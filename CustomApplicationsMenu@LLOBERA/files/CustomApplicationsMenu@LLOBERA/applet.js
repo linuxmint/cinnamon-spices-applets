@@ -8,7 +8,7 @@
 const Applet = imports.ui.applet;
 const Cinnamon = imports.gi.Cinnamon;
 const Gettext = imports.gettext;
-//const _ = Gettext.gettext;
+const _ = Gettext.gettext;
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const Gtk = imports.gi.Gtk;
@@ -20,20 +20,84 @@ const St = imports.gi.St;
 const appletUUID = 'CustomApplicationsMenu@LLOBERA';
 const AppletDirectory = imports.ui.appletManager.appletMeta[appletUUID].path;
 
-imports.searchPath.push(AppletDirectory);
-const PopupMenuExtension = imports.popupMenuExtension;
-
 const SettingsFile = AppletDirectory + "/applications.json";
 const AppSys = Cinnamon.AppSystem.get_default();
 
 // l10n/translation support
-
 Gettext.bindtextdomain(appletUUID, GLib.get_home_dir() + "/.local/share/locale")
 
 function _(str) {
   return Gettext.dgettext(appletUUID, str);
 }
 
+// Manage theme icons and image files
+function CreateIcon(iconName) {
+    // if the iconName is a path to an icon
+    if (iconName[0] === '/') {
+        var file = Gio.file_new_for_path(iconName);
+        var iconFile = new Gio.FileIcon({ file: file });
+
+        return new St.Icon({
+            gicon: iconFile,
+            icon_size: 24,
+            style_class: 'popup-menu-icon'
+        });
+    }
+    else // use a themed icon
+        return new St.Icon({
+            icon_name: iconName,
+            icon_size: 24,
+            icon_type: St.IconType.FULLCOLOR,
+            style_class: 'popup-menu-icon'
+        });
+}
+
+/**********  PopupIconSubMenuMenuItem  **********/
+// Inherits from PopupSubMenuMenuItem to add a colored image to the left side
+function PopupIconSubMenuMenuItem() {
+    this._init.apply(this, arguments);
+}
+PopupIconSubMenuMenuItem.prototype = {
+    __proto__: PopupMenu.PopupSubMenuMenuItem.prototype,
+
+    _init: function(text, iconName) {
+        PopupMenu.PopupSubMenuMenuItem.prototype._init.call(this, text);
+
+        // remove previous added actor in PopupSubMenuMenuItem _init
+        // because the add order is important
+        this.removeActor(this.label);
+        this.removeActor(this._triangleBin);
+
+        this._icon = CreateIcon(iconName);
+        this.addActor(this._icon);
+
+        this.addActor(this.label);
+        this.addActor(this._triangleBin);
+    }
+};
+
+/**********  PopupIconCommandMenuItem  **********/
+// Inherits from PopupIconMenuItem to launch a command on click
+function PopupIconCommandMenuItem() {
+    this._init.apply(this, arguments);
+}
+PopupIconCommandMenuItem.prototype = {
+    __proto__: PopupMenu.PopupIconMenuItem.prototype,
+
+    _init: function(text, iconName, command, params) {
+        PopupMenu.PopupBaseMenuItem.prototype._init.call(this, params);
+
+        this.label = new St.Label({text: text});
+        this._icon = CreateIcon(iconName);
+        this.addActor(this._icon);
+        this.addActor(this.label);
+
+        // useful to use application in the connect method
+        this.command = command;
+    }
+};
+
+/**********  MyApplet  **********/
 function MyApplet(orientation) {
     this._init(orientation);
 }
@@ -62,7 +126,7 @@ MyApplet.prototype = {
         }
         catch (e) {
             global.logError(e);
-        };
+        }
     },
 
     on_applet_clicked: function(event) {
@@ -88,31 +152,28 @@ MyApplet.prototype = {
             // get command, displayName and icon from the desktop file
             // only fill empty values
             if (typeof(application.desktopFile) === "string") // if desktopFile is defined and a string
-                this._getDataFromDesktopFile(application);
-
-            // default icon name
-            if (typeof(application.iconName) === "undefined")
-                application.iconName = "image-missing";
+                this._getInfoFromDesktopFile(application);
 
             // if it's a menu
             if ("menu" in application) {
-                // PopupSubMenuMenuItem without icon makes the menu larger
-                /*var menuItem;
+                if (typeof(application.displayName) === "undefined")
+                    application.displayName = "Sub-menu";
+
+                var menuItem;
                 if (typeof(application.iconName) === "undefined")
                     menuItem = new PopupMenu.PopupSubMenuMenuItem(application.displayName);
                 else
-                    menuItem = new PopupMenuExtension.PopupLeftImageSubMenuMenuItem(application.displayName, application.iconName);*/
-
-                if (typeof(application.displayName) === "undefined")
-                    application.displayName = "sub-menu";
-
-                var menuItem = new PopupMenuExtension.PopupLeftImageSubMenuMenuItem(application.displayName, application.iconName);
+                    menuItem = new PopupIconSubMenuMenuItem(application.displayName, application.iconName);
 
                 this._createMenuRecursive(menuItem.menu, application.menu);
 
                 parentMenuItem.addMenuItem(menuItem);
             }
             else {
+                // default icon name
+                if (typeof(application.iconName) === "undefined")
+                    application.iconName = "image-missing";
+
                 if (typeof(application.command) !== "string") { // if command is not defined or not a string, go to the next application
                     global.logError("Undefined or unvalid command for item " + (i+1) + ".");
                     continue;
@@ -131,14 +192,14 @@ MyApplet.prototype = {
     },
 
     // extract the command, the name and the icone name from the desktop file
-    _getDataFromDesktopFile: function(application) {
+    _getInfoFromDesktopFile: function(application) {
         let appInfo = null;
         let desktopFile = application.desktopFile + ".desktop";
         let app = AppSys.lookup_app(desktopFile);
         if (app)
             appInfo = app.get_app_info();
         else {
-            global.logError("Desktop file " + application.desktopFile + " not found");
+            global.logError("Desktop file " + application.desktopFile + " not found.");
             return;
         }
 
@@ -169,8 +230,7 @@ MyApplet.prototype = {
     },
 
     _createMenuItem: function(parentMenuItem, application) {
-        var menuItem = new PopupMenuExtension.PopupImageLeftMenuItem(
-            application.displayName, application.iconName, application.command);
+        var menuItem = new PopupIconCommandMenuItem(application.displayName, application.iconName, application.command);
         menuItem.connect("activate", function(actor, event) {
             // As application variable is not accessible here,
             // the application variable is passed to the PopupImageLeftMenuItem ctor to be accessible throw the actor argument
