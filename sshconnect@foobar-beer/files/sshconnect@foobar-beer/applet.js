@@ -100,7 +100,7 @@ MyApplet.prototype = {
   },
 
   editConfig: function() {
-    GLib.spawn_command_line_async(AppletDir + '/edit_config.sh "' + AppletDir + '/config.json"');
+    Main.Util.spawn_async(["xdg-open", AppletDir + '/config.json'], null);
   },
 
   on_applet_clicked: function(event) {
