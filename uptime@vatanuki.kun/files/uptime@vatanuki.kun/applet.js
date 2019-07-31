@@ -32,19 +32,18 @@ MyApplet.prototype = {
 			this._prefix = "";
 			this._pattern = "";
 			this._text_css = "";
+			this._minimal_mode = false;
 
 			// Setup the settings
 			this.settings = new Settings.AppletSettings(this, metadata.uuid, this.instance_id);
 			this.settings.bind("display", "_display", this.settings_changed);
+			this.settings.bind("minimal_mode", "_minimal_mode", this.settings_changed);
 			this.settings.bind("prefix", "_prefix", this.settings_changed);
 			this.settings.bind("pattern", "_pattern", this.settings_changed);
 			this.settings.bind("text_css", "_text_css", this.settings_changed);
 
 			// Set a clock icon on the applet
 			this.set_applet_icon_symbolic_name("preferences-system-time-symbolic");
-
-			// Set tooltip of the applet
-			this.set_applet_tooltip(_("Uptime : Shows the time that have passed since last reboot. Click to update..."));
 
 			// Set label style, refresh and hookup a one minute update function
 			this._applet_label.set_style(this._text_css);
@@ -65,18 +64,27 @@ MyApplet.prototype = {
 		let hours = Math.floor((timestamps_s / 3600) % 24);
 		let days = Math.floor((timestamps_s / 86400) % 365);
 		let years = Math.floor(timestamps_s / 31536000);
-		let label_text = "?";
+		let label_text = "";
+		let tooltip_text = _("Uptime : Shows the time that have passed since last reboot.");
 
 		// Get the correct description based on user preferences
 		if (this._display == "classic")
-			label_text = this.GetClassicDescription(years, days, hours, minutes)
+			label_text = this._prefix + this.GetClassicDescription(years, days, hours, minutes)
 		else if (this._display == "simple")
-			label_text = this.GetSimpleDescription(years, days, hours, minutes)
+			label_text = this._prefix + this.GetSimpleDescription(years, days, hours, minutes)
 		else if (this._display == "complex")
-			label_text = this.GetComplexDescription(years, days, hours, minutes)
+			label_text = this._prefix + this.GetComplexDescription(years, days, hours, minutes)
+			
+		// Minimal mode
+		if (this._minimal_mode) {
+			tooltip_text = label_text;
+			label_text = "";
+		}
 
 		// Set application label (including prefix)
-		this.set_applet_label(this._prefix + label_text);
+		this.set_applet_label(label_text);
+		// Set tooltip of the applet
+		this.set_applet_tooltip(tooltip_text);
 
 		return true;
 	},
