@@ -28,8 +28,9 @@ const Cairo = imports.cairo;
 const Main = imports.ui.main;
 const Gettext = imports.gettext;
 const GLib = imports.gi.GLib;
+const Settings = imports.ui.settings;
 // Width of the applet will be ScaleRatio-times the height of it.
-const ScaleRatio = 3;
+var ScaleRatio = 3;
 
 const UUID = "hwmonitor@sylfurd";
 let gtopFailed = false;
@@ -75,6 +76,12 @@ GraphicalHWMonitorApplet.prototype = {
         this.itemOpenSysMon = new PopupMenu.PopupMenuItem(_("Open System Monitor"));
         this.itemOpenSysMon.connect('activate', Lang.bind(this, this._runSysMonActivate));
         this._applet_context_menu.addMenuItem(this.itemOpenSysMon);
+
+        // Setup the applet settings 
+        this.scale_factor = 3;
+        this.settings = new Settings.AppletSettings(this, metadata.uuid, instance_id);
+        this.settings.bind("scale_factor", "scale_factor", this.settings_changed);
+        ScaleRatio = this.scale_factor;
 
         this.graphArea = new St.DrawingArea();
         this.graphArea.height = this._panelHeight;
@@ -139,6 +146,12 @@ GraphicalHWMonitorApplet.prototype = {
             area.get_context().translate((index * (this._panelHeight * ScaleRatio)), 0);
             this.graphs[index].paint(area, this._panelHeight);
         }
+    },
+
+    // Called when the settings have changed
+    settings_changed: function () {
+        ScaleRatio = this.scale_factor;
+        this.update();
     }
 };
 

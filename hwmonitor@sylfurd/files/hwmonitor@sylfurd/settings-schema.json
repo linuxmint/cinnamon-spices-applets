@@ -1,0 +1,23 @@
+{
+    "main-section": {
+        "type": "section",
+        "description": "Graphical hardware monitor settings. Some changes may require a restart of Cinnamon."
+    },
+    "scale_factor": {
+        "type": "combobox",
+        "default": "file",
+        "options": {
+            "1.0": "1.0",
+            "1.5": "1.5",
+            "2.0": "2.0",
+            "2.5": "2.5",
+            "3.0": "3.0",
+            "3.5": "3.5",
+            "4.0": "4.0",
+            "4.5": "4.5",
+            "5.0": "5.0"
+        },
+        "description": "Width scale factor",
+        "tooltip": "Applet width = {width scale factor} * {panel height}."
+    }
+}
