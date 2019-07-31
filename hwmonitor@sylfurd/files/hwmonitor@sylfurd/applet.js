@@ -78,7 +78,7 @@ GraphicalHWMonitorApplet.prototype = {
         this._applet_context_menu.addMenuItem(this.itemOpenSysMon);
 
         // Setup the applet settings 
-        this.scale_factor = 3;
+        this.scale_factor = 3; // Default scale_factor
         this.settings = new Settings.AppletSettings(this, metadata.uuid, instance_id);
         this.settings.bind("scale_factor", "scale_factor", this.settings_changed);
         ScaleRatio = this.scale_factor;
