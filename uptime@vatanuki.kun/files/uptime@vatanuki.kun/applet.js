@@ -65,7 +65,7 @@ MyApplet.prototype = {
 		let days = Math.floor((timestamps_s / 86400) % 365);
 		let years = Math.floor(timestamps_s / 31536000);
 		let label_text = "";
-		let tooltip_text = _("Uptime : Shows the time that have passed since last reboot. Click to update...");
+		let tooltip_text = _("Uptime : Shows the time that have passed since last reboot.");
 
 		// Get the correct description based on user preferences
 		if (this._display == "classic")
