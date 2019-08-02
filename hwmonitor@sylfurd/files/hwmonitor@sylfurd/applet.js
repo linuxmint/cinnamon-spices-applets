@@ -79,8 +79,10 @@ GraphicalHWMonitorApplet.prototype = {
 
         // Setup the applet settings 
         this.scale_factor = 3; // Default scale_factor
+        this.frequency = 1;
         this.settings = new Settings.AppletSettings(this, metadata.uuid, instance_id);
         this.settings.bind("scale_factor", "scale_factor", this.settings_changed);
+        this.settings.bind("frequency", "frequency", this.settings_changed);
         ScaleRatio = this.scale_factor;
 
         this.graphArea = new St.DrawingArea();
@@ -99,21 +101,31 @@ GraphicalHWMonitorApplet.prototype = {
             new Graph(this.graphArea, memProvider, this._panelHeight)
         ];
 
-        this.shouldUpdate = true;
         this.actor.set_offscreen_redirect(Clutter.OffscreenRedirect.ALWAYS);
-        this.loopId = Mainloop.timeout_add(1000, Lang.bind(this, this.update));
+        this.add_update_loop(this.frequency);
     },
 
     on_applet_clicked: function(event) {
         this._runSysMon();
     },
 
-    on_applet_removed_from_panel: function() {
-        if (gtopFailed) return;
+    add_update_loop: function(frequency) {
+        // Start the update loop and allow updates
+        this.loopId = Mainloop.timeout_add(frequency*1000, Lang.bind(this, this.update));
+        this.shouldUpdate = true;
+    },
+
+    remove_update_loop: function() {
+        // Remove the update loop and stop updates
         if (this.loopId) {
             Mainloop.source_remove(this.loopId);
         }
         this.shouldUpdate = false;
+    },
+
+    on_applet_removed_from_panel: function() {
+        if (gtopFailed) return;
+        this.remove_update_loop();
     },
 
     _runSysMonActivate: function() {
@@ -151,6 +163,8 @@ GraphicalHWMonitorApplet.prototype = {
     // Called when the settings have changed
     settings_changed: function () {
         ScaleRatio = this.scale_factor;
+        this.remove_update_loop();
+        this.add_update_loop(this.frequency);
         this.update();
     }
 };
