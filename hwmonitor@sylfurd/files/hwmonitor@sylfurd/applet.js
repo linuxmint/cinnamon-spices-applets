@@ -93,6 +93,13 @@ GraphicalHWMonitorApplet.prototype = {
 
         this.actor.add_actor(this.graphArea);
 
+        this.setup_graphs();
+
+        this.actor.set_offscreen_redirect(Clutter.OffscreenRedirect.ALWAYS);
+        this.add_update_loop(this.frequency);
+    },
+
+    setup_graphs: function () {
         let cpuProvider =  new CpuDataProvider();
         let memProvider =  new MemDataProvider();
 
@@ -100,9 +107,6 @@ GraphicalHWMonitorApplet.prototype = {
             new Graph(this.graphArea, cpuProvider, this._panelHeight),
             new Graph(this.graphArea, memProvider, this._panelHeight)
         ];
-
-        this.actor.set_offscreen_redirect(Clutter.OffscreenRedirect.ALWAYS);
-        this.add_update_loop(this.frequency);
     },
 
     on_applet_clicked: function(event) {
@@ -163,9 +167,11 @@ GraphicalHWMonitorApplet.prototype = {
     // Called when the settings have changed
     settings_changed: function () {
         ScaleRatio = this.scale_factor;
+        // Refresh the update loop with the new frequency
         this.remove_update_loop();
         this.add_update_loop(this.frequency);
-        this.update();
+        // Setup the graphs again so that the data is cleared
+        this.setup_graphs();
     }
 };
 
