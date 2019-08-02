@@ -5,7 +5,7 @@
     },
     "scale_factor": {
         "type": "combobox",
-        "default": "file",
+        "default": "3.0",
         "options": {
             "1.0": "1.0",
             "1.5": "1.5",
@@ -19,5 +19,20 @@
         },
         "description": "Width scale factor",
         "tooltip": "Applet width = {width scale factor} * {panel height}."
+    },
+    "frequency": {
+        "type": "combobox",
+        "default": "1.0",
+        "options": {
+            "0,5": "0.5",
+            "1.0": "1.0",
+            "2.0": "2.0",
+            "3.0": "3.0",
+            "4.0": "4.0",
+            "5.0": "5.0",
+            "10.0": "10.0"
+        },
+        "description": "Update frequency (seconds)",
+        "tooltip": "The amount of time (in seconds) between the graph updates."
     }
 }
