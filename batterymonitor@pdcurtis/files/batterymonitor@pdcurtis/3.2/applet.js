@@ -194,8 +194,8 @@ MyApplet.prototype = {
 
             // Make sure the temp files are created
 
-            GLib.spawn_command_line_async('touch /tmp/.batteryPercentage');
-            GLib.spawn_command_line_async('touch /tmp/.batteryState');
+            GLib.spawn_command_line_async('touch .batteryPercentage');
+            GLib.spawn_command_line_async('touch .batteryState');
 
             // Finally setup to start the update loop for the applet display running
 
@@ -348,7 +348,7 @@ MyApplet.prototype = {
     updateUI: function() {
 
         try {
-            this.batteryPercentage = GLib.file_get_contents("/tmp/.batteryPercentage").toString();
+            this.batteryPercentage = GLib.file_get_contents(".batteryPercentage").toString();
             this.batteryPercentage = this.batteryPercentage.trim().substr(5);
             this.batteryPercentage = Math.floor(this.batteryPercentage);
              // now check we have a genuine number otherwise use last value
@@ -357,7 +357,7 @@ MyApplet.prototype = {
             }
 //          Comment out following line when tests are complete
 //          this.batteryPercentage = this.batteryPercentage / 5 ;
-            this.batteryState = GLib.file_get_contents("/tmp/.batteryState").toString();
+            this.batteryState = GLib.file_get_contents(".batteryState").toString();
             if ( this.batteryState.trim().length > 6 ) {
                  this.batteryState = this.batteryState.trim().substr(5);
                  this.batteryStateOld = this.batteryState;
@@ -616,5 +616,10 @@ Bug Fix for use with early versions of Cinnamon
 ### 1.3.7
   * Change to allow Multiversion 3.2
   * Change to selection of audible alert file in Applet Settings for 3.2 and higher.
+### 1.3.7.1
+  * Change to cinnamon-version in metadata.json to add use under Cinnamon 4.2
+### 1.3.8
+  * Change location of temporary files to home folder to avoid permissions problem when switching users
+  * Fixes #2502
 */
 
