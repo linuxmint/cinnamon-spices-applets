@@ -29,8 +29,10 @@ const HOME_DIR = GLib.get_home_dir();
 var _debug = Gio.file_new_for_path(HOME_DIR + "/.local/share/cinnamon/applets/" + UUID + "/DEBUG");
 const DEBUG = _debug.query_exists(null);
 
-const SCRIPTS_DIR = HOME_DIR + "/.local/share/cinnamon/applets/" + UUID + "/scripts";
-const ICONS_DIR = HOME_DIR + "/.local/share/cinnamon/applets/" + UUID + "/icons";
+const APPLET_DIR = HOME_DIR + "/.local/share/cinnamon/applets/" + UUID;
+const SCRIPTS_DIR = APPLET_DIR + "/scripts";
+const ICONS_DIR = APPLET_DIR + "/icons";
+const HELP_DIR = APPLET_DIR + "/help";
 
 const URL_SPICES_HOME = "https://cinnamon-spices.linuxmint.com";
 const CONFIG_DIR = HOME_DIR + "/.cinnamon/configs";
@@ -74,6 +76,7 @@ Soup.Session.prototype.add_feature.call(_httpSession, new Soup.ProxyResolverDefa
 
 // ++ l10n support
 Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
+Gettext.bindtextdomain("nemo", "/usr/share/locale");
 
 // ++ Always needed if you want localisation/translation support
 function _(str, uuid=UUID) {
@@ -161,7 +164,7 @@ function notify_send(message, duration=5000, urgency="normal", icon_path=null) {
     if (icon_path) {
       _icon = icon_path
     } else {
-      _icon = HOME_DIR + '/.local/share/cinnamon/applets/' + UUID + '/icons/spices-updater-symbolic.svg'
+      _icon = HOME_DIR + '/.local/share/cinnamon/applets/' + UUID + '/icons/spices-update-symbolic.svg'
     }
     let notification = "notify-send \"%s\" \"".format(_("Spices Update")) + message + "\" -i " + _icon + " -t "+ duration.toString() +" -u " + urgency;
     Util.spawnCommandLine(notification);
@@ -380,6 +383,9 @@ class SpicesUpdate extends Applet.TextIconApplet {
 
     this.on_orientation_changed(orientation);
 
+    // Translated help file (html)
+    this.help_file = this.get_translated_help_file();
+
     // Init lists of Spices:
     this.populateSettingsUnprotectedApplets();
     this.populateSettingsUnprotectedDesklets();
@@ -465,7 +471,45 @@ class SpicesUpdate extends Applet.TextIconApplet {
     this.updateLoop();
   }; // End of constructor
 
-  notify_with_button(message, type) {
+  /** get_translated_help_file()
+   * Returns the help file in html format
+   */
+  get_translated_help_file() {
+    let default_file_name = HELP_DIR + "/en/README.html";
+    let help_file = Gio.file_new_for_path(default_file_name);
+    let language = "";
+    let lang = "";
+    if (!help_file.query_exists(null)) {
+      return null;
+    }
+    try {
+      language = GLib.get_language_names().toString().split(",")[0].toString();
+    } catch(e) {
+      // Unable to detect language. Return English help file by default.
+      return default_file_name;
+    }
+    let file_name = "%s/%s/README.html".format(HELP_DIR, language);
+    help_file = Gio.file_new_for_path(file_name);
+    if (help_file.query_exists(null)) {
+      return file_name;
+    } else {
+      lang = language.split("_")[0].toString();
+      if (lang === language) {
+        // Not found
+        return default_file_name;
+      } else {
+        file_name = "%s/%s/README.html".format(HELP_DIR, lang);
+        help_file = Gio.file_new_for_path(file_name);
+        if (help_file.query_exists(null)) {
+          return file_name;
+        } else {
+          return default_file_name;
+        }
+      }
+    }
+  }; // End of get_translated_help_file
+
+  notify_with_button(message, type, uuid = null) {
     let source = new MessageTray.SystemNotificationSource();
     if (Main.messageTray) {
       Main.messageTray.add(source);
@@ -476,7 +520,16 @@ class SpicesUpdate extends Applet.TextIconApplet {
       notification.setResident(true);
       Gtk.IconTheme.get_default().append_search_path(ICONS_DIR);
       notification.setUseActionIcons(true);
-      let image = St.TextureCache.get_default().load_uri_async(GLib.filename_to_uri("%s/cs-%s.svg".format(ICONS_DIR, type.toString()), null),
+      let img_uri = GLib.filename_to_uri("%s/cs-%s.svg".format(ICONS_DIR, type.toString()), null);
+      if (uuid !== null) {
+        let uri= CACHE_DIR + "/" + this._get_singular_type(type) + "/" + uuid + ".png";
+        log("uri = " + uri);
+        let file = Gio.file_new_for_path(uri);
+        if (file.query_exists(null)) {
+          img_uri = GLib.filename_to_uri(uri, null);
+        }
+      }
+      let image = St.TextureCache.get_default().load_uri_async( img_uri,
                                                                 Math.round(notification.IMAGE_SIZE/2),
                                                                 Math.round(notification.IMAGE_SIZE/2));
       notification.setImage(image);
@@ -1446,6 +1499,19 @@ class SpicesUpdate extends Applet.TextIconApplet {
       _reload_button.connect("activate", (event) => this._on_reload_this_applet_pressed())
       this.menu.addMenuItem(_reload_button);
     }
+
+    if (this.help_file !== null) {
+      this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+
+      // button Help...
+      this.help_button = new PopupMenu.PopupIconMenuItem(_("Help", "nemo") + "...", "folder-documents-symbolic", St.IconType.SYMBOLIC);
+      this.help_button.connect('activate', (event) => {
+          GLib.spawn_command_line_async('xdg-open ' + this.help_file);
+        });
+
+      this.menu.addMenuItem(this.help_button);
+    }
+
   }; // End of makeMenu
 
   _on_refresh_pressed() {
@@ -1513,6 +1579,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
 
     // Inhibits also after the applet has been removed from the panel
     if (this.applet_running == true) {
+      this.get_translated_help_file();
       this.OKtoPopulateSettingsApplets = true;
       this.OKtoPopulateSettingsDesklets = true;
       this.OKtoPopulateSettingsExtensions = true;
@@ -1549,8 +1616,10 @@ class SpicesUpdate extends Applet.TextIconApplet {
                 var filePath, tempdir;
                 this.menuDots[t] = true;
                 let message = "";
+                let uuid = null;
                 if (must_be_updated.length === 1) {
-                  message = "One " + this._get_singular_type(t) + " needs update:"
+                  message = "One " + this._get_singular_type(t) + " needs update:";
+                  uuid = must_be_updated[0].split("(")[1].split(")")[0];
                 } else {
                   message = "Some " + t + " need update:"
                 }
@@ -1558,7 +1627,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
                 if (this.force_notifications || new_message != this.old_message[t]) { // One notification is sufficient!
                   if (this.general_notifications) {
                     if (this.general_type_notif === "minimal") notify_send(new_message);
-                    else this.notify_with_button(new_message, t);
+                    else this.notify_with_button(new_message, t, uuid);
                   }
                   this.old_message[t] = new_message.toString();
                 }

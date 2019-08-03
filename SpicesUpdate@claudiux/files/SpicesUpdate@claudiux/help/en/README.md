@@ -20,7 +20,7 @@ Fully supported by the author, under continuing development and in continuous us
 
 The Spices Update requires the ```notify-send``` tool and the ```symbola``` TrueType font.
 
-To install it:
+To install them:
 
   * Fedora: `sudo dnf install libnotify gdouros-symbola-fonts`
   * Arch:
