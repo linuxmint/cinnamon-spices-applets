@@ -9,8 +9,8 @@ The code for this applet can be found under hwmonitor@sylfurd here : [cinnamon-s
 
 You can open the configuration dialog by right-clicking the applet and selecting **Configure...**. In the dialog, you can:
 
-* Select a scale factor between 1,0 and 5,0. The width of the applet is then calculated as:
-  * Width = {scale factor} * {panel height}
+* Choose the width of the graphs in pixels, when in a horizontal panel.
+* Choose the height of the graphs in pixels, when in a vertical panel.
 * Select the update frequency for the graph, by selecting the number of seconds between updates in the Update frequency combo.
 
 ### Requirements
@@ -24,6 +24,10 @@ You can open the configuration dialog by right-clicking the applet and selecting
 ### Example
 
 ![screenshot](https://raw.githubusercontent.com/linuxmint/cinnamon-spices-applets/master/hwmonitor%40sylfurd/screenshot.png)
+Horizontal pane example:
+![screenshot](https://raw.githubusercontent.com/linuxmint/cinnamon-spices-applets/master/hwmonitor%40sylfurd/horizontal.png)
+Vertical pane example:
+![screenshot](https://raw.githubusercontent.com/linuxmint/cinnamon-spices-applets/master/hwmonitor%40sylfurd/vertical.png)
 
 ### Contributing
 
