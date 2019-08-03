@@ -29,8 +29,6 @@ const Main = imports.ui.main;
 const Gettext = imports.gettext;
 const GLib = imports.gi.GLib;
 const Settings = imports.ui.settings;
-// Width of the applet will be ScaleRatio-times the height of it.
-var ScaleRatio = 3;
 
 const UUID = "hwmonitor@sylfurd";
 let gtopFailed = false;
@@ -38,6 +36,10 @@ let gtopFailed = false;
 Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
 function _(str) {
   return Gettext.dgettext(UUID, str)
+}
+
+function debug_message(message) {
+    global.logError(message);
 }
 
 let GTop;
@@ -65,6 +67,8 @@ GraphicalHWMonitorApplet.prototype = {
     _init: function (metadata, orientation, panel_height, instance_id) {
         Applet.IconApplet.prototype._init.call(this, orientation, panel_height, instance_id);
 
+        this.get_orientation(orientation); // Initialise for panel orientation
+        this.panel_height = panel_height;
         this.graphs = [];
 
         if (gtopFailed) {
@@ -78,35 +82,102 @@ GraphicalHWMonitorApplet.prototype = {
         this._applet_context_menu.addMenuItem(this.itemOpenSysMon);
 
         // Setup the applet settings 
-        this.scale_factor = 3; // Default scale_factor
+        this.graph_width = 100; // Default width (horizontal panels)
+        this.graph_height = 50; // Default height (vertical panels)
         this.frequency = 1;
         this.settings = new Settings.AppletSettings(this, metadata.uuid, instance_id);
-        this.settings.bind("scale_factor", "scale_factor", this.settings_changed);
+        this.settings.bind("graph_width", "graph_width", this.settings_changed);
+        this.settings.bind("graph_height", "graph_height", this.settings_changed);
         this.settings.bind("frequency", "frequency", this.settings_changed);
-        ScaleRatio = this.scale_factor;
+
+        let height = this.get_height();
+        let width = this.get_width();
 
         this.graphArea = new St.DrawingArea();
-        this.graphArea.height = this._panelHeight;
-        // Request space for two graphs where w=h*ScaleRatio each
-        this.graphArea.width = (this._panelHeight * ScaleRatio * 2);
+        if (this.isHorizontal) {
+            this.graphArea.height = height;
+            this.graphArea.width = width * 2;
+
+        } else {
+            this.graphArea.height = height * 2;
+            this.graphArea.width = width;
+        }
         this.graphArea.connect('repaint', Lang.bind(this, this.onGraphRepaint));
-
         this.actor.add_actor(this.graphArea);
-
-        this.setup_graphs();
+        this.setup_graphs(width, height);
 
         this.actor.set_offscreen_redirect(Clutter.OffscreenRedirect.ALWAYS);
         this.add_update_loop(this.frequency);
     },
 
-    setup_graphs: function () {
+    get_height: function() {
+        if (this.isHorizontal) 
+            return this.panel_height;
+         else 
+            return this.graph_height;
+    },
+
+    get_width: function() {
+        if (this.isHorizontal) 
+            return this.graph_width;
+        else
+            return this.panel_height;
+    },
+
+    setup_graphs: function (width, height) {
         let cpuProvider =  new CpuDataProvider();
         let memProvider =  new MemDataProvider();
 
         this.graphs = [
-            new Graph(this.graphArea, cpuProvider, this._panelHeight),
-            new Graph(this.graphArea, memProvider, this._panelHeight)
+            new Graph(cpuProvider, width, height, this.isHorizontal),
+            new Graph(memProvider, width, height, this.isHorizontal)
         ];
+    },
+
+    change_graph_area_size: function(refresh_graphs = true) {
+        let width = this.get_width();
+        let height = this.get_height();
+
+        if (this.isHorizontal) {
+            this.graphArea.set_width(width * 2);
+            this.graphArea.set_height(height);
+        } else {
+            this.graphArea.set_width(width);
+            this.graphArea.set_height(height * 2);
+        }
+
+        if (refresh_graphs)
+            this.setup_graphs(width, height);
+
+        return [width, height];
+    },
+
+    get_orientation: function (orientation) {
+        this.orientation = orientation;
+        if (this.versionCompare( GLib.getenv('CINNAMON_VERSION') ,"3.2" ) >= 0 ){
+            if (this.orientation == St.Side.LEFT || this.orientation == St.Side.RIGHT) {                 
+                this.isHorizontal = false;  // vertical
+            } else {                 
+                this.isHorizontal = true;   // horizontal
+            }
+        } else {
+            this.isHorizontal = true;  // Do not check unless >= 3.2
+        }
+    },
+
+    on_orientation_changed: function(orientation) {
+        this.get_orientation(orientation);
+        this.change_graph_area_size();
+    },
+
+    on_panel_height_changed: function() {
+        this.change_graph_area_size();
+        this._update();
+    },
+
+    on_applet_removed_from_panel: function() {
+        if (gtopFailed) return;
+        this.remove_update_loop();
     },
 
     on_applet_clicked: function(event) {
@@ -127,15 +198,6 @@ GraphicalHWMonitorApplet.prototype = {
         this.shouldUpdate = false;
     },
 
-    on_applet_removed_from_panel: function() {
-        if (gtopFailed) return;
-        this.remove_update_loop();
-    },
-
-    _runSysMonActivate: function() {
-        this._runSysMon();
-    },
-
     update: function() {
         Mainloop.idle_add_full(Mainloop.PRIORITY_LOW, () => this._update());
         return this.shouldUpdate;
@@ -148,56 +210,82 @@ GraphicalHWMonitorApplet.prototype = {
         this.graphArea.queue_repaint();
     },
 
-    _runSysMon: function() {
-    	let _appSys = Cinnamon.AppSystem.get_default();
-    	let _gsmApp = _appSys.lookup_app('gnome-system-monitor.desktop');
-    	_gsmApp.activate();
-    },
-
     onGraphRepaint: function (area) {
-        this.graphArea.height = this._panelHeight;
-        // Request space for two graphs where w=h*ScaleRatio each
-        this.graphArea.width = this._panelHeight * ScaleRatio * 2;
+        let [width, height] = this.change_graph_area_size(false);
+
         for (let index = 0; index < 2; index++) {
-            area.get_context().translate((index * (this._panelHeight * ScaleRatio)), 0);
-            this.graphs[index].paint(area, this._panelHeight);
+            if (this.isHorizontal)
+                area.get_context().translate(index * width, 0);
+            else
+                area.get_context().translate(0, index * height);
+
+            this.graphs[index].paint(area, width, height);
         }
     },
 
     // Called when the settings have changed
     settings_changed: function () {
-        ScaleRatio = this.scale_factor;
         // Refresh the update loop with the new frequency
         this.remove_update_loop();
         this.add_update_loop(this.frequency);
-        // Setup the graphs again so that the data is cleared
-        this.setup_graphs();
+        this.change_graph_area_size();
+    },
+
+    _runSysMon: function() {
+    	let _appSys = Cinnamon.AppSystem.get_default();
+    	let _gsmApp = _appSys.lookup_app('gnome-system-monitor.desktop');
+    	_gsmApp.activate();
+    },
+    
+    _runSysMonActivate: function() {
+        this._runSysMon();
+    },
+    
+    // Compare two version numbers (strings) based on code by Alexey Bass (albass)
+    // Takes account of many variations of version numers including cinnamon.
+    versionCompare: function(left, right) {
+        if (typeof left + typeof right != 'stringstring')
+            return false;
+        var a = left.split('.'),
+            b = right.split('.'),
+            i = 0,
+            len = Math.max(a.length, b.length);
+        for (; i < len; i++) {
+            if ((a[i] && !b[i] && parseInt(a[i]) > 0) || (parseInt(a[i]) > parseInt(b[i]))) {
+                return 1;
+            } else if ((b[i] && !a[i] && parseInt(b[i]) > 0) || (parseInt(a[i]) < parseInt(b[i]))) {
+                return -1;
+            }
+        }
+        return 0;
     }
 };
 
-function Graph(area, provider, panel_height) {
-    this._init(area, provider, panel_height);
+function Graph(provider, width, height, horizontal) {
+    this._init(provider, width, height, horizontal);
 }
 
 Graph.prototype = {
 
-    _init: function (_area, _provider, panel_height) {
-        this.width = (panel_height * ScaleRatio) - 3;
+    _init: function (provider, width, height, horizontal) {
+        this.provider = provider;
 
-        this.datas = Array(this.width).fill(0);
+        if (horizontal) {
+            this.width = width - 3;     // Adjust for border and space between graphs
+            this.height = height - 2;   // Adjust for border
+        } else {
+            this.width = width - 2;     // Adjust for border
+            this.height = height - 3;   // Adjust for border and space between graphs
+        }
+
+        this.datas = Array(this.width);
 
         for (let i = 0; i < this.datas.length; i++) {
             this.datas[i] = 0;
         }
-
-        this.height = panel_height - 2;
-        this.provider = _provider;
-
     },
 
-    paint: function (area, panel_height) {
-        this.width = (panel_height * ScaleRatio) - 3;
-        this.height = panel_height - 2;
+    paint: function (area) {
         let widthOffset1 = Math.round(this.width * 0.5) + 0.5;
         let widthOffset2 = Math.round(this.width * 0.25) + 0.5;
         let widthOffset3 = Math.round(this.width * 0.75) + 0.5;
