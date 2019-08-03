@@ -1,3 +1,13 @@
+### v2.2.0~20190803
+  * Adding a "Help..." button in the menu. This help (in English by default) can be translated into your language. To do it:
+   * Place you into the `help` directory: `cd ~/.local/share/cinnamon/applets/SpicesUpdate@claudiux/help`
+   * Copy the `en` directory into a new directory named as your language code. Example: `cp -a en de`
+   * Place you into this new directory. Translate the contents of the README.md file. (Do not rename this file.)
+   * Install the `grip` package, then export the README.md file into html format: `grip --title "Spices Update - Help" --export README.md README.html`. (Translate _Help_.)
+   * You can propose your translation, mentionning me (@claudiux) on Github.
+  * French translation of the README.md file is available.
+  * When only one Spice (by category: Applets, Desklets, ...) needs an update, its icon appears into the notification messages.
+
 ### v2.1.0~20190721
   * Allows user to update even downloaded xlets from the Download button on the site.
   * Compatible with Cinnamon 3.8, 4.0 and 4.2.
