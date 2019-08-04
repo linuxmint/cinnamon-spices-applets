@@ -21,7 +21,7 @@
         "type": "entry",
         "default": "espeak -ven+m5 -a 100 -p 50 -s 175",
         "description": "Voice command",
-        "tooltip": "A command used to read the text"
+        "tooltip": "A command used to read the text. \nText to read will be passed as the last command argument."
     },
     "configuration_end" : {
         "type" : "separator"
@@ -103,7 +103,10 @@
     },
     "shortcuts_end" : {
         "type" : "separator"
+    },
+
+    "is_tts_engine_dialog_confirmed": {
+        "type": "generic",
+        "default": false
     }
-
-
 }
