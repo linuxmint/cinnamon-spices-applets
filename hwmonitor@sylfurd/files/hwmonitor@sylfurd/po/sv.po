@@ -34,6 +34,10 @@ msgstr "för att använda panelprogrammet %s"
 msgid "Open System Monitor"
 msgstr "Öppna systemövervakaren"
 
+#: applet.js:72
+msgid "Restart 'Graphical hardware monitor'"
+msgstr "Starta om 'grafisk hårdvaruövervakare'"
+
 #: applet.js:283
 msgid "CPU"
 msgstr "CPU"
@@ -49,3 +53,57 @@ msgstr "Visar CPU- och minnesbelastning i realtid"
 #. hwmonitor@sylfurd->metadata.json->name
 msgid "Graphical hardware monitor"
 msgstr "Grafisk hårdvaruövervakare"
+
+#. settings-schema.json->main-section->description
+msgid "Graphical hardware monitor settings."
+msgstr "Inställningar för Grafisk hårdvaruövervakare"
+
+#. settings-schema.json->graph_width->units
+#. settings-schema.json->graph_height->units
+msgid "pixels"
+msgstr "pixlar"
+
+#. settings-schema.json->graph_width->description
+msgid "Horizontal panel graph width"
+msgstr "Grafernas bredd för horisontella paneler"
+
+#. settings-schema.json->graph_height->description
+msgid "Vertical panel graph height"
+msgstr "Grafernas bredd för vertikala paneler"
+
+#. settings-schema.json->frequency->options
+msgid "0.5"
+msgstr "0,5"
+
+#. settings-schema.json->frequency->options
+msgid "1.0"
+msgstr "1,0"
+
+#. settings-schema.json->frequency->options
+msgid "2.0"
+msgstr "2,0"
+
+#. settings-schema.json->frequency->options
+msgid "3.0"
+msgstr "3,0"
+
+#. settings-schema.json->frequency->options
+msgid "4.0"
+msgstr "4,0"
+
+#. settings-schema.json->frequency->options
+msgid "5.0"
+msgstr "5,0"
+
+#. settings-schema.json->frequency->options
+msgid "10.0"
+msgstr "10,0"
+
+#. settings-schema.json->frequency->description
+msgid "Update frequency (seconds)"
+msgstr "Uppdateringsfrekvens (sekunder)"
+
+#. settings-schema.json->frequency->tooltip
+msgid "The amount of time (in seconds) between the graph updates."
+msgstr "Tiden (i sekunder) mellan grafernas uppdateringar."
+

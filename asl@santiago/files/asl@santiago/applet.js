@@ -4,8 +4,19 @@ const St = imports.gi.St;
 const PopupMenu = imports.ui.popupMenu;
 const Main = imports.ui.main;
 const Settings = imports.ui.settings;
+const GLib = imports.gi.GLib;
+const Gettext = imports.gettext;
 
 const website = "https://www.handspeak.com/";
+
+// l10n/translation support
+const UUID = "asl@santiago";
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
+
+function _(str) {
+    return Gettext.dgettext(UUID, str);
+}
+//****************************************************************************
 
 function MyApplet() {
     this._init.apply(this, arguments);
@@ -204,6 +215,105 @@ MyApplet.prototype = {
             this.menu.addMenuItem(this.AbecedarioASLItem); //Add the menu with the items created
             //***********************************************************************************************
 
+            /*//Submenú 2: Números cardinales en ASL
+            //***********************************************************************************************
+            this.NumCardinalesASLItem = new PopupMenu.PopupSubMenuMenuItem(_("Números cardinales"));
+
+            //Item 1 Submenu 2
+            this.NumCardinalesASLItem.menu.addAction("Número 1", () => {
+            Main.notify("Title", "Número 1 en ASL");
+            });
+
+            //Item 2 Submenu 2
+            this.NumCardinalesASLItem.menu.addAction("Número 2", () => {
+            Main.notify("Title", "Número 2 en ASL");
+            });
+
+            //Item 3 Submenu 2
+            this.NumCardinalesASLItem.menu.addAction("Número 3", () => {
+            Main.notify("Title", "Número 3 en ASL");
+            });
+
+
+            this.menu.addMenuItem(this.NumCardinalesASLItem); //Add the menu with the items created
+            //************************************************************************************************/
+
+            /*//Submenú 3: Números ordinales en ASL
+            //***********************************************************************************************
+            this.NumOrdinalesASLItem = new PopupMenu.PopupSubMenuMenuItem(_("Números ordinales"));
+
+            //Item 1 Submenu 3
+            this.NumOrdinalesASLItem.menu.addAction("Número 1", () => {
+            Main.notify("Title", "Número 1 en ASL");
+            });
+
+            //Item 2 Submenu 3
+            this.NumOrdinalesASLItem.menu.addAction("Número 2", () => {
+            Main.notify("Title", "Número 2 en ASL");
+            });
+
+            //Item 3 Submenu 3
+            this.NumOrdinalesASLItem.menu.addAction("Número 3", () => {
+            Main.notify("Title", "Número 3 en ASL");
+            });
+
+
+            this.menu.addMenuItem(this.NumOrdinalesASLItem); //Add the menu with the items created
+            //************************************************************************************************/
+
+            /*//Submenú 4: Vestimenta en ASL
+            //***********************************************************************************************
+            this.VestimentaASLItem = new PopupMenu.PopupSubMenuMenuItem(_("Vestimenta"));
+            //this.
+
+            //Item 1 Submenu 3
+            this.VestimentaASLItem.menu.addAction("Camisa", () => {
+            Main.notify("Title", "Número 1 en ASL");
+            });
+
+            //Item 2 Submenu 3
+            this.VestimentaASLItem.menu.addAction("Blusa", () => {
+            Main.notify("Title", "Número 2 en ASL");
+            });
+
+            //Item 3 Submenu 3
+            this.VestimentaASLItem.menu.addAction("Pantalón", () => {
+            Main.notify("Title", "Número 3 en ASL");
+            });
+
+
+            this.menu.addMenuItem(this.VestimentaASLItem); //Add the menu with the items created
+            //************************************************************************************************/
+
+            /*//Submenú 5: Otro menu en ASL
+            //***********************************************************************************************
+            this.Vestimenta1ASLItem = new PopupMenu.PopupSubMenuMenuItem(_("Otro menu"));
+
+            this.menu.addMenuItem(this.Vestimenta1ASLItem); //Add the menu with the items created*/
+            //********************************************************************************************
+
+            /*//Submenú Nth: Miscelánea; palabras que no tengan categoría definida, mas de una categoría
+            //o que se manejen de manera diferente
+            //***********************************************************************************************
+            this.RandomASLItem = new PopupMenu.PopupSubMenuMenuItem(_("Miscelánea"));
+
+
+            this.RandomASLItem.menu.addAction("Camisa", () => {
+            Main.notify("Title", "Número 1 en ASL");
+            });
+
+            this.RandomASLItem.menu.addAction("Blusa", () => {
+            Main.notify("Title", "Número 2 en ASL");
+            });
+
+            this.RandomASLItem.menu.addAction("Pantalón", () => {
+            Main.notify("Title", "Número 3 en ASL");
+            });
+
+
+            this.menu.addMenuItem(this.RandomASLItem); //Add the menu with the items created
+            //************************************************************************************************/
+
             this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
             //Access this website to check more vocabulary
@@ -218,6 +328,20 @@ MyApplet.prototype = {
             });
 
             this.menu.addMenuItem(websiteASL);
+
+            //Switcher test
+            //let editMode = global.settings.get_boolean("panel-edit-mode");
+            //let panelEditMode = new PopupMenu.PopupSwitchMenuItem(_("Panel Edit Mode"), editMode);
+            /*panelEditMode.connect('toggled', function(item) {
+                global.settings.set_boolean("panel-edit-mode", item.state);
+            }); //*/
+            //this.menu.addMenuItem(panelEditMode);
+            /*global.settings.connect('changed::panel-edit-mode', function() {
+                panelEditMode.setToggleState(global.settings.get_boolean("panel-edit-mode"));
+            });*/
+
+
+
 
     },
 

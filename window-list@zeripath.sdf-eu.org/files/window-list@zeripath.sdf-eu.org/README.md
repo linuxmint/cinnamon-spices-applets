@@ -1,7 +1,7 @@
 window-list-zeripath.sdf-eu.org
 ===============================
 
-Zeripath's Cinnamon Window List (Now updated to work with Cinnamon-2.2/Mint-17.)
+Zeripath's Cinnamon Window List (Now updated to work with Cinnamon-4.)
 
 This applet is a modified version of the original window-list but with features
 for controlling maximized windows.

@@ -1,0 +1,44 @@
+{
+    "head" : {
+        "type" : "header",
+        "description" : "Icons"
+    },
+    "use-custom-off-icon": {
+        "type": "checkbox",
+        "default": false,
+        "description": "Use a custom icon for when notifications are allowed.",
+        "indent": false
+    },
+    "off-icon": {
+        "type": "iconfilechooser",
+        "default" : "object-select-symbolic",
+        "description" : "Notifications allowed icon:",
+        "tooltip" : "Select an icon file, or you can type an icon name into the entry box",
+        "indent" : true,
+        "dependency" : "use-custom-off-icon"
+    },
+    "use-custom-on-icon": {
+        "type": "checkbox",
+        "default": false,
+        "description": "Use a custom icon for when notifications are muted.",
+        "indent": false
+    },
+    "on-icon": {
+        "type": "iconfilechooser",
+        "default" : "dialog-error-symbolic",
+        "description" : "Notifications muted icon:",
+        "tooltip" : "Select an icon file, or you can type an icon name into the entry box",
+        "indent" : true,
+        "dependency": "use-custom-on-icon"
+    },
+    "head1" : {
+        "type" : "header",
+        "description" : "Keybinding"
+    },
+    "keybinding" : {
+        "type" : "keybinding",
+        "description" : "Set the keybinding for toggling notification mute",
+        "default" : "<Control>i",
+        "indent": true
+    }
+}

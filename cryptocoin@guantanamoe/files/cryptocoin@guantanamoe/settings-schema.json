@@ -1,16 +1,33 @@
 {
     "layout" : {
         "type" : "layout",
-        "pages" : ["general-page", "graph-page"],
+        "pages" : [
+            "general-page",
+            "graph-page",
+            "alerts-page"
+        ],
         "general-page" : {
             "type" : "page",
-            "title" : "Currency",
-            "sections" : ["currency-section"]
+            "title" : "General",
+            "sections" : [
+                "currency-section"
+            ]
         },
         "graph-page" : {
             "type" : "page",
             "title" : "Graph",
-            "sections" : ["graph-section"]
+            "sections" : [
+                "graph-section"
+            ]
+        },
+        "alerts-page" : {
+            "type" : "page",
+            "title" : "Alerts",
+            "sections" : [
+                "alerts-config",
+                "alerts-section",
+                "alerts-delta-section"
+            ]
         },
         "currency-section" : {
             "type" : "section",
@@ -33,6 +50,36 @@
                 "graph-height",
                 "graph-color"
             ]
+        },
+        "alerts-config" : {
+            "type": "section",
+            "title": "Config",
+            "keys": [
+                "alert-enable",
+                "alert-label-color"
+            ]
+        },
+        "alerts-section" : {
+            "type" : "section",
+            "title" : "Alerts",
+            "keys" : [
+                "alert-any-change",
+                "alert-on-above",
+                "alert-on-below"
+            ],
+            "dependency": "alert-enable"
+        },
+        "alerts-delta-section" : {
+            "type" : "section",
+            "title" : "Delta Alerts",
+            "keys" : [
+                "alert-on-delta-above",
+                "alert-on-delta-below",
+                "alert-delta-length",
+                "alert-delta-unit",
+                "alert-delta-update-interval"
+            ],
+            "dependency": "alert-enable"
         }
     },
     "currency" : {
@@ -105,5 +152,73 @@
         "type" : "colorchooser",
         "default" : "red",
         "description" : "The Graph Foreground Color"
+    },
+    "alert-enable" : {
+        "type" : "switch",
+        "default" : false,
+        "description" : "Enable alerts"
+    },
+    "alert-any-change" : {
+        "type" : "switch",
+        "default" : false,
+        "description" : "Any change"
+    },
+    "alert-label-color" : {
+        "type" : "colorchooser",
+        "default" : "red",
+        "description" : "Label color",
+        "dependency": "alert-enable"
+    },
+    "alert-on-above" : {
+        "type" : "entry",
+        "default" : "",
+        "description" : "Absolute maximum (money)",
+        "tooltip" : "Alert when current value is above this value"
+    },
+    "alert-on-below" : {
+        "type" : "entry",
+        "default" : "",
+        "description" : "Absolute minimum (money)",
+        "tooltip" : "Alert when current value is below this value"
+    },
+    "alert-on-delta-above" : {
+        "type" : "entry",
+        "default" : "",
+        "description" : "Increase variation (%)",
+        "tooltip" : "Alert when value increase this delta %"
+    },
+    "alert-on-delta-below" : {
+        "type" : "entry",
+        "default" : "",
+        "description" : "Decrease variation (%)",
+        "tooltip" : "Alert when value decrease this delta %"
+    },
+    "alert-delta-length" : {
+        "type" : "spinbutton",
+        "default" : 60,
+        "min" : 0,
+        "max" : 2000,
+        "step" : 1,
+        "description" : "Delta interval"
+    },
+    "alert-delta-unit" : {
+        "type" : "combobox",
+        "description" : "Unit of interval",
+        "default" : "histominute",
+        "options" : {
+			"Minutes" : "histominute",
+			"Hours" : "histohour",
+			"Days" : "histoday"
+		},
+        "dependency": "alert-delta-length"
+    },
+    "alert-delta-update-interval" : {
+        "type" : "spinbutton",
+        "default" : 30,
+        "min" : 5,
+        "max" : 86400,
+        "step" : 1,
+        "units" : "seconds",
+        "description" : "Update interval"
     }
 }

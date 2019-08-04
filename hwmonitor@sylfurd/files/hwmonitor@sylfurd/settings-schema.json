@@ -1,0 +1,39 @@
+{
+    "main-section": {
+        "type": "section",
+        "description": "Graphical hardware monitor settings."
+    },
+    "graph_width": {
+        "type": "spinbutton",
+        "default": 100,
+        "min": 10,
+        "max": 500,
+        "units": "pixels",
+        "step": 1,
+        "description": "Horizontal panel graph width"
+    },
+    "graph_height": {
+        "type": "spinbutton",
+        "default": 50,
+        "min": 10,
+        "max": 300,
+        "units": "pixels",
+        "step": 1,
+        "description": "Vertical panel graph height"
+    },
+    "frequency": {
+        "type": "combobox",
+        "default": "1.0",
+        "options": {
+            "0,5": "0.5",
+            "1.0": "1.0",
+            "2.0": "2.0",
+            "3.0": "3.0",
+            "4.0": "4.0",
+            "5.0": "5.0",
+            "10.0": "10.0"
+        },
+        "description": "Update frequency (seconds)",
+        "tooltip": "The amount of time (in seconds) between the graph updates."
+    }
+}

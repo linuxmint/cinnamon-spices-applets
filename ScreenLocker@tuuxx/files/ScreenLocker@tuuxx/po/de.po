@@ -21,8 +21,8 @@ msgstr ""
 #. ScreenLocker@tuuxx->metadata.json->description
 #: applet.js:19
 msgid "Click to lock the screen immediately"
-msgstr "Draufklicken, um den Bildschirm sofort zu sperren"
+msgstr "Klicken, um den Bildschirm sofort zu sperren"
 
 #. ScreenLocker@tuuxx->metadata.json->name
 msgid "Screen locker"
-msgstr "Bildschirm-Sperrer"
+msgstr "Bildschirm sperren"

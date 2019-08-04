@@ -1,5 +1,12 @@
 ## Changelog
 
+### 1.3.8
+  * Change location of temporary files to home folder to avoid permissions problem when switching users
+  * Fixes #2502
+
+### 1.3.7.1
+  * Change to cinnamon-version in metadata.json to add use under Cinnamon 4.2
+
 ### 1.3.7
   * Change to allow Multiversion 3.2
   * Change to allow selection of audible alert file in Applet Settings for 3.2 and higher.
