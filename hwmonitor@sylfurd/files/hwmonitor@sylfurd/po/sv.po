@@ -34,6 +34,10 @@ msgstr "för att använda panelprogrammet %s"
 msgid "Open System Monitor"
 msgstr "Öppna systemövervakaren"
 
+#: applet.js:72
+msgid "Restart 'Graphical hardware monitor'"
+msgstr "Starta om 'grafisk hårdvaruövervakare'"
+
 #: applet.js:283
 msgid "CPU"
 msgstr "CPU"
