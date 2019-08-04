@@ -77,9 +77,13 @@ GraphicalHWMonitorApplet.prototype = {
             return;
         }
 
-        this.itemOpenSysMon = new PopupMenu.PopupMenuItem(_("Open System Monitor"));
+        this.itemOpenSysMon = new PopupMenu.PopupMenuItem(_("Open System Monitor"));        
         this.itemOpenSysMon.connect('activate', Lang.bind(this, this._runSysMonActivate));
         this._applet_context_menu.addMenuItem(this.itemOpenSysMon);
+
+        this.itemReset = new PopupMenu.PopupMenuItem(_("Restart 'Graphical hardware monitor'"));        
+        this.itemReset.connect('activate', Lang.bind(this, this.restartGHW));
+        this._applet_context_menu.addMenuItem(this.itemReset);
 
         // Setup the applet settings 
         this.graph_width = 100; // Default width (horizontal panels)
@@ -225,10 +229,14 @@ GraphicalHWMonitorApplet.prototype = {
 
     // Called when the settings have changed
     settings_changed: function () {
+        this.restartGHW();
+    },
+
+    restartGHW: function() {
         // Refresh the update loop with the new frequency
         this.remove_update_loop();
         this.add_update_loop(this.frequency);
-        this.change_graph_area_size();
+        this.change_graph_area_size();        
     },
 
     _runSysMon: function() {
