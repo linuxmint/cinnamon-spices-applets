@@ -23,10 +23,12 @@ You can open the configuration dialog by right-clicking the applet and selecting
 
 ### Example
 
-![screenshot](https://raw.githubusercontent.com/linuxmint/cinnamon-spices-applets/master/hwmonitor%40sylfurd/screenshot.png)
 Horizontal pane example:
+
 ![screenshot](https://raw.githubusercontent.com/linuxmint/cinnamon-spices-applets/master/hwmonitor%40sylfurd/horizontal.png)
+
 Vertical pane example:
+
 ![screenshot](https://raw.githubusercontent.com/linuxmint/cinnamon-spices-applets/master/hwmonitor%40sylfurd/vertical.png)
 
 ### Contributing
