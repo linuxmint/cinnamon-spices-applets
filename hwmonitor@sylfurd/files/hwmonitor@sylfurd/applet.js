@@ -174,8 +174,9 @@ GraphicalHWMonitorApplet.prototype = {
         this.change_graph_area_size();
     },
 
-    on_panel_height_changed: function() {
-        this.change_graph_area_size();
+    on_panel_height_changed: function() {  
+        this.panel_height = this._panelHeight
+        let [width, height] = this.change_graph_area_size();
         this._update();
     },
 
@@ -215,7 +216,7 @@ GraphicalHWMonitorApplet.prototype = {
     },
 
     onGraphRepaint: function (area) {
-        let [width, height] = this.change_graph_area_size(false);
+        let [width, height] = [this.get_width(), this.get_height()];
 
         for (let index = 0; index < 2; index++) {
             if (this.isHorizontal)
