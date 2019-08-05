@@ -1,5 +1,10 @@
 ## Changelog
 
+### 1.3.9
+  * Adds events-sounds property to soundfilechoser widget to allow any sound file to be selected under Cinnamon 4.2
+  * Adds additional option to inhibit notifications when user selected audible alert is in use
+    - closes feature request #2511
+
 ### 1.3.8
   * Change location of temporary files to home folder to avoid permissions problem when switching users
   * Fixes #2502

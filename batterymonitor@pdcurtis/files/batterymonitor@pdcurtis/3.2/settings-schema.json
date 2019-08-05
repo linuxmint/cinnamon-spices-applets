@@ -57,7 +57,8 @@
         "type": "checkbox",
         "default": false,
         "description": "Allow choice of audible alert file when Battery Low and at Shutdown Level",
-        "tooltip": "Must have Sox installed. Limited number of sound file types supported (.oga and .wav)"
+        "tooltip": "Must have Sox installed. Limited number of sound file types supported in versions < 4.2"
+
     },
 
     "batteryLowSound": {
@@ -65,7 +66,8 @@
         "default": "/usr/share/sounds/freedesktop/stereo/alarm-clock-elapsed.oga",
         "dependency": "chooseBatteryLowSound",
         "description": "Choose sound file to use when Battery is Low",
-        "tooltip": "Please ensure the volume is set sensibly in public places especially if a long loud file is specifed"
+        "tooltip": "Please ensure the volume is set sensibly in public places especially if a long loud file is specifed",
+        "event-sounds": false 
     },
 
     "batteryShutdownSound": {
@@ -73,7 +75,16 @@
         "default": "/usr/share/sounds/freedesktop/stereo/complete.oga",
         "dependency": "chooseBatteryLowSound" ,
         "description": "Choose sound file to use when Battery is at Shutdown Level",
-        "tooltip": "Please ensure the volume is set sensibly in public places - do not specify a long loud file at Shutdown"
+        "tooltip": "Please ensure the volume is set sensibly in public places - do not specify a long loud file at Shutdown",
+        "event-sounds": false
+    },
+
+     "notifyBatteryLowSound": {
+        "type": "checkbox",
+        "default": true,
+        "dependency": "chooseBatteryLowSound",
+        "description": "Provide Notification when user specified sound file is in use - Recommended",
+        "tooltip": "To remind users that the volume may need to be set sensibly in public places"
     }
 }
 
