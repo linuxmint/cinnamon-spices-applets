@@ -327,7 +327,7 @@ MyApplet.prototype = {
     _init_keybinds: function () {
         this.start_stop_keybind = new Keyboard.KeyBind(this.start_stop_keybind_id, this.start_stop_keys);
         this.pause_resume_keybind = new Keyboard.KeyBind(this.pause_resume_keybind_id, this.pause_resume_keys);
-        this.start_stop_keybind.set_callback_key_pressed(this, this.start_or_stop_reading);
+        this.start_stop_keybind.set_callback_key_pressed(this, this.on_applet_clicked);
         this.pause_resume_keybind.set_callback_key_pressed(this, this.pause_or_resume_reading);
         this.on_start_stop_keys_changed();
         this.on_pause_resume_keys_changed();
@@ -410,7 +410,13 @@ MyApplet.prototype = {
     },
 
     on_applet_clicked: function(event) {
-        this.start_or_stop_reading();
+        let is_paused = this.is_voice_process_paused();
+        if(is_paused) {
+            this.resume_reading();
+        }
+        else {
+            this.start_or_stop_reading();
+        }
     },
 
     start_or_stop_reading: function () {
