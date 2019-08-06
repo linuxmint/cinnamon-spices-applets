@@ -1039,7 +1039,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
 
     if (is_to_download === true) {
       // replace local json cache file by the remote one
-      let message = Soup.Message.new('GET', URL_MAP[type]);
+      let message = Soup.Message.new('GET', URL_MAP[type] + GLib.uuid_string_random());
       _httpSession.queue_message(message, Lang.bind(this, this._on_response_download_cache, type));
       this.testblink[type]=null;
     }

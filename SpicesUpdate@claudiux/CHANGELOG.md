@@ -1,3 +1,6 @@
+### v2.3.0~20190806
+  * Bypass all caches to download json files containing data about Spices.
+
 ### v2.2.0~20190803
   * Adding a "Help..." button in the menu. This help (in English by default) can be translated into your language. To do it:
    * Place you into the `help` directory: `cd ~/.local/share/cinnamon/applets/SpicesUpdate@claudiux/help`
