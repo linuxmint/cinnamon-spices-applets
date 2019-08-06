@@ -49,7 +49,7 @@ msgstr "Redémarrer 'Moniteur graphique'"
 
 #: applet.js:401
 msgid "CPU"
-msgstr "PROC"
+msgstr "CPU"
 
 #: applet.js:428
 msgid "MEM"
