@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-08-04 01:17+0200\n"
-"PO-Revision-Date: 2019-08-04 01:39+0200\n"
+"POT-Creation-Date: 2019-08-06 09:36+0200\n"
+"PO-Revision-Date: 2019-08-06 09:47+0200\n"
+"Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: \n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.0.6\n"
-"Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"Language: fr\n"
 
 #: applet.js:52
 msgid "Dependency missing"
@@ -43,11 +43,15 @@ msgstr ""
 msgid "Open System Monitor"
 msgstr "Ouvrir le Moniteur système"
 
-#: applet.js:392
+#: applet.js:84
+msgid "Restart 'Graphical hardware monitor'"
+msgstr "Redémarrer 'Moniteur graphique'"
+
+#: applet.js:401
 msgid "CPU"
 msgstr "PROC"
 
-#: applet.js:419
+#: applet.js:428
 msgid "MEM"
 msgstr "MEM"
 
