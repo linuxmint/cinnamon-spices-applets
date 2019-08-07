@@ -209,6 +209,14 @@ msgstr "Sand"
 msgid "Dust"
 msgstr "Staub"
 
+#: 3.8/applet.js:592
+msgid "Heute"
+msgstr ""
+
+#: 3.8/applet.js:594
+msgid "Morgen"
+msgstr ""
+
 #: applet.js:1341
 msgid "Sqalls"
 msgstr "Sturmböen"
