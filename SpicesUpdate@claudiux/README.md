@@ -1,5 +1,8 @@
 # Spices Update
 
+## Important!
+In order to be sure to download the latest version of Spices Update, use **[this link](https://cinnamon-spices.linuxmint.com/files/applets/SpicesUpdate@claudiux.zip?4f0319bf-beca-4aad-b686-dd7421a14693)** rather than the Download button at the top of this page.
+
 ## Summary
 
 Cinnamon Spices are Applets, Desklets, Extensions and Themes.
