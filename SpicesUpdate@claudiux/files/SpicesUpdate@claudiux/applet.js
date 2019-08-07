@@ -1537,6 +1537,12 @@ class SpicesUpdate extends Applet.TextIconApplet {
     Extension.reloadExtension(UUID, Extension.Type.APPLET);
   }; // End of _on_reload_this_applet_pressed
 
+  _clean_str(str) {
+    let ret = str.replace(/\\'/gi, "'");
+    ret = ret.replace(/\\"/gi, '"');
+    return ret;
+  }; // End of _clean_str
+
   // This updates the display of the applet and the tooltip
   updateUI() {
     this.get_default_icon_color();
@@ -1555,8 +1561,10 @@ class SpicesUpdate extends Applet.TextIconApplet {
       for (let type of TYPES) {
         // \uD83D\uDDD8
         // \u2605
-        if (this.old_message[type] != "") _tooltip += "\n\u21BB %s".format(this.old_message[type].replace(/, /gi, "\n\t"));
-        if (this.old_watch_message[type] != "") _tooltip += "\n\u23FF %s".format(this.old_watch_message[type].replace(/, /gi, "\n\t"));
+        //if (this.old_message[type] != "") _tooltip += "\n\u21BB %s".format(this.old_message[type].replace(/, /gi, "\n\t"));
+        //if (this.old_watch_message[type] != "") _tooltip += "\n\u23FF %s".format(this.old_watch_message[type].replace(/, /gi, "\n\t"));
+        if (this.old_message[type] != "") _tooltip += "\n\u21BB %s".format(this._clean_str(this.old_message[type].replace(/, /gi, "\n\t")));
+        if (this.old_watch_message[type] != "") _tooltip += "\n\u23FF %s".format(this._clean_str(this.old_watch_message[type].replace(/, /gi, "\n\t")));
       }
       this.set_applet_tooltip(_tooltip);
       this.numberLabel.text = (this.nb_to_update + this.nb_to_watch).toString();
@@ -1626,8 +1634,8 @@ class SpicesUpdate extends Applet.TextIconApplet {
                 let new_message = _(message) + "\n\t" + must_be_updated.join("\n\t");
                 if (this.force_notifications || new_message != this.old_message[t]) { // One notification is sufficient!
                   if (this.general_notifications) {
-                    if (this.general_type_notif === "minimal") notify_send(new_message);
-                    else this.notify_with_button(new_message, t, uuid);
+                    if (this.general_type_notif === "minimal") notify_send(this._clean_str(new_message));
+                    else this.notify_with_button(this._clean_str(new_message), t, uuid);
                   }
                   this.old_message[t] = new_message.toString();
                 }
@@ -1649,8 +1657,8 @@ class SpicesUpdate extends Applet.TextIconApplet {
                 let new_watch_message = _(watch_message) + "\n\t" + this.get_are_new(t).join("\n\t");
                 if (this.force_notifications || new_watch_message != this.old_watch_message[t]) { // One notification is sufficient!
                   if (this.general_notifications) {
-                    if (this.general_type_notif === "minimal") notify_send(new_watch_message);
-                    else this.notify_with_button(new_watch_message, t);
+                    if (this.general_type_notif === "minimal") notify_send(this._clean_str(new_watch_message));
+                    else this.notify_with_button(this._clean_str(new_watch_message), t);
                   }
                   this.old_watch_message[t] = new_watch_message.toString();
                 }

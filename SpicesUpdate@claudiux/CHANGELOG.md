@@ -1,3 +1,6 @@
+### v2.3.1~20190807
+  * Minor change: Replaces, in tooltip and in notifications, escaped characters \' and \" by ' and ", if any.
+
 ### v2.3.0~20190806
   * Bypass all caches to download json files containing data about Spices.
 
