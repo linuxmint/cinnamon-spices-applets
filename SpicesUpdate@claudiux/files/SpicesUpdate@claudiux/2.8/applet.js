@@ -76,7 +76,7 @@ Soup.Session.prototype.add_feature.call(_httpSession, new Soup.ProxyResolverDefa
 
 // ++ l10n support
 Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
-Gettext.bindtextdomain("nemo", "/usr/share/locale");
+Gettext.bindtextdomain("cinnamon-control-center", "/usr/share/locale");
 
 // ++ Always needed if you want localisation/translation support
 function _(str, uuid=UUID) {
@@ -171,12 +171,21 @@ function notify_send(message, duration=5000, urgency="normal", icon_path=null) {
   }
 }
 
-class SpicesUpdate extends Applet.TextIconApplet {
-  constructor (metadata, orientation, panelHeight, instance_id) {
-    super(orientation, panelHeight, instance_id);
+function SpicesUpdate(metadata, orientation, panelHeight, instance_id) {
+  this._init(metadata, orientation, panelHeight, instance_id);
+}
+
+SpicesUpdate.prototype = {
+  __proto__: Applet.TextIconApplet.prototype, // Now TextIcon Applet
+
+  _init: function (metadata, orientation, panelHeight, instance_id) {
+    Applet.TextIconApplet.prototype._init.call(this, orientation, panelHeight, instance_id);
     this.instanceId = instance_id;
-    this.setAllowedLayout(Applet.AllowedLayout.BOTH); // Can be used on horizontal or vertical panels.
+    if (this.versionCompare( GLib.getenv('CINNAMON_VERSION') ,"3.2" ) >= 0 ){
+      this.setAllowedLayout(Applet.AllowedLayout.BOTH); // Can be used on horizontal or vertical panels.
+    }
     this.appletPath = metadata.path;
+    Gtk.IconTheme.get_default().append_search_path(ICONS_DIR);
     this.set_applet_icon_symbolic_name("spices-update");
     this.set_applet_tooltip(_("Spices Update"));
 
@@ -262,11 +271,12 @@ class SpicesUpdate extends Applet.TextIconApplet {
       this.on_settings_changed,
       null);
 
-    this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL,
-      "unprotected_applets",
-      "unprotected_applets",
-      this.populateSettingsUnprotectedApplets,
-      null);
+    //this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL,
+      //"unprotected_applets",
+      //"unprotected_applets",
+      //this.populateSettingsUnprotectedApplets,
+      //null);
+    this.unprotected_applets = [];
 
     // Desklets
     this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL,
@@ -281,11 +291,12 @@ class SpicesUpdate extends Applet.TextIconApplet {
       this.on_settings_changed,
       null);
 
-    this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL,
-      "unprotected_desklets",
-      "unprotected_desklets",
-      this.populateSettingsUnprotectedDesklets,
-      null);
+    //this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL,
+      //"unprotected_desklets",
+      //"unprotected_desklets",
+      //this.populateSettingsUnprotectedDesklets,
+      //null);
+    this.unprotected_desklets = [];
 
     // Extensions
     this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL,
@@ -300,11 +311,12 @@ class SpicesUpdate extends Applet.TextIconApplet {
       this.on_settings_changed,
       null);
 
-    this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL,
-      "unprotected_extensions",
-      "unprotected_extensions",
-      this.populateSettingsUnprotectedExtensions,
-      null);
+    //this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL,
+      //"unprotected_extensions",
+      //"unprotected_extensions",
+      //this.populateSettingsUnprotectedExtensions,
+      //null);
+    this.unprotected_extensions = [];
 
     // Themes
     this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL,
@@ -319,11 +331,12 @@ class SpicesUpdate extends Applet.TextIconApplet {
       this.on_settings_changed,
       null);
 
-    this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL,
-      "unprotected_themes",
-      "unprotected_themes",
-      this.populateSettingsUnprotectedThemes,
-      null);
+    //this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL,
+      //"unprotected_themes",
+      //"unprotected_themes",
+      //this.populateSettingsUnprotectedThemes,
+      //null);
+    this.unprotected_themes = [];
 
     // General settings
     this.settings.bindProperty(Settings.BindingDirection.IN,
@@ -469,12 +482,32 @@ class SpicesUpdate extends Applet.TextIconApplet {
     this.on_settings_changed();
     // Run the loop !
     this.updateLoop();
-  }; // End of constructor
+  }, // End of _init
+
+  // Compare two version numbers (strings) based on code by Alexey Bass (albass)
+  // Takes account of many variations of version numers including cinnamon.
+  versionCompare: function(left, right) {
+      if (typeof left + typeof right != 'stringstring')
+          return false;
+      var a = left.split('.'),
+          b = right.split('.'),
+          i = 0,
+          len = Math.max(a.length, b.length);
+      for (; i < len; i++) {
+          if ((a[i] && !b[i] && parseInt(a[i]) > 0) || (parseInt(a[i]) > parseInt(b[i]))) {
+              return 1;
+          } else if ((b[i] && !a[i] && parseInt(b[i]) > 0) || (parseInt(a[i]) < parseInt(b[i]))) {
+              return -1;
+          }
+      }
+      return 0;
+  }, // End of versionCompare
+
 
   /** get_translated_help_file()
    * Returns the help file in html format
    */
-  get_translated_help_file() {
+  get_translated_help_file:function () {
     let default_file_name = HELP_DIR + "/en/README.html";
     let help_file = Gio.file_new_for_path(default_file_name);
     let language = "";
@@ -507,13 +540,13 @@ class SpicesUpdate extends Applet.TextIconApplet {
         }
       }
     }
-  }; // End of get_translated_help_file
+  }, // End of get_translated_help_file
 
-  notify_with_button(message, type, uuid = null) {
+  notify_with_button:function (message, type, uuid = null) {
     let source = new MessageTray.SystemNotificationSource();
     if (Main.messageTray) {
       Main.messageTray.add(source);
-      let gicon = Gio.icon_new_for_string(this.appletPath + "/icon.png");
+      let gicon = Gio.icon_new_for_string(APPLET_DIR + "/icon.png");
       let icon = new St.Icon({ gicon: gicon, 'icon-size': 32});
       let notification = new MessageTray.Notification(source, _("Spices Update"), message, {icon: icon});
       notification.setTransient(false);
@@ -557,9 +590,9 @@ class SpicesUpdate extends Applet.TextIconApplet {
           }));
       source.notify(notification);
     }
-  }; // End of notify_with_button
+  }, // End of notify_with_button
 
-  on_notif_for_new_changed() {
+  on_notif_for_new_changed:function () {
     if (!this.notif_for_new) {
       this.nb_to_watch = 0;
       this.new_Spices = {
@@ -576,15 +609,15 @@ class SpicesUpdate extends Applet.TextIconApplet {
       }
     }
     this._on_refresh_pressed()
-  }
+  }, //End of on_notif_for_new_changed
 
-  on_orientation_changed (orientation) {
+  on_orientation_changed:function (orientation) {
     this.orientation = orientation;
     this.isHorizontal = !(this.orientation == St.Side.LEFT || this.orientation == St.Side.RIGHT);
     this._set_main_label();
-  }; // End of on_orientation_changed
+  }, // End of on_orientation_changed
 
-  _set_main_label() {
+  _set_main_label:function () {
     if (this.general_hide === true && this.nb_to_update === 0 && this.nb_to_watch === 0) {
       this.set_applet_label("");
       this.actor.hide();
@@ -600,24 +633,24 @@ class SpicesUpdate extends Applet.TextIconApplet {
         this.set_applet_label("SpU");
       }
     }
-  }; // End of _set_main_label
+  }, // End of _set_main_label
 
-  on_frequency_changed() {
+  on_frequency_changed:function () {
     if (this.loopId) {
       Mainloop.source_remove(this.loopId);
     }
     this.loopId = 0;
     this.refreshInterval = 3600*this.general_frequency;
     this.loopId = Mainloop.timeout_add_seconds(this.refreshInterval, () => this.updateLoop());
-  }; // End of on_frequency_changed
+  }, // End of on_frequency_changed
 
-  on_display_type_changed() {
+  on_display_type_changed:function () {
     // Label
     this._set_main_label();
-  }; // End of on_display_type_changed
+  }, // End of on_display_type_changed
 
   // ++ Function called when settings are changed
-  on_settings_changed() {
+  on_settings_changed:function () {
     // Label
     this._set_main_label();
 
@@ -684,10 +717,10 @@ class SpicesUpdate extends Applet.TextIconApplet {
       this.menuDots['themes'] = false;
     }
 
-  }; // End of on_settings_changed
+  }, // End of on_settings_changed
 
   // Buttons in settings:
-  on_btn_test_notif_pressed() {
+  on_btn_test_notif_pressed:function () {
     let details = "";
     if (this.details_requested === true) details = _("With details here, when available.")+"\n\t";
     let message = _("One applet needs update:") + "\n%s\n\t".format(UUID) + details + _("Do not matter. This is a FAKE notification, just for the test.");
@@ -696,35 +729,35 @@ class SpicesUpdate extends Applet.TextIconApplet {
     } else {
       this.notify_with_button(message, TYPES[0])
     }
-  }; // End of on_btn_test_notif_pressed
-  on_btn_refresh_applets_pressed() {
+  }, // End of on_btn_test_notif_pressed
+  on_btn_refresh_applets_pressed:function () {
     this.OKtoPopulateSettingsApplets = true;
     this.populateSettingsUnprotectedApplets()
-  }; // End of on_btn_refresh_applets_pressed
-  on_btn_refresh_desklets_pressed() {
+  }, // End of on_btn_refresh_applets_pressed
+  on_btn_refresh_desklets_pressed:function () {
     this.OKtoPopulateSettingsDesklets = true;
     this.populateSettingsUnprotectedDesklets()
-  }; // End of on_btn_refresh_applets_pressed
-  on_btn_refresh_extensions_pressed() {
+  }, // End of on_btn_refresh_applets_pressed
+  on_btn_refresh_extensions_pressed:function () {
     this.OKtoPopulateSettingsExtensions = true;
     this.populateSettingsUnprotectedExtensions()
-  }; // End of on_btn_refresh_applets_pressed
-  on_btn_refresh_themes_pressed() {
+  }, // End of on_btn_refresh_applets_pressed
+  on_btn_refresh_themes_pressed:function () {
     this.OKtoPopulateSettingsThemes = true;
     this.populateSettingsUnprotectedThemes()
-  }; // End of on_btn_refresh_applets_pressed
-  on_btn_cs_applets_pressed() {
+  }, // End of on_btn_refresh_applets_pressed
+  on_btn_cs_applets_pressed:function () {
     GLib.spawn_command_line_async('bash -c \'cinnamon-settings applets\'');
-  }; // End of on_btn_cs_applets_pressed
-  on_btn_cs_desklets_pressed() {
+  }, // End of on_btn_cs_applets_pressed
+  on_btn_cs_desklets_pressed:function () {
     GLib.spawn_command_line_async('bash -c \'cinnamon-settings desklets\'');
-  }; // End of on_btn_cs_desklets_pressed
-  on_btn_cs_extensions_pressed() {
+  }, // End of on_btn_cs_desklets_pressed
+  on_btn_cs_extensions_pressed:function () {
     GLib.spawn_command_line_async('bash -c \'cinnamon-settings extensions\'');
-  }; // End of on_btn_cs_extensions_pressed
-  on_btn_cs_themes_pressed() {
+  }, // End of on_btn_cs_extensions_pressed
+  on_btn_cs_themes_pressed:function () {
     GLib.spawn_command_line_async('bash -c \'cinnamon-settings themes\'');
-  }; // End of on_btn_cs_themes_pressed
+  }, // End of on_btn_cs_themes_pressed
 
   /**
    * #populateSettingsUnprotectedApplets:
@@ -756,7 +789,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
     ]
     * (true when updates are requested by the user)
   */
-  populateSettingsUnprotectedApplets() {
+  populateSettingsUnprotectedApplets:function () {
     if (this.OKtoPopulateSettingsApplets === true) {
       this.OKtoPopulateSettingsApplets = false; // Prevents multiple access to the json config file of SpiceUpdate@claudiux.
       this.unprotectedAppletsDico = {};
@@ -791,9 +824,9 @@ class SpicesUpdate extends Applet.TextIconApplet {
         this.unprotected_applets = this.unprotectedAppletsList.sort((a,b) => this._compare(a,b));
       }
     }
-  }; // End of populateSettingsUnprotectedApplets
+  }, // End of populateSettingsUnprotectedApplets
 
-  populateSettingsUnprotectedDesklets() {
+  populateSettingsUnprotectedDesklets:function () {
     if (this.OKtoPopulateSettingsDesklets === true) {
       this.OKtoPopulateSettingsDesklets = false;
       this.unprotectedDeskletsDico = {};
@@ -828,9 +861,9 @@ class SpicesUpdate extends Applet.TextIconApplet {
         this.unprotected_desklets = this.unprotectedDeskletsList.sort((a,b) => this._compare(a,b));
       }
     }
-  }; // End of populateSettingsUnprotectedDesklets
+  }, // End of populateSettingsUnprotectedDesklets
 
-  populateSettingsUnprotectedExtensions() {
+  populateSettingsUnprotectedExtensions:function () {
     if (this.OKtoPopulateSettingsExtensions === true) {
       this.OKtoPopulateSettingsExtensions = false;
       this.unprotectedExtensionsDico = {};
@@ -865,9 +898,9 @@ class SpicesUpdate extends Applet.TextIconApplet {
         this.unprotected_extensions = this.unprotectedExtensionsList.sort((a,b) => this._compare(a,b));
       }
     }
-  }; // End of populateSettingsUnprotectedExtensions
+  }, // End of populateSettingsUnprotectedExtensions
 
-  populateSettingsUnprotectedThemes() {
+  populateSettingsUnprotectedThemes:function () {
     if (this.OKtoPopulateSettingsThemes === true) {
       this.OKtoPopulateSettingsThemes = false;
       this.unprotectedThemesDico = {};
@@ -902,21 +935,21 @@ class SpicesUpdate extends Applet.TextIconApplet {
         this.unprotected_themes = this.unprotectedThemesList.sort((a,b) => this._compare(a,b));
       }
     }
-  }; // End of populateSettingsUnprotectedThemes
+  }, // End of populateSettingsUnprotectedThemes
 
-  _compare(a,b) {
+  _compare:function (a,b) {
     // We know that a["name"] and b["name"] are different.
     if (a["name"].toLowerCase() < b["name"].toLowerCase()) {
       return -1
     }
     return 1
-  }; // End of _compare
+  }, // End of _compare
 
-  _get_singular_type(t) {
+  _get_singular_type:function (t) {
     return t.substr(0, t.length-1);
-  }; // End of _get_singular_type
+  }, // End of _get_singular_type
 
-  are_dependencies_installed() {
+  are_dependencies_installed:function () {
     let _fonts_installed = (
       Gio.file_new_for_path("/usr/share/fonts/truetype/ancient-scripts/Symbola_hint.ttf").query_exists(null) ||
       Gio.file_new_for_path("/usr/share/fonts/TTF/Symbola.ttf").query_exists(null) ||
@@ -933,9 +966,9 @@ class SpicesUpdate extends Applet.TextIconApplet {
       }
     }
     return (_fonts_installed && GLib.find_program_in_path("notify-send"))
-  }; // End of are_dependencies_installed
+  }, // End of are_dependencies_installed
 
-  get_terminal() {
+  get_terminal:function () {
     var term_found = "";
     var _terminals = ["gnome-terminal", "tilix", "konsole", "guake", "qterminal", "terminator", "uxterm", "xterm"];
     var t;
@@ -946,9 +979,9 @@ class SpicesUpdate extends Applet.TextIconApplet {
       }
     }
     return term_found
-  }; // End of get_terminal
+  }, // End of get_terminal
 
-  check_dependencies() {
+  check_dependencies:function () {
     if (!this.dependenciesMet && this.are_dependencies_installed()) {
       // At this time, the user just finished to install all dependencies.
       this.dependenciesMet=true;
@@ -997,14 +1030,15 @@ class SpicesUpdate extends Applet.TextIconApplet {
       }
       this.dependenciesMet = false;
     }
-  }; // End of check_dependencies
+  }, // End of check_dependencies
 
-  _load_cache(type) {
+  _load_cache:function (type) {
     let jsonFileName = CACHE_MAP[type];
     let jsonFile = Gio.file_new_for_path(jsonFileName);
     if (!jsonFile.query_exists(null)) {
       let jsonDirName = CACHE_DIR + "/" + this._get_singular_type(type);
-      GLib.mkdir_with_parents(jsonDirName, 0o755);
+      //GLib.mkdir_with_parents(jsonDirName, 0o755);
+      GLib.mkdir_with_parents(jsonDirName, 493);
       GLib.file_set_contents(jsonFileName,"{}");
     }
     if (jsonFile.query_exists(null)) {
@@ -1013,10 +1047,10 @@ class SpicesUpdate extends Applet.TextIconApplet {
     } else {
       this.cache[type] = "{}"
     }
-  }; // End of _load_cache
+  }, // End of _load_cache
 
 
-  download_cache(type) {
+  download_cache:function (type) {
     let jsonFile = Gio.file_new_for_path(CACHE_MAP[type]);
 
     //Should we renew the cache?
@@ -1039,21 +1073,37 @@ class SpicesUpdate extends Applet.TextIconApplet {
 
     if (is_to_download === true) {
       // replace local json cache file by the remote one
-      let message = Soup.Message.new('GET', URL_MAP[type] + GLib.uuid_string_random());
+      let message = Soup.Message.new('GET', URL_MAP[type] + this.uuid_string_random());
       _httpSession.queue_message(message, Lang.bind(this, this._on_response_download_cache, type));
       this.testblink[type]=null;
     }
-  }; // End of download_cache
+  }, // End of download_cache
 
-  _on_response_download_cache(session, message, type) {
+  uuid_string_random: function() {
+    // 4f0319bf-beca-4aad-b686-dd7421a14693
+    let model = "00000000-0000-0000-0000-000000000000";
+    let hexa = "0123456789abcdef";
+    var ret = new Array();
+    for (let i=0; i < model.length; i++) {
+      if (model[i] === "0") {
+        ret.push(hexa[GLib.random_int_range(0, 15)]);
+      } else {
+        ret.push("-");
+      }
+    }
+    return ret.join("").toString();
+
+  }, // End of uuid_string_random
+
+  _on_response_download_cache:function (session, message, type) {
     if (message.status_code===Soup.KnownStatusCode.OK) {
       let data = message.response_body.data.toString();
       GLib.file_set_contents(CACHE_MAP[type], data); // Records the new cache in the right place.
       this._load_cache(type)
     }
-  }; // End of _on_response_download_cache
+  }, // End of _on_response_download_cache
 
-  _get_last_edited_from_cache(type, uuid) {
+  _get_last_edited_from_cache:function (type, uuid) {
     var cacheParser = new Json.Parser();
     cacheParser.load_from_data(this.cache[type], -1);
     var ok = false;
@@ -1075,9 +1125,9 @@ class SpicesUpdate extends Applet.TextIconApplet {
     } else {
       return null
     }
-  }; // End of _get_last_edited_from_cache
+  }, // End of _get_last_edited_from_cache
 
-  _get_member_from_cache(type, uuid, memberId) {
+  _get_member_from_cache:function (type, uuid, memberId) {
     var cacheParser = new Json.Parser();
     cacheParser.load_from_data(this.cache[type], -1);
     var ok = false;
@@ -1099,26 +1149,26 @@ class SpicesUpdate extends Applet.TextIconApplet {
     } else {
       return null
     }
-  }; // End of _get_member_from_cache
+  }, // End of _get_member_from_cache
 
-  get_spice_name(type, uuid) {
+  get_spice_name:function (type, uuid) {
     return _(this._get_member_from_cache(type, uuid, "name"), uuid)
-  }; // End of get_spice_name
+  }, // End of get_spice_name
 
-  get_spice_description(type, uuid) {
+  get_spice_description:function (type, uuid) {
     return _(this._get_member_from_cache(type, uuid, "description"), uuid)
-  }; // End of get_spice_name
+  }, // End of get_spice_name
 
-  _rewrite_metadataFile(fileName, lastEdited) {
+  _rewrite_metadataFile:function (fileName, lastEdited) {
     let metadataData = GLib.file_get_contents(fileName).toString().substr(5);
     let newData = JSON.parse(metadataData);
     newData["last-edited"] = lastEdited;
     let message = JSON.stringify(newData, null, 2);
     GLib.file_set_contents(fileName, message);
     log("Added missing last-edited field into " + fileName.toString())
-  }; // End of _rewrite_metadataFile
+  }, // End of _rewrite_metadataFile
 
-  _get_last_edited_from_metadata(type, uuid) {
+  _get_last_edited_from_metadata:function (type, uuid) {
     var lastEdited = null;
     let metadataParser = new Json.Parser();
     let metadataFileName = DIR_MAP[type] + "/" + uuid + "/metadata.json";
@@ -1167,15 +1217,15 @@ class SpicesUpdate extends Applet.TextIconApplet {
       }
     }
     return lastEdited
-  }; // End of _get_last_edited_from_metadata
+  }, // End of _get_last_edited_from_metadata
 
-  _on_forget_new_spices_pressed() {
+  _on_forget_new_spices_pressed:function () {
     for (let type of TYPES) {
       for (let uuid of this.new_Spices[type]) this.download_image(type, uuid);
     }
-  }; // End of _on_forget_new_spices_pressed
+  }, // End of _on_forget_new_spices_pressed
 
-  download_image(type, uuid) {
+  download_image:function (type, uuid) {
     let memberName, url, target;
     let is_theme = (type === "themes");
     if (is_theme) {
@@ -1225,12 +1275,13 @@ class SpicesUpdate extends Applet.TextIconApplet {
       // close the file
       fstream.close(null);
     }));
-  }; // End of download_image
+  }, // End of download_image
 
-  get_last_commit_subject(type, uuid) {
+  get_last_commit_subject:function (type, uuid) {
     let marker_begin = "</span>\]";
     let marker_end = "</div>"
-    let subject_regexp = new RegExp(`${marker_begin}(.+)${marker_end}`);
+    //let subject_regexp = new RegExp(`${marker_begin}(.+)${marker_end}`);
+    let subject_regexp = new RegExp(marker_begin + '(.+)' + marker_end);
     let url = "https://cinnamon-spices.linuxmint.com/%s/view/%s/".format(type.toString(),
                                                                         this._get_member_from_cache(type, uuid, "spices-id").toString());
     var msg = Soup.Message.new('GET', url);
@@ -1247,17 +1298,17 @@ class SpicesUpdate extends Applet.TextIconApplet {
       }
     }));
     return (this.details_by_uuid[uuid] !== undefined)
-  }; // End of get_last_commit_subject
+  }, // End of get_last_commit_subject
 
-  is_to_check(type) {
+  is_to_check:function (type) {
     return (this.types_to_check.indexOf(type) > -1);
-  }; // End of is_to_check
+  }, // End of is_to_check
 
-  is_to_check_for_new(type) {
+  is_to_check_for_new:function (type) {
     return (this.types_to_check_new.indexOf(type) > -1);
-  }; // End of is_to_check_for_new
+  }, // End of is_to_check_for_new
 
-  get_can_be_updated(type) {
+  get_can_be_updated:function (type) {
     var ret = [];
     var spicesList = [];
     switch (type) {
@@ -1281,9 +1332,9 @@ class SpicesUpdate extends Applet.TextIconApplet {
     }
     //log("can_be_updated("+ type + ") = " + JSON.stringify(ret));
     return ret
-  }; // End of get_can_be_updated
+  }, // End of get_can_be_updated
 
-  get_must_be_updated(type) {
+  get_must_be_updated:function (type) {
     let can_be_updated = this.get_can_be_updated(type);
     var ret = new Array();
     var lc, lm;
@@ -1312,9 +1363,9 @@ class SpicesUpdate extends Applet.TextIconApplet {
       }
     }
     return ret
-  }; // End of get_must_be_updated
+  }, // End of get_must_be_updated
 
-  get_are_new(type) {
+  get_are_new:function (type) {
     var ret = new Array();
     for (let uuid of this.new_Spices[type]) {
       if (this.details_requested === true)
@@ -1325,16 +1376,16 @@ class SpicesUpdate extends Applet.TextIconApplet {
         ret.push("%s (%s)".format(_(this.get_spice_name(type, uuid)), uuid))
     }
     return ret
-  }; // End of get_are_new
+  }, // End of get_are_new
 
-  get_uuids_from_cache(type) {
+  get_uuids_from_cache:function (type) {
     var cacheParser = JSON.parse(this.cache[type]);
     let names = Object.keys(cacheParser);
     log("names = " + names.toString());
     return names
-  }; // End of get_uuids_from_cache
+  }, // End of get_uuids_from_cache
 
-  get_new_spices(type) {
+  get_new_spices:function (type) {
     //if (!this.notif_for_new) return false;
     if (!this.is_to_check_for_new(type)) return false;
     var known_spices = [];
@@ -1358,9 +1409,9 @@ class SpicesUpdate extends Applet.TextIconApplet {
     //log("known_spices = " + known_spices);
     log("new_Spices[%s] = %s".format(type, this.new_Spices[type].toString()));
     return (this.new_Spices[type].length > 0)
-  }; // End of get_new_spices
+  }, // End of get_new_spices
 
-  monitor_png_directory(type) {
+  monitor_png_directory:function (type) {
     if (this.monitorsPngId[type] === 0) {
       let pngDirName = HOME_DIR + "/.cinnamon/spices.cache/%s".format(this._get_singular_type(type));
       let pngDir = Gio.file_new_for_path(pngDirName);
@@ -1376,13 +1427,13 @@ class SpicesUpdate extends Applet.TextIconApplet {
         }
       }
     }
-  }; // End of monitor_png_directory
+  }, // End of monitor_png_directory
 
-  _on_pngDir_changed(type) {
+  _on_pngDir_changed:function (type) {
     this._on_refresh_pressed()
-  }; // End of _on_pngDir_changed
+  }, // End of _on_pngDir_changed
 
-  monitor_metadatajson(type, uuid) {
+  monitor_metadatajson:function (type, uuid) {
     let metadataFileName = DIR_MAP[type] + "/" + uuid + "/metadata.json";
     let metadataFile = Gio.file_new_for_path(metadataFileName);
 
@@ -1401,13 +1452,13 @@ class SpicesUpdate extends Applet.TextIconApplet {
         log("Unable to monitor metadata.json of the %s %s: %s".format(this._get_singular_type(type.toString()), uuid, e))
       }
     }
-  }; // End of monitor_metadatajson
+  }, // End of monitor_metadatajson
 
-  _on_metadatajson_changed(type, uuid) {
+  _on_metadatajson_changed:function (type, uuid) {
     this._on_refresh_pressed()
-  }; // End of _on_metadatajson_changed
+  }, // End of _on_metadatajson_changed
 
-  get_active_spices(type) {
+  get_active_spices:function (type) {
     // Returns the list of active spices of type 'type'
     var dconfEnabled;
     var elt = (type.toString() === "applets") ? 3 : 0;
@@ -1440,15 +1491,15 @@ class SpicesUpdate extends Applet.TextIconApplet {
     }
     //log('listEnabled='+ listEnabled.toString());
     return listEnabled
-  }; // End of get_active_spices
+  }, // End of get_active_spices
 
-  get_default_icon_color() {
+  get_default_icon_color:function () {
     let themeNode = this.actor.get_theme_node(); // get_theme_node() fails in constructor! (cause: widget not on stage)
     let icon_color = themeNode.get_icon_colors();
     this.defaultColor = icon_color.foreground.to_string();
-  }; // End of get_default_icon_color
+  }, // End of get_default_icon_color
 
-  makeMenu() {
+  makeMenu:function () {
     this.menu.removeAll();
 
     // Head
@@ -1469,20 +1520,21 @@ class SpicesUpdate extends Applet.TextIconApplet {
     // Status of each type of Spices:
     this.spicesMenuItems = {};
     let ts;
-    for (let t of TYPES) {
-      ts = _(capitalize(t.toString()));
+    for (let typ of TYPES) {
+      let t = typ.toString();
+      ts = _(capitalize(t));
       if (this.nb_in_menu[t] - this.new_Spices[t].length > 0) ts += "   \u21BB %s".format((this.nb_in_menu[t] - this.new_Spices[t].length).toString());
-      if (this.new_Spices[t].length > 0) ts += "   \u23FF %s".format((this.new_Spices[t].length).toString());
+      if (this.new_Spices[t].length > 0) ts += "   \u2604 %s".format((this.new_Spices[t].length).toString());
       this.spicesMenuItems[t] = new PopupMenu.PopupIndicatorMenuItem(ts);
       this.spicesMenuItems[t].connect('activate', (event) => {
-        //Util.spawnCommandLine("cinnamon-settings " + t.toString());
-        Util.spawnCommandLine("%s/open_download_tab.py %s".format(SCRIPTS_DIR, t.toString()));
+        Util.spawnCommandLine("cinnamon-settings %s".format(t));
+        //Util.spawnCommandLine("%s/open_download_tab.py %s".format(SCRIPTS_DIR, t.toString()));
       });
       this.spicesMenuItems[t].setShowDot(this.menuDots[t]);
       this.menu.addMenuItem(this.spicesMenuItems[t]);
     }
     if (this.nb_to_watch > 0) {
-      let _forget_button = new PopupMenu.PopupIconMenuItem(_("Forget new Spices") + " -\u23FF-", "emblem-ok", St.IconType.SYMBOLIC);
+      let _forget_button = new PopupMenu.PopupIconMenuItem(_("Forget new Spices") + " -\u2604-", "emblem-ok", St.IconType.SYMBOLIC);
       _forget_button.connect("activate", (event) => this._on_forget_new_spices_pressed())
       this.menu.addMenuItem(_forget_button);
     }
@@ -1504,7 +1556,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
       this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
       // button Help...
-      this.help_button = new PopupMenu.PopupIconMenuItem(_("Help", "nemo") + "...", "folder-documents-symbolic", St.IconType.SYMBOLIC);
+      this.help_button = new PopupMenu.PopupIconMenuItem(_("Help", "cinnamon-control-center") + "...", "folder-documents-symbolic", St.IconType.SYMBOLIC);
       this.help_button.connect('activate', (event) => {
           GLib.spawn_command_line_async('xdg-open ' + this.help_file);
         });
@@ -1512,14 +1564,14 @@ class SpicesUpdate extends Applet.TextIconApplet {
       this.menu.addMenuItem(this.help_button);
     }
 
-  }; // End of makeMenu
+  }, // End of makeMenu
 
-  _on_refresh_pressed() {
+  _on_refresh_pressed:function () {
     this.first_loop = false;
     this.updateLoop();
-  }; // End of _on_refresh_pressed
+  }, // End of _on_refresh_pressed
 
-  _on_reload_this_applet_pressed() {
+  _on_reload_this_applet_pressed:function () {
     // Before to reload this applet, stop the loop, remove all bindings and disconnect all signals to avoid errors.
     this.applet_running = false;
     if (this.loopId > 0) {
@@ -1535,16 +1587,16 @@ class SpicesUpdate extends Applet.TextIconApplet {
     for (let type of TYPES) this.monitorsPngId[type] = 0;
     // Reload this applet
     Extension.reloadExtension(UUID, Extension.Type.APPLET);
-  }; // End of _on_reload_this_applet_pressed
+  }, // End of _on_reload_this_applet_pressed
 
-  _clean_str(str) {
+  _clean_str:function (str) {
     let ret = str.replace(/\\'/gi, "'");
     ret = ret.replace(/\\"/gi, '"');
     return ret;
-  }; // End of _clean_str
+  }, // End of _clean_str
 
   // This updates the display of the applet and the tooltip
-  updateUI() {
+  updateUI:function () {
     this.get_default_icon_color();
     log("defaultColor = " + this.defaultColor);
     this._applet_icon.style = "color: %s;".format(this.defaultColor);
@@ -1574,10 +1626,10 @@ class SpicesUpdate extends Applet.TextIconApplet {
       this.numberLabel.text = '';
       this.badge.hide();
     }
-  }; // End of updateUI
+  }, // End of updateUI
 
   // This is the loop run at general_frequency rate to call updateUI() to update the display in the applet and tooltip
-  updateLoop() {
+  updateLoop:function () {
     //this.set_icons();
     this.check_dependencies();
     if (this.loopId > 0) {
@@ -1677,21 +1729,21 @@ class SpicesUpdate extends Applet.TextIconApplet {
       // One more loop !
       this.loopId = Mainloop.timeout_add_seconds(this.refreshInterval, () => this.updateLoop());
     }
-  }; // End of updateLoop
+  }, // End of updateLoop
 
   //++ Handler for when the applet is clicked.
-  on_applet_clicked(event) {
+  on_applet_clicked:function (event) {
     //this.updateLoop();
     this.makeMenu();
     this.updateUI();
     this.menu.toggle();
-  }; // End of on_applet_clicked
+  }, // End of on_applet_clicked
 
   // ++ Null function called when Generic (internal) Setting changed
-  on_generic_changed() {};
+  on_generic_changed:function () {}, // End of on_generic_changed
 
   // ++ This finalizes the settings when the applet is removed from the panel
-  on_applet_removed_from_panel() {
+  on_applet_removed_from_panel:function () {
     // When applet is removed from panel: stop the loop, inhibit the update timer,
     // remove all bindings and disconnect all signals (if any) to avoid errors.
     this.applet_running = false;
@@ -1708,9 +1760,11 @@ class SpicesUpdate extends Applet.TextIconApplet {
     for (let type of TYPES) this.monitorsPngId[type] = 0;
     if (this.settings) this.settings.finalize();
     //Main.keybindingManager.removeHotKey(UUID);
-  };
-} // End of class SpicesUpdate
+  } // End of on_applet_removed_from_panel
+
+} // End of SpicesUpdate.prototype
 
 function main(metadata, orientation, panelHeight, instance_id) {
-  return new SpicesUpdate(metadata, orientation, panelHeight, instance_id);
+  let spicesupdate = new SpicesUpdate(metadata, orientation, panelHeight, instance_id);
+  return spicesupdate;
 }

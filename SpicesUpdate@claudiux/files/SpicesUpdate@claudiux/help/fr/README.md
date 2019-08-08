@@ -16,7 +16,19 @@ L'applet **Spices Update** :
 
 ## État
 
+Disponible de Cinnamon 2.8 à Cinnamon 4.2.
+
 Cette applet est active, c'est-à-dire développée et utilisée par l'auteur sur plusieurs machines fonctionnant sous **Linux Mint**, **Fedora** ou **Archlinux**.
+
+À partir de la version v3.0.0 ~ 20190808:
+  * Spices Update est compatible avec Cinnamon 2.8 -> 4.2 (Mint 17.3 -> 19.2).
+  * De Cinnamon 3.8 à 4.2 (Mint 19 à 19.2): **Parfaitement fonctionnel, comme d'habitude.**
+  * De Cinnamon 2.8 à 3.6 (Mint 17.3 à 18.3): certaines fonctionnalités sont réduites:
+   * La fenêtre de configuration des Spices ne s'ouvre pas sur le deuxième onglet, mais sur le premier. Vous devrez cliquer sur le deuxième onglet et sélectionner vous-même le tri par date.
+   * La fenêtre Paramètres de cet applet ne contient aucun onglet.
+   * Dans les paramètres de cette applet, vous ne pouvez pas accéder aux listes des Spices pour désactiver leur surveillance. Par conséquent, toutes les Spices installées sont surveillées.
+   * Le script ```generate_mo.sh``` (dans le dossier ```scripts```) vous permet d'installer toutes les traductions disponibles. Redémarrez Cinnamon après l'exécution de ce script.
+   * Si la police ```Symbola_Hinted``` ne peut pas s'installer automatiquement, placez-vous dans le dossier ```fonts/symbola``` et double-cliquez sur le fichier ```Symbola_Hinted.ttf```. Installez-la avec l'application ```gnome-font-viewer``` qui vient de s'ouvrir.
 
 L'auteur est ouvert à toute suggestion d'amélioration.
 
