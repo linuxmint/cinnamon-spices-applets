@@ -1,3 +1,5 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var Mainloop = imports.mainloop;
 var Cinnamon = imports.gi.Cinnamon;
 var setTimeout = function (func, ms) {
@@ -89,4 +91,97 @@ var timeToUserUnits = function (date, show24Hours) {
             return time[0] + ":" + time[1] + " am";
         }
     }
+};
+var WEATHER_CONV_MPH_IN_MPS = 2.23693629;
+var WEATHER_CONV_KPH_IN_MPS = 3.6;
+var WEATHER_CONV_KNOTS_IN_MPS = 1.94384449;
+var capitalizeFirstLetter = function (description) {
+    if ((description == undefined || description == null)) {
+        return "";
+    }
+    return description.charAt(0).toUpperCase() + description.slice(1);
+};
+var KPHtoMPS = function (speed) {
+    return speed / WEATHER_CONV_KPH_IN_MPS;
+};
+var MPStoUserUnits = function (mps, units) {
+    switch (units) {
+        case "mph":
+            return Math.round((mps * WEATHER_CONV_MPH_IN_MPS) * 10) / 10;
+        case "kph":
+            return Math.round((mps * WEATHER_CONV_KPH_IN_MPS) * 10) / 10;
+        case "m/s":
+            return Math.round(mps * 10) / 10;
+        case "Knots":
+            return Math.round(mps * WEATHER_CONV_KNOTS_IN_MPS);
+    }
+};
+var TempToUserUnits = function (kelvin, units) {
+    if (units == "celsius") {
+        return Math.round((kelvin - 273.15));
+    }
+    if (units == "fahrenheit") {
+        return Math.round((9 / 5 * (kelvin - 273.15) + 32));
+    }
+};
+var CelsiusToKelvin = function (celsius) {
+    return (celsius + 273.15);
+};
+var FahrenheitToKelvin = function (fahr) {
+    return ((fahr - 32) / 1.8 + 273.15);
+};
+var MPHtoMPS = function (speed) {
+    return speed * 0.44704;
+};
+var PressToUserUnits = function (hpa, units) {
+    switch (units) {
+        case "hPa":
+            return hpa;
+        case "at":
+            return Math.round((hpa * 0.001019716) * 1000) / 1000;
+        case "atm":
+            return Math.round((hpa * 0.0009869233) * 1000) / 1000;
+        case "in Hg":
+            return Math.round((hpa * 0.029529983071445) * 10) / 10;
+        case "mm Hg":
+            return Math.round((hpa * 0.7500638));
+        case "Pa":
+            return Math.round((hpa * 100));
+        case "psi":
+            return Math.round((hpa * 0.01450377) * 100) / 100;
+    }
+};
+var isNumeric = function (n) {
+    return !isNaN(parseFloat(n)) && isFinite(n);
+};
+var isString = function (text) {
+    if (typeof text == 'string' || text instanceof String) {
+        return true;
+    }
+    return false;
+};
+var isID = function (text) {
+    if (text.length == 7 && isNumeric(text)) {
+        return true;
+    }
+    return false;
+};
+var isCoordinate = function (text) {
+    if (/^-?\d{1,3}(?:\.\d*)?,-?\d{1,3}(?:\.\d*)?/.test(text)) {
+        return true;
+    }
+    return false;
+};
+var nonempty = function (str) {
+    return (str != null && str.length > 0);
+};
+var compassDirection = function (deg) {
+    var directions = [_('N'), _('NE'), _('E'), _('SE'), _('S'), _('SW'), _('W'), _('NW')];
+    return directions[Math.round(deg / 45) % directions.length];
+};
+var isLangSupported = function (lang, languages) {
+    if (languages.indexOf(lang) != -1) {
+        return true;
+    }
+    return false;
 };

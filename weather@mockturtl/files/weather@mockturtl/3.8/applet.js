@@ -1,4 +1,13 @@
 const DEBUG = false;
+function importModule(path) {
+    if (typeof require !== 'undefined') {
+        return require('./' + path);
+    }
+    else {
+        let AppletDir = imports.ui.appletManager.applets['weather@mockturtl'];
+        return AppletDir[path];
+    }
+}
 const Cairo = imports.cairo;
 const Lang = imports.lang;
 const Main = imports.ui.main;
@@ -12,18 +21,15 @@ const Config = imports.misc.config;
 const PopupMenu = imports.ui.popupMenu;
 const Settings = imports.ui.settings;
 const Util = imports.misc.util;
-function importModule(path) {
-    if (typeof require !== 'undefined') {
-        return require('./' + path);
-    }
-    else {
-        let AppletDir = imports.ui.appletManager.applets['weather@mockturtl'];
-        return AppletDir[path];
-    }
-}
 var utils = importModule("utils");
 var GetDayName = utils.GetDayName;
 var GetHoursMinutes = utils.GetHoursMinutes;
+var capitalizeFirstLetter = utils.capitalizeFirstLetter;
+var TempToUserUnits = utils.TempToUserUnits;
+var PressToUserUnits = utils.PressToUserUnits;
+var compassDirection = utils.compassDirection;
+var MPStoUserUnits = utils.MPStoUserUnits;
+var nonempty = utils.nonempty;
 if (typeof Promise != "function") {
     var promisePoly = importModule("promise-polyfill");
     var finallyConstructor = promisePoly.finallyConstructor;
@@ -55,16 +61,11 @@ if (typeof Promise != "function") {
 }
 const GLib = imports.gi.GLib;
 const Gettext = imports.gettext;
-var darkSky;
-var openWeatherMap;
 const ipApi = importModule('ipApi');
 const UUID = "weather@mockturtl";
 const APPLET_ICON = "view-refresh-symbolic";
 const REFRESH_ICON = "view-refresh";
 const CMD_SETTINGS = "cinnamon-settings applets " + UUID;
-const WEATHER_CONV_MPH_IN_MPS = 2.23693629;
-const WEATHER_CONV_KPH_IN_MPS = 3.6;
-const WEATHER_CONV_KNOTS_IN_MPS = 1.94384449;
 const BLANK = '   ';
 const ELLIPSIS = '...';
 const EN_DASH = '\u2013';
@@ -119,15 +120,6 @@ const STYLE_POPUP_SEPARATOR_MENU_ITEM = 'popup-separator-menu-item';
 const STYLE_CURRENT = 'current';
 const STYLE_FORECAST = 'forecast';
 const STYLE_WEATHER_MENU = 'weather-menu';
-const WeatherPressureUnits = {
-    HPA: 'hPa',
-    MMHG: 'mm Hg',
-    INHG: 'in Hg',
-    PA: 'Pa',
-    PSI: 'psi',
-    ATM: 'atm',
-    AT: 'at'
-};
 class Log {
     constructor(_instanceId) {
         this.debug = false;
@@ -202,16 +194,6 @@ class MyApplet extends Applet.TextIconApplet {
             cloudiness: null,
         };
         this.forecasts = [];
-        this.WeatherUnits = {
-            CELSIUS: 'celsius',
-            FAHRENHEIT: 'fahrenheit'
-        };
-        this.WeatherWindSpeedUnits = {
-            KPH: 'kph',
-            MPH: 'mph',
-            MPS: 'm/s',
-            KNOTS: 'Knots'
-        };
         this.errMsg = {
             label: {
                 generic: _("Error"),
@@ -441,12 +423,12 @@ class MyApplet extends Applet.TextIconApplet {
             switch (this._dataService) {
                 case DATA_SERVICE.DARK_SKY:
                     if (darkSky == null)
-                        darkSky = importModule('darkSky');
+                        var darkSky = importModule('darkSky');
                     this.provider = new darkSky.DarkSky(this);
                     break;
                 case DATA_SERVICE.OPEN_WEATHER_MAP:
                     if (openWeatherMap == null)
-                        openWeatherMap = importModule("openWeatherMap");
+                        var openWeatherMap = importModule("openWeatherMap");
                     this.provider = new openWeatherMap.OpenWeatherMap(this);
                     break;
                 default:
@@ -478,11 +460,11 @@ class MyApplet extends Applet.TextIconApplet {
             if (this.weather.condition.main != null) {
                 mainCondition = this.weather.condition.main;
                 if (this._translateCondition) {
-                    mainCondition = this.capitalizeFirstLetter(_(mainCondition));
+                    mainCondition = capitalizeFirstLetter(_(mainCondition));
                 }
             }
             if (this.weather.condition.description != null) {
-                descriptionCondition = this.capitalizeFirstLetter(this.weather.condition.description);
+                descriptionCondition = capitalizeFirstLetter(this.weather.condition.description);
                 if (this._translateCondition) {
                     descriptionCondition = _(descriptionCondition);
                 }
@@ -494,7 +476,7 @@ class MyApplet extends Applet.TextIconApplet {
             else {
                 location = Math.round(this.weather.coord.lat * 10000) / 10000 + ", " + Math.round(this.weather.coord.lon * 10000) / 10000;
             }
-            if (this.nonempty(this._locationLabelOverride)) {
+            if (nonempty(this._locationLabelOverride)) {
                 location = this._locationLabelOverride;
             }
             this.set_applet_tooltip(location);
@@ -509,7 +491,7 @@ class MyApplet extends Applet.TextIconApplet {
                 this.set_applet_icon_name(iconname);
             let temp = "";
             if (this.weather.main.temperature != null) {
-                temp = this.TempToUserUnits(this.weather.main.temperature).toString();
+                temp = TempToUserUnits(this.weather.main.temperature, this._temperatureUnit).toString();
                 this._currentWeatherTemperature.text = temp + ' ' + this.unitToUnicode();
             }
             let label = "";
@@ -531,8 +513,8 @@ class MyApplet extends Applet.TextIconApplet {
             if (this.weather.main.humidity != null) {
                 this._currentWeatherHumidity.text = Math.round(this.weather.main.humidity) + "%";
             }
-            let wind_direction = this.compassDirection(this.weather.wind.degree);
-            this._currentWeatherWind.text = ((wind_direction != undefined) ? wind_direction + ' ' : '') + this.MPStoUserUnits(this.weather.wind.speed) + ' ' + this._windSpeedUnit;
+            let wind_direction = compassDirection(this.weather.wind.degree);
+            this._currentWeatherWind.text = ((wind_direction != undefined) ? wind_direction + ' ' : '') + MPStoUserUnits(this.weather.wind.speed, this._windSpeedUnit) + ' ' + this._windSpeedUnit;
             switch (this._dataService) {
                 case DATA_SERVICE.OPEN_WEATHER_MAP:
                     if (this.weather.cloudiness != null) {
@@ -542,7 +524,7 @@ class MyApplet extends Applet.TextIconApplet {
                     break;
                 case DATA_SERVICE.DARK_SKY:
                     if (this.weather.main.feelsLike != null) {
-                        this._currentWeatherApiUnique.text = this.TempToUserUnits(this.weather.main.feelsLike) + this.unitToUnicode();
+                        this._currentWeatherApiUnique.text = TempToUserUnits(this.weather.main.feelsLike, this._temperatureUnit) + this.unitToUnicode();
                         this._currentWeatherApiUniqueCap.text = _("Feels like:");
                     }
                     break;
@@ -551,7 +533,7 @@ class MyApplet extends Applet.TextIconApplet {
                     this._currentWeatherApiUniqueCap.text = "";
             }
             if (this.weather.main.pressure != null) {
-                this._currentWeatherPressure.text = this.PressToUserUnits(this.weather.main.pressure) + ' ' + _(this._pressureUnit);
+                this._currentWeatherPressure.text = PressToUserUnits(this.weather.main.pressure, this._pressureUnit) + ' ' + _(this._pressureUnit);
             }
             this._currentWeatherLocation.label = location;
             switch (this._dataService) {
@@ -585,14 +567,14 @@ class MyApplet extends Applet.TextIconApplet {
             for (let i = 0; i < this._forecast.length; i++) {
                 let forecastData = this.forecasts[i];
                 let forecastUi = this._forecast[i];
-                let t_low = this.TempToUserUnits(forecastData.main.temp_min);
-                let t_high = this.TempToUserUnits(forecastData.main.temp_max);
+                let t_low = TempToUserUnits(forecastData.main.temp_min, this._temperatureUnit);
+                let t_high = TempToUserUnits(forecastData.main.temp_max, this._temperatureUnit);
                 let first_temperature = this._temperatureHighFirst ? t_high : t_low;
                 let second_temperature = this._temperatureHighFirst ? t_low : t_high;
                 let comment = "";
                 if (forecastData.condition.main != null && forecastData.condition.description != null) {
                     comment = (this._shortConditions) ? forecastData.condition.main : forecastData.condition.description;
-                    comment = this.capitalizeFirstLetter(comment);
+                    comment = capitalizeFirstLetter(comment);
                     if (this._translateCondition)
                         comment = _(comment);
                 }
@@ -826,90 +808,8 @@ class MyApplet extends Applet.TextIconApplet {
         return false;
     }
     ;
-    capitalizeFirstLetter(description) {
-        if ((description == undefined || description == null)) {
-            return "";
-        }
-        return description.charAt(0).toUpperCase() + description.slice(1);
-    }
-    ;
-    KPHtoMPS(speed) {
-        return speed / WEATHER_CONV_KPH_IN_MPS;
-    }
-    ;
-    MPStoUserUnits(mps) {
-        switch (this._windSpeedUnit) {
-            case this.WeatherWindSpeedUnits.MPH:
-                return Math.round((mps * WEATHER_CONV_MPH_IN_MPS) * 10) / 10;
-            case this.WeatherWindSpeedUnits.KPH:
-                return Math.round((mps * WEATHER_CONV_KPH_IN_MPS) * 10) / 10;
-            case this.WeatherWindSpeedUnits.MPS:
-                return Math.round(mps * 10) / 10;
-            case this.WeatherWindSpeedUnits.KNOTS:
-                return Math.round(mps * WEATHER_CONV_KNOTS_IN_MPS);
-        }
-    }
-    TempToUserUnits(kelvin) {
-        if (this._temperatureUnit == this.WeatherUnits.CELSIUS) {
-            return Math.round((kelvin - 273.15));
-        }
-        if (this._temperatureUnit == this.WeatherUnits.FAHRENHEIT) {
-            return Math.round((9 / 5 * (kelvin - 273.15) + 32));
-        }
-    }
-    CelsiusToKelvin(celsius) {
-        return (celsius + 273.15);
-    }
-    FahrenheitToKelvin(fahr) {
-        return ((fahr - 32) / 1.8 + 273.15);
-    }
-    ;
-    MPHtoMPS(speed) {
-        return speed * 0.44704;
-    }
-    PressToUserUnits(hpa) {
-        switch (this._pressureUnit) {
-            case WeatherPressureUnits.HPA:
-                return hpa;
-            case WeatherPressureUnits.AT:
-                return Math.round((hpa * 0.001019716) * 1000) / 1000;
-            case WeatherPressureUnits.ATM:
-                return Math.round((hpa * 0.0009869233) * 1000) / 1000;
-            case WeatherPressureUnits.INHG:
-                return Math.round((hpa * 0.029529983071445) * 10) / 10;
-            case WeatherPressureUnits.MMHG:
-                return Math.round((hpa * 0.7500638));
-            case WeatherPressureUnits.PA:
-                return Math.round((hpa * 100));
-            case WeatherPressureUnits.PSI:
-                return Math.round((hpa * 0.01450377) * 100) / 100;
-        }
-    }
-    ;
-    isNumeric(n) {
-        return !isNaN(parseFloat(n)) && isFinite(n);
-    }
-    isString(text) {
-        if (typeof text == 'string' || text instanceof String) {
-            return true;
-        }
-        return false;
-    }
-    isID(text) {
-        if (text.length == 7 && this.isNumeric(text)) {
-            return true;
-        }
-        return false;
-    }
-    ;
-    isCoordinate(text) {
-        if (/^-?\d{1,3}(?:\.\d*)?,-?\d{1,3}(?:\.\d*)?/.test(text)) {
-            return true;
-        }
-        return false;
-    }
     unitToUnicode() {
-        return this._temperatureUnit == this.WeatherUnits.FAHRENHEIT ? '\u2109' : '\u2103';
+        return this._temperatureUnit == "fahrenheit" ? '\u2109' : '\u2103';
     }
     weatherIconSafely(code, iconResolver) {
         let iconname = iconResolver(code);
@@ -922,20 +822,6 @@ class MyApplet extends Applet.TextIconApplet {
     hasIcon(icon) {
         return Gtk.IconTheme.get_default().has_icon(icon + (this._icon_type == St.IconType.SYMBOLIC ? '-symbolic' : ''));
     }
-    nonempty(str) {
-        return (str != null && str.length > 0);
-    }
-    compassDirection(deg) {
-        let directions = [_('N'), _('NE'), _('E'), _('SE'), _('S'), _('SW'), _('W'), _('NW')];
-        return directions[Math.round(deg / 45) % directions.length];
-    }
-    isLangSupported(lang, languages) {
-        if (languages.indexOf(lang) != -1) {
-            return true;
-        }
-        return false;
-    }
-    ;
 }
 const openWeatherMapConditionLibrary = [
     _("Thunderstorm with light rain"),

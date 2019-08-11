@@ -1,3 +1,16 @@
+function importModule(path) {
+    if (typeof require !== 'undefined') {
+        return require('./' + path);
+    }
+    else {
+        let AppletDir = imports.ui.appletManager.applets['weather@mockturtl'];
+        return AppletDir[path];
+    }
+}
+var utils = importModule("utils");
+var isCoordinate = utils.isCoordinate;
+var isLangSupported = utils.isLangSupported;
+var isID = utils.isID;
 class OpenWeatherMap {
     constructor(_app) {
         this.supportedLanguages = ["ar", "bg", "ca", "cz", "de", "el", "en", "fa", "fi",
@@ -143,7 +156,7 @@ class OpenWeatherMap {
         if (locString != null) {
             query = query + locString + "&APPID=";
             query += "1c73f8259a86c6fd43c7163b543c8640";
-            if (this.app._translateCondition && this.app.isLangSupported(this.app.systemLanguage, this.supportedLanguages)) {
+            if (this.app._translateCondition && isLangSupported(this.app.systemLanguage, this.supportedLanguages)) {
                 query = query + "&lang=" + this.app.systemLanguage;
             }
             return query;
@@ -155,11 +168,11 @@ class OpenWeatherMap {
     ;
     ParseLocation() {
         let loc = this.app._location.replace(/ /g, "");
-        if (this.app.isCoordinate(loc)) {
+        if (isCoordinate(loc)) {
             let locArr = loc.split(',');
             return "lat=" + locArr[0] + "&lon=" + locArr[1];
         }
-        else if (this.app.isID(loc)) {
+        else if (isID(loc)) {
             return "id=" + loc;
         }
         else

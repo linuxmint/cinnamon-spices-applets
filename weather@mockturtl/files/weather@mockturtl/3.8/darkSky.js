@@ -1,3 +1,18 @@
+function importModule(path) {
+    if (typeof require !== 'undefined') {
+        return require('./' + path);
+    }
+    else {
+        let AppletDir = imports.ui.appletManager.applets['weather@mockturtl'];
+        return AppletDir[path];
+    }
+}
+var utils = importModule("utils");
+var isCoordinate = utils.isCoordinate;
+var isLangSupported = utils.isLangSupported;
+var FahrenheitToKelvin = utils.FahrenheitToKelvin;
+var CelsiusToKelvin = utils.CelsiusToKelvin;
+var MPHtoMPS = utils.MPHtoMPS;
 class DarkSky {
     constructor(_app) {
         this.descriptionLinelength = 25;
@@ -113,10 +128,10 @@ class DarkSky {
             this.app.showError(this.app.errMsg.label.noKey, "");
             return "";
         }
-        if (this.app.isCoordinate(location)) {
+        if (isCoordinate(location)) {
             query = this.query + key + "/" + location +
                 "?exclude=minutely,hourly,flags" + "&units=" + this.unit;
-            if (this.app.isLangSupported(this.app.systemLanguage, this.supportedLanguages) && this.app._translateCondition) {
+            if (isLangSupported(this.app.systemLanguage, this.supportedLanguages) && this.app._translateCondition) {
                 query = query + "&lang=" + this.app.systemLanguage;
             }
             return query;
@@ -209,8 +224,8 @@ class DarkSky {
     }
     ;
     SetQueryUnit() {
-        if (this.app._temperatureUnit == this.app.WeatherUnits.CELSIUS) {
-            if (this.app._windSpeedUnit == this.app.WeatherWindSpeedUnits.KPH || this.app._windSpeedUnit == this.app.WeatherWindSpeedUnits.MPS) {
+        if (this.app._temperatureUnit == "celsius") {
+            if (this.app._windSpeedUnit == "kph" || this.app._windSpeedUnit == "m/s") {
                 this.unit = 'si';
             }
             else {
@@ -224,10 +239,10 @@ class DarkSky {
     ;
     ToKelvin(temp) {
         if (this.unit == 'us') {
-            return this.app.FahrenheitToKelvin(temp);
+            return FahrenheitToKelvin(temp);
         }
         else {
-            return this.app.CelsiusToKelvin(temp);
+            return CelsiusToKelvin(temp);
         }
     }
     ;
@@ -236,7 +251,7 @@ class DarkSky {
             return speed;
         }
         else {
-            return this.app.MPHtoMPS(speed);
+            return MPHtoMPS(speed);
         }
     }
     ;

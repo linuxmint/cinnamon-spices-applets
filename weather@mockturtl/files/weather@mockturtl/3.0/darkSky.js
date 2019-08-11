@@ -1,3 +1,4 @@
+"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -33,6 +34,22 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+Object.defineProperty(exports, "__esModule", { value: true });
+function importModule(path) {
+    if (typeof require !== 'undefined') {
+        return require('./' + path);
+    }
+    else {
+        var AppletDir = imports.ui.appletManager.applets['weather@mockturtl'];
+        return AppletDir[path];
+    }
+}
+var utils = importModule("utils");
+var isCoordinate = utils.isCoordinate;
+var isLangSupported = utils.isLangSupported;
+var FahrenheitToKelvin = utils.FahrenheitToKelvin;
+var CelsiusToKelvin = utils.CelsiusToKelvin;
+var MPHtoMPS = utils.MPHtoMPS;
 var DarkSky = (function () {
     function DarkSky(_app) {
         this.descriptionLinelength = 25;
@@ -161,10 +178,10 @@ var DarkSky = (function () {
             this.app.showError(this.app.errMsg.label.noKey, "");
             return "";
         }
-        if (this.app.isCoordinate(location)) {
+        if (isCoordinate(location)) {
             query = this.query + key + "/" + location +
                 "?exclude=minutely,hourly,flags" + "&units=" + this.unit;
-            if (this.app.isLangSupported(this.app.systemLanguage, this.supportedLanguages) && this.app._translateCondition) {
+            if (isLangSupported(this.app.systemLanguage, this.supportedLanguages) && this.app._translateCondition) {
                 query = query + "&lang=" + this.app.systemLanguage;
             }
             return query;
@@ -257,8 +274,8 @@ var DarkSky = (function () {
     };
     ;
     DarkSky.prototype.SetQueryUnit = function () {
-        if (this.app._temperatureUnit == this.app.WeatherUnits.CELSIUS) {
-            if (this.app._windSpeedUnit == this.app.WeatherWindSpeedUnits.KPH || this.app._windSpeedUnit == this.app.WeatherWindSpeedUnits.MPS) {
+        if (this.app._temperatureUnit == "celsius") {
+            if (this.app._windSpeedUnit == "kph" || this.app._windSpeedUnit == "m/s") {
                 this.unit = 'si';
             }
             else {
@@ -272,10 +289,10 @@ var DarkSky = (function () {
     ;
     DarkSky.prototype.ToKelvin = function (temp) {
         if (this.unit == 'us') {
-            return this.app.FahrenheitToKelvin(temp);
+            return FahrenheitToKelvin(temp);
         }
         else {
-            return this.app.CelsiusToKelvin(temp);
+            return CelsiusToKelvin(temp);
         }
     };
     ;
@@ -284,7 +301,7 @@ var DarkSky = (function () {
             return speed;
         }
         else {
-            return this.app.MPHtoMPS(speed);
+            return MPHtoMPS(speed);
         }
     };
     ;

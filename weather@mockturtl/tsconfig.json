@@ -7,7 +7,9 @@
         "removeComments": true,
         "preserveConstEnums": true,
         "sourceMap": false,
-        "experimentalDecorators": true
+        //"experimentalDecorators": true,
+        "noLib": true,
+        "isolatedModules": true
     },
     "include": [
         "src/**/*"

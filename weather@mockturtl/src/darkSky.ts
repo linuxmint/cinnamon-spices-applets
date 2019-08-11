@@ -1,3 +1,21 @@
+export {}; // Declaring as a Module
+
+function importModule(path: string): any {
+    if (typeof require !== 'undefined') {
+      return require('./' + path);
+    } else {
+      let AppletDir = imports.ui.appletManager.applets['weather@mockturtl'];
+      return AppletDir[path];
+    }
+}
+
+var utils = importModule("utils");
+var isCoordinate = utils.isCoordinate as (text: any) => boolean;
+var isLangSupported = utils.isLangSupported as (lang: string, languages: Array <string> ) => boolean;
+var FahrenheitToKelvin = utils.FahrenheitToKelvin as (fahr: number) => number;
+var CelsiusToKelvin = utils.CelsiusToKelvin as (celsius: number) => number;
+var MPHtoMPS = utils.MPHtoMPS as (speed: number) => number;
+
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
 ///////////                                       ////////////
@@ -6,7 +24,7 @@
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
 
-class DarkSky {
+class DarkSky implements WeatherProvider {
 
     //--------------------------------------------------------
     //  Properties
@@ -27,7 +45,6 @@ class DarkSky {
     constructor(_app: MyApplet) {
         this.app = _app;
     }
-
 
     //--------------------------------------------------------
     //  Functions
@@ -146,10 +163,10 @@ class DarkSky {
             this.app.showError(this.app.errMsg.label.noKey, "");
             return "";
         }
-        if (this.app.isCoordinate(location)) {
+        if (isCoordinate(location)) {
             query = this.query + key + "/" + location + 
             "?exclude=minutely,hourly,flags" + "&units=" + this.unit;
-            if (this.app.isLangSupported(this.app.systemLanguage, this.supportedLanguages) && this.app._translateCondition) {
+            if (isLangSupported(this.app.systemLanguage, this.supportedLanguages) && this.app._translateCondition) {
                 query = query + "&lang=" + this.app.systemLanguage;
             }
             return query;
@@ -252,8 +269,8 @@ class DarkSky {
     };
 
     SetQueryUnit() {
-        if (this.app._temperatureUnit == this.app.WeatherUnits.CELSIUS){
-            if (this.app._windSpeedUnit == this.app.WeatherWindSpeedUnits.KPH || this.app._windSpeedUnit == this.app.WeatherWindSpeedUnits.MPS) {
+        if (this.app._temperatureUnit == "celsius"){
+            if (this.app._windSpeedUnit == "kph" || this.app._windSpeedUnit == "m/s") {
                 this.unit = 'si';
             }
             else {
@@ -267,10 +284,10 @@ class DarkSky {
 
     ToKelvin(temp: number) {
         if (this.unit == 'us') {
-            return this.app.FahrenheitToKelvin(temp);
+            return FahrenheitToKelvin(temp);
         }
         else {
-            return this.app.CelsiusToKelvin(temp);
+            return CelsiusToKelvin(temp);
         }
 
     };
@@ -280,7 +297,7 @@ class DarkSky {
             return speed;
         }
         else {
-            return this.app.MPHtoMPS(speed);
+            return MPHtoMPS(speed);
         }
     };
 };

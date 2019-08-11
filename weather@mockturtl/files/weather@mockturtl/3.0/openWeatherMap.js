@@ -1,3 +1,4 @@
+"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -33,6 +34,20 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+Object.defineProperty(exports, "__esModule", { value: true });
+function importModule(path) {
+    if (typeof require !== 'undefined') {
+        return require('./' + path);
+    }
+    else {
+        var AppletDir = imports.ui.appletManager.applets['weather@mockturtl'];
+        return AppletDir[path];
+    }
+}
+var utils = importModule("utils");
+var isCoordinate = utils.isCoordinate;
+var isLangSupported = utils.isLangSupported;
+var isID = utils.isID;
 var OpenWeatherMap = (function () {
     function OpenWeatherMap(_app) {
         this.supportedLanguages = ["ar", "bg", "ca", "cz", "de", "el", "en", "fa", "fi",
@@ -201,7 +216,7 @@ var OpenWeatherMap = (function () {
         if (locString != null) {
             query = query + locString + "&APPID=";
             query += "1c73f8259a86c6fd43c7163b543c8640";
-            if (this.app._translateCondition && this.app.isLangSupported(this.app.systemLanguage, this.supportedLanguages)) {
+            if (this.app._translateCondition && isLangSupported(this.app.systemLanguage, this.supportedLanguages)) {
                 query = query + "&lang=" + this.app.systemLanguage;
             }
             return query;
@@ -213,11 +228,11 @@ var OpenWeatherMap = (function () {
     ;
     OpenWeatherMap.prototype.ParseLocation = function () {
         var loc = this.app._location.replace(/ /g, "");
-        if (this.app.isCoordinate(loc)) {
+        if (isCoordinate(loc)) {
             var locArr = loc.split(',');
             return "lat=" + locArr[0] + "&lon=" + locArr[1];
         }
-        else if (this.app.isID(loc)) {
+        else if (isID(loc)) {
             return "id=" + loc;
         }
         else

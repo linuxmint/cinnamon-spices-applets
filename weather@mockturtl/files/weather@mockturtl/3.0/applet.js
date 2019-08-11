@@ -47,6 +47,15 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 var DEBUG = false;
+function importModule(path) {
+    if (typeof require !== 'undefined') {
+        return require('./' + path);
+    }
+    else {
+        var AppletDir = imports.ui.appletManager.applets['weather@mockturtl'];
+        return AppletDir[path];
+    }
+}
 var Cairo = imports.cairo;
 var Lang = imports.lang;
 var Main = imports.ui.main;
@@ -60,18 +69,15 @@ var Config = imports.misc.config;
 var PopupMenu = imports.ui.popupMenu;
 var Settings = imports.ui.settings;
 var Util = imports.misc.util;
-function importModule(path) {
-    if (typeof require !== 'undefined') {
-        return require('./' + path);
-    }
-    else {
-        var AppletDir = imports.ui.appletManager.applets['weather@mockturtl'];
-        return AppletDir[path];
-    }
-}
 var utils = importModule("utils");
 var GetDayName = utils.GetDayName;
 var GetHoursMinutes = utils.GetHoursMinutes;
+var capitalizeFirstLetter = utils.capitalizeFirstLetter;
+var TempToUserUnits = utils.TempToUserUnits;
+var PressToUserUnits = utils.PressToUserUnits;
+var compassDirection = utils.compassDirection;
+var MPStoUserUnits = utils.MPStoUserUnits;
+var nonempty = utils.nonempty;
 if (typeof Promise != "function") {
     var promisePoly = importModule("promise-polyfill");
     var finallyConstructor = promisePoly.finallyConstructor;
@@ -103,16 +109,11 @@ if (typeof Promise != "function") {
 }
 var GLib = imports.gi.GLib;
 var Gettext = imports.gettext;
-var darkSky;
-var openWeatherMap;
 var ipApi = importModule('ipApi');
 var UUID = "weather@mockturtl";
 var APPLET_ICON = "view-refresh-symbolic";
 var REFRESH_ICON = "view-refresh";
 var CMD_SETTINGS = "cinnamon-settings applets " + UUID;
-var WEATHER_CONV_MPH_IN_MPS = 2.23693629;
-var WEATHER_CONV_KPH_IN_MPS = 3.6;
-var WEATHER_CONV_KNOTS_IN_MPS = 1.94384449;
 var BLANK = '   ';
 var ELLIPSIS = '...';
 var EN_DASH = '\u2013';
@@ -167,15 +168,6 @@ var STYLE_POPUP_SEPARATOR_MENU_ITEM = 'popup-separator-menu-item';
 var STYLE_CURRENT = 'current';
 var STYLE_FORECAST = 'forecast';
 var STYLE_WEATHER_MENU = 'weather-menu';
-var WeatherPressureUnits = {
-    HPA: 'hPa',
-    MMHG: 'mm Hg',
-    INHG: 'in Hg',
-    PA: 'Pa',
-    PSI: 'psi',
-    ATM: 'atm',
-    AT: 'at'
-};
 var Log = (function () {
     function Log(_instanceId) {
         this.debug = false;
@@ -252,16 +244,6 @@ var MyApplet = (function (_super) {
             cloudiness: null,
         };
         _this.forecasts = [];
-        _this.WeatherUnits = {
-            CELSIUS: 'celsius',
-            FAHRENHEIT: 'fahrenheit'
-        };
-        _this.WeatherWindSpeedUnits = {
-            KPH: 'kph',
-            MPH: 'mph',
-            MPS: 'm/s',
-            KNOTS: 'Knots'
-        };
         _this.errMsg = {
             label: {
                 generic: _("Error"),
@@ -486,7 +468,7 @@ var MyApplet = (function (_super) {
     };
     MyApplet.prototype.refreshWeather = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var haveLocation, loc, _a, e_1;
+            var haveLocation, loc, darkSky, openWeatherMap, _a, e_1;
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
@@ -570,11 +552,11 @@ var MyApplet = (function (_super) {
             if (this.weather.condition.main != null) {
                 mainCondition = this.weather.condition.main;
                 if (this._translateCondition) {
-                    mainCondition = this.capitalizeFirstLetter(_(mainCondition));
+                    mainCondition = capitalizeFirstLetter(_(mainCondition));
                 }
             }
             if (this.weather.condition.description != null) {
-                descriptionCondition = this.capitalizeFirstLetter(this.weather.condition.description);
+                descriptionCondition = capitalizeFirstLetter(this.weather.condition.description);
                 if (this._translateCondition) {
                     descriptionCondition = _(descriptionCondition);
                 }
@@ -586,7 +568,7 @@ var MyApplet = (function (_super) {
             else {
                 location = Math.round(this.weather.coord.lat * 10000) / 10000 + ", " + Math.round(this.weather.coord.lon * 10000) / 10000;
             }
-            if (this.nonempty(this._locationLabelOverride)) {
+            if (nonempty(this._locationLabelOverride)) {
                 location = this._locationLabelOverride;
             }
             this.set_applet_tooltip(location);
@@ -601,7 +583,7 @@ var MyApplet = (function (_super) {
                 this.set_applet_icon_name(iconname);
             var temp = "";
             if (this.weather.main.temperature != null) {
-                temp = this.TempToUserUnits(this.weather.main.temperature).toString();
+                temp = TempToUserUnits(this.weather.main.temperature, this._temperatureUnit).toString();
                 this._currentWeatherTemperature.text = temp + ' ' + this.unitToUnicode();
             }
             var label = "";
@@ -623,8 +605,8 @@ var MyApplet = (function (_super) {
             if (this.weather.main.humidity != null) {
                 this._currentWeatherHumidity.text = Math.round(this.weather.main.humidity) + "%";
             }
-            var wind_direction = this.compassDirection(this.weather.wind.degree);
-            this._currentWeatherWind.text = ((wind_direction != undefined) ? wind_direction + ' ' : '') + this.MPStoUserUnits(this.weather.wind.speed) + ' ' + this._windSpeedUnit;
+            var wind_direction = compassDirection(this.weather.wind.degree);
+            this._currentWeatherWind.text = ((wind_direction != undefined) ? wind_direction + ' ' : '') + MPStoUserUnits(this.weather.wind.speed, this._windSpeedUnit) + ' ' + this._windSpeedUnit;
             switch (this._dataService) {
                 case DATA_SERVICE.OPEN_WEATHER_MAP:
                     if (this.weather.cloudiness != null) {
@@ -634,7 +616,7 @@ var MyApplet = (function (_super) {
                     break;
                 case DATA_SERVICE.DARK_SKY:
                     if (this.weather.main.feelsLike != null) {
-                        this._currentWeatherApiUnique.text = this.TempToUserUnits(this.weather.main.feelsLike) + this.unitToUnicode();
+                        this._currentWeatherApiUnique.text = TempToUserUnits(this.weather.main.feelsLike, this._temperatureUnit) + this.unitToUnicode();
                         this._currentWeatherApiUniqueCap.text = _("Feels like:");
                     }
                     break;
@@ -643,7 +625,7 @@ var MyApplet = (function (_super) {
                     this._currentWeatherApiUniqueCap.text = "";
             }
             if (this.weather.main.pressure != null) {
-                this._currentWeatherPressure.text = this.PressToUserUnits(this.weather.main.pressure) + ' ' + _(this._pressureUnit);
+                this._currentWeatherPressure.text = PressToUserUnits(this.weather.main.pressure, this._pressureUnit) + ' ' + _(this._pressureUnit);
             }
             this._currentWeatherLocation.label = location;
             switch (this._dataService) {
@@ -677,14 +659,14 @@ var MyApplet = (function (_super) {
             for (var i = 0; i < this._forecast.length; i++) {
                 var forecastData = this.forecasts[i];
                 var forecastUi = this._forecast[i];
-                var t_low = this.TempToUserUnits(forecastData.main.temp_min);
-                var t_high = this.TempToUserUnits(forecastData.main.temp_max);
+                var t_low = TempToUserUnits(forecastData.main.temp_min, this._temperatureUnit);
+                var t_high = TempToUserUnits(forecastData.main.temp_max, this._temperatureUnit);
                 var first_temperature = this._temperatureHighFirst ? t_high : t_low;
                 var second_temperature = this._temperatureHighFirst ? t_low : t_high;
                 var comment = "";
                 if (forecastData.condition.main != null && forecastData.condition.description != null) {
                     comment = (this._shortConditions) ? forecastData.condition.main : forecastData.condition.description;
-                    comment = this.capitalizeFirstLetter(comment);
+                    comment = capitalizeFirstLetter(comment);
                     if (this._translateCondition)
                         comment = _(comment);
                 }
@@ -918,90 +900,8 @@ var MyApplet = (function (_super) {
         return false;
     };
     ;
-    MyApplet.prototype.capitalizeFirstLetter = function (description) {
-        if ((description == undefined || description == null)) {
-            return "";
-        }
-        return description.charAt(0).toUpperCase() + description.slice(1);
-    };
-    ;
-    MyApplet.prototype.KPHtoMPS = function (speed) {
-        return speed / WEATHER_CONV_KPH_IN_MPS;
-    };
-    ;
-    MyApplet.prototype.MPStoUserUnits = function (mps) {
-        switch (this._windSpeedUnit) {
-            case this.WeatherWindSpeedUnits.MPH:
-                return Math.round((mps * WEATHER_CONV_MPH_IN_MPS) * 10) / 10;
-            case this.WeatherWindSpeedUnits.KPH:
-                return Math.round((mps * WEATHER_CONV_KPH_IN_MPS) * 10) / 10;
-            case this.WeatherWindSpeedUnits.MPS:
-                return Math.round(mps * 10) / 10;
-            case this.WeatherWindSpeedUnits.KNOTS:
-                return Math.round(mps * WEATHER_CONV_KNOTS_IN_MPS);
-        }
-    };
-    MyApplet.prototype.TempToUserUnits = function (kelvin) {
-        if (this._temperatureUnit == this.WeatherUnits.CELSIUS) {
-            return Math.round((kelvin - 273.15));
-        }
-        if (this._temperatureUnit == this.WeatherUnits.FAHRENHEIT) {
-            return Math.round((9 / 5 * (kelvin - 273.15) + 32));
-        }
-    };
-    MyApplet.prototype.CelsiusToKelvin = function (celsius) {
-        return (celsius + 273.15);
-    };
-    MyApplet.prototype.FahrenheitToKelvin = function (fahr) {
-        return ((fahr - 32) / 1.8 + 273.15);
-    };
-    ;
-    MyApplet.prototype.MPHtoMPS = function (speed) {
-        return speed * 0.44704;
-    };
-    MyApplet.prototype.PressToUserUnits = function (hpa) {
-        switch (this._pressureUnit) {
-            case WeatherPressureUnits.HPA:
-                return hpa;
-            case WeatherPressureUnits.AT:
-                return Math.round((hpa * 0.001019716) * 1000) / 1000;
-            case WeatherPressureUnits.ATM:
-                return Math.round((hpa * 0.0009869233) * 1000) / 1000;
-            case WeatherPressureUnits.INHG:
-                return Math.round((hpa * 0.029529983071445) * 10) / 10;
-            case WeatherPressureUnits.MMHG:
-                return Math.round((hpa * 0.7500638));
-            case WeatherPressureUnits.PA:
-                return Math.round((hpa * 100));
-            case WeatherPressureUnits.PSI:
-                return Math.round((hpa * 0.01450377) * 100) / 100;
-        }
-    };
-    ;
-    MyApplet.prototype.isNumeric = function (n) {
-        return !isNaN(parseFloat(n)) && isFinite(n);
-    };
-    MyApplet.prototype.isString = function (text) {
-        if (typeof text == 'string' || text instanceof String) {
-            return true;
-        }
-        return false;
-    };
-    MyApplet.prototype.isID = function (text) {
-        if (text.length == 7 && this.isNumeric(text)) {
-            return true;
-        }
-        return false;
-    };
-    ;
-    MyApplet.prototype.isCoordinate = function (text) {
-        if (/^-?\d{1,3}(?:\.\d*)?,-?\d{1,3}(?:\.\d*)?/.test(text)) {
-            return true;
-        }
-        return false;
-    };
     MyApplet.prototype.unitToUnicode = function () {
-        return this._temperatureUnit == this.WeatherUnits.FAHRENHEIT ? '\u2109' : '\u2103';
+        return this._temperatureUnit == "fahrenheit" ? '\u2109' : '\u2103';
     };
     MyApplet.prototype.weatherIconSafely = function (code, iconResolver) {
         var iconname = iconResolver(code);
@@ -1014,20 +914,6 @@ var MyApplet = (function (_super) {
     MyApplet.prototype.hasIcon = function (icon) {
         return Gtk.IconTheme.get_default().has_icon(icon + (this._icon_type == St.IconType.SYMBOLIC ? '-symbolic' : ''));
     };
-    MyApplet.prototype.nonempty = function (str) {
-        return (str != null && str.length > 0);
-    };
-    MyApplet.prototype.compassDirection = function (deg) {
-        var directions = [_('N'), _('NE'), _('E'), _('SE'), _('S'), _('SW'), _('W'), _('NW')];
-        return directions[Math.round(deg / 45) % directions.length];
-    };
-    MyApplet.prototype.isLangSupported = function (lang, languages) {
-        if (languages.indexOf(lang) != -1) {
-            return true;
-        }
-        return false;
-    };
-    ;
     return MyApplet;
 }(Applet.TextIconApplet));
 var openWeatherMapConditionLibrary = [

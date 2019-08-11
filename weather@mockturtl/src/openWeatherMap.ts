@@ -1,3 +1,18 @@
+export {}; // Declaring as a Module
+function importModule(path: string): any {
+  if (typeof require !== 'undefined') {
+    return require('./' + path);
+  } else {
+    let AppletDir = imports.ui.appletManager.applets['weather@mockturtl'];
+    return AppletDir[path];
+  }
+}
+
+var utils = importModule("utils");
+var isCoordinate = utils.isCoordinate as (text: any) => boolean;
+var isLangSupported = utils.isLangSupported as (lang: string, languages: Array <string> ) => boolean;
+var isID = utils.isID as (text: any) => boolean;
+
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
 ///////////                                       ////////////
@@ -6,7 +21,7 @@
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
 
-class OpenWeatherMap {
+class OpenWeatherMap implements WeatherProvider {
     //--------------------------------------------------------
     //  Properties
     //--------------------------------------------------------
@@ -170,7 +185,7 @@ class OpenWeatherMap {
             query = query + locString + "&APPID=";
              // Append Language if supported and enabled
             query += "1c73f8259a86c6fd43c7163b543c8640";
-            if (this.app._translateCondition && this.app.isLangSupported(this.app.systemLanguage, this.supportedLanguages)) {
+            if (this.app._translateCondition && isLangSupported(this.app.systemLanguage, this.supportedLanguages)) {
                 query = query + "&lang=" + this.app.systemLanguage;
             }
             return query;
@@ -183,11 +198,11 @@ class OpenWeatherMap {
 
     ParseLocation(): string {
         let loc = this.app._location.replace(/ /g, "");
-        if (this.app.isCoordinate(loc)) {
+        if (isCoordinate(loc)) {
             let locArr = loc.split(',');
             return "lat=" + locArr[0] + "&lon=" + locArr[1];
         }
-        else if (this.app.isID(loc)) {
+        else if (isID(loc)) {
             return "id=" + loc;
         }
         else  // try as a normal query
