@@ -61,6 +61,27 @@ var Config = imports.misc.config;
 var PopupMenu = imports.ui.popupMenu;
 var Settings = imports.ui.settings;
 var Util = imports.misc.util;
+function importModule(path) {
+    if (typeof require !== 'undefined') {
+        return require('./' + path);
+    }
+    else {
+        var AppletDir = imports.ui.appletManager.applets['weather@mockturtl'];
+        return AppletDir[path];
+    }
+}
+if (!setTimeout) {
+    var utils = importModule("utils");
+    var setTimeout = utils.setTimeout;
+}
+if (!Promise) {
+    importModule("promise-polyfill");
+}
+var GLib = imports.gi.GLib;
+var Gettext = imports.gettext;
+var darkSky;
+var openWeatherMap;
+var ipApi = importModule('ipApi');
 var UUID = "weather@mockturtl";
 var APPLET_ICON = "view-refresh-symbolic";
 var REFRESH_ICON = "view-refresh";
@@ -76,43 +97,27 @@ var DATA_SERVICE = {
     DARK_SKY: "DarkSky",
 };
 var WEATHER_LOCATION = "location";
-var WEATHER_DATA_SERVICE = "dataService";
-var WEATHER_API_KEY = "apiKey";
-var WEATHER_CITY_KEY = 'locationLabelOverride';
-var WEATHER_REFRESH_INTERVAL = 'refreshInterval';
-var WEATHER_SHOW_COMMENT_IN_PANEL_KEY = 'showCommentInPanel';
-var WEATHER_VERTICAL_ORIENTATION_KEY = 'verticalOrientation';
-var WEATHER_SHOW_SUNRISE_KEY = 'showSunrise';
-var WEATHER_SHOW_24HOURS_KEY = 'show24Hours';
-var WEATHER_FORECAST_DAYS = 'forecastDays';
-var WEATHER_SHOW_TEXT_IN_PANEL_KEY = 'showTextInPanel';
-var WEATHER_TRANSLATE_CONDITION_KEY = 'translateCondition';
-var WEATHER_TEMPERATURE_UNIT_KEY = 'temperatureUnit';
-var WEATHER_TEMPERATURE_HIGH_FIRST_KEY = 'temperatureHighFirst';
-var WEATHER_PRESSURE_UNIT_KEY = 'pressureUnit';
 var WEATHER_USE_SYMBOLIC_ICONS_KEY = 'useSymbolicIcons';
-var WEATHER_WIND_SPEED_UNIT_KEY = 'windSpeedUnit';
-var WEATHER_SHORT_CONDITIONS_KEY = 'shortConditions';
-var WEATHER_MANUAL_LOCATION = "manualLocation";
-var KEYS = [,
-    WEATHER_DATA_SERVICE,
-    WEATHER_API_KEY,
-    WEATHER_TEMPERATURE_UNIT_KEY,
-    WEATHER_TEMPERATURE_HIGH_FIRST_KEY,
-    WEATHER_WIND_SPEED_UNIT_KEY,
-    WEATHER_CITY_KEY,
-    WEATHER_TRANSLATE_CONDITION_KEY,
-    WEATHER_VERTICAL_ORIENTATION_KEY,
-    WEATHER_SHOW_TEXT_IN_PANEL_KEY,
-    WEATHER_SHOW_COMMENT_IN_PANEL_KEY,
-    WEATHER_SHOW_SUNRISE_KEY,
-    WEATHER_SHOW_24HOURS_KEY,
-    WEATHER_FORECAST_DAYS,
-    WEATHER_REFRESH_INTERVAL,
-    WEATHER_PRESSURE_UNIT_KEY,
-    WEATHER_SHORT_CONDITIONS_KEY,
-    WEATHER_MANUAL_LOCATION
-];
+var KEYS;
+(function (KEYS) {
+    KEYS["WEATHER_DATA_SERVICE"] = "dataService";
+    KEYS["WEATHER_API_KEY"] = "apiKey";
+    KEYS["WEATHER_TEMPERATURE_UNIT_KEY"] = "temperatureUnit";
+    KEYS["WEATHER_TEMPERATURE_HIGH_FIRST_KEY"] = "temperatureHighFirst";
+    KEYS["WEATHER_WIND_SPEED_UNIT_KEY"] = "windSpeedUnit";
+    KEYS["WEATHER_CITY_KEY"] = "locationLabelOverride";
+    KEYS["WEATHER_TRANSLATE_CONDITION_KEY"] = "translateCondition";
+    KEYS["WEATHER_VERTICAL_ORIENTATION_KEY"] = "verticalOrientation";
+    KEYS["WEATHER_SHOW_TEXT_IN_PANEL_KEY"] = "showTextInPanel";
+    KEYS["WEATHER_SHOW_COMMENT_IN_PANEL_KEY"] = "showCommentInPanel";
+    KEYS["WEATHER_SHOW_SUNRISE_KEY"] = "showSunrise";
+    KEYS["WEATHER_SHOW_24HOURS_KEY"] = "show24Hours";
+    KEYS["WEATHER_FORECAST_DAYS"] = "forecastDays";
+    KEYS["WEATHER_REFRESH_INTERVAL"] = "refreshInterval";
+    KEYS["WEATHER_PRESSURE_UNIT_KEY"] = "pressureUnit";
+    KEYS["WEATHER_SHORT_CONDITIONS_KEY"] = "shortConditions";
+    KEYS["WEATHER_MANUAL_LOCATION"] = "manualLocation";
+})(KEYS || (KEYS = {}));
 var SIGNAL_CHANGED = 'changed::';
 var SIGNAL_CLICKED = 'clicked';
 var SIGNAL_REPAINT = 'repaint';
@@ -147,22 +152,6 @@ var WeatherPressureUnits = {
     ATM: 'atm',
     AT: 'at'
 };
-function importModule(path) {
-    if (typeof require !== 'undefined') {
-        return require('./' + path);
-    }
-    else {
-        var AppletDir = imports.ui.appletManager.applets['weather@mocukturtl'];
-        return AppletDir['path'];
-    }
-}
-if (Promise == undefined) {
-    importModule("promise-polyfill");
-}
-if (setTimeout == undefined) {
-    var utils = importModule("utils");
-    setTimeout = utils.setTimeout;
-}
 var Log = (function () {
     function Log(_instanceId) {
         this.debug = false;
@@ -195,15 +184,10 @@ var Log = (function () {
     };
     return Log;
 }());
-var GLib = imports.gi.GLib;
-var Gettext = imports.gettext;
 Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
 function _(str) {
     return Gettext.dgettext(UUID, str);
 }
-var darkSky;
-var openWeatherMap;
-var ipApi = importModule('ipApi');
 var MyApplet = (function (_super) {
     __extends(MyApplet, _super);
     function MyApplet(metadata, orientation, panelHeight, instanceId) {

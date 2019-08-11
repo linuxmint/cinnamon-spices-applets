@@ -22,11 +22,11 @@ function importModule(path) {
         return AppletDir[path];
     }
 }
-if (setTimeout == undefined) {
+if (!setTimeout) {
     let utils = importModule("utils");
     var setTimeout = utils.setTimeout;
 }
-if (Promise == undefined) {
+if (!Promise) {
     importModule("promise-polyfill");
 }
 const GLib = imports.gi.GLib;
