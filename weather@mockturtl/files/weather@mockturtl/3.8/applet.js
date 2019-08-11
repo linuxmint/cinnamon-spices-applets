@@ -2,7 +2,7 @@ const DEBUG = false;
 const Cairo = imports.cairo;
 const Lang = imports.lang;
 const Main = imports.ui.main;
-const Mainloop = imports.mainloop;
+var Mainloop = imports.mainloop;
 const Gio = imports.gi.Gio;
 const Gtk = imports.gi.Gtk;
 const Cinnamon = imports.gi.Cinnamon;
@@ -99,6 +99,22 @@ const WeatherPressureUnits = {
     ATM: 'atm',
     AT: 'at'
 };
+function importModule(path) {
+    if (typeof require !== 'undefined') {
+        return require('./' + path);
+    }
+    else {
+        let AppletDir = imports.ui.appletManager.applets['weather@mocukturtl'];
+        return AppletDir['path'];
+    }
+}
+if (Promise == undefined) {
+    importModule("promise-polyfill");
+}
+if (setTimeout == undefined) {
+    let utils = importModule("utils");
+    setTimeout = utils.setTimeout;
+}
 class Log {
     constructor(_instanceId) {
         this.debug = false;
@@ -138,7 +154,7 @@ function _(str) {
 }
 var darkSky;
 var openWeatherMap;
-const ipApi = require('./ipApi');
+const ipApi = importModule('ipApi');
 class MyApplet extends Applet.TextIconApplet {
     constructor(metadata, orientation, panelHeight, instanceId) {
         super(orientation, panelHeight, instanceId);
@@ -410,14 +426,14 @@ class MyApplet extends Applet.TextIconApplet {
             switch (this._dataService) {
                 case DATA_SERVICE.DARK_SKY:
                     if (darkSky == null) {
-                        darkSky = require('./darkSky');
+                        darkSky = importModule('darkSky');
                     }
                     this.provider = new darkSky.DarkSky(this);
                     refreshResult = await this.provider.GetWeather();
                     break;
                 case DATA_SERVICE.OPEN_WEATHER_MAP:
                     if (openWeatherMap == null) {
-                        openWeatherMap = require('./openWeatherMap');
+                        openWeatherMap = importModule("openWeatherMap");
                     }
                     this.provider = new openWeatherMap.OpenWeatherMap(this);
                     refreshResult = await this.provider.GetWeather();

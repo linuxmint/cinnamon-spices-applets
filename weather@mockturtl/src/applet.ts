@@ -73,7 +73,7 @@ const Cairo = imports.cairo
 const Lang = imports.lang
 // http://developer.gnome.org/glib/unstable/glib-The-Main-Event-Loop.html
 const Main = imports.ui.main
-const Mainloop = imports.mainloop
+var Mainloop = imports.mainloop
 
 /**
  * /usr/share/gjs-1.0/overrides/
@@ -211,6 +211,24 @@ const WeatherPressureUnits = {
   AT: 'at'
 }
 
+function importModule(path: string): any {
+  if (typeof require !== 'undefined') {
+    return require('./' + path);
+  } else {
+    let AppletDir = imports.ui.appletManager.applets['weather@mocukturtl'];
+    return AppletDir['path'];
+  }
+}
+
+if (Promise == undefined) {
+  importModule("promise-polyfill");
+}
+
+if (setTimeout == undefined) {
+  let utils = importModule("utils");
+  setTimeout = utils.setTimeout;
+}
+
 //----------------------------------------------------------------------
 //
 // Logging
@@ -271,7 +289,7 @@ function _(str: string): string {
 var darkSky: any;
 var openWeatherMap: any;
 // Location lookup service
-const ipApi = require('./ipApi');
+const ipApi = importModule('ipApi');
 
 
 
@@ -689,7 +707,7 @@ class MyApplet extends Applet.TextIconApplet {
           // No City and Country information, fetch from geolocation api
           //
           if (darkSky == null) {
-            darkSky = require('./darkSky');
+            darkSky = importModule('darkSky');
           }
           this.provider = new darkSky.DarkSky(this);
           refreshResult = await this.provider.GetWeather();
@@ -699,7 +717,7 @@ class MyApplet extends Applet.TextIconApplet {
           //  No TZ information
           //
           if (openWeatherMap == null) {
-            openWeatherMap = require('./openWeatherMap');
+            openWeatherMap = importModule("openWeatherMap");
           }
           this.provider = new openWeatherMap.OpenWeatherMap(this);
           refreshResult = await this.provider.GetWeather();

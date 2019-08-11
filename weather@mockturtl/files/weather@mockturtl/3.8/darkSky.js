@@ -1,3 +1,6 @@
+if (!Array.prototype.includes) {
+    importModule("array-includes-polyfill");
+}
 class DarkSky {
     constructor(_app) {
         this.descriptionLinelength = 25;
