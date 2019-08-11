@@ -1,20 +1,20 @@
 declare function require(path: string): any;
 
 declare class global {
-    static log(...text: Array<string>): void;
-    static logError(...text: Array<string>): void;
+    static log(...text: Array < string > ): void;
+    static logError(...text: Array < string > ): void;
     static create_app_launch_context(): void;
-  }
+}
 
-  declare module imports {
-      export const lang: any;
-      export module cairo {
+declare module imports {
+    export const lang: any;
+    export module cairo {
         export class LinearGradient {
             constructor(margin: number, gradientOffset: number, width: number, height: number);
-            addColorStopRGBA(number: number, red:number, green:number, blue:number, alpha: number): void;
+            addColorStopRGBA(number: number, red: number, green: number, blue: number, alpha: number): void;
         }
-      }
-      export module ui {
+    }
+    export module ui {
         export module main {
             export class KeybindingManager {
                 addHotKey(UUID: string, keybinding: any, binding: void): void;
@@ -79,7 +79,7 @@ declare class global {
              *
              * Used by _log to handle each argument type and its formatting.
              */
-            export function formatLogArgument(arg?: any, recursion?: number, depth?: number): void;
+            export function formatLogArgument(arg ? : any, recursion ? : number, depth ? : number): void;
 
             /**
              * @obj (Object): the object to be tested
@@ -135,7 +135,7 @@ declare class global {
              * It can be called in the form of either _logError(msg),
              * _logError(error) or _logError(msg, error).
              */
-            export function _logError(msg?: string, error?: Error): void;
+            export function _logError(msg ? : string, error ? : Error): void;
 
             // If msg is an Error, its message will be printed as 'info' and its stack-trace will be printed as 'trace'
             /**
@@ -227,8 +227,8 @@ declare class global {
 
             export interface AllowedLayouts {
                 BOTH: string,
-                VERTICAL: string,
-                HORIZONTAL: string;
+                    VERTICAL: string,
+                    HORIZONTAL: string;
             }
             export const AllowedLayout: AllowedLayouts;
         }
@@ -250,19 +250,19 @@ declare class global {
 
             export interface BindingDirections {
                 IN: string,
-                BIDIRECTIONAL: string,
-                OUT: string
+                    BIDIRECTIONAL: string,
+                    OUT: string
             }
             export const BindingDirection: BindingDirections
         }
         export module appletManager {
             export var applets: any;
         }
-      }
-      export module mainloop {
+    }
+    export module mainloop {
         export function timeout_add_seconds(seconds: number, binding: Function): void;
-      }
-      export module gi {
+    }
+    export module gi {
         export module Gio {
             export function app_info_launch_default_for_uri(url: string, context: void): void;
         }
@@ -296,7 +296,7 @@ declare class global {
 
             }
             export class Message {
-                static new(method: string, query: string): MessageObj 
+                static new(method: string, query: string): MessageObj
             }
 
             export class MessageObj {
@@ -305,39 +305,39 @@ declare class global {
         }
         export module St {
             export class BoxLayout {
-                constructor(options?: any)
+                constructor(options ? : any)
                 add_actor(element: Button | Label | Icon | BoxLayout): void;
             }
             export class Bin {
-                constructor(options?: any)
+                constructor(options ? : any)
             }
             export class DrawingArea {
-                constructor(options?: any)
+                constructor(options ? : any)
             }
             export class Label {
                 text: string;
-                constructor(options?: any);
+                constructor(options ? : any);
             }
             export class Icon {
                 icon_type: string;
                 icon_size: number;
                 icon_name: string;
                 style_class: string;
-                constructor(options?: any);
+                constructor(options ? : any);
             }
             export class Button {
                 reactive: boolean;
                 label: string;
-                constructor(options?: any);
+                constructor(options ? : any);
             }
 
             export interface Sides {
                 LEFT: string,
-                RIGHT: string
+                    RIGHT: string
             }
             export interface IconTypes {
                 SYMBOLIC: string,
-                FULLCOLOR: string
+                    FULLCOLOR: string
             }
 
             export const Side: Sides;
@@ -345,20 +345,21 @@ declare class global {
         }
         export module GLib {
             export function get_home_dir(): string;
-            export function get_language_names(): Array<string>;
+            export function get_language_names(): Array < string > ;
         }
 
-      }
-      export module misc {
+    }
+    export module misc {
         export module config {
             export const PACKAGE_VERSION: string;
         }
         export module util {
             export function spawnCommandLine(CMDSettings: string): void;
         }
-      }
-      export module gettext {
+    }
+    export module gettext {
         function bindtextdomain(UUID: string, homeDir: string): void;
+
         function dgettext(UUID: string, text: string): string;
-      }
-  }
+    }
+}

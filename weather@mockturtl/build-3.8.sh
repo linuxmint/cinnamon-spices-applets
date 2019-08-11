@@ -18,5 +18,4 @@ mv applet.js ../files/weather@mockturtl/3.8
 mv darkSky.js ../files/weather@mockturtl/3.8
 mv ipApi.js ../files/weather@mockturtl/3.8
 mv openWeatherMap.js ../files/weather@mockturtl/3.8
-rm @cinnamon.js
 cd $path

@@ -421,7 +421,7 @@ class MyApplet extends Applet.TextIconApplet {
 
     constructor(metadata: any, orientation: any, panelHeight: number, instanceId: number) {
       super(orientation, panelHeight, instanceId);
-      this.currentLocale = GLib.get_language_names()[0];
+      this.currentLocale = this.constructJsLocale(GLib.get_language_names()[0]);
       this.systemLanguage = this.currentLocale.split('_')[0];
       this.settings = new Settings.AppletSettings(this, UUID, instanceId)
       this.log = new Log(instanceId);
@@ -643,6 +643,17 @@ class MyApplet extends Applet.TextIconApplet {
     this._currentWeatherSunrise.text = msg;
   };
 
+  constructJsLocale(locale: string): string {
+    let jsLocale = locale.split(".")[0];
+    let tmp: string[] = jsLocale.split("_");
+    jsLocale = "";
+    for (let i = 0; i < tmp.length; i++) {
+      if (i != 0) jsLocale += "-";
+      jsLocale += tmp[i];
+    }
+    return jsLocale;
+  }
+
 
   async refreshWeather(): Promise<void> {  
     this.wipeCurrentData();
@@ -847,14 +858,16 @@ class MyApplet extends Applet.TextIconApplet {
           sunriseText = _('Sunrise');
           sunsetText = _('Sunset');
           if (this.weather.location.timeZone != null) {     //have TZ, en-GB returns time in the correct format
-              let sunrise = this.weather.sunrise.toLocaleString("en-GB", {timeZone: this.weather.location.timeZone, hour: "2-digit", minute: "2-digit"});
-              let sunset = this.weather.sunset.toLocaleString("en-GB", {timeZone: this.weather.location.timeZone, hour: "2-digit", minute: "2-digit"});
-              sunriseText = (sunriseText + ': ' + this.timeToUserUnits(sunrise));
-              sunsetText = (sunsetText + ': ' + this.timeToUserUnits(sunset));
+              let sunrise = this.weather.sunrise.toLocaleString(this.currentLocale, {timeZone: this.weather.location.timeZone, hour: "numeric", minute: "numeric", hour12: !this._show24Hours});
+              let sunset = this.weather.sunset.toLocaleString(this.currentLocale, {timeZone: this.weather.location.timeZone, hour: "numeric", minute: "numeric", hour12: !this._show24Hours});
+              sunriseText = (sunriseText + ': ' + sunrise);
+              sunsetText = (sunsetText + ': ' + sunset);
           }
           else {   // else We assume that System TZ and Location TZ is same, covers 95% of users   
-            sunriseText = (sunriseText + ': ' + this.timeToUserUnits(this.toLocaleFormat(this.weather.sunrise, '%H:%M')));
-            sunsetText = (sunsetText + ': ' + this.timeToUserUnits(this.toLocaleFormat(this.weather.sunset, '%H:%M')));
+            let sunrise = this.weather.sunrise.toLocaleString(this.currentLocale, { hour: "numeric", minute: "numeric", hour12: !this._show24Hours});
+            let sunset = this.weather.sunset.toLocaleString(this.currentLocale, { hour: "numeric", minute: "numeric", hour12: !this._show24Hours});
+            sunriseText = (sunriseText + ': ' + sunrise);
+            sunsetText = (sunsetText + ': ' + sunset);
           }         
         }
       }
@@ -901,12 +914,12 @@ class MyApplet extends Applet.TextIconApplet {
         // Day Names
         let dayName: string = "";
         if (this.weather.location.timeZone != null) {
-           this.log.Debug(forecastData.dateTime.toLocaleString("en-GB", {timeZone: this.weather.location.timeZone}));
-           dayName = _(forecastData.dateTime.toLocaleString("en-GB", {timeZone: this.weather.location.timeZone, weekday: "long"}));
+           this.log.Debug(forecastData.dateTime.toLocaleString(this.currentLocale, {timeZone: this.weather.location.timeZone}));
+           dayName = _(this.capitalizeFirstLetter(forecastData.dateTime.toLocaleString(this.currentLocale, {timeZone: this.weather.location.timeZone, weekday: "long"})));
         }
         else {
           forecastData.dateTime.setMilliseconds(forecastData.dateTime.getMilliseconds() + (this.weather.location.tzOffset * 1000));
-          dayName = _(this.getDayName(forecastData.dateTime.getUTCDay()));
+          dayName =  _(this.capitalizeFirstLetter(forecastData.dateTime.toLocaleString(this.currentLocale, {timeZone: "UTC", weekday: "long"})));
         }       
 
         if (forecastData.dateTime) {
@@ -1143,10 +1156,6 @@ rebuildFutureWeatherUi(): void {
 //
 //----------------------------------------------------------------------
 
-toLocaleFormat(date: Date, format: string): string {
-  return Cinnamon.util_format_date(format, date.getTime());
-};
-
 noApiKey(): boolean {
   if (this._apiKey == undefined || this._apiKey == "") {
     return true;
@@ -1160,27 +1169,6 @@ capitalizeFirstLetter(description: string): string {
   }
   return description.charAt(0).toUpperCase() + description.slice(1);
 };
-
-// Takes Time in %H:%M string format
-timeToUserUnits(timeStr: string) {
-  let time = timeStr.split(':');
-  //Remove Leading 0
-  if (time[0].charAt(0) == "0") {
-    time[0] = time[0].substr(1);
-  }
-  //Returnt Time based on user preference
-  if(this._show24Hours) {
-    return time[0] + ":" + time[1];
-  }
-  else {
-    if (parseInt(time[0]) > 12) { // PM
-      return (parseInt(time[0]) - 12) + ":" + time[1] + " pm";
-    }
-    else { //AM
-      return time[0] + ":" + time[1] + " am";
-    }
-  }
-}
 
 KPHtoMPS(speed: number): number {
   return speed / WEATHER_CONV_KPH_IN_MPS;

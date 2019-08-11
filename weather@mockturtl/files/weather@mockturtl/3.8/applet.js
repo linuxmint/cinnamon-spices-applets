@@ -211,7 +211,7 @@ class MyApplet extends Applet.TextIconApplet {
         this._httpSession = new Soup.SessionAsync();
         this.locProvider = new ipApi.IpApi(this);
         this.lastUpdated = null;
-        this.currentLocale = GLib.get_language_names()[0];
+        this.currentLocale = this.constructJsLocale(GLib.get_language_names()[0]);
         this.systemLanguage = this.currentLocale.split('_')[0];
         this.settings = new Settings.AppletSettings(this, UUID, instanceId);
         this.log = new Log(instanceId);
@@ -373,6 +373,17 @@ class MyApplet extends Applet.TextIconApplet {
         this._currentWeatherSunrise.text = msg;
     }
     ;
+    constructJsLocale(locale) {
+        let jsLocale = locale.split(".")[0];
+        let tmp = jsLocale.split("_");
+        jsLocale = "";
+        for (let i = 0; i < tmp.length; i++) {
+            if (i != 0)
+                jsLocale += "-";
+            jsLocale += tmp[i];
+        }
+        return jsLocale;
+    }
     async refreshWeather() {
         this.wipeCurrentData();
         this.wipeForecastData();
@@ -532,14 +543,16 @@ class MyApplet extends Applet.TextIconApplet {
                     sunriseText = _('Sunrise');
                     sunsetText = _('Sunset');
                     if (this.weather.location.timeZone != null) {
-                        let sunrise = this.weather.sunrise.toLocaleString("en-GB", { timeZone: this.weather.location.timeZone, hour: "2-digit", minute: "2-digit" });
-                        let sunset = this.weather.sunset.toLocaleString("en-GB", { timeZone: this.weather.location.timeZone, hour: "2-digit", minute: "2-digit" });
-                        sunriseText = (sunriseText + ': ' + this.timeToUserUnits(sunrise));
-                        sunsetText = (sunsetText + ': ' + this.timeToUserUnits(sunset));
+                        let sunrise = this.weather.sunrise.toLocaleString(this.currentLocale, { timeZone: this.weather.location.timeZone, hour: "numeric", minute: "numeric", hour12: !this._show24Hours });
+                        let sunset = this.weather.sunset.toLocaleString(this.currentLocale, { timeZone: this.weather.location.timeZone, hour: "numeric", minute: "numeric", hour12: !this._show24Hours });
+                        sunriseText = (sunriseText + ': ' + sunrise);
+                        sunsetText = (sunsetText + ': ' + sunset);
                     }
                     else {
-                        sunriseText = (sunriseText + ': ' + this.timeToUserUnits(this.toLocaleFormat(this.weather.sunrise, '%H:%M')));
-                        sunsetText = (sunsetText + ': ' + this.timeToUserUnits(this.toLocaleFormat(this.weather.sunset, '%H:%M')));
+                        let sunrise = this.weather.sunrise.toLocaleString(this.currentLocale, { hour: "numeric", minute: "numeric", hour12: !this._show24Hours });
+                        let sunset = this.weather.sunset.toLocaleString(this.currentLocale, { hour: "numeric", minute: "numeric", hour12: !this._show24Hours });
+                        sunriseText = (sunriseText + ': ' + sunrise);
+                        sunsetText = (sunsetText + ': ' + sunset);
                     }
                 }
             }
@@ -579,12 +592,12 @@ class MyApplet extends Applet.TextIconApplet {
                 }
                 let dayName = "";
                 if (this.weather.location.timeZone != null) {
-                    this.log.Debug(forecastData.dateTime.toLocaleString("en-GB", { timeZone: this.weather.location.timeZone }));
-                    dayName = _(forecastData.dateTime.toLocaleString("en-GB", { timeZone: this.weather.location.timeZone, weekday: "long" }));
+                    this.log.Debug(forecastData.dateTime.toLocaleString(this.currentLocale, { timeZone: this.weather.location.timeZone }));
+                    dayName = _(this.capitalizeFirstLetter(forecastData.dateTime.toLocaleString(this.currentLocale, { timeZone: this.weather.location.timeZone, weekday: "long" })));
                 }
                 else {
                     forecastData.dateTime.setMilliseconds(forecastData.dateTime.getMilliseconds() + (this.weather.location.tzOffset * 1000));
-                    dayName = _(this.getDayName(forecastData.dateTime.getUTCDay()));
+                    dayName = _(this.capitalizeFirstLetter(forecastData.dateTime.toLocaleString(this.currentLocale, { timeZone: "UTC", weekday: "long" })));
                 }
                 if (forecastData.dateTime) {
                     let now = new Date();
@@ -781,10 +794,6 @@ class MyApplet extends Applet.TextIconApplet {
             this._forecastBox.add_actor(bb);
         }
     }
-    toLocaleFormat(date, format) {
-        return Cinnamon.util_format_date(format, date.getTime());
-    }
-    ;
     noApiKey() {
         if (this._apiKey == undefined || this._apiKey == "") {
             return true;
@@ -799,23 +808,6 @@ class MyApplet extends Applet.TextIconApplet {
         return description.charAt(0).toUpperCase() + description.slice(1);
     }
     ;
-    timeToUserUnits(timeStr) {
-        let time = timeStr.split(':');
-        if (time[0].charAt(0) == "0") {
-            time[0] = time[0].substr(1);
-        }
-        if (this._show24Hours) {
-            return time[0] + ":" + time[1];
-        }
-        else {
-            if (parseInt(time[0]) > 12) {
-                return (parseInt(time[0]) - 12) + ":" + time[1] + " pm";
-            }
-            else {
-                return time[0] + ":" + time[1] + " am";
-            }
-        }
-    }
     KPHtoMPS(speed) {
         return speed / WEATHER_CONV_KPH_IN_MPS;
     }
