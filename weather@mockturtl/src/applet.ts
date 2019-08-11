@@ -1,70 +1,5 @@
 const DEBUG = false;
 
-interface Forecast {
-  dateTime: Date,             //Required
-  main: {
-    temp: number,
-    temp_min: number,           //Required
-    temp_max: number,           //Required
-    pressure?: number,
-    sea_level: number,
-    grnd_level: number,
-    humidity: number,
-  },
-  condition: {
-    id: string,
-    main: string,               //Required
-    description: string,        //Required
-    icon: string,               //Required
-  },
-  clouds: number,
-  wind: {
-    speed: number,
-    deg: number,
-  }
-}
-
-interface Weather {
-  dateTime: Date,
-  location: {
-    city: string,
-    country: string,
-    id: string,               // API Specific ID, not used
-    tzOffset: number,          // seconds
-    timeZone: string
-  },
-  coord: {
-    lat: 	number,
-    lon: number,
-  },
-  sunrise: Date,             // Date object, UTC
-  sunset: Date,              // Date object, UTC
-  wind: {
-    speed: number,             // MPS
-    degree: number,            // meteorlogical degrees
-  },
-  main: {
-    temperature: number,       // Kelvin
-    pressure: number,          // hPa
-    humidity: number,          // %
-    temp_min: number,          // Kelvin, not used
-    temp_max: number,          // Kelvin, not used
-    feelsLike: number          // kelvin
-  },
-  condition: {
-    id: string,                // ID, not used
-    main: string,              // What API returns
-    description: string,       // Longer description, if not available put the same whats in main
-    icon: string,              // GTK weather icon names
-  },
-  cloudiness: number,       
-}
-
-
-//----------------------------------
-// imports
-//----------------------------------
-
 /**
  * /usr/share/gjs-1.0/
  * /usr/share/gnome-js/
@@ -95,6 +30,38 @@ const Config = imports.misc.config
 const PopupMenu = imports.ui.popupMenu
 const Settings = imports.ui.settings
 const Util = imports.misc.util
+
+function importModule(path: string): any {
+  if (typeof require !== 'undefined') {
+    return require('./' + path);
+  } else {
+    let AppletDir = imports.ui.appletManager.applets['weather@mockturtl'];
+    return AppletDir[path];
+  }
+}
+
+if (!setTimeout) {
+  let utils = importModule("utils");
+  var setTimeout = utils.setTimeout as (func: any, ms: number) => void;
+}
+
+if (!Promise) {
+  importModule("promise-polyfill");
+}
+
+//----------------------------------------------------------------
+//
+// l10n
+//
+//----------------------------------------------------------------------
+
+const GLib = imports.gi.GLib
+const Gettext = imports.gettext
+
+var darkSky: any;
+var openWeatherMap: any;
+// Location lookup service
+const ipApi = importModule('ipApi');
 
 //----------------------------------------------------------------------
 //
@@ -133,44 +100,27 @@ const DATA_SERVICE = {
 
 // Schema keys
 const WEATHER_LOCATION = "location"
-const WEATHER_DATA_SERVICE = "dataService"
-const WEATHER_API_KEY = "apiKey"
-const WEATHER_CITY_KEY = 'locationLabelOverride'
-const WEATHER_REFRESH_INTERVAL = 'refreshInterval'
-const WEATHER_SHOW_COMMENT_IN_PANEL_KEY = 'showCommentInPanel'
-const WEATHER_VERTICAL_ORIENTATION_KEY = 'verticalOrientation'
-const WEATHER_SHOW_SUNRISE_KEY = 'showSunrise'
-const WEATHER_SHOW_24HOURS_KEY = 'show24Hours'
-const WEATHER_FORECAST_DAYS = 'forecastDays'
-const WEATHER_SHOW_TEXT_IN_PANEL_KEY = 'showTextInPanel'
-const WEATHER_TRANSLATE_CONDITION_KEY = 'translateCondition'
-const WEATHER_TEMPERATURE_UNIT_KEY = 'temperatureUnit'
-const WEATHER_TEMPERATURE_HIGH_FIRST_KEY = 'temperatureHighFirst'
-const WEATHER_PRESSURE_UNIT_KEY = 'pressureUnit'
 const WEATHER_USE_SYMBOLIC_ICONS_KEY = 'useSymbolicIcons'
-const WEATHER_WIND_SPEED_UNIT_KEY = 'windSpeedUnit'
-const WEATHER_SHORT_CONDITIONS_KEY = 'shortConditions'
-const WEATHER_MANUAL_LOCATION = "manualLocation"
 
-const KEYS = [,
-  WEATHER_DATA_SERVICE,
-  WEATHER_API_KEY,
-  WEATHER_TEMPERATURE_UNIT_KEY,
-  WEATHER_TEMPERATURE_HIGH_FIRST_KEY,
-  WEATHER_WIND_SPEED_UNIT_KEY,
-  WEATHER_CITY_KEY,
-  WEATHER_TRANSLATE_CONDITION_KEY,
-  WEATHER_VERTICAL_ORIENTATION_KEY,
-  WEATHER_SHOW_TEXT_IN_PANEL_KEY,
-  WEATHER_SHOW_COMMENT_IN_PANEL_KEY,
-  WEATHER_SHOW_SUNRISE_KEY,
-  WEATHER_SHOW_24HOURS_KEY,
-  WEATHER_FORECAST_DAYS,
-  WEATHER_REFRESH_INTERVAL,
-  WEATHER_PRESSURE_UNIT_KEY,
-  WEATHER_SHORT_CONDITIONS_KEY,
-  WEATHER_MANUAL_LOCATION
-]
+enum KEYS {
+  WEATHER_DATA_SERVICE = "dataService",
+  WEATHER_API_KEY = "apiKey",
+  WEATHER_TEMPERATURE_UNIT_KEY = "temperatureUnit",
+  WEATHER_TEMPERATURE_HIGH_FIRST_KEY = "temperatureHighFirst",
+  WEATHER_WIND_SPEED_UNIT_KEY = "windSpeedUnit",
+  WEATHER_CITY_KEY = "locationLabelOverride",
+  WEATHER_TRANSLATE_CONDITION_KEY = "translateCondition",
+  WEATHER_VERTICAL_ORIENTATION_KEY = "verticalOrientation",
+  WEATHER_SHOW_TEXT_IN_PANEL_KEY = "showTextInPanel",
+  WEATHER_SHOW_COMMENT_IN_PANEL_KEY = "showCommentInPanel",
+  WEATHER_SHOW_SUNRISE_KEY = "showSunrise",
+  WEATHER_SHOW_24HOURS_KEY = "show24Hours",
+  WEATHER_FORECAST_DAYS = "forecastDays",
+  WEATHER_REFRESH_INTERVAL = "refreshInterval",
+  WEATHER_PRESSURE_UNIT_KEY = "pressureUnit",
+  WEATHER_SHORT_CONDITIONS_KEY = "shortConditions",
+  WEATHER_MANUAL_LOCATION = "manualLocation"
+}
 
 // Signals
 const SIGNAL_CHANGED = 'changed::'
@@ -209,24 +159,6 @@ const WeatherPressureUnits = {
   PSI: 'psi',
   ATM: 'atm',
   AT: 'at'
-}
-
-function importModule(path: string): any {
-  if (typeof require !== 'undefined') {
-    return require('./' + path);
-  } else {
-    let AppletDir = imports.ui.appletManager.applets['weather@mocukturtl'];
-    return AppletDir['path'];
-  }
-}
-
-if (Promise == undefined) {
-  importModule("promise-polyfill");
-}
-
-if (setTimeout == undefined) {
-  let utils = importModule("utils");
-  setTimeout = utils.setTimeout;
 }
 
 //----------------------------------------------------------------------
@@ -273,31 +205,11 @@ class Log {
     }
 }
 
-//----------------------------------------------------------------
-//
-// l10n
-//
-//----------------------------------------------------------------------
 
-const GLib = imports.gi.GLib
-const Gettext = imports.gettext
 Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
 function _(str: string): string {
   return Gettext.dgettext(UUID, str)
 }
-
-var darkSky: any;
-var openWeatherMap: any;
-// Location lookup service
-const ipApi = importModule('ipApi');
-
-
-
-//----------------------------------------------------------------
-//
-// l10n
-//
-//----------------------------------------------------------------------
 
 //----------------------------------------------------------------------
 //
@@ -1417,5 +1329,66 @@ const icons = {
 function main(metadata: any, orientation: string, panelHeight: number, instanceId: number) {
   //log("v" + metadata.version + ", cinnamon " + Config.PACKAGE_VERSION)
   return new MyApplet(metadata, orientation, panelHeight, instanceId);
+}
+
+
+interface Forecast {
+  dateTime: Date,             //Required
+  main: {
+    temp: number,
+    temp_min: number,           //Required
+    temp_max: number,           //Required
+    pressure?: number,
+    sea_level: number,
+    grnd_level: number,
+    humidity: number,
+  },
+  condition: {
+    id: string,
+    main: string,               //Required
+    description: string,        //Required
+    icon: string,               //Required
+  },
+  clouds: number,
+  wind: {
+    speed: number,
+    deg: number,
+  }
+}
+
+interface Weather {
+  dateTime: Date,
+  location: {
+    city: string,
+    country: string,
+    id: string,               // API Specific ID, not used
+    tzOffset: number,          // seconds
+    timeZone: string
+  },
+  coord: {
+    lat: 	number,
+    lon: number,
+  },
+  sunrise: Date,             // Date object, UTC
+  sunset: Date,              // Date object, UTC
+  wind: {
+    speed: number,             // MPS
+    degree: number,            // meteorlogical degrees
+  },
+  main: {
+    temperature: number,       // Kelvin
+    pressure: number,          // hPa
+    humidity: number,          // %
+    temp_min: number,          // Kelvin, not used
+    temp_max: number,          // Kelvin, not used
+    feelsLike: number          // kelvin
+  },
+  condition: {
+    id: string,                // ID, not used
+    main: string,              // What API returns
+    description: string,       // Longer description, if not available put the same whats in main
+    icon: string,              // GTK weather icon names
+  },
+  cloudiness: number,       
 }
 
