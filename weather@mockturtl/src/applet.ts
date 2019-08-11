@@ -43,7 +43,8 @@ function importModule(path: string): any {
 var utils = importModule("utils");
 var tzSupported = utils.tzSupported as () => boolean;
 
-if (!Promise) {
+// This always evalueates to True because "var Promise" line exists iinside 
+if (typeof Promise != "function") {
   var promisePoly = importModule("promise-polyfill");
   var finallyConstructor = promisePoly.finallyConstructor;
   var setTimeout = promisePoly.setTimeout as (func: any, ms: number) => void;
@@ -71,9 +72,6 @@ if (!Promise) {
     globalNS.Promise.prototype['finally'] = finallyConstructor;
   }
 }
-
-
-
 //----------------------------------------------------------------
 //
 // l10n
@@ -813,14 +811,14 @@ class MyApplet extends Applet.TextIconApplet {
           sunriseText = _('Sunrise');
           sunsetText = _('Sunset');
           if (this.weather.location.timeZone != null && tzSupported()) {     //have TZ, en-GB returns time in the correct format
-              let sunrise = this.weather.sunrise.toLocaleString(this.currentLocale, {timeZone: this.weather.location.timeZone, hour: "numeric", minute: "numeric", hour12: !this._show24Hours});
-              let sunset = this.weather.sunset.toLocaleString(this.currentLocale, {timeZone: this.weather.location.timeZone, hour: "numeric", minute: "numeric", hour12: !this._show24Hours});
+              let sunrise = this.weather.sunrise.toLocaleTimeString(this.currentLocale, {timeZone: this.weather.location.timeZone, hour: "numeric", minute: "numeric", hour12: !this._show24Hours});
+              let sunset = this.weather.sunset.toLocaleTimeString(this.currentLocale, {timeZone: this.weather.location.timeZone, hour: "numeric", minute: "numeric", hour12: !this._show24Hours});
               sunriseText = (sunriseText + ': ' + sunrise);
               sunsetText = (sunsetText + ': ' + sunset);
           }
           else {   // else We assume that System TZ and Location TZ is same, covers 95% of users   
-            let sunrise = this.weather.sunrise.toLocaleString(this.currentLocale, { hour: "numeric", minute: "numeric", hour12: !this._show24Hours});
-            let sunset = this.weather.sunset.toLocaleString(this.currentLocale, { hour: "numeric", minute: "numeric", hour12: !this._show24Hours});
+            let sunrise = this.weather.sunrise.toLocaleTimeString(this.currentLocale, { hour: "numeric", minute: "numeric", hour12: !this._show24Hours});
+            let sunset = this.weather.sunset.toLocaleTimeString(this.currentLocale, { hour: "numeric", minute: "numeric", hour12: !this._show24Hours});
             sunriseText = (sunriseText + ': ' + sunrise);
             sunsetText = (sunsetText + ': ' + sunset);
           }         

@@ -24,11 +24,34 @@ function importModule(path) {
 }
 var utils = importModule("utils");
 var tzSupported = utils.tzSupported;
-if (!setTimeout) {
-    var setTimeout = utils.setTimeout;
-}
-if (!Promise) {
-    importModule("promise-polyfill");
+if (typeof Promise != "function") {
+    var promisePoly = importModule("promise-polyfill");
+    var finallyConstructor = promisePoly.finallyConstructor;
+    var setTimeout = promisePoly.setTimeout;
+    var setTimeoutFunc = promisePoly.setTimeoutFunc;
+    var isArray = promisePoly.isArray;
+    var noop = promisePoly.noop;
+    var bind = promisePoly.bind;
+    var Promise = promisePoly.Promise;
+    var handle = promisePoly.handle;
+    var resolve = promisePoly.resolve;
+    var reject = promisePoly.reject;
+    var finale = promisePoly.finale;
+    var Handler = promisePoly.Handler;
+    var doResolve = promisePoly.doResolve;
+    Promise.prototype['catch'] = promisePoly.Promise.prototype['catch'];
+    Promise.prototype.then = promisePoly.Promise.prototype.then;
+    Promise.all = promisePoly.Promise.all;
+    Promise.resolve = promisePoly.Promise.resolve;
+    Promise.reject = promisePoly.Promise.reject;
+    Promise.race = promisePoly.Promise.race;
+    var globalNS = promisePoly.globalNS;
+    if (!('Promise' in globalNS)) {
+        globalNS['Promise'] = Promise;
+    }
+    else if (!globalNS.Promise.prototype['finally']) {
+        globalNS.Promise.prototype['finally'] = finallyConstructor;
+    }
 }
 const GLib = imports.gi.GLib;
 const Gettext = imports.gettext;
@@ -545,14 +568,14 @@ class MyApplet extends Applet.TextIconApplet {
                     sunriseText = _('Sunrise');
                     sunsetText = _('Sunset');
                     if (this.weather.location.timeZone != null && tzSupported()) {
-                        let sunrise = this.weather.sunrise.toLocaleString(this.currentLocale, { timeZone: this.weather.location.timeZone, hour: "numeric", minute: "numeric", hour12: !this._show24Hours });
-                        let sunset = this.weather.sunset.toLocaleString(this.currentLocale, { timeZone: this.weather.location.timeZone, hour: "numeric", minute: "numeric", hour12: !this._show24Hours });
+                        let sunrise = this.weather.sunrise.toLocaleTimeString(this.currentLocale, { timeZone: this.weather.location.timeZone, hour: "numeric", minute: "numeric", hour12: !this._show24Hours });
+                        let sunset = this.weather.sunset.toLocaleTimeString(this.currentLocale, { timeZone: this.weather.location.timeZone, hour: "numeric", minute: "numeric", hour12: !this._show24Hours });
                         sunriseText = (sunriseText + ': ' + sunrise);
                         sunsetText = (sunsetText + ': ' + sunset);
                     }
                     else {
-                        let sunrise = this.weather.sunrise.toLocaleString(this.currentLocale, { hour: "numeric", minute: "numeric", hour12: !this._show24Hours });
-                        let sunset = this.weather.sunset.toLocaleString(this.currentLocale, { hour: "numeric", minute: "numeric", hour12: !this._show24Hours });
+                        let sunrise = this.weather.sunrise.toLocaleTimeString(this.currentLocale, { hour: "numeric", minute: "numeric", hour12: !this._show24Hours });
+                        let sunset = this.weather.sunset.toLocaleTimeString(this.currentLocale, { hour: "numeric", minute: "numeric", hour12: !this._show24Hours });
                         sunriseText = (sunriseText + ': ' + sunrise);
                         sunsetText = (sunsetText + ': ' + sunset);
                     }

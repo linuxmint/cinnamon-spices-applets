@@ -33,9 +33,6 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-if (!Array.prototype.includes) {
-    importModule("array-includes-polyfill");
-}
 var DarkSky = (function () {
     function DarkSky(_app) {
         this.descriptionLinelength = 25;
@@ -211,7 +208,7 @@ var DarkSky = (function () {
         var processed = summary.split(" ");
         var result = "";
         for (var i = 0; i < 2; i++) {
-            if (!/[\(\)]/.test(processed[i]) && !(this.app.DarkSkyFilterWords.includes(processed[i]))) {
+            if (!/[\(\)]/.test(processed[i]) && (this.app.DarkSkyFilterWords.indexOf(processed[i]) != -1)) {
                 result = result + processed[i] + " ";
             }
         }
