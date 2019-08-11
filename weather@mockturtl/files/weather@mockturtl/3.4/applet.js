@@ -353,6 +353,11 @@ var MyApplet = (function (_super) {
             }));
             _this._applet_context_menu.addMenuItem(settingsMenuItem);
         }
+
+        if (cinnamonVersion >= 3.4 && cinnamonVersion < 3.8) {
+            _this.distroLookup();
+        }
+
         var mainBox = new St.BoxLayout({ vertical: true });
         _this.menu.addActor(mainBox);
         _this._currentWeather = new St.Bin({ style_class: STYLE_CURRENT });
@@ -426,6 +431,13 @@ var MyApplet = (function (_super) {
             });
         });
     };
+
+    MyApplet.prototype.distroLookup = function () {
+        Util.spawnCommandLine('hostnamectl | grep "Operating System"', function(data) {
+            this.log.Print(data);
+        });
+    };
+
     MyApplet.prototype.refreshLoop = function () {
         try {
             if (this.lastUpdated == null || new Date(this.lastUpdated.getTime() + this._refreshInterval * 60000) < new Date()) {
