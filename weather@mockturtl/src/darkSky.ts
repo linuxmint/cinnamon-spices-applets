@@ -5,6 +5,7 @@
 ///////////                                       ////////////
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
+
 class DarkSky {
 
     //--------------------------------------------------------
@@ -193,7 +194,7 @@ class DarkSky {
         let processed = summary.split(" ");
         let result = "";
         for (let i = 0; i < 2; i++) {
-            if (!/[\(\)]/.test(processed[i]) && !(this.app.DarkSkyFilterWords.includes(processed[i]))) {
+            if (!/[\(\)]/.test(processed[i]) && (this.app.DarkSkyFilterWords.indexOf(processed[i]) != -1)) {
                 result = result + processed[i] + " ";
             }
         }

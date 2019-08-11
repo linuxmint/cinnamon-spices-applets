@@ -1,54 +1,4 @@
-// https://tc39.github.io/ecma262/#sec-array.prototype.includes
-if (!Array.prototype.includes) {
-  Object.defineProperty(Array.prototype, 'includes', {
-    value: function(valueToFind, fromIndex) {
-
-      if (this == null) {
-        throw new TypeError('"this" is null or not defined');
-      }
-
-      // 1. Let O be ? ToObject(this value).
-      var o = Object(this);
-
-      // 2. Let len be ? ToLength(? Get(O, "length")).
-      var len = o.length >>> 0;
-
-      // 3. If len is 0, return false.
-      if (len === 0) {
-        return false;
-      }
-
-      // 4. Let n be ? ToInteger(fromIndex).
-      //    (If fromIndex is undefined, this step produces the value 0.)
-      var n = fromIndex | 0;
-
-      // 5. If n ≥ 0, then
-      //  a. Let k be n.
-      // 6. Else n < 0,
-      //  a. Let k be len + n.
-      //  b. If k < 0, let k be 0.
-      var k = Math.max(n >= 0 ? n : len - Math.abs(n), 0);
-
-      function sameValueZero(x, y) {
-        return x === y || (typeof x === 'number' && typeof y === 'number' && isNaN(x) && isNaN(y));
-      }
-
-      // 7. Repeat, while k < len
-      while (k < len) {
-        // a. Let elementK be the result of ? Get(O, ! ToString(k)).
-        // b. If SameValueZero(valueToFind, elementK) is true, return true.
-        if (sameValueZero(o[k], valueToFind)) {
-          return true;
-        }
-        // c. Increase k by 1. 
-        k++;
-      }
-
-      // 8. Return false
-      return false;
-    }
-  });
-}var __extends = (this && this.__extends) || (function () {
+var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
             ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -103,7 +53,6 @@ var Main = imports.ui.main;
 var Mainloop = imports.mainloop;
 var Gio = imports.gi.Gio;
 var Gtk = imports.gi.Gtk;
-var Cinnamon = imports.gi.Cinnamon;
 var Soup = imports.gi.Soup;
 var St = imports.gi.St;
 var Applet = imports.ui.applet;
@@ -111,8 +60,55 @@ var Config = imports.misc.config;
 var PopupMenu = imports.ui.popupMenu;
 var Settings = imports.ui.settings;
 var Util = imports.misc.util;
+function importModule(path) {
+    if (typeof require !== 'undefined') {
+        return require('./' + path);
+    }
+    else {
+        var AppletDir = imports.ui.appletManager.applets['weather@mockturtl'];
+        return AppletDir[path];
+    }
+}
+var utils = importModule("utils");
+var GetDayName = utils.GetDayName;
+var GetHoursMinutes = utils.GetHoursMinutes;
+if (typeof Promise != "function") {
+    var promisePoly = importModule("promise-polyfill");
+    var finallyConstructor = promisePoly.finallyConstructor;
+    var setTimeout = promisePoly.setTimeout;
+    var setTimeoutFunc = promisePoly.setTimeoutFunc;
+    var isArray = promisePoly.isArray;
+    var noop = promisePoly.noop;
+    var bind = promisePoly.bind;
+    var Promise = promisePoly.Promise;
+    var handle = promisePoly.handle;
+    var resolve = promisePoly.resolve;
+    var reject = promisePoly.reject;
+    var finale = promisePoly.finale;
+    var Handler = promisePoly.Handler;
+    var doResolve = promisePoly.doResolve;
+    Promise.prototype['catch'] = promisePoly.Promise.prototype['catch'];
+    Promise.prototype.then = promisePoly.Promise.prototype.then;
+    Promise.all = promisePoly.Promise.all;
+    Promise.resolve = promisePoly.Promise.resolve;
+    Promise.reject = promisePoly.Promise.reject;
+    Promise.race = promisePoly.Promise.race;
+    var globalNS = promisePoly.globalNS;
+    if (!('Promise' in globalNS)) {
+        globalNS['Promise'] = Promise;
+    }
+    else if (!globalNS.Promise.prototype['finally']) {
+        globalNS.Promise.prototype['finally'] = finallyConstructor;
+    }
+}
+var GLib = imports.gi.GLib;
+var Gettext = imports.gettext;
+var darkSky;
+var openWeatherMap;
+var ipApi = importModule('ipApi');
 var UUID = "weather@mockturtl";
 var APPLET_ICON = "view-refresh-symbolic";
+var REFRESH_ICON = "view-refresh";
 var CMD_SETTINGS = "cinnamon-settings applets " + UUID;
 var WEATHER_CONV_MPH_IN_MPS = 2.23693629;
 var WEATHER_CONV_KPH_IN_MPS = 3.6;
@@ -125,43 +121,27 @@ var DATA_SERVICE = {
     DARK_SKY: "DarkSky",
 };
 var WEATHER_LOCATION = "location";
-var WEATHER_DATA_SERVICE = "dataService";
-var WEATHER_API_KEY = "apiKey";
-var WEATHER_CITY_KEY = 'locationLabelOverride';
-var WEATHER_REFRESH_INTERVAL = 'refreshInterval';
-var WEATHER_SHOW_COMMENT_IN_PANEL_KEY = 'showCommentInPanel';
-var WEATHER_VERTICAL_ORIENTATION_KEY = 'verticalOrientation';
-var WEATHER_SHOW_SUNRISE_KEY = 'showSunrise';
-var WEATHER_SHOW_24HOURS_KEY = 'show24Hours';
-var WEATHER_FORECAST_DAYS = 'forecastDays';
-var WEATHER_SHOW_TEXT_IN_PANEL_KEY = 'showTextInPanel';
-var WEATHER_TRANSLATE_CONDITION_KEY = 'translateCondition';
-var WEATHER_TEMPERATURE_UNIT_KEY = 'temperatureUnit';
-var WEATHER_TEMPERATURE_HIGH_FIRST_KEY = 'temperatureHighFirst';
-var WEATHER_PRESSURE_UNIT_KEY = 'pressureUnit';
 var WEATHER_USE_SYMBOLIC_ICONS_KEY = 'useSymbolicIcons';
-var WEATHER_WIND_SPEED_UNIT_KEY = 'windSpeedUnit';
-var WEATHER_SHORT_CONDITIONS_KEY = 'shortConditions';
-var WEATHER_MANUAL_LOCATION = "manualLocation";
-var KEYS = [,
-    WEATHER_DATA_SERVICE,
-    WEATHER_API_KEY,
-    WEATHER_TEMPERATURE_UNIT_KEY,
-    WEATHER_TEMPERATURE_HIGH_FIRST_KEY,
-    WEATHER_WIND_SPEED_UNIT_KEY,
-    WEATHER_CITY_KEY,
-    WEATHER_TRANSLATE_CONDITION_KEY,
-    WEATHER_VERTICAL_ORIENTATION_KEY,
-    WEATHER_SHOW_TEXT_IN_PANEL_KEY,
-    WEATHER_SHOW_COMMENT_IN_PANEL_KEY,
-    WEATHER_SHOW_SUNRISE_KEY,
-    WEATHER_SHOW_24HOURS_KEY,
-    WEATHER_FORECAST_DAYS,
-    WEATHER_REFRESH_INTERVAL,
-    WEATHER_PRESSURE_UNIT_KEY,
-    WEATHER_SHORT_CONDITIONS_KEY,
-    WEATHER_MANUAL_LOCATION
-];
+var KEYS;
+(function (KEYS) {
+    KEYS["WEATHER_DATA_SERVICE"] = "dataService";
+    KEYS["WEATHER_API_KEY"] = "apiKey";
+    KEYS["WEATHER_TEMPERATURE_UNIT_KEY"] = "temperatureUnit";
+    KEYS["WEATHER_TEMPERATURE_HIGH_FIRST_KEY"] = "temperatureHighFirst";
+    KEYS["WEATHER_WIND_SPEED_UNIT_KEY"] = "windSpeedUnit";
+    KEYS["WEATHER_CITY_KEY"] = "locationLabelOverride";
+    KEYS["WEATHER_TRANSLATE_CONDITION_KEY"] = "translateCondition";
+    KEYS["WEATHER_VERTICAL_ORIENTATION_KEY"] = "verticalOrientation";
+    KEYS["WEATHER_SHOW_TEXT_IN_PANEL_KEY"] = "showTextInPanel";
+    KEYS["WEATHER_SHOW_COMMENT_IN_PANEL_KEY"] = "showCommentInPanel";
+    KEYS["WEATHER_SHOW_SUNRISE_KEY"] = "showSunrise";
+    KEYS["WEATHER_SHOW_24HOURS_KEY"] = "show24Hours";
+    KEYS["WEATHER_FORECAST_DAYS"] = "forecastDays";
+    KEYS["WEATHER_REFRESH_INTERVAL"] = "refreshInterval";
+    KEYS["WEATHER_PRESSURE_UNIT_KEY"] = "pressureUnit";
+    KEYS["WEATHER_SHORT_CONDITIONS_KEY"] = "shortConditions";
+    KEYS["WEATHER_MANUAL_LOCATION"] = "manualLocation";
+})(KEYS || (KEYS = {}));
 var SIGNAL_CHANGED = 'changed::';
 var SIGNAL_CLICKED = 'clicked';
 var SIGNAL_REPAINT = 'repaint';
@@ -181,6 +161,7 @@ var STYLE_DATABOX_VALUES = 'weather-current-databox-values';
 var STYLE_FORECAST_SUMMARY = 'weather-forecast-summary';
 var STYLE_FORECAST_TEMPERATURE = 'weather-forecast-temperature';
 var STYLE_FORECAST_BOX = 'weather-forecast-box';
+var STYLE_FORECAST_CONTAINER = 'weather-forecast-container';
 var STYLE_PANEL_BUTTON = 'panel-button';
 var STYLE_POPUP_SEPARATOR_MENU_ITEM = 'popup-separator-menu-item';
 var STYLE_CURRENT = 'current';
@@ -227,15 +208,10 @@ var Log = (function () {
     };
     return Log;
 }());
-var GLib = imports.gi.GLib;
-var Gettext = imports.gettext;
 Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
 function _(str) {
     return Gettext.dgettext(UUID, str);
 }
-var darkSky;
-var openWeatherMap;
-//var ipApi = require("./ipApi");
 var MyApplet = (function (_super) {
     __extends(MyApplet, _super);
     function MyApplet(metadata, orientation, panelHeight, instanceId) {
@@ -308,9 +284,9 @@ var MyApplet = (function (_super) {
         _this.currentLocale = null;
         _this.systemLanguage = null;
         _this._httpSession = new Soup.SessionAsync();
-        _this.locProvider = new IpApi(_this);
+        _this.locProvider = new ipApi.IpApi(_this);
         _this.lastUpdated = null;
-        _this.currentLocale = GLib.get_language_names()[0];
+        _this.currentLocale = _this.constructJsLocale(GLib.get_language_names()[0]);
         _this.systemLanguage = _this.currentLocale.split('_')[0];
         _this.settings = new Settings.AppletSettings(_this, UUID, instanceId);
         _this.log = new Log(instanceId);
@@ -344,29 +320,28 @@ var MyApplet = (function (_super) {
             }
             this.refreshWeather();
         }));
-        var cinnamonVersion = Config.PACKAGE_VERSION.split('.');
-        var majorVersion = parseInt(cinnamonVersion[0]);
-        if (majorVersion < 2) {
-            var itemLabel = _("Settings");
-            var settingsMenuItem = new Applet.MenuItem(itemLabel, Gtk.STOCK_EDIT, Lang.bind(_this, function () {
-                Util.spawnCommandLine(CMD_SETTINGS);
-            }));
-            _this._applet_context_menu.addMenuItem(settingsMenuItem);
-        }
-
-        if (cinnamonVersion >= 3.4 && cinnamonVersion < 3.8) {
-            _this.distroLookup();
-        }
-
-        var mainBox = new St.BoxLayout({ vertical: true });
+        var itemLabel = _("Refresh");
+        var refreshMenuItem = new Applet.MenuItem(itemLabel, REFRESH_ICON, Lang.bind(_this, function () {
+            this.refreshWeather();
+        }));
+        _this._applet_context_menu.addMenuItem(refreshMenuItem);
+        var mainBox = new St.BoxLayout({
+            vertical: true
+        });
         _this.menu.addActor(mainBox);
-        _this._currentWeather = new St.Bin({ style_class: STYLE_CURRENT });
+        _this._currentWeather = new St.Bin({
+            style_class: STYLE_CURRENT
+        });
         mainBox.add_actor(_this._currentWeather);
-        _this._separatorArea = new St.DrawingArea({ style_class: STYLE_POPUP_SEPARATOR_MENU_ITEM });
+        _this._separatorArea = new St.DrawingArea({
+            style_class: STYLE_POPUP_SEPARATOR_MENU_ITEM
+        });
         _this._separatorArea.width = 200;
         _this._separatorArea.connect(SIGNAL_REPAINT, Lang.bind(_this, _this._onSeparatorAreaRepaint));
         mainBox.add_actor(_this._separatorArea);
-        _this._futureWeather = new St.Bin({ style_class: STYLE_FORECAST });
+        _this._futureWeather = new St.Bin({
+            style_class: STYLE_FORECAST
+        });
         mainBox.add_actor(_this._futureWeather);
         _this.rebuild();
         _this.refreshLoop();
@@ -404,7 +379,7 @@ var MyApplet = (function (_super) {
                                     }
                                     catch (e) {
                                         _this.log.Error("Error: API response is not JSON. The response: " + message.response_body.data);
-                                        reject(null);
+                                        reject(e);
                                     }
                                 }
                                 else {
@@ -431,13 +406,6 @@ var MyApplet = (function (_super) {
             });
         });
     };
-
-    MyApplet.prototype.distroLookup = function () {
-        Util.spawnCommandLine('hostnamectl | grep "Operating System"', function(data) {
-            this.log.Print(data);
-        });
-    };
-
     MyApplet.prototype.refreshLoop = function () {
         try {
             if (this.lastUpdated == null || new Date(this.lastUpdated.getTime() + this._refreshInterval * 60000) < new Date()) {
@@ -505,21 +473,32 @@ var MyApplet = (function (_super) {
         this._currentWeatherSunrise.text = msg;
     };
     ;
+    MyApplet.prototype.constructJsLocale = function (locale) {
+        var jsLocale = locale.split(".")[0];
+        var tmp = jsLocale.split("_");
+        jsLocale = "";
+        for (var i = 0; i < tmp.length; i++) {
+            if (i != 0)
+                jsLocale += "-";
+            jsLocale += tmp[i];
+        }
+        return jsLocale;
+    };
     MyApplet.prototype.refreshWeather = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var haveLocation, loc, refreshResult, _a, _b, e_1;
-            return __generator(this, function (_c) {
-                switch (_c.label) {
+            var haveLocation, loc, _a, e_1;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
                     case 0:
                         this.wipeCurrentData();
                         this.wipeForecastData();
-                        _c.label = 1;
+                        _b.label = 1;
                     case 1:
-                        _c.trys.push([1, 14, , 15]);
+                        _b.trys.push([1, 9, , 10]);
                         if (!!this._manualLocation) return [3, 3];
                         return [4, this.locProvider.GetLocation()];
                     case 2:
-                        haveLocation = _c.sent();
+                        haveLocation = _b.sent();
                         if (!haveLocation) {
                             this.log.Error("Couldn't obtain location, retry in 15 seconds...");
                             this.showError(this.errMsg.label.noLoc, this.errMsg.desc.cantGetLoc);
@@ -534,60 +513,49 @@ var MyApplet = (function (_super) {
                             this.log.Error("No location given when setting is on Manual Location");
                             return [2];
                         }
-                        _c.label = 4;
+                        _b.label = 4;
                     case 4:
-                        refreshResult = void 0;
-                        _a = this._dataService;
-                        switch (_a) {
-                            case DATA_SERVICE.DARK_SKY: return [3, 5];
-                            case DATA_SERVICE.OPEN_WEATHER_MAP: return [3, 7];
+                        switch (this._dataService) {
+                            case DATA_SERVICE.DARK_SKY:
+                                if (darkSky == null)
+                                    darkSky = importModule('darkSky');
+                                this.provider = new darkSky.DarkSky(this);
+                                break;
+                            case DATA_SERVICE.OPEN_WEATHER_MAP:
+                                if (openWeatherMap == null)
+                                    openWeatherMap = importModule("openWeatherMap");
+                                this.provider = new openWeatherMap.OpenWeatherMap(this);
+                                break;
+                            default:
+                                return [2];
                         }
-                        return [3, 9];
+                        return [4, this.provider.GetWeather()];
                     case 5:
-                        /*if (darkSky == null) {
-                            darkSky = require('./darkSky');
-                        }*/
-                        this.provider = new DarkSky(this);
-                        return [4, this.provider.GetWeather()];
-                    case 6:
-                        refreshResult = _c.sent();
-                        return [3, 10];
-                    case 7:
-                        /*if (openWeatherMap == null) {
-                            openWeatherMap = require('./openWeatherMap');
-                        }*/
-                        this.provider = new OpenWeatherMap(this);
-                        return [4, this.provider.GetWeather()];
-                    case 8:
-                        refreshResult = _c.sent();
-                        return [3, 10];
-                    case 9: return [2];
-                    case 10:
-                        if (!refreshResult) {
+                        if (!(_b.sent())) {
                             this.log.Error("Unable to obtain Weather Information");
                             this.lastUpdated = null;
                             return [2];
                         }
                         this.rebuild();
                         return [4, this.displayWeather()];
-                    case 11:
-                        _b = (_c.sent());
-                        if (!_b) return [3, 13];
+                    case 6:
+                        _a = (_b.sent());
+                        if (!_a) return [3, 8];
                         return [4, this.displayForecast()];
-                    case 12:
-                        _b = (_c.sent());
-                        _c.label = 13;
-                    case 13:
-                        if (_b) {
+                    case 7:
+                        _a = (_b.sent());
+                        _b.label = 8;
+                    case 8:
+                        if (_a) {
                             this.log.Print("Weather Information refreshed");
                         }
-                        return [3, 15];
-                    case 14:
-                        e_1 = _c.sent();
+                        return [3, 10];
+                    case 9:
+                        e_1 = _b.sent();
                         this.log.Error("Error while refreshing Weather info: " + e_1);
                         this.lastUpdated = null;
                         return [2];
-                    case 15:
+                    case 10:
                         this.lastUpdated = new Date();
                         return [2];
                 }
@@ -690,21 +658,9 @@ var MyApplet = (function (_super) {
             }
             var sunriseText = "";
             var sunsetText = "";
-            if (this.weather.sunrise != null && this.weather.sunset != null) {
-                if (this._showSunrise) {
-                    sunriseText = _('Sunrise');
-                    sunsetText = _('Sunset');
-                    /*if (this.weather.location.timeZone != null) {
-                        var sunrise = this.weather.sunrise.toLocaleString("en-GB", { timeZone: this.weather.location.timeZone, hour: "2-digit", minute: "2-digit" });
-                        var sunset = this.weather.sunset.toLocaleString("en-GB", { timeZone: this.weather.location.timeZone, hour: "2-digit", minute: "2-digit" });
-                        sunriseText = (sunriseText + ': ' + this.timeToUserUnits(sunrise));
-                        sunsetText = (sunsetText + ': ' + this.timeToUserUnits(sunset));
-                    }
-                    else */{
-                        sunriseText = (sunriseText + ': ' + this.timeToUserUnits(this.toLocaleFormat(this.weather.sunrise, '%H:%M')));
-                        sunsetText = (sunsetText + ': ' + this.timeToUserUnits(this.toLocaleFormat(this.weather.sunset, '%H:%M')));
-                    }
-                }
+            if (this.weather.sunrise != null && this.weather.sunset != null && this._showSunrise) {
+                sunriseText = (_('Sunrise') + ': ' + GetHoursMinutes(this.weather.sunrise, this.currentLocale, this._show24Hours, this.weather.location.timeZone));
+                sunsetText = (_('Sunset') + ': ' + GetHoursMinutes(this.weather.sunset, this.currentLocale, this._show24Hours, this.weather.location.timeZone));
             }
             this._currentWeatherSunrise.text = sunriseText;
             this._currentWeatherSunset.text = sunsetText;
@@ -727,27 +683,20 @@ var MyApplet = (function (_super) {
                 var second_temperature = this._temperatureHighFirst ? t_low : t_high;
                 var comment = "";
                 if (forecastData.condition.main != null && forecastData.condition.description != null) {
-                    if (this._shortConditions) {
-                        comment = this.capitalizeFirstLetter(forecastData.condition.main);
-                        if (this._translateCondition) {
-                            comment = _(this.capitalizeFirstLetter(forecastData.condition.main));
-                        }
-                    }
-                    else {
-                        comment = this.capitalizeFirstLetter(forecastData.condition.description);
-                        if (this._translateCondition) {
-                            comment = _(this.capitalizeFirstLetter(forecastData.condition.description));
-                        }
-                    }
+                    comment = (this._shortConditions) ? forecastData.condition.main : forecastData.condition.description;
+                    comment = this.capitalizeFirstLetter(comment);
+                    if (this._translateCondition)
+                        comment = _(comment);
                 }
-                var dayName = "";
-                /*if (this.weather.location.timeZone != null) {
-                    this.log.Debug(forecastData.dateTime.toLocaleString("en-GB", { timeZone: this.weather.location.timeZone }));
-                    dayName = _(forecastData.dateTime.toLocaleString("en-GB", { timeZone: this.weather.location.timeZone, weekday: "long" }));
-                }
-                else */ {
+                if (this.weather.location.timeZone == null)
                     forecastData.dateTime.setMilliseconds(forecastData.dateTime.getMilliseconds() + (this.weather.location.tzOffset * 1000));
-                    dayName = _(this.getDayName(forecastData.dateTime.getUTCDay()));
+                var dayName = GetDayName(forecastData.dateTime, this.currentLocale, this.weather.location.timeZone);
+                if (forecastData.dateTime) {
+                    var now = new Date();
+                    if (forecastData.dateTime.getDate() == now.getDate())
+                        dayName = _("Today");
+                    if (forecastData.dateTime.getDate() == new Date(now.setDate(now.getDate() + 1)).getDate())
+                        dayName = _("Tomorrow");
                 }
                 forecastUi.Day.text = dayName;
                 forecastUi.Temperature.text = first_temperature + ' ' + '\u002F' + ' ' + second_temperature + ' ' + this.unitToUnicode();
@@ -757,7 +706,7 @@ var MyApplet = (function (_super) {
             return true;
         }
         catch (e) {
-            this.log.Error("DisplayForecastError" + e);
+            this.log.Error("DisplayForecastError " + e);
             return false;
         }
     };
@@ -802,8 +751,12 @@ var MyApplet = (function (_super) {
     MyApplet.prototype.showLoadingUi = function () {
         this.destroyCurrentWeather();
         this.destroyFutureWeather();
-        this._currentWeather.set_child(new St.Label({ text: _('Loading current weather ...') }));
-        this._futureWeather.set_child(new St.Label({ text: _('Loading future weather ...') }));
+        this._currentWeather.set_child(new St.Label({
+            text: _('Loading current weather ...')
+        }));
+        this._futureWeather.set_child(new St.Label({
+            text: _('Loading future weather ...')
+        }));
     };
     MyApplet.prototype.rebuild = function () {
         this.showLoadingUi();
@@ -841,25 +794,35 @@ var MyApplet = (function (_super) {
         });
         bb.add_actor(this._currentWeatherLocation);
         bb.add_actor(this._currentWeatherSummary);
-        var textOb = { text: ELLIPSIS };
+        var textOb = {
+            text: ELLIPSIS
+        };
         this._currentWeatherSunrise = new St.Label(textOb);
         this._currentWeatherSunset = new St.Label(textOb);
         var ab = new St.BoxLayout({
             style_class: STYLE_ASTRONOMY
         });
         ab.add_actor(this._currentWeatherSunrise);
-        var ab_spacerlabel = new St.Label({ text: BLANK });
+        var ab_spacerlabel = new St.Label({
+            text: BLANK
+        });
         ab.add_actor(ab_spacerlabel);
         ab.add_actor(this._currentWeatherSunset);
-        var bb_spacerlabel = new St.Label({ text: BLANK });
+        var bb_spacerlabel = new St.Label({
+            text: BLANK
+        });
         bb.add_actor(bb_spacerlabel);
         bb.add_actor(ab);
         this._currentWeatherTemperature = new St.Label(textOb);
         this._currentWeatherHumidity = new St.Label(textOb);
         this._currentWeatherPressure = new St.Label(textOb);
         this._currentWeatherWind = new St.Label(textOb);
-        this._currentWeatherApiUnique = new St.Label({ text: '' });
-        this._currentWeatherApiUniqueCap = new St.Label({ text: '' });
+        this._currentWeatherApiUnique = new St.Label({
+            text: ''
+        });
+        this._currentWeatherApiUniqueCap = new St.Label({
+            text: ''
+        });
         var rb = new St.BoxLayout({
             style_class: STYLE_DATABOX
         });
@@ -873,13 +836,21 @@ var MyApplet = (function (_super) {
         });
         rb.add_actor(rb_captions);
         rb.add_actor(rb_values);
-        rb_captions.add_actor(new St.Label({ text: _('Temperature:') }));
+        rb_captions.add_actor(new St.Label({
+            text: _('Temperature:')
+        }));
         rb_values.add_actor(this._currentWeatherTemperature);
-        rb_captions.add_actor(new St.Label({ text: _('Humidity:') }));
+        rb_captions.add_actor(new St.Label({
+            text: _('Humidity:')
+        }));
         rb_values.add_actor(this._currentWeatherHumidity);
-        rb_captions.add_actor(new St.Label({ text: _('Pressure:') }));
+        rb_captions.add_actor(new St.Label({
+            text: _('Pressure:')
+        }));
         rb_values.add_actor(this._currentWeatherPressure);
-        rb_captions.add_actor(new St.Label({ text: _('Wind:') }));
+        rb_captions.add_actor(new St.Label({
+            text: _('Wind:')
+        }));
         rb_values.add_actor(this._currentWeatherWind);
         rb_captions.add_actor(this._currentWeatherApiUniqueCap);
         rb_values.add_actor(this._currentWeatherApiUnique);
@@ -897,7 +868,10 @@ var MyApplet = (function (_super) {
     MyApplet.prototype.rebuildFutureWeatherUi = function () {
         this.destroyFutureWeather();
         this._forecast = [];
-        this._forecastBox = new St.BoxLayout({ vertical: this._verticalOrientation });
+        this._forecastBox = new St.BoxLayout({
+            vertical: this._verticalOrientation,
+            style_class: STYLE_FORECAST_CONTAINER
+        });
         this._futureWeather.set_child(this._forecastBox);
         for (var i = 0; i < this._forecastDays; i++) {
             var forecastWeather = {
@@ -937,10 +911,6 @@ var MyApplet = (function (_super) {
             this._forecastBox.add_actor(bb);
         }
     };
-    MyApplet.prototype.toLocaleFormat = function (date, format) {
-        return Cinnamon.util_format_date(format, date.getTime());
-    };
-    ;
     MyApplet.prototype.noApiKey = function () {
         if (this._apiKey == undefined || this._apiKey == "") {
             return true;
@@ -955,23 +925,6 @@ var MyApplet = (function (_super) {
         return description.charAt(0).toUpperCase() + description.slice(1);
     };
     ;
-    MyApplet.prototype.timeToUserUnits = function (timeStr) {
-        var time = timeStr.split(':');
-        if (time[0].charAt(0) == "0") {
-            time[0] = time[0].substr(1);
-        }
-        if (this._show24Hours) {
-            return time[0] + ":" + time[1];
-        }
-        else {
-            if (parseInt(time[0]) > 12) {
-                return (parseInt(time[0]) - 12) + ":" + time[1] + " pm";
-            }
-            else {
-                return time[0] + ":" + time[1] + " am";
-            }
-        }
-    };
     MyApplet.prototype.KPHtoMPS = function (speed) {
         return speed / WEATHER_CONV_KPH_IN_MPS;
     };
@@ -1064,10 +1017,6 @@ var MyApplet = (function (_super) {
     MyApplet.prototype.nonempty = function (str) {
         return (str != null && str.length > 0);
     };
-    MyApplet.prototype.getDayName = function (dayNum) {
-        var days = [_('Sunday'), _('Monday'), _('Tuesday'), _('Wednesday'), _('Thursday'), _('Friday'), _('Saturday')];
-        return days[dayNum];
-    };
     MyApplet.prototype.compassDirection = function (deg) {
         var directions = [_('N'), _('NE'), _('E'), _('SE'), _('S'), _('SW'), _('W'), _('NW')];
         return directions[Math.round(deg / 45) % directions.length];
@@ -1155,586 +1104,6 @@ var icons = {
     fog: 'weather-fog',
     alert: 'weather-severe-alert'
 };
-var IpApi = (function () {
-    function IpApi(_app) {
-        this.query = "https://ipapi.co/json";
-        this.app = _app;
-    }
-    IpApi.prototype.GetLocation = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            var json, e_1;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        _a.trys.push([0, 2, , 3]);
-                        return [4, this.app.LoadJsonAsync(this.query)];
-                    case 1:
-                        json = _a.sent();
-                        if (json == null) {
-                            this.app.showError(this.app.errMsg.label.service, this.app.errMsg.desc.noResponse);
-                            return [2, false];
-                        }
-                        return [3, 3];
-                    case 2:
-                        e_1 = _a.sent();
-                        this.app.log.Error("IpApi service error: " + e_1);
-                        this.app.showError(this.app.errMsg.label.generic, this.app.errMsg.desc.cantGetLoc);
-                        return [2, false];
-                    case 3:
-                        if (json.error) {
-                            this.HandleErrorResponse(json);
-                            return [2, false];
-                        }
-                        return [2, this.ParseInformation(json)];
-                }
-            });
-        });
-    };
-    ;
-    IpApi.prototype.ParseInformation = function (json) {
-        try {
-            var loc = json.latitude + "," + json.longitude;
-            this.app.settings.setValue('location', loc);
-            this.app.weather.location.timeZone = json.timezone;
-            this.app.weather.location.city = json.city;
-            this.app.weather.location.country = json.country;
-            this.app.log.Print("Location obtained");
-            this.app.log.Debug("Location:" + json.latitude + "," + json.longitude);
-            this.app.log.Debug("Location setting is now: " + this.app._location);
-            return true;
-        }
-        catch (e) {
-            this.app.log.Error("IPapi parsing error: " + e);
-            this.app.showError(this.app.errMsg.label.generic, this.app.errMsg.desc.cantGetLoc);
-            return false;
-        }
-    };
-    ;
-    IpApi.prototype.HandleErrorResponse = function (json) {
-        this.app.log.Error("IpApi error response: " + json.reason);
-    };
-    ;
-    return IpApi;
-}());
-;
-var DarkSky = (function () {
-    function DarkSky(_app) {
-        this.descriptionLinelength = 25;
-        this.supportedLanguages = [
-            'ar', 'az', 'be', 'bg', 'bs', 'ca', 'cs', 'da', 'de', 'el', 'en', 'es',
-            'et', 'fi', 'fr', 'he', 'hr', 'hu', 'id', 'is', 'it', 'ja', 'ka', 'ko',
-            'kw', 'lv', 'nb', 'nl', 'no', 'pl', 'pt', 'ro', 'ru', 'sk', 'sl', 'sr',
-            'sv', 'tet', 'tr', 'uk', 'x-pig-latin', 'zh', 'zh-tw'
-        ];
-        this.query = "https://api.darksky.net/forecast/";
-        this.unit = null;
-        this.app = _app;
-    }
-    DarkSky.prototype.GetWeather = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            var query, json, e_1;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        query = this.ConstructQuery();
-                        if (!(query != "" && query != null)) return [3, 5];
-                        this.app.log.Debug("DarkSky API query: " + query);
-                        _a.label = 1;
-                    case 1:
-                        _a.trys.push([1, 3, , 4]);
-                        return [4, this.app.LoadJsonAsync(query)];
-                    case 2:
-                        json = _a.sent();
-                        if (json == null) {
-                            this.app.showError(this.app.errMsg.label.service, this.app.errMsg.desc.noResponse);
-                            return [2, false];
-                        }
-                        return [3, 4];
-                    case 3:
-                        e_1 = _a.sent();
-                        this.app.log.Error("DarkSky: API call failed: " + e_1);
-                        this.app.showError(this.app.errMsg.label.service, this.app.errMsg.desc.noResponse);
-                        return [2, false];
-                    case 4:
-                        if (!json.code) {
-                            return [2, this.ParseWeather(json)];
-                        }
-                        else {
-                            this.HandleResponseErrors(json);
-                            return [2, false];
-                        }
-                        _a.label = 5;
-                    case 5:
-                        this.app.log.Error("DarkSky: Could not construct query, insufficent information");
-                        this.app.showError(this.app.errMsg.label.service, this.app.errMsg.desc.locBad);
-                        return [2, false];
-                }
-            });
-        });
-    };
-    ;
-    DarkSky.prototype.ParseWeather = function (json) {
-        try {
-            this.app.weather.dateTime = new Date(json.currently.time * 1000);
-            this.app.weather.location.timeZone = json.timezone;
-            this.app.weather.coord.lat = json.latitude;
-            this.app.weather.coord.lon = json.longitude;
-            this.app.weather.sunrise = new Date(json.daily.data[0].sunriseTime * 1000);
-            this.app.weather.sunset = new Date(json.daily.data[0].sunsetTime * 1000);
-            this.app.weather.wind.speed = this.ToMPS(json.currently.windSpeed);
-            this.app.weather.wind.degree = json.currently.windBearing;
-            this.app.weather.main.temperature = this.ToKelvin(json.currently.temperature);
-            this.app.weather.main.pressure = json.currently.pressure;
-            this.app.weather.main.humidity = json.currently.humidity * 100;
-            this.app.weather.condition.main = this.GetShortCurrentSummary(json.currently.summary);
-            this.app.weather.condition.description = json.currently.summary;
-            this.app.weather.condition.icon = this.app.weatherIconSafely(json.currently.icon, this.ResolveIcon);
-            this.app.weather.cloudiness = json.currently.cloudCover * 100;
-            this.app.weather.main.feelsLike = this.ToKelvin(json.currently.apparentTemperature);
-            for (var i = 0; i < this.app._forecastDays; i++) {
-                var forecast = {
-                    dateTime: null,
-                    main: {
-                        temp: null,
-                        temp_min: null,
-                        temp_max: null,
-                        pressure: null,
-                        sea_level: null,
-                        grnd_level: null,
-                        humidity: null,
-                    },
-                    condition: {
-                        id: null,
-                        main: null,
-                        description: null,
-                        icon: null,
-                    },
-                    clouds: null,
-                    wind: {
-                        speed: null,
-                        deg: null,
-                    }
-                };
-                var day = json.daily.data[i];
-                forecast.dateTime = new Date(day.time * 1000);
-                forecast.main.temp_min = this.ToKelvin(day.temperatureLow);
-                forecast.main.temp_max = this.ToKelvin(day.temperatureHigh);
-                forecast.condition.main = this.GetShortSummary(day.summary);
-                forecast.condition.description = this.ProcessSummary(day.summary);
-                forecast.condition.icon = this.app.weatherIconSafely(day.icon, this.ResolveIcon);
-                forecast.main.pressure = day.pressure;
-                forecast.main.humidity = day.humidity * 100;
-                this.app.forecasts.push(forecast);
-            }
-        }
-        catch (e) {
-            this.app.log.Error("DarkSky payload parsing error: " + e);
-            this.app.showError(this.app.errMsg.label.generic, this.app.errMsg.desc.parse);
-            return false;
-        }
-        return true;
-    };
-    ;
-    DarkSky.prototype.ConstructQuery = function () {
-        this.SetQueryUnit();
-        var query;
-        var key = this.app._apiKey.replace(" ", "");
-        var location = this.app._location.replace(" ", "");
-        if (this.app.noApiKey()) {
-            this.app.showError(this.app.errMsg.label.noKey, "");
-            return "";
-        }
-        if (this.app.isCoordinate(location)) {
-            query = this.query + key + "/" + location +
-                "?exclude=minutely,hourly,flags" + "&units=" + this.unit;
-            if (this.app.isLangSupported(this.app.systemLanguage, this.supportedLanguages) && this.app._translateCondition) {
-                query = query + "&lang=" + this.app.systemLanguage;
-            }
-            return query;
-        }
-        else {
-            return "";
-        }
-    };
-    ;
-    DarkSky.prototype.HandleResponseErrors = function (json) {
-        var code = json.code;
-        var error = json.error;
-        var errorMsg = "DarkSky API: ";
-        this.app.log.Debug("DarksSky API error payload: " + json);
-        switch (code) {
-            case "400":
-                this.app.log.Error(errorMsg + error);
-                break;
-            default:
-                this.app.log.Error(errorMsg + error);
-                break;
-        }
-    };
-    ;
-    DarkSky.prototype.ProcessSummary = function (summary) {
-        var processed = summary.split(" ");
-        var result = "";
-        var linelength = 0;
-        for (var i = 0; i < processed.length; i++) {
-            if (linelength + processed[i].length > this.descriptionLinelength) {
-                result = result + "\n";
-                linelength = 0;
-            }
-            result = result + processed[i] + " ";
-            linelength = linelength + processed[i].length + 1;
-        }
-        return result;
-    };
-    ;
-    DarkSky.prototype.GetShortSummary = function (summary) {
-        var processed = summary.split(" ");
-        var result = "";
-        for (var i = 0; i < 2; i++) {
-            if (!/[\(\)]/.test(processed[i]) && !(this.app.DarkSkyFilterWords.includes(processed[i]))) {
-                result = result + processed[i] + " ";
-            }
-        }
-        return result;
-    };
-    ;
-    DarkSky.prototype.GetShortCurrentSummary = function (summary) {
-        var processed = summary.split(" ");
-        var result = "";
-        var maxLoop;
-        (processed.length < 2) ? maxLoop = processed.length : maxLoop = 2;
-        for (var i = 0; i < maxLoop; i++) {
-            if (processed[i] != "and") {
-                result = result + processed[i] + " ";
-            }
-        }
-        return result;
-    };
-    DarkSky.prototype.ResolveIcon = function (icon) {
-        switch (icon) {
-            case "rain":
-                return ['weather-rain', 'weather-showers-scattered', 'weather-freezing-rain'];
-            case "snow":
-                return ['weather-snow'];
-            case "fog":
-                return ['weather-fog'];
-            case "cloudy":
-                return ['weather-overcast', 'weather-clouds', , 'weather-few-clouds'];
-            case "partly-cloudy-night":
-                return ['weather-few-clouds-night', "weather-few-clouds"];
-            case "partly-cloudy-day":
-                return ['weather-few-clouds'];
-            case "clear-night":
-                return ['weather-clear-night'];
-            case "clear-day":
-                return ['weather-clear'];
-            case "storm":
-                return ['weather-storm'];
-            case "showers":
-                return ['weather-showers'];
-            case "wind":
-                return ["weather-wind", "wind", "weather-breeze", 'weather-clouds', 'weather-few-clouds'];
-            default:
-                return ['weather-severe-alert'];
-        }
-    };
-    ;
-    DarkSky.prototype.SetQueryUnit = function () {
-        if (this.app._temperatureUnit == this.app.WeatherUnits.CELSIUS) {
-            if (this.app._windSpeedUnit == this.app.WeatherWindSpeedUnits.KPH || this.app._windSpeedUnit == this.app.WeatherWindSpeedUnits.MPS) {
-                this.unit = 'si';
-            }
-            else {
-                this.unit = 'uk2';
-            }
-        }
-        else {
-            this.unit = 'us';
-        }
-    };
-    ;
-    DarkSky.prototype.ToKelvin = function (temp) {
-        if (this.unit == 'us') {
-            return this.app.FahrenheitToKelvin(temp);
-        }
-        else {
-            return this.app.CelsiusToKelvin(temp);
-        }
-    };
-    ;
-    DarkSky.prototype.ToMPS = function (speed) {
-        if (this.unit == 'si') {
-            return speed;
-        }
-        else {
-            return this.app.MPHtoMPS(speed);
-        }
-    };
-    ;
-    return DarkSky;
-}());
-;
-var OpenWeatherMap = (function () {
-    function OpenWeatherMap(_app) {
-        this.supportedLanguages = ["ar", "bg", "ca", "cz", "de", "el", "en", "fa", "fi",
-            "fr", "gl", "hr", "hu", "it", "ja", "kr", "la", "lt", "mk", "nl", "pl",
-            "pt", "ro", "ru", "se", "sk", "sl", "es", "tr", "ua", "vi", "zh_cn", "zh_tw"];
-        this.current_url = "https://api.openweathermap.org/data/2.5/weather?";
-        this.daily_url = "https://api.openweathermap.org/data/2.5/forecast/daily?";
-        this.app = _app;
-    }
-    OpenWeatherMap.prototype.GetWeather = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            var currentResult, forecastResult;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4, this.GetData(this.current_url, this.ParseCurrent)];
-                    case 1:
-                        currentResult = _a.sent();
-                        return [4, this.GetData(this.daily_url, this.ParseForecast)];
-                    case 2:
-                        forecastResult = _a.sent();
-                        if (currentResult && forecastResult) {
-                            return [2, true];
-                        }
-                        else {
-                            this.app.log.Error("OpenWeatherMap: Could not get Weather information");
-                            return [2, false];
-                        }
-                        return [2];
-                }
-            });
-        });
-    };
-    ;
-    OpenWeatherMap.prototype.GetData = function (baseUrl, ParseFunction) {
-        return __awaiter(this, void 0, void 0, function () {
-            var query, json, e_1;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        query = this.ConstructQuery(baseUrl);
-                        if (!(query != null)) return [3, 5];
-                        this.app.log.Debug("Query: " + query);
-                        _a.label = 1;
-                    case 1:
-                        _a.trys.push([1, 3, , 4]);
-                        return [4, this.app.LoadJsonAsync(query)];
-                    case 2:
-                        json = _a.sent();
-                        if (json == null) {
-                            this.app.showError(this.app.errMsg.label.service, this.app.errMsg.desc.noResponse);
-                            return [2, false];
-                        }
-                        return [3, 4];
-                    case 3:
-                        e_1 = _a.sent();
-                        this.app.log.Error("Unable to call API:" + e_1);
-                        return [2, false];
-                    case 4:
-                        if (json.cod == 200) {
-                            return [2, ParseFunction(json, this)];
-                        }
-                        else {
-                            this.HandleResponseErrors(json);
-                            return [2, false];
-                        }
-                        return [3, 6];
-                    case 5: return [2, false];
-                    case 6: return [2];
-                }
-            });
-        });
-    };
-    ;
-    OpenWeatherMap.prototype.ParseCurrent = function (json, self) {
-        try {
-            if (json.coord) {
-                self.app.weather.coord.lat = json.coord.lat;
-                self.app.weather.coord.lon = json.coord.lon;
-            }
-            self.app.weather.location.city = json.name;
-            self.app.weather.location.country = json.sys.country;
-            self.app.weather.location.id = json.id;
-            self.app.weather.dateTime = new Date((json.dt) * 1000);
-            self.app.weather.sunrise = new Date((json.sys.sunrise) * 1000);
-            self.app.weather.sunset = new Date((json.sys.sunset) * 1000);
-            if (json.wind) {
-                self.app.weather.wind.speed = json.wind.speed;
-                self.app.weather.wind.degree = json.wind.deg;
-            }
-            if (json.main) {
-                self.app.weather.main.temperature = json.main.temp;
-                self.app.weather.main.pressure = json.main.pressure;
-                self.app.weather.main.humidity = json.main.humidity;
-                self.app.weather.main.temp_min = json.main.temp_min;
-                self.app.weather.main.temp_max = json.main.temp_max;
-            }
-            if (json.weather[0]) {
-                self.app.weather.condition.main = json.weather[0].main;
-                self.app.weather.condition.description = json.weather[0].description;
-                self.app.weather.condition.icon = self.app.weatherIconSafely(json.weather[0].icon, self.ResolveIcon);
-            }
-            if (json.clouds) {
-                self.app.weather.cloudiness = json.clouds.all;
-            }
-            return true;
-        }
-        catch (e) {
-            self.app.log.Error("OpenWeathermap Weather Parsing error: " + e);
-            self.app.showError(self.app.errMsg.label.generic, self.app.errMsg.desc.parse);
-            return false;
-        }
-    };
-    ;
-    OpenWeatherMap.prototype.ParseForecast = function (json, self) {
-        try {
-            for (var i = 0; i < self.app._forecastDays; i++) {
-                var forecast = {
-                    dateTime: null,
-                    main: {
-                        temp: null,
-                        temp_min: null,
-                        temp_max: null,
-                        pressure: null,
-                        sea_level: null,
-                        grnd_level: null,
-                        humidity: null,
-                    },
-                    condition: {
-                        id: null,
-                        main: null,
-                        description: null,
-                        icon: null,
-                    },
-                    clouds: null,
-                    wind: {
-                        speed: null,
-                        deg: null,
-                    }
-                };
-                var day = json.list[i];
-                forecast.dateTime = new Date(day.dt * 1000);
-                forecast.main.temp_min = day.temp.min;
-                forecast.main.temp_max = day.temp.max;
-                forecast.main.pressure = day.pressure;
-                forecast.main.humidity = day.humidity;
-                forecast.clouds = day.clouds;
-                if (day.weather[0].id) {
-                    forecast.condition.main = day.weather[0].main;
-                    forecast.condition.description = day.weather[0].description;
-                    forecast.condition.icon = self.app.weatherIconSafely(day.weather[0].icon, self.ResolveIcon);
-                }
-                self.app.forecasts.push(forecast);
-            }
-            return true;
-        }
-        catch (e) {
-            self.app.log.Error("OpenWeathermap Forecast Parsing error: " + e);
-            self.app.showError(self.app.errMsg.label.generic, self.app.errMsg.desc.parse);
-            return false;
-        }
-    };
-    ;
-    OpenWeatherMap.prototype.ConstructQuery = function (baseUrl) {
-        var query = baseUrl;
-        var locString = this.ParseLocation();
-        if (locString != null) {
-            query = query + locString + "&APPID=";
-            query += "1c73f8259a86c6fd43c7163b543c8640";
-            if (this.app._translateCondition && this.app.isLangSupported(this.app.systemLanguage, this.supportedLanguages)) {
-                query = query + "&lang=" + this.app.systemLanguage;
-            }
-            return query;
-        }
-        this.app.showError(this.app.errMsg.label.noLoc, "");
-        this.app.log.Error("OpenWeatherMap: No Location was provided");
-        return null;
-    };
-    ;
-    OpenWeatherMap.prototype.ParseLocation = function () {
-        var loc = this.app._location.replace(/ /g, "");
-        if (this.app.isCoordinate(loc)) {
-            var locArr = loc.split(',');
-            return "lat=" + locArr[0] + "&lon=" + locArr[1];
-        }
-        else if (this.app.isID(loc)) {
-            return "id=" + loc;
-        }
-        else
-            return "q=" + loc;
-    };
-    ;
-    OpenWeatherMap.prototype.HandleResponseErrors = function (json) {
-        var errorMsg = "OpenWeather API: ";
-        switch (json.cod) {
-            case ("400"):
-                this.app.showError(this.app.errMsg.label.service, this.app.errMsg.desc.locBad);
-                break;
-            case ("401"):
-                this.app.showError(this.app.errMsg.label.service, this.app.errMsg.desc.keyBad);
-                break;
-            case ("404"):
-                this.app.showError(this.app.errMsg.label.service, this.app.errMsg.desc.locNotFound);
-                break;
-            case ("429"):
-                this.app.showError(this.app.errMsg.label.service, this.app.errMsg.desc.keyBlock);
-                break;
-            default:
-                this.app.showError(this.app.errMsg.label.service, this.app.errMsg.desc.unknown);
-                break;
-        }
-        ;
-        this.app.log.Debug("OpenWeatherMap Error Code: " + json.cod);
-        this.app.log.Error(errorMsg + json.message);
-    };
-    ;
-    OpenWeatherMap.prototype.ResolveIcon = function (icon) {
-        switch (icon) {
-            case "10d":
-                return ['weather-rain', 'weather-showers-scattered', 'weather-freezing-rain'];
-            case "10n":
-                return ['weather-rain', 'weather-showers-scattered', 'weather-freezing-rain'];
-            case "09n":
-                return ['weather-showers'];
-            case "09d":
-                return ['weather-showers'];
-            case "13d":
-                return ['weather-snow'];
-            case "13n":
-                return ['weather-snow'];
-            case "50d":
-                return ['weather-fog'];
-            case "50n":
-                return ['weather-fog'];
-            case "04d":
-                return ['weather_overcast', 'weather-clouds', "weather-few-clouds"];
-            case "04n":
-                return ['weather_overcast', 'weather-clouds', "weather-few-clouds-night"];
-            case "03n":
-                return ['weather-clouds-night', 'weather-few-clouds-night'];
-            case "03d":
-                return ['weather-clouds', 'weather-overcast', 'weather-few-clouds'];
-            case "02n":
-                return ['weather-few-clouds-night'];
-            case "02d":
-                return ['weather-few-clouds'];
-            case "01n":
-                return ['weather-clear-night'];
-            case "01d":
-                return ['weather-clear'];
-            case "11d":
-                return ['weather-storm'];
-            case "11n":
-                return ['weather-storm'];
-            default:
-                return ['weather-severe-alert'];
-        }
-    };
-    ;
-    return OpenWeatherMap;
-}());
-;
 function main(metadata, orientation, panelHeight, instanceId) {
     return new MyApplet(metadata, orientation, panelHeight, instanceId);
 }

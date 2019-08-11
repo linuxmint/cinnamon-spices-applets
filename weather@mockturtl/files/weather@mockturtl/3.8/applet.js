@@ -2,10 +2,9 @@ const DEBUG = false;
 const Cairo = imports.cairo;
 const Lang = imports.lang;
 const Main = imports.ui.main;
-const Mainloop = imports.mainloop;
+var Mainloop = imports.mainloop;
 const Gio = imports.gi.Gio;
 const Gtk = imports.gi.Gtk;
-const Cinnamon = imports.gi.Cinnamon;
 const Soup = imports.gi.Soup;
 const St = imports.gi.St;
 const Applet = imports.ui.applet;
@@ -13,6 +12,52 @@ const Config = imports.misc.config;
 const PopupMenu = imports.ui.popupMenu;
 const Settings = imports.ui.settings;
 const Util = imports.misc.util;
+function importModule(path) {
+    if (typeof require !== 'undefined') {
+        return require('./' + path);
+    }
+    else {
+        let AppletDir = imports.ui.appletManager.applets['weather@mockturtl'];
+        return AppletDir[path];
+    }
+}
+var utils = importModule("utils");
+var GetDayName = utils.GetDayName;
+var GetHoursMinutes = utils.GetHoursMinutes;
+if (typeof Promise != "function") {
+    var promisePoly = importModule("promise-polyfill");
+    var finallyConstructor = promisePoly.finallyConstructor;
+    var setTimeout = promisePoly.setTimeout;
+    var setTimeoutFunc = promisePoly.setTimeoutFunc;
+    var isArray = promisePoly.isArray;
+    var noop = promisePoly.noop;
+    var bind = promisePoly.bind;
+    var Promise = promisePoly.Promise;
+    var handle = promisePoly.handle;
+    var resolve = promisePoly.resolve;
+    var reject = promisePoly.reject;
+    var finale = promisePoly.finale;
+    var Handler = promisePoly.Handler;
+    var doResolve = promisePoly.doResolve;
+    Promise.prototype['catch'] = promisePoly.Promise.prototype['catch'];
+    Promise.prototype.then = promisePoly.Promise.prototype.then;
+    Promise.all = promisePoly.Promise.all;
+    Promise.resolve = promisePoly.Promise.resolve;
+    Promise.reject = promisePoly.Promise.reject;
+    Promise.race = promisePoly.Promise.race;
+    var globalNS = promisePoly.globalNS;
+    if (!('Promise' in globalNS)) {
+        globalNS['Promise'] = Promise;
+    }
+    else if (!globalNS.Promise.prototype['finally']) {
+        globalNS.Promise.prototype['finally'] = finallyConstructor;
+    }
+}
+const GLib = imports.gi.GLib;
+const Gettext = imports.gettext;
+var darkSky;
+var openWeatherMap;
+const ipApi = importModule('ipApi');
 const UUID = "weather@mockturtl";
 const APPLET_ICON = "view-refresh-symbolic";
 const REFRESH_ICON = "view-refresh";
@@ -28,43 +73,27 @@ const DATA_SERVICE = {
     DARK_SKY: "DarkSky",
 };
 const WEATHER_LOCATION = "location";
-const WEATHER_DATA_SERVICE = "dataService";
-const WEATHER_API_KEY = "apiKey";
-const WEATHER_CITY_KEY = 'locationLabelOverride';
-const WEATHER_REFRESH_INTERVAL = 'refreshInterval';
-const WEATHER_SHOW_COMMENT_IN_PANEL_KEY = 'showCommentInPanel';
-const WEATHER_VERTICAL_ORIENTATION_KEY = 'verticalOrientation';
-const WEATHER_SHOW_SUNRISE_KEY = 'showSunrise';
-const WEATHER_SHOW_24HOURS_KEY = 'show24Hours';
-const WEATHER_FORECAST_DAYS = 'forecastDays';
-const WEATHER_SHOW_TEXT_IN_PANEL_KEY = 'showTextInPanel';
-const WEATHER_TRANSLATE_CONDITION_KEY = 'translateCondition';
-const WEATHER_TEMPERATURE_UNIT_KEY = 'temperatureUnit';
-const WEATHER_TEMPERATURE_HIGH_FIRST_KEY = 'temperatureHighFirst';
-const WEATHER_PRESSURE_UNIT_KEY = 'pressureUnit';
 const WEATHER_USE_SYMBOLIC_ICONS_KEY = 'useSymbolicIcons';
-const WEATHER_WIND_SPEED_UNIT_KEY = 'windSpeedUnit';
-const WEATHER_SHORT_CONDITIONS_KEY = 'shortConditions';
-const WEATHER_MANUAL_LOCATION = "manualLocation";
-const KEYS = [,
-    WEATHER_DATA_SERVICE,
-    WEATHER_API_KEY,
-    WEATHER_TEMPERATURE_UNIT_KEY,
-    WEATHER_TEMPERATURE_HIGH_FIRST_KEY,
-    WEATHER_WIND_SPEED_UNIT_KEY,
-    WEATHER_CITY_KEY,
-    WEATHER_TRANSLATE_CONDITION_KEY,
-    WEATHER_VERTICAL_ORIENTATION_KEY,
-    WEATHER_SHOW_TEXT_IN_PANEL_KEY,
-    WEATHER_SHOW_COMMENT_IN_PANEL_KEY,
-    WEATHER_SHOW_SUNRISE_KEY,
-    WEATHER_SHOW_24HOURS_KEY,
-    WEATHER_FORECAST_DAYS,
-    WEATHER_REFRESH_INTERVAL,
-    WEATHER_PRESSURE_UNIT_KEY,
-    WEATHER_SHORT_CONDITIONS_KEY,
-    WEATHER_MANUAL_LOCATION
-];
+var KEYS;
+(function (KEYS) {
+    KEYS["WEATHER_DATA_SERVICE"] = "dataService";
+    KEYS["WEATHER_API_KEY"] = "apiKey";
+    KEYS["WEATHER_TEMPERATURE_UNIT_KEY"] = "temperatureUnit";
+    KEYS["WEATHER_TEMPERATURE_HIGH_FIRST_KEY"] = "temperatureHighFirst";
+    KEYS["WEATHER_WIND_SPEED_UNIT_KEY"] = "windSpeedUnit";
+    KEYS["WEATHER_CITY_KEY"] = "locationLabelOverride";
+    KEYS["WEATHER_TRANSLATE_CONDITION_KEY"] = "translateCondition";
+    KEYS["WEATHER_VERTICAL_ORIENTATION_KEY"] = "verticalOrientation";
+    KEYS["WEATHER_SHOW_TEXT_IN_PANEL_KEY"] = "showTextInPanel";
+    KEYS["WEATHER_SHOW_COMMENT_IN_PANEL_KEY"] = "showCommentInPanel";
+    KEYS["WEATHER_SHOW_SUNRISE_KEY"] = "showSunrise";
+    KEYS["WEATHER_SHOW_24HOURS_KEY"] = "show24Hours";
+    KEYS["WEATHER_FORECAST_DAYS"] = "forecastDays";
+    KEYS["WEATHER_REFRESH_INTERVAL"] = "refreshInterval";
+    KEYS["WEATHER_PRESSURE_UNIT_KEY"] = "pressureUnit";
+    KEYS["WEATHER_SHORT_CONDITIONS_KEY"] = "shortConditions";
+    KEYS["WEATHER_MANUAL_LOCATION"] = "manualLocation";
+})(KEYS || (KEYS = {}));
 const SIGNAL_CHANGED = 'changed::';
 const SIGNAL_CLICKED = 'clicked';
 const SIGNAL_REPAINT = 'repaint';
@@ -130,15 +159,10 @@ class Log {
         return arr;
     }
 }
-const GLib = imports.gi.GLib;
-const Gettext = imports.gettext;
 Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
 function _(str) {
     return Gettext.dgettext(UUID, str);
 }
-var darkSky;
-var openWeatherMap;
-const ipApi = require('./ipApi');
 class MyApplet extends Applet.TextIconApplet {
     constructor(metadata, orientation, panelHeight, instanceId) {
         super(orientation, panelHeight, instanceId);
@@ -251,15 +275,23 @@ class MyApplet extends Applet.TextIconApplet {
             this.refreshWeather();
         }));
         this._applet_context_menu.addMenuItem(refreshMenuItem);
-        let mainBox = new St.BoxLayout({ vertical: true });
+        let mainBox = new St.BoxLayout({
+            vertical: true
+        });
         this.menu.addActor(mainBox);
-        this._currentWeather = new St.Bin({ style_class: STYLE_CURRENT });
+        this._currentWeather = new St.Bin({
+            style_class: STYLE_CURRENT
+        });
         mainBox.add_actor(this._currentWeather);
-        this._separatorArea = new St.DrawingArea({ style_class: STYLE_POPUP_SEPARATOR_MENU_ITEM });
+        this._separatorArea = new St.DrawingArea({
+            style_class: STYLE_POPUP_SEPARATOR_MENU_ITEM
+        });
         this._separatorArea.width = 200;
         this._separatorArea.connect(SIGNAL_REPAINT, Lang.bind(this, this._onSeparatorAreaRepaint));
         mainBox.add_actor(this._separatorArea);
-        this._futureWeather = new St.Bin({ style_class: STYLE_FORECAST });
+        this._futureWeather = new St.Bin({
+            style_class: STYLE_FORECAST
+        });
         mainBox.add_actor(this._futureWeather);
         this.rebuild();
         this.refreshLoop();
@@ -406,26 +438,21 @@ class MyApplet extends Applet.TextIconApplet {
                     return;
                 }
             }
-            let refreshResult;
             switch (this._dataService) {
                 case DATA_SERVICE.DARK_SKY:
-                    if (darkSky == null) {
-                        darkSky = require('./darkSky');
-                    }
+                    if (darkSky == null)
+                        darkSky = importModule('darkSky');
                     this.provider = new darkSky.DarkSky(this);
-                    refreshResult = await this.provider.GetWeather();
                     break;
                 case DATA_SERVICE.OPEN_WEATHER_MAP:
-                    if (openWeatherMap == null) {
-                        openWeatherMap = require('./openWeatherMap');
-                    }
+                    if (openWeatherMap == null)
+                        openWeatherMap = importModule("openWeatherMap");
                     this.provider = new openWeatherMap.OpenWeatherMap(this);
-                    refreshResult = await this.provider.GetWeather();
                     break;
                 default:
                     return;
             }
-            if (!refreshResult) {
+            if (!await this.provider.GetWeather()) {
                 this.log.Error("Unable to obtain Weather Information");
                 this.lastUpdated = null;
                 return;
@@ -539,23 +566,9 @@ class MyApplet extends Applet.TextIconApplet {
             }
             let sunriseText = "";
             let sunsetText = "";
-            if (this.weather.sunrise != null && this.weather.sunset != null) {
-                if (this._showSunrise) {
-                    sunriseText = _('Sunrise');
-                    sunsetText = _('Sunset');
-                    if (this.weather.location.timeZone != null) {
-                        let sunrise = this.weather.sunrise.toLocaleString(this.currentLocale, { timeZone: this.weather.location.timeZone, hour: "numeric", minute: "numeric", hour12: !this._show24Hours });
-                        let sunset = this.weather.sunset.toLocaleString(this.currentLocale, { timeZone: this.weather.location.timeZone, hour: "numeric", minute: "numeric", hour12: !this._show24Hours });
-                        sunriseText = (sunriseText + ': ' + sunrise);
-                        sunsetText = (sunsetText + ': ' + sunset);
-                    }
-                    else {
-                        let sunrise = this.weather.sunrise.toLocaleString(this.currentLocale, { hour: "numeric", minute: "numeric", hour12: !this._show24Hours });
-                        let sunset = this.weather.sunset.toLocaleString(this.currentLocale, { hour: "numeric", minute: "numeric", hour12: !this._show24Hours });
-                        sunriseText = (sunriseText + ': ' + sunrise);
-                        sunsetText = (sunsetText + ': ' + sunset);
-                    }
-                }
+            if (this.weather.sunrise != null && this.weather.sunset != null && this._showSunrise) {
+                sunriseText = (_('Sunrise') + ': ' + GetHoursMinutes(this.weather.sunrise, this.currentLocale, this._show24Hours, this.weather.location.timeZone));
+                sunsetText = (_('Sunset') + ': ' + GetHoursMinutes(this.weather.sunset, this.currentLocale, this._show24Hours, this.weather.location.timeZone));
             }
             this._currentWeatherSunrise.text = sunriseText;
             this._currentWeatherSunset.text = sunsetText;
@@ -578,28 +591,14 @@ class MyApplet extends Applet.TextIconApplet {
                 let second_temperature = this._temperatureHighFirst ? t_low : t_high;
                 let comment = "";
                 if (forecastData.condition.main != null && forecastData.condition.description != null) {
-                    if (this._shortConditions) {
-                        comment = this.capitalizeFirstLetter(forecastData.condition.main);
-                        if (this._translateCondition) {
-                            comment = _(this.capitalizeFirstLetter(forecastData.condition.main));
-                        }
-                    }
-                    else {
-                        comment = this.capitalizeFirstLetter(forecastData.condition.description);
-                        if (this._translateCondition) {
-                            comment = _(this.capitalizeFirstLetter(forecastData.condition.description));
-                        }
-                    }
+                    comment = (this._shortConditions) ? forecastData.condition.main : forecastData.condition.description;
+                    comment = this.capitalizeFirstLetter(comment);
+                    if (this._translateCondition)
+                        comment = _(comment);
                 }
-                let dayName = "";
-                if (this.weather.location.timeZone != null) {
-                    this.log.Debug(forecastData.dateTime.toLocaleString(this.currentLocale, { timeZone: this.weather.location.timeZone }));
-                    dayName = _(this.capitalizeFirstLetter(forecastData.dateTime.toLocaleString(this.currentLocale, { timeZone: this.weather.location.timeZone, weekday: "long" })));
-                }
-                else {
+                if (this.weather.location.timeZone == null)
                     forecastData.dateTime.setMilliseconds(forecastData.dateTime.getMilliseconds() + (this.weather.location.tzOffset * 1000));
-                    dayName = _(this.capitalizeFirstLetter(forecastData.dateTime.toLocaleString(this.currentLocale, { timeZone: "UTC", weekday: "long" })));
-                }
+                let dayName = GetDayName(forecastData.dateTime, this.currentLocale, this.weather.location.timeZone);
                 if (forecastData.dateTime) {
                     let now = new Date();
                     if (forecastData.dateTime.getDate() == now.getDate())
@@ -615,7 +614,7 @@ class MyApplet extends Applet.TextIconApplet {
             return true;
         }
         catch (e) {
-            this.log.Error("DisplayForecastError" + e);
+            this.log.Error("DisplayForecastError " + e);
             return false;
         }
     }
@@ -660,8 +659,12 @@ class MyApplet extends Applet.TextIconApplet {
     showLoadingUi() {
         this.destroyCurrentWeather();
         this.destroyFutureWeather();
-        this._currentWeather.set_child(new St.Label({ text: _('Loading current weather ...') }));
-        this._futureWeather.set_child(new St.Label({ text: _('Loading future weather ...') }));
+        this._currentWeather.set_child(new St.Label({
+            text: _('Loading current weather ...')
+        }));
+        this._futureWeather.set_child(new St.Label({
+            text: _('Loading future weather ...')
+        }));
     }
     rebuild() {
         this.showLoadingUi();
@@ -699,25 +702,35 @@ class MyApplet extends Applet.TextIconApplet {
         });
         bb.add_actor(this._currentWeatherLocation);
         bb.add_actor(this._currentWeatherSummary);
-        let textOb = { text: ELLIPSIS };
+        let textOb = {
+            text: ELLIPSIS
+        };
         this._currentWeatherSunrise = new St.Label(textOb);
         this._currentWeatherSunset = new St.Label(textOb);
         let ab = new St.BoxLayout({
             style_class: STYLE_ASTRONOMY
         });
         ab.add_actor(this._currentWeatherSunrise);
-        let ab_spacerlabel = new St.Label({ text: BLANK });
+        let ab_spacerlabel = new St.Label({
+            text: BLANK
+        });
         ab.add_actor(ab_spacerlabel);
         ab.add_actor(this._currentWeatherSunset);
-        let bb_spacerlabel = new St.Label({ text: BLANK });
+        let bb_spacerlabel = new St.Label({
+            text: BLANK
+        });
         bb.add_actor(bb_spacerlabel);
         bb.add_actor(ab);
         this._currentWeatherTemperature = new St.Label(textOb);
         this._currentWeatherHumidity = new St.Label(textOb);
         this._currentWeatherPressure = new St.Label(textOb);
         this._currentWeatherWind = new St.Label(textOb);
-        this._currentWeatherApiUnique = new St.Label({ text: '' });
-        this._currentWeatherApiUniqueCap = new St.Label({ text: '' });
+        this._currentWeatherApiUnique = new St.Label({
+            text: ''
+        });
+        this._currentWeatherApiUniqueCap = new St.Label({
+            text: ''
+        });
         let rb = new St.BoxLayout({
             style_class: STYLE_DATABOX
         });
@@ -731,13 +744,21 @@ class MyApplet extends Applet.TextIconApplet {
         });
         rb.add_actor(rb_captions);
         rb.add_actor(rb_values);
-        rb_captions.add_actor(new St.Label({ text: _('Temperature:') }));
+        rb_captions.add_actor(new St.Label({
+            text: _('Temperature:')
+        }));
         rb_values.add_actor(this._currentWeatherTemperature);
-        rb_captions.add_actor(new St.Label({ text: _('Humidity:') }));
+        rb_captions.add_actor(new St.Label({
+            text: _('Humidity:')
+        }));
         rb_values.add_actor(this._currentWeatherHumidity);
-        rb_captions.add_actor(new St.Label({ text: _('Pressure:') }));
+        rb_captions.add_actor(new St.Label({
+            text: _('Pressure:')
+        }));
         rb_values.add_actor(this._currentWeatherPressure);
-        rb_captions.add_actor(new St.Label({ text: _('Wind:') }));
+        rb_captions.add_actor(new St.Label({
+            text: _('Wind:')
+        }));
         rb_values.add_actor(this._currentWeatherWind);
         rb_captions.add_actor(this._currentWeatherApiUniqueCap);
         rb_values.add_actor(this._currentWeatherApiUnique);
@@ -755,7 +776,8 @@ class MyApplet extends Applet.TextIconApplet {
     rebuildFutureWeatherUi() {
         this.destroyFutureWeather();
         this._forecast = [];
-        this._forecastBox = new St.BoxLayout({ vertical: this._verticalOrientation,
+        this._forecastBox = new St.BoxLayout({
+            vertical: this._verticalOrientation,
             style_class: STYLE_FORECAST_CONTAINER
         });
         this._futureWeather.set_child(this._forecastBox);
@@ -902,10 +924,6 @@ class MyApplet extends Applet.TextIconApplet {
     }
     nonempty(str) {
         return (str != null && str.length > 0);
-    }
-    getDayName(dayNum) {
-        let days = [_('Sunday'), _('Monday'), _('Tuesday'), _('Wednesday'), _('Thursday'), _('Friday'), _('Saturday')];
-        return days[dayNum];
     }
     compassDirection(deg) {
         let directions = [_('N'), _('NE'), _('E'), _('SE'), _('S'), _('SW'), _('W'), _('NW')];

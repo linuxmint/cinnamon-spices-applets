@@ -260,7 +260,9 @@ declare module imports {
         }
     }
     export module mainloop {
-        export function timeout_add_seconds(seconds: number, binding: Function): void;
+        export function timeout_add_seconds(seconds: number, binding: () => any): void;
+        export function timeout_add(milliseconds: number, binding: () => any, errorCallback: () => null): void;
+        export function source_remove(id: any): void;
     }
     export module gi {
         export module Gio {
@@ -278,6 +280,10 @@ declare module imports {
             export class Theme {
                 has_icon(iconName: string): boolean;
             }
+        }
+        export module GObject {
+            /** Cannot init module without content */
+            const placeholder = "";
         }
         export module Cinnamon {
             function util_format_date(format: string, milliseconds: number): string;
