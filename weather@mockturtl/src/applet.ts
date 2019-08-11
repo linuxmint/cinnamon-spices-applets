@@ -194,6 +194,7 @@ const STYLE_DATABOX_VALUES = 'weather-current-databox-values'
 const STYLE_FORECAST_SUMMARY = 'weather-forecast-summary'
 const STYLE_FORECAST_TEMPERATURE = 'weather-forecast-temperature'
 const STYLE_FORECAST_BOX = 'weather-forecast-box'
+const STYLE_FORECAST_CONTAINER = 'weather-forecast-container'
 const STYLE_PANEL_BUTTON = 'panel-button'
 const STYLE_POPUP_SEPARATOR_MENU_ITEM = 'popup-separator-menu-item'
 const STYLE_CURRENT = 'current'
@@ -613,7 +614,6 @@ class MyApplet extends Applet.TextIconApplet {
     let gradientWidth = (width - margin * 2)
     let gradientOffset = (height - gradientHeight) / 2
     let pattern = new Cairo.LinearGradient(margin, gradientOffset, width - margin, gradientOffset + gradientHeight)
-
     pattern.addColorStopRGBA(0, startColor.red / 255, startColor.green / 255, startColor.blue / 255, startColor.alpha / 255)
     pattern.addColorStopRGBA(0.5, endColor.red / 255, endColor.green / 255, endColor.blue / 255, endColor.alpha / 255)
     pattern.addColorStopRGBA(1, startColor.red / 255, startColor.green / 255, startColor.blue / 255, startColor.alpha / 255)
@@ -1103,7 +1103,11 @@ rebuildFutureWeatherUi(): void {
   this.destroyFutureWeather();
 
   this._forecast = []
-  this._forecastBox = new St.BoxLayout({ vertical: this._verticalOrientation })
+  this._forecastBox = new St.BoxLayout(
+    { vertical: this._verticalOrientation,
+      style_class: STYLE_FORECAST_CONTAINER 
+    }
+  )
   this._futureWeather.set_child(this._forecastBox)
 
   for (let i = 0; i < this._forecastDays; i++) {
@@ -1112,7 +1116,6 @@ rebuildFutureWeatherUi(): void {
       Day: new St.Label,
       Summary: new St.Label,
       Temperature: new St.Label,
-
     }
 
     forecastWeather.Icon = new St.Icon({

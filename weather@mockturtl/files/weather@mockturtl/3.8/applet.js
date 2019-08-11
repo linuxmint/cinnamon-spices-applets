@@ -84,6 +84,7 @@ const STYLE_DATABOX_VALUES = 'weather-current-databox-values';
 const STYLE_FORECAST_SUMMARY = 'weather-forecast-summary';
 const STYLE_FORECAST_TEMPERATURE = 'weather-forecast-temperature';
 const STYLE_FORECAST_BOX = 'weather-forecast-box';
+const STYLE_FORECAST_CONTAINER = 'weather-forecast-container';
 const STYLE_PANEL_BUTTON = 'panel-button';
 const STYLE_POPUP_SEPARATOR_MENU_ITEM = 'popup-separator-menu-item';
 const STYLE_CURRENT = 'current';
@@ -754,7 +755,9 @@ class MyApplet extends Applet.TextIconApplet {
     rebuildFutureWeatherUi() {
         this.destroyFutureWeather();
         this._forecast = [];
-        this._forecastBox = new St.BoxLayout({ vertical: this._verticalOrientation });
+        this._forecastBox = new St.BoxLayout({ vertical: this._verticalOrientation,
+            style_class: STYLE_FORECAST_CONTAINER
+        });
         this._futureWeather.set_child(this._forecastBox);
         for (let i = 0; i < this._forecastDays; i++) {
             let forecastWeather = {
