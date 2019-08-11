@@ -35,3 +35,15 @@ const setInterval = function(func: any, ms: number) {
 const clearInterval = function(id: any) {
   Mainloop.source_remove(id);
 };
+
+
+var tzSupported = function(): boolean {
+    var date = new Date();
+    try {
+        date.toLocaleString('en-GB', {timeZone: 'Europe/London'});
+        return true;
+    }
+    catch(e) {
+        return false;
+    }
+}

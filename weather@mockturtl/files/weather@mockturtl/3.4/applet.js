@@ -70,8 +70,9 @@ function importModule(path) {
         return AppletDir[path];
     }
 }
+var utils = importModule("utils");
+var tzSupported = utils.tzSupported;
 if (!setTimeout) {
-    var utils = importModule("utils");
     var setTimeout = utils.setTimeout;
 }
 if (!Promise) {
@@ -641,7 +642,7 @@ var MyApplet = (function (_super) {
                 if (this._showSunrise) {
                     sunriseText = _('Sunrise');
                     sunsetText = _('Sunset');
-                    if (this.weather.location.timeZone != null) {
+                    if (this.weather.location.timeZone != null && tzSupported()) {
                         var sunrise = this.weather.sunrise.toLocaleString(this.currentLocale, { timeZone: this.weather.location.timeZone, hour: "numeric", minute: "numeric", hour12: !this._show24Hours });
                         var sunset = this.weather.sunset.toLocaleString(this.currentLocale, { timeZone: this.weather.location.timeZone, hour: "numeric", minute: "numeric", hour12: !this._show24Hours });
                         sunriseText = (sunriseText + ': ' + sunrise);
@@ -690,7 +691,7 @@ var MyApplet = (function (_super) {
                     }
                 }
                 var dayName = "";
-                if (this.weather.location.timeZone != null) {
+                if (this.weather.location.timeZone != null && tzSupported()) {
                     this.log.Debug(forecastData.dateTime.toLocaleString(this.currentLocale, { timeZone: this.weather.location.timeZone }));
                     dayName = _(this.capitalizeFirstLetter(forecastData.dateTime.toLocaleString(this.currentLocale, { timeZone: this.weather.location.timeZone, weekday: "long" })));
                 }

@@ -27,3 +27,13 @@ var setInterval = function (func, ms) {
 var clearInterval = function (id) {
     Mainloop.source_remove(id);
 };
+var tzSupported = function () {
+    var date = new Date();
+    try {
+        date.toLocaleString('en-GB', { timeZone: 'Europe/London' });
+        return true;
+    }
+    catch (e) {
+        return false;
+    }
+};

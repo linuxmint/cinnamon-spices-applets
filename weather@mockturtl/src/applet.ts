@@ -40,14 +40,17 @@ function importModule(path: string): any {
   }
 }
 
+var utils = importModule("utils");
+var tzSupported = utils.tzSupported as () => boolean;
 if (!setTimeout) {
-  let utils = importModule("utils");
   var setTimeout = utils.setTimeout as (func: any, ms: number) => void;
 }
 
 if (!Promise) {
   importModule("promise-polyfill");
 }
+
+
 
 //----------------------------------------------------------------
 //
@@ -787,7 +790,7 @@ class MyApplet extends Applet.TextIconApplet {
         if (this._showSunrise) {
           sunriseText = _('Sunrise');
           sunsetText = _('Sunset');
-          if (this.weather.location.timeZone != null) {     //have TZ, en-GB returns time in the correct format
+          if (this.weather.location.timeZone != null && tzSupported()) {     //have TZ, en-GB returns time in the correct format
               let sunrise = this.weather.sunrise.toLocaleString(this.currentLocale, {timeZone: this.weather.location.timeZone, hour: "numeric", minute: "numeric", hour12: !this._show24Hours});
               let sunset = this.weather.sunset.toLocaleString(this.currentLocale, {timeZone: this.weather.location.timeZone, hour: "numeric", minute: "numeric", hour12: !this._show24Hours});
               sunriseText = (sunriseText + ': ' + sunrise);
@@ -843,7 +846,7 @@ class MyApplet extends Applet.TextIconApplet {
 
         // Day Names
         let dayName: string = "";
-        if (this.weather.location.timeZone != null) {
+        if (this.weather.location.timeZone != null && tzSupported()) {
            this.log.Debug(forecastData.dateTime.toLocaleString(this.currentLocale, {timeZone: this.weather.location.timeZone}));
            dayName = _(this.capitalizeFirstLetter(forecastData.dateTime.toLocaleString(this.currentLocale, {timeZone: this.weather.location.timeZone, weekday: "long"})));
         }
