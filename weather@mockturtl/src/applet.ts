@@ -42,12 +42,34 @@ function importModule(path: string): any {
 
 var utils = importModule("utils");
 var tzSupported = utils.tzSupported as () => boolean;
-if (!setTimeout) {
-  var setTimeout = utils.setTimeout as (func: any, ms: number) => void;
-}
 
 if (!Promise) {
-  importModule("promise-polyfill");
+  var promisePoly = importModule("promise-polyfill");
+  var finallyConstructor = promisePoly.finallyConstructor;
+  var setTimeout = promisePoly.setTimeout as (func: any, ms: number) => void;
+  var setTimeoutFunc = promisePoly.setTimeoutFunc;
+  var isArray = promisePoly.isArray;
+  var noop = promisePoly.noop;
+  var bind = promisePoly.bind;
+  var Promise = promisePoly.Promise as PromiseConstructor;
+  var handle = promisePoly.handle;
+  var resolve = promisePoly.resolve;
+  var reject = promisePoly.reject;
+  var finale = promisePoly.finale;
+  var Handler = promisePoly.Handler;
+  var doResolve = promisePoly.doResolve;
+  Promise.prototype['catch'] = promisePoly.Promise.prototype['catch'];
+  Promise.prototype.then = promisePoly.Promise.prototype.then;
+  Promise.all = promisePoly.Promise.all;
+  Promise.resolve = promisePoly.Promise.resolve;
+  Promise.reject = promisePoly.Promise.reject;
+  Promise.race = promisePoly.Promise.race;
+  var globalNS = promisePoly.globalNS;
+  if (!('Promise' in globalNS)) {
+    globalNS['Promise'] = Promise;
+  } else if (!globalNS.Promise.prototype['finally']) {
+    globalNS.Promise.prototype['finally'] = finallyConstructor;
+  }
 }
 
 
