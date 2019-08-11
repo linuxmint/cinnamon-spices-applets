@@ -8,7 +8,7 @@
         "preserveConstEnums": true,
         "sourceMap": false,
         "experimentalDecorators": true,
-        "outDir": "files/weather@mockturtl/3.4/"
+        "outDir": "files/weather@mockturtl/3.0/"
     },
     "include": [
         "src/**/*"

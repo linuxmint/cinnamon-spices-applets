@@ -1,37 +1,37 @@
 var Mainloop = imports.mainloop;
-const Cinnamon = imports.gi.Cinnamon;
+var Cinnamon = imports.gi.Cinnamon;
 var setTimeout = function (func, ms) {
-    let args = [];
+    var args = [];
     if (arguments.length > 2) {
         args = args.slice.call(arguments, 2);
     }
-    let id = Mainloop.timeout_add(ms, () => {
+    var id = Mainloop.timeout_add(ms, function () {
         func.apply(null, args);
         return false;
     }, null);
     return id;
 };
-const clearTimeout = function (id) {
+var clearTimeout = function (id) {
     Mainloop.source_remove(id);
 };
-const setInterval = function (func, ms) {
-    let args = [];
+var setInterval = function (func, ms) {
+    var args = [];
     if (arguments.length > 2) {
         args = args.slice.call(arguments, 2);
     }
-    let id = Mainloop.timeout_add(ms, () => {
+    var id = Mainloop.timeout_add(ms, function () {
         func.apply(null, args);
         return true;
     }, null);
     return id;
 };
-const clearInterval = function (id) {
+var clearInterval = function (id) {
     Mainloop.source_remove(id);
 };
 var isLocaleStringSupported = function () {
-    let date = new Date(1565548657987);
+    var date = new Date(1565548657987);
     try {
-        let output = date.toLocaleString('en-GB', { timeZone: 'Europe/London', hour: "numeric" });
+        var output = date.toLocaleString('en-GB', { timeZone: 'Europe/London', hour: "numeric" });
         if (output !== "19")
             return "none";
         return "full";
@@ -41,7 +41,7 @@ var isLocaleStringSupported = function () {
     }
 };
 var GetDayName = function (date, locale, tz) {
-    let support = isLocaleStringSupported();
+    var support = isLocaleStringSupported();
     if (!tz && support == "full")
         support = "notz";
     switch (support) {
@@ -55,7 +55,7 @@ var GetDayName = function (date, locale, tz) {
     }
 };
 var GetHoursMinutes = function (date, locale, hours24Format, tz) {
-    let support = isLocaleStringSupported();
+    var support = isLocaleStringSupported();
     if (!tz && support == "full")
         support = "notz";
     switch (support) {
@@ -69,12 +69,12 @@ var GetHoursMinutes = function (date, locale, hours24Format, tz) {
     }
 };
 var getDayName = function (dayNum) {
-    let days = [_('Sunday'), _('Monday'), _('Tuesday'), _('Wednesday'), _('Thursday'), _('Friday'), _('Saturday')];
+    var days = [_('Sunday'), _('Monday'), _('Tuesday'), _('Wednesday'), _('Thursday'), _('Friday'), _('Saturday')];
     return days[dayNum];
 };
 var timeToUserUnits = function (date, show24Hours) {
-    let timeStr = Cinnamon.util_format_date('%H:%M', date.getTime());
-    let time = timeStr.split(':');
+    var timeStr = Cinnamon.util_format_date('%H:%M', date.getTime());
+    var time = timeStr.split(':');
     if (time[0].charAt(0) == "0") {
         time[0] = time[0].substr(1);
     }
