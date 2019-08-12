@@ -1,3 +1,6 @@
+### v3.0.1~20190812
+  * Fixes notification button issue (#2360)
+
 ### v3.0.0~20190808
   * Now compatible with Cinnamon 2.8 -> 4.2 (Mint 17.3 -> 19.2)!
    * From Cinnamon 3.8 to 4.2 (Mint 19 -> 19.2): Perfectly functional, as usual.
