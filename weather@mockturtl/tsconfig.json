@@ -8,8 +8,6 @@
         "preserveConstEnums": true,
         "sourceMap": false,
         //"experimentalDecorators": true,
-        "noLib": true,
-        "isolatedModules": true
     },
     "include": [
         "src/**/*"
