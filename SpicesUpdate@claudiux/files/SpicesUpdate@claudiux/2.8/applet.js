@@ -573,7 +573,7 @@ SpicesUpdate.prototype = {
       this.notifications.push(notification);
       notification.connect('action-invoked', Lang.bind(this, function(self, action) {
             if (action == "spices-update") {
-              Util.spawnCommandLine("%s/open_download_tab.py %s".format(SCRIPTS_DIR, type.toString()));
+              Util.spawnCommandLine("cinnamon-settings %s".format(type.toString()));
             } else {
               if (this.force_notifications === true) {
                 while (this.notifications.length != 0) {
