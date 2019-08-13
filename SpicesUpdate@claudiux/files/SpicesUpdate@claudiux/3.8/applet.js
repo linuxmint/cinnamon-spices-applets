@@ -176,10 +176,11 @@ class SpicesUpdate extends Applet.TextIconApplet {
     super(orientation, panelHeight, instance_id);
     this.instanceId = instance_id;
     this.setAllowedLayout(Applet.AllowedLayout.BOTH); // Can be used on horizontal or vertical panels.
-    this.appletPath = metadata.path;
+    //this.appletPath = metadata.path;
     Gtk.IconTheme.get_default().append_search_path(ICONS_DIR);
     this.set_applet_icon_symbolic_name("spices-update");
-    this.set_applet_tooltip(_("Spices Update"));
+    this.default_tooltip = _("Spices Update") + " " + metadata.version;
+    this.set_applet_tooltip(this.default_tooltip);
 
     // Be sure the scripts are executable:
     GLib.spawn_command_line_async("bash -c 'cd %s && chmod 755 *.py *.sh'".format(SCRIPTS_DIR));
@@ -1558,7 +1559,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
       }
     }
     if (this.nb_to_update > 0 || this.nb_to_watch > 0) {
-      var _tooltip = _("Spices Update");
+      var _tooltip = this.default_tooltip;
       for (let type of TYPES) {
         // \uD83D\uDDD8
         // \u2605
@@ -1571,7 +1572,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
       this.numberLabel.text = (this.nb_to_update + this.nb_to_watch).toString();
       this.badge.show();
     } else {
-      this.set_applet_tooltip(_("Spices Update"));
+      this.set_applet_tooltip(this.default_tooltip);
       this.numberLabel.text = '';
       this.badge.hide();
     }

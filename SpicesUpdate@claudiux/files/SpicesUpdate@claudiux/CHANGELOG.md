@@ -1,3 +1,6 @@
+### v3.0.2~20190813
+  * Show Spices Update version in tooltip
+
 ### v3.0.1~20190812
   * Fixes notification button issue (#2360)
 
