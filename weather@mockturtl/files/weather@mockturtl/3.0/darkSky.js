@@ -40,7 +40,8 @@ function importModule(path) {
         return require('./' + path);
     }
     else {
-        var AppletDir = imports.ui.appletManager.applets['weather@mockturtl'];
+        if (!AppletDir)
+            var AppletDir = imports.ui.appletManager.applets['weather@mockturtl'];
         return AppletDir[path];
     }
 }
@@ -50,6 +51,8 @@ var isLangSupported = utils.isLangSupported;
 var FahrenheitToKelvin = utils.FahrenheitToKelvin;
 var CelsiusToKelvin = utils.CelsiusToKelvin;
 var MPHtoMPS = utils.MPHtoMPS;
+var icons = utils.icons;
+var weatherIconSafely = utils.weatherIconSafely;
 var DarkSky = (function () {
     function DarkSky(_app) {
         this.descriptionLinelength = 25;
@@ -60,6 +63,7 @@ var DarkSky = (function () {
             'sv', 'tet', 'tr', 'uk', 'x-pig-latin', 'zh', 'zh-tw'
         ];
         this.query = "https://api.darksky.net/forecast/";
+        this.DarkSkyFilterWords = [_("and"), _("until"), _("in")];
         this.unit = null;
         this.app = _app;
     }
@@ -121,7 +125,7 @@ var DarkSky = (function () {
             this.app.weather.main.humidity = json.currently.humidity * 100;
             this.app.weather.condition.main = this.GetShortCurrentSummary(json.currently.summary);
             this.app.weather.condition.description = json.currently.summary;
-            this.app.weather.condition.icon = this.app.weatherIconSafely(json.currently.icon, this.ResolveIcon);
+            this.app.weather.condition.icon = weatherIconSafely(this.ResolveIcon(json.currently.icon), this.app._icon_type);
             this.app.weather.cloudiness = json.currently.cloudCover * 100;
             this.app.weather.main.feelsLike = this.ToKelvin(json.currently.apparentTemperature);
             for (var i = 0; i < this.app._forecastDays; i++) {
@@ -155,10 +159,11 @@ var DarkSky = (function () {
                 forecast.main.temp_max = this.ToKelvin(day.temperatureHigh);
                 forecast.condition.main = this.GetShortSummary(day.summary);
                 forecast.condition.description = this.ProcessSummary(day.summary);
-                forecast.condition.icon = this.app.weatherIconSafely(day.icon, this.ResolveIcon);
+                forecast.condition.icon = weatherIconSafely(this.ResolveIcon(day.icon), this.app._icon_type);
                 forecast.main.pressure = day.pressure;
                 forecast.main.humidity = day.humidity * 100;
                 this.app.forecasts.push(forecast);
+                return true;
             }
         }
         catch (e) {
@@ -166,7 +171,6 @@ var DarkSky = (function () {
             this.app.showError(this.app.errMsg.label.generic, this.app.errMsg.desc.parse);
             return false;
         }
-        return true;
     };
     ;
     DarkSky.prototype.ConstructQuery = function () {
@@ -225,7 +229,7 @@ var DarkSky = (function () {
         var processed = summary.split(" ");
         var result = "";
         for (var i = 0; i < 2; i++) {
-            if (!/[\(\)]/.test(processed[i]) && (this.app.DarkSkyFilterWords.indexOf(processed[i]) != -1)) {
+            if (!/[\(\)]/.test(processed[i]) && (this.DarkSkyFilterWords.indexOf(processed[i]) != -1)) {
                 result = result + processed[i] + " ";
             }
         }
@@ -247,29 +251,29 @@ var DarkSky = (function () {
     DarkSky.prototype.ResolveIcon = function (icon) {
         switch (icon) {
             case "rain":
-                return ['weather-rain', 'weather-showers-scattered', 'weather-freezing-rain'];
+                return [icons.rain, icons.showers_scattered, icons.rain_freezing];
             case "snow":
-                return ['weather-snow'];
+                return [icons.snow];
             case "fog":
-                return ['weather-fog'];
+                return [icons.fog];
             case "cloudy":
-                return ['weather-overcast', 'weather-clouds', , 'weather-few-clouds'];
+                return [icons.overcast, icons.clouds, icons.few_clouds_day];
             case "partly-cloudy-night":
-                return ['weather-few-clouds-night', "weather-few-clouds"];
+                return [icons.few_clouds_night, icons.few_clouds_day];
             case "partly-cloudy-day":
-                return ['weather-few-clouds'];
+                return [icons.few_clouds_day];
             case "clear-night":
-                return ['weather-clear-night'];
+                return [icons.clear_night];
             case "clear-day":
-                return ['weather-clear'];
+                return [icons.clear_day];
             case "storm":
-                return ['weather-storm'];
+                return [icons.storm];
             case "showers":
-                return ['weather-showers'];
+                return [icons.showers];
             case "wind":
-                return ["weather-wind", "wind", "weather-breeze", 'weather-clouds', 'weather-few-clouds'];
+                return ["weather-wind", "wind", "weather-breeze", icons.clouds, icons.few_clouds_day];
             default:
-                return ['weather-severe-alert'];
+                return [icons.alert];
         }
     };
     ;

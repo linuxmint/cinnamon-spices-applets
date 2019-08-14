@@ -4,10 +4,10 @@ function importModule(path: string): any {
     if (typeof require !== 'undefined') {
       return require('./' + path);
     } else {
-      let AppletDir = imports.ui.appletManager.applets['weather@mockturtl'];
+      if (!AppletDir) var AppletDir = imports.ui.appletManager.applets['weather@mockturtl'];
       return AppletDir[path];
     }
-}
+  }
 
 var utils = importModule("utils");
 var isCoordinate = utils.isCoordinate as (text: any) => boolean;
@@ -15,6 +15,8 @@ var isLangSupported = utils.isLangSupported as (lang: string, languages: Array <
 var FahrenheitToKelvin = utils.FahrenheitToKelvin as (fahr: number) => number;
 var CelsiusToKelvin = utils.CelsiusToKelvin as (celsius: number) => number;
 var MPHtoMPS = utils.MPHtoMPS as (speed: number) => number;
+var icons = utils.icons;
+var weatherIconSafely = utils.weatherIconSafely as (code: string[], icon_type: string) => string;
 
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
@@ -37,19 +39,22 @@ class DarkSky implements WeatherProvider {
         'sv', 'tet', 'tr', 'uk', 'x-pig-latin', 'zh', 'zh-tw'];
 
     query = "https://api.darksky.net/forecast/";
+
+      // DarkSky Filter words for short conditions, won't work on every language
+    DarkSkyFilterWords = [_("and"), _("until"), _("in")];
     
     unit: queryUnits = null;
 
-    app: MyApplet
+    app: WeatherApplet
 
-    constructor(_app: MyApplet) {
+    constructor(_app: WeatherApplet) {
         this.app = _app;
     }
 
     //--------------------------------------------------------
     //  Functions
     //--------------------------------------------------------
-    async GetWeather() {
+    async GetWeather(): Promise<boolean> {
         let query = this.ConstructQuery();
         let json;
         if (query != "" && query != null) {
@@ -81,7 +86,7 @@ class DarkSky implements WeatherProvider {
     };
 
 
-    ParseWeather(json: any) {
+    ParseWeather(json: any): boolean {
         try {
             // Current Weather
             this.app.weather.dateTime = new Date(json.currently.time * 1000);
@@ -98,7 +103,7 @@ class DarkSky implements WeatherProvider {
                 // Using Summary for both, only short description available
             this.app.weather.condition.main = this.GetShortCurrentSummary(json.currently.summary);        
             this.app.weather.condition.description = json.currently.summary;
-            this.app.weather.condition.icon = this.app.weatherIconSafely(json.currently.icon, this.ResolveIcon);
+            this.app.weather.condition.icon = weatherIconSafely(this.ResolveIcon(json.currently.icon), this.app._icon_type);
             this.app.weather.cloudiness = json.currently.cloudCover * 100;
             this.app.weather.main.feelsLike = this.ToKelvin(json.currently.apparentTemperature); //convert
             // Forecast
@@ -137,12 +142,13 @@ class DarkSky implements WeatherProvider {
                   forecast.main.temp_max = this.ToKelvin(day.temperatureHigh);
                   forecast.condition.main = this.GetShortSummary(day.summary);
                   forecast.condition.description = this.ProcessSummary(day.summary);
-                  forecast.condition.icon = this.app.weatherIconSafely(day.icon, this.ResolveIcon);
+                  forecast.condition.icon = weatherIconSafely(this.ResolveIcon(day.icon), this.app._icon_type);
                   forecast.main.pressure = day.pressure;
                   forecast.main.humidity = day.humidity * 100;
 
 
                   this.app.forecasts.push(forecast);
+                  return true;
             }
         }
         catch(e) {
@@ -150,11 +156,10 @@ class DarkSky implements WeatherProvider {
             this.app.showError(this.app.errMsg.label.generic, this.app.errMsg.desc.parse);
             return false;
         }
-        return true;
     };
 
 
-    ConstructQuery() {
+    ConstructQuery(): string {
         this.SetQueryUnit();
         let query;
         let key = this.app._apiKey.replace(" ", "");
@@ -177,7 +182,7 @@ class DarkSky implements WeatherProvider {
     };
 
 
-    HandleResponseErrors(json: any) {
+    HandleResponseErrors(json: any): void {
         let code = json.code;
         let error = json.error;
         let errorMsg = "DarkSky API: "
@@ -192,7 +197,7 @@ class DarkSky implements WeatherProvider {
         }
     };
 
-    ProcessSummary(summary: string) {
+    ProcessSummary(summary: string): string {
         let processed = summary.split(" ");
         let result = "";
         let linelength = 0;
@@ -207,18 +212,18 @@ class DarkSky implements WeatherProvider {
         return result;
     };
 
-    GetShortSummary(summary: string) {
+    GetShortSummary(summary: string): string {
         let processed = summary.split(" ");
         let result = "";
         for (let i = 0; i < 2; i++) {
-            if (!/[\(\)]/.test(processed[i]) && (this.app.DarkSkyFilterWords.indexOf(processed[i]) != -1)) {
+            if (!/[\(\)]/.test(processed[i]) && (this.DarkSkyFilterWords.indexOf(processed[i]) != -1)) {
                 result = result + processed[i] + " ";
             }
         }
         return result;
     };
 
-    GetShortCurrentSummary(summary: string) {
+    GetShortCurrentSummary(summary: string): string {
         let processed = summary.split(" ");
         let result = "";
         let maxLoop;
@@ -231,14 +236,14 @@ class DarkSky implements WeatherProvider {
         return result;
     }
 
-    ResolveIcon(icon: string) {
+    ResolveIcon(icon: string): string[] {
         switch (icon) {
             case "rain":
-              return ['weather-rain', 'weather-showers-scattered', 'weather-freezing-rain']
+              return [icons.rain, icons.showers_scattered, icons.rain_freezing]
             case "snow":
-              return ['weather-snow']
+              return [icons.snow]
             case "fog":
-              return ['weather-fog']
+              return [icons.fog]
            // case "04d":/* broken clouds day */
            //   return ['weather_overcast', 'weather-clouds', "weather-few-clouds"]
             //case "04n":/* broken clouds night */
@@ -246,29 +251,29 @@ class DarkSky implements WeatherProvider {
            // case "03n":/* mostly cloudy (night) */
            //   return ['weather-clouds-night', 'weather-few-clouds-night']
             case "cloudy":/* mostly cloudy (day) */
-              return ['weather-overcast', 'weather-clouds', , 'weather-few-clouds']
+              return [icons.overcast, icons.clouds, icons.few_clouds_day]
             case "partly-cloudy-night":
-              return ['weather-few-clouds-night', "weather-few-clouds"]
+              return [icons.few_clouds_night, icons.few_clouds_day]
             case "partly-cloudy-day":
-              return ['weather-few-clouds']
+              return [icons.few_clouds_day]
             case "clear-night":
-              return ['weather-clear-night']
+              return [icons.clear_night]
             case "clear-day":
-              return ['weather-clear']
+              return [icons.clear_day]
             // Have not seen Storm or Showers icons returned yet
             case "storm":
-              return ['weather-storm']
+              return [icons.storm]
             case "showers":
-              return ['weather-showers']
+              return [icons.showers]
             // There is no guarantee that there is a wind icon
             case "wind":
-                return ["weather-wind", "wind", "weather-breeze", 'weather-clouds', 'weather-few-clouds']
+                return ["weather-wind", "wind", "weather-breeze", icons.clouds, icons.few_clouds_day]
             default:
-              return ['weather-severe-alert']
+              return [icons.alert]
           }
     };
 
-    SetQueryUnit() {
+    SetQueryUnit(): void {
         if (this.app._temperatureUnit == "celsius"){
             if (this.app._windSpeedUnit == "kph" || this.app._windSpeedUnit == "m/s") {
                 this.unit = 'si';
@@ -282,7 +287,7 @@ class DarkSky implements WeatherProvider {
         }
     };
 
-    ToKelvin(temp: number) {
+    ToKelvin(temp: number): number {
         if (this.unit == 'us') {
             return FahrenheitToKelvin(temp);
         }
@@ -292,7 +297,7 @@ class DarkSky implements WeatherProvider {
 
     };
 
-    ToMPS(speed: number) {
+    ToMPS(speed: number): number {
         if (this.unit == 'si') {
             return speed;
         }

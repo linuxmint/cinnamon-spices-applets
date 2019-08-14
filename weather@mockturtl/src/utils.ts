@@ -2,6 +2,8 @@ export {}; // Declaring as a Module
 
 var Mainloop = imports.mainloop;
 const Cinnamon = imports.gi.Cinnamon;
+const St = imports.gi.St;
+const Gtk = imports.gi.Gtk;
 
 var setTimeout = function(func: any, ms: number) {
   let args: any[] = [];
@@ -226,3 +228,33 @@ var isLangSupported = function(lang: string, languages: Array < string > ): bool
     }
     return false;
 };
+
+const icons = {
+  clear_day: 'weather-clear',
+  clear_night: 'weather-clear-night',
+  few_clouds_day: 'weather-few-clouds',
+  few_clouds_night: 'weather-few-clouds-night',
+  clouds: 'weather-clouds',
+  overcast: 'weather_overcast',
+  showers_scattered: 'weather-showers-scattered',
+  showers: 'weather-showers',
+  rain: 'weather-rain',
+  rain_freezing: 'weather-freezing-rain',
+  snow: 'weather-snow',
+  storm: 'weather-storm',
+  fog: 'weather-fog',
+  alert: 'weather-severe-alert'
+}
+
+  // Passing appropriate resolver function for the API, and the code
+var weatherIconSafely = function (code: string[], icon_type: string): string {
+    for (let i = 0; i < code.length; i++) {
+      if (hasIcon(code[i], icon_type))
+        return code[i]
+    }
+    return 'weather-severe-alert'
+  }
+
+var hasIcon = function (icon: string, icon_type: string): boolean {
+    return Gtk.IconTheme.get_default().has_icon(icon + (icon_type == St.IconType.SYMBOLIC ? '-symbolic' : ''))
+  }

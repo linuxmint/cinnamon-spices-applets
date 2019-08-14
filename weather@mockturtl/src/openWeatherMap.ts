@@ -3,7 +3,7 @@ function importModule(path: string): any {
   if (typeof require !== 'undefined') {
     return require('./' + path);
   } else {
-    let AppletDir = imports.ui.appletManager.applets['weather@mockturtl'];
+    if (!AppletDir) var AppletDir = imports.ui.appletManager.applets['weather@mockturtl'];
     return AppletDir[path];
   }
 }
@@ -12,6 +12,8 @@ var utils = importModule("utils");
 var isCoordinate = utils.isCoordinate as (text: any) => boolean;
 var isLangSupported = utils.isLangSupported as (lang: string, languages: Array <string> ) => boolean;
 var isID = utils.isID as (text: any) => boolean;
+var icons = utils.icons;
+var weatherIconSafely = utils.weatherIconSafely as (code: string[], icon_type: string) => string;
 
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
@@ -32,8 +34,8 @@ class OpenWeatherMap implements WeatherProvider {
     current_url = "https://api.openweathermap.org/data/2.5/weather?";
     daily_url = "https://api.openweathermap.org/data/2.5/forecast/daily?";
 
-    app: MyApplet
-    constructor (_app: MyApplet) {
+    app: WeatherApplet
+    constructor (_app: WeatherApplet) {
       this.app = _app;
     }
 
@@ -87,7 +89,7 @@ class OpenWeatherMap implements WeatherProvider {
     };
 
 
-    ParseCurrent(json: any, self: any): boolean {
+    ParseCurrent(json: any, self: OpenWeatherMap): boolean {
         try {
             if (json.coord) {
               self.app.weather.coord.lat = json.coord.lat;
@@ -113,7 +115,7 @@ class OpenWeatherMap implements WeatherProvider {
             if (json.weather[0]) {
               self.app.weather.condition.main = json.weather[0].main;
               self.app.weather.condition.description = json.weather[0].description;
-              self.app.weather.condition.icon = self.app.weatherIconSafely(json.weather[0].icon, self.ResolveIcon); 
+              self.app.weather.condition.icon = weatherIconSafely(self.ResolveIcon(json.weather[0].icon), self.app._icon_type); 
             }
             if (json.clouds) {
               self.app.weather.cloudiness = json.clouds.all;
@@ -127,7 +129,7 @@ class OpenWeatherMap implements WeatherProvider {
           }
     };
 
-    ParseForecast(json: any, self: any): boolean {
+    ParseForecast(json: any, self: OpenWeatherMap): boolean {
         try {
             for (let i = 0; i < self.app._forecastDays; i++) {
                 // Object
@@ -165,7 +167,7 @@ class OpenWeatherMap implements WeatherProvider {
                 if (day.weather[0].id) {
                     forecast.condition.main = day.weather[0].main;
                     forecast.condition.description = day.weather[0].description;
-                    forecast.condition.icon = self.app.weatherIconSafely(day.weather[0].icon, self.ResolveIcon);
+                    forecast.condition.icon = weatherIconSafely(self.ResolveIcon(day.weather[0].icon), self.app._icon_type);
                 }     
                 self.app.forecasts.push(forecast);         
             }
@@ -234,7 +236,7 @@ class OpenWeatherMap implements WeatherProvider {
     };
 
 
-    ResolveIcon(icon: string): Array<string> {
+    ResolveIcon(icon: string): string[] {
         // https://openweathermap.org/weather-conditions
        /* fallback icons are: weather-clear-night 
        weather-clear weather-few-clouds-night weather-few-clouds 
@@ -242,43 +244,109 @@ class OpenWeatherMap implements WeatherProvider {
        weather-showers-scattered weather-snow weather-storm */
        switch (icon) {
            case "10d":/* rain day */
-             return ['weather-rain', 'weather-showers-scattered', 'weather-freezing-rain']
+             return [icons.rain, icons.showers_scattered, icons.rain_freezing]
            case "10n":/* rain night */
-             return ['weather-rain', 'weather-showers-scattered', 'weather-freezing-rain']
+             return [icons.rain, icons.showers_scattered, icons.rain_freezing]
            case "09n":/* showers nigh*/
-             return ['weather-showers']
+             return [icons.showers]
            case "09d":/* showers day */
-             return ['weather-showers']
+             return [icons.showers]
            case "13d":/* snow day*/
-             return ['weather-snow']
+             return [icons.snow]
            case "13n":/* snow night */
-             return ['weather-snow']
+             return [icons.snow]
            case "50d":/* mist day */
-             return ['weather-fog']
+             return [icons.fog]
            case "50n":/* mist night */
-             return ['weather-fog']
+             return [icons.fog]
            case "04d":/* broken clouds day */
-             return ['weather_overcast', 'weather-clouds', "weather-few-clouds"]
+             return [icons.overcast, icons.clouds, icons.few_clouds_day]
            case "04n":/* broken clouds night */
-             return ['weather_overcast', 'weather-clouds', "weather-few-clouds-night"]
+             return [icons.overcast, icons.clouds, icons.few_clouds_day]
            case "03n":/* mostly cloudy (night) */
-             return ['weather-clouds-night', 'weather-few-clouds-night']
+             return ['weather-clouds-night', icons.few_clouds_night]
            case "03d":/* mostly cloudy (day) */
-             return ['weather-clouds', 'weather-overcast', 'weather-few-clouds']
+             return [icons.clouds, icons.overcast, icons.few_clouds_day]
            case "02n":/* partly cloudy (night) */
-             return ['weather-few-clouds-night']
+             return [icons.few_clouds_night]
            case "02d":/* partly cloudy (day) */
-             return ['weather-few-clouds']
+             return [icons.few_clouds_day]
            case "01n":/* clear (night) */
-             return ['weather-clear-night']
+             return [icons.clear_night]
            case "01d":/* sunny */
-             return ['weather-clear']
+             return [icons.clear_day]
            case "11d":/* storm day */
-             return ['weather-storm']
+             return [icons.storm]
            case "11n":/* storm night */
-             return ['weather-storm']
+             return [icons.storm]
            default:
-             return ['weather-severe-alert']
+             return [icons.alert]
          }
    };
 };
+
+const openWeatherMapConditionLibrary = [
+  // Group 2xx: Thunderstorm
+  _("Thunderstorm with light rain"),
+  _("Thunderstorm with rain"),
+  _("Thunderstorm with heavy rain"),
+  _("Light thunderstorm"),
+  _("Thunderstorm"),
+  _("Heavy thunderstorm"),
+  _("Ragged thunderstorm"),
+  _("Thunderstorm with light drizzle"),
+  _("Thunderstorm with drizzle"),
+  _("Thunderstorm with heavy drizzle"),
+  // Group 3xx: Drizzle
+  _("Light intensity drizzle"),
+  _("Drizzle"),
+  _("Heavy intensity drizzle"),
+  _("Light intensity drizzle rain"),
+  _("Drizzle rain"),
+  _("Heavy intensity drizzle rain"),
+  _("Shower rain and drizzle"),
+  _("Heavy shower rain and drizzle"),
+  _("Shower drizzle"),
+  // Group 5xx: Rain
+  _("Light rain"),
+  _("Moderate rain"),
+  _("Heavy intensity rain"),
+  _("Very heavy rain"),
+  _("Extreme rain"),
+  _("Freezing rain"),
+  _("Light intensity shower rain"),
+  _("Shower rain"),
+  _("Heavy intensity shower rain"),
+  _("Ragged shower rain"),
+  // Group 6xx: Snow 
+  _("Light snow"),
+  _("Snow"),
+  _("Heavy snow"),
+  _("Sleet"),
+  _("Shower sleet"),
+  _("Light rain and snow"),
+  _("Rain and snow"),
+  _("Light shower snow"),
+  _("Shower snow"),
+  _("Heavy shower snow"),
+  // Group 7xx: Atmosphere 
+  _("Mist"),
+  _("Smoke"),
+  _("Haze"),
+  _("Sand, dust whirls"),
+  _("Fog"),
+  _("Sand"),
+  _("Dust"),
+  _("Volcanic ash"),
+  _("Squalls"),
+  _("Tornado"),
+  // Group 800: Clear 
+  _("Clear"),
+  _("Clear sky"),
+  _("Sky is clear"),
+  // Group 80x: Clouds
+  _("Few clouds"),
+  _("Scattered clouds"),
+  _("Broken clouds"),
+  _("Overcast clouds")
+];

@@ -8,15 +8,15 @@
 
 class IpApi {
     query = "https://ipapi.co/json";
-    app: MyApplet;
+    app: WeatherApplet;
 
 
-    constructor(_app: MyApplet) {
+    constructor(_app: WeatherApplet) {
         this.app = _app;
     }
 
 
-    async GetLocation() {
+    async GetLocation(): Promise<boolean> {
         let json: IpApiPayload;
         try {
             json = await this.app.LoadJsonAsync(this.query);
@@ -40,7 +40,7 @@ class IpApi {
         
     };
 
-    ParseInformation(json: any) {
+    ParseInformation(json: any): boolean {
         try {
             let loc = json.latitude + "," + json.longitude;
             //this.app._location == (json.latitude + "," + json.longitude);
@@ -60,7 +60,7 @@ class IpApi {
         }
     };
 
-    HandleErrorResponse(json: any) {
+    HandleErrorResponse(json: any): void {
         this.app.log.Error("IpApi error response: " + json.reason);       
     };
 };

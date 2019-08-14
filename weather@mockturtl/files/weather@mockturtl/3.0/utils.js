@@ -2,6 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var Mainloop = imports.mainloop;
 var Cinnamon = imports.gi.Cinnamon;
+var St = imports.gi.St;
+var Gtk = imports.gi.Gtk;
 var setTimeout = function (func, ms) {
     var args = [];
     if (arguments.length > 2) {
@@ -184,4 +186,30 @@ var isLangSupported = function (lang, languages) {
         return true;
     }
     return false;
+};
+var icons = {
+    clear_day: 'weather-clear',
+    clear_night: 'weather-clear-night',
+    few_clouds_day: 'weather-few-clouds',
+    few_clouds_night: 'weather-few-clouds-night',
+    clouds: 'weather-clouds',
+    overcast: 'weather_overcast',
+    showers_scattered: 'weather-showers-scattered',
+    showers: 'weather-showers',
+    rain: 'weather-rain',
+    rain_freezing: 'weather-freezing-rain',
+    snow: 'weather-snow',
+    storm: 'weather-storm',
+    fog: 'weather-fog',
+    alert: 'weather-severe-alert'
+};
+var weatherIconSafely = function (code, icon_type) {
+    for (var i = 0; i < code.length; i++) {
+        if (hasIcon(code[i], icon_type))
+            return code[i];
+    }
+    return 'weather-severe-alert';
+};
+var hasIcon = function (icon, icon_type) {
+    return Gtk.IconTheme.get_default().has_icon(icon + (icon_type == St.IconType.SYMBOLIC ? '-symbolic' : ''));
 };

@@ -310,30 +310,38 @@ declare module imports {
             }
         }
         export module St {
-            export class BoxLayout {
-                constructor(options ? : any)
-                add_actor(element: Button | Label | Icon | BoxLayout): void;
+            export class Widget {
+                destroy(): void;
+                style_class: string;
+                connect(id: string, binding: (...args: any) => any): void;
             }
-            export class Bin {
+            export class BoxLayout extends Widget {
                 constructor(options ? : any)
+                add_actor(element: Widget): void;
             }
-            export class DrawingArea {
+            export class Bin extends Widget {
                 constructor(options ? : any)
+                get_child(): Widget;
+                set_child(widget: Widget): void;
             }
-            export class Label {
+            export class DrawingArea extends Widget  {
+                constructor(options ? : any)
+                width: number;
+            }
+            export class Label extends Widget  {
                 text: string;
                 constructor(options ? : any);
             }
-            export class Icon {
+            export class Icon extends Widget  {
                 icon_type: string;
                 icon_size: number;
                 icon_name: string;
-                style_class: string;
                 constructor(options ? : any);
             }
-            export class Button {
+            export class Button extends Widget  {
                 reactive: boolean;
                 label: string;
+                url: string;
                 constructor(options ? : any);
             }
 

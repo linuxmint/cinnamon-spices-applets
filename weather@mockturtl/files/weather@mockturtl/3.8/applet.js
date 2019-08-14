@@ -4,7 +4,8 @@ function importModule(path) {
         return require('./' + path);
     }
     else {
-        let AppletDir = imports.ui.appletManager.applets['weather@mockturtl'];
+        if (!AppletDir)
+            var AppletDir = imports.ui.appletManager.applets['weather@mockturtl'];
         return AppletDir[path];
     }
 }
@@ -13,11 +14,11 @@ const Lang = imports.lang;
 const Main = imports.ui.main;
 var Mainloop = imports.mainloop;
 const Gio = imports.gi.Gio;
-const Gtk = imports.gi.Gtk;
 const Soup = imports.gi.Soup;
 const St = imports.gi.St;
+const GLib = imports.gi.GLib;
+const Gettext = imports.gettext;
 const Applet = imports.ui.applet;
-const Config = imports.misc.config;
 const PopupMenu = imports.ui.popupMenu;
 const Settings = imports.ui.settings;
 const Util = imports.misc.util;
@@ -59,16 +60,11 @@ if (typeof Promise != "function") {
         globalNS.Promise.prototype['finally'] = finallyConstructor;
     }
 }
-const GLib = imports.gi.GLib;
-const Gettext = imports.gettext;
 const ipApi = importModule('ipApi');
 const UUID = "weather@mockturtl";
 const APPLET_ICON = "view-refresh-symbolic";
 const REFRESH_ICON = "view-refresh";
 const CMD_SETTINGS = "cinnamon-settings applets " + UUID;
-const BLANK = '   ';
-const ELLIPSIS = '...';
-const EN_DASH = '\u2013';
 const DATA_SERVICE = {
     OPEN_WEATHER_MAP: "OpenWeatherMap",
     DARK_SKY: "DarkSky",
@@ -95,67 +91,11 @@ var KEYS;
     KEYS["WEATHER_SHORT_CONDITIONS_KEY"] = "shortConditions";
     KEYS["WEATHER_MANUAL_LOCATION"] = "manualLocation";
 })(KEYS || (KEYS = {}));
-const SIGNAL_CHANGED = 'changed::';
-const SIGNAL_CLICKED = 'clicked';
-const SIGNAL_REPAINT = 'repaint';
-const STYLE_LOCATION_LINK = 'weather-current-location-link';
-const STYLE_SUMMARYBOX = 'weather-current-summarybox';
-const STYLE_SUMMARY = 'weather-current-summary';
-const STYLE_DATABOX = 'weather-current-databox';
-const STYLE_ICON = 'weather-current-icon';
-const STYLE_ICONBOX = 'weather-current-iconbox';
-const STYLE_DATABOX_CAPTIONS = 'weather-current-databox-captions';
-const STYLE_ASTRONOMY = 'weather-current-astronomy';
-const STYLE_FORECAST_ICON = 'weather-forecast-icon';
-const STYLE_FORECAST_DATABOX = 'weather-forecast-databox';
-const STYLE_FORECAST_DAY = 'weather-forecast-day';
-const STYLE_CONFIG = 'weather-config';
-const STYLE_DATABOX_VALUES = 'weather-current-databox-values';
-const STYLE_FORECAST_SUMMARY = 'weather-forecast-summary';
-const STYLE_FORECAST_TEMPERATURE = 'weather-forecast-temperature';
-const STYLE_FORECAST_BOX = 'weather-forecast-box';
-const STYLE_FORECAST_CONTAINER = 'weather-forecast-container';
-const STYLE_PANEL_BUTTON = 'panel-button';
-const STYLE_POPUP_SEPARATOR_MENU_ITEM = 'popup-separator-menu-item';
-const STYLE_CURRENT = 'current';
-const STYLE_FORECAST = 'forecast';
-const STYLE_WEATHER_MENU = 'weather-menu';
-class Log {
-    constructor(_instanceId) {
-        this.debug = false;
-        this.ID = _instanceId;
-        this.debug = DEBUG;
-    }
-    Print(message) {
-        let msg = UUID + "#" + this.ID + ": " + message.toString();
-        let debug = "";
-        if (this.debug) {
-            debug = this.GetErrorLine();
-            global.log(msg, '\n', "On Line:", debug);
-        }
-        else {
-            global.log(msg);
-        }
-    }
-    Error(error) {
-        global.logError(UUID + "#" + this.ID + ": " + error.toString(), '\n', "On Line:", this.GetErrorLine());
-    }
-    ;
-    Debug(message) {
-        if (this.debug) {
-            this.Print(message);
-        }
-    }
-    GetErrorLine() {
-        let arr = (new Error).stack.split("\n").slice(-2)[0].split('/').slice(-1)[0];
-        return arr;
-    }
-}
 Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
 function _(str) {
     return Gettext.dgettext(UUID, str);
 }
-class MyApplet extends Applet.TextIconApplet {
+class WeatherApplet extends Applet.TextIconApplet {
     constructor(metadata, orientation, panelHeight, instanceId) {
         super(orientation, panelHeight, instanceId);
         this.weather = {
@@ -212,7 +152,6 @@ class MyApplet extends Applet.TextIconApplet {
                 noResponse: _("No/Bad response from Data Service")
             }
         };
-        this.DarkSkyFilterWords = [_("and"), _("until"), _("in")];
         this.currentLocale = null;
         this.systemLanguage = null;
         this._httpSession = new Soup.SessionAsync();
@@ -224,16 +163,38 @@ class MyApplet extends Applet.TextIconApplet {
         this.log = new Log(instanceId);
         this._httpSession.user_agent = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:37.0) Gecko/20100101 Firefox/37.0";
         Soup.Session.prototype.add_feature.call(this._httpSession, new Soup.ProxyResolverDefault());
+        this.SetAppletOnPanel();
+        this.AddPopupMenu(orientation);
+        this.BindSettings();
+        this.AddRefreshButton();
+        this.BuildPopupMenu();
+        this.rebuild();
+        this.RefreshLoop();
+        this.orientation = orientation;
+        try {
+            this.setAllowedLayout(Applet.AllowedLayout.BOTH);
+            this.update_label_visible();
+        }
+        catch (e) {
+        }
+    }
+    SetAppletOnPanel() {
         this.set_applet_icon_name(APPLET_ICON);
         this.set_applet_label(_("..."));
         this.set_applet_tooltip(_("Click to open"));
+    }
+    AddPopupMenu(orientation) {
         this.menuManager = new PopupMenu.PopupMenuManager(this);
         this.menu = new Applet.AppletPopupMenu(this, orientation);
         if (typeof this.menu.setCustomStyleClass === "function")
             this.menu.setCustomStyleClass(STYLE_WEATHER_MENU);
-        else
+        else {
+            throw Error("Old syle adding in BuildPopupMenu");
             this.menu.actor.add_style_class_name(STYLE_WEATHER_MENU);
+        }
         this.menuManager.addMenu(this.menu);
+    }
+    BindSettings() {
         for (let k in KEYS) {
             let key = KEYS[k];
             let keyProp = "_" + key;
@@ -252,38 +213,25 @@ class MyApplet extends Applet.TextIconApplet {
             }
             this.refreshWeather();
         }));
+    }
+    AddRefreshButton() {
         let itemLabel = _("Refresh");
         let refreshMenuItem = new Applet.MenuItem(itemLabel, REFRESH_ICON, Lang.bind(this, function () {
             this.refreshWeather();
         }));
         this._applet_context_menu.addMenuItem(refreshMenuItem);
-        let mainBox = new St.BoxLayout({
-            vertical: true
-        });
-        this.menu.addActor(mainBox);
-        this._currentWeather = new St.Bin({
-            style_class: STYLE_CURRENT
-        });
-        mainBox.add_actor(this._currentWeather);
-        this._separatorArea = new St.DrawingArea({
-            style_class: STYLE_POPUP_SEPARATOR_MENU_ITEM
-        });
+    }
+    BuildPopupMenu() {
+        this._currentWeather = new St.Bin({ style_class: STYLE_CURRENT });
+        this._futureWeather = new St.Bin({ style_class: STYLE_FORECAST });
+        this._separatorArea = new St.DrawingArea({ style_class: STYLE_POPUP_SEPARATOR_MENU_ITEM });
         this._separatorArea.width = 200;
         this._separatorArea.connect(SIGNAL_REPAINT, Lang.bind(this, this._onSeparatorAreaRepaint));
+        let mainBox = new St.BoxLayout({ vertical: true });
+        mainBox.add_actor(this._currentWeather);
         mainBox.add_actor(this._separatorArea);
-        this._futureWeather = new St.Bin({
-            style_class: STYLE_FORECAST
-        });
         mainBox.add_actor(this._futureWeather);
-        this.rebuild();
-        this.refreshLoop();
-        this.orientation = orientation;
-        try {
-            this.setAllowedLayout(Applet.AllowedLayout.BOTH);
-            this.update_label_visible();
-        }
-        catch (e) {
-        }
+        this.menu.addActor(mainBox);
     }
     refreshAndRebuild() {
         this.refreshWeather();
@@ -321,7 +269,8 @@ class MyApplet extends Applet.TextIconApplet {
         let command = "xdg-open ";
         Util.spawnCommandLine(command + "https://cinnamon-spices.linuxmint.com/applets/view/17");
     }
-    refreshLoop() {
+    RefreshLoop() {
+        let loopInterval = 15;
         try {
             if (this.lastUpdated == null || new Date(this.lastUpdated.getTime() + this._refreshInterval * 60000) < new Date()) {
                 this.refreshWeather();
@@ -331,8 +280,8 @@ class MyApplet extends Applet.TextIconApplet {
             this.log.Error("Error in Main loop: " + e);
             this.lastUpdated = null;
         }
-        Mainloop.timeout_add_seconds(15, Lang.bind(this, function mainloopTimeout() {
-            this.refreshLoop();
+        Mainloop.timeout_add_seconds(loopInterval, Lang.bind(this, function mainloopTimeout() {
+            this.RefreshLoop();
         }));
     }
     ;
@@ -655,20 +604,16 @@ class MyApplet extends Applet.TextIconApplet {
     }
     rebuildCurrentWeatherUi() {
         this.destroyCurrentWeather();
+        let textOb = {
+            text: ELLIPSIS
+        };
         this._currentWeatherIcon = new St.Icon({
             icon_type: this._icon_type,
             icon_size: 64,
             icon_name: APPLET_ICON,
             style_class: STYLE_ICON
         });
-        this._currentWeatherSummary = new St.Label({
-            text: _('Loading ...'),
-            style_class: STYLE_SUMMARY
-        });
-        this._currentWeatherLocation = new St.Button({
-            reactive: true,
-            label: _('Refresh'),
-        });
+        this._currentWeatherLocation = new St.Button({ reactive: true, label: _('Refresh'), });
         this._currentWeatherLocation.style_class = STYLE_LOCATION_LINK;
         this._currentWeatherLocation.connect(SIGNAL_CLICKED, Lang.bind(this, function () {
             if (this._currentWeatherLocation.url == null) {
@@ -678,80 +623,47 @@ class MyApplet extends Applet.TextIconApplet {
                 Gio.app_info_launch_default_for_uri(this._currentWeatherLocation.url, global.create_app_launch_context());
             }
         }));
-        let bb = new St.BoxLayout({
-            vertical: true,
-            style_class: STYLE_SUMMARYBOX
-        });
-        bb.add_actor(this._currentWeatherLocation);
-        bb.add_actor(this._currentWeatherSummary);
-        let textOb = {
-            text: ELLIPSIS
-        };
+        this._currentWeatherSummary = new St.Label({ text: _('Loading ...'), style_class: STYLE_SUMMARY });
         this._currentWeatherSunrise = new St.Label(textOb);
         this._currentWeatherSunset = new St.Label(textOb);
-        let ab = new St.BoxLayout({
-            style_class: STYLE_ASTRONOMY
-        });
-        ab.add_actor(this._currentWeatherSunrise);
-        let ab_spacerlabel = new St.Label({
-            text: BLANK
-        });
-        ab.add_actor(ab_spacerlabel);
-        ab.add_actor(this._currentWeatherSunset);
-        let bb_spacerlabel = new St.Label({
-            text: BLANK
-        });
-        bb.add_actor(bb_spacerlabel);
-        bb.add_actor(ab);
+        let ab_spacerlabel = new St.Label({ text: BLANK });
+        let bb_spacerlabel = new St.Label({ text: BLANK });
+        let sunBox = new St.BoxLayout({ style_class: STYLE_ASTRONOMY });
+        sunBox.add_actor(this._currentWeatherSunrise);
+        sunBox.add_actor(ab_spacerlabel);
+        sunBox.add_actor(this._currentWeatherSunset);
+        let middleColumn = new St.BoxLayout({ vertical: true, style_class: STYLE_SUMMARYBOX });
+        middleColumn.add_actor(this._currentWeatherLocation);
+        middleColumn.add_actor(this._currentWeatherSummary);
+        middleColumn.add_actor(bb_spacerlabel);
+        middleColumn.add_actor(sunBox);
         this._currentWeatherTemperature = new St.Label(textOb);
         this._currentWeatherHumidity = new St.Label(textOb);
         this._currentWeatherPressure = new St.Label(textOb);
         this._currentWeatherWind = new St.Label(textOb);
-        this._currentWeatherApiUnique = new St.Label({
-            text: ''
-        });
-        this._currentWeatherApiUniqueCap = new St.Label({
-            text: ''
-        });
-        let rb = new St.BoxLayout({
-            style_class: STYLE_DATABOX
-        });
-        let rb_captions = new St.BoxLayout({
-            vertical: true,
-            style_class: STYLE_DATABOX_CAPTIONS
-        });
-        let rb_values = new St.BoxLayout({
-            vertical: true,
-            style_class: STYLE_DATABOX_VALUES
-        });
-        rb.add_actor(rb_captions);
-        rb.add_actor(rb_values);
-        rb_captions.add_actor(new St.Label({
-            text: _('Temperature:')
-        }));
-        rb_values.add_actor(this._currentWeatherTemperature);
-        rb_captions.add_actor(new St.Label({
-            text: _('Humidity:')
-        }));
-        rb_values.add_actor(this._currentWeatherHumidity);
-        rb_captions.add_actor(new St.Label({
-            text: _('Pressure:')
-        }));
-        rb_values.add_actor(this._currentWeatherPressure);
-        rb_captions.add_actor(new St.Label({
-            text: _('Wind:')
-        }));
-        rb_values.add_actor(this._currentWeatherWind);
+        this._currentWeatherApiUnique = new St.Label({ text: '' });
+        this._currentWeatherApiUniqueCap = new St.Label({ text: '' });
+        let rb_captions = new St.BoxLayout({ vertical: true, style_class: STYLE_DATABOX_CAPTIONS });
+        let rb_values = new St.BoxLayout({ vertical: true, style_class: STYLE_DATABOX_VALUES });
+        rb_captions.add_actor(new St.Label({ text: _('Temperature:') }));
+        rb_captions.add_actor(new St.Label({ text: _('Humidity:') }));
+        rb_captions.add_actor(new St.Label({ text: _('Pressure:') }));
+        rb_captions.add_actor(new St.Label({ text: _('Wind:') }));
         rb_captions.add_actor(this._currentWeatherApiUniqueCap);
+        rb_values.add_actor(this._currentWeatherTemperature);
+        rb_values.add_actor(this._currentWeatherHumidity);
+        rb_values.add_actor(this._currentWeatherPressure);
+        rb_values.add_actor(this._currentWeatherWind);
         rb_values.add_actor(this._currentWeatherApiUnique);
-        let xb = new St.BoxLayout();
-        xb.add_actor(bb);
-        xb.add_actor(rb);
-        let box = new St.BoxLayout({
-            style_class: STYLE_ICONBOX
-        });
+        let rightColumn = new St.BoxLayout({ style_class: STYLE_DATABOX });
+        rightColumn.add_actor(rb_captions);
+        rightColumn.add_actor(rb_values);
+        let weatherBox = new St.BoxLayout();
+        weatherBox.add_actor(middleColumn);
+        weatherBox.add_actor(rightColumn);
+        let box = new St.BoxLayout({ style_class: STYLE_ICONBOX });
         box.add_actor(this._currentWeatherIcon);
-        box.add_actor(xb);
+        box.add_actor(weatherBox);
         this._currentWeather.set_child(box);
     }
     ;
@@ -776,29 +688,20 @@ class MyApplet extends Applet.TextIconApplet {
                 icon_name: APPLET_ICON,
                 style_class: STYLE_FORECAST_ICON
             });
-            forecastWeather.Day = new St.Label({
-                style_class: STYLE_FORECAST_DAY
-            });
-            forecastWeather.Summary = new St.Label({
-                style_class: STYLE_FORECAST_SUMMARY
-            });
-            forecastWeather.Temperature = new St.Label({
-                style_class: STYLE_FORECAST_TEMPERATURE
-            });
-            let by = new St.BoxLayout({
-                vertical: true,
-                style_class: STYLE_FORECAST_DATABOX
-            });
-            by.add_actor(forecastWeather.Day);
-            by.add_actor(forecastWeather.Summary);
-            by.add_actor(forecastWeather.Temperature);
-            let bb = new St.BoxLayout({
+            forecastWeather.Day = new St.Label({ style_class: STYLE_FORECAST_DAY });
+            forecastWeather.Summary = new St.Label({ style_class: STYLE_FORECAST_SUMMARY });
+            forecastWeather.Temperature = new St.Label({ style_class: STYLE_FORECAST_TEMPERATURE });
+            let dataBox = new St.BoxLayout({ vertical: true, style_class: STYLE_FORECAST_DATABOX });
+            dataBox.add_actor(forecastWeather.Day);
+            dataBox.add_actor(forecastWeather.Summary);
+            dataBox.add_actor(forecastWeather.Temperature);
+            let forecastBox = new St.BoxLayout({
                 style_class: STYLE_FORECAST_BOX
             });
-            bb.add_actor(forecastWeather.Icon);
-            bb.add_actor(by);
+            forecastBox.add_actor(forecastWeather.Icon);
+            forecastBox.add_actor(dataBox);
             this._forecast[i] = forecastWeather;
-            this._forecastBox.add_actor(bb);
+            this._forecastBox.add_actor(forecastBox);
         }
     }
     noApiKey() {
@@ -811,92 +714,66 @@ class MyApplet extends Applet.TextIconApplet {
     unitToUnicode() {
         return this._temperatureUnit == "fahrenheit" ? '\u2109' : '\u2103';
     }
-    weatherIconSafely(code, iconResolver) {
-        let iconname = iconResolver(code);
-        for (let i = 0; i < iconname.length; i++) {
-            if (this.hasIcon(iconname[i]))
-                return iconname[i];
-        }
-        return 'weather-severe-alert';
+}
+class Log {
+    constructor(_instanceId) {
+        this.debug = false;
+        this.ID = _instanceId;
+        this.debug = DEBUG;
     }
-    hasIcon(icon) {
-        return Gtk.IconTheme.get_default().has_icon(icon + (this._icon_type == St.IconType.SYMBOLIC ? '-symbolic' : ''));
+    Print(message) {
+        let msg = UUID + "#" + this.ID + ": " + message.toString();
+        let debug = "";
+        if (this.debug) {
+            debug = this.GetErrorLine();
+            global.log(msg, '\n', "On Line:", debug);
+        }
+        else {
+            global.log(msg);
+        }
+    }
+    Error(error) {
+        global.logError(UUID + "#" + this.ID + ": " + error.toString(), '\n', "On Line:", this.GetErrorLine());
+    }
+    ;
+    Debug(message) {
+        if (this.debug) {
+            this.Print(message);
+        }
+    }
+    GetErrorLine() {
+        let arr = (new Error).stack.split("\n").slice(-2)[0].split('/').slice(-1)[0];
+        return arr;
     }
 }
-const openWeatherMapConditionLibrary = [
-    _("Thunderstorm with light rain"),
-    _("Thunderstorm with rain"),
-    _("Thunderstorm with heavy rain"),
-    _("Light thunderstorm"),
-    _("Thunderstorm"),
-    _("Heavy thunderstorm"),
-    _("Ragged thunderstorm"),
-    _("Thunderstorm with light drizzle"),
-    _("Thunderstorm with drizzle"),
-    _("Thunderstorm with heavy drizzle"),
-    _("Light intensity drizzle"),
-    _("Drizzle"),
-    _("Heavy intensity drizzle"),
-    _("Light intensity drizzle rain"),
-    _("Drizzle rain"),
-    _("Heavy intensity drizzle rain"),
-    _("Shower rain and drizzle"),
-    _("Heavy shower rain and drizzle"),
-    _("Shower drizzle"),
-    _("Light rain"),
-    _("Moderate rain"),
-    _("Heavy intensity rain"),
-    _("Very heavy rain"),
-    _("Extreme rain"),
-    _("Freezing rain"),
-    _("Light intensity shower rain"),
-    _("Shower rain"),
-    _("Heavy intensity shower rain"),
-    _("Ragged shower rain"),
-    _("Light snow"),
-    _("Snow"),
-    _("Heavy snow"),
-    _("Sleet"),
-    _("Shower sleet"),
-    _("Light rain and snow"),
-    _("Rain and snow"),
-    _("Light shower snow"),
-    _("Shower snow"),
-    _("Heavy shower snow"),
-    _("Mist"),
-    _("Smoke"),
-    _("Haze"),
-    _("Sand, dust whirls"),
-    _("Fog"),
-    _("Sand"),
-    _("Dust"),
-    _("Volcanic ash"),
-    _("Squalls"),
-    _("Tornado"),
-    _("Clear"),
-    _("Clear sky"),
-    _("Sky is clear"),
-    _("Few clouds"),
-    _("Scattered clouds"),
-    _("Broken clouds"),
-    _("Overcast clouds")
-];
-const icons = {
-    clear_day: 'weather-clear',
-    clear_night: 'weather-clear-night',
-    few_clouds_day: 'weather-few-clouds',
-    few_clouds_night: 'weather-few-clouds-night',
-    clouds: 'weather-clouds',
-    overcast: 'weather_overcast',
-    showers_scattered: 'weather-showers-scattered',
-    showers: 'weather-showers',
-    rain: 'weather-rain',
-    rain_freezing: 'weather-freezing-rain',
-    snow: 'weather-snow',
-    storm: 'weather-storm',
-    fog: 'weather-fog',
-    alert: 'weather-severe-alert'
-};
+const SIGNAL_CHANGED = 'changed::';
+const SIGNAL_CLICKED = 'clicked';
+const SIGNAL_REPAINT = 'repaint';
+const STYLE_LOCATION_LINK = 'weather-current-location-link';
+const STYLE_SUMMARYBOX = 'weather-current-summarybox';
+const STYLE_SUMMARY = 'weather-current-summary';
+const STYLE_DATABOX = 'weather-current-databox';
+const STYLE_ICON = 'weather-current-icon';
+const STYLE_ICONBOX = 'weather-current-iconbox';
+const STYLE_DATABOX_CAPTIONS = 'weather-current-databox-captions';
+const STYLE_ASTRONOMY = 'weather-current-astronomy';
+const STYLE_FORECAST_ICON = 'weather-forecast-icon';
+const STYLE_FORECAST_DATABOX = 'weather-forecast-databox';
+const STYLE_FORECAST_DAY = 'weather-forecast-day';
+const STYLE_CONFIG = 'weather-config';
+const STYLE_DATABOX_VALUES = 'weather-current-databox-values';
+const STYLE_FORECAST_SUMMARY = 'weather-forecast-summary';
+const STYLE_FORECAST_TEMPERATURE = 'weather-forecast-temperature';
+const STYLE_FORECAST_BOX = 'weather-forecast-box';
+const STYLE_FORECAST_CONTAINER = 'weather-forecast-container';
+const STYLE_PANEL_BUTTON = 'panel-button';
+const STYLE_POPUP_SEPARATOR_MENU_ITEM = 'popup-separator-menu-item';
+const STYLE_CURRENT = 'current';
+const STYLE_FORECAST = 'forecast';
+const STYLE_WEATHER_MENU = 'weather-menu';
+const BLANK = '   ';
+const ELLIPSIS = '...';
+const EN_DASH = '\u2013';
 function main(metadata, orientation, panelHeight, instanceId) {
-    return new MyApplet(metadata, orientation, panelHeight, instanceId);
+    return new WeatherApplet(metadata, orientation, panelHeight, instanceId);
 }
