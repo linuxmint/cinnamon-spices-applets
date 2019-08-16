@@ -267,6 +267,18 @@ declare module imports {
     export module gi {
         export module Gio {
             export function app_info_launch_default_for_uri(url: string, context: void): void;
+            export class Cancellable {
+                static new(): Cancellable
+                static is_cancelled(cancellable: Cancellable): boolean;
+            }
+
+
+            export function AsyncReadyCallback(source_object: Object, result: AsyncResult, userData?: any): void;
+            export class AsyncResult {
+                get_user_data(): any;
+                is_tagged(): boolean;
+                source_object(): Object;
+            }
         }
         export module Gtk {
             export class IconTheme {
@@ -282,8 +294,7 @@ declare module imports {
             }
         }
         export module GObject {
-            /** Cannot init module without content */
-            const placeholder = "";
+            const placehgolder = "";
         }
         export module Cinnamon {
             function util_format_date(format: string, milliseconds: number): string;
@@ -291,23 +302,34 @@ declare module imports {
         export module Soup {
             export class SessionAsync {
                 user_agent: string;
-                constructor();
-                queue_message(message: MessageObj, callback: Function): void;
+                queue_message(message: Message, callback: (session: SessionAsync, message: Message) => void): void;
+                send_async(msg: Message, cancellable: any, callback: typeof Gio.AsyncReadyCallback): any;
+                send_finish(result: Gio.AsyncResult, user_data?: Object): any;
+                request(uri_string: string): SoupRequest;
             }
             export class Session {
                 add_feature(session: SessionAsync, proxyResolver: ProxyResolverDefault): void;
+            }
+
+            export class SoupRequest {
             }
 
             export class ProxyResolverDefault {
 
             }
             export class Message {
-                static new(method: string, query: string): MessageObj
+                static new(method: string, query: string): Message;
+                status_code: number;
+                reason_phrase: string;
+                response_body: SoupMessageBody;
+                response_headers: any;
             }
 
-            export class MessageObj {
-
+            export interface SoupMessageBody {
+                data: string;
+                goffset: number;
             }
+
         }
         export module St {
             export class Widget {

@@ -12,30 +12,31 @@ function importModule(path: string): any {
  * /usr/share/gjs-1.0/
  * /usr/share/gnome-js/
  */
-const Cairo = imports.cairo;
-const Lang = imports.lang;
+const Cairo: typeof imports.cairo = imports.cairo;
+const Lang: typeof imports.lang = imports.lang;
 // http://developer.gnome.org/glib/unstable/glib-The-Main-Event-Loop.html
-const Main = imports.ui.main;
-var Mainloop = imports.mainloop;
+const Main: typeof imports.ui.main = imports.ui.main;
+var Mainloop: typeof imports.mainloop = imports.mainloop;
 /**
  * /usr/share/gjs-1.0/overrides/
  * /usr/share/gir-1.0/
  * /usr/lib/cinnamon/
  */
-const Gio = imports.gi.Gio;
+const Gio: typeof imports.gi.Gio = imports.gi.Gio;
 // http://developer.gnome.org/libsoup/stable/libsoup-client-howto.html
-const Soup = imports.gi.Soup;
+const Soup: typeof imports.gi.Soup = imports.gi.Soup;
 // http://developer.gnome.org/st/stable/
-const St = imports.gi.St;
-const GLib = imports.gi.GLib
-const Gettext = imports.gettext
+const St: typeof imports.gi.St = imports.gi.St;
+const GLib: typeof imports.gi.GLib = imports.gi.GLib
+const GObject: typeof imports.gi.GObject = imports.gi.GObject;
+const Gettext: typeof imports.gettext = imports.gettext
 /**
  * /usr/share/cinnamon/js/
  */
-const Applet = imports.ui.applet;
-const PopupMenu = imports.ui.popupMenu;
-const Settings = imports.ui.settings;
-const Util = imports.misc.util;
+const Applet: typeof imports.ui.applet = imports.ui.applet;
+const PopupMenu: typeof imports.ui.popupMenu = imports.ui.popupMenu;
+const Settings: typeof imports.ui.settings = imports.ui.settings;
+const Util: typeof imports.misc.util = imports.misc.util;
 
 var utils = importModule("utils");
 var GetDayName = utils.GetDayName as (date: Date, locale:string, tz?: string) => string;
