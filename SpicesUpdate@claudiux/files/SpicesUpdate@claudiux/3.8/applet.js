@@ -34,6 +34,8 @@ const SCRIPTS_DIR = APPLET_DIR + "/scripts";
 const ICONS_DIR = APPLET_DIR + "/icons";
 const HELP_DIR = APPLET_DIR + "/help";
 
+Util.spawnCommandLine("sh -c '%s/witness-debian.sh'".format(SCRIPTS_DIR));
+
 const URL_SPICES_HOME = "https://cinnamon-spices.linuxmint.com";
 const CONFIG_DIR = HOME_DIR + "/.cinnamon/configs";
 const SU_CONFIG_DIR = CONFIG_DIR + "/" + UUID;
@@ -525,7 +527,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
       let img_uri = GLib.filename_to_uri("%s/cs-%s.svg".format(ICONS_DIR, type.toString()), null);
       if (uuid !== null) {
         let uri= CACHE_DIR + "/" + this._get_singular_type(type) + "/" + uuid + ".png";
-        log("uri = " + uri);
+        //log("uri = " + uri);
         let file = Gio.file_new_for_path(uri);
         if (file.query_exists(null)) {
           img_uri = GLib.filename_to_uri(uri, null);
@@ -934,7 +936,9 @@ class SpicesUpdate extends Applet.TextIconApplet {
         _fonts_installed = true
       }
     }
-    return (_fonts_installed && GLib.find_program_in_path("notify-send"))
+    this.fonts_installed = _fonts_installed;
+    this.notifysend_installed = GLib.find_program_in_path("notify-send");
+    return (this.fonts_installed && this.notifysend_installed)
   }; // End of are_dependencies_installed
 
   get_terminal() {
@@ -963,13 +967,13 @@ class SpicesUpdate extends Applet.TextIconApplet {
         this.notification = null;
       }
       // Notification (temporary)
-      let notifyMessage = _(this.appletName) + " " + _("is fully functional.");
+      let notifyMessage = _("Spices Update") + " " + _("is fully functional.");
       Main.notify(_("All dependencies are installed"), notifyMessage);
 
       // Before to reload this applet, stop the loop, remove all bindings and disconnect all signals to avoid errors.
-      this.on_applet_removed_from_panel();
+      //this.on_applet_removed_from_panel();
       // Reload this applet with dependencies installed
-      this.reloadThisApplet()
+      Extension.reloadExtension(UUID, Extension.Type.APPLET);
     } else if (!this.are_dependencies_installed() && this.notification === null) {
       let icon = new St.Icon({
         icon_name: 'error',
@@ -983,19 +987,31 @@ class SpicesUpdate extends Applet.TextIconApplet {
       let _isFedora = GLib.find_program_in_path("dnf");
       let _ArchlinuxWitnessFile = Gio.file_new_for_path("/etc/arch-release");
       let _isArchlinux = _ArchlinuxWitnessFile.query_exists(null);
-      let _apt_update =  _isFedora ? "sudo dnf update" : _isArchlinux ? "" : "sudo apt update";
+      let _DebianWitnessFile = Gio.file_new_for_path("/tmp/DEBIAN");
+      let _isDebian = _DebianWitnessFile.query_exists(null);
+      let _apt_update =  _isFedora ? "sudo dnf update" : _isArchlinux ? "" : _isDebian ? "apt update" : "sudo apt update";
       let _and = _isArchlinux ? "" : " \\\\&\\\\& ";
-      var _apt_install = _isFedora ? "sudo dnf install libnotify gdouros-symbola-fonts" : _isArchlinux ? "sudo pacman -Syu libnotify" : "sudo apt install libnotify-bin fonts-symbola";
+      var _apt_install = _isFedora ? "sudo dnf install libnotify gdouros-symbola-fonts" : _isArchlinux ? "sudo pacman -Syu libnotify" : _isDebian ? "apt install libnotify-bin fonts-symbola" : "sudo apt install libnotify-bin fonts-symbola";
       let criticalMessagePart1 = _("You appear to be missing some of the programs required for this applet to have all its features.");
       let criticalMessage = _is_apturl_present ? criticalMessagePart1 : criticalMessagePart1+"\n\n"+_("Please execute, in the just opened terminal, the commands:")+"\n "+ _apt_update +" \n "+ _apt_install +"\n\n";
       this.notification = criticalNotify(_("Some dependencies are not installed!"), criticalMessage, icon);
 
       if (!_is_apturl_present) {
-        // TRANSLATORS: The next message should not be translated.
-        if (terminal != "")
-          GLib.spawn_command_line_async(terminal + " -e 'sh -c \"echo Spices Update message: Some packages needed!; echo To complete the installation, please enter and execute the command: ; echo "+ _apt_update + _and + _apt_install + "; sleep 1; exec bash\"'");
+        if (terminal != "") {
+          // TRANSLATORS: The next messages should not be translated.
+          if (_isDebian === true) {
+            GLib.spawn_command_line_async(terminal + " -e 'sh -c \"echo Spices Update message: Some packages needed!; echo To complete the installation, please become root with su then execute the command: ; echo "+ _apt_update + _and + _apt_install + "; sleep 1; exec bash\"'");
+          } else {
+            GLib.spawn_command_line_async(terminal + " -e 'sh -c \"echo Spices Update message: Some packages needed!; echo To complete the installation, please enter and execute the command: ; echo "+ _apt_update + _and + _apt_install + "; sleep 1; exec bash\"'");
+          }
+        }
       } else {
-        Util.spawnCommandLine("apturl apt://libnotify-bin,fonts-symbola");
+        if (!this.fonts_installed && !this.notifysend_installed)
+          Util.spawnCommandLine("apturl apt://fonts-symbola,libnotify-bin")
+        else if (!this.fonts_installed)
+          Util.spawnCommandLine("apturl apt://fonts-symbola")
+        else if (!this.notifysend_installed)
+          Util.spawnCommandLine("apturl apt://libnotify-bin");
       }
       this.dependenciesMet = false;
     }
@@ -1060,16 +1076,16 @@ class SpicesUpdate extends Applet.TextIconApplet {
     cacheParser.load_from_data(this.cache[type], -1);
     var ok = false;
     var lastEdited = null;
-    var message;
+    //var message;
     try {
       lastEdited = cacheParser.get_root().get_object().get_member(uuid).get_object().get_member("last_edited").get_value();
       if (lastEdited) {
         ok = true;
-        message = "The last_edited member exists for the " + this._get_singular_type(type) + " " + uuid + ". Value = " + lastEdited.toString();
+        //message = "The last_edited member exists for the " + this._get_singular_type(type) + " " + uuid + ". Value = " + lastEdited.toString();
       }
     } catch(e) {
       // The "last-edited" member doesn't exists
-      message = "The last_edited member doesn't exist for the " + this._get_singular_type(type) + " " + uuid + ".";
+      //message = "The last_edited member doesn't exist for the " + this._get_singular_type(type) + " " + uuid + ".";
     }
 
     if (ok === true) {
@@ -1084,16 +1100,16 @@ class SpicesUpdate extends Applet.TextIconApplet {
     cacheParser.load_from_data(this.cache[type], -1);
     var ok = false;
     var memberValue = null;
-    var message;
+    //var message;
     try {
       memberValue = cacheParser.get_root().get_object().get_member(uuid).get_object().get_member(memberId).get_value();
       if (memberValue) {
         ok = true;
-        message = "The " + memberId + " member exists for the " + this._get_singular_type(type) + " " + uuid + ". Value = " + memberValue.toString();
+        //message = "The " + memberId + " member exists for the " + this._get_singular_type(type) + " " + uuid + ". Value = " + memberValue.toString();
       }
     } catch(e) {
       // The "last-edited" member doesn't exists
-      message = "The " + memberId + " member doesn't exist for the " + this._get_singular_type(type) + " " + uuid + ".";
+      //message = "The " + memberId + " member doesn't exist for the " + this._get_singular_type(type) + " " + uuid + ".";
     }
 
     if (ok === true) {
@@ -1117,7 +1133,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
     newData["last-edited"] = lastEdited;
     let message = JSON.stringify(newData, null, 2);
     GLib.file_set_contents(fileName, message);
-    log("Added missing last-edited field into " + fileName.toString())
+    //log("Added missing last-edited field into " + fileName.toString())
   }; // End of _rewrite_metadataFile
 
   _get_last_edited_from_metadata(type, uuid) {
@@ -1221,10 +1237,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
 
     // Queue of the http request
     _httpSession.queue_message(request, Lang.bind(this, function(_httpSession, message) {
-      // Download is done
-      //log("Download of png file is done");
-
-      // close the file
+      // Download is done; close the file:
       fstream.close(null);
     }));
   }; // End of download_image
@@ -1332,12 +1345,11 @@ class SpicesUpdate extends Applet.TextIconApplet {
   get_uuids_from_cache(type) {
     var cacheParser = JSON.parse(this.cache[type]);
     let names = Object.keys(cacheParser);
-    log("names = " + names.toString());
+    //log("names = " + names.toString());
     return names
   }; // End of get_uuids_from_cache
 
   get_new_spices(type) {
-    //if (!this.notif_for_new) return false;
     if (!this.is_to_check_for_new(type)) return false;
     var known_spices = [];
     let uuids = this.get_uuids_from_cache(type);
@@ -1357,8 +1369,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
     this.new_Spices[type] = [];
     uuids.map(x => {if (known_spices.indexOf(x)<0) this.new_Spices[type].push(x);});
     if (this.new_Spices[type].length > 0) this.monitor_png_directory(type);
-    //log("known_spices = " + known_spices);
-    log("new_Spices[%s] = %s".format(type, this.new_Spices[type].toString()));
+    //log("new_Spices[%s] = %s".format(type, this.new_Spices[type].toString()));
     return (this.new_Spices[type].length > 0)
   }; // End of get_new_spices
 
@@ -1374,7 +1385,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
           this.monitors.push([monitor, Id]);
           this.monitorsPngId[type] = Id;
         } catch(e) {
-          log("Unable to monitor the png directory for the %s: %s".format(type.toString(), e))
+          //log("Unable to monitor the png directory for the %s: %s".format(type.toString(), e))
         }
       }
     }
@@ -1400,7 +1411,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
         let Id = monitor.connect('changed', (type, uuid) => this._on_metadatajson_changed(type, uuid));
         this.monitors.push([monitor, Id]);
       } catch(e) {
-        log("Unable to monitor metadata.json of the %s %s: %s".format(this._get_singular_type(type.toString()), uuid, e))
+        //log("Unable to monitor metadata.json of the %s %s: %s".format(this._get_singular_type(type.toString()), uuid, e))
       }
     }
   }; // End of monitor_metadatajson
@@ -1548,7 +1559,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
   // This updates the display of the applet and the tooltip
   updateUI() {
     this.get_default_icon_color();
-    log("defaultColor = " + this.defaultColor);
+    //log("defaultColor = " + this.defaultColor);
     this._applet_icon.style = "color: %s;".format(this.defaultColor);
     if (this.general_warning === true) {
       for (let t of TYPES) {
@@ -1561,12 +1572,8 @@ class SpicesUpdate extends Applet.TextIconApplet {
     if (this.nb_to_update > 0 || this.nb_to_watch > 0) {
       var _tooltip = this.default_tooltip;
       for (let type of TYPES) {
-        // \uD83D\uDDD8
-        // \u2605
-        //if (this.old_message[type] != "") _tooltip += "\n\u21BB %s".format(this.old_message[type].replace(/, /gi, "\n\t"));
-        //if (this.old_watch_message[type] != "") _tooltip += "\n\u23FF %s".format(this.old_watch_message[type].replace(/, /gi, "\n\t"));
         if (this.old_message[type] != "") _tooltip += "\n\u21BB %s".format(this._clean_str(this.old_message[type].replace(/, /gi, "\n\t")));
-        if (this.old_watch_message[type] != "") _tooltip += "\n\u23FF %s".format(this._clean_str(this.old_watch_message[type].replace(/, /gi, "\n\t")));
+        if (this.old_watch_message[type] != "") _tooltip += "\n\u2604 %s".format(this._clean_str(this.old_watch_message[type].replace(/, /gi, "\n\t")));
       }
       this.set_applet_tooltip(_tooltip);
       this.numberLabel.text = (this.nb_to_update + this.nb_to_watch).toString();
@@ -1580,15 +1587,14 @@ class SpicesUpdate extends Applet.TextIconApplet {
 
   // This is the loop run at general_frequency rate to call updateUI() to update the display in the applet and tooltip
   updateLoop() {
-    //this.set_icons();
-    this.check_dependencies();
     if (this.loopId > 0) {
       Mainloop.source_remove(this.loopId);
     }
     this.loopId = 0;
+    this.check_dependencies();
 
     // Inhibits also after the applet has been removed from the panel
-    if (this.applet_running == true) {
+    if (this.applet_running === true) {
       this.get_translated_help_file();
       this.OKtoPopulateSettingsApplets = true;
       this.OKtoPopulateSettingsDesklets = true;
@@ -1613,13 +1619,9 @@ class SpicesUpdate extends Applet.TextIconApplet {
           this.nb_to_watch = 0;
           for (t of TYPES) {
             if (this.is_to_check(t)) {
-              //log("!!!! Are to check : " + t);
               if (this.cache[t] === "{}") this._load_cache(t);
-              //log(this.cache[t]);
               this.download_cache(t);
-              this.get_must_be_updated(t);
               must_be_updated = this.get_must_be_updated(t);
-              //log(capitalize(t) + " that must be updated = " + must_be_updated);
               this.nb_in_menu[t] = must_be_updated.length;
               if (must_be_updated.length > 0) {
                 this.nb_to_update += this.nb_in_menu[t];
@@ -1677,6 +1679,10 @@ class SpicesUpdate extends Applet.TextIconApplet {
       }
       this._set_main_label();
       // One more loop !
+      //this.loopId = Mainloop.timeout_add_seconds(this.refreshInterval, () => this.updateLoop());
+    }
+    if (this.applet_running === true && this.loopId === 0) {
+      // One more loop !
       this.loopId = Mainloop.timeout_add_seconds(this.refreshInterval, () => this.updateLoop());
     }
   }; // End of updateLoop
@@ -1708,7 +1714,13 @@ class SpicesUpdate extends Applet.TextIconApplet {
     }
     this.monitors = [];
     for (let type of TYPES) this.monitorsPngId[type] = 0;
-    if (this.settings) this.settings.finalize();
+    if (this.settings) {
+      try {
+        this.settings.finalize();
+      } catch(e) {
+        logError(e)
+      }
+    }
     //Main.keybindingManager.removeHotKey(UUID);
   };
 } // End of class SpicesUpdate

@@ -34,6 +34,8 @@ const SCRIPTS_DIR = APPLET_DIR + "/scripts";
 const ICONS_DIR = APPLET_DIR + "/icons";
 const HELP_DIR = APPLET_DIR + "/help";
 
+Util.spawnCommandLine("sh -c '%s/witness-debian.sh'".format(SCRIPTS_DIR));
+
 const URL_SPICES_HOME = "https://cinnamon-spices.linuxmint.com";
 const CONFIG_DIR = HOME_DIR + "/.cinnamon/configs";
 const SU_CONFIG_DIR = CONFIG_DIR + "/" + UUID;
@@ -966,7 +968,9 @@ SpicesUpdate.prototype = {
         _fonts_installed = true
       }
     }
-    return (_fonts_installed && GLib.find_program_in_path("notify-send"))
+    this.fonts_installed = _fonts_installed;
+    this.notifysend_installed = GLib.find_program_in_path("notify-send");
+    return (this.fonts_installed && this.notifysend_installed)
   }, // End of are_dependencies_installed
 
   get_terminal:function () {
@@ -982,7 +986,7 @@ SpicesUpdate.prototype = {
     return term_found
   }, // End of get_terminal
 
-  check_dependencies:function () {
+  check_dependencies() {
     if (!this.dependenciesMet && this.are_dependencies_installed()) {
       // At this time, the user just finished to install all dependencies.
       this.dependenciesMet=true;
@@ -995,13 +999,13 @@ SpicesUpdate.prototype = {
         this.notification = null;
       }
       // Notification (temporary)
-      let notifyMessage = _(this.appletName) + " " + _("is fully functional.");
+      let notifyMessage = _("Spices Update") + " " + _("is fully functional.");
       Main.notify(_("All dependencies are installed"), notifyMessage);
 
       // Before to reload this applet, stop the loop, remove all bindings and disconnect all signals to avoid errors.
-      this.on_applet_removed_from_panel();
+      //this.on_applet_removed_from_panel();
       // Reload this applet with dependencies installed
-      this.reloadThisApplet()
+      Extension.reloadExtension(UUID, Extension.Type.APPLET);
     } else if (!this.are_dependencies_installed() && this.notification === null) {
       let icon = new St.Icon({
         icon_name: 'error',
@@ -1015,23 +1019,35 @@ SpicesUpdate.prototype = {
       let _isFedora = GLib.find_program_in_path("dnf");
       let _ArchlinuxWitnessFile = Gio.file_new_for_path("/etc/arch-release");
       let _isArchlinux = _ArchlinuxWitnessFile.query_exists(null);
-      let _apt_update =  _isFedora ? "sudo dnf update" : _isArchlinux ? "" : "sudo apt update";
+      let _DebianWitnessFile = Gio.file_new_for_path("/tmp/DEBIAN");
+      let _isDebian = _DebianWitnessFile.query_exists(null);
+      let _apt_update =  _isFedora ? "sudo dnf update" : _isArchlinux ? "" : _isDebian ? "apt update" : "sudo apt update";
       let _and = _isArchlinux ? "" : " \\\\&\\\\& ";
-      var _apt_install = _isFedora ? "sudo dnf install libnotify gdouros-symbola-fonts" : _isArchlinux ? "sudo pacman -Syu libnotify" : "sudo apt install libnotify-bin fonts-symbola";
+      var _apt_install = _isFedora ? "sudo dnf install libnotify gdouros-symbola-fonts" : _isArchlinux ? "sudo pacman -Syu libnotify" : _isDebian ? "apt install libnotify-bin fonts-symbola" : "sudo apt install libnotify-bin fonts-symbola";
       let criticalMessagePart1 = _("You appear to be missing some of the programs required for this applet to have all its features.");
       let criticalMessage = _is_apturl_present ? criticalMessagePart1 : criticalMessagePart1+"\n\n"+_("Please execute, in the just opened terminal, the commands:")+"\n "+ _apt_update +" \n "+ _apt_install +"\n\n";
       this.notification = criticalNotify(_("Some dependencies are not installed!"), criticalMessage, icon);
 
       if (!_is_apturl_present) {
-        // TRANSLATORS: The next message should not be translated.
-        if (terminal != "")
-          GLib.spawn_command_line_async(terminal + " -e 'sh -c \"echo Spices Update message: Some packages needed!; echo To complete the installation, please enter and execute the command: ; echo "+ _apt_update + _and + _apt_install + "; sleep 1; exec bash\"'");
+        if (terminal != "") {
+          // TRANSLATORS: The next message should not be translated.
+          if (_isDebian === true) {
+            GLib.spawn_command_line_async(terminal + " -e 'sh -c \"echo Spices Update message: Some packages needed!; echo To complete the installation, please become root with su then execute the command: ; echo "+ _apt_update + _and + _apt_install + "; sleep 1; exec bash\"'");
+          } else {
+            GLib.spawn_command_line_async(terminal + " -e 'sh -c \"echo Spices Update message: Some packages needed!; echo To complete the installation, please enter and execute the command: ; echo "+ _apt_update + _and + _apt_install + "; sleep 1; exec bash\"'");
+          }
+        }
       } else {
-        Util.spawnCommandLine("apturl apt://libnotify-bin,fonts-symbola");
+        if (!this.fonts_installed && !this.notifysend_installed)
+          Util.spawnCommandLine("apturl apt://fonts-symbola,libnotify-bin")
+        else if (!this.fonts_installed)
+          Util.spawnCommandLine("apturl apt://fonts-symbola")
+        else if (!this.notifysend_installed)
+          Util.spawnCommandLine("apturl apt://libnotify-bin");
       }
       this.dependenciesMet = false;
     }
-  }, // End of check_dependencies
+  }; // End of check_dependencies
 
   _load_cache:function (type) {
     let jsonFileName = CACHE_MAP[type];
@@ -1631,12 +1647,11 @@ SpicesUpdate.prototype = {
 
   // This is the loop run at general_frequency rate to call updateUI() to update the display in the applet and tooltip
   updateLoop:function () {
-    //this.set_icons();
-    this.check_dependencies();
     if (this.loopId > 0) {
       Mainloop.source_remove(this.loopId);
     }
     this.loopId = 0;
+    this.check_dependencies();
 
     // Inhibits also after the applet has been removed from the panel
     if (this.applet_running == true) {
@@ -1727,6 +1742,8 @@ SpicesUpdate.prototype = {
         }
       }
       this._set_main_label();
+    }
+    if (this.applet_running === true && this.loopId === 0) {
       // One more loop !
       this.loopId = Mainloop.timeout_add_seconds(this.refreshInterval, () => this.updateLoop());
     }
@@ -1753,9 +1770,11 @@ SpicesUpdate.prototype = {
     }
     this.loopId = 0;
     var monitor, Id;
-    for (let tuple of this.monitors) {
-      [monitor, Id] = tuple;
-      monitor.disconnect(Id)
+    if (this.monitors) {
+      for (let tuple of this.monitors) {
+        [monitor, Id] = tuple;
+        monitor.disconnect(Id)
+      }
     }
     this.monitors = [];
     for (let type of TYPES) this.monitorsPngId[type] = 0;

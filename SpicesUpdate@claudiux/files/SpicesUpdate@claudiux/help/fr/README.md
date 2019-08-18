@@ -41,8 +41,11 @@ Pour les installer :
   * Fedora: `sudo dnf install libnotify gdouros-symbola-fonts`
   * Arch:
     * ```sudo pacman -Syu libnotify```
-    * `yay -S ttf-symbola` _or_ `pamac build ttf-symbola`
+    * `yay -S ttf-symbola` _ou bien_ `pamac build ttf-symbola`
   * Linux Mint: ```sudo apt install libnotify-bin fonts-symbola```
+  * Debian (sans sudo):
+    * `su`
+    * ```apt install libnotify-bin fonts-symbola```
 
 **Cette applet vous aide à installer ces dépendances, si besoin.** En effet, lors de son lancement, l'applet Spice Update vérifie que ces dépendances sont installées. Si ce n'est pas le cas, elle vous propose de les installer.
 

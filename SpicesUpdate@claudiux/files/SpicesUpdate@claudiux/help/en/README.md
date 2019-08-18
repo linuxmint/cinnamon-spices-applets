@@ -39,7 +39,10 @@ To install them:
   * Arch:
     * ```sudo pacman -Syu libnotify```
     * `yay -S ttf-symbola` _or_ `pamac build ttf-symbola`
-  * Linux Mint: ```sudo apt install libnotify-bin fonts-symbola```
+  * Linux Mint, Ubuntu: ```sudo apt install libnotify-bin fonts-symbola```
+  * Debian (without sudo):
+    * `su`
+    * ```apt install libnotify-bin fonts-symbola```
 
 **This applet helps you to install these dependencies, if needed.**
 

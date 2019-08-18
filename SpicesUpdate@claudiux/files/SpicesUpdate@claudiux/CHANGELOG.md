@@ -1,3 +1,7 @@
+### v3.0.3~20190818
+  * Improves installation.
+  * Removes useless log messages.
+
 ### v3.0.2~20190813
   * Show Spices Update version in tooltip
 
