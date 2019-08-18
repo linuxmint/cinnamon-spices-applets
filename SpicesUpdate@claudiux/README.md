@@ -1,7 +1,7 @@
 # Spices Update
 
 ## Important!
-In order to be sure to download the latest version of Spices Update, use **[this link](https://cinnamon-spices.linuxmint.com/files/applets/SpicesUpdate@claudiux.zip?ba7195cf-cdb9-4fce-9a1e-655f32fd5047)** rather than the Download button at the top of this page.
+In order to be sure to download the latest version of Spices Update, use **[this link](https://cinnamon-spices.linuxmint.com/files/applets/SpicesUpdate@claudiux.zip?7d873e00-4317-4902-a5c2-f1551b7c1c5d)** rather than the Download button at the top of this page.
 
 ## Summary
 
@@ -42,7 +42,10 @@ To install them:
   * Arch:
     * ```sudo pacman -Syu libnotify```
     * `yay -S ttf-symbola` _or_ `pamac build ttf-symbola`
-  * Linux Mint: ```sudo apt install libnotify-bin fonts-symbola```
+  * Linux Mint, Ubuntu: ```sudo apt install libnotify-bin fonts-symbola```
+  * Debian (without sudo):
+    * `su`
+    * ```apt install libnotify-bin fonts-symbola```
 
 **This applet helps you to install these dependencies, if needed.**
 
