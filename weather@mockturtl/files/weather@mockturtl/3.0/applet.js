@@ -65,6 +65,7 @@ var Gio = imports.gi.Gio;
 var Soup = imports.gi.Soup;
 var St = imports.gi.St;
 var GLib = imports.gi.GLib;
+var GObject = imports.gi.GObject;
 var Gettext = imports.gettext;
 var Applet = imports.ui.applet;
 var PopupMenu = imports.ui.popupMenu;

@@ -136,7 +136,7 @@ class DarkSky implements WeatherProvider {
                   forecast.dateTime = new Date(day.time * 1000);
                   // JS assumes time is local, so it applies the correct offset creating the Date (including Daylight Saving)
                   // but when using the date when daylight saving is active, it DOES NOT apply the DST back,
-                  // So we offset the date 
+                  // So we offset the date to make it Noon
                   forecast.dateTime.setHours(forecast.dateTime.getHours() + 12);
                   forecast.main.temp_min = this.ToKelvin(day.temperatureLow);
                   forecast.main.temp_max = this.ToKelvin(day.temperatureHigh);
@@ -148,8 +148,8 @@ class DarkSky implements WeatherProvider {
 
 
                   this.app.forecasts.push(forecast);
-                  return true;
             }
+            return true;
         }
         catch(e) {
             this.app.log.Error("DarkSky payload parsing error: " + e)

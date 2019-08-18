@@ -113,8 +113,8 @@ class DarkSky {
                 forecast.main.pressure = day.pressure;
                 forecast.main.humidity = day.humidity * 100;
                 this.app.forecasts.push(forecast);
-                return true;
             }
+            return true;
         }
         catch (e) {
             this.app.log.Error("DarkSky payload parsing error: " + e);

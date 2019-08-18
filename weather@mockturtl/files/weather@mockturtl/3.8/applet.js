@@ -17,6 +17,7 @@ const Gio = imports.gi.Gio;
 const Soup = imports.gi.Soup;
 const St = imports.gi.St;
 const GLib = imports.gi.GLib;
+const GObject = imports.gi.GObject;
 const Gettext = imports.gettext;
 const Applet = imports.ui.applet;
 const PopupMenu = imports.ui.popupMenu;
