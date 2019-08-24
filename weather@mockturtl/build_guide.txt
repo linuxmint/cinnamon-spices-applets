@@ -15,34 +15,5 @@ FOR 3.8:
     Just run: "build-3.8.sh" script and you are good
     (It compiles to the correct JS target and moves the files into the folder 3.8)
 
-FOR 3.4: Just leave it be, but IF you REALLY need to:
-    Run "build-3.4.py". requires Python 3.5+  
-    !!! (Build script is not included in the repo as it is unsafe.
-        You can ask (Gr3q floyd0122@gmail.com) for the script or just do it manually, 
-        it simply puts all files into one file without the generators before main and cleans up the unneeded files from the folder.
-    Then modify the output js ( 3.4/applet.js):
-        *   Remove Requires and use normal class Initialisations
-            for the previously imported modules (no "new ipApi.IpApi(this)", just  )
-        *   ToLocaleTimeString() does not work, the whole "if" section
-            needs to be uncommented in the 
-            ParseWeather, PareswForecast function
-
-    See previous outputs for reference.
-
-    What happens in the script under is a bit more complicated:
-        * Compiles to the correct JS target from Typescript
-        * Adds any extra specified polyfills at the top of the file
-            (currently only Array.includes)
-        * Adds the other file's contents before main function
-        * Moves the created file to the 3.4 folder
-        * Cleans the rest of the js up.
-
-
-
-    ANY NEW FILE WHAT YOU CREATE MUST BE APPENDED INTO THE "files" 
-    variable into with is filename, classname, and what variablename
-    you import it to! 
-
-    Any other manitulation with the variable what the module was imported
-    to will not be checked or removed.
-
+FOR 3.0:
+    Run "build-3.0.sh"

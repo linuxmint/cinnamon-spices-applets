@@ -56,11 +56,3 @@ Right-click to access `cinnamon-settings` -> _Applets -> Configure_.
 ## Known Issues
 * Sunset/Sunrise is not displayed correctly if there is a mismatch between the Location Timezone and System Timezone when using Manual Location
 * DarkSky verbose conditions are only in cm/celsius or in/fahrenheit
-
-
-
-### For Debian Users
-
-If you are using Cinnamon version 3.4-3.6 this applet will not work because Debian is using an older version of libmozjs compared to Linux Mint. (Check your version)
-
-Delete the folder named "3.4" in ~/.local/share/cinnamon/applets/weather@mockturtl and restart Cinnamon. Do not update the applet until you are on Cinnamon version 3.8!
