@@ -79,7 +79,7 @@ var GetHoursMinutes = function(date: Date, locale: string, hours24Format: boolea
         case "full":
             return date.toLocaleString(locale, {timeZone: tz, hour: "numeric", minute: "numeric", hour12: !hours24Format});
         case "notz":
-            return date.toLocaleString(locale, {hour: "numeric", minute: "numeric", hour12: !hours24Format});;
+            return date.toLocaleString(locale, {hour: "numeric", minute: "numeric", hour12: !hours24Format});
         case "none":
             return timeToUserUnits(date, hours24Format);
     }

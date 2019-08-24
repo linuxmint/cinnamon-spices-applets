@@ -65,7 +65,6 @@ var GetHoursMinutes = function (date, locale, hours24Format, tz) {
             return date.toLocaleString(locale, { timeZone: tz, hour: "numeric", minute: "numeric", hour12: !hours24Format });
         case "notz":
             return date.toLocaleString(locale, { hour: "numeric", minute: "numeric", hour12: !hours24Format });
-            ;
         case "none":
             return timeToUserUnits(date, hours24Format);
     }

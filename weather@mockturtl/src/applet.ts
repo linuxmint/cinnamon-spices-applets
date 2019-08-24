@@ -293,7 +293,6 @@ class WeatherApplet extends Applet.TextIconApplet {
       this.menu.setCustomStyleClass(STYLE_WEATHER_MENU);
     else
     {
-      throw Error("Old syle adding in BuildPopupMenu");
       this.menu.actor.add_style_class_name(STYLE_WEATHER_MENU);
     }
     
