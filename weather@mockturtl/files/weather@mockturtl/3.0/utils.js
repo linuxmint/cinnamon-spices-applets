@@ -1,5 +1,3 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 var Mainloop = imports.mainloop;
 var Cinnamon = imports.gi.Cinnamon;
 var St = imports.gi.St;
