@@ -1,0 +1,483 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-03-31 01:03-0500\n"
+"PO-Revision-Date: 2019-08-27 00:51+0300\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.6\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: fi\n"
+
+#: buttons.js:382
+msgid "Please provide your password to uninstall this application"
+msgstr "Anna salasanasi poistaaksesi tämän sovelluksen"
+
+#: buttons.js:1020
+msgid "Add to panel"
+msgstr "Lisää paneeliin"
+
+#: buttons.js:1022
+msgid "Add to desktop"
+msgstr "Lisää työpöydälle"
+
+#: buttons.js:1025
+msgid "Remove from favorites"
+msgstr "Poista suosikeista"
+
+#: buttons.js:1027
+msgid "Add to favorites"
+msgstr "Lisää suosikkeihin"
+
+#: buttons.js:1029
+msgid "Uninstall"
+msgstr "Asennuksen poisto"
+
+#: buttons.js:1031
+msgid "Run with NVIDIA GPU"
+msgstr "Suorita NVIDIA GPU:lla"
+
+#: buttons.js:1228 applet.js:2253
+msgid "List View"
+msgstr "Luettelonäkymä"
+
+#: buttons.js:1229 applet.js:2254
+msgid "Switch to list view"
+msgstr "Vaihda luettelonäkymään"
+
+#: buttons.js:1234 applet.js:2253
+msgid "Grid View"
+msgstr "Kuvakenäkymä"
+
+#: buttons.js:1235 applet.js:2254
+msgid "Switch to grid view"
+msgstr "Vaihda kuvakenäkymään"
+
+#: placeDisplay.js:57
+#, javascript-format
+msgid "Failed to launch \"%s\""
+msgstr "Epäonnistui ajaa \"%s\""
+
+#: placeDisplay.js:146
+msgid "Home"
+msgstr "Koti"
+
+#: placeDisplay.js:220
+msgid "Computer"
+msgstr "Tietokone"
+
+#: placeDisplay.js:224
+msgid "Browse network"
+msgstr "Selaa verkkoa"
+
+#: applet.js:84
+msgid "Type to search..."
+msgstr "Kirjoita haku..."
+
+#: applet.js:149
+msgid "Initializing"
+msgstr "Alustetaan"
+
+#: applet.js:275
+msgid "No description available"
+msgstr "Ei kuvausta saatavilla"
+
+#: applet.js:956
+msgid "All Applications"
+msgstr "Kaikki sovellukset"
+
+#: applet.js:994
+msgid "Places"
+msgstr "Sijainnit"
+
+#: applet.js:995
+msgid "Recent Files"
+msgstr "Viimeisimmät tiedostot"
+
+#: applet.js:996
+msgid "Bookmarks"
+msgstr "Kirjanmerkit"
+
+#: applet.js:997
+msgid "Favorite Apps"
+msgstr "Suosikkisovellukset"
+
+#: applet.js:1282
+msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
+msgstr "gir1.2-gda-5.0-paketti vaaditaan Firefox- ja Midori-kirjanmerkkeihin."
+
+#: applet.js:1362
+msgid "Clear List"
+msgstr "Tyhjennä luettelo"
+
+#: applet.js:1373
+msgid "No recent documents"
+msgstr "Ei viimeaikaisia asiakirjoja"
+
+#: applet.js:2246
+msgid "Account details"
+msgstr "Tilin tiedot"
+
+#: applet.js:2260
+msgid "Lock Screen"
+msgstr "Lukitusnäyttö"
+
+#: applet.js:2261
+msgid "Lock the screen"
+msgstr "Lukitse näyttö"
+
+#: applet.js:2282
+msgid "Logout"
+msgstr "Kirjaudu ulos"
+
+#: applet.js:2283
+msgid "Leave the session"
+msgstr "Poistu istunnosta"
+
+#: applet.js:2290
+msgid "Quit"
+msgstr "Lopeta"
+
+#: applet.js:2291
+msgid "Shutdown the computer"
+msgstr "Sammuta tietokone"
+
+#. metadata.json->name
+#. settings-schema.json->cinnamenuProvidersSection->title
+msgid "Cinnamenu"
+msgstr "Cinnamenu"
+
+#. metadata.json->description
+msgid ""
+"A flexible menu providing formatting options, web bookmarks, open window "
+"lookup, and search provider support with fuzzy searching."
+msgstr ""
+"Joustava valikko, joka tarjoaa näkymälle vaihtoehtoja, web-kirjanmerkkejä, "
+"avoimen ikkunan haku ja hakukoneen tuki sumeaan hakuun."
+
+#. settings-schema.json->panel->title
+msgid "Behavior"
+msgstr "Käyttäytyminen"
+
+#. settings-schema.json->appearance->title
+msgid "Appearance"
+msgstr "Ulkomuoto"
+
+#. settings-schema.json->menu->title
+msgid "Layout and Content"
+msgstr "Asettelu ja sisältö"
+
+#. settings-schema.json->providers->title
+msgid "Search Providers"
+msgstr "Hakupalvelut"
+
+#. settings-schema.json->extensionProvidersSection->title
+msgid "No search provider extensions found"
+msgstr "Hakupalvelun laajennuksia ei löytynyt"
+
+#. settings-schema.json->panel-appear->title
+#. settings-schema.json->panel-behave->title
+msgid "Panel"
+msgstr "Paneeli"
+
+#. settings-schema.json->menu-behave->title
+#. settings-schema.json->menu-icons->title
+msgid "Menu"
+msgstr "Valikko"
+
+#. settings-schema.json->menu-layout->title
+msgid "Layout"
+msgstr "Ulkoasu"
+
+#. settings-schema.json->menu-content->title
+msgid "Content"
+msgstr "Sisältö"
+
+#. settings-schema.json->privacy-settings-button->description
+msgid "Toggle recent files"
+msgstr "Vaihda viimeisimmät tiedostot"
+
+#. settings-schema.json->privacy-settings-button->tooltip
+msgid "Press this button to customize your privacy settings."
+msgstr "Paina tätä painiketta muokataksesi yksityisyyden asetuksia."
+
+#. settings-schema.json->menu-editor-button->description
+msgid "Open the menu editor"
+msgstr "Avaa valikon muokkausikkuna"
+
+#. settings-schema.json->menu-editor-button->tooltip
+msgid "Press this button to customize your menu entries."
+msgstr "Paina tätä painiketta muokataksesi valikon kohteita."
+
+#. settings-schema.json->resetCategoryOrder-button->description
+msgid "Reset category order"
+msgstr "Nollaa asetukset"
+
+#. settings-schema.json->menu-icon-custom->description
+msgid "Use a custom icon"
+msgstr "Käytä toista kuvaketta"
+
+#. settings-schema.json->menu-icon-custom->tooltip
+msgid "Unchecking this allows the theme to set the icon"
+msgstr "Jos poistat tämän valinnan, teema asettaa kuvakkeen"
+
+#. settings-schema.json->menu-icon->description
+msgid "Icon"
+msgstr "Kuvake"
+
+#. settings-schema.json->menu-icon->tooltip
+msgid "Select an icon to show in the panel."
+msgstr "Valitse paneelissa näytettävä kuvake."
+
+#. settings-schema.json->menu-label->description
+#. settings-schema.json->menu-label->tooltip
+msgid "Set the custom menu button icon name"
+msgstr "Aseta valikkopainikkeen kuvakkeen nimi"
+
+#. settings-schema.json->category-icon-size->units
+#. settings-schema.json->apps-list-icon-size->units
+#. settings-schema.json->apps-grid-icon-size->units
+msgid "pixels"
+msgstr "pikseliä"
+
+#. settings-schema.json->category-icon-size->description
+#. settings-schema.json->category-icon-size->tooltip
+msgid "Category icon size"
+msgstr "Ryhmän kuvakkeen koko"
+
+#. settings-schema.json->apps-list-icon-size->description
+#. settings-schema.json->apps-list-icon-size->tooltip
+msgid "Applications list icon size"
+msgstr "Sovellusluettelon kuvakkeen koko"
+
+#. settings-schema.json->apps-grid-icon-size->description
+#. settings-schema.json->apps-grid-icon-size->tooltip
+msgid "Applications grid icon size"
+msgstr "Sovellusten ruudukon kuvakeen koko"
+
+#. settings-schema.json->overlay-key->description
+msgid "Keyboard shortcut to open and close the menu"
+msgstr "Pikanäppäin valikon avaamiseen ja sulkemiseen"
+
+#. settings-schema.json->activate-on-hover->description
+msgid "Open the menu when I move my mouse over it"
+msgstr "Avaa valikko, kun siirrän hiiren sen päälle"
+
+#. settings-schema.json->activate-on-hover->tooltip
+msgid "Enable opening the menu when the mouse enters the applet"
+msgstr "Ota valikon avaaminen käyttöön hiiren tullessa sovelmaan päälle"
+
+#. settings-schema.json->hover-delay->units
+#. settings-schema.json->tooltip-delay->units
+msgid "milliseconds"
+msgstr "millisekuntia"
+
+#. settings-schema.json->hover-delay->description
+msgid "Menu hover delay:"
+msgstr "Valikkokohtainen viive:"
+
+#. settings-schema.json->hover-delay->tooltip
+msgid "Delay between switching categories"
+msgstr "Viive luokkien välillä"
+
+#. settings-schema.json->enable-animation->description
+msgid "Use menu animations"
+msgstr "Käytä valikon animaatioita"
+
+#. settings-schema.json->enable-animation->tooltip
+msgid "Allow the menu to animate on open and close"
+msgstr "Salli valikon animaatio avatessa ja sulkeutuessa"
+
+#. settings-schema.json->category-click->description
+msgid "Activate categories on click"
+msgstr "Aktivoi ryhmät napsauttamalla"
+
+#. settings-schema.json->category-click->tooltip
+msgid ""
+"When enabled, category views are activated on click instead of on hover."
+msgstr "Kun käytössä, ryhmän näkymät aktivoidaan napsautuksella."
+
+#. settings-schema.json->enable-autoscroll->description
+msgid "Enable autoscrolling in application list"
+msgstr "Ota automaattinen vieritys käyttöön sovellusluettelossa"
+
+#. settings-schema.json->enable-autoscroll->tooltip
+msgid ""
+"Choose whether or not to enable smooth autoscrolling in the application list."
+msgstr ""
+"Valitse, otetaanko pehmeä automaattinen vieritys käyttöön "
+"sovellusluettelossa vai ei."
+
+#. settings-schema.json->enable-bookmarks->description
+msgid "Show web bookmarks"
+msgstr "Näytä web-kirjanmerkit"
+
+#. settings-schema.json->enable-bookmarks->tooltip
+msgid "Choose whether or not bookmarks are indexed in the menu."
+msgstr "Valitse, indeksoidaanko kirjanmerkit valikossa."
+
+#. settings-schema.json->enable-windows->description
+msgid "Enable searching of open windows"
+msgstr "Ota avoimien ikkunoiden haku käyttöön"
+
+#. settings-schema.json->enable-windows->tooltip
+msgid "Choose whether or not open windows are indexed in menu searches."
+msgstr "Valitse, indeksoidaanko avoimet ikkunat valikkohaussa."
+
+#. settings-schema.json->enable-search-providers->description
+msgid "Enable search providers"
+msgstr "Ota hakupalvelut käyttöön"
+
+#. settings-schema.json->enable-search-providers->tooltip
+msgid ""
+"Choose whether or not search provider results are indexed in menu searches."
+msgstr "Valitse, indeksoidaanko hakupalvelun tulokset valikkohaussa."
+
+#. settings-schema.json->get-providers->description
+msgid "Example Search Providers"
+msgstr "Esimerkkejä hakupalvelujen tarjoajista"
+
+#. settings-schema.json->startup-view-mode->description
+#. settings-schema.json->startup-view-mode->tooltip
+msgid "Startup applications view mode"
+msgstr "Käynnistyvien sovellusten katselutila"
+
+#. settings-schema.json->startup-view-mode->options
+msgid "List"
+msgstr "Luettelo"
+
+#. settings-schema.json->startup-view-mode->options
+msgid "Grid"
+msgstr "Ruudukko"
+
+#. settings-schema.json->apps-grid-column-count->units
+msgid "columns"
+msgstr "Sarakkeet"
+
+#. settings-schema.json->apps-grid-column-count->description
+#. settings-schema.json->apps-grid-column-count->tooltip
+msgid "Number of columns in apps grid"
+msgstr "Sarakkeiden lukumäärä sovellusruudussa"
+
+#. settings-schema.json->show-places->description
+msgid "Show bookmarks and places"
+msgstr "Näytä kirjanmerkit ja sijainti"
+
+#. settings-schema.json->show-places->tooltip
+msgid "Choose whether or not to show bookmarks and places in the menu."
+msgstr "Valitse näytetäänkö kirjanmerkkejä ja sijaiteja valikossa."
+
+#. settings-schema.json->show-application-icons->description
+msgid "Show application icons"
+msgstr "Näytä sovellusten kuvakkeet"
+
+#. settings-schema.json->show-application-icons->tooltip
+msgid "Choose whether or not to show icons on applications."
+msgstr "Valitse, näytetäänkö sovelluksissa kuvakkeita."
+
+#. settings-schema.json->show-category-icons->description
+msgid "Show category icons"
+msgstr "Näytä ryhmän kuvakkeet"
+
+#. settings-schema.json->show-category-icons->tooltip
+msgid "Choose whether or not to show icons on categories."
+msgstr "Valitse, näytetäänkö ryhmän kuvakkeet vai ei."
+
+#. settings-schema.json->search-filesystem->description
+msgid "Enable filesystem path entry in search box"
+msgstr "Käytä tiedostojärjestelmän polun syöttämistä hakukenttään"
+
+#. settings-schema.json->search-filesystem->tooltip
+msgid "Allows path entry in the menu search box."
+msgstr "Mahdollistaa polun syöttämisen valikkon hakukenttään."
+
+#. settings-schema.json->show-apps-description-on-buttons->description
+msgid "Show application descriptions under titles"
+msgstr "Näytä sovellusten kuvaukset otsikoiden alla"
+
+#. settings-schema.json->show-apps-description-on-buttons->tooltip
+msgid ""
+"Choose whether or not to show the application description on the application "
+"buttons."
+msgstr "Valitse, näytetäänkö sovelluksen kuvaus sovelluspainikkeissa."
+
+#. settings-schema.json->show-tooltips->description
+msgid "Show tooltips"
+msgstr "Näytä työkaluvihjeet"
+
+#. settings-schema.json->show-tooltips->tooltip
+msgid ""
+"When enabled, tooltips containing the item's name or description is shown "
+"when hovered over."
+msgstr ""
+"Kun käytössä, työkaluvihjeet, jotka sisältävät kohteen nimen tai kuvauksen, "
+"näkyvät, kun hiirellä osoitetaan ."
+
+#. settings-schema.json->tooltip-delay->description
+msgid "Tooltip delay"
+msgstr "Työkaluvinkin viive"
+
+#. settings-schema.json->tooltip-delay->tooltip
+msgid ""
+"The delay time in milliseconds for tooltips when hovering over a menu item."
+msgstr ""
+"Työkaluvihjeiden viive millisekunnissa, kun hiiri on valikkokohteen päällä."
+
+#. settings-schema.json->enable-custom-menu-height->description
+#. settings-schema.json->enable-custom-menu-height->tooltip
+msgid "Use a custom menu height"
+msgstr "Käytä mukautettua valikon korkeutta"
+
+#. settings-schema.json->custom-menu-height->units
+msgid "px"
+msgstr "px"
+
+#. settings-schema.json->custom-menu-height->description
+#. settings-schema.json->custom-menu-height->tooltip
+msgid "Custom menu height"
+msgstr "Muokatun valikon korkeus"
+
+#. settings-schema.json->description-placement->description
+msgid "Application description placement"
+msgstr "Sovelluksen kuvaus"
+
+#. settings-schema.json->description-placement->options
+msgid "Tooltips"
+msgstr "Työkaluvinkit"
+
+#. settings-schema.json->description-placement->options
+msgid "Under titles"
+msgstr "Otsikkojen alla"
+
+#. settings-schema.json->description-placement->options
+msgid "Bottom pane"
+msgstr "Alapaneeli"
+
+#. settings-schema.json->description-placement->options
+msgid "None"
+msgstr "Ei mitään"
+
+#. settings-schema.json->description-placement->tooltip
+msgid ""
+"Choose where application descriptions will be placed, or select \"None\" to "
+"disable."
+msgstr ""
+"Valitse kuvausten sijoituspaikka tai poista \"Poista\" käytöstä valitsemalla "
+"\"Ei mitään\"."
+
+#. settings-schema.json->startupCategory->description
+msgid "Startup category"
+msgstr "Käynnistysryhmä"
+
+#. settings-schema.json->startupCategory->tooltip
+msgid "Category first seen when the menu is opened"
+msgstr "Ryhmä näkyy ensimmäisen kerran, kun valikko avataan"
