@@ -28,6 +28,12 @@ CPUTemperatureApplet.prototype = {
   _init: function(metadata, orientation, instance_id) {
     Applet.TextApplet.prototype._init.call(this, orientation, instance_id);
 
+    this.orientation = orientation;
+    if (this.versionCompare( GLib.getenv('CINNAMON_VERSION') ,"3.2" ) >= 0 ){
+      this.setAllowedLayout(Applet.AllowedLayout.BOTH);
+    }
+    this.on_orientation_changed(orientation); // Initializes for panel orientation
+
     this.isLooping = true;
     this.menuItems = [];
     this.state = {};
@@ -66,6 +72,38 @@ CPUTemperatureApplet.prototype = {
     this.updateTemperature();
     this.loopId = Mainloop.timeout_add(this.state.interval, () => this.updateTemperature());
   },
+
+  on_orientation_changed: function (orientation) {
+    this.orientation = orientation;
+    if (this.versionCompare( GLib.getenv('CINNAMON_VERSION') ,"3.2" ) >= 0 ){
+      if (this.orientation == St.Side.LEFT || this.orientation == St.Side.RIGHT) {
+        // vertical
+        this.isHorizontal = false;
+      } else {
+        // horizontal
+        this.isHorizontal = true;
+      }
+    } else {
+      this.isHorizontal = true;  // Do not check unless >= 3.2
+    }
+  }, // End of on_orientation_changed
+
+  versionCompare: function(left, right) {
+    if (typeof left + typeof right != 'stringstring')
+      return false;
+    var a = left.split('.'),
+        b = right.split('.'),
+        i = 0,
+        len = Math.max(a.length, b.length);
+    for (; i < len; i++) {
+      if ((a[i] && !b[i] && parseInt(a[i]) > 0) || (parseInt(a[i]) > parseInt(b[i]))) {
+        return 1;
+      } else if ((b[i] && !a[i] && parseInt(b[i]) > 0) || (parseInt(a[i]) < parseInt(b[i]))) {
+        return -1;
+      }
+    }
+    return 0;
+  }, // End of versionCompare
 
   on_applet_clicked: function() {
     this.buildMenu(this.menuItems);
@@ -278,14 +316,15 @@ CPUTemperatureApplet.prototype = {
   _formatTemp: function(t) {
     let precisionDigits;
     precisionDigits = this.state.onlyIntegerPart ? 0 : 1;
+    let separator = this.isHorizontal ? " " : "\n"
     if (this.state.useFahrenheit) {
       return (
         this._toFahrenheit(t)
           .toFixed(precisionDigits)
-          .toString() + ' °F'
+          .toString() + '%s°F'.format(separator)
       );
     } else {
-      return (Math.round(t * 10) / 10).toFixed(precisionDigits).toString() + ' °C';
+      return (Math.round(t * 10) / 10).toFixed(precisionDigits).toString() + '%s°C'.format(separator);
     }
   }
 };

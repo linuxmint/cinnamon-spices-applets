@@ -1,3 +1,16 @@
+### v3.0.4~20190826
+  * Available languages:
+   * Dutch
+   * English
+   * Finnish
+   * French
+   * Italian
+   * German
+   * Hungarian
+   * Spanish
+   * Swedish.
+  * Bug (#2545) fixed concerning Cinnamon 2.8 -> 3.6.
+
 ### v3.0.3~20190818
   * Improves installation.
   * Removes useless log messages.

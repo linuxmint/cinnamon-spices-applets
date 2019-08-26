@@ -1047,7 +1047,7 @@ SpicesUpdate.prototype = {
       }
       this.dependenciesMet = false;
     }
-  }; // End of check_dependencies
+  }, // End of check_dependencies
 
   _load_cache:function (type) {
     let jsonFileName = CACHE_MAP[type];
