@@ -202,6 +202,7 @@ CPUTemperatureApplet.prototype = {
           this.actor.style = (this.state.changeColor === true) ? "background: DarkOrange;" : "";
         } else {
           this.title = this._formatTemp(temp, true);
+          this.actor.style = "";
         }
       }
     }
