@@ -17,5 +17,10 @@
         "step": 1,
         "units": "ms",
         "description": "Update interval"
+    },
+    "change-color": {
+        "type" : "switch",
+        "default" : true,
+        "description" : "Change color when the temperature becomes High or Critical"
     }
 }
