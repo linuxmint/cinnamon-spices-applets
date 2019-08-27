@@ -80,3 +80,7 @@ msgstr ""
 #. settings-schema.json->interval->description
 msgid "Update interval"
 msgstr ""
+
+#. settings-schema.json->change-color->description
+msgid "Change color when the temperature becomes High or Critical"
+msgstr ""
