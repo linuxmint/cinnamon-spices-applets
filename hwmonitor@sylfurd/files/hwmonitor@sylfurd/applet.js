@@ -242,8 +242,7 @@ GraphicalHWMonitorApplet.prototype = {
     },
 
     // Called when the settings have changed
-    settings_changed: function () {
-        debug_message("Settings changed!");
+    settings_changed: function () {        
         this.restartGHW();
     },
 
