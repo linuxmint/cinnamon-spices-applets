@@ -42,6 +42,7 @@ CPUTemperatureApplet.prototype = {
     this.settings.bindProperty(Settings.BindingDirection.IN, 'use-fahrenheit', 'useFahrenheit', this.updateTemperature, null);
     this.settings.bindProperty(Settings.BindingDirection.IN, 'only-integer-part', 'onlyIntegerPart', this.updateTemperature, null);
     this.settings.bindProperty(Settings.BindingDirection.IN, 'interval', 'interval');
+    this.settings.bindProperty(Settings.BindingDirection.IN, 'change-color', 'changeColor', this.updateTemperature, null);
 
     this.lang = {
       acpi: 'ACPI Adapter',
@@ -195,10 +196,10 @@ CPUTemperatureApplet.prototype = {
         //critical = 53; high = 49; // <- For tests only.
         if (critical && temp >= critical) {
           this.title = this.isHorizontal ? _('Critical') + ': ' + label : this._formatTemp(temp, true);
-          this.actor.style = "background: FireBrick;";
+          this.actor.style = (this.state.changeColor === true) ? "background: FireBrick;" : "";
         } else if (high && temp >= high) {
           this.title =  this.isHorizontal ? _('High') + ': ' + label : this._formatTemp(temp, true);
-          this.actor.style = "background: DarkOrange;";
+          this.actor.style = (this.state.changeColor === true) ? "background: DarkOrange;" : "";
         } else {
           this.title = this._formatTemp(temp, true);
         }
