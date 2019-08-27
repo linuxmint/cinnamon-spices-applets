@@ -39,7 +39,7 @@ function _(str) {
 }
 
 function debug_message(message) {
-    global.logError(message);
+    global.logError("HWMONITOR : " + message);
 }
 
 let GTop;
@@ -86,32 +86,41 @@ GraphicalHWMonitorApplet.prototype = {
         this._applet_context_menu.addMenuItem(this.itemReset);
 
         // Setup the applet settings 
-        this.graph_width = 100; // Default width (horizontal panels)
-        this.graph_height = 50; // Default height (vertical panels)
-        this.frequency = 1;
         this.settings = new Settings.AppletSettings(this, metadata.uuid, instance_id);
         this.settings.bind("graph_width", "graph_width", this.settings_changed);
         this.settings.bind("graph_height", "graph_height", this.settings_changed);
         this.settings.bind("frequency", "frequency", this.settings_changed);
+        this.settings.bind("theme", "theme", this.settings_changed);
+        this.settings.bind("border_color", "border_color", this.settings_changed);
+        this.settings.bind("background_color1", "background_color1", this.settings_changed);
+        this.settings.bind("background_color2", "background_color2", this.settings_changed);
+        this.settings.bind("label_color", "label_color", this.settings_changed);
+        this.settings.bind("graph_color1", "graph_color1", this.settings_changed);
+        this.settings.bind("graph_color2", "graph_color2", this.settings_changed);
+        this.settings.bind("graph_color3", "graph_color3", this.settings_changed);
+        this.settings.bind("graph_color4", "graph_color4", this.settings_changed);
+        this.settings.bind("graph_offset2", "graph_offset2", this.settings_changed);
+        this.settings.bind("graph_offset3", "graph_offset3", this.settings_changed);
+        this.settings.bind("custom_labels", "custom_labels", this.settings_changed);
+        this.settings.bind("cpu_label", "cpu_label", this.settings_changed);
+        this.settings.bind("mem_label", "mem_label", this.settings_changed);
+        
+        this.create_theme_object();
 
-        let height = this.get_height();
-        let width = this.get_width();
+        this.area = new AppletArea();
+        this.area.init(this.isHorizontal,this.get_width(), this.get_height());
 
         this.graphArea = new St.DrawingArea();
-        if (this.isHorizontal) {
-            this.graphArea.height = height;
-            this.graphArea.width = width * 2;
+        this.graphArea.height = this.area.height;
+        this.graphArea.width = this.area.width;
 
-        } else {
-            this.graphArea.height = height * 2;
-            this.graphArea.width = width;
-        }
         this.graphArea.connect('repaint', Lang.bind(this, this.onGraphRepaint));
         this.actor.add_actor(this.graphArea);
-        this.setup_graphs(width, height);
+        this.update_graphs(this.area);
 
         this.actor.set_offscreen_redirect(Clutter.OffscreenRedirect.ALWAYS);
         this.add_update_loop(this.frequency);
+
     },
 
     get_height: function() {
@@ -128,32 +137,35 @@ GraphicalHWMonitorApplet.prototype = {
             return this.panel_height;
     },
 
-    setup_graphs: function (width, height) {
+    update_graphs: function (area) {
         let cpuProvider =  new CpuDataProvider();
         let memProvider =  new MemDataProvider();
 
         this.graphs = [
-            new Graph(cpuProvider, width, height, this.isHorizontal),
-            new Graph(memProvider, width, height, this.isHorizontal)
+            new Graph(cpuProvider, area, area.graph[0], this.theme_object),
+            new Graph(memProvider, area, area.graph[1], this.theme_object)
         ];
     },
 
-    change_graph_area_size: function(refresh_graphs = true) {
-        let width = this.get_width();
-        let height = this.get_height();
+    update_applet_area: function() {
+        if (this.area)
+            this.area = null;
 
-        if (this.isHorizontal) {
-            this.graphArea.set_width(width * 2);
-            this.graphArea.set_height(height);
-        } else {
-            this.graphArea.set_width(width);
-            this.graphArea.set_height(height * 2);
+        this.area = new AppletArea();
+        this.area.init(this.isHorizontal,this.get_width(), this.get_height());
+
+        if (this.graphArea) {
+            this.actor.remove_actor(this.graphArea);    
+            this.graphArea = null;        
         }
+            
+        this.graphArea = new St.DrawingArea();
+        this.graphArea.height = this.area.height;
+        this.graphArea.width = this.area.width;
+        this.graphArea.connect('repaint', Lang.bind(this, this.onGraphRepaint));
+        this.actor.add_actor(this.graphArea);
 
-        if (refresh_graphs)
-            this.setup_graphs(width, height);
-
-        return [width, height];
+        this.update_graphs(this.area);
     },
 
     get_orientation: function (orientation) {
@@ -171,12 +183,12 @@ GraphicalHWMonitorApplet.prototype = {
 
     on_orientation_changed: function(orientation) {
         this.get_orientation(orientation);
-        this.change_graph_area_size();
+        this.update_applet_area();
     },
 
     on_panel_height_changed: function() {  
         this.panel_height = this._panelHeight
-        let [width, height] = this.change_graph_area_size();
+        this.update_applet_area();
         this._update();
     },
 
@@ -215,6 +227,7 @@ GraphicalHWMonitorApplet.prototype = {
         this.graphArea.queue_repaint();
     },
 
+    // Redraws the graphs
     onGraphRepaint: function (area) {
         let [width, height] = [this.get_width(), this.get_height()];
 
@@ -224,20 +237,53 @@ GraphicalHWMonitorApplet.prototype = {
             else
                 area.get_context().translate(0, index * height);
 
-            this.graphs[index].paint(area, width, height);
+            this.graphs[index].paint(area);
         }
     },
 
     // Called when the settings have changed
     settings_changed: function () {
+        debug_message("Settings changed!");
         this.restartGHW();
     },
 
+    // Gets color on format 'rgba(255,255,255,0.5) and returns an array of four values
+    get_colors:function (rgb) {
+        let colors = rgb.replace(/[^\d,]/g, '').split(',');
+        for(let i=0;i<3;i++) {
+            colors[i] /= 255;
+        }
+
+        return colors;
+    },
+
+    // Creates an object containing the users selected theme settings
+    create_theme_object: function() {
+        this.theme_object = new Object();
+        this.theme_object.theme = this.theme;
+        this.theme_object.border_colors = this.get_colors(this.border_color);
+        this.theme_object.background_colors1 = this.get_colors(this.background_color1);
+        this.theme_object.background_colors2 = this.get_colors(this.background_color2);
+        this.theme_object.label_color = this.get_colors(this.label_color);
+        this.theme_object.graph_color1 = this.get_colors(this.graph_color1);
+        this.theme_object.graph_color2 = this.get_colors(this.graph_color2);
+        this.theme_object.graph_color3 = this.get_colors(this.graph_color3);
+        this.theme_object.graph_color4 = this.get_colors(this.graph_color4);
+        this.theme_object.graph_offset2 = this.graph_offset2;
+        this.theme_object.graph_offset3 = this.graph_offset3;
+        this.theme_object.custom_labels = this.custom_labels;
+        this.theme_object.cpu_label = this.cpu_label;
+        this.theme_object.mem_label = this.mem_label;
+    },
+
+    // Restarts GHW if something stopped it from working.
+    // Can happen for example after computer comes back from a suspend
     restartGHW: function() {
         // Refresh the update loop with the new frequency
+        this.create_theme_object();
         this.remove_update_loop();
         this.add_update_loop(this.frequency);
-        this.change_graph_area_size();        
+        this.update_applet_area();        
     },
 
     _runSysMon: function() {
@@ -270,24 +316,20 @@ GraphicalHWMonitorApplet.prototype = {
     }
 };
 
-function Graph(provider, width, height, horizontal) {
-    this._init(provider, width, height, horizontal);
+// Class responsible for drawing an instance of one graph
+function Graph(provider, appletArea, graphArea, theme) {    
+    this._init(provider, appletArea, graphArea, theme);
 }
 
 Graph.prototype = {
 
-    _init: function (provider, width, height, horizontal) {
+    _init: function (provider, appletArea, graphArea, theme) {
         this.provider = provider;
+        this.area = appletArea;
+        this.graph = graphArea;
+        this.theme = theme;
 
-        if (horizontal) {
-            this.width = width - 3;     // Adjust for border and space between graphs
-            this.height = height - 2;   // Adjust for border
-        } else {
-            this.width = width - 2;     // Adjust for border
-            this.height = height - 3;   // Adjust for border and space between graphs
-        }
-
-        this.datas = Array(this.width);
+        this.datas = Array(this.graph.inner.width-1);
 
         for (let i = 0; i < this.datas.length; i++) {
             this.datas[i] = 0;
@@ -295,97 +337,176 @@ Graph.prototype = {
     },
 
     paint: function (area) {
-        let widthOffset1 = Math.round(this.width * 0.5) + 0.5;
-        let widthOffset2 = Math.round(this.width * 0.25) + 0.5;
-        let widthOffset3 = Math.round(this.width * 0.75) + 0.5;
-        let heightOffset1 = Math.round(this.height / 2) + 0.5;
-        let heightOffset2 = Math.round(this.height * 0.25) + 0.5;
-        let heightOffset3 = Math.round(this.height * 0.75) + 0.5;
         let uiScale7x = global.ui_scale * 7;
         let cr = area.get_context();
 
-		// Border
-        cr.setSourceRGBA(1, 1, 1, 0.9);
+        // Since Cairo uses antialiasing, we need to translate all coordinates
+        // by half a pixel rather than having to deal with half a pixel everywhere
+        // See for example: https://stackoverflow.com/questions/8696631/canvas-drawings-like-lines-are-blurry
+        // We also translate to the (outer.left,outer.top) corner.
+        cr.translate(this.graph.outer.left + 0.5, this.graph.outer.top + 0.5);
+
+        // Draw border
+        if (this.theme.theme=="light")
+            cr.setSourceRGBA(1, 1, 1, 0.5);
+        else if (this.theme.theme=="dark")
+            cr.setSourceRGBA(0, 0, 0, 0.5);
+        else {
+            cr.setSourceRGBA(this.theme.border_colors[0], this.theme.border_colors[1], this.theme.border_colors[2], 0.5);
+        }
         cr.setLineWidth(1);
-        cr.rectangle(0.5, 0.5, this.width + 0.5, this.height + 0.5);
+        cr.rectangle(0, 0, 
+                    this.graph.outer.width, this.graph.outer.height);
         cr.stroke();
 
-		// Background
-        let gradientHeight = this.height - 1;
-        let gradientWidth = this.width - 1;
-        let gradientOffset = 1;
-        let pattern = new Cairo.LinearGradient(0, 0, 0, this.height);
-        pattern.addColorStopRGBA(0, 1, 1, 1, 0.3);
-        pattern.addColorStopRGBA(1, 0, 0, 0, 0.3);
+		// Draw background
+        let pattern = new Cairo.LinearGradient(0, 0, 0, this.graph.inner.height);
+        
+        if (this.theme.theme=="light") {
+            pattern.addColorStopRGBA(0, 1, 1, 1, 0.4);
+            pattern.addColorStopRGBA(1, 0, 0, 0, 0.4);
+        } else if (this.theme.theme=="dark") {
+            pattern.addColorStopRGBA(0, 1, 1, 1, 0.3);
+            pattern.addColorStopRGBA(1, 0, 0, 0, 0.3);
+        } else {
+            pattern.addColorStopRGBA(0, this.theme.background_colors1[0], this.theme.background_colors1[1], this.theme.background_colors1[2], 0.7);
+            pattern.addColorStopRGBA(1, this.theme.background_colors2[0], this.theme.background_colors2[1], this.theme.background_colors2[2], 0.7);
+        }
         cr.setSource(pattern);
-        cr.rectangle(1, gradientOffset, gradientWidth, gradientHeight);
+        cr.rectangle(0, 0, this.graph.inner.width, this.graph.inner.height);
         cr.fill();
 
-        // Grid
+        // Draw graph grid lines
+        let widthOffset1 = Math.round(this.graph.inner.width * 0.5);
+        let widthOffset2 = Math.round(this.graph.inner.width * 0.25);
+        let widthOffset3 = Math.round(this.graph.inner.width * 0.75);
+        let heightOffset1 = Math.round(this.graph.inner.height * 0.5);
+        let heightOffset2 = Math.round(this.graph.inner.height * 0.25);
+        let heightOffset3 = Math.round(this.graph.inner.height * 0.75);
         cr.setLineWidth(1);
-        cr.setSourceRGBA(1, 1, 1, 0.4);
-        cr.moveTo(0, heightOffset1);
-        cr.lineTo(this.width, heightOffset1);
-        cr.stroke();
-        cr.moveTo(widthOffset1, 0);
-        cr.lineTo(widthOffset1, this.height);
-        cr.stroke();
-        cr.setSourceRGBA(1, 1, 1, 0.2);
-        cr.moveTo(0, heightOffset2);
-        cr.lineTo(this.width, heightOffset2);
-        cr.stroke();
-        cr.moveTo(0, heightOffset3);
-        cr.lineTo(this.width, heightOffset3);
-        cr.stroke();
-        cr.moveTo(widthOffset2, 0);
-        cr.lineTo(widthOffset2, this.height);
-        cr.stroke();
-        cr.moveTo(widthOffset3, 0);
-        cr.lineTo(widthOffset3, this.height);
-        cr.stroke();
-
-        // Datas
-        cr.setLineWidth(0);
-        cr.moveTo(1, this.height - this.datas[0]);
-
-        for (let i = 1; i < this.datas.length; i++) {
-        	cr.lineTo(i + 1, this.height - this.datas[i]);
+        if (this.theme.theme=="light")
+            cr.setSourceRGBA(1, 1, 1, 0.4);
+        else if (this.theme.theme=="dark")
+            cr.setSourceRGBA(0, 0, 0, 0.4);
+        else {
+            cr.setSourceRGBA(this.theme.border_colors[0], this.theme.border_colors[1], this.theme.border_colors[2], 0.4);
         }
+        // Center horizontal line
+        cr.moveTo(1, heightOffset1);
+        cr.lineTo(this.graph.inner.width, heightOffset1);
+        cr.stroke();
+        // Center vertical line
+        cr.moveTo(widthOffset1, 1);
+        cr.lineTo(widthOffset1, this.graph.inner.height);
+        cr.stroke();
+        if (this.theme.theme=="light")
+            cr.setSourceRGBA(1, 1, 1, 0.2);
+        else if (this.theme.theme=="dark")
+            cr.setSourceRGBA(0, 0, 0, 0.2);
+        else {
+            cr.setSourceRGBA(this.theme.border_colors[0], this.theme.border_colors[1], this.theme.border_colors[2], 0.2);
+        }
+        // 25% horizontal line
+        cr.moveTo(1, heightOffset2);
+        cr.lineTo(this.graph.inner.width, heightOffset2);
+        cr.stroke();
+        // 75% horizontal line
+        cr.moveTo(1, heightOffset3);
+        cr.lineTo(this.graph.inner.width, heightOffset3);
+        cr.stroke();
+        // 25% vertical line
+        cr.moveTo(widthOffset2, 1);
+        cr.lineTo(widthOffset2, this.graph.inner.height);
+        cr.stroke();
+        // 75% vertical line
+        cr.moveTo(widthOffset3, 1);
+        cr.lineTo(widthOffset3, this.graph.inner.height);
+        cr.stroke();
 
-    	cr.lineTo(this.datas.length, this.height);
-    	cr.lineTo(1, this.height);
-
+        // Draw data points
+        cr.setLineWidth(0);
+        cr.moveTo(1, this.graph.inner.height - this.datas[0]);
+        for (let i = 1; i < this.datas.length; i++) {
+        	cr.lineTo(i + 1, this.graph.inner.height - this.datas[i]);
+        }
+    	cr.lineTo(this.datas.length, this.graph.inner.height);
+        cr.lineTo(1, this.graph.inner.height);
     	cr.closePath();
 
-        pattern = new Cairo.LinearGradient(0, 0, 0, this.height);
+        pattern = new Cairo.LinearGradient(0, this.graph.inner.top, 0, this.graph.inner.top + this.graph.inner.height);
         cr.setSource(pattern);
-        pattern.addColorStopRGBA(0, 1, 0, 0, 1);
-        pattern.addColorStopRGBA(0.5, 1, 1, 0.2, 1);
-        pattern.addColorStopRGBA(0.7, 0.4, 1, 0.3, 1);
-        pattern.addColorStopRGBA(1, 0.2, 0.7, 1, 1);
+        if (this.theme.theme=="user")
+            pattern.addColorStopRGBA(0, this.theme.graph_color4[0], this.theme.graph_color4[1], this.theme.graph_color4[2], 1);
+        else 
+            pattern.addColorStopRGBA(0, 1, 0, 0, 1);
 
+        if (this.theme.theme=="user")
+            pattern.addColorStopRGBA(this.theme.graph_offset3, this.theme.graph_color3[0], this.theme.graph_color3[1], this.theme.graph_color3[2], 1);
+        else 
+            pattern.addColorStopRGBA(0.5, 1, 1, 0.2, 1);
+
+        if (this.theme.theme=="user")
+            pattern.addColorStopRGBA(this.theme.graph_offset2, this.theme.graph_color2[0], this.theme.graph_color2[1], this.theme.graph_color2[2], 1);
+        else 
+            pattern.addColorStopRGBA(0.7, 0.4, 1, 0.3, 1);
+
+        if (this.theme.theme=="user")
+            pattern.addColorStopRGBA(1, this.theme.graph_color1[0], this.theme.graph_color1[1], this.theme.graph_color1[2], 1);        
+        else 
+            pattern.addColorStopRGBA(1, 0.2, 0.7, 1, 1);
         cr.fill();
 
-        // Label
-		cr.setFontSize(uiScale7x);
-        cr.setSourceRGBA(0, 0, 0, 0.5);
-		cr.moveTo(global.ui_scale * 2.5, global.ui_scale * 7.5);
-		cr.showText(this.provider.name);
-        cr.setSourceRGBA(1, 1, 1, 1);
-		cr.moveTo(global.ui_scale * 2, uiScale7x);
-		cr.showText(this.provider.name);
+        // Draw label
+        cr.setFontSize(uiScale7x);
+        if (this.theme.theme=="light")
+            cr.setSourceRGBA(1, 1, 1, 0.5);
+        else if (this.theme.theme=="dark")
+            cr.setSourceRGBA(0, 0, 0, 0.5);
+        else {
+            cr.setSourceRGBA(this.theme.label_color[0], this.theme.label_color[1], this.theme.label_color[2], 0.5);
+        }
+        cr.moveTo(global.ui_scale * 2.5, global.ui_scale * 7.5 + 0.5);
 
+        if (this.theme.custom_labels) {
+            if (this.provider.type == "CPU")
+                cr.showText(this.theme.cpu_label);
+            else
+                cr.showText(this.theme.mem_label);
+        }
+        else
+            cr.showText(this.provider.name);
+
+        if (this.theme.theme=="light")
+            cr.setSourceRGBA(1, 1, 1, 1);
+        else if (this.theme.theme=="dark")
+            cr.setSourceRGBA(0, 0, 0, 1);
+        else {
+            cr.setSourceRGBA(this.theme.label_color[0], this.theme.label_color[1], this.theme.label_color[2], 1);
+        }
+		cr.moveTo(global.ui_scale * 2, uiScale7x + 0.5);
+        if (this.theme.custom_labels) {
+            if (this.provider.type == "CPU")
+                cr.showText(this.theme.cpu_label);
+            else
+                cr.showText(this.theme.mem_label);
+        }
+        else
+            cr.showText(this.provider.name);
+
+        // Reset translation
+        cr.translate(- (this.graph.outer.left + 0.5), -(this.graph.outer.top + 0.5));
     },
 
     refreshData: function() {
-        let data = this.provider.getData() * (this.height - 1);
+        let data = this.provider.getData() * (this.graph.inner.height - 1);
 
-        if (this.datas.push(data) > this.width - 2) {
+        if (this.datas.push(data) > this.graph.inner.width - 2) {
             this.datas.shift();
         }
     }
 };
 
+// Class responsible for getting CPU data
 function CpuDataProvider() {
 	this._init();
 }
@@ -399,6 +520,7 @@ CpuDataProvider.prototype = {
         this.usage = 0;
         this.last_total = 0;
         this.name = _("CPU");
+        this.type = "CPU";
     },
 
     getData: function() {
@@ -417,6 +539,7 @@ CpuDataProvider.prototype = {
     }
 };
 
+// Class responsible for getting memory data
 function MemDataProvider() {
     this._init();
 }
@@ -426,6 +549,7 @@ MemDataProvider.prototype = {
     _init: function() {
         this.gtopMem = new GTop.glibtop_mem();
         this.name = _("MEM");
+        this.type = "MEM";
     },
 
     getData: function() {
@@ -435,6 +559,68 @@ MemDataProvider.prototype = {
     },
 };
 
+// Class responsible for keeping track of the entire applet area
+class AppletArea {
+    init(isHorizontal, graphWidth, graphHeight) {
+        this.isHorizontal = isHorizontal;
+
+        if (this.isHorizontal) {
+            // An area big enough to have two graphs next to each other
+            this.height = graphHeight;
+            this.width = graphWidth * 2;
+
+        } else {
+            // An area big enough to have two graphs on top of each other
+            this.height = graphHeight * 2;
+            this.width = graphWidth;
+        }
+
+        this.graph = [];
+        this.graph[0] = new GraphArea();
+        this.graph[0].init(this, graphWidth, graphHeight);
+        this.graph[1] = new GraphArea();
+        this.graph[1].init(this, graphWidth, graphHeight);
+    }
+}
+
+// Class responsible for keeping track of the area for one of the graphs
+class GraphArea {    
+    init(parent, width, height) {
+        // Set the actual drawing area of the graph
+        // which is sligthly smaller because of themes,
+        // borders and space between graphs etc
+        if (parent.isHorizontal) {
+            this.outer = new Box();
+            this.outer.init(2, 0, width - 4, height - 6);
+
+            this.inner = new Box();
+            this.inner.initFromBox(this.outer, 1);
+        } else {
+            this.outer = new Box();
+            this.outer.init(0, 3, width - 8, height - 4);
+
+            this.inner = new Box();
+            this.inner.initFromBox(this.outer, 1);
+        }
+    }
+}
+
+// Just a square class
+class Box {
+    init(top, left, width, height) {
+        this.top = top;
+        this.left = left;
+        this.width = width;
+        this.height = height;
+    }
+
+    initFromBox(box, delta) {
+        this.top = box.top + delta;
+        this.left = box.left + delta;
+        this.width = box.width;
+        this.height = box.height;
+    }
+}
 
 function main(metadata, orientation, panel_height, instance_id) {
     return new GraphicalHWMonitorApplet(metadata, orientation, panel_height, instance_id);
