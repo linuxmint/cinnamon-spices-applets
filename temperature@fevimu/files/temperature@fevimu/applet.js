@@ -192,12 +192,15 @@ CPUTemperatureApplet.prototype = {
             temp = s / n;
         }
         let label = this._formatTemp(temp);
+        //critical = 53; high = 49; // <- For tests only.
         if (critical && temp >= critical) {
-          this.title = _('Critical') + ': ' + label;
+          this.title = this.isHorizontal ? _('Critical') + ': ' + label : this._formatTemp(temp, true);
+          this.actor.style = "background: FireBrick;";
         } else if (high && temp >= high) {
-          this.title = _('High') + ': ' + label;
+          this.title =  this.isHorizontal ? _('High') + ': ' + label : this._formatTemp(temp, true);
+          this.actor.style = "background: DarkOrange;";
         } else {
-          this.title = label;
+          this.title = this._formatTemp(temp, true);
         }
       }
     }
@@ -206,7 +209,7 @@ CPUTemperatureApplet.prototype = {
       // if we don't have the temperature yet, use some known files
       tempInfo = this._findTemperatureFromFiles();
       if (tempInfo.temp) {
-        this.title = this._formatTemp(tempInfo.temp);
+        this.title = this._formatTemp(tempInfo.temp, true);
         items.push(_('Current Temperature') + ': ' + this._formatTemp(tempInfo.temp));
         if (tempInfo.crit) {
           items.push(_('Critical Temperature') + ': ' + this._formatTemp(tempInfo.crit));
@@ -313,10 +316,10 @@ CPUTemperatureApplet.prototype = {
     return 9 / 5 * c + 32;
   },
 
-  _formatTemp: function(t) {
+  _formatTemp: function(t, line_feed = false) {
     let precisionDigits;
     precisionDigits = this.state.onlyIntegerPart ? 0 : 1;
-    let separator = this.isHorizontal ? " " : "\n"
+    let separator = (this.isHorizontal || !line_feed) ? " " : "\n"
     if (this.state.useFahrenheit) {
       return (
         this._toFahrenheit(t)
