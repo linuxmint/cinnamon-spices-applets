@@ -85,3 +85,7 @@ msgstr "ms"
 #. settings-schema.json->interval->description
 msgid "Update interval"
 msgstr "Intervalle de temps entre deux mesures"
+
+#. settings-schema.json->change-color->description
+msgid "Change color when the temperature becomes High or Critical"
+msgstr "Changer de couleur lorsque la température devient Élevée ou Critique"
