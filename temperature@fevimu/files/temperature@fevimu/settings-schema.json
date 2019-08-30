@@ -19,8 +19,16 @@
         "description": "Update interval"
     },
     "change-color": {
-        "type" : "switch",
-        "default" : true,
-        "description" : "Change color when the temperature becomes High or Critical"
+        "type": "switch",
+        "default": true,
+        "description": "Change color when the temperature becomes High or Critical",
+        "tooltip": "Selecting this option, this applet becomes\n orange when the High Temperature Threshold is reached,\n red when the Critical Temperature Threshold is reached."
+    },
+    "only-colors": {
+        "type": "switch",
+        "default": false,
+        "dependency": "change-color",
+        "description": "Only use colors to alert me",
+        "tooltip": "Select this option to not display text alerts in horizontal panels.\n(No text alert is ever displayed on vertical panels.)"
     }
 }

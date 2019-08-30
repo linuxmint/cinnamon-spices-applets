@@ -1,11 +1,19 @@
 const St = imports.gi.St;
 const PopupMenu = imports.ui.popupMenu;
 const GLib = imports.gi.GLib;
+const Gio = imports.gi.Gio; // Needed for file infos
 const Util = imports.misc.util;
 const Mainloop = imports.mainloop;
 const Applet = imports.ui.applet;
 const Settings = imports.ui.settings;
 const Gettext = imports.gettext;
+
+const UUID = "temperature@fevimu";
+
+const HOME_DIR = GLib.get_home_dir();
+// ++ DEBUG is true only if the DEBUG file is present in this applet directory ($ touch DEBUG)
+var _debug = Gio.file_new_for_path(HOME_DIR + "/.local/share/cinnamon/applets/" + UUID + "/DEBUG");
+const DEBUG = _debug.query_exists(null);
 
 const sensorRegex = /^([\sA-z\w]+[\s|:|\d]{1,4})(?:\s+\+)(\d+\.\d+)°[FC]|(?:\s+\()([a-z]+)(?:[\s=+]+)(\d+\.\d)°[FC],\s([a-z]+)(?:[\s=+]+)(\d+\.\d)/gm;
 const cpuIdentifiers = ['Tctl', 'CPU Temperature'];
@@ -15,7 +23,7 @@ const _ = function(str) {
   if (translation !== str) {
     return translation;
   }
-  return Gettext.dgettext('temperature@fevimu', str);
+  return Gettext.dgettext(UUID, str);
 }
 
 function CPUTemperatureApplet(metadata, orientation, instance_id) {
@@ -43,6 +51,7 @@ CPUTemperatureApplet.prototype = {
     this.settings.bindProperty(Settings.BindingDirection.IN, 'only-integer-part', 'onlyIntegerPart', this.updateTemperature, null);
     this.settings.bindProperty(Settings.BindingDirection.IN, 'interval', 'interval');
     this.settings.bindProperty(Settings.BindingDirection.IN, 'change-color', 'changeColor', this.updateTemperature, null);
+    this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, 'only-colors', 'onlyColors', this.updateTemperature, null);
 
     this.lang = {
       acpi: 'ACPI Adapter',
@@ -187,18 +196,25 @@ CPUTemperatureApplet.prototype = {
           }
           items.push(tempInfo[i].label + ': ' + this._formatTemp(tempInfo[i].value));
         }
+        if (high > 0 || critical > 0) {
+          items.push("");
+          items.push(_("Thresholds Info") + ":")
+          if (high > 0) items.push("  " + _("High Temp") + ': ' + this._formatTemp(high));
+          if (critical > 0) items.push("  " + _("Crit. Temp") + ': ' + this._formatTemp(critical));
+        }
         if (packageCount > 0) {
             temp = packageIds / packageCount;
         } else if (n > 0) {
             temp = s / n;
         }
         let label = this._formatTemp(temp);
-        //critical = 53; high = 49; // <- For tests only.
+        if (DEBUG === true) {critical = 53; high = 49;} // <- For tests only.
+        if (this.state.changeColor === false) this.state.onlyColors = false;
         if (critical && temp >= critical) {
-          this.title = this.isHorizontal ? _('Critical') + ': ' + label : this._formatTemp(temp, true);
+          this.title = (this.isHorizontal === true && this.state.onlyColors === false) ? _('Critical') + ': ' + label : this._formatTemp(temp, true);
           this.actor.style = (this.state.changeColor === true) ? "background: FireBrick;" : "";
         } else if (high && temp >= high) {
-          this.title =  this.isHorizontal ? _('High') + ': ' + label : this._formatTemp(temp, true);
+          this.title = (this.isHorizontal === true && this.state.onlyColors === false) ? _('High') + ': ' + label : this._formatTemp(temp, true);
           this.actor.style = (this.state.changeColor === true) ? "background: DarkOrange;" : "";
         } else {
           this.title = this._formatTemp(temp, true);
