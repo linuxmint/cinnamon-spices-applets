@@ -208,7 +208,7 @@ CPUTemperatureApplet.prototype = {
             temp = s / n;
         }
         let label = this._formatTemp(temp);
-        if (DEBUG === true) critical = 53; high = 49; // <- For tests only.
+        if (DEBUG === true) {critical = 53; high = 49;} // <- For tests only.
         if (this.state.changeColor === false) this.state.onlyColors = false;
         if (critical && temp >= critical) {
           this.title = (this.isHorizontal === true && this.state.onlyColors === false) ? _('Critical') + ': ' + label : this._formatTemp(temp, true);
