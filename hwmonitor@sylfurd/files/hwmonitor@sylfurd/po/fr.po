@@ -1,0 +1,121 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-08-06 09:36+0200\n"
+"PO-Revision-Date: 2019-08-06 09:47+0200\n"
+"Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.6\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: applet.js:52
+msgid "Dependency missing"
+msgstr "Dépendance manquante"
+
+#: applet.js:56
+#, javascript-format
+msgid "to use the applet %s"
+msgstr "pour pouvoir utiliser l'applet %s"
+
+#: applet.js:52
+msgid ""
+"Please install the GTop package\n"
+"\tUbuntu / Mint: gir1.2-gtop-2.0\n"
+"\tFedora: libgtop2-devel\n"
+"\tArch: libgtop\n"
+msgstr ""
+"Veuillez installer le paquet GTop\n"
+"\tUbuntu / Mint: gir1.2-gtop-2.0\n"
+"\tFedora: libgtop2-devel\n"
+"\tArch: libgtop\n"
+
+#: applet.js:80
+msgid "Open System Monitor"
+msgstr "Ouvrir le Moniteur système"
+
+#: applet.js:84
+msgid "Restart 'Graphical hardware monitor'"
+msgstr "Redémarrer 'Moniteur graphique'"
+
+#: applet.js:401
+msgid "CPU"
+msgstr "CPU"
+
+#: applet.js:428
+msgid "MEM"
+msgstr "MEM"
+
+#. metadata.json->name
+msgid "Graphical hardware monitor"
+msgstr "Moniteur graphique"
+
+#. metadata.json->description
+msgid "Displaying realtime CPU and memory load"
+msgstr "Affiche en temps réel la charge des processeurs et de la mémoire"
+
+#. settings-schema.json->main-section->description
+msgid "Graphical hardware monitor settings."
+msgstr "Préférences du Moniteur graphique"
+
+#. settings-schema.json->graph_width->units
+#. settings-schema.json->graph_height->units
+msgid "pixels"
+msgstr "pixels"
+
+#. settings-schema.json->graph_width->description
+msgid "Horizontal panel graph width"
+msgstr "Largeur du graphique dans un tableau de bord horizontal"
+
+#. settings-schema.json->graph_height->description
+msgid "Vertical panel graph height"
+msgstr "Hauteur du graphique dans un tableau de bord vertical"
+
+#. settings-schema.json->frequency->options
+msgid "0,5"
+msgstr "0,5"
+
+#. settings-schema.json->frequency->options
+msgid "0.5"
+msgstr "0,5"
+
+#. settings-schema.json->frequency->options
+msgid "1.0"
+msgstr "1,0"
+
+#. settings-schema.json->frequency->options
+msgid "2.0"
+msgstr "2,0"
+
+#. settings-schema.json->frequency->options
+msgid "3.0"
+msgstr "3,0"
+
+#. settings-schema.json->frequency->options
+msgid "4.0"
+msgstr "4,0"
+
+#. settings-schema.json->frequency->options
+msgid "5.0"
+msgstr "5,0"
+
+#. settings-schema.json->frequency->options
+msgid "10.0"
+msgstr "10,0"
+
+#. settings-schema.json->frequency->description
+msgid "Update frequency (seconds)"
+msgstr "Fréquence de mise à jour (en secondes)"
+
+#. settings-schema.json->frequency->tooltip
+msgid "The amount of time (in seconds) between the graph updates."
+msgstr "La durée (en secondes) entre deux mises à jour du graphique."

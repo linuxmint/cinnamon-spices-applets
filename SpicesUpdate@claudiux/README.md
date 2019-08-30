@@ -1,5 +1,9 @@
 # Spices Update
 
+## Important!
+In order to be sure to download the latest version of Spices Update, use
+**[this link](https://cinnamon-spices.linuxmint.com/files/applets/SpicesUpdate@claudiux.zip?1795e891-f316-403b-9282-c1c63b090fe3)** rather than the Download button at the top of this page.
+
 ## Summary
 
 Cinnamon Spices are Applets, Desklets, Extensions and Themes.
@@ -14,19 +18,35 @@ The **Spices Update** applet plays these roles:
 
 ## Status
 
+Usable from Cinnamon 2.8 to Cinnamon 4.2.
+
 Fully supported by the author, under continuing development and in continuous use on several machines, running with **Linux Mint**, **Fedora** or **Archlinux**.
+
+From version v3.0.0 ~ 20190808:
+  * Spices Update is compatible with Cinnamon 2.8 -> 4.2 (Mint 17.3 -> 19.2).
+   * From Cinnamon 3.8 to 4.2 (Mint 19 -> 19.2): **Perfectly functional, as usual.**
+   * From Cinnamon 2.8 to 3.6 (Mint 17.3 -> 18.3): Some features are reduced:
+    * The Spices configuration window does not open on the second tab, only on the first one. You will need to click on the second tab and select the sort by date yourself.
+    * The Settings window of this applet does not contain any tabs.
+    * In the settings of this applet, you can not access Spices lists to disable their monitoring. Therefore, all installed Spices are monitored.
+    * The script `generate_mo.sh` (in the `scripts` folder) allows you to install all available translations. Restart Cinnamon after execution.
+    * If the `Symbola_Hinted` font can not be automatically installed, then place you into the `fonts/symbola` folder and double-click on the `Symbola_Hinted.ttf` file. Install it with the just opened `gnome-font-viewer`.
+    * Cinnamon 2.8: The number of changes does not appear next to the Spices Update icon.
 
 ## Requirements
 
 The Spices Update requires the ```notify-send``` tool and the ```symbola``` TrueType font.
 
-To install it:
+To install them:
 
   * Fedora: `sudo dnf install libnotify gdouros-symbola-fonts`
   * Arch:
     * ```sudo pacman -Syu libnotify```
     * `yay -S ttf-symbola` _or_ `pamac build ttf-symbola`
-  * Linux Mint: ```sudo apt install libnotify-bin fonts-symbola```
+  * Linux Mint, Ubuntu: ```sudo apt install libnotify-bin fonts-symbola```
+  * Debian (without sudo):
+    * `su`
+    * ```apt install libnotify-bin fonts-symbola```
 
 **This applet helps you to install these dependencies, if needed.**
 

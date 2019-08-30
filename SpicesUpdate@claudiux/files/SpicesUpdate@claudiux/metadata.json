@@ -1,8 +1,19 @@
 {
-    "uuid": "SpicesUpdate@claudiux",
-    "name": "Spices Update",
-    "max-instances": "1",
-    "hide-configuration": false,
-    "version": "2.0.0",
-    "description": "Warns you when installed Spices (applets, desklets, extensions, themes) require an update or new Spices are available."
+  "uuid": "SpicesUpdate@claudiux",
+  "name": "Spices Update",
+  "max-instances": "1",
+  "hide-configuration": false,
+  "version": "3.0.4",
+  "description": "Warns you when installed Spices (applets, desklets, extensions, themes) require an update or new Spices are available.",
+  "multiversion": true,
+  "cinnamon-version": [
+    "2.8",
+    "3.0",
+    "3.2",
+    "3.4",
+    "3.6",
+    "3.8",
+    "4.0",
+    "4.2"
+  ]
 }

@@ -16,25 +16,25 @@ function MyApplet(orientation) {
 MyApplet.prototype = {
     __proto__: Applet.IconApplet.prototype,
 
-    _init: function(orientation) {        
+    _init: function(orientation) {
         Applet.IconApplet.prototype._init.call(this, orientation);
-        
-        try {        
-            this.set_applet_icon_name("lock");
-            this.set_applet_tooltip(_("Click to lock the screen immediately"));                                                
+
+        try {
+            this.set_applet_icon_symbolic_name("system-lock-screen");
+            this.set_applet_tooltip(_("Click to lock the screen immediately"));
         }
         catch (e) {
             global.logError(e);
         }
     },
-    
+
     on_applet_clicked: function(event) {
         GLib.spawn_command_line_async('cinnamon-screensaver-command --lock');
     }
-   
+
 };
 
-function main(metadata, orientation) {  
+function main(metadata, orientation) {
     let myApplet = new MyApplet(orientation);
-    return myApplet;      
+    return myApplet;
 }

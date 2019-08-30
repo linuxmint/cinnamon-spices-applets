@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-19 11:15+0800\n"
+"POT-Creation-Date: 2019-08-06 09:36+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,34 +17,100 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: applet.js:45
+#: applet.js:52
 msgid "Dependency missing"
 msgstr ""
 
-#: applet.js:45
-msgid "Please install the GTop package\n"
-msgstr ""
-
-#: applet.js:49
+#: applet.js:56
+#, javascript-format
 msgid "to use the applet %s"
 msgstr ""
 
-#: applet.js:72
+#: applet.js:52
+msgid ""
+"Please install the GTop package\n"
+"\tUbuntu / Mint: gir1.2-gtop-2.0\n"
+"\tFedora: libgtop2-devel\n"
+"\tArch: libgtop\n"
+msgstr ""
+
+#: applet.js:80
 msgid "Open System Monitor"
 msgstr ""
 
-#: applet.js:283
+#: applet.js:84
+msgid "Restart 'Graphical hardware monitor'"
+msgstr ""
+
+#: applet.js:401
 msgid "CPU"
 msgstr ""
 
-#: applet.js:306
+#: applet.js:428
 msgid "MEM"
 msgstr ""
 
-#. hwmonitor@sylfurd->metadata.json->description
+#. metadata.json->name
+msgid "Graphical hardware monitor"
+msgstr ""
+
+#. metadata.json->description
 msgid "Displaying realtime CPU and memory load"
 msgstr ""
 
-#. hwmonitor@sylfurd->metadata.json->name
-msgid "Graphical hardware monitor"
+#. settings-schema.json->main-section->description
+msgid "Graphical hardware monitor settings."
+msgstr ""
+
+#. settings-schema.json->graph_width->units
+#. settings-schema.json->graph_height->units
+msgid "pixels"
+msgstr ""
+
+#. settings-schema.json->graph_width->description
+msgid "Horizontal panel graph width"
+msgstr ""
+
+#. settings-schema.json->graph_height->description
+msgid "Vertical panel graph height"
+msgstr ""
+
+#. settings-schema.json->frequency->options
+msgid "0,5"
+msgstr ""
+
+#. settings-schema.json->frequency->options
+msgid "0.5"
+msgstr ""
+
+#. settings-schema.json->frequency->options
+msgid "1.0"
+msgstr ""
+
+#. settings-schema.json->frequency->options
+msgid "2.0"
+msgstr ""
+
+#. settings-schema.json->frequency->options
+msgid "3.0"
+msgstr ""
+
+#. settings-schema.json->frequency->options
+msgid "4.0"
+msgstr ""
+
+#. settings-schema.json->frequency->options
+msgid "5.0"
+msgstr ""
+
+#. settings-schema.json->frequency->options
+msgid "10.0"
+msgstr ""
+
+#. settings-schema.json->frequency->description
+msgid "Update frequency (seconds)"
+msgstr ""
+
+#. settings-schema.json->frequency->tooltip
+msgid "The amount of time (in seconds) between the graph updates."
 msgstr ""

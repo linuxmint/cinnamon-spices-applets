@@ -97,6 +97,12 @@ MyApplet.prototype = {
                 null);
 
 
+            this.settings.bindProperty(Settings.BindingDirection.IN,
+                "notifyBatteryLowSound",
+                "notifyBatteryLowSound",
+                this.on_settings_changed,
+                null);
+
 
             // ++ Make metadata values available within applet for context menu.
 
@@ -155,7 +161,7 @@ MyApplet.prototype = {
             }
 
 /*
-            // Set sound file locations
+            // Set sound file locations as used in versions < 3.2
             this.batteryLowSound = GLib.get_home_dir() + "/batterymonitorwarning.mp3"; // path to sound file in user's home folder
             if (GLib.file_test(this.batteryLowSound, GLib.FileTest.EXISTS)) {
                   Main.warningNotify(_("Battery Monitor Applet"), _("A User Defined Sound File has been Specified for low Battery\n\nPlease ensure the volume is set sensibly in public places\nespecially if a long loud file is specifed\n"));
@@ -165,12 +171,14 @@ MyApplet.prototype = {
 */
              if (!this.chooseBatteryLowSound) {
                   // paths to default sound files
-                         this.batteryLowSound = "/usr/share/sounds/freedesktop/stereo/alarm-clock-elapsed.oga";
-                         this.batteryShutdownSound = "/usr/share/sounds/freedesktop/stereo/complete.oga";
+                   this.batteryLowSound = "/usr/share/sounds/freedesktop/stereo/alarm-clock-elapsed.oga";
+                   this.batteryShutdownSound = "/usr/share/sounds/freedesktop/stereo/complete.oga";
              } else {
-                   Main.warningNotify(_("Battery Monitor Applet"), _("A User Defined Sound File has been Specified for Low Battery\n\nPlease ensure the volume is set sensibly in public places\nespecially if a long loud file is specifed\n"));
-                        this.batteryLowSound = this.batteryLowSound1;
-                        this.batteryShutdownSound = this.batteryShutdownSound1;
+                    if (this.notifyBatteryLowSound && this.useBatteryLowSound) {
+                          Main.warningNotify(_("Battery Monitor Applet"), _("A User Defined Sound File has been Specified for Low Battery\n\nPlease ensure the volume is set sensibly in public places\nespecially if a long loud file is specifed\n"));
+                    }
+                    this.batteryLowSound = this.batteryLowSound1;
+                    this.batteryShutdownSound = this.batteryShutdownSound1;
               }
 
             // Check stylesheet file over-ride location and use
@@ -194,8 +202,8 @@ MyApplet.prototype = {
 
             // Make sure the temp files are created
 
-            GLib.spawn_command_line_async('touch /tmp/.batteryPercentage');
-            GLib.spawn_command_line_async('touch /tmp/.batteryState');
+            GLib.spawn_command_line_async('touch .batteryPercentage');
+            GLib.spawn_command_line_async('touch .batteryState');
 
             // Finally setup to start the update loop for the applet display running
 
@@ -348,7 +356,7 @@ MyApplet.prototype = {
     updateUI: function() {
 
         try {
-            this.batteryPercentage = GLib.file_get_contents("/tmp/.batteryPercentage").toString();
+            this.batteryPercentage = GLib.file_get_contents(".batteryPercentage").toString();
             this.batteryPercentage = this.batteryPercentage.trim().substr(5);
             this.batteryPercentage = Math.floor(this.batteryPercentage);
              // now check we have a genuine number otherwise use last value
@@ -357,7 +365,7 @@ MyApplet.prototype = {
             }
 //          Comment out following line when tests are complete
 //          this.batteryPercentage = this.batteryPercentage / 5 ;
-            this.batteryState = GLib.file_get_contents("/tmp/.batteryState").toString();
+            this.batteryState = GLib.file_get_contents(".batteryState").toString();
             if ( this.batteryState.trim().length > 6 ) {
                  this.batteryState = this.batteryState.trim().substr(5);
                  this.batteryStateOld = this.batteryState;
@@ -616,5 +624,14 @@ Bug Fix for use with early versions of Cinnamon
 ### 1.3.7
   * Change to allow Multiversion 3.2
   * Change to selection of audible alert file in Applet Settings for 3.2 and higher.
+### 1.3.7.1
+  * Change to cinnamon-version in metadata.json to add use under Cinnamon 4.2
+### 1.3.8
+  * Change location of temporary files to home folder to avoid permissions problem when switching users
+  * Fixes #2502
+### 1.3.9
+  * Adds events-sounds property to soundfilechoser widget to allow any sound file to be selected under Cinnamon 4.2
+  * Adds additional option to inhibit notifications when user selected audible alert is in use
+   - closes feature request #2511
 */
 

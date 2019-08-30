@@ -61,13 +61,10 @@ MyApplet.prototype = {
     _update: function() {
         try {
             GTop.glibtop_get_mem(this.gtop);
-            this.usage = this.gtop.used;
-            this.buffer = this.gtop.buffer;
-            this.cached = this.gtop.cached;
             this.maxmem = this.gtop.total;
+	    this.user = this.gtop.user;
 
-            this.realuse = this.usage - this.buffer - this.cached;
-            let percent = Math.round((this.realuse * 100) / this.maxmem);
+            let percent = Math.round((this.user * 100) / this.maxmem);
             this.set_applet_label(this.mem_label + " " + percent.toString().slice(-3) + "%");
             this.set_applet_tooltip(_("Click to open Gnome system monitor"));
         }

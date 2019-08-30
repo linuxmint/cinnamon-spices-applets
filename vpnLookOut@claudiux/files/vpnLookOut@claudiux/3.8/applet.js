@@ -559,6 +559,8 @@ class vpnLookOut extends Applet.TextIconApplet {
         this.system_icon_theme = this.get_system_icon_theme();
         if (this.system_icon_theme.startsWith('Mint-X'))
             this.system_icon_theme = 'Mint-X';
+        if (this.system_icon_theme.startsWith('Mint-Y'))
+            this.system_icon_theme = 'Mint-Y';
         if (this.old_system_icon_theme == null || this.system_icon_theme != this.old_system_icon_theme) {
             this.old_system_icon_theme = this.system_icon_theme;
             this.icon_theme_path = this.appletPath + '/../icons/byTheme/' + this.system_icon_theme;

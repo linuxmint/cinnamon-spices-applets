@@ -30,7 +30,7 @@ If the location you try does not work, try using [OpenWeatherMap's finder](https
 
 ------
 
-### DarkSky API Key Setup
+### DarkSky API Key Setup (Supported from Cinnamon 3.4)
 
 Go to [DarkSky](https://darksky.net/dev/register) and create an account. Then go your [Console section](https://darksky.net/dev/account) where you should find your secret key already created.
 
@@ -54,8 +54,7 @@ Right-click to access `cinnamon-settings` -> _Applets -> Configure_.
 [Mailing list](http://groups.google.com/group/cinnamon-weather)
 
 ## Known Issues
-* Translations in general and are in bad shape after the rework, contribute if you can, it is always much appreciated.
-* Sunset/Sunrise is not displayed correctly if there is a mismatch between the Location Timezone and System Timezone
+* Sunset/Sunrise is not displayed correctly if there is a mismatch between the Location Timezone and System Timezone when using Manual Location
 * DarkSky verbose conditions are only in cm/celsius or in/fahrenheit
 
 ###### Fedora 19 "Schrödinger's Cat" 

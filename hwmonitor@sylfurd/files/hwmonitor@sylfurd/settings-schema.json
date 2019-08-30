@@ -1,0 +1,160 @@
+{
+    "main_section": {
+        "type": "section",
+        "description": "Graphical hardware monitor settings"
+    },
+    "graph_width": {
+        "type": "spinbutton",
+        "default": 100,
+        "min": 10,
+        "max": 500,
+        "units": "pixels",
+        "step": 1,
+        "description": "Horizontal panel graph width"
+    },
+    "graph_height": {
+        "type": "spinbutton",
+        "default": 50,
+        "min": 10,
+        "max": 300,
+        "units": "pixels",
+        "step": 1,
+        "description": "Vertical panel graph height"
+    },
+    "frequency": {
+        "type": "combobox",
+        "default": "1.0",
+        "options": {
+            "0.5": "0.5",
+            "1.0": "1.0",
+            "2.0": "2.0",
+            "3.0": "3.0",
+            "4.0": "4.0",
+            "5.0": "5.0",
+            "10.0": "10.0"
+        },
+        "description": "Update frequency (seconds)",
+        "tooltip": "The amount of time (in seconds) between the graph updates."
+    },
+    "label_section": {
+        "type": "section",
+        "description": "Custom graph labels"
+    },
+    "custom_labels": {
+        "type": "checkbox",
+        "default": false,
+        "description": "Use custom graph labels",
+        "tooltip": "Choose your own labels for the graphs"
+    },
+    "cpu_label": {
+        "type": "entry",
+        "default": "CPU",
+        "description": "Set the label for the CPU graph",
+        "dependency": "custom_labels"
+    },
+    "mem_label": {
+        "type": "entry",
+        "default": "MEM",
+        "description": "Set the label for the memory graph",
+        "dependency": "custom_labels"
+    },
+    "theme_section": {
+        "type": "section",
+        "description": "Theme"
+    },
+    "theme": {
+        "type": "combobox",
+        "default": "dark",
+        "options": {
+            "dark theme": "dark",
+            "light theme": "light",
+            "custom theme": "user"
+        },
+        "description": "Theme",
+        "tooltip": "Use custom theme to select colors that matches your current theme."
+    },
+    "border_color": {
+        "type": "colorchooser",
+        "default": "rgba(255,255,255,0.5",
+        "description": "Border color",
+        "tooltip": "Click the button to select a border color for the graphs",
+        "indent": true,
+        "dependency": "theme=user"
+    },
+    "background_color1": {
+        "type": "colorchooser",
+        "default": "rgba(255,255,255,0.3)",
+        "description": "Background color 1",
+        "tooltip": "Click the button to select a starting color for the linear gradient of the graph background",
+        "indent": true,
+        "dependency": "theme=user"
+    },
+    "background_color2": {
+        "type": "colorchooser",
+        "default": "rgba(0,0,0,0.2)",
+        "description": "Background color 2",
+        "tooltip": "Click the button to select a ending color for the linear gradient of the graph background",
+        "indent": true,
+        "dependency": "theme=user"
+    },
+    "label_color": {
+        "type": "colorchooser",
+        "default": "rgb(255,255,255)",
+        "description": "Label color",
+        "tooltip": "Click the button to select a label color",
+        "indent": true,
+        "dependency": "theme=user"
+    },
+    "graph_color1": {
+        "type": "colorchooser",
+        "default": "rgba(51,178,255,1)",
+        "description": "Graph color 1",
+        "tooltip": "Click the button to select a starting color for the linear gradient of the graph colors. Offset for the first color is always 0.",
+        "indent": true,
+        "dependency": "theme=user"
+    },
+    "graph_color2": {
+        "type": "colorchooser",
+        "default": "rgba(102,255,76,1)",
+        "description": "Graph color 2",
+        "tooltip": "Click the button to select a first middle color for the linear gradient of the graph colors.",
+        "indent": true,
+        "dependency": "theme=user"
+    },
+    "graph_offset2": {
+        "type": "spinbutton",
+        "default": 0.5,
+        "min": 0,
+        "max": 1,
+        "step": 0.01,
+        "description": "Offset for graph color 2",
+        "tooltip": "Offset for first middle color of the linear gradient",
+        "dependency": "theme=user"
+    },
+    "graph_color3": {
+        "type": "colorchooser",
+        "default": "rgba(255,255,51,1)",
+        "description": "Graph color 3",
+        "tooltip": "Click the button to select a second middle color for the linear gradient of the graph colors.",
+        "indent": true,
+        "dependency": "theme=user"
+    },
+    "graph_offset3": {
+        "type": "spinbutton",
+        "default": 0.7,
+        "min": 0,
+        "max": 1,
+        "step": 0.01,
+        "description": "Offset for graph color 2",
+        "tooltip": "Offset for second middle color of the linear gradient",
+        "dependency": "theme=user"
+    },
+    "graph_color4": {
+        "type": "colorchooser",
+        "default": "rgba(255,0,0,1)",
+        "description": "Graph color 4",
+        "tooltip": "Click the button to select a ending color for the linear gradient of the graph colors. Offset for the last color is always 1.",
+        "indent": true,
+        "dependency": "theme=user"
+    }
+}

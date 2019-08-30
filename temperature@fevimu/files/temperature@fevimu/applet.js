@@ -1,11 +1,19 @@
 const St = imports.gi.St;
 const PopupMenu = imports.ui.popupMenu;
 const GLib = imports.gi.GLib;
+const Gio = imports.gi.Gio; // Needed for file infos
 const Util = imports.misc.util;
 const Mainloop = imports.mainloop;
 const Applet = imports.ui.applet;
 const Settings = imports.ui.settings;
 const Gettext = imports.gettext;
+
+const UUID = "temperature@fevimu";
+
+const HOME_DIR = GLib.get_home_dir();
+// ++ DEBUG is true only if the DEBUG file is present in this applet directory ($ touch DEBUG)
+var _debug = Gio.file_new_for_path(HOME_DIR + "/.local/share/cinnamon/applets/" + UUID + "/DEBUG");
+const DEBUG = _debug.query_exists(null);
 
 const sensorRegex = /^([\sA-z\w]+[\s|:|\d]{1,4})(?:\s+\+)(\d+\.\d+)°[FC]|(?:\s+\()([a-z]+)(?:[\s=+]+)(\d+\.\d)°[FC],\s([a-z]+)(?:[\s=+]+)(\d+\.\d)/gm;
 const cpuIdentifiers = ['Tctl', 'CPU Temperature'];
@@ -15,7 +23,7 @@ const _ = function(str) {
   if (translation !== str) {
     return translation;
   }
-  return Gettext.dgettext('temperature@fevimu', str);
+  return Gettext.dgettext(UUID, str);
 }
 
 function CPUTemperatureApplet(metadata, orientation, instance_id) {
@@ -28,6 +36,12 @@ CPUTemperatureApplet.prototype = {
   _init: function(metadata, orientation, instance_id) {
     Applet.TextApplet.prototype._init.call(this, orientation, instance_id);
 
+    this.orientation = orientation;
+    if (this.versionCompare( GLib.getenv('CINNAMON_VERSION') ,"3.2" ) >= 0 ){
+      this.setAllowedLayout(Applet.AllowedLayout.BOTH);
+    }
+    this.on_orientation_changed(orientation); // Initializes for panel orientation
+
     this.isLooping = true;
     this.menuItems = [];
     this.state = {};
@@ -36,6 +50,8 @@ CPUTemperatureApplet.prototype = {
     this.settings.bindProperty(Settings.BindingDirection.IN, 'use-fahrenheit', 'useFahrenheit', this.updateTemperature, null);
     this.settings.bindProperty(Settings.BindingDirection.IN, 'only-integer-part', 'onlyIntegerPart', this.updateTemperature, null);
     this.settings.bindProperty(Settings.BindingDirection.IN, 'interval', 'interval');
+    this.settings.bindProperty(Settings.BindingDirection.IN, 'change-color', 'changeColor', this.updateTemperature, null);
+    this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, 'only-colors', 'onlyColors', this.updateTemperature, null);
 
     this.lang = {
       acpi: 'ACPI Adapter',
@@ -66,6 +82,38 @@ CPUTemperatureApplet.prototype = {
     this.updateTemperature();
     this.loopId = Mainloop.timeout_add(this.state.interval, () => this.updateTemperature());
   },
+
+  on_orientation_changed: function (orientation) {
+    this.orientation = orientation;
+    if (this.versionCompare( GLib.getenv('CINNAMON_VERSION') ,"3.2" ) >= 0 ){
+      if (this.orientation == St.Side.LEFT || this.orientation == St.Side.RIGHT) {
+        // vertical
+        this.isHorizontal = false;
+      } else {
+        // horizontal
+        this.isHorizontal = true;
+      }
+    } else {
+      this.isHorizontal = true;  // Do not check unless >= 3.2
+    }
+  }, // End of on_orientation_changed
+
+  versionCompare: function(left, right) {
+    if (typeof left + typeof right != 'stringstring')
+      return false;
+    var a = left.split('.'),
+        b = right.split('.'),
+        i = 0,
+        len = Math.max(a.length, b.length);
+    for (; i < len; i++) {
+      if ((a[i] && !b[i] && parseInt(a[i]) > 0) || (parseInt(a[i]) > parseInt(b[i]))) {
+        return 1;
+      } else if ((b[i] && !a[i] && parseInt(b[i]) > 0) || (parseInt(a[i]) < parseInt(b[i]))) {
+        return -1;
+      }
+    }
+    return 0;
+  }, // End of versionCompare
 
   on_applet_clicked: function() {
     this.buildMenu(this.menuItems);
@@ -148,18 +196,29 @@ CPUTemperatureApplet.prototype = {
           }
           items.push(tempInfo[i].label + ': ' + this._formatTemp(tempInfo[i].value));
         }
+        if (high > 0 || critical > 0) {
+          items.push("");
+          items.push(_("Thresholds Info") + ":")
+          if (high > 0) items.push("  " + _("High Temp") + ': ' + this._formatTemp(high));
+          if (critical > 0) items.push("  " + _("Crit. Temp") + ': ' + this._formatTemp(critical));
+        }
         if (packageCount > 0) {
             temp = packageIds / packageCount;
         } else if (n > 0) {
             temp = s / n;
         }
         let label = this._formatTemp(temp);
+        if (DEBUG === true) {critical = 53; high = 49;} // <- For tests only.
+        if (this.state.changeColor === false) this.state.onlyColors = false;
         if (critical && temp >= critical) {
-          this.title = _('Critical') + ': ' + label;
+          this.title = (this.isHorizontal === true && this.state.onlyColors === false) ? _('Critical') + ': ' + label : this._formatTemp(temp, true);
+          this.actor.style = (this.state.changeColor === true) ? "background: FireBrick;" : "";
         } else if (high && temp >= high) {
-          this.title = _('High') + ': ' + label;
+          this.title = (this.isHorizontal === true && this.state.onlyColors === false) ? _('High') + ': ' + label : this._formatTemp(temp, true);
+          this.actor.style = (this.state.changeColor === true) ? "background: DarkOrange;" : "";
         } else {
-          this.title = label;
+          this.title = this._formatTemp(temp, true);
+          this.actor.style = "";
         }
       }
     }
@@ -168,7 +227,7 @@ CPUTemperatureApplet.prototype = {
       // if we don't have the temperature yet, use some known files
       tempInfo = this._findTemperatureFromFiles();
       if (tempInfo.temp) {
-        this.title = this._formatTemp(tempInfo.temp);
+        this.title = this._formatTemp(tempInfo.temp, true);
         items.push(_('Current Temperature') + ': ' + this._formatTemp(tempInfo.temp));
         if (tempInfo.crit) {
           items.push(_('Critical Temperature') + ': ' + this._formatTemp(tempInfo.crit));
@@ -275,17 +334,18 @@ CPUTemperatureApplet.prototype = {
     return 9 / 5 * c + 32;
   },
 
-  _formatTemp: function(t) {
+  _formatTemp: function(t, line_feed = false) {
     let precisionDigits;
     precisionDigits = this.state.onlyIntegerPart ? 0 : 1;
+    let separator = (this.isHorizontal || !line_feed) ? " " : "\n"
     if (this.state.useFahrenheit) {
       return (
         this._toFahrenheit(t)
           .toFixed(precisionDigits)
-          .toString() + ' °F'
+          .toString() + '%s°F'.format(separator)
       );
     } else {
-      return (Math.round(t * 10) / 10).toFixed(precisionDigits).toString() + ' °C';
+      return (Math.round(t * 10) / 10).toFixed(precisionDigits).toString() + '%s°C'.format(separator);
     }
   }
 };
