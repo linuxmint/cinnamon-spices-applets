@@ -457,8 +457,14 @@ class MyApplet extends Applet.TextIconApplet {
             let mimeType = recentInfo.get_mime_type().replace("\/","-");
             let recentItem = new IconMenuItem(recentInfo.get_display_name(), mimeType);
             this.recentSection.addMenuItem(recentItem);
-            recentItem.connect("activate", Lang.bind(this, function() {
-                Gio.app_info_launch_default_for_uri(recentInfo.get_uri(), global.create_app_launch_context());
+            recentItem.connect("activate", Lang.bind(this, function(actor, event) {
+                let button = event.get_button();
+                let uri = recentInfo.get_uri();
+                if (button == 3) {
+                    Gio.app_info_launch_default_for_uri(uri.substr(0, uri.lastIndexOf("/")+1), global.create_app_launch_context());
+                } else {
+                    Gio.app_info_launch_default_for_uri(uri, global.create_app_launch_context());
+                }
             }))
         }
     }
