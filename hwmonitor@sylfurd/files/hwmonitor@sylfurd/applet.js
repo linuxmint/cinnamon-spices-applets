@@ -518,6 +518,7 @@ CpuDataProvider.prototype = {
         this.last = 0;
         this.usage = 0;
         this.last_total = 0;
+        this.last_delta = 0;
         this.name = _("CPU");
         this.type = "CPU";
     },
@@ -528,10 +529,15 @@ CpuDataProvider.prototype = {
         this.current = this.gtop.idle;
 
         let delta = this.gtop.total - this.last_total;
+        //global.log("Moniteur: delta " + delta );
+        if (delta < -50000) {
+            delta = this.last_delta;
+        }
         if (delta > 0) {
             this.usage = (this.current - this.last) / delta;
             this.last = this.current;
             this.last_total = this.gtop.total;
+            this.last_delta = delta;
         }
 
         return 1 - this.usage;
