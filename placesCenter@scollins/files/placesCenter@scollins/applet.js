@@ -213,7 +213,6 @@ class MyApplet extends Applet.TextIconApplet {
         this.settings.bindProperty(Settings.BindingDirection.IN, "showRecentDocuments", "showRecentDocuments", this.buildMenu);
         this.settings.bindProperty(Settings.BindingDirection.IN, "recentSizeLimit", "recentSizeLimit", this.buildRecentDocumentsSection);
         this.settings.bindProperty(Settings.BindingDirection.IN, "keyOpen", "keyOpen", this.setKeybinding);
-
         this.setKeybinding();
     }
 
@@ -315,7 +314,6 @@ class MyApplet extends Applet.TextIconApplet {
                 recentPaneBox.add_actor(recentPane.actor);
                 section._connectSubMenuSignals(recentPane, recentPane);
 
-                let recents_manual = "";
                 let recentTitle = new PopupMenu.PopupMenuItem(_("RECENT DOCUMENTS"), { style_class: "xCenter-title", reactive: false });
                 recentPane.addMenuItem(recentTitle);
 
