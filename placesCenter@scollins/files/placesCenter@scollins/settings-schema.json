@@ -45,7 +45,7 @@
         "recentSection": {
             "type": "section",
             "title": "Recent documents",
-            "keys": ["showRecentDocuments", "recentSizeLimit", "showRecentsManual"]
+            "keys": ["showRecentDocuments", "recentSizeLimit"]
         }
     },
 
@@ -167,10 +167,5 @@
         "description": "Number to show",
         "indent": true,
         "dependency": "showRecentDocuments"
-    },
-    "showRecentsManual": {
-        "type": "checkbox",
-        "description": "Show help about recent documents",
-        "default": true
     }
 }
