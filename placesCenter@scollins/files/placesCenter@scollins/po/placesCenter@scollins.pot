@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-03 10:00+0200\n"
+"POT-Creation-Date: 2019-09-04 01:32+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,51 +17,47 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: applet.js:142
+#: applet.js:127
+msgid "(Right click to open folder)"
+msgstr ""
+
+#: applet.js:149
 msgid "Places"
 msgstr ""
 
-#: applet.js:255
+#: applet.js:261
 msgid "Search Home Folder"
 msgstr ""
 
-#: applet.js:278
+#: applet.js:284
 msgid "SYSTEM"
 msgstr ""
 
-#: applet.js:287
+#: applet.js:293
 msgid "Search File System"
 msgstr ""
 
-#: applet.js:313
-msgid "Click to open the file."
-msgstr ""
-
-#: applet.js:313
-msgid "Right-click to open its folder."
-msgstr ""
-
-#: applet.js:314
+#: applet.js:319
 msgid "RECENT DOCUMENTS"
 msgstr ""
 
-#: applet.js:328
+#: applet.js:333
 msgid "Clear"
 msgstr ""
 
-#: applet.js:371
+#: applet.js:376
 msgid "Computer"
 msgstr ""
 
-#: applet.js:377
+#: applet.js:382
 msgid "File System"
 msgstr ""
 
-#: applet.js:393
+#: applet.js:398
 msgid "Network"
 msgstr ""
 
-#: applet.js:502
+#: applet.js:507
 msgid "Trash"
 msgstr ""
 
@@ -286,8 +282,4 @@ msgstr ""
 
 #. settings-schema.json->recentSizeLimit->description
 msgid "Number to show"
-msgstr ""
-
-#. settings-schema.json->showRecentsManual->description
-msgid "Show help about recent documents"
 msgstr ""
