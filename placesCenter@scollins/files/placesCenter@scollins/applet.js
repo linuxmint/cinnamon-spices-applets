@@ -206,6 +206,8 @@ class MyApplet extends Applet.TextIconApplet {
         this.settings.bindProperty(Settings.BindingDirection.IN, "showRecentDocuments", "showRecentDocuments", this.buildMenu);
         this.settings.bindProperty(Settings.BindingDirection.IN, "recentSizeLimit", "recentSizeLimit", this.buildRecentDocumentsSection);
         this.settings.bindProperty(Settings.BindingDirection.IN, "keyOpen", "keyOpen", this.setKeybinding);
+        this.settings.bindProperty(Settings.BindingDirection.IN, "showRecentsManual", "showRecentsManual", this.buildMenu);
+
         this.setKeybinding();
     }
 
@@ -307,7 +309,9 @@ class MyApplet extends Applet.TextIconApplet {
                 recentPaneBox.add_actor(recentPane.actor);
                 section._connectSubMenuSignals(recentPane, recentPane);
 
-                let recentTitle = new PopupMenu.PopupMenuItem(_("RECENT DOCUMENTS"), { style_class: "xCenter-title", reactive: false });
+                let recents_manual = "";
+                if (this.showRecentsManual === true) recents_manual = '\n' + _("Click to open the file.") + '\n' + _("Right-click to open its folder.");
+                let recentTitle = new PopupMenu.PopupMenuItem(_("RECENT DOCUMENTS") + recents_manual, { style_class: "xCenter-title", reactive: false });
                 recentPane.addMenuItem(recentTitle);
 
                 let recentScrollBox = new St.ScrollView({ style_class: "xCenter-scrollBox", x_fill: true, y_fill: false, y_align: St.Align.START });
