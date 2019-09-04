@@ -1,5 +1,9 @@
 # VPN Look-Out Applet
 
+## Important!
+In order to be sure to download the latest version of VPN Lookout, use
+**[this link](https://cinnamon-spices.linuxmint.com/files/applets/vpnLookOut@claudiux.zip?67f17bb2-27e6-4ea7-8197-497fcbe291b1)** rather than the Download button at the top of this page.
+
 ## Summary
 
 This is a simple applet that I wrote because I often saw too late that my VPN (_Virtual Private Network_) was shut down.
