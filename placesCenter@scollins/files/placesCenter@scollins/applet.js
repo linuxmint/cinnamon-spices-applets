@@ -121,6 +121,23 @@ class PlaceMenuItem extends FolderTypeMenuItem {
     }
 }
 
+class RecentFileMenuItem extends IconMenuItem {
+    constructor(text, icon, uri, folderApp){
+        super(text, icon);
+        this.connect("activate", Lang.bind(this, function(actor, event) {
+            let button = event.get_button();
+            if (button == 3) {
+                // Opens the folder containing the file with this file selected:
+                let command = "%s %s".format(folderApp, uri);
+                Util.spawnCommandLine(command);
+            } else {
+                Gio.app_info_launch_default_for_uri(uri, global.create_app_launch_context());
+            }
+        }))
+        let tooltip = new Tooltips.Tooltip(this.actor, text + '\n' + _("(Right click to open folder)"));
+    }
+}
+
 class MyApplet extends Applet.TextIconApplet {
     constructor(metadata, orientation, panel_height, instanceId) {
         try {
@@ -449,23 +466,16 @@ class MyApplet extends Applet.TextIconApplet {
 
         let recentDocuments = this.recentManager.get_items();
 
+        let appOpeningFolders = Gio.app_info_get_default_for_type('inode/directory', false).get_executable(); // usually returns: nemo
+
         let showCount;
         if ( this.recentSizeLimit == 0 ) showCount = recentDocuments.length;
         else showCount = ( this.recentSizeLimit < recentDocuments.length ) ? this.recentSizeLimit : recentDocuments.length;
         for ( let i = 0; i < showCount; i++ ) {
             let recentInfo = recentDocuments[i];
             let mimeType = recentInfo.get_mime_type().replace("\/","-");
-            let recentItem = new IconMenuItem(recentInfo.get_display_name(), mimeType);
+            let recentItem = new RecentFileMenuItem( recentInfo.get_display_name(), mimeType, recentInfo.get_uri(), appOpeningFolders );
             this.recentSection.addMenuItem(recentItem);
-            recentItem.connect("activate", Lang.bind(this, function(actor, event) {
-                let button = event.get_button();
-                let uri = recentInfo.get_uri();
-                if (button == 3) {
-                    Gio.app_info_launch_default_for_uri(uri.substr(0, uri.lastIndexOf("/")+1), global.create_app_launch_context());
-                } else {
-                    Gio.app_info_launch_default_for_uri(uri, global.create_app_launch_context());
-                }
-            }))
         }
     }
 
