@@ -36,7 +36,7 @@ MyApplet.prototype = {
       this.menu = new Applet.AppletPopupMenu(this, orientation);
       this.menuManager.addMenu(this.menu);
       this.appletPath = metadata.path;
-      this.gsettings = Gio.Settings.new("org.gnome.desktop.default-applications.terminal");
+      this.gsettings = Gio.Settings.new("org.cinnamon.desktop.applications.terminal");
       this.sshHeadless = false;
       this.sshForwardX = false;
       this.homeDir = GLib.get_home_dir();
