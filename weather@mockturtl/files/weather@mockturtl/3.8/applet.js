@@ -135,29 +135,29 @@ class WeatherApplet extends Applet.TextIconApplet {
             cloudiness: null,
         };
         this.forecasts = [];
-        this.errMsg = {
-            label: {
-                generic: _("Error"),
-                service: _("Service Error"),
-                noKey: _("No Api key"),
-                noLoc: _("No Location"),
-            },
-            desc: {
-                keyBad: _("Wrong API Key"),
-                locBad: _("Wrong Location"),
-                locNotFound: _("Location Not found"),
-                parse: _("Parsing weather information failed :("),
-                keyBlock: _("Key Temp. Blocked"),
-                cantGetLoc: _("Could not get location"),
-                unknown: _("Unknown Error"),
-                noResponse: _("No/Bad response from Data Service")
-            }
-        };
         this.currentLocale = null;
         this.systemLanguage = null;
         this._httpSession = new Soup.SessionAsync();
         this.locProvider = new ipApi.IpApi(this);
         this.lastUpdated = null;
+        this.encounteredError = false;
+        this.errMsg = {
+            unknown: _("Error"),
+            "bad api response - non json": _("Service Error"),
+            "bad key": _("Incorrect API Key"),
+            "bad api response": _("Service Error"),
+            "bad location format": _("Incorrect Location Format"),
+            "bad status code": _("Service Error"),
+            "key blocked": _("Key Blocked"),
+            "location not found": _("Can't find location"),
+            "no api response": _("Service Error"),
+            "no key": _("No Api Key"),
+            "no location": _("No Location"),
+            "no network response": _("Service Error"),
+            "no reponse body": _("Service Error"),
+            "no respone data": _("Service Error"),
+            "unusal payload": _("Service Error"),
+        };
         this.currentLocale = this.constructJsLocale(GLib.get_language_names()[0]);
         this.systemLanguage = this.currentLocale.split('_')[0];
         this.settings = new Settings.AppletSettings(this, UUID, instanceId);
@@ -234,31 +234,29 @@ class WeatherApplet extends Applet.TextIconApplet {
         this.menu.addActor(mainBox);
     }
     refreshAndRebuild() {
-        this.refreshWeather();
+        this.refreshWeather(true);
     }
     ;
     async LoadJsonAsync(query) {
         let json = await new Promise((resolve, reject) => {
             let message = Soup.Message.new('GET', query);
             this._httpSession.queue_message(message, (session, message) => {
-                if (message) {
-                    try {
-                        if (message.status_code != 200) {
-                            reject("http response Code: " + message.status_code + ", reason: " + message.reason_phrase);
-                            return;
-                        }
-                        this.log.Debug("API full response: " + message.response_body.data.toString());
-                        let payload = JSON.parse(message.response_body.data);
-                        resolve(payload);
-                    }
-                    catch (e) {
-                        this.log.Error("Error: API response is not JSON. The response: " + message.response_body.data);
-                        reject(e);
-                    }
+                if (!message)
+                    reject({ code: 0, message: "no network response", reason_phrase: "no network response" });
+                if (message.status_code != 200)
+                    reject({ code: message.status_code, message: "bad status code", reason_phrase: message.reason_phrase });
+                if (!message.response_body)
+                    reject({ code: message.status_code, message: "no reponse body", reason_phrase: message.reason_phrase });
+                if (!message.response_body.data)
+                    reject({ code: message.status_code, message: "no respone data", reason_phrase: message.reason_phrase });
+                try {
+                    this.log.Debug("API full response: " + message.response_body.data.toString());
+                    let payload = JSON.parse(message.response_body.data);
+                    resolve(payload);
                 }
-                else {
-                    this.log.Error("Error: No Response from API");
-                    reject(null);
+                catch (e) {
+                    this.log.Error("Error: API response is not JSON. The response: " + message.response_body.data);
+                    reject({ code: message.status_code, message: "bad api response - non json", reason_phrase: e });
                 }
             });
         });
@@ -269,16 +267,24 @@ class WeatherApplet extends Applet.TextIconApplet {
         let command = "xdg-open ";
         Util.spawnCommandLine(command + "https://cinnamon-spices.linuxmint.com/applets/view/17");
     }
+    IsDataTooOld() {
+        if (!this.lastUpdated)
+            return true;
+        let oldDate = this.lastUpdated;
+        oldDate.setMinutes(oldDate.getMinutes() + (this._refreshInterval * 2));
+        return (this.lastUpdated > oldDate);
+    }
     RefreshLoop() {
         let loopInterval = 15;
         try {
-            if (this.lastUpdated == null || new Date(this.lastUpdated.getTime() + this._refreshInterval * 60000) < new Date()) {
-                this.refreshWeather();
+            if (this.lastUpdated == null || this.encounteredError
+                || new Date(this.lastUpdated.getTime() + this._refreshInterval * 60000) < new Date()) {
+                this.refreshWeather(false);
             }
         }
         catch (e) {
             this.log.Error("Error in Main loop: " + e);
-            this.lastUpdated = null;
+            this.encounteredError = true;
         }
         Mainloop.timeout_add_seconds(loopInterval, Lang.bind(this, function mainloopTimeout() {
             this.RefreshLoop();
@@ -294,7 +300,7 @@ class WeatherApplet extends Applet.TextIconApplet {
     ;
     on_orientation_changed(orientation) {
         this.orientation = orientation;
-        this.refreshWeather();
+        this.refreshWeather(true);
     }
     ;
     _onKeySettingsUpdated() {
@@ -330,13 +336,6 @@ class WeatherApplet extends Applet.TextIconApplet {
             St.IconType.FULLCOLOR;
     }
     ;
-    showError(title, msg) {
-        this.set_applet_label(title);
-        this.set_applet_tooltip("Click to open");
-        this.set_applet_icon_name("weather-severe-alert");
-        this._currentWeatherSunrise.text = msg;
-    }
-    ;
     constructJsLocale(locale) {
         let jsLocale = locale.split(".")[0];
         let tmp = jsLocale.split("_");
@@ -348,23 +347,25 @@ class WeatherApplet extends Applet.TextIconApplet {
         }
         return jsLocale;
     }
-    async refreshWeather() {
+    async refreshWeather(rebuild) {
+        this.encounteredError = false;
         this.wipeCurrentData();
         this.wipeForecastData();
         try {
             if (!this._manualLocation) {
                 let haveLocation = await this.locProvider.GetLocation();
-                if (!haveLocation) {
-                    this.log.Error("Couldn't obtain location, retry in 15 seconds...");
-                    this.showError(this.errMsg.label.noLoc, this.errMsg.desc.cantGetLoc);
-                    this.lastUpdated = null;
+                if (!haveLocation)
                     return;
-                }
             }
             else {
                 let loc = this._location.replace(" ", "");
                 if (loc == undefined || loc == "") {
-                    this.showError(this.errMsg.label.noLoc, "");
+                    this.HandleError({
+                        type: "hard",
+                        detail: "no location",
+                        noTriggerRefresh: true,
+                        message: _("Make sure you entered a location or use Automatic location instead")
+                    });
                     this.log.Error("No location given when setting is on Manual Location");
                     return;
                 }
@@ -385,17 +386,17 @@ class WeatherApplet extends Applet.TextIconApplet {
             }
             if (!await this.provider.GetWeather()) {
                 this.log.Error("Unable to obtain Weather Information");
-                this.lastUpdated = null;
                 return;
             }
-            this.rebuild();
-            if (await this.displayWeather() && await this.displayForecast()) {
-                this.log.Print("Weather Information refreshed");
-            }
+            if (rebuild)
+                this.rebuild();
+            if (!await this.displayWeather() || !await this.displayForecast())
+                return;
+            this.log.Print("Weather Information refreshed");
         }
         catch (e) {
-            this.log.Error("Error while refreshing Weather info: " + e);
-            this.lastUpdated = null;
+            this.log.Error("Generic Error while refreshing Weather info: " + e);
+            this.HandleError({ type: "hard", detail: "unknown", message: _("Unexpected Error While Refreshing Weather, please see log in Looking Glass") });
             return;
         }
         this.lastUpdated = new Date();
@@ -713,6 +714,55 @@ class WeatherApplet extends Applet.TextIconApplet {
     ;
     unitToUnicode() {
         return this._temperatureUnit == "fahrenheit" ? '\u2109' : '\u2103';
+    }
+    DisplayError(title, msg) {
+        this.set_applet_label(title);
+        this.set_applet_tooltip("Click to open");
+        this.set_applet_icon_name("weather-severe-alert");
+        this._currentWeatherSunset.text = msg;
+    }
+    ;
+    HandleError(error) {
+        if (this.encounteredError)
+            return;
+        this.encounteredError = true;
+        if (error.type == "hard") {
+            this.rebuild();
+            this.DisplayError(this.errMsg[error.detail], (!error.message) ? "" : error.message);
+        }
+        if (error.type == "soft") {
+            if (this.IsDataTooOld()) {
+                this.set_applet_tooltip("Click to open");
+                this.set_applet_icon_name("weather-severe-alert");
+                this._currentWeatherSunset.text = _("Could not update weather for a while...\nare you connected to the internet?");
+            }
+        }
+        if (error.noTriggerRefresh) {
+            this.encounteredError = false;
+            return;
+        }
+        this.log.Error("Retrying in the next 15 seconds...");
+    }
+    HandleHTTPError(service, error, ctx, callback) {
+        let uiError = {
+            type: "soft",
+            detail: "unknown",
+            message: _("Network Error, please check logs in Looking Glass"),
+            service: service
+        };
+        if (typeof error === 'string' || error instanceof String) {
+            ctx.log.Error("Error calling " + service + ": " + error.toString());
+        }
+        else {
+            ctx.log.Error("Error calling " + service + " '" + error.message.toString() + "' Reason: " + error.reason_phrase.toString());
+            uiError.detail = error.message;
+            uiError.code = error.code;
+            if (error.message == "bad api response - non json")
+                uiError.type = "hard";
+            if (!!callback && callback instanceof Function)
+                uiError = callback(error, uiError);
+        }
+        ctx.HandleError(uiError);
     }
 }
 class Log {

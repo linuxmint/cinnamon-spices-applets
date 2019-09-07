@@ -47,13 +47,7 @@ class OpenWeatherMap implements WeatherProvider {
     async GetWeather(): Promise<boolean> {
         let currentResult = await this.GetData(this.current_url, this.ParseCurrent);
         let forecastResult = await this.GetData(this.daily_url, this.ParseForecast);
-        if (currentResult && forecastResult) {
-            return true;
-        }
-        else {
-            this.app.log.Error("OpenWeatherMap: Could not get Weather information");
-            return false;
-        }
+        return (currentResult && forecastResult);
     };
 
     // A function as a function parameter 2 levels deep does not know
@@ -65,17 +59,18 @@ class OpenWeatherMap implements WeatherProvider {
             this.app.log.Debug("Query: " + query);
             try {
                 json = await this.app.LoadJsonAsync(query);
-                if (json == null) {
-                    this.app.showError(this.app.errMsg.label.service, this.app.errMsg.desc.noResponse)
-                    return false;                 
-                }
             }
             catch(e) {
-                this.app.log.Error("Unable to call API:" + e);
+              this.app.HandleHTTPError("openweathermap", e, this.app, this.HandleHTTPError);
                 return false;
             }
 
-            if (json.cod == 200) {   // Request Success
+            if (json == null) {
+              this.app.HandleError({type: "soft", detail: "no api response", service: "openweathermap"});
+              return false;                 
+          }
+
+            if (json.cod == "200") {   // Request Success
                 return ParseFunction(json, this);
             }
             else {
@@ -124,7 +119,7 @@ class OpenWeatherMap implements WeatherProvider {
           }
           catch(e) { 
             self.app.log.Error("OpenWeathermap Weather Parsing error: " + e);
-            self.app.showError(self.app.errMsg.label.generic, self.app.errMsg.desc.parse);
+            self.app.HandleError({type: "soft", service: "openweathermap", detail: "unusal payload", message: _("Failed to Process Current Weather Info")})
             return false; 
           }
     };
@@ -175,7 +170,7 @@ class OpenWeatherMap implements WeatherProvider {
         }
         catch(e) {
             self.app.log.Error("OpenWeathermap Forecast Parsing error: " + e);
-            self.app.showError(self.app.errMsg.label.generic, self.app.errMsg.desc.parse);
+            self.app.HandleError({type: "soft", service: "openweathermap", detail: "unusal payload", message: _("Failed to Process Forecast Info")})
             return false; 
         }
     };
@@ -193,7 +188,7 @@ class OpenWeatherMap implements WeatherProvider {
             return query;
         }
         
-        this.app.showError(this.app.errMsg.label.noLoc, "");
+        this.app.HandleError({type: "hard", noTriggerRefresh: true, "detail": "no location", message: _("Please enter a Location in settings")});
         this.app.log.Error("OpenWeatherMap: No Location was provided");
         return null;
     };
@@ -213,27 +208,48 @@ class OpenWeatherMap implements WeatherProvider {
 
 
     HandleResponseErrors(json: any): void {
-        let errorMsg = "OpenWeather API: ";
+        let errorMsg = "OpenWeathermap Response: ";
+        let error = {
+          service: "openweathermap",
+          type: "hard",
+        } as AppletError;
         switch (json.cod) {
             case("400"):
-                this.app.showError(this.app.errMsg.label.service, this.app.errMsg.desc.locBad);
-                break;
+              error.detail = "bad location format";
+              error.message = _("Please make sure Location is in the correct format in the Settings");
+              break;
             case("401"):
-                this.app.showError(this.app.errMsg.label.service, this.app.errMsg.desc.keyBad);
-                break;
+              error.detail = "bad key";
+              error.message = _("Make sure you entered the correct key in settings");
+              break;
             case("404"):
-                this.app.showError(this.app.errMsg.label.service, this.app.errMsg.desc.locNotFound);
-                break;
+              error.detail = "location not found";
+              error.message = _("Location not found, make sure location is available or it is in the correct format");
+              break;
             case("429"):
-                this.app.showError(this.app.errMsg.label.service, this.app.errMsg.desc.keyBlock);
-                break;
+              error.detail = "key blocked";
+              error.message = _("If this problem persists, please contact the Author of this applet");    
+              break;
             default:
-                this.app.showError(this.app.errMsg.label.service, this.app.errMsg.desc.unknown);
-                break;
+              error.detail = "unknown";
+              error.message = _("Unknown Error, please see the logs in Looking Glass");    
+              break;
         };
+        this.app.HandleError(error);
         this.app.log.Debug("OpenWeatherMap Error Code: " + json.cod)
         this.app.log.Error(errorMsg + json.message);
     };
+
+    HandleHTTPError(error: HttpError, uiError: AppletError): AppletError {
+      // "this" is not accessible here
+      if (error.code == 404) {
+        uiError.detail = "location not found";
+        uiError.message = _("Location not found, make sure location is available or it is in the correct format");
+        uiError.noTriggerRefresh = true;
+        uiError.type = "hard";
+      }
+      return uiError;
+    }
 
 
     ResolveIcon(icon: string): string[] {

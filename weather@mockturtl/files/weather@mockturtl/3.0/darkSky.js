@@ -80,17 +80,16 @@ var DarkSky = (function () {
                         return [4, this.app.LoadJsonAsync(query)];
                     case 2:
                         json = _a.sent();
-                        if (json == null) {
-                            this.app.showError(this.app.errMsg.label.service, this.app.errMsg.desc.noResponse);
-                            return [2, false];
-                        }
                         return [3, 4];
                     case 3:
                         e_1 = _a.sent();
-                        this.app.log.Error("DarkSky: API call failed: " + e_1);
-                        this.app.showError(this.app.errMsg.label.service, this.app.errMsg.desc.noResponse);
+                        this.app.HandleHTTPError("darksky", e_1, this.app, this.HandleHTTPError);
                         return [2, false];
                     case 4:
+                        if (!json) {
+                            this.app.HandleError({ type: "soft", detail: "no api response", service: "darksky" });
+                            return [2, false];
+                        }
                         if (!json.code) {
                             return [2, this.ParseWeather(json)];
                         }
@@ -99,10 +98,7 @@ var DarkSky = (function () {
                             return [2, false];
                         }
                         _a.label = 5;
-                    case 5:
-                        this.app.log.Error("DarkSky: Could not construct query, insufficent information");
-                        this.app.showError(this.app.errMsg.label.service, this.app.errMsg.desc.locBad);
-                        return [2, false];
+                    case 5: return [2, false];
                 }
             });
         });
@@ -166,7 +162,7 @@ var DarkSky = (function () {
         }
         catch (e) {
             this.app.log.Error("DarkSky payload parsing error: " + e);
-            this.app.showError(this.app.errMsg.label.generic, this.app.errMsg.desc.parse);
+            this.app.HandleError({ type: "soft", detail: "unusal payload", service: "darksky", message: _("Failed to Process Weather Info") });
             return false;
         }
     };
@@ -177,7 +173,13 @@ var DarkSky = (function () {
         var key = this.app._apiKey.replace(" ", "");
         var location = this.app._location.replace(" ", "");
         if (this.app.noApiKey()) {
-            this.app.showError(this.app.errMsg.label.noKey, "");
+            this.app.log.Error("DarkSky: No API Key given");
+            this.app.HandleError({
+                type: "hard",
+                noTriggerRefresh: true,
+                "detail": "no key",
+                message: _("Please enter API key in settings,\nor get one first on https://darksky.net/dev/register")
+            });
             return "";
         }
         if (isCoordinate(location)) {
@@ -189,6 +191,8 @@ var DarkSky = (function () {
             return query;
         }
         else {
+            this.app.log.Error("DarkSky: Location is not a coordinate");
+            this.app.HandleError({ type: "hard", detail: "bad location format", service: "darksky", noTriggerRefresh: true, message: ("Please Check the location,\nmake sure it is a coordinate") });
             return "";
         }
     };
@@ -208,6 +212,15 @@ var DarkSky = (function () {
         }
     };
     ;
+    DarkSky.prototype.HandleHTTPError = function (error, uiError) {
+        if (error.code == 403) {
+            uiError.detail = "bad key";
+            uiError.message = _("Please Make sure you\nentered the API key correctly");
+            uiError.type = "hard";
+            uiError.noTriggerRefresh = true;
+        }
+        return uiError;
+    };
     DarkSky.prototype.ProcessSummary = function (summary) {
         var processed = summary.split(" ");
         var result = "";

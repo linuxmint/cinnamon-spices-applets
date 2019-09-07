@@ -7,14 +7,13 @@ class IpApi {
         let json;
         try {
             json = await this.app.LoadJsonAsync(this.query);
-            if (json == null) {
-                this.app.showError(this.app.errMsg.label.service, this.app.errMsg.desc.noResponse);
-                return false;
-            }
         }
         catch (e) {
-            this.app.log.Error("IpApi service error: " + e);
-            this.app.showError(this.app.errMsg.label.generic, this.app.errMsg.desc.cantGetLoc);
+            this.app.HandleHTTPError("ipapi", e, this.app);
+            return false;
+        }
+        if (!json) {
+            this.app.HandleError({ type: "soft", detail: "no api response" });
             return false;
         }
         if (json.error) {
@@ -38,13 +37,14 @@ class IpApi {
         }
         catch (e) {
             this.app.log.Error("IPapi parsing error: " + e);
-            this.app.showError(this.app.errMsg.label.generic, this.app.errMsg.desc.cantGetLoc);
+            this.app.HandleError({ type: "hard", detail: "no location", service: "ipapi", message: _("Could not obtain location") });
             return false;
         }
     }
     ;
     HandleErrorResponse(json) {
-        this.app.log.Error("IpApi error response: " + json.reason);
+        this.app.HandleError({ type: "hard", detail: "bad api response", message: _("Location Service responded with errors, please see the logs in Looking Glass"), service: "ipapi" });
+        this.app.log.Error("IpApi Responsd with Error: " + json.reason);
     }
     ;
 }

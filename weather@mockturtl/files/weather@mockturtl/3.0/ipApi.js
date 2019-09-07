@@ -48,17 +48,16 @@ var IpApi = (function () {
                         return [4, this.app.LoadJsonAsync(this.query)];
                     case 1:
                         json = _a.sent();
-                        if (json == null) {
-                            this.app.showError(this.app.errMsg.label.service, this.app.errMsg.desc.noResponse);
-                            return [2, false];
-                        }
                         return [3, 3];
                     case 2:
                         e_1 = _a.sent();
-                        this.app.log.Error("IpApi service error: " + e_1);
-                        this.app.showError(this.app.errMsg.label.generic, this.app.errMsg.desc.cantGetLoc);
+                        this.app.HandleHTTPError("ipapi", e_1, this.app);
                         return [2, false];
                     case 3:
+                        if (!json) {
+                            this.app.HandleError({ type: "soft", detail: "no api response" });
+                            return [2, false];
+                        }
                         if (json.error) {
                             this.HandleErrorResponse(json);
                             return [2, false];
@@ -83,13 +82,14 @@ var IpApi = (function () {
         }
         catch (e) {
             this.app.log.Error("IPapi parsing error: " + e);
-            this.app.showError(this.app.errMsg.label.generic, this.app.errMsg.desc.cantGetLoc);
+            this.app.HandleError({ type: "hard", detail: "no location", service: "ipapi", message: _("Could not obtain location") });
             return false;
         }
     };
     ;
     IpApi.prototype.HandleErrorResponse = function (json) {
-        this.app.log.Error("IpApi error response: " + json.reason);
+        this.app.HandleError({ type: "hard", detail: "bad api response", message: _("Location Service responded with errors, please see the logs in Looking Glass"), service: "ipapi" });
+        this.app.log.Error("IpApi Responsd with Error: " + json.reason);
     };
     ;
     return IpApi;
