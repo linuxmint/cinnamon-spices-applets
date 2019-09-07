@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-08-24 15:04+0100\n"
+"POT-Creation-Date: 2019-09-07 14:19+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,48 +33,48 @@ msgstr ""
 msgid "No location provided"
 msgstr ""
 
-#: applet.js:610 3.0/applet.js:562 3.8/applet.js:471
+#: applet.js:610 3.0/applet.js:563 3.8/applet.js:472
 msgid "Cloudiness:"
 msgstr ""
 
-#: applet.js:634 3.0/applet.js:592 3.8/applet.js:501
+#: applet.js:634 3.0/applet.js:593 3.8/applet.js:502
 msgid "Sunrise"
 msgstr ""
 
-#: applet.js:635 3.0/applet.js:593 3.8/applet.js:502
+#: applet.js:635 3.0/applet.js:594 3.8/applet.js:503
 msgid "Sunset"
 msgstr ""
 
-#: applet.js:708 3.0/applet.js:685 3.8/applet.js:594
+#: applet.js:708 3.0/applet.js:686 3.8/applet.js:595
 msgid "Loading current weather ..."
 msgstr ""
 
-#: applet.js:709 3.0/applet.js:688 3.8/applet.js:597
+#: applet.js:709 3.0/applet.js:689 3.8/applet.js:598
 msgid "Loading future weather ..."
 msgstr ""
 
-#: applet.js:731 3.0/applet.js:717 3.8/applet.js:626
+#: applet.js:731 3.0/applet.js:718 3.8/applet.js:627
 msgid "Loading ..."
 msgstr ""
 
-#: applet.js:737 3.0/applet.js:268 3.0/applet.js:707 3.8/applet.js:218
-#: 3.8/applet.js:616
+#: applet.js:737 3.0/applet.js:268 3.0/applet.js:708 3.8/applet.js:218
+#: 3.8/applet.js:617
 msgid "Refresh"
 msgstr ""
 
-#: applet.js:802 3.0/applet.js:739 3.8/applet.js:648
+#: applet.js:802 3.0/applet.js:740 3.8/applet.js:649
 msgid "Temperature:"
 msgstr ""
 
-#: applet.js:804 3.0/applet.js:740 3.8/applet.js:649
+#: applet.js:804 3.0/applet.js:741 3.8/applet.js:650
 msgid "Humidity:"
 msgstr ""
 
-#: applet.js:806 3.0/applet.js:741 3.8/applet.js:650
+#: applet.js:806 3.0/applet.js:742 3.8/applet.js:651
 msgid "Pressure:"
 msgstr ""
 
-#: applet.js:808 3.0/applet.js:742 3.8/applet.js:651
+#: applet.js:808 3.0/applet.js:743 3.8/applet.js:652
 msgid "Wind:"
 msgstr ""
 
@@ -142,11 +142,15 @@ msgstr ""
 msgid "Service Unavailable"
 msgstr ""
 
-#: applet.js:1084 3.0/applet.js:190 3.8/applet.js:141
+#: applet.js:1084 3.0/applet.js:195 3.0/applet.js:197 3.0/applet.js:199
+#: 3.0/applet.js:202 3.0/applet.js:205 3.0/applet.js:206 3.0/applet.js:207
+#: 3.0/applet.js:208 3.8/applet.js:146 3.8/applet.js:148 3.8/applet.js:150
+#: 3.8/applet.js:153 3.8/applet.js:156 3.8/applet.js:157 3.8/applet.js:158
+#: 3.8/applet.js:159
 msgid "Service Error"
 msgstr ""
 
-#: applet.js:1086 3.0/applet.js:195 3.8/applet.js:146
+#: applet.js:1086
 msgid "Wrong API Key"
 msgstr ""
 
@@ -154,7 +158,7 @@ msgstr ""
 msgid "City Not found"
 msgstr ""
 
-#: applet.js:1092 3.0/applet.js:199 3.8/applet.js:150
+#: applet.js:1092
 msgid "Key Temp. Blocked"
 msgstr ""
 
@@ -170,276 +174,347 @@ msgstr ""
 msgid "in"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:314 3.8/openWeatherMap.js:255
+#: 3.0/darkSky.js:165 3.8/darkSky.js:118
+msgid "Failed to Process Weather Info"
+msgstr ""
+
+#: 3.0/darkSky.js:181 3.8/darkSky.js:134
+msgid ""
+"Please enter API key in settings,\n"
+"or get one first on https://darksky.net/dev/register"
+msgstr ""
+
+#: 3.0/darkSky.js:218 3.8/darkSky.js:171
+msgid ""
+"Please Make sure you\n"
+"entered the API key correctly"
+msgstr ""
+
+#: 3.0/ipApi.js:85 3.8/ipApi.js:40
+msgid "Could not obtain location"
+msgstr ""
+
+#: 3.0/ipApi.js:91 3.8/ipApi.js:46
+msgid ""
+"Location Service responded with errors, please see the logs in Looking Glass"
+msgstr ""
+
+#: 3.0/openWeatherMap.js:153 3.8/openWeatherMap.js:96
+msgid "Failed to Process Current Weather Info"
+msgstr ""
+
+#: 3.0/openWeatherMap.js:202 3.8/openWeatherMap.js:145
+msgid "Failed to Process Forecast Info"
+msgstr ""
+
+#: 3.0/openWeatherMap.js:218 3.8/openWeatherMap.js:161
+msgid "Please enter a Location in settings"
+msgstr ""
+
+#: 3.0/openWeatherMap.js:245 3.8/openWeatherMap.js:188
+msgid "Please make sure Location is in the correct format in the Settings"
+msgstr ""
+
+#: 3.0/openWeatherMap.js:249 3.8/openWeatherMap.js:192
+msgid "Make sure you entered the correct key in settings"
+msgstr ""
+
+#: 3.0/openWeatherMap.js:253 3.0/openWeatherMap.js:273
+#: 3.8/openWeatherMap.js:196 3.8/openWeatherMap.js:216
+msgid ""
+"Location not found, make sure location is available or it is in the correct "
+"format"
+msgstr ""
+
+#: 3.0/openWeatherMap.js:257 3.8/openWeatherMap.js:200
+msgid "If this problem persists, please contact the Author of this applet"
+msgstr ""
+
+#: 3.0/openWeatherMap.js:261 3.8/openWeatherMap.js:204
+msgid "Unknown Error, please see the logs in Looking Glass"
+msgstr ""
+
+#: 3.0/openWeatherMap.js:326 3.8/openWeatherMap.js:268
 msgid "Thunderstorm with light rain"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:315 3.8/openWeatherMap.js:256
+#: 3.0/openWeatherMap.js:327 3.8/openWeatherMap.js:269
 msgid "Thunderstorm with rain"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:316 3.8/openWeatherMap.js:257
+#: 3.0/openWeatherMap.js:328 3.8/openWeatherMap.js:270
 msgid "Thunderstorm with heavy rain"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:317 3.8/openWeatherMap.js:258
+#: 3.0/openWeatherMap.js:329 3.8/openWeatherMap.js:271
 msgid "Light thunderstorm"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:318 3.8/openWeatherMap.js:259
+#: 3.0/openWeatherMap.js:330 3.8/openWeatherMap.js:272
 msgid "Thunderstorm"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:319 3.8/openWeatherMap.js:260
+#: 3.0/openWeatherMap.js:331 3.8/openWeatherMap.js:273
 msgid "Heavy thunderstorm"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:320 3.8/openWeatherMap.js:261
+#: 3.0/openWeatherMap.js:332 3.8/openWeatherMap.js:274
 msgid "Ragged thunderstorm"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:321 3.8/openWeatherMap.js:262
+#: 3.0/openWeatherMap.js:333 3.8/openWeatherMap.js:275
 msgid "Thunderstorm with light drizzle"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:322 3.8/openWeatherMap.js:263
+#: 3.0/openWeatherMap.js:334 3.8/openWeatherMap.js:276
 msgid "Thunderstorm with drizzle"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:323 3.8/openWeatherMap.js:264
+#: 3.0/openWeatherMap.js:335 3.8/openWeatherMap.js:277
 msgid "Thunderstorm with heavy drizzle"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:324 3.8/openWeatherMap.js:265
+#: 3.0/openWeatherMap.js:336 3.8/openWeatherMap.js:278
 msgid "Light intensity drizzle"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:325 3.8/openWeatherMap.js:266
+#: 3.0/openWeatherMap.js:337 3.8/openWeatherMap.js:279
 msgid "Drizzle"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:326 3.8/openWeatherMap.js:267
+#: 3.0/openWeatherMap.js:338 3.8/openWeatherMap.js:280
 msgid "Heavy intensity drizzle"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:327 3.8/openWeatherMap.js:268
+#: 3.0/openWeatherMap.js:339 3.8/openWeatherMap.js:281
 msgid "Light intensity drizzle rain"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:328 3.8/openWeatherMap.js:269
+#: 3.0/openWeatherMap.js:340 3.8/openWeatherMap.js:282
 msgid "Drizzle rain"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:329 3.8/openWeatherMap.js:270
+#: 3.0/openWeatherMap.js:341 3.8/openWeatherMap.js:283
 msgid "Heavy intensity drizzle rain"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:330 3.8/openWeatherMap.js:271
+#: 3.0/openWeatherMap.js:342 3.8/openWeatherMap.js:284
 msgid "Shower rain and drizzle"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:331 3.8/openWeatherMap.js:272
+#: 3.0/openWeatherMap.js:343 3.8/openWeatherMap.js:285
 msgid "Heavy shower rain and drizzle"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:332 3.8/openWeatherMap.js:273
+#: 3.0/openWeatherMap.js:344 3.8/openWeatherMap.js:286
 msgid "Shower drizzle"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:333 3.8/openWeatherMap.js:274
+#: 3.0/openWeatherMap.js:345 3.8/openWeatherMap.js:287
 msgid "Light rain"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:334 3.8/openWeatherMap.js:275
+#: 3.0/openWeatherMap.js:346 3.8/openWeatherMap.js:288
 msgid "Moderate rain"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:335 3.8/openWeatherMap.js:276
+#: 3.0/openWeatherMap.js:347 3.8/openWeatherMap.js:289
 msgid "Heavy intensity rain"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:336 3.8/openWeatherMap.js:277
+#: 3.0/openWeatherMap.js:348 3.8/openWeatherMap.js:290
 msgid "Very heavy rain"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:337 3.8/openWeatherMap.js:278
+#: 3.0/openWeatherMap.js:349 3.8/openWeatherMap.js:291
 msgid "Extreme rain"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:338 3.8/openWeatherMap.js:279
+#: 3.0/openWeatherMap.js:350 3.8/openWeatherMap.js:292
 msgid "Freezing rain"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:339 3.8/openWeatherMap.js:280
+#: 3.0/openWeatherMap.js:351 3.8/openWeatherMap.js:293
 msgid "Light intensity shower rain"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:340 3.8/openWeatherMap.js:281
+#: 3.0/openWeatherMap.js:352 3.8/openWeatherMap.js:294
 msgid "Shower rain"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:341 3.8/openWeatherMap.js:282
+#: 3.0/openWeatherMap.js:353 3.8/openWeatherMap.js:295
 msgid "Heavy intensity shower rain"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:342 3.8/openWeatherMap.js:283
+#: 3.0/openWeatherMap.js:354 3.8/openWeatherMap.js:296
 msgid "Ragged shower rain"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:343 3.8/openWeatherMap.js:284
+#: 3.0/openWeatherMap.js:355 3.8/openWeatherMap.js:297
 msgid "Light snow"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:344 3.8/openWeatherMap.js:285
+#: 3.0/openWeatherMap.js:356 3.8/openWeatherMap.js:298
 msgid "Snow"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:345 3.8/openWeatherMap.js:286
+#: 3.0/openWeatherMap.js:357 3.8/openWeatherMap.js:299
 msgid "Heavy snow"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:346 3.8/openWeatherMap.js:287
+#: 3.0/openWeatherMap.js:358 3.8/openWeatherMap.js:300
 msgid "Sleet"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:347 3.8/openWeatherMap.js:288
+#: 3.0/openWeatherMap.js:359 3.8/openWeatherMap.js:301
 msgid "Shower sleet"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:348 3.8/openWeatherMap.js:289
+#: 3.0/openWeatherMap.js:360 3.8/openWeatherMap.js:302
 msgid "Light rain and snow"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:349 3.8/openWeatherMap.js:290
+#: 3.0/openWeatherMap.js:361 3.8/openWeatherMap.js:303
 msgid "Rain and snow"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:350 3.8/openWeatherMap.js:291
+#: 3.0/openWeatherMap.js:362 3.8/openWeatherMap.js:304
 msgid "Light shower snow"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:351 3.8/openWeatherMap.js:292
+#: 3.0/openWeatherMap.js:363 3.8/openWeatherMap.js:305
 msgid "Shower snow"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:352 3.8/openWeatherMap.js:293
+#: 3.0/openWeatherMap.js:364 3.8/openWeatherMap.js:306
 msgid "Heavy shower snow"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:353 3.8/openWeatherMap.js:294
+#: 3.0/openWeatherMap.js:365 3.8/openWeatherMap.js:307
 msgid "Mist"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:354 3.8/openWeatherMap.js:295
+#: 3.0/openWeatherMap.js:366 3.8/openWeatherMap.js:308
 msgid "Smoke"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:355 3.8/openWeatherMap.js:296
+#: 3.0/openWeatherMap.js:367 3.8/openWeatherMap.js:309
 msgid "Haze"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:356 3.8/openWeatherMap.js:297
+#: 3.0/openWeatherMap.js:368 3.8/openWeatherMap.js:310
 msgid "Sand, dust whirls"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:357 3.8/openWeatherMap.js:298
+#: 3.0/openWeatherMap.js:369 3.8/openWeatherMap.js:311
 msgid "Fog"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:358 3.8/openWeatherMap.js:299
+#: 3.0/openWeatherMap.js:370 3.8/openWeatherMap.js:312
 msgid "Sand"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:359 3.8/openWeatherMap.js:300
+#: 3.0/openWeatherMap.js:371 3.8/openWeatherMap.js:313
 msgid "Dust"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:360 3.8/openWeatherMap.js:301
+#: 3.0/openWeatherMap.js:372 3.8/openWeatherMap.js:314
 msgid "Volcanic ash"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:361 3.8/openWeatherMap.js:302
+#: 3.0/openWeatherMap.js:373 3.8/openWeatherMap.js:315
 msgid "Squalls"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:362 3.8/openWeatherMap.js:303
+#: 3.0/openWeatherMap.js:374 3.8/openWeatherMap.js:316
 msgid "Tornado"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:363 3.8/openWeatherMap.js:304
+#: 3.0/openWeatherMap.js:375 3.8/openWeatherMap.js:317
 msgid "Clear"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:364 3.8/openWeatherMap.js:305
+#: 3.0/openWeatherMap.js:376 3.8/openWeatherMap.js:318
 msgid "Clear sky"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:365 3.8/openWeatherMap.js:306
+#: 3.0/openWeatherMap.js:377 3.8/openWeatherMap.js:319
 msgid "Sky is clear"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:366 3.8/openWeatherMap.js:307
+#: 3.0/openWeatherMap.js:378 3.8/openWeatherMap.js:320
 msgid "Few clouds"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:367 3.8/openWeatherMap.js:308
+#: 3.0/openWeatherMap.js:379 3.8/openWeatherMap.js:321
 msgid "Scattered clouds"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:368 3.8/openWeatherMap.js:309
+#: 3.0/openWeatherMap.js:380 3.8/openWeatherMap.js:322
 msgid "Broken clouds"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:369 3.8/openWeatherMap.js:310
+#: 3.0/openWeatherMap.js:381 3.8/openWeatherMap.js:323
 msgid "Overcast clouds"
 msgstr ""
 
-#: 3.0/applet.js:189 3.8/applet.js:140
+#: 3.0/applet.js:194 3.8/applet.js:145
 msgid "Error"
 msgstr ""
 
-#: 3.0/applet.js:191 3.8/applet.js:142
-msgid "No Api key"
-msgstr ""
-
-#: 3.0/applet.js:192 3.8/applet.js:143
-msgid "No Location"
-msgstr ""
-
 #: 3.0/applet.js:196 3.8/applet.js:147
-msgid "Wrong Location"
-msgstr ""
-
-#: 3.0/applet.js:197 3.8/applet.js:148
-msgid "Location Not found"
+msgid "Incorrect API Key"
 msgstr ""
 
 #: 3.0/applet.js:198 3.8/applet.js:149
-msgid "Parsing weather information failed :("
+msgid "Incorrect Location Format"
 msgstr ""
 
 #: 3.0/applet.js:200 3.8/applet.js:151
-msgid "Could not get location"
+msgid "Key Blocked"
 msgstr ""
 
 #: 3.0/applet.js:201 3.8/applet.js:152
-msgid "Unknown Error"
+msgid "Can't find location"
 msgstr ""
 
-#: 3.0/applet.js:202 3.8/applet.js:153
-msgid "No/Bad response from Data Service"
+#: 3.0/applet.js:203 3.8/applet.js:154
+msgid "No Api Key"
 msgstr ""
 
-#: 3.0/applet.js:568 3.8/applet.js:477
+#: 3.0/applet.js:204 3.8/applet.js:155
+msgid "No Location"
+msgstr ""
+
+#: 3.0/applet.js:442 3.8/applet.js:367
+msgid "Make sure you entered a location or use Automatic location instead"
+msgstr ""
+
+#: 3.0/applet.js:487 3.8/applet.js:399
+msgid ""
+"Unexpected Error While Refreshing Weather, please see log in Looking Glass"
+msgstr ""
+
+#: 3.0/applet.js:569 3.8/applet.js:478
 msgid "Feels like:"
 msgstr ""
 
-#: 3.0/applet.js:627 3.8/applet.js:536
+#: 3.0/applet.js:628 3.8/applet.js:537
 msgid "Today"
 msgstr ""
 
-#: 3.0/applet.js:629 3.8/applet.js:538
+#: 3.0/applet.js:630 3.8/applet.js:539
 msgid "Tomorrow"
+msgstr ""
+
+#: 3.0/applet.js:828 3.8/applet.js:737
+msgid ""
+"Could not update weather for a while...\n"
+"are you connected to the internet?"
+msgstr ""
+
+#: 3.0/applet.js:841 3.8/applet.js:750
+msgid "Network Error, please check logs in Looking Glass"
 msgstr ""
 
 #. settings-schema.json->head->description
