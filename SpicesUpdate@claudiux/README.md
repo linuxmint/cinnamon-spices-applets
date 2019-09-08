@@ -2,7 +2,7 @@
 
 ## Important!
 In order to be sure to download the latest version of Spices Update, use
-**[this link](https://cinnamon-spices.linuxmint.com/files/applets/SpicesUpdate@claudiux.zip?6f5d7a0d-c801-4427-b478-56c7331443ca)** rather than the Download button at the top of this page.
+**[this link](https://cinnamon-spices.linuxmint.com/files/applets/SpicesUpdate@claudiux.zip?29ce8446-0622-4ff5-b9ee-c69b6de62d4c)** rather than the Download button at the top of this page.
 
 ## Summary
 
