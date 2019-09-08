@@ -37,6 +37,7 @@ class IconMenuItem extends PopupMenu.PopupBaseMenuItem {
         if ( typeof icon == "string" ) {
             icon = new St.Icon({icon_name: icon, icon_size: menu_item_icon_size, icon_type: St.IconType.FULLCOLOR});
         }
+
         this.addActor(icon);
 
         let label = new St.Label({ style_class: "xCenter-menuItemLabel", text: text });
@@ -122,8 +123,13 @@ class PlaceMenuItem extends FolderTypeMenuItem {
 }
 
 class RecentFileMenuItem extends IconMenuItem {
-    constructor(text, icon, uri, folderApp){
+    constructor(text, icon, gicon = null, uri, folderApp){
+        if ( gicon ) {
+            icon = new St.Icon({gicon: gicon, icon_size: menu_item_icon_size, icon_type: St.IconType.FULLCOLOR});
+        }
+
         super(text, icon);
+
         this.connect("activate", Lang.bind(this, function(actor, event) {
             let button = event.get_button();
             if (button == 3) {
@@ -133,7 +139,8 @@ class RecentFileMenuItem extends IconMenuItem {
             } else {
                 Gio.app_info_launch_default_for_uri(uri, global.create_app_launch_context());
             }
-        }))
+        }));
+
         let tooltip = new Tooltips.Tooltip(this.actor, text + '\n' + _("(Right click to open folder)"));
     }
 }
@@ -160,7 +167,8 @@ class MyApplet extends Applet.TextIconApplet {
 
             //listen for changes
             this.menuManager = new PopupMenu.PopupMenuManager(this);
-            this.recentManager = new Gtk.RecentManager();
+            //this.recentManager = new Gtk.RecentManager();       // Do not use a new RecentManager but
+            this.recentManager = Gtk.RecentManager.get_default(); // the default one to be synchrone with Cinnamon menu.
             this.recentManager.connect("changed", Lang.bind(this, this.buildRecentDocumentsSection));
             Main.placesManager.connect("bookmarks-updated", Lang.bind(this, this.buildUserSection));
             this.volumeMonitor = Gio.VolumeMonitor.get();
@@ -202,6 +210,7 @@ class MyApplet extends Applet.TextIconApplet {
     }
 
     openMenu() {
+        //this.buildMenu();
         this.menu.toggle();
     }
 
@@ -221,8 +230,10 @@ class MyApplet extends Applet.TextIconApplet {
         this.settings.bindProperty(Settings.BindingDirection.IN, "showNetwork", "showNetwork", this.buildSystemSection);
         this.settings.bindProperty(Settings.BindingDirection.IN, "systemCustomPlaces", "systemCustomPlaces", this.buildSystemSection);
         this.settings.bindProperty(Settings.BindingDirection.IN, "showRecentDocuments", "showRecentDocuments", this.buildMenu);
-        this.settings.bindProperty(Settings.BindingDirection.IN, "recentSizeLimit", "recentSizeLimit", this.buildRecentDocumentsSection);
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "recentSizeLimit", "recentSizeLimit", this.buildRecentDocumentsSection);
         this.settings.bindProperty(Settings.BindingDirection.IN, "keyOpen", "keyOpen", this.setKeybinding);
+        let recentSizeLimit = this.recentSizeLimit;
+        if ( recentSizeLimit % 5 !== 0 ) this.recentSizeLimit = Math.ceil(recentSizeLimit / 5) * 5;
         this.setKeybinding();
     }
 
@@ -338,9 +349,9 @@ class MyApplet extends Applet.TextIconApplet {
                 recentScrollBox.add_actor(this.recentSection.actor);
                 recentPane._connectSubMenuSignals(this.recentSection, this.recentSection);
 
-                let clearRecent = new IconMenuItem(_("Clear"), "edit-clear");
-                recentPane.addMenuItem(clearRecent);
-                clearRecent.connect("activate", Lang.bind(this, function() {
+                this.clearRecent = new IconMenuItem(_("Clear"), "edit-clear");
+                recentPane.addMenuItem(this.clearRecent);
+                this.clearRecent.connect("activate", Lang.bind(this, function() {
                     this.recentManager.purge_items();
                 }));
 
@@ -471,11 +482,46 @@ class MyApplet extends Applet.TextIconApplet {
         let showCount;
         if ( this.recentSizeLimit == 0 ) showCount = recentDocuments.length;
         else showCount = ( this.recentSizeLimit < recentDocuments.length ) ? this.recentSizeLimit : recentDocuments.length;
-        for ( let i = 0; i < showCount; i++ ) {
+
+        if ( showCount == 0 ) this.clearRecent.actor.hide();
+        else this.clearRecent.actor.show();
+
+        let i = 0;
+        while ( i < showCount ) {
             let recentInfo = recentDocuments[i];
-            let mimeType = recentInfo.get_mime_type().replace("\/","-");
-            let recentItem = new RecentFileMenuItem( recentInfo.get_display_name(), mimeType, recentInfo.get_uri(), appOpeningFolders );
-            this.recentSection.addMenuItem(recentItem);
+
+            let file = Gio.file_new_for_path( "%s".format(recentInfo.get_uri_display()) );
+            if ( file.query_exists(null) ) {
+                let mimeType = recentInfo.get_mime_type().replace("\/","-");
+
+                // Fixes some oversights in Gtk's mime types (example: for .xcf Gimp files ):
+                if ( mimeType.substr(0, 6) === "image-" && mimeType.substr(0, 8) !== "image-x-" && !Gtk.IconTheme.get_default().has_icon(mimeType) ) {
+                    mimeType = mimeType.replace("image-", "image-x-");
+                }
+
+                let default_for_type = Gio.app_info_get_default_for_type(recentInfo.get_mime_type(), false);
+                let gicon = null;
+                if ( default_for_type ) {
+                    let application = default_for_type.get_executable();
+                    gicon = default_for_type.get_icon();
+                    if ( !gicon && application && !Gtk.IconTheme.get_default().has_icon(mimeType) ) {
+                        mimeType = application; // Try replacing the unknown mimeType icon with the application's one.
+                        if ( !Gtk.IconTheme.get_default().has_icon(mimeType) ) mimeType = "unknown"; // Desperate case. (Apps without mime type recognized nor icon.)
+                    }
+                }
+
+                let recentItem;
+                if ( gicon ) {
+                    recentItem = new RecentFileMenuItem( recentInfo.get_display_name(), null, gicon, recentInfo.get_uri(), appOpeningFolders );
+                } else {
+                    recentItem = new RecentFileMenuItem( recentInfo.get_display_name(), mimeType, null, recentInfo.get_uri(), appOpeningFolders );
+                }
+                this.recentSection.addMenuItem(recentItem);
+            } else if ( showCount < recentDocuments.length ) {
+                showCount++; // To be sure to show as much as possible the number of recent files requested.
+            }
+
+            i++;
         }
     }
 
@@ -566,6 +612,10 @@ class MyApplet extends Applet.TextIconApplet {
         }
         this.__icon_type = -1;
         this.__icon_name = icon_path;
+    }
+
+    on_btnPrivacy_pressed() {
+        Util.spawnCommandLine("bash -c 'cinnamon-settings privacy'");
     }
 }
 
