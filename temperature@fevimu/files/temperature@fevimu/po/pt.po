@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-26 04:16-0500\n"
-"PO-Revision-Date: 2018-03-30 12:11+0100\n"
+"POT-Creation-Date: 2019-08-30 02:30+0200\n"
+"PO-Revision-Date: 2019-09-08 11:38+0100\n"
 "Last-Translator: André Silva <asilva_sc@hotmail.com>\n"
 "Language-Team: \n"
 "Language: pt\n"
@@ -17,47 +17,59 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: applet.js:55
+#: applet.js:73
 msgid "Error"
 msgstr "Erro"
 
-#: applet.js:56
+#: applet.js:74
 msgid ""
 "Run sensors-detect as root. If it doesn't help, click here to report with "
 "your sensors output!"
 msgstr ""
 "Execute o comando sensors-detect com utilizador root. Se não ajudar, clique "
-"aqui para reportar indicando o resultado do comando sensors"
+"aqui para reportar indicando o resultado do comando sensors!"
 
-#: applet.js:58
+#: applet.js:76
 msgid "Warning"
 msgstr "Alerta"
 
-#: applet.js:59
+#: applet.js:77
 msgid ""
 "Please install lm_sensors. If it doesn't help, click here to report with "
 "your sensors output!"
 msgstr ""
 "Por favor instale o lm_sensors. Se não ajudar, clique aqui para reportar "
-"indicando o resultado do comando sensors"
+"indicando o resultado do comando sensors!"
 
-#: applet.js:62 applet.js:89
+#: applet.js:80 applet.js:142
 msgid "Temperature"
 msgstr "Temperatura"
 
-#: applet.js:144
+#: applet.js:201
+msgid "Thresholds Info"
+msgstr "Valores Limite"
+
+#: applet.js:202
+msgid "High Temp"
+msgstr "Temp. Alta"
+
+#: applet.js:203
+msgid "Crit. Temp"
+msgstr "Temp. Crítica"
+
+#: applet.js:214
 msgid "Critical"
 msgstr "Crítica"
 
-#: applet.js:146
+#: applet.js:217
 msgid "High"
 msgstr "Alta"
 
-#: applet.js:156
+#: applet.js:231
 msgid "Current Temperature"
 msgstr "Temperatura Atual"
 
-#: applet.js:158
+#: applet.js:233
 msgid "Critical Temperature"
 msgstr "Temperatura Crítica"
 
@@ -67,7 +79,7 @@ msgstr "Indicador de Temperatura da CPU"
 
 #. metadata.json->description
 msgid "Shows CPU Temperature"
-msgstr "Mostrar temperatura da CPU"
+msgstr "Mostra a temperatura da CPU"
 
 #. settings-schema.json->use-fahrenheit->description
 msgid "Show temperature in Fahrenheit"
@@ -84,3 +96,29 @@ msgstr "ms"
 #. settings-schema.json->interval->description
 msgid "Update interval"
 msgstr "Intervalo de atualização"
+
+#. settings-schema.json->change-color->description
+msgid "Change color when the temperature becomes High or Critical"
+msgstr "Alterar a cor quando a temperatura for Alta ou Crítica"
+
+#. settings-schema.json->change-color->tooltip
+msgid ""
+"Selecting this option, this applet becomes\n"
+" orange when the High Temperature Threshold is reached,\n"
+" red when the Critical Temperature Threshold is reached."
+msgstr ""
+"Ao selecionar esta opção, a cor da applet muda para\n"
+" laranja quando a Temperatura Alta é atingida,\n"
+" vermelho quando a Temperatura Crítica é atingida."
+
+#. settings-schema.json->only-colors->description
+msgid "Only use colors to alert me"
+msgstr "Apenas usar cores para alertas"
+
+#. settings-schema.json->only-colors->tooltip
+msgid ""
+"Select this option to not display text alerts in horizontal panels.\n"
+"(No text alert is ever displayed on vertical panels.)"
+msgstr ""
+"Selecione esta opção para não mostrar alertas em painéis horizontais.\n"
+"(Alertas em painéis verticais nunca são mostrados.)"
