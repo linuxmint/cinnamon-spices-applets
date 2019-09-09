@@ -1,13 +1,13 @@
 {
     "compilerOptions": {
         "lib": ["es2017"],
-        "module": "commonjs",
+        "module": "es6",
         "target": "es5",
         "noImplicitAny": true,
         "removeComments": true,
         "preserveConstEnums": true,
         "sourceMap": false,
-        "experimentalDecorators": true
+        "outDir": "files/weather@mockturtl/3.0/"
     },
     "include": [
         "src/**/*"

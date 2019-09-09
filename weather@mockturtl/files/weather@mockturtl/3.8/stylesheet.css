@@ -56,6 +56,10 @@
   padding: 0 30px 0 0;
 }
 
+.weather-forecast-container {
+    margin: 10px 0 5px 0;
+}
+
 .weather-forecast-day {
   color: #999999;
   font-size: 90%;

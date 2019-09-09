@@ -1,7 +1,7 @@
 {
   "head":
   { "type": "header"
-  , "description": "Settings for weather@mockturtl 3.4"
+  , "description": "Settings for weather@mockturtl 3.0+"
   }
 ,  "keybinding":
   { "type": "keybinding"

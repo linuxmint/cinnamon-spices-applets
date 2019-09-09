@@ -1,3 +1,38 @@
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
 function importModule(path) {
     if (typeof require !== 'undefined') {
         return require('./' + path);
@@ -14,8 +49,8 @@ var isLangSupported = utils.isLangSupported;
 var isID = utils.isID;
 var icons = utils.icons;
 var weatherIconSafely = utils.weatherIconSafely;
-class OpenWeatherMap {
-    constructor(_app) {
+var OpenWeatherMap = (function () {
+    function OpenWeatherMap(_app) {
         this.supportedLanguages = ["ar", "bg", "ca", "cz", "de", "el", "en", "fa", "fi",
             "fr", "gl", "hr", "hu", "it", "ja", "kr", "la", "lt", "mk", "nl", "pl",
             "pt", "ro", "ru", "se", "sk", "sl", "es", "tr", "ua", "vi", "zh_cn", "zh_tw"];
@@ -23,42 +58,64 @@ class OpenWeatherMap {
         this.daily_url = "https://api.openweathermap.org/data/2.5/forecast/daily?";
         this.app = _app;
     }
-    async GetWeather() {
-        let currentResult = await this.GetData(this.current_url, this.ParseCurrent);
-        let forecastResult = await this.GetData(this.daily_url, this.ParseForecast);
-        return (currentResult && forecastResult);
-    }
+    OpenWeatherMap.prototype.GetWeather = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var currentResult, forecastResult;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4, this.GetData(this.current_url, this.ParseCurrent)];
+                    case 1:
+                        currentResult = _a.sent();
+                        return [4, this.GetData(this.daily_url, this.ParseForecast)];
+                    case 2:
+                        forecastResult = _a.sent();
+                        return [2, (currentResult && forecastResult)];
+                }
+            });
+        });
+    };
     ;
-    async GetData(baseUrl, ParseFunction) {
-        let query = this.ConstructQuery(baseUrl);
-        let json;
-        if (query != null) {
-            this.app.log.Debug("Query: " + query);
-            try {
-                json = await this.app.LoadJsonAsync(query);
-            }
-            catch (e) {
-                this.app.HandleHTTPError("openweathermap", e, this.app, this.HandleHTTPError);
-                return false;
-            }
-            if (json == null) {
-                this.app.HandleError({ type: "soft", detail: "no api response", service: "openweathermap" });
-                return false;
-            }
-            if (json.cod == "200") {
-                return ParseFunction(json, this);
-            }
-            else {
-                this.HandleResponseErrors(json);
-                return false;
-            }
-        }
-        else {
-            return false;
-        }
-    }
+    OpenWeatherMap.prototype.GetData = function (baseUrl, ParseFunction) {
+        return __awaiter(this, void 0, void 0, function () {
+            var query, json, e_1;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        query = this.ConstructQuery(baseUrl);
+                        if (!(query != null)) return [3, 5];
+                        this.app.log.Debug("Query: " + query);
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4, this.app.LoadJsonAsync(query)];
+                    case 2:
+                        json = _a.sent();
+                        return [3, 4];
+                    case 3:
+                        e_1 = _a.sent();
+                        this.app.HandleHTTPError("openweathermap", e_1, this.app, this.HandleHTTPError);
+                        return [2, false];
+                    case 4:
+                        if (json == null) {
+                            this.app.HandleError({ type: "soft", detail: "no api response", service: "openweathermap" });
+                            return [2, false];
+                        }
+                        if (json.cod == "200") {
+                            return [2, ParseFunction(json, this)];
+                        }
+                        else {
+                            this.HandleResponseErrors(json);
+                            return [2, false];
+                        }
+                        return [3, 6];
+                    case 5: return [2, false];
+                    case 6: return [2];
+                }
+            });
+        });
+    };
     ;
-    ParseCurrent(json, self) {
+    OpenWeatherMap.prototype.ParseCurrent = function (json, self) {
         try {
             if (json.coord) {
                 self.app.weather.coord.lat = json.coord.lat;
@@ -96,12 +153,12 @@ class OpenWeatherMap {
             self.app.HandleError({ type: "soft", service: "openweathermap", detail: "unusal payload", message: _("Failed to Process Current Weather Info") });
             return false;
         }
-    }
+    };
     ;
-    ParseForecast(json, self) {
+    OpenWeatherMap.prototype.ParseForecast = function (json, self) {
         try {
-            for (let i = 0; i < self.app._forecastDays; i++) {
-                let forecast = {
+            for (var i = 0; i < self.app._forecastDays; i++) {
+                var forecast = {
                     dateTime: null,
                     main: {
                         temp: null,
@@ -124,7 +181,7 @@ class OpenWeatherMap {
                         deg: null,
                     }
                 };
-                let day = json.list[i];
+                var day = json.list[i];
                 forecast.dateTime = new Date(day.dt * 1000);
                 forecast.main.temp_min = day.temp.min;
                 forecast.main.temp_max = day.temp.max;
@@ -145,11 +202,11 @@ class OpenWeatherMap {
             self.app.HandleError({ type: "soft", service: "openweathermap", detail: "unusal payload", message: _("Failed to Process Forecast Info") });
             return false;
         }
-    }
+    };
     ;
-    ConstructQuery(baseUrl) {
-        let query = baseUrl;
-        let locString = this.ParseLocation();
+    OpenWeatherMap.prototype.ConstructQuery = function (baseUrl) {
+        var query = baseUrl;
+        var locString = this.ParseLocation();
         if (locString != null) {
             query = query + locString + "&APPID=";
             query += "1c73f8259a86c6fd43c7163b543c8640";
@@ -161,12 +218,12 @@ class OpenWeatherMap {
         this.app.HandleError({ type: "hard", noTriggerRefresh: true, "detail": "no location", message: _("Please enter a Location in settings") });
         this.app.log.Error("OpenWeatherMap: No Location was provided");
         return null;
-    }
+    };
     ;
-    ParseLocation() {
-        let loc = this.app._location.replace(/ /g, "");
+    OpenWeatherMap.prototype.ParseLocation = function () {
+        var loc = this.app._location.replace(/ /g, "");
         if (isCoordinate(loc)) {
-            let locArr = loc.split(',');
+            var locArr = loc.split(',');
             return "lat=" + locArr[0] + "&lon=" + locArr[1];
         }
         else if (isID(loc)) {
@@ -174,11 +231,11 @@ class OpenWeatherMap {
         }
         else
             return "q=" + loc;
-    }
+    };
     ;
-    HandleResponseErrors(json) {
-        let errorMsg = "OpenWeathermap Response: ";
-        let error = {
+    OpenWeatherMap.prototype.HandleResponseErrors = function (json) {
+        var errorMsg = "OpenWeathermap Response: ";
+        var error = {
             service: "openweathermap",
             type: "hard",
         };
@@ -208,9 +265,9 @@ class OpenWeatherMap {
         this.app.HandleError(error);
         this.app.log.Debug("OpenWeatherMap Error Code: " + json.cod);
         this.app.log.Error(errorMsg + json.message);
-    }
+    };
     ;
-    HandleHTTPError(error, uiError) {
+    OpenWeatherMap.prototype.HandleHTTPError = function (error, uiError) {
         if (error.code == 404) {
             uiError.detail = "location not found";
             uiError.message = _("Location not found, make sure location is available or it is in the correct format");
@@ -218,8 +275,8 @@ class OpenWeatherMap {
             uiError.type = "hard";
         }
         return uiError;
-    }
-    ResolveIcon(icon) {
+    };
+    OpenWeatherMap.prototype.ResolveIcon = function (icon) {
         switch (icon) {
             case "10d":
                 return [icons.rain, icons.showers_scattered, icons.rain_freezing];
@@ -260,11 +317,12 @@ class OpenWeatherMap {
             default:
                 return [icons.alert];
         }
-    }
+    };
     ;
-}
+    return OpenWeatherMap;
+}());
 ;
-const openWeatherMapConditionLibrary = [
+var openWeatherMapConditionLibrary = [
     _("Thunderstorm with light rain"),
     _("Thunderstorm with rain"),
     _("Thunderstorm with heavy rain"),
