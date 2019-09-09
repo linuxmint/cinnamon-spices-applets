@@ -1,3 +1,7 @@
+### v3.1.0~20190908
+  * Multi-version: Using specific capabilities of `cinnamon-settings` in Cinnamon 4.2.
+  * Code cleanup.
+
 ### v3.0.4~20190826
   * Available languages:
    * Dutch
