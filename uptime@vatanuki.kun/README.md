@@ -31,6 +31,8 @@ The code for this applet can be found under uptime@vatanuki.kun here : [cinnamon
 
 ![screenshot](https://raw.githubusercontent.com/linuxmint/cinnamon-spices-applets/master/uptime%40vatanuki.kun/screenshot5.png)
 
+![screenshot](https://raw.githubusercontent.com/linuxmint/cinnamon-spices-applets/master/uptime%40vatanuki.kun/screenshot_old.png)
+
 ### Contributing
 
 *  Original author : vatanuki.kun
