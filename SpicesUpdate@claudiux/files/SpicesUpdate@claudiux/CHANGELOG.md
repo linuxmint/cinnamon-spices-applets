@@ -1,3 +1,8 @@
+### v3.2.0~20190910
+  * Improves tooltip display. (All branches)
+  * Bug fixes in the 2.8 branch. (Cinnamon 2.8 to 3.6)
+  * Code cleanup and restructuring in the 4.2 branch. (Cinnamon 4.2 and later)
+
 ### v3.1.0~20190908
   * Multi-version: Using specific capabilities of `cinnamon-settings` in Cinnamon 4.2.
   * Code cleanup.

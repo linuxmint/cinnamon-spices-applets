@@ -10,7 +10,6 @@ const GLib = imports.gi.GLib; // ++ Needed for starting programs and translation
 const Gio = imports.gi.Gio; // Needed for file infos
 const Gtk = imports.gi.Gtk; // Needed for theme icons
 const Mainloop = imports.mainloop; // Needed for timer update loop
-const Gettext = imports.gettext; // ++ Needed for translations
 const Main = imports.ui.main; // ++ Needed for notify()
 const MessageTray = imports.ui.messageTray; // ++ Needed for the criticalNotify() function in this script
 const Util = imports.misc.util; // Needed for spawnCommandLine()
@@ -20,119 +19,35 @@ const Soup = imports.gi.Soup;
 const Signals = imports.signals;
 const Cinnamon = imports.gi.Cinnamon; // Needed to read/write into a file
 
-var UUID="SpicesUpdate@claudiux";
-
-const HOME_DIR = GLib.get_home_dir();
-// ++ Set DEBUG to true to display log messages in ~/.cinnamon/glass.log
-// ++ Set DEBUG to false in production.
-// ++ DEBUG is true only if the DEBUG file is present in this applet directory ($ touch DEBUG)
-var _debug = Gio.file_new_for_path(HOME_DIR + "/.local/share/cinnamon/applets/" + UUID + "/DEBUG");
-const DEBUG = _debug.query_exists(null);
-
-const APPLET_DIR = HOME_DIR + "/.local/share/cinnamon/applets/" + UUID;
-const SCRIPTS_DIR = APPLET_DIR + "/scripts";
-const ICONS_DIR = APPLET_DIR + "/icons";
-const HELP_DIR = APPLET_DIR + "/help";
+const {
+  UUID,
+  HOME_DIR,
+  APPLET_DIR,
+  SCRIPTS_DIR,
+  ICONS_DIR,
+  HELP_DIR,
+  URL_SPICES_HOME,
+  CONFIG_DIR,
+  SU_CONFIG_DIR,
+  CACHE_DIR,
+  TYPES,
+  URL_MAP,
+  CACHE_MAP,
+  DIR_MAP,
+  DCONFCACHEUPDATED,
+  _,
+  DEBUG,
+  capitalize,
+  log,
+  logError
+} = require("./constants");
 
 Util.spawnCommandLine("sh -c '%s/witness-debian.sh'".format(SCRIPTS_DIR));
-
-const URL_SPICES_HOME = "https://cinnamon-spices.linuxmint.com";
-const CONFIG_DIR = HOME_DIR + "/.cinnamon/configs";
-const SU_CONFIG_DIR = CONFIG_DIR + "/" + UUID;
-const CACHE_DIR = HOME_DIR + "/.cinnamon/spices.cache";
-
-const TYPES = ['applets', 'desklets', 'extensions', 'themes'];
-
-const URL_MAP = {
-  'applets': URL_SPICES_HOME + "/json/applets.json?",
-  'themes': URL_SPICES_HOME + "/json/themes.json?",
-  'desklets': URL_SPICES_HOME + "/json/desklets.json?",
-  'extensions': URL_SPICES_HOME + "/json/extensions.json?"
-}
-
-const CACHE_MAP = {
-  'applets': CACHE_DIR + "/applet/index.json",
-  'themes': CACHE_DIR + "/theme/index.json",
-  'desklets': CACHE_DIR + "/desklet/index.json",
-  'extensions': CACHE_DIR + "/extension/index.json"
-}
-
-const DIR_MAP = {
-  'applets': HOME_DIR + "/.local/share/cinnamon/applets",
-  'themes': HOME_DIR + "/.themes",
-  'desklets': HOME_DIR + "/.local/share/cinnamon/desklets",
-  'extensions': HOME_DIR + "/.local/share/cinnamon/extensions"
-}
-
-const DCONFCACHEUPDATED = {
-  'applets': "org.cinnamon",
-  'themes': "org.cinnamon.theme",
-  'desklets': "org.cinnamon",
-  'extensions': "org.cinnamon"
-}
 
 // ++ Needed if some http(s) requests are required
 const _httpSession = new Soup.Session();
 _httpSession.timeout=60;
 Soup.Session.prototype.add_feature.call(_httpSession, new Soup.ProxyResolverDefault());
-
-// ++ l10n support
-Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
-Gettext.bindtextdomain("cinnamon-control-center", "/usr/share/locale");
-
-// ++ Always needed if you want localisation/translation support
-function _(str, uuid=UUID) {
-  var customTrans = Gettext.dgettext(uuid, str);
-  if (customTrans !== str && customTrans !== "") return customTrans;
-  return Gettext.gettext(str);
-}
-
-const capitalize = (s) => {
-  if (typeof s !== 'string') return ''
-  return s.charAt(0).toUpperCase() + s.slice(1)
-}
-
-// Dummy bidon variable for translation (don't remove these lines):
-let bidon = _("Applet");
-bidon = _("Desklet");
-bidon = _("Extension");
-bidon = _("Theme");
-bidon = _("Applets");
-bidon = _("Desklets");
-bidon = _("Extensions");
-bidon = _("Themes");
-bidon = _("One desklet needs update:");
-bidon = _("One applet needs update:");
-bidon = _("One extension needs update:");
-bidon = _("One theme needs update:");
-bidon = _("Some desklets need update:");
-bidon = _("Some applets need update:");
-bidon = _("Some extensions need update:");
-bidon = _("Some themes need update:");
-bidon = _("New desklet available:");
-bidon = _("New applet available:");
-bidon = _("New extension available:");
-bidon = _("New theme available:");
-bidon = _("New desklets available:");
-bidon = _("New applets available:");
-bidon = _("New extensions available:");
-bidon = _("New themes available:");
-bidon = null;
-
-// ++ Useful for logging in .xsession_errors
-/**
- * Usage of log and logError:
- * log("Any message here") to log the message only if DEBUG is set to true.
- * log("Any message here", true) to log the message even if DEBUG is set to false.
- * logError("Any error message") log the error message regardless of the DEBUG value.
- */
-function log(message, alwaysLog=false) {
-  if (DEBUG || alwaysLog) global.log("\n[" + UUID + "]: " + message + "\n");
-}
-
-function logError(error) {
-  global.logError("\n[" + UUID + "]: " + error + "\n")
-}
 
 /**
  * criticalNotify:
@@ -151,7 +66,6 @@ function criticalNotify(msg, details, icon) {
   return notification
 }
 
-const NOTIFY_OK = true;
 /**
  * notify_send:
  * Interface with the notify-send command.
@@ -161,16 +75,14 @@ const NOTIFY_OK = true;
  * @urgency: must be "low", "normal" or "critical" (default: "low").
  */
 function notify_send(message, duration=5000, urgency="normal", icon_path=null) {
-  if (NOTIFY_OK === true) {
-    let _icon;
-    if (icon_path) {
-      _icon = icon_path
-    } else {
-      _icon = HOME_DIR + '/.local/share/cinnamon/applets/' + UUID + '/icons/spices-update-symbolic.svg'
-    }
-    let notification = "notify-send \"%s\" \"".format(_("Spices Update")) + message + "\" -i " + _icon + " -t "+ duration.toString() +" -u " + urgency;
-    Util.spawnCommandLine(notification);
+  let _icon;
+  if (icon_path) {
+    _icon = icon_path
+  } else {
+    _icon = "%s/.local/share/cinnamon/applets/%s/icons/spices-update-symbolic.svg".format(HOME_DIR, UUID)
   }
+  let notification = "notify-send \"%s\" \"%s\" -i %s -t %s -u %s".format(_("Spices Update"), message, _icon, duration.toString(), urgency);
+  Util.spawnCommandLine(notification);
 }
 
 class SpicesUpdate extends Applet.TextIconApplet {
@@ -180,7 +92,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
     this.setAllowedLayout(Applet.AllowedLayout.BOTH); // Can be used on horizontal or vertical panels.
     Gtk.IconTheme.get_default().append_search_path(ICONS_DIR);
     this.set_applet_icon_symbolic_name("spices-update");
-    this.default_tooltip = _("Spices Update") + " " + metadata.version;
+    this.default_tooltip = "%s %s".format(_("Spices Update"), metadata.version);
     this.set_applet_tooltip(this.default_tooltip);
 
     // Be sure the scripts are executable:
@@ -381,6 +293,44 @@ class SpicesUpdate extends Applet.TextIconApplet {
       "general_hide",
       this.on_display_type_changed,
       null);
+
+    this.check = {
+      "applets" : {
+        get_value: () => {return this.check_applets;},
+        set_value: (v) => {this.check_applets = v}
+      },
+      "desklets" : {
+        get_value: () => {return this.check_desklets;},
+        set_value: (v) => {this.check_desklets = v}
+      },
+      "extensions" : {
+        get_value: () => {return this.check_extensions;},
+        set_value: (v) => {this.check_extensions = v}
+      },
+      "themes" : {
+        get_value: () => {return this.check_themes;},
+        set_value: (v) => {this.check_themes = v}
+      }
+    };
+
+    this.check_new = {
+      "applets" : {
+        get_value: () => {return this.check_new_applets;},
+        set_value: (v) => {this.check_new_applets = v}
+      },
+      "desklets" : {
+        get_value: () => {return this.check_new_desklets;},
+        set_value: (v) => {this.check_new_desklets = v}
+      },
+      "extensions" : {
+        get_value: () => {return this.check_new_extensions;},
+        set_value: (v) => {this.check_new_extensions = v}
+      },
+      "themes" : {
+        get_value: () => {return this.check_new_themes;},
+        set_value: (v) => {this.check_new_themes = v}
+      }
+    };
 
     this.on_orientation_changed(orientation);
 
@@ -595,7 +545,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
       this.set_applet_label("");
     } else {
       if (this.isHorizontal === true) {
-        this.set_applet_label("Spices Update");
+        this.set_applet_label(_("Spices Update"));
       } else {
         this.set_applet_label("SpU");
       }
@@ -628,62 +578,21 @@ class SpicesUpdate extends Applet.TextIconApplet {
     this.types_to_check = [];
     this.types_to_check_new = [];
 
-    // Applets
-    let _dir_applets = Gio.file_new_for_path(DIR_MAP["applets"]);
-    if (!_dir_applets.query_exists(null)) {
-      this.check_applets = false;
+    // All xlets
+    for (let type of TYPES) {
+      let _dir_xlets = Gio.file_new_for_path(DIR_MAP[type]);
+      if (!_dir_xlets.query_exists(null)) {
+        this.check[type].set_value(false);
+      }
+      if (this.check[type].get_value()) {
+        this.types_to_check.push(type);
+        if (this.check_new[type].get_value())
+          this.types_to_check_new.push(type);
+      } else {
+        this.check_new[type].set_value(false);
+        this.menuDots[type] = false;
+      }
     }
-    if (this.check_applets) {
-      this.types_to_check.push('applets');
-      if (this.check_new_applets)
-        this.types_to_check_new.push('applets');
-    } else {
-      this.check_new_applets = false;
-      this.menuDots['applets'] = false;
-    }
-
-    // Desklets
-    let _dir_desklets = Gio.file_new_for_path(DIR_MAP["desklets"]);
-    if (!_dir_desklets.query_exists(null)) {
-      this.check_desklets = false;
-    }
-    if (this.check_desklets) {
-      this.types_to_check.push('desklets');
-      if (this.check_new_desklets)
-        this.types_to_check_new.push('desklets');
-    } else {
-      this.check_new_desklets = false;
-      this.menuDots['desklets'] = false;
-    }
-
-    // Extensions
-    let _dir_extensions = Gio.file_new_for_path(DIR_MAP["extensions"]);
-    if (!_dir_extensions.query_exists(null)) {
-      this.check_extensions = false;
-    }
-    if (this.check_extensions) {
-      this.types_to_check.push('extensions');
-      if (this.check_new_extensions)
-        this.types_to_check_new.push('extensions');
-    } else {
-      this.check_new_extensions = false;
-      this.menuDots['extensions'] = false;
-    }
-
-    // Themes
-    let _dir_themes = Gio.file_new_for_path(DIR_MAP["themes"]);
-    if (!_dir_themes.query_exists(null)) {
-      this.check_themes = false;
-    }
-    if (this.check_themes) {
-      this.types_to_check.push('themes');
-      if (this.check_new_themes)
-        this.types_to_check_new.push('themes');
-    } else {
-      this.check_new_themes = false;
-      this.menuDots['themes'] = false;
-    }
-
   }; // End of on_settings_changed
 
   // Buttons in settings:
@@ -699,19 +608,23 @@ class SpicesUpdate extends Applet.TextIconApplet {
   }; // End of on_btn_test_notif_pressed
   on_btn_refresh_applets_pressed() {
     this.OKtoPopulateSettingsApplets = true;
-    this.populateSettingsUnprotectedApplets()
+    this.populateSettingsUnprotectedApplets();
+    this._on_refresh_pressed()
   }; // End of on_btn_refresh_applets_pressed
   on_btn_refresh_desklets_pressed() {
     this.OKtoPopulateSettingsDesklets = true;
-    this.populateSettingsUnprotectedDesklets()
+    this.populateSettingsUnprotectedDesklets();
+    this._on_refresh_pressed()
   }; // End of on_btn_refresh_applets_pressed
   on_btn_refresh_extensions_pressed() {
     this.OKtoPopulateSettingsExtensions = true;
-    this.populateSettingsUnprotectedExtensions()
+    this.populateSettingsUnprotectedExtensions();
+    this._on_refresh_pressed()
   }; // End of on_btn_refresh_applets_pressed
   on_btn_refresh_themes_pressed() {
     this.OKtoPopulateSettingsThemes = true;
-    this.populateSettingsUnprotectedThemes()
+    this.populateSettingsUnprotectedThemes();
+    this._on_refresh_pressed()
   }; // End of on_btn_refresh_applets_pressed
   on_btn_cs_applets_pressed() {
     GLib.spawn_command_line_async('bash -c \'cinnamon-settings applets\'');
@@ -1287,12 +1200,12 @@ class SpicesUpdate extends Applet.TextIconApplet {
             if (this.details_requested) {
               if (this.get_last_commit_subject(type, uuid)) {
                 if (this.details_by_uuid[uuid].trim() !== "") {
-                  ret.push("%s (%s)\n\t« %s »".format(_(this.get_spice_name(type, uuid)), uuid, this.details_by_uuid[uuid].trim()));
+                  ret.push("%s (%s)\n\t\t« %s »".format(_(this.get_spice_name(type, uuid)), uuid, this.details_by_uuid[uuid].trim()));
                 } else {
-                  ret.push("%s (%s)\n\t%s".format(_(this.get_spice_name(type, uuid)), uuid, _("(Description unavailable)")));
+                  ret.push("%s (%s)\n\t\t%s".format(_(this.get_spice_name(type, uuid)), uuid, _("(Description unavailable)")));
                 }
               } else {
-                ret.push("%s (%s)\n\t%s".format(_(this.get_spice_name(type, uuid)), uuid, _("(Refresh to see the description)")));
+                ret.push("%s (%s)\n\t\t%s".format(_(this.get_spice_name(type, uuid)), uuid, _("(Refresh to see the description)")));
               }
             } else {
               ret.push("%s (%s)".format(_(this.get_spice_name(type, uuid)), uuid));
@@ -1309,7 +1222,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
     var ret = new Array();
     for (let uuid of this.new_Spices[type]) {
       if (this.details_requested === true)
-        ret.push("%s (%s)\n\t« %s »".format(_(this.get_spice_name(type, uuid)),
+        ret.push("%s (%s)\n\t\t« %s »".format(_(this.get_spice_name(type, uuid)),
                                             uuid,
                                             _(this.get_spice_description(type, uuid))))
       else
@@ -1478,7 +1391,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
         Util.spawnCommandLine("cinnamon-settings applets " + UUID + " " + this.instanceId);
     });
     this.menu.addMenuItem(configure);
-    if (DEBUG) {
+    if (DEBUG()) {
       let _reload_button = new PopupMenu.PopupIconMenuItem("Reload this applet", "edit-redo", St.IconType.SYMBOLIC);
       _reload_button.connect("activate", (event) => this._on_reload_this_applet_pressed())
       this.menu.addMenuItem(_reload_button);
@@ -1542,8 +1455,11 @@ class SpicesUpdate extends Applet.TextIconApplet {
     if (this.nb_to_update > 0 || this.nb_to_watch > 0) {
       var _tooltip = this.default_tooltip;
       for (let type of TYPES) {
-        if (this.old_message[type] != "") _tooltip += "\n\u21BB %s".format(this._clean_str(this.old_message[type].replace(/, /gi, "\n\t")));
-        if (this.old_watch_message[type] != "") _tooltip += "\n\u2604 %s".format(this._clean_str(this.old_watch_message[type].replace(/, /gi, "\n\t")));
+        if (this.old_message[type] != "" || this.old_watch_message[type] != "") {
+          _tooltip += "\n\n\t\t\t%s".format(_(type).toLocaleUpperCase());
+          if (this.old_message[type] != "") _tooltip += "\n\u21BB %s".format(this._clean_str(this.old_message[type].replace(/, /gi, "\n\t")));
+          if (this.old_watch_message[type] != "") _tooltip += "\n\u2604 %s".format(this._clean_str(this.old_watch_message[type].replace(/, /gi, "\n\t")));
+        }
       }
       this.set_applet_tooltip(_tooltip);
       this.numberLabel.text = (this.nb_to_update + this.nb_to_watch).toString();
@@ -1552,6 +1468,11 @@ class SpicesUpdate extends Applet.TextIconApplet {
       this.set_applet_tooltip(this.default_tooltip);
       this.numberLabel.text = '';
       this.badge.hide();
+    }
+    if (St.Widget.get_default_direction() === St.TextDirection.RTL) {
+      this._applet_tooltip._tooltip.set_style('text-align: right;');
+    } else {
+      this._applet_tooltip._tooltip.set_style('text-align: left;');
     }
   }; // End of updateUI
 
@@ -1663,7 +1584,9 @@ class SpicesUpdate extends Applet.TextIconApplet {
   }; // End of on_applet_clicked
 
   // ++ Null function called when Generic (internal) Setting changed
-  on_generic_changed() {};
+  on_generic_changed() {
+    // Nothing to do.
+  }; // End of on_generic_changed
 
   // ++ This finalizes the settings when the applet is removed from the panel
   on_applet_removed_from_panel() {
