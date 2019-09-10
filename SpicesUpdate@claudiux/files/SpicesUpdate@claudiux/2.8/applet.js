@@ -986,7 +986,7 @@ SpicesUpdate.prototype = {
     return term_found
   }, // End of get_terminal
 
-  check_dependencies() {
+  check_dependencies: function() {
     if (!this.dependenciesMet && this.are_dependencies_installed()) {
       // At this time, the user just finished to install all dependencies.
       this.dependenciesMet=true;
@@ -1364,12 +1364,12 @@ SpicesUpdate.prototype = {
             if (this.details_requested) {
               if (this.get_last_commit_subject(type, uuid)) {
                 if (this.details_by_uuid[uuid].trim() !== "") {
-                  ret.push("%s (%s)\n\t« %s »".format(_(this.get_spice_name(type, uuid)), uuid, this.details_by_uuid[uuid].trim()));
+                  ret.push("%s (%s)\n\t\t« %s »".format(_(this.get_spice_name(type, uuid)), uuid, this.details_by_uuid[uuid].trim()));
                 } else {
-                  ret.push("%s (%s)\n\t%s".format(_(this.get_spice_name(type, uuid)), uuid, _("(Description unavailable)")));
+                  ret.push("%s (%s)\n\t\t%s".format(_(this.get_spice_name(type, uuid)), uuid, _("(Description unavailable)")));
                 }
               } else {
-                ret.push("%s (%s)\n\t%s".format(_(this.get_spice_name(type, uuid)), uuid, _("(Refresh to see the description)")));
+                ret.push("%s (%s)\n\t\t%s".format(_(this.get_spice_name(type, uuid)), uuid, _("(Refresh to see the description)")));
               }
             } else {
               ret.push("%s (%s)".format(_(this.get_spice_name(type, uuid)), uuid));
@@ -1386,7 +1386,7 @@ SpicesUpdate.prototype = {
     var ret = new Array();
     for (let uuid of this.new_Spices[type]) {
       if (this.details_requested === true)
-        ret.push("%s (%s)\n\t« %s »".format(_(this.get_spice_name(type, uuid)),
+        ret.push("%s (%s)\n\t\t« %s »".format(_(this.get_spice_name(type, uuid)),
                                             uuid,
                                             _(this.get_spice_description(type, uuid))))
       else
@@ -1628,12 +1628,11 @@ SpicesUpdate.prototype = {
     if (this.nb_to_update > 0 || this.nb_to_watch > 0) {
       var _tooltip = this.default_tooltip;
       for (let type of TYPES) {
-        // \uD83D\uDDD8
-        // \u2605
-        //if (this.old_message[type] != "") _tooltip += "\n\u21BB %s".format(this.old_message[type].replace(/, /gi, "\n\t"));
-        //if (this.old_watch_message[type] != "") _tooltip += "\n\u23FF %s".format(this.old_watch_message[type].replace(/, /gi, "\n\t"));
-        if (this.old_message[type] != "") _tooltip += "\n\u21BB %s".format(this._clean_str(this.old_message[type].replace(/, /gi, "\n\t")));
-        if (this.old_watch_message[type] != "") _tooltip += "\n\u23FF %s".format(this._clean_str(this.old_watch_message[type].replace(/, /gi, "\n\t")));
+        if (this.old_message[type] != "" || this.old_watch_message[type] != "") {
+          _tooltip += "\n\n\t\t\t%s".format(_(type).toLocaleUpperCase());
+          if (this.old_message[type] != "") _tooltip += "\n\u21BB %s".format(this._clean_str(this.old_message[type].replace(/, /gi, "\n\t")));
+          if (this.old_watch_message[type] != "") _tooltip += "\n\u2604 %s".format(this._clean_str(this.old_watch_message[type].replace(/, /gi, "\n\t")));
+        }
       }
       this.set_applet_tooltip(_tooltip);
       this.numberLabel.text = (this.nb_to_update + this.nb_to_watch).toString();
@@ -1642,6 +1641,11 @@ SpicesUpdate.prototype = {
       this.set_applet_tooltip(this.default_tooltip);
       this.numberLabel.text = '';
       this.badge.hide();
+    }
+    if (St.Widget.get_default_direction() === St.TextDirection.RTL) {
+      this._applet_tooltip._tooltip.set_style('text-align: right;');
+    } else {
+      this._applet_tooltip._tooltip.set_style('text-align: left;');
     }
   }, // End of updateUI
 
