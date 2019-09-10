@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: SpicesUpdate@claudiux v2.0.0\n"
 "Report-Msgid-Bugs-To: Claudiux <claude.clerc@gmail.com>\n"
 "POT-Creation-Date: 2019-01-02 13:30+0100\n"
-"PO-Revision-Date: 2019-01-31 23:33+0100\n"
+"PO-Revision-Date: 2019-09-10 20:33+0200\n"
+"Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: \n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.0.6\n"
-"Last-Translator: Claude CLERC <claude.clerc@gmail.com>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: es\n"
 
 #: metadata.json:3
 msgid "Spices Update"
@@ -72,7 +72,7 @@ msgstr "Tipo de visualización"
 
 #: settings-schema.json:90
 msgid "Let regularly check if your applets are up to date"
-msgstr "Comprobar regularmente si sus applets están actualizadas."
+msgstr "Comprobar regularmente si sus applets están actualizadas"
 
 #: settings-schema.json:91
 msgid "If applets updates do not concern you, uncheck this box."
@@ -110,11 +110,11 @@ msgstr "¿Buscar actualizaciones?"
 
 #: settings-schema.json:127
 msgid "Open Cinnamon Settings to manage all the Applets"
-msgstr "Abrir Ajustes de Cinnamon para gestionar todas las applets."
+msgstr "Abrir Ajustes de Cinnamon para gestionar todas las applets"
 
 #: settings-schema.json:135
 msgid "Let regularly check if your desklets are up to date"
-msgstr "Comprobar regularmente si sus desklets están actualizadas."
+msgstr "Comprobar regularmente si sus desklets están actualizadas"
 
 #: settings-schema.json:136
 msgid "If desklets updates do not concern you, uncheck this box."
@@ -144,11 +144,11 @@ msgstr "Sus Desklets"
 
 #: settings-schema.json:171
 msgid "Open Cinnamon Settings to manage all the Desklets"
-msgstr "Abrir Ajustes de Cinnamon para gestionar todas las desklets."
+msgstr "Abrir Ajustes de Cinnamon para gestionar todas las desklets"
 
 #: settings-schema.json:179
 msgid "Let regularly check if your extensions are up to date"
-msgstr "Comprobar regularmente si sus extenciones están actualizadas."
+msgstr "Comprobar regularmente si sus extenciones están actualizadas"
 
 #: settings-schema.json:180
 msgid "If extensions updates do not concern you, uncheck this box."
@@ -178,11 +178,11 @@ msgstr "Sus Extensiones"
 
 #: settings-schema.json:215
 msgid "Open Cinnamon Settings to manage all the Extensions"
-msgstr "Abrir Ajustes de Cinnamon para gestionar todas las extensiones."
+msgstr "Abrir Ajustes de Cinnamon para gestionar todas las extensiones"
 
 #: settings-schema.json:223
 msgid "Let regularly check if your themes are up to date"
-msgstr "Comprobar regularmente si sus temas están actualizados."
+msgstr "Comprobar regularmente si sus temas están actualizados"
 
 #: settings-schema.json:224
 msgid "If themes updates do not concern you, uncheck this box."
@@ -191,7 +191,7 @@ msgstr ""
 
 #: settings-schema.json:231
 msgid "Let regularly check if new themes are available"
-msgstr "Comprobar regularmente si hay nuevos temas disponibles."
+msgstr "Comprobar regularmente si hay nuevos temas disponibles"
 
 #: settings-schema.json:232
 msgid "If new themes do not concern you, uncheck this box."
@@ -211,7 +211,7 @@ msgstr "Sus Temas"
 
 #: settings-schema.json:259
 msgid "Open Cinnamon Settings to manage all the Themes"
-msgstr "Abrir Ajustes de Cinnamon para gestionar todos los temas."
+msgstr "Abrir Ajustes de Cinnamon para gestionar todos los temas"
 
 #: settings-schema.json:269
 msgid "hours"
@@ -232,7 +232,7 @@ msgstr ""
 #: settings-schema.json:277
 msgid "Notify me by changing the icon when Spices need an update"
 msgstr ""
-"Notifícame cambiando el ícono cuando las Spices necesiten una actualización."
+"Notifícame cambiando el ícono cuando las Spices necesiten una actualización"
 
 #: settings-schema.json:278
 msgid ""
@@ -244,7 +244,7 @@ msgstr ""
 
 #: settings-schema.json:285
 msgid "The icon color when Spices need an update"
-msgstr "El color del icono cuando las Spices necesitan una actualización."
+msgstr "El color del icono cuando las Spices necesitan una actualización"
 
 #: settings-schema.json:286
 msgid "Click the button to select another color."
@@ -278,7 +278,7 @@ msgstr ""
 
 #: settings-schema.json:308
 msgid "Show notification messages even if they are unchanged"
-msgstr "Mostrar mensajes de notificación incluso si no se han modificado."
+msgstr "Mostrar mensajes de notificación incluso si no se han modificado"
 
 #: settings-schema.json:309
 msgid ""
@@ -294,7 +294,7 @@ msgstr "Mínimo (sólo texto)"
 
 #: settings-schema.json:316
 msgid "With button opening the System Settings"
-msgstr "Con botón de apertura de la configuración del sistema."
+msgstr "Con botón de apertura de la configuración del sistema"
 
 #: settings-schema.json:319
 msgid "Notification style"
@@ -321,7 +321,7 @@ msgstr ""
 
 #: settings-schema.json:325
 msgid "Send a fake notification to test the style"
-msgstr "Enviar una notificación falsa para probar el estilo."
+msgstr "Enviar una notificación falsa para probar el estilo"
 
 #: settings-schema.json:332
 msgid "Classic - Icon and Text"
