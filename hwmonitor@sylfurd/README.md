@@ -37,4 +37,4 @@ Vertical pane example:
 ### Contributing
 
 *  Original author : Sylfurd
-*  Author : Hultan
+*  Author : Hultan (SoftTeam AB)
