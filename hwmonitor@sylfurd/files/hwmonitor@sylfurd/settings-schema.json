@@ -3,24 +3,6 @@
         "type": "section",
         "description": "Graphical hardware monitor settings"
     },
-    "graph_width": {
-        "type": "spinbutton",
-        "default": 100,
-        "min": 10,
-        "max": 500,
-        "units": "pixels",
-        "step": 1,
-        "description": "Horizontal panel graph width"
-    },
-    "graph_height": {
-        "type": "spinbutton",
-        "default": 50,
-        "min": 10,
-        "max": 300,
-        "units": "pixels",
-        "step": 1,
-        "description": "Vertical panel graph height"
-    },
     "frequency": {
         "type": "combobox",
         "default": "1.0",
@@ -35,32 +17,6 @@
         },
         "description": "Update frequency (seconds)",
         "tooltip": "The amount of time (in seconds) between the graph updates."
-    },
-    "label_section": {
-        "type": "section",
-        "description": "Custom graph labels"
-    },
-    "custom_labels": {
-        "type": "checkbox",
-        "default": false,
-        "description": "Use custom graph labels",
-        "tooltip": "Choose your own labels for the graphs"
-    },
-    "cpu_label": {
-        "type": "entry",
-        "default": "CPU",
-        "description": "Set the label for the CPU graph",
-        "dependency": "custom_labels"
-    },
-    "mem_label": {
-        "type": "entry",
-        "default": "MEM",
-        "description": "Set the label for the memory graph",
-        "dependency": "custom_labels"
-    },
-    "theme_section": {
-        "type": "section",
-        "description": "Theme"
     },
     "theme": {
         "type": "combobox",
@@ -156,5 +112,159 @@
         "tooltip": "Click the button to select a ending color for the linear gradient of the graph colors. Offset for the last color is always 1.",
         "indent": true,
         "dependency": "theme=user"
+    },
+    "cpu_section": {
+        "type": "section",
+        "description": "CPU"
+    },
+    "cpu_enable_graph": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Show CPU graph",
+        "tooltip": "Show or hide the CPU graph"
+    },
+    "cpu_size": {
+        "type": "spinbutton",
+        "default": 50,
+        "min": 10,
+        "max": 500,
+        "units": "Graph size",
+        "step": 1,
+        "description": "Horizontal panel width or vertical panel height.",
+        "dependency": "cpu_enable_graph"
+    },
+    "cpu_use_custom_label": {
+        "type": "checkbox",
+        "default": false,
+        "description": "Use custom graph label",
+        "tooltip": "Choose your own label for the CPU graph",
+        "dependency": "cpu_enable_graph"
+    },
+    "cpu_custom_label": {
+        "type": "entry",
+        "default": "CPU",
+        "description": "Set the custom label for the CPU graph",
+        "dependency": "cpu_enable_graph"
+    },
+    "mem_section": {
+        "type": "section",
+        "description": "MEM"
+    },
+    "mem_enable_graph": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Show MEM graph",
+        "tooltip": "Show or hide the MEM graph"
+    },
+    "mem_size": {
+        "type": "spinbutton",
+        "default": 50,
+        "min": 10,
+        "max": 500,
+        "units": "Graph size",
+        "step": 1,
+        "description": "Horizontal panel width or vertical panel height.",
+        "dependency": "mem_enable_graph"
+    },
+    "mem_use_custom_label": {
+        "type": "checkbox",
+        "default": false,
+        "description": "Use custom graph label",
+        "tooltip": "Choose your own label for the MEM graph",
+        "dependency": "mem_enable_graph"
+    },
+    "mem_custom_label": {
+        "type": "entry",
+        "default": "MEM",
+        "description": "Set the custom label for the MEM graph",
+        "dependency": "mem_enable_graph"
+    },
+    "netin_section": {
+        "type": "section",
+        "description": "NET (in)"
+    },
+    "netin_enable_graph": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Show NET (in) graph",
+        "tooltip": "Show or hide the NET (in) graph"
+    },
+    "netin_size": {
+        "type": "spinbutton",
+        "default": 50,
+        "min": 10,
+        "max": 500,
+        "units": "Graph size",
+        "step": 1,
+        "description": "Horizontal panel width or vertical panel height.",
+        "dependency": "netin_enable_graph"
+    },
+    "netin_use_custom_label": {
+        "type": "checkbox",
+        "default": false,
+        "description": "Use custom graph label",
+        "tooltip": "Choose your own label for the NET (in) graph",
+        "dependency": "netin_enable_graph"
+    },
+    "netin_custom_label": {
+        "type": "entry",
+        "default": "NET (in)",
+        "description": "Set the custom label for the NET (in) graph",
+        "dependency": "netin_enable_graph"
+    },
+    "netin_linlog": {
+        "type": "combobox",
+        "default": "log",
+        "options": {
+            "logarithmic": "log",
+            "linear": "lin"
+        },
+        "description": "Scale",
+        "tooltip": "Use linear or logarithmic scale.",
+        "dependency": "netin_enable_graph"
+    },
+    "netout_section": {
+        "type": "section",
+        "description": "NET (out)"
+    },
+    "netout_enable_graph": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Show NET (out) graph",
+        "tooltip": "Show or hide the NET (out) graph"
+    },
+    "netout_size": {
+        "type": "spinbutton",
+        "default": 50,
+        "min": 10,
+        "max": 500,
+        "units": "Graph size",
+        "step": 1,
+        "description": "Horizontal panel width or vertical panel height.",
+        "dependency": "netout_enable_graph"
+    },
+    "netout_use_custom_label": {
+        "type": "checkbox",
+        "default": false,
+        "description": "Use custom graph label",
+        "tooltip": "Choose your own label for the NET (out) graph",
+        "dependency": "netout_enable_graph"
+    },
+    "netout_custom_label": {
+        "type": "entry",
+        "default": "NET (out)",
+        "description": "Set the custom label for the NET (out) graph",
+        "dependency": "netout_enable_graph"
+    },
+    "netout_linlog": {
+        "type": "combobox",
+        "default": "log",
+        "options": {
+            "logarithmic": "log",
+            "linear": "lin"
+        },
+        "description": "Scale",
+        "tooltip": "Use linear or logarithmic scale.",
+        "dependency": "netout_enable_graph"
     }
 }

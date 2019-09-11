@@ -39,14 +39,21 @@ if (typeof require !== 'undefined') {
     Graph = require('./graph');
     Support = require('./support');
 } else {
-    Providers = imports.ui.appletManager.applets['hwmonitor@sylfurd'].providers;
-    Graph = imports.ui.appletManager.applets['hwmonitor@sylfurd'].graph;
-    Support = imports.ui.appletManager.applets['hwmonitor@sylfurd'].support;
+    Providers = imports.ui.appletManager.applets[UUID].providers;
+    Graph = imports.ui.appletManager.applets[UUID].graph;
+    Support = imports.ui.appletManager.applets[UUID].support;
 }
 
 Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
 function _(str) {
   return Gettext.dgettext(UUID, str)
+}
+
+let debug = true;
+function debug_message_once(message) {    
+    if (debug)
+        global.logError("HWMONITOR : " + message);
+    debug = false;
 }
 
 function debug_message(message) {
@@ -63,7 +70,7 @@ GraphicalHWMonitorApplet.prototype = {
     _init: function (metadata, orientation, panel_height, instance_id) {
         Applet.IconApplet.prototype._init.call(this, orientation, panel_height, instance_id);
 
-        this.get_orientation(orientation); // Initialise for panel orientation
+        this.getOrientation(orientation); // Initialise for panel orientation
         this.panel_height = panel_height;
         this.graphs = [];
 
@@ -83,88 +90,117 @@ GraphicalHWMonitorApplet.prototype = {
 
         // Setup the applet settings 
         this.settings = new Settings.AppletSettings(this, metadata.uuid, instance_id);
-        this.settings.bind("graph_width", "graph_width", this.settings_changed);
-        this.settings.bind("graph_height", "graph_height", this.settings_changed);
-        this.settings.bind("frequency", "frequency", this.settings_changed);
-        this.settings.bind("theme", "theme", this.settings_changed);
-        this.settings.bind("border_color", "border_color", this.settings_changed);
-        this.settings.bind("background_color1", "background_color1", this.settings_changed);
-        this.settings.bind("background_color2", "background_color2", this.settings_changed);
-        this.settings.bind("label_color", "label_color", this.settings_changed);
-        this.settings.bind("graph_color1", "graph_color1", this.settings_changed);
-        this.settings.bind("graph_color2", "graph_color2", this.settings_changed);
-        this.settings.bind("graph_color3", "graph_color3", this.settings_changed);
-        this.settings.bind("graph_color4", "graph_color4", this.settings_changed);
-        this.settings.bind("graph_offset2", "graph_offset2", this.settings_changed);
-        this.settings.bind("graph_offset3", "graph_offset3", this.settings_changed);
-        this.settings.bind("custom_labels", "custom_labels", this.settings_changed);
-        this.settings.bind("cpu_label", "cpu_label", this.settings_changed);
-        this.settings.bind("mem_label", "mem_label", this.settings_changed);
+        this.settings.bind("frequency", "frequency", this.settingsChanged);
+        this.settings.bind("theme", "theme", this.settingsChanged);
+        this.settings.bind("border_color", "border_color", this.settingsChanged);
+        this.settings.bind("background_color1", "background_color1", this.settingsChanged);
+        this.settings.bind("background_color2", "background_color2", this.settingsChanged);
+        this.settings.bind("label_color", "label_color", this.settingsChanged);
+        this.settings.bind("graph_color1", "graph_color1", this.settingsChanged);
+        this.settings.bind("graph_color2", "graph_color2", this.settingsChanged);
+        this.settings.bind("graph_color3", "graph_color3", this.settingsChanged);
+        this.settings.bind("graph_color4", "graph_color4", this.settingsChanged);
+        this.settings.bind("graph_offset2", "graph_offset2", this.settingsChanged);
+        this.settings.bind("graph_offset3", "graph_offset3", this.settingsChanged);
+        this.settings.bind("cpu_enable_graph", "cpu_enable_graph", this.settingsChanged);
+        this.settings.bind("cpu_size", "cpu_size", this.settingsChanged);
+        this.settings.bind("cpu_use_custom_label", "cpu_use_custom_label", this.settingsChanged);
+        this.settings.bind("cpu_custom_label", "cpu_custom_label", this.settingsChanged);
+        this.settings.bind("mem_enable_graph", "mem_enable_graph", this.settingsChanged);
+        this.settings.bind("mem_size", "mem_size", this.settingsChanged);
+        this.settings.bind("mem_use_custom_label", "mem_use_custom_label", this.settingsChanged);
+        this.settings.bind("mem_custom_label", "mem_custom_label", this.settingsChanged);
+        this.settings.bind("netin_enable_graph", "netin_enable_graph", this.settingsChanged);
+        this.settings.bind("netin_size", "netin_size", this.settingsChanged);
+        this.settings.bind("netin_use_custom_label", "netin_use_custom_label", this.settingsChanged);
+        this.settings.bind("netin_custom_label", "netin_custom_label", this.settingsChanged);
+        this.settings.bind("netin_linlog", "netin_linlog", this.settingsChanged);
+        this.settings.bind("netout_enable_graph", "netout_enable_graph", this.settingsChanged);
+        this.settings.bind("netout_size", "netout_size", this.settingsChanged);
+        this.settings.bind("netout_use_custom_label", "netout_use_custom_label", this.settingsChanged);
+        this.settings.bind("netout_custom_label", "netout_custom_label", this.settingsChanged);
+        this.settings.bind("netout_linlog", "netout_linlog", this.settingsChanged);
         
-        this.create_theme_object();
+        this.createThemeObject();
 
-        this.area = new Support.AppletArea();
-        this.area.init(this.isHorizontal,this.get_width(), this.get_height());
-
-        this.graphArea = new St.DrawingArea();
-        this.graphArea.height = this.area.height;
-        this.graphArea.width = this.area.width;
-
-        this.graphArea.connect('repaint', Lang.bind(this, this.onGraphRepaint));
-        this.actor.add_actor(this.graphArea);
-        this.update_graphs(this.area);
+        this.createAppletArea();
 
         this.actor.set_offscreen_redirect(Clutter.OffscreenRedirect.ALWAYS);
-        this.add_update_loop(this.frequency);
+        this.addUpdateLoop(this.frequency);
 
     },
 
-    get_height: function() {
-        if (this.isHorizontal) 
-            return this.panel_height;
-         else 
-            return this.graph_height;
-    },
-
-    get_width: function() {
-        if (this.isHorizontal) 
-            return this.graph_width;
+    createAppletArea: function(){
+        this.graphs = [];
+        if (this.isHorizontal)
+            this.appletArea = new Support.AppletArea(this, this.isHorizontal,0, this.panel_height);
         else
-            return this.panel_height;
-    },
+            this.appletArea = new Support.AppletArea(this, this.isHorizontal,this.panel_height, 0);
 
-    update_graphs: function (area) {
-        let cpuProvider =  new Providers.CpuDataProvider();
-        let memProvider =  new Providers.MemDataProvider();
+        // Add CPU graph
+        if (this.cpu_enable_graph) {
+            let cpuGraphArea = null;
+            if (this.isHorizontal)
+                cpuGraphArea = this.appletArea.addGraph(this.cpu_size, this.panel_height);
+            else
+                cpuGraphArea = this.appletArea.addGraph(this.panel_height, this.cpu_size);
 
-        this.graphs = [
-            new Graph.Graph(cpuProvider, area, area.graph[0], this.theme_object),
-            new Graph.Graph(memProvider, area, area.graph[1], this.theme_object)
-        ];
-    },
-
-    update_applet_area: function() {
-        if (this.area)
-            this.area = null;
-
-        this.area = new Support.AppletArea();
-        this.area.init(this.isHorizontal,this.get_width(), this.get_height());
-
-        if (this.graphArea) {
-            this.actor.remove_actor(this.graphArea);    
-            this.graphArea = null;        
+            let cpuProvider =  new Providers.CpuDataProvider();
+            this.graphs.push(new Graph.Graph(cpuProvider, cpuGraphArea, this.theme_object));
         }
-            
-        this.graphArea = new St.DrawingArea();
-        this.graphArea.height = this.area.height;
-        this.graphArea.width = this.area.width;
-        this.graphArea.connect('repaint', Lang.bind(this, this.onGraphRepaint));
-        this.actor.add_actor(this.graphArea);
 
-        this.update_graphs(this.area);
+        // Add MEM graph
+        if (this.mem_enable_graph) {
+            let memGraphArea = null;
+            if (this.isHorizontal)
+                memGraphArea = this.appletArea.addGraph(this.mem_size, this.panel_height);
+            else
+                memGraphArea = this.appletArea.addGraph(this.panel_height, this.mem_size);
+
+            let memProvider =  new Providers.MemDataProvider();
+            this.graphs.push(new Graph.Graph(memProvider, memGraphArea, this.theme_object));
+        }
+                
+        // Add NET IN Graph
+        if (this.netin_enable_graph) {
+            let netInGraphArea = null;
+            if (this.isHorizontal)
+                netInGraphArea = this.appletArea.addGraph(this.netin_size, this.panel_height);
+            else
+                netInGraphArea = this.appletArea.addGraph(this.panel_height, this.netin_size);
+
+            let netInProvider =  new Providers.NetDataProvider(this.frequency, true, this.netin_linlog);
+            this.graphs.push(new Graph.Graph(netInProvider, netInGraphArea, this.theme_object));
+        }    
+                
+        // Add NET OUT Graph
+        if (this.netout_enable_graph) {
+            let netOutGraphArea = null;
+            if (this.isHorizontal)
+                netOutGraphArea = this.appletArea.addGraph(this.netout_size, this.panel_height);
+            else
+                netOutGraphArea = this.appletArea.addGraph(this.panel_height, this.netout_size);
+
+            let netOutProvider =  new Providers.NetDataProvider(this.frequency, false, this.netout_linlog);
+            this.graphs.push(new Graph.Graph(netOutProvider, netOutGraphArea, this.theme_object));
+        }    
+
+        this.appletArea.createDrawingArea();
+
+        this.appletArea.drawingArea.connect('repaint', Lang.bind(this, this.onGraphRepaint));        
+        this.actor.add_actor(this.appletArea.drawingArea);
     },
 
-    get_orientation: function (orientation) {
+    updateAppletArea: function() {
+        if (this.appletArea) {
+            this.appletArea.destroyDrawingArea();
+            this.appletArea = null;
+        }
+
+        this.createAppletArea();
+    },
+
+    getOrientation: function (orientation) {
         this.orientation = orientation;
         if (this.versionCompare( GLib.getenv('CINNAMON_VERSION') ,"3.2" ) >= 0 ){
             if (this.orientation == St.Side.LEFT || this.orientation == St.Side.RIGHT) {                 
@@ -177,33 +213,33 @@ GraphicalHWMonitorApplet.prototype = {
         }
     },
 
-    on_orientation_changed: function(orientation) {
-        this.get_orientation(orientation);
-        this.update_applet_area();
+    onOrientationChanged: function(orientation) {
+        this.getOrientation(orientation);
+        this.updateAppletArea();
     },
 
-    on_panel_height_changed: function() {  
+    onPanelHeightChanged: function() {  
         this.panel_height = this._panelHeight
-        this.update_applet_area();
+        this.updateAppletArea();
         this._update();
     },
 
-    on_applet_removed_from_panel: function() {
+    onAppletRemovedFromPanel: function() {
         if (gtopFailed) return;
-        this.remove_update_loop();
+        this.removeUpdateLoop();
     },
 
-    on_applet_clicked: function(event) {
+    onAppletClicked: function(event) {
         this._runSysMon();
     },
 
-    add_update_loop: function(frequency) {
+    addUpdateLoop: function(frequency) {
         // Start the update loop and allow updates
         this.loopId = Mainloop.timeout_add(frequency*1000, Lang.bind(this, this.update));
         this.shouldUpdate = true;
     },
 
-    remove_update_loop: function() {
+    removeUpdateLoop: function() {
         // Remove the update loop and stop updates
         if (this.loopId) {
             Mainloop.source_remove(this.loopId);
@@ -220,30 +256,35 @@ GraphicalHWMonitorApplet.prototype = {
     	for (let i = 0; i < this.graphs.length; i++) {
             this.graphs[i].refreshData();
         }
-        this.graphArea.queue_repaint();
+        this.appletArea.drawingArea.queue_repaint();
     },
 
     // Redraws the graphs
     onGraphRepaint: function (area) {
-        let [width, height] = [this.get_width(), this.get_height()];
+        let [width, height] = [0,0];
 
-        for (let index = 0; index < 2; index++) {
+        for (let index = 0; index < this.graphs.length; index++) {
             if (this.isHorizontal)
-                area.get_context().translate(index * width, 0);
+                area.get_context().translate(width, 0);
             else
-                area.get_context().translate(0, index * height);
+                area.get_context().translate(0, height);
 
             this.graphs[index].paint(area);
+
+            if (this.isHorizontal)
+                width = this.appletArea.graphArea[index].width
+            else
+                height = this.appletArea.graphArea[index].height;            
         }
     },
 
     // Called when the settings have changed
-    settings_changed: function () {        
+    settingsChanged: function () {        
         this.restartGHW();
     },
 
     // Gets color on format 'rgba(255,255,255,0.5) and returns an array of four values
-    get_colors:function (rgb) {
+    getColors:function (rgb) {
         let colors = rgb.replace(/[^\d,]/g, '').split(',');
         for(let i=0;i<3;i++) {
             colors[i] /= 255;
@@ -253,32 +294,37 @@ GraphicalHWMonitorApplet.prototype = {
     },
 
     // Creates an object containing the users selected theme settings
-    create_theme_object: function() {
+    createThemeObject: function() {
         this.theme_object = new Object();
         this.theme_object.theme = this.theme;
-        this.theme_object.border_colors = this.get_colors(this.border_color);
-        this.theme_object.background_colors1 = this.get_colors(this.background_color1);
-        this.theme_object.background_colors2 = this.get_colors(this.background_color2);
-        this.theme_object.label_color = this.get_colors(this.label_color);
-        this.theme_object.graph_color1 = this.get_colors(this.graph_color1);
-        this.theme_object.graph_color2 = this.get_colors(this.graph_color2);
-        this.theme_object.graph_color3 = this.get_colors(this.graph_color3);
-        this.theme_object.graph_color4 = this.get_colors(this.graph_color4);
+        this.theme_object.border_colors = this.getColors(this.border_color);
+        this.theme_object.background_colors1 = this.getColors(this.background_color1);
+        this.theme_object.background_colors2 = this.getColors(this.background_color2);
+        this.theme_object.label_color = this.getColors(this.label_color);
+        this.theme_object.graph_color1 = this.getColors(this.graph_color1);
+        this.theme_object.graph_color2 = this.getColors(this.graph_color2);
+        this.theme_object.graph_color3 = this.getColors(this.graph_color3);
+        this.theme_object.graph_color4 = this.getColors(this.graph_color4);
         this.theme_object.graph_offset2 = this.graph_offset2;
         this.theme_object.graph_offset3 = this.graph_offset3;
-        this.theme_object.custom_labels = this.custom_labels;
-        this.theme_object.cpu_label = this.cpu_label;
-        this.theme_object.mem_label = this.mem_label;
+        this.theme_object.cpu_use_custom_label = this.cpu_use_custom_label;
+        this.theme_object.cpu_custom_label = this.cpu_custom_label;
+        this.theme_object.mem_use_custom_label = this.mem_use_custom_label;
+        this.theme_object.mem_custom_label = this.mem_custom_label;
+        this.theme_object.netin_use_custom_label = this.netin_use_custom_label;
+        this.theme_object.netin_custom_label = this.netin_custom_label;
+        this.theme_object.netout_use_custom_label = this.netout_use_custom_label;
+        this.theme_object.netout_custom_label = this.netout_custom_label;
     },
 
     // Restarts GHW if something stopped it from working.
     // Can happen for example after computer comes back from a suspend
     restartGHW: function() {
         // Refresh the update loop with the new frequency
-        this.create_theme_object();
-        this.remove_update_loop();
-        this.add_update_loop(this.frequency);
-        this.update_applet_area();        
+        this.createThemeObject();
+        this.removeUpdateLoop();
+        this.addUpdateLoop(this.frequency);
+        this.updateAppletArea();        
     },
 
     _runSysMon: function() {

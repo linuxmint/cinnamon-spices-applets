@@ -1,31 +1,63 @@
+const St = imports.gi.St;
 
+//
 // Class responsible for keeping track of the entire applet area
+//
 class AppletArea {
-    init(isHorizontal, graphWidth, graphHeight) {
+    constructor(parent, isHorizontal, appletWidth, appletHeight) {        
         this.isHorizontal = isHorizontal;
+        this.graphArea = [];
+        this.parent = parent;
 
         if (this.isHorizontal) {
-            // An area big enough to have two graphs next to each other
-            this.height = graphHeight;
-            this.width = graphWidth * 2;
-
+            this.height = appletHeight;
+            this.width = 0;
         } else {
-            // An area big enough to have two graphs on top of each other
-            this.height = graphHeight * 2;
-            this.width = graphWidth;
+            this.height = 0;
+            this.width = appletWidth;
         }
+    }
 
-        this.graph = [];
-        this.graph[0] = new GraphArea();
-        this.graph[0].init(this, graphWidth, graphHeight);
-        this.graph[1] = new GraphArea();
-        this.graph[1].init(this, graphWidth, graphHeight);
+    // Adds a new graph
+    addGraph(graphWidth, graphHeight) {
+        let area = new GraphArea(this, graphWidth, graphHeight);
+        this.graphArea.push(area);
+        
+        // Make place for the new graph
+        if (this.isHorizontal)
+            this.width += graphWidth;
+        else
+            this.height += graphHeight;
+
+        return area;
+    }
+
+    // Creates a new drawing area
+    createDrawingArea() {
+        this.destroyDrawingArea();
+        this.drawingArea = new St.DrawingArea();
+        this.drawingArea.height = this.height;
+        this.drawingArea.width = this.width;
+    }
+
+    // Destroys an existing drawing area
+    destroyDrawingArea() {
+        if (this.drawingArea) {
+            this.parent.actor.remove_actor(this.drawingArea);    
+            this.drawingArea = null;        
+        }
     }
 }
 
-// Class responsible for keeping track of the area for one of the graphs
+//
+// Class responsible for keeping track of one of the graphs
+//
 class GraphArea {    
-    init(parent, width, height) {
+    constructor(parent, width, height) {
+        this.width = width;
+        this.height = height;
+        this.graph = null;
+
         // Set the actual drawing area of the graph
         // which is sligthly smaller because of themes,
         // borders and space between graphs etc
@@ -45,7 +77,9 @@ class GraphArea {
     }
 }
 
+//
 // Just a square class
+//
 class Box {
     init(top, left, width, height) {
         this.top = top;

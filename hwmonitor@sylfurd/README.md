@@ -9,8 +9,9 @@ The code for this applet can be found under hwmonitor@sylfurd here : [cinnamon-s
 
 You can open the configuration dialog by right-clicking the applet and selecting **Configure...**. In the dialog, you can:
 
-* Choose the width of the graphs in pixels, when in a horizontal panel.
-* Choose the height of the graphs in pixels, when in a vertical panel.
+* **NEW** You can now turn on or off each individual graph.
+* **NEW** You can now choose the width (horizontal panels) or the height (vertical panels) of each individual graph.
+* **NEW** There are two new graphs showing internet traffic in and out. The NET graphs shows bytes in/out (per time slot) compared to the max bytes in/out (per time slot), which means that there might be an intial spike. The graph should stabilize itself after a while though (depending on the frequency you have selected). This purpose of this is to make it independant of internet speed.
 * Select the update frequency for the graph, by selecting the number of seconds between updates in the Update frequency combo.
 * Select theme : If you select **dark theme**, the graph will be drawn in dark colors and vice versa for **light theme**. If you select **custom theme** you can customize the colors so that they match your desktop theme perfectly.
 * Choose custom labels : If you check this option, you can override the labels from the language files for each graph.
