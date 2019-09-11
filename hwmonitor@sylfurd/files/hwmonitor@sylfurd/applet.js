@@ -84,10 +84,6 @@ GraphicalHWMonitorApplet.prototype = {
         this.itemOpenSysMon.connect('activate', Lang.bind(this, this._runSysMonActivate));
         this._applet_context_menu.addMenuItem(this.itemOpenSysMon);
 
-        this.itemReset = new PopupMenu.PopupMenuItem(_("Restart 'Graphical hardware monitor'"));        
-        this.itemReset.connect('activate', Lang.bind(this, this.restartGHW));
-        this._applet_context_menu.addMenuItem(this.itemReset);
-
         // Setup the applet settings 
         this.settings = new Settings.AppletSettings(this, metadata.uuid, instance_id);
         this.settings.bind("frequency", "frequency", this.settingsChanged);
