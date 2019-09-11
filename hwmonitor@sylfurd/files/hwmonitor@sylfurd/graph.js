@@ -5,10 +5,11 @@ const Main = imports.ui.main;
 // Class responsible for drawing an instance of one graph
 //
 class Graph {    
-    constructor (provider, graphArea, theme) {
+    constructor (provider, graphArea, theme, show_detail) {
         this.provider = provider;
         this.graph = graphArea;
         this.theme = theme;
+        this.show_detail = show_detail;
 
         this.datas = Array(this.graph.inner.width-1);
 
@@ -40,6 +41,10 @@ class Graph {
 
         // Draw label
         this.drawLabel(cr);
+
+        // Draw detail label
+        if (this.show_detail)
+            this.drawDetailLabel(cr);
 
         // Reset translation
         cr.translate( -(this.graph.outer.left + 0.5), -(this.graph.outer.top + 0.5));
@@ -208,6 +213,36 @@ class Graph {
             cr.showText(this.theme.netout_custom_label);
         else
             cr.showText(this.provider.name);
+    }
+
+
+    // Draw the text label on the graph
+    drawDetailLabel(cr) {
+        if (this.provider.text==null)
+            return;
+
+        cr.setFontSize(global.ui_scale * 9);
+        if (this.theme.theme=="light")
+            cr.setSourceRGBA(1, 1, 1, 0.5);
+        else if (this.theme.theme=="dark")
+            cr.setSourceRGBA(0, 0, 0, 0.5);
+        else {
+            cr.setSourceRGBA(this.theme.detail_label_color[0], this.theme.detail_label_color[1], this.theme.detail_label_color[2], 0.5);
+        }
+        cr.moveTo(global.ui_scale * 2.5, global.ui_scale * 18.5 + 0.5);
+        
+        cr.showText(this.provider.text);
+
+        if (this.theme.theme=="light")
+            cr.setSourceRGBA(1, 1, 1, 1);
+        else if (this.theme.theme=="dark")
+            cr.setSourceRGBA(0, 0, 0, 1);
+        else {
+            cr.setSourceRGBA(this.theme.detail_label_color[0], this.theme.detail_label_color[1], this.theme.detail_label_color[2], 1);
+        }
+        cr.moveTo(global.ui_scale * 2, global.ui_scale * 18 + 0.5);
+
+        cr.showText(this.provider.text);
     }
 
     refreshData() {

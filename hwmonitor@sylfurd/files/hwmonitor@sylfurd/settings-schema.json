@@ -61,6 +61,14 @@
         "indent": true,
         "dependency": "theme=user"
     },
+    "detail_label_color": {
+        "type": "colorchooser",
+        "default": "rgb(255,255,255)",
+        "description": "Detail label color",
+        "tooltip": "Click the button to select a detail label color",
+        "indent": true,
+        "dependency": "theme=user"
+    },
     "graph_color1": {
         "type": "colorchooser",
         "default": "rgba(51,178,255,1)",
@@ -130,7 +138,7 @@
         "max": 500,
         "units": "Graph size",
         "step": 1,
-        "description": "Horizontal panel width or vertical panel height.",
+        "description": "Horizontal panel width or vertical panel height",
         "dependency": "cpu_enable_graph"
     },
     "cpu_use_custom_label": {
@@ -144,6 +152,13 @@
         "type": "entry",
         "default": "CPU",
         "description": "Set the custom label for the CPU graph",
+        "dependency": "cpu_enable_graph"
+    },
+    "cpu_show_detail_label": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Show details",
+        "tooltip": "Show or hide the CPU usage label",
         "dependency": "cpu_enable_graph"
     },
     "mem_section": {
@@ -177,6 +192,13 @@
         "type": "entry",
         "default": "MEM",
         "description": "Set the custom label for the MEM graph",
+        "dependency": "mem_enable_graph"
+    },
+    "mem_show_detail_label": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Show details",
+        "tooltip": "Show or hide the MEM usage label",
         "dependency": "mem_enable_graph"
     },
     "netin_section": {
@@ -223,6 +245,13 @@
         "tooltip": "Use linear or logarithmic scale.",
         "dependency": "netin_enable_graph"
     },
+    "netin_show_detail_label": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Show details",
+        "tooltip": "Show or hide the NET (in) usage label",
+        "dependency": "netin_enable_graph"
+    },
     "netout_section": {
         "type": "section",
         "description": "NET (out)"
@@ -265,6 +294,13 @@
         },
         "description": "Scale",
         "tooltip": "Use linear or logarithmic scale.",
+        "dependency": "netout_enable_graph"
+    },
+    "netout_show_detail_label": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Show details",
+        "tooltip": "Show or hide the NET (out) usage label",
         "dependency": "netout_enable_graph"
     }
 }

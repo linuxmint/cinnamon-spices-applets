@@ -50,6 +50,8 @@ class CpuDataProvider {
             this.last_delta = delta;
         }
 
+        this.text = Math.round((1-this.usage) * 100) + "%";
+
         return 1 - this.usage;
     }
 }
@@ -65,8 +67,35 @@ class MemDataProvider {
     getData() {
         GTop.glibtop_get_mem(this.gtopMem);
 
-        return 1 - (this.gtopMem.buffer + this.gtopMem.cached + this.gtopMem.free) / this.gtopMem.total;
+        var free = (this.gtopMem.buffer + this.gtopMem.cached + this.gtopMem.free);
+
+        this.text = this.formatValue(this.gtopMem.total - free) + " (" + this.formatValue(this.gtopMem.total) + ")";
+        return 1 - free / this.gtopMem.total;
     }
+
+    formatValue(value) {
+        if (value<1024)
+            return value + "B";
+
+        value = value/1024;
+
+        if (value<1024)
+            return Math.round(value) + "KB";  
+
+        value = value/1024;
+
+        if (value<1024)
+            return Math.round(value) + "MB";    
+
+        value = value/1024;
+
+        if (value<1024)
+            return Math.round(value) + "GB";    
+
+        value = value/1024;
+
+        return Math.round(value) + "TB";            
+    }            
 }
 
 class NetDataProvider {
@@ -134,15 +163,16 @@ class NetDataProvider {
             }
             this.down_last = down;
             this.up_last = up;
-            // this.text_1 = Math.round(down_delta/1024) + _(" KB/s");
-            // this.text_2 = Math.round(up_delta/1024) + _(" KB/s");
+
             if (this.type_in) {
+                this.text = this.formatValue(down_delta);
                 if (this.linlog=="lin")
                     return this.getLinearValue(down_delta, this.max_down);
                 else
                     return this.getLogValue(down_delta, this.max_down);
             }
             else {
+                this.text = this.formatValue(up_delta);
                 if (this.linlog=="lin")
                     return this.getLinearValue(up_delta, this.max_up);
                 else
@@ -184,4 +214,29 @@ class NetDataProvider {
 
         return Math.log10(value + 1)/Math.log10(max + 1);
     }
+
+    
+    formatValue(value) {
+        if (value<1024)
+            return value + "B";
+
+        value = value/1024;
+
+        if (value<1024)
+            return Math.round(value) + "KB";  
+
+        value = value/1024;
+
+        if (value<1024)
+            return Math.round(value) + "MB";    
+
+        value = value/1024;
+
+        if (value<1024)
+            return Math.round(value) + "GB";    
+
+        value = value/1024;
+
+        return Math.round(value) + "TB";            
+    }            
 };

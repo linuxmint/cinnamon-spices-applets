@@ -92,6 +92,7 @@ GraphicalHWMonitorApplet.prototype = {
         this.settings.bind("background_color1", "background_color1", this.settingsChanged);
         this.settings.bind("background_color2", "background_color2", this.settingsChanged);
         this.settings.bind("label_color", "label_color", this.settingsChanged);
+        this.settings.bind("detail_label_color", "detail_label_color", this.settingsChanged);
         this.settings.bind("graph_color1", "graph_color1", this.settingsChanged);
         this.settings.bind("graph_color2", "graph_color2", this.settingsChanged);
         this.settings.bind("graph_color3", "graph_color3", this.settingsChanged);
@@ -102,20 +103,24 @@ GraphicalHWMonitorApplet.prototype = {
         this.settings.bind("cpu_size", "cpu_size", this.settingsChanged);
         this.settings.bind("cpu_use_custom_label", "cpu_use_custom_label", this.settingsChanged);
         this.settings.bind("cpu_custom_label", "cpu_custom_label", this.settingsChanged);
+        this.settings.bind("cpu_show_detail_label", "cpu_show_detail_label", this.settingsChanged);
         this.settings.bind("mem_enable_graph", "mem_enable_graph", this.settingsChanged);
         this.settings.bind("mem_size", "mem_size", this.settingsChanged);
         this.settings.bind("mem_use_custom_label", "mem_use_custom_label", this.settingsChanged);
         this.settings.bind("mem_custom_label", "mem_custom_label", this.settingsChanged);
+        this.settings.bind("mem_show_detail_label", "mem_show_detail_label", this.settingsChanged);
         this.settings.bind("netin_enable_graph", "netin_enable_graph", this.settingsChanged);
         this.settings.bind("netin_size", "netin_size", this.settingsChanged);
         this.settings.bind("netin_use_custom_label", "netin_use_custom_label", this.settingsChanged);
         this.settings.bind("netin_custom_label", "netin_custom_label", this.settingsChanged);
         this.settings.bind("netin_linlog", "netin_linlog", this.settingsChanged);
+        this.settings.bind("netin_show_detail_label", "netin_show_detail_label", this.settingsChanged);
         this.settings.bind("netout_enable_graph", "netout_enable_graph", this.settingsChanged);
         this.settings.bind("netout_size", "netout_size", this.settingsChanged);
         this.settings.bind("netout_use_custom_label", "netout_use_custom_label", this.settingsChanged);
         this.settings.bind("netout_custom_label", "netout_custom_label", this.settingsChanged);
         this.settings.bind("netout_linlog", "netout_linlog", this.settingsChanged);
+        this.settings.bind("netout_show_detail_label", "netout_show_detail_label", this.settingsChanged);
         
         this.createThemeObject();
 
@@ -142,7 +147,7 @@ GraphicalHWMonitorApplet.prototype = {
                 cpuGraphArea = this.appletArea.addGraph(this.panel_height, this.cpu_size);
 
             let cpuProvider =  new Providers.CpuDataProvider();
-            this.graphs.push(new Graph.Graph(cpuProvider, cpuGraphArea, this.theme_object));
+            this.graphs.push(new Graph.Graph(cpuProvider, cpuGraphArea, this.theme_object, this.cpu_show_detail_label));
         }
 
         // Add MEM graph
@@ -154,7 +159,7 @@ GraphicalHWMonitorApplet.prototype = {
                 memGraphArea = this.appletArea.addGraph(this.panel_height, this.mem_size);
 
             let memProvider =  new Providers.MemDataProvider();
-            this.graphs.push(new Graph.Graph(memProvider, memGraphArea, this.theme_object));
+            this.graphs.push(new Graph.Graph(memProvider, memGraphArea, this.theme_object, this.mem_show_detail_label));
         }
                 
         // Add NET IN Graph
@@ -166,7 +171,7 @@ GraphicalHWMonitorApplet.prototype = {
                 netInGraphArea = this.appletArea.addGraph(this.panel_height, this.netin_size);
 
             let netInProvider =  new Providers.NetDataProvider(this.frequency, true, this.netin_linlog);
-            this.graphs.push(new Graph.Graph(netInProvider, netInGraphArea, this.theme_object));
+            this.graphs.push(new Graph.Graph(netInProvider, netInGraphArea, this.theme_object, this.netin_show_detail_label));
         }    
                 
         // Add NET OUT Graph
@@ -178,7 +183,7 @@ GraphicalHWMonitorApplet.prototype = {
                 netOutGraphArea = this.appletArea.addGraph(this.panel_height, this.netout_size);
 
             let netOutProvider =  new Providers.NetDataProvider(this.frequency, false, this.netout_linlog);
-            this.graphs.push(new Graph.Graph(netOutProvider, netOutGraphArea, this.theme_object));
+            this.graphs.push(new Graph.Graph(netOutProvider, netOutGraphArea, this.theme_object, this.netout_show_detail_label));
         }    
 
         this.appletArea.createDrawingArea();
@@ -297,6 +302,7 @@ GraphicalHWMonitorApplet.prototype = {
         this.theme_object.background_colors1 = this.getColors(this.background_color1);
         this.theme_object.background_colors2 = this.getColors(this.background_color2);
         this.theme_object.label_color = this.getColors(this.label_color);
+        this.theme_object.detail_label_color = this.getColors(this.detail_label_color);
         this.theme_object.graph_color1 = this.getColors(this.graph_color1);
         this.theme_object.graph_color2 = this.getColors(this.graph_color2);
         this.theme_object.graph_color3 = this.getColors(this.graph_color3);
@@ -313,8 +319,6 @@ GraphicalHWMonitorApplet.prototype = {
         this.theme_object.netout_custom_label = this.netout_custom_label;
     },
 
-    // Restarts GHW if something stopped it from working.
-    // Can happen for example after computer comes back from a suspend
     restartGHW: function() {
         // Refresh the update loop with the new frequency
         this.createThemeObject();
