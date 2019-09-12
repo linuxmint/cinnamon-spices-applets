@@ -16,7 +16,9 @@ gi.require_version('Gtk', '3.0')
 from gi.repository import Gio, Gtk, GObject, Gdk, GdkPixbuf, Pango, GLib
 
 from SettingsWidgets import SidePage, SettingsStack, SettingsPage, SettingsWidget, SettingsLabel
-from Spices import Spice_Harvester, ThreadedTaskManager
+from SUSpices import Spice_Harvester, ThreadedTaskManager
+
+print("SU %s ExtensionCore.py" % os.path.abspath(sys.argv[0]).split("/")[-2])
 
 home = os.path.expanduser('~')
 
@@ -379,23 +381,6 @@ class ManageSpicesPage(SettingsPage):
         main_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         frame.add(main_box)
 
-        toolbar = Gtk.Toolbar.new()
-        Gtk.StyleContext.add_class(Gtk.Widget.get_style_context(toolbar), 'cs-header')
-        label = Gtk.Label()
-        if self.collection_type == 'applet':
-            markup = GLib.markup_escape_text(_("Installed applets"))
-        elif self.collection_type == 'desklet':
-            markup = GLib.markup_escape_text(_("Installed desklets"))
-        elif self.collection_type == 'extension':
-            markup = GLib.markup_escape_text(_("Installed extensions"))
-        elif self.collection_type == 'theme':
-            markup = GLib.markup_escape_text(_("Installed themes"))
-        label.set_markup('<b>{}</b>'.format(markup))
-        title_holder = Gtk.ToolItem()
-        title_holder.add(label)
-        toolbar.add(title_holder)
-        main_box.add(toolbar)
-
         scw = Gtk.ScrolledWindow()
         scw.expand = True
         scw.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
@@ -751,23 +736,6 @@ class DownloadSpicesPage(SettingsPage):
 
         main_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         frame.add(main_box)
-
-        toolbar = Gtk.Toolbar.new()
-        Gtk.StyleContext.add_class(Gtk.Widget.get_style_context(toolbar), 'cs-header')
-        label = Gtk.Label()
-        if self.collection_type == 'applet':
-            markup = GLib.markup_escape_text(_("Available applets"))
-        elif self.collection_type == 'desklet':
-            markup = GLib.markup_escape_text(_("Available desklets"))
-        elif self.collection_type == 'extension':
-            markup = GLib.markup_escape_text(_("Available extensions"))
-        elif self.collection_type == 'theme':
-            markup = GLib.markup_escape_text(_("Available themes"))
-        label.set_markup('<b>{}</b>'.format(markup))
-        title_holder = Gtk.ToolItem()
-        title_holder.add(label)
-        toolbar.add(title_holder)
-        main_box.add(toolbar)
 
         scw = Gtk.ScrolledWindow()
         scw.expand = True

@@ -29,7 +29,7 @@ try:
 except ImportError:
     import simplejson as json
 
-print("SU %s Spices.py" % sys.argv[0].split("/")[-2])
+print("SU %s Spices.py" % os.path.abspath(sys.argv[0]).split("/")[-2])
 
 home = os.path.expanduser("~")
 locale_inst = '%s/.local/share/locale' % home

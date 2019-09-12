@@ -1,10 +1,12 @@
 #!/usr/bin/python3
 
 import sys
-from ExtensionCore import ManageSpicesPage, DownloadSpicesPage
+from SUExtensionCore import ManageSpicesPage, DownloadSpicesPage
 from SettingsWidgets import SidePage, SettingsStack
-from Spices import Spice_Harvester
+from SUSpices import Spice_Harvester
 from gi.repository import GLib, Gtk, Gdk
+
+print("SU 3.8 cs_applets.py")
 
 class Module:
     name = "applets"

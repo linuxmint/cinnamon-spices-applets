@@ -20,6 +20,8 @@ from gi.repository import Gio, Gtk, Pango, Gdk, XApp
 
 sys.path.append(config.currentPath + "/modules")
 sys.path.append(config.currentPath + "/bin")
+sys.path.append(config.csPath + "/modules")
+sys.path.append(config.csPath + "/bin")
 import capi
 import proxygsettings
 import SettingsWidgets
@@ -609,7 +611,7 @@ class MainWindow:
 if __name__ == "__main__":
     import signal
 
-    print("SU %s" % " ".join(sys.argv[0].split("/")[-2:]))
+    print("SU %s" % " ".join(os.path.abspath(sys.argv[0]).split("/")[-2:]))
 
     ps = proxygsettings.get_proxy_settings()
     if ps:

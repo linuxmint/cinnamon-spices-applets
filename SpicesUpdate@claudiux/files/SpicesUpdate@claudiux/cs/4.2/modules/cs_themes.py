@@ -5,8 +5,8 @@ from gi.repository.Gtk import SizeGroup, SizeGroupMode
 from GSettingsWidgets import *
 from CinnamonGtkSettings import CssRange, CssOverrideSwitch, GtkSettingsSwitch, PreviewWidget, Gtk2ScrollbarSizeEditor
 from SettingsWidgets import LabelRow
-from ExtensionCore import DownloadSpicesPage
-from Spices import Spice_Harvester
+from SUExtensionCore import DownloadSpicesPage
+from SUSpices import Spice_Harvester
 
 import glob
 
