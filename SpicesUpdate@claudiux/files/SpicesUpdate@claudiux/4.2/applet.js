@@ -26,6 +26,7 @@ const {
   SCRIPTS_DIR,
   ICONS_DIR,
   HELP_DIR,
+  CS_PATH,
   URL_SPICES_HOME,
   CONFIG_DIR,
   SU_CONFIG_DIR,
@@ -490,7 +491,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
       this.notifications.push(notification);
       notification.connect('action-invoked', Lang.bind(this, function(self, action) {
             if (action == "spices-update") {
-              Util.spawnCommandLine("cinnamon-settings %s -t 1 -s date".format(type.toString()));
+              Util.spawnCommandLine("%s %s -t 1 -s date".format(CS_PATH, type.toString()));
             } else {
               if (this.force_notifications === true) {
                 while (this.notifications.length != 0) {
@@ -627,16 +628,16 @@ class SpicesUpdate extends Applet.TextIconApplet {
     this._on_refresh_pressed()
   }; // End of on_btn_refresh_applets_pressed
   on_btn_cs_applets_pressed() {
-    GLib.spawn_command_line_async('bash -c \'cinnamon-settings applets\'');
+    GLib.spawn_command_line_async('bash -c \'%s applets\''.format(CS_PATH));
   }; // End of on_btn_cs_applets_pressed
   on_btn_cs_desklets_pressed() {
-    GLib.spawn_command_line_async('bash -c \'cinnamon-settings desklets\'');
+    GLib.spawn_command_line_async('bash -c \'%s desklets\''.format(CS_PATH));
   }; // End of on_btn_cs_desklets_pressed
   on_btn_cs_extensions_pressed() {
-    GLib.spawn_command_line_async('bash -c \'cinnamon-settings extensions\'');
+    GLib.spawn_command_line_async('bash -c \'%s extensions\''.format(CS_PATH));
   }; // End of on_btn_cs_extensions_pressed
   on_btn_cs_themes_pressed() {
-    GLib.spawn_command_line_async('bash -c \'cinnamon-settings themes\'');
+    GLib.spawn_command_line_async('bash -c \'%s themes\''.format(CS_PATH));
   }; // End of on_btn_cs_themes_pressed
 
   /**
@@ -1373,7 +1374,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
       if (this.new_Spices[t].length > 0) ts += "   \u2604 %s".format((this.new_Spices[t].length).toString());
       this.spicesMenuItems[t] = new PopupMenu.PopupIndicatorMenuItem(ts);
       this.spicesMenuItems[t].connect('activate', (event) => {
-        Util.spawnCommandLine("cinnamon-settings %s -t 1 -s date".format(t.toString()));
+        Util.spawnCommandLine("%s %s -t 1 -s date".format(CS_PATH, t.toString()));
       });
       this.spicesMenuItems[t].setShowDot(this.menuDots[t]);
       this.menu.addMenuItem(this.spicesMenuItems[t]);
@@ -1388,7 +1389,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
     // button Configure...
     let configure = new PopupMenu.PopupIconMenuItem(_("Configure") + "...", "system-run", St.IconType.SYMBOLIC);
     configure.connect("activate", (event) => {
-        Util.spawnCommandLine("cinnamon-settings applets " + UUID + " " + this.instanceId);
+        Util.spawnCommandLine("cinnamon-settings applets %s %s".format(UUID, this.instanceId));
     });
     this.menu.addMenuItem(configure);
     if (DEBUG()) {

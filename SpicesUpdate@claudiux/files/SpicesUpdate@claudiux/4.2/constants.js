@@ -23,6 +23,8 @@ const SCRIPTS_DIR = APPLET_DIR + "/scripts";
 const ICONS_DIR = APPLET_DIR + "/icons";
 const HELP_DIR = APPLET_DIR + "/help";
 
+const CS_PATH = "%s/cs/4.2/cinnamon-settings.py".format(APPLET_DIR);
+
 const URL_SPICES_HOME = "https://cinnamon-spices.linuxmint.com";
 const CONFIG_DIR = HOME_DIR + "/.cinnamon/configs";
 const SU_CONFIG_DIR = CONFIG_DIR + "/" + UUID;
@@ -123,6 +125,7 @@ module.exports = {
   SCRIPTS_DIR,
   ICONS_DIR,
   HELP_DIR,
+  CS_PATH,
   URL_SPICES_HOME,
   CONFIG_DIR,
   SU_CONFIG_DIR,
