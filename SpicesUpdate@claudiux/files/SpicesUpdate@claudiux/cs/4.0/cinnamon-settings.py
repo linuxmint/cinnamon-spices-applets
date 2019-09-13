@@ -325,8 +325,8 @@ class MainWindow:
             wm_class = "cinnamon-settings %s" % sys.argv[1]
             self.window.set_wmclass(wm_class, wm_class)
             self.button_back.hide()
-            (iter, cat) = sidePagesIters[sys.argv[1]]
-            path = self.store[cat].get_path(iter)
+            (_iter, cat) = sidePagesIters[sys.argv[1]]
+            path = self.store[cat].get_path(_iter)
             if path:
                 self.go_to_sidepage(cat, path, user_action=False)
             else:
