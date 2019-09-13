@@ -338,7 +338,7 @@ class Module:
             if os.path.exists(os.path.join(directory, "gtk-3.0")):
                 return True
             else:
-                for subdir in glob.glob("%s/gtk-3.*" % directory):
+                if len(glob.glob("%s/gtk-3.*" % directory)) > 0:
                     return True
         return False
 

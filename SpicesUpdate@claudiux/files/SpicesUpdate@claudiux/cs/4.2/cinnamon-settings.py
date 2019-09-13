@@ -424,8 +424,8 @@ class MainWindow:
             wm_class = "cinnamon-settings %s" % arg1
             self.window.set_wmclass(wm_class, wm_class)
             self.button_back.hide()
-            (iter, cat) = sidePagesIters[arg1]
-            path = self.store[cat].get_path(iter)
+            (_iter, cat) = sidePagesIters[arg1]
+            path = self.store[cat].get_path(_iter)
             if path:
                 self.go_to_sidepage(cat, path, user_action=False)
                 self.window.show()
@@ -480,11 +480,12 @@ class MainWindow:
             self.search_entry.set_text("")
 
     def strip_accents(self, text):
+        if self is None: return
         text = unicodedata.normalize('NFKD', text)
         return ''.join([c for c in text if not unicodedata.combining(c)])
 
-    def filter_visible_function(self, model, iter, user_data = None):
-        sidePage = model.get_value(iter, 2)
+    def filter_visible_function(self, model, _iter, user_data = None):
+        sidePage = model.get_value(_iter, 2)
         text = self.strip_accents(self.search_entry.get_text().lower())
         if self.strip_accents(sidePage.name.lower()).find(text) > -1 or \
            self.strip_accents(sidePage.keywords.lower()).find(text) > -1:
@@ -513,7 +514,7 @@ class MainWindow:
             split_by_word = string.split(" ")
             for word in split_by_word:
                 layout = icon_view.create_pango_layout(word)
-                item_width, item_height = layout.get_pixel_size()
+                item_width = layout.get_pixel_size()[0]
                 if item_width > min_width_pixels:
                     min_width_pixels = item_width
                 if len(word) > min_width_chars:
@@ -680,13 +681,13 @@ class MainWindow:
             self.side_view_nav(widget, None, category)
 
     def anyVisibleInCategory(self, category):
-        id = category["id"]
-        _iter = self.storeFilter[id].get_iter_first()
+        _id = category["id"]
+        _iter = self.storeFilter[_id].get_iter_first()
         visible = False
         while _iter is not None:
-            cat = self.storeFilter[id].get_value(_iter, 3)
+            cat = self.storeFilter[_id].get_value(_iter, 3)
             visible = cat == category["id"]
-            _iter = self.storeFilter[id].iter_next(_iter)
+            _iter = self.storeFilter[_id].iter_next(_iter)
         return visible
 
     def setParentRefs (self, mod):
