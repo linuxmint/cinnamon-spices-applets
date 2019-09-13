@@ -343,8 +343,11 @@ class MainWindow:
         device = Gtk.get_current_event_device()
         if device.get_source() == Gdk.InputSource.KEYBOARD:
             grab = Gdk.Display.get_default().device_is_grabbed(device)
-        if not grab and event.keyval == Gdk.KEY_BackSpace and (type(self.window.get_focus()) not in
-                                                               (Gtk.TreeView, Gtk.Entry, Gtk.SpinButton, Gtk.TextView)):
+        if not grab and event.keyval == Gdk.KEY_BackSpace \
+        and not isinstance(self.window.get_focus(), Gtk.TreeView) \
+        and not isinstance(self.window.get_focus(), Gtk.Entry) \
+        and not isinstance(self.window.get_focus(), Gtk.SpinButton) \
+        and not isinstance(self.window.get_focus(), Gtk.TextView):
             self.back_to_icon_view(None)
             return True
         return False
@@ -369,6 +372,7 @@ class MainWindow:
             self.search_entry.set_text("")
 
     def strip_accents(self, text):
+        if self is None: return
         try:
             text = unicode(text, 'utf-8')
         except NameError:
@@ -379,8 +383,8 @@ class MainWindow:
         text = text.decode("utf-8")
         return str(text)
 
-    def filter_visible_function(self, model, iter, user_data = None):
-        sidePage = model.get_value(iter, 2)
+    def filter_visible_function(self, model, _iter, user_data = None):
+        sidePage = model.get_value(_iter, 2)
         text = self.strip_accents(self.search_entry.get_text().lower())
         if self.strip_accents(sidePage.name.lower()).find(text) > -1 or \
            self.strip_accents(sidePage.keywords.lower()).find(text) > -1:
