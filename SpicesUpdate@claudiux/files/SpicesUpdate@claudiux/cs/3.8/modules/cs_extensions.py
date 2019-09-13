@@ -2,7 +2,7 @@
 
 from ExtensionCore import ManageSpicesPage, DownloadSpicesPage
 from SettingsWidgets import SidePage, SettingsStack
-from SUSpices import Spice_Harvester
+from SUSpices import SU_Spice_Harvester
 from gi.repository import GLib
 
 class Module:
@@ -34,7 +34,7 @@ class ExtensionViewSidePage(SidePage):
     def load(self, window):
         self.window = window
 
-        self.spices = Spice_Harvester(self.collection_type, self.window)
+        self.spices = SU_Spice_Harvester(self.collection_type, self.window)
 
         self.stack = SettingsStack()
         self.add_widget(self.stack)
