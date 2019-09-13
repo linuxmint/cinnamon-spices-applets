@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 import sys
-from SUExtensionCore import ManageSpicesPage, DownloadSpicesPage
+from ExtensionCore import ManageSpicesPage, DownloadSpicesPage
 from SettingsWidgets import SidePage, SettingsStack
 from SUSpices import Spice_Harvester
 from gi.repository import GLib, Gtk, Gdk

@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 
-from SUExtensionCore import ManageSpicesPage, DownloadSpicesPage
+from ExtensionCore import ManageSpicesPage, DownloadSpicesPage
 from SUSpices import Spice_Harvester
 from GSettingsWidgets import *
 from gi.repository import GLib, Gtk
