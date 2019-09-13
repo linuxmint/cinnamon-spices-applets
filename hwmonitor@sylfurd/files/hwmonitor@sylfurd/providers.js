@@ -50,8 +50,8 @@ class CpuDataProvider {
             this.last_delta = delta;
         }
 
-        this.text = Math.round((1-this.usage) * 100) + "%";
-
+        this.text = ((1-this.usage) * 100).toFixed(1) + "%";
+            
         return 1 - this.usage;
     }
 }
@@ -69,33 +69,10 @@ class MemDataProvider {
 
         var free = (this.gtopMem.buffer + this.gtopMem.cached + this.gtopMem.free);
 
-        this.text = this.formatValue(this.gtopMem.total - free) + " (" + this.formatValue(this.gtopMem.total) + ")";
+        let format = new Tools();
+        this.text = format.formatBytes(this.gtopMem.total - free); //+ " (" + this.formatValue(this.gtopMem.total) + ")";
         return 1 - free / this.gtopMem.total;
     }
-
-    formatValue(value) {
-        if (value<1024)
-            return value + "B";
-
-        value = value/1024;
-
-        if (value<1024)
-            return Math.round(value) + "KB";  
-
-        value = value/1024;
-
-        if (value<1024)
-            return Math.round(value) + "MB";    
-
-        value = value/1024;
-
-        if (value<1024)
-            return Math.round(value) + "GB";    
-
-        value = value/1024;
-
-        return Math.round(value) + "TB";            
-    }            
 }
 
 class NetDataProvider {
@@ -103,7 +80,7 @@ class NetDataProvider {
     // Josef Michálek (Aka Orcus) <0rcus.cz@gmail.com>
     // Credit goes to him for the NetDataProvider
     // called NetData in sysmonitor@orcus
-    constructor(frequency, type_in, linlog) {
+    constructor(frequency, type_in, linlog, max_speed) {
         if (type_in) {
             this.name = _("NETIN");
             this.type = "NETIN";
@@ -117,6 +94,8 @@ class NetDataProvider {
         this.linlog = linlog;
         this.max_down = 0;
         this.max_up = 0;
+        // Mbit/s
+        this.max_speed = max_speed * 1000000 / 8;
 
         this.gtop = new GTop.glibtop_netload();
         try {
@@ -155,28 +134,29 @@ class NetDataProvider {
             let up_delta = (up - this.up_last) / this.frequency;
             if (down_delta>this.max_down){
                 this.max_down = down_delta;
-                //global.log("DOWN: " + down_delta);
+                global.log("DOWN: " + down_delta);
             }
             if (up_delta>this.max_up){
                 this.max_up = up_delta;
-                //global.log("UP  : " + up_delta);
+                global.log("UP  : " + up_delta);
             }
             this.down_last = down;
             this.up_last = up;
+            let format = new Tools();
 
             if (this.type_in) {
-                this.text = this.formatValue(down_delta);
+                this.text = format.formatBytes(down_delta);
                 if (this.linlog=="lin")
-                    return this.getLinearValue(down_delta, this.max_down);
+                    return this.getLinearValue(down_delta, this.max_speed);
                 else
-                    return this.getLogValue(down_delta, this.max_down);
+                    return this.getLogValue(down_delta, this.max_speed);
             }
             else {
-                this.text = this.formatValue(up_delta);
+                this.text = format.formatBytes(up_delta);
                 if (this.linlog=="lin")
-                    return this.getLinearValue(up_delta, this.max_up);
+                    return this.getLinearValue(up_delta, this.max_speed);
                 else
-                    return this.getLogValue(up_delta, this.max_up);
+                    return this.getLogValue(up_delta, this.max_speed);
             }
         }
         catch (e) {
@@ -201,42 +181,39 @@ class NetDataProvider {
         }
     }
 
+    
     getLinearValue(value, max) {
         if (max<=1 || value<=0)
             return 0;
 
-        return value/max;
+        let tools = new Tools();
+        return tools.limit(value/max, 0, 1);
     }
 
     getLogValue(value, max) {
         if (max<1 || value<=0)
             return 0;
 
-        return Math.log10(value + 1)/Math.log10(max + 1);
+        let tools = new Tools();
+        return tools.limit(Math.log10(value)/Math.log10(max), 0, 1);
+    }
+};
+
+class Tools {
+    //https://stackoverflow.com/questions/15900485/correct-way-to-convert-size-in-bytes-to-kb-mb-gb-in-javascript
+    formatBytes(bytes) {
+        if (bytes === 0) return '0 B';
+    
+        const k = 1024;
+        const sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+    
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+            
+        return parseFloat((bytes / Math.pow(k, i)).toPrecision(3)) + ' ' + sizes[i];
     }
 
-    
-    formatValue(value) {
-        if (value<1024)
-            return value + "B";
-
-        value = value/1024;
-
-        if (value<1024)
-            return Math.round(value) + "KB";  
-
-        value = value/1024;
-
-        if (value<1024)
-            return Math.round(value) + "MB";    
-
-        value = value/1024;
-
-        if (value<1024)
-            return Math.round(value) + "GB";    
-
-        value = value/1024;
-
-        return Math.round(value) + "TB";            
-    }            
-};
+    limit(value, min, max) {
+        //return value;
+        return Math.min(Math.max(value, min), max);
+    }
+}

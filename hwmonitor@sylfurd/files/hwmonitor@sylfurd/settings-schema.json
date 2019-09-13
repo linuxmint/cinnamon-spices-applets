@@ -55,18 +55,38 @@
     },
     "label_color": {
         "type": "colorchooser",
-        "default": "rgb(255,255,255)",
+        "default": "rgb(64,64,64)",
         "description": "Label color",
         "tooltip": "Click the button to select a label color",
         "indent": true,
         "dependency": "theme=user"
     },
+    "label_size": {
+        "type": "spinbutton",
+        "default": 7,
+        "min": 5,
+        "max": 25,
+        "step": 1,
+        "description": "Label font size",
+        "tooltip": "Set the font size for the main label.",
+        "dependency": "theme=user"
+    },
     "detail_label_color": {
         "type": "colorchooser",
-        "default": "rgb(255,255,255)",
+        "default": "rgb(32,32,32)",
         "description": "Detail label color",
         "tooltip": "Click the button to select a detail label color",
         "indent": true,
+        "dependency": "theme=user"
+    },
+    "detail_label_size": {
+        "type": "spinbutton",
+        "default": 9,
+        "min": 5,
+        "max": 25,
+        "step": 1,
+        "description": "Detail label font size",
+        "tooltip": "Set the font size for the detail label.",
         "dependency": "theme=user"
     },
     "graph_color1": {
@@ -87,7 +107,7 @@
     },
     "graph_offset2": {
         "type": "spinbutton",
-        "default": 0.5,
+        "default": 0.60,
         "min": 0,
         "max": 1,
         "step": 0.01,
@@ -105,7 +125,7 @@
     },
     "graph_offset3": {
         "type": "spinbutton",
-        "default": 0.7,
+        "default": 0.40,
         "min": 0,
         "max": 1,
         "step": 0.01,
@@ -221,6 +241,17 @@
         "description": "Horizontal panel width or vertical panel height.",
         "dependency": "netin_enable_graph"
     },
+    "netin_speed": {
+        "type": "spinbutton",
+        "default": 100,
+        "min": 1,
+        "max": 1000000,
+        "units": "Mbit/s",
+        "step": 1,
+        "description": "Internet speed (in).",
+        "tooltip": "Set your internet speed (in) in Mbit/s. Note that sometimes ISP:s delivers better or worse speed than what you have paid for. You might need to adjust this value up or down, to make it look right to you.",
+        "dependency": "netin_enable_graph"
+    },
     "netin_use_custom_label": {
         "type": "checkbox",
         "default": false,
@@ -236,7 +267,7 @@
     },
     "netin_linlog": {
         "type": "combobox",
-        "default": "log",
+        "default": "lin",
         "options": {
             "logarithmic": "log",
             "linear": "lin"
@@ -272,6 +303,17 @@
         "description": "Horizontal panel width or vertical panel height.",
         "dependency": "netout_enable_graph"
     },
+    "netout_speed": {
+        "type": "spinbutton",
+        "default": 100,
+        "min": 1,
+        "max": 1000000,
+        "units": "Mbit/s",
+        "step": 1,
+        "description": "Internet speed (out).",
+        "tooltip": "Set your internet speed (out) in Mbit/s. Note that sometimes ISP:s delivers better or worse speed than what you have paid for. You might need to adjust this value up or down, to make it look right to you.",
+        "dependency": "netout_enable_graph"
+    },
     "netout_use_custom_label": {
         "type": "checkbox",
         "default": false,
@@ -287,7 +329,7 @@
     },
     "netout_linlog": {
         "type": "combobox",
-        "default": "log",
+        "default": "lin",
         "options": {
             "logarithmic": "log",
             "linear": "lin"

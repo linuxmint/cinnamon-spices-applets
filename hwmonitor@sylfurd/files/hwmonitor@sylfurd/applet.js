@@ -92,7 +92,9 @@ GraphicalHWMonitorApplet.prototype = {
         this.settings.bind("background_color1", "background_color1", this.settingsChanged);
         this.settings.bind("background_color2", "background_color2", this.settingsChanged);
         this.settings.bind("label_color", "label_color", this.settingsChanged);
+        this.settings.bind("label_size", "label_size", this.settingsChanged);
         this.settings.bind("detail_label_color", "detail_label_color", this.settingsChanged);
+        this.settings.bind("detail_label_size", "detail_label_size", this.settingsChanged);
         this.settings.bind("graph_color1", "graph_color1", this.settingsChanged);
         this.settings.bind("graph_color2", "graph_color2", this.settingsChanged);
         this.settings.bind("graph_color3", "graph_color3", this.settingsChanged);
@@ -111,12 +113,14 @@ GraphicalHWMonitorApplet.prototype = {
         this.settings.bind("mem_show_detail_label", "mem_show_detail_label", this.settingsChanged);
         this.settings.bind("netin_enable_graph", "netin_enable_graph", this.settingsChanged);
         this.settings.bind("netin_size", "netin_size", this.settingsChanged);
+        this.settings.bind("netin_speed", "netin_speed", this.settingsChanged);
         this.settings.bind("netin_use_custom_label", "netin_use_custom_label", this.settingsChanged);
         this.settings.bind("netin_custom_label", "netin_custom_label", this.settingsChanged);
         this.settings.bind("netin_linlog", "netin_linlog", this.settingsChanged);
         this.settings.bind("netin_show_detail_label", "netin_show_detail_label", this.settingsChanged);
         this.settings.bind("netout_enable_graph", "netout_enable_graph", this.settingsChanged);
         this.settings.bind("netout_size", "netout_size", this.settingsChanged);
+        this.settings.bind("netout_speed", "netout_speed", this.settingsChanged);
         this.settings.bind("netout_use_custom_label", "netout_use_custom_label", this.settingsChanged);
         this.settings.bind("netout_custom_label", "netout_custom_label", this.settingsChanged);
         this.settings.bind("netout_linlog", "netout_linlog", this.settingsChanged);
@@ -170,7 +174,7 @@ GraphicalHWMonitorApplet.prototype = {
             else
                 netInGraphArea = this.appletArea.addGraph(this.panel_height, this.netin_size);
 
-            let netInProvider =  new Providers.NetDataProvider(this.frequency, true, this.netin_linlog);
+            let netInProvider =  new Providers.NetDataProvider(this.frequency, true, this.netin_linlog, this.netin_speed);
             this.graphs.push(new Graph.Graph(netInProvider, netInGraphArea, this.theme_object, this.netin_show_detail_label));
         }    
                 
@@ -182,7 +186,7 @@ GraphicalHWMonitorApplet.prototype = {
             else
                 netOutGraphArea = this.appletArea.addGraph(this.panel_height, this.netout_size);
 
-            let netOutProvider =  new Providers.NetDataProvider(this.frequency, false, this.netout_linlog);
+            let netOutProvider =  new Providers.NetDataProvider(this.frequency, false, this.netout_linlog, this.netout_speed);
             this.graphs.push(new Graph.Graph(netOutProvider, netOutGraphArea, this.theme_object, this.netout_show_detail_label));
         }    
 
@@ -302,7 +306,9 @@ GraphicalHWMonitorApplet.prototype = {
         this.theme_object.background_colors1 = this.getColors(this.background_color1);
         this.theme_object.background_colors2 = this.getColors(this.background_color2);
         this.theme_object.label_color = this.getColors(this.label_color);
+        this.theme_object.label_size = this.label_size;
         this.theme_object.detail_label_color = this.getColors(this.detail_label_color);
+        this.theme_object.detail_label_size = this.detail_label_size;
         this.theme_object.graph_color1 = this.getColors(this.graph_color1);
         this.theme_object.graph_color2 = this.getColors(this.graph_color2);
         this.theme_object.graph_color3 = this.getColors(this.graph_color3);

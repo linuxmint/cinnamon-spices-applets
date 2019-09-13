@@ -11,7 +11,7 @@ class Graph {
         this.theme = theme;
         this.show_detail = show_detail;
 
-        this.datas = Array(this.graph.inner.width-1);
+        this.datas = Array(this.graph.inner.width + 1);
 
         for (let i = 0; i < this.datas.length; i++) {
             this.datas[i] = 0;
@@ -138,11 +138,11 @@ class Graph {
     drawDataPoints(cr) {
         cr.setLineWidth(0);
         cr.moveTo(1, this.graph.inner.height - this.datas[0]);
-        for (let i = 1; i < this.datas.length; i++) {
-        	cr.lineTo(i + 1, this.graph.inner.height - this.datas[i]);
+        for (let i = 0; i < this.datas.length; i++) {
+        	cr.lineTo(i, this.graph.inner.height - this.datas[i]);
         }
-    	cr.lineTo(this.datas.length, this.graph.inner.height);
-        cr.lineTo(1, this.graph.inner.height);
+    	cr.lineTo(this.datas.length - 1, this.graph.inner.height);
+        cr.lineTo(0, this.graph.inner.height);
     	cr.closePath();
 
         let pattern = new Cairo.LinearGradient(0, this.graph.inner.top, 0, this.graph.inner.top + this.graph.inner.height);
@@ -171,17 +171,15 @@ class Graph {
 
     // Draw the text label on the graph
     drawLabel(cr) {
-        let uiScale7x = global.ui_scale * 7;
-
-        cr.setFontSize(uiScale7x);
+        cr.setFontSize(this.theme.label_size);
         if (this.theme.theme=="light")
-            cr.setSourceRGBA(1, 1, 1, 0.5);
+            cr.setSourceRGBA(0.8, 0.8, 0.8, 0.5);
         else if (this.theme.theme=="dark")
-            cr.setSourceRGBA(0, 0, 0, 0.5);
+            cr.setSourceRGBA(0.2, 0.2, 0.2, 0.5);
         else {
             cr.setSourceRGBA(this.theme.label_color[0], this.theme.label_color[1], this.theme.label_color[2], 0.5);
         }
-        cr.moveTo(global.ui_scale * 2.5, global.ui_scale * 7.5 + 0.5);
+        cr.moveTo(global.ui_scale * 1.5, global.ui_scale * 6.5 + 0.5);
 
         if (this.theme.cpu_use_custom_label && this.provider.type == "CPU")
             cr.showText(this.theme.cpu_custom_label);
@@ -194,14 +192,14 @@ class Graph {
         else
             cr.showText(this.provider.name);
 
-        if (this.theme.theme=="light")
-            cr.setSourceRGBA(1, 1, 1, 1);
+            if (this.theme.theme=="light")
+            cr.setSourceRGBA(0.8, 0.8, 0.8, 1);
         else if (this.theme.theme=="dark")
-            cr.setSourceRGBA(0, 0, 0, 1);
+            cr.setSourceRGBA(0.2, 0.2, 0.2, 1);
         else {
             cr.setSourceRGBA(this.theme.label_color[0], this.theme.label_color[1], this.theme.label_color[2], 1);
         }
-        cr.moveTo(global.ui_scale * 2, uiScale7x + 0.5);
+        cr.moveTo(global.ui_scale * 1, global.ui_scale * 6 + 0.5);
 
         if (this.theme.cpu_use_custom_label && this.provider.type == "CPU")
             cr.showText(this.theme.cpu_custom_label);
@@ -221,26 +219,26 @@ class Graph {
         if (this.provider.text==null)
             return;
 
-        cr.setFontSize(global.ui_scale * 9);
+        cr.setFontSize(this.theme.detail_label_size);
         if (this.theme.theme=="light")
-            cr.setSourceRGBA(1, 1, 1, 0.5);
+            cr.setSourceRGBA(0.7, 0.7, 0.7, 0.5);
         else if (this.theme.theme=="dark")
-            cr.setSourceRGBA(0, 0, 0, 0.5);
+            cr.setSourceRGBA(0.1, 0.1, 0.1, 0.5);
         else {
             cr.setSourceRGBA(this.theme.detail_label_color[0], this.theme.detail_label_color[1], this.theme.detail_label_color[2], 0.5);
         }
-        cr.moveTo(global.ui_scale * 2.5, global.ui_scale * 18.5 + 0.5);
+        cr.moveTo(global.ui_scale * 1.5, global.ui_scale * (this.theme.label_size + this.theme.detail_label_size + 0.5) + 0.5);
         
         cr.showText(this.provider.text);
 
         if (this.theme.theme=="light")
-            cr.setSourceRGBA(1, 1, 1, 1);
+            cr.setSourceRGBA(0.7, 0.7, 0.7, 1);
         else if (this.theme.theme=="dark")
-            cr.setSourceRGBA(0, 0, 0, 1);
+            cr.setSourceRGBA(0.1, 0.1, 0.1, 1);
         else {
             cr.setSourceRGBA(this.theme.detail_label_color[0], this.theme.detail_label_color[1], this.theme.detail_label_color[2], 1);
         }
-        cr.moveTo(global.ui_scale * 2, global.ui_scale * 18 + 0.5);
+        cr.moveTo(global.ui_scale * 1, global.ui_scale * (this.theme.label_size + this.theme.detail_label_size) + 0.5);
 
         cr.showText(this.provider.text);
     }
