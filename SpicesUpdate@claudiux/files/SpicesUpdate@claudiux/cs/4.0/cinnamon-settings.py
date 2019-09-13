@@ -169,7 +169,7 @@ class MainWindow:
             sidePage.build()
 
     def maybe_resize(self, sidePage):
-        m, n = self.content_box.get_preferred_size()
+        n = self.content_box.get_preferred_size()[1]
 
         # Resize vertically depending on the height requested by the module
         use_height = WIN_HEIGHT
@@ -583,6 +583,7 @@ class MainWindow:
         return True
 
     def loadCheck (self, mod):
+        if self is None: return
         try:
             return mod._loadCheck()
         except:
