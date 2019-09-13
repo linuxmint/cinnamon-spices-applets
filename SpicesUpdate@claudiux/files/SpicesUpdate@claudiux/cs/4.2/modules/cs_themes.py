@@ -6,7 +6,7 @@ from GSettingsWidgets import *
 from CinnamonGtkSettings import CssRange, CssOverrideSwitch, GtkSettingsSwitch, PreviewWidget, Gtk2ScrollbarSizeEditor
 from SettingsWidgets import LabelRow
 from ExtensionCore import DownloadSpicesPage
-from SUSpices import Spice_Harvester
+from SUSpices import SU_Spice_Harvester
 
 import glob
 
@@ -42,7 +42,7 @@ class Module:
         if not self.loaded:
             print("Loading Themes module")
 
-            self.spices = Spice_Harvester('theme', self.window)
+            self.spices = SU_Spice_Harvester('theme', self.window)
 
             self.sidePage.stack = SettingsStack()
             self.sidePage.add_widget(self.sidePage.stack)
@@ -215,10 +215,12 @@ class Module:
         GLib.timeout_add(500, self.hide_progress, chooser)
 
     def increment_progress(self, payload):
+        if self is None: return
         (chooser, inc) = payload
         chooser.increment_loading_progress(inc)
 
     def hide_progress(self, chooser):
+        if self is None: return
         chooser.set_sensitive(True)
         chooser.reset_loading_progress()
 
@@ -226,7 +228,7 @@ class Module:
         self.window = window
 
     def make_group(self, group_label, widget, add_widget_to_size_group=True):
-        self.size_groups = getattr(self, "size_groups", [Gtk.SizeGroup.new(Gtk.SizeGroupMode.HORIZONTAL) for x in range(2)])
+        self.size_groups = getattr(self, "size_groups", [SizeGroup.new(SizeGroupMode.HORIZONTAL) for x in range(2)])
         box = SettingsWidget()
         label = Gtk.Label()
         label.set_markup(group_label)
@@ -240,6 +242,7 @@ class Module:
         return box
 
     def create_button_chooser(self, settings, key, path_prefix, path_suffix, button_picture_size, menu_pictures_size, num_cols):
+        if self is None: return
         chooser = PictureChooserButton(num_cols=num_cols, button_picture_size=button_picture_size, menu_pictures_size=menu_pictures_size, has_button_label=True)
         theme = settings.get_string(key)
         chooser.set_button_label(theme)
@@ -261,7 +264,7 @@ class Module:
                     if os.path.exists(path):
                         chooser.set_picture_from_file(path)
                         break
-            except:
+            except Exception:
                 chooser.set_picture_from_file("/usr/share/cinnamon/thumbnails/%s/unknown.png" % path_suffix)
         return chooser
 
@@ -329,6 +332,7 @@ class Module:
         return res
 
     def filter_func_gtk_dir(self, directory):
+        if self is None: return
         # returns whether a directory is a valid GTK theme
         if os.path.exists(os.path.join(directory, "gtk-2.0")):
             if os.path.exists(os.path.join(directory, "gtk-3.0")):
@@ -339,6 +343,7 @@ class Module:
         return False
 
     def _load_icon_themes(self):
+        if self is None: return
         dirs = ICON_FOLDERS
         walked = walk_directories(dirs, lambda d: os.path.isdir(d), return_directories=True)
         valid = []
@@ -366,6 +371,7 @@ class Module:
         return res
 
     def _load_cursor_themes(self):
+        if self is None: return
         dirs = ICON_FOLDERS
         valid = walk_directories(dirs, lambda d: os.path.isdir(d) and os.path.exists(os.path.join(d, "cursors")), return_directories=True)
         valid.sort(key=lambda a: a[0].lower())
@@ -381,6 +387,7 @@ class Module:
         return res
 
     def _load_metacity_themes(self):
+        if self is None: return
         dirs = THEME_FOLDERS
         valid = walk_directories(dirs, lambda d: os.path.exists(os.path.join(d, "metacity-1/metacity-theme-3.xml")), return_directories=True)
         valid.sort(key=lambda a: a[0].lower())
@@ -396,6 +403,7 @@ class Module:
         return res
 
     def _load_cinnamon_themes(self):
+        if self is None: return
         dirs = THEME_FOLDERS
         valid = walk_directories(dirs, lambda d: os.path.exists(os.path.join(d, "cinnamon")), return_directories=True)
         valid.sort(key=lambda a: a[0].lower())
@@ -411,6 +419,7 @@ class Module:
         return res
 
     def update_cursor_theme_link(self, path, name):
+        if self is None: return
         default_dir = os.path.join(os.path.expanduser("~"), ".icons", "default")
         index_path = os.path.join(default_dir, "index.theme")
 

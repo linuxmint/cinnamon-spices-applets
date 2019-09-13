@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 from ExtensionCore import ManageSpicesPage, DownloadSpicesPage
-from SUSpices import Spice_Harvester
+from SUSpices import SU_Spice_Harvester
 from GSettingsWidgets import *
 from gi.repository import GLib, Gtk
 
@@ -34,7 +34,7 @@ class DeskletsViewSidePage(SidePage):
     def load(self, window):
         self.window = window
 
-        self.spices = Spice_Harvester(self.collection_type, self.window)
+        self.spices = SU_Spice_Harvester(self.collection_type, self.window)
 
         self.stack = SettingsStack()
         self.add_widget(self.stack)

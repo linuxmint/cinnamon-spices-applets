@@ -222,7 +222,7 @@ class MainWindow:
             self.current_sidepage = sidePage
             width = 0
             for widget in self.top_bar:
-                m, n = widget.get_preferred_width()
+                n = widget.get_preferred_width()[1]
                 width += n
             self.top_bar.set_size_request(width + 20, -1)
             self.maybe_resize(sidePage)
@@ -230,7 +230,7 @@ class MainWindow:
             sidePage.build()
 
     def maybe_resize(self, sidePage):
-        m, n = self.content_box.get_preferred_size()
+        n = self.content_box.get_preferred_size()[1]
 
         # Resize vertically depending on the height requested by the module
         use_height = WIN_HEIGHT
@@ -449,8 +449,13 @@ class MainWindow:
         device = Gtk.get_current_event_device()
         if device.get_source() == Gdk.InputSource.KEYBOARD:
             grab = Gdk.Display.get_default().device_is_grabbed(device)
-        if not grab and event.keyval == Gdk.KEY_BackSpace and (type(self.window.get_focus()) not in
-                                                               (Gtk.TreeView, Gtk.Entry, Gtk.SpinButton, Gtk.TextView)):
+        #if not grab and event.keyval == Gdk.KEY_BackSpace and (type(self.window.get_focus()) not in
+        #
+        if not grab and event.keyval == Gdk.KEY_BackSpace \
+        and not isinstance(self.window.get_focus(), Gtk.TreeView) \
+        and not isinstance(self.window.get_focus(), Gtk.Entry) \
+        and not isinstance(self.window.get_focus(), Gtk.SpinButton) \
+        and not isinstance(self.window.get_focus(), Gtk.TextView):
             self.back_to_icon_view(None)
             return True
         return False
@@ -463,7 +468,7 @@ class MainWindow:
 
     def calculate_bar_heights(self):
         h = 0
-        m, n = self.top_bar.get_preferred_size()
+        n = self.top_bar.get_preferred_size()[1]
         h += n.height
         self.bar_heights = h
 
@@ -606,6 +611,7 @@ class MainWindow:
             self.side_view[iv].unselect_all()
 
     def get_cur_cat_index(self, category):
+        if self is None: return
         i = 0
         for cat in CATEGORIES:
             if category == cat["id"]:
@@ -613,12 +619,14 @@ class MainWindow:
             i += 1
 
     def get_cur_column(self, iconview):
+        if self is None: return
         s, path, cell = iconview.get_cursor()
         if path:
             col = iconview.get_item_column(path)
             return col
 
     def reposition_new_cat(self, sel, iconview):
+        if self is None: return
         iconview.set_cursor(sel, None, False)
         iconview.select_path(sel)
         iconview.grab_focus()
@@ -636,15 +644,15 @@ class MainWindow:
             col = self.get_cur_column(widget)
             new_cat_view = self.side_view[new_cat["id"]]
             model = new_cat_view.get_model()
-            iter = model.get_iter_first()
-            while iter is not None:
-                path = model.get_path(iter)
+            _iter = model.get_iter_first()
+            while _iter is not None:
+                path = model.get_path(_iter)
                 c = new_cat_view.get_item_column(path)
                 d = abs(c - col)
                 if d < dist:
                     sel = path
                     dist = d
-                iter = model.iter_next(iter)
+                _iter = model.iter_next(_iter)
             self.reposition_new_cat(sel, new_cat_view)
             ret = True
         elif direction == Gtk.DirectionType.UP and current_idx > 0:
@@ -652,15 +660,15 @@ class MainWindow:
             col = self.get_cur_column(widget)
             new_cat_view = self.side_view[new_cat["id"]]
             model = new_cat_view.get_model()
-            iter = model.get_iter_first()
-            while iter is not None:
-                path = model.get_path(iter)
+            _iter = model.get_iter_first()
+            while _iter is not None:
+                path = model.get_path(_iter)
                 c = new_cat_view.get_item_column(path)
                 d = abs(c - col)
                 if d <= dist:
                     sel = path
                     dist = d
-                iter = model.iter_next(iter)
+                _iter = model.iter_next(_iter)
             self.reposition_new_cat(sel, new_cat_view)
             ret = True
         return ret
@@ -671,12 +679,12 @@ class MainWindow:
 
     def anyVisibleInCategory(self, category):
         id = category["id"]
-        iter = self.storeFilter[id].get_iter_first()
+        _iter = self.storeFilter[id].get_iter_first()
         visible = False
-        while iter is not None:
-            cat = self.storeFilter[id].get_value(iter, 3)
+        while _iter is not None:
+            cat = self.storeFilter[id].get_value(_iter, 3)
             visible = cat == category["id"]
-            iter = self.storeFilter[id].iter_next(iter)
+            _iter = self.storeFilter[id].iter_next(_iter)
         return visible
 
     def setParentRefs (self, mod):

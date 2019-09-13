@@ -3,7 +3,7 @@
 import sys
 from ExtensionCore import ManageSpicesPage, DownloadSpicesPage
 from SettingsWidgets import SidePage, SettingsStack
-from SUSpices import Spice_Harvester
+from SUSpices import SU_Spice_Harvester
 from gi.repository import GLib, Gtk, Gdk
 
 print("SU 4.2 cs_applets.py")
@@ -36,7 +36,7 @@ class AppletsViewSidePage(SidePage):
     def load(self, window):
         self.window = window
 
-        self.spices = Spice_Harvester(self.collection_type, self.window)
+        self.spices = SU_Spice_Harvester(self.collection_type, self.window)
 
         self.stack = SettingsStack()
         self.add_widget(self.stack)
@@ -121,7 +121,7 @@ class ManageAppletsPage(ManageSpicesPage):
         # we only want to select panels that are on a connected screen
         current_panel_exists = False
         for panel in self.spices.settings.get_strv('panels-enabled'):
-            panel_id, monitor, pos = panel.split(":")
+            panel_id, monitor = panel.split(":")[:-1]
             if int(monitor) < n_mons:
                 if int(panel_id) == self.panel_id:
                     self.current_panel_index = len(self.panels)
