@@ -1,33 +1,16 @@
 #!/usr/bin/python3
 
 try:
-    import gettext
-    from gi.repository import Gio, Gtk, GObject, Gdk, GdkPixbuf, GLib
+    from gi.repository import GLib
     import tempfile
     import os
     import sys
     import zipfile
     import shutil
-    import cgi
-    import subprocess
-    import threading
-    import time
-    import dbus
-    from PIL import Image
-    import datetime
     import uuid as uuidlib
-    import proxygsettings
 except Exception as detail:
     print(detail)
     sys.exit(1)
-
-from http.client import HTTPSConnection
-from urllib.parse import urlparse
-
-try:
-    import json
-except ImportError:
-    import simplejson as json
 
 from Spices import *
 
@@ -90,16 +73,16 @@ class SU_Spice_Harvester(Spice_Harvester):
         download_url = URL_SPICES_HOME + self.index_cache[uuid]['file'] + "?" + str(uuidlib.uuid4())
         self.current_uuid = uuid
 
-        fd, ziptempfile = tempfile.mkstemp()
+        ziptempfile = tempfile.mkstemp()[1]
 
         if self._download(ziptempfile, download_url) is None:
             return
 
         try:
-            zip = zipfile.ZipFile(ziptempfile)
+            _zip = zipfile.ZipFile(ziptempfile)
 
             tempfolder = tempfile.mkdtemp()
-            zip.extractall(tempfolder)
+            _zip.extractall(tempfolder)
 
             uuidfolder = os.path.join(tempfolder, uuid)
 
@@ -112,5 +95,5 @@ class SU_Spice_Harvester(Spice_Harvester):
         try:
             shutil.rmtree(tempfolder)
             os.remove(ziptempfile)
-        except Exception:
-            pass
+        except Exception as e:
+            print(e)

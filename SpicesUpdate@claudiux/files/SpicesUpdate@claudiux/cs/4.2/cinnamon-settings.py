@@ -503,12 +503,13 @@ class MainWindow:
         self.side_view_container.show_all()
 
     def get_label_min_width(self, model):
+        if self is None: return
         min_width_chars = 0
         min_width_pixels = 0
         icon_view = Gtk.IconView()
-        iter = model.get_iter_first()
-        while iter != None:
-            string = model.get_value(iter, 0)
+        _iter = model.get_iter_first()
+        while _iter != None:
+            string = model.get_value(_iter, 0)
             split_by_word = string.split(" ")
             for word in split_by_word:
                 layout = icon_view.create_pango_layout(word)
@@ -517,11 +518,12 @@ class MainWindow:
                     min_width_pixels = item_width
                 if len(word) > min_width_chars:
                     min_width_chars = len(word)
-            iter = model.iter_next(iter)
+            _iter = model.iter_next(_iter)
         return min_width_chars, min_width_pixels
 
-    def pixbuf_data_func(self, column, cell, model, iter, data=None):
-        wrapper = model.get_value(iter, 1)
+    def pixbuf_data_func(self, column, cell, model, _iter, data=None):
+        if self is None: return
+        wrapper = model.get_value(_iter, 1)
         if wrapper:
             cell.set_property('surface', wrapper.surface)
 
@@ -576,13 +578,13 @@ class MainWindow:
 
         if sel:
             path = sel[0]
-            found, rect = iconview.get_cell_rect(path, None)
+            rect = iconview.get_cell_rect(path, None)[1]
 
             cw = self.side_view_container.get_window()
-            cw_x, cw_y = cw.get_position()
+            cw_y = cw.get_position()[1]
 
             ivw = iconview.get_window()
-            iv_x, iv_y = ivw.get_position()
+            iv_y = ivw.get_position()[1]
 
             final_y = rect.y + cw_y + iv_y
 
@@ -620,7 +622,7 @@ class MainWindow:
 
     def get_cur_column(self, iconview):
         if self is None: return
-        s, path, cell = iconview.get_cursor()
+        path = iconview.get_cursor()[1]
         if path:
             col = iconview.get_item_column(path)
             return col
@@ -695,9 +697,10 @@ class MainWindow:
         return True
 
     def loadCheck (self, mod):
+        if self is None: return
         try:
             return mod._loadCheck()
-        except:
+        except Exception:
             return True
 
     def back_to_icon_view(self, widget):

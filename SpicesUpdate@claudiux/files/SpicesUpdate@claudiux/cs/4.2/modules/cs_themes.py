@@ -209,7 +209,7 @@ class Module:
                         if os.path.exists(path):
                             chooser.add_picture(path, callback, title=theme_name, id=theme_name)
                             break
-                except:
+                except Exception:
                     chooser.add_picture("/usr/share/cinnamon/thumbnails/%s/unknown.png" % path_suffix, callback, title=theme_name, id=theme_name)
                 GLib.timeout_add(5, self.increment_progress, (chooser, inc))
         GLib.timeout_add(500, self.hide_progress, chooser)
@@ -426,7 +426,7 @@ class Module:
         try:
             os.makedirs(default_dir)
         except os.error as e:
-            pass
+            print(e)
 
         if os.path.exists(index_path):
             os.unlink(index_path)
