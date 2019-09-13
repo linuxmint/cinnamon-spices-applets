@@ -159,6 +159,7 @@
         "units": "Graph size",
         "step": 1,
         "description": "Horizontal panel width or vertical panel height",
+        "tooltip":"Set the width of the graph for horizontal panels, or the height of the graph for vertical panels.",
         "dependency": "cpu_enable_graph"
     },
     "cpu_use_custom_label": {
@@ -188,8 +189,8 @@
     "mem_enable_graph": {
         "type": "checkbox",
         "default": true,
-        "description": "Show MEM graph",
-        "tooltip": "Show or hide the MEM graph"
+        "description": "Show the memory graph",
+        "tooltip": "Show or hide the memory graph"
     },
     "mem_size": {
         "type": "spinbutton",
@@ -199,26 +200,27 @@
         "units": "Graph size",
         "step": 1,
         "description": "Horizontal panel width or vertical panel height.",
+        "tooltip":"Set the width of the graph for horizontal panels, or the height of the graph for vertical panels.",
         "dependency": "mem_enable_graph"
     },
     "mem_use_custom_label": {
         "type": "checkbox",
         "default": false,
         "description": "Use custom graph label",
-        "tooltip": "Choose your own label for the MEM graph",
+        "tooltip": "Choose your own label for the memory graph",
         "dependency": "mem_enable_graph"
     },
     "mem_custom_label": {
         "type": "entry",
         "default": "MEM",
-        "description": "Set the custom label for the MEM graph",
+        "description": "Set the custom label for the memory graph",
         "dependency": "mem_enable_graph"
     },
     "mem_show_detail_label": {
         "type": "checkbox",
         "default": true,
         "description": "Show details",
-        "tooltip": "Show or hide the MEM usage label",
+        "tooltip": "Show or hide the memory usage label",
         "dependency": "mem_enable_graph"
     },
     "netin_section": {
@@ -239,6 +241,7 @@
         "units": "Graph size",
         "step": 1,
         "description": "Horizontal panel width or vertical panel height.",
+        "tooltip":"Set the width of the graph for horizontal panels, or the height of the graph for vertical panels.",
         "dependency": "netin_enable_graph"
     },
     "netin_speed": {
@@ -301,6 +304,7 @@
         "units": "Graph size",
         "step": 1,
         "description": "Horizontal panel width or vertical panel height.",
+        "tooltip":"Set the width of the graph for horizontal panels, or the height of the graph for vertical panels.",
         "dependency": "netout_enable_graph"
     },
     "netout_speed": {

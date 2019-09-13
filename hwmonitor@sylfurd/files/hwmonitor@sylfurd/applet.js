@@ -84,6 +84,10 @@ GraphicalHWMonitorApplet.prototype = {
         this.itemOpenSysMon.connect('activate', Lang.bind(this, this._runSysMonActivate));
         this._applet_context_menu.addMenuItem(this.itemOpenSysMon);
 
+        this.itemReset = new PopupMenu.PopupMenuItem(_("Restart 'Graphical hardware monitor'"));        
+        this.itemReset.connect('activate', Lang.bind(this, this.restartGHW));
+        this._applet_context_menu.addMenuItem(this.itemReset);
+
         // Setup the applet settings 
         this.settings = new Settings.AppletSettings(this, metadata.uuid, instance_id);
         this.settings.bind("frequency", "frequency", this.settingsChanged);
@@ -218,23 +222,24 @@ GraphicalHWMonitorApplet.prototype = {
         }
     },
 
-    onOrientationChanged: function(orientation) {
+    on_orientation_changed: function(orientation) {
         this.getOrientation(orientation);
         this.updateAppletArea();
     },
 
-    onPanelHeightChanged: function() {  
+    on_panel_height_changed: function() {  
         this.panel_height = this._panelHeight
         this.updateAppletArea();
         this._update();
     },
 
-    onAppletRemovedFromPanel: function() {
+    on_applet_removed_from_panel: function() {
         if (gtopFailed) return;
         this.removeUpdateLoop();
     },
 
-    onAppletClicked: function(event) {
+    on_applet_clicked: function(event) {
+        debug_message("Clicked!");
         this._runSysMon();
     },
 

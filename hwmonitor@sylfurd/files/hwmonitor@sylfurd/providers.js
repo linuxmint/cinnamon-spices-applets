@@ -39,10 +39,14 @@ class CpuDataProvider {
         this.current = this.gtop.idle;
 
         let delta = this.gtop.total - this.last_total;
-        //global.log("Moniteur: delta " + delta );
+        
+        // Sometimes after suspend we get weird values here
+        // which results in the graph being flat. This fixes
+        // that.
         if (delta < -50000) {
             delta = this.last_delta;
         }
+
         if (delta > 0) {
             this.usage = (this.current - this.last) / delta;
             this.last = this.current;
@@ -67,11 +71,9 @@ class MemDataProvider {
     getData() {
         GTop.glibtop_get_mem(this.gtopMem);
 
-        var free = (this.gtopMem.buffer + this.gtopMem.cached + this.gtopMem.free);
-
         let format = new Tools();
-        this.text = format.formatBytes(this.gtopMem.total - free); //+ " (" + this.formatValue(this.gtopMem.total) + ")";
-        return 1 - free / this.gtopMem.total;
+        this.text = format.formatBytes(this.gtopMem.user); 
+        return  this.gtopMem.user / this.gtopMem.total;
     }
 }
 
@@ -92,10 +94,8 @@ class NetDataProvider {
         this.frequency = frequency;
         this.type_in = type_in;
         this.linlog = linlog;
-        this.max_down = 0;
-        this.max_up = 0;
         // Mbit/s
-        this.max_speed = max_speed * 1000000 / 8;
+        this.max_speed = max_speed * 1024 * 1024 / 8;
 
         this.gtop = new GTop.glibtop_netload();
         try {
@@ -132,14 +132,6 @@ class NetDataProvider {
             let [down, up] = this.getNetLoad();
             let down_delta = (down - this.down_last) / this.frequency;
             let up_delta = (up - this.up_last) / this.frequency;
-            if (down_delta>this.max_down){
-                this.max_down = down_delta;
-                global.log("DOWN: " + down_delta);
-            }
-            if (up_delta>this.max_up){
-                this.max_up = up_delta;
-                global.log("UP  : " + up_delta);
-            }
             this.down_last = down;
             this.up_last = up;
             let format = new Tools();
@@ -213,7 +205,6 @@ class Tools {
     }
 
     limit(value, min, max) {
-        //return value;
         return Math.min(Math.max(value, min), max);
     }
 }
