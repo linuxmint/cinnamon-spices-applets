@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 
 try:
-    import gettext
+    #import gettext
     from gi.repository import Gio, Gtk, GObject, Gdk, GdkPixbuf, GLib
     import tempfile
     import os
@@ -199,7 +199,7 @@ class Spice_Harvester(GObject.Object):
         except dbus.exceptions.DBusException as e:
             print(e)
 
-    def _on_proxy_ready (self, object, result, data=None):
+    def _on_proxy_ready (self, obj, result, data=None):
         try:
             self._proxy = Gio.DBusProxy.new_for_bus_finish(result)
             self._proxy.connect('g-signal', self._on_signal)

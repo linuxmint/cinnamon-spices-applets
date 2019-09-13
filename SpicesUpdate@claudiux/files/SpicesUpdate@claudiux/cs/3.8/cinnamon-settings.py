@@ -20,6 +20,8 @@ from gi.repository import Gio, Gtk, Pango, Gdk, XApp
 
 sys.path.append(config.currentPath + "/modules")
 sys.path.append(config.currentPath + "/bin")
+sys.path.append(config.csPath + "/modules")
+sys.path.append(config.csPath + "/bin")
 import capi
 import proxygsettings
 import SettingsWidgets
@@ -392,7 +394,7 @@ class MainWindow:
             split_by_word = string.split(" ")
             for word in split_by_word:
                 layout = icon_view.create_pango_layout(word)
-                item_width, item_height = layout.get_pixel_size()
+                item_width = layout.get_pixel_size()[0]
                 if item_width > min_width_pixels:
                     min_width_pixels = item_width
                 if len(word) > min_width_chars:
@@ -488,6 +490,7 @@ class MainWindow:
             self.side_view[iv].unselect_all()
 
     def get_cur_cat_index(self, category):
+        if self is None: return
         i = 0
         for cat in CATEGORIES:
             if category == cat["id"]:
@@ -597,7 +600,7 @@ class MainWindow:
 if __name__ == "__main__":
     import signal
 
-    print("SU %s" % " ".join(sys.argv[0].split("/")[-2:]))
+    print("SU %s" % " ".join(os.path.abspath(sys.argv[0]).split("/")[-2:]))
 
     ps = proxygsettings.get_proxy_settings()
     if ps:
