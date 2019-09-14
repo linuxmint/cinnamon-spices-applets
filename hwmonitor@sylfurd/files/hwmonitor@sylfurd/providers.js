@@ -84,11 +84,11 @@ class NetDataProvider {
     // called NetData in sysmonitor@orcus
     constructor(frequency, type_in, linlog, max_speed) {
         if (type_in) {
-            this.name = _("NETIN");
+            this.name = _("NET (in)");
             this.type = "NETIN";
         }
         else {
-            this.name = _("NETOUT");
+            this.name = _("NET (out)");
             this.type = "NETOUT";
         }
         this.frequency = frequency;
