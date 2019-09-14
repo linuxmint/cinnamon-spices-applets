@@ -32,7 +32,7 @@ gettext.install("cinnamon", "/usr/share/locale", names="ngettext")
 # Standard setting pages... this can be expanded to include applet dirs maybe?
 mod_files = glob.glob(config.currentPath + "/modules/*.py")
 mod_files.sort()
-if len(mod_files) is 0:
+if len(mod_files) == 0:
     print("No settings modules found!!")
     sys.exit(1)
 
@@ -154,7 +154,7 @@ class MainWindow:
             self.current_sidepage = sidePage
             width = 0
             for widget in self.top_bar:
-                m, n = widget.get_preferred_width()
+                n = widget.get_preferred_width()[1]
                 width += n
             self.top_bar.set_size_request(width + 20, -1)
             self.maybe_resize(sidePage)
@@ -162,7 +162,7 @@ class MainWindow:
             sidePage.build()
 
     def maybe_resize(self, sidePage):
-        m, n = self.content_box.get_preferred_size()
+        n = self.content_box.get_preferred_size()[1]
 
         # Resize vertically depending on the height requested by the module
         use_height = WIN_HEIGHT
@@ -315,8 +315,8 @@ class MainWindow:
 
         # Select the first sidePage
         if len(sys.argv) > 1 and sys.argv[1] in sidePagesIters:
-            (iter, cat) = sidePagesIters[sys.argv[1]]
-            path = self.store[cat].get_path(iter)
+            (_iter, cat) = sidePagesIters[sys.argv[1]]
+            path = self.store[cat].get_path(_iter)
             if path:
                 self.go_to_sidepage(cat, path)
             else:
@@ -329,8 +329,11 @@ class MainWindow:
         device = Gtk.get_current_event_device()
         if device.get_source() == Gdk.InputSource.KEYBOARD:
             grab = Gdk.Display.get_default().device_is_grabbed(device)
-        if not grab and event.keyval == Gdk.KEY_BackSpace and (type(self.window.get_focus()) not in
-                                                               (Gtk.TreeView, Gtk.Entry, Gtk.SpinButton, Gtk.TextView)):
+        if not grab and event.keyval == Gdk.KEY_BackSpace \
+        and not isinstance(self.window.get_focus(), Gtk.TreeView) \
+        and not isinstance(self.window.get_focus(), Gtk.Entry) \
+        and not isinstance(self.window.get_focus(), Gtk.SpinButton) \
+        and not isinstance(self.window.get_focus(), Gtk.TextView):
             self.back_to_icon_view(None)
             return True
         return False
@@ -343,7 +346,7 @@ class MainWindow:
 
     def calculate_bar_heights(self):
         h = 0
-        m, n = self.top_bar.get_preferred_size()
+        n = self.top_bar.get_preferred_size()[1]
         h += n.height
         self.bar_heights = h
 
@@ -355,6 +358,7 @@ class MainWindow:
             self.search_entry.set_text("")
 
     def strip_accents(self, text):
+        if self is None: return
         try:
             text = unicode(text, 'utf-8')
         except NameError:
@@ -365,8 +369,8 @@ class MainWindow:
         text = text.decode("utf-8")
         return str(text)
 
-    def filter_visible_function(self, model, iter, user_data = None):
-        sidePage = model.get_value(iter, 2)
+    def filter_visible_function(self, model, _iter, user_data = None):
+        sidePage = model.get_value(_iter, 2)
         text = self.strip_accents(self.search_entry.get_text().lower())
         if self.strip_accents(sidePage.name.lower()).find(text) > -1 or \
            self.strip_accents(sidePage.keywords.lower()).find(text) > -1:
@@ -385,12 +389,13 @@ class MainWindow:
         self.side_view_container.show_all()
 
     def get_label_min_width(self, model):
+        if self is None: return
         min_width_chars = 0
         min_width_pixels = 0
         icon_view = Gtk.IconView()
-        iter = model.get_iter_first()
-        while iter != None:
-            string = model.get_value(iter, 0)
+        _iter = model.get_iter_first()
+        while _iter != None:
+            string = model.get_value(_iter, 0)
             split_by_word = string.split(" ")
             for word in split_by_word:
                 layout = icon_view.create_pango_layout(word)
@@ -399,11 +404,12 @@ class MainWindow:
                     min_width_pixels = item_width
                 if len(word) > min_width_chars:
                     min_width_chars = len(word)
-            iter = model.iter_next(iter)
+            _iter = model.iter_next(_iter)
         return min_width_chars, min_width_pixels
 
-    def pixbuf_data_func(self, column, cell, model, iter, data=None):
-        wrapper = model.get_value(iter, 1)
+    def pixbuf_data_func(self, column, cell, model, _iter, data=None):
+        if self is None: return
+        wrapper = model.get_value(_iter, 1)
         if wrapper:
             cell.set_property('surface', wrapper.surface)
 
@@ -460,13 +466,13 @@ class MainWindow:
 
         if sel:
             path = sel[0]
-            found, rect = iconview.get_cell_rect(path, None)
+            rect = iconview.get_cell_rect(path, None)[1]
 
             cw = self.side_view_container.get_window()
-            cw_x, cw_y = cw.get_position()
+            cw_y = cw.get_position()[1]
 
             ivw = iconview.get_window()
-            iv_x, iv_y = ivw.get_position()
+            iv_y = ivw.get_position()[1]
 
             final_y = rect.y + (rect.height / 2) + cw_y + iv_y
 
@@ -498,12 +504,14 @@ class MainWindow:
             i += 1
 
     def get_cur_column(self, iconview):
-        s, path, cell = iconview.get_cursor()
+        if self is None: return
+        path = iconview.get_cursor()[1]
         if path:
             col = iconview.get_item_column(path)
             return col
 
     def reposition_new_cat(self, sel, iconview):
+        if self is None: return
         iconview.set_cursor(sel, None, False)
         iconview.select_path(sel)
         iconview.grab_focus()
@@ -521,15 +529,15 @@ class MainWindow:
             col = self.get_cur_column(widget)
             new_cat_view = self.side_view[new_cat["id"]]
             model = new_cat_view.get_model()
-            iter = model.get_iter_first()
-            while iter is not None:
-                path = model.get_path(iter)
+            _iter = model.get_iter_first()
+            while _iter is not None:
+                path = model.get_path(_iter)
                 c = new_cat_view.get_item_column(path)
                 d = abs(c - col)
                 if d < dist:
                     sel = path
                     dist = d
-                iter = model.iter_next(iter)
+                _iter = model.iter_next(_iter)
             self.reposition_new_cat(sel, new_cat_view)
             ret = True
         elif direction == Gtk.DirectionType.UP and current_idx > 0:
@@ -537,15 +545,15 @@ class MainWindow:
             col = self.get_cur_column(widget)
             new_cat_view = self.side_view[new_cat["id"]]
             model = new_cat_view.get_model()
-            iter = model.get_iter_first()
-            while iter is not None:
-                path = model.get_path(iter)
+            _iter = model.get_iter_first()
+            while _iter is not None:
+                path = model.get_path(_iter)
                 c = new_cat_view.get_item_column(path)
                 d = abs(c - col)
                 if d <= dist:
                     sel = path
                     dist = d
-                iter = model.iter_next(iter)
+                _iter = model.iter_next(_iter)
             self.reposition_new_cat(sel, new_cat_view)
             ret = True
         return ret
@@ -555,13 +563,13 @@ class MainWindow:
             self.side_view_nav(widget, None, category)
 
     def anyVisibleInCategory(self, category):
-        id = category["id"]
-        iter = self.storeFilter[id].get_iter_first()
+        _id = category["id"]
+        _iter = self.storeFilter[_id].get_iter_first()
         visible = False
-        while iter is not None:
-            cat = self.storeFilter[id].get_value(iter, 3)
+        while _iter is not None:
+            cat = self.storeFilter[_id].get_value(_iter, 3)
             visible = cat == category["id"]
-            iter = self.storeFilter[id].iter_next(iter)
+            _iter = self.storeFilter[_id].iter_next(_iter)
         return visible
 
     def setParentRefs (self, mod):
@@ -572,9 +580,10 @@ class MainWindow:
         return True
 
     def loadCheck (self, mod):
+        if self is None: return
         try:
             return mod._loadCheck()
-        except:
+        except Exception:
             return True
 
     def back_to_icon_view(self, widget):
