@@ -285,7 +285,8 @@ class Module:
     def _load_icon_themes(self):
         if self is None: return
         dirs = ("/usr/share/icons", os.path.join(os.path.expanduser("~"), ".icons"))
-        walked = walk_directories(dirs, lambda d: os.path.isdir(d), return_directories=True)
+        #walked = walk_directories(dirs, lambda d: os.path.isdir(d), return_directories=True)
+        walked = walk_directories(dirs, os.path.isdir, return_directories=True)
         valid = []
         for directory in walked:
             path = os.path.join(directory[1], directory[0], "index.theme")
