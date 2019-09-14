@@ -8,9 +8,13 @@ try:
     import zipfile
     import shutil
     import uuid as uuidlib
+    import proxygsettings
 except Exception as detail:
     print(detail)
     sys.exit(1)
+
+from http.client import HTTPSConnection
+from urllib.parse import urlparse
 
 from Spices import *
 
@@ -66,6 +70,42 @@ class SU_Spice_Harvester(Spice_Harvester):
 
         self._load_cache()
         self._download_image_cache()
+
+    def _url_retrieve(self, url, outfd, reporthook, binary):
+        #Like the one in urllib. Unlike urllib.retrieve url_retrieve
+        #can be interrupted. KeyboardInterrupt exception is raised when
+        #interrupted.
+        count = 0
+        blockSize = 1024 * 8
+        parsed_url = urlparse(url)
+        host = parsed_url.netloc
+        try:
+            proxy = proxygsettings.get_proxy_settings()
+            if proxy and proxy.get('https'):
+                connection = HTTPSConnection(proxy.get('https'), timeout=15)
+                connection.set_tunnel(host)
+            else:
+                connection = HTTPSConnection(host, timeout=15)
+            headers = { "Accept-Encoding": "identity", "Host": host, "User-Agent": "Python/3" }
+            connection.request("GET", parsed_url.path + "?" + parsed_url.query, headers=headers)
+            urlobj = connection.getresponse()
+            if urlobj.getcode() != 200:
+                self.abort()
+                return None
+
+            totalSize = int(urlobj.info()['content-length'])
+
+            while not self._is_aborted():
+                data = urlobj.read(blockSize)
+                count += 1
+                if not data:
+                    break
+                if not binary:
+                    data = data.decode("utf-8")
+                outfd.write(data)
+                ui_thread_do(reporthook, count, blockSize, totalSize)
+        except Exception as e:
+            raise e
 
     def _install(self, job):
         uuid = job['uuid']
