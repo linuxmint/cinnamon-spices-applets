@@ -186,7 +186,8 @@ class MainWindow:
                 self.window.set_icon_name(sidePage.icon)
             sidePage.build()
             if sidePage.stack:
-                current_page = sidePage.stack.get_visible_child_name()
+                #current_page = sidePage.stack.get_visible_child_name()
+                sidePage.stack.get_visible_child_name()
                 self.stack_switcher.set_stack(sidePage.stack)
                 l = sidePage.stack.get_children()
                 if len(l) > 0:
@@ -253,8 +254,8 @@ class MainWindow:
             if key is not cat:
                 self.side_view[key].unselect_all()
 
-    ''' Create the UI '''
     def __init__(self):
+        ''' Create the UI '''
         self.builder = Gtk.Builder()
         self.builder.add_from_file(config.currentPath + "/cinnamon-settings.ui")
         self.window = XApp.GtkWindow(window_position=Gtk.WindowPosition.CENTER,
@@ -309,7 +310,7 @@ class MainWindow:
                 mod = module.Module(self.content_box)
                 if self.loadCheck(mod) and self.setParentRefs(mod):
                     self.unsortedSidePages.append((mod.sidePage, mod.name, mod.category))
-            except:
+            except Exception:
                 print("Failed to load module %s" % module)
                 traceback.print_exc()
 
