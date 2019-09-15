@@ -179,7 +179,7 @@ class Graph {
         else {
             cr.setSourceRGBA(this.theme.label_color[0], this.theme.label_color[1], this.theme.label_color[2], 0.5);
         }
-        cr.moveTo(global.ui_scale * 1.5, global.ui_scale * 6.5 + 0.5);
+        cr.moveTo(global.ui_scale * 1.5, global.ui_scale * this.theme.label_size + 1);
 
         if (this.theme.cpu_use_custom_label && this.provider.type == "CPU")
             cr.showText(this.theme.cpu_custom_label);
@@ -199,7 +199,7 @@ class Graph {
         else {
             cr.setSourceRGBA(this.theme.label_color[0], this.theme.label_color[1], this.theme.label_color[2], 1);
         }
-        cr.moveTo(global.ui_scale * 1, global.ui_scale * 6 + 0.5);
+        cr.moveTo(global.ui_scale * 1, global.ui_scale * this.theme.label_size + 0.5);
 
         if (this.theme.cpu_use_custom_label && this.provider.type == "CPU")
             cr.showText(this.theme.cpu_custom_label);
