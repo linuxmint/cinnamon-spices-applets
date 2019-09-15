@@ -1,3 +1,6 @@
+### v4.0.1~20190914
+  * Improves the download of the latest versions of Spices. (Cinnamon 3.8 and following.)
+
 ### v4.0.0~20190912
   * Make sure to download the latest version of Spices. (Cinnamon 3.8 and following.)
 
