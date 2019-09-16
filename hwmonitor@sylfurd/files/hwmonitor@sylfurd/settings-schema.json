@@ -129,7 +129,7 @@
         "min": 0,
         "max": 1,
         "step": 0.01,
-        "description": "Offset for graph color 2",
+        "description": "Offset for graph color 3",
         "tooltip": "Offset for second middle color of the linear gradient",
         "dependency": "theme=user"
     },
