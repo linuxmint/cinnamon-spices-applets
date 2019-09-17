@@ -28,6 +28,10 @@ function _(str) {
    return Gettext.gettext(str);
 }
 
+function icon_exists( iconName ) {
+    return Gtk.IconTheme.get_default().has_icon( iconName );
+}
+
 class IconMenuItem extends PopupMenu.PopupBaseMenuItem {
     constructor(text, icon){
         super();
@@ -101,7 +105,7 @@ class PlaceMenuItem extends FolderTypeMenuItem {
         let fileInfo = Gio.File.new_for_uri(uri).query_info("*", 0, null);
 
         let icon;
-        if ( iconName && Gtk.IconTheme.get_default().has_icon(iconName) ) {
+        if ( iconName && icon_exists(iconName) ) {
             icon = new St.Icon({icon_name: iconName, icon_size: menu_item_icon_size, icon_type: St.IconType.FULLCOLOR});
         }
         else {
@@ -167,8 +171,8 @@ class MyApplet extends Applet.TextIconApplet {
 
             //listen for changes
             this.menuManager = new PopupMenu.PopupMenuManager(this);
-            //this.recentManager = new Gtk.RecentManager();       // Do not use a new RecentManager but
-            this.recentManager = Gtk.RecentManager.get_default(); // the default one to be synchrone with Cinnamon menu.
+            // (Do not use a new RecentManager but the default one, synchronous with the Cinnamon menu.)
+            this.recentManager = Gtk.RecentManager.get_default();
             this.recentManager.connect("changed", Lang.bind(this, this.buildRecentDocumentsSection));
             Main.placesManager.connect("bookmarks-updated", Lang.bind(this, this.buildUserSection));
             this.volumeMonitor = Gio.VolumeMonitor.get();
@@ -210,7 +214,6 @@ class MyApplet extends Applet.TextIconApplet {
     }
 
     openMenu() {
-        //this.buildMenu();
         this.menu.toggle();
     }
 
@@ -492,25 +495,28 @@ class MyApplet extends Applet.TextIconApplet {
 
             let file = Gio.file_new_for_path( "%s".format(recentInfo.get_uri_display()) );
             if ( file.query_exists(null) ) {
-                let mimeType = recentInfo.get_mime_type().replace("\/","-");
-
-                // Fixes some oversights in Gtk's mime types (example: for .xcf Gimp files ):
-                if ( mimeType.substr(0, 6) === "image-" && mimeType.substr(0, 8) !== "image-x-" && !Gtk.IconTheme.get_default().has_icon(mimeType) ) {
-                    mimeType = mimeType.replace("image-", "image-x-");
-                }
+                let mimeType = "unknown";
+                let gicon = null;
+                let recentItem;
 
                 let default_for_type = Gio.app_info_get_default_for_type(recentInfo.get_mime_type(), false);
-                let gicon = null;
                 if ( default_for_type ) {
                     let application = default_for_type.get_executable();
                     gicon = default_for_type.get_icon();
-                    if ( !gicon && application && !Gtk.IconTheme.get_default().has_icon(mimeType) ) {
+                    if ( !gicon && application && !icon_exists(mimeType) ) {
                         mimeType = application; // Try replacing the unknown mimeType icon with the application's one.
-                        if ( !Gtk.IconTheme.get_default().has_icon(mimeType) ) mimeType = "unknown"; // Desperate case. (Apps without mime type recognized nor icon.)
+                        if ( !icon_exists(mimeType) ) mimeType = "unknown"; // Desperate case. (Apps without mime type recognized nor icon.)
+                    }
+                } else {
+                    mimeType = recentInfo.get_mime_type().replace("\/","-");
+
+                    // Fixes some oversights in Gtk's mime types (example: for .xcf Gimp files ):
+                    if ( mimeType.substr(0, 6) === "image-" && mimeType.substr(0, 8) !== "image-x-" && !icon_exists(mimeType) ) {
+                        mimeType = mimeType.replace("image-", "image-x-");
+                        if ( !icon_exists(mimeType) ) mimeType = "unknown";
                     }
                 }
 
-                let recentItem;
                 if ( gicon ) {
                     recentItem = new RecentFileMenuItem( recentInfo.get_display_name(), null, gicon, recentInfo.get_uri(), appOpeningFolders );
                 } else {
@@ -562,7 +568,7 @@ class MyApplet extends Applet.TextIconApplet {
             if ( this.panelIcon.search("-symbolic.svg") == -1 ) this.set_applet_icon_path(this.panelIcon);
             else this.set_applet_icon_symbolic_path(this.panelIcon);
         }
-        else if ( Gtk.IconTheme.get_default().has_icon(this.panelIcon) ) {
+        else if ( icon_exists(this.panelIcon) ) {
             if ( this.panelIcon.search("-symbolic") != -1 ) this.set_applet_icon_symbolic_name(this.panelIcon);
             else this.set_applet_icon_name(this.panelIcon);
         }
