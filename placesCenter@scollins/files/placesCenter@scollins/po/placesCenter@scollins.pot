@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-04 01:32+0200\n"
+"POT-Creation-Date: 2019-09-08 19:11+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,47 +17,47 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: applet.js:127
+#: applet.js:144
 msgid "(Right click to open folder)"
 msgstr ""
 
-#: applet.js:149
+#: applet.js:166
 msgid "Places"
 msgstr ""
 
-#: applet.js:261
+#: applet.js:281
 msgid "Search Home Folder"
 msgstr ""
 
-#: applet.js:284
+#: applet.js:304
 msgid "SYSTEM"
 msgstr ""
 
-#: applet.js:293
+#: applet.js:313
 msgid "Search File System"
 msgstr ""
 
-#: applet.js:319
+#: applet.js:338
 msgid "RECENT DOCUMENTS"
 msgstr ""
 
-#: applet.js:333
+#: applet.js:352
 msgid "Clear"
 msgstr ""
 
-#: applet.js:376
+#: applet.js:395
 msgid "Computer"
 msgstr ""
 
-#: applet.js:382
+#: applet.js:401
 msgid "File System"
 msgstr ""
 
-#: applet.js:398
+#: applet.js:417
 msgid "Network"
 msgstr ""
 
-#: applet.js:507
+#: applet.js:554
 msgid "Trash"
 msgstr ""
 
@@ -280,6 +280,38 @@ msgstr ""
 msgid "Show recent documents"
 msgstr ""
 
+#. settings-schema.json->recentSizeLimit->options
+msgid "5"
+msgstr ""
+
+#. settings-schema.json->recentSizeLimit->options
+msgid "10"
+msgstr ""
+
+#. settings-schema.json->recentSizeLimit->options
+msgid "15"
+msgstr ""
+
+#. settings-schema.json->recentSizeLimit->options
+msgid "20"
+msgstr ""
+
+#. settings-schema.json->recentSizeLimit->options
+msgid "25"
+msgstr ""
+
+#. settings-schema.json->recentSizeLimit->options
+msgid "30"
+msgstr ""
+
+#. settings-schema.json->recentSizeLimit->options
+msgid "All Recent Documents"
+msgstr ""
+
 #. settings-schema.json->recentSizeLimit->description
 msgid "Number to show"
+msgstr ""
+
+#. settings-schema.json->btnPrivacy->description
+msgid "Privacy"
 msgstr ""
