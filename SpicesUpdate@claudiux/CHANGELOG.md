@@ -1,3 +1,7 @@
+### v4.0.2~20190920
+  * Removes unnecessary notifications like '(Refresh to see the description)'.
+  * Minor CSS changes.
+
 ### v4.0.1~20190914
   * Improves the download of the latest versions of Spices. (Cinnamon 3.8 and following.)
 
