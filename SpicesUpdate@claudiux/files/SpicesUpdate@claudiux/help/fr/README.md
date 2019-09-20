@@ -98,19 +98,36 @@ Ici avec la raison de la mise à jour :
 ![notif_simple_with_details](https://github.com/claudiux/docs/raw/master/SpicesUpdate/images/notif_simple_with_details-fr.png)
 
 ### Notifications avec boutons
-Deux boutons sont présents : l'un pour ouvrir la page Paramètres système afin de télécharger les mises à jour ; l'autre pour actualiser la notification afin d’obtenir des détails, le cas échéant.
-
-Ici sans les détails :
-
-![notif_without_details](https://github.com/claudiux/docs/raw/master/SpicesUpdate/images/notif_without_details-fr.png)
-
-Après actualisation, le motif de la mise à jour apparaît :
+Deux boutons sont présents : l'un pour ouvrir la page Paramètres système afin de télécharger les mises à jour ; l'autre pour actualiser les notifications.
 
 ![notif_with_details](https://github.com/claudiux/docs/raw/master/SpicesUpdate/images/notif_with_details2-fr.png)
 
 ## Traductions
 
 Toute traduction est la bienvenue. Merci de contribuer en traduisant les messages de l'applet dans de nouvelles langues ou en améliorant/complétant les traductions existantes.
+
+### Traductions disponibles et leurs auteurs
+
+  * Croate (hr): muzena
+  * Néerlandais (nl): Jurien (French77)
+  * Finnois (fi): MahtiAnkka
+  * Français (fr): claudiux
+  * Allemand (de): Mintulix
+  * Italien (it): claudiux
+  * Espagnol (es): claudiux
+  * Suédois (sv): Åke Engelbrektson (eson57)
+
+Un grand merci à eux !
+
+### Commant proposer une traduction
+
+  1. Créer un compte dur [Github](https://github.com/).
+  2. Faire un Fork du dépôt [cinnamon-spices-applets](https://github.com/linuxmint/cinnamon-spices-applets).
+  3. Dans votre fork, créer une branche (la nommer comme `SpicesUpdate-CODE_LANGUE`) à partir de la branche master.
+  4. Sur votre ordinateur, installer git et poedit.
+  5. Cloner votre branche sur votre ordinateur : `git clone -b SpicesUpdate-CODE_LANGUE --single-branch https://github.com/VOTRE_COMPTE_GITHUB/cinnamon-spices-applets.git SpicesUpdate-CODE_LANGUE`
+  6. Ouvrir le fichier `SpicesUpdate@claudiux.pot` (qui est dans le dossier `po`) avec poedit et créer votre traduction. Vous obtenez une fichier CODE_LANGUE.po.
+  7. Sur Github, envoyer le fichier `CODE_LANGUE.po` au bon endroit dans votre branche puis aller à la racine de votre branche et faire un Pull Request.
 
 ## Installation
 

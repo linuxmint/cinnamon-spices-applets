@@ -484,6 +484,7 @@ SpicesUpdate.prototype = {
     this.first_loop = true; // To do nothing for 1 minute.
     this.on_settings_changed();
     // Run the loop !
+    this.iteration = 0;
     this.updateLoop();
   }, // End of _init
 
@@ -1303,9 +1304,10 @@ SpicesUpdate.prototype = {
                                                                         this._get_member_from_cache(type, uuid, "spices-id").toString());
     var msg = Soup.Message.new('GET', url);
 
+    let iteration = this.iteration;
     // Queue of the http request
     _httpSession.queue_message(msg, Lang.bind(this, function(_httpSession, message) {
-      if (message.status_code === Soup.KnownStatusCode.OK) {
+      if (message.status_code === Soup.KnownStatusCode.OK && iteration === this.iteration) {
         let data = message.response_body.data;
         let result = subject_regexp.exec(data.toString());
         this.details_by_uuid[uuid] = result[1].toString();
@@ -1369,7 +1371,8 @@ SpicesUpdate.prototype = {
                   ret.push("%s (%s)\n\t\t%s".format(_(this.get_spice_name(type, uuid)), uuid, _("(Description unavailable)")));
                 }
               } else {
-                ret.push("%s (%s)\n\t\t%s".format(_(this.get_spice_name(type, uuid)), uuid, _("(Refresh to see the description)")));
+                this.refreshInterval = 15; // Wait 15 more seconds to avoid the message "(Refresh to see the description)".
+                //ret.push("%s (%s)\n\t\t%s".format(_(this.get_spice_name(type, uuid)), uuid, _("(Refresh to see the description)")));
               }
             } else {
               ret.push("%s (%s)".format(_(this.get_spice_name(type, uuid)), uuid));
@@ -1656,6 +1659,8 @@ SpicesUpdate.prototype = {
     }
     this.loopId = 0;
     this.check_dependencies();
+
+    this.iteration = (this.iteration + 1) % 10;
 
     // Inhibits also after the applet has been removed from the panel
     if (this.applet_running == true) {
