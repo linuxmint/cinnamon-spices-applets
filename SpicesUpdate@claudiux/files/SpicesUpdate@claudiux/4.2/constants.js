@@ -18,6 +18,8 @@ function DEBUG() {
   return _debug.query_exists(null);
 };
 
+const DOWNLOAD_TIME = 1;
+
 const APPLET_DIR = HOME_DIR + "/.local/share/cinnamon/applets/" + UUID;
 const SCRIPTS_DIR = APPLET_DIR + "/scripts";
 const ICONS_DIR = APPLET_DIR + "/icons";
@@ -121,6 +123,22 @@ bidon = _("New extensions available:");
 bidon = _("New themes available:");
 bidon = null;
 
+const EXP1 = {
+  "applets": _("If you do not want an applet to be checked, uncheck its first box."),
+  "desklets": _("If you do not want a desklet to be checked, uncheck its first box."),
+  "extensions": _("If you do not want an extension to be checked, uncheck its first box."),
+  "themes": _("If you do not want a theme to be checked, uncheck its first box.")
+}
+
+const EXP2 = {
+  "applets": _("If you want to renew the download of an applet, check both boxes."),
+  "desklets": _("If you want to renew the download of a desklet, check both boxes."),
+  "extensions": _("If you want to renew the download of an extension, check both boxes."),
+  "themes": _("If you want to renew the download of a theme, check both boxes.")
+}
+
+const EXP3 = _("When all your choices are made, click the Refresh button.");
+
 module.exports = {
   UUID,
   HOME_DIR,
@@ -138,7 +156,9 @@ module.exports = {
   CACHE_MAP,
   DIR_MAP,
   DCONFCACHEUPDATED,
+  DOWNLOAD_TIME,
   _,
+  EXP1, EXP2, EXP3,
   DEBUG,
   capitalize,
   log,

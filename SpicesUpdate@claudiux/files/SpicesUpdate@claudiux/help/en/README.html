@@ -49,6 +49,7 @@
 <li>It warns you when the Spices you have installed need updates.</li>
 <li>Optional: It can also warn you when new Spices are available.</li>
 <li>It gives you direct access to Cinnamon Settings for Applets, Desklets, Extensions and Themes.</li>
+<li>It allows you to renew the download of the latest version of a Spice (only with Cinnamon 4.2 and following).</li>
 </ul>
 <h2>
 <a id="user-content-status" class="anchor" href="#status" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Status</h2>
@@ -105,11 +106,12 @@
 </ul>
 <p><a href="https://github.com/claudiux/docs/raw/master/SpicesUpdate/images/System_Settings_Applets.png" target="_blank" rel="noopener noreferrer"><img src="https://github.com/claudiux/docs/raw/master/SpicesUpdate/images/System_Settings_Applets.png" alt="system_settings_applet" style="max-width:100%;"></a></p>
 <p>For the content of the other tabs (<em>Applets</em>, <em>Desklets</em>, etc), please look at the screenshot above and note that <strong>the list of installed Spices is automatically filled</strong> at startup, but a button allows you to reload it.</p>
-<p>Set to <em>FALSE</em> all the Spices you <em>do not want</em> to check updates. There are two reasons to do this:</p>
+<p>Set to <em>FALSE</em> (or uncheck the first box of) all the Spices you <em>do not want</em> to check updates. There are two reasons to do this:</p>
 <ul>
 <li>A spice is OK for you, and you do not want to be notified of any changes to it.</li>
 <li>You are a developer working on a spice and you do not want to be informed about changes during development.</li>
 </ul>
+<p>From Cinnamon 4.2, you can request to renew the download of the latest version of a Spice checking both boxes then clicking the Refresh button.</p>
 <h2>
 <a id="user-content-menu" class="anchor" href="#menu" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Menu</h2>
 <p>In the menu of this applet:</p>
@@ -123,6 +125,7 @@
 <h2>
 <a id="user-content-icon" class="anchor" href="#icon" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Icon</h2>
 <p>The color of the icon changes when at least one of your Spices needs an update.</p>
+<p>From Cinnamon 4.2 (and Spices Update v4.1.0), the color of the icon darkens while data are being refreshed.</p>
 <p>Its tooltip (the message displayed when the icon is hovered) contains the list of spices to update, if any.</p>
 <p><a href="https://github.com/claudiux/docs/raw/master/SpicesUpdate/images/hovering_icon.png" target="_blank" rel="noopener noreferrer"><img src="https://github.com/claudiux/docs/raw/master/SpicesUpdate/images/hovering_icon.png" alt="hovering_icon" style="max-width:100%;"></a></p>
 <h2>
@@ -158,9 +161,12 @@
 <li>Create an account on <a href="https://github.com/">Github</a>.</li>
 <li>Fork the <a href="https://github.com/linuxmint/cinnamon-spices-applets">cinnamon-spices-applets</a> repository.</li>
 <li>In your fork, create a branch (named like <code>SpicesUpdate-YOUR_LANGUAGE_CODE</code>) from the master one.</li>
-<li>On your computer, install git and poedit.</li>
-<li>Clone your branch on your computer: <code>git clone -b SpicesUpdate-YOUR_LANGUAGE_CODE --single-branch https://github.com/YOUR_GITHUB_ACCOUNT/cinnamon-spices-applets.git SpicesUpdate-YOUR_LANGUAGE_CODE</code>
-</li>
+<li>On your computer, install <em>git</em> and <em>poedit</em>.</li>
+<li>Clone your branch on your computer:</li>
+</ol>
+<pre><code>`git clone -b SpicesUpdate-YOUR_LANGUAGE_CODE --single-branch https://github.com/YOUR_GITHUB_ACCOUNT/cinnamon-spices-applets.git SpicesUpdate-YOUR_LANGUAGE_CODE`
+</code></pre>
+<ol start="6">
 <li>Open the <code>SpicesUpdate@claudiux.pot</code> file (which is in the <code>po</code> directory) with poedit and create your translation. You obtain a YOUR_LANGUAGE_CODE.po file.</li>
 <li>On Github, upload this <code>YOUR_LANGUAGE_CODE.po</code> file at the right place into your branch then go to the root of your branch and make a Pull Request.</li>
 </ol>
@@ -173,7 +179,7 @@
 <a id="user-content-manual-installation" class="anchor" href="#manual-installation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Manual Installation:</h3>
 <ul>
 <li>Install the additional programs required.</li>
-<li>Download the Spices Update from the <a href="https://cinnamon-spices.linuxmint.com/applets/view/309" rel="nofollow">Spices Web Site</a>.</li>
+<li>Download the <strong><a href="https://cinnamon-spices.linuxmint.com/files/applets/SpicesUpdate@claudiux.zip?3a160f32-a3d6-437f-899e-afba9907e023" rel="nofollow">latest version of Spices Update</a></strong> from the Spices Web Site.</li>
 <li>Unzip and extract the folder <code>SpicesUpdate@claudiux</code> into <code>~/.local/share/cinnamon/applets/</code>
 </li>
 <li>Enable this applet in System Settings -&gt; Applets.</li>
