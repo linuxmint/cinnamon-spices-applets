@@ -626,13 +626,8 @@ MyApplet.prototype = {
     },
 
     _run_calculate_speed: function () {
-        if(this.update_every > 0) {
-            this._calculate_speed();
-            Mainloop.timeout_add(this.update_every * 1000, Lang.bind(this, this._run_calculate_speed_running));
-        }
-        else {
-            Mainloop.timeout_add(1000, Lang.bind(this, this._run_calculate_speed_running));
-        }
+        this._calculate_speed();
+        Mainloop.timeout_add(this.update_every * 1000, Lang.bind(this, this._run_calculate_speed_running));
     },
 
     _calculate_speed: function () {
