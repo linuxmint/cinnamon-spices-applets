@@ -131,10 +131,10 @@ const EXP1 = {
 }
 
 const EXP2 = {
-  "applets": _("If you want to renew the download of an applet, check both boxes."),
-  "desklets": _("If you want to renew the download of a desklet, check both boxes."),
-  "extensions": _("If you want to renew the download of an extension, check both boxes."),
-  "themes": _("If you want to renew the download of a theme, check both boxes.")
+  "applets": _("If you want to get the latest version of an applet now, check both boxes."),
+  "desklets": _("If you want to get the latest version of a desklet now, check both boxes."),
+  "extensions": _("If you want to get the latest version of an extension now, check both boxes."),
+  "themes": _("If you want to get the latest version of a theme now, check both boxes.")
 }
 
 const EXP3 = _("When all your choices are made, click the Refresh button.");

@@ -191,7 +191,7 @@
       },
       {
         "id": "requestnewdownload",
-        "title": "Renew last download",
+        "title": "Get the latest version now",
         "align": 0.5,
         "type": "boolean"
       }
@@ -244,7 +244,7 @@
       },
       {
         "id": "requestnewdownload",
-        "title": "Renew last download",
+        "title": "Get the latest version now",
         "align": 0.5,
         "type": "boolean"
       }
@@ -297,7 +297,7 @@
       },
       {
         "id": "requestnewdownload",
-        "title": "Renew last download",
+        "title": "Get the latest version now",
         "align": 0.5,
         "type": "boolean"
       }
@@ -350,7 +350,7 @@
       },
       {
         "id": "requestnewdownload",
-        "title": "Renew last download",
+        "title": "Get the latest version now",
         "align": 0.5,
         "type": "boolean"
       }
