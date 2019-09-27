@@ -1,3 +1,14 @@
+### v4.2.0~20190927
+  * Animated icon during refresh.
+    * Only for Cinnamon 4.2 and following.
+
+### v4.1.0~20190925
+  * Adds the ability to renew the download of the latest version of a Spice.
+    * Only for Cinnamon 4.2 and following.
+  * `SpicesUpdate@claudiux.pot` file updated.
+  * French translation: `fr.po` file updated.
+  * Minor bugs fixed.
+
 ### v4.0.2~20190920
   * Removes unnecessary notifications like '(Refresh to see the description)'.
   * Minor CSS changes.

@@ -255,6 +255,38 @@ SpicesUpdate.prototype = {
       "themes": false
     };
 
+    // Default icon color
+    this.defaultColor = "#000000FF";
+
+    // Monitoring metadata.json files and png directories
+    this.monitors = new Array();
+
+    // Monitoring png directories: Ids
+    this.monitorsPngId = {
+      "applets": 0,
+      "desklets": 0,
+      "extensions": 0,
+      "themes": 0
+    }
+
+    // Count of Spices to update
+    this.nb_to_update = 0;
+    this.nb_in_menu = {
+      "applets": 0,
+      "desklets": 0,
+      "extensions": 0,
+      "themes": 0
+    }
+
+    // New Spices
+    this.nb_to_watch = 0;
+    this.new_Spices = {
+      "applets": [],
+      "desklets": [],
+      "extensions": [],
+      "themes": []
+    }
+
 
     // ++ Settings
     this.settings = new Settings.AppletSettings(this, UUID, instance_id);
@@ -416,38 +448,6 @@ SpicesUpdate.prototype = {
     this.menuManager = new PopupMenu.PopupMenuManager(this);
     this.menu = new Applet.AppletPopupMenu(this, orientation);
     this.menuManager.addMenu(this.menu);
-
-    // Default icon color
-    this.defaultColor = "#000000FF";
-
-    // Monitoring metadata.json files and png directories
-    this.monitors = new Array();
-
-    // Monitoring png directories: Ids
-    this.monitorsPngId = {
-      "applets": 0,
-      "desklets": 0,
-      "extensions": 0,
-      "themes": 0
-    }
-
-    // Count of Spices to update
-    this.nb_to_update = 0;
-    this.nb_in_menu = {
-      "applets": 0,
-      "desklets": 0,
-      "extensions": 0,
-      "themes": 0
-    }
-
-    // New Spices
-    this.nb_to_watch = 0;
-    this.new_Spices = {
-      "applets": [],
-      "desklets": [],
-      "extensions": [],
-      "themes": []
-    }
 
     // Badge
     this.badge = new St.BoxLayout({

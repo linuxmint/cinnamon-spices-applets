@@ -2,7 +2,7 @@
 
 ## Important!
 In order to be sure to download the latest version of Spices Update, use
-**[this link](https://cinnamon-spices.linuxmint.com/files/applets/SpicesUpdate@claudiux.zip?bb90ce7a-8249-460d-9ff6-7811d055a280)** rather than the Download button at the top of this page.
+**[this link](https://cinnamon-spices.linuxmint.com/files/applets/SpicesUpdate@claudiux.zip?3a160f32-a3d6-437f-899e-afba9907e023)** rather than the Download button at the top of this page.
 
 ## Summary
 
@@ -15,6 +15,7 @@ The **Spices Update** applet plays these roles:
   * It warns you when the Spices you have installed need updates.
   * Optional: It can also warn you when new Spices are available.
   * It gives you direct access to Cinnamon Settings for Applets, Desklets, Extensions and Themes.
+  * It allows you to renew the download of the latest version of a Spice (only with Cinnamon 4.2 and following).
 
 ## Status
 
@@ -66,10 +67,12 @@ The first, _General_, allows you to:
 
 For the content of the other tabs (_Applets_, _Desklets_, etc), please look at the screenshot above and note that **the list of installed Spices is automatically filled** at startup, but a button allows you to reload it.
 
-Set to _FALSE_ all the Spices you _do not want_ to check updates. There are two reasons to do this:
+Set to _FALSE_ (or uncheck the first box of) all the Spices you _do not want_ to check updates. There are two reasons to do this:
 
   * A spice is OK for you, and you do not want to be notified of any changes to it.
   * You are a developer working on a spice and you do not want to be informed about changes during development.
+
+From Cinnamon 4.2, you can request to renew the download of the latest version of a Spice checking both boxes then clicking the Refresh button.
 
 ## Menu
 
@@ -84,6 +87,8 @@ In the menu of this applet:
 ## Icon
 
 The color of the icon changes when at least one of your Spices needs an update.
+
+From Cinnamon 4.2 (and Spices Update v4.1.0), the color of the icon darkens while data are being refreshed.
 
 Its tooltip (the message displayed when the icon is hovered) contains the list of spices to update, if any.
 
@@ -123,8 +128,10 @@ Many thanks to them!
   1. Create an account on [Github](https://github.com/).
   2. Fork the [cinnamon-spices-applets](https://github.com/linuxmint/cinnamon-spices-applets) repository.
   3. In your fork, create a branch (named like `SpicesUpdate-YOUR_LANGUAGE_CODE`) from the master one.
-  4. On your computer, install git and poedit.
-  5. Clone your branch on your computer: `git clone -b SpicesUpdate-YOUR_LANGUAGE_CODE --single-branch https://github.com/YOUR_GITHUB_ACCOUNT/cinnamon-spices-applets.git SpicesUpdate-YOUR_LANGUAGE_CODE`
+  4. On your computer, install _git_ and _poedit_.
+  5. Clone your branch on your computer:
+
+    `git clone -b SpicesUpdate-YOUR_LANGUAGE_CODE --single-branch https://github.com/YOUR_GITHUB_ACCOUNT/cinnamon-spices-applets.git SpicesUpdate-YOUR_LANGUAGE_CODE`
   6. Open the `SpicesUpdate@claudiux.pot` file (which is in the `po` directory) with poedit and create your translation. You obtain a YOUR_LANGUAGE_CODE.po file.
   7. On Github, upload this `YOUR_LANGUAGE_CODE.po` file at the right place into your branch then go to the root of your branch and make a Pull Request.
 
@@ -137,7 +144,7 @@ Use the _Applets_ menu in Cinnamon Settings, or _Add Applets to Panel_ in the co
 ### Manual Installation:
 
    * Install the additional programs required.
-   * Download the **[latest version of Spices Update](https://cinnamon-spices.linuxmint.com/files/applets/SpicesUpdate@claudiux.zip?bb90ce7a-8249-460d-9ff6-7811d055a280)** from the Spices Web Site.
+   * Download the **[latest version of Spices Update](https://cinnamon-spices.linuxmint.com/files/applets/SpicesUpdate@claudiux.zip?3a160f32-a3d6-437f-899e-afba9907e023)** from the Spices Web Site.
    * Unzip and extract the folder ```SpicesUpdate@claudiux``` into ```~/.local/share/cinnamon/applets/```
    * Enable this applet in System Settings -> Applets.
    * You can also access the Settings Screen from System Settings -> Applets, or from the context menu of this applet (right-clicking on its icon).
