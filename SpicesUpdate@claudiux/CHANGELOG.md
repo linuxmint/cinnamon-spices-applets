@@ -1,6 +1,8 @@
 ### v4.1.0~20190925
   * Adds the ability to renew the download of the latest version of a Spice.
     * Only for Cinnamon 4.2 and following.
+  * Animated icon during refresh.
+    * Only for Cinnamon 4.2 and following.
   * `SpicesUpdate@claudiux.pot` file updated.
   * French translation: `fr.po` file updated.
   * Minor bugs fixed.

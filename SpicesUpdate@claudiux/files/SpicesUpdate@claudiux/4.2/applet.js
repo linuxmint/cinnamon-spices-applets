@@ -4,6 +4,8 @@ const Applet = imports.ui.applet; // ++
 const Settings = imports.ui.settings; // ++ Needed if you use Settings Screen
 const St = imports.gi.St; // ++ Needed for icons
 const Clutter = imports.gi.Clutter;
+const GdkPixbuf = imports.gi.GdkPixbuf;
+const Cogl = imports.gi.Cogl;
 const PopupMenu = imports.ui.popupMenu; // ++ Needed for menus
 const Lang = imports.lang; //  Needed for on_response function call
 const GLib = imports.gi.GLib; // ++ Needed for starting programs and translations
@@ -88,6 +90,23 @@ function notify_send(message, duration=5000, urgency="normal", icon_path=null) {
   Util.spawnCommandLine(notification);
 }
 
+function getImageAtScale(imageFileName, width, height) {
+    let pixBuf = GdkPixbuf.Pixbuf.new_from_file_at_size(imageFileName, width, height);
+    let image = new Clutter.Image();
+    image.set_data(
+        pixBuf.get_pixels(),
+        pixBuf.get_has_alpha() ? Cogl.PixelFormat.RGBA_8888 : Cogl.PixelFormat.RGBA_888,
+        width, height,
+        pixBuf.get_rowstride()
+    );
+
+    let actor = new Clutter.Actor({width: width, height: height});
+    actor.set_content(image);
+
+    return actor;
+}
+
+
 class SpicesUpdate extends Applet.TextIconApplet {
   constructor (metadata, orientation, panelHeight, instance_id) {
     super(orientation, panelHeight, instance_id);
@@ -97,6 +116,14 @@ class SpicesUpdate extends Applet.TextIconApplet {
     this.set_applet_icon_symbolic_name("spices-update");
     this.default_tooltip = "%s %s".format(_("Spices Update"), metadata.version);
     this.set_applet_tooltip(this.default_tooltip);
+
+    this.img_path = ICONS_DIR + "/spices-update-symbolic.svg";
+    //this.general_frequency = 10; //(seconds between two loops)
+    this.angle = 0;
+    this.do_rotation = false;
+    this.interval = 0;
+
+
 
     // Be sure the scripts are executable:
     GLib.spawn_command_line_async("bash -c 'cd %s && chmod 755 *.py *.sh'".format(SCRIPTS_DIR));
@@ -307,7 +334,8 @@ class SpicesUpdate extends Applet.TextIconApplet {
       "general_frequency",
       this.on_frequency_changed,
       null);
-      this.refreshInterval = 3600*this.general_frequency;
+      this.refreshInterval = 3600 * this.general_frequency;
+      if (DEBUG()) this.refreshInterval = 120 * this.general_frequency;
 
     this.settings.bindProperty(Settings.BindingDirection.IN,
       "general_warning",
@@ -590,7 +618,8 @@ class SpicesUpdate extends Applet.TextIconApplet {
       Mainloop.source_remove(this.loopId);
     }
     this.loopId = 0;
-    this.refreshInterval = 3600*this.general_frequency;
+    this.refreshInterval = 3600 * this.general_frequency;
+    if (DEBUG()) this.refreshInterval = 120 * this.general_frequency;
     this.loopId = Mainloop.timeout_add_seconds(this.refreshInterval, () => this.updateLoop());
   }; // End of on_frequency_changed
 
@@ -605,7 +634,8 @@ class SpicesUpdate extends Applet.TextIconApplet {
     this._set_main_label();
 
     // Refresh intervall:
-    this.refreshInterval = 3600*this.general_frequency;
+    this.refreshInterval = 3600 * this.general_frequency;
+    if (DEBUG()) this.refreshInterval = 120 * this.general_frequency;
 
     // Types to check
     this.types_to_check = [];
@@ -1211,6 +1241,8 @@ class SpicesUpdate extends Applet.TextIconApplet {
     // Queue of the http request
     _httpSession.queue_message(msg, Lang.bind(this, function(_httpSession, message) {
       if (message.status_code === Soup.KnownStatusCode.OK && iteration === this.iteration) {
+        this.do_rotation = false;
+        this.updateUI();
         let data = message.response_body.data;
         let result = subject_regexp.exec(data.toString());
         this.details_by_uuid[uuid] = result[1].toString();
@@ -1486,6 +1518,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
   _on_refresh_pressed() {
     this.first_loop = false;
     this.refresh_requested = true;
+    this.do_rotation = true;
     this.updateLoop();
   }; // End of _on_refresh_pressed
 
@@ -1539,8 +1572,32 @@ class SpicesUpdate extends Applet.TextIconApplet {
     }
   }; // End of set_icon_color
 
+  icon_rotate() {
+    this.angle = Math.round(this.angle + 3) % 360;
+    let size = Math.round(this.getPanelIconSize(St.IconType.SYMBOLIC)/global.ui_scale);
+    this.img_icon = getImageAtScale(this.img_path, size, size);
+    this.img_icon.set_pivot_point(0.5, 0.5);
+    this.img_icon.set_rotation_angle(Clutter.RotateAxis.Z_AXIS, this.angle);
+    this._applet_icon_box.set_child(this.img_icon);
+    if (this.isHorizontal === true)
+      this._applet_icon_box.set_fill(true, false);
+    else
+      this._applet_icon_box.set_fill(false, true);
+    this._applet_icon_box.set_alignment(St.Align.MIDDLE,St.Align.MIDDLE);
+  }; // End of icon_rotate
+
   // This updates the display of the applet and the tooltip
   updateUI() {
+    if (this.do_rotation) {
+      if (this.interval === 0)
+        this.interval = setInterval(() => this.icon_rotate(), 10);
+    } else if (this.interval != 0){
+      clearInterval(this.interval);
+      this.interval = 0;
+      this.angle = 0;
+      this.set_applet_icon_symbolic_name("spices-update");
+    }
+
     this.set_icon_color();
     if (this.nb_to_update > 0 || this.nb_to_watch > 0) {
       var _tooltip = this.default_tooltip;
@@ -1588,7 +1645,8 @@ class SpicesUpdate extends Applet.TextIconApplet {
         this.refreshInterval = 5;
       } else {
         if (!this.first_loop) {
-          this.refreshInterval = 3600*this.general_frequency;
+          this.refreshInterval = 3600 * this.general_frequency;
+          if (DEBUG()) this.refreshInterval = 120 * this.general_frequency;
           var monitor, Id;
           for (let tuple of this.monitors) {
             [monitor, Id] = tuple;
@@ -1663,6 +1721,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
       this._set_main_label();
     }
     if (this.applet_running === true && this.loopId === 0) {
+      this.do_rotation = false;
       // One more loop !
       this.loopId = Mainloop.timeout_add_seconds(this.refreshInterval, () => this.updateLoop());
     }
@@ -1689,6 +1748,11 @@ class SpicesUpdate extends Applet.TextIconApplet {
       Mainloop.source_remove(this.loopId);
     }
     this.loopId = 0;
+
+    if (this.interval != 0){
+      clearInterval(this.interval);
+    }
+
     var monitor, Id;
     for (let tuple of this.monitors) {
       [monitor, Id] = tuple;
