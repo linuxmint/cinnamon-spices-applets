@@ -10,7 +10,7 @@ Places Center is a feature-rich, cross-platform Cinnamon applet that provides ea
 * Supports additional user defined places
 * Easy to read layout with multiple columns
 * Ability to set the panel icon and text (symbolic icons supported)
-* Option to show recent documents
+* Option to show recent documents (click on a recent document to open it; right-click to open the folder that contains it)
 * Quick keyboard access (default super+p)
 * Search tool that allows you to quickly search for files and folders (supports regular expressions)
 * Add middle click to open

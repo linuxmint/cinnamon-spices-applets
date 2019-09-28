@@ -12,18 +12,25 @@
 			"Complex": "complex"
 		},
 		"description": "Display mode",
-		"tooltip": "Minimal mode: Just shows the icon, time in tooltip\n\nClassic mode: The way the Uptime applet have always worked.\n\nSimple mode: The first two non-zero values of year,day,hour and minute.\n\nComplex mode: Use %y,%d,%h and %m to insert time values into the pattern field. Use %H and %M to insert hours and minutes with a leading zero for values less than ten."
+		"tooltip": "Classic mode: The way the Uptime applet have always worked.\n\nSimple mode: The first two non-zero values of year,day,hour and minute.\n\nComplex mode: Use %y,%d,%h and %m to insert time values into the pattern field. Use %H and %M to insert hours and minutes with a leading zero for values less than ten."
 	},
     "minimal_mode": {
         "type": "checkbox",
         "default": false,
         "description": "Minimal mode",
-        "tooltip": "Minimal mode shows just the icon, and the time will be shown in the tooltip (formatted according to the display mode above)."
+		"tooltip": "Just an icon, uptime in tooltip."
+    },
+    "show_icon": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Show icon",
+		"tooltip": "Show or hide the icon. Not available in minimal mode.",
+		"dependency": "minimal_mode!=true"
     },
 	"prefix": {
 		"type": "entry",
 		"default": "",
-		"description": "Prefix (all modes)",
+		"description": "Prefix (all display modes)",
 		"tooltip": "Text shown before the uptime text, for example 'Uptime :'."
 	},
 	"pattern": {

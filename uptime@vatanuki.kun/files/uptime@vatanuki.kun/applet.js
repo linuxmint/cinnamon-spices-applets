@@ -32,19 +32,24 @@ MyApplet.prototype = {
 			this._prefix = "";
 			this._pattern = "";
 			this._text_css = "";
+			this._show_icon = true;
 			this._minimal_mode = false;
 
 			// Setup the settings
 			this.settings = new Settings.AppletSettings(this, metadata.uuid, this.instance_id);
 			this.settings.bind("display", "_display", this.settings_changed);
+			this.settings.bind("show_icon", "_show_icon", this.settings_changed);
 			this.settings.bind("minimal_mode", "_minimal_mode", this.settings_changed);
 			this.settings.bind("prefix", "_prefix", this.settings_changed);
 			this.settings.bind("pattern", "_pattern", this.settings_changed);
 			this.settings.bind("text_css", "_text_css", this.settings_changed);
 
-			// Set a clock icon on the applet
-			this.set_applet_icon_symbolic_name("preferences-system-time-symbolic");
-
+			if (this._minimal_mode || this._show_icon)
+				// Set a clock icon on the applet
+				this.set_applet_icon_symbolic_name("preferences-system-time-symbolic");
+			else
+				this.hide_applet_icon ();
+	
 			// Set label style, refresh and hookup a one minute update function
 			this._applet_label.set_style(this._text_css);
 			this._refresh();
@@ -67,7 +72,6 @@ MyApplet.prototype = {
 		let label_text = "";
 		let tooltip_text = _("Uptime : Shows the time that have passed since last reboot.");
 
-		// Get the correct description based on user preferences
 		if (this._display == "classic")
 			label_text = this._prefix + this.GetClassicDescription(years, days, hours, minutes)
 		else if (this._display == "simple")
@@ -79,6 +83,7 @@ MyApplet.prototype = {
 			tooltip_text = label_text;
 			label_text = "";
 		}
+
 		// Set application label (including prefix)
 		this.set_applet_label(label_text);
 		// Set tooltip of the applet
@@ -123,7 +128,15 @@ MyApplet.prototype = {
 	},
 	// Called when the settings have changed
 	settings_changed: function () {
+
+		if (this._minimal_mode || this._show_icon)
+			// Set a clock icon on the applet
+			this.set_applet_icon_symbolic_name("preferences-system-time-symbolic");
+		else
+			this.hide_applet_icon ();
+
 		this._applet_label.set_style(this._text_css);
+
 		this._refresh();
 	},
 	// Refresh the uptime when the application is clicked

@@ -45,7 +45,7 @@
         "recentSection": {
             "type": "section",
             "title": "Recent documents",
-            "keys": ["showRecentDocuments", "recentSizeLimit"]
+            "keys": ["showRecentDocuments", "recentSizeLimit", "btnPrivacy"]
         }
     },
 
@@ -158,14 +158,25 @@
     },
 
     "recentSizeLimit": {
-        "type": "spinbutton",
+        "type": "combobox",
         "default": 10,
-        "min": 0,
-        "max": 30,
-        "units": "",
-        "step": 1,
+        "options": {
+            "5": 5,
+            "10": 10,
+            "15": 15,
+            "20": 20,
+            "25": 25,
+            "30": 30,
+            "All Recent Documents": 0
+        },
         "description": "Number to show",
         "indent": true,
         "dependency": "showRecentDocuments"
+    },
+
+    "btnPrivacy": {
+        "type": "button",
+        "description": "Privacy",
+        "callback": "on_btnPrivacy_pressed"
     }
 }

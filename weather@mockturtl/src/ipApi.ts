@@ -8,26 +8,25 @@
 
 class IpApi {
     query = "https://ipapi.co/json";
-    app: MyApplet;
+    app: WeatherApplet;
 
 
-    constructor(_app: MyApplet) {
+    constructor(_app: WeatherApplet) {
         this.app = _app;
     }
 
-
-    async GetLocation() {
+    async GetLocation(): Promise<boolean> {
         let json: IpApiPayload;
         try {
             json = await this.app.LoadJsonAsync(this.query);
-            if (json == null) {                         // Bad response
-                this.app.showError(this.app.errMsg.label.service, this.app.errMsg.desc.noResponse);
-                return false;
-            }
         }
         catch(e) {
-            this.app.log.Error("IpApi service error: " + e);
-            this.app.showError(this.app.errMsg.label.generic, this.app.errMsg.desc.cantGetLoc);
+            this.app.HandleHTTPError("ipapi", e, this.app);
+            return false;
+        }
+
+        if (!json) {                         // Bad response
+            this.app.HandleError({type: "soft", detail: "no api response"});
             return false;
         }
 
@@ -40,7 +39,7 @@ class IpApi {
         
     };
 
-    ParseInformation(json: any) {
+    ParseInformation(json: any): boolean {
         try {
             let loc = json.latitude + "," + json.longitude;
             //this.app._location == (json.latitude + "," + json.longitude);
@@ -55,13 +54,14 @@ class IpApi {
         }
         catch(e) {
             this.app.log.Error("IPapi parsing error: " + e);
-            this.app.showError(this.app.errMsg.label.generic, this.app.errMsg.desc.cantGetLoc);
+            this.app.HandleError({type: "hard", detail: "no location", service: "ipapi", message: _("Could not obtain location")});
             return false;
         }
     };
 
-    HandleErrorResponse(json: any) {
-        this.app.log.Error("IpApi error response: " + json.reason);       
+    HandleErrorResponse(json: any): void {
+        this.app.HandleError({type: "hard", detail: "bad api response", message: _("Location Service responded with errors, please see the logs in Looking Glass"), service: "ipapi"})
+        this.app.log.Error("IpApi Responsd with Error: " + json.reason);       
     };
 };
 
@@ -86,9 +86,8 @@ interface IpApiPayload {
     org: string,
     error?: string
 }
-/*
+/* Half sanitized example payload
 
-Half sanitized example payload, courtesy of gr3q
 {   
     "ip": "8.8.8.8",
     "city": "Cambridge",

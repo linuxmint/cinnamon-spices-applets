@@ -8,52 +8,56 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-19 21:13-0700\n"
+"POT-Creation-Date: 2019-09-08 19:11+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
 
-#: applet.js:178
+#: applet.js:144
+msgid "(Right click to open folder)"
+msgstr ""
+
+#: applet.js:166
 msgid "Places"
 msgstr ""
 
-#: applet.js:291
+#: applet.js:281
 msgid "Search Home Folder"
 msgstr ""
 
-#: applet.js:305
+#: applet.js:304
 msgid "SYSTEM"
 msgstr ""
 
-#: applet.js:314
+#: applet.js:313
 msgid "Search File System"
 msgstr ""
 
-#: applet.js:330
+#: applet.js:338
 msgid "RECENT DOCUMENTS"
 msgstr ""
 
-#: applet.js:344
+#: applet.js:352
 msgid "Clear"
 msgstr ""
 
-#: applet.js:388
+#: applet.js:395
 msgid "Computer"
 msgstr ""
 
-#: applet.js:394
+#: applet.js:401
 msgid "File System"
 msgstr ""
 
-#: applet.js:410
+#: applet.js:417
 msgid "Network"
 msgstr ""
 
-#: applet.js:513
+#: applet.js:554
 msgid "Trash"
 msgstr ""
 
@@ -127,6 +131,30 @@ msgstr ""
 
 #: search.py:259
 msgid " - direcotry already searched"
+msgstr ""
+
+#. metadata.json->name
+msgid "Places Center"
+msgstr ""
+
+#. metadata.json->description
+msgid "Provides an easy-to-read layout to access your places"
+msgstr ""
+
+#. metadata.json->comments
+msgid ""
+"Places Center is a feature-rich, cross-platform Cinnamon applet that "
+"provides easy access to all of your most-used places. Feel free to "
+"contribute by submitting pull requests, bug reports and feature requests to "
+"my github repo."
+msgstr ""
+
+#. metadata.json->contributors
+msgid "Stephen Collins - Author"
+msgstr ""
+
+#. metadata.json->contributors
+msgid "kehugter - Added configurability to middle click"
 msgstr ""
 
 #. settings-schema.json->generalPage->title
@@ -252,30 +280,38 @@ msgstr ""
 msgid "Show recent documents"
 msgstr ""
 
+#. settings-schema.json->recentSizeLimit->options
+msgid "5"
+msgstr ""
+
+#. settings-schema.json->recentSizeLimit->options
+msgid "10"
+msgstr ""
+
+#. settings-schema.json->recentSizeLimit->options
+msgid "15"
+msgstr ""
+
+#. settings-schema.json->recentSizeLimit->options
+msgid "20"
+msgstr ""
+
+#. settings-schema.json->recentSizeLimit->options
+msgid "25"
+msgstr ""
+
+#. settings-schema.json->recentSizeLimit->options
+msgid "30"
+msgstr ""
+
+#. settings-schema.json->recentSizeLimit->options
+msgid "All Recent Documents"
+msgstr ""
+
 #. settings-schema.json->recentSizeLimit->description
 msgid "Number to show"
 msgstr ""
 
-#. metadata.json->name
-msgid "Places Center"
-msgstr ""
-
-#. metadata.json->description
-msgid "Provides an easy-to-read layout to access your places"
-msgstr ""
-
-#. metadata.json->comments
-msgid ""
-"Places Center is a feature-rich, cross-platform Cinnamon applet that "
-"provides easy access to all of your most-used places. Feel free to "
-"contribute by submitting pull requests, bug reports and feature requests to "
-"my github repo."
-msgstr ""
-
-#. metadata.json->contributors
-msgid "Stephen Collins - Author"
-msgstr ""
-
-#. metadata.json->contributors
-msgid "kehugter - Added configurability to middle click"
+#. settings-schema.json->btnPrivacy->description
+msgid "Privacy"
 msgstr ""
