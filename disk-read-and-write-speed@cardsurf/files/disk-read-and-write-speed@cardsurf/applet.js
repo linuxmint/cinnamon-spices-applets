@@ -44,6 +44,11 @@ InputOutputInfo.prototype = {
         this.inputs_outputs_in_progress = 0;
         this.time_inputs_outputs_ms = 0;
         this.weighted_time_inputs_outputs_ms = 0;
+        this.discards_completed = 0;
+        this.discards_merged = 0;
+        this.sectors_discarded = 0;
+        this.time_discarding = 0;
+
         this.bytes_read = 0;
         this.bytes_written = 0;
 
@@ -80,9 +85,15 @@ MyApplet.prototype = {
         this.inputs_outputs_in_progress_index = 11;
         this.time_inputs_outputs_ms_index = 12;
         this.weighted_time_inputs_outputs_ms_index = 13;
-        this.bytes_read_index = 14;
-        this.bytes_written_index = 15;
+        this.discards_completed_index = 14;
+        this.discards_merged_index = 15;
+        this.sectors_discarded_index = 16;
+        this.time_discarding_index = 17;
+
+        this.bytes_read_index = -1;
+        this.bytes_written_index = -1;
         this.byte_indexes = [this.bytes_read_index, this.bytes_written_index];
+
         this.pair_device_index = 0;
         this.pair_alias_index = 1;
         this.default_sector_size = 512;
@@ -119,6 +130,10 @@ MyApplet.prototype = {
 
         this.update_every = 1.0;
         this.show_hover = true;
+        this.show_total_bytes_read = true;
+        this.show_total_bytes_written = true;
+        this.total_bytes_read_column_name = "Read";
+        this.total_bytes_written_column_name = "Written";
         this.gui_speed_type = AppletConstants.GuiSpeedType.COMPACT;
         this.gui_decimal_places = AppletConstants.DecimalPlaces.AUTO;
         this.gui_text_css = ""
@@ -135,6 +150,7 @@ MyApplet.prototype = {
         this.column_indexes_insert = [];
         this.column_spaces = 3;
         this.column_index_sort = 2;
+        this.column_type_sort = AppletConstants.SortColumn.OTHER;
         this.column_sort_order = AppletConstants.SortOrder.ASCENDING;
         this.hover_popup_decimal_places = AppletConstants.DecimalPlaces.AUTO;
         this.launch_terminal = true;
@@ -142,6 +158,7 @@ MyApplet.prototype = {
         this._bind_settings();
         this._init_files();
         this._init_disks();
+        this._init_byte_indexes();
         this._init_columns();
         this._init_terminal_process();
         this._init_menu_item_gui();
@@ -158,6 +175,7 @@ MyApplet.prototype = {
                 [Settings.BindingDirection.IN, "unit_type", null],
                 [Settings.BindingDirection.IN, "update_every", null],
                 [Settings.BindingDirection.IN, "column_spaces", null],
+                [Settings.BindingDirection.IN, "column_type_sort", null],
                 [Settings.BindingDirection.IN, "column_index_sort", null],
                 [Settings.BindingDirection.IN, "column_sort_order", null],
                 [Settings.BindingDirection.IN, "hover_popup_decimal_places", null],
@@ -167,6 +185,11 @@ MyApplet.prototype = {
                 [Settings.BindingDirection.IN, "gui_read_icon_filename", this.on_gui_icon_changed],
                 [Settings.BindingDirection.IN, "gui_written_icon_filename", this.on_gui_icon_changed],
                 [Settings.BindingDirection.IN, "show_hover", this.on_show_hover_changed],
+                [Settings.BindingDirection.IN, "show_total_bytes_read", this.on_column_indexes_string_changed],
+                [Settings.BindingDirection.IN, "show_total_bytes_written", this.on_column_indexes_string_changed],
+                [Settings.BindingDirection.IN, "total_bytes_read_column_name", this.on_column_indexes_string_changed],
+                [Settings.BindingDirection.IN, "total_bytes_written_column_name",
+                                                this.on_column_indexes_string_changed],
                 [Settings.BindingDirection.IN, "hover_popup_headers_css", this.on_hover_popup_css_changed],
                 [Settings.BindingDirection.IN, "hover_popup_rows_css", this.on_hover_popup_css_changed],
                 [Settings.BindingDirection.IN, "devices_regex_string", this.on_devices_regex_string_changed],
@@ -237,10 +260,18 @@ MyApplet.prototype = {
     get_column_names_insert: function () {
         let column_names_insert = [];
         for(let column_index of this.column_indexes_insert) {
-            if(column_index < this.column_names.length) {
+            if(column_index < this.bytes_read_index) {
                 let column_name = this.column_names[column_index];
                 column_names_insert.push(column_name);
             }
+        }
+        let is_bytes_read_column = this.array_contains(this.column_indexes_insert, this.bytes_read_index);
+        if(is_bytes_read_column) {
+            column_names_insert.push(this.total_bytes_read_column_name);
+        }
+        let is_bytes_written_column = this.array_contains(this.column_indexes_insert, this.bytes_written_index);
+        if(is_bytes_written_column) {
+            column_names_insert.push(this.total_bytes_written_column_name);
         }
         return column_names_insert;
     },
@@ -261,6 +292,12 @@ MyApplet.prototype = {
             if(column_index <= this.column_names.length) {
                 column_indexes_insert.push(column_index);
             }
+        }
+        if(this.show_total_bytes_read) {
+            column_indexes_insert.push(this.bytes_read_index);
+        }
+        if(this.show_total_bytes_written) {
+            column_indexes_insert.push(this.bytes_written_index);
         }
         return column_indexes_insert;
     },
@@ -378,6 +415,23 @@ MyApplet.prototype = {
 
     array_contains: function (array, element) {
         return array.indexOf(element) > -1;
+    },
+
+    _init_byte_indexes: function () {
+        let string = this.read_diskstats().trim();
+        let lines = string.split(this.newlines_regex);
+        let line = lines[0].trim();
+        let values = line.split(this.whitespaces_regex);
+        let index = values.length;
+
+        this.bytes_read_index = index;
+        this.bytes_written_index = index + 1;
+        this.byte_indexes = [this.bytes_read_index, this.bytes_written_index];
+    },
+
+    read_diskstats: function () {
+        let string = this.read_string(this.file_diskstats, "");
+        return string;
     },
 
     _init_columns: function () {
@@ -508,13 +562,8 @@ MyApplet.prototype = {
     },
 
     _run_calculate_speed: function () {
-        if(this.update_every > 0) {
-            this._calculate_speed();
-            Mainloop.timeout_add(this.update_every * 1000, Lang.bind(this, this._run_calculate_speed_running));
-        }
-        else {
-            Mainloop.timeout_add(1000, Lang.bind(this, this._run_calculate_speed_running));
-        }
+        this._calculate_speed();
+        Mainloop.timeout_add(this.update_every * 1000, Lang.bind(this, this._run_calculate_speed_running));
     },
 
     _calculate_speed: function () {
@@ -538,11 +587,6 @@ MyApplet.prototype = {
         let string = this.read_diskstats();
         this.update_input_output_infos(string);
         this.udpate_diskstats_table(string);
-    },
-
-    read_diskstats: function () {
-        let string = this.read_string(this.file_diskstats, "");
-        return string;
     },
 
     update_input_output_infos: function (string) {
@@ -579,6 +623,14 @@ MyApplet.prototype = {
         info.inputs_outputs_in_progress = parseInt(values[this.inputs_outputs_in_progress_index]);
         info.time_inputs_outputs_ms = parseInt(values[this.time_inputs_outputs_ms_index]);
         info.weighted_time_inputs_outputs_ms = parseInt(values[this.weighted_time_inputs_outputs_ms_index]);
+
+        if(values.length >= this.discards_completed_index)
+        {
+            info.discards_completed = parseInt(values[this.discards_completed_index]);
+            info.discards_merged = parseInt(values[this.discards_merged_index]);
+            info.sectors_discarded = parseInt(values[this.sectors_discarded_index]);
+            info.time_discarding = parseInt(values[this.time_discarding_index]);
+        }
     },
 
     update_input_output_info_bytes: function (info, device_name) {
@@ -684,10 +736,28 @@ MyApplet.prototype = {
     },
 
     sort_columns: function (table) {
-        table = this.column_index_sort == this.device_name_index ?
+        if(this.column_type_sort == AppletConstants.SortColumn.OTHER &&
+           this.column_index_sort >= this.bytes_read_index) {
+           return table;
+        }
+
+        let column_index = this.get_integer_column_index_sort();
+        table = this.column_type_sort == AppletConstants.SortColumn.OTHER &&
+                this.column_index_sort == this.device_name_index ?
                 table.sort(this.sort_string_rows(this.column_index_sort, this.column_sort_order)) :
-                table.sort(this.sort_integer_rows(this.column_index_sort, this.column_sort_order));
+                table.sort(this.sort_integer_rows(column_index, this.column_sort_order));
         return table;
+    },
+
+    get_integer_column_index_sort: function () {
+        let column_index = this.column_index_sort;
+        if(this.column_type_sort == AppletConstants.SortColumn.BYTES_READ) {
+            column_index = this.bytes_read_index;
+        };
+        if(this.column_type_sort == AppletConstants.SortColumn.BYTES_WRITTEN) {
+            column_index = this.bytes_written_index;
+        };
+        return column_index;
     },
 
     sort_string_rows: function (column_index, sort_order) {

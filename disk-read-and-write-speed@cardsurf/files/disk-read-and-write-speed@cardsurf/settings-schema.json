@@ -26,7 +26,7 @@
     "update_every": {
         "type": "spinbutton",
         "default": 1.0,
-        "min": 0.0,
+        "min": 0.1,
         "max": 60.0,
         "step": 0.1,
         "units": "seconds",
@@ -110,6 +110,30 @@
         "description": "Show total read and write on hover",
         "tooltip": "Show the hover popup with total amount of data read and written"
      },
+    "show_total_bytes_read" : {
+        "type" : "checkbox",
+        "default" : true,
+        "description": "Show total bytes read",
+        "tooltip": "Show the column with the total amount of bytes read in the hover popup"
+     },
+    "show_total_bytes_written" : {
+        "type" : "checkbox",
+        "default" : true,
+        "description": "Show total bytes written",
+        "tooltip": "Show the column with the total amount of bytes written in the hover popup"
+     },
+    "total_bytes_read_column_name" : {
+        "type" : "entry",
+        "default" : "Read",
+        "description": "Total bytes read column name",
+        "tooltip": "A name of the column with the total amount of bytes read in the hover popup"
+     },
+    "total_bytes_written_column_name" : {
+        "type" : "entry",
+        "default" : "Written",
+        "description": "Total bytes written column name",
+        "tooltip": "A name of the column with the total amount of bytes written in the hover popup"
+     },
     "devices_regex_string": {
         "type": "entry",
         "default": "sd",
@@ -124,13 +148,13 @@
     },
     "column_names_string" : {
         "type": "entry",
-        "default": "Major number,Minor number,Disk,Reads completed,Reads merged,Sectors read,Reads ms,Writes completed,Writes merged,Sectors written,Writes ms,IO progress,IO ms,Weighted IO ms,Read,Written",
+        "default": "Major number,Minor number,Disk,Reads completed,Reads merged,Sectors read,Reads ms,Writes completed,Writes merged,Sectors written,Writes ms,IO progress,IO ms,Weighted IO ms,Discards completed,Discards merged,Sectors discarded,Time discarding",
         "description": "Headers",
         "tooltip": "A comma separated list of column headers to show in the hover popup"
     },
     "column_indexes_string" : {
         "type": "entry",
-        "default": "2,14,15",
+        "default": "2",
         "description": "Columns",
         "tooltip": "A comma separated list of column indexes to show in the hover popup"
     },
@@ -144,14 +168,25 @@
         "description": "Spaces",
         "tooltip" : "A number of spaces between columns in the hover popup"
     },
+    "column_type_sort": {
+        "type": "combobox",
+        "default" : 2,
+        "description" : "Column sort",
+        "options" : {
+            "Bytes read" : 0,
+            "Bytes written" : 1,
+            "Other" : 2
+        },
+        "tooltip" : "A column used to sort rows in the hover popup"
+    },
     "column_index_sort": {
         "type": "spinbutton",
         "default": 2,
         "min": 0,
-        "max": 15,
+        "max": 17,
         "step": 1,
         "units": "",
-        "description": "Sort",
+        "description": "Sort column index",
         "tooltip" : "An index of a column that is used to sort rows in the hover popup"
     },
     "column_sort_order": {
