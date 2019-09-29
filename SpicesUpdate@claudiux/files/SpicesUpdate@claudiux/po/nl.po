@@ -667,3 +667,6 @@ msgstr "Als u niet wilt dat een extensie wordt gecontroleerd, stelt u deze in op
 #. 3.8->settings-schema.json->unprotected_themes->tooltip
 msgid "If you do not want a theme to be checked, set it to FALSE."
 msgstr "Als u niet wilt dat een thema wordt gecontroleerd, stelt u deze in op FALSE"
+
+#~ msgid "(Refresh to see the description)"
+#~ msgstr "(Vernieuwen om de beschrijving te zien)"
