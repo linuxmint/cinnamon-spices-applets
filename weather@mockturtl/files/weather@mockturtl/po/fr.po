@@ -80,6 +80,14 @@ msgstr "Pression :"
 msgid "Wind:"
 msgstr "Vent :"
 
+#: 3.0/applet.js:628 3.8/applet.js:537
+msgid "Today"
+msgstr "aujourd'hui"
+
+#: 3.0/applet.js:630 3.8/applet.js:539
+msgid "Tomorrow"
+msgstr "demain"
+
 #: applet.js:1026 3.6/applet.js:1026 3.8/applet.js:1209
 msgid "Sunday"
 msgstr "Dimanche"
