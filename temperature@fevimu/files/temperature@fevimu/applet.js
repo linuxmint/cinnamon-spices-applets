@@ -317,7 +317,7 @@ CPUTemperatureApplet.prototype = {
           }
           if (match[i - 1].indexOf(':') > -1) {
             entry.value = match[i];
-          } else if (entries[entries.length - 1].value) {
+          } else if (entries.length > 0 && entries[entries.length - 1].value) {
             entries[entries.length - 1][match[i - 1]] = match[i];
           }
         }
