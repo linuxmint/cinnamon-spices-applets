@@ -72,26 +72,25 @@ const DATA_SERVICE = {
 };
 const WEATHER_LOCATION = "location";
 const WEATHER_USE_SYMBOLIC_ICONS_KEY = 'useSymbolicIcons';
-var KEYS;
-(function (KEYS) {
-    KEYS["WEATHER_DATA_SERVICE"] = "dataService";
-    KEYS["WEATHER_API_KEY"] = "apiKey";
-    KEYS["WEATHER_TEMPERATURE_UNIT_KEY"] = "temperatureUnit";
-    KEYS["WEATHER_TEMPERATURE_HIGH_FIRST_KEY"] = "temperatureHighFirst";
-    KEYS["WEATHER_WIND_SPEED_UNIT_KEY"] = "windSpeedUnit";
-    KEYS["WEATHER_CITY_KEY"] = "locationLabelOverride";
-    KEYS["WEATHER_TRANSLATE_CONDITION_KEY"] = "translateCondition";
-    KEYS["WEATHER_VERTICAL_ORIENTATION_KEY"] = "verticalOrientation";
-    KEYS["WEATHER_SHOW_TEXT_IN_PANEL_KEY"] = "showTextInPanel";
-    KEYS["WEATHER_SHOW_COMMENT_IN_PANEL_KEY"] = "showCommentInPanel";
-    KEYS["WEATHER_SHOW_SUNRISE_KEY"] = "showSunrise";
-    KEYS["WEATHER_SHOW_24HOURS_KEY"] = "show24Hours";
-    KEYS["WEATHER_FORECAST_DAYS"] = "forecastDays";
-    KEYS["WEATHER_REFRESH_INTERVAL"] = "refreshInterval";
-    KEYS["WEATHER_PRESSURE_UNIT_KEY"] = "pressureUnit";
-    KEYS["WEATHER_SHORT_CONDITIONS_KEY"] = "shortConditions";
-    KEYS["WEATHER_MANUAL_LOCATION"] = "manualLocation";
-})(KEYS || (KEYS = {}));
+const KEYS = {
+    WEATHER_DATA_SERVICE: "dataService",
+    WEATHER_API_KEY: "apiKey",
+    WEATHER_TEMPERATURE_UNIT_KEY: "temperatureUnit",
+    WEATHER_TEMPERATURE_HIGH_FIRST_KEY: "temperatureHighFirst",
+    WEATHER_WIND_SPEED_UNIT_KEY: "windSpeedUnit",
+    WEATHER_CITY_KEY: "locationLabelOverride",
+    WEATHER_TRANSLATE_CONDITION_KEY: "translateCondition",
+    WEATHER_VERTICAL_ORIENTATION_KEY: "verticalOrientation",
+    WEATHER_SHOW_TEXT_IN_PANEL_KEY: "showTextInPanel",
+    WEATHER_SHOW_COMMENT_IN_PANEL_KEY: "showCommentInPanel",
+    WEATHER_SHOW_SUNRISE_KEY: "showSunrise",
+    WEATHER_SHOW_24HOURS_KEY: "show24Hours",
+    WEATHER_FORECAST_DAYS: "forecastDays",
+    WEATHER_REFRESH_INTERVAL: "refreshInterval",
+    WEATHER_PRESSURE_UNIT_KEY: "pressureUnit",
+    WEATHER_SHORT_CONDITIONS_KEY: "shortConditions",
+    WEATHER_MANUAL_LOCATION: "manualLocation"
+};
 Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
 function _(str) {
     return Gettext.dgettext(UUID, str);

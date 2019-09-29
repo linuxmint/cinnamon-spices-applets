@@ -193,7 +193,7 @@ class DarkSky {
         let processed = summary.split(" ");
         let result = "";
         for (let i = 0; i < 2; i++) {
-            if (!/[\(\)]/.test(processed[i]) && (this.DarkSkyFilterWords.indexOf(processed[i]) != -1)) {
+            if (!/[\(\)]/.test(processed[i]) && !this.WordBanned(processed[i])) {
                 result = result + processed[i] + " ";
             }
         }
@@ -211,6 +211,9 @@ class DarkSky {
             }
         }
         return result;
+    }
+    WordBanned(word) {
+        return this.DarkSkyFilterWords.indexOf(word) != -1;
     }
     ResolveIcon(icon) {
         switch (icon) {

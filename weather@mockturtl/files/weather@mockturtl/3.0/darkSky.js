@@ -1,8 +1,9 @@
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
         function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
@@ -240,7 +241,7 @@ var DarkSky = (function () {
         var processed = summary.split(" ");
         var result = "";
         for (var i = 0; i < 2; i++) {
-            if (!/[\(\)]/.test(processed[i]) && (this.DarkSkyFilterWords.indexOf(processed[i]) != -1)) {
+            if (!/[\(\)]/.test(processed[i]) && !this.WordBanned(processed[i])) {
                 result = result + processed[i] + " ";
             }
         }
@@ -258,6 +259,9 @@ var DarkSky = (function () {
             }
         }
         return result;
+    };
+    DarkSky.prototype.WordBanned = function (word) {
+        return this.DarkSkyFilterWords.indexOf(word) != -1;
     };
     DarkSky.prototype.ResolveIcon = function (icon) {
         switch (icon) {

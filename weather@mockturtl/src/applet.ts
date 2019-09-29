@@ -99,24 +99,24 @@ const DATA_SERVICE = {
 const WEATHER_LOCATION = "location"
 const WEATHER_USE_SYMBOLIC_ICONS_KEY = 'useSymbolicIcons'
 
-enum KEYS {
-  WEATHER_DATA_SERVICE = "dataService",
-  WEATHER_API_KEY = "apiKey",
-  WEATHER_TEMPERATURE_UNIT_KEY = "temperatureUnit",
-  WEATHER_TEMPERATURE_HIGH_FIRST_KEY = "temperatureHighFirst",
-  WEATHER_WIND_SPEED_UNIT_KEY = "windSpeedUnit",
-  WEATHER_CITY_KEY = "locationLabelOverride",
-  WEATHER_TRANSLATE_CONDITION_KEY = "translateCondition",
-  WEATHER_VERTICAL_ORIENTATION_KEY = "verticalOrientation",
-  WEATHER_SHOW_TEXT_IN_PANEL_KEY = "showTextInPanel",
-  WEATHER_SHOW_COMMENT_IN_PANEL_KEY = "showCommentInPanel",
-  WEATHER_SHOW_SUNRISE_KEY = "showSunrise",
-  WEATHER_SHOW_24HOURS_KEY = "show24Hours",
-  WEATHER_FORECAST_DAYS = "forecastDays",
-  WEATHER_REFRESH_INTERVAL = "refreshInterval",
-  WEATHER_PRESSURE_UNIT_KEY = "pressureUnit",
-  WEATHER_SHORT_CONDITIONS_KEY = "shortConditions",
-  WEATHER_MANUAL_LOCATION = "manualLocation"
+const  KEYS: SettingKeys  =  {
+  WEATHER_DATA_SERVICE : "dataService",
+  WEATHER_API_KEY:  "apiKey",
+  WEATHER_TEMPERATURE_UNIT_KEY: "temperatureUnit",
+  WEATHER_TEMPERATURE_HIGH_FIRST_KEY:  "temperatureHighFirst",
+  WEATHER_WIND_SPEED_UNIT_KEY: "windSpeedUnit",
+  WEATHER_CITY_KEY:  "locationLabelOverride",
+  WEATHER_TRANSLATE_CONDITION_KEY:  "translateCondition",
+  WEATHER_VERTICAL_ORIENTATION_KEY:  "verticalOrientation",
+  WEATHER_SHOW_TEXT_IN_PANEL_KEY:  "showTextInPanel",
+  WEATHER_SHOW_COMMENT_IN_PANEL_KEY:  "showCommentInPanel",
+  WEATHER_SHOW_SUNRISE_KEY: "showSunrise",
+  WEATHER_SHOW_24HOURS_KEY:  "show24Hours",
+  WEATHER_FORECAST_DAYS:  "forecastDays",
+  WEATHER_REFRESH_INTERVAL: "refreshInterval",
+  WEATHER_PRESSURE_UNIT_KEY: "pressureUnit",
+  WEATHER_SHORT_CONDITIONS_KEY:  "shortConditions",
+  WEATHER_MANUAL_LOCATION:  "manualLocation"
 }
 
 //----------------------------------------------------------------------
@@ -1148,6 +1148,10 @@ interface ForecastUI {
     Day: imports.gi.St.Label,
     Summary: imports.gi.St.Label,
     Temperature: imports.gi.St.Label,
+}
+
+type SettingKeys = {
+  [key: string]: string;
 }
 
 interface WeatherProvider {
