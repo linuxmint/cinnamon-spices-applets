@@ -173,6 +173,7 @@ class DarkSky implements WeatherProvider {
         if (isCoordinate(location)) {
             query = this.query + key + "/" + location + 
             "?exclude=minutely,hourly,flags" + "&units=" + this.unit;
+            this.app.log.Debug(this.app.systemLanguage);
             if (isLangSupported(this.app.systemLanguage, this.supportedLanguages) && this.app._translateCondition) {
                 query = query + "&lang=" + this.app.systemLanguage;
             }
@@ -231,7 +232,7 @@ class DarkSky implements WeatherProvider {
         let processed = summary.split(" ");
         let result = "";
         for (let i = 0; i < 2; i++) {
-            if (!/[\(\)]/.test(processed[i]) && (this.DarkSkyFilterWords.indexOf(processed[i]) != -1)) {
+            if (!/[\(\)]/.test(processed[i]) && !this.WordBanned(processed[i])) {
                 result = result + processed[i] + " ";
             }
         }
@@ -249,6 +250,10 @@ class DarkSky implements WeatherProvider {
             }
         }
         return result;
+    }
+
+    WordBanned(word: string): boolean {
+        return this.DarkSkyFilterWords.indexOf(word) != -1;
     }
 
     ResolveIcon(icon: string): string[] {
