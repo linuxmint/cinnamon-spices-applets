@@ -208,7 +208,7 @@ var WeatherApplet = (function (_super) {
             "unusal payload": _("Service Error"),
         };
         _this.currentLocale = _this.constructJsLocale(GLib.get_language_names()[0]);
-        _this.systemLanguage = _this.currentLocale.split('_')[0];
+        _this.systemLanguage = _this.currentLocale.split('-')[0];
         _this.settings = new Settings.AppletSettings(_this, UUID, instanceId);
         _this.log = new Log(instanceId);
         _this._httpSession.user_agent = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:37.0) Gecko/20100101 Firefox/37.0";

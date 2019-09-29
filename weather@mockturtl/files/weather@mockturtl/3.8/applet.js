@@ -158,7 +158,7 @@ class WeatherApplet extends Applet.TextIconApplet {
             "unusal payload": _("Service Error"),
         };
         this.currentLocale = this.constructJsLocale(GLib.get_language_names()[0]);
-        this.systemLanguage = this.currentLocale.split('_')[0];
+        this.systemLanguage = this.currentLocale.split('-')[0];
         this.settings = new Settings.AppletSettings(this, UUID, instanceId);
         this.log = new Log(instanceId);
         this._httpSession.user_agent = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:37.0) Gecko/20100101 Firefox/37.0";
