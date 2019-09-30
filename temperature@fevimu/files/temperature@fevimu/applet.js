@@ -3,6 +3,7 @@ const PopupMenu = imports.ui.popupMenu;
 const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio; // Needed for file infos
 const Util = imports.misc.util;
+const Lang = imports.lang;
 const Mainloop = imports.mainloop;
 const Applet = imports.ui.applet;
 const Settings = imports.ui.settings;
@@ -43,6 +44,7 @@ CPUTemperatureApplet.prototype = {
     this.on_orientation_changed(orientation); // Initializes for panel orientation
 
     this.isLooping = true;
+    this.waitForCmd = false;
     this.menuItems = [];
     this.state = {};
     this.settings = new Settings.AppletSettings(this.state, metadata.uuid, instance_id);
@@ -68,14 +70,8 @@ CPUTemperatureApplet.prototype = {
     this.menu = new Applet.AppletPopupMenu(this, orientation);
     this.menuManager.addMenu(this.menu);
 
-    this.sensorsPath = this._detectSensors();
-    if (this.sensorsPath) {
-      this.title = _('Error');
-      this.content = _('Run sensors-detect as root. If it doesn\'t help, click here to report with your sensors output!');
-    } else {
-      this.title = _('Warning');
-      this.content = _('Please install lm_sensors. If it doesn\'t help, click here to report with your sensors output!');
-    }
+    this.sensorsPath = null;
+    Util.spawn_async(['which', 'sensors'], Lang.bind(this, this._detectSensors));
 
     this.set_applet_tooltip(_('Temperature'));
 
@@ -127,13 +123,21 @@ CPUTemperatureApplet.prototype = {
     this.settings.finalize();
   },
 
-  _detectSensors: function() {
+  _detectSensors: function(ret) {
     // detect if sensors is installed
-    let ret = GLib.spawn_command_line_sync('which sensors');
-    if (ret[0] && ret[3] === 0) {
-      return ret[1].toString().split('\n', 1)[0]; // find the path of the sensors
+    if (ret != "") {
+      this.sensorsPath = ret.toString().split('\n', 1)[0]; // find the path of the sensors
+    } else {
+      this.sensorsPath = null;
     }
-    return null;
+
+    if (this.sensorsPath) {
+      this.title = _('Error');
+      this.content = _('Run sensors-detect as root. If it doesn\'t help, click here to report with your sensors output!');
+    } else {
+      this.title = _('Warning');
+      this.content = _('Please install lm_sensors. If it doesn\'t help, click here to report with your sensors output!');
+    }
   },
 
   buildMenu: function(items) {
@@ -161,15 +165,22 @@ CPUTemperatureApplet.prototype = {
     if (!this.isLooping) {
       return false;
     }
+
+    if (this.sensorsPath && !this.waitForCmd) {
+      this.waitForCmd = true;
+      Util.spawn_async([this.sensorsPath], Lang.bind(this, this._updateTemperature));
+    }
+
+    return true;
+  },
+
+  _updateTemperature: function(sensorsOutput) {
     let items = [];
     let tempInfo = null;
     let temp = 0;
 
-    if (this.sensorsPath) {
-      let sensorsOutput = GLib.spawn_command_line_sync(this.sensorsPath); //get the output of the sensors command
-
-      if (sensorsOutput[0]) {
-        tempInfo = this._findTemperatureFromSensorsOutput(sensorsOutput[1].toString()); //get temperature from sensors
+    if (sensorsOutput != "") {
+      tempInfo = this._findTemperatureFromSensorsOutput(sensorsOutput.toString()); //get temperature from sensors
       }
 
       if (tempInfo) {
@@ -219,7 +230,6 @@ CPUTemperatureApplet.prototype = {
         } else {
           this.title = this._formatTemp(temp, true);
           this.actor.style = "";
-        }
       }
     }
 
@@ -244,6 +254,8 @@ CPUTemperatureApplet.prototype = {
     } else {
       this.menuItems = items;
     }
+
+    this.waitForCmd = false;
 
     return true;
   },
