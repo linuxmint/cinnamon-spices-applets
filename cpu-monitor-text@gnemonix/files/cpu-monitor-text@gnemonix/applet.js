@@ -90,9 +90,9 @@ MyApplet.prototype = {
 			this.usage = Math.round((this.current - this.last) / delta);
 			this.last = this.current;
 
-			this.last_total = this.gtop.total;
 		}
 
+		this.last_total = this.gtop.total;
 		let percent = Math.round(this.max_percentage - this.usage);
 		this.set_applet_label(this.cpu_label + " " + this._pad(percent) + "%");
 	},
