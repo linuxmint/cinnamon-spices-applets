@@ -227,22 +227,22 @@ msgstr "Als je een thema niet wilt laten controleren, vink dan het eerste select
 #: 4.2/constants.js:134
 msgid ""
 "If you want to get the latest version of an applet now, check both boxes."
-msgstr "Schakel beide selectievakjes in als om de nieuwste versie van een hulptoepassing te verkrijgen"
+msgstr "Schakel beide selectievakjes in om de nieuwste versie van een hulptoepassing te verkrijgen"
 
 #: 4.2/constants.js:135
 msgid ""
 "If you want to get the latest version of a desklet now, check both boxes."
-msgstr "Schakel beide selectievakjes in als om de nieuwste versie van een minitoepassing te verkrijgen"
+msgstr "Schakel beide selectievakjes in om de nieuwste versie van een minitoepassing te verkrijgen"
 
 #: 4.2/constants.js:136
 msgid ""
 "If you want to get the latest version of an extension now, check both boxes."
-msgstr "Schakel beide selectievakjes in als om de nieuwste versie van een extensie te verkrijgen" 
+msgstr "Schakel beide selectievakjes in om de nieuwste versie van een extensie te verkrijgen" 
 
 #: 4.2/constants.js:137
 msgid ""
 "If you want to get the latest version of a theme now, check both boxes."
-msgstr "Schakel beide selectievakjes in als om de nieuwste versie van een thema te verkrijgen" 
+msgstr "Schakel beide selectievakjes in om de nieuwste versie van een thema te verkrijgen" 
 
 #: 4.2/constants.js:140
 msgid "When all your choices are made, click the Refresh button."
@@ -302,7 +302,7 @@ msgstr "Weergavetype"
 #. 3.8->settings-schema.json->check_applets->description
 #. 2.8->settings-schema.json->check_applets->description
 msgid "Let regularly check if your applets are up to date"
-msgstr ""
+msgstr "Laat regelmatig controleren of hulptoepassingentoepassingen up-to-date zijn"
 
 #. 4.2->settings-schema.json->check_applets->tooltip
 #. 3.8->settings-schema.json->check_applets->tooltip
