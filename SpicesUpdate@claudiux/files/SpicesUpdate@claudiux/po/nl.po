@@ -302,7 +302,7 @@ msgstr "Weergavetype"
 #. 3.8->settings-schema.json->check_applets->description
 #. 2.8->settings-schema.json->check_applets->description
 msgid "Let regularly check if your applets are up to date"
-msgstr ""
+msgstr "Laat regelmatig controleren of hulptoepassingen up-to-date zijn"
 
 #. 4.2->settings-schema.json->check_applets->tooltip
 #. 3.8->settings-schema.json->check_applets->tooltip
