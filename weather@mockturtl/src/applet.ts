@@ -1113,6 +1113,7 @@ interface Weather {
       city: string,
       country: string,
       id: string, // API Specific ID, not used
+      // Fill out both offset and timeZone,  but at leas tzOffset!
       tzOffset: number, // seconds
       timeZone: string
     },
