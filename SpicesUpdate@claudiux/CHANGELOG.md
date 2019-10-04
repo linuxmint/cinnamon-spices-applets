@@ -1,3 +1,6 @@
+### v4.2.1~20191004
+  * Adds the ability to increase up to 720 hours (30 days) the time between two checks. (User request.)
+
 ### v4.2.0~20190927
   * Animated icon during refresh.
     * Only for Cinnamon 4.2 and following.
