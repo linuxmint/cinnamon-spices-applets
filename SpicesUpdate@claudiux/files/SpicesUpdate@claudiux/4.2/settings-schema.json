@@ -366,7 +366,7 @@
     "type": "spinbutton",
     "default": 1,
     "min": 1,
-    "max": 24,
+    "max": 720,
     "step": 1,
     "units": "hours",
     "description": "Time interval between two checks",
