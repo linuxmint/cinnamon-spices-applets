@@ -1,9 +1,9 @@
-#Fiat and cryptocurrency quote rates
+# Fiat and cryptocurrency quote rates
 
 Displays the current price and trends of cryptocurrencies (TOP 150 coins with CoinMarketCap) and popular fiat currencies (Dollar, Euro, Ruble etc.). Monitoring daily percentage changes.
 
 
-##Manual Installation
+## Manual Installation
 
 	* Download from the Spices Web Site
 	* Unzip and extract folder ratecurrency@magner to
@@ -17,12 +17,12 @@ Displays the current price and trends of cryptocurrencies (TOP 150 coins with Co
 	* Enable the applet in System Settings -> Applets
 	* You can also access the Settings Screen from System Settings -> Applets or from the Applets Context menu
 
-##Localization (.mo):
+## Localization (.mo):
 
 	~/.local/share/locale/${language}/LC_MESSAGES
 	or
 	/usr/share/locale/${language}/LC_MESSAGES
 
-##Localization Program
+## Localization Program
 
 Poedit
