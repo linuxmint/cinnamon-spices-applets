@@ -348,7 +348,7 @@
 	"display": {
 		"type": "radiogroup",
 		"default": "money",
-		"description": "Display type quotes\n(if, after switching the server or currency, the quote is not displayed correctly, switch the display type between money, delta or percentage)",
+		"description": "Display type quotes",
 		"options": {
 			"Money (e.g. 8,261.20 $)": "money",
 			"Delta (e.g. -0.426 $)": "delta",

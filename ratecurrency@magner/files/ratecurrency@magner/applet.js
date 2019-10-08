@@ -7,7 +7,7 @@ const Main = imports.ui.main,
 			Soup = imports.gi.Soup, // https connections
 			St = imports.gi.St, // label, graph
 			Lang = imports.lang, // for menus
-			PopupMenu = imports.ui.popupMenu, // popup menu for graph
+			PopupMenu = imports.ui.popupMenu, // popup menu for graph and context
 			Gio = imports.gi.Gio, // files
 			Clutter = imports.gi.Clutter, // graph
 			Util = imports.misc.util, // button to go to the site (command line)
@@ -42,24 +42,6 @@ function _(str) {
 }
 
 // strings for translation
-const msg_setKey = _('Set API key...'),
-			msg_error = _('Error'),
-			msg_reconnect = _('Reconnect'),
-			msg_update = _('Update: '),
-			msg_rank = _('Rank: #'),
-			msg_1h = _('1H:'),
-			msg_24h = _('24H:'),
-			msg_7d = _('7D:'),
-			msg_max = _('Max.: '),
-			msg_min = _('Min.: '),
-			msg_ru_wait = _('For the Russian server, try again in 15 seconds.'),
-			msg_history = _('History for '),
-			msg_day1 = _(' day'),
-			msg_day2 = _(' days'),
-			msg_day3 = _(' _days'), // for some countries the third declension of the word
-			msg_average = _('Average:'),
-			msg_tooltip = _('Click to open graph');
-
 const fiatName = {
 	'AUD': _('Australian dollar'),
 	'BRL': _('Brazilian real'),
@@ -87,6 +69,25 @@ const fiatName = {
 	'USD': _('US dollar')
 };
 
+const msg_setKey = _('Set API key...'),
+			msg_error = _('Error'),
+			msg_reconnect = _('Reconnect'),
+			msg_update = _('Update: '),
+			msg_rank = _('Rank: #'),
+			msg_1h = _('1H:'),
+			msg_24h = _('24H:'),
+			msg_7d = _('7D:'),
+			msg_max = _('Max.: '),
+			msg_min = _('Min.: '),
+			msg_ru_wait = _('For the Russian server, try again in 15 seconds.'),
+			msg_history = _('History for '),
+			msg_day1 = _(' day'),
+			msg_day2 = _(' days'),
+			msg_day3 = _(' _days'), // for some countries the third declension of the word
+			msg_average = _('Average:'),
+			msg_tooltip = _('Click to open graph'),
+			msg_updateMenu = _('Update quote');
+
 const increase_css = '#32d74b',
 			decrease_css = '#ff453a',
 			increaseSign = ' \u25b4',
@@ -105,6 +106,8 @@ MyApplet.prototype = {
 	__proto__: Applet.TextIconApplet.prototype,
 
 	mainloop: null,
+	mainloopCoin: null,
+	mainloopFiat: null,
 	alertTimeout: null,
 
 	_init: function(metadata, orientation, panel_height, instance_id) {
@@ -183,6 +186,7 @@ MyApplet.prototype = {
 			this.fiatRU = {};
 
 			this._viewTooltip();
+			this._buildContextMenu();
 			this._updateLabel();
 		} catch (e) { global.logError(e); }
 	},
@@ -192,41 +196,34 @@ MyApplet.prototype = {
 		this._clear();
 
 		if (this.cryptoConnect) { this._updateLabelCrypto(); }
-		else if (this.serverFiat === 'RU') { this._updateLabelFiat(this.fiatRU, this._dataFiatRU()); }
-		else { this._updateLabelFiat(this.fiatEU, this._dataFiatEU()); }
+		else if (this.serverFiat === 'RU') { this._updateLabelFiat(this._connection(mainURL_RU, this._loadRU_Fiat, null)); }
+		else { this._updateLabelFiat(this._connection(`${mainURL_EU}${this.Currency}`, this._loadEU_Fiat, null)); }
 	},
 
 	// crypto currency auto update interval
 	_updateLabelCrypto: function() {
-		if (this.Crypto['dataRelevance']) { this.Crypto['dataRelevance'] = false; }
-		this._dataCrypto();
+		this._connection(`${mainURL_Crypto}${this.cryptoID}&convert=${this.Currency}`, this._loadCrypto, this.APIkey);
 
-		if (this.mainloop > 0) { Mainloop.source_remove(this.mainloop); }
-		this.mainloop = Mainloop.timeout_add_seconds(this.CryptoInterval * 60, Lang.bind(this, this._updateLabel));
+		if (this.mainloopCoin > 0) { Mainloop.source_remove(this.mainloopCoin); }
+		this.mainloopCoin = Mainloop.timeout_add_seconds(this.CryptoInterval * 60, Lang.bind(this, this._updateLabel));
 	},
 
 	// fiat currency auto update interval
-	_updateLabelFiat: function(obj, callback) {
-		if (obj['dataRelevance']) { obj['dataRelevance'] = false; }
+	_updateLabelFiat: function(callback) {
 		callback;
 
-		if (this.mainloop > 0) { Mainloop.source_remove(this.mainloop); }
-		// in milliseconds, for set seconds use 'timeout_add_seconds'
-		this.mainloop = Mainloop.timeout_add(this._getTimeToUpdateFiat(), Lang.bind(this, this._updateLabel));
+		if (this.mainloopFiat > 0) { Mainloop.source_remove(this.mainloopFiat); }
+		// in seconds, for set milliseconds use 'timeout_add'
+		this.mainloopFiat = Mainloop.timeout_add_seconds(this._getTimeToUpdateFiat(), Lang.bind(this, this._updateLabel));
 	},
 
-	// update every working day at 23:58 (except Saturday and Sunday)
+	// update every day at 22:58
 	_getTimeToUpdateFiat: function() {
 		let now = new Date(),
-				newDate,
-				days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-
-		if (days[now.getDay()] === 'Saturday') { newDate = now.getDate() + 3; }
-		else if (days[now.getDay()] === 'Sunday') { newDate = now.getDate() + 2; }
-		else { newDate = now.getDate() + 1; }
+				newDate = now.getDate() + 1;
 
 		let updateDate = new Date(now.getFullYear(), now.getMonth(), newDate);
-		return updateDate - now - (120 * 1000); // in milliseconds
+		return Math.round((updateDate - now) / 1000 - 62 * 60); // in seconds
 	},
 
 
@@ -286,13 +283,6 @@ MyApplet.prototype = {
 	// EU
 	// Received data from the server. Used without reconnection without need
 	_dataFiatEU: function() {
-		if (!this.fiatEU['dataRelevance']) {
-			this._clear();
-			this.fiatRU = {};
-			this.fiatEU = {};
-			return this._connection(`${mainURL_EU}${this.Currency}`, this._loadEU_Fiat, null);
-		}
-
 		if (this.display == 'money') {
 			this._setLabel(`${this._getPrice(this.fiatEU['Price'], this.Currency)}${this._setSign(this.fiatEU['Delta'])}`, '');
 		}
@@ -313,10 +303,9 @@ MyApplet.prototype = {
 				result = response['rates'][this.Currency];
 
 		this.fiatEU = {
-			'Name': fiatName[this.Currency], // 'US dollar'
-			'Price': result, // 1.0889
-			'LastUpdate': date, // '30.09.2019'
-			'dataRelevance': true
+			'Name': fiatName[this.Currency], // string
+			'Price': result, // float number
+			'LastUpdate': date // string
 		};
 
 		this._loadPrevPriceEU(null, response.date);
@@ -332,30 +321,17 @@ MyApplet.prototype = {
 			return this._connection(`https://api.ratesapi.io/api/${result}?base=EUR&symbols=${this.Currency}`, this._loadPrevPriceEU, null);
 		}
 		else {
-			this.fiatEU['PrevPrice'] = JSON.parse(data, null).rates[this.Currency]; // 1.956
-			this.fiatEU['Delta'] = this.fiatEU['Price'] - this.fiatEU['PrevPrice']; // -0.0046
-			this.fiatEU['Percent'] = this.fiatEU['Price'] / this.fiatEU['PrevPrice'] * 100 - 100; // -0.421
+			this.fiatEU['PrevPrice'] = JSON.parse(data, null).rates[this.Currency]; // float number
+			this.fiatEU['Delta'] = this.fiatEU['Price'] - this.fiatEU['PrevPrice']; // float number
+			this.fiatEU['Percent'] = this.fiatEU['Price'] / this.fiatEU['PrevPrice'] * 100 - 100; // float number
 			this._dataFiatEU();
 			this._loadHistory();
 		}
 	},
 
-	_visit_website: function _visit_website() {
-		let command = "xdg-open ";
-		Util.spawnCommandLine(command + "https://pro.coinmarketcap.com");
-	},
-
-
 	// RU
 	// Received data from the server. Used without reconnection without need
 	_dataFiatRU: function() {
-		if (!this.fiatRU['dataRelevance']) {
-			this._clear();
-			this.fiatEU = {};
-			this.fiatRU = {};
-			return this._connection(mainURL_RU, this._loadRU_Fiat, null);
-		}
-
 		if (this.display === 'money') {
 			this._setLabel(`${this._getPrice(this.fiatRU['Price'], 'RUB')}${this._setSign(this.fiatRU['Delta'])}`, '');
 		}
@@ -378,13 +354,12 @@ MyApplet.prototype = {
 		if (result != undefined) {
 			this.fiatRU = {
 				'ID': result['ID'],
-				'Name': result['Name'], // 'Доллар США'
-				'PrevPrice': result['Previous'], // 64.6407
-				'Price': result['Value'], // 65.067
-				'Delta': result['Value'] - result['Previous'], // 0.4263
-				'Percent': result['Value'] / result['Previous'] * 100 - 100, // 0.659
-				'LastUpdate': date, // '01.10.2019'
-				'dataRelevance': true
+				'Name': result['Name'], // string
+				'PrevPrice': result['Previous'], // float number
+				'Price': result['Value'], // float number
+				'Delta': result['Value'] - result['Previous'], // float number
+				'Percent': result['Value'] / result['Previous'] * 100 - 100, // float number
+				'LastUpdate': date // string
 			};
 			this._dataFiatRU();
 			this._loadHistory();
@@ -396,12 +371,6 @@ MyApplet.prototype = {
 	// Crypto currency
 	// Received data from the server. Used without reconnection without need
 	_dataCrypto: function() {
-		if (!this.Crypto['dataRelevance']) {
-			this._clear();
-			this.Crypto = {};
-			return this._connection(`${mainURL_Crypto}${this.cryptoID}&convert=${this.Currency}`, this._loadCrypto, this.APIkey);
-		}
-
 		if (this.display == 'money') {
 			this._setLabel(this._getPrice(this.Crypto['Price'], this.Currency), '');
 		}
@@ -422,21 +391,26 @@ MyApplet.prototype = {
 				result = response['quote'][this.Currency];
 
 		this.Crypto = {
-			'Name': response['name'], // 'Bitcoin'
-			'Symbol': response['symbol'], // 'BTC'
-			'Rank': response['cmc_rank'], // 1
-			'PrevPrice': result['price'] / (result['percent_change_24h'] + 100) * 100, // 7991.515
-			'Price': result['price'], // 8358.14853993
-			'Delta': result['price'] - (result['price'] / (result['percent_change_24h'] + 100) * 100), // 123.266
-			'Percent1H': result['percent_change_1h'], // -0.56943
-			'Percent24H': result['percent_change_24h'], // 4.38654
-			'Percent7D': result['percent_change_7d'], // -14.0384
-			'LastUpdate': date, // '01.10.2019, 18:04:34'
-			'dataRelevance': true
+			'Name': response['name'], // string
+			'Symbol': response['symbol'], // string
+			'Rank': response['cmc_rank'], // int number
+			'PrevPrice': result['price'] / (result['percent_change_24h'] + 100) * 100, // float number
+			'Price': result['price'], // float number
+			'Delta': result['price'] - (result['price'] / (result['percent_change_24h'] + 100) * 100), // float number
+			'Percent1H': result['percent_change_1h'], // float number
+			'Percent24H': result['percent_change_24h'], // float number
+			'Percent7D': result['percent_change_7d'], // float number
+			'LastUpdate': date // string
 		};
 		this._dataCrypto();
 		this._loadHistory();
 	},
+
+	_visit_website: function _visit_website() {
+		let command = "xdg-open ";
+		Util.spawnCommandLine(command + "https://pro.coinmarketcap.com");
+	},
+
 
 
 
@@ -855,8 +829,19 @@ MyApplet.prototype = {
 		else { this.set_applet_tooltip(''); }
 	},
 
+	// Add update function in the right click context menu
+	_buildContextMenu: function() {
+		let menuitem = new PopupMenu.PopupIconMenuItem(msg_updateMenu, 'view-refresh', St.IconType.SYMBOLIC);
+		menuitem.connect('activate', Lang.bind(this, function (event) { this._updateLabel(); }));
+		this._applet_context_menu.addMenuItem(menuitem);
+
+		this._applet_context_menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+	},
+
 	on_applet_removed_from_panel: function() {
 		if (this.mainloop > 0) { Mainloop.source_remove(this.mainloop); }
+		if (this.mainloopCoin > 0) { Mainloop.source_remove(this.mainloopCoin); }
+		if (this.mainloopFiat > 0) { Mainloop.source_remove(this.mainloopFiat); }
 		if (this.alertTimeout > 0) { Mainloop.source_remove(this.alertTimeout); }
 		this.settings.finalize();
 	}
