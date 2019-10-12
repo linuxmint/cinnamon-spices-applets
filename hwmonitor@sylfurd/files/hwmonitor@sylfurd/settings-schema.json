@@ -1,7 +1,117 @@
 {
-    "main_section": {
+    "layout": {
+      "type": "layout",
+      "pages": [
+        "General",
+        "CPU",
+        "MEM",
+        "NET_IN",
+        "NET_OUT"
+      ],
+      "General": {
+        "type": "page",
+        "title": "General",
+        "sections": [
+          "general_settings"
+        ]
+      },
+      "CPU": {
+        "type": "page",
+        "title": "CPU",
+        "sections": [
+          "CPU_settings"
+        ]
+      },
+      "MEM": {
+        "type": "page",
+        "title": "MEM",
+        "sections": [
+          "MEM_settings"
+        ]
+      },
+      "NET_IN": {
+        "type": "page",
+        "title": "NET (in)",
+        "sections": [
+          "NET_IN_settings"
+        ]
+      },
+      "NET_OUT": {
+        "type": "page",
+        "title": "NET (out)",
+        "sections": [
+          "NET_OUT_settings"
+        ]
+      },
+      "general_settings": {
         "type": "section",
-        "description": "Graphical hardware monitor settings"
+        "title": "General settings",
+        "keys": [
+          "frequency",
+          "theme",
+          "border_color",
+          "background_color1",
+          "background_color2",
+          "label_color",
+          "label_size",
+          "detail_label_color",
+          "detail_label_size",
+          "graph_color1",
+          "graph_color2",
+          "graph_offset2",
+          "graph_color3",
+          "graph_offset3",
+          "graph_color4"
+        ]
+      },
+      "CPU_settings": {
+        "type": "section",
+        "title": "CPU settings",
+        "keys": [
+          "cpu_enable_graph",
+          "cpu_size",
+          "cpu_use_custom_label",
+          "cpu_custom_label",
+          "cpu_show_detail_label"
+        ]
+      },
+      "MEM_settings": {
+        "type": "section",
+        "title": "MEM settings",
+        "keys": [
+          "mem_enable_graph",
+          "mem_size",
+          "mem_use_custom_label",
+          "mem_custom_label",
+          "mem_show_detail_label"
+        ]
+      },
+      "NET_IN_settings": {
+        "type": "section",
+        "title": "NET (in) settings",
+        "keys": [
+          "netin_enable_graph",
+          "netin_size",
+          "netin_speed",
+          "netin_use_custom_label",
+          "netin_custom_label",
+          "netin_linlog",
+          "netin_show_detail_label"
+        ]
+      },
+      "NET_OUT_settings": {
+        "type": "section",
+        "title": "NET (out) settings",
+        "keys": [
+          "netout_enable_graph",
+          "netout_size",
+          "netout_speed",
+          "netout_use_custom_label",
+          "netout_custom_label",
+          "netout_linlog",
+          "netout_show_detail_label"
+        ]
+      }
     },
     "frequency": {
         "type": "combobox",
@@ -141,10 +251,6 @@
         "indent": true,
         "dependency": "theme=user"
     },
-    "cpu_section": {
-        "type": "section",
-        "description": "CPU"
-    },
     "cpu_enable_graph": {
         "type": "checkbox",
         "default": true,
@@ -182,10 +288,6 @@
         "tooltip": "Show or hide the CPU usage label",
         "dependency": "cpu_enable_graph"
     },
-    "mem_section": {
-        "type": "section",
-        "description": "MEM"
-    },
     "mem_enable_graph": {
         "type": "checkbox",
         "default": true,
@@ -222,10 +324,6 @@
         "description": "Show details",
         "tooltip": "Show or hide the memory usage label",
         "dependency": "mem_enable_graph"
-    },
-    "netin_section": {
-        "type": "section",
-        "description": "NET (in)"
     },
     "netin_enable_graph": {
         "type": "checkbox",
@@ -285,10 +383,6 @@
         "description": "Show details",
         "tooltip": "Show or hide the NET (in) usage label",
         "dependency": "netin_enable_graph"
-    },
-    "netout_section": {
-        "type": "section",
-        "description": "NET (out)"
     },
     "netout_enable_graph": {
         "type": "checkbox",
