@@ -105,11 +105,6 @@ function MyApplet(metadata, orientation, panel_height, instance_id) {
 MyApplet.prototype = {
 	__proto__: Applet.TextIconApplet.prototype,
 
-	mainloop: null,
-	mainloopCoin: null,
-	mainloopFiat: null,
-	alertTimeout: null,
-
 	_init: function(metadata, orientation, panel_height, instance_id) {
 		try {
 			Applet.TextIconApplet.prototype._init.call(this, orientation, panel_height, instance_id);
@@ -202,28 +197,34 @@ MyApplet.prototype = {
 
 	// crypto currency auto update interval
 	_updateLabelCrypto: function() {
-		this._connection(`${mainURL_Crypto}${this.cryptoID}&convert=${this.Currency}`, this._loadCrypto, this.APIkey);
+		if (this.CoinTimeoutId) {
+			Mainloop.source_remove(this.CoinTimeoutId);
+			this.CoinTimeoutId = 0;
+		}
 
-		if (this.mainloopCoin > 0) { Mainloop.source_remove(this.mainloopCoin); }
-		this.mainloopCoin = Mainloop.timeout_add_seconds(this.CryptoInterval * 60, Lang.bind(this, this._updateLabel));
+		this._connection(`${mainURL_Crypto}${this.cryptoID}&convert=${this.Currency}`, this._loadCrypto, this.APIkey);
+		this.CoinTimeoutId = Mainloop.timeout_add_seconds(this.CryptoInterval * 60, Lang.bind(this, this._updateLabel));
 	},
 
 	// fiat currency auto update interval
 	_updateLabelFiat: function(callback) {
-		callback;
+		if (this.FiatTimeoutId) {
+			Mainloop.source_remove(this.FiatTimeoutId);
+			this.FiatTimeoutId = 0;
+		}
 
-		if (this.mainloopFiat > 0) { Mainloop.source_remove(this.mainloopFiat); }
+		callback;
 		// in seconds, for set milliseconds use 'timeout_add'
-		this.mainloopFiat = Mainloop.timeout_add_seconds(this._getTimeToUpdateFiat(), Lang.bind(this, this._updateLabel));
+		this.FiatTimeoutId = Mainloop.timeout_add_seconds(this._getTimeToUpdateFiat(), Lang.bind(this, this._updateLabel));
 	},
 
-	// update every day at 22:58
+	// update every day at 23:00 (11:00 PM)
 	_getTimeToUpdateFiat: function() {
 		let now = new Date(),
-				newDate = now.getDate() + 1;
+				newDate = now.getHours() >= 23 ? now.getDate() + 2 : now.getDate() + 1;
 
 		let updateDate = new Date(now.getFullYear(), now.getMonth(), newDate);
-		return Math.round((updateDate - now) / 1000 - 62 * 60); // in seconds
+		return Math.round((updateDate - now) / 1000 - 60 * 60);
 	},
 
 
@@ -259,11 +260,14 @@ MyApplet.prototype = {
 
 				// second chance to connect if there was a server error
 				if (this.count == 1) {
+					if (this.TimeoutId) {
+						Mainloop.source_remove(this.TimeoutId);
+						this.TimeoutId = 0;
+					}
+
 					this._clear();
 					this._setLabel(msg_reconnect, '');
-
-					if (this.mainloop > 0) { Mainloop.source_remove(this.mainloop); }
-					this.mainloop = Mainloop.timeout_add_seconds(3, Lang.bind(this, this._updateLabel));
+					this.TimeoutId = Mainloop.timeout_add_seconds(3, Lang.bind(this, this._updateLabel));
 				}
 				return;
 			}
@@ -298,8 +302,8 @@ MyApplet.prototype = {
 
 	// loading the latest data if necessary
 	_loadEU_Fiat: function(data) {
-		let response = JSON.parse(data, null),
-				date = new Date(response['date']).toLocaleString().slice(0, 10),
+		let response = JSON.parse(data),
+				date = new Date(response['date']).toLocaleDateString(),
 				result = response['rates'][this.Currency];
 
 		this.fiatEU = {
@@ -321,7 +325,7 @@ MyApplet.prototype = {
 			return this._connection(`https://api.ratesapi.io/api/${result}?base=EUR&symbols=${this.Currency}`, this._loadPrevPriceEU, null);
 		}
 		else {
-			this.fiatEU['PrevPrice'] = JSON.parse(data, null).rates[this.Currency]; // float number
+			this.fiatEU['PrevPrice'] = JSON.parse(data).rates[this.Currency]; // float number
 			this.fiatEU['Delta'] = this.fiatEU['Price'] - this.fiatEU['PrevPrice']; // float number
 			this.fiatEU['Percent'] = this.fiatEU['Price'] / this.fiatEU['PrevPrice'] * 100 - 100; // float number
 			this._dataFiatEU();
@@ -347,13 +351,13 @@ MyApplet.prototype = {
 
 	// loading the latest data if necessary
 	_loadRU_Fiat: function(data) {
-		let response = JSON.parse(data, null),
-				date = new Date(response['Date']).toLocaleString().slice(0, 10),
+		let response = JSON.parse(data),
+				date = new Date(response['Date']).toLocaleDateString(),
 				result = response['Valute'][this.Currency];
 
 		if (result != undefined) {
 			this.fiatRU = {
-				'ID': result['ID'],
+				'ID': result['ID'], // string
 				'Name': result['Name'], // string
 				'PrevPrice': result['Previous'], // float number
 				'Price': result['Value'], // float number
@@ -386,7 +390,7 @@ MyApplet.prototype = {
 
 	// loading the latest data if necessary
 	_loadCrypto: function(data) {
-		let response = JSON.parse(data, null).data[this.cryptoID],
+		let response = JSON.parse(data).data[this.cryptoID],
 				date = new Date(response['last_updated']).toLocaleString(),
 				result = response['quote'][this.Currency];
 
@@ -406,18 +410,12 @@ MyApplet.prototype = {
 		this._loadHistory();
 	},
 
-	_visit_website: function _visit_website() {
-		let command = "xdg-open ";
-		Util.spawnCommandLine(command + "https://pro.coinmarketcap.com");
-	},
-
+	_visit_website: function _visit_website() { Util.spawnCommandLine('xdg-open https://pro.coinmarketcap.com'); },
 
 
 
 	// PopUp graph
-	on_applet_clicked: function(event) {
-		if (this.graphOn) { this.menu.toggle(); }
-	},
+	on_applet_clicked: function(event) { if (this.graphOn) { this.menu.toggle(); } },
 
 	// loading the latest history data if necessary
 	_loadHistory: function() {
@@ -438,14 +436,10 @@ MyApplet.prototype = {
 		this.graphData = parseEUbank._parseXML(jsonOutput);
 	},
 
-	// loading the latest history data if necessary
-	_loadDataFiatHistoryRU: function(data) {
-		this.graphData = parseRUbank._parseXML(data.toString());
-	},
+	_loadDataFiatHistoryRU: function(data) { this.graphData = parseRUbank._parseXML(data.toString()); },
 
-	// loading the latest history data if necessary
 	_loadDataCryptoHistory: function(data) {
-		let jsonOutput = JSON.parse(data, null);
+		let jsonOutput = JSON.parse(data);
 
 		if (jsonOutput.hasOwnProperty('Response') && jsonOutput['Response'] === 'Error') {
 			global.logError(jsonOutput.Message);
@@ -603,15 +597,8 @@ MyApplet.prototype = {
 		// Error
 		else {
 			// Error text
-			cr.setSourceRGBA(color.red / 255, color.green / 255, color.blue / 255, .8);
-			cr.setFontSize(fontSizeTitle + 2);
-			cr.moveTo(15, height / 2 - (fontSizeTitle + 2));
-			cr.showText(msg_error);
-
-			cr.setSourceRGBA(color.red / 255, color.green / 255, color.blue / 255, .8);
-			cr.setFontSize(fontSizeNormal + 3);
-			cr.moveTo(15, height / 2 + (fontSizeNormal + 3));
-			cr.showText(msg_ru_wait);
+			this._graphText(cr, color, fontSizeTitle + 2, 15, height / 2 - (fontSizeTitle + 2), msg_error);
+			this._graphText(cr, color, fontSizeNormal + 3, 15, height / 2 + (fontSizeNormal + 3), msg_ru_wait);
 			return;
 		}
 
@@ -643,7 +630,7 @@ MyApplet.prototype = {
 					history = msg_history + this.duration + this._wordEndings(this.duration, [msg_day1, msg_day2, msg_day3]),
 					historySize = width - history.length * (fontSizeNormal/2 + 1.5) - 10,
 					percent = this.serverFiat == 'EU' ? percentEU : percentRU,
-					delta = '\u0394' + (this.serverFiat == 'EU' ? deltaEU : deltaRU),
+					delta = '\u0394 ' + (this.serverFiat == 'EU' ? deltaEU : deltaRU),
 					lastDate = this.serverFiat == 'EU' ? lastUpdateEU : lastUpdateRU,
 					lastDateSize = width - lastDate.length * (fontSizeNormal/2 + 1.5) - 10;
 
@@ -688,20 +675,16 @@ MyApplet.prototype = {
 			let price = this.cryptoConnect ? this.Crypto['Price'] : this.serverFiat === 'RU' ? this.fiatRU['Price'] : this.fiatEU['Price'];
 			let percent = this.cryptoConnect ? this.Crypto['Percent1H'] : this.serverFiat === 'RU' ? this.fiatRU['Percent'] : this.fiatEU['Percent'];
 
-			// input delay
-			if (this.alertTimeout > 0) { Mainloop.source_remove(this.alertTimeout); }
-			this.alertTimeout = Mainloop.timeout_add_seconds(3, Lang.bind(this, function() {
-				if (this.alertType === 'money') {
-					let formatPrice = this.serverFiat === 'RU' ? this._getPrice(price, 'RUB') : this._getPrice(price, this.Currency);
-					if (MaxValue !== undefined && price >= MaxValue) { this._notifyMessage(formatPrice, 'go-top'); }
-					if (MinValue !== undefined && price <= MinValue) { this._notifyMessage(formatPrice, 'go-bottom'); }
-				}
-				else if (this.alertType === 'percentage') {
-					let format = this._getPercent(percent);
-					if (MaxValue !== undefined && percent >= MaxValue) { this._notifyMessage(format, 'go-top'); }
-					if (MinValue !== undefined && percent <= MinValue) { this._notifyMessage(format, 'go-bottom'); }
-				}
-			}));
+			if (this.alertType === 'money') {
+				let formatPrice = this.cryptoConnect || this.serverFiat === 'EU' ? this._getPrice(price, this.Currency) : this._getPrice(price, 'RUB');
+				if (MaxValue !== undefined && price >= MaxValue) { this._notifyMessage(formatPrice, 'go-top'); }
+				if (MinValue !== undefined && price <= MinValue) { this._notifyMessage(formatPrice, 'go-bottom'); }
+			}
+			else if (this.alertType === 'percentage') {
+				let format = this._getPercent(percent);
+				if (MaxValue !== undefined && percent >= MaxValue) { this._notifyMessage(format, 'go-top'); }
+				if (MinValue !== undefined && percent <= MinValue) { this._notifyMessage(format, 'go-bottom'); }
+			}
 		}
 	},
 
@@ -801,7 +784,7 @@ MyApplet.prototype = {
 		};
 
 		if (Math.abs(num) < 1) { options['maximumFractionDigits'] = 3; }
-		return num = ` ${parseFloat(num).toLocaleString(undefined, options)}${this._setSign(num)}`;
+		return num = `${parseFloat(num).toLocaleString(undefined, options)}${this._setSign(num)}`;
 	},
 
 	_getPercent: function(num) {
@@ -834,15 +817,22 @@ MyApplet.prototype = {
 		let menuitem = new PopupMenu.PopupIconMenuItem(msg_updateMenu, 'view-refresh', St.IconType.SYMBOLIC);
 		menuitem.connect('activate', Lang.bind(this, function (event) { this._updateLabel(); }));
 		this._applet_context_menu.addMenuItem(menuitem);
-
-		this._applet_context_menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+		this._applet_context_menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem()); // Separator
 	},
 
 	on_applet_removed_from_panel: function() {
-		if (this.mainloop > 0) { Mainloop.source_remove(this.mainloop); }
-		if (this.mainloopCoin > 0) { Mainloop.source_remove(this.mainloopCoin); }
-		if (this.mainloopFiat > 0) { Mainloop.source_remove(this.mainloopFiat); }
-		if (this.alertTimeout > 0) { Mainloop.source_remove(this.alertTimeout); }
+		if (this.TimeoutId) {
+			Mainloop.source_remove(this.TimeoutId);
+			this.TimeoutId = 0;
+		}
+		if (this.CoinTimeoutId) {
+			Mainloop.source_remove(this.CoinTimeoutId);
+			this.CoinTimeoutId = 0;
+		}
+		if (this.FiatTimeoutId) {
+			Mainloop.source_remove(this.FiatTimeoutId);
+			this.FiatTimeoutId = 0;
+		}
 		this.settings.finalize();
 	}
 

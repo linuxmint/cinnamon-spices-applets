@@ -80,7 +80,6 @@
 		"graphOption": {
 			"type": "section",
 			"title": "Graph options",
-			"dependency": "graph-On",
 			"keys": [
 				"graphDuration",
 				"graphColor"
@@ -96,7 +95,6 @@
 		"alertOption": {
 			"type": "section",
 			"title": "Alerts options",
-			"dependency": "alert-On",
 			"keys": [
 				"alertAbove",
 				"alertBelow",
