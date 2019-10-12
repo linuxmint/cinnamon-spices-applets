@@ -12,7 +12,9 @@
         "type": "page",
         "title": "General",
         "sections": [
-          "general_settings"
+          "general_settings",
+          "theme_settings",
+          "theme_data_settings"
         ]
       },
       "CPU": {
@@ -47,7 +49,13 @@
         "type": "section",
         "title": "General settings",
         "keys": [
-          "frequency",
+          "frequency"
+        ]
+      },
+      "theme_settings": {
+        "type": "section",
+        "title": "Theme (graph)",
+        "keys": [
           "theme",
           "border_color",
           "background_color1",
@@ -55,7 +63,14 @@
           "label_color",
           "label_size",
           "detail_label_color",
-          "detail_label_size",
+          "detail_label_size"
+        ]
+      },
+      "theme_data_settings": {
+        "type": "section",
+        "title": "Theme (graph data)",
+        "keys": [
+          "theme_data",
           "graph_color1",
           "graph_color2",
           "graph_offset2",
@@ -132,12 +147,12 @@
         "type": "combobox",
         "default": "dark",
         "options": {
-            "dark theme": "dark",
+            "dark theme": "dark",            
             "light theme": "light",
             "custom theme": "user"
         },
-        "description": "Theme",
-        "tooltip": "Use custom theme to select colors that matches your current theme."
+        "description": "Theme (graph)",
+        "tooltip": "Use 'custom theme' to select colors that matches your current desktop theme."
     },
     "border_color": {
         "type": "colorchooser",
@@ -199,13 +214,25 @@
         "tooltip": "Set the font size for the detail label.",
         "dependency": "theme=user"
     },
+    "theme_data": {
+        "type": "combobox",
+        "default": "default",
+        "options": {
+            "default theme": "default",
+            "blue theme": "blue",
+            "gray theme": "gray",
+            "custom theme": "user"
+        },
+        "description": "Theme (graph data)",
+        "tooltip": "Use 'custom theme' to select colors that matches your current desktop theme."
+    },
     "graph_color1": {
         "type": "colorchooser",
         "default": "rgba(51,178,255,1)",
         "description": "Graph color 1",
         "tooltip": "Click the button to select a starting color for the linear gradient of the graph colors. Offset for the first color is always 0.",
         "indent": true,
-        "dependency": "theme=user"
+        "dependency": "theme_data=user"
     },
     "graph_color2": {
         "type": "colorchooser",
@@ -213,7 +240,7 @@
         "description": "Graph color 2",
         "tooltip": "Click the button to select a first middle color for the linear gradient of the graph colors.",
         "indent": true,
-        "dependency": "theme=user"
+        "dependency": "theme_data=user"
     },
     "graph_offset2": {
         "type": "spinbutton",
@@ -223,7 +250,7 @@
         "step": 0.01,
         "description": "Offset for graph color 2",
         "tooltip": "Offset for first middle color of the linear gradient",
-        "dependency": "theme=user"
+        "dependency": "theme_data=user"
     },
     "graph_color3": {
         "type": "colorchooser",
@@ -231,7 +258,7 @@
         "description": "Graph color 3",
         "tooltip": "Click the button to select a second middle color for the linear gradient of the graph colors.",
         "indent": true,
-        "dependency": "theme=user"
+        "dependency": "theme_data=user"
     },
     "graph_offset3": {
         "type": "spinbutton",
@@ -241,7 +268,7 @@
         "step": 0.01,
         "description": "Offset for graph color 3",
         "tooltip": "Offset for second middle color of the linear gradient",
-        "dependency": "theme=user"
+        "dependency": "theme_data=user"
     },
     "graph_color4": {
         "type": "colorchooser",
@@ -249,7 +276,7 @@
         "description": "Graph color 4",
         "tooltip": "Click the button to select a ending color for the linear gradient of the graph colors. Offset for the last color is always 1.",
         "indent": true,
-        "dependency": "theme=user"
+        "dependency": "theme_data=user"
     },
     "cpu_enable_graph": {
         "type": "checkbox",

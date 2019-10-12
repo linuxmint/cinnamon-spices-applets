@@ -147,25 +147,42 @@ class Graph {
 
         let pattern = new Cairo.LinearGradient(0, this.graph.inner.top, 0, this.graph.inner.top + this.graph.inner.height);
         cr.setSource(pattern);
-        if (this.theme.theme=="user")
+        if (this.theme.theme_data=="user")
             pattern.addColorStopRGBA(0, this.theme.graph_color4[0], this.theme.graph_color4[1], this.theme.graph_color4[2], 1);
-        else 
+        else if (this.theme.theme_data=="default")
             pattern.addColorStopRGBA(0, 1, 0, 0, 1);
+        else if (this.theme.theme_data=="blue")
+            pattern.addColorStopRGBA(0, 0.730, 0.741, 0.714, 1);
+        else if (this.theme.theme_data=="gray")
+            pattern.addColorStopRGBA(0, 0.730, 0.741, 0.714, 1);
 
-        if (this.theme.theme=="user")
+        if (this.theme.theme_data=="user")
             pattern.addColorStopRGBA(this.theme.graph_offset3, this.theme.graph_color3[0], this.theme.graph_color3[1], this.theme.graph_color3[2], 1);
-        else 
+        else if (this.theme.theme_data=="default")
             pattern.addColorStopRGBA(0.5, 1, 1, 0.2, 1);
+        else if (this.theme.theme_data=="blue")
+            pattern.addColorStopRGBA(0.3, 0.447, 0.624, 0.812, 1);
+        else if (this.theme.theme_data=="gray")
+            pattern.addColorStopRGBA(0.3, 0.533, 0.544, 0.521, 1);
 
-        if (this.theme.theme=="user")
+        if (this.theme.theme_data=="user")
             pattern.addColorStopRGBA(this.theme.graph_offset2, this.theme.graph_color2[0], this.theme.graph_color2[1], this.theme.graph_color2[2], 1);
-        else 
+        else if (this.theme.theme_data=="default")
             pattern.addColorStopRGBA(0.7, 0.4, 1, 0.3, 1);
+        else if (this.theme.theme_data=="blue")
+            pattern.addColorStopRGBA(0.52, 0.204, 0.396, 0.643, 1);
+        else if (this.theme.theme_data=="gray")
+            pattern.addColorStopRGBA(0.52, 0.33, 0.34, 0.326, 1);
 
-        if (this.theme.theme=="user")
+        if (this.theme.theme_data=="user")
             pattern.addColorStopRGBA(1, this.theme.graph_color1[0], this.theme.graph_color1[1], this.theme.graph_color1[2], 1);        
-        else 
+        else if (this.theme.theme_data=="default")
             pattern.addColorStopRGBA(1, 0.2, 0.7, 1, 1);
+        else if (this.theme.theme_data=="blue")
+            pattern.addColorStopRGBA(0, 0.125, 0.29, 0.529, 1);
+        else if (this.theme.theme_data=="gray")
+            pattern.addColorStopRGBA(1, 0.18, 0.204, 0.212, 1);
+
         cr.fill();
     }
 
