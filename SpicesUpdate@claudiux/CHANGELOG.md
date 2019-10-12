@@ -1,3 +1,36 @@
+### v4.2.1~20191004
+  * Adds the ability to increase up to 720 hours (30 days) the time between two checks. (User request.)
+
+### v4.2.0~20190927
+  * Animated icon during refresh.
+    * Only for Cinnamon 4.2 and following.
+
+### v4.1.0~20190925
+  * Adds the ability to renew the download of the latest version of a Spice.
+    * Only for Cinnamon 4.2 and following.
+  * `SpicesUpdate@claudiux.pot` file updated.
+  * French translation: `fr.po` file updated.
+  * Minor bugs fixed.
+
+### v4.0.2~20190920
+  * Removes unnecessary notifications like '(Refresh to see the description)'.
+  * Minor CSS changes.
+
+### v4.0.1~20190914
+  * Improves the download of the latest versions of Spices. (Cinnamon 3.8 and following.)
+
+### v4.0.0~20190912
+  * Make sure to download the latest version of Spices. (Cinnamon 3.8 and following.)
+
+### v3.2.0~20190910
+  * Improves tooltip display. (All branches)
+  * Bug fixes in the 2.8 branch. (Cinnamon from 2.8 to 3.6)
+  * Code cleanup and restructuring in the 4.2 branch. (Cinnamon 4.2 and following.)
+
+### v3.1.0~20190908
+  * Multi-version: Using specific capabilities of `cinnamon-settings` in Cinnamon 4.2.
+  * Code cleanup.
+
 ### v3.0.4~20190826
   * Available languages:
    * Dutch

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-04 01:32+0200\n"
-"PO-Revision-Date: 2019-09-04 01:33+0200\n"
+"POT-Creation-Date: 2019-09-08 19:11+0200\n"
+"PO-Revision-Date: 2019-09-08 19:13+0200\n"
 "Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -18,47 +18,47 @@ msgstr ""
 "X-Generator: Poedit 2.0.6\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: applet.js:127
+#: applet.js:144
 msgid "(Right click to open folder)"
 msgstr "(Clic droit pour ouvrir son dossier)"
 
-#: applet.js:149
+#: applet.js:166
 msgid "Places"
 msgstr "Emplacements"
 
-#: applet.js:261
+#: applet.js:281
 msgid "Search Home Folder"
 msgstr "Rechercher dans mon dossier personnel"
 
-#: applet.js:284
+#: applet.js:304
 msgid "SYSTEM"
 msgstr "SYSTÈME"
 
-#: applet.js:293
+#: applet.js:313
 msgid "Search File System"
 msgstr "Rechercher dans le système de fichiers"
 
-#: applet.js:319
+#: applet.js:338
 msgid "RECENT DOCUMENTS"
 msgstr "DOCUMENTS RÉCENTS"
 
-#: applet.js:333
+#: applet.js:352
 msgid "Clear"
 msgstr "Effacer"
 
-#: applet.js:376
+#: applet.js:395
 msgid "Computer"
 msgstr "Ordinateur"
 
-#: applet.js:382
+#: applet.js:401
 msgid "File System"
 msgstr "Système de fichiers"
 
-#: applet.js:398
+#: applet.js:417
 msgid "Network"
 msgstr "Réseau"
 
-#: applet.js:507
+#: applet.js:554
 msgid "Trash"
 msgstr "Corbeille"
 
@@ -296,9 +296,41 @@ msgstr "Montrer le Réseau"
 msgid "Show recent documents"
 msgstr "Montrer les Documents Récents"
 
+#. settings-schema.json->recentSizeLimit->options
+msgid "5"
+msgstr ""
+
+#. settings-schema.json->recentSizeLimit->options
+msgid "10"
+msgstr ""
+
+#. settings-schema.json->recentSizeLimit->options
+msgid "15"
+msgstr ""
+
+#. settings-schema.json->recentSizeLimit->options
+msgid "20"
+msgstr ""
+
+#. settings-schema.json->recentSizeLimit->options
+msgid "25"
+msgstr ""
+
+#. settings-schema.json->recentSizeLimit->options
+msgid "30"
+msgstr ""
+
+#. settings-schema.json->recentSizeLimit->options
+msgid "All Recent Documents"
+msgstr "Tous les documents récents"
+
 #. settings-schema.json->recentSizeLimit->description
 msgid "Number to show"
 msgstr "Nombre de documents récents à afficher"
+
+#. settings-schema.json->btnPrivacy->description
+msgid "Privacy"
+msgstr "Confidentialité"
 
 #~ msgid "Click to open the file."
 #~ msgstr "Clic gauche pour ouvrir le fichier."

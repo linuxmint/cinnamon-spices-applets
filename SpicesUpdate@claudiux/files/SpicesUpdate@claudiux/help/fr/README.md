@@ -12,7 +12,8 @@ L'applet **Spices Update** :
 
   * vous avertit dès lors que des Spices que vous avez installées disposent d'une mise à jour ;
   * peut vous avertir, si vous le désirez, lorsque de nouvelles Spices sont disponibles ;
-  * vous donne un accès direct aux Paramètres système des Applets, Desklets, Extensions et Thèmes.
+  * vous donne un accès direct aux Paramètres système des Applets, Desklets, Extensions et Thèmes ;
+  * vous permet de renouveler le téléchargement de la dernière version d'une Spice. (Cinnamon 4.2 et suivants.)
 
 ## État
 
@@ -21,6 +22,7 @@ Disponible de Cinnamon 2.8 à Cinnamon 4.2.
 Cette applet est active, c'est-à-dire développée et utilisée par l'auteur sur plusieurs machines fonctionnant sous **Linux Mint**, **Fedora** ou **Archlinux**.
 
 À partir de la version v3.0.0 ~ 20190808:
+
   * Spices Update est compatible avec Cinnamon 2.8 -> 4.2 (Mint 17.3 -> 19.2).
   * De Cinnamon 3.8 à 4.2 (Mint 19 à 19.2): **Parfaitement fonctionnel, comme d'habitude.**
   * De Cinnamon 2.8 à 3.6 (Mint 17.3 à 18.3): certaines fonctionnalités sont réduites:
@@ -71,6 +73,8 @@ Réglez sur _FALSE_ (ou décochez à partir de Cinnamon 4.2) toutes les Spices d
   * Une Spice vous convient pleinement et vous ne voulez pas être averti d'un quelconque changement la concernant.
   * Vous êtes un développeur travaillant sur une Spice et vous ne souhaitez pas être informé de quelque modification que ce soit durant son développement.
 
+À partir de Cinnamon 4.2, pour re-télécharger la dernière version d'une Spice, cochez ses deux cases.
+
 ## Menu
 
 Dans le menu de Spices Update (accessible par un clic sur son icône) :
@@ -98,19 +102,36 @@ Ici avec la raison de la mise à jour :
 ![notif_simple_with_details](https://github.com/claudiux/docs/raw/master/SpicesUpdate/images/notif_simple_with_details-fr.png)
 
 ### Notifications avec boutons
-Deux boutons sont présents : l'un pour ouvrir la page Paramètres système afin de télécharger les mises à jour ; l'autre pour actualiser la notification afin d’obtenir des détails, le cas échéant.
-
-Ici sans les détails :
-
-![notif_without_details](https://github.com/claudiux/docs/raw/master/SpicesUpdate/images/notif_without_details-fr.png)
-
-Après actualisation, le motif de la mise à jour apparaît :
+Deux boutons sont présents : l'un pour ouvrir la page Paramètres système afin de télécharger les mises à jour ; l'autre pour actualiser les notifications.
 
 ![notif_with_details](https://github.com/claudiux/docs/raw/master/SpicesUpdate/images/notif_with_details2-fr.png)
 
 ## Traductions
 
 Toute traduction est la bienvenue. Merci de contribuer en traduisant les messages de l'applet dans de nouvelles langues ou en améliorant/complétant les traductions existantes.
+
+### Traductions disponibles et leurs auteurs
+
+  * Croate (hr): muzena
+  * Néerlandais (nl): Jurien (French77)
+  * Finnois (fi): MahtiAnkka
+  * Français (fr): claudiux
+  * Allemand (de): Mintulix
+  * Italien (it): claudiux
+  * Espagnol (es): claudiux
+  * Suédois (sv): Åke Engelbrektson (eson57)
+
+Un grand merci à eux !
+
+### Commant proposer une traduction
+
+  1. Créer un compte dur [Github](https://github.com/).
+  2. Faire un Fork du dépôt [cinnamon-spices-applets](https://github.com/linuxmint/cinnamon-spices-applets).
+  3. Dans votre fork, créer une branche (la nommer comme `SpicesUpdate-CODE_LANGUE`) à partir de la branche master.
+  4. Sur votre ordinateur, installer `git` et `poedit`.
+  5. Cloner votre branche sur votre ordinateur : `git clone -b SpicesUpdate-CODE_LANGUE --single-branch https://github.com/VOTRE_COMPTE_GITHUB/cinnamon-spices-applets.git SpicesUpdate-CODE_LANGUE`
+  6. Ouvrir le fichier `SpicesUpdate@claudiux.pot` (qui est dans le dossier `po`) avec poedit et créer votre traduction. Vous obtenez une fichier CODE_LANGUE.po.
+  7. Sur Github, envoyer le fichier `CODE_LANGUE.po` au bon endroit dans votre branche puis aller à la racine de votre branche et faire un Pull Request.
 
 ## Installation
 
@@ -128,6 +149,6 @@ Utilisez le menu _Applets_ dans les Paramètres système de Cinnamon ou _Ajouter
 
 ## Une Étoile pour remercier l'auteur
 
-Si vous appréciez les services rendus par Spices Update, n'offrez ni argent ni café à l'auteur, mais connectez-vous et cliquez sur l'étoile en haut de [cette page](https://cinnamon-spices.linuxmint.com/applets/view/309#).
+Si vous appréciez les services rendus par Spices Update, n'offrez ni argent ni café à l'auteur, mais connectez-vous et cliquez sur l'étoile en haut de [cette page](https://cinnamon-spices.linuxmint.com/applets/view/309).
 
 Merci beaucoup.

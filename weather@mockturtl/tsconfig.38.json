@@ -7,7 +7,7 @@
         "removeComments": true,
         "preserveConstEnums": true,
         "sourceMap": false,
-        "experimentalDecorators": true
+        "outDir": "files/weather@mockturtl/3.8/"
     },
     "include": [
         "src/**/*"
