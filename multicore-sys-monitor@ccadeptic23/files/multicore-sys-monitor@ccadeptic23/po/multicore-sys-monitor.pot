@@ -26,7 +26,7 @@ msgid "Labels"
 msgstr ""
 
 #: ../3.0/prefsui.glade.h:3 ../3.2/prefsui.glade.h:3 ../3.4/prefsui.glade.h:3
-msgid "Resfresh Rate (ms)"
+msgid "Refresh Rate (ms)"
 msgstr ""
 
 #: ../3.0/prefsui.glade.h:4 ../3.2/prefsui.glade.h:4
