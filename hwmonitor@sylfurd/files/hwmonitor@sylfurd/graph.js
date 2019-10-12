@@ -56,6 +56,8 @@ class Graph {
             cr.setSourceRGBA(1, 1, 1, 0.5);
         else if (this.theme.theme=="dark")
             cr.setSourceRGBA(0, 0, 0, 0.5);
+        else if (this.theme.theme=="gray")
+            cr.setSourceRGBA(0.18, 0.204, 0.212, 0.5);
         else {
             cr.setSourceRGBA(this.theme.border_colors[0], this.theme.border_colors[1], this.theme.border_colors[2], 0.5);
         }
@@ -75,6 +77,9 @@ class Graph {
         } else if (this.theme.theme=="dark") {
             pattern.addColorStopRGBA(0, 1, 1, 1, 0.3);
             pattern.addColorStopRGBA(1, 0, 0, 0, 0.3);
+        } else if (this.theme.theme=="gray") {
+            pattern.addColorStopRGBA(0, 0.18, 0.204, 0.212, 0.3);
+            pattern.addColorStopRGBA(1, 0.18, 0.204, 0.212, 0.3);
         } else {
             pattern.addColorStopRGBA(0, this.theme.background_colors1[0], this.theme.background_colors1[1], this.theme.background_colors1[2], 0.7);
             pattern.addColorStopRGBA(1, this.theme.background_colors2[0], this.theme.background_colors2[1], this.theme.background_colors2[2], 0.7);
@@ -98,6 +103,8 @@ class Graph {
             cr.setSourceRGBA(1, 1, 1, 0.4);
         else if (this.theme.theme=="dark")
             cr.setSourceRGBA(0, 0, 0, 0.4);
+        else if (this.theme.theme=="gray")
+            cr.setSourceRGBA(0.18, 0.204, 0.212, 0.5);
         else {
             cr.setSourceRGBA(this.theme.border_colors[0], this.theme.border_colors[1], this.theme.border_colors[2], 0.4);
         }
@@ -113,6 +120,8 @@ class Graph {
             cr.setSourceRGBA(1, 1, 1, 0.2);
         else if (this.theme.theme=="dark")
             cr.setSourceRGBA(0, 0, 0, 0.2);
+        else if (this.theme.theme=="gray")
+            cr.setSourceRGBA(0.18, 0.204, 0.212, 0.5);
         else {
             cr.setSourceRGBA(this.theme.border_colors[0], this.theme.border_colors[1], this.theme.border_colors[2], 0.2);
         }
@@ -193,6 +202,8 @@ class Graph {
             cr.setSourceRGBA(0.8, 0.8, 0.8, 0.5);
         else if (this.theme.theme=="dark")
             cr.setSourceRGBA(0.2, 0.2, 0.2, 0.5);
+        else if (this.theme.theme=="gray")
+            cr.setSourceRGBA(1, 1, 1, 0.5);
         else {
             cr.setSourceRGBA(this.theme.label_color[0], this.theme.label_color[1], this.theme.label_color[2], 0.5);
         }
@@ -209,10 +220,12 @@ class Graph {
         else
             cr.showText(this.provider.name);
 
-            if (this.theme.theme=="light")
+        if (this.theme.theme=="light")
             cr.setSourceRGBA(0.8, 0.8, 0.8, 1);
         else if (this.theme.theme=="dark")
             cr.setSourceRGBA(0.2, 0.2, 0.2, 1);
+        else if (this.theme.theme=="gray")
+            cr.setSourceRGBA(1, 1, 1, 0.5);
         else {
             cr.setSourceRGBA(this.theme.label_color[0], this.theme.label_color[1], this.theme.label_color[2], 1);
         }
@@ -241,6 +254,8 @@ class Graph {
             cr.setSourceRGBA(0.7, 0.7, 0.7, 0.5);
         else if (this.theme.theme=="dark")
             cr.setSourceRGBA(0.1, 0.1, 0.1, 0.5);
+        else if (this.theme.theme=="gray")
+            cr.setSourceRGBA(1, 1, 1, 0.5);
         else {
             cr.setSourceRGBA(this.theme.detail_label_color[0], this.theme.detail_label_color[1], this.theme.detail_label_color[2], 0.5);
         }
@@ -252,6 +267,8 @@ class Graph {
             cr.setSourceRGBA(0.7, 0.7, 0.7, 1);
         else if (this.theme.theme=="dark")
             cr.setSourceRGBA(0.1, 0.1, 0.1, 1);
+        else if (this.theme.theme=="gray")
+            cr.setSourceRGBA(1, 1, 1, 0.5);
         else {
             cr.setSourceRGBA(this.theme.detail_label_color[0], this.theme.detail_label_color[1], this.theme.detail_label_color[2], 1);
         }
