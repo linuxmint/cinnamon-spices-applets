@@ -6,6 +6,7 @@ const Mainloop = imports.mainloop;
 const PopupMenu = imports.ui.popupMenu;
 const St = imports.gi.St;
 const Main = imports.ui.main;
+const Util = imports.misc.util; // Needed for spawnCommandLine()
 const MessageTray = imports.ui.messageTray;
 const Gio = imports.gi.Gio;
 const Gettext = imports.gettext;
@@ -40,7 +41,7 @@ MyApplet.prototype = {
       this.sshHeadless = false;
       this.sshForwardX = false;
       this.homeDir = GLib.get_home_dir();
-	  this.sshConfig = this.homeDir + "/.ssh/config";
+	    this.sshConfig = this.homeDir + "/.ssh/config";
       this.msgSource = new MessageTray.SystemNotificationSource(_("SSH Launcher"));
       Main.messageTray.add(this.msgSource);
       let file = Gio.file_new_for_path(this.sshConfig);
@@ -80,8 +81,8 @@ MyApplet.prototype = {
                     Grouper = new PopupMenu.PopupSubMenuMenuItem(hostname);
                     this.menu.addMenuItem(Grouper);
                     inGroup = true;
-                }                
-                continue;                
+                }
+                continue;
            } else if (host === "#GroupEnd") {
                 inGroup = false;
                 continue;
@@ -120,14 +121,14 @@ MyApplet.prototype = {
       flags = " -X " + flags;
     }
     let terminal = this.gsettings.get_string("exec");
-    Main.Util.spawnCommandLine(terminal + " -T \"" + hostname + "\" -e \"ssh " + flags + hostname + "\"");
+    Util.spawnCommandLine(terminal + " -T \"" + hostname + "\" -e \"ssh " + flags + hostname + "\"");
     let notification = new MessageTray.Notification(this.msgSource, _("SSH Launcher"), _("Connection opened to ") + hostname + " using " + terminal);
     notification.setTransient(true);
     this.msgSource.notify(notification);
   },
 
   editConfig: function() {
-	GLib.spawn_command_line_async(this.appletPath + "/launch_editor.sh");
+  GLib.spawn_command_line_async(this.appletPath + "/launch_editor.sh");
   },
 
   on_applet_clicked: function(event) {
