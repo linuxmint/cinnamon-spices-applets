@@ -26,7 +26,7 @@ function CpuDataProvider() {
 }
 
 CpuDataProvider.prototype = {
-	init() {
+	init: function() {
         this.gtop = new GTop.glibtop_cpu();
         this.current = 0;
         this.last = 0;
@@ -37,7 +37,7 @@ CpuDataProvider.prototype = {
         this.type = "CPU";
     },
 
-    getData() {
+    getData: function() {
         GTop.glibtop_get_cpu(this.gtop);
 
         this.current = this.gtop.idle;
@@ -70,13 +70,13 @@ function MemDataProvider() {
 }
 
 MemDataProvider.prototype = {
-    init() {
+    init: function() {
         this.gtopMem = new GTop.glibtop_mem();
         this.name = _("MEM");
         this.type = "MEM";
     },
 
-    getData() {
+    getData: function() {
         GTop.glibtop_get_mem(this.gtopMem);
 
         let format = new Tools();
@@ -94,7 +94,7 @@ NetDataProvider.prototype = {
     // Josef Michálek (Aka Orcus) <0rcus.cz@gmail.com>
     // Credit goes to him for the NetDataProvider
     // called NetData in sysmonitor@orcus
-    init(frequency, type_in, linlog, max_speed) {
+    init: function(frequency, type_in, linlog, max_speed) {
         if (type_in) {
             this.name = _("NET (in)");
             this.type = "NETIN";
@@ -139,7 +139,7 @@ NetDataProvider.prototype = {
         [this.down_last, this.up_last] = this.getNetLoad();
     },
     
-    getData() {
+    getData: function() {
         try {
             let [down, up] = this.getNetLoad();
             let down_delta = (down - this.down_last) / this.frequency;
@@ -168,7 +168,7 @@ NetDataProvider.prototype = {
         }
     },
 
-    getNetLoad() {
+    getNetLoad: function() {
         try {
             let down = 0;
             let up = 0;
@@ -185,7 +185,7 @@ NetDataProvider.prototype = {
         }
     },
     
-    getLinearValue(value, max) {
+    getLinearValue: function(value, max) {
         if (max<=1 || value<=0)
             return 0;
 
@@ -193,7 +193,7 @@ NetDataProvider.prototype = {
         return tools.limit(value/max, 0, 1);
     },
 
-    getLogValue(value, max) {
+    getLogValue: function(value, max) {
         if (max<1 || value<=0)
             return 0;
 
@@ -207,11 +207,11 @@ function Tools() {
 }
 
 Tools.prototype = {
-    init() {
+    init: function () {
     },
 
     //https://stackoverflow.com/questions/15900485/correct-way-to-convert-size-in-bytes-to-kb-mb-gb-in-javascript
-    formatBytes(bytes) {
+    formatBytes: function (bytes) {
         if (bytes === 0) return '0 B';
     
         const k = 1024;
@@ -222,7 +222,7 @@ Tools.prototype = {
         return parseFloat((bytes / Math.pow(k, i)).toPrecision(3)) + ' ' + sizes[i];
     },
 
-    limit(value, min, max) {
+    limit: function (value, min, max) {
         return Math.min(Math.max(value, min), max);
     }
 }

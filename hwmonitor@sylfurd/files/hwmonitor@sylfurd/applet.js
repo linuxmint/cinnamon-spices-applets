@@ -69,7 +69,7 @@ GraphicalHWMonitorApplet.prototype = {
 
     _init: function (metadata, orientation, panel_height, instance_id) {
         Applet.IconApplet.prototype._init.call(this, orientation, panel_height, instance_id);
-
+        
         this.getOrientation(orientation); // Initialise for panel orientation
         this.panel_height = panel_height;
         this.graphs = [];

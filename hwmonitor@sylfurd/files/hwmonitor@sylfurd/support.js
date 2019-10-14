@@ -9,7 +9,7 @@ function AppletArea(parent, isHorizontal, appletWidth, appletHeight) {
 }
 
 AppletArea.prototype = {
-    init(parent, isHorizontal, appletWidth, appletHeight) {        
+    init: function(parent, isHorizontal, appletWidth, appletHeight) {        
         this.isHorizontal = isHorizontal;
         this.graphArea = [];
         this.parent = parent;
@@ -24,7 +24,7 @@ AppletArea.prototype = {
     },
 
     // Adds a new graph
-    addGraph(graphWidth, graphHeight) {
+    addGraph: function(graphWidth, graphHeight) {
         let area = new GraphArea(this, graphWidth, graphHeight);
         this.graphArea.push(area);
         
@@ -38,7 +38,7 @@ AppletArea.prototype = {
     },
 
     // Creates a new drawing area
-    createDrawingArea() {
+    createDrawingArea: function() {
         this.destroyDrawingArea();
         this.drawingArea = new St.DrawingArea();
         this.drawingArea.height = this.height;
@@ -46,7 +46,7 @@ AppletArea.prototype = {
     },
 
     // Destroys an existing drawing area
-    destroyDrawingArea() {
+    destroyDrawingArea: function() {
         if (this.drawingArea) {
             this.parent.actor.remove_actor(this.drawingArea);    
             this.drawingArea = null;        
@@ -62,7 +62,7 @@ function GraphArea(parent, width, height) {
 }
 
 GraphArea.prototype = {    
-    init(parent, width, height) {
+    init: function(parent, width, height) {
         this.width = width;
         this.height = height;
         this.graph = null;
@@ -94,14 +94,14 @@ function Box(top, left, width, height) {
 }
 
 Box.prototype = {
-    init(top, left, width, height) {
+    init: function(top, left, width, height) {
         this.top = top;
         this.left = left;
         this.width = width;
         this.height = height;
     },
 
-    initFromBox(box, delta) {
+    initFromBox: function(box, delta) {
         this.top = box.top + delta;
         this.left = box.left + delta;
         this.width = box.width;

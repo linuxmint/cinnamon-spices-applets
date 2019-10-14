@@ -9,7 +9,7 @@ function Graph(provider, graphArea, theme, show_detail) {
 }
 
 Graph.prototype = {    
-    init(provider, graphArea, theme, show_detail) {
+    init: function(provider, graphArea, theme, show_detail) {
         this.provider = provider;
         this.graph = graphArea;
         this.theme = theme;
@@ -22,7 +22,7 @@ Graph.prototype = {
         }
     },
 
-    paint(area) {
+    paint: function(area) {
         let cr = area.get_context();
 
         // Since Cairo uses antialiasing, we need to translate all coordinates
@@ -55,7 +55,7 @@ Graph.prototype = {
     },
 
     // Draw the border around the graph
-    drawBorder(cr){
+    drawBorder: function(cr){
         if (this.theme.theme=="light")
             cr.setSourceRGBA(1, 1, 1, 0.5);
         else if (this.theme.theme=="dark")
@@ -72,7 +72,7 @@ Graph.prototype = {
     },
 
     // Draw the graph background with a linear gradient between two colors
-    drawBackground(cr) {
+    drawBackground: function(cr) {
         let pattern = new Cairo.LinearGradient(0, 0, 0, this.graph.inner.height);
         
         if (this.theme.theme=="light") {
@@ -94,7 +94,7 @@ Graph.prototype = {
     },
 
     // Draw the lines inside the graph
-    drawGraphLines(cr) {
+    drawGraphLines: function(cr) {
         let widthOffset1 = Math.round(this.graph.inner.width * 0.5);
         let widthOffset2 = Math.round(this.graph.inner.width * 0.25);
         let widthOffset3 = Math.round(this.graph.inner.width * 0.75);
@@ -148,7 +148,7 @@ Graph.prototype = {
     },
 
     // Draw the data points, and fill the area with a linear gradient of four colors
-    drawDataPoints(cr) {
+    drawDataPoints: function(cr) {
         cr.setLineWidth(0);
         cr.moveTo(1, this.graph.inner.height - this.datas[0]);
         for (let i = 0; i < this.datas.length; i++) {
@@ -200,7 +200,7 @@ Graph.prototype = {
     },
 
     // Draw the text label on the graph
-    drawLabel(cr) {
+    drawLabel: function(cr) {
         cr.setFontSize(this.theme.label_size);
         if (this.theme.theme=="light")
             cr.setSourceRGBA(0.8, 0.8, 0.8, 0.5);
@@ -248,7 +248,7 @@ Graph.prototype = {
     },
 
     // Draw the text label on the graph
-    drawDetailLabel(cr) {
+    drawDetailLabel: function(cr) {
         if (this.provider.text==null)
             return;
 
@@ -280,7 +280,7 @@ Graph.prototype = {
         cr.showText(this.provider.text);
     },
 
-    refreshData() {
+    refreshData: function() {
         try {
             let data = this.provider.getData() * (this.graph.inner.height - 1);
 
