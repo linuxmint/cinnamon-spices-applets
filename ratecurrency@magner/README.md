@@ -2,6 +2,8 @@
 
 Displays the current price and trends of cryptocurrencies (TOP 150 coins with CoinMarketCap) and popular fiat currencies (Dollar, Euro, Ruble etc.). Monitoring daily percentage changes.
 
+![alt text](./screenshot.png)
+
 
 ## Manual Installation
 
