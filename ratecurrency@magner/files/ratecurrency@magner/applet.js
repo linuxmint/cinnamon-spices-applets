@@ -98,42 +98,36 @@ const increase_css = '#32d74b',
 const httpSession = new Soup.SessionAsync();
 Soup.Session.prototype.add_feature.call(httpSession, new Soup.ProxyResolverDefault());
 
-function MyApplet(metadata, orientation, panel_height, instance_id) {
-	this._init(metadata, orientation, panel_height, instance_id);
-}
+class RateCurrencyApplet extends Applet.TextIconApplet {
+	constructor(metadata, orientation, panel_height, instance_id) {
+    super(orientation, panel_height, instance_id);
+		this.setAllowedLayout(Applet.AllowedLayout.BOTH);
 
-MyApplet.prototype = {
-	__proto__: Applet.TextIconApplet.prototype,
+		this.labelName = new St.Label({
+			reactive: true,
+			track_hover: true,
+			style_class: 'applet-label'
+		});
 
-	_init: function(metadata, orientation, panel_height, instance_id) {
+		this.label = new St.Label({
+			reactive: true,
+			track_hover: true,
+			style_class: 'applet-label'
+		});
+
+		this.actor.add(this.labelName, {
+			x_align: St.Align.MIDDLE,
+			y_align: St.Align.MIDDLE,
+			y_fill: false
+		});
+
+		this.actor.add(this.label, {
+			x_align: St.Align.MIDDLE,
+			y_align: St.Align.MIDDLE,
+			y_fill: false
+		});
+
 		try {
-			Applet.TextIconApplet.prototype._init.call(this, orientation, panel_height, instance_id);
-			this.setAllowedLayout(Applet.AllowedLayout.BOTH);
-
-			this.labelName = new St.Label({
-				reactive: true,
-				track_hover: true,
-				style_class: 'applet-label'
-			});
-
-			this.label = new St.Label({
-				reactive: true,
-				track_hover: true,
-				style_class: 'applet-label'
-			});
-
-			this.actor.add(this.labelName, {
-				x_align: St.Align.MIDDLE,
-				y_align: St.Align.MIDDLE,
-				y_fill: false
-			});
-
-			this.actor.add(this.label, {
-				x_align: St.Align.MIDDLE,
-				y_align: St.Align.MIDDLE,
-				y_fill: false
-			});
-
 			this.settings = new Settings.AppletSettings(this, metadata.uuid, instance_id);
 
 			this.settings.bind('country', 'serverFiat', this._updateLabel);
@@ -184,19 +178,19 @@ MyApplet.prototype = {
 			this._buildContextMenu();
 			this._updateLabel();
 		} catch (e) { global.logError(e); }
-	},
+	}
 
 	// server selection
-	_updateLabel: function() {
+	_updateLabel() {
 		this._clear();
 
 		if (this.cryptoConnect) { this._updateLabelCrypto(); }
 		else if (this.serverFiat === 'RU') { this._updateLabelFiat(this._connection(mainURL_RU, this._loadRU_Fiat, null)); }
 		else { this._updateLabelFiat(this._connection(`${mainURL_EU}${this.Currency}`, this._loadEU_Fiat, null)); }
-	},
+	}
 
 	// crypto currency auto update interval
-	_updateLabelCrypto: function() {
+	_updateLabelCrypto() {
 		if (this.CoinTimeoutId) {
 			Mainloop.source_remove(this.CoinTimeoutId);
 			this.CoinTimeoutId = 0;
@@ -204,10 +198,10 @@ MyApplet.prototype = {
 
 		this._connection(`${mainURL_Crypto}${this.cryptoID}&convert=${this.Currency}`, this._loadCrypto, this.APIkey);
 		this.CoinTimeoutId = Mainloop.timeout_add_seconds(this.CryptoInterval * 60, Lang.bind(this, this._updateLabel));
-	},
+	}
 
 	// fiat currency auto update interval
-	_updateLabelFiat: function(callback) {
+	_updateLabelFiat(callback) {
 		if (this.FiatTimeoutId) {
 			Mainloop.source_remove(this.FiatTimeoutId);
 			this.FiatTimeoutId = 0;
@@ -216,20 +210,20 @@ MyApplet.prototype = {
 		callback;
 		// in seconds, for set milliseconds use 'timeout_add'
 		this.FiatTimeoutId = Mainloop.timeout_add_seconds(this._getTimeToUpdateFiat(), Lang.bind(this, this._updateLabel));
-	},
+	}
 
 	// update every day at 23:00 (11:00 PM)
-	_getTimeToUpdateFiat: function() {
+	_getTimeToUpdateFiat() {
 		let now = new Date(),
 				newDate = now.getHours() >= 23 ? now.getDate() + 2 : now.getDate() + 1;
 
 		let updateDate = new Date(now.getFullYear(), now.getMonth(), newDate);
 		return Math.round((updateDate - now) / 1000 - 60 * 60);
-	},
+	}
 
 
 	// connection to the selected server
-	_connection: function(url, callback, key) {
+	_connection(url, callback, key) {
 		if (!this.cryptoConnect) {
 			if (this.serverFiat === 'RU' && this.Currency === 'RUB' || this.serverFiat === 'EU' && this.Currency === 'EUR') {
 				this._setLabel(this._getPrice(1, this.Currency), '');
@@ -274,19 +268,19 @@ MyApplet.prototype = {
 			this.count = 0;
 			Lang.bind(this, callback)(response.response_body.data, null);
 		}));
-	},
+	}
 
 	// access to data without connecting to the server
-	_updateData: function() {
+	_updateData() {
 		this._clear();
 		if (this.cryptoConnect) { this._dataCrypto(); }
 		else if (this.serverFiat === 'RU') { this._dataFiatRU(); }
 		else { this._dataFiatEU(); }
-	},
+	}
 
 	// EU
 	// Received data from the server. Used without reconnection without need
-	_dataFiatEU: function() {
+	_dataFiatEU() {
 		if (this.display == 'money') {
 			this._setLabel(`${this._getPrice(this.fiatEU['Price'], this.Currency)}${this._setSign(this.fiatEU['Delta'])}`, '');
 		}
@@ -298,10 +292,10 @@ MyApplet.prototype = {
 		this._setIcon(this.Currency, fiatImageDirectory);
 		this._setName(fiatName['EUR']);
 		this._alertOnUpdate();
-	},
+	}
 
 	// loading the latest data if necessary
-	_loadEU_Fiat: function(data) {
+	_loadEU_Fiat(data) {
 		let response = JSON.parse(data),
 				date = new Date(response['date']).toLocaleDateString(),
 				result = response['rates'][this.Currency];
@@ -313,10 +307,10 @@ MyApplet.prototype = {
 		};
 
 		this._loadPrevPriceEU(null, response.date);
-	},
+	}
 
 	// loading previous data for calculating delta and percentage change
-	_loadPrevPriceEU: function(data, lastDate) {
+	_loadPrevPriceEU(data, lastDate) {
 		if (!data) {
 			let date = new Date(lastDate),
 					result = new Date(date.getFullYear(), date.getMonth(), date.getDate() - 1);
@@ -331,11 +325,11 @@ MyApplet.prototype = {
 			this._dataFiatEU();
 			this._loadHistory();
 		}
-	},
+	}
 
 	// RU
 	// Received data from the server. Used without reconnection without need
-	_dataFiatRU: function() {
+	_dataFiatRU() {
 		if (this.display === 'money') {
 			this._setLabel(`${this._getPrice(this.fiatRU['Price'], 'RUB')}${this._setSign(this.fiatRU['Delta'])}`, '');
 		}
@@ -347,10 +341,10 @@ MyApplet.prototype = {
 		this._setIcon(this.Currency, fiatImageDirectory);
 		this._setName(this.Currency);
 		this._alertOnUpdate();
-	},
+	}
 
 	// loading the latest data if necessary
-	_loadRU_Fiat: function(data) {
+	_loadRU_Fiat(data) {
 		let response = JSON.parse(data),
 				date = new Date(response['Date']).toLocaleDateString(),
 				result = response['Valute'][this.Currency];
@@ -369,12 +363,12 @@ MyApplet.prototype = {
 			this._loadHistory();
 		}
 		else { this._setLabel(this._getPrice(1, this.Currency), ''); }
-	},
+	}
 
 
 	// Crypto currency
 	// Received data from the server. Used without reconnection without need
-	_dataCrypto: function() {
+	_dataCrypto() {
 		if (this.display == 'money') {
 			this._setLabel(this._getPrice(this.Crypto['Price'], this.Currency), '');
 		}
@@ -386,10 +380,10 @@ MyApplet.prototype = {
 		this._setIcon(this.Crypto['Symbol'], coinImageDirectory);
 		this._setName(this.Crypto['Symbol']);
 		this._alertOnUpdate();
-	},
+	}
 
 	// loading the latest data if necessary
-	_loadCrypto: function(data) {
+	_loadCrypto(data) {
 		let response = JSON.parse(data).data[this.cryptoID],
 				date = new Date(response['last_updated']).toLocaleString(),
 				result = response['quote'][this.Currency];
@@ -408,17 +402,17 @@ MyApplet.prototype = {
 		};
 		this._dataCrypto();
 		this._loadHistory();
-	},
+	}
 
-	_visit_website: function _visit_website() { Util.spawnCommandLine('xdg-open https://pro.coinmarketcap.com'); },
+	_visit_website() { Util.spawnCommandLine('xdg-open https://pro.coinmarketcap.com'); }
 
 
 
 	// PopUp graph
-	on_applet_clicked: function(event) { if (this.graphOn) { this.menu.toggle(); } },
+	on_applet_clicked(event) { if (this.graphOn) { this.menu.toggle(); } }
 
 	// loading the latest history data if necessary
-	_loadHistory: function() {
+	_loadHistory() {
 		if (this.cryptoConnect) {
 			this._connection(`${historyURL_Crypto}${this.Crypto['Symbol']}&tsym=${this.Currency}&limit=${this.duration}`, this._loadDataCryptoHistory, null);
 		}
@@ -428,17 +422,17 @@ MyApplet.prototype = {
 		else {
 			this._connection(`${historyURL_EU}${this.Currency.toLowerCase()}.xml`, this._loadDataFiatHistoryEU, null);
 		}
-	},
+	}
 
-	_loadDataFiatHistoryEU: function(data) {
+	_loadDataFiatHistoryEU(data) {
 		let periodDates = parseEUbank._formatPeriod(this.duration);
 		let jsonOutput = parseEUbank._periodFromArray(data.toString(), periodDates[0], periodDates[1]);
 		this.graphData = parseEUbank._parseXML(jsonOutput);
-	},
+	}
 
-	_loadDataFiatHistoryRU: function(data) { this.graphData = parseRUbank._parseXML(data.toString()); },
+	_loadDataFiatHistoryRU(data) { this.graphData = parseRUbank._parseXML(data.toString()); }
 
-	_loadDataCryptoHistory: function(data) {
+	_loadDataCryptoHistory(data) {
 		let jsonOutput = JSON.parse(data);
 
 		if (jsonOutput.hasOwnProperty('Response') && jsonOutput['Response'] === 'Error') {
@@ -446,9 +440,9 @@ MyApplet.prototype = {
 			return;
 		}
 		else { this.graphData = jsonOutput; }
-	},
+	}
 
-	_drawGraph: function() {
+	_drawGraph() {
 		if (!this.graph.visible) { return; }
 
 		let [width, height] = this.graph.get_surface_size(),
@@ -647,27 +641,27 @@ MyApplet.prototype = {
 			this._graphText(cr, color, fontSizeNormal, 15, height - 2, min); // Min price text
 			this._graphText(cr, color, fontSizeNormal, lastDateSize, height - 2, lastDate); // Last update text
 		}
-	},
+	}
 
-	_graphText: function(cr, color, FontSize, pxX, pxY, text) {
+	_graphText(cr, color, FontSize, pxX, pxY, text) {
 		cr.setSourceRGBA(color.red / 255, color.green / 255, color.blue / 255, .8);
 		cr.setFontSize(FontSize);
 		cr.moveTo(pxX, pxY);
 		cr.showText(text);
-	},
+	}
 
-	_graphLine: function(cr, color, posX, posY, width, height) {
+	_graphLine(cr, color, posX, posY, width, height) {
 		cr.setSourceRGBA(color.red / 255, color.green / 255, color.blue / 255, .2);
 		cr.moveTo(posX, posY);
 		cr.setLineWidth(height);
 		cr.lineTo(width - posX, posY);
 		cr.stroke();
-	},
+	}
 
 
 
 	// Alerts
-	_alertOnUpdate: function() {
+	_alertOnUpdate() {
 		if (this.alertOn) {
 			let MaxValue = parseFloat(this.alertAbove.replace(',', '.')) || undefined,
 					MinValue = parseFloat(this.alertBelow.replace(',', '.')) || undefined;
@@ -686,9 +680,9 @@ MyApplet.prototype = {
 				if (MinValue !== undefined && percent <= MinValue) { this._notifyMessage(format, 'go-bottom'); }
 			}
 		}
-	},
+	}
 
-	_notifyMessage: function(message, iconName) {
+	_notifyMessage(message, iconName) {
 		let icon = new St.Icon({
 			icon_name: iconName,
 			icon_type: St.IconType.SYMBOLIC,
@@ -699,18 +693,18 @@ MyApplet.prototype = {
 
 		notification.setTransient(true);
 		this.notificationSource.notify(notification);
-	},
+	}
 
 
 
 	// Labels
-	_clear: function() {
+	_clear() {
 		this.hide_applet_icon();
 		this._setName('');
 		this._setLabel('', '');
-	},
+	}
 
-	_setIcon: function(data, path) {
+	_setIcon(data, path) {
 		if (!this.showIcon) {
 			this.hide_applet_icon();
 			return;
@@ -728,9 +722,9 @@ MyApplet.prototype = {
 		});
 		this._applet_icon.set_icon_size(this.getPanelIconSize(St.IconType.FULLCOLOR));
 		this._applet_icon_box.child = this._applet_icon;
-	},
+	}
 
-	_setName: function(text) {
+	_setName(text) {
 		if (!this.showName || text == '' || text == undefined) { // Hide empty labels
 			this.labelName.hide();
 			return;
@@ -739,9 +733,9 @@ MyApplet.prototype = {
 		this.labelName.set_text(text + ': ');
 		this.labelName.set_style('');
 		this.labelName.show();
-	},
+	}
 
-	_setLabel: function(text, css_style) {
+	_setLabel(text, css_style) {
 		if (text == '' || text == undefined) { // Hide empty labels
 			this.label.hide();
 			return;
@@ -750,17 +744,17 @@ MyApplet.prototype = {
 		this.label.set_text(text);
 		this.label.set_style(css_style);
 		this.label.show();
-	},
+	}
 
-	_setStyle: function(value) {
+	_setStyle(value) {
 		return value > 0 ? 'color: ' + increase_css : value < 0 ? 'color: ' + decrease_css : '';
-	},
+	}
 
-	_setSign: function(value) {
+	_setSign(value) {
 		return value > 0 ? increaseSign : value < 0 ? decreaseSign : '';
-	},
+	}
 
-	_getPrice: function(price, symbol) {
+	_getPrice(price, symbol) {
 		price = parseFloat(price);
 		if (typeof price != 'number') { return; }
 
@@ -771,9 +765,9 @@ MyApplet.prototype = {
 
 		if (Math.abs(price) < 1) { options['minimumFractionDigits'] = 3; }
 		return price.toLocaleString(undefined, options);
-	},
+	}
 
-	_getDelta: function(num, symbol) {
+	_getDelta(num, symbol) {
 		if (typeof num != 'number') { return; }
 
 		let options = {
@@ -785,9 +779,9 @@ MyApplet.prototype = {
 
 		if (Math.abs(num) < 1) { options['maximumFractionDigits'] = 3; }
 		return num = `${parseFloat(num).toLocaleString(undefined, options)}${this._setSign(num)}`;
-	},
+	}
 
-	_getPercent: function(num) {
+	_getPercent(num) {
 		if (typeof num != 'number') { return; }
 
 		let options = {
@@ -797,30 +791,30 @@ MyApplet.prototype = {
 		};
 
 		return num = ` ${parseFloat(num).toLocaleString(undefined, options)}%${this._setSign(num)}`;
-	},
+	}
 
-	_wordEndings: function(n, titles) {
+	_wordEndings(n, titles) {
 		n = parseInt(n);
 		if (GLib.getenv('LANG').startsWith('ru')) { // if the system language is Russian
 			return titles[(n%10 == 1 && n%100 != 11 ? 0 : n%10 >= 2 && n%10 <= 4 && (n%100 < 10 || n%100 >= 20) ? 1 : 2)];
 		}
 		else { return titles[(n != 1 ? 1 : 0)]; }
-	},
+	}
 
-	_viewTooltip: function() {
+	_viewTooltip() {
 		if (this.graphOn) { this.set_applet_tooltip(msg_tooltip); }
 		else { this.set_applet_tooltip(''); }
-	},
+	}
 
 	// Add update function in the right click context menu
-	_buildContextMenu: function() {
+	_buildContextMenu() {
 		let menuitem = new PopupMenu.PopupIconMenuItem(msg_updateMenu, 'view-refresh', St.IconType.SYMBOLIC);
-		menuitem.connect('activate', Lang.bind(this, function (event) { this._updateLabel(); }));
+		menuitem.connect('activate', Lang.bind(this, function(event) { this._updateLabel(); }));
 		this._applet_context_menu.addMenuItem(menuitem);
 		this._applet_context_menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem()); // Separator
-	},
+	}
 
-	on_applet_removed_from_panel: function() {
+	on_applet_removed_from_panel() {
 		if (this.TimeoutId) {
 			Mainloop.source_remove(this.TimeoutId);
 			this.TimeoutId = 0;
@@ -836,8 +830,8 @@ MyApplet.prototype = {
 		this.settings.finalize();
 	}
 
-};
+}
 
 function main(metadata, orientation, panel_height, instance_id) {
-	return new MyApplet(metadata, orientation, panel_height, instance_id);
+	return new RateCurrencyApplet(metadata, orientation, panel_height, instance_id);
 }
