@@ -49,11 +49,11 @@ function _(str) {
   return Gettext.dgettext(UUID, str)
 }
 
-let debug = true;
+let debug_once = true;
 function debug_message_once(message) {    
-    if (debug)
+    if (debug_once)
         global.logError("HWMONITOR : " + message);
-    debug = false;
+    debug_once = false;
 }
 
 function debug_message(message) {
@@ -87,6 +87,7 @@ GraphicalHWMonitorApplet.prototype = {
         this.itemReset = new PopupMenu.PopupMenuItem(_("Restart 'Graphical hardware monitor'"));        
         this.itemReset.connect('activate', Lang.bind(this, this.restartGHW));
         this._applet_context_menu.addMenuItem(this.itemReset);
+
 
         // Setup the applet settings 
         this.settings = new Settings.AppletSettings(this, metadata.uuid, instance_id);
@@ -247,7 +248,6 @@ GraphicalHWMonitorApplet.prototype = {
     },
 
     on_applet_clicked: function(event) {
-        debug_message("Clicked!");
         this._runSysMon();
     },
 

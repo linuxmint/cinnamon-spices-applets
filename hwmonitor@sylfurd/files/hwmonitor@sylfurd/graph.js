@@ -4,8 +4,12 @@ const Main = imports.ui.main;
 //
 // Class responsible for drawing an instance of one graph
 //
-class Graph {    
-    constructor (provider, graphArea, theme, show_detail) {
+function Graph(provider, graphArea, theme, show_detail) {
+    this.init(provider, graphArea, theme, show_detail);
+}
+
+Graph.prototype = {    
+    init(provider, graphArea, theme, show_detail) {
         this.provider = provider;
         this.graph = graphArea;
         this.theme = theme;
@@ -16,7 +20,7 @@ class Graph {
         for (let i = 0; i < this.datas.length; i++) {
             this.datas[i] = 0;
         }
-    }
+    },
 
     paint(area) {
         let cr = area.get_context();
@@ -48,7 +52,7 @@ class Graph {
 
         // Reset translation
         cr.translate( -(this.graph.outer.left + 0.5), -(this.graph.outer.top + 0.5));
-    }
+    },
 
     // Draw the border around the graph
     drawBorder(cr){
@@ -65,7 +69,7 @@ class Graph {
         cr.rectangle(0, 0, 
                     this.graph.outer.width, this.graph.outer.height);
         cr.stroke();
-    }
+    },
 
     // Draw the graph background with a linear gradient between two colors
     drawBackground(cr) {
@@ -87,7 +91,7 @@ class Graph {
         cr.setSource(pattern);
         cr.rectangle(0, 0, this.graph.inner.width, this.graph.inner.height);
         cr.fill();
-    }
+    },
 
     // Draw the lines inside the graph
     drawGraphLines(cr) {
@@ -141,7 +145,7 @@ class Graph {
         cr.moveTo(widthOffset3, 1);
         cr.lineTo(widthOffset3, this.graph.inner.height);
         cr.stroke();
-    }
+    },
 
     // Draw the data points, and fill the area with a linear gradient of four colors
     drawDataPoints(cr) {
@@ -193,7 +197,7 @@ class Graph {
             pattern.addColorStopRGBA(1, 0.18, 0.204, 0.212, 1);
 
         cr.fill();
-    }
+    },
 
     // Draw the text label on the graph
     drawLabel(cr) {
@@ -241,8 +245,7 @@ class Graph {
             cr.showText(this.theme.netout_custom_label);
         else
             cr.showText(this.provider.name);
-    }
-
+    },
 
     // Draw the text label on the graph
     drawDetailLabel(cr) {
@@ -275,7 +278,7 @@ class Graph {
         cr.moveTo(global.ui_scale * 1, global.ui_scale * (this.theme.label_size + this.theme.detail_label_size) + 0.5);
 
         cr.showText(this.provider.text);
-    }
+    },
 
     refreshData() {
         try {

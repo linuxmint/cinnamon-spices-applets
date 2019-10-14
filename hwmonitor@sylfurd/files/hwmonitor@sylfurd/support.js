@@ -3,8 +3,13 @@ const St = imports.gi.St;
 //
 // Class responsible for keeping track of the entire applet area
 //
-class AppletArea {
-    constructor(parent, isHorizontal, appletWidth, appletHeight) {        
+
+function AppletArea(parent, isHorizontal, appletWidth, appletHeight) {
+    this.init(parent, isHorizontal, appletWidth, appletHeight);
+}
+
+AppletArea.prototype = {
+    init(parent, isHorizontal, appletWidth, appletHeight) {        
         this.isHorizontal = isHorizontal;
         this.graphArea = [];
         this.parent = parent;
@@ -16,7 +21,7 @@ class AppletArea {
             this.height = 0;
             this.width = appletWidth;
         }
-    }
+    },
 
     // Adds a new graph
     addGraph(graphWidth, graphHeight) {
@@ -30,7 +35,7 @@ class AppletArea {
             this.height += graphHeight;
 
         return area;
-    }
+    },
 
     // Creates a new drawing area
     createDrawingArea() {
@@ -38,7 +43,7 @@ class AppletArea {
         this.drawingArea = new St.DrawingArea();
         this.drawingArea.height = this.height;
         this.drawingArea.width = this.width;
-    }
+    },
 
     // Destroys an existing drawing area
     destroyDrawingArea() {
@@ -52,8 +57,12 @@ class AppletArea {
 //
 // Class responsible for keeping track of one of the graphs
 //
-class GraphArea {    
-    constructor(parent, width, height) {
+function GraphArea(parent, width, height) {
+    this.init(parent, width, height);
+}
+
+GraphArea.prototype = {    
+    init(parent, width, height) {
         this.width = width;
         this.height = height;
         this.graph = null;
@@ -80,13 +89,17 @@ class GraphArea {
 //
 // Just a square class
 //
-class Box {
+function Box(top, left, width, height) {
+    this.init(top, left, width, height)
+}
+
+Box.prototype = {
     init(top, left, width, height) {
         this.top = top;
         this.left = left;
         this.width = width;
         this.height = height;
-    }
+    },
 
     initFromBox(box, delta) {
         this.top = box.top + delta;

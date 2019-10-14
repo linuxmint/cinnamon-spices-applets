@@ -21,8 +21,12 @@ try {
 }
 
 // Class responsible for getting CPU data
-class CpuDataProvider {
-	constructor() {
+function CpuDataProvider() {
+    this.init();
+}
+
+CpuDataProvider.prototype = {
+	init() {
         this.gtop = new GTop.glibtop_cpu();
         this.current = 0;
         this.last = 0;
@@ -31,7 +35,7 @@ class CpuDataProvider {
         this.last_delta = 0;
         this.name = _("CPU");
         this.type = "CPU";
-    }
+    },
 
     getData() {
         GTop.glibtop_get_cpu(this.gtop);
@@ -61,12 +65,16 @@ class CpuDataProvider {
 }
 
 // Class responsible for getting memory data
-class MemDataProvider {
-    constructor () {
+function MemDataProvider() {
+    this.init();
+}
+
+MemDataProvider.prototype = {
+    init() {
         this.gtopMem = new GTop.glibtop_mem();
         this.name = _("MEM");
         this.type = "MEM";
-    }
+    },
 
     getData() {
         GTop.glibtop_get_mem(this.gtopMem);
@@ -77,12 +85,16 @@ class MemDataProvider {
     }
 }
 
-class NetDataProvider {
+function NetDataProvider(frequency, type_in, linlog, max_speed) {
+    this.init(frequency, type_in, linlog, max_speed);
+}
+
+NetDataProvider.prototype = {
     // Code is pretty much a copy of the code written by
     // Josef Michálek (Aka Orcus) <0rcus.cz@gmail.com>
     // Credit goes to him for the NetDataProvider
     // called NetData in sysmonitor@orcus
-    constructor(frequency, type_in, linlog, max_speed) {
+    init(frequency, type_in, linlog, max_speed) {
         if (type_in) {
             this.name = _("NET (in)");
             this.type = "NETIN";
@@ -125,7 +137,7 @@ class NetDataProvider {
         
         // Retrieve initial net load data
         [this.down_last, this.up_last] = this.getNetLoad();
-    }
+    },
     
     getData() {
         try {
@@ -154,7 +166,7 @@ class NetDataProvider {
         catch (e) {
             global.logError("Exception in getData():" + e.message);
         }
-    }
+    },
 
     getNetLoad() {
         try {
@@ -171,8 +183,7 @@ class NetDataProvider {
         catch (e) {
             global.logError("Exception in getNetLoad():" + e.message);
         }
-    }
-
+    },
     
     getLinearValue(value, max) {
         if (max<=1 || value<=0)
@@ -180,7 +191,7 @@ class NetDataProvider {
 
         let tools = new Tools();
         return tools.limit(value/max, 0, 1);
-    }
+    },
 
     getLogValue(value, max) {
         if (max<1 || value<=0)
@@ -191,7 +202,14 @@ class NetDataProvider {
     }
 };
 
-class Tools {
+function Tools() {
+    this.init();
+}
+
+Tools.prototype = {
+    init() {
+    },
+
     //https://stackoverflow.com/questions/15900485/correct-way-to-convert-size-in-bytes-to-kb-mb-gb-in-javascript
     formatBytes(bytes) {
         if (bytes === 0) return '0 B';
@@ -202,7 +220,7 @@ class Tools {
         const i = Math.floor(Math.log(bytes) / Math.log(k));
             
         return parseFloat((bytes / Math.pow(k, i)).toPrecision(3)) + ' ' + sizes[i];
-    }
+    },
 
     limit(value, min, max) {
         return Math.min(Math.max(value, min), max);
