@@ -1,6 +1,0 @@
-{
- "uuid": "system-monitor@spacy01",
- "name": "System monitor",
- "description": "Click here to see processes and etc.",
- "icon": "gnome-system-monitor"
-}

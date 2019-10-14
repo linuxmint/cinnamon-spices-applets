@@ -1,6 +1,0 @@
-{
- "uuid": "timeout@narutrey",
- "name": "Time Out",
- "description": "Automatically controlled time outs and breaks",
- "icon": "gnome-break-timer"
-}

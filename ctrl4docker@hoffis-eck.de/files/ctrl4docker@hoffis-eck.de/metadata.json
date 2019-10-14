@@ -1,6 +1,0 @@
-{
-    "uuid": "ctrl4docker@hoffis-eck.de",
-    "name": "Docker Control",
-    "description": "Activates/Deactivates Docker Container",
-    "max-instances": "-1"
-}

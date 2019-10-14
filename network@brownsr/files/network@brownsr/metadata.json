@@ -1,7 +1,0 @@
-{
- "uuid": "network@brownsr",
- "name": "Network",
- "description": "Show network",
- "icon": "network-wired",
- "max-instances": "infinite"
-}

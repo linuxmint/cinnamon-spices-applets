@@ -1,1 +1,0 @@
-ifconfig -s | awk '{ print $1 }'

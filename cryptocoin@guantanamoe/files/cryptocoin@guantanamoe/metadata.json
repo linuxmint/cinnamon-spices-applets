@@ -1,7 +1,0 @@
-{
-  "uuid": "cryptocoin@guantanamoe",
-  "name": "Cryptocoin",
-  "description": "Monitor current price and trends of cryptocurrencies",
-  "version": 1.5,
-  "max-instances": "-1"
-}

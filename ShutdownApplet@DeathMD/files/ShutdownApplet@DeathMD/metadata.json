@@ -1,7 +1,0 @@
-{
-    "last-edited": "1334576529", 
-    "description": "An applet to shutdown, restart and suspend your system.", 
-    "icon": "emblem-personal", 
-    "uuid": "ShutdownApplet@DeathMD", 
-    "name": "Shutdown Applet"
-}

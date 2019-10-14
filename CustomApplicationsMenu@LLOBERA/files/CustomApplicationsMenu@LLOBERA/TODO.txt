@@ -1,5 +1,0 @@
-# choose to display label or not
-
-# display menu without left and right margin
-
-# display pb with clementine icon

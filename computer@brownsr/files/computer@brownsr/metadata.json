@@ -1,7 +1,0 @@
-{
- "uuid": "computer@brownsr",
- "name": "Computer",
- "description": "Show files at computer level",
- "icon": "computer",
- "max-instances": "infinite"
-}

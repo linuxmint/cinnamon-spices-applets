@@ -1,6 +1,0 @@
-{
- "uuid": "force-quit@cinnamon.org",
- "name": "Force Quit",
- "description": "Click on the applet to launch xkill and force any window to quit immediately",
- "icon": "window-close"
-}

@@ -1,4 +1,0 @@
-Custom Places Menu Cinnamon Applet
-Developed by Nicolas LLOBERA - nllobera@gmail.com
-License: GPLv3
-Copyright © 2013 Nicolas LLOBERA

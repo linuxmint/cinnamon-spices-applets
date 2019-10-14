@@ -1,6 +1,0 @@
-{
-    "uuid": "sshconnect@foobar-beer",
-    "name": "SSH Connect",
-    "description": "Open SSH shell based on applet configuration table with optional configuration of console profile and flags per each connection.",
-    "icon": "network"
-}

@@ -1,6 +1,0 @@
-{
-    "description": "Shows a notification when a website updates",
-    "version": "1.0.3",
-    "uuid": "website-notifier@cardsurf",
-    "name": "Website notifier"
-}

@@ -1,8 +1,0 @@
-{
-	"cheatsheetFolder": {
-		"type": "filechooser",
-		"default": "~/.local/share/cinnamon/applets/cheaty@centurix/refdocs",
-		"description": "cheatsheetFolder",
-		"select-dir": true
-	}
-}

@@ -1,7 +1,0 @@
-{
-    "max-instances": -1,
-    "description": "Take a snapshot of your desktop or individual windows", 
-    "icon": "applets-screenshooter", 
-    "uuid": "ScreenShot@tech71", 
-    "name": "ScreenShot"
-}

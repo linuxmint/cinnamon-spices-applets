@@ -1,8 +1,0 @@
-{
- "uuid": "clipboard-qr@wrouesnel",
- "name": "Clipboard QR code applet",
- "description": "Create QR codes from clipboard content",
- "url" : "https://github.com/wrouesnel/clipboard-qr",
- "original-authors" : ["ebbes"],
- "version" : "1.12"
-}

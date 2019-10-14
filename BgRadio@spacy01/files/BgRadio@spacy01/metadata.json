@@ -1,7 +1,0 @@
-{
-    "uuid": "BgRadio@spacy01", 
-   "description": "The most famous bulgarian radio and TV streams. Some of the streams are available only from bulgaria. To watch a TVs, you'll need to install rtmpdump and mpv packages.",
-    "name": "Bulgarian Radio and TV Streams", 
-    "last-edited": 1508561972, 
-    "icon": "tvtime"
-}

@@ -1,5 +1,0 @@
-*.mo
-*.pyc
-*/gschemas.compiled
-node_modules/
-/.idea/

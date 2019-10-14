@@ -1,6 +1,0 @@
-{
- "uuid": "ThemeRefresh@JosephM",
- "name": "Reload Current Theme",
- "description": "A simple applet that allows you to refresh the current Cinnamon Theme",
- "icon": "preferences-system"
-}

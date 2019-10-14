@@ -1,8 +1,0 @@
-{
-  "uuid": "windowlist@cobinja.de",
-  "name": "CobiWindowList",
-  "description": "A window list with app grouping and window previews",
-  "max-instances": -1,
-  "multiversion": true,
-  "role": "panellauncher"
-}

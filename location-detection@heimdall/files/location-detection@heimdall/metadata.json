@@ -1,6 +1,0 @@
-{
-    "last-edited": "1408360521", 
-    "description": "Shows the geographic location of your public IP and country-flag.", 
-    "uuid": "location-detection@heimdall", 
-    "name": "Location Detection + Flags"
-}

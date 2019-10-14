@@ -1,8 +1,0 @@
-Items on the roadmap for the Feeds applet.
-☐ *Wish* Custom per feed title.. Allow users to define what additional fields are displayed in title. 
-
-Archive:
- ✔ Add roadmap to keep track of tasks.
- ✔ Update interface to notify users when a feed has been forwarded to new URL.
- ✔ Move feeds into separate json file to allow easier parsing / flexability.
- ✔ Allow per feed settings.

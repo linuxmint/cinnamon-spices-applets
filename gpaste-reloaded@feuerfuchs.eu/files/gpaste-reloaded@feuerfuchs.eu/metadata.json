@@ -1,9 +1,0 @@
-{
-    "website":       "https://github.com/Feuerfuchs/GPaste-Reloaded-Cinnamon-Applet",
-    "uuid":          "gpaste-reloaded@feuerfuchs.eu",
-    "max-instances": -1,
-    "description":   "A complete rewrite of the GPaste applet based on the Gnome Shell extension",
-    "version":       "2.6",
-    "icon":          "edit-paste",
-    "name":          "GPaste Reloaded"
-}

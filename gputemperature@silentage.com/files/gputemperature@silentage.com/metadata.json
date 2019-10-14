@@ -1,7 +1,0 @@
-{
-   "uuid": "gputemperature@silentage.com", 
-   "name": "GPU Temperature", 
-   "description": "Shows NVidia/ATI GPU temperature in the panel, and detailed/multi-gpu information in a popup menu.", 
-   "icon": "gpu-temp",
-   "version": "2.0.0"
-}

@@ -1,8 +1,0 @@
-{
-    "uuid": "expressvpn@Hukuta",
-    "name": "ExpressVPN",
-    "description": "Connect to VPN in one click from this applet. ExpressVPN client is required (this is a paid service)",
-    "icon": "network-connect",
-    "max-instances": "1",
-    "last-edited": 1553873473
-}

@@ -1,7 +1,0 @@
-{
-    "multiversion": true,
-    "uuid": "search-box@mtwebster",
-    "name": "Internet Search Box",
-    "icon": "web-browser",
-    "description": "Perform an Internet search, using your favorite engine"
-}
