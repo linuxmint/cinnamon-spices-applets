@@ -5,7 +5,7 @@ Graphical Hardware Monitor
 
 The code for this applet can be found under hwmonitor@sylfurd here : [cinnamon-spices-applets](https://github.com/linuxmint/cinnamon-spices-applets/)
 
-Issues can be reported here : [Issues](https://github.com/linuxmint/cinnamon-spices-applets/issues)
+Issues can be reported here : [Issues](https://github.com/linuxmint/cinnamon-spices-applets/issues?q=is%3Aissue+hwmonitor+user%3Asylfurd+is%3Aopen)
 
 ### Changes
 
