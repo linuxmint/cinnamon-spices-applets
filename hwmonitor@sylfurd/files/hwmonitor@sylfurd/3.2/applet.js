@@ -1,17 +1,24 @@
 /*
 Copyright 2012 Renaud Delcoigne (Aka Sylfurd)
+
 This file is part of HWMonitor
+
 HWMonitor is free software: you can redistribute it and/or modify it under the
 terms of the GNU General Public License as published by the Free Software
 Foundation, either version 3 of the License, or (at your option) any later
 version.
+
 Foobar is distributed in the hope that it will be useful, but WITHOUT ANY
 WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
 FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
 details.
+
 You should have received a copy of the GNU General Public License along
 with Foobar. If not, see http://www.gnu.org/licenses/.
 */
+
+// 2019-10-15 : I added a version to metadata.json, please increase that 
+// when making changes to this applet
 
 const Applet = imports.ui.applet;
 const Cinnamon = imports.gi.Cinnamon;
@@ -20,34 +27,40 @@ const Mainloop = imports.mainloop;
 const PopupMenu = imports.ui.popupMenu;
 const Clutter = imports.gi.Clutter;
 const St = imports.gi.St;
-const Cairo = imports.cairo;
-const Main = imports.ui.main;
 const Gettext = imports.gettext;
 const GLib = imports.gi.GLib;
-// Width of the applet will be ScaleRatio-times the height of it.
-const ScaleRatio = 3;
-
+const Settings = imports.ui.settings;
 const UUID = "hwmonitor@sylfurd";
+
 let gtopFailed = false;
+let Providers;
+let Graph;
+let Support;
+
+if (typeof require !== 'undefined') {
+    Providers = require('./providers');
+    Graph = require('./graph');
+    Support = require('./support');
+} else {
+    Providers = imports.ui.appletManager.applets[UUID].providers;
+    Graph = imports.ui.appletManager.applets[UUID].graph;
+    Support = imports.ui.appletManager.applets[UUID].support;
+}
 
 Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
 function _(str) {
   return Gettext.dgettext(UUID, str)
 }
 
-let GTop;
-try {
-    GTop = imports.gi.GTop;
-} catch (e) {
-    let icon = new St.Icon({ icon_name: 'utilities-system-monitor',
-                           icon_type: St.IconType.FULLCOLOR,
-                           icon_size: 24 });
-    Main.criticalNotify(_("Dependency missing"), _("Please install the GTop package\n" +
-      "\tUbuntu / Mint: gir1.2-gtop-2.0\n" +
-      "\tFedora: libgtop2-devel\n" +
-      "\tArch: libgtop\n" +_(
-			"to use the applet %s")).format(UUID), icon);
-    gtopFailed = true;
+let debug_once = true;
+function debug_message_once(message) {    
+    if (debug_once)
+        global.logError("HWMONITOR : " + message);
+    debug_once = false;
+}
+
+function debug_message(message) {
+    global.logError("HWMONITOR : " + message);
 }
 
 function GraphicalHWMonitorApplet(metadata, orientation, panel_height, instance_id) {
@@ -59,7 +72,9 @@ GraphicalHWMonitorApplet.prototype = {
 
     _init: function (metadata, orientation, panel_height, instance_id) {
         Applet.IconApplet.prototype._init.call(this, orientation, panel_height, instance_id);
-
+        
+        this.getOrientation(orientation); // Initialise for panel orientation
+        this.panel_height = panel_height;
         this.graphs = [];
 
         if (gtopFailed) {
@@ -68,45 +83,189 @@ GraphicalHWMonitorApplet.prototype = {
             return;
         }
 
-        this.itemOpenSysMon = new PopupMenu.PopupMenuItem(_("Open System Monitor"));
+        this.itemOpenSysMon = new PopupMenu.PopupMenuItem(_("Open System Monitor"));        
         this.itemOpenSysMon.connect('activate', Lang.bind(this, this._runSysMonActivate));
         this._applet_context_menu.addMenuItem(this.itemOpenSysMon);
 
-        this.graphArea = new St.DrawingArea();
-        this.graphArea.height = this._panelHeight;
-        // Request space for two graphs where w=h*ScaleRatio each
-        this.graphArea.width = (this._panelHeight * ScaleRatio * 2);
-        this.graphArea.connect('repaint', Lang.bind(this, this.onGraphRepaint));
+        this.itemReset = new PopupMenu.PopupMenuItem(_("Restart 'Graphical hardware monitor'"));        
+        this.itemReset.connect('activate', Lang.bind(this, this.restartGHW));
+        this._applet_context_menu.addMenuItem(this.itemReset);
 
-        this.actor.add_actor(this.graphArea);
 
-        let cpuProvider =  new CpuDataProvider();
-        let memProvider =  new MemDataProvider();
+        // Setup the applet settings 
+        this.settings = new Settings.AppletSettings(this, metadata.uuid, instance_id);
+        // General settings
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "frequency", "frequency", this.settingsChanged, null);
+        
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "theme", "theme", this.settingsChanged, null);
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "border_color", "border_color", this.settingsChanged, null);
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "background_color1", "background_color1", this.settingsChanged, null);
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "background_color2", "background_color2", this.settingsChanged, null);
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "label_color", "label_color", this.settingsChanged, null);
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "label_size", "label_size", this.settingsChanged, null);
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "detail_label_color", "detail_label_color", this.settingsChanged, null);
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "detail_label_size", "detail_label_size", this.settingsChanged, null);
 
-        this.graphs = [
-            new Graph(this.graphArea, cpuProvider, this._panelHeight),
-            new Graph(this.graphArea, memProvider, this._panelHeight)
-        ];
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "theme_data", "theme_data", this.settingsChanged, null);
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "graph_color1", "graph_color1", this.settingsChanged, null);
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "graph_color2", "graph_color2", this.settingsChanged, null);
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "graph_color3", "graph_color3", this.settingsChanged, null);
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "graph_color4", "graph_color4", this.settingsChanged, null);
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "graph_offset2", "graph_offset2", this.settingsChanged, null);
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "graph_offset3", "graph_offset3", this.settingsChanged, null);
+        // CPU settings
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "cpu_enable_graph", "cpu_enable_graph", this.settingsChanged, null);
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "cpu_size", "cpu_size", this.settingsChanged, null);
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "cpu_use_custom_label", "cpu_use_custom_label", this.settingsChanged, null);
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "cpu_custom_label", "cpu_custom_label", this.settingsChanged, null);
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "cpu_show_detail_label", "cpu_show_detail_label", this.settingsChanged, null);
+        // MEM settings
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "mem_enable_graph", "mem_enable_graph", this.settingsChanged, null);
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "mem_size", "mem_size", this.settingsChanged, null);
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "mem_use_custom_label", "mem_use_custom_label", this.settingsChanged, null);
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "mem_custom_label", "mem_custom_label", this.settingsChanged, null);
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "mem_show_detail_label", "mem_show_detail_label", this.settingsChanged, null);
+        // NET (in) settings
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "netin_enable_graph", "netin_enable_graph", this.settingsChanged, null);
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "netin_size", "netin_size", this.settingsChanged, null);
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "netin_speed", "netin_speed", this.settingsChanged, null);
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "netin_use_custom_label", "netin_use_custom_label", this.settingsChanged, null);
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "netin_custom_label", "netin_custom_label", this.settingsChanged, null);
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "netin_linlog", "netin_linlog", this.settingsChanged, null);
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "netin_show_detail_label", "netin_show_detail_label", this.settingsChanged, null);
+        // NET (out) settings
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "netout_enable_graph", "netout_enable_graph", this.settingsChanged, null);
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "netout_size", "netout_size", this.settingsChanged, null);
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "netout_speed", "netout_speed", this.settingsChanged, null);
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "netout_use_custom_label", "netout_use_custom_label", this.settingsChanged, null);
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "netout_custom_label", "netout_custom_label", this.settingsChanged, null);
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "netout_linlog", "netout_linlog", this.settingsChanged, null);
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "netout_show_detail_label", "netout_show_detail_label", this.settingsChanged, null);
+        
+        this.createThemeObject();
 
-        this.shouldUpdate = true;
+        this.createAppletArea();
+
         this.actor.set_offscreen_redirect(Clutter.OffscreenRedirect.ALWAYS);
-        this.loopId = Mainloop.timeout_add(1000, Lang.bind(this, this.update));
+        this.addUpdateLoop(this.frequency);
+
+    },
+
+    createAppletArea: function(){
+        this.graphs = [];
+        if (this.isHorizontal)
+            this.appletArea = new Support.AppletArea(this, this.isHorizontal,0, this.panel_height);
+        else
+            this.appletArea = new Support.AppletArea(this, this.isHorizontal,this.panel_height, 0);
+
+        // Add CPU graph
+        if (this.cpu_enable_graph) {
+            let cpuGraphArea = null;
+            if (this.isHorizontal)
+                cpuGraphArea = this.appletArea.addGraph(this.cpu_size, this.panel_height);
+            else
+                cpuGraphArea = this.appletArea.addGraph(this.panel_height, this.cpu_size);
+
+            let cpuProvider =  new Providers.CpuDataProvider();
+            this.graphs.push(new Graph.Graph(cpuProvider, cpuGraphArea, this.theme_object, this.cpu_show_detail_label));
+        }
+
+        // Add MEM graph
+        if (this.mem_enable_graph) {
+            let memGraphArea = null;
+            if (this.isHorizontal)
+                memGraphArea = this.appletArea.addGraph(this.mem_size, this.panel_height);
+            else
+                memGraphArea = this.appletArea.addGraph(this.panel_height, this.mem_size);
+
+            let memProvider =  new Providers.MemDataProvider();
+            this.graphs.push(new Graph.Graph(memProvider, memGraphArea, this.theme_object, this.mem_show_detail_label));
+        }
+                
+        // Add NET IN Graph
+        if (this.netin_enable_graph) {
+            let netInGraphArea = null;
+            if (this.isHorizontal)
+                netInGraphArea = this.appletArea.addGraph(this.netin_size, this.panel_height);
+            else
+                netInGraphArea = this.appletArea.addGraph(this.panel_height, this.netin_size);
+
+            let netInProvider =  new Providers.NetDataProvider(this.frequency, true, this.netin_linlog, this.netin_speed);
+            this.graphs.push(new Graph.Graph(netInProvider, netInGraphArea, this.theme_object, this.netin_show_detail_label));
+        }    
+                
+        // Add NET OUT Graph
+        if (this.netout_enable_graph) {
+            let netOutGraphArea = null;
+            if (this.isHorizontal)
+                netOutGraphArea = this.appletArea.addGraph(this.netout_size, this.panel_height);
+            else
+                netOutGraphArea = this.appletArea.addGraph(this.panel_height, this.netout_size);
+
+            let netOutProvider =  new Providers.NetDataProvider(this.frequency, false, this.netout_linlog, this.netout_speed);
+            this.graphs.push(new Graph.Graph(netOutProvider, netOutGraphArea, this.theme_object, this.netout_show_detail_label));
+        }    
+
+        this.appletArea.createDrawingArea();
+
+        this.appletArea.drawingArea.connect('repaint', Lang.bind(this, this.onGraphRepaint));        
+        this.actor.add_actor(this.appletArea.drawingArea);
+    },
+
+    updateAppletArea: function() {
+        if (this.appletArea) {
+            this.appletArea.destroyDrawingArea();
+            this.appletArea = null;
+        }
+
+        this.createAppletArea();
+    },
+
+    getOrientation: function (orientation) {
+        this.orientation = orientation;
+        if (this.versionCompare( GLib.getenv('CINNAMON_VERSION') ,"3.2" ) >= 0 ){
+            if (this.orientation == St.Side.LEFT || this.orientation == St.Side.RIGHT) {                 
+                this.isHorizontal = false;  // vertical
+            } else {                 
+                this.isHorizontal = true;   // horizontal
+            }
+        } else {
+            this.isHorizontal = true;  // Do not check unless >= 3.2
+        }
+    },
+
+    on_orientation_changed: function(orientation) {
+        this.getOrientation(orientation);
+        this.updateAppletArea();
+    },
+
+    on_panel_height_changed: function() {  
+        this.panel_height = this._panelHeight
+        this.updateAppletArea();
+        this._update();
+    },
+
+    on_applet_removed_from_panel: function() {
+        if (gtopFailed) return;
+        this.removeUpdateLoop();
     },
 
     on_applet_clicked: function(event) {
         this._runSysMon();
     },
 
-    on_applet_removed_from_panel: function() {
-        if (gtopFailed) return;
+    addUpdateLoop: function(frequency) {
+        // Start the update loop and allow updates
+        this.loopId = Mainloop.timeout_add(frequency*1000, Lang.bind(this, this.update));
+        this.shouldUpdate = true;
+    },
+
+    removeUpdateLoop: function() {
+        // Remove the update loop and stop updates
         if (this.loopId) {
             Mainloop.source_remove(this.loopId);
         }
         this.shouldUpdate = false;
-    },
-
-    _runSysMonActivate: function() {
-        this._runSysMon();
     },
 
     update: function() {
@@ -118,7 +277,77 @@ GraphicalHWMonitorApplet.prototype = {
     	for (let i = 0; i < this.graphs.length; i++) {
             this.graphs[i].refreshData();
         }
-        this.graphArea.queue_repaint();
+        this.appletArea.drawingArea.queue_repaint();
+    },
+
+    // Redraws the graphs
+    onGraphRepaint: function (area) {
+        let [width, height] = [0,0];
+
+        for (let index = 0; index < this.graphs.length; index++) {
+            if (this.isHorizontal)
+                area.get_context().translate(width, 0);
+            else
+                area.get_context().translate(0, height);
+
+            this.graphs[index].paint(area);
+
+            if (this.isHorizontal)
+                width = this.appletArea.graphArea[index].width
+            else
+                height = this.appletArea.graphArea[index].height;            
+        }
+    },
+
+    // Called when the settings have changed
+    settingsChanged: function () {        
+        this.restartGHW();
+    },
+
+    // Gets color on format 'rgba(255,255,255,0.5) and returns an array of four values
+    getColors:function (rgb) {
+        let colors = rgb.replace(/[^\d,]/g, '').split(',');
+        for(let i=0;i<3;i++) {
+            colors[i] /= 255;
+        }
+
+        return colors;
+    },
+
+    // Creates an object containing the users selected theme settings
+    createThemeObject: function() {
+        this.theme_object = new Object();
+        this.theme_object.theme = this.theme;
+        this.theme_object.border_colors = this.getColors(this.border_color);
+        this.theme_object.background_colors1 = this.getColors(this.background_color1);
+        this.theme_object.background_colors2 = this.getColors(this.background_color2);
+        this.theme_object.label_color = this.getColors(this.label_color);
+        this.theme_object.label_size = this.label_size;
+        this.theme_object.detail_label_color = this.getColors(this.detail_label_color);
+        this.theme_object.detail_label_size = this.detail_label_size;
+        this.theme_object.theme_data = this.theme_data;
+        this.theme_object.graph_color1 = this.getColors(this.graph_color1);
+        this.theme_object.graph_color2 = this.getColors(this.graph_color2);
+        this.theme_object.graph_color3 = this.getColors(this.graph_color3);
+        this.theme_object.graph_color4 = this.getColors(this.graph_color4);
+        this.theme_object.graph_offset2 = this.graph_offset2;
+        this.theme_object.graph_offset3 = this.graph_offset3;
+        this.theme_object.cpu_use_custom_label = this.cpu_use_custom_label;
+        this.theme_object.cpu_custom_label = this.cpu_custom_label;
+        this.theme_object.mem_use_custom_label = this.mem_use_custom_label;
+        this.theme_object.mem_custom_label = this.mem_custom_label;
+        this.theme_object.netin_use_custom_label = this.netin_use_custom_label;
+        this.theme_object.netin_custom_label = this.netin_custom_label;
+        this.theme_object.netout_use_custom_label = this.netout_use_custom_label;
+        this.theme_object.netout_custom_label = this.netout_custom_label;
+    },
+
+    restartGHW: function() {
+        // Refresh the update loop with the new frequency
+        this.createThemeObject();
+        this.removeUpdateLoop();
+        this.addUpdateLoop(this.frequency);
+        this.updateAppletArea();        
     },
 
     _runSysMon: function() {
@@ -126,181 +355,30 @@ GraphicalHWMonitorApplet.prototype = {
     	let _gsmApp = _appSys.lookup_app('gnome-system-monitor.desktop');
     	_gsmApp.activate();
     },
-
-    onGraphRepaint: function (area) {
-        this.graphArea.height = this._panelHeight;
-        // Request space for two graphs where w=h*ScaleRatio each
-        this.graphArea.width = this._panelHeight * ScaleRatio * 2;
-        for (let index = 0; index < 2; index++) {
-            area.get_context().translate((index * (this._panelHeight * ScaleRatio)), 0);
-            this.graphs[index].paint(area, this._panelHeight);
+    
+    _runSysMonActivate: function() {
+        this._runSysMon();
+    },
+    
+    // Compare two version numbers (strings) based on code by Alexey Bass (albass)
+    // Takes account of many variations of version numers including cinnamon.
+    versionCompare: function(left, right) {
+        if (typeof left + typeof right != 'stringstring')
+            return false;
+        var a = left.split('.'),
+            b = right.split('.'),
+            i = 0,
+            len = Math.max(a.length, b.length);
+        for (; i < len; i++) {
+            if ((a[i] && !b[i] && parseInt(a[i]) > 0) || (parseInt(a[i]) > parseInt(b[i]))) {
+                return 1;
+            } else if ((b[i] && !a[i] && parseInt(b[i]) > 0) || (parseInt(a[i]) < parseInt(b[i]))) {
+                return -1;
+            }
         }
+        return 0;
     }
 };
-
-function Graph(area, provider, panel_height) {
-    this._init(area, provider, panel_height);
-}
-
-Graph.prototype = {
-
-    _init: function (_area, _provider, panel_height) {
-        this.width = (panel_height * ScaleRatio) - 3;
-
-        this.datas = [];
-
-        for (let i = 0; i < this.datas.length; i++) {
-            this.datas[i] = 0;
-        }
-
-        this.height = panel_height - 2;
-        this.provider = _provider;
-
-    },
-
-    paint: function (area, panel_height) {
-        this.width = (panel_height * ScaleRatio) - 3;
-        this.height = panel_height - 2;
-        let widthOffset1 = Math.round(this.width * 0.5) + 0.5;
-        let widthOffset2 = Math.round(this.width * 0.25) + 0.5;
-        let widthOffset3 = Math.round(this.width * 0.75) + 0.5;
-        let heightOffset1 = Math.round(this.height / 2) + 0.5;
-        let heightOffset2 = Math.round(this.height * 0.25) + 0.5;
-        let heightOffset3 = Math.round(this.height * 0.75) + 0.5;
-        let uiScale7x = global.ui_scale * 7;
-        let cr = area.get_context();
-
-		// Border
-        cr.setSourceRGBA(1, 1, 1, 0.9);
-        cr.setLineWidth(1);
-        cr.rectangle(0.5, 0.5, this.width + 0.5, this.height + 0.5);
-        cr.stroke();
-
-		// Background
-        let gradientHeight = this.height - 1;
-        let gradientWidth = this.width - 1;
-        let gradientOffset = 1;
-        let pattern = new Cairo.LinearGradient(0, 0, 0, this.height);
-        pattern.addColorStopRGBA(0, 1, 1, 1, 0.3);
-        pattern.addColorStopRGBA(1, 0, 0, 0, 0.3);
-        cr.setSource(pattern);
-        cr.rectangle(1, gradientOffset, gradientWidth, gradientHeight);
-        cr.fill();
-
-        // Grid
-        cr.setLineWidth(1);
-        cr.setSourceRGBA(1, 1, 1, 0.4);
-        cr.moveTo(0, heightOffset1);
-        cr.lineTo(this.width, heightOffset1);
-        cr.stroke();
-        cr.moveTo(widthOffset1, 0);
-        cr.lineTo(widthOffset1, this.height);
-        cr.stroke();
-        cr.setSourceRGBA(1, 1, 1, 0.2);
-        cr.moveTo(0, heightOffset2);
-        cr.lineTo(this.width, heightOffset2);
-        cr.stroke();
-        cr.moveTo(0, heightOffset3);
-        cr.lineTo(this.width, heightOffset3);
-        cr.stroke();
-        cr.moveTo(widthOffset2, 0);
-        cr.lineTo(widthOffset2, this.height);
-        cr.stroke();
-        cr.moveTo(widthOffset3, 0);
-        cr.lineTo(widthOffset3, this.height);
-        cr.stroke();
-
-        // Datas
-        cr.setLineWidth(0);
-        cr.moveTo(1, this.height - this.datas[0]);
-
-        for (let i = 1; i < this.datas.length; i++) {
-        	cr.lineTo(i + 1, this.height - this.datas[i]);
-        }
-
-    	cr.lineTo(this.datas.length, this.height);
-    	cr.lineTo(1, this.height);
-
-    	cr.closePath();
-
-        pattern = new Cairo.LinearGradient(0, 0, 0, this.height);
-        cr.setSource(pattern);
-        pattern.addColorStopRGBA(0, 1, 0, 0, 1);
-        pattern.addColorStopRGBA(0.5, 1, 1, 0.2, 1);
-        pattern.addColorStopRGBA(0.7, 0.4, 1, 0.3, 1);
-        pattern.addColorStopRGBA(1, 0.2, 0.7, 1, 1);
-
-        cr.fill();
-
-        // Label
-		cr.setFontSize(uiScale7x);
-        cr.setSourceRGBA(0, 0, 0, 0.5);
-		cr.moveTo(global.ui_scale * 2.5, global.ui_scale * 7.5);
-		cr.showText(this.provider.name);
-        cr.setSourceRGBA(1, 1, 1, 1);
-		cr.moveTo(global.ui_scale * 2, uiScale7x);
-		cr.showText(this.provider.name);
-
-    },
-
-    refreshData: function() {
-        let data = this.provider.getData() * (this.height - 1);
-
-        if (this.datas.push(data) > this.width - 2) {
-            this.datas.shift();
-        }
-    }
-};
-
-function CpuDataProvider() {
-	this._init();
-}
-
-CpuDataProvider.prototype = {
-
-    _init: function(){
-        this.gtop = new GTop.glibtop_cpu();
-        this.current = 0;
-        this.last = 0;
-        this.usage = 0;
-        this.last_total = 0;
-        this.name = _("CPU");
-    },
-
-    getData: function() {
-        GTop.glibtop_get_cpu(this.gtop);
-
-        this.current = this.gtop.idle;
-
-        let delta = this.gtop.total - this.last_total;
-        if (delta > 0) {
-            this.usage = (this.current - this.last) / delta;
-            this.last = this.current;
-            this.last_total = this.gtop.total;
-        }
-
-        return 1 - this.usage;
-    }
-};
-
-function MemDataProvider() {
-    this._init();
-}
-
-MemDataProvider.prototype = {
-
-    _init: function() {
-        this.gtopMem = new GTop.glibtop_mem();
-        this.name = _("MEM");
-    },
-
-    getData: function() {
-        GTop.glibtop_get_mem(this.gtopMem);
-
-        return 1 - (this.gtopMem.buffer + this.gtopMem.cached + this.gtopMem.free) / this.gtopMem.total;
-    },
-};
-
 
 function main(metadata, orientation, panel_height, instance_id) {
     return new GraphicalHWMonitorApplet(metadata, orientation, panel_height, instance_id);
