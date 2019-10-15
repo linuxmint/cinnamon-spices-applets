@@ -15,18 +15,18 @@ You can open the configuration dialog by right-clicking the applet and selecting
     * Multi-version support: Should now support older versions of Cinnamon (before 3.8).
 
 **Older versions** (without a real version number):
-    * **NEW** Configuration dialog has been cleaned up and divided into pages.
-    * **NEW** Some new themes have been implemented. (Thanks to **@cgvirus**)    
-    * There are two new graphs showing internet traffic in and out. Note that you might need to adjust the values for your Internet speed in the configuration dialog, both in and out, for the graphs to look good. The default value is 100 Mbit/s. You might want to set the values to slightly higher or than the Internet speed you have paid for. You can show the graphs in a linear or logarithmic scale.
-    * You can now turn on or off each individual graphs.
-    * You can now choose the width (horizontal panels) or the height (vertical panels) of each individual graph.
-    * You can now show or hide a detail label, which show for example CPU usage %, or used memory etc.
-    * You can now control the font size of both the main label and the detail label.
-    * Select the update frequency for the graph, by selecting the number of seconds between updates in the Update frequency combo.
-    * Select theme : If you select **dark theme**, the graph will be drawn in dark colors and vice versa for **light theme**. If you select **custom theme** you can customize the colors so that they match your desktop theme perfectly.
-    * You can set a custom label for each graph. By doing this you will override the labels from the language files.
-    * You can now add more than one **Graphical Hardware Monitor** to your panels. Might be useful for people with more than one monitor.
-    * The applet now works in both vertical and horizontal panels.
+ * Configuration dialog has been cleaned up and divided into pages.
+ * Some new themes have been implemented. (Thanks to **@cgvirus**)
+ * There are two new graphs showing internet traffic in and out. Note that you might need to adjust the values for your Internet speed in the configuration dialog, both in and out, for the graphs to look good. The default value is 100 Mbit/s. You might want to set the values to slightly higher or than the Internet speed you have paid for. You can show the graphs in a linear or logarithmic scale.
+ * You can now turn on or off each individual graphs.
+ * You can now choose the width (horizontal panels) or the height (vertical panels) of each individual graph.
+ * You can now show or hide a detail label, which show for example CPU usage %, or used memory etc.
+ * You can now control the font size of both the main label and the detail label.
+ * Select the update frequency for the graph, by selecting the number of seconds between updates in the Update frequency combo.
+ * Select theme : If you select **dark theme**, the graph will be drawn in dark colors and vice versa for **light theme**. If you select **custom theme** you can customize the colors so that they match your desktop theme perfectly.
+ * You can set a custom label for each graph. By doing this you will override the labels from the language files.
+ * You can now add more than one **Graphical Hardware Monitor** to your panels. Might be useful for people with more than one monitor.
+ * The applet now works in both vertical and horizontal panels.
 
 ### Requirements
 
