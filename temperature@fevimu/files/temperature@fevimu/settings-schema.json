@@ -14,7 +14,7 @@
         "default": 5000,
         "min": 2000,
         "max": 30000,
-        "step": 1,
+        "step": 100,
         "units": "ms",
         "description": "Update interval"
     },
