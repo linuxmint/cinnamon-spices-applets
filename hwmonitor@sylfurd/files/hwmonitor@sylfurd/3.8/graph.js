@@ -4,12 +4,8 @@ const Main = imports.ui.main;
 //
 // Class responsible for drawing an instance of one graph
 //
-function Graph(provider, graphArea, theme, show_detail) {
-    this.init(provider, graphArea, theme, show_detail);
-}
-
-Graph.prototype = {    
-    init: function(provider, graphArea, theme, show_detail) {
+class Graph {    
+    constructor (provider, graphArea, theme, show_detail) {
         this.provider = provider;
         this.graph = graphArea;
         this.theme = theme;
@@ -20,9 +16,9 @@ Graph.prototype = {
         for (let i = 0; i < this.datas.length; i++) {
             this.datas[i] = 0;
         }
-    },
+    }
 
-    paint: function(area) {
+    paint(area) {
         let cr = area.get_context();
 
         // Since Cairo uses antialiasing, we need to translate all coordinates
@@ -52,10 +48,10 @@ Graph.prototype = {
 
         // Reset translation
         cr.translate( -(this.graph.outer.left + 0.5), -(this.graph.outer.top + 0.5));
-    },
+    }
 
     // Draw the border around the graph
-    drawBorder: function(cr){
+    drawBorder(cr){
         if (this.theme.theme=="light")
             cr.setSourceRGBA(1, 1, 1, 0.5);
         else if (this.theme.theme=="dark")
@@ -69,10 +65,10 @@ Graph.prototype = {
         cr.rectangle(0, 0, 
                     this.graph.outer.width, this.graph.outer.height);
         cr.stroke();
-    },
+    }
 
     // Draw the graph background with a linear gradient between two colors
-    drawBackground: function(cr) {
+    drawBackground(cr) {
         let pattern = new Cairo.LinearGradient(0, 0, 0, this.graph.inner.height);
         
         if (this.theme.theme=="light") {
@@ -91,10 +87,10 @@ Graph.prototype = {
         cr.setSource(pattern);
         cr.rectangle(0, 0, this.graph.inner.width, this.graph.inner.height);
         cr.fill();
-    },
+    }
 
     // Draw the lines inside the graph
-    drawGraphLines: function(cr) {
+    drawGraphLines(cr) {
         let widthOffset1 = Math.round(this.graph.inner.width * 0.5);
         let widthOffset2 = Math.round(this.graph.inner.width * 0.25);
         let widthOffset3 = Math.round(this.graph.inner.width * 0.75);
@@ -145,10 +141,10 @@ Graph.prototype = {
         cr.moveTo(widthOffset3, 1);
         cr.lineTo(widthOffset3, this.graph.inner.height);
         cr.stroke();
-    },
+    }
 
     // Draw the data points, and fill the area with a linear gradient of four colors
-    drawDataPoints: function(cr) {
+    drawDataPoints(cr) {
         cr.setLineWidth(0);
         cr.moveTo(1, this.graph.inner.height - this.datas[0]);
         for (let i = 0; i < this.datas.length; i++) {
@@ -197,10 +193,10 @@ Graph.prototype = {
             pattern.addColorStopRGBA(1, 0.18, 0.204, 0.212, 1);
 
         cr.fill();
-    },
+    }
 
     // Draw the text label on the graph
-    drawLabel: function(cr) {
+    drawLabel(cr) {
         cr.setFontSize(this.theme.label_size);
         if (this.theme.theme=="light")
             cr.setSourceRGBA(0.8, 0.8, 0.8, 0.5);
@@ -245,10 +241,11 @@ Graph.prototype = {
             cr.showText(this.theme.netout_custom_label);
         else
             cr.showText(this.provider.name);
-    },
+    }
+
 
     // Draw the text label on the graph
-    drawDetailLabel: function(cr) {
+    drawDetailLabel(cr) {
         if (this.provider.text==null)
             return;
 
@@ -278,9 +275,9 @@ Graph.prototype = {
         cr.moveTo(global.ui_scale * 1, global.ui_scale * (this.theme.label_size + this.theme.detail_label_size) + 0.5);
 
         cr.showText(this.provider.text);
-    },
+    }
 
-    refreshData: function() {
+    refreshData() {
         try {
             let data = this.provider.getData() * (this.graph.inner.height - 1);
 

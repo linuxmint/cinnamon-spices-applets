@@ -3,13 +3,8 @@ const St = imports.gi.St;
 //
 // Class responsible for keeping track of the entire applet area
 //
-
-function AppletArea(parent, isHorizontal, appletWidth, appletHeight) {
-    this.init(parent, isHorizontal, appletWidth, appletHeight);
-}
-
-AppletArea.prototype = {
-    init: function(parent, isHorizontal, appletWidth, appletHeight) {        
+class AppletArea {
+    constructor(parent, isHorizontal, appletWidth, appletHeight) {        
         this.isHorizontal = isHorizontal;
         this.graphArea = [];
         this.parent = parent;
@@ -21,10 +16,10 @@ AppletArea.prototype = {
             this.height = 0;
             this.width = appletWidth;
         }
-    },
+    }
 
     // Adds a new graph
-    addGraph: function(graphWidth, graphHeight) {
+    addGraph(graphWidth, graphHeight) {
         let area = new GraphArea(this, graphWidth, graphHeight);
         this.graphArea.push(area);
         
@@ -35,18 +30,18 @@ AppletArea.prototype = {
             this.height += graphHeight;
 
         return area;
-    },
+    }
 
     // Creates a new drawing area
-    createDrawingArea: function() {
+    createDrawingArea() {
         this.destroyDrawingArea();
         this.drawingArea = new St.DrawingArea();
         this.drawingArea.height = this.height;
         this.drawingArea.width = this.width;
-    },
+    }
 
     // Destroys an existing drawing area
-    destroyDrawingArea: function() {
+    destroyDrawingArea() {
         if (this.drawingArea) {
             this.parent.actor.remove_actor(this.drawingArea);    
             this.drawingArea = null;        
@@ -57,12 +52,8 @@ AppletArea.prototype = {
 //
 // Class responsible for keeping track of one of the graphs
 //
-function GraphArea(parent, width, height) {
-    this.init(parent, width, height);
-}
-
-GraphArea.prototype = {    
-    init: function(parent, width, height) {
+class GraphArea {    
+    constructor(parent, width, height) {
         this.width = width;
         this.height = height;
         this.graph = null;
@@ -89,19 +80,15 @@ GraphArea.prototype = {
 //
 // Just a square class
 //
-function Box(top, left, width, height) {
-    this.init(top, left, width, height)
-}
-
-Box.prototype = {
-    init: function(top, left, width, height) {
+class Box {
+    init(top, left, width, height) {
         this.top = top;
         this.left = left;
         this.width = width;
         this.height = height;
-    },
+    }
 
-    initFromBox: function(box, delta) {
+    initFromBox(box, delta) {
         this.top = box.top + delta;
         this.left = box.left + delta;
         this.width = box.width;
