@@ -13,9 +13,6 @@ You should have received a copy of the GNU General Public License along
 with Foobar. If not, see http://www.gnu.org/licenses/.
 */
 
-// 2019-10-15 : I added a version to metadata.json, please increase that 
-// when making changes to this applet
-
 const Applet = imports.ui.applet;
 const Cinnamon = imports.gi.Cinnamon;
 const Lang = imports.lang;
@@ -150,7 +147,7 @@ Graph.prototype = {
     _init: function (_area, _provider, panel_height) {
         this.width = (panel_height * ScaleRatio) - 3;
 
-        this.datas = Array(this.width).fill(0);
+        this.datas = [];
 
         for (let i = 0; i < this.datas.length; i++) {
             this.datas[i] = 0;
@@ -303,6 +300,7 @@ MemDataProvider.prototype = {
         return 1 - (this.gtopMem.buffer + this.gtopMem.cached + this.gtopMem.free) / this.gtopMem.total;
     },
 };
+
 
 function main(metadata, orientation, panel_height, instance_id) {
     return new GraphicalHWMonitorApplet(metadata, orientation, panel_height, instance_id);
