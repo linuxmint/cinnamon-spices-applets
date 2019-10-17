@@ -17,6 +17,9 @@ You should have received a copy of the GNU General Public License along
 with Foobar. If not, see http://www.gnu.org/licenses/.
 */
 
+// 2019-10-15 : I added a version to metadata.json, please increase that 
+// when making changes to this applet
+
 const Applet = imports.ui.applet;
 const Cinnamon = imports.gi.Cinnamon;
 const Lang = imports.lang;
@@ -49,11 +52,11 @@ function _(str) {
   return Gettext.dgettext(UUID, str)
 }
 
-let debug = true;
+let debug_once = true;
 function debug_message_once(message) {    
-    if (debug)
+    if (debug_once)
         global.logError("HWMONITOR : " + message);
-    debug = false;
+    debug_once = false;
 }
 
 function debug_message(message) {
@@ -69,7 +72,7 @@ GraphicalHWMonitorApplet.prototype = {
 
     _init: function (metadata, orientation, panel_height, instance_id) {
         Applet.IconApplet.prototype._init.call(this, orientation, panel_height, instance_id);
-
+        
         this.getOrientation(orientation); // Initialise for panel orientation
         this.panel_height = panel_height;
         this.graphs = [];
@@ -88,55 +91,56 @@ GraphicalHWMonitorApplet.prototype = {
         this.itemReset.connect('activate', Lang.bind(this, this.restartGHW));
         this._applet_context_menu.addMenuItem(this.itemReset);
 
+
         // Setup the applet settings 
         this.settings = new Settings.AppletSettings(this, metadata.uuid, instance_id);
         // General settings
-        this.settings.bind("frequency", "frequency", this.settingsChanged);
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "frequency", "frequency", this.settingsChanged, null);
         
-        this.settings.bind("theme", "theme", this.settingsChanged);
-        this.settings.bind("border_color", "border_color", this.settingsChanged);
-        this.settings.bind("background_color1", "background_color1", this.settingsChanged);
-        this.settings.bind("background_color2", "background_color2", this.settingsChanged);
-        this.settings.bind("label_color", "label_color", this.settingsChanged);
-        this.settings.bind("label_size", "label_size", this.settingsChanged);
-        this.settings.bind("detail_label_color", "detail_label_color", this.settingsChanged);
-        this.settings.bind("detail_label_size", "detail_label_size", this.settingsChanged);
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "theme", "theme", this.settingsChanged, null);
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "border_color", "border_color", this.settingsChanged, null);
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "background_color1", "background_color1", this.settingsChanged, null);
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "background_color2", "background_color2", this.settingsChanged, null);
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "label_color", "label_color", this.settingsChanged, null);
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "label_size", "label_size", this.settingsChanged, null);
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "detail_label_color", "detail_label_color", this.settingsChanged, null);
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "detail_label_size", "detail_label_size", this.settingsChanged, null);
 
-        this.settings.bind("theme_data", "theme_data", this.settingsChanged);
-        this.settings.bind("graph_color1", "graph_color1", this.settingsChanged);
-        this.settings.bind("graph_color2", "graph_color2", this.settingsChanged);
-        this.settings.bind("graph_color3", "graph_color3", this.settingsChanged);
-        this.settings.bind("graph_color4", "graph_color4", this.settingsChanged);
-        this.settings.bind("graph_offset2", "graph_offset2", this.settingsChanged);
-        this.settings.bind("graph_offset3", "graph_offset3", this.settingsChanged);
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "theme_data", "theme_data", this.settingsChanged, null);
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "graph_color1", "graph_color1", this.settingsChanged, null);
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "graph_color2", "graph_color2", this.settingsChanged, null);
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "graph_color3", "graph_color3", this.settingsChanged, null);
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "graph_color4", "graph_color4", this.settingsChanged, null);
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "graph_offset2", "graph_offset2", this.settingsChanged, null);
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "graph_offset3", "graph_offset3", this.settingsChanged, null);
         // CPU settings
-        this.settings.bind("cpu_enable_graph", "cpu_enable_graph", this.settingsChanged);
-        this.settings.bind("cpu_size", "cpu_size", this.settingsChanged);
-        this.settings.bind("cpu_use_custom_label", "cpu_use_custom_label", this.settingsChanged);
-        this.settings.bind("cpu_custom_label", "cpu_custom_label", this.settingsChanged);
-        this.settings.bind("cpu_show_detail_label", "cpu_show_detail_label", this.settingsChanged);
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "cpu_enable_graph", "cpu_enable_graph", this.settingsChanged, null);
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "cpu_size", "cpu_size", this.settingsChanged, null);
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "cpu_use_custom_label", "cpu_use_custom_label", this.settingsChanged, null);
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "cpu_custom_label", "cpu_custom_label", this.settingsChanged, null);
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "cpu_show_detail_label", "cpu_show_detail_label", this.settingsChanged, null);
         // MEM settings
-        this.settings.bind("mem_enable_graph", "mem_enable_graph", this.settingsChanged);
-        this.settings.bind("mem_size", "mem_size", this.settingsChanged);
-        this.settings.bind("mem_use_custom_label", "mem_use_custom_label", this.settingsChanged);
-        this.settings.bind("mem_custom_label", "mem_custom_label", this.settingsChanged);
-        this.settings.bind("mem_show_detail_label", "mem_show_detail_label", this.settingsChanged);
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "mem_enable_graph", "mem_enable_graph", this.settingsChanged, null);
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "mem_size", "mem_size", this.settingsChanged, null);
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "mem_use_custom_label", "mem_use_custom_label", this.settingsChanged, null);
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "mem_custom_label", "mem_custom_label", this.settingsChanged, null);
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "mem_show_detail_label", "mem_show_detail_label", this.settingsChanged, null);
         // NET (in) settings
-        this.settings.bind("netin_enable_graph", "netin_enable_graph", this.settingsChanged);
-        this.settings.bind("netin_size", "netin_size", this.settingsChanged);
-        this.settings.bind("netin_speed", "netin_speed", this.settingsChanged);
-        this.settings.bind("netin_use_custom_label", "netin_use_custom_label", this.settingsChanged);
-        this.settings.bind("netin_custom_label", "netin_custom_label", this.settingsChanged);
-        this.settings.bind("netin_linlog", "netin_linlog", this.settingsChanged);
-        this.settings.bind("netin_show_detail_label", "netin_show_detail_label", this.settingsChanged);
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "netin_enable_graph", "netin_enable_graph", this.settingsChanged, null);
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "netin_size", "netin_size", this.settingsChanged, null);
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "netin_speed", "netin_speed", this.settingsChanged, null);
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "netin_use_custom_label", "netin_use_custom_label", this.settingsChanged, null);
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "netin_custom_label", "netin_custom_label", this.settingsChanged, null);
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "netin_linlog", "netin_linlog", this.settingsChanged, null);
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "netin_show_detail_label", "netin_show_detail_label", this.settingsChanged, null);
         // NET (out) settings
-        this.settings.bind("netout_enable_graph", "netout_enable_graph", this.settingsChanged);
-        this.settings.bind("netout_size", "netout_size", this.settingsChanged);
-        this.settings.bind("netout_speed", "netout_speed", this.settingsChanged);
-        this.settings.bind("netout_use_custom_label", "netout_use_custom_label", this.settingsChanged);
-        this.settings.bind("netout_custom_label", "netout_custom_label", this.settingsChanged);
-        this.settings.bind("netout_linlog", "netout_linlog", this.settingsChanged);
-        this.settings.bind("netout_show_detail_label", "netout_show_detail_label", this.settingsChanged);
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "netout_enable_graph", "netout_enable_graph", this.settingsChanged, null);
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "netout_size", "netout_size", this.settingsChanged, null);
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "netout_speed", "netout_speed", this.settingsChanged, null);
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "netout_use_custom_label", "netout_use_custom_label", this.settingsChanged, null);
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "netout_custom_label", "netout_custom_label", this.settingsChanged, null);
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "netout_linlog", "netout_linlog", this.settingsChanged, null);
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "netout_show_detail_label", "netout_show_detail_label", this.settingsChanged, null);
         
         this.createThemeObject();
 
@@ -247,7 +251,6 @@ GraphicalHWMonitorApplet.prototype = {
     },
 
     on_applet_clicked: function(event) {
-        debug_message("Clicked!");
         this._runSysMon();
     },
 

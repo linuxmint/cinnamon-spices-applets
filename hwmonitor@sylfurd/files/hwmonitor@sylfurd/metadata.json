@@ -1,6 +1,18 @@
 {
- "uuid": "hwmonitor@sylfurd",
- "name": "Graphical hardware monitor",
- "description": "Displaying realtime CPU and memory load",
- "max-instances": "-1"
+    "multiversion": true, 
+    "cinnamon-version": [
+        "3.2", 
+        "3.4", 
+        "3.6", 
+        "3.8", 
+        "4.0", 
+        "4.2", 
+        "4.3"
+    ], 
+    "max-instances": "1", 
+    "dangerous": false, 
+    "description": "Displaying realtime CPU and memory load", 
+    "uuid": "hwmonitor@sylfurd", 
+    "version": "1.0.0", 
+    "name": "Graphical hardware monitor"
 }
