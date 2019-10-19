@@ -132,7 +132,7 @@ MyApplet.prototype = {
     let termOptions = this.getTermOptions(terminal);
     if (termOptions == null) return true; // No info stored on terminal, no way to validate
     if (!this.arrayIncludes(termOptions.execute, arg)) {
-      //global.log("'org.cinnamon.desktop.default-applications.terminal exec-arg' might be incorrectly set for " + terminal + " terminal emulator: '" + arg + "' instead of options '" + JSON.stringify(termOptions.execute) + "'");
+      global.log("'org.cinnamon.desktop.default-applications.terminal exec-arg' might be incorrectly set for " + terminal + " terminal emulator: '" + arg + "' instead of options '" + JSON.stringify(termOptions.execute) + "'");
       return false;
     }
     return true;
