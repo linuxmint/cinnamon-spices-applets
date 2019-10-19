@@ -106,7 +106,7 @@ MyApplet.prototype = {
     this.set_applet_icon_path(AppletDir + "/icon.png");
   },
 
-   addRefreshButton: function() {
+  addRefreshButton: function() {
     let itemLabel = _("Force Update from SSH config");
     let refreshMenuItem = new Applet.MenuItem(itemLabel, 'view-refresh', Lang.bind(this, this.updateMenu));
     this._applet_context_menu.addMenuItem(refreshMenuItem);
@@ -175,21 +175,21 @@ MyApplet.prototype = {
       flags = " -X " + flags;
     }
 
-    let terminal = this.gsettings.get_string("exec");
-    let terminalArg = this.gsettings.get_string("exec-arg");
-
     let command = "";
     if (this.notEmpty(this._customCommand)) {
       command = this._customCommand;
-      command += (" \"ssh " + flags + hostname + "\"");
     }
     else {
-      command = terminal + " ";
+      let terminal = this.gsettings.get_string("exec");
+      let terminalArg = this.gsettings.get_string("exec-arg");
+      command = terminal + " " + terminalArg;
       if (!this._safeMode) command += ("-t \"" + hostname + "\" ");
-      command += (terminalArg + " \"ssh " + flags + hostname + "\"");
     }
 
+    command += (" ssh " + flags + hostname);
+
     Util.spawnCommandLine(command);
+    global.log("Terminal opened with command '" + command + "'");
     let notification = new MessageTray.Notification(this.msgSource, _("SSH Launcher"), _("Connection opened to ") + hostname + " using " + terminal);
     notification.setTransient(true);
     this.msgSource.notify(notification);
