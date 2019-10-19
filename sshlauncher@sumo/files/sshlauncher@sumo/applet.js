@@ -195,7 +195,7 @@ MyApplet.prototype = {
   connectTo: function(hostname) {
     let command = "";
     let terminal = "";
-    let notifMessage = _("Connection opened to ") + hostname + _(" using ") + terminal;
+
     if (!this.empty(this._customCommand)) { // Custom command set in settings
       command = this._customCommand;
       terminal = command.split(" ")[0]; // Get terminal name from custom command
@@ -220,7 +220,7 @@ MyApplet.prototype = {
 
     Util.spawnCommandLine(command);
     global.log("Terminal opened with command '" + command + "'");
-    this.sendNotification(_("SSH Launcher"), notifMessage);
+    this.sendNotification(_("SSH Launcher"), _("Connection opened to ") + hostname + _(" using ") + terminal);
   },
 
   editConfig: function() {
