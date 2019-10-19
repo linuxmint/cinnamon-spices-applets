@@ -1,0 +1,33 @@
+{
+    "headAppearance":
+    { "type": "header"
+    , "description": "Appearance"
+    },
+    "themeIcon":
+    { "type": "checkbox"
+    , "default": true
+    , "description": "Use icon from your icon theme"
+    },
+    "symbolicIcon":
+    { "type": "checkbox"
+    , "default": false
+    , "dependency": "themeIcon"
+    , "description": "Use symbolic icon"
+    },
+    "headFunc":
+    { "type": "header"
+    , "description": "Functionality"
+    },
+    "safeMode":
+    { "type": "checkbox"
+    , "default": false
+    , "description": "Use safe mode to open the terminal"
+    , "tooltip": "Removes all extra arguments for the terminal, like title."
+    },
+    "customCommand":
+    { "type": "entry"
+    , "default": ""
+    , "description": "Use custom command for opening terminal"
+    , "tooltip": "Usually it should end with -e so it will execute the supplied ssh command, check your chosen terminal's manual."
+    }
+}

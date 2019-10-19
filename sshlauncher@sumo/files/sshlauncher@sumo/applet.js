@@ -12,12 +12,21 @@ const Gio = imports.gi.Gio;
 const Gettext = imports.gettext;
 const UUID = "sshlauncher@sumo";
 const AppletDir = imports.ui.appletManager.appletMeta[UUID].path;
+const Gtk = imports.gi.Gtk;
+const Settings = imports.ui.settings;
 
-Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
 
 function _(str) {
   return Gettext.dgettext(UUID, str);
 }
+
+var KEYS = {
+  CUSTOM_COMMAND: 'customCommand',
+  SAFE_MODEL: 'safeMode',
+};
+const CUSTOM_ICON_KEY = "themeIcon";
+const SYMBOLIC_ICON_KEY = "symbolicIcon";
 
 function MyApplet(metadata, orientation, panel_height, instance_id) {
   this._init(metadata, orientation, panel_height, instance_id);
@@ -30,14 +39,18 @@ MyApplet.prototype = {
     Applet.IconApplet.prototype._init.call(this, orientation, panel_height, instance_id);
 
     this.set_applet_tooltip(_("SSH Launcher"));
+    // Settings
+    this._safeMode;
+    this._customCommand;
 
     try {
-      this.set_applet_icon_path(AppletDir + "/icon.png");
+      this.settings = new Settings.AppletSettings(this, UUID, instance_id);
+      this.bindSettings();
       this.menuManager = new PopupMenu.PopupMenuManager(this);
       this.menu = new Applet.AppletPopupMenu(this, orientation);
       this.menuManager.addMenu(this.menu);
       this.appletPath = metadata.path;
-      this.gsettings = Gio.Settings.new("org.gnome.desktop.default-applications.terminal");
+      this.gsettings = Gio.Settings.new("org.cinnamon.desktop.default-applications.terminal");
       this.sshHeadless = false;
       this.sshForwardX = false;
       this.homeDir = GLib.get_home_dir();
@@ -47,11 +60,56 @@ MyApplet.prototype = {
       let file = Gio.file_new_for_path(this.sshConfig);
       this.monitor = file.monitor_file(Gio.FileMonitorFlags.NONE, new Gio.Cancellable());
       this.monitor.connect("changed", Lang.bind(this, this.updateMenu));
+      this.addRefreshButton();
       this.updateMenu();
     }
     catch (e) {
       global.logError(e);
     }
+  },
+
+  /** Runs on init */
+  bindSettings: function() {
+    for (let k in KEYS) {
+      let key = KEYS[k];
+      let keyProp = "_" + key;
+      this.settings.bindProperty(Settings.BindingDirection.IN,
+        key, keyProp, null, null);
+    }
+
+    this.setAppletIcon();
+
+    this.settings.connect("changed::" + CUSTOM_ICON_KEY, Lang.bind(this, function () {
+      this.setAppletIcon();
+    }))
+    this.settings.connect("changed::" + SYMBOLIC_ICON_KEY, Lang.bind(this, function () {
+      this.setAppletIcon();
+    }))
+  },
+
+  setAppletIcon: function() {
+    let _themeIcon = this.settings.getValue(CUSTOM_ICON_KEY);
+    let _symbolic = this.settings.getValue(SYMBOLIC_ICON_KEY);
+    if (_themeIcon) {
+      let icon = "folder-remote";
+      if (_symbolic) icon += "-symbolic";
+
+      if (Gtk.IconTheme.get_default().has_icon(icon)) {
+        this.set_applet_icon_name(icon);
+        return;
+      }
+
+      let notification = new MessageTray.Notification(this.msgSource, _("SSH Launcher"), _("No suitable icon found, falling back to custom icon"));
+      notification.setTransient(true);
+      this.msgSource.notify(notification);
+    }
+    this.set_applet_icon_path(AppletDir + "/icon.png");
+  },
+
+   addRefreshButton: function() {
+    let itemLabel = _("Force Update from SSH config");
+    let refreshMenuItem = new Applet.MenuItem(itemLabel, 'view-refresh', Lang.bind(this, this.updateMenu));
+    this._applet_context_menu.addMenuItem(refreshMenuItem);
   },
 
   updateMenu: function() {
@@ -106,10 +164,6 @@ MyApplet.prototype = {
     let menuitemEdit = new PopupMenu.PopupMenuItem(_("Edit SSH config"));
     menuitemEdit.connect('activate', Lang.bind(this, this.editConfig));
     this.menu.addMenuItem(menuitemEdit);
-    this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
-    let menuitemUpdate = new PopupMenu.PopupMenuItem(_("Force Update from SSH config"));
-    menuitemUpdate.connect('activate', Lang.bind(this, this.updateMenu));
-    this.menu.addMenuItem(menuitemUpdate);
   },
 
   connectTo: function(hostname) {
@@ -120,8 +174,22 @@ MyApplet.prototype = {
     if (this.sshForwardX) {
       flags = " -X " + flags;
     }
+
     let terminal = this.gsettings.get_string("exec");
-    Util.spawnCommandLine(terminal + " -T \"" + hostname + "\" -e \"ssh " + flags + hostname + "\"");
+    let terminalArg = this.gsettings.get_string("exec-arg");
+
+    let command = "";
+    if (this.notEmpty(this._customCommand)) {
+      command = this._customCommand;
+      command += (" \"ssh " + flags + hostname + "\"");
+    }
+    else {
+      command = terminal + " ";
+      if (!this._safeMode) command += ("-t \"" + hostname + "\" ");
+      command += (terminalArg + " \"ssh " + flags + hostname + "\"");
+    }
+
+    Util.spawnCommandLine(command);
     let notification = new MessageTray.Notification(this.msgSource, _("SSH Launcher"), _("Connection opened to ") + hostname + " using " + terminal);
     notification.setTransient(true);
     this.msgSource.notify(notification);
@@ -129,6 +197,11 @@ MyApplet.prototype = {
 
   editConfig: function() {
   GLib.spawn_command_line_async(this.appletPath + "/launch_editor.sh");
+  },
+
+  notEmpty: function(text) {
+    if (!text) return false;
+    return (text.trim().length != 0)
   },
 
   on_applet_clicked: function(event) {
