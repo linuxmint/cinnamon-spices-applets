@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: SpicesUpdate@claudiux v2.0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-09-27 19:02+0200\n"
-"PO-Revision-Date: 2019-09-27 20:37+0200\n"
-"Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
+"PO-Revision-Date: 2019-10-19 18:51+0200\n"
+"Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
@@ -51,7 +51,7 @@ msgstr "Un'applet deve essere aggiornata:"
 
 #: 4.2/applet.js:665 3.8/applet.js:698 2.8/applet.js:730
 msgid "Do not matter. This is a FAKE notification, just for the test."
-msgstr "Questa è una notifica falsa, solo per il test. Non importa."
+msgstr "Questa è una notifica falsa, solo per il test. Non ha importanza."
 
 #: 4.2/applet.js:975 3.8/applet.js:975 2.8/applet.js:1003
 msgid "is fully functional."
@@ -270,7 +270,7 @@ msgid ""
 "Warns you when installed Spices (applets, desklets, extensions, themes) "
 "require an update or new Spices are available."
 msgstr ""
-"Avvisa quando installato Spices (applet, desktop, estensioni, temi) "
+"Avvisa quando le Spices installate (applet, desktop, estensioni, temi) "
 "richiedono un aggiornamento o sono disponibili nuove Spices."
 
 #. 4.2->settings-schema.json->General->title
@@ -327,7 +327,7 @@ msgstr "Controllare regolarmente se le tue applet sono aggiornate"
 #. 2.8->settings-schema.json->check_applets->tooltip
 msgid "If applets updates do not concern you, uncheck this box."
 msgstr ""
-"Se gli aggiornamenti delle applet non ti riguardano, deseleziona questa "
+"Se gli aggiornamenti delle applet non ti interessano, deseleziona questa "
 "casella."
 
 #. 4.2->settings-schema.json->check_new_applets->description
@@ -340,7 +340,7 @@ msgstr "Controllare regolarmente se sono disponibili nuove applet"
 #. 3.8->settings-schema.json->check_new_applets->tooltip
 #. 2.8->settings-schema.json->check_new_applets->tooltip
 msgid "If new applets do not concern you, uncheck this box."
-msgstr "Se le nuove applet non ti riguardano, deseleziona questa casella."
+msgstr "Se le nuove applet non ti interessano, deseleziona questa casella."
 
 #. 4.2->settings-schema.json->unprotected_applets->description
 #. 3.8->settings-schema.json->unprotected_applets->description
@@ -387,7 +387,7 @@ msgstr "Controlla regolarmente se i tuoi desklet sono aggiornati"
 #. 2.8->settings-schema.json->check_desklets->tooltip
 msgid "If desklets updates do not concern you, uncheck this box."
 msgstr ""
-"Se gli aggiornamenti dei desklet non ti riguardano, deseleziona questa "
+"Se gli aggiornamenti dei desklet non ti interessano, deseleziona questa "
 "casella."
 
 #. 4.2->settings-schema.json->check_new_desklets->description
@@ -400,7 +400,7 @@ msgstr "Controllare regolarmente se sono disponibili nuove desklet"
 #. 3.8->settings-schema.json->check_new_desklets->tooltip
 #. 2.8->settings-schema.json->check_new_desklets->tooltip
 msgid "If new desklets do not concern you, uncheck this box."
-msgstr "Se le nuove desklet non ti riguardano, deseleziona questa casella."
+msgstr "Se le nuove desklet non ti interessano, deseleziona questa casella."
 
 #. 4.2->settings-schema.json->unprotected_desklets->description
 #. 3.8->settings-schema.json->unprotected_desklets->description
@@ -429,7 +429,7 @@ msgstr "Controlla regolarmente se le tue estensioni sono aggiornate"
 #. 2.8->settings-schema.json->check_extensions->tooltip
 msgid "If extensions updates do not concern you, uncheck this box."
 msgstr ""
-"Se gli aggiornamenti delle estensioni non riguardano te, deseleziona questa "
+"Se gli aggiornamenti delle estensioni non ti interessano, deseleziona questa "
 "casella."
 
 #. 4.2->settings-schema.json->check_new_extensions->description
@@ -442,7 +442,7 @@ msgstr "Controllare regolarmente se sono disponibili nuove estensioni"
 #. 3.8->settings-schema.json->check_new_extensions->tooltip
 #. 2.8->settings-schema.json->check_new_extensions->tooltip
 msgid "If new extensions do not concern you, uncheck this box."
-msgstr "Se le nuove estensioni non ti riguardano, deseleziona questa casella."
+msgstr "Se le nuove estensioni non ti interessano, deseleziona questa casella."
 
 #. 4.2->settings-schema.json->unprotected_extensions->description
 #. 3.8->settings-schema.json->unprotected_extensions->description
@@ -464,14 +464,14 @@ msgstr "Apri Impostazioni di sistema per gestire tutte le estensioni"
 #. 3.8->settings-schema.json->check_themes->description
 #. 2.8->settings-schema.json->check_themes->description
 msgid "Let regularly check if your themes are up to date"
-msgstr "Controlla regolarmente se le tue temi sono aggiornate"
+msgstr "Controlla regolarmente se i tuoi temi sono aggiornati"
 
 #. 4.2->settings-schema.json->check_themes->tooltip
 #. 3.8->settings-schema.json->check_themes->tooltip
 #. 2.8->settings-schema.json->check_themes->tooltip
 msgid "If themes updates do not concern you, uncheck this box."
 msgstr ""
-"Se gli aggiornamenti dei temi non ti riguardano, deseleziona questa casella."
+"Se gli aggiornamenti dei temi non ti interessano, deseleziona questa casella."
 
 #. 4.2->settings-schema.json->check_new_themes->description
 #. 3.8->settings-schema.json->check_new_themes->description
@@ -483,7 +483,7 @@ msgstr "Controllare regolarmente se sono disponibili nuovi temi"
 #. 3.8->settings-schema.json->check_new_themes->tooltip
 #. 2.8->settings-schema.json->check_new_themes->tooltip
 msgid "If new themes do not concern you, uncheck this box."
-msgstr "Se le nuovi temi non ti riguardano, deseleziona questa casella."
+msgstr "Se i nuovi temi non ti interessano, deseleziona questa casella."
 
 #. 4.2->settings-schema.json->unprotected_themes->description
 #. 3.8->settings-schema.json->unprotected_themes->description
@@ -493,13 +493,13 @@ msgstr "Aggiorna questi temi:"
 #. 4.2->settings-schema.json->unprotected_themes->columns->title
 #. 3.8->settings-schema.json->unprotected_themes->columns->title
 msgid "Your Themes"
-msgstr "I tuoi temi"
+msgstr "I Tuoi Temi"
 
 #. 4.2->settings-schema.json->btn_cs_themes->description
 #. 3.8->settings-schema.json->btn_cs_themes->description
 #. 2.8->settings-schema.json->btn_cs_themes->description
 msgid "Open Cinnamon Settings to manage all the Themes"
-msgstr "Apri Impostazioni di sistema per gestire tutti i temi"
+msgstr "Apri le Impostazioni di Cinnamon per gestire tutti i Temi"
 
 #. 4.2->settings-schema.json->general_frequency->units
 #. 3.8->settings-schema.json->general_frequency->units
@@ -607,7 +607,7 @@ msgstr ""
 #. 3.8->settings-schema.json->general_type_notif->options
 #. 2.8->settings-schema.json->general_type_notif->options
 msgid "Minimal (text only)"
-msgstr "Minimo (solo testo)"
+msgstr "Minimale (solo testo)"
 
 #. 4.2->settings-schema.json->general_type_notif->options
 #. 3.8->settings-schema.json->general_type_notif->options
@@ -633,14 +633,12 @@ msgid ""
 "\tOpen the Download tab in System Settings for the concerned type of Spices, "
 "with the Spices sorted by date."
 msgstr ""
-"Minimal:\n"
-"\n"
+"Minimale:\n"
 "\tVisualizza notifiche semplici e brevi.\n"
-"\n"
-"Con il pulsante che apre le Impostazioni di sistema:\n"
-"\n"
-"\tNotifiche contengono anche un pulsante che ha lo stesso ruolo nel menu:\n"
-"\tApri la scheda Download in Impostazioni di sistema per il tipo di Spices "
+"Con il pulsante che apre le Impostazioni di Sistema:\n"
+"\tLe notifiche contengono anche un pulsante che ha lo stesso ruolo nel "
+"menù:\n"
+"\tApre la scheda Download in Impostazioni di Sistema per il tipo di Spices "
 "in questione, con le Spices ordinate per data."
 
 #. 4.2->settings-schema.json->general_test_notif->description
@@ -665,7 +663,7 @@ msgstr "Compatto - Solo icone"
 #. 3.8->settings-schema.json->displayType->description
 #. 2.8->settings-schema.json->displayType->description
 msgid "Type of Display"
-msgstr "Tipo di vizzualizzazione"
+msgstr "Tipo di Visualizzazione"
 
 #. 4.2->settings-schema.json->displayType->tooltip
 #. 3.8->settings-schema.json->displayType->tooltip
@@ -690,8 +688,8 @@ msgid ""
 "By checking this box, as long as nothing is to report the icon of Spices "
 "Update does not appear on the panel."
 msgstr ""
-"Selezionando questa casella, purché nulla sia da riportare, l'icona di "
-"Spices Update non appare sul pannello."
+"Selezionando questa casella, finché non c'è nulla da segnalare, l'icona di "
+"Spices Update non apparirà sul pannello."
 
 #. 3.8->settings-schema.json->unprotected_applets->tooltip
 msgid "If you do not want an applet to be checked, set it to FALSE."
