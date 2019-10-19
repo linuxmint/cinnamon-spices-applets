@@ -18,12 +18,6 @@
     { "type": "header"
     , "description": "Functionality"
     },
-    "safeMode":
-    { "type": "checkbox"
-    , "default": false
-    , "description": "Use safe mode to open the terminal"
-    , "tooltip": "Removes all extra arguments for the terminal, like title."
-    },
     "customCommand":
     { "type": "entry"
     , "default": ""

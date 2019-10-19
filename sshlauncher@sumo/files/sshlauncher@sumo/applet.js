@@ -21,9 +21,8 @@ function _(str) {
   return Gettext.dgettext(UUID, str);
 }
 
-var KEYS = {
+const KEYS = {
   CUSTOM_COMMAND: 'customCommand',
-  SAFE_MODEL: 'safeMode',
 };
 const CUSTOM_ICON_KEY = "themeIcon";
 const SYMBOLIC_ICON_KEY = "symbolicIcon";
@@ -40,7 +39,6 @@ MyApplet.prototype = {
 
     this.set_applet_tooltip(_("SSH Launcher"));
     // Settings
-    this._safeMode;
     this._customCommand;
 
     try {
@@ -68,7 +66,6 @@ MyApplet.prototype = {
     }
   },
 
-  /** Runs on init */
   bindSettings: function() {
     for (let k in KEYS) {
       let key = KEYS[k];
@@ -99,9 +96,7 @@ MyApplet.prototype = {
         return;
       }
 
-      let notification = new MessageTray.Notification(this.msgSource, _("SSH Launcher"), _("No suitable icon found, falling back to custom icon"));
-      notification.setTransient(true);
-      this.msgSource.notify(notification);
+      this.sendNotification(_("SSH Launcher"), _("No suitable icon found, falling back to custom icon"));
     }
     this.set_applet_icon_path(AppletDir + "/icon.png");
   },
@@ -110,6 +105,37 @@ MyApplet.prototype = {
     let itemLabel = _("Force Update from SSH config");
     let refreshMenuItem = new Applet.MenuItem(itemLabel, 'view-refresh', Lang.bind(this, this.updateMenu));
     this._applet_context_menu.addMenuItem(refreshMenuItem);
+  },
+
+  getTermOptions: function(terminal) {
+    let t = terminalOptions[terminal];
+    return (!t) ? null : t;
+  },
+
+  buildTermFlags: function(termOptions, hostName) {
+    let options = "";
+    if (termOptions == null) return options;
+    if (termOptions.title != null) options += (termOptions.title + " \"" + hostName + "\" ");
+
+    return options;
+  },
+
+  buildSshFlags: function() {
+    let flags = "";
+    if (this.sshForwardX) flags += " -X ";
+    if (this.sshHeadless) flags += " -fN ";
+
+    return flags;
+  },
+
+  isExecArgCorrect: function(terminal, arg) {
+    let termOptions = this.getTermOptions(terminal);
+    if (termOptions == null) return true; // No info stored on terminal, no way to validate
+    if (!this.arrayIncludes(termOptions.execute, arg)) {
+      //global.log("'org.cinnamon.desktop.default-applications.terminal exec-arg' might be incorrectly set for " + terminal + " terminal emulator: '" + arg + "' instead of options '" + JSON.stringify(termOptions.execute) + "'");
+      return false;
+    }
+    return true;
   },
 
   updateMenu: function() {
@@ -167,41 +193,43 @@ MyApplet.prototype = {
   },
 
   connectTo: function(hostname) {
-    let flags = "";
-    if (this.sshHeadless) {
-      flags = " -fN ";
-    }
-    if (this.sshForwardX) {
-      flags = " -X " + flags;
-    }
-
     let command = "";
-    if (this.notEmpty(this._customCommand)) {
+    let terminal = "";
+    let notifMessage = _("Connection opened to ") + hostname + _(" using ") + terminal;
+    if (!this.empty(this._customCommand)) { // Custom command set in settings
       command = this._customCommand;
+      terminal = command.split(" ")[0]; // Get terminal name from custom command
     }
     else {
-      let terminal = this.gsettings.get_string("exec");
-      let terminalArg = this.gsettings.get_string("exec-arg");
-      command = terminal + " " + terminalArg;
-      if (!this._safeMode) command += ("-t \"" + hostname + "\" ");
+      let term = this.gsettings.get_string("exec");
+      if (this.empty(term)) {
+        this.sendNotification(_("SSH Launcher"), _("Error: I can't open the terminal.\nYou need to set a default terminal first in Preferred Applications!\n\n(More help in Right Click->About->More Info)"));
+        return;
+      }
+
+      terminal = term;
+      command = term + " ";
+      command += this.buildTermFlags(this.getTermOptions(term), hostname);
+
+      let termArg = this.gsettings.get_string("exec-arg");
+      if (!this.isExecArgCorrect(term, termArg)) {};
+      command += termArg + " ";
     }
 
-    command += (" ssh " + flags + hostname);
+    command += (" ssh " + this.buildSshFlags() + hostname);
 
     Util.spawnCommandLine(command);
     global.log("Terminal opened with command '" + command + "'");
-    let notification = new MessageTray.Notification(this.msgSource, _("SSH Launcher"), _("Connection opened to ") + hostname + " using " + terminal);
-    notification.setTransient(true);
-    this.msgSource.notify(notification);
+    this.sendNotification(_("SSH Launcher"), notifMessage);
   },
 
   editConfig: function() {
   GLib.spawn_command_line_async(this.appletPath + "/launch_editor.sh");
   },
 
-  notEmpty: function(text) {
-    if (!text) return false;
-    return (text.trim().length != 0)
+  empty: function(text) {
+    if (!text) return true;
+    return (text.trim().length == 0)
   },
 
   on_applet_clicked: function(event) {
@@ -214,8 +242,92 @@ MyApplet.prototype = {
 
   toggleForwardX: function(event) {
     this.sshForwardX = event.state;
+  },
+
+  sendNotification: function(title, message) {
+    let notification = new MessageTray.Notification(this.msgSource, title, message);
+    notification.setTransient(true);
+    this.msgSource.notify(notification);
+  },
+
+  arrayIncludes: function(arr, item) {
+    if (!arr) return false;
+    if (!item) return false;
+    return (arr.indexOf(item) != -1);
   }
 };
+
+
+const terminalOptions = {
+  "gnome-terminal": {
+    "title": "-t",
+    "execute": ["-x"]
+  },
+  "tilix": {
+    "title": "-t",
+    "execute": ["--new-process -e", "", "-e"]
+  },
+  "alacritty": {
+    "title": "-t",
+    "execute": ["-e"]
+  },
+  "xterm": {
+    "title": "-T",
+    "execute": ["-e"]
+  },
+  "rxvt": {
+    "title": "-title",
+    "execute": ["-e"]
+  },
+  "urxvt": {
+    "title": "-title",
+    "execute": ["-e"]
+  },
+  "cool-retro-term": {
+    "title": "-T",
+    "execute": ["-e"]
+  },
+  "p-term": {
+    "title": "-T",
+    "execute": ["-e"]
+  },
+  "konsole": {
+    "title": null,
+    "execute": ["-e"]
+  },
+  "qterminal": {
+    "title": null,
+    "execute": ["-e"]
+  },
+  "kitty": {
+    "title": null,
+    "execute": [""]
+  },
+  "terminology": {
+    "title": "-n",
+    "execute": ["-e"]
+  },
+  "lxterminal": {
+    "title": "-t",
+    "execute": ["-e"]
+  },
+  "termite": {
+    "title": "-t",
+    "execute": ["-e"]
+  },
+  "xfce4-terminal": {
+    "title": "-T",
+    "execute": ["-x"]
+  },
+  "sakura": {
+    "title": "-t",
+    "execute": ["-x"]
+  },
+  "io.elementary.terminal": { //wtf?
+    "title": null,
+    "execute": ["-e"]
+  },
+}
 
 function main(metadata, orientation, panel_height, instance_id) {
   let myApplet = new MyApplet(metadata, orientation, panel_height, instance_id);
