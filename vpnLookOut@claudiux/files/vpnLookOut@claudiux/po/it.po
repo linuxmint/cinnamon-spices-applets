@@ -8,19 +8,19 @@ msgstr ""
 "Project-Id-Version: vpnLookOut@claudiux v3.3.1~20181122\n"
 "Report-Msgid-Bugs-To: Claudiux <claude.clerc@gmail.com>\n"
 "POT-Creation-Date: 2017-12-02 19:59+0100\n"
-"PO-Revision-Date: 2018-11-23 01:56+0100\n"
+"PO-Revision-Date: 2019-10-19 18:41+0200\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.0.6\n"
-"Last-Translator: Claude CLERC <claude.clerc@gmail.com>\n"
+"Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Language: it\n"
 
 #: metadata.json:4
 msgid "VPN Look-Out Applet"
-msgstr "VPN Vedetta Applet"
+msgstr "Applet di Sorveglianza VPN"
 
 #: metadata.json:7
 msgid "A Cinnamon applet that watches over the VPN link, displays its status, allows to connect at start-up to the last VPN used, allows to reconnect the VPN link if it incidentally drops, and can stop or restart VPN-related apps according to the state of the VPN."
@@ -200,7 +200,7 @@ msgstr "Connessioni"
 
 #: 2.8/applet.js:771
 msgid "Click to disconnect from VPN"
-msgstr "Fare clic per disconnettersi da VPN"
+msgstr "Fare clic per disconnettersi dalla VPN"
 
 #: 2.8/applet.js:793
 msgid "Connected"
@@ -212,11 +212,11 @@ msgstr "Sconnesso"
 
 #: 2.8/applet.js:802
 msgid "Click to connect to VPN"
-msgstr "Fare clic per connettersi a VPN"
+msgstr "Fare clic per connettersi alla VPN"
 
 #: 2.8/applet.js:832
 msgid "VPN:"
-msgstr "VPN :"
+msgstr "VPN:"
 
 #: 2.8/applet.js:860
 msgid "is fully functional."
@@ -248,7 +248,7 @@ msgstr "Non provare a riconnettersi automaticamente se la VPN è stata disconnes
 
 #: 3.8/settings-schema.json:129
 msgid "If, by this applet only, the user disconnects the VPN, then no automatic reconnection will be tried."
-msgstr "Se, solo con questa applet, l'utente disconnette la VPN, non verrà tentata alcuna riconnessione automatica."
+msgstr "Se, solo tramite questa applet, l'utente disconnette la VPN, non verrà tentata alcuna riconnessione automatica."
 
 #: 3.8/settings-schema.json:139
 msgid "Refresh interval:"
@@ -276,7 +276,7 @@ msgstr "Controllare questo se si desidera emettere questo segnale acustico all'a
 
 #: 3.8/settings-schema.json:176
 msgid "Manage VPN-related Apps"
-msgstr "Gestire le applicazioni relative alla VPN"
+msgstr "Gestione Applicazioni relative alla VPN"
 
 #: 3.8/settings-schema.json:177
 msgid "This option allows this applet to manage the VPN-related applications you listed above."
@@ -329,7 +329,7 @@ msgid ""
 "This option allows this applet to log the VPN status changes and the VPN-related applications status changes.\n"
 "You will can display the log file to make diagnostics."
 msgstr ""
-"Questa opzione consente a questa applet di registrare le modifiche allo stato della VPN e le modifiche allo stato delle applicazioni relative alla VPN.\n"
+"Questa opzione consente a questa applet di registrare le modifiche allo stato della VPN e delle applicazioni relative ad essa.\n"
 "È possibile visualizzare il file di registro per effettuare la diagnostica."
 
 #: 3.8/settings-schema.json:249
@@ -342,11 +342,11 @@ msgstr "Durata di una registrazione nel file di registro, in giorni."
 
 #: 3.8/applet.js:331
 msgid "TRUE"
-msgstr "SI"
+msgstr "TRUE"
 
 #: 3.8/applet.js:332
 msgid "FALSE"
-msgstr "NO"
+msgstr "FALSE"
 
 #: 3.8/applet.js:741
 msgid "Switching to: "
@@ -354,24 +354,24 @@ msgstr "Passa a: "
 
 #: 3.8/applet.js:922
 msgid "View Activity Logs"
-msgstr "Visualizza i registri delle attività"
+msgstr "Visualizza i Registri delle Attività"
 
 #: 3.8/applet.js:994
 msgid "or Middle-Click to disconnect"
-msgstr "o clic centrale per disconnettersi"
+msgstr "o Clic Centrale per disconnettersi"
 
 #: 3.8/applet.js:1025
 msgid "Started by vpnLookOut: "
-msgstr "Iniziato da VPN Vedetta: "
+msgstr "Avviata da Sorveglianza VPN: "
 
 #: 3.8/applet.js:1051
 msgid "Blocked by vpnLookOut: "
-msgstr "Bloccato da VPN Vedetta: "
+msgstr "Bloccata da Sorveglianza VPN: "
 
 #: 3.8/applet.js:1069
 msgid "or Middle-Click to connect"
-msgstr "o clic centrale per connettersi"
+msgstr "o Clic Centrale per connettersi"
 
 #: 3.8/applet.js:1101
 msgid "Stopped by vpnLookOut: "
-msgstr "Fermato da VPN Vedetta: "
+msgstr "Arrestata da Sorveglianza VPN: "
