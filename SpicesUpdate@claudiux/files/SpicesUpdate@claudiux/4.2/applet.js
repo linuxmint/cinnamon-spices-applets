@@ -670,23 +670,15 @@ class SpicesUpdate extends Applet.TextIconApplet {
     }
   }; // End of on_btn_test_notif_pressed
   on_btn_refresh_applets_pressed() {
-    this.OKtoPopulateSettingsApplets = true;
-    this.populateSettingsUnprotectedApplets();
     this._on_refresh_pressed()
   }; // End of on_btn_refresh_applets_pressed
   on_btn_refresh_desklets_pressed() {
-    this.OKtoPopulateSettingsDesklets = true;
-    this.populateSettingsUnprotectedDesklets();
     this._on_refresh_pressed()
   }; // End of on_btn_refresh_applets_pressed
   on_btn_refresh_extensions_pressed() {
-    this.OKtoPopulateSettingsExtensions = true;
-    this.populateSettingsUnprotectedExtensions();
     this._on_refresh_pressed()
   }; // End of on_btn_refresh_applets_pressed
   on_btn_refresh_themes_pressed() {
-    this.OKtoPopulateSettingsThemes = true;
-    this.populateSettingsUnprotectedThemes();
     this._on_refresh_pressed()
   }; // End of on_btn_refresh_applets_pressed
   on_btn_cs_applets_pressed() {
@@ -723,11 +715,13 @@ class SpicesUpdate extends Applet.TextIconApplet {
    [
       {
         "name" : "batterymonitor@pdcurtis",
-        "isunprotected" : true
+        "isunprotected" : true,
+        "requestnewdownload": false
       },
       {
         "name" : "Cinnamenu@json",
-        "isunprotected" : true
+        "isunprotected" : true,
+        "requestnewdownload": false
       }, etc...
     ]
     * (true when updates are requested by the user)
@@ -769,6 +763,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
             if (this.unprotectedAppletsDico[name] === undefined) {
               this.unprotectedAppletsList.push({"name": name, "isunprotected": true, "requestnewdownload": false});
               this.unprotectedAppletsDico[name] = {"name": name, "isunprotected": true};
+              this._get_last_edited_from_metadata(type, name);
             }
           }
         }
@@ -814,6 +809,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
             if (this.unprotectedDeskletsDico[name] === undefined) {
               this.unprotectedDeskletsList.push({"name": name, "isunprotected": true, "requestnewdownload": false});
               this.unprotectedDeskletsDico[name] = {"name": name, "isunprotected": true};
+              this._get_last_edited_from_metadata(type, name);
             }
           }
         }
@@ -859,6 +855,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
             if (this.unprotectedExtensionsDico[name] === undefined) {
               this.unprotectedExtensionsList.push({"name": name, "isunprotected": true, "requestnewdownload": false});
               this.unprotectedExtensionsDico[name] = {"name": name, "isunprotected": true};
+              this._get_last_edited_from_metadata(type, name);
             }
           }
         }
@@ -905,6 +902,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
             if (this.unprotectedThemesDico[name] === undefined) {
               this.unprotectedThemesList.push({"name": name, "isunprotected": true, "requestnewdownload": false});
               this.unprotectedThemesDico[name] = {"name": name, "isunprotected": true};
+              this._get_last_edited_from_metadata(type, name);
             }
           }
         }
@@ -1137,6 +1135,9 @@ class SpicesUpdate extends Applet.TextIconApplet {
     let metadataParser = new Json.Parser();
     let metadataFileName = DIR_MAP[type] + "/" + uuid + "/metadata.json";
     let metadataFile = Gio.file_new_for_path(metadataFileName);
+    let dirName = DIR_MAP[type] + "/" + uuid;
+    let dir = Gio.file_new_for_path(dirName);
+    let most_recent;
 
     // For some themes, the metadata.json file is in the subfolder /cinnamon:
     if (type.toString() === "themes" && !metadataFile.query_exists(null)) {
@@ -1156,23 +1157,47 @@ class SpicesUpdate extends Applet.TextIconApplet {
           lastEdited = obj.get_member("last-edited").get_value();
         } catch(e) {
           // The last-edited member doesn't exist
-          lastEdited = null;
-          // Replace the last-edited member's value by the last modification time of the metadate file, in epoch format.
-          try {
-            lastEdited = metadataFile.query_info('time::modified', Gio.FileQueryInfoFlags.NONE, null).get_modification_time().tv_sec;
-            lastEditedIsToSet = true;
-          } catch(e) {
-            // Sure, the metadata file doesn't exist!
-            lastEdited = null;
+          most_recent = this._most_recent_file_in(dir);
+          // Set the last-edited member's value to the last modification time of the most_recent file, in epoch format.
+          if (most_recent !== null) {
+            lastEdited = most_recent.query_info('time::modified', Gio.FileQueryInfoFlags.NONE, null).get_modification_time().tv_sec;
+            this.get_date_of_nearest_commit(type, uuid, lastEdited, metadataFileName);
           }
-        }
-        if (lastEditedIsToSet === true) {
-          this._rewrite_metadataFile(metadataFileName, lastEdited)
         }
       }
     }
     return lastEdited
   }; // End of _get_last_edited_from_metadata
+
+  _most_recent_file_in(dir) {
+    if (dir.query_exists(null)) {
+      var latest_time = dir.query_info('time::modified', Gio.FileQueryInfoFlags.NONE, null).get_modification_time().tv_sec;
+      var latest_file = dir;
+      let children = dir.enumerate_children('standard::name,standard::type', Gio.FileQueryInfoFlags.NONE, null);
+      let info, file_type;
+      let file, file_time;
+      while ((info = children.next_file(null)) != null) {
+        file = children.get_child(info);
+        file_time = file.query_info('time::modified', Gio.FileQueryInfoFlags.NONE, null).get_modification_time().tv_sec;
+        if (file_time > latest_time) {
+          latest_time = file_time;
+          latest_file = file;
+        }
+        file_type = info.get_file_type();
+        if (file_type == Gio.FileType.DIRECTORY) {
+          file = this._most_recent_file_in(file);
+          file_time = file.query_info('time::modified', Gio.FileQueryInfoFlags.NONE, null).get_modification_time().tv_sec;
+          if (file_time > latest_time) {
+            latest_time = file_time;
+            latest_file = file;
+          }
+        }
+      }
+      return latest_file;
+    } else {
+      return null;
+    }
+  }; // End of _most_recent_file_in
 
   _on_forget_new_spices_pressed() {
     for (let type of TYPES) {
@@ -1231,7 +1256,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
 
   get_last_commit_subject(type, uuid) {
     let marker_begin = "</span>\]";
-    let marker_end = "</div>"
+    let marker_end = "</div>";
     let subject_regexp = new RegExp(`${marker_begin}(.+)${marker_end}`);
     let url = "https://cinnamon-spices.linuxmint.com/%s/view/%s/".format(type.toString(),
                                                                         this._get_member_from_cache(type, uuid, "spices-id").toString());
@@ -1252,6 +1277,39 @@ class SpicesUpdate extends Applet.TextIconApplet {
     }));
     return (this.details_by_uuid[uuid] !== undefined && this.details_by_uuid[uuid] !== "")
   }; // End of get_last_commit_subject
+
+  get_date_of_nearest_commit(type, uuid, timestamp, fileName) {
+    let marker_begin = '<relative-time datetime="';
+    let marker_end = '" class="no-wrap">';
+    let subject_regexp = new RegExp(`${marker_begin}(.+)${marker_end}`, 'g');
+    let url = "https://github.com/linuxmint/cinnamon-spices-%s/commits/master/%s".format(type.toString(), uuid);
+    var msg = Soup.Message.new('GET', url);
+
+    let iteration = this.iteration;
+    // Queue of the http request
+    _httpSession.queue_message(msg, Lang.bind(this, function(_httpSession, message) {
+      if (message.status_code === Soup.KnownStatusCode.OK && iteration === this.iteration) {
+        this.do_rotation = false;
+        this.updateUI();
+        let data = message.response_body.data;
+        let result;
+        let commit_time;
+        var nearest_commit_time = timestamp;
+        var smaller_difference = Math.round(Date.now() / 1000);
+        let difference;
+        while (result = subject_regexp.exec(data.toString())) {
+          commit_time = Date.parse(result[1].toString()) / 1000;
+          difference = Math.abs(timestamp - commit_time);
+          if (difference < smaller_difference) {
+            smaller_difference = difference;
+            nearest_commit_time = commit_time;
+          }
+        }
+        this._rewrite_metadataFile(fileName, nearest_commit_time);
+      }
+    }));
+    //return (this.details_by_uuid[uuid] !== undefined && this.details_by_uuid[uuid] !== "")
+  }; // End of get_date_of_nearest_commit
 
   is_to_check(type) {
     return (this.types_to_check.indexOf(type) > -1);
@@ -1654,6 +1712,11 @@ class SpicesUpdate extends Applet.TextIconApplet {
           }
           this.monitors = [];
           for (let type of TYPES) this.monitorsPngId[type] = 0;
+
+          this.populateSettingsUnprotectedApplets();
+          this.populateSettingsUnprotectedDesklets();
+          this.populateSettingsUnprotectedExtensions();
+          this.populateSettingsUnprotectedThemes();
 
           var must_be_updated;
           this.nb_to_update = 0;

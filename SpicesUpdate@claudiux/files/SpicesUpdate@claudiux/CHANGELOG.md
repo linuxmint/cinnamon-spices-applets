@@ -1,3 +1,7 @@
+### v4.3.0~20191020
+  * Better behavior when many spices need updating.
+  * Take better account of manually installed spices.
+
 ### v4.2.1~20191004
   * Adds the ability to increase up to 720 hours (30 days) the time between two checks. (User request.)
 
