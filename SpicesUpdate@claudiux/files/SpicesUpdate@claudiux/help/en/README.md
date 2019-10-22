@@ -86,9 +86,14 @@ The color of the icon changes when at least one of your Spices needs an update.
 
 From Cinnamon 4.2 (and Spices Update v4.1.0), the color of the icon darkens while data are being refreshed.
 
-Its tooltip (the message displayed when the icon is hovered) contains the list of spices to update, if any.
+Its tooltip (the message displayed hovering over the icon) contains the list of spices to update, if any.
 
 ![hovering_icon](https://github.com/claudiux/docs/raw/master/SpicesUpdate/images/hovering_icon.png)
+
+A _Middle-Click_ on applet icon:
+
+  * Performs a Refresh while no available updates are reported.
+  * Opens all useful Cinnamon Settings, when Spices updates are available, to allow the user to perform these updates.
 
 ## Notifications
 There are two types of notifications: _Minimal_ or _With buttons_. Each of them may or may not contain details: the reason for an update or the description of a new spice.
@@ -113,7 +118,7 @@ Any translation is welcome. Thank you for contributing to translate the applet's
   * Finnish (fi): MahtiAnkka
   * French (fr): claudiux
   * German (de): Mintulix
-  * Italian (it): claudiux
+  * Italian (it): Dragone2
   * Spanish (es): claudiux
   * Swedish (sv): Åke Engelbrektson (eson57)
 
@@ -140,13 +145,13 @@ Use the _Applets_ menu in Cinnamon Settings, or _Add Applets to Panel_ in the co
 ### Manual Installation:
 
    * Install the additional programs required.
-   * Download the **[latest version of Spices Update](https://cinnamon-spices.linuxmint.com/files/applets/SpicesUpdate@claudiux.zip?3a160f32-a3d6-437f-899e-afba9907e023)** from the Spices Web Site.
+   * Download the **[latest version of Spices Update](https://cinnamon-spices.linuxmint.com/files/applets/SpicesUpdate@claudiux.zip?2d21fbc0-6e63-410a-b948-7bd8318bd729)** from the Spices Web Site.
    * Unzip and extract the folder ```SpicesUpdate@claudiux``` into ```~/.local/share/cinnamon/applets/```
    * Enable this applet in System Settings -> Applets.
    * You can also access the Settings Screen from System Settings -> Applets, or from the context menu of this applet (right-clicking on its icon).
 
 ## A Star to thank the author
 
-If you like this Spices Update applet, please do not offer money or coffee, but log in and click on the Star at the top of this page.
+If you like this Spices Update applet, please do not offer money or coffee, but log in and click on the Star at the top of **[this page](https://cinnamon-spices.linuxmint.com/applets/view/309)**.
 
 Many Thanks.
