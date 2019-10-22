@@ -18,7 +18,7 @@ function DEBUG() {
   return _debug.query_exists(null);
 };
 
-const DOWNLOAD_TIME = 2;
+const DOWNLOAD_TIME = 10;
 
 const APPLET_DIR = HOME_DIR + "/.local/share/cinnamon/applets/" + UUID;
 const SCRIPTS_DIR = APPLET_DIR + "/scripts";

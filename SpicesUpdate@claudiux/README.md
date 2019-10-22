@@ -2,7 +2,7 @@
 
 ## Important!
 In order to be sure to download the latest version of Spices Update, use
-**[this link](https://cinnamon-spices.linuxmint.com/files/applets/SpicesUpdate@claudiux.zip?3a160f32-a3d6-437f-899e-afba9907e023)** rather than the Download button at the top of this page.
+**[this link](https://cinnamon-spices.linuxmint.com/files/applets/SpicesUpdate@claudiux.zip?ad7e0297-245d-4e51-8346-2ab656e9ce4b)** rather than the Download button at the top of this page, **or use Spices Update v4.1.0 or greater**.
 
 ## Summary
 
@@ -117,7 +117,7 @@ Any translation is welcome. Thank you for contributing to translate the applet's
   * Finnish (fi): MahtiAnkka
   * French (fr): claudiux
   * German (de): Mintulix
-  * Italian (it): claudiux
+  * Italian (it): Dragone2
   * Spanish (es): claudiux
   * Swedish (sv): Åke Engelbrektson (eson57)
 
@@ -144,7 +144,7 @@ Use the _Applets_ menu in Cinnamon Settings, or _Add Applets to Panel_ in the co
 ### Manual Installation:
 
    * Install the additional programs required.
-   * Download the **[latest version of Spices Update](https://cinnamon-spices.linuxmint.com/files/applets/SpicesUpdate@claudiux.zip?3a160f32-a3d6-437f-899e-afba9907e023)** from the Spices Web Site.
+   * Download the **[latest version of Spices Update](https://cinnamon-spices.linuxmint.com/files/applets/SpicesUpdate@claudiux.zip?ad7e0297-245d-4e51-8346-2ab656e9ce4b)** from the Spices Web Site.
    * Unzip and extract the folder ```SpicesUpdate@claudiux``` into ```~/.local/share/cinnamon/applets/```
    * Enable this applet in System Settings -> Applets.
    * You can also access the Settings Screen from System Settings -> Applets, or from the context menu of this applet (right-clicking on its icon).
