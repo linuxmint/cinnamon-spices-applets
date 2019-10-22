@@ -64,7 +64,7 @@ Le premier, _Général_, vous permet de :
 
 ![system_settings_applet](https://github.com/claudiux/docs/raw/master/SpicesUpdate/images/System_Settings_Applets-fr.png)
 
-Quant au contenu des autres onglets (_Applets_, _Desklets_, etc), veuillez consulter la capture d'écran ci-dessous et noter que **la liste des Spices installées est automatiquement remplie** au démarrage, mais qu'un bouton _Rafraîchir_ vous permet de la recharger.
+Quant au contenu des autres onglets (_Applets_, _Desklets_, etc), veuillez consulter la capture d'écran ci-dessous et noter que **la liste des Spices installées est automatiquement remplie** au démarrage, mais qu'un bouton _Actualiser_ vous permet de la recharger.
 
 ![settings_spices_update_applets](https://github.com/claudiux/docs/raw/master/SpicesUpdate/images/Settings_Spices_Update_Applets-fr.png)
 
@@ -93,6 +93,11 @@ Son infobulle (le message affiché lorsque l'icône est survolé) contient la li
 
 ![hovering_icon](https://github.com/claudiux/docs/raw/master/SpicesUpdate/images/hovering_icon-fr.png)
 
+Un **_Clic-Molette_** (ou clic central) sur l'cône de cette applet :
+
+  * Effectue une actualisation des données tant qu'aucune mise à jour n'est signalée (comme un clic sur Actualiser).
+  * Ouvre tous les paramètres système utiles aux mises à jour, lorsqu'il y en a de signalées.
+
 ## Notifications
 Il existe deux types de notifications: _Minimale_ or _Avec boutons_. Chacune d’elles peut contenir ou non des détails: le motif d’une mise à jour ou la description d’une nouvelle épice.
 
@@ -117,15 +122,15 @@ Toute traduction est la bienvenue. Merci de contribuer en traduisant les message
   * Finnois (fi): MahtiAnkka
   * Français (fr): claudiux
   * Allemand (de): Mintulix
-  * Italien (it): claudiux
+  * Italien (it): Dragone2
   * Espagnol (es): claudiux
   * Suédois (sv): Åke Engelbrektson (eson57)
 
 Un grand merci à eux !
 
-### Commant proposer une traduction
+### Comment proposer une traduction
 
-  1. Créer un compte dur [Github](https://github.com/).
+  1. Créer un compte sur [Github](https://github.com/).
   2. Faire un Fork du dépôt [cinnamon-spices-applets](https://github.com/linuxmint/cinnamon-spices-applets).
   3. Dans votre fork, créer une branche (la nommer comme `SpicesUpdate-CODE_LANGUE`) à partir de la branche master.
   4. Sur votre ordinateur, installer `git` et `poedit`.
@@ -142,13 +147,13 @@ Utilisez le menu _Applets_ dans les Paramètres système de Cinnamon ou _Ajouter
 ### Installation manuelle :
 
   * Installer les programmes supplémentaires requis.
-  * Télécharger Spices Update à partir du [site web des Spices](https://cinnamon-spices.linuxmint.com/applets/view/309).
+  * Télécharger la [dernière version de Spices Update](https://cinnamon-spices.linuxmint.com/files/applets/SpicesUpdate@claudiux.zip?2d21fbc0-6e63-410a-b948-7bd8318bd729).
   * Décompresser et extraire le dossier ```SpicesUpdate@claudiux``` dans ``` ~/.local/share/cinnamon/applets/```
   * Activer cette applet dans Paramètres système -> Applets.
   * Vous pouvez également accéder à la fenêtre de configuration à partir de Paramètres système -> Applets ou du menu de cet applet (en cliquant sur son icône).
 
 ## Une Étoile pour remercier l'auteur
 
-Si vous appréciez les services rendus par Spices Update, n'offrez ni argent ni café à l'auteur, mais connectez-vous et cliquez sur l'étoile en haut de [cette page](https://cinnamon-spices.linuxmint.com/applets/view/309).
+Si vous appréciez les services rendus par Spices Update, n'offrez ni argent ni café à l'auteur, mais connectez-vous et cliquez sur l'étoile en haut de **[cette page](https://cinnamon-spices.linuxmint.com/applets/view/309)**.
 
 Merci beaucoup.
