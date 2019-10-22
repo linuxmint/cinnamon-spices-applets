@@ -50,6 +50,8 @@ To install them:
 
 ## Settings
 
+![screenshot](https://cinnamon-spices.linuxmint.com/git/applets/SpicesUpdate@claudiux/screenshot.png)
+
 There are five tabs in settings.
 
 The first, _General_, allows you to:
