@@ -108,21 +108,21 @@
         "tooltip": "This information is automatically changed when connecting to a VPN.\nIt therefore contains the name of the last VPN to which you connected."
     },
     "connectAtStartup": {
-        "type": "checkbox",
+        "type": "switch",
         "indent": true,
         "default": false,
         "description": "Connect to VPN as this applet starts.",
         "tooltip": "Checking this allows this applet to try to connect to the last VPN at start-up."
     },
     "reconnect": {
-        "type": "checkbox",
+        "type": "switch",
         "indent": true,
         "default": false,
         "description": "Try to reconnect to VPN when it shuts down incidentally.",
         "tooltip": "Checking this allows this applet to try to reconnect to VPN when it shuts down incidentally."
     },
     "respectUserRequest": {
-		"type": "checkbox",
+		"type": "switch",
         "indent": true,
         "default": false,
         "description": "Do not try to reconnect automatically if the VPN has been disconnected by the user.",
@@ -150,14 +150,14 @@
         "tooltip": "This feature offers the Classic (default) display with icon and text, and compact display (Icon Only)."
     },
     "useSoundAlert": {
-        "type": "checkbox",
+        "type": "switch",
         "indent": true,
         "default": false,
         "description": "Emit an audible alert when VPN shuts down.",
         "tooltip": "Checking this allows this applet to emit an audible alert when VPN shuts down."
     },
     "useSoundAlertAtBeginning": {
-        "type": "checkbox",
+        "type": "switch",
         "indent": true,
         "default": false,
         "description": "Emit this audible alert when this Applet starts, if VPN is down.",
@@ -170,7 +170,7 @@
         "default": "<Super>v"
     },
     "manageClients": {
-        "type": "checkbox",
+        "type": "switch",
         "indent": true,
         "default": false,
         "description": "Manage VPN-related Apps",
@@ -215,11 +215,10 @@
                 "shutdown": true,
                 "vpnOnly": false
             }
-        ],
-        "dependency": "manageClients"
+        ]
     },
     "doLogActivity": {
-        "type": "checkbox",
+        "type": "switch",
         "indent": true,
         "default": false,
         "description": "Log the VPN status changes and the VPN-related Apps status changes",
