@@ -46,6 +46,31 @@ function _(str) {
 }
 
 
+// modifier button
+class TimeModifierButton extends PopupMenu.PopupBaseMenuItem
+{
+    constructor (applet, label, modifier)
+    {
+        super();
+        this._init();
+
+        this._applet = applet;
+        this._modifier = modifier;
+
+        this.label = new St.Label({ text: label });
+        this.addActor(this.label);
+        this.label.realize();
+
+        this.connect('activate', this._on_activate.bind(this));
+    }
+
+    _on_activate ()
+    {
+        this._applet.startTime -= this._modifier;
+    }
+}
+
+
 // ++ Always needed
 function MyApplet(metadata, orientation, panelHeight, instance_id) {
     this._init(metadata, orientation, panelHeight, instance_id);
@@ -66,7 +91,7 @@ MyApplet.prototype = {
                 this.on_settings_changed, // Callback when value changes
                 null); // Optional callback data
 
-            this.settings.bindProperty(Settings.BindingDirection.IN,
+            this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL,
                 "counterTitle",
                 "counterTitle",
                 this.on_settings_changed,
@@ -156,13 +181,37 @@ MyApplet.prototype = {
     buildContextMenu: function () {
         this._applet_context_menu.removeAll();
 
+        // name modifier
+        let section = new PopupMenu.PopupMenuSection();
+        section.actor.set_style('margin: 5px 0; padding: 0 20px;');
+        this._applet_context_menu.addMenuItem(section);
+
+        this._searchEntry = new St.Entry({
+            name: 'menu-search-entry',
+            hint_text: _('Name'),
+            text: this.counterTitle,
+            track_hover: true,
+            can_focus: true
+        });
+        section.actor.add_actor(this._searchEntry);
+
+        this._searchEntryText = this._searchEntry.clutter_text;
+        this._searchEntryText.connect('key-press-event', (se, prop) => {
+            this.counterTitle = this._searchEntry.get_text()
+        });
+
+        // state modifiers
+        let container = new St.BoxLayout();
+        container.set_style('padding: 5px 20px;');
+        this._applet_context_menu.addActor(container);
+
         let menuitem = new PopupMenu.PopupMenuItem(_("Start"));
         menuitem.connect('activate', Lang.bind(this, function (event) {
             this.counterStatus = "running";
             this.startTime = this.getCurrentTime();
             this.updateLoop();
         }));
-        this._applet_context_menu.addMenuItem(menuitem);
+        container.add_actor(menuitem.actor);
 
         menuitem = new PopupMenu.PopupMenuItem(_("Pause"));
         menuitem.connect('activate', Lang.bind(this, function (event) {
@@ -170,14 +219,48 @@ MyApplet.prototype = {
             this.pausedAt = this.currentCount; // Changed to reduce load on Settings
             this.updateUI();
         }));
-        this._applet_context_menu.addMenuItem(menuitem);
+        container.add_actor(menuitem.actor);
 
         menuitem = new PopupMenu.PopupMenuItem(_("Reset counter"));
         menuitem.connect('activate', Lang.bind(this, function (event) {
             this.counterStatus = "ready";
             this.updateUI();
         }));
-        this._applet_context_menu.addMenuItem(menuitem);
+        container.add_actor(menuitem.actor);
+
+        // time modifier buttons
+        let container2 = new St.BoxLayout();
+        container2.set_style('padding: 5px 20px;');
+        this._applet_context_menu.addActor(container2);
+
+        let button;
+
+        button = new TimeModifierButton(this, '-1h', -60*60);
+        button.actor.set_style('padding: 5px 10px;');
+        container2.add_actor(button.actor);
+
+        button = new TimeModifierButton(this, '-15min', -15*60);
+        button.actor.set_style('padding: 5px 10px;');
+        container2.add_actor(button.actor);
+
+        button = new TimeModifierButton(this, '-5min', -5*60);
+        button.actor.set_style('padding: 5px 10px;');
+        container2.add_actor(button.actor);
+
+        button = new TimeModifierButton(this, '+5min', 5*60);
+        button.actor.set_style('padding: 5px 10px;');
+        container2.add_actor(button.actor);
+
+        button = new TimeModifierButton(this, '+15min', 15*60);
+        button.actor.set_style('padding: 5px 10px;');
+        container2.add_actor(button.actor);
+
+        button = new TimeModifierButton(this, '+1h', 60*60);
+        button.actor.set_style('padding: 5px 10px;');
+        container2.add_actor(button.actor);
+
+        // other buttons
+        this._applet_context_menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
         menuitem = new PopupMenu.PopupMenuItem(_("If paused, continue counting from now"));
         menuitem.connect('activate', Lang.bind(this, function (event) {
@@ -278,6 +361,7 @@ MyApplet.prototype = {
         this.seconds = temp - (this.minutes * 60);
         let string = "";
         this.verboseCount = "";
+
         if (this.days > 0) {
             this.verboseCount = this.verboseCount + this.days + " " + _("days") + " "
         };
@@ -292,12 +376,11 @@ MyApplet.prototype = {
             this.verboseCount = this.verboseCount + "0"
         };
         this.verboseCount = this.verboseCount + this.seconds;
-        if (this.hours > 0 && this.hours < 10) {
+
+        if (this.hours < 10) {
             string = string + "0"
         };
-        if (this.hours > 0) {
-            string = string + this.hours + ":"
-        };
+        string = string + this.hours + ":"
         if (this.minutes < 10) {
             string = string + "0"
         };
@@ -305,7 +388,8 @@ MyApplet.prototype = {
         if (this.seconds < 10) {
             string = string + "0"
         };
-        string = string + this.seconds
+        string = string + this.seconds;
+
         return string;
     },
 
@@ -334,35 +418,46 @@ MyApplet.prototype = {
 
     // This updates the numerical display in the applet and in the tooltip and background colour of applet
     updateUI: function () {
-        if (this.counterStatus == "running") {
-            this.currentCount = this.getCurrentTime() - this.startTime;
-            this.set_applet_label(this.formatTime(this.currentCount));
-            this.set_applet_tooltip(this.counterTitle + ": " + _("Running for") + " " + this.verboseCount + " - " + _("Click to Pause"));
-              if (this.days > 0) {
-                   this.actor.style_class = 'stopwatch-running-day-exceeded';
-              } else {
-                   this.actor.style_class = 'stopwatch-running';
-              }
-        }
-        if (this.counterStatus == "paused") {
-            this.set_applet_label(this.formatTime(this.pausedAt));
-            if (this.modeContinueCounting) {
-                this.set_applet_tooltip(this.counterTitle + ": " + _("Paused at") + " " + this.verboseCount + " - " + _("Click to Continue Counting"));
+        var label = this.counterTitle + "\n"
+        var tooltip = ''
+        var klass = 'stopwatch '
+
+        if (this.counterStatus == 'running') {
+            this.currentCount = this.getCurrentTime() - this.startTime
+            label += this.formatTime(this.currentCount)
+
+            tooltip = _('Running for') + ' ' + this.verboseCount + ' - ' + _('Click to Pause')
+
+            if (this.days > 0) {
+                klass = ' stopwatch-running-day-exceeded'
             } else {
-                this.set_applet_tooltip(this.counterTitle + ": " + _("Paused at") + " " + this.verboseCount + " - " + _("Click to Reset"));
+                klass = 'stopwatch stopwatch-running'
             }
-              if (this.days > 0) {
-                   this.actor.style_class = 'stopwatch-paused-day-exceeded';
-              } else {
-                   this.actor.style_class = 'stopwatch-paused';
-              }
+        }
+        else if (this.counterStatus == 'paused') {
+            label += this.formatTime(this.pausedAt)
+
+            if (this.modeContinueCounting) {
+                tooltip = this.counterTitle + ': ' + _('Paused at') + ' ' + this.verboseCount + ' - ' + _('Click to Continue Counting')
+            } else {
+                tooltip = this.counterTitle + ': ' + _('Paused at') + ' ' + this.verboseCount + ' - ' + _('Click to Reset')
+            }
+
+            if (this.days > 0) {
+                klass += 'stopwatch-paused-day-exceeded'
+            } else {
+                klass += 'stopwatch-paused'
+            }
+        }
+        else if (this.counterStatus == 'ready') {
+            label += '00:00:00'
+            tooltip = this.counterTitle + ': ' + _('Ready - Click to Start')
+            klass = 'stopwatch stopwatch-ready'
         }
 
-        if (this.counterStatus == "ready") {
-            this.set_applet_tooltip(this.counterTitle + ": " + _("Ready - Click to Start"));
-            this.set_applet_label("00:00");
-            this.actor.style_class = 'stopwatch-ready';
-        }
+        this.set_applet_tooltip(tooltip)
+        this.set_applet_label(label)
+        this.actor.style_class = klass
     },
 
     // This is the loop run at refreshInterval rate to call updateUI() to update the display in the applet and tooltip
