@@ -67,6 +67,8 @@ class TimeModifierButton extends PopupMenu.PopupBaseMenuItem
     _on_activate ()
     {
         this._applet.startTime -= this._modifier;
+        this._applet.pausedAt += this._modifier;
+        this._applet.updateUI()
     }
 }
 
