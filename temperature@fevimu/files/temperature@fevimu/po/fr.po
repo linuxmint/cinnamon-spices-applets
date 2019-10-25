@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-08-30 02:30+0200\n"
-"PO-Revision-Date: 2019-08-30 02:42+0200\n"
+"POT-Creation-Date: 2019-10-24 15:42+0200\n"
+"PO-Revision-Date: 2019-10-24 15:43+0200\n"
 "Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -18,11 +18,15 @@ msgstr ""
 "X-Generator: Poedit 2.0.6\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: applet.js:73
+#: applet.js:78 applet.js:157
+msgid "Temperature"
+msgstr "Température du CPU"
+
+#: applet.js:146
 msgid "Error"
 msgstr "Erreur"
 
-#: applet.js:74
+#: applet.js:147
 msgid ""
 "Run sensors-detect as root. If it doesn't help, click here to report with "
 "your sensors output!"
@@ -30,11 +34,11 @@ msgstr ""
 "Exécuter sudo sensors-detect. Si cela ne résout rien, cliquer ici pour "
 "rapporter l'erreur avec ce que renvoient vos capteurs !"
 
-#: applet.js:76
+#: applet.js:149
 msgid "Warning"
 msgstr "Attention"
 
-#: applet.js:77
+#: applet.js:150
 msgid ""
 "Please install lm_sensors. If it doesn't help, click here to report with "
 "your sensors output!"
@@ -42,35 +46,31 @@ msgstr ""
 "Veuillez installer lm-sensors. Si cela ne résout rien, cliquer ici pour "
 "rapporter l'erreur avec ce que renvoient vos capteurs !"
 
-#: applet.js:80 applet.js:142
-msgid "Temperature"
-msgstr "Température du CPU"
-
-#: applet.js:201
+#: applet.js:222
 msgid "Thresholds Info"
 msgstr "Seuils (pour info)"
 
-#: applet.js:202
+#: applet.js:223
 msgid "High Temp"
 msgstr "Temp. élevée (high)"
 
-#: applet.js:203
+#: applet.js:224
 msgid "Crit. Temp"
-msgstr "Temp. Critique (crit)"
+msgstr "Temp. critique (crit)"
 
-#: applet.js:214
+#: applet.js:235
 msgid "Critical"
 msgstr "Critique"
 
-#: applet.js:217
+#: applet.js:238
 msgid "High"
 msgstr "Élevée"
 
-#: applet.js:231
+#: applet.js:251
 msgid "Current Temperature"
 msgstr "Température actuelle"
 
-#: applet.js:233
+#: applet.js:253
 msgid "Critical Temperature"
 msgstr "Température critique"
 
@@ -89,6 +89,22 @@ msgstr "Afficher la température en Fahrenheit"
 #. settings-schema.json->only-integer-part->description
 msgid "Use integer values for temperature"
 msgstr "N'afficher que des valeurs entières"
+
+#. settings-schema.json->show-unit->description
+msgid "Show unit"
+msgstr "Afficher l'unité"
+
+#. settings-schema.json->show-unit->tooltip
+msgid "Whether or not show the unit after the temperature value."
+msgstr "Indiquer ou non l'unité après la valeur de température."
+
+#. settings-schema.json->show-unit-letter->description
+msgid "Show unit letter"
+msgstr "Afficher la lettre de l'unité"
+
+#. settings-schema.json->show-unit-letter->tooltip
+msgid "Whether or not show the unit letter (C or F)."
+msgstr "Indiquer ou non la lettre de l'unité (C ou F)."
 
 #. settings-schema.json->interval->units
 msgid "ms"
@@ -114,13 +130,13 @@ msgstr ""
 
 #. settings-schema.json->only-colors->description
 msgid "Only use colors to alert me"
-msgstr "N'utiliser que alertes par couleurs"
+msgstr "N'utiliser que des alertes par couleurs"
 
 #. settings-schema.json->only-colors->tooltip
 msgid ""
 "Select this option to not display text alerts in horizontal panels.\n"
 "(No text alert is ever displayed on vertical panels.)"
 msgstr ""
-"Sélectionnez cette option pour ne pas afficher les alertes de texte dans "
-"les panneaux horizontaux.\n"
+"Sélectionnez cette option pour ne pas afficher les alertes de texte dans les "
+"panneaux horizontaux.\n"
 "(Aucune alerte textuelle n'est jamais affichée sur les panneaux verticaux.)"

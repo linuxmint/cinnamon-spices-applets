@@ -39,6 +39,7 @@ const {
   DIR_MAP,
   DCONFCACHEUPDATED,
   DOWNLOAD_TIME,
+  SORT,
   _,
   EXP1, EXP2, EXP3,
   DEBUG,
@@ -115,7 +116,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
     Gtk.IconTheme.get_default().append_search_path(ICONS_DIR);
     this.set_applet_icon_symbolic_name("spices-update");
     this.default_tooltip = "%s %s".format(_("Spices Update"), metadata.version);
-    this.set_applet_tooltip(this.default_tooltip);
+    this.set_applet_tooltip(this.default_tooltip + "\n%s".format(_("Middle-Click to Refresh")));
 
     this.img_path = ICONS_DIR + "/spices-update-symbolic.svg";
     //this.general_frequency = 10; //(seconds between two loops)
@@ -551,7 +552,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
       this.notifications.push(notification);
       notification.connect('action-invoked', Lang.bind(this, function(self, action) {
             if (action == "spices-update") {
-              Util.spawnCommandLine("%s %s -t 1 -s date".format(CS_PATH, type.toString()));
+              Util.spawnCommandLine("%s %s -t 1 -s %s".format(CS_PATH, type.toString(), SORT));
             } else {
               if (this.force_notifications === true) {
                 while (this.notifications.length != 0) {
@@ -682,16 +683,16 @@ class SpicesUpdate extends Applet.TextIconApplet {
     this._on_refresh_pressed()
   }; // End of on_btn_refresh_applets_pressed
   on_btn_cs_applets_pressed() {
-    Util.spawnCommandLine("%s applets -t 1 -s date".format(CS_PATH));
+    Util.spawnCommandLine("%s applets -t 1 -s %s".format(CS_PATH, SORT));
   }; // End of on_btn_cs_applets_pressed
   on_btn_cs_desklets_pressed() {
-    Util.spawnCommandLine("%s desklets -t 1 -s date".format(CS_PATH));
+    Util.spawnCommandLine("%s desklets -t 1 -s %s".format(CS_PATH, SORT));
   }; // End of on_btn_cs_desklets_pressed
   on_btn_cs_extensions_pressed() {
-    Util.spawnCommandLine("%s extensions -t 1 -s date".format(CS_PATH));
+    Util.spawnCommandLine("%s extensions -t 1 -s %s".format(CS_PATH, SORT));
   }; // End of on_btn_cs_extensions_pressed
   on_btn_cs_themes_pressed() {
-    Util.spawnCommandLine("%s themes -t 1 -s date".format(CS_PATH));
+    Util.spawnCommandLine("%s themes -t 1 -s %s".format(CS_PATH, SORT));
   }; // End of on_btn_cs_themes_pressed
 
   /**
@@ -1297,7 +1298,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
         var nearest_commit_time = timestamp;
         var smaller_difference = Math.round(Date.now() / 1000);
         let difference;
-        while (result = subject_regexp.exec(data.toString())) {
+        while (result == subject_regexp.exec(data.toString())) {
           commit_time = Date.parse(result[1].toString()) / 1000;
           difference = Math.abs(timestamp - commit_time);
           if (difference < smaller_difference) {
@@ -1535,15 +1536,22 @@ class SpicesUpdate extends Applet.TextIconApplet {
       if (this.new_Spices[t].length > 0) ts += "   \u2604 %s".format((this.new_Spices[t].length).toString());
       this.spicesMenuItems[t] = new PopupMenu.PopupIndicatorMenuItem(ts);
       this.spicesMenuItems[t].connect('activate', (event) => {
-        Util.spawnCommandLine("%s %s -t 1 -s date".format(CS_PATH, t.toString()));
+        Util.spawnCommandLine("%s %s -t 1 -s %s".format(CS_PATH, t.toString(), SORT));
       });
       this.spicesMenuItems[t].setShowDot(this.menuDots[t]);
       this.menu.addMenuItem(this.spicesMenuItems[t]);
     }
+    // button Forget
     if (this.nb_to_watch > 0) {
       let _forget_button = new PopupMenu.PopupIconMenuItem(_("Forget new Spices") + " -\u2604-", "emblem-ok", St.IconType.SYMBOLIC);
-      _forget_button.connect("activate", (event) => this._on_forget_new_spices_pressed())
+      _forget_button.connect("activate", (event) => this._on_forget_new_spices_pressed());
       this.menu.addMenuItem(_forget_button);
+    }
+    // button Download
+    if ((this.nb_to_update + this.nb_to_watch) > 0) {
+      let _download_tabs_button = new PopupMenu.PopupIconMenuItem(_("Open useful Cinnamon Settings"), "folder-download", St.IconType.SYMBOLIC);
+      _download_tabs_button.connect("activate", (event) => this.open_each_download_tab());
+      this.menu.addMenuItem(_download_tabs_button);
     }
     this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
@@ -1659,18 +1667,26 @@ class SpicesUpdate extends Applet.TextIconApplet {
     this.set_icon_color();
     if (this.nb_to_update > 0 || this.nb_to_watch > 0) {
       var _tooltip = this.default_tooltip;
+      var tooltip_was_modified = false;
       for (let type of TYPES) {
         if (this.old_message[type] != "" || this.old_watch_message[type] != "") {
+          if (!tooltip_was_modified) {
+            _tooltip += "\n%s".format(_("Middle-Click to open useful Cinnamon Settings"));
+            tooltip_was_modified = true;
+          }
           _tooltip += "\n\n\t\t\t%s".format(_(type).toLocaleUpperCase());
           if (this.old_message[type] != "") _tooltip += "\n\u21BB %s".format(this._clean_str(this.old_message[type].replace(/, /gi, "\n\t")));
           if (this.old_watch_message[type] != "") _tooltip += "\n\u2604 %s".format(this._clean_str(this.old_watch_message[type].replace(/, /gi, "\n\t")));
         }
       }
+      if (!tooltip_was_modified) {
+        _tooltip += "\n%s".format(_("Middle-Click to Refresh"));
+      }
       this.set_applet_tooltip(_tooltip);
       this.numberLabel.text = (this.nb_to_update + this.nb_to_watch).toString();
       this.badge.show();
     } else {
-      this.set_applet_tooltip(this.default_tooltip);
+      this.set_applet_tooltip(this.default_tooltip + "\n%s".format(_("Middle-Click to Refresh")));
       this.numberLabel.text = '';
       this.badge.hide();
     }
@@ -1789,6 +1805,25 @@ class SpicesUpdate extends Applet.TextIconApplet {
       this.loopId = Mainloop.timeout_add_seconds(this.refreshInterval, () => this.updateLoop());
     }
   }; // End of updateLoop
+
+  open_each_download_tab() {
+    for (let t of TYPES) {
+      if (this.nb_in_menu[t] > 0) {
+        Util.spawnCommandLine("%s %s -t 1 -s %s".format(CS_PATH, t.toString(), SORT));
+      }
+    }
+  };  // End of open_each_download_tab
+
+  _onButtonPressEvent(actor, event) {
+    if (event.get_button() == 2) {
+      if ((this.nb_to_update + this.nb_to_watch) === 0) {
+        this._on_refresh_pressed();
+      } else {
+        this.open_each_download_tab();
+      }
+    }
+    return super._onButtonPressEvent(actor, event);
+  };  // End of _onButtonPressEvent
 
   //++ Handler for when the applet is clicked.
   on_applet_clicked(event) {

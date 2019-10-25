@@ -367,7 +367,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
       "general_frequency",
       this.on_frequency_changed,
       null);
-      this.refreshInterval = 3600*this.general_frequency;
+      this.refreshInterval = 3600 * this.general_frequency;
 
     this.settings.bindProperty(Settings.BindingDirection.IN,
       "general_warning",
@@ -528,7 +528,6 @@ class SpicesUpdate extends Applet.TextIconApplet {
       let img_uri = GLib.filename_to_uri("%s/cs-%s.svg".format(ICONS_DIR, type.toString()), null);
       if (uuid !== null) {
         let uri= CACHE_DIR + "/" + this._get_singular_type(type) + "/" + uuid + ".png";
-        //log("uri = " + uri);
         let file = Gio.file_new_for_path(uri);
         if (file.query_exists(null)) {
           img_uri = GLib.filename_to_uri(uri, null);
@@ -612,7 +611,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
       Mainloop.source_remove(this.loopId);
     }
     this.loopId = 0;
-    this.refreshInterval = 3600*this.general_frequency;
+    this.refreshInterval = 3600 * this.general_frequency;
     this.loopId = Mainloop.timeout_add_seconds(this.refreshInterval, () => this.updateLoop());
   }; // End of on_frequency_changed
 
@@ -627,7 +626,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
     this._set_main_label();
 
     // Refresh intervall:
-    this.refreshInterval = 3600*this.general_frequency;
+    this.refreshInterval = 3600 * this.general_frequency;
 
     // Types to check
     this.types_to_check = [];
@@ -1303,7 +1302,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
         var nearest_commit_time = timestamp;
         var smaller_difference = Math.round(Date.now() / 1000);
         let difference;
-        while (result = subject_regexp.exec(data.toString())) {
+        while (result == subject_regexp.exec(data.toString())) {
           commit_time = Date.parse(result[1].toString()) / 1000;
           difference = Math.abs(timestamp - commit_time);
           if (difference < smaller_difference) {
@@ -1552,10 +1551,17 @@ class SpicesUpdate extends Applet.TextIconApplet {
       this.spicesMenuItems[t].setShowDot(this.menuDots[t]);
       this.menu.addMenuItem(this.spicesMenuItems[t]);
     }
+    // button Forget
     if (this.nb_to_watch > 0) {
       let _forget_button = new PopupMenu.PopupIconMenuItem(_("Forget new Spices") + " -\u2604-", "emblem-ok", St.IconType.SYMBOLIC);
       _forget_button.connect("activate", (event) => this._on_forget_new_spices_pressed())
       this.menu.addMenuItem(_forget_button);
+    }
+    // button Download
+    if ((this.nb_to_update + this.nb_to_watch) > 0) {
+      let _download_tabs_button = new PopupMenu.PopupIconMenuItem(_("Open useful Cinnamon Settings"), "folder-download", St.IconType.SYMBOLIC);
+      _download_tabs_button.connect("activate", (event) => this.open_each_download_tab());
+      this.menu.addMenuItem(_download_tabs_button);
     }
     this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
@@ -1629,18 +1635,26 @@ class SpicesUpdate extends Applet.TextIconApplet {
     }
     if (this.nb_to_update > 0 || this.nb_to_watch > 0) {
       var _tooltip = this.default_tooltip;
+      var tooltip_was_modified = false;
       for (let type of TYPES) {
         if (this.old_message[type] != "" || this.old_watch_message[type] != "") {
+          if (!tooltip_was_modified) {
+            _tooltip += "\n%s".format(_("Middle-Click to open useful Cinnamon Settings"));
+            tooltip_was_modified = true;
+          }
           _tooltip += "\n\n\t\t\t%s".format(_(type).toLocaleUpperCase());
           if (this.old_message[type] != "") _tooltip += "\n\u21BB %s".format(this._clean_str(this.old_message[type].replace(/, /gi, "\n\t")));
           if (this.old_watch_message[type] != "") _tooltip += "\n\u2604 %s".format(this._clean_str(this.old_watch_message[type].replace(/, /gi, "\n\t")));
         }
       }
+      if (!tooltip_was_modified) {
+        _tooltip += "\n%s".format(_("Middle-Click to Refresh"));
+      }
       this.set_applet_tooltip(_tooltip);
       this.numberLabel.text = (this.nb_to_update + this.nb_to_watch).toString();
       this.badge.show();
     } else {
-      this.set_applet_tooltip(this.default_tooltip);
+      this.set_applet_tooltip(this.default_tooltip + "\n%s".format(_("Middle-Click to Refresh")));
       this.numberLabel.text = '';
       this.badge.hide();
     }
@@ -1673,7 +1687,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
         this.refreshInterval = 5;
       } else {
         if (!this.first_loop) {
-          this.refreshInterval = 3600*this.general_frequency;
+          this.refreshInterval = 3600 * this.general_frequency;
           var monitor, Id;
           for (let tuple of this.monitors) {
             [monitor, Id] = tuple;
@@ -1759,6 +1773,25 @@ class SpicesUpdate extends Applet.TextIconApplet {
       this.loopId = Mainloop.timeout_add_seconds(this.refreshInterval, () => this.updateLoop());
     }
   }; // End of updateLoop
+
+  open_each_download_tab() {
+    for (let t of TYPES) {
+      if (this.nb_in_menu[t] > 0) {
+        Util.spawnCommandLine("%s/open_download_tab.py %s".format(SCRIPTS_DIR, t.toString()));
+      }
+    }
+  };  // End of open_each_download_tab
+
+  _onButtonPressEvent(actor, event) {
+    if (event.get_button() == 2) {
+      if ((this.nb_to_update + this.nb_to_watch) === 0) {
+        this._on_refresh_pressed();
+      } else {
+        this.open_each_download_tab();
+      }
+    }
+    return super._onButtonPressEvent(actor, event);
+  };  // End of _onButtonPressEvent
 
   //++ Handler for when the applet is clicked.
   on_applet_clicked(event) {
