@@ -130,7 +130,7 @@
                         <property name="halign">start</property>
                         <property name="margin_left">10</property>
                         <property name="margin_right">10</property>
-                        <property name="label" translatable="yes">Resfresh Rate (ms)</property>
+                        <property name="label" translatable="yes">Refresh Rate (ms)</property>
                         <property name="xalign">0</property>
                       </object>
                       <packing>

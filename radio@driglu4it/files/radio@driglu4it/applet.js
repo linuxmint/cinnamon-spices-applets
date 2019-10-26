@@ -24,7 +24,7 @@ function MyApplet(orientation, panel_height, instance_id) {
 MyApplet.prototype = {
   __proto__: Applet.TextIconApplet.prototype,
   _init: function(orientation, panel_height, instance_id) {
-    Main.Util.spawnCommandLine("mocp");
+    Util.spawnCommandLine("mocp");
     Applet.TextIconApplet.prototype._init.call(this, orientation, panel_height, instance_id);
     this.set_applet_icon_symbolic_path(GLib.get_home_dir() + "/.local/share/cinnamon/applets/" + UUID + "/icons/radio.svg");
     this.menuManager = new PopupMenu.PopupMenuManager(this);
@@ -63,7 +63,7 @@ MyApplet.prototype = {
     stopitem.connect('activate', Lang.bind(this, function() {
       this.set_applet_tooltip(_("Radio++"));
       this.activeMenuItemChanged(stopitem);
-      Main.Util.spawnCommandLine("mocp -s");
+      Util.spawnCommandLine("mocp -s");
       Main.notify(_("Stop") + ' Radio++');
     }));
     this.menu.addMenuItem(stopitem);
@@ -80,8 +80,8 @@ MyApplet.prototype = {
   },
   startCM: function(id) {
     //Make sure that the MOC-Server is running before playing a stream
-    Main.Util.spawnCommandLine("mocp -S")
-    Main.Util.spawnCommandLine('mocp -c -a -p ' + id);
+    Util.spawnCommandLine("mocp -S");
+    Util.spawnCommandLine('mocp -c -a -p ' + id);
   },
   on_applet_clicked: function(event) {
     this.menu.toggle();
@@ -101,10 +101,10 @@ _connect_signals: function() {
 
             let direction = event.get_scroll_direction();
             if (direction == Clutter.ScrollDirection.UP) {
-                Main.Util.spawnCommandLine("mocp -v +5");
+                Util.spawnCommandLine("mocp -v +5");
             }
             else {
-                Main.Util.spawnCommandLine("mocp -v -5");
+                Util.spawnCommandLine("mocp -v -5");
             }
 
     },

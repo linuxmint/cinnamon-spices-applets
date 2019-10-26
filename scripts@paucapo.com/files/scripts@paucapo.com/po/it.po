@@ -1,0 +1,68 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Â scripts@paucapo.com\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-02-18 20:53+0100\n"
+"PO-Revision-Date: 2019-10-24 21:59+0200\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.2.1\n"
+"Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: it\n"
+
+#: applet.js:89
+msgid "Scripts"
+msgstr "Script"
+
+#: applet.js:124
+msgid "Open scripts folder"
+msgstr "Apri la cartella degli script"
+
+#: applet.js:129
+msgid "Update menu"
+msgstr "Aggiorna menù"
+
+#. scripts@paucapo.com->settings-schema.json->paneltitle->description
+#. scripts@paucapo.com->settings-schema.json->head_title->description
+msgid "Title"
+msgstr "Titolo"
+
+#. scripts@paucapo.com->settings-schema.json->directory->description
+msgid "Scripts directory"
+msgstr "Cartella degli script"
+
+#. scripts@paucapo.com->settings-schema.json->customicon->description
+msgid "Custom icon"
+msgstr "Icona personalizzata"
+
+#. scripts@paucapo.com->settings-schema.json->autoupdate->description
+msgid "Autoupdate. Update scripts list when the applet is opened."
+msgstr "Aggiornamento automatico. Aggiorna l'elenco degli script quando viene aperta l'applet."
+
+#. scripts@paucapo.com->settings-schema.json->head_icon->description
+msgid "Icon"
+msgstr "Icona"
+
+#. scripts@paucapo.com->settings-schema.json->showtitle->description
+msgid "Show title"
+msgstr "Mostra titolo"
+
+#. scripts@paucapo.com->settings-schema.json->icon->description
+msgid "Icon (empty to hide the icon)"
+msgstr "Icona (vuota per nascondere l'icona)"
+
+#. scripts@paucapo.com->metadata.json->name
+msgid "Scripts Menu"
+msgstr "Menù degli Script"
+
+#. scripts@paucapo.com->metadata.json->description
+msgid "Menu applet for starting scripts"
+msgstr "Applet di menu per l'avvio di script"

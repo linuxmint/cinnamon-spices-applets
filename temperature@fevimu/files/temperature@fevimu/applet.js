@@ -49,11 +49,13 @@ CPUTemperatureApplet.prototype = {
     this.state = {};
     this.settings = new Settings.AppletSettings(this.state, metadata.uuid, instance_id);
 
-    this.settings.bindProperty(Settings.BindingDirection.IN, 'use-fahrenheit', 'useFahrenheit', this.updateTemperature, null);
-    this.settings.bindProperty(Settings.BindingDirection.IN, 'only-integer-part', 'onlyIntegerPart', this.updateTemperature, null);
+    this.settings.bindProperty(Settings.BindingDirection.IN, 'use-fahrenheit', 'useFahrenheit', () => this.on_settings_changed(), null);
+    this.settings.bindProperty(Settings.BindingDirection.IN, 'only-integer-part', 'onlyIntegerPart', () => this.on_settings_changed(), null);
+    this.settings.bindProperty(Settings.BindingDirection.IN, 'show-unit', 'showUnit', () => this.on_settings_changed(), null);
+    this.settings.bindProperty(Settings.BindingDirection.IN, 'show-unit-letter', 'showUnitLetter', () => this.on_settings_changed(), null);
     this.settings.bindProperty(Settings.BindingDirection.IN, 'interval', 'interval');
-    this.settings.bindProperty(Settings.BindingDirection.IN, 'change-color', 'changeColor', this.updateTemperature, null);
-    this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, 'only-colors', 'onlyColors', this.updateTemperature, null);
+    this.settings.bindProperty(Settings.BindingDirection.IN, 'change-color', 'changeColor', () => this.on_settings_changed(), null);
+    this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, 'only-colors', 'onlyColors', () => this.on_settings_changed(), null);
 
     this.lang = {
       acpi: 'ACPI Adapter',
@@ -75,6 +77,15 @@ CPUTemperatureApplet.prototype = {
 
     this.set_applet_tooltip(_('Temperature'));
 
+    this.updateTemperature();
+    this.loopId = Mainloop.timeout_add(this.state.interval, () => this.updateTemperature());
+  },
+
+  on_settings_changed: function() {
+    if (this.loopId > 0) {
+        Mainloop.source_remove(this.loopId);
+    }
+    this.loopId = 0;
     this.updateTemperature();
     this.loopId = Mainloop.timeout_add(this.state.interval, () => this.updateTemperature());
   },
@@ -181,55 +192,54 @@ CPUTemperatureApplet.prototype = {
 
     if (sensorsOutput != "") {
       tempInfo = this._findTemperatureFromSensorsOutput(sensorsOutput.toString()); //get temperature from sensors
+    }
+
+    if (tempInfo) {
+      let critical = 0;
+      let high = 0;
+      let packageIds = 0;
+      let packageCount = 0;
+      let s = 0;
+      let n = 0; //sum and count
+
+      for (let i = 0; i < tempInfo.length; i++) {
+        if (tempInfo[i].label.indexOf('Package') > -1) {
+          critical = tempInfo[i].crit ? tempInfo[i].crit : 0;
+          high = tempInfo[i].high ? tempInfo[i].high : 0;
+          packageIds += tempInfo[i].value;
+          packageCount++;
+        } else if (tempInfo[i].label.indexOf('Core') > -1) {
+          s += tempInfo[i].value;
+          n++;
+        }
+        if (cpuIdentifiers.indexOf(tempInfo[i].label) > -1) {
+          temp = tempInfo[i].value;
+        }
+        items.push(tempInfo[i].label + ': ' + this._formatTemp(tempInfo[i].value));
       }
-
-      if (tempInfo) {
-        let critical = 0;
-        let high = 0;
-        let packageIds = 0;
-        let packageCount = 0;
-        let s = 0;
-        let n = 0; //sum and count
-
-        for (let i = 0; i < tempInfo.length; i++) {
-          if (tempInfo[i].label.indexOf('Package') > -1) {
-            critical = tempInfo[i].crit ? tempInfo[i].crit : 0;
-            high = tempInfo[i].high ? tempInfo[i].high : 0;
-            packageIds += tempInfo[i].value;
-            packageCount++;
-          }
-          if (tempInfo[i].label.indexOf('Core') > -1) {
-            s += tempInfo[i].value;
-            n++;
-          }
-          if (cpuIdentifiers.indexOf(tempInfo[i].label) > -1) {
-            temp = tempInfo[i].value;
-          }
-          items.push(tempInfo[i].label + ': ' + this._formatTemp(tempInfo[i].value));
-        }
-        if (high > 0 || critical > 0) {
-          items.push("");
-          items.push(_("Thresholds Info") + ":")
-          if (high > 0) items.push("  " + _("High Temp") + ': ' + this._formatTemp(high));
-          if (critical > 0) items.push("  " + _("Crit. Temp") + ': ' + this._formatTemp(critical));
-        }
-        if (packageCount > 0) {
-            temp = packageIds / packageCount;
-        } else if (n > 0) {
-            temp = s / n;
-        }
-        let label = this._formatTemp(temp);
-        if (DEBUG === true) {critical = 53; high = 49;} // <- For tests only.
-        if (this.state.changeColor === false) this.state.onlyColors = false;
-        if (critical && temp >= critical) {
-          this.title = (this.isHorizontal === true && this.state.onlyColors === false) ? _('Critical') + ': ' + label : this._formatTemp(temp, true);
-          this.actor.style = (this.state.changeColor === true) ? "background: FireBrick;" : "";
-        } else if (high && temp >= high) {
-          this.title = (this.isHorizontal === true && this.state.onlyColors === false) ? _('High') + ': ' + label : this._formatTemp(temp, true);
-          this.actor.style = (this.state.changeColor === true) ? "background: DarkOrange;" : "";
-        } else {
-          this.title = this._formatTemp(temp, true);
-          this.actor.style = "";
+      if (high > 0 || critical > 0) {
+        items.push("");
+        items.push(_("Thresholds Info") + ":")
+        if (high > 0) items.push("  " + _("High Temp") + ': ' + this._formatTemp(high));
+        if (critical > 0) items.push("  " + _("Crit. Temp") + ': ' + this._formatTemp(critical));
+      }
+      if (packageCount > 0) {
+          temp = packageIds / packageCount;
+      } else if (n > 0) {
+          temp = s / n;
+      }
+      let label = this._formatTemp(temp);
+      if (DEBUG === true) {critical = 53; high = 49;} // <- For tests only.
+      if (this.state.changeColor === false) this.state.onlyColors = false;
+      if (critical && temp >= critical) {
+        this.title = (this.isHorizontal === true && this.state.onlyColors === false) ? _('Critical') + ': ' + label : this._formatTemp(temp, true);
+        this.actor.style = (this.state.changeColor === true) ? "background: FireBrick;" : "background: transparent;";
+      } else if (high && temp >= high) {
+        this.title = (this.isHorizontal === true && this.state.onlyColors === false) ? _('High') + ': ' + label : this._formatTemp(temp, true);
+        this.actor.style = (this.state.changeColor === true) ? "background: DarkOrange;" : "background: transparent;";
+      } else {
+        this.title = this._formatTemp(temp, true);
+        this.actor.style = "background: transparent;";
       }
     }
 
@@ -331,13 +341,15 @@ CPUTemperatureApplet.prototype = {
             entry.value = match[i];
           } else if (entries.length > 0 && entries[entries.length - 1].value) {
             entries[entries.length - 1][match[i - 1]] = match[i];
+          } else {
+            continue;
           }
         }
       }
       if (!entry.label || !entry.value) {
         continue;
       }
-      entries.push(entry);
+      if (entry != {}) entries.push(entry);
     }
     return entries;
   },
@@ -349,16 +361,32 @@ CPUTemperatureApplet.prototype = {
   _formatTemp: function(t, line_feed = false) {
     let precisionDigits;
     precisionDigits = this.state.onlyIntegerPart ? 0 : 1;
-    let separator = (this.isHorizontal || !line_feed) ? " " : "\n"
+    let value;
+    let unit = "";
+    let separator = "";
+    if (this.state.showUnit) {
+      unit = "°";
+      separator = (this.isHorizontal || !line_feed) ? " " : (this.state.showUnitLetter) ? "\n" : "";
+    } else if (!line_feed) {
+      separator = " ";
+      unit = "°";
+    }
+
     if (this.state.useFahrenheit) {
-      return (
+      if (this.state.showUnit && this.state.showUnitLetter) unit = "°F";
+      value = (
         this._toFahrenheit(t)
           .toFixed(precisionDigits)
-          .toString() + '%s°F'.format(separator)
+          .toString()
       );
     } else {
-      return (Math.round(t * 10) / 10).toFixed(precisionDigits).toString() + '%s°C'.format(separator);
+      if (this.state.showUnit && this.state.showUnitLetter) unit = "°C";
+      value = ((Math.round(t * 10) / 10)
+      .toFixed(precisionDigits)
+      .toString()
+      );
     }
+    return '%s%s%s'.format(value, separator, unit)
   }
 };
 

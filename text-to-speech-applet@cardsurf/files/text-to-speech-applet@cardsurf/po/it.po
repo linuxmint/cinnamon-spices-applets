@@ -1,0 +1,156 @@
+# Main translation file for text-to-speech-applet@cardsurf.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-04-20 23:44+0800\n"
+"PO-Revision-Date: 2019-10-17 21:42+0200\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
+"Language-Team: \n"
+"X-Generator: Poedit 2.2.1\n"
+
+#: applet.js:405
+msgid "Error parsing command parameters"
+msgstr "Errore durante l'analisi dei parametri del comando"
+
+#: applet.js:406
+msgid "Try to use less parameters to determine which one is causing the error"
+msgstr ""
+"Prova a utilizzare meno parametri per determinare qual è la causa "
+"dell'errore"
+
+#. text-to-speech-applet@cardsurf->metadata.json->name
+msgid "Text to speech applet"
+msgstr "Applet di sintesi vocale"
+
+#. text-to-speech-applet@cardsurf->metadata.json->description
+msgid "A text reading applet"
+msgstr "Un'applet per la lettura di testi"
+
+#. text-to-speech-applet@cardsurf->settings-
+#. schema.json->configuration->description
+msgid "Configuration"
+msgstr "Configurazione"
+
+#. text-to-speech-applet@cardsurf->settings-
+#. schema.json->clipboard_type->description
+msgid "Clipboard"
+msgstr "Clipboard"
+
+#. text-to-speech-applet@cardsurf->settings-
+#. schema.json->clipboard_type->tooltip
+msgid ""
+"The clipboard that contains the text to read. \n"
+"The primary selection stores highlighted text. \n"
+"The clipboard selection stores text copied with Ctrl+C."
+msgstr ""
+"La clipboard che contiene il testo da leggere.\n"
+"La selezione principale memorizza il testo evidenziato.\n"
+"La selezione della clipboard memorizza il testo copiato con Ctrl+C."
+
+#. text-to-speech-applet@cardsurf->settings-
+#. schema.json->clipboard_type->options
+msgid "Primary selection"
+msgstr "Selezione primaria"
+
+#. text-to-speech-applet@cardsurf->settings-
+#. schema.json->clipboard_type->options
+msgid "Clipboard selection"
+msgstr "Selezione da Clipboard"
+
+#. text-to-speech-applet@cardsurf->settings-
+#. schema.json->voice_command->description
+msgid "Voice command"
+msgstr "Comando vocale"
+
+#. text-to-speech-applet@cardsurf->settings-
+#. schema.json->voice_command->tooltip
+msgid "A command used to read the text"
+msgstr "Un comando utilizzato per leggere il testo"
+
+#. text-to-speech-applet@cardsurf->settings-
+#. schema.json->reading_start->description
+msgid "Reading"
+msgstr "Lettura"
+
+#. text-to-speech-applet@cardsurf->settings-
+#. schema.json->read_lines_and_stop->description
+msgid "Read lines and stop"
+msgstr "Leggi le righe e fermati"
+
+#. text-to-speech-applet@cardsurf->settings-
+#. schema.json->read_lines_and_stop->tooltip
+msgid ""
+"If checked reading is stopped after the specified number of lines. Reading "
+"is resumed from the line it was stopped."
+msgstr ""
+"Se selezionato la lettura viene interrotta dopo il numero specificato di "
+"righe. La lettura riprende dalla riga in cui è stata interrotta."
+
+#. text-to-speech-applet@cardsurf->settings-
+#. schema.json->number_lines_to_read->description
+msgid "Read"
+msgstr "Leggi"
+
+#. text-to-speech-applet@cardsurf->settings-
+#. schema.json->number_lines_to_read->tooltip
+msgid "The number of lines to read"
+msgstr "Il numero di righe da leggere"
+
+#. text-to-speech-applet@cardsurf->settings-
+#. schema.json->number_lines_to_read->units
+msgid "lines and stop"
+msgstr "righe e ferma"
+
+#. text-to-speech-applet@cardsurf->settings-
+#. schema.json->line_separator->description
+msgid "Line separator"
+msgstr "Separatore di riga"
+
+#. text-to-speech-applet@cardsurf->settings-
+#. schema.json->line_separator->tooltip
+msgid "A regular expression separating lines of text"
+msgstr "Un'espressione regolare che separa le righe di testo"
+
+#. text-to-speech-applet@cardsurf->settings-
+#. schema.json->gui_start->description
+msgid "Gui"
+msgstr "Interfaccia Grafica"
+
+#. text-to-speech-applet@cardsurf->settings-
+#. schema.json->gui_idle_icon_filename->description
+msgid "Idle icon"
+msgstr "Icona di inattività"
+
+#. text-to-speech-applet@cardsurf->settings-
+#. schema.json->gui_idle_icon_filename->tooltip
+msgid "An icon displayed when idle"
+msgstr "Un'icona visualizzata quando è inattivo"
+
+#. text-to-speech-applet@cardsurf->settings-
+#. schema.json->gui_pause_icon_filename->description
+msgid "Pause icon"
+msgstr "Icona di pausa"
+
+#. text-to-speech-applet@cardsurf->settings-
+#. schema.json->gui_pause_icon_filename->tooltip
+msgid "An icon displayed when paused"
+msgstr "Un'icona visualizzata quando in pausa"
+
+#. text-to-speech-applet@cardsurf->settings-
+#. schema.json->gui_reading_icon_filename->description
+msgid "Reading icon"
+msgstr "Icona di lettura"
+
+#. text-to-speech-applet@cardsurf->settings-
+#. schema.json->gui_reading_icon_filename->tooltip
+msgid "An icon displayed when reading"
+msgstr "Un'icona visualizzata durante la lettura"
