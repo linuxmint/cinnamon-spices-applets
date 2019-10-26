@@ -100,7 +100,7 @@ MultiCpuDataProvider.prototype = {
   getTooltipString: function() {
     if (!this.isEnabled)
       return "";
-    var tooltipstr = _("------- CPU -------") + "\n";
+    var tooltipstr = _("------------- CPU ------------") + "\n";
     tooltipstr += _("CPU") + ": ";
     for (var i = 0; i < this.cpucount; i++)
       tooltipstr += Math.round(100 * this.cpulist_usage[i], 2).toString() + "% ";
@@ -147,7 +147,7 @@ MemDataProvider.prototype = {
   getTooltipString: function() {
     if (!this.isEnabled)
       return "";
-    var tooltipstr = _("------- Memory -------") + "\n";
+    var tooltipstr = _("----------- Memory -----------") + "\n";
     tooltipstr += _("Usedup:") + "\t" + Math.round(100 * this.memInfo[0]).toString() + "%\n";
     tooltipstr += _("Cached:") + "\t" + Math.round(100 * this.memInfo[1]).toString() + "%\n";
     tooltipstr += _("Buffer:") + "\t" + Math.round(100 * this.memInfo[2]).toString() + "%\n";
@@ -183,7 +183,7 @@ SwapDataProvider.prototype = {
   getTooltipString: function() {
     if (!this.isEnabled)
       return "";
-    var tooltipstr = _("------- Swap -------") + "\n";
+    var tooltipstr = _("------------ Swap ------------") + "\n";
     tooltipstr += _("Swap") + ":\t" + (Math.round(10000 * this.swapInfo[0]) / 100).toString() + "%\n";
     return tooltipstr;
   }
@@ -289,7 +289,7 @@ NetDataProvider.prototype = {
     if (!this.isEnabled)
       return "";
 
-    var tooltipstr = _("------- Networks -------") + "\n";
+    var tooltipstr = _("---------- Networks ----------") + "\n";
     for (var dname in this.currentReadingRates) {
       tooltipstr += dname + ": " + _("Down:") + " " + this.currentReadingRates[dname]["down"] + " " + _("Up:") + " " + this.currentReadingRates[
         dname]["up"] + " " + _("(KiB/s)") + "\n";
@@ -391,7 +391,7 @@ DiskDataProvider.prototype = {
     if (!this.isEnabled)
       return "";
 
-    var tooltipstr = _("------- Disks -------") + "\n";
+    var tooltipstr = _("------------ Disks -----------") + "\n";
     for (var dname in this.currentReadingRates) {
       tooltipstr += dname + ": " + _("Read:") + " " + this.currentReadingRates[dname]["read"] + " " + ": " + _("Write:") + " " + this.currentReadingRates[
         dname]["write"] + " " + _("(MiB/s)") + "\n";
