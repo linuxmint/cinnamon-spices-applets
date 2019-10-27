@@ -20,33 +20,36 @@
  * */
 var ImportError = false; //flag import error
 var ImportErrorMsg = "";
+const Applet = imports.ui.applet;
+const Lang = imports.lang;
+const Mainloop = imports.mainloop;
+const St = imports.gi.St;
+//const Cairo = imports.cairo;
+const Gio = imports.gi.Gio;
+const Gtk = imports.gi.Gtk;
+const GLib = imports.gi.GLib;
+const NMClient = imports.gi.NMClient;
+const NetworkManager = imports.gi.NetworkManager;
+const Cinnamon = imports.gi.Cinnamon;
+const Gettext = imports.gettext;
+
+const UUID = "multicore-sys-monitor@ccadeptic23";
+
+var SpawnProcess = null; //defined in main (my library)
+var ErrorApplet = null; //defined in main (my library)
+var ConfigSettings = null; //defined in main (my library)
+var Graphs = null; //defined in main (my library)
+var DataProviders = null; //defined in main (my library)
+
 try {
-  const Applet = imports.ui.applet;
-  const Lang = imports.lang;
-  const Mainloop = imports.mainloop;
-  const St = imports.gi.St;
-  //const Cairo = imports.cairo;
-  const Gio = imports.gi.Gio;
-  const Gtk = imports.gi.Gtk;
-  const GLib = imports.gi.GLib;
-  const NMClient = imports.gi.NMClient;
-  const NetworkManager = imports.gi.NetworkManager;
-  const Cinnamon = imports.gi.Cinnamon;
-  const Gettext = imports.gettext;
   const GTop = imports.gi.GTop; //psst this is really only to see if we can
-  const UUID = "multicore-sys-monitor@ccadeptic23";
-  var SpawnProcess = null; //defined in main (my library)
-  var ErrorApplet = null; //defined in main (my library)
-  var ConfigSettings = null; //defined in main (my library)
-  var Graphs = null; //defined in main (my library)
-  var DataProviders = null; //defined in main (my library)
-
-
 } catch (err) {
   ImportError = true;
   global.logError(err);
   ImportErrorMsg = err.toString();
 }
+
+
 
 // Translation support
 Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
@@ -309,9 +312,22 @@ function main(metadata, orientation) {
   if (ImportError) {
     ErrorApplet = imports.ErrorApplet;
     var errmsg = ImportErrorMsg;
-    if (typeof GTop === 'undefined') //we dont have the gtop package
-      errmsg = _("Please install \"gir1.2-gtop-2.0\" package.");
-    let myErrorApplet = new ErrorApplet.ErrorImportApplet(orientation, errmsg);
+    if (typeof GTop === 'undefined') { //we don't have the gtop package
+			errmsg = _("Please install \"gir1.2-gtop-2.0\" package.");
+      var myErrorApplet = new ErrorApplet.ErrorImportApplet(orientation, errmsg);
+      let _is_apturl_present = GLib.find_program_in_path("apturl");
+      if (_is_apturl_present) {
+			  const Extension = imports.ui.extension;
+				const PopupMenu = imports.ui.popupMenu;
+			  let restart_button = new PopupMenu.PopupMenuItem(_("Reload this applet"));
+			  restart_button.connect('activate', Lang.bind(this, function(event) {
+					Extension.reloadExtension(UUID, Extension.Type.APPLET);
+			  }));
+			  myErrorApplet.menu.addMenuItem(restart_button);
+			  const Util = imports.misc.util;
+			  Util.spawnCommandLine("apturl apt://gir1.2-gtop-2.0");
+	    }
+    }
     return myErrorApplet;
   } else {
     ConfigSettings = imports.ConfigSettings.ConfigSettings;
