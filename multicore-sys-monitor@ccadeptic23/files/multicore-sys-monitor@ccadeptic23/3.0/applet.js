@@ -78,7 +78,13 @@ MyApplet.prototype = {
       this.configSettings = new ConfigSettings(this.configfilepath);
 
       this._initContextMenu();
-
+      
+      if (St.Widget.get_default_direction() === St.TextDirection.RTL) {
+        this._applet_tooltip._tooltip.set_style('text-align: right; font-family: monospace;');
+      } else {
+        this._applet_tooltip._tooltip.set_style('text-align: left; font-family: monospace;');
+      }
+    
       this.gtop = new GTop.glibtop_cpu();
 
       this.graphArea = new St.DrawingArea();
