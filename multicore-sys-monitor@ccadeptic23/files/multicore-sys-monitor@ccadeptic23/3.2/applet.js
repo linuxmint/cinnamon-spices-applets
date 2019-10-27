@@ -77,11 +77,11 @@ MyApplet.prototype = {
     this._initContextMenu();
 
     if (St.Widget.get_default_direction() === St.TextDirection.RTL) {
-			this._applet_tooltip._tooltip.set_style('text-align: right; font-family: monospace;');
-		} else {
-			this._applet_tooltip._tooltip.set_style('text-align: left; font-family: monospace;');
-		}
-    
+      this._applet_tooltip._tooltip.set_style('text-align: right; font-family: monospace;');
+    } else {
+      this._applet_tooltip._tooltip.set_style('text-align: left; font-family: monospace;');
+    }
+
     //this.gtop = new GTop.glibtop_cpu();
 
     this.graphArea = new St.DrawingArea();
@@ -334,18 +334,17 @@ function main(metadata, orientation) {
       errmsg = _("Please install \"gir1.2-gtop-2.0\" package.");
       let _is_apturl_present = GLib.find_program_in_path("apturl");
       if (_is_apturl_present) {
-				const Extension = imports.ui.extension;
-					const PopupMenu = imports.ui.popupMenu;
-				let restart_button = new PopupMenu.PopupMenuItem(_("Reload this applet"));
-				restart_button.connect('activate', Lang.bind(this, function(event) {
-							Extension.reloadExtension(UUID, Extension.Type.APPLET);
-				}));
-				myErrorApplet.menu.addMenuItem(restart_button);
-				const Util = imports.misc.util;
-				Util.spawnCommandLine("apturl apt://gir1.2-gtop-2.0");
-       }
+        const Extension = imports.ui.extension;
+        const PopupMenu = imports.ui.popupMenu;
+        let restart_button = new PopupMenu.PopupMenuItem(_("Reload this applet"));
+        restart_button.connect('activate', Lang.bind(this, function(event) {
+          Extension.reloadExtension(UUID, Extension.Type.APPLET);
+        }));
+        myErrorApplet.menu.addMenuItem(restart_button);
+        const Util = imports.misc.util;
+        Util.spawnCommandLine("apturl apt://gir1.2-gtop-2.0");
+      }
     }
-    //let myErrorApplet = new ErrorApplet.ErrorImportApplet(orientation, errmsg);
     return myErrorApplet;
   } else {
     ConfigSettings = imports.ConfigSettings.ConfigSettings;

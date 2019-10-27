@@ -16,11 +16,11 @@ function _(str) {
 }
 
 function lSpaced(word, n_max = spaces) {
-	var ret = "";
-	for (let i=0; i<n_max - word.length; i++)
-		ret += " ";
-	ret = ret + word;
-	return ret;
+  var ret = "";
+  for (let i=0; i<n_max - word.length; i++)
+    ret += " ";
+  ret = ret + word;
+  return ret;
 }
 
 function MultiCpuDataProvider() {
@@ -305,7 +305,7 @@ NetDataProvider.prototype = {
     var tooltipstr = _("---------- Networks ----------") + "\n";
     for (var dname in this.currentReadingRates) {
       tooltipstr += dname + "\n"
-      + lSpaced(_("Down:"), spaces+1) + lSpaced(this.currentReadingRates[dname]["down"].toString(), spaces/2) + " " + _("(KiB/s)") + "\n" 
+      + lSpaced(_("Down:"), spaces+1) + lSpaced(this.currentReadingRates[dname]["down"].toString(), spaces/2) + " " + _("(KiB/s)") + "\n"
       + lSpaced(_("Up:"),   spaces+1) + lSpaced(this.currentReadingRates[dname]["up"].toString(),   spaces/2) + " " + _("(KiB/s)") + "\n";
     }
     return tooltipstr;

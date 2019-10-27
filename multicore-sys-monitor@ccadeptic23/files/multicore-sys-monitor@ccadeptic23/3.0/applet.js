@@ -7,7 +7,7 @@
 //
 // You should have received a copy of the GNU General Public License along with
 // this file. If not, see <http://www.gnu.org/licenses/>.
-/*	Imports SearchPath
+/*  Imports SearchPath
  * 0 /usr/share/cinnamon/js
  * 1 /usr/share/cinnamon/gjs-1.0
  * 2 /usr/share/gnome/gjs-1.0
@@ -78,13 +78,13 @@ MyApplet.prototype = {
       this.configSettings = new ConfigSettings(this.configfilepath);
 
       this._initContextMenu();
-      
+
       if (St.Widget.get_default_direction() === St.TextDirection.RTL) {
         this._applet_tooltip._tooltip.set_style('text-align: right; font-family: monospace;');
       } else {
         this._applet_tooltip._tooltip.set_style('text-align: left; font-family: monospace;');
       }
-    
+
       this.gtop = new GTop.glibtop_cpu();
 
       this.graphArea = new St.DrawingArea();
@@ -113,12 +113,12 @@ MyApplet.prototype = {
       this.swapGraph = new Graphs.GraphVBars(this.graphArea, this.swapProvider);
 
       this.netGraph = new Graphs.GraphLineChart(this.graphArea, this.netProvider, this.configSettings.getNETWidth());
-      this.netGraph.setMinScaleYvalue(1.0); //For us this means the heighest point wont represent a valuelower than 1Kb/s 
+      this.netGraph.setMinScaleYvalue(1.0); //For us this means the heighest point wont represent a valuelower than 1Kb/s
       this.netGraph.setAutoScale(this.configSettings.isNETAutoScaled());
       this.netGraph.setLogScale(this.configSettings.isNETLogScaled());
 
       this.diskGraph = new Graphs.GraphLineChart(this.graphArea, this.diskProvider, this.configSettings.getDiskWidth());
-      this.diskGraph.setMinScaleYvalue(1.0); //For us this means the heighest point wont represent a valuelower than 1Kb/s 
+      this.diskGraph.setMinScaleYvalue(1.0); //For us this means the heighest point wont represent a valuelower than 1Kb/s
       this.diskGraph.setAutoScale(this.configSettings.isDiskAutoScaled());
       this.diskGraph.setLogScale(this.configSettings.isDiskLogScaled());
 
@@ -248,7 +248,7 @@ MyApplet.prototype = {
           this.configSettings.getBackgroundColor(),
           this.configSettings.getCPUColorList());
 
-        area.get_context().translate(-1 * xoffset, 0); //return translation to origin											
+        area.get_context().translate(-1 * xoffset, 0); //return translation to origin
         xoffset += this.configSettings.getCPUWidth() + 1; //update xoffset for next translation
       }
 
@@ -318,21 +318,21 @@ function main(metadata, orientation) {
   if (ImportError) {
     ErrorApplet = imports.ErrorApplet;
     var errmsg = ImportErrorMsg;
+    var myErrorApplet = new ErrorApplet.ErrorImportApplet(orientation, errmsg);
     if (typeof GTop === 'undefined') { //we don't have the gtop package
-			errmsg = _("Please install \"gir1.2-gtop-2.0\" package.");
-      var myErrorApplet = new ErrorApplet.ErrorImportApplet(orientation, errmsg);
+      errmsg = _("Please install \"gir1.2-gtop-2.0\" package.");
       let _is_apturl_present = GLib.find_program_in_path("apturl");
       if (_is_apturl_present) {
-			  const Extension = imports.ui.extension;
-				const PopupMenu = imports.ui.popupMenu;
-			  let restart_button = new PopupMenu.PopupMenuItem(_("Reload this applet"));
-			  restart_button.connect('activate', Lang.bind(this, function(event) {
-					Extension.reloadExtension(UUID, Extension.Type.APPLET);
-			  }));
-			  myErrorApplet.menu.addMenuItem(restart_button);
-			  const Util = imports.misc.util;
-			  Util.spawnCommandLine("apturl apt://gir1.2-gtop-2.0");
-	    }
+        const Extension = imports.ui.extension;
+        const PopupMenu = imports.ui.popupMenu;
+        let restart_button = new PopupMenu.PopupMenuItem(_("Reload this applet"));
+        restart_button.connect('activate', Lang.bind(this, function(event) {
+          Extension.reloadExtension(UUID, Extension.Type.APPLET);
+        }));
+        myErrorApplet.menu.addMenuItem(restart_button);
+        const Util = imports.misc.util;
+        Util.spawnCommandLine("apturl apt://gir1.2-gtop-2.0");
+      }
     }
     return myErrorApplet;
   } else {
