@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-09-27 11:22-0500\n"
-"PO-Revision-Date: 2019-01-24 01:38+0100\n"
+"PO-Revision-Date: 2019-10-26 18:33+0200\n"
+"Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: \n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.0.6\n"
-"Last-Translator: Claude CLERC <claude.clerc@gmail.com>\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"Language: fr\n"
 
 #: ../3.0/prefsui.glade.h:1 ../3.2/prefsui.glade.h:1 ../3.4/prefsui.glade.h:1
 msgid "Multi-Core System Monitor Preferences"
@@ -181,8 +181,8 @@ msgstr "Couleur des étiquettes"
 
 #: ../3.0/DataProviders.js:103 ../3.2/DataProviders.js:103
 #: ../3.4/DataProviders.js:123
-msgid "------- CPU -------"
-msgstr "------- Processeurs -------"
+msgid "------------- CPU ------------"
+msgstr "--------- Processeurs --------"
 
 #: ../3.0/DataProviders.js:144 ../3.2/DataProviders.js:144
 #: ../3.4/DataProviders.js:138
@@ -191,8 +191,8 @@ msgstr "MÉM"
 
 #: ../3.0/DataProviders.js:150 ../3.2/DataProviders.js:150
 #: ../3.4/DataProviders.js:158
-msgid "------- Memory -------"
-msgstr "------- Mémoire -------"
+msgid "----------- Memory -----------"
+msgstr "---------- Mémoire -----------"
 
 #: ../3.0/DataProviders.js:151 ../3.2/DataProviders.js:151
 msgid "Usedup:"
@@ -201,17 +201,17 @@ msgstr "Utilisée :"
 #: ../3.0/DataProviders.js:152 ../3.2/DataProviders.js:152
 #: ../3.4/DataProviders.js:159
 msgid "Cached:"
-msgstr "Cache :"
+msgstr "Cache:"
 
 #: ../3.0/DataProviders.js:153 ../3.2/DataProviders.js:153
 #: ../3.4/DataProviders.js:159
 msgid "Buffer:"
-msgstr "Tampon :"
+msgstr "Tampon:"
 
 #: ../3.0/DataProviders.js:154 ../3.2/DataProviders.js:154
 #: ../3.4/DataProviders.js:159
 msgid "Free:"
-msgstr "Libre :"
+msgstr "Libre:"
 
 #: ../3.0/DataProviders.js:181 ../3.2/DataProviders.js:181
 #: ../3.4/DataProviders.js:173
@@ -220,8 +220,8 @@ msgstr "SWAP"
 
 #: ../3.0/DataProviders.js:186 ../3.2/DataProviders.js:186
 #: ../3.4/DataProviders.js:191
-msgid "------- Swap -------"
-msgstr "------- Swap -------"
+msgid "------------ Swap ------------"
+msgstr "------------ Swap ------------"
 
 #: ../3.0/DataProviders.js:251 ../3.2/DataProviders.js:251
 #: ../3.4/DataProviders.js:202
@@ -230,18 +230,18 @@ msgstr "RÉSEAU"
 
 #: ../3.0/DataProviders.js:292 ../3.2/DataProviders.js:292
 #: ../3.4/DataProviders.js:286
-msgid "------- Networks -------"
-msgstr "------- Réseaux -------"
+msgid "---------- Networks ----------"
+msgstr "---------- Réseaux -----------"
 
 #: ../3.0/DataProviders.js:294 ../3.2/DataProviders.js:294
 #: ../3.4/DataProviders.js:297
 msgid "Down:"
-msgstr "Reçu :"
+msgstr "Reçu:"
 
 #: ../3.0/DataProviders.js:294 ../3.2/DataProviders.js:294
 #: ../3.4/DataProviders.js:298
 msgid "Up:"
-msgstr "Envoyé :"
+msgstr "Envoyé:"
 
 #: ../3.0/DataProviders.js:295 ../3.2/DataProviders.js:295
 msgid "(KiB/s)"
@@ -254,18 +254,18 @@ msgstr "DISQUES"
 
 #: ../3.0/DataProviders.js:394 ../3.2/DataProviders.js:394
 #: ../3.4/DataProviders.js:375
-msgid "------- Disks -------"
-msgstr "------- Disques -------"
+msgid "------------ Disks -----------"
+msgstr "---------- Disques -----------"
 
 #: ../3.0/DataProviders.js:396 ../3.2/DataProviders.js:396
 #: ../3.4/DataProviders.js:383
 msgid "Read:"
-msgstr "Lecture :"
+msgstr "Lecture:"
 
 #: ../3.0/DataProviders.js:396 ../3.2/DataProviders.js:396
 #: ../3.4/DataProviders.js:384
 msgid "Write:"
-msgstr "Écriture :"
+msgstr "Écriture:"
 
 #: ../3.0/DataProviders.js:397 ../3.2/DataProviders.js:397
 msgid "(MiB/s)"
@@ -314,7 +314,7 @@ msgstr "Cœur"
 
 #: ../3.4/DataProviders.js:159
 msgid "Used:"
-msgstr "Utilisé :"
+msgstr "Utilisée:"
 
 #: ../3.4/applet.js:60
 msgid "Dependency missing"

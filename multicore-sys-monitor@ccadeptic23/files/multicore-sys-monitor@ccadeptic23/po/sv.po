@@ -186,8 +186,8 @@ msgstr "Etikettfärg"
 
 #: ../3.0/DataProviders.js:103 ../3.2/DataProviders.js:103
 #: ../3.4/DataProviders.js:123
-msgid "------- CPU -------"
-msgstr "------CPU-------"
+msgid "------------- CPU ------------"
+msgstr "--------------CPU-------------"
 
 #: ../3.0/DataProviders.js:144 ../3.2/DataProviders.js:144
 #: ../3.4/DataProviders.js:138
@@ -196,8 +196,8 @@ msgstr "MINNE"
 
 #: ../3.0/DataProviders.js:150 ../3.2/DataProviders.js:150
 #: ../3.4/DataProviders.js:158
-msgid "------- Memory -------"
-msgstr "------- Minne -------"
+msgid "----------- Memory -----------"
+msgstr "----------- Minne ------------"
 
 #: ../3.0/DataProviders.js:151 ../3.2/DataProviders.js:151
 msgid "Usedup:"
@@ -225,8 +225,8 @@ msgstr "VÄXLING"
 
 #: ../3.0/DataProviders.js:186 ../3.2/DataProviders.js:186
 #: ../3.4/DataProviders.js:191
-msgid "------- Swap -------"
-msgstr "------Växlingsutrymme-------"
+msgid "------------ Swap ------------"
+msgstr "-------Växlingsutrymme--------"
 
 #: ../3.0/DataProviders.js:251 ../3.2/DataProviders.js:251
 #: ../3.4/DataProviders.js:202
@@ -235,8 +235,8 @@ msgstr "NÄT"
 
 #: ../3.0/DataProviders.js:292 ../3.2/DataProviders.js:292
 #: ../3.4/DataProviders.js:286
-msgid "------- Networks -------"
-msgstr "-------Nätverk-------"
+msgid "---------- Networks ----------"
+msgstr "-----------Nätverk------------"
 
 #: ../3.0/DataProviders.js:294 ../3.2/DataProviders.js:294
 #: ../3.4/DataProviders.js:297
@@ -259,8 +259,8 @@ msgstr "DISK"
 
 #: ../3.0/DataProviders.js:394 ../3.2/DataProviders.js:394
 #: ../3.4/DataProviders.js:375
-msgid "------- Disks -------"
-msgstr "------Diskar-------"
+msgid "------------ Disks -----------"
+msgstr "------------Diskar------------"
 
 #: ../3.0/DataProviders.js:396 ../3.2/DataProviders.js:396
 #: ../3.4/DataProviders.js:383

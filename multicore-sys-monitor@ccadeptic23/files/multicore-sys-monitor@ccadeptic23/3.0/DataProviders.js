@@ -7,10 +7,20 @@ const UUID = "multicore-sys-monitor@ccadeptic23";
 const GLib = imports.gi.GLib;
 const Gettext = imports.gettext;
 
+const spaces = 12;
+
 Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
 
 function _(str) {
   return Gettext.dgettext(UUID, str);
+}
+
+function lSpaced(word, n_max = spaces) {
+  var ret = "";
+  for (let i=0; i<n_max - word.length; i++)
+    ret += " ";
+  ret = ret + word;
+  return ret;
 }
 
 function MultiCpuDataProvider() {
@@ -100,11 +110,14 @@ MultiCpuDataProvider.prototype = {
   getTooltipString: function() {
     if (!this.isEnabled)
       return "";
-    var tooltipstr = _("------- CPU -------") + "\n";
-    tooltipstr += _("CPU") + ": ";
-    for (var i = 0; i < this.cpucount; i++)
-      tooltipstr += Math.round(100 * this.cpulist_usage[i], 2).toString() + "% ";
-    return tooltipstr + "\n";
+    var tooltipstr = _("------------- CPU ------------") + "\n";
+    //tooltipstr += _("CPU") + ": ";
+    for (var i = 0; i < this.cpucount; i++) {
+      let percentage = Math.round(100 * this.cpulist_usage[i], 2).toString();
+      let title = (_('Core') + ' ' + i).toString();
+      tooltipstr += lSpaced(title) + ':' + lSpaced(percentage, spaces/2) + " %\n";
+    }
+    return tooltipstr;
   }
 };
 
@@ -147,11 +160,11 @@ MemDataProvider.prototype = {
   getTooltipString: function() {
     if (!this.isEnabled)
       return "";
-    var tooltipstr = _("------- Memory -------") + "\n";
-    tooltipstr += _("Usedup:") + "\t" + Math.round(100 * this.memInfo[0]).toString() + "%\n";
-    tooltipstr += _("Cached:") + "\t" + Math.round(100 * this.memInfo[1]).toString() + "%\n";
-    tooltipstr += _("Buffer:") + "\t" + Math.round(100 * this.memInfo[2]).toString() + "%\n";
-    tooltipstr += _("Free:") + "\t\t" + Math.round(100 * this.memInfo[3]).toString() + "%\n";
+    var tooltipstr = _("----------- Memory -----------") + "\n";
+    tooltipstr += lSpaced(_("Usedup:"), spaces+1) + lSpaced(Math.round(100 * this.memInfo[0]).toString(), spaces/2) + " %\n";
+    tooltipstr += lSpaced(_("Cached:"), spaces+1) + lSpaced(Math.round(100 * this.memInfo[1]).toString(), spaces/2) + " %\n";
+    tooltipstr += lSpaced(_("Buffer:"), spaces+1) + lSpaced(Math.round(100 * this.memInfo[2]).toString(), spaces/2) + " %\n";
+    tooltipstr += lSpaced(_("Free:"),   spaces+1) + lSpaced(Math.round(100 * this.memInfo[3]).toString(), spaces/2) + " %\n";
     return tooltipstr;
   }
 };
@@ -183,8 +196,8 @@ SwapDataProvider.prototype = {
   getTooltipString: function() {
     if (!this.isEnabled)
       return "";
-    var tooltipstr = _("------- Swap -------") + "\n";
-    tooltipstr += _("Swap") + ":\t" + (Math.round(10000 * this.swapInfo[0]) / 100).toString() + "%\n";
+    var tooltipstr = _("------------ Swap ------------") + "\n";
+    tooltipstr += lSpaced(_("Swap")) + ":" + lSpaced((Math.round(10000 * this.swapInfo[0]) / 100).toString(), spaces/2) + " %\n";
     return tooltipstr;
   }
 };
@@ -289,10 +302,11 @@ NetDataProvider.prototype = {
     if (!this.isEnabled)
       return "";
 
-    var tooltipstr = _("------- Networks -------") + "\n";
+    var tooltipstr = _("---------- Networks ----------") + "\n";
     for (var dname in this.currentReadingRates) {
-      tooltipstr += dname + ": " + _("Down:") + " " + this.currentReadingRates[dname]["down"] + " " + _("Up:") + " " + this.currentReadingRates[
-        dname]["up"] + " " + _("(KiB/s)") + "\n";
+      tooltipstr += dname + "\n"
+      + lSpaced(_("Down:"), spaces+1) + lSpaced(this.currentReadingRates[dname]["down"].toString(), spaces/2) + " " + _("(KiB/s)") + "\n"
+      + lSpaced(_("Up:"),   spaces+1) + lSpaced(this.currentReadingRates[dname]["up"].toString(),   spaces/2) + " " + _("(KiB/s)") + "\n";
     }
     return tooltipstr;
   }
@@ -391,10 +405,11 @@ DiskDataProvider.prototype = {
     if (!this.isEnabled)
       return "";
 
-    var tooltipstr = _("------- Disks -------") + "\n";
+    var tooltipstr = _("------------ Disks -----------") + "\n";
     for (var dname in this.currentReadingRates) {
-      tooltipstr += dname + ": " + _("Read:") + " " + this.currentReadingRates[dname]["read"] + " " + ": " + _("Write:") + " " + this.currentReadingRates[
-        dname]["write"] + " " + _("(MiB/s)") + "\n";
+      tooltipstr += dname + "\n"
+      + lSpaced(_("Read:"),  spaces+1) + lSpaced(this.currentReadingRates[dname]["read"].toString(), spaces/2)  + " " + _("(MiB/s)") + "\n"
+      + lSpaced(_("Write:"), spaces+1) + lSpaced(this.currentReadingRates[dname]["write"].toString(), spaces/2) + " " + _("(MiB/s)") + "\n";
     }
     return tooltipstr;
   },
