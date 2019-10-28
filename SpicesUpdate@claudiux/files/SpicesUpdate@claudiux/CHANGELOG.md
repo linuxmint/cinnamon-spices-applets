@@ -1,3 +1,7 @@
+### v4.5.0~20191028
+  * Animated icon during refresh.
+    * For Cinnamon 3.8 and greater.
+
 ### v4.4.0~20191022
   * Middle-Click on applet icon:
     * Performs a Refresh while no available updates are reported.
