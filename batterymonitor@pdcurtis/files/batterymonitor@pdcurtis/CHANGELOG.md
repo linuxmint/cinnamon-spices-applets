@@ -7,7 +7,7 @@
   * Checks for dependency on 'upower'.
   * Increases maximum refresh interval to 5 min (300 s).
   * Simplification of the logic to select the icon to display.
-  * Removes (outdated) changelog.txt.
+  * Removes (outdated) 3.2/changelog.txt.
 
 ### 1.3.9
   * Adds events-sounds property to soundfilechoser widget to allow any sound file to be selected under Cinnamon 4.2
