@@ -364,6 +364,12 @@ MyApplet.prototype = {
         this.menu.toggle();
     },
 
+    //++ Call-back for the delete temporary files button.
+    deleteTemporaryFiles: function() {
+        GLib.spawn_command_line_async('rm --force .batteryPercentage');
+        GLib.spawn_command_line_async('rm --force .batteryState');
+    },
+
     // This updates the numerical display in the applet and in the tooltip
     updateUI: function(out) {
 

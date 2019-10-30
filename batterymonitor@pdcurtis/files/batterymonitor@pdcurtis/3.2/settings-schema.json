@@ -22,12 +22,12 @@
         "description": "Percentage Battery Charge at which Alert Displayed",
         "tooltip": "Percentage of Battery Charge at which Orange Warning Background is displayed - It is also shown and can be adjusted in the Applet left click menu"
     },
+
     "head1": {
         "type": "header",
         "description": "Display Mode"
     },
-
- "displayType" : {
+    "displayType" : {
         "type": "combobox",
         "default" : "classic",
         "options" : {
@@ -45,14 +45,12 @@
         "type": "header",
         "description": "Battery Low Alert Settings"
     },
-
     "useBatteryLowSound": {
         "type": "checkbox",
         "default": false,
         "description": "Provide audible alerts when Battery Low and at Shutdown Level",
         "tooltip": "Must have Sox installed. Limited number of sound file types supported (.oga and .wav)"
     },
-
     "chooseBatteryLowSound": {
         "type": "checkbox",
         "default": false,
@@ -60,7 +58,6 @@
         "tooltip": "Must have Sox installed. Limited number of sound file types supported in versions < 4.2"
 
     },
-
     "batteryLowSound": {
         "type": "soundfilechooser",
         "default": "/usr/share/sounds/freedesktop/stereo/alarm-clock-elapsed.oga",
@@ -69,7 +66,6 @@
         "tooltip": "Please ensure the volume is set sensibly in public places especially if a long loud file is specifed",
         "event-sounds": false 
     },
-
     "batteryShutdownSound": {
         "type": "soundfilechooser",
         "default": "/usr/share/sounds/freedesktop/stereo/complete.oga",
@@ -78,13 +74,23 @@
         "tooltip": "Please ensure the volume is set sensibly in public places - do not specify a long loud file at Shutdown",
         "event-sounds": false
     },
-
-     "notifyBatteryLowSound": {
+    "notifyBatteryLowSound": {
         "type": "checkbox",
         "default": true,
         "dependency": "chooseBatteryLowSound",
         "description": "Provide Notification when user specified sound file is in use - Recommended",
         "tooltip": "To remind users that the volume may need to be set sensibly in public places"
+    },
+
+    "head3": {
+        "type": "header",
+        "description": "Household Tasks"
+    },
+    "deleteTempraryFiles" : {
+        "type" : "button",
+        "description" : "Delete temporary files after upgrade to version 1.4",
+        "callback" : "deleteTemporaryFiles",
+        "tooltip" : "Versions prior to 1.4 used temporary files in the home directory. These are not needed any more and can be deleted."
     }
 }
 
