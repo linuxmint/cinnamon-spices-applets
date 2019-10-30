@@ -3,33 +3,32 @@
 # This file is distributed under the same license as the Cinnamon package.
 # FIRST AUTHOR Claudiux <claude.clerc@gmail.com>, 2019.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: Spices update 4.5.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-10-22 02:53+0200\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME Jurien@protonmail.com\n"
-"Language-Team: \n"
+"PO-Revision-Date: 2019-10-30 20:17+0100\n"
+"Last-Translator: Jurien (French77) <Jurien@protonmail.com>\n"
+"Language-Team: Jurien\n"
 "Language: nl_NL\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.6\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. metadata.json->name
-#: 4.2/applet.js:90 4.2/applet.js:118 4.2/applet.js:531 4.2/applet.js:610
-#: 4.2/applet.js:974 4.2/applet.js:1516 3.8/applet.js:171 3.8/applet.js:184
-#: 3.8/applet.js:523 3.8/applet.js:602 3.8/applet.js:970 3.8/applet.js:1525
-#: 2.8/applet.js:171 2.8/applet.js:192 2.8/applet.js:555 2.8/applet.js:1003
-#: 2.8/applet.js:1581
+#: 4.2/applet.js:90 4.2/applet.js:118 4.2/applet.js:531 4.2/applet.js:610 4.2/applet.js:974 4.2/applet.js:1516
+#: 3.8/applet.js:171 3.8/applet.js:184 3.8/applet.js:523 3.8/applet.js:602 3.8/applet.js:970 3.8/applet.js:1525
+#: 2.8/applet.js:171 2.8/applet.js:192 2.8/applet.js:555 2.8/applet.js:1003 2.8/applet.js:1581
 msgid "Spices Update"
 msgstr "Spices Update"
 
-#: 4.2/applet.js:119 4.2/applet.js:1683 4.2/applet.js:1689 3.8/applet.js:1651
-#: 3.8/applet.js:1657 2.8/applet.js:1708 2.8/applet.js:1714
+#: 4.2/applet.js:119 4.2/applet.js:1683 4.2/applet.js:1689 3.8/applet.js:1651 3.8/applet.js:1657 2.8/applet.js:1708
+#: 2.8/applet.js:1714
 msgid "Middle-Click to Refresh"
-msgstr "Om te vernieuwen klik op Scroll- Muiswiel "
+msgstr "Om te vernieuwen klik op Scroll  Muiswiel"
 
 #. 4.2->settings-schema.json->btn_refresh_applets->description
 #. 4.2->settings-schema.json->btn_refresh_desklets->description
@@ -39,23 +38,21 @@ msgstr "Om te vernieuwen klik op Scroll- Muiswiel "
 #. 3.8->settings-schema.json->btn_refresh_desklets->description
 #. 3.8->settings-schema.json->btn_refresh_extensions->description
 #. 3.8->settings-schema.json->btn_refresh_themes->description
-#: 4.2/applet.js:549 4.2/applet.js:1524 3.8/applet.js:541 3.8/applet.js:1533
-#: 2.8/applet.js:574 2.8/applet.js:1589
+#: 4.2/applet.js:549 4.2/applet.js:1524 3.8/applet.js:541 3.8/applet.js:1533 2.8/applet.js:574 2.8/applet.js:1589
 msgid "Refresh"
 msgstr "Vernieuwen"
 
 #: 4.2/applet.js:665 3.8/applet.js:696 2.8/applet.js:729
 msgid "With details here, when available."
-msgstr "Indien beschikbaar, met details"
+msgstr "Indien beschikbaar, met details."
 
-#: 4.2/applet.js:666 4.2/constants.js:110 3.8/applet.js:105 3.8/applet.js:697
-#: 2.8/applet.js:105 2.8/applet.js:730
+#: 4.2/applet.js:666 4.2/constants.js:110 3.8/applet.js:105 3.8/applet.js:697 2.8/applet.js:105 2.8/applet.js:730
 msgid "One applet needs update:"
-msgstr "Een hulptoepassing moet worden bijgewerkt"
+msgstr "Een hulptoepassing moet worden bijgewerkt:"
 
 #: 4.2/applet.js:666 3.8/applet.js:697 2.8/applet.js:730
 msgid "Do not matter. This is a FAKE notification, just for the test."
-msgstr "Maakt niet uit. Dit is een NEP-melding, bedoeld als test"
+msgstr "Maakt niet uit. Dit is een NEP-melding, bedoeld als test."
 
 #: 4.2/applet.js:974 3.8/applet.js:970 2.8/applet.js:1003
 msgid "is fully functional."
@@ -63,14 +60,13 @@ msgstr "is volledig functioneel."
 
 #: 4.2/applet.js:975 3.8/applet.js:971 2.8/applet.js:1004
 msgid "All dependencies are installed"
-msgstr "Alle afhankelijkheden zijn geïnstalleerd"
+msgstr "Alle afhankelijkheden zijn géinstalleerd"
 
 #: 4.2/applet.js:997 3.8/applet.js:995 2.8/applet.js:1028
-msgid ""
-"You appear to be missing some of the programs required for this applet to "
-"have all its features."
-msgstr "Het lijkt erop dat sommige van de programma's ontbreken die nodig zijn voor deze hulptoepassing "
-"en daardoor mogelijk niet alle functies hebben."
+msgid "You appear to be missing some of the programs required for this applet to have all its features."
+msgstr ""
+"Het lijkt erop dat sommige van de programma's ontbreken die nodig zijn voor deze hulptoepassing en daardoor mogelijk "
+"niet alle functies hebben."
 
 #: 4.2/applet.js:998 3.8/applet.js:996 2.8/applet.js:1029
 msgid "Please execute, in the just opened terminal, the commands:"
@@ -78,7 +74,7 @@ msgstr "Voer in de zojuist geopende terminal de opdrachten uit:"
 
 #: 4.2/applet.js:999 3.8/applet.js:997 2.8/applet.js:1030
 msgid "Some dependencies are not installed!"
-msgstr "Sommige afhankelijkheden zijn niet geïnstalleerd!"
+msgstr "Sommige afhankelijkheden zijn niet géinstalleerd!"
 
 #: 4.2/applet.js:1363 3.8/applet.js:1368 2.8/applet.js:1422
 msgid "(Description unavailable)"
@@ -150,31 +146,31 @@ msgstr "Thema's"
 
 #: 4.2/constants.js:109 3.8/applet.js:104 2.8/applet.js:104
 msgid "One desklet needs update:"
-msgstr "Eén minitoepassing moet worden bijgewerkt:"
+msgstr "Een minitoepassing moet worden bijgewerkt:"
 
 #: 4.2/constants.js:111 3.8/applet.js:106 2.8/applet.js:106
 msgid "One extension needs update:"
-msgstr "Een extensie moet worden bijgewerkt"
+msgstr "Een extensie moet worden bijgewerkt:"
 
 #: 4.2/constants.js:112 3.8/applet.js:107 2.8/applet.js:107
 msgid "One theme needs update:"
-msgstr "Een thema moet worden bijgewerkt"
+msgstr "Een thema moet worden bijgewerkt:"
 
 #: 4.2/constants.js:113 3.8/applet.js:108 2.8/applet.js:108
 msgid "Some desklets need update:"
-msgstr "Sommige minitoepassingen moeten worden bijgewerkt"
+msgstr "Sommige minitoepassingen moeten worden bijgewerkt:"
 
 #: 4.2/constants.js:114 3.8/applet.js:109 2.8/applet.js:109
 msgid "Some applets need update:"
-msgstr "Sommige hulptoepassingen moeten worden bijgewerkt"
+msgstr "Sommige hulptoepassingen moeten worden bijgewerkt:"
 
 #: 4.2/constants.js:115 3.8/applet.js:110 2.8/applet.js:110
 msgid "Some extensions need update:"
-msgstr "Sommige extensies moeten worden bijgewerkt"
+msgstr "Sommige extensies moeten worden bijgewerkt:"
 
 #: 4.2/constants.js:116 3.8/applet.js:111 2.8/applet.js:111
 msgid "Some themes need update:"
-msgstr "Sommige thema's moeten worden bijgewerkt"
+msgstr "Sommige thema's moeten worden bijgewerkt:"
 
 #: 4.2/constants.js:117 3.8/applet.js:112 2.8/applet.js:112
 msgid "New desklet available:"
@@ -210,39 +206,35 @@ msgstr "Nieuwe thema's beschikbaar:"
 
 #: 4.2/constants.js:128
 msgid "If you do not want an applet to be checked, uncheck its first box."
-msgstr "Als je een hulptoepassing niet wilt laten controleren, vink dan het eerste selectievakje uit"
+msgstr "Als je een hulptoepassing niet wilt laten controleren, vink dan het eerste selectievakje uit."
 
 #: 4.2/constants.js:129
 msgid "If you do not want a desklet to be checked, uncheck its first box."
-msgstr "Als je een minitoepassing niet wilt laten controleren, vink dan het eerste selectievakje uit"
+msgstr "Als je een minitoepassing niet wilt laten controleren, vink dan het eerste selectievakje uit."
 
 #: 4.2/constants.js:130
 msgid "If you do not want an extension to be checked, uncheck its first box."
-msgstr "Als je een extensie niet wilt laten controleren, vink dan het eerste selectievakje uit"
+msgstr "Als je een extensie niet wilt laten controleren, vink dan het eerste selectievakje uit."
 
 #: 4.2/constants.js:131
 msgid "If you do not want a theme to be checked, uncheck its first box."
-msgstr "Als je een thema niet wilt laten controleren, vink dan het eerste selectievakje uit"
+msgstr "Als je een thema niet wilt laten controleren, vink dan het eerste selectievakje uit."
 
 #: 4.2/constants.js:135
-msgid ""
-"If you want to get the latest version of an applet now, check both boxes."
-msgstr "Schakel beide selectievakjes in om de nieuwste versie van een hulptoepassing te verkrijgen"
+msgid "If you want to get the latest version of an applet now, check both boxes."
+msgstr "Schakel beide selectie vakjes in om de nieuwste versie van een hulptoepassing te verkrijgen."
 
 #: 4.2/constants.js:136
-msgid ""
-"If you want to get the latest version of a desklet now, check both boxes."
-msgstr "Schakel beide selectievakjes in om de nieuwste versie van een minitoepassing te verkrijgen"
+msgid "If you want to get the latest version of a desklet now, check both boxes."
+msgstr "Schakel beide selectievakjes in om de nieuwste versie van een minitoepassing te verkrijgen."
 
 #: 4.2/constants.js:137
-msgid ""
-"If you want to get the latest version of an extension now, check both boxes."
-msgstr "Schakel beide selectievakjes in om de nieuwste versie van een extensie te verkrijgen" 
+msgid "If you want to get the latest version of an extension now, check both boxes."
+msgstr "Schakel beide selectievakjes in om de nieuwste versie van een extensie te verkrijgen."
 
 #: 4.2/constants.js:138
-msgid ""
-"If you want to get the latest version of a theme now, check both boxes."
-msgstr "Schakel beide selectievakjes in om de nieuwste versie van een thema te verkrijgen" 
+msgid "If you want to get the latest version of a theme now, check both boxes."
+msgstr "Schakel beide selectievakjes in om de nieuwste versie van een thema te verkrijgen."
 
 #: 4.2/constants.js:141
 msgid "When all your choices are made, click the Refresh button."
@@ -250,10 +242,10 @@ msgstr "Wanneer al uw keuzes zijn gemaakt, klikt u op de knop Vernieuwen."
 
 #. metadata.json->description
 msgid ""
-"Warns you when installed Spices (applets, desklets, extensions, themes) "
-"require an update or new Spices are available."
-msgstr "Geef een seintje wanneer er voor geïnstalleerde Spices (hulptoepassingen, minitoepassingen, extensies, thema's) "
-"update's of nieuwe Spices beschikbaar zijn." 
+"Warns you when installed Spices (applets, desklets, extensions, themes) require an update or new Spices are available."
+msgstr ""
+"Geef een seintje wanneer er voor géinstalleerde Spices (hulptoepassingen, minitoepassingen, extensies, thema's) update's "
+"of nieuwe Spices beschikbaar zijn."
 
 #. 4.2->settings-schema.json->General->title
 #. 3.8->settings-schema.json->General->title
@@ -491,11 +483,8 @@ msgstr "Tijdsinterval tussen twee controles"
 #. 4.2->settings-schema.json->general_frequency->tooltip
 #. 3.8->settings-schema.json->general_frequency->tooltip
 #. 2.8->settings-schema.json->general_frequency->tooltip
-msgid ""
-"Please note that the first check will take place one minute after starting "
-"this applet."
-msgstr "Houd er rekening mee dat de eerste controle één minuut na het starten van "
-"deze applet plaatsvindt."
+msgid "Please note that the first check will take place one minute after starting this applet."
+msgstr "Houd er rekening mee dat de eerste controle 1 minuut na het starten van dit applet plaatsvindt."
 
 #. 4.2->settings-schema.json->general_warning->description
 #. 3.8->settings-schema.json->general_warning->description
@@ -507,11 +496,11 @@ msgstr "Laat het me weten door het pictogram te wijzigen wanneer er voor Spices 
 #. 3.8->settings-schema.json->general_warning->tooltip
 #. 2.8->settings-schema.json->general_warning->tooltip
 msgid ""
-"By checking this box, you allow this applet to modify its icon to warn you "
-"when at least one of the Spices requires an update."
-msgstr "Door dit selectievakje aan te vinken, staat u toe dat deze hulptoepassing het "
-"pictogram wijzigt om te waarschuwen wanneer er voor ten minste een van de spices "
-"een update beschikbaar is."
+"By checking this box, you allow this applet to modify its icon to warn you when at least one of the Spices requires an "
+"update."
+msgstr ""
+"Door dit selectievakje aan te vinken, staat u toe dat deze hulptoepassing het pictogram wijzigt om te waarschuwen "
+"wanneer er voor ten minste een van de spices een update beschikbaar is."
 
 #. 4.2->settings-schema.json->events_color->description
 #. 3.8->settings-schema.json->events_color->description
@@ -534,11 +523,10 @@ msgstr "Toon notificatieberichten over Spices-updates"
 #. 4.2->settings-schema.json->general_notifications->tooltip
 #. 3.8->settings-schema.json->general_notifications->tooltip
 #. 2.8->settings-schema.json->general_notifications->tooltip
-msgid ""
-"By checking this box, you allow this applet to display messages about Spices"
-" updates in notifications viewer."
-msgstr "Door dit selectievakje aan te vinken, staat u toe dat deze hulptoepassing berichten "
-"weergeeft over Spices-updates in de viewer voor meldingen."
+msgid "By checking this box, you allow this applet to display messages about Spices updates in notifications viewer."
+msgstr ""
+"Door dit selectievakje aan te vinken, staat u toe dat deze hulptoepassing berichten weergeeft over Spices-updates in de "
+"viewer voor meldingen."
 
 #. 4.2->settings-schema.json->general_details_requested->description
 #. 3.8->settings-schema.json->general_details_requested->description
@@ -552,8 +540,10 @@ msgstr "Geef de beschrijving weer van elke update of nieuwe Spice"
 msgid ""
 "By checking this box, you'll know why an update is available, and get a description of any new Spice.\n"
 "This information will be displayed in English."
-msgstr "Door dit selectievakje aan te vinken, weet u wanneer een update beschikbaar is en krijgt u een beschrijving van nieuwe Spice.\n"
-"Deze informatie wordt in het Engels weergegeven"
+msgstr ""
+"Door dit selectievakje aan te vinken, weet u wanneer een update beschikbaar is en krijgt u een beschrijving van nieuwe "
+"Spice.\n"
+"Deze informatie wordt in het Engels weergegeven."
 
 #. 4.2->settings-schema.json->general_force_notifications->description
 #. 3.8->settings-schema.json->general_force_notifications->description
@@ -564,11 +554,10 @@ msgstr "Toon meldingen, zelfs als ze ongewijzigd zijn"
 #. 4.2->settings-schema.json->general_force_notifications->tooltip
 #. 3.8->settings-schema.json->general_force_notifications->tooltip
 #. 2.8->settings-schema.json->general_force_notifications->tooltip
-msgid ""
-"By checking this box, all notification messages will be displayed, even if "
-"they are identical to the previous ones."
-msgstr "Door dit selectievakje in te schakelen, worden alle meldingsberichten "
-"weergegeven, zelfs als deze gelijk zijn aan de vorige."
+msgid "By checking this box, all notification messages will be displayed, even if they are identical to the previous ones."
+msgstr ""
+"Door dit selectievakje in te schakelen, worden alle meldingsberichten weergegeven, zelfs als deze gelijk zijn aan de "
+"vorige."
 
 #. 4.2->settings-schema.json->general_type_notif->options
 #. 3.8->settings-schema.json->general_type_notif->options
@@ -597,7 +586,8 @@ msgid ""
 "With button opening the System Settings:\n"
 "\tNotifications also contain a button which has the same role of the menu one:\n"
 "\tOpen the Download tab in System Settings for the concerned type of Spices, with the Spices sorted by date."
-msgstr "Minimaal:\n"
+msgstr ""
+"Minimaal:\n"
 "\tGeeft eenvoudige en korte meldingen weer.\n"
 "Wanneer de knop de Systeeminstellingen opent:\n"
 "\tNotificaties deze bevat ook een knop met dezelfde functie als die van het menu:\n"
@@ -630,11 +620,9 @@ msgstr "Type weergave"
 #. 4.2->settings-schema.json->displayType->tooltip
 #. 3.8->settings-schema.json->displayType->tooltip
 #. 2.8->settings-schema.json->displayType->tooltip
-msgid ""
-"This feature offers the Classic (default) display with icon and text, and "
-"compact display (Icon Only)."
-msgstr "Deze functie biedt de klassieke (standaard) weergave met pictogram en tekst"
-"en een compacte weergave (alleen pictogram)."
+msgid "This feature offers the Classic (default) display with icon and text, and compact display (Icon Only)."
+msgstr ""
+"Deze functie biedt de klassieke (standaard) weergave met pictogram en teksten een compacte weergave (alleen pictogram)."
 
 #. 4.2->settings-schema.json->general_hide->description
 #. 3.8->settings-schema.json->general_hide->description
@@ -645,24 +633,24 @@ msgstr "Verberg het pictogram zolang er niets te melden is"
 #. 4.2->settings-schema.json->general_hide->tooltip
 #. 3.8->settings-schema.json->general_hide->tooltip
 #. 2.8->settings-schema.json->general_hide->tooltip
-msgid ""
-"By checking this box, as long as nothing is to report the icon of Spices "
-"Update does not appear on the panel."
-msgstr "Door dit selectievakje in te schakelen, verschijnt het pictogram van Spices "
-"Update als er niets te melden is niet in het paneel"
+msgid "By checking this box, as long as nothing is to report the icon of Spices Update does not appear on the panel."
+msgstr ""
+"Door dit selectie vakje in te schakelen, verschijnt het pictogram van Spices Update als er niets te melden is niet in "
+"het paneel."
 
 #. 3.8->settings-schema.json->unprotected_applets->tooltip
 msgid "If you do not want an applet to be checked, set it to FALSE."
-msgstr "Als u niet wilt dat een hulptoepassing wordt gecontroleerd, stelt u deze in op FALSE"
+msgstr "Als u niet wilt dat een hulptoepassing wordt gecontroleerd, stelt u deze in op FALSE."
 
 #. 3.8->settings-schema.json->unprotected_desklets->tooltip
 msgid "If you do not want a desklet to be checked, set it to FALSE."
-msgstr "Als u niet wilt dat een minitoepassing wordt gecontroleerd, stelt u deze in op FALSE"
+msgstr "Als u niet wilt dat een minitoepassing wordt gecontroleerd, stelt u deze in op FALSE."
 
 #. 3.8->settings-schema.json->unprotected_extensions->tooltip
 msgid "If you do not want an extension to be checked, set it to FALSE."
-msgstr "Als u niet wilt dat een extensie wordt gecontroleerd, stelt u deze in op FALSE"
+msgstr "Als u niet wilt dat een extensie wordt gecontroleerd, stelt u deze in op FALSE."
 
 #. 3.8->settings-schema.json->unprotected_themes->tooltip
 msgid "If you do not want a theme to be checked, set it to FALSE."
-msgstr "Als u niet wilt dat een thema wordt gecontroleerd, stelt u deze in op FALSE"
+msgstr "Als u niet wilt dat een thema wordt gecontroleerd, stelt u deze in op FALSE."
+
