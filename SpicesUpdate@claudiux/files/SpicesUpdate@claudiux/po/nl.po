@@ -3,7 +3,6 @@
 # This file is distributed under the same license as the Cinnamon package.
 # FIRST AUTHOR Claudiux <claude.clerc@gmail.com>, 2019.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
