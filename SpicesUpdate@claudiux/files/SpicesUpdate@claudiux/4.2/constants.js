@@ -24,7 +24,8 @@ function DEBUG() {
 const DOWNLOAD_TIME = 10;
 
 let sort = "date";
-if (versionCompare( GLib.getenv('CINNAMON_VERSION') ,"4.2" ) > 0 ){
+global.logError("Comp=" + versionCompare( GLib.getenv('CINNAMON_VERSION') ,"4.3" ).toString());
+if (versionCompare( GLib.getenv('CINNAMON_VERSION') ,"4.3.0" ) >= 0 ) {
   sort = "update";
 }
 
