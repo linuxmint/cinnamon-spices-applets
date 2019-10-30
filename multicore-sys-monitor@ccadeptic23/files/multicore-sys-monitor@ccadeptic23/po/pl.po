@@ -183,8 +183,8 @@ msgstr "Kolor etykiety"
 
 #: ../3.0/DataProviders.js:103 ../3.2/DataProviders.js:103
 #: ../3.4/DataProviders.js:123
-msgid "------- CPU -------"
-msgstr "------- CPU -------"
+msgid "------------- CPU ------------"
+msgstr "------------- CPU ------------"
 
 #: ../3.0/DataProviders.js:144 ../3.2/DataProviders.js:144
 #: ../3.4/DataProviders.js:138
@@ -193,8 +193,8 @@ msgstr "MEM"
 
 #: ../3.0/DataProviders.js:150 ../3.2/DataProviders.js:150
 #: ../3.4/DataProviders.js:158
-msgid "------- Memory -------"
-msgstr "------- Pamięć -------"
+msgid "----------- Memory -----------"
+msgstr "----------- Pamięć -----------"
 
 #: ../3.0/DataProviders.js:151 ../3.2/DataProviders.js:151
 msgid "Usedup:"
@@ -222,8 +222,8 @@ msgstr "SWAP"
 
 #: ../3.0/DataProviders.js:186 ../3.2/DataProviders.js:186
 #: ../3.4/DataProviders.js:191
-msgid "------- Swap -------"
-msgstr "------- Swap -------"
+msgid "------------ Swap ------------"
+msgstr "------------ Swap ------------"
 
 #: ../3.0/DataProviders.js:251 ../3.2/DataProviders.js:251
 #: ../3.4/DataProviders.js:202
@@ -232,8 +232,8 @@ msgstr "NET"
 
 #: ../3.0/DataProviders.js:292 ../3.2/DataProviders.js:292
 #: ../3.4/DataProviders.js:286
-msgid "------- Networks -------"
-msgstr "--------- Sieci ---------"
+msgid "---------- Networks ----------"
+msgstr "----------- Sieci ------------"
 
 #: ../3.0/DataProviders.js:294 ../3.2/DataProviders.js:294
 #: ../3.4/DataProviders.js:297
@@ -256,8 +256,8 @@ msgstr "DISK"
 
 #: ../3.0/DataProviders.js:394 ../3.2/DataProviders.js:394
 #: ../3.4/DataProviders.js:375
-msgid "------- Disks -------"
-msgstr "------- Dyski -------"
+msgid "------------ Disks -----------"
+msgstr "------------ Dyski -----------"
 
 #: ../3.0/DataProviders.js:396 ../3.2/DataProviders.js:396
 #: ../3.4/DataProviders.js:383

@@ -23,13 +23,16 @@ tryFn(function() {
 
 const formatBytes = (bytes, decimals)=>{
   if (bytes === 0) {
-    return '0 Byte';
+    return '0'.padStart(spaces/2 - 1) + '.00'.padEnd(spaces/2 - 1) + 'B'.padStart(3, ' ') + rate;
   }
   let k = 1000;
   let dm = decimals + 1 || 3;
-  let sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+  let sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
   let i = Math.floor(Math.log(bytes) / Math.log(k));
-  return (bytes / Math.pow(k, i)).toPrecision(dm) + ' ' + sizes[i];
+  let value = (bytes / Math.pow(k, i)).toPrecision(dm).toString();
+  let parts = value.split('.');
+  let dec_part = (parts.length === 2) ? '.' + parts[1].toString().padEnd(2, '0') : '.00';
+  return parts[0].padStart(spaces/2 - 1) + dec_part.padEnd(spaces/2 - 1) + sizes[i].padStart(3, ' ') + rate;
 };
 
 const indent = '    ';
@@ -110,10 +113,10 @@ MultiCpuDataProvider.prototype = {
     if (!this.isEnabled) {
       return '';
     }
-    let toolTipString = _('------- CPU -------') + '\n';
+    let toolTipString = _('------------- CPU ------------') + '\n';
     for (let i = 0; i < this.CPUCount; i++) {
       let percentage = Math.round(100 * this.currentReadings[i], 2);
-      toolTipString += (_('Core') + ' ' + i + ':').padEnd(12) + percentage + '%\n';;
+      toolTipString += (_('Core') + ' ' + i).padStart(spaces, ' ') + ':\t' + percentage.toString().padStart(2, ' ') + ' %\n';;
     }
     return toolTipString;
   }
@@ -145,10 +148,10 @@ MemDataProvider.prototype = {
     if (!this.isEnabled) {
       return '';
     }
-    let toolTipString = _('------- Memory -------') + '\n';
+    let toolTipString = _('----------- Memory -----------') + '\n';
     let attributes = [_('Used:'), _('Cached:'), _('Buffer:'), _('Free:')];
     for (let i = 0; i < attributes.length; i++) {
-      toolTipString += attributes[i] + '\t' + Math.round(100 * this.currentReadings[i]) + '%\n';
+      toolTipString += (attributes[i]).split(':')[0].padStart(spaces, ' ') + ':\t' + Math.round(100 * this.currentReadings[i]).toString().padStart(2, ' ') + ' %\n';
     }
     return toolTipString;
   }
@@ -178,8 +181,8 @@ SwapDataProvider.prototype = {
     if (!this.isEnabled || !this.currentReadings[0]) {
       return '';
     }
-    let toolTipString = _('------- Swap -------') + '\n';
-    toolTipString += _('Swap') + ':\t' + (Math.round(10000 * this.currentReadings[0]) / 100) + '%\n';
+    let toolTipString = _('------------ Swap ------------') + '\n';
+    toolTipString += _('Swap').padStart(spaces, ' ') + ':\t' + (Math.round(10000 * this.currentReadings[0]) / 100).toString().padStart(2, ' ') + ' %\n';
     return toolTipString;
   }
 };
@@ -272,7 +275,7 @@ NetDataProvider.prototype = {
     if (!this.isEnabled) {
       return '';
     }
-    let toolTipString = _('------- Networks -------') + '\n';
+    let toolTipString = _('---------- Networks ----------') + '\n';
     for (let i = 0, len = this.currentReadings.length; i < len; i++) {
       if (!this.currentReadings[i].tooltipDown) {
         this.currentReadings[i].tooltipDown = 0;
@@ -283,8 +286,8 @@ NetDataProvider.prototype = {
       let down = formatBytes(this.currentReadings[i].tooltipDown, 2);
       let up = formatBytes(this.currentReadings[i].tooltipUp, 2);
       toolTipString += this.currentReadings[i].id.padEnd(22) + '\n';
-      toolTipString += indent + _('Down:') + '' + down.padStart(spaces) + rate + '\n';
-      toolTipString += indent  + _('Up:') + '   ' + up.padStart(spaces) + rate + '\n';
+      toolTipString += _('Down:').split(':')[0].padStart(spaces, ' ') + ':' + down.padStart(spaces + 2) + '\n';
+      toolTipString += _('Up:').split(':')[0].padStart(spaces, ' ') + ':'  + up.padStart(spaces + 2) + '\n';
     }
     return toolTipString;
   },
@@ -361,7 +364,7 @@ DiskDataProvider.prototype = {
     if (!this.isEnabled) {
       return '';
     }
-    let toolTipString = _('------- Disks -------') + '\n';
+    let toolTipString = _('------------ Disks -----------') + '\n';
     for (let i = 0, len = this.currentReadings.length; i < len; i++) {
       if (!this.currentReadings[i]) {
         continue;
@@ -369,8 +372,8 @@ DiskDataProvider.prototype = {
       let read = formatBytes(this.currentReadings[i].tooltipRead, 2);
       let write = formatBytes(this.currentReadings[i].tooltipWrite, 2);
       toolTipString += this.currentReadings[i].id.padEnd(22) + '\n';
-      toolTipString += indent + _('Read:') + read.padStart(spaces) + rate + '\n';
-      toolTipString += indent  + _('Write:') + write.padStart(spaces) + rate + '\n';
+      toolTipString += _('Read:').split(':')[0].padStart(spaces, ' ') + ':' + read.padStart(spaces + 2) + '\n';
+      toolTipString += _('Write:').split(':')[0].padStart(spaces, ' ') + ':' + write.padStart(spaces + 2) + '\n';
     }
     return toolTipString;
   },

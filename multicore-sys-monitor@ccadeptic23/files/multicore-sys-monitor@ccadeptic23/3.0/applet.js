@@ -7,7 +7,7 @@
 //
 // You should have received a copy of the GNU General Public License along with
 // this file. If not, see <http://www.gnu.org/licenses/>.
-/*	Imports SearchPath
+/*  Imports SearchPath
  * 0 /usr/share/cinnamon/js
  * 1 /usr/share/cinnamon/gjs-1.0
  * 2 /usr/share/gnome/gjs-1.0
@@ -20,33 +20,36 @@
  * */
 var ImportError = false; //flag import error
 var ImportErrorMsg = "";
+const Applet = imports.ui.applet;
+const Lang = imports.lang;
+const Mainloop = imports.mainloop;
+const St = imports.gi.St;
+//const Cairo = imports.cairo;
+const Gio = imports.gi.Gio;
+const Gtk = imports.gi.Gtk;
+const GLib = imports.gi.GLib;
+const NMClient = imports.gi.NMClient;
+const NetworkManager = imports.gi.NetworkManager;
+const Cinnamon = imports.gi.Cinnamon;
+const Gettext = imports.gettext;
+
+const UUID = "multicore-sys-monitor@ccadeptic23";
+
+var SpawnProcess = null; //defined in main (my library)
+var ErrorApplet = null; //defined in main (my library)
+var ConfigSettings = null; //defined in main (my library)
+var Graphs = null; //defined in main (my library)
+var DataProviders = null; //defined in main (my library)
+
 try {
-  const Applet = imports.ui.applet;
-  const Lang = imports.lang;
-  const Mainloop = imports.mainloop;
-  const St = imports.gi.St;
-  //const Cairo = imports.cairo;
-  const Gio = imports.gi.Gio;
-  const Gtk = imports.gi.Gtk;
-  const GLib = imports.gi.GLib;
-  const NMClient = imports.gi.NMClient;
-  const NetworkManager = imports.gi.NetworkManager;
-  const Cinnamon = imports.gi.Cinnamon;
-  const Gettext = imports.gettext;
   const GTop = imports.gi.GTop; //psst this is really only to see if we can
-  const UUID = "multicore-sys-monitor@ccadeptic23";
-  var SpawnProcess = null; //defined in main (my library)
-  var ErrorApplet = null; //defined in main (my library)
-  var ConfigSettings = null; //defined in main (my library)
-  var Graphs = null; //defined in main (my library)
-  var DataProviders = null; //defined in main (my library)
-
-
 } catch (err) {
   ImportError = true;
   global.logError(err);
   ImportErrorMsg = err.toString();
 }
+
+
 
 // Translation support
 Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
@@ -76,6 +79,12 @@ MyApplet.prototype = {
 
       this._initContextMenu();
 
+      if (St.Widget.get_default_direction() === St.TextDirection.RTL) {
+        this._applet_tooltip._tooltip.set_style('text-align: right; font-family: monospace;');
+      } else {
+        this._applet_tooltip._tooltip.set_style('text-align: left; font-family: monospace;');
+      }
+
       this.gtop = new GTop.glibtop_cpu();
 
       this.graphArea = new St.DrawingArea();
@@ -104,12 +113,12 @@ MyApplet.prototype = {
       this.swapGraph = new Graphs.GraphVBars(this.graphArea, this.swapProvider);
 
       this.netGraph = new Graphs.GraphLineChart(this.graphArea, this.netProvider, this.configSettings.getNETWidth());
-      this.netGraph.setMinScaleYvalue(1.0); //For us this means the heighest point wont represent a valuelower than 1Kb/s 
+      this.netGraph.setMinScaleYvalue(1.0); //For us this means the heighest point wont represent a valuelower than 1Kb/s
       this.netGraph.setAutoScale(this.configSettings.isNETAutoScaled());
       this.netGraph.setLogScale(this.configSettings.isNETLogScaled());
 
       this.diskGraph = new Graphs.GraphLineChart(this.graphArea, this.diskProvider, this.configSettings.getDiskWidth());
-      this.diskGraph.setMinScaleYvalue(1.0); //For us this means the heighest point wont represent a valuelower than 1Kb/s 
+      this.diskGraph.setMinScaleYvalue(1.0); //For us this means the heighest point wont represent a valuelower than 1Kb/s
       this.diskGraph.setAutoScale(this.configSettings.isDiskAutoScaled());
       this.diskGraph.setLogScale(this.configSettings.isDiskLogScaled());
 
@@ -239,7 +248,7 @@ MyApplet.prototype = {
           this.configSettings.getBackgroundColor(),
           this.configSettings.getCPUColorList());
 
-        area.get_context().translate(-1 * xoffset, 0); //return translation to origin											
+        area.get_context().translate(-1 * xoffset, 0); //return translation to origin
         xoffset += this.configSettings.getCPUWidth() + 1; //update xoffset for next translation
       }
 
@@ -309,9 +318,22 @@ function main(metadata, orientation) {
   if (ImportError) {
     ErrorApplet = imports.ErrorApplet;
     var errmsg = ImportErrorMsg;
-    if (typeof GTop === 'undefined') //we dont have the gtop package
+    var myErrorApplet = new ErrorApplet.ErrorImportApplet(orientation, errmsg);
+    if (typeof GTop === 'undefined') { //we don't have the gtop package
       errmsg = _("Please install \"gir1.2-gtop-2.0\" package.");
-    let myErrorApplet = new ErrorApplet.ErrorImportApplet(orientation, errmsg);
+      let _is_apturl_present = GLib.find_program_in_path("apturl");
+      if (_is_apturl_present) {
+        const Extension = imports.ui.extension;
+        const PopupMenu = imports.ui.popupMenu;
+        let restart_button = new PopupMenu.PopupMenuItem(_("Reload this applet"));
+        restart_button.connect('activate', Lang.bind(this, function(event) {
+          Extension.reloadExtension(UUID, Extension.Type.APPLET);
+        }));
+        myErrorApplet.menu.addMenuItem(restart_button);
+        const Util = imports.misc.util;
+        Util.spawnCommandLine("apturl apt://gir1.2-gtop-2.0");
+      }
+    }
     return myErrorApplet;
   } else {
     ConfigSettings = imports.ConfigSettings.ConfigSettings;
