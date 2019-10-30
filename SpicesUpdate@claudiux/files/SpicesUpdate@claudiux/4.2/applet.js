@@ -550,7 +550,8 @@ class SpicesUpdate extends Applet.TextIconApplet {
       notification.addButton("spices-update", _(buttonLabel));
       notification.addButton("refresh", _(buttonLabel2));
       this.notifications.push(notification);
-      notification.connect('action-invoked', Lang.bind(this, function(self, action) {
+      //notification.connect('action-invoked', Lang.bind(this, function(self, action) {
+      notification.connect('action-invoked', (self, action) => {
             if (action == "spices-update") {
               Util.spawnCommandLine("%s %s -t 1 -s %s".format(CS_PATH, type.toString(), SORT));
             } else {
@@ -566,7 +567,8 @@ class SpicesUpdate extends Applet.TextIconApplet {
               }
               this._on_refresh_pressed();
             }
-          }));
+          //}));
+          });
       source.notify(notification);
     }
   }; // End of notify_with_button
@@ -739,13 +741,17 @@ class SpicesUpdate extends Applet.TextIconApplet {
         let d = Gio.file_new_for_path("%s/%s".format(DIR_MAP[type], a["name"]));
         if (d.query_exists(null)) {
           this.unprotectedAppletsDico[a["name"]] = a["isunprotected"];
+          let metadataFileName = DIR_MAP[type] + "/" + a["name"] + "/metadata.json";
           if (a["isunprotected"] && a["requestnewdownload"] !== undefined && a["requestnewdownload"] === true) {
             if (this.cache[type] === "{}") this._load_cache(type);
             let created = this._get_member_from_cache(type, a["name"], "created");
             let last_edited = this._get_last_edited_from_cache(type, a["name"]);
             if (created !== null && last_edited !== null && created >= last_edited) created = last_edited - 1;
-            let metadataFileName = DIR_MAP[type] + "/" + a["name"] + "/metadata.json";
+
             if (created !== null) this._rewrite_metadataFile(metadataFileName, created);
+          }
+          if (!a["isunprotected"]) {
+            this._rewrite_metadataFile(metadataFileName, Math.ceil(Date.now()/1000));
           }
           this.unprotectedAppletsList.push({"name": a["name"], "isunprotected": a["isunprotected"], "requestnewdownload": false});
         }
@@ -785,13 +791,17 @@ class SpicesUpdate extends Applet.TextIconApplet {
         let d = Gio.file_new_for_path("%s/%s".format(DIR_MAP[type], a["name"]));
         if (d.query_exists(null)) {
           this.unprotectedDeskletsDico[a["name"]] = a["isunprotected"];
+          let metadataFileName = DIR_MAP[type] + "/" + a["name"] + "/metadata.json";
           if (a["isunprotected"] && a["requestnewdownload"] !== undefined && a["requestnewdownload"] === true) {
             if (this.cache[type] === "{}") this._load_cache(type);
             let created = this._get_member_from_cache(type, a["name"], "created");
             let last_edited = this._get_last_edited_from_cache(type, a["name"]);
             if (created !== null && last_edited !== null && created >= last_edited) created = last_edited - 1;
-            let metadataFileName = DIR_MAP[type] + "/" + a["name"] + "/metadata.json";
+
             if (created !== null) this._rewrite_metadataFile(metadataFileName, created);
+          }
+          if (!a["isunprotected"]) {
+            this._rewrite_metadataFile(metadataFileName, Math.ceil(Date.now()/1000));
           }
           this.unprotectedDeskletsList.push({"name": a["name"], "isunprotected": a["isunprotected"], "requestnewdownload": false});
         }
@@ -831,13 +841,17 @@ class SpicesUpdate extends Applet.TextIconApplet {
         let d = Gio.file_new_for_path("%s/%s".format(DIR_MAP[type], a["name"]));
         if (d.query_exists(null)) {
           this.unprotectedExtensionsDico[a["name"]] = a["isunprotected"];
+          let metadataFileName = DIR_MAP[type] + "/" + a["name"] + "/metadata.json";
           if (a["isunprotected"] && a["requestnewdownload"] !== undefined && a["requestnewdownload"] === true) {
             if (this.cache[type] === "{}") this._load_cache(type);
             let created = this._get_member_from_cache(type, a["name"], "created");
             let last_edited = this._get_last_edited_from_cache(type, a["name"]);
             if (created !== null && last_edited !== null && created >= last_edited) created = last_edited - 1;
-            let metadataFileName = DIR_MAP[type] + "/" + a["name"] + "/metadata.json";
+
             if (created !== null) this._rewrite_metadataFile(metadataFileName, created);
+          }
+          if (!a["isunprotected"]) {
+            this._rewrite_metadataFile(metadataFileName, Math.ceil(Date.now()/1000));
           }
           this.unprotectedExtensionsList.push({"name": a["name"], "isunprotected": a["isunprotected"], "requestnewdownload": false});
         }
@@ -878,13 +892,17 @@ class SpicesUpdate extends Applet.TextIconApplet {
         d = Gio.file_new_for_path("%s/%s".format(DIR_MAP[type], a["name"]));
         if (d.query_exists(null)) {
           this.unprotectedThemesDico[a["name"]] = a["isunprotected"];
+          let metadataFileName = DIR_MAP[type] + "/" + a["name"] + "/metadata.json";
           if (a["isunprotected"] && a["requestnewdownload"] !== undefined && a["requestnewdownload"] === true) {
             if (this.cache[type] === "{}") this._load_cache(type);
             let created = this._get_member_from_cache(type, a["name"], "created");
             let last_edited = this._get_last_edited_from_cache(type, a["name"]);
             if (created !== null && last_edited !== null && created >= last_edited) created = last_edited - 1;
-            let metadataFileName = DIR_MAP[type] + "/" + a["name"] + "/metadata.json";
+
             if (created !== null) this._rewrite_metadataFile(metadataFileName, created);
+          }
+          if (!a["isunprotected"]) {
+            this._rewrite_metadataFile(metadataFileName, Math.ceil(Date.now()/1000));
           }
           this.unprotectedThemesList.push({"name": a["name"], "isunprotected": a["isunprotected"], "requestnewdownload": false});
         }
@@ -1179,6 +1197,8 @@ class SpicesUpdate extends Applet.TextIconApplet {
       let file, file_time;
       while ((info = children.next_file(null)) != null) {
         file = children.get_child(info);
+        if (file.get_basename() === "metadata.json") continue; // ignore metadata.json file
+
         file_time = file.query_info('time::modified', Gio.FileQueryInfoFlags.NONE, null).get_modification_time().tv_sec;
         if (file_time > latest_time) {
           latest_time = file_time;
@@ -1756,7 +1776,8 @@ class SpicesUpdate extends Applet.TextIconApplet {
                   message = "Some " + t + " need update:"
                 }
                 let new_message = _(message) + "\n\t" + must_be_updated.join("\n\t");
-                if (this.force_notifications || new_message != this.old_message[t]) { // One notification is sufficient!
+                //if (this.force_notifications || new_message != this.old_message[t]) { // One notification is sufficient!
+                if (this.force_notifications || this.old_message[t].indexOf(new_message) == -1) { // One notification is sufficient!
                   if (this.general_notifications) {
                     if (this.general_type_notif === "minimal") notify_send(this._clean_str(new_message));
                     else this.notify_with_button(this._clean_str(new_message), t, uuid);
@@ -1809,7 +1830,8 @@ class SpicesUpdate extends Applet.TextIconApplet {
   open_each_download_tab() {
     for (let t of TYPES) {
       if (this.nb_in_menu[t] > 0) {
-        Util.spawnCommandLine("%s %s -t 1 -s %s".format(CS_PATH, t.toString(), SORT));
+        let command = "%s %s -t 1 -s %s".format(CS_PATH, t.toString(), SORT);
+        Util.spawnCommandLine(command);
       }
     }
   };  // End of open_each_download_tab
