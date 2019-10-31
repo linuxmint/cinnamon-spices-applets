@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-20 22:50+0800\n"
+"POT-Creation-Date: 2019-10-19 17:20+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,35 +17,77 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#. sshlauncher@sumo->metadata.json->name
-#: applet.js:30 applet.js:43 applet.js:103
+#. metadata.json->name
+#: applet.js:40 applet.js:56 applet.js:99 applet.js:206 applet.js:223
 msgid "SSH Launcher"
 msgstr ""
 
-#: applet.js:57
-msgid "Background (-fN)"
+#: applet.js:99
+msgid "No suitable icon found, falling back to custom icon"
 msgstr ""
 
-#: applet.js:60
-msgid "Forward X11 (-X)"
-msgstr ""
-
-#: applet.js:81
-msgid "ERROR. "
-msgstr ""
-
-#: applet.js:84
-msgid "Edit SSH config"
-msgstr ""
-
-#: applet.js:88
+#: applet.js:105
 msgid "Force Update from SSH config"
 msgstr ""
 
-#: applet.js:103
+#: applet.js:143
+msgid "Background (-fN)"
+msgstr ""
+
+#: applet.js:146
+msgid "Forward X11 (-X)"
+msgstr ""
+
+#: applet.js:187
+msgid "ERROR. "
+msgstr ""
+
+#: applet.js:190
+msgid "Edit SSH config"
+msgstr ""
+
+#: applet.js:206
+msgid ""
+"Error: I can't open the terminal.\n"
+"You need to set a default terminal first in Preferred Applications!\n"
+"\n"
+"(More help in Right Click->About->More Info)"
+msgstr ""
+
+#: applet.js:223
 msgid "Connection opened to "
 msgstr ""
 
-#. sshlauncher@sumo->metadata.json->description
+#: applet.js:223
+msgid " using "
+msgstr ""
+
+#. settings-schema.json->headAppearance->description
+msgid "Appearance"
+msgstr ""
+
+#. settings-schema.json->themeIcon->description
+msgid "Use icon from your icon theme"
+msgstr ""
+
+#. settings-schema.json->symbolicIcon->description
+msgid "Use symbolic icon"
+msgstr ""
+
+#. settings-schema.json->headFunc->description
+msgid "Functionality"
+msgstr ""
+
+#. settings-schema.json->customCommand->description
+msgid "Use custom command for opening terminal"
+msgstr ""
+
+#. settings-schema.json->customCommand->tooltip
+msgid ""
+"Usually it should end with -e so it will execute the supplied ssh command, "
+"check your chosen terminal's manual."
+msgstr ""
+
+#. metadata.json->description
 msgid "An applet to connect to SSH hosts configured in ~/.ssh/config"
 msgstr ""

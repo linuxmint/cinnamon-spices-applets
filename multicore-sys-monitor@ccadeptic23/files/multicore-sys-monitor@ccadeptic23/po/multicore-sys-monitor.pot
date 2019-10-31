@@ -160,7 +160,7 @@ msgstr ""
 
 #: ../3.0/DataProviders.js:103 ../3.2/DataProviders.js:103
 #: ../3.4/DataProviders.js:123
-msgid "------- CPU -------"
+msgid "------------- CPU ------------"
 msgstr ""
 
 #: ../3.0/DataProviders.js:144 ../3.2/DataProviders.js:144
@@ -170,7 +170,7 @@ msgstr ""
 
 #: ../3.0/DataProviders.js:150 ../3.2/DataProviders.js:150
 #: ../3.4/DataProviders.js:158
-msgid "------- Memory -------"
+msgid "----------- Memory -----------"
 msgstr ""
 
 #: ../3.0/DataProviders.js:151 ../3.2/DataProviders.js:151
@@ -199,7 +199,7 @@ msgstr ""
 
 #: ../3.0/DataProviders.js:186 ../3.2/DataProviders.js:186
 #: ../3.4/DataProviders.js:191
-msgid "------- Swap -------"
+msgid "------------ Swap ------------"
 msgstr ""
 
 #: ../3.0/DataProviders.js:251 ../3.2/DataProviders.js:251
@@ -209,7 +209,7 @@ msgstr ""
 
 #: ../3.0/DataProviders.js:292 ../3.2/DataProviders.js:292
 #: ../3.4/DataProviders.js:286
-msgid "------- Networks -------"
+msgid "---------- Networks ----------"
 msgstr ""
 
 #: ../3.0/DataProviders.js:294 ../3.2/DataProviders.js:294
@@ -233,7 +233,7 @@ msgstr ""
 
 #: ../3.0/DataProviders.js:394 ../3.2/DataProviders.js:394
 #: ../3.4/DataProviders.js:375
-msgid "------- Disks -------"
+msgid "------------ Disks -----------"
 msgstr ""
 
 #: ../3.0/DataProviders.js:396 ../3.2/DataProviders.js:396

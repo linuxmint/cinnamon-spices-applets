@@ -1,3 +1,12 @@
+### v4.5.0~20191028
+  * Animated icon during refresh.
+    * For Cinnamon 3.8 and greater.
+
+### v4.4.0~20191022
+  * Middle-Click on applet icon:
+    * Performs a Refresh while no available updates are reported.
+    * Opens all useful Cinnamon Settings, when Spices updates are available, to allow the user to perform these updates.
+
 ### v4.3.0~20191020
   * Better behavior when many spices need updating.
   * Take better account of manually installed spices.

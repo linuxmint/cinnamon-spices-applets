@@ -4,6 +4,8 @@ const Applet = imports.ui.applet; // ++
 const Settings = imports.ui.settings; // ++ Needed if you use Settings Screen
 const St = imports.gi.St; // ++ Needed for icons
 const Clutter = imports.gi.Clutter;
+const GdkPixbuf = imports.gi.GdkPixbuf;
+const Cogl = imports.gi.Cogl;
 const PopupMenu = imports.ui.popupMenu; // ++ Needed for menus
 const Lang = imports.lang; //  Needed for on_response function call
 const GLib = imports.gi.GLib; // ++ Needed for starting programs and translations
@@ -33,6 +35,8 @@ const APPLET_DIR = HOME_DIR + "/.local/share/cinnamon/applets/" + UUID;
 const SCRIPTS_DIR = APPLET_DIR + "/scripts";
 const ICONS_DIR = APPLET_DIR + "/icons";
 const HELP_DIR = APPLET_DIR + "/help";
+
+const DOWNLOAD_TIME = 10;
 
 Util.spawnCommandLine("sh -c '%s/witness-debian.sh'".format(SCRIPTS_DIR));
 
@@ -91,6 +95,25 @@ const capitalize = (s) => {
   if (typeof s !== 'string') return ''
   return s.charAt(0).toUpperCase() + s.slice(1)
 }
+
+function setInterval(callback, ms) {
+    let args = [];
+    if (arguments.length > 2) {
+        args = args.slice.call(arguments, 2);
+    }
+
+    let id = Mainloop.timeout_add(ms, () => {
+        callback.call(null, ...args);
+        return true; // Repeat
+    }, null);
+
+    return id;
+}
+
+function clearInterval(id) {
+    if (id > 0) Mainloop.source_remove(id);
+}
+
 
 // Dummy bidon variable for translation (don't remove these lines):
 let bidon = _("Applet");
@@ -173,6 +196,23 @@ function notify_send(message, duration=5000, urgency="normal", icon_path=null) {
   }
 }
 
+function getImageAtScale(imageFileName, width, height) {
+    let pixBuf = GdkPixbuf.Pixbuf.new_from_file_at_size(imageFileName, width, height);
+    let image = new Clutter.Image();
+    image.set_data(
+        pixBuf.get_pixels(),
+        pixBuf.get_has_alpha() ? Cogl.PixelFormat.RGBA_8888 : Cogl.PixelFormat.RGBA_888,
+        width, height,
+        pixBuf.get_rowstride()
+    );
+
+    let actor = new Clutter.Actor({width: width, height: height});
+    actor.set_content(image);
+
+    return actor;
+}
+
+
 class SpicesUpdate extends Applet.TextIconApplet {
   constructor (metadata, orientation, panelHeight, instance_id) {
     super(orientation, panelHeight, instance_id);
@@ -182,7 +222,15 @@ class SpicesUpdate extends Applet.TextIconApplet {
     Gtk.IconTheme.get_default().append_search_path(ICONS_DIR);
     this.set_applet_icon_symbolic_name("spices-update");
     this.default_tooltip = "%s %s".format(_("Spices Update"), metadata.version);
-    this.set_applet_tooltip(this.default_tooltip);
+    this.set_applet_tooltip(this.default_tooltip + "\n%s".format(_("Middle-Click to Refresh")));
+
+    this.img_path = ICONS_DIR + "/spices-update-symbolic.svg";
+    //this.general_frequency = 10; //(seconds between two loops)
+    this.angle = 0;
+    this.do_rotation = false;
+    this.interval = 0;
+
+
 
     // Be sure the scripts are executable:
     GLib.spawn_command_line_async("bash -c 'cd %s && chmod 755 *.py *.sh'".format(SCRIPTS_DIR));
@@ -367,7 +415,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
       "general_frequency",
       this.on_frequency_changed,
       null);
-      this.refreshInterval = 3600*this.general_frequency;
+      this.refreshInterval = 3600 * this.general_frequency;
 
     this.settings.bindProperty(Settings.BindingDirection.IN,
       "general_warning",
@@ -467,6 +515,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
     this.notifications = new Array();
     this.testblink = [];
     this.forceRefresh = false;
+    this.refresh_requested = false;
     this.applet_running = true;
     this.loopId = 0;
     this.first_loop = true; // To do nothing for 1 minute.
@@ -528,7 +577,6 @@ class SpicesUpdate extends Applet.TextIconApplet {
       let img_uri = GLib.filename_to_uri("%s/cs-%s.svg".format(ICONS_DIR, type.toString()), null);
       if (uuid !== null) {
         let uri= CACHE_DIR + "/" + this._get_singular_type(type) + "/" + uuid + ".png";
-        //log("uri = " + uri);
         let file = Gio.file_new_for_path(uri);
         if (file.query_exists(null)) {
           img_uri = GLib.filename_to_uri(uri, null);
@@ -612,7 +660,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
       Mainloop.source_remove(this.loopId);
     }
     this.loopId = 0;
-    this.refreshInterval = 3600*this.general_frequency;
+    this.refreshInterval = 3600 * this.general_frequency;
     this.loopId = Mainloop.timeout_add_seconds(this.refreshInterval, () => this.updateLoop());
   }; // End of on_frequency_changed
 
@@ -627,7 +675,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
     this._set_main_label();
 
     // Refresh intervall:
-    this.refreshInterval = 3600*this.general_frequency;
+    this.refreshInterval = 3600 * this.general_frequency;
 
     // Types to check
     this.types_to_check = [];
@@ -1273,6 +1321,8 @@ class SpicesUpdate extends Applet.TextIconApplet {
     // Queue of the http request
     _httpSession.queue_message(msg, Lang.bind(this, function(_httpSession, message) {
       if (message.status_code === Soup.KnownStatusCode.OK && iteration === this.iteration) {
+        this.do_rotation = false;
+        this.updateUI();
         let data = message.response_body.data;
         let result = subject_regexp.exec(data.toString());
         this.details_by_uuid[uuid] = result[1].toString();
@@ -1303,7 +1353,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
         var nearest_commit_time = timestamp;
         var smaller_difference = Math.round(Date.now() / 1000);
         let difference;
-        while (result = subject_regexp.exec(data.toString())) {
+        while (result == subject_regexp.exec(data.toString())) {
           commit_time = Date.parse(result[1].toString()) / 1000;
           difference = Math.abs(timestamp - commit_time);
           if (difference < smaller_difference) {
@@ -1369,7 +1419,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
                   ret.push("%s (%s)\n\t\t%s".format(_(this.get_spice_name(type, uuid)), uuid, _("(Description unavailable)")));
                 }
               } else {
-                this.refreshInterval = 10; // Wait 15 more seconds to avoid the message "(Refresh to see the description)".
+                this.refreshInterval = DOWNLOAD_TIME; // Wait DOWNLOAD_TIME more seconds to avoid the message "(Refresh to see the description)".
                 //ret.push("%s (%s)\n\t\t%s".format(_(this.get_spice_name(type, uuid)), uuid, _("(Refresh to see the description)")));
               }
             } else {
@@ -1552,10 +1602,17 @@ class SpicesUpdate extends Applet.TextIconApplet {
       this.spicesMenuItems[t].setShowDot(this.menuDots[t]);
       this.menu.addMenuItem(this.spicesMenuItems[t]);
     }
+    // button Forget
     if (this.nb_to_watch > 0) {
       let _forget_button = new PopupMenu.PopupIconMenuItem(_("Forget new Spices") + " -\u2604-", "emblem-ok", St.IconType.SYMBOLIC);
       _forget_button.connect("activate", (event) => this._on_forget_new_spices_pressed())
       this.menu.addMenuItem(_forget_button);
+    }
+    // button Download
+    if ((this.nb_to_update + this.nb_to_watch) > 0) {
+      let _download_tabs_button = new PopupMenu.PopupIconMenuItem(_("Open useful Cinnamon Settings"), "folder-download", St.IconType.SYMBOLIC);
+      _download_tabs_button.connect("activate", (event) => this.open_each_download_tab());
+      this.menu.addMenuItem(_download_tabs_button);
     }
     this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
@@ -1587,6 +1644,8 @@ class SpicesUpdate extends Applet.TextIconApplet {
 
   _on_refresh_pressed() {
     this.first_loop = false;
+    this.refresh_requested = true;
+    this.do_rotation = true;
     this.updateLoop();
   }; // End of _on_refresh_pressed
 
@@ -1614,11 +1673,22 @@ class SpicesUpdate extends Applet.TextIconApplet {
     return ret;
   }; // End of _clean_str
 
-  // This updates the display of the applet and the tooltip
-  updateUI() {
-    this.get_default_icon_color();
-    //log("defaultColor = " + this.defaultColor);
-    this._applet_icon.style = "color: %s;".format(this.defaultColor);
+  darken_color(str_color) {
+    let c = Clutter.Color.from_string(str_color)[1];
+    let lc = c.darken();
+    return lc.to_string().substr(0,7);
+  }
+
+  set_icon_color() {
+    if (this.refresh_requested) {
+      //this._applet_icon.style = "color: %s;".format("lightgray");
+      this._applet_icon.style = "color: %s;".format(this.darken_color(this.defaultColor));
+      this.refreshInterval = DOWNLOAD_TIME;
+    } else {
+      this.get_default_icon_color();
+      this._applet_icon.style = "color: %s;".format(this.defaultColor);
+    }
+    this.refresh_requested = false;
     if (this.general_warning === true) {
       for (let t of TYPES) {
         if (this.menuDots[t] === true) {
@@ -1627,20 +1697,58 @@ class SpicesUpdate extends Applet.TextIconApplet {
         }
       }
     }
+  }; // End of set_icon_color
+
+  icon_rotate() {
+    this.angle = Math.round(this.angle + 3) % 360;
+    let size = ((this._panelHeight / 25) * 1.14 * 11.5) / global.ui_scale;
+    if (this.isHorizontal === false) size = 0.8 * size;
+    this.img_icon = getImageAtScale(this.img_path, size, size);
+    this.img_icon.set_pivot_point(0.5, 0.5);
+    this.img_icon.set_rotation_angle(Clutter.RotateAxis.Z_AXIS, this.angle);
+    this._applet_icon_box.set_child(this.img_icon);
+    if (this.isHorizontal === true)
+      this._applet_icon_box.set_fill(true, false);
+    else
+      this._applet_icon_box.set_fill(false, true);
+    this._applet_icon_box.set_alignment(St.Align.MIDDLE,St.Align.MIDDLE);
+  }; // End of icon_rotate
+
+  // This updates the display of the applet and the tooltip
+  updateUI() {
+    if (this.do_rotation) {
+      if (this.interval === 0)
+        this.interval = setInterval(() => this.icon_rotate(), 10);
+    } else if (this.interval != 0){
+      clearInterval(this.interval);
+      this.interval = 0;
+      this.angle = 0;
+      this.set_applet_icon_symbolic_name("spices-update");
+    }
+
+    this.set_icon_color();
     if (this.nb_to_update > 0 || this.nb_to_watch > 0) {
       var _tooltip = this.default_tooltip;
+      var tooltip_was_modified = false;
       for (let type of TYPES) {
         if (this.old_message[type] != "" || this.old_watch_message[type] != "") {
+          if (!tooltip_was_modified) {
+            _tooltip += "\n%s".format(_("Middle-Click to open useful Cinnamon Settings"));
+            tooltip_was_modified = true;
+          }
           _tooltip += "\n\n\t\t\t%s".format(_(type).toLocaleUpperCase());
           if (this.old_message[type] != "") _tooltip += "\n\u21BB %s".format(this._clean_str(this.old_message[type].replace(/, /gi, "\n\t")));
           if (this.old_watch_message[type] != "") _tooltip += "\n\u2604 %s".format(this._clean_str(this.old_watch_message[type].replace(/, /gi, "\n\t")));
         }
       }
+      if (!tooltip_was_modified) {
+        _tooltip += "\n%s".format(_("Middle-Click to Refresh"));
+      }
       this.set_applet_tooltip(_tooltip);
       this.numberLabel.text = (this.nb_to_update + this.nb_to_watch).toString();
       this.badge.show();
     } else {
-      this.set_applet_tooltip(this.default_tooltip);
+      this.set_applet_tooltip(this.default_tooltip + "\n%s".format(_("Middle-Click to Refresh")));
       this.numberLabel.text = '';
       this.badge.hide();
     }
@@ -1673,7 +1781,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
         this.refreshInterval = 5;
       } else {
         if (!this.first_loop) {
-          this.refreshInterval = 3600*this.general_frequency;
+          this.refreshInterval = 3600 * this.general_frequency;
           var monitor, Id;
           for (let tuple of this.monitors) {
             [monitor, Id] = tuple;
@@ -1755,10 +1863,30 @@ class SpicesUpdate extends Applet.TextIconApplet {
       //this.loopId = Mainloop.timeout_add_seconds(this.refreshInterval, () => this.updateLoop());
     }
     if (this.applet_running === true && this.loopId === 0) {
+      this.do_rotation = false;
       // One more loop !
       this.loopId = Mainloop.timeout_add_seconds(this.refreshInterval, () => this.updateLoop());
     }
   }; // End of updateLoop
+
+  open_each_download_tab() {
+    for (let t of TYPES) {
+      if (this.nb_in_menu[t] > 0) {
+        Util.spawnCommandLine("%s/open_download_tab.py %s".format(SCRIPTS_DIR, t.toString()));
+      }
+    }
+  };  // End of open_each_download_tab
+
+  _onButtonPressEvent(actor, event) {
+    if (event.get_button() == 2) {
+      if ((this.nb_to_update + this.nb_to_watch) === 0) {
+        this._on_refresh_pressed();
+      } else {
+        this.open_each_download_tab();
+      }
+    }
+    return super._onButtonPressEvent(actor, event);
+  };  // End of _onButtonPressEvent
 
   //++ Handler for when the applet is clicked.
   on_applet_clicked(event) {
@@ -1782,6 +1910,11 @@ class SpicesUpdate extends Applet.TextIconApplet {
       Mainloop.source_remove(this.loopId);
     }
     this.loopId = 0;
+
+    if (this.interval != 0){
+      clearInterval(this.interval);
+    }
+
     var monitor, Id;
     for (let tuple of this.monitors) {
       [monitor, Id] = tuple;
