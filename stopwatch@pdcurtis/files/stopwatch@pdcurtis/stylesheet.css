@@ -4,58 +4,48 @@ The stylesheet can be edited by the user but will be overwritten when the applet
 There is a way to gain 'persistence' described at the end of this file.
 */
 
-.stopwatch-ready {
-background-color: rgba(127,127,127,0.3);
-    margin: 2px, 1px, 0px, 1px;
-    border: 2px;
-    border-radius: 4px, 4px, 1px, 1px;
+.stopwatch {
+    border: solid 2px rgba(127,127,127,0.3);
+    margin: 1px;
+    padding: 0 2px;
+
+    border-radius: 5px 5px 2px 2px;
     border-color: rgba(127,127,127,1);
-    font-size: 95%;
+
+    text-align: center;
+    font-size: 10px;
+	line-height: 9px;
+}
+
+.stopwatch-ready {
+	background-color: rgba(127,127,127,0.3);
+    border-color: rgba(127,127,127,1);
 }
 
 .stopwatch-running {
-background-color: rgba(0,255,0,0.3);
-    margin: 2px, 1px, 0px, 1px;
-    border: 2px;
-    border-radius: 4px, 4px, 1px, 1px;
+	background-color: rgba(0,255,0,0.3);
     border-color: rgba(0,255,0,0.5);
-    font-size: 95%;
 }
 
 .stopwatch-paused {
-background-color: rgba(255,165,0,0.5);
-    margin: 2px, 1px, 0px, 1px;
-    border: 2px;
-    border-radius: 4px, 4px, 1px, 1px;
+	background-color: rgba(255,165,0,0.5);
     border-color: rgba(255,165,0,0.7);
-    font-size: 95%;
 }
 
 .stopwatch-day-exceeded {
-background-color: rgba(127,127,127,0.3);
-    margin: 2px, 1px, 0px, 1px;
-    border: 2px;
-    border-radius: 4px, 4px, 1px, 1px;
+	background-color: rgba(127,127,127,0.3);
     border-color: red;
-    font-size: 95%;
 }
 
 .stopwatch-running-day-exceeded {
-background-color: rgba(0,255,0,0.3);
-    margin: 2px, 1px, 0px, 1px;
-    border: 2px;
-    border-radius: 4px, 4px, 1px, 1px;
+	background-color: rgba(0,255,0,0.3);
     border-color: red;
-    font-size: 95%;
 }
 
 .stopwatch-paused-day-exceeded {
-background-color: rgba(255,165,0,0.3);
-    margin: 2px, 1px, 0px, 1px;
-    border: 2px;
-    border-radius: 4px, 4px, 1px, 1px;
+	background-color: rgba(255,165,0,0.3);
     border-color: red;
-    font-size: 95%;
+}
 
 /*
 Persistence
@@ -67,4 +57,4 @@ The quickest way to restart Cinnamon is by the keyboard shortcut Ctrl+Alt+Esc
 Login out and back in also restarts Cinnamon or a Right click on the Panel -> Troubleshoot -> Restart Cinnamon
 A way to avoid these restarts is being sought but it is intended to maintain the default position for a user stylesheet.
 */
-}
+
