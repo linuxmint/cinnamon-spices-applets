@@ -1,7 +1,16 @@
 ## Changelog
 
-## 2.1.2
- * Update stylesheet to better match Cinnamon 4.0 System Styles.
+### 2.2.0
+  * Adds an option in Configure... to display Counter Heading in Panel.
+  * New single line layout for Start, Pause, Reset, Continue and Continue from Start Time in Context Menu
+  * Adds ability to edit Counter Heading in Context menu as well as Configure..
+  * Adds option in Configure... to add experimental functions such as an ability to modify time by buttons in Context (right click) Menu - a possible precursor to a flexible timer function
+  * Implements changes proposed by @100k (Łukasz Dobrowolski)in #2648 and uses code provided by him to implement his suggestions.
+  * Minor changes in stylesheet.css to match the other applets in the suite..
+  * Closes #2648
+
+### 2.1.2
+ * Update stylesheet.css to better match Cinnamon 4.0 System Styles.
 
 ### 2.1.1
   * Use xdg-open in place of gedit or xed to allow use on more distros

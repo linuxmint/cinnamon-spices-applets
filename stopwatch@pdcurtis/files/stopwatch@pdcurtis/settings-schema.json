@@ -25,7 +25,18 @@
         "description": "Check box to continue counting on clicking applet when paused",
         "tooltip": "Normal sequence on clicking is 'start -> pause -> reset' this changes to 'start -> pause -> continue -> pause -> continue etc'. In this mode one has to use the Right Click (Context) Menu to reset the counter"
     },
-
+    "displayFullPanel": {
+        "type": "checkbox",
+        "default": false,
+        "description": "Check box to Display Title in Panel",
+        "tooltip": "This provides a more comprehensive panel display but may use more panel space"
+    },
+    "enableExperimentalFunctions": {
+        "type": "checkbox",
+        "default": false,
+        "description": "Check box to enable some extra functions - Needs Cinnamon Restart",
+        "tooltip": "Provides extra functions requested by users"
+    },
     "counterStatus": {
         "type": "generic",
         "default": "ready",

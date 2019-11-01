@@ -46,6 +46,33 @@ function _(str) {
 }
 
 
+// modifier button
+class TimeModifierButton extends PopupMenu.PopupBaseMenuItem
+{
+    constructor (applet, label, modifier)
+    {
+        super();
+        this._init();
+
+        this._applet = applet;
+        this._modifier = modifier;
+
+        this.label = new St.Label({ text: label });
+        this.addActor(this.label);
+        this.label.realize();
+
+        this.connect('activate', this._on_activate.bind(this));
+    }
+
+    _on_activate ()
+    {
+        this._applet.startTime -= this._modifier;
+        this._applet.pausedAt += this._modifier;
+        this._applet.updateUI()
+    }
+}
+
+
 // ++ Always needed
 function MyApplet(metadata, orientation, panelHeight, instance_id) {
     this._init(metadata, orientation, panelHeight, instance_id);
@@ -66,7 +93,7 @@ MyApplet.prototype = {
                 this.on_settings_changed, // Callback when value changes
                 null); // Optional callback data
 
-            this.settings.bindProperty(Settings.BindingDirection.IN,
+            this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL,
                 "counterTitle",
                 "counterTitle",
                 this.on_settings_changed,
@@ -75,6 +102,18 @@ MyApplet.prototype = {
             this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL,
                 "modeContinueCounting",
                 "modeContinueCounting",
+                this.on_settings_changed,
+                null);
+
+            this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL,
+                "displayFullPanel",
+                "displayFullPanel",
+                this.on_settings_changed,
+                null);
+
+            this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL,
+                "enableExperimentalFunctions",
+                "enableExperimentalFunctions",
                 this.on_settings_changed,
                 null);
 
@@ -85,10 +124,10 @@ MyApplet.prototype = {
                 this.on_generic_changed,
                 null);
 
-          this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL,
+            this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL,
                "pausedAt",
                "pausedAt",
-              this.on_generic_changed,
+               this.on_generic_changed,
                null);
 
             this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL,
@@ -156,28 +195,121 @@ MyApplet.prototype = {
     buildContextMenu: function () {
         this._applet_context_menu.removeAll();
 
-        let menuitem = new PopupMenu.PopupMenuItem(_("Start"));
+        // name modifier
+        let section = new PopupMenu.PopupMenuSection();
+        section.actor.set_style('margin: 5px 0; padding: 0 10px;');
+        this._applet_context_menu.addMenuItem(section);
+
+        this._searchEntry = new St.Entry({
+            name: 'menu-search-entry',
+            hint_text: _('Name'),
+            text: this.counterTitle,
+            track_hover: true,
+            can_focus: true
+
+        });
+
+        section.actor.add_actor(this._searchEntry);
+
+        this._searchEntryText = this._searchEntry.clutter_text;
+        this._searchEntryText.connect('key-press-event', (se, prop) => {
+            this.counterTitle = this._searchEntry.get_text();
+            this.updateLoop();
+        });
+
+        // state modifiers
+        let container = new St.BoxLayout();
+        container.set_style('padding: 3px 8px;');
+        this._applet_context_menu.addActor(container);
+
+        let menuitem = new PopupMenu.PopupMenuItem(_("Start   "));
         menuitem.connect('activate', Lang.bind(this, function (event) {
             this.counterStatus = "running";
             this.startTime = this.getCurrentTime();
             this.updateLoop();
         }));
-        this._applet_context_menu.addMenuItem(menuitem);
+        container.add_actor(menuitem.actor);
 
-        menuitem = new PopupMenu.PopupMenuItem(_("Pause"));
+        menuitem = new PopupMenu.PopupMenuItem(_("Pause   "));
         menuitem.connect('activate', Lang.bind(this, function (event) {
             this.counterStatus = "paused";
             this.pausedAt = this.currentCount; // Changed to reduce load on Settings
             this.updateUI();
         }));
-        this._applet_context_menu.addMenuItem(menuitem);
+        container.add_actor(menuitem.actor);
 
-        menuitem = new PopupMenu.PopupMenuItem(_("Reset counter"));
+        menuitem = new PopupMenu.PopupMenuItem(_("Reset   "));
         menuitem.connect('activate', Lang.bind(this, function (event) {
             this.counterStatus = "ready";
             this.updateUI();
         }));
-        this._applet_context_menu.addMenuItem(menuitem);
+        container.add_actor(menuitem.actor);
+
+
+        menuitem = new PopupMenu.PopupMenuItem(_("Continue  "));
+        menuitem.connect('activate', Lang.bind(this, function (event) {
+            if (this.counterStatus == "paused") {
+                this.updateUI();
+                this.counterStatus = "running";
+                this.startTime = this.getCurrentTime() - this.pausedAt; // Fudge start time
+                this.updateLoop();
+            }
+        }));
+        container.add_actor(menuitem.actor);
+
+
+        menuitem = new PopupMenu.PopupMenuItem(_("Continue from Start"));
+        menuitem.connect('activate', Lang.bind(this, function (event) {
+            if (this.counterStatus == "paused") {
+                this.counterStatus = "running";
+                this.updateLoop();
+            }
+        }));
+        container.add_actor(menuitem.actor);
+
+
+
+        if (this.enableExperimentalFunctions) {
+
+/*         Time modifier buttons - possible precursor to mechanism for adding a timer function
+           Currently needs Cinnamon restart to enable these functions
+           as Context menu is not rebuilt 0n-the-fly when it is enabled.
+*/
+           let container2 = new St.BoxLayout();
+           container2.set_style('padding: 5px 20px;');
+           this._applet_context_menu.addActor(container2);
+
+           let button;
+
+           button = new TimeModifierButton(this, '-1h', -60*60);
+           button.actor.set_style('padding: 5px 10px;');
+           container2.add_actor(button.actor);
+
+           button = new TimeModifierButton(this, '-15min', -15*60);
+           button.actor.set_style('padding: 5px 10px;');
+           container2.add_actor(button.actor);
+
+           button = new TimeModifierButton(this, '-5min', -5*60);
+           button.actor.set_style('padding: 5px 10px;');
+           container2.add_actor(button.actor);
+
+           button = new TimeModifierButton(this, '+5min', 5*60);
+           button.actor.set_style('padding: 5px 10px;');
+           container2.add_actor(button.actor);
+
+           button = new TimeModifierButton(this, '+15min', 15*60);
+           button.actor.set_style('padding: 5px 10px;');
+           container2.add_actor(button.actor);
+
+           button = new TimeModifierButton(this, '+1h', 60*60);
+           button.actor.set_style('padding: 5px 10px;');
+           container2.add_actor(button.actor);
+
+        }
+
+/*
+        // other buttons to be removed after testing completed
+        this._applet_context_menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
         menuitem = new PopupMenu.PopupMenuItem(_("If paused, continue counting from now"));
         menuitem.connect('activate', Lang.bind(this, function (event) {
@@ -198,7 +330,7 @@ MyApplet.prototype = {
             }
         }));
         this._applet_context_menu.addMenuItem(menuitem);
-
+*/
         this._applet_context_menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
         // ++ Set up sub menu for Housekeeping and System Items
@@ -235,7 +367,6 @@ MyApplet.prototype = {
 
             let menuitem = new PopupMenu.PopupMenuItem(_("Configure..."));
             menuitem.connect('activate', Lang.bind(this, function (event) {
-//              GLib.spawn_command_line_async('cinnamon-settings applets ' + this.UUID);
                 GLib.spawn_command_line_async(this.settingsCommand);
             }));
             this._applet_context_menu.addMenuItem(menuitem);
@@ -332,38 +463,57 @@ MyApplet.prototype = {
         this.updateLoop();
     },
 
+
+
     // This updates the numerical display in the applet and in the tooltip and background colour of applet
     updateUI: function () {
-        if (this.counterStatus == "running") {
-            this.currentCount = this.getCurrentTime() - this.startTime;
-            this.set_applet_label(this.formatTime(this.currentCount));
-            this.set_applet_tooltip(this.counterTitle + ": " + _("Running for") + " " + this.verboseCount + " - " + _("Click to Pause"));
-              if (this.days > 0) {
-                   this.actor.style_class = 'stopwatch-running-day-exceeded';
-              } else {
-                   this.actor.style_class = 'stopwatch-running';
-              }
-        }
-        if (this.counterStatus == "paused") {
-            this.set_applet_label(this.formatTime(this.pausedAt));
-            if (this.modeContinueCounting) {
-                this.set_applet_tooltip(this.counterTitle + ": " + _("Paused at") + " " + this.verboseCount + " - " + _("Click to Continue Counting"));
-            } else {
-                this.set_applet_tooltip(this.counterTitle + ": " + _("Paused at") + " " + this.verboseCount + " - " + _("Click to Reset"));
-            }
-              if (this.days > 0) {
-                   this.actor.style_class = 'stopwatch-paused-day-exceeded';
-              } else {
-                   this.actor.style_class = 'stopwatch-paused';
-              }
+
+        var label = ""
+        var tooltip = ''
+        var klass = 'stopwatch '
+        if (this.displayFullPanel) {
+             label = this.counterTitle + "\n"
         }
 
-        if (this.counterStatus == "ready") {
-            this.set_applet_tooltip(this.counterTitle + ": " + _("Ready - Click to Start"));
-            this.set_applet_label("00:00");
-            this.actor.style_class = 'stopwatch-ready';
+
+        if (this.counterStatus == 'running') {
+            this.currentCount = this.getCurrentTime() - this.startTime
+            label += this.formatTime(this.currentCount);
+            tooltip = this.counterTitle + ': ' + _('Running for') + ' ' + this.verboseCount + ' - ' + _('Click to Pause');
+
+
+            if (this.days > 0) {
+                klass = ' stopwatch-running-day-exceeded'
+            } else {
+                klass = 'stopwatch stopwatch-running'
+            }
         }
+        else if (this.counterStatus == 'paused') {
+            label += this.formatTime(this.pausedAt)
+
+            if (this.modeContinueCounting) {
+                tooltip = this.counterTitle + ': ' + _('Paused at') + ' ' + this.verboseCount + ' - ' + _('Click to Continue Counting')
+            } else {
+                tooltip = this.counterTitle + ': ' + _('Paused at') + ' ' + this.verboseCount + ' - ' + _('Click to Reset')
+            }
+
+            if (this.days > 0) {
+                klass += 'stopwatch-paused-day-exceeded'
+            } else {
+                klass += 'stopwatch-paused'
+            }
+        }
+        else if (this.counterStatus == 'ready') {
+            label += '00:00'
+            tooltip = this.counterTitle + ': ' + _('Ready - Click to Start')
+            klass = 'stopwatch stopwatch-ready'
+        }
+
+        this.set_applet_tooltip(tooltip)
+        this.set_applet_label(label)
+        this.actor.style_class = klass
     },
+
 
     // This is the loop run at refreshInterval rate to call updateUI() to update the display in the applet and tooltip
     updateLoop: function () {
@@ -432,7 +582,7 @@ function main(metadata, orientation, panelHeight, instance_id) {
         _() function now checks for system translations if a local one not found.
         Based on ideas from @Odyseus, @lestcape and @NikoKrause
 ## 2.1.0
- * CHANGELOG.md added to applet with a symblic link from UUID - CHANGELOG.md is now displayed on Cinnamon Spices web site.
+ * CHANGELOG.md added to applet with a symbolic link from UUID - CHANGELOG.md is now displayed on Cinnamon Spices web site.
  * CHANGELOG.md is a simplified version of the existing changelog.txt
  * Applet updated so CHANGELOG.md is displayed from context
  * README.md in UUID is now symbolic link from UUID
@@ -441,4 +591,13 @@ function main(metadata, orientation, panelHeight, instance_id) {
 ## 2.1.2
  * Update stylesheet to better match Cinnamon 4.0 System Styles - less rounded.
  * Add an initial mechanism to provide persistence for user edits of the stylesheet.
+### 2.2.0
+  * Adds an option in Configure... to display Counter Heading in Panel.
+  * New single line layout for Start, Pause, Reset, Continue and Continue from Start Time in Context Menu
+  * Adds ability to edit Counter Heading in Context menu as well as Configure..
+  * Adds option in Configure... to add experimental functions such as an ability to modify time by buttons in Context (right click) Menu - a possible precursor to a flexible timer function
+  * Implements changes proposed by @100k (Łukasz Dobrowolski)in #2648 and uses code provided by him to implement his suggestions.
+  * Minor changes in stylesheet.css to match the other applets in the suite..
+  * Closes #2648
 */
+
