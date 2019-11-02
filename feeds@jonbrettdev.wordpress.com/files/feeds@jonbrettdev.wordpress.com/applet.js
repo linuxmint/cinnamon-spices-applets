@@ -510,7 +510,7 @@ FeedApplet.prototype = {
         }
 
         // Remove all notifications since they no longer apply
-        for (i in this.feeds){
+        for (let i in this.feeds){
             this._destroyMessage(this.feeds[i].reader);
         }
     },
