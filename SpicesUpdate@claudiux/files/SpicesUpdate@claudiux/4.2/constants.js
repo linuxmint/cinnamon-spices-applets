@@ -10,11 +10,11 @@ const UUID="SpicesUpdate@claudiux";
 
 const HOME_DIR = GLib.get_home_dir();
 
-// ++ Set DEBUG to true to display log messages in ~/.cinnamon/glass.log
-// ++ Set DEBUG to false in production.
-// ++ DEBUG is true only if the DEBUG file is present in this applet directory ($ touch DEBUG)
-//var _debug = Gio.file_new_for_path(HOME_DIR + "/.local/share/cinnamon/applets/" + UUID + "/DEBUG");
-//const DEBUG = _debug.query_exists(null);
+/**
+ * DEBUG:
+ * Returns whether or not the DEBUG file is present in this applet directory ($ touch DEBUG)
+ * Used by the log function above.
+ */
 
 function DEBUG() {
   let _debug = Gio.file_new_for_path(HOME_DIR + "/.local/share/cinnamon/applets/" + UUID + "/DEBUG");
@@ -24,7 +24,6 @@ function DEBUG() {
 const DOWNLOAD_TIME = 10;
 
 let sort = "date";
-global.logError("Comp=" + versionCompare( GLib.getenv('CINNAMON_VERSION') ,"4.3" ).toString());
 if (versionCompare( GLib.getenv('CINNAMON_VERSION') ,"4.3.0" ) >= 0 ) {
   sort = "update";
 }
@@ -95,9 +94,9 @@ const capitalize = (s) => {
 // ++ Useful for logging in .xsession_errors
 /**
  * Usage of log and logError:
- * log("Any message here") to log the message only if DEBUG is set to true.
- * log("Any message here", true) to log the message even if DEBUG is set to false.
- * logError("Any error message") log the error message regardless of the DEBUG value.
+ * log("Any message here") to log the message only if DEBUG() returns true.
+ * log("Any message here", true) to log the message even if DEBUG() returns false.
+ * logError("Any error message") log the error message regardless of the DEBUG() return.
  */
 function log(message, alwaysLog=false) {
   if (DEBUG() || alwaysLog) global.log("\n[" + UUID + "]: " + message + "\n");

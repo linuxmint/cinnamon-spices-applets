@@ -125,8 +125,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
     this.interval = 0;
 
 
-
-    // Be sure the scripts are executable:
+    // To be sure that the scripts will be executable:
     GLib.spawn_command_line_async("bash -c 'cd %s && chmod 755 *.py *.sh'".format(SCRIPTS_DIR));
 
     this.OKtoPopulateSettingsApplets = true;
