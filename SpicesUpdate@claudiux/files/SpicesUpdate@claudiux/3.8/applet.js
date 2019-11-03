@@ -231,8 +231,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
     this.interval = 0;
 
 
-
-    // Be sure the scripts are executable:
+    // To be sure that the scripts will be executable:
     GLib.spawn_command_line_async("bash -c 'cd %s && chmod 755 *.py *.sh'".format(SCRIPTS_DIR));
 
     this.OKtoPopulateSettingsApplets = true;
@@ -806,23 +805,27 @@ class SpicesUpdate extends Applet.TextIconApplet {
     * (true when updates are requested by the user)
   */
   populateSettingsUnprotectedApplets() {
+    let type = "applets";
     if (this.OKtoPopulateSettingsApplets === true) {
       this.OKtoPopulateSettingsApplets = false; // Prevents multiple access to the json config file of SpiceUpdate@claudiux.
       this.unprotectedAppletsDico = {};
       this.unprotectedAppletsList = [];
       // populate this.unprotectedApplets with the this.unprotected_applets elements, removing uninstalled applets:
-      let a, d;
       for (var i=0; i < this.unprotected_applets.length; i++) {
-        a = this.unprotected_applets[i];
-        d = Gio.file_new_for_path("%s/%s".format(DIR_MAP["applets"], a["name"]));
+        let a = this.unprotected_applets[i];
+        let d = Gio.file_new_for_path("%s/%s".format(DIR_MAP[type], a["name"]));
         if (d.query_exists(null)) {
           this.unprotectedAppletsDico[a["name"]] = a["isunprotected"];
+          let metadataFileName = DIR_MAP[type] + "/" + a["name"] + "/metadata.json";
+          if (!a["isunprotected"]) {
+            this._rewrite_metadataFile(metadataFileName, Math.ceil(Date.now()/1000));
+          }
           this.unprotectedAppletsList.push({"name": a["name"], "isunprotected": a["isunprotected"]});
         }
       }
 
       // Are there new applets installed? If there are, then push them in this.unprotectedApplets:
-      let dir = Gio.file_new_for_path(DIR_MAP["applets"]);
+      let dir = Gio.file_new_for_path(DIR_MAP[type]);
       if (dir.query_exists(null)) {
         let children = dir.enumerate_children('standard::name,standard::type', Gio.FileQueryInfoFlags.NONE, null);
         let info, type;
@@ -834,7 +837,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
             if (this.unprotectedAppletsDico[name] === undefined) {
               this.unprotectedAppletsList.push({"name": name, "isunprotected": true});
               this.unprotectedAppletsDico[name] = {"name": name, "isunprotected": true};
-              this._get_last_edited_from_metadata("applets", name);
+              this._get_last_edited_from_metadata(type, name);
             }
           }
         }
@@ -844,23 +847,27 @@ class SpicesUpdate extends Applet.TextIconApplet {
   }; // End of populateSettingsUnprotectedApplets
 
   populateSettingsUnprotectedDesklets() {
+    let type = "desklets";
     if (this.OKtoPopulateSettingsDesklets === true) {
       this.OKtoPopulateSettingsDesklets = false;
       this.unprotectedDeskletsDico = {};
       this.unprotectedDeskletsList = [];
       // populate this.unprotectedDesklets with the this.unprotected_desklets elements:
-      let a, d;
       for (var i=0; i < this.unprotected_desklets.length; i++) {
-        a = this.unprotected_desklets[i];
-        d = Gio.file_new_for_path("%s/%s".format(DIR_MAP["desklets"], a["name"]));
+        let a = this.unprotected_desklets[i];
+        let d = Gio.file_new_for_path("%s/%s".format(DIR_MAP[type], a["name"]));
         if (d.query_exists(null)) {
           this.unprotectedDeskletsDico[a["name"]] = a["isunprotected"];
+          let metadataFileName = DIR_MAP[type] + "/" + a["name"] + "/metadata.json";
+          if (!a["isunprotected"]) {
+            this._rewrite_metadataFile(metadataFileName, Math.ceil(Date.now()/1000));
+          }
           this.unprotectedDeskletsList.push({"name": a["name"], "isunprotected": a["isunprotected"]});
         }
       }
 
       // Are there new desklets installed? If there are, then push them in this.unprotectedDesklets:
-      let dir = Gio.file_new_for_path(DIR_MAP["desklets"]);
+      let dir = Gio.file_new_for_path(DIR_MAP[type]);
       if (dir.query_exists(null)) {
         let children = dir.enumerate_children('standard::name,standard::type', Gio.FileQueryInfoFlags.NONE, null);
         let info, type;
@@ -872,7 +879,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
             if (this.unprotectedDeskletsDico[name] === undefined) {
               this.unprotectedDeskletsList.push({"name": name, "isunprotected": true});
               this.unprotectedDeskletsDico[name] = {"name": name, "isunprotected": true};
-              this._get_last_edited_from_metadata("desklets", name);
+              this._get_last_edited_from_metadata(type, name);
             }
           }
         }
@@ -882,23 +889,27 @@ class SpicesUpdate extends Applet.TextIconApplet {
   }; // End of populateSettingsUnprotectedDesklets
 
   populateSettingsUnprotectedExtensions() {
+    let type = "extensions";
     if (this.OKtoPopulateSettingsExtensions === true) {
       this.OKtoPopulateSettingsExtensions = false;
       this.unprotectedExtensionsDico = {};
       this.unprotectedExtensionsList = [];
       // populate this.unprotectedExtensions with the this.unprotected_extensions elements:
-      let a, d;
       for (var i=0; i < this.unprotected_extensions.length; i++) {
-        a = this.unprotected_extensions[i];
-        d = Gio.file_new_for_path("%s/%s".format(DIR_MAP["extensions"], a["name"]));
+        let a = this.unprotected_extensions[i];
+        let d = Gio.file_new_for_path("%s/%s".format(DIR_MAP[type], a["name"]));
         if (d.query_exists(null)) {
           this.unprotectedExtensionsDico[a["name"]] = a["isunprotected"];
+          let metadataFileName = DIR_MAP[type] + "/" + a["name"] + "/metadata.json";
+          if (!a["isunprotected"]) {
+            this._rewrite_metadataFile(metadataFileName, Math.ceil(Date.now()/1000));
+          }
           this.unprotectedExtensionsList.push({"name": a["name"], "isunprotected": a["isunprotected"]});
         }
       }
 
       // Are there new extensions installed? If there are, then push them in this.unprotectedExtensions:
-      let dir = Gio.file_new_for_path(DIR_MAP["extensions"]);
+      let dir = Gio.file_new_for_path(DIR_MAP[type]);
       if (dir.query_exists(null)) {
         let children = dir.enumerate_children('standard::name,standard::type', Gio.FileQueryInfoFlags.NONE, null);
         let info, type;
@@ -910,7 +921,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
             if (this.unprotectedExtensionsDico[name] === undefined) {
               this.unprotectedExtensionsList.push({"name": name, "isunprotected": true});
               this.unprotectedExtensionsDico[name] = {"name": name, "isunprotected": true};
-              this._get_last_edited_from_metadata("extensions", name);
+              this._get_last_edited_from_metadata(type, name);
             }
           }
         }
@@ -920,23 +931,27 @@ class SpicesUpdate extends Applet.TextIconApplet {
   }; // End of populateSettingsUnprotectedExtensions
 
   populateSettingsUnprotectedThemes() {
+    let type = "themes";
     if (this.OKtoPopulateSettingsThemes === true) {
       this.OKtoPopulateSettingsThemes = false;
       this.unprotectedThemesDico = {};
       this.unprotectedThemesList = [];
       // populate this.unprotectedThemes with the this.unprotected_themes elements:
-      let a, d;
       for (var i=0; i < this.unprotected_themes.length; i++) {
-        a = this.unprotected_themes[i];
-        d = Gio.file_new_for_path("%s/%s".format(DIR_MAP["themes"], a["name"]));
+        let a = this.unprotected_themes[i];
+        let d = Gio.file_new_for_path("%s/%s".format(DIR_MAP[type], a["name"]));
         if (d.query_exists(null)) {
           this.unprotectedThemesDico[a["name"]] = a["isunprotected"];
+          let metadataFileName = DIR_MAP[type] + "/" + a["name"] + "/metadata.json";
+          if (!a["isunprotected"]) {
+            this._rewrite_metadataFile(metadataFileName, Math.ceil(Date.now()/1000));
+          }
           this.unprotectedThemesList.push({"name": a["name"], "isunprotected": a["isunprotected"]});
         }
       }
 
       // Are there new themes installed? If there are, then push them in this.unprotectedThemes:
-      let dir = Gio.file_new_for_path(DIR_MAP["themes"]);
+      let dir = Gio.file_new_for_path(DIR_MAP[type]);
       if (dir.query_exists(null)) {
         let children = dir.enumerate_children('standard::name,standard::type', Gio.FileQueryInfoFlags.NONE, null);
         let info, type;
@@ -948,7 +963,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
             if (this.unprotectedThemesDico[name] === undefined) {
               this.unprotectedThemesList.push({"name": name, "isunprotected": true});
               this.unprotectedThemesDico[name] = {"name": name, "isunprotected": true};
-              this._get_last_edited_from_metadata("themes", name);
+              this._get_last_edited_from_metadata(type, name);
             }
           }
         }
@@ -1233,6 +1248,8 @@ class SpicesUpdate extends Applet.TextIconApplet {
       let file, file_time;
       while ((info = children.next_file(null)) != null) {
         file = children.get_child(info);
+        if (file.get_basename() === "metadata.json") continue; // ignore metadata.json file
+
         file_time = file.query_info('time::modified', Gio.FileQueryInfoFlags.NONE, null).get_modification_time().tv_sec;
         if (file_time > latest_time) {
           latest_time = file_time;
