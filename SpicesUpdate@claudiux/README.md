@@ -26,14 +26,14 @@ Fully supported by the author, under continuing development and in continuous us
 From version v3.0.0 ~ 20190808:
 
   * Spices Update is compatible with Cinnamon 2.8 -> 4.2 (Mint 17.3 -> 19.2).
-   * From Cinnamon 3.8 to 4.2 (Mint 19 -> 19.2): **Perfectly functional, as usual.**
-   * From Cinnamon 2.8 to 3.6 (Mint 17.3 -> 18.3): Some features are reduced:
-    * The Spices configuration window does not open on the second tab, only on the first one. You will need to click on the second tab and select the sort by date yourself.
-    * The Settings window of this applet does not contain any tabs.
-    * In the settings of this applet, you can not access Spices lists to disable their monitoring. Therefore, all installed Spices are monitored.
-    * The script `generate_mo.sh` (in the `scripts` folder) allows you to install all available translations. Restart Cinnamon after execution.
-    * If the `Symbola_Hinted` font can not be automatically installed, then place you into the `fonts/symbola` folder and double-click on the `Symbola_Hinted.ttf` file. Install it with the just opened `gnome-font-viewer`.
-    * Cinnamon 2.8: The number of changes does not appear next to the Spices Update icon.
+  * From Cinnamon 3.8 to 4.2 (Mint 19 -> 19.2): **Perfectly functional, as usual.**
+  * From Cinnamon 2.8 to 3.6 (Mint 17.3 -> 18.3): Some features are reduced:
+   * The Spices configuration window does not open on the second tab, but on the first one. You will need to click on the second tab and select the sort by date yourself.
+   * The Settings window of this applet does not contain any tabs.
+   * In the settings of this applet, you can not access Spices lists to disable their monitoring. Therefore, all installed Spices are monitored.
+   * The script `generate_mo.sh` (in the `scripts` folder) allows you to install all available translations. Restart Cinnamon after execution.
+   * If the `Symbola_Hinted` font can not be automatically installed, then place you into the `fonts/symbola` folder and double-click on the `Symbola_Hinted.ttf` file. Install it with the just opened `gnome-font-viewer`.
+   * Cinnamon 2.8: The number of changes does not appear next to the Spices Update icon.
 
 ## Requirements
 
