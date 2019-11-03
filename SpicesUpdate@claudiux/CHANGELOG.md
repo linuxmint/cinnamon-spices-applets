@@ -2,7 +2,7 @@
   * Compatible with Cinnamon 4.4.
   * For Cinnamon 4.4: Uses the new sort by 'update' in the Download tab of System Settings for Applets, Desklets,
   Extensions and Themes. This sort shows the upgradable Spices first, then acts as the sort by date.
-  * For Cinnamon 4.2 and greater: Spices you do not want to upgrade do not anymore appear as upgradable in the Download
+  * For Cinnamon 3.8 and greater: Spices you do not want to upgrade do not anymore appear as upgradable in the Download
   tab of System Settings for Applets, Desklets, Extensions and Themes, even if updates are available for them. This
   avoids unfortunate updates and allows to confidently use the 'Update All' button.
 
