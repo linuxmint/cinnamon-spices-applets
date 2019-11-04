@@ -15,6 +15,15 @@ const AppletDir = imports.ui.appletManager.appletMeta[UUID].path;
 const Gtk = imports.gi.Gtk;
 const Settings = imports.ui.settings;
 
+/**
+ * DEBUG:
+ * Returns whether or not the DEBUG file is present in this applet directory (which can be created by the 'touch DEBUG' command).
+ */
+function DEBUG() {
+  let _debug = Gio.file_new_for_path(AppletDir + "/DEBUG");
+  return _debug.query_exists(null);
+};
+
 Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
 
 function _(str) {
@@ -39,7 +48,7 @@ MyApplet.prototype = {
 
     this.set_applet_tooltip(_("SSH Launcher"));
     // Settings
-    this._customCommand;
+    this._customCommand = "";
 
     try {
       this.settings = new Settings.AppletSettings(this, UUID, instance_id);
@@ -219,7 +228,7 @@ MyApplet.prototype = {
     command += (" ssh " + this.buildSshFlags() + hostname);
 
     Util.spawnCommandLine(command);
-    global.log("Terminal opened with command '" + command + "'");
+    if (DEBUG()) global.log("Terminal opened with command '" + command + "'");
     this.sendNotification(_("SSH Launcher"), _("Connection opened to ") + hostname + _(" using ") + terminal);
   },
 
