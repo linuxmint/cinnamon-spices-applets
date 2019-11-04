@@ -18,7 +18,8 @@ const Util = imports.misc.util; // Needed for spawnCommandLine()
 const Extension = imports.ui.extension; // Needed to reload applets
 const Json = imports.gi.Json;
 const Soup = imports.gi.Soup;
-const Signals = imports.signals;
+//const Signals = imports.signals;
+const {SignalManager} = imports.misc.signalManager;
 const Cinnamon = imports.gi.Cinnamon; // Needed to read/write into a file
 
 const {
@@ -123,6 +124,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
     this.angle = 0;
     this.do_rotation = false;
     this.interval = 0;
+    this.ui_scale = global.ui_scale;
 
 
     // To be sure that the scripts will be executable:
@@ -444,6 +446,27 @@ class SpicesUpdate extends Applet.TextIconApplet {
     this.menuManager.addMenu(this.menu);
 
     // Badge
+    this.badge = null;
+    this.define_badge();
+    this.signals = new SignalManager(null);
+    this.signals.connect(global, 'scale-changed', () => this.updateUI());
+
+    this.details_by_uuid = {};
+    this.notifications = new Array();
+    this.testblink = [];
+    this.forceRefresh = false;
+    this.refresh_requested = false;
+    this.applet_running = true;
+    this.loopId = 0;
+    this.first_loop = true; // To do nothing for 1 minute.
+    this.on_settings_changed();
+    // Run the loop !
+    this.iteration = 0;
+    this.updateLoop();
+  }; // End of constructor
+
+  define_badge() {
+    if (this.badge !== null) this.actor.remove_child(this.badge);
     this.badge = new St.BoxLayout({
       style_class: 'SU-badge',
       important: true,
@@ -468,20 +491,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
       y_align: St.Align.START,
     });
     this.actor.add_child(this.badge);
-
-    this.details_by_uuid = {};
-    this.notifications = new Array();
-    this.testblink = [];
-    this.forceRefresh = false;
-    this.refresh_requested = false;
-    this.applet_running = true;
-    this.loopId = 0;
-    this.first_loop = true; // To do nothing for 1 minute.
-    this.on_settings_changed();
-    // Run the loop !
-    this.iteration = 0;
-    this.updateLoop();
-  }; // End of constructor
+  }; // End of define_badge
 
   /** get_translated_help_file()
    * Returns the help file in html format
@@ -1659,7 +1669,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
 
   icon_rotate() {
     this.angle = Math.round(this.angle + 3) % 360;
-    let size = Math.round(this.getPanelIconSize(St.IconType.SYMBOLIC)/global.ui_scale);
+    let size = Math.round(this.getPanelIconSize(St.IconType.SYMBOLIC) * global.ui_scale);
     this.img_icon = getImageAtScale(this.img_path, size, size);
     this.img_icon.set_pivot_point(0.5, 0.5);
     this.img_icon.set_rotation_angle(Clutter.RotateAxis.Z_AXIS, this.angle);
@@ -1673,6 +1683,10 @@ class SpicesUpdate extends Applet.TextIconApplet {
 
   // This updates the display of the applet and the tooltip
   updateUI() {
+    if (this.ui_scale !== global.ui_scale) {
+      this.define_badge();
+      this.ui_scale = global.ui_scale;
+    }
     if (this.do_rotation) {
       if (this.interval === 0)
         this.interval = setInterval(() => this.icon_rotate(), 10);
