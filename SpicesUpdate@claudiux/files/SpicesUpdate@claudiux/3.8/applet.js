@@ -1729,7 +1729,8 @@ class SpicesUpdate extends Applet.TextIconApplet {
   icon_rotate() {
     this.angle = Math.round(this.angle + 3) % 360;
     let size = ((this._panelHeight / 25) * 1.14 * 11.5) * global.ui_scale;
-    if (this.isHorizontal === false) size = 0.8 * size;
+    if (this.isHorizontal === false) size = 0.8 * size / global.ui_scale;
+    else size = size / global.ui_scale;
     this.img_icon = getImageAtScale(this.img_path, size, size);
     this.img_icon.set_pivot_point(0.5, 0.5);
     this.img_icon.set_rotation_angle(Clutter.RotateAxis.Z_AXIS, this.angle);
