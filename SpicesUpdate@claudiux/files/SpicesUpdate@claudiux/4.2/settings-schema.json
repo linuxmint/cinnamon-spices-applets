@@ -164,7 +164,7 @@
     "tooltip": "If new applets do not concern you, uncheck this box."
   },
   "exp_applets": {
-    "type" : "textview",
+    "type": "textview",
     "default": "",
     "description": "",
     "height": 60
@@ -196,7 +196,9 @@
         "type": "boolean"
       }
     ],
-    "default": []
+    "default": [
+
+    ]
   },
   "btn_cs_applets": {
     "type": "button",
@@ -217,7 +219,7 @@
     "tooltip": "If new desklets do not concern you, uncheck this box."
   },
   "exp_desklets": {
-    "type" : "textview",
+    "type": "textview",
     "default": "",
     "description": "",
     "height": 60
@@ -249,7 +251,9 @@
         "type": "boolean"
       }
     ],
-    "default": []
+    "default": [
+
+    ]
   },
   "btn_cs_desklets": {
     "type": "button",
@@ -270,7 +274,7 @@
     "tooltip": "If new extensions do not concern you, uncheck this box."
   },
   "exp_extensions": {
-    "type" : "textview",
+    "type": "textview",
     "default": "",
     "description": "",
     "height": 60
@@ -302,7 +306,9 @@
         "type": "boolean"
       }
     ],
-    "default": []
+    "default": [
+
+    ]
   },
   "btn_cs_extensions": {
     "type": "button",
@@ -323,7 +329,7 @@
     "tooltip": "If new themes do not concern you, uncheck this box."
   },
   "exp_themes": {
-    "type" : "textview",
+    "type": "textview",
     "default": "",
     "description": "",
     "height": 60
@@ -355,7 +361,9 @@
         "type": "boolean"
       }
     ],
-    "default": []
+    "default": [
+
+    ]
   },
   "btn_cs_themes": {
     "type": "button",

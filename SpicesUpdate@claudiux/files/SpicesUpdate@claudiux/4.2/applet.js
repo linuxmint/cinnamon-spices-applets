@@ -895,10 +895,9 @@ class SpicesUpdate extends Applet.TextIconApplet {
       this.unprotectedThemesDico = {};
       this.unprotectedThemesList = [];
       // populate this.unprotectedThemes with the this.unprotected_themes elements:
-      let a, d;
       for (var i=0; i < this.unprotected_themes.length; i++) {
-        a = this.unprotected_themes[i];
-        d = Gio.file_new_for_path("%s/%s".format(DIR_MAP[type], a["name"]));
+        let a = this.unprotected_themes[i];
+        let d = Gio.file_new_for_path("%s/%s".format(DIR_MAP[type], a["name"]));
         if (d.query_exists(null)) {
           this.unprotectedThemesDico[a["name"]] = a["isunprotected"];
           let metadataFileName = DIR_MAP[type] + "/" + a["name"] + "/metadata.json";
