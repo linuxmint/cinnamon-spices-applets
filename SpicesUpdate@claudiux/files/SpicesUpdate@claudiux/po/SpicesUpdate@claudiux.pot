@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-22 02:53+0200\n"
+"POT-Creation-Date: 2019-11-05 01:43+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,16 +18,16 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #. metadata.json->name
-#: 4.2/applet.js:90 4.2/applet.js:118 4.2/applet.js:531 4.2/applet.js:610
-#: 4.2/applet.js:974 4.2/applet.js:1516 3.8/applet.js:171 3.8/applet.js:184
-#: 3.8/applet.js:523 3.8/applet.js:602 3.8/applet.js:970 3.8/applet.js:1525
+#: 4.2/applet.js:91 4.2/applet.js:119 4.2/applet.js:540 4.2/applet.js:621
+#: 4.2/applet.js:1000 4.2/applet.js:1544 3.8/applet.js:212 3.8/applet.js:242
+#: 3.8/applet.js:664 3.8/applet.js:743 3.8/applet.js:1171 3.8/applet.js:1730
 #: 2.8/applet.js:171 2.8/applet.js:192 2.8/applet.js:555 2.8/applet.js:1003
 #: 2.8/applet.js:1581
 msgid "Spices Update"
 msgstr ""
 
-#: 4.2/applet.js:119 4.2/applet.js:1683 4.2/applet.js:1689 3.8/applet.js:1651
-#: 3.8/applet.js:1657 2.8/applet.js:1708 2.8/applet.js:1714
+#: 4.2/applet.js:120 4.2/applet.js:1715 4.2/applet.js:1721 3.8/applet.js:243
+#: 3.8/applet.js:1904 3.8/applet.js:1910 2.8/applet.js:1708 2.8/applet.js:1714
 msgid "Middle-Click to Refresh"
 msgstr ""
 
@@ -39,212 +39,257 @@ msgstr ""
 #. 3.8->settings-schema.json->btn_refresh_desklets->description
 #. 3.8->settings-schema.json->btn_refresh_extensions->description
 #. 3.8->settings-schema.json->btn_refresh_themes->description
-#: 4.2/applet.js:549 4.2/applet.js:1524 3.8/applet.js:541 3.8/applet.js:1533
+#: 4.2/applet.js:558 4.2/applet.js:1552 3.8/applet.js:682 3.8/applet.js:1738
 #: 2.8/applet.js:574 2.8/applet.js:1589
 msgid "Refresh"
 msgstr ""
 
-#: 4.2/applet.js:665 3.8/applet.js:696 2.8/applet.js:729
+#: 4.2/applet.js:676 3.8/applet.js:847 2.8/applet.js:729
 msgid "With details here, when available."
 msgstr ""
 
-#: 4.2/applet.js:666 4.2/constants.js:110 3.8/applet.js:105 3.8/applet.js:697
+#: 4.2/applet.js:677 4.2/constants.js:119 3.8/applet.js:146 3.8/applet.js:848
 #: 2.8/applet.js:105 2.8/applet.js:730
 msgid "One applet needs update:"
 msgstr ""
 
-#: 4.2/applet.js:666 3.8/applet.js:697 2.8/applet.js:730
+#: 4.2/applet.js:677 3.8/applet.js:848 2.8/applet.js:730
 msgid "Do not matter. This is a FAKE notification, just for the test."
 msgstr ""
 
-#: 4.2/applet.js:974 3.8/applet.js:970 2.8/applet.js:1003
+#: 4.2/applet.js:1000 3.8/applet.js:1171 2.8/applet.js:1003
 msgid "is fully functional."
 msgstr ""
 
-#: 4.2/applet.js:975 3.8/applet.js:971 2.8/applet.js:1004
+#: 4.2/applet.js:1001 3.8/applet.js:1172 2.8/applet.js:1004
 msgid "All dependencies are installed"
 msgstr ""
 
-#: 4.2/applet.js:997 3.8/applet.js:995 2.8/applet.js:1028
+#: 4.2/applet.js:1023 3.8/applet.js:1196 2.8/applet.js:1028
 msgid ""
 "You appear to be missing some of the programs required for this applet to "
 "have all its features."
 msgstr ""
 
-#: 4.2/applet.js:998 3.8/applet.js:996 2.8/applet.js:1029
+#: 4.2/applet.js:1024 3.8/applet.js:1197 2.8/applet.js:1029
 msgid "Please execute, in the just opened terminal, the commands:"
 msgstr ""
 
-#: 4.2/applet.js:999 3.8/applet.js:997 2.8/applet.js:1030
+#: 4.2/applet.js:1025 3.8/applet.js:1198 2.8/applet.js:1030
 msgid "Some dependencies are not installed!"
 msgstr ""
 
-#: 4.2/applet.js:1363 3.8/applet.js:1368 2.8/applet.js:1422
+#: 4.2/applet.js:1391 3.8/applet.js:1573 2.8/applet.js:1422
 msgid "(Description unavailable)"
 msgstr ""
 
-#: 4.2/applet.js:1546 3.8/applet.js:1556 2.8/applet.js:1613
+#: 4.2/applet.js:1574 3.8/applet.js:1761 2.8/applet.js:1613
 msgid "Forget new Spices"
 msgstr ""
 
-#: 4.2/applet.js:1552 3.8/applet.js:1562 2.8/applet.js:1619
+#: 4.2/applet.js:1580 3.8/applet.js:1767 2.8/applet.js:1619
 msgid "Open useful Cinnamon Settings"
 msgstr ""
 
-#: 4.2/applet.js:1559 3.8/applet.js:1569 2.8/applet.js:1626
+#: 4.2/applet.js:1587 3.8/applet.js:1774 2.8/applet.js:1626
 msgid "Configure"
 msgstr ""
 
-#: 4.2/applet.js:1574 3.8/applet.js:1584 2.8/applet.js:1641
+#: 4.2/applet.js:1602 3.8/applet.js:1789 2.8/applet.js:1641
 msgid "Help"
 msgstr ""
 
-#: 4.2/applet.js:1674 3.8/applet.js:1642 2.8/applet.js:1699
+#: 4.2/applet.js:1706 3.8/applet.js:1895 2.8/applet.js:1699
 msgid "Middle-Click to open useful Cinnamon Settings"
 msgstr ""
 
-#: 4.2/constants.js:101 3.8/applet.js:96 2.8/applet.js:96
+#: 4.2/constants.js:110 3.8/applet.js:137 2.8/applet.js:96
 msgid "Applet"
 msgstr ""
 
-#: 4.2/constants.js:102 3.8/applet.js:97 2.8/applet.js:97
+#: 4.2/constants.js:111 3.8/applet.js:138 2.8/applet.js:97
 msgid "Desklet"
 msgstr ""
 
-#: 4.2/constants.js:103 3.8/applet.js:98 2.8/applet.js:98
+#: 4.2/constants.js:112 3.8/applet.js:139 2.8/applet.js:98
 msgid "Extension"
 msgstr ""
 
-#: 4.2/constants.js:104 3.8/applet.js:99 2.8/applet.js:99
+#: 4.2/constants.js:113 3.8/applet.js:140 2.8/applet.js:99
 msgid "Theme"
 msgstr ""
 
 #. 4.2->settings-schema.json->Applets->title
 #. 3.8->settings-schema.json->Applets->title
 #. 2.8->settings-schema.json->head1->description
-#: 4.2/constants.js:105 3.8/applet.js:100 2.8/applet.js:100
+#: 4.2/constants.js:114 3.8/applet.js:141 2.8/applet.js:100
 msgid "Applets"
 msgstr ""
 
 #. 4.2->settings-schema.json->Desklets->title
 #. 3.8->settings-schema.json->Desklets->title
 #. 2.8->settings-schema.json->head2->description
-#: 4.2/constants.js:106 3.8/applet.js:101 2.8/applet.js:101
+#: 4.2/constants.js:115 3.8/applet.js:142 2.8/applet.js:101
 msgid "Desklets"
 msgstr ""
 
 #. 4.2->settings-schema.json->Extensions->title
 #. 3.8->settings-schema.json->Extensions->title
 #. 2.8->settings-schema.json->head3->description
-#: 4.2/constants.js:107 3.8/applet.js:102 2.8/applet.js:102
+#: 4.2/constants.js:116 3.8/applet.js:143 2.8/applet.js:102
 msgid "Extensions"
 msgstr ""
 
 #. 4.2->settings-schema.json->Themes->title
 #. 3.8->settings-schema.json->Themes->title
 #. 2.8->settings-schema.json->head4->description
-#: 4.2/constants.js:108 3.8/applet.js:103 2.8/applet.js:103
+#: 4.2/constants.js:117 3.8/applet.js:144 2.8/applet.js:103
 msgid "Themes"
 msgstr ""
 
-#: 4.2/constants.js:109 3.8/applet.js:104 2.8/applet.js:104
+#: 4.2/constants.js:118 3.8/applet.js:145 2.8/applet.js:104
 msgid "One desklet needs update:"
 msgstr ""
 
-#: 4.2/constants.js:111 3.8/applet.js:106 2.8/applet.js:106
+#: 4.2/constants.js:120 3.8/applet.js:147 2.8/applet.js:106
 msgid "One extension needs update:"
 msgstr ""
 
-#: 4.2/constants.js:112 3.8/applet.js:107 2.8/applet.js:107
+#: 4.2/constants.js:121 3.8/applet.js:148 2.8/applet.js:107
 msgid "One theme needs update:"
 msgstr ""
 
-#: 4.2/constants.js:113 3.8/applet.js:108 2.8/applet.js:108
+#: 4.2/constants.js:122 3.8/applet.js:149 2.8/applet.js:108
 msgid "Some desklets need update:"
 msgstr ""
 
-#: 4.2/constants.js:114 3.8/applet.js:109 2.8/applet.js:109
+#: 4.2/constants.js:123 3.8/applet.js:150 2.8/applet.js:109
 msgid "Some applets need update:"
 msgstr ""
 
-#: 4.2/constants.js:115 3.8/applet.js:110 2.8/applet.js:110
+#: 4.2/constants.js:124 3.8/applet.js:151 2.8/applet.js:110
 msgid "Some extensions need update:"
 msgstr ""
 
-#: 4.2/constants.js:116 3.8/applet.js:111 2.8/applet.js:111
+#: 4.2/constants.js:125 3.8/applet.js:152 2.8/applet.js:111
 msgid "Some themes need update:"
 msgstr ""
 
-#: 4.2/constants.js:117 3.8/applet.js:112 2.8/applet.js:112
+#: 4.2/constants.js:126 3.8/applet.js:153 2.8/applet.js:112
 msgid "New desklet available:"
 msgstr ""
 
-#: 4.2/constants.js:118 3.8/applet.js:113 2.8/applet.js:113
+#: 4.2/constants.js:127 3.8/applet.js:154 2.8/applet.js:113
 msgid "New applet available:"
 msgstr ""
 
-#: 4.2/constants.js:119 3.8/applet.js:114 2.8/applet.js:114
+#: 4.2/constants.js:128 3.8/applet.js:155 2.8/applet.js:114
 msgid "New extension available:"
 msgstr ""
 
-#: 4.2/constants.js:120 3.8/applet.js:115 2.8/applet.js:115
+#: 4.2/constants.js:129 3.8/applet.js:156 2.8/applet.js:115
 msgid "New theme available:"
 msgstr ""
 
-#: 4.2/constants.js:121 3.8/applet.js:116 2.8/applet.js:116
+#: 4.2/constants.js:130 3.8/applet.js:157 2.8/applet.js:116
 msgid "New desklets available:"
 msgstr ""
 
-#: 4.2/constants.js:122 3.8/applet.js:117 2.8/applet.js:117
+#: 4.2/constants.js:131 3.8/applet.js:158 2.8/applet.js:117
 msgid "New applets available:"
 msgstr ""
 
-#: 4.2/constants.js:123 3.8/applet.js:118 2.8/applet.js:118
+#: 4.2/constants.js:132 3.8/applet.js:159 2.8/applet.js:118
 msgid "New extensions available:"
 msgstr ""
 
-#: 4.2/constants.js:124 3.8/applet.js:119 2.8/applet.js:119
+#: 4.2/constants.js:133 3.8/applet.js:160 2.8/applet.js:119
 msgid "New themes available:"
 msgstr ""
 
-#: 4.2/constants.js:128
+#: 4.2/constants.js:137
 msgid "If you do not want an applet to be checked, uncheck its first box."
 msgstr ""
 
-#: 4.2/constants.js:129
+#: 4.2/constants.js:138
 msgid "If you do not want a desklet to be checked, uncheck its first box."
 msgstr ""
 
-#: 4.2/constants.js:130
+#: 4.2/constants.js:139
 msgid "If you do not want an extension to be checked, uncheck its first box."
 msgstr ""
 
-#: 4.2/constants.js:131
+#: 4.2/constants.js:140
 msgid "If you do not want a theme to be checked, uncheck its first box."
 msgstr ""
 
-#: 4.2/constants.js:135
+#: 4.2/constants.js:144
 msgid ""
 "If you want to get the latest version of an applet now, check both boxes."
 msgstr ""
 
-#: 4.2/constants.js:136
+#: 4.2/constants.js:145
 msgid ""
 "If you want to get the latest version of a desklet now, check both boxes."
 msgstr ""
 
-#: 4.2/constants.js:137
+#: 4.2/constants.js:146
 msgid ""
 "If you want to get the latest version of an extension now, check both boxes."
 msgstr ""
 
-#: 4.2/constants.js:138
+#: 4.2/constants.js:147
 msgid ""
 "If you want to get the latest version of a theme now, check both boxes."
 msgstr ""
 
-#: 4.2/constants.js:141
+#: 4.2/constants.js:150 3.8/applet.js:93
 msgid "When all your choices are made, click the Refresh button."
+msgstr ""
+
+#: 3.8/applet.js:80
+msgid ""
+"If you do not want an applet to be checked, set its first switch to FALSE."
+msgstr ""
+
+#: 3.8/applet.js:81
+msgid ""
+"If you do not want a desklet to be checked, set its first switch to FALSE."
+msgstr ""
+
+#: 3.8/applet.js:82
+msgid ""
+"If you do not want an extension to be checked, set its first switch to "
+"FALSE."
+msgstr ""
+
+#: 3.8/applet.js:83
+msgid ""
+"If you do not want a theme to be checked, set its first switch to FALSE."
+msgstr ""
+
+#: 3.8/applet.js:87
+msgid ""
+"If you want to get the latest version of an applet now, set its two switches"
+" to TRUE."
+msgstr ""
+
+#: 3.8/applet.js:88
+msgid ""
+"If you want to get the latest version of a desklet now, set its two switches"
+" to TRUE."
+msgstr ""
+
+#: 3.8/applet.js:89
+msgid ""
+"If you want to get the latest version of an extension now, set its two "
+"switches to TRUE."
+msgstr ""
+
+#: 3.8/applet.js:90
+msgid ""
+"If you want to get the latest version of a theme now, set its two switches "
+"to TRUE."
 msgstr ""
 
 #. metadata.json->description
@@ -345,6 +390,10 @@ msgstr ""
 #. 4.2->settings-schema.json->unprotected_desklets->columns->title
 #. 4.2->settings-schema.json->unprotected_extensions->columns->title
 #. 4.2->settings-schema.json->unprotected_themes->columns->title
+#. 3.8->settings-schema.json->unprotected_applets->columns->title
+#. 3.8->settings-schema.json->unprotected_desklets->columns->title
+#. 3.8->settings-schema.json->unprotected_extensions->columns->title
+#. 3.8->settings-schema.json->unprotected_themes->columns->title
 msgid "Get the latest version now"
 msgstr ""
 
@@ -635,20 +684,4 @@ msgstr ""
 msgid ""
 "By checking this box, as long as nothing is to report the icon of Spices "
 "Update does not appear on the panel."
-msgstr ""
-
-#. 3.8->settings-schema.json->unprotected_applets->tooltip
-msgid "If you do not want an applet to be checked, set it to FALSE."
-msgstr ""
-
-#. 3.8->settings-schema.json->unprotected_desklets->tooltip
-msgid "If you do not want a desklet to be checked, set it to FALSE."
-msgstr ""
-
-#. 3.8->settings-schema.json->unprotected_extensions->tooltip
-msgid "If you do not want an extension to be checked, set it to FALSE."
-msgstr ""
-
-#. 3.8->settings-schema.json->unprotected_themes->tooltip
-msgid "If you do not want a theme to be checked, set it to FALSE."
 msgstr ""
