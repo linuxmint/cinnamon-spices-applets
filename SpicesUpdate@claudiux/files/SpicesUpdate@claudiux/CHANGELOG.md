@@ -1,3 +1,14 @@
+### v5.0.0~20191105
+
+Many new features and improvements.
+
+  * Compatible with Cinnamon 4.4.
+  * For Cinnamon 4.4: Uses the new sort by 'Upgradable' in the Download tab of System Settings for Applets, Desklets, Extensions and Themes. This sort shows the upgradable Spices first, then acts as the sort by date. Thanks to Clément Lefebvre for embedding my code in Cinnamon 4.4.
+  * Adds for Cinnamon 3.8 and 4.0 the ability, already present for Cinnamon 4.2, to renew the download of the latest version of a Spice.
+  * For Cinnamon 3.8 and greater:
+    * Spices you do not want to upgrade (as you defined in this applet's Settings) do not anymore appear as upgradable in the Download tab of System Settings for Applets, Desklets, Extensions and Themes, even if updates are available for them. This avoids unfortunate updates and allows to confidently use the 'Update All' button.
+  * Fixes icon size bug in Hi-DPI mode.
+
 ### v4.5.0~20191028
   * Animated icon during refresh.
     * For Cinnamon 3.8 and greater.
