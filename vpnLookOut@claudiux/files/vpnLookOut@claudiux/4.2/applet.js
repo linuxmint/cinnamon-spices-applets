@@ -13,6 +13,7 @@ const PopupMenu = imports.ui.popupMenu; // ++ Needed for menus
 const Lang = imports.lang; //  ++ Needed for menus
 const GLib = imports.gi.GLib; // ++ Needed for starting programs and translations
 const Gio = imports.gi.Gio; // Needed for file infos
+const Gtk = imports.gi.Gtk;
 const Mainloop = imports.mainloop; // Needed for timer update loop
 //const ModalDialog = imports.ui.modalDialog; // Needed for Modal Dialog used in Alert
 const Gettext = imports.gettext; // ++ Needed for translations
@@ -24,9 +25,10 @@ const Cinnamon = imports.gi.Cinnamon; // Needed to read/write into a file
 // ++ Always needed if you want localization/translation support
 // New l10n support thanks to ideas from @Odyseus, @lestcape and @NikoKrause
 
-var UUID = "vpnLookOut@claudiux";
+const UUID = "vpnLookOut@claudiux";
 const HOME_DIR = GLib.get_home_dir();
 const SCRIPTS_DIR = HOME_DIR + "/.local/share/cinnamon/applets/" + UUID + "/scripts";
+const ICONS_DIR = HOME_DIR + "/.local/share/cinnamon/applets/" + UUID + "/icons";
 
 // ++ Set DEBUG to true to display log messages in ~/.cinnamon/glass.log
 // ++ Set DEBUG to false in production.
@@ -76,7 +78,7 @@ function criticalNotify(msg, details, icon) {
 class ActivityLogging {
     constructor(metadata, nbdays=30, active=true) {
         this.metadata = metadata;
-        this.uuid = metadata.uuid;
+        //this.uuid = metadata.uuid;
         this.set_active(active);
         this.set_lifetime(nbdays); // to cut logfile
         this.time_options = {year: "numeric", month: "numeric", day: "numeric",
@@ -87,7 +89,7 @@ class ActivityLogging {
     } // End of constructor
 
     log_file_path() {
-        let ret = GLib.get_home_dir() + "/.cinnamon/configs/" + this.uuid + "/vpn_activity.log";
+        let ret = GLib.get_home_dir() + "/.cinnamon/configs/" + UUID + "/vpn_activity.log";
         return ret
     } // End of log_file_path
 
@@ -190,7 +192,7 @@ class vpnLookOut extends Applet.TextIconApplet {
             GLib.spawn_command_line_async("bash -c 'cd "+ metadata.path + " && chmod 755 egSpawn.js'");
 
             // ++ Settings
-            this.settings = new Settings.AppletSettings(this, metadata.uuid, instance_id); // ++ Picks up UUID from metadata for Settings
+            this.settings = new Settings.AppletSettings(this, UUID, instance_id); // ++ Picks up UUID from metadata for Settings
 
             if (this.versionCompare( GLib.getenv('CINNAMON_VERSION') ,"3.2" ) >= 0 ){
                  this.setAllowedLayout(Applet.AllowedLayout.BOTH);
@@ -236,6 +238,12 @@ class vpnLookOut extends Applet.TextIconApplet {
                 "displayType",
                 "displayType",
                 this.on_settings_changed,
+                null);
+
+            this.settings.bindProperty(Settings.BindingDirection.IN,
+                "use_symbolic_icons",
+                "use_symbolic_icons",
+                this.set_icons,
                 null);
 
             this.settings.bindProperty(Settings.BindingDirection.IN,
@@ -310,7 +318,7 @@ class vpnLookOut extends Applet.TextIconApplet {
             }
 
             // Keybinding:
-            Main.keybindingManager.addHotKey(metadata.uuid, this.keybinding, () => this.on_shortcut_used());
+            Main.keybindingManager.addHotKey(UUID, this.keybinding, () => this.on_shortcut_used());
 
             this.instance_id = instance_id;
             // ++ Make metadata values available within applet for context menu.
@@ -322,7 +330,9 @@ class vpnLookOut extends Applet.TextIconApplet {
             this.vpnscript = metadata.path + "/../scripts/vpn_status.sh";
             this.vpnifacedetect = metadata.path + "/../scripts/vpn_iface_detect.sh";
 
+            //this.use_symbolic_icons = true;
             this.set_icons();
+            //this._applet_icon.style = "color: grey;"
 
             this.stopClientScript = metadata.path + "/../scripts/stop_client.sh";
             this.startClientScript = metadata.path + "/../scripts/start_client.sh";
@@ -331,7 +341,7 @@ class vpnLookOut extends Applet.TextIconApplet {
             this.localePath = this.homedir + '/.local/share/locale';
 
             // Set initial value
-            this.set_applet_icon_path(this.vpnwait);
+            //this.set_applet_icon_path(this.vpnwait);
 
             // Make sure the temp files are created
             GLib.spawn_command_line_async('touch /tmp/.vpn_status /tmp/.vpn_name');
@@ -347,9 +357,9 @@ class vpnLookOut extends Applet.TextIconApplet {
             //this.execInstallLanguage(); // Removed to avoid Cinnamon crashes
 
             // ++ Part of new l10n support
-            UUID = metadata.uuid;
-            this.uuid = metadata.uuid;
-            Gettext.bindtextdomain(metadata.uuid, GLib.get_home_dir() + "/.local/share/locale");
+            //UUID = metadata.uuid;
+            //this.uuid = metadata.uuid;
+            Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
 
             /* dummy vars for translation */
             let x = _("TRUE"); // in settings-schema
@@ -363,15 +373,6 @@ class vpnLookOut extends Applet.TextIconApplet {
 
 
             this.on_orientation_changed(orientation); // Initializes for panel orientation
-
-            //// Choose Text Editor depending on whether Mint 18 with Cinnamon 3.0 and latter
-            //if (this.versionCompare(GLib.getenv('CINNAMON_VERSION'), "3.0") <= 0) {
-                //this.textEd = "gedit";
-            //} else {
-                //this.textEd = "xed";
-            //}
-            //let grip_is_present = GLib.find_program_in_path("grip");
-            //if (grip_is_present != null) this.textEd = "grip -b";
 
             // get a terminal used on this system
             this.terminal = this.get_terminal();
@@ -556,6 +557,12 @@ class vpnLookOut extends Applet.TextIconApplet {
     } // End of _onButtonPressEvent
 
     set_icons() {
+        if (this.use_symbolic_icons) {
+            //Gtk.IconTheme.get_default().append_search_path(ICONS_DIR);
+            //this.set_applet_icon_symbolic_name("vpnlookout");
+            this.set_applet_icon_symbolic_name("network-vpn");
+            return;
+        }
         this.system_icon_theme = this.get_system_icon_theme();
         if (this.system_icon_theme.startsWith('Mint-X'))
             this.system_icon_theme = 'Mint-X';
@@ -725,8 +732,12 @@ class vpnLookOut extends Applet.TextIconApplet {
     } // End of on_checkbox_reconnect_changed
 
     on_button_connect(toggleMenu=true) {
-        this.vpnIcon = this.vpnwait;
-        this.set_applet_icon_path(this.vpnIcon);
+        if (this.use_symbolic_icons) {
+            this._applet_icon.style = "color: grey;"
+        } else {
+            this.vpnIcon = this.vpnwait ;
+            this.set_applet_icon_path(this.vpnIcon);
+        }
 
         let l=this.SMCItems.length;
         for (let i=0; i<l; i++) {
@@ -762,8 +773,12 @@ class vpnLookOut extends Applet.TextIconApplet {
         }
 
         if (this.vpnStatus == "on") {
-            this.vpnIcon = this.vpnwait;
-            this.set_applet_icon_path(this.vpnIcon);
+            if (this.use_symbolic_icons) {
+                this._applet_icon.style = "color: grey;"
+            } else {
+                this.vpnIcon = this.vpnwait ;
+                this.set_applet_icon_path(this.vpnIcon);
+            }
             this.vpnStatusOld = "on";
             this.vpnStatus = "waiting";
 
@@ -971,7 +986,7 @@ class vpnLookOut extends Applet.TextIconApplet {
                 // button Torrent Clients Management...
                 let configure = new PopupMenu.PopupIconMenuItem(_("VPN-related Apps Manager") + "...", "system-run", St.IconType.SYMBOLIC);
                 configure.connect("activate", () => {
-                    Util.spawnCommandLine("cinnamon-settings applets " + UUID + " " + this.instanceId);
+                    Util.spawnCommandLine("cinnamon-settings applets " + UUID + " -t 3 " + this.instanceId);
                 });
                 this.menu.addMenuItem(configure);
 
@@ -1043,8 +1058,12 @@ class vpnLookOut extends Applet.TextIconApplet {
 
             // Now select icon and message to display, also determine VPN Name and Transmission policy
             if (this.vpnStatus == "on") { // VPN is connected
-                this.vpnIcon = this.vpnon ;
-                this.set_applet_icon_path(this.vpnIcon);
+                if (this.use_symbolic_icons) {
+                    this._applet_icon.style = "color: green;"
+                } else {
+                    this.vpnIcon = this.vpnon ;
+                    this.set_applet_icon_path(this.vpnIcon);
+                }
                 if (this.vpnInterface != "" && this.vpnName != "") {
                     //this.button_connect.setStatus(_("Click to disconnect from VPN")+' '+this.vpnName);
                     this.button_connect.setStatus(this.vpnName);
@@ -1094,8 +1113,12 @@ class vpnLookOut extends Applet.TextIconApplet {
                     }
                 }
             } else if (this.vpnStatus == "off") { // VPN is disconnected
-                this.vpnIcon = this.vpnoff;
-                this.set_applet_icon_path(this.vpnIcon);
+                if (this.use_symbolic_icons) {
+                    this._applet_icon.style = "color: #f57900;"
+                } else {
+                    this.vpnIcon = this.vpnoff;
+                    this.set_applet_icon_path(this.vpnIcon);
+                }
                 this.vpnMessage = _("Disconnected");
                 if (this.vpnStatusOld === "on") this.activityLog.log(this.vpnMessage);
 
@@ -1173,8 +1196,12 @@ class vpnLookOut extends Applet.TextIconApplet {
                     this.alertFlag = true
                 }
             } else { // Waiting about VPN status
-                this.vpnIcon = this.vpnwait ;
-                this.set_applet_icon_path(this.vpnIcon);
+                if (this.use_symbolic_icons) {
+                    this._applet_icon.style = "color: grey;"
+                } else {
+                    this.vpnIcon = this.vpnwait ;
+                    this.set_applet_icon_path(this.vpnIcon);
+                }
             }
             // set Tooltip
             if (tip !== " ") {
