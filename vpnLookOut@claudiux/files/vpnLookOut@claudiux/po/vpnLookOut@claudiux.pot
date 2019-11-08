@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: vpnLookOut@claudiux v3.3.5\n"
+"Project-Id-Version: vpnLookOut@claudiux v3.4.0\n"
 "Report-Msgid-Bugs-To: Claudiux <claude.clerc@gmail.com>\n"
-"POT-Creation-Date: 2019-11-06 19:08+0100\n"
+"POT-Creation-Date: 2019-11-08 13:46+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -362,5 +362,25 @@ msgstr ""
 
 #: 4.2/settings-schema.json:154
 msgid "Select this option if you prefer Symbolic icons instead of Full Color icons."
+msgstr ""
+
+#: 4.2/applet.js:357
+msgid "Deactivate vpnLookOut"
+msgstr ""
+
+#: 4.2/applet.js:922
+msgid "vpnLookOut is deactivated"
+msgstr ""
+
+#: 4.2/applet.js:1043
+msgid "Activate vpnLookOut"
+msgstr ""
+
+#: 4.2/applet.js:1046
+msgid "vpnLookOut deactivated"
+msgstr ""
+
+#: 4.2/applet.js:1056
+msgid "vpnLookOut reactivated"
 msgstr ""
 

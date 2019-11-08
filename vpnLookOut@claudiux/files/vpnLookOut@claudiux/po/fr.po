@@ -1,14 +1,14 @@
 # vpnLookOut@claudiux Applet POT File.
-# Copyright (C) 2017-2019 Claudiux <claude.clerc@gmail.com>
+# Copyright (C) 2017-2018 Claudiux <claude.clerc@gmail.com>
 # This file is distributed under the same license as the Cinnamon package.
 # FIRST AUTHOR Claudiux <claude.clerc@gmail.com>, 2017.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: vpnLookOut@claudiux v3.3.5\n"
+"Project-Id-Version: vpnLookOut@claudiux v3.3.1~20181122\n"
 "Report-Msgid-Bugs-To: Claudiux <claude.clerc@gmail.com>\n"
-"POT-Creation-Date: 2019-11-06 19:08+0100\n"
-"PO-Revision-Date: 2019-11-06 19:10+0100\n"
+"POT-Creation-Date: 2019-11-08 13:46+0100\n"
+"PO-Revision-Date: 2019-11-08 13:49+0100\n"
 "Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -481,3 +481,23 @@ msgid ""
 msgstr ""
 "Sélectionnez cette option si vous préférez des icônes symboliques de taille "
 "adaptable à celle du panneau plutôt que des icônes colorées de taille fixe."
+
+#: 4.2/applet.js:357
+msgid "Deactivate vpnLookOut"
+msgstr "Désactiver vpnLookOut"
+
+#: 4.2/applet.js:922
+msgid "vpnLookOut is deactivated"
+msgstr "vpnLookOut est désactivé"
+
+#: 4.2/applet.js:1043
+msgid "Activate vpnLookOut"
+msgstr "Activer vpnLookOut"
+
+#: 4.2/applet.js:1046
+msgid "vpnLookOut deactivated"
+msgstr "vpnLookOut désactivé"
+
+#: 4.2/applet.js:1056
+msgid "vpnLookOut reactivated"
+msgstr "vpnLookOut réactivé"

@@ -1,5 +1,8 @@
 ## Changelog
 
+### 3.4.0~20191108
+  * Add ability to deactivate vpnLookOut.
+
 ### 3.3.5~20191106
   * Bug fixes.
   * Compatible with Cinnamon 4.4.
