@@ -1,5 +1,13 @@
 ## Changelog
 
+### 3.4.0~20191108
+  * Add ability to deactivate vpnLookOut.
+
+### 3.3.5~20191106
+  * Bug fixes.
+  * Compatible with Cinnamon 4.4.
+  * Cinnamon 4.2 and above versions: Add ability to use symbolic icons.
+
 ### 3.3.4~20190702
   * Now compatible with Cinnamon 4.2.
 

@@ -13,7 +13,9 @@ const PopupMenu = imports.ui.popupMenu; // ++ Needed for menus
 const Lang = imports.lang; //  ++ Needed for menus
 const GLib = imports.gi.GLib; // ++ Needed for starting programs and translations
 const Gio = imports.gi.Gio; // Needed for file infos
+const Gtk = imports.gi.Gtk;
 const Mainloop = imports.mainloop; // Needed for timer update loop
+const Extension = imports.ui.extension; // Needed to reload applets
 //const ModalDialog = imports.ui.modalDialog; // Needed for Modal Dialog used in Alert
 const Gettext = imports.gettext; // ++ Needed for translations
 const Main = imports.ui.main; // ++ Needed for notify()
@@ -24,9 +26,10 @@ const Cinnamon = imports.gi.Cinnamon; // Needed to read/write into a file
 // ++ Always needed if you want localization/translation support
 // New l10n support thanks to ideas from @Odyseus, @lestcape and @NikoKrause
 
-var UUID = "vpnLookOut@claudiux";
+const UUID = "vpnLookOut@claudiux";
 const HOME_DIR = GLib.get_home_dir();
 const SCRIPTS_DIR = HOME_DIR + "/.local/share/cinnamon/applets/" + UUID + "/scripts";
+const ICONS_DIR = HOME_DIR + "/.local/share/cinnamon/applets/" + UUID + "/icons";
 
 // ++ Set DEBUG to true to display log messages in ~/.cinnamon/glass.log
 // ++ Set DEBUG to false in production.
@@ -76,7 +79,7 @@ function criticalNotify(msg, details, icon) {
 class ActivityLogging {
     constructor(metadata, nbdays=30, active=true) {
         this.metadata = metadata;
-        this.uuid = metadata.uuid;
+        //this.uuid = metadata.uuid;
         this.set_active(active);
         this.set_lifetime(nbdays); // to cut logfile
         this.time_options = {year: "numeric", month: "numeric", day: "numeric",
@@ -87,7 +90,7 @@ class ActivityLogging {
     } // End of constructor
 
     log_file_path() {
-        let ret = GLib.get_home_dir() + "/.cinnamon/configs/" + this.uuid + "/vpn_activity.log";
+        let ret = GLib.get_home_dir() + "/.cinnamon/configs/" + UUID + "/vpn_activity.log";
         return ret
     } // End of log_file_path
 
@@ -190,7 +193,7 @@ class vpnLookOut extends Applet.TextIconApplet {
             GLib.spawn_command_line_async("bash -c 'cd "+ metadata.path + " && chmod 755 egSpawn.js'");
 
             // ++ Settings
-            this.settings = new Settings.AppletSettings(this, metadata.uuid, instance_id); // ++ Picks up UUID from metadata for Settings
+            this.settings = new Settings.AppletSettings(this, UUID, instance_id); // ++ Picks up UUID from metadata for Settings
 
             if (this.versionCompare( GLib.getenv('CINNAMON_VERSION') ,"3.2" ) >= 0 ){
                  this.setAllowedLayout(Applet.AllowedLayout.BOTH);
@@ -236,6 +239,12 @@ class vpnLookOut extends Applet.TextIconApplet {
                 "displayType",
                 "displayType",
                 this.on_settings_changed,
+                null);
+
+            this.settings.bindProperty(Settings.BindingDirection.IN,
+                "use_symbolic_icons",
+                "use_symbolic_icons",
+                this.set_icons,
                 null);
 
             this.settings.bindProperty(Settings.BindingDirection.IN,
@@ -310,7 +319,7 @@ class vpnLookOut extends Applet.TextIconApplet {
             }
 
             // Keybinding:
-            Main.keybindingManager.addHotKey(metadata.uuid, this.keybinding, () => this.on_shortcut_used());
+            Main.keybindingManager.addHotKey(UUID, this.keybinding, () => this.on_shortcut_used());
 
             this.instance_id = instance_id;
             // ++ Make metadata values available within applet for context menu.
@@ -322,7 +331,9 @@ class vpnLookOut extends Applet.TextIconApplet {
             this.vpnscript = metadata.path + "/../scripts/vpn_status.sh";
             this.vpnifacedetect = metadata.path + "/../scripts/vpn_iface_detect.sh";
 
+            //this.use_symbolic_icons = true;
             this.set_icons();
+            //this._applet_icon.style = "color: grey;"
 
             this.stopClientScript = metadata.path + "/../scripts/stop_client.sh";
             this.startClientScript = metadata.path + "/../scripts/start_client.sh";
@@ -331,7 +342,7 @@ class vpnLookOut extends Applet.TextIconApplet {
             this.localePath = this.homedir + '/.local/share/locale';
 
             // Set initial value
-            this.set_applet_icon_path(this.vpnwait);
+            //this.set_applet_icon_path(this.vpnwait);
 
             // Make sure the temp files are created
             GLib.spawn_command_line_async('touch /tmp/.vpn_status /tmp/.vpn_name');
@@ -342,14 +353,17 @@ class vpnLookOut extends Applet.TextIconApplet {
             }
 
             this.applet_running = true; //** New to allow applet to be fully stopped when removed from panel
+            this.is_deactivated = false;
+            this.active_status_message = _("Deactivate vpnLookOut");
+            this.active_status_icon = "media-playback-pause-symbolic";
 
             // Install Languages (from .po files)
             //this.execInstallLanguage(); // Removed to avoid Cinnamon crashes
 
             // ++ Part of new l10n support
-            UUID = metadata.uuid;
-            this.uuid = metadata.uuid;
-            Gettext.bindtextdomain(metadata.uuid, GLib.get_home_dir() + "/.local/share/locale");
+            //UUID = metadata.uuid;
+            //this.uuid = metadata.uuid;
+            Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
 
             /* dummy vars for translation */
             let x = _("TRUE"); // in settings-schema
@@ -363,15 +377,6 @@ class vpnLookOut extends Applet.TextIconApplet {
 
 
             this.on_orientation_changed(orientation); // Initializes for panel orientation
-
-            //// Choose Text Editor depending on whether Mint 18 with Cinnamon 3.0 and latter
-            //if (this.versionCompare(GLib.getenv('CINNAMON_VERSION'), "3.0") <= 0) {
-                //this.textEd = "gedit";
-            //} else {
-                //this.textEd = "xed";
-            //}
-            //let grip_is_present = GLib.find_program_in_path("grip");
-            //if (grip_is_present != null) this.textEd = "grip -b";
 
             // get a terminal used on this system
             this.terminal = this.get_terminal();
@@ -556,6 +561,12 @@ class vpnLookOut extends Applet.TextIconApplet {
     } // End of _onButtonPressEvent
 
     set_icons() {
+        if (this.use_symbolic_icons) {
+            //Gtk.IconTheme.get_default().append_search_path(ICONS_DIR);
+            //this.set_applet_icon_symbolic_name("vpnlookout");
+            this.set_applet_icon_symbolic_name("network-vpn");
+            return;
+        }
         this.system_icon_theme = this.get_system_icon_theme();
         if (this.system_icon_theme.startsWith('Mint-X'))
             this.system_icon_theme = 'Mint-X';
@@ -725,8 +736,13 @@ class vpnLookOut extends Applet.TextIconApplet {
     } // End of on_checkbox_reconnect_changed
 
     on_button_connect(toggleMenu=true) {
-        this.vpnIcon = this.vpnwait;
-        this.set_applet_icon_path(this.vpnIcon);
+        if (this.is_deactivated) this.switch_activation();
+        if (this.use_symbolic_icons) {
+            this._applet_icon.style = "color: grey;"
+        } else {
+            this.vpnIcon = this.vpnwait ;
+            this.set_applet_icon_path(this.vpnIcon);
+        }
 
         let l=this.SMCItems.length;
         for (let i=0; i<l; i++) {
@@ -756,14 +772,19 @@ class vpnLookOut extends Applet.TextIconApplet {
     } // End of on_button_connect
 
     change_connection(new_co) {
+        if (this.is_deactivated) this.switch_activation();
         let l=this.SMCItems.length;
         for (let i=0; i<l; i++) {
             this.SMCItems[i].setSensitive(false)
         }
 
         if (this.vpnStatus == "on") {
-            this.vpnIcon = this.vpnwait;
-            this.set_applet_icon_path(this.vpnIcon);
+            if (this.use_symbolic_icons) {
+                this._applet_icon.style = "color: grey;"
+            } else {
+                this.vpnIcon = this.vpnwait ;
+                this.set_applet_icon_path(this.vpnIcon);
+            }
             this.vpnStatusOld = "on";
             this.vpnStatus = "waiting";
 
@@ -895,83 +916,88 @@ class vpnLookOut extends Applet.TextIconApplet {
             });
             this.menu.addMenuItem(this.menuitemHead1);
 
-            // Status Info
-            this.menuitemInfo2 = new PopupMenu.PopupMenuItem("     " + _("Waiting for VPN interface information"), {
-                reactive: false
-            });
-            this.menu.addMenuItem(this.menuitemInfo2);
-
             if (this.dependenciesMet) {
                 // All dependencies are met, we can continue :
-                this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
-                // button connect/disconnect
-                this.button_connect = new PopupMenu.PopupSwitchMenuItem(_("Connection ON/OFF"), false);
-                this.button_connect.connect("toggled", () => this.on_button_connect());
-                this.menu.addMenuItem(this.button_connect);
-                // this button must appear only if auto-reconnect is inactive
-                if (this.vpnInterface == "" || this.vpnName == "" || (this.reconnect && !this.respectUserRequest)) {
-                    this.button_connect.actor.hide()
-                } else {
-                    this.button_connect.actor.show()
-                }
+                let message = this.is_deactivated ? _("vpnLookOut is deactivated") : _("Waiting for VPN interface information");
 
-                // ++ Set up sub menu for Connections Items
-                this.subMenuConnections = new PopupMenu.PopupSubMenuMenuItem(_("Connections"));
-                this.menu.addMenuItem(this.subMenuConnections);
+                // Status Info
+                this.menuitemInfo2 = new PopupMenu.PopupMenuItem("     " + message, {
+                    reactive: false
+                });
+                this.menu.addMenuItem(this.menuitemInfo2);
 
                 this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
-                this.vpnNames = this.get_vpn_names();
-                this.SMCItems = []; // Items of subMenuConnections (SMC)
-                let l=this.vpnNames.length;
-                for (let i=0; i<l ; i++) {
-                    let name=this.vpnNames[i];
-                    this.SMCItems[i] = new PopupMenu.PopupIndicatorMenuItem(name);
-                    this.SMCItems[i].connect('activate', (event) => this.change_connection(""+name));
-                    if (name===this.vpnName) {
-                        //this.SMCItems[i].setOrnament(PopupMenu.OrnamentType.CHECK, true);
-                        this.SMCItems[i].setShowDot(true);
-                        this.SMCItems[i].setSensitive(false)
+                if (!this.is_deactivated) {
+                    // button connect/disconnect
+                    this.button_connect = new PopupMenu.PopupSwitchMenuItem(_("Connection ON/OFF"), false);
+                    this.button_connect.connect("toggled", () => this.on_button_connect());
+                    this.menu.addMenuItem(this.button_connect);
+                    // this button must appear only if auto-reconnect is inactive
+                    if (this.vpnInterface == "" || this.vpnName == "" || (this.reconnect && !this.respectUserRequest)) {
+                        this.button_connect.actor.hide()
+                    } else {
+                        this.button_connect.actor.show()
                     }
-                    this.subMenuConnections.menu.addMenuItem(this.SMCItems[i])
-                };
-                // Display this submenu only if there are more than one connection
-                if (this.SMCItems.length < 2) {
-                    this.subMenuConnections.actor.hide()
-                } else {
-                    this.subMenuConnections.actor.show()
+
+                    // ++ Set up sub menu for Connections Items
+                    this.subMenuConnections = new PopupMenu.PopupSubMenuMenuItem(_("Connections"));
+                    this.menu.addMenuItem(this.subMenuConnections);
+
+                    this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+
+                    this.vpnNames = this.get_vpn_names();
+                    this.SMCItems = []; // Items of subMenuConnections (SMC)
+                    let l=this.vpnNames.length;
+                    for (let i=0; i<l ; i++) {
+                        let name=this.vpnNames[i];
+                        this.SMCItems[i] = new PopupMenu.PopupIndicatorMenuItem(name);
+                        this.SMCItems[i].connect('activate', (event) => this.change_connection(""+name));
+                        if (name===this.vpnName) {
+                            //this.SMCItems[i].setOrnament(PopupMenu.OrnamentType.CHECK, true);
+                            this.SMCItems[i].setShowDot(true);
+                            this.SMCItems[i].setSensitive(false)
+                        }
+                        this.subMenuConnections.menu.addMenuItem(this.SMCItems[i])
+                    };
+                    // Display this submenu only if there are more than one connection
+                    if (this.SMCItems.length < 2) {
+                        this.subMenuConnections.actor.hide()
+                    } else {
+                        this.subMenuConnections.actor.show()
+                    }
+
+                    // checkbox Connect at start-up
+                    this.checkbox_connectAtStartup = new PopupMenu.PopupSwitchMenuItem(_("Connect to VPN as this applet starts."), this.connectAtStartup);
+                    this.checkbox_connectAtStartup.connect("toggled", () => this.on_checkbox_connectAtStartup_changed());
+                    this.menu.addMenuItem(this.checkbox_connectAtStartup);
+
+                    // checkbox reconnect
+                    this.checkbox_reconnect = new PopupMenu.PopupSwitchMenuItem(_("Try to reconnect to VPN when it shuts down incidentally."), this.reconnect);
+                    this.checkbox_reconnect.connect("toggled", () => this.on_checkbox_reconnect_changed());
+                    this.menu.addMenuItem(this.checkbox_reconnect);
+
+                    /*
+                    // checkboxes about Transmission
+                    this.checkbox_stopTransmission = new PopupMenu.PopupSwitchMenuItem(_("Shut down properly Transmission as soon as VPN falls."), this.stopTransmission);
+                    // this.checkbox_stopTransmission.connect("toggled", Lang.bind(this, this.on_checkbox_stopTransmission_changed));
+                    this.checkbox_stopTransmission.connect("toggled", () => this.on_checkbox_stopTransmission_changed());
+                    this.menu.addMenuItem(this.checkbox_stopTransmission);
+
+                    this.checkbox_restartTransmission = new PopupMenu.PopupSwitchMenuItem(_("Try to restart Transmission as soon as VPN restarts."), this.restartTransmission);
+                    // this.checkbox_restartTransmission.connect("toggled", Lang.bind(this, this.on_checkbox_restartTransmission_changed));
+                    this.checkbox_restartTransmission.connect("toggled", () => this.on_checkbox_restartTransmission_changed());
+                    this.menu.addMenuItem(this.checkbox_restartTransmission);
+                    */
                 }
-
-                // checkbox Connect at start-up
-                this.checkbox_connectAtStartup = new PopupMenu.PopupSwitchMenuItem(_("Connect to VPN as this applet starts."), this.connectAtStartup);
-                this.checkbox_connectAtStartup.connect("toggled", () => this.on_checkbox_connectAtStartup_changed());
-                this.menu.addMenuItem(this.checkbox_connectAtStartup);
-
-                // checkbox reconnect
-                this.checkbox_reconnect = new PopupMenu.PopupSwitchMenuItem(_("Try to reconnect to VPN when it shuts down incidentally."), this.reconnect);
-                this.checkbox_reconnect.connect("toggled", () => this.on_checkbox_reconnect_changed());
-                this.menu.addMenuItem(this.checkbox_reconnect);
-
-                /*
-                // checkboxes about Transmission
-                this.checkbox_stopTransmission = new PopupMenu.PopupSwitchMenuItem(_("Shut down properly Transmission as soon as VPN falls."), this.stopTransmission);
-                // this.checkbox_stopTransmission.connect("toggled", Lang.bind(this, this.on_checkbox_stopTransmission_changed));
-                this.checkbox_stopTransmission.connect("toggled", () => this.on_checkbox_stopTransmission_changed());
-                this.menu.addMenuItem(this.checkbox_stopTransmission);
-
-                this.checkbox_restartTransmission = new PopupMenu.PopupSwitchMenuItem(_("Try to restart Transmission as soon as VPN restarts."), this.restartTransmission);
-                // this.checkbox_restartTransmission.connect("toggled", Lang.bind(this, this.on_checkbox_restartTransmission_changed));
-                this.checkbox_restartTransmission.connect("toggled", () => this.on_checkbox_restartTransmission_changed());
-                this.menu.addMenuItem(this.checkbox_restartTransmission);
-                */
 
                 this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
                 // button Torrent Clients Management...
                 let configure = new PopupMenu.PopupIconMenuItem(_("VPN-related Apps Manager") + "...", "system-run", St.IconType.SYMBOLIC);
                 configure.connect("activate", () => {
-                    Util.spawnCommandLine("cinnamon-settings applets " + UUID + " " + this.instanceId);
+                    Util.spawnCommandLine("cinnamon-settings applets " + UUID + " -t 3 " + this.instanceId);
                 });
                 this.menu.addMenuItem(configure);
 
@@ -985,6 +1011,15 @@ class vpnLookOut extends Applet.TextIconApplet {
                 });
 
                 this.menu.addMenuItem(this.view_log);
+
+                this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+
+                // deactivate button
+                this.deactivate_button = new PopupMenu.PopupIconMenuItem(this.active_status_message, this.active_status_icon, St.IconType.SYMBOLIC);
+                this.deactivate_button.connect('activate', (event) => {
+                    this.switch_activation();
+                });
+                this.menu.addMenuItem(this.deactivate_button);
             }
 
             this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
@@ -1002,6 +1037,26 @@ class vpnLookOut extends Applet.TextIconApplet {
             //global.logError(e);
         //}
     } // End of makeMenu
+
+    switch_activation() {
+        this.is_deactivated = !this.is_deactivated;
+        this.active_status_message = this.is_deactivated ? _("Activate vpnLookOut") : _("Deactivate vpnLookOut");
+        this.active_status_icon = this.is_deactivated ? "media-playback-start-symbolic" : "media-playback-pause-symbolic";
+        if (this.is_deactivated) {
+            this.activityLog.log(_("vpnLookOut deactivated"));
+            if (this.use_symbolic_icons) {
+                this._applet_icon.style = "color: grey;"
+            } else {
+                this.vpnIcon = this.vpnwait ;
+                this.set_applet_icon_path(this.vpnIcon);
+            }
+            this.vpnStatusOld = this.vpnStatus;
+            this.vpnStatus = "waiting";
+        } else {
+            this.activityLog.log(_("vpnLookOut reactivated"));
+            this._on_reload_this_applet_pressed();
+        }
+    } // End of switch_activation
 
     //++ Handler for when the applet is clicked.
     on_applet_clicked(event) {
@@ -1043,8 +1098,12 @@ class vpnLookOut extends Applet.TextIconApplet {
 
             // Now select icon and message to display, also determine VPN Name and Transmission policy
             if (this.vpnStatus == "on") { // VPN is connected
-                this.vpnIcon = this.vpnon ;
-                this.set_applet_icon_path(this.vpnIcon);
+                if (this.use_symbolic_icons) {
+                    this._applet_icon.style = "color: green;"
+                } else {
+                    this.vpnIcon = this.vpnon ;
+                    this.set_applet_icon_path(this.vpnIcon);
+                }
                 if (this.vpnInterface != "" && this.vpnName != "") {
                     //this.button_connect.setStatus(_("Click to disconnect from VPN")+' '+this.vpnName);
                     this.button_connect.setStatus(this.vpnName);
@@ -1072,7 +1131,9 @@ class vpnLookOut extends Applet.TextIconApplet {
                 }
 
                 this.vpnMessage = _("Connected") + ' (' + this.vpnName + vpnMessage2 + ')' ;
-                if (this.vpnStatusOld === "off") this.activityLog.log(this.vpnMessage);
+                if (this.vpnStatusOld === "off") {
+                    this.activityLog.log(this.vpnMessage);
+                }
 
                 if (this.manageClients===true) {
                     let client;
@@ -1094,8 +1155,12 @@ class vpnLookOut extends Applet.TextIconApplet {
                     }
                 }
             } else if (this.vpnStatus == "off") { // VPN is disconnected
-                this.vpnIcon = this.vpnoff;
-                this.set_applet_icon_path(this.vpnIcon);
+                if (this.use_symbolic_icons) {
+                    this._applet_icon.style = "color: #f57900;"
+                } else {
+                    this.vpnIcon = this.vpnoff;
+                    this.set_applet_icon_path(this.vpnIcon);
+                }
                 this.vpnMessage = _("Disconnected");
                 if (this.vpnStatusOld === "on") this.activityLog.log(this.vpnMessage);
 
@@ -1173,8 +1238,12 @@ class vpnLookOut extends Applet.TextIconApplet {
                     this.alertFlag = true
                 }
             } else { // Waiting about VPN status
-                this.vpnIcon = this.vpnwait ;
-                this.set_applet_icon_path(this.vpnIcon);
+                if (this.use_symbolic_icons) {
+                    this._applet_icon.style = "color: grey;"
+                } else {
+                    this.vpnIcon = this.vpnwait ;
+                    this.set_applet_icon_path(this.vpnIcon);
+                }
             }
             // set Tooltip
             if (tip !== " ") {
@@ -1199,6 +1268,10 @@ class vpnLookOut extends Applet.TextIconApplet {
             //Mainloop.source_remove(this.loopId);
         //}
         //this.loopId = 0;
+        if (this.is_deactivated) {
+            this.loopId = Mainloop.timeout_add_seconds(this.refreshInterval, () => this.updateLoop());
+            return
+        }
         this.set_icons();
         if (!this.dependenciesMet && this.are_dependencies_installed()) {
             // At this time, the user just finished to install all dependencies.
@@ -1252,9 +1325,24 @@ class vpnLookOut extends Applet.TextIconApplet {
         }
         this.monitors = [];
         this.settings.finalize();
+        if (this.loopId > 0) {
+          Mainloop.source_remove(this.loopId);
+        }
         this.loopId = 0;
         Main.keybindingManager.removeHotKey(UUID);
     }
+
+    _on_reload_this_applet_pressed() {
+        // Before to reload this applet, stop the loop, remove all bindings and disconnect all signals to avoid errors.
+        //this.on_applet_removed_from_panel();
+
+        if (this.loopId > 0) {
+          Mainloop.source_remove(this.loopId);
+        }
+        this.loopId = 0;
+        // Reload this applet
+        Extension.reloadExtension(UUID, Extension.Type.APPLET);
+      } // End of _on_reload_this_applet_pressed
 
 }; // End of class vpnLookOut
 

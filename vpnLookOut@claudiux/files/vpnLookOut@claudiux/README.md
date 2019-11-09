@@ -51,6 +51,8 @@ A middle-click on the icon of this applet, or the keyboard shortcut <Super>v (wh
    * connect to the last VPN used if it is "off";
    * disconnect from the VPN if it is "on".
 
+In the menu, there is an option to deactivate/activate vpnLookOut. (From Cinnamon 4.2.)
+
 ## Translations
 The vpnLookOut applet is designed to allow translations of messages (initially in English). A vpnLookOut.pot template file is available, you can use it with software such as poedit to translate these messages.
 

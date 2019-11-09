@@ -17,7 +17,7 @@ from time import strftime
 applet_name = "vpnLookOut@claudiux"
 author_mail = "Claudiux <claude.clerc@gmail.com>"
 
-subdirs = ['2.8', '3.8'] ### Adapt it to development !!! ###
+subdirs = ['2.8', '3.8', '4.2'] ### Adapt it to development !!! ###
 
 home_path = expanduser("~")
 share_path = home_path + "/.local/share"
@@ -42,7 +42,7 @@ if applet_version.strip()=="":
 
 # Intro:
 pot_file.write(r'''# %s Applet POT File.
-# Copyright (C) 2017-2018 %s
+# Copyright (C) 2017-2019 %s
 # This file is distributed under the same license as the Cinnamon package.
 # FIRST AUTHOR %s, 2017.
 #
@@ -51,14 +51,13 @@ msgid ""
 msgstr ""
 "Project-Id-Version: %s v%s\n"
 "Report-Msgid-Bugs-To: %s\n"
-"POT-Creation-Date: 2017-12-02 19:59+0100\n"
-"PO-Revision-Date: %s\n"
+"POT-Creation-Date: %s\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.7.1\n"
 
 ''' % (applet_name, author_mail, author_mail, applet_name, applet_version, author_mail, strftime("%Y-%m-%d %H:%M%z")) )
 
