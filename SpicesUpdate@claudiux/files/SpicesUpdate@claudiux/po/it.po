@@ -320,7 +320,7 @@ msgstr "Tipo di vizzualizzazione"
 #. 4.2->settings-schema.json->check_applets->description
 #. 3.8->settings-schema.json->check_applets->description
 #. 2.8->settings-schema.json->check_applets->description
-msgid "Let regularly check if your applets are up to date"
+msgid "Check regularly whether your applets are up to date"
 msgstr "Controllare regolarmente se le tue applet sono aggiornate"
 
 #. 4.2->settings-schema.json->check_applets->tooltip
@@ -334,7 +334,7 @@ msgstr ""
 #. 4.2->settings-schema.json->check_new_applets->description
 #. 3.8->settings-schema.json->check_new_applets->description
 #. 2.8->settings-schema.json->check_new_applets->description
-msgid "Let regularly check if new applets are available"
+msgid "Check regularly whether new applets are available"
 msgstr "Controllare regolarmente se sono disponibili nuove applet"
 
 #. 4.2->settings-schema.json->check_new_applets->tooltip
@@ -380,7 +380,7 @@ msgstr "Apri Impostazioni di sistema per gestire tutte le Applet"
 #. 4.2->settings-schema.json->check_desklets->description
 #. 3.8->settings-schema.json->check_desklets->description
 #. 2.8->settings-schema.json->check_desklets->description
-msgid "Let regularly check if your desklets are up to date"
+msgid "Check regularly whether your desklets are up to date"
 msgstr "Controlla regolarmente se i tuoi desklet sono aggiornati"
 
 #. 4.2->settings-schema.json->check_desklets->tooltip
@@ -394,7 +394,7 @@ msgstr ""
 #. 4.2->settings-schema.json->check_new_desklets->description
 #. 3.8->settings-schema.json->check_new_desklets->description
 #. 2.8->settings-schema.json->check_new_desklets->description
-msgid "Let regularly check if new desklets are available"
+msgid "Check regularly whether new desklets are available"
 msgstr "Controllare regolarmente se sono disponibili nuove desklet"
 
 #. 4.2->settings-schema.json->check_new_desklets->tooltip
@@ -422,7 +422,7 @@ msgstr "Apri Impostazioni di sistema per gestire tutti i Desklet"
 #. 4.2->settings-schema.json->check_extensions->description
 #. 3.8->settings-schema.json->check_extensions->description
 #. 2.8->settings-schema.json->check_extensions->description
-msgid "Let regularly check if your extensions are up to date"
+msgid "Check regularly whether your extensions are up to date"
 msgstr "Controlla regolarmente se le tue estensioni sono aggiornate"
 
 #. 4.2->settings-schema.json->check_extensions->tooltip
@@ -436,7 +436,7 @@ msgstr ""
 #. 4.2->settings-schema.json->check_new_extensions->description
 #. 3.8->settings-schema.json->check_new_extensions->description
 #. 2.8->settings-schema.json->check_new_extensions->description
-msgid "Let regularly check if new extensions are available"
+msgid "Check regularly whether new extensions are available"
 msgstr "Controllare regolarmente se sono disponibili nuove estensioni"
 
 #. 4.2->settings-schema.json->check_new_extensions->tooltip
@@ -464,7 +464,7 @@ msgstr "Apri Impostazioni di sistema per gestire tutte le estensioni"
 #. 4.2->settings-schema.json->check_themes->description
 #. 3.8->settings-schema.json->check_themes->description
 #. 2.8->settings-schema.json->check_themes->description
-msgid "Let regularly check if your themes are up to date"
+msgid "Check regularly whether your themes are up to date"
 msgstr "Controlla regolarmente se i tuoi temi sono aggiornati"
 
 #. 4.2->settings-schema.json->check_themes->tooltip
@@ -477,7 +477,7 @@ msgstr ""
 #. 4.2->settings-schema.json->check_new_themes->description
 #. 3.8->settings-schema.json->check_new_themes->description
 #. 2.8->settings-schema.json->check_new_themes->description
-msgid "Let regularly check if new themes are available"
+msgid "Check regularly whether new themes are available"
 msgstr "Controllare regolarmente se sono disponibili nuovi temi"
 
 #. 4.2->settings-schema.json->check_new_themes->tooltip

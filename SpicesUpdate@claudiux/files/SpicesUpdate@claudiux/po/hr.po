@@ -303,7 +303,7 @@ msgstr "Vrsta prikaza"
 #. 4.2->settings-schema.json->check_applets->description
 #. 3.8->settings-schema.json->check_applets->description
 #. 2.8->settings-schema.json->check_applets->description
-msgid "Let regularly check if your applets are up to date"
+msgid "Check regularly whether your applets are up to date"
 msgstr "Redovito provjeravaj nadopune apleta"
 
 #. 4.2->settings-schema.json->check_applets->tooltip
@@ -315,7 +315,7 @@ msgstr "Ako ne želite najnovije nadopune apleta, isključite ovu mogućnost."
 #. 4.2->settings-schema.json->check_new_applets->description
 #. 3.8->settings-schema.json->check_new_applets->description
 #. 2.8->settings-schema.json->check_new_applets->description
-msgid "Let regularly check if new applets are available"
+msgid "Check regularly whether new applets are available"
 msgstr "Redovito provjeravaj objavu novih apleta"
 
 #. 4.2->settings-schema.json->check_new_applets->tooltip
@@ -361,7 +361,7 @@ msgstr "Otvori Cinnamon postavke za upravljanje svim apletima"
 #. 4.2->settings-schema.json->check_desklets->description
 #. 3.8->settings-schema.json->check_desklets->description
 #. 2.8->settings-schema.json->check_desklets->description
-msgid "Let regularly check if your desklets are up to date"
+msgid "Check regularly whether your desklets are up to date"
 msgstr "Redovito provjeravaj nadopune deskleta"
 
 #. 4.2->settings-schema.json->check_desklets->tooltip
@@ -373,7 +373,7 @@ msgstr "Ako ne želite najnovije nadopune deskleta, isključite ovu mogućnost."
 #. 4.2->settings-schema.json->check_new_desklets->description
 #. 3.8->settings-schema.json->check_new_desklets->description
 #. 2.8->settings-schema.json->check_new_desklets->description
-msgid "Let regularly check if new desklets are available"
+msgid "Check regularly whether new desklets are available"
 msgstr "Redovito provjeravaj objavu novih deskleta"
 
 #. 4.2->settings-schema.json->check_new_desklets->tooltip
@@ -401,7 +401,7 @@ msgstr "Otvori Cinnamon postavke za upravljanje svim deskletima"
 #. 4.2->settings-schema.json->check_extensions->description
 #. 3.8->settings-schema.json->check_extensions->description
 #. 2.8->settings-schema.json->check_extensions->description
-msgid "Let regularly check if your extensions are up to date"
+msgid "Check regularly whether your extensions are up to date"
 msgstr "Redovito provjeravaj nadopune proširenja"
 
 #. 4.2->settings-schema.json->check_extensions->tooltip
@@ -413,7 +413,7 @@ msgstr "Ako ne želite najnovije nadopune proširenja, isključite ovu mogućnos
 #. 4.2->settings-schema.json->check_new_extensions->description
 #. 3.8->settings-schema.json->check_new_extensions->description
 #. 2.8->settings-schema.json->check_new_extensions->description
-msgid "Let regularly check if new extensions are available"
+msgid "Check regularly whether new extensions are available"
 msgstr "Redovito provjeravaj objavu novih proširenja"
 
 #. 4.2->settings-schema.json->check_new_extensions->tooltip
@@ -441,7 +441,7 @@ msgstr "Otvori Cinnamon postavke za upravljanje svim proširenjima"
 #. 4.2->settings-schema.json->check_themes->description
 #. 3.8->settings-schema.json->check_themes->description
 #. 2.8->settings-schema.json->check_themes->description
-msgid "Let regularly check if your themes are up to date"
+msgid "Check regularly whether your themes are up to date"
 msgstr "Redovito provjeravaj nadopune tema"
 
 #. 4.2->settings-schema.json->check_themes->tooltip
@@ -453,7 +453,7 @@ msgstr "Ako ne želite najnovije nadopune tema, isključite ovu mogućnost."
 #. 4.2->settings-schema.json->check_new_themes->description
 #. 3.8->settings-schema.json->check_new_themes->description
 #. 2.8->settings-schema.json->check_new_themes->description
-msgid "Let regularly check if new themes are available"
+msgid "Check regularly whether new themes are available"
 msgstr "Redovito provjeravaj objavu novih tema"
 
 #. 4.2->settings-schema.json->check_new_themes->tooltip

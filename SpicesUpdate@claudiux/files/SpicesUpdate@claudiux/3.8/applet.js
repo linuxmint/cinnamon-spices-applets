@@ -1072,7 +1072,9 @@ class SpicesUpdate extends Applet.TextIconApplet {
         if (d.query_exists(null)) {
           this.unprotectedThemesDico[a["name"]] = a["isunprotected"];
           let metadataFileName = DIR_MAP[type] + "/" + a["name"] + "/metadata.json";
-          if (a["isunprotected"] && a["requestnewdownload"] !== undefined && a["requestnewdownload"] === true) {
+          let metadataFile = Gio.file_new_for_path(metadataFileName);
+          // For some themes, the metadata.json file is in the subfolder /cinnamon:
+          if (!metadataFile.query_exists(null) || (a["isunprotected"] && a["requestnewdownload"] !== undefined && a["requestnewdownload"] === true)) {
             if (this.cache[type] === "{}") this._load_cache(type);
             let created = this._get_member_from_cache(type, a["name"], "created");
             let last_edited = this._get_last_edited_from_cache(type, a["name"]);
@@ -1329,7 +1331,13 @@ class SpicesUpdate extends Applet.TextIconApplet {
   }; // End of get_spice_name
 
   _rewrite_metadataFile(fileName, lastEdited) {
-    let metadataData = GLib.file_get_contents(fileName).toString().substr(5);
+    let metadataFile = Gio.file_new_for_path(fileName);
+    let metadataData;
+    if (metadataFile.query_exists(null)) {
+      metadataData = GLib.file_get_contents(fileName).toString().substr(5);
+    } else {
+      metadataData = "{}";
+    }
     let newData = JSON.parse(metadataData);
     newData["last-edited"] = lastEdited;
     let message = JSON.stringify(newData, null, 2);

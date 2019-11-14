@@ -318,7 +318,7 @@ msgstr "Visningstyp"
 #. 4.2->settings-schema.json->check_applets->description
 #. 3.8->settings-schema.json->check_applets->description
 #. 2.8->settings-schema.json->check_applets->description
-msgid "Let regularly check if your applets are up to date"
+msgid "Check regularly whether your applets are up to date"
 msgstr "Kontrollera regelbundet mina panelprogram är uppdaterade"
 
 #. 4.2->settings-schema.json->check_applets->tooltip
@@ -330,7 +330,7 @@ msgstr "Avaktivera detta, om uppdateringar för panelprogram inte berör dig."
 #. 4.2->settings-schema.json->check_new_applets->description
 #. 3.8->settings-schema.json->check_new_applets->description
 #. 2.8->settings-schema.json->check_new_applets->description
-msgid "Let regularly check if new applets are available"
+msgid "Check regularly whether new applets are available"
 msgstr "Kontrollera regelbundet om nya panelprogram finns tillgängliga"
 
 #. 4.2->settings-schema.json->check_new_applets->tooltip
@@ -376,7 +376,7 @@ msgstr "Öppna Cinnamons inställningar för att hantera alla panelprogram"
 #. 4.2->settings-schema.json->check_desklets->description
 #. 3.8->settings-schema.json->check_desklets->description
 #. 2.8->settings-schema.json->check_desklets->description
-msgid "Let regularly check if your desklets are up to date"
+msgid "Check regularly whether your desklets are up to date"
 msgstr "Kontrollera regelbundet mina skrivbordsprogram är uppdaterade"
 
 #. 4.2->settings-schema.json->check_desklets->tooltip
@@ -389,7 +389,7 @@ msgstr ""
 #. 4.2->settings-schema.json->check_new_desklets->description
 #. 3.8->settings-schema.json->check_new_desklets->description
 #. 2.8->settings-schema.json->check_new_desklets->description
-msgid "Let regularly check if new desklets are available"
+msgid "Check regularly whether new desklets are available"
 msgstr "Kontrollera regelbundet om nya skrivbordsprogram finns tillgängliga"
 
 #. 4.2->settings-schema.json->check_new_desklets->tooltip
@@ -417,7 +417,7 @@ msgstr "Öppna Cinnamons inställningar för att hantera alla skrivbordsprogram"
 #. 4.2->settings-schema.json->check_extensions->description
 #. 3.8->settings-schema.json->check_extensions->description
 #. 2.8->settings-schema.json->check_extensions->description
-msgid "Let regularly check if your extensions are up to date"
+msgid "Check regularly whether your extensions are up to date"
 msgstr "Kontrollera regelbundet mina tillägg är uppdaterade"
 
 #. 4.2->settings-schema.json->check_extensions->tooltip
@@ -429,7 +429,7 @@ msgstr "Avaktivera detta, om uppdateringar för tillägg inte berör dig."
 #. 4.2->settings-schema.json->check_new_extensions->description
 #. 3.8->settings-schema.json->check_new_extensions->description
 #. 2.8->settings-schema.json->check_new_extensions->description
-msgid "Let regularly check if new extensions are available"
+msgid "Check regularly whether new extensions are available"
 msgstr "Kontrollera regelbundet om nya tillägg finns tillgängliga"
 
 #. 4.2->settings-schema.json->check_new_extensions->tooltip
@@ -457,7 +457,7 @@ msgstr "Öppna Cinnamons inställningar för att hantera alla tillägg"
 #. 4.2->settings-schema.json->check_themes->description
 #. 3.8->settings-schema.json->check_themes->description
 #. 2.8->settings-schema.json->check_themes->description
-msgid "Let regularly check if your themes are up to date"
+msgid "Check regularly whether your themes are up to date"
 msgstr "Kontrollera regelbundet mina teman är uppdaterade"
 
 #. 4.2->settings-schema.json->check_themes->tooltip
@@ -469,7 +469,7 @@ msgstr "Avaktivera detta, om uppdateringar för teman inte berör dig."
 #. 4.2->settings-schema.json->check_new_themes->description
 #. 3.8->settings-schema.json->check_new_themes->description
 #. 2.8->settings-schema.json->check_new_themes->description
-msgid "Let regularly check if new themes are available"
+msgid "Check regularly whether new themes are available"
 msgstr "Kontrollera regelbundet om nya teman finns tillgängliga"
 
 #. 4.2->settings-schema.json->check_new_themes->tooltip

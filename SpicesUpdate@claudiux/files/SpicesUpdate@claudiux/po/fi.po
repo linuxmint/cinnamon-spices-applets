@@ -71,7 +71,7 @@ msgid "Display type"
 msgstr "Näkyvyys"
 
 #: settings-schema.json:90
-msgid "Let regularly check if your applets are up to date"
+msgid "Check regularly whether your applets are up to date"
 msgstr "Anna säännöllisesti tarkistaa, ovatko ohjelmat ajan tasalla"
 
 #: settings-schema.json:91
@@ -79,7 +79,7 @@ msgid "If applets updates do not concern you, uncheck this box."
 msgstr "Jos sovelmien päivitykset eivät koske sinua, poista tämä valintaruutu."
 
 #: settings-schema.json:98
-msgid "Let regularly check if new applets are available"
+msgid "Check regularly whether new applets are available"
 msgstr "Anna säännöllisesti tarkistaa, onko uusia sovelmia saatavana"
 
 #: settings-schema.json:99
@@ -111,7 +111,7 @@ msgid "Open Cinnamon Settings to manage all the Applets"
 msgstr "Avaa Cinnamon asetukset hallitaksesi kaikkia paneelin sovelmia"
 
 #: settings-schema.json:135
-msgid "Let regularly check if your desklets are up to date"
+msgid "Check regularly whether your desklets are up to date"
 msgstr "Anna säännöllisesti tarkistaa, ovatko työpöytäsovelmat ajan tasalla"
 
 #: settings-schema.json:136
@@ -119,7 +119,7 @@ msgid "If desklets updates do not concern you, uncheck this box."
 msgstr "Jos päivitykset eivät koske sinua, poista tämä valintaruutu."
 
 #: settings-schema.json:143
-msgid "Let regularly check if new desklets are available"
+msgid "Check regularly whether new desklets are available"
 msgstr "Anna säännöllisesti tarkistaa, onko uusia työpöytäsovelmia saatavana"
 
 #: settings-schema.json:144
@@ -143,7 +143,7 @@ msgid "Open Cinnamon Settings to manage all the Desklets"
 msgstr "Avaa Cinnamon asetukset hallitaksesi kaikkia työpöydän sovelmia"
 
 #: settings-schema.json:179
-msgid "Let regularly check if your extensions are up to date"
+msgid "Check regularly whether your extensions are up to date"
 msgstr "Anna säännöllisesti tarkistaa, ovatko laajennukset ajan tasalla"
 
 #: settings-schema.json:180
@@ -152,7 +152,7 @@ msgstr ""
 "Jos laajennusten päivitykset eivät koske sinua, poista tämä valintaruutu."
 
 #: settings-schema.json:187
-msgid "Let regularly check if new extensions are available"
+msgid "Check regularly whether new extensions are available"
 msgstr "Anna säännöllisesti tarkistaa, onko uusia laajennuksia saatavana"
 
 #: settings-schema.json:188
@@ -178,7 +178,7 @@ msgid "Open Cinnamon Settings to manage all the Extensions"
 msgstr "Avaa Cinnamon asetukset hallitaksesi kaikkia laajennuksia"
 
 #: settings-schema.json:223
-msgid "Let regularly check if your themes are up to date"
+msgid "Check regularly whether your themes are up to date"
 msgstr "Anna säännöllisesti tarkistaa, ovatko teemasi ajan tasalla"
 
 #: settings-schema.json:224
@@ -186,7 +186,7 @@ msgid "If themes updates do not concern you, uncheck this box."
 msgstr "Jos teemojen päivitykset eivät koske sinua, poista tämä valintaruutu."
 
 #: settings-schema.json:231
-msgid "Let regularly check if new themes are available"
+msgid "Check regularly whether new themes are available"
 msgstr "Anna säännöllisesti tarkistaa, onko uusia teemoja saatavana"
 
 #: settings-schema.json:232

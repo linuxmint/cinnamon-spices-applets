@@ -1,3 +1,8 @@
+### v5.1.0~20191114
+  * Closes #2679.
+  * Closes #2680.
+  * Closes #2681.
+
 ### v5.0.0~20191105
 
 Many new features and improvements.
