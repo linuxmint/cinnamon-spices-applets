@@ -374,7 +374,7 @@ msgstr "Anzeigeart"
 #. 4.2->settings-schema.json->check_applets->description
 #. 3.8->settings-schema.json->check_applets->description
 #. 2.8->settings-schema.json->check_applets->description
-msgid "Let regularly check if your applets are up to date"
+msgid "Check regularly whether your applets are up to date"
 msgstr "Regelmäßige Überprüfung, ob die installierten Applets aktuell sind"
 
 #. 4.2->settings-schema.json->check_applets->tooltip
@@ -386,7 +386,7 @@ msgstr "Ausschalten, wenn nicht auf Updates für Applets geprüft werden soll."
 #. 4.2->settings-schema.json->check_new_applets->description
 #. 3.8->settings-schema.json->check_new_applets->description
 #. 2.8->settings-schema.json->check_new_applets->description
-msgid "Let regularly check if new applets are available"
+msgid "Check regularly whether new applets are available"
 msgstr "Regelmäßige Überprüfung, ob neue Applets zur Verfügung stehen"
 
 #. 4.2->settings-schema.json->check_new_applets->tooltip
@@ -436,7 +436,7 @@ msgstr "Cinnamon Einstellungen öffnen, um alle Applets zu verwalten"
 #. 4.2->settings-schema.json->check_desklets->description
 #. 3.8->settings-schema.json->check_desklets->description
 #. 2.8->settings-schema.json->check_desklets->description
-msgid "Let regularly check if your desklets are up to date"
+msgid "Check regularly whether your desklets are up to date"
 msgstr "Regelmäßige Überprüfung, ob die installierten Desklets aktuell sind"
 
 #. 4.2->settings-schema.json->check_desklets->tooltip
@@ -448,7 +448,7 @@ msgstr "Ausschalten, wenn nicht auf Updates für Desklets geprüft werden soll."
 #. 4.2->settings-schema.json->check_new_desklets->description
 #. 3.8->settings-schema.json->check_new_desklets->description
 #. 2.8->settings-schema.json->check_new_desklets->description
-msgid "Let regularly check if new desklets are available"
+msgid "Check regularly whether new desklets are available"
 msgstr "Regelmäßige Überprüfung, ob neue Desklets zur Verfügung stehen"
 
 #. 4.2->settings-schema.json->check_new_desklets->tooltip
@@ -476,7 +476,7 @@ msgstr "Cinnamon Einstellungen öffnen, um alle Desklets zu verwalten"
 #. 4.2->settings-schema.json->check_extensions->description
 #. 3.8->settings-schema.json->check_extensions->description
 #. 2.8->settings-schema.json->check_extensions->description
-msgid "Let regularly check if your extensions are up to date"
+msgid "Check regularly whether your extensions are up to date"
 msgstr ""
 "Regelmäßige Überprüfung, ob die installierten Erweiterungen aktuell sind"
 
@@ -490,7 +490,7 @@ msgstr ""
 #. 4.2->settings-schema.json->check_new_extensions->description
 #. 3.8->settings-schema.json->check_new_extensions->description
 #. 2.8->settings-schema.json->check_new_extensions->description
-msgid "Let regularly check if new extensions are available"
+msgid "Check regularly whether new extensions are available"
 msgstr "Regelmäßige Überprüfung, ob neue Erweiterungen zur Verfügung stehen"
 
 #. 4.2->settings-schema.json->check_new_extensions->tooltip
@@ -518,7 +518,7 @@ msgstr "Cinnamon Einstellungen öffnen, um alle Erweiterungen zu verwalten"
 #. 4.2->settings-schema.json->check_themes->description
 #. 3.8->settings-schema.json->check_themes->description
 #. 2.8->settings-schema.json->check_themes->description
-msgid "Let regularly check if your themes are up to date"
+msgid "Check regularly whether your themes are up to date"
 msgstr "Regelmäßige Überprüfung, ob die installierten Themen aktuell sind"
 
 #. 4.2->settings-schema.json->check_themes->tooltip
@@ -530,7 +530,7 @@ msgstr "Ausschalten, wenn nicht auf Updates für Themen geprüft werden soll."
 #. 4.2->settings-schema.json->check_new_themes->description
 #. 3.8->settings-schema.json->check_new_themes->description
 #. 2.8->settings-schema.json->check_new_themes->description
-msgid "Let regularly check if new themes are available"
+msgid "Check regularly whether new themes are available"
 msgstr "Regelmäßige Überprüfung, ob neue Themen zur Verfügung stehen"
 
 #. 4.2->settings-schema.json->check_new_themes->tooltip

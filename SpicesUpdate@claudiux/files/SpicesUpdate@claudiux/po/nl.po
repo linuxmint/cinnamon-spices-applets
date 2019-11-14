@@ -293,7 +293,7 @@ msgstr "Weergavetype"
 #. 4.2->settings-schema.json->check_applets->description
 #. 3.8->settings-schema.json->check_applets->description
 #. 2.8->settings-schema.json->check_applets->description
-msgid "Let regularly check if your applets are up to date"
+msgid "Check regularly whether your applets are up to date"
 msgstr "Laat regelmatig controleren of hulptoepassingen up-to-date zijn"
 
 #. 4.2->settings-schema.json->check_applets->tooltip
@@ -305,7 +305,7 @@ msgstr "Als updates van hulptoepassing n.v.t zijn, schakelt u dit selectievakje 
 #. 4.2->settings-schema.json->check_new_applets->description
 #. 3.8->settings-schema.json->check_new_applets->description
 #. 2.8->settings-schema.json->check_new_applets->description
-msgid "Let regularly check if new applets are available"
+msgid "Check regularly whether new applets are available"
 msgstr "Laat regelmatig controleren of er nieuwe hulptoepassingen beschikbaar zijn"
 
 #. 4.2->settings-schema.json->check_new_applets->tooltip
@@ -351,7 +351,7 @@ msgstr "Open Cinnamon-instellingen om alle hulptoepassingen te beheren"
 #. 4.2->settings-schema.json->check_desklets->description
 #. 3.8->settings-schema.json->check_desklets->description
 #. 2.8->settings-schema.json->check_desklets->description
-msgid "Let regularly check if your desklets are up to date"
+msgid "Check regularly whether your desklets are up to date"
 msgstr "Laat regelmatig controleren of minitoepassingen up-to-date zijn"
 
 #. 4.2->settings-schema.json->check_desklets->tooltip
@@ -363,7 +363,7 @@ msgstr "Als minitoepassingen update's n.v.t zijn, schakelt u dit selectievakje u
 #. 4.2->settings-schema.json->check_new_desklets->description
 #. 3.8->settings-schema.json->check_new_desklets->description
 #. 2.8->settings-schema.json->check_new_desklets->description
-msgid "Let regularly check if new desklets are available"
+msgid "Check regularly whether new desklets are available"
 msgstr "Laat regelmatig controleren of er nieuwe minitoepassingen beschikbaar zijn"
 
 #. 4.2->settings-schema.json->check_new_desklets->tooltip
@@ -391,7 +391,7 @@ msgstr "Open Cinnamon-instellingen om alle minitoepassingen te beheren"
 #. 4.2->settings-schema.json->check_extensions->description
 #. 3.8->settings-schema.json->check_extensions->description
 #. 2.8->settings-schema.json->check_extensions->description
-msgid "Let regularly check if your extensions are up to date"
+msgid "Check regularly whether your extensions are up to date"
 msgstr "Laat regelmatig controleren of extensies up-to-date zijn"
 
 #. 4.2->settings-schema.json->check_extensions->tooltip
@@ -403,7 +403,7 @@ msgstr "Als extensie update's n.v.t zijn, schakelt u dit selectievakje uit."
 #. 4.2->settings-schema.json->check_new_extensions->description
 #. 3.8->settings-schema.json->check_new_extensions->description
 #. 2.8->settings-schema.json->check_new_extensions->description
-msgid "Let regularly check if new extensions are available"
+msgid "Check regularly whether new extensions are available"
 msgstr "Laat regelmatig controleren of er nieuwe extensies beschikbaar zijn"
 
 #. 4.2->settings-schema.json->check_new_extensions->tooltip
@@ -431,7 +431,7 @@ msgstr "Open Cinnamon-instellingen om alle extensies te beheren"
 #. 4.2->settings-schema.json->check_themes->description
 #. 3.8->settings-schema.json->check_themes->description
 #. 2.8->settings-schema.json->check_themes->description
-msgid "Let regularly check if your themes are up to date"
+msgid "Check regularly whether your themes are up to date"
 msgstr "Laat regelmatig controleren of thema's up-to-date zijn"
 
 #. 4.2->settings-schema.json->check_themes->tooltip
@@ -443,7 +443,7 @@ msgstr "Als nieuwe thema's updates  n.v.t zijn, schakelt u dit selectievakje uit
 #. 4.2->settings-schema.json->check_new_themes->description
 #. 3.8->settings-schema.json->check_new_themes->description
 #. 2.8->settings-schema.json->check_new_themes->description
-msgid "Let regularly check if new themes are available"
+msgid "Check regularly whether new themes are available"
 msgstr "Laat regelmatig controleren of er nieuwe thema's beschikbaar zijn"
 
 #. 4.2->settings-schema.json->check_new_themes->tooltip

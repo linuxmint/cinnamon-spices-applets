@@ -336,8 +336,26 @@ class SpicesUpdate extends Applet.TextIconApplet {
       "general_frequency",
       this.on_frequency_changed,
       null);
-      this.refreshInterval = 3600 * this.general_frequency;
-      if (DEBUG()) this.refreshInterval = 120 * this.general_frequency;
+    this.refreshInterval = 3600 * this.general_frequency;
+    if (DEBUG()) this.refreshInterval = 120 * this.general_frequency;
+
+    this.settings.bindProperty(Settings.BindingDirection.IN,
+      "general_first_check",
+      "general_first_check",
+      null,
+      null);
+    this.first_loop = this.general_first_check;
+
+    this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL,
+      "general_next_check_date",
+      "general_next_check_date",
+      null,
+      null);
+    let now = Math.ceil(Date.now()/1000);
+    if (this.general_next_check_date === 0) {
+      this.general_next_check_date = now + this.refreshInterval;
+      //logError("now=%s ; this.general_next_check_date=%s".format(now.toString(), this.general_next_check_date.toString()));
+    }
 
     this.settings.bindProperty(Settings.BindingDirection.IN,
       "general_warning",
@@ -458,7 +476,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
     this.refresh_requested = false;
     this.applet_running = true;
     this.loopId = 0;
-    this.first_loop = true; // To do nothing for 1 minute.
+    //this.first_loop = true; // To do nothing for 1 minute.
     this.on_settings_changed();
     // Run the loop !
     this.iteration = 0;
@@ -624,6 +642,20 @@ class SpicesUpdate extends Applet.TextIconApplet {
       }
     }
   }; // End of _set_main_label
+
+  _is_time_to_check() {
+    let now = Math.ceil(Date.now()/1000);
+    let ret = (now >= this.general_next_check_date - 5);
+
+    this.refreshInterval = 3600 * this.general_frequency;
+    if (DEBUG()) this.refreshInterval = 120 * this.general_frequency;
+    if (ret === true) {
+      this.general_next_check_date = now + this.refreshInterval;
+    }
+
+    if (DEBUG()) log("Is time to check? %s. Now: %s. Next: %s. Interval: %s".format(ret.toString(), now.toString(), this.general_next_check_date.toString(), this.refreshInterval.toString()));
+    return ret
+  }; // End of _is_time_to_check
 
   on_frequency_changed() {
     if (this.loopId) {
@@ -901,7 +933,9 @@ class SpicesUpdate extends Applet.TextIconApplet {
         if (d.query_exists(null)) {
           this.unprotectedThemesDico[a["name"]] = a["isunprotected"];
           let metadataFileName = DIR_MAP[type] + "/" + a["name"] + "/metadata.json";
-          if (a["isunprotected"] && a["requestnewdownload"] !== undefined && a["requestnewdownload"] === true) {
+          let metadataFile = Gio.file_new_for_path(metadataFileName);
+          // For some themes, the metadata.json file is in the subfolder /cinnamon:
+          if (!metadataFile.query_exists(null) || (a["isunprotected"] && a["requestnewdownload"] !== undefined && a["requestnewdownload"] === true)) {
             if (this.cache[type] === "{}") this._load_cache(type);
             let created = this._get_member_from_cache(type, a["name"], "created");
             let last_edited = this._get_last_edited_from_cache(type, a["name"]);
@@ -1150,7 +1184,13 @@ class SpicesUpdate extends Applet.TextIconApplet {
   }; // End of get_spice_name
 
   _rewrite_metadataFile(fileName, lastEdited) {
-    let metadataData = GLib.file_get_contents(fileName).toString().substr(5);
+    let metadataFile = Gio.file_new_for_path(fileName);
+    let metadataData;
+    if (metadataFile.query_exists(null)) {
+      metadataData = GLib.file_get_contents(fileName).toString().substr(5);
+    } else {
+      metadataData = "{}";
+    }
     let newData = JSON.parse(metadataData);
     newData["last-edited"] = lastEdited;
     let message = JSON.stringify(newData, null, 2);
