@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-14 09:12+0100\n"
+"POT-Creation-Date: 2019-11-16 18:40+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,18 +16,19 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
 
 #. metadata.json->name
 #: 4.2/applet.js:91 4.2/applet.js:119 4.2/applet.js:558 4.2/applet.js:639
 #: 4.2/applet.js:1034 4.2/applet.js:1584 3.8/applet.js:212 3.8/applet.js:242
-#: 3.8/applet.js:664 3.8/applet.js:743 3.8/applet.js:1171 3.8/applet.js:1730
+#: 3.8/applet.js:664 3.8/applet.js:743 3.8/applet.js:1173 3.8/applet.js:1738
 #: 2.8/applet.js:171 2.8/applet.js:192 2.8/applet.js:555 2.8/applet.js:1003
 #: 2.8/applet.js:1581
 msgid "Spices Update"
 msgstr ""
 
 #: 4.2/applet.js:120 4.2/applet.js:1755 4.2/applet.js:1761 3.8/applet.js:243
-#: 3.8/applet.js:1904 3.8/applet.js:1910 2.8/applet.js:1708 2.8/applet.js:1714
+#: 3.8/applet.js:1912 3.8/applet.js:1918 2.8/applet.js:1708 2.8/applet.js:1714
 msgid "Middle-Click to Refresh"
 msgstr ""
 
@@ -39,8 +40,9 @@ msgstr ""
 #. 3.8->settings-schema.json->btn_refresh_desklets->description
 #. 3.8->settings-schema.json->btn_refresh_extensions->description
 #. 3.8->settings-schema.json->btn_refresh_themes->description
-#: 4.2/applet.js:576 4.2/applet.js:1592 3.8/applet.js:682 3.8/applet.js:1738
-#: 2.8/applet.js:574 2.8/applet.js:1589
+#: 4.2/applet.js:576 4.2/applet.js:1592 3.8/applet.js:682 3.8/applet.js:1746
+#: 2.8/applet.js:574 2.8/applet.js:1589 cs/4.2/bin/SUExtensionCore.py:795
+#: cs/4.4/bin/SUExtensionCore.py:795
 msgid "Refresh"
 msgstr ""
 
@@ -57,49 +59,50 @@ msgstr ""
 msgid "Do not matter. This is a FAKE notification, just for the test."
 msgstr ""
 
-#: 4.2/applet.js:1034 3.8/applet.js:1171 2.8/applet.js:1003
+#: 4.2/applet.js:1034 3.8/applet.js:1173 2.8/applet.js:1003
 msgid "is fully functional."
 msgstr ""
 
-#: 4.2/applet.js:1035 3.8/applet.js:1172 2.8/applet.js:1004
+#: 4.2/applet.js:1035 3.8/applet.js:1174 2.8/applet.js:1004
 msgid "All dependencies are installed"
 msgstr ""
 
-#: 4.2/applet.js:1057 3.8/applet.js:1196 2.8/applet.js:1028
+#: 4.2/applet.js:1057 3.8/applet.js:1198 2.8/applet.js:1028
 msgid ""
 "You appear to be missing some of the programs required for this applet to "
 "have all its features."
 msgstr ""
 
-#: 4.2/applet.js:1058 3.8/applet.js:1197 2.8/applet.js:1029
+#: 4.2/applet.js:1058 3.8/applet.js:1199 2.8/applet.js:1029
 msgid "Please execute, in the just opened terminal, the commands:"
 msgstr ""
 
-#: 4.2/applet.js:1059 3.8/applet.js:1198 2.8/applet.js:1030
+#: 4.2/applet.js:1059 3.8/applet.js:1200 2.8/applet.js:1030
 msgid "Some dependencies are not installed!"
 msgstr ""
 
-#: 4.2/applet.js:1431 3.8/applet.js:1573 2.8/applet.js:1422
+#: 4.2/applet.js:1431 3.8/applet.js:1581 2.8/applet.js:1422
 msgid "(Description unavailable)"
 msgstr ""
 
-#: 4.2/applet.js:1614 3.8/applet.js:1761 2.8/applet.js:1613
+#: 4.2/applet.js:1614 3.8/applet.js:1769 2.8/applet.js:1613
 msgid "Forget new Spices"
 msgstr ""
 
-#: 4.2/applet.js:1620 3.8/applet.js:1767 2.8/applet.js:1619
+#: 4.2/applet.js:1620 3.8/applet.js:1775 2.8/applet.js:1619
 msgid "Open useful Cinnamon Settings"
 msgstr ""
 
-#: 4.2/applet.js:1627 3.8/applet.js:1774 2.8/applet.js:1626
+#: 4.2/applet.js:1627 3.8/applet.js:1782 2.8/applet.js:1626
+#: cs/4.2/bin/SUExtensionCore.py:240 cs/4.4/bin/SUExtensionCore.py:240
 msgid "Configure"
 msgstr ""
 
-#: 4.2/applet.js:1642 3.8/applet.js:1789 2.8/applet.js:1641
+#: 4.2/applet.js:1642 3.8/applet.js:1797 2.8/applet.js:1641
 msgid "Help"
 msgstr ""
 
-#: 4.2/applet.js:1746 3.8/applet.js:1895 2.8/applet.js:1699
+#: 4.2/applet.js:1746 3.8/applet.js:1903 2.8/applet.js:1699
 msgid "Middle-Click to open useful Cinnamon Settings"
 msgstr ""
 
@@ -123,6 +126,8 @@ msgstr ""
 #. 3.8->settings-schema.json->Applets->title
 #. 2.8->settings-schema.json->head1->description
 #: 4.2/constants.js:114 3.8/applet.js:141 2.8/applet.js:100
+#: cs/4.2/modules/cs_applets.py:34 cs/3.8/modules/cs_applets.py:34
+#: cs/4.0/modules/cs_applets.py:34 cs/4.4/modules/cs_applets.py:34
 msgid "Applets"
 msgstr ""
 
@@ -130,6 +135,8 @@ msgstr ""
 #. 3.8->settings-schema.json->Desklets->title
 #. 2.8->settings-schema.json->head2->description
 #: 4.2/constants.js:115 3.8/applet.js:142 2.8/applet.js:101
+#: cs/4.2/modules/cs_desklets.py:32 cs/3.8/modules/cs_desklets.py:32
+#: cs/4.0/modules/cs_desklets.py:32 cs/4.4/modules/cs_desklets.py:32
 msgid "Desklets"
 msgstr ""
 
@@ -137,6 +144,8 @@ msgstr ""
 #. 3.8->settings-schema.json->Extensions->title
 #. 2.8->settings-schema.json->head3->description
 #: 4.2/constants.js:116 3.8/applet.js:143 2.8/applet.js:102
+#: cs/4.2/modules/cs_extensions.py:32 cs/3.8/modules/cs_extensions.py:32
+#: cs/4.0/modules/cs_extensions.py:32 cs/4.4/modules/cs_extensions.py:32
 msgid "Extensions"
 msgstr ""
 
@@ -144,6 +153,12 @@ msgstr ""
 #. 3.8->settings-schema.json->Themes->title
 #. 2.8->settings-schema.json->head4->description
 #: 4.2/constants.js:117 3.8/applet.js:144 2.8/applet.js:103
+#: cs/4.2/modules/cs_themes.py:38 cs/4.2/modules/cs_themes.py:61
+#: cs/4.2/modules/cs_themes.py:63 cs/3.8/modules/cs_themes.py:23
+#: cs/3.8/modules/cs_themes.py:46 cs/3.8/modules/cs_themes.py:48
+#: cs/4.0/modules/cs_themes.py:36 cs/4.0/modules/cs_themes.py:59
+#: cs/4.0/modules/cs_themes.py:61 cs/4.4/modules/cs_themes.py:38
+#: cs/4.4/modules/cs_themes.py:61 cs/4.4/modules/cs_themes.py:63
 msgid "Themes"
 msgstr ""
 
@@ -290,6 +305,10 @@ msgstr ""
 msgid ""
 "If you want to get the latest version of a theme now, set its two switches "
 "to TRUE."
+msgstr ""
+
+#: cs/4.2/bin/SUExtensionCore.py:723 cs/4.4/bin/SUExtensionCore.py:723
+msgid "Upgradable"
 msgstr ""
 
 #. metadata.json->description
