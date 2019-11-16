@@ -1,14 +1,14 @@
 # Swedish translation for vpnLookOut@claudiux.
 # Copyright (C) 2017 Claudiux <claude.clerc@gmail.com>
 # This file is distributed under the same license as the cinnamon package.
-# FIRST AUTHOR Åke Engelbrektson <eson@svenskasprakfiler.se>, 2018.
+# FIRST AUTHOR Åke Engelbrektson <eson@svenskasprakfiler.se>, 2018,2019.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: vpnLookOut@claudiux v3.0.0\n"
 "Report-Msgid-Bugs-To: Claudiux <claude.clerc@gmail.com>\n"
-"POT-Creation-Date: 2017-12-02 19:59+0100\n"
-"PO-Revision-Date: 2018-12-04 06:52+0100\n"
+"POT-Creation-Date: 2019-11-08 13:46+0100\n"
+"PO-Revision-Date: 2019-11-16 16:45+0100\n"
 "Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
 "Language-Team: Svenska Språkfiler <contactform@svenskasprakfiler.se>\n"
 "Language: sv\n"
@@ -396,11 +396,11 @@ msgstr "Stäng av"
 msgid "VPN only"
 msgstr "Endast VPN"
 
-#: 3.8/settings-schema.json:225
+#: 3.8/settings-schema.json:224
 msgid "Log the VPN status changes and the VPN-related Apps status changes"
 msgstr "Logga VPN-statusändringar och relaterade programs statusändringar"
 
-#: 3.8/settings-schema.json:226
+#: 3.8/settings-schema.json:225
 msgid ""
 "This option allows this applet to log the VPN status changes and the VPN-"
 "related applications status changes.\n"
@@ -410,49 +410,80 @@ msgstr ""
 "uppkopplingen och relaterade program.\n"
 "Du kan visa loggfilen för att utföra diagnostik."
 
-#: 3.8/settings-schema.json:249
+#: 3.8/settings-schema.json:248
 msgid "Lifetime (days)"
 msgstr "Livstid (dagar)"
 
-#: 3.8/settings-schema.json:250
+#: 3.8/settings-schema.json:249
 msgid "Lifetime of a record in the log file, in days."
 msgstr "Livstid för en post i loggfilen, i dagar."
 
-#: 3.8/applet.js:331
+#: 3.8/applet.js:355
 msgid "TRUE"
 msgstr "SANT"
 
-#: 3.8/applet.js:332
+#: 3.8/applet.js:356
 msgid "FALSE"
 msgstr "FALSKT"
 
-#: 3.8/applet.js:741
+#: 3.8/applet.js:773
 msgid "Switching to: "
 msgstr "Växlar till: "
 
-#: 3.8/applet.js:922
+#: 3.8/applet.js:979
 msgid "View Activity Logs"
 msgstr "Visa aktivitetsloggen"
 
-#: 3.8/applet.js:994
+#: 3.8/applet.js:1060
 msgid "or Middle-Click to disconnect"
 msgstr "eller mushjulsklick för att koppla ner"
 
-#: 3.8/applet.js:1025
+#: 3.8/applet.js:1091
 msgid "Started by vpnLookOut: "
 msgstr "Startad av vpnLookOut: "
 
-#: 3.8/applet.js:1051
+#: 3.8/applet.js:1117
 msgid "Blocked by vpnLookOut: "
 msgstr "Blockerad av vpnLookOut: "
 
-#: 3.8/applet.js:1069
+#: 3.8/applet.js:1135
 msgid "or Middle-Click to connect"
 msgstr "eller mushjulsklick för att ansluta"
 
-#: 3.8/applet.js:1101
+#: 3.8/applet.js:1167
 msgid "Stopped by vpnLookOut: "
 msgstr "Stoppad av vpnLookOut: "
+
+#: 4.2/settings-schema.json:153
+msgid "Use Symbolic Icons"
+msgstr "Använd symboliska ikoner"
+
+#: 4.2/settings-schema.json:154
+msgid ""
+"Select this option if you prefer Symbolic icons instead of Full Color icons."
+msgstr ""
+"Välj detta alternativ om du föredrar symboliska ikoner istället för "
+"fullfärgsikoner."
+
+#: 4.2/applet.js:357
+msgid "Deactivate vpnLookOut"
+msgstr "Avaktivera vpnLookOut"
+
+#: 4.2/applet.js:922
+msgid "vpnLookOut is deactivated"
+msgstr "vpnLookOut är inaktiverad"
+
+#: 4.2/applet.js:1043
+msgid "Activate vpnLookOut"
+msgstr "Aktivera vpnLookOut"
+
+#: 4.2/applet.js:1046
+msgid "vpnLookOut deactivated"
+msgstr "vpnLookOut avaktiverad"
+
+#: 4.2/applet.js:1056
+msgid "vpnLookOut reactivated"
+msgstr "vpnLookOut återaktiverad"
 
 #~ msgid ""
 #~ "A Cinnamon applet that watches over the VPN link, displays its status, "
