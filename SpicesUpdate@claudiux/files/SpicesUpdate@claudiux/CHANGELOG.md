@@ -1,3 +1,7 @@
+### v5.1.1~20191116
+  * Now compatible with Python 3.8 (used on Arch)
+  * Now can sort Spices by 'update' (Cinnamon 4.2)
+
 ### v5.1.0~20191114
   * Closes #2679.
   * Closes #2680.

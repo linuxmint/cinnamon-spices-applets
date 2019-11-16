@@ -29,7 +29,7 @@ import proxygsettings
 import SettingsWidgets
 
 # i18n
-gettext.install("cinnamon", "/usr/share/locale", names="ngettext")
+gettext.install("cinnamon", "/usr/share/locale", names="gettext.ngettext")
 
 # Standard setting pages... this can be expanded to include applet dirs maybe?
 mod_files = glob.glob(config.currentPath + "/modules/*.py")
@@ -72,7 +72,6 @@ CATEGORIES = [
 CONTROL_CENTER_MODULES = [
     #         Label                              Module ID                Icon                         Category      Keywords for filter
     [_("Network"),                          "network",            "cs-network",                 "hardware",      _("network, wireless, wifi, ethernet, broadband, internet")],
-    [_("Display"),                          "display",            "cs-display",                 "hardware",      _("display, screen, monitor, layout, resolution, dual, lcd")],
     [_("Color"),                            "color",              "cs-color",                   "hardware",      _("color, profile, display, printer, output")],
     [_("Graphics Tablet"),                  "wacom",              "cs-tablet",                  "hardware",      _("wacom, digitize, tablet, graphics, calibrate, stylus")]
 ]
@@ -93,7 +92,8 @@ STANDALONE_MODULES = [
     [_("Package Management"),            "yumex-dnf",                           "cs-sources",         "admin",          _("update, install, repository, package, source, download")],
     [_("Users and Groups"),              "cinnamon-settings-users",             "cs-user-accounts",   "admin",          _("user, users, account, accounts, group, groups, password")],
     [_("Bluetooth"),                     "blueberry",                           "cs-bluetooth",       "hardware",       _("bluetooth, dongle, transfer, mobile")],
-    [_("Manage Services and Units"),     "systemd-manager-pkexec",              "cs-sources",         "admin",          _("systemd, units, services, systemctl, init")]
+    [_("Manage Services and Units"),     "systemd-manager-pkexec",              "cs-sources",         "admin",          _("systemd, units, services, systemctl, init")],
+    [_("Disks"),                         "gnome-disks",                         "disks",              "hardware",       _("disks, manage, hardware, management, hard, hdd, pendrive, format, erase, test, create, iso, ISO, disk, image")]
 ]
 
 TABS = {
@@ -103,6 +103,7 @@ TABS = {
     "backgrounds":      {"images": 0, "settings": 1},
     "default":          {"preferred": 0, "removable": 1},
     "desklets":         {"installed": 0, "more": 1, "download": 1, "general": 2},
+    "display":          {"layout": 0, "settings": 1},
     "effects":          {"effects": 0, "customize": 1},
     "extensions":       {"installed": 0, "more": 1, "download": 1},
     "keyboard":         {"typing": 0, "shortcuts": 1, "layouts": 2},
@@ -186,8 +187,7 @@ class MainWindow:
                 self.window.set_icon_name(sidePage.icon)
             sidePage.build()
             if sidePage.stack:
-                #current_page = sidePage.stack.get_visible_child_name()
-                sidePage.stack.get_visible_child_name()
+                current_page = sidePage.stack.get_visible_child_name()
                 self.stack_switcher.set_stack(sidePage.stack)
                 l = sidePage.stack.get_children()
                 if len(l) > 0:
@@ -254,9 +254,10 @@ class MainWindow:
             if key is not cat:
                 self.side_view[key].unselect_all()
 
+    ''' Create the UI '''
     def __init__(self):
-        ''' Create the UI '''
         self.builder = Gtk.Builder()
+        self.builder.set_translation_domain('cinnamon') # let it translate!
         self.builder.add_from_file(config.currentPath + "/cinnamon-settings.ui")
         self.window = XApp.GtkWindow(window_position=Gtk.WindowPosition.CENTER,
                                      default_width=800, default_height=600)
@@ -423,7 +424,7 @@ class MainWindow:
             # can consider it as a standalone app and give it its own
             # group.
             wm_class = "cinnamon-settings %s" % arg1
-            self.window.set_wmclass(wm_class, wm_class)
+            self.window.set_role(wm_class)
             self.button_back.hide()
             (_iter, cat) = sidePagesIters[arg1]
             path = self.store[cat].get_path(_iter)

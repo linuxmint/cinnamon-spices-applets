@@ -29,7 +29,7 @@ import proxygsettings
 import SettingsWidgets
 
 # i18n
-gettext.install("cinnamon", "/usr/share/locale", names="ngettext")
+gettext.install("cinnamon", "/usr/share/locale", names="gettext.ngettext")
 
 # Standard setting pages... this can be expanded to include applet dirs maybe?
 mod_files = glob.glob(config.currentPath + "/modules/*.py")
@@ -196,7 +196,7 @@ class MainWindow:
                         visible_child = sidePage.stack.get_visible_child()
                         if self.tab == 1 \
                         and hasattr(visible_child, 'sort_combo') \
-                        and self.sort in range(4):
+                        and self.sort in range(5):
                             visible_child.sort_combo.set_active(self.sort)
                             visible_child.sort_changed()
                     else:
@@ -396,7 +396,7 @@ class MainWindow:
             #   cinnamon-settings.py desklets -t 2
             # Please note that useless or wrong arguments are ignored.
             opts = []
-            sorts_literal = {"name":0, "score":1, "date":2, "installed":3}
+            sorts_literal = {"name":0, "score":1, "date":2, "installed":3, "update":4}
             tabs_literal = {"default":0}
             if arg1 in TABS.keys():
                 tabs_literal = TABS[arg1]
@@ -423,7 +423,7 @@ class MainWindow:
             # can consider it as a standalone app and give it its own
             # group.
             wm_class = "cinnamon-settings %s" % arg1
-            self.window.set_wmclass(wm_class, wm_class)
+            self.window.set_role(wm_class)
             self.button_back.hide()
             (_iter, cat) = sidePagesIters[arg1]
             path = self.store[cat].get_path(_iter)
