@@ -1,6 +1,5 @@
 ### v5.1.3~20191118
   * Cinnamon 4.4: replaces the cgi module by the html one to be compatible with Python 3.8 (used on Arch).
-  * Deletes branch 4.3, which has become useless.
 
 ### v5.1.2~20191117
   * Translations: Updates files: .pot, fr.po and es.po.
