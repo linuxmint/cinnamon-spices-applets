@@ -389,7 +389,8 @@
   },
   "general_next_check_date": {
     "type": "generic",
-    "value": 0
+    "value": 0,
+    "default": 0
   },
   "general_warning": {
     "type": "switch",
