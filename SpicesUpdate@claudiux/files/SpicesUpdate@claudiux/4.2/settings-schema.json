@@ -318,13 +318,13 @@
   },
   "check_themes": {
     "type": "switch",
-    "default": true,
+    "default": false,
     "description": "Check regularly whether your themes are up to date",
     "tooltip": "If themes updates do not concern you, uncheck this box."
   },
   "check_new_themes": {
     "type": "switch",
-    "default": true,
+    "default": false,
     "dependency": "check_themes",
     "description": "Check regularly whether new themes are available",
     "tooltip": "If new themes do not concern you, uncheck this box."
@@ -389,7 +389,8 @@
   },
   "general_next_check_date": {
     "type": "generic",
-    "value": 0
+    "value": 0,
+    "default": 0
   },
   "general_warning": {
     "type": "switch",

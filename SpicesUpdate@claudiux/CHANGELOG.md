@@ -1,3 +1,9 @@
+### v5.1.3~20191118
+  * Cinnamon 4.4: replaces the cgi module by the html one to be compatible with Python 3.8 (used on Arch).
+
+### v5.1.2~20191117
+  * Translations: Updates files: .pot, fr.po and es.po.
+
 ### v5.1.1~20191116
   * Now compatible with Python 3.8 (used on Arch)
   * Now can sort Spices by 'update' (Cinnamon 4.2)
