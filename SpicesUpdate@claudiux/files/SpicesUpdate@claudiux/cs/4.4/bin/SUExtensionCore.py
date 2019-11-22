@@ -15,7 +15,8 @@ import gi
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gio, Gtk, GObject, Gdk, GdkPixbuf, Pango, GLib
 
-from SettingsWidgets import SidePage, SettingsStack, SettingsPage, SettingsWidget, SettingsLabel
+from xapp.SettingsWidgets import SettingsStack, SettingsPage, SettingsWidget, SettingsLabel
+from SettingsWidgets import SidePage
 from SUSpices import SU_Spice_Harvester, ThreadedTaskManager
 
 print("SU 4.4 ExtensionCore.py")
@@ -350,7 +351,7 @@ class ManageSpicesRow(Gtk.ListBoxRow):
 
 class ManageSpicesPage(SettingsPage):
     def __init__(self, parent, collection_type, spices, window):
-        super(ManageSpicesPage, self).__init__()
+        super().__init__()
         self.expand = True
         self.set_spacing(0)
         self.set_margin_top(5)
@@ -590,7 +591,7 @@ class ManageSpicesPage(SettingsPage):
 
 class DownloadSpicesRow(Gtk.ListBoxRow):
     def __init__(self, uuid, data, spices, size_groups):
-        super(DownloadSpicesRow, self).__init__()
+        super().__init__()
 
         self.uuid = uuid
         self.data = data
@@ -664,7 +665,7 @@ class DownloadSpicesRow(Gtk.ListBoxRow):
         if self.installed:
             self.add_status('installed', 'object-select-symbolic', _("Installed"))
 
-        self.show_all()
+        #self.show_all()
 
     def download(self, *args):
         self.spices.install(self.uuid)
@@ -677,7 +678,7 @@ class DownloadSpicesRow(Gtk.ListBoxRow):
         self.status_box.pack_end(icon, False, False, 0)
         self.status_ids[status_id] = icon
         icon.set_tooltip_text(tooltip_text)
-        icon.show()
+        #icon.show()
 
     def remove_status(self, status_id):
         if status_id not in self.status_ids:
@@ -689,7 +690,7 @@ class DownloadSpicesRow(Gtk.ListBoxRow):
 
 class DownloadSpicesPage(SettingsPage):
     def __init__(self, parent, collection_type, spices, window):
-        super(DownloadSpicesPage, self).__init__()
+        super().__init__()
         self.expand = True
         self.set_spacing(0)
         self.set_margin_top(5)
@@ -741,6 +742,9 @@ class DownloadSpicesPage(SettingsPage):
         main_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         frame.add(main_box)
 
+        self.infobar_holder = Gtk.Frame(shadow_type=Gtk.ShadowType.NONE)
+        main_box.pack_start(self.infobar_holder, False, False, 0)
+
         scw = Gtk.ScrolledWindow()
         scw.expand = True
         scw.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC)
@@ -748,9 +752,6 @@ class DownloadSpicesPage(SettingsPage):
         main_box.pack_start(scw, True, True, 0)
         self.box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL)
         scw.add(self.box)
-
-        self.infobar_holder = Gtk.Frame(shadow_type=Gtk.ShadowType.NONE)
-        self.box.add(self.infobar_holder)
 
         self.list_box = Gtk.ListBox()
         self.list_box.set_selection_mode(Gtk.SelectionMode.SINGLE)
@@ -813,7 +814,7 @@ class DownloadSpicesPage(SettingsPage):
 
         self.spices.connect('cache-loaded', self.build_list)
         self.spices.connect('installed-changed', self.build_list)
-        self.build_list()
+        #self.build_list()
 
     def on_entry_refilter(self, widget, data=None):
         if self.search_entry.get_text() == '':
@@ -912,11 +913,12 @@ class DownloadSpicesPage(SettingsPage):
         updates_available = self.spices.get_n_updates()
         self.update_all_button.set_sensitive(updates_available)
         if updates_available > 0:
-            msg_text = _("Update all") + ' (' + gettext.ngettext("%d update available", "%d updates available", updates_available) % updates_available  + ')'
+            msg_text = _("Update all") + ' (' + ngettext("%d update available", "%d updates available", updates_available) % updates_available  + ')'
         else:
             msg_text = _("No updates available")
         self.update_all_button.set_tooltip_text(msg_text)
         self.refresh_button.set_sensitive(True)
+        self.list_box.show_all()
 
     def get_more_info(self, *args):
         extension_row = self.list_box.get_selected_row()
@@ -929,10 +931,40 @@ class DownloadSpicesPage(SettingsPage):
         GLib.idle_add(self.on_page_shown)
 
     def on_page_shown(self, *args):
+        if not self.extension_rows:
+            self.build_list()
+
         if not self.spices.processing_jobs:
             if (not self.spices.has_cache) or self.spices.get_cache_age() > 7:
-                prompt = _("Your cache is out of date. Would you like to update it now?")
-                if show_prompt(prompt, self.window):
-                    self.spices.refresh_cache()
+                self.on_cache_outdated()
 
         self.search_entry.grab_focus()
+
+    def on_cache_outdated(self, *args):
+        infobar = self.infobar_holder.get_child()
+        if not infobar:
+            infobar = Gtk.InfoBar()
+            icon = Gtk.Image.new_from_icon_name("dialog-question-symbolic", Gtk.IconSize.LARGE_TOOLBAR)
+            label = Gtk.Label(_("Your cache is out of date. Would you like to update it now?"))
+            label.set_line_wrap(True)
+
+            infobar.set_message_type(Gtk.MessageType.QUESTION)
+            infobar.get_content_area().pack_start(icon, False, False, 12)
+            infobar.get_content_area().pack_start(label, False, False, 0)
+            infobar.add_button(_("Yes"), Gtk.ResponseType.YES)
+            infobar.add_button(_("No"), Gtk.ResponseType.NO)
+
+            infobar.connect('response', self._on_infobar_response)
+            self.infobar_holder.add(infobar)
+
+        self.infobar_holder.show_all()
+        infobar.set_revealed(True)
+
+    def _on_infobar_response(self, infobar: Gtk.InfoBar, response):
+        if response == Gtk.ResponseType.YES and not self.spices.processing_jobs:
+            self.spices.refresh_cache()
+            pass
+
+        infobar.set_revealed(False)
+        self.search_entry.grab_focus()
+

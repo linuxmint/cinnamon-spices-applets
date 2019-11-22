@@ -1,3 +1,7 @@
+### v5.2.0~20191124
+  * Cinnamon 4.4: Use Xapp widgets and speed up loading of the icon for the icon theme widget. (Thanks to collinss.)
+  * Cinnamon 4.3: Removed (now useless).
+
 ### v5.1.3~20191118
   * Cinnamon 4.4: replaces the cgi module by the html one to be compatible with Python 3.8 (used on Arch).
 

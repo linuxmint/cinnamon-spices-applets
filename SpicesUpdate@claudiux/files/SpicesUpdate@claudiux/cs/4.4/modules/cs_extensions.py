@@ -1,7 +1,8 @@
 #!/usr/bin/python3
 
 from SUExtensionCore import ManageSpicesPage, DownloadSpicesPage
-from SettingsWidgets import SidePage, SettingsStack
+from SettingsWidgets import SidePage
+from xapp.SettingsWidgets import SettingsStack
 from SUSpices import SU_Spice_Harvester
 from gi.repository import GLib
 
