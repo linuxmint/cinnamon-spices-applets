@@ -1,8 +1,9 @@
 #!/usr/bin/python3
 
-from SUExtensionCore import ManageSpicesPage, DownloadSpicesPage
+from ExtensionCore import ManageSpicesPage, DownloadSpicesPage
 from SUSpices import SU_Spice_Harvester
-from GSettingsWidgets import *
+from SettingsWidgets import SidePage
+from xapp.GSettingsWidgets import *
 from gi.repository import GLib, Gtk
 
 class Module:

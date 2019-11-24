@@ -1,11 +1,15 @@
 #!/usr/bin/python3
 
-from gi.repository.Gtk import SizeGroup, SizeGroupMode
+import os
 
-from GSettingsWidgets import *
+from gi.repository.Gtk import SizeGroup, SizeGroupMode, IconTheme, IconLookupFlags, Label
+import gi.repository.GLib as GLib
+
+from xapp.GSettingsWidgets import *
 from CinnamonGtkSettings import CssRange, CssOverrideSwitch, GtkSettingsSwitch, PreviewWidget, Gtk2ScrollbarSizeEditor
-from SettingsWidgets import LabelRow
-from SUExtensionCore import DownloadSpicesPage
+from SettingsWidgets import LabelRow, SidePage, walk_directories
+from ChooserButtonWidgets import PictureChooserButton
+from ExtensionCore import DownloadSpicesPage
 from SUSpices import SU_Spice_Harvester
 
 import glob
@@ -51,11 +55,18 @@ class Module:
             self.wm_settings = Gio.Settings.new("org.cinnamon.desktop.wm.preferences")
             self.cinnamon_settings = Gio.Settings.new("org.cinnamon.theme")
 
-            self.icon_chooser = self.create_button_chooser(self.settings, 'icon-theme', 'icons', 'icons', button_picture_size=ICON_SIZE, menu_pictures_size=ICON_SIZE, num_cols=4)
-            self.cursor_chooser = self.create_button_chooser(self.settings, 'cursor-theme', 'icons', 'cursors', button_picture_size=32, menu_pictures_size=32, num_cols=4)
-            self.theme_chooser = self.create_button_chooser(self.settings, 'gtk-theme', 'themes', 'gtk-3.0', button_picture_size=35, menu_pictures_size=35, num_cols=4)
-            self.metacity_chooser = self.create_button_chooser(self.wm_settings, 'theme', 'themes', 'metacity-1', button_picture_size=32, menu_pictures_size=32, num_cols=4)
-            self.cinnamon_chooser = self.create_button_chooser(self.cinnamon_settings, 'name', 'themes', 'cinnamon', button_picture_size=60, menu_pictures_size=60, num_cols=4)
+            self.scale = self.window.get_scale_factor()
+
+            self.icon_chooser = self.create_button_chooser(self.settings, \
+                'icon-theme', 'icons', 'icons', button_picture_size=ICON_SIZE, menu_pictures_size=ICON_SIZE, num_cols=4)
+            self.cursor_chooser = self.create_button_chooser(self.settings, \
+                'cursor-theme', 'icons', 'cursors', button_picture_size=32, menu_pictures_size=32, num_cols=4)
+            self.theme_chooser = self.create_button_chooser(self.settings, \
+                'gtk-theme', 'themes', 'gtk-3.0', button_picture_size=35, menu_pictures_size=35, num_cols=4)
+            self.metacity_chooser = self.create_button_chooser(self.wm_settings, \
+                'theme', 'themes', 'metacity-1', button_picture_size=32, menu_pictures_size=32, num_cols=4)
+            self.cinnamon_chooser = self.create_button_chooser(self.cinnamon_settings, \
+                'name', 'themes', 'cinnamon', button_picture_size=60, menu_pictures_size=60*self.scale, num_cols=4)
 
             page = SettingsPage()
             self.sidePage.stack.add_titled(page, "themes", _("Themes"))
@@ -187,15 +198,65 @@ class Module:
         if len(themes) > 0:
             inc = 1.0 / len(themes)
 
-        if path_suffix == "icons":
+        if path_suffix == 'icons':
+            cache_folder = GLib.get_user_cache_dir() + '/cs_themes/'
+            #print("cache_folder =", cache_folder)
+            icon_cache_path = os.path.join(cache_folder, 'icons')
+
+            # Retrieve list of known themes/locations for faster loading (icon theme loading and lookup are very slow)
+            if os.path.exists(icon_cache_path):
+                read_path =  icon_cache_path
+            elif os.path.exists('/usr/share/cinnamon/cinnamon-settings/icons'):
+                read_path =  '/usr/share/cinnamon/cinnamon-settings/icons'
+            else:
+                read_path =  os.path.join(os.path.dirname('..'), 'icons')
+
+            icon_paths = {}
+            with open(read_path, 'r') as cache_file:
+                for line in cache_file:
+                    theme_name, icon_path = line.strip().split(':')
+                    icon_paths[theme_name] = icon_path
+
+            dump = False
             for theme in themes:
-                icon_theme = Gtk.IconTheme()
-                icon_theme.set_custom_theme(theme)
-                folder = icon_theme.lookup_icon("folder", ICON_SIZE, Gtk.IconLookupFlags.FORCE_SVG)
-                if folder:
-                    path = folder.get_filename()
-                    chooser.add_picture(path, callback, title=theme, id=theme)
-                GLib.timeout_add(5, self.increment_progress, (chooser,inc))
+                theme_path = None
+
+                if theme in icon_paths:
+                    # loop through all possible locations until we find a match
+                    # (user folders should override system ones)
+                    for theme_folder in ICON_FOLDERS:
+                        possible_path = os.path.join(theme_folder, icon_paths[theme])
+                        if os.path.exists(possible_path):
+                            theme_path = possible_path
+                            break
+
+                if theme_path is None:
+                    icon_theme = IconTheme()
+                    icon_theme.set_custom_theme(theme)
+                    folder = icon_theme.lookup_icon('folder', ICON_SIZE, IconLookupFlags.FORCE_SVG)
+                    if folder:
+                        theme_path = folder.get_filename()
+
+                        # we need to get the relative path for storage
+                        for theme_folder in ICON_FOLDERS:
+                            if os.path.commonpath([theme_folder, theme_path]) == theme_folder:
+                                icon_paths[theme] = os.path.relpath(theme_path, start=theme_folder)
+                                break
+
+                    dump = True
+
+                if os.path.exists(theme_path):
+                    chooser.add_picture(theme_path, callback, title=theme, id=theme)
+                GLib.timeout_add(5, self.increment_progress, (chooser, inc))
+
+            if dump:
+                if not os.path.exists(cache_folder):
+                    os.mkdir(cache_folder)
+
+                with open(icon_cache_path, 'w') as cache_file:
+                    for theme_name, icon_path in icon_paths.items():
+                        cache_file.write('%s:%s\n' % (theme_name, icon_path))
+
         else:
             if path_suffix == "cinnamon":
                 chooser.add_picture("/usr/share/cinnamon/theme/thumbnail.png", callback, title="cinnamon", id="cinnamon")
@@ -230,7 +291,7 @@ class Module:
     def make_group(self, group_label, widget, add_widget_to_size_group=True):
         self.size_groups = getattr(self, "size_groups", [SizeGroup.new(SizeGroupMode.HORIZONTAL) for x in range(2)])
         box = SettingsWidget()
-        label = Gtk.Label()
+        label = Label()
         label.set_markup(group_label)
         label.props.xalign = 0.0
         self.size_groups[0].add_widget(label)
@@ -243,14 +304,15 @@ class Module:
 
     def create_button_chooser(self, settings, key, path_prefix, path_suffix, button_picture_size, menu_pictures_size, num_cols):
         if self is None: return
-        chooser = PictureChooserButton(num_cols=num_cols, button_picture_size=button_picture_size, menu_pictures_size=menu_pictures_size, has_button_label=True)
+        chooser = PictureChooserButton(num_cols=num_cols, button_picture_size=button_picture_size, menu_pictures_size=menu_pictures_size, \
+            has_button_label=True)
         theme = settings.get_string(key)
         chooser.set_button_label(theme)
         chooser.set_tooltip_text(theme)
         if path_suffix == "cinnamon" and theme == "cinnamon":
             chooser.set_picture_from_file("/usr/share/cinnamon/theme/thumbnail.png")
         elif path_suffix == "icons":
-            current_theme = Gtk.IconTheme.get_default()
+            current_theme = IconTheme.get_default()
             folder = current_theme.lookup_icon("folder", button_picture_size, 0)
             if folder is not None:
                 path = folder.get_filename()
