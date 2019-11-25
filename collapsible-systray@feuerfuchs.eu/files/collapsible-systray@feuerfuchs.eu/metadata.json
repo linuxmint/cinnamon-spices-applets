@@ -10,7 +10,9 @@
         "3.6",
         "3.8",
         "4.0",
-        "4.2"
+        "4.2",
+        "4.4",
+        "4.6"
     ], 
     "max-instances": 1, 
     "description": "A replacement for the abandoned System Tray Collapsible Cinnamon applet", 
