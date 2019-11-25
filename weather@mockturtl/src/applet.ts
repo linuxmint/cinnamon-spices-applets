@@ -342,6 +342,11 @@ class WeatherApplet extends Applet.TextIconApplet {
     this.refreshWeather(true);
   };
 
+  /**
+   * Handles obtaining JSON over http. 
+   * returns HTTPError object on fail.
+   * @param query fully contructed url
+   */
   public async LoadJsonAsync(query: string): Promise <any> {
     let json = await new Promise((resolve: any, reject: any) => {
       let message = Soup.Message.new('GET', query);
@@ -638,7 +643,7 @@ class WeatherApplet extends Applet.TextIconApplet {
       let temp = "";
       if (this.weather.temperature != null) {
         temp = TempToUserUnits(this.weather.temperature, this._temperatureUnit).toString();
-        this._currentWeatherTemperature.text = temp + ' ' + this.unitToUnicode();
+        this._currentWeatherTemperature.text = temp + ' ' + this.unitToUnicode(this._temperatureUnit);
       }
 
       // Set Applet Label, even if the variables are empty
@@ -650,7 +655,7 @@ class WeatherApplet extends Applet.TextIconApplet {
         if (label != "") {
           label += " ";
         }
-        label += (temp + ' ' + this.unitToUnicode());
+        label += (temp + ' ' + this.unitToUnicode(this._temperatureUnit));
       }
       this.set_applet_label(label);
 
@@ -680,7 +685,7 @@ class WeatherApplet extends Applet.TextIconApplet {
             value = this.weather.extra_field.value.toString() + "%";
             break;
           case "temperature":
-            value = TempToUserUnits(this.weather.extra_field.value, this._temperatureUnit) + this.unitToUnicode();
+            value = TempToUserUnits(this.weather.extra_field.value, this._temperatureUnit) + this.unitToUnicode(this._temperatureUnit);
             break;
           default:
             value = _(this.weather.extra_field.value);
@@ -748,7 +753,7 @@ class WeatherApplet extends Applet.TextIconApplet {
         }
 
         forecastUi.Day.text = dayName;
-        forecastUi.Temperature.text = first_temperature + ' ' + '\u002F' + ' ' + second_temperature + ' ' + this.unitToUnicode();
+        forecastUi.Temperature.text = first_temperature + ' ' + '\u002F' + ' ' + second_temperature + ' ' + this.unitToUnicode(this._temperatureUnit);
         forecastUi.Summary.text = comment;
         forecastUi.Icon.icon_name = forecastData.condition.icon;
       }
@@ -759,8 +764,8 @@ class WeatherApplet extends Applet.TextIconApplet {
     }
   };
 
+  /** Reset weather object */
   private wipeCurrentData(): void {
-    //Reset weather object
     this.weather.date = null;
     this.weather.location.city = null;
     this.weather.location.country = null;
@@ -782,20 +787,24 @@ class WeatherApplet extends Applet.TextIconApplet {
     this.weather.extra_field = null;
   };
 
+  /** Reset forecasts array */
   private wipeForecastData(): void {
     this.forecasts = [];
   };
 
+  /** Destroys current weather UI box */
   private destroyCurrentWeather(): void {
     if (this._currentWeather.get_child() != null)
       this._currentWeather.get_child().destroy()
   }
 
+  /** Destroys forecast UI box */
   private destroyFutureWeather(): void {
     if (this._futureWeather.get_child() != null)
       this._futureWeather.get_child().destroy()
   }
 
+  /** Destroys UI first then shows initial UI */
   private showLoadingUi(): void {
     this.destroyCurrentWeather()
     this.destroyFutureWeather()
@@ -807,6 +816,7 @@ class WeatherApplet extends Applet.TextIconApplet {
     }))
   }
 
+  /** Fully rebuilds UI */
   private rebuild(): void {
     this.showLoadingUi()
     this.rebuildCurrentWeatherUi()
@@ -947,15 +957,15 @@ class WeatherApplet extends Applet.TextIconApplet {
   //
   //----------------------------------------------------------------------
 
-  noApiKey(): boolean {
+  public noApiKey(): boolean {
     if (this._apiKey == undefined || this._apiKey == "") {
       return true;
     }
     return false;
   };
 
-  unitToUnicode(): string {
-    return this._temperatureUnit == "fahrenheit" ? '\u2109' : '\u2103'
+  private unitToUnicode(unit: WeatherUnits): string {
+    return unit == "fahrenheit" ? '\u2109' : '\u2103'
   }
 
 

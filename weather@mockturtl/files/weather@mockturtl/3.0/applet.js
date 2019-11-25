@@ -578,7 +578,7 @@ var WeatherApplet = (function (_super) {
             var temp = "";
             if (this.weather.temperature != null) {
                 temp = TempToUserUnits(this.weather.temperature, this._temperatureUnit).toString();
-                this._currentWeatherTemperature.text = temp + ' ' + this.unitToUnicode();
+                this._currentWeatherTemperature.text = temp + ' ' + this.unitToUnicode(this._temperatureUnit);
             }
             var label = "";
             if (this._showCommentInPanel) {
@@ -588,7 +588,7 @@ var WeatherApplet = (function (_super) {
                 if (label != "") {
                     label += " ";
                 }
-                label += (temp + ' ' + this.unitToUnicode());
+                label += (temp + ' ' + this.unitToUnicode(this._temperatureUnit));
             }
             this.set_applet_label(label);
             try {
@@ -611,7 +611,7 @@ var WeatherApplet = (function (_super) {
                         value = this.weather.extra_field.value.toString() + "%";
                         break;
                     case "temperature":
-                        value = TempToUserUnits(this.weather.extra_field.value, this._temperatureUnit) + this.unitToUnicode();
+                        value = TempToUserUnits(this.weather.extra_field.value, this._temperatureUnit) + this.unitToUnicode(this._temperatureUnit);
                         break;
                     default:
                         value = _(this.weather.extra_field.value);
@@ -667,7 +667,7 @@ var WeatherApplet = (function (_super) {
                         dayName = _("Tomorrow");
                 }
                 forecastUi.Day.text = dayName;
-                forecastUi.Temperature.text = first_temperature + ' ' + '\u002F' + ' ' + second_temperature + ' ' + this.unitToUnicode();
+                forecastUi.Temperature.text = first_temperature + ' ' + '\u002F' + ' ' + second_temperature + ' ' + this.unitToUnicode(this._temperatureUnit);
                 forecastUi.Summary.text = comment;
                 forecastUi.Icon.icon_name = forecastData.condition.icon;
             }
@@ -837,8 +837,8 @@ var WeatherApplet = (function (_super) {
         return false;
     };
     ;
-    WeatherApplet.prototype.unitToUnicode = function () {
-        return this._temperatureUnit == "fahrenheit" ? '\u2109' : '\u2103';
+    WeatherApplet.prototype.unitToUnicode = function (unit) {
+        return unit == "fahrenheit" ? '\u2109' : '\u2103';
     };
     WeatherApplet.prototype.DisplayError = function (title, msg) {
         this.set_applet_label(title);

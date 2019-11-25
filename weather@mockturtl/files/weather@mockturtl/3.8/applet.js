@@ -477,7 +477,7 @@ class WeatherApplet extends Applet.TextIconApplet {
             let temp = "";
             if (this.weather.temperature != null) {
                 temp = TempToUserUnits(this.weather.temperature, this._temperatureUnit).toString();
-                this._currentWeatherTemperature.text = temp + ' ' + this.unitToUnicode();
+                this._currentWeatherTemperature.text = temp + ' ' + this.unitToUnicode(this._temperatureUnit);
             }
             let label = "";
             if (this._showCommentInPanel) {
@@ -487,7 +487,7 @@ class WeatherApplet extends Applet.TextIconApplet {
                 if (label != "") {
                     label += " ";
                 }
-                label += (temp + ' ' + this.unitToUnicode());
+                label += (temp + ' ' + this.unitToUnicode(this._temperatureUnit));
             }
             this.set_applet_label(label);
             try {
@@ -510,7 +510,7 @@ class WeatherApplet extends Applet.TextIconApplet {
                         value = this.weather.extra_field.value.toString() + "%";
                         break;
                     case "temperature":
-                        value = TempToUserUnits(this.weather.extra_field.value, this._temperatureUnit) + this.unitToUnicode();
+                        value = TempToUserUnits(this.weather.extra_field.value, this._temperatureUnit) + this.unitToUnicode(this._temperatureUnit);
                         break;
                     default:
                         value = _(this.weather.extra_field.value);
@@ -566,7 +566,7 @@ class WeatherApplet extends Applet.TextIconApplet {
                         dayName = _("Tomorrow");
                 }
                 forecastUi.Day.text = dayName;
-                forecastUi.Temperature.text = first_temperature + ' ' + '\u002F' + ' ' + second_temperature + ' ' + this.unitToUnicode();
+                forecastUi.Temperature.text = first_temperature + ' ' + '\u002F' + ' ' + second_temperature + ' ' + this.unitToUnicode(this._temperatureUnit);
                 forecastUi.Summary.text = comment;
                 forecastUi.Icon.icon_name = forecastData.condition.icon;
             }
@@ -736,8 +736,8 @@ class WeatherApplet extends Applet.TextIconApplet {
         return false;
     }
     ;
-    unitToUnicode() {
-        return this._temperatureUnit == "fahrenheit" ? '\u2109' : '\u2103';
+    unitToUnicode(unit) {
+        return unit == "fahrenheit" ? '\u2109' : '\u2103';
     }
     DisplayError(title, msg) {
         this.set_applet_label(title);
