@@ -578,7 +578,7 @@ class WeatherApplet extends Applet.TextIconApplet {
     this.forecasts = weatherInfo.forecasts;
 
     // Estimation
-    this.weather.location.tzOffset = Math.round(this.weather.coord.lon/15) * 3600;
+    //this.weather.location.tzOffset = Math.round(this.weather.coord.lon/15) * 3600;
   }
 
   /** Injects data from weather object into the popupMenu */

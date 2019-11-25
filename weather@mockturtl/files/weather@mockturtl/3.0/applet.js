@@ -538,7 +538,6 @@ var WeatherApplet = (function (_super) {
         if (!!weatherInfo.extra_field)
             this.weather.extra_field = weatherInfo.extra_field;
         this.forecasts = weatherInfo.forecasts;
-        this.weather.location.tzOffset = Math.round(this.weather.coord.lon / 15) * 3600;
     };
     WeatherApplet.prototype.displayWeather = function () {
         try {
