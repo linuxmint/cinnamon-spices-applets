@@ -31,21 +31,21 @@ class DarkSky implements WeatherProvider {
     //--------------------------------------------------------
     //  Properties
     //--------------------------------------------------------
-    descriptionLinelength = 25;
-    supportedLanguages = [
+    private descriptionLinelength = 25;
+    private supportedLanguages = [
         'ar', 'az', 'be', 'bg', 'bs', 'ca', 'cs', 'da', 'de', 'el', 'en', 'es',
         'et', 'fi', 'fr', 'he', 'hr', 'hu', 'id', 'is', 'it', 'ja', 'ka', 'ko',
         'kw', 'lv', 'nb', 'nl', 'no', 'pl', 'pt', 'ro', 'ru', 'sk', 'sl', 'sr',
         'sv', 'tet', 'tr', 'uk', 'x-pig-latin', 'zh', 'zh-tw'];
 
-    query = "https://api.darksky.net/forecast/";
+    private query = "https://api.darksky.net/forecast/";
 
       // DarkSky Filter words for short conditions, won't work on every language
-    DarkSkyFilterWords = [_("and"), _("until"), _("in")];
+    private DarkSkyFilterWords = [_("and"), _("until"), _("in")];
     
-    unit: queryUnits = null;
+    private unit: queryUnits = null;
 
-    app: WeatherApplet
+    private app: WeatherApplet
 
     constructor(_app: WeatherApplet) {
         this.app = _app;
@@ -54,7 +54,7 @@ class DarkSky implements WeatherProvider {
     //--------------------------------------------------------
     //  Functions
     //--------------------------------------------------------
-    async GetWeather(): Promise<WeatherData> {
+    public async GetWeather(): Promise<WeatherData> {
         let query = this.ConstructQuery();
         let json;
         if (query != "" && query != null) {
@@ -84,7 +84,7 @@ class DarkSky implements WeatherProvider {
     };
 
 
-    ParseWeather(json: any): WeatherData {
+    private ParseWeather(json: any): WeatherData {
         try {
             let result: WeatherData = {
                 date: new Date(json.currently.time * 1000),
@@ -148,7 +148,7 @@ class DarkSky implements WeatherProvider {
     };
 
 
-    ConstructQuery(): string {
+    private ConstructQuery(): string {
         this.SetQueryUnit();
         let query;
         let key = this.app._apiKey.replace(" ", "");
@@ -179,7 +179,7 @@ class DarkSky implements WeatherProvider {
     };
 
 
-    HandleResponseErrors(json: any): void {
+    private HandleResponseErrors(json: any): void {
         let code = json.code;
         let error = json.error;
         let errorMsg = "DarkSky API: "
@@ -195,7 +195,7 @@ class DarkSky implements WeatherProvider {
     };
 
     /** Handles API Scpecific HTTP errors  */
-    HandleHTTPError(error: HttpError, uiError: AppletError): AppletError {
+    public HandleHTTPError(error: HttpError, uiError: AppletError): AppletError {
         if (error.code == 403) { // DarkSky returns auth error on the http level when key is wrong
             uiError.detail = "bad key"
             uiError.message = _("Please Make sure you\nentered the API key correctly");
@@ -205,7 +205,7 @@ class DarkSky implements WeatherProvider {
         return uiError;
     }
 
-    ProcessSummary(summary: string): string {
+    private ProcessSummary(summary: string): string {
         let processed = summary.split(" ");
         let result = "";
         let linelength = 0;
@@ -220,7 +220,7 @@ class DarkSky implements WeatherProvider {
         return result;
     };
 
-    GetShortSummary(summary: string): string {
+    private GetShortSummary(summary: string): string {
         let processed = summary.split(" ");
         let result = "";
         for (let i = 0; i < 2; i++) {
@@ -231,7 +231,7 @@ class DarkSky implements WeatherProvider {
         return result;
     };
 
-    GetShortCurrentSummary(summary: string): string {
+    private GetShortCurrentSummary(summary: string): string {
         let processed = summary.split(" ");
         let result = "";
         let maxLoop;
@@ -244,11 +244,11 @@ class DarkSky implements WeatherProvider {
         return result;
     }
 
-    WordBanned(word: string): boolean {
+    private WordBanned(word: string): boolean {
         return this.DarkSkyFilterWords.indexOf(word) != -1;
     }
 
-    ResolveIcon(icon: string): string[] {
+    private ResolveIcon(icon: string): string[] {
         switch (icon) {
             case "rain":
               return [icons.rain, icons.showers_scattered, icons.rain_freezing]
@@ -285,7 +285,7 @@ class DarkSky implements WeatherProvider {
           }
     };
 
-    SetQueryUnit(): void {
+    private SetQueryUnit(): void {
         if (this.app._temperatureUnit == "celsius"){
             if (this.app._windSpeedUnit == "kph" || this.app._windSpeedUnit == "m/s") {
                 this.unit = 'si';
@@ -299,7 +299,7 @@ class DarkSky implements WeatherProvider {
         }
     };
 
-    ToKelvin(temp: number): number {
+    private ToKelvin(temp: number): number {
         if (this.unit == 'us') {
             return FahrenheitToKelvin(temp);
         }
@@ -309,7 +309,7 @@ class DarkSky implements WeatherProvider {
 
     };
 
-    ToMPS(speed: number): number {
+    private ToMPS(speed: number): number {
         if (this.unit == 'si') {
             return speed;
         }

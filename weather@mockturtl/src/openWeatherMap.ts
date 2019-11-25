@@ -28,14 +28,14 @@ class OpenWeatherMap implements WeatherProvider {
     //--------------------------------------------------------
     //  Properties
     //--------------------------------------------------------
-    supportedLanguages = ["ar", "bg", "ca", "cz", "de", "el", "en", "fa", "fi",
+    private supportedLanguages = ["ar", "bg", "ca", "cz", "de", "el", "en", "fa", "fi",
      "fr", "gl", "hr", "hu", "it", "ja", "kr", "la", "lt", "mk", "nl", "pl",
       "pt", "ro", "ru", "se", "sk", "sl", "es", "tr", "ua", "vi", "zh_cn", "zh_tw"];
 
-    current_url = "https://api.openweathermap.org/data/2.5/weather?";
-    daily_url = "https://api.openweathermap.org/data/2.5/forecast/daily?";
+    private current_url = "https://api.openweathermap.org/data/2.5/weather?";
+    private daily_url = "https://api.openweathermap.org/data/2.5/forecast/daily?";
 
-    app: WeatherApplet
+    private app: WeatherApplet
     constructor (_app: WeatherApplet) {
       this.app = _app;
     }
@@ -45,7 +45,7 @@ class OpenWeatherMap implements WeatherProvider {
     //  Functions
     //--------------------------------------------------------
 
-    async GetWeather(): Promise<WeatherData> {
+    public async GetWeather(): Promise<WeatherData> {
         let currentResult = await this.GetData(this.current_url, this.ParseCurrent) as WeatherData;
         let forecastResult = await this.GetData(this.daily_url, this.ParseForecast) as ForecastData[];
         currentResult.forecasts = forecastResult;
@@ -59,7 +59,7 @@ class OpenWeatherMap implements WeatherProvider {
      * @param baseUrl 
      * @param ParseFunction returns WeatherData or ForecastData Object
      */
-    async GetData(baseUrl: string, ParseFunction: (json: any, context: any) => WeatherData | ForecastData[]): Promise<WeatherData | ForecastData[]> {
+    private async GetData(baseUrl: string, ParseFunction: (json: any, context: any) => WeatherData | ForecastData[]): Promise<WeatherData | ForecastData[]> {
         let query = this.ConstructQuery(baseUrl);
         let json;
         if (query != null) {
@@ -91,7 +91,7 @@ class OpenWeatherMap implements WeatherProvider {
     };
 
 
-    ParseCurrent(json: any, self: OpenWeatherMap): WeatherData {
+    private ParseCurrent(json: any, self: OpenWeatherMap): WeatherData {
         try {
           let weather: WeatherData = {
             coord: {
@@ -135,7 +135,7 @@ class OpenWeatherMap implements WeatherProvider {
         }
     };
 
-    ParseForecast(json: any, self: OpenWeatherMap): ForecastData[] {
+    private ParseForecast(json: any, self: OpenWeatherMap): ForecastData[] {
       let forecasts: ForecastData[] = [];
       try {
         for (let i = 0; i < self.app._forecastDays; i++) {
@@ -161,7 +161,7 @@ class OpenWeatherMap implements WeatherProvider {
       }
     };
 
-    ConstructQuery(baseUrl: string): string {
+    private ConstructQuery(baseUrl: string): string {
         let query = baseUrl;
         let locString = this.ParseLocation();
         if (locString != null) {
@@ -179,7 +179,7 @@ class OpenWeatherMap implements WeatherProvider {
         return null;
     };
 
-    ParseLocation(): string {
+    private ParseLocation(): string {
         let loc = this.app._location.replace(/ /g, "");
         if (isCoordinate(loc)) {
             let locArr = loc.split(',');
@@ -193,7 +193,7 @@ class OpenWeatherMap implements WeatherProvider {
     };
 
 
-    HandleResponseErrors(json: any): void {
+    private HandleResponseErrors(json: any): void {
         let errorMsg = "OpenWeathermap Response: ";
         let error = {
           service: "openweathermap",
@@ -226,7 +226,7 @@ class OpenWeatherMap implements WeatherProvider {
         this.app.log.Error(errorMsg + json.message);
     };
 
-    HandleHTTPError(error: HttpError, uiError: AppletError): AppletError {
+    public HandleHTTPError(error: HttpError, uiError: AppletError): AppletError {
       // "this" is not accessible here
       if (error.code == 404) {
         uiError.detail = "location not found";
@@ -238,7 +238,7 @@ class OpenWeatherMap implements WeatherProvider {
     }
 
 
-    ResolveIcon(icon: string): string[] {
+    private ResolveIcon(icon: string): string[] {
         // https://openweathermap.org/weather-conditions
        /* fallback icons are: weather-clear-night 
        weather-clear weather-few-clouds-night weather-few-clouds 

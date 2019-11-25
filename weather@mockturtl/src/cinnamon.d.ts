@@ -180,12 +180,12 @@ declare namespace imports.ui.applet {
 
     export class TextIconApplet {
         constructor(orientation: string, panelHeight: number, instanceID: number);
-        set_applet_icon_name(text: string): void;
-        set_applet_icon_symbolic_name(iconName: string): void;
-        set_applet_label(text: string): void;
-        set_applet_tooltip(text: string): void;
-        setAllowedLayout(text: string): void;
-        hide_applet_label(hide: boolean): void;
+        protected set_applet_icon_name(text: string): void;
+        protected set_applet_icon_symbolic_name(iconName: string): void;
+        protected set_applet_label(text: string): void;
+        protected set_applet_tooltip(text: string): void;
+        protected setAllowedLayout(text: string): void;
+        protected hide_applet_label(hide: boolean): void;
     }
 
     /**

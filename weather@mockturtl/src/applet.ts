@@ -135,7 +135,7 @@ function _(str: string): string {
 
 class WeatherApplet extends Applet.TextIconApplet {
   /** Stores all weather information */
-  weather: Weather = {
+  private weather: Weather = {
     date: null, // Date object, UTC
     location: {
       city: null,
@@ -165,68 +165,70 @@ class WeatherApplet extends Applet.TextIconApplet {
   }
 
   /** Stores all forecast information */
-  forecasts: Array < ForecastData > = [];
+  private forecasts: Array < ForecastData > = [];
 
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////  
 
   // UI elements
-  _currentWeather: imports.gi.St.Bin;
-  _separatorArea: imports.gi.St.DrawingArea;
-  _futureWeather: imports.gi.St.Bin;
-  _applet_context_menu: any;
-  _icon_type: string;
-  _currentWeatherIcon: imports.gi.St.Icon;
-  _currentWeatherSummary: imports.gi.St.Label;
-  _currentWeatherLocation: imports.gi.St.Button;
-  _currentWeatherSunrise: imports.gi.St.Label;
-  _currentWeatherSunset: imports.gi.St.Label;
-  _currentWeatherTemperature: imports.gi.St.Label;
-  _currentWeatherHumidity: imports.gi.St.Label;
-  _currentWeatherPressure: imports.gi.St.Label;
-  _currentWeatherWind: imports.gi.St.Label;
-  _currentWeatherApiUnique: imports.gi.St.Label;
-  _currentWeatherApiUniqueCap: imports.gi.St.Label;
-  _forecast: ForecastUI[];
-  _forecastBox: imports.gi.St.BoxLayout;
+  private _currentWeather: imports.gi.St.Bin;
+  private _separatorArea: imports.gi.St.DrawingArea;
+  private _futureWeather: imports.gi.St.Bin;
+  private _applet_context_menu: any;
+  private _currentWeatherIcon: imports.gi.St.Icon;
+  private _currentWeatherSummary: imports.gi.St.Label;
+  private _currentWeatherLocation: imports.gi.St.Button;
+  private _currentWeatherSunrise: imports.gi.St.Label;
+  private _currentWeatherSunset: imports.gi.St.Label;
+  private _currentWeatherTemperature: imports.gi.St.Label;
+  private _currentWeatherHumidity: imports.gi.St.Label;
+  private _currentWeatherPressure: imports.gi.St.Label;
+  private _currentWeatherWind: imports.gi.St.Label;
+  private _currentWeatherApiUnique: imports.gi.St.Label;
+  private _currentWeatherApiUniqueCap: imports.gi.St.Label;
+  private _forecast: ForecastUI[];
+  private _forecastBox: imports.gi.St.BoxLayout;
 
   // Settings properties to bind
-  _refreshInterval: number;
-  _manualLocation: boolean;
-  _dataService: string;
-  _location: string;
-  _translateCondition: boolean;
-  _temperatureUnit: WeatherUnits;
-  _pressureUnit: WeatherPressureUnits;
-  _windSpeedUnit: WeatherWindSpeedUnits;
-  _show24Hours: boolean;
-  _apiKey: string;
-  _forecastDays: number;
-  _verticalOrientation: boolean;
-  _temperatureHighFirst: boolean;
-  _shortConditions: boolean;
-  _showSunrise: boolean;
-  _showCommentInPanel: boolean;
-  _showTextInPanel: boolean;
-  _locationLabelOverride: string;
+  // Settings are public
+  public _refreshInterval: number;
+  public _manualLocation: boolean;
+  public _dataService: string;
+  public _location: string;
+  public _translateCondition: boolean;
+  public _temperatureUnit: WeatherUnits;
+  public _pressureUnit: WeatherPressureUnits;
+  public _windSpeedUnit: WeatherWindSpeedUnits;
+  public _show24Hours: boolean;
+  public _apiKey: string;
+  public _forecastDays: number;
+  public _verticalOrientation: boolean;
+  public _temperatureHighFirst: boolean;
+  public _shortConditions: boolean;
+  public _showSunrise: boolean;
+  public _showCommentInPanel: boolean;
+  public _showTextInPanel: boolean;
+  public _locationLabelOverride: string;
+  public _icon_type: string;
 
-  keybinding: any;
-  menu: any;
-  menuManager: any;
-  settings: any;
-  log: Log;
-  currentLocale: string = null;
-  systemLanguage: string = null;
+  public currentLocale: string = null;
+  public systemLanguage: string = null;
+  public log: Log;
+
+  private keybinding: any;
+  private menu: any;
+  private menuManager: any;
+  private settings: any;
   // Soup session (see https://bugzilla.gnome.org/show_bug.cgi?id=661323#c64)
-  _httpSession = new Soup.SessionAsync();
+  private _httpSession = new Soup.SessionAsync();
 
-  provider: WeatherProvider; // API
-  locProvider = new ipApi.IpApi(this); // IP location lookup
-  lastUpdated: Date = null;
-  orientation: any;
-  encounteredError: boolean = false;
+  private provider: WeatherProvider; // API
+  private locProvider = new ipApi.IpApi(this); // IP location lookup
+  private lastUpdated: Date = null;
+  private orientation: any;
+  private encounteredError: boolean = false;
 
-  constructor(metadata: any, orientation: any, panelHeight: number, instanceId: number) {
+  public constructor(metadata: any, orientation: any, panelHeight: number, instanceId: number) {
     super(orientation, panelHeight, instanceId);
     this.currentLocale = this.constructJsLocale(GLib.get_language_names()[0]);
     this.systemLanguage = this.currentLocale.split('-')[0];
@@ -256,13 +258,13 @@ class WeatherApplet extends Applet.TextIconApplet {
     }
   }
 
-  SetAppletOnPanel(): void {
+  private SetAppletOnPanel(): void {
     this.set_applet_icon_name(APPLET_ICON);
     this.set_applet_label(_("..."));
     this.set_applet_tooltip(_("Click to open"));
   }
 
-  AddPopupMenu(orientation: any) {
+  private AddPopupMenu(orientation: any) {
     this.menuManager = new PopupMenu.PopupMenuManager(this);
     this.menu = new Applet.AppletPopupMenu(this, orientation)
     if (typeof this.menu.setCustomStyleClass === "function")
@@ -275,7 +277,7 @@ class WeatherApplet extends Applet.TextIconApplet {
     this.menuManager.addMenu(this.menu)
   }
 
-  BindSettings() {
+  private BindSettings() {
     for (let k in KEYS) {
       let key = KEYS[k];
       let keyProp = "_" + key;
@@ -307,7 +309,7 @@ class WeatherApplet extends Applet.TextIconApplet {
   }
 
   /** Into context menu */
-  AddRefreshButton(): void {
+  private AddRefreshButton(): void {
      let itemLabel = _("Refresh")
      let refreshMenuItem = new Applet.MenuItem(itemLabel, REFRESH_ICON, Lang.bind(this, function () {
        this.refreshWeather();
@@ -315,7 +317,7 @@ class WeatherApplet extends Applet.TextIconApplet {
      this._applet_context_menu.addMenuItem(refreshMenuItem);
   }
 
-  BuildPopupMenu(): void {
+  private BuildPopupMenu(): void {
     //  today's forecast
     this._currentWeather = new St.Bin({ style_class: STYLE_CURRENT });
     //  tomorrow's forecast
@@ -333,11 +335,11 @@ class WeatherApplet extends Applet.TextIconApplet {
     this.menu.addActor(mainBox)
   }
 
-  refreshAndRebuild(): void {
+  private refreshAndRebuild(): void {
     this.refreshWeather(true);
   };
 
-  async LoadJsonAsync(query: string): Promise <any> {
+  public async LoadJsonAsync(query: string): Promise <any> {
     let json = await new Promise((resolve: any, reject: any) => {
       let message = Soup.Message.new('GET', query);
       this._httpSession.queue_message(message, (session: any, message: any) => {
@@ -367,12 +369,12 @@ class WeatherApplet extends Applet.TextIconApplet {
     return json;
   };
 
-  async locationLookup(): Promise < void > {
+  private async locationLookup(): Promise < void > {
     let command = "xdg-open ";
     Util.spawnCommandLine(command + "https://cinnamon-spices.linuxmint.com/applets/view/17");
   }
 
-  IsDataTooOld(): boolean {
+  private IsDataTooOld(): boolean {
     if (!this.lastUpdated) return true;
     let oldDate = this.lastUpdated;
     // If data is at least twice as old as refreshInterval, return true
@@ -381,7 +383,7 @@ class WeatherApplet extends Applet.TextIconApplet {
   }
 
   /** Refresh Loop Hooked into MainLoop */
-  RefreshLoop(): void {
+  private RefreshLoop(): void {
     /** In seconds */
     let loopInterval = 15;
     try {
@@ -399,19 +401,19 @@ class WeatherApplet extends Applet.TextIconApplet {
   };
 
   // Applet Overrides
-  update_label_visible(): void {
+  private update_label_visible(): void {
     if (this.orientation == St.Side.LEFT || this.orientation == St.Side.RIGHT)
       this.hide_applet_label(true);
     else
       this.hide_applet_label(false);
   };
 
-  on_orientation_changed(orientation: string) {
+  private on_orientation_changed(orientation: string) {
     this.orientation = orientation;
     this.refreshWeather(true);
   };
 
-  _onKeySettingsUpdated(): void {
+  private _onKeySettingsUpdated(): void {
     if (this.keybinding != null) {
       Main.keybindingManager.addHotKey(UUID,
         this.keybinding,
@@ -420,11 +422,11 @@ class WeatherApplet extends Applet.TextIconApplet {
     }
   }
 
-  on_applet_clicked(event: any): void {
+  private on_applet_clicked(event: any): void {
     this.menu.toggle()
   }
 
-  _onSeparatorAreaRepaint(area: any) {
+  private _onSeparatorAreaRepaint(area: any) {
     let cr = area.get_context()
     let themeNode = area.get_theme_node()
     let [width, height] = area.get_surface_size()
@@ -449,13 +451,13 @@ class WeatherApplet extends Applet.TextIconApplet {
   //
   //----------------------------------------------------------------------
 
-  updateIconType(): void {
+  private updateIconType(): void {
     this._icon_type = this.settings.getValue(WEATHER_USE_SYMBOLIC_ICONS_KEY) ?
       St.IconType.SYMBOLIC :
       St.IconType.FULLCOLOR
   };
 
-  constructJsLocale(locale: string): string {
+  private constructJsLocale(locale: string): string {
     let jsLocale = locale.split(".")[0];
     let tmp: string[] = jsLocale.split("_");
     jsLocale = "";
@@ -470,7 +472,7 @@ class WeatherApplet extends Applet.TextIconApplet {
    * Main function pulling data
    * @param rebuild 
    */
-  async refreshWeather(rebuild: boolean): Promise < void > {
+  private async refreshWeather(rebuild: boolean): Promise < void > {
     this.encounteredError = false;
 
     let locationData: LocationData = null;
@@ -525,7 +527,7 @@ class WeatherApplet extends Applet.TextIconApplet {
    * null if manual location is on and throws and error
    * if there is an issue with any of them
    */
-  async ValidateLocation(): Promise<LocationData> {
+  private async ValidateLocation(): Promise<LocationData> {
     // Autmatic location
     let location: LocationData = null;
     if (!this._manualLocation) { 
@@ -553,7 +555,7 @@ class WeatherApplet extends Applet.TextIconApplet {
   }
 
   /** Injects Data into Weather and Forecast Objects to display later */
-  ProcessWeatherData(weatherInfo: WeatherData, locationData: LocationData) {
+  private ProcessWeatherData(weatherInfo: WeatherData, locationData: LocationData) {
     if (!!locationData) { // Automatic location
       this.weather.location.city = locationData.city;
       this.weather.location.country = locationData.country;
@@ -582,7 +584,7 @@ class WeatherApplet extends Applet.TextIconApplet {
   }
 
   /** Injects data from weather object into the popupMenu */
-  displayWeather(): boolean {
+  private displayWeather(): boolean {
     try {
       let mainCondition = "";
       let descriptionCondition = "";
@@ -712,7 +714,7 @@ class WeatherApplet extends Applet.TextIconApplet {
   };
 
   /** Injects data from forecasts array into popupMenu */
-  displayForecast(): boolean {
+  private displayForecast(): boolean {
     try {
       for (let i = 0; i < this._forecast.length; i++) {
         let forecastData = this.forecasts[i];
@@ -754,7 +756,7 @@ class WeatherApplet extends Applet.TextIconApplet {
     }
   };
 
-  wipeCurrentData(): void {
+  private wipeCurrentData(): void {
     //Reset weather object
     this.weather.date = null;
     this.weather.location.city = null;
@@ -777,21 +779,21 @@ class WeatherApplet extends Applet.TextIconApplet {
     this.weather.extra_field = null;
   };
 
-  wipeForecastData(): void {
+  private wipeForecastData(): void {
     this.forecasts = [];
   };
 
-  destroyCurrentWeather(): void {
+  private destroyCurrentWeather(): void {
     if (this._currentWeather.get_child() != null)
       this._currentWeather.get_child().destroy()
   }
 
-  destroyFutureWeather(): void {
+  private destroyFutureWeather(): void {
     if (this._futureWeather.get_child() != null)
       this._futureWeather.get_child().destroy()
   }
 
-  showLoadingUi(): void {
+  private showLoadingUi(): void {
     this.destroyCurrentWeather()
     this.destroyFutureWeather()
     this._currentWeather.set_child(new St.Label({
@@ -802,13 +804,13 @@ class WeatherApplet extends Applet.TextIconApplet {
     }))
   }
 
-  rebuild(): void {
+  private rebuild(): void {
     this.showLoadingUi()
     this.rebuildCurrentWeatherUi()
     this.rebuildFutureWeatherUi()
   }
 
-  rebuildCurrentWeatherUi(): void {
+  private rebuildCurrentWeatherUi(): void {
     this.destroyCurrentWeather()
     let textOb = {
       text: ELLIPSIS
@@ -891,7 +893,7 @@ class WeatherApplet extends Applet.TextIconApplet {
     this._currentWeather.set_child(box)
   };
 
-  rebuildFutureWeatherUi(): void {
+  private rebuildFutureWeatherUi(): void {
     this.destroyFutureWeather();
 
     this._forecast = []
@@ -965,7 +967,7 @@ class WeatherApplet extends Applet.TextIconApplet {
     this._currentWeatherSunset.text = msg;
   };
 
-  errMsg: NiceErrorDetail = { // Error messages to use
+  private errMsg: NiceErrorDetail = { // Error messages to use
     unknown: _("Error"),
     "bad api response - non json": _("Service Error"),
     "bad key": _("Incorrect API Key"),
@@ -983,7 +985,7 @@ class WeatherApplet extends Applet.TextIconApplet {
     "unusal payload": _("Service Error"),
   }
 
-  HandleError(error: AppletError): void {
+  public HandleError(error: AppletError): void {
     if (this.encounteredError) return; // Error Already called in this loop, ignore
     this.encounteredError = true;
 
@@ -1010,7 +1012,7 @@ class WeatherApplet extends Applet.TextIconApplet {
   }
 
   /** Callback handles any service specific logic */
-  HandleHTTPError(service: ApiService, error: HttpError, ctx: WeatherApplet, callback?: (error: HttpError, uiError: AppletError) => AppletError) {
+  public HandleHTTPError(service: ApiService, error: HttpError, ctx: WeatherApplet, callback?: (error: HttpError, uiError: AppletError) => AppletError) {
     let uiError = {
       type: "soft",
       detail: "unknown",
@@ -1295,11 +1297,14 @@ type SettingKeys = {
   [key: string]: string;
 }
 
+/**
+ * A WeatherProvider must implement this interface.
+ */
 interface WeatherProvider {
   GetWeather(): Promise<WeatherData>;
-  /** Used as to extend the same named function int the Applet Class.
+  /** Used as to extend the same named function in the Applet Class.
    * 
-   * "this" is not accessible here
+   * "this" (context) is not accessible here
   */
   HandleHTTPError?:(error: HttpError, uiError: AppletError) => AppletError;
 }
