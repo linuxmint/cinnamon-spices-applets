@@ -128,6 +128,10 @@ var KPHtoMPS = function(speed: number): number {
     return speed / WEATHER_CONV_KPH_IN_MPS;
   };
 
+const get = (p: string[], o: any) =>
+  p.reduce((xs, x) =>
+    (xs && xs[x]) ? xs[x] : null, o);
+
 var MPStoUserUnits = function(mps: number, units: WeatherWindSpeedUnits): number {
     // Override wind units with our preference, takes Meter/Second wind speed
     switch (units) {

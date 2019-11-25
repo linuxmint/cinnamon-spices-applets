@@ -53,15 +53,15 @@ var IpApi = (function () {
                     case 2:
                         e_1 = _a.sent();
                         this.app.HandleHTTPError("ipapi", e_1, this.app);
-                        return [2, false];
+                        return [2, null];
                     case 3:
                         if (!json) {
                             this.app.HandleError({ type: "soft", detail: "no api response" });
-                            return [2, false];
+                            return [2, null];
                         }
                         if (json.error) {
                             this.HandleErrorResponse(json);
-                            return [2, false];
+                            return [2, null];
                         }
                         return [2, this.ParseInformation(json)];
                 }
@@ -71,20 +71,22 @@ var IpApi = (function () {
     ;
     IpApi.prototype.ParseInformation = function (json) {
         try {
-            var loc = json.latitude + "," + json.longitude;
-            this.app.settings.setValue('location', loc);
-            this.app.weather.location.timeZone = json.timezone;
-            this.app.weather.location.city = json.city;
-            this.app.weather.location.country = json.country;
-            this.app.log.Print("Location obtained");
+            var result = {
+                lat: json.latitude,
+                lon: json.longitude,
+                city: json.city,
+                country: json.country,
+                timeZone: json.timezone
+            };
+            this.app.log.Debug("Location obtained");
             this.app.log.Debug("Location:" + json.latitude + "," + json.longitude);
             this.app.log.Debug("Location setting is now: " + this.app._location);
-            return true;
+            return result;
         }
         catch (e) {
             this.app.log.Error("IPapi parsing error: " + e);
             this.app.HandleError({ type: "hard", detail: "no location", service: "ipapi", message: _("Could not obtain location") });
-            return false;
+            return null;
         }
     };
     ;

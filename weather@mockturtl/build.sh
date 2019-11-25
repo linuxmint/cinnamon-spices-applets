@@ -13,5 +13,9 @@ DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null && pwd )"
 path=${PWD}
 
 cd $DIR/src
+echo Building 3.8...
 cp promise-polyfill.js ../files/weather@mockturtl/3.8/
 tsc -p ../tsconfig.38.json
+echo Building 3.0...
+cp promise-polyfill.js ../files/weather@mockturtl/3.0/
+tsc -p ../tsconfig.30.json
