@@ -1,4 +1,7 @@
 const DEBUG = false;
+/**
+ * @param path Filename without extension
+ */
 function importModule(path: string): any {
   if (typeof require !== 'undefined') {
     return require('./' + path);
