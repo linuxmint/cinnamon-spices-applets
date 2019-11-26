@@ -103,6 +103,11 @@ var capitalizeFirstLetter = function (description) {
 var KPHtoMPS = function (speed) {
     return speed / WEATHER_CONV_KPH_IN_MPS;
 };
+var get = function (p, o) {
+    return p.reduce(function (xs, x) {
+        return (xs && xs[x]) ? xs[x] : null;
+    }, o);
+};
 var MPStoUserUnits = function (mps, units) {
     switch (units) {
         case "mph":

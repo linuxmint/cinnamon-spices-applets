@@ -40,83 +40,77 @@ class DarkSky {
             }
             catch (e) {
                 this.app.HandleHTTPError("darksky", e, this.app, this.HandleHTTPError);
-                return false;
+                return null;
             }
             if (!json) {
                 this.app.HandleError({ type: "soft", detail: "no api response", service: "darksky" });
-                return false;
+                return null;
             }
             if (!json.code) {
                 return this.ParseWeather(json);
             }
             else {
                 this.HandleResponseErrors(json);
-                return false;
+                return null;
             }
         }
-        return false;
+        return null;
     }
     ;
     ParseWeather(json) {
         try {
-            this.app.weather.dateTime = new Date(json.currently.time * 1000);
-            this.app.weather.location.timeZone = json.timezone;
-            this.app.weather.coord.lat = json.latitude;
-            this.app.weather.coord.lon = json.longitude;
-            this.app.weather.sunrise = new Date(json.daily.data[0].sunriseTime * 1000);
-            this.app.weather.sunset = new Date(json.daily.data[0].sunsetTime * 1000);
-            this.app.weather.wind.speed = this.ToMPS(json.currently.windSpeed);
-            this.app.weather.wind.degree = json.currently.windBearing;
-            this.app.weather.main.temperature = this.ToKelvin(json.currently.temperature);
-            this.app.weather.main.pressure = json.currently.pressure;
-            this.app.weather.main.humidity = json.currently.humidity * 100;
-            this.app.weather.condition.main = this.GetShortCurrentSummary(json.currently.summary);
-            this.app.weather.condition.description = json.currently.summary;
-            this.app.weather.condition.icon = weatherIconSafely(this.ResolveIcon(json.currently.icon), this.app._icon_type);
-            this.app.weather.cloudiness = json.currently.cloudCover * 100;
-            this.app.weather.main.feelsLike = this.ToKelvin(json.currently.apparentTemperature);
+            let result = {
+                date: new Date(json.currently.time * 1000),
+                coord: {
+                    lat: json.latitude,
+                    lon: json.longitude
+                },
+                location: {
+                    url: "https://darksky.net/forecast/" + json.latitude + "," + json.longitude,
+                    timeZone: json.timezone,
+                },
+                sunrise: new Date(json.daily.data[0].sunriseTime * 1000),
+                sunset: new Date(json.daily.data[0].sunsetTime * 1000),
+                wind: {
+                    speed: this.ToMPS(json.currently.windSpeed),
+                    degree: json.currently.windBearing
+                },
+                temperature: this.ToKelvin(json.currently.temperature),
+                pressure: json.currently.pressure,
+                humidity: json.currently.humidity * 100,
+                condition: {
+                    main: this.GetShortCurrentSummary(json.currently.summary),
+                    description: json.currently.summary,
+                    icon: weatherIconSafely(this.ResolveIcon(json.currently.icon), this.app._icon_type)
+                },
+                extra_field: {
+                    name: _("Feels Like"),
+                    value: this.ToKelvin(json.currently.apparentTemperature),
+                    type: "temperature"
+                },
+                forecasts: []
+            };
             for (let i = 0; i < this.app._forecastDays; i++) {
-                let forecast = {
-                    dateTime: null,
-                    main: {
-                        temp: null,
-                        temp_min: null,
-                        temp_max: null,
-                        pressure: null,
-                        sea_level: null,
-                        grnd_level: null,
-                        humidity: null,
-                    },
-                    condition: {
-                        id: null,
-                        main: null,
-                        description: null,
-                        icon: null,
-                    },
-                    clouds: null,
-                    wind: {
-                        speed: null,
-                        deg: null,
-                    }
-                };
                 let day = json.daily.data[i];
-                forecast.dateTime = new Date(day.time * 1000);
-                forecast.dateTime.setHours(forecast.dateTime.getHours() + 12);
-                forecast.main.temp_min = this.ToKelvin(day.temperatureLow);
-                forecast.main.temp_max = this.ToKelvin(day.temperatureHigh);
-                forecast.condition.main = this.GetShortSummary(day.summary);
-                forecast.condition.description = this.ProcessSummary(day.summary);
-                forecast.condition.icon = weatherIconSafely(this.ResolveIcon(day.icon), this.app._icon_type);
-                forecast.main.pressure = day.pressure;
-                forecast.main.humidity = day.humidity * 100;
-                this.app.forecasts.push(forecast);
+                let forecast = {
+                    date: new Date(day.time * 1000),
+                    temp_min: this.ToKelvin(day.temperatureLow),
+                    temp_max: this.ToKelvin(day.temperatureHigh),
+                    condition: {
+                        main: this.GetShortSummary(day.summary),
+                        description: this.ProcessSummary(day.summary),
+                        icon: weatherIconSafely(this.ResolveIcon(day.icon), this.app._icon_type),
+                    },
+                };
+                forecast.date.setHours(forecast.date.getHours() + 12);
+                result.forecasts.push(forecast);
             }
-            return true;
+            return result;
         }
         catch (e) {
             this.app.log.Error("DarkSky payload parsing error: " + e);
             this.app.HandleError({ type: "soft", detail: "unusal payload", service: "darksky", message: _("Failed to Process Weather Info") });
-            return false;
+            return null;
         }
     }
     ;

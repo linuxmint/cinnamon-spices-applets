@@ -15,47 +15,48 @@ class IpApi {
         this.app = _app;
     }
 
-    async GetLocation(): Promise<boolean> {
+    public async GetLocation(): Promise<LocationData> {
         let json: IpApiPayload;
         try {
             json = await this.app.LoadJsonAsync(this.query);
         }
         catch(e) {
             this.app.HandleHTTPError("ipapi", e, this.app);
-            return false;
+            return null;
         }
 
         if (!json) {                         // Bad response
             this.app.HandleError({type: "soft", detail: "no api response"});
-            return false;
+            return null;
         }
 
         if (json.error) {
             this.HandleErrorResponse(json);
-            return false;
+            return null;
         }
 
         return this.ParseInformation(json);
         
     };
 
-    ParseInformation(json: any): boolean {
+    private ParseInformation(json: any): LocationData {
         try {
-            let loc = json.latitude + "," + json.longitude;
-            //this.app._location == (json.latitude + "," + json.longitude);
-            this.app.settings.setValue('location', loc);
-            this.app.weather.location.timeZone = json.timezone;
-            this.app.weather.location.city = json.city;
-            this.app.weather.location.country = json.country;
-            this.app.log.Print("Location obtained");
+            let result: LocationData = {
+                lat: json.latitude,
+                lon: json.longitude,
+                city: json.city,
+                country: json.country,
+                timeZone: json.timezone
+            }
+            this.app.log.Debug("Location obtained");
             this.app.log.Debug("Location:" + json.latitude + "," + json.longitude);
             this.app.log.Debug("Location setting is now: " + this.app._location);
-            return true;
+            return result;
         }
         catch(e) {
             this.app.log.Error("IPapi parsing error: " + e);
             this.app.HandleError({type: "hard", detail: "no location", service: "ipapi", message: _("Could not obtain location")});
-            return false;
+            return null;
         }
     };
 

@@ -149,13 +149,13 @@ var WeatherApplet = (function (_super) {
     function WeatherApplet(metadata, orientation, panelHeight, instanceId) {
         var _this = _super.call(this, orientation, panelHeight, instanceId) || this;
         _this.weather = {
-            dateTime: null,
+            date: null,
             location: {
                 city: null,
                 country: null,
-                id: null,
                 tzOffset: null,
-                timeZone: null
+                timeZone: null,
+                url: null
             },
             coord: {
                 lat: null,
@@ -167,21 +167,14 @@ var WeatherApplet = (function (_super) {
                 speed: null,
                 degree: null,
             },
-            main: {
-                temperature: null,
-                pressure: null,
-                humidity: null,
-                temp_min: null,
-                temp_max: null,
-                feelsLike: null
-            },
+            temperature: null,
+            pressure: null,
+            humidity: null,
             condition: {
-                id: null,
                 main: null,
                 description: null,
                 icon: null,
             },
-            cloudiness: null,
         };
         _this.forecasts = [];
         _this.currentLocale = null;
@@ -415,37 +408,25 @@ var WeatherApplet = (function (_super) {
     };
     WeatherApplet.prototype.refreshWeather = function (rebuild) {
         return __awaiter(this, void 0, void 0, function () {
-            var haveLocation, loc, darkSky, openWeatherMap, _a, e_1;
+            var locationData, e_1, darkSky, openWeatherMap, weatherInfo, _a, e_2;
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
                         this.encounteredError = false;
-                        this.wipeCurrentData();
-                        this.wipeForecastData();
+                        locationData = null;
                         _b.label = 1;
                     case 1:
-                        _b.trys.push([1, 9, , 10]);
-                        if (!!this._manualLocation) return [3, 3];
-                        return [4, this.locProvider.GetLocation()];
+                        _b.trys.push([1, 3, , 4]);
+                        return [4, this.ValidateLocation()];
                     case 2:
-                        haveLocation = _b.sent();
-                        if (!haveLocation)
-                            return [2];
+                        locationData = _b.sent();
                         return [3, 4];
                     case 3:
-                        loc = this._location.replace(" ", "");
-                        if (loc == undefined || loc == "") {
-                            this.HandleError({
-                                type: "hard",
-                                detail: "no location",
-                                noTriggerRefresh: true,
-                                message: _("Make sure you entered a location or use Automatic location instead")
-                            });
-                            this.log.Error("No location given when setting is on Manual Location");
-                            return [2];
-                        }
-                        _b.label = 4;
+                        e_1 = _b.sent();
+                        this.log.Error(e_1);
+                        return [2];
                     case 4:
+                        _b.trys.push([4, 9, , 10]);
                         switch (this._dataService) {
                             case DATA_SERVICE.DARK_SKY:
                                 if (darkSky == null)
@@ -462,10 +443,14 @@ var WeatherApplet = (function (_super) {
                         }
                         return [4, this.provider.GetWeather()];
                     case 5:
-                        if (!(_b.sent())) {
+                        weatherInfo = _b.sent();
+                        if (!weatherInfo) {
                             this.log.Error("Unable to obtain Weather Information");
                             return [2];
                         }
+                        this.wipeCurrentData();
+                        this.wipeForecastData();
+                        this.ProcessWeatherData(weatherInfo, locationData);
                         if (rebuild)
                             this.rebuild();
                         return [4, this.displayWeather()];
@@ -482,8 +467,8 @@ var WeatherApplet = (function (_super) {
                         this.log.Print("Weather Information refreshed");
                         return [3, 10];
                     case 9:
-                        e_1 = _b.sent();
-                        this.log.Error("Generic Error while refreshing Weather info: " + e_1);
+                        e_2 = _b.sent();
+                        this.log.Error("Generic Error while refreshing Weather info: " + e_2);
                         this.HandleError({ type: "hard", detail: "unknown", message: _("Unexpected Error While Refreshing Weather, please see log in Looking Glass") });
                         return [2];
                     case 10:
@@ -494,6 +479,66 @@ var WeatherApplet = (function (_super) {
         });
     };
     ;
+    WeatherApplet.prototype.ValidateLocation = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var location, loc, loc;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        location = null;
+                        if (!!this._manualLocation) return [3, 2];
+                        return [4, this.locProvider.GetLocation()];
+                    case 1:
+                        location = _a.sent();
+                        if (!location)
+                            reject(null);
+                        loc = location.lat + "," + location.lon;
+                        this.settings.setValue('location', loc);
+                        return [2, location];
+                    case 2:
+                        loc = this._location.replace(" ", "");
+                        if (loc == undefined || loc == "") {
+                            this.HandleError({
+                                type: "hard",
+                                detail: "no location",
+                                noTriggerRefresh: true,
+                                message: _("Make sure you entered a location or use Automatic location instead")
+                            });
+                            reject("No location given when setting is on Manual Location");
+                        }
+                        _a.label = 3;
+                    case 3: return [2, null];
+                }
+            });
+        });
+    };
+    WeatherApplet.prototype.ProcessWeatherData = function (weatherInfo, locationData) {
+        if (!!locationData) {
+            this.weather.location.city = locationData.city;
+            this.weather.location.country = locationData.country;
+            this.weather.location.timeZone = locationData.timeZone;
+            this.weather.coord.lat = locationData.lat;
+            this.weather.coord.lon = locationData.lon;
+        }
+        this.weather.condition = weatherInfo.condition;
+        this.weather.wind = weatherInfo.wind;
+        this.weather.temperature = weatherInfo.temperature,
+            this.weather.date = weatherInfo.date;
+        this.weather.sunrise = weatherInfo.sunrise;
+        this.weather.sunset = weatherInfo.sunset;
+        this.weather.coord = weatherInfo.coord;
+        this.weather.humidity = weatherInfo.humidity;
+        this.weather.pressure = weatherInfo.pressure;
+        if (!!weatherInfo.location.city)
+            this.weather.location.city = weatherInfo.location.city;
+        if (!!weatherInfo.location.country)
+            this.weather.location.country = weatherInfo.location.country;
+        if (!!weatherInfo.location.timeZone)
+            this.weather.location.timeZone = weatherInfo.location.timeZone;
+        if (!!weatherInfo.extra_field)
+            this.weather.extra_field = weatherInfo.extra_field;
+        this.forecasts = weatherInfo.forecasts;
+    };
     WeatherApplet.prototype.displayWeather = function () {
         try {
             var mainCondition = "";
@@ -531,9 +576,9 @@ var WeatherApplet = (function (_super) {
                 this.set_applet_icon_symbolic_name(iconname) :
                 this.set_applet_icon_name(iconname);
             var temp = "";
-            if (this.weather.main.temperature != null) {
-                temp = TempToUserUnits(this.weather.main.temperature, this._temperatureUnit).toString();
-                this._currentWeatherTemperature.text = temp + ' ' + this.unitToUnicode();
+            if (this.weather.temperature != null) {
+                temp = TempToUserUnits(this.weather.temperature, this._temperatureUnit).toString();
+                this._currentWeatherTemperature.text = temp + ' ' + this.unitToUnicode(this._temperatureUnit);
             }
             var label = "";
             if (this._showCommentInPanel) {
@@ -543,7 +588,7 @@ var WeatherApplet = (function (_super) {
                 if (label != "") {
                     label += " ";
                 }
-                label += (temp + ' ' + this.unitToUnicode());
+                label += (temp + ' ' + this.unitToUnicode(this._temperatureUnit));
             }
             this.set_applet_label(label);
             try {
@@ -551,42 +596,34 @@ var WeatherApplet = (function (_super) {
             }
             catch (e) {
             }
-            if (this.weather.main.humidity != null) {
-                this._currentWeatherHumidity.text = Math.round(this.weather.main.humidity) + "%";
+            if (this.weather.humidity != null) {
+                this._currentWeatherHumidity.text = Math.round(this.weather.humidity) + "%";
             }
             var wind_direction = compassDirection(this.weather.wind.degree);
             this._currentWeatherWind.text = ((wind_direction != undefined) ? wind_direction + ' ' : '') + MPStoUserUnits(this.weather.wind.speed, this._windSpeedUnit) + ' ' + this._windSpeedUnit;
-            switch (this._dataService) {
-                case DATA_SERVICE.OPEN_WEATHER_MAP:
-                    if (this.weather.cloudiness != null) {
-                        this._currentWeatherApiUnique.text = this.weather.cloudiness + "%";
-                        this._currentWeatherApiUniqueCap.text = _("Cloudiness:");
-                    }
-                    break;
-                case DATA_SERVICE.DARK_SKY:
-                    if (this.weather.main.feelsLike != null) {
-                        this._currentWeatherApiUnique.text = TempToUserUnits(this.weather.main.feelsLike, this._temperatureUnit) + this.unitToUnicode();
-                        this._currentWeatherApiUniqueCap.text = _("Feels like:");
-                    }
-                    break;
-                default:
-                    this._currentWeatherApiUnique.text = "";
-                    this._currentWeatherApiUniqueCap.text = "";
+            this._currentWeatherApiUnique.text = "";
+            this._currentWeatherApiUniqueCap.text = "";
+            if (!!this.weather.extra_field) {
+                this._currentWeatherApiUniqueCap.text = _(this.weather.extra_field.name);
+                var value = void 0;
+                switch (this.weather.extra_field.type) {
+                    case "percent":
+                        value = this.weather.extra_field.value.toString() + "%";
+                        break;
+                    case "temperature":
+                        value = TempToUserUnits(this.weather.extra_field.value, this._temperatureUnit) + this.unitToUnicode(this._temperatureUnit);
+                        break;
+                    default:
+                        value = _(this.weather.extra_field.value);
+                        break;
+                }
+                this._currentWeatherApiUnique.text = value;
             }
-            if (this.weather.main.pressure != null) {
-                this._currentWeatherPressure.text = PressToUserUnits(this.weather.main.pressure, this._pressureUnit) + ' ' + _(this._pressureUnit);
+            if (this.weather.pressure != null) {
+                this._currentWeatherPressure.text = PressToUserUnits(this.weather.pressure, this._pressureUnit) + ' ' + _(this._pressureUnit);
             }
             this._currentWeatherLocation.label = location;
-            switch (this._dataService) {
-                case DATA_SERVICE.OPEN_WEATHER_MAP:
-                    this._currentWeatherLocation.url = "https://openweathermap.org/city/" + this.weather.location.id;
-                    break;
-                case DATA_SERVICE.DARK_SKY:
-                    this._currentWeatherLocation.url = "https://darksky.net/forecast/" + this.weather.coord.lat + "," + this.weather.coord.lon;
-                    break;
-                default:
-                    this._currentWeatherLocation.url = null;
-            }
+            this._currentWeatherLocation.url = this.weather.location.url;
             var sunriseText = "";
             var sunsetText = "";
             if (this.weather.sunrise != null && this.weather.sunset != null && this._showSunrise) {
@@ -608,8 +645,8 @@ var WeatherApplet = (function (_super) {
             for (var i = 0; i < this._forecast.length; i++) {
                 var forecastData = this.forecasts[i];
                 var forecastUi = this._forecast[i];
-                var t_low = TempToUserUnits(forecastData.main.temp_min, this._temperatureUnit);
-                var t_high = TempToUserUnits(forecastData.main.temp_max, this._temperatureUnit);
+                var t_low = TempToUserUnits(forecastData.temp_min, this._temperatureUnit);
+                var t_high = TempToUserUnits(forecastData.temp_max, this._temperatureUnit);
                 var first_temperature = this._temperatureHighFirst ? t_high : t_low;
                 var second_temperature = this._temperatureHighFirst ? t_low : t_high;
                 var comment = "";
@@ -620,17 +657,17 @@ var WeatherApplet = (function (_super) {
                         comment = _(comment);
                 }
                 if (this.weather.location.timeZone == null)
-                    forecastData.dateTime.setMilliseconds(forecastData.dateTime.getMilliseconds() + (this.weather.location.tzOffset * 1000));
-                var dayName = GetDayName(forecastData.dateTime, this.currentLocale, this.weather.location.timeZone);
-                if (forecastData.dateTime) {
+                    forecastData.date.setMilliseconds(forecastData.date.getMilliseconds() + (this.weather.location.tzOffset * 1000));
+                var dayName = GetDayName(forecastData.date, this.currentLocale, this.weather.location.timeZone);
+                if (forecastData.date) {
                     var now = new Date();
-                    if (forecastData.dateTime.getDate() == now.getDate())
+                    if (forecastData.date.getDate() == now.getDate())
                         dayName = _("Today");
-                    if (forecastData.dateTime.getDate() == new Date(now.setDate(now.getDate() + 1)).getDate())
+                    if (forecastData.date.getDate() == new Date(now.setDate(now.getDate() + 1)).getDate())
                         dayName = _("Tomorrow");
                 }
                 forecastUi.Day.text = dayName;
-                forecastUi.Temperature.text = first_temperature + ' ' + '\u002F' + ' ' + second_temperature + ' ' + this.unitToUnicode();
+                forecastUi.Temperature.text = first_temperature + ' ' + '\u002F' + ' ' + second_temperature + ' ' + this.unitToUnicode(this._temperatureUnit);
                 forecastUi.Summary.text = comment;
                 forecastUi.Icon.icon_name = forecastData.condition.icon;
             }
@@ -643,28 +680,25 @@ var WeatherApplet = (function (_super) {
     };
     ;
     WeatherApplet.prototype.wipeCurrentData = function () {
-        this.weather.dateTime = null;
+        this.weather.date = null;
         this.weather.location.city = null;
         this.weather.location.country = null;
-        this.weather.location.id = null;
         this.weather.location.timeZone = null;
         this.weather.location.tzOffset = null;
+        this.weather.location.url = null;
         this.weather.coord.lat = null;
         this.weather.coord.lon = null;
         this.weather.sunrise = null;
         this.weather.sunset = null;
         this.weather.wind.degree = null;
         this.weather.wind.speed = null;
-        this.weather.main.temperature = null;
-        this.weather.main.pressure = null;
-        this.weather.main.humidity = null;
-        this.weather.main.temp_max = null;
-        this.weather.main.temp_min = null;
-        this.weather.condition.id = null;
+        this.weather.temperature = null;
+        this.weather.pressure = null;
+        this.weather.humidity = null;
         this.weather.condition.main = null;
         this.weather.condition.description = null;
         this.weather.condition.icon = null;
-        this.weather.cloudiness = null;
+        this.weather.extra_field = null;
     };
     ;
     WeatherApplet.prototype.wipeForecastData = function () {
@@ -803,8 +837,8 @@ var WeatherApplet = (function (_super) {
         return false;
     };
     ;
-    WeatherApplet.prototype.unitToUnicode = function () {
-        return this._temperatureUnit == "fahrenheit" ? '\u2109' : '\u2103';
+    WeatherApplet.prototype.unitToUnicode = function (unit) {
+        return unit == "fahrenheit" ? '\u2109' : '\u2103';
     };
     WeatherApplet.prototype.DisplayError = function (title, msg) {
         this.set_applet_label(title);
