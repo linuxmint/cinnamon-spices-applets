@@ -85,7 +85,8 @@ class OpenWeatherMap {
                 condition: {
                     main: get(["weather", "0", "main"], json),
                     description: get(["weather", "0", "description"], json),
-                    icon: weatherIconSafely(self.ResolveIcon(get(["weather", "0", "icon"], json)), self.app._icon_type)
+                    icon: weatherIconSafely(self.ResolveIcon(get(["weather", "0", "icon"], json)), self.app._icon_type),
+                    customIcon: self.ResolveCustomIcon(get(["weather", "0", "icon"], json))
                 },
                 extra_field: {
                     name: _("Cloudiness"),
@@ -116,6 +117,7 @@ class OpenWeatherMap {
                         main: day.weather[0].main,
                         description: day.weather[0].description,
                         icon: weatherIconSafely(self.ResolveIcon(day.weather[0].icon), self.app._icon_type),
+                        customIcon: self.ResolveCustomIcon(day.weather[0].icon)
                     },
                 };
                 forecasts.push(forecast);
@@ -241,6 +243,49 @@ class OpenWeatherMap {
                 return [icons.storm];
             default:
                 return [icons.alert];
+        }
+    }
+    ;
+    ResolveCustomIcon(icon) {
+        switch (icon) {
+            case "10d":
+                return "Cloud-Rain-Sun";
+            case "10n":
+                return "Cloud-Rain-Moon";
+            case "09n":
+                return "Cloud-Drizzle-Moon";
+            case "09d":
+                return "Cloud-Drizzle-Sun";
+            case "13d":
+                return "Cloud-Snow-Sun";
+            case "13n":
+                return "Cloud-Snow-Moon";
+            case "50d":
+                return "Cloud-Fog-Sun-Alt";
+            case "50n":
+                return "Cloud-Fog-Moon-Alt";
+            case "04d":
+                return "Cloud-Sun";
+            case "04n":
+                return "Cloud-Moon";
+            case "03n":
+                return "Cloud-Moon";
+            case "03d":
+                return "Cloud-Sun";
+            case "02n":
+                return "Cloud-Moon";
+            case "02d":
+                return "Cloud-Sun";
+            case "01n":
+                return "Moon";
+            case "01d":
+                return "Sun";
+            case "11d":
+                return "Cloud-Lightning-Sun";
+            case "11n":
+                return "Cloud-Lightning-Moon";
+            default:
+                return "Cloud-Refresh";
         }
     }
     ;

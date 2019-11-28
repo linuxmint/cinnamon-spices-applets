@@ -131,6 +131,11 @@
   , "default": false
   , "description": "Symbolic icons"
   }
+, "useCustomAppletIcons":
+  { "type": "checkbox"
+  , "default": false
+  , "description": "Custom Applet icons"
+  }
 , "showTextInPanel":
   { "type": "checkbox"
   , "default": true

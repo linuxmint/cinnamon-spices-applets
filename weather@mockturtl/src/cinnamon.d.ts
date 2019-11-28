@@ -180,8 +180,38 @@ declare namespace imports.ui.applet {
 
     export class TextIconApplet {
         constructor(orientation: string, panelHeight: number, instanceID: number);
-        protected set_applet_icon_name(text: string): void;
-        protected set_applet_icon_symbolic_name(iconName: string): void;
+        /**
+         * @param icon_name  Name of the icon
+         *
+         * Sets the icon of the applet to @icon_name.
+         *
+         * The icon will be full color
+         */
+        protected set_applet_icon_name(icon_name: string): void;
+        /**
+         * @param icon_path path of the icon
+         *
+         * Sets the icon of the applet to the image file at @icon_path
+         *
+         * The icon will be full color
+         */
+        protected set_applet_icon_path(icon_path: string): void;
+        /**
+         * @param icon_path path of the icon
+         *
+         * Sets the icon of the applet to the image file at @icon_path
+         *
+         * The icon will be symbolic
+         */
+        protected set_applet_icon_symbolic_path(icon_path: string): void;
+        /**
+         * @param icon_name Name of the icon
+         *
+         * Sets the icon of the applet to @icon_name.
+         *
+         * The icon will be symbolic
+         */
+        protected set_applet_icon_symbolic_name(icon_name: string): void;
         protected set_applet_label(text: string): void;
         protected set_applet_tooltip(text: string): void;
         protected setAllowedLayout(text: string): void;
@@ -257,6 +287,7 @@ declare namespace imports.ui.settings {
 }
 declare namespace imports.ui.appletManager {
     export var applets: any;
+    export var appletMeta: any;
 }
 
 declare namespace imports.mainloop {

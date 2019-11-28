@@ -123,7 +123,8 @@ const KEYS: SettingKeys  =  {
   WEATHER_REFRESH_INTERVAL: "refreshInterval",
   WEATHER_PRESSURE_UNIT_KEY: "pressureUnit",
   WEATHER_SHORT_CONDITIONS_KEY:  "shortConditions",
-  WEATHER_MANUAL_LOCATION:  "manualLocation"
+  WEATHER_MANUAL_LOCATION:  "manualLocation",
+  WEATHER_USE_CCUSTOM_APPLETICONS_KEY: 'useCustomAppletIcons'
 }
 
 //----------------------------------------------------------------------
@@ -165,6 +166,7 @@ class WeatherApplet extends Applet.TextIconApplet {
       main: null, // What API returns
       description: null, // Longer description, if not available put the same whats in main
       icon: null, // GTK weather icon names
+      customIcon: null
     },
   }
 
@@ -214,6 +216,7 @@ class WeatherApplet extends Applet.TextIconApplet {
   public _showTextInPanel: boolean;
   public _locationLabelOverride: string;
   public _icon_type: string;
+  public _useCustomAppletIcons: boolean;
 
   public currentLocale: string = null;
   public systemLanguage: string = null;
@@ -225,6 +228,7 @@ class WeatherApplet extends Applet.TextIconApplet {
   private settings: any;
   // Soup session (see https://bugzilla.gnome.org/show_bug.cgi?id=661323#c64)
   private _httpSession = new Soup.SessionAsync();
+  private appletDir = imports.ui.appletManager.appletMeta[UUID].path;
 
   private provider: WeatherProvider; // API
   private locProvider = new ipApi.IpApi(this); // IP location lookup
@@ -326,7 +330,7 @@ class WeatherApplet extends Applet.TextIconApplet {
         this._forecast[i].Icon.icon_type = this._icon_type
       }
       this.refreshWeather()
-    }))
+    }))    
   }
 
   /** Into context menu */
@@ -668,6 +672,12 @@ class WeatherApplet extends Applet.TextIconApplet {
         this.set_applet_icon_symbolic_name(iconname) :
         this.set_applet_icon_name(iconname)
 
+      // TODO: check if fileicons can be used in panel
+      // let file = Gio.file_new_for_path(icon_path);
+      //this._applet_icon.set_gicon(new Gio.FileIcon({ file: file }));
+      // TODO: Fix size and coloring issues with custom icons
+      if (this._useCustomAppletIcons) this.SetCustomIcon(this.weather.condition.customIcon);
+
       // Temperature
       let temp = "";
       if (this.weather.temperature != null) {
@@ -993,6 +1003,10 @@ class WeatherApplet extends Applet.TextIconApplet {
     return false;
   };
 
+  public SetCustomIcon(iconName: CustomIcons): void {
+    this.set_applet_icon_symbolic_path(this.appletDir + "/../icons/" + iconName + ".svg");
+  }
+
   private unitToUnicode(unit: WeatherUnits): string {
     return unit == "fahrenheit" ? '\u2109' : '\u2103'
   }
@@ -1190,6 +1204,7 @@ interface Forecast {
     main: string,
     description: string,
     icon: string,
+    customIcon: CustomIcons
   },
   clouds?: number,
   wind?: {
@@ -1238,6 +1253,7 @@ interface Weather {
     description: string, // Longer description, if not available put the same whats in main
     /** GTK icon name */
     icon: string,
+    customIcon: CustomIcons
   },
   extra_field?: {
     name: string,
@@ -1283,7 +1299,8 @@ interface WeatherData {
     /** Long Description */
     description: string,
     /** GTK icon name */
-    icon: string
+    icon: string,
+    customIcon: CustomIcons
   }
   forecasts: ForecastData[];
   extra_field?: {
@@ -1310,6 +1327,7 @@ interface ForecastData {
     description: string,
     /** GTK icon name */
     icon: string,
+    customIcon: CustomIcons
   }
 }
 
@@ -1340,6 +1358,22 @@ interface ForecastUI {
 type SettingKeys = {
   [key: string]: string;
 }
+
+type CustomIcons = "Cloud-Drizzle" | "Cloud-Drizzle-Alt" | "Cloud-Drizzle-Moon-Alt" | "Cloud-Drizzle-Moon" | "Cloud-Drizzle-Sun-Alt" | 
+"Cloud-Drizzle-Sun" | "Cloud-Fog" | "Cloud-Fog-Alt" | "Cloud-Fog-Moon-Alt" | "Cloud-Fog-Moon" | "Cloud-Fog-Sun-Alt" |
+"Cloud-Fog-Sun" | "Cloud-Fog" | "Cloud-Hail-Alt" | "Cloud-Hail-Moon-Alt" | "Cloud-Hail-Moon" | 
+"Cloud-Hail-Sun-Alt" | "Cloud-Hail-Sun" | "Cloud-Hail" | "Cloud-Lightning-Moon" | "Cloud-Lightning-Sun" | 
+"Cloud-Lightning" | "Cloud-Moon" | "Cloud-Rain-Alt" | "Cloud-Rain-Moon-Alt" | "Cloud-Rain-Moon" | 
+"Cloud-Rain" | "Cloud-Rain-Sun" | "Cloud-Rain-Sun-Alt" | "Cloud-Refresh" | "Cloud-Snow-Alt" | "Cloud-Snow-Moon-Alt" | "Cloud-Snow-Moon" | 
+"Cloud-Snow-Sun-Alt" | "Cloud-Snow-Sun" | "Cloud-Snow" | "Cloud-Sun" | "Cloud-Upload" | "Cloud-Wind-Moon" | 
+"Cloud-Wind-Sun" | "Cloud-Wind" | "Cloud" | "Compass-East" | "Compass-North" | "Compass-South" | "Compass-West" | 
+"Compass" | "Degrees-Celcius" | "Degrees-Fahrenheit" | "Moon" | "Shades" | "Snowflake" | 
+"Sun"  | "Thermometer-25" | "Thermometer-50" | "Wind" |
+"Thermometer-75" | "Thermometer-100" | "Thermometer-Zero" | "Thermometer" | "Tornado" | "Umbrella";
+
+type CustomSunOptions = "Sun-Low" | "Sun-Lower"| "Sunrise" | "Sunset";
+type CustomMoonOptions = "Moon-First-Quarter" | "Moon-Full" | "Moon-Last-Quarter" | "Moon-New" | 
+"Moon-Waning-Crescent" | "Moon-Waning-Gibbous" | "Moon-Waxing-Crescent" | "Moon-Waxing-Gibbous";
 
 /**
  * A WeatherProvider must implement this interface.

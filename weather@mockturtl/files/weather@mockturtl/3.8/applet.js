@@ -90,7 +90,8 @@ const KEYS = {
     WEATHER_REFRESH_INTERVAL: "refreshInterval",
     WEATHER_PRESSURE_UNIT_KEY: "pressureUnit",
     WEATHER_SHORT_CONDITIONS_KEY: "shortConditions",
-    WEATHER_MANUAL_LOCATION: "manualLocation"
+    WEATHER_MANUAL_LOCATION: "manualLocation",
+    WEATHER_USE_CCUSTOM_APPLETICONS_KEY: 'useCustomAppletIcons'
 };
 Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
 function _(str) {
@@ -125,12 +126,14 @@ class WeatherApplet extends Applet.TextIconApplet {
                 main: null,
                 description: null,
                 icon: null,
+                customIcon: null
             },
         };
         this.forecasts = [];
         this.currentLocale = null;
         this.systemLanguage = null;
         this._httpSession = new Soup.SessionAsync();
+        this.appletDir = imports.ui.appletManager.appletMeta[UUID].path;
         this.locProvider = new ipApi.IpApi(this);
         this.lastUpdated = null;
         this.encounteredError = false;
@@ -490,6 +493,8 @@ class WeatherApplet extends Applet.TextIconApplet {
             this._icon_type == St.IconType.SYMBOLIC ?
                 this.set_applet_icon_symbolic_name(iconname) :
                 this.set_applet_icon_name(iconname);
+            if (this._useCustomAppletIcons)
+                this.SetCustomIcon(this.weather.condition.customIcon);
             let temp = "";
             if (this.weather.temperature != null) {
                 temp = TempToUserUnits(this.weather.temperature, this._temperatureUnit).toString();
@@ -752,6 +757,9 @@ class WeatherApplet extends Applet.TextIconApplet {
         return false;
     }
     ;
+    SetCustomIcon(iconName) {
+        this.set_applet_icon_symbolic_path(this.appletDir + "/../icons/" + iconName + ".svg");
+    }
     unitToUnicode(unit) {
         return unit == "fahrenheit" ? '\u2109' : '\u2103';
     }

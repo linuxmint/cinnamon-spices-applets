@@ -108,7 +108,8 @@ class DarkSky implements WeatherProvider {
                 condition: {
                     main: this.GetShortCurrentSummary(json.currently.summary),
                     description: json.currently.summary,
-                    icon: weatherIconSafely(this.ResolveIcon(json.currently.icon), this.app._icon_type)
+                    icon: weatherIconSafely(this.ResolveIcon(json.currently.icon), this.app._icon_type),
+                    customIcon: this.ResolveCustomIcon(json.currently.icon)
                 },
                 extra_field: {
                     name: _("Feels Like"),
@@ -127,7 +128,8 @@ class DarkSky implements WeatherProvider {
                     condition: {
                       main: this.GetShortSummary(day.summary),               
                       description: this.ProcessSummary(day.summary),        
-                      icon: weatherIconSafely(this.ResolveIcon(day.icon), this.app._icon_type),               
+                      icon: weatherIconSafely(this.ResolveIcon(day.icon), this.app._icon_type),    
+                      customIcon: this.ResolveCustomIcon(day.icon)           
                     },
                   };
 
@@ -284,6 +286,37 @@ class DarkSky implements WeatherProvider {
               return [icons.alert]
           }
     };
+
+    private ResolveCustomIcon(icon: string): CustomIcons {
+        switch (icon) {
+            case "rain":
+              return "Cloud-Rain";
+            case "snow":
+              return "Cloud-Snow";
+            case "fog":
+              return "Cloud-Fog";
+            case "cloudy":
+              return "Cloud";
+            case "partly-cloudy-night":
+              return "Cloud-Moon";
+            case "partly-cloudy-day":
+              return "Cloud-Sun";
+            case "clear-night":
+              return "Moon";
+            case "clear-day":
+              return "Sun";
+            // Have not seen Storm or Showers icons returned yet
+            case "storm":
+              return "Cloud-Lightning";
+            case "showers":
+              return "Cloud-Drizzle";
+            // There is no guarantee that there is a wind icon
+            case "wind":
+                return "Wind";
+            default:
+              return "Cloud-Refresh";
+          }
+    }
 
     private SetQueryUnit(): void {
         if (this.app._temperatureUnit == "celsius"){
