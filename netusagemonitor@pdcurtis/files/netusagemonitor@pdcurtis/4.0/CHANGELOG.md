@@ -1,5 +1,8 @@
 ### Changelog covering recent significant changes
 
+## 3.3.1
+  * Changes to syleshhet.css to improve colour contrast with wider range of Themes
+  * Update to allow use with Cinnamon 4.4
 
 ## 3.3.0
   * Correct code for style .numa-not-connected in applet.js
