@@ -17,6 +17,7 @@
   "tree": {
     "type": "list",
     "description": "List of stations",
+    "height": 400,
     "columns": [{
         "id": "name",
         "title": "Title",
