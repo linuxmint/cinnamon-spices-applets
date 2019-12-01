@@ -1,8 +1,26 @@
 {
- "mem-label" : {
-	"type" : "entry",
-	"default" : "mem:",
-	"description" : "Text:",
-	"tooltip" : "Enter custom text to show in the panel."
- }
+"mem-label" :
+    {
+"type" : "entry"
+        ,
+"default" : "mem:"
+        ,
+"description" : "Text:"
+        ,
+"tooltip" : "Enter custom text to show in the panel."
+    },
+"warning-usage" :
+    {
+"type": "spinbutton"
+        ,
+        "default" : 100,
+        "min" : 1,
+        "max" : 100,
+        "step" : 1,
+"units" : ""
+        ,
+"description" : "Warning Level:"
+        ,
+"tooltip" : "Percentage at which the text starts blinking to warn the user. Set at 100 to deactivate."
+    }
 }
