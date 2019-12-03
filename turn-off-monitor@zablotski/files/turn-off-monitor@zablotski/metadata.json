@@ -1,5 +1,6 @@
 {
   "uuid": "turn-off-monitor@zablotski",
   "name": "Turn Off Monitor",
+  "version": "2.0.0",
   "description": "Click on the applet to turn off monitor"
 }
