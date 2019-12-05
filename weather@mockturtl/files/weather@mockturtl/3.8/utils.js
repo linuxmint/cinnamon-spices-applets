@@ -69,6 +69,29 @@ var GetHoursMinutes = function (date, locale, hours24Format, tz) {
             return timeToUserUnits(date, hours24Format);
     }
 };
+var AwareDateString = function (date, locale, hours24Format) {
+    let support = isLocaleStringSupported();
+    let now = new Date();
+    let params = {
+        hour: "numeric",
+        minute: "numeric",
+        hour12: !hours24Format
+    };
+    if (date.toDateString() != now.toDateString()) {
+        params.month = "short";
+        params.day = "numeric";
+    }
+    if (date.getFullYear() != now.getFullYear()) {
+        params.year = "numeric";
+    }
+    switch (support) {
+        case "full":
+        case "notz":
+            return date.toLocaleString(locale, { hour: "numeric", minute: "numeric", hour12: !hours24Format });
+        case "none":
+            return timeToUserUnits(date, hours24Format);
+    }
+};
 var getDayName = function (dayNum) {
     let days = [_('Sunday'), _('Monday'), _('Tuesday'), _('Wednesday'), _('Thursday'), _('Friday'), _('Saturday')];
     return days[dayNum];

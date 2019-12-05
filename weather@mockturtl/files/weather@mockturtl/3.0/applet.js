@@ -81,6 +81,7 @@ var PressToUserUnits = utils.PressToUserUnits;
 var compassDirection = utils.compassDirection;
 var MPStoUserUnits = utils.MPStoUserUnits;
 var nonempty = utils.nonempty;
+var AwareDateString = utils.AwareDateString;
 if (typeof Promise != "function") {
     var promisePoly = importModule("promise-polyfill");
     var finallyConstructor = promisePoly.finallyConstructor;
@@ -185,6 +186,7 @@ var WeatherApplet = (function (_super) {
         _this.encounteredError = false;
         _this.pauseRefresh = false;
         _this.errorCount = 0;
+        _this.LOOP_INTERVAL = 15;
         _this.errMsg = {
             unknown: _("Error"),
             "bad api response - non json": _("Service Error"),
@@ -343,11 +345,11 @@ var WeatherApplet = (function (_super) {
         }
         if (this.errorCount > 60)
             this.errorCount = 60;
-        var loopInterval = 15;
+        var loopInterval = this.LOOP_INTERVAL;
         if (this.errorCount > 0)
             loopInterval = loopInterval * this.errorCount;
         try {
-            if ((this.lastUpdated == null || new Date(this.lastUpdated.getTime() + this._refreshInterval * 60000) < new Date())
+            if ((this.lastUpdated == null || this.errorCount > 0 || new Date(this.lastUpdated.getTime() + this._refreshInterval * 60000) < new Date())
                 && !this.pauseRefresh) {
                 this.refreshWeather(false);
             }
@@ -579,7 +581,7 @@ var WeatherApplet = (function (_super) {
             if (nonempty(this._locationLabelOverride)) {
                 location = this._locationLabelOverride;
             }
-            this.set_applet_tooltip(location);
+            this.set_applet_tooltip(location + " - " + _("Updated") + " " + AwareDateString(this.weather.date, this.currentLocale, this._show24Hours));
             this._currentWeatherSummary.text = descriptionCondition;
             var iconname = this.weather.condition.icon;
             if (iconname == null) {
@@ -880,7 +882,8 @@ var WeatherApplet = (function (_super) {
             this.pauseRefresh = true;
             return;
         }
-        this.log.Error("Retrying in the next 15 seconds...");
+        var nextRefresh = (this.errorCount > 0) ? this.errorCount++ * this.LOOP_INTERVAL : this.LOOP_INTERVAL;
+        this.log.Error("Retrying in the next " + nextRefresh.toString() + " seconds...");
     };
     WeatherApplet.prototype.HandleHTTPError = function (service, error, ctx, callback) {
         var uiError = {

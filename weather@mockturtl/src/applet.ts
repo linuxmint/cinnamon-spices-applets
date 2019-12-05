@@ -50,6 +50,7 @@ var PressToUserUnits = utils.PressToUserUnits as (hpa: number, units: WeatherPre
 var compassDirection = utils.compassDirection as (deg: number) => string;
 var MPStoUserUnits = utils.MPStoUserUnits as (mps: number, units: WeatherWindSpeedUnits) => number;
 var nonempty = utils.nonempty as (str: string) => boolean;
+var AwareDateString = utils.AwareDateString as (date: Date, locale: string, hours24Format: boolean) => string;
 
 // This always evaluates to True because "var Promise" line exists inside 
 if (typeof Promise != "function") {
@@ -245,6 +246,8 @@ class WeatherApplet extends Applet.TextIconApplet {
    * loop seconds are multpilied by this value on errors.
    */
   private errorCount: number = 0;
+  /** in seconds */
+  private readonly LOOP_INTERVAL: number = 15;
 
   public constructor(metadata: any, orientation: any, panelHeight: number, instanceId: number) {
     super(orientation, panelHeight, instanceId);
@@ -415,12 +418,11 @@ class WeatherApplet extends Applet.TextIconApplet {
     // Means loop expands to 15mins max on consecutive errors
     if (this.errorCount > 60) this.errorCount = 60; 
 
-    /** In seconds */
-    let loopInterval = 15;
+    let loopInterval = this.LOOP_INTERVAL;
     // Increase loop timeout linearly with the number of errors
     if (this.errorCount > 0) loopInterval = loopInterval*this.errorCount;
     try {
-      if ((this.lastUpdated == null || new Date(this.lastUpdated.getTime() + this._refreshInterval * 60000) < new Date())
+      if ((this.lastUpdated == null || this.errorCount > 0 || new Date(this.lastUpdated.getTime() + this._refreshInterval * 60000) < new Date())
       && !this.pauseRefresh) {
         this.refreshWeather(false);
       }
@@ -651,7 +653,7 @@ class WeatherApplet extends Applet.TextIconApplet {
         location = this._locationLabelOverride;
       }
 
-      this.set_applet_tooltip(location);
+      this.set_applet_tooltip(location + " - " + _("Updated") + " " + AwareDateString(this.weather.date, this.currentLocale, this._show24Hours));
 
       // Weather Condition
       this._currentWeatherSummary.text = descriptionCondition;
@@ -1049,7 +1051,8 @@ class WeatherApplet extends Applet.TextIconApplet {
       return;
     }
 
-    this.log.Error("Retrying in the next 15 seconds...");
+    let nextRefresh = (this.errorCount > 0) ? this.errorCount++*this.LOOP_INTERVAL : this.LOOP_INTERVAL;
+    this.log.Error("Retrying in the next " + nextRefresh.toString() + " seconds..." );
   }
 
   /** Callback handles any service specific logic */
