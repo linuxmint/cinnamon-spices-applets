@@ -183,6 +183,8 @@ var WeatherApplet = (function (_super) {
         _this.locProvider = new ipApi.IpApi(_this);
         _this.lastUpdated = null;
         _this.encounteredError = false;
+        _this.pauseRefresh = false;
+        _this.errorCount = 0;
         _this.errMsg = {
             unknown: _("Error"),
             "bad api response - non json": _("Service Error"),
@@ -260,7 +262,7 @@ var WeatherApplet = (function (_super) {
     WeatherApplet.prototype.AddRefreshButton = function () {
         var itemLabel = _("Refresh");
         var refreshMenuItem = new Applet.MenuItem(itemLabel, REFRESH_ICON, Lang.bind(this, function () {
-            this.refreshWeather();
+            this.refreshAndRebuild();
         }));
         this._applet_context_menu.addMenuItem(refreshMenuItem);
     };
@@ -277,6 +279,7 @@ var WeatherApplet = (function (_super) {
         this.menu.addActor(mainBox);
     };
     WeatherApplet.prototype.refreshAndRebuild = function () {
+        this.pauseRefresh = false;
         this.refreshWeather(true);
     };
     ;
@@ -334,10 +337,18 @@ var WeatherApplet = (function (_super) {
         return (this.lastUpdated > oldDate);
     };
     WeatherApplet.prototype.RefreshLoop = function () {
+        if (this.encounteredError) {
+            this.encounteredError = false;
+            this.errorCount++;
+        }
+        if (this.errorCount > 60)
+            this.errorCount = 60;
         var loopInterval = 15;
+        if (this.errorCount > 0)
+            loopInterval = loopInterval * this.errorCount;
         try {
-            if (this.lastUpdated == null || this.encounteredError
-                || new Date(this.lastUpdated.getTime() + this._refreshInterval * 60000) < new Date()) {
+            if ((this.lastUpdated == null || new Date(this.lastUpdated.getTime() + this._refreshInterval * 60000) < new Date())
+                && !this.pauseRefresh) {
                 this.refreshWeather(false);
             }
         }
@@ -465,6 +476,7 @@ var WeatherApplet = (function (_super) {
                         if (_a)
                             return [2];
                         this.log.Print("Weather Information refreshed");
+                        this.errorCount = 0;
                         return [3, 10];
                     case 9:
                         e_2 = _b.sent();
@@ -491,7 +503,7 @@ var WeatherApplet = (function (_super) {
                     case 1:
                         location = _a.sent();
                         if (!location)
-                            reject(null);
+                            throw new Error(null);
                         loc = location.lat + "," + location.lon;
                         this.settings.setValue('location', loc);
                         return [2, location];
@@ -501,10 +513,10 @@ var WeatherApplet = (function (_super) {
                             this.HandleError({
                                 type: "hard",
                                 detail: "no location",
-                                noTriggerRefresh: true,
+                                userError: true,
                                 message: _("Make sure you entered a location or use Automatic location instead")
                             });
-                            reject("No location given when setting is on Manual Location");
+                            throw new Error("No location given when setting is on Manual Location");
                         }
                         _a.label = 3;
                     case 3: return [2, null];
@@ -535,6 +547,8 @@ var WeatherApplet = (function (_super) {
             this.weather.location.country = weatherInfo.location.country;
         if (!!weatherInfo.location.timeZone)
             this.weather.location.timeZone = weatherInfo.location.timeZone;
+        if (!!weatherInfo.location.url)
+            this.weather.location.url = weatherInfo.location.url;
         if (!!weatherInfo.extra_field)
             this.weather.extra_field = weatherInfo.extra_field;
         this.forecasts = weatherInfo.forecasts;
@@ -862,8 +876,8 @@ var WeatherApplet = (function (_super) {
                 this._currentWeatherSunset.text = _("Could not update weather for a while...\nare you connected to the internet?");
             }
         }
-        if (error.noTriggerRefresh) {
-            this.encounteredError = false;
+        if (error.userError) {
+            this.pauseRefresh = true;
             return;
         }
         this.log.Error("Retrying in the next 15 seconds...");

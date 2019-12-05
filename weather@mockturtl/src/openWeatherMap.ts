@@ -120,7 +120,7 @@ class OpenWeatherMap implements WeatherProvider {
             },
             extra_field: {
               name: _("Cloudiness"),
-              value: get(["clouds", "all"], json),
+              value: json.clouds.all,
               type: "percent"
             },
             forecasts: []
@@ -174,7 +174,7 @@ class OpenWeatherMap implements WeatherProvider {
             return query;
         }
         
-        this.app.HandleError({type: "hard", noTriggerRefresh: true, "detail": "no location", message: _("Please enter a Location in settings")});
+        this.app.HandleError({type: "hard", userError: true, "detail": "no location", message: _("Please enter a Location in settings")});
         this.app.log.Error("OpenWeatherMap: No Location was provided");
         return null;
     };
@@ -231,7 +231,7 @@ class OpenWeatherMap implements WeatherProvider {
       if (error.code == 404) {
         uiError.detail = "location not found";
         uiError.message = _("Location not found, make sure location is available or it is in the correct format");
-        uiError.noTriggerRefresh = true;
+        uiError.userError = true;
         uiError.type = "hard";
       }
       return uiError;
