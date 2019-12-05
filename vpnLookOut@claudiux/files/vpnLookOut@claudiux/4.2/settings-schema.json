@@ -45,6 +45,7 @@
         "vpnInterface",
         "vpnName",
         "connectAtStartup",
+        "deactivateAtStartup",
         "reconnect",
         "respectUserRequest"
       ]
@@ -113,6 +114,17 @@
     "default": false,
     "description": "Connect to VPN as this applet starts.",
     "tooltip": "Checking this allows this applet to try to connect to the last VPN at start-up."
+  },
+  "deactivateAtStartup": {
+    "type": "switch",
+    "default": false,
+    "dependency": "connectAtStartup!=true",
+    "description": "Deactivate this applet at startup",
+    "tooltip": "When this option is checked, this applet starts in 'deactivated' state, saving resources but not monitoring anything. You can activate it from its menu."
+  },
+  "reactivationRequested": {
+    "type": "generic",
+    "default": false
   },
   "reconnect": {
     "type": "switch",

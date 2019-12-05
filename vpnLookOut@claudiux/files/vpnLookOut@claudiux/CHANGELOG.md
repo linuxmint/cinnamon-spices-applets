@@ -1,5 +1,8 @@
 ## Changelog
 
+### 3.4.1~20191205
+  * New option in Settings -> VPN: Deactivate vpnLookOut at startup.
+
 ### 3.4.0~20191108
   * Add ability to deactivate vpnLookOut.
 

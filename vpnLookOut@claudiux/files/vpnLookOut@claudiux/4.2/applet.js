@@ -229,7 +229,7 @@ class vpnLookOut extends Applet.TextIconApplet {
                 "vpnInterface",
                 this.on_settings_changed,
                 null);
-            this.settings.bindProperty(Settings.BindingDirection.IN,
+            this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL,
                 "vpnName",
                 "vpnName",
                 this.on_settings_changed,
@@ -257,6 +257,19 @@ class vpnLookOut extends Applet.TextIconApplet {
                 "connectAtStartup",
                 "connectAtStartup",
                 this.on_settings_changed,
+                null);
+
+            this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL,
+                "deactivateAtStartup",
+                "deactivateAtStartup",
+                null,
+                null);
+            if (this.connectAtStartup === true) this.deactivateAtStartup = false;
+
+            this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL,
+                "reactivationRequested",
+                "reactivationRequested",
+                null,
                 null);
 
             this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL,
@@ -356,6 +369,10 @@ class vpnLookOut extends Applet.TextIconApplet {
             this.is_deactivated = false;
             this.active_status_message = _("Deactivate vpnLookOut");
             this.active_status_icon = "media-playback-pause-symbolic";
+            if (this.deactivateAtStartup && this.reactivationRequested === false) {
+                this.switch_activation();
+            }
+            this.reactivationRequested = false;
 
             // Install Languages (from .po files)
             //this.execInstallLanguage(); // Removed to avoid Cinnamon crashes
@@ -684,6 +701,8 @@ class vpnLookOut extends Applet.TextIconApplet {
         } else {
             this.set_applet_label("VPN");
         }
+
+        if (this.connectAtStartup === true) this.deactivateAtStartup = false;
 
         this.updateLoop();
     } // End of on_settings_changed
@@ -1017,6 +1036,7 @@ class vpnLookOut extends Applet.TextIconApplet {
                 // deactivate button
                 this.deactivate_button = new PopupMenu.PopupIconMenuItem(this.active_status_message, this.active_status_icon, St.IconType.SYMBOLIC);
                 this.deactivate_button.connect('activate', (event) => {
+                    if (this.is_deactivated) this.reactivationRequested = true;
                     this.switch_activation();
                 });
                 this.menu.addMenuItem(this.deactivate_button);
@@ -1121,8 +1141,8 @@ class vpnLookOut extends Applet.TextIconApplet {
                 }
                 this.alertFlag = false ;
                 let vpnName = GLib.file_get_contents("/tmp/.vpn_name").toString().trim().substr(5).split(';')[0];
-                if (vpnName != "") {
-                    this.vpnName = vpnName
+                if (vpnName.toString() != "") {
+                    this.vpnName = vpnName.toString();
                 }
 
                 let vpnMessage2 = "";
