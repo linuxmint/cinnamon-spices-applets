@@ -216,6 +216,8 @@ declare namespace imports.ui.applet {
         protected set_applet_tooltip(text: string): void;
         protected setAllowedLayout(text: string): void;
         protected hide_applet_label(hide: boolean): void;
+        protected _applet_icon: any;
+        protected _applet_label: any;
     }
 
     /**

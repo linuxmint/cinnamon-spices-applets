@@ -53,6 +53,33 @@
   { "type": "header"
   , "description": "Personal Settings"
   }
+, "verticalOrientation":
+  { "type": "checkbox"
+  , "default": false
+  , "description": "Vertical orientation"
+  },
+  "refreshInterval":
+  { "type": "spinbutton"
+  , "default": 15
+  , "min": 5
+  , "max": 360
+  , "units": "minutes"
+  , "step": 5
+  , "description": "Update interval"
+  },
+  "forecastDays":
+  { "type": "spinbutton"
+  , "default": 2
+  , "min": 2
+  , "max": 5
+  , "units": "days"
+  , "step": 1
+  , "description": "Forecast length"
+  },
+  "unitSettings":
+  { "type": "header"
+  , "description": "Unit Settings"
+  }
 , "temperatureUnit":
   { "type": "radiogroup"
   , "default": "celsius"
@@ -61,11 +88,6 @@
     { "celsius": "celsius"
     , "fahrenheit": "fahrenheit"
     }
-  }
-, "temperatureHighFirst":
-  { "type": "checkbox"
-  , "default": false
-  , "description": "Show high temperature first in forecast"
   }
 , "windSpeedUnit":
   { "type": "combobox"
@@ -91,11 +113,24 @@
     , "atm": "atm"
     , "Pa": "Pa"
     }
-  }
-, "verticalOrientation":
+  },
+  "panelSettings":
+  { "type": "header"
+  , "description": "Panel Settings"
+  },
+  "showTextInPanel":
   { "type": "checkbox"
-  , "default": false
-  , "description": "Vertical orientation"
+  , "default": true
+  , "description": "Display current temperature in panel"
+  }
+, "showCommentInPanel":
+  { "type": "checkbox"
+  , "default": true
+  , "description": "Show the weather condition (e.g., \"Windy\", \"Clear\") in the panel"
+  },
+"displaySettings":
+  { "type": "header"
+  , "description": "Display Settings"
   }
 , "showSunrise":
   { "type": "checkbox"
@@ -107,14 +142,19 @@
   , "default": false
   , "description": "Display time in 24 hour format"
   }
-, "forecastDays":
-  { "type": "spinbutton"
-  , "default": 2
-  , "min": 2
-  , "max": 5
-  , "units": "days"
-  , "step": 1
-  , "description": "Forecast length"
+  , "temperatureHighFirst":
+  { "type": "checkbox"
+  , "default": false
+  , "description": "Show high temperature first in forecast"
+  }
+  , "locationLabelOverride":
+  { "type": "entry"
+  , "default": ""
+  , "description": "Override location label"
+  },
+  "conditionSettings":
+  { "type": "header"
+  , "description": "Condition Settings"
   }
 , "translateCondition":
   { "type": "checkbox"
@@ -125,6 +165,10 @@
   { "type": "checkbox"
   , "default": false
   , "description": "Less verbose conditions"
+  },
+  "iconSettings":
+  { "type": "header"
+  , "description": "Icon Settings"
   }
 , "useSymbolicIcons":
   { "type": "checkbox"
@@ -135,30 +179,6 @@
   { "type": "checkbox"
   , "default": false
   , "description": "Custom Applet icons"
-  }
-, "showTextInPanel":
-  { "type": "checkbox"
-  , "default": true
-  , "description": "Display current temperature in panel"
-  }
-, "showCommentInPanel":
-  { "type": "checkbox"
-  , "default": true
-  , "description": "Show the weather condition (e.g., \"Windy\", \"Clear\") in the panel"
-  }
-, "locationLabelOverride":
-  { "type": "entry"
-  , "default": ""
-  , "description": "Override location label"
-  }
-, "refreshInterval":
-  { "type": "spinbutton"
-  , "default": 15
-  , "min": 5
-  , "max": 360
-  , "units": "minutes"
-  , "step": 5
-  , "description": "Update interval"
   },
   "credits": {
     "type": "header",
