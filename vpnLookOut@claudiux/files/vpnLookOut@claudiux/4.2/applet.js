@@ -441,7 +441,10 @@ class vpnLookOut extends Applet.TextIconApplet {
             }
 
             if (this.dependenciesMet) {
-                this.set_applet_tooltip(_("Waiting"));
+                if (this.is_deactivated)
+                    this.set_applet_tooltip(_("vpnLookOut deactivated") + "\n\n" + this.keybinding + " " + _("or Middle-Click to activate"));
+                else
+                    this.set_applet_tooltip(_("Waiting"));
             } else {
                 this.set_applet_tooltip(_apt_install);
             }
@@ -569,7 +572,10 @@ class vpnLookOut extends Applet.TextIconApplet {
 
         // On middle click: Connect to last VPN used / Disconnect from VPN.
         if (buttonId === 2) {
-            if (this.vpnStatus !== "waiting") {
+            if (this.is_deactivated) {
+                this.reactivationRequested = true;
+                this.switch_activation();
+            } else if (this.vpnStatus !== "waiting") {
                 this.on_button_connect(false)
             }
         }
@@ -718,7 +724,10 @@ class vpnLookOut extends Applet.TextIconApplet {
     } // End of on_shortcut_changed
 
     on_shortcut_used() {
-        if (this.vpnStatus !== "waiting") {
+        if (this.is_deactivated) {
+            this.reactivationRequested = true;
+            this.switch_activation();
+        } else if (this.vpnStatus !== "waiting") {
             this.on_button_connect(false)
         }
     } // End of on_shortcut_used
@@ -1072,6 +1081,7 @@ class vpnLookOut extends Applet.TextIconApplet {
             }
             this.vpnStatusOld = this.vpnStatus;
             this.vpnStatus = "waiting";
+            this.set_applet_tooltip(_("vpnLookOut deactivated") + "\n\n" + this.keybinding + " " + _("or Middle-Click to activate"));
         } else {
             this.activityLog.log(_("vpnLookOut reactivated"));
             this._on_reload_this_applet_pressed();
