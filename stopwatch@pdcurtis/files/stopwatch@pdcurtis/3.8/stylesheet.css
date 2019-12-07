@@ -35,16 +35,31 @@ There is a way to gain 'persistence' described at the end of this file.
 .stopwatch-day-exceeded {
 	background-color: rgba(127,127,127,0.3);
     border-color: red;
+    border: 2px;
+    border-radius: 5px 5px 2px 2px;
+    text-align: center;
+    font-size: 10px;
+	line-height: 9px;
 }
 
 .stopwatch-running-day-exceeded {
-	background-color: rgba(0,255,0,0.3);
+    background-color: rgba(0,255,0,0.3);
     border-color: red;
+    border: 2px;
+    border-radius: 5px 5px 2px 2px;
+    text-align: center;
+    font-size: 10px;
+	line-height: 9px;
 }
 
 .stopwatch-paused-day-exceeded {
 	background-color: rgba(255,165,0,0.3);
     border-color: red;
+    border: 2px;
+    border-radius: 5px 5px 2px 2px;
+    text-align: center;
+    font-size: 10px;
+	line-height: 9px;
 }
 
 /*

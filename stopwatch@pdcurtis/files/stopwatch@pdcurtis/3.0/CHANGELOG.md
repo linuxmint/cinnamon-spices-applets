@@ -1,7 +1,7 @@
 ## Changelog
 
 ### 2.3.0
-  * Adds Multiversion to fix bug when new version used with Cinnamon 3.6 and earlier - reverts to earlier version
+  * Adds Multiversion to fix bug when new version used with Cinnamon 3.6 and earlier - reverts to earlier version 2.1.2 for 3.6 and lower.
 
 ### 2.2.0
   * Adds an option in Configure... to display Counter Heading in Panel.
