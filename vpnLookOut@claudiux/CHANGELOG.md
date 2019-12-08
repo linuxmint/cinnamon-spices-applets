@@ -1,5 +1,9 @@
 ## Changelog
 
+### 3.4.2~20191207
+  * Activate vpnLookOut with middle-click or keyboard shortcut.
+  * Change tooltip.
+
 ### 3.4.1~20191205
   * New option in Settings -> VPN: Deactivate vpnLookOut at startup.
 
