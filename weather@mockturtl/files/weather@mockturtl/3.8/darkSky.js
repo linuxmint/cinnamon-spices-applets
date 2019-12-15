@@ -123,7 +123,7 @@ class DarkSky {
             this.app.log.Error("DarkSky: No API Key given");
             this.app.HandleError({
                 type: "hard",
-                noTriggerRefresh: true,
+                userError: true,
                 "detail": "no key",
                 message: _("Please enter API key in settings,\nor get one first on https://darksky.net/dev/register")
             });
@@ -140,7 +140,7 @@ class DarkSky {
         }
         else {
             this.app.log.Error("DarkSky: Location is not a coordinate");
-            this.app.HandleError({ type: "hard", detail: "bad location format", service: "darksky", noTriggerRefresh: true, message: ("Please Check the location,\nmake sure it is a coordinate") });
+            this.app.HandleError({ type: "hard", detail: "bad location format", service: "darksky", userError: true, message: ("Please Check the location,\nmake sure it is a coordinate") });
             return "";
         }
     }
@@ -163,9 +163,9 @@ class DarkSky {
     HandleHTTPError(error, uiError) {
         if (error.code == 403) {
             uiError.detail = "bad key";
-            uiError.message = _("Please Make sure you\nentered the API key correctly");
+            uiError.message = _("Please Make sure you\nentered the API key correctly and your account is not locked");
             uiError.type = "hard";
-            uiError.noTriggerRefresh = true;
+            uiError.userError = true;
         }
         return uiError;
     }

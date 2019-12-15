@@ -32,6 +32,7 @@ var PressToUserUnits = utils.PressToUserUnits;
 var compassDirection = utils.compassDirection;
 var MPStoUserUnits = utils.MPStoUserUnits;
 var nonempty = utils.nonempty;
+var AwareDateString = utils.AwareDateString;
 if (typeof Promise != "function") {
     var promisePoly = importModule("promise-polyfill");
     var finallyConstructor = promisePoly.finallyConstructor;
@@ -133,6 +134,9 @@ class WeatherApplet extends Applet.TextIconApplet {
         this.locProvider = new ipApi.IpApi(this);
         this.lastUpdated = null;
         this.encounteredError = false;
+        this.pauseRefresh = false;
+        this.errorCount = 0;
+        this.LOOP_INTERVAL = 15;
         this.errMsg = {
             unknown: _("Error"),
             "bad api response - non json": _("Service Error"),
@@ -209,7 +213,7 @@ class WeatherApplet extends Applet.TextIconApplet {
     AddRefreshButton() {
         let itemLabel = _("Refresh");
         let refreshMenuItem = new Applet.MenuItem(itemLabel, REFRESH_ICON, Lang.bind(this, function () {
-            this.refreshWeather();
+            this.refreshAndRebuild();
         }));
         this._applet_context_menu.addMenuItem(refreshMenuItem);
     }
@@ -226,6 +230,7 @@ class WeatherApplet extends Applet.TextIconApplet {
         this.menu.addActor(mainBox);
     }
     refreshAndRebuild() {
+        this.pauseRefresh = false;
         this.refreshWeather(true);
     }
     ;
@@ -267,10 +272,18 @@ class WeatherApplet extends Applet.TextIconApplet {
         return (this.lastUpdated > oldDate);
     }
     RefreshLoop() {
-        let loopInterval = 15;
+        if (this.encounteredError) {
+            this.encounteredError = false;
+            this.errorCount++;
+        }
+        if (this.errorCount > 60)
+            this.errorCount = 60;
+        let loopInterval = this.LOOP_INTERVAL;
+        if (this.errorCount > 0)
+            loopInterval = loopInterval * this.errorCount;
         try {
-            if (this.lastUpdated == null || this.encounteredError
-                || new Date(this.lastUpdated.getTime() + this._refreshInterval * 60000) < new Date()) {
+            if ((this.lastUpdated == null || this.errorCount > 0 || new Date(this.lastUpdated.getTime() + this._refreshInterval * 60000) < new Date())
+                && !this.pauseRefresh) {
                 this.refreshWeather(false);
             }
         }
@@ -377,6 +390,7 @@ class WeatherApplet extends Applet.TextIconApplet {
             if (!await this.displayWeather() || !await this.displayForecast())
                 return;
             this.log.Print("Weather Information refreshed");
+            this.errorCount = 0;
         }
         catch (e) {
             this.log.Error("Generic Error while refreshing Weather info: " + e);
@@ -392,7 +406,7 @@ class WeatherApplet extends Applet.TextIconApplet {
         if (!this._manualLocation) {
             location = await this.locProvider.GetLocation();
             if (!location)
-                reject(null);
+                throw new Error(null);
             let loc = location.lat + "," + location.lon;
             this.settings.setValue('location', loc);
             return location;
@@ -403,10 +417,10 @@ class WeatherApplet extends Applet.TextIconApplet {
                 this.HandleError({
                     type: "hard",
                     detail: "no location",
-                    noTriggerRefresh: true,
+                    userError: true,
                     message: _("Make sure you entered a location or use Automatic location instead")
                 });
-                reject("No location given when setting is on Manual Location");
+                throw new Error("No location given when setting is on Manual Location");
             }
         }
         return null;
@@ -434,6 +448,8 @@ class WeatherApplet extends Applet.TextIconApplet {
             this.weather.location.country = weatherInfo.location.country;
         if (!!weatherInfo.location.timeZone)
             this.weather.location.timeZone = weatherInfo.location.timeZone;
+        if (!!weatherInfo.location.url)
+            this.weather.location.url = weatherInfo.location.url;
         if (!!weatherInfo.extra_field)
             this.weather.extra_field = weatherInfo.extra_field;
         this.forecasts = weatherInfo.forecasts;
@@ -464,7 +480,7 @@ class WeatherApplet extends Applet.TextIconApplet {
             if (nonempty(this._locationLabelOverride)) {
                 location = this._locationLabelOverride;
             }
-            this.set_applet_tooltip(location);
+            this.set_applet_tooltip(location + " - " + _("Updated") + " " + AwareDateString(this.weather.date, this.currentLocale, this._show24Hours));
             this._currentWeatherSummary.text = descriptionCondition;
             let iconname = this.weather.condition.icon;
             if (iconname == null) {
@@ -761,11 +777,12 @@ class WeatherApplet extends Applet.TextIconApplet {
                 this._currentWeatherSunset.text = _("Could not update weather for a while...\nare you connected to the internet?");
             }
         }
-        if (error.noTriggerRefresh) {
-            this.encounteredError = false;
+        if (error.userError) {
+            this.pauseRefresh = true;
             return;
         }
-        this.log.Error("Retrying in the next 15 seconds...");
+        let nextRefresh = (this.errorCount > 0) ? this.errorCount++ * this.LOOP_INTERVAL : this.LOOP_INTERVAL;
+        this.log.Error("Retrying in the next " + nextRefresh.toString() + " seconds...");
     }
     HandleHTTPError(service, error, ctx, callback) {
         let uiError = {

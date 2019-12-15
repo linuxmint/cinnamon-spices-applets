@@ -85,6 +85,33 @@ var GetHoursMinutes = function(date: Date, locale: string, hours24Format: boolea
     }
 }
 
+var AwareDateString = function(date: Date, locale: string, hours24Format: boolean): string {
+    let support: localeStringSupport = isLocaleStringSupported();
+    let now = new Date();
+    let params: any = {
+      hour: "numeric",
+      minute: "numeric",
+      hour12: !hours24Format
+    };
+
+    if (date.toDateString() != now.toDateString()) {
+      params.month = "short";
+      params.day = "numeric";
+    }
+
+    if (date.getFullYear() != now.getFullYear()) {
+      params.year = "numeric";
+    }
+
+    switch(support) {
+      case "full":
+      case "notz":
+          return date.toLocaleString(locale, {hour: "numeric", minute: "numeric", hour12: !hours24Format});
+      case "none":
+          return timeToUserUnits(date, hours24Format);  // Displaying only time
+  }
+}
+
 var getDayName = function(dayNum: number): string {
     let days = [_('Sunday'), _('Monday'), _('Tuesday'), _('Wednesday'), _('Thursday'), _('Friday'), _('Saturday')]
     return days[dayNum];

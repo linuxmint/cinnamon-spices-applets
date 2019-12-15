@@ -50,6 +50,7 @@ var PressToUserUnits = utils.PressToUserUnits as (hpa: number, units: WeatherPre
 var compassDirection = utils.compassDirection as (deg: number) => string;
 var MPStoUserUnits = utils.MPStoUserUnits as (mps: number, units: WeatherWindSpeedUnits) => number;
 var nonempty = utils.nonempty as (str: string) => boolean;
+var AwareDateString = utils.AwareDateString as (date: Date, locale: string, hours24Format: boolean) => string;
 
 // This always evaluates to True because "var Promise" line exists inside 
 if (typeof Promise != "function") {
@@ -227,9 +228,26 @@ class WeatherApplet extends Applet.TextIconApplet {
 
   private provider: WeatherProvider; // API
   private locProvider = new ipApi.IpApi(this); // IP location lookup
+
+  /** To check if data is up-to-date based on user-set refresh settings */
   private lastUpdated: Date = null;
   private orientation: any;
+  /** Used for error handling, first error calls dibs
+   * and stops diplaying the other errors after.
+   * Also used for counting consecutive errors
+   */
   private encounteredError: boolean = false;
+  /** true on errors what user interaction is required on an error.
+   * (usually on settings misconfiguration), refreshAndRebuild()
+   * clears it.
+   */
+  private pauseRefresh: boolean = false;
+  /** Slows main loop down on consecutive errors.
+   * loop seconds are multpilied by this value on errors.
+   */
+  private errorCount: number = 0;
+  /** in seconds */
+  private readonly LOOP_INTERVAL: number = 15;
 
   public constructor(metadata: any, orientation: any, panelHeight: number, instanceId: number) {
     super(orientation, panelHeight, instanceId);
@@ -315,7 +333,7 @@ class WeatherApplet extends Applet.TextIconApplet {
   private AddRefreshButton(): void {
      let itemLabel = _("Refresh")
      let refreshMenuItem = new Applet.MenuItem(itemLabel, REFRESH_ICON, Lang.bind(this, function () {
-       this.refreshWeather();
+       this.refreshAndRebuild();
      }))
      this._applet_context_menu.addMenuItem(refreshMenuItem);
   }
@@ -339,6 +357,7 @@ class WeatherApplet extends Applet.TextIconApplet {
   }
 
   private refreshAndRebuild(): void {
+    this.pauseRefresh = false;
     this.refreshWeather(true);
   };
 
@@ -392,11 +411,19 @@ class WeatherApplet extends Applet.TextIconApplet {
 
   /** Refresh Loop Hooked into MainLoop */
   private RefreshLoop(): void {
-    /** In seconds */
-    let loopInterval = 15;
+    if (this.encounteredError) {
+      this.encounteredError = false;
+      this.errorCount++;
+    }
+    // Means loop expands to 15mins max on consecutive errors
+    if (this.errorCount > 60) this.errorCount = 60; 
+
+    let loopInterval = this.LOOP_INTERVAL;
+    // Increase loop timeout linearly with the number of errors
+    if (this.errorCount > 0) loopInterval = loopInterval*this.errorCount;
     try {
-      if (this.lastUpdated == null || this.encounteredError
-         || new Date(this.lastUpdated.getTime() + this._refreshInterval * 60000) < new Date()) {
+      if ((this.lastUpdated == null || this.errorCount > 0 || new Date(this.lastUpdated.getTime() + this._refreshInterval * 60000) < new Date())
+      && !this.pauseRefresh) {
         this.refreshWeather(false);
       }
     } catch (e) {
@@ -519,6 +546,7 @@ class WeatherApplet extends Applet.TextIconApplet {
       if (rebuild) this.rebuild();
       if (!await this.displayWeather() || !await this.displayForecast()) return;
       this.log.Print("Weather Information refreshed");
+      this.errorCount = 0;
     } 
     catch (e) {
       this.log.Error("Generic Error while refreshing Weather info: " + e);
@@ -540,7 +568,7 @@ class WeatherApplet extends Applet.TextIconApplet {
     let location: LocationData = null;
     if (!this._manualLocation) { 
       location = await this.locProvider.GetLocation();
-      if (!location) reject(null);
+      if (!location) throw new Error(null);
 
       let loc = location.lat + "," + location.lon;
       this.settings.setValue('location', loc);
@@ -554,9 +582,9 @@ class WeatherApplet extends Applet.TextIconApplet {
         this.HandleError({
           type: "hard",
           detail: "no location",
-            noTriggerRefresh: true,
+            userError: true,
             message: _("Make sure you entered a location or use Automatic location instead")});
-        reject("No location given when setting is on Manual Location");
+        throw new Error("No location given when setting is on Manual Location");
       }
     }
     return null;
@@ -584,6 +612,7 @@ class WeatherApplet extends Applet.TextIconApplet {
     if (!!weatherInfo.location.city) this.weather.location.city = weatherInfo.location.city;
     if (!!weatherInfo.location.country) this.weather.location.country = weatherInfo.location.country;
     if (!!weatherInfo.location.timeZone) this.weather.location.timeZone = weatherInfo.location.timeZone;
+    if (!!weatherInfo.location.url) this.weather.location.url = weatherInfo.location.url;
     if (!!weatherInfo.extra_field) this.weather.extra_field = weatherInfo.extra_field;
     this.forecasts = weatherInfo.forecasts;
 
@@ -624,7 +653,7 @@ class WeatherApplet extends Applet.TextIconApplet {
         location = this._locationLabelOverride;
       }
 
-      this.set_applet_tooltip(location);
+      this.set_applet_tooltip(location + " - " + _("Updated") + " " + AwareDateString(this.weather.date, this.currentLocale, this._show24Hours));
 
       // Weather Condition
       this._currentWeatherSummary.text = descriptionCondition;
@@ -1017,11 +1046,13 @@ class WeatherApplet extends Applet.TextIconApplet {
       }
     }
 
-    if (error.noTriggerRefresh) {
-      this.encounteredError = false;
+    if (error.userError) {
+      this.pauseRefresh = true;
       return;
     }
-    this.log.Error("Retrying in the next 15 seconds...");
+
+    let nextRefresh = (this.errorCount > 0) ? this.errorCount++*this.LOOP_INTERVAL : this.LOOP_INTERVAL;
+    this.log.Error("Retrying in the next " + nextRefresh.toString() + " seconds..." );
   }
 
   /** Callback handles any service specific logic */
@@ -1324,7 +1355,8 @@ interface WeatherProvider {
 
 interface AppletError {
   type: ErrorSeverity;
-  noTriggerRefresh?: boolean;
+  /** Stops Refresh completely until settings have changed */
+  userError?: boolean;
   detail: ErrorDetail;
   code?: number;
   message?: string;
