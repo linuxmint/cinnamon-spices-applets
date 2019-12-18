@@ -43,6 +43,12 @@ CPUTemperatureApplet.prototype = {
     }
     this.on_orientation_changed(orientation); // Initializes for panel orientation
 
+    this.TEMPERATURE_FILES = [];
+    Util.spawn_async( ['/bin/bash', '-c', 'find /sys -type f -name "temp*" | sort'], Lang.bind(this, this._setTemperatureFiles));
+
+    //global.log("HERE!!! " + TEMPERATURE_FILES.join(",\n"));
+
+
     this.isLooping = true;
     this.waitForCmd = false;
     this.menuItems = [];
@@ -270,10 +276,28 @@ CPUTemperatureApplet.prototype = {
     return true;
   },
 
+  _setTemperatureFiles: function(out) {
+    this.TEMPERATURE_FILES = out.trim().split("\n");
+    this.tempFiles = [];
+    this.critFiles = [];
+    for (let i=0; i<this.TEMPERATURE_FILES.length; i++) {
+      let fileName = this.TEMPERATURE_FILES[i];
+      if (GLib.file_test(fileName, 1 << 4)) {
+        if (fileName.endsWith('temp') || fileName.endsWith('temperature') || fileName.endsWith('_input')) {
+          this.tempFiles.push(fileName);
+        } else if (fileName.endsWith('_crit')) {
+          this.critFiles.push(fileName);
+        }
+      }
+    }
+    global.log("\nTEMPERATURES:\n" + this.tempFiles.join("\n") + "\nCRIT:\n" + this.critFiles.join("\n"));
+  },
+
   _findTemperatureFromFiles: function() {
     let info = {};
     let tempFiles = [
       // hwmon for new 2.6.39, 3.x linux kernels
+      '/sys/class/hwmon/hwmon1/temp1_input', // @Padre2 #2706
       '/sys/class/hwmon/hwmon0/temp1_input',
       '/sys/devices/platform/coretemp.0/temp1_input',
       '/sys/bus/acpi/devices/LNXTHERM:00/thermal_zone/temp',
@@ -297,6 +321,7 @@ CPUTemperatureApplet.prototype = {
       }
     }
     let critFiles = [
+      '/sys/class/hwmon/hwmon1/temp1_crit',
       '/sys/devices/platform/coretemp.0/temp1_crit',
       '/sys/bus/acpi/drivers/ATK0110/ATK0110:00/hwmon/hwmon0/temp1_crit',
       // hwmon for new 2.6.39, 3.0 linux kernels
@@ -309,6 +334,7 @@ CPUTemperatureApplet.prototype = {
         let temperature = GLib.file_get_contents(critFiles[i]);
         if (temperature[0]) {
           info.crit = parseInt(temperature[1]) / 1000;
+          break;
         }
       }
     }
