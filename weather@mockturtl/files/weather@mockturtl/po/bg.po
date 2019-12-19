@@ -1,6 +1,6 @@
 ﻿# Bulgarian translation for weather@mockturtl
 # Copyright (C) 2019
-# This file is distributed under the same license as the PACKAGE package.
+# This file is distributed under the same license as the weather@mockturtl package.
 # DuMuT6p, 2014.
 # Peyu Yovev <spacy00001@gmail.com>, 2017
 # Angel Ivanov <angel.ivanov@outlook.com>, 2019
@@ -24,7 +24,7 @@ msgstr "..."
 
 #: applet.js:338 3.0/applet.js:232 3.8/applet.js:181
 msgid "Click to open"
-msgstr "Натиснете за да отворите"
+msgstr "Натиснете за да се отвори"
 
 #: applet.js:389
 msgid "Settings"
