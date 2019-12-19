@@ -115,7 +115,7 @@
     "min": 1000,
     "max": 9000,
     "units": "K",
-    "step": 50,
+    "step": 1,
     "description": "Temperature"
   },
   "dayBrightness": {
@@ -149,7 +149,7 @@
     "min": 1000,
     "max": 9000,
     "units": "K",
-    "step": 50,
+    "step": 1,
     "description": "Temperature"
   },
   "nightBrightness": {

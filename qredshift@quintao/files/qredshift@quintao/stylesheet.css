@@ -39,11 +39,11 @@
 }
 
 .q-text-bold {
-    font-weight: bold;
+    font-weight: bolder;
 }
 
 .q-text-medium {
-    font-weight: medium;
+    font-weight: normal;
 }
 
 .q-text-bigger {
