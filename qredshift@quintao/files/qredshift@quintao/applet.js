@@ -99,11 +99,11 @@ class QRedshift extends Applet.TextIconApplet {
         if (!this.verifyVersion()) {
             qLOG('Redshift required!');
             
-            this.set_applet_icon_path(metadata.path + ICON_OFF);
+            this.set_applet_icon_symbolic_path(metadata.path + ICON_OFF);
             this.set_applet_label('REDSHIFT NOT INSTALLED!');
             this.set_applet_tooltip('Requires Redshift: sudo apt-get install redshift');
             
-            // Reload BTN
+            // Reload BTN - view-refresh-symbolic
             let reload_btn = new PopupMenu.PopupMenuItem('Reload Applet', {hover: true});
             reload_btn.connect('activate', this.reloadApplet.bind(this));
             this._applet_context_menu.addMenuItem(reload_btn);
@@ -120,7 +120,7 @@ class QRedshift extends Applet.TextIconApplet {
         
         
         
-        this.set_applet_icon_path(metadata.path + ICON_OFF);
+        this.set_applet_icon_symbolic_path(metadata.path + ICON_OFF);
         this.set_applet_label(this.metadata.name);
         
         this.hide_applet_label(!this.opt.iconLabel);
@@ -556,12 +556,12 @@ class QRedshift extends Applet.TextIconApplet {
             
             // Util.spawnCommandLine(cmd);
             this.doCommand(cmd);
-            this.set_applet_icon_path(this.metadata.path + ICON_ON);
+            this.set_applet_icon_symbolic_path(this.metadata.path + ICON_ON);
             
         } else {
             // if(this.opt.period !== '' ){
             Util.spawnCommandLine(`redshift -x -c ${this.metadata.path + BASE_CONF}`);
-            this.set_applet_icon_path(this.metadata.path + ICON_OFF);
+            this.set_applet_icon_symbolic_path(this.metadata.path + ICON_OFF);
             this.opt.period = '';
             
             // }

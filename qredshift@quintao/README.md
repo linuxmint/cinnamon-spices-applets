@@ -1,6 +1,9 @@
 QRedshift
 ===
-An Cinnamon applet that sets brightness, gamma levels and color temperature with Redshift.
+A Cinnamon applet that sets brightness, gamma levels and color temperature with Redshift.
+
+![](https://raw.githubusercontent.com/raphaelquintao/QRedshift/master/screenshots/screenshot1.png)
+
 
 ## Features
 * Powerfull Interface.
@@ -17,8 +20,12 @@ An Cinnamon applet that sets brightness, gamma levels and color temperature with
 2. Extract .zip archive to `~/.local/share/cinnamon/applets`
 3. Enable the applet in Cinnamon settings
 
-## Screenshots
+## Changelog
+* 1.4
+  - Fixed icon scale.
+  - Added suport to version 4.3 and 4.4
 
+## Screenshots
 ![](https://raw.githubusercontent.com/raphaelquintao/QRedshift/master/screenshots/screenshot2.png)
 
 ![](https://raw.githubusercontent.com/raphaelquintao/QRedshift/master/screenshots/screenshot3.png)
