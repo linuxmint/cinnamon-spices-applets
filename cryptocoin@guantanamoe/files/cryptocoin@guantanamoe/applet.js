@@ -69,6 +69,7 @@ MyApplet.prototype = {
         this.settings.bindProperty(Settings.BindingDirection.IN, "show-ticker-icon", "show_ticker_icon", this._update_settings);
         this.settings.bindProperty(Settings.BindingDirection.IN, "show-ticker-name", "show_ticker_name", this._update_settings);
         this.settings.bindProperty(Settings.BindingDirection.IN, "show-currency", "show_currency", this._update_settings);
+        this.settings.bindProperty(Settings.BindingDirection.IN, "rates-update-interval", "rates_update_interval", this._update_settings);
         this.settings.bindProperty(Settings.BindingDirection.IN, "graph-unit", "graph_unit", this._updateGraphSettings);
         this.settings.bindProperty(Settings.BindingDirection.IN, "graph-length", "graph_length", this._updateGraphSettings);
         this.settings.bindProperty(Settings.BindingDirection.IN, "graph-width", "graph_width", this._updateGraphSettings);
@@ -175,7 +176,15 @@ MyApplet.prototype = {
 
     _update_value: function () {
         this._loadTrackers(`https://min-api.cryptocompare.com/data/pricemulti?fsyms=${this.ticker}&tsyms=${this.currency}`);
-        Mainloop.timeout_add(5000, Lang.bind(this, this._update_value));
+        if (this._updateTimeout) {
+            Mainloop.source_remove(this._updateTimeout);
+        }
+
+        if (this.rates_update_interval == false) {
+            this.rates_update_interval = 5;
+        }
+
+        this._updateTimeout = Mainloop.timeout_add(this.rates_update_interval * 1000, Lang.bind(this, this._update_value));
     },
 
     _updateGraphSettings: function() {
@@ -384,6 +393,16 @@ MyApplet.prototype = {
 
     on_applet_removed_from_panel: function() {
         this.settings.finalize();
+
+        if (this._updateTimeout) {
+            Mainloop.source_remove(this._updateTimeout);
+            this._updateTimeout = undefined;
+        }
+
+        if (this._alertTimeout) {
+            Mainloop.source_remove(this._alertTimeout);
+            this._alertTimeout = undefined;
+        }
     },
 
     on_applet_clicked: function(event) {
