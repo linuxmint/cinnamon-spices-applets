@@ -37,7 +37,8 @@
                 "ticker",
                 "show-ticker-icon",
                 "show-ticker-name",
-                "show-currency"
+                "show-currency",
+                "rates-update-interval"
             ]
         },
         "graph-section" : {
@@ -113,6 +114,12 @@
             "Symbol": "symbol",
             "None": "none"
         }
+    },
+    "rates-update-interval" : {
+        "type" : "entry",
+        "default" : "5",
+        "description" : "Rates update interval (in seconds)",
+        "tooltip" : "Set the delay between each rates update."
     },
     "graph-unit" : {
 		"type" : "combobox",
