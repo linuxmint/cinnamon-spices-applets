@@ -11,7 +11,14 @@ const Settings = imports.ui.settings;
 const Main = imports.ui.main;
 const Signals = imports.signals;
 
+const Gettext = imports.gettext;
 const UUID = "qredshift@quintao";
+
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
 
 
 global.DEBUG = true;
@@ -318,7 +325,7 @@ class QRedshift extends Applet.TextIconApplet {
         // region -- DAY Settings --
         
         this.enabledDay = new QPopupSwitch({
-            label: this.settings.getDesc('enabled'),
+            label: _("Enabled"),
             active: this.opt.enabled
         });
         this.enabledDay.connect('toggled', this.dayEnabledChange.bind(this));
@@ -326,7 +333,7 @@ class QRedshift extends Applet.TextIconApplet {
         
         // day color
         this.dc_Slider = new QPopupSlider({
-            label: 'Temp:', unit: 'K',
+            label: _("Temp:"), unit: 'K',
             value: this.opt.dayTemp, min: this.minColor, max: this.maxColor, step: this.colorStep
         });
         this.dc_Slider.connect('value-changed', this.dayColorChange.bind(this));
@@ -337,7 +344,7 @@ class QRedshift extends Applet.TextIconApplet {
         
         // day bright
         this.db_Slider = new QPopupSlider({
-            label: 'Bright:', unit: '%',
+            label: _("Bright:"), unit: '%',
             value: this.opt.dayBrightness, min: this.minBrightness, max: 100, step: 1
         });
         this.db_Slider.connect('value-changed', this.dayBrightChange.bind(this));
@@ -349,7 +356,7 @@ class QRedshift extends Applet.TextIconApplet {
         
         // gamma
         this.gm_Slider = new QPopupSlider({
-            label: 'Gamma:', unit: '',
+            label: _("Gamma:"), unit: '',
             value: this.opt.gammaMix, min: 1, max: 5, step: 0.01
         });
         this.gm_Slider.connect('value-changed', this.gammaMixChange.bind(this));
@@ -364,7 +371,7 @@ class QRedshift extends Applet.TextIconApplet {
         // region -- Night Settings --
         
         this.enabledNight = new QPopupSwitch({
-            label: this.settings.getDesc('enabledNight'),
+            label: _("Night Enabled"),
             active: this.opt.enabledNight
         });
         this.enabledNight.connect('toggled', this.nightEnabledChange.bind(this));
@@ -372,7 +379,7 @@ class QRedshift extends Applet.TextIconApplet {
         
         // night color
         this.nc_Slider = new QPopupSlider({
-            label: 'Temp:', unit: 'K',
+            label: _("Temp:"), unit: 'K',
             value: this.opt.nightTemp, min: this.minColor, max: this.maxColor, step: this.colorStep
         });
         this.nc_Slider.connect('value-changed', this.nightColorChange.bind(this));
@@ -383,7 +390,7 @@ class QRedshift extends Applet.TextIconApplet {
         
         // night bright
         this.nb_Slider = new QPopupSlider({
-            label: 'Bright:', unit: '%',
+            label: _("Bright:"), unit: '%',
             value: this.opt.nightBrightness, min: this.minBrightness, max: 100, step: 1
         });
         this.nb_Slider.connect('value-changed', this.nightBrightChange.bind(this));
@@ -426,7 +433,7 @@ class QRedshift extends Applet.TextIconApplet {
         
         // show label
         this.enabledLabel = new QPopupSwitch({
-            label: this.settings.getDesc('iconLabel'),
+            label: _("Show Label"),
             active: this.opt.iconLabel
         });
         this.enabledLabel.actor.add_style_class_name('q-icon');
@@ -632,7 +639,6 @@ class QRedshift extends Applet.TextIconApplet {
 function main(metadata, orientation, panel_height, instance_id) {
     return new QRedshift(metadata, orientation, panel_height, instance_id);
 }
-
 
 
 
