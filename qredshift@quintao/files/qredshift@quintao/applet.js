@@ -585,7 +585,7 @@ class QRedshift extends Applet.TextIconApplet {
     }
     
     updateTooltip() {
-        let tooltiptext = `${this.metadata.name}: ${this.opt.enabled ? 'On' : 'Off'}`;
+        let tooltiptext = `${this.metadata.name}: ${this.opt.enabled ? _("On") : _("Off")}`;
         // let labeltext = `${this.metadata.name}`;
         let labeltext = `Off`;
         
@@ -593,16 +593,16 @@ class QRedshift extends Applet.TextIconApplet {
             tooltiptext += '\n';
             tooltiptext += `${this.opt.period}\n\n`;
             if (this.opt.enabledNight) {
-                tooltiptext += `Day Temperature: ${this.opt.dayTemp}K\n`;
-                tooltiptext += `Day Brightness: ${this.opt.dayBrightness}%\n`;
+                tooltiptext += _("Day Temperature:") + " " +`${this.opt.dayTemp}K\n`;
+                tooltiptext += _("Day Brightness:") + " " +`${this.opt.dayBrightness}%\n`;
                 
-                tooltiptext += `Night Temperature: ${this.opt.nightTemp}K\n`;
-                tooltiptext += `Night Brightness: ${this.opt.nightBrightness}%\n`;
+                tooltiptext += _("Night Temperature:") + " " +`${this.opt.nightTemp}K\n`;
+                tooltiptext += _("Night Brightness:") + " " +`${this.opt.nightBrightness}%\n`;
             } else {
-                tooltiptext += `Temperature: ${this.opt.dayTemp}K\n`;
-                tooltiptext += `Brightness: ${this.opt.dayBrightness}%\n`;
+                tooltiptext += _("Temperature:") + " " +`${this.opt.dayTemp}K\n`;
+                tooltiptext += _("Brightness:") + " " +`${this.opt.dayBrightness}%\n`;
             }
-            tooltiptext += `Gamma: ${this.opt.gammaMix}`;
+            tooltiptext += _("Gamma:") + " " +`${this.opt.gammaMix}`;
             
             // Label text
             
