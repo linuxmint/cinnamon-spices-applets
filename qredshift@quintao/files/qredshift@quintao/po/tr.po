@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-12-24 18:00+0300\n"
-"PO-Revision-Date: 2019-12-24 18:21+0300\n"
+"PO-Revision-Date: 2019-12-25 23:10+0300\n"
+"Last-Translator: Gökhan Gökkaya <gokhanlnx@gmail.com>\n"
 "Language-Team: \n"
+"Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.0.6\n"
-"Last-Translator: Gökhan Gökkaya <gokhanlnx@gmail.com>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: tr\n"
 
 #. settings-schema.json->enabled->description
 #: applet.js:328
@@ -31,7 +31,7 @@ msgstr "Sıcaklık:"
 msgid "Bright:"
 msgstr "Parlaklık:"
 
-#: applet.js:359
+#: applet.js:359 applet.js:605
 msgid "Gamma:"
 msgstr "Gama:"
 
@@ -44,6 +44,38 @@ msgstr "Gece Kipi Etkin"
 #: applet.js:436
 msgid "Show Label"
 msgstr "Etiket Göster"
+
+#: applet.js:588
+msgid "On"
+msgstr "Açık"
+
+#: applet.js:588
+msgid "Off"
+msgstr "Kapalı"
+
+#: applet.js:596
+msgid "Day Temperature:"
+msgstr "Gün Sıcaklığı:"
+
+#: applet.js:597
+msgid "Day Brightness:"
+msgstr "Gün Parlaklığı:"
+
+#: applet.js:599
+msgid "Night Temperature:"
+msgstr "Gece Sıcaklığı:"
+
+#: applet.js:600
+msgid "Night Brightness:"
+msgstr "Gece Parlaklığı:"
+
+#: applet.js:602
+msgid "Temperature:"
+msgstr "Sıcaklık:"
+
+#: applet.js:603
+msgid "Brightness:"
+msgstr "Parlaklık:"
 
 #. metadata.json->name
 msgid "QRedshift"
