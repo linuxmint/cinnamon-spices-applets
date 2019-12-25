@@ -30,7 +30,7 @@ msgstr ""
 msgid "Bright:"
 msgstr ""
 
-#: applet.js:359
+#: applet.js:359 applet.js:605
 msgid "Gamma:"
 msgstr ""
 
@@ -42,6 +42,38 @@ msgstr ""
 #. settings-schema.json->iconLabel->description
 #: applet.js:436
 msgid "Show Label"
+msgstr ""
+
+#: applet.js:588
+msgid "On"
+msgstr ""
+
+#: applet.js:588
+msgid "Off"
+msgstr ""
+
+#: applet.js:596
+msgid "Day Temperature:"
+msgstr ""
+
+#: applet.js:597
+msgid "Day Brightness:"
+msgstr ""
+
+#: applet.js:599
+msgid "Night Temperature:"
+msgstr ""
+
+#: applet.js:600
+msgid "Night Brightness:"
+msgstr ""
+
+#: applet.js:602
+msgid "Temperature:"
+msgstr ""
+
+#: applet.js:603
+msgid "Brightness:"
 msgstr ""
 
 #. metadata.json->name
