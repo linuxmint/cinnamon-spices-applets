@@ -107,11 +107,11 @@ class QRedshift extends Applet.TextIconApplet {
             qLOG('Redshift required!');
             
             this.set_applet_icon_symbolic_path(metadata.path + ICON_OFF);
-            this.set_applet_label('REDSHIFT NOT INSTALLED!');
-            this.set_applet_tooltip('Requires Redshift: sudo apt-get install redshift');
+            this.set_applet_label(_("REDSHIFT NOT INSTALLED!"));
+            this.set_applet_tooltip(_("Requires Redshift: sudo apt-get install redshift"));
             
             // Reload BTN - view-refresh-symbolic
-            let reload_btn = new PopupMenu.PopupMenuItem('Reload Applet', {hover: true});
+            let reload_btn = new PopupMenu.PopupMenuItem(_("Reload Applet"), {hover: true});
             reload_btn.connect('activate', this.reloadApplet.bind(this));
             this._applet_context_menu.addMenuItem(reload_btn);
             
@@ -151,7 +151,7 @@ class QRedshift extends Applet.TextIconApplet {
         this.createPopup();
         
         // Reload BTN
-        let reload_btn = new PopupMenu.PopupMenuItem('Reload Applet', {hover: true});
+        let reload_btn = new PopupMenu.PopupMenuItem(_("Reload Applet"), {hover: true});
         reload_btn.connect('activate', this.reloadApplet.bind(this));
         this._applet_context_menu.addMenuItem(reload_btn);
         // this._applet_context_menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
