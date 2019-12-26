@@ -17,6 +17,18 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: applet.js:110
+msgid "REDSHIFT NOT INSTALLED!"
+msgstr ""
+
+#: applet.js:111
+msgid "Requires Redshift: sudo apt-get install redshift"
+msgstr ""
+
+#: applet.js:114 applet.js:154
+msgid "Reload Applet"
+msgstr ""
+
 #. settings-schema.json->enabled->description
 #: applet.js:328
 msgid "Enabled"
