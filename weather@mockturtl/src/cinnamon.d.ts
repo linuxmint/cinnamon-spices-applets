@@ -324,6 +324,7 @@ declare namespace imports.gi.Gtk {
 
     export class Theme {
         has_icon(iconName: string): boolean;
+        append_search_path(path: string): void;
     }
 }
 declare namespace imports.gi.GObject {

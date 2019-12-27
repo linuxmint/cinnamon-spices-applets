@@ -10,7 +10,7 @@
   },
   "providerSettings":
   { "type": "header"
-  , "description": "Weather Provider Settings"
+  , "description": "Weather Provider Options"
   }
 , "dataService":
   { "type": "radiogroup"
@@ -49,15 +49,6 @@
     "callback": "locationLookup",
     "tooltip": "Opens webpage guide"
   },
-  "personalSettings":
-  { "type": "header"
-  , "description": "Personal Settings"
-  }
-, "verticalOrientation":
-  { "type": "checkbox"
-  , "default": false
-  , "description": "Vertical orientation"
-  },
   "refreshInterval":
   { "type": "spinbutton"
   , "default": 15
@@ -78,7 +69,7 @@
   },
   "unitSettings":
   { "type": "header"
-  , "description": "Unit Settings"
+  , "description": "Units"
   }
 , "temperatureUnit":
   { "type": "radiogroup"
@@ -116,7 +107,12 @@
   },
   "panelSettings":
   { "type": "header"
-  , "description": "Panel Settings"
+  , "description": "Panel options"
+  },
+  "verticalOrientation":
+  { "type": "checkbox"
+  , "default": false
+  , "description": "Vertical orientation"
   },
   "showTextInPanel":
   { "type": "checkbox"
@@ -128,9 +124,14 @@
   , "default": true
   , "description": "Show the weather condition (e.g., \"Windy\", \"Clear\") in the panel"
   },
+  "useCustomAppletIcons":
+  { "type": "checkbox"
+  , "default": false
+  , "description": "Use custom icons on the panel"
+  },
 "displaySettings":
   { "type": "header"
-  , "description": "Display Settings"
+  , "description": "Presentation"
   }
 , "showSunrise":
   { "type": "checkbox"
@@ -154,7 +155,7 @@
   },
   "conditionSettings":
   { "type": "header"
-  , "description": "Condition Settings"
+  , "description": "Weather Conditions"
   }
 , "translateCondition":
   { "type": "checkbox"
@@ -168,17 +169,12 @@
   },
   "iconSettings":
   { "type": "header"
-  , "description": "Icon Settings"
+  , "description": "Icons"
   }
 , "useSymbolicIcons":
   { "type": "checkbox"
   , "default": false
-  , "description": "Symbolic icons"
-  }
-, "useCustomAppletIcons":
-  { "type": "checkbox"
-  , "default": false
-  , "description": "Custom Applet icons"
+  , "description": "Use symbolic icons in the applet"
   },
   "credits": {
     "type": "header",

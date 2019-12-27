@@ -32,7 +32,8 @@ const Soup: typeof imports.gi.Soup = imports.gi.Soup;
 const St: typeof imports.gi.St = imports.gi.St;
 const GLib: typeof imports.gi.GLib = imports.gi.GLib
 const GObject: typeof imports.gi.GObject = imports.gi.GObject;
-const Gettext: typeof imports.gettext = imports.gettext
+const Gettext: typeof imports.gettext = imports.gettext;
+const Gtk: typeof imports.gi.Gtk = imports.gi.Gtk;
 /**
  * /usr/share/cinnamon/js/
  */
@@ -261,6 +262,8 @@ class WeatherApplet extends Applet.TextIconApplet {
     this.log = new Log(instanceId);
     this._httpSession.user_agent = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:37.0) Gecko/20100101 Firefox/37.0"; // ipapi blocks non-browsers agents, imitating browser
     Soup.Session.prototype.add_feature.call(this._httpSession, new Soup.ProxyResolverDefault());
+    // Manually add the icons to the icontheme - only one icons folder
+    Gtk.IconTheme.get_default().append_search_path(this.appletDir + "/../icons");
 
     this.SetAppletOnPanel(); 
     this.AddPopupMenu(orientation);
@@ -671,11 +674,6 @@ class WeatherApplet extends Applet.TextIconApplet {
       this._icon_type == St.IconType.SYMBOLIC ?
         this.set_applet_icon_symbolic_name(iconname) :
         this.set_applet_icon_name(iconname)
-
-      // TODO: check if fileicons can be used in panel
-      // let file = Gio.file_new_for_path(icon_path);
-      //this._applet_icon.set_gicon(new Gio.FileIcon({ file: file }));
-      // TODO: Fix size and coloring issues with custom icons
       if (this._useCustomAppletIcons) this.SetCustomIcon(this.weather.condition.customIcon);
 
       // Temperature
@@ -1004,7 +1002,7 @@ class WeatherApplet extends Applet.TextIconApplet {
   };
 
   public SetCustomIcon(iconName: CustomIcons): void {
-    this.set_applet_icon_symbolic_path(this.appletDir + "/../icons/" + iconName + ".svg");
+    this.set_applet_icon_symbolic_name(iconName + "-symbolic");
   }
 
   private unitToUnicode(unit: WeatherUnits): string {

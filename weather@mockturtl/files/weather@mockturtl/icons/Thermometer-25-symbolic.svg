@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generator: Adobe Illustrator 15.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   id="Layer_1"
+   x="0px"
+   y="0px"
+   width="100px"
+   height="100px"
+   viewBox="0 0 100 100"
+   enable-background="new 0 0 100 100"
+   xml:space="preserve"
+   sodipodi:docname="Thermometer-25-symbolic.svg"
+   inkscape:version="0.92.4 5da689c313, 2019-01-14"><metadata
+   id="metadata9"><rdf:RDF><cc:Work
+       rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+         rdf:resource="http://purl.org/dc/dcmitype/StillImage" /></cc:Work></rdf:RDF></metadata><defs
+   id="defs7" /><sodipodi:namedview
+   pagecolor="#ffffff"
+   bordercolor="#666666"
+   borderopacity="1"
+   objecttolerance="10"
+   gridtolerance="10"
+   guidetolerance="10"
+   inkscape:pageopacity="0"
+   inkscape:pageshadow="2"
+   inkscape:window-width="640"
+   inkscape:window-height="480"
+   id="namedview5"
+   showgrid="false"
+   inkscape:zoom="2.36"
+   inkscape:cx="50"
+   inkscape:cy="50"
+   inkscape:window-x="0"
+   inkscape:window-y="0"
+   inkscape:window-maximized="0"
+   inkscape:current-layer="Layer_1" />
+<path
+   d="m 51.59956,100.91585 c -12.323461,0 -22.309424,-9.985966 -22.309424,-22.309427 0,-5.648485 2.114346,-10.792094 5.578751,-14.725113 V 17.248531 c 0,-9.2412008 7.492262,-16.7334632 16.730673,-16.7334632 9.243989,0 16.736252,7.4922624 16.736252,16.7334632 V 63.88131 c 3.458825,3.933019 5.578751,9.076628 5.578751,14.725113 0,12.323461 -9.991543,22.309427 -22.315003,22.309427 z M 57.17831,68.997025 V 57.022236 28.403244 17.248531 c 0,-3.07947 -2.49649,-5.578751 -5.57875,-5.578751 -3.07947,0 -5.578751,2.499281 -5.578751,5.578751 v 11.154713 28.618992 11.974789 c -3.316567,1.933037 -5.573172,5.49228 -5.573172,9.609398 0,6.16173 4.990193,11.151923 11.151923,11.151923 6.16173,0 11.157501,-4.990193 11.157501,-11.151923 0,-4.117118 -2.256605,-7.676361 -5.578751,-9.609398 z m -5.57875,17.977524 c -4.619206,0 -8.362547,-3.74892 -8.362547,-8.368126 0,-3.640135 2.331917,-6.70008 5.573172,-7.854881 V 56.291419 h 5.57875 v 14.460123 c 3.241254,1.154801 5.578751,4.217535 5.578751,7.854881 0,4.619206 -3.748921,8.368126 -8.368126,8.368126 z"
+   id="path2"
+   inkscape:connector-curvature="0"
+   style="clip-rule:evenodd;fill-rule:evenodd;stroke-width:2.78937554" />
+</svg>

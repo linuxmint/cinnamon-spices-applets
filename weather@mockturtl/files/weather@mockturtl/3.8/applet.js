@@ -19,6 +19,7 @@ const St = imports.gi.St;
 const GLib = imports.gi.GLib;
 const GObject = imports.gi.GObject;
 const Gettext = imports.gettext;
+const Gtk = imports.gi.Gtk;
 const Applet = imports.ui.applet;
 const PopupMenu = imports.ui.popupMenu;
 const Settings = imports.ui.settings;
@@ -163,6 +164,7 @@ class WeatherApplet extends Applet.TextIconApplet {
         this.log = new Log(instanceId);
         this._httpSession.user_agent = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:37.0) Gecko/20100101 Firefox/37.0";
         Soup.Session.prototype.add_feature.call(this._httpSession, new Soup.ProxyResolverDefault());
+        Gtk.IconTheme.get_default().append_search_path(this.appletDir + "/../icons");
         this.SetAppletOnPanel();
         this.AddPopupMenu(orientation);
         this.BindSettings();
@@ -758,7 +760,7 @@ class WeatherApplet extends Applet.TextIconApplet {
     }
     ;
     SetCustomIcon(iconName) {
-        this.set_applet_icon_symbolic_path(this.appletDir + "/../icons/" + iconName + ".svg");
+        this.set_applet_icon_symbolic_name(iconName + "-symbolic");
     }
     unitToUnicode(unit) {
         return unit == "fahrenheit" ? '\u2109' : '\u2103';

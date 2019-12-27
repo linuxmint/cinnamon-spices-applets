@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generator: Adobe Illustrator 15.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   id="Layer_1"
+   x="0px"
+   y="0px"
+   width="100px"
+   height="100px"
+   viewBox="0 0 100 100"
+   enable-background="new 0 0 100 100"
+   xml:space="preserve"
+   sodipodi:docname="Degrees-Fahrenheit-symbolic.svg"
+   inkscape:version="0.92.4 5da689c313, 2019-01-14"><metadata
+   id="metadata9"><rdf:RDF><cc:Work
+       rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+         rdf:resource="http://purl.org/dc/dcmitype/StillImage" /></cc:Work></rdf:RDF></metadata><defs
+   id="defs7" /><sodipodi:namedview
+   pagecolor="#ffffff"
+   bordercolor="#666666"
+   borderopacity="1"
+   objecttolerance="10"
+   gridtolerance="10"
+   guidetolerance="10"
+   inkscape:pageopacity="0"
+   inkscape:pageshadow="2"
+   inkscape:window-width="640"
+   inkscape:window-height="480"
+   id="namedview5"
+   showgrid="false"
+   inkscape:zoom="2.36"
+   inkscape:cx="50"
+   inkscape:cy="50"
+   inkscape:window-x="0"
+   inkscape:window-y="0"
+   inkscape:window-maximized="0"
+   inkscape:current-layer="Layer_1" />
+<path
+   d="m 88.369281,35.506916 c 0,-6.44898 -5.228666,-11.677646 -11.677646,-11.677646 -6.448981,0 -11.677647,5.228666 -11.677647,11.677646 V 47.181645 H 88.369281 V 58.859291 H 65.013988 V 82.211665 H 53.34218 V 58.859291 47.181645 35.506916 c 0,-12.89796 10.454413,-23.352374 23.352374,-23.352374 12.897961,0 23.355296,10.454414 23.355296,23.352374 z M 21.228653,53.020468 c -11.283526,0 -20.43004283,-9.149436 -20.43004283,-20.432963 0,-11.283527 9.14651683,-20.432963 20.43004283,-20.432963 11.283525,0 20.435881,9.149436 20.435881,20.432963 0,11.283527 -9.149436,20.432963 -20.435881,20.432963 z m 0,-29.191198 c -4.834545,0 -8.755315,3.923689 -8.755315,8.758235 0,4.834545 3.92077,8.758236 8.755315,8.758236 4.837465,0 8.758234,-3.923691 8.758234,-8.758236 0,-4.834546 -3.917849,-8.758235 -8.758234,-8.758235 z"
+   id="path2"
+   inkscape:connector-curvature="0"
+   style="clip-rule:evenodd;fill-rule:evenodd;stroke-width:2.91941166" />
+</svg>
