@@ -14,3 +14,18 @@ If not already installed by your distribution, install the gnote itself.
 ```
 sudo apt install gnote
 ```
+
+## Changelog
+
+### v1577449518
+
+ * Different icon.
+ * Symbolic icon.
+ * Got rid of debug output and other error messages.
+ * Changed how menu is rebuilt on changes.
+
+### v1577357545
+
+ * Initial release
+ 
+  

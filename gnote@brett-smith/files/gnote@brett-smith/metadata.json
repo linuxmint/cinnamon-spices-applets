@@ -1,8 +1,8 @@
 {
     "uuid": "gnote@brett-smith",
     "name": "Gnote",
-    "description": "Lists notes, view, create notes and search notes.",
+    "description": "Lists notes, view notes, create notes and search notes.",
     "icon": "gnome-note",
     "max-instances": "-1",
-    "last-edited": 1577357545
+    "last-edited": 1577449518
 }
