@@ -22,13 +22,13 @@ tryFn(function() {
 });
 
 const formatBytes = (bytes, decimals)=>{
-  if (bytes === 0) {
+  if (bytes < 1) {
     return '0'.padStart(spaces/2 - 1) + '.00'.padEnd(spaces/2 - 1) + 'B'.padStart(3, ' ') + rate;
   }
   let k = 1000;
   let dm = decimals + 1 || 3;
   let sizes = ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
-  let i = Math.floor(Math.log(bytes) / Math.log(k));
+  let i = Math.min(Math.max(0, Math.floor(Math.log(bytes) / 3)), 8); // 3 replaces Math.log(k)
   let value = (bytes / Math.pow(k, i)).toPrecision(dm).toString();
   let parts = value.split('.');
   let dec_part = (parts.length === 2) ? '.' + parts[1].toString().padEnd(2, '0') : '.00';
