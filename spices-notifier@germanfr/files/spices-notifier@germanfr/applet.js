@@ -101,6 +101,7 @@ class SpicesNotifier extends Applet.TextIconApplet {
 		this.settings.bind('username', 'username', this.reload);
 		this.settings.bind('update-interval', 'update_interval', this.reload);
 		this.settings.bind('show-nonzero-only', 'show_nonzero_only', this.update_applet);
+		this.settings.bind('uuidList', 'uuidList', this.reload);
 
 		this.menuManager = new PopupMenu.PopupMenuManager(this);
 		this.menu = new Applet.AppletPopupMenu(this, orientation);
@@ -247,10 +248,13 @@ class SpicesNotifier extends Applet.TextIconApplet {
 	on_xlets_loaded(type, xlets) {
 		let menuItems = [];
 		let username = this.username.toLowerCase();
+		let list = this.uuidList.toLowerCase().split(';');
 
 		for(let uuid in xlets) {
 			let xlet = xlets[uuid];
-			if (xlet.author_user.toLowerCase() === username) {
+			// If the user is the author of the xlet, or the
+			// xlet is in the additional uuids list, add it
+			if (xlet.author_user.toLowerCase() === username || list.indexOf(uuid.toLocaleLowerCase())>=0) {
 				xlet.type = type;
 				xlet.page = `${SPICES_URL}/${type}/view/${xlet['spices-id']}#${HTML_COUNT_ID}`;
 				xlet.uuid = uuid; // Themes don't have UUIDs, use name

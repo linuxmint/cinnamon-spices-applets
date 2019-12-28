@@ -21,6 +21,13 @@
 		"default": false
 	},
 
+	"uuidList": {
+		"type": "entry",
+		"description": "Additional uuid:s",
+		"tooltip": "Additional uuid:s for applets, desklets, extensions and themes you want to follow (separated by semi-colon).",
+		"default": ""
+	},
+
 	"xlets-cache": {
 		"type": "generic",
 		"default": { "applets": {}, "desklets": {}, "extensions": {}, "themes": {}, "timestamp": 0 }
