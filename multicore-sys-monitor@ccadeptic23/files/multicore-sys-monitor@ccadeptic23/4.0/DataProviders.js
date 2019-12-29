@@ -21,7 +21,7 @@ tryFn(function() {
   GTop = imports.gi.GTop;
 });
 
-const formatBytes = (bytes, decimals)=>{
+const formatBytes = (bytes, decimals=2)=>{
   if (bytes < 1) {
     return '0'.padStart(spaces/2 - 1) + '.00'.padEnd(spaces/2 - 1) + 'B'.padStart(3, ' ') + rate;
   }
