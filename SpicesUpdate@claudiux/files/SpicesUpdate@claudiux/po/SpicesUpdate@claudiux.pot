@@ -549,10 +549,14 @@ msgid "hours"
 msgstr ""
 
 #. 4.2->settings-schema.json->general_frequency->description
-#. 3.8->settings-schema.json->general_frequency->description
-#. 2.8->settings-schema.json->general_frequency->description
 msgid "Time interval between two checks"
 msgstr ""
+
+#. 3.8->settings-schema.json->general_frequency->description
+#. 2.8->settings-schema.json->general_frequency->description
+msgid "Time interval between two checks (hours)"
+msgstr ""
+
 
 #. 4.2->settings-schema.json->general_frequency->tooltip
 msgid "Min value: 1 hour. Max value: 720 hours (30 days)."
