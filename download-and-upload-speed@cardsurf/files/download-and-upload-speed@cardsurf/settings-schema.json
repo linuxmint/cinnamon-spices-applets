@@ -37,6 +37,16 @@
         "description": "Calculate every",
         "tooltip" : "How often to calculate download and upload speed"
     },
+    "update_available_interfaces_every": {
+        "type": "spinbutton",
+        "default": 5,
+        "min": 0,
+        "max": 85800,
+        "step": 1,
+        "units": "seconds",
+        "description": "Update available interfaces every",
+        "tooltip": "How often to update list of available network interfaces. 0 means list of available network interfaces is not updated periodically."
+    },
     "configuration_end" : {
         "type" : "separator"
     },
@@ -234,6 +244,10 @@
     "checked_interfaces_string" : {
         "type": "generic",
         "default" : "eth0"
+    },
+    "unplugged_interfaces_string" : {
+        "type": "generic",
+        "default" : ""
     }
 
 }
