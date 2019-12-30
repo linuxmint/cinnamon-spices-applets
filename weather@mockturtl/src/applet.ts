@@ -52,6 +52,7 @@ var compassDirection = utils.compassDirection as (deg: number) => string;
 var MPStoUserUnits = utils.MPStoUserUnits as (mps: number, units: WeatherWindSpeedUnits) => number;
 var nonempty = utils.nonempty as (str: string) => boolean;
 var AwareDateString = utils.AwareDateString as (date: Date, locale: string, hours24Format: boolean) => string;
+//const delay = utils.delay as (ms: number) => Promise<void>;
 
 // This always evaluates to True because "var Promise" line exists inside 
 if (typeof Promise != "function") {
@@ -127,6 +128,18 @@ const KEYS: SettingKeys  =  {
   WEATHER_MANUAL_LOCATION:  "manualLocation",
   WEATHER_USE_CCUSTOM_APPLETICONS_KEY: 'useCustomAppletIcons'
 }
+
+/*var custom_icons = ["Cloud-Drizzle" , "Cloud-Drizzle-Alt" , "Cloud-Drizzle-Moon-Alt", "Cloud-Drizzle-Moon", "Cloud-Drizzle-Sun-Alt", 
+"Cloud-Drizzle-Sun", "Cloud-Fog", "Cloud-Fog-Alt", "Cloud-Fog-Moon-Alt", "Cloud-Fog-Moon", "Cloud-Fog-Sun-Alt",
+"Cloud-Fog-Sun", "Cloud-Fog", "Cloud-Hail-Alt", "Cloud-Hail-Moon-Alt", "Cloud-Hail-Moon", 
+"Cloud-Hail-Sun-Alt", "Cloud-Hail-Sun", "Cloud-Hail", "Cloud-Lightning-Moon", "Cloud-Lightning-Sun", 
+"Cloud-Lightning", "Cloud-Moon", "Cloud-Rain-Alt", "Cloud-Rain-Moon-Alt", "Cloud-Rain-Moon", 
+"Cloud-Rain", "Cloud-Rain-Sun", "Cloud-Rain-Sun-Alt", "Cloud-Refresh", "Cloud-Snow-Alt", "Cloud-Snow-Moon-Alt","Cloud-Snow-Moon", 
+"Cloud-Snow-Sun-Alt", "Cloud-Snow-Sun", "Cloud-Snow", "Cloud-Sun", "Cloud-Upload", "Cloud-Wind-Moon", 
+"Cloud-Wind-Sun", "Cloud-Wind", "Cloud", "Compass-East", "Compass-North", "Compass-South", "Compass-West",
+"Compass", "Degrees-Celcius", "Degrees-Fahrenheit", "Moon", "Shades", "Snowflake", 
+"Sun", "Thermometer-25", "Thermometer-50", "Wind",
+"Thermometer-75", "Thermometer-100", "Thermometer-Zero", "Thermometer", "Tornado", "Umbrella"];*/
 
 //----------------------------------------------------------------------
 //
@@ -493,6 +506,14 @@ class WeatherApplet extends Applet.TextIconApplet {
   //
   //----------------------------------------------------------------------
 
+  /*private async IconTest() : Promise<void> {
+    for (let i = 0; i < custom_icons.length; i++) {
+      await delay(1000);
+      this.SetCustomIcon(custom_icons[i] as CustomIcons);
+    }
+    
+  }*/
+
   private updateIconType(): void {
     this._icon_type = this.settings.getValue(WEATHER_USE_SYMBOLIC_ICONS_KEY) ?
       St.IconType.SYMBOLIC :
@@ -554,6 +575,7 @@ class WeatherApplet extends Applet.TextIconApplet {
       if (!await this.displayWeather() || !await this.displayForecast()) return;
       this.log.Print("Weather Information refreshed");
       this.errorCount = 0;
+      //this.IconTest();
     } 
     catch (e) {
       this.log.Error("Generic Error while refreshing Weather info: " + e);

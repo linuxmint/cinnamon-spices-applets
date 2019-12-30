@@ -19,6 +19,14 @@ var setTimeout = function(func: any, ms: number) {
   return id;
 };
 
+var delay = async function(ms: number) : Promise<void> {
+  return await new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve();
+    }, ms);
+  });
+}
+
 const clearTimeout = function(id: any) {
   Mainloop.source_remove(id);
 };
