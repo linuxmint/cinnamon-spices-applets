@@ -245,7 +245,7 @@ class Module:
 
                     dump = True
 
-                if theme_path == None:
+                if theme_path is None:
                     continue
 
                 if os.path.exists(theme_path):
