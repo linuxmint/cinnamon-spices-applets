@@ -1,3 +1,6 @@
+### v5.2.1~20191230
+  * Make it configurable for Cinnamon 2.8 -> 4.0.
+
 ### v5.2.0~20191124
   * Cinnamon 4.4: Use Xapp widgets and speed up loading of the icon for the icon theme widget. (Thanks to collinss.)
   * Cinnamon 4.3: Removed (now useless).
