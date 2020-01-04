@@ -17,7 +17,7 @@ const UUID = "qredshift@quintao";
 Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
 
 function _(str) {
-  return Gettext.dgettext(UUID, str);
+    return Gettext.dgettext(UUID, str);
 }
 
 
@@ -53,11 +53,13 @@ class QRedshift extends Applet.TextIconApplet {
             redshift_version: 0,
             enabled: true,
             autoUpdate: false,
-            autoUpdateInterval: 5,
+            autoUpdateInterval: 30,
             adjustmentMethod: 'randr',
             labelScrollAction: 'disabled',
             iconLabel: false,
             iconLabelAlways: true,
+            
+            keyToggle: '',
             
             dayTemp: 6500,
             dayBrightness: 1,
@@ -69,7 +71,7 @@ class QRedshift extends Applet.TextIconApplet {
             
             locationLatitude: '0',
             locationLongitude: '0',
-            period: ''
+            period: '-'
         };
         
         
@@ -92,6 +94,7 @@ class QRedshift extends Applet.TextIconApplet {
             if (!this.opt.enabled && !this.opt.iconLabelAlways) this.hideLabel();
         });
         
+        
         this.settings.bind('dayTemp', 'dayTemp', this.onSettChange.bind(this));
         this.settings.bind('dayBrightness', 'dayBrightness', this.onSettChange.bind(this));
         this.settings.bind('gammaMix', 'gammaMix', this.onSettChange.bind(this));
@@ -102,6 +105,8 @@ class QRedshift extends Applet.TextIconApplet {
         
         this.settings.bind('locationLatitude', 'locationLatitude', this.onSettChange.bind(this));
         this.settings.bind('locationLongitude', 'locationLongitude', this.onSettChange.bind(this));
+    
+        this.settings.bind("keyToggle", "keyToggle", this.onKeyChanged.bind(this));
         
         if (!this.verifyVersion()) {
             qLOG('Redshift required!');
@@ -151,10 +156,14 @@ class QRedshift extends Applet.TextIconApplet {
         this.createPopup();
         
         // Reload BTN
-        let reload_btn = new PopupMenu.PopupMenuItem(_("Reload Applet"), {hover: true});
+        let reload_btn = new PopupMenu.PopupIconMenuItem(_("Reload Applet"), 'view-refresh-symbolic', QIcon.SYMBOLIC, {hover: true});
         reload_btn.connect('activate', this.reloadApplet.bind(this));
         this._applet_context_menu.addMenuItem(reload_btn);
         // this._applet_context_menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+        
+        let recompile_btn = new PopupMenu.PopupIconMenuItem(_("Recompile Translations"), 'preferences-desktop-locale-symbolic', QIcon.SYMBOLIC, {hover: true});
+        recompile_btn.connect('activate', this.recompileTranslations.bind(this));
+        this._applet_context_menu.addMenuItem(recompile_btn);
         
         
         
@@ -190,6 +199,9 @@ class QRedshift extends Applet.TextIconApplet {
             
         });
         
+        
+        // qLOG("KEY|");
+        this.onKeyChanged();
         this.doUpdate();
     }
     
@@ -255,7 +267,7 @@ class QRedshift extends Applet.TextIconApplet {
         if (this.opt.locationLatitude != "0" &&
             this.opt.locationLongitude != "0" && !force && !remoteEnable) return;
         
-        Util.spawn_async(['curl', 'https://geoip-db.com/json/'], (out) => {
+        Util.spawn_async(['curl', 'https://geolocation-db.com/json/'], (out) => {
             let {city, state, country_name, latitude, longitude} = JSON.parse(out);
             let info = `${city}, ${state}, ${country_name}`;
             this.opt.locationLatitude = `${latitude}`;
@@ -278,6 +290,21 @@ class QRedshift extends Applet.TextIconApplet {
         }
     }
     
+    
+    onKeyChanged() {
+        // Main.keybindingManager.addHotKey("must-be-unique-id", this.keybinding, Lang.bind(this, this.on_hotkey_triggered));
+        // qLOG("KEY Changed", this.opt.keyToggle + "", typeof this.opt.keyToggle);
+        // qLOG(this.opt.keyToggle + "");
+        
+        Main.keybindingManager.addHotKey("keyToggle", this.opt.keyToggle, (event) => {
+            
+            this.opt.enabled = !this.opt.enabled;
+            this.enabledDay.setToggleState(this.opt.enabled);
+            this.doUpdate();
+            // qLOG("Hotkey");
+        });
+        
+    }
     
     
     onSettChange() {
@@ -315,6 +342,7 @@ class QRedshift extends Applet.TextIconApplet {
         
         this.headerIcon = new QPopupHeader({
             label: this.metadata.name,
+            // sub_label: this.metadata.version + "",
             iconPath: this.metadata.path + '/icon.png'
         });
         this.menu.addMenuItem(this.headerIcon);
@@ -512,6 +540,8 @@ class QRedshift extends Applet.TextIconApplet {
     on_applet_removed_from_panel() {
         qLOG('REMOVED FROM PANEL');
         this.settings.finalize();
+        Main.keybindingManager.removeHotKey("keyToggle");
+        
         if (this.timeout) {
             Mainloop.source_remove(this.timeout);
             this.timeout = undefined;
@@ -569,7 +599,7 @@ class QRedshift extends Applet.TextIconApplet {
             // if(this.opt.period !== '' ){
             Util.spawnCommandLine(`redshift -x -c ${this.metadata.path + BASE_CONF}`);
             this.set_applet_icon_symbolic_path(this.metadata.path + ICON_OFF);
-            this.opt.period = '';
+            this.opt.period = '-';
             
             // }
             
@@ -580,29 +610,29 @@ class QRedshift extends Applet.TextIconApplet {
     }
     
     setInfo() {
-        this.headerIcon.setStatus(this.opt.period);
+        this.headerIcon.setStatus(this.opt.period + "");
         
     }
     
     updateTooltip() {
         let tooltiptext = `${this.metadata.name}: ${this.opt.enabled ? _("On") : _("Off")}`;
         // let labeltext = `${this.metadata.name}`;
-        let labeltext = `Off`;
+        let labeltext = _("Off");
         
         if (this.opt.enabled) {
             tooltiptext += '\n';
             tooltiptext += `${this.opt.period}\n\n`;
             if (this.opt.enabledNight) {
-                tooltiptext += _("Day Temperature:") + " " +`${this.opt.dayTemp}K\n`;
-                tooltiptext += _("Day Brightness:") + " " +`${this.opt.dayBrightness}%\n`;
+                tooltiptext += _("Day Temperature") + ": " + `${this.opt.dayTemp}K\n`;
+                tooltiptext += _("Day Brightness") + ": " + `${this.opt.dayBrightness}%\n`;
                 
-                tooltiptext += _("Night Temperature:") + " " +`${this.opt.nightTemp}K\n`;
-                tooltiptext += _("Night Brightness:") + " " +`${this.opt.nightBrightness}%\n`;
+                tooltiptext += _("Night Temperature") + ": " + `${this.opt.nightTemp}K\n`;
+                tooltiptext += _("Night Brightness") + ": " + `${this.opt.nightBrightness}%\n`;
             } else {
-                tooltiptext += _("Temperature:") + " " +`${this.opt.dayTemp}K\n`;
-                tooltiptext += _("Brightness:") + " " +`${this.opt.dayBrightness}%\n`;
+                tooltiptext += _("Temperature") + ": " + `${this.opt.dayTemp}K\n`;
+                tooltiptext += _("Brightness") + ": " + `${this.opt.dayBrightness}%\n`;
             }
-            tooltiptext += _("Gamma:") + " " +`${this.opt.gammaMix}`;
+            tooltiptext += _("Gamma:") + " " + `${this.opt.gammaMix}`;
             
             // Label text
             
@@ -622,7 +652,14 @@ class QRedshift extends Applet.TextIconApplet {
     }
     
     
-    
+    // Cinnamon should be restarted after this.
+    recompileTranslations() {
+        let cmd = `cinnamon-xlet-makepot -r ${this.metadata.path}`;
+        Util.spawnCommandLine(cmd);
+        
+        cmd = `cinnamon-xlet-makepot -i ${this.metadata.path}`;
+        Util.spawnCommandLine(cmd);
+    }
     
     reloadApplet() {
         let cmd = `dbus-send --session --dest=org.Cinnamon.LookingGlass --type=method_call /org/Cinnamon/LookingGlass org.Cinnamon.LookingGlass.ReloadExtension string:'${this.metadata.uuid}' string:'APPLET'`;
