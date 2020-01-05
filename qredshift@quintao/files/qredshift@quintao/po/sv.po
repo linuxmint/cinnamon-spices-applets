@@ -1,14 +1,14 @@
 # Swedish translation for qredshift@quintao.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# Åke Engelbrektson <eson@svenskasprakfiler.se>, 2019.
+# Åke Engelbrektson <eson@svenskasprakfiler.se>, 2019, 2020.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: qredshift@quintao\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-12-24 18:00+0300\n"
-"PO-Revision-Date: 2019-12-31 10:45+0100\n"
+"PO-Revision-Date: 2020-01-05 06:53+0100\n"
 "Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
 "Language-Team: Svenska Språkfiler <contactform@svenskasprakfiler.se>\n"
 "Language: sv\n"
@@ -17,6 +17,18 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.0.6\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: applet.js:110
+msgid "REDSHIFT NOT INSTALLED!"
+msgstr "REDSHIFT ÄR INTE INSTALLERAT!"
+
+#: applet.js:111
+msgid "Requires Redshift: sudo apt-get install redshift"
+msgstr "Kräver Redshift: sudo apt install redshift"
+
+#: applet.js:114 applet.js:154
+msgid "Reload Applet"
+msgstr "Uppdatera panelprogrammet"
 
 #. settings-schema.json->enabled->description
 #: applet.js:328
