@@ -20,7 +20,7 @@ if (typeof require !== 'undefined') {
     AppletGui = AppletDirectory.appletGui;
     AppletConstants = AppletDirectory.appletConstants
     ShellUtils = AppletDirectory.shellUtils;
-    Values = AppletDirectory.Values;
+    Values = AppletDirectory.values;
 }
 const MinXrandrVersion = 1.4;
 const MinRandrVersion = 1.2;
