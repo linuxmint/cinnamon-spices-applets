@@ -7,94 +7,94 @@ msgid ""
 msgstr ""
 "Project-Id-Version: qredshift@quintao\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-04 08:28-0300\n"
-"PO-Revision-Date: 2020-01-04 08:47-0300\n"
+"POT-Creation-Date: 2020-01-04 13:58-0300\n"
+"PO-Revision-Date: 2020-01-05 02:01+0100\n"
 "Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: \n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.4\n"
+"X-Generator: Poedit 2.0.6\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: applet.js:110
+#: applet.js:115
 msgid "REDSHIFT NOT INSTALLED!"
 msgstr "REDSHIFT N'EST PAS INSTALLÉ !"
 
-#: applet.js:111
+#: applet.js:116
 msgid "Requires Redshift: sudo apt-get install redshift"
 msgstr "Nécessite l'installation de Redshift : sudo apt-get install redshift"
 
-#: applet.js:114 applet.js:154
+#: applet.js:119 applet.js:159
 msgid "Reload Applet"
 msgstr "Relancer cette applet"
 
-#: applet.js:159
+#: applet.js:164
 msgid "Recompile Translations"
 msgstr "Recompiler les traductions"
 
 #. settings-schema.json->enabled->description
-#: applet.js:333
+#: applet.js:356
 msgid "Enabled"
 msgstr "Activé"
 
-#: applet.js:341 applet.js:387
+#: applet.js:364 applet.js:410
 msgid "Temp:"
 msgstr "Temp. :"
 
-#: applet.js:352 applet.js:398
+#: applet.js:375 applet.js:421
 msgid "Bright:"
 msgstr "Brill. :"
 
-#: applet.js:364 applet.js:610
+#: applet.js:387 applet.js:635
 msgid "Gamma:"
 msgstr "Gamma :"
 
 #. settings-schema.json->enabledNight->description
-#: applet.js:379
+#: applet.js:402
 msgid "Night Enabled"
 msgstr "Activer les paramètres de nuit"
 
 #. settings-schema.json->iconLabel->description
-#: applet.js:441
+#: applet.js:464
 msgid "Show Label"
 msgstr "Afficher l'étiquette de cette applet"
 
-#: applet.js:593
+#: applet.js:618
 msgid "On"
 msgstr "Activé"
 
-#: applet.js:593 applet.js:595
+#: applet.js:618 applet.js:620
 msgid "Off"
 msgstr "Désactivé"
 
-#: applet.js:601
+#: applet.js:626
 msgid "Day Temperature"
 msgstr "Température de jour"
 
-#: applet.js:602
+#: applet.js:627
 msgid "Day Brightness"
 msgstr "Brillance de jour"
 
-#: applet.js:604
+#: applet.js:629
 msgid "Night Temperature"
 msgstr "Température de nuit"
 
-#: applet.js:605
+#: applet.js:630
 msgid "Night Brightness"
 msgstr "Brillance de nuit"
 
 #. settings-schema.json->labelScrollAction->options
 #. settings-schema.json->dayTemp->description
 #. settings-schema.json->nightTemp->description
-#: applet.js:607
+#: applet.js:632
 msgid "Temperature"
 msgstr "Température"
 
 #. settings-schema.json->dayBrightness->description
 #. settings-schema.json->nightBrightness->description
-#: applet.js:608
+#: applet.js:633
 msgid "Brightness"
 msgstr "Brillance"
 
@@ -107,8 +107,9 @@ msgid ""
 "Sets brightness, gamma levels and color temperature with Redshift.\n"
 "This applet conflicts with redshift-gtk, make sure you remove it."
 msgstr ""
-"Règle les niveaux de luminosité, de gamma et de température de couleur avec Redshift.\n"
-"Cette applet est en conflit avec redshift-gtk, assurez-vous de la supprimer."
+"Règle les niveaux de luminosité, de gamma et de température de couleur avec "
+"Redshift.\n"
+"Cette applet est en conflit avec le paquet redshift-gtk, assurez-vous de le supprimer."
 
 #. settings-schema.json->panel-options->title
 msgid "Settings"
@@ -117,6 +118,14 @@ msgstr "Paramètres"
 #. settings-schema.json->panel-location->title
 msgid "Location"
 msgstr "Lieu"
+
+#. settings-schema.json->panel-shortcuts->title
+msgid "Shortcuts"
+msgstr "Raccourcis"
+
+#. settings-schema.json->info-section->title
+msgid "Tips"
+msgstr "Astuces"
 
 #. settings-schema.json->opt-section->title
 msgid "Options"
@@ -128,7 +137,11 @@ msgstr "Paramètres pour le jour"
 
 #. settings-schema.json->night-section->title
 msgid "Night Settings"
-msgstr "Paramètres de nuit"
+msgstr "Paramètres pour la nuit"
+
+#. settings-schema.json->keybind-section->title
+msgid "Key Bindings"
+msgstr "Raccourcis clavier"
 
 #. settings-schema.json->location-section->title
 msgid "Location Settings"
@@ -148,7 +161,7 @@ msgstr "Sec."
 
 #. settings-schema.json->autoUpdateInterval->description
 msgid "Update interval"
-msgstr "Intervalle entre deux vérifications"
+msgstr "Intervalle de temps entre deux vérifications"
 
 #. settings-schema.json->adjustmentMethod->description
 msgid "Adjustment Method"
@@ -179,6 +192,7 @@ msgid "Disabled"
 msgstr "Désactivé"
 
 #. settings-schema.json->labelScrollAction->options
+#. settings-schema.json->keyToggle->description
 msgid "On/Off"
 msgstr "Marche/Arrêt"
 
@@ -232,7 +246,23 @@ msgid ""
 "Using: https://geolocation-db.com/"
 msgstr ""
 "Votre géolocalisation peut ne pas se faire instantanément.\n"
-"Cette applet utilise https://geolocation-db.com/ comme service de géolocalisation."
+"Cette applet utilise https://geolocation-db.com/ comme service de "
+"géolocalisation."
+
+#. settings-schema.json->textTips->description
+msgid "* Right-click the sliders to reset the default (neutral) value."
+msgstr ""
+"* Cliquez avec le bouton droit sur les curseurs pour les réinitialiser à "
+"leur valeur par défaut."
+
+#. settings-schema.json->textInfo->description
+msgid ""
+"If you like and use this applet take the time to visit it's page on Cinnamon "
+"Spices and give it a star. You only need a github account to do this."
+msgstr ""
+"Si vous utilisez et appréciez cette applet, prenez le temps de visiter sa "
+"page sur Cinnamon Spices et attribuez-lui une étoile. Pour ce faire, vous "
+"n'avez besoin que d'un compte Github."
 
 #~ msgid "Temperature:"
 #~ msgstr "Température :"
