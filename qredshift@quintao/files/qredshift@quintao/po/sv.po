@@ -1,7 +1,7 @@
 # Swedish translation for qredshift@quintao.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# Åke Engelbrektson <eson@svenskasprakfiler.se>, 2019.
+# Åke Engelbrektson <eson@svenskasprakfiler.se>, 2019, 2020.
 #
 msgid ""
 msgstr ""
@@ -20,19 +20,23 @@ msgstr ""
 
 #: applet.js:110
 msgid "REDSHIFT NOT INSTALLED!"
-msgstr "REDSHIFT NOT INSTALLED!"
+msgstr "REDSHIFT ÄR INTE INSTALLERAT!"
 
 #: applet.js:111
 msgid "Requires Redshift: sudo apt-get install redshift"
-msgstr "Requires Redshift: sudo apt-get install redshift"
+msgstr "Kräver Redshift: sudo apt install redshift"
+
+#: applet.js:111
+msgid "Requires Redshift: sudo apt-get install redshift"
+msgstr "Kräver Redshift: sudo apt install redshift"
 
 #: applet.js:114 applet.js:154
 msgid "Reload Applet"
-msgstr "Reload Applet"
+msgstr "Uppdatera panelprogrammet"
 
 #: applet.js:159
 msgid "Recompile Translations"
-msgstr "Recompile Translations"
+msgstr "Kompilera om översättningar"
 
 #. settings-schema.json->enabled->description
 #: applet.js:333
