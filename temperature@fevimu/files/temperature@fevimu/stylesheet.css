@@ -1,3 +1,29 @@
 .temperature-label {
     background: transparent;
+    margin: 2px, 1px, 1px, 1px;
+    padding: 0 2px;
+    border: 1px;
+    border-radius: 5px, 5px, 5px, 5px;
+    border-color: rgba(127,127,127,0.5);
+    font-size: 95%;
+}
+
+.temperature-high {
+    background: DarkOrange;
+    margin: 2px, 1px, 1px, 1px;
+    padding: 0 2px;
+    border: 1px;
+    border-radius: 5px, 5px, 5px, 5px;
+    border-color: rgba(255,141,0,0.5);
+    font-size: 95%;
+}
+
+.temperature-critical {
+    background: FireBrick;
+    margin: 2px, 1px, 1px, 1px;
+    padding: 0 2px;
+    border: 1px;
+    border-radius: 5px, 5px, 5px, 5px;
+    border-color: rgba(194,34,34,0.5);
+    font-size: 95%;
 }

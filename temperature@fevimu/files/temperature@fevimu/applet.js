@@ -9,15 +9,33 @@ const Applet = imports.ui.applet;
 const Settings = imports.ui.settings;
 const Gettext = imports.gettext;
 
+//let keyFile = new GLib.KeyFile();
+//let osRelease = keyFile.load_from_file("/usr/lib/os-release", GLib.KeyFileFlags.NONE);
+//global.log("Distro="+osRelease.get_string("ID", null));
+
 const UUID = "temperature@fevimu";
 
 const HOME_DIR = GLib.get_home_dir();
-// ++ DEBUG is true only if the DEBUG file is present in this applet directory ($ touch DEBUG)
-var _debug = Gio.file_new_for_path(HOME_DIR + "/.local/share/cinnamon/applets/" + UUID + "/DEBUG");
-const DEBUG = _debug.query_exists(null);
+
+let Dependencies;
+if (typeof require !== 'undefined') {
+  // For Cinnamon >= 3.8
+  const CheckDependencies = require("./checkDependencies");
+  Dependencies = CheckDependencies.Dependencies;
+} else {
+  // For Cinnamon < 3.8
+  const AppletDirectory = imports.ui.appletManager.applets[UUID];
+  Dependencies = AppletDirectory.CheckDependencies.Dependencies;
+}
+
+const DEBUG = function() {
+  // Returns wether or not the DEBUG file is present in this applet directory (To create it: $ touch DEBUG).
+  let _debug = Gio.file_new_for_path(HOME_DIR + "/.local/share/cinnamon/applets/" + UUID + "/DEBUG");
+  return _debug.query_exists(null);
+}
 
 const sensorRegex = /^([\sA-z\w]+[\s|:|\d]{1,4})(?:\s+\+)(\d+\.\d+)°[FC]|(?:\s+\()([a-z]+)(?:[\s=+]+)(\d+\.\d)°[FC],\s([a-z]+)(?:[\s=+]+)(\d+\.\d)/gm;
-const cpuIdentifiers = ['Tctl', 'CPU Temperature'];
+const cpuIdentifiers = ['CPU Temp', 'CPU0 Temp', 'CPU1 Temp', 'Tctl', 'CPU Temperature', 'Current CPU Temperature', 'PECI Agent 0'];
 
 const _ = function(str) {
   let translation = Gettext.gettext(str);
@@ -25,6 +43,16 @@ const _ = function(str) {
     return translation;
   }
   return Gettext.dgettext(UUID, str);
+}
+
+const intersection = function(array1, array2) {
+  let ret = [];
+  for (let i = 0; i < array1.length; i++) {
+    if (array2.indexOf(array1[i]) > -1) {
+      ret.push(array1[i]);
+    }
+  }
+  return ret;
 }
 
 function CPUTemperatureApplet(metadata, orientation, instance_id) {
@@ -43,8 +71,13 @@ CPUTemperatureApplet.prototype = {
     }
     this.on_orientation_changed(orientation); // Initializes for panel orientation
 
+    this.dependencies = new Dependencies();
+
+    this.content = "";
     this.TEMPERATURE_FILES = [];
-    Util.spawn_async( ['/bin/bash', '-c', 'find /sys -type f -name "temp*" | sort'], Lang.bind(this, this._setTemperatureFiles));
+    this.tempFiles = [];
+    this.critFiles = [];
+    Util.spawn_async( ['/bin/bash', '-c', 'find /sys -name "*temp*" | sort'], Lang.bind(this, this._setTemperatureFiles));
 
     //global.log("HERE!!! " + TEMPERATURE_FILES.join(",\n"));
 
@@ -78,13 +111,20 @@ CPUTemperatureApplet.prototype = {
     this.menu = new Applet.AppletPopupMenu(this, orientation);
     this.menuManager.addMenu(this.menu);
 
-    this.sensorsPath = null;
-    Util.spawn_async(['which', 'sensors'], Lang.bind(this, this._detectSensors));
+    //this.sensorsPath = null;
+    //Util.spawn_async(['which', 'sensors'], Lang.bind(this, this._detectSensors));
 
     this.set_applet_tooltip(_('Temperature'));
 
-    this.updateTemperature();
-    this.loopId = Mainloop.timeout_add(this.state.interval, () => this.updateTemperature());
+    this.interval = 0;
+    if (this.dependencies.areDepMet()) {
+      this.sensorsPath = null;
+      Util.spawn_async(['which', 'sensors'], Lang.bind(this, this._detectSensors));
+      this.updateTemperature();
+      this.loopId = Mainloop.timeout_add(this.state.interval, () => this.updateTemperature());
+    } else {
+      this.interval = setInterval(() => this.dependencies.check_dependencies(), 10000);
+    }
   },
 
   on_settings_changed: function() {
@@ -134,8 +174,14 @@ CPUTemperatureApplet.prototype = {
   },
 
   on_applet_removed_from_panel: function() {
-    Mainloop.source_remove(this.loopId);
-    this.loopId = 0;
+    if (this.loopId) {
+      Mainloop.source_remove(this.loopId);
+      this.loopId = 0;
+    }
+    if (this.interval != 0) {
+      clearInterval(this.interval);
+      this.interval = 0;
+    }
     this.isLooping = false;
     this.settings.finalize();
   },
@@ -185,7 +231,7 @@ CPUTemperatureApplet.prototype = {
 
     if (this.sensorsPath && !this.waitForCmd) {
       this.waitForCmd = true;
-      Util.spawn_async([this.sensorsPath], Lang.bind(this, this._updateTemperature));
+      Util.spawn_async(['/bin/bash', '-c', this.sensorsPath, '-u'], Lang.bind(this, this._updateTemperature));
     }
 
     return true;
@@ -209,19 +255,25 @@ CPUTemperatureApplet.prototype = {
       let n = 0; //sum and count
 
       for (let i = 0; i < tempInfo.length; i++) {
+        //if (tempInfo[i].label.indexOf('Adapter') > -1) {
+          //global.log(tempInfo[i].label)
+        //}
         if (tempInfo[i].label.indexOf('Package') > -1) {
           critical = tempInfo[i].crit ? tempInfo[i].crit : 0;
           high = tempInfo[i].high ? tempInfo[i].high : 0;
           packageIds += tempInfo[i].value;
           packageCount++;
+          items.push(tempInfo[i].label + ': ' + this._formatTemp(tempInfo[i].value));
         } else if (tempInfo[i].label.indexOf('Core') > -1) {
           s += tempInfo[i].value;
+          items.push(tempInfo[i].label + ': ' + this._formatTemp(tempInfo[i].value));
           n++;
         }
         if (cpuIdentifiers.indexOf(tempInfo[i].label) > -1) {
           temp = tempInfo[i].value;
+          items.push(tempInfo[i].label + ': ' + this._formatTemp(temp));
         }
-        items.push(tempInfo[i].label + ': ' + this._formatTemp(tempInfo[i].value));
+        //items.push(tempInfo[i].label + ': ' + this._formatTemp(tempInfo[i].value));
       }
       if (high > 0 || critical > 0) {
         items.push("");
@@ -235,20 +287,24 @@ CPUTemperatureApplet.prototype = {
           temp = s / n;
       }
       let label = this._formatTemp(temp);
-      if (DEBUG === true) {critical = 53; high = 49;} // <- For tests only.
+      if (DEBUG() === true) {critical = 53; high = 49;} // <- For tests only.
       if (this.state.changeColor === false) this.state.onlyColors = false;
       if (critical && temp >= critical) {
         this.title = (this.isHorizontal === true && this.state.onlyColors === false) ? _('Critical') + ': ' + label : this._formatTemp(temp, true);
-        this.actor.style = (this.state.changeColor === true) ? "background: FireBrick;" : "background: transparent;";
+        //this.actor.style = (this.state.changeColor === true) ? "background: FireBrick;" : "background: transparent;";
+        this.actor.set_style_class_name((this.state.changeColor === true) ? "temperature-critical" : "temperature-label");
       } else if (high && temp >= high) {
         this.title = (this.isHorizontal === true && this.state.onlyColors === false) ? _('High') + ': ' + label : this._formatTemp(temp, true);
-        this.actor.style = (this.state.changeColor === true) ? "background: DarkOrange;" : "background: transparent;";
+        //this.actor.style = (this.state.changeColor === true) ? "background: DarkOrange;" : "background: transparent;";
+        this.actor.set_style_class_name((this.state.changeColor === true) ? "temperature-high" : "temperature-label");
       } else {
         this.title = this._formatTemp(temp, true);
-        this.actor.style = "background: transparent;";
+        //this.actor.style = "background: transparent;";
+        this.actor.set_style_class_name("temperature-label");
       }
     }
 
+    //if (DEBUG() === true) global.log("HERE!!! " + this.TEMPERATURE_FILES.join(",\n"));
     if (!tempInfo || !temp) {
       // if we don't have the temperature yet, use some known files
       tempInfo = this._findTemperatureFromFiles();
@@ -280,46 +336,28 @@ CPUTemperatureApplet.prototype = {
     this.TEMPERATURE_FILES = out.trim().split("\n");
     this.tempFiles = [];
     this.critFiles = [];
-    for (let i=0; i<this.TEMPERATURE_FILES.length; i++) {
-      let fileName = this.TEMPERATURE_FILES[i];
-      if (GLib.file_test(fileName, 1 << 4)) {
-        if (fileName.endsWith('temp') || fileName.endsWith('temperature') || fileName.endsWith('_input')) {
-          this.tempFiles.push(fileName);
-        } else if (fileName.endsWith('_crit')) {
-          this.critFiles.push(fileName);
-        }
-      }
-    }
-    global.log("\nTEMPERATURES:\n" + this.tempFiles.join("\n") + "\nCRIT:\n" + this.critFiles.join("\n"));
-  },
-
-  _findTemperatureFromFiles: function() {
-    let info = {};
     let tempFiles = [
       // hwmon for new 2.6.39, 3.x linux kernels
-      '/sys/class/hwmon/hwmon1/temp1_input', // @Padre2 #2706
       '/sys/class/hwmon/hwmon0/temp1_input',
+      '/sys/class/hwmon/hwmon1/temp1_input', // @Padre2 #2706
       '/sys/devices/platform/coretemp.0/temp1_input',
       '/sys/bus/acpi/devices/LNXTHERM:00/thermal_zone/temp',
+      '/sys/bus/acpi/devices/LNXTHERM:01/thermal_zone/temp', // @Padre2 #2706
       '/sys/devices/virtual/thermal/thermal_zone0/temp',
+      '/sys/devices/virtual/thermal/thermal_zone1/temp',
+      '/sys/devices/virtual/thermal/thermal_zone2/temp',
       '/sys/bus/acpi/drivers/ATK0110/ATK0110:00/hwmon/hwmon0/temp1_input',
+      '/sys/bus/acpi/drivers/ATK0110/ATK0110:00/hwmon/hwmon1/temp1_input',
+      '/sys/bus/acpi/drivers/thermal/LNXTHERM:00/thermal_zone/temp',
+      '/sys/bus/acpi/drivers/thermal/LNXTHERM:01/thermal_zone/temp',
       // old kernels with proc fs
       '/proc/acpi/thermal_zone/THM0/temperature',
       '/proc/acpi/thermal_zone/THRM/temperature',
       '/proc/acpi/thermal_zone/THR0/temperature',
       '/proc/acpi/thermal_zone/TZ0/temperature',
       // Debian Sid/Experimental on AMD-64
-      '/sys/class/hwmon/hwmon0/device/temp1_input'
+      '/sys/class/hwmon/hwmon1/device/temp1_input'
     ];
-    for (let i = 0; i < tempFiles.length; i++) {
-      if (GLib.file_test(tempFiles[i], 1 << 4)) {
-        let temperature = GLib.file_get_contents(tempFiles[i]);
-        if (temperature[0]) {
-          info.temp = parseInt(temperature[1]) / 1000;
-          break;
-        }
-      }
-    }
     let critFiles = [
       '/sys/class/hwmon/hwmon1/temp1_crit',
       '/sys/devices/platform/coretemp.0/temp1_crit',
@@ -329,9 +367,35 @@ CPUTemperatureApplet.prototype = {
       // Debian Sid/Experimental on AMD-64
       '/sys/class/hwmon/hwmon0/device/temp1_crit'
     ];
-    for (let i = 0; i < critFiles.length; i++) {
-      if (GLib.file_test(critFiles[i], 1 << 4)) {
-        let temperature = GLib.file_get_contents(critFiles[i]);
+    for (let i=0; i<this.TEMPERATURE_FILES.length; i++) {
+      let fileName = this.TEMPERATURE_FILES[i];
+      if (GLib.file_test(fileName, 1 << 4)) {
+        if (fileName.slice(fileName.lastIndexOf('/')).startsWith('temp') || fileName.endsWith('temp') || fileName.endsWith('temperature') || fileName.endsWith('_input')) {
+          this.tempFiles.push(fileName);
+        } else if (fileName.endsWith('_crit')) {
+          this.critFiles.push(fileName);
+        }
+      }
+    }
+    this.tempFiles = intersection(this.tempFiles, tempFiles);
+    this.critFiles = intersection(this.critFiles, critFiles);
+    if (DEBUG() === true) global.log("\nTEMPERATURES:\n" + this.tempFiles.join("\n") + "\nCRIT:\n" + this.critFiles.join("\n"));
+  },
+
+  _findTemperatureFromFiles: function() {
+    let info = {};
+    for (let i = 0; i < this.tempFiles.length; i++) {
+      if (GLib.file_test(this.tempFiles[i], 1 << 4)) {
+        let temperature = GLib.file_get_contents(this.tempFiles[i]);
+        if (temperature[0]) {
+          info.temp = parseInt(temperature[1]) / 1000;
+          break;
+        }
+      }
+    }
+    for (let i = 0; i < this.critFiles.length; i++) {
+      if (GLib.file_test(this.critFiles[i], 1 << 4)) {
+        let temperature = GLib.file_get_contents(this.critFiles[i]);
         if (temperature[0]) {
           info.crit = parseInt(temperature[1]) / 1000;
           break;
@@ -344,6 +408,9 @@ CPUTemperatureApplet.prototype = {
   _findTemperatureFromSensorsOutput: function(txt) {
     let match;
     let entries = [];
+
+    //global.log(txt);
+
     while ((match = sensorRegex.exec(txt)) !== null) {
       if (match.index === sensorRegex.lastIndex) {
           sensorRegex.lastIndex++;
@@ -353,6 +420,7 @@ CPUTemperatureApplet.prototype = {
         if (!match[i]) {
           continue;
         }
+        //global.log(match[i].toString());
         if (i % 2) {
           match[i] = match[i].trim();
           if (match[i].indexOf(':') > -1) {
