@@ -4,10 +4,10 @@ echo "{" > $OF
 LHWMON=( $(ls -1 /sys/class/hwmon) )
 HMAX=${#LHWMON[@]}
 HCPT=0
-LSENSORS=( )
+#LSENSORS=( )
 for f in ${LHWMON[@]}; do {
         if [ -f /sys/class/hwmon/$f/name ]; then {
-                HCPT=$(($HCPT + 1))
+                HCPT=$((HCPT + 1))
                 NAME=$(cat /sys/class/hwmon/$f/name)
                 echo '  "'$NAME'": {' >> $OF
                 LTINPUT=$(ls -1 /sys/class/hwmon/$f/temp*_input)
@@ -23,7 +23,7 @@ for f in ${LHWMON[@]}; do {
                 for num in ${LNUMS[@]}; do {
                         temp="temp${num}"
                         echo '    "'${temp}'": {' >> $OF
-                        NCPT=$(($NCPT + 1))
+                        NCPT=$((NCPT + 1))
                         echo '      "path": "/sys/class/hwmon/'$f'",' >> $OF;
                         echo '      "input": '$(cat /sys/class/hwmon/$f/${temp}_input)',' >> $OF;
                         if [ -f /sys/class/hwmon/$f/${temp}_crit ]; then {
@@ -55,7 +55,7 @@ for f in ${LHWMON[@]}; do {
                         echo '  }' >> $OF
                 }; fi
 
-        }; else HMAX=$(($HMAX - 1));
+        }; else HMAX=$((HMAX - 1));
         fi
 }
 done
