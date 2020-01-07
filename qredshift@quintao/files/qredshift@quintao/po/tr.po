@@ -7,94 +7,94 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-04 08:58-0300\n"
-"PO-Revision-Date: 2020-01-04 09:17-0300\n"
+"POT-Creation-Date: 2020-01-04 13:58-0300\n"
+"PO-Revision-Date: 2020-01-07 03:25+0300\n"
 "Last-Translator: Gökhan Gökkaya <gokhanlnx@gmail.com>\n"
 "Language-Team: \n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.4\n"
+"X-Generator: Poedit 2.2\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: applet.js:110
+#: applet.js:115
 msgid "REDSHIFT NOT INSTALLED!"
 msgstr "REDSHIFT KURULU DEĞİL!"
 
-#: applet.js:111
+#: applet.js:116
 msgid "Requires Redshift: sudo apt-get install redshift"
 msgstr "Redshift gerekiyor: sudo apt-get install redshift"
 
-#: applet.js:114 applet.js:154
+#: applet.js:119 applet.js:159
 msgid "Reload Applet"
 msgstr "Uygulamacığı Yeniden Yükle"
 
-#: applet.js:159
+#: applet.js:164
 msgid "Recompile Translations"
-msgstr "Recompile Translations"
+msgstr "Çevirileri Yeniden Derle"
 
 #. settings-schema.json->enabled->description
-#: applet.js:333
+#: applet.js:356
 msgid "Enabled"
 msgstr "Etkin"
 
-#: applet.js:341 applet.js:387
+#: applet.js:364 applet.js:410
 msgid "Temp:"
 msgstr "Sıcaklık:"
 
-#: applet.js:352 applet.js:398
+#: applet.js:375 applet.js:421
 msgid "Bright:"
 msgstr "Parlaklık:"
 
-#: applet.js:364 applet.js:610
+#: applet.js:387 applet.js:635
 msgid "Gamma:"
 msgstr "Gama:"
 
 #. settings-schema.json->enabledNight->description
-#: applet.js:379
+#: applet.js:402
 msgid "Night Enabled"
 msgstr "Gece Kipi Etkin"
 
 #. settings-schema.json->iconLabel->description
-#: applet.js:441
+#: applet.js:464
 msgid "Show Label"
 msgstr "Etiket Göster"
 
-#: applet.js:593
+#: applet.js:618
 msgid "On"
 msgstr "Açık"
 
-#: applet.js:593 applet.js:595
+#: applet.js:618 applet.js:620
 msgid "Off"
 msgstr "Kapalı"
 
-#: applet.js:601
+#: applet.js:626
 msgid "Day Temperature"
 msgstr "Gün Sıcaklığı"
 
-#: applet.js:602
+#: applet.js:627
 msgid "Day Brightness"
 msgstr "Gün Parlaklığı"
 
-#: applet.js:604
+#: applet.js:629
 msgid "Night Temperature"
 msgstr "Gece Sıcaklığı"
 
-#: applet.js:605
+#: applet.js:630
 msgid "Night Brightness"
 msgstr "Gece Parlaklığı"
 
 #. settings-schema.json->labelScrollAction->options
 #. settings-schema.json->dayTemp->description
 #. settings-schema.json->nightTemp->description
-#: applet.js:607
+#: applet.js:632
 msgid "Temperature"
 msgstr "Sıcaklık"
 
 #. settings-schema.json->dayBrightness->description
 #. settings-schema.json->nightBrightness->description
-#: applet.js:608
+#: applet.js:633
 msgid "Brightness"
 msgstr "Parlaklık"
 
@@ -118,6 +118,14 @@ msgstr "Ayarlar"
 msgid "Location"
 msgstr "Konum"
 
+#. settings-schema.json->panel-shortcuts->title
+msgid "Shortcuts"
+msgstr "Kısayollar"
+
+#. settings-schema.json->info-section->title
+msgid "Tips"
+msgstr "İpuçları"
+
 #. settings-schema.json->opt-section->title
 msgid "Options"
 msgstr "Seçenekler"
@@ -129,6 +137,10 @@ msgstr "Gün Ayarları"
 #. settings-schema.json->night-section->title
 msgid "Night Settings"
 msgstr "Gece Ayarları"
+
+#. settings-schema.json->keybind-section->title
+msgid "Key Bindings"
+msgstr "Tuş Atamaları"
 
 #. settings-schema.json->location-section->title
 msgid "Location Settings"
@@ -179,6 +191,7 @@ msgid "Disabled"
 msgstr "Pasif"
 
 #. settings-schema.json->labelScrollAction->options
+#. settings-schema.json->keyToggle->description
 msgid "On/Off"
 msgstr "Açık/Kapalı"
 
@@ -233,6 +246,20 @@ msgid ""
 msgstr ""
 "Doğal geoclue kullanımı Redshift deneyimini yavaşlatabilir.\n"
 "Kullanım: https://geolocation-db.com/"
+
+#. settings-schema.json->textTips->description
+msgid "* Right-click the sliders to reset the default (neutral) value."
+msgstr ""
+"* Varsayılan (nötr) değere sıfırlamak için kaydırma çubuklarına sağ tıklayın."
+
+#. settings-schema.json->textInfo->description
+msgid ""
+"If you like and use this applet take the time to visit it's page on Cinnamon "
+"Spices and give it a star. You only need a github account to do this."
+msgstr ""
+"Bu uygulamacığı beğendiyseniz ve kullanıyorsanız, Cinnamon Eklentileri "
+"sayfasını ziyaret edip bir yıldız verebilirsiniz. Bunu yapmak için sadece "
+"bir github hesabına ihtiyacınız var."
 
 #~ msgid "Temperature:"
 #~ msgstr "Sıcaklık:"
