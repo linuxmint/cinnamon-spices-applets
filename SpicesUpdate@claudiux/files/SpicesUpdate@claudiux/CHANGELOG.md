@@ -1,3 +1,6 @@
+### v5.2.2~20200109
+  * Cinnamon 4.2: Let Gtk determine the right size of dialog window ([see @mtwebster's commit for Cinnamon](https://github.com/linuxmint/cinnamon/commit/d57677b5ae306115139be98be62e3fb7cc6a27a8#diff-c4641b580bb45b188c5ae94c7f7a33cf))
+
 ### v5.2.1~20191230
   * Make it configurable for Cinnamon 2.8 -> 4.0.
 
