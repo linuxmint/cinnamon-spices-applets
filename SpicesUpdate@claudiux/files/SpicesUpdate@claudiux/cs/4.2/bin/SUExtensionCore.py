@@ -96,7 +96,7 @@ def show_prompt(msg, window=None):
                                destroy_with_parent = True,
                                message_type = Gtk.MessageType.QUESTION,
                                buttons = Gtk.ButtonsType.YES_NO)
-    dialog.set_default_size(400, 200)
+    #dialog.set_default_size(400, 200)
     esc = html.escape(msg)
     dialog.set_markup(esc)
     dialog.show_all()
