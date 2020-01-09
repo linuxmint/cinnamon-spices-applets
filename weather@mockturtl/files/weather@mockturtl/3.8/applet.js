@@ -137,6 +137,7 @@ class WeatherApplet extends Applet.TextIconApplet {
         this.appletDir = imports.ui.appletManager.appletMeta[UUID].path;
         this.locProvider = new ipApi.IpApi(this);
         this.lastUpdated = null;
+        this.lock = false;
         this.encounteredError = false;
         this.pauseRefresh = false;
         this.errorCount = 0;
@@ -276,7 +277,10 @@ class WeatherApplet extends Applet.TextIconApplet {
         oldDate.setMinutes(oldDate.getMinutes() + (this._refreshInterval * 2));
         return (this.lastUpdated > oldDate);
     }
-    RefreshLoop() {
+    async RefreshLoop() {
+        if (this.lock == true)
+            return;
+        this.lock = true;
         if (this.encounteredError) {
             this.encounteredError = false;
             this.errorCount++;
@@ -289,7 +293,12 @@ class WeatherApplet extends Applet.TextIconApplet {
         try {
             if ((this.lastUpdated == null || this.errorCount > 0 || new Date(this.lastUpdated.getTime() + this._refreshInterval * 60000) < new Date())
                 && !this.pauseRefresh) {
-                this.refreshWeather(false);
+                this.log.Debug("Refresh triggered in mainloop with these values: lastUpdated " + ((!this.lastUpdated) ? "null" : this.lastUpdated.toLocaleString()) + ", errorCount " + this.errorCount.toString() + " , loopInterval " + loopInterval.toString() + " seconds, refreshInterval " + this._refreshInterval + " minutes");
+                let state = await this.refreshWeather(false);
+                if (state == "success") {
+                    this.lastUpdated = new Date();
+                    this.errorCount = 0;
+                }
             }
         }
         catch (e) {
@@ -299,6 +308,7 @@ class WeatherApplet extends Applet.TextIconApplet {
         Mainloop.timeout_add_seconds(loopInterval, Lang.bind(this, function mainloopTimeout() {
             this.RefreshLoop();
         }));
+        this.lock = false;
     }
     ;
     update_label_visible() {
@@ -365,7 +375,7 @@ class WeatherApplet extends Applet.TextIconApplet {
         }
         catch (e) {
             this.log.Error(e);
-            return;
+            return "error";
         }
         try {
             switch (this._dataService) {
@@ -380,12 +390,12 @@ class WeatherApplet extends Applet.TextIconApplet {
                     this.provider = new openWeatherMap.OpenWeatherMap(this);
                     break;
                 default:
-                    return;
+                    return "error";
             }
             let weatherInfo = await this.provider.GetWeather();
             if (!weatherInfo) {
                 this.log.Error("Unable to obtain Weather Information");
-                return;
+                return "failure";
             }
             this.wipeCurrentData();
             this.wipeForecastData();
@@ -395,15 +405,13 @@ class WeatherApplet extends Applet.TextIconApplet {
             if (!await this.displayWeather() || !await this.displayForecast())
                 return;
             this.log.Print("Weather Information refreshed");
-            this.errorCount = 0;
+            return "success";
         }
         catch (e) {
             this.log.Error("Generic Error while refreshing Weather info: " + e);
             this.HandleError({ type: "hard", detail: "unknown", message: _("Unexpected Error While Refreshing Weather, please see log in Looking Glass") });
-            return;
+            return "failure";
         }
-        this.lastUpdated = new Date();
-        return;
     }
     ;
     async ValidateLocation() {

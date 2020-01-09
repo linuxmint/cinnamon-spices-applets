@@ -167,7 +167,7 @@ class DarkSky implements WeatherProvider {
         if (isCoordinate(location)) {
             query = this.query + key + "/" + location + 
             "?exclude=minutely,hourly,flags" + "&units=" + this.unit;
-            this.app.log.Debug(this.app.systemLanguage);
+            this.app.log.Debug("System language is " + this.app.systemLanguage.toString());
             if (isLangSupported(this.app.systemLanguage, this.supportedLanguages) && this.app._translateCondition) {
                 query = query + "&lang=" + this.app.systemLanguage;
             }

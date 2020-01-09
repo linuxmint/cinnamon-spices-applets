@@ -32,8 +32,7 @@ class IpApi {
                 country: json.country,
                 timeZone: json.timezone
             };
-            this.app.log.Debug("Location obtained");
-            this.app.log.Debug("Location:" + json.latitude + "," + json.longitude);
+            this.app.log.Debug("Location obtained:" + json.latitude + "," + json.longitude);
             this.app.log.Debug("Location setting is now: " + this.app._location);
             return result;
         }
@@ -46,7 +45,7 @@ class IpApi {
     ;
     HandleErrorResponse(json) {
         this.app.HandleError({ type: "hard", detail: "bad api response", message: _("Location Service responded with errors, please see the logs in Looking Glass"), service: "ipapi" });
-        this.app.log.Error("IpApi Responsd with Error: " + json.reason);
+        this.app.log.Error("IpApi Responds with Error: " + json.reason);
     }
     ;
 }

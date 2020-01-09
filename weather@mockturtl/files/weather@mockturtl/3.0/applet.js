@@ -187,6 +187,7 @@ var WeatherApplet = (function (_super) {
         _this.appletDir = imports.ui.appletManager.appletMeta[UUID].path;
         _this.locProvider = new ipApi.IpApi(_this);
         _this.lastUpdated = null;
+        _this.lock = false;
         _this.encounteredError = false;
         _this.pauseRefresh = false;
         _this.errorCount = 0;
@@ -344,28 +345,52 @@ var WeatherApplet = (function (_super) {
         return (this.lastUpdated > oldDate);
     };
     WeatherApplet.prototype.RefreshLoop = function () {
-        if (this.encounteredError) {
-            this.encounteredError = false;
-            this.errorCount++;
-        }
-        if (this.errorCount > 60)
-            this.errorCount = 60;
-        var loopInterval = this.LOOP_INTERVAL;
-        if (this.errorCount > 0)
-            loopInterval = loopInterval * this.errorCount;
-        try {
-            if ((this.lastUpdated == null || this.errorCount > 0 || new Date(this.lastUpdated.getTime() + this._refreshInterval * 60000) < new Date())
-                && !this.pauseRefresh) {
-                this.refreshWeather(false);
-            }
-        }
-        catch (e) {
-            this.log.Error("Error in Main loop: " + e);
-            this.encounteredError = true;
-        }
-        Mainloop.timeout_add_seconds(loopInterval, Lang.bind(this, function mainloopTimeout() {
-            this.RefreshLoop();
-        }));
+        return __awaiter(this, void 0, void 0, function () {
+            var loopInterval, state, e_1;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        if (this.lock == true)
+                            return [2];
+                        this.lock = true;
+                        if (this.encounteredError) {
+                            this.encounteredError = false;
+                            this.errorCount++;
+                        }
+                        if (this.errorCount > 60)
+                            this.errorCount = 60;
+                        loopInterval = this.LOOP_INTERVAL;
+                        if (this.errorCount > 0)
+                            loopInterval = loopInterval * this.errorCount;
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 4, , 5]);
+                        if (!((this.lastUpdated == null || this.errorCount > 0 || new Date(this.lastUpdated.getTime() + this._refreshInterval * 60000) < new Date())
+                            && !this.pauseRefresh)) return [3, 3];
+                        this.log.Debug("Refresh triggered in mainloop with these values: lastUpdated " + ((!this.lastUpdated) ? "null" : this.lastUpdated.toLocaleString()) + ", errorCount " + this.errorCount.toString() + " , loopInterval " + loopInterval.toString() + " seconds, refreshInterval " + this._refreshInterval + " minutes");
+                        return [4, this.refreshWeather(false)];
+                    case 2:
+                        state = _a.sent();
+                        if (state == "success") {
+                            this.lastUpdated = new Date();
+                            this.errorCount = 0;
+                        }
+                        _a.label = 3;
+                    case 3: return [3, 5];
+                    case 4:
+                        e_1 = _a.sent();
+                        this.log.Error("Error in Main loop: " + e_1);
+                        this.encounteredError = true;
+                        return [3, 5];
+                    case 5:
+                        Mainloop.timeout_add_seconds(loopInterval, Lang.bind(this, function mainloopTimeout() {
+                            this.RefreshLoop();
+                        }));
+                        this.lock = false;
+                        return [2];
+                }
+            });
+        });
     };
     ;
     WeatherApplet.prototype.update_label_visible = function () {
@@ -426,7 +451,7 @@ var WeatherApplet = (function (_super) {
     };
     WeatherApplet.prototype.refreshWeather = function (rebuild) {
         return __awaiter(this, void 0, void 0, function () {
-            var locationData, e_1, darkSky, openWeatherMap, weatherInfo, _a, e_2;
+            var locationData, e_2, darkSky, openWeatherMap, weatherInfo, _a, e_3;
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
@@ -440,9 +465,9 @@ var WeatherApplet = (function (_super) {
                         locationData = _b.sent();
                         return [3, 4];
                     case 3:
-                        e_1 = _b.sent();
-                        this.log.Error(e_1);
-                        return [2];
+                        e_2 = _b.sent();
+                        this.log.Error(e_2);
+                        return [2, "error"];
                     case 4:
                         _b.trys.push([4, 9, , 10]);
                         switch (this._dataService) {
@@ -457,14 +482,14 @@ var WeatherApplet = (function (_super) {
                                 this.provider = new openWeatherMap.OpenWeatherMap(this);
                                 break;
                             default:
-                                return [2];
+                                return [2, "error"];
                         }
                         return [4, this.provider.GetWeather()];
                     case 5:
                         weatherInfo = _b.sent();
                         if (!weatherInfo) {
                             this.log.Error("Unable to obtain Weather Information");
-                            return [2];
+                            return [2, "failure"];
                         }
                         this.wipeCurrentData();
                         this.wipeForecastData();
@@ -483,16 +508,13 @@ var WeatherApplet = (function (_super) {
                         if (_a)
                             return [2];
                         this.log.Print("Weather Information refreshed");
-                        this.errorCount = 0;
-                        return [3, 10];
+                        return [2, "success"];
                     case 9:
-                        e_2 = _b.sent();
-                        this.log.Error("Generic Error while refreshing Weather info: " + e_2);
+                        e_3 = _b.sent();
+                        this.log.Error("Generic Error while refreshing Weather info: " + e_3);
                         this.HandleError({ type: "hard", detail: "unknown", message: _("Unexpected Error While Refreshing Weather, please see log in Looking Glass") });
-                        return [2];
-                    case 10:
-                        this.lastUpdated = new Date();
-                        return [2];
+                        return [2, "failure"];
+                    case 10: return [2];
                 }
             });
         });
