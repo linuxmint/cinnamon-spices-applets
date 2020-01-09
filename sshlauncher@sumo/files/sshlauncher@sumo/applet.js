@@ -102,7 +102,7 @@ MyApplet.prototype = {
       if (_symbolic) icon += "-symbolic";
 
       if (Gtk.IconTheme.get_default().has_icon(icon)) {
-        this.set_applet_icon_name(icon);
+        if (_symbolic) this.set_applet_icon_symbolic_name(icon); else this.set_applet_icon_name(icon);
         return;
       }
 
