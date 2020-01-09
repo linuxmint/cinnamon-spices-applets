@@ -81,7 +81,8 @@ class DarkSky {
                 condition: {
                     main: this.GetShortCurrentSummary(json.currently.summary),
                     description: json.currently.summary,
-                    icon: weatherIconSafely(this.ResolveIcon(json.currently.icon), this.app._icon_type)
+                    icon: weatherIconSafely(this.ResolveIcon(json.currently.icon), this.app._icon_type),
+                    customIcon: this.ResolveCustomIcon(json.currently.icon)
                 },
                 extra_field: {
                     name: _("Feels Like"),
@@ -100,6 +101,7 @@ class DarkSky {
                         main: this.GetShortSummary(day.summary),
                         description: this.ProcessSummary(day.summary),
                         icon: weatherIconSafely(this.ResolveIcon(day.icon), this.app._icon_type),
+                        customIcon: this.ResolveCustomIcon(day.icon)
                     },
                 };
                 forecast.date.setHours(forecast.date.getHours() + 12);
@@ -132,7 +134,7 @@ class DarkSky {
         if (isCoordinate(location)) {
             query = this.query + key + "/" + location +
                 "?exclude=minutely,hourly,flags" + "&units=" + this.unit;
-            this.app.log.Debug(this.app.systemLanguage);
+            this.app.log.Debug("System language is " + this.app.systemLanguage.toString());
             if (isLangSupported(this.app.systemLanguage, this.supportedLanguages) && this.app._translateCondition) {
                 query = query + "&lang=" + this.app.systemLanguage;
             }
@@ -239,6 +241,34 @@ class DarkSky {
         }
     }
     ;
+    ResolveCustomIcon(icon) {
+        switch (icon) {
+            case "rain":
+                return "Cloud-Rain";
+            case "snow":
+                return "Cloud-Snow";
+            case "fog":
+                return "Cloud-Fog";
+            case "cloudy":
+                return "Cloud";
+            case "partly-cloudy-night":
+                return "Cloud-Moon";
+            case "partly-cloudy-day":
+                return "Cloud-Sun";
+            case "clear-night":
+                return "Moon";
+            case "clear-day":
+                return "Sun";
+            case "storm":
+                return "Cloud-Lightning";
+            case "showers":
+                return "Cloud-Drizzle";
+            case "wind":
+                return "Wind";
+            default:
+                return "Cloud-Refresh";
+        }
+    }
     SetQueryUnit() {
         if (this.app._temperatureUnit == "celsius") {
             if (this.app._windSpeedUnit == "kph" || this.app._windSpeedUnit == "m/s") {

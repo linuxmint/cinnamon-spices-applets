@@ -13,6 +13,13 @@ var setTimeout = function (func, ms) {
     }, null);
     return id;
 };
+var delay = async function (ms) {
+    return await new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve();
+        }, ms);
+    });
+};
 const clearTimeout = function (id) {
     Mainloop.source_remove(id);
 };

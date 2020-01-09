@@ -19,6 +19,7 @@ const St = imports.gi.St;
 const GLib = imports.gi.GLib;
 const GObject = imports.gi.GObject;
 const Gettext = imports.gettext;
+const Gtk = imports.gi.Gtk;
 const Applet = imports.ui.applet;
 const PopupMenu = imports.ui.popupMenu;
 const Settings = imports.ui.settings;
@@ -90,7 +91,8 @@ const KEYS = {
     WEATHER_REFRESH_INTERVAL: "refreshInterval",
     WEATHER_PRESSURE_UNIT_KEY: "pressureUnit",
     WEATHER_SHORT_CONDITIONS_KEY: "shortConditions",
-    WEATHER_MANUAL_LOCATION: "manualLocation"
+    WEATHER_MANUAL_LOCATION: "manualLocation",
+    WEATHER_USE_CCUSTOM_APPLETICONS_KEY: 'useCustomAppletIcons'
 };
 Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
 function _(str) {
@@ -125,14 +127,17 @@ class WeatherApplet extends Applet.TextIconApplet {
                 main: null,
                 description: null,
                 icon: null,
+                customIcon: null
             },
         };
         this.forecasts = [];
         this.currentLocale = null;
         this.systemLanguage = null;
         this._httpSession = new Soup.SessionAsync();
+        this.appletDir = imports.ui.appletManager.appletMeta[UUID].path;
         this.locProvider = new ipApi.IpApi(this);
         this.lastUpdated = null;
+        this.lock = false;
         this.encounteredError = false;
         this.pauseRefresh = false;
         this.errorCount = 0;
@@ -160,6 +165,7 @@ class WeatherApplet extends Applet.TextIconApplet {
         this.log = new Log(instanceId);
         this._httpSession.user_agent = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:37.0) Gecko/20100101 Firefox/37.0";
         Soup.Session.prototype.add_feature.call(this._httpSession, new Soup.ProxyResolverDefault());
+        Gtk.IconTheme.get_default().append_search_path(this.appletDir + "/../icons");
         this.SetAppletOnPanel();
         this.AddPopupMenu(orientation);
         this.BindSettings();
@@ -271,7 +277,10 @@ class WeatherApplet extends Applet.TextIconApplet {
         oldDate.setMinutes(oldDate.getMinutes() + (this._refreshInterval * 2));
         return (this.lastUpdated > oldDate);
     }
-    RefreshLoop() {
+    async RefreshLoop() {
+        if (this.lock == true)
+            return;
+        this.lock = true;
         if (this.encounteredError) {
             this.encounteredError = false;
             this.errorCount++;
@@ -284,7 +293,12 @@ class WeatherApplet extends Applet.TextIconApplet {
         try {
             if ((this.lastUpdated == null || this.errorCount > 0 || new Date(this.lastUpdated.getTime() + this._refreshInterval * 60000) < new Date())
                 && !this.pauseRefresh) {
-                this.refreshWeather(false);
+                this.log.Debug("Refresh triggered in mainloop with these values: lastUpdated " + ((!this.lastUpdated) ? "null" : this.lastUpdated.toLocaleString()) + ", errorCount " + this.errorCount.toString() + " , loopInterval " + loopInterval.toString() + " seconds, refreshInterval " + this._refreshInterval + " minutes");
+                let state = await this.refreshWeather(false);
+                if (state == "success") {
+                    this.lastUpdated = new Date();
+                    this.errorCount = 0;
+                }
             }
         }
         catch (e) {
@@ -294,6 +308,7 @@ class WeatherApplet extends Applet.TextIconApplet {
         Mainloop.timeout_add_seconds(loopInterval, Lang.bind(this, function mainloopTimeout() {
             this.RefreshLoop();
         }));
+        this.lock = false;
     }
     ;
     update_label_visible() {
@@ -360,7 +375,7 @@ class WeatherApplet extends Applet.TextIconApplet {
         }
         catch (e) {
             this.log.Error(e);
-            return;
+            return "error";
         }
         try {
             switch (this._dataService) {
@@ -375,12 +390,12 @@ class WeatherApplet extends Applet.TextIconApplet {
                     this.provider = new openWeatherMap.OpenWeatherMap(this);
                     break;
                 default:
-                    return;
+                    return "error";
             }
             let weatherInfo = await this.provider.GetWeather();
             if (!weatherInfo) {
                 this.log.Error("Unable to obtain Weather Information");
-                return;
+                return "failure";
             }
             this.wipeCurrentData();
             this.wipeForecastData();
@@ -390,15 +405,13 @@ class WeatherApplet extends Applet.TextIconApplet {
             if (!await this.displayWeather() || !await this.displayForecast())
                 return;
             this.log.Print("Weather Information refreshed");
-            this.errorCount = 0;
+            return "success";
         }
         catch (e) {
             this.log.Error("Generic Error while refreshing Weather info: " + e);
             this.HandleError({ type: "hard", detail: "unknown", message: _("Unexpected Error While Refreshing Weather, please see log in Looking Glass") });
-            return;
+            return "failure";
         }
-        this.lastUpdated = new Date();
-        return;
     }
     ;
     async ValidateLocation() {
@@ -490,6 +503,8 @@ class WeatherApplet extends Applet.TextIconApplet {
             this._icon_type == St.IconType.SYMBOLIC ?
                 this.set_applet_icon_symbolic_name(iconname) :
                 this.set_applet_icon_name(iconname);
+            if (this._useCustomAppletIcons)
+                this.SetCustomIcon(this.weather.condition.customIcon);
             let temp = "";
             if (this.weather.temperature != null) {
                 temp = TempToUserUnits(this.weather.temperature, this._temperatureUnit).toString();
@@ -752,6 +767,9 @@ class WeatherApplet extends Applet.TextIconApplet {
         return false;
     }
     ;
+    SetCustomIcon(iconName) {
+        this.set_applet_icon_symbolic_name(iconName + "-symbolic");
+    }
     unitToUnicode(unit) {
         return unit == "fahrenheit" ? '\u2109' : '\u2103';
     }

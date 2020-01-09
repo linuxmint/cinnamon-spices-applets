@@ -32,7 +32,8 @@ const Soup: typeof imports.gi.Soup = imports.gi.Soup;
 const St: typeof imports.gi.St = imports.gi.St;
 const GLib: typeof imports.gi.GLib = imports.gi.GLib
 const GObject: typeof imports.gi.GObject = imports.gi.GObject;
-const Gettext: typeof imports.gettext = imports.gettext
+const Gettext: typeof imports.gettext = imports.gettext;
+const Gtk: typeof imports.gi.Gtk = imports.gi.Gtk;
 /**
  * /usr/share/cinnamon/js/
  */
@@ -51,6 +52,7 @@ var compassDirection = utils.compassDirection as (deg: number) => string;
 var MPStoUserUnits = utils.MPStoUserUnits as (mps: number, units: WeatherWindSpeedUnits) => number;
 var nonempty = utils.nonempty as (str: string) => boolean;
 var AwareDateString = utils.AwareDateString as (date: Date, locale: string, hours24Format: boolean) => string;
+//const delay = utils.delay as (ms: number) => Promise<void>;
 
 // This always evaluates to True because "var Promise" line exists inside 
 if (typeof Promise != "function") {
@@ -123,8 +125,21 @@ const KEYS: SettingKeys  =  {
   WEATHER_REFRESH_INTERVAL: "refreshInterval",
   WEATHER_PRESSURE_UNIT_KEY: "pressureUnit",
   WEATHER_SHORT_CONDITIONS_KEY:  "shortConditions",
-  WEATHER_MANUAL_LOCATION:  "manualLocation"
+  WEATHER_MANUAL_LOCATION:  "manualLocation",
+  WEATHER_USE_CCUSTOM_APPLETICONS_KEY: 'useCustomAppletIcons'
 }
+
+/*var custom_icons = ["Cloud-Drizzle" , "Cloud-Drizzle-Alt" , "Cloud-Drizzle-Moon-Alt", "Cloud-Drizzle-Moon", "Cloud-Drizzle-Sun-Alt", 
+"Cloud-Drizzle-Sun", "Cloud-Fog", "Cloud-Fog-Alt", "Cloud-Fog-Moon-Alt", "Cloud-Fog-Moon", "Cloud-Fog-Sun-Alt",
+"Cloud-Fog-Sun", "Cloud-Fog", "Cloud-Hail-Alt", "Cloud-Hail-Moon-Alt", "Cloud-Hail-Moon", 
+"Cloud-Hail-Sun-Alt", "Cloud-Hail-Sun", "Cloud-Hail", "Cloud-Lightning-Moon", "Cloud-Lightning-Sun", 
+"Cloud-Lightning", "Cloud-Moon", "Cloud-Rain-Alt", "Cloud-Rain-Moon-Alt", "Cloud-Rain-Moon", 
+"Cloud-Rain", "Cloud-Rain-Sun", "Cloud-Rain-Sun-Alt", "Cloud-Refresh", "Cloud-Snow-Alt", "Cloud-Snow-Moon-Alt","Cloud-Snow-Moon", 
+"Cloud-Snow-Sun-Alt", "Cloud-Snow-Sun", "Cloud-Snow", "Cloud-Sun", "Cloud-Upload", "Cloud-Wind-Moon", 
+"Cloud-Wind-Sun", "Cloud-Wind", "Cloud", "Compass-East", "Compass-North", "Compass-South", "Compass-West",
+"Compass", "Degrees-Celcius", "Degrees-Fahrenheit", "Moon", "Shades", "Snowflake", 
+"Sun", "Thermometer-25", "Thermometer-50", "Wind",
+"Thermometer-75", "Thermometer-100", "Thermometer-Zero", "Thermometer", "Tornado", "Umbrella"];*/
 
 //----------------------------------------------------------------------
 //
@@ -165,6 +180,7 @@ class WeatherApplet extends Applet.TextIconApplet {
       main: null, // What API returns
       description: null, // Longer description, if not available put the same whats in main
       icon: null, // GTK weather icon names
+      customIcon: null
     },
   }
 
@@ -214,6 +230,7 @@ class WeatherApplet extends Applet.TextIconApplet {
   public _showTextInPanel: boolean;
   public _locationLabelOverride: string;
   public _icon_type: string;
+  public _useCustomAppletIcons: boolean;
 
   public currentLocale: string = null;
   public systemLanguage: string = null;
@@ -225,21 +242,22 @@ class WeatherApplet extends Applet.TextIconApplet {
   private settings: any;
   // Soup session (see https://bugzilla.gnome.org/show_bug.cgi?id=661323#c64)
   private _httpSession = new Soup.SessionAsync();
+  private appletDir = imports.ui.appletManager.appletMeta[UUID].path;
 
   private provider: WeatherProvider; // API
   private locProvider = new ipApi.IpApi(this); // IP location lookup
 
   /** To check if data is up-to-date based on user-set refresh settings */
   private lastUpdated: Date = null;
+  private lock: boolean = false;
   private orientation: any;
   /** Used for error handling, first error calls dibs
    * and stops diplaying the other errors after.
    * Also used for counting consecutive errors
    */
   private encounteredError: boolean = false;
-  /** true on errors what user interaction is required on an error.
-   * (usually on settings misconfiguration), refreshAndRebuild()
-   * clears it.
+  /** true on errors when user interaction is required.
+   * (usually on settings misconfiguration), every settings change clears it.
    */
   private pauseRefresh: boolean = false;
   /** Slows main loop down on consecutive errors.
@@ -257,6 +275,8 @@ class WeatherApplet extends Applet.TextIconApplet {
     this.log = new Log(instanceId);
     this._httpSession.user_agent = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:37.0) Gecko/20100101 Firefox/37.0"; // ipapi blocks non-browsers agents, imitating browser
     Soup.Session.prototype.add_feature.call(this._httpSession, new Soup.ProxyResolverDefault());
+    // Manually add the icons to the icontheme - only one icons folder
+    Gtk.IconTheme.get_default().append_search_path(this.appletDir + "/../icons");
 
     this.SetAppletOnPanel(); 
     this.AddPopupMenu(orientation);
@@ -326,7 +346,7 @@ class WeatherApplet extends Applet.TextIconApplet {
         this._forecast[i].Icon.icon_type = this._icon_type
       }
       this.refreshWeather()
-    }))
+    }))    
   }
 
   /** Into context menu */
@@ -410,21 +430,28 @@ class WeatherApplet extends Applet.TextIconApplet {
   }
 
   /** Refresh Loop Hooked into MainLoop */
-  private RefreshLoop(): void {
+  private async RefreshLoop(): Promise<void> {
+    if (this.lock == true) return;
+    this.lock = true;
+
     if (this.encounteredError) {
       this.encounteredError = false;
       this.errorCount++;
     }
-    // Means loop expands to 15mins max on consecutive errors
-    if (this.errorCount > 60) this.errorCount = 60; 
-
+    
+    if (this.errorCount > 60) this.errorCount = 60; // Means loop expands to 15mins max on consecutive errors
     let loopInterval = this.LOOP_INTERVAL;
-    // Increase loop timeout linearly with the number of errors
-    if (this.errorCount > 0) loopInterval = loopInterval*this.errorCount;
+    if (this.errorCount > 0) loopInterval = loopInterval*this.errorCount; // Increase loop timeout linearly with the number of errors
+
     try {
       if ((this.lastUpdated == null || this.errorCount > 0 || new Date(this.lastUpdated.getTime() + this._refreshInterval * 60000) < new Date())
       && !this.pauseRefresh) {
-        this.refreshWeather(false);
+        this.log.Debug("Refresh triggered in mainloop with these values: lastUpdated " + ((!this.lastUpdated) ? "null" : this.lastUpdated.toLocaleString()) + ", errorCount " + this.errorCount.toString() + " , loopInterval " + loopInterval.toString() + " seconds, refreshInterval " + this._refreshInterval + " minutes");
+        let state = await this.refreshWeather(false);
+        if (state == "success") {
+          this.lastUpdated = new Date();
+          this.errorCount = 0;
+        }
       }
     } catch (e) {
       this.log.Error("Error in Main loop: " + e);
@@ -433,6 +460,7 @@ class WeatherApplet extends Applet.TextIconApplet {
     Mainloop.timeout_add_seconds(loopInterval, Lang.bind(this, function mainloopTimeout() {
       this.RefreshLoop();
     }))
+    this.lock = false;
   };
 
   // Applet Overrides
@@ -486,6 +514,14 @@ class WeatherApplet extends Applet.TextIconApplet {
   //
   //----------------------------------------------------------------------
 
+  /*private async IconTest() : Promise<void> {
+    for (let i = 0; i < custom_icons.length; i++) {
+      await delay(1000);
+      this.SetCustomIcon(custom_icons[i] as CustomIcons);
+    }
+    
+  }*/
+
   private updateIconType(): void {
     this._icon_type = this.settings.getValue(WEATHER_USE_SYMBOLIC_ICONS_KEY) ?
       St.IconType.SYMBOLIC :
@@ -507,7 +543,7 @@ class WeatherApplet extends Applet.TextIconApplet {
    * Main function pulling data
    * @param rebuild 
    */
-  private async refreshWeather(rebuild: boolean): Promise < void > {
+  private async refreshWeather(rebuild: boolean): Promise <RefreshState> {
     this.encounteredError = false;
 
     let locationData: LocationData = null;
@@ -516,7 +552,7 @@ class WeatherApplet extends Applet.TextIconApplet {
     }
     catch(e) {
       this.log.Error(e);
-      return;
+      return "error";
     }
 
     try {
@@ -530,13 +566,13 @@ class WeatherApplet extends Applet.TextIconApplet {
           this.provider = new openWeatherMap.OpenWeatherMap(this);
           break;
         default:
-          return;
+          return "error";
       }
 
       let weatherInfo = await this.provider.GetWeather();
       if (!weatherInfo) {
         this.log.Error("Unable to obtain Weather Information");
-        return;
+        return "failure";
       }
 
       this.wipeCurrentData();
@@ -546,16 +582,14 @@ class WeatherApplet extends Applet.TextIconApplet {
       if (rebuild) this.rebuild();
       if (!await this.displayWeather() || !await this.displayForecast()) return;
       this.log.Print("Weather Information refreshed");
-      this.errorCount = 0;
+      //this.IconTest();
+      return "success";
     } 
     catch (e) {
       this.log.Error("Generic Error while refreshing Weather info: " + e);
       this.HandleError({type: "hard", detail: "unknown", message: _("Unexpected Error While Refreshing Weather, please see log in Looking Glass")});
-      return;
+      return "failure";
     }
-
-    this.lastUpdated = new Date();
-    return;
   };
 
   /** 
@@ -667,6 +701,7 @@ class WeatherApplet extends Applet.TextIconApplet {
       this._icon_type == St.IconType.SYMBOLIC ?
         this.set_applet_icon_symbolic_name(iconname) :
         this.set_applet_icon_name(iconname)
+      if (this._useCustomAppletIcons) this.SetCustomIcon(this.weather.condition.customIcon);
 
       // Temperature
       let temp = "";
@@ -993,6 +1028,10 @@ class WeatherApplet extends Applet.TextIconApplet {
     return false;
   };
 
+  public SetCustomIcon(iconName: CustomIcons): void {
+    this.set_applet_icon_symbolic_name(iconName + "-symbolic");
+  }
+
   private unitToUnicode(unit: WeatherUnits): string {
     return unit == "fahrenheit" ? '\u2109' : '\u2103'
   }
@@ -1190,6 +1229,7 @@ interface Forecast {
     main: string,
     description: string,
     icon: string,
+    customIcon: CustomIcons
   },
   clouds?: number,
   wind?: {
@@ -1238,6 +1278,7 @@ interface Weather {
     description: string, // Longer description, if not available put the same whats in main
     /** GTK icon name */
     icon: string,
+    customIcon: CustomIcons
   },
   extra_field?: {
     name: string,
@@ -1283,7 +1324,8 @@ interface WeatherData {
     /** Long Description */
     description: string,
     /** GTK icon name */
-    icon: string
+    icon: string,
+    customIcon: CustomIcons
   }
   forecasts: ForecastData[];
   extra_field?: {
@@ -1310,6 +1352,7 @@ interface ForecastData {
     description: string,
     /** GTK icon name */
     icon: string,
+    customIcon: CustomIcons
   }
 }
 
@@ -1341,6 +1384,22 @@ type SettingKeys = {
   [key: string]: string;
 }
 
+type CustomIcons = "Cloud-Drizzle" | "Cloud-Drizzle-Alt" | "Cloud-Drizzle-Moon-Alt" | "Cloud-Drizzle-Moon" | "Cloud-Drizzle-Sun-Alt" | 
+"Cloud-Drizzle-Sun" | "Cloud-Fog" | "Cloud-Fog-Alt" | "Cloud-Fog-Moon-Alt" | "Cloud-Fog-Moon" | "Cloud-Fog-Sun-Alt" |
+"Cloud-Fog-Sun" | "Cloud-Fog" | "Cloud-Hail-Alt" | "Cloud-Hail-Moon-Alt" | "Cloud-Hail-Moon" | 
+"Cloud-Hail-Sun-Alt" | "Cloud-Hail-Sun" | "Cloud-Hail" | "Cloud-Lightning-Moon" | "Cloud-Lightning-Sun" | 
+"Cloud-Lightning" | "Cloud-Moon" | "Cloud-Rain-Alt" | "Cloud-Rain-Moon-Alt" | "Cloud-Rain-Moon" | 
+"Cloud-Rain" | "Cloud-Rain-Sun" | "Cloud-Rain-Sun-Alt" | "Cloud-Refresh" | "Cloud-Snow-Alt" | "Cloud-Snow-Moon-Alt" | "Cloud-Snow-Moon" | 
+"Cloud-Snow-Sun-Alt" | "Cloud-Snow-Sun" | "Cloud-Snow" | "Cloud-Sun" | "Cloud-Upload" | "Cloud-Wind-Moon" | 
+"Cloud-Wind-Sun" | "Cloud-Wind" | "Cloud" | "Compass-East" | "Compass-North" | "Compass-South" | "Compass-West" | 
+"Compass" | "Degrees-Celcius" | "Degrees-Fahrenheit" | "Moon" | "Shades" | "Snowflake" | 
+"Sun"  | "Thermometer-25" | "Thermometer-50" | "Wind" |
+"Thermometer-75" | "Thermometer-100" | "Thermometer-Zero" | "Thermometer" | "Tornado" | "Umbrella";
+
+type CustomSunOptions = "Sun-Low" | "Sun-Lower"| "Sunrise" | "Sunset";
+type CustomMoonOptions = "Moon-First-Quarter" | "Moon-Full" | "Moon-Last-Quarter" | "Moon-New" | 
+"Moon-Waning-Crescent" | "Moon-Waning-Gibbous" | "Moon-Waxing-Crescent" | "Moon-Waxing-Gibbous";
+
 /**
  * A WeatherProvider must implement this interface.
  */
@@ -1368,6 +1427,8 @@ interface HttpError {
   message: ErrorDetail;
   reason_phrase: string;
 }
+
+type RefreshState = "success" | "failure" | "error";
 
 /** hard will not force a refresh and cleans the applet ui.
  * 
