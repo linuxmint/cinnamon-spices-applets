@@ -14,3 +14,14 @@
   border-radius: 0px;
   border-image: none;
 }
+
+.grouped-window-list-badge {
+  margin: 0px;
+  padding: 0px;
+}
+
+.grouped-window-list-number-label {
+  margin: 0px;
+  padding: 0px;
+  font-size: 8pt;
+}
