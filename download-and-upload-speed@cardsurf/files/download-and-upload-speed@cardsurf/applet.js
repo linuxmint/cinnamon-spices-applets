@@ -166,6 +166,8 @@ MyApplet.prototype = {
                         [Settings.BindingDirection.IN, "update_every", null],
                         [Settings.BindingDirection.IN, "update_available_interfaces_every", null],
                         [Settings.BindingDirection.IN, "launch_terminal", null],
+                        [Settings.BindingDirection.IN, "minimum_bytes_received_to_display", null],
+                        [Settings.BindingDirection.IN, "minimum_bytes_sent_to_display", null],
                         [Settings.BindingDirection.IN, "list_connections_command",
                                                        this.on_list_connections_command_changed],
                         [Settings.BindingDirection.IN, "write_every", null],
@@ -714,10 +716,8 @@ MyApplet.prototype = {
                 bytes_sent_total += info.bytes_sent_total;
             }
 
-            let received = this.scale(bytes_received_iteration);
-            received = this.convert_to_readable_string(received);
-            let sent = this.scale(bytes_sent_iteration);
-            sent = this.convert_to_readable_string(sent);
+            let received = this.get_bytes_received_iteration_string(bytes_received_iteration);
+            let sent = this.get_bytes_sent_iteration_string(bytes_sent_iteration);
             let received_total = this.convert_to_two_decimals_string(bytes_received_total);
             let sent_total = this.convert_to_two_decimals_string(bytes_sent_total);
 
@@ -738,6 +738,17 @@ MyApplet.prototype = {
             difference = 0;
         }
         return difference;
+    },
+
+    get_bytes_received_iteration_string: function (bytes) {
+        let received = this.replace_with_zero(bytes, this.minimum_bytes_received_to_display);
+        received = this.scale(received);
+        received = this.convert_to_readable_string(received);
+        return received;
+    },
+
+    replace_with_zero: function (bytes, minimum) {
+        return bytes >= minimum ? bytes : 0;
     },
 
     scale: function (bytes) {
@@ -820,6 +831,13 @@ MyApplet.prototype = {
             return number.toFixed(1);
         }
         return number.toFixed(2);
+    },
+
+    get_bytes_sent_iteration_string: function (bytes) {
+        let sent = this.replace_with_zero(bytes, this.minimum_bytes_sent_to_display);
+        sent = this.scale(sent);
+        sent = this.convert_to_readable_string(sent);
+        return sent;
     },
 
     convert_to_two_decimals_string: function (bytes) {
