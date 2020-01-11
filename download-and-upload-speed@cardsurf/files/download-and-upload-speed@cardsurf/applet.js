@@ -89,6 +89,8 @@ MyApplet.prototype = {
         this.gui_sent_icon_filename = "";
         this.hover_popup_text_css = "";
         this.hover_popup_numbers_css = "";
+        this.minimum_bytes_received_to_display = 0;
+        this.minimum_bytes_sent_to_display = 0;
         this.bytes_start_time = AppletConstants.BytesStartTime.START_OF_CURRENT_SESSION;
 
         this.gui_speed = null;
