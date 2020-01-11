@@ -120,6 +120,26 @@
         "description": "Popup numbers CSS",
         "tooltip": "A CSS style applied to numbers in the hover popup"
     },
+    "minimum_bytes_received_to_display": {
+        "type": "spinbutton",
+        "default": 0,
+        "min": 0,
+        "max": 100000000,
+        "step": 100000,
+        "units": "bytes",
+        "description": "Minimum displayed download value",
+        "tooltip" : "A minimum download value to display in the panel"
+    },
+    "minimum_bytes_sent_to_display": {
+        "type": "spinbutton",
+        "default": 0,
+        "min": 0,
+        "max": 100000000,
+        "step": 100000,
+        "units": "bytes",
+        "description": "Minimum displayed upload value",
+        "tooltip" : "A minimum upload value to display in the panel"
+    },
     "gui_end" : {
         "type" : "separator"
     },
