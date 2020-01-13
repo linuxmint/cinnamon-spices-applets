@@ -70,6 +70,7 @@ MyApplet.prototype = {
         this.settings.bindProperty(Settings.BindingDirection.IN, "show-ticker-name", "show_ticker_name", this._update_settings);
         this.settings.bindProperty(Settings.BindingDirection.IN, "show-currency", "show_currency", this._update_settings);
         this.settings.bindProperty(Settings.BindingDirection.IN, "rates-update-interval", "rates_update_interval", this._update_settings);
+        this.settings.bindProperty(Settings.BindingDirection.IN, "graph-type", "graph_type", this._updateGraphSettings);
         this.settings.bindProperty(Settings.BindingDirection.IN, "graph-unit", "graph_unit", this._updateGraphSettings);
         this.settings.bindProperty(Settings.BindingDirection.IN, "graph-length", "graph_length", this._updateGraphSettings);
         this.settings.bindProperty(Settings.BindingDirection.IN, "graph-width", "graph_width", this._updateGraphSettings);
@@ -146,25 +147,52 @@ MyApplet.prototype = {
             cr.setFontSize(8);
             cr.moveTo(2, height);
             cr.showText(this._formatMoney(minLow));
-
-            this.graphData.Data.forEach(function(data, index) {
-                var left = step*index;
-                var low = (height - 20)*((data.low - minLow)/delta);
-                var high = (height - 20)*((data.high - minLow)/delta);
-                var open = (height - 20)*((data.open - minLow)/delta);
-                var close = (height - 20)*((data.close - minLow)/delta);
-                cr.setSourceRGBA(color.red/255, color.green/255, color.blue/255, 1)
-                cr.moveTo(step/2 + step*index, height - 10 - low);
-                cr.setLineWidth(1);
-                cr.lineTo(step/2 + step*index, height - 10 - high);
-                cr.stroke();
-                cr.setSourceRGBA(color.red/255, color.green/255, color.blue/255, open < close ? 1 : .4)
-                cr.moveTo(step/2 + step*index, height - 10 - open);
-                cr.setLineWidth(3);
-                cr.lineTo(step/2 + step*index, height - 10 - close);
-                cr.stroke();
-            });
+            
+            switch(this.graph_type) {
+            case 'candlestick':
+                this._drawCandlestickGraph(cr, width, height, minLow, maxHigh, delta, step, color);
+                break;
+            case 'line':
+                this._drawLineGraph(cr, width, height, minLow, maxHigh, delta, step, color);
+                break;
+            }
         }
+    },
+
+    _drawCandlestickGraph(cr, width, height, minLow, maxHigh, delta, step, color) {
+        this.graphData.Data.forEach(function(data, index) {
+            const low = (height - 20)*((data.low - minLow)/delta);
+            const high = (height - 20)*((data.high - minLow)/delta);
+            const open = (height - 20)*((data.open - minLow)/delta);
+            const close = (height - 20)*((data.close - minLow)/delta);
+            const x = step / 2 + step * index;
+            const top = height - 10;
+            cr.setSourceRGBA(color.red/255, color.green/255, color.blue/255, 1)
+            cr.moveTo(x, top - low);
+            cr.setLineWidth(1);
+            cr.lineTo(x, top - high);
+            cr.stroke();
+            cr.setSourceRGBA(color.red/255, color.green/255, color.blue/255, open < close ? 1 : .4)
+            cr.moveTo(x, top - open);
+            cr.setLineWidth(3);
+            cr.lineTo(x, top - close);
+            cr.stroke();
+        });
+    },
+
+    _drawLineGraph(cr, width, height, minLow, maxHigh, delta, step, color) {
+        cr.setLineWidth(1);
+        cr.setSourceRGBA(color.red/255, color.green/255, color.blue/255, 1)
+        this.graphData.Data.forEach(function(data, index) {
+            const close = (height - 20)*((data.close - minLow)/delta);
+            const x = step/2 + step*index;
+            const y = height - 10 - close;
+            if (index) {
+                cr.lineTo(x, y);
+                cr.stroke();
+            }
+            cr.moveTo(x, y);
+        });
     },
 
     _update_settings: function () {
