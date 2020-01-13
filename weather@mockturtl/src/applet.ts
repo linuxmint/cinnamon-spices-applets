@@ -1139,9 +1139,9 @@ class WeatherApplet extends TextIconApplet {
 }
 
 class Log {
-  ID: number;
-  debug: boolean = false;
-  appletDir: string;
+  private ID: number;
+  private debug: boolean = false;
+  private appletDir: string;
 
   constructor(_instanceId: number) {
     this.ID = _instanceId;
@@ -1149,7 +1149,7 @@ class Log {
     this.debug = this.DEBUG();
   }
 
-  DEBUG() {
+  private DEBUG() {
     let path = this.appletDir + "/../DEBUG";
     let _debug = imports.gi.Gio.file_new_for_path(path);
     this.Print("DEBUG file found in " + path + ", enabling Debug mode");
@@ -1177,7 +1177,7 @@ class Log {
     }
   }
 
-  GetErrorLine(): string {
+  private GetErrorLine(): string {
     // Couldnt be more ugly, but it returns the file and line number
     let arr = (new Error).stack.split("\n").slice(-2)[0].split('/').slice(-1)[0];
     return arr;

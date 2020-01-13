@@ -3345,7 +3345,7 @@ declare namespace imports.gi.Gtk {
     
     
     
-    /*interface Plug extends Window, Atk.ImplementorIface, Buildable {
+    interface Plug extends Window, Atk.ImplementorIface, Buildable {
         construct (socket_id: xlib.Window) : void;
         construct_for_display (display: Gdk.Display, socket_id: xlib.Window) : void;
         get_embedded () : boolean;
@@ -3357,7 +3357,7 @@ declare namespace imports.gi.Gtk {
         new (socket_id: xlib.Window) : Widget;
         new_for_display (display: Gdk.Display, socket_id: xlib.Window) : Widget;
         
-    }*/
+    }
     
     
     
@@ -4181,7 +4181,7 @@ declare namespace imports.gi.Gtk {
     
     
     
-    /*interface Socket extends Container, Atk.ImplementorIface, Buildable {
+    interface Socket extends Container, Atk.ImplementorIface, Buildable {
         add_id (window: xlib.Window) : void;
         get_id () : xlib.Window;
         get_plug_window () : Gdk.Window;
@@ -4190,7 +4190,7 @@ declare namespace imports.gi.Gtk {
     var Socket: {
         new () : Widget;
         
-    }*/
+    }
     
     
     
@@ -9151,7 +9151,7 @@ declare namespace imports.gi.Gtk {
     
     
     
-    /*class PlugClass {
+    class PlugClass {
         public parent_class: WindowClass;
     
         embedded : {(plug: Plug) : void;};
@@ -9160,7 +9160,7 @@ declare namespace imports.gi.Gtk {
         _gtk_reserved3 : {() : void;};
         _gtk_reserved4 : {() : void;};
     
-    }*/
+    }
     
     
     
@@ -10024,7 +10024,7 @@ declare namespace imports.gi.Gtk {
     
     
     
-    /*class SocketClass {
+    class SocketClass {
         public parent_class: ContainerClass;
     
         plug_added : {(socket_: Socket) : void;};
@@ -10034,7 +10034,7 @@ declare namespace imports.gi.Gtk {
         _gtk_reserved3 : {() : void;};
         _gtk_reserved4 : {() : void;};
     
-    }*/
+    }
     
     
     
