@@ -1,4 +1,3 @@
-const DEBUG = false;
 /**
  * @param path Filename without extension
  */
@@ -1120,11 +1119,18 @@ class WeatherApplet extends Applet.TextIconApplet {
 class Log {
   ID: number;
   debug: boolean = false;
+  appletDir: string;
 
   constructor(_instanceId: number) {
     this.ID = _instanceId;
-    this.debug = DEBUG;
+    this.appletDir = imports.ui.appletManager.appletMeta[UUID].path;
+    this.debug = this.DEBUG();
   }
+
+  DEBUG() {
+    let _debug = Gio.file_new_for_path(this.appletDir + "/DEBUG");
+    return _debug.query_exists(null);
+  };
 
   Print(message: string): void {
     let msg = UUID + "#" + this.ID + ": " + message.toString();
