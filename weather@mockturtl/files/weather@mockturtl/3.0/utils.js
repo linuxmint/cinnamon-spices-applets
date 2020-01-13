@@ -35,9 +35,9 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 var Mainloop = imports.mainloop;
-var Cinnamon = imports.gi.Cinnamon;
-var St = imports.gi.St;
-var Gtk = imports.gi.Gtk;
+var util_format_date = imports.gi.Cinnamon.util_format_date;
+var IconType = imports.gi.St.IconType;
+var IconTheme = imports.gi.Gtk.IconTheme;
 var setTimeout = function (func, ms) {
     var args = [];
     if (arguments.length > 2) {
@@ -147,7 +147,7 @@ var getDayName = function (dayNum) {
     return days[dayNum];
 };
 var timeToUserUnits = function (date, show24Hours) {
-    var timeStr = Cinnamon.util_format_date('%H:%M', date.getTime());
+    var timeStr = util_format_date('%H:%M', date.getTime());
     var time = timeStr.split(':');
     if (time[0].charAt(0) == "0") {
         time[0] = time[0].substr(1);
@@ -286,5 +286,5 @@ var weatherIconSafely = function (code, icon_type) {
     return 'weather-severe-alert';
 };
 var hasIcon = function (icon, icon_type) {
-    return Gtk.IconTheme.get_default().has_icon(icon + (icon_type == St.IconType.SYMBOLIC ? '-symbolic' : ''));
+    return IconTheme.get_default().has_icon(icon + (icon_type == IconType.SYMBOLIC ? '-symbolic' : ''));
 };

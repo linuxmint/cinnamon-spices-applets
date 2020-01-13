@@ -47,7 +47,6 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var DEBUG = false;
 function importModule(path) {
     if (typeof require !== 'undefined') {
         return require('./' + path);
@@ -58,21 +57,31 @@ function importModule(path) {
         return AppletDir[path];
     }
 }
-var Cairo = imports.cairo;
+var LinearGradient = imports.cairo.LinearGradient;
 var Lang = imports.lang;
-var Main = imports.ui.main;
+var keybindingManager = imports.ui.main.keybindingManager;
 var Mainloop = imports.mainloop;
-var Gio = imports.gi.Gio;
-var Soup = imports.gi.Soup;
-var St = imports.gi.St;
-var GLib = imports.gi.GLib;
-var GObject = imports.gi.GObject;
-var Gettext = imports.gettext;
-var Gtk = imports.gi.Gtk;
-var Applet = imports.ui.applet;
-var PopupMenu = imports.ui.popupMenu;
-var Settings = imports.ui.settings;
-var Util = imports.misc.util;
+var SoupMessage = imports.gi.Soup.Message;
+var Session = imports.gi.Soup.Session;
+var ProxyResolverDefault = imports.gi.Soup.ProxyResolverDefault;
+var SessionAsync = imports.gi.Soup.SessionAsync;
+var Bin = imports.gi.St.Bin;
+var DrawingArea = imports.gi.St.DrawingArea;
+var BoxLayout = imports.gi.St.BoxLayout;
+var StSide = imports.gi.St.Side;
+var IconType = imports.gi.St.IconType;
+var Label = imports.gi.St.Label;
+var Icon = imports.gi.St.Icon;
+var Button = imports.gi.St.Button;
+var get_language_names = imports.gi.GLib.get_language_names;
+var TextIconApplet = imports.ui.applet.TextIconApplet;
+var AllowedLayout = imports.ui.applet.AllowedLayout;
+var AppletPopupMenu = imports.ui.applet.AppletPopupMenu;
+var AppletMenuItem = imports.ui.applet.MenuItem;
+var PopupMenuManager = imports.ui.popupMenu.PopupMenuManager;
+var AppletSettings = imports.ui.settings.AppletSettings;
+var SettingBindingDirection = imports.ui.settings.BindingDirection;
+var spawnCommandLine = imports.misc.util.spawnCommandLine;
 var utils = importModule("utils");
 var GetDayName = utils.GetDayName;
 var GetHoursMinutes = utils.GetHoursMinutes;
@@ -143,9 +152,9 @@ var KEYS = {
     WEATHER_MANUAL_LOCATION: "manualLocation",
     WEATHER_USE_CCUSTOM_APPLETICONS_KEY: 'useCustomAppletIcons'
 };
-Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
+imports.gettext.bindtextdomain(UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
 function _(str) {
-    return Gettext.dgettext(UUID, str);
+    return imports.gettext.dgettext(UUID, str);
 }
 var WeatherApplet = (function (_super) {
     __extends(WeatherApplet, _super);
@@ -183,7 +192,7 @@ var WeatherApplet = (function (_super) {
         _this.forecasts = [];
         _this.currentLocale = null;
         _this.systemLanguage = null;
-        _this._httpSession = new Soup.SessionAsync();
+        _this._httpSession = new SessionAsync();
         _this.appletDir = imports.ui.appletManager.appletMeta[UUID].path;
         _this.locProvider = new ipApi.IpApi(_this);
         _this.lastUpdated = null;
@@ -209,13 +218,13 @@ var WeatherApplet = (function (_super) {
             "no respone data": _("Service Error"),
             "unusal payload": _("Service Error"),
         };
-        _this.currentLocale = _this.constructJsLocale(GLib.get_language_names()[0]);
+        _this.currentLocale = _this.constructJsLocale(get_language_names()[0]);
         _this.systemLanguage = _this.currentLocale.split('-')[0];
-        _this.settings = new Settings.AppletSettings(_this, UUID, instanceId);
+        _this.settings = new AppletSettings(_this, UUID, instanceId);
         _this.log = new Log(instanceId);
         _this._httpSession.user_agent = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:37.0) Gecko/20100101 Firefox/37.0";
-        Soup.Session.prototype.add_feature.call(_this._httpSession, new Soup.ProxyResolverDefault());
-        Gtk.IconTheme.get_default().append_search_path(_this.appletDir + "/../icons");
+        Session.prototype.add_feature.call(_this._httpSession, new ProxyResolverDefault());
+        imports.gi.Gtk.IconTheme.get_default().append_search_path(_this.appletDir + "/../icons");
         _this.SetAppletOnPanel();
         _this.AddPopupMenu(orientation);
         _this.BindSettings();
@@ -225,7 +234,7 @@ var WeatherApplet = (function (_super) {
         _this.RefreshLoop();
         _this.orientation = orientation;
         try {
-            _this.setAllowedLayout(Applet.AllowedLayout.BOTH);
+            _this.setAllowedLayout(AllowedLayout.BOTH);
             _this.update_label_visible();
         }
         catch (e) {
@@ -238,8 +247,8 @@ var WeatherApplet = (function (_super) {
         this.set_applet_tooltip(_("Click to open"));
     };
     WeatherApplet.prototype.AddPopupMenu = function (orientation) {
-        this.menuManager = new PopupMenu.PopupMenuManager(this);
-        this.menu = new Applet.AppletPopupMenu(this, orientation);
+        this.menuManager = new PopupMenuManager(this);
+        this.menu = new AppletPopupMenu(this, orientation);
         if (typeof this.menu.setCustomStyleClass === "function")
             this.menu.setCustomStyleClass(STYLE_WEATHER_MENU);
         else {
@@ -251,11 +260,11 @@ var WeatherApplet = (function (_super) {
         for (var k in KEYS) {
             var key = KEYS[k];
             var keyProp = "_" + key;
-            this.settings.bindProperty(Settings.BindingDirection.IN, key, keyProp, this.refreshAndRebuild, null);
+            this.settings.bindProperty(SettingBindingDirection.IN, key, keyProp, this.refreshAndRebuild, null);
         }
-        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, WEATHER_LOCATION, ("_" + WEATHER_LOCATION), this.refreshAndRebuild, null);
-        this.settings.bindProperty(Settings.BindingDirection.IN, "keybinding", "keybinding", this._onKeySettingsUpdated, null);
-        Main.keybindingManager.addHotKey(UUID, this.keybinding, Lang.bind(this, this.on_applet_clicked));
+        this.settings.bindProperty(SettingBindingDirection.BIDIRECTIONAL, WEATHER_LOCATION, ("_" + WEATHER_LOCATION), this.refreshAndRebuild, null);
+        this.settings.bindProperty(SettingBindingDirection.IN, "keybinding", "keybinding", this._onKeySettingsUpdated, null);
+        keybindingManager.addHotKey(UUID, this.keybinding, Lang.bind(this, this.on_applet_clicked));
         this.updateIconType();
         this.settings.connect(SIGNAL_CHANGED + WEATHER_USE_SYMBOLIC_ICONS_KEY, Lang.bind(this, function () {
             this.updateIconType();
@@ -269,18 +278,18 @@ var WeatherApplet = (function (_super) {
     };
     WeatherApplet.prototype.AddRefreshButton = function () {
         var itemLabel = _("Refresh");
-        var refreshMenuItem = new Applet.MenuItem(itemLabel, REFRESH_ICON, Lang.bind(this, function () {
+        var refreshMenuItem = new AppletMenuItem(itemLabel, REFRESH_ICON, Lang.bind(this, function () {
             this.refreshAndRebuild();
         }));
         this._applet_context_menu.addMenuItem(refreshMenuItem);
     };
     WeatherApplet.prototype.BuildPopupMenu = function () {
-        this._currentWeather = new St.Bin({ style_class: STYLE_CURRENT });
-        this._futureWeather = new St.Bin({ style_class: STYLE_FORECAST });
-        this._separatorArea = new St.DrawingArea({ style_class: STYLE_POPUP_SEPARATOR_MENU_ITEM });
+        this._currentWeather = new Bin({ style_class: STYLE_CURRENT });
+        this._futureWeather = new Bin({ style_class: STYLE_FORECAST });
+        this._separatorArea = new DrawingArea({ style_class: STYLE_POPUP_SEPARATOR_MENU_ITEM });
         this._separatorArea.width = 200;
         this._separatorArea.connect(SIGNAL_REPAINT, Lang.bind(this, this._onSeparatorAreaRepaint));
-        var mainBox = new St.BoxLayout({ vertical: true });
+        var mainBox = new BoxLayout({ vertical: true });
         mainBox.add_actor(this._currentWeather);
         mainBox.add_actor(this._separatorArea);
         mainBox.add_actor(this._futureWeather);
@@ -298,7 +307,7 @@ var WeatherApplet = (function (_super) {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4, new Promise(function (resolve, reject) {
-                            var message = Soup.Message.new('GET', query);
+                            var message = SoupMessage.new('GET', query);
                             _this._httpSession.queue_message(message, function (session, message) {
                                 if (!message)
                                     reject({ code: 0, message: "no network response", reason_phrase: "no network response" });
@@ -332,7 +341,7 @@ var WeatherApplet = (function (_super) {
             var command;
             return __generator(this, function (_a) {
                 command = "xdg-open ";
-                Util.spawnCommandLine(command + "https://cinnamon-spices.linuxmint.com/applets/view/17");
+                spawnCommandLine(command + "https://cinnamon-spices.linuxmint.com/applets/view/17");
                 return [2];
             });
         });
@@ -394,7 +403,7 @@ var WeatherApplet = (function (_super) {
     };
     ;
     WeatherApplet.prototype.update_label_visible = function () {
-        if (this.orientation == St.Side.LEFT || this.orientation == St.Side.RIGHT)
+        if (this.orientation == StSide.LEFT || this.orientation == StSide.RIGHT)
             this.hide_applet_label(true);
         else
             this.hide_applet_label(false);
@@ -407,7 +416,7 @@ var WeatherApplet = (function (_super) {
     ;
     WeatherApplet.prototype._onKeySettingsUpdated = function () {
         if (this.keybinding != null) {
-            Main.keybindingManager.addHotKey(UUID, this.keybinding, Lang.bind(this, this.on_applet_clicked));
+            keybindingManager.addHotKey(UUID, this.keybinding, Lang.bind(this, this.on_applet_clicked));
         }
     };
     WeatherApplet.prototype.on_applet_clicked = function (event) {
@@ -423,7 +432,7 @@ var WeatherApplet = (function (_super) {
         var endColor = themeNode.get_color('-gradient-end');
         var gradientWidth = (width - margin * 2);
         var gradientOffset = (height - gradientHeight) / 2;
-        var pattern = new Cairo.LinearGradient(margin, gradientOffset, width - margin, gradientOffset + gradientHeight);
+        var pattern = new LinearGradient(margin, gradientOffset, width - margin, gradientOffset + gradientHeight);
         pattern.addColorStopRGBA(0, startColor.red / 255, startColor.green / 255, startColor.blue / 255, startColor.alpha / 255);
         pattern.addColorStopRGBA(0.5, endColor.red / 255, endColor.green / 255, endColor.blue / 255, endColor.alpha / 255);
         pattern.addColorStopRGBA(1, startColor.red / 255, startColor.green / 255, startColor.blue / 255, startColor.alpha / 255);
@@ -434,8 +443,8 @@ var WeatherApplet = (function (_super) {
     ;
     WeatherApplet.prototype.updateIconType = function () {
         this._icon_type = this.settings.getValue(WEATHER_USE_SYMBOLIC_ICONS_KEY) ?
-            St.IconType.SYMBOLIC :
-            St.IconType.FULLCOLOR;
+            IconType.SYMBOLIC :
+            IconType.FULLCOLOR;
     };
     ;
     WeatherApplet.prototype.constructJsLocale = function (locale) {
@@ -615,7 +624,7 @@ var WeatherApplet = (function (_super) {
                 iconname = "weather-severe-alert";
             }
             this._currentWeatherIcon.icon_name = iconname;
-            this._icon_type == St.IconType.SYMBOLIC ?
+            this._icon_type == IconType.SYMBOLIC ?
                 this.set_applet_icon_symbolic_name(iconname) :
                 this.set_applet_icon_name(iconname);
             if (this._useCustomAppletIcons)
@@ -761,10 +770,10 @@ var WeatherApplet = (function (_super) {
     WeatherApplet.prototype.showLoadingUi = function () {
         this.destroyCurrentWeather();
         this.destroyFutureWeather();
-        this._currentWeather.set_child(new St.Label({
+        this._currentWeather.set_child(new Label({
             text: _('Loading current weather ...')
         }));
-        this._futureWeather.set_child(new St.Label({
+        this._futureWeather.set_child(new Label({
             text: _('Loading future weather ...')
         }));
     };
@@ -778,61 +787,61 @@ var WeatherApplet = (function (_super) {
         var textOb = {
             text: ELLIPSIS
         };
-        this._currentWeatherIcon = new St.Icon({
+        this._currentWeatherIcon = new Icon({
             icon_type: this._icon_type,
             icon_size: 64,
             icon_name: APPLET_ICON,
             style_class: STYLE_ICON
         });
-        this._currentWeatherLocation = new St.Button({ reactive: true, label: _('Refresh'), });
+        this._currentWeatherLocation = new Button({ reactive: true, label: _('Refresh'), });
         this._currentWeatherLocation.style_class = STYLE_LOCATION_LINK;
         this._currentWeatherLocation.connect(SIGNAL_CLICKED, Lang.bind(this, function () {
             if (this._currentWeatherLocation.url == null) {
                 this.refreshWeather();
             }
             else {
-                Gio.app_info_launch_default_for_uri(this._currentWeatherLocation.url, global.create_app_launch_context());
+                imports.gi.Gio.app_info_launch_default_for_uri(this._currentWeatherLocation.url, global.create_app_launch_context());
             }
         }));
-        this._currentWeatherSummary = new St.Label({ text: _('Loading ...'), style_class: STYLE_SUMMARY });
-        this._currentWeatherSunrise = new St.Label(textOb);
-        this._currentWeatherSunset = new St.Label(textOb);
-        var ab_spacerlabel = new St.Label({ text: BLANK });
-        var bb_spacerlabel = new St.Label({ text: BLANK });
-        var sunBox = new St.BoxLayout({ style_class: STYLE_ASTRONOMY });
+        this._currentWeatherSummary = new Label({ text: _('Loading ...'), style_class: STYLE_SUMMARY });
+        this._currentWeatherSunrise = new Label(textOb);
+        this._currentWeatherSunset = new Label(textOb);
+        var ab_spacerlabel = new Label({ text: BLANK });
+        var bb_spacerlabel = new Label({ text: BLANK });
+        var sunBox = new BoxLayout({ style_class: STYLE_ASTRONOMY });
         sunBox.add_actor(this._currentWeatherSunrise);
         sunBox.add_actor(ab_spacerlabel);
         sunBox.add_actor(this._currentWeatherSunset);
-        var middleColumn = new St.BoxLayout({ vertical: true, style_class: STYLE_SUMMARYBOX });
+        var middleColumn = new BoxLayout({ vertical: true, style_class: STYLE_SUMMARYBOX });
         middleColumn.add_actor(this._currentWeatherLocation);
         middleColumn.add_actor(this._currentWeatherSummary);
         middleColumn.add_actor(bb_spacerlabel);
         middleColumn.add_actor(sunBox);
-        this._currentWeatherTemperature = new St.Label(textOb);
-        this._currentWeatherHumidity = new St.Label(textOb);
-        this._currentWeatherPressure = new St.Label(textOb);
-        this._currentWeatherWind = new St.Label(textOb);
-        this._currentWeatherApiUnique = new St.Label({ text: '' });
-        this._currentWeatherApiUniqueCap = new St.Label({ text: '' });
-        var rb_captions = new St.BoxLayout({ vertical: true, style_class: STYLE_DATABOX_CAPTIONS });
-        var rb_values = new St.BoxLayout({ vertical: true, style_class: STYLE_DATABOX_VALUES });
-        rb_captions.add_actor(new St.Label({ text: _('Temperature:') }));
-        rb_captions.add_actor(new St.Label({ text: _('Humidity:') }));
-        rb_captions.add_actor(new St.Label({ text: _('Pressure:') }));
-        rb_captions.add_actor(new St.Label({ text: _('Wind:') }));
+        this._currentWeatherTemperature = new Label(textOb);
+        this._currentWeatherHumidity = new Label(textOb);
+        this._currentWeatherPressure = new Label(textOb);
+        this._currentWeatherWind = new Label(textOb);
+        this._currentWeatherApiUnique = new Label({ text: '' });
+        this._currentWeatherApiUniqueCap = new Label({ text: '' });
+        var rb_captions = new BoxLayout({ vertical: true, style_class: STYLE_DATABOX_CAPTIONS });
+        var rb_values = new BoxLayout({ vertical: true, style_class: STYLE_DATABOX_VALUES });
+        rb_captions.add_actor(new Label({ text: _('Temperature:') }));
+        rb_captions.add_actor(new Label({ text: _('Humidity:') }));
+        rb_captions.add_actor(new Label({ text: _('Pressure:') }));
+        rb_captions.add_actor(new Label({ text: _('Wind:') }));
         rb_captions.add_actor(this._currentWeatherApiUniqueCap);
         rb_values.add_actor(this._currentWeatherTemperature);
         rb_values.add_actor(this._currentWeatherHumidity);
         rb_values.add_actor(this._currentWeatherPressure);
         rb_values.add_actor(this._currentWeatherWind);
         rb_values.add_actor(this._currentWeatherApiUnique);
-        var rightColumn = new St.BoxLayout({ style_class: STYLE_DATABOX });
+        var rightColumn = new BoxLayout({ style_class: STYLE_DATABOX });
         rightColumn.add_actor(rb_captions);
         rightColumn.add_actor(rb_values);
-        var weatherBox = new St.BoxLayout();
+        var weatherBox = new BoxLayout();
         weatherBox.add_actor(middleColumn);
         weatherBox.add_actor(rightColumn);
-        var box = new St.BoxLayout({ style_class: STYLE_ICONBOX });
+        var box = new BoxLayout({ style_class: STYLE_ICONBOX });
         box.add_actor(this._currentWeatherIcon);
         box.add_actor(weatherBox);
         this._currentWeather.set_child(box);
@@ -841,32 +850,32 @@ var WeatherApplet = (function (_super) {
     WeatherApplet.prototype.rebuildFutureWeatherUi = function () {
         this.destroyFutureWeather();
         this._forecast = [];
-        this._forecastBox = new St.BoxLayout({
+        this._forecastBox = new BoxLayout({
             vertical: this._verticalOrientation,
             style_class: STYLE_FORECAST_CONTAINER
         });
         this._futureWeather.set_child(this._forecastBox);
         for (var i = 0; i < this._forecastDays; i++) {
             var forecastWeather = {
-                Icon: new St.Icon,
-                Day: new St.Label,
-                Summary: new St.Label,
-                Temperature: new St.Label,
+                Icon: new Icon,
+                Day: new Label,
+                Summary: new Label,
+                Temperature: new Label,
             };
-            forecastWeather.Icon = new St.Icon({
+            forecastWeather.Icon = new Icon({
                 icon_type: this._icon_type,
                 icon_size: 48,
                 icon_name: APPLET_ICON,
                 style_class: STYLE_FORECAST_ICON
             });
-            forecastWeather.Day = new St.Label({ style_class: STYLE_FORECAST_DAY });
-            forecastWeather.Summary = new St.Label({ style_class: STYLE_FORECAST_SUMMARY });
-            forecastWeather.Temperature = new St.Label({ style_class: STYLE_FORECAST_TEMPERATURE });
-            var dataBox = new St.BoxLayout({ vertical: true, style_class: STYLE_FORECAST_DATABOX });
+            forecastWeather.Day = new Label({ style_class: STYLE_FORECAST_DAY });
+            forecastWeather.Summary = new Label({ style_class: STYLE_FORECAST_SUMMARY });
+            forecastWeather.Temperature = new Label({ style_class: STYLE_FORECAST_TEMPERATURE });
+            var dataBox = new BoxLayout({ vertical: true, style_class: STYLE_FORECAST_DATABOX });
             dataBox.add_actor(forecastWeather.Day);
             dataBox.add_actor(forecastWeather.Summary);
             dataBox.add_actor(forecastWeather.Temperature);
-            var forecastBox = new St.BoxLayout({
+            var forecastBox = new BoxLayout({
                 style_class: STYLE_FORECAST_BOX
             });
             forecastBox.add_actor(forecastWeather.Icon);
@@ -939,15 +948,23 @@ var WeatherApplet = (function (_super) {
         ctx.HandleError(uiError);
     };
     return WeatherApplet;
-}(Applet.TextIconApplet));
+}(TextIconApplet));
 var Log = (function () {
     function Log(_instanceId) {
         this.debug = false;
         this.ID = _instanceId;
-        this.debug = DEBUG;
+        this.appletDir = imports.ui.appletManager.appletMeta[UUID].path;
+        this.debug = this.DEBUG();
     }
+    Log.prototype.DEBUG = function () {
+        var path = this.appletDir + "/../DEBUG";
+        var _debug = imports.gi.Gio.file_new_for_path(path);
+        this.Print("DEBUG file found in " + path + ", enabling Debug mode");
+        return _debug.query_exists(null);
+    };
+    ;
     Log.prototype.Print = function (message) {
-        var msg = UUID + "#" + this.ID + ": " + message.toString();
+        var msg = "[" + UUID + "#" + this.ID + "]: " + message.toString();
         var debug = "";
         if (this.debug) {
             debug = this.GetErrorLine();
@@ -958,7 +975,7 @@ var Log = (function () {
         }
     };
     Log.prototype.Error = function (error) {
-        global.logError(UUID + "#" + this.ID + ": " + error.toString(), '\n', "On Line:", this.GetErrorLine());
+        global.logError("[" + UUID + "#" + this.ID + "]: " + error.toString(), '\n', "On Line:", this.GetErrorLine());
     };
     ;
     Log.prototype.Debug = function (message) {

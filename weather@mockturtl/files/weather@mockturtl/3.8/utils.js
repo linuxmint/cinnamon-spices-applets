@@ -1,7 +1,7 @@
 var Mainloop = imports.mainloop;
-const Cinnamon = imports.gi.Cinnamon;
-const St = imports.gi.St;
-const Gtk = imports.gi.Gtk;
+const util_format_date = imports.gi.Cinnamon.util_format_date;
+const IconType = imports.gi.St.IconType;
+const IconTheme = imports.gi.Gtk.IconTheme;
 var setTimeout = function (func, ms) {
     let args = [];
     if (arguments.length > 2) {
@@ -104,7 +104,7 @@ var getDayName = function (dayNum) {
     return days[dayNum];
 };
 var timeToUserUnits = function (date, show24Hours) {
-    let timeStr = Cinnamon.util_format_date('%H:%M', date.getTime());
+    let timeStr = util_format_date('%H:%M', date.getTime());
     let time = timeStr.split(':');
     if (time[0].charAt(0) == "0") {
         time[0] = time[0].substr(1);
@@ -239,5 +239,5 @@ var weatherIconSafely = function (code, icon_type) {
     return 'weather-severe-alert';
 };
 var hasIcon = function (icon, icon_type) {
-    return Gtk.IconTheme.get_default().has_icon(icon + (icon_type == St.IconType.SYMBOLIC ? '-symbolic' : ''));
+    return IconTheme.get_default().has_icon(icon + (icon_type == IconType.SYMBOLIC ? '-symbolic' : ''));
 };
