@@ -85,6 +85,10 @@ MyApplet.prototype = {
         this.settings.bindProperty(Settings.BindingDirection.IN, "alert-delta-length", "alert_delta_length", this._updateAlertSettings);
         this.settings.bindProperty(Settings.BindingDirection.IN, "alert-delta-unit", "alert_delta_unit", this._updateAlertSettings);
         this.settings.bindProperty(Settings.BindingDirection.IN, "alert-delta-update-interval", "alert_delta_update_interval", this._updateAlertSettings);
+        this.settings.bindProperty(Settings.BindingDirection.IN, "currency-format-enable", "currency_format_enable", this._update_settings);
+        this.settings.bindProperty(Settings.BindingDirection.IN, "currency-format-symbol", "currency_format_symbol", this._update_settings);
+        this.settings.bindProperty(Settings.BindingDirection.IN, "currency-format-name", "currency_format_name", this._update_settings);
+        this.settings.bindProperty(Settings.BindingDirection.IN, "currency-format-precision", "currency_format_precision", this._update_settings);
 
         this._loadCurrencies();
         this._update_settings();
@@ -172,6 +176,7 @@ MyApplet.prototype = {
         this._loadIcon();
         this._updateGraphSettings();
         this._updateAlertSettings();
+        this._updateLabel();
     },
 
     _update_value: function () {
@@ -248,10 +253,14 @@ MyApplet.prototype = {
     _updateValue: function(value) {
         this.previousValue = this.value === undefined ? value : this.value;
         this.value = value;
+        this._updateLabel();
+        this._alertOnUpdate();
+    },
+
+    _updateLabel: function() {
         let formattedValue = this._formatMoney(this.value);
         let ticker_name = this.show_ticker_name ? `${this.ticker}:` : '';
         this.set_applet_label(`${ticker_name}${formattedValue}`);
-        this._alertOnUpdate();
     },
 
     _alertOnUpdate: function() {
@@ -298,17 +307,24 @@ MyApplet.prototype = {
     },
 
     _formatMoney: function(value) {
+        let symbol, name, precision;
+        if (this.currency_format_enable) {
+            symbol = this.currency_format_symbol;
+            name = this.currency_format_name;
+            precision = this.currency_format_precision;
+        } else {
+            let currency_config = this.currencies[this.currency];
+            symbol = currency_config.symbol;
+            name = this.currency;
+            precision = currency_config.precision;
+        }
         switch (this.show_currency) {
             case 'symbol':
-                let currency_config = this.currencies[this.currency];
-                value = Accounting.formatMoney(value, currency_config.symbol,
-                                                      currency_config.precision);
-                break;
+                return Accounting.formatMoney(value, symbol, precision);
             case 'name':
-                value = Accounting.formatMoney(value, '', 2) + ` ${this.currency}`;
-                break;
+                return `${Accounting.formatNumber(value, precision)} ${name}`;
         }
-        return value;
+        return Accounting.formatNumber(value, precision);
     },
 
     _parseGraphJSON: function (data) {
