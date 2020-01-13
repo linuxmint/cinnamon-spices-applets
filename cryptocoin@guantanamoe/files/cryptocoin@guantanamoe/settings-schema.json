@@ -4,7 +4,8 @@
         "pages" : [
             "general-page",
             "graph-page",
-            "alerts-page"
+            "alerts-page",
+            "advanced-page"
         ],
         "general-page" : {
             "type" : "page",
@@ -27,6 +28,13 @@
                 "alerts-config",
                 "alerts-section",
                 "alerts-delta-section"
+            ]
+        },
+        "advanced-page" : {
+            "type" : "page",
+            "title" : "Advanced",
+            "sections" : [
+                "advanced-currency-section"
             ]
         },
         "currency-section" : {
@@ -81,6 +89,16 @@
                 "alert-delta-update-interval"
             ],
             "dependency": "alert-enable"
+        },
+        "advanced-currency-section" : {
+            "type": "section",
+            "title": "Currency",
+            "keys": [
+                "currency-format-enable",
+                "currency-format-symbol",
+                "currency-format-name",
+                "currency-format-precision"
+            ]
         }
     },
     "currency" : {
@@ -227,5 +245,31 @@
         "step" : 1,
         "units" : "seconds",
         "description" : "Update interval"
+    },
+    "currency-format-enable" : {
+        "type" : "switch",
+        "default" : false,
+        "description" : "Custom format"
+    },
+    "currency-format-symbol" : {
+        "type" : "entry",
+        "default" : "$",
+        "description" : "Currency symbol",
+        "dependency": "currency-format-enable"
+    },
+    "currency-format-name" : {
+        "type" : "entry",
+        "default" : "",
+        "description" : "Currency name",
+        "dependency": "currency-format-enable"
+    },
+    "currency-format-precision" : {
+        "type" : "spinbutton",
+        "default" : 2,
+        "min" : 0,
+        "max" : 32,
+        "step" : 1,
+        "description" : "Decimal places",
+        "dependency": "currency-format-enable"
     }
 }
