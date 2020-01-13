@@ -265,22 +265,7 @@ declare namespace imports.mainloop {
     export function timeout_add(milliseconds: number, binding: () => any, errorCallback: () => null): void;
     export function source_remove(id: any): void;
 }
-declare namespace imports.gi.Gtk {
-    export class IconTheme {
-        static get_default(): Theme;
-    }
-    /** DEPRECATED */
-    export const STOCK_EDIT: any;
-    /** DEPRECATED */
-    export const STOCK_REFRESH: string;
 
-    export class Theme {
-        has_icon(iconName: string): boolean;
-    }
-}
-declare namespace imports.gi.GObject {
-    const placehgolder = "";
-}
 declare namespace imports.gi.Cinnamon {
     function util_format_date(format: string, milliseconds: number): string;
 }
