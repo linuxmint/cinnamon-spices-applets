@@ -53,6 +53,7 @@
             "type" : "section",
             "title" : "Graph",
             "keys" : [
+                "graph-type",
                 "graph-unit",
                 "graph-length",
                 "graph-width",
@@ -139,6 +140,15 @@
         "description" : "Rates update interval (in seconds)",
         "tooltip" : "Set the delay between each rates update."
     },
+    "graph-type" : {
+        "type" : "combobox",
+        "description" : "Graph Type",
+        "default" : "candlestick",
+        "options" : {
+			"Candlestick" : "candlestick",
+			"Line" : "line"
+		}
+    },
     "graph-unit" : {
 		"type" : "combobox",
         "default" : "histohour",
@@ -176,7 +186,7 @@
     "graph-color" : {
         "type" : "colorchooser",
         "default" : "red",
-        "description" : "The Graph Foreground Color"
+        "description" : "Graph Foreground Color"
     },
     "alert-enable" : {
         "type" : "switch",
