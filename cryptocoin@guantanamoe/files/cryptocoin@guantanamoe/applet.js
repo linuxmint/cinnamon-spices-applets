@@ -64,6 +64,7 @@ MyApplet.prototype = {
         } catch (e){ throw 'LiveScore: Adding ProxyResolverDefault failed: ' + e; }
 
         this.settings = new Settings.AppletSettings(this, metadata.uuid, instance_id);
+        this.settings.bindProperty(Settings.BindingDirection.IN, "amount", "amount", this._update_settings);
         this.settings.bindProperty(Settings.BindingDirection.IN, "currency", "currency", this._update_settings);
         this.settings.bindProperty(Settings.BindingDirection.IN, "ticker", "ticker", this._update_settings);
         this.settings.bindProperty(Settings.BindingDirection.IN, "show-ticker-icon", "show_ticker_icon", this._update_settings);
@@ -286,7 +287,7 @@ MyApplet.prototype = {
     },
 
     _updateLabel: function() {
-        let formattedValue = this._formatMoney(this.value);
+        let formattedValue = this._formatMoney(this.value * parseFloat(this.amount));
         let ticker_name = this.show_ticker_name ? `${this.ticker}:` : '';
         this.set_applet_label(`${ticker_name}${formattedValue}`);
     },

@@ -41,6 +41,7 @@
             "type" : "section",
             "title" : "Currency",
             "keys" : [
+                "amount",
                 "currency",
                 "ticker",
                 "show-ticker-icon",
@@ -101,6 +102,12 @@
                 "currency-format-precision"
             ]
         }
+    },
+    "amount" : {
+        "type" : "entry",
+        "default" : "1",
+        "description" : "Amount",
+        "tooltip" : "Set the balance to multiply the price"
     },
     "currency" : {
         "type" : "entry",
