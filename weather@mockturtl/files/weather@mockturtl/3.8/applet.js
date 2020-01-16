@@ -530,7 +530,11 @@ class WeatherApplet extends Applet.TextIconApplet {
                 this._currentWeatherHumidity.text = Math.round(this.weather.humidity) + "%";
             }
             let wind_direction = compassDirection(this.weather.wind.degree);
-            this._currentWeatherWind.text = ((wind_direction != undefined) ? wind_direction + ' ' : '') + MPStoUserUnits(this.weather.wind.speed, this._windSpeedUnit) + ' ' + this._windSpeedUnit;
+            this._currentWeatherWind.text =
+                (wind_direction != undefined ? _(wind_direction) + " " : "") +
+                    MPStoUserUnits(this.weather.wind.speed, this._windSpeedUnit) +
+                    " " +
+                    _(this._windSpeedUnit);
             this._currentWeatherApiUnique.text = "";
             this._currentWeatherApiUniqueCap.text = "";
             if (!!this.weather.extra_field) {
