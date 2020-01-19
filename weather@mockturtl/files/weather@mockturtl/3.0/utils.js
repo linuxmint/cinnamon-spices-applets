@@ -34,7 +34,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var Mainloop = imports.mainloop;
+var _a = imports.mainloop, timeout_add = _a.timeout_add, source_remove = _a.source_remove;
 var util_format_date = imports.gi.Cinnamon.util_format_date;
 var IconType = imports.gi.St.IconType;
 var IconTheme = imports.gi.Gtk.IconTheme;
@@ -43,7 +43,7 @@ var setTimeout = function (func, ms) {
     if (arguments.length > 2) {
         args = args.slice.call(arguments, 2);
     }
-    var id = Mainloop.timeout_add(ms, function () {
+    var id = timeout_add(ms, function () {
         func.apply(null, args);
         return false;
     }, null);
@@ -64,21 +64,21 @@ var delay = function (ms) {
     });
 };
 var clearTimeout = function (id) {
-    Mainloop.source_remove(id);
+    source_remove(id);
 };
 var setInterval = function (func, ms) {
     var args = [];
     if (arguments.length > 2) {
         args = args.slice.call(arguments, 2);
     }
-    var id = Mainloop.timeout_add(ms, function () {
+    var id = timeout_add(ms, function () {
         func.apply(null, args);
         return true;
     }, null);
     return id;
 };
 var clearInterval = function (id) {
-    Mainloop.source_remove(id);
+    source_remove(id);
 };
 var isLocaleStringSupported = function () {
     var date = new Date(1565548657987);

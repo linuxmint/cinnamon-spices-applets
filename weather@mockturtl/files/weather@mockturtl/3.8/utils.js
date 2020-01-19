@@ -1,13 +1,13 @@
-var Mainloop = imports.mainloop;
-const util_format_date = imports.gi.Cinnamon.util_format_date;
-const IconType = imports.gi.St.IconType;
-const IconTheme = imports.gi.Gtk.IconTheme;
+var { timeout_add, source_remove } = imports.mainloop;
+const { util_format_date } = imports.gi.Cinnamon;
+const { IconType } = imports.gi.St;
+const { IconTheme } = imports.gi.Gtk;
 var setTimeout = function (func, ms) {
     let args = [];
     if (arguments.length > 2) {
         args = args.slice.call(arguments, 2);
     }
-    let id = Mainloop.timeout_add(ms, () => {
+    let id = timeout_add(ms, () => {
         func.apply(null, args);
         return false;
     }, null);
@@ -21,21 +21,21 @@ var delay = async function (ms) {
     });
 };
 const clearTimeout = function (id) {
-    Mainloop.source_remove(id);
+    source_remove(id);
 };
 const setInterval = function (func, ms) {
     let args = [];
     if (arguments.length > 2) {
         args = args.slice.call(arguments, 2);
     }
-    let id = Mainloop.timeout_add(ms, () => {
+    let id = timeout_add(ms, () => {
         func.apply(null, args);
         return true;
     }, null);
     return id;
 };
 const clearInterval = function (id) {
-    Mainloop.source_remove(id);
+    source_remove(id);
 };
 var isLocaleStringSupported = function () {
     let date = new Date(1565548657987);
