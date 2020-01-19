@@ -14,54 +14,25 @@ function importModule(path: string): any {
  * /usr/share/gjs-1.0/
  * /usr/share/gnome-js/
  */
-//const Cairo: typeof imports.cairo = imports.cairo;
-const LinearGradient = imports.cairo.LinearGradient;
-
+const { LinearGradient } = imports.cairo;
 const Lang: typeof imports.lang = imports.lang;
-
 // http://developer.gnome.org/glib/unstable/glib-The-Main-Event-Loop.html
 //const Main: typeof imports.ui.main = imports.ui.main;
 const keybindingManager = imports.ui.main.keybindingManager;
 
-const Mainloop = imports.mainloop;
-
+const { timeout_add_seconds } = imports.mainloop;
 // http://developer.gnome.org/libsoup/stable/libsoup-client-howto.html
 //const Soup: typeof imports.gi.Soup = imports.gi.Soup;
-const SoupMessage = imports.gi.Soup.Message;
-const Session = imports.gi.Soup.Session;
-const ProxyResolverDefault = imports.gi.Soup.ProxyResolverDefault;
-const SessionAsync = imports.gi.Soup.SessionAsync;
-
+const { Message, Session, ProxyResolverDefault, SessionAsync } = imports.gi.Soup;
 // http://developer.gnome.org/st/stable/
 //const St: typeof imports.gi.St = imports.gi.St;
-const Bin = imports.gi.St.Bin;
-const DrawingArea = imports.gi.St.DrawingArea;
-const BoxLayout = imports.gi.St.BoxLayout;
-const StSide = imports.gi.St.Side;
-const IconType = imports.gi.St.IconType;
-const Label = imports.gi.St.Label;
-const Icon = imports.gi.St.Icon;
-const Button = imports.gi.St.Button;
-
-//const GLib: typeof imports.gi.GLib = imports.gi.GLib;
-const get_language_names = imports.gi.GLib.get_language_names;
-
+const { Bin, DrawingArea, BoxLayout, Side, IconType, Label, Icon, Button } = imports.gi.St;
+const { get_language_names } = imports.gi.GLib;
 // * /usr/share/cinnamon/js/
-//const Applet: typeof imports.ui.applet = imports.ui.applet;
-const TextIconApplet = imports.ui.applet.TextIconApplet;
-const AllowedLayout = imports.ui.applet.AllowedLayout;
-const AppletPopupMenu = imports.ui.applet.AppletPopupMenu;
-const AppletMenuItem = imports.ui.applet.MenuItem;
-
-//const PopupMenu: typeof imports.ui.popupMenu = imports.ui.popupMenu;
-const PopupMenuManager = imports.ui.popupMenu.PopupMenuManager;
-
-//const Settings: typeof imports.ui.settings = imports.ui.settings;
-const AppletSettings = imports.ui.settings.AppletSettings;
-const SettingBindingDirection = imports.ui.settings.BindingDirection;
-
-//const Util: typeof imports.misc.util = imports.misc.util;
-const spawnCommandLine = imports.misc.util.spawnCommandLine;
+const { TextIconApplet, AllowedLayout, AppletPopupMenu, MenuItem} = imports.ui.applet;
+const { PopupMenuManager } = imports.ui.popupMenu;
+const { AppletSettings, BindingDirection } = imports.ui.settings;
+const { spawnCommandLine } = imports.misc.util;
 
 var utils = importModule("utils");
 var GetDayName = utils.GetDayName as (date: Date, locale:string, tz?: string) => string;
@@ -343,15 +314,15 @@ class WeatherApplet extends TextIconApplet {
     for (let k in KEYS) {
       let key = KEYS[k];
       let keyProp = "_" + key;
-      this.settings.bindProperty(SettingBindingDirection.IN,
+      this.settings.bindProperty(BindingDirection.IN,
         key, keyProp, this.refreshAndRebuild, null);
     }
 
     // Settings what need special care
-    this.settings.bindProperty(SettingBindingDirection.BIDIRECTIONAL,
+    this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
       WEATHER_LOCATION, ("_" + WEATHER_LOCATION), this.refreshAndRebuild, null);
 
-    this.settings.bindProperty(SettingBindingDirection.IN, "keybinding",
+    this.settings.bindProperty(BindingDirection.IN, "keybinding",
       "keybinding", this._onKeySettingsUpdated, null);
 
     keybindingManager.addHotKey(
@@ -373,7 +344,7 @@ class WeatherApplet extends TextIconApplet {
   /** Into context menu */
   private AddRefreshButton(): void {
      let itemLabel = _("Refresh")
-     let refreshMenuItem = new AppletMenuItem(itemLabel, REFRESH_ICON, Lang.bind(this, function () {
+     let refreshMenuItem = new MenuItem(itemLabel, REFRESH_ICON, Lang.bind(this, function () {
        this.refreshAndRebuild();
      }))
      this._applet_context_menu.addMenuItem(refreshMenuItem);
@@ -409,7 +380,7 @@ class WeatherApplet extends TextIconApplet {
    */
   public async LoadJsonAsync(query: string): Promise <any> {
     let json = await new Promise((resolve: any, reject: any) => {
-      let message = SoupMessage.new('GET', query);
+      let message = Message.new('GET', query);
       this._httpSession.queue_message(message, (session: any, message: any) => {
 
         if (!message) 
@@ -478,7 +449,7 @@ class WeatherApplet extends TextIconApplet {
       this.log.Error("Error in Main loop: " + e);
       this.encounteredError = true;
     }
-    Mainloop.timeout_add_seconds(loopInterval, Lang.bind(this, function mainloopTimeout() {
+    timeout_add_seconds(loopInterval, Lang.bind(this, function mainloopTimeout() {
       this.RefreshLoop();
     }))
     this.lock = false;
@@ -486,7 +457,7 @@ class WeatherApplet extends TextIconApplet {
 
   // Applet Overrides
   private update_label_visible(): void {
-    if (this.orientation == StSide.LEFT || this.orientation == StSide.RIGHT)
+    if (this.orientation == Side.LEFT || this.orientation == Side.RIGHT)
       this.hide_applet_label(true);
     else
       this.hide_applet_label(false);

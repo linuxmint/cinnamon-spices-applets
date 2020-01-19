@@ -8,31 +8,17 @@ function importModule(path) {
         return AppletDir[path];
     }
 }
-const LinearGradient = imports.cairo.LinearGradient;
+const { LinearGradient } = imports.cairo;
 const Lang = imports.lang;
 const keybindingManager = imports.ui.main.keybindingManager;
-const Mainloop = imports.mainloop;
-const SoupMessage = imports.gi.Soup.Message;
-const Session = imports.gi.Soup.Session;
-const ProxyResolverDefault = imports.gi.Soup.ProxyResolverDefault;
-const SessionAsync = imports.gi.Soup.SessionAsync;
-const Bin = imports.gi.St.Bin;
-const DrawingArea = imports.gi.St.DrawingArea;
-const BoxLayout = imports.gi.St.BoxLayout;
-const StSide = imports.gi.St.Side;
-const IconType = imports.gi.St.IconType;
-const Label = imports.gi.St.Label;
-const Icon = imports.gi.St.Icon;
-const Button = imports.gi.St.Button;
-const get_language_names = imports.gi.GLib.get_language_names;
-const TextIconApplet = imports.ui.applet.TextIconApplet;
-const AllowedLayout = imports.ui.applet.AllowedLayout;
-const AppletPopupMenu = imports.ui.applet.AppletPopupMenu;
-const AppletMenuItem = imports.ui.applet.MenuItem;
-const PopupMenuManager = imports.ui.popupMenu.PopupMenuManager;
-const AppletSettings = imports.ui.settings.AppletSettings;
-const SettingBindingDirection = imports.ui.settings.BindingDirection;
-const spawnCommandLine = imports.misc.util.spawnCommandLine;
+const { timeout_add_seconds } = imports.mainloop;
+const { Message, Session, ProxyResolverDefault, SessionAsync } = imports.gi.Soup;
+const { Bin, DrawingArea, BoxLayout, Side, IconType, Label, Icon, Button } = imports.gi.St;
+const { get_language_names } = imports.gi.GLib;
+const { TextIconApplet, AllowedLayout, AppletPopupMenu, MenuItem } = imports.ui.applet;
+const { PopupMenuManager } = imports.ui.popupMenu;
+const { AppletSettings, BindingDirection } = imports.ui.settings;
+const { spawnCommandLine } = imports.misc.util;
 var utils = importModule("utils");
 var GetDayName = utils.GetDayName;
 var GetHoursMinutes = utils.GetHoursMinutes;
@@ -209,10 +195,10 @@ class WeatherApplet extends TextIconApplet {
         for (let k in KEYS) {
             let key = KEYS[k];
             let keyProp = "_" + key;
-            this.settings.bindProperty(SettingBindingDirection.IN, key, keyProp, this.refreshAndRebuild, null);
+            this.settings.bindProperty(BindingDirection.IN, key, keyProp, this.refreshAndRebuild, null);
         }
-        this.settings.bindProperty(SettingBindingDirection.BIDIRECTIONAL, WEATHER_LOCATION, ("_" + WEATHER_LOCATION), this.refreshAndRebuild, null);
-        this.settings.bindProperty(SettingBindingDirection.IN, "keybinding", "keybinding", this._onKeySettingsUpdated, null);
+        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, WEATHER_LOCATION, ("_" + WEATHER_LOCATION), this.refreshAndRebuild, null);
+        this.settings.bindProperty(BindingDirection.IN, "keybinding", "keybinding", this._onKeySettingsUpdated, null);
         keybindingManager.addHotKey(UUID, this.keybinding, Lang.bind(this, this.on_applet_clicked));
         this.updateIconType();
         this.settings.connect(SIGNAL_CHANGED + WEATHER_USE_SYMBOLIC_ICONS_KEY, Lang.bind(this, function () {
@@ -227,7 +213,7 @@ class WeatherApplet extends TextIconApplet {
     }
     AddRefreshButton() {
         let itemLabel = _("Refresh");
-        let refreshMenuItem = new AppletMenuItem(itemLabel, REFRESH_ICON, Lang.bind(this, function () {
+        let refreshMenuItem = new MenuItem(itemLabel, REFRESH_ICON, Lang.bind(this, function () {
             this.refreshAndRebuild();
         }));
         this._applet_context_menu.addMenuItem(refreshMenuItem);
@@ -251,7 +237,7 @@ class WeatherApplet extends TextIconApplet {
     ;
     async LoadJsonAsync(query) {
         let json = await new Promise((resolve, reject) => {
-            let message = SoupMessage.new('GET', query);
+            let message = Message.new('GET', query);
             this._httpSession.queue_message(message, (session, message) => {
                 if (!message)
                     reject({ code: 0, message: "no network response", reason_phrase: "no network response" });
@@ -314,14 +300,14 @@ class WeatherApplet extends TextIconApplet {
             this.log.Error("Error in Main loop: " + e);
             this.encounteredError = true;
         }
-        Mainloop.timeout_add_seconds(loopInterval, Lang.bind(this, function mainloopTimeout() {
+        timeout_add_seconds(loopInterval, Lang.bind(this, function mainloopTimeout() {
             this.RefreshLoop();
         }));
         this.lock = false;
     }
     ;
     update_label_visible() {
-        if (this.orientation == StSide.LEFT || this.orientation == StSide.RIGHT)
+        if (this.orientation == Side.LEFT || this.orientation == Side.RIGHT)
             this.hide_applet_label(true);
         else
             this.hide_applet_label(false);

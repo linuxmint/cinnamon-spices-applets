@@ -261,6 +261,11 @@ declare namespace imports.ui.appletManager {
 }
 
 declare namespace imports.mainloop {
+    /**
+     * Calls callback function after given seconds
+     * @param seconds 
+     * @param binding 
+     */
     export function timeout_add_seconds(seconds: number, binding: () => any): void;
     export function timeout_add(milliseconds: number, binding: () => any, errorCallback: () => null): void;
     export function source_remove(id: any): void;

@@ -60,27 +60,13 @@ function importModule(path) {
 var LinearGradient = imports.cairo.LinearGradient;
 var Lang = imports.lang;
 var keybindingManager = imports.ui.main.keybindingManager;
-var Mainloop = imports.mainloop;
-var SoupMessage = imports.gi.Soup.Message;
-var Session = imports.gi.Soup.Session;
-var ProxyResolverDefault = imports.gi.Soup.ProxyResolverDefault;
-var SessionAsync = imports.gi.Soup.SessionAsync;
-var Bin = imports.gi.St.Bin;
-var DrawingArea = imports.gi.St.DrawingArea;
-var BoxLayout = imports.gi.St.BoxLayout;
-var StSide = imports.gi.St.Side;
-var IconType = imports.gi.St.IconType;
-var Label = imports.gi.St.Label;
-var Icon = imports.gi.St.Icon;
-var Button = imports.gi.St.Button;
+var timeout_add_seconds = imports.mainloop.timeout_add_seconds;
+var _a = imports.gi.Soup, Message = _a.Message, Session = _a.Session, ProxyResolverDefault = _a.ProxyResolverDefault, SessionAsync = _a.SessionAsync;
+var _b = imports.gi.St, Bin = _b.Bin, DrawingArea = _b.DrawingArea, BoxLayout = _b.BoxLayout, Side = _b.Side, IconType = _b.IconType, Label = _b.Label, Icon = _b.Icon, Button = _b.Button;
 var get_language_names = imports.gi.GLib.get_language_names;
-var TextIconApplet = imports.ui.applet.TextIconApplet;
-var AllowedLayout = imports.ui.applet.AllowedLayout;
-var AppletPopupMenu = imports.ui.applet.AppletPopupMenu;
-var AppletMenuItem = imports.ui.applet.MenuItem;
+var _c = imports.ui.applet, TextIconApplet = _c.TextIconApplet, AllowedLayout = _c.AllowedLayout, AppletPopupMenu = _c.AppletPopupMenu, MenuItem = _c.MenuItem;
 var PopupMenuManager = imports.ui.popupMenu.PopupMenuManager;
-var AppletSettings = imports.ui.settings.AppletSettings;
-var SettingBindingDirection = imports.ui.settings.BindingDirection;
+var _d = imports.ui.settings, AppletSettings = _d.AppletSettings, BindingDirection = _d.BindingDirection;
 var spawnCommandLine = imports.misc.util.spawnCommandLine;
 var utils = importModule("utils");
 var GetDayName = utils.GetDayName;
@@ -260,10 +246,10 @@ var WeatherApplet = (function (_super) {
         for (var k in KEYS) {
             var key = KEYS[k];
             var keyProp = "_" + key;
-            this.settings.bindProperty(SettingBindingDirection.IN, key, keyProp, this.refreshAndRebuild, null);
+            this.settings.bindProperty(BindingDirection.IN, key, keyProp, this.refreshAndRebuild, null);
         }
-        this.settings.bindProperty(SettingBindingDirection.BIDIRECTIONAL, WEATHER_LOCATION, ("_" + WEATHER_LOCATION), this.refreshAndRebuild, null);
-        this.settings.bindProperty(SettingBindingDirection.IN, "keybinding", "keybinding", this._onKeySettingsUpdated, null);
+        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, WEATHER_LOCATION, ("_" + WEATHER_LOCATION), this.refreshAndRebuild, null);
+        this.settings.bindProperty(BindingDirection.IN, "keybinding", "keybinding", this._onKeySettingsUpdated, null);
         keybindingManager.addHotKey(UUID, this.keybinding, Lang.bind(this, this.on_applet_clicked));
         this.updateIconType();
         this.settings.connect(SIGNAL_CHANGED + WEATHER_USE_SYMBOLIC_ICONS_KEY, Lang.bind(this, function () {
@@ -278,7 +264,7 @@ var WeatherApplet = (function (_super) {
     };
     WeatherApplet.prototype.AddRefreshButton = function () {
         var itemLabel = _("Refresh");
-        var refreshMenuItem = new AppletMenuItem(itemLabel, REFRESH_ICON, Lang.bind(this, function () {
+        var refreshMenuItem = new MenuItem(itemLabel, REFRESH_ICON, Lang.bind(this, function () {
             this.refreshAndRebuild();
         }));
         this._applet_context_menu.addMenuItem(refreshMenuItem);
@@ -307,7 +293,7 @@ var WeatherApplet = (function (_super) {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4, new Promise(function (resolve, reject) {
-                            var message = SoupMessage.new('GET', query);
+                            var message = Message.new('GET', query);
                             _this._httpSession.queue_message(message, function (session, message) {
                                 if (!message)
                                     reject({ code: 0, message: "no network response", reason_phrase: "no network response" });
@@ -392,7 +378,7 @@ var WeatherApplet = (function (_super) {
                         this.encounteredError = true;
                         return [3, 5];
                     case 5:
-                        Mainloop.timeout_add_seconds(loopInterval, Lang.bind(this, function mainloopTimeout() {
+                        timeout_add_seconds(loopInterval, Lang.bind(this, function mainloopTimeout() {
                             this.RefreshLoop();
                         }));
                         this.lock = false;
@@ -403,7 +389,7 @@ var WeatherApplet = (function (_super) {
     };
     ;
     WeatherApplet.prototype.update_label_visible = function () {
-        if (this.orientation == StSide.LEFT || this.orientation == StSide.RIGHT)
+        if (this.orientation == Side.LEFT || this.orientation == Side.RIGHT)
             this.hide_applet_label(true);
         else
             this.hide_applet_label(false);
