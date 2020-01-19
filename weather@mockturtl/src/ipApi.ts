@@ -7,7 +7,7 @@
 //////////////////////////////////////////////////////////////
 
 class IpApi {
-    query = "http://http://ip-api.com/json/?fields=status,message,country,countryCode,city,lat,lon,timezone,mobile,query";
+    query = "http://ip-api.com/json/?fields=status,message,country,countryCode,city,lat,lon,timezone,mobile,query";
     app: WeatherApplet;
 
 
