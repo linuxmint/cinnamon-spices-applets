@@ -1149,11 +1149,12 @@ class Log {
     this.debug = this.DEBUG();
   }
 
-  private DEBUG() {
+  private DEBUG(): boolean {
     let path = this.appletDir + "/../DEBUG";
     let _debug = imports.gi.Gio.file_new_for_path(path);
-    this.Print("DEBUG file found in " + path + ", enabling Debug mode");
-    return _debug.query_exists(null);
+    let result = _debug.query_exists(null);
+    if (result) this.Print("DEBUG file found in " + path + ", enabling Debug mode");
+    return result;
   };
 
   Print(message: string): void {
@@ -1391,7 +1392,8 @@ interface LocationData {
   lon: number,
   city: string,
   country: string,
-  timeZone: string
+  timeZone: string,
+  mobile: boolean
 }
 
 /** 

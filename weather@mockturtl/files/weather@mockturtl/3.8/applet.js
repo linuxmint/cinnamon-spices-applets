@@ -843,8 +843,10 @@ class Log {
     DEBUG() {
         let path = this.appletDir + "/../DEBUG";
         let _debug = imports.gi.Gio.file_new_for_path(path);
-        this.Print("DEBUG file found in " + path + ", enabling Debug mode");
-        return _debug.query_exists(null);
+        let result = _debug.query_exists(null);
+        if (result)
+            this.Print("DEBUG file found in " + path + ", enabling Debug mode");
+        return result;
     }
     ;
     Print(message) {

@@ -959,8 +959,10 @@ var Log = (function () {
     Log.prototype.DEBUG = function () {
         var path = this.appletDir + "/../DEBUG";
         var _debug = imports.gi.Gio.file_new_for_path(path);
-        this.Print("DEBUG file found in " + path + ", enabling Debug mode");
-        return _debug.query_exists(null);
+        var result = _debug.query_exists(null);
+        if (result)
+            this.Print("DEBUG file found in " + path + ", enabling Debug mode");
+        return result;
     };
     ;
     Log.prototype.Print = function (message) {

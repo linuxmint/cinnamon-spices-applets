@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var IpApi = (function () {
     function IpApi(_app) {
-        this.query = "https://ipapi.co/json";
+        this.query = "http://http://ip-api.com/json/?fields=status,message,country,countryCode,city,lat,lon,timezone,mobile,query";
         this.app = _app;
     }
     IpApi.prototype.GetLocation = function () {
@@ -59,7 +59,7 @@ var IpApi = (function () {
                             this.app.HandleError({ type: "soft", detail: "no api response" });
                             return [2, null];
                         }
-                        if (json.error) {
+                        if (json.status != "success") {
                             this.HandleErrorResponse(json);
                             return [2, null];
                         }
@@ -72,13 +72,14 @@ var IpApi = (function () {
     IpApi.prototype.ParseInformation = function (json) {
         try {
             var result = {
-                lat: json.latitude,
-                lon: json.longitude,
+                lat: json.lat,
+                lon: json.lon,
                 city: json.city,
                 country: json.country,
-                timeZone: json.timezone
+                timeZone: json.timezone,
+                mobile: json.mobile
             };
-            this.app.log.Debug("Location obtained:" + json.latitude + "," + json.longitude);
+            this.app.log.Debug("Location obtained:" + json.lat + "," + json.lon);
             this.app.log.Debug("Location setting is now: " + this.app._location);
             return result;
         }
