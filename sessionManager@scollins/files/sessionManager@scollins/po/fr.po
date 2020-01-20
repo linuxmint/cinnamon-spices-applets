@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-02-13 23:47+0100\n"
-"PO-Revision-Date: 2019-09-01 18:14+0200\n"
-"Last-Translator: Claude CLERC <claude.clerc@gmail.com>\n"
+"PO-Revision-Date: 2020-01-20 02:45+0100\n"
+"Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: \n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -20,7 +20,7 @@ msgstr ""
 
 #: applet.js:159
 msgid "Session"
-msgstr ""
+msgstr "Session"
 
 #: applet.js:226
 msgid "Lock Screen"
@@ -40,7 +40,7 @@ msgstr "Fermer la session"
 
 #: applet.js:246
 msgid "Suspend"
-msgstr "Éteindre l'écran"
+msgstr "Suspendre toute activité"
 
 #: applet.js:251
 msgid "Sleep"
@@ -100,14 +100,14 @@ msgid ""
 "submit a feature request on github, and I will add it at my earliest "
 "convenience."
 msgstr ""
-"Session Manager est une applet qui fournit un accès facile aux contrôles de "
-"session tels que l'arrêt, le redémarrage, la déconnexion, le changement "
-"d'utilisateur, etc. Il a été testé dans Arch, Fedora et Linux Mint et "
-"supporte une grande variété de configurations logicielles. Si votre "
-"configuration particulière n'est pas supportée, veuillez soumettre une "
-"demande de fonctionnalité sur github, et je l'ajouterai dans les meilleurs "
-"délais."
+"Session Manager (Gestionnaire de session) est une applet qui fournit un "
+"accès facile aux contrôles de session tels que l'arrêt, le redémarrage, la "
+"déconnexion, le changement d'utilisateur, etc. Il a été testé dans Arch, "
+"Fedora et Linux Mint et supporte une grande variété de configurations "
+"logicielles. Si votre configuration particulière n'est pas supportée, "
+"veuillez soumettre une demande de fonctionnalité sur Github, et je "
+"l'ajouterai dans les meilleurs délais."
 
 #. sessionManager@scollins->metadata.json->name
 msgid "Session Manager"
-msgstr ""
+msgstr "Session Manager (Gestionnaire de session)"
