@@ -3,5 +3,5 @@
 "name": "SSH Launcher",
 "description": "An applet to connect to SSH hosts configured in ~/.ssh/config",
 "icon": "network",
-"version": "0.1.0"
+"version": "0.1.1"
 }
