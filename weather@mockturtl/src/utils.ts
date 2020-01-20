@@ -1,9 +1,9 @@
 export {}; // Declaring as a Module
 
-var Mainloop = imports.mainloop;
-const Cinnamon = imports.gi.Cinnamon;
-const St = imports.gi.St;
-const Gtk = imports.gi.Gtk;
+var { timeout_add, source_remove } = imports.mainloop;
+const { util_format_date } = imports.gi.Cinnamon;
+const { IconType } = imports.gi.St;
+const { IconTheme } = imports.gi.Gtk;
 
 var setTimeout = function(func: any, ms: number) {
   let args: any[] = [];
@@ -11,7 +11,7 @@ var setTimeout = function(func: any, ms: number) {
     args = args.slice.call(arguments, 2);
   }
 
-  let id = Mainloop.timeout_add(ms, () => {
+  let id = timeout_add(ms, () => {
     func.apply(null, args);
     return false; // Stop repeating
   }, null);
@@ -28,7 +28,7 @@ var delay = async function(ms: number) : Promise<void> {
 }
 
 const clearTimeout = function(id: any) {
-  Mainloop.source_remove(id);
+  source_remove(id);
 };
 
 const setInterval = function(func: any, ms: number) {
@@ -37,7 +37,7 @@ const setInterval = function(func: any, ms: number) {
     args = args.slice.call(arguments, 2);
   }
 
-  let id = Mainloop.timeout_add(ms, () => {
+  let id = timeout_add(ms, () => {
     func.apply(null, args);
     return true; // Repeat
   }, null);
@@ -46,7 +46,7 @@ const setInterval = function(func: any, ms: number) {
 };
 
 const clearInterval = function(id: any) {
-  Mainloop.source_remove(id);
+  source_remove(id);
 };
 
 var isLocaleStringSupported = function(): localeStringSupport {
@@ -127,7 +127,7 @@ var getDayName = function(dayNum: number): string {
 
 // Takes Time in %H:%M string format
 var timeToUserUnits = function(date: Date, show24Hours: boolean) {
-    let timeStr = Cinnamon.util_format_date('%H:%M', date.getTime());
+    let timeStr = util_format_date('%H:%M', date.getTime());
     let time = timeStr.split(':');
     //Remove Leading 0
     if (time[0].charAt(0) == "0") {
@@ -295,5 +295,5 @@ var weatherIconSafely = function (code: string[], icon_type: string): string {
   }
 
 var hasIcon = function (icon: string, icon_type: string): boolean {
-    return Gtk.IconTheme.get_default().has_icon(icon + (icon_type == St.IconType.SYMBOLIC ? '-symbolic' : ''))
-  }
+  return IconTheme.get_default().has_icon(icon + (icon_type == IconType.SYMBOLIC ? '-symbolic' : ''))
+}

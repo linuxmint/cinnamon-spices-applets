@@ -1,4 +1,3 @@
-const DEBUG = false;
 /**
  * @param path Filename without extension
  */
@@ -15,32 +14,25 @@ function importModule(path: string): any {
  * /usr/share/gjs-1.0/
  * /usr/share/gnome-js/
  */
-const Cairo: typeof imports.cairo = imports.cairo;
+const { LinearGradient } = imports.cairo;
 const Lang: typeof imports.lang = imports.lang;
 // http://developer.gnome.org/glib/unstable/glib-The-Main-Event-Loop.html
-const Main: typeof imports.ui.main = imports.ui.main;
-var Mainloop: typeof imports.mainloop = imports.mainloop;
-/**
- * /usr/share/gjs-1.0/overrides/
- * /usr/share/gir-1.0/
- * /usr/lib/cinnamon/
- */
-const Gio: typeof imports.gi.Gio = imports.gi.Gio;
+//const Main: typeof imports.ui.main = imports.ui.main;
+const keybindingManager = imports.ui.main.keybindingManager;
+
+const { timeout_add_seconds } = imports.mainloop;
 // http://developer.gnome.org/libsoup/stable/libsoup-client-howto.html
-const Soup: typeof imports.gi.Soup = imports.gi.Soup;
+//const Soup: typeof imports.gi.Soup = imports.gi.Soup;
+const { Message, Session, ProxyResolverDefault, SessionAsync } = imports.gi.Soup;
 // http://developer.gnome.org/st/stable/
-const St: typeof imports.gi.St = imports.gi.St;
-const GLib: typeof imports.gi.GLib = imports.gi.GLib
-const GObject: typeof imports.gi.GObject = imports.gi.GObject;
-const Gettext: typeof imports.gettext = imports.gettext;
-const Gtk: typeof imports.gi.Gtk = imports.gi.Gtk;
-/**
- * /usr/share/cinnamon/js/
- */
-const Applet: typeof imports.ui.applet = imports.ui.applet;
-const PopupMenu: typeof imports.ui.popupMenu = imports.ui.popupMenu;
-const Settings: typeof imports.ui.settings = imports.ui.settings;
-const Util: typeof imports.misc.util = imports.misc.util;
+//const St: typeof imports.gi.St = imports.gi.St;
+const { Bin, DrawingArea, BoxLayout, Side, IconType, Label, Icon, Button } = imports.gi.St;
+const { get_language_names } = imports.gi.GLib;
+// * /usr/share/cinnamon/js/
+const { TextIconApplet, AllowedLayout, AppletPopupMenu, MenuItem} = imports.ui.applet;
+const { PopupMenuManager } = imports.ui.popupMenu;
+const { AppletSettings, BindingDirection } = imports.ui.settings;
+const { spawnCommandLine } = imports.misc.util;
 
 var utils = importModule("utils");
 var GetDayName = utils.GetDayName as (date: Date, locale:string, tz?: string) => string;
@@ -147,12 +139,12 @@ const KEYS: SettingKeys  =  {
 //
 //----------------------------------------------------------------------
 
-Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
+imports.gettext.bindtextdomain(UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
 function _(str: string): string {
-  return Gettext.dgettext(UUID, str)
+  return imports.gettext.dgettext(UUID, str)
 }
 
-class WeatherApplet extends Applet.TextIconApplet {
+class WeatherApplet extends TextIconApplet {
   /** Stores all weather information */
   private weather: Weather = {
     date: null, // Date object, UTC
@@ -241,7 +233,7 @@ class WeatherApplet extends Applet.TextIconApplet {
   private menuManager: any;
   private settings: any;
   // Soup session (see https://bugzilla.gnome.org/show_bug.cgi?id=661323#c64)
-  private _httpSession = new Soup.SessionAsync();
+  private _httpSession = new SessionAsync();
   private appletDir = imports.ui.appletManager.appletMeta[UUID].path;
 
   private provider: WeatherProvider; // API
@@ -269,14 +261,14 @@ class WeatherApplet extends Applet.TextIconApplet {
 
   public constructor(metadata: any, orientation: any, panelHeight: number, instanceId: number) {
     super(orientation, panelHeight, instanceId);
-    this.currentLocale = this.constructJsLocale(GLib.get_language_names()[0]);
+    this.currentLocale = this.constructJsLocale(get_language_names()[0]);
     this.systemLanguage = this.currentLocale.split('-')[0];
-    this.settings = new Settings.AppletSettings(this, UUID, instanceId)
+    this.settings = new AppletSettings(this, UUID, instanceId)
     this.log = new Log(instanceId);
     this._httpSession.user_agent = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:37.0) Gecko/20100101 Firefox/37.0"; // ipapi blocks non-browsers agents, imitating browser
-    Soup.Session.prototype.add_feature.call(this._httpSession, new Soup.ProxyResolverDefault());
+    Session.prototype.add_feature.call(this._httpSession, new ProxyResolverDefault());
     // Manually add the icons to the icontheme - only one icons folder
-    Gtk.IconTheme.get_default().append_search_path(this.appletDir + "/../icons");
+    imports.gi.Gtk.IconTheme.get_default().append_search_path(this.appletDir + "/../icons");
 
     this.SetAppletOnPanel(); 
     this.AddPopupMenu(orientation);
@@ -292,7 +284,7 @@ class WeatherApplet extends Applet.TextIconApplet {
 
     this.orientation = orientation;
     try {
-      this.setAllowedLayout(Applet.AllowedLayout.BOTH);
+      this.setAllowedLayout(AllowedLayout.BOTH);
       this.update_label_visible();
     } catch (e) {
       // vertical panel not supported
@@ -306,8 +298,8 @@ class WeatherApplet extends Applet.TextIconApplet {
   }
 
   private AddPopupMenu(orientation: any) {
-    this.menuManager = new PopupMenu.PopupMenuManager(this);
-    this.menu = new Applet.AppletPopupMenu(this, orientation)
+    this.menuManager = new PopupMenuManager(this);
+    this.menu = new AppletPopupMenu(this, orientation)
     if (typeof this.menu.setCustomStyleClass === "function")
       this.menu.setCustomStyleClass(STYLE_WEATHER_MENU);
     else
@@ -322,18 +314,18 @@ class WeatherApplet extends Applet.TextIconApplet {
     for (let k in KEYS) {
       let key = KEYS[k];
       let keyProp = "_" + key;
-      this.settings.bindProperty(Settings.BindingDirection.IN,
+      this.settings.bindProperty(BindingDirection.IN,
         key, keyProp, this.refreshAndRebuild, null);
     }
 
     // Settings what need special care
-    this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL,
+    this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
       WEATHER_LOCATION, ("_" + WEATHER_LOCATION), this.refreshAndRebuild, null);
 
-    this.settings.bindProperty(Settings.BindingDirection.IN, "keybinding",
+    this.settings.bindProperty(BindingDirection.IN, "keybinding",
       "keybinding", this._onKeySettingsUpdated, null);
 
-    Main.keybindingManager.addHotKey(
+    keybindingManager.addHotKey(
       UUID, this.keybinding, Lang.bind(this, this.on_applet_clicked));
 
     this.updateIconType()
@@ -352,7 +344,7 @@ class WeatherApplet extends Applet.TextIconApplet {
   /** Into context menu */
   private AddRefreshButton(): void {
      let itemLabel = _("Refresh")
-     let refreshMenuItem = new Applet.MenuItem(itemLabel, REFRESH_ICON, Lang.bind(this, function () {
+     let refreshMenuItem = new MenuItem(itemLabel, REFRESH_ICON, Lang.bind(this, function () {
        this.refreshAndRebuild();
      }))
      this._applet_context_menu.addMenuItem(refreshMenuItem);
@@ -360,15 +352,15 @@ class WeatherApplet extends Applet.TextIconApplet {
 
   private BuildPopupMenu(): void {
     //  today's forecast
-    this._currentWeather = new St.Bin({ style_class: STYLE_CURRENT });
+    this._currentWeather = new Bin({ style_class: STYLE_CURRENT });
     //  tomorrow's forecast
-    this._futureWeather = new St.Bin({ style_class: STYLE_FORECAST });
+    this._futureWeather = new Bin({ style_class: STYLE_FORECAST });
     //  horizontal rule
-    this._separatorArea = new St.DrawingArea({ style_class: STYLE_POPUP_SEPARATOR_MENU_ITEM });
+    this._separatorArea = new DrawingArea({ style_class: STYLE_POPUP_SEPARATOR_MENU_ITEM });
     this._separatorArea.width = 200
     this._separatorArea.connect(SIGNAL_REPAINT, Lang.bind(this, this._onSeparatorAreaRepaint))
     // build menu
-    let mainBox = new St.BoxLayout({ vertical: true })
+    let mainBox = new BoxLayout({ vertical: true })
 
     mainBox.add_actor(this._currentWeather)
     mainBox.add_actor(this._separatorArea)
@@ -388,7 +380,7 @@ class WeatherApplet extends Applet.TextIconApplet {
    */
   public async LoadJsonAsync(query: string): Promise <any> {
     let json = await new Promise((resolve: any, reject: any) => {
-      let message = Soup.Message.new('GET', query);
+      let message = Message.new('GET', query);
       this._httpSession.queue_message(message, (session: any, message: any) => {
 
         if (!message) 
@@ -418,7 +410,7 @@ class WeatherApplet extends Applet.TextIconApplet {
 
   private async locationLookup(): Promise < void > {
     let command = "xdg-open ";
-    Util.spawnCommandLine(command + "https://cinnamon-spices.linuxmint.com/applets/view/17");
+    spawnCommandLine(command + "https://cinnamon-spices.linuxmint.com/applets/view/17");
   }
 
   private IsDataTooOld(): boolean {
@@ -457,7 +449,7 @@ class WeatherApplet extends Applet.TextIconApplet {
       this.log.Error("Error in Main loop: " + e);
       this.encounteredError = true;
     }
-    Mainloop.timeout_add_seconds(loopInterval, Lang.bind(this, function mainloopTimeout() {
+    timeout_add_seconds(loopInterval, Lang.bind(this, function mainloopTimeout() {
       this.RefreshLoop();
     }))
     this.lock = false;
@@ -465,7 +457,7 @@ class WeatherApplet extends Applet.TextIconApplet {
 
   // Applet Overrides
   private update_label_visible(): void {
-    if (this.orientation == St.Side.LEFT || this.orientation == St.Side.RIGHT)
+    if (this.orientation == Side.LEFT || this.orientation == Side.RIGHT)
       this.hide_applet_label(true);
     else
       this.hide_applet_label(false);
@@ -478,7 +470,7 @@ class WeatherApplet extends Applet.TextIconApplet {
 
   private _onKeySettingsUpdated(): void {
     if (this.keybinding != null) {
-      Main.keybindingManager.addHotKey(UUID,
+      keybindingManager.addHotKey(UUID,
         this.keybinding,
         Lang.bind(this,
           this.on_applet_clicked))
@@ -499,7 +491,7 @@ class WeatherApplet extends Applet.TextIconApplet {
     let endColor = themeNode.get_color('-gradient-end')
     let gradientWidth = (width - margin * 2)
     let gradientOffset = (height - gradientHeight) / 2
-    let pattern = new Cairo.LinearGradient(margin, gradientOffset, width - margin, gradientOffset + gradientHeight)
+    let pattern = new LinearGradient(margin, gradientOffset, width - margin, gradientOffset + gradientHeight)
     pattern.addColorStopRGBA(0, startColor.red / 255, startColor.green / 255, startColor.blue / 255, startColor.alpha / 255)
     pattern.addColorStopRGBA(0.5, endColor.red / 255, endColor.green / 255, endColor.blue / 255, endColor.alpha / 255)
     pattern.addColorStopRGBA(1, startColor.red / 255, startColor.green / 255, startColor.blue / 255, startColor.alpha / 255)
@@ -524,8 +516,8 @@ class WeatherApplet extends Applet.TextIconApplet {
 
   private updateIconType(): void {
     this._icon_type = this.settings.getValue(WEATHER_USE_SYMBOLIC_ICONS_KEY) ?
-      St.IconType.SYMBOLIC :
-      St.IconType.FULLCOLOR
+      IconType.SYMBOLIC :
+      IconType.FULLCOLOR
   };
 
   private constructJsLocale(locale: string): string {
@@ -698,7 +690,7 @@ class WeatherApplet extends Applet.TextIconApplet {
         iconname = "weather-severe-alert";
       }
       this._currentWeatherIcon.icon_name = iconname;
-      this._icon_type == St.IconType.SYMBOLIC ?
+      this._icon_type == IconType.SYMBOLIC ?
         this.set_applet_icon_symbolic_name(iconname) :
         this.set_applet_icon_name(iconname)
       if (this._useCustomAppletIcons) this.SetCustomIcon(this.weather.condition.customIcon);
@@ -876,10 +868,10 @@ class WeatherApplet extends Applet.TextIconApplet {
   private showLoadingUi(): void {
     this.destroyCurrentWeather()
     this.destroyFutureWeather()
-    this._currentWeather.set_child(new St.Label({
+    this._currentWeather.set_child(new Label({
       text: _('Loading current weather ...')
     }))
-    this._futureWeather.set_child(new St.Label({
+    this._futureWeather.set_child(new Label({
       text: _('Loading future weather ...')
     }))
   }
@@ -898,7 +890,7 @@ class WeatherApplet extends Applet.TextIconApplet {
     }
 
     // This will hold the icon for the current weather
-    this._currentWeatherIcon = new St.Icon({
+    this._currentWeatherIcon = new Icon({
       icon_type: this._icon_type,
       icon_size: 64,
       icon_name: APPLET_ICON,
@@ -906,52 +898,52 @@ class WeatherApplet extends Applet.TextIconApplet {
     })
 
     // Current Weather Middle Column
-    this._currentWeatherLocation = new St.Button({ reactive: true, label: _('Refresh'), });
+    this._currentWeatherLocation = new Button({ reactive: true, label: _('Refresh'), });
     this._currentWeatherLocation.style_class = STYLE_LOCATION_LINK;
     this._currentWeatherLocation.connect(SIGNAL_CLICKED, Lang.bind(this, function () {
       if (this._currentWeatherLocation.url == null) {
         this.refreshWeather();
       } else {
-        Gio.app_info_launch_default_for_uri(
+        imports.gi.Gio.app_info_launch_default_for_uri(
           this._currentWeatherLocation.url,
           global.create_app_launch_context()
         )
       }
     }));
 
-    this._currentWeatherSummary = new St.Label({ text: _('Loading ...'), style_class: STYLE_SUMMARY })
+    this._currentWeatherSummary = new Label({ text: _('Loading ...'), style_class: STYLE_SUMMARY })
 
-    this._currentWeatherSunrise = new St.Label(textOb)
-    this._currentWeatherSunset = new St.Label(textOb)
-    let ab_spacerlabel = new St.Label({ text: BLANK })
-    let bb_spacerlabel = new St.Label({ text: BLANK })
+    this._currentWeatherSunrise = new Label(textOb)
+    this._currentWeatherSunset = new Label(textOb)
+    let ab_spacerlabel = new Label({ text: BLANK })
+    let bb_spacerlabel = new Label({ text: BLANK })
 
-    let sunBox = new St.BoxLayout({ style_class: STYLE_ASTRONOMY })
+    let sunBox = new BoxLayout({ style_class: STYLE_ASTRONOMY })
     sunBox.add_actor(this._currentWeatherSunrise)
     sunBox.add_actor(ab_spacerlabel)
     sunBox.add_actor(this._currentWeatherSunset)
 
-    let middleColumn = new St.BoxLayout({ vertical: true, style_class: STYLE_SUMMARYBOX })
+    let middleColumn = new BoxLayout({ vertical: true, style_class: STYLE_SUMMARYBOX })
     middleColumn.add_actor(this._currentWeatherLocation)
     middleColumn.add_actor(this._currentWeatherSummary)
     middleColumn.add_actor(bb_spacerlabel)
     middleColumn.add_actor(sunBox)
 
     // Current Weather Right Column
-    this._currentWeatherTemperature = new St.Label(textOb)
-    this._currentWeatherHumidity = new St.Label(textOb)
-    this._currentWeatherPressure = new St.Label(textOb)
-    this._currentWeatherWind = new St.Label(textOb)
-    this._currentWeatherApiUnique = new St.Label({ text: '' })
+    this._currentWeatherTemperature = new Label(textOb)
+    this._currentWeatherHumidity = new Label(textOb)
+    this._currentWeatherPressure = new Label(textOb)
+    this._currentWeatherWind = new Label(textOb)
+    this._currentWeatherApiUnique = new Label({ text: '' })
     // APi Unique Caption
-    this._currentWeatherApiUniqueCap = new St.Label({ text: '' });
+    this._currentWeatherApiUniqueCap = new Label({ text: '' });
 
-    let rb_captions = new St.BoxLayout({ vertical: true, style_class: STYLE_DATABOX_CAPTIONS })
-    let rb_values = new St.BoxLayout({vertical: true, style_class: STYLE_DATABOX_VALUES })
-    rb_captions.add_actor(new St.Label({ text: _('Temperature:') }));
-    rb_captions.add_actor(new St.Label({ text: _('Humidity:') }));
-    rb_captions.add_actor(new St.Label({ text: _('Pressure:') }));
-    rb_captions.add_actor(new St.Label({ text: _('Wind:') }));
+    let rb_captions = new BoxLayout({ vertical: true, style_class: STYLE_DATABOX_CAPTIONS })
+    let rb_values = new BoxLayout({vertical: true, style_class: STYLE_DATABOX_VALUES })
+    rb_captions.add_actor(new Label({ text: _('Temperature:') }));
+    rb_captions.add_actor(new Label({ text: _('Humidity:') }));
+    rb_captions.add_actor(new Label({ text: _('Pressure:') }));
+    rb_captions.add_actor(new Label({ text: _('Wind:') }));
     rb_captions.add_actor(this._currentWeatherApiUniqueCap);
     rb_values.add_actor(this._currentWeatherTemperature);
     rb_values.add_actor(this._currentWeatherHumidity);
@@ -959,16 +951,16 @@ class WeatherApplet extends Applet.TextIconApplet {
     rb_values.add_actor(this._currentWeatherWind);
     rb_values.add_actor(this._currentWeatherApiUnique);
 
-    let rightColumn = new St.BoxLayout({ style_class: STYLE_DATABOX });
+    let rightColumn = new BoxLayout({ style_class: STYLE_DATABOX });
     rightColumn.add_actor(rb_captions);
     rightColumn.add_actor(rb_values);
 
     // Current Weather Main Boxes
-    let weatherBox = new St.BoxLayout();
+    let weatherBox = new BoxLayout();
     weatherBox.add_actor(middleColumn)
     weatherBox.add_actor(rightColumn)
 
-    let box = new St.BoxLayout({ style_class: STYLE_ICONBOX })
+    let box = new BoxLayout({ style_class: STYLE_ICONBOX })
     box.add_actor(this._currentWeatherIcon)
     box.add_actor(weatherBox)
     this._currentWeather.set_child(box)
@@ -978,7 +970,7 @@ class WeatherApplet extends Applet.TextIconApplet {
     this.destroyFutureWeather();
 
     this._forecast = []
-    this._forecastBox = new St.BoxLayout({
+    this._forecastBox = new BoxLayout({
       vertical: this._verticalOrientation,
       style_class: STYLE_FORECAST_CONTAINER
     })
@@ -986,29 +978,29 @@ class WeatherApplet extends Applet.TextIconApplet {
 
     for (let i = 0; i < this._forecastDays; i++) {
       let forecastWeather: ForecastUI = {
-        Icon: new St.Icon,
-        Day: new St.Label,
-        Summary: new St.Label,
-        Temperature: new St.Label,
+        Icon: new Icon,
+        Day: new Label,
+        Summary: new Label,
+        Temperature: new Label,
       }
 
-      forecastWeather.Icon = new St.Icon({
+      forecastWeather.Icon = new Icon({
         icon_type: this._icon_type,
         icon_size: 48,
         icon_name: APPLET_ICON,
         style_class: STYLE_FORECAST_ICON
       })
 
-      forecastWeather.Day = new St.Label({ style_class: STYLE_FORECAST_DAY })
-      forecastWeather.Summary = new St.Label({ style_class: STYLE_FORECAST_SUMMARY })
-      forecastWeather.Temperature = new St.Label({ style_class: STYLE_FORECAST_TEMPERATURE })
+      forecastWeather.Day = new Label({ style_class: STYLE_FORECAST_DAY })
+      forecastWeather.Summary = new Label({ style_class: STYLE_FORECAST_SUMMARY })
+      forecastWeather.Temperature = new Label({ style_class: STYLE_FORECAST_TEMPERATURE })
 
-      let dataBox = new St.BoxLayout({ vertical: true, style_class: STYLE_FORECAST_DATABOX })
+      let dataBox = new BoxLayout({ vertical: true, style_class: STYLE_FORECAST_DATABOX })
       dataBox.add_actor(forecastWeather.Day)
       dataBox.add_actor(forecastWeather.Summary)
       dataBox.add_actor(forecastWeather.Temperature)
 
-      let forecastBox = new St.BoxLayout({
+      let forecastBox = new BoxLayout({
         style_class: STYLE_FORECAST_BOX
       })
       forecastBox.add_actor(forecastWeather.Icon)
@@ -1122,16 +1114,26 @@ class WeatherApplet extends Applet.TextIconApplet {
 }
 
 class Log {
-  ID: number;
-  debug: boolean = false;
+  private ID: number;
+  private debug: boolean = false;
+  private appletDir: string;
 
   constructor(_instanceId: number) {
     this.ID = _instanceId;
-    this.debug = DEBUG;
+    this.appletDir = imports.ui.appletManager.appletMeta[UUID].path;
+    this.debug = this.DEBUG();
   }
 
+  private DEBUG(): boolean {
+    let path = this.appletDir + "/../DEBUG";
+    let _debug = imports.gi.Gio.file_new_for_path(path);
+    let result = _debug.query_exists(null);
+    if (result) this.Print("DEBUG file found in " + path + ", enabling Debug mode");
+    return result;
+  };
+
   Print(message: string): void {
-    let msg = UUID + "#" + this.ID + ": " + message.toString();
+    let msg = "[" + UUID + "#" + this.ID + "]: " + message.toString();
     let debug = "";
     if (this.debug) {
       debug = this.GetErrorLine();
@@ -1142,7 +1144,7 @@ class Log {
   }
 
   Error(error: string): void {
-    global.logError(UUID + "#" + this.ID + ": " + error.toString(), '\n', "On Line:", this.GetErrorLine());
+    global.logError("[" + UUID + "#" + this.ID + "]: " + error.toString(), '\n', "On Line:", this.GetErrorLine());
   };
 
   Debug(message: string): void {
@@ -1151,7 +1153,7 @@ class Log {
     }
   }
 
-  GetErrorLine(): string {
+  private GetErrorLine(): string {
     // Couldnt be more ugly, but it returns the file and line number
     let arr = (new Error).stack.split("\n").slice(-2)[0].split('/').slice(-1)[0];
     return arr;
@@ -1365,7 +1367,8 @@ interface LocationData {
   lon: number,
   city: string,
   country: string,
-  timeZone: string
+  timeZone: string,
+  mobile: boolean
 }
 
 /** 

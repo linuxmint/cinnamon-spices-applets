@@ -3,7 +3,7 @@ declare function require(path: string): any;
 declare class global {
     static log(...text: Array < string > ): void;
     static logError(...text: Array < string > ): void;
-    static create_app_launch_context(): void;
+    static create_app_launch_context(): imports.gi.Gio.AppLaunchContext;
 }
 
 declare namespace imports.cairo {
@@ -180,44 +180,12 @@ declare namespace imports.ui.applet {
 
     export class TextIconApplet {
         constructor(orientation: string, panelHeight: number, instanceID: number);
-        /**
-         * @param icon_name  Name of the icon
-         *
-         * Sets the icon of the applet to @icon_name.
-         *
-         * The icon will be full color
-         */
-        protected set_applet_icon_name(icon_name: string): void;
-        /**
-         * @param icon_path path of the icon
-         *
-         * Sets the icon of the applet to the image file at @icon_path
-         *
-         * The icon will be full color
-         */
-        protected set_applet_icon_path(icon_path: string): void;
-        /**
-         * @param icon_path path of the icon
-         *
-         * Sets the icon of the applet to the image file at @icon_path
-         *
-         * The icon will be symbolic
-         */
-        protected set_applet_icon_symbolic_path(icon_path: string): void;
-        /**
-         * @param icon_name Name of the icon
-         *
-         * Sets the icon of the applet to @icon_name.
-         *
-         * The icon will be symbolic
-         */
-        protected set_applet_icon_symbolic_name(icon_name: string): void;
+        protected set_applet_icon_name(text: string): void;
+        protected set_applet_icon_symbolic_name(iconName: string): void;
         protected set_applet_label(text: string): void;
         protected set_applet_tooltip(text: string): void;
         protected setAllowedLayout(text: string): void;
         protected hide_applet_label(hide: boolean): void;
-        protected _applet_icon: any;
-        protected _applet_label: any;
     }
 
     /**
@@ -293,45 +261,16 @@ declare namespace imports.ui.appletManager {
 }
 
 declare namespace imports.mainloop {
+    /**
+     * Calls callback function after given seconds
+     * @param seconds 
+     * @param binding 
+     */
     export function timeout_add_seconds(seconds: number, binding: () => any): void;
     export function timeout_add(milliseconds: number, binding: () => any, errorCallback: () => null): void;
     export function source_remove(id: any): void;
 }
 
-declare namespace imports.gi.Gio {
-    export function app_info_launch_default_for_uri(url: string, context: void): void;
-    export class Cancellable {
-        static new(): Cancellable
-        static is_cancelled(cancellable: Cancellable): boolean;
-    }
-
-
-    export function AsyncReadyCallback(source_object: Object, result: AsyncResult, userData ? : any): void;
-    export class AsyncResult {
-        get_user_data(): any;
-        is_tagged(): boolean;
-        source_object(): Object;
-    }
-}
-declare namespace imports.gi.Gtk {
-    export class IconTheme {
-        static get_default(): Theme;
-    }
-    /** DEPRECATED */
-    export const STOCK_EDIT: any;
-    /** DEPRECATED */
-    export const STOCK_REFRESH: string;
-
-    export class Theme {
-        has_icon(iconName: string): boolean;
-        append_search_path(path: string): void;
-        get_search_path(): string[];
-        set_search_path(path: string[]): void;
-    }
-}
-declare namespace imports.gi.GObject {
-    const placehgolder = "";
-}
 declare namespace imports.gi.Cinnamon {
     function util_format_date(format: string, milliseconds: number): string;
 }
@@ -339,7 +278,7 @@ declare namespace imports.gi.Soup {
     export class SessionAsync {
         user_agent: string;
         queue_message(message: Message, callback: (session: SessionAsync, message: Message) => void): void;
-        send_async(msg: Message, cancellable: any, callback: typeof Gio.AsyncReadyCallback): any;
+        send_async(msg: Message, cancellable: any, callback: Gio.AsyncReadyCallback): any;
         send_finish(result: Gio.AsyncResult, user_data ? : Object): any;
         request(uri_string: string): SoupRequest;
     }
@@ -414,10 +353,6 @@ declare namespace imports.gi.St {
     export const Side: Sides;
     export const IconType: IconTypes;
 }
-declare namespace imports.gi.GLib {
-    export function get_home_dir(): string;
-    export function get_language_names(): Array < string > ;
-}
 
 declare namespace imports.misc.config {
     export const PACKAGE_VERSION: string;
@@ -431,7 +366,6 @@ declare namespace imports.gettext {
 
     function dgettext(UUID: string, text: string): string;
 }
-
 
 declare namespace imports {
     export const lang: any;
