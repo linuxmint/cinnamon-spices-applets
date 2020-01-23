@@ -19,7 +19,8 @@
   , "options":
     { 
       "OpenWeatherMap (no key needed)": "OpenWeatherMap",
-      "DarkSky": "DarkSky"
+      "DarkSky": "DarkSky",
+      "MET Norway (no key needed)": "MetNoway"
     }
   },
   "apiKey":

@@ -69,6 +69,11 @@ const DATA_SERVICE = {
     DARK_SKY: "DarkSky",
     MET_NORWAY: "MetNoway"
 };
+const DATASERVICE_DESCRIPTION = {
+    "OpenWeatherMap": "OpenWeatherMap is blablabla",
+    "DarkSky": "DarkSky is blablabla",
+    "MetNoway": "MET Norway is blablabla"
+};
 const WEATHER_LOCATION = "location";
 const WEATHER_USE_SYMBOLIC_ICONS_KEY = 'useSymbolicIcons';
 const KEYS = {

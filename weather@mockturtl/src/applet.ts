@@ -89,11 +89,24 @@ const APPLET_ICON = "view-refresh-symbolic"
 const REFRESH_ICON = "view-refresh";
 const CMD_SETTINGS = "cinnamon-settings applets " + UUID
 
+type Services = "OpenWeatherMap" | "DarkSky" | "MetNoway";
+type ServiceMap = {
+  [key: string]: Services
+}
+type ServiceDescriptions = {
+  [key in Services]: string
+}
 // Settings keys
-const DATA_SERVICE = {
+const DATA_SERVICE: ServiceMap = {
   OPEN_WEATHER_MAP: "OpenWeatherMap",
   DARK_SKY: "DarkSky",
   MET_NORWAY: "MetNoway"
+}
+
+const DATASERVICE_DESCRIPTION: ServiceDescriptions  = {
+   "OpenWeatherMap" : "OpenWeatherMap is blablabla",
+   "DarkSky": "DarkSky is blablabla",
+   "MetNoway": "MET Norway is blablabla"
 }
 
 const WEATHER_LOCATION = "location"
@@ -207,7 +220,7 @@ class WeatherApplet extends TextIconApplet {
   // Settings are public
   public _refreshInterval: number;
   public _manualLocation: boolean;
-  public _dataService: string;
+  public _dataService: Services;
   public _location: string;
   public _translateCondition: boolean;
   public _temperatureUnit: WeatherUnits;
@@ -231,9 +244,9 @@ class WeatherApplet extends TextIconApplet {
   public log: Log;
 
   private keybinding: any;
-  private menu: any;
-  private menuManager: any;
-  private settings: any;
+  private menu: imports.ui.applet.AppletPopupMenu;
+  private menuManager: imports.ui.popupMenu.PopupMenuManager;
+  private settings: imports.ui.settings.AppletSettings;
   // Soup session (see https://bugzilla.gnome.org/show_bug.cgi?id=661323#c64)
   private _httpSession = new SessionAsync();
   private appletDir = imports.ui.appletManager.appletMeta[UUID].path;
@@ -265,7 +278,7 @@ class WeatherApplet extends TextIconApplet {
     super(orientation, panelHeight, instanceId);
     this.currentLocale = this.constructJsLocale(get_language_names()[0]);
     this.systemLanguage = this.currentLocale.split('-')[0];
-    this.settings = new AppletSettings(this, UUID, instanceId)
+    this.settings = new AppletSettings(this, UUID, instanceId);
     this.log = new Log(instanceId);
     this._httpSession.user_agent = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:37.0) Gecko/20100101 Firefox/37.0"; // ipapi blocks non-browsers agents, imitating browser
     Session.prototype.add_feature.call(this._httpSession, new ProxyResolverDefault());
@@ -313,12 +326,20 @@ class WeatherApplet extends TextIconApplet {
   }
 
   private BindSettings() {
+    // TODO: Add changeable item to describe Data service
     for (let k in KEYS) {
       let key = KEYS[k];
       let keyProp = "_" + key;
       this.settings.bindProperty(BindingDirection.IN,
         key, keyProp, this.refreshAndRebuild, null);
     }
+
+    /*this.settings.bindProperty(BindingDirection.IN,
+        KEYS.WEATHER_DATA_SERVICE, "_" + KEYS.WEATHER_DATA_SERVICE,Lang.bind(this, function () {
+          this.settings.setValue('serviceDescription', DATASERVICE_DESCRIPTION[this._dataService as Services] as string);
+          this.refreshAndRebuild();
+        }), null
+    );*/
 
     // Settings what need special care
     this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,

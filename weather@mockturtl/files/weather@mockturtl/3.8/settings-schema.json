@@ -23,11 +23,6 @@
       "MET Norway (no key needed)": "MetNoway"
     }
   },
-  "serviceDescription":
-  {
-    "type":"label",
-    "description": "MET Norway is blablabla"
-  },
   "apiKey":
   { "type": "entry"
   , "default": ""

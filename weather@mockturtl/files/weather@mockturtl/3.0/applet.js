@@ -118,6 +118,11 @@ var DATA_SERVICE = {
     DARK_SKY: "DarkSky",
     MET_NORWAY: "MetNoway"
 };
+var DATASERVICE_DESCRIPTION = {
+    "OpenWeatherMap": "OpenWeatherMap is blablabla",
+    "DarkSky": "DarkSky is blablabla",
+    "MetNoway": "MET Norway is blablabla"
+};
 var WEATHER_LOCATION = "location";
 var WEATHER_USE_SYMBOLIC_ICONS_KEY = 'useSymbolicIcons';
 var KEYS = {
