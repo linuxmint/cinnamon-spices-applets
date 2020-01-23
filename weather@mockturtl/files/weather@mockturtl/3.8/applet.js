@@ -29,6 +29,7 @@ var compassDirection = utils.compassDirection;
 var MPStoUserUnits = utils.MPStoUserUnits;
 var nonempty = utils.nonempty;
 var AwareDateString = utils.AwareDateString;
+const delay = utils.delay;
 if (typeof Promise != "function") {
     var promisePoly = importModule("promise-polyfill");
     var finallyConstructor = promisePoly.finallyConstructor;
@@ -66,6 +67,7 @@ const CMD_SETTINGS = "cinnamon-settings applets " + UUID;
 const DATA_SERVICE = {
     OPEN_WEATHER_MAP: "OpenWeatherMap",
     DARK_SKY: "DarkSky",
+    MET_NORWAY: "MetNoway"
 };
 const WEATHER_LOCATION = "location";
 const WEATHER_USE_SYMBOLIC_ICONS_KEY = 'useSymbolicIcons';
@@ -131,7 +133,7 @@ class WeatherApplet extends TextIconApplet {
         this._httpSession = new SessionAsync();
         this.appletDir = imports.ui.appletManager.appletMeta[UUID].path;
         this.locProvider = new ipApi.IpApi(this);
-        this.lastUpdated = null;
+        this.lastUpdated = new Date(0);
         this.lock = false;
         this.encounteredError = false;
         this.pauseRefresh = false;
@@ -261,6 +263,26 @@ class WeatherApplet extends TextIconApplet {
         return json;
     }
     ;
+    async LoadAsync(query) {
+        let data = await new Promise((resolve, reject) => {
+            let message = Message.new('GET', query);
+            this._httpSession.queue_message(message, (session, message) => {
+                if (!message)
+                    reject({ code: 0, message: "no network response", reason_phrase: "no network response" });
+                if (message.status_code != 200)
+                    reject({ code: message.status_code, message: "bad status code", reason_phrase: message.reason_phrase });
+                if (!message.response_body)
+                    reject({ code: message.status_code, message: "no reponse body", reason_phrase: message.reason_phrase });
+                if (!message.response_body.data)
+                    reject({ code: message.status_code, message: "no respone data", reason_phrase: message.reason_phrase });
+                this.log.Debug("API full response: " + message.response_body.data.toString());
+                let payload = message.response_body.data;
+                resolve(payload);
+            });
+        });
+        return data;
+    }
+    ;
     async locationLookup() {
         let command = "xdg-open ";
         spawnCommandLine(command + "https://cinnamon-spices.linuxmint.com/applets/view/17");
@@ -273,37 +295,41 @@ class WeatherApplet extends TextIconApplet {
         return (this.lastUpdated > oldDate);
     }
     async RefreshLoop() {
-        if (this.lock == true)
-            return;
-        this.lock = true;
-        if (this.encounteredError) {
-            this.encounteredError = false;
-            this.errorCount++;
-        }
-        if (this.errorCount > 60)
-            this.errorCount = 60;
         let loopInterval = this.LOOP_INTERVAL;
-        if (this.errorCount > 0)
-            loopInterval = loopInterval * this.errorCount;
-        try {
-            if ((this.lastUpdated == null || this.errorCount > 0 || new Date(this.lastUpdated.getTime() + this._refreshInterval * 60000) < new Date())
-                && !this.pauseRefresh) {
-                this.log.Debug("Refresh triggered in mainloop with these values: lastUpdated " + ((!this.lastUpdated) ? "null" : this.lastUpdated.toLocaleString()) + ", errorCount " + this.errorCount.toString() + " , loopInterval " + loopInterval.toString() + " seconds, refreshInterval " + this._refreshInterval + " minutes");
-                let state = await this.refreshWeather(false);
-                if (state == "success") {
-                    this.lastUpdated = new Date();
-                    this.errorCount = 0;
+        while (true) {
+            try {
+                this.log.Debug("Loop began");
+                if (this.encounteredError) {
+                    this.encounteredError = false;
+                    this.errorCount++;
+                    this.log.Debug("Encountered error in previous loop");
+                }
+                if (this.errorCount > 60)
+                    this.errorCount = 60;
+                loopInterval = (this.errorCount > 0) ? loopInterval * this.errorCount : this.LOOP_INTERVAL;
+                if (this.pauseRefresh == true) {
+                    this.log.Debug("Configuration error, updating paused");
+                    await delay(loopInterval);
+                    continue;
+                }
+                let nextUpdate = new Date(this.lastUpdated.getTime() + this._refreshInterval * 60000);
+                if (this.errorCount > 0 || nextUpdate < new Date()) {
+                    this.log.Debug("Refresh triggered in mainloop with these values: lastUpdated " + ((!this.lastUpdated) ? "null" : this.lastUpdated.toLocaleString()) + ", errorCount " + this.errorCount.toString() + " , loopInterval " + loopInterval.toString() + " seconds, refreshInterval " + this._refreshInterval + " minutes");
+                    let state = await this.refreshWeather(false);
+                    if (state == "success") {
+                        this.lastUpdated = new Date();
+                    }
+                }
+                else {
+                    this.log.Debug("No need to update yet, skipping");
                 }
             }
+            catch (e) {
+                this.log.Error("Error in Main loop: " + e);
+                this.encounteredError = true;
+            }
+            await delay(loopInterval * 1000);
         }
-        catch (e) {
-            this.log.Error("Error in Main loop: " + e);
-            this.encounteredError = true;
-        }
-        timeout_add_seconds(loopInterval, Lang.bind(this, function mainloopTimeout() {
-            this.RefreshLoop();
-        }));
-        this.lock = false;
     }
     ;
     update_label_visible() {
@@ -384,6 +410,11 @@ class WeatherApplet extends TextIconApplet {
                         var openWeatherMap = importModule("openWeatherMap");
                     this.provider = new openWeatherMap.OpenWeatherMap(this);
                     break;
+                case DATA_SERVICE.MET_NORWAY:
+                    if (openWeatherMap == null)
+                        var metNorway = importModule("met_norway");
+                    this.provider = new metNorway.MetNorway(this);
+                    break;
                 default:
                     return "error";
             }
@@ -400,6 +431,7 @@ class WeatherApplet extends TextIconApplet {
             if (!await this.displayWeather() || !await this.displayForecast())
                 return;
             this.log.Print("Weather Information refreshed");
+            this.errorCount = 0;
             return "success";
         }
         catch (e) {

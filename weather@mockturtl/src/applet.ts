@@ -44,7 +44,7 @@ var compassDirection = utils.compassDirection as (deg: number) => string;
 var MPStoUserUnits = utils.MPStoUserUnits as (mps: number, units: WeatherWindSpeedUnits) => number;
 var nonempty = utils.nonempty as (str: string) => boolean;
 var AwareDateString = utils.AwareDateString as (date: Date, locale: string, hours24Format: boolean) => string;
-//const delay = utils.delay as (ms: number) => Promise<void>;
+const delay = utils.delay as (ms: number) => Promise<void>;
 
 // This always evaluates to True because "var Promise" line exists inside 
 if (typeof Promise != "function") {
@@ -93,7 +93,9 @@ const CMD_SETTINGS = "cinnamon-settings applets " + UUID
 const DATA_SERVICE = {
   OPEN_WEATHER_MAP: "OpenWeatherMap",
   DARK_SKY: "DarkSky",
+  MET_NORWAY: "MetNoway"
 }
+
 const WEATHER_LOCATION = "location"
 const WEATHER_USE_SYMBOLIC_ICONS_KEY = 'useSymbolicIcons'
 
@@ -240,7 +242,7 @@ class WeatherApplet extends TextIconApplet {
   private locProvider = new ipApi.IpApi(this); // IP location lookup
 
   /** To check if data is up-to-date based on user-set refresh settings */
-  private lastUpdated: Date = null;
+  private lastUpdated: Date = new Date(0);
   private lock: boolean = false;
   private orientation: any;
   /** Used for error handling, first error calls dibs
@@ -376,7 +378,7 @@ class WeatherApplet extends TextIconApplet {
   /**
    * Handles obtaining JSON over http. 
    * returns HTTPError object on fail.
-   * @param query fully contructed url
+   * @param query fully constructed url
    */
   public async LoadJsonAsync(query: string): Promise <any> {
     let json = await new Promise((resolve: any, reject: any) => {
@@ -408,6 +410,36 @@ class WeatherApplet extends TextIconApplet {
     return json;
   };
 
+  /**
+   * Handles obtaining data over http. 
+   * returns HTTPError object on fail.
+   * @param query fully constructed url
+   */
+  public async LoadAsync(query: string): Promise <any> {
+    let data = await new Promise((resolve: any, reject: any) => {
+      let message = Message.new('GET', query);
+      this._httpSession.queue_message(message, (session: any, message: any) => {
+
+        if (!message) 
+          reject({code: 0, message: "no network response", reason_phrase: "no network response"} as HttpError);
+
+        if (message.status_code != 200) 
+          reject({code: message.status_code, message: "bad status code", reason_phrase: message.reason_phrase } as HttpError)
+        
+        if (!message.response_body) 
+          reject({code: message.status_code, message: "no reponse body", reason_phrase: message.reason_phrase} as HttpError);
+        
+        if (!message.response_body.data) 
+          reject({code: message.status_code, message: "no respone data", reason_phrase: message.reason_phrase} as HttpError);
+        
+        this.log.Debug("API full response: " + message.response_body.data.toString());
+        let payload = message.response_body.data;
+        resolve(payload);
+      });
+    });
+    return data;
+  };
+
   private async locationLookup(): Promise < void > {
     let command = "xdg-open ";
     spawnCommandLine(command + "https://cinnamon-spices.linuxmint.com/applets/view/17");
@@ -421,38 +453,48 @@ class WeatherApplet extends TextIconApplet {
     return (this.lastUpdated > oldDate);
   }
 
-  /** Refresh Loop Hooked into MainLoop */
+  /** Refresh Loop */
   private async RefreshLoop(): Promise<void> {
-    if (this.lock == true) return;
-    this.lock = true;
-
-    if (this.encounteredError) {
-      this.encounteredError = false;
-      this.errorCount++;
-    }
-    
-    if (this.errorCount > 60) this.errorCount = 60; // Means loop expands to 15mins max on consecutive errors
     let loopInterval = this.LOOP_INTERVAL;
-    if (this.errorCount > 0) loopInterval = loopInterval*this.errorCount; // Increase loop timeout linearly with the number of errors
-
-    try {
-      if ((this.lastUpdated == null || this.errorCount > 0 || new Date(this.lastUpdated.getTime() + this._refreshInterval * 60000) < new Date())
-      && !this.pauseRefresh) {
-        this.log.Debug("Refresh triggered in mainloop with these values: lastUpdated " + ((!this.lastUpdated) ? "null" : this.lastUpdated.toLocaleString()) + ", errorCount " + this.errorCount.toString() + " , loopInterval " + loopInterval.toString() + " seconds, refreshInterval " + this._refreshInterval + " minutes");
-        let state = await this.refreshWeather(false);
-        if (state == "success") {
-          this.lastUpdated = new Date();
-          this.errorCount = 0;
+    while(true) {
+      try {
+        this.log.Debug("Loop began")
+        if (this.encounteredError) {
+          this.encounteredError = false;
+          this.errorCount++;
+          this.log.Debug("Encountered error in previous loop");
         }
+      
+        // Limiting count so timeout does not expand forever
+        if (this.errorCount > 60) this.errorCount = 60;
+        // Linearly increasing timeout on consecutive errors
+        loopInterval = (this.errorCount > 0) ? loopInterval*this.errorCount : this.LOOP_INTERVAL; // Increase loop timeout linearly with the number of errors
+    
+        if (this.pauseRefresh == true) {
+          this.log.Debug("Configuration error, updating paused")
+          await delay(loopInterval);
+          continue;
+        }
+
+        let nextUpdate = new Date(this.lastUpdated.getTime() + this._refreshInterval * 60000);
+        if (this.errorCount > 0 || nextUpdate < new Date()) {
+          this.log.Debug("Refresh triggered in mainloop with these values: lastUpdated " + ((!this.lastUpdated) ? "null" : this.lastUpdated.toLocaleString()) + ", errorCount " + this.errorCount.toString() + " , loopInterval " + loopInterval.toString() + " seconds, refreshInterval " + this._refreshInterval + " minutes");
+          let state = await this.refreshWeather(false);
+          if (state == "success") {
+            this.lastUpdated = new Date();
+            //this.errorCount resets inside refreshWeather Function
+          }
+        }
+        else {
+          this.log.Debug("No need to update yet, skipping")
+        }
+      } catch (e) {
+        this.log.Error("Error in Main loop: " + e);
+        this.encounteredError = true;
       }
-    } catch (e) {
-      this.log.Error("Error in Main loop: " + e);
-      this.encounteredError = true;
+
+      await delay(loopInterval * 1000);
     }
-    timeout_add_seconds(loopInterval, Lang.bind(this, function mainloopTimeout() {
-      this.RefreshLoop();
-    }))
-    this.lock = false;
   };
 
   // Applet Overrides
@@ -557,6 +599,10 @@ class WeatherApplet extends TextIconApplet {
           if (openWeatherMap == null) var openWeatherMap = importModule("openWeatherMap");
           this.provider = new openWeatherMap.OpenWeatherMap(this);
           break;
+        case DATA_SERVICE.MET_NORWAY:
+          if (openWeatherMap == null) var metNorway = importModule("met_norway");
+          this.provider = new metNorway.MetNorway(this);
+          break;
         default:
           return "error";
       }
@@ -574,6 +620,7 @@ class WeatherApplet extends TextIconApplet {
       if (rebuild) this.rebuild();
       if (!await this.displayWeather() || !await this.displayForecast()) return;
       this.log.Print("Weather Information refreshed");
+      this.errorCount = 0;
       //this.IconTest();
       return "success";
     } 
@@ -1082,7 +1129,7 @@ class WeatherApplet extends TextIconApplet {
       return;
     }
 
-    let nextRefresh = (this.errorCount > 0) ? this.errorCount++*this.LOOP_INTERVAL : this.LOOP_INTERVAL;
+    let nextRefresh = (this.errorCount > 0) ? this.errorCount++ *this.LOOP_INTERVAL : this.LOOP_INTERVAL;
     this.log.Error("Retrying in the next " + nextRefresh.toString() + " seconds..." );
   }
 
@@ -1320,15 +1367,7 @@ interface WeatherData {
   pressure: number;
   /** In percent */
   humidity: number;
-  condition: {
-    /** Short description */
-    main: string,
-    /** Long Description */
-    description: string,
-    /** GTK icon name */
-    icon: string,
-    customIcon: CustomIcons
-  }
+  condition: Condition
   forecasts: ForecastData[];
   extra_field?: {
     name: string,
@@ -1347,15 +1386,7 @@ interface ForecastData {
     temp_min: number,
     /** Kelvin */
     temp_max: number,
-  condition: {
-    /** Short description */
-    main: string,
-    /** Long Description */
-    description: string,
-    /** GTK icon name */
-    icon: string,
-    customIcon: CustomIcons
-  }
+  condition: Condition
 }
 
 interface LocationData {
@@ -1438,11 +1469,21 @@ type RefreshState = "success" | "failure" | "error";
  *  soft will show a subtle hint that the refresh failed (NOT IMPLEMENTED)
  */
 type ErrorSeverity = "hard" |  "soft";
-type ApiService = "ipapi" | "darksky" | "openweathermap";
+type ApiService = "ipapi" | "darksky" | "openweathermap" | "met-norway";
 type ErrorDetail = "no key" | "bad key" | "no location" | "bad location format" |
   "location not found" | "no network response" | "no api response" | 
   "bad api response - non json" | "bad api response" | "no reponse body" | 
   "no respone data" | "unusal payload" | "key blocked"| "unknown" | "bad status code";
 type NiceErrorDetail = {
   [key in ErrorDetail]: string;
+}
+
+interface Condition {
+  /** Short description */
+  main: string,
+  /** Long Description */
+  description: string,
+  /** GTK icon name */
+  icon: string,
+  customIcon: CustomIcons
 }

@@ -56,14 +56,10 @@ Right-click to access `cinnamon-settings` -> _Applets -> Configure_.
 
 ###### Enabling debug mode
 
-You can enable debug mode for more logging by createing a file named ```DEBUG``` in the folder of the applet located here: ```~/.local/share/cinnamon/applets/weather@mockturtl```
+You can enable debug mode for more logging by creating a file named ```DEBUG``` in the folder of the applet here: ```~/.local/share/cinnamon/applets/weather@mockturtl/```
 
 ###### See the logs producing by applets
 
 You can see Logs by opening the Cinnamon 'Looking Glass' debugger. You can open it by Right Clicking on your Panel (taskbar), then Troubleshoot->Looking Glass
 
 Logs can be found under the ```Log``` Tab.
-
-
-
-
