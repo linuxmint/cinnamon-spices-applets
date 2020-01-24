@@ -81,7 +81,7 @@ msgstr "Marquer comme lu"
 
 #: applet.js:687 applet.js:749
 msgid "No unread mails."
-msgstr "Pas de courrier non lus."
+msgstr "Aucun courrier non lu."
 
 #: applet.js:725
 msgid "Mailnag daemon is not running!"
