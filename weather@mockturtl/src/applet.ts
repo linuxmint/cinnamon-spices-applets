@@ -249,7 +249,7 @@ class WeatherApplet extends TextIconApplet {
   private settings: imports.ui.settings.AppletSettings;
   // Soup session (see https://bugzilla.gnome.org/show_bug.cgi?id=661323#c64)
   private _httpSession = new SessionAsync();
-  private appletDir = imports.ui.appletManager.appletMeta[UUID].path;
+  public appletDir = imports.ui.appletManager.appletMeta[UUID].path;
 
   private provider: WeatherProvider; // API
   private locProvider = new ipApi.IpApi(this); // IP location lookup

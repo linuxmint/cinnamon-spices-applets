@@ -15,70 +15,84 @@ var isCoordinate = utils.isCoordinate as (text: any) => boolean;
 var icons = utils.icons;
 var weatherIconSafely = utils.weatherIconSafely as (code: string[], icon_type: string) => string;
 var CelsiusToKelvin = utils.CelsiusToKelvin as (celsius: number) => number;
-
-const Marknote = importModule("markNote");
+const { spawn_async } = imports.misc.util;
 
 class MetNorway implements WeatherProvider {
     private ctx: MetNorway
     private app: WeatherApplet
     private baseUrl = "https://api.met.no/weatherapi/locationforecast/1.9/?"
     private xmlParser: any;
+    private appletDir: string;
 
     constructor(app: WeatherApplet) {
         this.ctx = this;
         this.app = app;
-        this.xmlParser = new Marknote.marknote.Parser();
+        this.appletDir = app.appletDir + "/../";
     }
 
     public async GetWeather(): Promise<WeatherData> {
         let query = this.GetUrl();
-        let xml;
+        let json: any;
         if (query != "" && query != null) {
             this.app.log.Debug("MET Norway API query: " + query);
             try {
-                xml = await this.app.LoadAsync(query);
+                json = await this.SpawnProcess(this.GetUrl());
             }
             catch(e) {
                 this.app.HandleHTTPError("met-norway", e, this.app);
                 return null;
             }        
             
-            if (!xml) {
-                this.app.HandleError({type: "soft", detail: "no api response", service: "darksky"});
+            if (!json) {
+                this.app.HandleError({type: "soft", detail: "no api response", service: "met-norway"});
                 return null;
             }
 
-            return await this.ParseWeather(xml);
+            json = JSON.parse(json);
+
+            if (json.error) {
+              this.app.HandleError({type: "hard", detail: "bad api response", "service": "met-norway"});
+                return null;
+            }
+            return await this.ParseWeather(json);
         }
         return null;
     }
 
-    private async ParseWeather(xml: any): Promise<WeatherData> {
-        let doc = this.xmlParser.parse(xml);
-        let rootElem = doc.getRootElement().getChildElement("product");
-        let dataPoints : any[] = rootElem.getChildElements("time");
+    private async SpawnProcess(url: string): Promise<any> {
+      global.log(this.appletDir)
+      let json = await new Promise((resolve: any, reject: any) => {
+        spawn_async(['python', this.appletDir + '/xmlParser.py', url], (aStdout: any) => {
+          resolve(aStdout);
+        });
+      });
+      return json;
+    }
+
+    private async ParseWeather(json: any): Promise<WeatherData> {    
+        json = json.weatherdata.product.time;
         
         // Sorting Data points
-        let parsedWeathers: XMLWeatherForecast[] = [];
-        let parsed6hourly: XML6HourForecast[] = [];
-        let parsedHourly: XMLHourlyForecast[] = [];
-        for (let i = 0; i < dataPoints.length; i++) {
-          const element = dataPoints[i];
-          let fromDate = new Date(element.getAttribute("from").getValue());
-          let toDate = new Date(element.getAttribute("to").getValue());
-          let item = element.getChildElement("location");
+        let parsedWeathers: WeatherForecast[] = [];
+        let parsed6hourly: SixHourForecast[] = [];
+        let parsedHourly: HourlyForecast[] = [];
+        for (let i = 0; i < json.length; i++) {
+          const element = json[i];
+          let fromDate = new Date(element["@from"]);
+          let toDate = new Date(element["@to"]);
+          let item = element.location;
 
-          let temp = item.getChildElement("temperature");
-          let minTemp = item.getChildElement("minTemperature");
-          let symbol = item.getChildElement("symbol");
+          let temp = item.temperature;
+          let minTemp = item.minTemperature;
+          let symbol = item.symbol;
           if (!!temp) { // Current observations
-            parsedWeathers.push(this.ParseXMLWeather(item, fromDate, toDate));
+            parsedWeathers.push(this.ParseCurrentWeather(item, fromDate, toDate));
           }
           else if (!!minTemp && !!symbol) { // 6-hour forecast
-            parsed6hourly.push(this.Parse6HourXMLForecast(item, fromDate, toDate));
+            parsed6hourly.push(this.Parse6HourForecast(item, fromDate, toDate));
           }
           else if (!minTemp && !!symbol) { // Hourly forecats with confition
-            parsedHourly.push(this.ParseHourlyXMLForecast(item, fromDate, toDate));
+            parsedHourly.push(this.ParseHourlyForecast(item, fromDate, toDate));
           }
         }
 
@@ -113,7 +127,7 @@ class MetNorway implements WeatherProvider {
         return result;
     }
 
-    private GetEarliestData(events: XML6HourForecast[] | XMLHourlyForecast[] | XMLWeatherForecast[]): XML6HourForecast | XMLHourlyForecast | XMLWeatherForecast {
+    private GetEarliestData(events: SixHourForecast[] | HourlyForecast[] | WeatherForecast[]): SixHourForecast | HourlyForecast | WeatherForecast {
       let earliest: number = 0;
       for (let i = 0; i < events.length; i++) {
         const element = events[i];
@@ -126,9 +140,9 @@ class MetNorway implements WeatherProvider {
       return events[earliest];
     }
 
-    private BuildForecasts(forecastsData: XML6HourForecast[]): ForecastData[] {
+    private BuildForecasts(forecastsData: SixHourForecast[]): ForecastData[] {
       let forecasts: ForecastData[] = [];
-      let days: Array<XML6HourForecast[]> = []
+      let days: Array<SixHourForecast[]> = []
 
       // Sorting and conatinerizing forecasts by date
       // Ingoring forecast for multiple days (eg. 22/12/2019 22:00 - 23/12/2019 04:00)
@@ -190,52 +204,44 @@ class MetNorway implements WeatherProvider {
       return result;
     }
 
-    private ParseXMLWeather(element: any, from: Date, to: Date): XMLWeatherForecast {
+    private ParseCurrentWeather(element: any, from: Date, to: Date): WeatherForecast {
       return {
-        temperature: parseFloat(this.GetXMLValueSafely(element, "temperature", "value")),
-        lat: element.getAttribute("latitude").getValue(),
-        lon: element.getAttribute("longitude").getValue(),
-        windDirection: parseFloat(this.GetXMLValueSafely(element, "windDirection", "deg")),
-        windSpeed: parseFloat(this.GetXMLValueSafely(element, "windSpeed", "mps")),
-        humidity: parseFloat(this.GetXMLValueSafely(element, "humidity", "value")),
-        pressure: parseFloat(this.GetXMLValueSafely(element, "pressure", "value")),
-        cloudiness: parseFloat(this.GetXMLValueSafely(element, "cloudiness", "percent")),
-        fog: parseFloat(this.GetXMLValueSafely(element, "fog", "percent")),
-        lowClouds: parseFloat(this.GetXMLValueSafely(element, "lowClouds", "percent")),
-        mediumClouds: parseFloat(this.GetXMLValueSafely(element, "mediumClouds", "percent")),
-        highClouds: parseFloat(this.GetXMLValueSafely(element, "highClouds", "percent")),
-        dewpointTemperature: parseFloat(this.GetXMLValueSafely(element, "dewpointTemperature", "value")),
+        temperature: parseFloat(element.temperature['@value']),
+        lat: element["@latitude"],
+        lon: element["@longitude"],
+        windDirection: parseFloat(element.windDirection["@deg"]),
+        windSpeed: parseFloat(element.windSpeed["@mps"]),
+        humidity: parseFloat(element.humidity["@value"]),
+        pressure: parseFloat(element.pressure["@value"]),
+        cloudiness: parseFloat(element.cloudiness["@percent"]),
+        //fog: parseFloat(element.fog["@percent"]),
+        lowClouds: parseFloat(element.lowClouds["@percent"]),
+        mediumClouds: parseFloat(element.mediumClouds["@percent"]),
+        highClouds: parseFloat(element.highClouds["@percent"]),
+        dewpointTemperature: parseFloat(element.dewpointTemperature["@value"]),
         from: from,
         to: to
       };
     }
 
-    private Parse6HourXMLForecast(element: any, from: Date, to: Date): XML6HourForecast {
+    private Parse6HourForecast(element: any, from: Date, to: Date): SixHourForecast {
       return {
-        precipitation: parseFloat(this.GetXMLValueSafely(element, "precipitation", "value")),
-        minTemperature: parseFloat(this.GetXMLValueSafely(element, "minTemperature", "value")),
-        maxTemperature: parseFloat(this.GetXMLValueSafely(element, "maxTemperature", "value")),
+        precipitation: parseFloat(element.precipitation["@value"]),
+        minTemperature: parseFloat(element.minTemperature["@value"]),
+        maxTemperature: parseFloat(element.maxTemperature["@value"]),
         from: from,
         to: to,
-        symbol: this.GetXMLValueSafely(element, "symbol", "id")
+        symbol: element.symbol["@id"]
       }
     }
 
-    private ParseHourlyXMLForecast(element: any, from: Date, to: Date): XMLHourlyForecast {
+    private ParseHourlyForecast(element: any, from: Date, to: Date): HourlyForecast {
       return {
-        precipitation: parseFloat(this.GetXMLValueSafely(element, "precipitation", "value")),
+        precipitation: parseFloat(element.precipitation["@value"]),
         from: from,
         to: to,
-        symbol: this.GetXMLValueSafely(element, "symbol", "id")
+        symbol: element.symbol["@id"]
       }
-    }
-
-    private GetXMLValueSafely(element: any, childName: string, attributeName: string): string {
-      let child = element.getChildElement(childName);
-      if (!child) return null;
-      let attribute = child.getAttribute(attributeName);
-      if (!attribute) return null;
-      return attribute.getValue();
     }
 
     private GetUrl(): string {
@@ -544,7 +550,7 @@ class MetNorway implements WeatherProvider {
   }
 
 
-interface XMLWeatherForecast {
+interface WeatherForecast {
   from: Date;
   to: Date;
   lat: number;
@@ -562,7 +568,7 @@ interface XMLWeatherForecast {
   /**percent */
   cloudiness: number;
   /**percent */
-  fog: number;
+  fog?: number;
   /**percent */
   lowClouds: number;
   /**percent */
@@ -573,7 +579,7 @@ interface XMLWeatherForecast {
   dewpointTemperature: number;
 }
 
-interface XML6HourForecast {
+interface SixHourForecast {
   from: Date;
   to: Date;
   /**mm */
@@ -585,7 +591,7 @@ interface XML6HourForecast {
   symbol: string;
 }
 
-interface XMLHourlyForecast {
+interface HourlyForecast {
   from: Date;
   to: Date;
   /**mm */

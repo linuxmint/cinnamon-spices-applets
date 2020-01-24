@@ -370,6 +370,7 @@ declare namespace imports.misc.config {
 }
 declare namespace imports.misc.util {
     export function spawnCommandLine(CMDSettings: string): void;
+    export function spawn_async(cmd: string[], callback: Function): any;
 }
 
 declare namespace imports.gettext {
