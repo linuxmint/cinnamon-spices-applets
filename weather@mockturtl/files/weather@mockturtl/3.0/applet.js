@@ -151,6 +151,13 @@ imports.gettext.bindtextdomain(UUID, imports.gi.GLib.get_home_dir() + "/.local/s
 function _(str) {
     return imports.gettext.dgettext(UUID, str);
 }
+function uuidv4() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+        var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+        return v.toString(16);
+    });
+}
+var weatherAppletGUIDs = {};
 var WeatherApplet = (function (_super) {
     __extends(WeatherApplet, _super);
     function WeatherApplet(metadata, orientation, panelHeight, instanceId) {
@@ -191,11 +198,11 @@ var WeatherApplet = (function (_super) {
         _this.appletDir = imports.ui.appletManager.appletMeta[UUID].path;
         _this.locProvider = new ipApi.IpApi(_this);
         _this.lastUpdated = new Date(0);
-        _this.lock = false;
         _this.encounteredError = false;
         _this.pauseRefresh = false;
         _this.errorCount = 0;
         _this.LOOP_INTERVAL = 15;
+        _this.appletRemoved = false;
         _this.errMsg = {
             unknown: _("Error"),
             "bad api response - non json": _("Service Error"),
@@ -214,6 +221,7 @@ var WeatherApplet = (function (_super) {
             "unusal payload": _("Service Error"),
             "import error": _("Missing Packages")
         };
+        _this.instanceID = instanceId;
         _this.currentLocale = _this.constructJsLocale(get_language_names()[0]);
         _this.systemLanguage = _this.currentLocale.split('-')[0];
         _this.settings = new AppletSettings(_this, UUID, instanceId);
@@ -228,6 +236,8 @@ var WeatherApplet = (function (_super) {
         _this.BindSettings();
         _this.AddRefreshButton();
         _this.BuildPopupMenu();
+        _this.GUID = uuidv4();
+        weatherAppletGUIDs[instanceId] = _this.GUID;
         _this.rebuild();
         _this.RefreshLoop();
         _this.orientation = orientation;
@@ -418,6 +428,14 @@ var WeatherApplet = (function (_super) {
                     case 2:
                         _a.trys.push([2, 8, , 9]);
                         this.log.Debug("Loop began");
+                        if (this.appletRemoved == true)
+                            return [2];
+                        this.log.Debug("Applet GUID: " + this.GUID);
+                        this.log.Debug("GUID stored globally: " + weatherAppletGUIDs[this.instanceID]);
+                        if (this.GUID != weatherAppletGUIDs[this.instanceID]) {
+                            this.log.Print("GUID mismatch, terminating applet");
+                            return [2];
+                        }
                         if (this.encounteredError) {
                             this.encounteredError = false;
                             this.errorCount++;
@@ -478,6 +496,10 @@ var WeatherApplet = (function (_super) {
         if (this.keybinding != null) {
             keybindingManager.addHotKey(UUID, this.keybinding, Lang.bind(this, this.on_applet_clicked));
         }
+    };
+    WeatherApplet.prototype.on_applet_removed_from_panel = function (deleteConfig) {
+        this.log.Print("Removing instance of applet...");
+        this.appletRemoved = true;
     };
     WeatherApplet.prototype.on_applet_clicked = function (event) {
         this.menu.toggle();

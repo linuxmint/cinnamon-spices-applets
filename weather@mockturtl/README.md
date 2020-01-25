@@ -25,7 +25,7 @@ If the location you try does not work, try using [OpenWeatherMap's finder](https
 
 ------
 
-### DarkSky API Key Setup (Supported from Cinnamon 3.4)
+### DarkSky API Key Setup (Supported from Cinnamon 3.0)
 
 Go to [DarkSky](https://darksky.net/dev/register) and create an account. Then go your [Console section](https://darksky.net/dev/account) where you should find your secret key already created.
 

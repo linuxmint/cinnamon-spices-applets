@@ -102,6 +102,13 @@ imports.gettext.bindtextdomain(UUID, imports.gi.GLib.get_home_dir() + "/.local/s
 function _(str) {
     return imports.gettext.dgettext(UUID, str);
 }
+function uuidv4() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+        var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+        return v.toString(16);
+    });
+}
+var weatherAppletGUIDs = {};
 class WeatherApplet extends TextIconApplet {
     constructor(metadata, orientation, panelHeight, instanceId) {
         super(orientation, panelHeight, instanceId);
@@ -141,11 +148,11 @@ class WeatherApplet extends TextIconApplet {
         this.appletDir = imports.ui.appletManager.appletMeta[UUID].path;
         this.locProvider = new ipApi.IpApi(this);
         this.lastUpdated = new Date(0);
-        this.lock = false;
         this.encounteredError = false;
         this.pauseRefresh = false;
         this.errorCount = 0;
         this.LOOP_INTERVAL = 15;
+        this.appletRemoved = false;
         this.errMsg = {
             unknown: _("Error"),
             "bad api response - non json": _("Service Error"),
@@ -164,6 +171,7 @@ class WeatherApplet extends TextIconApplet {
             "unusal payload": _("Service Error"),
             "import error": _("Missing Packages")
         };
+        this.instanceID = instanceId;
         this.currentLocale = this.constructJsLocale(get_language_names()[0]);
         this.systemLanguage = this.currentLocale.split('-')[0];
         this.settings = new AppletSettings(this, UUID, instanceId);
@@ -178,6 +186,8 @@ class WeatherApplet extends TextIconApplet {
         this.BindSettings();
         this.AddRefreshButton();
         this.BuildPopupMenu();
+        this.GUID = uuidv4();
+        weatherAppletGUIDs[instanceId] = this.GUID;
         this.rebuild();
         this.RefreshLoop();
         this.orientation = orientation;
@@ -323,6 +333,14 @@ class WeatherApplet extends TextIconApplet {
         while (true) {
             try {
                 this.log.Debug("Loop began");
+                if (this.appletRemoved == true)
+                    return;
+                this.log.Debug("Applet GUID: " + this.GUID);
+                this.log.Debug("GUID stored globally: " + weatherAppletGUIDs[this.instanceID]);
+                if (this.GUID != weatherAppletGUIDs[this.instanceID]) {
+                    this.log.Print("GUID mismatch, terminating applet");
+                    return;
+                }
                 if (this.encounteredError) {
                     this.encounteredError = false;
                     this.errorCount++;
@@ -372,6 +390,10 @@ class WeatherApplet extends TextIconApplet {
         if (this.keybinding != null) {
             keybindingManager.addHotKey(UUID, this.keybinding, Lang.bind(this, this.on_applet_clicked));
         }
+    }
+    on_applet_removed_from_panel(deleteConfig) {
+        this.log.Print("Removing instance of applet...");
+        this.appletRemoved = true;
     }
     on_applet_clicked(event) {
         this.menu.toggle();

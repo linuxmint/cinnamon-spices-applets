@@ -161,6 +161,15 @@ function _(str: string): string {
   return imports.gettext.dgettext(UUID, str)
 }
 
+function uuidv4() {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+    return v.toString(16);
+  });
+}
+
+var weatherAppletGUIDs: GUIDStore = {};
+
 class WeatherApplet extends TextIconApplet {
   /** Stores all weather information */
   private weather: Weather = {
@@ -259,7 +268,6 @@ class WeatherApplet extends TextIconApplet {
 
   /** To check if data is up-to-date based on user-set refresh settings */
   private lastUpdated: Date = new Date(0);
-  private lock: boolean = false;
   private orientation: any;
   /** Used for error handling, first error calls dibs
    * and stops diplaying the other errors after.
@@ -276,9 +284,13 @@ class WeatherApplet extends TextIconApplet {
   private errorCount: number = 0;
   /** in seconds */
   private readonly LOOP_INTERVAL: number = 15;
+  private GUID: string;
+  private instanceID: number;
+  private appletRemoved = false;
 
   public constructor(metadata: any, orientation: any, panelHeight: number, instanceId: number) {
     super(orientation, panelHeight, instanceId);
+    this.instanceID = instanceId;
     this.currentLocale = this.constructJsLocale(get_language_names()[0]);
     this.systemLanguage = this.currentLocale.split('-')[0];
     this.settings = new AppletSettings(this, UUID, instanceId);
@@ -295,6 +307,9 @@ class WeatherApplet extends TextIconApplet {
     this.BindSettings();
     this.AddRefreshButton();
     this.BuildPopupMenu();
+    // generating unique GUIDs
+    this.GUID = uuidv4();
+    weatherAppletGUIDs[instanceId] = this.GUID;
 
     this.rebuild()
     //------------------------------
@@ -500,6 +515,14 @@ class WeatherApplet extends TextIconApplet {
     while(true) {
       try {
         this.log.Debug("Loop began")
+        if (this.appletRemoved == true) return;
+        this.log.Debug("Applet GUID: " + this.GUID);
+        this.log.Debug("GUID stored globally: " +  weatherAppletGUIDs[this.instanceID]);
+        if (this.GUID != weatherAppletGUIDs[this.instanceID]) {
+          this.log.Print("GUID mismatch, terminating applet")
+          return;
+        }
+
         if (this.encounteredError) {
           this.encounteredError = false;
           this.errorCount++;
@@ -523,7 +546,6 @@ class WeatherApplet extends TextIconApplet {
           let state = await this.refreshWeather(false);
           if (state == "success") {
             this.lastUpdated = new Date();
-            //this.errorCount resets inside refreshWeather Function
           }
         }
         else {
@@ -558,6 +580,11 @@ class WeatherApplet extends TextIconApplet {
         Lang.bind(this,
           this.on_applet_clicked))
     }
+  }
+
+  private on_applet_removed_from_panel(deleteConfig: any) {
+    this.log.Print("Removing instance of applet...")
+    this.appletRemoved = true;
   }
 
   private on_applet_clicked(event: any): void {
@@ -1538,3 +1565,7 @@ interface XMLParserError {
 }
 
 type XMLParserErrorType = "import";
+
+type GUIDStore = {
+  [key: number]: string
+}
