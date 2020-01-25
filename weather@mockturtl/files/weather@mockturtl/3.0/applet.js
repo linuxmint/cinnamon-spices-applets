@@ -67,7 +67,9 @@ var get_language_names = imports.gi.GLib.get_language_names;
 var _c = imports.ui.applet, TextIconApplet = _c.TextIconApplet, AllowedLayout = _c.AllowedLayout, AppletPopupMenu = _c.AppletPopupMenu, MenuItem = _c.MenuItem;
 var PopupMenuManager = imports.ui.popupMenu.PopupMenuManager;
 var _d = imports.ui.settings, AppletSettings = _d.AppletSettings, BindingDirection = _d.BindingDirection;
-var spawnCommandLine = imports.misc.util.spawnCommandLine;
+var _e = imports.misc.util, spawnCommandLine = _e.spawnCommandLine, spawn_async = _e.spawn_async;
+var _f = imports.ui.messageTray, SystemNotificationSource = _f.SystemNotificationSource, Notification = _f.Notification;
+var messageTray = imports.ui.main.messageTray;
 var utils = importModule("utils");
 var GetDayName = utils.GetDayName;
 var GetHoursMinutes = utils.GetHoursMinutes;
@@ -210,12 +212,15 @@ var WeatherApplet = (function (_super) {
             "no reponse body": _("Service Error"),
             "no respone data": _("Service Error"),
             "unusal payload": _("Service Error"),
+            "import error": _("Missing Packages")
         };
         _this.currentLocale = _this.constructJsLocale(get_language_names()[0]);
         _this.systemLanguage = _this.currentLocale.split('-')[0];
         _this.settings = new AppletSettings(_this, UUID, instanceId);
         _this.log = new Log(instanceId);
         _this._httpSession.user_agent = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:37.0) Gecko/20100101 Firefox/37.0";
+        _this.msgSource = new SystemNotificationSource(_("Weather Applet"));
+        messageTray.add(_this.msgSource);
         Session.prototype.add_feature.call(_this._httpSession, new ProxyResolverDefault());
         imports.gi.Gtk.IconTheme.get_default().append_search_path(_this.appletDir + "/../icons");
         _this.SetAppletOnPanel();
@@ -329,6 +334,23 @@ var WeatherApplet = (function (_super) {
         });
     };
     ;
+    WeatherApplet.prototype.SpawnProcess = function (command) {
+        return __awaiter(this, void 0, void 0, function () {
+            var json;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4, new Promise(function (resolve, reject) {
+                            spawn_async(command, function (aStdout) {
+                                resolve(aStdout);
+                            });
+                        })];
+                    case 1:
+                        json = _a.sent();
+                        return [2, json];
+                }
+            });
+        });
+    };
     WeatherApplet.prototype.LoadAsync = function (query) {
         return __awaiter(this, void 0, void 0, function () {
             var data;
@@ -359,6 +381,12 @@ var WeatherApplet = (function (_super) {
         });
     };
     ;
+    WeatherApplet.prototype.sendNotification = function (title, message, transient) {
+        var notification = new Notification(this.msgSource, title, message);
+        if (transient)
+            notification.setTransient(true);
+        this.msgSource.notify(notification);
+    };
     WeatherApplet.prototype.locationLookup = function () {
         return __awaiter(this, void 0, void 0, function () {
             var command;

@@ -18,7 +18,9 @@ const { get_language_names } = imports.gi.GLib;
 const { TextIconApplet, AllowedLayout, AppletPopupMenu, MenuItem } = imports.ui.applet;
 const { PopupMenuManager } = imports.ui.popupMenu;
 const { AppletSettings, BindingDirection } = imports.ui.settings;
-const { spawnCommandLine } = imports.misc.util;
+const { spawnCommandLine, spawn_async } = imports.misc.util;
+const { SystemNotificationSource, Notification } = imports.ui.messageTray;
+const { messageTray } = imports.ui.main;
 var utils = importModule("utils");
 var GetDayName = utils.GetDayName;
 var GetHoursMinutes = utils.GetHoursMinutes;
@@ -160,12 +162,15 @@ class WeatherApplet extends TextIconApplet {
             "no reponse body": _("Service Error"),
             "no respone data": _("Service Error"),
             "unusal payload": _("Service Error"),
+            "import error": _("Missing Packages")
         };
         this.currentLocale = this.constructJsLocale(get_language_names()[0]);
         this.systemLanguage = this.currentLocale.split('-')[0];
         this.settings = new AppletSettings(this, UUID, instanceId);
         this.log = new Log(instanceId);
         this._httpSession.user_agent = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:37.0) Gecko/20100101 Firefox/37.0";
+        this.msgSource = new SystemNotificationSource(_("Weather Applet"));
+        messageTray.add(this.msgSource);
         Session.prototype.add_feature.call(this._httpSession, new ProxyResolverDefault());
         imports.gi.Gtk.IconTheme.get_default().append_search_path(this.appletDir + "/../icons");
         this.SetAppletOnPanel();
@@ -268,6 +273,14 @@ class WeatherApplet extends TextIconApplet {
         return json;
     }
     ;
+    async SpawnProcess(command) {
+        let json = await new Promise((resolve, reject) => {
+            spawn_async(command, (aStdout) => {
+                resolve(aStdout);
+            });
+        });
+        return json;
+    }
     async LoadAsync(query) {
         let data = await new Promise((resolve, reject) => {
             let message = Message.new('GET', query);
@@ -288,6 +301,12 @@ class WeatherApplet extends TextIconApplet {
         return data;
     }
     ;
+    sendNotification(title, message, transient) {
+        let notification = new Notification(this.msgSource, title, message);
+        if (transient)
+            notification.setTransient(true);
+        this.msgSource.notify(notification);
+    }
     async locationLookup() {
         let command = "xdg-open ";
         spawnCommandLine(command + "https://cinnamon-spices.linuxmint.com/applets/view/17");

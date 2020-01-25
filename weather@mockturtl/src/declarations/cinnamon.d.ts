@@ -18,6 +18,8 @@ declare namespace imports.ui.main {
         addHotKey(UUID: string, keybinding: any, binding: void): void;
     }
 
+    export const messageTray: any;
+
     export const keybindingManager: KeybindingManager;
     /**
      * getThemeStylesheet:
@@ -234,6 +236,19 @@ declare namespace imports.ui.applet {
             HORIZONTAL: string;
     }
     export const AllowedLayout: AllowedLayouts;
+}
+
+declare namespace imports.ui.messageTray {
+    export class Notification {
+        constructor(source: SystemNotificationSource, title: string, message: string);
+        setTransient(value: boolean): void;
+    }
+
+    export class SystemNotificationSource {
+        constructor(name: string)
+
+        notify(notification: Notification): void;
+    }
 }
 
 declare namespace imports.ui.popupMenu {

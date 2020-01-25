@@ -49,17 +49,18 @@ var isCoordinate = utils.isCoordinate;
 var icons = utils.icons;
 var weatherIconSafely = utils.weatherIconSafely;
 var CelsiusToKelvin = utils.CelsiusToKelvin;
-var spawn_async = imports.misc.util.spawn_async;
+var SunCalc = importModule("sunCalc").SunCalc;
 var MetNorway = (function () {
     function MetNorway(app) {
         this.baseUrl = "https://api.met.no/weatherapi/locationforecast/1.9/?";
         this.ctx = this;
         this.app = app;
         this.appletDir = app.appletDir + "/../";
+        this.sunCalc = new SunCalc();
     }
     MetNorway.prototype.GetWeather = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var query, json, e_1;
+            var query, json, e_1, error;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -69,7 +70,7 @@ var MetNorway = (function () {
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
-                        return [4, this.SpawnProcess(this.GetUrl())];
+                        return [4, this.app.SpawnProcess(['python3', this.appletDir + '/xmlParser.py', query])];
                     case 2:
                         json = _a.sent();
                         return [3, 4];
@@ -84,7 +85,14 @@ var MetNorway = (function () {
                         }
                         json = JSON.parse(json);
                         if (json.error) {
-                            this.app.HandleError({ type: "hard", detail: "bad api response", "service": "met-norway" });
+                            error = json;
+                            if (error.error.type == "import") {
+                                this.app.HandleError({ type: "hard", detail: "bad api response", "service": "met-norway", "userError": true });
+                                this.app.sendNotification(_("Weather Applet - Missing Dependencies"), _("MET Norway requires package installed: \n python3-xmltodict \n (For Arch Linux: python-xmltodict)"));
+                            }
+                            else {
+                                this.app.HandleError({ type: "hard", detail: "bad api response", "service": "met-norway" });
+                            }
                             return [2, null];
                         }
                         return [4, this.ParseWeather(json)];
@@ -94,29 +102,9 @@ var MetNorway = (function () {
             });
         });
     };
-    MetNorway.prototype.SpawnProcess = function (url) {
-        return __awaiter(this, void 0, void 0, function () {
-            var json;
-            var _this = this;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        global.log(this.appletDir);
-                        return [4, new Promise(function (resolve, reject) {
-                                spawn_async(['python', _this.appletDir + '/xmlParser.py', url], function (aStdout) {
-                                    resolve(aStdout);
-                                });
-                            })];
-                    case 1:
-                        json = _a.sent();
-                        return [2, json];
-                }
-            });
-        });
-    };
     MetNorway.prototype.ParseWeather = function (json) {
         return __awaiter(this, void 0, void 0, function () {
-            var parsedWeathers, parsed6hourly, parsedHourly, i, element, fromDate, toDate, item, temp, minTemp, symbol, forecasts, result;
+            var parsedWeathers, parsed6hourly, parsedHourly, i, element, fromDate, toDate, item, temp, minTemp, symbol, times, forecasts, result;
             return __generator(this, function (_a) {
                 json = json.weatherdata.product.time;
                 parsedWeathers = [];
@@ -140,6 +128,7 @@ var MetNorway = (function () {
                         parsedHourly.push(this.ParseHourlyForecast(item, fromDate, toDate));
                     }
                 }
+                times = this.sunCalc.getTimes(new Date(), parsedWeathers[0].lat, parsedWeathers[0].lon, 0);
                 forecasts = this.BuildForecasts(parsed6hourly);
                 result = {
                     temperature: CelsiusToKelvin(parsedWeathers[0].temperature),
@@ -156,8 +145,8 @@ var MetNorway = (function () {
                         type: "percent",
                         value: parsedWeathers[0].cloudiness
                     },
-                    sunrise: null,
-                    sunset: null,
+                    sunrise: times.sunrise,
+                    sunset: times.sunset,
                     wind: {
                         degree: parsedWeathers[0].windDirection,
                         speed: parsedWeathers[0].windSpeed
@@ -190,10 +179,10 @@ var MetNorway = (function () {
         days.push([]);
         for (var i = 0; i < forecastsData.length; i++) {
             var element = forecastsData[i];
-            if (element.from.toDateString() == currentDay && element.to.toDateString() == currentDay) {
+            if (element.from.toDateString() == currentDay) {
                 days[dayIndex].push(element);
             }
-            else if (element.from.toDateString() != currentDay && element.to.toDateString() != currentDay) {
+            else if (element.from.toDateString() != currentDay) {
                 dayIndex++;
                 currentDay = element.from.toDateString();
                 days.push([]);

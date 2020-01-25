@@ -32,7 +32,9 @@ const { get_language_names } = imports.gi.GLib;
 const { TextIconApplet, AllowedLayout, AppletPopupMenu, MenuItem} = imports.ui.applet;
 const { PopupMenuManager } = imports.ui.popupMenu;
 const { AppletSettings, BindingDirection } = imports.ui.settings;
-const { spawnCommandLine } = imports.misc.util;
+const { spawnCommandLine, spawn_async } = imports.misc.util;
+const { SystemNotificationSource, Notification } = imports.ui.messageTray;
+const { messageTray } = imports.ui.main;
 
 var utils = importModule("utils");
 var GetDayName = utils.GetDayName as (date: Date, locale:string, tz?: string) => string;
@@ -250,6 +252,7 @@ class WeatherApplet extends TextIconApplet {
   // Soup session (see https://bugzilla.gnome.org/show_bug.cgi?id=661323#c64)
   private _httpSession = new SessionAsync();
   public appletDir = imports.ui.appletManager.appletMeta[UUID].path;
+  private msgSource: imports.ui.messageTray.SystemNotificationSource;
 
   private provider: WeatherProvider; // API
   private locProvider = new ipApi.IpApi(this); // IP location lookup
@@ -281,6 +284,8 @@ class WeatherApplet extends TextIconApplet {
     this.settings = new AppletSettings(this, UUID, instanceId);
     this.log = new Log(instanceId);
     this._httpSession.user_agent = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:37.0) Gecko/20100101 Firefox/37.0"; // ipapi blocks non-browsers agents, imitating browser
+    this.msgSource = new SystemNotificationSource(_("Weather Applet"));
+    messageTray.add(this.msgSource);
     Session.prototype.add_feature.call(this._httpSession, new ProxyResolverDefault());
     // Manually add the icons to the icontheme - only one icons folder
     imports.gi.Gtk.IconTheme.get_default().append_search_path(this.appletDir + "/../icons");
@@ -431,6 +436,15 @@ class WeatherApplet extends TextIconApplet {
     return json;
   };
 
+  public async SpawnProcess(command: string[]): Promise<any> {
+    let json = await new Promise((resolve: any, reject: any) => {
+      spawn_async(command, (aStdout: any) => {
+        resolve(aStdout);
+      });
+    });
+    return json;
+  }
+
   /**
    * Handles obtaining data over http. 
    * returns HTTPError object on fail.
@@ -460,6 +474,12 @@ class WeatherApplet extends TextIconApplet {
     });
     return data;
   };
+
+  public sendNotification(title: string, message: string, transient?: boolean) {
+    let notification = new Notification(this.msgSource, title, message);
+    if (transient) notification.setTransient(true);
+    this.msgSource.notify(notification);
+  }
 
   private async locationLookup(): Promise < void > {
     let command = "xdg-open ";
@@ -1124,6 +1144,7 @@ class WeatherApplet extends TextIconApplet {
     "no reponse body": _("Service Error"),
     "no respone data": _("Service Error"),
     "unusal payload": _("Service Error"),
+    "import error": _("Missing Packages")
   }
 
   public HandleError(error: AppletError): void {
@@ -1494,7 +1515,7 @@ type ApiService = "ipapi" | "darksky" | "openweathermap" | "met-norway";
 type ErrorDetail = "no key" | "bad key" | "no location" | "bad location format" |
   "location not found" | "no network response" | "no api response" | 
   "bad api response - non json" | "bad api response" | "no reponse body" | 
-  "no respone data" | "unusal payload" | "key blocked"| "unknown" | "bad status code";
+  "no respone data" | "unusal payload" | "key blocked"| "unknown" | "bad status code" | "import error";
 type NiceErrorDetail = {
   [key in ErrorDetail]: string;
 }
@@ -1508,3 +1529,12 @@ interface Condition {
   icon: string,
   customIcon: CustomIcons
 }
+
+interface XMLParserError {
+  error: {
+    type: XMLParserErrorType,
+    message:  string
+  }
+}
+
+type XMLParserErrorType = "import";

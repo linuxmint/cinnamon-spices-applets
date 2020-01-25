@@ -13,13 +13,14 @@ var isCoordinate = utils.isCoordinate;
 var icons = utils.icons;
 var weatherIconSafely = utils.weatherIconSafely;
 var CelsiusToKelvin = utils.CelsiusToKelvin;
-const { spawn_async } = imports.misc.util;
+var SunCalc = importModule("sunCalc").SunCalc;
 class MetNorway {
     constructor(app) {
         this.baseUrl = "https://api.met.no/weatherapi/locationforecast/1.9/?";
         this.ctx = this;
         this.app = app;
         this.appletDir = app.appletDir + "/../";
+        this.sunCalc = new SunCalc();
     }
     async GetWeather() {
         let query = this.GetUrl();
@@ -27,7 +28,7 @@ class MetNorway {
         if (query != "" && query != null) {
             this.app.log.Debug("MET Norway API query: " + query);
             try {
-                json = await this.SpawnProcess(this.GetUrl());
+                json = await this.app.SpawnProcess(['python3', this.appletDir + '/xmlParser.py', query]);
             }
             catch (e) {
                 this.app.HandleHTTPError("met-norway", e, this.app);
@@ -39,21 +40,19 @@ class MetNorway {
             }
             json = JSON.parse(json);
             if (json.error) {
-                this.app.HandleError({ type: "hard", detail: "bad api response", "service": "met-norway" });
+                let error = json;
+                if (error.error.type == "import") {
+                    this.app.HandleError({ type: "hard", detail: "bad api response", "service": "met-norway", "userError": true });
+                    this.app.sendNotification(_("Weather Applet - Missing Dependencies"), _("MET Norway requires package installed: \n python3-xmltodict \n (For Arch Linux: python-xmltodict)"));
+                }
+                else {
+                    this.app.HandleError({ type: "hard", detail: "bad api response", "service": "met-norway" });
+                }
                 return null;
             }
             return await this.ParseWeather(json);
         }
         return null;
-    }
-    async SpawnProcess(url) {
-        global.log(this.appletDir);
-        let json = await new Promise((resolve, reject) => {
-            spawn_async(['python', this.appletDir + '/xmlParser.py', url], (aStdout) => {
-                resolve(aStdout);
-            });
-        });
-        return json;
     }
     async ParseWeather(json) {
         json = json.weatherdata.product.time;
@@ -78,6 +77,7 @@ class MetNorway {
                 parsedHourly.push(this.ParseHourlyForecast(item, fromDate, toDate));
             }
         }
+        let times = this.sunCalc.getTimes(new Date(), parsedWeathers[0].lat, parsedWeathers[0].lon, 0);
         let forecasts = this.BuildForecasts(parsed6hourly);
         let result = {
             temperature: CelsiusToKelvin(parsedWeathers[0].temperature),
@@ -94,8 +94,8 @@ class MetNorway {
                 type: "percent",
                 value: parsedWeathers[0].cloudiness
             },
-            sunrise: null,
-            sunset: null,
+            sunrise: times.sunrise,
+            sunset: times.sunset,
             wind: {
                 degree: parsedWeathers[0].windDirection,
                 speed: parsedWeathers[0].windSpeed
@@ -126,10 +126,10 @@ class MetNorway {
         days.push([]);
         for (let i = 0; i < forecastsData.length; i++) {
             const element = forecastsData[i];
-            if (element.from.toDateString() == currentDay && element.to.toDateString() == currentDay) {
+            if (element.from.toDateString() == currentDay) {
                 days[dayIndex].push(element);
             }
-            else if (element.from.toDateString() != currentDay && element.to.toDateString() != currentDay) {
+            else if (element.from.toDateString() != currentDay) {
                 dayIndex++;
                 currentDay = element.from.toDateString();
                 days.push([]);
