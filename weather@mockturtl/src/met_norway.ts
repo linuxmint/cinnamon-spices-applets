@@ -15,7 +15,7 @@ var isCoordinate = utils.isCoordinate as (text: any) => boolean;
 var icons = utils.icons;
 var weatherIconSafely = utils.weatherIconSafely as (code: string[], icon_type: string) => string;
 var CelsiusToKelvin = utils.CelsiusToKelvin as (celsius: number) => number;
-const { spawn_async } = imports.misc.util;
+var SunCalc = importModule("sunCalc").SunCalc;
 
 class MetNorway implements WeatherProvider {
     private ctx: MetNorway
@@ -23,11 +23,13 @@ class MetNorway implements WeatherProvider {
     private baseUrl = "https://api.met.no/weatherapi/locationforecast/1.9/?"
     private xmlParser: any;
     private appletDir: string;
+    private sunCalc: any;
 
     constructor(app: WeatherApplet) {
         this.ctx = this;
         this.app = app;
         this.appletDir = app.appletDir + "/../";
+        this.sunCalc = new SunCalc();
     }
 
     public async GetWeather(): Promise<WeatherData> {
@@ -36,7 +38,7 @@ class MetNorway implements WeatherProvider {
         if (query != "" && query != null) {
             this.app.log.Debug("MET Norway API query: " + query);
             try {
-                json = await this.SpawnProcess(this.GetUrl());
+                json = await this.app.SpawnProcess(['python3', this.appletDir + '/xmlParser.py', query]);
             }
             catch(e) {
                 this.app.HandleHTTPError("met-norway", e, this.app);
@@ -51,27 +53,26 @@ class MetNorway implements WeatherProvider {
             json = JSON.parse(json);
 
             if (json.error) {
-              this.app.HandleError({type: "hard", detail: "bad api response", "service": "met-norway"});
-                return null;
+              let error: XMLParserError = json as XMLParserError;
+              if (error.error.type == "import") {
+                this.app.HandleError({type: "hard", detail: "bad api response", "service": "met-norway", "userError": true});
+                this.app.sendNotification(
+                  _("Weather Applet - Missing Dependencies"),
+                  _("MET Norway requires package installed: \n python3-xmltodict \n (For Arch Linux: python-xmltodict)"))
+              }
+              else {
+                this.app.HandleError({type: "hard", detail: "bad api response", "service": "met-norway"});
+              }
+              
+              return null;
             }
             return await this.ParseWeather(json);
         }
         return null;
     }
 
-    private async SpawnProcess(url: string): Promise<any> {
-      global.log(this.appletDir)
-      let json = await new Promise((resolve: any, reject: any) => {
-        spawn_async(['python', this.appletDir + '/xmlParser.py', url], (aStdout: any) => {
-          resolve(aStdout);
-        });
-      });
-      return json;
-    }
-
     private async ParseWeather(json: any): Promise<WeatherData> {    
-        json = json.weatherdata.product.time;
-        
+        json = json.weatherdata.product.time;        
         // Sorting Data points
         let parsedWeathers: WeatherForecast[] = [];
         let parsed6hourly: SixHourForecast[] = [];
@@ -96,6 +97,7 @@ class MetNorway implements WeatherProvider {
           }
         }
 
+        let times = this.sunCalc.getTimes(new Date(), parsedWeathers[0].lat, parsedWeathers[0].lon, 0);
         // Building weather data
         let forecasts: ForecastData[] = this.BuildForecasts(parsed6hourly);
         let result: WeatherData = {
@@ -113,8 +115,8 @@ class MetNorway implements WeatherProvider {
               type: "percent",
               value: parsedWeathers[0].cloudiness
             },
-            sunrise: null,
-            sunset: null,
+            sunrise: times.sunrise,
+            sunset: times.sunset,
             wind: {
               degree: parsedWeathers[0].windDirection,
               speed: parsedWeathers[0].windSpeed
@@ -151,10 +153,10 @@ class MetNorway implements WeatherProvider {
       days.push([]);
       for (let i = 0; i < forecastsData.length; i++) {
         const element = forecastsData[i];
-        if (element.from.toDateString() == currentDay && element.to.toDateString() == currentDay) {
+        if (element.from.toDateString() == currentDay) {
           days[dayIndex].push(element);
         }
-        else if (element.from.toDateString() != currentDay && element.to.toDateString() != currentDay) {
+        else if (element.from.toDateString() != currentDay) {
           dayIndex ++;
           currentDay = element.from.toDateString();
           days.push([]);
