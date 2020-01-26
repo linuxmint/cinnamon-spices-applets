@@ -39,15 +39,15 @@ function _(str) {
   return Gettext.dgettext(UUID, str);
 }
 
-function MyApplet(orientation) {
-    this._init(orientation);
+function MyApplet(metadata, orientation, panelHeight, instanceId) {
+    this._init(metadata, orientation, panelHeight, instanceId);
 }
 
 MyApplet.prototype = {
     __proto__: Applet.IconApplet.prototype,
 
-    _init: function(orientation) {
-        Applet.IconApplet.prototype._init.call(this, orientation);
+    _init: function(metadata, orientation, panelHeight, instanceId) {
+        Applet.IconApplet.prototype._init.call(this, orientation, panelHeight, instanceId);
 
         try {
             // Holds the subprocess reference to a zbarimg
@@ -180,7 +180,7 @@ MyApplet.prototype = {
     }
 };
 
-function main(metadata, orientation) {
-    let myApplet = new MyApplet(orientation);
+function main(metadata, orientation, panelHeight, instanceId) {
+    let myApplet = new MyApplet(metadata, orientation, panelHeight, instanceId);
     return myApplet;
 }

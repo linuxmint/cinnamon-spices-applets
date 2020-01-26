@@ -43,15 +43,15 @@ QR.prototype = {
     _draw: function() {
         let [width, height] = this.actor.get_surface_size();
         let context = this.actor.get_context();
-        
+
         //clear drawing area
         context.setSourceRGBA(1.0,1.0,1.0,1.0);
         context.rectangle(0, 0, width, height);
         context.fill();
-        
+
         if (!this._qrdata)
             return;
-        
+
         //draw qr code
         context.setSourceRGBA(0.0,0.0,0.0,1.0);
         let length = this._qrdata.length;
