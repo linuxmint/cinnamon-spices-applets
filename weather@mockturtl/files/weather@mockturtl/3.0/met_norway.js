@@ -323,7 +323,7 @@ var MetNorway = (function () {
                 };
             case "DrizzleSun":
                 return {
-                    customIcon: "Cloud-Drizzle-Sun",
+                    customIcon: (checkIfNight && this.IsNight()) ? "Cloud-Drizzle-Moon" : "Cloud-Drizzle-Sun",
                     main: _("Drizzle"),
                     description: _("Drizzle"),
                     icon: weatherIconSafely([icons.showers_scattered, icons.rain_freezing, icons.alert], this.app._icon_type)
@@ -358,7 +358,7 @@ var MetNorway = (function () {
                 };
             case "HeavySleetSun":
                 return {
-                    customIcon: "Cloud-Hail-Sun",
+                    customIcon: (checkIfNight && this.IsNight()) ? "Cloud-Hail-Moon" : "Cloud-Hail-Sun",
                     main: _("Heavy Sleet"),
                     description: _("Mostly Heavy Sleet"),
                     icon: weatherIconSafely([icons.rain_freezing, icons.rain, icons.alert], this.app._icon_type)
@@ -372,7 +372,7 @@ var MetNorway = (function () {
                 };
             case "HeavySleetThunderSun":
                 return {
-                    customIcon: "Cloud-Hail-Sun",
+                    customIcon: (checkIfNight && this.IsNight()) ? "Cloud-Hail-Moon" : "Cloud-Hail-Sun",
                     main: _("Heavy Sleet"),
                     description: _("Mostly Heavy Sleet with Thunderstorms"),
                     icon: weatherIconSafely([icons.rain_freezing, icons.rain, icons.alert], this.app._icon_type)
@@ -393,14 +393,14 @@ var MetNorway = (function () {
                 };
             case "HeavySnowThunderSun":
                 return {
-                    customIcon: "Cloud-Snow-Sun",
+                    customIcon: (checkIfNight && this.IsNight()) ? "Cloud-Snow-Moon" : "Cloud-Snow-Sun",
                     main: _("Heavy Snow"),
                     description: _("Heavy Snow with Thunderstorm"),
                     icon: weatherIconSafely([icons.snow, icons.alert], this.app._icon_type)
                 };
             case "HeavysnowSun":
                 return {
-                    customIcon: "Cloud-Snow-Sun",
+                    customIcon: (checkIfNight && this.IsNight()) ? "Cloud-Snow-Moon" : "Cloud-Snow-Sun",
                     main: _("Heavy Snow"),
                     description: _("Heavy Snow"),
                     icon: weatherIconSafely([icons.snow, icons.alert], this.app._icon_type)
@@ -414,14 +414,14 @@ var MetNorway = (function () {
                 };
             case "LightRain":
                 return {
-                    customIcon: "Cloud-Rain-Sun",
+                    customIcon: (checkIfNight && this.IsNight()) ? "Cloud-Rain-Moon" : "Cloud-Rain-Sun",
                     main: _("Light Rain"),
                     description: _("Light Rain"),
                     icon: weatherIconSafely([icons.showers_scattered, icons.rain, icons.alert], this.app._icon_type)
                 };
             case "LightRainSun":
                 return {
-                    customIcon: "Cloud-Rain-Sun",
+                    customIcon: (checkIfNight && this.IsNight()) ? "Cloud-Rain-Moon" : "Cloud-Rain-Sun",
                     main: _("Light Rain"),
                     description: _("Light Rain"),
                     icon: weatherIconSafely([icons.showers_scattered, icons.rain, icons.alert], this.app._icon_type)
@@ -435,7 +435,7 @@ var MetNorway = (function () {
                 };
             case "LightRainThunderSun":
                 return {
-                    customIcon: "Cloud-Rain-Sun",
+                    customIcon: (checkIfNight && this.IsNight()) ? "Cloud-Rain-Moon" : "Cloud-Rain-Sun",
                     main: _("Light Rain"),
                     description: _("Mostly Ligh Rain with Thunderstorms"),
                     icon: weatherIconSafely([icons.showers_scattered, icons.rain, icons.alert], this.app._icon_type)
@@ -449,7 +449,7 @@ var MetNorway = (function () {
                 };
             case "LightSleetSun":
                 return {
-                    customIcon: "Cloud-Hail-Sun",
+                    customIcon: (checkIfNight && this.IsNight()) ? "Cloud-Hail-Moon" : "Cloud-Hail-Sun",
                     main: _("Light Sleet"),
                     description: _("Mostly Light Sleet"),
                     icon: weatherIconSafely([icons.rain_freezing, icons.showers, icons.alert], this.app._icon_type)
@@ -463,7 +463,7 @@ var MetNorway = (function () {
                 };
             case "LightSleetThunderSun":
                 return {
-                    customIcon: "Cloud-Hail-Sun",
+                    customIcon: (checkIfNight && this.IsNight()) ? "Cloud-Hail-Moon" : "Cloud-Hail-Sun",
                     main: _("Light Sleet"),
                     description: _("Mostly Light Sleet with Thunderstorms"),
                     icon: weatherIconSafely([icons.rain_freezing, icons.showers, icons.alert], this.app._icon_type)
@@ -477,7 +477,7 @@ var MetNorway = (function () {
                 };
             case "LightSnowSun":
                 return {
-                    customIcon: "Cloud-Snow-Sun",
+                    customIcon: (checkIfNight && this.IsNight()) ? "Cloud-Snow-Moon" : "Cloud-Snow-Sun",
                     main: _("Light Snow"),
                     description: _("Mostly Light Snow"),
                     icon: weatherIconSafely([icons.snow, icons.alert], this.app._icon_type)
@@ -491,7 +491,7 @@ var MetNorway = (function () {
                 };
             case "LightSnowThunderSun":
                 return {
-                    customIcon: "Cloud-Snow-Sun",
+                    customIcon: (checkIfNight && this.IsNight()) ? "Cloud-Snow-Moon" : "Cloud-Snow-Sun",
                     main: _("Light Snow"),
                     description: _("Mostly Light Snow with Thunderstorms"),
                     icon: weatherIconSafely([icons.snow, icons.alert], this.app._icon_type)
@@ -512,7 +512,7 @@ var MetNorway = (function () {
                 };
             case "RainSun":
                 return {
-                    customIcon: "Cloud-Rain-Sun",
+                    customIcon: (checkIfNight && this.IsNight()) ? "Cloud-Rain-Moon" : "Cloud-Rain-Sun",
                     main: _("Mostly Rainy"),
                     description: _("Mostly Rainy"),
                     icon: weatherIconSafely([icons.rain, icons.rain_freezing, icons.alert], this.app._icon_type)
@@ -526,7 +526,7 @@ var MetNorway = (function () {
                 };
             case "RainThunderSun":
                 return {
-                    customIcon: "Cloud-Lightning-Sun",
+                    customIcon: (checkIfNight && this.IsNight()) ? "Cloud-Lightning-Moon" : "Cloud-Lightning-Sun",
                     main: _("Rain"),
                     description: _("Mostly Rainy with Thunderstorms"),
                     icon: weatherIconSafely([icons.storm, icons.rain, icons.rain_freezing, icons.alert], this.app._icon_type)
@@ -540,14 +540,14 @@ var MetNorway = (function () {
                 };
             case "SleetSun":
                 return {
-                    customIcon: "Cloud-Hail-Sun",
+                    customIcon: (checkIfNight && this.IsNight()) ? "Cloud-Hail-Moon" : "Cloud-Hail-Sun",
                     main: _("Sleet"),
                     description: _("Mostly Sleet"),
                     icon: weatherIconSafely([icons.rain_freezing, icons.showers, icons.alert], this.app._icon_type)
                 };
             case "SleetSunThunder":
                 return {
-                    customIcon: "Cloud-Hail-Sun",
+                    customIcon: (checkIfNight && this.IsNight()) ? "Cloud-Hail-Moon" : "Cloud-Hail-Sun",
                     main: _("Sleet"),
                     description: _("Mostly Sleet with Thunderstorms"),
                     icon: weatherIconSafely([icons.rain_freezing, icons.showers, icons.alert], this.app._icon_type)
@@ -568,14 +568,14 @@ var MetNorway = (function () {
                 };
             case "SnowSun":
                 return {
-                    customIcon: "Cloud-Snow-Sun",
+                    customIcon: (checkIfNight && this.IsNight()) ? "Cloud-Snow-Moon" : "Cloud-Snow-Sun",
                     main: _("Mostly Snowy"),
                     description: _("Mostly Snowy"),
                     icon: weatherIconSafely([icons.snow, icons.alert], this.app._icon_type)
                 };
             case "SnowSunThunder":
                 return {
-                    customIcon: "Cloud-Snow-Sun",
+                    customIcon: (checkIfNight && this.IsNight()) ? "Cloud-Snow-Moon" : "Cloud-Snow-Sun",
                     main: _("Mostly Snowy"),
                     description: _("Mostly Snowy with Thunder"),
                     icon: weatherIconSafely([icons.snow, icons.alert], this.app._icon_type)
