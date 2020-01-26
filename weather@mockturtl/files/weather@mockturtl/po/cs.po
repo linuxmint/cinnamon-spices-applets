@@ -36,8 +36,8 @@ msgid "No location provided"
 msgstr "Poloha není k dispozici"
 
 #: applet.js:610 3.6/applet.js:610 3.8/applet.js:743
-msgid "Cloudiness:"
-msgstr "Oblačnost:"
+msgid "Cloudiness"
+msgstr "Oblačnost"
 
 #: applet.js:634 3.6/applet.js:634 3.8/applet.js:781
 msgid "Sunrise"

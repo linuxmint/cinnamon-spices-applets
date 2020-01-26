@@ -849,7 +849,7 @@ class WeatherApplet extends TextIconApplet {
       this._currentWeatherApiUnique.text = "";
       this._currentWeatherApiUniqueCap.text = "";
       if (!!this.weather.extra_field) {
-        this._currentWeatherApiUniqueCap.text = _(this.weather.extra_field.name);
+        this._currentWeatherApiUniqueCap.text = _(this.weather.extra_field.name) + ":";
         let value;
         switch (this.weather.extra_field.type) {
           case "percent":

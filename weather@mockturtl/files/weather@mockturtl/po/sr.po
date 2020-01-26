@@ -34,7 +34,7 @@ msgid "No location provided"
 msgstr "Нема постављене локације"
 
 #: applet.js:610 3.0/applet.js:563 3.8/applet.js:472
-msgid "Cloudiness:"
+msgid "Cloudiness"
 msgstr "Облачност"
 
 #: applet.js:634 3.0/applet.js:593 3.8/applet.js:502
@@ -499,7 +499,7 @@ msgid ""
 msgstr "Неочекивана грешка током освежавања времена, погледајте записнике у прозорче огледала"
 
 #: 3.0/applet.js:569 3.8/applet.js:478
-msgid "Feels like:"
+msgid "Feels like"
 msgstr "Као да је"
 
 #: 3.0/applet.js:628 3.8/applet.js:537

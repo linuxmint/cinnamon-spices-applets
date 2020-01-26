@@ -746,7 +746,7 @@ var WeatherApplet = (function (_super) {
             this._currentWeatherApiUnique.text = "";
             this._currentWeatherApiUniqueCap.text = "";
             if (!!this.weather.extra_field) {
-                this._currentWeatherApiUniqueCap.text = _(this.weather.extra_field.name);
+                this._currentWeatherApiUniqueCap.text = _(this.weather.extra_field.name) + ":";
                 var value = void 0;
                 switch (this.weather.extra_field.type) {
                     case "percent":

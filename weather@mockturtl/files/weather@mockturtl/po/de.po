@@ -38,8 +38,8 @@ msgid "No Api Key provided"
 msgstr "API-Schlüssel fehlt"
 
 #: applet.js:621
-msgid "Cloudiness:"
-msgstr "Bewölkung:"
+msgid "Cloudiness"
+msgstr "Bewölkung"
 
 #: applet.js:645
 msgid "Sunrise"

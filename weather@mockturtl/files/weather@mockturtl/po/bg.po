@@ -35,8 +35,8 @@ msgid "No location provided"
 msgstr "Не е указано местоположение"
 
 #: applet.js:610
-msgid "Cloudiness:"
-msgstr "Облачност:"
+msgid "Cloudiness"
+msgstr "Облачност"
 
 #: applet.js:634 3.0/applet.js:646 3.8/applet.js:545
 msgid "Sunrise"
@@ -165,7 +165,7 @@ msgstr "Ключът е временно блокиран"
 
 #: 3.0/openWeatherMap.js:149 3.8/openWeatherMap.js:91
 msgid "Cloudiness"
-msgstr "Облачност:"
+msgstr "Облачност"
 
 #: 3.0/openWeatherMap.js:159 3.8/openWeatherMap.js:101
 msgid "Failed to Process Current Weather Info"

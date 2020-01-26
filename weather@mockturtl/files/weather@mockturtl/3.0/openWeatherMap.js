@@ -147,7 +147,7 @@ var OpenWeatherMap = (function () {
                     customIcon: self.ResolveCustomIcon(get(["weather", "0", "icon"], json))
                 },
                 extra_field: {
-                    name: _("Cloudiness:"),
+                    name: _("Cloudiness"),
                     value: json.clouds.all,
                     type: "percent"
                 },

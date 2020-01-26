@@ -39,8 +39,8 @@ msgid "No location provided"
 msgstr "Ei sijaintia saatavilla"
 
 #: applet.js:610 3.8/applet.js:501 3.4/applet.js:652
-msgid "Cloudiness:"
-msgstr "Pilvisyys:"
+msgid "Cloudiness"
+msgstr "Pilvisyys"
 
 #: applet.js:634 3.8/applet.js:532 3.4/applet.js:683
 msgid "Sunrise"
@@ -211,8 +211,8 @@ msgid "in"
 msgstr "asti"
 
 #: 3.8/applet.js:507 3.4/applet.js:658
-msgid "Feels like:"
-msgstr "Tuntuu kuin:"
+msgid "Feels like"
+msgstr "Tuntuu kuin"
 
 #: 3.8/applet.js:592
 msgid "Today"
