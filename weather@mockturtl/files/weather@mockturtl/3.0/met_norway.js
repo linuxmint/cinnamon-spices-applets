@@ -104,7 +104,7 @@ var MetNorway = (function () {
     };
     MetNorway.prototype.ParseWeather = function (json) {
         return __awaiter(this, void 0, void 0, function () {
-            var parsedWeathers, parsed6hourly, parsedHourly, i, element, fromDate, toDate, item, temp, minTemp, symbol, times, forecasts, result;
+            var parsedWeathers, parsed6hourly, parsedHourly, i, element, fromDate, toDate, item, temp, minTemp, symbol, earliesWeather, earliesCondition, times, forecasts, result;
             return __generator(this, function (_a) {
                 json = json.weatherdata.product.time;
                 parsedWeathers = [];
@@ -128,28 +128,31 @@ var MetNorway = (function () {
                         parsedHourly.push(this.ParseHourlyForecast(item, fromDate, toDate));
                     }
                 }
-                times = this.sunCalc.getTimes(new Date(), parsedWeathers[0].lat, parsedWeathers[0].lon, 0);
+                earliesWeather = this.GetEarliestData(parsedWeathers);
+                earliesCondition = this.GetEarliestData(parsedHourly);
+                times = this.sunCalc.getTimes(new Date(), earliesWeather.lat, earliesWeather.lon, 0);
+                this.sunTimes = times;
                 forecasts = this.BuildForecasts(parsed6hourly);
                 result = {
-                    temperature: CelsiusToKelvin(parsedWeathers[0].temperature),
+                    temperature: CelsiusToKelvin(earliesWeather.temperature),
                     coord: {
-                        lat: parsedWeathers[0].lat,
-                        lon: parsedWeathers[0].lon
+                        lat: earliesWeather.lat,
+                        lon: earliesWeather.lon
                     },
-                    date: parsedWeathers[0].from,
-                    condition: this.ResolveCondition(parsedHourly[0].symbol),
-                    humidity: parsedWeathers[0].humidity,
-                    pressure: parsedWeathers[0].pressure,
+                    date: earliesWeather.from,
+                    condition: this.ResolveCondition(earliesCondition.symbol, true),
+                    humidity: earliesWeather.humidity,
+                    pressure: earliesWeather.pressure,
                     extra_field: {
-                        name: _("Cloudiness:"),
+                        name: _("Cloudiness"),
                         type: "percent",
-                        value: parsedWeathers[0].cloudiness
+                        value: earliesWeather.cloudiness
                     },
                     sunrise: times.sunrise,
                     sunset: times.sunset,
                     wind: {
-                        degree: parsedWeathers[0].windDirection,
-                        speed: parsedWeathers[0].windSpeed
+                        degree: earliesWeather.windDirection,
+                        speed: earliesWeather.windSpeed
                     },
                     location: {
                         url: null,
@@ -171,14 +174,13 @@ var MetNorway = (function () {
         }
         return events[earliest];
     };
-    MetNorway.prototype.BuildForecasts = function (forecastsData) {
-        var forecasts = [];
+    MetNorway.prototype.SortDataByDay = function (data) {
         var days = [];
-        var currentDay = this.GetEarliestData(forecastsData).from.toDateString();
+        var currentDay = this.GetEarliestData(data).from.toDateString();
         var dayIndex = 0;
         days.push([]);
-        for (var i = 0; i < forecastsData.length; i++) {
-            var element = forecastsData[i];
+        for (var i = 0; i < data.length; i++) {
+            var element = data[i];
             if (element.from.toDateString() == currentDay) {
                 days[dayIndex].push(element);
             }
@@ -189,6 +191,11 @@ var MetNorway = (function () {
                 days[dayIndex].push(element);
             }
         }
+        return days;
+    };
+    MetNorway.prototype.BuildForecasts = function (forecastsData) {
+        var forecasts = [];
+        var days = this.SortDataByDay(forecastsData);
         for (var i = 0; i < days.length; i++) {
             var forecast = {
                 condition: {
@@ -209,11 +216,13 @@ var MetNorway = (function () {
                     forecast.temp_max = element.maxTemperature;
                 if (element.minTemperature < forecast.temp_min)
                     forecast.temp_min = element.minTemperature;
-                conditionCounter[element.symbol] = (!!conditionCounter[element.symbol]) ? conditionCounter[element.symbol]++ : 1;
+                if (!conditionCounter[element.symbolID])
+                    conditionCounter[element.symbolID] = { count: 0, name: element.symbol };
+                conditionCounter[element.symbolID].count = conditionCounter[element.symbolID].count + 1;
             }
             forecast.temp_max = CelsiusToKelvin(forecast.temp_max);
             forecast.temp_min = CelsiusToKelvin(forecast.temp_min);
-            forecast.condition = this.ResolveCondition(this.GetMostCommonCondition(conditionCounter));
+            forecast.condition = this.ResolveCondition(this.GetMostSevereCondition(conditionCounter));
             forecasts.push(forecast);
         }
         return forecasts;
@@ -222,11 +231,23 @@ var MetNorway = (function () {
         var result = null;
         for (var key in count) {
             if (result == null)
-                result = key;
-            if (count[result] < count[key])
-                result = key;
+                result = parseInt(key);
+            if (count[result].count < count[key].count)
+                result = parseInt(key);
         }
-        return result;
+        var condition = count[result].name.replace("Dark_", "");
+        return condition;
+    };
+    MetNorway.prototype.GetMostSevereCondition = function (conditions) {
+        var result = null;
+        for (var key in conditions) {
+            var conditionID = parseInt(key);
+            if (conditionID > 100)
+                conditionID = -100;
+            if (conditionID > result)
+                result = conditionID;
+        }
+        return conditions[result].name;
     };
     MetNorway.prototype.ParseCurrentWeather = function (element, from, to) {
         return {
@@ -253,7 +274,8 @@ var MetNorway = (function () {
             maxTemperature: parseFloat(element.maxTemperature["@value"]),
             from: from,
             to: to,
-            symbol: element.symbol["@id"]
+            symbol: element.symbol["@id"],
+            symbolID: element.symbol["@number"]
         };
     };
     MetNorway.prototype.ParseHourlyForecast = function (element, from, to) {
@@ -261,7 +283,8 @@ var MetNorway = (function () {
             precipitation: parseFloat(element.precipitation["@value"]),
             from: from,
             to: to,
-            symbol: element.symbol["@id"]
+            symbol: element.symbol["@id"],
+            symbolID: element.symbol["@number"]
         };
     };
     MetNorway.prototype.GetUrl = function () {
@@ -273,7 +296,15 @@ var MetNorway = (function () {
         url += (latLon[0] + "&lon=" + latLon[1]);
         return url;
     };
-    MetNorway.prototype.ResolveCondition = function (icon) {
+    MetNorway.prototype.IsNight = function () {
+        if (!this.sunTimes)
+            return false;
+        var now = new Date();
+        if (now < this.sunTimes.sunrise || now > this.sunTimes.sunset)
+            return true;
+        return false;
+    };
+    MetNorway.prototype.ResolveCondition = function (icon, checkIfNight) {
         var condition = icon.replace("Dark_", "");
         switch (condition) {
             case "Cloud":
@@ -349,7 +380,7 @@ var MetNorway = (function () {
             case "HeavySnow":
                 return {
                     customIcon: "Cloud-Snow",
-                    main: _("heavy Snow"),
+                    main: _("Heavy Snow"),
                     description: _("Heavy Snow"),
                     icon: weatherIconSafely([icons.snow, icons.alert], this.app._icon_type)
                 };
@@ -376,10 +407,10 @@ var MetNorway = (function () {
                 };
             case "LightCloud":
                 return {
-                    customIcon: "Cloud-Sun",
-                    main: _("Mostly Sunny"),
-                    description: _("Mostly Sunny"),
-                    icon: weatherIconSafely([icons.few_clouds_day, icons.alert], this.app._icon_type)
+                    customIcon: (checkIfNight && this.IsNight()) ? "Cloud-Moon" : "Cloud-Sun",
+                    main: _("Few Clouds"),
+                    description: _("Few Clouds"),
+                    icon: weatherIconSafely((checkIfNight && this.IsNight()) ? [icons.few_clouds_night, icons.alert] : [icons.few_clouds_day, icons.alert], this.app._icon_type)
                 };
             case "LightRain":
                 return {
@@ -392,7 +423,7 @@ var MetNorway = (function () {
                 return {
                     customIcon: "Cloud-Rain-Sun",
                     main: _("Light Rain"),
-                    description: _(""),
+                    description: _("Light Rain"),
                     icon: weatherIconSafely([icons.showers_scattered, icons.rain, icons.alert], this.app._icon_type)
                 };
             case "LightRainThunder":
@@ -467,10 +498,10 @@ var MetNorway = (function () {
                 };
             case "PartlyCloud":
                 return {
-                    customIcon: "Cloud-Sun",
+                    customIcon: (checkIfNight && this.IsNight()) ? "Cloud-Moon" : "Cloud-Sun",
                     main: _("Partly Cloudy"),
                     description: _("Partly Cloudy"),
-                    icon: weatherIconSafely([icons.few_clouds_day, icons.clouds, icons.overcast, icons.alert], this.app._icon_type)
+                    icon: weatherIconSafely((checkIfNight && this.IsNight()) ? [icons.few_clouds_night, icons.clouds, icons.overcast, icons.alert] : [icons.few_clouds_day, icons.clouds, icons.overcast, icons.alert], this.app._icon_type)
                 };
             case "Rain":
                 return {
@@ -558,10 +589,10 @@ var MetNorway = (function () {
                 };
             case "Sun":
                 return {
-                    customIcon: "Sun",
-                    main: _("Sunny"),
-                    description: _("Sunny"),
-                    icon: weatherIconSafely([icons.clear_day, icons.alert], this.app._icon_type)
+                    customIcon: (checkIfNight && this.IsNight()) ? "Moon" : "Sun",
+                    main: _("Clear"),
+                    description: _("Clear"),
+                    icon: weatherIconSafely((checkIfNight && this.IsNight()) ? [icons.clear_night, icons.alert] : [icons.clear_day, icons.alert], this.app._icon_type)
                 };
         }
     };

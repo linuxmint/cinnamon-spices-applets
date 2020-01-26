@@ -77,28 +77,31 @@ class MetNorway {
                 parsedHourly.push(this.ParseHourlyForecast(item, fromDate, toDate));
             }
         }
-        let times = this.sunCalc.getTimes(new Date(), parsedWeathers[0].lat, parsedWeathers[0].lon, 0);
+        let earliesWeather = this.GetEarliestData(parsedWeathers);
+        let earliesCondition = this.GetEarliestData(parsedHourly);
+        let times = this.sunCalc.getTimes(new Date(), earliesWeather.lat, earliesWeather.lon, 0);
+        this.sunTimes = times;
         let forecasts = this.BuildForecasts(parsed6hourly);
         let result = {
-            temperature: CelsiusToKelvin(parsedWeathers[0].temperature),
+            temperature: CelsiusToKelvin(earliesWeather.temperature),
             coord: {
-                lat: parsedWeathers[0].lat,
-                lon: parsedWeathers[0].lon
+                lat: earliesWeather.lat,
+                lon: earliesWeather.lon
             },
-            date: parsedWeathers[0].from,
-            condition: this.ResolveCondition(parsedHourly[0].symbol),
-            humidity: parsedWeathers[0].humidity,
-            pressure: parsedWeathers[0].pressure,
+            date: earliesWeather.from,
+            condition: this.ResolveCondition(earliesCondition.symbol, true),
+            humidity: earliesWeather.humidity,
+            pressure: earliesWeather.pressure,
             extra_field: {
-                name: _("Cloudiness:"),
+                name: _("Cloudiness"),
                 type: "percent",
-                value: parsedWeathers[0].cloudiness
+                value: earliesWeather.cloudiness
             },
             sunrise: times.sunrise,
             sunset: times.sunset,
             wind: {
-                degree: parsedWeathers[0].windDirection,
-                speed: parsedWeathers[0].windSpeed
+                degree: earliesWeather.windDirection,
+                speed: earliesWeather.windSpeed
             },
             location: {
                 url: null,
@@ -118,14 +121,13 @@ class MetNorway {
         }
         return events[earliest];
     }
-    BuildForecasts(forecastsData) {
-        let forecasts = [];
+    SortDataByDay(data) {
         let days = [];
-        let currentDay = this.GetEarliestData(forecastsData).from.toDateString();
+        let currentDay = this.GetEarliestData(data).from.toDateString();
         let dayIndex = 0;
         days.push([]);
-        for (let i = 0; i < forecastsData.length; i++) {
-            const element = forecastsData[i];
+        for (let i = 0; i < data.length; i++) {
+            const element = data[i];
             if (element.from.toDateString() == currentDay) {
                 days[dayIndex].push(element);
             }
@@ -136,6 +138,11 @@ class MetNorway {
                 days[dayIndex].push(element);
             }
         }
+        return days;
+    }
+    BuildForecasts(forecastsData) {
+        let forecasts = [];
+        let days = this.SortDataByDay(forecastsData);
         for (let i = 0; i < days.length; i++) {
             let forecast = {
                 condition: {
@@ -156,11 +163,13 @@ class MetNorway {
                     forecast.temp_max = element.maxTemperature;
                 if (element.minTemperature < forecast.temp_min)
                     forecast.temp_min = element.minTemperature;
-                conditionCounter[element.symbol] = (!!conditionCounter[element.symbol]) ? conditionCounter[element.symbol]++ : 1;
+                if (!conditionCounter[element.symbolID])
+                    conditionCounter[element.symbolID] = { count: 0, name: element.symbol };
+                conditionCounter[element.symbolID].count = conditionCounter[element.symbolID].count + 1;
             }
             forecast.temp_max = CelsiusToKelvin(forecast.temp_max);
             forecast.temp_min = CelsiusToKelvin(forecast.temp_min);
-            forecast.condition = this.ResolveCondition(this.GetMostCommonCondition(conditionCounter));
+            forecast.condition = this.ResolveCondition(this.GetMostSevereCondition(conditionCounter));
             forecasts.push(forecast);
         }
         return forecasts;
@@ -169,11 +178,23 @@ class MetNorway {
         let result = null;
         for (let key in count) {
             if (result == null)
-                result = key;
-            if (count[result] < count[key])
-                result = key;
+                result = parseInt(key);
+            if (count[result].count < count[key].count)
+                result = parseInt(key);
         }
-        return result;
+        let condition = count[result].name.replace("Dark_", "");
+        return condition;
+    }
+    GetMostSevereCondition(conditions) {
+        let result = null;
+        for (let key in conditions) {
+            let conditionID = parseInt(key);
+            if (conditionID > 100)
+                conditionID = -100;
+            if (conditionID > result)
+                result = conditionID;
+        }
+        return conditions[result].name;
     }
     ParseCurrentWeather(element, from, to) {
         return {
@@ -200,7 +221,8 @@ class MetNorway {
             maxTemperature: parseFloat(element.maxTemperature["@value"]),
             from: from,
             to: to,
-            symbol: element.symbol["@id"]
+            symbol: element.symbol["@id"],
+            symbolID: element.symbol["@number"]
         };
     }
     ParseHourlyForecast(element, from, to) {
@@ -208,7 +230,8 @@ class MetNorway {
             precipitation: parseFloat(element.precipitation["@value"]),
             from: from,
             to: to,
-            symbol: element.symbol["@id"]
+            symbol: element.symbol["@id"],
+            symbolID: element.symbol["@number"]
         };
     }
     GetUrl() {
@@ -220,7 +243,15 @@ class MetNorway {
         url += (latLon[0] + "&lon=" + latLon[1]);
         return url;
     }
-    ResolveCondition(icon) {
+    IsNight() {
+        if (!this.sunTimes)
+            return false;
+        let now = new Date();
+        if (now < this.sunTimes.sunrise || now > this.sunTimes.sunset)
+            return true;
+        return false;
+    }
+    ResolveCondition(icon, checkIfNight) {
         let condition = icon.replace("Dark_", "");
         switch (condition) {
             case "Cloud":
@@ -296,7 +327,7 @@ class MetNorway {
             case "HeavySnow":
                 return {
                     customIcon: "Cloud-Snow",
-                    main: _("heavy Snow"),
+                    main: _("Heavy Snow"),
                     description: _("Heavy Snow"),
                     icon: weatherIconSafely([icons.snow, icons.alert], this.app._icon_type)
                 };
@@ -323,10 +354,10 @@ class MetNorway {
                 };
             case "LightCloud":
                 return {
-                    customIcon: "Cloud-Sun",
-                    main: _("Mostly Sunny"),
-                    description: _("Mostly Sunny"),
-                    icon: weatherIconSafely([icons.few_clouds_day, icons.alert], this.app._icon_type)
+                    customIcon: (checkIfNight && this.IsNight()) ? "Cloud-Moon" : "Cloud-Sun",
+                    main: _("Few Clouds"),
+                    description: _("Few Clouds"),
+                    icon: weatherIconSafely((checkIfNight && this.IsNight()) ? [icons.few_clouds_night, icons.alert] : [icons.few_clouds_day, icons.alert], this.app._icon_type)
                 };
             case "LightRain":
                 return {
@@ -339,7 +370,7 @@ class MetNorway {
                 return {
                     customIcon: "Cloud-Rain-Sun",
                     main: _("Light Rain"),
-                    description: _(""),
+                    description: _("Light Rain"),
                     icon: weatherIconSafely([icons.showers_scattered, icons.rain, icons.alert], this.app._icon_type)
                 };
             case "LightRainThunder":
@@ -414,10 +445,10 @@ class MetNorway {
                 };
             case "PartlyCloud":
                 return {
-                    customIcon: "Cloud-Sun",
+                    customIcon: (checkIfNight && this.IsNight()) ? "Cloud-Moon" : "Cloud-Sun",
                     main: _("Partly Cloudy"),
                     description: _("Partly Cloudy"),
-                    icon: weatherIconSafely([icons.few_clouds_day, icons.clouds, icons.overcast, icons.alert], this.app._icon_type)
+                    icon: weatherIconSafely((checkIfNight && this.IsNight()) ? [icons.few_clouds_night, icons.clouds, icons.overcast, icons.alert] : [icons.few_clouds_day, icons.clouds, icons.overcast, icons.alert], this.app._icon_type)
                 };
             case "Rain":
                 return {
@@ -505,10 +536,10 @@ class MetNorway {
                 };
             case "Sun":
                 return {
-                    customIcon: "Sun",
-                    main: _("Sunny"),
-                    description: _("Sunny"),
-                    icon: weatherIconSafely([icons.clear_day, icons.alert], this.app._icon_type)
+                    customIcon: (checkIfNight && this.IsNight()) ? "Moon" : "Sun",
+                    main: _("Clear"),
+                    description: _("Clear"),
+                    icon: weatherIconSafely((checkIfNight && this.IsNight()) ? [icons.clear_night, icons.alert] : [icons.clear_day, icons.alert], this.app._icon_type)
                 };
         }
     }

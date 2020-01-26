@@ -24,6 +24,7 @@ class MetNorway implements WeatherProvider {
     private xmlParser: any;
     private appletDir: string;
     private sunCalc: any;
+    private sunTimes: any;
 
     constructor(app: WeatherApplet) {
         this.ctx = this;
@@ -92,34 +93,38 @@ class MetNorway implements WeatherProvider {
           else if (!!minTemp && !!symbol) { // 6-hour forecast
             parsed6hourly.push(this.Parse6HourForecast(item, fromDate, toDate));
           }
-          else if (!minTemp && !!symbol) { // Hourly forecats with confition
+          else if (!minTemp && !!symbol) { // Hourly forecats with condition
             parsedHourly.push(this.ParseHourlyForecast(item, fromDate, toDate));
           }
         }
 
-        let times = this.sunCalc.getTimes(new Date(), parsedWeathers[0].lat, parsedWeathers[0].lon, 0);
+        let earliesWeather = this.GetEarliestData(parsedWeathers) as WeatherForecast;
+        let earliesCondition = this.GetEarliestData(parsedHourly) as HourlyForecast;
+
+        let times = this.sunCalc.getTimes(new Date(), earliesWeather.lat, earliesWeather.lon, 0);
+        this.sunTimes = times;
         // Building weather data
         let forecasts: ForecastData[] = this.BuildForecasts(parsed6hourly);
         let result: WeatherData = {
-            temperature: CelsiusToKelvin(parsedWeathers[0].temperature),
+            temperature: CelsiusToKelvin(earliesWeather.temperature),
             coord: {
-              lat: parsedWeathers[0].lat,
-              lon: parsedWeathers[0].lon
+              lat: earliesWeather.lat,
+              lon: earliesWeather.lon
             },
-            date: parsedWeathers[0].from,
-            condition: this.ResolveCondition(parsedHourly[0].symbol),
-            humidity: parsedWeathers[0].humidity,
-            pressure: parsedWeathers[0].pressure,
+            date: earliesWeather.from,
+            condition: this.ResolveCondition(earliesCondition.symbol, true),
+            humidity: earliesWeather.humidity,
+            pressure: earliesWeather.pressure,
             extra_field: {
-              name: _("Cloudiness:"),
+              name: _("Cloudiness"),
               type: "percent",
-              value: parsedWeathers[0].cloudiness
+              value: earliesWeather.cloudiness
             },
             sunrise: times.sunrise,
             sunset: times.sunset,
             wind: {
-              degree: parsedWeathers[0].windDirection,
-              speed: parsedWeathers[0].windSpeed
+              degree: earliesWeather.windDirection,
+              speed: earliesWeather.windSpeed
             },
             location: {
               url: null,
@@ -142,17 +147,15 @@ class MetNorway implements WeatherProvider {
       return events[earliest];
     }
 
-    private BuildForecasts(forecastsData: SixHourForecast[]): ForecastData[] {
-      let forecasts: ForecastData[] = [];
-      let days: Array<SixHourForecast[]> = []
-
+    private SortDataByDay(data: SixHourForecast[] | HourlyForecast[] | WeatherForecast[]):  Array<SixHourForecast[]> | Array<HourlyForecast[]> | Array<WeatherForecast[]> {
+      let days: Array<any> = []
       // Sorting and conatinerizing forecasts by date
-      // Ingoring forecast for multiple days (eg. 22/12/2019 22:00 - 23/12/2019 04:00)
-      let currentDay = this.GetEarliestData(forecastsData).from.toDateString();
+      // Using "from" attribute
+      let currentDay = this.GetEarliestData(data).from.toDateString();
       let dayIndex = 0;
       days.push([]);
-      for (let i = 0; i < forecastsData.length; i++) {
-        const element = forecastsData[i];
+      for (let i = 0; i < data.length; i++) {
+        const element = data[i];
         if (element.from.toDateString() == currentDay) {
           days[dayIndex].push(element);
         }
@@ -164,6 +167,14 @@ class MetNorway implements WeatherProvider {
         }
       }
 
+      return days;
+    }
+
+    private BuildForecasts(forecastsData: SixHourForecast[]): ForecastData[] {
+      let forecasts: ForecastData[] = [];
+      let days: Array<SixHourForecast[]> = this.SortDataByDay(forecastsData) as Array<SixHourForecast[]>;
+
+      // TODO:  Switch to processing Hourly forecast for conditions
       for (let i = 0; i < days.length; i++) {
         let forecast: ForecastData = {
           condition: {
@@ -177,33 +188,49 @@ class MetNorway implements WeatherProvider {
           temp_min: Number.POSITIVE_INFINITY
         }
 
-        // Build daily data
-        let conditionCounter: ConditionCount = {}
+        // Get min/max temp from 6-hourly data
+        // get condition from hourly data
+        let conditionCounter: ConditionCount = {};
         for (let j = 0; j < days[i].length; j++) {
           const element = days[i][j];
           forecast.date = element.from;
           if (element.maxTemperature > forecast.temp_max) forecast.temp_max = element.maxTemperature;
           if (element.minTemperature < forecast.temp_min) forecast.temp_min = element.minTemperature;
-          conditionCounter[element.symbol] = (!!conditionCounter[element.symbol]) ? conditionCounter[element.symbol]++ : 1;
+          if (!conditionCounter[element.symbolID]) conditionCounter[element.symbolID] = {count: 0, name: element.symbol};
+          conditionCounter[element.symbolID].count = conditionCounter[element.symbolID].count + 1;
         }
 
         forecast.temp_max = CelsiusToKelvin(forecast.temp_max);
         forecast.temp_min = CelsiusToKelvin(forecast.temp_min);
+        forecast.condition = this.ResolveCondition(this.GetMostSevereCondition(conditionCounter));
 
-        forecast.condition = this.ResolveCondition(this.GetMostCommonCondition(conditionCounter));
         forecasts.push(forecast);
-
       }
       return forecasts;
     }
 
     private GetMostCommonCondition(count: ConditionCount): string {
-      let result: string  = null;
+      let result: number  = null;
       for (let key in count) {
-        if (result == null) result = key;
-        if (count[result] < count[key]) result = key;
+        if (result == null) result = parseInt(key);
+        if (count[result].count < count[key].count) result = parseInt(key);
       }
-      return result;
+      let condition: Conditions = count[result].name.replace("Dark_", "") as Conditions;
+      return condition;
+    }
+
+    private GetMostSevereCondition(conditions: ConditionCount): string {
+      // Refer to
+      // https://api.met.no/weatherapi/weathericon/1.1/documentation
+      // for Weather conditions
+      //this.app.log.Debug(JSON.stringify(conditions));
+      let result: number  = null;
+      for (let key in conditions) {
+        let conditionID = parseInt(key);
+        if (conditionID > 100) conditionID=- 100; 
+        if (conditionID > result) result = conditionID;
+      }
+      return conditions[result].name;
     }
 
     private ParseCurrentWeather(element: any, from: Date, to: Date): WeatherForecast {
@@ -233,7 +260,8 @@ class MetNorway implements WeatherProvider {
         maxTemperature: parseFloat(element.maxTemperature["@value"]),
         from: from,
         to: to,
-        symbol: element.symbol["@id"]
+        symbol: element.symbol["@id"],
+        symbolID: element.symbol["@number"]
       }
     }
 
@@ -242,7 +270,8 @@ class MetNorway implements WeatherProvider {
         precipitation: parseFloat(element.precipitation["@value"]),
         from: from,
         to: to,
-        symbol: element.symbol["@id"]
+        symbol: element.symbol["@id"],
+        symbolID: element.symbol["@number"]
       }
     }
 
@@ -256,7 +285,14 @@ class MetNorway implements WeatherProvider {
         return url;
     }
 
-    private ResolveCondition(icon: string): Condition {
+    private IsNight(): boolean {
+      if (!this.sunTimes) return false;
+      let now = new Date();
+      if (now < this.sunTimes.sunrise || now > this.sunTimes.sunset) return true;
+      return false;
+    }
+
+    private ResolveCondition(icon: string, checkIfNight?: boolean): Condition {
       let condition: Conditions = icon.replace("Dark_", "") as Conditions;
       switch (condition) {
         case "Cloud":
@@ -332,7 +368,7 @@ class MetNorway implements WeatherProvider {
         case "HeavySnow":
           return {
             customIcon : "Cloud-Snow",
-            main: _("heavy Snow"),
+            main: _("Heavy Snow"),
             description: _("Heavy Snow"),
             icon: weatherIconSafely([icons.snow, icons.alert], this.app._icon_type)
           }
@@ -359,10 +395,10 @@ class MetNorway implements WeatherProvider {
           }
         case "LightCloud":
           return {
-            customIcon : "Cloud-Sun",
-            main: _("Mostly Sunny"),
-            description: _("Mostly Sunny"),
-            icon: weatherIconSafely([icons.few_clouds_day, icons.alert], this.app._icon_type)
+            customIcon : (checkIfNight && this.IsNight()) ? "Cloud-Moon" : "Cloud-Sun",
+            main: _("Few Clouds"),
+            description: _("Few Clouds"),
+            icon: weatherIconSafely((checkIfNight && this.IsNight()) ? [icons.few_clouds_night, icons.alert] : [icons.few_clouds_day, icons.alert], this.app._icon_type)
           }
         case "LightRain":
           return {
@@ -375,7 +411,7 @@ class MetNorway implements WeatherProvider {
           return {
             customIcon : "Cloud-Rain-Sun",
             main: _("Light Rain"),
-            description: _(""),
+            description: _("Light Rain"),
             icon: weatherIconSafely([icons.showers_scattered, icons.rain, icons.alert], this.app._icon_type)
           }
         case "LightRainThunder":
@@ -450,10 +486,10 @@ class MetNorway implements WeatherProvider {
           }
         case "PartlyCloud":
           return {
-            customIcon : "Cloud-Sun",
+            customIcon : (checkIfNight && this.IsNight()) ? "Cloud-Moon" : "Cloud-Sun",
             main: _("Partly Cloudy"),
             description: _("Partly Cloudy"),
-            icon: weatherIconSafely([icons.few_clouds_day, icons.clouds, icons.overcast, icons.alert], this.app._icon_type)
+            icon: weatherIconSafely((checkIfNight && this.IsNight()) ? [icons.few_clouds_night, icons.clouds, icons.overcast, icons.alert] : [icons.few_clouds_day, icons.clouds, icons.overcast, icons.alert], this.app._icon_type)
           }
         case "Rain":
           return {
@@ -541,14 +577,13 @@ class MetNorway implements WeatherProvider {
           }
         case "Sun":
           return {
-            customIcon : "Sun",
-            main: _("Sunny"),
-            description: _("Sunny"),
-            icon: weatherIconSafely([icons.clear_day, icons.alert], this.app._icon_type)
+            customIcon : (checkIfNight && this.IsNight()) ? "Moon" : "Sun",
+            main: _("Clear"),
+            description: _("Clear"),
+            icon: weatherIconSafely((checkIfNight && this.IsNight()) ? [icons.clear_night, icons.alert] : [icons.clear_day, icons.alert], this.app._icon_type)
           }
       }
     }
-
   }
 
 
@@ -591,6 +626,7 @@ interface SixHourForecast {
   /**celsius */
   maxTemperature: number;
   symbol: string;
+  symbolID: number;
 }
 
 interface HourlyForecast {
@@ -599,10 +635,16 @@ interface HourlyForecast {
   /**mm */
   precipitation: number;
   symbol: string;
+  symbolID: number;
 }
 
 interface ConditionCount {
-  [key: string]: number
+  [key: number]: METCondition
+}
+
+interface METCondition {
+  count: number;
+  name: string;
 }
 
 type Conditions = "Sun" | "LightCloud" | "PartlyCloud" | "Cloud" | "LightRainSun" | "LightRainThunderSun" |
