@@ -125,6 +125,8 @@ class MetNorway {
         for (let i = 0; i < events.length; i++) {
             const element = events[i];
             const earliestElement = events[earliest];
+            if (element.from.toDateString() != new Date().toDateString())
+                continue;
             if (earliestElement.from < element.from)
                 continue;
             earliest = i;
@@ -133,17 +135,17 @@ class MetNorway {
     }
     SortDataByDay(data) {
         let days = [];
-        let currentDay = this.GetEarliestDataForToday(data).from.toDateString();
+        let currentDay = this.GetEarliestDataForToday(data).from;
         let dayIndex = 0;
         days.push([]);
         for (let i = 0; i < data.length; i++) {
             const element = data[i];
-            if (element.from.toDateString() == currentDay) {
+            if (element.from.toDateString() == currentDay.toDateString()) {
                 days[dayIndex].push(element);
             }
-            else if (element.from.toDateString() != currentDay) {
+            else if (element.from.toDateString() != currentDay.toDateString()) {
                 dayIndex++;
-                currentDay = element.from.toDateString();
+                currentDay = element.from;
                 days.push([]);
                 days[dayIndex].push(element);
             }

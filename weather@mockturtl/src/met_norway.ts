@@ -146,12 +146,12 @@ class MetNorway implements WeatherProvider {
     }
 
     private GetEarliestDataForToday(events: SixHourForecast[] | HourlyForecast[] | WeatherForecast[]): SixHourForecast | HourlyForecast | WeatherForecast {
-      // TODO: Check if earliest data is for today
       let earliest: number = 0;
       for (let i = 0; i < events.length; i++) {
         const element = events[i];
         const earliestElement = events[earliest];
 
+        if (element.from.toDateString() != new Date().toDateString()) continue;
         if (earliestElement.from < element.from) continue;
 
         earliest = i;
@@ -163,17 +163,17 @@ class MetNorway implements WeatherProvider {
       let days: Array<any> = []
       // Sorting and conatinerizing forecasts by date
       // Using "from" attribute
-      let currentDay = this.GetEarliestDataForToday(data).from.toDateString();
+      let currentDay = this.GetEarliestDataForToday(data).from;
       let dayIndex = 0;
       days.push([]);
       for (let i = 0; i < data.length; i++) {
         const element = data[i];
-        if (element.from.toDateString() == currentDay) {
+        if (element.from.toDateString() == currentDay.toDateString()) {
           days[dayIndex].push(element);
         }
-        else if (element.from.toDateString() != currentDay) {
+        else if (element.from.toDateString() != currentDay.toDateString()) {
           dayIndex ++;
-          currentDay = element.from.toDateString();
+          currentDay = element.from;
           days.push([]);
           days[dayIndex].push(element);
         }

@@ -178,6 +178,8 @@ var MetNorway = (function () {
         for (var i = 0; i < events.length; i++) {
             var element = events[i];
             var earliestElement = events[earliest];
+            if (element.from.toDateString() != new Date().toDateString())
+                continue;
             if (earliestElement.from < element.from)
                 continue;
             earliest = i;
@@ -186,17 +188,17 @@ var MetNorway = (function () {
     };
     MetNorway.prototype.SortDataByDay = function (data) {
         var days = [];
-        var currentDay = this.GetEarliestDataForToday(data).from.toDateString();
+        var currentDay = this.GetEarliestDataForToday(data).from;
         var dayIndex = 0;
         days.push([]);
         for (var i = 0; i < data.length; i++) {
             var element = data[i];
-            if (element.from.toDateString() == currentDay) {
+            if (element.from.toDateString() == currentDay.toDateString()) {
                 days[dayIndex].push(element);
             }
-            else if (element.from.toDateString() != currentDay) {
+            else if (element.from.toDateString() != currentDay.toDateString()) {
                 dayIndex++;
-                currentDay = element.from.toDateString();
+                currentDay = element.from;
                 days.push([]);
                 days[dayIndex].push(element);
             }
