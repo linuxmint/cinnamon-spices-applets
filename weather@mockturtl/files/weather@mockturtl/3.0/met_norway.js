@@ -52,15 +52,14 @@ var CelsiusToKelvin = utils.CelsiusToKelvin;
 var SunCalc = importModule("sunCalc").SunCalc;
 var MetNorway = (function () {
     function MetNorway(app) {
-        this.baseUrl = "https://api.met.no/weatherapi/locationforecast/1.9/?";
+        this.baseUrl = "https://api.met.no/weatherapi/locationforecast/1.9/.json?";
         this.ctx = this;
         this.app = app;
-        this.appletDir = app.appletDir + "/../";
         this.sunCalc = new SunCalc();
     }
     MetNorway.prototype.GetWeather = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var query, json, e_1, error;
+            var query, json, e_1;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -70,36 +69,27 @@ var MetNorway = (function () {
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
-                        return [4, this.app.SpawnProcess(['python3', this.appletDir + '/xmlParser.py', query])];
+                        return [4, this.app.LoadAsync(query)];
                     case 2:
                         json = _a.sent();
                         return [3, 4];
                     case 3:
                         e_1 = _a.sent();
                         this.app.HandleHTTPError("met-norway", e_1, this.app);
+                        this.app.log.Error("MET Norway: Network error - " + e_1);
                         return [2, null];
                     case 4:
                         if (!json) {
                             this.app.HandleError({ type: "soft", detail: "no api response", service: "met-norway" });
+                            this.app.log.Error("MET Norway: Empty response from API");
                             return [2, null];
                         }
-                        json = JSON.parse(json);
-                        if (json.error) {
-                            error = json;
-                            this.app.log.Error("MET Norway error: " + error.error.message);
-                            if (error.error.type == "import") {
-                                this.app.HandleError({ type: "hard", detail: "bad api response", "service": "met-norway", "userError": true });
-                                this.app.sendNotification(_("Weather Applet - Missing Dependencies"), _("MET Norway requires package installed: \n python3-xmltodict \n (For Arch Linux: python-xmltodict)"));
-                            }
-                            if (error.error.type == "network") {
-                                this.app.HandleError({ type: "soft", detail: "no network response", "service": "met-norway" });
-                            }
-                            if (error.error.type == "payload") {
-                                this.app.HandleError({ type: "soft", detail: "unusal payload", "service": "met-norway" });
-                            }
-                            else {
-                                this.app.HandleError({ type: "hard", detail: "unknown", "service": "met-norway" });
-                            }
+                        try {
+                            json = JSON.parse(json);
+                        }
+                        catch (e) {
+                            this.app.HandleError({ type: "soft", detail: "unusal payload", service: "met-norway" });
+                            this.app.log.Error("MET Norway: Payload is not JSON, aborting.");
                             return [2, null];
                         }
                         return [4, this.ParseWeather(json)];
@@ -113,14 +103,14 @@ var MetNorway = (function () {
         return __awaiter(this, void 0, void 0, function () {
             var parsedWeathers, parsed6hourly, parsedHourly, i, element, fromDate, toDate, item, temp, minTemp, symbol, forecasts, weather;
             return __generator(this, function (_a) {
-                json = json.weatherdata.product.time;
+                json = json.product.time;
                 parsedWeathers = [];
                 parsed6hourly = [];
                 parsedHourly = [];
                 for (i = 0; i < json.length; i++) {
                     element = json[i];
-                    fromDate = new Date(element["@from"]);
-                    toDate = new Date(element["@to"]);
+                    fromDate = new Date(element["from"]);
+                    toDate = new Date(element["to"]);
                     item = element.location;
                     temp = item.temperature;
                     minTemp = item.minTemperature;
@@ -143,7 +133,7 @@ var MetNorway = (function () {
         });
     };
     MetNorway.prototype.BuildWeather = function (weather, hourly) {
-        var times = this.sunCalc.getTimes(new Date(), weather.lat, weather.lon, 0);
+        var times = this.sunCalc.getTimes(new Date(), weather.lat, weather.lon, hourly.altitude);
         this.sunTimes = times;
         var result = {
             temperature: CelsiusToKelvin(weather.temperature),
@@ -172,38 +162,6 @@ var MetNorway = (function () {
             forecasts: []
         };
         return result;
-    };
-    MetNorway.prototype.GetEarliestDataForToday = function (events) {
-        var earliest = 0;
-        for (var i = 0; i < events.length; i++) {
-            var element = events[i];
-            var earliestElement = events[earliest];
-            if (element.from.toDateString() != new Date().toDateString())
-                continue;
-            if (earliestElement.from < element.from)
-                continue;
-            earliest = i;
-        }
-        return events[earliest];
-    };
-    MetNorway.prototype.SortDataByDay = function (data) {
-        var days = [];
-        var currentDay = this.GetEarliestDataForToday(data).from;
-        var dayIndex = 0;
-        days.push([]);
-        for (var i = 0; i < data.length; i++) {
-            var element = data[i];
-            if (element.from.toDateString() == currentDay.toDateString()) {
-                days[dayIndex].push(element);
-            }
-            else if (element.from.toDateString() != currentDay.toDateString()) {
-                dayIndex++;
-                currentDay = element.from;
-                days.push([]);
-                days[dayIndex].push(element);
-            }
-        }
-        return days;
     };
     MetNorway.prototype.BuildForecasts = function (forecastsData) {
         var forecasts = [];
@@ -239,6 +197,38 @@ var MetNorway = (function () {
         }
         return forecasts;
     };
+    MetNorway.prototype.GetEarliestDataForToday = function (events) {
+        var earliest = 0;
+        for (var i = 0; i < events.length; i++) {
+            var element = events[i];
+            var earliestElement = events[earliest];
+            if (element.from.toDateString() != new Date().toDateString())
+                continue;
+            if (earliestElement.from < element.from)
+                continue;
+            earliest = i;
+        }
+        return events[earliest];
+    };
+    MetNorway.prototype.SortDataByDay = function (data) {
+        var days = [];
+        var currentDay = this.GetEarliestDataForToday(data).from;
+        var dayIndex = 0;
+        days.push([]);
+        for (var i = 0; i < data.length; i++) {
+            var element = data[i];
+            if (element.from.toDateString() == currentDay.toDateString()) {
+                days[dayIndex].push(element);
+            }
+            else if (element.from.toDateString() != currentDay.toDateString()) {
+                dayIndex++;
+                currentDay = element.from;
+                days.push([]);
+                days[dayIndex].push(element);
+            }
+        }
+        return days;
+    };
     MetNorway.prototype.GetMostCommonCondition = function (count) {
         var result = null;
         for (var key in count) {
@@ -254,49 +244,48 @@ var MetNorway = (function () {
         var result = null;
         for (var key in conditions) {
             var conditionID = parseInt(key);
-            if (conditionID > 100)
-                conditionID = -100;
-            if (conditionID > result)
+            var resultStripped = (result > 100) ? result - 100 : result;
+            var conditionIDStripped = (conditionID > 100) ? conditionID - 100 : conditionID;
+            if (conditionIDStripped > resultStripped)
                 result = conditionID;
+        }
+        if (result <= 4) {
+            return this.GetMostCommonCondition(conditions);
         }
         return conditions[result].name;
     };
     MetNorway.prototype.ParseCurrentWeather = function (element, from, to) {
         return {
-            temperature: parseFloat(element.temperature['@value']),
-            lat: element["@latitude"],
-            lon: element["@longitude"],
-            windDirection: parseFloat(element.windDirection["@deg"]),
-            windSpeed: parseFloat(element.windSpeed["@mps"]),
-            humidity: parseFloat(element.humidity["@value"]),
-            pressure: parseFloat(element.pressure["@value"]),
-            cloudiness: parseFloat(element.cloudiness["@percent"]),
-            lowClouds: parseFloat(element.lowClouds["@percent"]),
-            mediumClouds: parseFloat(element.mediumClouds["@percent"]),
-            highClouds: parseFloat(element.highClouds["@percent"]),
-            dewpointTemperature: parseFloat(element.dewpointTemperature["@value"]),
+            temperature: parseFloat(element.temperature['value']),
+            lat: element["latitude"],
+            lon: element["longitude"],
+            windDirection: parseFloat(element.windDirection["deg"]),
+            windSpeed: parseFloat(element.windSpeed["mps"]),
+            humidity: parseFloat(element.humidity["value"]),
+            pressure: parseFloat(element.pressure["value"]),
+            cloudiness: parseFloat(element.cloudiness["percent"]),
             from: from,
             to: to
         };
     };
     MetNorway.prototype.Parse6HourForecast = function (element, from, to) {
         return {
-            precipitation: parseFloat(element.precipitation["@value"]),
-            minTemperature: parseFloat(element.minTemperature["@value"]),
-            maxTemperature: parseFloat(element.maxTemperature["@value"]),
+            minTemperature: parseFloat(element.minTemperature["value"]),
+            maxTemperature: parseFloat(element.maxTemperature["value"]),
             from: from,
             to: to,
-            symbol: element.symbol["@id"],
-            symbolID: element.symbol["@number"]
+            altitude: parseInt(element.altitude),
+            symbol: element.symbol["id"],
+            symbolID: element.symbol["number"]
         };
     };
     MetNorway.prototype.ParseHourlyForecast = function (element, from, to) {
         return {
-            precipitation: parseFloat(element.precipitation["@value"]),
             from: from,
             to: to,
-            symbol: element.symbol["@id"],
-            symbolID: element.symbol["@number"]
+            symbol: element.symbol["id"],
+            symbolID: element.symbol["number"],
+            altitude: parseInt(element.altitude)
         };
     };
     MetNorway.prototype.GetUrl = function () {

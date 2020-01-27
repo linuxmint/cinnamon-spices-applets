@@ -1557,15 +1557,6 @@ interface Condition {
   customIcon: CustomIcons
 }
 
-interface XMLParserError {
-  error: {
-    type: XMLParserErrorType,
-    message:  string
-  }
-}
-
-type XMLParserErrorType = "import" | "unknown" | "payload" | "network";
-
 type GUIDStore = {
   [key: number]: string
 }

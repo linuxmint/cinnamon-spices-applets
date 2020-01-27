@@ -20,16 +20,13 @@ var SunCalc = importModule("sunCalc").SunCalc;
 class MetNorway implements WeatherProvider {
     private ctx: MetNorway
     private app: WeatherApplet
-    private baseUrl = "https://api.met.no/weatherapi/locationforecast/1.9/?"
-    private xmlParser: any;
-    private appletDir: string;
+    private baseUrl = "https://api.met.no/weatherapi/locationforecast/1.9/.json?"
     private sunCalc: any;
     private sunTimes: any;
 
     constructor(app: WeatherApplet) {
         this.ctx = this;
         this.app = app;
-        this.appletDir = app.appletDir + "/../";
         this.sunCalc = new SunCalc();
     }
 
@@ -39,55 +36,45 @@ class MetNorway implements WeatherProvider {
         if (query != "" && query != null) {
             this.app.log.Debug("MET Norway API query: " + query);
             try {
-                json = await this.app.SpawnProcess(['python3', this.appletDir + '/xmlParser.py', query]);
+                //json = await this.app.SpawnProcess(['python3', this.appletDir + '/xmlParser.py', query]);
+                json = await this.app.LoadAsync(query);
             }
             catch(e) {
                 this.app.HandleHTTPError("met-norway", e, this.app);
+                this.app.log.Error("MET Norway: Network error - " + e);
                 return null;
             }        
             
             if (!json) {
                 this.app.HandleError({type: "soft", detail: "no api response", service: "met-norway"});
+                this.app.log.Error("MET Norway: Empty response from API");
                 return null;
             }
 
-            json = JSON.parse(json);
-
-            if (json.error) {
-              let error: XMLParserError = json as XMLParserError;
-              this.app.log.Error("MET Norway error: " + error.error.message);
-              if (error.error.type == "import") {
-                this.app.HandleError({type: "hard", detail: "bad api response", "service": "met-norway", "userError": true});
-                this.app.sendNotification(
-                  _("Weather Applet - Missing Dependencies"),
-                  _("MET Norway requires package installed: \n python3-xmltodict \n (For Arch Linux: python-xmltodict)"))
-              }
-              if (error.error.type == "network") {
-                this.app.HandleError({type: "soft", detail: "no network response", "service": "met-norway"});
-              }
-              if (error.error.type == "payload") {
-                this.app.HandleError({type: "soft", detail: "unusal payload", "service": "met-norway"})
-              }
-              else {
-                this.app.HandleError({type: "hard", detail: "unknown", "service": "met-norway"});
-              }
+            try {
+              json = JSON.parse(json);
+            }
+            catch(e) {
+              this.app.HandleError({type: "soft", detail: "unusal payload", service: "met-norway"});
+              this.app.log.Error("MET Norway: Payload is not JSON, aborting.")
               return null;
             }
+            
             return await this.ParseWeather(json);
         }
         return null;
     }
 
     private async ParseWeather(json: any): Promise<WeatherData> {    
-        json = json.weatherdata.product.time;        
+        json = json.product.time;        
         // Sorting Data points
         let parsedWeathers: WeatherForecast[] = [];
         let parsed6hourly: SixHourForecast[] = [];
         let parsedHourly: HourlyForecast[] = [];
         for (let i = 0; i < json.length; i++) {
           const element = json[i];
-          let fromDate = new Date(element["@from"]);
-          let toDate = new Date(element["@to"]);
+          let fromDate = new Date(element["from"]);
+          let toDate = new Date(element["to"]);
           let item = element.location;
 
           let temp = item.temperature;
@@ -113,7 +100,7 @@ class MetNorway implements WeatherProvider {
     }
 
     private BuildWeather(weather: WeatherForecast, hourly: HourlyForecast): WeatherData {
-      let times = this.sunCalc.getTimes(new Date(), weather.lat, weather.lon, 0);
+      let times = this.sunCalc.getTimes(new Date(), weather.lat, weather.lon, hourly.altitude);
       this.sunTimes = times;
 
       let result: WeatherData = {
@@ -143,43 +130,6 @@ class MetNorway implements WeatherProvider {
         forecasts: []
     };
     return result;
-    }
-
-    private GetEarliestDataForToday(events: SixHourForecast[] | HourlyForecast[] | WeatherForecast[]): SixHourForecast | HourlyForecast | WeatherForecast {
-      let earliest: number = 0;
-      for (let i = 0; i < events.length; i++) {
-        const element = events[i];
-        const earliestElement = events[earliest];
-
-        if (element.from.toDateString() != new Date().toDateString()) continue;
-        if (earliestElement.from < element.from) continue;
-
-        earliest = i;
-      }
-      return events[earliest];
-    }
-
-    private SortDataByDay(data: SixHourForecast[] | HourlyForecast[] | WeatherForecast[]):  Array<SixHourForecast[]> | Array<HourlyForecast[]> | Array<WeatherForecast[]> {
-      let days: Array<any> = []
-      // Sorting and conatinerizing forecasts by date
-      // Using "from" attribute
-      let currentDay = this.GetEarliestDataForToday(data).from;
-      let dayIndex = 0;
-      days.push([]);
-      for (let i = 0; i < data.length; i++) {
-        const element = data[i];
-        if (element.from.toDateString() == currentDay.toDateString()) {
-          days[dayIndex].push(element);
-        }
-        else if (element.from.toDateString() != currentDay.toDateString()) {
-          dayIndex ++;
-          currentDay = element.from;
-          days.push([]);
-          days[dayIndex].push(element);
-        }
-      }
-
-      return days;
     }
 
     private BuildForecasts(forecastsData: SixHourForecast[]): ForecastData[] {
@@ -220,6 +170,49 @@ class MetNorway implements WeatherProvider {
       return forecasts;
     }
 
+    // -------------------------------------------
+    //
+    //  Utility functions
+    //
+    // -----------------------------------------------
+
+    private GetEarliestDataForToday(events: SixHourForecast[] | HourlyForecast[] | WeatherForecast[]): SixHourForecast | HourlyForecast | WeatherForecast {
+      let earliest: number = 0;
+      for (let i = 0; i < events.length; i++) {
+        const element = events[i];
+        const earliestElement = events[earliest];
+
+        if (element.from.toDateString() != new Date().toDateString()) continue;
+        if (earliestElement.from < element.from) continue;
+
+        earliest = i;
+      }
+      return events[earliest];
+    }
+
+    private SortDataByDay(data: SixHourForecast[] | HourlyForecast[] | WeatherForecast[]):  Array<SixHourForecast[]> | Array<HourlyForecast[]> | Array<WeatherForecast[]> {
+      let days: Array<any> = []
+      // Sorting and conatinerizing forecasts by date
+      // Using "from" attribute
+      let currentDay = this.GetEarliestDataForToday(data).from;
+      let dayIndex = 0;
+      days.push([]);
+      for (let i = 0; i < data.length; i++) {
+        const element = data[i];
+        if (element.from.toDateString() == currentDay.toDateString()) {
+          days[dayIndex].push(element);
+        }
+        else if (element.from.toDateString() != currentDay.toDateString()) {
+          dayIndex ++;
+          currentDay = element.from;
+          days.push([]);
+          days[dayIndex].push(element);
+        }
+      }
+
+      return days;
+    }
+
     private GetMostCommonCondition(count: ConditionCount): string {
       let result: number  = null;
       for (let key in count) {
@@ -235,30 +228,39 @@ class MetNorway implements WeatherProvider {
       // https://api.met.no/weatherapi/weathericon/1.1/documentation
       // for Weather conditions
       //this.app.log.Debug(JSON.stringify(conditions));
+
+      // We want to know the worst condition
       let result: number  = null;
       for (let key in conditions) {
         let conditionID = parseInt(key);
-        if (conditionID > 100) conditionID=- 100; 
-        if (conditionID > result) result = conditionID;
+        // Polar night id's are above 100, make sure to remove them for checking
+        let resultStripped = (result > 100) ? result-100 : result;
+        let conditionIDStripped = (conditionID > 100) ? conditionID - 100 : conditionID; 
+        // Make the comparison, keep the polar night condition id
+        if (conditionIDStripped > resultStripped) result = conditionID;
+      }
+      // If there is no rain or worse, just get the most common condition for the day
+      if (result <= 4) {
+        return this.GetMostCommonCondition(conditions);
       }
       return conditions[result].name;
     }
 
     private ParseCurrentWeather(element: any, from: Date, to: Date): WeatherForecast {
       return {
-        temperature: parseFloat(element.temperature['@value']),
-        lat: element["@latitude"],
-        lon: element["@longitude"],
-        windDirection: parseFloat(element.windDirection["@deg"]),
-        windSpeed: parseFloat(element.windSpeed["@mps"]),
-        humidity: parseFloat(element.humidity["@value"]),
-        pressure: parseFloat(element.pressure["@value"]),
-        cloudiness: parseFloat(element.cloudiness["@percent"]),
+        temperature: parseFloat(element.temperature['value']),
+        lat: element["latitude"],
+        lon: element["longitude"],
+        windDirection: parseFloat(element.windDirection["deg"]),
+        windSpeed: parseFloat(element.windSpeed["mps"]),
+        humidity: parseFloat(element.humidity["value"]),
+        pressure: parseFloat(element.pressure["value"]),
+        cloudiness: parseFloat(element.cloudiness["percent"]),
         //fog: parseFloat(element.fog["@percent"]),
-        lowClouds: parseFloat(element.lowClouds["@percent"]),
-        mediumClouds: parseFloat(element.mediumClouds["@percent"]),
-        highClouds: parseFloat(element.highClouds["@percent"]),
-        dewpointTemperature: parseFloat(element.dewpointTemperature["@value"]),
+        //lowClouds: parseFloat(element.lowClouds["percent"]),
+        //mediumClouds: parseFloat(element.mediumClouds["percent"]),
+        //highClouds: parseFloat(element.highClouds["percent"]),
+        //dewpointTemperature: parseFloat(element.dewpointTemperature["value"]),
         from: from,
         to: to
       };
@@ -266,23 +268,25 @@ class MetNorway implements WeatherProvider {
 
     private Parse6HourForecast(element: any, from: Date, to: Date): SixHourForecast {
       return {
-        precipitation: parseFloat(element.precipitation["@value"]),
-        minTemperature: parseFloat(element.minTemperature["@value"]),
-        maxTemperature: parseFloat(element.maxTemperature["@value"]),
+        //precipitation: parseFloat(element.precipitation["value"]),
+        minTemperature: parseFloat(element.minTemperature["value"]),
+        maxTemperature: parseFloat(element.maxTemperature["value"]),
         from: from,
         to: to,
-        symbol: element.symbol["@id"],
-        symbolID: element.symbol["@number"]
+        altitude: parseInt(element.altitude),
+        symbol: element.symbol["id"],
+        symbolID: element.symbol["number"]
       }
     }
 
     private ParseHourlyForecast(element: any, from: Date, to: Date): HourlyForecast {
       return {
-        precipitation: parseFloat(element.precipitation["@value"]),
+        //precipitation: parseFloat(element.precipitation["value"]),
         from: from,
         to: to,
-        symbol: element.symbol["@id"],
-        symbolID: element.symbol["@number"]
+        symbol: element.symbol["id"],
+        symbolID: element.symbol["number"],
+        altitude: parseInt(element.altitude)
       }
     }
 
@@ -618,24 +622,25 @@ interface WeatherForecast {
   /**percent */
   fog?: number;
   /**percent */
-  lowClouds: number;
+  lowClouds?: number;
   /**percent */
-  mediumClouds: number;
+  mediumClouds?: number;
   /**percent */
-  highClouds: number;
+  highClouds?: number;
   /**percent */
-  dewpointTemperature: number;
+  dewpointTemperature?: number;
 }
 
 interface SixHourForecast {
   from: Date;
   to: Date;
   /**mm */
-  precipitation: number;
+  precipitation?: number;
   /**celsius */
   minTemperature: number;
   /**celsius */
   maxTemperature: number;
+  altitude: number;
   symbol: string;
   symbolID: number;
 }
@@ -644,9 +649,10 @@ interface HourlyForecast {
   from: Date;
   to: Date;
   /**mm */
-  precipitation: number;
+  precipitation?: number;
   symbol: string;
   symbolID: number;
+  altitude: number;
 }
 
 interface ConditionCount {
