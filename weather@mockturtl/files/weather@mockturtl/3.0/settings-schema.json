@@ -34,9 +34,9 @@
   , "description": "Data service"
   , "options":
     { 
-      "OpenWeatherMap (no key needed)": "OpenWeatherMap",
-      "DarkSky": "DarkSky",
-      "MET Norway (no key needed)": "MetNoway"
+      "OpenWeatherMap": "OpenWeatherMap",
+      "DarkSky (key needed)": "DarkSky",
+      "MET Norway": "MetNorway"
     }
   },
   "apiKey":

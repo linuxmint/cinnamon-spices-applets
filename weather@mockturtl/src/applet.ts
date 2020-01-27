@@ -91,7 +91,7 @@ const APPLET_ICON = "view-refresh-symbolic"
 const REFRESH_ICON = "view-refresh";
 const CMD_SETTINGS = "cinnamon-settings applets " + UUID
 
-type Services = "OpenWeatherMap" | "DarkSky" | "MetNoway";
+type Services = "OpenWeatherMap" | "DarkSky" | "MetNorway";
 type ServiceMap = {
   [key: string]: Services
 }
@@ -102,13 +102,7 @@ type ServiceDescriptions = {
 const DATA_SERVICE: ServiceMap = {
   OPEN_WEATHER_MAP: "OpenWeatherMap",
   DARK_SKY: "DarkSky",
-  MET_NORWAY: "MetNoway"
-}
-
-const DATASERVICE_DESCRIPTION: ServiceDescriptions  = {
-   "OpenWeatherMap" : "OpenWeatherMap is blablabla",
-   "DarkSky": "DarkSky is blablabla",
-   "MetNoway": "MET Norway is blablabla"
+  MET_NORWAY: "MetNorway"
 }
 
 const WEATHER_LOCATION = "location"
@@ -354,13 +348,6 @@ class WeatherApplet extends TextIconApplet {
         key, keyProp, this.refreshAndRebuild, null);
     }
 
-    /*this.settings.bindProperty(BindingDirection.IN,
-        KEYS.WEATHER_DATA_SERVICE, "_" + KEYS.WEATHER_DATA_SERVICE,Lang.bind(this, function () {
-          this.settings.setValue('serviceDescription', DATASERVICE_DESCRIPTION[this._dataService as Services] as string);
-          this.refreshAndRebuild();
-        }), null
-    );*/
-
     // Settings what need special care
     this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
       WEATHER_LOCATION, ("_" + WEATHER_LOCATION), this.refreshAndRebuild, null);
@@ -417,6 +404,7 @@ class WeatherApplet extends TextIconApplet {
   };
 
   /**
+   * DEPRECATED - 
    * Handles obtaining JSON over http. 
    * returns HTTPError object on fail.
    * @param query fully constructed url
@@ -583,7 +571,7 @@ class WeatherApplet extends TextIconApplet {
   }
 
   private on_applet_removed_from_panel(deleteConfig: any) {
-    this.log.Print("Removing instance of applet...")
+    this.log.Print("Removing applet instance...")
     this.appletRemoved = true;
   }
 
@@ -667,7 +655,7 @@ class WeatherApplet extends TextIconApplet {
           if (openWeatherMap == null) var openWeatherMap = importModule("openWeatherMap");
           this.provider = new openWeatherMap.OpenWeatherMap(this);
           break;
-        case DATA_SERVICE.MET_NORWAY:
+        case DATA_SERVICE.MET_NORWAY:         // No TZ or city info
           if (openWeatherMap == null) var metNorway = importModule("met_norway");
           this.provider = new metNorway.MetNorway(this);
           break;
@@ -723,8 +711,8 @@ class WeatherApplet extends TextIconApplet {
         this.HandleError({
           type: "hard",
           detail: "no location",
-            userError: true,
-            message: _("Make sure you entered a location or use Automatic location instead")});
+          userError: true,
+          message: _("Make sure you entered a location or use Automatic location instead")});
         throw new Error("No location given when setting is on Manual Location");
       }
     }

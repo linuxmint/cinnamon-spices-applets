@@ -36,7 +36,6 @@ class MetNorway implements WeatherProvider {
         if (query != "" && query != null) {
             this.app.log.Debug("MET Norway API query: " + query);
             try {
-                //json = await this.app.SpawnProcess(['python3', this.appletDir + '/xmlParser.py', query]);
                 json = await this.app.LoadAsync(query);
             }
             catch(e) {

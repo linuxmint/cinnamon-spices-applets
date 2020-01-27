@@ -69,12 +69,7 @@ const CMD_SETTINGS = "cinnamon-settings applets " + UUID;
 const DATA_SERVICE = {
     OPEN_WEATHER_MAP: "OpenWeatherMap",
     DARK_SKY: "DarkSky",
-    MET_NORWAY: "MetNoway"
-};
-const DATASERVICE_DESCRIPTION = {
-    "OpenWeatherMap": "OpenWeatherMap is blablabla",
-    "DarkSky": "DarkSky is blablabla",
-    "MetNoway": "MET Norway is blablabla"
+    MET_NORWAY: "MetNorway"
 };
 const WEATHER_LOCATION = "location";
 const WEATHER_USE_SYMBOLIC_ICONS_KEY = 'useSymbolicIcons';
@@ -392,7 +387,7 @@ class WeatherApplet extends TextIconApplet {
         }
     }
     on_applet_removed_from_panel(deleteConfig) {
-        this.log.Print("Removing instance of applet...");
+        this.log.Print("Removing applet instance...");
         this.appletRemoved = true;
     }
     on_applet_clicked(event) {

@@ -118,12 +118,7 @@ var CMD_SETTINGS = "cinnamon-settings applets " + UUID;
 var DATA_SERVICE = {
     OPEN_WEATHER_MAP: "OpenWeatherMap",
     DARK_SKY: "DarkSky",
-    MET_NORWAY: "MetNoway"
-};
-var DATASERVICE_DESCRIPTION = {
-    "OpenWeatherMap": "OpenWeatherMap is blablabla",
-    "DarkSky": "DarkSky is blablabla",
-    "MetNoway": "MET Norway is blablabla"
+    MET_NORWAY: "MetNorway"
 };
 var WEATHER_LOCATION = "location";
 var WEATHER_USE_SYMBOLIC_ICONS_KEY = 'useSymbolicIcons';
@@ -498,7 +493,7 @@ var WeatherApplet = (function (_super) {
         }
     };
     WeatherApplet.prototype.on_applet_removed_from_panel = function (deleteConfig) {
-        this.log.Print("Removing instance of applet...");
+        this.log.Print("Removing applet instance...");
         this.appletRemoved = true;
     };
     WeatherApplet.prototype.on_applet_clicked = function (event) {
