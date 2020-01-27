@@ -34,9 +34,9 @@ msgstr "Inställningar"
 msgid "No location provided"
 msgstr "Ingen plats angiven"
 
-#: applet.js:610
-msgid "Cloudiness:"
-msgstr "Molnighet:"
+#: applet.js:610 3.0/applet.js:563 3.8/applet.js:472
+msgid "Cloudiness"
+msgstr "Molnighet"
 
 #: applet.js:634 3.0/applet.js:646 3.8/applet.js:545
 msgid "Sunrise"
@@ -501,13 +501,9 @@ msgstr "Ingen plats"
 msgid "Unexpected Error While Refreshing Weather, please see log in Looking Glass"
 msgstr "Oväntat fel under uppdatering av väder, vänligen se logg i Looking Glass"
 
-#: 3.0/applet.js:519 3.8/applet.js:421
-msgid "Make sure you entered a location or use Automatic location instead"
-msgstr "Var noga med att ange en plats eller automatisk plats istället"
-
-#: 3.0/applet.js:584 3.8/applet.js:483
-msgid "Updated"
-msgstr "Uppdaterad"
+#: 3.0/applet.js:569 3.8/applet.js:478
+msgid "Feels like"
+msgstr "Känns som"
 
 #: 3.0/applet.js:681 3.8/applet.js:580
 msgid "Today"
