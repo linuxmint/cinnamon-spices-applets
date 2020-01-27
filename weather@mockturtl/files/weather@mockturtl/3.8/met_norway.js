@@ -41,12 +41,19 @@ class MetNorway {
             json = JSON.parse(json);
             if (json.error) {
                 let error = json;
+                this.app.log.Error("MET Norway error: " + error.error.message);
                 if (error.error.type == "import") {
                     this.app.HandleError({ type: "hard", detail: "bad api response", "service": "met-norway", "userError": true });
                     this.app.sendNotification(_("Weather Applet - Missing Dependencies"), _("MET Norway requires package installed: \n python3-xmltodict \n (For Arch Linux: python-xmltodict)"));
                 }
+                if (error.error.type == "network") {
+                    this.app.HandleError({ type: "soft", detail: "no network response", "service": "met-norway" });
+                }
+                if (error.error.type == "payload") {
+                    this.app.HandleError({ type: "soft", detail: "unusal payload", "service": "met-norway" });
+                }
                 else {
-                    this.app.HandleError({ type: "hard", detail: "bad api response", "service": "met-norway" });
+                    this.app.HandleError({ type: "hard", detail: "unknown", "service": "met-norway" });
                 }
                 return null;
             }
@@ -77,40 +84,43 @@ class MetNorway {
                 parsedHourly.push(this.ParseHourlyForecast(item, fromDate, toDate));
             }
         }
-        let earliesWeather = this.GetEarliestData(parsedWeathers);
-        let earliesCondition = this.GetEarliestData(parsedHourly);
-        let times = this.sunCalc.getTimes(new Date(), earliesWeather.lat, earliesWeather.lon, 0);
-        this.sunTimes = times;
         let forecasts = this.BuildForecasts(parsed6hourly);
+        let weather = this.BuildWeather(this.GetEarliestDataForToday(parsedWeathers), this.GetEarliestDataForToday(parsedHourly));
+        weather.forecasts = forecasts;
+        return weather;
+    }
+    BuildWeather(weather, hourly) {
+        let times = this.sunCalc.getTimes(new Date(), weather.lat, weather.lon, 0);
+        this.sunTimes = times;
         let result = {
-            temperature: CelsiusToKelvin(earliesWeather.temperature),
+            temperature: CelsiusToKelvin(weather.temperature),
             coord: {
-                lat: earliesWeather.lat,
-                lon: earliesWeather.lon
+                lat: weather.lat,
+                lon: weather.lon
             },
-            date: earliesWeather.from,
-            condition: this.ResolveCondition(earliesCondition.symbol, true),
-            humidity: earliesWeather.humidity,
-            pressure: earliesWeather.pressure,
+            date: weather.from,
+            condition: this.ResolveCondition(hourly.symbol, true),
+            humidity: weather.humidity,
+            pressure: weather.pressure,
             extra_field: {
                 name: _("Cloudiness"),
                 type: "percent",
-                value: earliesWeather.cloudiness
+                value: weather.cloudiness
             },
             sunrise: times.sunrise,
             sunset: times.sunset,
             wind: {
-                degree: earliesWeather.windDirection,
-                speed: earliesWeather.windSpeed
+                degree: weather.windDirection,
+                speed: weather.windSpeed
             },
             location: {
                 url: null,
             },
-            forecasts: forecasts
+            forecasts: []
         };
         return result;
     }
-    GetEarliestData(events) {
+    GetEarliestDataForToday(events) {
         let earliest = 0;
         for (let i = 0; i < events.length; i++) {
             const element = events[i];
@@ -123,7 +133,7 @@ class MetNorway {
     }
     SortDataByDay(data) {
         let days = [];
-        let currentDay = this.GetEarliestData(data).from.toDateString();
+        let currentDay = this.GetEarliestDataForToday(data).from.toDateString();
         let dayIndex = 0;
         days.push([]);
         for (let i = 0; i < data.length; i++) {

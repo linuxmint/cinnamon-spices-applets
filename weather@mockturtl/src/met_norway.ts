@@ -55,16 +55,22 @@ class MetNorway implements WeatherProvider {
 
             if (json.error) {
               let error: XMLParserError = json as XMLParserError;
+              this.app.log.Error("MET Norway error: " + error.error.message);
               if (error.error.type == "import") {
                 this.app.HandleError({type: "hard", detail: "bad api response", "service": "met-norway", "userError": true});
                 this.app.sendNotification(
                   _("Weather Applet - Missing Dependencies"),
                   _("MET Norway requires package installed: \n python3-xmltodict \n (For Arch Linux: python-xmltodict)"))
               }
-              else {
-                this.app.HandleError({type: "hard", detail: "bad api response", "service": "met-norway"});
+              if (error.error.type == "network") {
+                this.app.HandleError({type: "soft", detail: "no network response", "service": "met-norway"});
               }
-              
+              if (error.error.type == "payload") {
+                this.app.HandleError({type: "soft", detail: "unusal payload", "service": "met-norway"})
+              }
+              else {
+                this.app.HandleError({type: "hard", detail: "unknown", "service": "met-norway"});
+              }
               return null;
             }
             return await this.ParseWeather(json);
@@ -97,44 +103,50 @@ class MetNorway implements WeatherProvider {
             parsedHourly.push(this.ParseHourlyForecast(item, fromDate, toDate));
           }
         }
-
-        let earliesWeather = this.GetEarliestData(parsedWeathers) as WeatherForecast;
-        let earliesCondition = this.GetEarliestData(parsedHourly) as HourlyForecast;
-
-        let times = this.sunCalc.getTimes(new Date(), earliesWeather.lat, earliesWeather.lon, 0);
-        this.sunTimes = times;
+        
         // Building weather data
         let forecasts: ForecastData[] = this.BuildForecasts(parsed6hourly);
-        let result: WeatherData = {
-            temperature: CelsiusToKelvin(earliesWeather.temperature),
-            coord: {
-              lat: earliesWeather.lat,
-              lon: earliesWeather.lon
-            },
-            date: earliesWeather.from,
-            condition: this.ResolveCondition(earliesCondition.symbol, true),
-            humidity: earliesWeather.humidity,
-            pressure: earliesWeather.pressure,
-            extra_field: {
-              name: _("Cloudiness"),
-              type: "percent",
-              value: earliesWeather.cloudiness
-            },
-            sunrise: times.sunrise,
-            sunset: times.sunset,
-            wind: {
-              degree: earliesWeather.windDirection,
-              speed: earliesWeather.windSpeed
-            },
-            location: {
-              url: null,
-            },
-            forecasts: forecasts
-        };
-        return result;
+        let weather = this.BuildWeather(this.GetEarliestDataForToday(parsedWeathers) as WeatherForecast, this.GetEarliestDataForToday(parsedHourly) as HourlyForecast);
+        weather.forecasts = forecasts;
+
+        return weather;
     }
 
-    private GetEarliestData(events: SixHourForecast[] | HourlyForecast[] | WeatherForecast[]): SixHourForecast | HourlyForecast | WeatherForecast {
+    private BuildWeather(weather: WeatherForecast, hourly: HourlyForecast): WeatherData {
+      let times = this.sunCalc.getTimes(new Date(), weather.lat, weather.lon, 0);
+      this.sunTimes = times;
+
+      let result: WeatherData = {
+        temperature: CelsiusToKelvin(weather.temperature),
+        coord: {
+          lat: weather.lat,
+          lon: weather.lon
+        },
+        date: weather.from,
+        condition: this.ResolveCondition(hourly.symbol, true),
+        humidity: weather.humidity,
+        pressure: weather.pressure,
+        extra_field: {
+          name: _("Cloudiness"),
+          type: "percent",
+          value: weather.cloudiness
+        },
+        sunrise: times.sunrise,
+        sunset: times.sunset,
+        wind: {
+          degree: weather.windDirection,
+          speed: weather.windSpeed
+        },
+        location: {
+          url: null,
+        },
+        forecasts: []
+    };
+    return result;
+    }
+
+    private GetEarliestDataForToday(events: SixHourForecast[] | HourlyForecast[] | WeatherForecast[]): SixHourForecast | HourlyForecast | WeatherForecast {
+      // TODO: Check if earliest data is for today
       let earliest: number = 0;
       for (let i = 0; i < events.length; i++) {
         const element = events[i];
@@ -151,7 +163,7 @@ class MetNorway implements WeatherProvider {
       let days: Array<any> = []
       // Sorting and conatinerizing forecasts by date
       // Using "from" attribute
-      let currentDay = this.GetEarliestData(data).from.toDateString();
+      let currentDay = this.GetEarliestDataForToday(data).from.toDateString();
       let dayIndex = 0;
       days.push([]);
       for (let i = 0; i < data.length; i++) {
@@ -174,7 +186,6 @@ class MetNorway implements WeatherProvider {
       let forecasts: ForecastData[] = [];
       let days: Array<SixHourForecast[]> = this.SortDataByDay(forecastsData) as Array<SixHourForecast[]>;
 
-      // TODO:  Switch to processing Hourly forecast for conditions
       for (let i = 0; i < days.length; i++) {
         let forecast: ForecastData = {
           condition: {

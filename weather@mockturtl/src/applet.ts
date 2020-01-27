@@ -1564,7 +1564,7 @@ interface XMLParserError {
   }
 }
 
-type XMLParserErrorType = "import";
+type XMLParserErrorType = "import" | "unknown" | "payload" | "network";
 
 type GUIDStore = {
   [key: number]: string
