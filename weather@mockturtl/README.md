@@ -25,13 +25,29 @@ If the location you try does not work, try using [OpenWeatherMap's finder](https
 
 ------
 
-### DarkSky API Key Setup (Supported from Cinnamon 3.0)
+### DarkSky API Key Setup
 
 Go to [DarkSky](https://darksky.net/dev/register) and create an account. Then go your [Console section](https://darksky.net/dev/account) where you should find your secret key already created.
 
 ### DarkSky Location
 
 DarkSky only supports Latitude, Longitude format! (e.g. 37.77,122.41)
+
+---
+
+### MET Norway Location
+
+MET Norway only supports Latitude, Longitude format! (e.g. 37.77,122.41)
+
+----
+
+### Weatherbit API Key Setup
+
+Go to [Weatherbit.io](https://www.weatherbit.io/account/create) and create an account. Then go your [Dashboard](https://www.weatherbit.io/account/dashboard) where you should find your secret key already created.
+
+### Weatherbit Location
+
+Weatherbit implementation only supports Latitude, Longitude format! (e.g. 37.77,122.41) Might expand the support on it later.
 
 ------
 

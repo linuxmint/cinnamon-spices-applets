@@ -118,7 +118,8 @@ var CMD_SETTINGS = "cinnamon-settings applets " + UUID;
 var DATA_SERVICE = {
     OPEN_WEATHER_MAP: "OpenWeatherMap",
     DARK_SKY: "DarkSky",
-    MET_NORWAY: "MetNorway"
+    MET_NORWAY: "MetNorway",
+    WEATHERBIT: "Weatherbit"
 };
 var WEATHER_LOCATION = "location";
 var WEATHER_USE_SYMBOLIC_ICONS_KEY = 'useSymbolicIcons';
@@ -441,7 +442,7 @@ var WeatherApplet = (function (_super) {
                         loopInterval = (this.errorCount > 0) ? loopInterval * this.errorCount : this.LOOP_INTERVAL;
                         if (!(this.pauseRefresh == true)) return [3, 4];
                         this.log.Debug("Configuration error, updating paused");
-                        return [4, delay(loopInterval)];
+                        return [4, delay(loopInterval * 1000)];
                     case 3:
                         _a.sent();
                         return [3, 1];
@@ -537,7 +538,7 @@ var WeatherApplet = (function (_super) {
     };
     WeatherApplet.prototype.refreshWeather = function (rebuild) {
         return __awaiter(this, void 0, void 0, function () {
-            var locationData, e_2, darkSky, openWeatherMap, metNorway, weatherInfo, _a, e_3;
+            var locationData, e_2, darkSky, openWeatherMap, metNorway, weatherbit, weatherInfo, _a, e_3;
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
@@ -568,9 +569,14 @@ var WeatherApplet = (function (_super) {
                                 this.provider = new openWeatherMap.OpenWeatherMap(this);
                                 break;
                             case DATA_SERVICE.MET_NORWAY:
-                                if (openWeatherMap == null)
+                                if (metNorway == null)
                                     metNorway = importModule("met_norway");
                                 this.provider = new metNorway.MetNorway(this);
+                                break;
+                            case DATA_SERVICE.WEATHERBIT:
+                                if (weatherbit == null)
+                                    weatherbit = importModule("weatherbit");
+                                this.provider = new weatherbit.Weatherbit(this);
                                 break;
                             default:
                                 return [2, "error"];

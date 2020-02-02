@@ -85,7 +85,7 @@ class DarkSky {
                     customIcon: this.ResolveCustomIcon(json.currently.icon)
                 },
                 extra_field: {
-                    name: _("Feels Like:"),
+                    name: _("Feels Like"),
                     value: this.ToKelvin(json.currently.apparentTemperature),
                     type: "temperature"
                 },

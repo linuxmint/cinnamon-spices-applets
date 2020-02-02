@@ -69,7 +69,8 @@ const CMD_SETTINGS = "cinnamon-settings applets " + UUID;
 const DATA_SERVICE = {
     OPEN_WEATHER_MAP: "OpenWeatherMap",
     DARK_SKY: "DarkSky",
-    MET_NORWAY: "MetNorway"
+    MET_NORWAY: "MetNorway",
+    WEATHERBIT: "Weatherbit"
 };
 const WEATHER_LOCATION = "location";
 const WEATHER_USE_SYMBOLIC_ICONS_KEY = 'useSymbolicIcons';
@@ -346,7 +347,7 @@ class WeatherApplet extends TextIconApplet {
                 loopInterval = (this.errorCount > 0) ? loopInterval * this.errorCount : this.LOOP_INTERVAL;
                 if (this.pauseRefresh == true) {
                     this.log.Debug("Configuration error, updating paused");
-                    await delay(loopInterval);
+                    await delay(loopInterval * 1000);
                     continue;
                 }
                 let nextUpdate = new Date(this.lastUpdated.getTime() + this._refreshInterval * 60000);
@@ -452,9 +453,14 @@ class WeatherApplet extends TextIconApplet {
                     this.provider = new openWeatherMap.OpenWeatherMap(this);
                     break;
                 case DATA_SERVICE.MET_NORWAY:
-                    if (openWeatherMap == null)
+                    if (metNorway == null)
                         var metNorway = importModule("met_norway");
                     this.provider = new metNorway.MetNorway(this);
+                    break;
+                case DATA_SERVICE.WEATHERBIT:
+                    if (weatherbit == null)
+                        var weatherbit = importModule("weatherbit");
+                    this.provider = new weatherbit.Weatherbit(this);
                     break;
                 default:
                     return "error";
