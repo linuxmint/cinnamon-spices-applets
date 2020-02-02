@@ -18,6 +18,8 @@ declare namespace imports.ui.main {
         addHotKey(UUID: string, keybinding: any, binding: void): void;
     }
 
+    export const messageTray: any;
+
     export const keybindingManager: KeybindingManager;
     /**
      * getThemeStylesheet:
@@ -201,6 +203,10 @@ declare namespace imports.ui.applet {
 
         _onOrientationChanged(a: any, orientation: string): void;
         _onOpenStateChanged(menu: any, open: any, sourceActor: any): void;
+        setCustomStyleClass(classname: string): void;
+        actor: any;
+        addActor(menu: any): void;
+        toggle(): void;
     }
 
     /**
@@ -232,9 +238,23 @@ declare namespace imports.ui.applet {
     export const AllowedLayout: AllowedLayouts;
 }
 
+declare namespace imports.ui.messageTray {
+    export class Notification {
+        constructor(source: SystemNotificationSource, title: string, message: string);
+        setTransient(value: boolean): void;
+    }
+
+    export class SystemNotificationSource {
+        constructor(name: string)
+
+        notify(notification: Notification): void;
+    }
+}
+
 declare namespace imports.ui.popupMenu {
     export class PopupMenuManager {
         constructor(context: any);
+        addMenu(menu: any): void;
     }
     export class PopupMenu {
         constructor();
@@ -246,14 +266,20 @@ declare namespace imports.ui.popupMenu {
 declare namespace imports.ui.settings {
     export class AppletSettings {
         constructor(context: any, UUID: string, instanceID: number);
+        setValue(key: string, value: any): void;
+        getValue(key: string): any;
+        connect(key: string, callback: Function): void;
+        bindProperty(direction: BindingDirection, key: string, keyProp: string, callback: Function, something: any): void;
     }
 
-    export interface BindingDirections {
-        IN: string,
-            BIDIRECTIONAL: string,
-            OUT: string
+    export enum BindingDirection {
+        IN = 1,
+        BIDIRECTIONAL = 2,
+        OUT = 3
     }
-    export const BindingDirection: BindingDirections
+
+
+
 }
 declare namespace imports.ui.appletManager {
     export var applets: any;
@@ -359,6 +385,7 @@ declare namespace imports.misc.config {
 }
 declare namespace imports.misc.util {
     export function spawnCommandLine(CMDSettings: string): void;
+    export function spawn_async(cmd: string[], callback: Function): any;
 }
 
 declare namespace imports.gettext {

@@ -34,8 +34,8 @@ msgid "No location provided"
 msgstr "Hely nincs megadva"
 
 #: applet.js:610 3.6/applet.js:610 3.8/applet.js:743
-msgid "Cloudiness:"
-msgstr "Felhőzet:"
+msgid "Cloudiness"
+msgstr "Felhőzet"
 
 #: applet.js:634 3.6/applet.js:634 3.8/applet.js:781
 msgid "Sunrise"
@@ -206,8 +206,8 @@ msgid "in"
 msgstr ""
 
 #: 3.8/applet.js:749
-msgid "Feels like:"
-msgstr "Hőérzet:"
+msgid "Feels like"
+msgstr "Hőérzet"
 
 #: 3.8/applet.js:1234
 msgid "Thunderstorm with light rain"

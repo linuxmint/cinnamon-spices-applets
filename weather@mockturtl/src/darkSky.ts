@@ -7,7 +7,7 @@ function importModule(path: string): any {
       if (!AppletDir) var AppletDir = imports.ui.appletManager.applets['weather@mockturtl'];
       return AppletDir[path];
     }
-  }
+}
 
 var utils = importModule("utils");
 var isCoordinate = utils.isCoordinate as (text: any) => boolean;

@@ -74,12 +74,12 @@ msgid "Settings"
 msgstr "Postavke"
 
 #: applet.js:731 applet.js:737
-msgid "Cloudiness:"
-msgstr "Naoblaka:"
+msgid "Cloudiness"
+msgstr "Naoblaka"
 
 #: applet.js:743
-msgid "Feels like:"
-msgstr "Kao da je:"
+msgid "Feels like"
+msgstr "Kao da je"
 
 #: applet.js:765
 msgid "Sunrise"
