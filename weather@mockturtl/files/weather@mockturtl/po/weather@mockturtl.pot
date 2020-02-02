@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-27 15:36+0000\n"
+"POT-Creation-Date: 2020-02-02 13:14+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,48 +33,48 @@ msgstr ""
 msgid "No location provided"
 msgstr ""
 
-#: applet.js:610
+#: applet.js:610 3.0/openWeatherMap.js:150 3.8/openWeatherMap.js:92
 msgid "Cloudiness:"
 msgstr ""
 
-#: applet.js:634 3.0/applet.js:767 3.8/applet.js:628
+#: applet.js:634 3.0/applet.js:771 3.8/applet.js:632
 msgid "Sunrise"
 msgstr ""
 
-#: applet.js:635 3.0/applet.js:768 3.8/applet.js:629
+#: applet.js:635 3.0/applet.js:772 3.8/applet.js:633
 msgid "Sunset"
 msgstr ""
 
-#: applet.js:708 3.0/applet.js:857 3.8/applet.js:718
+#: applet.js:708 3.0/applet.js:861 3.8/applet.js:722
 msgid "Loading current weather ..."
 msgstr ""
 
-#: applet.js:709 3.0/applet.js:860 3.8/applet.js:721
+#: applet.js:709 3.0/applet.js:864 3.8/applet.js:725
 msgid "Loading future weather ..."
 msgstr ""
 
-#: applet.js:731 3.0/applet.js:889 3.8/applet.js:750
+#: applet.js:731 3.0/applet.js:893 3.8/applet.js:754
 msgid "Loading ..."
 msgstr ""
 
-#: applet.js:737 3.0/applet.js:283 3.0/applet.js:879 3.8/applet.js:232
-#: 3.8/applet.js:740
+#: applet.js:737 3.0/applet.js:283 3.0/applet.js:883 3.8/applet.js:232
+#: 3.8/applet.js:744
 msgid "Refresh"
 msgstr ""
 
-#: applet.js:802 3.0/applet.js:911 3.8/applet.js:772
+#: applet.js:802 3.0/applet.js:915 3.8/applet.js:776
 msgid "Temperature:"
 msgstr ""
 
-#: applet.js:804 3.0/applet.js:912 3.8/applet.js:773
+#: applet.js:804 3.0/applet.js:916 3.8/applet.js:777
 msgid "Humidity:"
 msgstr ""
 
-#: applet.js:806 3.0/applet.js:913 3.8/applet.js:774
+#: applet.js:806 3.0/applet.js:917 3.8/applet.js:778
 msgid "Pressure:"
 msgstr ""
 
-#: applet.js:808 3.0/applet.js:914 3.8/applet.js:775
+#: applet.js:808 3.0/applet.js:918 3.8/applet.js:779
 msgid "Wind:"
 msgstr ""
 
@@ -162,8 +162,7 @@ msgstr ""
 msgid "Key Temp. Blocked"
 msgstr ""
 
-#: 3.0/met_norway.js:149 3.0/openWeatherMap.js:150 3.8/met_norway.js:96
-#: 3.8/openWeatherMap.js:92
+#: 3.0/met_norway.js:149 3.8/met_norway.js:96
 msgid "Cloudiness"
 msgstr ""
 
@@ -208,7 +207,7 @@ msgid "Mostly Heavy Sleet"
 msgstr ""
 
 #: 3.0/met_norway.js:371 3.8/met_norway.js:318
-msgid "Heavy Sleet with Thundertorms"
+msgid "Heavy Sleet with Thunderstorms"
 msgstr ""
 
 #: 3.0/met_norway.js:378 3.8/met_norway.js:325
@@ -222,8 +221,11 @@ msgstr ""
 msgid "Heavy Snow"
 msgstr ""
 
-#: 3.0/met_norway.js:392 3.0/met_norway.js:399 3.8/met_norway.js:339
-#: 3.8/met_norway.js:346
+#: 3.0/met_norway.js:392 3.8/met_norway.js:339
+msgid "Heavy Snow with Thunderstorms"
+msgstr ""
+
+#: 3.0/met_norway.js:399 3.8/met_norway.js:346
 msgid "Heavy Snow with Thunderstorm"
 msgstr ""
 
@@ -302,7 +304,7 @@ msgid "Mostly Rainy"
 msgstr ""
 
 #: 3.0/met_norway.js:525 3.8/met_norway.js:472
-msgid "Rain with Thunderstorm"
+msgid "Rain with Thunderstorms"
 msgstr ""
 
 #: 3.0/met_norway.js:532 3.8/met_norway.js:479
@@ -377,7 +379,7 @@ msgid "in"
 msgstr ""
 
 #: 3.0/darkSky.js:136 3.8/darkSky.js:88
-msgid "Feels Like"
+msgid "Feels Like:"
 msgstr ""
 
 #: 3.0/darkSky.js:162 3.8/darkSky.js:114
@@ -684,21 +686,21 @@ msgstr ""
 msgid "Updated"
 msgstr ""
 
-#: 3.0/applet.js:802 3.8/applet.js:663
+#: 3.0/applet.js:806 3.8/applet.js:667
 msgid "Today"
 msgstr ""
 
-#: 3.0/applet.js:804 3.8/applet.js:665
+#: 3.0/applet.js:808 3.8/applet.js:669
 msgid "Tomorrow"
 msgstr ""
 
-#: 3.0/applet.js:1002 3.8/applet.js:863
+#: 3.0/applet.js:1006 3.8/applet.js:867
 msgid ""
 "Could not update weather for a while...\n"
 "are you connected to the internet?"
 msgstr ""
 
-#: 3.0/applet.js:1016 3.8/applet.js:877
+#: 3.0/applet.js:1020 3.8/applet.js:881
 msgid "Network Error, please check logs in Looking Glass"
 msgstr ""
 
@@ -959,8 +961,9 @@ msgstr ""
 #. 3.0->settings-schema.json->METN->description
 #. 3.8->settings-schema.json->METN->description
 msgid ""
-"MET Norway - The daily forecasts are generated from 6 hour forecasts, so it "
-"can look incorrect sometimes."
+"MET Norway - Current weather is shown for the next hour, and the daily "
+"forecasts are generated from 6 hour forecasts, so it can look incorrect "
+"sometimes."
 msgstr ""
 
 #. 3.0->settings-schema.json->providerSettings->description

@@ -22,7 +22,7 @@
   },
   "METN":
   { "type": "label"
-  , "description": "MET Norway - The daily forecasts are generated from 6 hour forecasts, so it can look incorrect sometimes."
+  , "description": "MET Norway - Current weather is shown for the next hour, and the daily forecasts are generated from 6 hour forecasts, so it can look incorrect sometimes."
   },
   "providerSettings":
   { "type": "header"

@@ -368,7 +368,7 @@ var MetNorway = (function () {
                 return {
                     customIcon: "Cloud-Hail",
                     main: _("Heavy Sleet"),
-                    description: _("Heavy Sleet with Thundertorms"),
+                    description: _("Heavy Sleet with Thunderstorms"),
                     icon: weatherIconSafely([icons.rain_freezing, icons.rain, icons.alert], this.app._icon_type)
                 };
             case "HeavySleetThunderSun":
@@ -389,7 +389,7 @@ var MetNorway = (function () {
                 return {
                     customIcon: "Cloud-Snow",
                     main: _("Heavy Snow"),
-                    description: _("Heavy Snow with Thunderstorm"),
+                    description: _("Heavy Snow with Thunderstorms"),
                     icon: weatherIconSafely([icons.snow, icons.alert], this.app._icon_type)
                 };
             case "HeavySnowThunderSun":
@@ -522,7 +522,7 @@ var MetNorway = (function () {
                 return {
                     customIcon: "Cloud-Lightning",
                     main: _("Rain"),
-                    description: _("Rain with Thunderstorm"),
+                    description: _("Rain with Thunderstorms"),
                     icon: weatherIconSafely([icons.storm, icons.rain, icons.rain_freezing, icons.alert], this.app._icon_type)
                 };
             case "RainThunderSun":
