@@ -24,6 +24,10 @@
   { "type": "label"
   , "description": "MET Norway - Current weather is shown for the next hour, and the daily forecasts are generated from 6 hour forecasts, so it can look incorrect sometimes."
   },
+  "WB":
+  { "type": "label"
+  , "description": "WeatherBit - Minimum of 10min refresh rate is recommended or you might exceed you daily quota. Needs a key, please click on 'Setup API Key and Location' for the steps how to obtain one."
+  },
   "providerSettings":
   { "type": "header"
   , "description": "Weather Provider Options"
@@ -36,7 +40,8 @@
     { 
       "OpenWeatherMap": "OpenWeatherMap",
       "DarkSky (key needed)": "DarkSky",
-      "MET Norway": "MetNorway"
+      "MET Norway": "MetNorway",
+      "Weatherbit (key needed)": "Weatherbit"
     }
   },
   "apiKey":
@@ -182,7 +187,8 @@
   "shortConditions":
   { "type": "checkbox"
   , "default": false
-  , "description": "Less verbose conditions"
+  , "description": "Less verbose conditions",
+    "tooltip": "Currently only used with DarkSky "
   },
   "iconSettings":
   { "type": "header"

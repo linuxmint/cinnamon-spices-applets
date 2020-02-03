@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-02 13:14+0000\n"
+"POT-Creation-Date: 2020-02-03 13:30+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,11 +17,11 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: applet.js:337 3.0/applet.js:249 3.8/applet.js:198
+#: applet.js:337 3.0/applet.js:250 3.8/applet.js:199
 msgid "..."
 msgstr ""
 
-#: applet.js:338 3.0/applet.js:250 3.8/applet.js:199
+#: applet.js:338 3.0/applet.js:251 3.8/applet.js:200
 msgid "Click to open"
 msgstr ""
 
@@ -33,48 +33,48 @@ msgstr ""
 msgid "No location provided"
 msgstr ""
 
-#: applet.js:610 3.0/openWeatherMap.js:150 3.8/openWeatherMap.js:92
+#: applet.js:610
 msgid "Cloudiness:"
 msgstr ""
 
-#: applet.js:634 3.0/applet.js:771 3.8/applet.js:632
+#: applet.js:634 3.0/applet.js:777 3.8/applet.js:638
 msgid "Sunrise"
 msgstr ""
 
-#: applet.js:635 3.0/applet.js:772 3.8/applet.js:633
+#: applet.js:635 3.0/applet.js:778 3.8/applet.js:639
 msgid "Sunset"
 msgstr ""
 
-#: applet.js:708 3.0/applet.js:861 3.8/applet.js:722
+#: applet.js:708 3.0/applet.js:867 3.8/applet.js:728
 msgid "Loading current weather ..."
 msgstr ""
 
-#: applet.js:709 3.0/applet.js:864 3.8/applet.js:725
+#: applet.js:709 3.0/applet.js:870 3.8/applet.js:731
 msgid "Loading future weather ..."
 msgstr ""
 
-#: applet.js:731 3.0/applet.js:893 3.8/applet.js:754
+#: applet.js:731 3.0/applet.js:899 3.8/applet.js:760
 msgid "Loading ..."
 msgstr ""
 
-#: applet.js:737 3.0/applet.js:283 3.0/applet.js:883 3.8/applet.js:232
-#: 3.8/applet.js:744
+#: applet.js:737 3.0/applet.js:284 3.0/applet.js:889 3.8/applet.js:233
+#: 3.8/applet.js:750
 msgid "Refresh"
 msgstr ""
 
-#: applet.js:802 3.0/applet.js:915 3.8/applet.js:776
+#: applet.js:802 3.0/applet.js:921 3.8/applet.js:782
 msgid "Temperature:"
 msgstr ""
 
-#: applet.js:804 3.0/applet.js:916 3.8/applet.js:777
+#: applet.js:804 3.0/applet.js:922 3.8/applet.js:783
 msgid "Humidity:"
 msgstr ""
 
-#: applet.js:806 3.0/applet.js:917 3.8/applet.js:778
+#: applet.js:806 3.0/applet.js:923 3.8/applet.js:784
 msgid "Pressure:"
 msgstr ""
 
-#: applet.js:808 3.0/applet.js:918 3.8/applet.js:779
+#: applet.js:808 3.0/applet.js:924 3.8/applet.js:785
 msgid "Wind:"
 msgstr ""
 
@@ -142,11 +142,11 @@ msgstr ""
 msgid "Service Unavailable"
 msgstr ""
 
-#: applet.js:1084 3.0/applet.js:203 3.0/applet.js:205 3.0/applet.js:207
-#: 3.0/applet.js:210 3.0/applet.js:213 3.0/applet.js:214 3.0/applet.js:215
-#: 3.0/applet.js:216 3.8/applet.js:153 3.8/applet.js:155 3.8/applet.js:157
-#: 3.8/applet.js:160 3.8/applet.js:163 3.8/applet.js:164 3.8/applet.js:165
-#: 3.8/applet.js:166
+#: applet.js:1084 3.0/applet.js:204 3.0/applet.js:206 3.0/applet.js:208
+#: 3.0/applet.js:211 3.0/applet.js:214 3.0/applet.js:215 3.0/applet.js:216
+#: 3.0/applet.js:217 3.8/applet.js:154 3.8/applet.js:156 3.8/applet.js:158
+#: 3.8/applet.js:161 3.8/applet.js:164 3.8/applet.js:165 3.8/applet.js:166
+#: 3.8/applet.js:167
 msgid "Service Error"
 msgstr ""
 
@@ -162,7 +162,8 @@ msgstr ""
 msgid "Key Temp. Blocked"
 msgstr ""
 
-#: 3.0/met_norway.js:149 3.8/met_norway.js:96
+#: 3.0/met_norway.js:149 3.0/openWeatherMap.js:150 3.8/met_norway.js:96
+#: 3.8/openWeatherMap.js:92
 msgid "Cloudiness"
 msgstr ""
 
@@ -378,8 +379,9 @@ msgstr ""
 msgid "in"
 msgstr ""
 
-#: 3.0/darkSky.js:136 3.8/darkSky.js:88
-msgid "Feels Like:"
+#: 3.0/darkSky.js:136 3.0/weatherbit.js:149 3.8/darkSky.js:88
+#: 3.8/weatherbit.js:93
+msgid "Feels Like"
 msgstr ""
 
 #: 3.0/darkSky.js:162 3.8/darkSky.js:114
@@ -392,17 +394,20 @@ msgid ""
 "or get one first on https://darksky.net/dev/register"
 msgstr ""
 
-#: 3.0/darkSky.js:216 3.8/darkSky.js:168
+#: 3.0/darkSky.js:216 3.0/weatherbit.js:230 3.8/darkSky.js:168
+#: 3.8/weatherbit.js:174
 msgid ""
 "Please Make sure you\n"
 "entered the API key correctly and your account is not locked"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:160 3.8/openWeatherMap.js:102
+#: 3.0/openWeatherMap.js:160 3.0/weatherbit.js:159 3.8/openWeatherMap.js:102
+#: 3.8/weatherbit.js:103
 msgid "Failed to Process Current Weather Info"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:187 3.8/openWeatherMap.js:129
+#: 3.0/openWeatherMap.js:187 3.0/weatherbit.js:186 3.8/openWeatherMap.js:129
+#: 3.8/weatherbit.js:130
 msgid "Failed to Process Forecast Info"
 msgstr ""
 
@@ -637,70 +642,76 @@ msgstr ""
 msgid "Overcast clouds"
 msgstr ""
 
-#: 3.0/applet.js:202 3.8/applet.js:152
+#: 3.0/weatherbit.js:207 3.8/weatherbit.js:151
+msgid ""
+"Please enter API key in settings,\n"
+"or get one first on https://www.weatherbit.io/account/create"
+msgstr ""
+
+#: 3.0/applet.js:203 3.8/applet.js:153
 msgid "Error"
 msgstr ""
 
-#: 3.0/applet.js:204 3.8/applet.js:154
+#: 3.0/applet.js:205 3.8/applet.js:155
 msgid "Incorrect API Key"
 msgstr ""
 
-#: 3.0/applet.js:206 3.8/applet.js:156
+#: 3.0/applet.js:207 3.8/applet.js:157
 msgid "Incorrect Location Format"
 msgstr ""
 
-#: 3.0/applet.js:208 3.8/applet.js:158
+#: 3.0/applet.js:209 3.8/applet.js:159
 msgid "Key Blocked"
 msgstr ""
 
-#: 3.0/applet.js:209 3.8/applet.js:159
+#: 3.0/applet.js:210 3.8/applet.js:160
 msgid "Can't find location"
 msgstr ""
 
-#: 3.0/applet.js:211 3.8/applet.js:161
+#: 3.0/applet.js:212 3.8/applet.js:162
 msgid "No Api Key"
 msgstr ""
 
-#: 3.0/applet.js:212 3.8/applet.js:162
+#: 3.0/applet.js:213 3.8/applet.js:163
 msgid "No Location"
 msgstr ""
 
-#: 3.0/applet.js:217 3.8/applet.js:167
+#: 3.0/applet.js:218 3.8/applet.js:168
 msgid "Missing Packages"
 msgstr ""
 
-#: 3.0/applet.js:225 3.8/applet.js:175
+#: 3.0/applet.js:226 3.8/applet.js:176
 msgid "Weather Applet"
 msgstr ""
 
-#: 3.0/applet.js:607 3.8/applet.js:480
+#: 3.0/applet.js:613 3.8/applet.js:486
 msgid ""
 "Unexpected Error While Refreshing Weather, please see log in Looking Glass"
 msgstr ""
 
-#: 3.0/applet.js:638 3.8/applet.js:502
+#: 3.0/applet.js:644 3.8/applet.js:508
 msgid "Make sure you entered a location or use Automatic location instead"
 msgstr ""
 
-#: 3.0/applet.js:703 3.8/applet.js:564
+#: 3.0/applet.js:709 3.8/applet.js:570
 msgid "Updated"
 msgstr ""
 
-#: 3.0/applet.js:806 3.8/applet.js:667
+#: 3.0/applet.js:812 3.8/applet.js:673
 msgid "Today"
 msgstr ""
 
-#: 3.0/applet.js:808 3.8/applet.js:669
+#: 3.0/applet.js:814 3.8/applet.js:675
 msgid "Tomorrow"
 msgstr ""
 
-#: 3.0/applet.js:1006 3.8/applet.js:867
+#: 3.0/applet.js:1012 3.8/applet.js:873
 msgid ""
 "Could not update weather for a while...\n"
 "are you connected to the internet?"
 msgstr ""
 
-#: 3.0/applet.js:1020 3.8/applet.js:881
+#: 3.0/applet.js:1026 3.8/applet.js:887
 msgid "Network Error, please check logs in Looking Glass"
 msgstr ""
 
@@ -966,6 +977,14 @@ msgid ""
 "sometimes."
 msgstr ""
 
+#. 3.0->settings-schema.json->WB->description
+#. 3.8->settings-schema.json->WB->description
+msgid ""
+"WeatherBit - Minimum of 10min refresh rate is recommended or you might "
+"exceed you daily quota. Needs a key, please click on 'Setup API Key and "
+"Location' for the steps how to obtain one."
+msgstr ""
+
 #. 3.0->settings-schema.json->providerSettings->description
 #. 3.8->settings-schema.json->providerSettings->description
 msgid "Weather Provider Options"
@@ -979,6 +998,11 @@ msgstr ""
 #. 3.0->settings-schema.json->dataService->options
 #. 3.8->settings-schema.json->dataService->options
 msgid "MET Norway"
+msgstr ""
+
+#. 3.0->settings-schema.json->dataService->options
+#. 3.8->settings-schema.json->dataService->options
+msgid "Weatherbit (key needed)"
 msgstr ""
 
 #. 3.0->settings-schema.json->apiKey->description
@@ -1040,6 +1064,11 @@ msgstr ""
 #. 3.0->settings-schema.json->shortConditions->description
 #. 3.8->settings-schema.json->shortConditions->description
 msgid "Less verbose conditions"
+msgstr ""
+
+#. 3.0->settings-schema.json->shortConditions->tooltip
+#. 3.8->settings-schema.json->shortConditions->tooltip
+msgid "Currently only used with DarkSky "
 msgstr ""
 
 #. 3.0->settings-schema.json->iconSettings->description

@@ -91,7 +91,7 @@ const APPLET_ICON = "view-refresh-symbolic"
 const REFRESH_ICON = "view-refresh";
 const CMD_SETTINGS = "cinnamon-settings applets " + UUID
 
-type Services = "OpenWeatherMap" | "DarkSky" | "MetNorway";
+type Services = "OpenWeatherMap" | "DarkSky" | "MetNorway" | "Weatherbit";
 type ServiceMap = {
   [key: string]: Services
 }
@@ -102,7 +102,8 @@ type ServiceDescriptions = {
 const DATA_SERVICE: ServiceMap = {
   OPEN_WEATHER_MAP: "OpenWeatherMap",
   DARK_SKY: "DarkSky",
-  MET_NORWAY: "MetNorway"
+  MET_NORWAY: "MetNorway",
+  WEATHERBIT: "Weatherbit"
 }
 
 const WEATHER_LOCATION = "location"
@@ -340,7 +341,6 @@ class WeatherApplet extends TextIconApplet {
   }
 
   private BindSettings() {
-    // TODO: Add changeable item to describe Data service
     for (let k in KEYS) {
       let key = KEYS[k];
       let keyProp = "_" + key;
@@ -524,7 +524,7 @@ class WeatherApplet extends TextIconApplet {
     
         if (this.pauseRefresh == true) {
           this.log.Debug("Configuration error, updating paused")
-          await delay(loopInterval);
+          await delay(loopInterval * 1000);
           continue;
         }
 
@@ -656,8 +656,12 @@ class WeatherApplet extends TextIconApplet {
           this.provider = new openWeatherMap.OpenWeatherMap(this);
           break;
         case DATA_SERVICE.MET_NORWAY:         // No TZ or city info
-          if (openWeatherMap == null) var metNorway = importModule("met_norway");
+          if (metNorway == null) var metNorway = importModule("met_norway");
           this.provider = new metNorway.MetNorway(this);
+          break;
+        case DATA_SERVICE.WEATHERBIT:
+          if (weatherbit == null) var weatherbit = importModule("weatherbit");
+          this.provider = new weatherbit.Weatherbit(this);
           break;
         default:
           return "error";
@@ -1530,7 +1534,7 @@ type RefreshState = "success" | "failure" | "error";
  *  soft will show a subtle hint that the refresh failed (NOT IMPLEMENTED)
  */
 type ErrorSeverity = "hard" |  "soft";
-type ApiService = "ipapi" | "darksky" | "openweathermap" | "met-norway";
+type ApiService = "ipapi" | "darksky" | "openweathermap" | "met-norway" | "weatherbit";
 type ErrorDetail = "no key" | "bad key" | "no location" | "bad location format" |
   "location not found" | "no network response" | "no api response" | 
   "bad api response - non json" | "bad api response" | "no reponse body" | 
