@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-03 09:50+0000\n"
+"POT-Creation-Date: 2020-02-03 13:30+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -980,9 +980,9 @@ msgstr ""
 #. 3.0->settings-schema.json->WB->description
 #. 3.8->settings-schema.json->WB->description
 msgid ""
-"WeatherBit - 30min refresh rate is recommended or you might exceed you daily"
-" quota. Needs key, please click on 'Setup API Key and Location' for the "
-"steps how to obtain one."
+"WeatherBit - Minimum of 10min refresh rate is recommended or you might "
+"exceed you daily quota. Needs a key, please click on 'Setup API Key and "
+"Location' for the steps how to obtain one."
 msgstr ""
 
 #. 3.0->settings-schema.json->providerSettings->description
@@ -1002,7 +1002,7 @@ msgstr ""
 
 #. 3.0->settings-schema.json->dataService->options
 #. 3.8->settings-schema.json->dataService->options
-msgid "Weatherbit (needs key)"
+msgid "Weatherbit (key needed)"
 msgstr ""
 
 #. 3.0->settings-schema.json->apiKey->description

@@ -26,7 +26,7 @@
   },
   "WB":
   { "type": "label"
-  , "description": "WeatherBit - 30min refresh rate is recommended or you might exceed you daily quota. Needs key, please click on 'Setup API Key and Location' for the steps how to obtain one."
+  , "description": "WeatherBit - Minimum of 10min refresh rate is recommended or you might exceed you daily quota. Needs a key, please click on 'Setup API Key and Location' for the steps how to obtain one."
   },
   "providerSettings":
   { "type": "header"
@@ -41,7 +41,7 @@
       "OpenWeatherMap": "OpenWeatherMap",
       "DarkSky (key needed)": "DarkSky",
       "MET Norway": "MetNorway",
-      "Weatherbit (needs key)": "Weatherbit"
+      "Weatherbit (key needed)": "Weatherbit"
     }
   },
   "apiKey":
@@ -204,4 +204,3 @@
     "description": "powered by: OpenWeatherMap, DarkSky, ipapi. Big Thanks to OpenWeatherMap for their support!"
   }
 }
-
