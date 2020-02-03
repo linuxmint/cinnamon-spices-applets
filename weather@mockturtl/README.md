@@ -79,3 +79,7 @@ You can enable debug mode for more logging by creating a file named ```DEBUG``` 
 You can see Logs by opening the Cinnamon 'Looking Glass' debugger. You can open it by Right Clicking on your Panel (taskbar), then Troubleshoot->Looking Glass
 
 Logs can be found under the ```Log``` Tab.
+
+
+
+[Changelog](https://github.com/linuxmint/cinnamon-spices-applets/blob/master/weather%40mockturtl/CHANGELOG.md)

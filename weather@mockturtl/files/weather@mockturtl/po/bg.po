@@ -35,8 +35,8 @@ msgid "No location provided"
 msgstr "Не е указано местоположение"
 
 #: applet.js:610
-msgid "Cloudiness"
-msgstr "Облачност"
+msgid "Cloudiness:"
+msgstr "Облачност:"
 
 #: applet.js:634 3.0/applet.js:646 3.8/applet.js:545
 msgid "Sunrise"
