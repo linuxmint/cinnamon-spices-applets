@@ -1,6 +1,6 @@
 # cinnamon-weather
 
-Adaptation of Gnome Shell's [weather extension](https://github.com/simon04/gnome-shell-extension-weather) for the [Cinnamon](http://cinnamon.linuxmint.com) desktop.
+Adaptation of Gnome Shell's [weather extension](https://github.com/simon04/gnome-shell-extension-weather) for the Cinnamon desktop.
 
 cinnamon-weather uses [Semantic Versioning](http://semver.org/).  For the current version number, see `metadata.json`.  
 

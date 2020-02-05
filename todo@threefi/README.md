@@ -1,4 +1,4 @@
-## todo applet for the [Cinnamon](http://cinnamon.linuxmint.com) desktop.
+## todo applet for the Cinnamon desktop.
 (inspired by Gnome Shell's stocks extension written by Andrew Miller)
 
 ----
