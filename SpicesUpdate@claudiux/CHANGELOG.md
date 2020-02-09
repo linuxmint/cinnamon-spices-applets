@@ -1,3 +1,6 @@
+### v5.3.0~20200209
+  * Cinnamon 4.2 & 4.4: Direct access from the Spices Update menu to each tab of settings (General, Applets, Desklets, Extensions, Themes) via the Configure sub menu.
+
 ### v5.2.2~20200109
   * Cinnamon 4.2: Let Gtk determine the right size of dialog window ([see @mtwebster's commit for Cinnamon](https://github.com/linuxmint/cinnamon/commit/d57677b5ae306115139be98be62e3fb7cc6a27a8#diff-c4641b580bb45b188c5ae94c7f7a33cf))
 
