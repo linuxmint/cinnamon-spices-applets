@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-03-26 04:16-0500\n"
 "PO-Revision-Date: 2017-09-17 20:00+0200\n"
-"Last-Translator: \n"
+"Last-Translator: Ozzie Isaacs\n"
 "Language-Team: \n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -48,11 +48,11 @@ msgstr "Temperatur"
 
 #: applet.js:144
 msgid "Critical"
-msgstr ""
+msgstr "Kritisch"
 
 #: applet.js:146
 msgid "High"
-msgstr ""
+msgstr "Hoch"
 
 #: applet.js:156
 msgid "Current Temperature"
@@ -76,12 +76,12 @@ msgstr "Temperatur in Fahrenheit anzeigen"
 
 #. settings-schema.json->only-integer-part->description
 msgid "Use integer values for temperature"
-msgstr ""
+msgstr "Ganzahlwerte für Temperatur nutzen"
 
 #. settings-schema.json->interval->units
 msgid "ms"
-msgstr ""
+msgstr "ms"
 
 #. settings-schema.json->interval->description
 msgid "Update interval"
-msgstr ""
+msgstr "Aktualisierungsintervall"
