@@ -93,19 +93,19 @@ function notify_send(message, duration=5000, urgency="normal", icon_path=null) {
 }
 
 function getImageAtScale(imageFileName, width, height) {
-    let pixBuf = GdkPixbuf.Pixbuf.new_from_file_at_size(imageFileName, width, height);
-    let image = new Clutter.Image();
-    image.set_data(
-        pixBuf.get_pixels(),
-        pixBuf.get_has_alpha() ? Cogl.PixelFormat.RGBA_8888 : Cogl.PixelFormat.RGBA_888,
-        width, height,
-        pixBuf.get_rowstride()
-    );
+  let pixBuf = GdkPixbuf.Pixbuf.new_from_file_at_size(imageFileName, width, height);
+  let image = new Clutter.Image();
+  image.set_data(
+    pixBuf.get_pixels(),
+    pixBuf.get_has_alpha() ? Cogl.PixelFormat.RGBA_8888 : Cogl.PixelFormat.RGBA_888,
+    width, height,
+    pixBuf.get_rowstride()
+  );
 
-    let actor = new Clutter.Actor({width: width, height: height});
-    actor.set_content(image);
+  let actor = new Clutter.Actor({width: width, height: height});
+  actor.set_content(image);
 
-    return actor;
+  return actor;
 }
 
 
@@ -1581,7 +1581,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
     this.menu.removeAll();
 
     // Head
-    this.menuitemHead1 = new PopupMenu.PopupMenuItem(_("Spices Update"), {
+    this.menuitemHead1 = new PopupMenu.PopupMenuItem(this.default_tooltip, {
       reactive: false
     });
     this.menu.addMenuItem(this.menuitemHead1);
@@ -1617,18 +1617,35 @@ class SpicesUpdate extends Applet.TextIconApplet {
     }
     // button Download
     if ((this.nb_to_update + this.nb_to_watch) > 0) {
-      let _download_tabs_button = new PopupMenu.PopupIconMenuItem(_("Open useful Cinnamon Settings"), "folder-download", St.IconType.SYMBOLIC);
+      let _download_tabs_button = new PopupMenu.PopupIconMenuItem(_("Open useful Cinnamon Settings"), "su-update-available", St.IconType.SYMBOLIC);
       _download_tabs_button.connect("activate", (event) => this.open_each_download_tab());
       this.menu.addMenuItem(_download_tabs_button);
     }
     this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
-    // button Configure...
-    let configure = new PopupMenu.PopupIconMenuItem(_("Configure") + "...", "system-run", St.IconType.SYMBOLIC);
-    configure.connect("activate", (event) => {
-        Util.spawnCommandLine("cinnamon-settings applets %s %s".format(UUID, this.instanceId));
-    });
-    this.menu.addMenuItem(configure);
+    //~ // button Configure...
+    //~ let configure = new PopupMenu.PopupIconMenuItem(_("Configure") + "...", "system-run", St.IconType.SYMBOLIC);
+    //~ configure.connect("activate", (event) => {
+        //~ Util.spawnCommandLine("cinnamon-settings applets %s %s".format(UUID, this.instanceId));
+    //~ });
+    //~ this.menu.addMenuItem(configure);
+
+    // sub-menu Configure
+    let _configure = new PopupMenu.PopupSubMenuMenuItem(_("Configure"));
+    this.menu.addMenuItem(_configure);
+    this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+    let _configureOptions = [_("General"), _("Applets"), _("Desklets"), _("Extensions"), _("Themes")];
+    let _iconNames = ["su-general", "su-applets", "su-desklets", "su-extensions", "su-themes"];
+    let _options = [];
+    for (let i=0; i<_configureOptions.length ; i++) {
+      let _optionTitle = _configureOptions[i];
+      let _icon = _iconNames[i];
+      _options[i] = new PopupMenu.PopupIconMenuItem(_optionTitle, _icon, St.IconType.SYMBOLIC);
+      _options[i].connect('activate', (event) => Util.spawnCommandLine("xlet-settings applet %s -t %s".format(UUID, i.toString())));
+      _configure.menu.addMenuItem(_options[i])
+    }
+
+    // button Reload this applet
     if (DEBUG()) {
       let _reload_button = new PopupMenu.PopupIconMenuItem("Reload this applet", "edit-redo", St.IconType.SYMBOLIC);
       _reload_button.connect("activate", (event) => this._on_reload_this_applet_pressed())
