@@ -1,3 +1,7 @@
+# 2.4.2
+
+* Fixes [#2853](https://github.com/linuxmint/cinnamon-spices-applets/issues/2853)
+
 # 2.4.1
 
 * Add weatherbit.io as a weather provider.
@@ -54,6 +58,34 @@ Fixes:
 * Can now build from same source down to Cinnamon Version 3.0
 * Fixed some styling issues with some themes (Adapta, etc) where the Forecast box did not have enough padding
 * Sunset/Sunrise and Day names are using the system locale *(3.4+)*
+
+# 2.2.0
+
+General changes:
+
+* Source converted to Typescript.
+* Added some basic Typescript declarations of Cinnamon js libraries (minimum needed for the applet)
+* Added Build scripts and Build guide
+* Text 'Today' and 'Tomorrow' is used for forecasts in 3.8+
+* Version 3.6 changed to 3.4 and using the Typescript source compiled to es5 with some extra changes after:
+  * All files moved into One file
+  * code regarding importing other files was removed
+  * .ToLocaleString() does not support Timezones, removed
+  * Array.includes polyfill added (it is used in DarkSky)
+
+Fixes:
+
+* !!! the panel was not rebuilding at the correct time on refresh (I 
+  honestly don't know how the app was working before at all), now 
+  rebuilding is part of the data refresh function.
+* Applet was crashing when there was no internet (Debug line was outside try/catch)
+* Big performance increase in version 3.4, plus DarkSky support
+* OpenWeatherMap forecast conditions were always translated, fixed.
+* Several fixes where undefined variables were referred to, now fixed (found while converting to TS)
+
+New stuff:
+
+* 3.8+: Added Refresh button to context menu.
 
 # 2.1.7
 
@@ -112,34 +144,6 @@ Fixes:
 * Removed obsolete code
 * Edited Readme
 * Added some thanks to OpenWeatherMap at the bottom of the settings
-
-# 2.2.0
-
-General changes:
-
-* Source converted to Typescript.
-* Added some basic Typescript declarations of Cinnamon js libraries (minimum needed for the applet)
-* Added Build scripts and Build guide
-* Text 'Today' and 'Tomorrow' is used for forecasts in 3.8+
-* Version 3.6 changed to 3.4 and using the Typescript source compiled to es5 with some extra changes after:
-  * All files moved into One file
-  * code regarding importing other files was removed
-  * .ToLocaleString() does not support Timezones, removed
-  * Array.includes polyfill added (it is used in DarkSky)
-
-Fixes:
-
-* !!! the panel was not rebuilding at the correct time on refresh (I 
-  honestly don't know how the app was working before at all), now 
-  rebuilding is part of the data refresh function.
-* Applet was crashing when there was no internet (Debug line was outside try/catch)
-* Big performance increase in version 3.4, plus DarkSky support
-* OpenWeatherMap forecast conditions were always translated, fixed.
-* Several fixes where undefined variables were referred to, now fixed (found while converting to TS)
-
-New stuff:
-
-* 3.8+: Added Refresh button to context menu.
 
 # 2.0.1
 
