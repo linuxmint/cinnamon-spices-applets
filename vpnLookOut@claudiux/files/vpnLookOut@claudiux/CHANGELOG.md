@@ -1,5 +1,8 @@
 ## Changelog
 
+### 3.5.0~20191218
+  * Some bug fixes and code cleanup. See [issue 8914](https://github.com/linuxmint/cinnamon/issues/8914) - Many thanks to @Odyseus and @collinss !
+
 ### 3.4.2~20191207
   * Activate vpnLookOut with middle-click or keyboard shortcut.
   * Change tooltip.

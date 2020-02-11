@@ -84,6 +84,7 @@
     "sectionT2": {
       "type": "section",
       "title": "Managed Apps",
+      "dependency": "manageClients",
       "keys": [
         "clientsList"
       ]
