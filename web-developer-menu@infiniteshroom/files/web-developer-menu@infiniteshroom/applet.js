@@ -9,12 +9,12 @@ const Gio = imports.gi.Gio;
 
 //applet command constants
 var CommandConstants = new function() {
-  this.COMMAND_START_APACHE = "gksu service apache2 restart";
-  this.COMMAND_STOP_APACHE = "gksu service apache2 stop";
-  this.COMMAND_START_MYSQL = "gksu service mysql restart";
-  this.COMMAND_STOP_MYSQL = "gksu service mysql stop";
-  this.COMMAND_APACHE_CONFIG_EDIT = "gksu gedit /etc/apache2/sites-enabled/000-default";
-  this.COMMAND_PHP_CONFIG_EDIT = "gksu gedit /etc/php5/apache2/php.ini";
+  this.COMMAND_START_APACHE = "sudo service apache2 restart";
+  this.COMMAND_STOP_APACHE = "sudo service apache2 stop";
+  this.COMMAND_START_MYSQL = "sudo service mysql restart";
+  this.COMMAND_STOP_MYSQL = "sudo service mysql stop";
+  this.COMMAND_APACHE_CONFIG_EDIT = "sudo gedit /etc/apache2/sites-enabled/000-default";
+  this.COMMAND_PHP_CONFIG_EDIT = "sudo gedit /etc/php5/apache2/php.ini";
   this.COMMAND_LAUNCH_PHPMYADMIN = "xdg-open http://localhost/phpmyadmin/";
   this.COMMAND_LAUNCH_WEBDIR = "xdg-open http://localhost/";
   this.COMMAND_OPEN_WEBDIR = "nemo /var/www/";
