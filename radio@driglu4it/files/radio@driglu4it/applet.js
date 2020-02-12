@@ -8,7 +8,12 @@ const Clutter = imports.gi.Clutter;
 // l10n support
 const Gettext = imports.gettext;
 const GLib = imports.gi.GLib;
+const Gtk = imports.gi.Gtk;
+
 const UUID = "radio@driglu4it";
+
+const ICONS_DIR = GLib.get_home_dir() + "/.local/share/cinnamon/applets/" + UUID + "/icons";
+
 Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
 function _(str) {
     let customTranslation = Gettext.dgettext(UUID, str);
@@ -26,7 +31,12 @@ MyApplet.prototype = {
   _init: function(orientation, panel_height, instance_id) {
     Util.spawnCommandLine("mocp");
     Applet.TextIconApplet.prototype._init.call(this, orientation, panel_height, instance_id);
-    this.set_applet_icon_symbolic_path(GLib.get_home_dir() + "/.local/share/cinnamon/applets/" + UUID + "/icons/radio.svg");
+
+    Gtk.IconTheme.get_default().append_search_path(ICONS_DIR);
+    this.set_applet_icon_symbolic_name("radioapplet");
+
+    //this.set_applet_icon_symbolic_path(ICONS_DIR + "/radio.svg");
+
     this.menuManager = new PopupMenu.PopupMenuManager(this);
     this.menu = new Applet.AppletPopupMenu(this, orientation);
     this.menuManager.addMenu(this.menu);
@@ -38,7 +48,7 @@ MyApplet.prototype = {
   },
   on_settings_changed: function() {
     this.set_applet_tooltip(_("Radio++"));
-    this.set_applet_icon_name('radio');
+    this.set_applet_icon_name('radioapplet');
     this.menu.removeAll();
     this.menuManager.addMenu(this.menu);
     var i;
