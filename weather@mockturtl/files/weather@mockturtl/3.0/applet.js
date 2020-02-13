@@ -232,6 +232,7 @@ var WeatherApplet = (function (_super) {
         _this.BindSettings();
         _this.AddRefreshButton();
         _this.BuildPopupMenu();
+        _this.set_show_label_in_vertical_panels(true);
         _this.GUID = uuidv4();
         weatherAppletGUIDs[instanceId] = _this.GUID;
         _this.rebuild();
@@ -691,9 +692,9 @@ var WeatherApplet = (function (_super) {
                 }
             }
             if (this.weather.condition.description != null) {
-                descriptionCondition = capitalizeFirstLetter(this.weather.condition.description);
+                descriptionCondition = this.weather.condition.description;
                 if (this._translateCondition) {
-                    descriptionCondition = _(descriptionCondition);
+                    descriptionCondition = capitalizeFirstLetter(_(descriptionCondition));
                 }
             }
             var location = "";
@@ -724,7 +725,7 @@ var WeatherApplet = (function (_super) {
                 this._currentWeatherTemperature.text = temp + ' ' + this.unitToUnicode(this._temperatureUnit);
             }
             var label = "";
-            if (this._showCommentInPanel) {
+            if (this._showCommentInPanel && (this.orientation != Side.LEFT || this.orientation != Side.RIGHT)) {
                 label += mainCondition;
             }
             if (this._showTextInPanel) {

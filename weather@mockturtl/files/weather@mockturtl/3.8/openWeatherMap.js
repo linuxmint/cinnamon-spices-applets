@@ -344,6 +344,7 @@ const openWeatherMapConditionLibrary = [
     _("Clear"),
     _("Clear sky"),
     _("Sky is clear"),
+    _("Clouds"),
     _("Few clouds"),
     _("Scattered clouds"),
     _("Broken clouds"),

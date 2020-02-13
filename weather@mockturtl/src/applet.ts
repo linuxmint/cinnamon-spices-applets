@@ -263,7 +263,7 @@ class WeatherApplet extends TextIconApplet {
 
   /** To check if data is up-to-date based on user-set refresh settings */
   private lastUpdated: Date = new Date(0);
-  private orientation: any;
+  private orientation: imports.gi.St.Side;
   /** Used for error handling, first error calls dibs
    * and stops diplaying the other errors after.
    * Also used for counting consecutive errors
@@ -283,7 +283,7 @@ class WeatherApplet extends TextIconApplet {
   private instanceID: number;
   private appletRemoved = false;
 
-  public constructor(metadata: any, orientation: any, panelHeight: number, instanceId: number) {
+  public constructor(metadata: any, orientation: imports.gi.St.Side, panelHeight: number, instanceId: number) {
     super(orientation, panelHeight, instanceId);
     this.instanceID = instanceId;
     this.currentLocale = this.constructJsLocale(get_language_names()[0]);
@@ -302,6 +302,7 @@ class WeatherApplet extends TextIconApplet {
     this.BindSettings();
     this.AddRefreshButton();
     this.BuildPopupMenu();
+    this.set_show_label_in_vertical_panels(true);
     // generating unique GUIDs
     this.GUID = uuidv4();
     weatherAppletGUIDs[instanceId] = this.GUID;
@@ -556,7 +557,7 @@ class WeatherApplet extends TextIconApplet {
       this.hide_applet_label(false);
   };
 
-  private on_orientation_changed(orientation: string) {
+  private on_orientation_changed(orientation: imports.gi.St.Side) {
     this.orientation = orientation;
     this.refreshWeather(true);
   };
@@ -767,9 +768,9 @@ class WeatherApplet extends TextIconApplet {
       }
       // Condition Description
       if (this.weather.condition.description != null) {
-        descriptionCondition = capitalizeFirstLetter(this.weather.condition.description);
+        descriptionCondition = this.weather.condition.description;
         if (this._translateCondition) {
-          descriptionCondition = _(descriptionCondition);
+          descriptionCondition = capitalizeFirstLetter(_(descriptionCondition));
         }
       }
 
@@ -811,7 +812,7 @@ class WeatherApplet extends TextIconApplet {
 
       // Set Applet Label, even if the variables are empty
       let label = "";
-      if (this._showCommentInPanel) {
+      if (this._showCommentInPanel && (this.orientation != Side.LEFT || this.orientation != Side.RIGHT)) {
         label += mainCondition;
       }
       if (this._showTextInPanel) {
@@ -1308,7 +1309,7 @@ const EN_DASH = '\u2013'
 //
 //----------------------------------------------------------------------
 
-function main(metadata: any, orientation: string, panelHeight: number, instanceId: number) {
+function main(metadata: any, orientation: imports.gi.St.Side, panelHeight: number, instanceId: number) {
   //log("v" + metadata.version + ", cinnamon " + Config.PACKAGE_VERSION)
   return new WeatherApplet(metadata, orientation, panelHeight, instanceId);
 }
