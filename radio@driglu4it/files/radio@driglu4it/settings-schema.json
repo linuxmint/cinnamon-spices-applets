@@ -1,24 +1,56 @@
 {
   "layout1": {
     "type": "layout",
-    "pages": ["page1"],
+    "height": 600,
+    "width": 800,
+    "pages": [
+      "page1",
+      "page2"
+    ],
     "page1": {
       "type": "page",
       "title": "List of stations",
-      "sections": ["section1"]
+      "sections": [
+        "section1"
+      ]
+    },
+    "page2": {
+      "type": "page",
+      "title": "Icon",
+      "sections": [
+        "section2",
+        "section3"
+      ]
     },
     "section1": {
       "type": "section",
       "title": "Radio",
-      "keys": ["tree"]
+      "keys": [
+        "tree"
+      ]
+    },
+    "section2": {
+      "type": "section",
+      "title": "Icon",
+      "keys": [
+        "icon-type"
+      ]
+    },
+    "section3": {
+      "type": "section",
+      "title": "Symbolic Icon Color",
+      "dependency": "icon-type=SYMBOLIC",
+      "keys": [
+        "color-on"
+      ]
     }
   },
-
   "tree": {
     "type": "list",
     "description": "List of stations",
     "height": 400,
-    "columns": [{
+    "columns": [
+      {
         "id": "name",
         "title": "Title",
         "type": "string"
@@ -27,13 +59,15 @@
         "id": "url",
         "title": "URL",
         "type": "string"
-    },
-    {"id": "inc",
-         "title": "Include of list",
-          "type": "boolean"
+      },
+      {
+        "id": "inc",
+        "title": "Include of list",
+        "type": "boolean"
       }
     ],
-    "default": [{
+    "default": [
+      {
         "name": "Akustika",
         "url": "http://ic3.101.ru:8000/c16_34",
         "inc": true
@@ -54,5 +88,20 @@
         "inc": false
       }
     ]
+  },
+  "icon-type": {
+    "type": "combobox",
+    "description": "Type",
+    "default": "SYMBOLIC",
+    "options": {
+      "Symbolic Icon": "SYMBOLIC",
+      "Full Color Icon": "FULLCOLOR",
+      "Bicolor Icon": "BICOLOR"
+    }
+  },
+  "color-on": {
+    "type": "colorchooser",
+    "default": "#bebebe",
+    "description": "Color of Symbolic Icon when playing a radio"
   }
 }
