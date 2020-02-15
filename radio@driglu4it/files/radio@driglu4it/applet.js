@@ -50,7 +50,7 @@ MyApplet.prototype = {
     this.radioId = "";
     this.get_moc_status();
     this.on_icon_changed();
-    this.on_tree_changed();
+    this.on_tree_changed(true);
     this.oldNames = JSON.stringify(this.names);
   },
 
@@ -78,6 +78,17 @@ MyApplet.prototype = {
       let [state, rate, file, title] = out.trim().split(",");
       this.mocStatus = state;
       this.radioId = file;
+      if (state === "PLAY") {
+        for (let i = 0; i < this.names.length; i++) {
+          let id = this.names[i].url;
+          if (this.radioId === id) {
+            this.set_applet_tooltip(this.names[i].name);
+            break;
+          }
+        }
+      } else {
+        this.set_applet_tooltip(_("Radio++"));
+      }
       this.set_color();
     }));
   },
@@ -98,9 +109,11 @@ MyApplet.prototype = {
       this.currentMenuItem = null;
       this.menu.removeAll();
       for (let i = 0; i < this.names.length; i++) {
+        let title = this.names[i].name;
+        let id = this.names[i].url;
         if (this.names[i].inc === true) {
-          let title = this.names[i].name;
-          let id = this.names[i].url;
+          //let title = this.names[i].name;
+          //let id = this.names[i].url;
           let menuitem = new PopupMenu.PopupMenuItem(title, false);
           this.menu.addMenuItem(menuitem);
           menuitem.connect('activate', Lang.bind(this, function() {
@@ -109,33 +122,29 @@ MyApplet.prototype = {
               this.startCM(id);
               Main.notify(_("Playing %s").format(title));
               this.radioId = id;
-              try {
-                this.activeMenuItemChanged(menuitem);
-              } catch(e) {
-                // Nothing to do
-              }
+              this.activeMenuItemChanged(menuitem);
             }
           }));
           if (force && this.radioId === id) menuitem.setShowDot(true);
         }
+        if (this.radioId === id) this.set_applet_tooltip(title);
       }
       this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
       let stopitem = new PopupMenu.PopupMenuItem(_("Stop"), false);
       this.menu.addMenuItem(stopitem);
       stopitem.connect('activate', Lang.bind(this, function() {
         this.set_applet_tooltip(_("Radio++"));
-        try {
-          this.activeMenuItemChanged(stopitem);
-        } catch(e) {
-          // Nothing to do
-        }
+        this.activeMenuItemChanged(stopitem);
         Util.spawnCommandLine("mocp -s");
         this.mocStatus = "STOP";
         this.radioId = "";
         this.set_color();
         Main.notify(_("Stop Radio++"));
       }));
-      if (force && this.mocStatus == "STOP") stopitem.setShowDot(true);
+      if (force && this.mocStatus == "STOP") {
+        stopitem.setShowDot(true);
+        this.set_applet_tooltip(_("Radio++"));
+      }
       this.oldNames = JSON.stringify(this.names);
     }
   },
