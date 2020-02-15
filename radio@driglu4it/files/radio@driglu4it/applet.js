@@ -95,6 +95,7 @@ MyApplet.prototype = {
   on_tree_changed: function(force=false) {
     if (force || this.oldNames != JSON.stringify(this.names)) {
       this.set_applet_tooltip(_("Radio++"));
+      this.currentMenuItem = null;
       this.menu.removeAll();
       for (let i = 0; i < this.names.length; i++) {
         if (this.names[i].inc === true) {
