@@ -86,6 +86,8 @@ class DarkSky implements WeatherProvider {
 
     private ParseWeather(json: any): WeatherData {
         try {
+            let sunrise = new Date(json.daily.data[0].sunriseTime * 1000);
+            let sunset = new Date(json.daily.data[0].sunsetTime * 1000)
             let result: WeatherData = {
                 date: new Date(json.currently.time * 1000),
                 coord: {
@@ -96,8 +98,8 @@ class DarkSky implements WeatherProvider {
                     url: "https://darksky.net/forecast/" + json.latitude + "," + json.longitude,
                     timeZone: json.timezone,
                 },
-                sunrise: new Date(json.daily.data[0].sunriseTime * 1000),
-                sunset: new Date(json.daily.data[0].sunsetTime * 1000),
+                sunrise: sunrise,
+                sunset: sunset,
                 wind: {
                     speed: this.ToMPS(json.currently.windSpeed),
                     degree: json.currently.windBearing
@@ -108,7 +110,7 @@ class DarkSky implements WeatherProvider {
                 condition: {
                     main: this.GetShortCurrentSummary(json.currently.summary),
                     description: json.currently.summary,
-                    icon: weatherIconSafely(this.ResolveIcon(json.currently.icon), this.app._icon_type),
+                    icon: weatherIconSafely(this.ResolveIcon(json.currently.icon, {sunrise: sunrise, sunset: sunset}), this.app._icon_type),
                     customIcon: this.ResolveCustomIcon(json.currently.icon)
                 },
                 extra_field: {
@@ -250,24 +252,30 @@ class DarkSky implements WeatherProvider {
         return this.DarkSkyFilterWords.indexOf(word) != -1;
     }
 
-    private ResolveIcon(icon: string): string[] {
+    private IsNight(sunTimes: SunTimes): boolean {
+        if (!sunTimes) return false;
+        let now = new Date();
+        if (now < sunTimes.sunrise || now > sunTimes.sunset) return true;
+        return false;
+    }
+
+    private ResolveIcon(icon: string, sunTimes?: SunTimes): string[] {
         switch (icon) {
             case "rain":
               return [icons.rain, icons.showers_scattered, icons.rain_freezing]
             case "snow":
               return [icons.snow]
+            case "sleet":
+              return [icons.rain_freezing, icons.rain, icons.showers_scattered]
             case "fog":
               return [icons.fog]
-           // case "04d":/* broken clouds day */
-           //   return ['weather_overcast', 'weather-clouds', "weather-few-clouds"]
-            //case "04n":/* broken clouds night */
-            //  return ['weather_overcast', 'weather-clouds', "weather-few-clouds-night"]
-           // case "03n":/* mostly cloudy (night) */
-           //   return ['weather-clouds-night', 'weather-few-clouds-night']
+            // There is no guarantee that there is a wind icon
+            case "wind":
+                return (sunTimes && this.IsNight(sunTimes)) ? ["weather-wind", "wind", "weather-breeze", icons.clouds, icons.few_clouds_night] : ["weather-wind", "wind", "weather-breeze", icons.clouds, icons.few_clouds_day]
             case "cloudy":/* mostly cloudy (day) */
-              return [icons.overcast, icons.clouds, icons.few_clouds_day]
+              return (sunTimes && this.IsNight(sunTimes)) ? [icons.overcast, icons.clouds, icons.few_clouds_night] : [icons.overcast, icons.clouds, icons.few_clouds_day]
             case "partly-cloudy-night":
-              return [icons.few_clouds_night, icons.few_clouds_day]
+              return [icons.few_clouds_night]
             case "partly-cloudy-day":
               return [icons.few_clouds_day]
             case "clear-night":
@@ -278,10 +286,7 @@ class DarkSky implements WeatherProvider {
             case "storm":
               return [icons.storm]
             case "showers":
-              return [icons.showers]
-            // There is no guarantee that there is a wind icon
-            case "wind":
-                return ["weather-wind", "wind", "weather-breeze", icons.clouds, icons.few_clouds_day]
+              return [icons.showers, icons.showers_scattered]
             default:
               return [icons.alert]
           }
@@ -358,4 +363,8 @@ class DarkSky implements WeatherProvider {
  * - 'uk2' return miles/hour and Celsius
  */
 type queryUnits = 'si' | 'us' | 'uk2';
+interface SunTimes {
+    sunrise: Date;
+    sunset: Date
+}
 

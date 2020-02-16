@@ -107,6 +107,8 @@ var DarkSky = (function () {
     ;
     DarkSky.prototype.ParseWeather = function (json) {
         try {
+            var sunrise = new Date(json.daily.data[0].sunriseTime * 1000);
+            var sunset = new Date(json.daily.data[0].sunsetTime * 1000);
             var result = {
                 date: new Date(json.currently.time * 1000),
                 coord: {
@@ -117,8 +119,8 @@ var DarkSky = (function () {
                     url: "https://darksky.net/forecast/" + json.latitude + "," + json.longitude,
                     timeZone: json.timezone,
                 },
-                sunrise: new Date(json.daily.data[0].sunriseTime * 1000),
-                sunset: new Date(json.daily.data[0].sunsetTime * 1000),
+                sunrise: sunrise,
+                sunset: sunset,
                 wind: {
                     speed: this.ToMPS(json.currently.windSpeed),
                     degree: json.currently.windBearing
@@ -129,7 +131,7 @@ var DarkSky = (function () {
                 condition: {
                     main: this.GetShortCurrentSummary(json.currently.summary),
                     description: json.currently.summary,
-                    icon: weatherIconSafely(this.ResolveIcon(json.currently.icon), this.app._icon_type),
+                    icon: weatherIconSafely(this.ResolveIcon(json.currently.icon, { sunrise: sunrise, sunset: sunset }), this.app._icon_type),
                     customIcon: this.ResolveCustomIcon(json.currently.icon)
                 },
                 extra_field: {
@@ -260,18 +262,30 @@ var DarkSky = (function () {
     DarkSky.prototype.WordBanned = function (word) {
         return this.DarkSkyFilterWords.indexOf(word) != -1;
     };
-    DarkSky.prototype.ResolveIcon = function (icon) {
+    DarkSky.prototype.IsNight = function (sunTimes) {
+        if (!sunTimes)
+            return false;
+        var now = new Date();
+        if (now < sunTimes.sunrise || now > sunTimes.sunset)
+            return true;
+        return false;
+    };
+    DarkSky.prototype.ResolveIcon = function (icon, sunTimes) {
         switch (icon) {
             case "rain":
                 return [icons.rain, icons.showers_scattered, icons.rain_freezing];
             case "snow":
                 return [icons.snow];
+            case "sleet":
+                return [icons.rain_freezing, icons.rain, icons.showers_scattered];
             case "fog":
                 return [icons.fog];
+            case "wind":
+                return (sunTimes && this.IsNight(sunTimes)) ? ["weather-wind", "wind", "weather-breeze", icons.clouds, icons.few_clouds_night] : ["weather-wind", "wind", "weather-breeze", icons.clouds, icons.few_clouds_day];
             case "cloudy":
-                return [icons.overcast, icons.clouds, icons.few_clouds_day];
+                return (sunTimes && this.IsNight(sunTimes)) ? [icons.overcast, icons.clouds, icons.few_clouds_night] : [icons.overcast, icons.clouds, icons.few_clouds_day];
             case "partly-cloudy-night":
-                return [icons.few_clouds_night, icons.few_clouds_day];
+                return [icons.few_clouds_night];
             case "partly-cloudy-day":
                 return [icons.few_clouds_day];
             case "clear-night":
@@ -281,9 +295,7 @@ var DarkSky = (function () {
             case "storm":
                 return [icons.storm];
             case "showers":
-                return [icons.showers];
-            case "wind":
-                return ["weather-wind", "wind", "weather-breeze", icons.clouds, icons.few_clouds_day];
+                return [icons.showers, icons.showers_scattered];
             default:
                 return [icons.alert];
         }
