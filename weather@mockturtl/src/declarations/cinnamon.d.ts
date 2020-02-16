@@ -190,6 +190,7 @@ declare namespace imports.ui.applet {
         protected hide_applet_label(hide: boolean): void;
         protected set_show_label_in_vertical_panels (show: boolean): void;
         protected hide_applet_icon(): void;
+        protected panel: any;
     }
 
     /**
