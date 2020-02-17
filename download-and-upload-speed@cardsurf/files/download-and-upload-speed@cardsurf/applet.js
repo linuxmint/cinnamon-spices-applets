@@ -86,6 +86,7 @@ MyApplet.prototype = {
         this.data_limit = 0;
         this.gui_text_css = "";
         this.gui_received_icon_filename = "";
+        this.gui_symbolic_icon = false;
         this.gui_sent_icon_filename = "";
         this.hover_popup_text_css = "";
         this.hover_popup_numbers_css = "";
@@ -184,6 +185,7 @@ MyApplet.prototype = {
                         [Settings.BindingDirection.IN, "gui_text_css", this.on_gui_css_changed],
                         [Settings.BindingDirection.IN, "gui_received_icon_filename", this.on_gui_icon_changed],
                         [Settings.BindingDirection.IN, "gui_sent_icon_filename", this.on_gui_icon_changed],
+                        [Settings.BindingDirection.IN, "gui_symbolic_icon", this.on_gui_icon_style_change],
                         [Settings.BindingDirection.IN, "hover_popup_text_css", this.on_hover_popup_css_changed],
                         [Settings.BindingDirection.IN, "hover_popup_numbers_css", this.on_hover_popup_css_changed],
                         [Settings.BindingDirection.BIDIRECTIONAL, "gui_speed_type", this.on_gui_speed_type_changed],
@@ -293,8 +295,22 @@ MyApplet.prototype = {
     },
 
     on_gui_icon_changed: function () {
-        this.gui_speed.set_reveived_icon(this.gui_received_icon_filename);
-        this.gui_speed.set_sent_icon(this.gui_sent_icon_filename);
+        let sent_path = this.gui_sent_icon_filename;
+        let received_path = this.gui_received_icon_filename;
+        if (received_path == "") {
+            received_path = "~/.local/share/cinnamon/applets/download-and-upload-speed@cardsurf/icons/arrow_down_blue";
+            received_path += (this.gui_symbolic_icon) ? "-symbolic.svg" : ".svg";
+        }
+        if (sent_path == "") {
+            sent_path = "~/.local/share/cinnamon/applets/download-and-upload-speed@cardsurf/icons/arrow_up_red";
+            sent_path += (this.gui_symbolic_icon) ? "-symbolic.svg" : ".svg";
+        }
+        this.gui_speed.set_reveived_icon(received_path);
+        this.gui_speed.set_sent_icon(sent_path);
+    },
+
+    on_gui_icon_style_change: function() {
+        this.on_gui_icon_changed();
     },
 
     on_gui_css_changed: function () {
