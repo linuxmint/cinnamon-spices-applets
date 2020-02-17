@@ -110,7 +110,7 @@
     },
     "gui_symbolic_icon" : {
         "type" : "checkbox",
-        "default" : false,
+        "default" : true,
         "description": "Show symbolic icons instead of colored ones",
         "tooltip": "If you are using you own icons, you just need to add '-symbolic' at the end of your icons filename's like so: 'myicon-symbolic.svg'."
     },

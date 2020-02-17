@@ -1,0 +1,2 @@
+arrow-pointing-down-symbolic.svg and arrow-up-symbolic.svg
+    from https://www.flaticon.com/packs/font-awesome

@@ -298,12 +298,12 @@ MyApplet.prototype = {
         let sent_path = this.gui_sent_icon_filename;
         let received_path = this.gui_received_icon_filename;
         if (received_path == "") {
-            received_path = "~/.local/share/cinnamon/applets/download-and-upload-speed@cardsurf/icons/arrow_down_blue";
-            received_path += (this.gui_symbolic_icon) ? "-symbolic.svg" : ".svg";
+            received_path = "~/.local/share/cinnamon/applets/download-and-upload-speed@cardsurf/icons/";
+            received_path += (this.gui_symbolic_icon) ? "arrow-pointing-down-symbolic.svg" : "arrow_down_blue.svg";
         }
         if (sent_path == "") {
-            sent_path = "~/.local/share/cinnamon/applets/download-and-upload-speed@cardsurf/icons/arrow_up_red";
-            sent_path += (this.gui_symbolic_icon) ? "-symbolic.svg" : ".svg";
+            sent_path = "~/.local/share/cinnamon/applets/download-and-upload-speed@cardsurf/icons/";
+            sent_path += (this.gui_symbolic_icon) ? "arrow-up-symbolic.svg" : "arrow_up_red.svg";
         }
         this.gui_speed.set_reveived_icon(received_path);
         this.gui_speed.set_sent_icon(sent_path);
