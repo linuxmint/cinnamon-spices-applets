@@ -302,7 +302,6 @@ class WeatherApplet extends TextIconApplet {
     this.BindSettings();
     this.AddRefreshButton();
     this.BuildPopupMenu();
-    this.set_show_label_in_vertical_panels(true);
     // generating unique GUIDs
     this.GUID = uuidv4();
     weatherAppletGUIDs[instanceId] = this.GUID;
@@ -810,24 +809,30 @@ class WeatherApplet extends TextIconApplet {
         this._currentWeatherTemperature.text = temp + ' ' + this.unitToUnicode(this._temperatureUnit);
       }
 
-      // Set Applet Label, even if the variables are empty
       let label = "";
-      if (this._showCommentInPanel && (this.orientation != Side.LEFT || this.orientation != Side.RIGHT)) {
-        label += mainCondition;
-      }
-      if (this._showTextInPanel) {
-        if (label != "") {
-          label += " ";
+      if (this.orientation != Side.LEFT && this.orientation != Side.RIGHT) {
+        if (this._showCommentInPanel) {
+          label += mainCondition;
         }
-        label += (temp + ' ' + this.unitToUnicode(this._temperatureUnit));
+        if (this._showTextInPanel) {
+          if (label != "") {
+            label += " ";
+          }
+          label += (temp + ' ' + this.unitToUnicode(this._temperatureUnit));
+        }
       }
+      else {
+        if (this._showTextInPanel) {
+          label = temp;
+        }
+        // Vertical panel width is more than this value then we has space
+        // to show units
+        if (this.panel._getScaledPanelHeight() >= 35) {
+          label += this.unitToUnicode(this._temperatureUnit);
+        }
+      }
+      // Set Applet Label, even if the variables are empty
       this.set_applet_label(label);
-
-      try {
-        this.update_label_visible();
-      } catch (e) {
-        // vertical panel not supported
-      }
 
       // Displaying humidity
       if (this.weather.humidity != null) {

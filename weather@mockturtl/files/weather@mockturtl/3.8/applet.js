@@ -182,7 +182,6 @@ class WeatherApplet extends TextIconApplet {
         this.BindSettings();
         this.AddRefreshButton();
         this.BuildPopupMenu();
-        this.set_show_label_in_vertical_panels(true);
         this.GUID = uuidv4();
         weatherAppletGUIDs[instanceId] = this.GUID;
         this.rebuild();
@@ -586,21 +585,26 @@ class WeatherApplet extends TextIconApplet {
                 this._currentWeatherTemperature.text = temp + ' ' + this.unitToUnicode(this._temperatureUnit);
             }
             let label = "";
-            if (this._showCommentInPanel && (this.orientation != Side.LEFT || this.orientation != Side.RIGHT)) {
-                label += mainCondition;
-            }
-            if (this._showTextInPanel) {
-                if (label != "") {
-                    label += " ";
+            if (this.orientation != Side.LEFT && this.orientation != Side.RIGHT) {
+                if (this._showCommentInPanel) {
+                    label += mainCondition;
                 }
-                label += (temp + ' ' + this.unitToUnicode(this._temperatureUnit));
+                if (this._showTextInPanel) {
+                    if (label != "") {
+                        label += " ";
+                    }
+                    label += (temp + ' ' + this.unitToUnicode(this._temperatureUnit));
+                }
+            }
+            else {
+                if (this._showTextInPanel) {
+                    label = temp;
+                }
+                if (this.panel._getScaledPanelHeight() >= 35) {
+                    label += this.unitToUnicode(this._temperatureUnit);
+                }
             }
             this.set_applet_label(label);
-            try {
-                this.update_label_visible();
-            }
-            catch (e) {
-            }
             if (this.weather.humidity != null) {
                 this._currentWeatherHumidity.text = Math.round(this.weather.humidity) + "%";
             }
