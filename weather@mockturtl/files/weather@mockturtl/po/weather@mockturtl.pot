@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-13 17:20+0000\n"
+"POT-Creation-Date: 2020-02-17 20:01+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -37,44 +37,44 @@ msgstr ""
 msgid "Cloudiness:"
 msgstr ""
 
-#: applet.js:634 3.0/applet.js:777 3.8/applet.js:638
+#: applet.js:634 3.0/applet.js:782 3.8/applet.js:643
 msgid "Sunrise"
 msgstr ""
 
-#: applet.js:635 3.0/applet.js:778 3.8/applet.js:639
+#: applet.js:635 3.0/applet.js:783 3.8/applet.js:644
 msgid "Sunset"
 msgstr ""
 
-#: applet.js:708 3.0/applet.js:867 3.8/applet.js:728
+#: applet.js:708 3.0/applet.js:872 3.8/applet.js:733
 msgid "Loading current weather ..."
 msgstr ""
 
-#: applet.js:709 3.0/applet.js:870 3.8/applet.js:731
+#: applet.js:709 3.0/applet.js:875 3.8/applet.js:736
 msgid "Loading future weather ..."
 msgstr ""
 
-#: applet.js:731 3.0/applet.js:899 3.8/applet.js:760
+#: applet.js:731 3.0/applet.js:904 3.8/applet.js:765
 msgid "Loading ..."
 msgstr ""
 
-#: applet.js:737 3.0/applet.js:284 3.0/applet.js:889 3.8/applet.js:233
-#: 3.8/applet.js:750
+#: applet.js:737 3.0/applet.js:284 3.0/applet.js:894 3.8/applet.js:233
+#: 3.8/applet.js:755
 msgid "Refresh"
 msgstr ""
 
-#: applet.js:802 3.0/applet.js:921 3.8/applet.js:782
+#: applet.js:802 3.0/applet.js:926 3.8/applet.js:787
 msgid "Temperature:"
 msgstr ""
 
-#: applet.js:804 3.0/applet.js:922 3.8/applet.js:783
+#: applet.js:804 3.0/applet.js:927 3.8/applet.js:788
 msgid "Humidity:"
 msgstr ""
 
-#: applet.js:806 3.0/applet.js:923 3.8/applet.js:784
+#: applet.js:806 3.0/applet.js:928 3.8/applet.js:789
 msgid "Pressure:"
 msgstr ""
 
-#: applet.js:808 3.0/applet.js:924 3.8/applet.js:785
+#: applet.js:808 3.0/applet.js:929 3.8/applet.js:790
 msgid "Wind:"
 msgstr ""
 
@@ -376,22 +376,22 @@ msgstr ""
 msgid "in"
 msgstr ""
 
-#: 3.0/darkSky.js:136 3.0/weatherbit.js:149 3.8/darkSky.js:88
+#: 3.0/darkSky.js:138 3.0/weatherbit.js:149 3.8/darkSky.js:90
 #: 3.8/weatherbit.js:93
 msgid "Feels Like"
 msgstr ""
 
-#: 3.0/darkSky.js:162 3.8/darkSky.js:114
+#: 3.0/darkSky.js:164 3.8/darkSky.js:116
 msgid "Failed to Process Weather Info"
 msgstr ""
 
-#: 3.0/darkSky.js:178 3.8/darkSky.js:130
+#: 3.0/darkSky.js:180 3.8/darkSky.js:132
 msgid ""
 "Please enter API key in settings,\n"
 "or get one first on https://darksky.net/dev/register"
 msgstr ""
 
-#: 3.0/darkSky.js:216 3.0/weatherbit.js:230 3.8/darkSky.js:168
+#: 3.0/darkSky.js:218 3.0/weatherbit.js:230 3.8/darkSky.js:170
 #: 3.8/weatherbit.js:174
 msgid ""
 "Please Make sure you\n"
@@ -698,21 +698,21 @@ msgstr ""
 msgid "Updated"
 msgstr ""
 
-#: 3.0/applet.js:812 3.8/applet.js:673
+#: 3.0/applet.js:817 3.8/applet.js:678
 msgid "Today"
 msgstr ""
 
-#: 3.0/applet.js:814 3.8/applet.js:675
+#: 3.0/applet.js:819 3.8/applet.js:680
 msgid "Tomorrow"
 msgstr ""
 
-#: 3.0/applet.js:1012 3.8/applet.js:873
+#: 3.0/applet.js:1017 3.8/applet.js:878
 msgid ""
 "Could not update weather for a while...\n"
 "are you connected to the internet?"
 msgstr ""
 
-#: 3.0/applet.js:1026 3.8/applet.js:887
+#: 3.0/applet.js:1031 3.8/applet.js:892
 msgid "Network Error, please check logs in Looking Glass"
 msgstr ""
 
@@ -881,7 +881,6 @@ msgid "Pa"
 msgstr ""
 
 #. settings-schema.json->verticalOrientation->description
-#. 3.8->settings-schema.json->verticalOrientation->description
 msgid "Vertical orientation"
 msgstr ""
 
@@ -1036,8 +1035,8 @@ msgstr ""
 msgid "Panel options"
 msgstr ""
 
-#. 3.0->settings-schema.json->showTextInPanel->tooltip
 #. 3.0->settings-schema.json->showCommentInPanel->tooltip
+#. 3.8->settings-schema.json->showCommentInPanel->tooltip
 msgid "Only works with horizontal panels"
 msgstr ""
 
@@ -1052,6 +1051,7 @@ msgid "Presentation"
 msgstr ""
 
 #. 3.0->settings-schema.json->verticalOrientation->description
+#. 3.8->settings-schema.json->verticalOrientation->description
 msgid "Show forecast vertically"
 msgstr ""
 
