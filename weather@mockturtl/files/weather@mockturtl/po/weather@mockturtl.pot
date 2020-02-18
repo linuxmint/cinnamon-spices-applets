@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-03 13:30+0000\n"
+"POT-Creation-Date: 2020-02-17 20:01+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -37,44 +37,44 @@ msgstr ""
 msgid "Cloudiness:"
 msgstr ""
 
-#: applet.js:634 3.0/applet.js:777 3.8/applet.js:638
+#: applet.js:634 3.0/applet.js:782 3.8/applet.js:643
 msgid "Sunrise"
 msgstr ""
 
-#: applet.js:635 3.0/applet.js:778 3.8/applet.js:639
+#: applet.js:635 3.0/applet.js:783 3.8/applet.js:644
 msgid "Sunset"
 msgstr ""
 
-#: applet.js:708 3.0/applet.js:867 3.8/applet.js:728
+#: applet.js:708 3.0/applet.js:872 3.8/applet.js:733
 msgid "Loading current weather ..."
 msgstr ""
 
-#: applet.js:709 3.0/applet.js:870 3.8/applet.js:731
+#: applet.js:709 3.0/applet.js:875 3.8/applet.js:736
 msgid "Loading future weather ..."
 msgstr ""
 
-#: applet.js:731 3.0/applet.js:899 3.8/applet.js:760
+#: applet.js:731 3.0/applet.js:904 3.8/applet.js:765
 msgid "Loading ..."
 msgstr ""
 
-#: applet.js:737 3.0/applet.js:284 3.0/applet.js:889 3.8/applet.js:233
-#: 3.8/applet.js:750
+#: applet.js:737 3.0/applet.js:284 3.0/applet.js:894 3.8/applet.js:233
+#: 3.8/applet.js:755
 msgid "Refresh"
 msgstr ""
 
-#: applet.js:802 3.0/applet.js:921 3.8/applet.js:782
+#: applet.js:802 3.0/applet.js:926 3.8/applet.js:787
 msgid "Temperature:"
 msgstr ""
 
-#: applet.js:804 3.0/applet.js:922 3.8/applet.js:783
+#: applet.js:804 3.0/applet.js:927 3.8/applet.js:788
 msgid "Humidity:"
 msgstr ""
 
-#: applet.js:806 3.0/applet.js:923 3.8/applet.js:784
+#: applet.js:806 3.0/applet.js:928 3.8/applet.js:789
 msgid "Pressure:"
 msgstr ""
 
-#: applet.js:808 3.0/applet.js:924 3.8/applet.js:785
+#: applet.js:808 3.0/applet.js:929 3.8/applet.js:790
 msgid "Wind:"
 msgstr ""
 
@@ -222,12 +222,9 @@ msgstr ""
 msgid "Heavy Snow"
 msgstr ""
 
-#: 3.0/met_norway.js:392 3.8/met_norway.js:339
+#: 3.0/met_norway.js:392 3.0/met_norway.js:399 3.8/met_norway.js:339
+#: 3.8/met_norway.js:346
 msgid "Heavy Snow with Thunderstorms"
-msgstr ""
-
-#: 3.0/met_norway.js:399 3.8/met_norway.js:346
-msgid "Heavy Snow with Thunderstorm"
 msgstr ""
 
 #: 3.0/met_norway.js:412 3.0/met_norway.js:413 3.8/met_norway.js:359
@@ -346,11 +343,11 @@ msgid "Mostly Snowy"
 msgstr ""
 
 #: 3.0/met_norway.js:581 3.8/met_norway.js:528
-msgid "Mostly Snowy with Thunder"
+msgid "Mostly Snowy with Thunderstorms"
 msgstr ""
 
 #: 3.0/met_norway.js:588 3.8/met_norway.js:535
-msgid "Snowy with Thunder"
+msgid "Snowy with Thunderstorms"
 msgstr ""
 
 #: 3.0/met_norway.js:594 3.0/met_norway.js:595 3.0/openWeatherMap.js:403
@@ -379,22 +376,22 @@ msgstr ""
 msgid "in"
 msgstr ""
 
-#: 3.0/darkSky.js:136 3.0/weatherbit.js:149 3.8/darkSky.js:88
+#: 3.0/darkSky.js:138 3.0/weatherbit.js:149 3.8/darkSky.js:90
 #: 3.8/weatherbit.js:93
 msgid "Feels Like"
 msgstr ""
 
-#: 3.0/darkSky.js:162 3.8/darkSky.js:114
+#: 3.0/darkSky.js:164 3.8/darkSky.js:116
 msgid "Failed to Process Weather Info"
 msgstr ""
 
-#: 3.0/darkSky.js:178 3.8/darkSky.js:130
+#: 3.0/darkSky.js:180 3.8/darkSky.js:132
 msgid ""
 "Please enter API key in settings,\n"
 "or get one first on https://darksky.net/dev/register"
 msgstr ""
 
-#: 3.0/darkSky.js:216 3.0/weatherbit.js:230 3.8/darkSky.js:168
+#: 3.0/darkSky.js:218 3.0/weatherbit.js:230 3.8/darkSky.js:170
 #: 3.8/weatherbit.js:174
 msgid ""
 "Please Make sure you\n"
@@ -627,18 +624,22 @@ msgid "Sky is clear"
 msgstr ""
 
 #: 3.0/openWeatherMap.js:406 3.8/openWeatherMap.js:347
-msgid "Few clouds"
+msgid "Clouds"
 msgstr ""
 
 #: 3.0/openWeatherMap.js:407 3.8/openWeatherMap.js:348
-msgid "Scattered clouds"
+msgid "Few clouds"
 msgstr ""
 
 #: 3.0/openWeatherMap.js:408 3.8/openWeatherMap.js:349
-msgid "Broken clouds"
+msgid "Scattered clouds"
 msgstr ""
 
 #: 3.0/openWeatherMap.js:409 3.8/openWeatherMap.js:350
+msgid "Broken clouds"
+msgstr ""
+
+#: 3.0/openWeatherMap.js:410 3.8/openWeatherMap.js:351
 msgid "Overcast clouds"
 msgstr ""
 
@@ -697,21 +698,21 @@ msgstr ""
 msgid "Updated"
 msgstr ""
 
-#: 3.0/applet.js:812 3.8/applet.js:673
+#: 3.0/applet.js:817 3.8/applet.js:678
 msgid "Today"
 msgstr ""
 
-#: 3.0/applet.js:814 3.8/applet.js:675
+#: 3.0/applet.js:819 3.8/applet.js:680
 msgid "Tomorrow"
 msgstr ""
 
-#: 3.0/applet.js:1012 3.8/applet.js:873
+#: 3.0/applet.js:1017 3.8/applet.js:878
 msgid ""
 "Could not update weather for a while...\n"
 "are you connected to the internet?"
 msgstr ""
 
-#: 3.0/applet.js:1026 3.8/applet.js:887
+#: 3.0/applet.js:1031 3.8/applet.js:892
 msgid "Network Error, please check logs in Looking Glass"
 msgstr ""
 
@@ -880,8 +881,6 @@ msgid "Pa"
 msgstr ""
 
 #. settings-schema.json->verticalOrientation->description
-#. 3.0->settings-schema.json->verticalOrientation->description
-#. 3.8->settings-schema.json->verticalOrientation->description
 msgid "Vertical orientation"
 msgstr ""
 
@@ -948,8 +947,7 @@ msgid "Update interval"
 msgstr ""
 
 #. 3.0->settings-schema.json->head->description
-#. 3.8->settings-schema.json->head->description
-msgid "Settings for weather@mockturtl 3.8+"
+msgid "Settings for weather@mockturtl 3.0+"
 msgstr ""
 
 #. 3.0->settings-schema.json->descriptions->description
@@ -970,19 +968,15 @@ msgid ""
 msgstr ""
 
 #. 3.0->settings-schema.json->METN->description
-#. 3.8->settings-schema.json->METN->description
 msgid ""
-"MET Norway - Current weather is shown for the next hour, and the daily "
-"forecasts are generated from 6 hour forecasts, so it can look incorrect "
-"sometimes."
+"MET Norway - Current weather is shown for the next hour, and the daily forecasts \n"
+"are generated from 6 hour forecasts, so it can look incorrect sometimes."
 msgstr ""
 
 #. 3.0->settings-schema.json->WB->description
-#. 3.8->settings-schema.json->WB->description
 msgid ""
-"WeatherBit - Minimum of 10min refresh rate is recommended or you might "
-"exceed you daily quota. Needs a key, please click on 'Setup API Key and "
-"Location' for the steps how to obtain one."
+"WeatherBit - Minimum of 10min refresh rate is recommended or you might exceed you daily quota.\n"
+"Needs a key, please click on 'Setup API Key and Location' for the steps how to obtain one."
 msgstr ""
 
 #. 3.0->settings-schema.json->providerSettings->description
@@ -1041,6 +1035,11 @@ msgstr ""
 msgid "Panel options"
 msgstr ""
 
+#. 3.0->settings-schema.json->showCommentInPanel->tooltip
+#. 3.8->settings-schema.json->showCommentInPanel->tooltip
+msgid "Only works with horizontal panels"
+msgstr ""
+
 #. 3.0->settings-schema.json->useCustomAppletIcons->description
 #. 3.8->settings-schema.json->useCustomAppletIcons->description
 msgid "Use custom icons on the panel"
@@ -1049,6 +1048,11 @@ msgstr ""
 #. 3.0->settings-schema.json->displaySettings->description
 #. 3.8->settings-schema.json->displaySettings->description
 msgid "Presentation"
+msgstr ""
+
+#. 3.0->settings-schema.json->verticalOrientation->description
+#. 3.8->settings-schema.json->verticalOrientation->description
+msgid "Show forecast vertically"
 msgstr ""
 
 #. 3.0->settings-schema.json->conditionSettings->description
@@ -1086,4 +1090,22 @@ msgstr ""
 msgid ""
 "powered by: OpenWeatherMap, DarkSky, ipapi. Big Thanks to OpenWeatherMap for"
 " their support!"
+msgstr ""
+
+#. 3.8->settings-schema.json->head->description
+msgid "Settings for weather@mockturtl 3.8+"
+msgstr ""
+
+#. 3.8->settings-schema.json->METN->description
+msgid ""
+"MET Norway - Current weather is shown for the next hour, and the daily "
+"forecasts are generated from 6 hour forecasts, so it can look incorrect "
+"sometimes."
+msgstr ""
+
+#. 3.8->settings-schema.json->WB->description
+msgid ""
+"WeatherBit - Minimum of 10min refresh rate is recommended or you might "
+"exceed you daily quota. Needs a key, please click on 'Setup API Key and "
+"Location' for the steps how to obtain one."
 msgstr ""

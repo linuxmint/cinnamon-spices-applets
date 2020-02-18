@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Neroth-gnome-shell-extension-weather 3696468\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-03 13:30+0000\n"
-"PO-Revision-Date: 2020-02-03 22:22+0000\n"
+"POT-Creation-Date: 2020-02-13 17:20+0000\n"
+"PO-Revision-Date: 2020-02-13 17:34+0000\n"
 "Last-Translator: Attila Greguss <floyd0122@gmail.com>\n"
 "Language-Team: Hungarian\n"
 "Language: hu\n"
@@ -222,12 +222,9 @@ msgstr "Nagyrészt intenzív havas eső viharral"
 msgid "Heavy Snow"
 msgstr "Erős havazás"
 
-#: 3.0/met_norway.js:392 3.8/met_norway.js:339
+#: 3.0/met_norway.js:392 3.0/met_norway.js:399 3.8/met_norway.js:339
+#: 3.8/met_norway.js:346
 msgid "Heavy Snow with Thunderstorms"
-msgstr "Erős viharos havazás"
-
-#: 3.0/met_norway.js:399 3.8/met_norway.js:346
-msgid "Heavy Snow with Thunderstorm"
 msgstr "Erős viharos havazás"
 
 #: 3.0/met_norway.js:412 3.0/met_norway.js:413 3.8/met_norway.js:359
@@ -273,8 +270,6 @@ msgstr "Nagyrészt gyenge havas eső elszórt viharokkal"
 #: 3.0/met_norway.js:489 3.0/met_norway.js:496 3.8/met_norway.js:422
 #: 3.8/met_norway.js:423 3.8/met_norway.js:429 3.8/met_norway.js:436
 #: 3.8/met_norway.js:443
-#, fuzzy
-#| msgid "Light snow"
 msgid "Light Snow"
 msgstr "Enyhe havazás"
 
@@ -348,12 +343,16 @@ msgid "Mostly Snowy"
 msgstr "Nagyrészt havazás"
 
 #: 3.0/met_norway.js:581 3.8/met_norway.js:528
-msgid "Mostly Snowy with Thunder"
-msgstr "Nagyrészt havazás viharokkal"
+#, fuzzy
+#| msgid "Mostly Rainy with Thunderstorms"
+msgid "Mostly Snowy with Thunderstorms"
+msgstr "Nagyrészt esős idő elszórt viharokkal"
 
 #: 3.0/met_norway.js:588 3.8/met_norway.js:535
-msgid "Snowy with Thunder"
-msgstr "Viharos havazás"
+#, fuzzy
+#| msgid "Heavy Snow with Thunderstorms"
+msgid "Snowy with Thunderstorms"
+msgstr "Erős viharos havazás"
 
 #: 3.0/met_norway.js:594 3.0/met_norway.js:595 3.0/openWeatherMap.js:403
 #: 3.8/met_norway.js:541 3.8/met_norway.js:542 3.8/openWeatherMap.js:344
@@ -636,18 +635,22 @@ msgid "Sky is clear"
 msgstr "Napos idő"
 
 #: 3.0/openWeatherMap.js:406 3.8/openWeatherMap.js:347
+msgid "Clouds"
+msgstr "Felhős"
+
+#: 3.0/openWeatherMap.js:407 3.8/openWeatherMap.js:348
 msgid "Few clouds"
 msgstr "Enyhén felhős"
 
-#: 3.0/openWeatherMap.js:407 3.8/openWeatherMap.js:348
+#: 3.0/openWeatherMap.js:408 3.8/openWeatherMap.js:349
 msgid "Scattered clouds"
 msgstr "Gyengén felhős"
 
-#: 3.0/openWeatherMap.js:408 3.8/openWeatherMap.js:349
+#: 3.0/openWeatherMap.js:409 3.8/openWeatherMap.js:350
 msgid "Broken clouds"
 msgstr "Szakadozott felhőzet"
 
-#: 3.0/openWeatherMap.js:409 3.8/openWeatherMap.js:350
+#: 3.0/openWeatherMap.js:410 3.8/openWeatherMap.js:351
 msgid "Overcast clouds"
 msgstr "Borult idő"
 
@@ -900,7 +903,6 @@ msgid "Pa"
 msgstr "Pa"
 
 #. settings-schema.json->verticalOrientation->description
-#. 3.0->settings-schema.json->verticalOrientation->description
 #. 3.8->settings-schema.json->verticalOrientation->description
 msgid "Vertical orientation"
 msgstr "Függőleges elrendezés"
@@ -969,9 +971,8 @@ msgid "Update interval"
 msgstr "Frissítési időköz"
 
 #. 3.0->settings-schema.json->head->description
-#. 3.8->settings-schema.json->head->description
-msgid "Settings for weather@mockturtl 3.8+"
-msgstr "Beállítások a weather@mockturtl 3.8+ applethez"
+msgid "Settings for weather@mockturtl 3.0+"
+msgstr "Beállítások a weather@mockturtl 3.0+ applethez"
 
 #. 3.0->settings-schema.json->descriptions->description
 #. 3.8->settings-schema.json->descriptions->description
@@ -993,26 +994,26 @@ msgstr ""
 "helyzet beállítása' gombra a lépések megtekintéséhez."
 
 #. 3.0->settings-schema.json->METN->description
-#. 3.8->settings-schema.json->METN->description
 msgid ""
 "MET Norway - Current weather is shown for the next hour, and the daily "
-"forecasts are generated from 6 hour forecasts, so it can look incorrect "
-"sometimes."
+"forecasts \n"
+"are generated from 6 hour forecasts, so it can look incorrect sometimes."
 msgstr ""
-"MET Norvégia - Időjárás-jelentés mindig a következő órát mutatja, és a napi "
-"előrejelzések 6-órás előrejelzésekből vannak generálva, úgyhogy nem biztos "
-"hogy mindig pontosak."
+"MET Norvégia - Időjárás-jelentés mindig a következő órát mutatja, \n"
+"és a napi előrejelzések 6-órás előrejelzésekből vannak generálva, úgyhogy "
+"nem biztos hogy mindig pontosak."
 
 #. 3.0->settings-schema.json->WB->description
-#. 3.8->settings-schema.json->WB->description
 msgid ""
 "WeatherBit - Minimum of 10min refresh rate is recommended or you might "
-"exceed you daily quota. Needs a key, please click on 'Setup API Key and "
-"Location' for the steps how to obtain one."
+"exceed you daily quota.\n"
+"Needs a key, please click on 'Setup API Key and Location' for the steps how "
+"to obtain one."
 msgstr ""
 "Weatherbit - Minimum 10 perces frissítési idő ajánlott, vagy az applet "
-"túllépi a napi megengedett 500 kérést. Kulcs szükséges, kérem kattintson az "
-"'API-kulcs és földrajzi helyzet beállítása' gombra a lépések megtekintéséhez."
+"túllépi a napi megengedett 500 kérést.\n"
+"Kulcs szükséges, kérem kattintson az 'API-kulcs és földrajzi helyzet "
+"beállítása' gombra a lépések megtekintéséhez."
 
 #. 3.0->settings-schema.json->providerSettings->description
 #. 3.8->settings-schema.json->providerSettings->description
@@ -1069,6 +1070,11 @@ msgstr "Egységek"
 msgid "Panel options"
 msgstr "Panel beállítások"
 
+#. 3.0->settings-schema.json->showTextInPanel->tooltip
+#. 3.0->settings-schema.json->showCommentInPanel->tooltip
+msgid "Only works with horizontal panels"
+msgstr "Csak vízszintes panelekben működik"
+
 #. 3.0->settings-schema.json->useCustomAppletIcons->description
 #. 3.8->settings-schema.json->useCustomAppletIcons->description
 msgid "Use custom icons on the panel"
@@ -1078,6 +1084,10 @@ msgstr "Egyéni ikonok használata a panelen"
 #. 3.8->settings-schema.json->displaySettings->description
 msgid "Presentation"
 msgstr "Külső"
+
+#. 3.0->settings-schema.json->verticalOrientation->description
+msgid "Show forecast vertically"
+msgstr "Előrejelzések mutatása függőlegesen"
 
 #. 3.0->settings-schema.json->conditionSettings->description
 #. 3.8->settings-schema.json->conditionSettings->description
@@ -1106,7 +1116,6 @@ msgstr "Ikonok"
 
 #. 3.0->settings-schema.json->useSymbolicIcons->description
 #. 3.8->settings-schema.json->useSymbolicIcons->description
-#, fuzzy
 msgid "Use symbolic icons in the applet"
 msgstr "Szimbolikus ikonok használata az appletben"
 
@@ -1118,6 +1127,39 @@ msgid ""
 msgstr ""
 "az OpenWeatherMap, a DarkSky és az ipapi segítségével létrehozva. Külön "
 "köszönet OpenWeatherMap szolgáltatásnak a segítségükért."
+
+#. 3.8->settings-schema.json->head->description
+msgid "Settings for weather@mockturtl 3.8+"
+msgstr "Beállítások a weather@mockturtl 3.8+ applethez"
+
+#. 3.8->settings-schema.json->METN->description
+msgid ""
+"MET Norway - Current weather is shown for the next hour, and the daily "
+"forecasts are generated from 6 hour forecasts, so it can look incorrect "
+"sometimes."
+msgstr ""
+"MET Norvégia - Időjárás-jelentés mindig a következő órát mutatja, és a napi "
+"előrejelzések 6-órás előrejelzésekből vannak generálva, úgyhogy nem biztos "
+"hogy mindig pontosak."
+
+#. 3.8->settings-schema.json->WB->description
+msgid ""
+"WeatherBit - Minimum of 10min refresh rate is recommended or you might "
+"exceed you daily quota. Needs a key, please click on 'Setup API Key and "
+"Location' for the steps how to obtain one."
+msgstr ""
+"Weatherbit - Minimum 10 perces frissítési idő ajánlott, vagy az applet "
+"túllépi a napi megengedett 500 kérést. Kulcs szükséges, kérem kattintson az "
+"'API-kulcs és földrajzi helyzet beállítása' gombra a lépések megtekintéséhez."
+
+#~ msgid "Heavy Snow with Thunderstorm"
+#~ msgstr "Erős viharos havazás"
+
+#~ msgid "Mostly Snowy with Thunder"
+#~ msgstr "Nagyrészt havazás viharokkal"
+
+#~ msgid "Snowy with Thunder"
+#~ msgstr "Viharos havazás"
 
 #~ msgid "Wrong Location"
 #~ msgstr "A hely rosszul van megadva"
@@ -1154,9 +1196,6 @@ msgstr ""
 
 #~ msgid "mbar"
 #~ msgstr "mbar"
-
-#~ msgid "Show 5-day forecast"
-#~ msgstr "5 napos előrejelzés kijelzése"
 
 #~ msgid "Please wait"
 #~ msgstr "Kérem várjon"

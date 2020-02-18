@@ -181,13 +181,16 @@ declare namespace imports.ui.applet {
     }
 
     export class TextIconApplet {
-        constructor(orientation: string, panelHeight: number, instanceID: number);
+        constructor(orientation: gi.St.Side, panelHeight: number, instanceID: number);
         protected set_applet_icon_name(text: string): void;
         protected set_applet_icon_symbolic_name(iconName: string): void;
         protected set_applet_label(text: string): void;
         protected set_applet_tooltip(text: string): void;
         protected setAllowedLayout(text: string): void;
         protected hide_applet_label(hide: boolean): void;
+        protected set_show_label_in_vertical_panels (show: boolean): void;
+        protected hide_applet_icon(): void;
+        protected panel: any;
     }
 
     /**
@@ -367,16 +370,15 @@ declare namespace imports.gi.St {
         constructor(options ? : any);
     }
 
-    export interface Sides {
-        LEFT: string,
-            RIGHT: string
+    export enum Side {
+        LEFT,
+        RIGHT
     }
     export interface IconTypes {
         SYMBOLIC: string,
-            FULLCOLOR: string
+        FULLCOLOR: string
     }
 
-    export const Side: Sides;
     export const IconType: IconTypes;
 }
 

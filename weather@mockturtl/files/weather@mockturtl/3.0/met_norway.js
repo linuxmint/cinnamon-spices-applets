@@ -396,7 +396,7 @@ var MetNorway = (function () {
                 return {
                     customIcon: (checkIfNight && this.IsNight()) ? "Cloud-Snow-Moon" : "Cloud-Snow-Sun",
                     main: _("Heavy Snow"),
-                    description: _("Heavy Snow with Thunderstorm"),
+                    description: _("Heavy Snow with Thunderstorms"),
                     icon: weatherIconSafely([icons.snow, icons.alert], this.app._icon_type)
                 };
             case "HeavysnowSun":
@@ -578,14 +578,14 @@ var MetNorway = (function () {
                 return {
                     customIcon: (checkIfNight && this.IsNight()) ? "Cloud-Snow-Moon" : "Cloud-Snow-Sun",
                     main: _("Mostly Snowy"),
-                    description: _("Mostly Snowy with Thunder"),
+                    description: _("Mostly Snowy with Thunderstorms"),
                     icon: weatherIconSafely([icons.snow, icons.alert], this.app._icon_type)
                 };
             case "SnowThunder":
                 return {
                     customIcon: "Cloud-Snow",
                     main: _("Snow"),
-                    description: _("Snowy with Thunder"),
+                    description: _("Snowy with Thunderstorms"),
                     icon: weatherIconSafely([icons.snow, icons.alert], this.app._icon_type)
                 };
             case "Sun":

@@ -392,6 +392,7 @@ const openWeatherMapConditionLibrary = [
   _("Clear sky"),
   _("Sky is clear"),
   // Group 80x: Clouds
+  _("Clouds"),
   _("Few clouds"),
   _("Scattered clouds"),
   _("Broken clouds"),

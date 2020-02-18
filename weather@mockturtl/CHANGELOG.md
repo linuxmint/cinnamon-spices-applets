@@ -1,3 +1,8 @@
+# 2.4.3
+
+* Fixes [#2861](https://github.com/linuxmint/cinnamon-spices-applets/issues/2861)
+* Fixes [#2860](https://github.com/linuxmint/cinnamon-spices-applets/issues/2860)
+
 # 2.4.2
 
 * Fixes [#2853](https://github.com/linuxmint/cinnamon-spices-applets/issues/2853)
