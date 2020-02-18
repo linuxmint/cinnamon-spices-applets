@@ -3,7 +3,7 @@ declare function require(path: string): any;
 declare class global {
     static log(...text: Array < string > ): void;
     static logError(...text: Array < string > ): void;
-    static create_app_launch_context(): void;
+    static create_app_launch_context(): imports.gi.Gio.AppLaunchContext;
 }
 
 declare namespace imports.cairo {
@@ -17,6 +17,8 @@ declare namespace imports.ui.main {
     export class KeybindingManager {
         addHotKey(UUID: string, keybinding: any, binding: void): void;
     }
+
+    export const messageTray: any;
 
     export const keybindingManager: KeybindingManager;
     /**
@@ -179,13 +181,16 @@ declare namespace imports.ui.applet {
     }
 
     export class TextIconApplet {
-        constructor(orientation: string, panelHeight: number, instanceID: number);
+        constructor(orientation: gi.St.Side, panelHeight: number, instanceID: number);
         protected set_applet_icon_name(text: string): void;
         protected set_applet_icon_symbolic_name(iconName: string): void;
         protected set_applet_label(text: string): void;
         protected set_applet_tooltip(text: string): void;
         protected setAllowedLayout(text: string): void;
         protected hide_applet_label(hide: boolean): void;
+        protected set_show_label_in_vertical_panels (show: boolean): void;
+        protected hide_applet_icon(): void;
+        protected panel: any;
     }
 
     /**
@@ -201,6 +206,10 @@ declare namespace imports.ui.applet {
 
         _onOrientationChanged(a: any, orientation: string): void;
         _onOpenStateChanged(menu: any, open: any, sourceActor: any): void;
+        setCustomStyleClass(classname: string): void;
+        actor: any;
+        addActor(menu: any): void;
+        toggle(): void;
     }
 
     /**
@@ -232,9 +241,23 @@ declare namespace imports.ui.applet {
     export const AllowedLayout: AllowedLayouts;
 }
 
+declare namespace imports.ui.messageTray {
+    export class Notification {
+        constructor(source: SystemNotificationSource, title: string, message: string);
+        setTransient(value: boolean): void;
+    }
+
+    export class SystemNotificationSource {
+        constructor(name: string)
+
+        notify(notification: Notification): void;
+    }
+}
+
 declare namespace imports.ui.popupMenu {
     export class PopupMenuManager {
         constructor(context: any);
+        addMenu(menu: any): void;
     }
     export class PopupMenu {
         constructor();
@@ -246,56 +269,37 @@ declare namespace imports.ui.popupMenu {
 declare namespace imports.ui.settings {
     export class AppletSettings {
         constructor(context: any, UUID: string, instanceID: number);
+        setValue(key: string, value: any): void;
+        getValue(key: string): any;
+        connect(key: string, callback: Function): void;
+        bindProperty(direction: BindingDirection, key: string, keyProp: string, callback: Function, something: any): void;
     }
 
-    export interface BindingDirections {
-        IN: string,
-            BIDIRECTIONAL: string,
-            OUT: string
+    export enum BindingDirection {
+        IN = 1,
+        BIDIRECTIONAL = 2,
+        OUT = 3
     }
-    export const BindingDirection: BindingDirections
+
+
+
 }
 declare namespace imports.ui.appletManager {
     export var applets: any;
+    export var appletMeta: any;
 }
 
 declare namespace imports.mainloop {
+    /**
+     * Calls callback function after given seconds
+     * @param seconds 
+     * @param binding 
+     */
     export function timeout_add_seconds(seconds: number, binding: () => any): void;
     export function timeout_add(milliseconds: number, binding: () => any, errorCallback: () => null): void;
     export function source_remove(id: any): void;
 }
 
-declare namespace imports.gi.Gio {
-    export function app_info_launch_default_for_uri(url: string, context: void): void;
-    export class Cancellable {
-        static new(): Cancellable
-        static is_cancelled(cancellable: Cancellable): boolean;
-    }
-
-
-    export function AsyncReadyCallback(source_object: Object, result: AsyncResult, userData ? : any): void;
-    export class AsyncResult {
-        get_user_data(): any;
-        is_tagged(): boolean;
-        source_object(): Object;
-    }
-}
-declare namespace imports.gi.Gtk {
-    export class IconTheme {
-        static get_default(): Theme;
-    }
-    /** DEPRECATED */
-    export const STOCK_EDIT: any;
-    /** DEPRECATED */
-    export const STOCK_REFRESH: string;
-
-    export class Theme {
-        has_icon(iconName: string): boolean;
-    }
-}
-declare namespace imports.gi.GObject {
-    const placehgolder = "";
-}
 declare namespace imports.gi.Cinnamon {
     function util_format_date(format: string, milliseconds: number): string;
 }
@@ -303,7 +307,7 @@ declare namespace imports.gi.Soup {
     export class SessionAsync {
         user_agent: string;
         queue_message(message: Message, callback: (session: SessionAsync, message: Message) => void): void;
-        send_async(msg: Message, cancellable: any, callback: typeof Gio.AsyncReadyCallback): any;
+        send_async(msg: Message, cancellable: any, callback: Gio.AsyncReadyCallback): any;
         send_finish(result: Gio.AsyncResult, user_data ? : Object): any;
         request(uri_string: string): SoupRequest;
     }
@@ -366,21 +370,16 @@ declare namespace imports.gi.St {
         constructor(options ? : any);
     }
 
-    export interface Sides {
-        LEFT: string,
-            RIGHT: string
+    export enum Side {
+        LEFT,
+        RIGHT
     }
     export interface IconTypes {
         SYMBOLIC: string,
-            FULLCOLOR: string
+        FULLCOLOR: string
     }
 
-    export const Side: Sides;
     export const IconType: IconTypes;
-}
-declare namespace imports.gi.GLib {
-    export function get_home_dir(): string;
-    export function get_language_names(): Array < string > ;
 }
 
 declare namespace imports.misc.config {
@@ -388,6 +387,7 @@ declare namespace imports.misc.config {
 }
 declare namespace imports.misc.util {
     export function spawnCommandLine(CMDSettings: string): void;
+    export function spawn_async(cmd: string[], callback: Function): any;
 }
 
 declare namespace imports.gettext {
@@ -395,7 +395,6 @@ declare namespace imports.gettext {
 
     function dgettext(UUID: string, text: string): string;
 }
-
 
 declare namespace imports {
     export const lang: any;

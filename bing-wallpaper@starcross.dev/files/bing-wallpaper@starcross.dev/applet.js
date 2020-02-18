@@ -12,6 +12,8 @@ Soup.Session.prototype.add_feature.call(_httpSession, new Soup.ProxyResolverDefa
 
 const bingHost = 'https://www.bing.com';
 const bingRequestPath = '/HPImageArchive.aspx?format=js&idx=0&n=1&mbl=1&mkt=';
+const default_file_name = 'Bing Desktop Wallpaper';
+var file_name;
 
 function log(message) {
     if (logging) global.log(`[bing-wallpaper@starcross.dev]: ${message}`);
@@ -29,7 +31,8 @@ BingWallpaperApplet.prototype = {
         // Generic Setup
         Applet.IconApplet.prototype._init.call(this, orientation, panel_height, instance_id);
         this.set_applet_icon_name("bing-wallpaper-symbolic");
-        this.set_applet_tooltip(_("Bing Desktop Wallpaper"));
+        file_name = default_file_name;
+        this.set_applet_tooltip(_(`${file_name}`));
 
         // Find file path to write
         const userPicturesDir = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_PICTURES);
@@ -55,8 +58,23 @@ BingWallpaperApplet.prototype = {
             if ((file_mod_secs < today.to_unix()) || !file_size) { // Is the image old, or empty?
                 log("Calling loadImageData");
                 this._loadImageData();
-            } else log("Skipping, image appears up to date");
-        } else {
+            } else {
+                log("Skipping, image appears up to date");
+                // get only the image name again (and only when it was lost)
+                if (`${file_name}` == default_file_name) {
+                    log("image name is lost, get it again");
+                    let request = Soup.Message.new('GET', `${bingHost}${bingRequestPath}`);
+                    _httpSession.queue_message(request, (_httpSession, message) => {
+                        if (message.status_code === 200) {
+                            const json = JSON.parse(message.response_body.data);
+                            this.imageData = json.images[0];
+                            file_name = this.imageData.copyright;
+                            this.set_applet_tooltip(`${file_name}`);
+                        }
+                    })
+                }
+            }
+        } else { // Image does not exist yet
             this._loadImageData()
         }
         this._setTimeout(300);
@@ -90,7 +108,8 @@ BingWallpaperApplet.prototype = {
             if (message.status_code === 200) {
                 const json = JSON.parse(message.response_body.data);
                 this.imageData = json.images[0];
-                this.set_applet_tooltip(this.imageData.copyright);
+                file_name = this.imageData.copyright;
+                this.set_applet_tooltip(`${file_name}`);
                 log(`Got image url: ${this.imageData.url}`);
 
                 /**const end_date = GLib.DateTime.new_local(

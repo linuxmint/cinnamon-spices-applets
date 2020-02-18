@@ -1,7 +1,7 @@
 {
   "layout": {
     "type": "layout",
-    "pages": ["panel-options", "panel-location"],
+    "pages": ["panel-options", "panel-location", "panel-shortcuts"],
     
     "panel-options": {
       "type": "page",
@@ -19,6 +19,26 @@
         "location-section"
       ]
     },
+    "panel-shortcuts": {
+      "type": "page",
+      "title": "Shortcuts",
+      "sections": [
+        "keybind-section",
+        "info-section"
+      ]
+    },
+    
+    
+    
+    "info-section": {
+      "type": "section",
+      "title": "Tips",
+      "keys": [
+        "textTips",
+        "textInfo"
+      ]
+    },
+    
     "opt-section": {
       "type": "section",
       "title": "Options",
@@ -50,6 +70,14 @@
       ]
     },
     
+    "keybind-section": {
+      "type": "section",
+      "title": "Key Bindings",
+      "keys": [
+        "keyToggle"
+      ]
+    },
+    
     "location-section": {
       "type": "section",
       "title": "Location Settings",
@@ -73,10 +101,10 @@
   "autoUpdateInterval": {
     "type": "spinbutton",
     "dependency": "autoUpdate=true",
-    "default": 5,
-    "min": 1,
-    "max": 60,
-    "units": "Sec",
+    "default": 30,
+    "min": 5,
+    "max": 1800,
+    "units": "Sec.",
     "step": 1,
     "description": "Update interval"
   },
@@ -109,6 +137,13 @@
     "default": false,
     "description": "Show Label"
   },
+  
+  "keyToggle" : {
+    "type" : "keybinding",
+    "description" : "On/Off",
+    "default" : "<Control>End"
+  },
+  
   "dayTemp": {
     "type": "spinbutton",
     "default": 5900,
@@ -188,6 +223,15 @@
   },
   "aboutLocation": {
     "type": "label",
-    "description": "Native geoclue on redshift can make the experience slow.\nUsing: https://geoip-db.com/"
+    "description": "Native geoclue on redshift can make the experience slow.\nUsing: https://geolocation-db.com/"
+  },
+  "textTips": {
+    "type": "label",
+    "description": "* Right-click the sliders to reset the default (neutral) value."
+  },
+  "textInfo": {
+    "type": "label",
+    "description": "If you like and use this applet take the time to visit it's page on Cinnamon Spices and give it a star. You only need a github account to do this."
   }
+  
 }

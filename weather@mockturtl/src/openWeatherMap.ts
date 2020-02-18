@@ -116,7 +116,8 @@ class OpenWeatherMap implements WeatherProvider {
             condition: {
               main: get(["weather", "0", "main"], json),
               description: get(["weather", "0", "description"], json),
-              icon: weatherIconSafely(self.ResolveIcon(get(["weather", "0", "icon"], json)), self.app._icon_type) 
+              icon: weatherIconSafely(self.ResolveIcon(get(["weather", "0", "icon"], json)), self.app._icon_type),
+              customIcon: self.ResolveCustomIcon(get(["weather", "0", "icon"], json))
             },
             extra_field: {
               name: _("Cloudiness"),
@@ -148,6 +149,7 @@ class OpenWeatherMap implements WeatherProvider {
                   main: day.weather[0].main,
                   description: day.weather[0].description,
                   icon: weatherIconSafely(self.ResolveIcon(day.weather[0].icon), self.app._icon_type),
+                  customIcon: self.ResolveCustomIcon(day.weather[0].icon)
               },
           };
           forecasts.push(forecast);         
@@ -285,6 +287,49 @@ class OpenWeatherMap implements WeatherProvider {
              return [icons.alert]
          }
    };
+
+   private ResolveCustomIcon(icon: string): CustomIcons {
+    switch (icon) {
+        case "10d":/* rain day */
+          return "Cloud-Rain-Sun";
+        case "10n":/* rain night */
+          return "Cloud-Rain-Moon";
+        case "09n":/* showers nigh*/
+          return "Cloud-Drizzle-Moon";
+        case "09d":/* showers day */
+          return "Cloud-Drizzle-Sun"
+        case "13d":/* snow day*/
+          return "Cloud-Snow-Sun"
+        case "13n":/* snow night */
+          return "Cloud-Snow-Moon"
+        case "50d":/* mist day */
+          return "Cloud-Fog-Sun-Alt"
+        case "50n":/* mist night */
+          return "Cloud-Fog-Moon-Alt"
+        case "04d":/* broken clouds day */
+          return "Cloud-Sun"
+        case "04n":/* broken clouds night */
+          return "Cloud-Moon"
+        case "03n":/* mostly cloudy (night) */
+          return "Cloud-Moon"
+        case "03d":/* mostly cloudy (day) */
+          return "Cloud-Sun"
+        case "02n":/* partly cloudy (night) */
+          return "Cloud-Moon"
+        case "02d":/* partly cloudy (day) */
+          return "Cloud-Sun"
+        case "01n":/* clear (night) */
+          return "Moon"
+        case "01d":/* sunny */
+          return "Sun"
+        case "11d":/* storm day */
+          return "Cloud-Lightning-Sun"
+        case "11n":/* storm night */
+          return "Cloud-Lightning-Moon"
+        default:
+          return "Cloud-Refresh"
+      }
+  };
 };
 
 const openWeatherMapConditionLibrary = [
@@ -347,6 +392,7 @@ const openWeatherMapConditionLibrary = [
   _("Clear sky"),
   _("Sky is clear"),
   // Group 80x: Clouds
+  _("Clouds"),
   _("Few clouds"),
   _("Scattered clouds"),
   _("Broken clouds"),

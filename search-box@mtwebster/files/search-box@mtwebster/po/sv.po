@@ -1,32 +1,32 @@
 # Swedish translation for search-box@mtwebster.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# Åke Engelbrektson <eson@svenskasprakfiler.se>, 2017.
+# Åke Engelbrektson <eson@svenskasprakfiler.se>, 2017, 2020.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: search-box@mtwebster\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-16 17:49+0200\n"
-"PO-Revision-Date: 2017-05-16 19:21+0200\n"
+"POT-Creation-Date: 2018-02-13 12:52+0100\n"
+"PO-Revision-Date: 2020-01-01 10:57+0100\n"
+"Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
 "Language-Team: Svenska Språkfiler <contactform@svenskasprakfiler.se>\n"
+"Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.7.1\n"
-"Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
+"X-Generator: Poedit 2.0.6\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: sv\n"
 
-#: applet.js:74 3.2/applet.js:72
+#: 3.2/applet.js:73 applet.js:73
 msgid "Type to search..."
 msgstr "Skriv för att söka..."
 
-#: applet.js:85
+#: applet.js:84
 msgid "Change default programs..."
 msgstr "Byt standardprogram..."
 
-#: applet.js:87
+#: applet.js:86
 msgid "Edit providers"
 msgstr "Redigera söktjänster"
 
@@ -70,6 +70,10 @@ msgstr "Ask "
 msgid "Search Provider Settings"
 msgstr "Söktjänstinställningar"
 
+#. 3.2->settings-schema.json->custom-keybinding->description
+msgid "Keybinding, which opens the search box"
+msgstr "Tangentkombination som öppnar sökrutan"
+
 #. 3.2->settings-schema.json->custom-provider-url->description
 msgid "URL of custom provider"
 msgstr "URL för anpassad söktjänst"
@@ -85,6 +89,10 @@ msgstr "Använd anpassad söktjänst"
 #. 3.2->settings-schema.json->use-custom-provider->tooltip
 msgid "Use your own search provider"
 msgstr "Använd din egen favoritsöktjänst"
+
+#. 3.2->settings-schema.json->header-keybinding->description
+msgid "Keybinding"
+msgstr "Kortkommando"
 
 #. 3.2->settings-schema.json->show-provider->description
 msgid "Show provider"

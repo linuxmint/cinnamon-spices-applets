@@ -37,8 +37,8 @@ msgid "No location provided"
 msgstr "Aucun lieu indiqué"
 
 #: applet.js:610 3.6/applet.js:610 3.8/applet.js:738
-msgid "Cloudiness:"
-msgstr "Nébulosité :"
+msgid "Cloudiness"
+msgstr "Nébulosité "
 
 #: applet.js:634 3.6/applet.js:634 3.8/applet.js:779
 msgid "Sunrise"
@@ -285,8 +285,8 @@ msgid "in"
 msgstr "à"
 
 #: 3.8/applet.js:744
-msgid "Feels like:"
-msgstr "Semble être :"
+msgid "Feels like"
+msgstr "Semble être "
 
 #: 3.8/applet.js:1231
 msgid "Sky is clear"

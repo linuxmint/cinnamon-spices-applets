@@ -8,9 +8,29 @@
   , "description": "Set the keybinding to call the menu"
   , "default": "<Super><Shift>w"
   },
+  "descriptions":
+  { "type": "header"
+  , "description": "Weather service information"
+  },
+  "openWM":
+  { "type": "label"
+  , "description": "OpenWeatherMap - The default, works out of the box."
+  },
+  "darkS":
+  { "type": "label"
+  , "description": "DarkSky - Needs key, please click on 'Setup API Key and Location' for the steps how to obtain one."
+  },
+  "METN":
+  { "type": "label"
+  , "description": "MET Norway - Current weather is shown for the next hour, and the daily forecasts \nare generated from 6 hour forecasts, so it can look incorrect sometimes."
+  },
+  "WB":
+  { "type": "label"
+  , "description": "WeatherBit - Minimum of 10min refresh rate is recommended or you might exceed you daily quota.\nNeeds a key, please click on 'Setup API Key and Location' for the steps how to obtain one."
+  },
   "providerSettings":
   { "type": "header"
-  , "description": "Weather Provider Settings"
+  , "description": "Weather Provider Options"
   }
 , "dataService":
   { "type": "radiogroup"
@@ -18,8 +38,10 @@
   , "description": "Data service"
   , "options":
     { 
-      "OpenWeatherMap (no key needed)": "OpenWeatherMap",
-      "DarkSky": "DarkSky"
+      "OpenWeatherMap": "OpenWeatherMap",
+      "DarkSky (key needed)": "DarkSky",
+      "MET Norway": "MetNorway",
+      "Weatherbit (key needed)": "Weatherbit"
     }
   },
   "apiKey":
@@ -49,9 +71,27 @@
     "callback": "locationLookup",
     "tooltip": "Opens webpage guide"
   },
-  "personalSettings":
+  "refreshInterval":
+  { "type": "spinbutton"
+  , "default": 15
+  , "min": 5
+  , "max": 360
+  , "units": "minutes"
+  , "step": 5
+  , "description": "Update interval"
+  },
+  "forecastDays":
+  { "type": "spinbutton"
+  , "default": 2
+  , "min": 2
+  , "max": 5
+  , "units": "days"
+  , "step": 1
+  , "description": "Forecast length"
+  },
+  "unitSettings":
   { "type": "header"
-  , "description": "Personal Settings"
+  , "description": "Units"
   }
 , "temperatureUnit":
   { "type": "radiogroup"
@@ -61,11 +101,6 @@
     { "celsius": "celsius"
     , "fahrenheit": "fahrenheit"
     }
-  }
-, "temperatureHighFirst":
-  { "type": "checkbox"
-  , "default": false
-  , "description": "Show high temperature first in forecast"
   }
 , "windSpeedUnit":
   { "type": "combobox"
@@ -91,13 +126,38 @@
     , "atm": "atm"
     , "Pa": "Pa"
     }
+  },
+  "panelSettings":
+  { "type": "header"
+  , "description": "Panel options"
+  },
+  "showTextInPanel":
+  { "type": "checkbox"
+  , "default": true
+  , "description": "Display current temperature in panel"
   }
-, "verticalOrientation":
+, "showCommentInPanel":
+  { "type": "checkbox"
+  , "default": true
+  , "description": "Show the weather condition (e.g., \"Windy\", \"Clear\") in the panel",
+    "tooltip": "Only works with horizontal panels"
+  },
+  "useCustomAppletIcons":
   { "type": "checkbox"
   , "default": false
-  , "description": "Vertical orientation"
-  }
-, "showSunrise":
+  , "tootlip": "Uses a slightly modified version of Climaicons"
+  , "description": "Use custom icons on the panel"
+  },
+"displaySettings":
+  { "type": "header"
+  , "description": "Presentation"
+  },
+  "verticalOrientation":
+  { "type": "checkbox"
+  , "default": false
+  , "description": "Show forecast vertically"
+  },
+  "showSunrise":
   { "type": "checkbox"
   , "default": true
   , "description": "Show sunrise / sunset times"
@@ -107,14 +167,19 @@
   , "default": false
   , "description": "Display time in 24 hour format"
   }
-, "forecastDays":
-  { "type": "spinbutton"
-  , "default": 2
-  , "min": 2
-  , "max": 5
-  , "units": "days"
-  , "step": 1
-  , "description": "Forecast length"
+  , "temperatureHighFirst":
+  { "type": "checkbox"
+  , "default": false
+  , "description": "Show high temperature first in forecast"
+  }
+  , "locationLabelOverride":
+  { "type": "entry"
+  , "default": ""
+  , "description": "Override location label"
+  },
+  "conditionSettings":
+  { "type": "header"
+  , "description": "Weather Conditions"
   }
 , "translateCondition":
   { "type": "checkbox"
@@ -124,40 +189,20 @@
   "shortConditions":
   { "type": "checkbox"
   , "default": false
-  , "description": "Less verbose conditions"
+  , "description": "Less verbose conditions",
+    "tooltip": "Currently only used with DarkSky "
+  },
+  "iconSettings":
+  { "type": "header"
+  , "description": "Icons"
   }
 , "useSymbolicIcons":
   { "type": "checkbox"
   , "default": false
-  , "description": "Symbolic icons"
-  }
-, "showTextInPanel":
-  { "type": "checkbox"
-  , "default": true
-  , "description": "Display current temperature in panel"
-  }
-, "showCommentInPanel":
-  { "type": "checkbox"
-  , "default": true
-  , "description": "Show the weather condition (e.g., \"Windy\", \"Clear\") in the panel"
-  }
-, "locationLabelOverride":
-  { "type": "entry"
-  , "default": ""
-  , "description": "Override location label"
-  }
-, "refreshInterval":
-  { "type": "spinbutton"
-  , "default": 15
-  , "min": 5
-  , "max": 360
-  , "units": "minutes"
-  , "step": 5
-  , "description": "Update interval"
+  , "description": "Use symbolic icons in the applet"
   },
   "credits": {
     "type": "header",
     "description": "powered by: OpenWeatherMap, DarkSky, ipapi. Big Thanks to OpenWeatherMap for their support!"
   }
 }
-

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: SpicesUpdate@claudiux v2.0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-11-16 18:40+0100\n"
-"PO-Revision-Date: 2019-11-16 18:49+0100\n"
+"PO-Revision-Date: 2019-12-30 09:46+0100\n"
 "Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -596,10 +596,13 @@ msgid "hours"
 msgstr "heures"
 
 #. 4.2->settings-schema.json->general_frequency->description
-#. 3.8->settings-schema.json->general_frequency->description
-#. 2.8->settings-schema.json->general_frequency->description
 msgid "Time interval between two checks"
 msgstr "Intervalle de temps entre deux vérifications"
+
+#. 3.8->settings-schema.json->general_frequency->description
+#. 2.8->settings-schema.json->general_frequency->description
+msgid "Time interval between two checks (hours)"
+msgstr "Intervalle de temps entre deux vérifications (en heures)"
 
 #. 4.2->settings-schema.json->general_frequency->tooltip
 msgid "Min value: 1 hour. Max value: 720 hours (30 days)."

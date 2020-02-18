@@ -1,34 +1,41 @@
-var Mainloop = imports.mainloop;
-const Cinnamon = imports.gi.Cinnamon;
-const St = imports.gi.St;
-const Gtk = imports.gi.Gtk;
+var { timeout_add, source_remove } = imports.mainloop;
+const { util_format_date } = imports.gi.Cinnamon;
+const { IconType } = imports.gi.St;
+const { IconTheme } = imports.gi.Gtk;
 var setTimeout = function (func, ms) {
     let args = [];
     if (arguments.length > 2) {
         args = args.slice.call(arguments, 2);
     }
-    let id = Mainloop.timeout_add(ms, () => {
+    let id = timeout_add(ms, () => {
         func.apply(null, args);
         return false;
     }, null);
     return id;
 };
+var delay = async function (ms) {
+    return await new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve();
+        }, ms);
+    });
+};
 const clearTimeout = function (id) {
-    Mainloop.source_remove(id);
+    source_remove(id);
 };
 const setInterval = function (func, ms) {
     let args = [];
     if (arguments.length > 2) {
         args = args.slice.call(arguments, 2);
     }
-    let id = Mainloop.timeout_add(ms, () => {
+    let id = timeout_add(ms, () => {
         func.apply(null, args);
         return true;
     }, null);
     return id;
 };
 const clearInterval = function (id) {
-    Mainloop.source_remove(id);
+    source_remove(id);
 };
 var isLocaleStringSupported = function () {
     let date = new Date(1565548657987);
@@ -97,7 +104,7 @@ var getDayName = function (dayNum) {
     return days[dayNum];
 };
 var timeToUserUnits = function (date, show24Hours) {
-    let timeStr = Cinnamon.util_format_date('%H:%M', date.getTime());
+    let timeStr = util_format_date('%H:%M', date.getTime());
     let time = timeStr.split(':');
     if (time[0].charAt(0) == "0") {
         time[0] = time[0].substr(1);
@@ -232,5 +239,5 @@ var weatherIconSafely = function (code, icon_type) {
     return 'weather-severe-alert';
 };
 var hasIcon = function (icon, icon_type) {
-    return Gtk.IconTheme.get_default().has_icon(icon + (icon_type == St.IconType.SYMBOLIC ? '-symbolic' : ''));
+    return IconTheme.get_default().has_icon(icon + (icon_type == IconType.SYMBOLIC ? '-symbolic' : ''));
 };

@@ -1,4 +1,3 @@
-const DEBUG = false;
 /**
  * @param path Filename without extension
  */
@@ -15,31 +14,27 @@ function importModule(path: string): any {
  * /usr/share/gjs-1.0/
  * /usr/share/gnome-js/
  */
-const Cairo: typeof imports.cairo = imports.cairo;
+const { LinearGradient } = imports.cairo;
 const Lang: typeof imports.lang = imports.lang;
 // http://developer.gnome.org/glib/unstable/glib-The-Main-Event-Loop.html
-const Main: typeof imports.ui.main = imports.ui.main;
-var Mainloop: typeof imports.mainloop = imports.mainloop;
-/**
- * /usr/share/gjs-1.0/overrides/
- * /usr/share/gir-1.0/
- * /usr/lib/cinnamon/
- */
-const Gio: typeof imports.gi.Gio = imports.gi.Gio;
+//const Main: typeof imports.ui.main = imports.ui.main;
+const keybindingManager = imports.ui.main.keybindingManager;
+
+const { timeout_add_seconds } = imports.mainloop;
 // http://developer.gnome.org/libsoup/stable/libsoup-client-howto.html
-const Soup: typeof imports.gi.Soup = imports.gi.Soup;
+//const Soup: typeof imports.gi.Soup = imports.gi.Soup;
+const { Message, Session, ProxyResolverDefault, SessionAsync } = imports.gi.Soup;
 // http://developer.gnome.org/st/stable/
-const St: typeof imports.gi.St = imports.gi.St;
-const GLib: typeof imports.gi.GLib = imports.gi.GLib
-const GObject: typeof imports.gi.GObject = imports.gi.GObject;
-const Gettext: typeof imports.gettext = imports.gettext
-/**
- * /usr/share/cinnamon/js/
- */
-const Applet: typeof imports.ui.applet = imports.ui.applet;
-const PopupMenu: typeof imports.ui.popupMenu = imports.ui.popupMenu;
-const Settings: typeof imports.ui.settings = imports.ui.settings;
-const Util: typeof imports.misc.util = imports.misc.util;
+//const St: typeof imports.gi.St = imports.gi.St;
+const { Bin, DrawingArea, BoxLayout, Side, IconType, Label, Icon, Button } = imports.gi.St;
+const { get_language_names } = imports.gi.GLib;
+// * /usr/share/cinnamon/js/
+const { TextIconApplet, AllowedLayout, AppletPopupMenu, MenuItem} = imports.ui.applet;
+const { PopupMenuManager } = imports.ui.popupMenu;
+const { AppletSettings, BindingDirection } = imports.ui.settings;
+const { spawnCommandLine, spawn_async } = imports.misc.util;
+const { SystemNotificationSource, Notification } = imports.ui.messageTray;
+const { messageTray } = imports.ui.main;
 
 var utils = importModule("utils");
 var GetDayName = utils.GetDayName as (date: Date, locale:string, tz?: string) => string;
@@ -51,6 +46,7 @@ var compassDirection = utils.compassDirection as (deg: number) => string;
 var MPStoUserUnits = utils.MPStoUserUnits as (mps: number, units: WeatherWindSpeedUnits) => number;
 var nonempty = utils.nonempty as (str: string) => boolean;
 var AwareDateString = utils.AwareDateString as (date: Date, locale: string, hours24Format: boolean) => string;
+const delay = utils.delay as (ms: number) => Promise<void>;
 
 // This always evaluates to True because "var Promise" line exists inside 
 if (typeof Promise != "function") {
@@ -95,11 +91,21 @@ const APPLET_ICON = "view-refresh-symbolic"
 const REFRESH_ICON = "view-refresh";
 const CMD_SETTINGS = "cinnamon-settings applets " + UUID
 
+type Services = "OpenWeatherMap" | "DarkSky" | "MetNorway" | "Weatherbit";
+type ServiceMap = {
+  [key: string]: Services
+}
+type ServiceDescriptions = {
+  [key in Services]: string
+}
 // Settings keys
-const DATA_SERVICE = {
+const DATA_SERVICE: ServiceMap = {
   OPEN_WEATHER_MAP: "OpenWeatherMap",
   DARK_SKY: "DarkSky",
+  MET_NORWAY: "MetNorway",
+  WEATHERBIT: "Weatherbit"
 }
+
 const WEATHER_LOCATION = "location"
 const WEATHER_USE_SYMBOLIC_ICONS_KEY = 'useSymbolicIcons'
 
@@ -123,8 +129,21 @@ const KEYS: SettingKeys  =  {
   WEATHER_REFRESH_INTERVAL: "refreshInterval",
   WEATHER_PRESSURE_UNIT_KEY: "pressureUnit",
   WEATHER_SHORT_CONDITIONS_KEY:  "shortConditions",
-  WEATHER_MANUAL_LOCATION:  "manualLocation"
+  WEATHER_MANUAL_LOCATION:  "manualLocation",
+  WEATHER_USE_CCUSTOM_APPLETICONS_KEY: 'useCustomAppletIcons'
 }
+
+/*var custom_icons = ["Cloud-Drizzle" , "Cloud-Drizzle-Alt" , "Cloud-Drizzle-Moon-Alt", "Cloud-Drizzle-Moon", "Cloud-Drizzle-Sun-Alt", 
+"Cloud-Drizzle-Sun", "Cloud-Fog", "Cloud-Fog-Alt", "Cloud-Fog-Moon-Alt", "Cloud-Fog-Moon", "Cloud-Fog-Sun-Alt",
+"Cloud-Fog-Sun", "Cloud-Fog", "Cloud-Hail-Alt", "Cloud-Hail-Moon-Alt", "Cloud-Hail-Moon", 
+"Cloud-Hail-Sun-Alt", "Cloud-Hail-Sun", "Cloud-Hail", "Cloud-Lightning-Moon", "Cloud-Lightning-Sun", 
+"Cloud-Lightning", "Cloud-Moon", "Cloud-Rain-Alt", "Cloud-Rain-Moon-Alt", "Cloud-Rain-Moon", 
+"Cloud-Rain", "Cloud-Rain-Sun", "Cloud-Rain-Sun-Alt", "Cloud-Refresh", "Cloud-Snow-Alt", "Cloud-Snow-Moon-Alt","Cloud-Snow-Moon", 
+"Cloud-Snow-Sun-Alt", "Cloud-Snow-Sun", "Cloud-Snow", "Cloud-Sun", "Cloud-Upload", "Cloud-Wind-Moon", 
+"Cloud-Wind-Sun", "Cloud-Wind", "Cloud", "Compass-East", "Compass-North", "Compass-South", "Compass-West",
+"Compass", "Degrees-Celcius", "Degrees-Fahrenheit", "Moon", "Shades", "Snowflake", 
+"Sun", "Thermometer-25", "Thermometer-50", "Wind",
+"Thermometer-75", "Thermometer-100", "Thermometer-Zero", "Thermometer", "Tornado", "Umbrella"];*/
 
 //----------------------------------------------------------------------
 //
@@ -132,12 +151,21 @@ const KEYS: SettingKeys  =  {
 //
 //----------------------------------------------------------------------
 
-Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
+imports.gettext.bindtextdomain(UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
 function _(str: string): string {
-  return Gettext.dgettext(UUID, str)
+  return imports.gettext.dgettext(UUID, str)
 }
 
-class WeatherApplet extends Applet.TextIconApplet {
+function uuidv4() {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+    return v.toString(16);
+  });
+}
+
+var weatherAppletGUIDs: GUIDStore = {};
+
+class WeatherApplet extends TextIconApplet {
   /** Stores all weather information */
   private weather: Weather = {
     date: null, // Date object, UTC
@@ -165,6 +193,7 @@ class WeatherApplet extends Applet.TextIconApplet {
       main: null, // What API returns
       description: null, // Longer description, if not available put the same whats in main
       icon: null, // GTK weather icon names
+      customIcon: null
     },
   }
 
@@ -197,7 +226,7 @@ class WeatherApplet extends Applet.TextIconApplet {
   // Settings are public
   public _refreshInterval: number;
   public _manualLocation: boolean;
-  public _dataService: string;
+  public _dataService: Services;
   public _location: string;
   public _translateCondition: boolean;
   public _temperatureUnit: WeatherUnits;
@@ -214,32 +243,34 @@ class WeatherApplet extends Applet.TextIconApplet {
   public _showTextInPanel: boolean;
   public _locationLabelOverride: string;
   public _icon_type: string;
+  public _useCustomAppletIcons: boolean;
 
   public currentLocale: string = null;
   public systemLanguage: string = null;
   public log: Log;
 
   private keybinding: any;
-  private menu: any;
-  private menuManager: any;
-  private settings: any;
+  private menu: imports.ui.applet.AppletPopupMenu;
+  private menuManager: imports.ui.popupMenu.PopupMenuManager;
+  private settings: imports.ui.settings.AppletSettings;
   // Soup session (see https://bugzilla.gnome.org/show_bug.cgi?id=661323#c64)
-  private _httpSession = new Soup.SessionAsync();
+  private _httpSession = new SessionAsync();
+  public appletDir = imports.ui.appletManager.appletMeta[UUID].path;
+  private msgSource: imports.ui.messageTray.SystemNotificationSource;
 
   private provider: WeatherProvider; // API
   private locProvider = new ipApi.IpApi(this); // IP location lookup
 
   /** To check if data is up-to-date based on user-set refresh settings */
-  private lastUpdated: Date = null;
-  private orientation: any;
+  private lastUpdated: Date = new Date(0);
+  private orientation: imports.gi.St.Side;
   /** Used for error handling, first error calls dibs
    * and stops diplaying the other errors after.
    * Also used for counting consecutive errors
    */
   private encounteredError: boolean = false;
-  /** true on errors what user interaction is required on an error.
-   * (usually on settings misconfiguration), refreshAndRebuild()
-   * clears it.
+  /** true on errors when user interaction is required.
+   * (usually on settings misconfiguration), every settings change clears it.
    */
   private pauseRefresh: boolean = false;
   /** Slows main loop down on consecutive errors.
@@ -248,21 +279,32 @@ class WeatherApplet extends Applet.TextIconApplet {
   private errorCount: number = 0;
   /** in seconds */
   private readonly LOOP_INTERVAL: number = 15;
+  private GUID: string;
+  private instanceID: number;
+  private appletRemoved = false;
 
-  public constructor(metadata: any, orientation: any, panelHeight: number, instanceId: number) {
+  public constructor(metadata: any, orientation: imports.gi.St.Side, panelHeight: number, instanceId: number) {
     super(orientation, panelHeight, instanceId);
-    this.currentLocale = this.constructJsLocale(GLib.get_language_names()[0]);
+    this.instanceID = instanceId;
+    this.currentLocale = this.constructJsLocale(get_language_names()[0]);
     this.systemLanguage = this.currentLocale.split('-')[0];
-    this.settings = new Settings.AppletSettings(this, UUID, instanceId)
+    this.settings = new AppletSettings(this, UUID, instanceId);
     this.log = new Log(instanceId);
     this._httpSession.user_agent = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:37.0) Gecko/20100101 Firefox/37.0"; // ipapi blocks non-browsers agents, imitating browser
-    Soup.Session.prototype.add_feature.call(this._httpSession, new Soup.ProxyResolverDefault());
+    this.msgSource = new SystemNotificationSource(_("Weather Applet"));
+    messageTray.add(this.msgSource);
+    Session.prototype.add_feature.call(this._httpSession, new ProxyResolverDefault());
+    // Manually add the icons to the icontheme - only one icons folder
+    imports.gi.Gtk.IconTheme.get_default().append_search_path(this.appletDir + "/../icons");
 
     this.SetAppletOnPanel(); 
     this.AddPopupMenu(orientation);
     this.BindSettings();
     this.AddRefreshButton();
     this.BuildPopupMenu();
+    // generating unique GUIDs
+    this.GUID = uuidv4();
+    weatherAppletGUIDs[instanceId] = this.GUID;
 
     this.rebuild()
     //------------------------------
@@ -272,7 +314,7 @@ class WeatherApplet extends Applet.TextIconApplet {
 
     this.orientation = orientation;
     try {
-      this.setAllowedLayout(Applet.AllowedLayout.BOTH);
+      this.setAllowedLayout(AllowedLayout.BOTH);
       this.update_label_visible();
     } catch (e) {
       // vertical panel not supported
@@ -286,8 +328,8 @@ class WeatherApplet extends Applet.TextIconApplet {
   }
 
   private AddPopupMenu(orientation: any) {
-    this.menuManager = new PopupMenu.PopupMenuManager(this);
-    this.menu = new Applet.AppletPopupMenu(this, orientation)
+    this.menuManager = new PopupMenuManager(this);
+    this.menu = new AppletPopupMenu(this, orientation)
     if (typeof this.menu.setCustomStyleClass === "function")
       this.menu.setCustomStyleClass(STYLE_WEATHER_MENU);
     else
@@ -302,18 +344,18 @@ class WeatherApplet extends Applet.TextIconApplet {
     for (let k in KEYS) {
       let key = KEYS[k];
       let keyProp = "_" + key;
-      this.settings.bindProperty(Settings.BindingDirection.IN,
+      this.settings.bindProperty(BindingDirection.IN,
         key, keyProp, this.refreshAndRebuild, null);
     }
 
     // Settings what need special care
-    this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL,
+    this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
       WEATHER_LOCATION, ("_" + WEATHER_LOCATION), this.refreshAndRebuild, null);
 
-    this.settings.bindProperty(Settings.BindingDirection.IN, "keybinding",
+    this.settings.bindProperty(BindingDirection.IN, "keybinding",
       "keybinding", this._onKeySettingsUpdated, null);
 
-    Main.keybindingManager.addHotKey(
+    keybindingManager.addHotKey(
       UUID, this.keybinding, Lang.bind(this, this.on_applet_clicked));
 
     this.updateIconType()
@@ -326,13 +368,13 @@ class WeatherApplet extends Applet.TextIconApplet {
         this._forecast[i].Icon.icon_type = this._icon_type
       }
       this.refreshWeather()
-    }))
+    }))    
   }
 
   /** Into context menu */
   private AddRefreshButton(): void {
      let itemLabel = _("Refresh")
-     let refreshMenuItem = new Applet.MenuItem(itemLabel, REFRESH_ICON, Lang.bind(this, function () {
+     let refreshMenuItem = new MenuItem(itemLabel, REFRESH_ICON, Lang.bind(this, function () {
        this.refreshAndRebuild();
      }))
      this._applet_context_menu.addMenuItem(refreshMenuItem);
@@ -340,15 +382,15 @@ class WeatherApplet extends Applet.TextIconApplet {
 
   private BuildPopupMenu(): void {
     //  today's forecast
-    this._currentWeather = new St.Bin({ style_class: STYLE_CURRENT });
+    this._currentWeather = new Bin({ style_class: STYLE_CURRENT });
     //  tomorrow's forecast
-    this._futureWeather = new St.Bin({ style_class: STYLE_FORECAST });
+    this._futureWeather = new Bin({ style_class: STYLE_FORECAST });
     //  horizontal rule
-    this._separatorArea = new St.DrawingArea({ style_class: STYLE_POPUP_SEPARATOR_MENU_ITEM });
+    this._separatorArea = new DrawingArea({ style_class: STYLE_POPUP_SEPARATOR_MENU_ITEM });
     this._separatorArea.width = 200
     this._separatorArea.connect(SIGNAL_REPAINT, Lang.bind(this, this._onSeparatorAreaRepaint))
     // build menu
-    let mainBox = new St.BoxLayout({ vertical: true })
+    let mainBox = new BoxLayout({ vertical: true })
 
     mainBox.add_actor(this._currentWeather)
     mainBox.add_actor(this._separatorArea)
@@ -362,13 +404,14 @@ class WeatherApplet extends Applet.TextIconApplet {
   };
 
   /**
+   * DEPRECATED - 
    * Handles obtaining JSON over http. 
    * returns HTTPError object on fail.
-   * @param query fully contructed url
+   * @param query fully constructed url
    */
   public async LoadJsonAsync(query: string): Promise <any> {
     let json = await new Promise((resolve: any, reject: any) => {
-      let message = Soup.Message.new('GET', query);
+      let message = Message.new('GET', query);
       this._httpSession.queue_message(message, (session: any, message: any) => {
 
         if (!message) 
@@ -396,9 +439,54 @@ class WeatherApplet extends Applet.TextIconApplet {
     return json;
   };
 
+  public async SpawnProcess(command: string[]): Promise<any> {
+    let json = await new Promise((resolve: any, reject: any) => {
+      spawn_async(command, (aStdout: any) => {
+        resolve(aStdout);
+      });
+    });
+    return json;
+  }
+
+  /**
+   * Handles obtaining data over http. 
+   * returns HTTPError object on fail.
+   * @param query fully constructed url
+   */
+  public async LoadAsync(query: string): Promise <any> {
+    let data = await new Promise((resolve: any, reject: any) => {
+      let message = Message.new('GET', query);
+      this._httpSession.queue_message(message, (session: any, message: any) => {
+
+        if (!message) 
+          reject({code: 0, message: "no network response", reason_phrase: "no network response"} as HttpError);
+
+        if (message.status_code != 200) 
+          reject({code: message.status_code, message: "bad status code", reason_phrase: message.reason_phrase } as HttpError)
+        
+        if (!message.response_body) 
+          reject({code: message.status_code, message: "no reponse body", reason_phrase: message.reason_phrase} as HttpError);
+        
+        if (!message.response_body.data) 
+          reject({code: message.status_code, message: "no respone data", reason_phrase: message.reason_phrase} as HttpError);
+        
+        this.log.Debug("API full response: " + message.response_body.data.toString());
+        let payload = message.response_body.data;
+        resolve(payload);
+      });
+    });
+    return data;
+  };
+
+  public sendNotification(title: string, message: string, transient?: boolean) {
+    let notification = new Notification(this.msgSource, title, message);
+    if (transient) notification.setTransient(true);
+    this.msgSource.notify(notification);
+  }
+
   private async locationLookup(): Promise < void > {
     let command = "xdg-open ";
-    Util.spawnCommandLine(command + "https://cinnamon-spices.linuxmint.com/applets/view/17");
+    spawnCommandLine(command + "https://cinnamon-spices.linuxmint.com/applets/view/17");
   }
 
   private IsDataTooOld(): boolean {
@@ -409,52 +497,82 @@ class WeatherApplet extends Applet.TextIconApplet {
     return (this.lastUpdated > oldDate);
   }
 
-  /** Refresh Loop Hooked into MainLoop */
-  private RefreshLoop(): void {
-    if (this.encounteredError) {
-      this.encounteredError = false;
-      this.errorCount++;
-    }
-    // Means loop expands to 15mins max on consecutive errors
-    if (this.errorCount > 60) this.errorCount = 60; 
-
+  /** Refresh Loop */
+  private async RefreshLoop(): Promise<void> {
     let loopInterval = this.LOOP_INTERVAL;
-    // Increase loop timeout linearly with the number of errors
-    if (this.errorCount > 0) loopInterval = loopInterval*this.errorCount;
-    try {
-      if ((this.lastUpdated == null || this.errorCount > 0 || new Date(this.lastUpdated.getTime() + this._refreshInterval * 60000) < new Date())
-      && !this.pauseRefresh) {
-        this.refreshWeather(false);
+    while(true) {
+      try {
+        this.log.Debug("Loop began")
+        if (this.appletRemoved == true) return;
+        this.log.Debug("Applet GUID: " + this.GUID);
+        this.log.Debug("GUID stored globally: " +  weatherAppletGUIDs[this.instanceID]);
+        if (this.GUID != weatherAppletGUIDs[this.instanceID]) {
+          this.log.Print("GUID mismatch, terminating applet")
+          return;
+        }
+
+        if (this.encounteredError) {
+          this.encounteredError = false;
+          this.errorCount++;
+          this.log.Debug("Encountered error in previous loop");
+        }
+      
+        // Limiting count so timeout does not expand forever
+        if (this.errorCount > 60) this.errorCount = 60;
+        // Linearly increasing timeout on consecutive errors
+        loopInterval = (this.errorCount > 0) ? loopInterval*this.errorCount : this.LOOP_INTERVAL; // Increase loop timeout linearly with the number of errors
+    
+        if (this.pauseRefresh == true) {
+          this.log.Debug("Configuration error, updating paused")
+          await delay(loopInterval * 1000);
+          continue;
+        }
+
+        let nextUpdate = new Date(this.lastUpdated.getTime() + this._refreshInterval * 60000);
+        if (this.errorCount > 0 || nextUpdate < new Date()) {
+          this.log.Debug("Refresh triggered in mainloop with these values: lastUpdated " + ((!this.lastUpdated) ? "null" : this.lastUpdated.toLocaleString()) + ", errorCount " + this.errorCount.toString() + " , loopInterval " + loopInterval.toString() + " seconds, refreshInterval " + this._refreshInterval + " minutes");
+          let state = await this.refreshWeather(false);
+          if (state == "success") {
+            this.lastUpdated = new Date();
+          }
+        }
+        else {
+          this.log.Debug("No need to update yet, skipping")
+        }
+      } catch (e) {
+        this.log.Error("Error in Main loop: " + e);
+        this.encounteredError = true;
       }
-    } catch (e) {
-      this.log.Error("Error in Main loop: " + e);
-      this.encounteredError = true;
+
+      await delay(loopInterval * 1000);
     }
-    Mainloop.timeout_add_seconds(loopInterval, Lang.bind(this, function mainloopTimeout() {
-      this.RefreshLoop();
-    }))
   };
 
   // Applet Overrides
   private update_label_visible(): void {
-    if (this.orientation == St.Side.LEFT || this.orientation == St.Side.RIGHT)
+    if (this.orientation == Side.LEFT || this.orientation == Side.RIGHT)
       this.hide_applet_label(true);
     else
       this.hide_applet_label(false);
   };
 
-  private on_orientation_changed(orientation: string) {
+  private on_orientation_changed(orientation: imports.gi.St.Side) {
     this.orientation = orientation;
     this.refreshWeather(true);
   };
 
   private _onKeySettingsUpdated(): void {
     if (this.keybinding != null) {
-      Main.keybindingManager.addHotKey(UUID,
+      keybindingManager.addHotKey(UUID,
         this.keybinding,
         Lang.bind(this,
           this.on_applet_clicked))
     }
+  }
+
+  private on_applet_removed_from_panel(deleteConfig: any) {
+    this.log.Print("Removing applet instance...")
+    this.appletRemoved = true;
   }
 
   private on_applet_clicked(event: any): void {
@@ -471,7 +589,7 @@ class WeatherApplet extends Applet.TextIconApplet {
     let endColor = themeNode.get_color('-gradient-end')
     let gradientWidth = (width - margin * 2)
     let gradientOffset = (height - gradientHeight) / 2
-    let pattern = new Cairo.LinearGradient(margin, gradientOffset, width - margin, gradientOffset + gradientHeight)
+    let pattern = new LinearGradient(margin, gradientOffset, width - margin, gradientOffset + gradientHeight)
     pattern.addColorStopRGBA(0, startColor.red / 255, startColor.green / 255, startColor.blue / 255, startColor.alpha / 255)
     pattern.addColorStopRGBA(0.5, endColor.red / 255, endColor.green / 255, endColor.blue / 255, endColor.alpha / 255)
     pattern.addColorStopRGBA(1, startColor.red / 255, startColor.green / 255, startColor.blue / 255, startColor.alpha / 255)
@@ -486,10 +604,18 @@ class WeatherApplet extends Applet.TextIconApplet {
   //
   //----------------------------------------------------------------------
 
+  /*private async IconTest() : Promise<void> {
+    for (let i = 0; i < custom_icons.length; i++) {
+      await delay(1000);
+      this.SetCustomIcon(custom_icons[i] as CustomIcons);
+    }
+    
+  }*/
+
   private updateIconType(): void {
     this._icon_type = this.settings.getValue(WEATHER_USE_SYMBOLIC_ICONS_KEY) ?
-      St.IconType.SYMBOLIC :
-      St.IconType.FULLCOLOR
+      IconType.SYMBOLIC :
+      IconType.FULLCOLOR
   };
 
   private constructJsLocale(locale: string): string {
@@ -507,7 +633,7 @@ class WeatherApplet extends Applet.TextIconApplet {
    * Main function pulling data
    * @param rebuild 
    */
-  private async refreshWeather(rebuild: boolean): Promise < void > {
+  private async refreshWeather(rebuild: boolean): Promise <RefreshState> {
     this.encounteredError = false;
 
     let locationData: LocationData = null;
@@ -516,7 +642,7 @@ class WeatherApplet extends Applet.TextIconApplet {
     }
     catch(e) {
       this.log.Error(e);
-      return;
+      return "error";
     }
 
     try {
@@ -529,14 +655,22 @@ class WeatherApplet extends Applet.TextIconApplet {
           if (openWeatherMap == null) var openWeatherMap = importModule("openWeatherMap");
           this.provider = new openWeatherMap.OpenWeatherMap(this);
           break;
+        case DATA_SERVICE.MET_NORWAY:         // No TZ or city info
+          if (metNorway == null) var metNorway = importModule("met_norway");
+          this.provider = new metNorway.MetNorway(this);
+          break;
+        case DATA_SERVICE.WEATHERBIT:
+          if (weatherbit == null) var weatherbit = importModule("weatherbit");
+          this.provider = new weatherbit.Weatherbit(this);
+          break;
         default:
-          return;
+          return "error";
       }
 
       let weatherInfo = await this.provider.GetWeather();
       if (!weatherInfo) {
         this.log.Error("Unable to obtain Weather Information");
-        return;
+        return "failure";
       }
 
       this.wipeCurrentData();
@@ -547,15 +681,14 @@ class WeatherApplet extends Applet.TextIconApplet {
       if (!await this.displayWeather() || !await this.displayForecast()) return;
       this.log.Print("Weather Information refreshed");
       this.errorCount = 0;
+      //this.IconTest();
+      return "success";
     } 
     catch (e) {
       this.log.Error("Generic Error while refreshing Weather info: " + e);
       this.HandleError({type: "hard", detail: "unknown", message: _("Unexpected Error While Refreshing Weather, please see log in Looking Glass")});
-      return;
+      return "failure";
     }
-
-    this.lastUpdated = new Date();
-    return;
   };
 
   /** 
@@ -582,8 +715,8 @@ class WeatherApplet extends Applet.TextIconApplet {
         this.HandleError({
           type: "hard",
           detail: "no location",
-            userError: true,
-            message: _("Make sure you entered a location or use Automatic location instead")});
+          userError: true,
+          message: _("Make sure you entered a location or use Automatic location instead")});
         throw new Error("No location given when setting is on Manual Location");
       }
     }
@@ -634,9 +767,9 @@ class WeatherApplet extends Applet.TextIconApplet {
       }
       // Condition Description
       if (this.weather.condition.description != null) {
-        descriptionCondition = capitalizeFirstLetter(this.weather.condition.description);
+        descriptionCondition = this.weather.condition.description;
         if (this._translateCondition) {
-          descriptionCondition = _(descriptionCondition);
+          descriptionCondition = capitalizeFirstLetter(_(descriptionCondition));
         }
       }
 
@@ -664,9 +797,10 @@ class WeatherApplet extends Applet.TextIconApplet {
         iconname = "weather-severe-alert";
       }
       this._currentWeatherIcon.icon_name = iconname;
-      this._icon_type == St.IconType.SYMBOLIC ?
+      this._icon_type == IconType.SYMBOLIC ?
         this.set_applet_icon_symbolic_name(iconname) :
         this.set_applet_icon_name(iconname)
+      if (this._useCustomAppletIcons) this.SetCustomIcon(this.weather.condition.customIcon);
 
       // Temperature
       let temp = "";
@@ -675,24 +809,30 @@ class WeatherApplet extends Applet.TextIconApplet {
         this._currentWeatherTemperature.text = temp + ' ' + this.unitToUnicode(this._temperatureUnit);
       }
 
-      // Set Applet Label, even if the variables are empty
       let label = "";
-      if (this._showCommentInPanel) {
-        label += mainCondition;
-      }
-      if (this._showTextInPanel) {
-        if (label != "") {
-          label += " ";
+      if (this.orientation != Side.LEFT && this.orientation != Side.RIGHT) {
+        if (this._showCommentInPanel) {
+          label += mainCondition;
         }
-        label += (temp + ' ' + this.unitToUnicode(this._temperatureUnit));
+        if (this._showTextInPanel) {
+          if (label != "") {
+            label += " ";
+          }
+          label += (temp + ' ' + this.unitToUnicode(this._temperatureUnit));
+        }
       }
+      else {
+        if (this._showTextInPanel) {
+          label = temp;
+        }
+        // Vertical panel width is more than this value then we has space
+        // to show units
+        if (this.panel._getScaledPanelHeight() >= 35) {
+          label += this.unitToUnicode(this._temperatureUnit);
+        }
+      }
+      // Set Applet Label, even if the variables are empty
       this.set_applet_label(label);
-
-      try {
-        this.update_label_visible();
-      } catch (e) {
-        // vertical panel not supported
-      }
 
       // Displaying humidity
       if (this.weather.humidity != null) {
@@ -701,13 +841,17 @@ class WeatherApplet extends Applet.TextIconApplet {
 
       // Wind
       let wind_direction = compassDirection(this.weather.wind.degree);
-      this._currentWeatherWind.text = ((wind_direction != undefined) ? wind_direction + ' ' : '') + MPStoUserUnits(this.weather.wind.speed, this._windSpeedUnit) + ' ' + this._windSpeedUnit;
+      this._currentWeatherWind.text =
+        (wind_direction != undefined ? _(wind_direction) + " " : "") +
+        MPStoUserUnits(this.weather.wind.speed, this._windSpeedUnit) +
+        " " +
+        _(this._windSpeedUnit);
 
       // API Unique display
       this._currentWeatherApiUnique.text = "";
       this._currentWeatherApiUniqueCap.text = "";
       if (!!this.weather.extra_field) {
-        this._currentWeatherApiUniqueCap.text = _(this.weather.extra_field.name);
+        this._currentWeatherApiUniqueCap.text = _(this.weather.extra_field.name) + ":";
         let value;
         switch (this.weather.extra_field.type) {
           case "percent":
@@ -837,10 +981,10 @@ class WeatherApplet extends Applet.TextIconApplet {
   private showLoadingUi(): void {
     this.destroyCurrentWeather()
     this.destroyFutureWeather()
-    this._currentWeather.set_child(new St.Label({
+    this._currentWeather.set_child(new Label({
       text: _('Loading current weather ...')
     }))
-    this._futureWeather.set_child(new St.Label({
+    this._futureWeather.set_child(new Label({
       text: _('Loading future weather ...')
     }))
   }
@@ -859,7 +1003,7 @@ class WeatherApplet extends Applet.TextIconApplet {
     }
 
     // This will hold the icon for the current weather
-    this._currentWeatherIcon = new St.Icon({
+    this._currentWeatherIcon = new Icon({
       icon_type: this._icon_type,
       icon_size: 64,
       icon_name: APPLET_ICON,
@@ -867,52 +1011,52 @@ class WeatherApplet extends Applet.TextIconApplet {
     })
 
     // Current Weather Middle Column
-    this._currentWeatherLocation = new St.Button({ reactive: true, label: _('Refresh'), });
+    this._currentWeatherLocation = new Button({ reactive: true, label: _('Refresh'), });
     this._currentWeatherLocation.style_class = STYLE_LOCATION_LINK;
     this._currentWeatherLocation.connect(SIGNAL_CLICKED, Lang.bind(this, function () {
       if (this._currentWeatherLocation.url == null) {
         this.refreshWeather();
       } else {
-        Gio.app_info_launch_default_for_uri(
+        imports.gi.Gio.app_info_launch_default_for_uri(
           this._currentWeatherLocation.url,
           global.create_app_launch_context()
         )
       }
     }));
 
-    this._currentWeatherSummary = new St.Label({ text: _('Loading ...'), style_class: STYLE_SUMMARY })
+    this._currentWeatherSummary = new Label({ text: _('Loading ...'), style_class: STYLE_SUMMARY })
 
-    this._currentWeatherSunrise = new St.Label(textOb)
-    this._currentWeatherSunset = new St.Label(textOb)
-    let ab_spacerlabel = new St.Label({ text: BLANK })
-    let bb_spacerlabel = new St.Label({ text: BLANK })
+    this._currentWeatherSunrise = new Label(textOb)
+    this._currentWeatherSunset = new Label(textOb)
+    let ab_spacerlabel = new Label({ text: BLANK })
+    let bb_spacerlabel = new Label({ text: BLANK })
 
-    let sunBox = new St.BoxLayout({ style_class: STYLE_ASTRONOMY })
+    let sunBox = new BoxLayout({ style_class: STYLE_ASTRONOMY })
     sunBox.add_actor(this._currentWeatherSunrise)
     sunBox.add_actor(ab_spacerlabel)
     sunBox.add_actor(this._currentWeatherSunset)
 
-    let middleColumn = new St.BoxLayout({ vertical: true, style_class: STYLE_SUMMARYBOX })
+    let middleColumn = new BoxLayout({ vertical: true, style_class: STYLE_SUMMARYBOX })
     middleColumn.add_actor(this._currentWeatherLocation)
     middleColumn.add_actor(this._currentWeatherSummary)
     middleColumn.add_actor(bb_spacerlabel)
     middleColumn.add_actor(sunBox)
 
     // Current Weather Right Column
-    this._currentWeatherTemperature = new St.Label(textOb)
-    this._currentWeatherHumidity = new St.Label(textOb)
-    this._currentWeatherPressure = new St.Label(textOb)
-    this._currentWeatherWind = new St.Label(textOb)
-    this._currentWeatherApiUnique = new St.Label({ text: '' })
+    this._currentWeatherTemperature = new Label(textOb)
+    this._currentWeatherHumidity = new Label(textOb)
+    this._currentWeatherPressure = new Label(textOb)
+    this._currentWeatherWind = new Label(textOb)
+    this._currentWeatherApiUnique = new Label({ text: '' })
     // APi Unique Caption
-    this._currentWeatherApiUniqueCap = new St.Label({ text: '' });
+    this._currentWeatherApiUniqueCap = new Label({ text: '' });
 
-    let rb_captions = new St.BoxLayout({ vertical: true, style_class: STYLE_DATABOX_CAPTIONS })
-    let rb_values = new St.BoxLayout({vertical: true, style_class: STYLE_DATABOX_VALUES })
-    rb_captions.add_actor(new St.Label({ text: _('Temperature:') }));
-    rb_captions.add_actor(new St.Label({ text: _('Humidity:') }));
-    rb_captions.add_actor(new St.Label({ text: _('Pressure:') }));
-    rb_captions.add_actor(new St.Label({ text: _('Wind:') }));
+    let rb_captions = new BoxLayout({ vertical: true, style_class: STYLE_DATABOX_CAPTIONS })
+    let rb_values = new BoxLayout({vertical: true, style_class: STYLE_DATABOX_VALUES })
+    rb_captions.add_actor(new Label({ text: _('Temperature:') }));
+    rb_captions.add_actor(new Label({ text: _('Humidity:') }));
+    rb_captions.add_actor(new Label({ text: _('Pressure:') }));
+    rb_captions.add_actor(new Label({ text: _('Wind:') }));
     rb_captions.add_actor(this._currentWeatherApiUniqueCap);
     rb_values.add_actor(this._currentWeatherTemperature);
     rb_values.add_actor(this._currentWeatherHumidity);
@@ -920,16 +1064,16 @@ class WeatherApplet extends Applet.TextIconApplet {
     rb_values.add_actor(this._currentWeatherWind);
     rb_values.add_actor(this._currentWeatherApiUnique);
 
-    let rightColumn = new St.BoxLayout({ style_class: STYLE_DATABOX });
+    let rightColumn = new BoxLayout({ style_class: STYLE_DATABOX });
     rightColumn.add_actor(rb_captions);
     rightColumn.add_actor(rb_values);
 
     // Current Weather Main Boxes
-    let weatherBox = new St.BoxLayout();
+    let weatherBox = new BoxLayout();
     weatherBox.add_actor(middleColumn)
     weatherBox.add_actor(rightColumn)
 
-    let box = new St.BoxLayout({ style_class: STYLE_ICONBOX })
+    let box = new BoxLayout({ style_class: STYLE_ICONBOX })
     box.add_actor(this._currentWeatherIcon)
     box.add_actor(weatherBox)
     this._currentWeather.set_child(box)
@@ -939,7 +1083,7 @@ class WeatherApplet extends Applet.TextIconApplet {
     this.destroyFutureWeather();
 
     this._forecast = []
-    this._forecastBox = new St.BoxLayout({
+    this._forecastBox = new BoxLayout({
       vertical: this._verticalOrientation,
       style_class: STYLE_FORECAST_CONTAINER
     })
@@ -947,29 +1091,29 @@ class WeatherApplet extends Applet.TextIconApplet {
 
     for (let i = 0; i < this._forecastDays; i++) {
       let forecastWeather: ForecastUI = {
-        Icon: new St.Icon,
-        Day: new St.Label,
-        Summary: new St.Label,
-        Temperature: new St.Label,
+        Icon: new Icon,
+        Day: new Label,
+        Summary: new Label,
+        Temperature: new Label,
       }
 
-      forecastWeather.Icon = new St.Icon({
+      forecastWeather.Icon = new Icon({
         icon_type: this._icon_type,
         icon_size: 48,
         icon_name: APPLET_ICON,
         style_class: STYLE_FORECAST_ICON
       })
 
-      forecastWeather.Day = new St.Label({ style_class: STYLE_FORECAST_DAY })
-      forecastWeather.Summary = new St.Label({ style_class: STYLE_FORECAST_SUMMARY })
-      forecastWeather.Temperature = new St.Label({ style_class: STYLE_FORECAST_TEMPERATURE })
+      forecastWeather.Day = new Label({ style_class: STYLE_FORECAST_DAY })
+      forecastWeather.Summary = new Label({ style_class: STYLE_FORECAST_SUMMARY })
+      forecastWeather.Temperature = new Label({ style_class: STYLE_FORECAST_TEMPERATURE })
 
-      let dataBox = new St.BoxLayout({ vertical: true, style_class: STYLE_FORECAST_DATABOX })
+      let dataBox = new BoxLayout({ vertical: true, style_class: STYLE_FORECAST_DATABOX })
       dataBox.add_actor(forecastWeather.Day)
       dataBox.add_actor(forecastWeather.Summary)
       dataBox.add_actor(forecastWeather.Temperature)
 
-      let forecastBox = new St.BoxLayout({
+      let forecastBox = new BoxLayout({
         style_class: STYLE_FORECAST_BOX
       })
       forecastBox.add_actor(forecastWeather.Icon)
@@ -992,6 +1136,10 @@ class WeatherApplet extends Applet.TextIconApplet {
     }
     return false;
   };
+
+  public SetCustomIcon(iconName: CustomIcons): void {
+    this.set_applet_icon_symbolic_name(iconName + "-symbolic");
+  }
 
   private unitToUnicode(unit: WeatherUnits): string {
     return unit == "fahrenheit" ? '\u2109' : '\u2103'
@@ -1025,6 +1173,7 @@ class WeatherApplet extends Applet.TextIconApplet {
     "no reponse body": _("Service Error"),
     "no respone data": _("Service Error"),
     "unusal payload": _("Service Error"),
+    "import error": _("Missing Packages")
   }
 
   public HandleError(error: AppletError): void {
@@ -1051,7 +1200,7 @@ class WeatherApplet extends Applet.TextIconApplet {
       return;
     }
 
-    let nextRefresh = (this.errorCount > 0) ? this.errorCount++*this.LOOP_INTERVAL : this.LOOP_INTERVAL;
+    let nextRefresh = (this.errorCount > 0) ? this.errorCount++ *this.LOOP_INTERVAL : this.LOOP_INTERVAL;
     this.log.Error("Retrying in the next " + nextRefresh.toString() + " seconds..." );
   }
 
@@ -1079,16 +1228,26 @@ class WeatherApplet extends Applet.TextIconApplet {
 }
 
 class Log {
-  ID: number;
-  debug: boolean = false;
+  private ID: number;
+  private debug: boolean = false;
+  private appletDir: string;
 
   constructor(_instanceId: number) {
     this.ID = _instanceId;
-    this.debug = DEBUG;
+    this.appletDir = imports.ui.appletManager.appletMeta[UUID].path;
+    this.debug = this.DEBUG();
   }
 
+  private DEBUG(): boolean {
+    let path = this.appletDir + "/../DEBUG";
+    let _debug = imports.gi.Gio.file_new_for_path(path);
+    let result = _debug.query_exists(null);
+    if (result) this.Print("DEBUG file found in " + path + ", enabling Debug mode");
+    return result;
+  };
+
   Print(message: string): void {
-    let msg = UUID + "#" + this.ID + ": " + message.toString();
+    let msg = "[" + UUID + "#" + this.ID + "]: " + message.toString();
     let debug = "";
     if (this.debug) {
       debug = this.GetErrorLine();
@@ -1099,7 +1258,7 @@ class Log {
   }
 
   Error(error: string): void {
-    global.logError(UUID + "#" + this.ID + ": " + error.toString(), '\n', "On Line:", this.GetErrorLine());
+    global.logError("[" + UUID + "#" + this.ID + "]: " + error.toString(), '\n', "On Line:", this.GetErrorLine());
   };
 
   Debug(message: string): void {
@@ -1108,7 +1267,7 @@ class Log {
     }
   }
 
-  GetErrorLine(): string {
+  private GetErrorLine(): string {
     // Couldnt be more ugly, but it returns the file and line number
     let arr = (new Error).stack.split("\n").slice(-2)[0].split('/').slice(-1)[0];
     return arr;
@@ -1155,7 +1314,7 @@ const EN_DASH = '\u2013'
 //
 //----------------------------------------------------------------------
 
-function main(metadata: any, orientation: string, panelHeight: number, instanceId: number) {
+function main(metadata: any, orientation: imports.gi.St.Side, panelHeight: number, instanceId: number) {
   //log("v" + metadata.version + ", cinnamon " + Config.PACKAGE_VERSION)
   return new WeatherApplet(metadata, orientation, panelHeight, instanceId);
 }
@@ -1190,6 +1349,7 @@ interface Forecast {
     main: string,
     description: string,
     icon: string,
+    customIcon: CustomIcons
   },
   clouds?: number,
   wind?: {
@@ -1238,6 +1398,7 @@ interface Weather {
     description: string, // Longer description, if not available put the same whats in main
     /** GTK icon name */
     icon: string,
+    customIcon: CustomIcons
   },
   extra_field?: {
     name: string,
@@ -1277,14 +1438,7 @@ interface WeatherData {
   pressure: number;
   /** In percent */
   humidity: number;
-  condition: {
-    /** Short description */
-    main: string,
-    /** Long Description */
-    description: string,
-    /** GTK icon name */
-    icon: string
-  }
+  condition: Condition
   forecasts: ForecastData[];
   extra_field?: {
     name: string,
@@ -1303,14 +1457,7 @@ interface ForecastData {
     temp_min: number,
     /** Kelvin */
     temp_max: number,
-  condition: {
-    /** Short description */
-    main: string,
-    /** Long Description */
-    description: string,
-    /** GTK icon name */
-    icon: string,
-  }
+  condition: Condition
 }
 
 interface LocationData {
@@ -1318,7 +1465,8 @@ interface LocationData {
   lon: number,
   city: string,
   country: string,
-  timeZone: string
+  timeZone: string,
+  mobile: boolean
 }
 
 /** 
@@ -1340,6 +1488,22 @@ interface ForecastUI {
 type SettingKeys = {
   [key: string]: string;
 }
+
+type CustomIcons = "Cloud-Drizzle" | "Cloud-Drizzle-Alt" | "Cloud-Drizzle-Moon-Alt" | "Cloud-Drizzle-Moon" | "Cloud-Drizzle-Sun-Alt" | 
+"Cloud-Drizzle-Sun" | "Cloud-Fog" | "Cloud-Fog-Alt" | "Cloud-Fog-Moon-Alt" | "Cloud-Fog-Moon" | "Cloud-Fog-Sun-Alt" |
+"Cloud-Fog-Sun" | "Cloud-Fog" | "Cloud-Hail-Alt" | "Cloud-Hail-Moon-Alt" | "Cloud-Hail-Moon" | 
+"Cloud-Hail-Sun-Alt" | "Cloud-Hail-Sun" | "Cloud-Hail" | "Cloud-Lightning-Moon" | "Cloud-Lightning-Sun" | 
+"Cloud-Lightning" | "Cloud-Moon" | "Cloud-Rain-Alt" | "Cloud-Rain-Moon-Alt" | "Cloud-Rain-Moon" | 
+"Cloud-Rain" | "Cloud-Rain-Sun" | "Cloud-Rain-Sun-Alt" | "Cloud-Refresh" | "Cloud-Snow-Alt" | "Cloud-Snow-Moon-Alt" | "Cloud-Snow-Moon" | 
+"Cloud-Snow-Sun-Alt" | "Cloud-Snow-Sun" | "Cloud-Snow" | "Cloud-Sun" | "Cloud-Upload" | "Cloud-Wind-Moon" | 
+"Cloud-Wind-Sun" | "Cloud-Wind" | "Cloud" | "Compass-East" | "Compass-North" | "Compass-South" | "Compass-West" | 
+"Compass" | "Degrees-Celcius" | "Degrees-Fahrenheit" | "Moon" | "Shades" | "Snowflake" | 
+"Sun"  | "Thermometer-25" | "Thermometer-50" | "Wind" |
+"Thermometer-75" | "Thermometer-100" | "Thermometer-Zero" | "Thermometer" | "Tornado" | "Umbrella";
+
+type CustomSunOptions = "Sun-Low" | "Sun-Lower"| "Sunrise" | "Sunset";
+type CustomMoonOptions = "Moon-First-Quarter" | "Moon-Full" | "Moon-Last-Quarter" | "Moon-New" | 
+"Moon-Waning-Crescent" | "Moon-Waning-Gibbous" | "Moon-Waxing-Crescent" | "Moon-Waxing-Gibbous";
 
 /**
  * A WeatherProvider must implement this interface.
@@ -1369,16 +1533,32 @@ interface HttpError {
   reason_phrase: string;
 }
 
+type RefreshState = "success" | "failure" | "error";
+
 /** hard will not force a refresh and cleans the applet ui.
  * 
  *  soft will show a subtle hint that the refresh failed (NOT IMPLEMENTED)
  */
 type ErrorSeverity = "hard" |  "soft";
-type ApiService = "ipapi" | "darksky" | "openweathermap";
+type ApiService = "ipapi" | "darksky" | "openweathermap" | "met-norway" | "weatherbit";
 type ErrorDetail = "no key" | "bad key" | "no location" | "bad location format" |
   "location not found" | "no network response" | "no api response" | 
   "bad api response - non json" | "bad api response" | "no reponse body" | 
-  "no respone data" | "unusal payload" | "key blocked"| "unknown" | "bad status code";
+  "no respone data" | "unusal payload" | "key blocked"| "unknown" | "bad status code" | "import error";
 type NiceErrorDetail = {
   [key in ErrorDetail]: string;
+}
+
+interface Condition {
+  /** Short description */
+  main: string,
+  /** Long Description */
+  description: string,
+  /** GTK icon name */
+  icon: string,
+  customIcon: CustomIcons
+}
+
+type GUIDStore = {
+  [key: number]: string
 }

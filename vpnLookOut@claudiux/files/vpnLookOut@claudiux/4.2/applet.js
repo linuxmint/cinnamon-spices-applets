@@ -28,15 +28,21 @@ const Cinnamon = imports.gi.Cinnamon; // Needed to read/write into a file
 
 const UUID = "vpnLookOut@claudiux";
 const HOME_DIR = GLib.get_home_dir();
-const SCRIPTS_DIR = HOME_DIR + "/.local/share/cinnamon/applets/" + UUID + "/scripts";
-const ICONS_DIR = HOME_DIR + "/.local/share/cinnamon/applets/" + UUID + "/icons";
+const APPLET_DIR = HOME_DIR + "/.local/share/cinnamon/applets/" + UUID;
+const SCRIPTS_DIR = APPLET_DIR + "/scripts";
+const ICONS_DIR = APPLET_DIR + "/icons";
 
-// ++ Set DEBUG to true to display log messages in ~/.cinnamon/glass.log
-// ++ Set DEBUG to false in production.
-// ++ DEBUG is true only if the DEBUG file is present in this applet directory ($ touch DEBUG)
-var _debug = Gio.file_new_for_path(HOME_DIR + "/.local/share/cinnamon/applets/" + UUID + "/DEBUG");
-const DEBUG = _debug.query_exists(null);
+/**
+ * Returns true only when the DEBUG file is present in this applet directory ($ touch DEBUG).
+ * Useful to log messages in ~/.xsession-errors.
+ */
+function DEBUG() {
+  let _debug = Gio.file_new_for_path(APPLET_DIR + "/DEBUG");
+  return _debug.query_exists(null);
+};
 
+// ++ Always needed if you want localization/translation support
+Gettext.bindtextdomain(UUID, HOME_DIR + "/.local/share/locale");
 function _(str) {
     let customTrans = Gettext.dgettext(UUID, str);
     if (customTrans !== str && customTrans !== "")
@@ -47,12 +53,12 @@ function _(str) {
 // ++ Useful for logging in .xsession_errors
 /**
  * Usage of log and logError:
- * log("Any message here") to log the message only if DEBUG is set to true.
- * log("Any message here", true) to log the message even if DEBUG is set to false.
- * logError("Any error message") log the error message regardless of the DEBUG value.
+ * log("Any message here") to log the message only if DEBUG() returns true.
+ * log("Any message here", true) to log the message even if DEBUG() returns false.
+ * logError("Any error message") log the error message regardless of the DEBUG() return.
  */
 function log(message, alwaysLog=false) {
-  if (DEBUG || alwaysLog) global.log("\n[" + UUID + "]: " + message + "\n");
+  if (DEBUG() || alwaysLog) global.log("\n[" + UUID + "]: " + message + "\n");
 }
 
 function logError(error) {
@@ -189,7 +195,7 @@ class vpnLookOut extends Applet.TextIconApplet {
         super(orientation, panelHeight, instance_id);
         //try {
             // Fixes an issue in Cinnamon 3.6.x, setting right permissions to script files
-            GLib.spawn_command_line_async("bash -c 'cd "+ metadata.path + "/../scripts && chmod 755 *.sh *.py'");
+            GLib.spawn_command_line_async("bash -c 'cd "+ SCRIPTS_DIR + " && chmod 755 *.sh *.py'");
             GLib.spawn_command_line_async("bash -c 'cd "+ metadata.path + " && chmod 755 egSpawn.js'");
 
             // ++ Settings
@@ -339,17 +345,17 @@ class vpnLookOut extends Applet.TextIconApplet {
             this.appletName = metadata.name;
             this.appletPath = metadata.path;
             //this.cssfile = metadata.path + "/stylesheet.css"; // No longer required
-            this.changelog = metadata.path + "/../CHANGELOG.md";
-            this.helpfile = metadata.path + "/../help.html";
-            this.vpnscript = metadata.path + "/../scripts/vpn_status.sh";
-            this.vpnifacedetect = metadata.path + "/../scripts/vpn_iface_detect.sh";
+            this.changelog = APPLET_DIR + "/CHANGELOG.md";
+            this.helpfile = APPLET_DIR + "/help.html";
+            this.vpnscript = SCRIPTS_DIR + "/vpn_status.sh";
+            this.vpnifacedetect = SCRIPTS_DIR + "/vpn_iface_detect.sh";
 
             //this.use_symbolic_icons = true;
             this.set_icons();
             //this._applet_icon.style = "color: grey;"
 
-            this.stopClientScript = metadata.path + "/../scripts/stop_client.sh";
-            this.startClientScript = metadata.path + "/../scripts/start_client.sh";
+            this.stopClientScript = SCRIPTS_DIR + "/stop_client.sh";
+            this.startClientScript = SCRIPTS_DIR + "/start_client.sh";
 
             this.homedir = GLib.get_home_dir();
             this.localePath = this.homedir + '/.local/share/locale';
@@ -461,16 +467,7 @@ class vpnLookOut extends Applet.TextIconApplet {
                 } else {
                     this.vpnStatus = "waiting"
                 }
-                /*
-                this.vpnStatus = GLib.file_get_contents("/tmp/.vpn_status").toString();
-                if ( this.vpnStatus.toString().trim().length > 6 ) { // this.vpnStatus string starts by 'true,'
-                     this.vpnStatusOld = this.vpnStatus;
-                     this.vpnStatus = this.vpnStatus.toString().trim().substr(5); // removing 'true,'
-                } else {
-                     //this.vpnStatus =  this.vpnStatusOld;
-                     this.vpnStatus = "waiting";
-                }
-                */
+
                 if (this.vpnStatus != "on") {
                     GLib.spawn_command_line_async('bash -c \'/usr/bin/nmcli connection up "' + this.vpnName + '" > /dev/null \'')
                 }
@@ -646,7 +643,7 @@ class vpnLookOut extends Applet.TextIconApplet {
     } // End of get_terminal
 
     get_vpn_names() {
-        let [res, out, err, status] = GLib.spawn_command_line_sync('sh -c ' + this.appletPath + "/../scripts/vpn_names.sh");
+        let [res, out, err, status] = GLib.spawn_command_line_sync('sh -c ' + SCRIPTS_DIR + "/vpn_names.sh");
         let list_vpn_names=[];
         if (res && status == 0) {
             list_vpn_names=out.toString().split(';');
@@ -870,7 +867,9 @@ class vpnLookOut extends Applet.TextIconApplet {
             this._applet_context_menu.addMenuItem(this.contextmenuitemHead1);
 
             // Info: Connection Status
-            this.contextmenuitemInfo2 = new PopupMenu.PopupMenuItem("     " + _("Waiting for VPN interface information"), {
+            let message = this.is_deactivated ? _("vpnLookOut is deactivated") : _("Waiting for VPN interface information");
+
+            this.contextmenuitemInfo2 = new PopupMenu.PopupMenuItem("  " + message, {
                 reactive: false
             });
             this._applet_context_menu.addMenuItem(this.contextmenuitemInfo2);
@@ -927,6 +926,8 @@ class vpnLookOut extends Applet.TextIconApplet {
 
                 this._applet_context_menu.addMenuItem(this.help2);
 
+            } else {
+                this.contextmenuitemInfo2.label.text = "  " + _("Some dependencies are not installed!");
             }
         //} catch (e) {
         //  global.logError(e);
@@ -944,16 +945,19 @@ class vpnLookOut extends Applet.TextIconApplet {
             });
             this.menu.addMenuItem(this.menuitemHead1);
 
+            this.menuitemInfo2 = new PopupMenu.PopupMenuItem("  ", {
+                reactive: false
+            });
+            this.menu.addMenuItem(this.menuitemInfo2);
+
+
             if (this.dependenciesMet) {
                 // All dependencies are met, we can continue :
 
                 let message = this.is_deactivated ? _("vpnLookOut is deactivated") : _("Waiting for VPN interface information");
 
                 // Status Info
-                this.menuitemInfo2 = new PopupMenu.PopupMenuItem("     " + message, {
-                    reactive: false
-                });
-                this.menu.addMenuItem(this.menuitemInfo2);
+                this.menuitemInfo2.label.text = "  " + message ;
 
                 this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
@@ -1049,6 +1053,8 @@ class vpnLookOut extends Applet.TextIconApplet {
                     this.switch_activation();
                 });
                 this.menu.addMenuItem(this.deactivate_button);
+            } else {
+                this.menuitemInfo2.label.text = "  " + _("Some dependencies are not installed!");
             }
 
             this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
@@ -1092,7 +1098,7 @@ class vpnLookOut extends Applet.TextIconApplet {
     on_applet_clicked(event) {
         this.updateLoop();
 
-        if (this.vpnNames !== this.get_vpn_names()) {
+        if (this.vpnNames === undefined || this.vpnNames !== this.get_vpn_names()) {
             this.makeMenu()
         }
 
@@ -1103,7 +1109,7 @@ class vpnLookOut extends Applet.TextIconApplet {
     updateUI() {
         let command;
         var tip = "", kbdg = this.keybinding;
-        //try {
+        if (this.dependenciesMet) {
             // Get the VPN Status ('on', 'off' or 'waiting')
             this.vpnStatusOld = this.vpnStatus;
 
@@ -1282,14 +1288,12 @@ class vpnLookOut extends Applet.TextIconApplet {
                 this.set_applet_tooltip(_("VPN:") + " " + this.vpnMessage)
             }
             // set Menu Item Info
-            this.menuitemInfo2.label.text = "    " + _("VPN:") + " " + this.vpnMessage ;
-            this.contextmenuitemInfo2.label.text = "    " + _("VPN:") + " " + this.vpnMessage ;
+            this.menuitemInfo2.label.text = "  " + _("VPN:") + " " + this.vpnMessage ;
+            this.contextmenuitemInfo2.label.text = "  " + _("VPN:") + " " + this.vpnMessage ;
             // Get VPN Status via asyncronous script ready for next cycle
             GLib.spawn_command_line_async('sh ' + this.vpnscript + ' ' + this.vpnInterface);
 
-        //} catch (e) {
-        //  global.logError(e);
-        //}
+        }
     } // End of updateUI
 
     // This is the loop run at refreshInterval rate to call updateUI() to update the display in the applet and tooltip
@@ -1320,7 +1324,7 @@ class vpnLookOut extends Applet.TextIconApplet {
             // Before to reload this applet, stop the loop, remove all bindings and disconnect all signals to avoid errors.
             this.on_applet_removed_from_panel();
             // Reload this applet with dependencies installed
-            GLib.spawn_command_line_async('sh ' + this.appletPath + '/../scripts/reload_ext.sh')
+            GLib.spawn_command_line_async('sh ' + SCRIPTS_DIR + '/reload_ext.sh');
         }
 
         // Inhibits also after the applet has been removed from the panel
@@ -1354,7 +1358,6 @@ class vpnLookOut extends Applet.TextIconApplet {
             monitor.disconnect(Id)
         }
         this.monitors = [];
-        this.settings.finalize();
         if (this.loopId > 0) {
           Mainloop.source_remove(this.loopId);
         }
