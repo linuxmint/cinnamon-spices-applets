@@ -1,15 +1,15 @@
-# Copyright (C) 2019
+# Copyright (C) 2020
 # This file is distributed under the same license as the weather@mockturtl package.
 # DuMuT6p, 2014.
 # Peyu Yovev <spacy00001@gmail.com>, 2017
-# Angel Ivanov <angel.ivanov@outlook.com>, 2019
+# Angel Ivanov <angel.ivanov@outlook.com>, 2020
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: weather@mockturtl 2.3.5\n"
+"Project-Id-Version: weather@mockturtl 2.4.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-05 19:59+0000\n"
-"PO-Revision-Date: 2019-12-24 16:53+0200\n"
+"POT-Creation-Date: 2020-02-17 20:01+0000\n"
+"PO-Revision-Date: 2020-02-18 21:17+0200\n"
 "Last-Translator: Angel Ivanov <angel.ivanov@outlook.com>\n"
 "Language-Team: български <>\n"
 "Language: bg\n"
@@ -18,11 +18,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.0.6\n"
 
-#: applet.js:337 3.0/applet.js:231 3.8/applet.js:180
+#: applet.js:337 3.0/applet.js:250 3.8/applet.js:199
 msgid "..."
 msgstr "..."
 
-#: applet.js:338 3.0/applet.js:232 3.8/applet.js:181
+#: applet.js:338 3.0/applet.js:251 3.8/applet.js:200
 msgid "Click to open"
 msgstr "Натиснете за да се отвори"
 
@@ -38,104 +38,104 @@ msgstr "Не е указано местоположение"
 msgid "Cloudiness:"
 msgstr "Облачност:"
 
-#: applet.js:634 3.0/applet.js:646 3.8/applet.js:545
+#: applet.js:634 3.0/applet.js:782 3.8/applet.js:643
 msgid "Sunrise"
 msgstr "Изгрев"
 
-#: applet.js:635 3.0/applet.js:647 3.8/applet.js:546
+#: applet.js:635 3.0/applet.js:783 3.8/applet.js:644
 msgid "Sunset"
 msgstr "Залез"
 
-#: applet.js:708 3.0/applet.js:736 3.8/applet.js:635
+#: applet.js:708 3.0/applet.js:872 3.8/applet.js:733
 msgid "Loading current weather ..."
 msgstr "Зареждане на текущата прогноза ..."
 
-#: applet.js:709 3.0/applet.js:739 3.8/applet.js:638
+#: applet.js:709 3.0/applet.js:875 3.8/applet.js:736
 msgid "Loading future weather ..."
 msgstr "Зареждане на прогнозата за времето ..."
 
-#: applet.js:731 3.0/applet.js:768 3.8/applet.js:667
+#: applet.js:731 3.0/applet.js:904 3.8/applet.js:765
 msgid "Loading ..."
 msgstr "Зареждане ..."
 
-#: applet.js:737 3.0/applet.js:265 3.0/applet.js:758 3.8/applet.js:214
-#: 3.8/applet.js:657
+#: applet.js:737 3.0/applet.js:284 3.0/applet.js:894 3.8/applet.js:233
+#: 3.8/applet.js:755
 msgid "Refresh"
 msgstr "Обнови"
 
-#: applet.js:802 3.0/applet.js:790 3.8/applet.js:689
+#: applet.js:802 3.0/applet.js:926 3.8/applet.js:787
 msgid "Temperature:"
 msgstr "Температура:"
 
-#: applet.js:804 3.0/applet.js:791 3.8/applet.js:690
+#: applet.js:804 3.0/applet.js:927 3.8/applet.js:788
 msgid "Humidity:"
 msgstr "Влажност:"
 
-#: applet.js:806 3.0/applet.js:792 3.8/applet.js:691
+#: applet.js:806 3.0/applet.js:928 3.8/applet.js:789
 msgid "Pressure:"
 msgstr "Налягане:"
 
-#: applet.js:808 3.0/applet.js:793 3.8/applet.js:692
+#: applet.js:808 3.0/applet.js:929 3.8/applet.js:790
 msgid "Wind:"
 msgstr "Вятър:"
 
-#: applet.js:1026 3.0/utils.js:96 3.8/utils.js:96
+#: applet.js:1026 3.0/utils.js:146 3.8/utils.js:103
 msgid "Sunday"
 msgstr "Неделя"
 
-#: applet.js:1026 3.0/utils.js:96 3.8/utils.js:96
+#: applet.js:1026 3.0/utils.js:146 3.8/utils.js:103
 msgid "Monday"
 msgstr "Понеделник"
 
-#: applet.js:1026 3.0/utils.js:96 3.8/utils.js:96
+#: applet.js:1026 3.0/utils.js:146 3.8/utils.js:103
 msgid "Tuesday"
 msgstr "Вторник"
 
-#: applet.js:1026 3.0/utils.js:96 3.8/utils.js:96
+#: applet.js:1026 3.0/utils.js:146 3.8/utils.js:103
 msgid "Wednesday"
 msgstr "Сряда"
 
-#: applet.js:1026 3.0/utils.js:96 3.8/utils.js:96
+#: applet.js:1026 3.0/utils.js:146 3.8/utils.js:103
 msgid "Thursday"
 msgstr "Четвъртък"
 
-#: applet.js:1026 3.0/utils.js:96 3.8/utils.js:96
+#: applet.js:1026 3.0/utils.js:146 3.8/utils.js:103
 msgid "Friday"
 msgstr "Петък"
 
-#: applet.js:1026 3.0/utils.js:96 3.8/utils.js:96
+#: applet.js:1026 3.0/utils.js:146 3.8/utils.js:103
 msgid "Saturday"
 msgstr "Събота"
 
-#: applet.js:1030 3.0/utils.js:206 3.8/utils.js:202
+#: applet.js:1030 3.0/utils.js:256 3.8/utils.js:209
 msgid "N"
 msgstr "С"
 
-#: applet.js:1030 3.0/utils.js:206 3.8/utils.js:202
+#: applet.js:1030 3.0/utils.js:256 3.8/utils.js:209
 msgid "NE"
 msgstr "СИ"
 
-#: applet.js:1030 3.0/utils.js:206 3.8/utils.js:202
+#: applet.js:1030 3.0/utils.js:256 3.8/utils.js:209
 msgid "E"
 msgstr "И"
 
-#: applet.js:1030 3.0/utils.js:206 3.8/utils.js:202
+#: applet.js:1030 3.0/utils.js:256 3.8/utils.js:209
 msgid "SE"
 msgstr "ЮИ"
 
-#: applet.js:1030 3.0/utils.js:206 3.8/utils.js:202
+#: applet.js:1030 3.0/utils.js:256 3.8/utils.js:209
 msgid "S"
 msgstr "Ю"
 
-#: applet.js:1030 3.0/utils.js:206 3.8/utils.js:202
+#: applet.js:1030 3.0/utils.js:256 3.8/utils.js:209
 msgid "SW"
 msgstr "ЮЗ"
 
-#: applet.js:1030 3.0/utils.js:206 3.8/utils.js:202
+#: applet.js:1030 3.0/utils.js:256 3.8/utils.js:209
 msgid "W"
 msgstr "З"
 
-#: applet.js:1030 3.0/utils.js:206 3.8/utils.js:202
+#: applet.js:1030 3.0/utils.js:256 3.8/utils.js:209
 msgid "NW"
 msgstr "СЗ"
 
@@ -143,11 +143,11 @@ msgstr "СЗ"
 msgid "Service Unavailable"
 msgstr "Услугата е недостъпна"
 
-#: applet.js:1084 3.0/applet.js:192 3.0/applet.js:194 3.0/applet.js:196
-#: 3.0/applet.js:199 3.0/applet.js:202 3.0/applet.js:203 3.0/applet.js:204
-#: 3.0/applet.js:205 3.8/applet.js:142 3.8/applet.js:144 3.8/applet.js:146
-#: 3.8/applet.js:149 3.8/applet.js:152 3.8/applet.js:153 3.8/applet.js:154
-#: 3.8/applet.js:155
+#: applet.js:1084 3.0/applet.js:204 3.0/applet.js:206 3.0/applet.js:208
+#: 3.0/applet.js:211 3.0/applet.js:214 3.0/applet.js:215 3.0/applet.js:216
+#: 3.0/applet.js:217 3.8/applet.js:154 3.8/applet.js:156 3.8/applet.js:158
+#: 3.8/applet.js:161 3.8/applet.js:164 3.8/applet.js:165 3.8/applet.js:166
+#: 3.8/applet.js:167
 msgid "Service Error"
 msgstr "Грешка в услугата"
 
@@ -163,278 +163,208 @@ msgstr "Градът не е намерен"
 msgid "Key Temp. Blocked"
 msgstr "Ключът е временно блокиран"
 
-#: 3.0/openWeatherMap.js:149 3.8/openWeatherMap.js:91
+#: 3.0/met_norway.js:149 3.0/openWeatherMap.js:150 3.8/met_norway.js:96
+#: 3.8/openWeatherMap.js:92
 msgid "Cloudiness"
 msgstr "Облачност"
 
-#: 3.0/openWeatherMap.js:159 3.8/openWeatherMap.js:101
-msgid "Failed to Process Current Weather Info"
-msgstr "Неуспешна обработка на текущата информация за времето"
+#: 3.0/met_norway.js:314 3.0/met_norway.js:315 3.8/met_norway.js:261
+#: 3.8/met_norway.js:262
+msgid "Cloudy"
+msgstr "Облачно"
 
-#: 3.0/openWeatherMap.js:185 3.8/openWeatherMap.js:127
-msgid "Failed to Process Forecast Info"
-msgstr "Неуспешна обработка на прогнозата за времето"
-
-#: 3.0/openWeatherMap.js:201 3.8/openWeatherMap.js:143
-msgid "Please enter a Location in settings"
-msgstr "Моля, въведете местоположение в настройките"
-
-#: 3.0/openWeatherMap.js:228 3.8/openWeatherMap.js:170
-msgid "Please make sure Location is in the correct format in the Settings"
-msgstr "Моля, убедете се, че местоположението е въведено в правилния формат в "
-"Настройките"
-
-#: 3.0/openWeatherMap.js:232 3.8/openWeatherMap.js:174
-msgid "Make sure you entered the correct key in settings"
-msgstr "Убедете се, че сте въвели правилния ключ в Настройките"
-
-#: 3.0/openWeatherMap.js:236 3.0/openWeatherMap.js:256
-#: 3.8/openWeatherMap.js:178 3.8/openWeatherMap.js:198
-msgid "Location not found, make sure location is available or it is in the correct "
-"format"
-msgstr "Местоположението не е намерено, убедете се за съществуването му или, че е "
-"въведено в правилният формат"
-
-#: 3.0/openWeatherMap.js:240 3.8/openWeatherMap.js:182
-msgid "If this problem persists, please contact the Author of this applet"
-msgstr "Ако проблема продължава да съществува, моля свържете се с автора на този "
-"аплет"
-
-#: 3.0/openWeatherMap.js:244 3.8/openWeatherMap.js:186
-msgid "Unknown Error, please see the logs in Looking Glass"
-msgstr "Неизвестна грешка, моля проверете логовете в Looking Glass"
-
-#: 3.0/openWeatherMap.js:309 3.8/openWeatherMap.js:250
-msgid "Thunderstorm with light rain"
-msgstr "Гръмотевици с лек дъжд"
-
-#: 3.0/openWeatherMap.js:310 3.8/openWeatherMap.js:251
-msgid "Thunderstorm with rain"
-msgstr "Гръмотевици с дъжд"
-
-#: 3.0/openWeatherMap.js:311 3.8/openWeatherMap.js:252
-msgid "Thunderstorm with heavy rain"
-msgstr "Гръмотевици със силен дъжд"
-
-#: 3.0/openWeatherMap.js:312 3.8/openWeatherMap.js:253
-msgid "Light thunderstorm"
-msgstr "Слаби гръмотевици"
-
-#: 3.0/openWeatherMap.js:313 3.8/openWeatherMap.js:254
-msgid "Thunderstorm"
-msgstr "Гръмотевици"
-
-#: 3.0/openWeatherMap.js:314 3.8/openWeatherMap.js:255
-msgid "Heavy thunderstorm"
-msgstr "Силни гръмотевици"
-
-#: 3.0/openWeatherMap.js:315 3.8/openWeatherMap.js:256
-msgid "Ragged thunderstorm"
-msgstr "Частични гръмотевици"
-
-#: 3.0/openWeatherMap.js:316 3.8/openWeatherMap.js:257
-msgid "Thunderstorm with light drizzle"
-msgstr "Гръмотевици с леко ръмене"
-
-#: 3.0/openWeatherMap.js:317 3.8/openWeatherMap.js:258
-msgid "Thunderstorm with drizzle"
-msgstr "Гръмотевици с ръмене"
-
-#: 3.0/openWeatherMap.js:318 3.8/openWeatherMap.js:259
-msgid "Thunderstorm with heavy drizzle"
-msgstr "Гръмотевици със дъжд"
-
-#: 3.0/openWeatherMap.js:319 3.8/openWeatherMap.js:260
-msgid "Light intensity drizzle"
-msgstr "Леко ръмене"
-
-#: 3.0/openWeatherMap.js:320 3.8/openWeatherMap.js:261
+#: 3.0/met_norway.js:321 3.0/met_norway.js:322 3.0/met_norway.js:328
+#: 3.0/met_norway.js:329 3.0/met_norway.js:335 3.0/openWeatherMap.js:365
+#: 3.8/met_norway.js:268 3.8/met_norway.js:269 3.8/met_norway.js:275
+#: 3.8/met_norway.js:276 3.8/met_norway.js:282 3.8/openWeatherMap.js:306
 msgid "Drizzle"
 msgstr "Ръмене"
 
-#: 3.0/openWeatherMap.js:321 3.8/openWeatherMap.js:262
-msgid "Heavy intensity drizzle"
-msgstr "Силен дъжд"
+#: 3.0/met_norway.js:336 3.8/met_norway.js:283
+msgid "Drizzle with Thunderstorms"
+msgstr "Гръмотевици с ръмене"
 
-#: 3.0/openWeatherMap.js:322 3.8/openWeatherMap.js:263
-msgid "Light intensity drizzle rain"
-msgstr "Леко ръмене"
+#: 3.0/met_norway.js:342 3.8/met_norway.js:289
+msgid "Mostly Drizzle"
+msgstr "Ръмене"
 
-#: 3.0/openWeatherMap.js:323 3.8/openWeatherMap.js:264
-msgid "Drizzle rain"
-msgstr "Ситен дъжд"
+#: 3.0/met_norway.js:343 3.8/met_norway.js:290
+msgid "Mostly Drizzle with Thunderstorms"
+msgstr "Гръмотевици с ръмене"
 
-#: 3.0/openWeatherMap.js:324 3.8/openWeatherMap.js:265
-msgid "Heavy intensity drizzle rain"
-msgstr "Силен дъжд"
-
-#: 3.0/openWeatherMap.js:325 3.8/openWeatherMap.js:266
-msgid "Shower rain and drizzle"
-msgstr "Проливен дъжд"
-
-#: 3.0/openWeatherMap.js:326 3.8/openWeatherMap.js:267
-msgid "Heavy shower rain and drizzle"
-msgstr "Проливен дъжд"
-
-#: 3.0/openWeatherMap.js:327 3.8/openWeatherMap.js:268
-msgid "Shower drizzle"
-msgstr "Силен дъжд"
-
-#: 3.0/openWeatherMap.js:328 3.8/openWeatherMap.js:269
-msgid "Light rain"
-msgstr "Лек дъжд"
-
-#: 3.0/openWeatherMap.js:329 3.8/openWeatherMap.js:270
-msgid "Moderate rain"
-msgstr "Умерен дъжд"
-
-#: 3.0/openWeatherMap.js:330 3.8/openWeatherMap.js:271
-msgid "Heavy intensity rain"
-msgstr "Силен дъжд"
-
-#: 3.0/openWeatherMap.js:331 3.8/openWeatherMap.js:272
-msgid "Very heavy rain"
-msgstr "Много силен дъжд"
-
-#: 3.0/openWeatherMap.js:332 3.8/openWeatherMap.js:273
-msgid "Extreme rain"
-msgstr "Порой"
-
-#: 3.0/openWeatherMap.js:333 3.8/openWeatherMap.js:274
-msgid "Freezing rain"
-msgstr "Леден дъжд"
-
-#: 3.0/openWeatherMap.js:334 3.8/openWeatherMap.js:275
-msgid "Light intensity shower rain"
-msgstr "Слаб дъжд"
-
-#: 3.0/openWeatherMap.js:335 3.8/openWeatherMap.js:276
-msgid "Shower rain"
-msgstr "Проливен дъжд"
-
-#: 3.0/openWeatherMap.js:336 3.8/openWeatherMap.js:277
-msgid "Heavy intensity shower rain"
-msgstr "Проливен дъжд"
-
-#: 3.0/openWeatherMap.js:337 3.8/openWeatherMap.js:278
-msgid "Ragged shower rain"
-msgstr "Частичен дъжд"
-
-#: 3.0/openWeatherMap.js:338 3.8/openWeatherMap.js:279
-msgid "Light snow"
-msgstr "Слаб сняг"
-
-#: 3.0/openWeatherMap.js:339 3.8/openWeatherMap.js:280
-msgid "Snow"
-msgstr "Сняг"
-
-#: 3.0/openWeatherMap.js:340 3.8/openWeatherMap.js:281
-msgid "Heavy snow"
-msgstr "Силен сняг"
-
-#: 3.0/openWeatherMap.js:341 3.8/openWeatherMap.js:282
-msgid "Sleet"
-msgstr "Суграшица"
-
-#: 3.0/openWeatherMap.js:342 3.8/openWeatherMap.js:283
-msgid "Shower sleet"
-msgstr "Силна суграшица"
-
-#: 3.0/openWeatherMap.js:343 3.8/openWeatherMap.js:284
-msgid "Light rain and snow"
-msgstr "Слаб дъжд и сняг"
-
-#: 3.0/openWeatherMap.js:344 3.8/openWeatherMap.js:285
-msgid "Rain and snow"
-msgstr "Дъжд и сняг"
-
-#: 3.0/openWeatherMap.js:345 3.8/openWeatherMap.js:286
-msgid "Light shower snow"
-msgstr "Слаб сняг"
-
-#: 3.0/openWeatherMap.js:346 3.8/openWeatherMap.js:287
-msgid "Shower snow"
-msgstr "Силен сняг"
-
-#: 3.0/openWeatherMap.js:347 3.8/openWeatherMap.js:288
-msgid "Heavy shower snow"
-msgstr "Силен сняг"
-
-#: 3.0/openWeatherMap.js:348 3.8/openWeatherMap.js:289
-msgid "Mist"
-msgstr "Мъгла"
-
-#: 3.0/openWeatherMap.js:349 3.8/openWeatherMap.js:290
-msgid "Smoke"
-msgstr "Дим"
-
-#: 3.0/openWeatherMap.js:350 3.8/openWeatherMap.js:291
-msgid "Haze"
-msgstr "Лека мъгла"
-
-#: 3.0/openWeatherMap.js:351 3.8/openWeatherMap.js:292
-msgid "Sand, dust whirls"
-msgstr "Пясък, пепел и вятър"
-
-#: 3.0/openWeatherMap.js:352 3.8/openWeatherMap.js:293
+#: 3.0/met_norway.js:349 3.0/met_norway.js:350 3.0/openWeatherMap.js:397
+#: 3.8/met_norway.js:296 3.8/met_norway.js:297 3.8/openWeatherMap.js:338
 msgid "Fog"
 msgstr "Мъгла"
 
-#: 3.0/openWeatherMap.js:353 3.8/openWeatherMap.js:294
-msgid "Sand"
-msgstr "Пясък"
+#: 3.0/met_norway.js:356 3.0/met_norway.js:357 3.0/met_norway.js:363
+#: 3.0/met_norway.js:370 3.0/met_norway.js:377 3.8/met_norway.js:303
+#: 3.8/met_norway.js:304 3.8/met_norway.js:310 3.8/met_norway.js:317
+#: 3.8/met_norway.js:324
+msgid "Heavy Sleet"
+msgstr "Суграшица"
 
-#: 3.0/openWeatherMap.js:354 3.8/openWeatherMap.js:295
-msgid "Dust"
-msgstr "Пепел"
+#: 3.0/met_norway.js:364 3.8/met_norway.js:311
+msgid "Mostly Heavy Sleet"
+msgstr "Силна суграшица"
 
-#: 3.0/openWeatherMap.js:355 3.8/openWeatherMap.js:296
-msgid "Volcanic ash"
-msgstr "Вулканичен прах"
+#: 3.0/met_norway.js:371 3.8/met_norway.js:318
+msgid "Heavy Sleet with Thunderstorms"
+msgstr "Силна суграшица с гръмотевици"
 
-#: 3.0/openWeatherMap.js:356 3.8/openWeatherMap.js:297
-msgid "Squalls"
-msgstr "Шквалове"
+#: 3.0/met_norway.js:378 3.8/met_norway.js:325
+msgid "Mostly Heavy Sleet with Thunderstorms"
+msgstr "Силна суграшица с гръмотевици"
 
-#: 3.0/openWeatherMap.js:357 3.8/openWeatherMap.js:298
-msgid "Tornado"
-msgstr "Торнадо"
+#: 3.0/met_norway.js:384 3.0/met_norway.js:385 3.0/met_norway.js:391
+#: 3.0/met_norway.js:398 3.0/met_norway.js:405 3.0/met_norway.js:406
+#: 3.8/met_norway.js:331 3.8/met_norway.js:332 3.8/met_norway.js:338
+#: 3.8/met_norway.js:345 3.8/met_norway.js:352 3.8/met_norway.js:353
+msgid "Heavy Snow"
+msgstr "Силен сняг"
 
-#: 3.0/openWeatherMap.js:358 3.8/openWeatherMap.js:299
-msgid "Clear"
-msgstr "Ясно"
+#: 3.0/met_norway.js:392 3.0/met_norway.js:399 3.8/met_norway.js:339
+#: 3.8/met_norway.js:346
+msgid "Heavy Snow with Thunderstorms"
+msgstr "Силен сняг с гръмотевици"
 
-#: 3.0/openWeatherMap.js:359 3.8/openWeatherMap.js:300
-msgid "Clear sky"
-msgstr "Ясно небе"
-
-#: 3.0/openWeatherMap.js:360 3.8/openWeatherMap.js:301
-msgid "Sky is clear"
-msgstr "Ясно небе"
-
-#: 3.0/openWeatherMap.js:361 3.8/openWeatherMap.js:302
-msgid "Few clouds"
+#: 3.0/met_norway.js:412 3.0/met_norway.js:413 3.8/met_norway.js:359
+#: 3.8/met_norway.js:360
+msgid "Few Clouds"
 msgstr "Лека облачност"
 
-#: 3.0/openWeatherMap.js:362 3.8/openWeatherMap.js:303
-msgid "Scattered clouds"
-msgstr "Разсеяна облачност"
+#: 3.0/met_norway.js:419 3.0/met_norway.js:420 3.0/met_norway.js:426
+#: 3.0/met_norway.js:427 3.0/met_norway.js:433 3.0/met_norway.js:440
+#: 3.8/met_norway.js:366 3.8/met_norway.js:367 3.8/met_norway.js:373
+#: 3.8/met_norway.js:374 3.8/met_norway.js:380 3.8/met_norway.js:387
+msgid "Light Rain"
+msgstr "Лек дъжд"
 
-#: 3.0/openWeatherMap.js:363 3.8/openWeatherMap.js:304
-msgid "Broken clouds"
+#: 3.0/met_norway.js:434 3.8/met_norway.js:381
+msgid "Light Rain with Thunderstorms"
+msgstr "Гръмотевици с лек дъжд"
+
+#: 3.0/met_norway.js:441 3.8/met_norway.js:388
+msgid "Mostly Ligh Rain with Thunderstorms"
+msgstr "Гръмотевици с лек дъжд"
+
+#: 3.0/met_norway.js:447 3.0/met_norway.js:448 3.0/met_norway.js:454
+#: 3.0/met_norway.js:461 3.0/met_norway.js:468 3.8/met_norway.js:394
+#: 3.8/met_norway.js:395 3.8/met_norway.js:401 3.8/met_norway.js:408
+#: 3.8/met_norway.js:415
+msgid "Light Sleet"
+msgstr "Суграшица"
+
+#: 3.0/met_norway.js:455 3.8/met_norway.js:402
+msgid "Mostly Light Sleet"
+msgstr "Суграшица"
+
+#: 3.0/met_norway.js:462 3.8/met_norway.js:409
+msgid "Light Sleet with Thunderstorms"
+msgstr "Лека суграшица с гръмотевици"
+
+#: 3.0/met_norway.js:469 3.8/met_norway.js:416
+msgid "Mostly Light Sleet with Thunderstorms"
+msgstr "Лека суграшица с гръмотевици"
+
+#: 3.0/met_norway.js:475 3.0/met_norway.js:476 3.0/met_norway.js:482
+#: 3.0/met_norway.js:489 3.0/met_norway.js:496 3.8/met_norway.js:422
+#: 3.8/met_norway.js:423 3.8/met_norway.js:429 3.8/met_norway.js:436
+#: 3.8/met_norway.js:443
+msgid "Light Snow"
+msgstr "Слаб сняг"
+
+#: 3.0/met_norway.js:483 3.8/met_norway.js:430
+msgid "Mostly Light Snow"
+msgstr "Слаб сняг"
+
+#: 3.0/met_norway.js:490 3.8/met_norway.js:437
+msgid "Light Snow with Thunderstorms"
+msgstr "Слаб сняг с гръмотевици"
+
+#: 3.0/met_norway.js:497 3.8/met_norway.js:444
+msgid "Mostly Light Snow with Thunderstorms"
+msgstr "Слаб сняг с гръмотевици"
+
+#: 3.0/met_norway.js:503 3.0/met_norway.js:504 3.8/met_norway.js:450
+#: 3.8/met_norway.js:451
+msgid "Partly Cloudy"
 msgstr "Разкъсана облачност"
 
-#: 3.0/openWeatherMap.js:364 3.8/openWeatherMap.js:305
-msgid "Overcast clouds"
-msgstr "Облачно"
+#: 3.0/met_norway.js:510 3.0/met_norway.js:511 3.0/met_norway.js:524
+#: 3.0/met_norway.js:531 3.8/met_norway.js:457 3.8/met_norway.js:458
+#: 3.8/met_norway.js:471 3.8/met_norway.js:478
+msgid "Rain"
+msgstr "Дъжд"
+
+#: 3.0/met_norway.js:517 3.0/met_norway.js:518 3.8/met_norway.js:464
+#: 3.8/met_norway.js:465
+msgid "Mostly Rainy"
+msgstr "Дъжд"
+
+#: 3.0/met_norway.js:525 3.8/met_norway.js:472
+msgid "Rain with Thunderstorms"
+msgstr "Дъжд с гръмотевици"
+
+#: 3.0/met_norway.js:532 3.8/met_norway.js:479
+msgid "Mostly Rainy with Thunderstorms"
+msgstr "Дъжд с гръмотевици"
+
+#: 3.0/met_norway.js:538 3.0/met_norway.js:539 3.0/met_norway.js:545
+#: 3.0/met_norway.js:552 3.0/met_norway.js:559 3.0/openWeatherMap.js:386
+#: 3.8/met_norway.js:485 3.8/met_norway.js:486 3.8/met_norway.js:492
+#: 3.8/met_norway.js:499 3.8/met_norway.js:506 3.8/openWeatherMap.js:327
+msgid "Sleet"
+msgstr "Суграшица"
+
+#: 3.0/met_norway.js:546 3.8/met_norway.js:493
+msgid "Mostly Sleet"
+msgstr "Суграшица"
+
+#: 3.0/met_norway.js:553 3.8/met_norway.js:500
+msgid "Mostly Sleet with Thunderstorms"
+msgstr "Суграшица с гръмотевици"
+
+#: 3.0/met_norway.js:560 3.8/met_norway.js:507
+msgid "Sleet with Thunderstorms"
+msgstr "Суграшица с гръмотевици"
+
+#: 3.0/met_norway.js:566 3.0/met_norway.js:587 3.0/openWeatherMap.js:384
+#: 3.8/met_norway.js:513 3.8/met_norway.js:534 3.8/openWeatherMap.js:325
+msgid "Snow"
+msgstr "Сняг"
+
+#: 3.0/met_norway.js:567 3.8/met_norway.js:514
+msgid "Snowy"
+msgstr "Сняг"
+
+#: 3.0/met_norway.js:573 3.0/met_norway.js:574 3.0/met_norway.js:580
+#: 3.8/met_norway.js:520 3.8/met_norway.js:521 3.8/met_norway.js:527
+msgid "Mostly Snowy"
+msgstr "Сняг"
+
+#: 3.0/met_norway.js:581 3.8/met_norway.js:528
+msgid "Mostly Snowy with Thunderstorms"
+msgstr "Сняг с гръмотевици"
+
+#: 3.0/met_norway.js:588 3.8/met_norway.js:535
+msgid "Snowy with Thunderstorms"
+msgstr "Сняг с гръмотевици"
+
+#: 3.0/met_norway.js:594 3.0/met_norway.js:595 3.0/openWeatherMap.js:403
+#: 3.8/met_norway.js:541 3.8/met_norway.js:542 3.8/openWeatherMap.js:344
+msgid "Clear"
+msgstr "Ясно"
 
 #: 3.0/ipApi.js:88 3.8/ipApi.js:42
 msgid "Could not obtain location"
 msgstr "Неуспешно получаване на местоположението"
 
 #: 3.0/ipApi.js:94 3.8/ipApi.js:48
-msgid "Location Service responded with errors, please see the logs in Looking Glass"
-msgstr "Услугата за получаване на местоположението отговори с грешка, моля проверете "
+msgid ""
+"Location Service responded with errors, please see the logs in Looking Glass"
+msgstr ""
+"Услугата за получаване на местоположението отговори с грешка, моля проверете "
 "логовете в Looking Glass"
 
 #: 3.0/darkSky.js:65 3.8/darkSky.js:29
@@ -449,85 +379,371 @@ msgstr "до"
 msgid "in"
 msgstr "в"
 
-#: 3.0/darkSky.js:135 3.8/darkSky.js:87
+#: 3.0/darkSky.js:138 3.0/weatherbit.js:149 3.8/darkSky.js:90
+#: 3.8/weatherbit.js:93
 msgid "Feels Like"
 msgstr "Усеща се като"
 
-#: 3.0/darkSky.js:160 3.8/darkSky.js:112
+#: 3.0/darkSky.js:164 3.8/darkSky.js:116
 msgid "Failed to Process Weather Info"
 msgstr "Неуспешна обработка на информацията за времето"
 
-#: 3.0/darkSky.js:176 3.8/darkSky.js:128
-msgid "Please enter API key in settings,\n"
+#: 3.0/darkSky.js:180 3.8/darkSky.js:132
+msgid ""
+"Please enter API key in settings,\n"
 "or get one first on https://darksky.net/dev/register"
-msgstr "Моля въведете API ключ в Настройките\n"
+msgstr ""
+"Моля въведете API ключ в Настройките\n"
 "или първо получете такъв от https://darksky.net/dev/register"
 
-#: 3.0/darkSky.js:214 3.8/darkSky.js:166
-msgid "Please Make sure you\n"
+#: 3.0/darkSky.js:218 3.0/weatherbit.js:230 3.8/darkSky.js:170
+#: 3.8/weatherbit.js:174
+msgid ""
+"Please Make sure you\n"
 "entered the API key correctly and your account is not locked"
-msgstr "Моля убедете се, че сте\n"
+msgstr ""
+"Моля убедете се, че сте\n"
 "въвели правилния API ключ"
 
-#: 3.0/applet.js:191 3.8/applet.js:141
+#: 3.0/openWeatherMap.js:160 3.0/weatherbit.js:159 3.8/openWeatherMap.js:102
+#: 3.8/weatherbit.js:103
+msgid "Failed to Process Current Weather Info"
+msgstr "Неуспешна обработка на текущата информация за времето"
+
+#: 3.0/openWeatherMap.js:187 3.0/weatherbit.js:186 3.8/openWeatherMap.js:129
+#: 3.8/weatherbit.js:130
+msgid "Failed to Process Forecast Info"
+msgstr "Неуспешна обработка на прогнозата за времето"
+
+#: 3.0/openWeatherMap.js:203 3.8/openWeatherMap.js:145
+msgid "Please enter a Location in settings"
+msgstr "Моля, въведете местоположение в настройките"
+
+#: 3.0/openWeatherMap.js:230 3.8/openWeatherMap.js:172
+msgid "Please make sure Location is in the correct format in the Settings"
+msgstr ""
+"Моля, убедете се, че местоположението е въведено в правилния формат в "
+"Настройките"
+
+#: 3.0/openWeatherMap.js:234 3.8/openWeatherMap.js:176
+msgid "Make sure you entered the correct key in settings"
+msgstr "Убедете се, че сте въвели правилния ключ в Настройките"
+
+#: 3.0/openWeatherMap.js:238 3.0/openWeatherMap.js:258
+#: 3.8/openWeatherMap.js:180 3.8/openWeatherMap.js:200
+msgid ""
+"Location not found, make sure location is available or it is in the correct "
+"format"
+msgstr ""
+"Местоположението не е намерено, убедете се за съществуването му или, че е "
+"въведено в правилният формат"
+
+#: 3.0/openWeatherMap.js:242 3.8/openWeatherMap.js:184
+msgid "If this problem persists, please contact the Author of this applet"
+msgstr ""
+"Ако проблема продължава да съществува, моля свържете се с автора на този "
+"аплет"
+
+#: 3.0/openWeatherMap.js:246 3.8/openWeatherMap.js:188
+msgid "Unknown Error, please see the logs in Looking Glass"
+msgstr "Неизвестна грешка, моля проверете логовете в Looking Glass"
+
+#: 3.0/openWeatherMap.js:354 3.8/openWeatherMap.js:295
+msgid "Thunderstorm with light rain"
+msgstr "Гръмотевици с лек дъжд"
+
+#: 3.0/openWeatherMap.js:355 3.8/openWeatherMap.js:296
+msgid "Thunderstorm with rain"
+msgstr "Гръмотевици с дъжд"
+
+#: 3.0/openWeatherMap.js:356 3.8/openWeatherMap.js:297
+msgid "Thunderstorm with heavy rain"
+msgstr "Гръмотевици със силен дъжд"
+
+#: 3.0/openWeatherMap.js:357 3.8/openWeatherMap.js:298
+msgid "Light thunderstorm"
+msgstr "Слаби гръмотевици"
+
+#: 3.0/openWeatherMap.js:358 3.8/openWeatherMap.js:299
+msgid "Thunderstorm"
+msgstr "Гръмотевици"
+
+#: 3.0/openWeatherMap.js:359 3.8/openWeatherMap.js:300
+msgid "Heavy thunderstorm"
+msgstr "Силни гръмотевици"
+
+#: 3.0/openWeatherMap.js:360 3.8/openWeatherMap.js:301
+msgid "Ragged thunderstorm"
+msgstr "Частични гръмотевици"
+
+#: 3.0/openWeatherMap.js:361 3.8/openWeatherMap.js:302
+msgid "Thunderstorm with light drizzle"
+msgstr "Гръмотевици с леко ръмене"
+
+#: 3.0/openWeatherMap.js:362 3.8/openWeatherMap.js:303
+msgid "Thunderstorm with drizzle"
+msgstr "Гръмотевици с ръмене"
+
+#: 3.0/openWeatherMap.js:363 3.8/openWeatherMap.js:304
+msgid "Thunderstorm with heavy drizzle"
+msgstr "Гръмотевици със дъжд"
+
+#: 3.0/openWeatherMap.js:364 3.8/openWeatherMap.js:305
+msgid "Light intensity drizzle"
+msgstr "Леко ръмене"
+
+#: 3.0/openWeatherMap.js:366 3.8/openWeatherMap.js:307
+msgid "Heavy intensity drizzle"
+msgstr "Силен дъжд"
+
+#: 3.0/openWeatherMap.js:367 3.8/openWeatherMap.js:308
+msgid "Light intensity drizzle rain"
+msgstr "Леко ръмене"
+
+#: 3.0/openWeatherMap.js:368 3.8/openWeatherMap.js:309
+msgid "Drizzle rain"
+msgstr "Ситен дъжд"
+
+#: 3.0/openWeatherMap.js:369 3.8/openWeatherMap.js:310
+msgid "Heavy intensity drizzle rain"
+msgstr "Силен дъжд"
+
+#: 3.0/openWeatherMap.js:370 3.8/openWeatherMap.js:311
+msgid "Shower rain and drizzle"
+msgstr "Проливен дъжд"
+
+#: 3.0/openWeatherMap.js:371 3.8/openWeatherMap.js:312
+msgid "Heavy shower rain and drizzle"
+msgstr "Проливен дъжд"
+
+#: 3.0/openWeatherMap.js:372 3.8/openWeatherMap.js:313
+msgid "Shower drizzle"
+msgstr "Силен дъжд"
+
+#: 3.0/openWeatherMap.js:373 3.8/openWeatherMap.js:314
+msgid "Light rain"
+msgstr "Лек дъжд"
+
+#: 3.0/openWeatherMap.js:374 3.8/openWeatherMap.js:315
+msgid "Moderate rain"
+msgstr "Умерен дъжд"
+
+#: 3.0/openWeatherMap.js:375 3.8/openWeatherMap.js:316
+msgid "Heavy intensity rain"
+msgstr "Силен дъжд"
+
+#: 3.0/openWeatherMap.js:376 3.8/openWeatherMap.js:317
+msgid "Very heavy rain"
+msgstr "Много силен дъжд"
+
+#: 3.0/openWeatherMap.js:377 3.8/openWeatherMap.js:318
+msgid "Extreme rain"
+msgstr "Порой"
+
+#: 3.0/openWeatherMap.js:378 3.8/openWeatherMap.js:319
+msgid "Freezing rain"
+msgstr "Леден дъжд"
+
+#: 3.0/openWeatherMap.js:379 3.8/openWeatherMap.js:320
+msgid "Light intensity shower rain"
+msgstr "Слаб дъжд"
+
+#: 3.0/openWeatherMap.js:380 3.8/openWeatherMap.js:321
+msgid "Shower rain"
+msgstr "Проливен дъжд"
+
+#: 3.0/openWeatherMap.js:381 3.8/openWeatherMap.js:322
+msgid "Heavy intensity shower rain"
+msgstr "Проливен дъжд"
+
+#: 3.0/openWeatherMap.js:382 3.8/openWeatherMap.js:323
+msgid "Ragged shower rain"
+msgstr "Частичен дъжд"
+
+#: 3.0/openWeatherMap.js:383 3.8/openWeatherMap.js:324
+msgid "Light snow"
+msgstr "Слаб сняг"
+
+#: 3.0/openWeatherMap.js:385 3.8/openWeatherMap.js:326
+msgid "Heavy snow"
+msgstr "Силен сняг"
+
+#: 3.0/openWeatherMap.js:387 3.8/openWeatherMap.js:328
+msgid "Shower sleet"
+msgstr "Силна суграшица"
+
+#: 3.0/openWeatherMap.js:388 3.8/openWeatherMap.js:329
+msgid "Light rain and snow"
+msgstr "Слаб дъжд и сняг"
+
+#: 3.0/openWeatherMap.js:389 3.8/openWeatherMap.js:330
+msgid "Rain and snow"
+msgstr "Дъжд и сняг"
+
+#: 3.0/openWeatherMap.js:390 3.8/openWeatherMap.js:331
+msgid "Light shower snow"
+msgstr "Слаб сняг"
+
+#: 3.0/openWeatherMap.js:391 3.8/openWeatherMap.js:332
+msgid "Shower snow"
+msgstr "Силен сняг"
+
+#: 3.0/openWeatherMap.js:392 3.8/openWeatherMap.js:333
+msgid "Heavy shower snow"
+msgstr "Силен сняг"
+
+#: 3.0/openWeatherMap.js:393 3.8/openWeatherMap.js:334
+msgid "Mist"
+msgstr "Мъгла"
+
+#: 3.0/openWeatherMap.js:394 3.8/openWeatherMap.js:335
+msgid "Smoke"
+msgstr "Дим"
+
+#: 3.0/openWeatherMap.js:395 3.8/openWeatherMap.js:336
+msgid "Haze"
+msgstr "Лека мъгла"
+
+#: 3.0/openWeatherMap.js:396 3.8/openWeatherMap.js:337
+msgid "Sand, dust whirls"
+msgstr "Пясък, пепел и вятър"
+
+#: 3.0/openWeatherMap.js:398 3.8/openWeatherMap.js:339
+msgid "Sand"
+msgstr "Пясък"
+
+#: 3.0/openWeatherMap.js:399 3.8/openWeatherMap.js:340
+msgid "Dust"
+msgstr "Пепел"
+
+#: 3.0/openWeatherMap.js:400 3.8/openWeatherMap.js:341
+msgid "Volcanic ash"
+msgstr "Вулканичен прах"
+
+#: 3.0/openWeatherMap.js:401 3.8/openWeatherMap.js:342
+msgid "Squalls"
+msgstr "Шквалове"
+
+#: 3.0/openWeatherMap.js:402 3.8/openWeatherMap.js:343
+msgid "Tornado"
+msgstr "Торнадо"
+
+#: 3.0/openWeatherMap.js:404 3.8/openWeatherMap.js:345
+msgid "Clear sky"
+msgstr "Ясно небе"
+
+#: 3.0/openWeatherMap.js:405 3.8/openWeatherMap.js:346
+msgid "Sky is clear"
+msgstr "Ясно небе"
+
+#: 3.0/openWeatherMap.js:406 3.8/openWeatherMap.js:347
+msgid "Clouds"
+msgstr "Облачно"
+
+#: 3.0/openWeatherMap.js:407 3.8/openWeatherMap.js:348
+msgid "Few clouds"
+msgstr "Лека облачност"
+
+#: 3.0/openWeatherMap.js:408 3.8/openWeatherMap.js:349
+msgid "Scattered clouds"
+msgstr "Разсеяна облачност"
+
+#: 3.0/openWeatherMap.js:409 3.8/openWeatherMap.js:350
+msgid "Broken clouds"
+msgstr "Разкъсана облачност"
+
+#: 3.0/openWeatherMap.js:410 3.8/openWeatherMap.js:351
+msgid "Overcast clouds"
+msgstr "Облачно"
+
+#: 3.0/weatherbit.js:207 3.8/weatherbit.js:151
+msgid ""
+"Please enter API key in settings,\n"
+"or get one first on https://www.weatherbit.io/account/create"
+msgstr ""
+"Моля въведете API ключ в Настройките\n"
+"или първо получете такъв от https://www.weatherbit.io/account/create"
+
+#: 3.0/applet.js:203 3.8/applet.js:153
 msgid "Error"
 msgstr "Грешка"
 
-#: 3.0/applet.js:193 3.8/applet.js:143
+#: 3.0/applet.js:205 3.8/applet.js:155
 msgid "Incorrect API Key"
 msgstr "Неправилен API ключ"
 
-#: 3.0/applet.js:195 3.8/applet.js:145
+#: 3.0/applet.js:207 3.8/applet.js:157
 msgid "Incorrect Location Format"
 msgstr "Неправилен формат на местоположението"
 
-#: 3.0/applet.js:197 3.8/applet.js:147
+#: 3.0/applet.js:209 3.8/applet.js:159
 msgid "Key Blocked"
 msgstr "Блокиран ключ"
 
-#: 3.0/applet.js:198 3.8/applet.js:148
+#: 3.0/applet.js:210 3.8/applet.js:160
 msgid "Can't find location"
 msgstr "Местоположението не е открито"
 
-#: 3.0/applet.js:200 3.8/applet.js:150
+#: 3.0/applet.js:212 3.8/applet.js:162
 msgid "No Api Key"
 msgstr "Не е въведен API ключ"
 
-#: 3.0/applet.js:201 3.8/applet.js:151
+#: 3.0/applet.js:213 3.8/applet.js:163
 msgid "No Location"
 msgstr "Не е въведено местоположение"
 
-#: 3.0/applet.js:486 3.8/applet.js:397
-msgid "Unexpected Error While Refreshing Weather, please see log in Looking Glass"
-msgstr "Възникна неизвестна грешка при обновлението на прогнозата, \n"
+#: 3.0/applet.js:218 3.8/applet.js:168
+msgid "Missing Packages"
+msgstr "Липсващи пакети"
+
+#: 3.0/applet.js:226 3.8/applet.js:176
+msgid "Weather Applet"
+msgstr "Аплет за Времето"
+
+#: 3.0/applet.js:613 3.8/applet.js:486
+msgid ""
+"Unexpected Error While Refreshing Weather, please see log in Looking Glass"
+msgstr ""
+"Възникна неизвестна грешка при обновлението на прогнозата, \n"
 "моля вижте лога в Looking Glass"
 
-#: 3.0/applet.js:519 3.8/applet.js:421
+#: 3.0/applet.js:644 3.8/applet.js:508
 msgid "Make sure you entered a location or use Automatic location instead"
-msgstr "Убедете се, че сте въвели местоположение или използвайте\n"
+msgstr ""
+"Убедете се, че сте въвели местоположение или използвайте\n"
 "Автоматично местоположение"
 
-#: 3.0/applet.js:584 3.8/applet.js:483
+#: 3.0/applet.js:709 3.8/applet.js:570
 msgid "Updated"
 msgstr "Обновен"
 
-#: 3.0/applet.js:681 3.8/applet.js:580
+#: 3.0/applet.js:817 3.8/applet.js:678
 msgid "Today"
 msgstr "Днес"
 
-#: 3.0/applet.js:683 3.8/applet.js:582
+#: 3.0/applet.js:819 3.8/applet.js:680
 msgid "Tomorrow"
 msgstr "Утре"
 
-#: 3.0/applet.js:878 3.8/applet.js:777
-msgid "Could not update weather for a while...\n"
+#: 3.0/applet.js:1017 3.8/applet.js:878
+msgid ""
+"Could not update weather for a while...\n"
 "are you connected to the internet?"
-msgstr "Не успешно обновление на прогнозата...\n"
+msgstr ""
+"Не успешно обновление на прогнозата...\n"
 "свързани ли сте към интернет?"
 
-#: 3.0/applet.js:892 3.8/applet.js:791
+#: 3.0/applet.js:1031 3.8/applet.js:892
 msgid "Network Error, please check logs in Looking Glass"
 msgstr "Мрежова грешка, моля проверете логовете в Looking Glass"
+
+#. metadata.json->name
+msgid "Weather"
+msgstr "Времето"
+
+#. metadata.json->description
+msgid "View your local weather forecast"
+msgstr "Прегледайте прогнозата за времето във вашия град"
 
 #. settings-schema.json->head->description
 msgid "Settings for weather@mockturtl 1.8+"
@@ -540,8 +756,6 @@ msgid "Set the keybinding to call the menu"
 msgstr "Задаване на клавишна комбинация за показване на менюто"
 
 #. settings-schema.json->providerSettings->description
-#. 3.0->settings-schema.json->providerSettings->description
-#. 3.8->settings-schema.json->providerSettings->description
 msgid "Weather Provider Settings"
 msgstr "Настройки за доставчика на прогноза"
 
@@ -552,6 +766,8 @@ msgid "Data service"
 msgstr "Доставчик на прогнозата"
 
 #. settings-schema.json->dataService->options
+#. 3.0->settings-schema.json->dataService->options
+#. 3.8->settings-schema.json->dataService->options
 msgid "OpenWeatherMap"
 msgstr "OpenWeatherMap"
 
@@ -564,9 +780,11 @@ msgstr "Местоположение"
 #. settings-schema.json->location->tooltip
 #. 3.0->settings-schema.json->location->tooltip
 #. 3.8->settings-schema.json->location->tooltip
-msgid "Acceptable inputs: City,CountryCode or Zipcode,CountryCode or Latitude,"
+msgid ""
+"Acceptable inputs: City,CountryCode or Zipcode,CountryCode or Latitude,"
 "Longtitude"
-msgstr "Разрешен формат: Град, Код на страната или пощенски код, Код на страната или "
+msgstr ""
+"Разрешен формат: Град, Код на страната или пощенски код, Код на страната или "
 "Географска ширина, дължина"
 
 #. settings-schema.json->getLocation->description
@@ -580,8 +798,6 @@ msgid "Opens webpage guide"
 msgstr "Отваря уеб страницата с ръководството"
 
 #. settings-schema.json->personalSettings->description
-#. 3.0->settings-schema.json->personalSettings->description
-#. 3.8->settings-schema.json->personalSettings->description
 msgid "Personal Settings"
 msgstr "Лични настройки"
 
@@ -688,8 +904,6 @@ msgid "Pa"
 msgstr "Па"
 
 #. settings-schema.json->verticalOrientation->description
-#. 3.0->settings-schema.json->verticalOrientation->description
-#. 3.8->settings-schema.json->verticalOrientation->description
 msgid "Vertical orientation"
 msgstr "Вертикална ориентация"
 
@@ -722,8 +936,6 @@ msgid "Translate condition"
 msgstr "Превеждане на метеорологичните условия"
 
 #. settings-schema.json->useSymbolicIcons->description
-#. 3.0->settings-schema.json->useSymbolicIcons->description
-#. 3.8->settings-schema.json->useSymbolicIcons->description
 msgid "Symbolic icons"
 msgstr "Символични икони"
 
@@ -737,7 +949,8 @@ msgstr "Показване на текущата температура в па�
 #. 3.0->settings-schema.json->showCommentInPanel->description
 #. 3.8->settings-schema.json->showCommentInPanel->description
 msgid "Show the weather condition (e.g., \"Windy\", \"Clear\") in the panel"
-msgstr "Показване на метеорологичните условия (като \"Ветровито\", \"Ясно\") в панела"
+msgstr ""
+"Показване на метеорологичните условия (като \"Ветровито\", \"Ясно\") в панела"
 
 #. settings-schema.json->locationLabelOverride->description
 #. 3.0->settings-schema.json->locationLabelOverride->description
@@ -757,27 +970,73 @@ msgstr "минути"
 msgid "Update interval"
 msgstr "Интервал на обновление"
 
-#. metadata.json->name
-msgid "Weather"
-msgstr "Прогноза"
-
-#. metadata.json->description
-msgid "View your local weather forecast"
-msgstr "Вижте вашата местна прогноза"
-
 #. 3.0->settings-schema.json->head->description
 msgid "Settings for weather@mockturtl 3.0+"
 msgstr "Настройки за weather@mockturtl 3.0+"
 
-#. 3.0->settings-schema.json->dataService->options
-#. 3.8->settings-schema.json->dataService->options
-msgid "OpenWeatherMap (no key needed)"
-msgstr "OpenWeatherMap (не е необходим ключ)"
+#. 3.0->settings-schema.json->descriptions->description
+#. 3.8->settings-schema.json->descriptions->description
+msgid "Weather service information"
+msgstr "Информация за доставчика на прогноза"
+
+#. 3.0->settings-schema.json->openWM->description
+#. 3.8->settings-schema.json->openWM->description
+msgid "OpenWeatherMap - The default, works out of the box."
+msgstr ""
+"OpenWeatherMap - Доставчик по-подразбиране, работи без нужда от допълнителни "
+"настройки."
+
+#. 3.0->settings-schema.json->darkS->description
+#. 3.8->settings-schema.json->darkS->description
+msgid ""
+"DarkSky - Needs key, please click on 'Setup API Key and Location' for the "
+"steps how to obtain one."
+msgstr ""
+"DarkSky - Необходим е ключ, моля натиснитете на 'Настройка на API Ключ и "
+"Местоположение' за да разберете как да получите такъв."
+
+#. 3.0->settings-schema.json->METN->description
+msgid ""
+"MET Norway - Current weather is shown for the next hour, and the daily "
+"forecasts \n"
+"are generated from 6 hour forecasts, so it can look incorrect sometimes."
+msgstr ""
+"MET Norway - Текущата прогноза се показва за следващия час, а дневната "
+"прогноза\n"
+"се определя от прогнозата за 6 час, поради което може понякога да изглежда "
+"неправилна."
+
+#. 3.0->settings-schema.json->WB->description
+msgid ""
+"WeatherBit - Minimum of 10min refresh rate is recommended or you might "
+"exceed you daily quota.\n"
+"Needs a key, please click on 'Setup API Key and Location' for the steps how "
+"to obtain one."
+msgstr ""
+"WeatherBit - За да не натхвърлите дневния си лимит, се препоръчва периода на "
+"обновяване на прогнозата да е поне 10 мин.\n"
+"Необходим е ключ, моля натистнете на 'Настройка на API Ключ и "
+"Местоположение' за да разберете как да получите такъв."
+
+#. 3.0->settings-schema.json->providerSettings->description
+#. 3.8->settings-schema.json->providerSettings->description
+msgid "Weather Provider Options"
+msgstr "Настройки за доставчика на прогноза"
 
 #. 3.0->settings-schema.json->dataService->options
 #. 3.8->settings-schema.json->dataService->options
-msgid "DarkSky"
-msgstr "DarkSky"
+msgid "DarkSky (key needed)"
+msgstr "DarkSky (необходим ключ)"
+
+#. 3.0->settings-schema.json->dataService->options
+#. 3.8->settings-schema.json->dataService->options
+msgid "MET Norway"
+msgstr "MET Norway"
+
+#. 3.0->settings-schema.json->dataService->options
+#. 3.8->settings-schema.json->dataService->options
+msgid "Weatherbit (key needed)"
+msgstr "Weatherbit (необходим ключ)"
 
 #. 3.0->settings-schema.json->apiKey->description
 #. 3.8->settings-schema.json->apiKey->description
@@ -787,7 +1046,8 @@ msgstr "API Ключ"
 #. 3.0->settings-schema.json->apiKey->tooltip
 #. 3.8->settings-schema.json->apiKey->tooltip
 msgid "Copy this from your account of the used Data service and paste it here."
-msgstr "Копирайте ключа от вашата регистрация за Доставчик на прогнозата и го "
+msgstr ""
+"Копирайте ключа от вашата регистрация за Доставчик на прогнозата и го "
 "поставете тук."
 
 #. 3.0->settings-schema.json->manualLocation->description
@@ -805,6 +1065,41 @@ msgstr "Използвайте това ако вашето местополож
 msgid "Setup API Key and Location"
 msgstr "Настройка на API Ключ и Местоположение"
 
+#. 3.0->settings-schema.json->unitSettings->description
+#. 3.8->settings-schema.json->unitSettings->description
+msgid "Units"
+msgstr "Мерни Единици"
+
+#. 3.0->settings-schema.json->panelSettings->description
+#. 3.8->settings-schema.json->panelSettings->description
+msgid "Panel options"
+msgstr "Настройки на Панела"
+
+#. 3.0->settings-schema.json->showCommentInPanel->tooltip
+#. 3.8->settings-schema.json->showCommentInPanel->tooltip
+msgid "Only works with horizontal panels"
+msgstr "Работи само с хоризонтални панели"
+
+#. 3.0->settings-schema.json->useCustomAppletIcons->description
+#. 3.8->settings-schema.json->useCustomAppletIcons->description
+msgid "Use custom icons on the panel"
+msgstr "Използване на собственоръчно избрани икони в панела"
+
+#. 3.0->settings-schema.json->displaySettings->description
+#. 3.8->settings-schema.json->displaySettings->description
+msgid "Presentation"
+msgstr "Оформление"
+
+#. 3.0->settings-schema.json->verticalOrientation->description
+#. 3.8->settings-schema.json->verticalOrientation->description
+msgid "Show forecast vertically"
+msgstr "Вертикално показване на прогнозата"
+
+#. 3.0->settings-schema.json->conditionSettings->description
+#. 3.8->settings-schema.json->conditionSettings->description
+msgid "Weather Conditions"
+msgstr "Метеорологични условия"
+
 #. 3.0->settings-schema.json->translateCondition->description
 #. 3.8->settings-schema.json->translateCondition->description
 msgid "Translate conditions"
@@ -815,13 +1110,54 @@ msgstr "Превеждане на метеорологичните услови�
 msgid "Less verbose conditions"
 msgstr "По-малко подробни метеорологични условия"
 
+#. 3.0->settings-schema.json->shortConditions->tooltip
+#. 3.8->settings-schema.json->shortConditions->tooltip
+msgid "Currently only used with DarkSky "
+msgstr "В момента се използва само от DarkSky "
+
+#. 3.0->settings-schema.json->iconSettings->description
+#. 3.8->settings-schema.json->iconSettings->description
+msgid "Icons"
+msgstr "Икони"
+
+#. 3.0->settings-schema.json->useSymbolicIcons->description
+#. 3.8->settings-schema.json->useSymbolicIcons->description
+msgid "Use symbolic icons in the applet"
+msgstr "Използване на символични икони в аплета"
+
 #. 3.0->settings-schema.json->credits->description
 #. 3.8->settings-schema.json->credits->description
-msgid "powered by: OpenWeatherMap, DarkSky, ipapi. Big Thanks to OpenWeatherMap for "
+msgid ""
+"powered by: OpenWeatherMap, DarkSky, ipapi. Big Thanks to OpenWeatherMap for "
 "their support!"
-msgstr "Услугата е предоставена от: OpenWeatherMap, DarkSky, ipapi. Огромна "
+msgstr ""
+"Услугата е предоставена от: OpenWeatherMap, DarkSky, ipapi. Огромна "
 "благодарност на OpenWeatherMap за тяхната поддръжка!"
 
 #. 3.8->settings-schema.json->head->description
 msgid "Settings for weather@mockturtl 3.8+"
 msgstr "Настройки за weather@mockturtl 3.8+"
+
+#. 3.8->settings-schema.json->METN->description
+msgid ""
+"MET Norway - Current weather is shown for the next hour, and the daily "
+"forecasts are generated from 6 hour forecasts, so it can look incorrect "
+"sometimes."
+msgstr ""
+"MET Norway - Текущата прогноза се показва за следващия час, а дневната се "
+"определя от прогнозата за 6 последователни часа, поради което може понякога "
+"да изглежда неправилна."
+
+#. 3.8->settings-schema.json->WB->description
+msgid ""
+"WeatherBit - Minimum of 10min refresh rate is recommended or you might "
+"exceed you daily quota. Needs a key, please click on 'Setup API Key and "
+"Location' for the steps how to obtain one."
+msgstr ""
+"WeatherBit - За да не натхвърлите дневния си лимит, се препоръчва периода на "
+"обновяване на прогнозата да е поне 10 мин.\n"
+"Необходим е ключ, моля натистнете на 'Настройка на API Ключ и "
+"Местоположение' за да разберете как да получите такъв."
+
+#~ msgid "DarkSky"
+#~ msgstr "DarkSky"
