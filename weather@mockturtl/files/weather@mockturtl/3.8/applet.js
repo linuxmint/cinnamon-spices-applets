@@ -139,7 +139,6 @@ class WeatherApplet extends TextIconApplet {
         };
         this.forecasts = [];
         this.currentLocale = null;
-        this.systemLanguage = null;
         this._httpSession = new SessionAsync();
         this.appletDir = imports.ui.appletManager.appletMeta[UUID].path;
         this.locProvider = new ipApi.IpApi(this);
@@ -169,7 +168,6 @@ class WeatherApplet extends TextIconApplet {
         };
         this.instanceID = instanceId;
         this.currentLocale = this.constructJsLocale(get_language_names()[0]);
-        this.systemLanguage = this.currentLocale.split('-')[0];
         this.settings = new AppletSettings(this, UUID, instanceId);
         this.log = new Log(instanceId);
         this._httpSession.user_agent = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:37.0) Gecko/20100101 Firefox/37.0";
@@ -193,6 +191,7 @@ class WeatherApplet extends TextIconApplet {
         }
         catch (e) {
         }
+        this.log.Debug("System locale is " + this.currentLocale);
     }
     SetAppletOnPanel() {
         this.set_applet_icon_name(APPLET_ICON);
@@ -394,6 +393,10 @@ class WeatherApplet extends TextIconApplet {
     on_applet_clicked(event) {
         this.menu.toggle();
     }
+    on_applet_middle_clicked(event) {
+    }
+    on_panel_height_changed() {
+    }
     _onSeparatorAreaRepaint(area) {
         let cr = area.get_context();
         let themeNode = area.get_theme_node();
@@ -426,7 +429,7 @@ class WeatherApplet extends TextIconApplet {
         for (let i = 0; i < tmp.length; i++) {
             if (i != 0)
                 jsLocale += "-";
-            jsLocale += tmp[i];
+            jsLocale += tmp[i].toLowerCase();
         }
         return jsLocale;
     }
@@ -552,9 +555,9 @@ class WeatherApplet extends TextIconApplet {
                 }
             }
             if (this.weather.condition.description != null) {
-                descriptionCondition = this.weather.condition.description;
+                descriptionCondition = capitalizeFirstLetter(this.weather.condition.description);
                 if (this._translateCondition) {
-                    descriptionCondition = capitalizeFirstLetter(_(descriptionCondition));
+                    descriptionCondition = capitalizeFirstLetter(_(this.weather.condition.description));
                 }
             }
             let location = "";

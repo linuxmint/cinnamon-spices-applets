@@ -151,6 +151,13 @@ class DarkSky implements WeatherProvider {
         }
     };
 
+    private ConvertToDarkSkyLocale(systemLocale: string) {
+        if (systemLocale == "zh-tw") {
+          return systemLocale;
+        }
+        let lang = systemLocale.split("-")[0];
+        return lang;
+    }
 
     private ConstructQuery(): string {
         this.SetQueryUnit();
@@ -169,9 +176,9 @@ class DarkSky implements WeatherProvider {
         if (isCoordinate(location)) {
             query = this.query + key + "/" + location + 
             "?exclude=minutely,hourly,flags" + "&units=" + this.unit;
-            this.app.log.Debug("System language is " + this.app.systemLanguage.toString());
-            if (isLangSupported(this.app.systemLanguage, this.supportedLanguages) && this.app._translateCondition) {
-                query = query + "&lang=" + this.app.systemLanguage;
+            let locale = this.ConvertToDarkSkyLocale(this.app.currentLocale);
+            if (isLangSupported(locale, this.supportedLanguages) && this.app._translateCondition) {
+                query = query + "&lang=" + locale;
             }
             return query;
         }

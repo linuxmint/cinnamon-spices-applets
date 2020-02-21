@@ -246,7 +246,6 @@ class WeatherApplet extends TextIconApplet {
   public _useCustomAppletIcons: boolean;
 
   public currentLocale: string = null;
-  public systemLanguage: string = null;
   public log: Log;
 
   private keybinding: any;
@@ -287,7 +286,6 @@ class WeatherApplet extends TextIconApplet {
     super(orientation, panelHeight, instanceId);
     this.instanceID = instanceId;
     this.currentLocale = this.constructJsLocale(get_language_names()[0]);
-    this.systemLanguage = this.currentLocale.split('-')[0];
     this.settings = new AppletSettings(this, UUID, instanceId);
     this.log = new Log(instanceId);
     this._httpSession.user_agent = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:37.0) Gecko/20100101 Firefox/37.0"; // ipapi blocks non-browsers agents, imitating browser
@@ -319,6 +317,8 @@ class WeatherApplet extends TextIconApplet {
     } catch (e) {
       // vertical panel not supported
     }
+
+    this.log.Debug("System locale is " + this.currentLocale);
   }
 
   private SetAppletOnPanel(): void {
@@ -579,6 +579,14 @@ class WeatherApplet extends TextIconApplet {
     this.menu.toggle()
   }
 
+  private on_applet_middle_clicked(event: any) {
+    
+  }
+
+  private on_panel_height_changed() {
+    // Implemented byApplets
+  }
+
   private _onSeparatorAreaRepaint(area: any) {
     let cr = area.get_context()
     let themeNode = area.get_theme_node()
@@ -624,7 +632,7 @@ class WeatherApplet extends TextIconApplet {
     jsLocale = "";
     for (let i = 0; i < tmp.length; i++) {
       if (i != 0) jsLocale += "-";
-      jsLocale += tmp[i];
+      jsLocale += tmp[i].toLowerCase();
     }
     return jsLocale;
   }
@@ -767,9 +775,9 @@ class WeatherApplet extends TextIconApplet {
       }
       // Condition Description
       if (this.weather.condition.description != null) {
-        descriptionCondition = this.weather.condition.description;
+        descriptionCondition = capitalizeFirstLetter(this.weather.condition.description);
         if (this._translateCondition) {
-          descriptionCondition = capitalizeFirstLetter(_(descriptionCondition));
+          descriptionCondition = capitalizeFirstLetter(_(this.weather.condition.description));
         }
       }
 

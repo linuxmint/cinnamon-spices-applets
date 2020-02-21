@@ -172,6 +172,17 @@ class Weatherbit implements WeatherProvider {
         return date;
     }
 
+    private ConvertToWeatherBitLocale(systemLocale: string) {
+        if (systemLocale == "zh-tw") {
+          return systemLocale;
+        }
+        // Czech code is different
+        let lang = systemLocale.split("-")[0];
+        if (lang == "cs") {
+            return "cz";
+        }
+        return lang;
+    }
 
     private ConstructQuery(query: string): string {
         let key = this.app._apiKey.replace(" ", "");
@@ -188,9 +199,9 @@ class Weatherbit implements WeatherProvider {
         if (isCoordinate(location)) {
             let latLong = location.split(",");
             query = query + "key="+ key + "&lat=" + latLong[0] + "&lon=" + latLong[1] + "&units=S"
-            this.app.log.Debug("System language is " + this.app.systemLanguage.toString());
-            if (isLangSupported(this.app.systemLanguage, this.supportedLanguages) && this.app._translateCondition) {
-                query = query + "&lang=" + this.app.systemLanguage;
+            let lang = this.ConvertToWeatherBitLocale(this.app.currentLocale);
+            if (isLangSupported(lang, this.supportedLanguages) && this.app._translateCondition) {
+                query = query + "&lang=" + lang;
             }
             return query;
         }
