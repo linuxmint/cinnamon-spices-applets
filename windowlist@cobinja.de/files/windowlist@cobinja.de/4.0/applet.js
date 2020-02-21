@@ -1040,11 +1040,11 @@ class CobiAppButton {
       this._labelNumberBox.hide();
     }
     else {
-      let [width, height] = this._labelNumberBin.get_size();
+      this._labelNumberBox.show();
+      let [width, height] = this._labelNumber.get_size();
       let size = Math.max(width, height);
       this._labelNumberBin.width = size;
       this._labelNumberBin.height = size;
-      this._labelNumberBox.show();
     }
   }
   
