@@ -1,5 +1,9 @@
 Changelog
 
+2.5.2
+==
+- Fix: the number badge grew when showing after being hidden
+
 2.5.1
 ==
 - Fix: the last window on an applet instance left the number label on the icon
