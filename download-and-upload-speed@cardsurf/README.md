@@ -31,6 +31,3 @@ To specify a network interface:
 
 ## Source code
 Browse the source of the applet in the [original repository](https://gitlab.com/cardsurf/download-and-upload-speed).
-
-## Known Issues
-* Reset to the default settings is needed after updating from 1.6.4 to 1.6.5 in order for the "Show symbolic icons instead of colored ones" setting to work with the default icons.

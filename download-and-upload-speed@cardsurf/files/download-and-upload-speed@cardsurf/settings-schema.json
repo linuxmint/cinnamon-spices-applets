@@ -98,21 +98,20 @@
     },
     "gui_received_icon_filename" : {
         "type" : "filechooser",
-        "default" : "",
+        "default" : "~/.local/share/cinnamon/applets/download-and-upload-speed@cardsurf/icons/arrow_down_blue.svg",
         "description" : "Download icon",
         "tooltip": "An icon displayed next to download speed in the panel"
     },
     "gui_sent_icon_filename" : {
         "type" : "filechooser",
-        "default" : "",
+        "default" : "~/.local/share/cinnamon/applets/download-and-upload-speed@cardsurf/icons/arrow_up_red.svg",
         "description" : "Upload icon",
         "tooltip": "An icon displayed next to upload speed in the panel"
     },
     "gui_symbolic_icon" : {
         "type" : "checkbox",
-        "default" : true,
-        "description": "Show symbolic icons instead of colored ones",
-        "tooltip": "If you are using you own icons, you just need to add '-symbolic' at the end of your icons filename's like so: 'myicon-symbolic.svg'."
+        "default" : false,
+        "description": "Show a custom set of symbolic icons"
     },
     "hover_popup_text_css": {
         "type": "entry",
