@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: SpicesUpdate@claudiux v1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-11-16 18:40+0100\n"
-"PO-Revision-Date: 2019-12-29 17:08+0100\n"
+"PO-Revision-Date: 2020-02-22 16:47+0100\n"
 "Last-Translator: gogo <linux.hr@protonmail.com>\n"
 "Language-Team: \n"
 "Language: hr\n"
@@ -30,7 +30,6 @@ msgstr "Nadopune dodataka"
 
 #: 4.2/applet.js:120 4.2/applet.js:1755 4.2/applet.js:1761 3.8/applet.js:243
 #: 3.8/applet.js:1912 3.8/applet.js:1918 2.8/applet.js:1708 2.8/applet.js:1714
-#, fuzzy
 msgid "Middle-Click to Refresh"
 msgstr "Srednji klik za osvježavanje"
 
@@ -106,7 +105,6 @@ msgid "Help"
 msgstr "Pomoć"
 
 #: 4.2/applet.js:1746 3.8/applet.js:1903 2.8/applet.js:1699
-#, fuzzy
 msgid "Middle-Click to open useful Cinnamon Settings"
 msgstr "Srednji klik za otvaranje korisnih Cinnamon postavki"
 
@@ -267,74 +265,52 @@ msgid "When all your choices are made, click the Refresh button."
 msgstr "Kada ste odabrali sve mogućnosti, kliknite na Osvježi tipku."
 
 #: 3.8/applet.js:80
-#, fuzzy
-#| msgid "If you do not want an applet to be checked, set it to FALSE."
 msgid ""
 "If you do not want an applet to be checked, set its first switch to FALSE."
 msgstr "Ako ne želite provjeru nadopune apleta, postavite na FALSE."
 
 #: 3.8/applet.js:81
-#, fuzzy
-#| msgid "If you do not want a desklet to be checked, set it to FALSE."
 msgid ""
 "If you do not want a desklet to be checked, set its first switch to FALSE."
 msgstr "Ako ne želite provjeru nadopune deskleta, postavite na FALSE."
 
 #: 3.8/applet.js:82
-#, fuzzy
-#| msgid "If you do not want an extension to be checked, set it to FALSE."
 msgid ""
 "If you do not want an extension to be checked, set its first switch to FALSE."
 msgstr "Ako ne želite provjeru nadopune proširenja, postavite na FALSE."
 
 #: 3.8/applet.js:83
-#, fuzzy
-#| msgid "If you do not want a theme to be checked, set it to FALSE."
 msgid ""
 "If you do not want a theme to be checked, set its first switch to FALSE."
 msgstr "Ako ne želite provjeru nadopune tema, postavite na FALSE."
 
 #: 3.8/applet.js:87
-#, fuzzy
-#| msgid ""
-#| "If you want to get the latest version of an applet now, check both boxes."
 msgid ""
 "If you want to get the latest version of an applet now, set its two switches "
 "to TRUE."
-msgstr "Ako želite imati najnoviju inačicu apleta, odaberite ovu mogućnost."
+msgstr "Ako želite imati najnoviju inačicu apleta, postavite na TRUE."
 
 #: 3.8/applet.js:88
-#, fuzzy
-#| msgid ""
-#| "If you want to get the latest version of a desklet now, check both boxes."
 msgid ""
 "If you want to get the latest version of a desklet now, set its two switches "
 "to TRUE."
-msgstr "Ako želite imati najnoviju inačicu deskleta, odaberite ovu mogućnost."
+msgstr "Ako želite imati najnoviju inačicu deskleta, postavite na TRUE."
 
 #: 3.8/applet.js:89
-#, fuzzy
-#| msgid ""
-#| "If you want to get the latest version of an extension now, check both "
-#| "boxes."
 msgid ""
 "If you want to get the latest version of an extension now, set its two "
 "switches to TRUE."
-msgstr ""
-"Ako želite imati najnoviju inačicu proširenja, odaberite ovu mogućnost."
+msgstr "Ako želite imati najnoviju inačicu proširenja, postavite na TRUE."
 
 #: 3.8/applet.js:90
-#, fuzzy
-#| msgid ""
-#| "If you want to get the latest version of a theme now, check both boxes."
 msgid ""
 "If you want to get the latest version of a theme now, set its two switches "
 "to TRUE."
-msgstr "Ako želite imati najnoviju inačicu teme, odaberite ovu mogućnost."
+msgstr "Ako želite imati najnoviju inačicu teme, postavite na TRUE."
 
 #: cs/4.2/bin/SUExtensionCore.py:723 cs/4.4/bin/SUExtensionCore.py:723
 msgid "Upgradable"
-msgstr ""
+msgstr "Nadogradivo"
 
 #. metadata.json->description
 msgid ""
@@ -576,36 +552,29 @@ msgid "hours"
 msgstr "sata"
 
 #. 4.2->settings-schema.json->general_frequency->description
-#. 3.8->settings-schema.json->general_frequency->description
-#. 2.8->settings-schema.json->general_frequency->description
 msgid "Time interval between two checks"
 msgstr "Vremensko razdoblje između nadopuna"
 
+#. 3.8->settings-schema.json->general_frequency->description
+#. 2.8->settings-schema.json->general_frequency->description
+msgid "Time interval between two checks (hours)"
+msgstr "Vremensko razdoblje između nadopuna (sati)"
+
 #. 4.2->settings-schema.json->general_frequency->tooltip
 msgid "Min value: 1 hour. Max value: 720 hours (30 days)."
-msgstr ""
+msgstr "Najmanja vrijednost: 1 sat. Najveća vrijednost: 720 sati (30 dana)."
 
 #. 4.2->settings-schema.json->general_first_check->description
-#, fuzzy
-#| msgid ""
-#| "Please note that the first check will take place one minute after "
-#| "starting this applet."
 msgid "Make a first check one minute after starting"
-msgstr ""
-"Zapamtite da će prva provjera biti izvršena jednu minutu nakon pokretanja "
-"ovog apleta."
+msgstr "Pokreni prvu provjeru jednu minutu nakon pokretanja"
 
 #. 4.2->settings-schema.json->general_first_check->tooltip
-#, fuzzy
-#| msgid ""
-#| "Please note that the first check will take place one minute after "
-#| "starting this applet."
 msgid ""
 "By checking this box, the first check will take place one minute after "
 "starting this applet."
 msgstr ""
-"Zapamtite da će prva provjera biti izvršena jednu minutu nakon pokretanja "
-"ovog apleta."
+"Odabirom ove mogućnosti, prva provjera će biti pokrenuta jednu minutu nakon "
+"pokretanja ovog apleta."
 
 #. 4.2->settings-schema.json->general_warning->description
 #. 3.8->settings-schema.json->general_warning->description
