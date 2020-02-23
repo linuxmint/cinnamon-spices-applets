@@ -106,7 +106,7 @@
         "type" : "filechooser",
         "default" : "~/.local/share/cinnamon/applets/download-and-upload-speed@cardsurf/icons/arrow_up_red.svg",
         "description" : "Upload icon",
-        "tooltip": "An icon displayed next to download speed in the panel.\nTo display a symbolic icon make sure its name ends with '-symbolic.svg'."
+        "tooltip": "An icon displayed next to upload speed in the panel.\nTo display a symbolic icon make sure its name ends with '-symbolic.svg'."
     },
     "gui_symbolic_icon" : {
         "type" : "checkbox",
