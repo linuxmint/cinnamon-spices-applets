@@ -168,38 +168,10 @@ var weatherAppletGUIDs: GUIDStore = {};
 
 class WeatherApplet extends TextIconApplet {
   /** Stores all weather information */
-  private weather: Weather = {
-    date: null, // Date object, UTC
-    location: {
-      city: null,
-      country: null, // Country code
-      tzOffset: null, // seconds
-      timeZone: null,
-      url: null
-    },
-    coord: {
-      lat: null,
-      lon: null,
-    },
-    sunrise: null, // Date object, UTC
-    sunset: null, // Date object, UTC
-    wind: {
-      speed: null, // MPS
-      degree: null, // meteorlogical degrees
-    },
-    temperature: null, // Kelvin
-    pressure: null, // hPa
-    humidity: null, // %
-    condition: {
-      main: null, // What API returns
-      description: null, // Longer description, if not available put the same whats in main
-      icon: null, // GTK weather icon names
-      customIcon: null
-    },
-  }
-
+  private weather: Weather = null;
   /** Stores all forecast information */
-  private forecasts: Array < ForecastData > = [];
+  private forecasts: ForecastData[] = [];
+  private hourlyForecasts: HourlyForecastData[];
 
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////  
@@ -222,6 +194,13 @@ class WeatherApplet extends TextIconApplet {
   private _currentWeatherApiUniqueCap: imports.gi.St.Label;
   private _forecast: ForecastUI[];
   private _forecastBox: imports.gi.St.BoxLayout;
+
+  //Hourly UI elements
+  private secondaryMenu: imports.ui.applet.AppletPopupMenu;
+  private secondaryMenuManager: imports.ui.popupMenu.PopupMenuManager;
+  private _hourlyFutureWeather: imports.gi.St.Bin;
+  private _hourlyForecast: ForecastUI[];
+  private _hourlyForecastBox: imports.gi.St.BoxLayout;
 
   // Settings properties to bind
   // Settings are public
@@ -299,6 +278,7 @@ class WeatherApplet extends TextIconApplet {
 
     this.SetAppletOnPanel(); 
     this.AddPopupMenu(orientation);
+    this.AddSecondaryMenu(orientation);
     this.BindSettings();
     this.AddRefreshButton();
     this.BuildPopupMenu();
@@ -339,6 +319,23 @@ class WeatherApplet extends TextIconApplet {
     }
     
     this.menuManager.addMenu(this.menu)
+  }
+
+  private AddSecondaryMenu(orientation: imports.gi.St.Side) {
+    this.secondaryMenuManager = new PopupMenuManager(this);
+    this.secondaryMenu = new AppletPopupMenu(this, orientation)
+    if (typeof this.secondaryMenu.setCustomStyleClass === "function")
+      this.menu.setCustomStyleClass(STYLE_WEATHER_MENU);
+    else
+    {
+      this.menu.actor.add_style_class_name(STYLE_WEATHER_MENU);
+    }
+    this.secondaryMenuManager.addMenu(this.secondaryMenu);
+    this._hourlyFutureWeather = new Bin({ style_class: STYLE_FORECAST });
+    // build menu
+    let mainBox = new BoxLayout({ vertical: true })
+    mainBox.add_actor(this._hourlyFutureWeather);
+    this.secondaryMenu.addActor(mainBox)
   }
 
   private BindSettings() {
@@ -573,7 +570,9 @@ class WeatherApplet extends TextIconApplet {
   }
 
   private on_applet_middle_clicked(event: any) {
-    
+    if (!!this.hourlyForecasts) {
+      this.secondaryMenu.toggle();
+    }
   }
 
   private on_panel_height_changed() {
@@ -679,7 +678,7 @@ class WeatherApplet extends TextIconApplet {
       this.ProcessWeatherData(weatherInfo, locationData);
 
       if (rebuild) this.rebuild();
-      if (!await this.displayWeather() || !await this.displayForecast()) return;
+      if (!await this.displayWeather() || !await this.displayForecast() || !await this.displayHourlyForecast()) return;
       this.log.Print("Weather Information refreshed");
       this.errorCount = 0;
       //this.IconTest();
@@ -726,6 +725,21 @@ class WeatherApplet extends TextIconApplet {
 
   /** Injects Data into Weather and Forecast Objects to display later */
   private ProcessWeatherData(weatherInfo: WeatherData, locationData: LocationData) {
+    if (!this.weather) {
+      this.weather = {
+        date: null, // Date object, UTC
+        location: {},
+        coord: {},
+        sunrise: null, // Date object, UTC
+        sunset: null, // Date object, UTC
+        wind: {},
+        temperature: null, // Kelvin
+        pressure: null, // hPa
+        humidity: null, // %
+        condition: {},
+      } as Weather;
+    };
+
     if (!!locationData) { // Automatic location
       this.weather.location.city = locationData.city;
       this.weather.location.country = locationData.country;
@@ -749,6 +763,7 @@ class WeatherApplet extends TextIconApplet {
     if (!!weatherInfo.location.url) this.weather.location.url = weatherInfo.location.url;
     if (!!weatherInfo.extra_field) this.weather.extra_field = weatherInfo.extra_field;
     this.forecasts = weatherInfo.forecasts;
+    this.hourlyForecasts = (!!weatherInfo.hourlyForecasts) ? weatherInfo.hourlyForecasts : null;
 
     // Estimation
     //this.weather.location.tzOffset = Math.round(this.weather.coord.lon/15) * 3600;
@@ -947,8 +962,42 @@ class WeatherApplet extends TextIconApplet {
     }
   };
 
+  /** Injects data from forecasts array into popupMenu */
+  private displayHourlyForecast(): boolean {
+    try {
+      for (let i = 0; i < 12; i++) {
+        let forecastData = this.forecasts[i];
+        let forecastUi = this._hourlyForecast[i];
+
+        let t_low = TempToUserUnits(forecastData.temp_min, this._temperatureUnit);
+        let t_high = TempToUserUnits(forecastData.temp_max, this._temperatureUnit);
+
+        let first_temperature = this._temperatureHighFirst ? t_high : t_low;
+        let second_temperature = this._temperatureHighFirst ? t_low : t_high;
+
+        // Weather Condition
+        let comment = "";
+        if (forecastData.condition.main != null && forecastData.condition.description != null) {
+          comment = (this._shortConditions) ? forecastData.condition.main : forecastData.condition.description;
+          comment = capitalizeFirstLetter(comment);
+          if (this._translateCondition) comment = _(comment);
+        }
+
+        forecastUi.Day.text = forecastData.date.toLocaleString();
+        forecastUi.Temperature.text = first_temperature + ' ' + '\u002F' + ' ' + second_temperature + ' ' + this.unitToUnicode(this._temperatureUnit);
+        forecastUi.Summary.text = comment;
+        forecastUi.Icon.icon_name = forecastData.condition.icon;
+      }
+      return true;
+    } catch (e) {
+        this.log.Error("DisplayForecastError " + e);
+      return false;
+    }
+  };
+
   /** Reset weather object */
   private wipeCurrentData(): void {
+    if (!this.weather) return;
     this.weather.date = null;
     this.weather.location.city = null;
     this.weather.location.country = null;
@@ -987,15 +1036,24 @@ class WeatherApplet extends TextIconApplet {
       this._futureWeather.get_child().destroy()
   }
 
+  private destroyHourlyWeather(): void {
+    if (this._hourlyFutureWeather.get_child() != null)
+      this._hourlyFutureWeather.get_child().destroy()
+  }
+
   /** Destroys UI first then shows initial UI */
   private showLoadingUi(): void {
     this.destroyCurrentWeather()
     this.destroyFutureWeather()
+    this.destroyHourlyWeather()
     this._currentWeather.set_child(new Label({
       text: _('Loading current weather ...')
     }))
     this._futureWeather.set_child(new Label({
       text: _('Loading future weather ...')
+    }))
+    this._hourlyFutureWeather.set_child(new Label({
+      text: _('Loading hourly weather ...')
     }))
   }
 
@@ -1004,6 +1062,7 @@ class WeatherApplet extends TextIconApplet {
     this.showLoadingUi()
     this.rebuildCurrentWeatherUi()
     this.rebuildFutureWeatherUi()
+    this.rebuildHourlyWeatherUi()
   }
 
   private rebuildCurrentWeatherUi(): void {
@@ -1134,6 +1193,52 @@ class WeatherApplet extends TextIconApplet {
     }
   }
 
+  private rebuildHourlyWeatherUi(): void {
+    this.destroyHourlyWeather();
+
+    this._hourlyForecast = []
+    this._hourlyForecastBox = new BoxLayout({
+      vertical: this._verticalOrientation,
+      style_class: STYLE_FORECAST_CONTAINER
+    })
+    this._hourlyFutureWeather.set_child(this._hourlyForecastBox)
+
+    for (let i = 0; i < 12; i++) {
+      let forecastWeather: ForecastUI = {
+        Icon: new Icon,
+        Day: new Label,
+        Summary: new Label,
+        Temperature: new Label,
+      }
+
+      forecastWeather.Icon = new Icon({
+        icon_type: this._icon_type,
+        icon_size: 48,
+        icon_name: APPLET_ICON,
+        style_class: STYLE_FORECAST_ICON
+      })
+
+      forecastWeather.Day = new Label({ style_class: STYLE_FORECAST_DAY })
+      forecastWeather.Summary = new Label({ style_class: STYLE_FORECAST_SUMMARY })
+      forecastWeather.Temperature = new Label({ style_class: STYLE_FORECAST_TEMPERATURE })
+
+      let dataBox = new BoxLayout({ vertical: true, style_class: STYLE_FORECAST_DATABOX })
+      dataBox.add_actor(forecastWeather.Day)
+      dataBox.add_actor(forecastWeather.Summary)
+      dataBox.add_actor(forecastWeather.Temperature)
+
+      let forecastBox = new BoxLayout({
+        style_class: STYLE_FORECAST_BOX
+      })
+      forecastBox.add_actor(forecastWeather.Icon)
+      forecastBox.add_actor(dataBox)
+
+      this._hourlyForecast[i] = forecastWeather;
+      this._hourlyForecastBox.add_actor(forecastBox)
+    }
+  }
+
+
   //----------------------------------------------------------------------
   //
   // Utility functions
@@ -1235,6 +1340,10 @@ class WeatherApplet extends TextIconApplet {
     }
     ctx.HandleError(uiError);
   }
+}
+
+class HourlyWeatherMenu {
+    
 }
 
 class Log {
@@ -1450,6 +1559,7 @@ interface WeatherData {
   humidity: number;
   condition: Condition
   forecasts: ForecastData[];
+  hourlyForecasts?: HourlyForecastData[];
   extra_field?: {
     name: string,
     /**
@@ -1469,6 +1579,15 @@ interface ForecastData {
     temp_max: number,
   condition: Condition
 }
+
+interface HourlyForecastData {
+  /** Set to 12:00 if possible */
+  time: Date,
+  /** Kelvin */
+  temp: number,
+  condition: Condition
+}
+
 
 interface LocationData {
   lat: number,

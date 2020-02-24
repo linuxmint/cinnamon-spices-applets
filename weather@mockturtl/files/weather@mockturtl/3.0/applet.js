@@ -159,35 +159,7 @@ var WeatherApplet = (function (_super) {
     __extends(WeatherApplet, _super);
     function WeatherApplet(metadata, orientation, panelHeight, instanceId) {
         var _this = _super.call(this, orientation, panelHeight, instanceId) || this;
-        _this.weather = {
-            date: null,
-            location: {
-                city: null,
-                country: null,
-                tzOffset: null,
-                timeZone: null,
-                url: null
-            },
-            coord: {
-                lat: null,
-                lon: null,
-            },
-            sunrise: null,
-            sunset: null,
-            wind: {
-                speed: null,
-                degree: null,
-            },
-            temperature: null,
-            pressure: null,
-            humidity: null,
-            condition: {
-                main: null,
-                description: null,
-                icon: null,
-                customIcon: null
-            },
-        };
+        _this.weather = null;
         _this.forecasts = [];
         _this.currentLocale = null;
         _this._httpSession = new SessionAsync();
@@ -228,6 +200,7 @@ var WeatherApplet = (function (_super) {
         imports.gi.Gtk.IconTheme.get_default().append_search_path(_this.appletDir + "/../icons");
         _this.SetAppletOnPanel();
         _this.AddPopupMenu(orientation);
+        _this.AddSecondaryMenu(orientation);
         _this.BindSettings();
         _this.AddRefreshButton();
         _this.BuildPopupMenu();
@@ -258,6 +231,20 @@ var WeatherApplet = (function (_super) {
             this.menu.actor.add_style_class_name(STYLE_WEATHER_MENU);
         }
         this.menuManager.addMenu(this.menu);
+    };
+    WeatherApplet.prototype.AddSecondaryMenu = function (orientation) {
+        this.secondaryMenuManager = new PopupMenuManager(this);
+        this.secondaryMenu = new AppletPopupMenu(this, orientation);
+        if (typeof this.secondaryMenu.setCustomStyleClass === "function")
+            this.menu.setCustomStyleClass(STYLE_WEATHER_MENU);
+        else {
+            this.menu.actor.add_style_class_name(STYLE_WEATHER_MENU);
+        }
+        this.secondaryMenuManager.addMenu(this.secondaryMenu);
+        this._hourlyFutureWeather = new Bin({ style_class: STYLE_FORECAST });
+        var mainBox = new BoxLayout({ vertical: true });
+        mainBox.add_actor(this._hourlyFutureWeather);
+        this.secondaryMenu.addActor(mainBox);
     };
     WeatherApplet.prototype.BindSettings = function () {
         for (var k in KEYS) {
@@ -493,6 +480,9 @@ var WeatherApplet = (function (_super) {
         this.menu.toggle();
     };
     WeatherApplet.prototype.on_applet_middle_clicked = function (event) {
+        if (!!this.hourlyForecasts) {
+            this.secondaryMenu.toggle();
+        }
     };
     WeatherApplet.prototype.on_panel_height_changed = function () {
     };
@@ -534,25 +524,25 @@ var WeatherApplet = (function (_super) {
     };
     WeatherApplet.prototype.refreshWeather = function (rebuild) {
         return __awaiter(this, void 0, void 0, function () {
-            var locationData, e_2, darkSky, openWeatherMap, metNorway, weatherbit, weatherInfo, _a, e_3;
-            return __generator(this, function (_b) {
-                switch (_b.label) {
+            var locationData, e_2, darkSky, openWeatherMap, metNorway, weatherbit, weatherInfo, _a, _b, e_3;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
                     case 0:
                         this.encounteredError = false;
                         locationData = null;
-                        _b.label = 1;
+                        _c.label = 1;
                     case 1:
-                        _b.trys.push([1, 3, , 4]);
+                        _c.trys.push([1, 3, , 4]);
                         return [4, this.ValidateLocation()];
                     case 2:
-                        locationData = _b.sent();
+                        locationData = _c.sent();
                         return [3, 4];
                     case 3:
-                        e_2 = _b.sent();
+                        e_2 = _c.sent();
                         this.log.Error(e_2);
                         return [2, "error"];
                     case 4:
-                        _b.trys.push([4, 9, , 10]);
+                        _c.trys.push([4, 11, , 12]);
                         switch (this._dataService) {
                             case DATA_SERVICE.DARK_SKY:
                                 if (darkSky == null)
@@ -579,7 +569,7 @@ var WeatherApplet = (function (_super) {
                         }
                         return [4, this.provider.GetWeather()];
                     case 5:
-                        weatherInfo = _b.sent();
+                        weatherInfo = _c.sent();
                         if (!weatherInfo) {
                             this.log.Error("Unable to obtain Weather Information");
                             return [2, "failure"];
@@ -591,24 +581,31 @@ var WeatherApplet = (function (_super) {
                             this.rebuild();
                         return [4, this.displayWeather()];
                     case 6:
-                        _a = !(_b.sent());
-                        if (_a) return [3, 8];
+                        _b = !(_c.sent());
+                        if (_b) return [3, 8];
                         return [4, this.displayForecast()];
                     case 7:
-                        _a = !(_b.sent());
-                        _b.label = 8;
+                        _b = !(_c.sent());
+                        _c.label = 8;
                     case 8:
+                        _a = _b;
+                        if (_a) return [3, 10];
+                        return [4, this.displayHourlyForecast()];
+                    case 9:
+                        _a = !(_c.sent());
+                        _c.label = 10;
+                    case 10:
                         if (_a)
                             return [2];
                         this.log.Print("Weather Information refreshed");
                         this.errorCount = 0;
                         return [2, "success"];
-                    case 9:
-                        e_3 = _b.sent();
+                    case 11:
+                        e_3 = _c.sent();
                         this.log.Error("Generic Error while refreshing Weather info: " + e_3);
                         this.HandleError({ type: "hard", detail: "unknown", message: _("Unexpected Error While Refreshing Weather, please see log in Looking Glass") });
                         return [2, "failure"];
-                    case 10: return [2];
+                    case 12: return [2];
                 }
             });
         });
@@ -648,6 +645,21 @@ var WeatherApplet = (function (_super) {
         });
     };
     WeatherApplet.prototype.ProcessWeatherData = function (weatherInfo, locationData) {
+        if (!this.weather) {
+            this.weather = {
+                date: null,
+                location: {},
+                coord: {},
+                sunrise: null,
+                sunset: null,
+                wind: {},
+                temperature: null,
+                pressure: null,
+                humidity: null,
+                condition: {},
+            };
+        }
+        ;
         if (!!locationData) {
             this.weather.location.city = locationData.city;
             this.weather.location.country = locationData.country;
@@ -675,6 +687,7 @@ var WeatherApplet = (function (_super) {
         if (!!weatherInfo.extra_field)
             this.weather.extra_field = weatherInfo.extra_field;
         this.forecasts = weatherInfo.forecasts;
+        this.hourlyForecasts = (!!weatherInfo.hourlyForecasts) ? weatherInfo.hourlyForecasts : null;
     };
     WeatherApplet.prototype.displayWeather = function () {
         try {
@@ -833,7 +846,38 @@ var WeatherApplet = (function (_super) {
         }
     };
     ;
+    WeatherApplet.prototype.displayHourlyForecast = function () {
+        try {
+            for (var i = 0; i < 12; i++) {
+                var forecastData = this.forecasts[i];
+                var forecastUi = this._hourlyForecast[i];
+                var t_low = TempToUserUnits(forecastData.temp_min, this._temperatureUnit);
+                var t_high = TempToUserUnits(forecastData.temp_max, this._temperatureUnit);
+                var first_temperature = this._temperatureHighFirst ? t_high : t_low;
+                var second_temperature = this._temperatureHighFirst ? t_low : t_high;
+                var comment = "";
+                if (forecastData.condition.main != null && forecastData.condition.description != null) {
+                    comment = (this._shortConditions) ? forecastData.condition.main : forecastData.condition.description;
+                    comment = capitalizeFirstLetter(comment);
+                    if (this._translateCondition)
+                        comment = _(comment);
+                }
+                forecastUi.Day.text = forecastData.date.toLocaleString();
+                forecastUi.Temperature.text = first_temperature + ' ' + '\u002F' + ' ' + second_temperature + ' ' + this.unitToUnicode(this._temperatureUnit);
+                forecastUi.Summary.text = comment;
+                forecastUi.Icon.icon_name = forecastData.condition.icon;
+            }
+            return true;
+        }
+        catch (e) {
+            this.log.Error("DisplayForecastError " + e);
+            return false;
+        }
+    };
+    ;
     WeatherApplet.prototype.wipeCurrentData = function () {
+        if (!this.weather)
+            return;
         this.weather.date = null;
         this.weather.location.city = null;
         this.weather.location.country = null;
@@ -867,20 +911,29 @@ var WeatherApplet = (function (_super) {
         if (this._futureWeather.get_child() != null)
             this._futureWeather.get_child().destroy();
     };
+    WeatherApplet.prototype.destroyHourlyWeather = function () {
+        if (this._hourlyFutureWeather.get_child() != null)
+            this._hourlyFutureWeather.get_child().destroy();
+    };
     WeatherApplet.prototype.showLoadingUi = function () {
         this.destroyCurrentWeather();
         this.destroyFutureWeather();
+        this.destroyHourlyWeather();
         this._currentWeather.set_child(new Label({
             text: _('Loading current weather ...')
         }));
         this._futureWeather.set_child(new Label({
             text: _('Loading future weather ...')
         }));
+        this._hourlyFutureWeather.set_child(new Label({
+            text: _('Loading hourly weather ...')
+        }));
     };
     WeatherApplet.prototype.rebuild = function () {
         this.showLoadingUi();
         this.rebuildCurrentWeatherUi();
         this.rebuildFutureWeatherUi();
+        this.rebuildHourlyWeatherUi();
     };
     WeatherApplet.prototype.rebuildCurrentWeatherUi = function () {
         this.destroyCurrentWeather();
@@ -984,6 +1037,43 @@ var WeatherApplet = (function (_super) {
             this._forecastBox.add_actor(forecastBox);
         }
     };
+    WeatherApplet.prototype.rebuildHourlyWeatherUi = function () {
+        this.destroyHourlyWeather();
+        this._hourlyForecast = [];
+        this._hourlyForecastBox = new BoxLayout({
+            vertical: this._verticalOrientation,
+            style_class: STYLE_FORECAST_CONTAINER
+        });
+        this._hourlyFutureWeather.set_child(this._hourlyForecastBox);
+        for (var i = 0; i < 12; i++) {
+            var forecastWeather = {
+                Icon: new Icon,
+                Day: new Label,
+                Summary: new Label,
+                Temperature: new Label,
+            };
+            forecastWeather.Icon = new Icon({
+                icon_type: this._icon_type,
+                icon_size: 48,
+                icon_name: APPLET_ICON,
+                style_class: STYLE_FORECAST_ICON
+            });
+            forecastWeather.Day = new Label({ style_class: STYLE_FORECAST_DAY });
+            forecastWeather.Summary = new Label({ style_class: STYLE_FORECAST_SUMMARY });
+            forecastWeather.Temperature = new Label({ style_class: STYLE_FORECAST_TEMPERATURE });
+            var dataBox = new BoxLayout({ vertical: true, style_class: STYLE_FORECAST_DATABOX });
+            dataBox.add_actor(forecastWeather.Day);
+            dataBox.add_actor(forecastWeather.Summary);
+            dataBox.add_actor(forecastWeather.Temperature);
+            var forecastBox = new BoxLayout({
+                style_class: STYLE_FORECAST_BOX
+            });
+            forecastBox.add_actor(forecastWeather.Icon);
+            forecastBox.add_actor(dataBox);
+            this._hourlyForecast[i] = forecastWeather;
+            this._hourlyForecastBox.add_actor(forecastBox);
+        }
+    };
     WeatherApplet.prototype.noApiKey = function () {
         if (this._apiKey == undefined || this._apiKey == "") {
             return true;
@@ -1049,6 +1139,11 @@ var WeatherApplet = (function (_super) {
     };
     return WeatherApplet;
 }(TextIconApplet));
+var HourlyWeatherMenu = (function () {
+    function HourlyWeatherMenu() {
+    }
+    return HourlyWeatherMenu;
+}());
 var Log = (function () {
     function Log(_instanceId) {
         this.debug = false;
