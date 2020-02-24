@@ -315,7 +315,6 @@ class WeatherApplet extends TextIconApplet {
     this.orientation = orientation;
     try {
       this.setAllowedLayout(AllowedLayout.BOTH);
-      this.update_label_visible();
     } catch (e) {
       // vertical panel not supported
     }
@@ -548,14 +547,6 @@ class WeatherApplet extends TextIconApplet {
 
       await delay(loopInterval * 1000);
     }
-  };
-
-  // Applet Overrides
-  private update_label_visible(): void {
-    if (this.orientation == Side.LEFT || this.orientation == Side.RIGHT)
-      this.hide_applet_label(true);
-    else
-      this.hide_applet_label(false);
   };
 
   private on_orientation_changed(orientation: imports.gi.St.Side) {

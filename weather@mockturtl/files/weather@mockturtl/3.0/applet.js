@@ -238,7 +238,6 @@ var WeatherApplet = (function (_super) {
         _this.orientation = orientation;
         try {
             _this.setAllowedLayout(AllowedLayout.BOTH);
-            _this.update_label_visible();
         }
         catch (e) {
         }
@@ -474,13 +473,6 @@ var WeatherApplet = (function (_super) {
                 }
             });
         });
-    };
-    ;
-    WeatherApplet.prototype.update_label_visible = function () {
-        if (this.orientation == Side.LEFT || this.orientation == Side.RIGHT)
-            this.hide_applet_label(true);
-        else
-            this.hide_applet_label(false);
     };
     ;
     WeatherApplet.prototype.on_orientation_changed = function (orientation) {

@@ -188,7 +188,6 @@ class WeatherApplet extends TextIconApplet {
         this.orientation = orientation;
         try {
             this.setAllowedLayout(AllowedLayout.BOTH);
-            this.update_label_visible();
         }
         catch (e) {
         }
@@ -368,13 +367,6 @@ class WeatherApplet extends TextIconApplet {
             }
             await delay(loopInterval * 1000);
         }
-    }
-    ;
-    update_label_visible() {
-        if (this.orientation == Side.LEFT || this.orientation == Side.RIGHT)
-            this.hide_applet_label(true);
-        else
-            this.hide_applet_label(false);
     }
     ;
     on_orientation_changed(orientation) {
