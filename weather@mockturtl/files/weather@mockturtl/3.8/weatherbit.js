@@ -139,7 +139,7 @@ class Weatherbit {
         date.setMinutes(parseInt(hoursMinutes[1]));
         return date;
     }
-    ConvertToWeatherBitLocale(systemLocale) {
+    ConvertToAPILocale(systemLocale) {
         if (systemLocale == "zh-tw") {
             return systemLocale;
         }
@@ -165,7 +165,7 @@ class Weatherbit {
         if (isCoordinate(location)) {
             let latLong = location.split(",");
             query = query + "key=" + key + "&lat=" + latLong[0] + "&lon=" + latLong[1] + "&units=S";
-            let lang = this.ConvertToWeatherBitLocale(this.app.currentLocale);
+            let lang = this.ConvertToAPILocale(this.app.currentLocale);
             if (isLangSupported(lang, this.supportedLanguages) && this.app._translateCondition) {
                 query = query + "&lang=" + lang;
             }

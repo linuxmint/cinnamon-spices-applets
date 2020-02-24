@@ -170,7 +170,7 @@ class OpenWeatherMap implements WeatherProvider {
             query = query + locString + "&APPID=";
              // Append Language if supported and enabled
             query += "1c73f8259a86c6fd43c7163b543c8640";
-            let locale: string = this.ConvertToOWLocale(this.app.currentLocale);
+            let locale: string = this.ConvertToAPILocale(this.app.currentLocale);
             if (this.app._translateCondition && isLangSupported(locale, this.supportedLanguages)) {
                 query = query + "&lang=" + locale;
             }
@@ -195,7 +195,7 @@ class OpenWeatherMap implements WeatherProvider {
             return "q=" + loc;
     };
 
-    private ConvertToOWLocale(systemLocale: string) {
+    private ConvertToAPILocale(systemLocale: string) {
       // Dialect? support by OWM
       if (systemLocale == "zh-cn" || systemLocale == "zh-cn" || systemLocale == "pt-br") {
         return systemLocale;

@@ -137,7 +137,7 @@ class OpenWeatherMap {
         if (locString != null) {
             query = query + locString + "&APPID=";
             query += "1c73f8259a86c6fd43c7163b543c8640";
-            let locale = this.ConvertToOWLocale(this.app.currentLocale);
+            let locale = this.ConvertToAPILocale(this.app.currentLocale);
             if (this.app._translateCondition && isLangSupported(locale, this.supportedLanguages)) {
                 query = query + "&lang=" + locale;
             }
@@ -161,7 +161,7 @@ class OpenWeatherMap {
             return "q=" + loc;
     }
     ;
-    ConvertToOWLocale(systemLocale) {
+    ConvertToAPILocale(systemLocale) {
         if (systemLocale == "zh-cn" || systemLocale == "zh-cn" || systemLocale == "pt-br") {
             return systemLocale;
         }

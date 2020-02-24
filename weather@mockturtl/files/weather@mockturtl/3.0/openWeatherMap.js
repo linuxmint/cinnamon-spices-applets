@@ -195,7 +195,7 @@ var OpenWeatherMap = (function () {
         if (locString != null) {
             query = query + locString + "&APPID=";
             query += "1c73f8259a86c6fd43c7163b543c8640";
-            var locale = this.ConvertToOWLocale(this.app.currentLocale);
+            var locale = this.ConvertToAPILocale(this.app.currentLocale);
             if (this.app._translateCondition && isLangSupported(locale, this.supportedLanguages)) {
                 query = query + "&lang=" + locale;
             }
@@ -219,7 +219,7 @@ var OpenWeatherMap = (function () {
             return "q=" + loc;
     };
     ;
-    OpenWeatherMap.prototype.ConvertToOWLocale = function (systemLocale) {
+    OpenWeatherMap.prototype.ConvertToAPILocale = function (systemLocale) {
         if (systemLocale == "zh-cn" || systemLocale == "zh-cn" || systemLocale == "pt-br") {
             return systemLocale;
         }

@@ -172,7 +172,7 @@ class Weatherbit implements WeatherProvider {
         return date;
     }
 
-    private ConvertToWeatherBitLocale(systemLocale: string) {
+    private ConvertToAPILocale(systemLocale: string) {
         if (systemLocale == "zh-tw") {
           return systemLocale;
         }
@@ -199,7 +199,7 @@ class Weatherbit implements WeatherProvider {
         if (isCoordinate(location)) {
             let latLong = location.split(",");
             query = query + "key="+ key + "&lat=" + latLong[0] + "&lon=" + latLong[1] + "&units=S"
-            let lang = this.ConvertToWeatherBitLocale(this.app.currentLocale);
+            let lang = this.ConvertToAPILocale(this.app.currentLocale);
             if (isLangSupported(lang, this.supportedLanguages) && this.app._translateCondition) {
                 query = query + "&lang=" + lang;
             }

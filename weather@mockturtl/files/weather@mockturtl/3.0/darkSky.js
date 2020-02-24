@@ -166,7 +166,7 @@ var DarkSky = (function () {
         }
     };
     ;
-    DarkSky.prototype.ConvertToDarkSkyLocale = function (systemLocale) {
+    DarkSky.prototype.ConvertToAPILocale = function (systemLocale) {
         if (systemLocale == "zh-tw") {
             return systemLocale;
         }
@@ -191,7 +191,7 @@ var DarkSky = (function () {
         if (isCoordinate(location)) {
             query = this.query + key + "/" + location +
                 "?exclude=minutely,hourly,flags" + "&units=" + this.unit;
-            var locale = this.ConvertToDarkSkyLocale(this.app.currentLocale);
+            var locale = this.ConvertToAPILocale(this.app.currentLocale);
             if (isLangSupported(locale, this.supportedLanguages) && this.app._translateCondition) {
                 query = query + "&lang=" + locale;
             }
