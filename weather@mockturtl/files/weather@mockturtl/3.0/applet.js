@@ -847,14 +847,13 @@ var WeatherApplet = (function (_super) {
     };
     ;
     WeatherApplet.prototype.displayHourlyForecast = function () {
+        if (!this.hourlyForecasts)
+            return;
         try {
-            for (var i = 0; i < 12; i++) {
-                var forecastData = this.forecasts[i];
+            for (var i = 0; i < this.hourlyForecasts.length && i < this._hourlyForecast.length; i++) {
+                var forecastData = this.hourlyForecasts[i];
                 var forecastUi = this._hourlyForecast[i];
-                var t_low = TempToUserUnits(forecastData.temp_min, this._temperatureUnit);
-                var t_high = TempToUserUnits(forecastData.temp_max, this._temperatureUnit);
-                var first_temperature = this._temperatureHighFirst ? t_high : t_low;
-                var second_temperature = this._temperatureHighFirst ? t_low : t_high;
+                var t_low = TempToUserUnits(forecastData.temp, this._temperatureUnit);
                 var comment = "";
                 if (forecastData.condition.main != null && forecastData.condition.description != null) {
                     comment = (this._shortConditions) ? forecastData.condition.main : forecastData.condition.description;
@@ -862,15 +861,15 @@ var WeatherApplet = (function (_super) {
                     if (this._translateCondition)
                         comment = _(comment);
                 }
-                forecastUi.Day.text = forecastData.date.toLocaleString();
-                forecastUi.Temperature.text = first_temperature + ' ' + '\u002F' + ' ' + second_temperature + ' ' + this.unitToUnicode(this._temperatureUnit);
+                forecastUi.Day.text = forecastData.time.toLocaleString();
+                forecastUi.Temperature.text = t_low + ' ' + this.unitToUnicode(this._temperatureUnit);
                 forecastUi.Summary.text = comment;
                 forecastUi.Icon.icon_name = forecastData.condition.icon;
             }
             return true;
         }
         catch (e) {
-            this.log.Error("DisplayForecastError " + e);
+            this.log.Error("DisplayHourlyForecastError " + e);
             return false;
         }
     };
@@ -1045,7 +1044,7 @@ var WeatherApplet = (function (_super) {
             style_class: STYLE_FORECAST_CONTAINER
         });
         this._hourlyFutureWeather.set_child(this._hourlyForecastBox);
-        for (var i = 0; i < 12; i++) {
+        for (var i = 0; i < 8; i++) {
             var forecastWeather = {
                 Icon: new Icon,
                 Day: new Label,
@@ -1066,7 +1065,8 @@ var WeatherApplet = (function (_super) {
             dataBox.add_actor(forecastWeather.Summary);
             dataBox.add_actor(forecastWeather.Temperature);
             var forecastBox = new BoxLayout({
-                style_class: STYLE_FORECAST_BOX
+                style_class: STYLE_FORECAST_BOX,
+                vertical: true
             });
             forecastBox.add_actor(forecastWeather.Icon);
             forecastBox.add_actor(dataBox);

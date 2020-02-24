@@ -118,7 +118,8 @@ class DarkSky implements WeatherProvider {
                     value: this.ToKelvin(json.currently.apparentTemperature),
                     type: "temperature"
                 },
-                forecasts: []
+                forecasts: [],
+                hourlyForecasts: []
             }
             // Forecast
             for (let i = 0; i < this.app._forecastDays; i++) {
@@ -141,6 +142,26 @@ class DarkSky implements WeatherProvider {
                   forecast.date.setHours(forecast.date.getHours() + 12);
 
                   result.forecasts.push(forecast);
+            }
+            for (let i = 0; i < 18; i++) {
+                let hour = json.hourly.data[i];
+                let hourlyForecast: HourlyForecastData = {          
+                    time: new Date(hour.time * 1000),         
+                    temp: this.ToKelvin(hour.temperature),           
+                    temp_apparent: this.ToKelvin(hour.apparentTemperature),           
+                    condition: {
+                      main: this.GetShortSummary(hour.summary),               
+                      description: this.ProcessSummary(hour.summary),        
+                      icon: weatherIconSafely(this.ResolveIcon(hour.icon), this.app._icon_type),    
+                      customIcon: this.ResolveCustomIcon(hour.icon)           
+                    },
+                    precipIntensity: hour.precipIntensity,
+                    precipProbability: hour.precipProbability,
+                    windBearing: hour.windBearing,
+                    windspeed: this.ToMPS(hour.windSpeed),
+
+                  };
+                  result.hourlyForecasts.push(hourlyForecast);
             }
             return result;
         }
@@ -175,7 +196,7 @@ class DarkSky implements WeatherProvider {
         }
         if (isCoordinate(location)) {
             query = this.query + key + "/" + location + 
-            "?exclude=minutely,hourly,flags" + "&units=" + this.unit;
+            "?exclude=minutely,flags" + "&units=" + this.unit;
             let locale = this.ConvertToAPILocale(this.app.currentLocale);
             if (isLangSupported(locale, this.supportedLanguages) && this.app._translateCondition) {
                 query = query + "&lang=" + locale;

@@ -964,16 +964,13 @@ class WeatherApplet extends TextIconApplet {
 
   /** Injects data from forecasts array into popupMenu */
   private displayHourlyForecast(): boolean {
+    if (!this.hourlyForecasts) return;
     try {
-      for (let i = 0; i < 12; i++) {
-        let forecastData = this.forecasts[i];
+      for (let i = 0; i < this.hourlyForecasts.length && i < this._hourlyForecast.length; i++) {
+        let forecastData = this.hourlyForecasts[i];
         let forecastUi = this._hourlyForecast[i];
 
-        let t_low = TempToUserUnits(forecastData.temp_min, this._temperatureUnit);
-        let t_high = TempToUserUnits(forecastData.temp_max, this._temperatureUnit);
-
-        let first_temperature = this._temperatureHighFirst ? t_high : t_low;
-        let second_temperature = this._temperatureHighFirst ? t_low : t_high;
+        let t_low = TempToUserUnits(forecastData.temp, this._temperatureUnit)
 
         // Weather Condition
         let comment = "";
@@ -983,14 +980,14 @@ class WeatherApplet extends TextIconApplet {
           if (this._translateCondition) comment = _(comment);
         }
 
-        forecastUi.Day.text = forecastData.date.toLocaleString();
-        forecastUi.Temperature.text = first_temperature + ' ' + '\u002F' + ' ' + second_temperature + ' ' + this.unitToUnicode(this._temperatureUnit);
+        forecastUi.Day.text = forecastData.time.toLocaleString();
+        forecastUi.Temperature.text = t_low + ' ' + this.unitToUnicode(this._temperatureUnit);
         forecastUi.Summary.text = comment;
         forecastUi.Icon.icon_name = forecastData.condition.icon;
       }
       return true;
     } catch (e) {
-        this.log.Error("DisplayForecastError " + e);
+        this.log.Error("DisplayHourlyForecastError " + e);
       return false;
     }
   };
@@ -1203,7 +1200,7 @@ class WeatherApplet extends TextIconApplet {
     })
     this._hourlyFutureWeather.set_child(this._hourlyForecastBox)
 
-    for (let i = 0; i < 12; i++) {
+    for (let i = 0; i < 8; i++) {
       let forecastWeather: ForecastUI = {
         Icon: new Icon,
         Day: new Label,
@@ -1228,7 +1225,8 @@ class WeatherApplet extends TextIconApplet {
       dataBox.add_actor(forecastWeather.Temperature)
 
       let forecastBox = new BoxLayout({
-        style_class: STYLE_FORECAST_BOX
+        style_class: STYLE_FORECAST_BOX,
+        vertical: true
       })
       forecastBox.add_actor(forecastWeather.Icon)
       forecastBox.add_actor(dataBox)
@@ -1585,7 +1583,12 @@ interface HourlyForecastData {
   time: Date,
   /** Kelvin */
   temp: number,
-  condition: Condition
+  temp_apparent: number;
+  condition: Condition,
+  windspeed: number,
+  windBearing: number,
+  precipProbability: number,
+  precipIntensity: number,
 }
 
 
