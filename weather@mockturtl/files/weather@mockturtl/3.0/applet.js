@@ -133,6 +133,7 @@ var KEYS = {
     WEATHER_TRANSLATE_CONDITION_KEY: "translateCondition",
     WEATHER_VERTICAL_ORIENTATION_KEY: "verticalOrientation",
     WEATHER_SHOW_TEXT_IN_PANEL_KEY: "showTextInPanel",
+    WEATHER_TEMP_TEXT_OVERRIDE: "tempTextOverride",
     WEATHER_SHOW_COMMENT_IN_PANEL_KEY: "showCommentInPanel",
     WEATHER_SHOW_SUNRISE_KEY: "showSunrise",
     WEATHER_SHOW_24HOURS_KEY: "show24Hours",
@@ -745,6 +746,12 @@ var WeatherApplet = (function (_super) {
                 if (this.panel._getScaledPanelHeight() >= 35) {
                     label += this.unitToUnicode(this._temperatureUnit);
                 }
+            }
+            if (nonempty(this._tempTextOverride)) {
+                label = this._tempTextOverride
+                    .replace("{t}", temp)
+                    .replace("{u}", this.unitToUnicode(this._temperatureUnit))
+                    .replace("{c}", mainCondition);
             }
             this.set_applet_label(label);
             if (this.weather.humidity != null) {
