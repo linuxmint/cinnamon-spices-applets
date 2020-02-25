@@ -179,17 +179,24 @@ function getOverheadSize(actor) {
 }
 
 function getMonitors() {
-  let gdkScreen = Gdk.Screen.get_default();
-  let screen = CinnamonDesktop.RRScreen.new(gdkScreen);
-  let currentConfig = CinnamonDesktop.RRConfig.new_current(screen);
-  let outputInfos = currentConfig.get_outputs();
   let result = [];
-  for (let index = 0; index < outputInfos.length; index++) {
-    let output = outputInfos[index];
-    if (output.is_active()) {
-      result.push(output.get_display_name());
+
+  try {
+    let gdkScreen = Gdk.Screen.get_default();
+    let screen = CinnamonDesktop.RRScreen.new(gdkScreen);
+    let currentConfig = CinnamonDesktop.RRConfig.new_current(screen);
+    let outputInfos = currentConfig.get_outputs();
+
+    for (let index = 0; index < outputInfos.length; index++) {
+      let output = outputInfos[index];
+      if (output.is_active()) {
+        result.push(output.get_display_name());
+      }
     }
+  } catch (err) {
+    return [];
   }
+
   return result;
 }
 
@@ -1451,7 +1458,11 @@ class CobiAppButton {
             continue;
           }
           let j = i;
-          let name = _("Monitor") + " " + j + " (" + this._applet.xrandrMonitors[j] + ")";
+          let name = _("Monitor") + " " + j;
+          if (this._applet.xrandrMonitors[j] != null) {
+            name += " (" + this._applet.xrandrMonitors[j] + ")";
+          }
+
           let monitorItem = new PopupMenu.PopupMenuItem(name);
           monitorItem.connect("activate", Lang.bind(this, function() {
             this._currentWindow.move_to_monitor(j);
