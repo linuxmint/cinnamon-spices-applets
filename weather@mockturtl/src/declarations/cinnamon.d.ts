@@ -338,11 +338,20 @@ declare namespace imports.gi.St {
     export class Widget {
         destroy(): void;
         style_class: string;
+        remove_style_class_name(style_class: string): void; 
+        has_style_class_name(style_class: string): boolean; 
+        add_style_class_name(style_class: string): void; 
         connect(id: string, binding: (...args: any) => any): void;
     }
     export class BoxLayout extends Widget {
         constructor(options ? : any)
         add_actor(element: Widget): void;
+        add_child(element: Widget): void;
+        set_x_align(align: gi.St.Align): void;
+        set_x_expand(expand: boolean): void; 
+    }
+    export class BoxLayoutChild extends Widget {
+        constructor(options ? : any)
     }
     export class Bin extends Widget {
         constructor(options ? : any)
@@ -373,6 +382,11 @@ declare namespace imports.gi.St {
     export enum Side {
         LEFT,
         RIGHT
+    }
+    export enum Align {
+        END,
+        MIDDLE,
+        START
     }
     export interface IconTypes {
         SYMBOLIC: string,

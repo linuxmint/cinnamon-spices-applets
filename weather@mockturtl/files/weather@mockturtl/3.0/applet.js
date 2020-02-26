@@ -62,7 +62,7 @@ var Lang = imports.lang;
 var keybindingManager = imports.ui.main.keybindingManager;
 var timeout_add_seconds = imports.mainloop.timeout_add_seconds;
 var _a = imports.gi.Soup, Message = _a.Message, Session = _a.Session, ProxyResolverDefault = _a.ProxyResolverDefault, SessionAsync = _a.SessionAsync;
-var _b = imports.gi.St, Bin = _b.Bin, DrawingArea = _b.DrawingArea, BoxLayout = _b.BoxLayout, Side = _b.Side, IconType = _b.IconType, Label = _b.Label, Icon = _b.Icon, Button = _b.Button;
+var _b = imports.gi.St, Bin = _b.Bin, DrawingArea = _b.DrawingArea, BoxLayout = _b.BoxLayout, Side = _b.Side, IconType = _b.IconType, Label = _b.Label, Icon = _b.Icon, Button = _b.Button, Align = _b.Align, BoxLayoutChild = _b.BoxLayoutChild;
 var get_language_names = imports.gi.GLib.get_language_names;
 var _c = imports.ui.applet, TextIconApplet = _c.TextIconApplet, AllowedLayout = _c.AllowedLayout, AppletPopupMenu = _c.AppletPopupMenu, MenuItem = _c.MenuItem;
 var PopupMenuManager = imports.ui.popupMenu.PopupMenuManager;
@@ -1040,16 +1040,9 @@ var WeatherApplet = (function (_super) {
             vertical: this._verticalOrientation,
             style_class: "hourly-forecast-container"
         });
-        var hourlyForecastBox = new BoxLayout({
-            vertical: true
-        });
-        var label = new Label({
-            text: "Forecast for the next 13 hours",
-            style_class: "hourly-forecast-title"
-        });
-        hourlyForecastBox.add_actor(label);
-        hourlyForecastBox.add_actor(this._hourlyForecastBox);
-        this._hourlyFutureWeather.set_child(hourlyForecastBox);
+        var mainBox = new BoxLayout({ vertical: true });
+        mainBox.add_actor(this._hourlyForecastBox);
+        this._hourlyFutureWeather.set_child(mainBox);
         for (var i = 0; i < this.hourlyForecastItems; i++) {
             var forecastWeather = {};
             forecastWeather.Icon = new Icon({
@@ -1069,7 +1062,16 @@ var WeatherApplet = (function (_super) {
             forecastBox.add_actor(forecastWeather.Day);
             forecastBox.add_actor(forecastWeather.Icon);
             forecastBox.add_actor(forecastWeather.Temperature);
-            forecastBox.add_actor(forecastWeather.Precipation);
+            var precipationBin = new Bin();
+            var precipationBox = new BoxLayout({ vertical: false });
+            var precipationIcon = new Icon({
+                icon_size: 12,
+                icon_name: "drops-symbolic",
+            });
+            precipationBox.add_child(precipationIcon);
+            precipationBox.add_actor(forecastWeather.Precipation);
+            precipationBin.set_child(precipationBox);
+            forecastBox.add_actor(precipationBin);
             this._hourlyForecast[i] = forecastWeather;
             this._hourlyForecastBox.add_actor(forecastBox);
         }

@@ -73,15 +73,10 @@
     margin: 10px;
 }
 
-.hourly-forecast-databox {
-    border-right: #999999 solid 1px;
-    /*padding: 0 10px 0 0;*/
-}
-
 .hourly-forecast-title {
     text-align: center;
     color: #999999;
-    font-size: 130%;
+    font-size: 115%;
 }
 
 .hourly-forecast-day {
@@ -95,13 +90,10 @@
     text-align: center;
     margin-bottom: 5px;
 }
+
 .hourly-forecast-temperature {
     text-align: center;
     margin-bottom: 5px;
-}
-
-.hourly-forecast-precipation {
-    text-align: center;
 }
 
 .hourly-forecast-icon {
