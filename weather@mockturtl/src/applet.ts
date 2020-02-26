@@ -199,7 +199,7 @@ class WeatherApplet extends TextIconApplet {
   private secondaryMenu: imports.ui.applet.AppletPopupMenu;
   private secondaryMenuManager: imports.ui.popupMenu.PopupMenuManager;
   private _hourlyFutureWeather: imports.gi.St.Bin;
-  private _hourlyForecast: ForecastUI[];
+  private _hourlyForecast: HourlyForecastUI[];
   private _hourlyForecastBox: imports.gi.St.BoxLayout;
 
   // Settings properties to bind
@@ -225,6 +225,8 @@ class WeatherApplet extends TextIconApplet {
   public _icon_type: string;
   public _useCustomAppletIcons: boolean;
   public _tempTextOverride: string;
+
+  public hourlyForecastItems: number = 13;
 
   public currentLocale: string = null;
   public log: Log;
@@ -324,15 +326,10 @@ class WeatherApplet extends TextIconApplet {
   private AddSecondaryMenu(orientation: imports.gi.St.Side) {
     this.secondaryMenuManager = new PopupMenuManager(this);
     this.secondaryMenu = new AppletPopupMenu(this, orientation)
-    if (typeof this.secondaryMenu.setCustomStyleClass === "function")
-      this.menu.setCustomStyleClass(STYLE_WEATHER_MENU);
-    else
-    {
-      this.menu.actor.add_style_class_name(STYLE_WEATHER_MENU);
-    }
     this.secondaryMenuManager.addMenu(this.secondaryMenu);
-    this._hourlyFutureWeather = new Bin({ style_class: STYLE_FORECAST });
+    this._hourlyFutureWeather = new Bin();
     // build menu
+    //
     let mainBox = new BoxLayout({ vertical: true })
     mainBox.add_actor(this._hourlyFutureWeather);
     this.secondaryMenu.addActor(mainBox)
@@ -980,10 +977,11 @@ class WeatherApplet extends TextIconApplet {
           if (this._translateCondition) comment = _(comment);
         }
 
-        forecastUi.Day.text = forecastData.time.toLocaleString();
+        forecastUi.Day.text = AwareDateString(forecastData.time, this.currentLocale, this._show24Hours);
         forecastUi.Temperature.text = t_low + ' ' + this.unitToUnicode(this._temperatureUnit);
         forecastUi.Summary.text = comment;
         forecastUi.Icon.icon_name = forecastData.condition.icon;
+        forecastUi.Precipation.text = Math.round(forecastData.precipProbability * 100).toString() + "%";
       }
       return true;
     } catch (e) {
@@ -1196,40 +1194,47 @@ class WeatherApplet extends TextIconApplet {
     this._hourlyForecast = []
     this._hourlyForecastBox = new BoxLayout({
       vertical: this._verticalOrientation,
-      style_class: STYLE_FORECAST_CONTAINER
+      style_class: "hourly-forecast-container"
     })
-    this._hourlyFutureWeather.set_child(this._hourlyForecastBox)
 
-    for (let i = 0; i < 8; i++) {
-      let forecastWeather: ForecastUI = {
-        Icon: new Icon,
-        Day: new Label,
-        Summary: new Label,
-        Temperature: new Label,
-      }
+    let hourlyForecastBox = new BoxLayout({
+      vertical: true
+    })
+
+    let label = new Label(
+      {
+        text: "Forecast for the next 13 hours",
+        style_class: "hourly-forecast-title"
+      })
+    hourlyForecastBox.add_actor(label)
+    hourlyForecastBox.add_actor(this._hourlyForecastBox)
+
+    this._hourlyFutureWeather.set_child(hourlyForecastBox)
+
+    for (let i = 0; i < this.hourlyForecastItems; i++) {
+      let forecastWeather: HourlyForecastUI = {} as HourlyForecastUI;
 
       forecastWeather.Icon = new Icon({
         icon_type: this._icon_type,
-        icon_size: 48,
+        icon_size: 36,
         icon_name: APPLET_ICON,
-        style_class: STYLE_FORECAST_ICON
+        style_class: "hourly-forecast-icon"
       })
 
-      forecastWeather.Day = new Label({ style_class: STYLE_FORECAST_DAY })
-      forecastWeather.Summary = new Label({ style_class: STYLE_FORECAST_SUMMARY })
-      forecastWeather.Temperature = new Label({ style_class: STYLE_FORECAST_TEMPERATURE })
-
-      let dataBox = new BoxLayout({ vertical: true, style_class: STYLE_FORECAST_DATABOX })
-      dataBox.add_actor(forecastWeather.Day)
-      dataBox.add_actor(forecastWeather.Summary)
-      dataBox.add_actor(forecastWeather.Temperature)
+      forecastWeather.Day = new Label({ style_class: "hourly-forecast-day" })
+      forecastWeather.Summary = new Label({ style_class: "hourly-forecast-summary" })
+      forecastWeather.Temperature = new Label({ style_class: "hourly-forecast-temperature" })
+      forecastWeather.Precipation = new Label({ style_class: "hourly-forecast-precipation" })
 
       let forecastBox = new BoxLayout({
-        style_class: STYLE_FORECAST_BOX,
+        style_class: "hourly-forecast-databox",
         vertical: true
       })
+      forecastBox.add_actor(forecastWeather.Day)
       forecastBox.add_actor(forecastWeather.Icon)
-      forecastBox.add_actor(dataBox)
+      //forecastBox.add_actor(forecastWeather.Summary)
+      forecastBox.add_actor(forecastWeather.Temperature)
+      forecastBox.add_actor(forecastWeather.Precipation)
 
       this._hourlyForecast[i] = forecastWeather;
       this._hourlyForecastBox.add_actor(forecastBox)
@@ -1615,6 +1620,14 @@ interface ForecastUI {
     Day: imports.gi.St.Label,
     Summary: imports.gi.St.Label,
     Temperature: imports.gi.St.Label,
+}
+
+interface HourlyForecastUI {
+  Icon: imports.gi.St.Icon,
+  Day: imports.gi.St.Label,
+  Summary: imports.gi.St.Label,
+  Temperature: imports.gi.St.Label,
+  Precipation: imports.gi.St.Label;
 }
 
 type SettingKeys = {

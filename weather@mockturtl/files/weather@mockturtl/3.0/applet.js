@@ -161,6 +161,7 @@ var WeatherApplet = (function (_super) {
         var _this = _super.call(this, orientation, panelHeight, instanceId) || this;
         _this.weather = null;
         _this.forecasts = [];
+        _this.hourlyForecastItems = 13;
         _this.currentLocale = null;
         _this._httpSession = new SessionAsync();
         _this.appletDir = imports.ui.appletManager.appletMeta[UUID].path;
@@ -235,13 +236,8 @@ var WeatherApplet = (function (_super) {
     WeatherApplet.prototype.AddSecondaryMenu = function (orientation) {
         this.secondaryMenuManager = new PopupMenuManager(this);
         this.secondaryMenu = new AppletPopupMenu(this, orientation);
-        if (typeof this.secondaryMenu.setCustomStyleClass === "function")
-            this.menu.setCustomStyleClass(STYLE_WEATHER_MENU);
-        else {
-            this.menu.actor.add_style_class_name(STYLE_WEATHER_MENU);
-        }
         this.secondaryMenuManager.addMenu(this.secondaryMenu);
-        this._hourlyFutureWeather = new Bin({ style_class: STYLE_FORECAST });
+        this._hourlyFutureWeather = new Bin();
         var mainBox = new BoxLayout({ vertical: true });
         mainBox.add_actor(this._hourlyFutureWeather);
         this.secondaryMenu.addActor(mainBox);
@@ -861,10 +857,11 @@ var WeatherApplet = (function (_super) {
                     if (this._translateCondition)
                         comment = _(comment);
                 }
-                forecastUi.Day.text = forecastData.time.toLocaleString();
+                forecastUi.Day.text = AwareDateString(forecastData.time, this.currentLocale, this._show24Hours);
                 forecastUi.Temperature.text = t_low + ' ' + this.unitToUnicode(this._temperatureUnit);
                 forecastUi.Summary.text = comment;
                 forecastUi.Icon.icon_name = forecastData.condition.icon;
+                forecastUi.Precipation.text = Math.round(forecastData.precipProbability * 100).toString() + "%";
             }
             return true;
         }
@@ -1041,35 +1038,38 @@ var WeatherApplet = (function (_super) {
         this._hourlyForecast = [];
         this._hourlyForecastBox = new BoxLayout({
             vertical: this._verticalOrientation,
-            style_class: STYLE_FORECAST_CONTAINER
+            style_class: "hourly-forecast-container"
         });
-        this._hourlyFutureWeather.set_child(this._hourlyForecastBox);
-        for (var i = 0; i < 8; i++) {
-            var forecastWeather = {
-                Icon: new Icon,
-                Day: new Label,
-                Summary: new Label,
-                Temperature: new Label,
-            };
+        var hourlyForecastBox = new BoxLayout({
+            vertical: true
+        });
+        var label = new Label({
+            text: "Forecast for the next 13 hours",
+            style_class: "hourly-forecast-title"
+        });
+        hourlyForecastBox.add_actor(label);
+        hourlyForecastBox.add_actor(this._hourlyForecastBox);
+        this._hourlyFutureWeather.set_child(hourlyForecastBox);
+        for (var i = 0; i < this.hourlyForecastItems; i++) {
+            var forecastWeather = {};
             forecastWeather.Icon = new Icon({
                 icon_type: this._icon_type,
-                icon_size: 48,
+                icon_size: 36,
                 icon_name: APPLET_ICON,
-                style_class: STYLE_FORECAST_ICON
+                style_class: "hourly-forecast-icon"
             });
-            forecastWeather.Day = new Label({ style_class: STYLE_FORECAST_DAY });
-            forecastWeather.Summary = new Label({ style_class: STYLE_FORECAST_SUMMARY });
-            forecastWeather.Temperature = new Label({ style_class: STYLE_FORECAST_TEMPERATURE });
-            var dataBox = new BoxLayout({ vertical: true, style_class: STYLE_FORECAST_DATABOX });
-            dataBox.add_actor(forecastWeather.Day);
-            dataBox.add_actor(forecastWeather.Summary);
-            dataBox.add_actor(forecastWeather.Temperature);
+            forecastWeather.Day = new Label({ style_class: "hourly-forecast-day" });
+            forecastWeather.Summary = new Label({ style_class: "hourly-forecast-summary" });
+            forecastWeather.Temperature = new Label({ style_class: "hourly-forecast-temperature" });
+            forecastWeather.Precipation = new Label({ style_class: "hourly-forecast-precipation" });
             var forecastBox = new BoxLayout({
-                style_class: STYLE_FORECAST_BOX,
+                style_class: "hourly-forecast-databox",
                 vertical: true
             });
+            forecastBox.add_actor(forecastWeather.Day);
             forecastBox.add_actor(forecastWeather.Icon);
-            forecastBox.add_actor(dataBox);
+            forecastBox.add_actor(forecastWeather.Temperature);
+            forecastBox.add_actor(forecastWeather.Precipation);
             this._hourlyForecast[i] = forecastWeather;
             this._hourlyForecastBox.add_actor(forecastBox);
         }

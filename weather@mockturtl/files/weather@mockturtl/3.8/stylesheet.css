@@ -68,3 +68,42 @@
 .weather-config {
   padding-right: 10px;
 }
+
+.hourly-forecast-container {
+    margin: 10px;
+}
+
+.hourly-forecast-databox {
+    border-right: #999999 solid 1px;
+    /*padding: 0 10px 0 0;*/
+}
+
+.hourly-forecast-title {
+    text-align: center;
+    color: #999999;
+    font-size: 130%;
+}
+
+.hourly-forecast-day {
+    /*color: #999999;*/
+    font-size: 110%;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.hourly-forecast-summary {
+    text-align: center;
+    margin-bottom: 5px;
+}
+.hourly-forecast-temperature {
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.hourly-forecast-precipation {
+    text-align: center;
+}
+
+.hourly-forecast-icon {
+    padding: 0 15px 10px 15px;
+}

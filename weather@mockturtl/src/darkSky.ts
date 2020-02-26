@@ -88,6 +88,7 @@ class DarkSky implements WeatherProvider {
         try {
             let sunrise = new Date(json.daily.data[0].sunriseTime * 1000);
             let sunset = new Date(json.daily.data[0].sunsetTime * 1000)
+            let suntimes = {sunrise: sunrise, sunset: sunset};
             let result: WeatherData = {
                 date: new Date(json.currently.time * 1000),
                 coord: {
@@ -110,7 +111,7 @@ class DarkSky implements WeatherProvider {
                 condition: {
                     main: this.GetShortCurrentSummary(json.currently.summary),
                     description: json.currently.summary,
-                    icon: weatherIconSafely(this.ResolveIcon(json.currently.icon, {sunrise: sunrise, sunset: sunset}), this.app._icon_type),
+                    icon: weatherIconSafely(this.ResolveIcon(json.currently.icon, suntimes), this.app._icon_type),
                     customIcon: this.ResolveCustomIcon(json.currently.icon)
                 },
                 extra_field: {
@@ -143,7 +144,7 @@ class DarkSky implements WeatherProvider {
 
                   result.forecasts.push(forecast);
             }
-            for (let i = 0; i < 18; i++) {
+            for (let i = 0; i < this.app.hourlyForecastItems; i++) {
                 let hour = json.hourly.data[i];
                 let hourlyForecast: HourlyForecastData = {          
                     time: new Date(hour.time * 1000),         
@@ -152,7 +153,7 @@ class DarkSky implements WeatherProvider {
                     condition: {
                       main: this.GetShortSummary(hour.summary),               
                       description: this.ProcessSummary(hour.summary),        
-                      icon: weatherIconSafely(this.ResolveIcon(hour.icon), this.app._icon_type),    
+                      icon: weatherIconSafely(this.ResolveIcon(hour.icon, suntimes, new Date(hour.time * 1000)), this.app._icon_type),    
                       customIcon: this.ResolveCustomIcon(hour.icon)           
                     },
                     precipIntensity: hour.precipIntensity,
@@ -280,14 +281,14 @@ class DarkSky implements WeatherProvider {
         return this.DarkSkyFilterWords.indexOf(word) != -1;
     }
 
-    private IsNight(sunTimes: SunTimes): boolean {
+    private IsNight(sunTimes: SunTimes, date?: Date): boolean {
         if (!sunTimes) return false;
-        let now = new Date();
+        let now = (!date) ? new Date() : date;
         if (now < sunTimes.sunrise || now > sunTimes.sunset) return true;
         return false;
     }
 
-    private ResolveIcon(icon: string, sunTimes?: SunTimes): string[] {
+    private ResolveIcon(icon: string, sunTimes?: SunTimes, date?: Date): string[] {
         switch (icon) {
             case "rain":
               return [icons.rain, icons.showers_scattered, icons.rain_freezing]
@@ -299,9 +300,9 @@ class DarkSky implements WeatherProvider {
               return [icons.fog]
             // There is no guarantee that there is a wind icon
             case "wind":
-                return (sunTimes && this.IsNight(sunTimes)) ? ["weather-wind", "wind", "weather-breeze", icons.clouds, icons.few_clouds_night] : ["weather-wind", "wind", "weather-breeze", icons.clouds, icons.few_clouds_day]
+                return (sunTimes && this.IsNight(sunTimes, date)) ? ["weather-wind", "wind", "weather-breeze", icons.clouds, icons.few_clouds_night] : ["weather-wind", "wind", "weather-breeze", icons.clouds, icons.few_clouds_day]
             case "cloudy":/* mostly cloudy (day) */
-              return (sunTimes && this.IsNight(sunTimes)) ? [icons.overcast, icons.clouds, icons.few_clouds_night] : [icons.overcast, icons.clouds, icons.few_clouds_day]
+              return (sunTimes && this.IsNight(sunTimes, date)) ? [icons.overcast, icons.clouds, icons.few_clouds_night] : [icons.overcast, icons.clouds, icons.few_clouds_day]
             case "partly-cloudy-night":
               return [icons.few_clouds_night]
             case "partly-cloudy-day":
