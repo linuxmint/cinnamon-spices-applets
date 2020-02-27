@@ -1,7 +1,7 @@
 Graphical Hardware Monitor
 ==========================
 
-**Graphical Hardware Monitor** is an applet that displays realtime CPU and memory load.
+**Graphical Hardware Monitor** is an applet that displays realtime system information (CPU load, memory usage, network in and out, root disk (/) usage (read and write)).
 
 The code for this applet can be found under hwmonitor@sylfurd here : [cinnamon-spices-applets](https://github.com/linuxmint/cinnamon-spices-applets/)
 
@@ -9,15 +9,17 @@ Issues can be reported here : [Issues](https://github.com/linuxmint/cinnamon-spi
 
 ### Changes
 
-You can open the configuration dialog by right-clicking the applet and selecting **Configure...**.
+**Version 1.1**:
+ * **Two new graphs**, showing disk usage, are now available (called **DISK (read)** and **DISK (write)**). These graphs shows the usage of the **root drive (/)**. It will automatically set itself up, based on the max usage over time. This means that the graph might show high usage in the beginning, but it will settle down once a reasonable max value has been set. These graphs are available in all versions of Cinnamon.
 
 **Version 1.0**:
-    * Multi-version support: Should now support older versions of Cinnamon (before 3.8).
+ * **Multi-version support**: Should now support older versions of Cinnamon (before 3.8).
 
-**Older versions** (without a real version number):
+**Older versions** (without a version number):
+ * You can open the configuration dialog by right-clicking the applet and selecting **Configure...**.
  * Configuration dialog has been cleaned up and divided into pages.
  * Some new themes have been implemented. (Thanks to **@cgvirus**)
- * There are two new graphs showing internet traffic in and out. Note that you might need to adjust the values for your Internet speed in the configuration dialog, both in and out, for the graphs to look good. The default value is 100 Mbit/s. You might want to set the values to slightly higher or than the Internet speed you have paid for. You can show the graphs in a linear or logarithmic scale.
+ * There are two new graphs showing internet traffic in and out. Note that you might need to adjust the values for your Internet speed in the configuration dialog, both in and out, for the graphs to look good. The default value is 100 Mbit/s. You might want to set the values to slightly higher or lower than the internet speed you have paid for. You can show the graphs in a linear or logarithmic scale.
  * You can now turn on or off each individual graphs.
  * You can now choose the width (horizontal panels) or the height (vertical panels) of each individual graph.
  * You can now show or hide a detail label, which show for example CPU usage %, or used memory etc.
@@ -30,7 +32,7 @@ You can open the configuration dialog by right-clicking the applet and selecting
 
 ### Requirements
 
-**Graphical Hardware Monitor** requires the **Gtop** package to collect system information. It might allready be installed on your system, but if the applet or graph is not shown, you might need to install the **Gtop** package manually.
+**Graphical Hardware Monitor** requires the **Gtop** package to collect system information. It might already be installed on your system, but if the applet or graph is not shown, you might need to install the **Gtop** package manually.
 
 * **Ubuntu/Mint**: install the package **gir1.2-gtop-2.0**
 * **Fedora**: install the package **libgtop2-devel**

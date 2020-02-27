@@ -217,6 +217,10 @@ class Graph {
             cr.showText(this.theme.netin_custom_label);
         else if (this.theme.netout_use_custom_label && this.provider.type == "NETOUT")
             cr.showText(this.theme.netout_custom_label);
+        else if (this.theme.diskread_use_custom_label && this.provider.type == "DISKREAD")
+            cr.showText(this.theme.diskread_custom_label);
+        else if (this.theme.diskwrite_use_custom_label && this.provider.type == "DISKWRITE")
+            cr.showText(this.theme.diskwrite_custom_label);
         else
             cr.showText(this.provider.name);
 
@@ -239,6 +243,10 @@ class Graph {
             cr.showText(this.theme.netin_custom_label);
         else if (this.theme.netout_use_custom_label && this.provider.type == "NETOUT")
             cr.showText(this.theme.netout_custom_label);
+        else if (this.theme.diskread_use_custom_label && this.provider.type == "DISKREAD")
+            cr.showText(this.theme.diskread_custom_label);
+        else if (this.theme.diskwrite_use_custom_label && this.provider.type == "DISKWRITE")
+            cr.showText(this.theme.diskwrite_custom_label);
         else
             cr.showText(this.provider.name);
     }
