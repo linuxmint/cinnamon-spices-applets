@@ -84,7 +84,7 @@
   { "type": "spinbutton"
   , "default": 2
   , "min": 2
-  , "max": 5
+  , "max": 7
   , "units": "days"
   , "step": 1
   , "description": "Forecast length"
