@@ -38,29 +38,36 @@ CpuDataProvider.prototype = {
     },
 
     getData : function() {
-        GTop.glibtop_get_cpu(this.gtop);
+        try {
+            GTop.glibtop_get_cpu(this.gtop);
 
-        this.current = this.gtop.idle;
+            this.current = this.gtop.idle;
 
-        let delta = this.gtop.total - this.last_total;
-        
-        // Sometimes after suspend we get weird values here
-        // which results in the graph being flat. This fixes
-        // that.
-        if (delta < -50000) {
-            delta = this.last_delta;
-        }
-
-        if (delta > 0) {
-            this.usage = (this.current - this.last) / delta;
-            this.last = this.current;
-            this.last_total = this.gtop.total;
-            this.last_delta = delta;
-        }
-
-        this.text = ((1-this.usage) * 100).toFixed(1) + "%";
+            let delta = this.gtop.total - this.last_total;
             
-        return 1 - this.usage;
+            // Sometimes after suspend we get weird values here
+            // which results in the graph being flat. This fixes
+            // that.
+            if (delta < -50000) {
+                delta = this.last_delta;
+            }
+
+            if (delta > 0) {
+                this.usage = (this.current - this.last) / delta;
+                this.last = this.current;
+                this.last_total = this.gtop.total;
+                this.last_delta = delta;
+            }
+
+            this.text = ((1-this.usage) * 100).toFixed(1) + "%";
+
+            let tools = new Tools();
+            return tools.limit(1 - this.usage, 0, 1);
+        } catch (e) {
+            global.logError(e);
+            this.text = "0 %";
+            return 0;
+        }
     }
 }
 
@@ -77,11 +84,18 @@ MemDataProvider.prototype = {
     },
 
     getData : function() {
-        GTop.glibtop_get_mem(this.gtopMem);
+        try {
+            GTop.glibtop_get_mem(this.gtopMem);
 
-        let format = new Tools();
-        this.text = format.formatBytes(this.gtopMem.user); 
-        return  this.gtopMem.user / this.gtopMem.total;
+            let format = new Tools();
+            this.text = format.formatBytes(this.gtopMem.user); 
+            
+            return format.limit(this.gtopMem.user / this.gtopMem.total, 0, 1);
+        } catch (e) {
+            global.logError(e);
+            this.text = "0 B";
+            return 0;
+        }
     }
 }
 
@@ -165,6 +179,8 @@ NetDataProvider.prototype = {
         }
         catch (e) {
             global.logError("Exception in getData():" + e.message);
+            this.text = "0 B";
+            return 0;
         }
     },
 
@@ -182,6 +198,7 @@ NetDataProvider.prototype = {
             }
         catch (e) {
             global.logError("Exception in getNetLoad():" + e.message);
+            return [0,0];
         }
     },
 
@@ -202,6 +219,61 @@ NetDataProvider.prototype = {
         return tools.limit(Math.log10(value)/Math.log10(max), 0, 1);
     }
 };
+
+// Class responsible for getting disk data
+function DiskDataProvider(frequency, type_read) {
+    this.init(frequency, type_read);
+}
+
+DiskDataProvider.prototype = {
+	init : function(frequency, type_read) {
+        this.gtop = new GTop.glibtop_fsusage();
+        this.frequency = frequency;
+        this.last = -1;
+        this.max = 1;
+        this.type_read = type_read;
+        if (this.type_read) {
+            this.name = _("DISK (read)");
+            this.type = "DISKREAD";
+        } else {
+            this.name = _("DISK (write)");
+            this.type = "DISKWRITE";
+        }
+    },
+
+    getData : function() {
+        try {
+            GTop.glibtop_get_fsusage(this.gtop, "/");
+
+            let current = 0;
+            if (this.type_read) {
+                current = this.gtop.read;
+            } else {
+                current = this.gtop.write;
+            }
+            
+            if (this.last==-1) {
+                this.text = "0 %";
+                this.last = current;
+                return 0;
+            } else {
+                let usage = (current - this.last) / this.frequency;
+                this.last = current;
+                if (usage > this.max)
+                    this.max = usage;
+                var text = ((usage/this.max)*100).toFixed(1);
+                this.text = text + "%";
+                let tools = new Tools();
+                return tools.limit(usage/this.max, 0, 1);
+            }    
+        }
+        catch (e) {
+            global.logError(e);
+            this.text = "0 %";
+            return 0;
+        }
+    }
+}
 
 function Tools() {
     this.init();

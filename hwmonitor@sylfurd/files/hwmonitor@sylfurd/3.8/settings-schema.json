@@ -6,7 +6,9 @@
         "CPU",
         "MEM",
         "NET_IN",
-        "NET_OUT"
+        "NET_OUT",
+        "DISK_READ",
+        "DISK_WRITE"
       ],
       "General": {
         "type": "page",
@@ -43,6 +45,20 @@
         "title": "NET (out)",
         "sections": [
           "NET_OUT_settings"
+        ]
+      },
+      "DISK_READ": {
+        "type": "page",
+        "title": "DISK (read)",
+        "sections": [
+          "DISK_READ_settings"
+        ]
+      },
+      "DISK_WRITE": {
+        "type": "page",
+        "title": "DISK (write)",
+        "sections": [
+          "DISK_WRITE_settings"
         ]
       },
       "general_settings": {
@@ -125,6 +141,28 @@
           "netout_custom_label",
           "netout_linlog",
           "netout_show_detail_label"
+        ]
+      },
+      "DISK_READ_settings": {
+        "type": "section",
+        "title": "DISK (read) settings",
+        "keys": [
+          "diskread_enable_graph",
+          "diskread_size",
+          "diskread_use_custom_label",
+          "diskread_custom_label",
+          "diskread_show_detail_label"
+        ]
+      },
+      "DISK_WRITE_settings": {
+        "type": "section",
+        "title": "DISK (write) settings",
+        "keys": [
+          "diskwrite_enable_graph",
+          "diskwrite_size",
+          "diskwrite_use_custom_label",
+          "diskwrite_custom_label",
+          "diskwrite_show_detail_label"
         ]
       }
     },
@@ -474,5 +512,79 @@
         "description": "Show details",
         "tooltip": "Show or hide the NET (out) usage label",
         "dependency": "netout_enable_graph"
-    }
+    },
+    "diskread_enable_graph": {
+      "type": "checkbox",
+      "default": true,
+      "description": "Show DISK (read) graph for the root disk (/).",
+      "tooltip": "Show or hide the DISK (read) graph. Shows usage of the root disk (/)."
+    },
+    "diskread_size": {
+        "type": "spinbutton",
+        "default": 50,
+        "min": 10,
+        "max": 500,
+        "step": 1,
+        "units" : "",
+        "description": "Horizontal panel width or vertical panel height.",
+        "tooltip":"Set the width of the graph for horizontal panels, or the height of the graph for vertical panels.",
+        "dependency": "diskread_enable_graph"
+    },
+    "diskread_use_custom_label": {
+        "type": "checkbox",
+        "default": false,
+        "description": "Use custom graph label.",
+        "tooltip": "Choose your own label for the DISK (read) graph.",
+        "dependency": "diskread_enable_graph"
+    },
+    "diskread_custom_label": {
+        "type": "entry",
+        "default": "DISK (read)",
+        "description": "Set the custom label for the DISK (read) graph.",
+        "dependency": "diskread_enable_graph"
+    },
+    "diskread_show_detail_label": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Show details.",
+        "tooltip": "Show or hide the DISK (read) usage label.",
+        "dependency": "diskread_enable_graph"
+    },
+    "diskwrite_enable_graph": {
+      "type": "checkbox",
+      "default": true,
+      "description": "Show DISK (write) graph for the root disk (/).",
+      "tooltip": "Show or hide the DISK (write) graph. Shows usage of the root disk (/)."
+    },
+    "diskwrite_size": {
+        "type": "spinbutton",
+        "default": 50,
+        "min": 10,
+        "max": 500,
+        "step": 1,
+        "units" : "",
+        "description": "Horizontal panel width or vertical panel height.",
+        "tooltip":"Set the width of the graph for horizontal panels, or the height of the graph for vertical panels.",
+        "dependency": "diskwrite_enable_graph"
+    },
+    "diskwrite_use_custom_label": {
+        "type": "checkbox",
+        "default": false,
+        "description": "Use custom graph label.",
+        "tooltip": "Choose your own label for the DISK (write) graph.",
+        "dependency": "diskwrite_enable_graph"
+    },
+    "diskwrite_custom_label": {
+        "type": "entry",
+        "default": "DISK (write)",
+        "description": "Set the custom label for the DISK (write) graph.",
+        "dependency": "diskwrite_enable_graph"
+    },
+    "diskwrite_show_detail_label": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Show details.",
+        "tooltip": "Show or hide the DISK (write) usage label.",
+        "dependency": "diskwrite_enable_graph"
+    }    
 }
