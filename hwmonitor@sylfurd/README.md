@@ -1,7 +1,7 @@
 Graphical Hardware Monitor
 ==========================
 
-**Graphical Hardware Monitor** is an applet that displays realtime CPU and memory load.
+**Graphical Hardware Monitor** is an applet that displays realtime system information (CPU load, memory usage, network in and out, root disk (/) usage (read and write)).
 
 The code for this applet can be found under hwmonitor@sylfurd here : [cinnamon-spices-applets](https://github.com/linuxmint/cinnamon-spices-applets/)
 
