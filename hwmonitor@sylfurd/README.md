@@ -10,10 +10,10 @@ Issues can be reported here : [Issues](https://github.com/linuxmint/cinnamon-spi
 ### Changes
 
 **Version 1.1**:
-    * **New graphs**: Two new graphs, showing disk usage, are now available (called **DISK (read)** and **DISK (write)**). These graphs shows the usage of the **root drive (/)**. It will automatically set itself up, based on the max usage over time. This means that the graph might show high usage in the beginning, but it will settle down once a reasonable max value has been set. These graphs are available in all versions of Cinnamon.
+ * **Two new graphs**, showing disk usage, are now available (called **DISK (read)** and **DISK (write)**). These graphs shows the usage of the **root drive (/)**. It will automatically set itself up, based on the max usage over time. This means that the graph might show high usage in the beginning, but it will settle down once a reasonable max value has been set. These graphs are available in all versions of Cinnamon.
 
 **Version 1.0**:
-    * Multi-version support: Should now support older versions of Cinnamon (before 3.8).
+ * **Multi-version support**: Should now support older versions of Cinnamon (before 3.8).
 
 **Older versions** (without a version number):
  * You can open the configuration dialog by right-clicking the applet and selecting **Configure...**.
