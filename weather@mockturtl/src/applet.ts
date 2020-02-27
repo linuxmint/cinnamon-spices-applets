@@ -122,6 +122,7 @@ const KEYS: SettingKeys  =  {
   WEATHER_TRANSLATE_CONDITION_KEY:  "translateCondition",
   WEATHER_VERTICAL_ORIENTATION_KEY:  "verticalOrientation",
   WEATHER_SHOW_TEXT_IN_PANEL_KEY:  "showTextInPanel",
+  WEATHER_TEMP_TEXT_OVERRIDE: "tempTextOverride",
   WEATHER_SHOW_COMMENT_IN_PANEL_KEY:  "showCommentInPanel",
   WEATHER_SHOW_SUNRISE_KEY: "showSunrise",
   WEATHER_SHOW_24HOURS_KEY:  "show24Hours",
@@ -244,9 +245,9 @@ class WeatherApplet extends TextIconApplet {
   public _locationLabelOverride: string;
   public _icon_type: string;
   public _useCustomAppletIcons: boolean;
+  public _tempTextOverride: string;
 
   public currentLocale: string = null;
-  public systemLanguage: string = null;
   public log: Log;
 
   private keybinding: any;
@@ -287,7 +288,6 @@ class WeatherApplet extends TextIconApplet {
     super(orientation, panelHeight, instanceId);
     this.instanceID = instanceId;
     this.currentLocale = this.constructJsLocale(get_language_names()[0]);
-    this.systemLanguage = this.currentLocale.split('-')[0];
     this.settings = new AppletSettings(this, UUID, instanceId);
     this.log = new Log(instanceId);
     this._httpSession.user_agent = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:37.0) Gecko/20100101 Firefox/37.0"; // ipapi blocks non-browsers agents, imitating browser
@@ -315,10 +315,11 @@ class WeatherApplet extends TextIconApplet {
     this.orientation = orientation;
     try {
       this.setAllowedLayout(AllowedLayout.BOTH);
-      this.update_label_visible();
     } catch (e) {
       // vertical panel not supported
     }
+
+    this.log.Debug("System locale is " + this.currentLocale);
   }
 
   private SetAppletOnPanel(): void {
@@ -548,14 +549,6 @@ class WeatherApplet extends TextIconApplet {
     }
   };
 
-  // Applet Overrides
-  private update_label_visible(): void {
-    if (this.orientation == Side.LEFT || this.orientation == Side.RIGHT)
-      this.hide_applet_label(true);
-    else
-      this.hide_applet_label(false);
-  };
-
   private on_orientation_changed(orientation: imports.gi.St.Side) {
     this.orientation = orientation;
     this.refreshWeather(true);
@@ -577,6 +570,14 @@ class WeatherApplet extends TextIconApplet {
 
   private on_applet_clicked(event: any): void {
     this.menu.toggle()
+  }
+
+  private on_applet_middle_clicked(event: any) {
+    
+  }
+
+  private on_panel_height_changed() {
+    // Implemented byApplets
   }
 
   private _onSeparatorAreaRepaint(area: any) {
@@ -624,7 +625,7 @@ class WeatherApplet extends TextIconApplet {
     jsLocale = "";
     for (let i = 0; i < tmp.length; i++) {
       if (i != 0) jsLocale += "-";
-      jsLocale += tmp[i];
+      jsLocale += tmp[i].toLowerCase();
     }
     return jsLocale;
   }
@@ -767,9 +768,9 @@ class WeatherApplet extends TextIconApplet {
       }
       // Condition Description
       if (this.weather.condition.description != null) {
-        descriptionCondition = this.weather.condition.description;
+        descriptionCondition = capitalizeFirstLetter(this.weather.condition.description);
         if (this._translateCondition) {
-          descriptionCondition = capitalizeFirstLetter(_(descriptionCondition));
+          descriptionCondition = capitalizeFirstLetter(_(this.weather.condition.description));
         }
       }
 
@@ -831,6 +832,15 @@ class WeatherApplet extends TextIconApplet {
           label += this.unitToUnicode(this._temperatureUnit);
         }
       }
+
+      // Overriding temperature panel label
+      if (nonempty(this._tempTextOverride)) {
+        label = this._tempTextOverride
+          .replace("{t}", temp)
+          .replace("{u}", this.unitToUnicode(this._temperatureUnit))
+          .replace("{c}", mainCondition);
+      }
+
       // Set Applet Label, even if the variables are empty
       this.set_applet_label(label);
 

@@ -195,6 +195,16 @@ var Weatherbit = (function () {
         date.setMinutes(parseInt(hoursMinutes[1]));
         return date;
     };
+    Weatherbit.prototype.ConvertToAPILocale = function (systemLocale) {
+        if (systemLocale == "zh-tw") {
+            return systemLocale;
+        }
+        var lang = systemLocale.split("-")[0];
+        if (lang == "cs") {
+            return "cz";
+        }
+        return lang;
+    };
     Weatherbit.prototype.ConstructQuery = function (query) {
         var key = this.app._apiKey.replace(" ", "");
         var location = this.app._location.replace(" ", "");
@@ -211,9 +221,9 @@ var Weatherbit = (function () {
         if (isCoordinate(location)) {
             var latLong = location.split(",");
             query = query + "key=" + key + "&lat=" + latLong[0] + "&lon=" + latLong[1] + "&units=S";
-            this.app.log.Debug("System language is " + this.app.systemLanguage.toString());
-            if (isLangSupported(this.app.systemLanguage, this.supportedLanguages) && this.app._translateCondition) {
-                query = query + "&lang=" + this.app.systemLanguage;
+            var lang = this.ConvertToAPILocale(this.app.currentLocale);
+            if (isLangSupported(lang, this.supportedLanguages) && this.app._translateCondition) {
+                query = query + "&lang=" + lang;
             }
             return query;
         }

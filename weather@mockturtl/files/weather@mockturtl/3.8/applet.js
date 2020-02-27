@@ -84,6 +84,7 @@ const KEYS = {
     WEATHER_TRANSLATE_CONDITION_KEY: "translateCondition",
     WEATHER_VERTICAL_ORIENTATION_KEY: "verticalOrientation",
     WEATHER_SHOW_TEXT_IN_PANEL_KEY: "showTextInPanel",
+    WEATHER_TEMP_TEXT_OVERRIDE: "tempTextOverride",
     WEATHER_SHOW_COMMENT_IN_PANEL_KEY: "showCommentInPanel",
     WEATHER_SHOW_SUNRISE_KEY: "showSunrise",
     WEATHER_SHOW_24HOURS_KEY: "show24Hours",
@@ -139,7 +140,6 @@ class WeatherApplet extends TextIconApplet {
         };
         this.forecasts = [];
         this.currentLocale = null;
-        this.systemLanguage = null;
         this._httpSession = new SessionAsync();
         this.appletDir = imports.ui.appletManager.appletMeta[UUID].path;
         this.locProvider = new ipApi.IpApi(this);
@@ -169,7 +169,6 @@ class WeatherApplet extends TextIconApplet {
         };
         this.instanceID = instanceId;
         this.currentLocale = this.constructJsLocale(get_language_names()[0]);
-        this.systemLanguage = this.currentLocale.split('-')[0];
         this.settings = new AppletSettings(this, UUID, instanceId);
         this.log = new Log(instanceId);
         this._httpSession.user_agent = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:37.0) Gecko/20100101 Firefox/37.0";
@@ -189,10 +188,10 @@ class WeatherApplet extends TextIconApplet {
         this.orientation = orientation;
         try {
             this.setAllowedLayout(AllowedLayout.BOTH);
-            this.update_label_visible();
         }
         catch (e) {
         }
+        this.log.Debug("System locale is " + this.currentLocale);
     }
     SetAppletOnPanel() {
         this.set_applet_icon_name(APPLET_ICON);
@@ -370,13 +369,6 @@ class WeatherApplet extends TextIconApplet {
         }
     }
     ;
-    update_label_visible() {
-        if (this.orientation == Side.LEFT || this.orientation == Side.RIGHT)
-            this.hide_applet_label(true);
-        else
-            this.hide_applet_label(false);
-    }
-    ;
     on_orientation_changed(orientation) {
         this.orientation = orientation;
         this.refreshWeather(true);
@@ -393,6 +385,10 @@ class WeatherApplet extends TextIconApplet {
     }
     on_applet_clicked(event) {
         this.menu.toggle();
+    }
+    on_applet_middle_clicked(event) {
+    }
+    on_panel_height_changed() {
     }
     _onSeparatorAreaRepaint(area) {
         let cr = area.get_context();
@@ -426,7 +422,7 @@ class WeatherApplet extends TextIconApplet {
         for (let i = 0; i < tmp.length; i++) {
             if (i != 0)
                 jsLocale += "-";
-            jsLocale += tmp[i];
+            jsLocale += tmp[i].toLowerCase();
         }
         return jsLocale;
     }
@@ -552,9 +548,9 @@ class WeatherApplet extends TextIconApplet {
                 }
             }
             if (this.weather.condition.description != null) {
-                descriptionCondition = this.weather.condition.description;
+                descriptionCondition = capitalizeFirstLetter(this.weather.condition.description);
                 if (this._translateCondition) {
-                    descriptionCondition = capitalizeFirstLetter(_(descriptionCondition));
+                    descriptionCondition = capitalizeFirstLetter(_(this.weather.condition.description));
                 }
             }
             let location = "";
@@ -603,6 +599,12 @@ class WeatherApplet extends TextIconApplet {
                 if (this.panel._getScaledPanelHeight() >= 35) {
                     label += this.unitToUnicode(this._temperatureUnit);
                 }
+            }
+            if (nonempty(this._tempTextOverride)) {
+                label = this._tempTextOverride
+                    .replace("{t}", temp)
+                    .replace("{u}", this.unitToUnicode(this._temperatureUnit))
+                    .replace("{c}", mainCondition);
             }
             this.set_applet_label(label);
             if (this.weather.humidity != null) {

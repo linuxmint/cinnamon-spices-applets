@@ -53,9 +53,9 @@ var weatherIconSafely = utils.weatherIconSafely;
 var get = utils.get;
 var OpenWeatherMap = (function () {
     function OpenWeatherMap(_app) {
-        this.supportedLanguages = ["ar", "bg", "ca", "cz", "de", "el", "en", "fa", "fi",
-            "fr", "gl", "hr", "hu", "it", "ja", "kr", "la", "lt", "mk", "nl", "pl",
-            "pt", "ro", "ru", "se", "sk", "sl", "es", "tr", "ua", "vi", "zh_cn", "zh_tw"];
+        this.supportedLanguages = ["af", "ar", "az", "bg", "ca", "cz", "da", "de", "el", "en", "eu", "fa", "fi",
+            "fr", "gl", "he", "hi", "hr", "hu", "id", "it", "ja", "kr", "la", "lt", "mk", "no", "nl", "pl",
+            "pt", "pt_br", "ro", "ru", "se", "sk", "sl", "sp", "es", "sr", "th", "tr", "ua", "uk", "vi", "zh_cn", "zh_tw", "zu"];
         this.current_url = "https://api.openweathermap.org/data/2.5/weather?";
         this.daily_url = "https://api.openweathermap.org/data/2.5/forecast/daily?";
         this.app = _app;
@@ -195,8 +195,9 @@ var OpenWeatherMap = (function () {
         if (locString != null) {
             query = query + locString + "&APPID=";
             query += "1c73f8259a86c6fd43c7163b543c8640";
-            if (this.app._translateCondition && isLangSupported(this.app.systemLanguage, this.supportedLanguages)) {
-                query = query + "&lang=" + this.app.systemLanguage;
+            var locale = this.ConvertToAPILocale(this.app.currentLocale);
+            if (this.app._translateCondition && isLangSupported(locale, this.supportedLanguages)) {
+                query = query + "&lang=" + locale;
             }
             return query;
         }
@@ -218,6 +219,28 @@ var OpenWeatherMap = (function () {
             return "q=" + loc;
     };
     ;
+    OpenWeatherMap.prototype.ConvertToAPILocale = function (systemLocale) {
+        if (systemLocale == "zh-cn" || systemLocale == "zh-cn" || systemLocale == "pt-br") {
+            return systemLocale;
+        }
+        var lang = systemLocale.split("-")[0];
+        if (lang == "sv") {
+            return "se";
+        }
+        else if (lang == "cs") {
+            return "cz";
+        }
+        else if (lang == "ko") {
+            return "kr";
+        }
+        else if (lang == "lv") {
+            return "la";
+        }
+        else if (lang == "nn" || lang == "nb") {
+            return "no";
+        }
+        return lang;
+    };
     OpenWeatherMap.prototype.HandleResponseErrors = function (json) {
         var errorMsg = "OpenWeathermap Response: ";
         var error = {

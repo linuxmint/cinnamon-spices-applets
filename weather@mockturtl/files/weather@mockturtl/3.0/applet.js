@@ -133,6 +133,7 @@ var KEYS = {
     WEATHER_TRANSLATE_CONDITION_KEY: "translateCondition",
     WEATHER_VERTICAL_ORIENTATION_KEY: "verticalOrientation",
     WEATHER_SHOW_TEXT_IN_PANEL_KEY: "showTextInPanel",
+    WEATHER_TEMP_TEXT_OVERRIDE: "tempTextOverride",
     WEATHER_SHOW_COMMENT_IN_PANEL_KEY: "showCommentInPanel",
     WEATHER_SHOW_SUNRISE_KEY: "showSunrise",
     WEATHER_SHOW_24HOURS_KEY: "show24Hours",
@@ -189,7 +190,6 @@ var WeatherApplet = (function (_super) {
         };
         _this.forecasts = [];
         _this.currentLocale = null;
-        _this.systemLanguage = null;
         _this._httpSession = new SessionAsync();
         _this.appletDir = imports.ui.appletManager.appletMeta[UUID].path;
         _this.locProvider = new ipApi.IpApi(_this);
@@ -219,7 +219,6 @@ var WeatherApplet = (function (_super) {
         };
         _this.instanceID = instanceId;
         _this.currentLocale = _this.constructJsLocale(get_language_names()[0]);
-        _this.systemLanguage = _this.currentLocale.split('-')[0];
         _this.settings = new AppletSettings(_this, UUID, instanceId);
         _this.log = new Log(instanceId);
         _this._httpSession.user_agent = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:37.0) Gecko/20100101 Firefox/37.0";
@@ -239,10 +238,10 @@ var WeatherApplet = (function (_super) {
         _this.orientation = orientation;
         try {
             _this.setAllowedLayout(AllowedLayout.BOTH);
-            _this.update_label_visible();
         }
         catch (e) {
         }
+        _this.log.Debug("System locale is " + _this.currentLocale);
         return _this;
     }
     WeatherApplet.prototype.SetAppletOnPanel = function () {
@@ -476,13 +475,6 @@ var WeatherApplet = (function (_super) {
         });
     };
     ;
-    WeatherApplet.prototype.update_label_visible = function () {
-        if (this.orientation == Side.LEFT || this.orientation == Side.RIGHT)
-            this.hide_applet_label(true);
-        else
-            this.hide_applet_label(false);
-    };
-    ;
     WeatherApplet.prototype.on_orientation_changed = function (orientation) {
         this.orientation = orientation;
         this.refreshWeather(true);
@@ -499,6 +491,10 @@ var WeatherApplet = (function (_super) {
     };
     WeatherApplet.prototype.on_applet_clicked = function (event) {
         this.menu.toggle();
+    };
+    WeatherApplet.prototype.on_applet_middle_clicked = function (event) {
+    };
+    WeatherApplet.prototype.on_panel_height_changed = function () {
     };
     WeatherApplet.prototype._onSeparatorAreaRepaint = function (area) {
         var cr = area.get_context();
@@ -532,7 +528,7 @@ var WeatherApplet = (function (_super) {
         for (var i = 0; i < tmp.length; i++) {
             if (i != 0)
                 jsLocale += "-";
-            jsLocale += tmp[i];
+            jsLocale += tmp[i].toLowerCase();
         }
         return jsLocale;
     };
@@ -691,9 +687,9 @@ var WeatherApplet = (function (_super) {
                 }
             }
             if (this.weather.condition.description != null) {
-                descriptionCondition = this.weather.condition.description;
+                descriptionCondition = capitalizeFirstLetter(this.weather.condition.description);
                 if (this._translateCondition) {
-                    descriptionCondition = capitalizeFirstLetter(_(descriptionCondition));
+                    descriptionCondition = capitalizeFirstLetter(_(this.weather.condition.description));
                 }
             }
             var location = "";
@@ -742,6 +738,12 @@ var WeatherApplet = (function (_super) {
                 if (this.panel._getScaledPanelHeight() >= 35) {
                     label += this.unitToUnicode(this._temperatureUnit);
                 }
+            }
+            if (nonempty(this._tempTextOverride)) {
+                label = this._tempTextOverride
+                    .replace("{t}", temp)
+                    .replace("{u}", this.unitToUnicode(this._temperatureUnit))
+                    .replace("{c}", mainCondition);
             }
             this.set_applet_label(label);
             if (this.weather.humidity != null) {
