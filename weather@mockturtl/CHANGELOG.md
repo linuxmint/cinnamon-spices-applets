@@ -1,3 +1,8 @@
+# 2.4.4
+
+* Fixes [#2782](https://github.com/linuxmint/cinnamon-spices-applets/issues/2872)
+* Add ability to override applet label with injecting values (customise and fit text on horizontal and vertical panels as well)
+
 # 2.4.3
 
 * Fixes [#2861](https://github.com/linuxmint/cinnamon-spices-applets/issues/2861)

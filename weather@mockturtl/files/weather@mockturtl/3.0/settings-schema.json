@@ -135,12 +135,18 @@
   { "type": "checkbox"
   , "default": true
   , "description": "Display current temperature in panel"
-  }
-, "showCommentInPanel":
+  },
+  "showCommentInPanel":
   { "type": "checkbox"
   , "default": true
   , "description": "Show the weather condition (e.g., \"Windy\", \"Clear\") in the panel",
     "tooltip": "Only works with horizontal panels"
+  },
+  "tempTextOverride":
+  { "type": "entry"
+  , "default": ""
+  , "description": "Override label on panel"
+  , "tooltip": "Available values are: {c} is condition, {t} is temperature and {u} is unit.\nCan be used if label does not fit on vertical panel, among other smart things."
   },
   "useCustomAppletIcons":
   { "type": "checkbox"

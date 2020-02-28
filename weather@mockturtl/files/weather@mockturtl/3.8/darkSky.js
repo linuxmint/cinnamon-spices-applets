@@ -118,6 +118,13 @@ class DarkSky {
         }
     }
     ;
+    ConvertToAPILocale(systemLocale) {
+        if (systemLocale == "zh-tw") {
+            return systemLocale;
+        }
+        let lang = systemLocale.split("-")[0];
+        return lang;
+    }
     ConstructQuery() {
         this.SetQueryUnit();
         let query;
@@ -136,9 +143,9 @@ class DarkSky {
         if (isCoordinate(location)) {
             query = this.query + key + "/" + location +
                 "?exclude=minutely,hourly,flags" + "&units=" + this.unit;
-            this.app.log.Debug("System language is " + this.app.systemLanguage.toString());
-            if (isLangSupported(this.app.systemLanguage, this.supportedLanguages) && this.app._translateCondition) {
-                query = query + "&lang=" + this.app.systemLanguage;
+            let locale = this.ConvertToAPILocale(this.app.currentLocale);
+            if (isLangSupported(locale, this.supportedLanguages) && this.app._translateCondition) {
+                query = query + "&lang=" + locale;
             }
             return query;
         }
