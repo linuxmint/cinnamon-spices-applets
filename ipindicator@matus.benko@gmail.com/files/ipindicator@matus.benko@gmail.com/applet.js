@@ -1,7 +1,5 @@
-const Clutter = imports.gi.Clutter;
 const Applet = imports.ui.applet;
 const PopupMenu = imports.ui.popupMenu;
-const Util = imports.misc.util;
 const St = imports.gi.St;
 const Gtk = imports.gi.Gtk;
 const Soup = imports.gi.Soup;
@@ -17,24 +15,18 @@ Soup.Session.prototype.add_feature.call(_httpSession,
 
 var defaultTooltip = _("trying to fetch IP information");
 var noConnectionIcon = "nm-no-connection";
-var homeIcon = "gtk-home";
 
 const Debugger = {
     logLevel: 0,
-    setLogLevel: function(level) {
-        this.log("Setting new log level: "+level, 1);
-        this.logLevel = level;  
-    },
-    
     log: function(message, level) {
         if (!level) {
             level = 1;
         }
-        if (level <= this.logLevel) {    
+        if (level <= this.logLevel) {
             global.log(message);
         }
     }
-}
+};
 
 const IpGateway = {
     init: function() {
@@ -134,7 +126,7 @@ const IpGateway = {
             callback(data);
         });
     }
-}
+};
 
 function IpIndicatorApplet(metadata, orientation, panel_height, instance_id) {
     this._init(metadata, orientation, panel_height, instance_id);
@@ -355,7 +347,7 @@ IpIndicatorApplet.prototype = {
         Debugger.log("Searching for ISP settings", 2);
         for (var i = 0; i < this.ispsSettings.length; i++) {
             var ispSetting = this.ispsSettings[i];
-            if (isp == ispSetting.name) {                
+            if (isp === ispSetting.name) {
                 Debugger.log("ISP setting found: "+ ispSetting.name, 2);
                 
                 if (ispSetting.icon) {
@@ -401,7 +393,7 @@ IpIndicatorApplet.prototype = {
             Debugger.log("Old public IP: "+oldPublicIP, 2);
             Debugger.log("Current public IP: "+this._publicIp, 2);
             
-            let areChanged = oldPublicIP != this._publicIp;
+            let areChanged = oldPublicIP !== this._publicIp;
             if (areChanged) Debugger.log("CHANGED!!!"); else  Debugger.log("ARE NOT CHANGED");
             if (areChanged) {
                 actionIfYes();
@@ -418,7 +410,7 @@ IpIndicatorApplet.prototype = {
         Debugger.log("Old interfaces: " + oldInterfaces, 2);
         Debugger.log("Current interfaces: " + this._interfaces, 2);
         
-        let areChanged = oldInterfaces.toString() != this._interfaces.toString();
+        let areChanged = oldInterfaces.toString() !== this._interfaces.toString();
         if (areChanged) Debugger.log("CHANGED!!!"); else  Debugger.log("ARE NOT CHANGED");
         return areChanged;
     },
