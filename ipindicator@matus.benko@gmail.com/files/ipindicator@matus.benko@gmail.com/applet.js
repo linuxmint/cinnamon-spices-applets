@@ -13,8 +13,8 @@ const GLib = imports.gi.GLib;
 Soup.Session.prototype.add_feature.call(_httpSession,
     new Soup.ProxyResolverDefault());
 
-var defaultTooltip = _("trying to fetch IP information");
-var noConnectionIcon = "nm-no-connection";
+const defaultTooltip = _("trying to fetch IP information");
+const noConnectionIcon = "nm-no-connection";
 
 const Debugger = {
     logLevel: 0,
@@ -113,7 +113,7 @@ const IpGateway = {
 
     _get: function (url, callback) {
         Debugger.log(url, 2);
-        var request = new Soup.Message({
+        const request = new Soup.Message({
             method: 'GET',
             uri: new Soup.URI(url)
         });
@@ -335,14 +335,14 @@ IpIndicatorApplet.prototype = {
         this._ip.set_text(ip);
         this._country.set_text(country);
 
-        var tooltip = ip;
-        var ispName = isp;
-        var iconName;
-        var isIspSettingFound = false;
+        let tooltip = ip;
+        let ispName = isp;
+        let iconName;
+        let isIspSettingFound = false;
 
         Debugger.log("Searching for ISP settings", 2);
-        for (var i = 0; i < this.ispsSettings.length; i++) {
-            var ispSetting = this.ispsSettings[i];
+        for (let i = 0; i < this.ispsSettings.length; i++) {
+            const ispSetting = this.ispsSettings[i];
             if (isp === ispSetting.name) {
                 Debugger.log("ISP setting found: " + ispSetting.name, 2);
                 if (ispSetting.icon) {
@@ -365,7 +365,7 @@ IpIndicatorApplet.prototype = {
             iconName = countryCode;
         }
 
-        var icon_file = Gio.File.new_for_path(iconName);
+        const icon_file = Gio.File.new_for_path(iconName);
         if (icon_file.query_exists(null)) {
             this.set_applet_icon_path(iconName);
         } else {
