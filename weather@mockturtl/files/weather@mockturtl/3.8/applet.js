@@ -93,7 +93,8 @@ const KEYS = {
     WEATHER_PRESSURE_UNIT_KEY: "pressureUnit",
     WEATHER_SHORT_CONDITIONS_KEY: "shortConditions",
     WEATHER_MANUAL_LOCATION: "manualLocation",
-    WEATHER_USE_CCUSTOM_APPLETICONS_KEY: 'useCustomAppletIcons'
+    WEATHER_USE_CUSTOM_APPLETICONS_KEY: 'useCustomAppletIcons',
+    WEATHER_USE_CUSTOM_MENUICONS_KEY: "useCustomMenuIcons"
 };
 imports.gettext.bindtextdomain(UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
 function _(str) {
@@ -217,14 +218,10 @@ class WeatherApplet extends TextIconApplet {
         this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, WEATHER_LOCATION, ("_" + WEATHER_LOCATION), this.refreshAndRebuild, null);
         this.settings.bindProperty(BindingDirection.IN, "keybinding", "keybinding", this._onKeySettingsUpdated, null);
         keybindingManager.addHotKey(UUID, this.keybinding, Lang.bind(this, this.on_applet_clicked));
-        this.updateIconType();
+        this._icon_type = this.GetCurrentIconType();
         this.settings.connect(SIGNAL_CHANGED + WEATHER_USE_SYMBOLIC_ICONS_KEY, Lang.bind(this, function () {
-            this.updateIconType();
-            this._applet_icon.icon_type = this._icon_type;
-            this._currentWeatherIcon.icon_type = this._icon_type;
-            for (let i = 0; i < this._forecastDays; i++) {
-                this._forecast[i].Icon.icon_type = this._icon_type;
-            }
+            this._icon_type = this.GetCurrentIconType();
+            this.UpdateIconType(this._icon_type);
             this.refreshWeather();
         }));
     }
@@ -234,6 +231,12 @@ class WeatherApplet extends TextIconApplet {
             this.refreshAndRebuild();
         }));
         this._applet_context_menu.addMenuItem(refreshMenuItem);
+    }
+    UpdateIconType(iconType) {
+        this._currentWeatherIcon.icon_type = iconType;
+        for (let i = 0; i < this._forecastDays; i++) {
+            this._forecast[i].Icon.icon_type = iconType;
+        }
     }
     BuildPopupMenu() {
         this._currentWeather = new Bin({ style_class: STYLE_CURRENT });
@@ -409,8 +412,8 @@ class WeatherApplet extends TextIconApplet {
         cr.fill();
     }
     ;
-    updateIconType() {
-        this._icon_type = this.settings.getValue(WEATHER_USE_SYMBOLIC_ICONS_KEY) ?
+    GetCurrentIconType() {
+        return this.settings.getValue(WEATHER_USE_SYMBOLIC_ICONS_KEY) ?
             IconType.SYMBOLIC :
             IconType.FULLCOLOR;
     }
@@ -569,7 +572,14 @@ class WeatherApplet extends TextIconApplet {
             if (iconname == null) {
                 iconname = "weather-severe-alert";
             }
-            this._currentWeatherIcon.icon_name = iconname;
+            if (this._useCustomMenuIcons) {
+                this._currentWeatherIcon.icon_name = this.GetCustomIconname(this.weather.condition.customIcon);
+                this.UpdateIconType(IconType.SYMBOLIC);
+            }
+            else {
+                this._currentWeatherIcon.icon_name = iconname;
+                this.UpdateIconType(this.GetCurrentIconType());
+            }
             this._icon_type == IconType.SYMBOLIC ?
                 this.set_applet_icon_symbolic_name(iconname) :
                 this.set_applet_icon_name(iconname);
@@ -684,7 +694,7 @@ class WeatherApplet extends TextIconApplet {
                 forecastUi.Day.text = dayName;
                 forecastUi.Temperature.text = first_temperature + ' ' + '\u002F' + ' ' + second_temperature + ' ' + this.unitToUnicode(this._temperatureUnit);
                 forecastUi.Summary.text = comment;
-                forecastUi.Icon.icon_name = forecastData.condition.icon;
+                forecastUi.Icon.icon_name = (this._useCustomMenuIcons) ? this.GetCustomIconname(forecastData.condition.customIcon) : forecastData.condition.icon;
             }
             return true;
         }
@@ -854,6 +864,9 @@ class WeatherApplet extends TextIconApplet {
     ;
     SetCustomIcon(iconName) {
         this.set_applet_icon_symbolic_name(iconName + "-symbolic");
+    }
+    GetCustomIconname(iconName) {
+        return (iconName + "-symbolic");
     }
     unitToUnicode(unit) {
         return unit == "fahrenheit" ? '\u2109' : '\u2103';

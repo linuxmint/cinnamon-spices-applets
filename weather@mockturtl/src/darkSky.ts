@@ -16,7 +16,7 @@ var FahrenheitToKelvin = utils.FahrenheitToKelvin as (fahr: number) => number;
 var CelsiusToKelvin = utils.CelsiusToKelvin as (celsius: number) => number;
 var MPHtoMPS = utils.MPHtoMPS as (speed: number) => number;
 var icons = utils.icons;
-var weatherIconSafely = utils.weatherIconSafely as (code: string[], icon_type: string) => string;
+var weatherIconSafely = utils.weatherIconSafely as (code: string[], icon_type: imports.gi.St.IconType) => string;
 
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////

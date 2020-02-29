@@ -207,6 +207,11 @@
   , "default": false
   , "description": "Use symbolic icons in the applet"
   },
+  "useCustomMenuIcons":
+  { "type": "checkbox"
+  , "default": false
+  , "description": "Use custom icons in the popup menu"
+  },
   "credits": {
     "type": "header",
     "description": "powered by: OpenWeatherMap, DarkSky, ipapi. Big Thanks to OpenWeatherMap for their support!"

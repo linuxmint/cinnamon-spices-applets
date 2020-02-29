@@ -142,7 +142,8 @@ var KEYS = {
     WEATHER_PRESSURE_UNIT_KEY: "pressureUnit",
     WEATHER_SHORT_CONDITIONS_KEY: "shortConditions",
     WEATHER_MANUAL_LOCATION: "manualLocation",
-    WEATHER_USE_CCUSTOM_APPLETICONS_KEY: 'useCustomAppletIcons'
+    WEATHER_USE_CUSTOM_APPLETICONS_KEY: 'useCustomAppletIcons',
+    WEATHER_USE_CUSTOM_MENUICONS_KEY: "useCustomMenuIcons"
 };
 imports.gettext.bindtextdomain(UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
 function _(str) {
@@ -268,14 +269,10 @@ var WeatherApplet = (function (_super) {
         this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, WEATHER_LOCATION, ("_" + WEATHER_LOCATION), this.refreshAndRebuild, null);
         this.settings.bindProperty(BindingDirection.IN, "keybinding", "keybinding", this._onKeySettingsUpdated, null);
         keybindingManager.addHotKey(UUID, this.keybinding, Lang.bind(this, this.on_applet_clicked));
-        this.updateIconType();
+        this._icon_type = this.GetCurrentIconType();
         this.settings.connect(SIGNAL_CHANGED + WEATHER_USE_SYMBOLIC_ICONS_KEY, Lang.bind(this, function () {
-            this.updateIconType();
-            this._applet_icon.icon_type = this._icon_type;
-            this._currentWeatherIcon.icon_type = this._icon_type;
-            for (var i = 0; i < this._forecastDays; i++) {
-                this._forecast[i].Icon.icon_type = this._icon_type;
-            }
+            this._icon_type = this.GetCurrentIconType();
+            this.UpdateIconType(this._icon_type);
             this.refreshWeather();
         }));
     };
@@ -285,6 +282,12 @@ var WeatherApplet = (function (_super) {
             this.refreshAndRebuild();
         }));
         this._applet_context_menu.addMenuItem(refreshMenuItem);
+    };
+    WeatherApplet.prototype.UpdateIconType = function (iconType) {
+        this._currentWeatherIcon.icon_type = iconType;
+        for (var i = 0; i < this._forecastDays; i++) {
+            this._forecast[i].Icon.icon_type = iconType;
+        }
     };
     WeatherApplet.prototype.BuildPopupMenu = function () {
         this._currentWeather = new Bin({ style_class: STYLE_CURRENT });
@@ -515,8 +518,8 @@ var WeatherApplet = (function (_super) {
         cr.fill();
     };
     ;
-    WeatherApplet.prototype.updateIconType = function () {
-        this._icon_type = this.settings.getValue(WEATHER_USE_SYMBOLIC_ICONS_KEY) ?
+    WeatherApplet.prototype.GetCurrentIconType = function () {
+        return this.settings.getValue(WEATHER_USE_SYMBOLIC_ICONS_KEY) ?
             IconType.SYMBOLIC :
             IconType.FULLCOLOR;
     };
@@ -708,7 +711,14 @@ var WeatherApplet = (function (_super) {
             if (iconname == null) {
                 iconname = "weather-severe-alert";
             }
-            this._currentWeatherIcon.icon_name = iconname;
+            if (this._useCustomMenuIcons) {
+                this._currentWeatherIcon.icon_name = this.GetCustomIconname(this.weather.condition.customIcon);
+                this.UpdateIconType(IconType.SYMBOLIC);
+            }
+            else {
+                this._currentWeatherIcon.icon_name = iconname;
+                this.UpdateIconType(this.GetCurrentIconType());
+            }
             this._icon_type == IconType.SYMBOLIC ?
                 this.set_applet_icon_symbolic_name(iconname) :
                 this.set_applet_icon_name(iconname);
@@ -823,7 +833,7 @@ var WeatherApplet = (function (_super) {
                 forecastUi.Day.text = dayName;
                 forecastUi.Temperature.text = first_temperature + ' ' + '\u002F' + ' ' + second_temperature + ' ' + this.unitToUnicode(this._temperatureUnit);
                 forecastUi.Summary.text = comment;
-                forecastUi.Icon.icon_name = forecastData.condition.icon;
+                forecastUi.Icon.icon_name = (this._useCustomMenuIcons) ? this.GetCustomIconname(forecastData.condition.customIcon) : forecastData.condition.icon;
             }
             return true;
         }
@@ -993,6 +1003,9 @@ var WeatherApplet = (function (_super) {
     ;
     WeatherApplet.prototype.SetCustomIcon = function (iconName) {
         this.set_applet_icon_symbolic_name(iconName + "-symbolic");
+    };
+    WeatherApplet.prototype.GetCustomIconname = function (iconName) {
+        return (iconName + "-symbolic");
     };
     WeatherApplet.prototype.unitToUnicode = function (unit) {
         return unit == "fahrenheit" ? '\u2109' : '\u2103';

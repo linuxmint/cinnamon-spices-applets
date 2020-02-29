@@ -131,7 +131,8 @@ const KEYS: SettingKeys  =  {
   WEATHER_PRESSURE_UNIT_KEY: "pressureUnit",
   WEATHER_SHORT_CONDITIONS_KEY:  "shortConditions",
   WEATHER_MANUAL_LOCATION:  "manualLocation",
-  WEATHER_USE_CCUSTOM_APPLETICONS_KEY: 'useCustomAppletIcons'
+  WEATHER_USE_CUSTOM_APPLETICONS_KEY: 'useCustomAppletIcons',
+  WEATHER_USE_CUSTOM_MENUICONS_KEY: "useCustomMenuIcons"
 }
 
 /*var custom_icons = ["Cloud-Drizzle" , "Cloud-Drizzle-Alt" , "Cloud-Drizzle-Moon-Alt", "Cloud-Drizzle-Moon", "Cloud-Drizzle-Sun-Alt", 
@@ -243,14 +244,15 @@ class WeatherApplet extends TextIconApplet {
   public _showCommentInPanel: boolean;
   public _showTextInPanel: boolean;
   public _locationLabelOverride: string;
-  public _icon_type: string;
   public _useCustomAppletIcons: boolean;
+  public _useCustomMenuIcons: boolean;
   public _tempTextOverride: string;
 
   public currentLocale: string = null;
   public log: Log;
 
   private keybinding: any;
+  public _icon_type: imports.gi.St.IconType;
   private menu: imports.ui.applet.AppletPopupMenu;
   private menuManager: imports.ui.popupMenu.PopupMenuManager;
   private settings: imports.ui.settings.AppletSettings;
@@ -359,15 +361,11 @@ class WeatherApplet extends TextIconApplet {
     keybindingManager.addHotKey(
       UUID, this.keybinding, Lang.bind(this, this.on_applet_clicked));
 
-    this.updateIconType()
+    this._icon_type = this.GetCurrentIconType();
 
     this.settings.connect(SIGNAL_CHANGED + WEATHER_USE_SYMBOLIC_ICONS_KEY, Lang.bind(this, function () {
-      this.updateIconType()
-      this._applet_icon.icon_type = this._icon_type
-      this._currentWeatherIcon.icon_type = this._icon_type
-      for (let i = 0; i < this._forecastDays; i++) {
-        this._forecast[i].Icon.icon_type = this._icon_type
-      }
+      this._icon_type = this.GetCurrentIconType();
+      this.UpdateIconType(this._icon_type);
       this.refreshWeather()
     }))    
   }
@@ -379,6 +377,13 @@ class WeatherApplet extends TextIconApplet {
        this.refreshAndRebuild();
      }))
      this._applet_context_menu.addMenuItem(refreshMenuItem);
+  }
+
+  private UpdateIconType(iconType: imports.gi.St.IconType): void {
+    this._currentWeatherIcon.icon_type = iconType
+    for (let i = 0; i < this._forecastDays; i++) {
+      this._forecast[i].Icon.icon_type = iconType
+    }
   }
 
   private BuildPopupMenu(): void {
@@ -613,8 +618,8 @@ class WeatherApplet extends TextIconApplet {
     
   }*/
 
-  private updateIconType(): void {
-    this._icon_type = this.settings.getValue(WEATHER_USE_SYMBOLIC_ICONS_KEY) ?
+  private GetCurrentIconType(): imports.gi.St.IconType {
+    return this.settings.getValue(WEATHER_USE_SYMBOLIC_ICONS_KEY) ?
       IconType.SYMBOLIC :
       IconType.FULLCOLOR
   };
@@ -797,7 +802,18 @@ class WeatherApplet extends TextIconApplet {
       if (iconname == null) {
         iconname = "weather-severe-alert";
       }
-      this._currentWeatherIcon.icon_name = iconname;
+
+      // Popup menu icons
+      if (this._useCustomMenuIcons) {
+          this._currentWeatherIcon.icon_name = this.GetCustomIconname(this.weather.condition.customIcon)
+          this.UpdateIconType(IconType.SYMBOLIC); // Hard set to symbolic as iconset is symbolic
+      }
+      else {
+          this._currentWeatherIcon.icon_name = iconname;
+          this.UpdateIconType(this.GetCurrentIconType()); // Revert to user setting
+      }
+
+      // Applet icon
       this._icon_type == IconType.SYMBOLIC ?
         this.set_applet_icon_symbolic_name(iconname) :
         this.set_applet_icon_name(iconname)
@@ -938,7 +954,7 @@ class WeatherApplet extends TextIconApplet {
         forecastUi.Day.text = dayName;
         forecastUi.Temperature.text = first_temperature + ' ' + '\u002F' + ' ' + second_temperature + ' ' + this.unitToUnicode(this._temperatureUnit);
         forecastUi.Summary.text = comment;
-        forecastUi.Icon.icon_name = forecastData.condition.icon;
+        forecastUi.Icon.icon_name = (this._useCustomMenuIcons) ? this.GetCustomIconname(forecastData.condition.customIcon) : forecastData.condition.icon;
       }
       return true;
     } catch (e) {
@@ -1149,6 +1165,10 @@ class WeatherApplet extends TextIconApplet {
 
   public SetCustomIcon(iconName: CustomIcons): void {
     this.set_applet_icon_symbolic_name(iconName + "-symbolic");
+  }
+
+  public GetCustomIconname(iconName: CustomIcons): string {
+    return (iconName + "-symbolic");
   }
 
   private unitToUnicode(unit: WeatherUnits): string {

@@ -286,7 +286,7 @@ const icons = {
 }
 
   // Passing appropriate resolver function for the API, and the code
-var weatherIconSafely = function (code: string[], icon_type: string): string {
+var weatherIconSafely = function (code: string[], icon_type: imports.gi.St.IconType): string {
     for (let i = 0; i < code.length; i++) {
       if (hasIcon(code[i], icon_type))
         return code[i]
@@ -294,6 +294,6 @@ var weatherIconSafely = function (code: string[], icon_type: string): string {
     return 'weather-severe-alert'
   }
 
-var hasIcon = function (icon: string, icon_type: string): boolean {
+var hasIcon = function (icon: string, icon_type: imports.gi.St.IconType): boolean {
   return IconTheme.get_default().has_icon(icon + (icon_type == IconType.SYMBOLIC ? '-symbolic' : ''))
 }

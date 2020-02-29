@@ -358,7 +358,7 @@ declare namespace imports.gi.St {
         constructor(options ? : any);
     }
     export class Icon extends Widget {
-        icon_type: string;
+        icon_type: IconType;
         icon_size: number;
         icon_name: string;
         constructor(options ? : any);
@@ -374,12 +374,10 @@ declare namespace imports.gi.St {
         LEFT,
         RIGHT
     }
-    export interface IconTypes {
-        SYMBOLIC: string,
-        FULLCOLOR: string
+    export enum IconType {
+        SYMBOLIC,
+        FULLCOLOR
     }
-
-    export const IconType: IconTypes;
 }
 
 declare namespace imports.misc.config {
