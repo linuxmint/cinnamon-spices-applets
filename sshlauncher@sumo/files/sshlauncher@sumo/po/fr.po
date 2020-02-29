@@ -33,7 +33,7 @@ msgstr "Forcer la mise à jour à partir de la configuration SSH"
 
 #: applet.js:143
 msgid "Background (-fN)"
-msgstr "En arrière-plan   (-fN)"
+msgstr "En arrière-plan (-fN)"
 
 #: applet.js:146
 msgid "Forward X11 (-X)"
