@@ -787,7 +787,9 @@ class WeatherApplet extends TextIconApplet {
         middleColumn.add_actor(this._currentWeatherLocation);
         middleColumn.add_actor(this._currentWeatherSummary);
         middleColumn.add_actor(bb_spacerlabel);
-        middleColumn.add_actor(sunBox);
+        let sunBin = new Bin();
+        sunBin.set_child(sunBox);
+        middleColumn.add_actor(sunBin);
         this._currentWeatherTemperature = new Label(textOb);
         this._currentWeatherHumidity = new Label(textOb);
         this._currentWeatherPressure = new Label(textOb);

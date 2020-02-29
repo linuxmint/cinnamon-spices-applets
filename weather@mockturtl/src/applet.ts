@@ -1060,13 +1060,17 @@ class WeatherApplet extends TextIconApplet {
     let sunBox = new BoxLayout({ style_class: STYLE_ASTRONOMY })
     sunBox.add_actor(this._currentWeatherSunrise)
     sunBox.add_actor(ab_spacerlabel)
-    sunBox.add_actor(this._currentWeatherSunset)
+    sunBox.add_actor(this._currentWeatherSunset);
 
     let middleColumn = new BoxLayout({ vertical: true, style_class: STYLE_SUMMARYBOX })
     middleColumn.add_actor(this._currentWeatherLocation)
     middleColumn.add_actor(this._currentWeatherSummary)
     middleColumn.add_actor(bb_spacerlabel)
-    middleColumn.add_actor(sunBox)
+
+    // Bin is used here for horizontally center BoxLayout
+    let sunBin = new Bin();
+    sunBin.set_child(sunBox);
+    middleColumn.add_actor(sunBin)
 
     // Current Weather Right Column
     this._currentWeatherTemperature = new Label(textOb)
