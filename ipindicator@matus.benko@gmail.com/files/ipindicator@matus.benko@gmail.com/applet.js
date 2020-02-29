@@ -42,27 +42,26 @@ const IpGateway = {
             }
         });
         this._services.push({
-            url: "http://bot.whatismyipaddress.com/",
+            url: "https://bot.whatismyipaddress.com/",
             parse: function (response) {
                 return response;
             }
         });
         this._services.push({
-            url: "http://geoip.nekudo.com/api/",
+            url: "https://myexternalip.com/json",
             parse: function (jsonResponse) {
                 let response = JSON.parse(jsonResponse);
                 return response.ip;
             }
         });
         this._services.push({
-            url: "http://ip-json.rhcloud.com/json",
-            parse: function (jsonResponse) {
-                let response = JSON.parse(jsonResponse);
-                return response.q;
+            url: "https://icanhazip.com",
+            parse: function (response) {
+                return response;
             }
         });
         this._services.push({
-            url: "http://ipinfo.io/json",
+            url: "https://ipinfo.io/json",
             parse: function (jsonResponse) {
                 let response = JSON.parse(jsonResponse);
                 return response.ip;
