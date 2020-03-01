@@ -392,7 +392,7 @@ var WeatherApplet = (function (_super) {
     WeatherApplet.prototype.sendNotification = function (title, message, transient) {
         var notification = new Notification(this.msgSource, title, message);
         if (transient)
-            notification.setTransient(true);
+            notification.setTransient((!transient) ? false : true);
         this.msgSource.notify(notification);
     };
     WeatherApplet.prototype.locationLookup = function () {
@@ -712,7 +712,7 @@ var WeatherApplet = (function (_super) {
                 iconname = "weather-severe-alert";
             }
             if (this._useCustomMenuIcons) {
-                this._currentWeatherIcon.icon_name = this.GetCustomIconname(this.weather.condition.customIcon);
+                this._currentWeatherIcon.icon_name = this.weather.condition.customIcon;
                 this.UpdateIconType(IconType.SYMBOLIC);
             }
             else {
@@ -762,9 +762,9 @@ var WeatherApplet = (function (_super) {
             var wind_direction = compassDirection(this.weather.wind.degree);
             this._currentWeatherWind.text =
                 (wind_direction != undefined ? _(wind_direction) + " " : "") +
-                    MPStoUserUnits(this.weather.wind.speed, this._windSpeedUnit) +
-                    " " +
-                    _(this._windSpeedUnit);
+                    MPStoUserUnits(this.weather.wind.speed, this._windSpeedUnit);
+            if (this._windSpeedUnit != "Beaufort")
+                this._currentWeatherWind.text += " " + _(this._windSpeedUnit);
             this._currentWeatherApiUnique.text = "";
             this._currentWeatherApiUniqueCap.text = "";
             if (!!this.weather.extra_field) {
@@ -833,7 +833,7 @@ var WeatherApplet = (function (_super) {
                 forecastUi.Day.text = dayName;
                 forecastUi.Temperature.text = first_temperature + ' ' + '\u002F' + ' ' + second_temperature + ' ' + this.unitToUnicode(this._temperatureUnit);
                 forecastUi.Summary.text = comment;
-                forecastUi.Icon.icon_name = (this._useCustomMenuIcons) ? this.GetCustomIconname(forecastData.condition.customIcon) : forecastData.condition.icon;
+                forecastUi.Icon.icon_name = (this._useCustomMenuIcons) ? forecastData.condition.customIcon : forecastData.condition.icon;
             }
             return true;
         }
@@ -945,11 +945,7 @@ var WeatherApplet = (function (_super) {
         rb_values.add_actor(this._currentWeatherTemperature);
         rb_values.add_actor(this._currentWeatherHumidity);
         rb_values.add_actor(this._currentWeatherPressure);
-        var windBox = new BoxLayout({ vertical: false });
-        var windIcon = new Icon({ icon_type: IconType.SYMBOLIC, icon_name: "Wind-symbolic", icon_size: 15 });
-        windBox.add_actor(windIcon);
-        windBox.add_actor(this._currentWeatherWind);
-        rb_values.add_actor(windBox);
+        rb_values.add_actor(this._currentWeatherWind);
         rb_values.add_actor(this._currentWeatherApiUnique);
         var rightColumn = new BoxLayout({ style_class: STYLE_DATABOX });
         rightColumn.add_actor(rb_captions);
@@ -1008,10 +1004,7 @@ var WeatherApplet = (function (_super) {
     };
     ;
     WeatherApplet.prototype.SetCustomIcon = function (iconName) {
-        this.set_applet_icon_symbolic_name(iconName + "-symbolic");
-    };
-    WeatherApplet.prototype.GetCustomIconname = function (iconName) {
-        return (iconName + "-symbolic");
+        this.set_applet_icon_symbolic_name(iconName);
     };
     WeatherApplet.prototype.unitToUnicode = function (unit) {
         return unit == "fahrenheit" ? '\u2109' : '\u2103';

@@ -110,7 +110,8 @@
     { "kph": "kph"
     , "mph": "mph"
     , "m/s": "m/s"
-    , "knots": "Knots"
+    , "knots": "Knots",
+      "Beaufort": "Beaufort"
     }
   },
   "pressureUnit":
@@ -151,7 +152,7 @@
   "useCustomAppletIcons":
   { "type": "checkbox"
   , "default": false
-  , "tootlip": "Uses a slightly modified version of Climaicons"
+  , "tootlip": "Iconset used is weather-icons by Erik Flowers"
   , "description": "Use custom icons on the panel"
   },
   "displaySettings":
@@ -210,7 +211,8 @@
   "useCustomMenuIcons":
   { "type": "checkbox"
   , "default": false
-  , "description": "Use custom icons in the popup menu"
+  , "description": "Use custom icons in the popup menu",
+    "tooltip": "Iconset used is weather-icons by Erik Flowers"
   },
   "credits": {
     "type": "header",

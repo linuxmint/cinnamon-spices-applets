@@ -137,13 +137,51 @@ const get = (p, o) => p.reduce((xs, x) => (xs && xs[x]) ? xs[x] : null, o);
 var MPStoUserUnits = function (mps, units) {
     switch (units) {
         case "mph":
-            return Math.round((mps * WEATHER_CONV_MPH_IN_MPS) * 10) / 10;
+            return (Math.round((mps * WEATHER_CONV_MPH_IN_MPS) * 10) / 10).toString();
         case "kph":
-            return Math.round((mps * WEATHER_CONV_KPH_IN_MPS) * 10) / 10;
+            return (Math.round((mps * WEATHER_CONV_KPH_IN_MPS) * 10) / 10).toString();
         case "m/s":
-            return Math.round(mps * 10) / 10;
+            return (Math.round(mps * 10) / 10).toString();
         case "Knots":
-            return Math.round(mps * WEATHER_CONV_KNOTS_IN_MPS);
+            return Math.round(mps * WEATHER_CONV_KNOTS_IN_MPS).toString();
+        case "Beaufort":
+            if (mps < 0.5) {
+                return "0 (" + _("Calm") + ")";
+            }
+            if (mps < 1.5) {
+                return "1 (" + _("Light air") + ")";
+            }
+            if (mps < 3.3) {
+                return "2 (" + _("Light breeze") + ")";
+            }
+            if (mps < 5.5) {
+                return "3 (" + _("Gentle breeze") + ")";
+            }
+            if (mps < 7.9) {
+                return "4 (" + _("Moderate breeze") + ")";
+            }
+            if (mps < 10.7) {
+                return "5 (" + _("Fresh breeze") + ")";
+            }
+            if (mps < 13.8) {
+                return "6 (" + _("Strong breeze") + ")";
+            }
+            if (mps < 17.1) {
+                return "7 (" + _("Near gale") + ")";
+            }
+            if (mps < 20.7) {
+                return "8 (" + _("Gale") + ")";
+            }
+            if (mps < 24.4) {
+                return "9 (" + _("Strong gale") + ")";
+            }
+            if (mps < 28.4) {
+                return "10 (" + _("Storm") + ")";
+            }
+            if (mps < 32.6) {
+                return "11 (" + _("Violent storm") + ")";
+            }
+            return "12 (" + _("Hurricane") + ")";
     }
 };
 var TempToUserUnits = function (kelvin, units) {

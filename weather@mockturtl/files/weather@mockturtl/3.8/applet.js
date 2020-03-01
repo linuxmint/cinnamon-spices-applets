@@ -312,7 +312,7 @@ class WeatherApplet extends TextIconApplet {
     sendNotification(title, message, transient) {
         let notification = new Notification(this.msgSource, title, message);
         if (transient)
-            notification.setTransient(true);
+            notification.setTransient((!transient) ? false : true);
         this.msgSource.notify(notification);
     }
     async locationLookup() {
@@ -573,7 +573,7 @@ class WeatherApplet extends TextIconApplet {
                 iconname = "weather-severe-alert";
             }
             if (this._useCustomMenuIcons) {
-                this._currentWeatherIcon.icon_name = this.GetCustomIconname(this.weather.condition.customIcon);
+                this._currentWeatherIcon.icon_name = this.weather.condition.customIcon;
                 this.UpdateIconType(IconType.SYMBOLIC);
             }
             else {
@@ -623,9 +623,9 @@ class WeatherApplet extends TextIconApplet {
             let wind_direction = compassDirection(this.weather.wind.degree);
             this._currentWeatherWind.text =
                 (wind_direction != undefined ? _(wind_direction) + " " : "") +
-                    MPStoUserUnits(this.weather.wind.speed, this._windSpeedUnit) +
-                    " " +
-                    _(this._windSpeedUnit);
+                    MPStoUserUnits(this.weather.wind.speed, this._windSpeedUnit);
+            if (this._windSpeedUnit != "Beaufort")
+                this._currentWeatherWind.text += " " + _(this._windSpeedUnit);
             this._currentWeatherApiUnique.text = "";
             this._currentWeatherApiUniqueCap.text = "";
             if (!!this.weather.extra_field) {
@@ -694,7 +694,7 @@ class WeatherApplet extends TextIconApplet {
                 forecastUi.Day.text = dayName;
                 forecastUi.Temperature.text = first_temperature + ' ' + '\u002F' + ' ' + second_temperature + ' ' + this.unitToUnicode(this._temperatureUnit);
                 forecastUi.Summary.text = comment;
-                forecastUi.Icon.icon_name = (this._useCustomMenuIcons) ? this.GetCustomIconname(forecastData.condition.customIcon) : forecastData.condition.icon;
+                forecastUi.Icon.icon_name = (this._useCustomMenuIcons) ? forecastData.condition.customIcon : forecastData.condition.icon;
             }
             return true;
         }
@@ -806,11 +806,7 @@ class WeatherApplet extends TextIconApplet {
         rb_values.add_actor(this._currentWeatherTemperature);
         rb_values.add_actor(this._currentWeatherHumidity);
         rb_values.add_actor(this._currentWeatherPressure);
-        let windBox = new BoxLayout({ vertical: false });
-        let windIcon = new Icon({ icon_type: IconType.SYMBOLIC, icon_name: "Wind-symbolic", icon_size: 15 });
-        windBox.add_actor(windIcon);
-        windBox.add_actor(this._currentWeatherWind);
-        rb_values.add_actor(windBox);
+        rb_values.add_actor(this._currentWeatherWind);
         rb_values.add_actor(this._currentWeatherApiUnique);
         let rightColumn = new BoxLayout({ style_class: STYLE_DATABOX });
         rightColumn.add_actor(rb_captions);
@@ -869,10 +865,7 @@ class WeatherApplet extends TextIconApplet {
     }
     ;
     SetCustomIcon(iconName) {
-        this.set_applet_icon_symbolic_name(iconName + "-symbolic");
-    }
-    GetCustomIconname(iconName) {
-        return (iconName + "-symbolic");
+        this.set_applet_icon_symbolic_name(iconName);
     }
     unitToUnicode(unit) {
         return unit == "fahrenheit" ? '\u2109' : '\u2103';

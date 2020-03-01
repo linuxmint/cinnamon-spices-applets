@@ -135,18 +135,6 @@ const KEYS: SettingKeys  =  {
   WEATHER_USE_CUSTOM_MENUICONS_KEY: "useCustomMenuIcons"
 }
 
-/*var custom_icons = ["Cloud-Drizzle" , "Cloud-Drizzle-Alt" , "Cloud-Drizzle-Moon-Alt", "Cloud-Drizzle-Moon", "Cloud-Drizzle-Sun-Alt", 
-"Cloud-Drizzle-Sun", "Cloud-Fog", "Cloud-Fog-Alt", "Cloud-Fog-Moon-Alt", "Cloud-Fog-Moon", "Cloud-Fog-Sun-Alt",
-"Cloud-Fog-Sun", "Cloud-Fog", "Cloud-Hail-Alt", "Cloud-Hail-Moon-Alt", "Cloud-Hail-Moon", 
-"Cloud-Hail-Sun-Alt", "Cloud-Hail-Sun", "Cloud-Hail", "Cloud-Lightning-Moon", "Cloud-Lightning-Sun", 
-"Cloud-Lightning", "Cloud-Moon", "Cloud-Rain-Alt", "Cloud-Rain-Moon-Alt", "Cloud-Rain-Moon", 
-"Cloud-Rain", "Cloud-Rain-Sun", "Cloud-Rain-Sun-Alt", "Cloud-Refresh", "Cloud-Snow-Alt", "Cloud-Snow-Moon-Alt","Cloud-Snow-Moon", 
-"Cloud-Snow-Sun-Alt", "Cloud-Snow-Sun", "Cloud-Snow", "Cloud-Sun", "Cloud-Upload", "Cloud-Wind-Moon", 
-"Cloud-Wind-Sun", "Cloud-Wind", "Cloud", "Compass-East", "Compass-North", "Compass-South", "Compass-West",
-"Compass", "Degrees-Celcius", "Degrees-Fahrenheit", "Moon", "Shades", "Snowflake", 
-"Sun", "Thermometer-25", "Thermometer-50", "Wind",
-"Thermometer-75", "Thermometer-100", "Thermometer-Zero", "Thermometer", "Tornado", "Umbrella"];*/
-
 //----------------------------------------------------------------------
 //
 // Weather Applet
@@ -224,7 +212,7 @@ class WeatherApplet extends TextIconApplet {
   private _forecast: ForecastUI[];
   private _forecastBox: imports.gi.St.BoxLayout;
 
-  // Settings properties to bind
+  // Settings variables to bind to
   // Settings are public
   public _refreshInterval: number;
   public _manualLocation: boolean;
@@ -324,12 +312,14 @@ class WeatherApplet extends TextIconApplet {
     this.log.Debug("System locale is " + this.currentLocale);
   }
 
+  /** Set applet on the panel with default settings */
   private SetAppletOnPanel(): void {
     this.set_applet_icon_name(APPLET_ICON);
     this.set_applet_label(_("..."));
     this.set_applet_tooltip(_("Click to open"));
   }
 
+  /** Creates popup menu manager and popup menu */
   private AddPopupMenu(orientation: any) {
     this.menuManager = new PopupMenuManager(this);
     this.menu = new AppletPopupMenu(this, orientation)
@@ -343,6 +333,7 @@ class WeatherApplet extends TextIconApplet {
     this.menuManager.addMenu(this.menu)
   }
 
+  /** Attaches settings to functions */
   private BindSettings() {
     for (let k in KEYS) {
       let key = KEYS[k];
@@ -370,7 +361,7 @@ class WeatherApplet extends TextIconApplet {
     }))    
   }
 
-  /** Into context menu */
+  /** Into right-click context menu */
   private AddRefreshButton(): void {
      let itemLabel = _("Refresh")
      let refreshMenuItem = new MenuItem(itemLabel, REFRESH_ICON, Lang.bind(this, function () {
@@ -379,6 +370,9 @@ class WeatherApplet extends TextIconApplet {
      this._applet_context_menu.addMenuItem(refreshMenuItem);
   }
 
+  /** Changes all icon's type what are affected by
+   * the "use symbolic icons" setting
+   */
   private UpdateIconType(iconType: imports.gi.St.IconType): void {
     this._currentWeatherIcon.icon_type = iconType
     for (let i = 0; i < this._forecastDays; i++) {
@@ -386,6 +380,7 @@ class WeatherApplet extends TextIconApplet {
     }
   }
 
+  /** Creates the skeleton of the popup menu */
   private BuildPopupMenu(): void {
     //  today's forecast
     this._currentWeather = new Bin({ style_class: STYLE_CURRENT });
@@ -445,6 +440,7 @@ class WeatherApplet extends TextIconApplet {
     return json;
   };
 
+  /** Spawn a command and await for the output it gives */
   public async SpawnProcess(command: string[]): Promise<any> {
     let json = await new Promise((resolve: any, reject: any) => {
       spawn_async(command, (aStdout: any) => {
@@ -456,7 +452,7 @@ class WeatherApplet extends TextIconApplet {
 
   /**
    * Handles obtaining data over http. 
-   * returns HTTPError object on fail.
+   * @returns HTTPError object on fail.
    * @param query fully constructed url
    */
   public async LoadAsync(query: string): Promise <any> {
@@ -486,7 +482,7 @@ class WeatherApplet extends TextIconApplet {
 
   public sendNotification(title: string, message: string, transient?: boolean) {
     let notification = new Notification(this.msgSource, title, message);
-    if (transient) notification.setTransient(true);
+    if (transient) notification.setTransient((!transient) ? false : true);
     this.msgSource.notify(notification);
   }
 
@@ -503,7 +499,7 @@ class WeatherApplet extends TextIconApplet {
     return (this.lastUpdated > oldDate);
   }
 
-  /** Refresh Loop */
+  /** Main loop */
   private async RefreshLoop(): Promise<void> {
     let loopInterval = this.LOOP_INTERVAL;
     while(true) {
@@ -554,11 +550,13 @@ class WeatherApplet extends TextIconApplet {
     }
   };
 
+  /** override function */
   private on_orientation_changed(orientation: imports.gi.St.Side) {
     this.orientation = orientation;
     this.refreshWeather(true);
   };
 
+  /** Override function */
   private _onKeySettingsUpdated(): void {
     if (this.keybinding != null) {
       keybindingManager.addHotKey(UUID,
@@ -568,19 +566,23 @@ class WeatherApplet extends TextIconApplet {
     }
   }
 
+  /** Override function */
   private on_applet_removed_from_panel(deleteConfig: any) {
     this.log.Print("Removing applet instance...")
     this.appletRemoved = true;
   }
 
+  /** Override function */
   private on_applet_clicked(event: any): void {
     this.menu.toggle()
   }
 
+  /** Override function */
   private on_applet_middle_clicked(event: any) {
     
   }
 
+  /** Override function */
   private on_panel_height_changed() {
     // Implemented byApplets
   }
@@ -610,20 +612,19 @@ class WeatherApplet extends TextIconApplet {
   //
   //----------------------------------------------------------------------
 
-  /*private async IconTest() : Promise<void> {
-    for (let i = 0; i < custom_icons.length; i++) {
-      await delay(1000);
-      this.SetCustomIcon(custom_icons[i] as CustomIcons);
-    }
-    
-  }*/
-
+  /**
+   * Gets Icon type based on user config
+   */
   private GetCurrentIconType(): imports.gi.St.IconType {
     return this.settings.getValue(WEATHER_USE_SYMBOLIC_ICONS_KEY) ?
       IconType.SYMBOLIC :
       IconType.FULLCOLOR
   };
 
+  /**
+   * Convert Linux locale to JS locale format
+   * @param locale Linux locale string
+   */
   private constructJsLocale(locale: string): string {
     let jsLocale = locale.split(".")[0];
     let tmp: string[] = jsLocale.split("_");
@@ -687,7 +688,6 @@ class WeatherApplet extends TextIconApplet {
       if (!await this.displayWeather() || !await this.displayForecast()) return;
       this.log.Print("Weather Information refreshed");
       this.errorCount = 0;
-      //this.IconTest();
       return "success";
     } 
     catch (e) {
@@ -805,7 +805,7 @@ class WeatherApplet extends TextIconApplet {
 
       // Popup menu icons
       if (this._useCustomMenuIcons) {
-          this._currentWeatherIcon.icon_name = this.GetCustomIconname(this.weather.condition.customIcon)
+          this._currentWeatherIcon.icon_name = this.weather.condition.customIcon;
           this.UpdateIconType(IconType.SYMBOLIC); // Hard set to symbolic as iconset is symbolic
       }
       else {
@@ -826,6 +826,7 @@ class WeatherApplet extends TextIconApplet {
         this._currentWeatherTemperature.text = temp + ' ' + this.unitToUnicode(this._temperatureUnit);
       }
 
+      // Applet panel label
       let label = "";
       if (this.orientation != Side.LEFT && this.orientation != Side.RIGHT) {
         if (this._showCommentInPanel) {
@@ -869,10 +870,10 @@ class WeatherApplet extends TextIconApplet {
       let wind_direction = compassDirection(this.weather.wind.degree);
       this._currentWeatherWind.text =
         (wind_direction != undefined ? _(wind_direction) + " " : "") +
-        MPStoUserUnits(this.weather.wind.speed, this._windSpeedUnit) +
-        " " +
-        _(this._windSpeedUnit);
-
+        MPStoUserUnits(this.weather.wind.speed, this._windSpeedUnit);
+      // No need to display unit to Beaufort scale
+      if (this._windSpeedUnit != "Beaufort") this._currentWeatherWind.text += " " + _(this._windSpeedUnit);
+        
       // API Unique display
       this._currentWeatherApiUnique.text = "";
       this._currentWeatherApiUniqueCap.text = "";
@@ -954,7 +955,7 @@ class WeatherApplet extends TextIconApplet {
         forecastUi.Day.text = dayName;
         forecastUi.Temperature.text = first_temperature + ' ' + '\u002F' + ' ' + second_temperature + ' ' + this.unitToUnicode(this._temperatureUnit);
         forecastUi.Summary.text = comment;
-        forecastUi.Icon.icon_name = (this._useCustomMenuIcons) ? this.GetCustomIconname(forecastData.condition.customIcon) : forecastData.condition.icon;
+        forecastUi.Icon.icon_name = (this._useCustomMenuIcons) ? forecastData.condition.customIcon : forecastData.condition.icon;
       }
       return true;
     } catch (e) {
@@ -1091,11 +1092,12 @@ class WeatherApplet extends TextIconApplet {
     rb_values.add_actor(this._currentWeatherTemperature);
     rb_values.add_actor(this._currentWeatherHumidity);
     rb_values.add_actor(this._currentWeatherPressure);
-    let windBox = new BoxLayout({vertical: false});
+    /*let windBox = new BoxLayout({vertical: false});
     let windIcon = new Icon({icon_type: IconType.SYMBOLIC, icon_name: "Wind-symbolic", icon_size: 15});
     windBox.add_actor(windIcon);
     windBox.add_actor(this._currentWeatherWind);
-    rb_values.add_actor(windBox);
+    rb_values.add_actor(windBox);*/
+    rb_values.add_actor(this._currentWeatherWind);
     rb_values.add_actor(this._currentWeatherApiUnique);
 
     let rightColumn = new BoxLayout({ style_class: STYLE_DATABOX });
@@ -1172,17 +1174,12 @@ class WeatherApplet extends TextIconApplet {
   };
 
   public SetCustomIcon(iconName: CustomIcons): void {
-    this.set_applet_icon_symbolic_name(iconName + "-symbolic");
-  }
-
-  public GetCustomIconname(iconName: CustomIcons): string {
-    return (iconName + "-symbolic");
+    this.set_applet_icon_symbolic_name(iconName);
   }
 
   private unitToUnicode(unit: WeatherUnits): string {
     return unit == "fahrenheit" ? '\u2109' : '\u2103'
   }
-
 
   ///
   ///  Error Handling in UI
@@ -1362,7 +1359,7 @@ function main(metadata: any, orientation: imports.gi.St.Side, panelHeight: numbe
 type WeatherUnits = 'celsius' | 'fahrenheit';
 
 /** Units Used in Options. Change Options list if You change this! */
-type WeatherWindSpeedUnits = 'kph' | 'mph' | 'm/s' | 'Knots';
+type WeatherWindSpeedUnits = 'kph' | 'mph' | 'm/s' | 'Knots' | 'Beaufort';
 
 /** Units used in Options. Change Options list if You change this! */
 type WeatherPressureUnits = 'hPa'|'mm Hg'|'in Hg'|'Pa'|'psi'|'atm'|'at';
@@ -1527,10 +1524,6 @@ type SettingKeys = {
   [key: string]: string;
 }
 
-type CustomSunOptions = "Sun-Low" | "Sun-Lower"| "Sunrise" | "Sunset";
-type CustomMoonOptions = "Moon-First-Quarter" | "Moon-Full" | "Moon-Last-Quarter" | "Moon-New" | 
-"Moon-Waning-Crescent" | "Moon-Waning-Gibbous" | "Moon-Waxing-Crescent" | "Moon-Waxing-Gibbous";
-
 /**
  * A WeatherProvider must implement this interface.
  */
@@ -1589,6 +1582,9 @@ type GUIDStore = {
   [key: number]: string
 }
 
+/**
+ * Available icons in icons folder
+ */
 type CustomIcons = 
 "alien-symbolic" |
 "barometer-symbolic" |
