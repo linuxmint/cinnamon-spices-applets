@@ -145,11 +145,13 @@ GraphicalHWMonitorApplet.prototype = {
         this.settings.bind("diskread_enable_graph", "diskread_enable_graph", this.settingsChanged);
         this.settings.bind("diskread_size", "diskread_size", this.settingsChanged);
         this.settings.bind("diskread_use_custom_label", "diskread_use_custom_label", this.settingsChanged);
+        this.settings.bind("diskread_mount_dir", "diskread_mount_dir", this.settingsChanged);
         this.settings.bind("diskread_custom_label", "diskread_custom_label", this.settingsChanged);
         this.settings.bind("diskread_show_detail_label", "diskread_show_detail_label", this.settingsChanged);
         // DISK (write) settings
         this.settings.bind("diskwrite_enable_graph", "diskwrite_enable_graph", this.settingsChanged);
         this.settings.bind("diskwrite_size", "diskwrite_size", this.settingsChanged);
+        this.settings.bind("diskwrite_mount_dir", "diskwrite_mount_dir", this.settingsChanged);
         this.settings.bind("diskwrite_use_custom_label", "diskwrite_use_custom_label", this.settingsChanged);
         this.settings.bind("diskwrite_custom_label", "diskwrite_custom_label", this.settingsChanged);
         this.settings.bind("diskwrite_show_detail_label", "diskwrite_show_detail_label", this.settingsChanged);
@@ -226,7 +228,7 @@ GraphicalHWMonitorApplet.prototype = {
             else
                 diskReadGraphArea = this.appletArea.addGraph(this.panel_height, this.diskread_size);
 
-            let diskReadProvider =  new Providers.DiskDataProvider(this.frequency, true);
+            let diskReadProvider =  new Providers.DiskDataProvider(this.frequency, true, this.diskread_mount_dir);
             this.graphs.push(new Graph.Graph(diskReadProvider, diskReadGraphArea, this.theme_object, this.diskread_show_detail_label));
         }    
                 
@@ -238,7 +240,7 @@ GraphicalHWMonitorApplet.prototype = {
             else
                 diskWriteGraphArea = this.appletArea.addGraph(this.panel_height, this.diskwrite_size);
 
-            let diskWriteProvider =  new Providers.DiskDataProvider(this.frequency, false);
+            let diskWriteProvider =  new Providers.DiskDataProvider(this.frequency, false, this.diskwrite_mount_dir);
             this.graphs.push(new Graph.Graph(diskWriteProvider, diskWriteGraphArea, this.theme_object, this.diskwrite_show_detail_label));
         }    
 

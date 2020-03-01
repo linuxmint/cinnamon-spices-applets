@@ -150,6 +150,7 @@
           "diskread_enable_graph",
           "diskread_size",
           "diskread_use_custom_label",
+          "diskread_mount_dir",
           "diskread_custom_label",
           "diskread_show_detail_label"
         ]
@@ -161,6 +162,7 @@
           "diskwrite_enable_graph",
           "diskwrite_size",
           "diskwrite_use_custom_label",
+          "diskwrite_mount_dir",
           "diskwrite_custom_label",
           "diskwrite_show_detail_label"
         ]
@@ -516,8 +518,8 @@
     "diskread_enable_graph": {
       "type": "checkbox",
       "default": true,
-      "description": "Show DISK (read) graph for the root disk (/).",
-      "tooltip": "Show or hide the DISK (read) graph. Shows usage of the root disk (/)."
+      "description": "Show DISK (read) graph",
+      "tooltip": "Show or hide the DISK (read) graph. Shows usage of the drive specified below."
     },
     "diskread_size": {
         "type": "spinbutton",
@@ -537,6 +539,13 @@
         "tooltip": "Choose your own label for the DISK (read) graph.",
         "dependency": "diskread_enable_graph"
     },
+    "diskread_mount_dir": {
+      "type": "entry",
+      "default": "/",
+      "description": "Set the mount dir to monitor for the DISK (read) graph.",
+      "tooltip": "Set the mount dir to monitor for the DISK (read) graph. By default it monitors the root drive (/), but you could change it to monitor another drive by setting it to for example /mnt/another_drive.",
+      "dependency": "diskread_enable_graph"
+    },
     "diskread_custom_label": {
         "type": "entry",
         "default": "DISK (read)",
@@ -553,8 +562,8 @@
     "diskwrite_enable_graph": {
       "type": "checkbox",
       "default": true,
-      "description": "Show DISK (write) graph for the root disk (/).",
-      "tooltip": "Show or hide the DISK (write) graph. Shows usage of the root disk (/)."
+      "description": "Show DISK (write) graph.",
+      "tooltip": "Show or hide the DISK (write) graph. Shows usage of the drive specified below."
     },
     "diskwrite_size": {
         "type": "spinbutton",
@@ -566,6 +575,13 @@
         "description": "Horizontal panel width or vertical panel height.",
         "tooltip":"Set the width of the graph for horizontal panels, or the height of the graph for vertical panels.",
         "dependency": "diskwrite_enable_graph"
+    },
+    "diskwrite_mount_dir": {
+      "type": "entry",
+      "default": "/",
+      "description": "Set the mount dir to monitor for the DISK (write) graph.",
+      "tooltip": "Set the mount dir to monitor for the DISK (write) graph. By default it monitors the root drive (/), but you could change it to monitor another drive by setting it to for example /mnt/another_drive.",
+      "dependency": "diskwrite_enable_graph"
     },
     "diskwrite_use_custom_label": {
         "type": "checkbox",
