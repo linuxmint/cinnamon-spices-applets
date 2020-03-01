@@ -311,29 +311,29 @@ var DarkSky = (function () {
     DarkSky.prototype.ResolveCustomIcon = function (icon) {
         switch (icon) {
             case "rain":
-                return "Cloud-Rain";
+                return "rain-symbolic";
             case "snow":
-                return "Cloud-Snow";
+                return "snow-symbolic";
             case "fog":
-                return "Cloud-Fog";
+                return "fog-symbolic";
             case "cloudy":
-                return "Cloud";
+                return "cloudy-symbolic";
             case "partly-cloudy-night":
-                return "Cloud-Moon";
+                return "night-alt-cloudy-symbolic";
             case "partly-cloudy-day":
-                return "Cloud-Sun";
+                return "day-cloudy-symbolic";
             case "clear-night":
-                return "Moon";
+                return "night-clear-symbolic";
             case "clear-day":
-                return "Sun";
+                return "day-sunny-symbolic";
             case "storm":
-                return "Cloud-Lightning";
+                return "thunderstorm-symbolic";
             case "showers":
-                return "Cloud-Drizzle";
+                return "showers-symbolic";
             case "wind":
-                return "Wind";
+                return "strong-wind-symbolic";
             default:
-                return "Cloud-Refresh";
+                return "cloud-refresh-symbolic";
         }
     };
     DarkSky.prototype.SetQueryUnit = function () {

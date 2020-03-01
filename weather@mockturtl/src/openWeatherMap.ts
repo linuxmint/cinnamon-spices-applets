@@ -315,43 +315,43 @@ class OpenWeatherMap implements WeatherProvider {
    private ResolveCustomIcon(icon: string): CustomIcons {
     switch (icon) {
         case "10d":/* rain day */
-          return "Cloud-Rain-Sun";
+          return "day-rain-symbolic";
         case "10n":/* rain night */
-          return "Cloud-Rain-Moon";
+          return "night-rain-symbolic";
         case "09n":/* showers nigh*/
-          return "Cloud-Drizzle-Moon";
+          return "night-showers-symbolic";
         case "09d":/* showers day */
-          return "Cloud-Drizzle-Sun"
+          return "day-showers-symbolic"
         case "13d":/* snow day*/
-          return "Cloud-Snow-Sun"
+          return "day-snow-symbolic"
         case "13n":/* snow night */
-          return "Cloud-Snow-Moon"
+          return "night-alt-snow-symbolic"
         case "50d":/* mist day */
-          return "Cloud-Fog-Sun-Alt"
+          return "day-fog-symbolic"
         case "50n":/* mist night */
-          return "Cloud-Fog-Moon-Alt"
+          return "night-fog-symbolic"
         case "04d":/* broken clouds day */
-          return "Cloud-Sun"
+          return "day-cloudy-symbolic"
         case "04n":/* broken clouds night */
-          return "Cloud-Moon"
+          return "night-alt-cloudy-symbolic"
         case "03n":/* mostly cloudy (night) */
-          return "Cloud-Moon"
+          return "night-alt-cloudy-symbolic"
         case "03d":/* mostly cloudy (day) */
-          return "Cloud-Sun"
+          return "day-cloudy-symbolic"
         case "02n":/* partly cloudy (night) */
-          return "Cloud-Moon"
+          return "night-alt-cloudy-symbolic"
         case "02d":/* partly cloudy (day) */
-          return "Cloud-Sun"
+          return "day-cloudy-symbolic"
         case "01n":/* clear (night) */
-          return "Moon"
+          return "night-clear-symbolic"
         case "01d":/* sunny */
-          return "Sun"
+          return "day-sunny-symbolic"
         case "11d":/* storm day */
-          return "Cloud-Lightning-Sun"
+          return "day-thunderstorm-symbolic"
         case "11n":/* storm night */
-          return "Cloud-Lightning-Moon"
+          return "night-alt-thunderstorm-symbolic"
         default:
-          return "Cloud-Refresh"
+          return "cloud-refresh-symbolic"
       }
   };
 };

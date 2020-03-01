@@ -272,43 +272,43 @@ class OpenWeatherMap {
     ResolveCustomIcon(icon) {
         switch (icon) {
             case "10d":
-                return "Cloud-Rain-Sun";
+                return "day-rain-symbolic";
             case "10n":
-                return "Cloud-Rain-Moon";
+                return "night-rain-symbolic";
             case "09n":
-                return "Cloud-Drizzle-Moon";
+                return "night-showers-symbolic";
             case "09d":
-                return "Cloud-Drizzle-Sun";
+                return "day-showers-symbolic";
             case "13d":
-                return "Cloud-Snow-Sun";
+                return "day-snow-symbolic";
             case "13n":
-                return "Cloud-Snow-Moon";
+                return "night-alt-snow-symbolic";
             case "50d":
-                return "Cloud-Fog-Sun-Alt";
+                return "day-fog-symbolic";
             case "50n":
-                return "Cloud-Fog-Moon-Alt";
+                return "night-fog-symbolic";
             case "04d":
-                return "Cloud-Sun";
+                return "day-cloudy-symbolic";
             case "04n":
-                return "Cloud-Moon";
+                return "night-alt-cloudy-symbolic";
             case "03n":
-                return "Cloud-Moon";
+                return "night-alt-cloudy-symbolic";
             case "03d":
-                return "Cloud-Sun";
+                return "day-cloudy-symbolic";
             case "02n":
-                return "Cloud-Moon";
+                return "night-alt-cloudy-symbolic";
             case "02d":
-                return "Cloud-Sun";
+                return "day-cloudy-symbolic";
             case "01n":
-                return "Moon";
+                return "night-clear-symbolic";
             case "01d":
-                return "Sun";
+                return "day-sunny-symbolic";
             case "11d":
-                return "Cloud-Lightning-Sun";
+                return "day-thunderstorm-symbolic";
             case "11n":
-                return "Cloud-Lightning-Moon";
+                return "night-alt-thunderstorm-symbolic";
             default:
-                return "Cloud-Refresh";
+                return "cloud-refresh-symbolic";
         }
     }
     ;

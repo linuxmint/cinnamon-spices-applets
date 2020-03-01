@@ -806,7 +806,11 @@ class WeatherApplet extends TextIconApplet {
         rb_values.add_actor(this._currentWeatherTemperature);
         rb_values.add_actor(this._currentWeatherHumidity);
         rb_values.add_actor(this._currentWeatherPressure);
-        rb_values.add_actor(this._currentWeatherWind);
+        let windBox = new BoxLayout({ vertical: false });
+        let windIcon = new Icon({ icon_type: IconType.SYMBOLIC, icon_name: "Wind-symbolic", icon_size: 15 });
+        windBox.add_actor(windIcon);
+        windBox.add_actor(this._currentWeatherWind);
+        rb_values.add_actor(windBox);
         rb_values.add_actor(this._currentWeatherApiUnique);
         let rightColumn = new BoxLayout({ style_class: STYLE_DATABOX });
         rightColumn.add_actor(rb_captions);

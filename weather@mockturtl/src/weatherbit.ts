@@ -319,17 +319,17 @@ class Weatherbit implements WeatherProvider {
             case "t01d": 
             case "t02d":
             case "t03d":
-                return "Cloud-Lightning-Sun"
+                return "day-thunderstorm-symbolic"
             case "t04d":
             case "t05d":
-                return "Cloud-Lightning"
+                return "thunderstorm-symbolic"
             case "t01n":
             case "t02n":
             case "t03n":
-                return "Cloud-Lightning-Moon"
+                return "night-alt-thunderstorm-symbolic"
             case "t04n":
             case "t05n":
-                return "Cloud-Lightning"
+                return "thunderstorm-symbolic"
             // Drizzle
             case "d01d":
             case "d02d":
@@ -337,7 +337,7 @@ class Weatherbit implements WeatherProvider {
             case "d01n":
             case "d02n":
             case "d03n":
-                return "Cloud-Drizzle"
+                return "showers-symbolic"
             // Rain
             case "r01d":
             case "r02d":
@@ -345,36 +345,36 @@ class Weatherbit implements WeatherProvider {
             case "r01n":
             case "r02n":
             case "r03n":
-                return "Cloud-Rain"
+                return "rain-symbolic"
             case "r04d":
             case "r05d":
-                return "Cloud-Rain-Sun"
+                return "day-rain-symbolic"
             case "r06d":
-                return "Cloud-Rain"
+                return "rain-symbolic"
             case "r04n":
             case "r05n":
-                return "Cloud-Rain-Moon"
+                return "night-alt-rain-symbolic"
             case "r06n":
-                return "Cloud-Rain"
+                return "rain-symbolic"
             // Snow
             case "s01d":
             case "s04d":
-                return "Cloud-Snow-Sun"
+                return "day-snow-symbolic"
             case "s02d":
             case "s03d":
             case "s06d":
-                return "Cloud-Snow"
+                return "snow-symbolic"
             case "s01n":
             case "s04n":
-                return "Cloud-Snow-Moon"
+                return "night-alt-snow-symbolic"
             case "s02n":
             case "s03n":
             case "s06n":
-                return "Cloud-Snow"
+                return "snow-symbolic"
             // Sleet
             case "s05d":
             case "s05n":
-                return "Cloud-Hail"
+                return "sleet-symbolic"
             // Fog, Sand, haze, smoke, mist
             case "a01d":
             case "a02d":
@@ -382,35 +382,35 @@ class Weatherbit implements WeatherProvider {
             case "a04d":
             case "a05d":
             case "a06d":
-                return "Cloud-Fog-Sun"
+                return "day-fog-symbolic"
             case "a01n":
             case "a02n":
             case "a03n":
             case "a04n":
             case "a05n":
             case "a06n":
-                return "Cloud-Fog-Moon"
+                return "night-fog-symbolic"
             case "c02d":
-                return "Cloud-Sun"
+                return "day-cloudy-symbolic"
             case "c02n":
-                return "Cloud-Moon"
+                return "night-alt-cloudy-symbolic"
             case "c01n":
-                return "Moon"
+                return "night-clear-symbolic"
             case "c01d":
-                return "Sun"
+                return "day-sunny-symbolic"
             case "c03d":
-                return "Cloud-Sun"
+                return "day-cloudy-symbolic"
             case "c03n":
-                return "Cloud-Moon"
+                return "night-alt-cloudy-symbolic"
             case "c04n":
-                return "Cloud"
+                return "cloudy-symbolic"
             case "c04d":
-                return "Cloud"
+                return "cloudy-symbolic"
             case "u00d":
             case "u00n":
-                return "Cloud-Refresh"
+                return "cloud-refresh-symbolic"
             default:
-              return "Cloud-Refresh"
+              return "cloud-refresh-symbolic"
           }
     }
 };

@@ -1091,7 +1091,11 @@ class WeatherApplet extends TextIconApplet {
     rb_values.add_actor(this._currentWeatherTemperature);
     rb_values.add_actor(this._currentWeatherHumidity);
     rb_values.add_actor(this._currentWeatherPressure);
-    rb_values.add_actor(this._currentWeatherWind);
+    let windBox = new BoxLayout({vertical: false});
+    let windIcon = new Icon({icon_type: IconType.SYMBOLIC, icon_name: "Wind-symbolic", icon_size: 15});
+    windBox.add_actor(windIcon);
+    windBox.add_actor(this._currentWeatherWind);
+    rb_values.add_actor(windBox);
     rb_values.add_actor(this._currentWeatherApiUnique);
 
     let rightColumn = new BoxLayout({ style_class: STYLE_DATABOX });
@@ -1523,18 +1527,6 @@ type SettingKeys = {
   [key: string]: string;
 }
 
-type CustomIcons = "Cloud-Drizzle" | "Cloud-Drizzle-Alt" | "Cloud-Drizzle-Moon-Alt" | "Cloud-Drizzle-Moon" | "Cloud-Drizzle-Sun-Alt" | 
-"Cloud-Drizzle-Sun" | "Cloud-Fog" | "Cloud-Fog-Alt" | "Cloud-Fog-Moon-Alt" | "Cloud-Fog-Moon" | "Cloud-Fog-Sun-Alt" |
-"Cloud-Fog-Sun" | "Cloud-Fog" | "Cloud-Hail-Alt" | "Cloud-Hail-Moon-Alt" | "Cloud-Hail-Moon" | 
-"Cloud-Hail-Sun-Alt" | "Cloud-Hail-Sun" | "Cloud-Hail" | "Cloud-Lightning-Moon" | "Cloud-Lightning-Sun" | 
-"Cloud-Lightning" | "Cloud-Moon" | "Cloud-Rain-Alt" | "Cloud-Rain-Moon-Alt" | "Cloud-Rain-Moon" | 
-"Cloud-Rain" | "Cloud-Rain-Sun" | "Cloud-Rain-Sun-Alt" | "Cloud-Refresh" | "Cloud-Snow-Alt" | "Cloud-Snow-Moon-Alt" | "Cloud-Snow-Moon" | 
-"Cloud-Snow-Sun-Alt" | "Cloud-Snow-Sun" | "Cloud-Snow" | "Cloud-Sun" | "Cloud-Upload" | "Cloud-Wind-Moon" | 
-"Cloud-Wind-Sun" | "Cloud-Wind" | "Cloud" | "Compass-East" | "Compass-North" | "Compass-South" | "Compass-West" | 
-"Compass" | "Degrees-Celcius" | "Degrees-Fahrenheit" | "Moon" | "Shades" | "Snowflake" | 
-"Sun"  | "Thermometer-25" | "Thermometer-50" | "Wind" |
-"Thermometer-75" | "Thermometer-100" | "Thermometer-Zero" | "Thermometer" | "Tornado" | "Umbrella";
-
 type CustomSunOptions = "Sun-Low" | "Sun-Lower"| "Sunrise" | "Sunset";
 type CustomMoonOptions = "Moon-First-Quarter" | "Moon-Full" | "Moon-Last-Quarter" | "Moon-New" | 
 "Moon-Waning-Crescent" | "Moon-Waning-Gibbous" | "Moon-Waxing-Crescent" | "Moon-Waxing-Gibbous";
@@ -1596,3 +1588,225 @@ interface Condition {
 type GUIDStore = {
   [key: number]: string
 }
+
+type CustomIcons = 
+"alien-symbolic" |
+"barometer-symbolic" |
+"celsius-symbolic" |
+"cloud-down-symbolic" |
+"cloud-refresh-symbolic" |
+"cloud-symbolic" |
+"cloud-up-symbolic" |
+"cloudy-gusts-symbolic" |
+"cloudy-symbolic" |
+"cloudy-windy-symbolic" |
+"day-cloudy-gusts-symbolic" |
+"day-cloudy-high-symbolic" |
+"day-cloudy-symbolic" |
+"day-cloudy-windy-symbolic" |
+"day-fog-symbolic" |
+"day-hail-symbolic" |
+"day-haze-symbolic" |
+"day-light-wind-symbolic" |
+"day-lightning-symbolic" |
+"day-rain-mix-symbolic" |
+"day-rain-symbolic" |
+"day-rain-wind-symbolic" |
+"day-showers-symbolic" |
+"day-sleet-storm-symbolic" |
+"day-sleet-symbolic" |
+"day-snow-symbolic" |
+"day-snow-thunderstorm-symbolic" |
+"day-snow-wind-symbolic" |
+"day-sprinkle-symbolic" |
+"day-storm-showers-symbolic" |
+"day-sunny-overcast-symbolic" |
+"day-sunny-symbolic" |
+"day-thunderstorm-symbolic" |
+"day-windy-symbolic" |
+"degrees-symbolic" |
+"direction-down-left-symbolic" |
+"direction-down-right-symbolic" |
+"direction-down-symbolic" |
+"direction-left-symbolic" |
+"direction-right-symbolic" |
+"direction-up-left-symbolic" |
+"direction-up-right-symbolic" |
+"direction-up-symbolic" |
+"dust-symbolic" |
+"earthquake-symbolic" |
+"fahrenheit-symbolic" |
+"fire-symbolic" |
+"flood-symbolic" |
+"fog-symbolic" |
+"gale-warning-symbolic" |
+"hail-symbolic" |
+"horizon-alt-symbolic" |
+"horizon-symbolic" |
+"hot-symbolic" |
+"humidity-symbolic" |
+"hurricane-symbolic" |
+"hurricane-warning-symbolic" |
+"lightning-symbolic" |
+"lunar-eclipse-symbolic" |
+"meteor-symbolic" |
+"moon-alt-first-quarter-symbolic" |
+"moon-alt-full-symbolic" |
+"moon-alt-new-symbolic" |
+"moon-alt-third-quarter-symbolic" |
+"moon-alt-waning-crescent-1-symbolic" |
+"moon-alt-waning-crescent-2-symbolic" |
+"moon-alt-waning-crescent-3-symbolic" |
+"moon-alt-waning-crescent-4-symbolic" |
+"moon-alt-waning-crescent-5-symbolic" |
+"moon-alt-waning-crescent-6-symbolic" |
+"moon-alt-waning-gibbous-1-symbolic" |
+"moon-alt-waning-gibbous-2-symbolic" |
+"moon-alt-waning-gibbous-3-symbolic" |
+"moon-alt-waning-gibbous-4-symbolic" |
+"moon-alt-waning-gibbous-5-symbolic" |
+"moon-alt-waning-gibbous-6-symbolic" |
+"moon-alt-waxing-crescent-1-symbolic" |
+"moon-alt-waxing-crescent-2-symbolic" |
+"moon-alt-waxing-crescent-3-symbolic" |
+"moon-alt-waxing-crescent-4-symbolic" |
+"moon-alt-waxing-crescent-5-symbolic" |
+"moon-alt-waxing-crescent-6-symbolic" |
+"moon-alt-waxing-gibbous-1-symbolic" |
+"moon-alt-waxing-gibbous-2-symbolic" |
+"moon-alt-waxing-gibbous-3-symbolic" |
+"moon-alt-waxing-gibbous-4-symbolic" |
+"moon-alt-waxing-gibbous-5-symbolic" |
+"moon-alt-waxing-gibbous-6-symbolic" |
+"moon-first-quarter-symbolic" |
+"moon-full-symbolic" |
+"moon-new-symbolic" |
+"moon-third-quarter-symbolic" |
+"moon-waning-crescent-1-symbolic" |
+"moon-waning-crescent-2-symbolic" |
+"moon-waning-crescent-3-symbolic" |
+"moon-waning-crescent-4-symbolic" |
+"moon-waning-crescent-5-symbolic" |
+"moon-waning-crescent-6-symbolic" |
+"moon-waning-gibbous-1-symbolic" |
+"moon-waning-gibbous-2-symbolic" |
+"moon-waning-gibbous-3-symbolic" |
+"moon-waning-gibbous-4-symbolic" |
+"moon-waning-gibbous-5-symbolic" |
+"moon-waning-gibbous-6-symbolic" |
+"moon-waxing-crescent-1-symbolic" |
+"moon-waxing-crescent-2-symbolic" |
+"moon-waxing-crescent-3-symbolic" |
+"moon-waxing-crescent-4-symbolic" |
+"moon-waxing-crescent-5-symbolic" |
+"moon-waxing-crescent-6-symbolic" |
+"moon-waxing-gibbous-1-symbolic" |
+"moon-waxing-gibbous-2-symbolic" |
+"moon-waxing-gibbous-3-symbolic" |
+"moon-waxing-gibbous-4-symbolic" |
+"moon-waxing-gibbous-5-symbolic" |
+"moon-waxing-gibbous-6-symbolic" |
+"moonrise-symbolic" |
+"moonset-symbolic" |
+"na-symbolic" |
+"night-alt-cloudy-gusts-symbolic" |
+"night-alt-cloudy-high-symbolic" |
+"night-alt-cloudy-symbolic" |
+"night-alt-cloudy-windy-symbolic" |
+"night-alt-hail-symbolic" |
+"night-alt-lightning-symbolic" |
+"night-alt-partly-cloudy-symbolic" |
+"night-alt-rain-mix-symbolic" |
+"night-alt-rain-symbolic" |
+"night-alt-rain-wind-symbolic" |
+"night-alt-showers-symbolic" |
+"night-alt-sleet-storm-symbolic" |
+"night-alt-sleet-symbolic" |
+"night-alt-snow-symbolic" |
+"night-alt-snow-thunderstorm-symbolic" |
+"night-alt-snow-wind-symbolic" |
+"night-alt-sprinkle-symbolic" |
+"night-alt-storm-showers-symbolic" |
+"night-alt-thunderstorm-symbolic" |
+"night-clear-symbolic" |
+"night-cloudy-gusts-symbolic" |
+"night-cloudy-high-symbolic" |
+"night-cloudy-symbolic" |
+"night-cloudy-windy-symbolic" |
+"night-fog-symbolic" |
+"night-hail-symbolic" |
+"night-lightning-symbolic" |
+"night-partly-cloudy-symbolic" |
+"night-rain-mix-symbolic" |
+"night-rain-symbolic" |
+"night-rain-wind-symbolic" |
+"night-showers-symbolic" |
+"night-sleet-storm-symbolic" |
+"night-sleet-symbolic" |
+"night-snow-symbolic" |
+"night-snow-thunderstorm-symbolic" |
+"night-snow-wind-symbolic" |
+"night-sprinkle-symbolic" |
+"night-storm-showers-symbolic" |
+"night-thunderstorm-symbolic" |
+"rain-mix-symbolic" |
+"rain-symbolic" |
+"rain-wind-symbolic" |
+"raindrop-symbolic" |
+"raindrops-symbolic" |
+"refresh-alt-symbolic" |
+"refresh-symbolic" |
+"sandstorm-symbolic" |
+"showers-symbolic" |
+"sleet-symbolic" |
+"sleet-storm-symbolic" |
+"small-craft-advisory-symbolic" |
+"smog-symbolic" |
+"smoke-symbolic" |
+"snow-symbolic" |
+"snow-wind-symbolic" |
+"snowflake-cold-symbolic" |
+"solar-eclipse-symbolic" |
+"sprinkle-symbolic" |
+"stars-symbolic" |
+"storm-showers-symbolic" |
+"storm-warning-symbolic" |
+"strong-wind-symbolic" |
+"sunrise-symbolic" |
+"sunset-symbolic" |
+"thermometer-exterior-symbolic" |
+"thermometer-internal-symbolic" |
+"thermometer-symbolic" |
+"thunderstorm-symbolic" |
+"time-1-symbolic" |
+"time-10-symbolic" |
+"time-11-symbolic" |
+"time-12-symbolic" |
+"time-2-symbolic" |
+"time-3-symbolic" |
+"time-4-symbolic" |
+"time-5-symbolic" |
+"time-6-symbolic" |
+"time-7-symbolic" |
+"time-8-symbolic" |
+"time-9-symbolic" |
+"tornado-symbolic" |
+"train-symbolic" |
+"tsunami-symbolic" |
+"umbrella-symbolic" |
+"volcano-symbolic" |
+"wind-beaufort-0-symbolic" |
+"wind-beaufort-1-symbolic" |
+"wind-beaufort-10-symbolic" |
+"wind-beaufort-11-symbolic" |
+"wind-beaufort-12-symbolic" |
+"wind-beaufort-2-symbolic" |
+"wind-beaufort-3-symbolic" |
+"wind-beaufort-4-symbolic" |
+"wind-beaufort-5-symbolic" |
+"wind-beaufort-6-symbolic" |
+"wind-beaufort-7-symbolic" |
+"wind-beaufort-8-symbolic" |
+"wind-beaufort-9-symbolic" |
+"wind-deg-symbolic" |
+"windy-symbolic";
