@@ -74,7 +74,7 @@ var utils = importModule("utils");
 var GetDayName = utils.GetDayName;
 var GetHoursMinutes = utils.GetHoursMinutes;
 var capitalizeFirstLetter = utils.capitalizeFirstLetter;
-var TempToUserUnits = utils.TempToUserUnits;
+var TempToUserConfig = utils.TempToUserConfig;
 var PressToUserUnits = utils.PressToUserUnits;
 var compassDirection = utils.compassDirection;
 var MPStoUserUnits = utils.MPStoUserUnits;
@@ -143,7 +143,8 @@ var KEYS = {
     WEATHER_SHORT_CONDITIONS_KEY: "shortConditions",
     WEATHER_MANUAL_LOCATION: "manualLocation",
     WEATHER_USE_CUSTOM_APPLETICONS_KEY: 'useCustomAppletIcons',
-    WEATHER_USE_CUSTOM_MENUICONS_KEY: "useCustomMenuIcons"
+    WEATHER_USE_CUSTOM_MENUICONS_KEY: "useCustomMenuIcons",
+    WEATHER_RUSSIAN_STYLE: "tempRussianStyle"
 };
 imports.gettext.bindtextdomain(UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
 function _(str) {
@@ -726,8 +727,8 @@ var WeatherApplet = (function (_super) {
                 this.SetCustomIcon(this.weather.condition.customIcon);
             var temp = "";
             if (this.weather.temperature != null) {
-                temp = TempToUserUnits(this.weather.temperature, this._temperatureUnit).toString();
-                this._currentWeatherTemperature.text = temp + ' ' + this.unitToUnicode(this._temperatureUnit);
+                temp = TempToUserConfig(this.weather.temperature, this._temperatureUnit, this._tempRussianStyle);
+                this._currentWeatherTemperature.text = temp + this.unitToUnicode(this._temperatureUnit);
             }
             var label = "";
             if (this.orientation != Side.LEFT && this.orientation != Side.RIGHT) {
@@ -775,7 +776,7 @@ var WeatherApplet = (function (_super) {
                         value = this.weather.extra_field.value.toString() + "%";
                         break;
                     case "temperature":
-                        value = TempToUserUnits(this.weather.extra_field.value, this._temperatureUnit) + this.unitToUnicode(this._temperatureUnit);
+                        value = TempToUserConfig(this.weather.extra_field.value, this._temperatureUnit, this._tempRussianStyle) + this.unitToUnicode(this._temperatureUnit);
                         break;
                     default:
                         value = _(this.weather.extra_field.value);
@@ -809,8 +810,8 @@ var WeatherApplet = (function (_super) {
             for (var i = 0; i < this._forecast.length; i++) {
                 var forecastData = this.forecasts[i];
                 var forecastUi = this._forecast[i];
-                var t_low = TempToUserUnits(forecastData.temp_min, this._temperatureUnit);
-                var t_high = TempToUserUnits(forecastData.temp_max, this._temperatureUnit);
+                var t_low = TempToUserConfig(forecastData.temp_min, this._temperatureUnit, this._tempRussianStyle);
+                var t_high = TempToUserConfig(forecastData.temp_max, this._temperatureUnit, this._tempRussianStyle);
                 var first_temperature = this._temperatureHighFirst ? t_high : t_low;
                 var second_temperature = this._temperatureHighFirst ? t_low : t_high;
                 var comment = "";
@@ -831,7 +832,9 @@ var WeatherApplet = (function (_super) {
                         dayName = _("Tomorrow");
                 }
                 forecastUi.Day.text = dayName;
-                forecastUi.Temperature.text = first_temperature + ' ' + '\u002F' + ' ' + second_temperature + ' ' + this.unitToUnicode(this._temperatureUnit);
+                forecastUi.Temperature.text = first_temperature;
+                forecastUi.Temperature.text += ((this._tempRussianStyle) ? ELLIPSIS : " " + FORWARD_SLASH + " ");
+                forecastUi.Temperature.text += second_temperature + ' ' + this.unitToUnicode(this._temperatureUnit);
                 forecastUi.Summary.text = comment;
                 forecastUi.Icon.icon_name = (this._useCustomMenuIcons) ? forecastData.condition.customIcon : forecastData.condition.icon;
             }
@@ -1151,6 +1154,7 @@ var STYLE_WEATHER_MENU = 'weather-menu';
 var BLANK = '   ';
 var ELLIPSIS = '...';
 var EN_DASH = '\u2013';
+var FORWARD_SLASH = '\u002F';
 function main(metadata, orientation, panelHeight, instanceId) {
     return new WeatherApplet(metadata, orientation, panelHeight, instanceId);
 }

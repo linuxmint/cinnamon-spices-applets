@@ -178,6 +178,11 @@
   { "type": "checkbox"
   , "default": false
   , "description": "Show high temperature first in forecast"
+  },
+  "tempRussianStyle":
+  { "type": "checkbox"
+  , "default": false
+  , "description": "Show temperature Russian style"
   }
   , "locationLabelOverride":
   { "type": "entry"

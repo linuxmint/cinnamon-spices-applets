@@ -40,7 +40,7 @@ var utils = importModule("utils");
 var GetDayName = utils.GetDayName as (date: Date, locale:string, tz?: string) => string;
 var GetHoursMinutes = utils.GetHoursMinutes as (date: Date, locale: string, hours24Format: boolean, tz?: string) => string;
 var capitalizeFirstLetter = utils.capitalizeFirstLetter as (description: string) => string;
-var TempToUserUnits = utils.TempToUserUnits as (kelvin: number, units: WeatherUnits) => number;
+var TempToUserConfig = utils.TempToUserConfig as (kelvin: number, units: WeatherUnits, russianStyle: boolean) => string;
 var PressToUserUnits = utils.PressToUserUnits as (hpa: number, units: WeatherPressureUnits) => number;
 var compassDirection = utils.compassDirection as (deg: number) => string;
 var MPStoUserUnits = utils.MPStoUserUnits as (mps: number, units: WeatherWindSpeedUnits) => number;
@@ -132,7 +132,8 @@ const KEYS: SettingKeys  =  {
   WEATHER_SHORT_CONDITIONS_KEY:  "shortConditions",
   WEATHER_MANUAL_LOCATION:  "manualLocation",
   WEATHER_USE_CUSTOM_APPLETICONS_KEY: 'useCustomAppletIcons',
-  WEATHER_USE_CUSTOM_MENUICONS_KEY: "useCustomMenuIcons"
+  WEATHER_USE_CUSTOM_MENUICONS_KEY: "useCustomMenuIcons",
+  WEATHER_RUSSIAN_STYLE: "tempRussianStyle"
 }
 
 //----------------------------------------------------------------------
@@ -235,6 +236,7 @@ class WeatherApplet extends TextIconApplet {
   public _useCustomAppletIcons: boolean;
   public _useCustomMenuIcons: boolean;
   public _tempTextOverride: string;
+  public _tempRussianStyle: boolean;
 
   public currentLocale: string = null;
   public log: Log;
@@ -822,8 +824,8 @@ class WeatherApplet extends TextIconApplet {
       // Temperature
       let temp = "";
       if (this.weather.temperature != null) {
-        temp = TempToUserUnits(this.weather.temperature, this._temperatureUnit).toString();
-        this._currentWeatherTemperature.text = temp + ' ' + this.unitToUnicode(this._temperatureUnit);
+        temp = TempToUserConfig(this.weather.temperature, this._temperatureUnit, this._tempRussianStyle);
+        this._currentWeatherTemperature.text = temp + this.unitToUnicode(this._temperatureUnit);
       }
 
       // Applet panel label
@@ -885,7 +887,7 @@ class WeatherApplet extends TextIconApplet {
             value = this.weather.extra_field.value.toString() + "%";
             break;
           case "temperature":
-            value = TempToUserUnits(this.weather.extra_field.value, this._temperatureUnit) + this.unitToUnicode(this._temperatureUnit);
+            value = TempToUserConfig(this.weather.extra_field.value, this._temperatureUnit, this._tempRussianStyle) + this.unitToUnicode(this._temperatureUnit);
             break;
           default:
             value = _(this.weather.extra_field.value);
@@ -928,8 +930,8 @@ class WeatherApplet extends TextIconApplet {
         let forecastData = this.forecasts[i];
         let forecastUi = this._forecast[i];
 
-        let t_low = TempToUserUnits(forecastData.temp_min, this._temperatureUnit);
-        let t_high = TempToUserUnits(forecastData.temp_max, this._temperatureUnit);
+        let t_low = TempToUserConfig(forecastData.temp_min, this._temperatureUnit, this._tempRussianStyle);
+        let t_high = TempToUserConfig(forecastData.temp_max, this._temperatureUnit, this._tempRussianStyle);
 
         let first_temperature = this._temperatureHighFirst ? t_high : t_low;
         let second_temperature = this._temperatureHighFirst ? t_low : t_high;
@@ -953,7 +955,11 @@ class WeatherApplet extends TextIconApplet {
         }
 
         forecastUi.Day.text = dayName;
-        forecastUi.Temperature.text = first_temperature + ' ' + '\u002F' + ' ' + second_temperature + ' ' + this.unitToUnicode(this._temperatureUnit);
+        forecastUi.Temperature.text = first_temperature;
+        // As Russian Tradition, -temp...+temp
+        // See https://github.com/linuxmint/cinnamon-spices-applets/issues/618
+        forecastUi.Temperature.text += ((this._tempRussianStyle) ? ELLIPSIS : " " + FORWARD_SLASH + " ");
+        forecastUi.Temperature.text += second_temperature + ' ' + this.unitToUnicode(this._temperatureUnit);
         forecastUi.Summary.text = comment;
         forecastUi.Icon.icon_name = (this._useCustomMenuIcons) ? forecastData.condition.customIcon : forecastData.condition.icon;
       }
@@ -1362,9 +1368,10 @@ const STYLE_FORECAST = 'forecast'
 const STYLE_WEATHER_MENU = 'weather-menu'
 
 // Magic strings
-const BLANK = '   '
-const ELLIPSIS = '...'
-const EN_DASH = '\u2013'
+const BLANK = '   ';
+const ELLIPSIS = '...';
+const EN_DASH = '\u2013';
+const FORWARD_SLASH = '\u002F';
 
 //----------------------------------------------------------------------
 //

@@ -231,13 +231,21 @@ var MPStoUserUnits = function (mps, units) {
             return "12 (" + _("Hurricane") + ")";
     }
 };
-var TempToUserUnits = function (kelvin, units) {
+var TempToUserConfig = function (kelvin, units, russianStyle) {
+    var temp;
     if (units == "celsius") {
-        return Math.round((kelvin - 273.15));
+        temp = Math.round((kelvin - 273.15));
     }
     if (units == "fahrenheit") {
-        return Math.round((9 / 5 * (kelvin - 273.15) + 32));
+        temp = Math.round((9 / 5 * (kelvin - 273.15) + 32));
     }
+    if (!russianStyle)
+        return temp.toString();
+    if (temp < 0)
+        temp = "−" + Math.abs(temp).toString();
+    else if (temp > 0)
+        temp = "+" + temp.toString();
+    return temp.toString();
 };
 var CelsiusToKelvin = function (celsius) {
     return (celsius + 273.15);

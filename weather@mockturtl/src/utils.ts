@@ -225,14 +225,21 @@ var MPStoUserUnits = function(mps: number, units: WeatherWindSpeedUnits): string
   }
 
   // Conversion from Kelvin
-var TempToUserUnits = function(kelvin: number, units: WeatherUnits): number {
-    if (units == "celsius") {
-      return Math.round((kelvin - 273.15));
-    }
-    if (units == "fahrenheit") {
-      return Math.round((9 / 5 * (kelvin - 273.15) + 32));
-    }
+var TempToUserConfig = function(kelvin: number, units: WeatherUnits, russianStyle: boolean): string {
+  let temp;
+  if (units == "celsius") {
+    temp = Math.round((kelvin - 273.15));
   }
+  if (units == "fahrenheit") {
+    temp = Math.round((9 / 5 * (kelvin - 273.15) + 32));
+  }
+
+  if (!russianStyle) return temp.toString();
+
+  if (temp < 0) temp = "−" + Math.abs(temp).toString();
+  else if (temp > 0) temp = "+" + temp.toString();
+  return temp.toString();
+}
 
 var CelsiusToKelvin = function(celsius: number): number {
     return (celsius + 273.15);
@@ -297,6 +304,7 @@ var nonempty = function(str: string): boolean {
 
 var compassDirection = function(deg: number): string {
     let directions = [_('N'), _('NE'), _('E'), _('SE'), _('S'), _('SW'), _('W'), _('NW')]
+    //let directions = [_('⬇'), _('⬋'), _('⬅'), _('⬉'), _('⬆'), _('⬈'), _('➞'), _('⬊')]
     return directions[Math.round(deg / 45) % directions.length]
   }
 
