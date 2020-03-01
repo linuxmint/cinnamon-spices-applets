@@ -728,7 +728,7 @@ var WeatherApplet = (function (_super) {
             var temp = "";
             if (this.weather.temperature != null) {
                 temp = TempToUserConfig(this.weather.temperature, this._temperatureUnit, this._tempRussianStyle);
-                this._currentWeatherTemperature.text = temp + this.unitToUnicode(this._temperatureUnit);
+                this._currentWeatherTemperature.text = temp + " " + this.unitToUnicode(this._temperatureUnit);
             }
             var label = "";
             if (this.orientation != Side.LEFT && this.orientation != Side.RIGHT) {
@@ -776,7 +776,7 @@ var WeatherApplet = (function (_super) {
                         value = this.weather.extra_field.value.toString() + "%";
                         break;
                     case "temperature":
-                        value = TempToUserConfig(this.weather.extra_field.value, this._temperatureUnit, this._tempRussianStyle) + this.unitToUnicode(this._temperatureUnit);
+                        value = TempToUserConfig(this.weather.extra_field.value, this._temperatureUnit, this._tempRussianStyle) + " " + this.unitToUnicode(this._temperatureUnit);
                         break;
                     default:
                         value = _(this.weather.extra_field.value);

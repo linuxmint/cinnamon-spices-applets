@@ -825,7 +825,7 @@ class WeatherApplet extends TextIconApplet {
       let temp = "";
       if (this.weather.temperature != null) {
         temp = TempToUserConfig(this.weather.temperature, this._temperatureUnit, this._tempRussianStyle);
-        this._currentWeatherTemperature.text = temp + this.unitToUnicode(this._temperatureUnit);
+        this._currentWeatherTemperature.text = temp + " " + this.unitToUnicode(this._temperatureUnit);
       }
 
       // Applet panel label
@@ -887,7 +887,7 @@ class WeatherApplet extends TextIconApplet {
             value = this.weather.extra_field.value.toString() + "%";
             break;
           case "temperature":
-            value = TempToUserConfig(this.weather.extra_field.value, this._temperatureUnit, this._tempRussianStyle) + this.unitToUnicode(this._temperatureUnit);
+            value = TempToUserConfig(this.weather.extra_field.value, this._temperatureUnit, this._tempRussianStyle) + " " + this.unitToUnicode(this._temperatureUnit);
             break;
           default:
             value = _(this.weather.extra_field.value);
