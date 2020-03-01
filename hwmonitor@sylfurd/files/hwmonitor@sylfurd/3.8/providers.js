@@ -206,12 +206,13 @@ class NetDataProvider {
 
 // Class responsible for getting CPU data
 class DiskDataProvider {
-	constructor(frequency, type_read) {
+	constructor(frequency, type_read, mount_dir) {
         this.gtop = new GTop.glibtop_fsusage();
         this.frequency = frequency;
         this.last = -1;
         this.max = 1;
         this.type_read = type_read;
+        this.mount_dir = mount_dir;
         if (this.type_read) {
             this.name = _("DISK (read)");
             this.type = "DISKREAD";
@@ -223,8 +224,7 @@ class DiskDataProvider {
 
     getData() {
         try {
-            GTop.glibtop_get_fsusage(this.gtop, "/");
-
+            GTop.glibtop_get_fsusage(this.gtop, this.mount_dir);
             let current = 0;
             if (this.type_read) {
                 current = this.gtop.read;
@@ -237,14 +237,20 @@ class DiskDataProvider {
                 this.last = current;
                 return 0;
             } else {
-                let usage = (current - this.last) / this.frequency;
-                this.last = current;
-                if (usage > this.max)
+                // Drive usage (percent of drive full)
+                // let usage = (this.gtop.blocks - this.gtop.bfree) / this.gtop.blocks;
+                // var text = (usage*100).toFixed(1);
+                // return tools.limit(usage, 0, 1);
+
+                // Calculate percent being used
+                let usage = current - this.last;
+                this.last = current;                            // Save number of read/write blocks for next check
+                if (usage > this.max)                           // Save the max value so that we can calculate the percentage
                     this.max = usage;
-                var text = ((usage/this.max)*100).toFixed(1);
-                this.text = text + "%";
+                let percent = usage/this.max;                   // Calculate percentage being used
+                this.text = ((percent)*100).toFixed(1) + "%";   // Set detailed text
                 let tools = new Tools();
-                return tools.limit(usage/this.max, 0, 1);
+                return tools.limit(percent, 0, 1);              // Return percentage
             }    
         }
         catch (e) {

@@ -144,12 +144,14 @@ GraphicalHWMonitorApplet.prototype = {
         // DISK (read) settings
         this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "diskread_enable_graph", "diskread_enable_graph", this.settingsChanged, null);
         this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "diskread_size", "diskread_size", this.settingsChanged, null);
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "diskread_mount_dir", "diskread_mount_dir", this.settingsChanged, null);
         this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "diskread_use_custom_label", "diskread_use_custom_label", this.settingsChanged, null);
         this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "diskread_custom_label", "diskread_custom_label", this.settingsChanged, null);
         this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "diskread_show_detail_label", "diskread_show_detail_label", this.settingsChanged, null);
         // DISK (write) settings
         this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "diskwrite_enable_graph", "diskwrite_enable_graph", this.settingsChanged, null);
         this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "diskwrite_size", "diskwrite_size", this.settingsChanged, null);
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "diskwrite_mount_dir", "diskwrite_mount_dir", this.settingsChanged, null);
         this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "diskwrite_use_custom_label", "diskwrite_use_custom_label", this.settingsChanged, null);
         this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "diskwrite_custom_label", "diskwrite_custom_label", this.settingsChanged, null);
         this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "diskwrite_show_detail_label", "diskwrite_show_detail_label", this.settingsChanged, null);
@@ -226,7 +228,7 @@ GraphicalHWMonitorApplet.prototype = {
             else
                 diskReadGraphArea = this.appletArea.addGraph(this.panel_height, this.diskread_size);
 
-            let diskReadProvider =  new Providers.DiskDataProvider(this.frequency, true);
+            let diskReadProvider =  new Providers.DiskDataProvider(this.frequency, true, this.diskread_mount_dir);
             this.graphs.push(new Graph.Graph(diskReadProvider, diskReadGraphArea, this.theme_object, this.diskread_show_detail_label));
         }    
                 
@@ -238,7 +240,7 @@ GraphicalHWMonitorApplet.prototype = {
             else
                 diskWriteGraphArea = this.appletArea.addGraph(this.panel_height, this.diskwrite_size);
 
-            let diskWriteProvider =  new Providers.DiskDataProvider(this.frequency, false);
+            let diskWriteProvider =  new Providers.DiskDataProvider(this.frequency, false, this.diskwrite_mount_dir);
             this.graphs.push(new Graph.Graph(diskWriteProvider, diskWriteGraphArea, this.theme_object, this.diskwrite_show_detail_label));
         }    
 
