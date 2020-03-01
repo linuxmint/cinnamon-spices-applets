@@ -152,7 +152,7 @@
   "useCustomAppletIcons":
   { "type": "checkbox"
   , "default": false
-  , "tootlip": "Iconset used is weather-icons by Erik Flowers"
+  , "tootlip": "Iconset is weather-icons by Erik Flowers"
   , "description": "Use custom icons on the panel"
   },
 "displaySettings":
@@ -212,7 +212,7 @@
   { "type": "checkbox"
   , "default": false
   , "description": "Use custom icons in the popup menu",
-   "tootlip": "Iconset used is weather-icons by Erik Flowers"
+   "tootlip": "Iconset is weather-icons by Erik Flowers"
   },
   "credits": {
     "type": "header",

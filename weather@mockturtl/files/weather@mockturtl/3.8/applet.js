@@ -652,8 +652,8 @@ class WeatherApplet extends TextIconApplet {
             let sunriseText = "";
             let sunsetText = "";
             if (this.weather.sunrise != null && this.weather.sunset != null && this._showSunrise) {
-                sunriseText = (_('Sunrise') + ': ' + GetHoursMinutes(this.weather.sunrise, this.currentLocale, this._show24Hours, this.weather.location.timeZone));
-                sunsetText = (_('Sunset') + ': ' + GetHoursMinutes(this.weather.sunset, this.currentLocale, this._show24Hours, this.weather.location.timeZone));
+                sunriseText = (GetHoursMinutes(this.weather.sunrise, this.currentLocale, this._show24Hours, this.weather.location.timeZone));
+                sunsetText = (GetHoursMinutes(this.weather.sunset, this.currentLocale, this._show24Hours, this.weather.location.timeZone));
             }
             this._currentWeatherSunrise.text = sunriseText;
             this._currentWeatherSunset.text = sunsetText;
@@ -777,12 +777,32 @@ class WeatherApplet extends TextIconApplet {
         this._currentWeatherSummary = new Label({ text: _('Loading ...'), style_class: STYLE_SUMMARY });
         this._currentWeatherSunrise = new Label(textOb);
         this._currentWeatherSunset = new Label(textOb);
+        let sunriseBox = new BoxLayout();
+        let sunriseTextBin = new Bin();
+        sunriseTextBin.set_child(this._currentWeatherSunrise);
+        let sunriseIcon = new Icon({
+            icon_name: "sunrise-symbolic",
+            icon_type: IconType.SYMBOLIC,
+            icon_size: 25
+        });
+        sunriseBox.add_actor(sunriseIcon);
+        sunriseBox.add_actor(sunriseTextBin);
+        let sunsetBox = new BoxLayout();
+        let sunsetTextBin = new Bin();
+        sunsetTextBin.set_child(this._currentWeatherSunset);
+        let sunsetIcon = new Icon({
+            icon_name: "sunset-symbolic",
+            icon_type: IconType.SYMBOLIC,
+            icon_size: 25
+        });
+        sunsetBox.add_actor(sunsetIcon);
+        sunsetBox.add_actor(sunsetTextBin);
         let ab_spacerlabel = new Label({ text: BLANK });
         let bb_spacerlabel = new Label({ text: BLANK });
         let sunBox = new BoxLayout({ style_class: STYLE_ASTRONOMY });
-        sunBox.add_actor(this._currentWeatherSunrise);
+        sunBox.add_actor(sunriseBox);
         sunBox.add_actor(ab_spacerlabel);
-        sunBox.add_actor(this._currentWeatherSunset);
+        sunBox.add_actor(sunsetBox);
         let middleColumn = new BoxLayout({ vertical: true, style_class: STYLE_SUMMARYBOX });
         middleColumn.add_actor(this._currentWeatherLocation);
         middleColumn.add_actor(this._currentWeatherSummary);
