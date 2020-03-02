@@ -16,7 +16,7 @@ After any of these layers recognized, that something has changed, another reques
 # Installation
 Clone this repository to `.local/share/cinnamon/applets/`
 
-For parsing ifconfig output externall shell script is used: `getNetworkInterfaces.sh`. Make sure that this script has set permissions to be executable! 
+For parsing ifconfig output, external shell script is used: `getNetworkInterfaces.sh`. Make sure that this script has set permissions to be executable! 
 ```
 chmod 755 getNetworkInterfaces.sh
 ```
@@ -33,8 +33,8 @@ Flag icons used from http://www.famfamfam.com/lab/icons/flags/.
 Following IP Services are called:
 - https://api.ipify.org?format=json
 - http://bot.whatismyipaddress.com/
-- http://geoip.nekudo.com/api/
-- http://ip-json.rhcloud.com/json
+- https://myexternalip.com/json
+- https://icanhazip.com
 - http://ipinfo.io/json
 - http://ip-api.com/json
 
