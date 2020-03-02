@@ -67,6 +67,7 @@ Right-click to access `cinnamon-settings` -> _Applets -> Configure_.
 
 * Sunset/Sunrise is not displayed correctly if there is a mismatch between the Location Timezone and System Timezone when using Manual Location
 * DarkSky verbose conditions are only in cm/celsius or in/fahrenheit
+* Location button does not indicate that its hovered over with light themes.
 
 ### Troubleshooting
 
