@@ -142,7 +142,7 @@ var Weatherbit = (function () {
                 condition: {
                     main: json.weather.description,
                     description: json.weather.description,
-                    icon: weatherIconSafely(self.ResolveIcon(json.weather.icon), self.app._icon_type),
+                    icon: weatherIconSafely(self.ResolveIcon(json.weather.icon), self.app.config._icon_type),
                     customIcon: self.ResolveCustomIcon(json.weather.icon)
                 },
                 extra_field: {
@@ -164,7 +164,7 @@ var Weatherbit = (function () {
     Weatherbit.prototype.ParseForecast = function (json, self) {
         var forecasts = [];
         try {
-            for (var i = 0; i < self.app._forecastDays; i++) {
+            for (var i = 0; i < self.app.config._forecastDays; i++) {
                 var day = json.data[i];
                 var forecast = {
                     date: new Date(day.ts * 1000),
@@ -173,7 +173,7 @@ var Weatherbit = (function () {
                     condition: {
                         main: day.weather.description,
                         description: day.weather.description,
-                        icon: weatherIconSafely(self.ResolveIcon(day.weather.icon), self.app._icon_type),
+                        icon: weatherIconSafely(self.ResolveIcon(day.weather.icon), self.app.config._icon_type),
                         customIcon: self.ResolveCustomIcon(day.weather.icon)
                     },
                 };
@@ -206,9 +206,9 @@ var Weatherbit = (function () {
         return lang;
     };
     Weatherbit.prototype.ConstructQuery = function (query) {
-        var key = this.app._apiKey.replace(" ", "");
-        var location = this.app._location.replace(" ", "");
-        if (this.app.noApiKey()) {
+        var key = this.app.config._apiKey.replace(" ", "");
+        var location = this.app.config._location.replace(" ", "");
+        if (this.app.config.noApiKey()) {
             this.app.log.Error("DarkSky: No API Key given");
             this.app.HandleError({
                 type: "hard",
@@ -222,7 +222,7 @@ var Weatherbit = (function () {
             var latLong = location.split(",");
             query = query + "key=" + key + "&lat=" + latLong[0] + "&lon=" + latLong[1] + "&units=S";
             var lang = this.ConvertToAPILocale(this.app.currentLocale);
-            if (isLangSupported(lang, this.supportedLanguages) && this.app._translateCondition) {
+            if (isLangSupported(lang, this.supportedLanguages) && this.app.config._translateCondition) {
                 query = query + "&lang=" + lang;
             }
             return query;

@@ -86,7 +86,7 @@ class Weatherbit {
                 condition: {
                     main: json.weather.description,
                     description: json.weather.description,
-                    icon: weatherIconSafely(self.ResolveIcon(json.weather.icon), self.app._icon_type),
+                    icon: weatherIconSafely(self.ResolveIcon(json.weather.icon), self.app.config._icon_type),
                     customIcon: self.ResolveCustomIcon(json.weather.icon)
                 },
                 extra_field: {
@@ -108,7 +108,7 @@ class Weatherbit {
     ParseForecast(json, self) {
         let forecasts = [];
         try {
-            for (let i = 0; i < self.app._forecastDays; i++) {
+            for (let i = 0; i < self.app.config._forecastDays; i++) {
                 let day = json.data[i];
                 let forecast = {
                     date: new Date(day.ts * 1000),
@@ -117,7 +117,7 @@ class Weatherbit {
                     condition: {
                         main: day.weather.description,
                         description: day.weather.description,
-                        icon: weatherIconSafely(self.ResolveIcon(day.weather.icon), self.app._icon_type),
+                        icon: weatherIconSafely(self.ResolveIcon(day.weather.icon), self.app.config._icon_type),
                         customIcon: self.ResolveCustomIcon(day.weather.icon)
                     },
                 };
@@ -150,9 +150,9 @@ class Weatherbit {
         return lang;
     }
     ConstructQuery(query) {
-        let key = this.app._apiKey.replace(" ", "");
-        let location = this.app._location.replace(" ", "");
-        if (this.app.noApiKey()) {
+        let key = this.app.config._apiKey.replace(" ", "");
+        let location = this.app.config._location.replace(" ", "");
+        if (this.app.config.noApiKey()) {
             this.app.log.Error("DarkSky: No API Key given");
             this.app.HandleError({
                 type: "hard",
@@ -166,7 +166,7 @@ class Weatherbit {
             let latLong = location.split(",");
             query = query + "key=" + key + "&lat=" + latLong[0] + "&lon=" + latLong[1] + "&units=S";
             let lang = this.ConvertToAPILocale(this.app.currentLocale);
-            if (isLangSupported(lang, this.supportedLanguages) && this.app._translateCondition) {
+            if (isLangSupported(lang, this.supportedLanguages) && this.app.config._translateCondition) {
                 query = query + "&lang=" + lang;
             }
             return query;

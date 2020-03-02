@@ -115,7 +115,7 @@ class OpenWeatherMap implements WeatherProvider {
             condition: {
               main: get(["weather", "0", "main"], json),
               description: get(["weather", "0", "description"], json),
-              icon: weatherIconSafely(self.ResolveIcon(get(["weather", "0", "icon"], json)), self.app._icon_type),
+              icon: weatherIconSafely(self.ResolveIcon(get(["weather", "0", "icon"], json)), self.app.config._icon_type),
               customIcon: self.ResolveCustomIcon(get(["weather", "0", "icon"], json))
             },
             extra_field: {
@@ -138,7 +138,7 @@ class OpenWeatherMap implements WeatherProvider {
     private ParseForecast(json: any, self: OpenWeatherMap): ForecastData[] {
       let forecasts: ForecastData[] = [];
       try {
-        for (let i = 0; i < self.app._forecastDays; i++) {
+        for (let i = 0; i < self.app.config._forecastDays; i++) {
           let day = json.list[i];
           let forecast: ForecastData = {          
               date: new Date(day.dt * 1000),
@@ -147,7 +147,7 @@ class OpenWeatherMap implements WeatherProvider {
               condition: {
                   main: day.weather[0].main,
                   description: day.weather[0].description,
-                  icon: weatherIconSafely(self.ResolveIcon(day.weather[0].icon), self.app._icon_type),
+                  icon: weatherIconSafely(self.ResolveIcon(day.weather[0].icon), self.app.config._icon_type),
                   customIcon: self.ResolveCustomIcon(day.weather[0].icon)
               },
           };
@@ -170,7 +170,7 @@ class OpenWeatherMap implements WeatherProvider {
              // Append Language if supported and enabled
             query += "1c73f8259a86c6fd43c7163b543c8640";
             let locale: string = this.ConvertToAPILocale(this.app.currentLocale);
-            if (this.app._translateCondition && isLangSupported(locale, this.supportedLanguages)) {
+            if (this.app.config._translateCondition && isLangSupported(locale, this.supportedLanguages)) {
                 query = query + "&lang=" + locale;
             }
             return query;
@@ -182,7 +182,7 @@ class OpenWeatherMap implements WeatherProvider {
     };
 
     private ParseLocation(): string {
-        let loc = this.app._location.replace(/ /g, "");
+        let loc = this.app.config._location.replace(/ /g, "");
         if (isCoordinate(loc)) {
             let locArr = loc.split(',');
             return "lat=" + locArr[0] + "&lon=" + locArr[1];

@@ -192,6 +192,7 @@ declare namespace imports.ui.applet {
         protected hide_applet_icon(): void;
         protected panel: any;
         protected actor: imports.gi.St.BoxLayout;
+        protected _applet_context_menu: any;
     }
 
     /**
