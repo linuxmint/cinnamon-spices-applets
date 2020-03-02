@@ -203,11 +203,7 @@ class WeatherApplet extends TextIconApplet {
     AddPopupMenu(orientation) {
         this.menuManager = new PopupMenuManager(this);
         this.menu = new AppletPopupMenu(this, orientation);
-        if (typeof this.menu.setCustomStyleClass === "function")
-            this.menu.setCustomStyleClass(STYLE_WEATHER_MENU);
-        else {
-            this.menu.actor.add_style_class_name(STYLE_WEATHER_MENU);
-        }
+        this.menu.box.add_style_class_name(STYLE_WEATHER_MENU);
         this.menuManager.addMenu(this.menu);
     }
     BindSettings() {
@@ -243,7 +239,6 @@ class WeatherApplet extends TextIconApplet {
         this._currentWeather = new Bin({ style_class: STYLE_CURRENT });
         this._futureWeather = new Bin({ style_class: STYLE_FORECAST });
         this._separatorArea = new DrawingArea({ style_class: STYLE_POPUP_SEPARATOR_MENU_ITEM });
-        this._separatorArea.width = 200;
         this._separatorArea.connect(SIGNAL_REPAINT, Lang.bind(this, this._onSeparatorAreaRepaint));
         let mainBox = new BoxLayout({ vertical: true });
         mainBox.add_actor(this._currentWeather);

@@ -325,13 +325,9 @@ class WeatherApplet extends TextIconApplet {
   private AddPopupMenu(orientation: any) {
     this.menuManager = new PopupMenuManager(this);
     this.menu = new AppletPopupMenu(this, orientation)
-    if (typeof this.menu.setCustomStyleClass === "function")
-      this.menu.setCustomStyleClass(STYLE_WEATHER_MENU);
-    else
-    {
-      this.menu.actor.add_style_class_name(STYLE_WEATHER_MENU);
-    }
-    
+    // this.menu.setCustomStyleClass and this.menu.actor.add_style_class_name(STYLE_WEATHER_MENU)
+    // Doesn't do shit, setting class on the box instead.
+    this.menu.box.add_style_class_name(STYLE_WEATHER_MENU);   
     this.menuManager.addMenu(this.menu)
   }
 
@@ -390,7 +386,6 @@ class WeatherApplet extends TextIconApplet {
     this._futureWeather = new Bin({ style_class: STYLE_FORECAST });
     //  horizontal rule
     this._separatorArea = new DrawingArea({ style_class: STYLE_POPUP_SEPARATOR_MENU_ITEM });
-    this._separatorArea.width = 200
     this._separatorArea.connect(SIGNAL_REPAINT, Lang.bind(this, this._onSeparatorAreaRepaint))
     // build menu
     let mainBox = new BoxLayout({ vertical: true })
@@ -589,7 +584,8 @@ class WeatherApplet extends TextIconApplet {
     // Implemented byApplets
   }
 
-  private _onSeparatorAreaRepaint(area: any) {
+  /** Called on panel toggle */
+  private _onSeparatorAreaRepaint(area: imports.gi.St.DrawingArea) {
     let cr = area.get_context()
     let themeNode = area.get_theme_node()
     let [width, height] = area.get_surface_size()
