@@ -1006,15 +1006,17 @@ var WeatherApplet = (function (_super) {
             forecastWeather.Day = new Label({ style_class: STYLE_FORECAST_DAY });
             forecastWeather.Summary = new Label({ style_class: STYLE_FORECAST_SUMMARY });
             forecastWeather.Temperature = new Label({ style_class: STYLE_FORECAST_TEMPERATURE });
+            var dataBin = new Bin();
             var dataBox = new BoxLayout({ vertical: true, style_class: STYLE_FORECAST_DATABOX });
             dataBox.add_actor(forecastWeather.Day);
             dataBox.add_actor(forecastWeather.Summary);
             dataBox.add_actor(forecastWeather.Temperature);
+            dataBin.set_child(dataBox);
             var forecastBox = new BoxLayout({
                 style_class: STYLE_FORECAST_BOX
             });
             forecastBox.add_actor(forecastWeather.Icon);
-            forecastBox.add_actor(dataBox);
+            forecastBox.add_actor(dataBin);
             this._forecast[i] = forecastWeather;
             this._forecastBox.add_actor(forecastBox);
         }
