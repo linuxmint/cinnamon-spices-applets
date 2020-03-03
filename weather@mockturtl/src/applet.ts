@@ -177,7 +177,7 @@ class WeatherApplet extends TextIconApplet {
     this.AddRefreshButton();
     // generating unique GUIDs
     this.ui = new UI(this, orientation);
-    this.ui.rebuild();
+    this.ui.rebuild(this.config);
     this.loop = new WeatherLoop(this, instanceId);
 
     this.orientation = orientation;
@@ -425,7 +425,7 @@ class WeatherApplet extends TextIconApplet {
       this.wipeData();
       this.ProcessWeatherData(weatherInfo, locationData);
 
-      if (rebuild) this.ui.rebuild();
+      if (rebuild) this.ui.rebuild(this.config);
       if (!await this.ui.displayWeather(this.weather, this.config) || !await this.ui.displayForecast(this.weather, this.forecasts, this.config)) return;
       this.log.Print("Weather Information refreshed");
       this.loop.ResetErrorCount();
@@ -590,7 +590,7 @@ class WeatherApplet extends TextIconApplet {
     this.encounteredError = true;
 
     if (error.type == "hard") {
-      this.ui.rebuild();
+      this.ui.rebuild(this.config);
       this.DisplayError(this.errMsg[error.detail], (!error.message) ? "" : error.message);
     }
 
@@ -683,6 +683,7 @@ class Log {
   }
 }
 
+/** Roll-down Popup Menu */
 class UI {
     // UI elements
     private _currentWeather: imports.gi.St.Bin;
@@ -709,29 +710,15 @@ class UI {
 
     constructor(app: WeatherApplet, orientation: imports.gi.St.Side) {
       this.app = app;
-      this.AddPopupMenu(orientation);
-      this.BuildPopupMenu();
-    }
-
-      /** Creates popup menu manager and popup menu */
-    private AddPopupMenu(orientation: any) {
       this.menuManager = new PopupMenuManager(this.app);
-      this.menu = new AppletPopupMenu(this.app, orientation)
+      this.menu = new AppletPopupMenu(this.app, orientation);
       // this.menu.setCustomStyleClass and 
       //this.menu.actor.add_style_class_name(STYLE_WEATHER_MENU);
       // Doesn't do shit, setting class on the box instead.
       this.menu.box.add_style_class_name(STYLE_WEATHER_MENU);  
       this.app.log.Debug("Popup Menu applied classes are: " + this.menu.box.get_style_class_name());
       this.menuManager.addMenu(this.menu);
-    }
-    /** Changes all icon's type what are affected by
-     * the "use symbolic icons" setting
-     */
-    public UpdateIconType(iconType: imports.gi.St.IconType): void {
-      this._currentWeatherIcon.icon_type = iconType
-      for (let i = 0; i < this._forecast.length; i++) {
-        this._forecast[i].Icon.icon_type = iconType
-      }
+      this.BuildPopupMenu();
     }
 
     /** Creates the skeleton of the popup menu */
@@ -752,48 +739,21 @@ class UI {
       this.menu.addActor(mainBox)
     }
 
-    /** Called on panel toggle */
-    private _onSeparatorAreaRepaint(area: imports.gi.St.DrawingArea) {
-      let cr = area.get_context()
-      let themeNode = area.get_theme_node()
-      let [width, height] = area.get_surface_size()
-      let margin = themeNode.get_length('-margin-horizontal')
-      let gradientHeight = themeNode.get_length('-gradient-height')
-      let startColor = themeNode.get_color('-gradient-start')
-      let endColor = themeNode.get_color('-gradient-end')
-      let gradientWidth = (width - margin * 2)
-      let gradientOffset = (height - gradientHeight) / 2
-      let pattern = new LinearGradient(margin, gradientOffset, width - margin, gradientOffset + gradientHeight)
-      pattern.addColorStopRGBA(0, startColor.red / 255, startColor.green / 255, startColor.blue / 255, startColor.alpha / 255)
-      pattern.addColorStopRGBA(0.5, endColor.red / 255, endColor.green / 255, endColor.blue / 255, endColor.alpha / 255)
-      pattern.addColorStopRGBA(1, startColor.red / 255, startColor.green / 255, startColor.blue / 255, startColor.alpha / 255)
-      cr.setSource(pattern)
-      cr.rectangle(margin, gradientOffset, gradientWidth, gradientHeight)
-      cr.fill()
-    };
+    /** Fully rebuilds UI */
+    public rebuild(config: Config): void {
+      this.showLoadingUi()
+      this.rebuildCurrentWeatherUi(config)
+      this.rebuildFutureWeatherUi(config)
+    }
 
-    /** Destroys current weather UI box */
-    private destroyCurrentWeather(): void {
-      if (this._currentWeather.get_child() != null)
-        this._currentWeather.get_child().destroy()
-    }
-  
-    /** Destroys forecast UI box */
-    private destroyFutureWeather(): void {
-      if (this._futureWeather.get_child() != null)
-        this._futureWeather.get_child().destroy()
-    }
-  
-    /** Destroys UI first then shows initial UI */
-    private showLoadingUi(): void {
-      this.destroyCurrentWeather()
-      this.destroyFutureWeather()
-      this._currentWeather.set_child(new Label({
-        text: _('Loading current weather ...')
-      }))
-      this._futureWeather.set_child(new Label({
-        text: _('Loading future weather ...')
-      }))
+    /** Changes all icon's type what are affected by
+     * the "use symbolic icons" setting
+     */
+    public UpdateIconType(iconType: imports.gi.St.IconType): void {
+      this._currentWeatherIcon.icon_type = iconType
+      for (let i = 0; i < this._forecast.length; i++) {
+        this._forecast[i].Icon.icon_type = iconType
+      }
     }
 
     public DisplayErrorMessage(msg: string) {
@@ -1009,15 +969,52 @@ class UI {
     private unitToUnicode(unit: WeatherUnits): string {
       return unit == "fahrenheit" ? '\u2109' : '\u2103'
     }
-  
-    /** Fully rebuilds UI */
-    public rebuild(): void {
-      this.showLoadingUi()
-      this.rebuildCurrentWeatherUi()
-      this.rebuildFutureWeatherUi()
+
+    /** Painted on panel toggle */
+    private _onSeparatorAreaRepaint(area: imports.gi.St.DrawingArea) {
+      let cr = area.get_context()
+      let themeNode = area.get_theme_node()
+      let [width, height] = area.get_surface_size()
+      let margin = themeNode.get_length('-margin-horizontal')
+      let gradientHeight = themeNode.get_length('-gradient-height')
+      let startColor = themeNode.get_color('-gradient-start')
+      let endColor = themeNode.get_color('-gradient-end')
+      let gradientWidth = (width - margin * 2)
+      let gradientOffset = (height - gradientHeight) / 2
+      let pattern = new LinearGradient(margin, gradientOffset, width - margin, gradientOffset + gradientHeight)
+      pattern.addColorStopRGBA(0, startColor.red / 255, startColor.green / 255, startColor.blue / 255, startColor.alpha / 255)
+      pattern.addColorStopRGBA(0.5, endColor.red / 255, endColor.green / 255, endColor.blue / 255, endColor.alpha / 255)
+      pattern.addColorStopRGBA(1, startColor.red / 255, startColor.green / 255, startColor.blue / 255, startColor.alpha / 255)
+      cr.setSource(pattern)
+      cr.rectangle(margin, gradientOffset, gradientWidth, gradientHeight)
+      cr.fill()
+    };
+
+    /** Destroys current weather UI box */
+    private destroyCurrentWeather(): void {
+      if (this._currentWeather.get_child() != null)
+        this._currentWeather.get_child().destroy()
     }
   
-    private rebuildCurrentWeatherUi(): void {
+    /** Destroys forecast UI box */
+    private destroyFutureWeather(): void {
+      if (this._futureWeather.get_child() != null)
+        this._futureWeather.get_child().destroy()
+    }
+  
+    /** Destroys UI first then shows initial UI */
+    private showLoadingUi(): void {
+      this.destroyCurrentWeather()
+      this.destroyFutureWeather()
+      this._currentWeather.set_child(new Label({
+        text: _('Loading current weather ...')
+      }))
+      this._futureWeather.set_child(new Label({
+        text: _('Loading future weather ...')
+      }))
+    }
+  
+    private rebuildCurrentWeatherUi(config: Config): void {
       this.destroyCurrentWeather()
       let textOb = {
         text: ELLIPSIS
@@ -1025,7 +1022,7 @@ class UI {
   
       // This will hold the icon for the current weather
       this._currentWeatherIcon = new Icon({
-        icon_type: this.app.config.IconType(),
+        icon_type: config.IconType(),
         icon_size: 64,
         icon_name: APPLET_ICON,
         style_class: STYLE_ICON
@@ -1057,7 +1054,7 @@ class UI {
         icon_type: IconType.SYMBOLIC,
         icon_size: 25
       })
-      if (this.app.config._showSunrise) sunriseBox.add_actor(sunriseIcon);
+      if (config._showSunrise) sunriseBox.add_actor(sunriseIcon);
       sunriseBox.add_actor(sunriseTextBin);
   
       let sunsetBox = new BoxLayout();
@@ -1068,7 +1065,7 @@ class UI {
         icon_type: IconType.SYMBOLIC,
         icon_size: 25
       })
-      if (this.app.config._showSunrise) sunsetBox.add_actor(sunsetIcon);
+      if (config._showSunrise) sunsetBox.add_actor(sunsetIcon);
       sunsetBox.add_actor(sunsetTextBin);
   
   
@@ -1132,17 +1129,17 @@ class UI {
       this._currentWeather.set_child(box)
     };
   
-    private rebuildFutureWeatherUi(): void {
+    private rebuildFutureWeatherUi(config: Config): void {
       this.destroyFutureWeather();
   
       this._forecast = []
       this._forecastBox = new BoxLayout({
-        vertical: this.app.config._verticalOrientation,
+        vertical: config._verticalOrientation,
         style_class: STYLE_FORECAST_CONTAINER
       })
       this._futureWeather.set_child(this._forecastBox)
   
-      for (let i = 0; i < this.app.config._forecastDays; i++) {
+      for (let i = 0; i < config._forecastDays; i++) {
         let forecastWeather: ForecastUI = {
           Icon: new Icon,
           Day: new Label,
@@ -1151,7 +1148,7 @@ class UI {
         }
   
         forecastWeather.Icon = new Icon({
-          icon_type: this.app.config.IconType(),
+          icon_type: config.IconType(),
           icon_size: 48,
           icon_name: APPLET_ICON,
           style_class: STYLE_FORECAST_ICON

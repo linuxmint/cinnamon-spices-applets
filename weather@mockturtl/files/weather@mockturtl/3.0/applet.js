@@ -173,7 +173,7 @@ var WeatherApplet = (function (_super) {
         _this.config = new Config(_this, instanceId);
         _this.AddRefreshButton();
         _this.ui = new UI(_this, orientation);
-        _this.ui.rebuild();
+        _this.ui.rebuild(_this.config);
         _this.loop = new WeatherLoop(_this, instanceId);
         _this.orientation = orientation;
         try {
@@ -406,7 +406,7 @@ var WeatherApplet = (function (_super) {
                         this.wipeData();
                         this.ProcessWeatherData(weatherInfo, locationData);
                         if (rebuild)
-                            this.ui.rebuild();
+                            this.ui.rebuild(this.config);
                         return [4, this.ui.displayWeather(this.weather, this.config)];
                     case 6:
                         _a = !(_b.sent());
@@ -560,7 +560,7 @@ var WeatherApplet = (function (_super) {
             return;
         this.encounteredError = true;
         if (error.type == "hard") {
-            this.ui.rebuild();
+            this.ui.rebuild(this.config);
             this.DisplayError(this.errMsg[error.detail], (!error.message) ? "" : error.message);
         }
         if (error.type == "soft") {
@@ -645,22 +645,13 @@ var Log = (function () {
 var UI = (function () {
     function UI(app, orientation) {
         this.app = app;
-        this.AddPopupMenu(orientation);
-        this.BuildPopupMenu();
-    }
-    UI.prototype.AddPopupMenu = function (orientation) {
         this.menuManager = new PopupMenuManager(this.app);
         this.menu = new AppletPopupMenu(this.app, orientation);
         this.menu.box.add_style_class_name(STYLE_WEATHER_MENU);
         this.app.log.Debug("Popup Menu applied classes are: " + this.menu.box.get_style_class_name());
         this.menuManager.addMenu(this.menu);
-    };
-    UI.prototype.UpdateIconType = function (iconType) {
-        this._currentWeatherIcon.icon_type = iconType;
-        for (var i = 0; i < this._forecast.length; i++) {
-            this._forecast[i].Icon.icon_type = iconType;
-        }
-    };
+        this.BuildPopupMenu();
+    }
     UI.prototype.BuildPopupMenu = function () {
         this._currentWeather = new Bin({ style_class: STYLE_CURRENT });
         this._futureWeather = new Bin({ style_class: STYLE_FORECAST });
@@ -672,42 +663,16 @@ var UI = (function () {
         mainBox.add_actor(this._futureWeather);
         this.menu.addActor(mainBox);
     };
-    UI.prototype._onSeparatorAreaRepaint = function (area) {
-        var cr = area.get_context();
-        var themeNode = area.get_theme_node();
-        var _a = area.get_surface_size(), width = _a[0], height = _a[1];
-        var margin = themeNode.get_length('-margin-horizontal');
-        var gradientHeight = themeNode.get_length('-gradient-height');
-        var startColor = themeNode.get_color('-gradient-start');
-        var endColor = themeNode.get_color('-gradient-end');
-        var gradientWidth = (width - margin * 2);
-        var gradientOffset = (height - gradientHeight) / 2;
-        var pattern = new LinearGradient(margin, gradientOffset, width - margin, gradientOffset + gradientHeight);
-        pattern.addColorStopRGBA(0, startColor.red / 255, startColor.green / 255, startColor.blue / 255, startColor.alpha / 255);
-        pattern.addColorStopRGBA(0.5, endColor.red / 255, endColor.green / 255, endColor.blue / 255, endColor.alpha / 255);
-        pattern.addColorStopRGBA(1, startColor.red / 255, startColor.green / 255, startColor.blue / 255, startColor.alpha / 255);
-        cr.setSource(pattern);
-        cr.rectangle(margin, gradientOffset, gradientWidth, gradientHeight);
-        cr.fill();
+    UI.prototype.rebuild = function (config) {
+        this.showLoadingUi();
+        this.rebuildCurrentWeatherUi(config);
+        this.rebuildFutureWeatherUi(config);
     };
-    ;
-    UI.prototype.destroyCurrentWeather = function () {
-        if (this._currentWeather.get_child() != null)
-            this._currentWeather.get_child().destroy();
-    };
-    UI.prototype.destroyFutureWeather = function () {
-        if (this._futureWeather.get_child() != null)
-            this._futureWeather.get_child().destroy();
-    };
-    UI.prototype.showLoadingUi = function () {
-        this.destroyCurrentWeather();
-        this.destroyFutureWeather();
-        this._currentWeather.set_child(new Label({
-            text: _('Loading current weather ...')
-        }));
-        this._futureWeather.set_child(new Label({
-            text: _('Loading future weather ...')
-        }));
+    UI.prototype.UpdateIconType = function (iconType) {
+        this._currentWeatherIcon.icon_type = iconType;
+        for (var i = 0; i < this._forecast.length; i++) {
+            this._forecast[i].Icon.icon_type = iconType;
+        }
     };
     UI.prototype.DisplayErrorMessage = function (msg) {
         this._currentWeatherSunset.text = msg;
@@ -877,18 +842,50 @@ var UI = (function () {
     UI.prototype.unitToUnicode = function (unit) {
         return unit == "fahrenheit" ? '\u2109' : '\u2103';
     };
-    UI.prototype.rebuild = function () {
-        this.showLoadingUi();
-        this.rebuildCurrentWeatherUi();
-        this.rebuildFutureWeatherUi();
+    UI.prototype._onSeparatorAreaRepaint = function (area) {
+        var cr = area.get_context();
+        var themeNode = area.get_theme_node();
+        var _a = area.get_surface_size(), width = _a[0], height = _a[1];
+        var margin = themeNode.get_length('-margin-horizontal');
+        var gradientHeight = themeNode.get_length('-gradient-height');
+        var startColor = themeNode.get_color('-gradient-start');
+        var endColor = themeNode.get_color('-gradient-end');
+        var gradientWidth = (width - margin * 2);
+        var gradientOffset = (height - gradientHeight) / 2;
+        var pattern = new LinearGradient(margin, gradientOffset, width - margin, gradientOffset + gradientHeight);
+        pattern.addColorStopRGBA(0, startColor.red / 255, startColor.green / 255, startColor.blue / 255, startColor.alpha / 255);
+        pattern.addColorStopRGBA(0.5, endColor.red / 255, endColor.green / 255, endColor.blue / 255, endColor.alpha / 255);
+        pattern.addColorStopRGBA(1, startColor.red / 255, startColor.green / 255, startColor.blue / 255, startColor.alpha / 255);
+        cr.setSource(pattern);
+        cr.rectangle(margin, gradientOffset, gradientWidth, gradientHeight);
+        cr.fill();
     };
-    UI.prototype.rebuildCurrentWeatherUi = function () {
+    ;
+    UI.prototype.destroyCurrentWeather = function () {
+        if (this._currentWeather.get_child() != null)
+            this._currentWeather.get_child().destroy();
+    };
+    UI.prototype.destroyFutureWeather = function () {
+        if (this._futureWeather.get_child() != null)
+            this._futureWeather.get_child().destroy();
+    };
+    UI.prototype.showLoadingUi = function () {
+        this.destroyCurrentWeather();
+        this.destroyFutureWeather();
+        this._currentWeather.set_child(new Label({
+            text: _('Loading current weather ...')
+        }));
+        this._futureWeather.set_child(new Label({
+            text: _('Loading future weather ...')
+        }));
+    };
+    UI.prototype.rebuildCurrentWeatherUi = function (config) {
         this.destroyCurrentWeather();
         var textOb = {
             text: ELLIPSIS
         };
         this._currentWeatherIcon = new Icon({
-            icon_type: this.app.config.IconType(),
+            icon_type: config.IconType(),
             icon_size: 64,
             icon_name: APPLET_ICON,
             style_class: STYLE_ICON
@@ -914,7 +911,7 @@ var UI = (function () {
             icon_type: IconType.SYMBOLIC,
             icon_size: 25
         });
-        if (this.app.config._showSunrise)
+        if (config._showSunrise)
             sunriseBox.add_actor(sunriseIcon);
         sunriseBox.add_actor(sunriseTextBin);
         var sunsetBox = new BoxLayout();
@@ -925,7 +922,7 @@ var UI = (function () {
             icon_type: IconType.SYMBOLIC,
             icon_size: 25
         });
-        if (this.app.config._showSunrise)
+        if (config._showSunrise)
             sunsetBox.add_actor(sunsetIcon);
         sunsetBox.add_actor(sunsetTextBin);
         var ab_spacerlabel = new Label({ text: BLANK });
@@ -971,15 +968,15 @@ var UI = (function () {
         this._currentWeather.set_child(box);
     };
     ;
-    UI.prototype.rebuildFutureWeatherUi = function () {
+    UI.prototype.rebuildFutureWeatherUi = function (config) {
         this.destroyFutureWeather();
         this._forecast = [];
         this._forecastBox = new BoxLayout({
-            vertical: this.app.config._verticalOrientation,
+            vertical: config._verticalOrientation,
             style_class: STYLE_FORECAST_CONTAINER
         });
         this._futureWeather.set_child(this._forecastBox);
-        for (var i = 0; i < this.app.config._forecastDays; i++) {
+        for (var i = 0; i < config._forecastDays; i++) {
             var forecastWeather = {
                 Icon: new Icon,
                 Day: new Label,
@@ -987,7 +984,7 @@ var UI = (function () {
                 Temperature: new Label,
             };
             forecastWeather.Icon = new Icon({
-                icon_type: this.app.config.IconType(),
+                icon_type: config.IconType(),
                 icon_size: 48,
                 icon_name: APPLET_ICON,
                 style_class: STYLE_FORECAST_ICON

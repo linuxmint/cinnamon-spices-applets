@@ -204,7 +204,7 @@ declare namespace imports.ui.applet {
      * Inherits: PopupMenu.PopupMenu
      */
     export class AppletPopupMenu extends popupMenu.PopupMenu {
-        constructor(context: any, orinentation: string);
+        constructor(context: any, orinentation: imports.gi.St.Side);
 
         _onOrientationChanged(a: any, orientation: string): void;
         _onOpenStateChanged(menu: any, open: any, sourceActor: any): void;
