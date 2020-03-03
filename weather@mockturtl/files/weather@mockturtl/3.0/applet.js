@@ -247,6 +247,7 @@ var WeatherApplet = (function (_super) {
         this.menuManager = new PopupMenuManager(this);
         this.menu = new AppletPopupMenu(this, orientation);
         this.menu.box.add_style_class_name(STYLE_WEATHER_MENU);
+        this.log.Debug("Popup Menu applied classes are: " + this.menu.box.get_style_class_name());
         this.menuManager.addMenu(this.menu);
     };
     WeatherApplet.prototype.AddRefreshButton = function () {
@@ -274,7 +275,6 @@ var WeatherApplet = (function (_super) {
         this.menu.addActor(mainBox);
     };
     WeatherApplet.prototype.refreshAndRebuild = function () {
-        global.log("RefreshandRebuild ran");
         this.loop.Resume();
         this.refreshWeather(true);
     };
@@ -384,7 +384,6 @@ var WeatherApplet = (function (_super) {
     };
     ;
     WeatherApplet.prototype._onKeySettingsUpdated = function () {
-        global.log("KeysettingUpdated");
         if (this.config.keybinding != null) {
             keybindingManager.addHotKey(UUID, this.config.keybinding, Lang.bind(this, this.on_applet_clicked));
         }
@@ -821,7 +820,8 @@ var WeatherApplet = (function (_super) {
             icon_type: IconType.SYMBOLIC,
             icon_size: 25
         });
-        sunriseBox.add_actor(sunriseIcon);
+        if (this.config._showSunrise)
+            sunriseBox.add_actor(sunriseIcon);
         sunriseBox.add_actor(sunriseTextBin);
         var sunsetBox = new BoxLayout();
         var sunsetTextBin = new Bin();
@@ -831,7 +831,8 @@ var WeatherApplet = (function (_super) {
             icon_type: IconType.SYMBOLIC,
             icon_size: 25
         });
-        sunsetBox.add_actor(sunsetIcon);
+        if (this.config._showSunrise)
+            sunsetBox.add_actor(sunsetIcon);
         sunsetBox.add_actor(sunsetTextBin);
         var ab_spacerlabel = new Label({ text: BLANK });
         var bb_spacerlabel = new Label({ text: BLANK });
@@ -845,8 +846,7 @@ var WeatherApplet = (function (_super) {
         middleColumn.add_actor(bb_spacerlabel);
         var sunBin = new Bin();
         sunBin.set_child(sunBox);
-        if (this.config._showSunrise)
-            middleColumn.add_actor(sunBin);
+        middleColumn.add_actor(sunBin);
         this._currentWeatherTemperature = new Label(textOb);
         this._currentWeatherHumidity = new Label(textOb);
         this._currentWeatherPressure = new Label(textOb);

@@ -1,7 +1,7 @@
 /* taken from gnome-shell.css, .dash-search-button */
-.weather-menu {
-    padding-bottom: 1em !important;
-    padding-top: 1em !important;
+.popup-menu-content.weather-menu {
+    padding-bottom: 0em !important;
+    padding-top: 0em !important;
 }
 
 .weather-current-location-link {

@@ -286,10 +286,12 @@ class WeatherApplet extends TextIconApplet {
   private AddPopupMenu(orientation: any) {
     this.menuManager = new PopupMenuManager(this);
     this.menu = new AppletPopupMenu(this, orientation)
-    // this.menu.setCustomStyleClass and this.menu.actor.add_style_class_name(STYLE_WEATHER_MENU)
+    // this.menu.setCustomStyleClass and 
+    //this.menu.actor.add_style_class_name(STYLE_WEATHER_MENU);
     // Doesn't do shit, setting class on the box instead.
-    this.menu.box.add_style_class_name(STYLE_WEATHER_MENU);   
-    this.menuManager.addMenu(this.menu)
+    this.menu.box.add_style_class_name(STYLE_WEATHER_MENU);  
+    this.log.Debug("Popup Menu applied classes are: " + this.menu.box.get_style_class_name());
+    this.menuManager.addMenu(this.menu);
   }
 
   /** Into right-click context menu */
@@ -330,7 +332,6 @@ class WeatherApplet extends TextIconApplet {
   }
 
   public refreshAndRebuild(): void {
-    global.log("RefreshandRebuild ran")
     this.loop.Resume();
     this.refreshWeather(true);
   };
@@ -430,7 +431,6 @@ class WeatherApplet extends TextIconApplet {
 
   /** Override function */
   public _onKeySettingsUpdated(): void {
-    global.log("KeysettingUpdated")
     if (this.config.keybinding != null) {
       keybindingManager.addHotKey(UUID,
         this.config.keybinding,
@@ -932,7 +932,7 @@ class WeatherApplet extends TextIconApplet {
       icon_type: IconType.SYMBOLIC,
       icon_size: 25
     })
-    sunriseBox.add_actor(sunriseIcon);
+    if (this.config._showSunrise) sunriseBox.add_actor(sunriseIcon);
     sunriseBox.add_actor(sunriseTextBin);
 
     let sunsetBox = new BoxLayout();
@@ -943,7 +943,7 @@ class WeatherApplet extends TextIconApplet {
       icon_type: IconType.SYMBOLIC,
       icon_size: 25
     })
-    sunsetBox.add_actor(sunsetIcon);
+    if (this.config._showSunrise) sunsetBox.add_actor(sunsetIcon);
     sunsetBox.add_actor(sunsetTextBin);
 
 
@@ -963,7 +963,7 @@ class WeatherApplet extends TextIconApplet {
     // Bin is used here for horizontally center BoxLayout
     let sunBin = new Bin();
     sunBin.set_child(sunBox);
-    if (this.config._showSunrise) middleColumn.add_actor(sunBin);
+    middleColumn.add_actor(sunBin);
 
     // Current Weather Right Column
     this._currentWeatherTemperature = new Label(textOb)
@@ -1227,6 +1227,7 @@ class Config {
 
   private settings: imports.ui.settings.AppletSettings;
   private app: WeatherApplet;
+
   constructor(app: WeatherApplet, instanceID: number) {
     this.app = app;
     this.settings = new AppletSettings(this, UUID, instanceID);
