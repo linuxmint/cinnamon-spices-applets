@@ -106,36 +106,6 @@ const DATA_SERVICE: ServiceMap = {
   WEATHERBIT: "Weatherbit"
 }
 
-const WEATHER_LOCATION = "location"
-const WEATHER_USE_SYMBOLIC_ICONS_KEY = 'useSymbolicIcons'
-
-/**
- * Keys matching the ones in settings-schema.json
- */
-const KEYS: SettingKeys  =  {
-  WEATHER_DATA_SERVICE : "dataService",
-  WEATHER_API_KEY:  "apiKey",
-  WEATHER_TEMPERATURE_UNIT_KEY: "temperatureUnit",
-  WEATHER_TEMPERATURE_HIGH_FIRST_KEY:  "temperatureHighFirst",
-  WEATHER_WIND_SPEED_UNIT_KEY: "windSpeedUnit",
-  WEATHER_CITY_KEY:  "locationLabelOverride",
-  WEATHER_TRANSLATE_CONDITION_KEY:  "translateCondition",
-  WEATHER_VERTICAL_ORIENTATION_KEY:  "verticalOrientation",
-  WEATHER_SHOW_TEXT_IN_PANEL_KEY:  "showTextInPanel",
-  WEATHER_TEMP_TEXT_OVERRIDE: "tempTextOverride",
-  WEATHER_SHOW_COMMENT_IN_PANEL_KEY:  "showCommentInPanel",
-  WEATHER_SHOW_SUNRISE_KEY: "showSunrise",
-  WEATHER_SHOW_24HOURS_KEY:  "show24Hours",
-  WEATHER_FORECAST_DAYS:  "forecastDays",
-  WEATHER_REFRESH_INTERVAL: "refreshInterval",
-  WEATHER_PRESSURE_UNIT_KEY: "pressureUnit",
-  WEATHER_SHORT_CONDITIONS_KEY:  "shortConditions",
-  WEATHER_MANUAL_LOCATION:  "manualLocation",
-  WEATHER_USE_CUSTOM_APPLETICONS_KEY: 'useCustomAppletIcons',
-  WEATHER_USE_CUSTOM_MENUICONS_KEY: "useCustomMenuIcons",
-  WEATHER_RUSSIAN_STYLE: "tempRussianStyle"
-}
-
 //----------------------------------------------------------------------
 //
 // Weather Applet
@@ -675,11 +645,11 @@ class WeatherApplet extends TextIconApplet {
       }
       else {
           this._currentWeatherIcon.icon_name = iconname;
-          this.UpdateIconType(this.config.GetCurrentIconType()); // Revert to user setting
+          this.UpdateIconType(this.config.IconType()); // Revert to user setting
       }
 
       // Applet icon
-      this.config._icon_type == IconType.SYMBOLIC ?
+      this.config.IconType() == IconType.SYMBOLIC ?
         this.set_applet_icon_symbolic_name(iconname) :
         this.set_applet_icon_name(iconname)
       if (this.config._useCustomAppletIcons) this.SetCustomIcon(this.weather.condition.customIcon);
@@ -900,7 +870,7 @@ class WeatherApplet extends TextIconApplet {
 
     // This will hold the icon for the current weather
     this._currentWeatherIcon = new Icon({
-      icon_type: this.config._icon_type,
+      icon_type: this.config.IconType(),
       icon_size: 64,
       icon_name: APPLET_ICON,
       style_class: STYLE_ICON
@@ -1026,7 +996,7 @@ class WeatherApplet extends TextIconApplet {
       }
 
       forecastWeather.Icon = new Icon({
-        icon_type: this.config._icon_type,
+        icon_type: this.config.IconType(),
         icon_size: 48,
         icon_name: APPLET_ICON,
         style_class: STYLE_FORECAST_ICON
@@ -1197,8 +1167,37 @@ class Log {
 }
 
 class Config {
-    // Settings variables to bind to
-  // Settings are public
+  WEATHER_LOCATION = "location"
+  WEATHER_USE_SYMBOLIC_ICONS_KEY = 'useSymbolicIcons'
+
+/**
+ * Keys matching the ones in settings-schema.json
+ */
+  KEYS: SettingKeys  =  {
+    WEATHER_DATA_SERVICE : "dataService",
+    WEATHER_API_KEY:  "apiKey",
+    WEATHER_TEMPERATURE_UNIT_KEY: "temperatureUnit",
+    WEATHER_TEMPERATURE_HIGH_FIRST_KEY:  "temperatureHighFirst",
+    WEATHER_WIND_SPEED_UNIT_KEY: "windSpeedUnit",
+    WEATHER_CITY_KEY:  "locationLabelOverride",
+    WEATHER_TRANSLATE_CONDITION_KEY:  "translateCondition",
+    WEATHER_VERTICAL_ORIENTATION_KEY:  "verticalOrientation",
+    WEATHER_SHOW_TEXT_IN_PANEL_KEY:  "showTextInPanel",
+    WEATHER_TEMP_TEXT_OVERRIDE: "tempTextOverride",
+    WEATHER_SHOW_COMMENT_IN_PANEL_KEY:  "showCommentInPanel",
+    WEATHER_SHOW_SUNRISE_KEY: "showSunrise",
+    WEATHER_SHOW_24HOURS_KEY:  "show24Hours",
+    WEATHER_FORECAST_DAYS:  "forecastDays",
+    WEATHER_REFRESH_INTERVAL: "refreshInterval",
+    WEATHER_PRESSURE_UNIT_KEY: "pressureUnit",
+    WEATHER_SHORT_CONDITIONS_KEY:  "shortConditions",
+    WEATHER_MANUAL_LOCATION:  "manualLocation",
+    WEATHER_USE_CUSTOM_APPLETICONS_KEY: 'useCustomAppletIcons',
+    WEATHER_USE_CUSTOM_MENUICONS_KEY: "useCustomMenuIcons",
+    WEATHER_RUSSIAN_STYLE: "tempRussianStyle"
+  }
+  
+  // Settings variables to bind to
   public _refreshInterval: number;
   public _manualLocation: boolean;
   public _dataService: Services;
@@ -1223,7 +1222,6 @@ class Config {
   public _tempRussianStyle: boolean;
 
   public keybinding: any;
-  public _icon_type: imports.gi.St.IconType;
 
   private settings: imports.ui.settings.AppletSettings;
   private app: WeatherApplet;
@@ -1236,8 +1234,8 @@ class Config {
 
   /** Attaches settings to functions */
   private BindSettings() {
-    for (let k in KEYS) {
-      let key = KEYS[k];
+    for (let k in this.KEYS) {
+      let key = this.KEYS[k];
       let keyProp = "_" + key;
       this.settings.bindProperty(BindingDirection.IN,
         key, keyProp, Lang.bind(this.app, this.app.refreshAndRebuild), null);
@@ -1245,7 +1243,7 @@ class Config {
 
     // Settings what need special care
     this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
-      WEATHER_LOCATION, ("_" + WEATHER_LOCATION), Lang.bind(this.app, this.app.refreshAndRebuild), null);
+      this.WEATHER_LOCATION, ("_" + this.WEATHER_LOCATION), Lang.bind(this.app, this.app.refreshAndRebuild), null);
 
     this.settings.bindProperty(BindingDirection.IN, "keybinding",
       "keybinding", Lang.bind(this.app, this.app._onKeySettingsUpdated), null);
@@ -1253,11 +1251,8 @@ class Config {
     keybindingManager.addHotKey(
       UUID, this.keybinding, Lang.bind(this.app, this.app.on_applet_clicked));
 
-    this._icon_type = this.GetCurrentIconType();
-
-    this.settings.connect(SIGNAL_CHANGED + WEATHER_USE_SYMBOLIC_ICONS_KEY, Lang.bind(this, function () {
-      this._icon_type = this.GetCurrentIconType();
-      this.app.UpdateIconType(this._icon_type);
+    this.settings.connect(SIGNAL_CHANGED + this.WEATHER_USE_SYMBOLIC_ICONS_KEY, Lang.bind(this, function () {
+      this.app.UpdateIconType(this.IconType());
       this.app.refreshWeather()
     }))    
   }
@@ -1265,14 +1260,14 @@ class Config {
     /**
    * Gets Icon type based on user config
    */
-  public GetCurrentIconType(): imports.gi.St.IconType {
-    return this.settings.getValue(WEATHER_USE_SYMBOLIC_ICONS_KEY) ?
+  public IconType(): imports.gi.St.IconType {
+    return this.settings.getValue(this.WEATHER_USE_SYMBOLIC_ICONS_KEY) ?
       IconType.SYMBOLIC :
       IconType.FULLCOLOR
   };
 
   public SetLocation(value: string) {
-    this.settings.setValue('location', value);
+    this.settings.setValue(this.WEATHER_LOCATION, value);
   }
 
   public noApiKey(): boolean {

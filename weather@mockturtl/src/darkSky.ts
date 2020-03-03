@@ -110,7 +110,7 @@ class DarkSky implements WeatherProvider {
                 condition: {
                     main: this.GetShortCurrentSummary(json.currently.summary),
                     description: json.currently.summary,
-                    icon: weatherIconSafely(this.ResolveIcon(json.currently.icon, {sunrise: sunrise, sunset: sunset}), this.app.config._icon_type),
+                    icon: weatherIconSafely(this.ResolveIcon(json.currently.icon, {sunrise: sunrise, sunset: sunset}), this.app.config.IconType()),
                     customIcon: this.ResolveCustomIcon(json.currently.icon)
                 },
                 extra_field: {
@@ -130,7 +130,7 @@ class DarkSky implements WeatherProvider {
                     condition: {
                       main: this.GetShortSummary(day.summary),               
                       description: this.ProcessSummary(day.summary),        
-                      icon: weatherIconSafely(this.ResolveIcon(day.icon), this.app.config._icon_type),    
+                      icon: weatherIconSafely(this.ResolveIcon(day.icon), this.app.config.IconType()),    
                       customIcon: this.ResolveCustomIcon(day.icon)           
                     },
                   };

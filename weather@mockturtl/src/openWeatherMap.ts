@@ -115,7 +115,7 @@ class OpenWeatherMap implements WeatherProvider {
             condition: {
               main: get(["weather", "0", "main"], json),
               description: get(["weather", "0", "description"], json),
-              icon: weatherIconSafely(self.ResolveIcon(get(["weather", "0", "icon"], json)), self.app.config._icon_type),
+              icon: weatherIconSafely(self.ResolveIcon(get(["weather", "0", "icon"], json)), self.app.config.IconType()),
               customIcon: self.ResolveCustomIcon(get(["weather", "0", "icon"], json))
             },
             extra_field: {
@@ -147,7 +147,7 @@ class OpenWeatherMap implements WeatherProvider {
               condition: {
                   main: day.weather[0].main,
                   description: day.weather[0].description,
-                  icon: weatherIconSafely(self.ResolveIcon(day.weather[0].icon), self.app.config._icon_type),
+                  icon: weatherIconSafely(self.ResolveIcon(day.weather[0].icon), self.app.config.IconType()),
                   customIcon: self.ResolveCustomIcon(day.weather[0].icon)
               },
           };

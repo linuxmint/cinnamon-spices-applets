@@ -307,293 +307,294 @@ var MetNorway = (function () {
     };
     MetNorway.prototype.ResolveCondition = function (icon, checkIfNight) {
         var condition = icon.replace("Dark_", "");
+        var iconType = this.app.config.IconType();
         switch (condition) {
             case "Cloud":
                 return {
                     customIcon: "cloudy-symbolic",
                     main: _("Cloudy"),
                     description: _("Cloudy"),
-                    icon: weatherIconSafely([icons.overcast, icons.clouds, icons.few_clouds_day], this.app.config._icon_type)
+                    icon: weatherIconSafely([icons.overcast, icons.clouds, icons.few_clouds_day], iconType)
                 };
             case "Drizzle":
                 return {
                     customIcon: "showers-symbolic",
                     main: _("Drizzle"),
                     description: _("Drizzle"),
-                    icon: weatherIconSafely([icons.rain, icons.showers_scattered, icons.rain_freezing, icons.alert], this.app.config._icon_type)
+                    icon: weatherIconSafely([icons.rain, icons.showers_scattered, icons.rain_freezing, icons.alert], iconType)
                 };
             case "DrizzleSun":
                 return {
                     customIcon: (checkIfNight && this.IsNight()) ? "night-showers-symbolic" : "day-showers-symbolic",
                     main: _("Drizzle"),
                     description: _("Drizzle"),
-                    icon: weatherIconSafely([icons.showers_scattered, icons.rain_freezing, icons.alert], this.app.config._icon_type)
+                    icon: weatherIconSafely([icons.showers_scattered, icons.rain_freezing, icons.alert], iconType)
                 };
             case "DrizzleThunder":
                 return {
                     customIcon: "storm-showers-symbolic",
                     main: _("Drizzle"),
                     description: _("Drizzle with Thunderstorms"),
-                    icon: weatherIconSafely([icons.showers_scattered, icons.rain_freezing, icons.alert], this.app.config._icon_type)
+                    icon: weatherIconSafely([icons.showers_scattered, icons.rain_freezing, icons.alert], iconType)
                 };
             case "DrizzleThunderSun":
                 return {
                     customIcon: "day-storm-showers-symbolic",
                     main: _("Mostly Drizzle"),
                     description: _("Mostly Drizzle with Thunderstorms"),
-                    icon: weatherIconSafely([icons.rain, icons.showers_scattered, icons.rain_freezing, icons.alert], this.app.config._icon_type)
+                    icon: weatherIconSafely([icons.rain, icons.showers_scattered, icons.rain_freezing, icons.alert], iconType)
                 };
             case "Fog":
                 return {
                     customIcon: "fog-symbolic",
                     main: _("Fog"),
                     description: _("Fog"),
-                    icon: weatherIconSafely([icons.fog, icons.alert], this.app.config._icon_type)
+                    icon: weatherIconSafely([icons.fog, icons.alert], iconType)
                 };
             case "HeavySleet":
                 return {
                     customIcon: "sleet-symbolic",
                     main: _("Heavy Sleet"),
                     description: _("Heavy Sleet"),
-                    icon: weatherIconSafely([icons.rain_freezing, icons.rain, icons.alert], this.app.config._icon_type)
+                    icon: weatherIconSafely([icons.rain_freezing, icons.rain, icons.alert], iconType)
                 };
             case "HeavySleetSun":
                 return {
                     customIcon: (checkIfNight && this.IsNight()) ? "night-sleet-symbolic" : "day-sleet-symbolic",
                     main: _("Heavy Sleet"),
                     description: _("Mostly Heavy Sleet"),
-                    icon: weatherIconSafely([icons.rain_freezing, icons.rain, icons.alert], this.app.config._icon_type)
+                    icon: weatherIconSafely([icons.rain_freezing, icons.rain, icons.alert], iconType)
                 };
             case "HeavySleetThunder":
                 return {
                     customIcon: "sleet-storm-symbolic",
                     main: _("Heavy Sleet"),
                     description: _("Heavy Sleet with Thunderstorms"),
-                    icon: weatherIconSafely([icons.rain_freezing, icons.rain, icons.alert], this.app.config._icon_type)
+                    icon: weatherIconSafely([icons.rain_freezing, icons.rain, icons.alert], iconType)
                 };
             case "HeavySleetThunderSun":
                 return {
                     customIcon: (checkIfNight && this.IsNight()) ? "night-sleet-storm-symbolic" : "day-sleet-storm-symbolic",
                     main: _("Heavy Sleet"),
                     description: _("Mostly Heavy Sleet with Thunderstorms"),
-                    icon: weatherIconSafely([icons.rain_freezing, icons.rain, icons.alert], this.app.config._icon_type)
+                    icon: weatherIconSafely([icons.rain_freezing, icons.rain, icons.alert], iconType)
                 };
             case "HeavySnow":
                 return {
                     customIcon: "snow-symbolic",
                     main: _("Heavy Snow"),
                     description: _("Heavy Snow"),
-                    icon: weatherIconSafely([icons.snow, icons.alert], this.app.config._icon_type)
+                    icon: weatherIconSafely([icons.snow, icons.alert], iconType)
                 };
             case "HeavySnowThunder":
                 return {
                     customIcon: "snow-symbolic",
                     main: _("Heavy Snow"),
                     description: _("Heavy Snow with Thunderstorms"),
-                    icon: weatherIconSafely([icons.snow, icons.alert], this.app.config._icon_type)
+                    icon: weatherIconSafely([icons.snow, icons.alert], iconType)
                 };
             case "HeavySnowThunderSun":
                 return {
                     customIcon: (checkIfNight && this.IsNight()) ? "night-snow-thunderstorm-symbolic" : "day-snow-thunderstorm-symbolic",
                     main: _("Heavy Snow"),
                     description: _("Heavy Snow with Thunderstorms"),
-                    icon: weatherIconSafely([icons.snow, icons.alert], this.app.config._icon_type)
+                    icon: weatherIconSafely([icons.snow, icons.alert], iconType)
                 };
             case "HeavySnowSun":
                 return {
                     customIcon: (checkIfNight && this.IsNight()) ? "night-snow-symbolic" : "day-snow-symbolic",
                     main: _("Heavy Snow"),
                     description: _("Heavy Snow"),
-                    icon: weatherIconSafely([icons.snow, icons.alert], this.app.config._icon_type)
+                    icon: weatherIconSafely([icons.snow, icons.alert], iconType)
                 };
             case "LightCloud":
                 return {
                     customIcon: (checkIfNight && this.IsNight()) ? "night-cloudy-symbolic" : "day-cloudy-symbolic",
                     main: _("Few Clouds"),
                     description: _("Few Clouds"),
-                    icon: weatherIconSafely((checkIfNight && this.IsNight()) ? [icons.few_clouds_night, icons.alert] : [icons.few_clouds_day, icons.alert], this.app.config._icon_type)
+                    icon: weatherIconSafely((checkIfNight && this.IsNight()) ? [icons.few_clouds_night, icons.alert] : [icons.few_clouds_day, icons.alert], iconType)
                 };
             case "LightRain":
                 return {
                     customIcon: (checkIfNight && this.IsNight()) ? "rain-symbolic" : "rain-symbolic",
                     main: _("Light Rain"),
                     description: _("Light Rain"),
-                    icon: weatherIconSafely([icons.showers_scattered, icons.rain, icons.alert], this.app.config._icon_type)
+                    icon: weatherIconSafely([icons.showers_scattered, icons.rain, icons.alert], iconType)
                 };
             case "LightRainSun":
                 return {
                     customIcon: (checkIfNight && this.IsNight()) ? "night-rain-symbolic" : "day-rain-symbolic",
                     main: _("Light Rain"),
                     description: _("Light Rain"),
-                    icon: weatherIconSafely([icons.showers_scattered, icons.rain, icons.alert], this.app.config._icon_type)
+                    icon: weatherIconSafely([icons.showers_scattered, icons.rain, icons.alert], iconType)
                 };
             case "LightRainThunder":
                 return {
                     customIcon: "rain-symbolic",
                     main: _("Light Rain"),
                     description: _("Light Rain with Thunderstorms"),
-                    icon: weatherIconSafely([icons.showers_scattered, icons.rain, icons.alert], this.app.config._icon_type)
+                    icon: weatherIconSafely([icons.showers_scattered, icons.rain, icons.alert], iconType)
                 };
             case "LightRainThunderSun":
                 return {
                     customIcon: (checkIfNight && this.IsNight()) ? "night-rain-symbolic" : "day-rain-symbolic",
                     main: _("Light Rain"),
                     description: _("Mostly Ligh Rain with Thunderstorms"),
-                    icon: weatherIconSafely([icons.showers_scattered, icons.rain, icons.alert], this.app.config._icon_type)
+                    icon: weatherIconSafely([icons.showers_scattered, icons.rain, icons.alert], iconType)
                 };
             case "LightSleet":
                 return {
                     customIcon: "sleet-symbolic",
                     main: _("Light Sleet"),
                     description: _("Light Sleet"),
-                    icon: weatherIconSafely([icons.rain_freezing, icons.showers, icons.alert], this.app.config._icon_type)
+                    icon: weatherIconSafely([icons.rain_freezing, icons.showers, icons.alert], iconType)
                 };
             case "LightSleetSun":
                 return {
                     customIcon: (checkIfNight && this.IsNight()) ? "night-sleet-symbolic" : "day-sleet-symbolic",
                     main: _("Light Sleet"),
                     description: _("Mostly Light Sleet"),
-                    icon: weatherIconSafely([icons.rain_freezing, icons.showers, icons.alert], this.app.config._icon_type)
+                    icon: weatherIconSafely([icons.rain_freezing, icons.showers, icons.alert], iconType)
                 };
             case "LightSleetThunder":
                 return {
                     customIcon: "sleet-symbolic",
                     main: _("Light Sleet"),
                     description: _("Light Sleet with Thunderstorms"),
-                    icon: weatherIconSafely([icons.rain_freezing, icons.showers, icons.alert], this.app.config._icon_type)
+                    icon: weatherIconSafely([icons.rain_freezing, icons.showers, icons.alert], iconType)
                 };
             case "LightSleetThunderSun":
                 return {
                     customIcon: (checkIfNight && this.IsNight()) ? "night-sleet-storm-symbolic" : "day-sleet-storm-symbolic",
                     main: _("Light Sleet"),
                     description: _("Mostly Light Sleet with Thunderstorms"),
-                    icon: weatherIconSafely([icons.rain_freezing, icons.showers, icons.alert], this.app.config._icon_type)
+                    icon: weatherIconSafely([icons.rain_freezing, icons.showers, icons.alert], iconType)
                 };
             case "LightSnow":
                 return {
                     customIcon: "snow-symbolic",
                     main: _("Light Snow"),
                     description: _("Light Snow"),
-                    icon: weatherIconSafely([icons.snow, icons.alert], this.app.config._icon_type)
+                    icon: weatherIconSafely([icons.snow, icons.alert], iconType)
                 };
             case "LightSnowSun":
                 return {
                     customIcon: (checkIfNight && this.IsNight()) ? "night-snow-symbolic" : "day-snow-symbolic",
                     main: _("Light Snow"),
                     description: _("Mostly Light Snow"),
-                    icon: weatherIconSafely([icons.snow, icons.alert], this.app.config._icon_type)
+                    icon: weatherIconSafely([icons.snow, icons.alert], iconType)
                 };
             case "LightSnowThunder":
                 return {
                     customIcon: "snow-symbolic",
                     main: _("Light Snow"),
                     description: _("Light Snow with Thunderstorms"),
-                    icon: weatherIconSafely([icons.snow, icons.alert], this.app.config._icon_type)
+                    icon: weatherIconSafely([icons.snow, icons.alert], iconType)
                 };
             case "LightSnowThunderSun":
                 return {
                     customIcon: (checkIfNight && this.IsNight()) ? "night-snow-thunderstorm-symbolic" : "day-snow-thunderstorm-symbolic",
                     main: _("Light Snow"),
                     description: _("Mostly Light Snow with Thunderstorms"),
-                    icon: weatherIconSafely([icons.snow, icons.alert], this.app.config._icon_type)
+                    icon: weatherIconSafely([icons.snow, icons.alert], iconType)
                 };
             case "PartlyCloud":
                 return {
                     customIcon: (checkIfNight && this.IsNight()) ? "night-cloudy-symbolic" : "day-cloudy-symbolic",
                     main: _("Partly Cloudy"),
                     description: _("Partly Cloudy"),
-                    icon: weatherIconSafely((checkIfNight && this.IsNight()) ? [icons.few_clouds_night, icons.clouds, icons.overcast, icons.alert] : [icons.few_clouds_day, icons.clouds, icons.overcast, icons.alert], this.app.config._icon_type)
+                    icon: weatherIconSafely((checkIfNight && this.IsNight()) ? [icons.few_clouds_night, icons.clouds, icons.overcast, icons.alert] : [icons.few_clouds_day, icons.clouds, icons.overcast, icons.alert], iconType)
                 };
             case "Rain":
                 return {
                     customIcon: "rain-symbolic",
                     main: _("Rain"),
                     description: _("Rain"),
-                    icon: weatherIconSafely([icons.rain, icons.rain_freezing, icons.alert], this.app.config._icon_type)
+                    icon: weatherIconSafely([icons.rain, icons.rain_freezing, icons.alert], iconType)
                 };
             case "RainSun":
                 return {
                     customIcon: (checkIfNight && this.IsNight()) ? "night-rain-symbolic" : "day-rain-symbolic",
                     main: _("Mostly Rainy"),
                     description: _("Mostly Rainy"),
-                    icon: weatherIconSafely([icons.rain, icons.rain_freezing, icons.alert], this.app.config._icon_type)
+                    icon: weatherIconSafely([icons.rain, icons.rain_freezing, icons.alert], iconType)
                 };
             case "RainThunder":
                 return {
                     customIcon: "thunderstorm-symbolic",
                     main: _("Rain"),
                     description: _("Rain with Thunderstorms"),
-                    icon: weatherIconSafely([icons.storm, icons.rain, icons.rain_freezing, icons.alert], this.app.config._icon_type)
+                    icon: weatherIconSafely([icons.storm, icons.rain, icons.rain_freezing, icons.alert], iconType)
                 };
             case "RainThunderSun":
                 return {
                     customIcon: (checkIfNight && this.IsNight()) ? "night-thunderstorm-symbolic" : "day-thunderstorm-symbolic",
                     main: _("Rain"),
                     description: _("Mostly Rainy with Thunderstorms"),
-                    icon: weatherIconSafely([icons.storm, icons.rain, icons.rain_freezing, icons.alert], this.app.config._icon_type)
+                    icon: weatherIconSafely([icons.storm, icons.rain, icons.rain_freezing, icons.alert], iconType)
                 };
             case "Sleet":
                 return {
                     customIcon: "sleet-symbolic",
                     main: _("Sleet"),
                     description: _("Sleet"),
-                    icon: weatherIconSafely([icons.rain_freezing, icons.showers, icons.alert], this.app.config._icon_type)
+                    icon: weatherIconSafely([icons.rain_freezing, icons.showers, icons.alert], iconType)
                 };
             case "SleetSun":
                 return {
                     customIcon: (checkIfNight && this.IsNight()) ? "night-sleet-symbolic" : "day-sleet-symbolic",
                     main: _("Sleet"),
                     description: _("Mostly Sleet"),
-                    icon: weatherIconSafely([icons.rain_freezing, icons.showers, icons.alert], this.app.config._icon_type)
+                    icon: weatherIconSafely([icons.rain_freezing, icons.showers, icons.alert], iconType)
                 };
             case "SleetSunThunder":
                 return {
                     customIcon: (checkIfNight && this.IsNight()) ? "night-sleet-storm-symbolic" : "day-sleet-storm-symbolic",
                     main: _("Sleet"),
                     description: _("Mostly Sleet with Thunderstorms"),
-                    icon: weatherIconSafely([icons.rain_freezing, icons.showers, icons.alert], this.app.config._icon_type)
+                    icon: weatherIconSafely([icons.rain_freezing, icons.showers, icons.alert], iconType)
                 };
             case "SleetThunder":
                 return {
                     customIcon: "sleet-storm-symbolic",
                     main: _("Sleet"),
                     description: _("Sleet with Thunderstorms"),
-                    icon: weatherIconSafely([icons.rain_freezing, icons.showers, icons.alert], this.app.config._icon_type)
+                    icon: weatherIconSafely([icons.rain_freezing, icons.showers, icons.alert], iconType)
                 };
             case "Snow":
                 return {
                     customIcon: "snow-symbolic",
                     main: _("Snow"),
                     description: _("Snowy"),
-                    icon: weatherIconSafely([icons.snow, icons.alert], this.app.config._icon_type)
+                    icon: weatherIconSafely([icons.snow, icons.alert], iconType)
                 };
             case "SnowSun":
                 return {
                     customIcon: (checkIfNight && this.IsNight()) ? "night-snow-symbolic" : "day-snow-symbolic",
                     main: _("Mostly Snowy"),
                     description: _("Mostly Snowy"),
-                    icon: weatherIconSafely([icons.snow, icons.alert], this.app.config._icon_type)
+                    icon: weatherIconSafely([icons.snow, icons.alert], iconType)
                 };
             case "SnowSunThunder":
                 return {
                     customIcon: (checkIfNight && this.IsNight()) ? "night-snow-thunderstorm-symbolic" : "day-snow-thunderstorm-symbolic",
                     main: _("Mostly Snowy"),
                     description: _("Mostly Snowy with Thunderstorms"),
-                    icon: weatherIconSafely([icons.snow, icons.alert], this.app.config._icon_type)
+                    icon: weatherIconSafely([icons.snow, icons.alert], iconType)
                 };
             case "SnowThunder":
                 return {
                     customIcon: "snow-symbolic",
                     main: _("Snow"),
                     description: _("Snowy with Thunderstorms"),
-                    icon: weatherIconSafely([icons.snow, icons.alert], this.app.config._icon_type)
+                    icon: weatherIconSafely([icons.snow, icons.alert], iconType)
                 };
             case "Sun":
                 return {
                     customIcon: (checkIfNight && this.IsNight()) ? "night-clear-symbolic" : "day-sunny-symbolic",
                     main: _("Clear"),
                     description: _("Clear"),
-                    icon: weatherIconSafely((checkIfNight && this.IsNight()) ? [icons.clear_night, icons.alert] : [icons.clear_day, icons.alert], this.app.config._icon_type)
+                    icon: weatherIconSafely((checkIfNight && this.IsNight()) ? [icons.clear_night, icons.alert] : [icons.clear_day, icons.alert], iconType)
                 };
         }
     };

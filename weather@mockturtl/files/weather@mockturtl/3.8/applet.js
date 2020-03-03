@@ -72,31 +72,6 @@ const DATA_SERVICE = {
     MET_NORWAY: "MetNorway",
     WEATHERBIT: "Weatherbit"
 };
-const WEATHER_LOCATION = "location";
-const WEATHER_USE_SYMBOLIC_ICONS_KEY = 'useSymbolicIcons';
-const KEYS = {
-    WEATHER_DATA_SERVICE: "dataService",
-    WEATHER_API_KEY: "apiKey",
-    WEATHER_TEMPERATURE_UNIT_KEY: "temperatureUnit",
-    WEATHER_TEMPERATURE_HIGH_FIRST_KEY: "temperatureHighFirst",
-    WEATHER_WIND_SPEED_UNIT_KEY: "windSpeedUnit",
-    WEATHER_CITY_KEY: "locationLabelOverride",
-    WEATHER_TRANSLATE_CONDITION_KEY: "translateCondition",
-    WEATHER_VERTICAL_ORIENTATION_KEY: "verticalOrientation",
-    WEATHER_SHOW_TEXT_IN_PANEL_KEY: "showTextInPanel",
-    WEATHER_TEMP_TEXT_OVERRIDE: "tempTextOverride",
-    WEATHER_SHOW_COMMENT_IN_PANEL_KEY: "showCommentInPanel",
-    WEATHER_SHOW_SUNRISE_KEY: "showSunrise",
-    WEATHER_SHOW_24HOURS_KEY: "show24Hours",
-    WEATHER_FORECAST_DAYS: "forecastDays",
-    WEATHER_REFRESH_INTERVAL: "refreshInterval",
-    WEATHER_PRESSURE_UNIT_KEY: "pressureUnit",
-    WEATHER_SHORT_CONDITIONS_KEY: "shortConditions",
-    WEATHER_MANUAL_LOCATION: "manualLocation",
-    WEATHER_USE_CUSTOM_APPLETICONS_KEY: 'useCustomAppletIcons',
-    WEATHER_USE_CUSTOM_MENUICONS_KEY: "useCustomMenuIcons",
-    WEATHER_RUSSIAN_STYLE: "tempRussianStyle"
-};
 imports.gettext.bindtextdomain(UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
 function _(str) {
     return imports.gettext.dgettext(UUID, str);
@@ -492,9 +467,9 @@ class WeatherApplet extends TextIconApplet {
             }
             else {
                 this._currentWeatherIcon.icon_name = iconname;
-                this.UpdateIconType(this.config.GetCurrentIconType());
+                this.UpdateIconType(this.config.IconType());
             }
-            this.config._icon_type == IconType.SYMBOLIC ?
+            this.config.IconType() == IconType.SYMBOLIC ?
                 this.set_applet_icon_symbolic_name(iconname) :
                 this.set_applet_icon_name(iconname);
             if (this.config._useCustomAppletIcons)
@@ -675,7 +650,7 @@ class WeatherApplet extends TextIconApplet {
             text: ELLIPSIS
         };
         this._currentWeatherIcon = new Icon({
-            icon_type: this.config._icon_type,
+            icon_type: this.config.IconType(),
             icon_size: 64,
             icon_name: APPLET_ICON,
             style_class: STYLE_ICON
@@ -774,7 +749,7 @@ class WeatherApplet extends TextIconApplet {
                 Temperature: new Label,
             };
             forecastWeather.Icon = new Icon({
-                icon_type: this.config._icon_type,
+                icon_type: this.config.IconType(),
                 icon_size: 48,
                 icon_name: APPLET_ICON,
                 style_class: STYLE_FORECAST_ICON
@@ -897,34 +872,57 @@ class Log {
 }
 class Config {
     constructor(app, instanceID) {
+        this.WEATHER_LOCATION = "location";
+        this.WEATHER_USE_SYMBOLIC_ICONS_KEY = 'useSymbolicIcons';
+        this.KEYS = {
+            WEATHER_DATA_SERVICE: "dataService",
+            WEATHER_API_KEY: "apiKey",
+            WEATHER_TEMPERATURE_UNIT_KEY: "temperatureUnit",
+            WEATHER_TEMPERATURE_HIGH_FIRST_KEY: "temperatureHighFirst",
+            WEATHER_WIND_SPEED_UNIT_KEY: "windSpeedUnit",
+            WEATHER_CITY_KEY: "locationLabelOverride",
+            WEATHER_TRANSLATE_CONDITION_KEY: "translateCondition",
+            WEATHER_VERTICAL_ORIENTATION_KEY: "verticalOrientation",
+            WEATHER_SHOW_TEXT_IN_PANEL_KEY: "showTextInPanel",
+            WEATHER_TEMP_TEXT_OVERRIDE: "tempTextOverride",
+            WEATHER_SHOW_COMMENT_IN_PANEL_KEY: "showCommentInPanel",
+            WEATHER_SHOW_SUNRISE_KEY: "showSunrise",
+            WEATHER_SHOW_24HOURS_KEY: "show24Hours",
+            WEATHER_FORECAST_DAYS: "forecastDays",
+            WEATHER_REFRESH_INTERVAL: "refreshInterval",
+            WEATHER_PRESSURE_UNIT_KEY: "pressureUnit",
+            WEATHER_SHORT_CONDITIONS_KEY: "shortConditions",
+            WEATHER_MANUAL_LOCATION: "manualLocation",
+            WEATHER_USE_CUSTOM_APPLETICONS_KEY: 'useCustomAppletIcons',
+            WEATHER_USE_CUSTOM_MENUICONS_KEY: "useCustomMenuIcons",
+            WEATHER_RUSSIAN_STYLE: "tempRussianStyle"
+        };
         this.app = app;
         this.settings = new AppletSettings(this, UUID, instanceID);
         this.BindSettings();
     }
     BindSettings() {
-        for (let k in KEYS) {
-            let key = KEYS[k];
+        for (let k in this.KEYS) {
+            let key = this.KEYS[k];
             let keyProp = "_" + key;
             this.settings.bindProperty(BindingDirection.IN, key, keyProp, Lang.bind(this.app, this.app.refreshAndRebuild), null);
         }
-        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, WEATHER_LOCATION, ("_" + WEATHER_LOCATION), Lang.bind(this.app, this.app.refreshAndRebuild), null);
+        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, this.WEATHER_LOCATION, ("_" + this.WEATHER_LOCATION), Lang.bind(this.app, this.app.refreshAndRebuild), null);
         this.settings.bindProperty(BindingDirection.IN, "keybinding", "keybinding", Lang.bind(this.app, this.app._onKeySettingsUpdated), null);
         keybindingManager.addHotKey(UUID, this.keybinding, Lang.bind(this.app, this.app.on_applet_clicked));
-        this._icon_type = this.GetCurrentIconType();
-        this.settings.connect(SIGNAL_CHANGED + WEATHER_USE_SYMBOLIC_ICONS_KEY, Lang.bind(this, function () {
-            this._icon_type = this.GetCurrentIconType();
-            this.app.UpdateIconType(this._icon_type);
+        this.settings.connect(SIGNAL_CHANGED + this.WEATHER_USE_SYMBOLIC_ICONS_KEY, Lang.bind(this, function () {
+            this.app.UpdateIconType(this.IconType());
             this.app.refreshWeather();
         }));
     }
-    GetCurrentIconType() {
-        return this.settings.getValue(WEATHER_USE_SYMBOLIC_ICONS_KEY) ?
+    IconType() {
+        return this.settings.getValue(this.WEATHER_USE_SYMBOLIC_ICONS_KEY) ?
             IconType.SYMBOLIC :
             IconType.FULLCOLOR;
     }
     ;
     SetLocation(value) {
-        this.settings.setValue('location', value);
+        this.settings.setValue(this.WEATHER_LOCATION, value);
     }
     noApiKey() {
         if (this._apiKey == undefined || this._apiKey == "") {
