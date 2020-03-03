@@ -58,11 +58,11 @@
 }
 
 .weather-forecast-databox {
-    padding: 0 20px 0px 0;
+    padding: 0 20px 10px 0;
 }
 
 .weather-forecast-container {
-    margin: 10px 0 10px 0;
+    margin: 10px 0 0px 0;
 }
 
 .weather-forecast-day {
