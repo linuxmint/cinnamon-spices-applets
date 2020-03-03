@@ -928,8 +928,9 @@ class Config {
         this.settings.bindProperty(BindingDirection.IN, "keybinding", "keybinding", Lang.bind(this.app, this.app._onKeySettingsUpdated), null);
         keybindingManager.addHotKey(UUID, this.keybinding, Lang.bind(this.app, this.app.on_applet_clicked));
         this.settings.connect(SIGNAL_CHANGED + this.WEATHER_USE_SYMBOLIC_ICONS_KEY, Lang.bind(this, function () {
-            this.app.UpdateIconType(this.IconType());
+            this.app.ui.UpdateIconType(this.IconType());
             this.app.refreshWeather();
+            this.app.log.Debug("Symbolic icon setting changed");
         }));
     }
     IconType() {

@@ -1263,8 +1263,10 @@ class Config {
       UUID, this.keybinding, Lang.bind(this.app, this.app.on_applet_clicked));
 
     this.settings.connect(SIGNAL_CHANGED + this.WEATHER_USE_SYMBOLIC_ICONS_KEY, Lang.bind(this, function () {
-      this.app.UpdateIconType(this.IconType());
+      // Static type checking does not work here
+      this.app.ui.UpdateIconType(this.IconType());
       this.app.refreshWeather()
+      this.app.log.Debug("Symbolic icon setting changed");
     }))    
   }
 
