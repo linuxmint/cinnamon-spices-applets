@@ -136,35 +136,7 @@ var WeatherApplet = (function (_super) {
     __extends(WeatherApplet, _super);
     function WeatherApplet(metadata, orientation, panelHeight, instanceId) {
         var _this = _super.call(this, orientation, panelHeight, instanceId) || this;
-        _this.weather = {
-            date: null,
-            location: {
-                city: null,
-                country: null,
-                tzOffset: null,
-                timeZone: null,
-                url: null
-            },
-            coord: {
-                lat: null,
-                lon: null,
-            },
-            sunrise: null,
-            sunset: null,
-            wind: {
-                speed: null,
-                degree: null,
-            },
-            temperature: null,
-            pressure: null,
-            humidity: null,
-            condition: {
-                main: null,
-                description: null,
-                icon: null,
-                customIcon: null
-            },
-        };
+        _this.weather = null;
         _this.forecasts = [];
         _this.currentLocale = null;
         _this._httpSession = new SessionAsync();
@@ -189,28 +161,27 @@ var WeatherApplet = (function (_super) {
             "unusal payload": _("Service Error"),
             "import error": _("Missing Packages")
         };
-        _this.currentLocale = _this.constructJsLocale(get_language_names()[0]);
         _this.log = new Log(instanceId);
+        _this.currentLocale = _this.constructJsLocale(get_language_names()[0]);
+        _this.log.Debug("System locale is " + _this.currentLocale);
         _this._httpSession.user_agent = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:37.0) Gecko/20100101 Firefox/37.0";
         _this.msgSource = new SystemNotificationSource(_("Weather Applet"));
         messageTray.add(_this.msgSource);
         Session.prototype.add_feature.call(_this._httpSession, new ProxyResolverDefault());
         imports.gi.Gtk.IconTheme.get_default().append_search_path(_this.appletDir + "/../icons");
         _this.SetAppletOnPanel();
-        _this.AddPopupMenu(orientation);
         _this.config = new Config(_this, instanceId);
         _this.AddRefreshButton();
-        _this.BuildPopupMenu();
+        _this.ui = new UI(_this, orientation);
+        _this.ui.rebuild();
         _this.loop = new WeatherLoop(_this, instanceId);
-        _this.rebuild();
-        _this.loop.Start();
         _this.orientation = orientation;
         try {
             _this.setAllowedLayout(AllowedLayout.BOTH);
         }
         catch (e) {
         }
-        _this.log.Debug("System locale is " + _this.currentLocale);
+        _this.loop.Start();
         return _this;
     }
     WeatherApplet.prototype.SetAppletOnPanel = function () {
@@ -218,36 +189,12 @@ var WeatherApplet = (function (_super) {
         this.set_applet_label(_("..."));
         this.set_applet_tooltip(_("Click to open"));
     };
-    WeatherApplet.prototype.AddPopupMenu = function (orientation) {
-        this.menuManager = new PopupMenuManager(this);
-        this.menu = new AppletPopupMenu(this, orientation);
-        this.menu.box.add_style_class_name(STYLE_WEATHER_MENU);
-        this.log.Debug("Popup Menu applied classes are: " + this.menu.box.get_style_class_name());
-        this.menuManager.addMenu(this.menu);
-    };
     WeatherApplet.prototype.AddRefreshButton = function () {
         var itemLabel = _("Refresh");
         var refreshMenuItem = new MenuItem(itemLabel, REFRESH_ICON, Lang.bind(this, function () {
             this.refreshAndRebuild();
         }));
         this._applet_context_menu.addMenuItem(refreshMenuItem);
-    };
-    WeatherApplet.prototype.UpdateIconType = function (iconType) {
-        this._currentWeatherIcon.icon_type = iconType;
-        for (var i = 0; i < this.config._forecastDays; i++) {
-            this._forecast[i].Icon.icon_type = iconType;
-        }
-    };
-    WeatherApplet.prototype.BuildPopupMenu = function () {
-        this._currentWeather = new Bin({ style_class: STYLE_CURRENT });
-        this._futureWeather = new Bin({ style_class: STYLE_FORECAST });
-        this._separatorArea = new DrawingArea({ style_class: STYLE_POPUP_SEPARATOR_MENU_ITEM });
-        this._separatorArea.connect(SIGNAL_REPAINT, Lang.bind(this, this._onSeparatorAreaRepaint));
-        var mainBox = new BoxLayout({ vertical: true });
-        mainBox.add_actor(this._currentWeather);
-        mainBox.add_actor(this._separatorArea);
-        mainBox.add_actor(this._futureWeather);
-        this.menu.addActor(mainBox);
     };
     WeatherApplet.prototype.refreshAndRebuild = function () {
         this.loop.Resume();
@@ -343,6 +290,25 @@ var WeatherApplet = (function (_super) {
             notification.setTransient((!transient) ? false : true);
         this.msgSource.notify(notification);
     };
+    WeatherApplet.prototype.SetAppletTooltip = function (msg) {
+        this.set_applet_tooltip(msg);
+    };
+    WeatherApplet.prototype.SetAppletIcon = function (iconname) {
+        this.config.IconType() == IconType.SYMBOLIC ?
+            this.set_applet_icon_symbolic_name(iconname) :
+            this.set_applet_icon_name(iconname);
+        if (this.config._useCustomAppletIcons)
+            this.SetCustomIcon(this.weather.condition.customIcon);
+    };
+    WeatherApplet.prototype.SetCustomIcon = function (iconName) {
+        this.set_applet_icon_symbolic_name(iconName);
+    };
+    WeatherApplet.prototype.SetAppletLabel = function (label) {
+        this.set_applet_label(label);
+    };
+    WeatherApplet.prototype.GetPanelHeight = function () {
+        return this.panel._getScaledPanelHeight();
+    };
     WeatherApplet.prototype.locationLookup = function () {
         return __awaiter(this, void 0, void 0, function () {
             var command;
@@ -368,31 +334,12 @@ var WeatherApplet = (function (_super) {
         this.loop.Stop();
     };
     WeatherApplet.prototype.on_applet_clicked = function (event) {
-        this.menu.toggle();
+        this.ui.menu.toggle();
     };
     WeatherApplet.prototype.on_applet_middle_clicked = function (event) {
     };
     WeatherApplet.prototype.on_panel_height_changed = function () {
     };
-    WeatherApplet.prototype._onSeparatorAreaRepaint = function (area) {
-        var cr = area.get_context();
-        var themeNode = area.get_theme_node();
-        var _a = area.get_surface_size(), width = _a[0], height = _a[1];
-        var margin = themeNode.get_length('-margin-horizontal');
-        var gradientHeight = themeNode.get_length('-gradient-height');
-        var startColor = themeNode.get_color('-gradient-start');
-        var endColor = themeNode.get_color('-gradient-end');
-        var gradientWidth = (width - margin * 2);
-        var gradientOffset = (height - gradientHeight) / 2;
-        var pattern = new LinearGradient(margin, gradientOffset, width - margin, gradientOffset + gradientHeight);
-        pattern.addColorStopRGBA(0, startColor.red / 255, startColor.green / 255, startColor.blue / 255, startColor.alpha / 255);
-        pattern.addColorStopRGBA(0.5, endColor.red / 255, endColor.green / 255, endColor.blue / 255, endColor.alpha / 255);
-        pattern.addColorStopRGBA(1, startColor.red / 255, startColor.green / 255, startColor.blue / 255, startColor.alpha / 255);
-        cr.setSource(pattern);
-        cr.rectangle(margin, gradientOffset, gradientWidth, gradientHeight);
-        cr.fill();
-    };
-    ;
     WeatherApplet.prototype.constructJsLocale = function (locale) {
         var jsLocale = locale.split(".")[0];
         var tmp = jsLocale.split("_");
@@ -456,16 +403,15 @@ var WeatherApplet = (function (_super) {
                             this.log.Error("Unable to obtain Weather Information");
                             return [2, "failure"];
                         }
-                        this.wipeCurrentData();
-                        this.wipeForecastData();
+                        this.wipeData();
                         this.ProcessWeatherData(weatherInfo, locationData);
                         if (rebuild)
-                            this.rebuild();
-                        return [4, this.displayWeather()];
+                            this.ui.rebuild();
+                        return [4, this.ui.displayWeather(this.weather, this.config)];
                     case 6:
                         _a = !(_b.sent());
                         if (_a) return [3, 8];
-                        return [4, this.displayForecast()];
+                        return [4, this.ui.displayForecast(this.weather, this.forecasts, this.config)];
                     case 7:
                         _a = !(_b.sent());
                         _b.label = 8;
@@ -548,173 +494,38 @@ var WeatherApplet = (function (_super) {
             this.weather.extra_field = weatherInfo.extra_field;
         this.forecasts = weatherInfo.forecasts;
     };
-    WeatherApplet.prototype.displayWeather = function () {
-        try {
-            var mainCondition = "";
-            var descriptionCondition = "";
-            if (this.weather.condition.main != null) {
-                mainCondition = this.weather.condition.main;
-                if (this.config._translateCondition) {
-                    mainCondition = capitalizeFirstLetter(_(mainCondition));
-                }
-            }
-            if (this.weather.condition.description != null) {
-                descriptionCondition = capitalizeFirstLetter(this.weather.condition.description);
-                if (this.config._translateCondition) {
-                    descriptionCondition = capitalizeFirstLetter(_(this.weather.condition.description));
-                }
-            }
-            var location = "";
-            if (this.weather.location.city != null && this.weather.location.country != null) {
-                location = this.weather.location.city + ", " + this.weather.location.country;
-            }
-            else {
-                location = Math.round(this.weather.coord.lat * 10000) / 10000 + ", " + Math.round(this.weather.coord.lon * 10000) / 10000;
-            }
-            if (nonempty(this.config._locationLabelOverride)) {
-                location = this.config._locationLabelOverride;
-            }
-            this.set_applet_tooltip(location + " - " + _("Updated") + " " + AwareDateString(this.weather.date, this.currentLocale, this.config._show24Hours));
-            this._currentWeatherSummary.text = descriptionCondition;
-            var iconname = this.weather.condition.icon;
-            if (iconname == null) {
-                iconname = "weather-severe-alert";
-            }
-            if (this.config._useCustomMenuIcons) {
-                this._currentWeatherIcon.icon_name = this.weather.condition.customIcon;
-                this.UpdateIconType(IconType.SYMBOLIC);
-            }
-            else {
-                this._currentWeatherIcon.icon_name = iconname;
-                this.UpdateIconType(this.config.IconType());
-            }
-            this.config.IconType() == IconType.SYMBOLIC ?
-                this.set_applet_icon_symbolic_name(iconname) :
-                this.set_applet_icon_name(iconname);
-            if (this.config._useCustomAppletIcons)
-                this.SetCustomIcon(this.weather.condition.customIcon);
-            var temp = "";
-            if (this.weather.temperature != null) {
-                temp = TempToUserConfig(this.weather.temperature, this.config._temperatureUnit, this.config._tempRussianStyle);
-                this._currentWeatherTemperature.text = temp + " " + this.unitToUnicode(this.config._temperatureUnit);
-            }
-            var label = "";
-            if (this.orientation != Side.LEFT && this.orientation != Side.RIGHT) {
-                if (this.config._showCommentInPanel) {
-                    label += mainCondition;
-                }
-                if (this.config._showTextInPanel) {
-                    if (label != "") {
-                        label += " ";
-                    }
-                    label += (temp + ' ' + this.unitToUnicode(this.config._temperatureUnit));
-                }
-            }
-            else {
-                if (this.config._showTextInPanel) {
-                    label = temp;
-                }
-                if (this.panel._getScaledPanelHeight() >= 35) {
-                    label += this.unitToUnicode(this.config._temperatureUnit);
-                }
-            }
-            if (nonempty(this.config._tempTextOverride)) {
-                label = this.config._tempTextOverride
-                    .replace("{t}", temp)
-                    .replace("{u}", this.unitToUnicode(this.config._temperatureUnit))
-                    .replace("{c}", mainCondition);
-            }
-            this.set_applet_label(label);
-            if (this.weather.humidity != null) {
-                this._currentWeatherHumidity.text = Math.round(this.weather.humidity) + "%";
-            }
-            var wind_direction = compassDirection(this.weather.wind.degree);
-            this._currentWeatherWind.text =
-                (wind_direction != undefined ? _(wind_direction) + " " : "") +
-                    MPStoUserUnits(this.weather.wind.speed, this.config._windSpeedUnit);
-            if (this.config._windSpeedUnit != "Beaufort")
-                this._currentWeatherWind.text += " " + _(this.config._windSpeedUnit);
-            this._currentWeatherApiUnique.text = "";
-            this._currentWeatherApiUniqueCap.text = "";
-            if (!!this.weather.extra_field) {
-                this._currentWeatherApiUniqueCap.text = _(this.weather.extra_field.name) + ":";
-                var value = void 0;
-                switch (this.weather.extra_field.type) {
-                    case "percent":
-                        value = this.weather.extra_field.value.toString() + "%";
-                        break;
-                    case "temperature":
-                        value = TempToUserConfig(this.weather.extra_field.value, this.config._temperatureUnit, this.config._tempRussianStyle) + " " + this.unitToUnicode(this.config._temperatureUnit);
-                        break;
-                    default:
-                        value = _(this.weather.extra_field.value);
-                        break;
-                }
-                this._currentWeatherApiUnique.text = value;
-            }
-            if (this.weather.pressure != null) {
-                this._currentWeatherPressure.text = PressToUserUnits(this.weather.pressure, this.config._pressureUnit) + ' ' + _(this.config._pressureUnit);
-            }
-            this._currentWeatherLocation.label = location;
-            this._currentWeatherLocation.url = this.weather.location.url;
-            var sunriseText = "";
-            var sunsetText = "";
-            if (this.weather.sunrise != null && this.weather.sunset != null && this.config._showSunrise) {
-                sunriseText = (GetHoursMinutes(this.weather.sunrise, this.currentLocale, this.config._show24Hours, this.weather.location.timeZone));
-                sunsetText = (GetHoursMinutes(this.weather.sunset, this.currentLocale, this.config._show24Hours, this.weather.location.timeZone));
-            }
-            this._currentWeatherSunrise.text = sunriseText;
-            this._currentWeatherSunset.text = sunsetText;
-            return true;
+    WeatherApplet.prototype.wipeData = function () {
+        if (this.weather == null) {
+            this.weather = {
+                date: null,
+                location: {
+                    city: null,
+                    country: null,
+                    tzOffset: null,
+                    timeZone: null,
+                    url: null
+                },
+                coord: {
+                    lat: null,
+                    lon: null,
+                },
+                sunrise: null,
+                sunset: null,
+                wind: {
+                    speed: null,
+                    degree: null,
+                },
+                temperature: null,
+                pressure: null,
+                humidity: null,
+                condition: {
+                    main: null,
+                    description: null,
+                    icon: null,
+                    customIcon: null
+                },
+            };
         }
-        catch (e) {
-            this.log.Error("DisplayWeatherError: " + e);
-            return false;
-        }
-    };
-    ;
-    WeatherApplet.prototype.displayForecast = function () {
-        try {
-            for (var i = 0; i < this._forecast.length; i++) {
-                var forecastData = this.forecasts[i];
-                var forecastUi = this._forecast[i];
-                var t_low = TempToUserConfig(forecastData.temp_min, this.config._temperatureUnit, this.config._tempRussianStyle);
-                var t_high = TempToUserConfig(forecastData.temp_max, this.config._temperatureUnit, this.config._tempRussianStyle);
-                var first_temperature = this.config._temperatureHighFirst ? t_high : t_low;
-                var second_temperature = this.config._temperatureHighFirst ? t_low : t_high;
-                var comment = "";
-                if (forecastData.condition.main != null && forecastData.condition.description != null) {
-                    comment = (this.config._shortConditions) ? forecastData.condition.main : forecastData.condition.description;
-                    comment = capitalizeFirstLetter(comment);
-                    if (this.config._translateCondition)
-                        comment = _(comment);
-                }
-                if (this.weather.location.timeZone == null)
-                    forecastData.date.setMilliseconds(forecastData.date.getMilliseconds() + (this.weather.location.tzOffset * 1000));
-                var dayName = GetDayName(forecastData.date, this.currentLocale, this.weather.location.timeZone);
-                if (forecastData.date) {
-                    var now = new Date();
-                    if (forecastData.date.getDate() == now.getDate())
-                        dayName = _("Today");
-                    if (forecastData.date.getDate() == new Date(now.setDate(now.getDate() + 1)).getDate())
-                        dayName = _("Tomorrow");
-                }
-                forecastUi.Day.text = dayName;
-                forecastUi.Temperature.text = first_temperature;
-                forecastUi.Temperature.text += ((this.config._tempRussianStyle) ? ELLIPSIS : " " + FORWARD_SLASH + " ");
-                forecastUi.Temperature.text += second_temperature + ' ' + this.unitToUnicode(this.config._temperatureUnit);
-                forecastUi.Summary.text = comment;
-                forecastUi.Icon.icon_name = (this.config._useCustomMenuIcons) ? forecastData.condition.customIcon : forecastData.condition.icon;
-            }
-            return true;
-        }
-        catch (e) {
-            this.log.Error("DisplayForecastError " + e);
-            return false;
-        }
-    };
-    ;
-    WeatherApplet.prototype.wipeCurrentData = function () {
         this.weather.date = null;
         this.weather.location.city = null;
         this.weather.location.country = null;
@@ -734,174 +545,14 @@ var WeatherApplet = (function (_super) {
         this.weather.condition.description = null;
         this.weather.condition.icon = null;
         this.weather.extra_field = null;
-    };
-    ;
-    WeatherApplet.prototype.wipeForecastData = function () {
         this.forecasts = [];
     };
     ;
-    WeatherApplet.prototype.destroyCurrentWeather = function () {
-        if (this._currentWeather.get_child() != null)
-            this._currentWeather.get_child().destroy();
-    };
-    WeatherApplet.prototype.destroyFutureWeather = function () {
-        if (this._futureWeather.get_child() != null)
-            this._futureWeather.get_child().destroy();
-    };
-    WeatherApplet.prototype.showLoadingUi = function () {
-        this.destroyCurrentWeather();
-        this.destroyFutureWeather();
-        this._currentWeather.set_child(new Label({
-            text: _('Loading current weather ...')
-        }));
-        this._futureWeather.set_child(new Label({
-            text: _('Loading future weather ...')
-        }));
-    };
-    WeatherApplet.prototype.rebuild = function () {
-        this.showLoadingUi();
-        this.rebuildCurrentWeatherUi();
-        this.rebuildFutureWeatherUi();
-    };
-    WeatherApplet.prototype.rebuildCurrentWeatherUi = function () {
-        this.destroyCurrentWeather();
-        var textOb = {
-            text: ELLIPSIS
-        };
-        this._currentWeatherIcon = new Icon({
-            icon_type: this.config.IconType(),
-            icon_size: 64,
-            icon_name: APPLET_ICON,
-            style_class: STYLE_ICON
-        });
-        this._currentWeatherLocation = new Button({ reactive: true, label: _('Refresh'), });
-        this._currentWeatherLocation.style_class = STYLE_LOCATION_LINK;
-        this._currentWeatherLocation.connect(SIGNAL_CLICKED, Lang.bind(this, function () {
-            if (this._currentWeatherLocation.url == null) {
-                this.refreshWeather();
-            }
-            else {
-                imports.gi.Gio.app_info_launch_default_for_uri(this._currentWeatherLocation.url, global.create_app_launch_context());
-            }
-        }));
-        this._currentWeatherSummary = new Label({ text: _('Loading ...'), style_class: STYLE_SUMMARY });
-        this._currentWeatherSunrise = new Label(textOb);
-        this._currentWeatherSunset = new Label(textOb);
-        var sunriseBox = new BoxLayout();
-        var sunriseTextBin = new Bin();
-        sunriseTextBin.set_child(this._currentWeatherSunrise);
-        var sunriseIcon = new Icon({
-            icon_name: "sunrise-symbolic",
-            icon_type: IconType.SYMBOLIC,
-            icon_size: 25
-        });
-        if (this.config._showSunrise)
-            sunriseBox.add_actor(sunriseIcon);
-        sunriseBox.add_actor(sunriseTextBin);
-        var sunsetBox = new BoxLayout();
-        var sunsetTextBin = new Bin();
-        sunsetTextBin.set_child(this._currentWeatherSunset);
-        var sunsetIcon = new Icon({
-            icon_name: "sunset-symbolic",
-            icon_type: IconType.SYMBOLIC,
-            icon_size: 25
-        });
-        if (this.config._showSunrise)
-            sunsetBox.add_actor(sunsetIcon);
-        sunsetBox.add_actor(sunsetTextBin);
-        var ab_spacerlabel = new Label({ text: BLANK });
-        var bb_spacerlabel = new Label({ text: BLANK });
-        var sunBox = new BoxLayout({ style_class: STYLE_ASTRONOMY });
-        sunBox.add_actor(sunriseBox);
-        sunBox.add_actor(ab_spacerlabel);
-        sunBox.add_actor(sunsetBox);
-        var middleColumn = new BoxLayout({ vertical: true, style_class: STYLE_SUMMARYBOX });
-        middleColumn.add_actor(this._currentWeatherLocation);
-        middleColumn.add_actor(this._currentWeatherSummary);
-        middleColumn.add_actor(bb_spacerlabel);
-        var sunBin = new Bin();
-        sunBin.set_child(sunBox);
-        middleColumn.add_actor(sunBin);
-        this._currentWeatherTemperature = new Label(textOb);
-        this._currentWeatherHumidity = new Label(textOb);
-        this._currentWeatherPressure = new Label(textOb);
-        this._currentWeatherWind = new Label(textOb);
-        this._currentWeatherApiUnique = new Label({ text: '' });
-        this._currentWeatherApiUniqueCap = new Label({ text: '' });
-        var rb_captions = new BoxLayout({ vertical: true, style_class: STYLE_DATABOX_CAPTIONS });
-        var rb_values = new BoxLayout({ vertical: true, style_class: STYLE_DATABOX_VALUES });
-        rb_captions.add_actor(new Label({ text: _('Temperature:') }));
-        rb_captions.add_actor(new Label({ text: _('Humidity:') }));
-        rb_captions.add_actor(new Label({ text: _('Pressure:') }));
-        rb_captions.add_actor(new Label({ text: _('Wind:') }));
-        rb_captions.add_actor(this._currentWeatherApiUniqueCap);
-        rb_values.add_actor(this._currentWeatherTemperature);
-        rb_values.add_actor(this._currentWeatherHumidity);
-        rb_values.add_actor(this._currentWeatherPressure);
-        rb_values.add_actor(this._currentWeatherWind);
-        rb_values.add_actor(this._currentWeatherApiUnique);
-        var rightColumn = new BoxLayout({ style_class: STYLE_DATABOX });
-        rightColumn.add_actor(rb_captions);
-        rightColumn.add_actor(rb_values);
-        var weatherBox = new BoxLayout();
-        weatherBox.add_actor(middleColumn);
-        weatherBox.add_actor(rightColumn);
-        var box = new BoxLayout({ style_class: STYLE_ICONBOX });
-        box.add_actor(this._currentWeatherIcon);
-        box.add_actor(weatherBox);
-        this._currentWeather.set_child(box);
-    };
-    ;
-    WeatherApplet.prototype.rebuildFutureWeatherUi = function () {
-        this.destroyFutureWeather();
-        this._forecast = [];
-        this._forecastBox = new BoxLayout({
-            vertical: this.config._verticalOrientation,
-            style_class: STYLE_FORECAST_CONTAINER
-        });
-        this._futureWeather.set_child(this._forecastBox);
-        for (var i = 0; i < this.config._forecastDays; i++) {
-            var forecastWeather = {
-                Icon: new Icon,
-                Day: new Label,
-                Summary: new Label,
-                Temperature: new Label,
-            };
-            forecastWeather.Icon = new Icon({
-                icon_type: this.config.IconType(),
-                icon_size: 48,
-                icon_name: APPLET_ICON,
-                style_class: STYLE_FORECAST_ICON
-            });
-            forecastWeather.Day = new Label({ style_class: STYLE_FORECAST_DAY });
-            forecastWeather.Summary = new Label({ style_class: STYLE_FORECAST_SUMMARY });
-            forecastWeather.Temperature = new Label({ style_class: STYLE_FORECAST_TEMPERATURE });
-            var dataBin = new Bin();
-            var dataBox = new BoxLayout({ vertical: true, style_class: STYLE_FORECAST_DATABOX });
-            dataBox.add_actor(forecastWeather.Day);
-            dataBox.add_actor(forecastWeather.Summary);
-            dataBox.add_actor(forecastWeather.Temperature);
-            dataBin.set_child(dataBox);
-            var forecastBox = new BoxLayout({
-                style_class: STYLE_FORECAST_BOX
-            });
-            forecastBox.add_actor(forecastWeather.Icon);
-            forecastBox.add_actor(dataBin);
-            this._forecast[i] = forecastWeather;
-            this._forecastBox.add_actor(forecastBox);
-        }
-    };
-    WeatherApplet.prototype.SetCustomIcon = function (iconName) {
-        this.set_applet_icon_symbolic_name(iconName);
-    };
-    WeatherApplet.prototype.unitToUnicode = function (unit) {
-        return unit == "fahrenheit" ? '\u2109' : '\u2103';
-    };
     WeatherApplet.prototype.DisplayError = function (title, msg) {
         this.set_applet_label(title);
         this.set_applet_tooltip("Click to open");
         this.set_applet_icon_name("weather-severe-alert");
-        this._currentWeatherSunset.text = msg;
+        this.ui.DisplayErrorMessage(msg);
     };
     ;
     WeatherApplet.prototype.HandleError = function (error) {
@@ -909,14 +560,14 @@ var WeatherApplet = (function (_super) {
             return;
         this.encounteredError = true;
         if (error.type == "hard") {
-            this.rebuild();
+            this.ui.rebuild();
             this.DisplayError(this.errMsg[error.detail], (!error.message) ? "" : error.message);
         }
         if (error.type == "soft") {
             if (this.loop.IsDataTooOld()) {
                 this.set_applet_tooltip("Click to open");
                 this.set_applet_icon_name("weather-severe-alert");
-                this._currentWeatherSunset.text = _("Could not update weather for a while...\nare you connected to the internet?");
+                this.ui.DisplayErrorMessage(_("Could not update weather for a while...\nare you connected to the internet?"));
             }
         }
         if (error.userError) {
@@ -990,6 +641,376 @@ var Log = (function () {
         return arr;
     };
     return Log;
+}());
+var UI = (function () {
+    function UI(app, orientation) {
+        this.app = app;
+        this.AddPopupMenu(orientation);
+        this.BuildPopupMenu();
+    }
+    UI.prototype.AddPopupMenu = function (orientation) {
+        this.menuManager = new PopupMenuManager(this.app);
+        this.menu = new AppletPopupMenu(this.app, orientation);
+        this.menu.box.add_style_class_name(STYLE_WEATHER_MENU);
+        this.app.log.Debug("Popup Menu applied classes are: " + this.menu.box.get_style_class_name());
+        this.menuManager.addMenu(this.menu);
+    };
+    UI.prototype.UpdateIconType = function (iconType) {
+        this._currentWeatherIcon.icon_type = iconType;
+        for (var i = 0; i < this._forecast.length; i++) {
+            this._forecast[i].Icon.icon_type = iconType;
+        }
+    };
+    UI.prototype.BuildPopupMenu = function () {
+        this._currentWeather = new Bin({ style_class: STYLE_CURRENT });
+        this._futureWeather = new Bin({ style_class: STYLE_FORECAST });
+        this._separatorArea = new DrawingArea({ style_class: STYLE_POPUP_SEPARATOR_MENU_ITEM });
+        this._separatorArea.connect(SIGNAL_REPAINT, Lang.bind(this, this._onSeparatorAreaRepaint));
+        var mainBox = new BoxLayout({ vertical: true });
+        mainBox.add_actor(this._currentWeather);
+        mainBox.add_actor(this._separatorArea);
+        mainBox.add_actor(this._futureWeather);
+        this.menu.addActor(mainBox);
+    };
+    UI.prototype._onSeparatorAreaRepaint = function (area) {
+        var cr = area.get_context();
+        var themeNode = area.get_theme_node();
+        var _a = area.get_surface_size(), width = _a[0], height = _a[1];
+        var margin = themeNode.get_length('-margin-horizontal');
+        var gradientHeight = themeNode.get_length('-gradient-height');
+        var startColor = themeNode.get_color('-gradient-start');
+        var endColor = themeNode.get_color('-gradient-end');
+        var gradientWidth = (width - margin * 2);
+        var gradientOffset = (height - gradientHeight) / 2;
+        var pattern = new LinearGradient(margin, gradientOffset, width - margin, gradientOffset + gradientHeight);
+        pattern.addColorStopRGBA(0, startColor.red / 255, startColor.green / 255, startColor.blue / 255, startColor.alpha / 255);
+        pattern.addColorStopRGBA(0.5, endColor.red / 255, endColor.green / 255, endColor.blue / 255, endColor.alpha / 255);
+        pattern.addColorStopRGBA(1, startColor.red / 255, startColor.green / 255, startColor.blue / 255, startColor.alpha / 255);
+        cr.setSource(pattern);
+        cr.rectangle(margin, gradientOffset, gradientWidth, gradientHeight);
+        cr.fill();
+    };
+    ;
+    UI.prototype.destroyCurrentWeather = function () {
+        if (this._currentWeather.get_child() != null)
+            this._currentWeather.get_child().destroy();
+    };
+    UI.prototype.destroyFutureWeather = function () {
+        if (this._futureWeather.get_child() != null)
+            this._futureWeather.get_child().destroy();
+    };
+    UI.prototype.showLoadingUi = function () {
+        this.destroyCurrentWeather();
+        this.destroyFutureWeather();
+        this._currentWeather.set_child(new Label({
+            text: _('Loading current weather ...')
+        }));
+        this._futureWeather.set_child(new Label({
+            text: _('Loading future weather ...')
+        }));
+    };
+    UI.prototype.DisplayErrorMessage = function (msg) {
+        this._currentWeatherSunset.text = msg;
+    };
+    UI.prototype.displayWeather = function (weather, config) {
+        try {
+            var mainCondition = "";
+            var descriptionCondition = "";
+            if (weather.condition.main != null) {
+                mainCondition = weather.condition.main;
+                if (config._translateCondition) {
+                    mainCondition = capitalizeFirstLetter(_(mainCondition));
+                }
+            }
+            if (weather.condition.description != null) {
+                descriptionCondition = capitalizeFirstLetter(weather.condition.description);
+                if (config._translateCondition) {
+                    descriptionCondition = capitalizeFirstLetter(_(weather.condition.description));
+                }
+            }
+            var location = "";
+            if (weather.location.city != null && weather.location.country != null) {
+                location = weather.location.city + ", " + weather.location.country;
+            }
+            else {
+                location = Math.round(weather.coord.lat * 10000) / 10000 + ", " + Math.round(weather.coord.lon * 10000) / 10000;
+            }
+            if (nonempty(config._locationLabelOverride)) {
+                location = config._locationLabelOverride;
+            }
+            this.app.SetAppletTooltip(location + " - " + _("Updated") + " " + AwareDateString(weather.date, this.app.currentLocale, config._show24Hours));
+            this._currentWeatherSummary.text = descriptionCondition;
+            var iconname = weather.condition.icon;
+            if (iconname == null) {
+                iconname = "weather-severe-alert";
+            }
+            if (config._useCustomMenuIcons) {
+                this._currentWeatherIcon.icon_name = weather.condition.customIcon;
+                this.UpdateIconType(IconType.SYMBOLIC);
+            }
+            else {
+                this._currentWeatherIcon.icon_name = iconname;
+                this.UpdateIconType(config.IconType());
+            }
+            this.app.SetAppletIcon(iconname);
+            var temp = "";
+            if (weather.temperature != null) {
+                temp = TempToUserConfig(weather.temperature, config._temperatureUnit, config._tempRussianStyle);
+                this._currentWeatherTemperature.text = temp + " " + this.unitToUnicode(config._temperatureUnit);
+            }
+            var label = "";
+            if (this.app.orientation != Side.LEFT && this.app.orientation != Side.RIGHT) {
+                if (config._showCommentInPanel) {
+                    label += mainCondition;
+                }
+                if (config._showTextInPanel) {
+                    if (label != "") {
+                        label += " ";
+                    }
+                    label += (temp + ' ' + this.unitToUnicode(config._temperatureUnit));
+                }
+            }
+            else {
+                if (config._showTextInPanel) {
+                    label = temp;
+                }
+                if (this.app.GetPanelHeight() >= 35) {
+                    label += this.unitToUnicode(config._temperatureUnit);
+                }
+            }
+            if (nonempty(config._tempTextOverride)) {
+                label = config._tempTextOverride
+                    .replace("{t}", temp)
+                    .replace("{u}", this.unitToUnicode(config._temperatureUnit))
+                    .replace("{c}", mainCondition);
+            }
+            this.app.SetAppletLabel(label);
+            if (weather.humidity != null) {
+                this._currentWeatherHumidity.text = Math.round(weather.humidity) + "%";
+            }
+            var wind_direction = compassDirection(weather.wind.degree);
+            this._currentWeatherWind.text =
+                (wind_direction != undefined ? _(wind_direction) + " " : "") +
+                    MPStoUserUnits(weather.wind.speed, config._windSpeedUnit);
+            if (config._windSpeedUnit != "Beaufort")
+                this._currentWeatherWind.text += " " + _(config._windSpeedUnit);
+            this._currentWeatherApiUnique.text = "";
+            this._currentWeatherApiUniqueCap.text = "";
+            if (!!weather.extra_field) {
+                this._currentWeatherApiUniqueCap.text = _(weather.extra_field.name) + ":";
+                var value = void 0;
+                switch (weather.extra_field.type) {
+                    case "percent":
+                        value = weather.extra_field.value.toString() + "%";
+                        break;
+                    case "temperature":
+                        value = TempToUserConfig(weather.extra_field.value, config._temperatureUnit, config._tempRussianStyle) + " " + this.unitToUnicode(config._temperatureUnit);
+                        break;
+                    default:
+                        value = _(weather.extra_field.value);
+                        break;
+                }
+                this._currentWeatherApiUnique.text = value;
+            }
+            if (weather.pressure != null) {
+                this._currentWeatherPressure.text = PressToUserUnits(weather.pressure, config._pressureUnit) + ' ' + _(config._pressureUnit);
+            }
+            this._currentWeatherLocation.label = location;
+            this._currentWeatherLocation.url = weather.location.url;
+            var sunriseText = "";
+            var sunsetText = "";
+            if (weather.sunrise != null && weather.sunset != null && config._showSunrise) {
+                sunriseText = (GetHoursMinutes(weather.sunrise, this.app.currentLocale, config._show24Hours, weather.location.timeZone));
+                sunsetText = (GetHoursMinutes(weather.sunset, this.app.currentLocale, config._show24Hours, weather.location.timeZone));
+            }
+            this._currentWeatherSunrise.text = sunriseText;
+            this._currentWeatherSunset.text = sunsetText;
+            return true;
+        }
+        catch (e) {
+            this.app.log.Error("DisplayWeatherError: " + e);
+            return false;
+        }
+    };
+    ;
+    UI.prototype.displayForecast = function (weather, forecasts, config) {
+        try {
+            for (var i = 0; i < this._forecast.length; i++) {
+                var forecastData = forecasts[i];
+                var forecastUi = this._forecast[i];
+                var t_low = TempToUserConfig(forecastData.temp_min, config._temperatureUnit, config._tempRussianStyle);
+                var t_high = TempToUserConfig(forecastData.temp_max, config._temperatureUnit, config._tempRussianStyle);
+                var first_temperature = config._temperatureHighFirst ? t_high : t_low;
+                var second_temperature = config._temperatureHighFirst ? t_low : t_high;
+                var comment = "";
+                if (forecastData.condition.main != null && forecastData.condition.description != null) {
+                    comment = (config._shortConditions) ? forecastData.condition.main : forecastData.condition.description;
+                    comment = capitalizeFirstLetter(comment);
+                    if (config._translateCondition)
+                        comment = _(comment);
+                }
+                if (weather.location.timeZone == null)
+                    forecastData.date.setMilliseconds(forecastData.date.getMilliseconds() + (weather.location.tzOffset * 1000));
+                var dayName = GetDayName(forecastData.date, this.app.currentLocale, weather.location.timeZone);
+                if (forecastData.date) {
+                    var now = new Date();
+                    if (forecastData.date.getDate() == now.getDate())
+                        dayName = _("Today");
+                    if (forecastData.date.getDate() == new Date(now.setDate(now.getDate() + 1)).getDate())
+                        dayName = _("Tomorrow");
+                }
+                forecastUi.Day.text = dayName;
+                forecastUi.Temperature.text = first_temperature;
+                forecastUi.Temperature.text += ((config._tempRussianStyle) ? ELLIPSIS : " " + FORWARD_SLASH + " ");
+                forecastUi.Temperature.text += second_temperature + ' ' + this.unitToUnicode(config._temperatureUnit);
+                forecastUi.Summary.text = comment;
+                forecastUi.Icon.icon_name = (config._useCustomMenuIcons) ? forecastData.condition.customIcon : forecastData.condition.icon;
+            }
+            return true;
+        }
+        catch (e) {
+            this.app.log.Error("DisplayForecastError " + e);
+            return false;
+        }
+    };
+    ;
+    UI.prototype.unitToUnicode = function (unit) {
+        return unit == "fahrenheit" ? '\u2109' : '\u2103';
+    };
+    UI.prototype.rebuild = function () {
+        this.showLoadingUi();
+        this.rebuildCurrentWeatherUi();
+        this.rebuildFutureWeatherUi();
+    };
+    UI.prototype.rebuildCurrentWeatherUi = function () {
+        this.destroyCurrentWeather();
+        var textOb = {
+            text: ELLIPSIS
+        };
+        this._currentWeatherIcon = new Icon({
+            icon_type: this.app.config.IconType(),
+            icon_size: 64,
+            icon_name: APPLET_ICON,
+            style_class: STYLE_ICON
+        });
+        this._currentWeatherLocation = new Button({ reactive: true, label: _('Refresh'), });
+        this._currentWeatherLocation.style_class = STYLE_LOCATION_LINK;
+        this._currentWeatherLocation.connect(SIGNAL_CLICKED, Lang.bind(this, function () {
+            if (this._currentWeatherLocation.url == null) {
+                this.refreshWeather();
+            }
+            else {
+                imports.gi.Gio.app_info_launch_default_for_uri(this._currentWeatherLocation.url, global.create_app_launch_context());
+            }
+        }));
+        this._currentWeatherSummary = new Label({ text: _('Loading ...'), style_class: STYLE_SUMMARY });
+        this._currentWeatherSunrise = new Label(textOb);
+        this._currentWeatherSunset = new Label(textOb);
+        var sunriseBox = new BoxLayout();
+        var sunriseTextBin = new Bin();
+        sunriseTextBin.set_child(this._currentWeatherSunrise);
+        var sunriseIcon = new Icon({
+            icon_name: "sunrise-symbolic",
+            icon_type: IconType.SYMBOLIC,
+            icon_size: 25
+        });
+        if (this.app.config._showSunrise)
+            sunriseBox.add_actor(sunriseIcon);
+        sunriseBox.add_actor(sunriseTextBin);
+        var sunsetBox = new BoxLayout();
+        var sunsetTextBin = new Bin();
+        sunsetTextBin.set_child(this._currentWeatherSunset);
+        var sunsetIcon = new Icon({
+            icon_name: "sunset-symbolic",
+            icon_type: IconType.SYMBOLIC,
+            icon_size: 25
+        });
+        if (this.app.config._showSunrise)
+            sunsetBox.add_actor(sunsetIcon);
+        sunsetBox.add_actor(sunsetTextBin);
+        var ab_spacerlabel = new Label({ text: BLANK });
+        var bb_spacerlabel = new Label({ text: BLANK });
+        var sunBox = new BoxLayout({ style_class: STYLE_ASTRONOMY });
+        sunBox.add_actor(sunriseBox);
+        sunBox.add_actor(ab_spacerlabel);
+        sunBox.add_actor(sunsetBox);
+        var middleColumn = new BoxLayout({ vertical: true, style_class: STYLE_SUMMARYBOX });
+        middleColumn.add_actor(this._currentWeatherLocation);
+        middleColumn.add_actor(this._currentWeatherSummary);
+        middleColumn.add_actor(bb_spacerlabel);
+        var sunBin = new Bin();
+        sunBin.set_child(sunBox);
+        middleColumn.add_actor(sunBin);
+        this._currentWeatherTemperature = new Label(textOb);
+        this._currentWeatherHumidity = new Label(textOb);
+        this._currentWeatherPressure = new Label(textOb);
+        this._currentWeatherWind = new Label(textOb);
+        this._currentWeatherApiUnique = new Label({ text: '' });
+        this._currentWeatherApiUniqueCap = new Label({ text: '' });
+        var rb_captions = new BoxLayout({ vertical: true, style_class: STYLE_DATABOX_CAPTIONS });
+        var rb_values = new BoxLayout({ vertical: true, style_class: STYLE_DATABOX_VALUES });
+        rb_captions.add_actor(new Label({ text: _('Temperature:') }));
+        rb_captions.add_actor(new Label({ text: _('Humidity:') }));
+        rb_captions.add_actor(new Label({ text: _('Pressure:') }));
+        rb_captions.add_actor(new Label({ text: _('Wind:') }));
+        rb_captions.add_actor(this._currentWeatherApiUniqueCap);
+        rb_values.add_actor(this._currentWeatherTemperature);
+        rb_values.add_actor(this._currentWeatherHumidity);
+        rb_values.add_actor(this._currentWeatherPressure);
+        rb_values.add_actor(this._currentWeatherWind);
+        rb_values.add_actor(this._currentWeatherApiUnique);
+        var rightColumn = new BoxLayout({ style_class: STYLE_DATABOX });
+        rightColumn.add_actor(rb_captions);
+        rightColumn.add_actor(rb_values);
+        var weatherBox = new BoxLayout();
+        weatherBox.add_actor(middleColumn);
+        weatherBox.add_actor(rightColumn);
+        var box = new BoxLayout({ style_class: STYLE_ICONBOX });
+        box.add_actor(this._currentWeatherIcon);
+        box.add_actor(weatherBox);
+        this._currentWeather.set_child(box);
+    };
+    ;
+    UI.prototype.rebuildFutureWeatherUi = function () {
+        this.destroyFutureWeather();
+        this._forecast = [];
+        this._forecastBox = new BoxLayout({
+            vertical: this.app.config._verticalOrientation,
+            style_class: STYLE_FORECAST_CONTAINER
+        });
+        this._futureWeather.set_child(this._forecastBox);
+        for (var i = 0; i < this.app.config._forecastDays; i++) {
+            var forecastWeather = {
+                Icon: new Icon,
+                Day: new Label,
+                Summary: new Label,
+                Temperature: new Label,
+            };
+            forecastWeather.Icon = new Icon({
+                icon_type: this.app.config.IconType(),
+                icon_size: 48,
+                icon_name: APPLET_ICON,
+                style_class: STYLE_FORECAST_ICON
+            });
+            forecastWeather.Day = new Label({ style_class: STYLE_FORECAST_DAY });
+            forecastWeather.Summary = new Label({ style_class: STYLE_FORECAST_SUMMARY });
+            forecastWeather.Temperature = new Label({ style_class: STYLE_FORECAST_TEMPERATURE });
+            var dataBin = new Bin();
+            var dataBox = new BoxLayout({ vertical: true, style_class: STYLE_FORECAST_DATABOX });
+            dataBox.add_actor(forecastWeather.Day);
+            dataBox.add_actor(forecastWeather.Summary);
+            dataBox.add_actor(forecastWeather.Temperature);
+            dataBin.set_child(dataBox);
+            var forecastBox = new BoxLayout({
+                style_class: STYLE_FORECAST_BOX
+            });
+            forecastBox.add_actor(forecastWeather.Icon);
+            forecastBox.add_actor(dataBin);
+            this._forecast[i] = forecastWeather;
+            this._forecastBox.add_actor(forecastBox);
+        }
+    };
+    return UI;
 }());
 var Config = (function () {
     function Config(app, instanceID) {

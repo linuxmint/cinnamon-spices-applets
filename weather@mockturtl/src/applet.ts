@@ -132,67 +132,16 @@ var weatherAppletGUIDs: GUIDStore = {};
 
 class WeatherApplet extends TextIconApplet {
   /** Stores all weather information */
-  private weather: Weather = {
-    date: null, // Date object, UTC
-    location: {
-      city: null,
-      country: null, // Country code
-      tzOffset: null, // seconds
-      timeZone: null,
-      url: null
-    },
-    coord: {
-      lat: null,
-      lon: null,
-    },
-    sunrise: null, // Date object, UTC
-    sunset: null, // Date object, UTC
-    wind: {
-      speed: null, // MPS
-      degree: null, // meteorlogical degrees
-    },
-    temperature: null, // Kelvin
-    pressure: null, // hPa
-    humidity: null, // %
-    condition: {
-      main: null, // What API returns
-      description: null, // Longer description, if not available put the same whats in main
-      icon: null, // GTK weather icon names
-      customIcon: null
-    },
-  }
-
+  private weather: Weather = null;
   /** Stores all forecast information */
   private forecasts: Array < ForecastData > = [];
 
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////  
 
-  // UI elements
-  private _currentWeather: imports.gi.St.Bin;
-  private _separatorArea: imports.gi.St.DrawingArea;
-  private _futureWeather: imports.gi.St.Bin;
-  private _currentWeatherIcon: imports.gi.St.Icon;
-  private _currentWeatherSummary: imports.gi.St.Label;
-  private _currentWeatherLocation: imports.gi.St.Button;
-  private _currentWeatherSunrise: imports.gi.St.Label;
-  private _currentWeatherSunset: imports.gi.St.Label;
-  private _currentWeatherTemperature: imports.gi.St.Label;
-  private _currentWeatherHumidity: imports.gi.St.Label;
-  private _currentWeatherPressure: imports.gi.St.Label;
-  private _currentWeatherWind: imports.gi.St.Label;
-  private _currentWeatherApiUnique: imports.gi.St.Label;
-  private _currentWeatherApiUniqueCap: imports.gi.St.Label;
-  private _forecast: ForecastUI[];
-  private _forecastBox: imports.gi.St.BoxLayout;
-
   public currentLocale: string = null;
   public log: Log;
 
-
-  /** Rolldown menu itself */
-  private menu: imports.ui.applet.AppletPopupMenu;
-  private menuManager: imports.ui.popupMenu.PopupMenuManager;
   /** Soup session (see https://bugzilla.gnome.org/show_bug.cgi?id=661323#c64) */
   private _httpSession = new SessionAsync();
   /** Running applet's path*/
@@ -200,10 +149,11 @@ class WeatherApplet extends TextIconApplet {
   private msgSource: imports.ui.messageTray.SystemNotificationSource;
   private loop: WeatherLoop;
   public config: Config;
+  private ui: UI;
 
   private provider: WeatherProvider; // API
   private locProvider = new ipApi.IpApi(this); // IP location lookup
-  private orientation: imports.gi.St.Side;
+  public orientation: imports.gi.St.Side;
 
   /** Used for error handling, first error calls flips it
    * to prevents diplaying other errors in the current loop.
@@ -212,8 +162,9 @@ class WeatherApplet extends TextIconApplet {
 
   public constructor(metadata: any, orientation: imports.gi.St.Side, panelHeight: number, instanceId: number) {
     super(orientation, panelHeight, instanceId);
-    this.currentLocale = this.constructJsLocale(get_language_names()[0]);
     this.log = new Log(instanceId);
+    this.currentLocale = this.constructJsLocale(get_language_names()[0]);
+    this.log.Debug("System locale is " + this.currentLocale);
     this._httpSession.user_agent = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:37.0) Gecko/20100101 Firefox/37.0"; // ipapi blocks non-browsers agents, imitating browser
     this.msgSource = new SystemNotificationSource(_("Weather Applet"));
     messageTray.add(this.msgSource);
@@ -222,18 +173,12 @@ class WeatherApplet extends TextIconApplet {
     imports.gi.Gtk.IconTheme.get_default().append_search_path(this.appletDir + "/../icons");
 
     this.SetAppletOnPanel(); 
-    this.AddPopupMenu(orientation);
     this.config = new Config(this, instanceId);
     this.AddRefreshButton();
-    this.BuildPopupMenu();
     // generating unique GUIDs
+    this.ui = new UI(this, orientation);
+    this.ui.rebuild();
     this.loop = new WeatherLoop(this, instanceId);
-
-    this.rebuild()
-    //------------------------------
-    // RUN
-    //------------------------------
-    this.loop.Start();
 
     this.orientation = orientation;
     try {
@@ -241,8 +186,7 @@ class WeatherApplet extends TextIconApplet {
     } catch (e) {
       // vertical panel not supported
     }
-
-    this.log.Debug("System locale is " + this.currentLocale);
+    this.loop.Start();
   }
 
   /** Set applet on the panel with default settings */
@@ -252,18 +196,6 @@ class WeatherApplet extends TextIconApplet {
     this.set_applet_tooltip(_("Click to open"));
   }
 
-  /** Creates popup menu manager and popup menu */
-  private AddPopupMenu(orientation: any) {
-    this.menuManager = new PopupMenuManager(this);
-    this.menu = new AppletPopupMenu(this, orientation)
-    // this.menu.setCustomStyleClass and 
-    //this.menu.actor.add_style_class_name(STYLE_WEATHER_MENU);
-    // Doesn't do shit, setting class on the box instead.
-    this.menu.box.add_style_class_name(STYLE_WEATHER_MENU);  
-    this.log.Debug("Popup Menu applied classes are: " + this.menu.box.get_style_class_name());
-    this.menuManager.addMenu(this.menu);
-  }
-
   /** Into right-click context menu */
   private AddRefreshButton(): void {
      let itemLabel = _("Refresh")
@@ -271,34 +203,6 @@ class WeatherApplet extends TextIconApplet {
        this.refreshAndRebuild();
      }))
      this._applet_context_menu.addMenuItem(refreshMenuItem);
-  }
-
-  /** Changes all icon's type what are affected by
-   * the "use symbolic icons" setting
-   */
-  private UpdateIconType(iconType: imports.gi.St.IconType): void {
-    this._currentWeatherIcon.icon_type = iconType
-    for (let i = 0; i < this.config._forecastDays; i++) {
-      this._forecast[i].Icon.icon_type = iconType
-    }
-  }
-
-  /** Creates the skeleton of the popup menu */
-  private BuildPopupMenu(): void {
-    //  today's forecast
-    this._currentWeather = new Bin({ style_class: STYLE_CURRENT });
-    //  tomorrow's forecast
-    this._futureWeather = new Bin({ style_class: STYLE_FORECAST });
-    //  horizontal rule
-    this._separatorArea = new DrawingArea({ style_class: STYLE_POPUP_SEPARATOR_MENU_ITEM });
-    this._separatorArea.connect(SIGNAL_REPAINT, Lang.bind(this, this._onSeparatorAreaRepaint))
-    // build menu
-    let mainBox = new BoxLayout({ vertical: true })
-
-    mainBox.add_actor(this._currentWeather)
-    mainBox.add_actor(this._separatorArea)
-    mainBox.add_actor(this._futureWeather)
-    this.menu.addActor(mainBox)
   }
 
   public refreshAndRebuild(): void {
@@ -388,6 +292,29 @@ class WeatherApplet extends TextIconApplet {
     this.msgSource.notify(notification);
   }
 
+  public SetAppletTooltip(msg: string) {
+    this.set_applet_tooltip(msg);
+  }
+
+  public SetAppletIcon(iconname: string) {
+    this.config.IconType() == IconType.SYMBOLIC ?
+          this.set_applet_icon_symbolic_name(iconname) :
+          this.set_applet_icon_name(iconname)
+        if (this.config._useCustomAppletIcons) this.SetCustomIcon(this.weather.condition.customIcon);
+  }
+
+  public SetCustomIcon(iconName: CustomIcons): void {
+    this.set_applet_icon_symbolic_name(iconName);
+  }
+
+  public SetAppletLabel(label: string) {
+    this.set_applet_label(label);
+  }
+
+  public GetPanelHeight(): number {
+    return this.panel._getScaledPanelHeight();
+  }
+
   private async locationLookup(): Promise < void > {
     let command = "xdg-open ";
     spawnCommandLine(command + "https://cinnamon-spices.linuxmint.com/applets/view/17");
@@ -417,7 +344,7 @@ class WeatherApplet extends TextIconApplet {
 
   /** Override function */
   public on_applet_clicked(event: any): void {
-    this.menu.toggle()
+    this.ui.menu.toggle()
   }
 
   /** Override function */
@@ -429,26 +356,6 @@ class WeatherApplet extends TextIconApplet {
   private on_panel_height_changed() {
     // Implemented byApplets
   }
-
-  /** Called on panel toggle */
-  private _onSeparatorAreaRepaint(area: imports.gi.St.DrawingArea) {
-    let cr = area.get_context()
-    let themeNode = area.get_theme_node()
-    let [width, height] = area.get_surface_size()
-    let margin = themeNode.get_length('-margin-horizontal')
-    let gradientHeight = themeNode.get_length('-gradient-height')
-    let startColor = themeNode.get_color('-gradient-start')
-    let endColor = themeNode.get_color('-gradient-end')
-    let gradientWidth = (width - margin * 2)
-    let gradientOffset = (height - gradientHeight) / 2
-    let pattern = new LinearGradient(margin, gradientOffset, width - margin, gradientOffset + gradientHeight)
-    pattern.addColorStopRGBA(0, startColor.red / 255, startColor.green / 255, startColor.blue / 255, startColor.alpha / 255)
-    pattern.addColorStopRGBA(0.5, endColor.red / 255, endColor.green / 255, endColor.blue / 255, endColor.alpha / 255)
-    pattern.addColorStopRGBA(1, startColor.red / 255, startColor.green / 255, startColor.blue / 255, startColor.alpha / 255)
-    cr.setSource(pattern)
-    cr.rectangle(margin, gradientOffset, gradientWidth, gradientHeight)
-    cr.fill()
-  };
 
   //----------------------------------------------------------------------
   //
@@ -515,12 +422,11 @@ class WeatherApplet extends TextIconApplet {
         return "failure";
       }
 
-      this.wipeCurrentData();
-      this.wipeForecastData();
+      this.wipeData();
       this.ProcessWeatherData(weatherInfo, locationData);
 
-      if (rebuild) this.rebuild();
-      if (!await this.displayWeather() || !await this.displayForecast()) return;
+      if (rebuild) this.ui.rebuild();
+      if (!await this.ui.displayWeather(this.weather, this.config) || !await this.ui.displayForecast(this.weather, this.forecasts, this.config)) return;
       this.log.Print("Weather Information refreshed");
       this.loop.ResetErrorCount();
       return "success";
@@ -594,217 +500,39 @@ class WeatherApplet extends TextIconApplet {
     //this.weather.location.tzOffset = Math.round(this.weather.coord.lon/15) * 3600;
   }
 
-  /** Injects data from weather object into the popupMenu */
-  private displayWeather(): boolean {
-    try {
-      let mainCondition = "";
-      let descriptionCondition = "";
-      // Short Condition Name
-      if (this.weather.condition.main != null) {
-        mainCondition = this.weather.condition.main;
-        if (this.config._translateCondition) {
-          mainCondition = capitalizeFirstLetter(_(mainCondition));
-        }
-      }
-      // Condition Description
-      if (this.weather.condition.description != null) {
-        descriptionCondition = capitalizeFirstLetter(this.weather.condition.description);
-        if (this.config._translateCondition) {
-          descriptionCondition = capitalizeFirstLetter(_(this.weather.condition.description));
-        }
-      }
-
-      // Displaying Location   
-      let location = "";
-      if (this.weather.location.city != null && this.weather.location.country != null) {
-        location = this.weather.location.city + ", " + this.weather.location.country;
-      } else {
-        location = Math.round(this.weather.coord.lat * 10000) / 10000 + ", " + Math.round(this.weather.coord.lon * 10000) / 10000;
-      }
-
-      // Overriding Location
-      if (nonempty(this.config._locationLabelOverride)) {
-        location = this.config._locationLabelOverride;
-      }
-
-      this.set_applet_tooltip(location + " - " + _("Updated") + " " + AwareDateString(this.weather.date, this.currentLocale, this.config._show24Hours));
-
-      // Weather Condition
-      this._currentWeatherSummary.text = descriptionCondition;
-
-      // Weather icon
-      let iconname = this.weather.condition.icon;
-      if (iconname == null) {
-        iconname = "weather-severe-alert";
-      }
-
-      // Popup menu icons
-      if (this.config._useCustomMenuIcons) {
-          this._currentWeatherIcon.icon_name = this.weather.condition.customIcon;
-          this.UpdateIconType(IconType.SYMBOLIC); // Hard set to symbolic as iconset is symbolic
-      }
-      else {
-          this._currentWeatherIcon.icon_name = iconname;
-          this.UpdateIconType(this.config.IconType()); // Revert to user setting
-      }
-
-      // Applet icon
-      this.config.IconType() == IconType.SYMBOLIC ?
-        this.set_applet_icon_symbolic_name(iconname) :
-        this.set_applet_icon_name(iconname)
-      if (this.config._useCustomAppletIcons) this.SetCustomIcon(this.weather.condition.customIcon);
-
-      // Temperature
-      let temp = "";
-      if (this.weather.temperature != null) {
-        temp = TempToUserConfig(this.weather.temperature, this.config._temperatureUnit, this.config._tempRussianStyle);
-        this._currentWeatherTemperature.text = temp + " " + this.unitToUnicode(this.config._temperatureUnit);
-      }
-
-      // Applet panel label
-      let label = "";
-      if (this.orientation != Side.LEFT && this.orientation != Side.RIGHT) {
-        if (this.config._showCommentInPanel) {
-          label += mainCondition;
-        }
-        if (this.config._showTextInPanel) {
-          if (label != "") {
-            label += " ";
-          }
-          label += (temp + ' ' + this.unitToUnicode(this.config._temperatureUnit));
-        }
-      }
-      else {
-        if (this.config._showTextInPanel) {
-          label = temp;
-        }
-        // Vertical panel width is more than this value then we has space
-        // to show units
-        if (this.panel._getScaledPanelHeight() >= 35) {
-          label += this.unitToUnicode(this.config._temperatureUnit);
-        }
-      }
-
-      // Overriding temperature panel label
-      if (nonempty(this.config._tempTextOverride)) {
-        label = this.config._tempTextOverride
-          .replace("{t}", temp)
-          .replace("{u}", this.unitToUnicode(this.config._temperatureUnit))
-          .replace("{c}", mainCondition);
-      }
-
-      // Set Applet Label, even if the variables are empty
-      this.set_applet_label(label);
-
-      // Displaying humidity
-      if (this.weather.humidity != null) {
-        this._currentWeatherHumidity.text = Math.round(this.weather.humidity) + "%";
-      }
-
-      // Wind
-      let wind_direction = compassDirection(this.weather.wind.degree);
-      this._currentWeatherWind.text =
-        (wind_direction != undefined ? _(wind_direction) + " " : "") +
-        MPStoUserUnits(this.weather.wind.speed, this.config._windSpeedUnit);
-      // No need to display unit to Beaufort scale
-      if (this.config._windSpeedUnit != "Beaufort") this._currentWeatherWind.text += " " + _(this.config._windSpeedUnit);
-        
-      // API Unique display
-      this._currentWeatherApiUnique.text = "";
-      this._currentWeatherApiUniqueCap.text = "";
-      if (!!this.weather.extra_field) {
-        this._currentWeatherApiUniqueCap.text = _(this.weather.extra_field.name) + ":";
-        let value;
-        switch (this.weather.extra_field.type) {
-          case "percent":
-            value = this.weather.extra_field.value.toString() + "%";
-            break;
-          case "temperature":
-            value = TempToUserConfig(this.weather.extra_field.value, this.config._temperatureUnit, this.config._tempRussianStyle) + " " + this.unitToUnicode(this.config._temperatureUnit);
-            break;
-          default:
-            value = _(this.weather.extra_field.value);
-            break;
-        }
-        this._currentWeatherApiUnique.text = value;
-
-      }
-
-      // Pressure
-      if (this.weather.pressure != null) {
-        this._currentWeatherPressure.text = PressToUserUnits(this.weather.pressure, this.config._pressureUnit) + ' ' + _(this.config._pressureUnit);
-      }
-
-      // Location
-      this._currentWeatherLocation.label = location;
-      this._currentWeatherLocation.url = this.weather.location.url;
-
-      // Sunset/Sunrise
-      let sunriseText = "";
-      let sunsetText = "";
-      if (this.weather.sunrise != null && this.weather.sunset != null && this.config._showSunrise) {
-        sunriseText = (GetHoursMinutes(this.weather.sunrise, this.currentLocale, this.config._show24Hours, this.weather.location.timeZone));
-        sunsetText = (GetHoursMinutes(this.weather.sunset, this.currentLocale, this.config._show24Hours, this.weather.location.timeZone));
-      }
-
-      this._currentWeatherSunrise.text = sunriseText;
-      this._currentWeatherSunset.text = sunsetText;
-      return true;
-    } catch (e) {
-      this.log.Error("DisplayWeatherError: " + e);
-      return false;
-    }
-  };
-
-  /** Injects data from forecasts array into popupMenu */
-  private displayForecast(): boolean {
-    try {
-      for (let i = 0; i < this._forecast.length; i++) {
-        let forecastData = this.forecasts[i];
-        let forecastUi = this._forecast[i];
-
-        let t_low = TempToUserConfig(forecastData.temp_min, this.config._temperatureUnit, this.config._tempRussianStyle);
-        let t_high = TempToUserConfig(forecastData.temp_max, this.config._temperatureUnit, this.config._tempRussianStyle);
-
-        let first_temperature = this.config._temperatureHighFirst ? t_high : t_low;
-        let second_temperature = this.config._temperatureHighFirst ? t_low : t_high;
-
-        // Weather Condition
-        let comment = "";
-        if (forecastData.condition.main != null && forecastData.condition.description != null) {
-          comment = (this.config._shortConditions) ? forecastData.condition.main : forecastData.condition.description;
-          comment = capitalizeFirstLetter(comment);
-          if (this.config._translateCondition) comment = _(comment);
-        }
-
-        // Day Names
-        if (this.weather.location.timeZone == null) forecastData.date.setMilliseconds(forecastData.date.getMilliseconds() + (this.weather.location.tzOffset * 1000));
-        let dayName: string = GetDayName(forecastData.date, this.currentLocale, this.weather.location.timeZone);
-
-        if (forecastData.date) {
-          let now = new Date();
-          if (forecastData.date.getDate() == now.getDate()) dayName = _("Today");
-          if (forecastData.date.getDate() == new Date(now.setDate(now.getDate() + 1)).getDate()) dayName = _("Tomorrow");
-        }
-
-        forecastUi.Day.text = dayName;
-        forecastUi.Temperature.text = first_temperature;
-        // As Russian Tradition, -temp...+temp
-        // See https://github.com/linuxmint/cinnamon-spices-applets/issues/618
-        forecastUi.Temperature.text += ((this.config._tempRussianStyle) ? ELLIPSIS : " " + FORWARD_SLASH + " ");
-        forecastUi.Temperature.text += second_temperature + ' ' + this.unitToUnicode(this.config._temperatureUnit);
-        forecastUi.Summary.text = comment;
-        forecastUi.Icon.icon_name = (this.config._useCustomMenuIcons) ? forecastData.condition.customIcon : forecastData.condition.icon;
-      }
-      return true;
-    } catch (e) {
-        this.log.Error("DisplayForecastError " + e);
-      return false;
-    }
-  };
-
   /** Reset weather object */
-  private wipeCurrentData(): void {
+  private wipeData(): void {
+    if (this.weather == null) {
+      this.weather = {
+        date: null,
+        location: {
+          city: null,
+          country: null,
+          tzOffset: null,
+          timeZone: null,
+          url: null
+        },
+        coord: {
+          lat: null,
+          lon: null,
+        },
+        sunrise: null,
+        sunset: null,
+        wind: {
+          speed: null,
+          degree: null,
+        },
+        temperature: null,
+        pressure: null,
+        humidity: null, 
+        condition: {
+          main: null,
+          description: null,
+          icon: null,
+          customIcon: null
+        },
+      }
+    }
     this.weather.date = null;
     this.weather.location.city = null;
     this.weather.location.country = null;
@@ -824,219 +552,8 @@ class WeatherApplet extends TextIconApplet {
     this.weather.condition.description = null;
     this.weather.condition.icon = null;
     this.weather.extra_field = null;
-  };
-
-  /** Reset forecasts array */
-  private wipeForecastData(): void {
     this.forecasts = [];
   };
-
-  /** Destroys current weather UI box */
-  private destroyCurrentWeather(): void {
-    if (this._currentWeather.get_child() != null)
-      this._currentWeather.get_child().destroy()
-  }
-
-  /** Destroys forecast UI box */
-  private destroyFutureWeather(): void {
-    if (this._futureWeather.get_child() != null)
-      this._futureWeather.get_child().destroy()
-  }
-
-  /** Destroys UI first then shows initial UI */
-  private showLoadingUi(): void {
-    this.destroyCurrentWeather()
-    this.destroyFutureWeather()
-    this._currentWeather.set_child(new Label({
-      text: _('Loading current weather ...')
-    }))
-    this._futureWeather.set_child(new Label({
-      text: _('Loading future weather ...')
-    }))
-  }
-
-  /** Fully rebuilds UI */
-  private rebuild(): void {
-    this.showLoadingUi()
-    this.rebuildCurrentWeatherUi()
-    this.rebuildFutureWeatherUi()
-  }
-
-  private rebuildCurrentWeatherUi(): void {
-    this.destroyCurrentWeather()
-    let textOb = {
-      text: ELLIPSIS
-    }
-
-    // This will hold the icon for the current weather
-    this._currentWeatherIcon = new Icon({
-      icon_type: this.config.IconType(),
-      icon_size: 64,
-      icon_name: APPLET_ICON,
-      style_class: STYLE_ICON
-    })
-
-    // Current Weather Middle Column
-    this._currentWeatherLocation = new Button({ reactive: true, label: _('Refresh'), });
-    this._currentWeatherLocation.style_class = STYLE_LOCATION_LINK;
-    this._currentWeatherLocation.connect(SIGNAL_CLICKED, Lang.bind(this, function () {
-      if (this._currentWeatherLocation.url == null) {
-        this.refreshWeather();
-      } else {
-        imports.gi.Gio.app_info_launch_default_for_uri(
-          this._currentWeatherLocation.url,
-          global.create_app_launch_context()
-        )
-      }
-    }));
-
-    this._currentWeatherSummary = new Label({ text: _('Loading ...'), style_class: STYLE_SUMMARY })
-    this._currentWeatherSunrise = new Label(textOb)
-    this._currentWeatherSunset = new Label(textOb)
-    
-    let sunriseBox = new BoxLayout();
-    let sunriseTextBin = new Bin();
-    sunriseTextBin.set_child(this._currentWeatherSunrise);
-    let sunriseIcon = new Icon({
-      icon_name: "sunrise-symbolic",
-      icon_type: IconType.SYMBOLIC,
-      icon_size: 25
-    })
-    if (this.config._showSunrise) sunriseBox.add_actor(sunriseIcon);
-    sunriseBox.add_actor(sunriseTextBin);
-
-    let sunsetBox = new BoxLayout();
-    let sunsetTextBin = new Bin();
-    sunsetTextBin.set_child(this._currentWeatherSunset);
-    let sunsetIcon = new Icon({
-      icon_name: "sunset-symbolic",
-      icon_type: IconType.SYMBOLIC,
-      icon_size: 25
-    })
-    if (this.config._showSunrise) sunsetBox.add_actor(sunsetIcon);
-    sunsetBox.add_actor(sunsetTextBin);
-
-
-    let ab_spacerlabel = new Label({ text: BLANK })
-    let bb_spacerlabel = new Label({ text: BLANK })
-
-    let sunBox = new BoxLayout({ style_class: STYLE_ASTRONOMY })
-    sunBox.add_actor(sunriseBox)
-    sunBox.add_actor(ab_spacerlabel)
-    sunBox.add_actor(sunsetBox);
-
-    let middleColumn = new BoxLayout({ vertical: true, style_class: STYLE_SUMMARYBOX })
-    middleColumn.add_actor(this._currentWeatherLocation)
-    middleColumn.add_actor(this._currentWeatherSummary)
-    middleColumn.add_actor(bb_spacerlabel)
-
-    // Bin is used here for horizontally center BoxLayout
-    let sunBin = new Bin();
-    sunBin.set_child(sunBox);
-    middleColumn.add_actor(sunBin);
-
-    // Current Weather Right Column
-    this._currentWeatherTemperature = new Label(textOb)
-    this._currentWeatherHumidity = new Label(textOb)
-    this._currentWeatherPressure = new Label(textOb)
-    this._currentWeatherWind = new Label(textOb)
-    this._currentWeatherApiUnique = new Label({ text: '' })
-    // APi Unique Caption
-    this._currentWeatherApiUniqueCap = new Label({ text: '' });
-
-    let rb_captions = new BoxLayout({ vertical: true, style_class: STYLE_DATABOX_CAPTIONS })
-    let rb_values = new BoxLayout({vertical: true, style_class: STYLE_DATABOX_VALUES })
-    rb_captions.add_actor(new Label({ text: _('Temperature:') }));
-    rb_captions.add_actor(new Label({ text: _('Humidity:') }));
-    rb_captions.add_actor(new Label({ text: _('Pressure:') }));
-    rb_captions.add_actor(new Label({ text: _('Wind:') }));
-    rb_captions.add_actor(this._currentWeatherApiUniqueCap);
-    rb_values.add_actor(this._currentWeatherTemperature);
-    rb_values.add_actor(this._currentWeatherHumidity);
-    rb_values.add_actor(this._currentWeatherPressure);
-    /*let windBox = new BoxLayout({vertical: false});
-    let windIcon = new Icon({icon_type: IconType.SYMBOLIC, icon_name: "wind-symbolic", icon_size: 15});
-    windBox.add_actor(windIcon);
-    windBox.add_actor(this._currentWeatherWind);
-    rb_values.add_actor(windBox);*/
-    rb_values.add_actor(this._currentWeatherWind);
-    rb_values.add_actor(this._currentWeatherApiUnique);
-
-    let rightColumn = new BoxLayout({ style_class: STYLE_DATABOX });
-    rightColumn.add_actor(rb_captions);
-    rightColumn.add_actor(rb_values);
-
-    // Current Weather Main Boxes
-    let weatherBox = new BoxLayout();
-    weatherBox.add_actor(middleColumn)
-    weatherBox.add_actor(rightColumn)
-
-    let box = new BoxLayout({ style_class: STYLE_ICONBOX })
-    box.add_actor(this._currentWeatherIcon)
-    box.add_actor(weatherBox)
-    this._currentWeather.set_child(box)
-  };
-
-  private rebuildFutureWeatherUi(): void {
-    this.destroyFutureWeather();
-
-    this._forecast = []
-    this._forecastBox = new BoxLayout({
-      vertical: this.config._verticalOrientation,
-      style_class: STYLE_FORECAST_CONTAINER
-    })
-    this._futureWeather.set_child(this._forecastBox)
-
-    for (let i = 0; i < this.config._forecastDays; i++) {
-      let forecastWeather: ForecastUI = {
-        Icon: new Icon,
-        Day: new Label,
-        Summary: new Label,
-        Temperature: new Label,
-      }
-
-      forecastWeather.Icon = new Icon({
-        icon_type: this.config.IconType(),
-        icon_size: 48,
-        icon_name: APPLET_ICON,
-        style_class: STYLE_FORECAST_ICON
-      })
-
-      forecastWeather.Day = new Label({ style_class: STYLE_FORECAST_DAY })
-      forecastWeather.Summary = new Label({ style_class: STYLE_FORECAST_SUMMARY })
-      forecastWeather.Temperature = new Label({ style_class: STYLE_FORECAST_TEMPERATURE })
-
-      let dataBin = new Bin();
-      let dataBox = new BoxLayout({ vertical: true, style_class: STYLE_FORECAST_DATABOX })
-      dataBox.add_actor(forecastWeather.Day)
-      dataBox.add_actor(forecastWeather.Summary)
-      dataBox.add_actor(forecastWeather.Temperature)
-      dataBin.set_child(dataBox);
-
-      let forecastBox = new BoxLayout({
-        style_class: STYLE_FORECAST_BOX
-      })
-      forecastBox.add_actor(forecastWeather.Icon)
-      forecastBox.add_actor(dataBin)
-
-      this._forecast[i] = forecastWeather
-      this._forecastBox.add_actor(forecastBox)
-    }
-  }
-
-  //----------------------------------------------------------------------
-  //
-  // Utility functions
-  //
-  //----------------------------------------------------------------------
-
-  public SetCustomIcon(iconName: CustomIcons): void {
-    this.set_applet_icon_symbolic_name(iconName);
-  }
-
-  private unitToUnicode(unit: WeatherUnits): string {
-    return unit == "fahrenheit" ? '\u2109' : '\u2103'
-  }
 
   ///
   ///  Error Handling in UI
@@ -1046,7 +563,7 @@ class WeatherApplet extends TextIconApplet {
     this.set_applet_label(title);
     this.set_applet_tooltip("Click to open");
     this.set_applet_icon_name("weather-severe-alert");
-    this._currentWeatherSunset.text = msg;
+    this.ui.DisplayErrorMessage(msg);
   };
 
   private errMsg: NiceErrorDetail = { // Error messages to use
@@ -1073,7 +590,7 @@ class WeatherApplet extends TextIconApplet {
     this.encounteredError = true;
 
     if (error.type == "hard") {
-      this.rebuild();
+      this.ui.rebuild();
       this.DisplayError(this.errMsg[error.detail], (!error.message) ? "" : error.message);
     }
 
@@ -1083,7 +600,7 @@ class WeatherApplet extends TextIconApplet {
       if (this.loop.IsDataTooOld()) {
         this.set_applet_tooltip("Click to open");
         this.set_applet_icon_name("weather-severe-alert");
-        this._currentWeatherSunset.text = _("Could not update weather for a while...\nare you connected to the internet?");
+        this.ui.DisplayErrorMessage(_("Could not update weather for a while...\nare you connected to the internet?"));
       }
     }
 
@@ -1166,6 +683,503 @@ class Log {
   }
 }
 
+class UI {
+    // UI elements
+    private _currentWeather: imports.gi.St.Bin;
+    private _separatorArea: imports.gi.St.DrawingArea;
+    private _futureWeather: imports.gi.St.Bin;
+    private _currentWeatherIcon: imports.gi.St.Icon;
+    private _currentWeatherSummary: imports.gi.St.Label;
+    private _currentWeatherLocation: imports.gi.St.Button;
+    private _currentWeatherSunrise: imports.gi.St.Label;
+    private _currentWeatherSunset: imports.gi.St.Label;
+    private _currentWeatherTemperature: imports.gi.St.Label;
+    private _currentWeatherHumidity: imports.gi.St.Label;
+    private _currentWeatherPressure: imports.gi.St.Label;
+    private _currentWeatherWind: imports.gi.St.Label;
+    private _currentWeatherApiUnique: imports.gi.St.Label;
+    private _currentWeatherApiUniqueCap: imports.gi.St.Label;
+    private _forecast: ForecastUI[];
+    private _forecastBox: imports.gi.St.BoxLayout;
+
+    private app: WeatherApplet;
+      /** Rolldown menu itself */
+    public menu: imports.ui.applet.AppletPopupMenu;
+    private menuManager: imports.ui.popupMenu.PopupMenuManager;
+
+    constructor(app: WeatherApplet, orientation: imports.gi.St.Side) {
+      this.app = app;
+      this.AddPopupMenu(orientation);
+      this.BuildPopupMenu();
+    }
+
+      /** Creates popup menu manager and popup menu */
+    private AddPopupMenu(orientation: any) {
+      this.menuManager = new PopupMenuManager(this.app);
+      this.menu = new AppletPopupMenu(this.app, orientation)
+      // this.menu.setCustomStyleClass and 
+      //this.menu.actor.add_style_class_name(STYLE_WEATHER_MENU);
+      // Doesn't do shit, setting class on the box instead.
+      this.menu.box.add_style_class_name(STYLE_WEATHER_MENU);  
+      this.app.log.Debug("Popup Menu applied classes are: " + this.menu.box.get_style_class_name());
+      this.menuManager.addMenu(this.menu);
+    }
+    /** Changes all icon's type what are affected by
+     * the "use symbolic icons" setting
+     */
+    public UpdateIconType(iconType: imports.gi.St.IconType): void {
+      this._currentWeatherIcon.icon_type = iconType
+      for (let i = 0; i < this._forecast.length; i++) {
+        this._forecast[i].Icon.icon_type = iconType
+      }
+    }
+
+    /** Creates the skeleton of the popup menu */
+    private BuildPopupMenu(): void {
+      //  today's forecast
+      this._currentWeather = new Bin({ style_class: STYLE_CURRENT });
+      //  tomorrow's forecast
+      this._futureWeather = new Bin({ style_class: STYLE_FORECAST });
+      //  horizontal rule
+      this._separatorArea = new DrawingArea({ style_class: STYLE_POPUP_SEPARATOR_MENU_ITEM });
+      this._separatorArea.connect(SIGNAL_REPAINT, Lang.bind(this, this._onSeparatorAreaRepaint))
+      // build menu
+      let mainBox = new BoxLayout({ vertical: true })
+
+      mainBox.add_actor(this._currentWeather)
+      mainBox.add_actor(this._separatorArea)
+      mainBox.add_actor(this._futureWeather)
+      this.menu.addActor(mainBox)
+    }
+
+    /** Called on panel toggle */
+    private _onSeparatorAreaRepaint(area: imports.gi.St.DrawingArea) {
+      let cr = area.get_context()
+      let themeNode = area.get_theme_node()
+      let [width, height] = area.get_surface_size()
+      let margin = themeNode.get_length('-margin-horizontal')
+      let gradientHeight = themeNode.get_length('-gradient-height')
+      let startColor = themeNode.get_color('-gradient-start')
+      let endColor = themeNode.get_color('-gradient-end')
+      let gradientWidth = (width - margin * 2)
+      let gradientOffset = (height - gradientHeight) / 2
+      let pattern = new LinearGradient(margin, gradientOffset, width - margin, gradientOffset + gradientHeight)
+      pattern.addColorStopRGBA(0, startColor.red / 255, startColor.green / 255, startColor.blue / 255, startColor.alpha / 255)
+      pattern.addColorStopRGBA(0.5, endColor.red / 255, endColor.green / 255, endColor.blue / 255, endColor.alpha / 255)
+      pattern.addColorStopRGBA(1, startColor.red / 255, startColor.green / 255, startColor.blue / 255, startColor.alpha / 255)
+      cr.setSource(pattern)
+      cr.rectangle(margin, gradientOffset, gradientWidth, gradientHeight)
+      cr.fill()
+    };
+
+    /** Destroys current weather UI box */
+    private destroyCurrentWeather(): void {
+      if (this._currentWeather.get_child() != null)
+        this._currentWeather.get_child().destroy()
+    }
+  
+    /** Destroys forecast UI box */
+    private destroyFutureWeather(): void {
+      if (this._futureWeather.get_child() != null)
+        this._futureWeather.get_child().destroy()
+    }
+  
+    /** Destroys UI first then shows initial UI */
+    private showLoadingUi(): void {
+      this.destroyCurrentWeather()
+      this.destroyFutureWeather()
+      this._currentWeather.set_child(new Label({
+        text: _('Loading current weather ...')
+      }))
+      this._futureWeather.set_child(new Label({
+        text: _('Loading future weather ...')
+      }))
+    }
+
+    public DisplayErrorMessage(msg: string) {
+      this._currentWeatherSunset.text = msg;
+    }
+
+    /** Injects data from weather object into the popupMenu */
+    public displayWeather(weather: Weather, config: Config): boolean {
+      try {
+        let mainCondition = "";
+        let descriptionCondition = "";
+        // Short Condition Name
+        if (weather.condition.main != null) {
+          mainCondition = weather.condition.main;
+          if (config._translateCondition) {
+            mainCondition = capitalizeFirstLetter(_(mainCondition));
+          }
+        }
+        // Condition Description
+        if (weather.condition.description != null) {
+          descriptionCondition = capitalizeFirstLetter(weather.condition.description);
+          if (config._translateCondition) {
+            descriptionCondition = capitalizeFirstLetter(_(weather.condition.description));
+          }
+        }
+
+        // Displaying Location   
+        let location = "";
+        if (weather.location.city != null && weather.location.country != null) {
+          location = weather.location.city + ", " + weather.location.country;
+        } else {
+          location = Math.round(weather.coord.lat * 10000) / 10000 + ", " + Math.round(weather.coord.lon * 10000) / 10000;
+        }
+
+        // Overriding Location
+        if (nonempty(config._locationLabelOverride)) {
+          location = config._locationLabelOverride;
+        }
+
+        this.app.SetAppletTooltip(location + " - " + _("Updated") + " " + AwareDateString(weather.date, this.app.currentLocale, config._show24Hours));
+
+        // Weather Condition
+        this._currentWeatherSummary.text = descriptionCondition;
+
+        // Weather icon
+        let iconname = weather.condition.icon;
+        if (iconname == null) {
+          iconname = "weather-severe-alert";
+        }
+
+        // Popup menu icons
+        if (config._useCustomMenuIcons) {
+            this._currentWeatherIcon.icon_name = weather.condition.customIcon;
+            this.UpdateIconType(IconType.SYMBOLIC); // Hard set to symbolic as iconset is symbolic
+        }
+        else {
+            this._currentWeatherIcon.icon_name = iconname;
+            this.UpdateIconType(config.IconType()); // Revert to user setting
+        }
+
+        // Applet icon
+        this.app.SetAppletIcon(iconname);
+
+        // Temperature
+        let temp = "";
+        if (weather.temperature != null) {
+          temp = TempToUserConfig(weather.temperature, config._temperatureUnit, config._tempRussianStyle);
+          this._currentWeatherTemperature.text = temp + " " + this.unitToUnicode(config._temperatureUnit);
+        }
+
+        // Applet panel label
+        let label = "";
+        if (this.app.orientation != Side.LEFT && this.app.orientation != Side.RIGHT) {
+          if (config._showCommentInPanel) {
+            label += mainCondition;
+          }
+          if (config._showTextInPanel) {
+            if (label != "") {
+              label += " ";
+            }
+            label += (temp + ' ' + this.unitToUnicode(config._temperatureUnit));
+          }
+        }
+        else {
+          if (config._showTextInPanel) {
+            label = temp;
+          }
+          // Vertical panel width is more than this value then we has space
+          // to show units
+          if (this.app.GetPanelHeight() >= 35) {
+            label += this.unitToUnicode(config._temperatureUnit);
+          }
+        }
+
+        // Overriding temperature panel label
+        if (nonempty(config._tempTextOverride)) {
+          label = config._tempTextOverride
+            .replace("{t}", temp)
+            .replace("{u}", this.unitToUnicode(config._temperatureUnit))
+            .replace("{c}", mainCondition);
+        }
+
+        // Set Applet Label, even if the variables are empty
+        this.app.SetAppletLabel(label);
+
+        // Displaying humidity
+        if (weather.humidity != null) {
+          this._currentWeatherHumidity.text = Math.round(weather.humidity) + "%";
+        }
+
+        // Wind
+        let wind_direction = compassDirection(weather.wind.degree);
+        this._currentWeatherWind.text =
+          (wind_direction != undefined ? _(wind_direction) + " " : "") +
+          MPStoUserUnits(weather.wind.speed, config._windSpeedUnit);
+        // No need to display unit to Beaufort scale
+        if (config._windSpeedUnit != "Beaufort") this._currentWeatherWind.text += " " + _(config._windSpeedUnit);
+          
+        // API Unique display
+        this._currentWeatherApiUnique.text = "";
+        this._currentWeatherApiUniqueCap.text = "";
+        if (!!weather.extra_field) {
+          this._currentWeatherApiUniqueCap.text = _(weather.extra_field.name) + ":";
+          let value;
+          switch (weather.extra_field.type) {
+            case "percent":
+              value = weather.extra_field.value.toString() + "%";
+              break;
+            case "temperature":
+              value = TempToUserConfig(weather.extra_field.value, config._temperatureUnit, config._tempRussianStyle) + " " + this.unitToUnicode(config._temperatureUnit);
+              break;
+            default:
+              value = _(weather.extra_field.value);
+              break;
+          }
+          this._currentWeatherApiUnique.text = value;
+
+        }
+
+        // Pressure
+        if (weather.pressure != null) {
+          this._currentWeatherPressure.text = PressToUserUnits(weather.pressure, config._pressureUnit) + ' ' + _(config._pressureUnit);
+        }
+
+        // Location
+        this._currentWeatherLocation.label = location;
+        this._currentWeatherLocation.url = weather.location.url;
+
+        // Sunset/Sunrise
+        let sunriseText = "";
+        let sunsetText = "";
+        if (weather.sunrise != null && weather.sunset != null && config._showSunrise) {
+          sunriseText = (GetHoursMinutes(weather.sunrise, this.app.currentLocale, config._show24Hours, weather.location.timeZone));
+          sunsetText = (GetHoursMinutes(weather.sunset, this.app.currentLocale, config._show24Hours, weather.location.timeZone));
+        }
+
+        this._currentWeatherSunrise.text = sunriseText;
+        this._currentWeatherSunset.text = sunsetText;
+        return true;
+      } catch (e) {
+        this.app.log.Error("DisplayWeatherError: " + e);
+        return false;
+      }
+    };
+
+    /** Injects data from forecasts array into popupMenu */
+    public displayForecast(weather: Weather, forecasts: ForecastData[], config: Config): boolean {
+      try {
+        for (let i = 0; i < this._forecast.length; i++) {
+          let forecastData = forecasts[i];
+          let forecastUi = this._forecast[i];
+
+          let t_low = TempToUserConfig(forecastData.temp_min, config._temperatureUnit, config._tempRussianStyle);
+          let t_high = TempToUserConfig(forecastData.temp_max, config._temperatureUnit, config._tempRussianStyle);
+
+          let first_temperature = config._temperatureHighFirst ? t_high : t_low;
+          let second_temperature = config._temperatureHighFirst ? t_low : t_high;
+
+          // Weather Condition
+          let comment = "";
+          if (forecastData.condition.main != null && forecastData.condition.description != null) {
+            comment = (config._shortConditions) ? forecastData.condition.main : forecastData.condition.description;
+            comment = capitalizeFirstLetter(comment);
+            if (config._translateCondition) comment = _(comment);
+          }
+
+          // Day Names
+          if (weather.location.timeZone == null) forecastData.date.setMilliseconds(forecastData.date.getMilliseconds() + (weather.location.tzOffset * 1000));
+          let dayName: string = GetDayName(forecastData.date, this.app.currentLocale, weather.location.timeZone);
+
+          if (forecastData.date) {
+            let now = new Date();
+            if (forecastData.date.getDate() == now.getDate()) dayName = _("Today");
+            if (forecastData.date.getDate() == new Date(now.setDate(now.getDate() + 1)).getDate()) dayName = _("Tomorrow");
+          }
+
+          forecastUi.Day.text = dayName;
+          forecastUi.Temperature.text = first_temperature;
+          // As Russian Tradition, -temp...+temp
+          // See https://github.com/linuxmint/cinnamon-spices-applets/issues/618
+          forecastUi.Temperature.text += ((config._tempRussianStyle) ? ELLIPSIS : " " + FORWARD_SLASH + " ");
+          forecastUi.Temperature.text += second_temperature + ' ' + this.unitToUnicode(config._temperatureUnit);
+          forecastUi.Summary.text = comment;
+          forecastUi.Icon.icon_name = (config._useCustomMenuIcons) ? forecastData.condition.customIcon : forecastData.condition.icon;
+        }
+        return true;
+      } catch (e) {
+          this.app.log.Error("DisplayForecastError " + e);
+        return false;
+      }
+    };
+
+    private unitToUnicode(unit: WeatherUnits): string {
+      return unit == "fahrenheit" ? '\u2109' : '\u2103'
+    }
+  
+    /** Fully rebuilds UI */
+    public rebuild(): void {
+      this.showLoadingUi()
+      this.rebuildCurrentWeatherUi()
+      this.rebuildFutureWeatherUi()
+    }
+  
+    private rebuildCurrentWeatherUi(): void {
+      this.destroyCurrentWeather()
+      let textOb = {
+        text: ELLIPSIS
+      }
+  
+      // This will hold the icon for the current weather
+      this._currentWeatherIcon = new Icon({
+        icon_type: this.app.config.IconType(),
+        icon_size: 64,
+        icon_name: APPLET_ICON,
+        style_class: STYLE_ICON
+      })
+  
+      // Current Weather Middle Column
+      this._currentWeatherLocation = new Button({ reactive: true, label: _('Refresh'), });
+      this._currentWeatherLocation.style_class = STYLE_LOCATION_LINK;
+      this._currentWeatherLocation.connect(SIGNAL_CLICKED, Lang.bind(this, function () {
+        if (this._currentWeatherLocation.url == null) {
+          this.refreshWeather();
+        } else {
+          imports.gi.Gio.app_info_launch_default_for_uri(
+            this._currentWeatherLocation.url,
+            global.create_app_launch_context()
+          )
+        }
+      }));
+  
+      this._currentWeatherSummary = new Label({ text: _('Loading ...'), style_class: STYLE_SUMMARY })
+      this._currentWeatherSunrise = new Label(textOb)
+      this._currentWeatherSunset = new Label(textOb)
+      
+      let sunriseBox = new BoxLayout();
+      let sunriseTextBin = new Bin();
+      sunriseTextBin.set_child(this._currentWeatherSunrise);
+      let sunriseIcon = new Icon({
+        icon_name: "sunrise-symbolic",
+        icon_type: IconType.SYMBOLIC,
+        icon_size: 25
+      })
+      if (this.app.config._showSunrise) sunriseBox.add_actor(sunriseIcon);
+      sunriseBox.add_actor(sunriseTextBin);
+  
+      let sunsetBox = new BoxLayout();
+      let sunsetTextBin = new Bin();
+      sunsetTextBin.set_child(this._currentWeatherSunset);
+      let sunsetIcon = new Icon({
+        icon_name: "sunset-symbolic",
+        icon_type: IconType.SYMBOLIC,
+        icon_size: 25
+      })
+      if (this.app.config._showSunrise) sunsetBox.add_actor(sunsetIcon);
+      sunsetBox.add_actor(sunsetTextBin);
+  
+  
+      let ab_spacerlabel = new Label({ text: BLANK })
+      let bb_spacerlabel = new Label({ text: BLANK })
+  
+      let sunBox = new BoxLayout({ style_class: STYLE_ASTRONOMY })
+      sunBox.add_actor(sunriseBox)
+      sunBox.add_actor(ab_spacerlabel)
+      sunBox.add_actor(sunsetBox);
+  
+      let middleColumn = new BoxLayout({ vertical: true, style_class: STYLE_SUMMARYBOX })
+      middleColumn.add_actor(this._currentWeatherLocation)
+      middleColumn.add_actor(this._currentWeatherSummary)
+      middleColumn.add_actor(bb_spacerlabel)
+  
+      // Bin is used here for horizontally center BoxLayout
+      let sunBin = new Bin();
+      sunBin.set_child(sunBox);
+      middleColumn.add_actor(sunBin);
+  
+      // Current Weather Right Column
+      this._currentWeatherTemperature = new Label(textOb)
+      this._currentWeatherHumidity = new Label(textOb)
+      this._currentWeatherPressure = new Label(textOb)
+      this._currentWeatherWind = new Label(textOb)
+      this._currentWeatherApiUnique = new Label({ text: '' })
+      // APi Unique Caption
+      this._currentWeatherApiUniqueCap = new Label({ text: '' });
+  
+      let rb_captions = new BoxLayout({ vertical: true, style_class: STYLE_DATABOX_CAPTIONS })
+      let rb_values = new BoxLayout({vertical: true, style_class: STYLE_DATABOX_VALUES })
+      rb_captions.add_actor(new Label({ text: _('Temperature:') }));
+      rb_captions.add_actor(new Label({ text: _('Humidity:') }));
+      rb_captions.add_actor(new Label({ text: _('Pressure:') }));
+      rb_captions.add_actor(new Label({ text: _('Wind:') }));
+      rb_captions.add_actor(this._currentWeatherApiUniqueCap);
+      rb_values.add_actor(this._currentWeatherTemperature);
+      rb_values.add_actor(this._currentWeatherHumidity);
+      rb_values.add_actor(this._currentWeatherPressure);
+      /*let windBox = new BoxLayout({vertical: false});
+      let windIcon = new Icon({icon_type: IconType.SYMBOLIC, icon_name: "wind-symbolic", icon_size: 15});
+      windBox.add_actor(windIcon);
+      windBox.add_actor(this._currentWeatherWind);
+      rb_values.add_actor(windBox);*/
+      rb_values.add_actor(this._currentWeatherWind);
+      rb_values.add_actor(this._currentWeatherApiUnique);
+  
+      let rightColumn = new BoxLayout({ style_class: STYLE_DATABOX });
+      rightColumn.add_actor(rb_captions);
+      rightColumn.add_actor(rb_values);
+  
+      // Current Weather Main Boxes
+      let weatherBox = new BoxLayout();
+      weatherBox.add_actor(middleColumn)
+      weatherBox.add_actor(rightColumn)
+  
+      let box = new BoxLayout({ style_class: STYLE_ICONBOX })
+      box.add_actor(this._currentWeatherIcon)
+      box.add_actor(weatherBox)
+      this._currentWeather.set_child(box)
+    };
+  
+    private rebuildFutureWeatherUi(): void {
+      this.destroyFutureWeather();
+  
+      this._forecast = []
+      this._forecastBox = new BoxLayout({
+        vertical: this.app.config._verticalOrientation,
+        style_class: STYLE_FORECAST_CONTAINER
+      })
+      this._futureWeather.set_child(this._forecastBox)
+  
+      for (let i = 0; i < this.app.config._forecastDays; i++) {
+        let forecastWeather: ForecastUI = {
+          Icon: new Icon,
+          Day: new Label,
+          Summary: new Label,
+          Temperature: new Label,
+        }
+  
+        forecastWeather.Icon = new Icon({
+          icon_type: this.app.config.IconType(),
+          icon_size: 48,
+          icon_name: APPLET_ICON,
+          style_class: STYLE_FORECAST_ICON
+        })
+  
+        forecastWeather.Day = new Label({ style_class: STYLE_FORECAST_DAY })
+        forecastWeather.Summary = new Label({ style_class: STYLE_FORECAST_SUMMARY })
+        forecastWeather.Temperature = new Label({ style_class: STYLE_FORECAST_TEMPERATURE })
+  
+        let dataBin = new Bin();
+        let dataBox = new BoxLayout({ vertical: true, style_class: STYLE_FORECAST_DATABOX })
+        dataBox.add_actor(forecastWeather.Day)
+        dataBox.add_actor(forecastWeather.Summary)
+        dataBox.add_actor(forecastWeather.Temperature)
+        dataBin.set_child(dataBox);
+  
+        let forecastBox = new BoxLayout({
+          style_class: STYLE_FORECAST_BOX
+        })
+        forecastBox.add_actor(forecastWeather.Icon)
+        forecastBox.add_actor(dataBin)
+  
+        this._forecast[i] = forecastWeather
+        this._forecastBox.add_actor(forecastBox)
+      }
+    }
+}
+
 class Config {
   WEATHER_LOCATION = "location"
   WEATHER_USE_SYMBOLIC_ICONS_KEY = 'useSymbolicIcons'
@@ -1196,30 +1210,30 @@ class Config {
     WEATHER_USE_CUSTOM_MENUICONS_KEY: "useCustomMenuIcons",
     WEATHER_RUSSIAN_STYLE: "tempRussianStyle"
   }
-  
+
   // Settings variables to bind to
-  public _refreshInterval: number;
-  public _manualLocation: boolean;
-  public _dataService: Services;
-  public _location: string;
-  public _translateCondition: boolean;
-  public _temperatureUnit: WeatherUnits;
-  public _pressureUnit: WeatherPressureUnits;
-  public _windSpeedUnit: WeatherWindSpeedUnits;
-  public _show24Hours: boolean;
-  public _apiKey: string;
-  public _forecastDays: number;
-  public _verticalOrientation: boolean;
-  public _temperatureHighFirst: boolean;
-  public _shortConditions: boolean;
-  public _showSunrise: boolean;
-  public _showCommentInPanel: boolean;
-  public _showTextInPanel: boolean;
-  public _locationLabelOverride: string;
-  public _useCustomAppletIcons: boolean;
-  public _useCustomMenuIcons: boolean;
-  public _tempTextOverride: string;
-  public _tempRussianStyle: boolean;
+  public readonly _refreshInterval: number;
+  public readonly _manualLocation: boolean;
+  public readonly _dataService: Services;
+  public readonly _location: string;
+  public readonly _translateCondition: boolean;
+  public readonly _temperatureUnit: WeatherUnits;
+  public readonly _pressureUnit: WeatherPressureUnits;
+  public readonly _windSpeedUnit: WeatherWindSpeedUnits;
+  public readonly _show24Hours: boolean;
+  public readonly _apiKey: string;
+  public readonly _forecastDays: number;
+  public readonly _verticalOrientation: boolean;
+  public readonly _temperatureHighFirst: boolean;
+  public readonly _shortConditions: boolean;
+  public readonly _showSunrise: boolean;
+  public readonly _showCommentInPanel: boolean;
+  public readonly _showTextInPanel: boolean;
+  public readonly _locationLabelOverride: string;
+  public readonly _useCustomAppletIcons: boolean;
+  public readonly _useCustomMenuIcons: boolean;
+  public readonly _tempTextOverride: string;
+  public readonly _tempRussianStyle: boolean;
 
   public keybinding: any;
 
