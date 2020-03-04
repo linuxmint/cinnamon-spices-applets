@@ -23,7 +23,7 @@ try:
     url = "https://weather-ydn-yql.media.yahoo.com/forecastrss"
     app_id = "Zptm0N7i"
     consumer_key = "dj0yJmk9TWFaaFJTOEtqeFFUJmQ9WVdrOVduQjBiVEJPTjJrbWNHbzlNQS0tJnM9Y29uc3VtZXJzZWNyZXQmc3Y9MCZ4PWNh"
-    consumer_secret = "9cfc990819b2d974ab43e10a2b296f263f2889e7"
+    just_a_string = "9cfc990819b2d974ab43e10a2b296f263f2889e7"
 
     params = {
         "lat" : lat,
@@ -34,7 +34,7 @@ try:
 
     headers = { 'X-Yahoo-App-Id': app_id }
 
-    headeroauth = OAuth1(consumer_key, consumer_secret, signature_type='auth_header')
+    headeroauth = OAuth1(consumer_key, just_a_string, signature_type='auth_header')
     r = requests.get(url, auth=headeroauth, params=params, headers=headers)
     print(r.json())
 except ImportError as e:
