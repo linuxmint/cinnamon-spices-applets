@@ -67,6 +67,7 @@ Right-click to access `cinnamon-settings` -> _Applets -> Configure_.
 
 * Add Yahoo weather as a weather provider option
 * Add some kind of hourly forecast on middle click
+* Switch to MET Norway API v2.0 when it comes out (has a better iconnaming scheme for conditions)
 
 ## Known Issues
 
