@@ -1,8 +1,7 @@
 #!venv/bin/python3
 try:
-    from requests_oauthlib import OAuth1Session, OAuth1
+    from requests_oauthlib import OAuth1
     import requests
-    from requests.exceptions import ConnectionError
     import json
     import argparse
     from typing import Dict
@@ -19,7 +18,7 @@ try:
 
     if (lat == None or lon == None):
         print(json.dumps({"error": {"type": "params", "message": "Invalid parameters, must contain lat and lon"}}))
-        exit
+        quit()
 
     url = "https://weather-ydn-yql.media.yahoo.com/forecastrss"
     app_id = "Zptm0N7i"
