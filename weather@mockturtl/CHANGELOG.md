@@ -8,6 +8,8 @@
 * Add Python-JS Yahoo bridge, preparation to add Yahoo back as an option.
 * Add option to use the Custom icon set in the popup menu, not just on the panel.
 * Maximum number of forecasts displayed increased from 5 to 7.
+* Code Refactor in preparation for adding Hourly forecasts on middle click (Config, Main Loop and PopupMenu has its own class now)
+* Work on style to be more consisten accross themes
 
 # 2.4.4
 
