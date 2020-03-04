@@ -3,13 +3,13 @@
 * Fixes [#618](https://github.com/linuxmint/cinnamon-spices-applets/issues/618)
 * Fixes [#2885](https://github.com/linuxmint/cinnamon-spices-applets/issues/2885)
 * Fixes [#2890](https://github.com/linuxmint/cinnamon-spices-applets/issues/2890)
-* Center Sunrise and Sunset Label, and Use icons instead of text naming them.
-* Use weather-icons from [Erik Flowers](https://github.com/erikflowers/weather-icons) instead of Climaicons as it has more icons for more conditions.
+* Center Sunrise and Sunset Label, and use icons instead of text.
+* Use weather-icons from [Erik Flowers](https://github.com/erikflowers/weather-icons) instead of Climaicons as it has more icons for conditions.
 * Add Python-JS Yahoo bridge, preparation to add Yahoo back as an option.
 * Add option to use the Custom icon set in the popup menu, not just on the panel.
 * Maximum number of forecasts displayed increased from 5 to 7.
-* Code Refactor in preparation for adding Hourly forecasts on middle click (Config, Main Loop and PopupMenu has its own class now)
-* Work on style to be more consisten accross themes
+* Code refactor in preparation for adding Hourly forecasts on middle click (Config, Main Loop and PopupMenu has its own class now)
+* Amend styling to be more consistent across themes
 
 # 2.4.4
 
