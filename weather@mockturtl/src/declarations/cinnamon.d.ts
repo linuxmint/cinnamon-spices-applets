@@ -382,6 +382,12 @@ declare namespace imports.gi.St {
         constructor(options ? : any);
     }
 
+    export class ScrollView  extends Bin {
+        set_row_size(row_size:number): void;
+        set_policy(hscroll: any, vscroll: any): void;
+        constructor(options ? : any);
+    }
+
     export class Theme {
         constructor();
         get_custom_stylesheets(): imports.gi.Gio.File[]; 
@@ -458,6 +464,13 @@ declare namespace imports.gi.St {
         SYMBOLIC,
         FULLCOLOR
     }
+
+    /*export enum PolicyType {
+        ALWAYS,
+        AUTOMATIC,
+        EXTERNAL,
+        NEVER
+    }*/
 
     /**
      * Colors are represented by a number from 0 to 255
