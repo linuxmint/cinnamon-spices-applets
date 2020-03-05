@@ -86,7 +86,7 @@ class Weatherbit {
                 condition: {
                     main: json.weather.description,
                     description: json.weather.description,
-                    icon: weatherIconSafely(self.ResolveIcon(json.weather.icon), self.app._icon_type),
+                    icon: weatherIconSafely(self.ResolveIcon(json.weather.icon), self.app.config.IconType()),
                     customIcon: self.ResolveCustomIcon(json.weather.icon)
                 },
                 extra_field: {
@@ -108,7 +108,7 @@ class Weatherbit {
     ParseForecast(json, self) {
         let forecasts = [];
         try {
-            for (let i = 0; i < self.app._forecastDays; i++) {
+            for (let i = 0; i < self.app.config._forecastDays; i++) {
                 let day = json.data[i];
                 let forecast = {
                     date: new Date(day.ts * 1000),
@@ -117,7 +117,7 @@ class Weatherbit {
                     condition: {
                         main: day.weather.description,
                         description: day.weather.description,
-                        icon: weatherIconSafely(self.ResolveIcon(day.weather.icon), self.app._icon_type),
+                        icon: weatherIconSafely(self.ResolveIcon(day.weather.icon), self.app.config.IconType()),
                         customIcon: self.ResolveCustomIcon(day.weather.icon)
                     },
                 };
@@ -150,9 +150,9 @@ class Weatherbit {
         return lang;
     }
     ConstructQuery(query) {
-        let key = this.app._apiKey.replace(" ", "");
-        let location = this.app._location.replace(" ", "");
-        if (this.app.noApiKey()) {
+        let key = this.app.config._apiKey.replace(" ", "");
+        let location = this.app.config._location.replace(" ", "");
+        if (this.app.config.noApiKey()) {
             this.app.log.Error("DarkSky: No API Key given");
             this.app.HandleError({
                 type: "hard",
@@ -166,7 +166,7 @@ class Weatherbit {
             let latLong = location.split(",");
             query = query + "key=" + key + "&lat=" + latLong[0] + "&lon=" + latLong[1] + "&units=S";
             let lang = this.ConvertToAPILocale(this.app.currentLocale);
-            if (isLangSupported(lang, this.supportedLanguages) && this.app._translateCondition) {
+            if (isLangSupported(lang, this.supportedLanguages) && this.app.config._translateCondition) {
                 query = query + "&lang=" + lang;
             }
             return query;
@@ -276,93 +276,93 @@ class Weatherbit {
             case "t01d":
             case "t02d":
             case "t03d":
-                return "Cloud-Lightning-Sun";
+                return "day-thunderstorm-symbolic";
             case "t04d":
             case "t05d":
-                return "Cloud-Lightning";
+                return "thunderstorm-symbolic";
             case "t01n":
             case "t02n":
             case "t03n":
-                return "Cloud-Lightning-Moon";
+                return "night-alt-thunderstorm-symbolic";
             case "t04n":
             case "t05n":
-                return "Cloud-Lightning";
+                return "thunderstorm-symbolic";
             case "d01d":
             case "d02d":
             case "d03d":
             case "d01n":
             case "d02n":
             case "d03n":
-                return "Cloud-Drizzle";
+                return "showers-symbolic";
             case "r01d":
             case "r02d":
             case "r03d":
             case "r01n":
             case "r02n":
             case "r03n":
-                return "Cloud-Rain";
+                return "rain-symbolic";
             case "r04d":
             case "r05d":
-                return "Cloud-Rain-Sun";
+                return "day-rain-symbolic";
             case "r06d":
-                return "Cloud-Rain";
+                return "rain-symbolic";
             case "r04n":
             case "r05n":
-                return "Cloud-Rain-Moon";
+                return "night-alt-rain-symbolic";
             case "r06n":
-                return "Cloud-Rain";
+                return "rain-symbolic";
             case "s01d":
             case "s04d":
-                return "Cloud-Snow-Sun";
+                return "day-snow-symbolic";
             case "s02d":
             case "s03d":
             case "s06d":
-                return "Cloud-Snow";
+                return "snow-symbolic";
             case "s01n":
             case "s04n":
-                return "Cloud-Snow-Moon";
+                return "night-alt-snow-symbolic";
             case "s02n":
             case "s03n":
             case "s06n":
-                return "Cloud-Snow";
+                return "snow-symbolic";
             case "s05d":
             case "s05n":
-                return "Cloud-Hail";
+                return "sleet-symbolic";
             case "a01d":
             case "a02d":
             case "a03d":
             case "a04d":
             case "a05d":
             case "a06d":
-                return "Cloud-Fog-Sun";
+                return "day-fog-symbolic";
             case "a01n":
             case "a02n":
             case "a03n":
             case "a04n":
             case "a05n":
             case "a06n":
-                return "Cloud-Fog-Moon";
+                return "night-fog-symbolic";
             case "c02d":
-                return "Cloud-Sun";
+                return "day-cloudy-symbolic";
             case "c02n":
-                return "Cloud-Moon";
+                return "night-alt-cloudy-symbolic";
             case "c01n":
-                return "Moon";
+                return "night-clear-symbolic";
             case "c01d":
-                return "Sun";
+                return "day-sunny-symbolic";
             case "c03d":
-                return "Cloud-Sun";
+                return "day-cloudy-symbolic";
             case "c03n":
-                return "Cloud-Moon";
+                return "night-alt-cloudy-symbolic";
             case "c04n":
-                return "Cloud";
+                return "cloudy-symbolic";
             case "c04d":
-                return "Cloud";
+                return "cloudy-symbolic";
             case "u00d":
             case "u00n":
-                return "Cloud-Refresh";
+                return "cloud-refresh-symbolic";
             default:
-                return "Cloud-Refresh";
+                return "cloud-refresh-symbolic";
         }
     }
 }

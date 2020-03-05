@@ -16,7 +16,7 @@ var FahrenheitToKelvin = utils.FahrenheitToKelvin as (fahr: number) => number;
 var CelsiusToKelvin = utils.CelsiusToKelvin as (celsius: number) => number;
 var MPHtoMPS = utils.MPHtoMPS as (speed: number) => number;
 var icons = utils.icons;
-var weatherIconSafely = utils.weatherIconSafely as (code: string[], icon_type: string) => string;
+var weatherIconSafely = utils.weatherIconSafely as (code: string[], icon_type: imports.gi.St.IconType) => string;
 
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
@@ -110,7 +110,7 @@ class DarkSky implements WeatherProvider {
                 condition: {
                     main: this.GetShortCurrentSummary(json.currently.summary),
                     description: json.currently.summary,
-                    icon: weatherIconSafely(this.ResolveIcon(json.currently.icon, {sunrise: sunrise, sunset: sunset}), this.app._icon_type),
+                    icon: weatherIconSafely(this.ResolveIcon(json.currently.icon, {sunrise: sunrise, sunset: sunset}), this.app.config.IconType()),
                     customIcon: this.ResolveCustomIcon(json.currently.icon)
                 },
                 extra_field: {
@@ -121,7 +121,7 @@ class DarkSky implements WeatherProvider {
                 forecasts: []
             }
             // Forecast
-            for (let i = 0; i < this.app._forecastDays; i++) {
+            for (let i = 0; i < this.app.config._forecastDays; i++) {
                 let day = json.daily.data[i];
                 let forecast: ForecastData = {          
                     date: new Date(day.time * 1000),         
@@ -130,7 +130,7 @@ class DarkSky implements WeatherProvider {
                     condition: {
                       main: this.GetShortSummary(day.summary),               
                       description: this.ProcessSummary(day.summary),        
-                      icon: weatherIconSafely(this.ResolveIcon(day.icon), this.app._icon_type),    
+                      icon: weatherIconSafely(this.ResolveIcon(day.icon), this.app.config.IconType()),    
                       customIcon: this.ResolveCustomIcon(day.icon)           
                     },
                   };
@@ -162,9 +162,9 @@ class DarkSky implements WeatherProvider {
     private ConstructQuery(): string {
         this.SetQueryUnit();
         let query;
-        let key = this.app._apiKey.replace(" ", "");
-        let location = this.app._location.replace(" ", "");
-        if (this.app.noApiKey()) {
+        let key = this.app.config._apiKey.replace(" ", "");
+        let location = this.app.config._location.replace(" ", "");
+        if (this.app.config.noApiKey()) {
             this.app.log.Error("DarkSky: No API Key given");
             this.app.HandleError({
                 type: "hard",
@@ -177,7 +177,7 @@ class DarkSky implements WeatherProvider {
             query = this.query + key + "/" + location + 
             "?exclude=minutely,hourly,flags" + "&units=" + this.unit;
             let locale = this.ConvertToAPILocale(this.app.currentLocale);
-            if (isLangSupported(locale, this.supportedLanguages) && this.app._translateCondition) {
+            if (isLangSupported(locale, this.supportedLanguages) && this.app.config._translateCondition) {
                 query = query + "&lang=" + locale;
             }
             return query;
@@ -302,37 +302,37 @@ class DarkSky implements WeatherProvider {
     private ResolveCustomIcon(icon: string): CustomIcons {
         switch (icon) {
             case "rain":
-              return "Cloud-Rain";
+              return "rain-symbolic";
             case "snow":
-              return "Cloud-Snow";
+              return "snow-symbolic";
             case "fog":
-              return "Cloud-Fog";
+              return "fog-symbolic";
             case "cloudy":
-              return "Cloud";
+              return "cloudy-symbolic";
             case "partly-cloudy-night":
-              return "Cloud-Moon";
+              return "night-alt-cloudy-symbolic";
             case "partly-cloudy-day":
-              return "Cloud-Sun";
+              return "day-cloudy-symbolic";
             case "clear-night":
-              return "Moon";
+              return "night-clear-symbolic";
             case "clear-day":
-              return "Sun";
+              return "day-sunny-symbolic";
             // Have not seen Storm or Showers icons returned yet
             case "storm":
-              return "Cloud-Lightning";
+              return "thunderstorm-symbolic";
             case "showers":
-              return "Cloud-Drizzle";
+              return "showers-symbolic";
             // There is no guarantee that there is a wind icon
             case "wind":
-                return "Wind";
+                return "strong-wind-symbolic";
             default:
-              return "Cloud-Refresh";
+              return "cloud-refresh-symbolic";
           }
     }
 
     private SetQueryUnit(): void {
-        if (this.app._temperatureUnit == "celsius"){
-            if (this.app._windSpeedUnit == "kph" || this.app._windSpeedUnit == "m/s") {
+        if (this.app.config._temperatureUnit == "celsius"){
+            if (this.app.config._windSpeedUnit == "kph" || this.app.config._windSpeedUnit == "m/s") {
                 this.unit = 'si';
             }
             else {

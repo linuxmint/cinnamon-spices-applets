@@ -63,10 +63,17 @@ Right-click to access `cinnamon-settings` -> _Applets -> Configure_.
 
 [Mailing list](http://groups.google.com/group/cinnamon-weather)
 
+## Future Plans
+
+* Add Yahoo weather as a weather provider option
+* Add some kind of hourly forecast on middle click
+* Switch to MET Norway API v2.0 when it comes out (has a better iconnaming scheme for conditions)
+
 ## Known Issues
 
 * Sunset/Sunrise is not displayed correctly if there is a mismatch between the Location Timezone and System Timezone when using Manual Location
 * DarkSky verbose conditions are only in cm/celsius or in/fahrenheit
+* Location button does not indicate that its hovered over with light themes.
 
 ### Troubleshooting
 

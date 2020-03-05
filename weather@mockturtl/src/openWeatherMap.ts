@@ -13,7 +13,7 @@ var isCoordinate = utils.isCoordinate as (text: any) => boolean;
 var isLangSupported = utils.isLangSupported as (lang: string, languages: Array <string> ) => boolean;
 var isID = utils.isID as (text: any) => boolean;
 var icons = utils.icons;
-var weatherIconSafely = utils.weatherIconSafely as (code: string[], icon_type: string) => string;
+var weatherIconSafely = utils.weatherIconSafely as (code: string[], icon_type: imports.gi.St.IconType) => string;
 var get = utils.get as (p: string[], o: any) => any;
 
 //////////////////////////////////////////////////////////////
@@ -39,7 +39,6 @@ class OpenWeatherMap implements WeatherProvider {
     constructor (_app: WeatherApplet) {
       this.app = _app;
     }
-
 
     //--------------------------------------------------------
     //  Functions
@@ -116,7 +115,7 @@ class OpenWeatherMap implements WeatherProvider {
             condition: {
               main: get(["weather", "0", "main"], json),
               description: get(["weather", "0", "description"], json),
-              icon: weatherIconSafely(self.ResolveIcon(get(["weather", "0", "icon"], json)), self.app._icon_type),
+              icon: weatherIconSafely(self.ResolveIcon(get(["weather", "0", "icon"], json)), self.app.config.IconType()),
               customIcon: self.ResolveCustomIcon(get(["weather", "0", "icon"], json))
             },
             extra_field: {
@@ -139,7 +138,7 @@ class OpenWeatherMap implements WeatherProvider {
     private ParseForecast(json: any, self: OpenWeatherMap): ForecastData[] {
       let forecasts: ForecastData[] = [];
       try {
-        for (let i = 0; i < self.app._forecastDays; i++) {
+        for (let i = 0; i < self.app.config._forecastDays; i++) {
           let day = json.list[i];
           let forecast: ForecastData = {          
               date: new Date(day.dt * 1000),
@@ -148,7 +147,7 @@ class OpenWeatherMap implements WeatherProvider {
               condition: {
                   main: day.weather[0].main,
                   description: day.weather[0].description,
-                  icon: weatherIconSafely(self.ResolveIcon(day.weather[0].icon), self.app._icon_type),
+                  icon: weatherIconSafely(self.ResolveIcon(day.weather[0].icon), self.app.config.IconType()),
                   customIcon: self.ResolveCustomIcon(day.weather[0].icon)
               },
           };
@@ -171,7 +170,7 @@ class OpenWeatherMap implements WeatherProvider {
              // Append Language if supported and enabled
             query += "1c73f8259a86c6fd43c7163b543c8640";
             let locale: string = this.ConvertToAPILocale(this.app.currentLocale);
-            if (this.app._translateCondition && isLangSupported(locale, this.supportedLanguages)) {
+            if (this.app.config._translateCondition && isLangSupported(locale, this.supportedLanguages)) {
                 query = query + "&lang=" + locale;
             }
             return query;
@@ -183,7 +182,7 @@ class OpenWeatherMap implements WeatherProvider {
     };
 
     private ParseLocation(): string {
-        let loc = this.app._location.replace(/ /g, "");
+        let loc = this.app.config._location.replace(/ /g, "");
         if (isCoordinate(loc)) {
             let locArr = loc.split(',');
             return "lat=" + locArr[0] + "&lon=" + locArr[1];
@@ -316,43 +315,43 @@ class OpenWeatherMap implements WeatherProvider {
    private ResolveCustomIcon(icon: string): CustomIcons {
     switch (icon) {
         case "10d":/* rain day */
-          return "Cloud-Rain-Sun";
+          return "day-rain-symbolic";
         case "10n":/* rain night */
-          return "Cloud-Rain-Moon";
+          return "night-rain-symbolic";
         case "09n":/* showers nigh*/
-          return "Cloud-Drizzle-Moon";
+          return "night-showers-symbolic";
         case "09d":/* showers day */
-          return "Cloud-Drizzle-Sun"
+          return "day-showers-symbolic"
         case "13d":/* snow day*/
-          return "Cloud-Snow-Sun"
+          return "day-snow-symbolic"
         case "13n":/* snow night */
-          return "Cloud-Snow-Moon"
+          return "night-alt-snow-symbolic"
         case "50d":/* mist day */
-          return "Cloud-Fog-Sun-Alt"
+          return "day-fog-symbolic"
         case "50n":/* mist night */
-          return "Cloud-Fog-Moon-Alt"
+          return "night-fog-symbolic"
         case "04d":/* broken clouds day */
-          return "Cloud-Sun"
+          return "day-cloudy-symbolic"
         case "04n":/* broken clouds night */
-          return "Cloud-Moon"
+          return "night-alt-cloudy-symbolic"
         case "03n":/* mostly cloudy (night) */
-          return "Cloud-Moon"
+          return "night-alt-cloudy-symbolic"
         case "03d":/* mostly cloudy (day) */
-          return "Cloud-Sun"
+          return "day-cloudy-symbolic"
         case "02n":/* partly cloudy (night) */
-          return "Cloud-Moon"
+          return "night-alt-cloudy-symbolic"
         case "02d":/* partly cloudy (day) */
-          return "Cloud-Sun"
+          return "day-cloudy-symbolic"
         case "01n":/* clear (night) */
-          return "Moon"
+          return "night-clear-symbolic"
         case "01d":/* sunny */
-          return "Sun"
+          return "day-sunny-symbolic"
         case "11d":/* storm day */
-          return "Cloud-Lightning-Sun"
+          return "day-thunderstorm-symbolic"
         case "11n":/* storm night */
-          return "Cloud-Lightning-Moon"
+          return "night-alt-thunderstorm-symbolic"
         default:
-          return "Cloud-Refresh"
+          return "cloud-refresh-symbolic"
       }
   };
 };

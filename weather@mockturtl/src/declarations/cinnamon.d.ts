@@ -191,6 +191,8 @@ declare namespace imports.ui.applet {
         protected set_show_label_in_vertical_panels (show: boolean): void;
         protected hide_applet_icon(): void;
         protected panel: any;
+        protected actor: imports.gi.St.BoxLayout;
+        protected _applet_context_menu: any;
     }
 
     /**
@@ -201,13 +203,12 @@ declare namespace imports.ui.applet {
      *
      * Inherits: PopupMenu.PopupMenu
      */
-    export class AppletPopupMenu extends popupMenu.PopupIconMenuItem {
-        constructor(context: any, orinentation: string);
+    export class AppletPopupMenu extends popupMenu.PopupMenu {
+        constructor(context: any, orinentation: imports.gi.St.Side);
 
         _onOrientationChanged(a: any, orientation: string): void;
         _onOpenStateChanged(menu: any, open: any, sourceActor: any): void;
         setCustomStyleClass(classname: string): void;
-        actor: any;
         addActor(menu: any): void;
         toggle(): void;
     }
@@ -255,12 +256,18 @@ declare namespace imports.ui.messageTray {
 }
 
 declare namespace imports.ui.popupMenu {
+    export class PopupMenuBase {
+        constructor(context: any);
+        box: imports.gi.St.BoxLayout;
+    }
     export class PopupMenuManager {
         constructor(context: any);
         addMenu(menu: any): void;
     }
-    export class PopupMenu {
+    export class PopupMenu extends PopupMenuBase {
         constructor();
+        public customStyleClass: string;
+        public actor: imports.gi.St.Bin;
     }
     export class PopupIconMenuItem {
 
@@ -280,9 +287,6 @@ declare namespace imports.ui.settings {
         BIDIRECTIONAL = 2,
         OUT = 3
     }
-
-
-
 }
 declare namespace imports.ui.appletManager {
     export var applets: any;
@@ -339,6 +343,11 @@ declare namespace imports.gi.St {
         destroy(): void;
         style_class: string;
         connect(id: string, binding: (...args: any) => any): void;
+        add_style_class_name(style_class: string): void; 
+        get_style_class_name(): string;
+        get_style(): string;
+        get_theme(): imports.gi.St.Theme;
+        get_theme_node(): ThemeNode;
     }
     export class BoxLayout extends Widget {
         constructor(options ? : any)
@@ -351,6 +360,9 @@ declare namespace imports.gi.St {
     }
     export class DrawingArea extends Widget {
         constructor(options ? : any)
+        queue_repaint(): void;
+        get_context(): any;
+        get_surface_size(): number[];
         width: number;
     }
     export class Label extends Widget {
@@ -358,7 +370,7 @@ declare namespace imports.gi.St {
         constructor(options ? : any);
     }
     export class Icon extends Widget {
-        icon_type: string;
+        icon_type: IconType;
         icon_size: number;
         icon_name: string;
         constructor(options ? : any);
@@ -370,16 +382,109 @@ declare namespace imports.gi.St {
         constructor(options ? : any);
     }
 
+    export class ScrollView  extends Bin {
+        set_row_size(row_size:number): void;
+        set_policy(hscroll: any, vscroll: any): void;
+        constructor(options ? : any);
+    }
+
+    export class Theme {
+        constructor();
+        get_custom_stylesheets(): imports.gi.Gio.File[]; 
+    }
+
+    export class ThemeNode {
+        constructor();
+        get_length(property: string): number;
+        get_foreground_color(): Color;
+        get_background_color(): Color;
+        geometry_equal(other: ThemeNode): boolean;
+        get_background_gradient(): any;
+        get_background_image(): imports.gi.Gio.File;
+        get_background_image_shadow(): any //shadow;
+        get_background_paint_box(allocation: any): any; //clutter.ActorBox
+        get_border_color(side: Side): Color;
+        get_border_image(): any; //BorderImage
+        get_border_radius(corner: any): number;
+        get_border_width(side: Side): number;
+        get_box_shadow(): any; //shadow
+        get_color(property_name: string): Color;
+        /*get_content_box(allocation)
+        get_double(property_name)
+        get_element_classes()
+        get_element_id()
+        get_element_type()
+        get_font()
+        get_font_features()
+        get_foreground_color()
+        get_height()
+        get_horizontal_padding()
+        get_icon_colors()
+        get_icon_style()
+        get_length(property_name)
+        get_letter_spacing()
+        get_margin(side)
+        get_max_height()
+        get_max_width()
+        get_min_height()
+        get_min_width()
+        get_outline_color()
+        get_outline_width()
+        get_padding(side)
+        get_paint_box(allocation)
+        get_parent()
+        get_pseudo_classes()
+        get_shadow(property_name)
+        get_text_align()
+        get_text_decoration()
+        get_text_shadow()
+        get_theme()
+        get_transition_duration()
+        get_url(property_name)
+        get_vertical_padding()
+        get_width()
+        hash()
+        invalidate_background_image()
+        invalidate_border_image()
+        lookup_color(property_name, inherit)
+        lookup_double(property_name, inherit)
+        lookup_length(property_name, inherit)
+        lookup_shadow(property_name, inherit)
+        lookup_time(property_name, inherit)
+        lookup_url(property_name, inherit)
+        paint_equal(other)*/
+        to_string(): string;
+    }
+
     export enum Side {
         LEFT,
         RIGHT
     }
-    export interface IconTypes {
-        SYMBOLIC: string,
-        FULLCOLOR: string
+    export enum IconType {
+        SYMBOLIC,
+        FULLCOLOR
     }
 
-    export const IconType: IconTypes;
+    /*export enum PolicyType {
+        ALWAYS,
+        AUTOMATIC,
+        EXTERNAL,
+        NEVER
+    }*/
+
+    /**
+     * Colors are represented by a number from 0 to 255
+     */
+    export interface Color {
+        red: number;
+        green: number;
+        blue: number;
+        alpha: number;
+    }
+
+    export interface Shadow {
+
+    }
 }
 
 declare namespace imports.misc.config {

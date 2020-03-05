@@ -1,16 +1,7 @@
-Notice: Icons have been modified (enlarged) by Attila Greguss to be usable in Cinnamon panel.
+Notice: Icons used are named "weather-icons" available from here: https://github.com/erikflowers/weather-icons
 
-Licence from http://adamwhitcroft.com/climacons/ :
+Licence: OFL Licence
+https://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=OFL
 
-By downloading the icons, you agree to the following terms: The icons are released 
-'AS IS'. You waive the implied warranty of infringement. 
-You may use the icons in any personal or commercial works without 
-obligation of payment, monetary or otherwise, or attribution to Adam Whitcroft. 
-You may not resell or redistribute the icons (or modified versions of the icons). 
-Intellectual property rights are not transferred with the download of the icons. 
-In no event will Adam Whitcroft be held liable for any costs, damages or losses 
-arising from your use of the icons, including third-party claims against you.
-
-©Adam Whitcroft
-Version 1.1 • @adamwhitcroft • Buy me a coffee 
-http://adamwhitcroft.com/climacons/
+Icons created to extend the iconset by Attila Greguss:
+	sleet-storm-symbolic.svg

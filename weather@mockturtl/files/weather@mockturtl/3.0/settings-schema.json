@@ -84,7 +84,7 @@
   { "type": "spinbutton"
   , "default": 2
   , "min": 2
-  , "max": 5
+  , "max": 7
   , "units": "days"
   , "step": 1
   , "description": "Forecast length"
@@ -110,7 +110,8 @@
     { "kph": "kph"
     , "mph": "mph"
     , "m/s": "m/s"
-    , "knots": "Knots"
+    , "knots": "Knots",
+      "Beaufort": "Beaufort"
     }
   },
   "pressureUnit":
@@ -151,7 +152,7 @@
   "useCustomAppletIcons":
   { "type": "checkbox"
   , "default": false
-  , "tootlip": "Uses a slightly modified version of Climaicons"
+  , "tootlip": "Iconset is weather-icons by Erik Flowers"
   , "description": "Use custom icons on the panel"
   },
 "displaySettings":
@@ -177,6 +178,11 @@
   { "type": "checkbox"
   , "default": false
   , "description": "Show high temperature first in forecast"
+  },
+  "tempRussianStyle":
+  { "type": "checkbox"
+  , "default": false
+  , "description": "Show temperature Russian style"
   }
   , "locationLabelOverride":
   { "type": "entry"
@@ -206,6 +212,12 @@
   { "type": "checkbox"
   , "default": false
   , "description": "Use symbolic icons in the applet"
+  },
+  "useCustomMenuIcons":
+  { "type": "checkbox"
+  , "default": false
+  , "description": "Use custom icons in the popup menu",
+   "tootlip": "Iconset is weather-icons by Erik Flowers"
   },
   "credits": {
     "type": "header",

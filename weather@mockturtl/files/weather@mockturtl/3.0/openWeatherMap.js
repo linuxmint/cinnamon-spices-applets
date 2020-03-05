@@ -143,7 +143,7 @@ var OpenWeatherMap = (function () {
                 condition: {
                     main: get(["weather", "0", "main"], json),
                     description: get(["weather", "0", "description"], json),
-                    icon: weatherIconSafely(self.ResolveIcon(get(["weather", "0", "icon"], json)), self.app._icon_type),
+                    icon: weatherIconSafely(self.ResolveIcon(get(["weather", "0", "icon"], json)), self.app.config.IconType()),
                     customIcon: self.ResolveCustomIcon(get(["weather", "0", "icon"], json))
                 },
                 extra_field: {
@@ -165,7 +165,7 @@ var OpenWeatherMap = (function () {
     OpenWeatherMap.prototype.ParseForecast = function (json, self) {
         var forecasts = [];
         try {
-            for (var i = 0; i < self.app._forecastDays; i++) {
+            for (var i = 0; i < self.app.config._forecastDays; i++) {
                 var day = json.list[i];
                 var forecast = {
                     date: new Date(day.dt * 1000),
@@ -174,7 +174,7 @@ var OpenWeatherMap = (function () {
                     condition: {
                         main: day.weather[0].main,
                         description: day.weather[0].description,
-                        icon: weatherIconSafely(self.ResolveIcon(day.weather[0].icon), self.app._icon_type),
+                        icon: weatherIconSafely(self.ResolveIcon(day.weather[0].icon), self.app.config.IconType()),
                         customIcon: self.ResolveCustomIcon(day.weather[0].icon)
                     },
                 };
@@ -196,7 +196,7 @@ var OpenWeatherMap = (function () {
             query = query + locString + "&APPID=";
             query += "1c73f8259a86c6fd43c7163b543c8640";
             var locale = this.ConvertToAPILocale(this.app.currentLocale);
-            if (this.app._translateCondition && isLangSupported(locale, this.supportedLanguages)) {
+            if (this.app.config._translateCondition && isLangSupported(locale, this.supportedLanguages)) {
                 query = query + "&lang=" + locale;
             }
             return query;
@@ -207,7 +207,7 @@ var OpenWeatherMap = (function () {
     };
     ;
     OpenWeatherMap.prototype.ParseLocation = function () {
-        var loc = this.app._location.replace(/ /g, "");
+        var loc = this.app.config._location.replace(/ /g, "");
         if (isCoordinate(loc)) {
             var locArr = loc.split(',');
             return "lat=" + locArr[0] + "&lon=" + locArr[1];
@@ -330,43 +330,43 @@ var OpenWeatherMap = (function () {
     OpenWeatherMap.prototype.ResolveCustomIcon = function (icon) {
         switch (icon) {
             case "10d":
-                return "Cloud-Rain-Sun";
+                return "day-rain-symbolic";
             case "10n":
-                return "Cloud-Rain-Moon";
+                return "night-rain-symbolic";
             case "09n":
-                return "Cloud-Drizzle-Moon";
+                return "night-showers-symbolic";
             case "09d":
-                return "Cloud-Drizzle-Sun";
+                return "day-showers-symbolic";
             case "13d":
-                return "Cloud-Snow-Sun";
+                return "day-snow-symbolic";
             case "13n":
-                return "Cloud-Snow-Moon";
+                return "night-alt-snow-symbolic";
             case "50d":
-                return "Cloud-Fog-Sun-Alt";
+                return "day-fog-symbolic";
             case "50n":
-                return "Cloud-Fog-Moon-Alt";
+                return "night-fog-symbolic";
             case "04d":
-                return "Cloud-Sun";
+                return "day-cloudy-symbolic";
             case "04n":
-                return "Cloud-Moon";
+                return "night-alt-cloudy-symbolic";
             case "03n":
-                return "Cloud-Moon";
+                return "night-alt-cloudy-symbolic";
             case "03d":
-                return "Cloud-Sun";
+                return "day-cloudy-symbolic";
             case "02n":
-                return "Cloud-Moon";
+                return "night-alt-cloudy-symbolic";
             case "02d":
-                return "Cloud-Sun";
+                return "day-cloudy-symbolic";
             case "01n":
-                return "Moon";
+                return "night-clear-symbolic";
             case "01d":
-                return "Sun";
+                return "day-sunny-symbolic";
             case "11d":
-                return "Cloud-Lightning-Sun";
+                return "day-thunderstorm-symbolic";
             case "11n":
-                return "Cloud-Lightning-Moon";
+                return "night-alt-thunderstorm-symbolic";
             default:
-                return "Cloud-Refresh";
+                return "cloud-refresh-symbolic";
         }
     };
     ;
