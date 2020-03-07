@@ -1,0 +1,36 @@
+# Dutch translation for cinnamon-weather (weather@mockturtl)
+# Copyright (C) 2019
+# This file is distributed under the same license as the cinnamon-weather package.
+# Pjotr <pjotrvertaalt@gmail.com>, 2013-2019.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Weather (weather@mockturtl) Version 2.4.5 (2020-03-05 "
+"08:38:14)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-03-04 21:37+0000\n"
+"PO-Revision-Date: 2020-03-07 12:09+0100\n"
+"Last-Translator: Jurien (French77) <Jurien@protonmail.com>\n"
+"Language-Team: Jurien@protonmail.com\n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.6\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: applet.js:337 3.0/applet.js:189 3.8/applet.js:138
+msgid "..."
+msgstr "..."
+
+#: applet.js:338 3.0/applet.js:190 3.8/applet.js:139
+msgid "Click to open"
+msgstr "Klik om te openen"
+
+#: applet.js:389
+msgid "Settings"
+msgstr "Instellingen"
+
+#: applet.js:511
+msgid "No location provided"
+msgstr "Geen locatie opgegeven"
