@@ -186,11 +186,11 @@ msgstr "Gematigd briesje"
 
 #: 3.0/utils.js:211 3.8/utils.js:164
 msgid "Fresh breeze"
-msgstr "Frisse briesje"
+msgstr "Frisse bries"
 
 #: 3.0/utils.js:214 3.8/utils.js:167
 msgid "Strong breeze"
-msgstr "Sterk briesje"
+msgstr "Sterk bries"
 
 #: 3.0/utils.js:217 3.8/utils.js:170
 msgid "Near gale"
