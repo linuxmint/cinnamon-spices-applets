@@ -5,13 +5,12 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 2.0\n"
+"Project-Id-Version: 2.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-24 10:42+0000\n"
-"PO-Revision-Date: 2019-05-11 17:35+0200\n"
+"POT-Creation-Date: 2019-12-05 19:59+0000\n"
+"PO-Revision-Date: 2020-01-14 20:15+0100\n"
 "Last-Translator: Fotobob <fotobob1@centrum.cz>\n"
-"Language-Team: partly used outdated mhladik@seznam.cz translation"
-"translation)\n"
+"Language-Team: partly used outdated mhladik@seznam.cz translation)\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,659 +18,764 @@ msgstr ""
 "X-Generator: Poedit 2.0.6\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
-#: applet.js:337 3.6/applet.js:337 3.8/applet.js:401
+#: applet.js:337 3.0/applet.js:231 3.8/applet.js:180
 msgid "..."
 msgstr "…"
 
-#: applet.js:338 3.6/applet.js:338 3.8/applet.js:402
+#: applet.js:338 3.0/applet.js:232 3.8/applet.js:181
 msgid "Click to open"
 msgstr "Klikni pro zobrazení"
 
-#: applet.js:389 3.6/applet.js:389 3.8/applet.js:456
+#: applet.js:389
 msgid "Settings"
 msgstr "Nastavení"
 
-#: applet.js:511 3.6/applet.js:511
+#: applet.js:511
 msgid "No location provided"
-msgstr "Poloha není k dispozici"
+msgstr "Pozice není k dispozici"
 
-#: applet.js:610 3.6/applet.js:610 3.8/applet.js:743
-msgid "Cloudiness"
-msgstr "Oblačnost"
+#: applet.js:610
+msgid "Cloudiness:"
+msgstr "Oblačnost:"
 
-#: applet.js:634 3.6/applet.js:634 3.8/applet.js:781
+#: applet.js:634 3.0/applet.js:646 3.8/applet.js:545
 msgid "Sunrise"
 msgstr "Východ"
 
-#: applet.js:635 3.6/applet.js:635 3.8/applet.js:782
+#: applet.js:635 3.0/applet.js:647 3.8/applet.js:546
 msgid "Sunset"
 msgstr "Západ"
 
-#: applet.js:708 3.6/applet.js:708 3.8/applet.js:892
+#: applet.js:708 3.0/applet.js:736 3.8/applet.js:635
 msgid "Loading current weather ..."
-msgstr "Zjišťuji aktuální počasí …"
+msgstr "Načítám aktuální počasí …"
 
-#: applet.js:709 3.6/applet.js:709 3.8/applet.js:893
+#: applet.js:709 3.0/applet.js:739 3.8/applet.js:638
 msgid "Loading future weather ..."
-msgstr "Zjišťuji jaké bude počasí …"
+msgstr "Načítám předpověď počasí …"
 
-#: applet.js:731 3.6/applet.js:731 3.8/applet.js:915
+#: applet.js:731 3.0/applet.js:768 3.8/applet.js:667
 msgid "Loading ..."
 msgstr "Nahrávám …"
 
-#: applet.js:737 3.6/applet.js:737 3.8/applet.js:921
+#: applet.js:737 3.0/applet.js:265 3.0/applet.js:758 3.8/applet.js:214
+#: 3.8/applet.js:657
 msgid "Refresh"
 msgstr "Znovunačtení"
 
-#: applet.js:802 3.6/applet.js:802 3.8/applet.js:985
+#: applet.js:802 3.0/applet.js:790 3.8/applet.js:689
 msgid "Temperature:"
 msgstr "Teplota:"
 
-#: applet.js:804 3.6/applet.js:804 3.8/applet.js:987
+#: applet.js:804 3.0/applet.js:791 3.8/applet.js:690
 msgid "Humidity:"
 msgstr "Vlhkost:"
 
-#: applet.js:806 3.6/applet.js:806 3.8/applet.js:989
+#: applet.js:806 3.0/applet.js:792 3.8/applet.js:691
 msgid "Pressure:"
 msgstr "Tlak:"
 
-#: applet.js:808 3.6/applet.js:808 3.8/applet.js:991
+#: applet.js:808 3.0/applet.js:793 3.8/applet.js:692
 msgid "Wind:"
 msgstr "Vítr:"
 
-#: applet.js:1026 3.6/applet.js:1026 3.8/applet.js:1211
+#: applet.js:1026 3.0/utils.js:96 3.8/utils.js:96
 msgid "Sunday"
 msgstr "Neděle"
 
-#: applet.js:1026 3.6/applet.js:1026 3.8/applet.js:1211
+#: applet.js:1026 3.0/utils.js:96 3.8/utils.js:96
 msgid "Monday"
 msgstr "Pondělí"
 
-#: applet.js:1026 3.6/applet.js:1026 3.8/applet.js:1211
+#: applet.js:1026 3.0/utils.js:96 3.8/utils.js:96
 msgid "Tuesday"
 msgstr "Úterý"
 
-#: applet.js:1026 3.6/applet.js:1026 3.8/applet.js:1211
+#: applet.js:1026 3.0/utils.js:96 3.8/utils.js:96
 msgid "Wednesday"
 msgstr "Středa"
 
-#: applet.js:1026 3.6/applet.js:1026 3.8/applet.js:1211
+#: applet.js:1026 3.0/utils.js:96 3.8/utils.js:96
 msgid "Thursday"
 msgstr "Čtvrtek"
 
-#: applet.js:1026 3.6/applet.js:1026 3.8/applet.js:1211
+#: applet.js:1026 3.0/utils.js:96 3.8/utils.js:96
 msgid "Friday"
 msgstr "Pátek"
 
-#: applet.js:1026 3.6/applet.js:1026 3.8/applet.js:1211
+#: applet.js:1026 3.0/utils.js:96 3.8/utils.js:96
 msgid "Saturday"
 msgstr "Sobota"
 
-#: applet.js:1030 3.6/applet.js:1030 3.8/applet.js:1216
+#: applet.js:1030 3.0/utils.js:206 3.8/utils.js:202
 msgid "N"
 msgstr "S"
 
-#: applet.js:1030 3.6/applet.js:1030 3.8/applet.js:1216
+#: applet.js:1030 3.0/utils.js:206 3.8/utils.js:202
 msgid "NE"
 msgstr "SV"
 
-#: applet.js:1030 3.6/applet.js:1030 3.8/applet.js:1216
+#: applet.js:1030 3.0/utils.js:206 3.8/utils.js:202
 msgid "E"
 msgstr "V"
 
-#: applet.js:1030 3.6/applet.js:1030 3.8/applet.js:1216
+#: applet.js:1030 3.0/utils.js:206 3.8/utils.js:202
 msgid "SE"
 msgstr "JV"
 
-#: applet.js:1030 3.6/applet.js:1030 3.8/applet.js:1216
+#: applet.js:1030 3.0/utils.js:206 3.8/utils.js:202
 msgid "S"
 msgstr "J"
 
-#: applet.js:1030 3.6/applet.js:1030 3.8/applet.js:1216
+#: applet.js:1030 3.0/utils.js:206 3.8/utils.js:202
 msgid "SW"
-msgstr "JW"
+msgstr "JZ"
 
-#: applet.js:1030 3.6/applet.js:1030 3.8/applet.js:1216
+#: applet.js:1030 3.0/utils.js:206 3.8/utils.js:202
 msgid "W"
 msgstr "Z"
 
-#: applet.js:1030 3.6/applet.js:1030 3.8/applet.js:1216
+#: applet.js:1030 3.0/utils.js:206 3.8/utils.js:202
 msgid "NW"
 msgstr "SZ"
 
-#: applet.js:1080 3.6/applet.js:1080
+#: applet.js:1080
 msgid "Service Unavailable"
 msgstr "Služba nedostupná"
 
-#: applet.js:1084 3.6/applet.js:1084 3.8/applet.js:338
+#: applet.js:1084 3.0/applet.js:192 3.0/applet.js:194 3.0/applet.js:196
+#: 3.0/applet.js:199 3.0/applet.js:202 3.0/applet.js:203 3.0/applet.js:204
+#: 3.0/applet.js:205 3.8/applet.js:142 3.8/applet.js:144 3.8/applet.js:146
+#: 3.8/applet.js:149 3.8/applet.js:152 3.8/applet.js:153 3.8/applet.js:154
+#: 3.8/applet.js:155
 msgid "Service Error"
 msgstr "Chyba služby"
 
-#: applet.js:1086 3.6/applet.js:1086 3.8/applet.js:343
+#: applet.js:1086
 msgid "Wrong API Key"
 msgstr "Chybný API klíč"
 
-#: applet.js:1089 3.6/applet.js:1089
+#: applet.js:1089
 msgid "City Not found"
 msgstr "Město nenalezeno"
 
-#: applet.js:1092 3.6/applet.js:1092 3.8/applet.js:347
+#: applet.js:1092
 msgid "Key Temp. Blocked"
 msgstr "Klíč dočasně zablokován"
 
-#: 3.8/applet.js:337
-msgid "Error"
-msgstr "Chyba"
+#: 3.0/openWeatherMap.js:149 3.8/openWeatherMap.js:91
+msgid "Cloudiness"
+msgstr "Oblačnost"
 
-#: 3.8/applet.js:339
-msgid "No Api key"
-msgstr "Chybí API klíč"
+#: 3.0/openWeatherMap.js:159 3.8/openWeatherMap.js:101
+msgid "Failed to Process Current Weather Info"
+msgstr "Zpracování informací o aktuálním počasí selhalo"
 
-#: 3.8/applet.js:340
-msgid "No Location"
-msgstr "Poloha není k dispozici"
+#: 3.0/openWeatherMap.js:185 3.8/openWeatherMap.js:127
+msgid "Failed to Process Forecast Info"
+msgstr "Zpracování informací s předpovědí selhalo"
 
-#: 3.8/applet.js:344
-msgid "Wrong Location"
-msgstr "Špatně zadaná poloha"
+#: 3.0/openWeatherMap.js:201 3.8/openWeatherMap.js:143
+msgid "Please enter a Location in settings"
+msgstr "Zadej prosím lokalitu v nastaveních"
 
-#: 3.8/applet.js:345
-msgid "Location Not found"
-msgstr "Poloha není k dispozici"
+#: 3.0/openWeatherMap.js:228 3.8/openWeatherMap.js:170
+msgid "Please make sure Location is in the correct format in the Settings"
+msgstr ""
+"Ujisti se prosím, že je lokalita zadána ve správném formátu v nastaveních"
 
-#: 3.8/applet.js:346
-msgid "Parsing weather information failed :("
-msgstr "Analýza informace o počasí selhala :("
+#: 3.0/openWeatherMap.js:232 3.8/openWeatherMap.js:174
+msgid "Make sure you entered the correct key in settings"
+msgstr "Ujisti se, že jsi zadal správný klíč v nastavení"
 
-#: 3.8/applet.js:348
-msgid "Could not get location"
-msgstr "Nelze zjistit polohu"
+#: 3.0/openWeatherMap.js:236 3.0/openWeatherMap.js:256
+#: 3.8/openWeatherMap.js:178 3.8/openWeatherMap.js:198
+msgid ""
+"Location not found, make sure location is available or it is in the correct "
+"format"
+msgstr ""
+"Lokalita nenalezena. Ujististi se, že je zvolená lokalita dostupná a jestli "
+"je ve správném formátu"
 
-#: 3.8/applet.js:349
-msgid "Unknown Error"
-msgstr "Neznámá chyba"
+#: 3.0/openWeatherMap.js:240 3.8/openWeatherMap.js:182
+msgid "If this problem persists, please contact the Author of this applet"
+msgstr "Pokud problém přetrvává, kontaktuj prosím autora appletu"
 
-#: 3.8/applet.js:350
-msgid "No/Bad response from Data Service"
-msgstr "Žádná či chybná odpověď Datové Služby"
+#: 3.0/openWeatherMap.js:244 3.8/openWeatherMap.js:186
+msgid "Unknown Error, please see the logs in Looking Glass"
+msgstr "Neznámá chyba, detaily jsou v Looking Glass logu"
 
-#: 3.8/applet.js:355
-msgid "and"
-msgstr "a"
-
-#: 3.8/applet.js:355
-msgid "until"
-msgstr "až do"
-
-#: 3.8/applet.js:355
-msgid "in"
-msgstr "v"
-
-#: 3.8/applet.js:749
-msgid "Feels like:"
-msgstr "Pocitově:"
-
-#: 3.8/applet.js:1234
+#: 3.0/openWeatherMap.js:309 3.8/openWeatherMap.js:250
 msgid "Thunderstorm with light rain"
 msgstr "Bouřka se slabým deštěm"
 
-#: 3.8/applet.js:1235
+#: 3.0/openWeatherMap.js:310 3.8/openWeatherMap.js:251
 msgid "Thunderstorm with rain"
 msgstr "Bouřka s deštěm"
 
-#: 3.8/applet.js:1236
+#: 3.0/openWeatherMap.js:311 3.8/openWeatherMap.js:252
 msgid "Thunderstorm with heavy rain"
 msgstr "Bouřka s přívalovým deštěm"
 
-#: 3.8/applet.js:1237
+#: 3.0/openWeatherMap.js:312 3.8/openWeatherMap.js:253
 msgid "Light thunderstorm"
 msgstr "Slabá bouřka"
 
-#: 3.8/applet.js:1238
+#: 3.0/openWeatherMap.js:313 3.8/openWeatherMap.js:254
 msgid "Thunderstorm"
 msgstr "Bouřka"
 
-#: 3.8/applet.js:1239
+#: 3.0/openWeatherMap.js:314 3.8/openWeatherMap.js:255
 msgid "Heavy thunderstorm"
-msgstr "Silná bouřka"
+msgstr "Silná bouře"
 
-#: 3.8/applet.js:1240
+#: 3.0/openWeatherMap.js:315 3.8/openWeatherMap.js:256
 msgid "Ragged thunderstorm"
 msgstr "Lokální bouřky"
 
-#: 3.8/applet.js:1241
+#: 3.0/openWeatherMap.js:316 3.8/openWeatherMap.js:257
 msgid "Thunderstorm with light drizzle"
 msgstr "Bouřka s mírným mrholením"
 
-#: 3.8/applet.js:1242
+#: 3.0/openWeatherMap.js:317 3.8/openWeatherMap.js:258
 msgid "Thunderstorm with drizzle"
 msgstr "Bouřka s mrholením"
 
-#: 3.8/applet.js:1243
+#: 3.0/openWeatherMap.js:318 3.8/openWeatherMap.js:259
 msgid "Thunderstorm with heavy drizzle"
 msgstr "Bouřka se silným mžením"
 
-#: 3.8/applet.js:1245
+#: 3.0/openWeatherMap.js:319 3.8/openWeatherMap.js:260
 msgid "Light intensity drizzle"
 msgstr "Slabé mrholení"
 
-#: 3.8/applet.js:1246
+#: 3.0/openWeatherMap.js:320 3.8/openWeatherMap.js:261
 msgid "Drizzle"
 msgstr "Mrholení"
 
-#: 3.8/applet.js:1247
+#: 3.0/openWeatherMap.js:321 3.8/openWeatherMap.js:262
 msgid "Heavy intensity drizzle"
 msgstr "Silné mžení"
 
-#: 3.8/applet.js:1248
+#: 3.0/openWeatherMap.js:322 3.8/openWeatherMap.js:263
 msgid "Light intensity drizzle rain"
 msgstr "Slabé mrholení"
 
-#: 3.8/applet.js:1249
+#: 3.0/openWeatherMap.js:323 3.8/openWeatherMap.js:264
 #, fuzzy
 #| msgid "Drizzle"
 msgid "Drizzle rain"
 msgstr "Mrholení"
 
-#: 3.8/applet.js:1250
+#: 3.0/openWeatherMap.js:324 3.8/openWeatherMap.js:265
 msgid "Heavy intensity drizzle rain"
-msgstr "Silně mrholení"
+msgstr "Intenzivní mrholení"
 
-#: 3.8/applet.js:1251
+#: 3.0/openWeatherMap.js:325 3.8/openWeatherMap.js:266
 msgid "Shower rain and drizzle"
 msgstr "Přeháňky a mrholení"
 
-#: 3.8/applet.js:1252
+#: 3.0/openWeatherMap.js:326 3.8/openWeatherMap.js:267
 msgid "Heavy shower rain and drizzle"
 msgstr "Průtrže a mrholení"
 
-#: 3.8/applet.js:1253
+#: 3.0/openWeatherMap.js:327 3.8/openWeatherMap.js:268
 msgid "Shower drizzle"
 msgstr "Občasné mrholení"
 
-#: 3.8/applet.js:1255
+#: 3.0/openWeatherMap.js:328 3.8/openWeatherMap.js:269
 msgid "Light rain"
 msgstr "Slabý déšť"
 
-#: 3.8/applet.js:1256
+#: 3.0/openWeatherMap.js:329 3.8/openWeatherMap.js:270
 msgid "Moderate rain"
 msgstr "Mírný déšť"
 
-#: 3.8/applet.js:1257
+#: 3.0/openWeatherMap.js:330 3.8/openWeatherMap.js:271
 msgid "Heavy intensity rain"
 msgstr "Velmi silný déšť"
 
-#: 3.8/applet.js:1258
+#: 3.0/openWeatherMap.js:331 3.8/openWeatherMap.js:272
 msgid "Very heavy rain"
 msgstr "Průtrž mračen"
 
-#: 3.8/applet.js:1259
+#: 3.0/openWeatherMap.js:332 3.8/openWeatherMap.js:273
 msgid "Extreme rain"
 msgstr "Extrémní dešť"
 
-#: 3.8/applet.js:1260
+#: 3.0/openWeatherMap.js:333 3.8/openWeatherMap.js:274
 msgid "Freezing rain"
 msgstr "Mrznoucí déšť"
 
-#: 3.8/applet.js:1261
+#: 3.0/openWeatherMap.js:334 3.8/openWeatherMap.js:275
 msgid "Light intensity shower rain"
 msgstr "Slabé přeháňky"
 
-#: 3.8/applet.js:1262
+#: 3.0/openWeatherMap.js:335 3.8/openWeatherMap.js:276
 msgid "Shower rain"
 msgstr "Dešťové přeháňky"
 
-#: 3.8/applet.js:1263
+#: 3.0/openWeatherMap.js:336 3.8/openWeatherMap.js:277
 msgid "Heavy intensity shower rain"
 msgstr "Vydatné dešťové přeháňky"
 
-#: 3.8/applet.js:1264
+#: 3.0/openWeatherMap.js:337 3.8/openWeatherMap.js:278
 msgid "Ragged shower rain"
 msgstr "Lokální přeháňky"
 
-#: 3.8/applet.js:1266
+#: 3.0/openWeatherMap.js:338 3.8/openWeatherMap.js:279
 msgid "Light snow"
 msgstr "Lehké sněžení"
 
-#: 3.8/applet.js:1267
+#: 3.0/openWeatherMap.js:339 3.8/openWeatherMap.js:280
 msgid "Snow"
 msgstr "Sněžení"
 
-#: 3.8/applet.js:1268
+#: 3.0/openWeatherMap.js:340 3.8/openWeatherMap.js:281
 msgid "Heavy snow"
 msgstr "Silné sněžení"
 
-#: 3.8/applet.js:1269
+#: 3.0/openWeatherMap.js:341 3.8/openWeatherMap.js:282
 msgid "Sleet"
 msgstr "Plískanice"
 
-#: 3.8/applet.js:1270
+#: 3.0/openWeatherMap.js:342 3.8/openWeatherMap.js:283
 msgid "Shower sleet"
 msgstr "Plískanice"
 
-#: 3.8/applet.js:1271
+#: 3.0/openWeatherMap.js:343 3.8/openWeatherMap.js:284
 msgid "Light rain and snow"
 msgstr "Slabý déšť se sněhem"
 
-#: 3.8/applet.js:1272
+#: 3.0/openWeatherMap.js:344 3.8/openWeatherMap.js:285
 #, fuzzy
 #| msgid "Mixed rain and snow"
 msgid "Rain and snow"
 msgstr "Déšť se sněhem"
 
-#: 3.8/applet.js:1273
+#: 3.0/openWeatherMap.js:345 3.8/openWeatherMap.js:286
 #, fuzzy
 #| msgid "Light snow showers"
 msgid "Light shower snow"
 msgstr "Lehké sněhové přeháňky"
 
-#: 3.8/applet.js:1274
+#: 3.0/openWeatherMap.js:346 3.8/openWeatherMap.js:287
 msgid "Shower snow"
 msgstr "Sněhové přeháňky"
 
-#: 3.8/applet.js:1275
+#: 3.0/openWeatherMap.js:347 3.8/openWeatherMap.js:288
 msgid "Heavy shower snow"
 msgstr "Silné sněhové přeháňky"
 
-#: 3.8/applet.js:1277
+#: 3.0/openWeatherMap.js:348 3.8/openWeatherMap.js:289
 msgid "Mist"
 msgstr "Opar"
 
-#: 3.8/applet.js:1278
+#: 3.0/openWeatherMap.js:349 3.8/openWeatherMap.js:290
 #, fuzzy
 #| msgid "Smoky"
 msgid "Smoke"
 msgstr "Kouřmo"
 
-#: 3.8/applet.js:1279
+#: 3.0/openWeatherMap.js:350 3.8/openWeatherMap.js:291
 msgid "Haze"
 msgstr "Mlhavo"
 
-#: 3.8/applet.js:1280
+#: 3.0/openWeatherMap.js:351 3.8/openWeatherMap.js:292
 msgid "Sand, dust whirls"
 msgstr "Víření prachu a písku"
 
-#: 3.8/applet.js:1281
+#: 3.0/openWeatherMap.js:352 3.8/openWeatherMap.js:293
 #, fuzzy
 #| msgid "Foggy"
 msgid "Fog"
 msgstr "Mlha"
 
-#: 3.8/applet.js:1282
+#: 3.0/openWeatherMap.js:353 3.8/openWeatherMap.js:294
 msgid "Sand"
 msgstr "Písek"
 
-#: 3.8/applet.js:1283
+#: 3.0/openWeatherMap.js:354 3.8/openWeatherMap.js:295
 msgid "Dust"
 msgstr "Prach"
 
-#: 3.8/applet.js:1284
+#: 3.0/openWeatherMap.js:355 3.8/openWeatherMap.js:296
 msgid "Volcanic ash"
 msgstr "Sopečný popílek"
 
-#: 3.8/applet.js:1285
+#: 3.0/openWeatherMap.js:356 3.8/openWeatherMap.js:297
 msgid "Squalls"
-msgstr "Poryvy větru"
+msgstr "Nárazy větru"
 
-#: 3.8/applet.js:1286
+#: 3.0/openWeatherMap.js:357 3.8/openWeatherMap.js:298
 msgid "Tornado"
 msgstr "Tornádo"
 
-#: 3.8/applet.js:1288
+#: 3.0/openWeatherMap.js:358 3.8/openWeatherMap.js:299
 msgid "Clear"
 msgstr "Jasno"
 
-#: 3.8/applet.js:1289
+#: 3.0/openWeatherMap.js:359 3.8/openWeatherMap.js:300
 msgid "Clear sky"
 msgstr "Jasná obloha"
 
-#: 3.8/applet.js:1290
+#: 3.0/openWeatherMap.js:360 3.8/openWeatherMap.js:301
 msgid "Sky is clear"
-msgstr "Obloha je jasná"
+msgstr "Bezoblačná obloha"
 
-#: 3.8/applet.js:1292
+#: 3.0/openWeatherMap.js:361 3.8/openWeatherMap.js:302
 msgid "Few clouds"
 msgstr "Skoro jasno"
 
-#: 3.8/applet.js:1293
+#: 3.0/openWeatherMap.js:362 3.8/openWeatherMap.js:303
 msgid "Scattered clouds"
 msgstr "Polojasno"
 
-#: 3.8/applet.js:1294
+#: 3.0/openWeatherMap.js:363 3.8/openWeatherMap.js:304
 msgid "Broken clouds"
 msgstr "Skoro zataženo"
 
-#: 3.8/applet.js:1295
+#: 3.0/openWeatherMap.js:364 3.8/openWeatherMap.js:305
 msgid "Overcast clouds"
 msgstr "Zataženo"
 
+#: 3.0/ipApi.js:88 3.8/ipApi.js:42
+#, fuzzy
+#| msgid "Could not get location"
+msgid "Could not obtain location"
+msgstr "Nelze zjistit polohu"
+
+#: 3.0/ipApi.js:94 3.8/ipApi.js:48
+msgid ""
+"Location Service responded with errors, please see the logs in Looking Glass"
+msgstr ""
+"Lokalizační služba odpověděla s chybami, detaily jsou v logu v Looking Glass"
+
+#: 3.0/darkSky.js:65 3.8/darkSky.js:29
+msgid "and"
+msgstr "a"
+
+#: 3.0/darkSky.js:65 3.8/darkSky.js:29
+msgid "until"
+msgstr "až do"
+
+#: 3.0/darkSky.js:65 3.8/darkSky.js:29
+msgid "in"
+msgstr "v"
+
+#: 3.0/darkSky.js:135 3.8/darkSky.js:87
+msgid "Feels Like"
+msgstr "Pocitově"
+
+#: 3.0/darkSky.js:160 3.8/darkSky.js:112
+msgid "Failed to Process Weather Info"
+msgstr "Nepodařilo se zpracovat informace o počasí"
+
+#: 3.0/darkSky.js:176 3.8/darkSky.js:128
+msgid ""
+"Please enter API key in settings,\n"
+"or get one first on https://darksky.net/dev/register"
+msgstr ""
+"Vlož klíč API v nastavení\n"
+"nebo jej získat na https://darksky.net/dev/register"
+
+#: 3.0/darkSky.js:214 3.8/darkSky.js:166
+msgid ""
+"Please Make sure you\n"
+"entered the API key correctly and your account is not locked"
+msgstr ""
+"Ujisti se, že jsi\n"
+"vložil klič API správně a tvůj účet není uzamčen"
+
+#: 3.0/applet.js:191 3.8/applet.js:141
+msgid "Error"
+msgstr "Chyba"
+
+#: 3.0/applet.js:193 3.8/applet.js:143
+msgid "Incorrect API Key"
+msgstr "Nesprávný API klíč"
+
+#: 3.0/applet.js:195 3.8/applet.js:145
+msgid "Incorrect Location Format"
+msgstr "Chybný lokační formát"
+
+#: 3.0/applet.js:197 3.8/applet.js:147
+msgid "Key Blocked"
+msgstr "Klíč zablokován"
+
+#: 3.0/applet.js:198 3.8/applet.js:148
+msgid "Can't find location"
+msgstr "Nemohu zjistit polohu"
+
+#: 3.0/applet.js:200 3.8/applet.js:150
+#, fuzzy
+#| msgid "No Api key"
+msgid "No Api Key"
+msgstr "Chybí API klíč"
+
+#: 3.0/applet.js:201 3.8/applet.js:151
+msgid "No Location"
+msgstr "Poloha není k dispozici"
+
+#: 3.0/applet.js:486 3.8/applet.js:397
+msgid ""
+"Unexpected Error While Refreshing Weather, please see log in Looking Glass"
+msgstr ""
+"Neočekávaná chyba při získávání předpovědi, detaily jsou přes Looking Glass "
+"dostupné v logu"
+
+#: 3.0/applet.js:519 3.8/applet.js:421
+msgid "Make sure you entered a location or use Automatic location instead"
+msgstr "Ujisti se, že jsi zadal polohu nebo zapnul její automatické nastavení"
+
+#: 3.0/applet.js:584 3.8/applet.js:483
+msgid "Updated"
+msgstr "Aktualizováno"
+
+#: 3.0/applet.js:681 3.8/applet.js:580
+msgid "Today"
+msgstr "Dnes"
+
+#: 3.0/applet.js:683 3.8/applet.js:582
+msgid "Tomorrow"
+msgstr "Zítra"
+
+#: 3.0/applet.js:878 3.8/applet.js:777
+msgid ""
+"Could not update weather for a while...\n"
+"are you connected to the internet?"
+msgstr ""
+"Nedaří se opakovaně získat počasí... jsi si jist, že máš připojení k "
+"internetu?"
+
+#: 3.0/applet.js:892 3.8/applet.js:791
+msgid "Network Error, please check logs in Looking Glass"
+msgstr "Chyba sítě. Detaily jsou v logu v logu Looking Glass"
+
 #. settings-schema.json->head->description
-msgid "Settings for weather@mockturtl 1.8"
-msgstr "Nastavení weather@mockturtl 1.8"
+msgid "Settings for weather@mockturtl 1.8+"
+msgstr "Nastavení weather@mockturtl 1.8+"
 
 #. settings-schema.json->keybinding->description
-#. 3.6->settings-schema.json->keybinding->description
+#. 3.0->settings-schema.json->keybinding->description
 #. 3.8->settings-schema.json->keybinding->description
 msgid "Set the keybinding to call the menu"
 msgstr "Kombinace kláves volající menu"
 
 #. settings-schema.json->providerSettings->description
-#. 3.6->settings-schema.json->providerSettings->description
+#. 3.0->settings-schema.json->providerSettings->description
 #. 3.8->settings-schema.json->providerSettings->description
 msgid "Weather Provider Settings"
 msgstr "Nastavení poskytovatele předpovědi"
 
 #. settings-schema.json->dataService->description
-#. 3.6->settings-schema.json->dataService->description
+#. 3.0->settings-schema.json->dataService->description
 #. 3.8->settings-schema.json->dataService->description
 msgid "Data service"
 msgstr "Datová služba"
 
 #. settings-schema.json->dataService->options
-#. 3.6->settings-schema.json->dataService->options
 msgid "OpenWeatherMap"
 msgstr "OpenWeatherMap"
 
 #. settings-schema.json->location->description
-#. 3.6->settings-schema.json->location->description
+#. 3.0->settings-schema.json->location->description
 #. 3.8->settings-schema.json->location->description
 msgid "Location"
 msgstr "Poloha"
 
 #. settings-schema.json->location->tooltip
-#. 3.6->settings-schema.json->location->tooltip
+#. 3.0->settings-schema.json->location->tooltip
 #. 3.8->settings-schema.json->location->tooltip
 msgid ""
 "Acceptable inputs: City,CountryCode or Zipcode,CountryCode or Latitude,"
 "Longtitude"
-msgstr "Akceptováno je: Město,kód země či ZIPkód, nebo zeměpisné koordináty"
+msgstr "Akceptováno je: Město, kód země či ZIPkód, nebo zeměpisné koordináty"
 
 #. settings-schema.json->getLocation->description
-#. 3.6->settings-schema.json->getLocation->description
 msgid "Setup Location"
 msgstr "Nastavit polohu"
 
 #. settings-schema.json->getLocation->tooltip
-#. 3.6->settings-schema.json->getLocation->tooltip
+#. 3.0->settings-schema.json->getLocation->tooltip
 #. 3.8->settings-schema.json->getLocation->tooltip
 msgid "Opens webpage guide"
 msgstr "Otevře webovou stránku s návodem (EN)"
 
 #. settings-schema.json->personalSettings->description
-#. 3.6->settings-schema.json->personalSettings->description
+#. 3.0->settings-schema.json->personalSettings->description
 #. 3.8->settings-schema.json->personalSettings->description
 msgid "Personal Settings"
 msgstr "Osobní nastavení"
 
 #. settings-schema.json->temperatureUnit->description
-#. 3.6->settings-schema.json->temperatureUnit->description
+#. 3.0->settings-schema.json->temperatureUnit->description
 #. 3.8->settings-schema.json->temperatureUnit->description
 msgid "Temperature unit"
 msgstr "Jednotka teploty"
 
 #. settings-schema.json->temperatureUnit->options
-#. 3.6->settings-schema.json->temperatureUnit->options
+#. 3.0->settings-schema.json->temperatureUnit->options
 #. 3.8->settings-schema.json->temperatureUnit->options
 msgid "celsius"
 msgstr "º Celsia"
 
 #. settings-schema.json->temperatureUnit->options
-#. 3.6->settings-schema.json->temperatureUnit->options
+#. 3.0->settings-schema.json->temperatureUnit->options
 #. 3.8->settings-schema.json->temperatureUnit->options
 msgid "fahrenheit"
 msgstr "Fahrenheit"
 
 #. settings-schema.json->temperatureHighFirst->description
-#. 3.6->settings-schema.json->temperatureHighFirst->description
+#. 3.0->settings-schema.json->temperatureHighFirst->description
 #. 3.8->settings-schema.json->temperatureHighFirst->description
 msgid "Show high temperature first in forecast"
 msgstr "Vyšší teplotu zobrazit v předpovědi jako první"
 
 #. settings-schema.json->windSpeedUnit->description
-#. 3.6->settings-schema.json->windSpeedUnit->description
+#. 3.0->settings-schema.json->windSpeedUnit->description
 #. 3.8->settings-schema.json->windSpeedUnit->description
 msgid "Wind speed unit"
 msgstr "Jednotka rychlosti větru"
 
 #. settings-schema.json->windSpeedUnit->options
-#. 3.6->settings-schema.json->windSpeedUnit->options
+#. 3.0->settings-schema.json->windSpeedUnit->options
 #. 3.8->settings-schema.json->windSpeedUnit->options
 msgid "kph"
 msgstr "km/h"
 
 #. settings-schema.json->windSpeedUnit->options
-#. 3.6->settings-schema.json->windSpeedUnit->options
+#. 3.0->settings-schema.json->windSpeedUnit->options
 #. 3.8->settings-schema.json->windSpeedUnit->options
 msgid "mph"
 msgstr "míle/h"
 
 #. settings-schema.json->windSpeedUnit->options
-#. 3.6->settings-schema.json->windSpeedUnit->options
+#. 3.0->settings-schema.json->windSpeedUnit->options
 #. 3.8->settings-schema.json->windSpeedUnit->options
 msgid "m/s"
 msgstr "m/s"
 
 #. settings-schema.json->windSpeedUnit->options
-#. 3.6->settings-schema.json->windSpeedUnit->options
+#. 3.0->settings-schema.json->windSpeedUnit->options
 #. 3.8->settings-schema.json->windSpeedUnit->options
 msgid "knots"
 msgstr "uzly"
 
 #. settings-schema.json->pressureUnit->description
-#. 3.6->settings-schema.json->pressureUnit->description
+#. 3.0->settings-schema.json->pressureUnit->description
 #. 3.8->settings-schema.json->pressureUnit->description
 msgid "Atmospheric pressure unit"
 msgstr "Jednotka atm. tlaku"
 
 #. settings-schema.json->pressureUnit->options
-#. 3.6->settings-schema.json->pressureUnit->options
+#. 3.0->settings-schema.json->pressureUnit->options
 #. 3.8->settings-schema.json->pressureUnit->options
 msgid "hPa"
 msgstr "hPa"
 
 #. settings-schema.json->pressureUnit->options
-#. 3.6->settings-schema.json->pressureUnit->options
+#. 3.0->settings-schema.json->pressureUnit->options
 #. 3.8->settings-schema.json->pressureUnit->options
 msgid "in Hg"
 msgstr "palce Hg"
 
 #. settings-schema.json->pressureUnit->options
-#. 3.6->settings-schema.json->pressureUnit->options
+#. 3.0->settings-schema.json->pressureUnit->options
 #. 3.8->settings-schema.json->pressureUnit->options
 msgid "mm Hg"
 msgstr "mm Hg"
 
 #. settings-schema.json->pressureUnit->options
-#. 3.6->settings-schema.json->pressureUnit->options
+#. 3.0->settings-schema.json->pressureUnit->options
 #. 3.8->settings-schema.json->pressureUnit->options
 msgid "psi"
 msgstr "psi"
 
 #. settings-schema.json->pressureUnit->options
-#. 3.6->settings-schema.json->pressureUnit->options
+#. 3.0->settings-schema.json->pressureUnit->options
 #. 3.8->settings-schema.json->pressureUnit->options
 msgid "at"
 msgstr "at"
 
 #. settings-schema.json->pressureUnit->options
-#. 3.6->settings-schema.json->pressureUnit->options
+#. 3.0->settings-schema.json->pressureUnit->options
 #. 3.8->settings-schema.json->pressureUnit->options
 msgid "atm"
 msgstr "atm"
 
 #. settings-schema.json->pressureUnit->options
-#. 3.6->settings-schema.json->pressureUnit->options
+#. 3.0->settings-schema.json->pressureUnit->options
 #. 3.8->settings-schema.json->pressureUnit->options
 msgid "Pa"
 msgstr "Pa"
 
 #. settings-schema.json->verticalOrientation->description
-#. 3.6->settings-schema.json->verticalOrientation->description
+#. 3.0->settings-schema.json->verticalOrientation->description
 #. 3.8->settings-schema.json->verticalOrientation->description
 msgid "Vertical orientation"
-msgstr "Zobrazení na výšku"
+msgstr "Vertikální orientace"
 
 #. settings-schema.json->showSunrise->description
-#. 3.6->settings-schema.json->showSunrise->description
+#. 3.0->settings-schema.json->showSunrise->description
 #. 3.8->settings-schema.json->showSunrise->description
 msgid "Show sunrise / sunset times"
 msgstr "Zobrazit východ a západ slunce"
 
 #. settings-schema.json->show24Hours->description
-#. 3.6->settings-schema.json->show24Hours->description
+#. 3.0->settings-schema.json->show24Hours->description
 #. 3.8->settings-schema.json->show24Hours->description
 msgid "Display time in 24 hour format"
 msgstr "Zobrazovat 24hodinový formát"
 
 #. settings-schema.json->forecastDays->units
-#. 3.6->settings-schema.json->forecastDays->units
+#. 3.0->settings-schema.json->forecastDays->units
 #. 3.8->settings-schema.json->forecastDays->units
 msgid "days"
 msgstr "dny"
 
 #. settings-schema.json->forecastDays->description
-#. 3.6->settings-schema.json->forecastDays->description
+#. 3.0->settings-schema.json->forecastDays->description
 #. 3.8->settings-schema.json->forecastDays->description
 msgid "Forecast length"
 msgstr "Délka předpovědi"
 
 #. settings-schema.json->translateCondition->description
-#. 3.6->settings-schema.json->translateCondition->description
 msgid "Translate condition"
-msgstr "Překlad počasí"
+msgstr "Použít překlad"
 
 #. settings-schema.json->useSymbolicIcons->description
-#. 3.6->settings-schema.json->useSymbolicIcons->description
+#. 3.0->settings-schema.json->useSymbolicIcons->description
 #. 3.8->settings-schema.json->useSymbolicIcons->description
 msgid "Symbolic icons"
-msgstr "Zjednodušené symbolické ikony"
+msgstr "Symbolické ikony"
 
 #. settings-schema.json->showTextInPanel->description
-#. 3.6->settings-schema.json->showTextInPanel->description
+#. 3.0->settings-schema.json->showTextInPanel->description
 #. 3.8->settings-schema.json->showTextInPanel->description
 msgid "Display current temperature in panel"
 msgstr "Zobrazit aktuální teplotu na panelu"
 
 #. settings-schema.json->showCommentInPanel->description
-#. 3.6->settings-schema.json->showCommentInPanel->description
+#. 3.0->settings-schema.json->showCommentInPanel->description
 #. 3.8->settings-schema.json->showCommentInPanel->description
 msgid "Show the weather condition (e.g., \"Windy\", \"Clear\") in the panel"
 msgstr "Zobrazit slovně stav počasí na panelu (např. \"Oblačno\", \"Jasno\")"
 
 #. settings-schema.json->locationLabelOverride->description
-#. 3.6->settings-schema.json->locationLabelOverride->description
+#. 3.0->settings-schema.json->locationLabelOverride->description
 #. 3.8->settings-schema.json->locationLabelOverride->description
 msgid "Override location label"
-msgstr "Přepsat název polohy"
+msgstr "Přepsat název lokality"
 
 #. settings-schema.json->refreshInterval->units
-#. 3.6->settings-schema.json->refreshInterval->units
+#. 3.0->settings-schema.json->refreshInterval->units
 #. 3.8->settings-schema.json->refreshInterval->units
 msgid "minutes"
 msgstr "minut"
 
 #. settings-schema.json->refreshInterval->description
-#. 3.6->settings-schema.json->refreshInterval->description
+#. 3.0->settings-schema.json->refreshInterval->description
 #. 3.8->settings-schema.json->refreshInterval->description
 msgid "Update interval"
 msgstr "Interval aktualizace"
@@ -684,50 +788,56 @@ msgstr "Počasí"
 msgid "View your local weather forecast"
 msgstr "Zobrazit lokální předpověď počasí"
 
-#. 3.6->settings-schema.json->head->description
-msgid "Settings for weather@mockturtl 3.6"
-msgstr "Nastavení pro @mockturtl 3.6"
+#. 3.0->settings-schema.json->head->description
+msgid "Settings for weather@mockturtl 3.0+"
+msgstr "Nastavení pro weather@mockturtl 3.0+"
 
-#. 3.8->settings-schema.json->head->description
-msgid "Settings for weather@mockturtl 3.8"
-msgstr "Nastavení pro @mockturtl 3.8"
-
+#. 3.0->settings-schema.json->dataService->options
 #. 3.8->settings-schema.json->dataService->options
 msgid "OpenWeatherMap (no key needed)"
 msgstr "OpenWeatherMap (nevyžaduje klíč)"
 
+#. 3.0->settings-schema.json->dataService->options
 #. 3.8->settings-schema.json->dataService->options
 msgid "DarkSky"
 msgstr "DarkSky"
 
+#. 3.0->settings-schema.json->apiKey->description
 #. 3.8->settings-schema.json->apiKey->description
 msgid "API Key"
 msgstr "API klíč"
 
+#. 3.0->settings-schema.json->apiKey->tooltip
 #. 3.8->settings-schema.json->apiKey->tooltip
 msgid "Copy this from your account of the used Data service and paste it here."
 msgstr "Toto zkopíruj ze svého účtu používané datové služby a vlož sem."
 
+#. 3.0->settings-schema.json->manualLocation->description
 #. 3.8->settings-schema.json->manualLocation->description
 msgid "Manual Location"
 msgstr "Poloha manuálně"
 
+#. 3.0->settings-schema.json->manualLocation->tooltip
 #. 3.8->settings-schema.json->manualLocation->tooltip
 msgid "Enable this if your location is not accurate"
 msgstr "Toto povol, pokud není určení polohy přesné"
 
+#. 3.0->settings-schema.json->getLocation->description
 #. 3.8->settings-schema.json->getLocation->description
 msgid "Setup API Key and Location"
 msgstr "Nastavení API klíče a polohy"
 
+#. 3.0->settings-schema.json->translateCondition->description
 #. 3.8->settings-schema.json->translateCondition->description
 msgid "Translate conditions"
 msgstr "Podmínky překladu"
 
+#. 3.0->settings-schema.json->shortConditions->description
 #. 3.8->settings-schema.json->shortConditions->description
 msgid "Less verbose conditions"
 msgstr "Stručné poznámky"
 
+#. 3.0->settings-schema.json->credits->description
 #. 3.8->settings-schema.json->credits->description
 msgid ""
 "powered by: OpenWeatherMap, DarkSky, ipapi. Big Thanks to OpenWeatherMap for "
@@ -735,3 +845,22 @@ msgid ""
 msgstr ""
 "zajišťováno: OpenWeatherMap, DarkSky, ipapi. Velký dík OpenWeatherMap za "
 "jejich podporu!"
+
+#. 3.8->settings-schema.json->head->description
+msgid "Settings for weather@mockturtl 3.8+"
+msgstr "Nastavení pro weather@mockturtl 3.8+"
+
+#~ msgid "Wrong Location"
+#~ msgstr "Špatně zadaná poloha"
+
+#~ msgid "Location Not found"
+#~ msgstr "Poloha není k dispozici"
+
+#~ msgid "Parsing weather information failed :("
+#~ msgstr "Analýza informace o počasí selhala :("
+
+#~ msgid "Unknown Error"
+#~ msgstr "Neznámá chyba"
+
+#~ msgid "No/Bad response from Data Service"
+#~ msgstr "Žádná či chybná odpověď Datové Služby"
