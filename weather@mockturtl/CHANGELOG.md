@@ -1,3 +1,8 @@
+# 2.4.6
+
+* Fixes [#2907(https://github.com/linuxmint/cinnamon-spices-applets/issues/2907)
+* Update Hungraian translation
+
 # 2.4.5
 
 * Fixes [#618](https://github.com/linuxmint/cinnamon-spices-applets/issues/618)
