@@ -1,6 +1,6 @@
 export {}; // Declaring as a Module
 
-// Add this so translation works in untils as well
+// Add this so translation works in utils as well
 const UUID = "weather@mockturtl";
 imports.gettext.bindtextdomain(UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
 function _(str: string): string {
