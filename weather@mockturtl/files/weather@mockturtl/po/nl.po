@@ -1072,7 +1072,7 @@ msgstr "Opties voor weeraanbieder"
 #. 3.0->settings-schema.json->dataService->options
 #. 3.8->settings-schema.json->dataService->options
 msgid "DarkSky (key needed)"
-msgstr "DarkSky (sleutel nodig)"
+msgstr "DarkSky (API sleutel nodig)"
 
 #. 3.0->settings-schema.json->dataService->options
 #. 3.8->settings-schema.json->dataService->options
@@ -1082,7 +1082,7 @@ msgstr "MET Norway"
 #. 3.0->settings-schema.json->dataService->options
 #. 3.8->settings-schema.json->dataService->options
 msgid "Weatherbit (key needed)"
-msgstr "Weatherbit (sleutel nodig)"
+msgstr "Weatherbit (API sleutel nodig)"
 
 #. 3.0->settings-schema.json->apiKey->description
 #. 3.8->settings-schema.json->apiKey->description
@@ -1180,7 +1180,7 @@ msgstr "Weersgesteldheden vertalen"
 #. 3.0->settings-schema.json->shortConditions->description
 #. 3.8->settings-schema.json->shortConditions->description
 msgid "Less verbose conditions"
-msgstr "Kortere beschrijving van weersomstandigheden"
+msgstr "Korte omschrijving van weersomstandigheden"
 
 #. 3.0->settings-schema.json->shortConditions->tooltip
 #. 3.8->settings-schema.json->shortConditions->tooltip
