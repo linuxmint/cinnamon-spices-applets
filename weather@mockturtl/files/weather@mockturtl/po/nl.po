@@ -186,7 +186,7 @@ msgstr "Gematigd briesje"
 
 #: 3.0/utils.js:211 3.8/utils.js:164
 msgid "Fresh breeze"
-msgstr "Frisse briesje"
+msgstr "Fris briesje"
 
 #: 3.0/utils.js:214 3.8/utils.js:167
 msgid "Strong breeze"
@@ -1038,7 +1038,7 @@ msgid ""
 "DarkSky - Needs key, please click on 'Setup API Key and Location' for the "
 "steps how to obtain one."
 msgstr ""
-"DarkSky - Heeft een sleutel nodig, klik op 'Setup API Key en Locatie' voor "
+"DarkSky - Heeft een sleutel nodig, klik op 'API sleutel en locatie instellen' voor "
 "de stappen hoe er een te verkrijgen."
 
 #. 3.0->settings-schema.json->METN->description
@@ -1059,7 +1059,7 @@ msgid ""
 "Needs a key, please click on 'Setup API Key and Location' for the steps how "
 "to obtain one."
 msgstr ""
-"WeatherBit - Minimaal 10min verversingssnelheid wordt aanbevolen of u zou uw "
+"WeatherBit - Minimaal 10 min verversingssnelheid wordt aanbevolen of u zou uw "
 "dagelijkse quota kunnen overschrijden.\n"
 "Heeft u een sleutel nodig, klik dan op 'Setup API Key en Locatie' voor de "
 "stappen om deze te verkrijgen."
@@ -1231,7 +1231,7 @@ msgid ""
 "exceed you daily quota. Needs a key, please click on 'Setup API Key and "
 "Location' for the steps how to obtain one."
 msgstr ""
-"WeatherBit - Minimaal 10min verversingssnelheid wordt aanbevolen of u zou uw "
+"WeatherBit - Minimaal 10 min verversingssnelheid wordt aanbevolen of u zou uw "
 "dagelijkse quota kunnen overschrijden. Heeft u een sleutel nodig, klik dan "
 "op 'Setup API Key en Locatie' voor de stappen om deze te verkrijgen."
 
