@@ -43,7 +43,7 @@ var capitalizeFirstLetter = utils.capitalizeFirstLetter as (description: string)
 var TempToUserConfig = utils.TempToUserConfig as (kelvin: number, units: WeatherUnits, russianStyle: boolean) => string;
 var PressToUserUnits = utils.PressToUserUnits as (hpa: number, units: WeatherPressureUnits) => number;
 var compassDirection = utils.compassDirection as (deg: number) => string;
-var MPStoUserUnits = utils.MPStoUserUnits as (mps: number, units: WeatherWindSpeedUnits) => number;
+var MPStoUserUnits = utils.MPStoUserUnits as (mps: number, units: WeatherWindSpeedUnits) => string;
 var nonempty = utils.nonempty as (str: string) => boolean;
 var AwareDateString = utils.AwareDateString as (date: Date, locale: string, hours24Format: boolean) => string;
 const delay = utils.delay as (ms: number) => Promise<void>;

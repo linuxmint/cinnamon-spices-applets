@@ -34,6 +34,11 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var UUID = "weather@mockturtl";
+imports.gettext.bindtextdomain(UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
+function _(str) {
+    return imports.gettext.dgettext(UUID, str);
+}
 var _a = imports.mainloop, timeout_add = _a.timeout_add, source_remove = _a.source_remove;
 var util_format_date = imports.gi.Cinnamon.util_format_date;
 var IconType = imports.gi.St.IconType;
