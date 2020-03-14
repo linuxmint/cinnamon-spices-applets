@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-02-15 13:48+0100\n"
-"PO-Revision-Date: 2020-02-15 13:58+0100\n"
+"PO-Revision-Date: 2020-03-14 14:25+0100\n"
 "Last-Translator: Ozzie Isaacs\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -76,11 +76,11 @@ msgstr "Kritische Temperatur"
 
 #. settings-schema.json->use-fahrenheit->description
 msgid "Show temperature in Fahrenheit"
-msgstr "Temperatur in Fahrenheit anzeigen"
+msgstr "Temperaturen in Fahrenheit anzeigen"
 
 #. settings-schema.json->only-integer-part->description
 msgid "Use integer values for temperature"
-msgstr "Ganzahlwerte für Temperatur nutzen"
+msgstr "Temperaturen als ganze Zahlen anzeigen"
 
 #. settings-schema.json->show-unit->description
 msgid "Show unit"
@@ -92,11 +92,11 @@ msgstr "Zeigt oder unterdrückt die Einheit nach dem Temperaturwert."
 
 #. settings-schema.json->show-unit-letter->description
 msgid "Show unit letter"
-msgstr "Zeige Buchstabe Einheit"
+msgstr "Zeige Temperatureinheit"
 
 #. settings-schema.json->show-unit-letter->tooltip
 msgid "Whether or not show the unit letter (C or F)."
-msgstr "Zeigt oder unterdrückt die den Einheitsbuchstaben (C oder F)"
+msgstr "Zeigt oder unterdrückt das Einheitenzeichen (C oder F)"
 
 #. settings-schema.json->interval->units
 msgid "ms"
@@ -108,7 +108,7 @@ msgstr "Aktualisierungsintervall"
 
 #. settings-schema.json->change-color->description
 msgid "Change color when the temperature becomes High or Critical"
-msgstr "Ändert die Farbe wenn die Temperatur hoch oder kritisch wird"
+msgstr "Ändere die Farbe wenn die Temperatur hoch oder kritisch wird"
 
 #. settings-schema.json->change-color->tooltip
 msgid ""
@@ -122,7 +122,7 @@ msgstr ""
 
 #. settings-schema.json->only-colors->description
 msgid "Only use colors to alert me"
-msgstr "Benutzt nur Farben zur Alarmierung"
+msgstr "Benutze nur Farben zur Alarmierung"
 
 #. settings-schema.json->only-colors->tooltip
 msgid ""
