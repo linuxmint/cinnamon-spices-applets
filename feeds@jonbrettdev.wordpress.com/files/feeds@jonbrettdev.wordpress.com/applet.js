@@ -144,7 +144,7 @@ FeedApplet.prototype = {
     _check_feedparser: function(output) {
         if (output == "FAIL") {
             this.notify_installation('python3-feedparser');
-            Util.spawnCommandLine("apturl apt://python-feedparser");
+            Util.spawnCommandLine("apturl apt://python3-feedparser");
         }
     },
 
