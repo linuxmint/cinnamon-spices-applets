@@ -1,3 +1,8 @@
+const UUID = "weather@mockturtl";
+imports.gettext.bindtextdomain(UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
+function _(str) {
+    return imports.gettext.dgettext(UUID, str);
+}
 var { timeout_add, source_remove } = imports.mainloop;
 const { util_format_date } = imports.gi.Cinnamon;
 const { IconType } = imports.gi.St;
