@@ -90,5 +90,14 @@
 		"type": "checkbox",
 		"default": true,
 		"description": "Display output of menu command"
+	},
+	"head5": {
+		"type": "header",
+		"description": "Command on start-up"
+	},
+	"startupScript": {
+		"type": "entry",
+		"default": "",
+		"description": "Command run at start-up"
 	}
 }
