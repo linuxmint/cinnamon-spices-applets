@@ -215,7 +215,7 @@ MyApplet.prototype = {
         }
 
         if (this.rates_update_interval == false) {
-            this.rates_update_interval = 5;
+            this.rates_update_interval = 30;
         }
 
         this._updateTimeout = Mainloop.timeout_add(this.rates_update_interval * 1000, Lang.bind(this, this._update_value));
