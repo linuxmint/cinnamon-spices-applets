@@ -1,5 +1,10 @@
 Changelog
 
+2.6
+==
+- Switch styling to the one also used by the builtin grouped window list
+- Add flashing effect for windows that demand attention
+
 2.5.2
 ==
 - Fix: the number badge grew when showing after being hidden
