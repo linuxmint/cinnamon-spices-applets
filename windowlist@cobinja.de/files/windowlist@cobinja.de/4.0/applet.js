@@ -49,6 +49,8 @@ const DEFAULT_ICON_SIZE = 22;
 const MINIMUM_ICON_SIZE = 16;
 const ICON_HEIGHT_FACTOR = 0.8;
 
+const FLASH_INTERVAL = 500;
+
 const PANEL_EDIT_MODE_KEY = "panel-edit-mode";
 
 const CobiCaptionType = {
@@ -770,6 +772,7 @@ class CobiAppButton {
     this._applet = applet;
     this._app = app;
     this._settings = this._applet._settings;
+    this._needsAttention = false;
     this._signalManager = new SignalManager.SignalManager(null);
     
     this._pinned = false;
@@ -1147,17 +1150,45 @@ class CobiAppButton {
     }
   }
   
+  _flashButton() {
+    if (!this._needsAttention){
+      return;
+    }
+
+    let counter = 0;
+    let sc = "grouped-window-list-item-demands-attention";
+    
+    global.log("Start flashing");
+    this.actor.add_style_class_name(sc);
+
+    Mainloop.timeout_add(FLASH_INTERVAL, () => {
+      if (!this._needsAttention) {
+        return false;
+      }
+      if (this.actor.has_style_class_name(sc)) {
+        global.log("Flash off");
+        this.actor.remove_style_class_name(sc);
+      }
+      else {
+        global.log("Flash on");
+        this.actor.add_style_class_name(sc);
+      }
+      let result = counter <= 4;
+      counter++;
+      return result;
+    });
+  }
+  
   _updateUrgentState() {
+    if (this._needsAttention) {
+      return;
+    }
+    
     let state = this._windows.some(function(win) {
       return win.urgent || win.demands_attention;
     });
-    
-    if (state) {
-      this.actor.add_style_class_name("grouped-window-list-item-demands-attention");
-    }
-    else {
-      this.actor.remove_style_class_name("grouped-window-list-item-demands-attention");
-    }
+    this._needsAttention = state;
+    this._flashButton();
   }
   
   _updateFocus() {
@@ -1165,6 +1196,7 @@ class CobiAppButton {
       let metaWindow = this._windows[i];
       if (hasFocus(metaWindow) && !metaWindow.minimized) {
         this.actor.add_style_pseudo_class("focus");
+        this.actor.remove_style_class_name("grouped-window-list-item-demands-attention");
         this._currentWindow = metaWindow;
         this._updateLabel();
         break;
