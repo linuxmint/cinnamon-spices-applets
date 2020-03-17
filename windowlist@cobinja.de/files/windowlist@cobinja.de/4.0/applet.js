@@ -774,7 +774,7 @@ class CobiAppButton {
     
     this._pinned = false;
     
-    this.actor = new St.BoxLayout({style_class: "window-list-item-box",
+    this.actor = new St.BoxLayout({style_class: "grouped-window-list-item-box",
                                    track_hover: true,
                                    can_focus: true,
                                    reactive: true
@@ -818,8 +818,6 @@ class CobiAppButton {
     this._windows = [];
     this._currentWindow = null;
     
-    this.actor.add_style_pseudo_class("neutral");
-    
     this._updateOrientation();
     
     this._contextMenuManager = new PopupMenu.PopupMenuManager(this);
@@ -838,7 +836,6 @@ class CobiAppButton {
     this._signalManager.connect(this.actor, "notify::hover", this._updateVisualState, this);
     
     this._signalManager.connect(Main.themeManager, "theme-set", Lang.bind(this, function() {
-      this.actor.remove_style_pseudo_class("neutral");
       this.updateView();
     }), this);
     this._signalManager.connect(St.TextureCache.get_default(), "icon-theme-changed", this.updateIcon, this);
@@ -920,7 +917,7 @@ class CobiAppButton {
     this._signalManager.connect(metaWindow, "notify::wm-class", this._onWmClassChanged, this);
     this._signalManager.connect(metaWindow, "workspace-changed", this._onWindowWorkspaceChanged, this);
     
-    this.actor.remove_style_pseudo_class("neutral");
+    this.actor.add_style_pseudo_class("active");
     this._updateTooltip();
     if (this._windows.length == 1) {
       this._workspace.menuManager.addMenu(this.menu);
@@ -948,7 +945,6 @@ class CobiAppButton {
       if (!this._currentWindow) {
         this.actor.remove_style_pseudo_class("focus");
         this.actor.remove_style_pseudo_class("active");
-        this.actor.add_style_pseudo_class("neutral");
         this._workspace.menuManager.removeMenu(this.menu);
       }
     }
@@ -1117,21 +1113,8 @@ class CobiAppButton {
   }
   
   _updateVisualState() {
-    if (this._currentWindow) {
-      if (this.actor.has_style_pseudo_class("neutral")) {
-        this.actor.remove_style_pseudo_class("neutral");
-      }
-    }
-    else {
-      if (this.actor.has_style_pseudo_class("focus")) {
-        this.actor.remove_style_pseudo_class("focus");
-      }
-      if (!this.actor.has_style_pseudo_class("neutral")) {
-        this.actor.add_style_pseudo_class("neutral");
-      }
-      else if (this.actor.has_style_pseudo_class("hover")) {
-        this.actor.remove_style_pseudo_class("neutral");
-      }
+    if (!this._currentWindow) {
+      this.actor.remove_style_pseudo_class("focus");
     }
   }
   
@@ -1170,10 +1153,10 @@ class CobiAppButton {
     });
     
     if (state) {
-      this.actor.add_style_class_name("window-list-item-demands-attention");
+      this.actor.add_style_class_name("grouped-window-list-item-demands-attention");
     }
     else {
-      this.actor.remove_style_class_name("window-list-item-demands-attention");
+      this.actor.remove_style_class_name("grouped-window-list-item-demands-attention");
     }
   }
   
