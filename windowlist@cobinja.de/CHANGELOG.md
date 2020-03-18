@@ -1,5 +1,9 @@
 Changelog
 
+2.6.1
+==
+- Don't show "Visible on all workspaces" if there is only one workspace
+
 2.6
 ==
 - Switch styling to the one also used by the builtin grouped window list

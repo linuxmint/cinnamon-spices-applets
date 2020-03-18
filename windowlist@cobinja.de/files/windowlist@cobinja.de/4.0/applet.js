@@ -1442,23 +1442,21 @@ class CobiAppButton {
       if (this._currentWindow.is_on_all_workspaces()) {
         this._contextMenu.addAction(_("Only on this workspace"), Lang.bind(this, function() {this._currentWindow.unstick()}));
       }
-      else {
+      else if (this._applet._workspaces.length > 1) {
         this._contextMenu.addAction(_("Visible on all workspaces"), Lang.bind(this, function() {this._currentWindow.stick()}));
-        if (this._applet._workspaces.length > 1) {
-          item = new PopupMenu.PopupSubMenuMenuItem(_("Move to another workspace"));
-          this._contextMenu.addMenuItem(item);
-          
-          for (let i = 0; i < this._applet._workspaces.length; i++) {
-            if (i != this._workspace._wsNum) {
-              // Make the index a local variable to pass to function
-              let j = i;
-              let name = Main.workspace_names[i] ? Main.workspace_names[i] : Main._makeDefaultWorkspaceName(i);
-              let ws = new PopupMenu.PopupMenuItem(name);
-              ws.connect("activate", Lang.bind(this, function() {
-                 this._currentWindow.change_workspace_by_index(j, false, 0);
-              }));
-              item.menu.addMenuItem(ws);
-            }
+        item = new PopupMenu.PopupSubMenuMenuItem(_("Move to another workspace"));
+        this._contextMenu.addMenuItem(item);
+        
+        for (let i = 0; i < this._applet._workspaces.length; i++) {
+          if (i != this._workspace._wsNum) {
+            // Make the index a local variable to pass to function
+            let j = i;
+            let name = Main.workspace_names[i] ? Main.workspace_names[i] : Main._makeDefaultWorkspaceName(i);
+            let ws = new PopupMenu.PopupMenuItem(name);
+            ws.connect("activate", Lang.bind(this, function() {
+                this._currentWindow.change_workspace_by_index(j, false, 0);
+            }));
+            item.menu.addMenuItem(ws);
           }
         }
       }
