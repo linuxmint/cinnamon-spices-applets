@@ -108,3 +108,11 @@ msgstr ""
 #. settings-schema.json->menuScriptDisplay->description
 msgid "Display output of menu command"
 msgstr ""
+
+#. settings-schema.json->head5->description
+msgid "Command on start-up"
+msgstr ""
+
+#. settings-schema.json->startupScript->description
+msgid "Command run at start-up"
+msgstr ""
