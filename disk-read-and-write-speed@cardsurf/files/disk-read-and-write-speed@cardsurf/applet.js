@@ -106,6 +106,7 @@ MyApplet.prototype = {
         this.numbers_comma_regex = new RegExp("(\\s*\\d+)(,\\s*\\d+)*");
         this.numbers_regex = new RegExp("\\d+", "g");
         this.non_whitespace_end_regex = new RegExp("[^\\s]+$");
+        this.letter_regex = new RegExp("[a-zA-Z]+");
         this.non_whitespace_regex = new RegExp("[^\\s]+");
 
         this.filepath_partitions = "/proc/partitions";
@@ -391,12 +392,30 @@ MyApplet.prototype = {
     },
 
     read_sectors_size: function (disk_name) {
-        let device = disk_name.match(this.non_whitespace_regex).toString();
-        let filepath_sector_size = "/sys/block/" + device + "/queue/hw_sector_size";
-        let file_sectors_size = new Files.File(filepath_sector_size);
-        let string = file_sectors_size.exists() ? this.read_number(file_sectors_size, this.default_sector_size) :
-                                                  this.default_sector_size;
-        return string;
+        let sector_size = -1;
+        sector_size = this.read_sector_size_letter(sector_size, disk_name);
+        sector_size = this.read_sector_size_non_whitespace(sector_size, disk_name);
+        let number = sector_size >= 0 ? sector_size : this.default_sector_size;
+        return number;
+    },
+
+    read_sector_size_letter: function (sector_size, disk_name) {
+        var match_result = disk_name.match(this.letter_regex);
+        sector_size = this.read_sector_size(sector_size, match_result);
+        return sector_size;
+    },
+
+    read_sector_size: function (sector_size, match_result) {
+        if(sector_size < 0 && match_result != null) {
+            let device = match_result.toString();
+            let filepath_sector_size = "/sys/block/" + device + "/queue/hw_sector_size";
+            let file_sectors_size = new Files.File(filepath_sector_size);
+            let exists = file_sectors_size.exists();
+            if(exists) {
+                sector_size = this.read_number(file_sectors_size, -1);
+            }
+        }
+        return sector_size;
     },
 
     read_number: function (file, default_number) {
@@ -409,6 +428,12 @@ MyApplet.prototype = {
         catch(exception) {
             return default_number;
         }
+    },
+
+    read_sector_size_non_whitespace: function (sector_size, disk_name) {
+        var match_result = disk_name.match(this.non_whitespace_regex);
+        sector_size = this.read_sector_size(sector_size, match_result);
+        return sector_size;
     },
 
     _init_disk_name: function () {
