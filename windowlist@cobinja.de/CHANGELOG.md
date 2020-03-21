@@ -1,5 +1,10 @@
 Changelog
 
+2.7
+==
+- Add support for launching desktop file actions
+- Show places in nemo's context menu
+
 2.6.1
 ==
 - Don't show "Visible on all workspaces" if there is only one workspace
