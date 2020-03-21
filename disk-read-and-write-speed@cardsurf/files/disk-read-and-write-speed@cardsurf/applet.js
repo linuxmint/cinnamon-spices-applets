@@ -105,8 +105,8 @@ MyApplet.prototype = {
         this.newlines_regex = new RegExp("\\n+");
         this.numbers_comma_regex = new RegExp("(\\s*\\d+)(,\\s*\\d+)*");
         this.numbers_regex = new RegExp("\\d+", "g");
-        this.alphanumeric_end_regex = new RegExp("[a-zA-Z0-9]+$");
-        this.letter_regex = new RegExp("[a-zA-Z]+");
+        this.non_whitespace_end_regex = new RegExp("[^\\s]+$");
+        this.non_whitespace_regex = new RegExp("[^\\s]+");
 
         this.filepath_partitions = "/proc/partitions";
         this.filepath_diskstats = "/proc/diskstats";
@@ -352,8 +352,8 @@ MyApplet.prototype = {
         string = string.trim();
         let lines = string.split(this.newlines_regex);
         for(let i = 1; i < lines.length; ++i) {
-            let disk_name = lines[i].match(this.alphanumeric_end_regex).toString();
-            disk_names.push(disk_name);
+            let disk_name_match = lines[i].match(this.non_whitespace_end_regex);
+            this.add_string_if_match_found(disk_names, disk_name_match);
         }
         return disk_names;
     },
@@ -374,6 +374,13 @@ MyApplet.prototype = {
         }
     },
 
+    add_string_if_match_found: function (array, match_result) {
+        if(match_result != null) {
+            var str = match_result.toString();
+            array.push(str);
+        }
+    },
+
     _init_disk_sector_sizes: function () {
         let sector_sizes = {};
         for(let disk_name of this.disk_names) {
@@ -384,7 +391,7 @@ MyApplet.prototype = {
     },
 
     read_sectors_size: function (disk_name) {
-        let device = disk_name.match(this.letter_regex).toString();
+        let device = disk_name.match(this.non_whitespace_regex).toString();
         let filepath_sector_size = "/sys/block/" + device + "/queue/hw_sector_size";
         let file_sectors_size = new Files.File(filepath_sector_size);
         let string = file_sectors_size.exists() ? this.read_number(file_sectors_size, this.default_sector_size) :
