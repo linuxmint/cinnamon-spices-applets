@@ -1436,6 +1436,48 @@ class CobiAppButton {
       }
     }
     
+    let appInfo = this._app.get_app_info();
+    if (appInfo != null) {
+      let actions = appInfo.list_actions();
+      if (actions.length > 0) {
+        let appId = this.get_app_id();
+        
+        if (appId == "nemo.desktop" || appId == "nemo-home.desktop") {
+          let defaultPlaces = Main.placesManager.getDefaultPlaces();
+          let bookmarks = Main.placesManager.getBookmarks();
+          let places = defaultPlaces.concat(bookmarks);
+          
+          if (places.length > 0) {
+            this._contextMenu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+            let placesMenu = new PopupMenu.PopupSubMenuMenuItem(_("Places"));
+            
+            for (let i = 0; i < bookmarks.length; i++) {
+              let bookmark = bookmarks[i];
+              let bookmarkItem = new PopupMenu.PopupMenuItem(bookmark.name);
+              bookmarkItem.connect("activate", Lang.bind(this, function() {
+                bookmark.launch();
+              }));
+              placesMenu.menu.addMenuItem(bookmarkItem);
+            }
+            this._contextMenu.addMenuItem(placesMenu);
+          }
+        }
+        
+        this._contextMenu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+        for (let i = 0; i < actions.length; i++) {
+          let action = actions[i];
+          let displayName = appInfo.get_action_name(action);
+          
+          let actionItem = new PopupMenu.PopupMenuItem(displayName);
+          actionItem.connect("activate", Lang.bind(this, function() {
+            global.log("Launching action: " + action);
+            appInfo.launch_action(action, global.create_app_launch_context());
+          }));
+          this._contextMenu.addMenuItem(actionItem);
+        }
+      }
+    }
+    
     if (this._currentWindow) {
       this._contextMenu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
       // window ops for workspaces
