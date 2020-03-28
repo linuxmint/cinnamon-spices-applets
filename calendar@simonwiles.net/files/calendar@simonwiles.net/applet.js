@@ -312,7 +312,7 @@ MyApplet.prototype = {
     },
 
     _launch_worldclocks_config: function() {
-        Util.spawnCommandLine("/usr/bin/env python2 " + APPLET_DIR + "/world_clock_calendar_settings.py --instance-id " + this.instance_id);
+        Util.spawnCommandLine("/usr/bin/env python3 " + APPLET_DIR + "/world_clock_calendar_settings.py --instance-id " + this.instance_id);
     },
 
     _initRightClickMenu: function () {

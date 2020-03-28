@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python3
 #-*- coding:utf-8 -*-
 
 """ Settings Dialogue for World Clock Calendar Applet """
@@ -175,7 +175,7 @@ class SettingsWindow(Gtk.Window):
 
         timezones = subprocess.check_output(
             ['/usr/bin/awk', '!/#/ {print $3}', timezones_tab])
-        timezones = sorted(timezones.strip('\n').split('\n'))
+        timezones = sorted(timezones.decode('utf-8').strip('\n').split('\n'))
 
         # https://github.com/simonwiles/cinnamon_applets/issues/7
         timezones.append('UTC')
@@ -266,7 +266,7 @@ class AppletSettings(object):
 
     def save(self):
         with io.open(self.settings_json, 'w', encoding='utf-8') as handle:
-            handle.write(unicode(json.dumps(
+            handle.write(str(json.dumps(
                 self.settings, ensure_ascii=True, indent=2)))
 
 
