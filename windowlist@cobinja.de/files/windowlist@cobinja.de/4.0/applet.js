@@ -1158,7 +1158,6 @@ class CobiAppButton {
     let counter = 0;
     let sc = "grouped-window-list-item-demands-attention";
     
-    global.log("Start flashing");
     this.actor.add_style_class_name(sc);
 
     Mainloop.timeout_add(FLASH_INTERVAL, () => {
@@ -1166,11 +1165,9 @@ class CobiAppButton {
         return false;
       }
       if (this.actor.has_style_class_name(sc)) {
-        global.log("Flash off");
         this.actor.remove_style_class_name(sc);
       }
       else {
-        global.log("Flash on");
         this.actor.add_style_class_name(sc);
       }
       let result = counter <= 4;
@@ -1470,7 +1467,6 @@ class CobiAppButton {
           
           let actionItem = new PopupMenu.PopupMenuItem(displayName);
           actionItem.connect("activate", Lang.bind(this, function() {
-            global.log("Launching action: " + action);
             appInfo.launch_action(action, global.create_app_launch_context());
           }));
           this._contextMenu.addMenuItem(actionItem);
