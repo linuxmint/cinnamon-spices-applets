@@ -794,7 +794,7 @@ Player.prototype = {
                 artUrl = artUrl.replace("/image/", "/300/"); // Spotify 0.27.x
             }
             if (this._trackCoverFile != artUrl) {
-                this._trackCoverFile = artUrl;
+                this._trackCoverFile = (this._name === "Spotify") ? artUrl.replace("open.spotify.com","i.scdn.co") :  artUrl;
                 change = true;
             }
         }
