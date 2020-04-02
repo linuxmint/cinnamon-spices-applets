@@ -1059,9 +1059,9 @@ msgid ""
 "Needs a key, please click on 'Setup API Key and Location' for the steps how "
 "to obtain one."
 msgstr ""
-"WeatherBit - Minimaal 10 min verversingssnelheid wordt aanbevolen of u zou uw "
-"dagelijkse quota kunnen overschrijden.\n"
-"Heeft u een sleutel nodig, klik dan op 'Setup API Key en Locatie' voor de "
+"WeatherBit - Minstens 10 minuten als verversingssnelheid wordt aanbevolen "
+"omdat je anders de dagelijkse quota zou kunnen overschrijden.\n"
+"Heeft u een sleutel nodig, klik dan op 'API sleutel en locatie instellen' voor de "
 "stappen om deze te verkrijgen."
 
 #. 3.0->settings-schema.json->providerSettings->description
