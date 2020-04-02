@@ -1,3 +1,8 @@
+# 2.4.7
+
+* Fixes [#2929](https://github.com/linuxmint/cinnamon-spices-applets/issues/2929)
+* Fix styling issues with forecasts box - There wasn't enough margin on the bottom when the icon's height were bigger than the text, neither when the forecasts were wider than the current weather box.
+
 # 2.4.6
 
 * Fixes [#2907](https://github.com/linuxmint/cinnamon-spices-applets/issues/2907)
