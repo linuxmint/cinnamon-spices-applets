@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-04 21:37+0000\n"
+"POT-Creation-Date: 2020-04-05 15:43+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -78,63 +78,63 @@ msgstr ""
 msgid "Wind:"
 msgstr ""
 
-#: applet.js:1026 3.0/utils.js:146 3.8/utils.js:103
+#: applet.js:1026 3.0/utils.js:151 3.8/utils.js:108
 msgid "Sunday"
 msgstr ""
 
-#: applet.js:1026 3.0/utils.js:146 3.8/utils.js:103
+#: applet.js:1026 3.0/utils.js:151 3.8/utils.js:108
 msgid "Monday"
 msgstr ""
 
-#: applet.js:1026 3.0/utils.js:146 3.8/utils.js:103
+#: applet.js:1026 3.0/utils.js:151 3.8/utils.js:108
 msgid "Tuesday"
 msgstr ""
 
-#: applet.js:1026 3.0/utils.js:146 3.8/utils.js:103
+#: applet.js:1026 3.0/utils.js:151 3.8/utils.js:108
 msgid "Wednesday"
 msgstr ""
 
-#: applet.js:1026 3.0/utils.js:146 3.8/utils.js:103
+#: applet.js:1026 3.0/utils.js:151 3.8/utils.js:108
 msgid "Thursday"
 msgstr ""
 
-#: applet.js:1026 3.0/utils.js:146 3.8/utils.js:103
+#: applet.js:1026 3.0/utils.js:151 3.8/utils.js:108
 msgid "Friday"
 msgstr ""
 
-#: applet.js:1026 3.0/utils.js:146 3.8/utils.js:103
+#: applet.js:1026 3.0/utils.js:151 3.8/utils.js:108
 msgid "Saturday"
 msgstr ""
 
-#: applet.js:1030 3.0/utils.js:302 3.8/utils.js:255
+#: applet.js:1030 3.0/utils.js:307 3.8/utils.js:260
 msgid "N"
 msgstr ""
 
-#: applet.js:1030 3.0/utils.js:302 3.8/utils.js:255
+#: applet.js:1030 3.0/utils.js:307 3.8/utils.js:260
 msgid "NE"
 msgstr ""
 
-#: applet.js:1030 3.0/utils.js:302 3.8/utils.js:255
+#: applet.js:1030 3.0/utils.js:307 3.8/utils.js:260
 msgid "E"
 msgstr ""
 
-#: applet.js:1030 3.0/utils.js:302 3.8/utils.js:255
+#: applet.js:1030 3.0/utils.js:307 3.8/utils.js:260
 msgid "SE"
 msgstr ""
 
-#: applet.js:1030 3.0/utils.js:302 3.8/utils.js:255
+#: applet.js:1030 3.0/utils.js:307 3.8/utils.js:260
 msgid "S"
 msgstr ""
 
-#: applet.js:1030 3.0/utils.js:302 3.8/utils.js:255
+#: applet.js:1030 3.0/utils.js:307 3.8/utils.js:260
 msgid "SW"
 msgstr ""
 
-#: applet.js:1030 3.0/utils.js:302 3.8/utils.js:255
+#: applet.js:1030 3.0/utils.js:307 3.8/utils.js:260
 msgid "W"
 msgstr ""
 
-#: applet.js:1030 3.0/utils.js:302 3.8/utils.js:255
+#: applet.js:1030 3.0/utils.js:307 3.8/utils.js:260
 msgid "NW"
 msgstr ""
 
@@ -162,55 +162,55 @@ msgstr ""
 msgid "Key Temp. Blocked"
 msgstr ""
 
-#: 3.0/utils.js:196 3.8/utils.js:149
+#: 3.0/utils.js:201 3.8/utils.js:154
 msgid "Calm"
 msgstr ""
 
-#: 3.0/utils.js:199 3.8/utils.js:152
+#: 3.0/utils.js:204 3.8/utils.js:157
 msgid "Light air"
 msgstr ""
 
-#: 3.0/utils.js:202 3.8/utils.js:155
+#: 3.0/utils.js:207 3.8/utils.js:160
 msgid "Light breeze"
 msgstr ""
 
-#: 3.0/utils.js:205 3.8/utils.js:158
+#: 3.0/utils.js:210 3.8/utils.js:163
 msgid "Gentle breeze"
 msgstr ""
 
-#: 3.0/utils.js:208 3.8/utils.js:161
+#: 3.0/utils.js:213 3.8/utils.js:166
 msgid "Moderate breeze"
 msgstr ""
 
-#: 3.0/utils.js:211 3.8/utils.js:164
+#: 3.0/utils.js:216 3.8/utils.js:169
 msgid "Fresh breeze"
 msgstr ""
 
-#: 3.0/utils.js:214 3.8/utils.js:167
+#: 3.0/utils.js:219 3.8/utils.js:172
 msgid "Strong breeze"
 msgstr ""
 
-#: 3.0/utils.js:217 3.8/utils.js:170
+#: 3.0/utils.js:222 3.8/utils.js:175
 msgid "Near gale"
 msgstr ""
 
-#: 3.0/utils.js:220 3.8/utils.js:173
+#: 3.0/utils.js:225 3.8/utils.js:178
 msgid "Gale"
 msgstr ""
 
-#: 3.0/utils.js:223 3.8/utils.js:176
+#: 3.0/utils.js:228 3.8/utils.js:181
 msgid "Strong gale"
 msgstr ""
 
-#: 3.0/utils.js:226 3.8/utils.js:179
+#: 3.0/utils.js:231 3.8/utils.js:184
 msgid "Storm"
 msgstr ""
 
-#: 3.0/utils.js:229 3.8/utils.js:182
+#: 3.0/utils.js:234 3.8/utils.js:187
 msgid "Violent storm"
 msgstr ""
 
-#: 3.0/utils.js:231 3.8/utils.js:184
+#: 3.0/utils.js:236 3.8/utils.js:189
 msgid "Hurricane"
 msgstr ""
 
@@ -1027,8 +1027,8 @@ msgstr ""
 
 #. 3.0->settings-schema.json->WB->description
 msgid ""
-"WeatherBit - Minimum of 10min refresh rate is recommended or you might exceed you daily quota.\n"
-"Needs a key, please click on 'Setup API Key and Location' for the steps how to obtain one."
+"WeatherBit - At least 10 minutes as refresh rate is recommended,\n"
+"since otherwise you might exceed you daily quota."
 msgstr ""
 
 #. 3.0->settings-schema.json->providerSettings->description
@@ -1184,9 +1184,8 @@ msgstr ""
 
 #. 3.8->settings-schema.json->WB->description
 msgid ""
-"WeatherBit - Minimum of 10min refresh rate is recommended or you might "
-"exceed you daily quota. Needs a key, please click on 'Setup API Key and "
-"Location' for the steps how to obtain one."
+"WeatherBit - At least 10 minutes as refresh rate is recommended, since "
+"otherwise you might exceed you daily quota."
 msgstr ""
 
 #. 3.8->settings-schema.json->useCustomMenuIcons->tooltip
