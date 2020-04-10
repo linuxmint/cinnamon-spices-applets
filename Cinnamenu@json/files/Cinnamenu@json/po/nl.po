@@ -1,0 +1,450 @@
+# Dutch translation for Cinnamenu
+# Copyright (C) 2019
+# This file is distributed under the same license as the Cinnamenu package.
+# Pjotr <pjotrvertaalt@gmail.com>, 2013-2019.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-03-31 01:03-0500\n"
+"PO-Revision-Date: 2019-02-10 12:00+100\n"
+"Last-Translator: Pjotr <pjotrvertaalt@gmail.com>\n"
+"Language-Team: nl\n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: buttons.js:382
+msgid "Please provide your password to uninstall this application"
+msgstr "Voer a.u.b. uw wachtwoord in om deze toepassing te deïnstalleren"
+
+#: buttons.js:1020
+msgid "Add to panel"
+msgstr "Toevoegen aan werkbalk"
+
+#: buttons.js:1022
+msgid "Add to desktop"
+msgstr "Toevoegen aan bureaublad"
+
+#: buttons.js:1025
+msgid "Remove from favorites"
+msgstr "Verwijderen uit favorieten"
+
+#: buttons.js:1027
+msgid "Add to favorites"
+msgstr "Toevoegen aan favorieten"
+
+#: buttons.js:1029
+msgid "Uninstall"
+msgstr "Deïnstalleren"
+
+#: buttons.js:1031
+msgid "Run with NVIDIA GPU"
+msgstr "Draaien met NVIDIA-GPU"
+
+#: buttons.js:1228 applet.js:2253
+msgid "List View"
+msgstr "Lijstweergave"
+
+#: buttons.js:1229 applet.js:2254
+msgid "Switch to list view"
+msgstr "Omschakelen naar lijstweergave"
+
+#: buttons.js:1234 applet.js:2253
+msgid "Grid View"
+msgstr "Rasterweergave"
+
+#: buttons.js:1235 applet.js:2254
+msgid "Switch to grid view"
+msgstr "Omschakelen naar rasterweergave"
+
+#: placeDisplay.js:57
+#, javascript-format
+msgid "Failed to launch \"%s\""
+msgstr "Kon '%s' niet starten"
+
+#: placeDisplay.js:146
+msgid "Home"
+msgstr "Persoonlijke map"
+
+#: placeDisplay.js:220
+msgid "Computer"
+msgstr "Computer"
+
+#: placeDisplay.js:224
+msgid "Browse network"
+msgstr "Netwerk verkennen"
+
+#: applet.js:84
+msgid "Type to search..."
+msgstr "Tik in om te zoeken..."
+
+#: applet.js:149
+msgid "Initializing"
+msgstr "Bezig met opstarten"
+
+#: applet.js:275
+msgid "No description available"
+msgstr "Geen beschrijving beschikbaar"
+
+#: applet.js:956
+msgid "All Applications"
+msgstr "Alle toepassingen"
+
+#: applet.js:994
+msgid "Places"
+msgstr "Locaties"
+
+#: applet.js:995
+msgid "Recent Files"
+msgstr "Recente bestanden"
+
+#: applet.js:996
+msgid "Bookmarks"
+msgstr "Bladwijzers"
+
+#: applet.js:997
+msgid "Favorite Apps"
+msgstr "Favoriete toepassingen"
+
+#: applet.js:1282
+msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
+msgstr "Voor bladwijzers van Firefox en Midori is het pakket gir1.2-gda-5.0 vereist"
+
+#: applet.js:1362
+msgid "Clear List"
+msgstr "Lijst wissen"
+
+#: applet.js:1373
+msgid "No recent documents"
+msgstr "Geen recente documenten"
+
+#: applet.js:2246
+msgid "Account details"
+msgstr "Bijzonderheden van account"
+
+#: applet.js:2260
+msgid "Lock Screen"
+msgstr "Scherm vergrendelen"
+
+#: applet.js:2261
+msgid "Lock the screen"
+msgstr "Vergrendel het scherm"
+
+#: applet.js:2282
+msgid "Logout"
+msgstr "Afmelden"
+
+#: applet.js:2283
+msgid "Leave the session"
+msgstr "Sessie verlaten"
+
+#: applet.js:2290
+msgid "Quit"
+msgstr "Afsluiten"
+
+#: applet.js:2291
+msgid "Shutdown the computer"
+msgstr "De computer afsluiten"
+
+#. metadata.json->name
+#. settings-schema.json->cinnamenuProvidersSection->title
+msgid "Cinnamenu"
+msgstr "Cinnamenu"
+
+#. metadata.json->description
+msgid ""
+"A flexible menu providing formatting options, web bookmarks, open window "
+"lookup, and search provider support with fuzzy searching."
+msgstr ""
+"Een flexibel menu met vormgevingsopties, webbladwijzers, opzoeken van "
+"open vensters, en zoekdienstondersteuning met wazig zoeken."
+
+#. settings-schema.json->panel->title
+msgid "Behavior"
+msgstr "Gedrag"
+
+#. settings-schema.json->appearance->title
+msgid "Appearance"
+msgstr "Uiterlijk"
+
+#. settings-schema.json->menu->title
+msgid "Layout and Content"
+msgstr "Vormgeving en inhoud"
+
+#. settings-schema.json->providers->title
+msgid "Search Providers"
+msgstr "Zoekdienstaanbieders"
+
+#. settings-schema.json->extensionProvidersSection->title
+msgid "No search provider extensions found"
+msgstr "Geen extensies aangetroffen voor zoekdiensten"
+
+#. settings-schema.json->panel-appear->title
+#. settings-schema.json->panel-behave->title
+msgid "Panel"
+msgstr "Werkbalk"
+
+#. settings-schema.json->menu-behave->title
+#. settings-schema.json->menu-icons->title
+msgid "Menu"
+msgstr "Menu"
+
+#. settings-schema.json->menu-layout->title
+msgid "Layout"
+msgstr "Vormgeving"
+
+#. settings-schema.json->menu-content->title
+msgid "Content"
+msgstr "Inhoud"
+
+#. settings-schema.json->privacy-settings-button->description
+msgid "Toggle recent files"
+msgstr "Recente bestanden omschakelen"
+
+#. settings-schema.json->privacy-settings-button->tooltip
+msgid "Press this button to customize your privacy settings."
+msgstr "Klik op deze knop om uw privéleven-instellingen aan te passen."
+
+#. settings-schema.json->menu-editor-button->description
+msgid "Open the menu editor"
+msgstr "Open de menubewerker"
+
+#. settings-schema.json->menu-editor-button->tooltip
+msgid "Press this button to customize your menu entries."
+msgstr "Klik op deze knop om uw menu-onderdelen aan te passen."
+
+#. settings-schema.json->resetCategoryOrder-button->description
+msgid "Reset category order"
+msgstr "Categorievolgorde terugzetten op standaard"
+
+#. settings-schema.json->menu-icon-custom->description
+msgid "Use a custom icon"
+msgstr "Een aangepast pictogram gebruiken"
+
+#. settings-schema.json->menu-icon-custom->tooltip
+msgid "Unchecking this allows the theme to set the icon"
+msgstr "Als u dit uitvinkt zal het thema het pictogram instellen"
+
+#. settings-schema.json->menu-icon->description
+msgid "Icon"
+msgstr "Pictogram"
+
+#. settings-schema.json->menu-icon->tooltip
+msgid "Select an icon to show in the panel."
+msgstr "Kies een pictogram om te tonen in de werkbalk."
+
+#. settings-schema.json->menu-label->description
+#. settings-schema.json->menu-label->tooltip
+msgid "Set the custom menu button icon name"
+msgstr "Stel de naam in van het aangepaste menuknoppictogram"
+
+#. settings-schema.json->category-icon-size->units
+#. settings-schema.json->apps-list-icon-size->units
+#. settings-schema.json->apps-grid-icon-size->units
+msgid "pixels"
+msgstr "beeldpunten"
+
+#. settings-schema.json->category-icon-size->description
+#. settings-schema.json->category-icon-size->tooltip
+msgid "Category icon size"
+msgstr "Pictogramgrootte voor categorie"
+
+#. settings-schema.json->apps-list-icon-size->description
+#. settings-schema.json->apps-list-icon-size->tooltip
+msgid "Applications list icon size"
+msgstr "Pictogramgrootte voor toepassingenlijst"
+
+#. settings-schema.json->apps-grid-icon-size->description
+#. settings-schema.json->apps-grid-icon-size->tooltip
+msgid "Applications grid icon size"
+msgstr "Pictogramgrootte voor toepassingenraster"
+
+#. settings-schema.json->overlay-key->description
+msgid "Keyboard shortcut to open and close the menu"
+msgstr "Sneltoets voor openen en sluiten van het menu"
+
+#. settings-schema.json->activate-on-hover->description
+msgid "Open the menu when I move my mouse over it"
+msgstr "Open het menu wanneer ik mijn muispijl er overheen beweeg"
+
+#. settings-schema.json->activate-on-hover->tooltip
+msgid "Enable opening the menu when the mouse enters the applet"
+msgstr "Schakel openen van het menu in wanneer de muispijl de hulptoepassing binnengaat"
+
+#. settings-schema.json->hover-delay->units
+#. settings-schema.json->tooltip-delay->units
+msgid "milliseconds"
+msgstr "milliseconden"
+
+#. settings-schema.json->hover-delay->description
+msgid "Menu hover delay:"
+msgstr "Zweefvertraging voor menu:"
+
+#. settings-schema.json->hover-delay->tooltip
+msgid "Delay between switching categories"
+msgstr "Vertraging tussen het wisselen van categorieën"
+
+#. settings-schema.json->enable-animation->description
+msgid "Use menu animations"
+msgstr "Menu-animaties gebruiken"
+
+#. settings-schema.json->enable-animation->tooltip
+msgid "Allow the menu to animate on open and close"
+msgstr "Menu-animaties inschakelen voor openen en sluiten"
+
+#. settings-schema.json->category-click->description
+msgid "Activate categories on click"
+msgstr "Categorieën activeren bij klikken"
+
+#. settings-schema.json->category-click->tooltip
+msgid ""
+"When enabled, category views are activated on click instead of on hover."
+msgstr ""
+"Indien ingeschakeld worden categorieweergaven geactiveerd bij klikken in plaats van bij zweven."
+
+#. settings-schema.json->enable-autoscroll->description
+msgid "Enable autoscrolling in application list"
+msgstr "Automatisch schuiven in toepassingenlijst inschakelen"
+
+#. settings-schema.json->enable-autoscroll->tooltip
+msgid ""
+"Choose whether or not to enable smooth autoscrolling in the application "
+"list."
+msgstr ""
+"Kies of soepel automatisch schuiven moet worden ingeschakeld in de "
+"toepassingenlijst."
+
+#. settings-schema.json->enable-bookmarks->description
+msgid "Show web bookmarks"
+msgstr "Webbladwijzers tonen"
+
+#. settings-schema.json->enable-bookmarks->tooltip
+msgid "Choose whether or not bookmarks are indexed in the menu."
+msgstr "Kies of webbladwijzers al dan niet worden opgenomen in het menu."
+
+#. settings-schema.json->enable-windows->description
+msgid "Enable searching of open windows"
+msgstr "Opzoeken van open vensters inschakelen"
+
+#. settings-schema.json->enable-windows->tooltip
+msgid "Choose whether or not open windows are indexed in menu searches."
+msgstr "Kies of open vensters al dan niet worden opgenomen in menu-zoekresultaten."
+
+#. settings-schema.json->enable-search-providers->description
+msgid "Enable search providers"
+msgstr "Zoekdiensten inschakelen"
+
+#. settings-schema.json->enable-search-providers->tooltip
+msgid ""
+"Choose whether or not search provider results are indexed in menu searches."
+msgstr ""
+"Kies of zoekdienstresultaten al dan niet worden opgenomen in menu-zoekresultaten."
+
+#. settings-schema.json->get-providers->description
+msgid "Example Search Providers"
+msgstr "Voorbeeld van zoekdiensten"
+
+#. settings-schema.json->startup-view-mode->description
+#. settings-schema.json->startup-view-mode->tooltip
+msgid "Startup applications view mode"
+msgstr "Weergavemodus van opstarttoepassingen"
+
+#. settings-schema.json->startup-view-mode->options
+msgid "List"
+msgstr "Lijst"
+
+#. settings-schema.json->startup-view-mode->options
+msgid "Grid"
+msgstr "Raster"
+
+#. settings-schema.json->apps-grid-column-count->units
+msgid "columns"
+msgstr "rijen"
+
+#. settings-schema.json->apps-grid-column-count->description
+#. settings-schema.json->apps-grid-column-count->tooltip
+msgid "Number of columns in apps grid"
+msgstr "Aantal rijen in toepassingenraster"
+
+#. settings-schema.json->show-places->description
+msgid "Show bookmarks and places"
+msgstr "Bladwijzers en locaties tonen"
+
+#. settings-schema.json->show-places->tooltip
+msgid "Choose whether or not to show bookmarks and places in the menu."
+msgstr "Kies of bladwijzers en locaties al dan niet worden weergegeven in het menu."
+
+#. settings-schema.json->show-application-icons->description
+msgid "Show application icons"
+msgstr "Toepassingspictogrammen tonen"
+
+#. settings-schema.json->show-application-icons->tooltip
+msgid "Choose whether or not to show icons on applications."
+msgstr "Kies of toepassingspictogrammen al dan niet worden weergegeven in het menu."
+
+#. settings-schema.json->show-category-icons->description
+msgid "Show category icons"
+msgstr "Categoriepictogrammen tonen"
+
+#. settings-schema.json->show-category-icons->tooltip
+msgid "Choose whether or not to show icons on categories."
+msgstr "Kies of categoriepictogrammen al dan niet worden getoond."
+
+#. settings-schema.json->search-filesystem->description
+msgid "Enable filesystem path entry in search box"
+msgstr "Bestandssysteempad in zoekveld inschakelen"
+
+#. settings-schema.json->search-filesystem->tooltip
+msgid "Allows path entry in the menu search box."
+msgstr "Maakt bestandspad mogelijk in het menuzoekveld."
+
+#. settings-schema.json->show-apps-description-on-buttons->description
+msgid "Show application descriptions under titles"
+msgstr "Beschrijvingen van toepassingen tonen onder titels"
+
+#. settings-schema.json->show-apps-description-on-buttons->tooltip
+msgid ""
+"Choose whether or not to show the application description on the application"
+" buttons."
+msgstr ""
+"Kies of de beschrijving van de toepassing wordt getoond op de knop van de "
+"toepassing."
+
+#. settings-schema.json->show-tooltips->description
+msgid "Show tooltips"
+msgstr "Zweeftips tonen"
+
+#. settings-schema.json->show-tooltips->tooltip
+msgid ""
+"When enabled, tooltips containing the item's name or description is shown "
+"when hovered over."
+msgstr ""
+"Indien ingeschakeld zullen er zweeftips worden getoond met de naam of "
+"beschrijving van het menu-onderdeel."
+
+#. settings-schema.json->tooltip-delay->description
+msgid "Tooltip delay"
+msgstr "Vertraging voor zweeftip"
+
+#. settings-schema.json->tooltip-delay->tooltip
+msgid ""
+"The delay time in milliseconds for tooltips when hovering over a menu item."
+msgstr ""
+"De vertraging in milliseconden voor het verschijnen van zweeftips bij menu-onderdelen."
+
+#. settings-schema.json->enable-custom-menu-height->description
+#. settings-schema.json->enable-custom-menu-height->tooltip
+msgid "Use a custom menu height"
+msgstr "Een aangepaste menuhoogte gebruiken"
+
+#. settings-schema.json->custom-menu-height->units
+msgid "px"
+msgstr "bp"
+
+#. settings-schema.json->custom-menu-height->description
+#. settings-schema.json->custom-menu-height->tooltip
+msgid "Custom menu height"
+msgstr "Aangepaste menuhoogte"
