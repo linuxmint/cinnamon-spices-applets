@@ -8,6 +8,11 @@ function importModule(path) {
         return AppletDir[path];
     }
 }
+const UUID = "weather@mockturtl";
+imports.gettext.bindtextdomain(UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
+function _(str) {
+    return imports.gettext.dgettext(UUID, str);
+}
 var utils = importModule("utils");
 var isCoordinate = utils.isCoordinate;
 var isLangSupported = utils.isLangSupported;
@@ -20,19 +25,11 @@ class OpenWeatherMap {
         this.supportedLanguages = ["af", "ar", "az", "bg", "ca", "cz", "da", "de", "el", "en", "eu", "fa", "fi",
             "fr", "gl", "he", "hi", "hr", "hu", "id", "it", "ja", "kr", "la", "lt", "mk", "no", "nl", "pl",
             "pt", "pt_br", "ro", "ru", "se", "sk", "sl", "sp", "es", "sr", "th", "tr", "ua", "uk", "vi", "zh_cn", "zh_tw", "zu"];
-        this.current_url = "https://api.openweathermap.org/data/2.5/weather?";
-        this.daily_url = "https://api.openweathermap.org/data/2.5/forecast/daily?";
+        this.base_url = "https://api.openweathermap.org/data/2.5/onecall?";
         this.app = _app;
     }
     async GetWeather() {
-        let currentResult = await this.GetData(this.current_url, this.ParseCurrent);
-        let forecastResult = await this.GetData(this.daily_url, this.ParseForecast);
-        currentResult.forecasts = forecastResult;
-        return currentResult;
-    }
-    ;
-    async GetData(baseUrl, ParseFunction) {
-        let query = this.ConstructQuery(baseUrl);
+        let query = this.ConstructQuery(this.base_url);
         let json;
         if (query != null) {
             this.app.log.Debug("Query: " + query);
@@ -47,68 +44,50 @@ class OpenWeatherMap {
                 this.app.HandleError({ type: "soft", detail: "no api response", service: "openweathermap" });
                 return null;
             }
-            if (json.cod == "200") {
-                return ParseFunction(json, this);
-            }
-            else {
-                this.HandleResponseErrors(json);
-                return null;
-            }
+            return this.ParseWeather(json, this);
         }
         else {
             return null;
         }
     }
     ;
-    ParseCurrent(json, self) {
+    ParseWeather(json, self) {
         try {
             let weather = {
                 coord: {
-                    lat: get(["coord", "lat"], json),
-                    lon: get(["coord", "lon"], json)
+                    lat: json.lat,
+                    lon: json.lon
                 },
                 location: {
-                    city: json.name,
-                    country: json.sys.country,
-                    url: "https://openweathermap.org/city/" + json.id,
+                    url: null,
+                    timeZone: json.timezone
                 },
-                date: new Date((json.dt) * 1000),
-                sunrise: new Date((json.sys.sunrise) * 1000),
-                sunset: new Date((json.sys.sunset) * 1000),
+                date: new Date((json.current.dt) * 1000),
+                sunrise: new Date((json.current.sunrise) * 1000),
+                sunset: new Date((json.current.sunset) * 1000),
                 wind: {
-                    speed: get(["wind", "speed"], json),
-                    degree: get(["wind", "deg"], json)
+                    speed: json.current.wind_speed,
+                    degree: json.current.wind_deg
                 },
-                temperature: get(["main", "temp"], json),
-                pressure: get(["main", "pressure"], json),
-                humidity: get(["main", "humidity"], json),
+                temperature: json.current.temp,
+                pressure: json.current.pressure,
+                humidity: json.current.humidity,
                 condition: {
-                    main: get(["weather", "0", "main"], json),
-                    description: get(["weather", "0", "description"], json),
-                    icon: weatherIconSafely(self.ResolveIcon(get(["weather", "0", "icon"], json)), self.app.config.IconType()),
-                    customIcon: self.ResolveCustomIcon(get(["weather", "0", "icon"], json))
+                    main: get(["current", "weather", "0", "main"], json),
+                    description: get(["current", "weather", "0", "description"], json),
+                    icon: weatherIconSafely(self.ResolveIcon(get(["current", "weather", "0", "icon"], json)), self.app.config.IconType()),
+                    customIcon: self.ResolveCustomIcon(get(["current", "weather", "0", "icon"], json))
                 },
                 extra_field: {
                     name: _("Cloudiness"),
-                    value: json.clouds.all,
+                    value: json.current.clouds,
                     type: "percent"
                 },
                 forecasts: []
             };
-            return weather;
-        }
-        catch (e) {
-            self.app.log.Error("OpenWeathermap Weather Parsing error: " + e);
-            self.app.HandleError({ type: "soft", service: "openweathermap", detail: "unusal payload", message: _("Failed to Process Current Weather Info") });
-            return null;
-        }
-    }
-    ;
-    ParseForecast(json, self) {
-        let forecasts = [];
-        try {
+            let forecasts = [];
             for (let i = 0; i < self.app.config._forecastDays; i++) {
-                let day = json.list[i];
+                let day = json.daily[i];
                 let forecast = {
                     date: new Date(day.dt * 1000),
                     temp_min: day.temp.min,
@@ -122,11 +101,12 @@ class OpenWeatherMap {
                 };
                 forecasts.push(forecast);
             }
-            return forecasts;
+            weather.forecasts = forecasts;
+            return weather;
         }
         catch (e) {
-            self.app.log.Error("OpenWeathermap Forecast Parsing error: " + e);
-            self.app.HandleError({ type: "soft", service: "openweathermap", detail: "unusal payload", message: _("Failed to Process Forecast Info") });
+            self.app.log.Error("OpenWeathermap Weather Parsing error: " + e);
+            self.app.HandleError({ type: "soft", service: "openweathermap", detail: "unusal payload", message: _("Failed to Process Current Weather Info") });
             return null;
         }
     }
@@ -135,7 +115,7 @@ class OpenWeatherMap {
         let query = baseUrl;
         let locString = this.ParseLocation();
         if (locString != null) {
-            query = query + locString + "&APPID=";
+            query = query + locString + "&appid=";
             query += "1c73f8259a86c6fd43c7163b543c8640";
             let locale = this.ConvertToAPILocale(this.app.currentLocale);
             if (this.app.config._translateCondition && isLangSupported(locale, this.supportedLanguages)) {
