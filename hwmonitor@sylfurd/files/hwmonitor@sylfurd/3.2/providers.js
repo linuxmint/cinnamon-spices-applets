@@ -220,7 +220,7 @@ NetDataProvider.prototype = {
     }
 };
 
-// Class responsible for getting disk data
+// Class responsible for getting DISK (read/write) data
 function DiskDataProvider(frequency, type_read, mount_dir) {
     this.init(frequency, type_read, mount_dir);
 }
@@ -273,6 +273,44 @@ DiskDataProvider.prototype = {
                 let tools = new Tools();
                 return tools.limit(percent, 0, 1);              // Return percentage
             }    
+        }
+        catch (e) {
+            global.logError(e);
+            this.text = "0 %";
+            return 0;
+        }
+    }
+}
+
+function BatteryProvider() {
+    this.init();
+}
+
+BatteryProvider.prototype = {
+	init: function() {
+        this.name = _("BAT");
+        this.type = "BAT";
+    },
+
+    getData: function() {
+        try {
+            var percent = 0;
+            var path = '/sys/class/power_supply/BAT0';
+            if ( GLib.file_test(path, GLib.FileTest.IS_DIR) ) {
+                // People, we have a power!!!
+
+                path = path + '/capacity';
+                let [success, array_chars] = GLib.file_get_contents(path);
+                if(!success) {
+                    global.logError("HWMONITOR : Failed to read battery status from file : " + path)
+                } else {
+                    let string = array_chars.toString().trim();
+                    percent = parseInt(string) / 100;    
+                }
+            }
+            this.text = ((percent)*100).toFixed(0) + "%";   // Set detailed text
+            let tools = new Tools();
+            return tools.limit(percent, 0, 1);              // Return percentage
         }
         catch (e) {
             global.logError(e);

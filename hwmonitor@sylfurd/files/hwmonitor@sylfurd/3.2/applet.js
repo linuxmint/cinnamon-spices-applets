@@ -155,6 +155,12 @@ GraphicalHWMonitorApplet.prototype = {
         this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "diskwrite_use_custom_label", "diskwrite_use_custom_label", this.settingsChanged, null);
         this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "diskwrite_custom_label", "diskwrite_custom_label", this.settingsChanged, null);
         this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "diskwrite_show_detail_label", "diskwrite_show_detail_label", this.settingsChanged, null);
+        // BAT (battery) settings
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "bat_enable_graph", "bat_enable_graph", this.settingsChanged, null);
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "bat_size", "bat_size", this.settingsChanged, null);
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "bat_use_custom_label", "bat_use_custom_label", this.settingsChanged, null);
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "bat_custom_label", "bat_custom_label", this.settingsChanged, null);
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "bat_show_detail_label", "bat_show_detail_label", this.settingsChanged, null);
         
         this.createThemeObject();
 
@@ -242,6 +248,18 @@ GraphicalHWMonitorApplet.prototype = {
 
             let diskWriteProvider =  new Providers.DiskDataProvider(this.frequency, false, this.diskwrite_mount_dir);
             this.graphs.push(new Graph.Graph(diskWriteProvider, diskWriteGraphArea, this.theme_object, this.diskwrite_show_detail_label));
+        }    
+
+        // Add BAT Graph
+        if (this.bat_enable_graph) { 
+            let batGraphArea = null;
+            if (this.isHorizontal)
+                batGraphArea = this.appletArea.addGraph(this.bat_size, this.panel_height);
+            else
+                batGraphArea = this.appletArea.addGraph(this.panel_height, this.bat_size);
+
+            let batProvider =  new Providers.BatteryProvider();
+            this.graphs.push(new Graph.Graph(batProvider, batGraphArea, this.theme_object, this.bat_show_detail_label));
         }    
 
         this.appletArea.createDrawingArea();
@@ -382,6 +400,8 @@ GraphicalHWMonitorApplet.prototype = {
         this.theme_object.diskread_custom_label = this.diskread_custom_label;
         this.theme_object.diskwrite_use_custom_label = this.diskwrite_use_custom_label;
         this.theme_object.diskwrite_custom_label = this.diskwrite_custom_label;
+        this.theme_object.bat_use_custom_label = this.bat_use_custom_label;
+        this.theme_object.bat_custom_label = this.bat_custom_label;
     },
 
     restartGHW: function() {

@@ -1,5 +1,6 @@
 const Gio = imports.gi.Gio;
 const St = imports.gi.St;
+const GLib = imports.gi.GLib;
 
 //
 // Initialize GTop
@@ -204,7 +205,7 @@ class NetDataProvider {
     }
 };
 
-// Class responsible for getting CPU data
+// Class responsible for getting DISK (read/write) data
 class DiskDataProvider {
 	constructor(frequency, type_read, mount_dir) {
         this.gtop = new GTop.glibtop_fsusage();
@@ -252,6 +253,41 @@ class DiskDataProvider {
                 let tools = new Tools();
                 return tools.limit(percent, 0, 1);              // Return percentage
             }    
+        }
+        catch (e) {
+            global.logError(e);
+            this.text = "0 %";
+            return 0;
+        }
+    }
+}
+
+// Class responsible for getting BAT (battery) data
+class BatteryProvider {
+	constructor() {
+        this.name = _("BAT");
+        this.type = "BAT";
+    }
+
+    getData() {
+        try {
+            var percent = 0;
+            var path = '/sys/class/power_supply/BAT0';
+            if ( GLib.file_test(path, GLib.FileTest.IS_DIR) ) {
+                // People, we have a power!!!
+
+                path = path + '/capacity';
+                let [success, array_chars] = GLib.file_get_contents(path);
+                if(!success) {
+                    global.logError("HWMONITOR : Failed to read battery status from file : " + path)
+                } else {
+                    let string = array_chars.toString().trim();
+                    percent = parseInt(string) / 100;    
+                }
+            }
+            this.text = ((percent)*100).toFixed(0) + "%";   // Set detailed text
+            let tools = new Tools();
+            return tools.limit(percent, 0, 1);              // Return percentage
         }
         catch (e) {
             global.logError(e);
