@@ -9,6 +9,12 @@ function importModule(path: string): any {
     }
 }
 
+const UUID = "weather@mockturtl"
+imports.gettext.bindtextdomain(UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
+function _(str: string): string {
+  return imports.gettext.dgettext(UUID, str)
+}
+
 var utils = importModule("utils");
 var isCoordinate = utils.isCoordinate as (text: any) => boolean;
 var isLangSupported = utils.isLangSupported as (lang: string, languages: Array <string> ) => boolean;
