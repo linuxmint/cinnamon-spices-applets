@@ -9,7 +9,6 @@ function importModule(path: string): any {
       return AppletDir[path];
     }
 }
-
 const UUID = "weather@mockturtl"
 imports.gettext.bindtextdomain(UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
 function _(str: string): string {

@@ -91,7 +91,7 @@ const APPLET_ICON = "view-refresh-symbolic"
 const REFRESH_ICON = "view-refresh";
 const CMD_SETTINGS = "cinnamon-settings applets " + UUID
 
-type Services = "OpenWeatherMap" | "DarkSky" | "MetNorway" | "Weatherbit";
+type Services = "OpenWeatherMap" | "DarkSky" | "MetNorway" | "Weatherbit" | "Yahoo";
 type ServiceMap = {
   [key: string]: Services
 }
@@ -103,7 +103,8 @@ const DATA_SERVICE: ServiceMap = {
   OPEN_WEATHER_MAP: "OpenWeatherMap",
   DARK_SKY: "DarkSky",
   MET_NORWAY: "MetNorway",
-  WEATHERBIT: "Weatherbit"
+  WEATHERBIT: "Weatherbit",
+  YAHOO: "Yahoo"
 }
 
 //----------------------------------------------------------------------
@@ -165,6 +166,7 @@ class WeatherApplet extends TextIconApplet {
     this.log = new Log(instanceId);
     this.currentLocale = this.constructJsLocale(get_language_names()[0]);
     this.log.Debug("System locale is " + this.currentLocale);
+    this.log.Debug("Appletdir is: " + this.appletDir);
     this._httpSession.user_agent = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:37.0) Gecko/20100101 Firefox/37.0"; // ipapi blocks non-browsers agents, imitating browser
     this.msgSource = new SystemNotificationSource(_("Weather Applet"));
     messageTray.add(this.msgSource);
@@ -287,7 +289,7 @@ class WeatherApplet extends TextIconApplet {
   };
 
   public sendNotification(title: string, message: string, transient?: boolean) {
-    let notification = new Notification(this.msgSource, title, message);
+    let notification = new Notification(this.msgSource, "WeatherApplet: " + title, message);
     if (transient) notification.setTransient((!transient) ? false : true);
     this.msgSource.notify(notification);
   }
@@ -411,6 +413,10 @@ class WeatherApplet extends TextIconApplet {
         case DATA_SERVICE.WEATHERBIT:
           if (weatherbit == null) var weatherbit = importModule("weatherbit");
           this.provider = new weatherbit.Weatherbit(this);
+          break;
+        case DATA_SERVICE.YAHOO:
+          if (yahoo == null) var yahoo = importModule("yahoo");
+          this.provider = new yahoo.Yahoo(this);
           break;
         default:
           return "error";
@@ -1651,7 +1657,7 @@ type RefreshState = "success" | "failure" | "error";
  *  soft will show a subtle hint that the refresh failed (NOT IMPLEMENTED)
  */
 type ErrorSeverity = "hard" |  "soft";
-type ApiService = "ipapi" | "darksky" | "openweathermap" | "met-norway" | "weatherbit";
+type ApiService = "ipapi" | "darksky" | "openweathermap" | "met-norway" | "weatherbit" | "yahoo";
 type ErrorDetail = "no key" | "bad key" | "no location" | "bad location format" |
   "location not found" | "no network response" | "no api response" | 
   "bad api response - non json" | "bad api response" | "no reponse body" | 

@@ -70,7 +70,8 @@ const DATA_SERVICE = {
     OPEN_WEATHER_MAP: "OpenWeatherMap",
     DARK_SKY: "DarkSky",
     MET_NORWAY: "MetNorway",
-    WEATHERBIT: "Weatherbit"
+    WEATHERBIT: "Weatherbit",
+    YAHOO: "Yahoo"
 };
 imports.gettext.bindtextdomain(UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
 function _(str) {
@@ -114,6 +115,7 @@ class WeatherApplet extends TextIconApplet {
         this.log = new Log(instanceId);
         this.currentLocale = this.constructJsLocale(get_language_names()[0]);
         this.log.Debug("System locale is " + this.currentLocale);
+        this.log.Debug("Appletdir is: " + this.appletDir);
         this._httpSession.user_agent = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:37.0) Gecko/20100101 Firefox/37.0";
         this.msgSource = new SystemNotificationSource(_("Weather Applet"));
         messageTray.add(this.msgSource);
@@ -205,7 +207,7 @@ class WeatherApplet extends TextIconApplet {
     }
     ;
     sendNotification(title, message, transient) {
-        let notification = new Notification(this.msgSource, title, message);
+        let notification = new Notification(this.msgSource, "WeatherApplet: " + title, message);
         if (transient)
             notification.setTransient((!transient) ? false : true);
         this.msgSource.notify(notification);
@@ -296,6 +298,11 @@ class WeatherApplet extends TextIconApplet {
                     if (weatherbit == null)
                         var weatherbit = importModule("weatherbit");
                     this.provider = new weatherbit.Weatherbit(this);
+                    break;
+                case DATA_SERVICE.YAHOO:
+                    if (yahoo == null)
+                        var yahoo = importModule("yahoo");
+                    this.provider = new yahoo.Yahoo(this);
                     break;
                 default:
                     return "error";

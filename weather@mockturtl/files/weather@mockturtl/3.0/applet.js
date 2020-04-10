@@ -119,7 +119,8 @@ var DATA_SERVICE = {
     OPEN_WEATHER_MAP: "OpenWeatherMap",
     DARK_SKY: "DarkSky",
     MET_NORWAY: "MetNorway",
-    WEATHERBIT: "Weatherbit"
+    WEATHERBIT: "Weatherbit",
+    YAHOO: "Yahoo"
 };
 imports.gettext.bindtextdomain(UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
 function _(str) {
@@ -164,6 +165,7 @@ var WeatherApplet = (function (_super) {
         _this.log = new Log(instanceId);
         _this.currentLocale = _this.constructJsLocale(get_language_names()[0]);
         _this.log.Debug("System locale is " + _this.currentLocale);
+        _this.log.Debug("Appletdir is: " + _this.appletDir);
         _this._httpSession.user_agent = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:37.0) Gecko/20100101 Firefox/37.0";
         _this.msgSource = new SystemNotificationSource(_("Weather Applet"));
         messageTray.add(_this.msgSource);
@@ -285,7 +287,7 @@ var WeatherApplet = (function (_super) {
     };
     ;
     WeatherApplet.prototype.sendNotification = function (title, message, transient) {
-        var notification = new Notification(this.msgSource, title, message);
+        var notification = new Notification(this.msgSource, "WeatherApplet: " + title, message);
         if (transient)
             notification.setTransient((!transient) ? false : true);
         this.msgSource.notify(notification);
@@ -353,7 +355,7 @@ var WeatherApplet = (function (_super) {
     };
     WeatherApplet.prototype.refreshWeather = function (rebuild) {
         return __awaiter(this, void 0, void 0, function () {
-            var locationData, e_1, darkSky, openWeatherMap, metNorway, weatherbit, weatherInfo, _a, e_2;
+            var locationData, e_1, darkSky, openWeatherMap, metNorway, weatherbit, yahoo, weatherInfo, _a, e_2;
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
@@ -392,6 +394,11 @@ var WeatherApplet = (function (_super) {
                                 if (weatherbit == null)
                                     weatherbit = importModule("weatherbit");
                                 this.provider = new weatherbit.Weatherbit(this);
+                                break;
+                            case DATA_SERVICE.YAHOO:
+                                if (yahoo == null)
+                                    yahoo = importModule("yahoo");
+                                this.provider = new yahoo.Yahoo(this);
                                 break;
                             default:
                                 return [2, "error"];

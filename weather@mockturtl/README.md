@@ -53,6 +53,12 @@ Go to [Weatherbit.io](https://www.weatherbit.io/account/create) and create an ac
 
 Weatherbit implementation only supports Latitude, Longitude format! (e.g. 37.77,122.41) Might expand the support on it later.
 
+## Yahoo
+
+#### Location
+
+Only Latitude, Longitude format (e.g. 37.77,122.41) is supported (implemented) currently for Yahoo Weather.
+
 ------
 
 ## Requirements

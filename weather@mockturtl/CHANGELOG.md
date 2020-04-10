@@ -5,6 +5,7 @@
 * Update Openweathermap to their unified API call
 * Add DarkSky aquisition to Readme
 * Fix translation issues in files other than applet.js
+* Add Yahoo Weather to the available services
 
 ## 2.4.7
 
