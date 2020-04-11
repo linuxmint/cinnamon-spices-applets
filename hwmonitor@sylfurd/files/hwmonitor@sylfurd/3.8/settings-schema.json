@@ -8,7 +8,8 @@
         "NET_IN",
         "NET_OUT",
         "DISK_READ",
-        "DISK_WRITE"
+        "DISK_WRITE",
+        "BAT"
       ],
       "General": {
         "type": "page",
@@ -59,6 +60,13 @@
         "title": "DISK (write)",
         "sections": [
           "DISK_WRITE_settings"
+        ]
+      },
+      "BAT": {
+        "type": "page",
+        "title": "BAT (battery)",
+        "sections": [
+          "BAT_settings"
         ]
       },
       "general_settings": {
@@ -165,6 +173,17 @@
           "diskwrite_mount_dir",
           "diskwrite_custom_label",
           "diskwrite_show_detail_label"
+        ]
+      },
+      "BAT_settings": {
+        "type": "section",
+        "title": "BAT (battery) settings",
+        "keys": [
+          "bat_enable_graph",
+          "bat_size",
+          "bat_use_custom_label",
+          "bat_custom_label",
+          "bat_show_detail_label"
         ]
       }
     },
@@ -602,5 +621,43 @@
         "description": "Show details.",
         "tooltip": "Show or hide the DISK (write) usage label.",
         "dependency": "diskwrite_enable_graph"
+    },
+    "bat_enable_graph": {
+      "type": "checkbox",
+      "default": true,
+      "description": "Show BAT (battery) graph.",
+      "tooltip": "Show or hide the BAT (battery) graph. Shows battery level."
+    },
+    "bat_size": {
+        "type": "spinbutton",
+        "default": 50,
+        "min": 10,
+        "max": 500,
+        "step": 1,
+        "units" : "",
+        "description": "Horizontal panel width or vertical panel height.",
+        "tooltip":"Set the width of the graph for horizontal panels, or the height of the graph for vertical panels.",
+        "dependency": "bat_enable_graph"
+    },
+    "bat_use_custom_label": {
+        "type": "checkbox",
+        "default": false,
+        "description": "Use custom graph label.",
+        "tooltip": "Choose your own label for the BAT (battery) graph.",
+        "dependency": "bat_enable_graph"
+    },
+    "bat_custom_label": {
+        "type": "entry",
+        "default": "BAT",
+        "description": "Set the custom label for the BAT (battery) graph.",
+        "dependency": "bat_enable_graph"
+    },
+    "bat_show_detail_label": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Show details.",
+        "tooltip": "Show or hide the BAT (battery) detail label.",
+        "dependency": "bat_enable_graph"
     }    
+
 }
