@@ -131,6 +131,10 @@ MyApplet.prototype = {
         this.wait_for_tooltip_cmd = false;
     },
 
+    update_started: function (cmd_output) {
+        this.wait_for_startup_cmd = false;
+    },
+
     update: function () {
         if (this.dynamicTooltip) {
             if (!this.wait_for_tooltip_cmd) {
@@ -181,7 +185,8 @@ MyApplet.prototype = {
                          "script1", "enableScript2", "script2",
                          "dynamicIcon", "iconScript",
                          "dynamicTooltip", "tooltipScript",
-                         "menuScript", "menuScriptDisplay"]) {
+                         "menuScript", "menuScriptDisplay",
+                         "startupScript"]) {
             this.settings.bindProperty(Settings.BindingDirection.IN,
                 str,
                 str,
