@@ -1,3 +1,46 @@
+### v5.3.0~20200209
+  * Cinnamon 4.2 & 4.4: Direct access from the Spices Update menu to each tab of settings (General, Applets, Desklets, Extensions, Themes) via the Configure sub menu.
+
+### v5.2.2~20200109
+  * Cinnamon 4.2: Let Gtk determine the right size of dialog window ([see @mtwebster's commit for Cinnamon](https://github.com/linuxmint/cinnamon/commit/d57677b5ae306115139be98be62e3fb7cc6a27a8#diff-c4641b580bb45b188c5ae94c7f7a33cf))
+
+### v5.2.1~20191230
+  * Make it configurable for Cinnamon 2.8 -> 4.0.
+
+### v5.2.0~20191124
+  * Cinnamon 4.4: Use Xapp widgets and speed up loading of the icon for the icon theme widget. (Thanks to collinss.)
+  * Cinnamon 4.3: Removed (now useless).
+
+### v5.1.3~20191118
+  * Cinnamon 4.4: replaces the cgi module by the html one to be compatible with Python 3.8 (used on Arch).
+
+### v5.1.2~20191117
+  * Translations: Updates files: .pot, fr.po and es.po.
+
+### v5.1.1~20191116
+  * Now compatible with Python 3.8 (used on Arch)
+  * Now can sort Spices by 'update' (Cinnamon 4.2)
+
+### v5.1.0~20191114
+  * Closes #2679.
+  * Closes #2680.
+  * Closes #2681.
+
+### v5.0.0~20191105
+
+Many new features and improvements.
+
+  * Compatible with Cinnamon 4.4.
+  * For Cinnamon 4.4: Uses the new sort by 'Upgradable' in the Download tab of System Settings for Applets, Desklets, Extensions and Themes. This sort shows the upgradable Spices first, then acts as the sort by date. Thanks to Clément Lefebvre for embedding my code in Cinnamon 4.4.
+  * Adds for Cinnamon 3.8 and 4.0 the ability, already present for Cinnamon 4.2, to renew the download of the latest version of a Spice.
+  * For Cinnamon 3.8 and greater:
+    * Spices you do not want to upgrade (as you defined in this applet's Settings) do not anymore appear as upgradable in the Download tab of System Settings for Applets, Desklets, Extensions and Themes, even if updates are available for them. This avoids unfortunate updates and allows to confidently use the 'Update All' button.
+  * Fixes icon size bug in Hi-DPI mode.
+
+### v4.5.0~20191028
+  * Animated icon during refresh.
+    * For Cinnamon 3.8 and greater.
+
 ### v4.4.0~20191022
   * Middle-Click on applet icon:
     * Performs a Refresh while no available updates are reported.

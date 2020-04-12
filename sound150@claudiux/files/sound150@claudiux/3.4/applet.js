@@ -793,6 +793,9 @@ Player.prototype = {
                 artUrl = artUrl.replace("/thumb/", "/300/"); // Spotify 0.9.x
                 artUrl = artUrl.replace("/image/", "/300/"); // Spotify 0.27.x
             }
+            else if (this._name == "Spotify"){
+                artUrl = artUrl.replace("open.spotify.com","i.scdn.co"); // Fix missing cover art
+            }
             if (this._trackCoverFile != artUrl) {
                 this._trackCoverFile = artUrl;
                 change = true;

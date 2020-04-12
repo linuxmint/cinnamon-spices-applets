@@ -18,7 +18,8 @@ const Util = imports.misc.util; // Needed for spawnCommandLine()
 const Extension = imports.ui.extension; // Needed to reload applets
 const Json = imports.gi.Json;
 const Soup = imports.gi.Soup;
-const Signals = imports.signals;
+//const Signals = imports.signals;
+const {SignalManager} = imports.misc.signalManager;
 const Cinnamon = imports.gi.Cinnamon; // Needed to read/write into a file
 
 const {
@@ -92,19 +93,19 @@ function notify_send(message, duration=5000, urgency="normal", icon_path=null) {
 }
 
 function getImageAtScale(imageFileName, width, height) {
-    let pixBuf = GdkPixbuf.Pixbuf.new_from_file_at_size(imageFileName, width, height);
-    let image = new Clutter.Image();
-    image.set_data(
-        pixBuf.get_pixels(),
-        pixBuf.get_has_alpha() ? Cogl.PixelFormat.RGBA_8888 : Cogl.PixelFormat.RGBA_888,
-        width, height,
-        pixBuf.get_rowstride()
-    );
+  let pixBuf = GdkPixbuf.Pixbuf.new_from_file_at_size(imageFileName, width, height);
+  let image = new Clutter.Image();
+  image.set_data(
+    pixBuf.get_pixels(),
+    pixBuf.get_has_alpha() ? Cogl.PixelFormat.RGBA_8888 : Cogl.PixelFormat.RGBA_888,
+    width, height,
+    pixBuf.get_rowstride()
+  );
 
-    let actor = new Clutter.Actor({width: width, height: height});
-    actor.set_content(image);
+  let actor = new Clutter.Actor({width: width, height: height});
+  actor.set_content(image);
 
-    return actor;
+  return actor;
 }
 
 
@@ -123,10 +124,10 @@ class SpicesUpdate extends Applet.TextIconApplet {
     this.angle = 0;
     this.do_rotation = false;
     this.interval = 0;
+    this.ui_scale = global.ui_scale;
 
 
-
-    // Be sure the scripts are executable:
+    // To be sure that the scripts will be executable:
     GLib.spawn_command_line_async("bash -c 'cd %s && chmod 755 *.py *.sh'".format(SCRIPTS_DIR));
 
     this.OKtoPopulateSettingsApplets = true;
@@ -335,8 +336,26 @@ class SpicesUpdate extends Applet.TextIconApplet {
       "general_frequency",
       this.on_frequency_changed,
       null);
-      this.refreshInterval = 3600 * this.general_frequency;
-      if (DEBUG()) this.refreshInterval = 120 * this.general_frequency;
+    this.refreshInterval = 3600 * this.general_frequency;
+    if (DEBUG()) this.refreshInterval = 120 * this.general_frequency;
+
+    this.settings.bindProperty(Settings.BindingDirection.IN,
+      "general_first_check",
+      "general_first_check",
+      null,
+      null);
+    this.first_loop = this.general_first_check;
+
+    this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL,
+      "general_next_check_date",
+      "general_next_check_date",
+      null,
+      null);
+    let now = Math.ceil(Date.now()/1000);
+    if (this.general_next_check_date === 0) {
+      this.general_next_check_date = now + this.refreshInterval;
+      //logError("now=%s ; this.general_next_check_date=%s".format(now.toString(), this.general_next_check_date.toString()));
+    }
 
     this.settings.bindProperty(Settings.BindingDirection.IN,
       "general_warning",
@@ -445,6 +464,27 @@ class SpicesUpdate extends Applet.TextIconApplet {
     this.menuManager.addMenu(this.menu);
 
     // Badge
+    this.badge = null;
+    this.define_badge();
+    this.signals = new SignalManager(null);
+    this.signals.connect(global, 'scale-changed', () => this.updateUI());
+
+    this.details_by_uuid = {};
+    this.notifications = new Array();
+    this.testblink = [];
+    this.forceRefresh = false;
+    this.refresh_requested = false;
+    this.applet_running = true;
+    this.loopId = 0;
+    //this.first_loop = true; // To do nothing for 1 minute.
+    this.on_settings_changed();
+    // Run the loop !
+    this.iteration = 0;
+    this.updateLoop();
+  }; // End of constructor
+
+  define_badge() {
+    if (this.badge !== null) this.actor.remove_child(this.badge);
     this.badge = new St.BoxLayout({
       style_class: 'SU-badge',
       important: true,
@@ -469,20 +509,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
       y_align: St.Align.START,
     });
     this.actor.add_child(this.badge);
-
-    this.details_by_uuid = {};
-    this.notifications = new Array();
-    this.testblink = [];
-    this.forceRefresh = false;
-    this.refresh_requested = false;
-    this.applet_running = true;
-    this.loopId = 0;
-    this.first_loop = true; // To do nothing for 1 minute.
-    this.on_settings_changed();
-    // Run the loop !
-    this.iteration = 0;
-    this.updateLoop();
-  }; // End of constructor
+  }; // End of define_badge
 
   /** get_translated_help_file()
    * Returns the help file in html format
@@ -550,7 +577,8 @@ class SpicesUpdate extends Applet.TextIconApplet {
       notification.addButton("spices-update", _(buttonLabel));
       notification.addButton("refresh", _(buttonLabel2));
       this.notifications.push(notification);
-      notification.connect('action-invoked', Lang.bind(this, function(self, action) {
+      //notification.connect('action-invoked', Lang.bind(this, function(self, action) {
+      notification.connect('action-invoked', (self, action) => {
             if (action == "spices-update") {
               Util.spawnCommandLine("%s %s -t 1 -s %s".format(CS_PATH, type.toString(), SORT));
             } else {
@@ -566,7 +594,8 @@ class SpicesUpdate extends Applet.TextIconApplet {
               }
               this._on_refresh_pressed();
             }
-          }));
+          //}));
+          });
       source.notify(notification);
     }
   }; // End of notify_with_button
@@ -613,6 +642,20 @@ class SpicesUpdate extends Applet.TextIconApplet {
       }
     }
   }; // End of _set_main_label
+
+  _is_time_to_check() {
+    let now = Math.ceil(Date.now()/1000);
+    let ret = (now >= this.general_next_check_date - 5);
+
+    this.refreshInterval = 3600 * this.general_frequency;
+    if (DEBUG()) this.refreshInterval = 120 * this.general_frequency;
+    if (ret === true) {
+      this.general_next_check_date = now + this.refreshInterval;
+    }
+
+    if (DEBUG()) log("Is time to check? %s. Now: %s. Next: %s. Interval: %s".format(ret.toString(), now.toString(), this.general_next_check_date.toString(), this.refreshInterval.toString()));
+    return ret
+  }; // End of _is_time_to_check
 
   on_frequency_changed() {
     if (this.loopId) {
@@ -739,13 +782,17 @@ class SpicesUpdate extends Applet.TextIconApplet {
         let d = Gio.file_new_for_path("%s/%s".format(DIR_MAP[type], a["name"]));
         if (d.query_exists(null)) {
           this.unprotectedAppletsDico[a["name"]] = a["isunprotected"];
+          let metadataFileName = DIR_MAP[type] + "/" + a["name"] + "/metadata.json";
           if (a["isunprotected"] && a["requestnewdownload"] !== undefined && a["requestnewdownload"] === true) {
             if (this.cache[type] === "{}") this._load_cache(type);
             let created = this._get_member_from_cache(type, a["name"], "created");
             let last_edited = this._get_last_edited_from_cache(type, a["name"]);
             if (created !== null && last_edited !== null && created >= last_edited) created = last_edited - 1;
-            let metadataFileName = DIR_MAP[type] + "/" + a["name"] + "/metadata.json";
+
             if (created !== null) this._rewrite_metadataFile(metadataFileName, created);
+          }
+          if (!a["isunprotected"]) {
+            this._rewrite_metadataFile(metadataFileName, Math.ceil(Date.now()/1000));
           }
           this.unprotectedAppletsList.push({"name": a["name"], "isunprotected": a["isunprotected"], "requestnewdownload": false});
         }
@@ -785,13 +832,17 @@ class SpicesUpdate extends Applet.TextIconApplet {
         let d = Gio.file_new_for_path("%s/%s".format(DIR_MAP[type], a["name"]));
         if (d.query_exists(null)) {
           this.unprotectedDeskletsDico[a["name"]] = a["isunprotected"];
+          let metadataFileName = DIR_MAP[type] + "/" + a["name"] + "/metadata.json";
           if (a["isunprotected"] && a["requestnewdownload"] !== undefined && a["requestnewdownload"] === true) {
             if (this.cache[type] === "{}") this._load_cache(type);
             let created = this._get_member_from_cache(type, a["name"], "created");
             let last_edited = this._get_last_edited_from_cache(type, a["name"]);
             if (created !== null && last_edited !== null && created >= last_edited) created = last_edited - 1;
-            let metadataFileName = DIR_MAP[type] + "/" + a["name"] + "/metadata.json";
+
             if (created !== null) this._rewrite_metadataFile(metadataFileName, created);
+          }
+          if (!a["isunprotected"]) {
+            this._rewrite_metadataFile(metadataFileName, Math.ceil(Date.now()/1000));
           }
           this.unprotectedDeskletsList.push({"name": a["name"], "isunprotected": a["isunprotected"], "requestnewdownload": false});
         }
@@ -831,13 +882,17 @@ class SpicesUpdate extends Applet.TextIconApplet {
         let d = Gio.file_new_for_path("%s/%s".format(DIR_MAP[type], a["name"]));
         if (d.query_exists(null)) {
           this.unprotectedExtensionsDico[a["name"]] = a["isunprotected"];
+          let metadataFileName = DIR_MAP[type] + "/" + a["name"] + "/metadata.json";
           if (a["isunprotected"] && a["requestnewdownload"] !== undefined && a["requestnewdownload"] === true) {
             if (this.cache[type] === "{}") this._load_cache(type);
             let created = this._get_member_from_cache(type, a["name"], "created");
             let last_edited = this._get_last_edited_from_cache(type, a["name"]);
             if (created !== null && last_edited !== null && created >= last_edited) created = last_edited - 1;
-            let metadataFileName = DIR_MAP[type] + "/" + a["name"] + "/metadata.json";
+
             if (created !== null) this._rewrite_metadataFile(metadataFileName, created);
+          }
+          if (!a["isunprotected"]) {
+            this._rewrite_metadataFile(metadataFileName, Math.ceil(Date.now()/1000));
           }
           this.unprotectedExtensionsList.push({"name": a["name"], "isunprotected": a["isunprotected"], "requestnewdownload": false});
         }
@@ -872,19 +927,24 @@ class SpicesUpdate extends Applet.TextIconApplet {
       this.unprotectedThemesDico = {};
       this.unprotectedThemesList = [];
       // populate this.unprotectedThemes with the this.unprotected_themes elements:
-      let a, d;
       for (var i=0; i < this.unprotected_themes.length; i++) {
-        a = this.unprotected_themes[i];
-        d = Gio.file_new_for_path("%s/%s".format(DIR_MAP[type], a["name"]));
+        let a = this.unprotected_themes[i];
+        let d = Gio.file_new_for_path("%s/%s".format(DIR_MAP[type], a["name"]));
         if (d.query_exists(null)) {
           this.unprotectedThemesDico[a["name"]] = a["isunprotected"];
-          if (a["isunprotected"] && a["requestnewdownload"] !== undefined && a["requestnewdownload"] === true) {
+          let metadataFileName = DIR_MAP[type] + "/" + a["name"] + "/metadata.json";
+          let metadataFile = Gio.file_new_for_path(metadataFileName);
+          // For some themes, the metadata.json file is in the subfolder /cinnamon:
+          if (!metadataFile.query_exists(null) || (a["isunprotected"] && a["requestnewdownload"] !== undefined && a["requestnewdownload"] === true)) {
             if (this.cache[type] === "{}") this._load_cache(type);
             let created = this._get_member_from_cache(type, a["name"], "created");
             let last_edited = this._get_last_edited_from_cache(type, a["name"]);
             if (created !== null && last_edited !== null && created >= last_edited) created = last_edited - 1;
-            let metadataFileName = DIR_MAP[type] + "/" + a["name"] + "/metadata.json";
+
             if (created !== null) this._rewrite_metadataFile(metadataFileName, created);
+          }
+          if (!a["isunprotected"]) {
+            this._rewrite_metadataFile(metadataFileName, Math.ceil(Date.now()/1000));
           }
           this.unprotectedThemesList.push({"name": a["name"], "isunprotected": a["isunprotected"], "requestnewdownload": false});
         }
@@ -1124,7 +1184,13 @@ class SpicesUpdate extends Applet.TextIconApplet {
   }; // End of get_spice_name
 
   _rewrite_metadataFile(fileName, lastEdited) {
-    let metadataData = GLib.file_get_contents(fileName).toString().substr(5);
+    let metadataFile = Gio.file_new_for_path(fileName);
+    let metadataData;
+    if (metadataFile.query_exists(null)) {
+      metadataData = GLib.file_get_contents(fileName).toString().substr(5);
+    } else {
+      metadataData = "{}";
+    }
     let newData = JSON.parse(metadataData);
     newData["last-edited"] = lastEdited;
     let message = JSON.stringify(newData, null, 2);
@@ -1179,6 +1245,8 @@ class SpicesUpdate extends Applet.TextIconApplet {
       let file, file_time;
       while ((info = children.next_file(null)) != null) {
         file = children.get_child(info);
+        if (file.get_basename() === "metadata.json") continue; // ignore metadata.json file
+
         file_time = file.query_info('time::modified', Gio.FileQueryInfoFlags.NONE, null).get_modification_time().tv_sec;
         if (file_time > latest_time) {
           latest_time = file_time;
@@ -1513,7 +1581,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
     this.menu.removeAll();
 
     // Head
-    this.menuitemHead1 = new PopupMenu.PopupMenuItem(_("Spices Update"), {
+    this.menuitemHead1 = new PopupMenu.PopupMenuItem(this.default_tooltip, {
       reactive: false
     });
     this.menu.addMenuItem(this.menuitemHead1);
@@ -1549,18 +1617,35 @@ class SpicesUpdate extends Applet.TextIconApplet {
     }
     // button Download
     if ((this.nb_to_update + this.nb_to_watch) > 0) {
-      let _download_tabs_button = new PopupMenu.PopupIconMenuItem(_("Open useful Cinnamon Settings"), "folder-download", St.IconType.SYMBOLIC);
+      let _download_tabs_button = new PopupMenu.PopupIconMenuItem(_("Open useful Cinnamon Settings"), "su-update-available", St.IconType.SYMBOLIC);
       _download_tabs_button.connect("activate", (event) => this.open_each_download_tab());
       this.menu.addMenuItem(_download_tabs_button);
     }
     this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
-    // button Configure...
-    let configure = new PopupMenu.PopupIconMenuItem(_("Configure") + "...", "system-run", St.IconType.SYMBOLIC);
-    configure.connect("activate", (event) => {
-        Util.spawnCommandLine("cinnamon-settings applets %s %s".format(UUID, this.instanceId));
-    });
-    this.menu.addMenuItem(configure);
+    //~ // button Configure...
+    //~ let configure = new PopupMenu.PopupIconMenuItem(_("Configure") + "...", "system-run", St.IconType.SYMBOLIC);
+    //~ configure.connect("activate", (event) => {
+        //~ Util.spawnCommandLine("cinnamon-settings applets %s %s".format(UUID, this.instanceId));
+    //~ });
+    //~ this.menu.addMenuItem(configure);
+
+    // sub-menu Configure
+    let _configure = new PopupMenu.PopupSubMenuMenuItem(_("Configure"));
+    this.menu.addMenuItem(_configure);
+    this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+    let _configureOptions = [_("General"), _("Applets"), _("Desklets"), _("Extensions"), _("Themes")];
+    let _iconNames = ["su-general", "su-applets", "su-desklets", "su-extensions", "su-themes"];
+    let _options = [];
+    for (let i=0; i<_configureOptions.length ; i++) {
+      let _optionTitle = _configureOptions[i];
+      let _icon = _iconNames[i];
+      _options[i] = new PopupMenu.PopupIconMenuItem(_optionTitle, _icon, St.IconType.SYMBOLIC);
+      _options[i].connect('activate', (event) => Util.spawnCommandLine("xlet-settings applet %s -t %s".format(UUID, i.toString())));
+      _configure.menu.addMenuItem(_options[i])
+    }
+
+    // button Reload this applet
     if (DEBUG()) {
       let _reload_button = new PopupMenu.PopupIconMenuItem("Reload this applet", "edit-redo", St.IconType.SYMBOLIC);
       _reload_button.connect("activate", (event) => this._on_reload_this_applet_pressed())
@@ -1640,7 +1725,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
 
   icon_rotate() {
     this.angle = Math.round(this.angle + 3) % 360;
-    let size = Math.round(this.getPanelIconSize(St.IconType.SYMBOLIC)/global.ui_scale);
+    let size = Math.round(this.getPanelIconSize(St.IconType.SYMBOLIC) * global.ui_scale);
     this.img_icon = getImageAtScale(this.img_path, size, size);
     this.img_icon.set_pivot_point(0.5, 0.5);
     this.img_icon.set_rotation_angle(Clutter.RotateAxis.Z_AXIS, this.angle);
@@ -1654,6 +1739,10 @@ class SpicesUpdate extends Applet.TextIconApplet {
 
   // This updates the display of the applet and the tooltip
   updateUI() {
+    if (this.ui_scale !== global.ui_scale) {
+      this.define_badge();
+      this.ui_scale = global.ui_scale;
+    }
     if (this.do_rotation) {
       if (this.interval === 0)
         this.interval = setInterval(() => this.icon_rotate(), 10);
@@ -1756,7 +1845,8 @@ class SpicesUpdate extends Applet.TextIconApplet {
                   message = "Some " + t + " need update:"
                 }
                 let new_message = _(message) + "\n\t" + must_be_updated.join("\n\t");
-                if (this.force_notifications || new_message != this.old_message[t]) { // One notification is sufficient!
+                //if (this.force_notifications || new_message != this.old_message[t]) { // One notification is sufficient!
+                if (this.force_notifications || this.old_message[t].indexOf(new_message) == -1) { // One notification is sufficient!
                   if (this.general_notifications) {
                     if (this.general_type_notif === "minimal") notify_send(this._clean_str(new_message));
                     else this.notify_with_button(this._clean_str(new_message), t, uuid);
@@ -1809,7 +1899,8 @@ class SpicesUpdate extends Applet.TextIconApplet {
   open_each_download_tab() {
     for (let t of TYPES) {
       if (this.nb_in_menu[t] > 0) {
-        Util.spawnCommandLine("%s %s -t 1 -s %s".format(CS_PATH, t.toString(), SORT));
+        let command = "%s %s -t 1 -s %s".format(CS_PATH, t.toString(), SORT);
+        Util.spawnCommandLine(command);
       }
     }
   };  // End of open_each_download_tab

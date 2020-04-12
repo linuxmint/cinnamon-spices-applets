@@ -9,20 +9,18 @@ const Settings = imports.ui.settings;
 const GLib = imports.gi.GLib;
 const Gettext = imports.gettext;
 const uuid = "brightness-and-gamma-applet@cardsurf";
-let AppletGui, AppletConstants, ShellUtils, Files, FilesCsv;
+let AppletGui, AppletConstants, ShellUtils, Values;
 if (typeof require !== 'undefined') {
     AppletGui = require('./appletGui');
     AppletConstants = require('./appletConstants');
     ShellUtils = require('./shellUtils');
-    Files = require('./files');
-    FilesCsv = require('./filesCsv');
+    Values = require('./values');
 } else {
     const AppletDirectory = imports.ui.appletManager.applets[uuid];
     AppletGui = AppletDirectory.appletGui;
     AppletConstants = AppletDirectory.appletConstants
     ShellUtils = AppletDirectory.shellUtils;
-    Files = AppletDirectory.files;
-    FilesCsv = AppletDirectory.filesCsv;
+    Values = AppletDirectory.values;
 }
 const MinXrandrVersion = 1.4;
 const MinRandrVersion = 1.2;
@@ -57,7 +55,6 @@ MyApplet.prototype = {
 
         this.panel_orientation = orientation;
         this.applet_directory = this._get_applet_directory();
-        this.values_directory = this.applet_directory + "values/";
         this.is_running = true;
 
         this.screen_outputs = {};
@@ -82,8 +79,7 @@ MyApplet.prototype = {
         this.output_disconnected = "disconnected";
         this.gamma_separator = ":";
         this.output_indexes_separator = "^";
-        this.filepath_last_values = "";
-        this.file_last_values = null;
+        this.last_values_string = "";
 
         this.settings = new Settings.AppletSettings(this, metadata.uuid, instance_id);
         this.default_screen_name = "";
@@ -211,8 +207,6 @@ MyApplet.prototype = {
         this._init_layout();
         this._bind_settings();
         this._connect_signals();
-        this._init_filepaths();
-        this._init_files();
         this._init_values();
         this._init_screen_outputs();
         this._init_screen_output();
@@ -269,7 +263,8 @@ MyApplet.prototype = {
                         [Settings.BindingDirection.IN, "minimum_gamma", this.on_gamma_range_changed],
                         [Settings.BindingDirection.IN, "maximum_gamma", this.on_gamma_range_changed],
                         [Settings.BindingDirection.IN, "options_type", this.on_options_type_changed],
-                        [Settings.BindingDirection.IN, "gui_icon_filepath", this.on_gui_icon_changed] ]){
+                        [Settings.BindingDirection.IN, "gui_icon_filepath", this.on_gui_icon_changed],
+                        [Settings.BindingDirection.BIDIRECTIONAL, "last_values_string", null] ]) {
                 this.settings.bindProperty(binding, property_name, property_name, callback, null);
         }
     },
@@ -537,26 +532,14 @@ MyApplet.prototype = {
         return found;
     },
 
-    _init_filepaths: function () {
-        this.filepath_last_values = this.values_directory + 'last_values.csv';
-    },
-
-    _init_files: function () {
-        this.file_last_values = new FilesCsv.LastValuesFileCsv(this.filepath_last_values);
-        if(!this.file_last_values.exists()) {
-            this.file_last_values.create();
-        }
-    },
-
     _init_values: function () {
         this.load_last_values();
     },
 
     load_last_values: function() {
         try {
-            let rows = this.file_last_values.get_last_value_rows();
-            if(rows.length > 0) {
-                let row = rows[0];
+            if(this.last_values_string.length > 0) {
+                let row = Values.to_last_values_row(this.last_values_string);
                 this.screen_name = row.screen_name;
                 let output_indexes = row.output_indexes_string.split(this.output_indexes_separator);
                 this.output_indexes = output_indexes.map(function(output_index) { return parseInt(output_index); });
@@ -567,7 +550,7 @@ MyApplet.prototype = {
             }
         }
         catch(e) {
-            global.log("Error while loading last values from a file: " + e);
+            global.log("Error while loading last values: " + e);
         }
     },
 
@@ -888,16 +871,15 @@ MyApplet.prototype = {
         }
     },
 
-    // Save last values to a CSV file instead of using Settings.bind function to prevent high CPU usage in Cinnamon 3.2+
     save_last_values: function() {
         try {
             let output_indexes_string = this.output_indexes.join(this.output_indexes_separator);
-            let rows = [ new FilesCsv.LastValuesRowCsv(this.screen_name, output_indexes_string, this.brightness,
-                                                       this.gamma_red, this.gamma_green, this.gamma_blue)   ];
-            this.file_last_values.overwrite(rows);
+            let row = new Values.LastValuesRow(this.screen_name, output_indexes_string, this.brightness,
+                                               this.gamma_red, this.gamma_green, this.gamma_blue);
+            this.last_values_string = Values.to_csv_string(row);
         }
         catch(e) {
-            global.log("Error while saving last values to a file: " + e);
+            global.log("Error while saving last values: " + e);
         }
     },
 

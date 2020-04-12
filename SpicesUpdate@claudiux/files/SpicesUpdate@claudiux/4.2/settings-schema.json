@@ -54,7 +54,8 @@
       "title": "Checking",
       "keys": [
         "check_applets",
-        "check_new_applets"
+        "check_new_applets",
+        "btn_refresh_applets"
       ]
     },
     "section_applets2": {
@@ -62,7 +63,6 @@
       "title": "Monitoring",
       "keys": [
         "exp_applets",
-        "btn_refresh_applets",
         "unprotected_applets",
         "btn_cs_applets"
       ]
@@ -72,7 +72,8 @@
       "title": "Checking",
       "keys": [
         "check_desklets",
-        "check_new_desklets"
+        "check_new_desklets",
+        "btn_refresh_desklets"
       ]
     },
     "section_desklets2": {
@@ -80,7 +81,6 @@
       "title": "Monitoring",
       "keys": [
         "exp_desklets",
-        "btn_refresh_desklets",
         "unprotected_desklets",
         "btn_cs_desklets"
       ]
@@ -90,7 +90,8 @@
       "title": "Checking",
       "keys": [
         "check_extensions",
-        "check_new_extensions"
+        "check_new_extensions",
+        "btn_refresh_extensions"
       ]
     },
     "section_extensions2": {
@@ -98,7 +99,6 @@
       "title": "Monitoring",
       "keys": [
         "exp_extensions",
-        "btn_refresh_extensions",
         "unprotected_extensions",
         "btn_cs_extensions"
       ]
@@ -108,7 +108,8 @@
       "title": "Checking",
       "keys": [
         "check_themes",
-        "check_new_themes"
+        "check_new_themes",
+        "btn_refresh_themes"
       ]
     },
     "section_themes2": {
@@ -116,7 +117,6 @@
       "title": "Monitoring",
       "keys": [
         "exp_themes",
-        "btn_refresh_themes",
         "unprotected_themes",
         "btn_cs_themes"
       ]
@@ -125,7 +125,8 @@
       "type": "section",
       "title": "Frequency",
       "keys": [
-        "general_frequency"
+        "general_frequency",
+        "general_first_check"
       ]
     },
     "section_general2": {
@@ -153,18 +154,18 @@
   "check_applets": {
     "type": "switch",
     "default": true,
-    "description": "Let regularly check if your applets are up to date",
+    "description": "Check regularly whether your applets are up to date",
     "tooltip": "If applets updates do not concern you, uncheck this box."
   },
   "check_new_applets": {
     "type": "switch",
     "default": true,
     "dependency": "check_applets",
-    "description": "Let regularly check if new applets are available",
+    "description": "Check regularly whether new applets are available",
     "tooltip": "If new applets do not concern you, uncheck this box."
   },
   "exp_applets": {
-    "type" : "textview",
+    "type": "textview",
     "default": "",
     "description": "",
     "height": 60
@@ -196,7 +197,9 @@
         "type": "boolean"
       }
     ],
-    "default": []
+    "default": [
+
+    ]
   },
   "btn_cs_applets": {
     "type": "button",
@@ -206,18 +209,18 @@
   "check_desklets": {
     "type": "switch",
     "default": true,
-    "description": "Let regularly check if your desklets are up to date",
+    "description": "Check regularly whether your desklets are up to date",
     "tooltip": "If desklets updates do not concern you, uncheck this box."
   },
   "check_new_desklets": {
     "type": "switch",
     "default": true,
     "dependency": "check_desklets",
-    "description": "Let regularly check if new desklets are available",
+    "description": "Check regularly whether new desklets are available",
     "tooltip": "If new desklets do not concern you, uncheck this box."
   },
   "exp_desklets": {
-    "type" : "textview",
+    "type": "textview",
     "default": "",
     "description": "",
     "height": 60
@@ -249,7 +252,9 @@
         "type": "boolean"
       }
     ],
-    "default": []
+    "default": [
+
+    ]
   },
   "btn_cs_desklets": {
     "type": "button",
@@ -259,18 +264,18 @@
   "check_extensions": {
     "type": "switch",
     "default": true,
-    "description": "Let regularly check if your extensions are up to date",
+    "description": "Check regularly whether your extensions are up to date",
     "tooltip": "If extensions updates do not concern you, uncheck this box."
   },
   "check_new_extensions": {
     "type": "switch",
     "default": true,
     "dependency": "check_extensions",
-    "description": "Let regularly check if new extensions are available",
+    "description": "Check regularly whether new extensions are available",
     "tooltip": "If new extensions do not concern you, uncheck this box."
   },
   "exp_extensions": {
-    "type" : "textview",
+    "type": "textview",
     "default": "",
     "description": "",
     "height": 60
@@ -302,7 +307,9 @@
         "type": "boolean"
       }
     ],
-    "default": []
+    "default": [
+
+    ]
   },
   "btn_cs_extensions": {
     "type": "button",
@@ -311,19 +318,19 @@
   },
   "check_themes": {
     "type": "switch",
-    "default": true,
-    "description": "Let regularly check if your themes are up to date",
+    "default": false,
+    "description": "Check regularly whether your themes are up to date",
     "tooltip": "If themes updates do not concern you, uncheck this box."
   },
   "check_new_themes": {
     "type": "switch",
-    "default": true,
+    "default": false,
     "dependency": "check_themes",
-    "description": "Let regularly check if new themes are available",
+    "description": "Check regularly whether new themes are available",
     "tooltip": "If new themes do not concern you, uncheck this box."
   },
   "exp_themes": {
-    "type" : "textview",
+    "type": "textview",
     "default": "",
     "description": "",
     "height": 60
@@ -355,7 +362,9 @@
         "type": "boolean"
       }
     ],
-    "default": []
+    "default": [
+
+    ]
   },
   "btn_cs_themes": {
     "type": "button",
@@ -363,14 +372,25 @@
     "callback": "on_btn_cs_themes_pressed"
   },
   "general_frequency": {
-    "type": "spinbutton",
+    "type": "scale",
     "default": 1,
     "min": 1,
     "max": 720,
     "step": 1,
     "units": "hours",
     "description": "Time interval between two checks",
-    "tooltip": "Please note that the first check will take place one minute after starting this applet."
+    "tooltip": "Min value: 1 hour. Max value: 720 hours (30 days)."
+  },
+  "general_first_check": {
+    "type": "switch",
+    "default": true,
+    "description": "Make a first check one minute after starting",
+    "tooltip": "By checking this box, the first check will take place one minute after starting this applet."
+  },
+  "general_next_check_date": {
+    "type": "generic",
+    "value": 0,
+    "default": 0
   },
   "general_warning": {
     "type": "switch",

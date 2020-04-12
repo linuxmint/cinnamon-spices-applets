@@ -1195,10 +1195,10 @@ class vpnLookOut extends Applet.TextIconApplet {
 
     // This is the loop run at refreshInterval rate to call updateUI() to update the display in the applet and tooltip
     updateLoop() {
-        if (this.loopId > 0) {
-            Mainloop.source_remove(this.loopId);
-        }
-        this.loopId = 0;
+        //if (this.loopId > 0) {
+            //Mainloop.source_remove(this.loopId);
+        //}
+        //this.loopId = 0;
         this.set_icons();
         if (!this.dependenciesMet && this.are_dependencies_installed()) {
             // At this time, the user just finished to install all dependencies.

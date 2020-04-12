@@ -129,7 +129,7 @@ MyApplet.prototype = {
         this.settings.bindProperty(Settings.BindingDirection.IN, "alsoopacifydesklets", "opacify_desklets", function(){}, null);
         this.settings.bindProperty(Settings.BindingDirection.IN, "blur", "blur", null, null);
 
-        this.signals = new SignalManager.SignalManager(this);
+        this.signals = new SignalManager.SignalManager();
         this.actor.connect('enter-event', Lang.bind(this, this._onEntered));
         this.actor.connect('leave-event', Lang.bind(this, this._onLEntered));
         this.signals.connect(global.stage, 'notify::key-focus', Lang.bind(this, this._onLEntered));
@@ -171,7 +171,7 @@ MyApplet.prototype = {
                 if(sticky_windows.length && (wks==0)) {
                     for ( let i = 0; i < sticky_windows.length; ++i ) {
                         let metaWindow = sticky_windows[i];
-                        TL_Dot='...';
+                        let TL_Dot='...';
                         if( metaWindow.get_title().length < 69 ) {
                                 TL_Dot = "";
                         }
@@ -264,7 +264,7 @@ MyApplet.prototype = {
 
                     for ( let i = 0; i < windows.length; ++i ) {
                         let metaWindow = windows[i];
-                        TL_Dot='...';
+                        let TL_Dot='...';
                         if( metaWindow.get_title().length < 69 ) {
                                 TL_Dot = "";
                         }
@@ -399,7 +399,7 @@ MyApplet.prototype = {
             this._applet_tooltip.show();
         }
         if (this.peek_at_desktop){
-            if (this._peektimeoutid)
+            if (this._peektimeoutid == true)
                 Mainloop.source_remove(this._peektimeoutid);
             this._peektimeoutid = Mainloop.timeout_add(400, Lang.bind(this,function () {
                 if(this.actor.hover && !this._applet_context_menu.isOpen && ! global.settings.get_boolean("panel-edit-mode")){
@@ -443,14 +443,14 @@ MyApplet.prototype = {
             this.show_all(0.2);
             this.didpeek=false;
         }
-        if (this._peektimeoutid)
+        if (this._peektimeoutid == true)
             Mainloop.source_remove(this._peektimeoutid);
     },
 
     on_applet_clicked: function(event) {
         global.screen.toggle_desktop(global.get_current_time());
         this.show_all(0);
-        if (this._peektimeoutid)
+        if (this._peektimeoutid == true)
             Mainloop.source_remove(this._peektimeoutid);
         this.didpeek=false;
     },
@@ -506,7 +506,7 @@ MyApplet.prototype = {
 
     _onScrollEvent: function(actor, event) {
         //switch workspace
-        if (this._peektimeoutid)
+        if (this._peektimeoutid == true)
             Mainloop.source_remove(this._peektimeoutid);
         var index = global.screen.get_active_workspace_index() + event.get_scroll_direction() * 2 - 1;
         if(global.screen.get_workspace_by_index(index) != null){

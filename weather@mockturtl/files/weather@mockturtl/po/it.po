@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-09-07 14:19+0100\n"
-"PO-Revision-Date: 2019-10-15 23:03+0200\n"
+"PO-Revision-Date: 2019-10-29 21:34+0100\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.2.1\n"
-"Last-Translator: dragone2@risposteinformatiche.it\n"
+"Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Language: it\n"
 
@@ -35,8 +35,8 @@ msgid "No location provided"
 msgstr "Nessuna località specificata"
 
 #: applet.js:610 3.0/applet.js:563 3.8/applet.js:472
-msgid "Cloudiness:"
-msgstr "Nuvolosità:"
+msgid "Cloudiness"
+msgstr "Nuvolosità"
 
 #: applet.js:634 3.0/applet.js:593 3.8/applet.js:502
 msgid "Sunrise"
@@ -109,35 +109,35 @@ msgstr "Sabato"
 
 #: applet.js:1030 3.0/utils.js:178 3.8/utils.js:178
 msgid "N"
-msgstr ""
+msgstr "N"
 
 #: applet.js:1030 3.0/utils.js:178 3.8/utils.js:178
 msgid "NE"
-msgstr ""
+msgstr "NE"
 
 #: applet.js:1030 3.0/utils.js:178 3.8/utils.js:178
 msgid "E"
-msgstr ""
+msgstr "E"
 
 #: applet.js:1030 3.0/utils.js:178 3.8/utils.js:178
 msgid "SE"
-msgstr ""
+msgstr "SE"
 
 #: applet.js:1030 3.0/utils.js:178 3.8/utils.js:178
 msgid "S"
-msgstr ""
+msgstr "S"
 
 #: applet.js:1030 3.0/utils.js:178 3.8/utils.js:178
 msgid "SW"
-msgstr ""
+msgstr "SO"
 
 #: applet.js:1030 3.0/utils.js:178 3.8/utils.js:178
 msgid "W"
-msgstr ""
+msgstr "O"
 
 #: applet.js:1030 3.0/utils.js:178 3.8/utils.js:178
 msgid "NW"
-msgstr ""
+msgstr "NO"
 
 #: applet.js:1080
 msgid "Service Unavailable"
@@ -258,7 +258,7 @@ msgstr "Temporale con forti piogge"
 
 #: 3.0/openWeatherMap.js:329 3.8/openWeatherMap.js:271
 msgid "Light thunderstorm"
-msgstr "Temporale leggero"
+msgstr "Lieve temporale"
 
 #: 3.0/openWeatherMap.js:330 3.8/openWeatherMap.js:272
 msgid "Thunderstorm"
@@ -282,55 +282,55 @@ msgstr "Temporale con pioviggine"
 
 #: 3.0/openWeatherMap.js:335 3.8/openWeatherMap.js:277
 msgid "Thunderstorm with heavy drizzle"
-msgstr "Temporale con pioggerella intensa"
+msgstr "Temporale con forti rovesci"
 
 #: 3.0/openWeatherMap.js:336 3.8/openWeatherMap.js:278
 msgid "Light intensity drizzle"
-msgstr "Pioggerellina"
+msgstr "Lievi rovesci"
 
 #: 3.0/openWeatherMap.js:337 3.8/openWeatherMap.js:279
 msgid "Drizzle"
-msgstr "Pioggerella"
+msgstr "Lievi rovesci"
 
 #: 3.0/openWeatherMap.js:338 3.8/openWeatherMap.js:280
 msgid "Heavy intensity drizzle"
-msgstr "Pioggia ad alta intensità"
+msgstr "Forti rovesci"
 
 #: 3.0/openWeatherMap.js:339 3.8/openWeatherMap.js:281
 msgid "Light intensity drizzle rain"
-msgstr "Pioggia leggera"
+msgstr "Lievi rovesci"
 
 #: 3.0/openWeatherMap.js:340 3.8/openWeatherMap.js:282
 msgid "Drizzle rain"
-msgstr "Pioggia"
+msgstr "Rovesci"
 
 #: 3.0/openWeatherMap.js:341 3.8/openWeatherMap.js:283
 msgid "Heavy intensity drizzle rain"
-msgstr "Pioggia intensa"
+msgstr "Forti rovesci"
 
 #: 3.0/openWeatherMap.js:342 3.8/openWeatherMap.js:284
 msgid "Shower rain and drizzle"
-msgstr "Pioggia"
+msgstr "Rovesci"
 
 #: 3.0/openWeatherMap.js:343 3.8/openWeatherMap.js:285
 msgid "Heavy shower rain and drizzle"
-msgstr "Piogge forti"
+msgstr "Forti rovesci"
 
 #: 3.0/openWeatherMap.js:344 3.8/openWeatherMap.js:286
 msgid "Shower drizzle"
-msgstr "Pioggia"
+msgstr "Rovesci"
 
 #: 3.0/openWeatherMap.js:345 3.8/openWeatherMap.js:287
 msgid "Light rain"
-msgstr "Pioggia leggera"
+msgstr "Lievi rovesci"
 
 #: 3.0/openWeatherMap.js:346 3.8/openWeatherMap.js:288
 msgid "Moderate rain"
-msgstr "Pioggia moderata"
+msgstr "Rovesci moderati"
 
 #: 3.0/openWeatherMap.js:347 3.8/openWeatherMap.js:289
 msgid "Heavy intensity rain"
-msgstr "Pioggia ad alta intensità"
+msgstr "Forti rovesci"
 
 #: 3.0/openWeatherMap.js:348 3.8/openWeatherMap.js:290
 msgid "Very heavy rain"
@@ -338,7 +338,7 @@ msgstr "Pioggia molto forte"
 
 #: 3.0/openWeatherMap.js:349 3.8/openWeatherMap.js:291
 msgid "Extreme rain"
-msgstr "Pioggia estrema"
+msgstr "Rovesci estremi"
 
 #: 3.0/openWeatherMap.js:350 3.8/openWeatherMap.js:292
 msgid "Freezing rain"
@@ -382,7 +382,7 @@ msgstr "Nevischio"
 
 #: 3.0/openWeatherMap.js:360 3.8/openWeatherMap.js:302
 msgid "Light rain and snow"
-msgstr "Pioggiarella e neve"
+msgstr "Lievi rovesci e neve"
 
 #: 3.0/openWeatherMap.js:361 3.8/openWeatherMap.js:303
 msgid "Rain and snow"
@@ -390,7 +390,7 @@ msgstr "Pioggia e neve"
 
 #: 3.0/openWeatherMap.js:362 3.8/openWeatherMap.js:304
 msgid "Light shower snow"
-msgstr "Pioggia leggera"
+msgstr "Lieve nevicata"
 
 #: 3.0/openWeatherMap.js:363 3.8/openWeatherMap.js:305
 msgid "Shower snow"
@@ -510,8 +510,8 @@ msgstr ""
 "Looking Glass"
 
 #: 3.0/applet.js:569 3.8/applet.js:478
-msgid "Feels like:"
-msgstr "Si sente come:"
+msgid "Feels like"
+msgstr "Si sente come"
 
 #: 3.0/applet.js:628 3.8/applet.js:537
 msgid "Today"
@@ -526,7 +526,7 @@ msgid ""
 "Could not update weather for a while...\n"
 "are you connected to the internet?"
 msgstr ""
-"Impossibile aggiornare il tempo per un po '...\n"
+"Non è stato possibile aggiornare il meteo per un po'...\n"
 "sei connesso a internet?"
 
 #: 3.0/applet.js:841 3.8/applet.js:750
@@ -830,7 +830,7 @@ msgid ""
 "their support!"
 msgstr ""
 "realizzato da: OpenWeatherMap, DarkSky, ipapi. Grazie mille a OpenWeatherMap "
-"per il loro supporto!"
+"per il suo supporto!"
 
 #. 3.8->settings-schema.json->head->description
 msgid "Settings for weather@mockturtl 3.8+"

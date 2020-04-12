@@ -1,4 +1,9 @@
 /* taken from gnome-shell.css, .dash-search-button */
+.popup-menu-content.weather-menu {
+    padding-bottom: 0em;
+    padding-top: 0em;
+}
+
 .weather-current-location-link {
     text-align: center;
 }
@@ -10,7 +15,7 @@
 }
 
 .weather-current-summarybox {
-    padding-top: 15px;
+    padding-top: 5px;
 }
 
 .weather-current-summary {
@@ -20,6 +25,7 @@
 .weather-current-databox {
     padding-top: 15px;
     padding-left: 30px;
+    padding-right: 30px;
 }
 
 .weather-current-icon {
@@ -49,15 +55,15 @@
 }
 
 .weather-forecast-icon {
-  padding: 0 15px 0 30px;
+   padding: 0 7px 10px 15px;
 }
 
 .weather-forecast-databox {
-  padding: 0 30px 0 0;
+    padding: 0 20px 10px 0;
 }
 
 .weather-forecast-container {
-    margin: 10px 0 5px 0;
+    margin: 10px 10px 0px 10px;
 }
 
 .weather-forecast-day {

@@ -7,12 +7,11 @@
         "3.8", 
         "4.0", 
         "4.2", 
-        "4.3"
+        "4.4"
     ], 
-    "max-instances": "1", 
-    "dangerous": false, 
-    "description": "Displaying realtime CPU and memory load", 
+    "max-instances": "-1", 
+    "description": "Displaying realtime system information (CPU, memory, network and disk load).", 
     "uuid": "hwmonitor@sylfurd", 
-    "version": "1.0.0", 
+    "version": "1.2", 
     "name": "Graphical hardware monitor"
 }

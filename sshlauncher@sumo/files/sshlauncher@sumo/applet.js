@@ -15,6 +15,16 @@ const AppletDir = imports.ui.appletManager.appletMeta[UUID].path;
 const Gtk = imports.gi.Gtk;
 const Settings = imports.ui.settings;
 
+/**
+ * DEBUG:
+ * Returns whether or not the DEBUG file is present in this applet directory (which can be created by the 'touch DEBUG' command).
+ * @returns {boolean}
+ */
+function DEBUG() {
+  let _debug = Gio.file_new_for_path(AppletDir + "/DEBUG");
+  return _debug.query_exists(null);
+};
+
 Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
 
 function _(str) {
@@ -39,7 +49,7 @@ MyApplet.prototype = {
 
     this.set_applet_tooltip(_("SSH Launcher"));
     // Settings
-    this._customCommand;
+    this._customCommand = "";
 
     try {
       this.settings = new Settings.AppletSettings(this, UUID, instance_id);
@@ -92,7 +102,7 @@ MyApplet.prototype = {
       if (_symbolic) icon += "-symbolic";
 
       if (Gtk.IconTheme.get_default().has_icon(icon)) {
-        this.set_applet_icon_name(icon);
+        if (_symbolic) this.set_applet_icon_symbolic_name(icon); else this.set_applet_icon_name(icon);
         return;
       }
 
@@ -112,7 +122,31 @@ MyApplet.prototype = {
     return (!t) ? null : t;
   },
 
-  buildTermFlags: function(termOptions, hostName) {
+  /**
+   * Trust our own options first, then
+   * the exec-arg stored in cinnamon-settings.
+   * @param {string} terminal name of terminal
+   * @returns {string} terminal's execute flag
+   */
+  getTermExecuteFlag: function(terminal) {
+      let termOptions = this.getTermOptions(terminal);
+      if (!!termOptions) {
+        return (termOptions.execute[0] + " ");
+      }
+      else {
+        let termArg = this.gsettings.get_string("exec-arg");
+        return (termArg + " ");
+      }
+  },
+
+  /**
+   * Adds title if option available in terminal.
+   * @param {string} terminal name of terminal
+   * @param {string} hostName hostname stored in ssh-config
+   * @returns {string} all extra terminal options if available
+   */
+  buildTermFlags: function(terminal, hostName) {
+    let termOptions = this.getTermOptions(terminal);
     let options = "";
     if (termOptions == null) return options;
     if (termOptions.title != null) options += (termOptions.title + " \"" + hostName + "\" ");
@@ -128,6 +162,11 @@ MyApplet.prototype = {
     return flags;
   },
 
+  /**
+   * @param {string} terminal name of terminal
+   * @param {string} arg execute argument of terminal
+   * @returns {boolean}
+   */
   isExecArgCorrect: function(terminal, arg) {
     let termOptions = this.getTermOptions(terminal);
     if (termOptions == null) return true; // No info stored on terminal, no way to validate
@@ -201,25 +240,22 @@ MyApplet.prototype = {
       terminal = command.split(" ")[0]; // Get terminal name from custom command
     }
     else {
-      let term = this.gsettings.get_string("exec");
-      if (this.empty(term)) {
+      terminal = this.gsettings.get_string("exec");
+      if (this.empty(terminal)) {
         this.sendNotification(_("SSH Launcher"), _("Error: I can't open the terminal.\nYou need to set a default terminal first in Preferred Applications!\n\n(More help in Right Click->About->More Info)"));
         return;
       }
-
-      terminal = term;
-      command = term + " ";
-      command += this.buildTermFlags(this.getTermOptions(term), hostname);
-
-      let termArg = this.gsettings.get_string("exec-arg");
-      if (!this.isExecArgCorrect(term, termArg)) {};
-      command += termArg + " ";
+      command = terminal + " ";
+      command += this.buildTermFlags(terminal, hostname);
+      command += this.getTermExecuteFlag(terminal);
     }
 
     command += (" ssh " + this.buildSshFlags() + hostname);
 
+    // TODO: capture of the command output in the event of success/failure
+    // to provide better feedback on issues
     Util.spawnCommandLine(command);
-    global.log("Terminal opened with command '" + command + "'");
+    if (DEBUG()) global.log("Terminal opened with command '" + command + "'");
     this.sendNotification(_("SSH Launcher"), _("Connection opened to ") + hostname + _(" using ") + terminal);
   },
 

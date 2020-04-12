@@ -9,7 +9,6 @@
 // You should have received a copy of the GNU General Public License along with
 // this file. If not, see <http://www.gnu.org/licenses/>.
 
-const Lang = imports.lang;
 const Mainloop = imports.mainloop;
 const Clutter = imports.gi.Clutter;
 const St = imports.gi.St;
@@ -204,7 +203,7 @@ MyApplet.prototype = {
     this.graphArea.width = 1;
     this.graphArea.height = this.panelHeight * global.ui_scale;
 
-    this.graphArea.connect('repaint', Lang.bind(this, this.onGraphRepaint));
+    this.graphArea.connect('repaint', (area) => this.onGraphRepaint(area));
 
     this.multiCpuProvider = new DataProviders.MultiCpuDataProvider();
     this.configSettings.adjustCPUcount(this.multiCpuProvider.getCPUCount());
@@ -234,7 +233,14 @@ MyApplet.prototype = {
     this.diskGraph.logScale = this.configSettings._prefs.disk.logscale;
 
     this.actor.add_actor(this.graphArea);
-    this.loopId = Mainloop.timeout_add(this.configSettings._prefs.refreshRate, Lang.bind(this, this._update));
+
+    if (St.Widget.get_default_direction() === St.TextDirection.RTL) {
+      this._applet_tooltip._tooltip.set_style('text-align: right; font-family: monospace;');
+    } else {
+      this._applet_tooltip._tooltip.set_style('text-align: left; font-family: monospace;');
+    }
+    this.loopId = 0;
+    this.loopId = Mainloop.timeout_add(this.configSettings._prefs.refreshRate, () => this._update());
   },
 
   on_applet_removed_from_panel: function() {
@@ -254,7 +260,7 @@ MyApplet.prototype = {
 
   _initContextMenu: function() {
     // Todo - make this a submenu item
-    let preferences_menu_item = new Applet.MenuItem(_('Preferences'), Gtk.STOCK_EDIT, Lang.bind(this, this.launchPreferences));
+    let preferences_menu_item = new Applet.MenuItem(_('Preferences'), Gtk.STOCK_EDIT, () => this.launchPreferences());
     this._applet_context_menu.addMenuItem(preferences_menu_item);
     this.out_reader = null;
   },
@@ -283,6 +289,9 @@ MyApplet.prototype = {
   _update: function() {
     // This loops on interval, we need to make sure it stops when the xlet is removed.
     if (!this.networkProvider) {
+      if (this.loopId > 0) {
+        Mainloop.source_remove(this.loopId);
+      }
       this.loopId = 0;
       return false;
     }
