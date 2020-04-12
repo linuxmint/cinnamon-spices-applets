@@ -31,7 +31,6 @@ const {
   AppTypes,
   ApplicationsViewMode,
   fuzzyOptions,
-  gridWidths,
   searchThresholds,
   markdownProps
 } = require('./constants');
@@ -284,7 +283,7 @@ class CinnamenuApplet extends TextIconApplet {
 
   get gridWidth() {
     if (!this.state) return 0;
-    return gridWidths[this.state.settings.appsGridColumnCount] * global.ui_scale;
+    return (this.state.settings.appsGridColumnCount * 130 + 80 ) * global.ui_scale;
   }
 
   loadSettings(init = false) {
@@ -2570,3 +2569,4 @@ class CinnamenuApplet extends TextIconApplet {
 function main(metadata, orientation, panel_height, instance_id) {
   return new CinnamenuApplet(metadata, orientation, panel_height, instance_id);
 }
+
