@@ -31,8 +31,6 @@ const fuzzyOptions = {
   after: '</u></b>'
 }
 
-const gridWidths = [0, 240, 340, 498, 644, 725, 840, 980];
-
 const searchThresholds = {
   id: 0.2,
   name: 0.1,
@@ -45,4 +43,5 @@ const markdownProps = ['name', 'description'];
 
 const stripMarkupRegex = /(<([^>]+)>)/ig;
 
-module.exports = {_, REMEMBER_RECENT_KEY, ApplicationType, AppTypes, ApplicationsViewMode, fuzzyOptions, gridWidths, searchThresholds, markdownProps, stripMarkupRegex};
+module.exports = {_, REMEMBER_RECENT_KEY, ApplicationType, AppTypes, ApplicationsViewMode, fuzzyOptions, searchThresholds, markdownProps, stripMarkupRegex};
+

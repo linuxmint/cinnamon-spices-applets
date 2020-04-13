@@ -410,7 +410,9 @@ class AppListGridButton extends PopupBaseMenuItem {
     });
 
     this.actor.set_style_class_name('menu-application-button');
-    this.actor.set_style('padding-left: 0px; padding-right: 0px;')
+    if (!this.state.isListView) {
+      this.actor.set_style('padding-left: 5px; padding-right: 5px;');
+    }
     this.actor.x_align = this.state.isListView ? Align.START : Align.MIDDLE;
     this.actor.y_align = Align.MIDDLE;
 
@@ -1230,3 +1232,4 @@ class GroupButton extends PopupBaseMenuItem {
 };
 
 module.exports = {CategoryListButton, AppListGridButton, GroupButton};
+

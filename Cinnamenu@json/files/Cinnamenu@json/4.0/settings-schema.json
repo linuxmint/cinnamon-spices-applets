@@ -257,7 +257,7 @@
     "type": "spinbutton",
     "default": 4,
     "min": 2,
-    "max": 7,
+    "max": 12,
     "step": 1,
     "units": "columns",
     "description": "Number of columns in apps grid",
@@ -328,3 +328,4 @@
     "dependency": "enable-custom-menu-height"
   }
 }
+
