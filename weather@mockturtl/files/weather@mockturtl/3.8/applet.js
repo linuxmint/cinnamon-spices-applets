@@ -977,34 +977,22 @@ class WeatherLoop {
         return (this.lastUpdated > oldDate);
     }
     async Start() {
-        let loopInterval = this.LOOP_INTERVAL;
         while (true) {
             try {
-                this.app.log.Debug("Loop began");
-                if (this.appletRemoved == true)
+                if (this.IsStray())
                     return;
-                this.app.log.Debug("Applet GUID: " + this.GUID);
-                this.app.log.Debug("GUID stored globally: " + weatherAppletGUIDs[this.instanceID]);
-                if (this.GUID != weatherAppletGUIDs[this.instanceID]) {
-                    this.app.log.Print("GUID mismatch, terminating applet");
-                    return;
-                }
-                if (this.app.encounteredError) {
-                    this.app.encounteredError = false;
-                    this.errorCount++;
-                    this.app.log.Debug("Encountered error in previous loop");
-                }
-                if (this.errorCount > 60)
-                    this.errorCount = 60;
-                loopInterval = (this.errorCount > 0) ? loopInterval * this.errorCount : this.LOOP_INTERVAL;
-                if (this.pauseRefresh == true) {
+                if (this.app.encounteredError)
+                    this.IncrementErrorCount();
+                this.ValidateLastUpdate();
+                if (this.pauseRefresh) {
                     this.app.log.Debug("Configuration error, updating paused");
-                    await delay(loopInterval * 1000);
+                    await delay(this.LoopInterval());
                     continue;
                 }
-                let nextUpdate = new Date(this.lastUpdated.getTime() + this.app.config._refreshInterval * 60000);
-                if (this.errorCount > 0 || nextUpdate < new Date()) {
-                    this.app.log.Debug("Refresh triggered in mainloop with these values: lastUpdated " + ((!this.lastUpdated) ? "null" : this.lastUpdated.toLocaleString()) + ", errorCount " + this.errorCount.toString() + " , loopInterval " + loopInterval.toString() + " seconds, refreshInterval " + this.app.config._refreshInterval + " minutes");
+                if (this.errorCount > 0 || this.NextUpdate() < new Date()) {
+                    this.app.log.Debug("Refresh triggered in mainloop with these values: lastUpdated " + ((!this.lastUpdated) ? "null" : this.lastUpdated.toLocaleString())
+                        + ", errorCount " + this.errorCount.toString() + " , loopInterval " + (this.LoopInterval() / 1000).toString()
+                        + " seconds, refreshInterval " + this.app.config._refreshInterval + " minutes");
                     let state = await this.app.refreshWeather(false);
                     if (state == "success") {
                         this.lastUpdated = new Date();
@@ -1018,10 +1006,38 @@ class WeatherLoop {
                 this.app.log.Error("Error in Main loop: " + e);
                 this.app.encounteredError = true;
             }
-            await delay(loopInterval * 1000);
+            await delay(this.LoopInterval());
         }
     }
     ;
+    IsStray() {
+        if (this.appletRemoved == true)
+            return true;
+        if (this.GUID != weatherAppletGUIDs[this.instanceID]) {
+            this.app.log.Debug("Applet GUID: " + this.GUID);
+            this.app.log.Debug("GUID stored globally: " + weatherAppletGUIDs[this.instanceID]);
+            this.app.log.Print("GUID mismatch, terminating applet");
+            return true;
+        }
+        return false;
+    }
+    IncrementErrorCount() {
+        this.app.encounteredError = false;
+        this.errorCount++;
+        this.app.log.Debug("Encountered error in previous loop");
+        if (this.errorCount > 60)
+            this.errorCount = 60;
+    }
+    NextUpdate() {
+        return new Date(this.lastUpdated.getTime() + this.app.config._refreshInterval * 60000);
+    }
+    ValidateLastUpdate() {
+        if (this.lastUpdated > new Date())
+            this.lastUpdated = new Date(0);
+    }
+    LoopInterval() {
+        return (this.errorCount > 0) ? this.LOOP_INTERVAL * this.errorCount * 1000 : this.LOOP_INTERVAL * 1000;
+    }
     Stop() {
         this.appletRemoved = true;
     }
