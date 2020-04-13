@@ -1,0 +1,99 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-04-13 12:38+0800\n"
+"PO-Revision-Date: 2020-04-13 02:43+0200\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Last-Translator: jerrywham <contact@ecyseo.net>\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: fr\n"
+
+#: applet.js:82
+msgid "Open cook book"
+msgstr "Ouvrir la documentation"
+
+#: applet.js:86
+msgid "Open projects directory"
+msgstr "Ouvrir le repertoire de projets"
+
+#: applet.js:93
+msgid "First edition of cook book"
+msgstr "Première édition de la doc"
+
+#: applet.js:96
+msgid "Rust by example"
+msgstr "Rust par l'exemple"
+
+#: applet.js:99
+msgid "Cargo book"
+msgstr "Manuel de Cargo"
+
+#: applet.js:102
+msgid "Rustc book"
+msgstr "Manuel de Rustc"
+
+#: applet.js:105
+msgid "Rustdoc book"
+msgstr "Manuel de Rustdoc"
+
+#: applet.js:112
+msgid "Create std"
+msgstr "Create std"
+
+#: applet.js:115
+msgid "Create alloc"
+msgstr "Create alloc"
+
+#: applet.js:118
+msgid "Create core"
+msgstr "Create core"
+
+#: applet.js:121
+msgid "Create proc_macro"
+msgstr "Create proc_macro"
+
+#: applet.js:124
+msgid "Create test"
+msgstr "Create test"
+
+#: applet.js:131
+msgid "Edition guide"
+msgstr "Manuel d'édition"
+
+#: applet.js:134
+msgid "Reference guide"
+msgstr "Manuel de référence"
+
+#: applet.js:137
+msgid "Embedded book"
+msgstr "Manuel pour l'embarqué"
+
+#: applet.js:140
+msgid "Rustonomicon book"
+msgstr "Manuel pour usage non sûrs"
+
+#: applet.js:143
+msgid "Unstable book"
+msgstr "Manuel non stable"
+
+#: applet.js:150
+msgid "Launch Nursery"
+msgstr "Lancer Nursery"
+
+#. rust-menu@jerrywham->metadata.json->description
+msgid "A Menu for Rust Developers"
+msgstr "Un menu pour les développeurs Rust"
+
+#. rust-menu@jerrywham->metadata.json->name
+msgid "Rust Developer Menu"
+msgstr "Rust Developer Menu"
