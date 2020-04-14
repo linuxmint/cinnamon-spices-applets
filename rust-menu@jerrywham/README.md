@@ -4,6 +4,12 @@ This is a Cinnamon applet that give you shortcuts to many Rust documentations.
 This applet requires at least Cinnamon 4.4.8 or newer.
 This version assumes you’re using Rust 1.37.0 or later with edition="2018" in Cargo.toml of all projects to use Rust 2018 Edition idioms.
 
+To install rustup, you have to run on a terminal :
+```bash
+curl https://sh.rustup.rs -sSf | sh
+```
+Then, restart your terminal.
+
 ## Installation
 Download and enable via cinnamon settings.
 
