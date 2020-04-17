@@ -1,5 +1,6 @@
 const Applet = imports.ui.applet;
 const PopupMenu = imports.ui.popupMenu;
+const St = imports.gi.St;
 const Gettext = imports.gettext;
 const UUID = "rust-menu@jerrywham";
 const Util = imports.misc.util;
@@ -13,7 +14,6 @@ const HOME = GLib.get_home_dir();
 var CommandConstants = new function() {
   this.COMMAND_COOKBOOK = "xdg-open file://" + HOME + "/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/book/title-page.html";
   this.COMMAND_OPEN_DIR_PROJECTS = "nemo " + HOME + "\"/RUST PROJETS\"";
-  //this.COMMAND_BOOK_FIRST_EDITION = "xdg-open https://doc.rust-lang.org/1.18.0/book/first-edition/README.html";
 
   this.COMMAND_BOOK_FIRST_EDITION = "xdg-open file://" + HOME + "/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/book/first-edition/index.html";
   this.COMMAND_RUST_BY_EXAMPLE = "xdg-open file://" + HOME + "/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/rust-by-example/index.html";
@@ -72,7 +72,6 @@ MyApplet.prototype = {
 
   _init: function(orientation){
     Applet.IconApplet.prototype._init.call(this, orientation);
-    // this.set_applet_icon_symbolic_name("folder-symbolic");
     this.set_applet_icon_path(AppletDir + '/icon2.svg');
     this.set_applet_tooltip("Rust Menu");
 
@@ -82,77 +81,126 @@ MyApplet.prototype = {
     this.menu = new Applet.AppletPopupMenu(this, orientation);
     this.menuManager.addMenu(this.menu);
 
-    this.menu.addAction(_("Open cook book"), function(event) {
-      Util.spawnCommandLine(CommandConstants.COMMAND_COOKBOOK);
-    });
+    let item = new PopupMenu.PopupIconMenuItem(_("Open cook book"), "accessories-dictionary", St.IconType.SYMBOLIC);
+    item.connect('activate', Lang.bind(this, function() {
+        Util.spawnCommandLine(CommandConstants.COMMAND_COOKBOOK);
+    }));
+    this.menu.addMenuItem(item);
 
-    this.menu.addAction(_("Open projects directory"), function(event) {
-      Util.spawnCommandLine(CommandConstants.COMMAND_OPEN_DIR_PROJECTS);
-    });
-
-    //add a separator to separate the toggle buttons and actions
-    this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
-
-    this.menu.addAction(_("First edition of cook book"), function(event) {
-      Util.spawnCommandLine(CommandConstants.COMMAND_BOOK_FIRST_EDITION);
-    });
-    this.menu.addAction(_("Rust by example"), function(event) {
-      Util.spawnCommandLine(CommandConstants.COMMAND_RUST_BY_EXAMPLE);
-    });
-    this.menu.addAction(_("Cargo book"), function(event) {
-      Util.spawnCommandLine(CommandConstants.COMMAND_CARGO_BOOK);
-    });
-    this.menu.addAction(_("Rustc book"), function(event) {
-      Util.spawnCommandLine(CommandConstants.COMMAND_RUSTC_BOOK);
-    });
-    this.menu.addAction(_("Rustdoc book"), function(event) {
-      Util.spawnCommandLine(CommandConstants.COMMAND_RUSTDOC_BOOK);
-    });
+    item = new PopupMenu.PopupIconMenuItem(_("Open projects directory"), "folder", St.IconType.SYMBOLIC);
+    item.connect('activate', Lang.bind(this, function() {
+        Util.spawnCommandLine(CommandConstants.COMMAND_OPEN_DIR_PROJECTS);
+    }));
+    this.menu.addMenuItem(item);
 
     //add a separator to separate the toggle buttons and actions
     this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
-    this.menu.addAction(_("Create std"), function(event) {
-      Util.spawnCommandLine(CommandConstants.COMMAND_STD);
-    });
-    this.menu.addAction(_("Create alloc"), function(event) {
-      Util.spawnCommandLine(CommandConstants.COMMAND_ALLOC);
-    });
-    this.menu.addAction(_("Create core"), function(event) {
-      Util.spawnCommandLine(CommandConstants.COMMAND_CORE);
-    });
-    this.menu.addAction(_("Create proc_macro"), function(event) {
-      Util.spawnCommandLine(CommandConstants.COMMAND_PROC_MACRO);
-    });
-    this.menu.addAction(_("Create test"), function(event) {
-      Util.spawnCommandLine(CommandConstants.COMMAND_TEST);
-    });
+    item = new PopupMenu.PopupIconMenuItem(_("First edition of cook book"), "accessories-dictionary", St.IconType.SYMBOLIC);
+    item.connect('activate', Lang.bind(this, function() {
+        Util.spawnCommandLine(CommandConstants.COMMAND_BOOK_FIRST_EDITION);
+    }));
+    this.menu.addMenuItem(item);
+
+    item = new PopupMenu.PopupIconMenuItem(_("Rust by example"), "accessories-dictionary", St.IconType.SYMBOLIC);
+    item.connect('activate', Lang.bind(this, function() {
+        Util.spawnCommandLine(CommandConstants.COMMAND_RUST_BY_EXAMPLE);
+    }));
+    this.menu.addMenuItem(item);
+
+    item = new PopupMenu.PopupIconMenuItem(_("Cargo book"), "package-x-generic", St.IconType.SYMBOLIC);
+    item.connect('activate', Lang.bind(this, function() {
+        Util.spawnCommandLine(CommandConstants.COMMAND_CARGO_BOOK);
+    }));
+    this.menu.addMenuItem(item);
+
+    item = new PopupMenu.PopupIconMenuItem(_("Rustc book"), "accessories-dictionary", St.IconType.SYMBOLIC);
+    item.connect('activate', Lang.bind(this, function() {
+        Util.spawnCommandLine(CommandConstants.COMMAND_RUSTC_BOOK);
+    }));
+    this.menu.addMenuItem(item);
+
+    item = new PopupMenu.PopupIconMenuItem(_("Rustdoc book"), "accessories-dictionary", St.IconType.SYMBOLIC);
+    item.connect('activate', Lang.bind(this, function() {
+        Util.spawnCommandLine(CommandConstants.COMMAND_RUSTDOC_BOOK);
+    }));
+    this.menu.addMenuItem(item);
 
     //add a separator to separate the toggle buttons and actions
     this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
-    this.menu.addAction(_("Edition guide"), function(event) {
-      Util.spawnCommandLine(CommandConstants.COMMAND_EDITION_GUIDE);
-    });
-    this.menu.addAction(_("Reference guide"), function(event) {
-      Util.spawnCommandLine(CommandConstants.COMMAND_REFERENCE_GUIDE);
-    });
-    this.menu.addAction(_("Embedded book"), function(event) {
-      Util.spawnCommandLine(CommandConstants.COMMAND_EMBEDDED_BOOK);
-    });
-    this.menu.addAction(_("Rustonomicon book"), function(event) {
-      Util.spawnCommandLine(CommandConstants.COMMAND_RUSTONOMICON_BOOK);
-    });
-    this.menu.addAction(_("Unstable book"), function(event) {
-      Util.spawnCommandLine(CommandConstants.COMMAND_UNSTABLE_BOOK);
-    });
-    
+    item = new PopupMenu.PopupIconMenuItem(_("Create std"), "application-x-executable", St.IconType.SYMBOLIC);
+    item.connect('activate', Lang.bind(this, function() {
+        Util.spawnCommandLine(CommandConstants.COMMAND_STD);
+    }));
+    this.menu.addMenuItem(item);
+
+    item = new PopupMenu.PopupIconMenuItem(_("Create alloc"), "application-x-executable", St.IconType.SYMBOLIC);
+    item.connect('activate', Lang.bind(this, function() {
+        Util.spawnCommandLine(CommandConstants.COMMAND_ALLOC);
+    }));
+    this.menu.addMenuItem(item);
+
+    item = new PopupMenu.PopupIconMenuItem(_("Create core"), "application-x-executable", St.IconType.SYMBOLIC);
+    item.connect('activate', Lang.bind(this, function() {
+        Util.spawnCommandLine(CommandConstants.COMMAND_CORE);
+    }));
+    this.menu.addMenuItem(item);
+
+    item = new PopupMenu.PopupIconMenuItem(_("Create proc_macro"), "application-x-executable", St.IconType.SYMBOLIC);
+    item.connect('activate', Lang.bind(this, function() {
+        Util.spawnCommandLine(CommandConstants.COMMAND_PROC_MACRO);
+    }));
+    this.menu.addMenuItem(item);
+
+    item = new PopupMenu.PopupIconMenuItem(_("Create test"), "application-x-executable", St.IconType.SYMBOLIC);
+    item.connect('activate', Lang.bind(this, function() {
+        Util.spawnCommandLine(CommandConstants.COMMAND_TEST);
+    }));
+    this.menu.addMenuItem(item);
+
     //add a separator to separate the toggle buttons and actions
     this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
-    this.menu.addAction(_("Launch Nursery"), function(event) {
-      Util.spawnCommandLine(CommandConstants.COMMAND_NURSERY);
-    });
+
+    item = new PopupMenu.PopupIconMenuItem(_("Edition guide"), "x-office-document", St.IconType.SYMBOLIC);
+    item.connect('activate', Lang.bind(this, function() {
+        Util.spawnCommandLine(CommandConstants.COMMAND_EDITION_GUIDE);
+    }));
+    this.menu.addMenuItem(item);
+
+    item = new PopupMenu.PopupIconMenuItem(_("Reference guide"), "x-office-document", St.IconType.SYMBOLIC);
+    item.connect('activate', Lang.bind(this, function() {
+        Util.spawnCommandLine(CommandConstants.COMMAND_REFERENCE_GUIDE);
+    }));
+    this.menu.addMenuItem(item);
+
+    item = new PopupMenu.PopupIconMenuItem(_("Embedded book"), "x-office-document", St.IconType.SYMBOLIC);
+    item.connect('activate', Lang.bind(this, function() {
+        Util.spawnCommandLine(CommandConstants.COMMAND_EMBEDDED_BOOK);
+    }));
+    this.menu.addMenuItem(item);
+
+    item = new PopupMenu.PopupIconMenuItem(_("Rustonomicon book"), "x-office-document", St.IconType.SYMBOLIC);
+    item.connect('activate', Lang.bind(this, function() {
+        Util.spawnCommandLine(CommandConstants.COMMAND_RUSTONOMICON_BOOK);
+    }));
+    this.menu.addMenuItem(item);
+
+    item = new PopupMenu.PopupIconMenuItem(_("Unstable book"), "x-office-document", St.IconType.SYMBOLIC);
+    item.connect('activate', Lang.bind(this, function() {
+        Util.spawnCommandLine(CommandConstants.COMMAND_UNSTABLE_BOOK);
+    }));
+    this.menu.addMenuItem(item);
+
+    //add a separator to separate the toggle buttons and actions
+    this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+
+    item = new PopupMenu.PopupIconMenuItem(_("Launch Nursery"), "network-workgroup", St.IconType.SYMBOLIC);
+    item.connect('activate', Lang.bind(this, function() {
+        Util.spawnCommandLine(CommandConstants.COMMAND_NURSERY);
+    }));
+    this.menu.addMenuItem(item);
 
   },
 
