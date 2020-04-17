@@ -55,7 +55,7 @@ MyApplet.prototype = {
     Applet.IconApplet.prototype._init.call(this, orientation);
     this.set_applet_icon_symbolic_name("applications-utilities");
     // this.set_applet_icon_path(AppletDir + '/icon.png');
-    this.set_applet_tooltip("Rust Menu");
+    this.set_applet_tooltip("Standard Icon Names");
 
     //setup a new menuManager and add the main context main to the manager
 
