@@ -162,7 +162,6 @@ MyApplet.prototype = {
     //add a separator to separate the toggle buttons and actions
     this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
-
     item = new PopupMenu.PopupIconMenuItem(_("Edition guide"), "x-office-document", St.IconType.SYMBOLIC);
     item.connect('activate', Lang.bind(this, function() {
         Util.spawnCommandLine(CommandConstants.COMMAND_EDITION_GUIDE);
