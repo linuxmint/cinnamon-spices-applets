@@ -6,14 +6,18 @@ const UUID = "standardIconNames@jerrywham";
 const Util = imports.misc.util;
 const Lang = imports.lang;
 const GLib = imports.gi.GLib;
+const Settings = imports.ui.settings;  // Needed for settings API
+const Main = imports.ui.main;
+const Cinnamon = imports.gi.Cinnamon;
+const Gtk = imports.gi.Gtk;
 const Gio = imports.gi.Gio;
-const AppletDir = imports.ui.appletManager.appletMeta[UUID].path;
+// const AppletDir = imports.ui.appletManager.appletMeta[UUID].path;
 const HOME = GLib.get_home_dir();
 
 //applet command constants
-var CommandConstants = new function() {
-  this.COMMAND = "nemo " + HOME;
-}
+// var CommandConstants = new function() {
+//   this.COMMAND = "";
+// }
 
 
 Gettext.bindtextdomain(UUID, HOME + "/.local/share/locale")
@@ -22,40 +26,24 @@ function _(str) {
   return Gettext.dgettext(UUID, str);
 }
 
-function checkService(service) {
-  let s=GLib.spawn_async_with_pipes(null, ["pgrep",service], null, GLib.SpawnFlags.SEARCH_PATH,null)
-  let c=GLib.IOChannel.unix_new(s[3])
-
-  let [res, pid, in_fd, out_fd, err_fd] =
-    GLib.spawn_async_with_pipes(null, ["pgrep",service], null, GLib.SpawnFlags.SEARCH_PATH, null);
-
-  let out_reader = new Gio.DataInputStream({ base_stream: new Gio.UnixInputStream({fd: out_fd}) });
-
-  let [out, size] = out_reader.read_line(null);
-
-  var result = false;
-  if(out != null) {
-    result = true;
-  }
-
-  return result;
-}
-
-
-function MyApplet(orientation){
-  this._init(orientation);
+function MyApplet(orientation, metadata, panelHeight,  instance_id){
+  this._init(orientation,metadata);
 }
 
 MyApplet.prototype = {
 
   __proto__: Applet.IconApplet.prototype,
 
-  _init: function(orientation){
+  _init: function(orientation, metadata, panelHeight,  instance_id){
 
-    Applet.IconApplet.prototype._init.call(this, orientation);
+    Applet.IconApplet.prototype._init.call(this, orientation, panelHeight,  instance_id);
+
+    this.instance_id=instance_id;
     this.set_applet_icon_symbolic_name("applications-utilities");
-    // this.set_applet_icon_path(AppletDir + '/icon.png');
     this.set_applet_tooltip("Standard Icon Names");
+
+    this.appletPath=metadata.path;
+    this.pick_notification = true;
 
     //setup a new menuManager and add the main context main to the manager
 
@@ -170,7 +158,7 @@ MyApplet.prototype = {
 	this._addItemToSubMenu("zoom-out", this._StandardActionIconsItem);
 
     this.menu.addMenuItem(this._StandardActionIconsItem);
-    
+
     /////////////////////////////////////////////////////////////////////
     //                                                                 //
     //  ████  ██  ██  ████  █     █  ████  ██████  ████   ████  ██  ██ //
@@ -468,21 +456,49 @@ MyApplet.prototype = {
 
   },
 
+  notify_send: function(notification, iconPath) {
+      if (iconPath == null)
+          iconPath = this.appletPath + '/icon.png';
+      Util.spawnCommandLine('notify-send --hint=int:transient:1 "' + notification + '" --icon=' + iconPath);
+  },
+
+  notify_installation: function(packageName) {
+      this.notify_send(_("Please install the '%s' package.").format(packageName), null);
+  },
+
   _addItemToSubMenu: function(label,subMenu){
   	let item = new PopupMenu.PopupIconMenuItem(_(""+label+""), ""+label+"", St.IconType.SYMBOLIC);
     item.connect('activate', Lang.bind(this, function() {
-        Util.spawnCommandLine(CommandConstants.COMMAND);
+        if(Gio.file_new_for_path("/usr/bin/xclip").query_exists(null)) {
+           Util.spawn_async(["python3", this.appletPath + "/copyscript.py", item.label.get_text()], Lang.bind(this, function(output) {
+               global.unset_cursor();
+               output = output.replace(/\n$/, "");
+               if (output == "ImportError Xlib") {
+                   Util.spawnCommandLine("apturl apt://python3-xlib");
+                   this.notify_installation('python3-xlib');
+               } else if (output == "ImportError numpy") {
+                   this.notify_installation('python3-numpy');
+                   Util.spawnCommandLine("apturl apt://python3-numpy");
+               } else {
+                   if (this.pick_notification) {
+                       this.notify_send(_("Item '%s' copied to clipboard.").format(output), output);
+                   }
+               }
+           }));
+       } else {
+           this.notify_installation('xclip');
+           Util.spawnCommandLine("apturl apt://xclip");
+       }
     }));
     subMenu.menu.addMenuItem(item);
   },
 
-  on_applet_clicked: function(){
+  on_applet_clicked: function(event) {
     this.menu.toggle();
   },
 }
 
-
-function main(metadata, orientation){
-  let myApplet = new MyApplet(orientation);
+function main(metadata, orientation, panelHeight,  instance_id){
+  let myApplet = new MyApplet(orientation, metadata, panelHeight,  instance_id);
   return myApplet;
 }
