@@ -5,6 +5,9 @@ const Gettext = imports.gettext;
 const UUID = "rust-menu@jerrywham";
 const Util = imports.misc.util;
 const Lang = imports.lang;
+const Settings = imports.ui.settings;  // Needed for settings API
+const Main = imports.ui.main;
+const Gtk = imports.gi.Gtk;
 const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
 const AppletDir = imports.ui.appletManager.appletMeta[UUID].path;
@@ -13,7 +16,7 @@ const HOME = GLib.get_home_dir();
 //applet command constants
 var CommandConstants = new function() {
   this.COMMAND_COOKBOOK = "xdg-open file://" + HOME + "/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/book/title-page.html";
-  this.COMMAND_OPEN_DIR_PROJECTS = "nemo " + HOME + "\"/RUST PROJETS\"";
+  this.COMMAND_OPEN_DIR_PROJECTS = "nemo ";
 
   this.COMMAND_BOOK_FIRST_EDITION = "xdg-open file://" + HOME + "/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/book/first-edition/index.html";
   this.COMMAND_RUST_BY_EXAMPLE = "xdg-open file://" + HOME + "/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/share/doc/rust/html/rust-by-example/index.html";
@@ -43,37 +46,58 @@ function _(str) {
   return Gettext.dgettext(UUID, str);
 }
 
-function checkService(service) {
-  let s=GLib.spawn_async_with_pipes(null, ["pgrep",service], null, GLib.SpawnFlags.SEARCH_PATH,null)
-  let c=GLib.IOChannel.unix_new(s[3])
-
-  let [res, pid, in_fd, out_fd, err_fd] =
-    GLib.spawn_async_with_pipes(null, ["pgrep",service], null, GLib.SpawnFlags.SEARCH_PATH, null);
-
-  let out_reader = new Gio.DataInputStream({ base_stream: new Gio.UnixInputStream({fd: out_fd}) });
-
-  let [out, size] = out_reader.read_line(null);
-
-  var result = false;
-  if(out != null) {
-    result = true;
-  }
-
-  return result;
-}
-
-
-function MyApplet(orientation){
-  this._init(orientation);
+function MyApplet(orientation, metadata, panelHeight,  instance_id){
+  this._init(orientation, metadata, panelHeight,  instance_id);
 }
 
 MyApplet.prototype = {
   __proto__: Applet.IconApplet.prototype,
 
-  _init: function(orientation){
-    Applet.IconApplet.prototype._init.call(this, orientation);
-    this.set_applet_icon_path(AppletDir + '/icon2.svg');
-    this.set_applet_tooltip("Rust Menu");
+  _init: function(orientation, metadata, panelHeight,  instance_id){
+    Applet.IconApplet.prototype._init.call(this, orientation, panelHeight,  instance_id);
+
+    this.instance_id = instance_id;
+
+    try {
+
+      this.settings = new Settings.AppletSettings(this, metadata.uuid, this.instance_id)
+
+      this.settings.bindProperty(
+        Settings.BindingDirection.IN,
+        "use-custom-directory",
+        "use_custom_directory",
+        this.on_settings_changed,
+        null);
+      this.settings.bindProperty(
+      Settings.BindingDirection.IN,
+        "custom-directory",
+        "custom_directory",
+        null,
+        null);
+      this.settings.bindProperty(
+        Settings.BindingDirection.IN,
+          "keybinding-project",
+          "keybinding_project",
+          this.on_keybinding_project_changed,
+          null);
+      this.settings.bindProperty(
+        Settings.BindingDirection.IN,
+          "keybinding-documentation",
+          "keybinding_documentation",
+          this.on_keybinding_doc_changed,
+          null);
+
+      this.set_applet_icon_path(AppletDir + '/icon2.svg');
+      this.set_applet_tooltip("Rust Menu");
+
+      this.on_keybinding_doc_changed();
+      this.on_keybinding_project_changed();
+      this.on_setting_changed();
+
+    }
+    catch (e) {
+        global.logError(e);
+    }
 
     //setup a new menuManager and add the main context main to the manager
 
@@ -89,7 +113,7 @@ MyApplet.prototype = {
 
     item = new PopupMenu.PopupIconMenuItem(_("Open projects directory"), "folder", St.IconType.SYMBOLIC);
     item.connect('activate', Lang.bind(this, function() {
-        Util.spawnCommandLine(CommandConstants.COMMAND_OPEN_DIR_PROJECTS);
+        Util.spawnCommandLine(CommandConstants.COMMAND_OPEN_DIR_PROJECTS + "\""+ this.custom_directory + "\"");
     }));
     this.menu.addMenuItem(item);
 
@@ -162,6 +186,7 @@ MyApplet.prototype = {
     //add a separator to separate the toggle buttons and actions
     this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
+
     item = new PopupMenu.PopupIconMenuItem(_("Edition guide"), "x-office-document", St.IconType.SYMBOLIC);
     item.connect('activate', Lang.bind(this, function() {
         Util.spawnCommandLine(CommandConstants.COMMAND_EDITION_GUIDE);
@@ -202,14 +227,41 @@ MyApplet.prototype = {
     this.menu.addMenuItem(item);
 
   },
-
+  on_settings_changed: function() {
+    if (this.use_custom_directory) {
+        this.settings.bindProperty(
+        Settings.BindingDirection.IN,
+        "custom-directory",
+        "custom_directory",
+        null,
+        null);
+    } else {
+        this.settings.setValue('custom-directory', this.settings.getDefaultValue('custom-directory'));
+    }
+  },
+   on_keybinding_doc_changed: function() {
+      Main.keybindingManager.addHotKey("hotkey-doc", this.keybinding_documentation, Lang.bind(this, this.on_hotkey_doc_triggered));
+   },
+   on_keybinding_project_changed: function() {
+      Main.keybindingManager.addHotKey("hotkey-project", this.keybinding_project, Lang.bind(this, this.on_hotkey_project_triggered));
+   },
+   on_hotkey_doc_triggered: function() {
+      Util.spawnCommandLine(CommandConstants.COMMAND_COOKBOOK);
+  },
+   on_hotkey_project_triggered: function() {
+      Util.spawnCommandLine(CommandConstants.COMMAND_OPEN_DIR_PROJECTS + "\""+ this.custom_directory + "\"");
+  },
   on_applet_clicked: function(){
     this.menu.toggle();
   },
+  on_applet_removed_from_panel() {
+      this.settings.finalize();    // This is called when a user removes the applet from the panel.. we want to
+                                   // Remove any connections and file listeners here, which our settings object
+                                   // has a few of
+  }
 }
 
-
-function main(metadata, orientation){
-  let myApplet = new MyApplet(orientation);
+function main(metadata, orientation, panelHeight,  instance_id){
+  let myApplet = new MyApplet(orientation, metadata, panelHeight,  instance_id);
   return myApplet;
 }
