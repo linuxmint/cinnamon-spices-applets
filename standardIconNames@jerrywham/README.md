@@ -12,3 +12,5 @@ Download and enable via cinnamon settings.
 
 ## Features
 See screenshot
+![Script menu and configure dialog](https://github.com/jerrywham/cinnamon-spices-applets/blob/master/standardIconNames%40jerrywham/screenshot.png
+"Menu")
