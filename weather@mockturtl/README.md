@@ -29,7 +29,9 @@ If the location you try does not work, try using [OpenWeatherMap's finder](https
 
 #### API Key Setup
 
-Go to [DarkSky](https://darksky.net/dev/register) and create an account. Then go your [Console section](https://darksky.net/dev/account) where you should find your secret key already created.
+**[DarkSky has been aquired by Apple](https://blog.darksky.net/dark-sky-has-a-new-home/) as of March  31, 2020. It does not allow new signups, and it will cease to function at the end of 2021.**
+
+~~Go to [DarkSky](https://darksky.net/dev/register) and create an account. Then go your [Console section](https://darksky.net/dev/account) where you should find your secret key already created.~~
 
 #### DarkSky Location
 
@@ -51,11 +53,17 @@ Go to [Weatherbit.io](https://www.weatherbit.io/account/create) and create an ac
 
 Weatherbit implementation only supports Latitude, Longitude format! (e.g. 37.77,122.41) Might expand the support on it later.
 
+## Yahoo
+
+#### Location
+
+Only Latitude, Longitude format (e.g. 37.77,122.41) is supported (implemented) currently for Yahoo Weather.
+
 ------
 
 ## Requirements
 
-* [Cinnamon](https://github.com/linuxmint/Cinnamon) 1.8+
+* [Cinnamon](https://github.com/linuxmint/Cinnamon) 1.8+, 
 
 ## Configuration
 

@@ -28,6 +28,10 @@
   { "type": "label"
   , "description": "WeatherBit - At least 10 minutes as refresh rate is recommended,\nsince otherwise you might exceed you daily quota."
   },
+  "Yahoo":
+  { "type": "label"
+  , "description": "Yahoo - Requires 'python3-requests-oauthlib' package installed (for Arch\nbased distros 'python-requests-oauthlib'), Updates every 2 hours."
+  },
   "providerSettings":
   { "type": "header"
   , "description": "Weather Provider Options"
@@ -41,7 +45,8 @@
       "OpenWeatherMap": "OpenWeatherMap",
       "DarkSky (key needed)": "DarkSky",
       "MET Norway": "MetNorway",
-      "Weatherbit (key needed)": "Weatherbit"
+      "Weatherbit (key needed)": "Weatherbit",
+      "Yahoo": "Yahoo"
     }
   },
   "apiKey":

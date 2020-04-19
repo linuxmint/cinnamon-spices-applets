@@ -119,7 +119,8 @@ var DATA_SERVICE = {
     OPEN_WEATHER_MAP: "OpenWeatherMap",
     DARK_SKY: "DarkSky",
     MET_NORWAY: "MetNorway",
-    WEATHERBIT: "Weatherbit"
+    WEATHERBIT: "Weatherbit",
+    YAHOO: "Yahoo"
 };
 imports.gettext.bindtextdomain(UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
 function _(str) {
@@ -164,6 +165,7 @@ var WeatherApplet = (function (_super) {
         _this.log = new Log(instanceId);
         _this.currentLocale = _this.constructJsLocale(get_language_names()[0]);
         _this.log.Debug("System locale is " + _this.currentLocale);
+        _this.log.Debug("Appletdir is: " + _this.appletDir);
         _this._httpSession.user_agent = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:37.0) Gecko/20100101 Firefox/37.0";
         _this.msgSource = new SystemNotificationSource(_("Weather Applet"));
         messageTray.add(_this.msgSource);
@@ -285,7 +287,7 @@ var WeatherApplet = (function (_super) {
     };
     ;
     WeatherApplet.prototype.sendNotification = function (title, message, transient) {
-        var notification = new Notification(this.msgSource, title, message);
+        var notification = new Notification(this.msgSource, "WeatherApplet: " + title, message);
         if (transient)
             notification.setTransient((!transient) ? false : true);
         this.msgSource.notify(notification);
@@ -353,7 +355,7 @@ var WeatherApplet = (function (_super) {
     };
     WeatherApplet.prototype.refreshWeather = function (rebuild) {
         return __awaiter(this, void 0, void 0, function () {
-            var locationData, e_1, darkSky, openWeatherMap, metNorway, weatherbit, weatherInfo, _a, e_2;
+            var locationData, e_1, darkSky, openWeatherMap, metNorway, weatherbit, yahoo, weatherInfo, _a, e_2;
             return __generator(this, function (_b) {
                 switch (_b.label) {
                     case 0:
@@ -392,6 +394,11 @@ var WeatherApplet = (function (_super) {
                                 if (weatherbit == null)
                                     weatherbit = importModule("weatherbit");
                                 this.provider = new weatherbit.Weatherbit(this);
+                                break;
+                            case DATA_SERVICE.YAHOO:
+                                if (yahoo == null)
+                                    yahoo = importModule("yahoo");
+                                this.provider = new yahoo.Yahoo(this);
                                 break;
                             default:
                                 return [2, "error"];
@@ -703,7 +710,7 @@ var UI = (function () {
             if (nonempty(config._locationLabelOverride)) {
                 location = config._locationLabelOverride;
             }
-            this.app.SetAppletTooltip(location + " - " + _("Updated") + " " + AwareDateString(weather.date, this.app.currentLocale, config._show24Hours));
+            this.app.SetAppletTooltip(location + " - " + _("As of") + " " + AwareDateString(weather.date, this.app.currentLocale, config._show24Hours));
             this._currentWeatherSummary.text = descriptionCondition;
             var iconname = weather.condition.icon;
             if (iconname == null) {
@@ -1094,70 +1101,84 @@ var WeatherLoop = (function () {
     };
     WeatherLoop.prototype.Start = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var loopInterval, nextUpdate, state, e_3;
+            var state, e_3;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        loopInterval = this.LOOP_INTERVAL;
+                        if (!true) return [3, 10];
                         _a.label = 1;
                     case 1:
-                        if (!true) return [3, 11];
-                        _a.label = 2;
-                    case 2:
-                        _a.trys.push([2, 8, , 9]);
-                        this.app.log.Debug("Loop began");
-                        if (this.appletRemoved == true)
+                        _a.trys.push([1, 7, , 8]);
+                        if (this.IsStray())
                             return [2];
-                        this.app.log.Debug("Applet GUID: " + this.GUID);
-                        this.app.log.Debug("GUID stored globally: " + weatherAppletGUIDs[this.instanceID]);
-                        if (this.GUID != weatherAppletGUIDs[this.instanceID]) {
-                            this.app.log.Print("GUID mismatch, terminating applet");
-                            return [2];
-                        }
-                        if (this.app.encounteredError) {
-                            this.app.encounteredError = false;
-                            this.errorCount++;
-                            this.app.log.Debug("Encountered error in previous loop");
-                        }
-                        if (this.errorCount > 60)
-                            this.errorCount = 60;
-                        loopInterval = (this.errorCount > 0) ? loopInterval * this.errorCount : this.LOOP_INTERVAL;
-                        if (!(this.pauseRefresh == true)) return [3, 4];
+                        if (this.app.encounteredError)
+                            this.IncrementErrorCount();
+                        this.ValidateLastUpdate();
+                        if (!this.pauseRefresh) return [3, 3];
                         this.app.log.Debug("Configuration error, updating paused");
-                        return [4, delay(loopInterval * 1000)];
-                    case 3:
+                        return [4, delay(this.LoopInterval())];
+                    case 2:
                         _a.sent();
-                        return [3, 1];
-                    case 4:
-                        nextUpdate = new Date(this.lastUpdated.getTime() + this.app.config._refreshInterval * 60000);
-                        if (!(this.errorCount > 0 || nextUpdate < new Date())) return [3, 6];
-                        this.app.log.Debug("Refresh triggered in mainloop with these values: lastUpdated " + ((!this.lastUpdated) ? "null" : this.lastUpdated.toLocaleString()) + ", errorCount " + this.errorCount.toString() + " , loopInterval " + loopInterval.toString() + " seconds, refreshInterval " + this.app.config._refreshInterval + " minutes");
+                        return [3, 0];
+                    case 3:
+                        if (!(this.errorCount > 0 || this.NextUpdate() < new Date())) return [3, 5];
+                        this.app.log.Debug("Refresh triggered in mainloop with these values: lastUpdated " + ((!this.lastUpdated) ? "null" : this.lastUpdated.toLocaleString())
+                            + ", errorCount " + this.errorCount.toString() + " , loopInterval " + (this.LoopInterval() / 1000).toString()
+                            + " seconds, refreshInterval " + this.app.config._refreshInterval + " minutes");
                         return [4, this.app.refreshWeather(false)];
-                    case 5:
+                    case 4:
                         state = _a.sent();
                         if (state == "success") {
                             this.lastUpdated = new Date();
                         }
-                        return [3, 7];
-                    case 6:
+                        return [3, 6];
+                    case 5:
                         this.app.log.Debug("No need to update yet, skipping");
-                        _a.label = 7;
-                    case 7: return [3, 9];
-                    case 8:
+                        _a.label = 6;
+                    case 6: return [3, 8];
+                    case 7:
                         e_3 = _a.sent();
                         this.app.log.Error("Error in Main loop: " + e_3);
                         this.app.encounteredError = true;
-                        return [3, 9];
-                    case 9: return [4, delay(loopInterval * 1000)];
-                    case 10:
+                        return [3, 8];
+                    case 8: return [4, delay(this.LoopInterval())];
+                    case 9:
                         _a.sent();
-                        return [3, 1];
-                    case 11: return [2];
+                        return [3, 0];
+                    case 10: return [2];
                 }
             });
         });
     };
     ;
+    WeatherLoop.prototype.IsStray = function () {
+        if (this.appletRemoved == true)
+            return true;
+        if (this.GUID != weatherAppletGUIDs[this.instanceID]) {
+            this.app.log.Debug("Applet GUID: " + this.GUID);
+            this.app.log.Debug("GUID stored globally: " + weatherAppletGUIDs[this.instanceID]);
+            this.app.log.Print("GUID mismatch, terminating applet");
+            return true;
+        }
+        return false;
+    };
+    WeatherLoop.prototype.IncrementErrorCount = function () {
+        this.app.encounteredError = false;
+        this.errorCount++;
+        this.app.log.Debug("Encountered error in previous loop");
+        if (this.errorCount > 60)
+            this.errorCount = 60;
+    };
+    WeatherLoop.prototype.NextUpdate = function () {
+        return new Date(this.lastUpdated.getTime() + this.app.config._refreshInterval * 60000);
+    };
+    WeatherLoop.prototype.ValidateLastUpdate = function () {
+        if (this.lastUpdated > new Date())
+            this.lastUpdated = new Date(0);
+    };
+    WeatherLoop.prototype.LoopInterval = function () {
+        return (this.errorCount > 0) ? this.LOOP_INTERVAL * this.errorCount * 1000 : this.LOOP_INTERVAL * 1000;
+    };
     WeatherLoop.prototype.Stop = function () {
         this.appletRemoved = true;
     };

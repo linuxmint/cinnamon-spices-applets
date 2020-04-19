@@ -1,14 +1,25 @@
-# 2.4.7
+# Changelog
+
+## 2.4.8
+
+* Update Openweathermap to their unified API call
+* Add information on DarkSky aquisition to Readme
+* Fix translation issues in files other than applet.js
+* Add Yahoo Weather to the available services
+* Fix issue when system time is changed backwards, the applet stops updating until time gets to the time previously set
+* Change 'Updated' to 'As of' to have a clearer meaning.
+
+## 2.4.7
 
 * Fixes [#2929](https://github.com/linuxmint/cinnamon-spices-applets/issues/2929)
 * Fix styling issues with forecasts box - There wasn't enough margin on the bottom when the icon's height were bigger than the text, neither when the forecasts were wider than the current weather box.
 
-# 2.4.6
+## 2.4.6
 
 * Fixes [#2907](https://github.com/linuxmint/cinnamon-spices-applets/issues/2907)
 * Update Hungraian translation
 
-# 2.4.5
+## 2.4.5
 
 * Fixes [#618](https://github.com/linuxmint/cinnamon-spices-applets/issues/618)
 * Fixes [#2885](https://github.com/linuxmint/cinnamon-spices-applets/issues/2885)
@@ -21,27 +32,27 @@
 * Code refactor in preparation for adding Hourly forecasts on middle click (Config, Main Loop and PopupMenu has its own class now)
 * Amend styling to be more consistent across themes
 
-# 2.4.4
+## 2.4.4
 
 * Fixes [#2782](https://github.com/linuxmint/cinnamon-spices-applets/issues/2872)
 * Add ability to override applet label with injecting values (customise and fit text on horizontal and vertical panels as well)
 
-# 2.4.3
+## 2.4.3
 
 * Fixes [#2861](https://github.com/linuxmint/cinnamon-spices-applets/issues/2861)
 * Fixes [#2860](https://github.com/linuxmint/cinnamon-spices-applets/issues/2860)
 
-# 2.4.2
+## 2.4.2
 
 * Fixes [#2853](https://github.com/linuxmint/cinnamon-spices-applets/issues/2853)
 
-# 2.4.1
+## 2.4.1
 
 * Add weatherbit.io as a weather provider.
 * Fix fast looping when there is a settings error (wrong api key, wrong location), 15ms loop instead of 15s
 * Fix [#2835](https://github.com/linuxmint/cinnamon-spices-applets/issues/2835) again?!
 
-# 2.4.0
+## 2.4.0
 
 * Fixes [#2835](https://github.com/linuxmint/cinnamon-spices-applets/issues/2835)
 * Fixes [#2831](https://github.com/linuxmint/cinnamon-spices-applets/issues/2831)
@@ -49,7 +60,7 @@
 * Add Met Norway as a weather provider
 * Add sunrise/sunset calculator to support Met Norway.
 
-# 2.3.7
+## 2.3.7
 
 * Fixes [#2816](https://github.com/linuxmint/cinnamon-spices-applets/issues/2816), changed to different geolocation API
 * Fixes [#2808](https://github.com/linuxmint/cinnamon-spices-applets/issues/2808)
@@ -57,24 +68,24 @@
 * Added complete TS declaration files for some import modules (the easy ones...)
 * Only import whats needed (hopefully it speeds loading the applet the first time, but I don't really know)
 
-# 2.3.6
+## 2.3.6
 
 * Configuration page reorganized, hopefully it makes more sense now
 * Custom iconset (Climaicons) can be used on the panel
 * Added lock to the main loop what hopefully fixes some weird issues what I see coming up from people
 * Also a few more debug lines
 
-# 2.3.4
+## 2.3.4
 
 * Various small bugfixes
 * Change repeated error handling (increases time between retries, tops up at 15 mins)
 * Add last refreshed time to the tool-tip next to location.
 
-# 2.3.2
+## 2.3.2
 
 * Add Serbian Translation
 
-# 2.3.1
+## 2.3.1
 
 Fixes:
 
@@ -82,7 +93,7 @@ Fixes:
 * SystemLanguage string was processed incorrectly (split by the wrong char)
 * Updating French Translation to include Today and Tomorrow
 
-# 2.3.0
+## 2.3.0
 
 * Fixed Issues with Debian, now Polyfilling Promises when needed
 * Reworked on how to import from other files, now in line with other applets
@@ -92,7 +103,7 @@ Fixes:
 * Fixed some styling issues with some themes (Adapta, etc) where the Forecast box did not have enough padding
 * Sunset/Sunrise and Day names are using the system locale *(3.4+)*
 
-# 2.2.0
+## 2.2.0
 
 General changes:
 
@@ -120,36 +131,36 @@ New stuff:
 
 * 3.8+: Added Refresh button to context menu.
 
-# 2.1.7
+## 2.1.7
 
 * Fixed issue that OpenWeatherMap forecast conditions were always translated
 * Updated Hungarian translation
 * Version bump
 
-# 2.1.6
+## 2.1.6
 
 * Fixed regression when location label override did not work if no City information was available
 
-# 2.1.5
+## 2.1.5
 
 * DarkSky short conditions contained words like 'and', 'until' at the end (used wrong function), this is now fixed
 * Day names are now properly translated
 * Update Translation template
 
-# 2.1.4
+## 2.1.4
 
 * Applet did not load on Cinnamon version 3.6, it seems it needs the separate folder named 3.6.  
   So now we have 3.8 for 3.8+, 3.6 for 3.6, and everything below uses the version in root. All working for real now..
 * DarkSky was not using TimeZone information for displaying times and forecast days
 
-# 2.1.3
+## 2.1.3
 
 * Multiversion fix. Everything below 3.8 should use the previous 
   version now (3.6 version moved to the root folder), because it does not 
   even work with version 3.2 at the moment.
 * Small addition for DarkSky condition processing for shorter conditions.
 
-# 2.1.2
+## 2.1.2
 
 **3.6**
 
@@ -165,7 +176,7 @@ New stuff:
   with more weather, or it can trigger a refresh if there was an error 
   (there is no need anymore, but still).
 
-# 2.1.1
+## 2.1.1
 
 * Openweathermap no longer requires key
 * Forcing mainloop to refresh when Weather update fails (it was not 
@@ -178,7 +189,7 @@ New stuff:
 * Edited Readme
 * Added some thanks to OpenWeatherMap at the bottom of the settings
 
-# 2.0.1
+## 2.0.1
 
 * Fixed issue where sunset/sunrise displayed twice
 * Forecast compiling uses timezone calculation to separate forecasts to the correct days now
@@ -187,7 +198,7 @@ New stuff:
   day boundary i guess)
 * using HTTPS to call OpenWeather
 
-# 2.0.0
+## 2.0.0
 
 * Pull request to make the weather applet functional again after Yahoo API changes
 

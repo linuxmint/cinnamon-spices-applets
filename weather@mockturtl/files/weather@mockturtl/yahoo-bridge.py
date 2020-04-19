@@ -1,17 +1,16 @@
 #!venv/bin/python3
 try:
-    from requests_oauthlib import OAuth1
-    import requests
     import json
     import argparse
-    from typing import Dict
-
-    parser = argparse.ArgumentParser(description='Parsing XMl and returns JSON string')
-    parser.add_argument('params', metavar='params', type=str,
-                        help='params, lat and lon')
+    from requests_oauthlib import OAuth1
+    import requests
+    
+    parser = argparse.ArgumentParser(description='Gets yahoo Weather and returns it as JSON string')
+    parser.add_argument('--params', metavar='params', type=str,
+                        help='parameters in json format, must include lat and lon')
 
     args = parser.parse_args()
-    paramArgs: Dict = json.loads(args.params)
+    paramArgs = json.loads(args.params)
 
     lat = paramArgs.get("lat", None)
     lon = paramArgs.get("lon", None)
@@ -36,10 +35,10 @@ try:
 
     headeroauth = OAuth1(consumer_key, just_a_string, signature_type='auth_header')
     r = requests.get(url, auth=headeroauth, params=params, headers=headers)
-    print(r.json())
+    print(json.dumps(json.loads(r.text))) #r.json() returns incorrect JSON
 except ImportError as e:
-    print(json.dumps({"error": {"type": "import", "message": "Couldn't import packages", "data": e}}))
+    print(json.dumps({"error": {"type": "import", "message": "Couldn't import packages", "data": str(e)}}))
 except ConnectionError as e:
-    print(json.dumps({"error": {"type": "network", "message": "Could not connect to API", "data": e}}))
+    print(json.dumps({"error": {"type": "network", "message": "Could not connect to API", "data": str(e)}}))
 except Exception as e:
-    print(json.dumps({"error": {"type": "unknown", "message": "Unexpected Error", "data": e}}))
+    print(json.dumps({"error": {"type": "unknown", "message": "Unexpected Error", "data": str(e)}}))

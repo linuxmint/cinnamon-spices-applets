@@ -175,6 +175,7 @@ const get = (p: string[], o: any) =>
     (xs && xs[x]) ? xs[x] : null, o);
 
 var MPStoUserUnits = function(mps: number, units: WeatherWindSpeedUnits): string {
+    if (mps == null) return null;
     // Override wind units with our preference, takes Meter/Second wind speed
     switch (units) {
       case "mph":

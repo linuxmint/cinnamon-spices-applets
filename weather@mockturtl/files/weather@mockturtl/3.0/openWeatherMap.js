@@ -44,6 +44,11 @@ function importModule(path) {
         return AppletDir[path];
     }
 }
+var UUID = "weather@mockturtl";
+imports.gettext.bindtextdomain(UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
+function _(str) {
+    return imports.gettext.dgettext(UUID, str);
+}
 var utils = importModule("utils");
 var isCoordinate = utils.isCoordinate;
 var isLangSupported = utils.isLangSupported;
@@ -56,35 +61,16 @@ var OpenWeatherMap = (function () {
         this.supportedLanguages = ["af", "ar", "az", "bg", "ca", "cz", "da", "de", "el", "en", "eu", "fa", "fi",
             "fr", "gl", "he", "hi", "hr", "hu", "id", "it", "ja", "kr", "la", "lt", "mk", "no", "nl", "pl",
             "pt", "pt_br", "ro", "ru", "se", "sk", "sl", "sp", "es", "sr", "th", "tr", "ua", "uk", "vi", "zh_cn", "zh_tw", "zu"];
-        this.current_url = "https://api.openweathermap.org/data/2.5/weather?";
-        this.daily_url = "https://api.openweathermap.org/data/2.5/forecast/daily?";
+        this.base_url = "https://api.openweathermap.org/data/2.5/onecall?";
         this.app = _app;
     }
     OpenWeatherMap.prototype.GetWeather = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            var currentResult, forecastResult;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4, this.GetData(this.current_url, this.ParseCurrent)];
-                    case 1:
-                        currentResult = _a.sent();
-                        return [4, this.GetData(this.daily_url, this.ParseForecast)];
-                    case 2:
-                        forecastResult = _a.sent();
-                        currentResult.forecasts = forecastResult;
-                        return [2, currentResult];
-                }
-            });
-        });
-    };
-    ;
-    OpenWeatherMap.prototype.GetData = function (baseUrl, ParseFunction) {
         return __awaiter(this, void 0, void 0, function () {
             var query, json, e_1;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        query = this.ConstructQuery(baseUrl);
+                        query = this.ConstructQuery(this.base_url);
                         if (!(query != null)) return [3, 5];
                         this.app.log.Debug("Query: " + query);
                         _a.label = 1;
@@ -103,70 +89,50 @@ var OpenWeatherMap = (function () {
                             this.app.HandleError({ type: "soft", detail: "no api response", service: "openweathermap" });
                             return [2, null];
                         }
-                        if (json.cod == "200") {
-                            return [2, ParseFunction(json, this)];
-                        }
-                        else {
-                            this.HandleResponseErrors(json);
-                            return [2, null];
-                        }
-                        return [3, 6];
+                        return [2, this.ParseWeather(json, this)];
                     case 5: return [2, null];
-                    case 6: return [2];
                 }
             });
         });
     };
     ;
-    OpenWeatherMap.prototype.ParseCurrent = function (json, self) {
+    OpenWeatherMap.prototype.ParseWeather = function (json, self) {
         try {
             var weather = {
                 coord: {
-                    lat: get(["coord", "lat"], json),
-                    lon: get(["coord", "lon"], json)
+                    lat: json.lat,
+                    lon: json.lon
                 },
                 location: {
-                    city: json.name,
-                    country: json.sys.country,
-                    url: "https://openweathermap.org/city/" + json.id,
+                    url: null,
+                    timeZone: json.timezone
                 },
-                date: new Date((json.dt) * 1000),
-                sunrise: new Date((json.sys.sunrise) * 1000),
-                sunset: new Date((json.sys.sunset) * 1000),
+                date: new Date((json.current.dt) * 1000),
+                sunrise: new Date((json.current.sunrise) * 1000),
+                sunset: new Date((json.current.sunset) * 1000),
                 wind: {
-                    speed: get(["wind", "speed"], json),
-                    degree: get(["wind", "deg"], json)
+                    speed: json.current.wind_speed,
+                    degree: json.current.wind_deg
                 },
-                temperature: get(["main", "temp"], json),
-                pressure: get(["main", "pressure"], json),
-                humidity: get(["main", "humidity"], json),
+                temperature: json.current.temp,
+                pressure: json.current.pressure,
+                humidity: json.current.humidity,
                 condition: {
-                    main: get(["weather", "0", "main"], json),
-                    description: get(["weather", "0", "description"], json),
-                    icon: weatherIconSafely(self.ResolveIcon(get(["weather", "0", "icon"], json)), self.app.config.IconType()),
-                    customIcon: self.ResolveCustomIcon(get(["weather", "0", "icon"], json))
+                    main: get(["current", "weather", "0", "main"], json),
+                    description: get(["current", "weather", "0", "description"], json),
+                    icon: weatherIconSafely(self.ResolveIcon(get(["current", "weather", "0", "icon"], json)), self.app.config.IconType()),
+                    customIcon: self.ResolveCustomIcon(get(["current", "weather", "0", "icon"], json))
                 },
                 extra_field: {
                     name: _("Cloudiness"),
-                    value: json.clouds.all,
+                    value: json.current.clouds,
                     type: "percent"
                 },
                 forecasts: []
             };
-            return weather;
-        }
-        catch (e) {
-            self.app.log.Error("OpenWeathermap Weather Parsing error: " + e);
-            self.app.HandleError({ type: "soft", service: "openweathermap", detail: "unusal payload", message: _("Failed to Process Current Weather Info") });
-            return null;
-        }
-    };
-    ;
-    OpenWeatherMap.prototype.ParseForecast = function (json, self) {
-        var forecasts = [];
-        try {
+            var forecasts = [];
             for (var i = 0; i < self.app.config._forecastDays; i++) {
-                var day = json.list[i];
+                var day = json.daily[i];
                 var forecast = {
                     date: new Date(day.dt * 1000),
                     temp_min: day.temp.min,
@@ -180,11 +146,12 @@ var OpenWeatherMap = (function () {
                 };
                 forecasts.push(forecast);
             }
-            return forecasts;
+            weather.forecasts = forecasts;
+            return weather;
         }
         catch (e) {
-            self.app.log.Error("OpenWeathermap Forecast Parsing error: " + e);
-            self.app.HandleError({ type: "soft", service: "openweathermap", detail: "unusal payload", message: _("Failed to Process Forecast Info") });
+            self.app.log.Error("OpenWeathermap Weather Parsing error: " + e);
+            self.app.HandleError({ type: "soft", service: "openweathermap", detail: "unusal payload", message: _("Failed to Process Current Weather Info") });
             return null;
         }
     };
@@ -193,7 +160,7 @@ var OpenWeatherMap = (function () {
         var query = baseUrl;
         var locString = this.ParseLocation();
         if (locString != null) {
-            query = query + locString + "&APPID=";
+            query = query + locString + "&appid=";
             query += "1c73f8259a86c6fd43c7163b543c8640";
             var locale = this.ConvertToAPILocale(this.app.currentLocale);
             if (this.app.config._translateCondition && isLangSupported(locale, this.supportedLanguages)) {

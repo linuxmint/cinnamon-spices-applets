@@ -187,6 +187,8 @@ var get = function (p, o) {
     }, o);
 };
 var MPStoUserUnits = function (mps, units) {
+    if (mps == null)
+        return null;
     switch (units) {
         case "mph":
             return (Math.round((mps * WEATHER_CONV_MPH_IN_MPS) * 10) / 10).toString();
