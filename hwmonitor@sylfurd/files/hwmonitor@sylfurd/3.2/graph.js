@@ -38,12 +38,16 @@ Graph.prototype = {
         this.drawBackground(cr);
 
         // Draw graph grid lines
-        this.drawGraphLines(cr);
+        if (this.theme.graph_line_mode=="graph")
+            this.drawGraphLines(cr);
 
         // Draw data points
         this.drawDataPoints(cr);
 
-        // Draw label
+        if (this.theme.graph_line_mode=="lines")
+            this.drawGraphLines(cr);
+
+            // Draw label
         this.drawLabel(cr);
 
         // Draw detail label

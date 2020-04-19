@@ -9,6 +9,12 @@ Issues can be reported here : [Issues](https://github.com/linuxmint/cinnamon-spi
 
 ### Changes
 
+**Version 1.2.1**:
+ * **New setting**, a new minor UI setting, you can now choose how to draw the grid lines in the graphs. You can choose between:
+    * Don't draw grid lines at all
+    * Draw grid lines over the graphs **(default)**
+    * Draw the graphs over the grid lines.
+
 **Version 1.2**:
  * **New graph**, a graph that shows the battery charge level (**BAT**) for laptops have been added. Non-laptop users should turn off the graph in the settings if you want to save some space.
 

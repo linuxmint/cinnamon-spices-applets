@@ -96,6 +96,7 @@ GraphicalHWMonitorApplet.prototype = {
         this.settings = new Settings.AppletSettings(this, metadata.uuid, instance_id);
         // General settings
         this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "frequency", "frequency", this.settingsChanged, null);
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "graph_line_mode", "graph_line_mode", this.settingsChanged, null);
         
         this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "theme", "theme", this.settingsChanged, null);
         this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "border_color", "border_color", this.settingsChanged, null);
@@ -374,6 +375,7 @@ GraphicalHWMonitorApplet.prototype = {
     createThemeObject: function() {
         this.theme_object = new Object();
         this.theme_object.theme = this.theme;
+        this.theme_object.graph_line_mode = this.graph_line_mode;
         this.theme_object.border_colors = this.getColors(this.border_color);
         this.theme_object.background_colors1 = this.getColors(this.background_color1);
         this.theme_object.background_colors2 = this.getColors(this.background_color2);
