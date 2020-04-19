@@ -118,7 +118,7 @@ var Yahoo = (function () {
                     lon: json.location.long
                 },
                 location: {
-                    url: null,
+                    url: "https://www.yahoo.com/news/weather/country/state/city-" + json.location.woeid,
                     timeZone: json.location.timezone_id,
                     city: json.location.city,
                     country: json.location.country,
