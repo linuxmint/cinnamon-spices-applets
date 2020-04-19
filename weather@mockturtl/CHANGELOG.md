@@ -3,9 +3,11 @@
 ## 2.4.8
 
 * Update Openweathermap to their unified API call
-* Add DarkSky aquisition to Readme
+* Add information on DarkSky aquisition to Readme
 * Fix translation issues in files other than applet.js
 * Add Yahoo Weather to the available services
+* Fix issue when system time is changed backwards, the applet stops updating until time gets to the time previously set
+* Change 'Updated' to 'As of' to have a clearer meaning.
 
 ## 2.4.7
 
