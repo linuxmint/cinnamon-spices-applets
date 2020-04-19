@@ -29,7 +29,7 @@ If the location you try does not work, try using [OpenWeatherMap's finder](https
 
 #### API Key Setup
 
-**[DarkSky got bought up by Apple](https://blog.darksky.net/dark-sky-has-a-new-home/) as of March  31, 2020. It does not allow new signups, and it will cease to function at the end of 2021.**
+**[DarkSky has been aquired by Apple](https://blog.darksky.net/dark-sky-has-a-new-home/) as of March  31, 2020. It does not allow new signups, and it will cease to function at the end of 2021.**
 
 ~~Go to [DarkSky](https://darksky.net/dev/register) and create an account. Then go your [Console section](https://darksky.net/dev/account) where you should find your secret key already created.~~
 
