@@ -4,14 +4,13 @@ try:
     import argparse
     from requests_oauthlib import OAuth1
     import requests
-    from typing import Dict
     
     parser = argparse.ArgumentParser(description='Gets yahoo Weather and returns it as JSON string')
     parser.add_argument('--params', metavar='params', type=str,
                         help='parameters in json format, must include lat and lon')
 
     args = parser.parse_args()
-    paramArgs: Dict = json.loads(args.params)
+    paramArgs = json.loads(args.params)
 
     lat = paramArgs.get("lat", None)
     lon = paramArgs.get("lon", None)
