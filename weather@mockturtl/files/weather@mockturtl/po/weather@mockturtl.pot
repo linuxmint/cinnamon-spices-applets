@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-10 15:13+0100\n"
+"POT-Creation-Date: 2020-04-19 10:49+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -901,7 +901,7 @@ msgid "Network Error, please check logs in Looking Glass"
 msgstr ""
 
 #: 3.0/applet.js:713 3.8/applet.js:592
-msgid "Updated"
+msgid "As of"
 msgstr ""
 
 #: 3.0/applet.js:830 3.8/applet.js:709
@@ -1177,8 +1177,8 @@ msgstr ""
 
 #. 3.0->settings-schema.json->Yahoo->description
 msgid ""
-"Yahoo - Requires Python 3.5+ and 'python3-requests-oauthlib' package\n"
-"installed (for Arch based distros 'python-requests-oauthlib')"
+"Yahoo - Requires 'python3-requests-oauthlib' package installed (for Arch\n"
+"based distros 'python-requests-oauthlib'), Updates every 2 hours."
 msgstr ""
 
 #. 3.0->settings-schema.json->providerSettings->description
@@ -1345,8 +1345,8 @@ msgstr ""
 
 #. 3.8->settings-schema.json->Yahoo->description
 msgid ""
-"Yahoo - Requires Python 3.5+ and 'python3-requests-oauthlib' package "
-"installed (for Arch based distros 'python-requests-oauthlib')"
+"Yahoo - Requires 'python3-requests-oauthlib' package installed (for Arch "
+"based distros 'python-requests-oauthlib'), Updates every 2 hours."
 msgstr ""
 
 #. 3.8->settings-schema.json->useCustomMenuIcons->tooltip

@@ -30,7 +30,7 @@
   },
   "Yahoo":
   { "type": "label"
-  , "description": "Yahoo - Requires Python 3.5+ and 'python3-requests-oauthlib' package installed (for Arch based distros 'python-requests-oauthlib')"
+  , "description": "Yahoo - Requires 'python3-requests-oauthlib' package installed (for Arch based distros 'python-requests-oauthlib'), Updates every 2 hours."
   },
   "providerSettings":
   { "type": "header"

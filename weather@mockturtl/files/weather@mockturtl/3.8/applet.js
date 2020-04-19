@@ -589,7 +589,7 @@ class UI {
             if (nonempty(config._locationLabelOverride)) {
                 location = config._locationLabelOverride;
             }
-            this.app.SetAppletTooltip(location + " - " + _("Updated") + " " + AwareDateString(weather.date, this.app.currentLocale, config._show24Hours));
+            this.app.SetAppletTooltip(location + " - " + _("As of") + " " + AwareDateString(weather.date, this.app.currentLocale, config._show24Hours));
             this._currentWeatherSummary.text = descriptionCondition;
             let iconname = weather.condition.icon;
             if (iconname == null) {

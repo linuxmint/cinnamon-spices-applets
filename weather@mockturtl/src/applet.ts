@@ -799,7 +799,7 @@ class UI {
           location = config._locationLabelOverride;
         }
 
-        this.app.SetAppletTooltip(location + " - " + _("Updated") + " " + AwareDateString(weather.date, this.app.currentLocale, config._show24Hours));
+        this.app.SetAppletTooltip(location + " - " + _("As of") + " " + AwareDateString(weather.date, this.app.currentLocale, config._show24Hours));
 
         // Weather Condition
         this._currentWeatherSummary.text = descriptionCondition;
