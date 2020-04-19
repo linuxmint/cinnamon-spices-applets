@@ -73,7 +73,8 @@
       "type": "section",
       "title": "General settings",
       "keys": [
-        "frequency"
+        "frequency",
+        "graph_line_mode"
       ]
     },
     "theme_settings": {
@@ -201,6 +202,17 @@
       },
       "description": "Update frequency (seconds)",
       "tooltip": "The amount of time (in seconds) between the graph updates."
+  },
+  "graph_line_mode": {
+    "type": "combobox",
+    "default": "lines",
+    "options": {
+        "Don't draw grid lines" : "no",
+        "Draw graph over grid lines" : "graph",
+        "Draw grid lines over graph" : "lines"
+    },
+    "description": "Grid lines",
+    "tooltip": "How to draw the graph grid lines."
   },
   "theme": {
       "type": "combobox",
@@ -659,4 +671,5 @@
       "tooltip": "Show or hide the BAT (battery) detail label.",
       "dependency": "bat_enable_graph"
   }    
+
 }
