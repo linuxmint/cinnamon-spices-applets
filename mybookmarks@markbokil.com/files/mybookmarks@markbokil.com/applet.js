@@ -19,24 +19,20 @@ const PropertiesFile = GLib.build_filenamev([global.userdatadir, 'applets/mybook
 const HelpURL = "http://markbokil.com/downloads/mybookmarks/help.php?appname=mybookmarks&version=" + Version;
 const AboutURL = "http://markbokil.com/downloads/mybookmarks/about.php?appname=mybookmarks&version=" + Version;
 const AppIcon = 'mybookmarks.svg';
+const HOME = GLib.get_home_dir();
+
+const ICON_SIZE = 16;
 
 // external JS library options
 let AppOptions, DebugMode, OpenFileCmd, OpenFTPCmd, AppIconType;
-if (typeof require !== 'undefined') {
-    let config = require('./config');
-    AppOptions = config.Options;
-    DebugMode = config.Options.DebugMode;
-    OpenFileCmd = config.Options.OpenFileCmd;
-    OpenFTPCmd = config.Options.OpenFTPCmd;
-    AppIconType = config.Options.AppIconType;
-} else {
-    const AppletMeta = imports.ui.appletManager.applets['mybookmarks@markbokil.com'];
-    AppOptions = AppletMeta.config.Options;
-    DebugMode = AppletMeta.config.Options.DebugMode;
-    OpenFileCmd = AppletMeta.config.Options.OpenFileCmd;
-    OpenFTPCmd = AppletMeta.config.Options.OpenFTPCmd;
-    AppIconType = AppletMeta.config.Options.AppIconType;
-}
+
+const AppletMeta = imports.ui.appletManager.applets['mybookmarks@markbokil.com'];
+AppOptions = AppletMeta.config.Options;
+DebugMode = AppletMeta.config.Options.DebugMode;
+OpenFileCmd = AppletMeta.config.Options.OpenFileCmd;
+OpenFTPCmd = AppletMeta.config.Options.OpenFTPCmd;
+AppIconType = AppletMeta.config.Options.AppIconType;
+
 
 function PopupMenuItem(label, icon, callback) {
     this._init(label, icon, callback);
@@ -106,9 +102,11 @@ MyApplet.prototype = {
 
     // build dynamic menu items
     createMenu: function () {
+
         let propLines = this.getProperties();
 
         for (let i = 0; i < propLines.length; i++) {
+            let icon = "network-workgroup";
             let line = propLines[i];
             if (line.substring(0,1) == '#')
                 continue;
@@ -127,21 +125,44 @@ MyApplet.prototype = {
 
             if (propVal.indexOf('ftp://') != -1 || propVal.indexOf('ftps://') != -1) {
                 propVal = OpenFTPCmd + " " + propVal;
+            } else if (propVal.indexOf('cmd:') != -1) {
+                propVal = propVal.substring(propVal.indexOf('cmd:')+4);
             } else {
-                propVal = OpenFileCmd + " " + propVal;
+                if (propVal.indexOf('~') == 0) {
+                    let valTranslate = String(propVal).replace(/(~)?(\/)?([A-Za-z0-9]*)(\/)?/, this._replacement);
+                    propVal = OpenFileCmd + " " + valTranslate;
+                } else {
+                    propVal = OpenFileCmd + " " + propVal;
+                }
             }
-
-            if (propVal.indexOf('[EE]') != -1) { // ?
-                propVal = "xdg-open http://markbokil.com/downloads/mylauncher/mycat.jpg";
+            if (propName.indexOf('[') == 0 && propName.indexOf(']') != -1 && propName.indexOf('[MS]') == -1) {
+                icon = String(propName).substring(1,propName.indexOf(']'));
+                let name = String(propName).substring(propName.indexOf(']')+1);
+                propName = name;
             }
 
             this.console(propName + ", " + propVal); //debug
-            this.menu.addAction(_(propName), function(event) {
+
+            let item = new PopupMenu.PopupIconMenuItem(_(propName), icon, St.IconType.FULLCOLOR);
+            item.connect('activate', Lang.bind(this, function() {
                 Util.spawnCommandLine(propVal);
-            });
+            }));
+            this.menu.addMenuItem(item);
+
+            // this.menu.addAction(_(propName), function(event) {
+            //     Util.spawnCommandLine(propVal);
+            // });
         }
     },
 
+    _replacement: function (string, p1, p2, p3, p4) {
+        if (p2 == undefined) { p2 = ""; }
+        if (p3 == undefined || p3 == "") { p3 = ""; } else { p3 = _(p3); }
+        if (p4 == undefined) { p4 = ""; }
+
+        return HOME + p2 + p3 + p4;
+
+    },
 
     createContextMenu: function () {
         // reload
