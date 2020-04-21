@@ -569,7 +569,8 @@ AppListGridButton.prototype = {
 
     this.label = new St.Label({
       text: this.buttonState.app.name,
-      style_class: 'menu-application-button-label'
+      style_class: 'menu-application-button-label',
+      style: 'padding-right: 5px',
     });
 
     this.dot = new St.Widget({
