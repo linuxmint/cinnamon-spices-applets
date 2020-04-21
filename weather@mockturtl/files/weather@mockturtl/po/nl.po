@@ -9,7 +9,7 @@ msgstr ""
 "08:38:14)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-04-19 10:49+0100\n"
-"PO-Revision-Date: 2020-04-20 08:17+0200\n"
+"PO-Revision-Date: 2020-04-21 09:04+0200\n"
 "Last-Translator: Jurien (French77) <Jurien@protonmail.com>\n"
 "Language-Team: Jurien@protonmail.com\n"
 "Language: nl\n"
@@ -307,7 +307,7 @@ msgstr "Lichte Sneeuwbuien"
 
 #: 3.0/yahoo.js:464 3.8/yahoo.js:415
 msgid "Blowing Snow"
-msgstr "Blazende sneeuw"
+msgstr "Stuif sneeuw"
 
 #: 3.0/yahoo.js:465 3.0/met_norway.js:572 3.0/met_norway.js:593
 #: 3.0/openWeatherMap.js:374 3.8/yahoo.js:416 3.8/met_norway.js:519
@@ -347,7 +347,7 @@ msgstr "Mistig"
 
 #: 3.0/yahoo.js:472 3.8/yahoo.js:423
 msgid "Blustery"
-msgstr "Blauwe lucht"
+msgstr "Vlagerig"
 
 #: 3.0/yahoo.js:473 3.8/yahoo.js:424
 msgid "Windy"
@@ -923,7 +923,7 @@ msgstr "Netwerkfout, controleer de logboeken in Looking Glass"
 
 #: 3.0/applet.js:713 3.8/applet.js:592
 msgid "As of"
-msgstr "Sinds"
+msgstr "Vanaf"
 
 #: 3.0/applet.js:830 3.8/applet.js:709
 msgid "Today"
@@ -1425,6 +1425,7 @@ msgstr "Pictogrammen weather-icons van Erik Flowers"
 #~ "zou uw dagelijkse quota kunnen overschrijden. Heeft u een sleutel nodig, "
 #~ "klik dan op 'API sleutel en locatie instellen' voor de te nemen stappen "
 #~ "om deze te verkrijgen."
+
 
 
 
