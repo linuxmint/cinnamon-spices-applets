@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.4.9
+
+* Fixes [#2970](https://github.com/linuxmint/cinnamon-spices-applets/issues/2970)
+
 ## 2.4.8
 
 * Update Openweathermap to their unified API call

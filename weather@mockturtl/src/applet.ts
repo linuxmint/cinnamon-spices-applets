@@ -846,11 +846,11 @@ class UI {
         else {
           if (config._showTextInPanel) {
             label = temp;
-          }
-          // Vertical panel width is more than this value then we has space
-          // to show units
-          if (this.app.GetPanelHeight() >= 35) {
-            label += this.unitToUnicode(config._temperatureUnit);
+            // Vertical panel width is more than this value then we has space
+            // to show units
+            if (this.app.GetPanelHeight() >= 35) {
+              label += this.unitToUnicode(config._temperatureUnit);
+            }
           }
         }
 
