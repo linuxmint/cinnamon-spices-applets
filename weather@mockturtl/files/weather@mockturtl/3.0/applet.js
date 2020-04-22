@@ -745,9 +745,9 @@ var UI = (function () {
             else {
                 if (config._showTextInPanel) {
                     label = temp;
-                }
-                if (this.app.GetPanelHeight() >= 35) {
-                    label += this.unitToUnicode(config._temperatureUnit);
+                    if (this.app.GetPanelHeight() >= 35) {
+                        label += this.unitToUnicode(config._temperatureUnit);
+                    }
                 }
             }
             if (nonempty(config._tempTextOverride)) {
