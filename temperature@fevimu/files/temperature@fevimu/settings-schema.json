@@ -30,9 +30,8 @@
   },
   "label-prefix": {
     "type": "entry",
-    "default": "🌡 ",
+    "default": "🌡",
     "description": "Label prefix",
-    "indent": true,
     "tooltip": "The label to be shown before the temperature value.",
     "dependency": "show-label-prefix"
   },

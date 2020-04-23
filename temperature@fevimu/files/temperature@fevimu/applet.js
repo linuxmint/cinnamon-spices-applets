@@ -258,7 +258,7 @@ CPUTemperatureApplet.prototype = {
     }
 
     if (this.state.showLabelPrefix) {
-      this.title = this.state.labelPrefix + this.title;
+      this.title = "%s %s".format(this.state.labelPrefix, this.title);
     }
 
     if (this._applet_label.text !== this.title) {
