@@ -56,7 +56,7 @@
         "quitmenu-layout" : {
             "type" : "section",
             "title" : "Quit Menu Layout",
-            "keys" : ["show-shutdown-menu", "shutdown-menu-layout", "shutdown-label", "shutdown-menu-reverse-order"]
+            "keys" : ["show-shutdown-menu", "shutdown-menu-reverse-order", "shutdown-menu-layout", "shutdown-label"]
         },
         "quicklauncher-separator-layout" : {
             "type" : "section",
@@ -248,6 +248,14 @@
     "description": "Show quit buttons",
     "tooltip": "Choose whether or not to show the quit buttons."
  },
+ "shutdown-menu-reverse-order" : {
+    "type" : "switch",
+    "default" : true,
+    "description": "Reverse quit button order",
+    "tooltip": "Choose whether to display the 'Quit' button first or last. (Has no effect on 'DropDown' layout.)",
+    "dependency" : "show-shutdown-menu",
+    "indent" : true
+ },
  "shutdown-menu-layout" : {
     "type": "combobox",
     "default": "vertical",
@@ -266,14 +274,6 @@
     "default" : "Quit",
     "description" : "'Quit'-Button label",
     "tooltip" : "Enter custom text for the 'Quit' button.",
-    "dependency" : "show-shutdown-menu",
-    "indent" : true
- },
- "shutdown-menu-reverse-order" : {
-    "type" : "switch",
-    "default" : false,
-    "description": "Reverse order of the buttons",
-    "tooltip": "Choose whether to display the 'Quit' button first (on top of the vertical layout or on the left of the horizontal layout) or last (on bottom of the vertical layout or on the right of the horizontal layout).",
     "dependency" : "show-shutdown-menu",
     "indent" : true
  },
