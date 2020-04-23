@@ -1764,6 +1764,7 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
 
         this.settings.bind("show-shutdown-menu", "showShutdownMenu", this._updateQuickLinksShutdownView);
         this.settings.bind("shutdown-menu-layout", "shutdownMenuLayout", this._updateQuickLinks);
+        this.settings.bind("shutdown-menu-reverse-order", "shutdownMenuReverseOrder", this._updateQuickLinksShutdownView);
 
         this._fileFolderAccessActive = false;
         this._pathCompleter = new Gio.FilenameCompleter();
@@ -1909,6 +1910,7 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
     _updateQuickLinksShutdownView() {
         this.menu.showShutdownMenu = this.showShutdownMenu;
         this.menu.shutdownMenuLayout = this.shutdownMenuLayout;
+        this.menu.shutdownMenuReverseOrder = this.shutdownMenuReverseOrder;
         if (this.menu.showShutdownMenu) {
             if (this.quicklauncherLayout != 'icons') {
                 if (this.shutdownMenuLayout == 'dropdown') {
@@ -1946,6 +1948,29 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
             this.rightButtonsBox.shutDownIconBoxXP.hide();
             this.rightButtonsBox.shutDownIconBox.hide();
             this.rightButtonsBox.shutDownMenuBox.hide();
+        }
+
+        if (this.shutdownMenuReverseOrder) {
+	        this.rightButtonsBox.shutDownIconBox.remove_actor(this.rightButtonsBox.shutdown2.actor);
+	        this.rightButtonsBox.shutDownIconBox.remove_actor(this.rightButtonsBox.logout.actor);
+	        this.rightButtonsBox.shutDownIconBox.add_actor(this.rightButtonsBox.logout.actor);
+	        this.rightButtonsBox.shutDownIconBox.add_actor(this.rightButtonsBox.shutdown2.actor);
+
+	        this.rightButtonsBox.shutDownIconBoxXP.remove_actor(this.rightButtonsBox.shutdown3.actor);
+	        this.rightButtonsBox.shutDownIconBoxXP.remove_actor(this.rightButtonsBox.logout2.actor);
+	        this.rightButtonsBox.shutDownIconBoxXP.add_actor(this.rightButtonsBox.logout2.actor);
+	        this.rightButtonsBox.shutDownIconBoxXP.add_actor(this.rightButtonsBox.shutdown3.actor);
+        }
+        else {
+	        this.rightButtonsBox.shutDownIconBox.remove_actor(this.rightButtonsBox.lock.actor);
+	        this.rightButtonsBox.shutDownIconBox.remove_actor(this.rightButtonsBox.logout.actor);
+	        this.rightButtonsBox.shutDownIconBox.add_actor(this.rightButtonsBox.logout.actor);
+	        this.rightButtonsBox.shutDownIconBox.add_actor(this.rightButtonsBox.lock.actor);
+
+	        this.rightButtonsBox.shutDownIconBoxXP.remove_actor(this.rightButtonsBox.lock2.actor);
+	        this.rightButtonsBox.shutDownIconBoxXP.remove_actor(this.rightButtonsBox.logout2.actor);
+	        this.rightButtonsBox.shutDownIconBoxXP.add_actor(this.rightButtonsBox.logout2.actor);
+	        this.rightButtonsBox.shutDownIconBoxXP.add_actor(this.rightButtonsBox.lock2.actor);
         }
 
         this._updateCustomLabels();
