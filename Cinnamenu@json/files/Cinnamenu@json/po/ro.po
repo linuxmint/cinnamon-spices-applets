@@ -1,0 +1,490 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-03-31 01:03-0500\n"
+"PO-Revision-Date: 2020-04-24 21:38+0200\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.6\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?"
+"2:1));\n"
+"Language: ro\n"
+
+#: buttons.js:382
+msgid "Please provide your password to uninstall this application"
+msgstr ""
+"Sunteți rugat să furnizați parola pentru dezinstalarea acestei aplicații"
+
+#: buttons.js:1020
+msgid "Add to panel"
+msgstr "Adaugă la panou"
+
+#: buttons.js:1022
+msgid "Add to desktop"
+msgstr "Adaugă la desktop"
+
+#: buttons.js:1025
+msgid "Remove from favorites"
+msgstr "Scoate din favorite"
+
+#: buttons.js:1027
+msgid "Add to favorites"
+msgstr "Adaugă la favorite"
+
+#: buttons.js:1029
+msgid "Uninstall"
+msgstr "Dezinstalează"
+
+#: buttons.js:1031
+msgid "Run with NVIDIA GPU"
+msgstr "Rulează cu placa grafică NVIDIA"
+
+#: buttons.js:1228 applet.js:2253
+msgid "List View"
+msgstr "Vedere listă"
+
+#: buttons.js:1229 applet.js:2254
+msgid "Switch to list view"
+msgstr "Schimbă la vedere listă"
+
+#: buttons.js:1234 applet.js:2253
+msgid "Grid View"
+msgstr "Vedere grilă"
+
+#: buttons.js:1235 applet.js:2254
+msgid "Switch to grid view"
+msgstr "Schimbă la vedere grilă"
+
+#: placeDisplay.js:57
+#, javascript-format
+msgid "Failed to launch \"%s\""
+msgstr "Nu s-a putut lansa \"%s\""
+
+#: placeDisplay.js:146
+msgid "Home"
+msgstr "Acasă"
+
+#: placeDisplay.js:220
+msgid "Computer"
+msgstr "Calculator"
+
+#: placeDisplay.js:224
+msgid "Browse network"
+msgstr "Navighează rețeaua"
+
+#: applet.js:84
+msgid "Type to search..."
+msgstr "Scrie pentru a căuta..."
+
+#: applet.js:149
+msgid "Initializing"
+msgstr "Inițializare"
+
+#: applet.js:275
+msgid "No description available"
+msgstr "Nu este disponibilă o descriere"
+
+#: applet.js:956
+msgid "All Applications"
+msgstr "Toate Aplicațiile"
+
+#: applet.js:994
+msgid "Places"
+msgstr "Locuri"
+
+#: applet.js:995
+msgid "Recent Files"
+msgstr "Fișiere recente"
+
+#: applet.js:996
+msgid "Bookmarks"
+msgstr "Marcaje"
+
+#: applet.js:997
+msgid "Favorite Apps"
+msgstr "Aplicații favorite"
+
+#: applet.js:1282
+msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
+msgstr "Pachetul gir1.2-gda-5.0 este necesar pentru marcaje Firefox și Midori."
+
+#: applet.js:1362
+msgid "Clear List"
+msgstr "Curăță lista"
+
+#: applet.js:1373
+msgid "No recent documents"
+msgstr "Nu sunt documente recente"
+
+#: applet.js:2246
+msgid "Account details"
+msgstr "Detaliile contului"
+
+#: applet.js:2260
+msgid "Lock Screen"
+msgstr "Ecran de blocare"
+
+#: applet.js:2261
+msgid "Lock the screen"
+msgstr "Blochează ecranul"
+
+#: applet.js:2282
+msgid "Logout"
+msgstr "Delogare"
+
+#: applet.js:2283
+msgid "Leave the session"
+msgstr "Părăsește sesiunea"
+
+#: applet.js:2290
+msgid "Quit"
+msgstr "Închide"
+
+#: applet.js:2291
+msgid "Shutdown the computer"
+msgstr "Închide calculatorul"
+
+#. metadata.json->name
+#. settings-schema.json->cinnamenuProvidersSection->title
+msgid "Cinnamenu"
+msgstr "Cinnamenu"
+
+#. metadata.json->description
+msgid ""
+"A flexible menu providing formatting options, web bookmarks, open window "
+"lookup, and search provider support with fuzzy searching."
+msgstr ""
+"Un meniu flexibil, cu opțiuni de formatare, marcaje web, căutare în "
+"ferestrele deschise, și suport pentru furnizorii de căutare, cu căutare "
+"inexactă."
+
+#. settings-schema.json->panel->title
+msgid "Behavior"
+msgstr "Comportament"
+
+#. settings-schema.json->appearance->title
+msgid "Appearance"
+msgstr "Aspect"
+
+#. settings-schema.json->menu->title
+msgid "Layout and Content"
+msgstr "Amplasare și conținut"
+
+#. settings-schema.json->providers->title
+msgid "Search Providers"
+msgstr "Furnizori de căutare"
+
+#. settings-schema.json->extensionProvidersSection->title
+msgid "No search provider extensions found"
+msgstr "Nu s-a găsit nicio extensie pentru furnizori de căutare"
+
+#. settings-schema.json->panel-appear->title
+#. settings-schema.json->panel-behave->title
+msgid "Panel"
+msgstr "Panou"
+
+#. settings-schema.json->menu-behave->title
+#. settings-schema.json->menu-icons->title
+msgid "Menu"
+msgstr "Meniu"
+
+#. settings-schema.json->menu-layout->title
+msgid "Layout"
+msgstr "Amplasare"
+
+#. settings-schema.json->menu-content->title
+msgid "Content"
+msgstr "Conținut"
+
+#. settings-schema.json->privacy-settings-button->description
+msgid "Toggle recent files"
+msgstr "Comută fișiere recente"
+
+#. settings-schema.json->privacy-settings-button->tooltip
+msgid "Press this button to customize your privacy settings."
+msgstr "Apasă acest buton pentru a personaliza setările de intimitate."
+
+#. settings-schema.json->menu-editor-button->description
+msgid "Open the menu editor"
+msgstr "Deschide editorul meniului"
+
+#. settings-schema.json->menu-editor-button->tooltip
+msgid "Press this button to customize your menu entries."
+msgstr "Apasă acest buton pentru a personaliza articolele din meniu."
+
+#. settings-schema.json->resetCategoryOrder-button->description
+msgid "Reset category order"
+msgstr "Resetează ordinea categoriilor"
+
+#. settings-schema.json->menu-icon-custom->description
+msgid "Use a custom icon"
+msgstr "Folosește o pictogramă personalizată"
+
+#. settings-schema.json->menu-icon-custom->tooltip
+msgid "Unchecking this allows the theme to set the icon"
+msgstr "Debifarea aici permite temei să seteze pictograma"
+
+#. settings-schema.json->menu-icon->description
+msgid "Icon"
+msgstr "Pictogramă"
+
+#. settings-schema.json->menu-icon->tooltip
+msgid "Select an icon to show in the panel."
+msgstr "Alege o pictogramă pentru a fi afișată în panou."
+
+#. settings-schema.json->menu-label->description
+#. settings-schema.json->menu-label->tooltip
+msgid "Set the custom menu button icon name"
+msgstr "Setează un nume personalizat pentru pictograma butonului meniului"
+
+#. settings-schema.json->category-icon-size->units
+#. settings-schema.json->apps-list-icon-size->units
+#. settings-schema.json->apps-grid-icon-size->units
+msgid "pixels"
+msgstr "pixeli"
+
+#. settings-schema.json->category-icon-size->description
+#. settings-schema.json->category-icon-size->tooltip
+msgid "Category icon size"
+msgstr "Mărimea pictogramelor categoriilor"
+
+#. settings-schema.json->apps-list-icon-size->description
+#. settings-schema.json->apps-list-icon-size->tooltip
+msgid "Applications list icon size"
+msgstr "Mărimea pictogramei în lista de aplicații"
+
+#. settings-schema.json->apps-grid-icon-size->description
+#. settings-schema.json->apps-grid-icon-size->tooltip
+msgid "Applications grid icon size"
+msgstr "Mărimea pictogramei în grila de aplicații"
+
+#. settings-schema.json->overlay-key->description
+msgid "Keyboard shortcut to open and close the menu"
+msgstr "Scurtătura de pe tastatură pentru a deschide și închide meniul"
+
+#. settings-schema.json->activate-on-hover->description
+msgid "Open the menu when I move my mouse over it"
+msgstr "Deschide meniul când pun cursorul pe el"
+
+#. settings-schema.json->activate-on-hover->tooltip
+msgid "Enable opening the menu when the mouse enters the applet"
+msgstr "Permite deschiderea meniului când mouse-ul intră în applet."
+
+#. settings-schema.json->hover-delay->units
+#. settings-schema.json->tooltip-delay->units
+msgid "milliseconds"
+msgstr "milisecunde"
+
+#. settings-schema.json->hover-delay->description
+msgid "Menu hover delay:"
+msgstr "Întărziere la cursor deasupra meniului:"
+
+#. settings-schema.json->hover-delay->tooltip
+msgid "Delay between switching categories"
+msgstr "Întârziere la schimbarea categoriilor"
+
+#. settings-schema.json->enable-animation->description
+msgid "Use menu animations"
+msgstr "Folosește animații pentru meniu"
+
+#. settings-schema.json->enable-animation->tooltip
+msgid "Allow the menu to animate on open and close"
+msgstr "Permite animarea meniului la deschidere și închidere"
+
+#. settings-schema.json->category-click->description
+msgid "Activate categories on click"
+msgstr "Activează categorii când dau click"
+
+#. settings-schema.json->category-click->tooltip
+msgid ""
+"When enabled, category views are activated on click instead of on hover."
+msgstr ""
+"Când este activat, vederile categoriilor sunt activate la click, nu la "
+"punerea cursorului pe ele."
+
+#. settings-schema.json->enable-autoscroll->description
+msgid "Enable autoscrolling in application list"
+msgstr "Activează derularea automată în lista de aplicații."
+
+#. settings-schema.json->enable-autoscroll->tooltip
+msgid ""
+"Choose whether or not to enable smooth autoscrolling in the application list."
+msgstr "Alege dacă derularea fluentă este activată în lista de aplicații."
+
+#. settings-schema.json->enable-bookmarks->description
+msgid "Show web bookmarks"
+msgstr "Arată marcaje web"
+
+#. settings-schema.json->enable-bookmarks->tooltip
+msgid "Choose whether or not bookmarks are indexed in the menu."
+msgstr "Alege dacă marcajele sunt indexate în meniu."
+
+#. settings-schema.json->enable-windows->description
+msgid "Enable searching of open windows"
+msgstr "Activează căutarea în ferestre deschise"
+
+#. settings-schema.json->enable-windows->tooltip
+msgid "Choose whether or not open windows are indexed in menu searches."
+msgstr "Alege dacă ferestrele deschise sunt indexate în căutările în meniu."
+
+#. settings-schema.json->enable-search-providers->description
+msgid "Enable search providers"
+msgstr "Activează furnizori de căutare"
+
+#. settings-schema.json->enable-search-providers->tooltip
+msgid ""
+"Choose whether or not search provider results are indexed in menu searches."
+msgstr ""
+"Alege dacă rezultatele de la furnizorii de căutare sunt indexate în "
+"căutarile în menu."
+
+#. settings-schema.json->get-providers->description
+msgid "Example Search Providers"
+msgstr "Exemple de furnizori de căutare"
+
+#. settings-schema.json->startup-view-mode->description
+#. settings-schema.json->startup-view-mode->tooltip
+msgid "Startup applications view mode"
+msgstr "Modul de vizualizare al aplicațiilor de pornire"
+
+#. settings-schema.json->startup-view-mode->options
+msgid "List"
+msgstr "Listă"
+
+#. settings-schema.json->startup-view-mode->options
+msgid "Grid"
+msgstr "Grilă"
+
+#. settings-schema.json->apps-grid-column-count->units
+msgid "columns"
+msgstr "coloane"
+
+#. settings-schema.json->apps-grid-column-count->description
+#. settings-schema.json->apps-grid-column-count->tooltip
+msgid "Number of columns in apps grid"
+msgstr "Numărul de coloane din grila de aplicații"
+
+#. settings-schema.json->show-places->description
+msgid "Show bookmarks and places"
+msgstr "Arată marcaje și locuri"
+
+#. settings-schema.json->show-places->tooltip
+msgid "Choose whether or not to show bookmarks and places in the menu."
+msgstr "Alege dacă se afișează marcaje și locuri în meniu."
+
+#. settings-schema.json->show-application-icons->description
+msgid "Show application icons"
+msgstr "Arată pictogramele aplicațiilor"
+
+#. settings-schema.json->show-application-icons->tooltip
+msgid "Choose whether or not to show icons on applications."
+msgstr "Alege dacă se afișează pictogramele pentru aplicații."
+
+#. settings-schema.json->show-category-icons->description
+msgid "Show category icons"
+msgstr "Arată pictogramele categoriilor"
+
+#. settings-schema.json->show-category-icons->tooltip
+msgid "Choose whether or not to show icons on categories."
+msgstr "Alege dacă se afișează pictograme la categorii."
+
+#. settings-schema.json->search-filesystem->description
+msgid "Enable filesystem path entry in search box"
+msgstr "Activează scrierea unei căi din sistem în caseta de căutare"
+
+#. settings-schema.json->search-filesystem->tooltip
+msgid "Allows path entry in the menu search box."
+msgstr "Permite scrierea unei căi din caseta de căutare a meniului."
+
+#. settings-schema.json->show-apps-description-on-buttons->description
+msgid "Show application descriptions under titles"
+msgstr "Arată descrierea aplicațiilor sub titluri"
+
+#. settings-schema.json->show-apps-description-on-buttons->tooltip
+msgid ""
+"Choose whether or not to show the application description on the application "
+"buttons."
+msgstr ""
+"Alege dacă se afișează descrierea aplicațiilor în butoanele aplicațiilor."
+
+#. settings-schema.json->show-tooltips->description
+msgid "Show tooltips"
+msgstr "Arată baloane explicative"
+
+#. settings-schema.json->show-tooltips->tooltip
+msgid ""
+"When enabled, tooltips containing the item's name or description is shown "
+"when hovered over."
+msgstr ""
+"Când este activat, baloanele explicative ce conțin numele sau descrierea "
+"articolului sunt afișate la punerea cursorului pe el."
+
+#. settings-schema.json->tooltip-delay->description
+msgid "Tooltip delay"
+msgstr "Întârzierea balonului explicativ"
+
+#. settings-schema.json->tooltip-delay->tooltip
+msgid ""
+"The delay time in milliseconds for tooltips when hovering over a menu item."
+msgstr ""
+"Timpul de întârziere în milisecunde pentru baloanele explicative ce apar "
+"când cursorul este pe un articol din meniu."
+
+#. settings-schema.json->enable-custom-menu-height->description
+#. settings-schema.json->enable-custom-menu-height->tooltip
+msgid "Use a custom menu height"
+msgstr "Folosește o înălțime personalizată a meniului"
+
+#. settings-schema.json->custom-menu-height->units
+msgid "px"
+msgstr "px"
+
+#. settings-schema.json->custom-menu-height->description
+#. settings-schema.json->custom-menu-height->tooltip
+msgid "Custom menu height"
+msgstr "Înălțime personalizată pentru meniu"
+
+#. settings-schema.json->description-placement->description
+msgid "Application description placement"
+msgstr "Poziționarea descrierilor aplicațiilor"
+
+#. settings-schema.json->description-placement->options
+msgid "Tooltips"
+msgstr "Baloane explicative"
+
+#. settings-schema.json->description-placement->options
+msgid "Under titles"
+msgstr "Sub titluri"
+
+#. settings-schema.json->description-placement->options
+msgid "Bottom pane"
+msgstr "Panoul de jos"
+
+#. settings-schema.json->description-placement->options
+msgid "None"
+msgstr "Niciuna"
+
+#. settings-schema.json->description-placement->tooltip
+msgid ""
+"Choose where application descriptions will be placed, or select \"None\" to "
+"disable."
+msgstr ""
+"Alege unde vor fi puse descrierile aplicațiilor, sau selectează ”Niciuna” "
+"pentru a dezactiva."
+
+#. settings-schema.json->startupCategory->description
+msgid "Startup category"
+msgstr "Categorie de pornire"
+
+#. settings-schema.json->startupCategory->tooltip
+msgid "Category first seen when the menu is opened"
+msgstr "Prima categorie văzută la deschiderea meniului"
