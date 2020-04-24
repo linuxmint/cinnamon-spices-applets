@@ -1,19 +1,14 @@
-the Source code is in typescript now, You must compile it into js.
-the Build script help to get them where they need to be in the correct
+the Source code is in typescript, You must compile it into js if you change it.
+the Build script helps to get them where they need to be in the correct
 format.
 
 Building requires Typescript installed (obviously).
-To install typescript run: "sudo npm install -g typescript"  (requires node...)
+To install typescript run: "sudo npm install -g typescript"  (requires node...) or find it in your package manager
 
 Visual Studio Code has the best Typescript support, 
-    although you can use other Text editor.
+    although you can use other Text editors.
 
 
 
 --------- BUILD -----------
-FOR 3.8:
-    Just run: "build-3.8.sh" script and you are good
-    (It compiles to the correct JS target and moves the files into the folder 3.8)
-
-FOR 3.0:
-    Run "build-3.0.sh"
+Run "build.sh", it will build for 3.8 and 3.0 as well.

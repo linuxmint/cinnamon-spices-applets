@@ -8,6 +8,11 @@ function importModule(path) {
         return AppletDir[path];
     }
 }
+const UUID = "weather@mockturtl";
+imports.gettext.bindtextdomain(UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
+function _(str) {
+    return imports.gettext.dgettext(UUID, str);
+}
 var utils = importModule("utils");
 var isCoordinate = utils.isCoordinate;
 var isLangSupported = utils.isLangSupported;
@@ -17,22 +22,14 @@ var weatherIconSafely = utils.weatherIconSafely;
 var get = utils.get;
 class OpenWeatherMap {
     constructor(_app) {
-        this.supportedLanguages = ["ar", "bg", "ca", "cz", "de", "el", "en", "fa", "fi",
-            "fr", "gl", "hr", "hu", "it", "ja", "kr", "la", "lt", "mk", "nl", "pl",
-            "pt", "ro", "ru", "se", "sk", "sl", "es", "tr", "ua", "vi", "zh_cn", "zh_tw"];
-        this.current_url = "https://api.openweathermap.org/data/2.5/weather?";
-        this.daily_url = "https://api.openweathermap.org/data/2.5/forecast/daily?";
+        this.supportedLanguages = ["af", "ar", "az", "bg", "ca", "cz", "da", "de", "el", "en", "eu", "fa", "fi",
+            "fr", "gl", "he", "hi", "hr", "hu", "id", "it", "ja", "kr", "la", "lt", "mk", "no", "nl", "pl",
+            "pt", "pt_br", "ro", "ru", "se", "sk", "sl", "sp", "es", "sr", "th", "tr", "ua", "uk", "vi", "zh_cn", "zh_tw", "zu"];
+        this.base_url = "https://api.openweathermap.org/data/2.5/onecall?";
         this.app = _app;
     }
     async GetWeather() {
-        let currentResult = await this.GetData(this.current_url, this.ParseCurrent);
-        let forecastResult = await this.GetData(this.daily_url, this.ParseForecast);
-        currentResult.forecasts = forecastResult;
-        return currentResult;
-    }
-    ;
-    async GetData(baseUrl, ParseFunction) {
-        let query = this.ConstructQuery(baseUrl);
+        let query = this.ConstructQuery(this.base_url);
         let json;
         if (query != null) {
             this.app.log.Debug("Query: " + query);
@@ -47,53 +44,64 @@ class OpenWeatherMap {
                 this.app.HandleError({ type: "soft", detail: "no api response", service: "openweathermap" });
                 return null;
             }
-            if (json.cod == "200") {
-                return ParseFunction(json, this);
-            }
-            else {
-                this.HandleResponseErrors(json);
-                return null;
-            }
+            return this.ParseWeather(json, this);
         }
         else {
             return null;
         }
     }
     ;
-    ParseCurrent(json, self) {
+    ParseWeather(json, self) {
         try {
             let weather = {
                 coord: {
-                    lat: get(["coord", "lat"], json),
-                    lon: get(["coord", "lon"], json)
+                    lat: json.lat,
+                    lon: json.lon
                 },
                 location: {
-                    city: json.name,
-                    country: json.sys.country,
-                    url: "https://openweathermap.org/city/" + json.id,
+                    url: null,
+                    timeZone: json.timezone
                 },
-                date: new Date((json.dt) * 1000),
-                sunrise: new Date((json.sys.sunrise) * 1000),
-                sunset: new Date((json.sys.sunset) * 1000),
+                date: new Date((json.current.dt) * 1000),
+                sunrise: new Date((json.current.sunrise) * 1000),
+                sunset: new Date((json.current.sunset) * 1000),
                 wind: {
-                    speed: get(["wind", "speed"], json),
-                    degree: get(["wind", "deg"], json)
+                    speed: json.current.wind_speed,
+                    degree: json.current.wind_deg
                 },
-                temperature: get(["main", "temp"], json),
-                pressure: get(["main", "pressure"], json),
-                humidity: get(["main", "humidity"], json),
+                temperature: json.current.temp,
+                pressure: json.current.pressure,
+                humidity: json.current.humidity,
                 condition: {
-                    main: get(["weather", "0", "main"], json),
-                    description: get(["weather", "0", "description"], json),
-                    icon: weatherIconSafely(self.ResolveIcon(get(["weather", "0", "icon"], json)), self.app._icon_type)
+                    main: get(["current", "weather", "0", "main"], json),
+                    description: get(["current", "weather", "0", "description"], json),
+                    icon: weatherIconSafely(self.ResolveIcon(get(["current", "weather", "0", "icon"], json)), self.app.config.IconType()),
+                    customIcon: self.ResolveCustomIcon(get(["current", "weather", "0", "icon"], json))
                 },
                 extra_field: {
                     name: _("Cloudiness"),
-                    value: json.clouds.all,
+                    value: json.current.clouds,
                     type: "percent"
                 },
                 forecasts: []
             };
+            let forecasts = [];
+            for (let i = 0; i < self.app.config._forecastDays; i++) {
+                let day = json.daily[i];
+                let forecast = {
+                    date: new Date(day.dt * 1000),
+                    temp_min: day.temp.min,
+                    temp_max: day.temp.max,
+                    condition: {
+                        main: day.weather[0].main,
+                        description: day.weather[0].description,
+                        icon: weatherIconSafely(self.ResolveIcon(day.weather[0].icon), self.app.config.IconType()),
+                        customIcon: self.ResolveCustomIcon(day.weather[0].icon)
+                    },
+                };
+                forecasts.push(forecast);
+            }
+            weather.forecasts = forecasts;
             return weather;
         }
         catch (e) {
@@ -103,40 +111,15 @@ class OpenWeatherMap {
         }
     }
     ;
-    ParseForecast(json, self) {
-        let forecasts = [];
-        try {
-            for (let i = 0; i < self.app._forecastDays; i++) {
-                let day = json.list[i];
-                let forecast = {
-                    date: new Date(day.dt * 1000),
-                    temp_min: day.temp.min,
-                    temp_max: day.temp.max,
-                    condition: {
-                        main: day.weather[0].main,
-                        description: day.weather[0].description,
-                        icon: weatherIconSafely(self.ResolveIcon(day.weather[0].icon), self.app._icon_type),
-                    },
-                };
-                forecasts.push(forecast);
-            }
-            return forecasts;
-        }
-        catch (e) {
-            self.app.log.Error("OpenWeathermap Forecast Parsing error: " + e);
-            self.app.HandleError({ type: "soft", service: "openweathermap", detail: "unusal payload", message: _("Failed to Process Forecast Info") });
-            return null;
-        }
-    }
-    ;
     ConstructQuery(baseUrl) {
         let query = baseUrl;
         let locString = this.ParseLocation();
         if (locString != null) {
-            query = query + locString + "&APPID=";
+            query = query + locString + "&appid=";
             query += "1c73f8259a86c6fd43c7163b543c8640";
-            if (this.app._translateCondition && isLangSupported(this.app.systemLanguage, this.supportedLanguages)) {
-                query = query + "&lang=" + this.app.systemLanguage;
+            let locale = this.ConvertToAPILocale(this.app.currentLocale);
+            if (this.app.config._translateCondition && isLangSupported(locale, this.supportedLanguages)) {
+                query = query + "&lang=" + locale;
             }
             return query;
         }
@@ -146,7 +129,7 @@ class OpenWeatherMap {
     }
     ;
     ParseLocation() {
-        let loc = this.app._location.replace(/ /g, "");
+        let loc = this.app.config._location.replace(/ /g, "");
         if (isCoordinate(loc)) {
             let locArr = loc.split(',');
             return "lat=" + locArr[0] + "&lon=" + locArr[1];
@@ -158,6 +141,28 @@ class OpenWeatherMap {
             return "q=" + loc;
     }
     ;
+    ConvertToAPILocale(systemLocale) {
+        if (systemLocale == "zh-cn" || systemLocale == "zh-cn" || systemLocale == "pt-br") {
+            return systemLocale;
+        }
+        let lang = systemLocale.split("-")[0];
+        if (lang == "sv") {
+            return "se";
+        }
+        else if (lang == "cs") {
+            return "cz";
+        }
+        else if (lang == "ko") {
+            return "kr";
+        }
+        else if (lang == "lv") {
+            return "la";
+        }
+        else if (lang == "nn" || lang == "nb") {
+            return "no";
+        }
+        return lang;
+    }
     HandleResponseErrors(json) {
         let errorMsg = "OpenWeathermap Response: ";
         let error = {
@@ -244,6 +249,49 @@ class OpenWeatherMap {
         }
     }
     ;
+    ResolveCustomIcon(icon) {
+        switch (icon) {
+            case "10d":
+                return "day-rain-symbolic";
+            case "10n":
+                return "night-rain-symbolic";
+            case "09n":
+                return "night-showers-symbolic";
+            case "09d":
+                return "day-showers-symbolic";
+            case "13d":
+                return "day-snow-symbolic";
+            case "13n":
+                return "night-alt-snow-symbolic";
+            case "50d":
+                return "day-fog-symbolic";
+            case "50n":
+                return "night-fog-symbolic";
+            case "04d":
+                return "day-cloudy-symbolic";
+            case "04n":
+                return "night-alt-cloudy-symbolic";
+            case "03n":
+                return "night-alt-cloudy-symbolic";
+            case "03d":
+                return "day-cloudy-symbolic";
+            case "02n":
+                return "night-alt-cloudy-symbolic";
+            case "02d":
+                return "day-cloudy-symbolic";
+            case "01n":
+                return "night-clear-symbolic";
+            case "01d":
+                return "day-sunny-symbolic";
+            case "11d":
+                return "day-thunderstorm-symbolic";
+            case "11n":
+                return "night-alt-thunderstorm-symbolic";
+            default:
+                return "cloud-refresh-symbolic";
+        }
+    }
+    ;
 }
 ;
 const openWeatherMapConditionLibrary = [
@@ -299,6 +347,7 @@ const openWeatherMapConditionLibrary = [
     _("Clear"),
     _("Clear sky"),
     _("Sky is clear"),
+    _("Clouds"),
     _("Few clouds"),
     _("Scattered clouds"),
     _("Broken clouds"),

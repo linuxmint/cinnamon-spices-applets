@@ -1,9 +1,16 @@
 export {}; // Declaring as a Module
 
-var Mainloop = imports.mainloop;
-const Cinnamon = imports.gi.Cinnamon;
-const St = imports.gi.St;
-const Gtk = imports.gi.Gtk;
+// Add this so translation works in utils as well
+const UUID = "weather@mockturtl";
+imports.gettext.bindtextdomain(UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
+function _(str: string): string {
+  return imports.gettext.dgettext(UUID, str)
+}
+
+var { timeout_add, source_remove } = imports.mainloop;
+const { util_format_date } = imports.gi.Cinnamon;
+const { IconType } = imports.gi.St;
+const { IconTheme } = imports.gi.Gtk;
 
 var setTimeout = function(func: any, ms: number) {
   let args: any[] = [];
@@ -11,7 +18,7 @@ var setTimeout = function(func: any, ms: number) {
     args = args.slice.call(arguments, 2);
   }
 
-  let id = Mainloop.timeout_add(ms, () => {
+  let id = timeout_add(ms, () => {
     func.apply(null, args);
     return false; // Stop repeating
   }, null);
@@ -19,8 +26,16 @@ var setTimeout = function(func: any, ms: number) {
   return id;
 };
 
+var delay = async function(ms: number) : Promise<void> {
+  return await new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve();
+    }, ms);
+  });
+}
+
 const clearTimeout = function(id: any) {
-  Mainloop.source_remove(id);
+  source_remove(id);
 };
 
 const setInterval = function(func: any, ms: number) {
@@ -29,7 +44,7 @@ const setInterval = function(func: any, ms: number) {
     args = args.slice.call(arguments, 2);
   }
 
-  let id = Mainloop.timeout_add(ms, () => {
+  let id = timeout_add(ms, () => {
     func.apply(null, args);
     return true; // Repeat
   }, null);
@@ -38,7 +53,7 @@ const setInterval = function(func: any, ms: number) {
 };
 
 const clearInterval = function(id: any) {
-  Mainloop.source_remove(id);
+  source_remove(id);
 };
 
 var isLocaleStringSupported = function(): localeStringSupport {
@@ -119,7 +134,7 @@ var getDayName = function(dayNum: number): string {
 
 // Takes Time in %H:%M string format
 var timeToUserUnits = function(date: Date, show24Hours: boolean) {
-    let timeStr = Cinnamon.util_format_date('%H:%M', date.getTime());
+    let timeStr = util_format_date('%H:%M', date.getTime());
     let time = timeStr.split(':');
     //Remove Leading 0
     if (time[0].charAt(0) == "0") {
@@ -159,33 +174,80 @@ const get = (p: string[], o: any) =>
   p.reduce((xs, x) =>
     (xs && xs[x]) ? xs[x] : null, o);
 
-var MPStoUserUnits = function(mps: number, units: WeatherWindSpeedUnits): number {
+var MPStoUserUnits = function(mps: number, units: WeatherWindSpeedUnits): string {
+    if (mps == null) return null;
     // Override wind units with our preference, takes Meter/Second wind speed
     switch (units) {
       case "mph":
         //Rounding to 1 decimal
-        return Math.round((mps * WEATHER_CONV_MPH_IN_MPS) * 10) / 10;
+        return (Math.round((mps * WEATHER_CONV_MPH_IN_MPS) * 10) / 10).toString();
       case "kph":
         //Rounding to 1 decimal
-        return Math.round((mps * WEATHER_CONV_KPH_IN_MPS) * 10) / 10;
+        return (Math.round((mps * WEATHER_CONV_KPH_IN_MPS) * 10) / 10).toString();
       case "m/s":
         // Rounding to 1 decimal just in case API does not return it in the same format
-        return Math.round(mps * 10) / 10;
+        return (Math.round(mps * 10) / 10).toString();
       case "Knots":
         //Rounding to whole units
-        return Math.round(mps * WEATHER_CONV_KNOTS_IN_MPS);
+        return Math.round(mps * WEATHER_CONV_KNOTS_IN_MPS).toString();
+      case "Beaufort":
+        //https://en.m.wikipedia.org/wiki/Beaufort_scale
+        if (mps < 0.5) {
+          return "0 (" + _("Calm") + ")";
+        }
+        if (mps < 1.5) {
+          return "1 (" + _("Light air") + ")";
+        }
+        if (mps < 3.3) {
+          return "2 (" + _("Light breeze") + ")";
+        }
+        if (mps < 5.5) {
+          return "3 (" + _("Gentle breeze") + ")";
+        }
+        if (mps < 7.9) {
+          return "4 (" + _("Moderate breeze") + ")";
+        }
+        if (mps < 10.7) {
+          return "5 (" + _("Fresh breeze") + ")";
+        }
+        if (mps < 13.8) {
+          return "6 (" + _("Strong breeze") + ")";
+        }
+        if (mps < 17.1) {
+          return "7 (" + _("Near gale") + ")";
+        }
+        if (mps < 20.7) {
+          return "8 (" + _("Gale") + ")";
+        }
+        if (mps < 24.4) {
+          return "9 (" + _("Strong gale") + ")";
+        }
+        if (mps < 28.4) {
+          return "10 (" + _("Storm") + ")";
+        }
+        if (mps < 32.6) {
+          return "11 (" + _("Violent storm") + ")";
+        }
+        return "12 (" + _("Hurricane") + ")";
     }
   }
 
   // Conversion from Kelvin
-var TempToUserUnits = function(kelvin: number, units: WeatherUnits): number {
-    if (units == "celsius") {
-      return Math.round((kelvin - 273.15));
-    }
-    if (units == "fahrenheit") {
-      return Math.round((9 / 5 * (kelvin - 273.15) + 32));
-    }
+var TempToUserConfig = function(kelvin: number, units: WeatherUnits, russianStyle: boolean): string {
+  let temp;
+  if (units == "celsius") {
+    temp = Math.round((kelvin - 273.15));
   }
+  if (units == "fahrenheit") {
+    temp = Math.round((9 / 5 * (kelvin - 273.15) + 32));
+  }
+
+  if (!russianStyle) return temp.toString();
+
+  if (temp < 0) temp = "−" + Math.abs(temp).toString();
+  else if (temp > 0) temp = "+" + temp.toString();
+  return temp.toString();
+}
 
 var CelsiusToKelvin = function(celsius: number): number {
     return (celsius + 273.15);
@@ -250,6 +312,7 @@ var nonempty = function(str: string): boolean {
 
 var compassDirection = function(deg: number): string {
     let directions = [_('N'), _('NE'), _('E'), _('SE'), _('S'), _('SW'), _('W'), _('NW')]
+    //let directions = [_('⬇'), _('⬋'), _('⬅'), _('⬉'), _('⬆'), _('⬈'), _('➞'), _('⬊')]
     return directions[Math.round(deg / 45) % directions.length]
   }
 
@@ -278,7 +341,7 @@ const icons = {
 }
 
   // Passing appropriate resolver function for the API, and the code
-var weatherIconSafely = function (code: string[], icon_type: string): string {
+var weatherIconSafely = function (code: string[], icon_type: imports.gi.St.IconType): string {
     for (let i = 0; i < code.length; i++) {
       if (hasIcon(code[i], icon_type))
         return code[i]
@@ -286,6 +349,6 @@ var weatherIconSafely = function (code: string[], icon_type: string): string {
     return 'weather-severe-alert'
   }
 
-var hasIcon = function (icon: string, icon_type: string): boolean {
-    return Gtk.IconTheme.get_default().has_icon(icon + (icon_type == St.IconType.SYMBOLIC ? '-symbolic' : ''))
-  }
+var hasIcon = function (icon: string, icon_type: imports.gi.St.IconType): boolean {
+  return IconTheme.get_default().has_icon(icon + (icon_type == IconType.SYMBOLIC ? '-symbolic' : ''))
+}

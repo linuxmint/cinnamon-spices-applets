@@ -96,6 +96,7 @@ GraphicalHWMonitorApplet.prototype = {
         this.settings = new Settings.AppletSettings(this, metadata.uuid, instance_id);
         // General settings
         this.settings.bind("frequency", "frequency", this.settingsChanged);
+        this.settings.bind("graph_line_mode", "graph_line_mode", this.settingsChanged);
         
         this.settings.bind("theme", "theme", this.settingsChanged);
         this.settings.bind("border_color", "border_color", this.settingsChanged);
@@ -141,6 +142,26 @@ GraphicalHWMonitorApplet.prototype = {
         this.settings.bind("netout_custom_label", "netout_custom_label", this.settingsChanged);
         this.settings.bind("netout_linlog", "netout_linlog", this.settingsChanged);
         this.settings.bind("netout_show_detail_label", "netout_show_detail_label", this.settingsChanged);
+        // DISK (read) settings
+        this.settings.bind("diskread_enable_graph", "diskread_enable_graph", this.settingsChanged);
+        this.settings.bind("diskread_size", "diskread_size", this.settingsChanged);
+        this.settings.bind("diskread_use_custom_label", "diskread_use_custom_label", this.settingsChanged);
+        this.settings.bind("diskread_mount_dir", "diskread_mount_dir", this.settingsChanged);
+        this.settings.bind("diskread_custom_label", "diskread_custom_label", this.settingsChanged);
+        this.settings.bind("diskread_show_detail_label", "diskread_show_detail_label", this.settingsChanged);
+        // DISK (write) settings
+        this.settings.bind("diskwrite_enable_graph", "diskwrite_enable_graph", this.settingsChanged);
+        this.settings.bind("diskwrite_size", "diskwrite_size", this.settingsChanged);
+        this.settings.bind("diskwrite_mount_dir", "diskwrite_mount_dir", this.settingsChanged);
+        this.settings.bind("diskwrite_use_custom_label", "diskwrite_use_custom_label", this.settingsChanged);
+        this.settings.bind("diskwrite_custom_label", "diskwrite_custom_label", this.settingsChanged);
+        this.settings.bind("diskwrite_show_detail_label", "diskwrite_show_detail_label", this.settingsChanged);
+        // BAT (battery) settings
+        this.settings.bind("bat_enable_graph", "bat_enable_graph", this.settingsChanged);
+        this.settings.bind("bat_size", "bat_size", this.settingsChanged);
+        this.settings.bind("bat_use_custom_label", "bat_use_custom_label", this.settingsChanged);
+        this.settings.bind("bat_custom_label", "bat_custom_label", this.settingsChanged);
+        this.settings.bind("bat_show_detail_label", "bat_show_detail_label", this.settingsChanged);
         
         this.createThemeObject();
 
@@ -205,7 +226,43 @@ GraphicalHWMonitorApplet.prototype = {
             let netOutProvider =  new Providers.NetDataProvider(this.frequency, false, this.netout_linlog, this.netout_speed);
             this.graphs.push(new Graph.Graph(netOutProvider, netOutGraphArea, this.theme_object, this.netout_show_detail_label));
         }    
+                
+        // Add DISK READ Graph
+        if (this.diskread_enable_graph) {
+            let diskReadGraphArea = null;
+            if (this.isHorizontal)
+                diskReadGraphArea = this.appletArea.addGraph(this.diskread_size, this.panel_height);
+            else
+                diskReadGraphArea = this.appletArea.addGraph(this.panel_height, this.diskread_size);
 
+            let diskReadProvider =  new Providers.DiskDataProvider(this.frequency, true, this.diskread_mount_dir);
+            this.graphs.push(new Graph.Graph(diskReadProvider, diskReadGraphArea, this.theme_object, this.diskread_show_detail_label));
+        }    
+                
+        // Add DISK WRITE Graph
+        if (this.diskwrite_enable_graph) { 
+            let diskWriteGraphArea = null;
+            if (this.isHorizontal)
+                diskWriteGraphArea = this.appletArea.addGraph(this.diskwrite_size, this.panel_height);
+            else
+                diskWriteGraphArea = this.appletArea.addGraph(this.panel_height, this.diskwrite_size);
+
+            let diskWriteProvider =  new Providers.DiskDataProvider(this.frequency, false, this.diskwrite_mount_dir);
+            this.graphs.push(new Graph.Graph(diskWriteProvider, diskWriteGraphArea, this.theme_object, this.diskwrite_show_detail_label));
+        }    
+
+        // Add BAT Graph
+        if (this.bat_enable_graph) { 
+            let batGraphArea = null;
+            if (this.isHorizontal)
+                batGraphArea = this.appletArea.addGraph(this.bat_size, this.panel_height);
+            else
+                batGraphArea = this.appletArea.addGraph(this.panel_height, this.bat_size);
+
+            let batProvider =  new Providers.BatteryProvider();
+            this.graphs.push(new Graph.Graph(batProvider, batGraphArea, this.theme_object, this.bat_show_detail_label));
+        }    
+        
         this.appletArea.createDrawingArea();
 
         this.appletArea.drawingArea.connect('repaint', Lang.bind(this, this.onGraphRepaint));        
@@ -318,6 +375,7 @@ GraphicalHWMonitorApplet.prototype = {
     createThemeObject: function() {
         this.theme_object = new Object();
         this.theme_object.theme = this.theme;
+        this.theme_object.graph_line_mode = this.graph_line_mode;
         this.theme_object.border_colors = this.getColors(this.border_color);
         this.theme_object.background_colors1 = this.getColors(this.background_color1);
         this.theme_object.background_colors2 = this.getColors(this.background_color2);
@@ -340,6 +398,12 @@ GraphicalHWMonitorApplet.prototype = {
         this.theme_object.netin_custom_label = this.netin_custom_label;
         this.theme_object.netout_use_custom_label = this.netout_use_custom_label;
         this.theme_object.netout_custom_label = this.netout_custom_label;
+        this.theme_object.diskread_use_custom_label = this.diskread_use_custom_label;
+        this.theme_object.diskread_custom_label = this.diskread_custom_label;
+        this.theme_object.diskwrite_use_custom_label = this.diskwrite_use_custom_label;
+        this.theme_object.diskwrite_custom_label = this.diskwrite_custom_label;
+        this.theme_object.bat_use_custom_label = this.bat_use_custom_label;
+        this.theme_object.bat_custom_label = this.bat_custom_label;
     },
 
     restartGHW: function() {

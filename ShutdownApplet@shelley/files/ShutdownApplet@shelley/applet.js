@@ -53,7 +53,7 @@ MyApplet.prototype = {
             });  
             
             this.menu.addAction(_("Log Out"), function(event) {
-                Util.spawnCommandLine("gnome-session-quit --no-prompt");
+                Util.spawnCommandLine("cinnamon-session-quit --no-prompt");
             });
             
              this.menu.addAction(_("Shutdown"), function(event) {

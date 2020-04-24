@@ -1,34 +1,46 @@
-var Mainloop = imports.mainloop;
-const Cinnamon = imports.gi.Cinnamon;
-const St = imports.gi.St;
-const Gtk = imports.gi.Gtk;
+const UUID = "weather@mockturtl";
+imports.gettext.bindtextdomain(UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
+function _(str) {
+    return imports.gettext.dgettext(UUID, str);
+}
+var { timeout_add, source_remove } = imports.mainloop;
+const { util_format_date } = imports.gi.Cinnamon;
+const { IconType } = imports.gi.St;
+const { IconTheme } = imports.gi.Gtk;
 var setTimeout = function (func, ms) {
     let args = [];
     if (arguments.length > 2) {
         args = args.slice.call(arguments, 2);
     }
-    let id = Mainloop.timeout_add(ms, () => {
+    let id = timeout_add(ms, () => {
         func.apply(null, args);
         return false;
     }, null);
     return id;
 };
+var delay = async function (ms) {
+    return await new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve();
+        }, ms);
+    });
+};
 const clearTimeout = function (id) {
-    Mainloop.source_remove(id);
+    source_remove(id);
 };
 const setInterval = function (func, ms) {
     let args = [];
     if (arguments.length > 2) {
         args = args.slice.call(arguments, 2);
     }
-    let id = Mainloop.timeout_add(ms, () => {
+    let id = timeout_add(ms, () => {
         func.apply(null, args);
         return true;
     }, null);
     return id;
 };
 const clearInterval = function (id) {
-    Mainloop.source_remove(id);
+    source_remove(id);
 };
 var isLocaleStringSupported = function () {
     let date = new Date(1565548657987);
@@ -97,7 +109,7 @@ var getDayName = function (dayNum) {
     return days[dayNum];
 };
 var timeToUserUnits = function (date, show24Hours) {
-    let timeStr = Cinnamon.util_format_date('%H:%M', date.getTime());
+    let timeStr = util_format_date('%H:%M', date.getTime());
     let time = timeStr.split(':');
     if (time[0].charAt(0) == "0") {
         time[0] = time[0].substr(1);
@@ -128,24 +140,72 @@ var KPHtoMPS = function (speed) {
 };
 const get = (p, o) => p.reduce((xs, x) => (xs && xs[x]) ? xs[x] : null, o);
 var MPStoUserUnits = function (mps, units) {
+    if (mps == null)
+        return null;
     switch (units) {
         case "mph":
-            return Math.round((mps * WEATHER_CONV_MPH_IN_MPS) * 10) / 10;
+            return (Math.round((mps * WEATHER_CONV_MPH_IN_MPS) * 10) / 10).toString();
         case "kph":
-            return Math.round((mps * WEATHER_CONV_KPH_IN_MPS) * 10) / 10;
+            return (Math.round((mps * WEATHER_CONV_KPH_IN_MPS) * 10) / 10).toString();
         case "m/s":
-            return Math.round(mps * 10) / 10;
+            return (Math.round(mps * 10) / 10).toString();
         case "Knots":
-            return Math.round(mps * WEATHER_CONV_KNOTS_IN_MPS);
+            return Math.round(mps * WEATHER_CONV_KNOTS_IN_MPS).toString();
+        case "Beaufort":
+            if (mps < 0.5) {
+                return "0 (" + _("Calm") + ")";
+            }
+            if (mps < 1.5) {
+                return "1 (" + _("Light air") + ")";
+            }
+            if (mps < 3.3) {
+                return "2 (" + _("Light breeze") + ")";
+            }
+            if (mps < 5.5) {
+                return "3 (" + _("Gentle breeze") + ")";
+            }
+            if (mps < 7.9) {
+                return "4 (" + _("Moderate breeze") + ")";
+            }
+            if (mps < 10.7) {
+                return "5 (" + _("Fresh breeze") + ")";
+            }
+            if (mps < 13.8) {
+                return "6 (" + _("Strong breeze") + ")";
+            }
+            if (mps < 17.1) {
+                return "7 (" + _("Near gale") + ")";
+            }
+            if (mps < 20.7) {
+                return "8 (" + _("Gale") + ")";
+            }
+            if (mps < 24.4) {
+                return "9 (" + _("Strong gale") + ")";
+            }
+            if (mps < 28.4) {
+                return "10 (" + _("Storm") + ")";
+            }
+            if (mps < 32.6) {
+                return "11 (" + _("Violent storm") + ")";
+            }
+            return "12 (" + _("Hurricane") + ")";
     }
 };
-var TempToUserUnits = function (kelvin, units) {
+var TempToUserConfig = function (kelvin, units, russianStyle) {
+    let temp;
     if (units == "celsius") {
-        return Math.round((kelvin - 273.15));
+        temp = Math.round((kelvin - 273.15));
     }
     if (units == "fahrenheit") {
-        return Math.round((9 / 5 * (kelvin - 273.15) + 32));
+        temp = Math.round((9 / 5 * (kelvin - 273.15) + 32));
     }
+    if (!russianStyle)
+        return temp.toString();
+    if (temp < 0)
+        temp = "−" + Math.abs(temp).toString();
+    else if (temp > 0)
+        temp = "+" + temp.toString();
+    return temp.toString();
 };
 var CelsiusToKelvin = function (celsius) {
     return (celsius + 273.15);
@@ -232,5 +292,5 @@ var weatherIconSafely = function (code, icon_type) {
     return 'weather-severe-alert';
 };
 var hasIcon = function (icon, icon_type) {
-    return Gtk.IconTheme.get_default().has_icon(icon + (icon_type == St.IconType.SYMBOLIC ? '-symbolic' : ''));
+    return IconTheme.get_default().has_icon(icon + (icon_type == IconType.SYMBOLIC ? '-symbolic' : ''));
 };

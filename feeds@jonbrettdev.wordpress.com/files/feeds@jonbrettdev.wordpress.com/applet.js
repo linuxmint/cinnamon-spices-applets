@@ -143,14 +143,14 @@ FeedApplet.prototype = {
 
     _check_feedparser: function(output) {
         if (output == "FAIL") {
-            this.notify_installation('python-feedparser');
-            Util.spawnCommandLine("apturl apt://python-feedparser");
+            this.notify_installation('python3-feedparser');
+            Util.spawnCommandLine("apturl apt://python3-feedparser");
         }
     },
 
     /* private function to check, confirm and install any dependencies */
     _check_dependencies: function() {
-       Util.spawn_async(['python', APPLET_PATH + '/check_feedparser.py'], Lang.bind(this, this._check_feedparser));
+       Util.spawn_async(['python3', APPLET_PATH + '/check_feedparser.py'], Lang.bind(this, this._check_feedparser));
     },
 
     /* private function that connects to the settings-schema and initializes the variables */

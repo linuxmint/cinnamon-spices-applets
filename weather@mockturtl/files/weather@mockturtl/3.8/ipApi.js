@@ -1,6 +1,6 @@
 class IpApi {
     constructor(_app) {
-        this.query = "https://ipapi.co/json";
+        this.query = "http://ip-api.com/json/?fields=status,message,country,countryCode,city,lat,lon,timezone,mobile,query";
         this.app = _app;
     }
     async GetLocation() {
@@ -16,7 +16,7 @@ class IpApi {
             this.app.HandleError({ type: "soft", detail: "no api response" });
             return null;
         }
-        if (json.error) {
+        if (json.status != "success") {
             this.HandleErrorResponse(json);
             return null;
         }
@@ -26,19 +26,19 @@ class IpApi {
     ParseInformation(json) {
         try {
             let result = {
-                lat: json.latitude,
-                lon: json.longitude,
+                lat: json.lat,
+                lon: json.lon,
                 city: json.city,
                 country: json.country,
-                timeZone: json.timezone
+                timeZone: json.timezone,
+                mobile: json.mobile
             };
-            this.app.log.Debug("Location obtained");
-            this.app.log.Debug("Location:" + json.latitude + "," + json.longitude);
-            this.app.log.Debug("Location setting is now: " + this.app._location);
+            this.app.log.Debug("Location obtained:" + json.lat + "," + json.lon);
+            this.app.log.Debug("Location setting is now: " + this.app.config._location);
             return result;
         }
         catch (e) {
-            this.app.log.Error("IPapi parsing error: " + e);
+            this.app.log.Error("ip-api parsing error: " + e);
             this.app.HandleError({ type: "hard", detail: "no location", service: "ipapi", message: _("Could not obtain location") });
             return null;
         }
@@ -46,7 +46,7 @@ class IpApi {
     ;
     HandleErrorResponse(json) {
         this.app.HandleError({ type: "hard", detail: "bad api response", message: _("Location Service responded with errors, please see the logs in Looking Glass"), service: "ipapi" });
-        this.app.log.Error("IpApi Responsd with Error: " + json.reason);
+        this.app.log.Error("ip-api responds with Error: " + json.reason);
     }
     ;
 }

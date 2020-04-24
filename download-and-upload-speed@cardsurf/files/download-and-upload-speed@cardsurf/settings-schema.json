@@ -37,6 +37,16 @@
         "description": "Calculate every",
         "tooltip" : "How often to calculate download and upload speed"
     },
+    "update_available_interfaces_every": {
+        "type": "spinbutton",
+        "default": 5,
+        "min": 0,
+        "max": 85800,
+        "step": 1,
+        "units": "seconds",
+        "description": "Update available interfaces every",
+        "tooltip": "How often to update list of available network interfaces. 0 means list of available network interfaces is not updated periodically."
+    },
     "configuration_end" : {
         "type" : "separator"
     },
@@ -90,13 +100,18 @@
         "type" : "filechooser",
         "default" : "~/.local/share/cinnamon/applets/download-and-upload-speed@cardsurf/icons/arrow_down_blue.svg",
         "description" : "Download icon",
-        "tooltip": "An icon displayed next to download speed in the panel"
+        "tooltip": "An icon displayed next to download speed in the panel.\nTo display a symbolic icon make sure its name ends with '-symbolic.svg'."
     },
     "gui_sent_icon_filename" : {
         "type" : "filechooser",
         "default" : "~/.local/share/cinnamon/applets/download-and-upload-speed@cardsurf/icons/arrow_up_red.svg",
         "description" : "Upload icon",
-        "tooltip": "An icon displayed next to upload speed in the panel"
+        "tooltip": "An icon displayed next to upload speed in the panel.\nTo display a symbolic icon make sure its name ends with '-symbolic.svg'."
+    },
+    "gui_symbolic_icon" : {
+        "type" : "checkbox",
+        "default" : false,
+        "description": "Show a default set of symbolic icons"
     },
     "hover_popup_text_css": {
         "type": "entry",
@@ -109,6 +124,26 @@
         "default": "font-size: 15px; padding: 5px; font-weight: bold;",
         "description": "Popup numbers CSS",
         "tooltip": "A CSS style applied to numbers in the hover popup"
+    },
+    "minimum_bytes_received_to_display": {
+        "type": "spinbutton",
+        "default": 0,
+        "min": 0,
+        "max": 100000000,
+        "step": 100000,
+        "units": "bytes",
+        "description": "Minimum displayed download value",
+        "tooltip" : "A minimum download value to display in the panel"
+    },
+    "minimum_bytes_sent_to_display": {
+        "type": "spinbutton",
+        "default": 0,
+        "min": 0,
+        "max": 100000000,
+        "step": 100000,
+        "units": "bytes",
+        "description": "Minimum displayed upload value",
+        "tooltip" : "A minimum upload value to display in the panel"
     },
     "gui_end" : {
         "type" : "separator"
@@ -234,6 +269,10 @@
     "checked_interfaces_string" : {
         "type": "generic",
         "default" : "eth0"
+    },
+    "unplugged_interfaces_string" : {
+        "type": "generic",
+        "default" : ""
     }
 
 }
