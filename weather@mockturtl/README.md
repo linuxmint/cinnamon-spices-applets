@@ -10,13 +10,15 @@ cinnamon-weather uses [Semantic Versioning](http://semver.org/).  For the curren
 
 **The applet obtains the location automatically, see below how to obtain API keys if your chosen weather provider needs one.**
 
-In **Manual Location** mode the applet only **accepts Coordinates** in Latitude, Longitude format (e.g. 37.77,122.41). You can use [OpenWeatherMap's finder](https://openweathermap.org/find) and paste the coordinates in from there.
+In **Manual Location** mode the applet **only** **accepts Coordinates** in Latitude, Longitude format (e.g. 37.77,122.41). You can use [OpenWeatherMap's finder](https://openweathermap.org/find) and paste the coordinates in from there.
 
 ## Weather providers to choose from
 
 ### OpenWeatherMap
 
 OpenWeatherMap does not require API key anymore! Big Thanks to them for supporting this applet!
+
+*The applet does not support City name, WOEID or ZIP code as location, in prepapration for adding hourly forecasts. Apololgies for the removed feature.*
 
 ### DarkSky - needs API key
 
