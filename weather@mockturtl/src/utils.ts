@@ -307,7 +307,7 @@ var isCoordinate = function(text: any): boolean {
   }
 
 var nonempty = function(str: string): boolean {
-    return (str != null && str.length > 0)
+    return (str != null && str.length > 0 && str != undefined)
   }
 
 var compassDirection = function(deg: number): string {

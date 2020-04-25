@@ -226,6 +226,6 @@
   },
   "credits": {
     "type": "header",
-    "description": "powered by: OpenWeatherMap, DarkSky, ipapi. Big Thanks to OpenWeatherMap for their support!"
+    "description": "powered by: OpenWeatherMap, DarkSky, MET Norway, Weatherbit,\nYahoo and ip-api. Big Thanks to OpenWeatherMap for their FOSS support!"
   }
 }
