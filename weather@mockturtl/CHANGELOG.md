@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.5.0
+
+* Fixes [#2980](https://github.com/linuxmint/cinnamon-spices-applets/issues/2980) and [#2979](https://github.com/linuxmint/cinnamon-spices-applets/issues/2979)
+* Hopefully Fixes [#2977](https://github.com/linuxmint/cinnamon-spices-applets/issues/2977) in most cases. You can never know with JSs flimsy timezone support.
+
 ## 2.4.9
 
 * Fixes [#2970](https://github.com/linuxmint/cinnamon-spices-applets/issues/2970)
