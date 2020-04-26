@@ -1,0 +1,4395 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   enable-background="new 0 0 1920 1080"
+   version="1.1"
+   viewBox="0 0 1096 1096"
+   xml:space="preserve"
+   id="svg1434"
+   sodipodi:docname="icon.svg"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)"
+   width="1096"
+   height="1096"><metadata
+   id="metadata1440"><rdf:RDF><cc:Work
+       rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+         rdf:resource="http://purl.org/dc/dcmitype/StillImage" /><dc:title></dc:title></cc:Work></rdf:RDF></metadata><defs
+   id="defs1438"><clipPath
+     clipPathUnits="userSpaceOnUse"
+     id="clipPath5151"><rect
+       id="rect5153"
+       width="1257.5309"
+       height="1189.1603"
+       x="380.922"
+       y="-60.324127" /></clipPath><clipPath
+     clipPathUnits="userSpaceOnUse"
+     id="clipPath839"><ellipse
+       style="fill:#333333;stroke-width:1.10757577"
+       id="ellipse841"
+       cx="968.72815"
+       cy="530.82318"
+       rx="582.17041"
+       ry="518.05377" /></clipPath></defs><sodipodi:namedview
+   pagecolor="#ffffff"
+   bordercolor="#666666"
+   borderopacity="1"
+   objecttolerance="10"
+   gridtolerance="10"
+   guidetolerance="10"
+   inkscape:pageopacity="0"
+   inkscape:pageshadow="2"
+   inkscape:window-width="1499"
+   inkscape:window-height="962"
+   id="namedview1436"
+   showgrid="false"
+   inkscape:zoom="0.40953268"
+   inkscape:cx="596.3454"
+   inkscape:cy="400.00737"
+   inkscape:window-x="1199"
+   inkscape:window-y="38"
+   inkscape:window-maximized="0"
+   inkscape:current-layer="layer2" />
+<g
+   inkscape:groupmode="layer"
+   id="layer1"
+   inkscape:label="Layer 1"
+   transform="translate(0,16)"><switch
+     id="switch1432"
+     transform="matrix(0.87788363,0,0,0.99951381,-302.59456,3.414562)"
+     clip-path="url(#clipPath839)">
+	<foreignObject
+   width="1"
+   height="1"
+   requiredExtensions="http://ns.adobe.com/AdobeIllustrator/10.0/">
+	</foreignObject>
+	<g
+   id="g1430"
+   clip-path="url(#clipPath5151)"
+   transform="matrix(0.9423959,0,0,1,21.974544,2.4418107)">
+					<linearGradient
+   id="lz"
+   x1="-2.8262"
+   x2="-2.1005001"
+   y1="1092.2"
+   y2="1091.5"
+   gradientTransform="matrix(344,0,0,-120,2218.75,132109)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#359D92"
+   offset="0"
+   id="stop2" />
+					<stop
+   stop-color="#5AB5AB"
+   offset="1"
+   id="stop4" />
+				</linearGradient>
+				<polygon
+   points="1320.9,1080 1374.9,1080 1369,1068.5 "
+   id="polygon7"
+   style="fill:url(#lz)" />
+					<linearGradient
+   id="mq"
+   x1="-5.3134999"
+   x2="-4.5893998"
+   y1="1084.9"
+   y2="1084.2"
+   gradientTransform="matrix(216,0,0,-302,2201,328330)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#1F6E1E"
+   offset="0"
+   id="stop9" />
+					<stop
+   stop-color="#34811F"
+   offset="1"
+   id="stop11" />
+				</linearGradient>
+				<polygon
+   points="1058.4,912.09 1215.1,908.47 1193.3,693.48 "
+   id="polygon14"
+   style="fill:url(#mq)" />
+					<linearGradient
+   id="nb"
+   x1="-4.0360999"
+   x2="-3.3111999"
+   y1="1084.8"
+   y2="1084.1"
+   gradientTransform="matrix(275,0,0,-336,2358,365270)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#59AA81"
+   offset="0"
+   id="stop16" />
+					<stop
+   stop-color="#4F994B"
+   offset="1"
+   id="stop18" />
+				</linearGradient>
+				<polygon
+   points="1215.1,908.47 1369,1068.5 1414.7,825.23 "
+   id="polygon21"
+   style="fill:url(#nb)" />
+					<linearGradient
+   id="nm"
+   x1="-11.021"
+   x2="-10.296"
+   y1="1085.2"
+   y2="1084.5"
+   gradientTransform="matrix(88,0,0,-290,1199,315640)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#324E3D"
+   offset="0"
+   id="stop23" />
+					<stop
+   stop-color="#44573B"
+   offset="1"
+   id="stop25" />
+				</linearGradient>
+				<polygon
+   points="240.5,1080 300.02,1080 254.32,898.34 "
+   id="polygon28"
+   style="fill:url(#nm)" />
+					<linearGradient
+   id="ny"
+   x1="-4.4130998"
+   x2="-3.6882999"
+   y1="1085.7"
+   y2="1085"
+   gradientTransform="matrix(237,0,0,-269,1943,292960)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#106332"
+   offset="0"
+   id="stop30" />
+					<stop
+   stop-color="#10663A"
+   offset="1"
+   id="stop32" />
+				</linearGradient>
+				<polygon
+   points="1058.4,912.09 886.38,985.93 906.15,1080 931.97,1080 "
+   id="polygon35"
+   style="fill:url(#ny)" />
+					<linearGradient
+   id="oj"
+   x1="-3.7974"
+   x2="-3.0731001"
+   y1="1084.8"
+   y2="1084.1"
+   gradientTransform="matrix(270,0,0,-334,1945,363230)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#146B3C"
+   offset="0"
+   id="stop37" />
+					<stop
+   stop-color="#107363"
+   offset="1"
+   id="stop39" />
+				</linearGradient>
+				<polygon
+   points="931.97,1080 1092.6,1080 1058.4,912.09 "
+   id="polygon42"
+   style="fill:url(#oj)" />
+					<linearGradient
+   id="gz"
+   x1="-4.9702001"
+   x2="-4.2454"
+   y1="1088.1"
+   y2="1087.4"
+   gradientTransform="matrix(191,0,0,-156,1522,170181)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#457707"
+   offset="0"
+   id="stop44" />
+					<stop
+   stop-color="#447208"
+   offset="1"
+   id="stop46" />
+				</linearGradient>
+				<polygon
+   points="660.7,467.63 547.49,457.49 686.1,570.42 "
+   id="polygon49"
+   style="fill:url(#gz)" />
+					<linearGradient
+   id="hk"
+   x1="-5.085"
+   x2="-4.3603001"
+   y1="1086.4"
+   y2="1085.7"
+   gradientTransform="matrix(191,0,0,-202,1522,219907)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#3F6D07"
+   offset="0"
+   id="stop51" />
+					<stop
+   stop-color="#427008"
+   offset="1"
+   id="stop53" />
+				</linearGradient>
+				<polygon
+   points="547.49,457.49 666.5,603.72 686.1,570.42 "
+   id="polygon56"
+   style="fill:url(#hk)" />
+					<linearGradient
+   id="or"
+   x1="-3.3188"
+   x2="-2.5934999"
+   y1="1088.6"
+   y2="1087.8"
+   gradientTransform="matrix(256,0,0,-142,1201,155013)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#617120"
+   offset="0"
+   id="stop58" />
+					<stop
+   stop-color="#5A701A"
+   offset="1"
+   id="stop60" />
+				</linearGradient>
+				<polygon
+   points="361.72,432.88 363.9,535.67 547.49,457.49 "
+   id="polygon63"
+   style="fill:url(#or)" />
+					<linearGradient
+   id="hz"
+   x1="-7.1532998"
+   x2="-6.4282999"
+   y1="1085.1"
+   y2="1084.4"
+   gradientTransform="matrix(162,0,0,-264,2075,286970)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#468805"
+   offset="0"
+   id="stop65" />
+					<stop
+   stop-color="#387B03"
+   offset="1"
+   id="stop67" />
+				</linearGradient>
+				<polygon
+   points="935,680.45 1045.3,577.66 927.74,489.34 "
+   id="polygon70"
+   style="fill:url(#hz)" />
+					<linearGradient
+   id="ik"
+   x1="-2.77"
+   x2="-2.0450001"
+   y1="1084"
+   y2="1083.3"
+   gradientTransform="matrix(245,0,0,-281,592,304460)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#4D5206"
+   offset="0"
+   id="stop72" />
+					<stop
+   stop-color="#55610B"
+   offset="1"
+   id="stop74" />
+				</linearGradient>
+				<polygon
+   points="74.044,0 28.029,0 69.271,47.777 "
+   id="polygon77"
+   style="fill:url(#ik)" />
+					<linearGradient
+   id="iw"
+   x1="-7.6073999"
+   x2="-6.8825998"
+   y1="1085.7"
+   y2="1085"
+   gradientTransform="matrix(123,0,0,-263,1186,286460)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#535C37"
+   offset="0"
+   id="stop79" />
+					<stop
+   stop-color="#3A5943"
+   offset="1"
+   id="stop81" />
+				</linearGradient>
+				<polygon
+   points="343.58,1039.5 254.32,898.34 300.02,1080 309.54,1080 "
+   id="polygon84"
+   style="fill:url(#iw)" />
+					<linearGradient
+   id="jh"
+   x1="-15.709"
+   x2="-14.985"
+   y1="1099"
+   y2="1098.3"
+   gradientTransform="matrix(64,0,0,-73,1311,81262)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#305547"
+   offset="0"
+   id="stop86" />
+					<stop
+   stop-color="#335948"
+   offset="1"
+   id="stop88" />
+				</linearGradient>
+				<polygon
+   points="309.54,1080 347.47,1080 343.58,1039.5 "
+   id="polygon91"
+   style="fill:url(#jh)" />
+					<linearGradient
+   id="jt"
+   x1="-8.8457003"
+   x2="-8.1210003"
+   y1="1098.6"
+   y2="1097.8"
+   gradientTransform="matrix(112,0,0,-74,1320,82343)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#2E594B"
+   offset="0"
+   id="stop93" />
+					<stop
+   stop-color="#305B49"
+   offset="1"
+   id="stop95" />
+				</linearGradient>
+				<polygon
+   points="347.47,1080 405.03,1080 343.58,1039.5 "
+   id="polygon98"
+   style="fill:url(#jt)" />
+					<linearGradient
+   id="ke"
+   x1="-4.9224"
+   x2="-4.1968999"
+   y1="1083.3"
+   y2="1082.6"
+   gradientTransform="matrix(183,0,0,-519,1249,562943)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#395E43"
+   offset="0"
+   id="stop100" />
+					<stop
+   stop-color="#4B6334"
+   offset="1"
+   id="stop102" />
+				</linearGradient>
+				<polygon
+   points="476.38,717.37 343.58,1039.5 405.03,1080 426.64,1080 "
+   id="polygon105"
+   style="fill:url(#ke)" />
+					<linearGradient
+   id="kq"
+   x1="-4.8720999"
+   x2="-4.1472998"
+   y1="1099.8"
+   y2="1099.1"
+   gradientTransform="matrix(172,0,0,-55,1077,60771)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#73752B"
+   offset="0"
+   id="stop107" />
+					<stop
+   stop-color="#6A7729"
+   offset="1"
+   id="stop109" />
+				</linearGradient>
+				<polygon
+   points="335.59,291.73 210.78,295.34 328.34,331.54 "
+   id="polygon112"
+   style="fill:url(#kq)" />
+					<linearGradient
+   id="lb"
+   x1="-10.295"
+   x2="-9.5703001"
+   y1="1089.9"
+   y2="1089.2"
+   gradientTransform="matrix(125,0,0,-107,2524,116695)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#CFE4D8"
+   offset="0"
+   id="stop114" />
+					<stop
+   stop-color="#C8E1D3"
+   offset="1"
+   id="stop116" />
+				</linearGradient>
+				<polygon
+   points="1317.4,83.247 1226.7,85.418 1268.1,160.7 "
+   id="polygon119"
+   style="fill:url(#lb)" />
+					<linearGradient
+   id="lm"
+   x1="-4.4917002"
+   x2="-3.7671001"
+   y1="1086.4"
+   y2="1085.7"
+   gradientTransform="matrix(265,0,0,-172,2441,186960)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#BDDAC9"
+   offset="0"
+   id="stop121" />
+					<stop
+   stop-color="#B9D9CF"
+   offset="1"
+   id="stop123" />
+				</linearGradient>
+				<polygon
+   points="1460.4,207.76 1317.4,83.247 1268.1,160.7 "
+   id="polygon126"
+   style="fill:url(#lm)" />
+					<linearGradient
+   id="ly"
+   x1="-6.3477001"
+   x2="-5.6226001"
+   y1="1084.4"
+   y2="1083.7"
+   gradientTransform="matrix(197,0,0,-275,2577,298200)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#C9E4E4"
+   offset="0"
+   id="stop128" />
+					<stop
+   stop-color="#BBDBD4"
+   offset="1"
+   id="stop130" />
+				</linearGradient>
+				<polygon
+   points="1407.4,8.687 1317.4,83.247 1460.4,207.76 "
+   id="polygon133"
+   style="fill:url(#ly)" />
+					<linearGradient
+   id="mf"
+   x1="-7.8070998"
+   x2="-7.0822001"
+   y1="1087.3"
+   y2="1086.6"
+   gradientTransform="matrix(185,0,0,-191,3266,208374)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#89B384"
+   offset="0"
+   id="stop135" />
+					<stop
+   stop-color="#8BB687"
+   offset="1"
+   id="stop137" />
+				</linearGradient>
+				<polygon
+   points="1921.9,846.29 1921.9,725.27 1808.7,771.66 "
+   id="polygon140"
+   style="fill:url(#mf)" />
+					<linearGradient
+   id="mg"
+   x1="-5.9619002"
+   x2="-5.2375002"
+   y1="1086.4"
+   y2="1085.7"
+   gradientTransform="matrix(140,0,0,-212,910,230863)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#7B5714"
+   offset="0"
+   id="stop142" />
+					<stop
+   stop-color="#7B5C19"
+   offset="1"
+   id="stop144" />
+				</linearGradient>
+				<polygon
+   points="66.369,581.28 101.93,716.64 167.96,563.18 "
+   id="polygon147"
+   style="fill:url(#mg)" />
+					<linearGradient
+   id="mh"
+   x1="-6.0683999"
+   x2="-5.3441"
+   y1="1086.2"
+   y2="1085.5"
+   gradientTransform="matrix(140,0,0,-205,910,223116)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#7A5915"
+   offset="0"
+   id="stop149" />
+					<stop
+   stop-color="#7B611E"
+   offset="1"
+   id="stop151" />
+				</linearGradient>
+				<polygon
+   points="144.02,432.88 66.369,581.28 167.96,563.18 "
+   id="polygon154"
+   style="fill:url(#mh)" />
+					<linearGradient
+   id="mi"
+   x1="-8.3062"
+   x2="-7.5805998"
+   y1="1088.7"
+   y2="1088"
+   gradientTransform="matrix(136,0,0,-167,1943,182802)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#0F6137"
+   offset="0"
+   id="stop156" />
+					<stop
+   stop-color="#0B6247"
+   offset="1"
+   id="stop158" />
+				</linearGradient>
+				<polygon
+   points="886.38,985.93 813.09,1074.2 830.53,1080 906.15,1080 "
+   id="polygon161"
+   style="fill:url(#mi)" />
+					<linearGradient
+   id="mj"
+   x1="-6.1508999"
+   x2="-5.4264998"
+   y1="1085.3"
+   y2="1084.6"
+   gradientTransform="matrix(140,0,0,-261,959,283830)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#7A5A18"
+   offset="0"
+   id="stop163" />
+					<stop
+   stop-color="#7A6020"
+   offset="1"
+   id="stop165" />
+				</linearGradient>
+				<polygon
+   points="167.96,563.18 101.93,716.64 203.52,752.11 "
+   id="polygon168"
+   style="fill:url(#mj)" />
+					<linearGradient
+   id="mk"
+   x1="-3.6621001"
+   x2="-2.9374001"
+   y1="1085.8"
+   y2="1085.1"
+   gradientTransform="matrix(210,0,0,-251,889,273234)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#765A1B"
+   offset="0"
+   id="stop170" />
+					<stop
+   stop-color="#6F5E27"
+   offset="1"
+   id="stop172" />
+				</linearGradient>
+				<polygon
+   points="101.93,716.64 254.32,898.34 203.52,752.11 "
+   id="polygon175"
+   style="fill:url(#mk)" />
+					<linearGradient
+   id="ml"
+   x1="-2.7523999"
+   x2="-2.0281999"
+   y1="1084.8"
+   y2="1084"
+   gradientTransform="matrix(270,0,0,-299,920,324870)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#7B6523"
+   offset="0"
+   id="stop177" />
+					<stop
+   stop-color="#746724"
+   offset="1"
+   id="stop179" />
+				</linearGradient>
+				<polygon
+   points="203.52,752.11 363.9,535.67 167.96,563.18 "
+   id="polygon182"
+   style="fill:url(#ml)" />
+					<linearGradient
+   id="mm"
+   x1="-1.8271"
+   x2="-1.1027"
+   y1="1084.7"
+   y2="1083.9"
+   gradientTransform="matrix(376,0,0,-299,862.75,324870)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#6E6D26"
+   offset="0"
+   id="stop184" />
+					<stop
+   stop-color="#6C6723"
+   offset="1"
+   id="stop186" />
+				</linearGradient>
+				<polygon
+   points="203.52,752.11 476.38,717.37 363.9,535.67 "
+   id="polygon189"
+   style="fill:url(#mm)" />
+					<linearGradient
+   id="mn"
+   x1="-4.4028001"
+   x2="-3.6782999"
+   y1="1085.6"
+   y2="1084.9"
+   gradientTransform="matrix(265,0,0,-212,2441,230307)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#B3D5BC"
+   offset="0"
+   id="stop191" />
+					<stop
+   stop-color="#A0CAAB"
+   offset="1"
+   id="stop193" />
+				</linearGradient>
+				<polygon
+   points="1460.4,207.76 1268.1,160.7 1352.3,314.16 "
+   id="polygon196"
+   style="fill:url(#mn)" />
+					<linearGradient
+   id="mo"
+   x1="-4.1079001"
+   x2="-3.3829999"
+   y1="1093.4"
+   y2="1092.7"
+   gradientTransform="matrix(228,0,0,-73,1517,79783)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#A4C56D"
+   offset="0"
+   id="stop198" />
+					<stop
+   stop-color="#BAD48D"
+   offset="1"
+   id="stop200" />
+				</linearGradient>
+				<polygon
+   points="719.17,0 656.11,0 736.17,21.717 "
+   id="polygon203"
+   style="fill:url(#mo)" />
+					<linearGradient
+   id="mr"
+   x1="-13.416"
+   x2="-12.691"
+   y1="1089.5"
+   y2="1088.8"
+   gradientTransform="matrix(85,0,0,-104,1831,113263)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#C0D99A"
+   offset="0"
+   id="stop205" />
+					<stop
+   stop-color="#C5DCA2"
+   offset="1"
+   id="stop207" />
+				</linearGradient>
+				<polygon
+   points="742.03,0 719.17,0 736.17,21.717 "
+   id="polygon210"
+   style="fill:url(#mr)" />
+					<linearGradient
+   id="ms"
+   x1="-3.1187"
+   x2="-2.3929"
+   y1="1089.4"
+   y2="1088.7"
+   gradientTransform="matrix(316,0,0,-104,1656.75,113263)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#D2E4B9"
+   offset="0"
+   id="stop212" />
+					<stop
+   stop-color="#D1E4B8"
+   offset="1"
+   id="stop214" />
+				</linearGradient>
+				<polygon
+   points="868.46,0 742.03,0 736.17,21.717 "
+   id="polygon217"
+   style="fill:url(#ms)" />
+					<linearGradient
+   id="mt"
+   x1="-5.4077001"
+   x2="-4.6830001"
+   y1="1084.9"
+   y2="1084.2"
+   gradientTransform="matrix(184,0,0,-257,1529,279110)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#4C7A0D"
+   offset="0"
+   id="stop219" />
+					<stop
+   stop-color="#578C10"
+   offset="1"
+   id="stop221" />
+				</linearGradient>
+				<polygon
+   points="626.59,271.46 547.49,457.49 681.02,371.35 "
+   id="polygon224"
+   style="fill:url(#mt)" />
+					<linearGradient
+   id="mu"
+   x1="-5.3164001"
+   x2="-4.5910001"
+   y1="1088.9"
+   y2="1088.2"
+   gradientTransform="matrix(184,0,0,-133,1529,145199)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#49770B"
+   offset="0"
+   id="stop226" />
+					<stop
+   stop-color="#4B8009"
+   offset="1"
+   id="stop228" />
+				</linearGradient>
+				<polygon
+   points="681.02,371.35 547.49,457.49 660.7,467.63 "
+   id="polygon231"
+   style="fill:url(#mu)" />
+					<linearGradient
+   id="mv"
+   x1="-3.9849"
+   x2="-3.2597001"
+   y1="1088.4"
+   y2="1087.6"
+   gradientTransform="matrix(240,0,0,-138,1582,150466)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#629715"
+   offset="0"
+   id="stop233" />
+					<stop
+   stop-color="#659B13"
+   offset="1"
+   id="stop235" />
+				</linearGradient>
+				<polygon
+   points="800.75,305.48 626.59,271.46 681.02,371.35 "
+   id="polygon238"
+   style="fill:url(#mv)" />
+					<linearGradient
+   id="mw"
+   x1="-6.5693002"
+   x2="-5.8445001"
+   y1="1088.8"
+   y2="1088.1"
+   gradientTransform="matrix(162,0,0,-133,1707,145199)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#497F06"
+   offset="0"
+   id="stop240" />
+					<stop
+   stop-color="#518B08"
+   offset="1"
+   id="stop242" />
+				</linearGradient>
+				<polygon
+   points="681.02,371.35 660.7,467.63 778.26,429.99 "
+   id="polygon245"
+   style="fill:url(#mw)" />
+					<linearGradient
+   id="mx"
+   x1="-4.4678001"
+   x2="-3.7435"
+   y1="1086.4"
+   y2="1085.7"
+   gradientTransform="matrix(174,0,0,-210,751,228726)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#79530F"
+   offset="0"
+   id="stop247" />
+					<stop
+   stop-color="#78510D"
+   offset="1"
+   id="stop249" />
+				</linearGradient>
+				<polygon
+   points="101.93,716.64 66.369,581.28 -0.03,692.55 -0.03,730.09 "
+   id="polygon252"
+   style="fill:url(#mx)" />
+					<linearGradient
+   id="my"
+   x1="-5.6152"
+   x2="-4.8905001"
+   y1="1083.8"
+   y2="1083.1"
+   gradientTransform="matrix(208,0,0,-318,2233,344700)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#D7E9D8"
+   offset="0"
+   id="stop254" />
+					<stop
+   stop-color="#C4DDB1"
+   offset="1"
+   id="stop256" />
+				</linearGradient>
+				<polygon
+   points="1226.7,85.418 1165,17.374 1075.8,247.57 "
+   id="polygon259"
+   style="fill:url(#my)" />
+					<linearGradient
+   id="mz"
+   x1="-4.1894999"
+   x2="-3.4649"
+   y1="1085.2"
+   y2="1084.5"
+   gradientTransform="matrix(265,0,0,-224,2176,243175)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#CAE1C9"
+   offset="0"
+   id="stop261" />
+					<stop
+   stop-color="#BAD7A5"
+   offset="1"
+   id="stop263" />
+				</linearGradient>
+				<polygon
+   points="1268.1,160.7 1226.7,85.418 1075.8,247.57 "
+   id="polygon266"
+   style="fill:url(#mz)" />
+					<linearGradient
+   id="na"
+   x1="-3.0541999"
+   x2="-2.3294001"
+   y1="1083.1"
+   y2="1082.4"
+   gradientTransform="matrix(248,0,0,-412,753,446351)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#6C6219"
+   offset="0"
+   id="stop268" />
+					<stop
+   stop-color="#77661F"
+   offset="1"
+   id="stop270" />
+				</linearGradient>
+				<polygon
+   points="69.271,47.777 30.811,346.02 210.78,295.34 "
+   id="polygon273"
+   style="fill:url(#na)" />
+					<linearGradient
+   id="nc"
+   x1="-2.7974"
+   x2="-2.0725999"
+   y1="1086.5"
+   y2="1085.8"
+   gradientTransform="matrix(248,0,0,-190,753,206711)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#7B6620"
+   offset="0"
+   id="stop275" />
+					<stop
+   stop-color="#78661F"
+   offset="1"
+   id="stop277" />
+				</linearGradient>
+				<polygon
+   points="30.811,346.02 144.02,432.88 210.78,295.34 "
+   id="polygon280"
+   style="fill:url(#nc)" />
+					<linearGradient
+   id="nd"
+   x1="-3.2944"
+   x2="-2.5692999"
+   y1="1083.8"
+   y2="1083.1"
+   gradientTransform="matrix(217,0,0,-304,620,329350)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#514D07"
+   offset="0"
+   id="stop282" />
+					<stop
+   stop-color="#5F530D"
+   offset="1"
+   id="stop284" />
+				</linearGradient>
+				<polygon
+   points="69.271,47.777 28.029,0 -0.03,0 -0.03,64.977 "
+   id="polygon287"
+   style="fill:url(#nd)" />
+					<linearGradient
+   id="ne"
+   x1="-3.3022001"
+   x2="-2.5778999"
+   y1="1083.4"
+   y2="1082.7"
+   gradientTransform="matrix(209,0,0,-412,636,446351)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#745913"
+   offset="0"
+   id="stop289" />
+					<stop
+   stop-color="#675610"
+   offset="1"
+   id="stop291" />
+				</linearGradient>
+				<polygon
+   points="30.811,346.02 69.271,47.777 -0.03,64.977 -0.03,275.02 "
+   id="polygon294"
+   style="fill:url(#ne)" />
+					<linearGradient
+   id="nf"
+   x1="-2.1914001"
+   x2="-1.4668"
+   y1="1087.2"
+   y2="1086.5"
+   gradientTransform="matrix(294,0,0,-168,569,182999)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#785813"
+   offset="0"
+   id="stop296" />
+					<stop
+   stop-color="#765613"
+   offset="1"
+   id="stop298" />
+				</linearGradient>
+				<polygon
+   points="144.02,432.88 30.811,346.02 -0.03,383.47 -0.03,456.34 "
+   id="polygon301"
+   style="fill:url(#nf)" />
+					<linearGradient
+   id="ng"
+   x1="-2.0557001"
+   x2="-1.3314"
+   y1="1086.4"
+   y2="1085.7"
+   gradientTransform="matrix(294,0,0,-205,569,223116)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#795511"
+   offset="0"
+   id="stop303" />
+					<stop
+   stop-color="#775513"
+   offset="1"
+   id="stop305" />
+				</linearGradient>
+				<polygon
+   points="66.369,581.28 144.02,432.88 -0.03,456.34 -0.03,525.67 "
+   id="polygon308"
+   style="fill:url(#ng)" />
+					<linearGradient
+   id="nh"
+   x1="-4.9238"
+   x2="-4.1987"
+   y1="1087"
+   y2="1086.2"
+   gradientTransform="matrix(172,0,0,-180,985,196091)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#7B6621"
+   offset="0"
+   id="stop310" />
+					<stop
+   stop-color="#796723"
+   offset="1"
+   id="stop312" />
+				</linearGradient>
+				<polygon
+   points="268.83,483.55 144.02,432.88 167.96,563.18 "
+   id="polygon315"
+   style="fill:url(#nh)" />
+					<linearGradient
+   id="ni"
+   x1="-4.9247999"
+   x2="-4.2002001"
+   y1="1084.9"
+   y2="1084.2"
+   gradientTransform="matrix(172,0,0,-260,985,282380)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#7A6923"
+   offset="0"
+   id="stop317" />
+					<stop
+   stop-color="#776F28"
+   offset="1"
+   id="stop319" />
+				</linearGradient>
+				<polygon
+   points="210.78,295.34 144.02,432.88 268.83,483.55 "
+   id="polygon322"
+   style="fill:url(#ni)" />
+					<linearGradient
+   id="nj"
+   x1="-2.8721001"
+   x2="-2.1473999"
+   y1="1090.9"
+   y2="1090.2"
+   gradientTransform="matrix(270,0,0,-110,920,120491)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#796723"
+   offset="0"
+   id="stop324" />
+					<stop
+   stop-color="#726D26"
+   offset="1"
+   id="stop326" />
+				</linearGradient>
+				<polygon
+   points="167.96,563.18 363.9,535.67 268.83,483.55 "
+   id="polygon329"
+   style="fill:url(#nj)" />
+					<linearGradient
+   id="nk"
+   x1="-7.0054002"
+   x2="-6.2803998"
+   y1="1088.7"
+   y2="1088"
+   gradientTransform="matrix(131,0,0,-142,1198,155013)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#697125"
+   offset="0"
+   id="stop331" />
+					<stop
+   stop-color="#6F6E26"
+   offset="1"
+   id="stop333" />
+				</linearGradient>
+				<polygon
+   points="268.83,483.55 363.9,535.67 361.72,432.88 "
+   id="polygon336"
+   style="fill:url(#nk)" />
+					<linearGradient
+   id="nl"
+   x1="-5.2075"
+   x2="-4.4826999"
+   y1="1088.6"
+   y2="1087.9"
+   gradientTransform="matrix(198,0,0,-142,1671,155061)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#437805"
+   offset="0"
+   id="stop338" />
+					<stop
+   stop-color="#3F7604"
+   offset="1"
+   id="stop340" />
+				</linearGradient>
+				<polygon
+   points="686.1,570.42 804.38,545.81 660.7,467.63 "
+   id="polygon343"
+   style="fill:url(#nl)" />
+					<linearGradient
+   id="nn"
+   x1="-5.0137"
+   x2="-4.2887001"
+   y1="1087.8"
+   y2="1087.1"
+   gradientTransform="matrix(198,0,0,-160,1671,174467)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#457E05"
+   offset="0"
+   id="stop345" />
+					<stop
+   stop-color="#488404"
+   offset="1"
+   id="stop347" />
+				</linearGradient>
+				<polygon
+   points="660.7,467.63 804.38,545.81 778.26,429.99 "
+   id="polygon350"
+   style="fill:url(#nn)" />
+					<linearGradient
+   id="no"
+   x1="-5.1416001"
+   x2="-4.4165001"
+   y1="1087.7"
+   y2="1086.9"
+   gradientTransform="matrix(206,0,0,-160,1825,174467)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#4F8C06"
+   offset="0"
+   id="stop352" />
+					<stop
+   stop-color="#498704"
+   offset="1"
+   id="stop354" />
+				</linearGradient>
+				<polygon
+   points="804.38,545.81 927.74,489.34 778.26,429.99 "
+   id="polygon357"
+   style="fill:url(#no)" />
+					<linearGradient
+   id="np"
+   x1="-3.8671999"
+   x2="-3.1414001"
+   y1="1084.3"
+   y2="1083.6"
+   gradientTransform="matrix(300,0,0,-382,2545,415070)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#6DBAA6"
+   offset="0"
+   id="stop359" />
+					<stop
+   stop-color="#7ABEA7"
+   offset="1"
+   id="stop361" />
+				</linearGradient>
+				<polygon
+   points="1586.7,878.8 1369,1068.5 1374.9,1080 1461,1080 "
+   id="polygon364"
+   style="fill:url(#np)" />
+					<linearGradient
+   id="nr"
+   x1="-3.9590001"
+   x2="-3.2337999"
+   y1="1084.6"
+   y2="1083.9"
+   gradientTransform="matrix(300,0,0,-336,2545,365270)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#6CB591"
+   offset="0"
+   id="stop366" />
+					<stop
+   stop-color="#7CB373"
+   offset="1"
+   id="stop368" />
+				</linearGradient>
+				<polygon
+   points="1369,1068.5 1586.7,878.8 1414.7,825.23 "
+   id="polygon371"
+   style="fill:url(#nr)" />
+					<linearGradient
+   id="ns"
+   x1="-4.0444002"
+   x2="-3.3192"
+   y1="1087"
+   y2="1086.3"
+   gradientTransform="matrix(306,0,0,-202,2839,220341)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#91BC93"
+   offset="0"
+   id="stop373" />
+					<stop
+   stop-color="#93BC9A"
+   offset="1"
+   id="stop375" />
+				</linearGradient>
+				<polygon
+   points="1586.7,878.8 1782.6,917.88 1808.7,771.66 "
+   id="polygon378"
+   style="fill:url(#ns)" />
+					<linearGradient
+   id="nt"
+   x1="-6.8813"
+   x2="-6.1566"
+   y1="1086.9"
+   y2="1086.1"
+   gradientTransform="matrix(210,0,0,-202,3205,220341)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#8EB78F"
+   offset="0"
+   id="stop380" />
+					<stop
+   stop-color="#97C0A3"
+   offset="1"
+   id="stop382" />
+				</linearGradient>
+				<polygon
+   points="1808.7,771.66 1782.6,917.88 1921.9,860.3 1921.9,846.29 "
+   id="polygon385"
+   style="fill:url(#nt)" />
+					<linearGradient
+   id="nu"
+   x1="-4.3027"
+   x2="-3.5778999"
+   y1="1084.4"
+   y2="1083.7"
+   gradientTransform="matrix(304,0,0,-367,3111,398820)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#9DC7AF"
+   offset="0"
+   id="stop387" />
+					<stop
+   stop-color="#9ECFC3"
+   offset="1"
+   id="stop389" />
+				</linearGradient>
+				<polygon
+   points="1921.9,1045.9 1921.9,860.3 1782.6,917.88 "
+   id="polygon392"
+   style="fill:url(#nu)" />
+					<linearGradient
+   id="nv"
+   x1="-4.1802001"
+   x2="-3.4552"
+   y1="1086"
+   y2="1085.3"
+   gradientTransform="matrix(323,0,0,-208,3156.75,226269)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#7AB184"
+   offset="0"
+   id="stop394" />
+					<stop
+   stop-color="#7FB484"
+   offset="1"
+   id="stop396" />
+				</linearGradient>
+				<polygon
+   points="1921.9,492.06 1921.9,412.54 1829.8,441.57 "
+   id="polygon399"
+   style="fill:url(#nv)" />
+					<linearGradient
+   id="nw"
+   x1="-2.5625"
+   x2="-1.8380001"
+   y1="1087.5"
+   y2="1086.8"
+   gradientTransform="matrix(236,0,0,-168,529,182999)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#704909"
+   offset="0"
+   id="stop401" />
+					<stop
+   stop-color="#704D0C"
+   offset="1"
+   id="stop403" />
+				</linearGradient>
+				<polygon
+   points="-0.03,347.06 -0.03,383.47 30.811,346.02 "
+   id="polygon406"
+   style="fill:url(#nw)" />
+					<linearGradient
+   id="nx"
+   x1="-6.2494998"
+   x2="-5.5247002"
+   y1="1085.4"
+   y2="1084.7"
+   gradientTransform="matrix(164,0,0,-239,1549,259904)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#476F0C"
+   offset="0"
+   id="stop408" />
+					<stop
+   stop-color="#456A0B"
+   offset="1"
+   id="stop410" />
+				</linearGradient>
+				<polygon
+   points="554.02,630.5 666.5,603.72 547.49,457.49 "
+   id="polygon413"
+   style="fill:url(#nx)" />
+					<linearGradient
+   id="nz"
+   x1="-3.1709001"
+   x2="-2.4463"
+   y1="1085.5"
+   y2="1084.7"
+   gradientTransform="matrix(262,0,0,-251,1198,272984)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#636C1F"
+   offset="0"
+   id="stop415" />
+					<stop
+   stop-color="#566918"
+   offset="1"
+   id="stop417" />
+				</linearGradient>
+				<polygon
+   points="363.9,535.67 476.38,717.37 554.02,630.5 "
+   id="polygon420"
+   style="fill:url(#nz)" />
+					<linearGradient
+   id="oa"
+   x1="-3.0908"
+   x2="-2.3657999"
+   y1="1085.6"
+   y2="1084.9"
+   gradientTransform="matrix(262,0,0,-239,1198,259904)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#5F6D1C"
+   offset="0"
+   id="stop422" />
+					<stop
+   stop-color="#4E6D11"
+   offset="1"
+   id="stop424" />
+				</linearGradient>
+				<polygon
+   points="363.9,535.67 554.02,630.5 547.49,457.49 "
+   id="polygon427"
+   style="fill:url(#oa)" />
+					<linearGradient
+   id="ob"
+   x1="-1.5522"
+   x2="-0.82709998"
+   y1="1085.4"
+   y2="1084.6"
+   gradientTransform="matrix(363,0,0,-306,560.75,333150)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#0E291E"
+   offset="0"
+   id="stop429" />
+					<stop
+   stop-color="#253823"
+   offset="1"
+   id="stop431" />
+				</linearGradient>
+				<polygon
+   points="-0.03,1080 111.38,1080 -0.03,1055.2 "
+   id="polygon434"
+   style="fill:url(#ob)" />
+					<linearGradient
+   id="oc"
+   x1="-2.8501"
+   x2="-2.1255"
+   y1="1088.2"
+   y2="1087.5"
+   gradientTransform="matrix(236,0,0,-140,529,152599)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#6B4608"
+   offset="0"
+   id="stop436" />
+					<stop
+   stop-color="#6F4E0C"
+   offset="1"
+   id="stop438" />
+				</linearGradient>
+				<polygon
+   points="-0.03,328.59 -0.03,347.06 30.811,346.02 "
+   id="polygon441"
+   style="fill:url(#oc)" />
+					<linearGradient
+   id="od"
+   x1="-2.8931"
+   x2="-2.1684999"
+   y1="1083.6"
+   y2="1082.9"
+   gradientTransform="matrix(233,0,0,-360,535,390190)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#694E0B"
+   offset="0"
+   id="stop443" />
+					<stop
+   stop-color="#6F500D"
+   offset="1"
+   id="stop445" />
+				</linearGradient>
+				<polygon
+   points="-0.03,275.02 -0.03,328.59 30.811,346.02 "
+   id="polygon448"
+   style="fill:url(#od)" />
+					<linearGradient
+   id="oe"
+   x1="-4.0391002"
+   x2="-3.3143001"
+   y1="1084.2"
+   y2="1083.4"
+   gradientTransform="matrix(265,0,0,-320,2176,347060)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#A9CE79"
+   offset="0"
+   id="stop450" />
+					<stop
+   stop-color="#A4CB82"
+   offset="1"
+   id="stop452" />
+				</linearGradient>
+				<polygon
+   points="1268.1,160.7 1075.8,247.57 1197.7,392.34 "
+   id="polygon455"
+   style="fill:url(#oe)" />
+					<linearGradient
+   id="of"
+   x1="-5.7241001"
+   x2="-4.9994001"
+   y1="1083.9"
+   y2="1083.2"
+   gradientTransform="matrix(213,0,0,-320,2396,347060)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#AFD2A7"
+   offset="0"
+   id="stop457" />
+					<stop
+   stop-color="#93C173"
+   offset="1"
+   id="stop459" />
+				</linearGradient>
+				<polygon
+   points="1352.3,314.16 1268.1,160.7 1197.7,392.34 "
+   id="polygon462"
+   style="fill:url(#of)" />
+					<linearGradient
+   id="og"
+   x1="-4.7631998"
+   x2="-4.0387001"
+   y1="1093.1"
+   y2="1092.4"
+   gradientTransform="matrix(270,0,0,-103,2875,113470)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#94C09C"
+   offset="0"
+   id="stop464" />
+					<stop
+   stop-color="#9CC8B1"
+   offset="1"
+   id="stop466" />
+				</linearGradient>
+				<polygon
+   points="1697.7,953.35 1782.6,917.88 1586.7,878.8 "
+   id="polygon469"
+   style="fill:url(#og)" />
+					<linearGradient
+   id="oh"
+   x1="-4.2456002"
+   x2="-3.5199001"
+   y1="1086.3"
+   y2="1085.5"
+   gradientTransform="matrix(211,0,0,-166,1204,180279)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#608923"
+   offset="0"
+   id="stop471" />
+					<stop
+   stop-color="#6B992B"
+   offset="1"
+   id="stop473" />
+				</linearGradient>
+				<polygon
+   points="465.61,0 362.82,0 331.24,62.254 "
+   id="polygon476"
+   style="fill:url(#oh)" />
+					<linearGradient
+   id="oi"
+   x1="-2.7860999"
+   x2="-2.0611999"
+   y1="1084.7"
+   y2="1084"
+   gradientTransform="matrix(316,0,0,-252,1656.75,273303)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#C8DDA2"
+   offset="0"
+   id="stop478" />
+					<stop
+   stop-color="#D1E4B1"
+   offset="1"
+   id="stop480" />
+				</linearGradient>
+				<polygon
+   points="736.17,21.717 964.03,166.49 965.35,0 868.46,0 "
+   id="polygon483"
+   style="fill:url(#oi)" />
+					<linearGradient
+   id="ok"
+   x1="-3.8090999"
+   x2="-3.0836"
+   y1="1084.6"
+   y2="1083.8"
+   gradientTransform="matrix(277,0,0,-252,2010,273303)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#DEEDD5"
+   offset="0"
+   id="stop485" />
+					<stop
+   stop-color="#D3E6BF"
+   offset="1"
+   id="stop487" />
+				</linearGradient>
+				<polygon
+   points="964.03,166.49 1165,17.374 1060.9,0 965.35,0 "
+   id="polygon490"
+   style="fill:url(#ok)" />
+					<linearGradient
+   id="ol"
+   x1="-3.7124"
+   x2="-2.9872999"
+   y1="1084"
+   y2="1083.2"
+   gradientTransform="matrix(277,0,0,-318,2010,344700)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#BAD890"
+   offset="0"
+   id="stop492" />
+					<stop
+   stop-color="#CDE2B4"
+   offset="1"
+   id="stop494" />
+				</linearGradient>
+				<polygon
+   points="1165,17.374 964.03,166.49 1075.8,247.57 "
+   id="polygon497"
+   style="fill:url(#ol)" />
+					<linearGradient
+   id="om"
+   x1="-4.1781998"
+   x2="-3.4535"
+   y1="1083.8"
+   y2="1083"
+   gradientTransform="matrix(290,0,0,-356,2487,386180)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#7CB240"
+   offset="0"
+   id="stop499" />
+					<stop
+   stop-color="#89B969"
+   offset="1"
+   id="stop501" />
+				</linearGradient>
+				<polygon
+   points="1319.6,571.87 1530.1,554.49 1352.3,314.16 "
+   id="polygon504"
+   style="fill:url(#om)" />
+					<linearGradient
+   id="on"
+   x1="-4.0776"
+   x2="-3.3527"
+   y1="1084.2"
+   y2="1083.5"
+   gradientTransform="matrix(319,0,0,-393,2976.8,427060)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#86D0D6"
+   offset="0"
+   id="stop506" />
+					<stop
+   stop-color="#94D1CD"
+   offset="1"
+   id="stop508" />
+				</linearGradient>
+				<polygon
+   points="1697,1080 1820.4,1080 1697.7,953.35 "
+   id="polygon511"
+   style="fill:url(#on)" />
+					<linearGradient
+   id="oo"
+   x1="-4.0039001"
+   x2="-3.2788999"
+   y1="1084.4"
+   y2="1083.7"
+   gradientTransform="matrix(317,0,0,-377,2980.8,409720)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#A2D0C3"
+   offset="0"
+   id="stop513" />
+					<stop
+   stop-color="#98CFC8"
+   offset="1"
+   id="stop515" />
+				</linearGradient>
+				<polygon
+   points="1782.6,917.88 1697.7,953.35 1820.4,1080 1868.8,1080 "
+   id="polygon518"
+   style="fill:url(#oo)" />
+					<linearGradient
+   id="op"
+   x1="-4.3779001"
+   x2="-3.6531"
+   y1="1084.3"
+   y2="1083.6"
+   gradientTransform="matrix(304,0,0,-377,3111,409720)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#A0CEC4"
+   offset="0"
+   id="stop520" />
+					<stop
+   stop-color="#96D5D7"
+   offset="1"
+   id="stop522" />
+				</linearGradient>
+				<polygon
+   points="1921.9,1045.9 1782.6,917.88 1868.8,1080 1921.9,1080 "
+   id="polygon525"
+   style="fill:url(#op)" />
+					<linearGradient
+   id="oq"
+   x1="-4.1694002"
+   x2="-3.4447"
+   y1="1085"
+   y2="1084.3"
+   gradientTransform="matrix(306,0,0,-286,2839,311010)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#8AB785"
+   offset="0"
+   id="stop527" />
+					<stop
+   stop-color="#85B079"
+   offset="1"
+   id="stop529" />
+				</linearGradient>
+				<polygon
+   points="1713.7,671.76 1586.7,878.8 1808.7,771.66 "
+   id="polygon532"
+   style="fill:url(#oq)" />
+					<linearGradient
+   id="gw"
+   x1="-8.4531002"
+   x2="-7.7284002"
+   y1="1084"
+   y2="1083.3"
+   gradientTransform="matrix(119,0,0,-318,1507,344640)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#7BA639"
+   offset="0"
+   id="stop534" />
+					<stop
+   stop-color="#7DA83C"
+   offset="1"
+   id="stop536" />
+				</linearGradient>
+				<polygon
+   points="569.76,0 487.46,0 561.28,207.03 "
+   id="polygon539"
+   style="fill:url(#gw)" />
+					<linearGradient
+   id="gx"
+   x1="-9.7397003"
+   x2="-9.0145998"
+   y1="1083.8"
+   y2="1083.1"
+   gradientTransform="matrix(109,0,0,-346,1604,375230)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#4E7C0F"
+   offset="0"
+   id="stop541" />
+					<stop
+   stop-color="#5D9018"
+   offset="1"
+   id="stop543" />
+				</linearGradient>
+				<polygon
+   points="626.59,271.46 561.28,207.03 547.49,457.49 "
+   id="polygon546"
+   style="fill:url(#gx)" />
+					<linearGradient
+   id="gy"
+   x1="-3.8931"
+   x2="-3.1675"
+   y1="1083.8"
+   y2="1083.1"
+   gradientTransform="matrix(241,0,0,-318,1491,344640)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#95BB54"
+   offset="0"
+   id="stop548" />
+					<stop
+   stop-color="#92B756"
+   offset="1"
+   id="stop550" />
+				</linearGradient>
+				<polygon
+   points="561.28,207.03 736.17,21.717 656.11,0 569.76,0 "
+   id="polygon553"
+   style="fill:url(#gy)" />
+					<linearGradient
+   id="ha"
+   x1="-2.3622999"
+   x2="-1.6373"
+   y1="1084.1"
+   y2="1083.4"
+   gradientTransform="matrix(317,0,0,-298,1097.8,323040)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#628B25"
+   offset="0"
+   id="stop555" />
+					<stop
+   stop-color="#6C9A2B"
+   offset="1"
+   id="stop557" />
+				</linearGradient>
+				<polygon
+   points="331.24,62.254 561.28,207.03 487.46,0 465.61,0 "
+   id="polygon560"
+   style="fill:url(#ha)" />
+					<linearGradient
+   id="hb"
+   x1="-7.7997999"
+   x2="-7.0749002"
+   y1="1084.7"
+   y2="1084"
+   gradientTransform="matrix(155,0,0,-334,2262,363230)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#187242"
+   offset="0"
+   id="stop562" />
+					<stop
+   stop-color="#1B8575"
+   offset="1"
+   id="stop564" />
+				</linearGradient>
+				<polygon
+   points="1092.6,1080 1159.1,1080 1058.4,912.09 "
+   id="polygon567"
+   style="fill:url(#hb)" />
+					<linearGradient
+   id="hc"
+   x1="-5.1547999"
+   x2="-4.4301"
+   y1="1085.9"
+   y2="1085.2"
+   gradientTransform="matrix(216,0,0,-264,2201,287550)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#1C7134"
+   offset="0"
+   id="stop569" />
+					<stop
+   stop-color="#268453"
+   offset="1"
+   id="stop571" />
+				</linearGradient>
+				<polygon
+   points="1215.1,908.47 1058.4,912.09 1159.1,1080 1175.4,1080 "
+   id="polygon574"
+   style="fill:url(#hc)" />
+					<linearGradient
+   id="hd"
+   x1="-3.7075"
+   x2="-2.9775"
+   y1="1100.7"
+   y2="1099.9"
+   gradientTransform="matrix(282,0,0,-68,2281,75897)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#299487"
+   offset="0"
+   id="stop576" />
+					<stop
+   stop-color="#3C9F8F"
+   offset="1"
+   id="stop578" />
+				</linearGradient>
+				<polygon
+   points="1295.5,1080 1320.9,1080 1369,1068.5 "
+   id="polygon581"
+   style="fill:url(#hd)" />
+					<linearGradient
+   id="he"
+   x1="-4.2494998"
+   x2="-3.5248001"
+   y1="1085.7"
+   y2="1084.9"
+   gradientTransform="matrix(273,0,0,-264,2299,287550)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#348E55"
+   offset="0"
+   id="stop583" />
+					<stop
+   stop-color="#3E9E87"
+   offset="1"
+   id="stop585" />
+				</linearGradient>
+				<polygon
+   points="1369,1068.5 1215.1,908.47 1175.4,1080 1295.5,1080 "
+   id="polygon588"
+   style="fill:url(#he)" />
+					<linearGradient
+   id="hf"
+   x1="-4.9551001"
+   x2="-4.2294002"
+   y1="1083.8"
+   y2="1083.1"
+   gradientTransform="matrix(246,0,0,-464,2661,503711)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#76C5C0"
+   offset="0"
+   id="stop590" />
+					<stop
+   stop-color="#83C5B5"
+   offset="1"
+   id="stop592" />
+				</linearGradient>
+				<polygon
+   points="1461,1080 1590.1,1080 1586.7,878.8 "
+   id="polygon595"
+   style="fill:url(#hf)" />
+					<linearGradient
+   id="hg"
+   x1="-9.1464996"
+   x2="-8.4210997"
+   y1="1083.7"
+   y2="1083"
+   gradientTransform="matrix(153,0,0,-464,2992,503711)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#95C5A8"
+   offset="0"
+   id="stop597" />
+					<stop
+   stop-color="#8FCCC3"
+   offset="1"
+   id="stop599" />
+				</linearGradient>
+				<polygon
+   points="1697.7,953.35 1586.7,878.8 1590.1,1080 1646.7,1080 "
+   id="polygon602"
+   style="fill:url(#hg)" />
+					<linearGradient
+   id="hh"
+   x1="-9.5674"
+   x2="-8.8417997"
+   y1="1084.4"
+   y2="1083.7"
+   gradientTransform="matrix(145,0,0,-393,3007.9,427060)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#83CED4"
+   offset="0"
+   id="stop604" />
+					<stop
+   stop-color="#8CCDC9"
+   offset="1"
+   id="stop606" />
+				</linearGradient>
+				<polygon
+   points="1646.7,1080 1697,1080 1697.7,953.35 "
+   id="polygon609"
+   style="fill:url(#hh)" />
+					<linearGradient
+   id="hi"
+   x1="-6.9116001"
+   x2="-6.1869001"
+   y1="1094.2"
+   y2="1093.4"
+   gradientTransform="matrix(151,0,0,-81,1746,88987)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#568F0B"
+   offset="0"
+   id="stop611" />
+					<stop
+   stop-color="#59940A"
+   offset="1"
+   id="stop613" />
+				</linearGradient>
+				<polygon
+   points="790.59,377.87 681.02,371.35 778.26,429.99 "
+   id="polygon616"
+   style="fill:url(#hi)" />
+					<linearGradient
+   id="hj"
+   x1="-6.3540001"
+   x2="-5.6285"
+   y1="1091.3"
+   y2="1090.6"
+   gradientTransform="matrix(165,0,0,-100,1732,109435)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#5C940E"
+   offset="0"
+   id="stop618" />
+					<stop
+   stop-color="#6AA113"
+   offset="1"
+   id="stop620" />
+				</linearGradient>
+				<polygon
+   points="790.59,377.87 800.75,305.48 681.02,371.35 "
+   id="polygon623"
+   style="fill:url(#hj)" />
+					<linearGradient
+   id="hl"
+   x1="-5.1514001"
+   x2="-4.4267001"
+   y1="1087.8"
+   y2="1087.1"
+   gradientTransform="matrix(206,0,0,-154,1825,167909)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#559207"
+   offset="0"
+   id="stop625" />
+					<stop
+   stop-color="#599509"
+   offset="1"
+   id="stop627" />
+				</linearGradient>
+				<polygon
+   points="778.26,429.99 927.74,489.34 790.59,377.87 "
+   id="polygon630"
+   style="fill:url(#hl)" />
+					<linearGradient
+   id="hm"
+   x1="-2.3989"
+   x2="-1.6742001"
+   y1="1086"
+   y2="1085.3"
+   gradientTransform="matrix(266,0,0,-220,518,239379)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#724708"
+   offset="0"
+   id="stop632" />
+					<stop
+   stop-color="#754909"
+   offset="1"
+   id="stop634" />
+				</linearGradient>
+				<polygon
+   points="-0.03,525.67 -0.03,596.96 66.369,581.28 "
+   id="polygon637"
+   style="fill:url(#hm)" />
+					<linearGradient
+   id="hn"
+   x1="-2.2553999"
+   x2="-1.5312999"
+   y1="1086.6"
+   y2="1085.8"
+   gradientTransform="matrix(266,0,0,-210,518,228726)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#774A07"
+   offset="0"
+   id="stop639" />
+					<stop
+   stop-color="#764A09"
+   offset="1"
+   id="stop641" />
+				</linearGradient>
+				<polygon
+   points="-0.03,596.96 -0.03,692.55 66.369,581.28 "
+   id="polygon644"
+   style="fill:url(#hn)" />
+					<linearGradient
+   id="ho"
+   x1="-3.9433999"
+   x2="-3.2181001"
+   y1="1084.3"
+   y2="1083.6"
+   gradientTransform="matrix(302,0,0,-275,2596,298200)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#C5E2E5"
+   offset="0"
+   id="stop646" />
+					<stop
+   stop-color="#B1D7D6"
+   offset="1"
+   id="stop648" />
+				</linearGradient>
+				<polygon
+   points="1626.6,65.15 1407.4,8.687 1460.4,207.76 "
+   id="polygon651"
+   style="fill:url(#ho)" />
+					<linearGradient
+   id="il"
+   x1="-5.5971999"
+   x2="-4.8710999"
+   y1="1085.8"
+   y2="1085"
+   gradientTransform="matrix(229,0,0,-197,2742,213960)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#A6CFCA"
+   offset="0"
+   id="stop653" />
+					<stop
+   stop-color="#A9D3D6"
+   offset="1"
+   id="stop655" />
+				</linearGradient>
+				<polygon
+   points="1622.9,182.42 1626.6,65.15 1460.4,207.76 "
+   id="polygon658"
+   style="fill:url(#il)" />
+					<linearGradient
+   id="jm"
+   x1="-12.345"
+   x2="-11.62"
+   y1="1086.8"
+   y2="1086"
+   gradientTransform="matrix(118,0,0,-162,3077,176125)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#A5D1D4"
+   offset="0"
+   id="stop660" />
+					<stop
+   stop-color="#B1DAE0"
+   offset="1"
+   id="stop662" />
+				</linearGradient>
+				<polygon
+   points="1708.6,79.627 1626.6,65.15 1622.9,182.42 "
+   id="polygon665"
+   style="fill:url(#jm)" />
+					<linearGradient
+   id="kn"
+   x1="-5.4917002"
+   x2="-4.7659998"
+   y1="1083.9"
+   y2="1083.1"
+   gradientTransform="matrix(156,0,0,-281,898,304460)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#5B6111"
+   offset="0"
+   id="stop667" />
+					<stop
+   stop-color="#52690E"
+   offset="1"
+   id="stop669" />
+				</linearGradient>
+				<polygon
+   points="157.17,0 74.044,0 69.271,47.777 "
+   id="polygon672"
+   style="fill:url(#kn)" />
+					<linearGradient
+   id="lo"
+   x1="-2.5508001"
+   x2="-1.8261"
+   y1="1086.4"
+   y2="1085.6"
+   gradientTransform="matrix(289,0,0,-166,921,180279)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#5A801E"
+   offset="0"
+   id="stop674" />
+					<stop
+   stop-color="#5B801C"
+   offset="1"
+   id="stop676" />
+				</linearGradient>
+				<polygon
+   points="362.82,0 209.4,0 331.24,62.254 "
+   id="polygon679"
+   style="fill:url(#lo)" />
+					<linearGradient
+   id="mp"
+   x1="-2.4526"
+   x2="-1.7275"
+   y1="1083.9"
+   y2="1083.2"
+   gradientTransform="matrix(308,0,0,-346,1116,375230)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#4F7612"
+   offset="0"
+   id="stop681" />
+					<stop
+   stop-color="#60821F"
+   offset="1"
+   id="stop683" />
+				</linearGradient>
+				<polygon
+   points="547.49,457.49 561.28,207.03 337.77,353.98 "
+   id="polygon686"
+   style="fill:url(#mp)" />
+					<linearGradient
+   id="nq"
+   x1="-4.9063001"
+   x2="-4.1817002"
+   y1="1085"
+   y2="1084.2"
+   gradientTransform="matrix(175,0,0,-260,1074,282380)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#75732B"
+   offset="0"
+   id="stop688" />
+					<stop
+   stop-color="#707229"
+   offset="1"
+   id="stop690" />
+				</linearGradient>
+				<polygon
+   points="210.78,295.34 268.83,483.55 337.77,353.98 "
+   id="polygon693"
+   style="fill:url(#nq)" />
+					<linearGradient
+   id="hp"
+   x1="-4.8769999"
+   x2="-4.1522002"
+   y1="1093.7"
+   y2="1093"
+   gradientTransform="matrix(175,0,0,-81,1074,88882)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#72752A"
+   offset="0"
+   id="stop695" />
+					<stop
+   stop-color="#6A7628"
+   offset="1"
+   id="stop697" />
+				</linearGradient>
+				<polygon
+   points="328.34,331.54 210.78,295.34 337.77,353.98 "
+   id="polygon700"
+   style="fill:url(#hp)" />
+					<linearGradient
+   id="hq"
+   x1="-7.3291001"
+   x2="-6.6046"
+   y1="1086.8"
+   y2="1086.1"
+   gradientTransform="matrix(128,0,0,-179,1201,194901)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#717028"
+   offset="0"
+   id="stop702" />
+					<stop
+   stop-color="#697426"
+   offset="1"
+   id="stop704" />
+				</linearGradient>
+				<polygon
+   points="337.77,353.98 268.83,483.55 361.72,432.88 "
+   id="polygon707"
+   style="fill:url(#hq)" />
+					<linearGradient
+   id="hr"
+   x1="-82.259003"
+   x2="-81.533997"
+   y1="1092.9"
+   y2="1092.2"
+   gradientTransform="matrix(13,0,0,-86,1398,94282)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#697728"
+   offset="0"
+   id="stop709" />
+					<stop
+   stop-color="#677728"
+   offset="1"
+   id="stop711" />
+				</linearGradient>
+				<polygon
+   points="337.77,353.98 335.59,291.73 328.34,331.54 "
+   id="polygon714"
+   style="fill:url(#hr)" />
+					<linearGradient
+   id="hs"
+   x1="-2.4877999"
+   x2="-1.7639"
+   y1="1085.9"
+   y2="1085.2"
+   gradientTransform="matrix(311,0,0,-203,1109.75,220642)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#627A24"
+   offset="0"
+   id="stop716" />
+					<stop
+   stop-color="#638222"
+   offset="1"
+   id="stop718" />
+				</linearGradient>
+				<polygon
+   points="337.77,353.98 561.28,207.03 335.59,291.73 "
+   id="polygon721"
+   style="fill:url(#hs)" />
+					<linearGradient
+   id="ht"
+   x1="-2.8745"
+   x2="-2.1496999"
+   y1="1088.2"
+   y2="1087.5"
+   gradientTransform="matrix(289,0,0,-143,1135,155985)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#617322"
+   offset="0"
+   id="stop723" />
+					<stop
+   stop-color="#5A731C"
+   offset="1"
+   id="stop725" />
+				</linearGradient>
+				<polygon
+   points="547.49,457.49 337.77,353.98 361.72,432.88 "
+   id="polygon728"
+   style="fill:url(#ht)" />
+					<linearGradient
+   id="hu"
+   x1="-1.6504"
+   x2="-0.92559999"
+   y1="1092.5"
+   y2="1091.8"
+   gradientTransform="matrix(363,0,0,-113,560.75,124484)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#2E3412"
+   offset="0"
+   id="stop730" />
+					<stop
+   stop-color="#2E3C21"
+   offset="1"
+   id="stop732" />
+				</linearGradient>
+				<polygon
+   points="-0.03,1029.7 -0.03,1055.2 111.38,1080 152.6,1080 "
+   id="polygon735"
+   style="fill:url(#hu)" />
+					<linearGradient
+   id="hv"
+   x1="-4.4043002"
+   x2="-3.6805999"
+   y1="1083.8"
+   y2="1083.1"
+   gradientTransform="matrix(174,0,0,-428,751,464571)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#724A09"
+   offset="0"
+   id="stop737" />
+					<stop
+   stop-color="#5F470F"
+   offset="1"
+   id="stop739" />
+				</linearGradient>
+				<polygon
+   points="-0.03,730.09 -0.03,999.31 101.93,716.64 "
+   id="polygon742"
+   style="fill:url(#hv)" />
+					<linearGradient
+   id="hw"
+   x1="-1.7173001"
+   x2="-0.99250001"
+   y1="1083.7"
+   y2="1083"
+   gradientTransform="matrix(364,0,0,-428,580.75,464571)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#6E5217"
+   offset="0"
+   id="stop744" />
+					<stop
+   stop-color="#544A1D"
+   offset="1"
+   id="stop746" />
+				</linearGradient>
+				<polygon
+   points="254.32,898.34 101.93,716.64 -0.03,999.31 -0.03,1021.7 "
+   id="polygon749"
+   style="fill:url(#hw)" />
+					<linearGradient
+   id="hx"
+   x1="-1.5483"
+   x2="-0.82319999"
+   y1="1085.4"
+   y2="1084.7"
+   gradientTransform="matrix(364,0,0,-290,580.75,315640)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#334832"
+   offset="0"
+   id="stop751" />
+					<stop
+   stop-color="#484821"
+   offset="1"
+   id="stop753" />
+				</linearGradient>
+				<polygon
+   points="-0.03,1021.7 -0.03,1029.7 152.6,1080 240.5,1080 254.32,898.34 "
+   id="polygon756"
+   style="fill:url(#hx)" />
+					<linearGradient
+   id="hy"
+   x1="-1.7168"
+   x2="-0.99129999"
+   y1="1085.5"
+   y2="1084.8"
+   gradientTransform="matrix(379,0,0,-315,1320.8,342910)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#0A4F4D"
+   offset="0"
+   id="stop758" />
+					<stop
+   stop-color="#06504A"
+   offset="1"
+   id="stop760" />
+				</linearGradient>
+				<polygon
+   points="798.88,1080 809,1080 813.09,1074.2 "
+   id="polygon763"
+   style="fill:url(#hy)" />
+					<linearGradient
+   id="ia"
+   x1="-2.1303999"
+   x2="-1.4066"
+   y1="1085.4"
+   y2="1084.7"
+   gradientTransform="matrix(359,0,0,-315,1496.8,342910)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#085B49"
+   offset="0"
+   id="stop765" />
+					<stop
+   stop-color="#055652"
+   offset="1"
+   id="stop767" />
+				</linearGradient>
+				<polygon
+   points="809,1080 830.53,1080 813.09,1074.2 "
+   id="polygon770"
+   style="fill:url(#ia)" />
+					<linearGradient
+   id="ib"
+   x1="-1.7065001"
+   x2="-0.98229998"
+   y1="1086.7"
+   y2="1085.9"
+   gradientTransform="matrix(376,0,0,-211,862.75,230000)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#746528"
+   offset="0"
+   id="stop772" />
+					<stop
+   stop-color="#666729"
+   offset="1"
+   id="stop774" />
+				</linearGradient>
+				<polygon
+   points="273.91,870.11 476.38,717.37 203.52,752.11 "
+   id="polygon777"
+   style="fill:url(#ib)" />
+					<linearGradient
+   id="ic"
+   x1="-9.6894999"
+   x2="-8.9645996"
+   y1="1086.9"
+   y2="1086.2"
+   gradientTransform="matrix(97,0,0,-202,1142,220314)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#736128"
+   offset="0"
+   id="stop779" />
+					<stop
+   stop-color="#67612F"
+   offset="1"
+   id="stop781" />
+				</linearGradient>
+				<polygon
+   points="203.52,752.11 254.32,898.34 273.91,870.11 "
+   id="polygon784"
+   style="fill:url(#ic)" />
+					<linearGradient
+   id="id"
+   x1="-7.5654001"
+   x2="-6.8406"
+   y1="1086.3"
+   y2="1085.6"
+   gradientTransform="matrix(123,0,0,-234,1186,255069)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#5C5F34"
+   offset="0"
+   id="stop786" />
+					<stop
+   stop-color="#53603A"
+   offset="1"
+   id="stop788" />
+				</linearGradient>
+				<polygon
+   points="254.32,898.34 343.58,1039.5 273.91,870.11 "
+   id="polygon791"
+   style="fill:url(#id)" />
+					<linearGradient
+   id="ie"
+   x1="-2.7441001"
+   x2="-2.0195999"
+   y1="1083.7"
+   y2="1083"
+   gradientTransform="matrix(279,0,0,-445,1057,482949)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#4D623C"
+   offset="0"
+   id="stop793" />
+					<stop
+   stop-color="#60662B"
+   offset="1"
+   id="stop795" />
+				</linearGradient>
+				<polygon
+   points="343.58,1039.5 476.38,717.37 273.91,870.11 "
+   id="polygon798"
+   style="fill:url(#ie)" />
+					<linearGradient
+   id="if"
+   x1="-10.069"
+   x2="-9.3444996"
+   y1="1087.5"
+   y2="1086.8"
+   gradientTransform="matrix(144,0,0,-174,3148.9,189760)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#7DAC6B"
+   offset="0"
+   id="stop800" />
+					<stop
+   stop-color="#7DAC6E"
+   offset="1"
+   id="stop802" />
+				</linearGradient>
+				<polygon
+   points="1713.7,671.76 1798.6,545.81 1694.1,586.35 "
+   id="polygon805"
+   style="fill:url(#if)" />
+					<linearGradient
+   id="ig"
+   x1="-7.5527"
+   x2="-6.8257999"
+   y1="1086.4"
+   y2="1085.7"
+   gradientTransform="matrix(187,0,0,-200,3106,217723)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#7BAD70"
+   offset="0"
+   id="stop807" />
+					<stop
+   stop-color="#79AE7A"
+   offset="1"
+   id="stop809" />
+				</linearGradient>
+				<polygon
+   points="1798.6,545.81 1829.8,441.57 1694.1,586.35 "
+   id="polygon812"
+   style="fill:url(#ig)" />
+					<linearGradient
+   id="ih"
+   x1="-11.202"
+   x2="-10.477"
+   y1="1084.7"
+   y2="1083.9"
+   gradientTransform="matrix(131,0,0,-312,3189,338940)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#7FAC6D"
+   offset="0"
+   id="stop814" />
+					<stop
+   stop-color="#80AE76"
+   offset="1"
+   id="stop816" />
+				</linearGradient>
+				<polygon
+   points="1808.7,771.66 1798.6,545.81 1713.7,671.76 "
+   id="polygon819"
+   style="fill:url(#ih)" />
+					<linearGradient
+   id="ii"
+   x1="-7.3632998"
+   x2="-6.6384001"
+   y1="1084.5"
+   y2="1083.7"
+   gradientTransform="matrix(199,0,0,-312,3238,338940)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#84AF79"
+   offset="0"
+   id="stop821" />
+					<stop
+   stop-color="#7FAD72"
+   offset="1"
+   id="stop823" />
+				</linearGradient>
+				<polygon
+   points="1798.6,545.81 1808.7,771.66 1921.9,725.27 1921.9,691.75 "
+   id="polygon826"
+   style="fill:url(#ii)" />
+					<linearGradient
+   id="ij"
+   x1="-6.0801001"
+   x2="-5.3554001"
+   y1="1088.4"
+   y2="1087.6"
+   gradientTransform="matrix(236,0,0,-144,3201,157187)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#78AF7F"
+   offset="0"
+   id="stop828" />
+					<stop
+   stop-color="#7AAE74"
+   offset="1"
+   id="stop830" />
+				</linearGradient>
+				<polygon
+   points="1829.8,441.57 1798.6,545.81 1921.9,525.99 1921.9,492.06 "
+   id="polygon833"
+   style="fill:url(#ij)" />
+					<linearGradient
+   id="im"
+   x1="-5.8462"
+   x2="-5.1215"
+   y1="1085.2"
+   y2="1084.4"
+   gradientTransform="matrix(236,0,0,-274,3201,297820)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#7FAE70"
+   offset="0"
+   id="stop835" />
+					<stop
+   stop-color="#7BAE70"
+   offset="1"
+   id="stop837" />
+				</linearGradient>
+				<polygon
+   points="1921.9,691.75 1921.9,525.99 1798.6,545.81 "
+   id="polygon840"
+   style="fill:url(#im)" />
+					<linearGradient
+   id="in"
+   x1="-3.9730999"
+   x2="-3.2483001"
+   y1="1087.6"
+   y2="1086.9"
+   gradientTransform="matrix(302,0,0,-136,2596,147883)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#CAE7EC"
+   offset="0"
+   id="stop842" />
+					<stop
+   stop-color="#C2E3EA"
+   offset="1"
+   id="stop844" />
+				</linearGradient>
+				<polygon
+   points="1407.4,8.687 1626.6,65.15 1529.1,0 1422.3,0 "
+   id="polygon847"
+   style="fill:url(#in)" />
+					<linearGradient
+   id="io"
+   x1="-1.8442"
+   x2="-1.1192"
+   y1="1084"
+   y2="1083.3"
+   gradientTransform="matrix(343,0,0,-305,710.75,330600)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#616618"
+   offset="0"
+   id="stop849" />
+					<stop
+   stop-color="#5E721E"
+   offset="1"
+   id="stop851" />
+				</linearGradient>
+				<polygon
+   points="69.271,47.777 318.18,207.03 190.93,0 157.17,0 "
+   id="polygon854"
+   style="fill:url(#io)" />
+					<linearGradient
+   id="ip"
+   x1="-1.8828"
+   x2="-1.1578"
+   y1="1083.7"
+   y2="1083"
+   gradientTransform="matrix(343,0,0,-342,710.75,370680)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#68681C"
+   offset="0"
+   id="stop856" />
+					<stop
+   stop-color="#6E7628"
+   offset="1"
+   id="stop858" />
+				</linearGradient>
+				<polygon
+   points="318.18,207.03 69.271,47.777 210.78,295.34 "
+   id="polygon861"
+   style="fill:url(#ip)" />
+					<linearGradient
+   id="iq"
+   x1="-3.9096999"
+   x2="-3.1849"
+   y1="1084.1"
+   y2="1083.4"
+   gradientTransform="matrix(205,0,0,-305,1005,330600)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#59731A"
+   offset="0"
+   id="stop863" />
+					<stop
+   stop-color="#607D23"
+   offset="1"
+   id="stop865" />
+				</linearGradient>
+				<polygon
+   points="318.18,207.03 331.24,62.254 209.4,0 190.93,0 "
+   id="polygon868"
+   style="fill:url(#iq)" />
+					<linearGradient
+   id="ir"
+   x1="-5.0605001"
+   x2="-4.3365002"
+   y1="1089.1"
+   y2="1088.4"
+   gradientTransform="matrix(172,0,0,-122,1077,133081)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#72762B"
+   offset="0"
+   id="stop870" />
+					<stop
+   stop-color="#687A2A"
+   offset="1"
+   id="stop872" />
+				</linearGradient>
+				<polygon
+   points="335.59,291.73 318.18,207.03 210.78,295.34 "
+   id="polygon875"
+   style="fill:url(#ir)" />
+					<linearGradient
+   id="is"
+   x1="-2.3921001"
+   x2="-1.6673"
+   y1="1085.5"
+   y2="1084.8"
+   gradientTransform="matrix(335,0,0,-200,1061.75,217199)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#5E8323"
+   offset="0"
+   id="stop877" />
+					<stop
+   stop-color="#638824"
+   offset="1"
+   id="stop879" />
+				</linearGradient>
+				<polygon
+   points="331.24,62.254 318.18,207.03 561.28,207.03 "
+   id="polygon882"
+   style="fill:url(#is)" />
+					<linearGradient
+   id="it"
+   x1="-2.2065001"
+   x2="-1.4825"
+   y1="1089.5"
+   y2="1088.8"
+   gradientTransform="matrix(335,0,0,-117,1061.8,127680)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#627C26"
+   offset="0"
+   id="stop884" />
+					<stop
+   stop-color="#628624"
+   offset="1"
+   id="stop886" />
+				</linearGradient>
+				<polygon
+   points="561.28,207.03 318.18,207.03 335.59,291.73 "
+   id="polygon889"
+   style="fill:url(#it)" />
+					<linearGradient
+   id="iu"
+   x1="-7.8936"
+   x2="-7.1700001"
+   y1="1083.7"
+   y2="1082.9"
+   gradientTransform="matrix(195,0,0,-310,3390,336020)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#A4D2D3"
+   offset="0"
+   id="stop891" />
+					<stop
+   stop-color="#BAE2E9"
+   offset="1"
+   id="stop893" />
+				</linearGradient>
+				<polygon
+   points="1921.9,203.33 1921.9,151.8 1906,224.4 "
+   id="polygon896"
+   style="fill:url(#iu)" />
+					<linearGradient
+   id="iv"
+   x1="-6.4629002"
+   x2="-5.7375002"
+   y1="1084.1"
+   y2="1083.3"
+   gradientTransform="matrix(215,0,0,-270,2985,292600)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#B9E0E9"
+   offset="0"
+   id="stop898" />
+					<stop
+   stop-color="#BAE4EE"
+   offset="1"
+   id="stop900" />
+				</linearGradient>
+				<polygon
+   points="1626.6,65.15 1782.6,26.06 1757.9,0 1629.2,0 "
+   id="polygon903"
+   style="fill:url(#iv)" />
+					<linearGradient
+   id="ix"
+   x1="-6.27"
+   x2="-5.5451002"
+   y1="1093.5"
+   y2="1092.8"
+   gradientTransform="matrix(215,0,0,-74,2985,80943)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#B4DDE4"
+   offset="0"
+   id="stop905" />
+					<stop
+   stop-color="#B3DDE5"
+   offset="1"
+   id="stop907" />
+				</linearGradient>
+				<polygon
+   points="1782.6,26.06 1626.6,65.15 1708.6,79.627 "
+   id="polygon910"
+   style="fill:url(#ix)" />
+					<linearGradient
+   id="iy"
+   x1="-6.7124"
+   x2="-5.9872999"
+   y1="1084"
+   y2="1083.3"
+   gradientTransform="matrix(204,0,0,-280,3007,303350)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#BCE8F4"
+   offset="0"
+   id="stop912" />
+					<stop
+   stop-color="#B9E5F1"
+   offset="1"
+   id="stop914" />
+				</linearGradient>
+				<polygon
+   points="1781.6,0 1757.9,0 1782.6,26.06 "
+   id="polygon917"
+   style="fill:url(#iy)" />
+					<linearGradient
+   id="iz"
+   x1="-4.8799"
+   x2="-4.1549001"
+   y1="1084.4"
+   y2="1083.7"
+   gradientTransform="matrix(272,0,0,-274,3041,297140)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#ADD8DF"
+   offset="0"
+   id="stop919" />
+					<stop
+   stop-color="#A7D5D8"
+   offset="1"
+   id="stop921" />
+				</linearGradient>
+				<polygon
+   points="1906,224.4 1782.6,26.06 1708.6,79.627 "
+   id="polygon924"
+   style="fill:url(#iz)" />
+					<linearGradient
+   id="ja"
+   x1="-10.966"
+   x2="-10.241"
+   y1="1083.8"
+   y2="1083.1"
+   gradientTransform="matrix(139,0,0,-280,3265,303350)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#BBE7F4"
+   offset="0"
+   id="stop926" />
+					<stop
+   stop-color="#BCE5EF"
+   offset="1"
+   id="stop928" />
+				</linearGradient>
+				<polygon
+   points="1819.7,0 1781.6,0 1782.6,26.06 "
+   id="polygon931"
+   style="fill:url(#ja)" />
+					<linearGradient
+   id="jb"
+   x1="-6.0023999"
+   x2="-5.277"
+   y1="1090.8"
+   y2="1090.1"
+   gradientTransform="matrix(238,0,0,-90,3177,98149)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#BEE6EF"
+   offset="0"
+   id="stop933" />
+					<stop
+   stop-color="#BBE3EC"
+   offset="1"
+   id="stop935" />
+				</linearGradient>
+				<polygon
+   points="1782.6,26.06 1921.9,5.037 1921.9,0 1819.7,0 "
+   id="polygon938"
+   style="fill:url(#jb)" />
+					<linearGradient
+   id="jc"
+   x1="-5.7680998"
+   x2="-5.0433002"
+   y1="1084"
+   y2="1083.3"
+   gradientTransform="matrix(238,0,0,-310,3177,336020)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#A3D1D2"
+   offset="0"
+   id="stop940" />
+					<stop
+   stop-color="#B7E0E8"
+   offset="1"
+   id="stop942" />
+				</linearGradient>
+				<polygon
+   points="1782.6,26.06 1906,224.4 1921.9,151.8 1921.9,5.037 "
+   id="polygon945"
+   style="fill:url(#jc)" />
+					<linearGradient
+   id="jd"
+   x1="-6.4805002"
+   x2="-5.7557998"
+   y1="1086.2"
+   y2="1085.5"
+   gradientTransform="matrix(203,0,0,-170,2794,184603)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#C8E7EF"
+   offset="0"
+   id="stop947" />
+					<stop
+   stop-color="#C1E4EB"
+   offset="1"
+   id="stop949" />
+				</linearGradient>
+				<polygon
+   points="1563.9,0 1529.1,0 1626.6,65.15 "
+   id="polygon952"
+   style="fill:url(#jd)" />
+					<linearGradient
+   id="je"
+   x1="-7.7733998"
+   x2="-7.0486999"
+   y1="1084.2"
+   y2="1083.5"
+   gradientTransform="matrix(174,0,0,-270,2863,292600)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#BCE2EA"
+   offset="0"
+   id="stop954" />
+					<stop
+   stop-color="#C2E8F2"
+   offset="1"
+   id="stop956" />
+				</linearGradient>
+				<polygon
+   points="1629.2,0 1563.9,0 1626.6,65.15 "
+   id="polygon959"
+   style="fill:url(#je)" />
+					<linearGradient
+   id="jf"
+   x1="-11.208"
+   x2="-10.482"
+   y1="1087.8"
+   y2="1087"
+   gradientTransform="matrix(124,0,0,-126,2749,137005)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#D1EAEF"
+   offset="0"
+   id="stop961" />
+					<stop
+   stop-color="#D1EBF2"
+   offset="1"
+   id="stop963" />
+				</linearGradient>
+				<polygon
+   points="1422.3,0 1405.7,0 1407.4,8.687 "
+   id="polygon966"
+   style="fill:url(#jf)" />
+					<linearGradient
+   id="jg"
+   x1="-7.4531002"
+   x2="-6.7283001"
+   y1="1084.4"
+   y2="1083.7"
+   gradientTransform="matrix(167,0,0,-252,2397,273191)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#DEEEE9"
+   offset="0"
+   id="stop968" />
+					<stop
+   stop-color="#DAECE9"
+   offset="1"
+   id="stop970" />
+				</linearGradient>
+				<polygon
+   points="1165,17.374 1226.7,85.418 1254.6,0 1183.4,0 "
+   id="polygon973"
+   style="fill:url(#jg)" />
+					<linearGradient
+   id="ji"
+   x1="-10.504"
+   x2="-9.7790003"
+   y1="1084.4"
+   y2="1083.6"
+   gradientTransform="matrix(125,0,0,-252,2524,273191)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#D5E9E2"
+   offset="0"
+   id="stop975" />
+					<stop
+   stop-color="#D6EBEA"
+   offset="1"
+   id="stop977" />
+				</linearGradient>
+				<polygon
+   points="1226.7,85.418 1317.4,83.247 1303,0 1254.6,0 "
+   id="polygon980"
+   style="fill:url(#ji)" />
+					<linearGradient
+   id="jj"
+   x1="-7.7108998"
+   x2="-6.9854002"
+   y1="1084.5"
+   y2="1083.7"
+   gradientTransform="matrix(167,0,0,-249,2564,269948)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#D2E8E7"
+   offset="0"
+   id="stop982" />
+					<stop
+   stop-color="#D7ECF0"
+   offset="1"
+   id="stop984" />
+				</linearGradient>
+				<polygon
+   points="1317.4,83.247 1407.4,8.687 1397.5,0 1303,0 "
+   id="polygon987"
+   style="fill:url(#jj)" />
+					<linearGradient
+   id="jk"
+   x1="-7.6367002"
+   x2="-6.9130998"
+   y1="1087"
+   y2="1086.3"
+   gradientTransform="matrix(167,0,0,-146,2564,158605)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#D6EEF4"
+   offset="0"
+   id="stop989" />
+					<stop
+   stop-color="#D7EDF2"
+   offset="1"
+   id="stop991" />
+				</linearGradient>
+				<polygon
+   points="1405.7,0 1397.5,0 1407.4,8.687 "
+   id="polygon994"
+   style="fill:url(#jk)" />
+					<linearGradient
+   id="jl"
+   x1="-3.8441999"
+   x2="-3.119"
+   y1="1088.2"
+   y2="1087.5"
+   gradientTransform="matrix(275,0,0,-122,2014,132697)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#E3F0E1"
+   offset="0"
+   id="stop996" />
+					<stop
+   stop-color="#E2F1EB"
+   offset="1"
+   id="stop998" />
+				</linearGradient>
+				<polygon
+   points="1156.6,0 1060.9,0 1165,17.374 "
+   id="polygon1001"
+   style="fill:url(#jl)" />
+					<linearGradient
+   id="jn"
+   x1="-5.3383999"
+   x2="-4.6143999"
+   y1="1086.3"
+   y2="1085.6"
+   gradientTransform="matrix(226,0,0,-158,2279,171577)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#E0F0EC"
+   offset="0"
+   id="stop1003" />
+					<stop
+   stop-color="#E1F2F3"
+   offset="1"
+   id="stop1005" />
+				</linearGradient>
+				<polygon
+   points="1183.4,0 1156.6,0 1165,17.374 "
+   id="polygon1008"
+   style="fill:url(#jn)" />
+					<linearGradient
+   id="jo"
+   x1="-3.6997001"
+   x2="-2.9751999"
+   y1="1086.5"
+   y2="1085.8"
+   gradientTransform="matrix(317,0,0,-179,2504.75,194699)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#94C29A"
+   offset="0"
+   id="stop1010" />
+					<stop
+   stop-color="#93C2AC"
+   offset="1"
+   id="stop1012" />
+				</linearGradient>
+				<polygon
+   points="1582.3,337.33 1460.4,207.76 1352.3,314.16 "
+   id="polygon1015"
+   style="fill:url(#jo)" />
+					<linearGradient
+   id="jp"
+   x1="-3.5127001"
+   x2="-2.7880001"
+   y1="1084.2"
+   y2="1083.5"
+   gradientTransform="matrix(317,0,0,-332,2504.8,360240)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#8EBD86"
+   offset="0"
+   id="stop1017" />
+					<stop
+   stop-color="#84B77D"
+   offset="1"
+   id="stop1019" />
+				</linearGradient>
+				<polygon
+   points="1530.1,554.49 1582.3,337.33 1352.3,314.16 "
+   id="polygon1022"
+   style="fill:url(#jp)" />
+					<linearGradient
+   id="jq"
+   x1="-5.6079001"
+   x2="-4.8832002"
+   y1="1085.7"
+   y2="1085"
+   gradientTransform="matrix(224,0,0,-214,2747,232499)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#9CC8BD"
+   offset="0"
+   id="stop1024" />
+					<stop
+   stop-color="#92C3B5"
+   offset="1"
+   id="stop1026" />
+				</linearGradient>
+				<polygon
+   points="1622.9,182.42 1460.4,207.76 1582.3,337.33 "
+   id="polygon1029"
+   style="fill:url(#jq)" />
+					<linearGradient
+   id="jr"
+   x1="-5.9018998"
+   x2="-5.1773"
+   y1="1083.9"
+   y2="1083.2"
+   gradientTransform="matrix(226,0,0,-344,2841,373240)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#81B367"
+   offset="0"
+   id="stop1031" />
+					<stop
+   stop-color="#7FB37E"
+   offset="1"
+   id="stop1033" />
+				</linearGradient>
+				<polygon
+   points="1694.1,586.35 1582.3,337.33 1530.1,554.49 "
+   id="polygon1036"
+   style="fill:url(#jr)" />
+					<linearGradient
+   id="js"
+   x1="-3.5566001"
+   x2="-2.8322001"
+   y1="1084"
+   y2="1083.3"
+   gradientTransform="matrix(341,0,0,-344,2797.8,373240)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#7AAF76"
+   offset="0"
+   id="stop1038" />
+					<stop
+   stop-color="#7CB38C"
+   offset="1"
+   id="stop1040" />
+				</linearGradient>
+				<polygon
+   points="1694.1,586.35 1829.8,441.57 1582.3,337.33 "
+   id="polygon1043"
+   style="fill:url(#js)" />
+					<linearGradient
+   id="ju"
+   x1="-5.665"
+   x2="-4.9401999"
+   y1="1085.5"
+   y2="1084.7"
+   gradientTransform="matrix(238,0,0,-214,2901,232499)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#87BBA8"
+   offset="0"
+   id="stop1045" />
+					<stop
+   stop-color="#8EC2B9"
+   offset="1"
+   id="stop1047" />
+				</linearGradient>
+				<polygon
+   points="1755,289.55 1622.9,182.42 1582.3,337.33 "
+   id="polygon1050"
+   style="fill:url(#ju)" />
+					<linearGradient
+   id="jv"
+   x1="-3.4956"
+   x2="-2.7707"
+   y1="1085.9"
+   y2="1085.2"
+   gradientTransform="matrix(341,0,0,-210,2797.75,228323)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#81B79C"
+   offset="0"
+   id="stop1052" />
+					<stop
+   stop-color="#7EB69A"
+   offset="1"
+   id="stop1054" />
+				</linearGradient>
+				<polygon
+   points="1582.3,337.33 1829.8,441.57 1755,289.55 "
+   id="polygon1057"
+   style="fill:url(#jv)" />
+					<linearGradient
+   id="jw"
+   x1="-7.6089001"
+   x2="-6.8838"
+   y1="1084.3"
+   y2="1083.6"
+   gradientTransform="matrix(182,0,0,-290,3013,314510)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#9CCBCB"
+   offset="0"
+   id="stop1059" />
+					<stop
+   stop-color="#9ACBC8"
+   offset="1"
+   id="stop1061" />
+				</linearGradient>
+				<polygon
+   points="1708.6,79.627 1622.9,182.42 1755,289.55 "
+   id="polygon1064"
+   style="fill:url(#jw)" />
+					<linearGradient
+   id="jx"
+   x1="-4.98"
+   x2="-4.2550001"
+   y1="1084.2"
+   y2="1083.4"
+   gradientTransform="matrix(272,0,0,-290,3041,314510)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#A3D1D4"
+   offset="0"
+   id="stop1066" />
+					<stop
+   stop-color="#90C4BD"
+   offset="1"
+   id="stop1068" />
+				</linearGradient>
+				<polygon
+   points="1755,289.55 1906,224.4 1708.6,79.627 "
+   id="polygon1071"
+   style="fill:url(#jx)" />
+					<linearGradient
+   id="jy"
+   x1="-6.7080002"
+   x2="-5.9835"
+   y1="1084.4"
+   y2="1083.7"
+   gradientTransform="matrix(208,0,0,-300,3169,325520)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#7CB596"
+   offset="0"
+   id="stop1073" />
+					<stop
+   stop-color="#88BFB2"
+   offset="1"
+   id="stop1075" />
+				</linearGradient>
+				<polygon
+   points="1829.8,441.57 1906,224.4 1755,289.55 "
+   id="polygon1078"
+   style="fill:url(#jy)" />
+					<linearGradient
+   id="jz"
+   x1="-5.1581998"
+   x2="-4.434"
+   y1="1084.9"
+   y2="1084.1"
+   gradientTransform="matrix(228,0,0,-307,2375,333730)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#458B13"
+   offset="0"
+   id="stop1080" />
+					<stop
+   stop-color="#4B9228"
+   offset="1"
+   id="stop1082" />
+				</linearGradient>
+				<polygon
+   points="1193.3,693.48 1215.1,908.47 1358.8,686.24 "
+   id="polygon1085"
+   style="fill:url(#jz)" />
+					<linearGradient
+   id="ka"
+   x1="-5.2245998"
+   x2="-4.5004001"
+   y1="1087.7"
+   y2="1087"
+   gradientTransform="matrix(228,0,0,-168,2375,183311)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#539515"
+   offset="0"
+   id="stop1087" />
+					<stop
+   stop-color="#6BA725"
+   offset="1"
+   id="stop1089" />
+				</linearGradient>
+				<polygon
+   points="1193.3,693.48 1358.8,686.24 1319.6,571.87 "
+   id="polygon1092"
+   style="fill:url(#ka)" />
+					<linearGradient
+   id="kb"
+   x1="-4.2061"
+   x2="-3.4816"
+   y1="1084.8"
+   y2="1084.1"
+   gradientTransform="matrix(275,0,0,-307,2358,333730)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#428F33"
+   offset="0"
+   id="stop1094" />
+					<stop
+   stop-color="#64A337"
+   offset="1"
+   id="stop1096" />
+				</linearGradient>
+				<polygon
+   points="1358.8,686.24 1215.1,908.47 1414.7,825.23 "
+   id="polygon1099"
+   style="fill:url(#kb)" />
+					<linearGradient
+   id="kc"
+   x1="-3.9912"
+   x2="-3.2671001"
+   y1="1087.2"
+   y2="1086.5"
+   gradientTransform="matrix(290,0,0,-182,2487,198421)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#79AF33"
+   offset="0"
+   id="stop1101" />
+					<stop
+   stop-color="#79AE3F"
+   offset="1"
+   id="stop1103" />
+				</linearGradient>
+				<polygon
+   points="1319.6,571.87 1358.8,686.24 1530.1,554.49 "
+   id="polygon1106"
+   style="fill:url(#kc)" />
+					<linearGradient
+   id="kd"
+   x1="-3.6001"
+   x2="-2.8752"
+   y1="1084.9"
+   y2="1084.2"
+   gradientTransform="matrix(288,0,0,-290,2111,315070)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#4C8F0A"
+   offset="0"
+   id="stop1108" />
+					<stop
+   stop-color="#5B9A19"
+   offset="1"
+   id="stop1110" />
+				</linearGradient>
+				<polygon
+   points="1045.3,577.66 1193.3,693.48 1254.3,483.55 "
+   id="polygon1113"
+   style="fill:url(#kd)" />
+					<linearGradient
+   id="kf"
+   x1="-3.7479999"
+   x2="-3.0236001"
+   y1="1085.1"
+   y2="1084.4"
+   gradientTransform="matrix(288,0,0,-256,2111,278190)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#589811"
+   offset="0"
+   id="stop1115" />
+					<stop
+   stop-color="#79B030"
+   offset="1"
+   id="stop1117" />
+				</linearGradient>
+				<polygon
+   points="1045.3,577.66 1254.3,483.55 1197.7,392.34 "
+   id="polygon1120"
+   style="fill:url(#kf)" />
+					<linearGradient
+   id="kg"
+   x1="-7.1767998"
+   x2="-6.4517002"
+   y1="1084.7"
+   y2="1084"
+   gradientTransform="matrix(174,0,0,-290,2429,315070)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#559714"
+   offset="0"
+   id="stop1122" />
+					<stop
+   stop-color="#71AB27"
+   offset="1"
+   id="stop1124" />
+				</linearGradient>
+				<polygon
+   points="1254.3,483.55 1193.3,693.48 1319.6,571.87 "
+   id="polygon1127"
+   style="fill:url(#kg)" />
+					<linearGradient
+   id="kh"
+   x1="-5.5595999"
+   x2="-4.835"
+   y1="1085.5"
+   y2="1084.8"
+   gradientTransform="matrix(213,0,0,-234,2396,254301)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#87B94B"
+   offset="0"
+   id="stop1129" />
+					<stop
+   stop-color="#88B95B"
+   offset="1"
+   id="stop1131" />
+				</linearGradient>
+				<polygon
+   points="1197.7,392.34 1254.3,483.55 1352.3,314.16 "
+   id="polygon1134"
+   style="fill:url(#kh)" />
+					<linearGradient
+   id="ki"
+   x1="-9.5502996"
+   x2="-8.8250999"
+   y1="1084"
+   y2="1083.2"
+   gradientTransform="matrix(135,0,0,-356,2552,386180)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#7BB239"
+   offset="0"
+   id="stop1136" />
+					<stop
+   stop-color="#85B856"
+   offset="1"
+   id="stop1138" />
+				</linearGradient>
+				<polygon
+   points="1254.3,483.55 1319.6,571.87 1352.3,314.16 "
+   id="polygon1141"
+   style="fill:url(#ki)" />
+					<linearGradient
+   id="kj"
+   x1="-3.5404999"
+   x2="-2.8155999"
+   y1="1091.1"
+   y2="1090.4"
+   gradientTransform="matrix(287,0,0,-100,1761,109435)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#6BA312"
+   offset="0"
+   id="stop1143" />
+					<stop
+   stop-color="#79AE1C"
+   offset="1"
+   id="stop1145" />
+				</linearGradient>
+				<polygon
+   points="998.86,369.18 800.75,305.48 790.59,377.87 "
+   id="polygon1148"
+   style="fill:url(#kj)" />
+					<linearGradient
+   id="kk"
+   x1="-3.2612"
+   x2="-2.5366001"
+   y1="1087.5"
+   y2="1086.7"
+   gradientTransform="matrix(287,0,0,-166,1761,180869)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#649E0D"
+   offset="0"
+   id="stop1150" />
+					<stop
+   stop-color="#67A112"
+   offset="1"
+   id="stop1152" />
+				</linearGradient>
+				<polygon
+   points="927.74,489.34 998.86,369.18 790.59,377.87 "
+   id="polygon1155"
+   style="fill:url(#kk)" />
+					<linearGradient
+   id="kl"
+   x1="-3.5952001"
+   x2="-2.8699999"
+   y1="1084.5"
+   y2="1083.8"
+   gradientTransform="matrix(273,0,0,-280,1789,303820)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#87B62A"
+   offset="0"
+   id="stop1157" />
+					<stop
+   stop-color="#9CC34B"
+   offset="1"
+   id="stop1159" />
+				</linearGradient>
+				<polygon
+   points="998.86,369.18 964.03,166.49 800.75,305.48 "
+   id="polygon1162"
+   style="fill:url(#kl)" />
+					<linearGradient
+   id="km"
+   x1="-7.0770998"
+   x2="-6.3519001"
+   y1="1084.7"
+   y2="1083.9"
+   gradientTransform="matrix(162,0,0,-288,2075,312750)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#559508"
+   offset="0"
+   id="stop1164" />
+					<stop
+   stop-color="#5F9B10"
+   offset="1"
+   id="stop1166" />
+				</linearGradient>
+				<polygon
+   points="1045.3,577.66 998.86,369.18 927.74,489.34 "
+   id="polygon1169"
+   style="fill:url(#km)" />
+					<linearGradient
+   id="ko"
+   x1="-7.6069002"
+   x2="-6.8817"
+   y1="1084.5"
+   y2="1083.7"
+   gradientTransform="matrix(154,0,0,-280,2133,303820)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#B1D270"
+   offset="0"
+   id="stop1171" />
+					<stop
+   stop-color="#9AC44F"
+   offset="1"
+   id="stop1173" />
+				</linearGradient>
+				<polygon
+   points="1075.8,247.57 964.03,166.49 998.86,369.18 "
+   id="polygon1176"
+   style="fill:url(#ko)" />
+					<linearGradient
+   id="kp"
+   x1="-3.8529999"
+   x2="-3.1287999"
+   y1="1084.7"
+   y2="1084"
+   gradientTransform="matrix(274,0,0,-288,2061,312750)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#58980F"
+   offset="0"
+   id="stop1178" />
+					<stop
+   stop-color="#7BB129"
+   offset="1"
+   id="stop1180" />
+				</linearGradient>
+				<polygon
+   points="1197.7,392.34 998.86,369.18 1045.3,577.66 "
+   id="polygon1183"
+   style="fill:url(#kp)" />
+					<linearGradient
+   id="kr"
+   x1="-3.9584999"
+   x2="-3.2339001"
+   y1="1086"
+   y2="1085.2"
+   gradientTransform="matrix(274,0,0,-200,2061,217455)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#9EC65A"
+   offset="0"
+   id="stop1185" />
+					<stop
+   stop-color="#87B837"
+   offset="1"
+   id="stop1187" />
+				</linearGradient>
+				<polygon
+   points="1075.8,247.57 998.86,369.18 1197.7,392.34 "
+   id="polygon1190"
+   style="fill:url(#kr)" />
+					<linearGradient
+   id="ks"
+   x1="-3.168"
+   x2="-2.4433999"
+   y1="1088.7"
+   y2="1087.9"
+   gradientTransform="matrix(277,0,0,-129,1455,140608)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#6B9C22"
+   offset="0"
+   id="stop1192" />
+					<stop
+   stop-color="#79A82C"
+   offset="1"
+   id="stop1194" />
+				</linearGradient>
+				<polygon
+   points="762.29,178.08 561.28,207.03 626.59,271.46 "
+   id="polygon1197"
+   style="fill:url(#ks)" />
+					<linearGradient
+   id="kt"
+   x1="-3.2490001"
+   x2="-2.5249"
+   y1="1084.6"
+   y2="1083.9"
+   gradientTransform="matrix(277,0,0,-256,1455,277680)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#7CA834"
+   offset="0"
+   id="stop1199" />
+					<stop
+   stop-color="#A4C661"
+   offset="1"
+   id="stop1201" />
+				</linearGradient>
+				<polygon
+   points="736.17,21.717 561.28,207.03 762.29,178.08 "
+   id="polygon1204"
+   style="fill:url(#kt)" />
+					<linearGradient
+   id="ku"
+   x1="-3.9730999"
+   x2="-3.2479"
+   y1="1086.6"
+   y2="1085.9"
+   gradientTransform="matrix(240,0,0,-176,1582,191415)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#6EA01D"
+   offset="0"
+   id="stop1206" />
+					<stop
+   stop-color="#85B32D"
+   offset="1"
+   id="stop1208" />
+				</linearGradient>
+				<polygon
+   points="762.29,178.08 626.59,271.46 800.75,305.48 "
+   id="polygon1211"
+   style="fill:url(#ku)" />
+					<linearGradient
+   id="kv"
+   x1="-3.0845001"
+   x2="-2.3596001"
+   y1="1085.1"
+   y2="1084.4"
+   gradientTransform="matrix(314,0,0,-216,1658.75,234439)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#BBD686"
+   offset="0"
+   id="stop1213" />
+					<stop
+   stop-color="#B0D06E"
+   offset="1"
+   id="stop1215" />
+				</linearGradient>
+				<polygon
+   points="964.03,166.49 736.17,21.717 762.29,178.08 "
+   id="polygon1218"
+   style="fill:url(#kv)" />
+					<linearGradient
+   id="kw"
+   x1="-3.4487"
+   x2="-2.7246001"
+   y1="1086.1"
+   y2="1085.4"
+   gradientTransform="matrix(278,0,0,-192,1731,208695)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#8BB932"
+   offset="0"
+   id="stop1220" />
+					<stop
+   stop-color="#A7CA5D"
+   offset="1"
+   id="stop1222" />
+				</linearGradient>
+				<polygon
+   points="800.75,305.48 964.03,166.49 762.29,178.08 "
+   id="polygon1225"
+   style="fill:url(#kw)" />
+					<linearGradient
+   id="kx"
+   x1="-4.4102001"
+   x2="-3.6854999"
+   y1="1091.2"
+   y2="1090.5"
+   gradientTransform="matrix(226,0,0,-110,1651,120611)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#3B6D05"
+   offset="0"
+   id="stop1227" />
+					<stop
+   stop-color="#376E03"
+   offset="1"
+   id="stop1229" />
+				</linearGradient>
+				<polygon
+   points="666.5,603.72 830.5,650.05 686.1,570.42 "
+   id="polygon1232"
+   style="fill:url(#kx)" />
+					<linearGradient
+   id="ky"
+   x1="-5.0145998"
+   x2="-4.2897"
+   y1="1088.9"
+   y2="1088.2"
+   gradientTransform="matrix(199,0,0,-144,1705,157331)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#3B7104"
+   offset="0"
+   id="stop1234" />
+					<stop
+   stop-color="#377402"
+   offset="1"
+   id="stop1236" />
+				</linearGradient>
+				<polygon
+   points="686.1,570.42 830.5,650.05 804.38,545.81 "
+   id="polygon1239"
+   style="fill:url(#ky)" />
+					<linearGradient
+   id="kz"
+   x1="-6.3887"
+   x2="-5.6644001"
+   y1="1086"
+   y2="1085.3"
+   gradientTransform="matrix(170,0,0,-222,1897,241571)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#3D7C02"
+   offset="0"
+   id="stop1241" />
+					<stop
+   stop-color="#3E7E03"
+   offset="1"
+   id="stop1243" />
+				</linearGradient>
+				<polygon
+   points="804.38,545.81 830.5,650.05 927.74,489.34 "
+   id="polygon1246"
+   style="fill:url(#kz)" />
+					<linearGradient
+   id="la"
+   x1="-7.8213"
+   x2="-7.0959001"
+   y1="1085.2"
+   y2="1084.5"
+   gradientTransform="matrix(144,0,0,-264,1958.9,286970)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#428404"
+   offset="0"
+   id="stop1248" />
+					<stop
+   stop-color="#2E6F02"
+   offset="1"
+   id="stop1250" />
+				</linearGradient>
+				<polygon
+   points="927.74,489.34 830.5,650.05 935,680.45 "
+   id="polygon1253"
+   style="fill:url(#la)" />
+					<linearGradient
+   id="lc"
+   x1="-7.8183999"
+   x2="-7.0939999"
+   y1="1086.2"
+   y2="1085.5"
+   gradientTransform="matrix(144,0,0,-222,1958.9,241790)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#2B6903"
+   offset="0"
+   id="stop1255" />
+					<stop
+   stop-color="#256505"
+   offset="1"
+   id="stop1257" />
+				</linearGradient>
+				<polygon
+   points="830.5,650.05 860.98,810.75 935,680.45 "
+   id="polygon1260"
+   style="fill:url(#lc)" />
+					<linearGradient
+   id="ld"
+   x1="-3.1387"
+   x2="-2.414"
+   y1="1086.9"
+   y2="1086.2"
+   gradientTransform="matrix(278,0,0,-193,1337,210417)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#526716"
+   offset="0"
+   id="stop1262" />
+					<stop
+   stop-color="#43640E"
+   offset="1"
+   id="stop1264" />
+				</linearGradient>
+				<polygon
+   points="476.38,717.37 678.11,770.21 554.02,630.5 "
+   id="polygon1267"
+   style="fill:url(#ld)" />
+					<linearGradient
+   id="le"
+   x1="-2.085"
+   x2="-1.3604"
+   y1="1083.1"
+   y2="1082.4"
+   gradientTransform="matrix(379,0,0,-574,1320.75,622471)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#13523D"
+   offset="0"
+   id="stop1269" />
+					<stop
+   stop-color="#1D5C28"
+   offset="1"
+   id="stop1271" />
+				</linearGradient>
+				<polygon
+   points="813.09,1074.2 678.11,770.21 573.69,1080 798.88,1080 "
+   id="polygon1274"
+   style="fill:url(#le)" />
+					<linearGradient
+   id="lf"
+   x1="-5.6957998"
+   x2="-4.9707999"
+   y1="1086.1"
+   y2="1085.4"
+   gradientTransform="matrix(171,0,0,-230,1551,250377)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#45670D"
+   offset="0"
+   id="stop1276" />
+					<stop
+   stop-color="#3A6608"
+   offset="1"
+   id="stop1278" />
+				</linearGradient>
+				<polygon
+   points="554.02,630.5 678.11,770.21 666.5,603.72 "
+   id="polygon1281"
+   style="fill:url(#lf)" />
+					<linearGradient
+   id="lg"
+   x1="-4.3936"
+   x2="-3.6684"
+   y1="1085.9"
+   y2="1085.2"
+   gradientTransform="matrix(226,0,0,-230,1651,250377)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#386905"
+   offset="0"
+   id="stop1283" />
+					<stop
+   stop-color="#326706"
+   offset="1"
+   id="stop1285" />
+				</linearGradient>
+				<polygon
+   points="666.5,603.72 678.11,770.21 830.5,650.05 "
+   id="polygon1288"
+   style="fill:url(#lg)" />
+					<linearGradient
+   id="lh"
+   x1="-3.2432001"
+   x2="-2.5181999"
+   y1="1083.9"
+   y2="1083.1"
+   gradientTransform="matrix(287,0,0,-420,1606,455997)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#115C2F"
+   offset="0"
+   id="stop1290" />
+					<stop
+   stop-color="#1F5F1C"
+   offset="1"
+   id="stop1292" />
+				</linearGradient>
+				<polygon
+   points="813.09,1074.2 886.38,985.93 678.11,770.21 "
+   id="polygon1295"
+   style="fill:url(#lh)" />
+					<linearGradient
+   id="li"
+   x1="-3.8062"
+   x2="-3.0809"
+   y1="1086.2"
+   y2="1085.5"
+   gradientTransform="matrix(252,0,0,-222,1641,241793)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#2C6803"
+   offset="0"
+   id="stop1297" />
+					<stop
+   stop-color="#296109"
+   offset="1"
+   id="stop1299" />
+				</linearGradient>
+				<polygon
+   points="830.5,650.05 678.11,770.21 860.98,810.75 "
+   id="polygon1302"
+   style="fill:url(#li)" />
+					<linearGradient
+   id="lj"
+   x1="-3.1078999"
+   x2="-2.3831999"
+   y1="1085.2"
+   y2="1084.5"
+   gradientTransform="matrix(287,0,0,-298,1606,324120)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#1F5E0D"
+   offset="0"
+   id="stop1304" />
+					<stop
+   stop-color="#215F18"
+   offset="1"
+   id="stop1306" />
+				</linearGradient>
+				<polygon
+   points="678.11,770.21 886.38,985.93 860.98,810.75 "
+   id="polygon1309"
+   style="fill:url(#lj)" />
+					<linearGradient
+   id="lk"
+   x1="-2.2235999"
+   x2="-1.4983"
+   y1="1083.3"
+   y2="1082.5"
+   gradientTransform="matrix(349,0,0,-519,1194.75,562943)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#365D36"
+   offset="0"
+   id="stop1311" />
+					<stop
+   stop-color="#476418"
+   offset="1"
+   id="stop1313" />
+				</linearGradient>
+				<polygon
+   points="678.11,770.21 476.38,717.37 426.64,1080 435.1,1080 "
+   id="polygon1316"
+   style="fill:url(#lk)" />
+					<linearGradient
+   id="ll"
+   x1="-2.1533"
+   x2="-1.4277"
+   y1="1083.2"
+   y2="1082.4"
+   gradientTransform="matrix(349,0,0,-574,1194.75,622471)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#275941"
+   offset="0"
+   id="stop1318" />
+					<stop
+   stop-color="#23582F"
+   offset="1"
+   id="stop1320" />
+				</linearGradient>
+				<polygon
+   points="435.1,1080 573.69,1080 678.11,770.21 "
+   id="polygon1323"
+   style="fill:url(#ll)" />
+					<linearGradient
+   id="ln"
+   x1="-4.3070998"
+   x2="-3.5818999"
+   y1="1087.1"
+   y2="1086.4"
+   gradientTransform="matrix(278,0,0,-192,2553,209413)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#70A936"
+   offset="0"
+   id="stop1325" />
+					<stop
+   stop-color="#77AB4E"
+   offset="1"
+   id="stop1327" />
+				</linearGradient>
+				<polygon
+   points="1414.7,825.23 1560.5,734.02 1358.8,686.24 "
+   id="polygon1330"
+   style="fill:url(#ln)" />
+					<linearGradient
+   id="lp"
+   x1="-4.2739"
+   x2="-3.5486"
+   y1="1085.6"
+   y2="1084.8"
+   gradientTransform="matrix(278,0,0,-248,2553,269767)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#75AC37"
+   offset="0"
+   id="stop1332" />
+					<stop
+   stop-color="#82B155"
+   offset="1"
+   id="stop1334" />
+				</linearGradient>
+				<polygon
+   points="1358.8,686.24 1560.5,734.02 1530.1,554.49 "
+   id="polygon1337"
+   style="fill:url(#lp)" />
+					<linearGradient
+   id="lq"
+   x1="-5.2621999"
+   x2="-4.5369"
+   y1="1087"
+   y2="1086.3"
+   gradientTransform="matrix(237,0,0,-200,2671,218127)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#76AC59"
+   offset="0"
+   id="stop1339" />
+					<stop
+   stop-color="#86B470"
+   offset="1"
+   id="stop1341" />
+				</linearGradient>
+				<polygon
+   points="1414.7,825.23 1586.7,878.8 1560.5,734.02 "
+   id="polygon1344"
+   style="fill:url(#lq)" />
+					<linearGradient
+   id="lr"
+   x1="-5.7979002"
+   x2="-5.0737"
+   y1="1085.5"
+   y2="1084.8"
+   gradientTransform="matrix(226,0,0,-248,2841,269767)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#82B05D"
+   offset="0"
+   id="stop1346" />
+					<stop
+   stop-color="#80AE62"
+   offset="1"
+   id="stop1348" />
+				</linearGradient>
+				<polygon
+   points="1530.1,554.49 1560.5,734.02 1694.1,586.35 "
+   id="polygon1351"
+   style="fill:url(#lr)" />
+					<linearGradient
+   id="ls"
+   x1="-6.3070998"
+   x2="-5.5830002"
+   y1="1085.1"
+   y2="1084.4"
+   gradientTransform="matrix(211,0,0,-286,2898,311010)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#8AB67E"
+   offset="0"
+   id="stop1353" />
+					<stop
+   stop-color="#83AE67"
+   offset="1"
+   id="stop1355" />
+				</linearGradient>
+				<polygon
+   points="1560.5,734.02 1586.7,878.8 1713.7,671.76 "
+   id="polygon1358"
+   style="fill:url(#ls)" />
+					<linearGradient
+   id="lt"
+   x1="-6.3607998"
+   x2="-5.6364999"
+   y1="1086.5"
+   y2="1085.8"
+   gradientTransform="matrix(211,0,0,-204,2898,222247)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#7FAD68"
+   offset="0"
+   id="stop1360" />
+					<stop
+   stop-color="#82AD64"
+   offset="1"
+   id="stop1362" />
+				</linearGradient>
+				<polygon
+   points="1560.5,734.02 1713.7,671.76 1694.1,586.35 "
+   id="polygon1365"
+   style="fill:url(#lt)" />
+					<linearGradient
+   id="lu"
+   x1="-5.7206998"
+   x2="-4.9966998"
+   y1="1084.2"
+   y2="1083.5"
+   gradientTransform="matrix(249,0,0,-300,3231,325520)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#7FB698"
+   offset="0"
+   id="stop1367" />
+					<stop
+   stop-color="#8EC2B7"
+   offset="1"
+   id="stop1369" />
+				</linearGradient>
+				<polygon
+   points="1906,224.4 1829.8,441.57 1921.9,347.79 1921.9,229.49 "
+   id="polygon1372"
+   style="fill:url(#lu)" />
+					<linearGradient
+   id="lv"
+   x1="-4.3066001"
+   x2="-3.5836"
+   y1="1084.8"
+   y2="1084.1"
+   gradientTransform="matrix(323,0,0,-254,3156.75,275843)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#7CB490"
+   offset="0"
+   id="stop1374" />
+					<stop
+   stop-color="#87BCA3"
+   offset="1"
+   id="stop1376" />
+				</linearGradient>
+				<polygon
+   points="1921.9,412.54 1921.9,347.79 1829.8,441.57 "
+   id="polygon1379"
+   style="fill:url(#lv)" />
+					<linearGradient
+   id="lw"
+   x1="-7.8808999"
+   x2="-7.1552"
+   y1="1083.8"
+   y2="1083.1"
+   gradientTransform="matrix(195,0,0,-304,3390,329590)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#9CCCCA"
+   offset="0"
+   id="stop1381" />
+					<stop
+   stop-color="#A5D3D1"
+   offset="1"
+   id="stop1383" />
+				</linearGradient>
+				<polygon
+   points="1921.9,229.49 1921.9,203.33 1906,224.4 "
+   id="polygon1386"
+   style="fill:url(#lw)" />
+					<linearGradient
+   id="lx"
+   x1="-5.585"
+   x2="-4.8608999"
+   y1="1085.7"
+   y2="1085"
+   gradientTransform="matrix(194,0,0,-260,1951,283080)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#1B5E0E"
+   offset="0"
+   id="stop1388" />
+					<stop
+   stop-color="#176018"
+   offset="1"
+   id="stop1390" />
+				</linearGradient>
+				<polygon
+   points="860.98,810.75 886.38,985.93 1001.8,797.72 "
+   id="polygon1393"
+   style="fill:url(#lx)" />
+					<linearGradient
+   id="ma"
+   x1="-5.7031002"
+   x2="-4.9787002"
+   y1="1087.4"
+   y2="1086.7"
+   gradientTransform="matrix(194,0,0,-180,1951,196433)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#206109"
+   offset="0"
+   id="stop1395" />
+					<stop
+   stop-color="#226506"
+   offset="1"
+   id="stop1397" />
+				</linearGradient>
+				<polygon
+   points="860.98,810.75 1001.8,797.72 935,680.45 "
+   id="polygon1400"
+   style="fill:url(#ma)" />
+					<linearGradient
+   id="mb"
+   x1="-4.5176001"
+   x2="-3.7931001"
+   y1="1085.6"
+   y2="1084.9"
+   gradientTransform="matrix(237,0,0,-260,1943,283080)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#136123"
+   offset="0"
+   id="stop1402" />
+					<stop
+   stop-color="#186317"
+   offset="1"
+   id="stop1404" />
+				</linearGradient>
+				<polygon
+   points="886.38,985.93 1058.4,912.09 1001.8,797.72 "
+   id="polygon1407"
+   style="fill:url(#mb)" />
+					<linearGradient
+   id="mc"
+   x1="-7.5352001"
+   x2="-6.8102999"
+   y1="1084.8"
+   y2="1084.1"
+   gradientTransform="matrix(152,0,0,-304,2095,330340)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#2A6C03"
+   offset="0"
+   id="stop1409" />
+					<stop
+   stop-color="#2E7306"
+   offset="1"
+   id="stop1411" />
+				</linearGradient>
+				<polygon
+   points="935,680.45 1001.8,797.72 1045.3,577.66 "
+   id="polygon1414"
+   style="fill:url(#mc)" />
+					<linearGradient
+   id="md"
+   x1="-4.1606002"
+   x2="-3.4356999"
+   y1="1084.6"
+   y2="1083.9"
+   gradientTransform="matrix(264,0,0,-304,2075,330340)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#3A7F05"
+   offset="0"
+   id="stop1416" />
+					<stop
+   stop-color="#307609"
+   offset="1"
+   id="stop1418" />
+				</linearGradient>
+				<polygon
+   points="1001.8,797.72 1193.3,693.48 1045.3,577.66 "
+   id="polygon1421"
+   style="fill:url(#md)" />
+					<linearGradient
+   id="me"
+   x1="-4.0117002"
+   x2="-3.2871001"
+   y1="1085"
+   y2="1084.2"
+   gradientTransform="matrix(264,0,0,-302,2075,328330)"
+   gradientUnits="userSpaceOnUse">
+					<stop
+   stop-color="#1C6918"
+   offset="0"
+   id="stop1423" />
+					<stop
+   stop-color="#2B720C"
+   offset="1"
+   id="stop1425" />
+				</linearGradient>
+				<polygon
+   points="1001.8,797.72 1058.4,912.09 1193.3,693.48 "
+   id="polygon1428"
+   style="fill:url(#me)" />
+	</g>
+<rect
+   id="rect5145"
+   width="1107.0605"
+   height="1101.2552"
+   x="468.82706"
+   y="-4.162571" /><g
+   id="g10256"
+   transform="matrix(-13.637735,-0.08636964,0.08558761,-13.604966,6024.1711,5219.1424)"
+   style="fill:#f9f9f9"><path
+     id="path10254"
+     d="m 399.28,314.12 -9.125,7.25 c -4.799,-4.0243 -10.962,-6.4688 -17.656,-6.4688 -15.129,0 -27.562,12.434 -27.562,27.562 0,15.128 12.434,27.281 27.562,27.281 11.86,0 22.052,-7.4546 25.906,-17.969 l -9.875,-2.4062 c -2.6427,6.2319 -8.7668,10.531 -16.031,10.531 -9.7241,0 -17.438,-7.7134 -17.438,-17.438 0,-9.7246 7.7134,-17.719 17.438,-17.719 3.6079,0 6.923,1.1171 9.6875,3 l -9.0312,7.1875 26.125,4.8438 v -25.656 z"
+     inkscape:connector-curvature="0"
+     style="fill:#f9f9f9" /></g><g
+   id="g945"
+   transform="matrix(15.648158,0,0,15.70548,-4841.2085,-4818.8456)"
+   style="fill:#ffffff"><path
+     id="path943"
+     d="m 399.28,314.12 -9.125,7.25 c -4.799,-4.0243 -10.962,-6.4688 -17.656,-6.4688 -15.129,0 -27.562,12.434 -27.562,27.562 0,15.128 12.434,27.281 27.562,27.281 11.86,0 22.052,-7.4546 25.906,-17.969 l -9.875,-2.4062 c -2.6427,6.2319 -8.7668,10.531 -16.031,10.531 -9.7241,0 -17.438,-7.7134 -17.438,-17.438 0,-9.7246 7.7134,-17.719 17.438,-17.719 3.6079,0 6.923,1.1171 9.6875,3 l -9.0312,7.1875 26.125,4.8438 v -25.656 z"
+     inkscape:connector-curvature="0"
+     style="fill:#ffffff" /></g><g
+   id="g3335"
+   transform="matrix(16.007622,0,0,16.144449,-4991.2958,-4973.3931)"><path
+     id="path3333"
+     d="m 399.28,314.12 -9.125,7.25 c -4.799,-4.0243 -10.962,-6.4688 -17.656,-6.4688 -15.129,0 -27.562,12.434 -27.562,27.562 0,15.128 12.434,27.281 27.562,27.281 11.86,0 22.052,-7.4546 25.906,-17.969 l -9.875,-2.4062 c -2.6427,6.2319 -8.7668,10.531 -16.031,10.531 -9.7241,0 -17.438,-7.7134 -17.438,-17.438 0,-9.7246 7.7134,-17.719 17.438,-17.719 3.6079,0 6.923,1.1171 9.6875,3 l -9.0312,7.1875 26.125,4.8438 v -25.656 z"
+     inkscape:connector-curvature="0" /></g></switch></g><g
+   inkscape:groupmode="layer"
+   id="layer2"
+   inkscape:label="Layer 2"
+   transform="translate(0,16)"><g
+     id="g4226"
+     transform="matrix(13.154777,0,0,13.28801,-5253.5319,-3929.5878)"
+     style="fill:#ffffff"><path
+       id="path4224"
+       d="m 467.53214,307.6231 -9.125,7.25 c -4.799,-4.0243 -10.962,-6.4688 -17.656,-6.4688 -15.129,0 -27.562,12.434 -27.562,27.562 0,15.128 12.434,27.281 27.562,27.281 11.86,0 22.052,-7.4546 25.906,-17.969 l -9.875,-2.4062 c -2.6427,6.2319 -8.7668,10.531 -16.031,10.531 -9.7241,0 -17.438,-7.7134 -17.438,-17.438 0,-9.7246 7.7134,-17.719 17.438,-17.719 3.6079,0 6.923,1.1171 9.6875,3 l -9.0312,7.1875 26.125,4.8438 v -25.656 z"
+       inkscape:connector-curvature="0"
+       style="fill:#ffffff" /></g></g>
+</svg>

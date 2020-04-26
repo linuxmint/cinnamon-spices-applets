@@ -1,0 +1,114 @@
+{
+    "layout1": {
+        "type": "layout",
+        "pages": ["pageTriggers", "pageImage"],
+        "pageTriggers": {
+            "type": "page",
+            "title": "Triggers",
+            "sections": ["changeon"]
+        },
+        "pageImage": {
+            "type": "page",
+            "title": "Image",
+            "sections": ["imageconf"]
+        },
+        "changeon": {
+            "type": "section",
+            "title": "Triggers",
+            "keys": ["change-onstart", "change-onclick", "change-ontime", "change-time"]
+        },
+        "imageconf": {
+            "type": "section",
+            "title": "Image",
+            "keys": ["image-res-manual", "image-res-info", "image-res-width", "image-res-height", "image-tag", "image-tag-info", "image-tag-data", "image-align-info", "image-update-button"]
+        }
+    },
+    "change-onstart" : {
+        "type" : "switch",
+        "default" : true,
+        "description": "On startup",
+        "tooltip": "Every time the applet is (re-)loaded, the background will be changed"
+    },
+    "change-onclick" : {
+        "type" : "switch",
+        "default" : true,
+        "description": "Clicking on the applet",
+        "tooltip": "Just click onto the icon in your panel"
+    },
+    "change-ontime" : {
+        "type" : "switch",
+        "default" : true,
+        "description": "After some time",
+        "tooltip": "After the specified number of minutes passes, we will change the background"
+    },
+    "change-time" : {
+        "type" : "spinbutton",
+        "description" : "Change after",
+        "min" : 1,
+        "max" : 99999,
+        "step" : 1,
+        "units" : "minutes",
+        "default" : 15,
+        "dependency" : "change-ontime=true"
+    },
+    "image-res-manual" : {
+        "type" : "switch",
+        "default" : false,
+        "description": "Use custom resolution",
+        "tooltip": "This is mostly 1920x1080 or higher"
+    },
+    "image-res-info" : {
+        "type" : "label",
+        "description" : "Please make sure to choose a common resolution, otherwise the background can't be changed!",
+        "dependency" : "image-res-manual"
+    },
+    "image-res-width" : {
+        "type" : "spinbutton",
+        "description" : "Width",
+        "min" : 256,
+        "max" : 15360,
+        "step" : 1,
+        "units" : "pixels",
+        "default" : 1920,
+        "dependency" : "image-res-manual"
+    },
+    "image-res-height" : {
+        "type" : "spinbutton",
+        "description" : "Height",
+        "min" : 144,
+        "max" : 8640,
+        "step" : 1,
+        "units" : "pixels",
+        "default" : 1080,
+        "dependency" : "image-res-manual"
+    },
+    "image-tag" : {
+        "type" : "switch",
+        "default" : false,
+        "description": "Use own search tags",
+        "tooltip": "Specify own tags to look for..."
+    },
+    "image-tag-info" : {
+        "type" : "label",
+        "description" : "Please make sure to choose an available tag, otherwise the background can't be changed! Make sure to seperate the tags by a ',' and no spaces. A valid search term would be 'nature,water'...",
+        "dependency" : "image-tag"
+    },
+    "image-tag-data" : {
+        "type" : "entry",
+        "default" : "nature",
+        "description" : "Search tags",
+        "indent": true,
+        "dependency" : "image-tag",
+        "tooltip" : "Enter your topics - like space"
+    },
+    "image-align-info" : {
+        "type" : "label",
+        "description" : "Note that properties for the image alignment are not modified from the original desktop wallpaper. Recommended is to choose the 'zoom' option, because it ensures always the best fit on your screen."
+    },
+    "image-update-button" : {
+        "type" : "button",
+        "description" : "Apply now",
+        "callback" : "_change_background",
+        "tooltip" : "The settings are already stored - press this button to force a refresh of the background now."
+    }
+}
