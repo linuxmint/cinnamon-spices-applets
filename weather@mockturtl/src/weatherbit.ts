@@ -186,15 +186,11 @@ class Weatherbit implements WeatherProvider {
      * in string format, but we can check if unix timestamp and date string has mismatch
      * to figure out if it's an incorrect Date.
      * 
-     * This only works if incorrectTime was given in the same timezone as
-     * the user's system Timezone!
-     * 
      * @param ts unix timestamp initialised as Date from payload
      * @param last_ob_time last refresh time in string format
      * @returns the hour difference of incorrect time from correct time
      */
     private HourDifference(correctTime: Date, incorrectTime: Date): number {
-        // TODO: Only works reliably if original incorrectTime string was in same timezone as system timezone
         return Math.round((incorrectTime.getTime() - correctTime.getTime()) / (1000 * 60 * 60));
     }
 

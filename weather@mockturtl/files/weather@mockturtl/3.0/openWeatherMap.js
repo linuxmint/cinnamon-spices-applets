@@ -180,7 +180,7 @@ var OpenWeatherMap = (function () {
             return null;
         }
         if (!isCoordinate(loc)) {
-            this.app.HandleError({ type: "hard", userError: true, "detail": "bad location format", message: _("Please enter location in the correct format") });
+            this.app.HandleError({ type: "hard", userError: true, "detail": "bad location format", message: _("Please enter location in the correct format (coordinates)") });
             this.app.log.Error("OpenWeatherMap: Location was provided in bad format");
             return null;
         }
