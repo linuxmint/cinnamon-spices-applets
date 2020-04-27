@@ -14,7 +14,7 @@
   },
   "openWM":
   { "type": "label"
-  , "description": "OpenWeatherMap - The default, works out of the box."
+  , "description": "OpenWeatherMap - The default, works out of the box, only accepts coordinates as a location now!"
   },
   "darkS":
   { "type": "label"
@@ -65,8 +65,8 @@
   { "type": "entry"
   , "default": "London,UK"
   , "dependency": "manualLocation"
-  , "description": "Location"
-  , "tooltip": "Acceptable inputs: City,CountryCode or Zipcode,CountryCode or Latitude,Longtitude"
+  , "description": "Location - Coordinates"
+  , "tooltip": "Acceptable inputs is Latitude,Longtitude"
 },
   "getLocation":
   {
@@ -226,6 +226,6 @@
   },
   "credits": {
     "type": "header",
-    "description": "powered by: OpenWeatherMap, DarkSky, ipapi. Big Thanks to OpenWeatherMap for their support!"
+    "description": "powered by: OpenWeatherMap, DarkSky, MET Norway, Weatherbit,\nYahoo and ip-api. Big Thanks to OpenWeatherMap for their FOSS support!"
   }
 }

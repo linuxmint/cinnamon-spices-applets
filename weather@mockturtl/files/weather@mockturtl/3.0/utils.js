@@ -303,7 +303,7 @@ var isCoordinate = function (text) {
     return false;
 };
 var nonempty = function (str) {
-    return (str != null && str.length > 0);
+    return (str != null && str.length > 0 && str != undefined);
 };
 var compassDirection = function (deg) {
     var directions = [_('N'), _('NE'), _('E'), _('SE'), _('S'), _('SW'), _('W'), _('NW')];
