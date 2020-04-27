@@ -19,6 +19,7 @@ class UnsplashBackgroundApplet extends Applet.IconApplet {
 
         this.settings = new imports.ui.settings.AppletSettings(this, uuid, instance_id);
 
+        this.settings.bind("applet-icon-animation", "applet_icon_animation", this.on_settings_changed);
         this.settings.bind("change-onstart", "change_onstart", this.on_settings_changed);
         this.settings.bind("change-onclick", "change_onclick", this.on_settings_changed);
         this.settings.bind("change-ontime", "change_ontime", this.on_settings_changed);
@@ -57,7 +58,31 @@ class UnsplashBackgroundApplet extends Applet.IconApplet {
         this._timeout = imports.mainloop.timeout_add_seconds(this.change_time * 60, imports.lang.bind(this, this._change_background));
     }
 
+    _set_icon_opacity(newValue) {
+        if(this.applet_icon_animation)
+            Tweener.addTween(this._applet_icon, {
+                opacity: newValue,
+                time: 0.8
+            });
+    }
+
+    _icon_animate() {
+        this._icon_opacity = this._icon_opacity == 0 ? 255 : 0;
+        this._set_icon_opacity(this._icon_opacity);
+        //And queue next step...
+        this._animator = imports.mainloop.timeout_add_seconds(1, imports.lang.bind(this, this._icon_animate));
+    }
+
+    _icon_stop() {
+        //Abort queued step
+        imports.mainloop.source_remove(this._animator);
+        //And fade back to normal
+        this._set_icon_opacity(255);
+    }
+
     _change_background() {
+        this._icon_animate();
+
         let gFile = Gio.file_new_for_path(imagePath);
         let fStream = gFile.replace(null, false, Gio.FileCreateFlags.NONE, null);
         let resStr = 'featured';
@@ -74,6 +99,7 @@ class UnsplashBackgroundApplet extends Applet.IconApplet {
                 fStream.write(chunk.get_data(), null);
         });
 
+        var that = this;
         this.httpSession.queue_message(request, function(http, message) {
             fStream.close(null);
 
@@ -84,7 +110,8 @@ class UnsplashBackgroundApplet extends Applet.IconApplet {
                 gSetting.apply();
             } else
                 log('Could not download image!');
-            this._timeout_update();
+            that._timeout_update();
+            that._icon_stop();
         });
         log('Downloading ' + imageUri);
     }
@@ -118,6 +145,7 @@ class UnsplashBackgroundApplet extends Applet.IconApplet {
 
     on_applet_removed_from_panel() {
         this.settings.finalize();
+        this._timeout_disable();
     }
 };
 

@@ -1,16 +1,21 @@
 {
     "layout1": {
         "type": "layout",
-        "pages": ["pageTriggers", "pageImage"],
-        "pageTriggers": {
+        "pages": ["pageBehavior", "pageImage"],
+        "pageBehavior": {
             "type": "page",
-            "title": "Triggers",
-            "sections": ["changeon"]
+            "title": "Behavior",
+            "sections": ["applet", "changeon"]
         },
         "pageImage": {
             "type": "page",
             "title": "Image",
             "sections": ["imageconf"]
+        },
+        "applet": {
+            "type": "section",
+            "title": "Applet",
+            "keys": ["applet-icon-animation"]
         },
         "changeon": {
             "type": "section",
@@ -22,6 +27,12 @@
             "title": "Image",
             "keys": ["image-res-manual", "image-res-info", "image-res-width", "image-res-height", "image-tag", "image-tag-info", "image-tag-data", "image-align-info", "image-update-button"]
         }
+    },
+    "applet-icon-animation" : {
+        "type" : "switch",
+        "default" : true,
+        "description": "Animate icon while downloading",
+        "tooltip": "When a new background is downloaded the icon gets animated..."
     },
     "change-onstart" : {
         "type" : "switch",
@@ -90,7 +101,7 @@
     },
     "image-tag-info" : {
         "type" : "label",
-        "description" : "Please make sure to choose an available tag, otherwise the background can't be changed! Make sure to seperate the tags by a ',' and no spaces. A valid search term would be 'nature,water'...",
+        "description" : "Please make sure to choose an available tag, otherwise the background can't be changed! Make sure to seperate the tags by a ',' and not spaces, also the tags are understood as AND - not as OR! A valid search term could be 'nature,water'...",
         "dependency" : "image-tag"
     },
     "image-tag-data" : {
@@ -99,7 +110,7 @@
         "description" : "Search tags",
         "indent": true,
         "dependency" : "image-tag",
-        "tooltip" : "Enter your topics - like space"
+        "tooltip" : "Enter your topic filters"
     },
     "image-align-info" : {
         "type" : "label",
