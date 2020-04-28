@@ -40,32 +40,6 @@ const sortBy = function(array = [], property = '', direction = 'asc') {
   });
 }
 
-const sortDirs = function(dirs) {
-  dirs.sort(function(a, b) {
-    let prefCats = ['administration', 'preferences'];
-    let menuIdA = a.get_menu_id().toLowerCase();
-    let menuIdB = b.get_menu_id().toLowerCase();
-    let prefIdA = prefCats.indexOf(menuIdA);
-    let prefIdB = prefCats.indexOf(menuIdB);
-    if (prefIdA < 0 && prefIdB >= 0) {
-      return -1;
-    }
-    if (prefIdA >= 0 && prefIdB < 0) {
-      return 1;
-    }
-    let nameA = a.get_name().toLowerCase();
-    let nameB = b.get_name().toLowerCase();
-    if (nameA > nameB) {
-      return 1;
-    }
-    if (nameA < nameB) {
-      return -1;
-    }
-    return 0;
-  });
-  return dirs;
-};
-
 const readFileAsync = function(file, opts = {utf8: true}) {
   const {utf8} = opts;
   return new Promise(function(resolve, reject) {
@@ -189,50 +163,49 @@ const buildSettings = function(fds, knownProviders, schema, schemaFile, backupSc
 };
 
 const setSchema = function(path, categoryButtons, startupCategory, cb) {
-  let schemaFile = Gio.File.new_for_path(path + '/settings-schema.json');
-  let backupSchemaFile = Gio.File.new_for_path(path + '/settings-schema-backup.json');
-  let startupCategoryValid = false;
-  let knownProviders = [];
-  let next = () => cb(knownProviders, startupCategoryValid);
+    let schemaFile = Gio.File.new_for_path(path + '/settings-schema.json');
+    let backupSchemaFile = Gio.File.new_for_path(path + '/settings-schema-backup.json');
+    let startupCategoryValid = false;
+    let knownProviders = [];
+    let next = () => cb(knownProviders, startupCategoryValid);
 
-  readJSONAsync(schemaFile).then(function(schema) {
-    each(categoryButtons, function(category) {
-      schema.startupCategory.options[category.categoryNameText] = category.id;
-      if (category.id === startupCategory) startupCategoryValid = true;
-    });
-
-    // Back up the schema file if it doesn't exist.
-    if (!backupSchemaFile.query_exists(null)) {
-      return copyFileAsync(schemaFile, backupSchemaFile, schema);
-    }
-    return Promise.resolve(schema);
-  }).then(function(schema) {
-    let providerFiles = [];
-    let dataDir = Gio.File.new_for_path(global.datadir + '/search_providers');
-    let userDataDir = Gio.File.new_for_path(global.userdatadir + '/search_providers');
-    if (dataDir.query_exists(null)) {
-      listDirAsync(dataDir, (files) => {
-        providerFiles = providerFiles.concat([[dataDir, files]]);
-        if (userDataDir.query_exists(null)) {
-          listDirAsync(userDataDir, (files) => {
-            providerFiles = providerFiles.concat([[userDataDir, files]]);
-            buildSettings(providerFiles, knownProviders, schema, schemaFile, backupSchemaFile, next);
-          });
-        } else {
-          buildSettings(providerFiles, knownProviders, schema, schemaFile, backupSchemaFile, next);
-        }
-      });
-    } else if (userDataDir.query_exists(null)) {
-      listDirAsync(userDataDir, (files) => {
-        buildSettings([[userDataDir, files]], knownProviders, schema, schemaFile, backupSchemaFile, next);
-      });
-    } else {
-      next();
-    }
+    readJSONAsync(schemaFile)
+        .then(function(schema) {
+            each(categoryButtons, function(category) {
+                          schema.startupCategory.options[category.categoryNameText] = category.id;
+                          if (category.id === startupCategory) startupCategoryValid = true; });
+            // Back up the schema file if it doesn't exist.
+            if (!backupSchemaFile.query_exists(null)) {
+                return copyFileAsync(schemaFile, backupSchemaFile, schema);
+            }
+            return Promise.resolve(schema); })
+        .then(function(schema) {
+            let providerFiles = [];
+            let dataDir = Gio.File.new_for_path(global.datadir + '/search_providers');
+            let userDataDir = Gio.File.new_for_path(global.userdatadir + '/search_providers');
+            if (dataDir.query_exists(null)) {
+              listDirAsync(dataDir, (files) => {
+                providerFiles = providerFiles.concat([[dataDir, files]]);
+                if (userDataDir.query_exists(null)) {
+                  listDirAsync(userDataDir, (files) => {
+                    providerFiles = providerFiles.concat([[userDataDir, files]]);
+                    buildSettings(providerFiles, knownProviders, schema, schemaFile, backupSchemaFile, next);
+                  });
+                } else {
+                  buildSettings(providerFiles, knownProviders, schema, schemaFile, backupSchemaFile, next);
+                }
+              });
+            } else if (userDataDir.query_exists(null)) {
+              listDirAsync(userDataDir, (files) => {
+                buildSettings([[userDataDir, files]], knownProviders, schema, schemaFile, backupSchemaFile, next);
+              });
+            } else {
+              next();
+            }
   }).catch(function(e) {
     global.log(e);
     copyFileAsync(backupSchemaFile, schemaFile).then(next);
   });
 };
 
-module.exports = {tryFn, sortBy, sortDirs, readFileAsync, readJSONAsync, writeFileAsync, copyFileAsync, buildSettings, setSchema};
+module.exports = {tryFn, sortBy, readFileAsync, readJSONAsync, setSchema};
