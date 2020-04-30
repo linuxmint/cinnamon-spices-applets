@@ -29,6 +29,7 @@ const Clutter = imports.gi.Clutter;
 const St = imports.gi.St;
 const Gettext = imports.gettext;
 const GLib = imports.gi.GLib;
+const Gio = imports.gi.Gio;
 const Settings = imports.ui.settings;
 const UUID = "hwmonitor@sylfurd";
 
@@ -145,14 +146,14 @@ GraphicalHWMonitorApplet.prototype = {
         // DISK (read) settings
         this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "diskread_enable_graph", "diskread_enable_graph", this.settingsChanged, null);
         this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "diskread_size", "diskread_size", this.settingsChanged, null);
-        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "diskread_mount_dir", "diskread_mount_dir", this.settingsChanged, null);
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "diskread_device_name", "diskread_device_name", this.settingsChanged, null);
         this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "diskread_use_custom_label", "diskread_use_custom_label", this.settingsChanged, null);
         this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "diskread_custom_label", "diskread_custom_label", this.settingsChanged, null);
         this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "diskread_show_detail_label", "diskread_show_detail_label", this.settingsChanged, null);
         // DISK (write) settings
         this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "diskwrite_enable_graph", "diskwrite_enable_graph", this.settingsChanged, null);
         this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "diskwrite_size", "diskwrite_size", this.settingsChanged, null);
-        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "diskwrite_mount_dir", "diskwrite_mount_dir", this.settingsChanged, null);
+        this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "diskwrite_device_name", "diskwrite_device_name", this.settingsChanged, null);
         this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "diskwrite_use_custom_label", "diskwrite_use_custom_label", this.settingsChanged, null);
         this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "diskwrite_custom_label", "diskwrite_custom_label", this.settingsChanged, null);
         this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "diskwrite_show_detail_label", "diskwrite_show_detail_label", this.settingsChanged, null);
@@ -164,6 +165,8 @@ GraphicalHWMonitorApplet.prototype = {
         this.settings.bindProperty(Settings.BindingDirection.BIDIRECTIONAL, "bat_show_detail_label", "bat_show_detail_label", this.settingsChanged, null);
         
         this.createThemeObject();
+
+        this.getAvailableDisks();
 
         this.createAppletArea();
 
@@ -235,7 +238,7 @@ GraphicalHWMonitorApplet.prototype = {
             else
                 diskReadGraphArea = this.appletArea.addGraph(this.panel_height, this.diskread_size);
 
-            let diskReadProvider =  new Providers.DiskDataProvider(this.frequency, true, this.diskread_mount_dir);
+            let diskReadProvider =  new Providers.DiskDataProvider(this.frequency, this.diskread_size, true, this.diskread_device_name);
             this.graphs.push(new Graph.Graph(diskReadProvider, diskReadGraphArea, this.theme_object, this.diskread_show_detail_label));
         }    
                 
@@ -247,7 +250,7 @@ GraphicalHWMonitorApplet.prototype = {
             else
                 diskWriteGraphArea = this.appletArea.addGraph(this.panel_height, this.diskwrite_size);
 
-            let diskWriteProvider =  new Providers.DiskDataProvider(this.frequency, false, this.diskwrite_mount_dir);
+            let diskWriteProvider =  new Providers.DiskDataProvider(this.frequency, this.diskread_size, false, this.diskwrite_device_name);
             this.graphs.push(new Graph.Graph(diskWriteProvider, diskWriteGraphArea, this.theme_object, this.diskwrite_show_detail_label));
         }    
 
@@ -370,6 +373,23 @@ GraphicalHWMonitorApplet.prototype = {
 
         return colors;
     },
+    // Queries the system for available block devices which the user may select from
+    getAvailableDisks: function() {
+        let devices_list = [];
+        let devices_options = {};
+        let d = Gio.File.new_for_path("/sys/block");
+        let en = d.enumerate_children("standard::name", Gio.FileQueryInfoFlags.NONE, null);
+        let info;
+        while (info = en.next_file(null)) {
+            devices_list.push(info.get_name())
+        }
+        devices_list = devices_list.sort();
+        for (var key of devices_list) {
+            devices_options[key] = key;
+        }
+        this.settings.setOptions("diskread_device_name", devices_options);
+        this.settings.setOptions("diskwrite_device_name", devices_options);
+    },
 
     // Creates an object containing the users selected theme settings
     createThemeObject: function() {
@@ -412,6 +432,7 @@ GraphicalHWMonitorApplet.prototype = {
         this.removeUpdateLoop();
         this.addUpdateLoop(this.frequency);
         this.updateAppletArea();        
+        this.getAvailableDisks();
     },
 
     _runSysMon: function() {
