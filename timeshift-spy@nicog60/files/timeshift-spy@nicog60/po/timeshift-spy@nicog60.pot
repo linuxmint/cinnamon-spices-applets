@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-29 20:10+0100\n"
+"POT-Creation-Date: 2020-04-30 13:06+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,15 +21,19 @@ msgstr ""
 msgid "Make a new snapshot"
 msgstr ""
 
-#: applet.js:301
+#: applet.js:315
+msgid "Timeshift not configured"
+msgstr ""
+
+#: applet.js:317
 msgid "Backup device not found"
 msgstr ""
 
-#: applet.js:308
+#: applet.js:322
 msgid "Wait for snapshot to begin"
 msgstr ""
 
-#: applet.js:314
+#: applet.js:328
 msgid "Making snapshot..."
 msgstr ""
 

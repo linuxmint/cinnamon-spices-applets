@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-29 20:10+0100\n"
-"PO-Revision-Date: 2020-04-29 20:18+0100\n"
+"POT-Creation-Date: 2020-04-30 13:06+0100\n"
+"PO-Revision-Date: 2020-04-30 13:11+0100\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,15 +22,19 @@ msgstr ""
 msgid "Make a new snapshot"
 msgstr "Faire une sauvegarde"
 
-#: applet.js:301
+#: applet.js:315
+msgid "Timeshift not configured"
+msgstr "Timeshift n'est pas configuré"
+
+#: applet.js:317
 msgid "Backup device not found"
 msgstr "Appareil de sauvegarde non connecté"
 
-#: applet.js:308
+#: applet.js:322
 msgid "Wait for snapshot to begin"
 msgstr "En attente de sauvegarde"
 
-#: applet.js:314
+#: applet.js:328
 msgid "Making snapshot..."
 msgstr "Sauvegarde en cours..."
 
@@ -44,4 +48,4 @@ msgstr ""
 
 #. metadata.json->name
 msgid "Timeshift Spy"
-msgstr "Timeshift Spy"
+msgstr ""
