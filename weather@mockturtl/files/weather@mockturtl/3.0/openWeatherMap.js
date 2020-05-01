@@ -56,6 +56,7 @@ var isID = utils.isID;
 var icons = utils.icons;
 var weatherIconSafely = utils.weatherIconSafely;
 var get = utils.get;
+var nonempty = utils.nonempty;
 var OpenWeatherMap = (function () {
     function OpenWeatherMap(_app) {
         this.supportedLanguages = ["af", "ar", "az", "bg", "ca", "cz", "da", "de", "el", "en", "eu", "fa", "fi",
@@ -168,22 +169,23 @@ var OpenWeatherMap = (function () {
             }
             return query;
         }
-        this.app.HandleError({ type: "hard", userError: true, "detail": "no location", message: _("Please enter a Location in settings") });
-        this.app.log.Error("OpenWeatherMap: No Location was provided");
         return null;
     };
     ;
     OpenWeatherMap.prototype.ParseLocation = function () {
         var loc = this.app.config._location.replace(/ /g, "");
-        if (isCoordinate(loc)) {
-            var locArr = loc.split(',');
-            return "lat=" + locArr[0] + "&lon=" + locArr[1];
+        if (!nonempty(loc)) {
+            this.app.HandleError({ type: "hard", userError: true, "detail": "no location", message: _("Please enter a Location in settings") });
+            this.app.log.Error("OpenWeatherMap: No Location was provided");
+            return null;
         }
-        else if (isID(loc)) {
-            return "id=" + loc;
+        if (!isCoordinate(loc)) {
+            this.app.HandleError({ type: "hard", userError: true, "detail": "bad location format", message: _("Please enter location in the correct format (coordinates)") });
+            this.app.log.Error("OpenWeatherMap: Location was provided in bad format");
+            return null;
         }
-        else
-            return "q=" + loc;
+        var locArr = loc.split(',');
+        return "lat=" + locArr[0] + "&lon=" + locArr[1];
     };
     ;
     OpenWeatherMap.prototype.ConvertToAPILocale = function (systemLocale) {

@@ -140,7 +140,7 @@ var timeToUserUnits = function(date: Date, show24Hours: boolean) {
     if (time[0].charAt(0) == "0") {
       time[0] = time[0].substr(1);
     }
-    //Returnt Time based on user preference
+    //Return Time based on user preference
     if(show24Hours) {
       return time[0] + ":" + time[1];
     }
@@ -307,7 +307,7 @@ var isCoordinate = function(text: any): boolean {
   }
 
 var nonempty = function(str: string): boolean {
-    return (str != null && str.length > 0)
+    return (str != null && str.length > 0 && str != undefined)
   }
 
 var compassDirection = function(deg: number): string {
