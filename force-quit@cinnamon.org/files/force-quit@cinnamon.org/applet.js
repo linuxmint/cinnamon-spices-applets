@@ -4,10 +4,10 @@ const GLib = imports.gi.GLib;
 const Gettext = imports.gettext;
 const UUID = "force-quit@cinnamon.org";
 
-Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "./local/share/locale");
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
 
 function _(str) {
-    return Gettext.dgettext(UUID, str)
+    return Gettext.dgettext(UUID, str);
 }
 
 function MyApplet(orientation) {
@@ -21,7 +21,7 @@ MyApplet.prototype = {
         Applet.IconApplet.prototype._init.call(this, orientation);
 
         try {
-            this.set_applet_icon_name("window-close");
+            this.set_applet_icon_symbolic_name("window-close");
             this.set_applet_tooltip(_("Click here to kill a window"));
             this.actor.connect('button-release-event', Lang.bind(this, this._onButtonReleaseEvent));
         }
