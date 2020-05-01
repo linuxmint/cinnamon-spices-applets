@@ -66,6 +66,9 @@ class Weatherbit {
     ;
     ParseCurrent(json, self) {
         json = json.data[0];
+        let hourDiff = self.HourDifference(new Date(json.ts * 1000), self.ParseStringTime(json.ob_time));
+        if (hourDiff != 0)
+            self.app.log.Debug("Weatherbit reporting incorrect time, correcting with " + (0 - hourDiff).toString() + " hours");
         try {
             let weather = {
                 coord: {
@@ -79,8 +82,8 @@ class Weatherbit {
                     timeZone: json.timezone
                 },
                 date: new Date(json.ts * 1000),
-                sunrise: self.TimeToDate(json.sunrise),
-                sunset: self.TimeToDate(json.sunset),
+                sunrise: self.TimeToDate(json.sunrise, hourDiff),
+                sunset: self.TimeToDate(json.sunset, hourDiff),
                 wind: {
                     speed: json.wind_spd,
                     degree: json.wind_dir
@@ -137,12 +140,21 @@ class Weatherbit {
         }
     }
     ;
-    TimeToDate(time) {
+    TimeToDate(time, hourDiff) {
         let hoursMinutes = time.split(":");
         let date = new Date();
-        date.setHours(parseInt(hoursMinutes[0]));
+        date.setHours(parseInt(hoursMinutes[0]) - hourDiff);
         date.setMinutes(parseInt(hoursMinutes[1]));
         return date;
+    }
+    HourDifference(correctTime, incorrectTime) {
+        return Math.round((incorrectTime.getTime() - correctTime.getTime()) / (1000 * 60 * 60));
+    }
+    ParseStringTime(last_ob_time) {
+        let splitted = last_ob_time.split(/[T\-\s:]/);
+        if (splitted.length != 5)
+            return null;
+        return new Date(parseInt(splitted[0]), parseInt(splitted[1]) - 1, parseInt(splitted[2]), parseInt(splitted[3]), parseInt(splitted[4]));
     }
     ConvertToAPILocale(systemLocale) {
         if (systemLocale == "zh-tw") {

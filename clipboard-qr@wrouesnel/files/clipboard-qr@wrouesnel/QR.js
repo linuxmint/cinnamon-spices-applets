@@ -6,6 +6,7 @@
 const Lang = imports.lang;
 const Clutter = imports.gi.Clutter;
 const St = imports.gi.St;
+const Gio = imports.gi.Gio;
 
 const AppletDir = imports.ui.appletManager.appletMeta['clipboard-qr@wrouesnel'].path;
 imports.ui.searchPath.unshift(AppletDir);
@@ -39,6 +40,7 @@ QR.prototype = {
         this._qrdata = {};
         this.error = '';
         this.actor.connect('repaint', Lang.bind(this, this._draw));
+        this.svgPath = AppletDir + "/qr-code.svg";
     },
     _draw: function() {
         let [width, height] = this.actor.get_surface_size();
@@ -59,13 +61,15 @@ QR.prototype = {
         for (let i = 0; i < length; ++i) {
             for (let j = 0; j < length; ++j) {
                 if (this._qrdata[i][j]) {
-                    context.rectangle(QR_Blocksize * (j + 1), QR_Blocksize * (i + 1), 
+                    context.rectangle(QR_Blocksize * (j + 1), QR_Blocksize * (i + 1),
                     	QR_Blocksize, QR_Blocksize);
                     context.fill();
                 }
             }
         }
         this.actor.show();
+
+        this._create_svg(this._qrdata)
     },
     _resize: function(size) {
         this.size = size;
@@ -83,5 +87,27 @@ QR.prototype = {
             this._qrdata = {};
             this._resize(0);
         }
+    },
+    _create_svg: function(qrmatrix) {
+        let length = qrmatrix.length;
+        let height = length+2
+
+        let svgFile = Gio.File.new_for_path(this.svgPath)
+        if (svgFile.query_exists(null))
+            svgFile.delete(null);
+        let readwrite = svgFile.create_readwrite(Gio.FileCreateFlags.NONE, null);
+        let writeFile = readwrite.get_output_stream();
+
+        writeFile.write('<svg height="' + height + '" width="' + height + '" xmlns="http://www.w3.org/2000/svg">', null)
+        writeFile.write('  <rect width="' + height + '" height="' + height + '" x="0" y="0" fill="#ffffff" />\n', null);
+
+        for (let i = 0; i < length; ++i) {
+            for (let j = 0; j < length; ++j) {
+                if(qrmatrix[i][j])
+                    writeFile.write('  <rect width="1" height="1" x="'+ (i+1) +'" y="' + (j+1) + '" fill="#000000" />\n', null);
+            }
+        }
+        writeFile.write('</svg>', null)
+        writeFile.close(null);
     }
 };
