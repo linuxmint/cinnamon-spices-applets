@@ -1,31 +1,93 @@
 {
     "layout1": {
         "type": "layout",
-        "pages": ["pageBehavior", "pageImage"],
-        "pageBehavior": {
+        "pages": ["pageBehaviour", "pageEffects", "pageSource", "pageResolution"],
+        "pageBehaviour": {
             "type": "page",
-            "title": "Behavior",
+            "title": "Behaviour",
             "sections": ["applet", "changeon"]
         },
-        "pageImage": {
+        "pageEffects": {
             "type": "page",
-            "title": "Image",
-            "sections": ["imageconf"]
+            "title": "Effects",
+            "sections": ["effects", "imageapply"]
+        },
+        "pageSource": {
+            "type": "page",
+            "title": "Source",
+            "sections": ["imagesource", "imageurl", "imagetags", "imageapply"]
+        },
+        "pageResolution": {
+            "type": "page",
+            "title": "Resolution",
+            "sections": ["imageresbing", "imageresplacecutycapt", "imageresplacekitten", "imagerespicsum", "imageresunsplash", "imageapply"]
         },
         "applet": {
             "type": "section",
             "title": "Applet",
-            "keys": ["applet-icon-animation"]
+            "keys": ["applet-icon-animation", "applet-show-notification", "applet-info-issues"]
+        },
+        "effects": {
+            "type": "section",
+            "title": "Image effects",
+            "keys": ["effect-note", "effect-select"]
         },
         "changeon": {
             "type": "section",
             "title": "Triggers",
             "keys": ["change-onstart", "change-onclick", "change-ontime", "change-time"]
         },
-        "imageconf": {
+        "imagesource": {
             "type": "section",
-            "title": "Image",
-            "keys": ["image-res-manual", "image-res-info", "image-res-width", "image-res-height", "image-tag", "image-tag-info", "image-tag-data", "image-align-info", "image-update-button"]
+            "title": "Source",
+            "keys": ["image-source", "install-warn-cutycapt"]
+        },
+        "imageresbing": {
+            "type": "section",
+            "title": "Resolution",
+            "dependency": "image-source=bing",
+            "keys": ["image-res-unsupported"]
+        },
+        "imageresunsplash": {
+            "type": "section",
+            "title": "Resolution",
+            "dependency": "image-source=unsplash",
+            "keys": ["image-res-manual", "image-res-info", "image-res-width", "image-res-height"]
+        },
+        "imageresplacekitten": {
+            "type": "section",
+            "title": "Resolution",
+            "dependency": "image-source=placekitten",
+            "keys": ["image-res-manual", "image-res-info", "image-res-width", "image-res-height"]
+        },
+        "imageresplacecutycapt": {
+            "type": "section",
+            "title": "Resolution",
+            "dependency": "image-source=cutycapt",
+            "keys": ["image-res-manual", "image-res-info", "image-res-width", "image-res-height"]
+        },
+        "imagerespicsum": {
+            "type": "section",
+            "title": "Resolution",
+            "dependency": "image-source=picsum",
+            "keys": ["image-res-manual", "image-res-info", "image-res-width", "image-res-height"]
+        },
+        "imageurl": {
+            "type": "section",
+            "title": "URI",
+            "dependency": "image-source=cutycapt",
+            "keys": ["image-uri"]
+        },
+        "imagetags": {
+            "type": "section",
+            "title": "Tags",
+            "dependency": "image-source=unsplash",
+            "keys": ["image-tag", "image-tag-info", "image-tag-data", "image-align-info"]
+        },
+        "imageapply": {
+            "type": "section",
+            "title": "Apply",
+            "keys": ["image-update-button"]
         }
     },
     "applet-icon-animation" : {
@@ -33,6 +95,16 @@
         "default" : true,
         "description": "Animate icon while downloading",
         "tooltip": "When a new background is downloaded the icon gets animated..."
+    },
+    "applet-show-notification" : {
+        "type" : "switch",
+        "default" : true,
+        "description": "Show notifications on problems",
+        "tooltip": "Bad network? Faulty setup? The applet will notify you. Every time."
+    },
+    "applet-info-issues" : {
+        "type" : "label",
+        "description" : "You found a bug or want to suggest a missing feature? Just checkout the source code at https://github.com/Simonmicro/better-backgrounds right over on Github!"
     },
     "change-onstart" : {
         "type" : "switch",
@@ -61,6 +133,37 @@
         "units" : "minutes",
         "default" : 15,
         "dependency" : "change-ontime=true"
+    },
+    "effect-note" : {
+        "type" : "label",
+        "description" : "Apply here some effects with imagemagick (make sure that package is installed or at least the mogrify command)..."
+    },
+    "effect-select" : {
+        "type" : "combobox",
+        "description" : "Apply effects",
+        "default" : "none",
+        "options" : {
+            "Gaussian blur" : "gaussian-blur",
+            "Grayscale" : "grayscale",
+            "None" : "none"
+        }
+    },
+    "image-source" : {
+        "type" : "combobox",
+        "description" : "Image source",
+        "default" : "unsplash",
+        "options" : {
+            "Bing" : "bing",
+            "Cutycapt" : "cutycapt",
+            "Placekitten" : "placekitten",
+            "Picsum Photos" : "picsum",
+            "Unsplash" : "unsplash"
+        }
+    },
+    "install-warn-cutycapt" : {
+        "type" : "label",
+        "description" : "Please make sure to install the 'cutycapt' package from the package manager of your choice!",
+        "dependency" : "image-source=cutycapt"
     },
     "image-res-manual" : {
         "type" : "switch",
@@ -99,6 +202,10 @@
         "description": "Use own search tags",
         "tooltip": "Specify own tags to look for..."
     },
+    "image-res-unsupported" : {
+        "type" : "label",
+        "description" : "Sorry, the selected option does not support resulution modifiers."
+    },
     "image-tag-info" : {
         "type" : "label",
         "description" : "Please make sure to choose an available tag, otherwise the background can't be changed! Make sure to seperate the tags by a ',' and not spaces, also the tags are understood as AND - not as OR! A valid search term could be 'nature,water'...",
@@ -115,6 +222,13 @@
     "image-align-info" : {
         "type" : "label",
         "description" : "Note that properties for the image alignment are not modified from the original desktop wallpaper. Recommended is to choose the 'zoom' option, because it ensures always the best fit on your screen."
+    },
+    "image-uri" : {
+        "type" : "entry",
+        "default" : "https://distrowatch.com/",
+        "description" : "Website URI to render",
+        "indent": true,
+        "tooltip" : "Enter the website URI which sould be rendered as your background"
     },
     "image-update-button" : {
         "type" : "button",

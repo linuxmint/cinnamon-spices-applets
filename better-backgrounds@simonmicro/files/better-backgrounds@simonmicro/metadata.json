@@ -1,7 +1,7 @@
 {
     "uuid": "better-backgrounds@simonmicro",
     "name": "Better Backgrounds",
-    "description": "Apply new backgrounds from Unsplash.com - specify search tags, triggers and more...",
+    "description": "Apply new backgrounds from Picsum Photos, Bing, PlaceKitten.com, Unsplash.com or even whole websites - specify search tags, triggers and more...",
     "max-instances": "-1",
-    "last-edited": 1587941689
+    "last-edited": 1588360629
 }
