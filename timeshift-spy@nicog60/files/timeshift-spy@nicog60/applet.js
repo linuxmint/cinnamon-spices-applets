@@ -92,13 +92,24 @@ class TimeshiftSpy extends Applet.IconApplet {
     reload_config() {
         var old_uuid = this.backup_device_uuid
 
-        var parser = Json.Parser.new_immutable()
-        parser.load_from_file('/etc/timeshift.json')
-        var object = parser.get_root().get_object()
+        var config_path = '/etc/timeshift.json'
 
-        this.backup_device_uuid = object.get_string_member('backup_device_uuid')
+        var config_file = Gio.File.new_for_path(config_path)
 
-        this.check_backup_device()
+        if(config_file.query_exists(null)) {
+        	var parser = Json.Parser.new_immutable()
+        	parser.load_from_file(config_path)
+        	var object = parser.get_root().get_object()
+
+        	this.backup_device_uuid = object.get_string_member('backup_device_uuid')
+
+        	if(this.backup_device_uuid.length > 0)
+				this.check_backup_device()
+			else
+				this.backup_device_uuid = null
+        }
+        else
+        	this.backup_device_uuid = null
     }
 
     /**
@@ -298,9 +309,12 @@ class TimeshiftSpy extends Applet.IconApplet {
         switch(state) {
             case IDLE:
             this.set_applet_icon_name('timeshift-idle')
-            this.set_applet_tooltip(_('Backup device not found'))
             this.idle_timer = setInterval(this.reload_config, 60000)
             this.reload_config()
+            if(this.backup_device_uuid === null)
+            	this.set_applet_tooltip(_('Timeshift not configured'))
+            else
+            	this.set_applet_tooltip(_('Backup device not found'))
             break
 
             case WAIT_FOR_SNAP:
