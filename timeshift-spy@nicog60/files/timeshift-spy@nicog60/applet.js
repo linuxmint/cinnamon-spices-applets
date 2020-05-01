@@ -117,17 +117,33 @@ class TimeshiftSpy extends Applet.IconApplet {
      * applet state to WAIT_FOR_SNAP
      */
     check_backup_device() {
-        var v_list = Gio.VolumeMonitor.get().get_volumes()
+        var found = false
 
-        var found = v_list.some(v => {
-            let uuid = v.get_uuid()
-            let mount = v.get_mount();
+        // Ok, here is a horrible hack to get the uuid of the root volume.
+        // as there is no way to get it from Gio API 
+        var root_uuid = GLib.spawn_command_line_sync('findmnt / -o UUID -n')[1].toString()
 
-            if(uuid === this.backup_device_uuid && mount !== null)
-                return true
-            else
-                return false
-        })
+        if(root_uuid = this.backup_device_uuid) {
+            this.backup_mount_point = Gio.File.new_for_path('/')
+            found = true
+        } else {
+            var v_list = Gio.VolumeMonitor.get().get_volumes()
+
+            found = v_list.some(v => {
+                let uuid = v.get_uuid()
+                let mount = v.get_mount()
+
+                global.log(uuid,mount)
+
+                if(uuid === this.backup_device_uuid && mount !== null) {
+                    this.backup_mount_point = mount.get_root()
+                    return true
+                } else {
+                    this.backup_mount_point = null
+                    return false
+                }
+            })
+        }
 
         if(found)
             this.set_state(WAIT_FOR_SNAP)
@@ -145,18 +161,7 @@ class TimeshiftSpy extends Applet.IconApplet {
         // retrieve the moun point. If it fails to get it, check if the backup
         // device is there again and update the state.
 
-        // Get the volume
-        var v = Gio.VolumeMonitor.get().get_volume_for_uuid(this.backup_device_uuid)
-
-        if(v === null) {
-            this.check_backup_device()
-            return
-        }
-
-        // Get the mount point
-        var m = v.get_mount()
-
-        if(m === null) {
+        if(this.backup_device_uuid == null || this.backup_mount_point == null) {
             this.check_backup_device()
             return
         }
@@ -166,12 +171,7 @@ class TimeshiftSpy extends Applet.IconApplet {
         // them to have the latest first
 
         // Go to the snapshot dir
-        var f = m.get_root()
-
-        if(f === null)
-            return
-
-        f = f.get_child('timeshift').get_child('snapshots')
+        var f = this.backup_mount_point.get_child('timeshift').get_child('snapshots')
 
         // Get all the snapshots names (and therefore dates)
         var e = f.enumerate_children('standard::name', 0, null)
