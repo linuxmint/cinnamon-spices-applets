@@ -571,8 +571,8 @@
           "sdb": "sdb",
           "sdc": "sdc"
       },
-      "description": "Set the device name to monitor for the DISK (read) graph.",
-      "tooltip": "Set the device name to monitor for the DISK (read) graph.",
+      "description": "Set the device to monitor for the DISK (read) graph.",
+      "tooltip": "Set the device to monitor for the DISK (read) graph.",
       "dependency": "diskread_enable_graph"
     },
     "diskread_use_custom_label": {
@@ -620,8 +620,8 @@
           "sdb": "sdb",
           "sdc": "sdc"
       },
-      "description": "Set the device name to monitor for the DISK (write) graph.",
-      "tooltip": "Set the device name to monitor for the DISK (write) graph.",
+      "description": "Set the device to monitor for the DISK (write) graph.",
+      "tooltip": "Set the device to monitor for the DISK (write) graph.",
       "dependency": "diskwrite_enable_graph"
     },
     "diskwrite_use_custom_label": {

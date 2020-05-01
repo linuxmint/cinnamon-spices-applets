@@ -377,15 +377,34 @@ GraphicalHWMonitorApplet.prototype = {
     getAvailableDisks: function() {
         let devices_options = {};
         let block_devices = new GUdev.Client().query_by_subsystem("block");
+        
         for (var n = 0; n < block_devices.length; n++) {
+            let options_labels = [];
+
             let name = block_devices[n].get_name();
-            let label = block_devices[n].get_property("ID_FS_LABEL_ENC");
-            devices_options[name + (label == null ? "" : ("   " + label.replace(/\\x20/g, " ")))] = name;
+            options_labels.push(name);
+
+            let format = new Providers.Tools();
+            let capacity = format.formatBytes(block_devices[n].get_sysfs_attr("size") * 512);
+            options_labels.push(`[${capacity}]`);
+            
+            let id_fs_label = block_devices[n].get_property("ID_FS_LABEL");
+            options_labels.length < 3 && id_fs_label != null ? options_labels.push(id_fs_label.toString()) : {};
+
+            let id_model = block_devices[n].get_property("ID_MODEL");
+            options_labels.length < 3 && id_model != null ? options_labels.push(id_model.toString()) : {};
+
+            let dm_name = block_devices[n].get_property("DM_NAME");
+            options_labels.length < 3 && dm_name != null ? options_labels.push(dm_name.toString()) : {};
+
+            devices_options[options_labels.join("   ")] = name.trim();
         }
+        // filter and sort into new object
         let ordered_devices_options = {};
         Object.keys(devices_options).filter(x => !x.includes("loop")).sort().forEach(function(key) {
             ordered_devices_options[key] = devices_options[key];
         });
+
         this.settings.setOptions("diskread_device_name", ordered_devices_options);
         this.settings.setOptions("diskwrite_device_name", ordered_devices_options);
     },
