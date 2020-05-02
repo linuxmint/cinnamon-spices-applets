@@ -1,6 +1,7 @@
 const Gio = imports.gi.Gio;
 const St = imports.gi.St;
 const GLib = imports.gi.GLib;
+const GUdev = imports.gi.GUdev;
 
 //
 // Initialize GTop
@@ -207,58 +208,78 @@ class NetDataProvider {
 
 // Class responsible for getting DISK (read/write) data
 class DiskDataProvider {
-	constructor(frequency, type_read, mount_dir) {
-        this.gtop = new GTop.glibtop_fsusage();
-        this.frequency = frequency;
-        this.last = -1;
-        this.max = 1;
-        this.type_read = type_read;
-        this.mount_dir = mount_dir;
-        if (this.type_read) {
+	constructor(frequency, sample_size, type_read, device_name) {
+        if (type_read) {
             this.name = _("DISK (read)");
             this.type = "DISKREAD";
         } else {
             this.name = _("DISK (write)");
             this.type = "DISKWRITE";
         }
+        this.frequency = frequency;
+        this.type_read = type_read;
+        this.device_name = device_name;
+        this.sample_size = sample_size;
+        this.sample_history = [];
+
+        [this.read_last, this.written_last] = this.getDiskLoad();
     }
 
     getData() {
         try {
-            GTop.glibtop_get_fsusage(this.gtop, this.mount_dir);
-            let current = 0;
-            if (this.type_read) {
-                current = this.gtop.read;
-            } else {
-                current = this.gtop.write;
-            }
+            let [read, written] = this.getDiskLoad();
+            let read_delta = (read - this.read_last) / this.frequency;
+            let written_delta = (written - this.written_last) / this.frequency;
+            this.read_last = read;
+            this.written_last = written;
+            let format = new Tools();
             
-            if (this.last==-1) {
-                this.text = "0 %";
-                this.last = current;
-                return 0;
-            } else {
-                // Drive usage (percent of drive full)
-                // let usage = (this.gtop.blocks - this.gtop.bfree) / this.gtop.blocks;
-                // var text = (usage*100).toFixed(1);
-                // return tools.limit(usage, 0, 1);
+            this.max_speed = Math.max(...this.sample_history);
 
-                // Calculate percent being used
-                let usage = current - this.last;
-                this.last = current;                            // Save number of read/write blocks for next check
-                if (usage > this.max)                           // Save the max value so that we can calculate the percentage
-                    this.max = usage;
-                let percent = usage/this.max;                   // Calculate percentage being used
-                this.text = ((percent)*100).toFixed(1) + "%";   // Set detailed text
-                let tools = new Tools();
-                return tools.limit(percent, 0, 1);              // Return percentage
-            }    
+            if (this.type_read) {
+                this.text = format.formatBytes(read_delta);
+                this.data = this.getLinearValue(read_delta, this.max_speed);
+                this.updateSampleHistory(read_delta);
+                return this.data;
+            }
+            else {
+                this.text = format.formatBytes(written_delta);
+                this.data = this.getLinearValue(written_delta, this.max_speed);
+                this.updateSampleHistory(written_delta);
+                return this.data;
+            }
         }
         catch (e) {
-            global.logError(e);
-            this.text = "0 %";
-            return 0;
+            global.logError("Exception in getData():" + e.message);
         }
+    }
+
+    getDiskLoad() {
+        try {
+            let device = new GUdev.Client().query_by_subsystem_and_name("block", this.device_name);
+            let stats_data = device.get_sysfs_attr_as_strv("stat");
+            let read = stats_data[2] * 512;
+            let written = stats_data[6] * 512;
+            return [read, written];
+        }
+        catch (e) {
+            global.logError("Exception in getDiskLoad(): " + e.message);
+        }
+    }
+
+    getLinearValue(value, max) {
+        if (max<=1 || value<=0)
+            return 0;
+
+        let tools = new Tools();
+        return tools.limit(value/max, 0, 1);
+    }
+
+    updateSampleHistory(delta) {
+        if (this.sample_history.length >= this.sample_size) {
+            this.sample_history.shift();
+        }
+        this.sample_history.push(delta);
     }
 }
 
