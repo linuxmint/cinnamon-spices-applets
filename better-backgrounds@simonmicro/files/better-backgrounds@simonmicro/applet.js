@@ -4,6 +4,7 @@ const Soup = imports.gi.Soup;
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const Tweener = imports.ui.tweener;
+const PopupMenu = imports.ui.popupMenu;
 
 const uuid = "better-backgrounds@simonmicro";
 const appletPath = AppletManager.appletMeta[uuid].path;
@@ -16,6 +17,17 @@ function log(msg) {
 class UnsplashBackgroundApplet extends Applet.IconApplet {
     constructor(orientation, panel_height, instance_id) {
         super(orientation, panel_height, instance_id);
+
+        //Init the menu on applet click, which is opened if applet is click with no bg change
+        this.menuManager = new PopupMenu.PopupMenuManager(this);
+        this.menu = new Applet.AppletPopupMenu(this, orientation);
+        this.menuManager.addMenu(this.menu);
+        this.menuBtnChangeBack = new PopupMenu.PopupMenuItem('Change background');
+        this.menuBtnSavePic = new PopupMenu.PopupMenuItem('Save current picture');
+        this.menuBtnChangeBack.connect('activate', imports.lang.bind(this, this._change_background));
+        this.menuBtnSavePic.connect('activate', imports.lang.bind(this, this._store_background));
+        this.menu.addMenuItem(this.menuBtnChangeBack);
+        this.menu.addMenuItem(this.menuBtnSavePic);
 
         this.settings = new imports.ui.settings.AppletSettings(this, uuid, instance_id);
 
@@ -119,7 +131,7 @@ class UnsplashBackgroundApplet extends Applet.IconApplet {
                     if (msg.status_code === 200)
                         that._download_image('https://www.bing.com' + JSON.parse(msg.response_body.data).images[0].url);
                     else
-                        log('Could not download image!');
+                        this._show_notification('Could not download image!');
                     that._icon_stop();
                 });
                 log('Downloading bing metadata');
@@ -145,6 +157,15 @@ class UnsplashBackgroundApplet extends Applet.IconApplet {
                 this._download_image('https://picsum.photos/' + resStr);
             break;
         }
+    }
+
+    _store_background() {
+        //Copy the background to users picture folder with random name and show the stored notification
+        let targetPath = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_PICTURES) + '/' + Math.floor(Math.random() * 2048) + '.png';
+        let cmdStr = 'convert "' + imagePath + '" -write "' + targetPath + '"';
+        log('Running: ' + cmdStr);
+        imports.ui.main.Util.spawnCommandLine(cmdStr);
+        this._show_notification('Image stored to: ' + targetPath);
     }
 
     _download_image(uri) {
@@ -215,6 +236,8 @@ class UnsplashBackgroundApplet extends Applet.IconApplet {
     on_applet_clicked() {
         if(this.change_onclick)
             this._change_background();
+        else
+            this.menu.toggle();
     }
 
     on_applet_removed_from_panel() {
