@@ -9,6 +9,12 @@ Issues can be reported here : [Issues](https://github.com/linuxmint/cinnamon-spi
 
 ### Changes
 
+**Version 1.3**:
+* **Bug Fixes and Feature Enhancements**: Disk Usage Stats
+    * Fixed a bug that prevented device mapper volumes (LVM, dm-crypt LUKS, etc.) from displaying usage statistics details or graphs.
+    * Disk usage graphs and details statistics are now displayed as throughput with unit and graph scaling (B/s, KB/s, MB/s, etc.).
+    * It is now possible to select the disk to monitor from a drop down menu in the settings UI that lists the available storage devices on the system.
+
 **Version 1.2.1**:
  * **New setting**, a new minor UI setting, you can now choose how to draw the grid lines in the graphs. You can choose between:
     * Don't draw grid lines at all
@@ -83,3 +89,4 @@ Vertical pane examples:
 *  giwhub
 *  andreevlex
 *  clefebvre
+*  jacobwills

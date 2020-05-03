@@ -35,7 +35,7 @@
         "changeon": {
             "type": "section",
             "title": "Triggers",
-            "keys": ["change-onstart", "change-onclick", "change-ontime", "change-time"]
+            "keys": ["change-onstart", "change-onclick", "change-onclick-nomenu", "change-ontime", "change-time"]
         },
         "imagesource": {
             "type": "section",
@@ -109,7 +109,7 @@
     "change-onstart" : {
         "type" : "switch",
         "default" : true,
-        "description": "On startup",
+        "description": "On applet reloading",
         "tooltip": "Every time the applet is (re-)loaded, the background will be changed"
     },
     "change-onclick" : {
@@ -117,6 +117,11 @@
         "default" : true,
         "description": "Clicking on the applet",
         "tooltip": "Just click onto the icon in your panel"
+    },
+    "change-onclick-nomenu" : {
+        "type" : "label",
+        "description" : "Note that this will disable the menu to store the image - because this will change the background before you've got any chance to click the corresponding button!",
+        "dependency" : "change-onclick"
     },
     "change-ontime" : {
         "type" : "switch",
