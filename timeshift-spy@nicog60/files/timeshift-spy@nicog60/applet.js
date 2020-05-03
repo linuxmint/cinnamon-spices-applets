@@ -49,30 +49,56 @@ class TimeshiftSpy extends Applet.IconApplet {
      */
     constructor(orientation, panelHeight, instanceId) {
         super(orientation, panelHeight, instanceId)
-        
-        // Some bindings
-        this.reload_config = this.reload_config.bind(this)
-        this.check_if_snapping = this.check_if_snapping.bind(this)
-        this.check_if_ended = this.check_if_ended.bind(this)
-        this.update_icon = this.update_icon.bind(this)
-        this.make_snapshot = this.make_snapshot.bind(this)
 
-        // Create the menu
+        this.init_members()
+
+        this.create_menu(orientation)
+
+        this.set_state(IDLE)
+    }
+
+    init_members() {
+        this.reload_config       = this.reload_config.bind(this)
+        this.check_backup_device = this.check_backup_device.bind(this)
+        this.check_if_snapping   = this.check_if_snapping.bind(this)
+        this.check_if_ended      = this.check_if_ended.bind(this)
+        this.update_icon         = this.update_icon.bind(this)
+        this.make_snapshot       = this.make_snapshot.bind(this)
+
+        Gio.VolumeMonitor.get().connect('mount-added',   this.check_backup_device)
+        Gio.VolumeMonitor.get().connect('mount-removed', this.check_backup_device)
+
+        this.menu        = null
+        this.menuManager = null
+
+        this.monitor_flags = Gio.FileMonitorFlags.SEND_MOVED +
+                             Gio.FileMonitorFlags.WATCH_MOVES
+
+        this.config_file_path = '/etc/timeshift.json'
+        this.config_file      = Gio.File.new_for_path(this.config_file_path)
+        this.config_monitor   = this.config_file.monitor_file(this.monitor_flags, null)
+        this.config_monitor.connect('changed', this.reload_config)
+
+        this.backup_device_uuid = null
+        this.snapshot_directory = null
+        this.current_snapshot = null
+
+        this.wait_timer = null
+        this.snap_timer = null
+        this.icon_timer = null
+    }
+
+    /**
+     * Create the popup menu
+     */
+    create_menu(orientation) {
         this.menu = new Applet.AppletPopupMenu(this, orientation)
         let menuItem = new PopupMenu.PopupMenuItem(_('Make a new snapshot'))
         menuItem.connect('activate', () => this.make_snapshot())
         this.menu.addMenuItem(menuItem)
 
-    	this.menuManager = new PopupMenu.PopupMenuManager(this);
-    	this.menuManager.addMenu(this.menu);
-
-        // Set the initial state to IDLE.
-        this.set_state(IDLE)
-
-        // Connects some signal to avoid polling constantly.
-        // We'll get notified when a device is mounted
-        Gio.VolumeMonitor.get().connect('mount-added', (v) => this.check_backup_device() )
-        Gio.VolumeMonitor.get().connect('mount-removed', (v) => this.check_backup_device() )
+        this.menuManager = new PopupMenu.PopupMenuManager(this);
+        this.menuManager.addMenu(this.menu);
     }
 
     /**
@@ -81,7 +107,7 @@ class TimeshiftSpy extends Applet.IconApplet {
      * and not making a snapshot, toggle a menu that shows a "make snapshot".
      */
     on_applet_clicked() {
-    	if(this.state === WAIT_FOR_SNAP)
+    	if(this.state === WAIT_FOR_SNAP && !this.check_timeshift_gtk())
     		this.menu.toggle()
     }
 
@@ -90,26 +116,26 @@ class TimeshiftSpy extends Applet.IconApplet {
      * if it is mounted.
      */
     reload_config() {
-        var old_uuid = this.backup_device_uuid
+        this.debug('reloading config')
 
-        var config_path = '/etc/timeshift.json'
+        this.backup_device_uuid = null
 
-        var config_file = Gio.File.new_for_path(config_path)
+        if(this.config_file.query_exists(null)) {
+            this.debug('parsing config')
 
-        if(config_file.query_exists(null)) {
         	var parser = Json.Parser.new_immutable()
-        	parser.load_from_file(config_path)
+        	parser.load_from_file(this.config_file_path)
         	var object = parser.get_root().get_object()
 
-        	this.backup_device_uuid = object.get_string_member('backup_device_uuid')
+        	var uuid = object.get_string_member('backup_device_uuid')
 
-        	if(this.backup_device_uuid.length > 0)
+        	if(uuid.length > 0) {
+                this.debug('devide uuid found')
+
+                this.backup_device_uuid = uuid
 				this.check_backup_device()
-			else
-				this.backup_device_uuid = null
+            }
         }
-        else
-        	this.backup_device_uuid = null
     }
 
     /**
@@ -117,38 +143,32 @@ class TimeshiftSpy extends Applet.IconApplet {
      * applet state to WAIT_FOR_SNAP
      */
     check_backup_device() {
-        var found = false
+        this.debug('checking backing device')
 
-        // Ok, here is a horrible hack to get the uuid of the root volume.
-        // as there is no way to get it from Gio API 
-        var root_uuid = GLib.spawn_command_line_sync('findmnt / -o UUID -n')[1].toString()
+        this.snapshot_directory = null
 
-        if(root_uuid = this.backup_device_uuid) {
-            this.backup_mount_point = Gio.File.new_for_path('/')
-            found = true
-        } else {
-            var v_list = Gio.VolumeMonitor.get().get_volumes()
+        let [success, result] = GLib.spawn_command_line_sync('bash -c "lsblk -o UUID,MOUNTPOINT | grep ' + this.backup_device_uuid + '"')
+        
+        if(success) {
+            this.debug('device found')
 
-            found = v_list.some(v => {
-                let uuid = v.get_uuid()
-                let mount = v.get_mount()
+            let result_str = result.toString()
+            let [uuid, mount] = result_str.split(" ")
 
-                global.log(uuid,mount)
+            mount = mount.trim()
+            let mount_point = Gio.File.new_for_path(mount)
 
-                if(uuid === this.backup_device_uuid && mount !== null) {
-                    this.backup_mount_point = mount.get_root()
-                    return true
-                } else {
-                    this.backup_mount_point = null
-                    return false
-                }
-            })
+            if(mount.length !== 0 && mount_point.query_exists(null)) {
+                this.debug('mount point found')
+
+                this.snapshot_directory = mount_point.get_child('timeshift')
+                                                     .get_child('snapshots')
+                this.set_state(WAIT_FOR_SNAP)
+                return
+            }
         }
 
-        if(found)
-            this.set_state(WAIT_FOR_SNAP)
-        else
-            this.set_state(IDLE)
+        this.set_state(IDLE)
     }
 
     /**
@@ -156,56 +176,70 @@ class TimeshiftSpy extends Applet.IconApplet {
      * a snapshot. If it does, change the state to SNAPPING
      */
     check_if_snapping() {
-        delete this.current
+        this.debug('checking if snapping')
 
-        // retrieve the moun point. If it fails to get it, check if the backup
-        // device is there again and update the state.
+        this.current_snapshot = null
 
-        if(this.backup_device_uuid == null || this.backup_mount_point == null) {
+        // If one of them is null, something is probably wrong. better check again
+        if(this.backup_device_uuid === null || this.snapshot_directory === null) {
+            this.debug('invalid member state')
             this.check_backup_device()
             return
         }
 
-        // Go down the rabbit hole from teh mount point. Navigate in the
-        // snapshots directory, then get the list of all the snapshots, order
-        // them to have the latest first
-
-        // Go to the snapshot dir
-        var f = this.backup_mount_point.get_child('timeshift').get_child('snapshots')
-
-        // Get all the snapshots names (and therefore dates)
-        var e = f.enumerate_children('standard::name', 0, null)
-
-        var list = []
-        var snap
-
-        while(snap = e.next_file(null))
-            list.push(snap.get_name())
-
-        if(list.length === 0)
+        // Handles if there is no snapshots yet.
+        if(!this.snapshot_directory.query_exists(null)) {
+            this.debug('snapshot directory not created yet')
             return
+        }
 
-        list.sort((a, b) => a.localeCompare(b) < 0)
+        var is_snapping = false
 
-        // Now it have the latest snapshot available, checks if its date match
-        // the current date. No need to check a past snapshot.
-        // then checks the present of the two files that gives away the snapshot
-        // process 
+        try {
+            // Get all the snapshots names (and therefore dates)
+            let children = this.snapshot_directory.enumerate_children('standard::name', 0, null)
 
-        var now = new Date().toISOString()
+            let list = []
+            let snap
 
-        if(now.slice(0, 10) !== list[0].slice(0, 10))
-            return
+            while(snap = children.next_file(null))
+                list.push(snap.get_name())
 
-        f = f.get_child(list[0])
+            if(list.length > 0) {
+                list.sort((a, b) => a.localeCompare(b) < 0)
 
-        this.current = f.get_path()
+                // Now it have the latest snapshot available, checks if its date match
+                // the current date. No need to check a past snapshot.
+                // then checks the present of the two files that gives away the snapshot
+                // process 
 
-        var info = f.get_child('info.json')
-        var rsync = f.get_child('rsync-log-changes')
+                let now = new Date().toISOString()
 
-        if(!info.query_exists(null) && !rsync.query_exists(null))
-            this.set_state(SNAPPING)
+                if(now.slice(0, 10) === list[0].slice(0, 10)) {
+                    let last_snap = this.snapshot_directory.get_child(list[0])
+
+                    let info = last_snap.get_child('info.json')
+                    let rsync = last_snap.get_child('rsync-log-changes')
+
+                    if(!info.query_exists(null) && !rsync.query_exists(null)) {
+                        this.debug('snapshot creataion detected')
+                        this.current_snapshot = last_snap
+                        is_snapping = true
+                    }
+                }
+            }   
+        }
+        catch(e) {
+            this.debug(e.toString())
+            this.set_applet_tooltip(e.toString())
+            this.set_applet_icon_name('timeshift-error')
+        }
+        finally {
+            if(is_snapping)
+                this.set_state(SNAPPING)
+            else
+                this.set_state(WAIT_FOR_SNAP)
+        }
     }
 
     /**
@@ -214,20 +248,23 @@ class TimeshiftSpy extends Applet.IconApplet {
      * WAIT_FOR_SNAP once they appear
      */
     check_if_ended() {
+        this.debug('checking end of snapshot')
+
         // simple check, if that attribute is not set then there is something
         // wrong. let's go back one step for safety.
-        if(!this.current) {
-            check_if_snapping()
+        if(this.current_snapshot === null) {
+            this.debug('invalid member state')
+            this.check_if_snapping()
             return
         }
 
-        var f = Gio.File.new_for_path(this.current)
+        var info = this.current_snapshot.get_child('info.json')
+        var rsync = this.current_snapshot.get_child('rsync-log-changes')
 
-        var info = f.get_child('info.json')
-        var rsync = f.get_child('rsync-log-changes')
-
-        if(info.query_exists(null) || rsync.query_exists(null))
+        if(info.query_exists(null) || rsync.query_exists(null)) {
+            this.debug('end of snapshot detected')
             this.set_state(WAIT_FOR_SNAP)
+        }
     }
 
     /**
@@ -247,23 +284,58 @@ class TimeshiftSpy extends Applet.IconApplet {
     set_state(state) {
         if(this.state !== state)
         {
+            this.debug('changing from ' +
+                        this.state_to_string(this.state) +
+                        ' to ' + 
+                        this.state_to_string(state))
+
+            this.leave(this.state)
             this.state = state
-            this.clear_all()
             this.check_menu()
-            this.start(state)
+            this.enter(state)
         }
     }
 
     /**
-     * Stops the timer(s) associated with the given state
+     * Performs all the necessary action for entering the state
      */
-    clear(state) {
+    enter(state) {
         switch(state) {
             case IDLE:
-            if(this.idle_timer) {
-                clearInterval(this.idle_timer)
-                delete this.idle_timer
-            }
+            this.set_applet_icon_name('timeshift-idle')
+            this.reload_config()
+            if(this.backup_device_uuid === null)
+                this.set_applet_tooltip(_('Timeshift not configured'))
+            
+            if(this.snapshot_directory === null)
+                this.set_applet_tooltip(_('Backup device not found'))
+            break
+
+            case WAIT_FOR_SNAP:
+            this.set_applet_icon_name('timeshift-wait')
+            this.set_applet_tooltip(_('Wait for snapshot to begin'))
+            this.wait_timer = setInterval(this.check_if_snapping, 1000)
+            this.check_if_snapping()
+            break
+
+            case SNAPPING:
+            this.set_applet_tooltip(_('Making snapshot...'))
+            this.snap_timer = setInterval(this.check_if_ended, 500)
+            this.check_if_ended()
+            this.icon_timer = setInterval(this.update_icon, 50)
+            break
+
+            default:
+            break;
+        }
+    }
+
+    /**
+     * Performs all the necessary action for leaving the state
+     */
+    leave(state) {
+         switch(state) {
+            case IDLE:
             break
             
 
@@ -291,54 +363,11 @@ class TimeshiftSpy extends Applet.IconApplet {
     }
 
     /**
-     * Clears all the timers
-     */
-    clear_all() {
-        this.clear(IDLE)
-        this.clear(WAIT_FOR_SNAP)
-        this.clear(SNAPPING)
-    }
-
-    /**
-     * Starts the timer(s) for the given state and update icons and tootips.
-     * In order to save resources, timers are quite long when the applet is
-     * waiting for something. not a big deal if the icons updates 1 or 2 secs
-     * after the snapshot actually starts.
-     */
-    start(state) {
-        switch(state) {
-            case IDLE:
-            this.set_applet_icon_name('timeshift-idle')
-            this.idle_timer = setInterval(this.reload_config, 60000)
-            this.reload_config()
-            if(this.backup_device_uuid === null)
-            	this.set_applet_tooltip(_('Timeshift not configured'))
-            else
-            	this.set_applet_tooltip(_('Backup device not found'))
-            break
-
-            case WAIT_FOR_SNAP:
-            this.set_applet_icon_name('timeshift-wait')
-            this.set_applet_tooltip(_('Wait for snapshot to begin'))
-            this.wait_timer = setInterval(this.check_if_snapping, 1000)
-            this.check_if_snapping()
-            break
-
-            case SNAPPING:
-            this.set_applet_tooltip(_('Making snapshot...'))
-            this.snap_timer = setInterval(this.check_if_ended, 500)
-            this.check_if_ended()
-            this.icon_timer = setInterval(this.update_icon, 50)
-            break
-        }
-    }
-
-    /**
      * Ask for password, as timeshift requires root privileges, and make a new
      * snapshot.
      */
     make_snapshot() {
-    	GLib.spawn_command_line_async('pkexec timeshift --create')
+    	GLib.spawn_command_line_async('bash -c "pkexec timeshift --create"')
     }
 
     /**
@@ -346,8 +375,36 @@ class TimeshiftSpy extends Applet.IconApplet {
      * connected or if a snapshot is being made, then close the menu.
      */
     check_menu() {
-    	if(this.state !== WAIT_FOR_SNAP && this.menu.isOpen)
+    	if((this.state !== WAIT_FOR_SNAP || this.check_timeshift_gtk()) && this.menu.isOpen)
     		this.menu.close()
+    }
+
+    /**
+     * Checks if the timeshift GUI is open as a snapshot can't be launched with the GUI running.
+     */
+    check_timeshift_gtk() {
+        let [success, result] = GLib.spawn_command_line_sync('bash -c "wmctrl -lx | grep timeshift-gtk.Timeshift-gtk"')
+        if(result.length > 0) {
+            return true
+        }
+        return false
+    }
+
+    state_to_string(state) {
+        switch(state) {
+            case IDLE:
+            return 'IDLE'
+
+            case WAIT_FOR_SNAP:
+            return 'WAIT_FOR_SNAP'
+
+            case SNAPPING:
+            return 'SNAPPING'
+        }
+    }
+
+    debug(msg) {
+        //global.log(msg)
     }
 }
 
