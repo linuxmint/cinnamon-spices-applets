@@ -131,7 +131,7 @@ class UnsplashBackgroundApplet extends Applet.IconApplet {
                     if (msg.status_code === 200)
                         that._download_image('https://www.bing.com' + JSON.parse(msg.response_body.data).images[0].url);
                     else
-                        this._show_notification('Could not download image!');
+                        that._show_notification('Could not download bing metadata!');
                     that._icon_stop();
                 });
                 log('Downloading bing metadata');
