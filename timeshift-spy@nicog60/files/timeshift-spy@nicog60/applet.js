@@ -404,7 +404,7 @@ class TimeshiftSpy extends Applet.IconApplet {
     }
 
     debug(msg) {
-        global.log(msg)
+        //global.log(msg)
     }
 }
 
