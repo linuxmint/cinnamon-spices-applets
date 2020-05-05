@@ -1,0 +1,29 @@
+{
+	"octoprintUrl" : 
+	{
+    	"type": "entry",
+        "default": "http://octopi.local/",
+        "description": "OctoPrint API Address",
+        "tooltip": "OctoPrint API Address"
+  	},
+	"octoprintApiKey": {
+		"type": "entry",
+		"default": "",
+		"description": "OctoPrint API Key. Get an API key from the OctoPrint site settings."
+	},
+	"octoprintInterval": {
+        "type": "spinbutton",
+        "default": 10,
+        "min": 1,
+        "max": 30,
+        "step": 1,
+        "units": "seconds",
+        "description": "Refresh Interval:",
+        "tooltip": "Increase or decrease this spinner value to change the refresh interval - use a slow refresh if you have a slow machine"
+    },
+	"octoprintVideoCommand": {
+		"type": "entry",
+		"default": "vlc --video-on-top --qt-minimal-view --no-video-title %s",
+		"description": "Video command to use when showing the webcam. Defaults to vlc."
+	}
+}
