@@ -8,13 +8,12 @@ const PopupMenu = imports.ui.popupMenu;
 
 const uuid = "better-backgrounds@simonmicro";
 const appletPath = AppletManager.appletMeta[uuid].path;
-const imagePath = appletPath + '/background';
 
 function log(msg) {
     global.log('[' + uuid + '] ' + msg);
 };
 
-class UnsplashBackgroundApplet extends Applet.IconApplet {
+class UnsplashBackgroundApplet extends Applet.TextIconApplet {
     constructor(orientation, panel_height, instance_id) {
         super(orientation, panel_height, instance_id);
 
@@ -42,13 +41,15 @@ class UnsplashBackgroundApplet extends Applet.IconApplet {
         this.settings.bind("image-res-manual", "image_res_manual", this.on_settings_changed);
         this.settings.bind("image-res-width", "image_res_width", this.on_settings_changed);
         this.settings.bind("image-res-height", "image_res_height", this.on_settings_changed);
+        this.settings.bind("image-res-himawari", "image_res_himawari", this.on_settings_changed);
         this.settings.bind("image-uri", "image_uri", this.on_settings_changed);
         this.settings.bind("image-tag", "image_tag", this.on_settings_changed);
         this.settings.bind("image-tag-data", "image_tag_data", this.on_settings_changed);
 
         this.set_applet_icon_name("applet");
-        this.httpSession = new Soup.SessionAsync();
-        Soup.Session.prototype.add_feature.call(this.httpSession, new Soup.ProxyResolverDefault());
+        this.httpAsyncSession = new Soup.SessionAsync();
+        Soup.Session.prototype.add_feature.call(this.httpAsyncSession, new Soup.ProxyResolverDefault());
+        this.swapChainSwapped = false;
 
         this.on_settings_changed();
 
@@ -112,101 +113,202 @@ class UnsplashBackgroundApplet extends Applet.IconApplet {
 
     _change_background() {
         this._icon_start();
-        let resStr = '';
-        let tagStr = '';
-        let cmdStr = '';
+        this._update_tooltip();
+        let that = this;
+        function defaultEnd() {
+            that._apply_image().then(function() {
+                that._icon_stop();
+            });
+        };
 
-        switch(this.image_source) {
-            case 'cutycapt':
-                if(this.image_res_manual)
-                    resStr = ' --min-width=' + this.image_res_width + ' --min-height=' + this.image_res_height;
-                cmdStr = 'cutycapt --out-format=png --url="' + this.image_uri + '" --out="' + imagePath + '"' + resStr;
-                log('Running ' + cmdStr);
-                imports.ui.main.Util.spawnCommandLine(cmdStr);
-            break;
-            case 'bing':
-                let request = Soup.Message.new('GET', 'https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mbl=1');
-                var that = this;
-                this.httpSession.queue_message(request, function(http, msg) {
-                    if (msg.status_code === 200)
-                        that._download_image('https://www.bing.com' + JSON.parse(msg.response_body.data).images[0].url);
-                    else
-                        that._show_notification('Could not download bing metadata!');
-                    that._icon_stop();
-                });
-                log('Downloading bing metadata');
-            break;
-            case 'unsplash':
-                resStr = 'featured';
-                if(this.image_res_manual)
-                    resStr = this.image_res_width + 'x' + this.image_res_height;
-                if(this.image_tag)
-                    tagStr = '?' + this.image_tag_data;
-                this._download_image('https://source.unsplash.com/' + resStr + '/' + tagStr);
-            break;
-            case 'placekitten':
-                resStr = '1920/1080';
-                if(this.image_res_manual)
-                    resStr = this.image_res_width + '/' + this.image_res_height;
-                this._download_image('http://placekitten.com/' + resStr);
-            break;
-            case 'picsum':
-                resStr = '1920/1080';
-                if(this.image_res_manual)
-                    resStr = this.image_res_width + '/' + this.image_res_height;
-                this._download_image('https://picsum.photos/' + resStr);
-            break;
+        if(this.image_source == 'cutycapt') {
+            let cmd = ['cutycapt', '--out-format=png', '--url=' + this.image_uri, '--out=' + this._get_swap_chain_image_next()];
+            if(this.image_res_manual) {
+                cmd.push('--min-width=' + this.image_res_width);
+                cmd.push('--min-height=' + this.image_res_height);
+            }
+            this._run_cmd(cmd).then(defaultEnd);
+        } else if(this.image_source == 'bing') {
+            log('Downloading bing metadata');
+            let request = Soup.Message.new('GET', 'https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1&mbl=1');
+            this.httpAsyncSession.queue_message(request, function(http, msg) {
+                if (msg.status_code === 200) {
+                    let jsonData = JSON.parse(msg.response_body.data).images[0];
+                    that._update_tooltip(jsonData.title + ' - ' + jsonData.copyright);
+                    that._download_image('https://www.bing.com' + jsonData.url).then(defaultEnd);
+                } else
+                    that._show_notification('Could not download bing metadata!');
+            });
+        } else if(this.image_source == 'himawari') {
+            log('Downloading himawari metadata');
+            //Download metadata and read latest timestamp
+            let request = Soup.Message.new('GET', 'https://himawari8-dl.nict.go.jp/himawari8/img/D531106/latest.json');
+            this.httpAsyncSession.queue_message(request, function(http, msg) {
+                if (msg.status_code !== 200)
+                    that._show_notification('Could not download himawari metadata!');
+                else {
+                    let latestDate = new Date(JSON.parse(request.response_body.data).date);
+                    let zoomLvl = that.image_res_himawari;
+                    let tileNames = Array();
+                    var tileId = 0;
+
+                    function downloadTiles() {
+                        //Download the tile and call ourself again
+                        let y = tileId % zoomLvl;
+                        let x = Math.floor(tileId / zoomLvl);
+                        let tileName = appletPath + '/tile_' + x + '_' + y + '.png';
+                        tileNames.push(tileName);
+                        tileId++;
+                        that.set_applet_label(Math.floor(tileId / (zoomLvl * zoomLvl) * 100) + '%');
+                        that._download_image('https://himawari8-dl.nict.go.jp/himawari8/img/D531106/' +
+                            zoomLvl + 'd/550/' + latestDate.getFullYear() + '/' + ('0' + latestDate.getMonth()).slice(-2) + 
+                            '/' + ('0' + latestDate.getDate()).slice(-2) + '/' + ('0' + latestDate.getHours()).slice(-2) +
+                            ('0' + latestDate.getMinutes()).slice(-2) + ('0' + latestDate.getSeconds()).slice(-2) + '_' +
+                            y + '_' + x + '.png', tileName)
+                        .then(function() {
+                            //tileId == zoomLvl * zoomLvl -> we have all tiles -> proceed
+                            if(tileId == zoomLvl * zoomLvl) {
+                                //Trigger imagemagick to merge the tiles
+                                let cmd = ['montage'];
+                                Array.prototype.push.apply(cmd, tileNames);
+                                cmd.push('-geometry', '550x550+0+0');
+                                cmd.push('-tile', zoomLvl + 'x' + zoomLvl);
+                                cmd.push(that._get_swap_chain_image_next());
+                                that._run_cmd(cmd).then(function() {
+                                    //Cleanup the tiles from buffer
+                                    let rmCmd = ['rm', '-f'];
+                                    Array.prototype.push.apply(rmCmd, tileNames);
+                                    that._run_cmd(rmCmd);
+
+                                    //And update the tooltip
+                                    that._update_tooltip('The Earth by Himawari 8 from ' + latestDate.toISOString());
+
+                                    //Remove the progress label
+                                    that.set_applet_label('');
+
+                                    //And apply new image
+                                    defaultEnd();
+                                });
+                            } else {
+                                //Not? Recall!
+                                downloadTiles();
+                            }
+                        });
+                    }
+                    downloadTiles();
+                }
+            });
+        } else if(this.image_source == 'unsplash') {
+            let resStr = 'featured';
+            if(this.image_res_manual)
+                resStr = this.image_res_width + 'x' + this.image_res_height;
+            let tagStr = '';
+            if(this.image_tag)
+                tagStr = '?' + this.image_tag_data;
+            this._download_image('https://source.unsplash.com/' + resStr + '/' + tagStr).then(defaultEnd);
+        } else if(this.image_source == 'placekitten') {
+            let resStr = '1920/1080';
+            if(this.image_res_manual)
+                resStr = this.image_res_width + '/' + this.image_res_height;
+            this._download_image('http://placekitten.com/' + resStr).then(defaultEnd);
+        } else if(this.image_source == 'picsum') {
+            let resStr = '1920/1080';
+            if(this.image_res_manual)
+                resStr = this.image_res_width + '/' + this.image_res_height;
+            this._download_image('https://picsum.photos/' + resStr).then(defaultEnd);
         }
+    }
+
+    _run_cmd(cmd) {
+        return new Promise(function(resolve, reject) {
+            try {
+                log('Running: ' + cmd.join(' '));
+                let pid = GLib.spawn_async(null, cmd, null, GLib.SpawnFlags.SEARCH_PATH | GLib.SpawnFlags.DO_NOT_REAP_CHILD, null, null)[1];
+                GLib.child_watch_add(GLib.PRIORITY_DEFAULT_IDLE, pid, function test() {
+                    GLib.spawn_close_pid(pid); resolve();
+                });
+            } catch (e) {
+                log('Execution failure: ' + e);
+                reject(e);
+            }
+        });
     }
 
     _store_background() {
         //Copy the background to users picture folder with random name and show the stored notification
         let targetPath = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_PICTURES) + '/' + Math.floor(Math.random() * 2048) + '.png';
-        let cmdStr = 'convert "' + imagePath + '" -write "' + targetPath + '"';
-        log('Running: ' + cmdStr);
-        imports.ui.main.Util.spawnCommandLine(cmdStr);
-        this._show_notification('Image stored to: ' + targetPath);
+        var that = this;
+        this._run_cmd(['convert', this._get_swap_chain_image_current(), '-write', targetPath]).then(function() {
+            that._show_notification('Image stored to: ' + targetPath);
+        });
     }
 
-    _download_image(uri) {
-        let gFile = Gio.file_new_for_path(imagePath);
+    _get_swap_chain_image_next() {
+        return this._get_swap_chain_base() + '/next';
+    }
+
+    _get_swap_chain_image_current() {
+        return this._get_swap_chain_base() + '/background';
+    }
+
+    _get_swap_chain_base() {
+        return appletPath;
+    }
+
+    _swap_chain_image_swap() {
+        //Replace current with next
+        this._run_cmd(['mv', this._get_swap_chain_image_next(), this._get_swap_chain_image_current()]);
+    }
+
+    _apply_image() {
+        var that = this;
+        return new Promise(function(resolve, reject) {
+            function update() {
+                //Update gsettings
+                that._swap_chain_image_swap();
+                let gSetting = new Gio.Settings({schema: 'org.cinnamon.desktop.background'});
+                gSetting.set_string('picture-uri', 'file://' + that._get_swap_chain_image_current());
+                Gio.Settings.sync();
+                gSetting.apply();
+                resolve();
+            }
+
+            //Now apply any effect (if selected)
+            if(that.effect_select == 'grayscale') {
+                that._run_cmd(['mogrify', '-grayscale', 'average', that._get_swap_chain_image_next()]).then(update);
+            } else if(that.effect_select == 'gaussian-blur') {
+                that._run_cmd(['mogrify', '-gaussian-blur', '40', that._get_swap_chain_image_next()]).then(update);
+            } else
+                //Just ignore any invalid option...
+                update();
+        });
+    }
+
+    _download_image(uri, targetPath = this._get_swap_chain_image_next()) {
+        log('Downloading image ' + uri);
+        let gFile = Gio.file_new_for_path(targetPath);
         let fStream = gFile.replace(null, false, Gio.FileCreateFlags.NONE, null);
         let request = Soup.Message.new('GET', uri);
+        let that = this;
 
         request.connect('got_chunk', function(message, chunk) {
             if (message.status_code === 200)
                 fStream.write(chunk.get_data(), null);
         });
 
-        var that = this;
-        this.httpSession.queue_message(request, function(http, message) {
-            fStream.close(null);
-
-            //Now apply any effect (if selected)
-            switch(that.effect_select) {
-                case 'grayscale':
-                    imports.ui.main.Util.spawnCommandLine('mogrify -grayscale average ' + imagePath);
-                break;
-                case 'gaussian-blur':
-                    imports.ui.main.Util.spawnCommandLine('mogrify -gaussian-blur 40 ' + imagePath);
-                break;
-                default:
-                    //Just ignore any invalid option...
-            }
-
-            if (message.status_code === 200) {
-                let gSetting = new Gio.Settings({schema: 'org.cinnamon.desktop.background'});
-                gSetting.set_string('picture-uri', 'file://' + imagePath);
-                Gio.Settings.sync();
-                gSetting.apply();
-            } else
-                this._show_notification('Could not download image!');
-            that._icon_stop();
+        return new Promise(function(resolve, reject) {
+            that.httpAsyncSession.queue_message(request, function(http, msg) {
+                fStream.close(null);
+                if (msg.status_code !== 200) {
+                    that._show_notification('Could not download image!');
+                    reject();
+                }
+                resolve();
+            });
         });
-        log('Downloading ' + uri);
     }
 
-    _update_tooltip() {
+    _update_tooltip(more = null) {
         let tooltipStr = '';
         if(this.change_onstart)
             tooltipStr += 'Background changed on last startup';
@@ -219,7 +321,9 @@ class UnsplashBackgroundApplet extends Applet.IconApplet {
         if(this.change_ontime)
             tooltipStr += 'Every ' + this.change_time + ' minutes the background changes itself';
         if(!this.change_ontime && !this.change_onclick)
-            tooltipStr += 'No action defined! Please enable at least on in the configuration!';
+            tooltipStr += 'No action defined! Please enable at least one in the configuration!';
+        if(more !== null)
+            tooltipStr += "\n\n" + more;
         this.set_applet_tooltip(_(tooltipStr));
     }
 
