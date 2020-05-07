@@ -3,7 +3,7 @@
     "description": "Tmux Cheatsheet",
     "author": "Guionardo Furlan",
     "email": "guionardo@gmail.com",
-    "repository": "http://fipo.co",
+    "repository": "",
     "version": "0.1",
     "sections": {
         "Tmux Windows and Panes": {
