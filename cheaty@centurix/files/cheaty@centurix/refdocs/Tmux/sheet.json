@@ -1,0 +1,66 @@
+{
+    "name": "Tmux",
+    "description": "Tmux Cheatsheet",
+    "author": "Guionardo Furlan",
+    "email": "guionardo@gmail.com",
+    "repository": "",
+    "version": "0.1",
+    "sections": {
+        "Tmux Windows and Panes": {
+            "Create new window": {
+                "description": "Create a new window(with shell)",
+                "code": "Ctrl + b c"
+            },
+            "Close pane": {
+                "description": "Close the current pane",
+                "code": "Ctrl + b x"
+            },
+            "Split horizontally": {
+                "description": "Split current pane horizontally into two panes",
+                "code": "Ctrl + b %"
+            },
+            "Split vertically": {
+                "description": "Split current pane vertically into two panes",
+                "code": "Ctrl + b \""
+            },
+            "Choose window": {
+                "description": "Choose window from a list",
+                "code": "Ctrl + b w"
+            },
+            "Switch to window": {
+                "description": "Switch to window 0(by number)",
+                "code": "Ctrl + b 0"
+            },
+            "Rename window": {
+                "description": "Rename the current window",
+                "code": "Ctrl + b ,"
+            },
+            "Go to the next pane": {
+                "description": "Go to the next pane",
+                "code": "Ctrl + b o "
+            },
+            "Toggle between current and previows": {
+                "description": "Toggle between the current and previous pane",
+                "code": "Ctrl + b;"
+            }
+        },
+        "Installing": {
+            "Linux debian": {
+                "description": "Installing Tmux on Ubuntu and Debian",
+                "code": "sudo apt install tmux"
+            },
+            "CentOS and Fedora": {
+                "description": "Installing Tmux on CentOS and Fedora",
+                "code": "sudo yum install tmux"
+            },
+            "MacOS": {
+                "description": "Installing Tmux on macOS",
+                "code": "brew install tmux"
+            },
+            "More infos": {
+                "description": "Go to this site",
+                "code": "https://linuxize.com/post/getting-started-with-tmux/"
+            }
+        }
+    }
+}
