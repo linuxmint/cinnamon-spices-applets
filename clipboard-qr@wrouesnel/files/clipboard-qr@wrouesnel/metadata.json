@@ -4,5 +4,5 @@
  "description": "Create QR codes from clipboard content",
  "url" : "https://github.com/wrouesnel/clipboard-qr",
  "original-authors" : ["ebbes"],
- "version" : "1.14"
+ "version" : "1.15"
 }
