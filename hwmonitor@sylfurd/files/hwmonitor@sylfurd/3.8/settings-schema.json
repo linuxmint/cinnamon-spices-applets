@@ -565,12 +565,8 @@
     },
     "diskread_device_name": {
       "type": "combobox",
-      "default": "sda",
-      "options": {
-          "sda": "sda",
-          "sdb": "sdb",
-          "sdc": "sdc"
-      },
+      "default": "none",
+      "options": {"Select a device": "none"},
       "description": "Set the device to monitor for the DISK (read) graph.",
       "tooltip": "Set the device to monitor for the DISK (read) graph.",
       "dependency": "diskread_enable_graph"
@@ -614,12 +610,8 @@
     },
     "diskwrite_device_name": {
       "type": "combobox",
-      "default": "sda",
-      "options": {
-          "sda": "sda",
-          "sdb": "sdb",
-          "sdc": "sdc"
-      },
+      "default": "none",
+      "options": {"Select a device": "none"},
       "description": "Set the device to monitor for the DISK (write) graph.",
       "tooltip": "Set the device to monitor for the DISK (write) graph.",
       "dependency": "diskwrite_enable_graph"

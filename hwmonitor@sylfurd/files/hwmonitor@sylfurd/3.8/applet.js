@@ -163,18 +163,16 @@ GraphicalHWMonitorApplet.prototype = {
         this.settings.bind("bat_use_custom_label", "bat_use_custom_label", this.settingsChanged);
         this.settings.bind("bat_custom_label", "bat_custom_label", this.settingsChanged);
         this.settings.bind("bat_show_detail_label", "bat_show_detail_label", this.settingsChanged);
+
         this.createThemeObject();
-
-        this.getAvailableDisks();
-
         this.createAppletArea();
-
         this.actor.set_offscreen_redirect(Clutter.OffscreenRedirect.ALWAYS);
         this.addUpdateLoop(this.frequency);
-
     },
 
     createAppletArea: function(){
+        this.getAvailableDisks();
+
         this.graphs = [];
         if (this.isHorizontal)
             this.appletArea = new Support.AppletArea(this, this.isHorizontal,0, this.panel_height);
@@ -359,7 +357,7 @@ GraphicalHWMonitorApplet.prototype = {
     },
 
     // Called when the settings have changed
-    settingsChanged: function () {        
+    settingsChanged: function () {
         this.restartGHW();
     },
 
@@ -407,6 +405,12 @@ GraphicalHWMonitorApplet.prototype = {
 
         this.settings.setOptions("diskread_device_name", ordered_devices_options);
         this.settings.setOptions("diskwrite_device_name", ordered_devices_options);
+
+        if (this.diskread_device_name == "none" || this.diskwrite_device_name == "none") {
+            
+            this.diskread_device_name = ordered_devices_options[Object.keys(ordered_devices_options)[0]];
+            this.diskwrite_device_name = ordered_devices_options[Object.keys(ordered_devices_options)[0]];
+        }
     },
 
     // Creates an object containing the users selected theme settings
@@ -450,7 +454,6 @@ GraphicalHWMonitorApplet.prototype = {
         this.removeUpdateLoop();
         this.addUpdateLoop(this.frequency);
         this.updateAppletArea();
-        this.getAvailableDisks();
     },
 
     _runSysMon: function() {

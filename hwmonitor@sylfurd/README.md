@@ -9,6 +9,10 @@ Issues can be reported here : [Issues](https://github.com/linuxmint/cinnamon-spi
 
 ### Changes
 
+**Version 1.3.1**:
+* **Bug Fix
+    * Fixed a bug that crashed the applet if the hardcoded default was not a valid device option. The default is now the first device listed after scanning for devices on the system instead of "sda".
+
 **Version 1.3**:
 * **Bug Fixes and Feature Enhancements**: Disk Usage Stats
     * Fixed a bug that prevented device mapper volumes (LVM, dm-crypt LUKS, etc.) from displaying usage statistics details or graphs.
