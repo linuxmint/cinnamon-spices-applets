@@ -445,7 +445,7 @@ class MetNorway implements WeatherProvider {
           return {
             customIcon : (checkIfNight && this.IsNight()) ? "night-rain-symbolic" : "day-rain-symbolic",
             main: _("Light Rain"),
-            description: _("Mostly Ligh Rain with Thunderstorms"),
+            description: _("Mostly Light Rain with Thunderstorms"),
             icon: weatherIconSafely([icons.showers_scattered, icons.rain, icons.alert], iconType)
           }
         case "LightSleet":
@@ -516,28 +516,28 @@ class MetNorway implements WeatherProvider {
             customIcon : "rain-symbolic",
             main: _("Rain"),
             description: _("Rain"),
-            icon: weatherIconSafely([icons.rain, icons.rain_freezing, icons.alert], iconType)
+            icon: weatherIconSafely([icons.rain, icons.rain_freezing, icons.showers_scattered, icons.alert], iconType)
           }
         case "RainSun":
           return {
             customIcon : (checkIfNight && this.IsNight()) ? "night-rain-symbolic" : "day-rain-symbolic",
             main: _("Mostly Rainy"),
             description: _("Mostly Rainy"),
-            icon: weatherIconSafely([icons.rain, icons.rain_freezing, icons.alert], iconType)
+            icon: weatherIconSafely([icons.rain, icons.rain_freezing, icons.showers_scattered, icons.alert], iconType)
           }
         case "RainThunder":
           return {
             customIcon : "thunderstorm-symbolic",
             main: _("Rain"),
             description: _("Rain with Thunderstorms"),
-            icon: weatherIconSafely([icons.storm, icons.rain, icons.rain_freezing, icons.alert], iconType)
+            icon: weatherIconSafely([icons.storm, icons.rain, icons.rain_freezing, icons.showers_scattered, icons.alert], iconType)
           }
         case "RainThunderSun":
           return {
             customIcon : (checkIfNight && this.IsNight()) ? "night-thunderstorm-symbolic" : "day-thunderstorm-symbolic",
             main: _("Rain"),
             description: _("Mostly Rainy with Thunderstorms"),
-            icon: weatherIconSafely([icons.storm, icons.rain, icons.rain_freezing, icons.alert], iconType)
+            icon: weatherIconSafely([icons.storm, icons.rain, icons.rain_freezing, icons.showers_scattered, icons.alert], iconType)
           }
         case "Sleet":
           return {
