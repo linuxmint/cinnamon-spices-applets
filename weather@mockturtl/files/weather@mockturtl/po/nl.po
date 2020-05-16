@@ -370,7 +370,7 @@ msgstr "Overwegend bewolkt"
 #: 3.0/yahoo.js:477 3.0/met_norway.js:509 3.0/met_norway.js:510
 #: 3.8/yahoo.js:428 3.8/met_norway.js:456 3.8/met_norway.js:457
 msgid "Partly Cloudy"
-msgstr "Gedeeltelijk bewolkt"
+msgstr "Deels bewolkt"
 
 #: 3.0/yahoo.js:478 3.0/met_norway.js:600 3.0/met_norway.js:601
 #: 3.0/openWeatherMap.js:395 3.8/yahoo.js:429 3.8/met_norway.js:547
@@ -392,7 +392,7 @@ msgstr "Mengsel van regen en hagel"
 
 #: 3.0/yahoo.js:482 3.8/yahoo.js:433
 msgid "Hot"
-msgstr "Warm"
+msgstr "Zeer warm"
 
 #: 3.0/yahoo.js:483 3.8/yahoo.js:434
 msgid "Isolated Thunderstorms"
@@ -1202,8 +1202,7 @@ msgid ""
 msgstr ""
 "MET Norway - Het huidige weer wordt getoond voor het komende uur, en de "
 "dagelijkse voorspellingen \n"
-"worden gegenereerd vanuit zesurige voorspellingen, zodat het er soms niet "
-"goed uitziet."
+"worden gegenereerd vanuit zesurige voorspellingen. Vaak beste resultaat."
 
 #. 3.0->settings-schema.json->WB->description
 msgid ""
@@ -1394,7 +1393,7 @@ msgid ""
 msgstr ""
 "MET Norway - Het huidige weer wordt getoond voor het komende uur, en de "
 "dagelijkse voorspellingen worden gegenereerd op basis van zesurige "
-"voorspellingen, dus het kan er soms niet goed uitzien."
+"voorspellingen. Vaak beste resultaat."
 
 #. 3.8->settings-schema.json->WB->description
 msgid ""
