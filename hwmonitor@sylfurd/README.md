@@ -54,11 +54,11 @@ Issues can be reported here : [Issues](https://github.com/linuxmint/cinnamon-spi
 
 ### Requirements
 
-**Graphical Hardware Monitor** requires the **Gtop** package to collect system information. It might already be installed on your system, but if the applet or graph is not shown, you might need to install the **Gtop** package manually.
+**Graphical Hardware Monitor** requires the **Gtop** and **GUdev** packages to collect system information. It might already be installed on your system, but if the applet or graph is not shown, you might need to install the packages manually.
 
-* **Ubuntu/Mint**: install the package **gir1.2-gtop-2.0**
-* **Fedora**: install the package **libgtop2-devel**
-* **Arch/Manjaro**: install the package **libgtop**
+* **Debian/Ubuntu/Mint**: install the packages **gir1.2-gtop-2.0** and **gir1.2-gudev-1.0**
+* **Fedora**: install the package **libgtop2-devel** and **libgudev**
+* **Arch/Manjaro**: install the package **libgtop** and **libgudev**
 
 ### Example
 
