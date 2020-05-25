@@ -196,7 +196,7 @@ class CinnamonCalendarApplet extends Applet.TextApplet {
     on_applet_added_to_panel() {
         this._onSettingsChanged();
 
-        if (this.clock_notify_id == 0) {
+        if (this.clock_notify_id === 0) {
             this.clock_notify_id = this.clock.connect("notify::clock", () => this._clockNotify());
         }
 

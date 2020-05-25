@@ -120,12 +120,13 @@ function _datesEqual(a, b) {
 
 function _dateIntervalsOverlap(a0, a1, b0, b1)
 {
-    if (a1 <= b0)
+    if (a1 <= b0) {
         return false;
-    else if (b1 <= a0)
+    } else if (b1 <= a0) {
         return false;
-    else
+    } else {
         return true;
+    }
 }
 
 class Calendar {
@@ -171,7 +172,9 @@ class Calendar {
     }
 
     _onSettingsChange(object, key, old_val, new_val) {
-        if (key == FIRST_WEEKDAY_KEY) this._weekStart = Cinnamon.util_get_week_start();
+        if (key === FIRST_WEEKDAY_KEY) {
+            this._weekStart = Cinnamon.util_get_week_start();
+        }
         this._buildHeader();
         this._update(false);
     }
@@ -183,8 +186,9 @@ class Calendar {
             this._update(forceReload);
             this.emit("selected-date-changed", new Date(this._selectedDate));
         } else {
-            if (forceReload)
+            if (forceReload) {
                 this._update(forceReload);
+            }
         }
     }
 
@@ -330,8 +334,9 @@ class Calendar {
 
         // Remove everything but the topBox and the weekday labels
         let children = this.actor.get_children();
-        for (let i = this._firstDayIndex; i < children.length; i++)
+        for (let i = this._firstDayIndex; i < children.length; i++) {
             children[i].destroy();
+        }
 
         // Start at the beginning of the week before the start of the month
         let beginDate = new Date(this._selectedDate);
@@ -345,7 +350,7 @@ class Calendar {
 
         let iter = new Date(beginDate);
         let row = 2;
-        while (true) {
+        do {
             let button = new St.Button({ label: iter.getDate().toString() });
 
             //only same month dates are eligable for holiday
@@ -366,18 +371,22 @@ class Calendar {
             }
 
             // Hack used in lieu of border-collapse - see cinnamon.css
-            if (row == 2)
+            if (row === 2) {
                 styleClass = "calendar-day-top " + styleClass;
-            if (iter.getDay() == this._weekStart)
+            }
+            if (iter.getDay() === this._weekStart) {
                 styleClass = "calendar-day-left " + styleClass;
+            }
 
-            if (_sameDay(now, iter))
+            if (_sameDay(now, iter)) {
                 styleClass += " calendar-today";
-            else if (iter.getMonth() != this._selectedDate.getMonth())
+            } else if (iter.getMonth() !== this._selectedDate.getMonth()) {
                 styleClass += " calendar-other-month-day";
+            }
 
-            if (_sameDay(this._selectedDate, iter))
+            if (_sameDay(this._selectedDate, iter)) {
                 button.add_style_pseudo_class("active");
+            }
 
             button.style_class = styleClass;
 
@@ -385,7 +394,7 @@ class Calendar {
             this.actor.add(button,
                            { row: row, col: offsetCols + (7 + iter.getDay() - this._weekStart) % 7 });
 
-            if (this.show_week_numbers && iter.getDay() == 4) {
+            if (this.show_week_numbers && iter.getDay() === 4) {
                 let label = new St.Label({ text: iter.toLocaleFormat("%V"),
                                            style_class: "calendar-day-base calendar-week-number"});
                 this.actor.add(label,
@@ -393,15 +402,12 @@ class Calendar {
             }
 
             iter.setTime(iter.getTime() + MSECS_IN_DAY);
-            if (iter.getDay() == this._weekStart) {
+            if (iter.getDay() === this._weekStart) {
                 row++;
-                // We always stop after placing 6 rows, even if month fits in 4
-                // to prevent issues with jumping controls, see #226
-                if (row > 7) {
-                    break;
-                }
             }
-        }
+            // We always stop after placing 6 rows, even if month fits in 4
+            // to prevent issues with jumping controls, see #226
+            } while (row <= 7 )
 
         this.holiday.getHolidays(this._selectedDate.getFullYear(), this._selectedDate.getMonth() + 1, (dates) => {
             for (const [day, name] of dates.entries()) {

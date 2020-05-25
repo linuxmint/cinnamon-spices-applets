@@ -10,7 +10,9 @@ function getInfo (env) {
 
     standard_output.toString().split("\n").forEach((line) => {
         const match = re.exec(line);
-        if (!match) return;
+        if (!match) {
+            return;
+        }
 
         const [, key, quoted, value] = match;
 

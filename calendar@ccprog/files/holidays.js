@@ -28,7 +28,9 @@ class Provider {
 
     writeToFile (fn, data) {
         const file = Provider.loadFile(fn);
-        if (!file) return;
+        if (!file) {
+            return;
+        }
 
         const allData = Utils.readJsonFile(file);
         allData[this.country] = data;
@@ -67,7 +69,7 @@ class Enrico extends Provider {
             .sort((a, b) => a.lang === "en" ? 1 : b.lang === "en" ? -1 : 0)[0]
             .text;
 
-        const known = this.data.find(d => d.year === year && d.month === month && d.day === day && d.region === this.region);
+        const known = this.data.find((d) => d.year === year && d.month === month && d.day === day && d.region === this.region);
 
         if (known) {
             known.name = name;
@@ -77,7 +79,9 @@ class Enrico extends Provider {
     }
 
     addData (data, params, retrieved) {
-        if (data.error) return;
+        if (data.error) {
+            return;
+        }
 
         const regionId = params.region || "global";
         if (this.years[params.year]) {
@@ -94,7 +98,9 @@ class Enrico extends Provider {
     }
 
     retrieveForYear (year, callback) {
-        if (!this.country) throw new Error("invalid country");
+        if (!this.country) {
+            throw new Error("invalid country");
+        }
         const params = {
             year,
             country: this.country,
@@ -105,7 +111,7 @@ class Enrico extends Provider {
         }
 
         let url = Enrico.url;
-        for (let key in params) {
+        for (let key of Object.keys(params)) {
             url += "&" + key + "=" + params[key];
         }
 
@@ -162,9 +168,6 @@ class HolidayData {
     _init (source) {
         if (HolidayData.validSources.hasOwnProperty(source)) {
             this._provider = new HolidayData.validSources[source]();
-            if (this._provider.region) {
-                this._provider.setRegion(region);
-            }
         }
     }
 
