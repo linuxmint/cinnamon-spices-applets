@@ -1,4 +1,4 @@
-/* global imports, _, C */
+/* global imports, C_ */
 /* eslint camelcase: "off" */
 
 const Clutter = imports.gi.Clutter;
@@ -366,57 +366,58 @@ class Calendar {
             const newlySelectedDate = new Date(iter.getTime());
             button.connect("clicked", this.setDate.bind(this, newlySelectedDate, false));
 
-            let styleClass = "calendar-day-base calendar-day";
+            let styleClass = ["calendar-day-base", "calendar-day"];
             if (_isWorkDay(iter, this.weekend_length)) {
-                styleClass += " calendar-work-day";
+                styleClass.push("calendar-work-day");
             } else {
-                styleClass += " calendar-nonwork-day";
+                styleClass.push("calendar-nonwork-day");
             }
 
             // Hack used in lieu of border-collapse - see cinnamon.css
             if (row === 2) {
-                styleClass = "calendar-day-top " + styleClass;
+                styleClass.push("calendar-day-top");
             }
             if (iter.getDay() === this._weekStart) {
-                styleClass = "calendar-day-left " + styleClass;
+                styleClass.push("calendar-day-left");
             }
 
             if (_sameDay(now, iter)) {
-                styleClass += " calendar-today";
+                styleClass.push("calendar-today");
             } else if (iter.getMonth() !== this._selectedDate.getMonth()) {
-                styleClass += " calendar-other-month-day";
+                styleClass.push("calendar-other-month-day");
             }
 
             if (_sameDay(this._selectedDate, iter)) {
                 button.add_style_pseudo_class("active");
             }
 
-            button.style_class = styleClass;
+            button.style_class = styleClass.join(" ");
 
             let offsetCols = this.show_week_numbers ? 1 : 0;
             this.actor.add(button,
-                           { row: row, col: offsetCols + (7 + iter.getDay() - this._weekStart) % 7 });
+                           { row, col: offsetCols + (7 + iter.getDay() - this._weekStart) % 7 });
 
             if (this.show_week_numbers && iter.getDay() === 4) {
                 let label = new St.Label({ text: iter.toLocaleFormat("%V"),
                                            style_class: "calendar-day-base calendar-week-number"});
                 this.actor.add(label,
-                               { row: row, col: 0, y_align: St.Align.MIDDLE });
+                               { row, col: 0, y_align: St.Align.MIDDLE });
             }
 
             iter.setTime(iter.getTime() + MSECS_IN_DAY);
             if (iter.getDay() === this._weekStart) {
                 row++;
             }
-            // We always stop after placing 6 rows, even if month fits in 4
-            // to prevent issues with jumping controls, see #226
-            } while (row <= 7 )
+        // We always stop after placing 6 rows, even if month fits in 4
+        // to prevent issues with jumping controls, see #226
+        } while (row <= 7 );
 
         this.holiday.getHolidays(this._selectedDate.getFullYear(), this._selectedDate.getMonth() + 1, (dates) => {
             for (const [day, name] of dates.entries()) {
                 const button = buttons.get(day);
 
-                new Tooltips.Tooltip(button, name);
+                const tooltip = new Tooltips.Tooltip(button);
+                tooltip.set_text(name);
 
                 button.remove_style_class_name("calendar-work-day");
                 button.add_style_class_name("calendar-nonwork-day");

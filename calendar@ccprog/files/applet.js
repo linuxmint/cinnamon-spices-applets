@@ -1,4 +1,4 @@
-/* global imports, _, C */
+/* global imports, _ */
 /* eslint camelcase: "off" */
 
 const Applet = imports.ui.applet;

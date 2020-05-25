@@ -25,8 +25,9 @@ class Provider {
 
     loadFromFile (fn, country) {
         const file = Provider.loadFile(fn);
+        const struct = { years: {}, holidays: []};
 
-        return file ? Utils.readJsonFile(file)[country] || {} : {};
+        return file ? Object.assign(struct, Utils.readJsonFile(file)[country]) : struct;
     }
 
     writeToFile (fn, data) {
@@ -126,15 +127,15 @@ class Enrico extends Provider {
         });
     }
 
-    setPlace (country, region) {
+    setPlace (country, region = "global") {
         if (this.country !== country) {
             const data = this.loadFromFile(Enrico.fn, country);
-            this.years = data.years || {};
-            this.data = data.holidays || [];
+            this.years = data.years;
+            this.data = data.holidays;
         }
 
         this.country = country;
-        this.region = region || "global";
+        this.region = region;
 
         const year = new Date().getFullYear();
         if (!this.years[year] || this.region && !this.years[year][this.region]) {
