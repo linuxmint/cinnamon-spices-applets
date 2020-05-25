@@ -1,3 +1,6 @@
+/* global imports, _, C */
+/* eslint camelcase: "off" */
+
 const Clutter = imports.gi.Clutter;
 const Gio = imports.gi.Gio;
 const St = imports.gi.St;
@@ -75,7 +78,7 @@ function _formatEventTime(event, clockFormat) {
             break;
 
         default:
-            /* explicit fall-through */
+            /* falls through */
         case "12h":
             /* Transators: Shown in calendar event list, if 12h format */
             ret = event.date.toLocaleFormat(C_("event list time", "%l:%M %p"));

@@ -1,3 +1,6 @@
+/* global imports */
+/* eslint camelcase: "off" */
+
 const Cinnamon = imports.gi.Cinnamon;
 const Gio = imports.gi.Gio;
 const glib = imports.gi.GLib;

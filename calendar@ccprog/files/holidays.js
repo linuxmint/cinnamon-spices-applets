@@ -1,3 +1,6 @@
+/* global imports */
+/* eslint camelcase: "off" */
+
 const Soup = imports.gi.Soup;
 const Gio = imports.gi.Gio;
 const Utils = require("./utils");

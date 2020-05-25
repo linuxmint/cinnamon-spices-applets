@@ -1,3 +1,6 @@
+/* global imports, _, C */
+/* eslint camelcase: "off" */
+
 const Applet = imports.ui.applet;
 const Gio = imports.gi.Gio;
 const Clutter = imports.gi.Clutter;
