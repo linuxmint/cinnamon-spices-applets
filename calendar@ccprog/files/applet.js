@@ -6,12 +6,12 @@ const Util = imports.misc.util;
 const PopupMenu = imports.ui.popupMenu;
 const UPowerGlib = imports.gi.UPowerGlib;
 const Settings = imports.ui.settings;
-const Utils = require('./utils');
-const Calendar = require('./calendar');
+const Utils = require("./utils");
+const Calendar = require("./calendar");
 const CinnamonDesktop = imports.gi.CinnamonDesktop;
 const Main = imports.ui.main;
 
-const Langinfo = Utils.getInfo('LC_ADDRESS');
+const Langinfo = Utils.getInfo("LC_ADDRESS");
 const LC_AB3 = Langinfo.country_ab3.toLowerCase();
 
 String.prototype.capitalize = function() {
@@ -23,8 +23,8 @@ function _onVertSepRepaint (area)
     let cr = area.get_context();
     let themeNode = area.get_theme_node();
     let [width, height] = area.get_surface_size();
-    let stippleColor = themeNode.get_color('-stipple-color');
-    let stippleWidth = themeNode.get_length('-stipple-width');
+    let stippleColor = themeNode.get_color("-stipple-color");
+    let stippleWidth = themeNode.get_length("-stipple-width");
     let x = Math.floor(width/2) + 0.5;
     cr.moveTo(x, 0);
     cr.lineTo(x, height);
@@ -51,12 +51,14 @@ class CinnamonCalendarApplet extends Applet.TextApplet {
             this.settings.bind("country", "country", this._onPlaceChanged.bind(this));
             this.regions = {};
 
-            for (let country of this.settings.getValue('has_region')) {
+            for (let country of this.settings.getValue("has_region")) {
                 this.settings.bindWithObject(this.regions, "region_" + country, country,
                     this._onPlaceChanged.bind(this));
             }
 
-            if (this.country === null) this.country = LC_AB3;
+            if (this.country === null) {
+                this.country = LC_AB3;
+            }
 
             // Calendar
             this.clock = new CinnamonDesktop.WallClock();
@@ -66,11 +68,11 @@ class CinnamonCalendarApplet extends Applet.TextApplet {
             }
 
             this._initContextMenu();
-            this.menu.setCustomStyleClass('calendar-background');
+            this.menu.setCustomStyleClass("calendar-background");
 
             // Date
             this._date = new St.Label();
-            this._date.style_class = 'datemenu-date-label';
+            this._date.style_class = "datemenu-date-label";
             this.menu.addActor(this._date);
 
             this.menu.addActor(this._calendar.actor);
@@ -100,9 +102,9 @@ class CinnamonCalendarApplet extends Applet.TextApplet {
             // https://bugzilla.gnome.org/show_bug.cgi?id=655129
             this._upClient = new UPowerGlib.Client();
             try {
-                this._upClient.connect('notify-resume', this._updateClockAndDate.bind(this));
+                this._upClient.connect("notify-resume", this._updateClockAndDate.bind(this));
             } catch (e) {
-                this._upClient.connect('notify::resume', this._updateClockAndDate.bind(this));
+                this._upClient.connect("notify::resume", this._updateClockAndDate.bind(this));
             }
         }
         catch (e) {
@@ -145,7 +147,7 @@ class CinnamonCalendarApplet extends Applet.TextApplet {
     }
 
     _updateFormatString() {
-        let in_vertical_panel = (this.orientation == St.Side.LEFT || this.orientation == St.Side.RIGHT);
+        let in_vertical_panel = (this.orientation === St.Side.LEFT || this.orientation === St.Side.RIGHT);
 
         if (this.use_custom_format) {
             if (!this.clock.set_format_string(this.custom_format)) {
@@ -215,7 +217,7 @@ class CinnamonCalendarApplet extends Applet.TextApplet {
         this.menuManager.addMenu(this.menu);
 
         // Whenever the menu is opened, select today
-        this.menu.connect('open-state-changed', (menu, isOpen) => {
+        this.menu.connect("open-state-changed", (menu, isOpen) => {
             if (isOpen) {
                 this._updateCalendar();
             }

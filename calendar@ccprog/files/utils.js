@@ -8,7 +8,7 @@ function getInfo (env) {
     let [error, standard_output, standard_error, exit_status] = glib.spawn_command_line_sync("locale -k " + env);
     const info = {};
 
-    standard_output.toString().split('\n').forEach(line => {
+    standard_output.toString().split("\n").forEach((line) => {
         const match = re.exec(line);
         if (!match) return;
 

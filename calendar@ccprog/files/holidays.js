@@ -1,9 +1,9 @@
 const Soup = imports.gi.Soup;
 const Gio = imports.gi.Gio;
-const Utils = require('./utils');
-const AppletDir = imports.ui.appletManager.appletMeta['calendar@ccprog'].path;
+const Utils = require("./utils");
+const AppletDir = imports.ui.appletManager.appletMeta["calendar@ccprog"].path;
 
-const Langinfo = Utils.getInfo('LC_ADDRESS');
+const Langinfo = Utils.getInfo("LC_ADDRESS");
 const LC_LANG = Langinfo.lang_ab;
 
 const _httpSession = new Soup.SessionAsync();
@@ -37,13 +37,13 @@ class Provider {
     }
 
     static loadJsonAsync(url, params, callback) {
-        const message = Soup.Message.new('GET', url);
-        global.log('get', url);
+        const message = Soup.Message.new("GET", url);
+        global.log("get", url);
 
         _httpSession.queue_message(message, (session, message) => {
-            const retrieved = message.response_headers.get_one('date');
+            const retrieved = message.response_headers.get_one("date");
             const data = JSON.parse(message.response_body.data);
-            global.log('response', retrieved);
+            global.log("response", retrieved);
 
             callback(data, params, retrieved);
         });
@@ -63,8 +63,8 @@ class Enrico extends Provider {
         const {year, month, day} = holiday.date;
 
         const name = holiday.name
-            .filter(l => l.lang === LC_LANG || l.lang === 'en')
-            .sort((a, b) => a.lang === 'en' ? 1 : b.lang === 'en' ? -1 : 0)[0]
+            .filter((l) => l.lang === LC_LANG || l.lang === "en")
+            .sort((a, b) => a.lang === "en" ? 1 : b.lang === "en" ? -1 : 0)[0]
             .text;
 
         const known = this.data.find(d => d.year === year && d.month === month && d.day === day && d.region === this.region);
@@ -79,7 +79,7 @@ class Enrico extends Provider {
     addData (data, params, retrieved) {
         if (data.error) return;
 
-        const regionId = params.region || 'global';
+        const regionId = params.region || "global";
         if (this.years[params.year]) {
             this.years[params.year][regionId] = retrieved;
         } else {
@@ -94,13 +94,15 @@ class Enrico extends Provider {
     }
 
     retrieveForYear (year, callback) {
-        if (!this.country) throw new Error('invalid country');
+        if (!this.country) throw new Error("invalid country");
         const params = {
-            year: year,
+            year,
             country: this.country,
-            holidayType: 'public_holiday'
+            holidayType: "public_holiday"
         };
-        if (this.region !== 'global') params.region = this.region;
+        if (this.region !== "global") {
+            params.region = this.region;
+        }
 
         let url = Enrico.url;
         for (let key in params) {
@@ -123,7 +125,7 @@ class Enrico extends Provider {
         }
 
         this.country = country;
-        this.region = region || 'global';
+        this.region = region || "global";
 
         const year = new Date().getFullYear();
         if (!this.years[year] || this.region && !this.years[year][this.region]) {
@@ -132,8 +134,8 @@ class Enrico extends Provider {
     }
 
     matchMonth (year, month) {
-        const holidays = this.data.filter(d => d.year === year && d.month === month && d.region === this.region);
-        return new Map(holidays.map(d => [d.day, d.name]));
+        const holidays = this.data.filter((d) => d.year === year && d.month === month && d.region === this.region);
+        return new Map(holidays.map((d) => [d.day, d.name]));
     }
 
     getHolidays (year, month, callback) {
@@ -150,10 +152,10 @@ class Enrico extends Provider {
     }
 }
 Enrico.url = "https://kayaposoft.com/enrico/json/v2.0?action=getHolidaysForYear";
-Enrico.fn = '/enrico.json';
+Enrico.fn = "/enrico.json";
 
 class HolidayData {
-    constructor (source = 'enrico') {
+    constructor (source = "enrico") {
         this._init(source);
     }
 

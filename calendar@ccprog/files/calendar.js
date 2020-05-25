@@ -4,37 +4,37 @@ const St = imports.gi.St;
 const Tooltips = imports.ui.tooltips;
 const Signals = imports.signals;
 const Pango = imports.gi.Pango;
-const Gettext_gtk30 = imports.gettext.domain('gtk30');
+const Gettext_gtk30 = imports.gettext.domain("gtk30");
 const Cinnamon = imports.gi.Cinnamon;
 
 const MSECS_IN_DAY = 24 * 60 * 60 * 1000;
 const WEEKDATE_HEADER_WIDTH_DIGITS = 3;
-const SHOW_WEEKDATE_KEY = 'show-week-numbers';
-const WEEKEND_LENGHTE_KEY = 'weekend-length';
-const FIRST_WEEKDAY_KEY = 'first-day-of-week';
-const DESKTOP_SCHEMA = 'org.cinnamon.desktop.interface';
+const SHOW_WEEKDATE_KEY = "show-week-numbers";
+const WEEKEND_LENGHTE_KEY = "weekend-length";
+const FIRST_WEEKDAY_KEY = "first-day-of-week";
+const DESKTOP_SCHEMA = "org.cinnamon.desktop.interface";
 
-const timeinfo = require('./utils').getInfo('LC_TIME');
-const LC_ABDAY = timeinfo.abday.split(';');
+const timeinfo = require("./utils").getInfo("LC_TIME");
+const LC_ABDAY = timeinfo.abday.split(";");
 const LC_FIRST_WORKDAY = (timeinfo.first_workday + 6) % 7;
 
-const Holidays = require('./holidays');
+const Holidays = require("./holidays");
 
 // in org.cinnamon.desktop.interface
-const CLOCK_FORMAT_KEY = 'clock-format';
+const CLOCK_FORMAT_KEY = "clock-format";
 
 function _sameDay(dateA, dateB) {
-    return (dateA.getDate() == dateB.getDate() &&
-            dateA.getMonth() == dateB.getMonth() &&
-            dateA.getFullYear() == dateB.getFullYear());
+    return (dateA.getDate() === dateB.getDate() &&
+            dateA.getMonth() === dateB.getMonth() &&
+            dateA.getFullYear() === dateB.getFullYear());
 }
 
 function _sameYear(dateA, dateB) {
-    return (dateA.getFullYear() == dateB.getFullYear());
+    return (dateA.getFullYear() === dateB.getFullYear());
 }
 
 /* TODO: maybe needs config - right now we assume that Saturday and
- * Sunday are non-work days (not true in e.g. Israel, it's Sunday and
+ * Sunday are non-work days (not true in e.g. Israel, it"s Sunday and
  * Monday there)
  */
 function _isWorkDay(date, weekend_length) {
@@ -69,14 +69,14 @@ function _formatEventTime(event, clockFormat) {
         ret = C_("event list time", "All Day");
     } else {
         switch (clockFormat) {
-        case '24h':
+        case "24h":
             /* Translators: Shown in calendar event list, if 24h format */
             ret = event.date.toLocaleFormat(C_("event list time", "%H:%M"));
             break;
 
         default:
             /* explicit fall-through */
-        case '12h':
+        case "12h":
             /* Transators: Shown in calendar event list, if 12h format */
             ret = event.date.toLocaleFormat(C_("event list time", "%l:%M %p"));
             break;
@@ -110,10 +110,11 @@ class CalendarEvent {
 }
 
 function _datesEqual(a, b) {
-    if (a < b)
+    if (a < b) {
         return false;
-    else if (a > b)
+    } else if (a > b) {
         return false;
+    }
     return true;
 }
 
@@ -141,16 +142,16 @@ class Calendar {
 
         // Find the ordering for month/year in the calendar heading
 
-        let var_name = 'calendar:MY';
+        let var_name = "calendar:MY";
         switch (Gettext_gtk30.gettext(var_name)) {
-        case 'calendar:MY':
+        case "calendar:MY":
             this._headerMonthFirst = true;
             break;
-        case 'calendar:YM':
+        case "calendar:YM":
             this._headerMonthFirst = false;
             break;
         default:
-            log('Translation of "calendar:MY" in GTK+ is not correct');
+            global.log("Translation of 'calendar:MY' in GTK+ is not correct");
             this._headerMonthFirst = true;
             break;
         }
@@ -161,10 +162,10 @@ class Calendar {
         this._selectedDate = new Date();
 
         this.actor = new St.Table({ homogeneous: false,
-                                    style_class: 'calendar',
+                                    style_class: "calendar",
                                     reactive: true });
 
-        this.actor.connect('scroll-event', this._onScroll.bind(this));
+        this.actor.connect("scroll-event", this._onScroll.bind(this));
 
         this._buildHeader ();
     }
@@ -180,7 +181,7 @@ class Calendar {
         if (!_sameDay(date, this._selectedDate)) {
             this._selectedDate = date;
             this._update(forceReload);
-            this.emit('selected-date-changed', new Date(this._selectedDate));
+            this.emit("selected-date-changed", new Date(this._selectedDate));
         } else {
             if (forceReload)
                 this._update(forceReload);
@@ -191,7 +192,7 @@ class Calendar {
         let offsetCols = this.show_week_numbers ? 1 : 0;
         this.actor.destroy_all_children();
 
-        // Top line of the calendar '<| September |> <| 2009 |>'
+        // Top line of the calendar "<| September |> <| 2009 |>"
         this._topBoxMonth = new St.BoxLayout();
         this._topBoxYear = new St.BoxLayout();
 
@@ -207,43 +208,43 @@ class Calendar {
                        {row: 0, col: 0, col_span: offsetCols + 3});
         }
 
-        this.actor.connect('style-changed', this._onStyleChange.bind(this));
+        this.actor.connect("style-changed", this._onStyleChange.bind(this));
 
-        let back = new St.Button({ style_class: 'calendar-change-month-back' });
+        let back = new St.Button({ style_class: "calendar-change-month-back" });
         this._topBoxMonth.add(back);
-        back.connect('clicked', this._onPrevMonthButtonClicked.bind(this));
+        back.connect("clicked", this._onPrevMonthButtonClicked.bind(this));
 
-        this._monthLabel = new St.Label({style_class: 'calendar-month-label'});
+        this._monthLabel = new St.Label({style_class: "calendar-month-label"});
         this._topBoxMonth.add(this._monthLabel, { expand: true, x_fill: false, x_align: St.Align.MIDDLE });
 
-        let forward = new St.Button({ style_class: 'calendar-change-month-forward' });
+        let forward = new St.Button({ style_class: "calendar-change-month-forward" });
         this._topBoxMonth.add(forward);
-        forward.connect('clicked', this._onNextMonthButtonClicked.bind(this));
+        forward.connect("clicked", this._onNextMonthButtonClicked.bind(this));
 
-        back = new St.Button({style_class: 'calendar-change-month-back'});
+        back = new St.Button({style_class: "calendar-change-month-back"});
         this._topBoxYear.add(back);
-        back.connect('clicked', this._onPrevYearButtonClicked.bind(this));
+        back.connect("clicked", this._onPrevYearButtonClicked.bind(this));
 
-        this._yearLabel = new St.Label({style_class: 'calendar-month-label'});
+        this._yearLabel = new St.Label({style_class: "calendar-month-label"});
         this._topBoxYear.add(this._yearLabel, {expand: true, x_fill: false, x_align: St.Align.MIDDLE});
 
-        forward = new St.Button({style_class: 'calendar-change-month-forward'});
+        forward = new St.Button({style_class: "calendar-change-month-forward"});
         this._topBoxYear.add(forward);
-        forward.connect('clicked', this._onNextYearButtonClicked.bind(this));
+        forward.connect("clicked", this._onNextYearButtonClicked.bind(this));
 
         // Add weekday labels...
         //
         // We need to figure out the abbreviated localized names for the days of the week;
         // we do this by just getting the next 7 days starting from right now and then putting
-        // them in the right cell in the table. It doesn't matter if we add them in order
+        // them in the right cell in the table. It doesn"t matter if we add them in order
         let iter = new Date(this._selectedDate);
         iter.setSeconds(0); // Leap second protection. Hah!
         iter.setHours(12);
         for (let i = 0; i < 7; i++) {
-            // Could use iter.toLocaleFormat('%a') but that normally gives three characters
+            // Could use iter.toLocaleFormat("%a") but that normally gives three characters
             // and we want, ideally, a single character for e.g. S M T W T F S
             let customDayAbbrev = _getCalendarDayAbbreviation(iter.getDay());
-            let label = new St.Label({ style_class: 'calendar-day-base calendar-day-heading',
+            let label = new St.Label({ style_class: "calendar-day-base calendar-day-heading",
                                        text: customDayAbbrev });
             this.actor.add(label,
                            { row: 1,
@@ -324,8 +325,8 @@ class Calendar {
     _update(forceReload) {
         let now = new Date();
 
-        this._monthLabel.text = this._selectedDate.toLocaleFormat('%OB').capitalize();
-        this._yearLabel.text = this._selectedDate.toLocaleFormat('%Y');
+        this._monthLabel.text = this._selectedDate.toLocaleFormat("%OB").capitalize();
+        this._yearLabel.text = this._selectedDate.toLocaleFormat("%Y");
 
         // Remove everything but the topBox and the weekday labels
         let children = this.actor.get_children();
@@ -355,28 +356,28 @@ class Calendar {
             //button.reactive = false;
 
             const newlySelectedDate = new Date(iter.getTime());
-            button.connect('clicked', this.setDate.bind(this, newlySelectedDate, false));
+            button.connect("clicked", this.setDate.bind(this, newlySelectedDate, false));
 
-            let styleClass = 'calendar-day-base calendar-day';
+            let styleClass = "calendar-day-base calendar-day";
             if (_isWorkDay(iter, this.weekend_length)) {
-                styleClass += ' calendar-work-day';
+                styleClass += " calendar-work-day";
             } else {
-                styleClass += ' calendar-nonwork-day';
+                styleClass += " calendar-nonwork-day";
             }
 
             // Hack used in lieu of border-collapse - see cinnamon.css
             if (row == 2)
-                styleClass = 'calendar-day-top ' + styleClass;
+                styleClass = "calendar-day-top " + styleClass;
             if (iter.getDay() == this._weekStart)
-                styleClass = 'calendar-day-left ' + styleClass;
+                styleClass = "calendar-day-left " + styleClass;
 
             if (_sameDay(now, iter))
-                styleClass += ' calendar-today';
+                styleClass += " calendar-today";
             else if (iter.getMonth() != this._selectedDate.getMonth())
-                styleClass += ' calendar-other-month-day';
+                styleClass += " calendar-other-month-day";
 
             if (_sameDay(this._selectedDate, iter))
-                button.add_style_pseudo_class('active');
+                button.add_style_pseudo_class("active");
 
             button.style_class = styleClass;
 
@@ -385,8 +386,8 @@ class Calendar {
                            { row: row, col: offsetCols + (7 + iter.getDay() - this._weekStart) % 7 });
 
             if (this.show_week_numbers && iter.getDay() == 4) {
-                let label = new St.Label({ text: iter.toLocaleFormat('%V'),
-                                           style_class: 'calendar-day-base calendar-week-number'});
+                let label = new St.Label({ text: iter.toLocaleFormat("%V"),
+                                           style_class: "calendar-day-base calendar-week-number"});
                 this.actor.add(label,
                                { row: row, col: 0, y_align: St.Align.MIDDLE });
             }
@@ -408,8 +409,8 @@ class Calendar {
 
                 new Tooltips.Tooltip(button, name);
 
-                button.remove_style_class_name('calendar-work-day');
-                button.add_style_class_name('calendar-nonwork-day');
+                button.remove_style_class_name("calendar-work-day");
+                button.add_style_class_name("calendar-nonwork-day");
                 //button.queue_redraw();
             }
         });
