@@ -1,0 +1,28 @@
+.stevedore-search {
+	border: solid 1px silver;
+	background-color: white;
+	color: black;
+}
+
+.boxee-pink {
+	/* border: solid 1px pink; */
+}
+
+.image-name {
+	padding: 5px;
+}
+
+.image-select {
+	border: solid 1px silver;
+	border-radius: 5px;
+	padding: 5px;
+	margin: 5px;
+}
+
+.selected-button {
+	background-color: silver;
+}
+
+.workspace-button:hover {
+	background-color: silver;	
+}

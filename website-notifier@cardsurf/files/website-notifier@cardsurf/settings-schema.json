@@ -1,0 +1,150 @@
+{
+    "configuration": {
+        "type": "header",
+        "description": "Configuration"
+    },
+    "update_every": {
+        "type": "spinbutton",
+        "default": 60,
+        "min": 0,
+        "max": 525600,
+        "step": 1,
+        "units": "minutes",
+        "description": "Refresh every",
+        "tooltip" : "How often to refresh a website. 0 means no refreshing."
+    },
+    "notification_type" : {
+        "type": "combobox",
+        "default" : 0,
+        "description" : "Notification type",
+        "options" : {
+            "System popup" : 0,
+            "Applet popup" : 1
+        },
+        "tooltip" : "A user interface that shows notficiation text"
+    },
+    "tooltip_type" : {
+        "type": "combobox",
+        "default" : 0,
+        "description" : "Tooltip text",
+        "options" : {
+            "Time left next refresh": 0,
+            "Next refresh time" : 1,
+            "Last refresh time" : 2,
+            "Last notification time" : 3,
+            "None" : 4
+        },
+        "tooltip" : "Text shown in an applet tooltip"
+    },
+    "primary_button_type" : {
+        "type": "combobox",
+        "default" : 0,
+        "description" : "Primary button",
+        "options" : {
+            "Left" : 0,
+            "Middle" : 1
+        },
+        "tooltip" : "A mouse button used to perform main actions.\nThe primary button refreshes a website on demand.\nThe secondary button toggles an applet popup."
+    },
+    "applet_popup_click_type" : {
+        "type": "combobox",
+        "default" : 0,
+        "description" : "On popup clicked",
+        "options" : {
+            "Close popup and open browser" : 0,
+            "Close popup" : 1
+        },
+        "tooltip" : "An action to perform when an applet popup is clicked"
+    },
+    "configuration_end" : {
+        "type" : "separator"
+    },
+
+    "gui_start": {
+        "type": "header",
+        "description": "Gui"
+    },
+    "max_title_length": {
+        "type": "spinbutton",
+        "default": 100,
+        "min": 0,
+        "max": 500,
+        "step": 1,
+        "units": "characters",
+        "description": "Title length",
+        "tooltip" : "A maximum number of characters in a notification title"
+    },
+    "max_message_length": {
+        "type": "spinbutton",
+        "default": 500,
+        "min": 0,
+        "max": 3000,
+        "step": 1,
+        "units": "characters",
+        "description": "Message length",
+        "tooltip" : "A maximum number of characters in a notification message"
+    },
+    "applet_popup_width": {
+        "type": "spinbutton",
+        "default": 500,
+        "min": 50,
+        "max": 1000,
+        "step": 1,
+        "units": "pixels",
+        "description": "Popup width",
+        "tooltip" : "A width of an applet popup"
+    },
+    "applet_popup_height": {
+        "type": "spinbutton",
+        "default": 150,
+        "min": 50,
+        "max": 1000,
+        "step": 1,
+        "units": "pixels",
+        "description": "Popup height",
+        "tooltip" : "A height of an applet popup"
+    },
+    "applet_popup_title_css": {
+        "type": "entry",
+        "default": "font-size: 15px; padding: 5px; font-weight: bold;",
+        "description": "Popup title CSS",
+        "tooltip": "A CSS style applied to a notification title in an applet popup"
+    },
+    "applet_popup_message_css": {
+        "type": "entry",
+        "default": "font-size: 15px; padding: 5px; font-weight: normal;",
+        "description": "Popup message CSS",
+        "tooltip": "A CSS style applied to a notification message in an applet popup"
+    },
+    "gui_icon_filepath" : {
+        "type" : "filechooser",
+        "default" : "~/.local/share/cinnamon/applets/website-notifier@cardsurf/icons/bubbleBlue.png",
+        "description" : "Icon",
+        "tooltip": "An icon displayed in a panel"
+    },
+    "gui_end" : {
+        "type" : "separator"
+    },
+
+
+    "scripts_start": {
+        "type": "header",
+        "description": "Scripts"
+    },
+    "script_filepath": {
+        "type" : "filechooser",
+        "default" : "~/.local/share/cinnamon/applets/website-notifier@cardsurf/scripts/custom.sh",
+        "description" : "Script",
+        "tooltip": "A path to a script that refeshes a website"
+    },
+    "script_separator" : {
+        "type": "entry",
+        "default": ":::::",
+        "description": "Separator ",
+        "tooltip": "A string that seperates values returned from the script"
+    },
+    "scripts_end" : {
+        "type" : "separator"
+    }
+
+}

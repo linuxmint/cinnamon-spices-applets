@@ -13,6 +13,16 @@
         "description": "Refresh Interval for Display:",
         "tooltip": "Increase or decrease this spinner value to change the refresh interval - use a slow refresh if you have a slow machine"
      },
+
+    "showGpuTemp": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Show GPU Temperature as well as icon",
+        "tooltip": "Available in Horizontal and Vertical Panels. Display is in Degrees Centigrade."
+    },
+
+
+
    "head2": {
         "type": "header",
         "description": "Programs settings for Optimus"
@@ -20,26 +30,26 @@
 
     "description1": {
         "type": "entry",
-        "default": "null",
+        "default": "nVidia Settings Program",
         "description": "Display Name of Program 1 to be run using Optimus technology",
         "tooltip": "Put the name of the program here or null if you do not want it displayed"
     },
     "commandString1": {
         "type": "entry",
-        "default": "null",
+        "default": "optirun -b none nvidia-settings -c :8",
         "description": "Command String for Program 1",
         "tooltip": "Put the command string to run the program here starting with optirun or primusrun"
     },
 
     "description2": {
         "type": "entry",
-        "default": "null",
+        "default": "Run glxspheres64 GPU test program",
         "description": "Display Name of Program 2 to be run using Optimus technology",
         "tooltip": "Put the name of the program here or none if you do not want it displayed"
     },
     "commandString2": {
         "type": "entry",
-        "default": "",
+        "default": "optirun /opt/VirtualGL/bin/glxspheres64",
         "description": "Command String for Program 2",
         "tooltip": "Put the command string to run the program here starting with optirun or primusrun"
     },

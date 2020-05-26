@@ -8,6 +8,14 @@ const PopupMenu = imports.ui.popupMenu;
 const Util = imports.misc.util;
 const GLib = imports.gi.GLib;
 const ModalDialog = imports.ui.modalDialog;
+const Gettext = imports.gettext;
+const UUID = "ShutdownApplet@shelley"
+
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
 
 function ConfirmDialog(){
     this._init();
@@ -32,29 +40,25 @@ MyApplet.prototype = {
             this._contentSection = new PopupMenu.PopupMenuSection();
             this.menu.addMenuItem(this._contentSection);      
                                                                                        
-  	    this.menu.addAction(_("Screen Lock"), function(event) {
-                Util.spawnCommandLine("dbus-send --session --type=method_call --print-reply --dest=org.gnome.ScreenSaver /org/gnome/ScreenSaver org.gnome.ScreenSaver.Lock");
+            this.menu.addAction(_("Screen Lock"), function(event) {
+                Util.spawnCommandLine("cinnamon-screensaver-command --lock");
             });                                                                         
 
             this.menu.addAction(_("Suspend"), function(event) {
-                Util.spawnCommandLine("dbus-send --print-reply --system --dest=org.freedesktop.UPower /org/freedesktop/UPower org.freedesktop.UPower.Suspend");
+                Util.spawnCommandLine("systemctl suspend");
             });
 	    
-              this.menu.addAction(_("Hibernate"), function(event) {
-                Util.spawnCommandLine("dbus-send --print-reply --system --dest=org.freedesktop.UPower /org/freedesktop/UPower org.freedesktop.UPower.Suspend");
-            });  
-            
              this.menu.addAction(_("Restart"), function(event) {
-                Util.spawnCommandLine("dbus-send --system --print-reply --system --dest=org.freedesktop.ConsoleKit /org/freedesktop/ConsoleKit/Manager org.freedesktop.ConsoleKit.Manager.Restart");
+                Util.spawnCommandLine("systemctl reboot");
             });  
             
-        this.menu.addAction(_("Log Out"), function(event) {
-                Util.spawnCommandLine("dbus-send --session --type=method_call --print-reply --dest=org.gnome.SessionManager /org/gnome/SessionManager org.gnome.SessionManager.Logout uint32:1");
+            this.menu.addAction(_("Log Out"), function(event) {
+                Util.spawnCommandLine("cinnamon-session-quit --no-prompt");
             });
             
-	     this.menu.addAction(_("Shutdown"), function(event) {
-                Util.spawnCommandLine("dbus-send --system --print-reply --system --dest=org.freedesktop.ConsoleKit /org/freedesktop/ConsoleKit/Manager org.freedesktop.ConsoleKit.Manager.Stop");
-            });                        
+             this.menu.addAction(_("Shutdown"), function(event) {
+                Util.spawnCommandLine("systemctl poweroff");
+             });                        
         }
         catch (e) {
             global.logError(e);

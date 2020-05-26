@@ -5,7 +5,7 @@
  },
  "icon-name": {
     "type": "iconfilechooser",
-    "default" : "",
+    "default" : "user-desktop",
     "description" : "The icon to use in the panel:",
     "tooltip" : "Select an icon file, or you can type an icon name into the entry box, for example: desktop"
  },
@@ -36,7 +36,7 @@
  },
  "head1" : {
     "type" : "header",
-    "description" : "\nMenu options"
+    "description" : "Menu options"
  },
  "closebuttons" : {
     "type" : "checkbox",
@@ -62,7 +62,7 @@
  },
  "head2" : {
     "type" : "header",
-    "description" : "\nPeek at desktop"
+    "description" : "Peek at desktop"
  },
  "peekatdesktop" : {
     "type" : "checkbox",
@@ -102,4 +102,3 @@
     "tooltip" : ""
  }
 }
-

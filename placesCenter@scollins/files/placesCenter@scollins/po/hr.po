@@ -1,0 +1,234 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Places Center 2.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-02-26 21:07+0100\n"
+"PO-Revision-Date: 2017-02-26 21:10+0100\n"
+"Last-Translator: gogo <trebelnik2@gmail.com>\n"
+"Language-Team: Croatian <hr@li.org>\n"
+"Language: hr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#: applet.js:250
+msgid "Clear"
+msgstr "Obriši"
+
+#: applet.js:306
+msgid "Places"
+msgstr "Lokacije"
+
+#: applet.js:408
+msgid "Search Home Folder"
+msgstr "Pretraži osobnu mapu"
+
+#: applet.js:422
+msgid "SYSTEM"
+msgstr "SUSTAV"
+
+#: applet.js:430
+msgid "Search File System"
+msgstr "Pretraži datotečni sustav"
+
+#: applet.js:445
+msgid "RECENT DOCUMENTS"
+msgstr "NEDAVNI DOKUMENTI"
+
+#: applet.js:494
+msgid "Computer"
+msgstr "Računalo"
+
+#: applet.js:500
+msgid "File System"
+msgstr "Datotečni sustav"
+
+#: applet.js:516
+msgid "Network"
+msgstr "Mreža"
+
+#: applet.js:612
+msgid "Trash"
+msgstr "Smeće"
+
+#. placesCenter@scollins->settings-schema.json->panelIcon->description
+msgid "Panel icon"
+msgstr "Ikona panela"
+
+#. placesCenter@scollins->settings-schema.json->panelIcon->tooltip
+msgid "Accepts icon name or direct path (supports symbolic icons)"
+msgstr "Upišite naziv ikone ili izravnu putanju (podržava simboličke ikone)"
+
+#. placesCenter@scollins->settings-schema.json->showComputer->description
+msgid "Show computer"
+msgstr "Prikaži računalo"
+
+#. placesCenter@scollins->settings-schema.json->showRoot->description
+msgid "Show file system"
+msgstr "Prikaži datotečni sustav"
+
+#. placesCenter@scollins->settings-schema.json->recentSection->title
+#. placesCenter@scollins->settings-schema.json->recentPage->title
+msgid "Recent documents"
+msgstr "Nedavni dokumenti"
+
+#. placesCenter@scollins->settings-schema.json->generalPage->title
+msgid "General"
+msgstr "Općenito"
+
+#. placesCenter@scollins->settings-schema.json->systemSection->title
+msgid "System section"
+msgstr "Mogućnosti sustava"
+
+#. placesCenter@scollins->settings-schema.json->userPage->title
+msgid "User"
+msgstr "Korisnik"
+
+#. placesCenter@scollins->settings-schema.json->menu->title
+msgid "Menu settings"
+msgstr "Postavke izbornika"
+
+#. placesCenter@scollins->settings-schema.json->userSection->title
+msgid "User section"
+msgstr "Korisnikove mogućnosti"
+
+#. placesCenter@scollins->settings-schema.json->systemPage->title
+msgid "System"
+msgstr "Sustav"
+
+#. placesCenter@scollins->settings-schema.json->panel->title
+msgid "Panel settings"
+msgstr "Postavke panela"
+
+#. placesCenter@scollins->settings-schema.json->keyOpen->description
+msgid "Menu shortcut key"
+msgstr "Prečac tipkovnice izbornika"
+
+#. placesCenter@scollins->settings-schema.json->middleClickPath->description
+msgid "Open on middle click"
+msgstr "Otvori pri srednjem kliku"
+
+#. placesCenter@scollins->settings-schema.json->middleClickPath->tooltip
+msgid "Leave blank to disable"
+msgstr "Ostavi prazno za onemgućavanje"
+
+#. placesCenter@scollins->settings-schema.json->iconSize->description
+msgid "Menu icon size"
+msgstr "Veličina ikone izbornika"
+
+#. placesCenter@scollins->settings-schema.json->iconSize->units
+msgid "px"
+msgstr "pikseli"
+
+#. placesCenter@scollins->settings-schema.json->showTrash->description
+msgid "Show trash"
+msgstr "Prikaži smeće"
+
+#. placesCenter@scollins->settings-schema.json->showTrash->options
+msgid "Always"
+msgstr "Uvijek"
+
+#. placesCenter@scollins->settings-schema.json->showTrash->options
+msgid "Never"
+msgstr "Nikada"
+
+#. placesCenter@scollins->settings-schema.json->showTrash->options
+msgid "When not empty"
+msgstr "Kada nije prazno"
+
+#. placesCenter@scollins->settings-schema.json->showVolumes->description
+msgid "Show volumes"
+msgstr "Prikaži montirane uređaje"
+
+#. placesCenter@scollins->settings-schema.json->recentSizeLimit->description
+msgid "Number to show"
+msgstr "Broj prikazanih nedavnih dokumenata"
+
+#. placesCenter@scollins->settings-schema.json->userCustomPlaces->description
+#. placesCenter@scollins->settings-
+#. schema.json->systemCustomPlaces->description
+msgid "Custom places"
+msgstr "Prilagođene lokacije"
+
+#. placesCenter@scollins->settings-schema.json->userCustomPlaces->tooltip
+#. placesCenter@scollins->settings-schema.json->systemCustomPlaces->tooltip
+msgid ""
+"List of uris/file paths to be included. Entries may be separated by either a "
+"comma(,) or by a new-line. You can set the name to be displayed by adding :"
+"customName after the location."
+msgstr ""
+"Popis uri-ja/putanja datoteka koje su uključene. Unosi mogu biti odvojeni "
+"ili zarezom (,) ili novim redkom. Možete postaviti naziv za prikaz "
+"dodavanjem :Prilagođeni-Naziv nakon lokacije."
+
+#. placesCenter@scollins->settings-schema.json->panelText->description
+msgid "Panel text"
+msgstr "Tekst panela"
+
+#. placesCenter@scollins->settings-schema.json->showNetwork->description
+msgid "Show network"
+msgstr "Prikaži mrežu"
+
+#. placesCenter@scollins->settings-schema.json->onlyShowMounted->description
+msgid "Only show mounted drives"
+msgstr "Prikaži samo montirane uređaje"
+
+#. placesCenter@scollins->settings-
+#. schema.json->showRecentDocuments->description
+msgid "Show recent documents"
+msgstr "Prikaži nedavne dokumente"
+
+#. placesCenter@scollins->settings-schema.json->showDesktop->description
+msgid "Show desktop"
+msgstr "Prikaži radnu površinu"
+
+#. placesCenter@scollins->metadata.json->name
+msgid "Places Center"
+msgstr "Središte lokacija"
+
+#. placesCenter@scollins->metadata.json->contributors
+msgid "Stephen Collins - Author"
+msgstr "Stephen Collins - Autor"
+
+#. placesCenter@scollins->metadata.json->contributors
+msgid "kehugter - Added configurability to middle click"
+msgstr "kehugter - Dodao prilagodljiv srednji klik"
+
+#. placesCenter@scollins->metadata.json->description
+msgid "Provides an easy-to-read layout to access your places"
+msgstr "Omogućuje lako čitljiv raspored za pristup vašim lokacijama"
+
+#. placesCenter@scollins->metadata.json->comments
+msgid ""
+"Places Center is a feature-rich, cross-platform Cinnamon applet that "
+"provides easy access to all of your most-used places. Feel free to "
+"contribute by submitting pull requests, bug reports and feature requests to "
+"my github repo."
+msgstr ""
+"Središte lokacija je značajkama bogat, višeplatformski Cinnamon aplet koji "
+"omogućuje lagan pristup vašim najposjećenijim lokacijama. Slobodno možete "
+"doprinijeti slanjem zahtjeva s novom značajkom, prijave grešaka i zahtjevom "
+"nove značajke na moj github repozitorij."
+
+#~ msgid "General Settings"
+#~ msgstr "Opće postavke"
+
+#~ msgid "User Section"
+#~ msgstr "Korisnikove mogućnosti"
+
+#~ msgid "Icon size"
+#~ msgstr "Veličina ikone"
+
+#~ msgid "Recent Documents"
+#~ msgstr "Nedavni dokumenti"
+
+#~ msgid "System Section"
+#~ msgstr "Mogućnosti sustava"

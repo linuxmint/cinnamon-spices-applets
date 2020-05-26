@@ -1,7 +1,0 @@
-{
-    "description": "Access your places and system settings like in Gnome 2", 
-    "icon": "user-home", 
-    "uuid": "places-system-menu@fogl", 
-    "name": "Places and System Menu",
-    "max-instances": 2
-}

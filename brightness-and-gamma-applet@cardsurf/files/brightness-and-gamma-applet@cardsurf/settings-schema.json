@@ -1,0 +1,135 @@
+{
+    "configuration_start": {
+        "type": "header",
+        "description": "Configuration"
+    },
+    "apply_startup" : {
+        "type" : "checkbox",
+        "default" : true,
+        "description": "Apply at startup",
+        "tooltip": "Apply values at applet startup"
+    },
+    "apply_every": {
+        "type": "spinbutton",
+        "default": 0,
+        "min": 0,
+        "max": 604800,
+        "step": 1,
+        "units": "seconds",
+        "description": "Apply every",
+        "tooltip" : "How often to apply values. 0 means that values are not applied periodically."
+    },
+    "apply_asynchronously" : {
+        "type" : "checkbox",
+        "default" : true,
+        "description": "Apply asynchronously",
+        "tooltip": "Apply values in a background process"
+    },
+    "update_scroll" : {
+        "type" : "checkbox",
+        "default" : true,
+        "description": "Adjust brightness scroll",
+        "tooltip": "Allows to adjust a brightness value on a mouse scroll"
+    },
+    "scroll_step": {
+        "type": "spinbutton",
+        "default": 5,
+        "min": 0,
+        "max": 200,
+        "step": 1,
+        "units": "%",
+        "description": "Scroll step",
+        "tooltip" : "A percentage of a brightness value to adjust on a mouse scroll"
+    },
+    "configuration_end" : {
+        "type" : "separator"
+    },
+
+    "values_start": {
+        "type": "header",
+        "description": "Values"
+    },
+    "minimum_brightness": {
+        "type": "spinbutton",
+        "default": 30,
+        "min": 10,
+        "max": 50,
+        "step": 1,
+        "units": "%",
+        "description": "Minimum brightness",
+        "tooltip": "A minimum value of brightness. Value from 10% to 50%."
+    },
+    "maximum_brightness": {
+        "type": "spinbutton",
+        "default": 100,
+        "min": 51,
+        "max": 200,
+        "step": 1,
+        "units": "%",
+        "description": "Maximum brightness",
+        "tooltip": "A maximum value of brightness. Value from 51% to 200%."
+    },
+    "minimum_gamma": {
+        "type": "spinbutton",
+        "default": 30,
+        "min": 10,
+        "max": 50,
+        "step": 1,
+        "units": "%",
+        "description": "Minimum gamma",
+        "tooltip": "A minimum value of gamma. Value from 10% to 50%."
+    },
+    "maximum_gamma": {
+        "type": "spinbutton",
+        "default": 100,
+        "min": 51,
+        "max": 200,
+        "step": 1,
+        "units": "%",
+        "description": "Maximum gamma",
+        "tooltip": "A maximum value of gamma. Value from 51% to 200%."
+    },
+    "save_every": {
+        "type": "spinbutton",
+        "default": 60,
+        "min": 5,
+        "max": 86400,
+        "step": 1,
+        "units": "seconds",
+        "description": "Save every",
+        "tooltip" : "How often to save last used values"
+    },
+    "values_end": {
+        "type" : "separator"
+    },
+
+    "gui_start": {
+        "type": "header",
+        "description": "Gui"
+    },
+    "options_type" : {
+        "type": "combobox",
+        "default" : 0,
+        "description" : "Show",
+        "options" : {
+            "All" : 0,
+            "Brightness" : 1,
+            "Gamma" : 2
+        },
+        "tooltip" : "Values shown in user interface"
+    },
+    "gui_icon_filepath" : {
+        "type" : "filechooser",
+        "default" : "~/.local/share/cinnamon/applets/brightness-and-gamma-applet@cardsurf/icons/sun.svg",
+        "description" : "Icon",
+        "tooltip": "An icon displayed in a panel"
+    },
+    "gui_end" : {
+        "type" : "separator"
+    },
+
+    "last_values_string" : {
+        "type": "generic",
+        "default" : ""
+    }
+}

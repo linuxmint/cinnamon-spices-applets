@@ -1,0 +1,167 @@
+{
+    "layout": {
+        "type":  "layout",
+        "pages": [ "behavior", "appearance" ],
+
+        "behavior": {
+            "type":     "page",
+            "title":    "Behavior",
+            "sections": [ "behavior-section" ]
+        },
+        "behavior-section": {
+            "type":  "section",
+            "title": "Behavior",
+            "keys":  [
+                "animation-support",
+                "animation-duration",
+                "expand-on-hover",
+                "expand-on-hover-delay",
+                "collapse-on-leave",
+                "collapse-on-leave-delay",
+                "init-delay"
+            ]
+        },
+
+        "appearance": {
+            "type":     "page",
+            "title":    "Appearance",
+            "sections": [ "appearance-section" ]
+        },
+        "appearance-section": {
+            "type":  "section",
+            "title": "Appearance",
+            "keys":  [
+                "sort-icons",
+                "no-hover-for-tray-icons",
+                "horizontal-expand-icon-name",
+                "horizontal-collapse-icon-name",
+                "vertical-expand-icon-name",
+                "vertical-collapse-icon-name",
+                "tray-icon-padding"
+            ]
+        }
+    },
+
+    "animation-support": {
+        "type":        "checkbox",
+        "default":     true,
+        "description": "Animation support (disable if icons stop updating)",
+        "tooltip":     "Disable if you have issues with icons not updating themselves."
+    },
+
+    "animation-duration": {
+        "type":        "spinbutton",
+        "default":     500,
+        "min":         0,
+        "max":         2000,
+        "step":        50,
+        "units":       "milliseconds",
+        "description": "Animation duration",
+        "dependency":  "animation-support"
+    },
+
+    "expand-on-hover": {
+        "type":        "checkbox",
+        "default":     false,
+        "description": "Expand on hover"
+    },
+
+    "expand-on-hover-delay": {
+        "type":        "spinbutton",
+        "default":     1000,
+        "min":         0,
+        "max":         10000,
+        "step":        100,
+        "dependency":  "expand-on-hover",
+        "units":       "milliseconds",
+        "description": "Expand on hover delay",
+        "indent":      true
+    },
+
+    "collapse-on-leave": {
+        "type":        "checkbox",
+        "default":     false,
+        "description": "Collapse on un-hover"
+    },
+
+    "collapse-on-leave-delay": {
+        "type":        "spinbutton",
+        "default":     1000,
+        "min":         0,
+        "max":         10000,
+        "step":        100,
+        "dependency":  "collapse-on-leave",
+        "units":       "milliseconds",
+        "description": "Collapse on un-hover delay",
+        "indent":      true
+    },
+
+    "init-delay": {
+        "type":        "spinbutton",
+        "default":     5,
+        "min":         0,
+        "max":         30,
+        "step":        1,
+        "units":       "seconds",
+        "description": "Startup collapse delay",
+        "tooltip" :    "The delay until the applet automatically collapses upon startup"
+    },
+
+    "sort-icons": {
+        "type":        "checkbox",
+        "default":     true,
+        "description": "Sort icons by name",
+        "tooltip" :    "If unchecked, the order of the icons will be pretty much random"
+    },
+
+    "no-hover-for-tray-icons": {
+        "type":        "checkbox",
+        "default":     false,
+        "description": "Disable hover effect for tray icons",
+        "tooltip" :    "If you have problems with the hover effect or it simply doesn't look good, you should enable this setting"
+    },
+
+    "horizontal-expand-icon-name": {
+        "type":         "iconfilechooser",
+        "default" :     "pan-start",
+        "description" : "Horizontal expand icon",
+        "tooltip" :     "Enter either the icon's qualified name or it's full path"
+    },
+
+    "horizontal-collapse-icon-name": {
+        "type":         "iconfilechooser",
+        "default" :     "pan-end",
+        "description" : "Horizontal collapse icon",
+        "tooltip" :     "Enter either the icon's qualified name or it's full path"
+    },
+
+    "vertical-expand-icon-name": {
+        "type":         "iconfilechooser",
+        "default" :     "pan-up",
+        "description" : "Vertical expand icon",
+        "tooltip" :     "Enter either the icon's qualified name or it's full path"
+    },
+
+    "vertical-collapse-icon-name": {
+        "type":         "iconfilechooser",
+        "default" :     "pan-down",
+        "description" : "Vertical collapse icon",
+        "tooltip" :     "Enter either the icon's qualified name or it's full path"
+    },
+
+    "tray-icon-padding": {
+        "type":        "spinbutton",
+        "default":     5,
+        "min":         0,
+        "max":         20,
+        "step":        1,
+        "units":       "px",
+        "description": "Padding of tray icons"
+    },
+
+    "icon-visibility-list": {
+        "type":        "generic",
+        "default":     "{}",
+        "description": "Internal use"
+    }
+}

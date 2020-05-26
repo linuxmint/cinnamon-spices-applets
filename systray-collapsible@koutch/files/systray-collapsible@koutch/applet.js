@@ -1,9 +1,9 @@
 const Lang = imports.lang;
 const St = imports.gi.St;
-
+const UUID = "systray-collapsible@koutch";
 const Applet = imports.ui.applet;
 const Main = imports.ui.main;
-
+const Gettext = imports.gettext;
 ///@koutch new const
 const Tooltips = imports.ui.tooltips;
 const Mainloop = imports.mainloop;
@@ -18,6 +18,12 @@ const Config = imports.misc.config; // To check cinnamon version to show/hide se
 ///---
 
 const ICON_SCALE_FACTOR = .88; // for custom panel heights, 22 (default icon size) / 25 (default panel height)
+
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
 
 function MyApplet(orientation, panel_height, instance_id) {///@koutch instance_id needed for settings API
     this._init(orientation, panel_height, instance_id);
@@ -613,7 +619,7 @@ MyApplet.prototype = {
         ///@koutch add Settings to context_menu
 
         if (!this.auto_export_to_file) {
-            this.save_menu_item = new PopupMenu.PopupMenuItem(_('Export to a file'));
+            this.save_menu_item = new PopupMenu.PopupMenuItem(_("Export to a file"));
             this.save_menu_item.connect('activate', Lang.bind(this, function () {
                 this._saveIconsHideByUser();
             }));
@@ -626,7 +632,7 @@ MyApplet.prototype = {
 
         // for Cinnamon 1.x, build a menu item
         if (majorVersion < 2) {
-            this.edit_menu_item = new PopupMenu.PopupImageMenuItem(_('Settings'), "system-run-symbolic");
+            this.edit_menu_item = new PopupMenu.PopupImageMenuItem(_("Settings"), "system-run-symbolic");
             this.edit_menu_item = new PopupMenu.PopupImageMenuItem(_("Configure..."), "system-run-symbolic");
             this.edit_menu_item.connect('activate', Lang.bind(this, function () {
                 Util.spawnCommandLine('cinnamon-settings applets systray-collapsible@koutch');

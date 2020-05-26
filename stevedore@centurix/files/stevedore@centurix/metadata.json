@@ -1,0 +1,6 @@
+{
+    "version": "0.0.1", 
+    "description": "Docker controlling applet.", 
+    "name": "Stevedor - Docker controller", 
+    "uuid": "stevedore@centurix"
+}

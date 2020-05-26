@@ -1,6 +1,0 @@
-{
-"uuid": "sshlauncher@sotiwin",
-"name": "SSH Launcher (fixed)",
-"description": "Updated to work on Linux Mint 17. An applet to connect to SSH hosts configured in ~/.ssh/config",
-"icon": "network"
-}

@@ -4,7 +4,7 @@ const GLib = imports.gi.GLib;
 const Gtk = imports.gi.Gtk;
 const Gio = imports.gi.Gio;
 const Util = imports.misc.util;
-const Gettext = imports.gettext.domain('cinnamon-applets');
+const Gettext = imports.gettext;
 const PopupMenu = imports.ui.popupMenu;
 const St = imports.gi.St;
 const Mainloop = imports.mainloop;
@@ -12,7 +12,13 @@ const Cinnamon = imports.gi.Cinnamon;
 const Tracker = imports.gi.Tracker;
 const Main = imports.ui.main;
 const Settings = imports.ui.settings;
-const _ = Gettext.gettext;
+
+const UUID = "tracker@glebihan"
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
 
 const RESULT_TYPES_LABELS = 
 {
@@ -159,8 +165,8 @@ MyApplet.prototype =
         try
         {
             Applet.IconApplet.prototype._init.call(this, orientation, panel_height, instanceId);
-        
-            menuItem = new Applet.MenuItem(_("Indexing Preferences"), null, Lang.bind(this, function(actor, event)
+
+            let menuItem = new Applet.MenuItem(_("Indexing Preferences"), null, Lang.bind(this, function(actor, event)
             {
                 Util.spawnCommandLine('tracker-preferences');
             }));

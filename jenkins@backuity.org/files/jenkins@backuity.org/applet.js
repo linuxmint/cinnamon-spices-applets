@@ -34,12 +34,14 @@ const JENKINS_USERNAME = 'jenkinsUsername'
 const JENKINS_PASSWORD = 'jenkinsPassword'
 const JENKINS_MAX_NUMBER_OF_JOBS = 'maxNumberOfJobs'
 const JENKINS_HIDE_SUCCESSFUL_JOBS = 'hideSuccessfulJobs'
+const JENKINS_HIDE_DISABLED_JOBS = 'hideDisabledJobs'
 const JENKINS_SHOW_NOTIFICATION_FOR_FAILED_JOBS = 'showNotificationForFailedJobs'
 
 const KEYS = [
   JENKINS_REFRESH_INTERVAL,
   JENKINS_MAX_NUMBER_OF_JOBS,
   JENKINS_HIDE_SUCCESSFUL_JOBS,
+  JENKINS_HIDE_DISABLED_JOBS,
   JENKINS_SHOW_NOTIFICATION_FOR_FAILED_JOBS,
   JENKINS_SSL_STRICT,
   JENKINS_URL,
@@ -89,9 +91,9 @@ MyApplet.prototype = {
 
         let applet = this;
         _httpSession.connect("authenticate",function(session,message,auth,retrying) {
-            log("Authenticating with " + applet._jenkinsUsername);
+            global.log("Authenticating with " + applet._jenkinsUsername);
             auth.authenticate(applet._jenkinsUsername, applet._jenkinsPassword);
-        });        
+        });
 
         // PopupMenu
         //----------------------------------
@@ -100,7 +102,8 @@ MyApplet.prototype = {
         this.menu = new Applet.AppletPopupMenu(this, orientation);
         this.menuManager.addMenu(this.menu);
 
-        this.menu.addMenuItem(new PopupMenu.PopupMenuItem(_('Loading jobs...')));
+        this.initialMenuItem = new PopupMenu.PopupMenuItem(_('Loading jobs...'));
+        this.menu.addMenuItem(this.initialMenuItem);
       }
 
     , assignMessageSource: function() {
@@ -146,55 +149,61 @@ MyApplet.prototype = {
             return;
         }
 
-        log("Loading " + this.jenkinsUrl());
         let applet = this;
-        this.loadJsonAsync(this.jenkinsUrl(), function(json) {  
-            applet.destroyMenu();          
+        this.loadJsonAsync(this.jenkinsUrl(), function(json) {
+            applet.destroyMenu();
             try {
                 let maxJobs = applet._maxNumberOfJobs;
-                let hideSuccessfulJobs = applet._hideSuccessfulJobs;
                 let jobs = json.get_array_member('jobs').get_elements();
                 let displayedJobs = 0;
-                
-                let filteredJobs = [];            
+
+                let filteredJobs = [];
                 for (let i = 0; i < jobs.length && displayedJobs < maxJobs; i++) {
                     let job = jobs[i].get_object();
 
                     let color = job.get_string_member('color');
-                    let success = applet.isColorSuccess(color);
 
+                    let success = this.helpers().isColorSuccess(color);
+                    let hideSuccessfulJobs = applet._hideSuccessfulJobs;
                     if (success && hideSuccessfulJobs) {
+                        continue;
+                    }
+
+                    let disabled = this.helpers().isColorDisabled(color);
+                    let hideDisabledJobs = applet._hideDisabledJobs;
+                    if (disabled && hideDisabledJobs) {
                         continue;
                     }
 
                     let jobName = job.get_string_member('name');
                     let url = job.get_string_member('url');
-                    
+
                     var regex = RegExp(this._jenkinsFilter);
                     if(regex.exec(jobName)) {
                         filteredJobs.push(jobs[i]);
-                        applet.menu.addMenuItem(new JobMenuItem(jobName, success, url));
+                        applet.menu.addMenuItem(new JobMenuItem(jobName, color, url));
                         displayedJobs++;
                     }
                 }
                 let success = applet.countSuccesses(filteredJobs);
-                let failure = filteredJobs.length - success;
+                let disabled = applet.countDisabled(filteredJobs);
+                let failure = (filteredJobs.length - success) - disabled;
 
                 applet.updateAppletLabel(failure, success);
 
-                if (success < filteredJobs.length) {
+                if (success + disabled < filteredJobs.length) {
                     applet.set_applet_icon_name('jenkins-red');
                 } else {
                     applet.set_applet_icon_name('jenkins-green');
                 }
-                
+
 
                 applet.displayNewlyFailedJobs(filteredJobs);
-                
+
             } catch(error) {
                 applet.set_applet_icon_name('jenkins-grey');
-                applet.set_applet_label('!');                                
-                logError(error.message)
+                applet.set_applet_label('!');
+                global.logError(error.message);
                 applet.menu.addMenuItem(new PopupMenu.PopupMenuItem(error.message));
             }
         })
@@ -215,10 +224,11 @@ MyApplet.prototype = {
             let job = jobs[i].get_object();
 
             let color = job.get_string_member('color');
-            let success = this.isColorSuccess(color);
+            let success = this.helpers().isColorSuccess(color);
+            let grey = this.helpers().isColorDisabled(color);
             let jobName = job.get_string_member('name');
 
-            if (success) {
+            if (success || grey) {
                 this.lastCheckJobSuccess[jobName] = true;
                 continue;
             }
@@ -234,16 +244,26 @@ MyApplet.prototype = {
         let success = 0;
         for (let i = 0; i < jobs.length; i ++) {
             let color = jobs[i].get_object().get_string_member('color');
-            if (this.isColorSuccess(color)) {
+            if (this.helpers().isColorSuccess(color)) {
                 success += 1;
             }
         }
         return success;
     }
+    
+    , countDisabled: function(jobs) {
+        let disabled = 0;
+        for (let i = 0; i < jobs.length; i ++) {
+            let color = jobs[i].get_object().get_string_member('color');
+            if (this.helpers().isColorDisabled(color)) {
+                disabled += 1;
+            }
+        }
+        return disabled;
+    }
 
-    , isColorSuccess: function(color) {
-        return color == 'blue' || 
-               color == 'blue_anime';
+    , helpers: function() {
+        return new Helpers()
     }
 
     , updateAppletLabel: function(failure, success) {
@@ -271,7 +291,7 @@ MyApplet.prototype = {
         this.menu.removeAll();
     }
 
-    , jenkinsUrl: function() {        
+    , jenkinsUrl: function() {
         let output =  this._jenkinsUrl + '/api/json';
         return output;
     }
@@ -284,11 +304,16 @@ MyApplet.prototype = {
           message.request_headers.append('Authorization', 'Basic ' + encoded);
         }
         _httpSession.ssl_strict = this._sslStrict;
+        if (!message) {
+            if (this.initialMenuItem) this.initialMenuItem.label.set_text(_('No jobs'));
+            return;
+        }
         _httpSession.queue_message(message, function soupQueue(session, message) {
-          
+
             if( message.status_code != 200 ) {
-                logError("Got status " + message.status_code + " " + message.response_body.data);
+                global.logError("Got status " + message.status_code + " " + message.response_body.data);
                 applet.destroyMenu();
+                this.initialMenuItem = null;
                 applet.set_applet_label('!');
                 applet.set_applet_icon_name('jenkins-grey');
 
@@ -309,45 +334,68 @@ MyApplet.prototype = {
 };
 
 
-function JobMenuItem(name, success, url) {
-    this._init(name, success, url);
+function JobMenuItem(name, color, url) {
+    this._init(name, color, url);
 }
 
 JobMenuItem.prototype = {
     __proto__: PopupMenu.PopupBaseMenuItem.prototype,
 
-    _init: function(name, success, url) {
+    helpers: function () {
+        return new Helpers();
+    },
+
+    _init: function(name, color, url) {
         PopupMenu.PopupBaseMenuItem.prototype._init.call(this);
 
         this.label = new St.Label({ text: name });
         this.addActor(this.label);
 
-        let iconName = 'jenkins-green';
-        if( !success ) {
-            iconName = 'jenkins-red';
-        }        
-
+        let iconName = this.helpers().getIconName(color)
         let statusIcon = new St.Icon({ icon_name: iconName, icon_type: St.IconType.FULLCOLOR, style_class: 'popup-menu-icon' });
         this.addActor(statusIcon);
 
         this.connect('activate', Lang.bind(this, function (menuItem, event) {
             Util.spawnCommandLine("xdg-open " + url);
         }));
-    }    
+    }
 };
 
 
-// Logging
-//----------------------------------------------------------------------
+function Helpers() {}
+Helpers.prototype = {
 
-function log(message) {
-  global.log(UUID + "#" + log.caller.name + ": " + message)
+    isColorSuccess: function (color) {
+        return color == 'blue' || color == 'blue_anime';
+    },
+
+    isColorFailure: function (color) {
+        return color == 'red' || color == 'red_anime';
+    },
+
+    isColorDisabled: function (color) {
+        return color == 'disabled' || color == 'disabled_anime' || color == null;
+    },
+
+    isColorAborted: function (color) {
+        return color == 'aborted' || color == 'aborted_anime';
+    },
+
+    getIconName: function(color) {
+        if (this.isColorSuccess(color)) {
+            return 'jenkins-green'
+        } else if (this.isColorFailure(color)) {
+            return 'jenkins-red'
+        } else if (this.isColorDisabled(color)) {
+            return 'jenkins-grey'
+        } else if (this.isColorAborted(color)) {
+            return 'jenkins-abort'
+        } else { // unknown status
+            return 'jenkins-grey'
+        }
+    }
+
 }
-
-function logError(error) {
-  global.logError(UUID + "#" + logError.caller.name + ": " + error)
-}
-
 
 // Entry point
 //----------------------------------------------------------------------

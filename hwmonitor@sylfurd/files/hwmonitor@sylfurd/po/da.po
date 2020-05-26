@@ -1,0 +1,442 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-09-14 23:45+0200\n"
+"PO-Revision-Date: 2019-12-01 15:58+0100\n"
+"Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
+"Language-Team: \n"
+"Language: da\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.6\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: applet.js:83
+msgid "Open System Monitor"
+msgstr "Åbn systemovervågning"
+
+#: applet.js:87
+msgid "Restart 'Graphical hardware monitor'"
+msgstr "Genstart \"Grafisk hardwareovervågning\""
+
+#: providers.js:15
+msgid "Dependency missing"
+msgstr "Afhængighed mangler"
+
+#: providers.js:19
+#, javascript-format
+msgid "to use the applet %s"
+msgstr "for at bruge panelprogrammet %s"
+
+#: providers.js:15
+msgid ""
+"Please install the GTop package\n"
+"\tUbuntu / Mint: gir1.2-gtop-2.0\n"
+"\tFedora: libgtop2-devel\n"
+"\tArch: libgtop\n"
+msgstr ""
+"Installér pakken GTop\n"
+"\tUbuntu / Mint: gir1.2-gtop-2.0\n"
+"\tFedora: libgtop2-devel\n"
+"\tArch: libgtop\n"
+
+#. settings-schema.json->cpu_section->description
+#: providers.js:32
+msgid "CPU"
+msgstr "CPU"
+
+#. settings-schema.json->mem_section->description
+#: providers.js:67
+msgid "MEM"
+msgstr "HUK"
+
+#. settings-schema.json->netin_section->description
+#: providers.js:87
+msgid "NET (in)"
+msgstr "NET (ned)"
+
+#. settings-schema.json->netout_section->description
+#: providers.js:91
+msgid "NET (out)"
+msgstr "NET (op)"
+
+#. metadata.json->name
+msgid "Graphical hardware monitor"
+msgstr "Grafisk hardwareovervågning"
+
+#. metadata.json->description
+msgid "Displaying realtime CPU and memory load"
+msgstr "Viser CPU- og hukommelsesbelastning i realtid"
+
+#. settings-schema.json->main_section->description
+msgid "Graphical hardware monitor settings"
+msgstr "Indstillinger for Grafisk hardwareovervågning"
+
+#. settings-schema.json->frequency->options
+msgid "0.5"
+msgstr "0,5"
+
+#. settings-schema.json->frequency->options
+msgid "1.0"
+msgstr "1,0"
+
+#. settings-schema.json->frequency->options
+msgid "2.0"
+msgstr "2,0"
+
+#. settings-schema.json->frequency->options
+msgid "3.0"
+msgstr "3,0"
+
+#. settings-schema.json->frequency->options
+msgid "4.0"
+msgstr "4,0"
+
+#. settings-schema.json->frequency->options
+msgid "5.0"
+msgstr "5,0"
+
+#. settings-schema.json->frequency->options
+msgid "10.0"
+msgstr "10,0"
+
+#. settings-schema.json->frequency->description
+msgid "Update frequency (seconds)"
+msgstr "Opdateringsinterval (sekunder)"
+
+#. settings-schema.json->frequency->tooltip
+msgid "The amount of time (in seconds) between the graph updates."
+msgstr "Tidsintervallet (i sekunder) for opdatering af grafen."
+
+#. settings-schema.json->theme->options
+msgid "dark theme"
+msgstr "mørkt tema"
+
+#. settings-schema.json->theme->options
+msgid "light theme"
+msgstr "lyst tema"
+
+#. settings-schema.json->theme->options
+msgid "custom theme"
+msgstr "tilpasset tema"
+
+#. settings-schema.json->theme->description
+msgid "Theme"
+msgstr "Tema"
+
+#. settings-schema.json->theme->tooltip
+msgid "Use custom theme to select colors that matches your current theme."
+msgstr ""
+"Brug tilpasset tema for at vælge farver, som matcher dit nuværende tema."
+
+#. settings-schema.json->border_color->description
+msgid "Border color"
+msgstr "Kantfarve"
+
+#. settings-schema.json->border_color->tooltip
+msgid "Click the button to select a border color for the graphs"
+msgstr "Klik knappen for at vælge en kantfarve til grafen"
+
+#. settings-schema.json->background_color1->description
+msgid "Background color 1"
+msgstr "Baggrundsfarve 1"
+
+#. settings-schema.json->background_color1->tooltip
+msgid ""
+"Click the button to select a starting color for the linear gradient of the "
+"graph background"
+msgstr ""
+"Klik knappen for at vælge en begyndelsesfarve til den lineære farveovergang "
+"i grafens baggrund"
+
+#. settings-schema.json->background_color2->description
+msgid "Background color 2"
+msgstr "Baggrundsfarve 1"
+
+#. settings-schema.json->background_color2->tooltip
+msgid ""
+"Click the button to select a ending color for the linear gradient of the "
+"graph background"
+msgstr ""
+"Klik knappen for at vælge en slutfarve til den lineære farveovergang i "
+"grafens baggrund"
+
+#. settings-schema.json->label_color->description
+msgid "Label color"
+msgstr "Etiketfarve"
+
+#. settings-schema.json->label_color->tooltip
+msgid "Click the button to select a label color"
+msgstr "Klik på knappen for at vælge etikettens farve"
+
+#. settings-schema.json->label_size->description
+msgid "Label font size"
+msgstr "Etikettens skriftstørrelse"
+
+#. settings-schema.json->label_size->tooltip
+msgid "Set the font size for the main label."
+msgstr "Angiv skriftstørrelsen for den primære etiket"
+
+#. settings-schema.json->detail_label_color->description
+msgid "Detail label color"
+msgstr "Etiketfarve for detaljer"
+
+#. settings-schema.json->detail_label_color->tooltip
+msgid "Click the button to select a detail label color"
+msgstr "Klik på knappen for at vælge etiketfarve for detaljer"
+
+#. settings-schema.json->detail_label_size->description
+msgid "Detail label font size"
+msgstr "Skriftstørrelse for detaljeetiketten"
+
+#. settings-schema.json->detail_label_size->tooltip
+msgid "Set the font size for the detail label."
+msgstr "Angiv skriftstørrelsen for detaljeetiketten"
+
+#. settings-schema.json->graph_color1->description
+msgid "Graph color 1"
+msgstr "Graffarve 1"
+
+#. settings-schema.json->graph_color1->tooltip
+msgid ""
+"Click the button to select a starting color for the linear gradient of the "
+"graph colors. Offset for the first color is always 0."
+msgstr ""
+"Klik knappen for at vælge en begyndelsesfarve til den lineære farveovergang "
+"i grafens farve. Den første farves forskydning er altid 0."
+
+#. settings-schema.json->graph_color2->description
+msgid "Graph color 2"
+msgstr "Graffarve 2"
+
+#. settings-schema.json->graph_color2->tooltip
+msgid ""
+"Click the button to select a first middle color for the linear gradient of "
+"the graph colors."
+msgstr ""
+"Klik knappen for at vælge den første midterste farve til den lineære "
+"farveovergang i grafens farve."
+
+#. settings-schema.json->graph_offset2->description
+msgid "Offset for graph color 2"
+msgstr "Graffarve 2's forskydning"
+
+#. settings-schema.json->graph_offset3->description
+msgid "Offset for graph color 3"
+msgstr "Graffarve 3's forskydning"
+
+#. settings-schema.json->graph_offset2->tooltip
+msgid "Offset for first middle color of the linear gradient"
+msgstr "Forskydning for den første midterste farve i den lineære farveovergang"
+
+#. settings-schema.json->graph_color3->description
+msgid "Graph color 3"
+msgstr "Graffarve 3"
+
+#. settings-schema.json->graph_color3->tooltip
+msgid ""
+"Click the button to select a second middle color for the linear gradient of "
+"the graph colors."
+msgstr ""
+"Klik knappen for at vælge en anden midterste farve til den lineære "
+"farveovergang i grafens farve."
+
+#. settings-schema.json->graph_offset3->tooltip
+msgid "Offset for second middle color of the linear gradient"
+msgstr "Forskydning for den anden midterste farve i den lineære farveovergang"
+
+#. settings-schema.json->graph_color4->description
+msgid "Graph color 4"
+msgstr "Graffarve 4"
+
+#. settings-schema.json->graph_color4->tooltip
+msgid ""
+"Click the button to select a ending color for the linear gradient of the "
+"graph colors. Offset for the last color is always 1."
+msgstr ""
+"Klik knappen for at vælge en slutfarve til den lineære farveovergang i "
+"grafens farve. Den sidste farves forskydning er altid 1."
+
+#. settings-schema.json->cpu_enable_graph->description
+msgid "Show CPU graph"
+msgstr "VIs cpu-graf"
+
+#. settings-schema.json->cpu_enable_graph->tooltip
+msgid "Show or hide the CPU graph"
+msgstr "Vis eller skjul CPU-grafen"
+
+#. settings-schema.json->cpu_size->units
+#. settings-schema.json->mem_size->units
+#. settings-schema.json->netin_size->units
+#. settings-schema.json->netout_size->units
+msgid "Graph size"
+msgstr "Grafstørrelse"
+
+#. settings-schema.json->cpu_size->description
+msgid "Horizontal panel width or vertical panel height"
+msgstr "Vandret panelbredde eller lodret panelhøjde"
+
+#. settings-schema.json->cpu_size->tooltip
+#. settings-schema.json->mem_size->tooltip
+#. settings-schema.json->netin_size->tooltip
+#. settings-schema.json->netout_size->tooltip
+msgid ""
+"Set the width of the graph for horizontal panels, or the height of the graph "
+"for vertical panels."
+msgstr ""
+"Angiv grafens bredde for vandrette paneler eller højden for lodrette paneler."
+
+#. settings-schema.json->cpu_use_custom_label->description
+#. settings-schema.json->mem_use_custom_label->description
+#. settings-schema.json->netin_use_custom_label->description
+#. settings-schema.json->netout_use_custom_label->description
+msgid "Use custom graph label"
+msgstr "Anvend tilpasset grafetiket"
+
+#. settings-schema.json->cpu_use_custom_label->tooltip
+msgid "Choose your own label for the CPU graph"
+msgstr "Vælg din egen etiket til CPU-grafen"
+
+#. settings-schema.json->cpu_custom_label->description
+msgid "Set the custom label for the CPU graph"
+msgstr "Angiv den tilpassede etiket til CPU-grafen"
+
+#. settings-schema.json->cpu_show_detail_label->description
+#. settings-schema.json->mem_show_detail_label->description
+#. settings-schema.json->netin_show_detail_label->description
+#. settings-schema.json->netout_show_detail_label->description
+msgid "Show details"
+msgstr "Vis detaljer"
+
+#. settings-schema.json->cpu_show_detail_label->tooltip
+msgid "Show or hide the CPU usage label"
+msgstr "Vis eller skjul etiketten for CPU-forbrug"
+
+#. settings-schema.json->mem_enable_graph->description
+msgid "Show the memory graph"
+msgstr "Vis hukommelsesgrafen"
+
+#. settings-schema.json->mem_enable_graph->tooltip
+msgid "Show or hide the memory graph"
+msgstr "Vis eller skjul hukommelsesgrafen"
+
+#. settings-schema.json->mem_size->description
+#. settings-schema.json->netin_size->description
+#. settings-schema.json->netout_size->description
+msgid "Horizontal panel width or vertical panel height."
+msgstr "Vandret panelbredde eller lodret panelhøjde."
+
+#. settings-schema.json->mem_use_custom_label->tooltip
+msgid "Choose your own label for the memory graph"
+msgstr "Vælg din egen etiket til hukommelsesgrafen"
+
+#. settings-schema.json->mem_custom_label->description
+msgid "Set the custom label for the memory graph"
+msgstr "Angiv den tilpassede etiket til hukommelsesgrafen"
+
+#. settings-schema.json->mem_show_detail_label->tooltip
+msgid "Show or hide the memory usage label"
+msgstr "Vis eller skjul etiketten for hukommelsesforbrug"
+
+#. settings-schema.json->netin_enable_graph->description
+msgid "Show NET (in) graph"
+msgstr "Vis NET (ned)-grafen"
+
+#. settings-schema.json->netin_enable_graph->tooltip
+msgid "Show or hide the NET (in) graph"
+msgstr "Vis eller skjul NET (ned)-grafen"
+
+#. settings-schema.json->netin_speed->units
+#. settings-schema.json->netout_speed->units
+msgid "Mbit/s"
+msgstr "Mbit/s"
+
+#. settings-schema.json->netin_speed->description
+msgid "Internet speed (in)."
+msgstr "Internethastighed (ned)."
+
+#. settings-schema.json->netin_speed->tooltip
+msgid ""
+"Set your internet speed (in) in Mbit/s. Note that sometimes ISP:s delivers "
+"better or worse speed than what you have paid for. You might need to adjust "
+"this value up or down, to make it look right to you."
+msgstr ""
+"Angiv din internethastighed (ned) i Mbit/s. Nogle gange kan din "
+"internetudbyder levere højere eller lavere hastighed, end du har betalt for. "
+"Måske skal værdien justeres op eller ned for at få den til at se rigtig ud."
+
+#. settings-schema.json->netin_use_custom_label->tooltip
+msgid "Choose your own label for the NET (in) graph"
+msgstr "Vælg din egen etiket til NET (ned)-grafen"
+
+#. settings-schema.json->netin_custom_label->description
+msgid "Set the custom label for the NET (in) graph"
+msgstr "Angiv den tilpassede etiket til NET (ned)-grafen"
+
+#. settings-schema.json->netin_linlog->options
+#. settings-schema.json->netout_linlog->options
+msgid "logarithmic"
+msgstr "logaritmisk"
+
+#. settings-schema.json->netin_linlog->options
+#. settings-schema.json->netout_linlog->options
+msgid "linear"
+msgstr "lineær"
+
+#. settings-schema.json->netin_linlog->description
+#. settings-schema.json->netout_linlog->description
+msgid "Scale"
+msgstr "Skala"
+
+#. settings-schema.json->netin_linlog->tooltip
+#. settings-schema.json->netout_linlog->tooltip
+msgid "Use linear or logarithmic scale."
+msgstr "Anvend lineær eller logaritmisk skala."
+
+#. settings-schema.json->netin_show_detail_label->tooltip
+msgid "Show or hide the NET (in) usage label"
+msgstr "Vis eller skjul etiketten for NET (ned)-forbrug"
+
+#. settings-schema.json->netout_enable_graph->description
+msgid "Show NET (out) graph"
+msgstr "Vis NET (op)-grafen"
+
+#. settings-schema.json->netout_enable_graph->tooltip
+msgid "Show or hide the NET (out) graph"
+msgstr "Vis eller skjul NET (op)-grafen"
+
+#. settings-schema.json->netout_speed->description
+msgid "Internet speed (out)."
+msgstr "Internethastighed (op)."
+
+#. settings-schema.json->netout_speed->tooltip
+msgid ""
+"Set your internet speed (out) in Mbit/s. Note that sometimes ISP:s delivers "
+"better or worse speed than what you have paid for. You might need to adjust "
+"this value up or down, to make it look right to you."
+msgstr ""
+"Angiv din internethastighed (op) i Mbit/s. Nogle gange kan din "
+"internetudbyder levere højere eller lavere hastighed, end du har betalt for. "
+"Måske skal værdien justeres op eller ned for at få den til at se rigtig ud."
+
+#. settings-schema.json->netout_use_custom_label->tooltip
+msgid "Choose your own label for the NET (out) graph"
+msgstr "Vælg din egen etiket til NET (op)-grafen"
+
+#. settings-schema.json->netout_custom_label->description
+msgid "Set the custom label for the NET (out) graph"
+msgstr "Angiv den tilpassede etiket til NET (op)-grafen"
+
+#. settings-schema.json->netout_show_detail_label->tooltip
+msgid "Show or hide the NET (out) usage label"
+msgstr "Vis eller skjul etiketten for NET (op)-forbrug"
+
+#~ msgid "Please install the GTop package\n"
+#~ msgstr "Installér pakken GTop\n"

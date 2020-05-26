@@ -1,15 +1,43 @@
 {
-  "woeidLookup":
-  { "type": "button"
-  , "description": "Get WOEID"
-  , "callback": "woeidLookup"
-  , "tooltip": "http://woeid.rosselliot.co.nz/"
+  "head":
+  { "type": "header"
+  , "description": "Settings for weather@mockturtl 1.8+"
   }
-, "woeid":
+,  "keybinding":
+  { "type": "keybinding"
+  , "description": "Set the keybinding to call the menu"
+  , "default": "<Super><Shift>w"
+  },
+  "providerSettings":
+  { "type": "header"
+  , "description": "Weather Provider Settings"
+  }
+, "dataService":
+  { "type": "radiogroup"
+  , "default": "OpenWeatherMap"
+  , "description": "Data service"
+  , "options":
+    { 
+      "OpenWeatherMap": "OpenWeatherMap"
+    }
+  },
+  "location":
   { "type": "entry"
-  , "default": ""
-  , "description": "WOEID"
-  , "tooltip": "Where On Earth ID"
+  , "default": "London,UK"
+  , "description": "Location"
+  , "tooltip": "Acceptable inputs: City,CountryCode or Zipcode,CountryCode or Latitude,Longtitude"
+},
+  "getLocation":
+  {
+    "type": "button",
+    "indent": true,
+    "description": "Setup Location",
+    "callback": "locationLookup",
+    "tooltip": "Opens webpage guide"
+  },
+  "personalSettings":
+  { "type": "header"
+  , "description": "Personal Settings"
   }
 , "temperatureUnit":
   { "type": "radiogroup"
@@ -20,6 +48,11 @@
     , "fahrenheit": "fahrenheit"
     }
   }
+, "temperatureHighFirst":
+  { "type": "checkbox"
+  , "default": false
+  , "description": "Show high temperature first in forecast"
+  }
 , "windSpeedUnit":
   { "type": "combobox"
   , "default": "kph"
@@ -28,22 +61,21 @@
     { "kph": "kph"
     , "mph": "mph"
     , "m/s": "m/s"
-    , "knots": "knots"
+    , "knots": "Knots"
     }
   }
 , "pressureUnit":
   { "type": "combobox"
-  , "default": "mbar"
+  , "default": "hPa"
   , "description": "Atmospheric pressure unit"
   , "options":
-    { "mbar": "mbar"
+    { "hPa": "hPa"
     , "in Hg": "in Hg"
     , "mm Hg": "mm Hg"
     , "psi": "psi"
     , "at": "at"
     , "atm": "atm"
     , "Pa": "Pa"
-    , "kPa": "kPa"
     }
   }
 , "verticalOrientation":
@@ -98,7 +130,7 @@
 , "refreshInterval":
   { "type": "spinbutton"
   , "default": 15
-  , "min": 1
+  , "min": 5
   , "max": 360
   , "units": "minutes"
   , "step": 5

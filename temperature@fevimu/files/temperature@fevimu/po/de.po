@@ -1,0 +1,142 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-02-15 13:48+0100\n"
+"PO-Revision-Date: 2020-03-14 14:25+0100\n"
+"Last-Translator: Ozzie Isaacs\n"
+"Language-Team: \n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: applet.js:78 applet.js:157
+msgid "Temperature"
+msgstr "Temperatur"
+
+#: applet.js:146
+msgid "Error"
+msgstr "Fehler"
+
+#: applet.js:147
+msgid ""
+"Run sensors-detect as root. If it doesn't help, click here to report with "
+"your sensors output!"
+msgstr ""
+"»sensors-detect« als Systemverwalter ausführen. Wenn dies nicht hilft, hier "
+"klicken um einen Fehlerbericht mit dem Output Ihrer Sensoren zu erstellen!"
+
+#: applet.js:149
+msgid "Warning"
+msgstr "Warnung"
+
+#: applet.js:150
+msgid ""
+"Please install lm_sensors. If it doesn't help, click here to report with "
+"your sensors output!"
+msgstr ""
+"Bitte »lm-sensors« installieren. Wenn dies nicht hilft, hier klicken um "
+"einen Fehlerbericht mit dem Output Ihrer Sensoren zu erstellen!"
+
+#: applet.js:222
+msgid "Thresholds Info"
+msgstr "Schwellwerte"
+
+#: applet.js:223
+msgid "High Temp"
+msgstr "Hohe Temp"
+
+#: applet.js:224
+msgid "Crit. Temp"
+msgstr "Kritische Temp"
+
+#: applet.js:235
+msgid "Critical"
+msgstr "Kritisch"
+
+#: applet.js:238
+msgid "High"
+msgstr "Hoch"
+
+#: applet.js:251
+msgid "Current Temperature"
+msgstr "Aktuelle Temperatur"
+
+#: applet.js:253
+msgid "Critical Temperature"
+msgstr "Kritische Temperatur"
+
+#. settings-schema.json->use-fahrenheit->description
+msgid "Show temperature in Fahrenheit"
+msgstr "Temperaturen in Fahrenheit anzeigen"
+
+#. settings-schema.json->only-integer-part->description
+msgid "Use integer values for temperature"
+msgstr "Temperaturen als ganze Zahlen anzeigen"
+
+#. settings-schema.json->show-unit->description
+msgid "Show unit"
+msgstr "Einheit anzeigen"
+
+#. settings-schema.json->show-unit->tooltip
+msgid "Whether or not show the unit after the temperature value."
+msgstr "Zeigt oder unterdrückt die Einheit nach dem Temperaturwert."
+
+#. settings-schema.json->show-unit-letter->description
+msgid "Show unit letter"
+msgstr "Zeige Temperatureinheit"
+
+#. settings-schema.json->show-unit-letter->tooltip
+msgid "Whether or not show the unit letter (C or F)."
+msgstr "Zeigt oder unterdrückt das Einheitenzeichen (C oder F)"
+
+#. settings-schema.json->interval->units
+msgid "ms"
+msgstr "ms"
+
+#. settings-schema.json->interval->description
+msgid "Update interval"
+msgstr "Aktualisierungsintervall"
+
+#. settings-schema.json->change-color->description
+msgid "Change color when the temperature becomes High or Critical"
+msgstr "Ändere die Farbe wenn die Temperatur hoch oder kritisch wird"
+
+#. settings-schema.json->change-color->tooltip
+msgid ""
+"Selecting this option, this applet becomes\n"
+" orange when the High Temperature Threshold is reached,\n"
+" red when the Critical Temperature Threshold is reached."
+msgstr ""
+"Durch Auswahl dieser Option wird dieses Applet\n"
+" orange wenn die obere Temperaturschwelle erreicht wird\n"
+" und rot wenn der kritische Temperaturschwellwert erreicht wird."
+
+#. settings-schema.json->only-colors->description
+msgid "Only use colors to alert me"
+msgstr "Benutze nur Farben zur Alarmierung"
+
+#. settings-schema.json->only-colors->tooltip
+msgid ""
+"Select this option to not display text alerts in horizontal panels.\n"
+"(No text alert is ever displayed on vertical panels.)"
+msgstr ""
+"Wähle diese Option um Textalarme in den horizontalen Leisten zu "
+"unterdrücken.\n"
+"(Textalarme werden nie in vertikalen Leisten angezeigt)"
+
+#. metadata.json->name
+msgid "CPU Temperature Indicator"
+msgstr "CPU-Temperaturanzeige"
+
+#. metadata.json->description
+msgid "Shows CPU Temperature"
+msgstr "Zeigt die CPU-Temperatur an"

@@ -6,14 +6,23 @@ const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
 const Gtk = imports.gi.Gtk;
 const Cinnamon = imports.gi.Cinnamon;
-const Gettext = imports.gettext.domain('cinnamon-applets');
-const _ = Gettext.gettext;
+const Gettext = imports.gettext;
+const UUID = "pa-equalizer@jschug.com";
 
-const CONFIG_DIR = GLib.get_home_dir() + "/.pulse";
+const CONFIG_DIR_OLD = GLib.get_home_dir() + "/.pulse";
+const CONFIG_DIR_NEW = GLib.get_user_config_dir() + "/pulse";
+const CONFIG_DIR = GLib.file_test(CONFIG_DIR_NEW, GLib.FileTest.IS_DIR)? CONFIG_DIR_NEW: CONFIG_DIR_OLD;
+
 const EQCONFIG = CONFIG_DIR + "/equalizerrc";
 const EQPRESETS = EQCONFIG + ".availablepresets";
 const PRESETDIR1 = CONFIG_DIR + "/presets/";
 const PRESETDIR2 = "/usr/share/pulseaudio-equalizer/presets/";
+
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+    return Gettext.dgettext(UUID, str);
+}
 
 function Config() {
     this._init();
@@ -26,7 +35,7 @@ Config.prototype = {
     load: function() {
         try {
             GLib.spawn_command_line_sync("pulseaudio-equalizer interface.getsettings");
-            this._monitor = Gio.file_new_for_path(EQCONFIG).monitor(null, null);
+            this._monitor = Gio.file_new_for_path(EQCONFIG).monitor(Gio.FileMonitorFlags.NONE, null);
             this._monitor.connect("changed", Lang.bind(this, function(self, file, otherFile, eventType) {
                 if (eventType == Gio.FileMonitorEvent.CHANGES_DONE_HINT) {
                     this._configChanged();
@@ -37,16 +46,18 @@ Config.prototype = {
             this.presets = Cinnamon.get_file_contents_utf8_sync(EQPRESETS).split('\n')
                         .filter(function(item) { return item.length > 0; });
         } catch (e) {
-                global.logError(e);
+            global.logError(e);
         }
     },
     save: function() {
         try {
-            let out = Gio.file_new_for_path(EQCONFIG).replace(null, false, null, null);
+            this._monitor.cancel()
+            let out = Gio.file_new_for_path(EQCONFIG).replace(null, false, Gio.FileCreateFlags.NONE, null);
             out.write_all(this._rawdata.join('\n'), null);
             out.close(null);
 
-            GLib.spawn_command_line_async("pulseaudio-equalizer interface.applysettings");
+            GLib.spawn_command_line_sync("pulseaudio-equalizer interface.applysettings");
+            this.load();
         } catch (e) {
             global.logError(e);
         }
@@ -119,7 +130,7 @@ EqualizerApplet.prototype = {
             this.menuManager.addMenu(this.menu);
 
             this._enabledSwitch = new PopupMenu.PopupSwitchMenuItem(_("Equalizer"),
-                                    this.config.enabled);
+                                    this.config.enabled());
             this.menu.addMenuItem(this._enabledSwitch);
             this._enabledSwitch.connect("toggled", Lang.bind(this.config, this.config.toggle));
 

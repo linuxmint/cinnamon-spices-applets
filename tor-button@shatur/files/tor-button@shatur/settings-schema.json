@@ -1,0 +1,63 @@
+{
+    "layout" : {
+        "type" : "layout",
+        "pages" : ["applet-page", "torrc-page"],
+
+
+        "applet-page" : {
+            "type" : "page",
+            "title" : "Applet settings",
+            "sections" : ["applet-section"]
+        },
+
+        "torrc-page" : {
+            "type" : "page",
+            "title" : "Tor settings",
+            "sections" : ["torrc-section"]
+        },
+
+
+        "applet-section": {
+            "type": "section",
+            "title": "Settings for applet",
+            "keys": ["torPath", "showNotifications", "runAsRoot"]
+        },
+
+        "torrc-section": {
+            "type": "section",
+            "title": "Settings for Tor",
+            "keys": ["configPath"]
+        }
+    },
+
+
+    "torPath" : {
+        "type" : "entry",
+        "default" : "/usr/bin/tor",
+        "description" : "Tor location path",
+        "tooltip" : "Specify the command to launch Tor.",
+        "indent" : true
+    },
+
+    "showNotifications": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Show notifications",
+        "tooltip": "Show notifications when the Tor network is turned on/off."
+    },
+
+    "runAsRoot": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Launch Tor as tor user",
+        "tooltip": "Launch Tor with polkit as tor user. Needed if you don't have permissions to launch Tor as normal user."
+    },
+
+    "configPath" : {
+        "type" : "entry",
+        "default" : "/etc/tor/torrc",
+        "description" : "Tor config path",
+        "tooltip" : "Specify the path to torrc file.",
+        "indent" : true
+    }
+}

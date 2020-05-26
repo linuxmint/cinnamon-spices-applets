@@ -1,6 +1,0 @@
-{
-  "uuid": "netctlsystraymenu@prmurthy",  
-  "name": "Netctl Systray Menu",
-  "description": "Netctl Systray Menu displays netctl status in the system tray and enables profile switching",
-  "icon": "network-idle"
-}

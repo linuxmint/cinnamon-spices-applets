@@ -5,6 +5,15 @@ const Lang = imports.lang;
 const Cinnamon = imports.gi.Cinnamon;
 const AppletDir = imports.ui.appletManager.appletMeta["rwall@typicalfoobar"].path;
 const Settings = imports.ui.settings;
+const GLib = imports.gi.GLib;
+const Gettext = imports.gettext;
+const UUID = "rwall@typicalfoobar";
+
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
 
 function MyApplet(orientation, panel_height, instance_id) {
     this._init(orientation, panel_height, instance_id);
@@ -82,12 +91,12 @@ MyApplet.prototype = {
         this.menu.addMenuItem(this.useCronMenuItem);
         
         // Create the "Next Wallpaper" menu item
-        let nextWallpaperMenuItem = new PopupMenu.PopupMenuItem(_('Next Wallpaper'));
+        let nextWallpaperMenuItem = new PopupMenu.PopupMenuItem(_("Next Wallpaper"));
         nextWallpaperMenuItem.connect('activate', Lang.bind(this, this.runRwall));
         this.menu.addMenuItem(nextWallpaperMenuItem);
         
         // Create the "Save Wallpaper" menu item
-        let saveWallpaperMenuItem = new PopupMenu.PopupMenuItem(_('Save Wallpaper'));
+        let saveWallpaperMenuItem = new PopupMenu.PopupMenuItem(_("Save Wallpaper"));
         saveWallpaperMenuItem.connect('activate', Lang.bind(this, this.saveWallpaper));
         this.menu.addMenuItem(saveWallpaperMenuItem);
     },

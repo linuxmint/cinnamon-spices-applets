@@ -4,8 +4,6 @@ const PopupMenu = imports.ui.popupMenu;
 const Pango     = imports.gi.Pango;
 const Clutter   = imports.gi.Clutter;
 
-const GPaste    = imports.gi.GPaste;
-
 // ------------------------------------------------------------------------------------------------------
 
 function GPasteHistoryItem(text, index) {

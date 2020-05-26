@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-26 23:33+0100\n"
+"POT-Creation-Date: 2018-03-08 21:52+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -61,7 +61,7 @@ msgstr ""
 msgid "Show each document number on print list"
 msgstr ""
 
-#: ../settings-schema.json:30 ../applet.js:192
+#: ../settings-schema.json:30 ../applet.js:195
 msgid "Send to front"
 msgstr ""
 
@@ -77,15 +77,23 @@ msgstr ""
 msgid "Use symbolic icons"
 msgstr ""
 
-#: ../applet.js:37 ../applet.js:131
+#: ../settings-schema.json:43
+msgid "Reload Applet"
+msgstr ""
+
+#: ../settings-schema.json:49
+msgid "Restart CUPS"
+msgstr ""
+
+#: ../metadata.json:10 ../applet.js:37 ../applet.js:134
 msgid "Printers"
 msgstr ""
 
-#: ../applet.js:156
+#: ../applet.js:159
 msgid "Cancel all jobs"
 msgstr ""
 
-#: ../applet.js:178
+#: ../applet.js:181
 msgid "at"
 msgstr ""
 

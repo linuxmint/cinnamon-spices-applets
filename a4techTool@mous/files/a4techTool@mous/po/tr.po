@@ -1,0 +1,67 @@
+# Turkish translations for a package.
+# Copyright (C) 2018 THE a'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the a package.
+# Muhammet Kara <muhammetk@gnome.org>, 2018.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: a 4techTool@mous\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-04-21 12:46+0800\n"
+"PO-Revision-Date: 2018-10-31 13:39+0300\n"
+"Last-Translator: Muhammet Kara <muhammetk@gnome.org>\n"
+"Language-Team: Turkish <gnome-turk@gnome.org>\n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Gtranslator 2.91.7\n"
+
+#: applet.js:94
+msgid "Remaining battery: N/A%, Profile: N/A"
+msgstr "Kalan pil: N/A%, Profil: N/A"
+
+#: applet.js:104
+msgid "Sleep Time:"
+msgstr "Uyku Zamanı:"
+
+#: applet.js:125
+msgid "Signal:"
+msgstr "Sinyal:"
+
+#: applet.js:133
+msgid "Dump memory to file"
+msgstr "Belleği dosyaya boşalt"
+
+#: applet.js:155
+msgid "Move to wake"
+msgstr "Uyandırmak için hareket ettir"
+
+#: applet.js:196 applet.js:219
+msgid "%, Profile: "
+msgstr "%, Profil: "
+
+#: applet.js:196 applet.js:219
+msgid "Remaining mouse battery: "
+msgstr "Kalan fare pili: "
+
+#: applet.js:201 applet.js:224
+msgid "Remaining battery: N/A%"
+msgstr "Kalan pil: N/A%"
+
+#: applet.js:253
+msgid "Sleep time"
+msgstr "Uyku zamanı"
+
+#: applet.js:253
+msgid "min"
+msgstr "dk"
+
+#. a4techTool@mous->metadata.json->description
+msgid "Shows Battery level of A4Tech mouse"
+msgstr "A4Tech farenin pil düzeyini gösterir"
+
+#. a4techTool@mous->metadata.json->name
+msgid "A4Tech battery checker"
+msgstr "A4Tech pil denetleyici"

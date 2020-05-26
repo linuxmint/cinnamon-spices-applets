@@ -1,15 +1,26 @@
-const TerminalReader = imports.applet.terminal_reader;
 const GLib = imports.gi.GLib;
 const Lang = imports.lang;
 const Main = imports.ui.main;
-const Util = imports.applet.util;
-const HomesteadYamlReader = imports.applet.homestead_yaml_reader;
+const UUID = "rancher@centurix";
+let Util, HomesteadYamlReader, TerminalReader;
+if (typeof require !== 'undefined') {
+	Util = require('./util');
+	HomesteadYamlReader = require('./homestead_yaml_reader');
+	TerminalReader = require('./terminal_reader');
+} else {
+	const AppletDir = imports.ui.appletManager.applets['rancher@centurix'];
+	Util = AppletDir.util;
+	HomesteadYamlReader = AppletDir.homestead_yaml_reader;
+	TerminalReader = AppletDir.terminal_reader;
+}
 
-const STATUS_RUNNING = 0;
-const STATUS_SAVED = 1;
-const STATUS_POWER_OFF = 2;
-const STATUS_NOT_CREATED = 3;
-const STATUS_KERNAL_NOT_LOADED = 4;
+var STATUS_RUNNING = 0;
+var STATUS_SAVED = 1;
+var STATUS_POWER_OFF = 2;
+var STATUS_NOT_CREATED = 3;
+var STATUS_HOMESTEAD_MISSING = 4;
+var STATUS_KERNAL_NOT_LOADED = 5;
+var STATUS_VAGRANT_OUT_OF_DATE = 6;
 
 /**
  * Homestead/Vagrant manager
@@ -20,10 +31,10 @@ function Homestead(project_folder, config_folder, vagrant_cmd, editor) {
 
 Homestead.prototype = {
 	_init: function(project_folder, config_folder, vagrant_cmd, editor) {
-		this._project_folder = project_folder;
-		this._config_folder = config_folder;
-		this._vagrant_cmd = vagrant_cmd;
-		this._editor = editor;
+		this.setProjectFolder(project_folder);
+		this.setConfigFolder(config_folder);
+		this.setVagrantCmd(vagrant_cmd);
+		this.setEditor(editor);
 
 		this._up = null;
 		this._status_pause = null;
@@ -35,7 +46,15 @@ Homestead.prototype = {
 	},
 
 	setConfigFolder: function(folder) {
-		this._config_folder = folder;
+		try {
+			// If this folder doesn't exist, default to the _project_folder
+			if (!GLib.file_test(Util.resolveHome(folder) + "/Homestead.yaml", GLib.FileTest.EXISTS)) {
+				let folder = this._project_folder;
+			}
+			this._config_folder = folder;
+		} catch(e) {
+			global.log(UUID + "::setConfigFolder: " + e);
+		}
 	},
 
 	setVagrantCmd: function(cmd) {
@@ -82,29 +101,39 @@ Homestead.prototype = {
 
 	checkStatus: function(callback) {
 		try {
-			reader = new TerminalReader.TerminalReader(Util.resolveHome(this._project_folder), this._vagrant_cmd + ' status', Lang.bind(this, function (command, status, stdout) {
+			let reader = new TerminalReader.TerminalReader(Util.resolveHome(this._project_folder), this._vagrant_cmd + ' status', Lang.bind(this, function (command, status, stdout) {
 				reader.destroy();
-				if (new RegExp('running').test(stdout)) {
+				if (new RegExp('Please change your Vagrant version').test(stdout)) {
+					if (typeof callback == 'function') {
+						callback(this.exists(), STATUS_VAGRANT_OUT_OF_DATE)
+					}
+				}
+				else if (new RegExp('running').test(stdout)) {
 					if (typeof callback == 'function') {
 						callback(this.exists(), STATUS_RUNNING);
 					}
 				}
-				if (new RegExp('saved').test(stdout)) {
+				else if (new RegExp('saved').test(stdout)) {
 					if (typeof callback == 'function') {
 						callback(this.exists(), STATUS_SAVED);
 					}
 				}
-				if (new RegExp('poweroff').test(stdout)) {
+				else if (new RegExp('poweroff').test(stdout)) {
 					if (typeof callback == 'function') {
 						callback(this.exists(), STATUS_POWER_OFF);
 					}
 				}
-				if (new RegExp('not created').test(stdout)) {
+				else if (new RegExp('not created').test(stdout)) {
 					if (typeof callback == 'function') {
 						callback(this.exists(), STATUS_NOT_CREATED);
 					}
 				}
-				if (new RegExp('VBoxManage --version').test(stdout)) {
+				else if (new RegExp('can\'t cd to').test(stdout)) {
+					if (typeof callback == 'function') {
+						callback(this.exists(), STATUS_HOMESTEAD_MISSING);
+					}
+				}
+				else if (new RegExp('VBoxManage --version').test(stdout)) {
 					if (typeof callback == 'function') {
 						callback(this.exists(), STATUS_KERNAL_NOT_LOADED);
 					}
@@ -185,7 +214,7 @@ Homestead.prototype = {
 
 	parseConfig: function() {
 		try {
-			yaml = new HomesteadYamlReader.HomesteadYamlReader(Util.resolveHome(this._config_folder) + "/Homestead.yaml");
+			let yaml = new HomesteadYamlReader.HomesteadYamlReader(Util.resolveHome(this._config_folder) + "/Homestead.yaml");
 
 			return {
 				ip: yaml.ip,

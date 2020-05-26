@@ -1,5 +1,4 @@
 const Gio = imports.gi.Gio;
-const Util = imports.applet.util;
 
 function HomesteadYamlReader(yaml_file) {
 	this._init(yaml_file);
@@ -25,17 +24,17 @@ HomesteadYamlReader.prototype = {
 		let input_file = Gio.file_new_for_path(this._yaml_file);
 		let [ok, data, etag] = input_file.load_contents(null);
 		if (ok) {
-			lines = data.toString('utf-8').split('\n');
+			let lines = data.toString('utf-8').split('\n');
 
-			reBlockTest = new RegExp('^(\\w+):');
-			reIP = new RegExp('ip:.*?"(.*?)"');
-			reMemory = new RegExp('memory:.*?(\\d+)');
-			reCPU = new RegExp('cpus:.*?(\\d+)');
-			reProvider = new RegExp('provider:.*?(\\w+)');
-			reSiteCollectionItem = new RegExp('^\\s*-\\s*map:\\s*(.*)');
-			reDatabaseCollectionItem = new RegExp('^\\s*-\\s*(.*)');
+			let reBlockTest = new RegExp('^(\\w+):');
+			let reIP = new RegExp('ip:.*?"(.*?)"');
+			let reMemory = new RegExp('memory:.*?(\\d+)');
+			let reCPU = new RegExp('cpus:.*?(\\d+)');
+			let reProvider = new RegExp('provider:.*?(\\w+)');
+			let reSiteCollectionItem = new RegExp('^\\s*-\\s*map:\\s*(.*)');
+			let reDatabaseCollectionItem = new RegExp('^\\s*-\\s*(.*)');
 
-			currentSection = "";
+			let currentSection = "";
 
 			for (var i = 0; i < lines.length; i++) {
 				currentSection = this._firstMatch(reBlockTest, lines[i], currentSection);
@@ -50,7 +49,7 @@ HomesteadYamlReader.prototype = {
 	},
 
 	_firstMatch: function(re, line, passthrough) {
-		matches = re.exec(line);
+		let matches = re.exec(line);
 		if (matches && matches.length > 0) {
 			return matches[1];
 		}
@@ -58,7 +57,7 @@ HomesteadYamlReader.prototype = {
 	},
 
 	_pushToCollection: function(re, line, collection, section, currentSection) {
-		matches = re.exec(line);
+		let matches = re.exec(line);
 		if (matches && matches.length > 0 && currentSection == section) {
 			collection.push(matches[1]);
 		}

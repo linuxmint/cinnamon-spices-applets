@@ -61,6 +61,18 @@
         "dependency": "showDocuments"
     },
     
+    "docMax": {
+        "type": "spinbutton",
+        "description": "Limit number of documents shown to",
+        "min": 5,
+        "max": 200,
+        "units": "",
+        "step": 1,
+        "default": 50,
+        "indent": true,
+        "dependency": "showDocuments"
+    },
+    
     "recent": {
         "type": "header",
         "description": "Recent Documents"

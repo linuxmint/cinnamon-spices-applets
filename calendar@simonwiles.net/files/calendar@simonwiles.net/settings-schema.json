@@ -27,6 +27,18 @@
     "callback" : "on_custom_format_button_pressed",
     "tooltip" : "Click this button to know more about the syntax for date formats."
  },
+ "separator0" : {
+    "type" : "separator"
+ },
+ "keybindings": {
+    "type":        "header",
+    "description": "Keybindings"
+ },
+ "keybinding": {
+    "type": "keybinding",
+    "description": "Set the keybinding to call the menu",
+    "default": "<Super><Shift>c"
+ },
  "separator" : {
     "type" : "separator"
  },

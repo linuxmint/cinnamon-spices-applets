@@ -3,6 +3,14 @@
  */
 const GLib = imports.gi.GLib;
 const Lang = imports.lang;
+const Gettext = imports.gettext;
+const UUID = "CommandRunner@appdevsw";
+
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
 
 function Node(parent, name)
 {
@@ -274,4 +282,3 @@ SimpleXml.prototype =
         return buf;
     },
 }
-

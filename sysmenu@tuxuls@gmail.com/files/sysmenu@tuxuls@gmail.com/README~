@@ -1,9 +1,0 @@
-This is a Cinnamon applet, which add system menu
-
-
-Installation
-================
-	
-	1) Copy the folder "sysmenu@tuxuls@gmail.com" to "~/.local/share/cinnamon/applets/".
-
-	2) Enable the applet in cinnamon settings. (Eventually you have to restart cinnamon: Press Alt+F2, type 'r' and enter)

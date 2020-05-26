@@ -1,0 +1,202 @@
+{
+ "update_interval_ifconfig" : {
+    "type": "spinbutton",
+    "default" : 5,
+    "min" : 1,
+    "max" : 3600000,
+    "step" : 1,
+    "units" : "seconds",
+    "description" : "Interface check interval:",
+    "tooltip" : "Interval in which applet will check if there was change in network interfaces. Can be frequent."
+ },
+ 
+ "update_interval_service": {
+    "type": "spinbutton",
+    "default" : 5,
+    "min" : 3,
+    "max" : 100,
+    "step" : 1,
+    "units" : "minutes",
+    "description" : "IP Service interval:",
+    "tooltip" : "Interval in which applet will fire get request to one of IP Services. Don't make it too frequent to not overload the servers."
+ },
+ 
+ "debug_level": {
+    "type": "spinbutton",
+    "default" : 0,
+    "min" : 0,
+    "max" : 2,
+    "step" : 1,
+    "units" : "",
+    "description" : "Debug level:",
+    "tooltip" : "For debugging purposes. Higher level means more detailed logs in ~/.cinnamon/glass.log"
+ },
+ 
+ "div01" : {
+    "type" : "separator"
+ },
+ "head0" : {
+ 	"type": "header",
+ 	"description": "To match ISP names, use isp value from the service http://ip-api.com/json"
+ },
+ "div02" : {
+    "type" : "separator"
+ },
+ 
+ "head1" : {
+ 	"type": "header",
+ 	"description": "Home ISP"
+ },
+ "home_isp" : {
+    "type" : "entry",
+    "default": "Use your ISP name from here: http://ip-api.com/json",
+    "description" : "Home ISP:",
+    "tooltip" : "Fill out your home ISP. If the ISP from IP service will match with this value, home icon will be used instead of country flag."
+ },
+ "home_isp_icon-name": {
+    "type": "iconfilechooser",
+    "default" : "gtk-home",
+    "description" : "The icon to used for home ISP:",
+    "tooltip" : "Select an icon file, or you can type an icon name into the entry box"
+ },
+ "home_isp_nickname" : {
+    "type" : "entry",
+    "default": "",
+    "description" : "Nickname:",
+    "tooltip" : "Text to show in tooltip when this ISP is active"
+ },
+
+ "div1" : {
+    "type" : "separator"
+ },  
+ "head2" : {
+ 	"type": "header",
+ 	"description": "Other ISP 1"
+ }, 
+ "other1_isp" : {
+    "type" : "entry",
+    "default": "Use your ISP name from here: http://ip-api.com/json",
+    "description" : "Other ISP 1:",
+    "tooltip" : "Fill out your other ISP. If the ISP from IP service will match with this value, home icon will be used instead of country flag."
+ },
+ "other1_isp_icon-name": {
+    "type": "iconfilechooser",
+    "default" : "gtk-add",
+    "description" : "The icon to use for other ISP:",
+    "tooltip" : "Select an icon file, or you can type an icon name into the entry box"
+ }, 
+ "other1_isp_nickname" : {
+    "type" : "entry",
+    "default": "",
+    "description" : "Nickname:",
+    "tooltip" : "Text to show in tooltip when this ISP is active"
+ }, 
+ 
+ 
+ "div2" : {
+    "type" : "separator"
+ }, 
+ "head3" : {
+ 	"type": "header",
+ 	"description": "Other ISP 2"
+ }, 
+ "other2_isp" : {
+    "type" : "entry",
+    "default": "Use your ISP name from here: http://ip-api.com/json",
+    "description" : "Other ISP 2:",
+    "tooltip" : "Fill out your oher ISP. If the ISP from IP service will match with this value, home icon will be used instead of country flag."
+ },
+ "other2_isp_icon-name": {
+    "type": "iconfilechooser",
+    "default" : "gtk-add",
+    "description" : "The icon to use for other ISP:",
+    "tooltip" : "Select an icon file, or you can type an icon name into the entry box"
+ },  
+ "other2_isp_nickname" : {
+    "type" : "entry",
+    "default": "",
+    "description" : "Nickname:",
+    "tooltip" : "Text to show in tooltip when this ISP is active"
+ }, 
+ 
+ 
+ "div3" : {
+    "type" : "separator"
+ }, 
+ "head4" : {
+ 	"type": "header",
+ 	"description": "Other ISP 3"
+ }, 
+ "other3_isp" : {
+    "type" : "entry",
+    "default": "Use your ISP name from here: http://ip-api.com/json",
+    "description" : "Other ISP 3:",
+    "tooltip" : "Fill out your oher ISP. If the ISP from IP service will match with this value, home icon will be used instead of country flag."
+ },
+ "other3_isp_icon-name": {
+    "type": "iconfilechooser",
+    "default" : "gtk-add",
+    "description" : "The icon to use for other ISP:",
+    "tooltip" : "Select an icon file, or you can type an icon name into the entry box"
+ },  
+ "other3_isp_nickname" : {
+    "type" : "entry",
+    "default": "",
+    "description" : "Nickname:",
+    "tooltip" : "Text to show in tooltip when this ISP is active"
+ }, 
+ 
+ 
+ "div4" : {
+    "type" : "separator"
+ }, 
+ "head5" : {
+ 	"type": "header",
+ 	"description": "Other ISP 4"
+ }, 
+ "other4_isp" : {
+    "type" : "entry",
+    "default": "Use your ISP name from here: http://ip-api.com/json",
+    "description" : "Other ISP 4:",
+    "tooltip" : "Fill out your oher ISP. If the ISP from IP service will match with this value, home icon will be used instead of country flag."
+ },
+ "other4_isp_icon-name": {
+    "type": "iconfilechooser",
+    "default" : "gtk-add",
+    "description" : "The icon to use for other ISP:",
+    "tooltip" : "Select an icon file, or you can type an icon name into the entry box"
+ },  
+ "other4_isp_nickname" : {
+    "type" : "entry",
+    "default": "",
+    "description" : "Nickname:",
+    "tooltip" : "Text to show in tooltip when this ISP is active"
+ }, 
+ 
+ 
+ "div5" : {
+    "type" : "separator"
+ }, 
+ "head6" : {
+ 	"type": "header",
+ 	"description": "Other ISP 5"
+ }, 
+ "other5_isp" : {
+    "type" : "entry",
+    "default": "Use your ISP name from here: http://ip-api.com/json",
+    "description" : "Other ISP 5:",
+    "tooltip" : "Fill out your oher ISP. If the ISP from IP service will match with this value, home icon will be used instead of country flag."
+ },
+ "other5_isp_icon-name": {
+    "type": "iconfilechooser",
+    "default" : "gtk-add",
+    "description" : "The icon to use for other ISP:",
+    "tooltip" : "Select an icon file, or you can type an icon name into the entry box"
+ },
+ "other5_isp_nickname" : {
+    "type" : "entry",
+    "default": "",
+    "description" : "Nickname:",
+    "tooltip" : "Text to show in tooltip when this ISP is active"
+ } 
+}

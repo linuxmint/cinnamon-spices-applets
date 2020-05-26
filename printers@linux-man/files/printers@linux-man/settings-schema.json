@@ -35,5 +35,17 @@
     "default" : true,
     "description": "Symbolic icons",
     "tooltip": "Use symbolic icons"
+ },
+  "reload-button" : {
+    "type" : "button",
+    "description": "Reload Applet",
+    "callback": "on_reload_button",
+    "tooltip": "Reload Applet"
+ },
+   "cups-button" : {
+    "type" : "button",
+    "description": "Restart CUPS",
+    "callback": "on_cups_button",
+    "tooltip": "Restart CUPS"
  }
 }

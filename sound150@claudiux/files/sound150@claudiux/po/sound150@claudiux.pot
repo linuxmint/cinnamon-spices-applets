@@ -1,0 +1,58 @@
+# sound150@claudiux Applet POT File.
+# Copyright (C) 2018 Claudiux <claude.clerc@gmail.com>
+# This file is distributed under the same license as the cinnamon package.
+# FIRST AUTHOR Claudiux <claude.clerc@gmail.com>, 2018.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: sound150@claudiux v1.0.0\n"
+"Report-Msgid-Bugs-To: Claudiux <claude.clerc@gmail.com>\n"
+"POT-Creation-Date: 2018-01-12 15:47+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+
+#: metadata.json:2
+msgid "An applet, based on the Cinnamon one, to control sound (up to 150% of nominal volume) and music"
+msgstr ""
+
+#: metadata.json:5
+msgid "Sound 150%"
+msgstr ""
+
+#: settings-schema.json:103
+msgid "% of nominal volume"
+msgstr ""
+
+#: settings-schema.json:85
+msgid "Maximum volume control"
+msgstr ""
+
+#: settings-schema.json:86
+msgid "You can try to increase the volume of your sound card up to 150% of its nominal value. Use with caution. You can also set a value less than 100%, for example on a child's computer."
+msgstr ""
+
+#: settings-schema.json:105
+msgid "Step"
+msgstr ""
+
+#: settings-schema.json:109
+msgid "Magnetize the 'Volume 100%' mark"
+msgstr ""
+
+#: settings-schema.json:110
+msgid "When checked, the 'Volume 100%' mark becomes magnetic: the volume is automatically set to 100% when the distance between the volume value and 100% is lesser than a half-step."
+msgstr ""
+
+#: settings-schema.json:115
+msgid "Adjust the color of the icon to the volume"
+msgstr ""
+
+#: settings-schema.json:116
+msgid "From 101% to 115%: yellow; from 116% to 130%: orange; beyond 130%: red."
+msgstr ""

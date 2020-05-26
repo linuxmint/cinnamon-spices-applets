@@ -1,26 +1,24 @@
 {
     "head":{
-    	"type":"header",
-	"description":"Store your username and password.\nUses the keyring so password is not stored in cleartext.\nIt might take a while (2-10seconds) before the password\ngets visible removed after you press the button.\nIf your gmail adress is usernam@gmail.com, only put in the username part here.\nThere are still some issues so you might have to press the button a couple of time.\nIf the password changes to something else, dont press it again."
+        "type":"header",
+        "description":"Store your username and password.\nUses the keyring so password is not stored in cleartext.\nIt might take a while (2-10seconds) before the password\ngets visible removed after you press the button.\nIf your gmail adress is usernam@gmail.com, only put in the username part here.\nThere are still some issues so you might have to press the button a couple of time.\nIf the password changes to something else, dont press it again."
     },
     "settings-username" : {
-	         "type" : "entry",
-		 "default" : "",
-		 "description" : "Username:",
-		 "dependency":true,
-		 "tooltip" : "Set your username"
+        "type" : "entry",
+         "default" : "",
+         "description" : "Username:",
+         "tooltip" : "Set your username"
     },
     "settings-password": {
-    		"type":"entry",
-		"default":"",
-		"description": "Password:",
-		"dependency":true,
-		"tooltip":"Set your password"
+        "type":"entry",
+        "default":"",
+        "description": "Password:",
+        "tooltip":"Set your password"
     },
     "demo-button":{
-		"type":"button",
-		"description":"Save username and password",
-		"callback":"on_settings_save",
-		"tooltip":"Click to save username and password"	
+        "type":"button",
+        "description":"Save username and password",
+        "callback":"on_settings_save",
+        "tooltip":"Click to save username and password"
     }
 }

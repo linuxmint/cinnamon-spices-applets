@@ -2,11 +2,17 @@ const Applet = imports.ui.applet;
 const Lang = imports.lang;
 const Mainloop = imports.mainloop;
 const GLib = imports.gi.GLib;
-
+const Gettext = imports.gettext;
 const UUID = "localip@mrieracrespi";
-
 const REFRESH_INTERVAL = 60
 
+// l10n/translation support
+// ----------
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
 
 // Logging
 // ----------
@@ -46,9 +52,9 @@ MyApplet.prototype = {
     refreshLocation: function refreshLocation() {
         let [res, out] = GLib.spawn_command_line_sync(" hostname -I ")
 
-	let out = String(out).replace("\n", "");
-	let out = String(out).trim();
-	let out = String(out).replace(/ /g, " - ");
+        out = String(out).replace("\n", "");
+        out = String(out).trim();
+        out = String(out).replace(/ /g, " - ");
 
         this.set_applet_label('' + out + '');
 

@@ -3,27 +3,42 @@
 		"type": "header",
 		"description": "Settings - Bash Sensors (write commands in Bash!)"
 	},
+	"title": {
+		"type": "entry",
+		"default": "Bash sensors",
+		"description": "Title",
+		"tooltip": "Title used when displaying notifications"
+	},
 	"refreshInterval": {
 		"type": "spinbutton",
 		"default": 10,
-		"min": 1,
+		"min": 0,
 		"max": 60,
 		"step": 1,
 		"units": "seconds",
-		"description": "Refresh interval"
+		"description": "Refresh interval [0 for no refresh]"
+	},
+	"shell": {
+		"type": "entry",
+		"default": "sh",
+		"description": "Shell",
+		"tooltip": "Shell to be used ('-c' will be used to call commands)"
+	},
+	"head1": {
+		"type": "header",
+		"description": "Commands"
 	},
 	"script1": {
 		"type": "entry",
 		"default": "echo 'hello, cinnamon!'",
 		"description": "Command 1",
-		"tooltip": "first line of output"
+		"tooltip": "first line of output (use \f for more lines)"
 	},
 	"enableScript2": {
 		"type": "checkbox",
 		"default": true,
 		"description": "Two-line mode (command 2 enabled)"
 	},
-
 	"script2": {
 		"type": "entry",
 		"default": "echo 'configuration required'",
@@ -31,10 +46,58 @@
 		"tooltip": "second line of output (optional)",
         "dependency": "enableScript2"
 	},
+	"head2": {
+		"type": "header",
+		"description": "Icon"
+	},
+        "dynamicIcon": {
+		"type": "checkbox",
+		"default": false,
+		"description": "Dynamic icon (use output of icon command as icon)"
+	},
+	"iconScript": {
+		"type": "entry",
+		"default": "",
+		"description": "Static icon or command returning the full path to an icon",
+		"tooltip": "command should return an icon (leave empty for no icon)"
+	},
+	"head3": {
+		"type": "header",
+		"description": "Tooltip"
+	},
+	"dynamicTooltip": {
+		"type": "checkbox",
+		"default": false,
+		"description": "Dynamic tooltip (use output of tooltip command as tooltip)"
+	},
+	"tooltipScript": {
+		"type": "entry",
+		"default": "Bash sensors!",
+		"description": "Tooltip command or static tooltip text",
+		"tooltip": "tooltip (static or dynamic)"
+	},
+	"head4": {
+		"type": "header",
+                "description": "Command on applet click"
+	},
 	"menuScript": {
 		"type": "entry",
 		"default": "sensors",
 		"description": "Menu command (on applet left-click)",
 		"tooltip": "allows to display lots of information in popup menu"
+	},
+	"menuScriptDisplay": {
+		"type": "checkbox",
+		"default": true,
+		"description": "Display output of menu command"
+	},
+	"head5": {
+		"type": "header",
+		"description": "Command on start-up"
+	},
+	"startupScript": {
+		"type": "entry",
+		"default": "",
+		"description": "Command run at start-up"
 	}
 }

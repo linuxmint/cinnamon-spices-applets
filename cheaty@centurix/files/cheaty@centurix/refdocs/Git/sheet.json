@@ -1,0 +1,175 @@
+{
+	"name": "Git",
+	"description": "Git cheatsheet",
+	"author": "Chris Read",
+	"email": "centurix@gmail.com",
+	"repository": "http://fipo.co",
+	"version": "1.0",
+	"sections": {
+		"Initialisation": {
+			"New Repository": {
+				"description": "Initialise a local repository",
+				"code": "git init"
+			},
+			"Cloning": {
+				"description": "Clone an existing repository",
+				"code": "git clone <repository>"
+			}
+		},
+		"Changes": {
+			"Repository Status": {
+				"description": "Display information about the current state of the repository",
+				"code": "git status"
+			},
+			"Add Changed Files": {
+				"description": "Add all changed files to a commit",
+				"code": "git add ."
+			},
+			"Commit Changed Files With Editor": {
+				"description": "Commit changed files and open an editor to enter the commit message",
+				"code": "git commit"
+			},
+			"Commit Changed Files Inline": {
+				"description": "Commit changed files and add a commit message inline",
+				"code": "git commit -m '<commit message>'"
+			},
+			"Amend the Last Commit": {
+				"description": "Amend the last commit with new details, including the commit author",
+				"code": "git commit --amend"
+			}
+		},
+		"Branches": {
+			"Create a New Branch": {
+				"description": "Create a new branch from the current branch",
+				"code": "git branch <new branch name>"
+			},
+			"Checkout a different branch": {
+				"description": "Change the current branch to a different",
+				"code": "git checkout <branch name>"
+			},
+			"List All Branches": {
+				"description": "List all local branches in the current repository",
+				"code": "git branch -av"
+			},
+			"Delete a Branch": {
+				"description": "Delete a local repository branch",
+				"code": "git branch -d <branch name>"
+			},
+			"Tag a Branch": {
+				"description": "Tag the current branch",
+				"code": "git tag <tag name>"
+			}
+		},
+		"Remote Work": {
+			"Download Remote Changes": {
+				"description": "Pull changes from a remote repository",
+				"code": "git pull <remote name> <branch name>"
+			},
+			"Upload Local Changes to Remote": {
+				"description": "Push changes from a local repository to a remote",
+				"code": "git push <remote name> <branch name>"
+			},
+			"Download All Changes Without Integration": {
+				"description": "Download all changes from a remote without integrating them into the current branch",
+				"code": "git fetch <remote>"
+			},
+			"Delete a Remote Branch": {
+				"description": "Delete a remote branch",
+				"code": "git branch -dr <remote>/<branch>"
+			},
+			"Publish Current Branch Tags": {
+				"description": "Publish all current branch tags",
+				"code": "git push --tags"
+			},
+			"Show Remote Branch Information": {
+				"description": "Show information about a remote branch",
+				"code": "git remote show <remote>"
+			},
+			"Add a Remote Repository to a Local Repository": {
+				"description": "Add a remote repository to an existing local repository",
+				"code": "git remote add <remote name> <repository url>"
+			},
+			"List All Remote Repositories": {
+				"description": "List all remote repositories for a local repository",
+				"code": "git remote"
+			},
+			"Add an Upstream Repository to a Fork": {
+				"description": "Add an Upstream Repository to a Fork",
+				"code": "git remote add upstream <repository url>"
+			},
+			"Merge Upstream Repository Changes": {
+				"description": "Merge all upstream repository changes into a fork after adding the upstream remote",
+				"code": "git fetch upstream\ngit checkout <master or branch>\ngit rebase upstream/<master or branch>",
+				"alternatives": {
+					"Merge": {
+						"code": "git fetch upstream\ngit checkout <master or branch>\ngit merge upstream/<master or branch>"
+					}
+				}
+			}
+		},
+		"History": {
+			"Show All Commits": {
+				"description": "List all commits to the repository, latest first",
+				"code": "git log"
+			},
+			"Show Who Changed What": {
+				"description": "Show who changed code in a specific file",
+				"code": "git blame <file>"
+			}
+		},
+		"Merge": {
+			"Merge a Branch": {
+				"description": "Merge a branch into the current branch",
+				"code": "git merge <branch>"
+			},
+			"Resolve Merge Conflicts": {
+				"description": "Merge the current commit conflicts with the user defined tool",
+				"code": "git mergetool"
+			},
+			"Add a Resolved File to the Commit": {
+				"description": "Add a file to the current commit merge resolution",
+				"code": "git add <filename>"
+			},
+			"Remove a Resolved File From the Commit": {
+				"description": "Remove a file from the current commit merge resolution",
+				"code": "git rm <filename>"
+			}
+		},
+		"Rebase": {
+			"Rebase the Current Branch": {
+				"description": "Rebase the current branch into another branch",
+				"code": "git rebase <branch name>"
+			},
+			"Continue a Rebase": {
+				"description": "Continue a rebase after resolving conflicts",
+				"code": "git rebase --continue"
+			},
+			"Abort a Rebase": {
+				"description": "Abort a rebase",
+				"code": "git rebase --abort"
+			}
+		},
+		"Backing Out": {
+			"Discard the Current Branch": {
+				"description": "Rewind all changes in the current branch",
+				"code": "git reset --hard HEAD"
+			},
+			"Discard a Files Changes": {
+				"description": "Only discard changes for a single file",
+				"code": "git checkout HEAD <filename>"
+			},
+			"Revert a Commit": {
+				"description": "Revert a commit",
+				"code": "git revert <commit>"
+			},
+			"Revert to a Commit": {
+				"description": "Rewind to a specific commit",
+				"code": "git reset --hard <commit>"
+			},
+			"Preserve Unstaged Changes": {
+				"description": "Preserve unstaged changes",
+				"code": "git reset <commit>"
+			}
+		}
+	}
+}

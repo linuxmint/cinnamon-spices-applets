@@ -1,0 +1,685 @@
+{
+  "layout": {
+    "type": "layout",
+    "pages": [
+      "General",
+      "CPU",
+      "MEM",
+      "NET_IN",
+      "NET_OUT",
+      "DISK_READ",
+      "DISK_WRITE",
+      "BAT"
+    ],
+    "General": {
+      "type": "page",
+      "title": "General",
+      "sections": [
+        "general_settings",
+        "theme_settings",
+        "theme_data_settings"
+      ]
+    },
+    "CPU": {
+      "type": "page",
+      "title": "CPU",
+      "sections": [
+        "CPU_settings"
+      ]
+    },
+    "MEM": {
+      "type": "page",
+      "title": "MEM",
+      "sections": [
+        "MEM_settings"
+      ]
+    },
+    "NET_IN": {
+      "type": "page",
+      "title": "NET (in)",
+      "sections": [
+        "NET_IN_settings"
+      ]
+    },
+    "NET_OUT": {
+      "type": "page",
+      "title": "NET (out)",
+      "sections": [
+        "NET_OUT_settings"
+      ]
+    },
+    "DISK_READ": {
+      "type": "page",
+      "title": "DISK (read)",
+      "sections": [
+        "DISK_READ_settings"
+      ]
+    },
+    "DISK_WRITE": {
+      "type": "page",
+      "title": "DISK (write)",
+      "sections": [
+        "DISK_WRITE_settings"
+      ]
+    },
+    "BAT": {
+      "type": "page",
+      "title": "BAT (battery)",
+      "sections": [
+        "BAT_settings"
+      ]
+    },
+    "general_settings": {
+      "type": "section",
+      "title": "General settings",
+      "keys": [
+        "frequency",
+        "graph_line_mode"
+      ]
+    },
+    "theme_settings": {
+      "type": "section",
+      "title": "Theme (graph)",
+      "keys": [
+        "theme",
+        "border_color",
+        "background_color1",
+        "background_color2",
+        "label_color",
+        "label_size",
+        "detail_label_color",
+        "detail_label_size"
+      ]
+    },
+    "theme_data_settings": {
+      "type": "section",
+      "title": "Theme (graph data)",
+      "keys": [
+        "theme_data",
+        "graph_color1",
+        "graph_color2",
+        "graph_offset2",
+        "graph_color3",
+        "graph_offset3",
+        "graph_color4"
+      ]
+    },
+    "CPU_settings": {
+      "type": "section",
+      "title": "CPU settings",
+      "keys": [
+        "cpu_enable_graph",
+        "cpu_size",
+        "cpu_use_custom_label",
+        "cpu_custom_label",
+        "cpu_show_detail_label"
+      ]
+    },
+    "MEM_settings": {
+      "type": "section",
+      "title": "MEM settings",
+      "keys": [
+        "mem_enable_graph",
+        "mem_size",
+        "mem_use_custom_label",
+        "mem_custom_label",
+        "mem_show_detail_label"
+      ]
+    },
+    "NET_IN_settings": {
+      "type": "section",
+      "title": "NET (in) settings",
+      "keys": [
+        "netin_enable_graph",
+        "netin_size",
+        "netin_speed",
+        "netin_use_custom_label",
+        "netin_custom_label",
+        "netin_linlog",
+        "netin_show_detail_label"
+      ]
+    },
+    "NET_OUT_settings": {
+      "type": "section",
+      "title": "NET (out) settings",
+      "keys": [
+        "netout_enable_graph",
+        "netout_size",
+        "netout_speed",
+        "netout_use_custom_label",
+        "netout_custom_label",
+        "netout_linlog",
+        "netout_show_detail_label"
+      ]
+    },
+    "DISK_READ_settings": {
+      "type": "section",
+      "title": "DISK (read) settings",
+      "keys": [
+        "diskread_enable_graph",
+        "diskread_size",
+        "diskread_device_name",
+        "diskread_use_custom_label",
+        "diskread_custom_label",
+        "diskread_show_detail_label"
+      ]
+    },
+    "DISK_WRITE_settings": {
+      "type": "section",
+      "title": "DISK (write) settings",
+      "keys": [
+        "diskwrite_enable_graph",
+        "diskwrite_size",
+        "diskwrite_device_name",
+        "diskwrite_use_custom_label",
+        "diskwrite_custom_label",
+        "diskwrite_show_detail_label"
+      ]
+    },
+    "BAT_settings": {
+      "type": "section",
+      "title": "BAT (battery) settings",
+      "keys": [
+        "bat_enable_graph",
+        "bat_size",
+        "bat_use_custom_label",
+        "bat_custom_label",
+        "bat_show_detail_label"
+      ]
+    }
+  },
+  "frequency": {
+      "type": "combobox",
+      "default": "1.0",
+      "options": {
+          "0.5": "0.5",
+          "1.0": "1.0",
+          "2.0": "2.0",
+          "3.0": "3.0",
+          "4.0": "4.0",
+          "5.0": "5.0",
+          "10.0": "10.0"
+      },
+      "description": "Update frequency (seconds)",
+      "tooltip": "The amount of time (in seconds) between the graph updates."
+  },
+  "graph_line_mode": {
+    "type": "combobox",
+    "default": "lines",
+    "options": {
+        "Don't draw grid lines" : "no",
+        "Draw graph over grid lines" : "graph",
+        "Draw grid lines over graph" : "lines"
+    },
+    "description": "Grid lines",
+    "tooltip": "How to draw the graph grid lines."
+  },
+  "theme": {
+      "type": "combobox",
+      "default": "dark",
+      "options": {
+          "dark theme": "dark",
+          "gray theme": "gray",                        
+          "light theme": "light",
+          "custom theme": "user"
+      },
+      "description": "Theme (graph)",
+      "tooltip": "Use 'custom theme' to select colors that matches your current desktop theme."
+  },
+  "border_color": {
+      "type": "colorchooser",
+      "default": "rgba(255,255,255,0.5",
+      "description": "Border color",
+      "tooltip": "Click the button to select a border color for the graphs",
+      "indent": true,
+      "dependency": "theme=user"
+  },
+  "background_color1": {
+      "type": "colorchooser",
+      "default": "rgba(255,255,255,0.3)",
+      "description": "Background color 1",
+      "tooltip": "Click the button to select a starting color for the linear gradient of the graph background",
+      "indent": true,
+      "dependency": "theme=user"
+  },
+  "background_color2": {
+      "type": "colorchooser",
+      "default": "rgba(0,0,0,0.2)",
+      "description": "Background color 2",
+      "tooltip": "Click the button to select a ending color for the linear gradient of the graph background",
+      "indent": true,
+      "dependency": "theme=user"
+  },
+  "label_color": {
+      "type": "colorchooser",
+      "default": "rgb(64,64,64)",
+      "description": "Label color",
+      "tooltip": "Click the button to select a label color",
+      "indent": true,
+      "dependency": "theme=user"
+  },
+  "label_size": {
+      "type": "spinbutton",
+      "default": 7,
+      "min": 5,
+      "max": 25,
+      "step": 1,
+      "units" : "",
+      "description": "Label font size",
+      "tooltip": "Set the font size for the main label.",
+      "dependency": "theme=user"
+  },
+  "detail_label_color": {
+      "type": "colorchooser",
+      "default": "rgb(32,32,32)",
+      "description": "Detail label color",
+      "tooltip": "Click the button to select a detail label color",
+      "indent": true,
+      "dependency": "theme=user"
+  },
+  "detail_label_size": {
+      "type": "spinbutton",
+      "default": 9,
+      "min": 5,
+      "max": 25,
+      "step": 1,
+      "units" : "",
+      "description": "Detail label font size",
+      "tooltip": "Set the font size for the detail label.",
+      "dependency": "theme=user"
+  },
+  "theme_data": {
+      "type": "combobox",
+      "default": "default",
+      "options": {
+          "default theme": "default",
+          "blue theme": "blue",
+          "gray theme": "gray",
+          "custom theme": "user"
+      },
+      "description": "Theme (graph data)",
+      "tooltip": "Use 'custom theme' to select colors that matches your current desktop theme."
+  },
+  "graph_color1": {
+      "type": "colorchooser",
+      "default": "rgba(51,178,255,1)",
+      "description": "Graph color 1",
+      "tooltip": "Click the button to select a starting color for the linear gradient of the graph colors. Offset for the first color is always 0.",
+      "indent": true,
+      "dependency": "theme_data=user"
+  },
+  "graph_color2": {
+      "type": "colorchooser",
+      "default": "rgba(102,255,76,1)",
+      "description": "Graph color 2",
+      "tooltip": "Click the button to select a first middle color for the linear gradient of the graph colors.",
+      "indent": true,
+      "dependency": "theme_data=user"
+  },
+  "graph_offset2": {
+      "type": "spinbutton",
+      "default": 0.60,
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "units" : "",
+      "description": "Offset for graph color 2",
+      "tooltip": "Offset for first middle color of the linear gradient",
+      "dependency": "theme_data=user"
+  },
+  "graph_color3": {
+      "type": "colorchooser",
+      "default": "rgba(255,255,51,1)",
+      "description": "Graph color 3",
+      "tooltip": "Click the button to select a second middle color for the linear gradient of the graph colors.",
+      "indent": true,
+      "dependency": "theme_data=user"
+  },
+  "graph_offset3": {
+      "type": "spinbutton",
+      "default": 0.40,
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "units" : "",
+      "description": "Offset for graph color 3",
+      "tooltip": "Offset for second middle color of the linear gradient",
+      "dependency": "theme_data=user"
+  },
+  "graph_color4": {
+      "type": "colorchooser",
+      "default": "rgba(255,0,0,1)",
+      "description": "Graph color 4",
+      "tooltip": "Click the button to select a ending color for the linear gradient of the graph colors. Offset for the last color is always 1.",
+      "indent": true,
+      "dependency": "theme_data=user"
+  },
+  "cpu_enable_graph": {
+      "type": "checkbox",
+      "default": true,
+      "description": "Show CPU graph",
+      "tooltip": "Show or hide the CPU graph"
+  },
+  "cpu_size": {
+      "type": "spinbutton",
+      "default": 50,
+      "min": 10,
+      "max": 500,        
+      "step": 1,
+      "units" : "",
+      "description": "Horizontal panel width or vertical panel height",
+      "tooltip":"Set the width of the graph for horizontal panels, or the height of the graph for vertical panels.",
+      "dependency": "cpu_enable_graph"
+  },
+  "cpu_use_custom_label": {
+      "type": "checkbox",
+      "default": false,
+      "description": "Use custom graph label",
+      "tooltip": "Choose your own label for the CPU graph",
+      "dependency": "cpu_enable_graph"
+  },
+  "cpu_custom_label": {
+      "type": "entry",
+      "default": "CPU",
+      "description": "Set the custom label for the CPU graph",
+      "dependency": "cpu_enable_graph"
+  },
+  "cpu_show_detail_label": {
+      "type": "checkbox",
+      "default": true,
+      "description": "Show details",
+      "tooltip": "Show or hide the CPU usage label",
+      "dependency": "cpu_enable_graph"
+  },
+  "mem_enable_graph": {
+      "type": "checkbox",
+      "default": true,
+      "description": "Show the memory graph",
+      "tooltip": "Show or hide the memory graph"
+  },
+  "mem_size": {
+      "type": "spinbutton",
+      "default": 50,
+      "min": 10,
+      "max": 500,        
+      "step": 1,
+      "units" : "",
+      "description": "Horizontal panel width or vertical panel height.",
+      "tooltip":"Set the width of the graph for horizontal panels, or the height of the graph for vertical panels.",
+      "dependency": "mem_enable_graph"
+  },
+  "mem_use_custom_label": {
+      "type": "checkbox",
+      "default": false,
+      "description": "Use custom graph label",
+      "tooltip": "Choose your own label for the memory graph",
+      "dependency": "mem_enable_graph"
+  },
+  "mem_custom_label": {
+      "type": "entry",
+      "default": "MEM",
+      "description": "Set the custom label for the memory graph",
+      "dependency": "mem_enable_graph"
+  },
+  "mem_show_detail_label": {
+      "type": "checkbox",
+      "default": true,
+      "description": "Show details",
+      "tooltip": "Show or hide the memory usage label",
+      "dependency": "mem_enable_graph"
+  },
+  "netin_enable_graph": {
+      "type": "checkbox",
+      "default": true,
+      "description": "Show NET (in) graph",
+      "tooltip": "Show or hide the NET (in) graph"
+  },
+  "netin_size": {
+      "type": "spinbutton",
+      "default": 50,
+      "min": 10,
+      "max": 500,
+      "step": 1,
+      "units" : "",
+      "description": "Horizontal panel width or vertical panel height.",
+      "tooltip":"Set the width of the graph for horizontal panels, or the height of the graph for vertical panels.",
+      "dependency": "netin_enable_graph"
+  },
+  "netin_speed": {
+      "type": "spinbutton",
+      "default": 100,
+      "min": 1,
+      "max": 1000000,
+      "units": "Mbit/s",
+      "step": 1,
+      "description": "Internet speed (in).",
+      "tooltip": "Set your internet speed (in) in Mbit/s. Note that sometimes ISP:s delivers better or worse speed than what you have paid for. You might need to adjust this value up or down, to make it look right to you.",
+      "dependency": "netin_enable_graph"
+  },
+  "netin_use_custom_label": {
+      "type": "checkbox",
+      "default": false,
+      "description": "Use custom graph label",
+      "tooltip": "Choose your own label for the NET (in) graph",
+      "dependency": "netin_enable_graph"
+  },
+  "netin_custom_label": {
+      "type": "entry",
+      "default": "NET (in)",
+      "description": "Set the custom label for the NET (in) graph",
+      "dependency": "netin_enable_graph"
+  },
+  "netin_linlog": {
+      "type": "combobox",
+      "default": "lin",
+      "options": {
+          "logarithmic": "log",
+          "linear": "lin"
+      },
+      "description": "Scale",
+      "tooltip": "Use linear or logarithmic scale.",
+      "dependency": "netin_enable_graph"
+  },
+  "netin_show_detail_label": {
+      "type": "checkbox",
+      "default": true,
+      "description": "Show details",
+      "tooltip": "Show or hide the NET (in) usage label",
+      "dependency": "netin_enable_graph"
+  },
+  "netout_enable_graph": {
+      "type": "checkbox",
+      "default": true,
+      "description": "Show NET (out) graph",
+      "tooltip": "Show or hide the NET (out) graph"
+  },
+  "netout_size": {
+      "type": "spinbutton",
+      "default": 50,
+      "min": 10,
+      "max": 500,
+      "step": 1,
+      "units" : "",
+      "description": "Horizontal panel width or vertical panel height.",
+      "tooltip":"Set the width of the graph for horizontal panels, or the height of the graph for vertical panels.",
+      "dependency": "netout_enable_graph"
+  },
+  "netout_speed": {
+      "type": "spinbutton",
+      "default": 100,
+      "min": 1,
+      "max": 1000000,
+      "units": "Mbit/s",
+      "step": 1,
+      "description": "Internet speed (out).",
+      "tooltip": "Set your internet speed (out) in Mbit/s. Note that sometimes ISP:s delivers better or worse speed than what you have paid for. You might need to adjust this value up or down, to make it look right to you.",
+      "dependency": "netout_enable_graph"
+  },
+  "netout_use_custom_label": {
+      "type": "checkbox",
+      "default": false,
+      "description": "Use custom graph label",
+      "tooltip": "Choose your own label for the NET (out) graph",
+      "dependency": "netout_enable_graph"
+  },
+  "netout_custom_label": {
+      "type": "entry",
+      "default": "NET (out)",
+      "description": "Set the custom label for the NET (out) graph",
+      "dependency": "netout_enable_graph"
+  },
+  "netout_linlog": {
+      "type": "combobox",
+      "default": "lin",
+      "options": {
+          "logarithmic": "log",
+          "linear": "lin"
+      },
+      "description": "Scale",
+      "tooltip": "Use linear or logarithmic scale.",
+      "dependency": "netout_enable_graph"
+  },
+  "netout_show_detail_label": {
+      "type": "checkbox",
+      "default": true,
+      "description": "Show details",
+      "tooltip": "Show or hide the NET (out) usage label",
+      "dependency": "netout_enable_graph"
+  },
+  "diskread_enable_graph": {
+    "type": "checkbox",
+    "default": true,
+    "description": "Show DISK (read) graph",
+    "tooltip": "Show or hide the DISK (read) graph. Shows usage of the drive specified below."
+  },
+  "diskread_size": {
+      "type": "spinbutton",
+      "default": 50,
+      "min": 10,
+      "max": 500,
+      "step": 1,
+      "units" : "",
+      "description": "Horizontal panel width or vertical panel height.",
+      "tooltip":"Set the width of the graph for horizontal panels, or the height of the graph for vertical panels.",
+      "dependency": "diskread_enable_graph"
+  },
+  "diskread_device_name": {
+    "type": "combobox",
+    "default": "sda",
+    "options": {
+        "sda": "sda",
+        "sdb": "sdb",
+        "sdc": "sdc"
+    },
+    "description": "Set the device name to monitor for the DISK (read) graph.",
+    "tooltip": "Set the device name to monitor for the DISK (read) graph.",
+    "dependency": "diskread_enable_graph"
+  },
+  "diskread_use_custom_label": {
+      "type": "checkbox",
+      "default": false,
+      "description": "Use custom graph label.",
+      "tooltip": "Choose your own label for the DISK (read) graph.",
+      "dependency": "diskread_enable_graph"
+  },
+  "diskread_custom_label": {
+      "type": "entry",
+      "default": "DISK (read)",
+      "description": "Set the custom label for the DISK (read) graph.",
+      "dependency": "diskread_enable_graph"
+  },
+  "diskread_show_detail_label": {
+      "type": "checkbox",
+      "default": true,
+      "description": "Show details.",
+      "tooltip": "Show or hide the DISK (read) usage label.",
+      "dependency": "diskread_enable_graph"
+  },
+  "diskwrite_enable_graph": {
+    "type": "checkbox",
+    "default": true,
+    "description": "Show DISK (write) graph.",
+    "tooltip": "Show or hide the DISK (write) graph. Shows usage of the drive specified below."
+  },
+  "diskwrite_size": {
+      "type": "spinbutton",
+      "default": 50,
+      "min": 10,
+      "max": 500,
+      "step": 1,
+      "units" : "",
+      "description": "Horizontal panel width or vertical panel height.",
+      "tooltip":"Set the width of the graph for horizontal panels, or the height of the graph for vertical panels.",
+      "dependency": "diskwrite_enable_graph"
+  },
+  "diskwrite_device_name": {
+    "type": "combobox",
+    "default": "sda",
+    "options": {
+        "sda": "sda",
+        "sdb": "sdb",
+        "sdc": "sdc"
+    },
+    "description": "Set the device name to monitor for the DISK (write) graph.",
+    "tooltip": "Set the device name to monitor for the DISK (write) graph.",
+    "dependency": "diskwrite_enable_graph"
+  },
+  "diskwrite_use_custom_label": {
+      "type": "checkbox",
+      "default": false,
+      "description": "Use custom graph label.",
+      "tooltip": "Choose your own label for the DISK (write) graph.",
+      "dependency": "diskwrite_enable_graph"
+  },
+  "diskwrite_custom_label": {
+      "type": "entry",
+      "default": "DISK (write)",
+      "description": "Set the custom label for the DISK (write) graph.",
+      "dependency": "diskwrite_enable_graph"
+  },
+  "diskwrite_show_detail_label": {
+      "type": "checkbox",
+      "default": true,
+      "description": "Show details.",
+      "tooltip": "Show or hide the DISK (write) usage label.",
+      "dependency": "diskwrite_enable_graph"
+  },
+  "bat_enable_graph": {
+    "type": "checkbox",
+    "default": true,
+    "description": "Show BAT (battery) graph.",
+    "tooltip": "Show or hide the BAT (battery) graph. Shows battery level."
+  },
+  "bat_size": {
+      "type": "spinbutton",
+      "default": 50,
+      "min": 10,
+      "max": 500,
+      "step": 1,
+      "units" : "",
+      "description": "Horizontal panel width or vertical panel height.",
+      "tooltip":"Set the width of the graph for horizontal panels, or the height of the graph for vertical panels.",
+      "dependency": "bat_enable_graph"
+  },
+  "bat_use_custom_label": {
+      "type": "checkbox",
+      "default": false,
+      "description": "Use custom graph label.",
+      "tooltip": "Choose your own label for the BAT (battery) graph.",
+      "dependency": "bat_enable_graph"
+  },
+  "bat_custom_label": {
+      "type": "entry",
+      "default": "BAT",
+      "description": "Set the custom label for the BAT (battery) graph.",
+      "dependency": "bat_enable_graph"
+  },
+  "bat_show_detail_label": {
+      "type": "checkbox",
+      "default": true,
+      "description": "Show details.",
+      "tooltip": "Show or hide the BAT (battery) detail label.",
+      "dependency": "bat_enable_graph"
+  }    
+
+}

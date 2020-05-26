@@ -7,6 +7,7 @@
 // Copyright (C) 2012-2013 M D Bokil
 // Mylauncher Cinnamon Applet
 
+const UUID = "mylauncher@markbokil.com";
 const Version = "1.0.7";
 const Lang = imports.lang;
 const St = imports.gi.St;
@@ -18,6 +19,7 @@ const Util = imports.misc.util;
 const Gtk = imports.gi.Gtk; //needed for context menu
 const Gio = imports.gi.Gio; // file monitor
 const GLib = imports.gi.GLib;
+const Gettext = imports.gettext;
 const AppletMeta = imports.ui.appletManager.applets['mylauncher@markbokil.com'];
 const AppletDir = imports.ui.appletManager.appletMeta['mylauncher@markbokil.com'].path;
 const PropertiesFile = GLib.build_filenamev([global.userdatadir, 'applets/mylauncher@markbokil.com/mylauncher.properties']);
@@ -25,9 +27,14 @@ const SettingsJSON = GLib.build_filenamev([global.userdatadir, 'applets/mylaunch
 const HelpURL = "http://markbokil.com/downloads/mylauncher/help.php?appname=mylauncher&version=" + Version;
 const AboutURL = "http://markbokil.com/downloads/mylauncher/about.php?appname=mylauncher&version=" + Version;
 
-
 function PopupMenuItem(label, icon, callback) {
     this._init(label, icon, callback);
+}
+
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
 }
 
 function MyApplet(orientation) {
@@ -54,7 +61,7 @@ MyApplet.prototype = {
                 this.set_applet_icon_symbolic_name(this._json.icon);
             }
             
-            this.set_applet_tooltip(_('My Launcher'));
+            this.set_applet_tooltip(_("My Launcher"));
             
             // watch props file for changes
             let file = Gio.file_new_for_path(PropertiesFile);
@@ -173,18 +180,18 @@ MyApplet.prototype = {
 
     _createContextMenu: function () {    
         //edit 
-        this.edit_menu_item = new Applet.MenuItem(_('Edit launcher menu'), Gtk.STOCK_EDIT, 
+        this.edit_menu_item = new Applet.MenuItem(_("Edit launcher menu"), Gtk.STOCK_EDIT, 
             Lang.bind(this, this._editProperties));     
         this._applet_context_menu.addMenuItem(this.edit_menu_item);
         
         this._applet_context_menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem()); //separator
        
         //help
-        this.help_menu_item = new Applet.MenuItem(_('Help'), Gtk.STOCK_HELP, 
+        this.help_menu_item = new Applet.MenuItem(_("Help"), Gtk.STOCK_HELP, 
             Lang.bind(this, this._doHelp));     
         this._applet_context_menu.addMenuItem(this.help_menu_item); 
         //about
-        this.about_menu_item = new Applet.MenuItem(_('About'), Gtk.STOCK_ABOUT, 
+        this.about_menu_item = new Applet.MenuItem(_("About"), Gtk.STOCK_ABOUT, 
             Lang.bind(this, this._doAbout));     
         this._applet_context_menu.addMenuItem(this.about_menu_item); 
 

@@ -1,9 +1,0 @@
-{
-    "name": "System monitor with graphs",
-    "uuid": "system-monitor@pixunil",
-    "description": "Display CPU, Memory and Swap usage, Disk and Network rates as text and graphs",
-    "website": "https://github.com/pixunil/cinnamon-applet-system-monitor",
-    "icon": "utilities-system-monitor",
-    "version": "3.10",
-    "max-instances": 10
-}

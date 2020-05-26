@@ -6,12 +6,19 @@ const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
 const Settings = imports.ui.settings;
 const Util = imports.misc.util;
-
+const Gettext = imports.gettext;
 const Interfaces = imports.misc.interfaces
 const St = imports.gi.St;
 const PopupMenu = imports.ui.popupMenu;
 const Pango = imports.gi.Pango;
 const Main = imports.ui.main;
+const UUID = "CommandRunner@appdevsw";
+
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
 
 function AppletGui(applet, debug)
 {

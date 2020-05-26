@@ -1,0 +1,59 @@
+# sound150@claudiux Applet POT File.
+# Copyright (C) 2018 Claudiux <claude.clerc@gmail.com>
+# This file is distributed under the same license as the cinnamon package.
+# FIRST AUTHOR Claudiux <claude.clerc@gmail.com>, 2018.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: sound150@claudiux v1.0.0\n"
+"Report-Msgid-Bugs-To: Claudiux <claude.clerc@gmail.com>\n"
+"POT-Creation-Date: 2018-01-13 15:10+0100\n"
+"PO-Revision-Date: 2018-04-13 19:27+0200\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Last-Translator: claudiux <claude.clerc@gmail.com>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: es\n"
+
+#: metadata.json:2
+msgid "An applet, based on the Cinnamon one, to control sound (up to 150% of nominal volume) and music"
+msgstr "Un applet, basado en el de Cinnamon, para controlar el sonido (hasta el 150% del volumen nominal) y la música"
+
+#: metadata.json:5
+msgid "Sound 150%"
+msgstr "Sonido 150%"
+
+#: settings-schema.json:103
+msgid "% of nominal volume"
+msgstr "% del volumen nominal"
+
+#: settings-schema.json:85
+msgid "Maximum volume control"
+msgstr "Control de volumen máximo"
+
+#: settings-schema.json:86
+msgid "You can try to increase the volume of your sound card up to 150% of its nominal value. Use with caution. You can also set a value less than 100%, for example on a child's computer."
+msgstr "Puede intentar aumentar el volumen de su tarjeta de sonido hasta un 150% de su valor nominal. Usar con precaución. También puede establecer un valor inferior al 100%, por ejemplo, en la computadora de un niño."
+
+#: settings-schema.json:105
+msgid "Step"
+msgstr "Paso"
+
+#: settings-schema.json:109
+msgid "Magnetize the 'Volume 100%' mark"
+msgstr "Magnetizar el signo del 100% del volumen"
+
+#: settings-schema.json:110
+msgid "When checked, the 'Volume 100%' mark becomes magnetic: the volume is automatically set to 100% when the distance between the volume value and 100% is lesser than a half-step."
+msgstr "Cuando está marcada, la marca 'Volumen 100%' se vuelve magnética: el volumen se ajusta automáticamente al 100% cuando la diferencia entre el valor del volumen y el 100% es inferior a medio paso."
+
+#: settings-schema.json:115
+msgid "Adjust the color of the icon to the volume"
+msgstr "Ajustar el color del icono al volumen"
+
+#: settings-schema.json:116
+msgid "From 101% to 115%: yellow; from 116% to 130%: orange; beyond 130%: red."
+msgstr "Del 101% al 115%: amarillo; de 116% a 130%: naranja; más allá del 130%: rojo."

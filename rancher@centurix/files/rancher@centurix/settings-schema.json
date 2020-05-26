@@ -7,7 +7,7 @@
 	},
 	"homesteadConfigFolder": {
 		"type": "filechooser",
-		"default": "~/.homestead",
+		"default": "~/Homestead",
 		"description": "Homestead config folder",
 		"select-dir": true
 	},

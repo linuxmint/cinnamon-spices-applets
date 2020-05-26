@@ -1,0 +1,340 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-07-26 08:08-0500\n"
+"PO-Revision-Date: 2018-04-25 14:21+0200\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: hu\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"X-Generator: Poedit 1.8.7.1\n"
+
+#: specialMenus.js:63
+msgid "Close"
+msgstr "Bezár"
+
+#: specialMenus.js:66 specialMenus.js:198
+msgid "Minimize"
+msgstr "Minimalizálás"
+
+#: specialMenus.js:69 specialMenus.js:195
+msgid "Maximize"
+msgstr "Maximalizálás"
+
+#: specialMenus.js:72
+msgid "Move to left workspace"
+msgstr "Áthelyezés a bal oldali munkaterületre"
+
+#: specialMenus.js:75
+msgid "Move to right workspace"
+msgstr "Áthelyezés a jobb oldali munkaterületre"
+
+#: specialMenus.js:78 specialMenus.js:185
+msgid "Visible on all workspaces"
+msgstr "Minden munkaterületen látható"
+
+#: specialMenus.js:81
+msgid "New Window"
+msgstr "Új ablak"
+
+#: specialMenus.js:84
+msgid "Go to Settings"
+msgstr "Beállítások"
+
+#: specialMenus.js:87
+msgid "ReArrange"
+msgstr "Újrarendezés"
+
+#: specialMenus.js:90
+msgid "Show Pinned"
+msgstr "Rögzített alkalmazások megjelenítése"
+
+#: specialMenus.js:93
+msgid "Group Apps"
+msgstr "Alkalmazások csoportosítása"
+
+#: specialMenus.js:96
+msgid "Show Thumbs"
+msgstr "Előnézet megjelenítése"
+
+#: specialMenus.js:99
+msgid "Vertical Thumbs"
+msgstr ""
+
+#: specialMenus.js:102
+msgid "Stack Thumbs"
+msgstr ""
+
+#: specialMenus.js:105
+msgid "Hover to Peek"
+msgstr ""
+
+#: specialMenus.js:111 specialMenus.js:256
+msgid "Unpin App"
+msgstr "Feloldás a panelról"
+
+#: specialMenus.js:114 specialMenus.js:252
+msgid "Pin App"
+msgstr "Rögzítés a panelra"
+
+#: specialMenus.js:181
+msgid "Only on this workspace"
+msgstr "Csak ezen a munkaterületen"
+
+#: specialMenus.js:193
+msgid "Unmaximize"
+msgstr "Eredeti méret"
+
+#: specialMenus.js:197
+msgid "Restore"
+msgstr "Visszaállítás"
+
+#. WindowListGroup@jake.phy@gmail.com->metadata.json->description
+msgid "Window List with App Grouping an Window Thumbnails"
+msgstr ""
+
+#. WindowListGroup@jake.phy@gmail.com->metadata.json->name
+msgid "Window List With App Grouping"
+msgstr ""
+
+#. WindowListGroup@jake.phy@gmail.com->settings-schema.json->thumbnail-
+#. size->description
+msgid "Thumbnail Size:"
+msgstr ""
+
+#. WindowListGroup@jake.phy@gmail.com->settings-schema.json->thumbnail-
+#. size->tooltip
+#. WindowListGroup@jake.phy@gmail.com->settings-schema.json->hover-peek-
+#. opacity->tooltip
+msgid "Opacity of the windows on peek."
+msgstr ""
+
+#. WindowListGroup@jake.phy@gmail.com->settings-schema.json->thumbnail-
+#. size->units
+msgid "size"
+msgstr "méret"
+
+#. WindowListGroup@jake.phy@gmail.com->settings-schema.json->show-
+#. thumbnails->description
+msgid "Show Thumbnails"
+msgstr ""
+
+#. WindowListGroup@jake.phy@gmail.com->settings-schema.json->show-
+#. thumbnails->tooltip
+msgid "Show the Thumbnail Windows"
+msgstr ""
+
+#. WindowListGroup@jake.phy@gmail.com->settings-schema.json->hover-peek-
+#. time->description
+msgid "Window fade time:"
+msgstr ""
+
+#. WindowListGroup@jake.phy@gmail.com->settings-schema.json->hover-peek-
+#. time->tooltip
+msgid "The animation time for the windows on hover peek"
+msgstr ""
+
+#. WindowListGroup@jake.phy@gmail.com->settings-schema.json->hover-peek-
+#. time->units
+#. WindowListGroup@jake.phy@gmail.com->settings-schema.json->thumbnail-
+#. timeout->units
+msgid "milliseconds"
+msgstr "ezredmásodperc"
+
+#. WindowListGroup@jake.phy@gmail.com->settings-schema.json->title-
+#. display->description
+msgid "Title Display:"
+msgstr ""
+
+#. WindowListGroup@jake.phy@gmail.com->settings-schema.json->title-
+#. display->tooltip
+msgid ""
+"focused: show focused window title, title: display the window title, app: "
+"diplay app name, none: don't display anything"
+msgstr ""
+
+#. WindowListGroup@jake.phy@gmail.com->settings-schema.json->title-
+#. display->options
+#. WindowListGroup@jake.phy@gmail.com->settings-schema.json->number-
+#. display->options
+msgid "none"
+msgstr "nincs"
+
+#. WindowListGroup@jake.phy@gmail.com->settings-schema.json->title-
+#. display->options
+msgid "focused"
+msgstr "fókuszt kapott"
+
+#. WindowListGroup@jake.phy@gmail.com->settings-schema.json->title-
+#. display->options
+msgid "app"
+msgstr "alkalmazás"
+
+#. WindowListGroup@jake.phy@gmail.com->settings-schema.json->title-
+#. display->options
+msgid "title"
+msgstr "cím"
+
+#. WindowListGroup@jake.phy@gmail.com->settings-schema.json->hover-peek-
+#. opacity->description
+msgid "Window opacity:"
+msgstr "Ablak átlátszatlanság:"
+
+#. WindowListGroup@jake.phy@gmail.com->settings-schema.json->hover-peek-
+#. opacity->units
+msgid "percent"
+msgstr "százalék"
+
+#. WindowListGroup@jake.phy@gmail.com->settings-schema.json->enable-hover-
+#. peek->description
+msgid "Enable hover peek"
+msgstr ""
+
+#. WindowListGroup@jake.phy@gmail.com->settings-schema.json->enable-hover-
+#. peek->tooltip
+msgid "Enable Hover peek when mouse is over thumbnail"
+msgstr ""
+
+#. WindowListGroup@jake.phy@gmail.com->settings-schema.json->icon-
+#. padding->description
+msgid "Icon Padding:"
+msgstr ""
+
+#. WindowListGroup@jake.phy@gmail.com->settings-schema.json->icon-
+#. padding->tooltip
+msgid "How much Padding is between the icons"
+msgstr ""
+
+#. WindowListGroup@jake.phy@gmail.com->settings-schema.json->icon-
+#. padding->units
+msgid "padding"
+msgstr "térköz"
+
+#. WindowListGroup@jake.phy@gmail.com->settings-schema.json->show-
+#. pinned->description
+msgid "Show pinned apps"
+msgstr "Rögzített alkalmazások megjelenítése"
+
+#. WindowListGroup@jake.phy@gmail.com->settings-schema.json->show-
+#. pinned->tooltip
+msgid "Show the pinned apps or just show the open windows"
+msgstr ""
+
+#. WindowListGroup@jake.phy@gmail.com->settings-
+#. schema.json->Space2->description
+#. WindowListGroup@jake.phy@gmail.com->settings-
+#. schema.json->Space1->description
+msgid " "
+msgstr ""
+
+#. WindowListGroup@jake.phy@gmail.com->settings-
+#. schema.json->WindowList->description
+msgid "Window List Settings"
+msgstr ""
+
+#. WindowListGroup@jake.phy@gmail.com->settings-
+#. schema.json->Thumbnails->description
+msgid "Thumbnail Settings"
+msgstr ""
+
+#. WindowListGroup@jake.phy@gmail.com->settings-schema.json->vertical-
+#. thumbnails->description
+msgid "Vertical Thumbnails"
+msgstr ""
+
+#. WindowListGroup@jake.phy@gmail.com->settings-schema.json->vertical-
+#. thumbnails->tooltip
+msgid "Arrange thumbnails vertically or horizontally"
+msgstr ""
+
+#. WindowListGroup@jake.phy@gmail.com->settings-schema.json->thumbnail-
+#. timeout->description
+msgid "Thumbnail timeout:"
+msgstr "Előnézet időtúllépése:"
+
+#. WindowListGroup@jake.phy@gmail.com->settings-schema.json->thumbnail-
+#. timeout->tooltip
+msgid "Thumbnail timeout"
+msgstr "Előnézet időtúllépése"
+
+#. WindowListGroup@jake.phy@gmail.com->settings-schema.json->stack-
+#. thumbnails->description
+msgid "Stack Thumbnails"
+msgstr ""
+
+#. WindowListGroup@jake.phy@gmail.com->settings-schema.json->stack-
+#. thumbnails->tooltip
+msgid ""
+"Stack the Thumbnail Windows if there are to many thumbnails for the screen"
+msgstr ""
+
+#. WindowListGroup@jake.phy@gmail.com->settings-schema.json->number-
+#. display->description
+msgid "Number Display:"
+msgstr ""
+
+#. WindowListGroup@jake.phy@gmail.com->settings-schema.json->number-
+#. display->tooltip
+msgid ""
+"normal: display window number, smart: display window number if more than one "
+"window, none: don't display number, all: display window number for favorites "
+"too"
+msgstr ""
+
+#. WindowListGroup@jake.phy@gmail.com->settings-schema.json->number-
+#. display->options
+msgid "all"
+msgstr "összes"
+
+#. WindowListGroup@jake.phy@gmail.com->settings-schema.json->number-
+#. display->options
+msgid "Smart"
+msgstr "intelligens"
+
+#. WindowListGroup@jake.phy@gmail.com->settings-schema.json->number-
+#. display->options
+msgid "normal"
+msgstr "normál"
+
+#. WindowListGroup@jake.phy@gmail.com->settings-schema.json->onclick-
+#. thumbnails->description
+msgid "Open Thumbnails OnClick"
+msgstr ""
+
+#. WindowListGroup@jake.phy@gmail.com->settings-schema.json->onclick-
+#. thumbnails->tooltip
+msgid "Open the thumbnails on click, if there is more than 1 windows open."
+msgstr ""
+
+#. WindowListGroup@jake.phy@gmail.com->settings-
+#. schema.json->HoverPeek->description
+msgid "Hover Peek Settings"
+msgstr ""
+
+#. WindowListGroup@jake.phy@gmail.com->settings-schema.json->group-
+#. apps->description
+msgid "Group apps into single icon"
+msgstr ""
+
+#. WindowListGroup@jake.phy@gmail.com->settings-schema.json->group-
+#. apps->tooltip
+msgid "Group the open app instances into single icon"
+msgstr ""
+
+#. WindowListGroup@jake.phy@gmail.com->settings-schema.json->arrange-
+#. pinnedApps->description
+msgid "Arrange pinned apps"
+msgstr ""
+
+#. WindowListGroup@jake.phy@gmail.com->settings-schema.json->arrange-
+#. pinnedApps->tooltip
+msgid "Arrange pinned apps into a different order"
+msgstr ""

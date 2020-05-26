@@ -1,6 +1,0 @@
-{
- "uuid": "clipboard-qr@ebbes",
- "name": "Clipboard QR code applet",
- "description": "Create QR codes from clipboard content",
- "icon": "edit-paste-symbolic"
-}

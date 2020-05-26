@@ -1,6 +1,7 @@
 {
-"uuid": "places-bookmarks@dmo60.de",
-"name": "Places",
-"description": "Access your places and bookmarks",
-"icon": "user-home"
+    "uuid": "places-bookmarks@dmo60.de",
+    "max-instances": -1,
+    "description": "Access your places and bookmarks",
+    "name": "Places",
+    "icon": "user-home"
 }

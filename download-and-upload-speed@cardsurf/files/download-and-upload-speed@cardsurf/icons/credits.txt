@@ -1,0 +1,10 @@
+arrow-pointing-down-symbolic.svg icon up made by Dave Gandy from www.flaticon.com
+arrow-up-symbolic.svg icon down made by Dave Gandy from www.flaticon.com
+Under CC 3.0 BY. licence: https://creativecommons.org/licenses/by/3.0/
+Link: https://www.flaticon.com/packs/font-awesome
+
+Changes:
+
+Changed alignment of icons to better fit with text.
+
+-------------------------------------------------

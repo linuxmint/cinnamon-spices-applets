@@ -1,0 +1,438 @@
+# Korean translation for gnome-shell-extension-weather.
+# Copyright (C) 2011
+# This file is distributed under the same license as the gnome-shell-extension-weather package.
+# Hang Park <hangpark@kaist.ac.kr>, 2017.
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: weather@mockturtl 1.13.7\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-06-12 12:27-0400\n"
+"PO-Revision-Date: 2017-02-12 14:49+0900\n"
+"Last-Translator: Hang Park <hangpark@kaist.ac.kr>\n"
+"Language-Team: Korean <hangpark@kaist.ac.kr>\n"
+"Language: ko\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: \n"
+
+#: applet.js:249
+msgid "..."
+msgstr "..."
+
+#: applet.js:250
+msgid "Click to open"
+msgstr "열기"
+
+#: applet.js:289
+msgid "Settings"
+msgstr "설정"
+
+#: applet.js:555
+msgid "Sunrise"
+msgstr "일출"
+
+#: applet.js:556
+msgid "Sunset"
+msgstr "일몰"
+
+#: applet.js:648
+msgid "Loading current weather ..."
+msgstr "현재 날씨를 가져오고 있습니다 ..."
+
+#: applet.js:649
+msgid "Loading future weather ..."
+msgstr "날씨 예보를 가져오고 있습니다 ..."
+
+#: applet.js:671
+msgid "Loading ..."
+msgstr "가져오는 중 ..."
+
+#: applet.js:677
+msgid "Refresh"
+msgstr "새로고침"
+
+#: applet.js:740
+msgid "Temperature:"
+msgstr "기온:"
+
+#: applet.js:742
+msgid "Humidity:"
+msgstr "습도:"
+
+#: applet.js:744
+msgid "Pressure:"
+msgstr "기압:"
+
+#: applet.js:746
+msgid "Wind:"
+msgstr "풍속:"
+
+#: applet.js:748
+msgid "Wind Chill:"
+msgstr "체감온도:"
+
+#: applet.js:953
+msgid "Tornado"
+msgstr "토네이도"
+
+#: applet.js:955
+msgid "Tropical storm"
+msgstr "열대 폭풍우"
+
+#: applet.js:957
+msgid "Hurricane"
+msgstr "허리케인"
+
+#: applet.js:959
+msgid "Severe thunderstorms"
+msgstr "강한 뇌우"
+
+#: applet.js:961
+msgid "Thunderstorms"
+msgstr "뇌우"
+
+#: applet.js:963
+msgid "Mixed rain and snow"
+msgstr "비와 눈"
+
+#: applet.js:965
+msgid "Mixed rain and sleet"
+msgstr "비와 진눈깨비"
+
+#: applet.js:967
+msgid "Mixed snow and sleet"
+msgstr "눈과 진눈깨비"
+
+#: applet.js:969
+msgid "Freezing drizzle"
+msgstr "착빙성 이슬비"
+
+#: applet.js:971
+msgid "Drizzle"
+msgstr "이슬비"
+
+#: applet.js:973
+msgid "Freezing rain"
+msgstr "착빙성 비"
+
+#: applet.js:975 applet.js:977
+msgid "Showers"
+msgstr "소나기"
+
+#: applet.js:979
+msgid "Snow flurries"
+msgstr "소낙눈"
+
+#: applet.js:981
+msgid "Light snow showers"
+msgstr "약한 소낙눈"
+
+#: applet.js:983
+msgid "Blowing snow"
+msgstr "날린 눈"
+
+#: applet.js:985
+msgid "Snow"
+msgstr "눈"
+
+#: applet.js:987
+msgid "Hail"
+msgstr "우박"
+
+#: applet.js:989
+msgid "Sleet"
+msgstr "진눈깨비"
+
+#: applet.js:991
+msgid "Dust"
+msgstr "먼지"
+
+#: applet.js:993
+msgid "Foggy"
+msgstr "안개"
+
+#: applet.js:995
+msgid "Haze"
+msgstr "아지랑이"
+
+#: applet.js:997
+msgid "Smoky"
+msgstr "연기"
+
+#: applet.js:999
+msgid "Blustery"
+msgstr "바람 거셈"
+
+#: applet.js:1001
+msgid "Windy"
+msgstr "바람 많음"
+
+#: applet.js:1003
+msgid "Cold"
+msgstr "추움"
+
+#: applet.js:1005
+msgid "Cloudy"
+msgstr "구름"
+
+#: applet.js:1008
+msgid "Mostly cloudy"
+msgstr "구름 많음"
+
+#: applet.js:1011 applet.js:1037
+msgid "Partly cloudy"
+msgstr "구름 약간"
+
+#: applet.js:1013
+msgid "Clear"
+msgstr "맑음"
+
+#: applet.js:1015
+msgid "Sunny"
+msgstr "화창"
+
+#: applet.js:1018
+msgid "Fair"
+msgstr "맑음"
+
+#: applet.js:1020
+msgid "Mixed rain and hail"
+msgstr "비와 우박"
+
+#: applet.js:1022
+msgid "Hot"
+msgstr "더움"
+
+#: applet.js:1024
+msgid "Isolated thunderstorms"
+msgstr "고립형 뇌우"
+
+#: applet.js:1027
+msgid "Scattered thunderstorms"
+msgstr "산재형 뇌우"
+
+#: applet.js:1029
+msgid "Scattered showers"
+msgstr "산재형 소나기"
+
+#: applet.js:1031 applet.js:1035
+msgid "Heavy snow"
+msgstr "폭설"
+
+#: applet.js:1033
+msgid "Scattered snow showers"
+msgstr "산재형 소낙눈"
+
+#: applet.js:1039
+msgid "Thundershowers"
+msgstr "천둥을 동반한 비"
+
+#: applet.js:1041
+msgid "Snow showers"
+msgstr "소낙눈"
+
+#: applet.js:1043
+msgid "Isolated thundershowers"
+msgstr "고립형 소낙눈"
+
+#: applet.js:1046
+msgid "Not available"
+msgstr "이용할 수 없음"
+
+#: applet.js:1051
+msgid "Monday"
+msgstr "월요일"
+
+#: applet.js:1051
+msgid "Tuesday"
+msgstr "화요일"
+
+#: applet.js:1051
+msgid "Wednesday"
+msgstr "수요일"
+
+#: applet.js:1051
+msgid "Thursday"
+msgstr "목요일"
+
+#: applet.js:1051
+msgid "Friday"
+msgstr "금요일"
+
+#: applet.js:1051
+msgid "Saturday"
+msgstr "토요일"
+
+#: applet.js:1051
+msgid "Sunday"
+msgstr "일요일"
+
+#: applet.js:1056
+msgid "N"
+msgstr "북풍"
+
+#: applet.js:1056
+msgid "NE"
+msgstr "북동풍"
+
+#: applet.js:1056
+msgid "E"
+msgstr "동풍"
+
+#: applet.js:1056
+msgid "SE"
+msgstr "남동풍"
+
+#: applet.js:1056
+msgid "S"
+msgstr "남풍"
+
+#: applet.js:1056
+msgid "SW"
+msgstr "남서풍"
+
+#: applet.js:1056
+msgid "W"
+msgstr "서풍"
+
+#: applet.js:1056
+msgid "NW"
+msgstr "북서풍"
+
+#. cinnamon-weather->settings-schema.json->woeidLookup->description
+msgid "Get WOEID"
+msgstr "WOEID 얻기"
+
+#. cinnamon-weather->settings-schema.json->verticalOrientation->description
+msgid "Vertical orientation"
+msgstr "세로쓰기"
+
+#. cinnamon-weather->settings-schema.json->showTextInPanel->description
+msgid "Display current temperature in panel"
+msgstr "패널에 현재 기온 출력"
+
+#. cinnamon-weather->settings-schema.json->woeid->description
+msgid "WOEID"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->woeid->tooltip
+msgid "Where On Earth ID"
+msgstr "위치 코드(Where On Earth ID)"
+
+#. cinnamon-weather->settings-schema.json->temperatureUnit->description
+msgid "Temperature unit"
+msgstr "기온 단위"
+
+#. cinnamon-weather->settings-schema.json->temperatureUnit->options
+msgid "fahrenheit"
+msgstr "화씨"
+
+#. cinnamon-weather->settings-schema.json->temperatureUnit->options
+msgid "celsius"
+msgstr "섭씨"
+
+#. cinnamon-weather->settings-schema.json->translateCondition->description
+msgid "Translate condition"
+msgstr "번역"
+
+#. cinnamon-weather->settings-schema.json->locationLabelOverride->description
+msgid "Override location label"
+msgstr "지역명 덮어쓰기"
+
+#. cinnamon-weather->settings-schema.json->show24Hours->description
+msgid "Display time in 24 hour format"
+msgstr "24시간제"
+
+#. cinnamon-weather->settings-schema.json->forecastDays->description
+msgid "Forecast length"
+msgstr "기상예보 기간"
+
+#. cinnamon-weather->settings-schema.json->forecastDays->units
+msgid "days"
+msgstr "일"
+
+#. cinnamon-weather->settings-schema.json->showSunrise->description
+msgid "Show sunrise / sunset times"
+msgstr "일출 / 일몰 시간 출력"
+
+#. cinnamon-weather->settings-schema.json->windSpeedUnit->description
+msgid "Wind speed unit"
+msgstr "풍속 단위"
+
+#. cinnamon-weather->settings-schema.json->windSpeedUnit->options
+msgid "kph"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->windSpeedUnit->options
+msgid "m/s"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->windSpeedUnit->options
+msgid "knots"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->windSpeedUnit->options
+msgid "mph"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->showCommentInPanel->description
+msgid "Show the weather condition (e.g., \"Windy\", \"Clear\") in the panel"
+msgstr "패널에 날씨 상태(\"바람\", \"맑음\" 등)를 출력"
+
+#. cinnamon-weather->settings-schema.json->pressureUnit->description
+msgid "Atmospheric pressure unit"
+msgstr "기압 단위"
+
+#. cinnamon-weather->settings-schema.json->pressureUnit->options
+msgid "psi"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->pressureUnit->options
+msgid "atm"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->pressureUnit->options
+msgid "kPa"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->pressureUnit->options
+msgid "Pa"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->pressureUnit->options
+msgid "mm Hg"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->pressureUnit->options
+msgid "at"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->pressureUnit->options
+msgid "mbar"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->pressureUnit->options
+msgid "in Hg"
+msgstr ""
+
+#. cinnamon-weather->settings-schema.json->refreshInterval->description
+msgid "Update interval"
+msgstr "업데이트 간격"
+
+#. cinnamon-weather->settings-schema.json->refreshInterval->units
+msgid "minutes"
+msgstr "분"
+
+#. cinnamon-weather->settings-schema.json->useSymbolicIcons->description
+msgid "Symbolic icons"
+msgstr "심볼릭 아이콘"
+
+#. cinnamon-weather->metadata.json->description
+msgid "View your local weather forecast"
+msgstr "당신의 지역 날씨정보를 보여줍니다"
+
+#. cinnamon-weather->metadata.json->name
+msgid "Weather"
+msgstr "날씨"

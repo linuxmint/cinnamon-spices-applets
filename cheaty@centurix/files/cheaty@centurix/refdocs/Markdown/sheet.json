@@ -1,0 +1,118 @@
+{
+	"name": "Markdown",
+	"description": "Markdown cheatsheet",
+	"author": "Chris Read",
+	"email": "centurix@gmail.com",
+	"repository": "http://fipo.co",
+	"version": "1.0",
+	"sections": {
+		"Headers": {
+			"Level 1": {
+				"code": "# H1",
+				"description": "Level 1 heading"
+			},
+			"Level 2": {
+				"code": "## H2",
+				"description": "Level 2 heading"
+			},
+			"Level 3": {
+				"code": "### H3",
+				"description": "Level 3 heading"
+			},
+			"Level 4": {
+				"code": "#### H4",
+				"description": "Level 4 heading"
+			},
+			"Level 5": {
+				"code": "##### H5",
+				"description": "Level 5 heading"
+			},
+			"Level 6": {
+				"code": "###### H6",
+				"description": "Level 6 heading"
+			}
+		},
+		"Lists": {
+			"Ordered": {
+				"code": "1. Item 1",
+				"description": "Ordered list items, the number at the start doesn't matter, just has to be a number"
+			},
+			"Unordered": {
+				"code": "* Item 1",
+				"description": "Unordered list items",
+				"alternatives": {
+					"-": {
+						"code": "- Item 1"
+					},
+					"+": {
+						"code": "+ Item 1"
+					}
+				}
+			},
+			"Sub-lists": {
+				"code": "..* Sub-Item 1",
+				"description": "Sub-list item, the two dots at the beginning are spaces"
+			},
+			"Indented paragraphs": {
+				"code": "\n..Paragraph text",
+				"description": "The two dots at the beginning are spaces. A blank line must preceed the paragraph between the last list item."
+			}
+		},
+		"Links": {
+			"Inline": {
+				"code": "[Link display text](url)",
+				"description": "Shows a simple in-line style link",
+				"alternatives": {
+					"Include a page title": {
+						"code": "[Link display text](url \"Page title\")"
+					}
+				}
+			},
+			"Reference link": {
+				"code": "[Link display text][]",
+				"description": "Show a reference link"
+			}
+		},
+		"Images": {
+			"Inline": {
+				"code": "[image title](Image url)",
+				"description": "Show an image inline"
+			}
+		},
+		"Code": {
+			"Inline": {
+				"code": "Inline `code` formatting",
+				"description": "Provides non-blocked code formatting"
+			},
+			"Blocked": {
+				"code": "```\nBlocked code\n```",
+				"description": "Provides blocked code formatting",
+				"alternatives": {
+					"Language declaration": {
+						"code": "```python\nBlocked Python code\n```"
+					}
+				}
+			}
+		},
+		"Blockquotes": {
+			"Blocked": {
+				"code": "> Block quote line 1\n> Block quote line 2",
+				"description": "Provide blockquote indentation"
+			}
+		},
+		"Horizontal Rule": {
+			"Regular": {
+				"code": "Text\n---\nMore text",
+				"description": "Three or more hyphens defines a horizontal rule",
+				"alternatives": {
+					"Asterisks": {
+						"code": "Text\n***\nMore text"
+					},
+					"Underscores": {
+						"code": "Text\n___\nMore text"
+					}
+				}
+			}
+		}
+	}
+}

@@ -2,8 +2,8 @@
 const Lang = imports.lang;
 const Applet = imports.ui.applet;
 const GLib = imports.gi.GLib;
-const Gettext = imports.gettext.domain('cinnamon-applets');
-const _ = Gettext.gettext;
+const Gettext = imports.gettext;
+const UUID = "softyubikey@yubiserver.include.gr";
 const Util = imports.misc.util
 const PopupMenu = imports.ui.popupMenu;
 const St = imports.gi.St;
@@ -17,6 +17,12 @@ const Clutter = imports.gi.Clutter;
 let ykey
 let yubikey_icon
 let softyubikey_settings
+
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
 
 function PopupMenuItem(label, icon, callback) {
     this._init(label, icon, callback);
@@ -54,7 +60,7 @@ MyApplet.prototype = {
 //	    this.set_applet_icon_name("softyubikey");
             this.set_applet_tooltip(_("Click here to create a OTP"));
 
-	    this.config_item = new PopupMenuItem(_('Configure your SoftYubikey'), Gtk.STOCK_REMOVE, Lang.bind(this, this.config_yubikey));
+	    this.config_item = new PopupMenuItem(_("Configure your SoftYubikey"), Gtk.STOCK_REMOVE, Lang.bind(this, this.config_yubikey));
             this._applet_context_menu.addMenuItem(this.config_item);
         }
         catch (e) {

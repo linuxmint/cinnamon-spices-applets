@@ -1,0 +1,63 @@
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-04-28 15:32+0800\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.11\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: applet.js:61
+msgid "Has never run succesfully!"
+msgstr "从未成功运行！"
+
+#: applet.js:77
+msgid "Last successful back-up completed on"
+msgstr "上次成功的备份完成在"
+
+#: applet.js:100
+msgid "Has never run successfully!"
+msgstr "从未成功运行！"
+
+#. back-up_state@natsakis.com->metadata.json->description
+msgid ""
+"Probes for the state of a certain rsync back-up by checking the exit status "
+"of the log file"
+msgstr "通过检查日志文件的退出状态来检测某个rsync备份的状态"
+
+#. back-up_state@natsakis.com->metadata.json->name
+msgid "Back-up State"
+msgstr "备份状态"
+
+#. back-up_state@natsakis.com->settings-schema.json->id_string->description
+msgid "String to be searched for "
+msgstr "要搜索的字符串"
+
+#. back-up_state@natsakis.com->settings-schema.json->id_string->tooltip
+msgid ""
+"Set the string that will be searched for in your log file, to determine the "
+"last good back-up"
+msgstr "设置要在您的日志文件搜索的字符串，以确定最后的备份良好"
+
+#. back-up_state@natsakis.com->settings-schema.json->log_file->description
+msgid "Log file "
+msgstr "日志文件"
+
+#. back-up_state@natsakis.com->settings-schema.json->refresh_int->description
+msgid "Refresh interval (min):  "
+msgstr "刷新间隔（分）："
+
+#. back-up_state@natsakis.com->settings-schema.json->error_days->description
+msgid "Error after days:  "
+msgstr "天后错误："
+
+#. back-up_state@natsakis.com->settings-schema.json->warning_days->description
+msgid "Warning after days:  "
+msgstr "天后警告："

@@ -8,11 +8,20 @@ const St = imports.gi.St;
 const Util = imports.misc.util;
 const PopupMenu = imports.ui.popupMenu;
 const Main = imports.ui.main;
+const Gettext = imports.gettext;
+const UUID = "gputemperature@silentage.com";
+
+// l10n/translation support
+
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
 
 var has_nvidia_smi=false;
 var has_nvidia_settings=false;
 var has_sensors=false;
-
 
 /*   The Popup Menu */
 function GPUMenu(launcher, orientation)
@@ -58,17 +67,17 @@ GPUTemp.prototype =
 
 			if((has_nvidia_settings==true))
 			{
-				this.set_applet_tooltip("Current Temperature of your NVidia based GPU");
+				this.set_applet_tooltip(_("Current Temperature of your NVidia based GPU"));
 				this._getNvidiaGpuTemperature();
 			}
 			else if(has_sensors==true)
 			{
-				this.set_applet_tooltip("Current Temperature of your ATI based GPU");
+				this.set_applet_tooltip(_("Current Temperature of your ATI based GPU"));
 				this._getAtiGpuTemperature();
 			}
 			else
 			{
-				this.set_applet_tooltip("No supported GPUs detected.");
+				this.set_applet_tooltip(_("No supported GPUs detected."));
 				this._noGpuSource();
 			}
 		}
@@ -121,7 +130,7 @@ GPUTemp.prototype =
 						if(currentTemperature!=null)
 						{
 							totalTemperature += parseFloat(currentTemperature);
-							this.menu.addMenuItem( new PopupMenu.PopupMenuItem("Temperature: " + this._formatTemperature(currentTemperature.toString()), {reactive:false}));
+							this.menu.addMenuItem( new PopupMenu.PopupMenuItem(_("Temperature") + ": " + this._formatTemperature(currentTemperature.toString()), {reactive:false}));
 						}
 						else
 						{
@@ -336,11 +345,11 @@ GPUTemp.prototype =
 							}
 							if(SettingsObject.gpus[n].gpuCoreTemp != null)
 							{
-								this.menu.addMenuItem(new PopupMenu.PopupMenuItem("     Temperature:  " + SettingsObject.gpus[n].gpuCoreTemp, {reactive:false}));
+								this.menu.addMenuItem(new PopupMenu.PopupMenuItem("     " + _("Temperature") + ":  " + SettingsObject.gpus[n].gpuCoreTemp, {reactive:false}));
 							}
 							if(SettingsObject.gpus[n].driverVersion != null)
 							{
-								this.menu.addMenuItem(new PopupMenu.PopupMenuItem("     Driver  :  " + SettingsObject.gpus[n].driverVersion, {reactive:false}));
+								this.menu.addMenuItem(new PopupMenu.PopupMenuItem("     " + _("Driver") + "  :  " + SettingsObject.gpus[n].driverVersion, {reactive:false}));
 							}
 							//if(SettingsObject.gpus[n].displays != null)
 							//{
@@ -348,35 +357,35 @@ GPUTemp.prototype =
 							//}
 							if((SettingsObject.gpus[n].totalRam != null)||(SettingsObject.gpus[n].usedRam != null)||(SettingsObject.gpus[n].memoryInterface != null)||(SettingsObject.gpus[n].memoryClock != null))
 							{
-								this.menu.addMenuItem(new PopupMenu.PopupMenuItem("     Video Memory", {reactive:false}));
+								this.menu.addMenuItem(new PopupMenu.PopupMenuItem("     " + _("Video Memory"), {reactive:false}));
 								if(SettingsObject.gpus[n].totalRam != null)
 								{
-									this.menu.addMenuItem(new PopupMenu.PopupMenuItem("          Total:  " + SettingsObject.gpus[n].totalRam, {reactive:false}));
+									this.menu.addMenuItem(new PopupMenu.PopupMenuItem("          " + _("Total") + ":  " + SettingsObject.gpus[n].totalRam, {reactive:false}));
 								}
 								if(SettingsObject.gpus[n].usedRam != null)
 								{
-									this.menu.addMenuItem(new PopupMenu.PopupMenuItem("          Used :  " + SettingsObject.gpus[n].usedRam, {reactive:false}));
+									this.menu.addMenuItem(new PopupMenu.PopupMenuItem("          " + _("Used") + " :  " + SettingsObject.gpus[n].usedRam, {reactive:false}));
 								}
 								if(SettingsObject.gpus[n].memoryInterface != null)
 								{
-									this.menu.addMenuItem(new PopupMenu.PopupMenuItem("          Interface:  " + SettingsObject.gpus[n].memoryInterface, {reactive:false}));
+									this.menu.addMenuItem(new PopupMenu.PopupMenuItem("          " + _("Interface") + ":  " + SettingsObject.gpus[n].memoryInterface, {reactive:false}));
 								}
 								if(SettingsObject.gpus[n].memoryClock != null)
 								{
-									this.menu.addMenuItem(new PopupMenu.PopupMenuItem("          Memory Clock:  " + SettingsObject.gpus[n].memoryClock, {reactive:false}));
+									this.menu.addMenuItem(new PopupMenu.PopupMenuItem("          " + _("Memory Clock") + ":  " + SettingsObject.gpus[n].memoryClock, {reactive:false}));
 								}
 							}
 							if(SettingsObject.gpus[n].cudaCores != null)
 							{
-								this.menu.addMenuItem(new PopupMenu.PopupMenuItem("     Cuda Cores:  " + SettingsObject.gpus[n].cudaCores, {reactive:false}));
+								this.menu.addMenuItem(new PopupMenu.PopupMenuItem("     " + _("Cuda Cores") + ":  " + SettingsObject.gpus[n].cudaCores, {reactive:false}));
 							}
 							if(SettingsObject.gpus[n].gpuClock != null)
 							{
-								this.menu.addMenuItem(new PopupMenu.PopupMenuItem("     Gpu Clock:  " + SettingsObject.gpus[n].gpuClock, {reactive:false}));
+								this.menu.addMenuItem(new PopupMenu.PopupMenuItem("     " + _("Gpu Clock") + ":  " + SettingsObject.gpus[n].gpuClock, {reactive:false}));
 							}
 							if((SettingsObject.gpus[n].pciLinkSpeed != null)&&(SettingsObject.gpus[n].pciLanes != null))
 							{
-								this.menu.addMenuItem(new PopupMenu.PopupMenuItem("     PCI Speed:  " + SettingsObject.gpus[n].pciLanes + " @ " + SettingsObject.gpus[n].pciLinkSpeed, {reactive:false}));
+								this.menu.addMenuItem(new PopupMenu.PopupMenuItem("     " + _("PCI Speed") + ":  " + SettingsObject.gpus[n].pciLanes + " @ " + SettingsObject.gpus[n].pciLinkSpeed, {reactive:false}));
 							}
 						}
 
@@ -391,7 +400,7 @@ GPUTemp.prototype =
 						{
 							if(SettingsObject.fans[n].speed != null)
 							{
-								this.menu.addMenuItem(new PopupMenu.PopupMenuItem("Fan " +n + ":  " + SettingsObject.fans[n].speed + "%", {reactive:false}));
+								this.menu.addMenuItem(new PopupMenu.PopupMenuItem(_("Fan ") +n + ":  " + SettingsObject.fans[n].speed + "%", {reactive:false}));
 							}
 						}
 					}
@@ -399,7 +408,7 @@ GPUTemp.prototype =
 				if((SettingsObject!=null)&&(SettingsObject.dpys!=null))
 				{
 					//this.menu.addMenuItem(new PopupMenu.PopupMenuItem("Specs " + SettingsObject.dpys.length + " Displays ("+SettingsObject.totalDisplays.toString() +")", {reactive:false}));
-					this.menu.addMenuItem(new PopupMenu.PopupMenuItem("Displays:", {reactive:false}));
+					this.menu.addMenuItem(new PopupMenu.PopupMenuItem(_("Displays:"), {reactive:false}));
 					for(let n=0;n<SettingsObject.dpys.length;n++)
 					{
 						try
@@ -501,7 +510,7 @@ GPUTemp.prototype =
 					bGpu=false;
 					bDisplay=false;
 				}
-				else if (gpuTest(line))
+				else if (gpuTest.test(line))
 				{
 					//global.logError(line);
 					bMain=false;
@@ -513,7 +522,7 @@ GPUTemp.prototype =
 					SettingsSettings.gpus[SettingsSettings.totalGpus-1] = new Object();
 					SettingsSettings.gpus[SettingsSettings.totalGpus-1].gpuId=gpu;
 				}
-				else if (fanTest(line))
+				else if (fanTest.test(line))
 				{
 					//global.logError(line);
 					bMain=false;
@@ -525,7 +534,7 @@ GPUTemp.prototype =
 					SettingsSettings.fans[SettingsSettings.totalFans-1] = new Object();
 					SettingsSettings.fans[SettingsSettings.totalFans-1].fanId=fan;
 				}
-				else if (displayTest(line))
+				else if (displayTest.test(line))
 				{
 					//global.logError(line);
 					bMain=false;
@@ -538,7 +547,7 @@ GPUTemp.prototype =
 					SettingsSettings.dpys[SettingsSettings.totalDisplays-1].displayId=display.toString();
 					//global.logError("Display:" + SettingsSettings.dpys[SettingsSettings.totalDisplays-1].displayId);
 				}
-				else if (otherSectionTest(line))
+				else if (otherSectionTest.test(line))
 				{
 					bMain=false;
 					bGpu=false;
@@ -728,7 +737,7 @@ GPUTemp.prototype =
 								}
 								else
 								{
-									SettingsSettings.gpus[num].gpuName = "No GPU Name";
+									SettingsSettings.gpus[num].gpuName = _("No GPU Name");
 								}
 							}
 						}
@@ -793,7 +802,7 @@ GPUTemp.prototype =
 								}
 								else
 								{
-									SettingsSettings.dpys[num].dpyName = "No Display Name";
+									SettingsSettings.dpys[num].dpyName = _("No Display Name");
 								}
 							}
 						}
@@ -832,16 +841,16 @@ GPUTemp.prototype =
 	},
 	_noGpuSource: function()
 	{
-		this.set_applet_label(" GPU: ??\u1d3cC ERROR");
+		this.set_applet_label(_(" GPU: ??\u1d3cC ERROR"));
 		this.menu.removeAll();
-		this.menu.addMenuItem(new PopupMenu.PopupMenuItem("We couldn't determine your GPU's temperature."), {reactive:false});
+		this.menu.addMenuItem(new PopupMenu.PopupMenuItem(_("We couldn't determine your GPU's temperature.")), {reactive:false});
 		this.menu.addMenuItem(new PopupMenu.PopupMenuItem(""), {reactive:false});
-		this.menu.addMenuItem(new PopupMenu.PopupMenuItem("If you have a NVIDIA GPU, please try installing"), {reactive:false});
-		this.menu.addMenuItem(new PopupMenu.PopupMenuItem("the binary drivers from http://geforce.com/drivers"), {reactive:false});
-		this.menu.addMenuItem(new PopupMenu.PopupMenuItem("and the nvidia-settings package for your distribution."), {reactive:false});
+		this.menu.addMenuItem(new PopupMenu.PopupMenuItem(_("If you have a NVIDIA GPU, please try installing")), {reactive:false});
+		this.menu.addMenuItem(new PopupMenu.PopupMenuItem(_("the binary drivers from http://geforce.com/drivers")), {reactive:false});
+		this.menu.addMenuItem(new PopupMenu.PopupMenuItem(_("and the nvidia-settings package for your distribution.")), {reactive:false});
 		this.menu.addMenuItem(new PopupMenu.PopupMenuItem(""), {reactive:false});
-		this.menu.addMenuItem(new PopupMenu.PopupMenuItem("If you have an ATI GPU, please install the LM-SENSORS"), {reactive:false});
-		this.menu.addMenuItem(new PopupMenu.PopupMenuItem("packages for your distribution."), {reactive:false});
+		this.menu.addMenuItem(new PopupMenu.PopupMenuItem(_("If you have an ATI GPU, please install the LM-SENSORS")), {reactive:false});
+		this.menu.addMenuItem(new PopupMenu.PopupMenuItem(_("packages for your distribution.")), {reactive:false});
 	},
 	_formatTemperature: function(t) 
 	{

@@ -1,0 +1,58 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-11-08 12:03+0300\n"
+"PO-Revision-Date: 2017-11-08 12:05+0300\n"
+"Language-Team: Linux Mint Türkiye\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: tr\n"
+
+#. radio@driglu4it->metadata.json->name
+#: applet.js:25 applet.js:48
+msgid "Radio++"
+msgstr "Radyo++"
+
+#: applet.js:39
+#, javascript-format
+msgid "Playing %s"
+msgstr "%s çalıyor"
+
+#: applet.js:46 applet.js:51
+msgid "Stop"
+msgstr "Dur"
+
+#. radio@driglu4it->settings-schema.json->section1->title
+msgid "Radio"
+msgstr "Radyo"
+
+#. radio@driglu4it->settings-schema.json->page1->title
+#. radio@driglu4it->settings-schema.json->tree->description
+msgid "List of stations"
+msgstr "İstasyonların listesi"
+
+#. radio@driglu4it->settings-schema.json->tree->columns->title
+msgid "Title"
+msgstr "Başlık"
+
+#. radio@driglu4it->settings-schema.json->tree->columns->title
+msgid "URL"
+msgstr "Adres"
+
+#. radio@driglu4it->metadata.json->description
+msgid ""
+"This simple radio for Cinnamon. Require moc player. In setting you may add, "
+"edit and remove stations."
+msgstr ""
+"Bu Cinnamon için basit bir radyo uygulamacığıdır. Moc player gerektirir. "
+"Ayarlardan radyo istasyonu ekleme, silme ve düzenlemesi yapılabilir."

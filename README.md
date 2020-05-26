@@ -30,7 +30,7 @@ A spice can contain many files, but it should have the following file structure:
 - UUID/files/
 - UUID/files/UUID
 - UUID/files/UUID/metadata.json
-- UUID/files/UUID/extension.js
+- UUID/files/UUID/applet.js
 
 There are two important directories:
 
@@ -39,12 +39,23 @@ There are two important directories:
 
 As you can see, the content of the spice isn't placed inside UUID/files/ directly, but inside UUID/files/UUID/ instead. This guarantees files aren't extracted directly onto the file system, but placed in the proper UUID directory. The presence of this UUID directory, inside of files/ isn't actually needed by Cinnamon (as Cinnamon creates it if it's missing), but it is needed to guarantee a proper manual installation (i.e. when users download the ZIP from the Cinnamon Spices website).
 
+Important note:
+
+- The UUID/files/ directory has to be "empty", which means that it should contain ONLY the UUID directory. Else the spice won't be installable through System Settings.
+
 At the root level:
 
 - info.json contains information about the spice. For instance, this is the file which contains the github username of the spice's author.
 - icon.png is the icon associated with the spice.
 - screenshot.png is a screenshot of the spice in action.
 - README.md is optional and can be used to show instructions and information about the spice. It appears both in Github and on the website.
+
+## Validation
+
+To check if a spice with UUID satifies those requirements run the `validate-spice` script in this repo:
+```
+./validate-spice UUID
+```
 
 # Rights and responsibility of the author
 
@@ -56,6 +67,10 @@ Authors can modify their spice under the following conditions:
 - They cannot introduce malicious code or code which would have a negative impact on the environment
 
 Authors are able to accept or refuse changes from other people which modify the features or the look of their spice.
+
+Authors may choose to pass on development of their applet to someone else. In that case, the "author" field in UUID/info.json will be changed to the new developer and the "original_author" field will be added to give credit to the original developer.
+
+If an author abandons their applet, the Linux Mint team will take over maintenance of the applet or pass it on to someone else. Several factors are used to determine if an applet is abandoned, including prolonged activity, failure to respond to requests, and serious breakages that have occurred due to changes in API, etc. If you plan to abandon an applet, please notify us, so we don't have to guess as to whether it is abandoned or not.
 
 # Pull requests from authors and workflow
 
@@ -73,13 +88,15 @@ If everything is fine, the PR is merged, the website is updated and users can se
 
 # Pull requests from other people
 
-In addition to the checks specified above, if the pull requests comes from somebody else than the author, the reviewer will need to check the nature of the changes.
+In addition to the checks specified above, if the pull request comes from somebody other than the author, it will be held until the author reviews it or gives a thumbs-up, with the following exceptions:
 
-If the changes represent a bug fix, the PR can be merged.
+- If it is a bug fix, the PR may be merged, though if the bug is minor, or the fix could potentially impact the way the applet works, we may wait for author approval before merging.
+- If the pull request adds translations it will likewise be merged. These are not going to effect the functionality of the code, and will make the applet available to many users who couldn't use it before due to a language barrier. We view this a essentially a bugfix, but it is included here for clarification.
+- If the author fails to respond in a reasonable time, we will assume the applet is abandoned (as mentioned above) and the pull request will be merged assuming it meets all other requirements.
 
 If the changes represent a change in functionality, or in look and feel, or if their implementation could be questioned and/or discussed, the reviewer should leave the PR open and ask the author to review it.
 
-If the author is happy with the PR, it can then be merged. If he's not, it can be closed instead.
+If the author is happy with the PR, it can then be merged. If he's not, it can either be closed or updated to reflect any changes the author requested, at which point it will either be merged or the author may be asked to review the changes depending on whether it is clear the changes fully meet the author's requirements.
 
 # Deletions
 
@@ -93,5 +110,34 @@ New spices can be added by Pull Request.
 
 The Cinnamon team can accept or reject the addition and should give justification in the PR comments section.
 
+# Reporting Bugs and Creating Pull Requests
 
+See the [Guidelines for Contributing](https://github.com/linuxmint/cinnamon-spices-applets/blob/master/.github/CONTRIBUTING.md)
 
+# Translations
+
+The script `cinnamon-spices-makepot` in this repo was written to help authors to update their translation template (`.pot`) file and to help translators to test their translations.
+
+Updating a translation template `.pot`:
+```
+./cinnamon-spices-makepot UUID
+```
+
+Test your translations `.po` locally before uploading to Spices:"
+```
+./cinnamon-spices-makepot UUID --install
+```
+
+More info:
+```
+./cinnamon-spices-makepot --help
+```
+
+# Auto-reloading applets
+
+A utility script using Gulp is provided that can automatically reload applets on code change. To use, install the [latest NodeJS LTS release](https://github.com/nodesource/distributions).
+- Run `npm install -g gulp@^4.0.0`
+- In the root of this repo's directory run `npm install`.
+- To use the script, run ```gulp watch --uuid="<applet uuid>"```
+
+For more info run ```gulp help```.

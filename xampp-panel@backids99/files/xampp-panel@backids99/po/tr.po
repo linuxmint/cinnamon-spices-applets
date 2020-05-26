@@ -1,0 +1,59 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-06-19 18:36+0300\n"
+"PO-Revision-Date: 2017-06-19 18:38+0300\n"
+"Language-Team: Linux Mint Türkiye\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Last-Translator: Gökhan Gökkaya <gokhanlnx@gmail.com>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: tr\n"
+
+#: applet.js:42
+msgid "Xampp Panel"
+msgstr "Xampp Panel"
+
+#: applet.js:50
+msgid "XAMPP Start"
+msgstr "XAMPP Başlat"
+
+#: applet.js:55
+msgid "XAMPP Stop"
+msgstr "XAMPP Durdur"
+
+#: applet.js:60
+msgid "XAMPP Restart"
+msgstr "XAMPP Yeniden Başlat"
+
+#: applet.js:68
+msgid "Open Web Dir"
+msgstr "Web Dizinini Aç"
+
+#: applet.js:73
+msgid "Launch Web Dir"
+msgstr "Web Dizinini Başlat"
+
+#: applet.js:77
+msgid "Launch phpMyAdmin"
+msgstr "phpMyAdmin Başlat"
+
+#: applet.js:82
+msgid "Edit default php.ini"
+msgstr "Varsayılan php.ini dosyasını düzenle"
+
+#. xampp-panel@backids99->metadata.json->description
+msgid "A Panel Menu for XAMPP Web Developers"
+msgstr "XAMPP Web Geliştiricileri İçin Bir Panel Menüsü"
+
+#. xampp-panel@backids99->metadata.json->name
+msgid "Xampp Panel Menu"
+msgstr "Xampp Panel Menüsü"

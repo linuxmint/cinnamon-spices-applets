@@ -1,0 +1,289 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-04-18 12:16+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: applet.js
+msgid "Radio"
+msgstr ""
+
+#: applet.js
+msgid "TV"
+msgstr ""
+
+#: applet.js
+msgid "Stop"
+msgstr ""
+
+#: applet.js
+msgid "Bg Radio"
+msgstr ""
+
+#: applet.js
+msgid "Listening Bg Radio"
+msgstr ""
+
+#: applet.js
+msgid "bTV Radio"
+msgstr ""
+
+#: applet.js
+msgid "Listening bTV Radio"
+msgstr ""
+
+
+#: applet.js
+msgid "City Radio"
+msgstr ""
+
+#: applet.js
+msgid "Listening City Radio"
+msgstr ""
+
+#: applet.js
+msgid "Classic FM"
+msgstr ""
+
+#: applet.js
+msgid "Listening Clasic FM"
+msgstr ""
+
+#: applet.js
+msgid "Darik"
+msgstr ""
+
+#: applet.js
+msgid "Listening Darik"
+msgstr ""
+
+#: applet.js
+msgid "Darik Nostalgie"
+msgstr ""
+
+#: applet.js
+msgid "Listening Darik Nostalgie"
+msgstr ""
+
+#: applet.js
+msgid "Energy"
+msgstr ""
+
+#: applet.js
+msgid "Listening Energy"
+msgstr ""
+
+
+#: applet.js
+msgid "FM+"
+msgstr ""
+
+#: applet.js
+msgid "Listening FM+"
+msgstr ""
+
+#: applet.js
+msgid "Fresh"
+msgstr ""
+
+#: applet.js
+msgid "Listening Fresh"
+msgstr ""
+
+#: applet.js
+msgid "Jazz FM"
+msgstr ""
+
+#: applet.js
+msgid "Listening Jazz FM"
+msgstr ""
+
+#: applet.js
+msgid "K2"
+msgstr ""
+
+#: applet.js
+msgid "Listening K2"
+msgstr ""
+
+#: applet.js
+msgid "Melody"
+msgstr ""
+
+#: applet.js
+msgid "Listening Melody"
+msgstr ""
+
+
+#: applet.js
+msgid "N-Joy"
+msgstr ""
+
+#: applet.js
+msgid "Listening N-joy"
+msgstr ""
+
+
+#: applet.js
+msgid "Nova Radio"
+msgstr ""
+
+#: applet.js
+msgid "Listening Nova Radio"
+msgstr ""
+
+#: applet.js
+msgid "Radio 1"
+msgstr ""
+
+#: applet.js
+msgid "Listening Radio 1"
+msgstr ""
+
+#: applet.js
+msgid "Radio 1 Rock"
+msgstr ""
+#: applet.js
+msgid "Listening Radio 1 Rock"
+msgstr ""
+
+#: applet.js
+msgid "The Voice Radio"
+msgstr ""
+
+#: applet.js
+msgid "Listening The Voice Radio"
+msgstr ""
+
+#: applet.js
+msgid "Z-Rock"
+msgstr ""
+
+#: applet.js
+msgid "Listening Z-Rock"
+msgstr ""
+
+#: applet.js
+msgid "BNT"
+msgstr ""
+
+#: applet.js
+msgid "Watching BNT"
+msgstr ""
+
+#: applet.js
+msgid "BNT 2"
+msgstr ""
+
+#: applet.js
+msgid "Watching BNT 2"
+msgstr ""
+
+#: applet.js
+msgid "BNT HD"
+msgstr ""
+
+#: applet.js
+msgid "Watching BNT HD"
+msgstr ""
+
+#: applet.js
+msgid "BNT World"
+msgstr ""
+
+#: applet.js
+msgid "Watching BNT World"
+msgstr ""
+
+#: applet.js
+msgid "bTV"
+msgstr ""
+
+#: applet.js
+msgid "Watching bTV"
+msgstr ""
+
+#: applet.js
+msgid "BIT"
+msgstr ""
+
+#: applet.js
+msgid "Watching BIT"
+msgstr ""
+
+#: applet.js
+msgid "City"
+msgstr ""
+
+#: applet.js
+msgid "Watching City"
+msgstr ""
+
+#: applet.js
+msgid "Nova"
+msgstr ""
+
+#: applet.js
+msgid "Watching Nova"
+msgstr ""
+
+#: applet.js
+msgid "Kanal 3"
+msgstr ""
+
+#: applet.js
+msgid "Watching Kanal 3"
+msgstr ""
+
+#: applet.js
+msgid "On Air"
+msgstr ""
+
+#: applet.js
+msgid "Watching On Air"
+msgstr ""
+
+#: applet.js
+msgid "The Voice"
+msgstr ""
+
+#: applet.js
+msgid "Watching The Voice"
+msgstr ""
+
+#: applet.js
+msgid "Magic TV"
+msgstr ""
+
+#: applet.js
+msgid "Watching Magic TV"
+msgstr ""
+
+#: applet.js
+msgid "All Stop"
+msgstr ""
+
+#. BgRadio@spacy01->metadata.json->description
+msgid ""
+"The most famous bulgarian radio and TV streams. Some of the streams are available "
+"only from bulgaria. To watch a TVs, you'll need to install rtmpdump and mpv packages."
+msgstr ""
+""
+""
+
+#. BgRadio@spacy01->metadata.json->name
+msgid "Bulgarian Radio and TV Streams"
+msgstr ""

@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python3
 #-*- coding:utf-8 -*-
 
 """ Settings Dialogue for World Clock Calendar Applet """
@@ -31,9 +31,10 @@ except ImportError:
 APPLET_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # i18n
-from gettext import gettext as _
-#import gettext
-#gettext.install('cinnamon', '/usr/share/cinnamon/locale')
+#from gettext import gettext as _
+import gettext
+home = os.path.expanduser("~")
+gettext.install("calendar@simonwiles.net", home + "/.local/share/locale")
 
 
 class SettingsWindow(Gtk.Window):
@@ -44,7 +45,7 @@ class SettingsWindow(Gtk.Window):
             os.path.join(APPLET_DIR, 'metadata.json'), 'r', encoding='utf8'))
 
         self.settings = AppletSettings(metadata['uuid'], args.instance_id)
-        Gtk.Window.__init__(self, title=metadata['name'])
+        Gtk.Window.__init__(self, title=_(metadata['name']))
 
         self.set_size_request(400, 300)
         self.set_position(Gtk.WindowPosition.CENTER)
@@ -72,7 +73,7 @@ class SettingsWindow(Gtk.Window):
         cellrenderertext = Gtk.CellRendererText()
         cellrenderertext.set_property('editable', True)
         cellrenderertext.connect('edited', self._on_label_edited)
-        col = Gtk.TreeViewColumn('Display Name', cellrenderertext, text=0)
+        col = Gtk.TreeViewColumn(_('Display Name'), cellrenderertext, text=0)
         col.set_property('resizable', True)
         col.set_expand(True)
         self.treeview.append_column(col)
@@ -84,7 +85,7 @@ class SettingsWindow(Gtk.Window):
             timezones, match_anywhere=True, force_match=True)
         cellrendererautocomplete.set_property('editable', True)
         cellrendererautocomplete.connect('edited', self._on_tz_edited)
-        col = Gtk.TreeViewColumn('Timezone', cellrendererautocomplete, text=1)
+        col = Gtk.TreeViewColumn(_('Timezone'), cellrendererautocomplete, text=1)
         col.set_expand(True)
         self.treeview.append_column(col)
 
@@ -174,7 +175,7 @@ class SettingsWindow(Gtk.Window):
 
         timezones = subprocess.check_output(
             ['/usr/bin/awk', '!/#/ {print $3}', timezones_tab])
-        timezones = sorted(timezones.strip('\n').split('\n'))
+        timezones = sorted(timezones.decode('utf-8').strip('\n').split('\n'))
 
         # https://github.com/simonwiles/cinnamon_applets/issues/7
         timezones.append('UTC')
@@ -210,7 +211,7 @@ class SettingsWindow(Gtk.Window):
     def _add_entry(self, widget):
         self.liststore_worldclocks.insert(
             len(self.liststore_worldclocks),
-            ('Coordinated Universal Time', 'UTC')
+            (_('Coordinated Universal Time'), 'UTC')
         )
 
     def _remove_entry(self, widget):
@@ -265,7 +266,7 @@ class AppletSettings(object):
 
     def save(self):
         with io.open(self.settings_json, 'w', encoding='utf-8') as handle:
-            handle.write(unicode(json.dumps(
+            handle.write(str(json.dumps(
                 self.settings, ensure_ascii=True, indent=2)))
 
 

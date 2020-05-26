@@ -7,6 +7,14 @@ const Main = imports.ui.main;
 const Mainloop = imports.mainloop;
 const PopupMenu = imports.ui.popupMenu;
 const Settings = imports.ui.settings;
+const UUID = "cpu-monitor-text@gnemonix";
+const Gettext = imports.gettext;
+const GLib = imports.gi.GLib;
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
 
 function MyApplet(orientation, panel_height, instane_id) {
 	this._init(orientation, panel_height, instane_id);
@@ -26,13 +34,13 @@ MyApplet.prototype = {
 			this.settings.bindProperty(Settings.BindingDirection.IN, "max-percentage", "max_percentage", this._update, null);
 			this.settings.bindProperty(Settings.BindingDirection.IN, "update-interval", "update_interval", this._update, null);
 			
-			this.itemOpenSysMon = new PopupMenu.PopupMenuItem("Open System Monitor");
+			this.itemOpenSysMon = new PopupMenu.PopupMenuItem(_("Open System Monitor"));
 			this.itemOpenSysMon.connect('activate', Lang.bind(this, this._runSysMonActivate));
 			this._applet_context_menu.addMenuItem(this.itemOpenSysMon);
 	
 			this.gtop = new GTop.glibtop_cpu();
 	
-			this._applet_label.set_style('text-align: left');
+			this._applet_label.set_style('min-width: 2.5em; text-align: left');
 	
 			this.current = 0;
 			this.last = 0;
@@ -82,13 +90,11 @@ MyApplet.prototype = {
 			this.usage = Math.round((this.current - this.last) / delta);
 			this.last = this.current;
 
-			this.last_total = this.gtop.total;
 		}
 
+		this.last_total = this.gtop.total;
 		let percent = Math.round(this.max_percentage - this.usage);
-		this.set_applet_label("  " + this.cpu_label + " " + this._pad(percent) + "%");
-		
-		this.actor.style = "width: " + (this.max_percentage.toString().length + 3.5) + "em";
+		this.set_applet_label(this.cpu_label + " " + this._pad(percent) + "%");
 	},
 
 	_updateLoop: function () {

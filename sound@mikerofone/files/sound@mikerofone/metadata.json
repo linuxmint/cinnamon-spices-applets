@@ -1,6 +1,0 @@
-{
- "uuid": "sound@mikerofone",
- "name": "informative Sound",
- "description": "Fork of the 'Cinnamon sound applet' which provides more information while requiring less interaction",
- "icon": "stock_volume"
-}

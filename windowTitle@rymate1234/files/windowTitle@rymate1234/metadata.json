@@ -1,6 +1,0 @@
-{
- "uuid": "windowTitle@rymate1234",
- "name": "Window Title Applet",
- "description": "Shows the title of the current window in a applet.",
- "icon": "gnome-panel-window-list"
-}

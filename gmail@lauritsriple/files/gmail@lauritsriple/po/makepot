@@ -1,0 +1,9 @@
+#!/bin/bash
+
+cd ..
+
+uuid="gmail@lauritsriple"
+
+xgettext --language=JavaScript --keyword=_ --keyword=N_ --output=po/$uuid.pot --from-code=UTF-8 *.js
+
+cinnamon-json-makepot po/$uuid.pot

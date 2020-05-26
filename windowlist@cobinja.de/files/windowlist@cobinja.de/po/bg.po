@@ -1,0 +1,154 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-10-19 05:26+0300\n"
+"PO-Revision-Date: 2017-10-19 05:53+0300\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Last-Translator: Peyu Yovev <spacy00001@gmail.com>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: bg\n"
+
+msgid "A window list with app grouping and window previews"
+msgstr "Списък прозорци с групиране по приложение и преглед"
+
+msgid "Remove this applet"
+msgstr "Премахни този аплет"
+
+msgid "Open new window"
+msgstr "Отвори нов прозорец"
+
+msgid "Captions"
+msgstr "Надписи"
+
+msgid "Caption type"
+msgstr "Вид на надписите"
+
+msgid "Name"
+msgstr "Име"
+
+msgid "Title"
+msgstr "Заглавие"
+
+msgid "Display Caption For"
+msgstr "Покажи надписи за"
+
+msgid "None"
+msgstr "Никой"
+
+msgid "All"
+msgstr "Всички"
+
+msgid "Running"
+msgstr "Работещи"
+
+msgid "Focused"
+msgstr "На фокус"
+
+msgid "Label width"
+msgstr "Ширина на заглавието"
+
+msgid "Animate label"
+msgstr "Анимирано заглавие"
+
+msgid "Label animation time"
+msgstr "Време на анимация"
+
+msgid "Display Number"
+msgstr "Покажи бройка"
+
+msgid "Smart"
+msgstr "Умно"
+
+msgid "Group Windows"
+msgstr "Групирай прозорците"
+
+msgid "Display Favorites"
+msgstr "Показвай любими"
+
+msgid "Animation Time"
+msgstr "Време на анимация"
+
+msgid "Previews"
+msgstr "Преглед"
+
+msgid "Show on hover"
+msgstr "Покажи при посочване"
+
+msgid "Timeout Show"
+msgstr "Закъснение при показване"
+
+msgid "Timeout Hide"
+msgstr "Закъснение при скриване"
+
+msgid "Pin to this workspace"
+msgstr "Закачи на това работно място"
+
+msgid "Pin to other workspaces"
+msgstr "Закачи на друго работно място"
+
+msgid "Unmaximize"
+msgstr "Демаксимизиране"
+
+msgid "Close window on mouse-wheel click"
+msgstr "Затвори прозореца при клик с колелцето на мишката"
+
+msgid ""
+"If windows are grouped, all windows from an application are managed by the "
+"same button,\n"
+"if not grouped, all windows get an own button"
+msgstr ""
+"Ако има групиране на прозорци, всички прозорци на едно приложение се "
+"управляват от един бутон,\n"
+"ако няма групиране, всеки прозорец има отделен бутон"
+
+msgid "The flashing time when a new window is opened via a button"
+msgstr "Време на примигване, когато нов прозорец в отворен от бутона"
+
+msgid ""
+"If enabled, the popup menu will show window previews\n"
+"(Always disabled when running Cinnamon in Software Rendering Mode)"
+msgstr ""
+"Ако е включено, изкачащо меню ще се показва при преглед на прозорците\n"
+"\n"
+"(Винаги е изключено когато ползвате Cinnamon в режим на софтуерно "
+"рендиране)"
+
+msgid ""
+"The waiting time for the popup menu to show, when hovering a button\n"
+"(Not used when moving directly to a different button in the list)"
+msgstr ""
+"Време на изчакване преди покзване на изкачащия прозорец при посочване на "
+"бутона\n"
+"(Не се използва при директно преместване към различен бутон в списъка)"
+
+msgid ""
+"The waiting time for the popup menu to hide, when leaving a button\n"
+"(Not used when moving directly to a different button in the list)"
+msgstr ""
+"Време на изчакване преди скриване на изкачащия прозорец при отдалечаване "
+"от бутона\n"
+"(Не се използва при директно преместване към различен бутон в списъка)"
+
+msgid "Only show windows on the same monitor"
+msgstr "Показвай само прозорците от този монитор"
+
+msgid ""
+"If enabled, this applet instance only manages windows\n"
+"that are displayed on the same monitor"
+msgstr ""
+"Ако е включено, тази инстанция на аплета ще управлява прозорците,\n"
+"които се покзват на същия монитор"
+
+msgid "Move to another monitor"
+msgstr "Премести до друг монитор"
+
+msgid "Always"
+msgstr "Винаги"
+
+msgid "2 or more windows"
+msgstr "При два или повече прозореца"

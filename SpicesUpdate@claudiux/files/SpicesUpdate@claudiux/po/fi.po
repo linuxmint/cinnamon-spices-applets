@@ -1,0 +1,479 @@
+# SpicesUpdate@claudiux Applet POT File.
+# Copyright (C) 2019 Claudiux <claude.clerc@gmail.com>
+# This file is distributed under the same license as the Cinnamon package.
+# FIRST AUTHOR Claudiux <claude.clerc@gmail.com>, 2019.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: SpicesUpdate@claudiux v2.0.0\n"
+"Report-Msgid-Bugs-To: Claudiux <claude.clerc@gmail.com>\n"
+"POT-Creation-Date: 2019-01-02 13:30+0100\n"
+"PO-Revision-Date: 2019-08-19 09:52+0300\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.6\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: fi\n"
+
+#: metadata.json:3
+msgid "Spices Update"
+msgstr "Lisäosien päivitys"
+
+#: metadata.json:7
+msgid ""
+"Warns you when installed Spices (applets, desklets, extensions, themes) "
+"require an update or new Spices are available."
+msgstr ""
+"Varoittaa sinua, kun asennetut lisäosat (paneeli, työpöytä, laajennukset, "
+"teemat) vaativat päivityksen tai uusia on saatavilla."
+
+#: settings-schema.json:7
+msgid "Applets"
+msgstr "Paneelisovelmat"
+
+#: settings-schema.json:12
+msgid "Desklets"
+msgstr "Työpöytäsovelmat"
+
+#: settings-schema.json:17
+msgid "Extensions"
+msgstr "Laajennukset"
+
+#: settings-schema.json:22
+msgid "Themes"
+msgstr "Teemat"
+
+#: settings-schema.json:27
+msgid "General"
+msgstr "Yleinen"
+
+#: settings-schema.json:32
+msgid "Checking"
+msgstr "Tarkistetaan"
+
+#: settings-schema.json:37
+msgid "Monitoring"
+msgstr "Seuranta"
+
+#: settings-schema.json:72
+msgid "Frequency"
+msgstr "Taajuus"
+
+#: settings-schema.json:77
+msgid "Notifications"
+msgstr "Ilmoitukset"
+
+#: settings-schema.json:82
+msgid "Display type"
+msgstr "Näkyvyys"
+
+#: settings-schema.json:90
+msgid "Check regularly whether your applets are up to date"
+msgstr "Anna säännöllisesti tarkistaa, ovatko ohjelmat ajan tasalla"
+
+#: settings-schema.json:91
+msgid "If applets updates do not concern you, uncheck this box."
+msgstr "Jos sovelmien päivitykset eivät koske sinua, poista tämä valintaruutu."
+
+#: settings-schema.json:98
+msgid "Check regularly whether new applets are available"
+msgstr "Anna säännöllisesti tarkistaa, onko uusia sovelmia saatavana"
+
+#: settings-schema.json:99
+msgid "If new applets do not concern you, uncheck this box."
+msgstr "Jos uudet sovelmat eivät koske sinua, poista tämä valinta."
+
+#: settings-schema.json:103
+msgid "Refresh"
+msgstr "Päivitä"
+
+#: settings-schema.json:108
+msgid "Update these applets:"
+msgstr "Päivitä nämä sovelmat:"
+
+#: settings-schema.json:109
+msgid "If you do not want an applet to be checked, set it to FALSE."
+msgstr "Jos et halua, että sovelma tarkistetaan, aseta se EI."
+
+#: settings-schema.json:113
+msgid "Your Applets"
+msgstr "Sinun sovelmat"
+
+#: settings-schema.json:118
+msgid "Check for updates?"
+msgstr "Tarkista päivitykset?"
+
+#: settings-schema.json:127
+msgid "Open Cinnamon Settings to manage all the Applets"
+msgstr "Avaa Cinnamon asetukset hallitaksesi kaikkia paneelin sovelmia"
+
+#: settings-schema.json:135
+msgid "Check regularly whether your desklets are up to date"
+msgstr "Anna säännöllisesti tarkistaa, ovatko työpöytäsovelmat ajan tasalla"
+
+#: settings-schema.json:136
+msgid "If desklets updates do not concern you, uncheck this box."
+msgstr "Jos päivitykset eivät koske sinua, poista tämä valintaruutu."
+
+#: settings-schema.json:143
+msgid "Check regularly whether new desklets are available"
+msgstr "Anna säännöllisesti tarkistaa, onko uusia työpöytäsovelmia saatavana"
+
+#: settings-schema.json:144
+msgid "If new desklets do not concern you, uncheck this box."
+msgstr "Jos päivitykset eivät koske sinua, poista tämä valintaruutu."
+
+#: settings-schema.json:153
+msgid "Update these desklets:"
+msgstr "Päivitä nämä työpöytäsovelmat:"
+
+#: settings-schema.json:154
+msgid "If you do not want a desklet to be checked, set it to FALSE."
+msgstr "Jos et halua, että työpöytäsovelma tarkistetaan, aseta se EI."
+
+#: settings-schema.json:158
+msgid "Your Desklets"
+msgstr "Sinun työpöytäsovelmat"
+
+#: settings-schema.json:171
+msgid "Open Cinnamon Settings to manage all the Desklets"
+msgstr "Avaa Cinnamon asetukset hallitaksesi kaikkia työpöydän sovelmia"
+
+#: settings-schema.json:179
+msgid "Check regularly whether your extensions are up to date"
+msgstr "Anna säännöllisesti tarkistaa, ovatko laajennukset ajan tasalla"
+
+#: settings-schema.json:180
+msgid "If extensions updates do not concern you, uncheck this box."
+msgstr ""
+"Jos laajennusten päivitykset eivät koske sinua, poista tämä valintaruutu."
+
+#: settings-schema.json:187
+msgid "Check regularly whether new extensions are available"
+msgstr "Anna säännöllisesti tarkistaa, onko uusia laajennuksia saatavana"
+
+#: settings-schema.json:188
+msgid "If new extensions do not concern you, uncheck this box."
+msgstr ""
+"Jos uudet laajennusten päivitykset eivät koske sinua, poista tämä "
+"valintaruutu."
+
+#: settings-schema.json:197
+msgid "Update these extensions:"
+msgstr "Päivitä nämä laajennukset:"
+
+#: settings-schema.json:198
+msgid "If you do not want an extension to be checked, set it to FALSE."
+msgstr "Jos et halua, että laajennukset tarkistetaan, aseta se EI."
+
+#: settings-schema.json:202
+msgid "Your Extensions"
+msgstr "Sinun laajennukset"
+
+#: settings-schema.json:215
+msgid "Open Cinnamon Settings to manage all the Extensions"
+msgstr "Avaa Cinnamon asetukset hallitaksesi kaikkia laajennuksia"
+
+#: settings-schema.json:223
+msgid "Check regularly whether your themes are up to date"
+msgstr "Anna säännöllisesti tarkistaa, ovatko teemasi ajan tasalla"
+
+#: settings-schema.json:224
+msgid "If themes updates do not concern you, uncheck this box."
+msgstr "Jos teemojen päivitykset eivät koske sinua, poista tämä valintaruutu."
+
+#: settings-schema.json:231
+msgid "Check regularly whether new themes are available"
+msgstr "Anna säännöllisesti tarkistaa, onko uusia teemoja saatavana"
+
+#: settings-schema.json:232
+msgid "If new themes do not concern you, uncheck this box."
+msgstr "Jos uudet teemat eivät koske sinua, poista tämä valintaruutu."
+
+#: settings-schema.json:241
+msgid "Update these themes:"
+msgstr "Päivitä nämä teemat:"
+
+#: settings-schema.json:242
+msgid "If you do not want a theme to be checked, set it to FALSE."
+msgstr "Jos et halua, että teemoja tarkistetaan, aseta se EI."
+
+#: settings-schema.json:246
+msgid "Your Themes"
+msgstr "Sinun teemat"
+
+#: settings-schema.json:259
+msgid "Open Cinnamon Settings to manage all the Themes"
+msgstr "Avaa Cinnamon asetukset hallitaksesi kaikkia teemoja"
+
+#: settings-schema.json:269
+msgid "hours"
+msgstr "tuntia"
+
+#: settings-schema.json:270
+msgid "Time interval between two checks"
+msgstr "Tarkistuksen aikaväli"
+
+#: settings-schema.json:271
+msgid ""
+"Please note that the first check will take place one minute after starting "
+"this applet."
+msgstr ""
+"Huomaa, että ensimmäinen tarkistus tapahtuu minuutin kuluttua tämän "
+"käynnistämisestä."
+
+#: settings-schema.json:277
+msgid "Notify me by changing the icon when Spices need an update"
+msgstr ""
+"Ilmoita minulle vaihtamalla kuvake, kun lisäosat tarvitsevat päivityksen"
+
+#: settings-schema.json:278
+msgid ""
+"By checking this box, you allow this applet to modify its icon to warn you "
+"when at least one of the Spices requires an update."
+msgstr ""
+"Valitsemalla tämän ruudun annat tämän sovelman muokata sen kuvaketta "
+"varoittaaksesi sinua, kun vähintään yksi lisäosa vaatii päivityksen."
+
+#: settings-schema.json:285
+msgid "The icon color when Spices need an update"
+msgstr "Kuvakkeen väri, kun lisäosat tarvitsevat päivityksen"
+
+#: settings-schema.json:286
+msgid "Click the button to select another color."
+msgstr "Napsauta painiketta valitaksesi toisen värin."
+
+#: settings-schema.json:292
+msgid "Show notification messages about Spices updates"
+msgstr "Näytä ilmoitusviestit päivityksistä"
+
+#: settings-schema.json:293
+msgid ""
+"By checking this box, you allow this applet to display messages about Spices "
+"updates in notifications viewer."
+msgstr ""
+"Valitsemalla tämän ruudun annat tämän sovelman näyttää viestejä "
+"päivityksistä ilmoituksissa."
+
+#: settings-schema.json:300
+msgid "Display the description of each update or new Spice"
+msgstr "Näytä kunkin päivityksen tai uuden lisäosan kuvaus"
+
+#: settings-schema.json:301
+msgid ""
+"By checking this box, you'll know why an update is available, and get a "
+"description of any new Spice.\n"
+"This information will be displayed in English."
+msgstr ""
+"Valitsemalla tämän ruudun tiedät syyn, miksi päivitys on saatavana, ja saat "
+"kuvauksen kaikista uusista lisäosista.\n"
+"Nämä tiedot näytetään englanniksi."
+
+#: settings-schema.json:308
+msgid "Show notification messages even if they are unchanged"
+msgstr "Näytä ilmoitusviestit, vaikka ne eivät olisikaan muuttuneet"
+
+#: settings-schema.json:309
+msgid ""
+"By checking this box, all notification messages will be displayed, even if "
+"they are identical to the previous ones."
+msgstr ""
+"Valitsemalla tämän ruudun kaikki ilmoitussanomat näytetään, vaikka ne "
+"olisivat identtisiä edellisten kanssa."
+
+#: settings-schema.json:315
+msgid "Minimal (text only)"
+msgstr "Pienin (vain teksti)"
+
+#: settings-schema.json:316
+msgid "With button opening the System Settings"
+msgstr "Painikeella joka avaa järjestelmäasetukset"
+
+#: settings-schema.json:319
+msgid "Notification style"
+msgstr "Ilmoituksen tyyli"
+
+#: settings-schema.json:320
+msgid ""
+"Minimal:\n"
+"\tDisplays simple and short notifications.\n"
+"With button opening the System Settings:\n"
+"\tNotifications also contain a button which has the same role of the menu "
+"one:\n"
+"\tOpen the Download tab in System Settings for the concerned type of Spices, "
+"with the Spices sorted by date."
+msgstr ""
+"Pieni:\n"
+"\tNäyttää yksinkertaiset ja lyhyet ilmoitukset.\n"
+"Painikeella joka avaa järjestelmäasetukset:\n"
+"\tIlmoitukset sisältävät myös painikkeen, jolla on sama tehtävä kuin "
+"valikon::\n"
+"\tAvaa kyseisessä tyypistä järjestelmäasetukset-välilehden, jolloin "
+"laajennukset on lajiteltu päivämäärän mukaan."
+
+#: settings-schema.json:325
+msgid "Send a fake notification to test the style"
+msgstr "Lähetä testi-ilmoitus tyylin testaamiseksi"
+
+#: settings-schema.json:332
+msgid "Classic - Icon and Text"
+msgstr "Klassinen - kuvake ja teksti"
+
+#: settings-schema.json:333
+msgid "Compact - Icon Only"
+msgstr "Kompakti - vain kuvake"
+
+#: settings-schema.json:335
+msgid "Type of Display"
+msgstr "Näkyvyys"
+
+#: settings-schema.json:336
+msgid ""
+"This feature offers the Classic (default) display with icon and text, and "
+"compact display (Icon Only)."
+msgstr ""
+"Tämä ominaisuus tarjoaa klassisen (oletus) näkymän, jossa on kuvake ja "
+"teksti, sekä näkymän (vain kuvake)."
+
+#: settings-schema.json:342
+msgid "Hide the icon as long as nothing is to report"
+msgstr "Piilota kuvake niin kauan kuin mitään ei tarvitse ilmoittaa"
+
+#: settings-schema.json:343
+msgid ""
+"By checking this box, as long as nothing is to report the icon of Spices "
+"Update does not appear on the panel."
+msgstr ""
+"Valitsemalla tämän ruudun, niin kauan kuin mitään ilmoitettavaa ei ole, "
+"kuvake ei tule näkyviin paneeliin."
+
+#: applet.js:91
+msgid "Applet"
+msgstr "Paneelisovelma"
+
+#: applet.js:92
+msgid "Desklet"
+msgstr "Työpöytäsovelma"
+
+#: applet.js:93
+msgid "Extension"
+msgstr "Laajennus"
+
+#: applet.js:94
+msgid "Theme"
+msgstr "Teema"
+
+#: applet.js:99
+msgid "One desklet needs update:"
+msgstr "Yksi työpöytäsovelma tarvitsee päivityksen:"
+
+#: applet.js:100
+msgid "One applet needs update:"
+msgstr "Yksi paneelisovelma tarvitsee päivityksen:"
+
+#: applet.js:101
+msgid "One extension needs update:"
+msgstr "Yksi laajennus tarvitsee päivityksen:"
+
+#: applet.js:102
+msgid "One theme needs update:"
+msgstr "Yksi teema tarvitsee päivityksen:"
+
+#: applet.js:103
+msgid "Some desklets need update:"
+msgstr "Jotkut työpöytäsovelmat tarvitsee päivityksen:"
+
+#: applet.js:104
+msgid "Some applets need update:"
+msgstr "Jotkut paneelisovelmat tarvitsee päivityksen:"
+
+#: applet.js:105
+msgid "Some extensions need update:"
+msgstr "Jotkut laajennukset tarvitsee päivityksen:"
+
+#: applet.js:106
+msgid "Some themes need update:"
+msgstr "Jotkut teemat tarvitsee päivityksen:"
+
+#: applet.js:107
+msgid "New desklet available:"
+msgstr "Uusi työpöytäsovelma saatavilla:"
+
+#: applet.js:108
+msgid "New applet available:"
+msgstr "Uusi paneelisovelma saatavilla:"
+
+#: applet.js:109
+msgid "New extension available:"
+msgstr "Uusi laajennus saatavilla:"
+
+#: applet.js:110
+msgid "New theme available:"
+msgstr "Uusi teema saatavilla:"
+
+#: applet.js:111
+msgid "New desklets available:"
+msgstr "Uusia työpöytäsovelmia saatavilla:"
+
+#: applet.js:112
+msgid "New applets available:"
+msgstr "Uusia paneelisovelmia saatavilla:"
+
+#: applet.js:113
+msgid "New extensions available:"
+msgstr "Uusia laajennuksia saatavilla:"
+
+#: applet.js:114
+msgid "New themes available:"
+msgstr "Uusia teemoja saatavilla:"
+
+#: applet.js:626
+msgid "With details here, when available."
+msgstr "Yksityiskohdat täällä, kun saatavilla."
+
+#: applet.js:627
+msgid "Do not matter. This is a FAKE notification, just for the test."
+msgstr "Ei ole väliä. Tämä on ilmoitus, vain testiä varten."
+
+#: applet.js:898
+msgid "is fully functional."
+msgstr "on täysin toimiva."
+
+#: applet.js:899
+msgid "All dependencies are installed"
+msgstr "Kaikki riippuvuudet on asennettu"
+
+#: applet.js:921
+msgid ""
+"You appear to be missing some of the programs required for this applet to "
+"have all its features."
+msgstr ""
+"Näyttää siltä, että puuttuu joitain ohjelmia, joita tarvitaan tämän sovelman "
+"ominaisuuksiin."
+
+#: applet.js:922
+msgid "Please execute, in the just opened terminal, the commands:"
+msgstr "Suorita päätteessä seuraavat komennot:"
+
+#: applet.js:923
+msgid "Some dependencies are not installed!"
+msgstr "Joitakin riippuvuuksia ei ole asennettu!"
+
+#: applet.js:1218
+msgid "(Description unavailable)"
+msgstr "(Ohjeistus ei ole käytettävissä)"
+
+#: applet.js:1221
+msgid "(Refresh to see the description)"
+msgstr "(Päivitä nähdäksesi ohjeistus)"
+
+#: applet.js:1402
+msgid "Forget new Spices"
+msgstr "Unohda uudet lisäosat"
+
+#: applet.js:1409
+msgid "Configure"
+msgstr "Määritä"

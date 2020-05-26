@@ -1,4 +1,8 @@
 {
+  "head":
+  { "type": "header"
+  , "description": "Settings for show-hide-applets@mohammad-sn"
+  }, 
  "autohide" : {
     "type" : "checkbox",
     "default" : true,

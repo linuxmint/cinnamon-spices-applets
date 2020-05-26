@@ -1,6 +1,0 @@
-{
- "uuid": "shutdown-timer@webum.by",
- "name": "Shutdown timer",
- "description": "Applet to help you shutdown, restart and suspend your system with timer",
- "icon": "system-shutdown"
-}

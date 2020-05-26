@@ -1,10 +1,10 @@
 {
- "website": "https://github.com/linux-man/cinnamon-printers",
- "uuid": "printers@linux-man",
- "contributors": "Caldas Lopes",
- "name": "Printers",
- "description": "Manage Jobs and Printers",
- "version": "0.7",
- "icon": "printer",
- "max-instances": "-1"
+    "website": "https://github.com/linux-man/cinnamon-printers",
+    "description": "Manage Jobs and Printers",
+    "contributors": "Caldas Lopes",
+    "max-instances": "-1",
+    "uuid": "printers@linux-man",
+    "version": "1.0",
+    "icon": "printer",
+    "name": "Printers"
 }

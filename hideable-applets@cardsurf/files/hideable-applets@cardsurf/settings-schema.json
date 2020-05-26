@@ -1,0 +1,172 @@
+{
+    "configuration": {
+        "type": "header",
+        "description": "Configuration"
+    },
+    "action_type" : {
+        "type": "combobox",
+        "default" : 0,
+        "description" : "Action",
+        "options" : {
+            "Open or close popup" : 0,
+            "Toggle visibility applets" : 1
+        },
+        "tooltip" : "An action to perform on trigger"
+    },
+    "action_trigger_type" : {
+        "type": "combobox",
+        "default" : 0,
+        "description" : "Trigger",
+        "options" : {
+            "Left mouse click" : 0,
+            "Mouse hover" : 1,
+            "None" : 2
+        },
+        "tooltip" : "An event that triggers the action"
+    },
+    "side_type" : {
+        "type": "combobox",
+        "default" : 3,
+        "description" : "Applets location",
+        "options" : {
+            "Top": 0,
+            "Right" : 1,
+            "Bottom" : 2,
+            "Left" : 3
+        },
+        "tooltip" : "A location of applets for which to toggle visibility"
+    },
+    "restore_hidden_string": {
+        "type" : "entry",
+        "default" : "network@cinnamon.org, sound@cinnamon.org, removable-drives@cinnamon.org, keyboard@cinnamon.org",
+        "description" : "Restore as hidden",
+        "tooltip": "A comma-separated list of applet UUIDs.\nAn applet from this list will be hidden if the applet is configured as hidden and the applet shows up."
+    },
+    "save_every": {
+        "type": "spinbutton",
+        "default": 60,
+        "min": 1,
+        "max": 86400,
+        "step": 1,
+        "units": "seconds",
+        "description": "Save every",
+        "tooltip" : "How often to save last used values"
+    },
+    "configuration_end" : {
+        "type" : "separator"
+    },
+
+    "tray_start": {
+        "type": "header",
+        "description": "Popup"
+    },
+    "applet_popup_columns": {
+        "type": "spinbutton",
+        "default": 4,
+        "min": 1,
+        "max": 10,
+        "step": 1,
+        "units": "",
+        "description": "Columns",
+        "tooltip" : "A number of columns in the applet popup"
+    },
+    "applet_popup_icons_size": {
+        "type": "spinbutton",
+        "default": 40,
+        "min": 1,
+        "max": 500,
+        "step": 1,
+        "units": "pixels",
+        "description": "Icon size",
+        "tooltip" : "A size of an icon in the applet popup"
+    },
+    "applet_popup_icons_css": {
+        "type": "entry",
+        "default": "padding: 10px;",
+        "description": "Icon CSS",
+        "tooltip": "A CSS style applied to the icons in the applet popup"
+    },
+    "applet_popup_table_css": {
+        "type": "entry",
+        "default": "padding: 15px;",
+        "description": "Table CSS",
+        "tooltip": "A CSS style applied to a table in the applet popup"
+    },
+    "applet_popup_close_leave" : {
+        "type" : "checkbox",
+        "default" : true,
+        "description": "Auto close",
+        "tooltip": "Close the applet popup when a mouse leaves the user interface"
+    },
+    "match_panel_icons_size": {
+        "type" : "checkbox",
+        "default" : false,
+        "description": "Match panel size",
+        "tooltip": "Match a size of an icon in the applet popup to a size of the panel"
+    },
+    "show_icon_tooltips" : {
+        "type" : "checkbox",
+        "default" : true,
+        "description": "Show tooltips",
+        "tooltip": "Show icon tooltips in the applet popup"
+    },
+    "show_grayscale_icons" : {
+        "type" : "checkbox",
+        "default" : false,
+        "description": "Show grayscale icons",
+        "tooltip": "Show icons of hidden applets in grayscale"
+    },
+    "grayscale_brightness": {
+        "type": "spinbutton",
+        "default": 80,
+        "min": 0,
+        "max": 100,
+        "step": 5,
+        "units": "%",
+        "description": "Grayscale brightness",
+        "tooltip" : "A brightness level of grayscale icons"
+    },
+    "tray_end" : {
+        "type" : "separator"
+    },
+
+    "gui_start": {
+        "type": "header",
+        "description": "Gui"
+    },
+    "gui_sort_type": {
+        "type": "combobox",
+        "default" : 0,
+        "description" : "Sort",
+        "options" : {
+            "Alphabetically": 0,
+            "Panel position" : 1
+        },
+        "tooltip" : "An order of items in the user interface"
+    },
+    "gui_icon_type" : {
+        "type": "combobox",
+        "default" : 0,
+        "description" : "Panel icon",
+        "options" : {
+            "Filepath": 0,
+            "Symbolic" : 1
+        },
+        "tooltip" : "A type of an icon displayed on the panel"
+    },
+    "gui_icon_filepath" : {
+        "type" : "filechooser",
+        "default" : "~/.local/share/cinnamon/applets/hideable-applets@cardsurf/icons/arrow-up.svg",
+        "description" : "Filepath",
+        "tooltip": "A path to an icon displayed on a panel"
+    },
+    "gui_icon_symbolic_name" : {
+        "type" : "entry",
+        "default" : "pan-up-symbolic",
+        "description" : "Symbolic name",
+        "tooltip": "A name of a symbolic icon displayed on a panel"
+    },
+    "gui_end" : {
+        "type" : "separator"
+    }
+}

@@ -1,6 +1,5 @@
 {
   "uuid": "pa-equalizer@jschug.com",
   "name": "Equalizer",
-  "description": "An applet to control sound equalization",
-  "icon": "multimedia-volume-control"
+  "description": "An applet to control sound equalization"
 }

@@ -36,16 +36,16 @@ MyApplet.prototype = {
 		this.set_applet_tooltip(_("please install ifstat and/or glib libraries"));
 		this.set_applet_label("please install ifstat and/or glib libraries");
 	}
-        
+
 	Mainloop.timeout_add_seconds(REFRESH_INTERVAL, Lang.bind(this, function refreshTimeout() {
 			let [res, out] = GLib.spawn_command_line_sync("cat /dev/shm/tmpnetfile");
 			let asd = String(out).split("\n")[0];
-			let asd = String(asd).trim();
-			let out = String(out).split("\n")[2];
-			let out = String(out).trim();
+			asd = String(asd).trim();
+			out = String(out).split("\n")[2];
+			out = String(out).trim();
 			let outa = String(out).split(" ")[0];
 			let outb = String(out).split(" ");
-			let outb = outb[outb.length-1];
+			outb = outb[outb.length-1];
 
 			var printout="\u25bc\u25b2";
 			if (outa == "0.00" && outb =="0.00"){
@@ -55,7 +55,7 @@ MyApplet.prototype = {
 			if (outa != "0.00" && outb =="0.00"){
 				printout="\u25bc\u25b3";}
 			if (outa == "undefined" && outb =="undefined"){
-				printout="";}
+				printout="\u25bd\u25b3";}
 
             		this.set_applet_tooltip(_(asd + "\nKB/s in: " + outa + "\nKB/s out: " + outb));
 			this.set_applet_label(printout);

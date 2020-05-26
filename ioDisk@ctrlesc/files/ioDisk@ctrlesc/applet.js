@@ -1,58 +1,42 @@
 const Lang = imports.lang;
 const Applet = imports.ui.applet;
 const GLib = imports.gi.GLib;
-const Gio = imports.gi.Gio;
 const Mainloop = imports.mainloop;
-const Clutter = imports.gi.Clutter;
-const St = imports.gi.St;
-const Util = imports.misc.util;
 const PopupMenu = imports.ui.popupMenu;
-const Main = imports.ui.main;
+const Gettext = imports.gettext;
+const UUID = "ioDisk@ctrlesc";
+
+// l10n/translation support
+
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
 
 var hasDataSource=false;
 
-/*   The Popup Menu */
-function ioDiskMenu(launcher, orientation)
-{
-    this._init(launcher, orientation);
-}
-
-ioDiskMenu.prototype = 
-{
-    __proto__: PopupMenu.PopupMenu.prototype,
-    _init: function(launcher, orientation)
-    {
-        this._launcher=launcher;
-        PopupMenu.PopupMenu.prototype._init.call(this, launcher.actor, 0.0, orientation, 0);
-        Main.uiGroup.add_actor(this.actor);
-        this.actor.hide();
-    }
-}
-
 /* The Applet */
-function ioDisk(orientation) 
+function ioDisk(orientation)
 {
     this._init(orientation);
 }
 
-ioDisk.prototype = 
+ioDisk.prototype =
 {
     __proto__: Applet.TextApplet.prototype,
-    _init: function(orientation) 
+    _init: function(orientation)
     {
         Applet.TextApplet.prototype._init.call(this, orientation);
-        try 
+        try
         {
-			this._applet_label.set_style('text-align: left');
-			this.actor.style = "width: " + 4 + "em";
+            this._applet_label.set_style('text-align: left');
+            this.actor.style = "width: " + 4.75 + "em";
             this._setLabel(-1);
-            
-            this.menuManager = new PopupMenu.PopupMenuManager(this);
-            this.menu = new ioDiskMenu(this, orientation);
-            this.menuManager.addMenu(this.menu); 
-            this._getioDiskEntry();           
+            this.menu = new Applet.AppletPopupMenu(this, orientation);
+            this._getioDiskEntry();
         }
-        catch (e) 
+        catch (e)
         {
             print("ioDisk: init - " + e.toString());
         }
@@ -82,19 +66,19 @@ ioDisk.prototype =
                 hasDataSource = this._hasCommand("which iostat", ".*/iostat");
                 if(hasDataSource == true)
                 {
-                    this.set_applet_tooltip("Disk Utilization");
+                    this.set_applet_tooltip(_("Disk Utilization"));
                 }
                 else
                 {
-                    this.set_applet_tooltip("Command [iostat] not found.");
+                    this.set_applet_tooltip(_("Command [iostat] not found."));
                     this._noDataSource();
                 }
-            }           
+            }
             catch (e)
             {
                 print("ioDisk: DataSource error - " + e.toString());
             }
-            Mainloop.timeout_add(2000, Lang.bind(this, this._getioDiskEntry));                 
+            Mainloop.timeout_add(2000, Lang.bind(this, this._getioDiskEntry));
         }
     },
     _continuegetioDiskData: function()
@@ -123,9 +107,10 @@ ioDisk.prototype =
         {
             try
             {
+                var menuText;
                 for(var n = 0; n < StatsObject.drives.length; n++)
                 {
-                    var menuText = StatsObject.drives[n] + ":\t" + StatsObject.metrics[n] + "%";
+                    menuText = StatsObject.drives[n] + ((StatsObject.drives[n].length < 4) ? ":\t\t" : ":\t") + StatsObject.metrics[n] + "%";
                     this.menu.addMenuItem(new PopupMenu.PopupMenuItem(menuText, {reactive:false}));
                 }
             }
@@ -136,7 +121,7 @@ ioDisk.prototype =
         }
         else
         {
-            this.menu.addMenuItem(new PopupMenu.PopupMenuItem("No drives detected.", {reactive:false}));
+            this.menu.addMenuItem(new PopupMenu.PopupMenuItem(_("No drives detected."), {reactive:false}));
         }
         this._getioDiskEntry();
     },
@@ -153,15 +138,15 @@ ioDisk.prototype =
                 var bDeviceCurr = false;
                 var devIndex = 0;
                 //print("length: " + ioDisk_lines.length);
-                for(let i = 0; i < ioDisk_lines.length; i++) 
+                for(let i = 0; i < ioDisk_lines.length; i++)
                 {
                     //print("i: " + i + " " + ioDisk_lines[i]);
-                    if (!bDeviceBoot && !bDeviceCurr && this._regexTest(ioDisk_lines[i], "^Device:"))
+                    if (!bDeviceBoot && !bDeviceCurr && this._regexTest(ioDisk_lines[i], "^Device"))
                     {
                         //print("DeviceBoot");
                         bDeviceBoot = true;
                     }
-                    else if (bDeviceBoot && this._regexTest(ioDisk_lines[i], "^Device:"))
+                    else if (bDeviceBoot && this._regexTest(ioDisk_lines[i], "^Device"))
                     {
                         //print("DeviceCurr");
                         bDeviceCurr = true;
@@ -171,13 +156,13 @@ ioDisk.prototype =
                     {
                         Stats.drives[devIndex] = ioDisk_lines[i].trim();
                         //print("Dev=" + Stats.drives[devIndex]);
-                        var ioRegExp = new RegExp("[ ]*([0-9]+\.[0-9]{2})[ ]*[ ]*([0-9]+\.[0-9]{2})[ ]*[ ]*([0-9]+\.[0-9]{2})[ ]*[ ]*([0-9]+\.[0-9]{2})[ ]*[ ]*([0-9]+\.[0-9]{2})[ ]*[ ]*([0-9]+\.[0-9]{2})[ ]*[ ]*([0-9]+\.[0-9]{2})[ ]*[ ]*([0-9]+\.[0-9]{2})[ ]*[ ]*([0-9]+\.[0-9]{2})[ ]*[ ]*([0-9]+\.[0-9]{2})[ ]*[ ]*([0-9]+\.[0-9]{2})[ ]*[ ]*([0-9]+\.[0-9]{2})[ ]*[ ]*([0-9]+\.[0-9]{2})[ ]*");
+                        var ioRegExp = new RegExp("([0-9]{1,3}[,.]?[0-9]{0,2})[%]?$");
                         var iostats = new Array();
                         iostats = ioRegExp.exec(ioDisk_lines[i + 1]);
 
-                        if (iostats != null && iostats[13] != null)
+                        if (iostats != null && iostats[1] != null)
                         {
-                            Stats.metrics[devIndex] = ~~parseFloat(iostats[13]);
+                            Stats.metrics[devIndex] = ~~parseFloat(iostats[1]);
                         }
                         else
                         {
@@ -222,7 +207,7 @@ ioDisk.prototype =
     {
         this._setLabel(-1);
         this.menu.removeAll();
-        this.menu.addMenuItem(new PopupMenu.PopupMenuItem("Error executing iostat."), {reactive:false});
+        this.menu.addMenuItem(new PopupMenu.PopupMenuItem(_("Error executing iostat.")), {reactive:false});
     },
     _hasCommand: function(test, match)
     {
@@ -234,13 +219,13 @@ ioDisk.prototype =
         }
         return false;
     },
-    on_applet_clicked: function(event) 
+    on_applet_clicked: function(event)
     {
         this.menu.toggle();
     }
 };
 
-function main(metadata, orientation) 
+function main(metadata, orientation)
 {
     let iosDisk = new ioDisk(orientation);
     return iosDisk;

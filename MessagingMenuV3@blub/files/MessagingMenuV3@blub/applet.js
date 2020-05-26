@@ -6,10 +6,22 @@ const St = imports.gi.St;
 const PopupMenu = imports.ui.popupMenu;
 const Main = imports.ui.main;
 const Util = imports.misc.util;
+const GLib = imports.gi.GLib;
+const Gettext = imports.gettext;
+const UUID = "MessagingMenuV3@blub";
+
+// l10n/translation support
+
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
 
 /* global values */
 let icon_path = "/usr/share/cinnamon/theme/";
-let compatible_Apps = ["skype", "pidgin", "empathy", "xchat", "kmess", "gajim", "emesene", "qutim", "amsn", "openfetion", "gwibber", "qwit", "turpial", "birdie", "pino", "fbmessenger"];
+
+let compatible_Apps = ["skype", "skypeforlinux", "pidgin", "empathy", "xchat", "kmess", "gajim", "emesene", "qutim", "amsn", "openfetion", "gwibber", "qwit", "turpial", "birdie", "pino", "slack", "fbmessenger", "fbmessengerdesktop", "telegramdesktop", "whatsdesk", "whatsie"];
 let compatible_Emails = ["evolution", "postler", "geary", "thunderbird", "KMail2", "claws-mail"];
 let compose_Commands = ["evolution mailto:", "postler mailto:", "geary mailto:", "thunderbird -compose", "kmail -compose", "claws-mail --compose"];
 let contact_Commands = ["evolution -c contacts", null, null, "thunderbird -addressbook", null, null];
@@ -129,8 +141,8 @@ MyApplet.prototype = {
         let listedDesktopFiles = new Array();
         for (let y = 0; y < allApps.length; y++) {
             let app = allApps[y];
-            let entry = app.get_tree_entry();
-            let path = entry.get_desktop_file_path();
+            let info = app.get_app_info();
+            let path = info.get_filename();
             //Get Application Desktop Files
             for (var p = 0; p < compatible_Apps.length; p++) {
                 let desktopFile = compatible_Apps[p] + ".desktop";
@@ -167,9 +179,9 @@ MyApplet.prototype = {
                 let emailItem = new MessengerLauncher(emailApp, this.menu);
                 this.menu.addMenuItem(emailItem);
                 if (availableComposeCommands[p])
-                    this._addCustomCommand(_("	Compose New Message..."), availableComposeCommands[p]);
+                    this._addCustomCommand("	" + _("Compose New Message..."), availableComposeCommands[p]);
                 if (availableContactCommands[p])
-                    this._addCustomCommand(_("	Contacts"), availableContactCommands[p]);
+                    this._addCustomCommand("	" + _("Contacts"), availableContactCommands[p]);
             }
         }
     },

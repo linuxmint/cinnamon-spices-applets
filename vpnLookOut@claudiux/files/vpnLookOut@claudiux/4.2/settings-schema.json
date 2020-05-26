@@ -1,0 +1,265 @@
+{
+  "layout": {
+    "type": "layout",
+    "pages": [
+      "Alerts",
+      "VPNpolicy",
+      "Shortcut",
+      "Torrentpolicy"
+    ],
+    "Torrentpolicy": {
+      "type": "page",
+      "title": "VPN-related Apps Manager",
+      "sections": [
+        "sectionT1",
+        "sectionT2"
+      ]
+    },
+    "Alerts": {
+      "type": "page",
+      "title": "Notifications",
+      "sections": [
+        "sectionA1",
+        "sectionA2"
+      ]
+    },
+    "VPNpolicy": {
+      "type": "page",
+      "title": "VPN",
+      "sections": [
+        "sectionV1",
+        "sectionV2"
+      ]
+    },
+    "Shortcut": {
+      "type": "page",
+      "title": "Keyboard shortcuts",
+      "sections": [
+        "sectionS1"
+      ]
+    },
+    "sectionV1": {
+      "type": "section",
+      "title": "VPN",
+      "keys": [
+        "vpnInterface",
+        "vpnName",
+        "connectAtStartup",
+        "deactivateAtStartup",
+        "reconnect",
+        "respectUserRequest"
+      ]
+    },
+    "sectionA1": {
+      "type": "section",
+      "title": "Display",
+      "keys": [
+        "refreshInterval-spinner",
+        "displayType",
+        "use_symbolic_icons"
+      ]
+    },
+    "sectionA2": {
+      "type": "section",
+      "title": "Sound Alert",
+      "keys": [
+        "useSoundAlert",
+        "useSoundAlertAtBeginning"
+      ]
+    },
+    "sectionS1": {
+      "type": "section",
+      "title": "Shortcuts",
+      "keys": [
+        "keybinding"
+      ]
+    },
+    "sectionT1": {
+      "type": "section",
+      "title": "Settings",
+      "keys": [
+        "manageClients"
+      ]
+    },
+    "sectionT2": {
+      "type": "section",
+      "title": "Managed Apps",
+      "dependency": "manageClients",
+      "keys": [
+        "clientsList"
+      ]
+    },
+    "sectionV2": {
+      "type": "section",
+      "title": "Activity Logs",
+      "keys": [
+        "doLogActivity",
+        "logLifetime"
+      ]
+    }
+  },
+  "vpnInterface": {
+    "type": "entry",
+    "default": "",
+    "description": "VPN Network Interface",
+    "tooltip": "You should be able to leave this field empty. This applet will try to detect this."
+  },
+  "vpnName": {
+    "type": "entry",
+    "default": "",
+    "description": "VPN Name",
+    "tooltip": "This information is automatically changed when connecting to a VPN.\nIt therefore contains the name of the last VPN to which you connected."
+  },
+  "connectAtStartup": {
+    "type": "switch",
+    "default": false,
+    "description": "Connect to VPN as this applet starts.",
+    "tooltip": "Checking this allows this applet to try to connect to the last VPN at start-up."
+  },
+  "deactivateAtStartup": {
+    "type": "switch",
+    "default": false,
+    "dependency": "connectAtStartup!=true",
+    "description": "Deactivate this applet at startup",
+    "tooltip": "When this option is checked, this applet starts in 'deactivated' state, saving resources but not monitoring anything. You can activate it from its menu."
+  },
+  "reactivationRequested": {
+    "type": "generic",
+    "default": false
+  },
+  "reconnect": {
+    "type": "switch",
+    "default": false,
+    "description": "Try to reconnect to VPN when it shuts down incidentally.",
+    "tooltip": "Checking this allows this applet to try to reconnect to VPN when it shuts down incidentally."
+  },
+  "respectUserRequest": {
+    "type": "switch",
+    "default": false,
+    "description": "Do not try to reconnect automatically if the VPN has been disconnected by the user.",
+    "tooltip": "If, by this applet only, the user disconnects the VPN, then no automatic reconnection will be tried.",
+    "dependency": "reconnect"
+  },
+  "refreshInterval-spinner": {
+    "type": "spinbutton",
+    "default": 5,
+    "min": 1,
+    "max": 60,
+    "step": 1,
+    "units": "seconds",
+    "description": "Refresh interval:",
+    "tooltip": "Time interval, in seconds, between two verifications of VPN link status. A low value increases security but causes more activity. Choose a value that is greater as your computer is slow."
+  },
+  "displayType": {
+    "type": "combobox",
+    "default": "classic",
+    "options": {
+      "Classic - Icon and Text": "classic",
+      "Compact - Icon Only": "compact"
+    },
+    "description": "Type of Display",
+    "tooltip": "This feature offers the Classic (default) display with icon and text, and compact display (Icon Only)."
+  },
+  "use_symbolic_icons": {
+    "type": "switch",
+    "default": true,
+    "description": "Use Symbolic Icons",
+    "tooltip": "Select this option if you prefer Symbolic icons instead of Full Color icons."
+  },
+  "useSoundAlert": {
+    "type": "switch",
+    "default": false,
+    "description": "Emit an audible alert when VPN shuts down.",
+    "tooltip": "Checking this allows this applet to emit an audible alert when VPN shuts down."
+  },
+  "useSoundAlertAtBeginning": {
+    "type": "switch",
+    "default": false,
+    "description": "Emit this audible alert when this Applet starts, if VPN is down.",
+    "tooltip": "Check this if you want to emit this audible alert when this Applet starts, if VPN is down.",
+    "dependency": "useSoundAlert"
+  },
+  "keybinding": {
+    "type": "keybinding",
+    "description": "Set the keybinding here to activate/deactivate the last used VPN.",
+    "default": "<Super>v"
+  },
+  "manageClients": {
+    "type": "switch",
+    "default": false,
+    "description": "Manage VPN-related Apps",
+    "tooltip": "This option allows this applet to manage the VPN-related applications you listed above."
+  },
+  "clientsList": {
+    "type": "list",
+    "description": "Managed applications",
+    "tooltip": "Name: What you want.\nCommand: The command to run the application, without its path.\nRestart: Set to TRUE if you want to restart this application as soon as the VPN link becomes active again.\nShutdown: Set to TRUE if you want to close the application as soon as the VPN link is stopped.\nVPN only: Set to TRUE if you want to quickly stop this application if it is started while the VPN is idle.",
+    "columns": [
+      {
+        "id": "name",
+        "title": "Name",
+        "type": "string"
+      },
+      {
+        "id": "command",
+        "title": "Command",
+        "type": "string"
+      },
+      {
+        "id": "restart",
+        "title": "Restart",
+        "type": "boolean"
+      },
+      {
+        "id": "shutdown",
+        "title": "Shut down",
+        "type": "boolean"
+      },
+      {
+        "id": "vpnOnly",
+        "title": "VPN only",
+        "type": "boolean"
+      }
+    ],
+    "default": [
+      {
+        "name": "Transmission",
+        "command": "transmission-gtk",
+        "restart": false,
+        "shutdown": true,
+        "vpnOnly": false
+      }
+    ]
+  },
+  "doLogActivity": {
+    "type": "switch",
+    "default": false,
+    "description": "Log the VPN status changes and the VPN-related Apps status changes",
+    "tooltip": "This option allows this applet to log the VPN status changes and the VPN-related applications status changes.\nYou will can display the log file to make diagnostics."
+  },
+  "logLifetime": {
+    "type": "combobox",
+    "default": 30,
+    "options": {
+      "1": 1,
+      "2": 2,
+      "3": 3,
+      "4": 4,
+      "5": 5,
+      "6": 6,
+      "7": 7,
+      "8": 8,
+      "9": 9,
+      "10": 10,
+      "15": 15,
+      "20": 20,
+      "30": 30,
+      "45": 45,
+      "60": 60,
+      "90": 90
+    },
+    "description": "Lifetime (days)",
+    "tooltip": "Lifetime of a record in the log file, in days.",
+    "dependency": "doLogActivity"
+  }
+}

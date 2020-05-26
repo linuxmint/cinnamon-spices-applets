@@ -1,0 +1,95 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: windowlist@cobinja.de\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-05-13 14:11+0200\n"
+"PO-Revision-Date: 2017-05-13 14:32+0200\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Last-Translator: gogo <trebelnik2@gmail.com>\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Language: hr\n"
+
+msgid "A window list with app grouping and window previews"
+msgstr "Prikaz prozora s grupiranjem aplikacija i prozorima pregleda"
+
+msgid "Remove this applet"
+msgstr "Ukloni ovaj aplet"
+
+msgid "Open new window"
+msgstr "Otvori novi prozor"
+
+msgid "Captions"
+msgstr "Natpis"
+
+msgid "Caption type"
+msgstr "Vrsta natpisa"
+
+msgid "Name"
+msgstr "Naziv"
+
+msgid "Title"
+msgstr "Naslov"
+
+msgid "Display Caption For"
+msgstr "Prikaži natpis za"
+
+msgid "None"
+msgstr "Nijedan"
+
+msgid "All"
+msgstr "Sve"
+
+msgid "Running"
+msgstr "Pokrenute"
+
+msgid "Focused"
+msgstr "Fokusirane"
+
+msgid "Label width"
+msgstr "Širina naslova"
+
+msgid "Animate label"
+msgstr "Animirani naslov"
+
+msgid "Label animation time"
+msgstr "Vrijeme animiranog naslova"
+
+msgid "Display Number"
+msgstr "Prikaz brojeva"
+
+msgid "Smart"
+msgstr "Pametan"
+
+msgid "Group Windows"
+msgstr "Grupiranje prozora"
+
+msgid "Display Favorites"
+msgstr "Prikaz omiljenih"
+
+msgid "Animation Time"
+msgstr "Vrsta animacije"
+
+msgid "Previews"
+msgstr "Pregledi"
+
+msgid "Show on hover"
+msgstr "Prikaži pri prijelazu pokazivačem"
+
+msgid "Timeout Show"
+msgstr "Istek vremena prikaza"
+
+msgid "Timeout Hide"
+msgstr "Istek vremena sakrivanja"
+
+msgid "Pin app to window list"
+msgstr "Pričvrsti aplikaciju na popis prozora"
+
+msgid "Unpin app from window list"
+msgstr "Ukloni aplikaciju s popisa prozora"
+
+msgid "Unmaximize"
+msgstr "Prikaži u prozoru"

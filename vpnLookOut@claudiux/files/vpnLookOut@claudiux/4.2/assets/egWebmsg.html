@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Hello, GNOME!</title>
+
+        <script type="application/javascript">
+        function messageFromGTK (message) {
+            // GTK will execute this function to send messages to Webkit
+            document.getElementById ("msg").innerHTML = (message);
+        }
+        function messageToGTK () {
+            // Webkit will change 'status bar/window.status' text to send messages to GTK
+            window.status = 'Message from Webkit';
+        }
+        </script>
+
+        <style type="text/css">
+            body {
+                font-face: Cantarell, sans-serif;
+                text-align: center; }
+        </style>
+
+    </head>
+    <body>
+        <br />
+        <br />
+        <button type="button" onclick="messageToGTK()">Webkit to GTK message</button>
+        <br />
+        <br />
+        <div id="msg"></div>
+    </body>
+</html>

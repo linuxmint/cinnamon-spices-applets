@@ -2,7 +2,7 @@ const Gio = imports.gi.Gio;
 const Lang = imports.lang;
 const Applet = imports.ui.applet;
 const Main = imports.ui.main;
-const Gettext = imports.gettext.domain('cinnamon-applets');
+const Gettext = imports.gettext.domain('cinnamon');
 const _ = Gettext.gettext;
 
 function MyApplet(orientation, panel_height, instance_id) {

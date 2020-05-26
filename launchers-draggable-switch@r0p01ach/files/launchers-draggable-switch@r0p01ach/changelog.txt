@@ -1,8 +1,0 @@
-
-version 0.1.1
-  - fixed hint spelling
-  - custom icon
-  - version in metadata
-
-version 0.1.0
-  - initial public version

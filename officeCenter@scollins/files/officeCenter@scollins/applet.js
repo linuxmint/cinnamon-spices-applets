@@ -1,4 +1,3 @@
-const Cinnamon = imports.gi.Cinnamon;
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const CMenu = imports.gi.CMenu;
@@ -8,198 +7,43 @@ const St = imports.gi.St;
 
 const Applet = imports.ui.applet;
 const Main = imports.ui.main;
-const ModalDialog = imports.ui.modalDialog;
 const PopupMenu = imports.ui.popupMenu;
 const Settings = imports.ui.settings;
 const Tooltips = imports.ui.tooltips;
 
-const Util = imports.misc.util;
+const Gettext = imports.gettext;
 const Lang = imports.lang;
 
 const MENU_ITEM_TEXT_LENGTH = 25;
 
 let menu_item_icon_size;
+let UUID;
 
-
-function AboutDialog(metadata) {
-    this._init(metadata);
+function _(str) {
+   let customTranslation = Gettext.dgettext(UUID, str);
+   if(customTranslation != str) {
+      return customTranslation;
+   }
+   return Gettext.gettext(str);
 }
 
-AboutDialog.prototype = {
-    __proto__: ModalDialog.ModalDialog.prototype,
-    
-    _init: function(metadata) {
+class MenuItem extends PopupMenu.PopupBaseMenuItem {
+    constructor(title, icon, tooltipText){
         try {
-            ModalDialog.ModalDialog.prototype._init.call(this, {  });
-            
-            let contentBox = new St.BoxLayout({ vertical: true, style_class: "about-content" });
-            this.contentLayout.add_actor(contentBox);
-            
-            let topBox = new St.BoxLayout();
-            contentBox.add_actor(topBox);
-            
-            //icon
-            let icon;
-            if ( metadata.icon ) icon = new St.Icon({ icon_name: metadata.icon, icon_size: 48, icon_type: St.IconType.FULLCOLOR, style_class: "about-icon" });
-            else {
-                let file = Gio.file_new_for_path(metadata.path + "/icon.png");
-                if ( file.query_exists(null) ) {
-                    let gicon = new Gio.FileIcon({ file: file });
-                    icon = new St.Icon({ gicon: gicon, icon_size: 48, icon_type: St.IconType.FULLCOLOR, style_class: "about-icon" });
-                }
-                else {
-                    icon = new St.Icon({ icon_name: "applets", icon_size: 48, icon_type: St.IconType.FULLCOLOR, style_class: "about-icon" });
-                }
-            }
-            topBox.add_actor(icon);
-            
-            let topTextBox = new St.BoxLayout({ vertical: true });
-            topBox.add_actor(topTextBox);
-            
-            /*title*/
-            let titleBox = new St.BoxLayout();
-            topTextBox.add_actor(titleBox);
-            
-            let title = new St.Label({ text: metadata.name, style_class: "about-title" });
-            titleBox.add_actor(title);
-            
-            if ( metadata.version ) {
-                let versionBin = new St.Bin({ x_align: St.Align.START, y_align: St.Align.END});
-                titleBox.add_actor(versionBin);
-                let version = new St.Label({ text: "v " + metadata.version, style_class: "about-version" });
-                versionBin.add_actor(version);
-            }
-            
-            //uuid
-            let uuid = new St.Label({ text: metadata.uuid, style_class: "about-uuid" });
-            topTextBox.add_actor(uuid);
-            
-            //description
-            let desc = new St.Label({ text: metadata.description, style_class: "about-description" });
-            let dText = desc.clutter_text;
-            topTextBox.add_actor(desc);
-            
-            /*optional content*/
-            let scrollBox = new St.ScrollView({ style_class: "about-scrollBox" });
-            contentBox.add_actor(scrollBox);
-            let infoBox = new St.BoxLayout({ vertical: true, style_class: "about-scrollBox-innerBox" });
-            scrollBox.add_actor(infoBox);
-            
-            //comments
-            if ( metadata.comments ) {
-                let comments = new St.Label({ text: "Comments:\n\t" + metadata.comments });
-                let cText = comments.clutter_text;
-                cText.ellipsize = Pango.EllipsizeMode.NONE;
-                cText.line_wrap = true;
-                cText.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR);
-                infoBox.add_actor(comments);
-            }
-            
-            //website
-            if ( metadata.website ) {
-                let wsBox = new St.BoxLayout({ vertical: true });
-                infoBox.add_actor(wsBox);
-                
-                let wLabel = new St.Label({ text: "Website:" });
-                wsBox.add_actor(wLabel);
-                
-                let wsButton = new St.Button({ x_align: St.Align.START, style_class: "cinnamon-link", name: "about-website" });
-                wsBox.add_actor(wsButton);
-                let website = new St.Label({ text: metadata.website });
-                let wtext = website.clutter_text;
-                wtext.ellipsize = Pango.EllipsizeMode.NONE;
-                wtext.line_wrap = true;
-                wtext.set_line_wrap_mode(Pango.WrapMode.WORD_CHAR);
-                wsButton.add_actor(website);
-                wsButton.connect("clicked", Lang.bind(this, this.launchSite, metadata.website));
-            }
-            
-            //contributors
-            if ( metadata.contributors ) {
-                let list = metadata.contributors.split(",").join("\n\t");
-                let contributors = new St.Label({ text: "Contributors:\n\t" + list });
-                infoBox.add_actor(contributors);
-            }
-            
-            //dialog close button
-            this.setButtons([
-                { label: "Close", key: "", focus: true, action: Lang.bind(this, this._onOk) }
-            ]);
-            
-            this.open(global.get_current_time());
-        } catch(e) {
-            global.log(e);
-        }
-    },
-    
-    _onOk: function() {
-        this.close(global.get_current_time());
-    },
-    
-    launchSite: function(a, b, site) {
-        Util.spawnCommandLine("xdg-open " + site);
-        this.close(global.get_current_time());
-    }
-}
-
-
-function MenuItem(title, icon){
-    this._init(title, icon);
-}
-
-MenuItem.prototype = {
-    __proto__: PopupMenu.PopupBaseMenuItem.prototype,
-    
-    _init: function(title, icon, params){
-        try {
-            
-            PopupMenu.PopupBaseMenuItem.prototype._init.call(this, params);
+            super();
             this.actor.add_style_class_name("xCenter-menuItem");
             if ( icon != null ) this.addActor(icon);
-            
+
             let label = new St.Label({ style_class: "xCenter-menuItemLabel", text: title });
             this.addActor(label);
             label.clutter_text.ellipsize = Pango.EllipsizeMode.END;
-            
+
             this.actor._delegate = this;
-            
-            let tooltip = new Tooltips.Tooltip(this.actor, title);
-            
+
+            if ( !tooltipText ) tooltipText = title;
+            let tooltip = new Tooltips.Tooltip(this.actor, tooltipText);
+
             this.connect("activate", Lang.bind(this, this.launch));
-            
-        } catch (e) {
-            global.logError(e);
-        }
-    }
-}
-
-
-function LauncherMenuItem(app) {
-    this._init(app);
-}
-
-LauncherMenuItem.prototype = {
-    __proto__: MenuItem.prototype,
-    
-    _init: function(app) {
-        try {
-            
-            this.app = app;
-            
-            let title = app.get_name();
-            let icon = app.create_icon_texture(menu_item_icon_size);
-            MenuItem.prototype._init.call(this, title, icon);
-            
-        } catch(e) {
-            global.logError(e);
-        }
-    },
-    
-    launch: function() {
-        try {
-            
-            this.app.open_new_window(-1);
-            
         } catch(e) {
             global.logError(e);
         }
@@ -207,32 +51,46 @@ LauncherMenuItem.prototype = {
 }
 
 
-function DocumentMenuItem(file) {
-    this._init(file);
+class LauncherMenuItem extends MenuItem {
+    constructor(app_info) {
+        try {
+            let title = app_info.get_display_name();
+            let gicon = app_info.get_icon();
+            let icon = new St.Icon({gicon: gicon, icon_size: menu_item_icon_size, icon_type: St.IconType.FULLCOLOR});
+            super(title, icon);
+
+            this.app_info = app_info;
+        } catch(e) {
+            global.logError(e);
+        }
+    }
+
+    launch() {
+        try {
+            this.app_info.launch([], null);
+        } catch(e) {
+            global.logError(e);
+        }
+    }
 }
 
-DocumentMenuItem.prototype = {
-    __proto__: MenuItem.prototype,
-    
-    _init: function(file) {
+
+class DocumentMenuItem extends MenuItem {
+    constructor(file) {
         try {
-            
             let fileInfo = file.query_info("*", Gio.FileQueryInfoFlags.NONE, null);
-            this.uri = file.get_uri();
-            
             let icon = fileInfo.get_icon();
-            MenuItem.prototype._init.call(this, fileInfo.get_name(), St.TextureCache.get_default().load_gicon(null, icon, menu_item_icon_size));
-            
+            super(fileInfo.get_name(), St.TextureCache.get_default().load_gicon(null, icon, menu_item_icon_size), file.get_path());
+
+            this.uri = file.get_uri();
         } catch(e) {
             global.logError(e);
         }
-    },
-    
-    launch: function(event) {
+    }
+
+    launch(event) {
         try {
-            
             Gio.app_info_launch_default_for_uri(this.uri, global.create_app_launch_context());
-            
         } catch(e) {
             global.logError(e);
         }
@@ -240,31 +98,21 @@ DocumentMenuItem.prototype = {
 }
 
 
-function RecentMenuItem(title, iName, file) {
-    this._init(title, iName, file);
-}
-
-RecentMenuItem.prototype = {
-    __proto__: MenuItem.prototype,
-    
-    _init: function(title, iName, file) {
+class RecentMenuItem extends MenuItem {
+    constructor(title, iName, file) {
         try {
-            
-            this.file = file;
-            
             let icon = new St.Icon({icon_name: iName, icon_size: menu_item_icon_size, icon_type: St.IconType.FULLCOLOR});
-            MenuItem.prototype._init.call(this, title, icon);
-            
+            super(title, icon);
+
+            this.file = file;
         } catch(e) {
             global.logError(e);
         }
-    },
-    
-    launch: function(event) {
+    }
+
+    launch(event) {
         try {
-            
             Gio.app_info_launch_default_for_uri(this.file, global.create_app_launch_context());
-            
         } catch(e) {
             global.logError(e);
         }
@@ -272,253 +120,225 @@ RecentMenuItem.prototype = {
 }
 
 
-function ClearRecentMenuItem(recentManager) {
-    this._init(recentManager);
-}
-
-ClearRecentMenuItem.prototype = {
-    __proto__: MenuItem.prototype,
-    
-    _init: function(recentManager) {
+class ClearRecentMenuItem extends MenuItem {
+    constructor(recentManager) {
         try {
-            
-            this.recentManager = recentManager;
-            
             let icon = new St.Icon({icon_name: "edit-clear", icon_size: menu_item_icon_size, icon_type: St.IconType.FULLCOLOR});
-            MenuItem.prototype._init.call(this, _("Clear"), icon);
-            
+            super(_("Clear"), icon);
+
+            this.recentManager = recentManager;
         } catch(e) {
             global.logError(e);
         }
-    },
-    
-    launch: function(event) {
+    }
+
+    launch(event) {
         try {
-            
             this.recentManager.purge_items();
-            
         } catch(e) {
             global.logError(e);
         }
     }
 }
 
-
-function MyApplet(metadata, orientation, panel_height, instanceId) {
-    this._init(metadata, orientation, panel_height, instanceId);
-}
-
-MyApplet.prototype = {
-    __proto__: Applet.TextIconApplet.prototype,
-    
-    _init: function(metadata, orientation, panel_height, instanceId) {
+class MyApplet extends Applet.TextIconApplet {
+    constructor(metadata, orientation, panel_height, instanceId) {
         try {
-            
+            super(orientation, panel_height);
+
             this.metadata = metadata;
             this.instanceId = instanceId;
             this.orientation = orientation;
-            Applet.TextIconApplet.prototype._init.call(this, this.orientation, panel_height);
-            
+
+            UUID = metadata.uuid;
+            Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
+
             //initiate settings
             this.bindSettings();
-            
+
             //set up panel
             this.setPanelIcon();
             this.setPanelText();
             this.set_applet_tooltip(_("Office"));
-            
-            this._applet_context_menu.addMenuItem(new Applet.MenuItem(_("About..."), "dialog-question", Lang.bind(this, this.openAbout)));
-            
+
             this.menuManager = new PopupMenu.PopupMenuManager(this);
-            this.appSys = Cinnamon.AppSystem.get_default();
             this.recentManager = new Gtk.RecentManager();
-            
+            this.tree = CMenu.Tree.new('cinnamon-applications.menu', CMenu.TreeFlags.SHOW_EMPTY|CMenu.TreeFlags.INCLUDE_EXCLUDED|CMenu.TreeFlags.INCLUDE_NODISPLAY|CMenu.TreeFlags.SHOW_ALL_SEPARATORS|CMenu.TreeFlags.SORT_DISPLAY_NAME);
+            this.tree.load_sync();
+
             //listen for changes
-            this.appSysId = this.appSys.connect("installed-changed", Lang.bind(this, this.buildLaunchersSection));
-            
+            this.treeChangedId = this.tree.connect("changed", Lang.bind(this, this.buildLaunchersSection));
+
             this.buildMenu();
-            
-        } catch (e) {
+        } catch(e) {
             global.logError(e);
         }
-    },
-    
-    on_applet_clicked: function(event) {
+    }
+
+    on_applet_clicked(event) {
         this.menu.toggle();
-    },
-    
-    on_applet_removed_from_panel: function() {
+    }
+
+    on_applet_removed_from_panel() {
         if ( this.keyId ) Main.keybindingManager.removeHotKey(this.keyId);
         this.destroyMenu();
-        this.appSys.disconnect(this.appSysId);
-    },
-    
-    openAbout: function() {
-        new AboutDialog(this.metadata);
-    },
-    
-    openMenu: function(){
+        this.tree.disconnect(this.treeChangedId);
+    }
+
+    openMenu(){
         this.menu.toggle();
-    },
-    
-    bindSettings: function() {
+    }
+
+    bindSettings() {
         this.settings = new Settings.AppletSettings(this, this.metadata["uuid"], this.instanceId);
         this.settings.bindProperty(Settings.BindingDirection.IN, "panelIcon", "panelIcon", this.setPanelIcon);
         this.settings.bindProperty(Settings.BindingDirection.IN, "panelText", "panelText", this.setPanelText);
         this.settings.bindProperty(Settings.BindingDirection.IN, "iconSize", "iconSize", this.buildMenu);
         this.settings.bindProperty(Settings.BindingDirection.IN, "showDocuments", "showDocuments", this.buildMenu);
-        this.settings.bindProperty(Settings.BindingDirection.IN, "altDir", "altDir", this.buildMenu);
         this.settings.bindProperty(Settings.BindingDirection.IN, "recurseDocuments", "recurseDocuments", this.updateDocumentsSection);
+        this.settings.bindProperty(Settings.BindingDirection.IN, "altDir", "altDir", this.updateDocumentsSection);
+        this.settings.bindProperty(Settings.BindingDirection.IN, "docMax", "docMax", this.updateDocumentsSection);
         this.settings.bindProperty(Settings.BindingDirection.IN, "showRecentDocuments", "showRecentDocuments", this.buildMenu);
         this.settings.bindProperty(Settings.BindingDirection.IN, "recentSizeLimit", "recentSizeLimit", this.updateRecentDocumentsSection);
         this.settings.bindProperty(Settings.BindingDirection.IN, "keyOpen", "keyOpen", this.setKeybinding);
         this.setKeybinding();
-    },
-    
-    setKeybinding: function() {
+    }
+
+    setKeybinding() {
         if ( this.keyId ) Main.keybindingManager.removeHotKey(this.keyId);
         if ( this.keyOpen == "" ) return;
         this.keyId = "officeCenter-open";
         Main.keybindingManager.addHotKey(this.keyId, this.keyOpen, Lang.bind(this, this.openMenu));
-    },
-    
-    buildMenu: function() {
+    }
+
+    buildMenu() {
         try {
-            
             this.destroyMenu();
-            
+
             menu_item_icon_size = this.iconSize;
-            
+
             this.menu = new Applet.AppletPopupMenu(this, this.orientation);
-            this.menu.actor.add_style_class_name("xCenter-menu");
+
+            // cinna 3.2 and above uses a different func
+            if (typeof this.menu.setCustomStyleClass === "function") {
+                this.menu.setCustomStyleClass("xCenter-menu");
+            } else {
+                this.menu.actor.add_style_class_name("xCenter-menu");
+            }
             this.menuManager.addMenu(this.menu);
             let section = new PopupMenu.PopupMenuSection();
             this.menu.addMenuItem(section);
             let mainBox = new St.BoxLayout({ style_class: "xCenter-mainBox", vertical: false });
             section.actor.add_actor(mainBox);
-            
+
             //launchers section
             let launchersPaneBox = new St.BoxLayout({ style_class: "xCenter-pane" });
             mainBox.add_actor(launchersPaneBox);
             let launchersPane = new PopupMenu.PopupMenuSection();
             launchersPaneBox.add_actor(launchersPane.actor);
             this.menu._connectSubMenuSignals(launchersPane, launchersPane);
-            
+
             let launchersTitle = new PopupMenu.PopupMenuItem(_("LAUNCHERS") , { style_class: "xCenter-title", reactive: false });
             launchersPane.addMenuItem(launchersTitle);
             this.launchersSection = new PopupMenu.PopupMenuSection();
             launchersPane.addMenuItem(this.launchersSection);
-            
+
             this.buildLaunchersSection();
-            
+
             //documents section
             if ( this.showDocuments ) {
-                //determine directory
-                if ( this.altDir == "" ) this.documentPath = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DOCUMENTS);
-                else this.documentPath = this.altDir;
-                
-                //if directory exists, build documents section
-                if ( this.documentPath && GLib.file_test(this.documentPath, GLib.FileTest.IS_DIR) ) {
-                    this.dirMonitor = Gio.file_new_for_path(this.documentPath).monitor_directory(Gio.FileMonitorFlags.SEND_MOVED, null);
-                    this.monitorId = this.dirMonitor.connect("changed", Lang.bind(this, this.updateDocumentsSection));
-                    
-                    let documentPaneBox = new St.BoxLayout({ style_class: "xCenter-pane" });
-                    mainBox.add_actor(documentPaneBox);
-                    let documentPane = new PopupMenu.PopupMenuSection();
-                    documentPaneBox.add_actor(documentPane.actor);
-                    this.menu._connectSubMenuSignals(documentPane, documentPane);
-                    
-                    let documentTitle = new PopupMenu.PopupBaseMenuItem({ style_class: "xCenter-title", reactive: false });
-                    documentTitle.addActor(new St.Label({ text: _("DOCUMENTS") }));
-                    documentPane.addMenuItem(documentTitle);
-                    
-                    //add link to documents folder
-                    let linkButton = new St.Button();
-                    documentTitle.addActor(linkButton);
-                    let file = Gio.file_new_for_path(this.metadata.path + "/link-symbolic.svg");
-                    let gicon = new Gio.FileIcon({ file: file });
-                    let image = new St.Icon({ gicon: gicon, icon_size: 10, icon_type: St.IconType.SYMBOLIC });
-                    linkButton.add_actor(image);
-                    linkButton.connect("clicked", Lang.bind(this, this.openDocumentsFolder));
-                    new Tooltips.Tooltip(linkButton, _("Open folder"));
-                    
-                    let documentScrollBox = new St.ScrollView({ style_class: "xCenter-scrollBox", x_fill: true, y_fill: false, y_align: St.Align.START });
-                    documentPane.actor.add_actor(documentScrollBox);
-                    documentScrollBox.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC);
-                    let vscroll = documentScrollBox.get_vscroll_bar();
-                    vscroll.connect("scroll-start", Lang.bind(this, function() { this.menu.passEvents = true; }));
-                    vscroll.connect("scroll-stop", Lang.bind(this, function() { this.menu.passEvents = false; }));
-                    
-                    this.documentSection = new PopupMenu.PopupMenuSection();
-                    documentScrollBox.add_actor(this.documentSection.actor);
-                    documentPane._connectSubMenuSignals(this.documentSection, this.documentSection);
-                    
-                    this.updateDocumentsSection();
-                }
+                let documentPaneBox = new St.BoxLayout({ style_class: "xCenter-pane" });
+                mainBox.add_actor(documentPaneBox);
+                let documentPane = new PopupMenu.PopupMenuSection();
+                documentPaneBox.add_actor(documentPane.actor);
+                this.menu._connectSubMenuSignals(documentPane, documentPane);
+
+                let documentTitle = new PopupMenu.PopupBaseMenuItem({ style_class: "xCenter-title", reactive: false });
+                documentTitle.addActor(new St.Label({ text: _("DOCUMENTS") }));
+                documentPane.addMenuItem(documentTitle);
+
+                //add link to documents folder
+                let linkButton = new St.Button();
+                documentTitle.addActor(linkButton);
+                let file = Gio.file_new_for_path(this.metadata.path + "/link-symbolic.svg");
+                let gicon = new Gio.FileIcon({ file: file });
+                let image = new St.Icon({ gicon: gicon, icon_size: 10, icon_type: St.IconType.SYMBOLIC });
+                linkButton.add_actor(image);
+                linkButton.connect("clicked", Lang.bind(this, this.openDocumentsFolder));
+                new Tooltips.Tooltip(linkButton, _("Open folder"));
+
+                let documentScrollBox = new St.ScrollView({ style_class: "xCenter-scrollBox", x_fill: true, y_fill: false, y_align: St.Align.START });
+                documentPane.actor.add_actor(documentScrollBox);
+                documentScrollBox.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC);
+                let vscroll = documentScrollBox.get_vscroll_bar();
+                vscroll.connect("scroll-start", Lang.bind(this, function() { this.menu.passEvents = true; }));
+                vscroll.connect("scroll-stop", Lang.bind(this, function() { this.menu.passEvents = false; }));
+
+                this.documentSection = new PopupMenu.PopupMenuSection();
+                documentScrollBox.add_actor(this.documentSection.actor);
+                documentPane._connectSubMenuSignals(this.documentSection, this.documentSection);
+
+                this.updateDocumentsSection();
             }
-            
+
             //recent documents section
             if ( this.showRecentDocuments ) {
                 this.recentManagerId = this.recentManager.connect("changed", Lang.bind(this, this.updateRecentDocumentsSection));
-                
+
                 let recentPaneBox = new St.BoxLayout({ style_class: "xCenter-pane" });
                 mainBox.add_actor(recentPaneBox);
                 let recentPane = new PopupMenu.PopupMenuSection();
                 recentPaneBox.add_actor(recentPane.actor);
                 this.menu._connectSubMenuSignals(recentPane, recentPane);
-                
+
                 let recentTitle = new PopupMenu.PopupMenuItem(_("RECENT DOCUMENTS"), { style_class: "xCenter-title", reactive: false });
                 recentPane.addMenuItem(recentTitle);
-                
+
                 let recentScrollBox = new St.ScrollView({ style_class: "xCenter-scrollBox", x_fill: true, y_fill: false, y_align: St.Align.START });
                 recentPane.actor.add_actor(recentScrollBox);
                 recentScrollBox.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC);
                 let vscroll = recentScrollBox.get_vscroll_bar();
                 vscroll.connect("scroll-start", Lang.bind(this, function() { this.menu.passEvents = true; }));
                 vscroll.connect("scroll-stop", Lang.bind(this, function() { this.menu.passEvents = false; }));
-                
+
                 this.recentSection = new PopupMenu.PopupMenuSection();
                 recentScrollBox.add_actor(this.recentSection.actor);
                 recentPane._connectSubMenuSignals(this.recentSection, this.recentSection);
-                
+
                 let clearRecent = new ClearRecentMenuItem(this.recentManager);
                 recentPane.addMenuItem(clearRecent);
-                
+
                 this.updateRecentDocumentsSection();
             }
-            
         } catch(e) {
             global.logError(e);
         }
-    },
-    
-    destroyMenu: function() {
+    }
+
+    destroyMenu() {
         if ( this.monitorId ) this.dirMonitor.disconnect(this.monitorId);
         if ( this.recentManagerId ) this.recentManager.disconnect(this.recentManagerId);
-        
+
         if ( this.menu ) this.menu.destroy();
-    },
-    
-    buildLaunchersSection: function() {
-        
+    }
+
+    buildLaunchersSection() {
         this.launchersSection.removeAll();
-        
-        let apps = [];
-        let tree = this.appSys.get_tree();
-        let root = tree.get_root_directory();
+
+        let root = this.tree.get_root_directory();
         let iter = root.iter();
         let nextType;
         while ( (nextType = iter.next()) != CMenu.TreeItemType.INVALID ) {
             if ( nextType == CMenu.TreeItemType.DIRECTORY ) {
                 let dir = iter.get_directory();
-                if ( dir.get_menu_id() == _("Office") ) {
+                if ( dir.get_menu_id() == "Office" ) {
                     let dirIter = dir.iter();
                     while (( nextType = dirIter.next()) != CMenu.TreeItemType.INVALID ) {
                         if ( nextType == CMenu.TreeItemType.ENTRY ) {
                             let entry = dirIter.get_entry();
-                            if (!entry.get_app_info().get_nodisplay()) {
-                                var app = this.appSys.lookup_app_by_tree_entry(entry);
-                                let launcherItem = new LauncherMenuItem(app);
+                            let app_info = entry.get_app_info()
+                            if (!app_info.get_nodisplay()) {
+                                let launcherItem = new LauncherMenuItem(app_info);
                                 this.launchersSection.addMenuItem(launcherItem);
                             }
                         }
@@ -526,48 +346,67 @@ MyApplet.prototype = {
                 }
             }
         }
-        
-    },
-    
-    updateDocumentsSection: function() {
+    }
+
+    updateDocumentsSection() {
+        if ( this.dirMonitor && this.monitorId ) {
+            this.dirMonitor.disconnect(this.monitorId);
+            this.dirMonitor = undefined;
+            this.monitorId = undefined;
+        }
         if ( !this.documentSection ) return;
         this.documentSection.removeAll();
-        
+
+        //determine directory
+        if ( this.altDir && GLib.file_test(this.altDir, GLib.FileTest.IS_DIR) ) this.documentPath = this.altDir;
+        else this.documentPath = GLib.get_user_special_dir(GLib.UserDirectory.DIRECTORY_DOCUMENTS);
+
+        this.documentCount = 0;
+
         let dir = Gio.file_new_for_path(this.documentPath);
+
         this.getDocuments(dir);
-    },
-    
-    getDocuments: function(dir) {
-        dir.enumerate_children_async("*", Gio.FileQueryInfoFlags.NONE, 0, null, Lang.bind(this, function(dir, res) {
-            let gEnum = dir.enumerate_children_finish(res);
-            
-            let info;
-            let directories = [];
-            while ( (info = gEnum.next_file(null)) != null ) {
-                if ( info.get_is_hidden() ) continue;
-                if ( info.get_file_type() == Gio.FileType.DIRECTORY && this.recurseDocuments ) {
-                    directories.push(dir.get_child(info.get_name()));
-                }
-                else {
-                    let documentItem = new DocumentMenuItem(dir.get_child(info.get_name()));
-                    this.documentSection.addMenuItem(documentItem);
-                }
+
+        this.dirMonitor = dir.monitor_directory(Gio.FileMonitorFlags.SEND_MOVED, null);
+        this.monitorId = this.dirMonitor.connect("changed", Lang.bind(this, this.updateDocumentsSection));
+    }
+
+    getDocuments(dir) {
+        if ( this.documentCount >= this.docMax ) return;
+        dir.enumerate_children_async("*", Gio.FileQueryInfoFlags.NONE, 0, null, Lang.bind(this, this.processDocuments));
+    }
+
+    processDocuments(dir, res) {
+        let gEnum = dir.enumerate_children_finish(res);
+
+        let info;
+        let directories = [];
+        while ( (info = gEnum.next_file(null)) != null ) {
+        if ( this.documentCount >= this.docMax ) break;
+            if ( info.get_is_hidden() ) continue;
+            if ( info.get_file_type() == Gio.FileType.DIRECTORY && this.recurseDocuments ) {
+                directories.push(dir.get_child(info.get_name()));
             }
-            gEnum.close(null);
-            
-            for ( let i = 0; i < directories.length; i++ ) {
-                this.getDocuments(directories[i]);
+            else {
+                let documentItem = new DocumentMenuItem(dir.get_child(info.get_name()));
+                this.documentSection.addMenuItem(documentItem);
+                this.documentCount++;
             }
-        }));
-    },
-    
-    updateRecentDocumentsSection: function() {
-        
+        }
+        gEnum.close(null);
+
+        for ( let i = 0; i < directories.length; i++ ) {
+            this.getDocuments(directories[i]);
+        }
+    }
+
+    updateRecentDocumentsSection() {
+
         if ( !this.recentSection ) return;
         this.recentSection.removeAll();
-        
+
         let recentDocuments = this.recentManager.get_items();
-        
+
         let showCount;
         if ( this.recentSizeLimit == 0 ) showCount = recentDocuments.length;
         else showCount = ( this.recentSizeLimit < recentDocuments.length ) ? this.recentSizeLimit : recentDocuments.length;
@@ -577,15 +416,15 @@ MyApplet.prototype = {
             let recentItem = new RecentMenuItem(recentInfo.get_display_name(), mimeType, recentInfo.get_uri());
             this.recentSection.addMenuItem(recentItem);
         }
-        
-    },
-    
-    openDocumentsFolder: function() {
+
+    }
+
+    openDocumentsFolder() {
         this.menu.close();
         Gio.app_info_launch_default_for_uri("file://" + this.documentPath, global.create_app_launch_context());
-    },
-    
-    setPanelIcon: function() {
+    }
+
+    setPanelIcon() {
         if ( this.panelIcon == "" ||
            ( GLib.path_is_absolute(this.panelIcon) &&
              GLib.file_test(this.panelIcon, GLib.FileTest.EXISTS) ) ) {
@@ -597,16 +436,16 @@ MyApplet.prototype = {
             else this.set_applet_icon_name(this.panelIcon);
         }
         else this.set_applet_icon_name("applications-office");
-    },
-    
-    setPanelText: function() {
+    }
+
+    setPanelText() {
         if ( this.panelText ) this.set_applet_label(this.panelText);
         else this.set_applet_label("");
-    },
-    
-    set_applet_icon_symbolic_path: function(icon_path) {
+    }
+
+    set_applet_icon_symbolic_path(icon_path) {
         if (this._applet_icon_box.child) this._applet_icon_box.child.destroy();
-        
+
         if (icon_path){
             let file = Gio.file_new_for_path(icon_path);
             let gicon = new Gio.FileIcon({ file: file });

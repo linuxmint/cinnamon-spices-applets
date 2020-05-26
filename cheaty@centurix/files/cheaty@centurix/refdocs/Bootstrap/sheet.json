@@ -1,0 +1,170 @@
+{
+	"name": "Bootstrap Cheatsheet",
+	"description": "Bootstrap Cheatsheet",
+	"author": "Chris Read",
+	"email": "centurix@gmail.com",
+	"repository": "http://fipo.co",
+	"version": "1.0",
+	"sections": {
+		"Setup": {
+			"DOCTYPE": {
+				"description": "Correct DOCTYPE declaration",
+				"code": "<!DOCTYPE html>\n<html lang=\"en\">\n...\n</html>"
+			},
+			"Mobile Viewport": {
+				"description": "Set the correct scale",
+				"code": "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">"
+			},
+			"Basic Container": {
+				"description": "A simple container",
+				"code": "<div class=\"container\">\n...\n</div>"
+			},
+			"Fluid Container": {
+				"description": "A simple container",
+				"code": "<div class=\"container-fluid\">\n...\n</div>"
+			}
+		},
+		"Grid System": {
+			"Screen Sizes": {
+				"description": "Available screen resolution prefixes",
+				"code": "< 768px: col-xs-*\n>= 768px: col-sm-*\n>= 992px: col-md-*\n>= 1170px: col-lg-*"
+			},
+			"12 Column Grid": {
+				"description": "12 Column Grid Layout",
+				"code": "<div class=\"row\">\n\t<div class=\"col-md-1\">...</div>\n\t<div class=\"col-md-1\">...</div>\n\t<div class=\"col-md-1\">...</div>\n\t<div class=\"col-md-1\">...</div>\n\t<div class=\"col-md-1\">...</div>\n\t<div class=\"col-md-1\">...</div>\n\t<div class=\"col-md-1\">...</div>\n\t<div class=\"col-md-1\">...</div>\n\t<div class=\"col-md-1\">...</div>\n\t<div class=\"col-md-1\">...</div>\n\t<div class=\"col-md-1\">...</div>\n\t<div class=\"col-md-1\">...</div>\n</div>"
+			},
+			"6 Column Grid": {
+				"description": "6 Column Grid Layout",
+				"code": "<div class=\"row\">\n\t<div class=\"col-md-2\">...</div>\n\t<div class=\"col-md-2\">...</div>\n\t<div class=\"col-md-2\">...</div>\n\t<div class=\"col-md-2\">...</div>\n\t<div class=\"col-md-2\">...</div>\n\t<div class=\"col-md-2\">...</div>\n</div>"
+			},
+			"4 Column Grid": {
+				"description": "4 Column Grid Layout",
+				"code": "<div class=\"row\">\n\t<div class=\"col-md-3\">...</div>\n\t<div class=\"col-md-3\">...</div>\n\t<div class=\"col-md-3\">...</div>\n\t<div class=\"col-md-3\">...</div>\n</div>"
+			},
+			"3 Column Grid": {
+				"description": "3 Column Grid Layout",
+				"code": "<div class=\"row\">\n\t<div class=\"col-md-4\">...</div>\n\t<div class=\"col-md-4\">...</div>\n\t<div class=\"col-md-4\">...</div>\n</div>"
+			},
+			"2 Column Grid": {
+				"description": "2 Column Grid Layout",
+				"code": "<div class=\"row\">\n\t<div class=\"col-md-6\">...</div>\n\t<div class=\"col-md-6\">...</div>\n</div>"
+			},
+			"Column Offset": {
+				"description": "Move columns to the right with a column offset",
+				"code": "<div class=\"col-md-4 col-md-offset-4\">...</div>"
+			},
+			"Column Ordering": {
+				"description": "Ordering columns within the grid system",
+				"code": "<div class=\"col-md-9 col-md-push-3\">...</div>\n<div class=\"col-md-3 col-md-pull-9\">...</div>"
+			}
+		},
+		"Typography": {
+			"Lead Body": {
+				"description": "Make a paragraph standout",
+				"code": "<p class=\"lead\">...</p>"
+			},
+			"Uppercase": {
+				"description": "Force uppercase",
+				"code": "<p class=\"text-uppercase\">...</p>"
+			},
+			"Lowercase": {
+				"description": "Force lowercase",
+				"code": "<p class=\"text-lowercase\">...</p>"
+			},
+			"Capitalize": {
+				"description": "Capitalized text",
+				"code": "<p class=\"text-capitalize\">...</p>"
+			}
+		},
+		"Alignment": {
+			"Left": {
+				"description": "Left aligned test",
+				"code": "<p class=\"text-left\">...</p>"
+			},
+			"Center": {
+				"description": "Center aligned test",
+				"code": "<p class=\"text-center\">...</p>"
+			},
+			"Right": {
+				"description": "Right aligned test",
+				"code": "<p class=\"text-right\">...</p>"
+			},
+			"Justify": {
+				"description": "Justified test",
+				"code": "<p class=\"text-justify\">...</p>"
+			},
+			"nowrap": {
+				"description": "No wrap test",
+				"code": "<p class=\"text-nowrap\">...</p>"
+			}
+		},
+		"Tables": {
+			"Basic Table": {
+				"description": "Basic table layout",
+				"code": "<table class=\"table\">\n...\n</table>"
+			},
+			"Striped Rows": {
+				"description": "Table with striped rows",
+				"code": "<table class=\"table table-striped\">\n...\n</table>"
+			},
+			"Bordered": {
+				"description": "Table with a border",
+				"code": "<table class=\"table table-bordered\">\n...\n</table>"				
+			},
+			"Hover Rows": {
+				"description": "Table with hover rows",
+				"code": "<table class=\"table table-hover\">\n...\n</table>"				
+			},
+			"Condensed Format": {
+				"description": "Table with a condensed format",
+				"code": "<table class=\"table table-condensed\">\n...\n</table>"				
+			},
+			"Coloured Rows": {
+				"description": "Table with coloured rows",
+				"code": "<table class=\"table\">\n\t<tr class=\"active\">...</tr>\n\t<tr class=\"success\">...</tr>\n\t<tr class=\"warning\">...</tr>\n\t<tr class=\"danger\">...</tr>\n\t<tr class=\"info\">...</tr>\n</table>"
+			},
+			"Responsive Layout": {
+				"description": "Responsive table layout",
+				"code": "<table class=\"table-responsive\">\n...\n</table>"
+			}
+		},
+		"Forms": {
+			"Basic Form": {
+				"description": "Basic from layout",
+				"code": "<form>\n\t<div class=\"form-group\">\n\t\t<label for=\"exampleInputEmail1\">Email address</label>\n\t\t<input type=\"email\" class=\"form-control\" id=\"exampleInputEmail1\" placeholder=\"Email\">\n\t</div>\n\t<div class=\"form-group\">\n\t\t<label for=\"exampleInputPassword1\">Password</label>\n\t\t<input type=\"password\" class=\"form-control\" id=\"exampleInputPassword1\" placeholder=\"Password\">\n\t</div>\n\t<div class=\"form-group\">\n\t\t<label for=\"exampleInputFile\">File input</label>\n\t\t<input type=\"file\" id=\"exampleInputFile\">\n\t\t<p class=\"help-block\">Example block-level help text here.</p>\n\t</div>\n\t<div class=\"checkbox\">\n\t\t<label>\n\t\t\t<input type=\"checkbox\"> Check me out\n\t\t</label>\n\t</div>\n\t<button type=\"submit\" class=\"btn btn-default\">Submit</button>\n</form>"
+			},
+			"Inline Form": {
+				"description": "Basic inline form",
+				"code": "<form class=\"form-inline\">\n\t<div class=\"form-group\">\n\t\t<label for=\"exampleInputName2\">Name</label>\n\t\t<input type=\"text\" class=\"form-control\" id=\"exampleInputName2\" placeholder=\"Jane Doe\">\n\t</div>\n\t<div class=\"form-group\">\n\t\t<label for=\"exampleInputEmail2\">Email</label>\n\t\t<input type=\"email\" class=\"form-control\" id=\"exampleInputEmail2\" placeholder=\"jane.doe@example.com\">\n\t</div>\n\t<button type=\"submit\" class=\"btn btn-default\">Send invitation</button>\n</form>"
+			},
+			"Horizontal Form": {
+				"description": "Horizontal form",
+				"code": "<form class=\"form-horizontal\">\n\t<div class=\"form-group\">\n\t\t<label for=\"inputEmail3\" class=\"col-sm-2 control-label\">Email</label>\n\t\t<div class=\"col-sm-10\">\n\t\t\t<input type=\"email\" class=\"form-control\" id=\"inputEmail3\" placeholder=\"Email\">\n\t\t</div>\n\t</div>\n\t<div class=\"form-group\">\n\t\t<label for=\"inputPassword3\" class=\"col-sm-2 control-label\">Password</label>\n\t\t<div class=\"col-sm-10\">\n\t\t\t<input type=\"password\" class=\"form-control\" id=\"inputPassword3\" placeholder=\"Password\">\n\t\t</div>\n\t</div>\n\t<div class=\"form-group\">\n\t\t<div class=\"col-sm-offset-2 col-sm-10\">\n\t\t\t<div class=\"checkbox\">\n\t\t\t\t<label>\n\t\t\t\t\t<input type=\"checkbox\"> Remember me\n\t\t\t\t</label>\n\t\t\t</div>\n\t\t</div>\n\t</div>\n\t<div class=\"form-group\">\n\t\t<div class=\"col-sm-offset-2 col-sm-10\">\n\t\t\t<button type=\"submit\" class=\"btn btn-default\">Sign in</button>\n\t\t</div>\n\t</div>\n</form>"
+			}
+		},
+		"Buttons": {
+			"Basic Buttons": {
+				"description": "Basic button layout",
+				"code": "<button class=\"btn btn-default\" type=\"submit\">Button</button>"
+			},
+			"Button Colours": {
+				"description": "Button colours",
+				"code": "<button type=\"button\" class=\"btn btn-default\">Default</button>\n<button type=\"button\" class=\"btn btn-primary\">Primary</button>\n<button type=\"button\" class=\"btn btn-success\">Success</button>\n<button type=\"button\" class=\"btn btn-info\">Info</button>\n<button type=\"button\" class=\"btn btn-warning\">Warning</button>\n<button type=\"button\" class=\"btn btn-danger\">Danger</button>\n<button type=\"button\" class=\"btn btn-link\">Link</button>"
+			},
+			"Button Sizes": {
+				"description": "Button sizes",
+				"code": "<button type=\"button\" class=\"btn btn-primary btn-lg\">Large button</button>\n<button type=\"button\" class=\"btn btn-primary\">Default button</button>\n<button type=\"button\" class=\"btn btn-primary btn-sm\">Small button</button>\n<button type=\"button\" class=\"btn btn-primary btn-xs\">Extra small button</button>"
+			}
+		},
+		"Images": {
+			"Responsive Images": {
+				"description": "Responsive image layout",
+				"code": "<img src=\"...\" class=\"img-responsive\" alt=\"Responsive image\">"
+			},
+			"Image Shapes": {
+				"description": "Image shapes",
+				"code": "<img src=\"...\" alt=\"...\" class=\"img-rounded\">\n<img src=\"...\" alt=\"...\" class=\"img-circle\">\n<img src=\"...\" alt=\"...\" class=\"img-thumbnail\">"
+			}
+		}
+	}
+}

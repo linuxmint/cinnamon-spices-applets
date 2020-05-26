@@ -4,7 +4,13 @@ const St          = imports.gi.St;
 const Pango       = imports.gi.Pango;
 const Gtk         = imports.gi.Gtk;
 
-const _           = imports.applet._;
+let _;
+if (typeof require !== 'undefined') {
+    _                        = require('./__init__')._;
+} else {
+    const AppletDir          = imports.ui.appletManager.applets['gpaste-reloaded@feuerfuchs.eu'];
+    _                        = AppletDir.__init__._;
+}
 
 // ------------------------------------------------------------------------------------------------------
 

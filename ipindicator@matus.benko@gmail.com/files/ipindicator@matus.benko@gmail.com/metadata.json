@@ -1,0 +1,6 @@
+{
+  "uuid": "ipindicator@matus.benko@gmail.com",
+  "name": "IP Indicator",
+  "description": "Applet shows different icon for different public IP addresses. Useful when often using VPN.",
+  "max-instances": 1
+}

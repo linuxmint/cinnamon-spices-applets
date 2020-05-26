@@ -1,6 +1,0 @@
-{
-"uuid": "sshlauncher@sumo",
-"name": "SSH Launcher",
-"description": "An applet to connect to SSH hosts configured in ~/.ssh/config",
-"icon": "network"
-}

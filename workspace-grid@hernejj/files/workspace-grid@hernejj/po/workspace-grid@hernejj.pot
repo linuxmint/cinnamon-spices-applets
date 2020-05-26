@@ -1,0 +1,60 @@
+#
+msgid ""
+msgstr ""
+
+#. workspace-grid@hernejj->metadata.json->description
+msgid "2D workspace grid and switcher for Cinnamon"
+msgstr ""
+
+#. workspace-grid@hernejj->metadata.json->name
+msgid "Workspace grid (2D) and switcher"
+msgstr ""
+
+#. workspace-grid@hernejj->settings-schema.json->numRows->description
+msgid "Number of rows:"
+msgstr ""
+
+#. workspace-grid@hernejj->settings-schema.json->numRows->units
+#. workspace-grid@hernejj->settings-schema.json->numCols->units
+msgid "desktops"
+msgstr ""
+
+#. workspace-grid@hernejj->settings-schema.json->style->description
+msgid "Style:"
+msgstr ""
+
+#. workspace-grid@hernejj->settings-schema.json->style->options
+msgid "Single Row"
+msgstr ""
+
+#. workspace-grid@hernejj->settings-schema.json->style->options
+msgid "Grid"
+msgstr ""
+
+#. workspace-grid@hernejj->settings-
+#. schema.json->registerUpDownKeyBindings->description
+msgid "Use Keyboard shortcuts (Ctrl+Alt+Up/Down) to switch desktop rows"
+msgstr ""
+
+#. workspace-grid@hernejj->settings-
+#. schema.json->registerUpDownKeyBindings->tooltip
+msgid ""
+"This prevents the use of the Expo and Scale keyboard shortcuts in Cinnamon"
+msgstr ""
+
+#. workspace-grid@hernejj->settings-schema.json->numCols->description
+msgid "Number of columns:"
+msgstr ""
+
+#. workspace-grid@hernejj->settings-
+#. schema.json->scrollWheelBehavior->description
+msgid "Scroll Wheel Behavior:"
+msgstr ""
+
+#. workspace-grid@hernejj->settings-schema.json->scrollWheelBehavior->options
+msgid "Scroll By Column"
+msgstr ""
+
+#. workspace-grid@hernejj->settings-schema.json->scrollWheelBehavior->options
+msgid "Scroll By Row"
+msgstr ""

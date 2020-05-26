@@ -1,0 +1,187 @@
+{
+  "head1" : {
+    "type" : "header",
+    "description" : "Applets"
+  },
+  "check_applets": {
+    "type": "checkbox",
+    "indent": true,
+    "default": true,
+    "description": "Check regularly whether your applets are up to date",
+    "tooltip": "If applets updates do not concern you, uncheck this box."
+  },
+  "check_new_applets": {
+    "type": "checkbox",
+    "indent": true,
+    "default": true,
+    "dependency": "check_applets",
+    "description": "Check regularly whether new applets are available",
+    "tooltip": "If new applets do not concern you, uncheck this box."
+  },
+  "btn_cs_applets": {
+    "type": "button",
+    "description": "Open Cinnamon Settings to manage all the Applets",
+    "callback": "on_btn_cs_applets_pressed"
+  },
+
+  "head2" : {
+    "type" : "header",
+    "description" : "Desklets"
+  },
+  "check_desklets": {
+    "type": "checkbox",
+    "indent": true,
+    "default": true,
+    "description": "Check regularly whether your desklets are up to date",
+    "tooltip": "If desklets updates do not concern you, uncheck this box."
+  },
+  "check_new_desklets": {
+    "type": "checkbox",
+    "indent": true,
+    "default": true,
+    "dependency": "check_desklets",
+    "description": "Check regularly whether new desklets are available",
+    "tooltip": "If new desklets do not concern you, uncheck this box."
+  },
+  "btn_cs_desklets": {
+    "type": "button",
+    "description": "Open Cinnamon Settings to manage all the Desklets",
+    "callback": "on_btn_cs_desklets_pressed"
+  },
+
+  "head3" : {
+    "type" : "header",
+    "description" : "Extensions"
+  },
+  "check_extensions": {
+    "type": "checkbox",
+    "indent": true,
+    "default": true,
+    "description": "Check regularly whether your extensions are up to date",
+    "tooltip": "If extensions updates do not concern you, uncheck this box."
+  },
+  "check_new_extensions": {
+    "type": "checkbox",
+    "indent": true,
+    "default": true,
+    "dependency": "check_extensions",
+    "description": "Check regularly whether new extensions are available",
+    "tooltip": "If new extensions do not concern you, uncheck this box."
+  },
+  "btn_cs_extensions": {
+    "type": "button",
+    "description": "Open Cinnamon Settings to manage all the Extensions",
+    "callback": "on_btn_cs_extensions_pressed"
+  },
+
+  "head4" : {
+    "type" : "header",
+    "description" : "Themes"
+  },
+  "check_themes": {
+    "type": "checkbox",
+    "indent": true,
+    "default": true,
+    "description": "Check regularly whether your themes are up to date",
+    "tooltip": "If themes updates do not concern you, uncheck this box."
+  },
+  "check_new_themes": {
+    "type": "checkbox",
+    "indent": true,
+    "default": true,
+    "dependency": "check_themes",
+    "description": "Check regularly whether new themes are available",
+    "tooltip": "If new themes do not concern you, uncheck this box."
+  },
+  "btn_cs_themes": {
+    "type": "button",
+    "description": "Open Cinnamon Settings to manage all the Themes",
+    "callback": "on_btn_cs_themes_pressed"
+  },
+
+  "head5" : {
+    "type" : "header",
+    "description" : "General"
+  },
+  "general_frequency": {
+    "type": "scale",
+    "default": 1,
+    "min": 1,
+    "max": 720,
+    "step": 1,
+    "description": "Time interval between two checks (hours)",
+    "tooltip": "Please note that the first check will take place one minute after starting this applet."
+  },
+  "general_warning": {
+    "type": "checkbox",
+    "indent": true,
+    "default": true,
+    "description": "Notify me by changing the icon when Spices need an update",
+    "tooltip": "By checking this box, you allow this applet to modify its icon to warn you when at least one of the Spices requires an update."
+  },
+  "events_color" : {
+    "type": "colorchooser",
+    "indent": true,
+    "default" : "#eb9122",
+    "dependency": "general_warning",
+    "description" : "The icon color when Spices need an update",
+    "tooltip" : "Click the button to select another color."
+  },
+  "general_notifications": {
+    "type": "checkbox",
+    "indent": true,
+    "default": true,
+    "description": "Show notification messages about Spices updates",
+    "tooltip": "By checking this box, you allow this applet to display messages about Spices updates in notifications viewer."
+  },
+  "general_details_requested": {
+    "type": "checkbox",
+    "indent": true,
+    "default": false,
+    "dependency": "general_notifications",
+    "description": "Display the description of each update or new Spice",
+    "tooltip": "By checking this box, you'll know why an update is available, and get a description of any new Spice.\nThis information will be displayed in English."
+  },
+  "general_force_notifications": {
+    "type": "checkbox",
+    "indent": true,
+    "default": false,
+    "dependency": "general_notifications",
+    "description": "Show notification messages even if they are unchanged",
+    "tooltip": "By checking this box, all notification messages will be displayed, even if they are identical to the previous ones."
+  },
+  "general_type_notif": {
+    "type": "combobox",
+    "default": "minimal",
+    "options": {
+      "Minimal (text only)": "minimal",
+      "With button opening the System Settings": "button"
+     },
+    "dependency": "general_notifications",
+    "description": "Notification style",
+    "tooltip": "Minimal:\n\tDisplays simple and short notifications.\nWith button opening the System Settings:\n\tNotifications also contain a button which has the same role of the menu one:\n\tOpen the Download tab in System Settings for the concerned type of Spices, with the Spices sorted by date."
+  },
+  "general_test_notif": {
+    "type": "button",
+    "dependency": "general_notifications",
+    "description": "Send a fake notification to test the style",
+    "callback": "on_btn_test_notif_pressed"
+  },
+  "displayType": {
+    "type": "combobox",
+    "default": "classic",
+    "options": {
+      "Classic - Icon and Text": "classic",
+      "Compact - Icon Only": "compact"
+     },
+    "description": "Type of Display",
+    "tooltip": "This feature offers the Classic (default) display with icon and text, and compact display (Icon Only)."
+  },
+  "general_hide": {
+    "type": "checkbox",
+    "indent": true,
+    "default": false,
+    "description": "Hide the icon as long as nothing is to report",
+    "tooltip": "By checking this box, as long as nothing is to report the icon of Spices Update does not appear on the panel."
+  }
+}

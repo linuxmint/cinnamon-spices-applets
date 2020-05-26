@@ -4,6 +4,7 @@ const Gio = imports.gi.Gio;
 const PopupMenu = imports.ui.popupMenu;
 const Mainloop = imports.mainloop;
 const Settings = imports.ui.settings;
+const Config = imports.misc.config;
 const St = imports.gi.St;
 const GLib = imports.gi.GLib;
 const Util = imports.misc.util;
@@ -37,7 +38,7 @@ MyApplet.prototype = {
     this.set_applet_tooltip(_('Printers'));
 
     this.menu = new Applet.AppletPopupMenu(this, orientation);
-    this.menu.connect('open-state-changed', Lang.bind(this, this.onMenuToggled));
+    this.menu.connect('open-state-changed', Lang.bind(this, this.onMenuOpened));
 
     this.menuManager = new PopupMenu.PopupMenuManager(this);
     this.menuManager.addMenu(this.menu);
@@ -55,13 +56,32 @@ MyApplet.prototype = {
     this.printError = false;
     this.printWarning = false;
     this.updating = false;
-    this.outdated = false;
+    this.showLater = false;
     this.printers = [];
+    this.setIcon('printer-printing');
     this.onSettingsChanged();
+    let cinnamonVersion = Config.PACKAGE_VERSION.split('.');
+    let majorVersion = parseInt(cinnamonVersion[0]);
+    let minorVersion = parseInt(cinnamonVersion[1]);
+    this.pkexec = majorVersion > 3 || (majorVersion == 3 && minorVersion > 7);
+  },
+
+  on_reload_button: function() {
+    Util.spawnCommandLine("dbus-send --session --dest=org.Cinnamon.LookingGlass --type=method_call /org/Cinnamon/LookingGlass org.Cinnamon.LookingGlass.ReloadExtension string:'printers@linux-man' string:'APPLET'");
+  },
+
+  on_cups_button: function() {
+    if(this.pkexec) Util.spawnCommandLine("sh -c 'pkexec systemctl restart cups.service'");
+    else Util.spawnCommandLine("gksudo 'systemctl restart cups.service'");
   },
 
   on_applet_clicked: function() {
+    if(!this.menu.isOpen && this.updating) {
+        this.showLater = true;
+        return;
+    }
     this.menu.toggle();
+    if(!this.printWarning && !this.menu.isOpen) this.update();
   },
 
   on_applet_removed_from_panel: function() {
@@ -74,7 +94,7 @@ MyApplet.prototype = {
     Mainloop.timeout_add_seconds(3, Lang.bind(this, this.warningTimeout));
     this.update();
   },
-  
+
   warningTimeout: function() {
     this.printWarning = false;
     this.update();
@@ -82,11 +102,17 @@ MyApplet.prototype = {
 
   setIcon: function(iconName) {
     if (this.symbolic_icons) this.set_applet_icon_symbolic_name(iconName);
-    else this.set_applet_icon_name(iconName);  
+    else this.set_applet_icon_name(iconName);
   },
 
-  onMenuToggled: function() {
-    if(!this.menu.isOpen && this.outdated) this.update();
+  onMenuOpened: function() {
+    if(this.sendSubMenu != null) {
+      this.sendSubMenu.close();
+      this.sendSubMenu.open();
+    }
+    this.cancelSubMenu.close();
+    this.cancelSubMenu.open();
+    if(this.sendSubMenu != null) this.sendSubMenu.close();
   },
 
   onSettingsChanged: function() {
@@ -118,13 +144,8 @@ MyApplet.prototype = {
   },
 
   update: function() {
-    if(this.updating) return;
-    if(this.menu.isOpen) {
-      this.outdated = true;
-      return;
-    }
+    if(this.updating || this.menu.isOpen) return;
     this.updating = true;
-    this.outdated = false;
     this.jobsCount = 0;
     this.printersCount = 0;
     this.menu.removeAll();
@@ -136,7 +157,7 @@ MyApplet.prototype = {
     Util.spawn_async(['python', APPLET_PATH + '/lpstat-a.py'], Lang.bind(this, function(out) {
       this.printers = [];
       Util.spawn_async(['/usr/bin/lpstat', '-d'], Lang.bind(this, function(out2) {//To check default printer
-        if(out2.substring(0, 2) != 'no') out2 = out2.split(': ')[1].trim();
+        if(out2.split(': ')[1] != undefined) out2 = out2.split(': ')[1].trim();
         else out2 = 'no default';
         out = out.split('\n');
         this.printersCount = out.length - 2;
@@ -156,10 +177,15 @@ MyApplet.prototype = {
             let cancelAll = new PopupMenu.PopupIconMenuItem(_('Cancel all jobs'), 'edit-delete', this.iconType);
             cancelAll.connect('activate', Lang.bind(this, this.onCancelAllJobsClicked));
             this.menu.addMenuItem(cancelAll);
+
+            let _cancelSubMenu = new PopupMenu.PopupSubMenuMenuItem(null);
+            _cancelSubMenu.actor.set_style_class_name('');
+            this.cancelSubMenu = _cancelSubMenu.menu;
+            this.menu.addMenuItem(_cancelSubMenu);
           }
 //Cancel Job
           out = out.split(/\n/);
-          this.jobsCount = out.length - 1
+          this.jobsCount = out.length - 1;
           Util.spawn_async(['/usr/bin/lpq', '-a'], Lang.bind(this, function(out2) {
             out2 = out2.replace(/\n/g, ' ').split(/\s+/);
             let sendJobs = [];
@@ -180,7 +206,7 @@ MyApplet.prototype = {
               if(out2[out2.indexOf(job) - 2] == 'active') jobItem.addActor(new St.Icon({ style_class: 'popup-menu-icon',icon_name: 'emblem-default', icon_type: this.iconType }));
               jobItem.job = job;
               jobItem.connect('activate', Lang.bind(jobItem, this.onCancelJobClicked));
-              this.menu.addMenuItem(jobItem);
+              this.cancelSubMenu.addMenuItem(jobItem);
               if(this.send_to_front && out2[out2.indexOf(job) - 2] != 'active' && out2[out2.indexOf(job) - 2] != '1st') {
                 sendJobs.push(new PopupMenu.PopupIconMenuItem(text, 'go-up', this.iconType));
                 sendJobs[sendJobs.length - 1].job = job;
@@ -189,9 +215,16 @@ MyApplet.prototype = {
             }
 //Send to Front
             if(this.send_to_front && sendJobs.length > 0) {
-              let subMenu = new PopupMenu.PopupSubMenuMenuItem(_('Send to front'));
-              for(var n = 0; n < sendJobs.length; n++) subMenu.menu.addMenuItem(sendJobs[n]);
-              this.menu.addMenuItem(subMenu);
+              let _sendSubMenu = new PopupMenu.PopupSubMenuMenuItem(_('Send to front'));
+              this.sendSubMenu =_sendSubMenu.menu;
+              for(var n = 0; n < sendJobs.length; n++) this.sendSubMenu.addMenuItem(sendJobs[n]);
+              this.menu.addMenuItem(_sendSubMenu);
+            }
+            this.updating = false;
+            if(this.cancelSubMenu != null) this.cancelSubMenu.open();
+            if(this.showLater) {
+              this.showLater = false;
+              this.menu.open();
             }
 //Update Icon
             if(this.jobsCount > 0 && this.show_jobs) this.set_applet_label(this.jobsCount.toString());
@@ -202,7 +235,6 @@ MyApplet.prototype = {
               if(this.printWarning) this.setIcon('printer-warning');
               else if(this.show_error && this.printError) this.setIcon('printer-error');
               else this.setIcon('printer-printing');
-              this.updating = false;
             }));
           }))
         }))

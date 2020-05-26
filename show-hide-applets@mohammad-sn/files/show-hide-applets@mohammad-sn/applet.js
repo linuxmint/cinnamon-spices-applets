@@ -7,6 +7,15 @@ const PopupMenu = imports.ui.popupMenu;
 const Mainloop = imports.mainloop;
 const Util = imports.misc.util;
 const St = imports.gi.St;
+const GLib = imports.gi.GLib;
+const Gettext = imports.gettext;
+
+const UUID = "show-hide-applets@mohammad-sn"
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
 
 function MyApplet(metadata, orientation, panel_height, instance_id) {
     this._init(metadata, orientation, panel_height, instance_id);
@@ -26,7 +35,7 @@ MyApplet.prototype = {
             this.settings.bindProperty(Settings.BindingDirection.IN, "autohide", "auto_hide", Lang.bind(this, function(){
                     if (this._hideTimeoutId & !this.auto_hide){
                         Mainloop.source_remove(this._hideTimeoutId);
-                        this._hideTimeoutId = null;
+                        this._hideTimeoutId = 0;
                     }
                     else if(this.auto_hide & this.h)
                         this.autodo(true);
@@ -44,7 +53,7 @@ MyApplet.prototype = {
                     }
                 }), null);
             this.settings.bindProperty(Settings.BindingDirection.IN, "autohiderstime", "autohide_rs_time", function(){}, null);
-    
+
 
 
             let editMode = global.settings.get_boolean("panel-edit-mode");
@@ -53,22 +62,22 @@ MyApplet.prototype = {
                 global.settings.set_boolean("panel-edit-mode", item.state);
             });
             this._applet_context_menu.addMenuItem(this.panelEditMode);
-            
-            let addapplets = new PopupMenu.PopupMenuItem("Add applets to the panel");
+
+            let addapplets = new PopupMenu.PopupMenuItem(_("Add applets to the panel"));
             let addappletsicon = new St.Icon({icon_name: "applets", icon_size: 22, icon_type: St.IconType.FULLCOLOR });
             addapplets.connect('activate', function() {
                 Util.spawnCommandLine("cinnamon-settings applets");
             });
             addapplets.addActor(addappletsicon, { align: St.Align.END });
             this._applet_context_menu.addMenuItem(addapplets);
-            
+
 
 
             global.settings.connect('changed::panel-edit-mode', Lang.bind(this, this.on_panel_edit_mode_changed));
             this.actor.connect('enter-event', Lang.bind(this, this._onEntered));
 
 
-    
+
             this.h = true;
             this.alreadyH = [];
             if((!this.disable_starttime_autohide) || this.auto_hide){
@@ -79,13 +88,13 @@ MyApplet.prototype = {
             }
 
 
-    
+
             /*if more than one instance
             this.actor.connect('hide', Lang.bind(this, function(){
                 if (this.h)
                     this.doAction(true);
             }));*/
-            
+
             this.cbox = Main.panel._rightBox;
 
             /*this doesn't work, i don't know why!
@@ -95,18 +104,20 @@ MyApplet.prototype = {
                     this.cbox = Main.panel2._rightBox;
             }*/
 
+            if (this._rshideTimeoutId){
+                Mainloop.source_remove(this._rshideTimeoutId);
+                this._rshideTimeoutId = 0;
+            }
+
             this.cbox.connect('queue-relayout', Lang.bind(this, Lang.bind(this, function(actor, m){
                 if (this.autohide_rs && !this.h){
-                    if (this._rshideTimeoutId){
-                        Mainloop.source_remove(this._rshideTimeoutId);
-                        this._rshideTimeoutId = null;
-                    }
                     this._rshideTimeoutId = Mainloop.timeout_add_seconds(this.autohide_rs_time, Lang.bind(this,function () {
                         if(!this.h){
                             //this.h=true;
                             this.doAction(true);
                             this.autodo(true);
                         }
+                        return false;
                     }));
                 }
             })));
@@ -131,11 +142,7 @@ MyApplet.prototype = {
     doAction: function(updalreadyH) {
         if (this._hideTimeoutId){
             Mainloop.source_remove(this._hideTimeoutId);
-            this._hideTimeoutId = null;
-        }
-        if (this._rshideTimeoutId){
-            Mainloop.source_remove(this._rshideTimeoutId);
-            this._rshideTimeoutId = null;
+            this._hideTimeoutId = 0;
         }
         let _children = this.cbox.get_children();
         let p = _children.indexOf(this.actor);
@@ -152,9 +159,12 @@ MyApplet.prototype = {
                     for(j in tis){
                         tis[j].set_size(0, 0);
                     }
-                    Mainloop.timeout_add(10, Lang.bind(this, function(){ this.tray.hide(); }));
+                    Mainloop.timeout_add(10, Lang.bind(this, function(){
+                        this.tray.hide();
+                        return false;
+                    }));
                     continue;
-                    //this.traysize = 
+                    //this.traysize =
                 }
                 _children[i].hide();
 //                if(_children[i]._applet._uuid=="systray@cinnamon.org" || _children[i]._applet._uuid=="systray-collapsible@koutch"){
@@ -205,7 +215,7 @@ MyApplet.prototype = {
     },
 
     autodo: function(updalreadyH){
-        let postpone=this.actor.hover;
+        let postpone=this.actor.hover && this.hover_activates;
         let _children = this.cbox.get_children();
         let p = _children.indexOf(this.actor);
         for(let i = 0; i < p; i++){

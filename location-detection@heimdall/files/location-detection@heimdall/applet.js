@@ -3,17 +3,24 @@ const Soup = imports.gi.Soup;
 const Lang = imports.lang;
 const Json = imports.gi.Json;
 const Mainloop = imports.mainloop;
-const Gettext = imports.gettext.domain("cinnamon-applets");
-const _ = Gettext.gettext;
-
-
+const Settings = imports.ui.settings;
+const Util = imports.misc.util;
+const Gettext = imports.gettext;
+const GLib = imports.gi.GLib;
 const UUID = "location-detection@heimdall";
-const GEO_IP_URL = 'http://api.ipinfodb.com/v3/ip-city/?key=d115c954db28487f38c5d25d5dcf62a5786479b87cc852cabe8fd6f1971d7f89&format=json';
+
 const REFRESH_INTERVAL = 30
 
 const _httpSession = new Soup.SessionAsync();
 Soup.Session.prototype.add_feature.call(_httpSession, new Soup.ProxyResolverDefault());
 
+// Translation support
+// ----------
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
 
 // Logging
 // ----------
@@ -28,19 +35,23 @@ function logError(error) {
 
 // Applet
 // ----------
-function MyApplet(orientation) {
-    this._init(orientation);
+function MyApplet(metadata, orientation, panelHeight, instanceId) {
+    this._init(metadata, orientation, panelHeight, instanceId);
 }
 
 MyApplet.prototype = {
     __proto__: Applet.TextIconApplet.prototype,
 
-    _init: function (orientation) {
-        Applet.TextIconApplet.prototype._init.call(this, orientation);
+    _init: function (metadata, orientation, panelHeight, instanceId) {
+        Applet.TextIconApplet.prototype._init.call(this, orientation, panelHeight, instanceId);
+
+        this.settings = new Settings.AppletSettings(this, metadata.uuid, instanceId);
+        this.settings.bindProperty(Settings.BindingDirection.IN, "api-key", "apiKey", this._updateAPIkey, null);
+
+        this.GEO_IP_URL = 'http://api.ipinfodb.com/v3/ip-city/?key=' + this.apiKey + '&format=json';
 
         try {
             this.set_applet_tooltip(_("Your percieved location."));
-            this.set_applet_label("...");
         }
         catch (error) {
             logError(error);
@@ -52,7 +63,7 @@ MyApplet.prototype = {
     loadJsonAsync: function loadJsonAsync(url, callback, error_callback) {
         let context = this;
         let message = Soup.Message.new('GET', url);
-        
+
         _httpSession.queue_message(message, function soupQueue(session, message) {
             if (message.status_code === 200) {
                 let jp = new Json.Parser();
@@ -66,23 +77,45 @@ MyApplet.prototype = {
         });
     },
 
+    _updateAPIkey: function() {
+        this.GEO_IP_URL = 'http://api.ipinfodb.com/v3/ip-city/?key=' + this.apiKey + '&format=json';
+        this.refreshLocation();
+    },
+
+    _register_IPInfoDB: function() {
+        Util.spawnCommandLine("xdg-open http://www.ipinfodb.com/register.php");
+    },
+
     refreshLocation: function refreshLocation() {
-        this.loadJsonAsync(GEO_IP_URL, function locationCallback (json) {
+        this.loadJsonAsync(this.GEO_IP_URL, function locationCallback (json) {
             if (json !== null) {
                 let countryCode = json.get_string_member('countryCode');
                 let ip = json.get_string_member('ipAddress');
-		let countryCode2 = json.get_string_member('countryCode');
-                
+                let countryCode2 = json.get_string_member('countryCode');
+
                 // country code is returned from IPInfoDB in upper case
-               countryCode = countryCode.charAt(0).toLowerCase() + countryCode.slice(1).toLowerCase();
-	       countryCode2 = countryCode.charAt(0).toUpperCase() + countryCode.slice(1).toUpperCase();
-   
-                this.set_applet_label(countryCode2 + ' ' + ip);
-	        this.set_applet_icon_path( global.userdatadir + "/applets/location-detection@heimdall/flags/" + countryCode + ".png");
+                countryCode = countryCode.charAt(0).toLowerCase() + countryCode.slice(1).toLowerCase();
+                countryCode2 = countryCode.charAt(0).toUpperCase() + countryCode.slice(1).toUpperCase();
+
+                let statusMessage = json.get_string_member('statusMessage');
+                if (statusMessage == 'Your account has been suspended.') { // Do not translate this string!
+                    this.set_applet_tooltip(_("Your IPInfoDB account has been suspended.") + " " + _("Please set a valid API key in the applets settings."))
+                    countryCode = 'aa';
+                } else if (statusMessage == 'Invalid API key.') { // Do not translate this string!
+                    this.set_applet_tooltip(_("Invalid API key.") + " " + _("Please set a valid API key in the applets settings."))
+                    countryCode = 'aa';
+                } else {
+                    this.set_applet_tooltip(countryCode2 + ' ' + ip);
+                }
+
+                this.hide_applet_icon();
+                this.set_applet_icon_path( global.userdatadir + "/applets/location-detection@heimdall/flags/" + countryCode + ".png");
             }
             else {
                 // error getting location
-                this.set_applet_label('...');
+                this.set_applet_tooltip(_("Something went Wrong!"));
+                this.set_applet_icon_symbolic_name ("dialog-error");
+
             }
 
             Mainloop.timeout_add_seconds(REFRESH_INTERVAL, Lang.bind(this, function refreshTimeout() {
@@ -92,7 +125,7 @@ MyApplet.prototype = {
     }
 };
 
-function main(metadata, orientation) {
-    let myapplet = new MyApplet(orientation);
+function main(metadata, orientation, panelHeight, instanceId) {
+    let myapplet = new MyApplet(metadata, orientation, panelHeight, instanceId);
     return myapplet;
 }

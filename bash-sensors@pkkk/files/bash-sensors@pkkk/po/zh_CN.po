@@ -1,0 +1,77 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-04-21 18:56+0800\n"
+"PO-Revision-Date: 2017-04-21 19:01+0800\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.11\n"
+"Last-Translator: \n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Language: zh_CN\n"
+
+#: applet.js:36
+msgid "Bash Sensors!"
+msgstr "Bash传感器！"
+
+#: applet.js:67 applet.js:80
+msgid "script error"
+msgstr "脚本错误"
+
+#. bash-sensors@pkkk->metadata.json->name
+msgid "Bash Sensors"
+msgstr "Bash传感器"
+
+#. bash-sensors@pkkk->metadata.json->description
+msgid ""
+"Write your Bash commands to specify applet output (temperature sensors and "
+"not only!)"
+msgstr "编写您的Bash命令以指定小程序输出（不仅限于温度传感器！）"
+
+#. bash-sensors@pkkk->settings-schema.json->head->description
+msgid "Settings - Bash Sensors (write commands in Bash!)"
+msgstr "设置 - Bash传感器（在Bash中编写命令！）"
+
+#. bash-sensors@pkkk->settings-schema.json->enableScript2->description
+msgid "Two-line mode (command 2 enabled)"
+msgstr "双行模式（命令2启用）"
+
+#. bash-sensors@pkkk->settings-schema.json->menuScript->description
+msgid "Menu command (on applet left-click)"
+msgstr "菜单命令（左键点击小程序）"
+
+#. bash-sensors@pkkk->settings-schema.json->menuScript->tooltip
+msgid "allows to display lots of information in popup menu"
+msgstr "允许在弹出的菜单中显示详细信息"
+
+#. bash-sensors@pkkk->settings-schema.json->script1->description
+msgid "Command 1"
+msgstr "命令1"
+
+#. bash-sensors@pkkk->settings-schema.json->script1->tooltip
+msgid "first line of output"
+msgstr "第一行输出"
+
+#. bash-sensors@pkkk->settings-schema.json->script2->description
+msgid "Command 2"
+msgstr "命令2"
+
+#. bash-sensors@pkkk->settings-schema.json->script2->tooltip
+msgid "second line of output (optional)"
+msgstr "第二行输出（可选）"
+
+#. bash-sensors@pkkk->settings-schema.json->refreshInterval->description
+msgid "Refresh interval"
+msgstr "刷新间隔"
+
+#. bash-sensors@pkkk->settings-schema.json->refreshInterval->units
+msgid "seconds"
+msgstr "秒"

@@ -1,0 +1,1 @@
+files/spices-notifier@germanfr/README.md

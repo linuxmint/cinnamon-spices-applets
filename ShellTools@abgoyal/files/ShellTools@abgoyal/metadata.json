@@ -1,7 +1,6 @@
 {
-    "last-edited": "2013-06-06 22:58:10+05:30", 
-    "description": "Provides an easy way to run shell commands", 
-    "icon": "tools_icon.svg", 
-    "uuid": "ShellTools@abgoyal", 
-    "name": "ShellTools"
+    "uuid": "ShellTools@abgoyal",
+    "name": "ShellTools",
+    "description": "Provides an easy way to run shell commands",
+    "cinnamon-version": ["3.2", "3.4"]
 }

@@ -1,0 +1,114 @@
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Gökhan Gökkaya <gokhanlnx@gmail.com>, 2018.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-05-16 12:35+0200\n"
+"PO-Revision-Date: 2018-11-05 00:01+0300\n"
+"Language-Team: Linux Mint Türkiye <gokhanlnx@gmail.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.6\n"
+"Last-Translator: Gökhan GÖKKAYA <gokhanlnx@gmail.com>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: tr\n"
+
+#: applet.js:32
+msgid "Take A Snapshot or Record Your Desktop"
+msgstr "Ekran Görüntüsü Alın veya Masaüstünüzü Kaydedin"
+
+#: applet.js:43
+msgid "ScreenShot"
+msgstr "Ekran Görüntüsü"
+
+#: applet.js:48
+msgid "Whole Screen"
+msgstr "Tam Ekran"
+
+#: applet.js:50
+msgid "1 Second Delay"
+msgstr "1 Saniye Gecikme"
+
+#: applet.js:54
+msgid "3 Second Delay"
+msgstr "3 Saniye Gecikme"
+
+#: applet.js:58
+msgid "5 Second Delay"
+msgstr "5 Saniye Gecikme"
+
+#: applet.js:68
+msgid "Current Window"
+msgstr "Mevcut Pencere"
+
+#: applet.js:73
+msgid "Selected Area"
+msgstr "Seçili Alan"
+
+#: applet.js:79
+msgid "Record Screencast"
+msgstr "Ekran Yayınını Kaydet"
+
+#: applet.js:81
+msgid "Record Desktop With Audio"
+msgstr "Masaüstünü Sesli Kaydet"
+
+#: applet.js:81
+msgid "Record Desktop Without Audio"
+msgstr "Masaüstünü Sessiz Kaydet"
+
+#: applet.js:83 applet.js:88
+msgid "Record Current Window With Audio"
+msgstr "Mevcut Pencereyi Sesli Kaydet"
+
+#: applet.js:83 applet.js:88
+msgid "Record Current Window Without Audio"
+msgstr "Mevcut Pencereyi Sessiz Kaydet"
+
+#: applet.js:83
+msgid "With-Audio"
+msgstr "Sesli"
+
+#: applet.js:86
+msgid "Start No Audio"
+msgstr "Sessiz Başlat"
+
+#: applet.js:88
+msgid "No-Audio"
+msgstr "Ses Yok"
+
+#: applet.js:91
+msgid "Stop Recording"
+msgstr "Kaydı Durdur"
+
+#: applet.js:95
+msgid "Recording-Stopped"
+msgstr "Kayıt-Duduruldu"
+
+#: applet.js:96
+msgid "Recording-Finished"
+msgstr "Kayıt-Bitirildi"
+
+#: applet.js:103
+msgid "Pictures Folder"
+msgstr "Resim Dizini"
+
+#: applet.js:109
+msgid "Videos Folder"
+msgstr "Video Dizini"
+
+#. ScreenShot+RecordDesktop@tech71->metadata.json->description
+msgid ""
+"Take A Snapshot Or Record Your Desktop (require ffmpeg, xwininfo, xdotool, "
+"xdpyinfo)"
+msgstr ""
+"Ekran Görüntüsü Alın veya Masaüstünüzü Kaydedin (ffmpeg, xwininfo, "
+"xdotool, xdpyinfo gerektirir)"
+
+#. ScreenShot+RecordDesktop@tech71->metadata.json->name
+msgid "ScreenShot+Record Desktop"
+msgstr "Ekran Görüntüsü+Masaüstü Kaydı"

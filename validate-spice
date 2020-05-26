@@ -1,0 +1,109 @@
+#!/bin/bash
+
+USAGE="Usage: ./validate-spice UUID"
+
+if [ $# -ne 1 ] ; then
+    echo $USAGE
+    exit 1;
+fi
+
+UUID=$1
+check="\xE2\x9C\x94"
+missing=" "
+cross="\xE2\x9D\x8C"
+valid=true
+
+# Get xlet type
+parentDirName=$(basename -- "$(pwd)")
+xletType=$(echo "$parentDirName" | cut -f3 -d '-')
+xletType="${xletType::-1}"
+
+# check if UUID exists
+if [ ! -d "$UUID" ]; then
+    echo "$UUID does not exist"
+    exit 1;
+fi
+
+
+cd $UUID
+
+# Check if info, screenshot files exist
+for file in "info.json" "screenshot.png"
+do
+    if [ ! -f $file ]; then
+        echo -e "[$missing] Missing file: $UUID/$file"
+        valid=false
+    fi
+done
+
+# Check if icon.png exists
+iconFile="icon.png"
+if [ ! -f $iconFile ]; then
+    echo -e "[$missing] Missing file: $UUID/$iconFile"
+    valid=false
+else
+    # check if icon is square
+    iconWidth=$(identify -format '%w' $iconFile)
+    iconHeight=$(identify -format '%h' $iconFile)
+    if [ $iconWidth != $iconHeight ]; then
+        echo -e "[$missing] icon.png of $UUID has to be square"
+        valid=false
+    fi
+fi
+
+# Check if UUID/files directory exists
+UUIDfilesUUIDDirExists=false
+if [ ! -d "files" ]; then
+    echo -e "[$missing] Missing directory: $UUID/files"
+    valid=false
+else
+    # check if UUID/files is "empty"
+    countFilesInFiles=$(ls -A files | wc -l)
+    if [ $countFilesInFiles != 1 ]; then
+        echo -e "[$missing] $UUID/files should contain ONLY the $UUID directory!"
+        valid=false
+    fi
+fi
+
+# Check if UUID/files/UUID directory exists
+if [ ! -d "files/$UUID" ]; then
+    echo -e "[$missing] Content of the spice has to be placed inside $UUID/files/$UUID"
+    valid=false
+else
+
+    # Check if metadata.json exists
+    metadataFile="files/$UUID/metadata.json"
+    if [ ! -f $metadataFile ]; then
+        echo -e "[$missing] Missing file: $metadataFile"
+        valid=false
+    else
+        # check UUID in metadata
+        metadataUUID=$(grep '"uuid"' $metadataFile | grep '"'$UUID'"' | wc -c)
+        if [ $metadataUUID == 0 ]; then
+            echo -e "[$missing] uuid in metadata != $UUID -- UUID directory name must be equal to uuid in metadata.json!"
+            valid=false
+        fi
+
+        # check for dangerous flag in metadata
+        dangerousFlag=$(grep '"dangerous"' $metadataFile | wc -c)
+        if [ $dangerousFlag != 0 ]; then
+            echo -e "[$missing] dangerous flag in $UUID/metadata.json has to be removed!"
+            valid=false
+        fi
+    fi
+
+    # Check if applet.js/desklet.js/extension.js exists
+    file="files/$UUID/$xletType.js"
+    findFile=$(find files/$UUID -name "$xletType.js")
+    if [ "$findFile" == "" ]; then
+        echo -e "[$missing] $UUID/$file -- Missing file!"
+        valid=false
+    fi
+fi
+
+
+if [ "$valid" == true ]; then
+    echo -e "$check $check $check $check $check $UUID is valid!"
+else
+    echo -e "$cross $cross $cross $cross $cross Please fix the issues in $UUID, which are mentioned above! $cross $cross $cross $cross $cross"
+fi

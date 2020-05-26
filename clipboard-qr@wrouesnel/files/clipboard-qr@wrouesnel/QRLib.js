@@ -32,6 +32,19 @@
 //
 // the number in this table (in particular, [0]) does not exactly match with
 // the numbers in the specficiation. see augumenteccs below for the reason.
+
+const GLib = imports.gi.GLib;
+const Gettext = imports.gettext;
+const UUID = "clipboard-qr@wrouesnel";
+
+// l10n/translation support
+
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
+
 let VERSIONS = [
 	null,
 	[[10, 7,17,13], [ 1, 1, 1, 1], []],
@@ -286,14 +299,14 @@ let encode = function(ver, mode, data, maxbuflen) {
 
 	switch (mode) {
 	case MODE_NUMERIC:
-		for (let i = 2; i < datalen; i += 3) {
+		for (var i = 2; i < datalen; i += 3) {
 			pack(parseInt(data.substring(i-2,i+1), 10), 10);
 		}
 		pack(parseInt(data.substring(i-2), 10), [0,4,7][datalen%3]);
 		break;
 
 	case MODE_ALPHANUMERIC:
-		for (let i = 1; i < datalen; i += 2) {
+		for (var i = 1; i < datalen; i += 2) {
 			pack(ALPHANUMERIC_MAP[data.charAt(i-1)] * 45 +
 				ALPHANUMERIC_MAP[data.charAt(i)], 11);
 		}
@@ -637,7 +650,7 @@ let generate = function(data, ver, mode, ecclevel, mask) {
 	return matrix;
 };
 
-let qr_generate = function(data, options) {
+var qr_generate = function(data, options) {
 	let MODES = {'numeric': MODE_NUMERIC, 'alphanumeric': MODE_ALPHANUMERIC,
 		'octet': MODE_OCTET};
 	let ECCLEVELS = {'L': ECCLEVEL_L, 'M': ECCLEVEL_M, 'Q': ECCLEVEL_Q,
@@ -666,25 +679,24 @@ let qr_generate = function(data, options) {
 		}
 	} else if (!(mode == MODE_NUMERIC || mode == MODE_ALPHANUMERIC ||
 			mode == MODE_OCTET)) {
-		throw 'Invalid or unsupported mode.';
+		throw _("Invalid or unsupported mode.");
 	}
 
 	data = validatedata(mode, data);
-	if (data === null) throw 'Invalid data format.';
+	if (data === null) throw _("Invalid data format.");
 
-	if (ecclevel < 0 || ecclevel > 3) throw 'Invalid ECC level.';
+	if (ecclevel < 0 || ecclevel > 3) throw _("Invalid ECC level.");
 
 	if (ver < 0) {
 		for (ver = 1; ver <= 40; ++ver) {
 			if (data.length <= getmaxdatalen(ver, mode, ecclevel)) break;
 		}
-		if (ver > 40) throw _('Too much data.');
+		if (ver > 40) throw _("Too much data.");
 	} else if (ver < 1 || ver > 40) {
-		throw 'Invalid version.';
+		throw _("Invalid version.");
 	}
 
-	if (mask != -1 && (mask < 0 || mask > 8)) throw 'Invalid mask.';
+	if (mask != -1 && (mask < 0 || mask > 8)) throw _("Invalid mask.");
 
 	return generate(data, ver, mode, ecclevel, mask);
 };
-

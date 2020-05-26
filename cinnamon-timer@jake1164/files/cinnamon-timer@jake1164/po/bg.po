@@ -1,0 +1,184 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-11-09 15:17+0200\n"
+"PO-Revision-Date: 2017-11-09 15:32+0200\n"
+"Last-Translator: Peyu Yovev <spacy00001@gmail.com>\n"
+"Language-Team: \n"
+"Language: bg\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: applet.js:189 applet.js:328
+msgid "Timer"
+msgstr "Таймер"
+
+#. cinnamon-timer@jake1164->settings-schema.json->preset_time->columns->title
+#: applet.js:195 applet.js:235 applet.js:326
+msgid "Minutes"
+msgstr "Минути"
+
+#: applet.js:212
+msgid "Reset"
+msgstr "Нулирай"
+
+#. cinnamon-timer@jake1164->settings-schema.json->preset_time->columns->title
+#: applet.js:234 applet.js:326
+msgid "Hours"
+msgstr "Часа"
+
+#. cinnamon-timer@jake1164->settings-schema.json->preset_time->columns->title
+#: applet.js:236 applet.js:326
+msgid "Seconds"
+msgstr "Секунди"
+
+#: applet.js:326
+msgid "and"
+msgstr "и"
+
+#: applet.js:473
+msgid "Okay"
+msgstr "Добре"
+
+#: applet.js:491
+msgid "Cinnamon Timer"
+msgstr "Таймер за Cinnamon"
+
+#. cinnamon-timer@jake1164->settings-schema.json->confirm-prompt-
+#. enable->description
+msgid "Check this to place a prompt on the window when time has elapsed."
+msgstr ""
+"Натисни тук, за да се покаже известяващ прозорец при изтичане на времето."
+
+#. cinnamon-timer@jake1164->settings-schema.json->confirm-prompt-
+#. enable->tooltip
+msgid "Check this to place a prompt on the window when time has elapsed"
+msgstr ""
+"Натисни тук, за да се покаже известяващ прозорец при изтичане на времето"
+
+#. cinnamon-timer@jake1164->settings-
+#. schema.json->time_display_enable->description
+#. cinnamon-timer@jake1164->settings-schema.json->time_display_enable->tooltip
+msgid "Display remaining time in panel"
+msgstr "Покажи оставащото време в панела"
+
+#. cinnamon-timer@jake1164->settings-schema.json->alarm_end->description
+#. cinnamon-timer@jake1164->settings-schema.json->alarm_end->tooltip
+#. cinnamon-timer@jake1164->settings-schema.json->alarm_start->description
+#. cinnamon-timer@jake1164->settings-schema.json->alarm_start->tooltip
+msgid "Do not change, the time the alarm is set to expire"
+msgstr "Не променяй, зададено е време"
+
+#. cinnamon-timer@jake1164->settings-schema.json->message-prompt-
+#. enable->description
+#. cinnamon-timer@jake1164->settings-schema.json->message-prompt-
+#. enable->tooltip
+msgid "Display a notification when time has elapsed"
+msgstr "Покажи известие, когато времето изтече"
+
+#. cinnamon-timer@jake1164->settings-schema.json->sound-file->description
+msgid "Full path and filename of alert sound file"
+msgstr "Пълен път и име на файл на звуково известие"
+
+#. cinnamon-timer@jake1164->settings-schema.json->sound-file->tooltip
+msgid "Must have Sox installed. Most sound file types supported"
+msgstr "Трябва да имате инсталиран Sox. Поддържат се повечето файлови типове"
+
+#. cinnamon-timer@jake1164->settings-schema.json->section2->title
+msgid "Sound Settings"
+msgstr "Звукови настройки"
+
+#. cinnamon-timer@jake1164->settings-schema.json->section3->title
+#. cinnamon-timer@jake1164->settings-schema.json->page3->title
+#. cinnamon-timer@jake1164->settings-schema.json->preset_time->description
+msgid "Preset Times"
+msgstr "Зададени времена "
+
+#. cinnamon-timer@jake1164->settings-schema.json->page4->title
+#. cinnamon-timer@jake1164->settings-schema.json->section4->title
+#. cinnamon-timer@jake1164->settings-
+#. schema.json->slider_intervals->description
+msgid "Slider Intervals"
+msgstr "Интервали на слайдера"
+
+#. cinnamon-timer@jake1164->settings-schema.json->page2->title
+msgid "Sounds"
+msgstr "Звуци"
+
+#. cinnamon-timer@jake1164->settings-schema.json->section1->title
+msgid "General Settings"
+msgstr "Общи настройки"
+
+#. cinnamon-timer@jake1164->settings-schema.json->page1->title
+msgid "General"
+msgstr "Общи"
+
+#. cinnamon-timer@jake1164->settings-schema.json->preset_time->columns->title
+msgid "Label"
+msgstr "Заглавие"
+
+#. cinnamon-timer@jake1164->settings-schema.json->preset_time->columns->title
+msgid "Custom Message (overrides global message)"
+msgstr "Потребителско съобщение (пренаписване на общото съобщение)"
+
+#. cinnamon-timer@jake1164->settings-schema.json->display-menu-
+#. enable->description
+#. cinnamon-timer@jake1164->settings-schema.json->display-menu-enable->tooltip
+msgid "Show the timer menu when time is elapsed"
+msgstr "Покажи менюто на таймера при изтичане на времето"
+
+#. cinnamon-timer@jake1164->settings-schema.json->sound-prompt-
+#. enable->description
+#. cinnamon-timer@jake1164->settings-schema.json->sound-prompt-enable->tooltip
+msgid "Play a sound when time is elapsed"
+msgstr "Изпълни звук при изтичане на времето"
+
+#. cinnamon-timer@jake1164->settings-
+#. schema.json->slider_intervals->columns->title
+msgid "Minimum"
+msgstr "Минимум"
+
+#. cinnamon-timer@jake1164->settings-
+#. schema.json->slider_intervals->columns->title
+msgid "Maximum"
+msgstr "Максимум"
+
+#. cinnamon-timer@jake1164->settings-
+#. schema.json->slider_intervals->columns->title
+msgid "Step"
+msgstr "Стъпка"
+
+#. cinnamon-timer@jake1164->settings-schema.json->message->description
+#. cinnamon-timer@jake1164->settings-schema.json->message->tooltip
+msgid "Do not change, message being displayed when the current timer expires"
+msgstr ""
+"Не променяйте, съобщението ще се покаже, когато текущия таймер изтече"
+
+#. cinnamon-timer@jake1164->settings-schema.json->display-message->description
+#. cinnamon-timer@jake1164->settings-schema.json->display-message->tooltip
+msgid ""
+"Global message displayed in notification windows unless defined in preset "
+"time."
+msgstr ""
+"Общото съобщение ще се покаже в известяващ прозорец, освен ако не е "
+"дефинирано друго в зададените времена."
+
+#. cinnamon-timer@jake1164->metadata.json->description
+msgid "A timer app with visual and auditory notifications."
+msgstr "Таймер с визуални и звукови известия."
+
+#. cinnamon-timer@jake1164->metadata.json->name
+msgid "Timer with notifications"
+msgstr "Таймер с известия"
+
+#~ msgid "Message displayed in notification windows"
+#~ msgstr "Съобщение, което да се показва в прозорче за известия"

@@ -1,13 +1,17 @@
 
 const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
+const Gettext = imports.gettext;
 
+function _(str) {
+    return Gettext.dgettext(uuid, str);
+}
 
 
 
 
 function File(path) {
-	this._init(path);
+    this._init(path);
 };
 
 File.prototype = {
@@ -15,24 +19,24 @@ File.prototype = {
     _init: function(path) {
         this.newline = "\n";
         this.regex_newline = /(?:[\n\r]+)/;
-		this.path = path;
+        this.path = path;
         this.file = Gio.file_new_for_path(this.path);
     },
 
     exists: function() {
-		return GLib.file_test(this.path, GLib.FileTest.IS_REGULAR) && GLib.file_test(this.path, GLib.FileTest.EXISTS);
+        return GLib.file_test(this.path, GLib.FileTest.IS_REGULAR) && GLib.file_test(this.path, GLib.FileTest.EXISTS);
     },
 
     read: function() {
-		let array_chars = this.read_chars();
-		let string = array_chars.toString().trim();
+        let array_chars = this.read_chars();
+        let string = array_chars.toString().trim();
         let array_strings = string.length == 0 ? [] : string.split(this.regex_newline);
         return array_strings;
     },
 
     read_chars: function() {
-		let [success, array_chars] = GLib.file_get_contents(this.path);
-		if(!success) {
+        let [success, array_chars] = GLib.file_get_contents(this.path);
+        if(!success) {
              throw ("Unable to read file content. Path to the file: " + this.path);
         }
         return array_chars;
@@ -40,15 +44,15 @@ File.prototype = {
 
     overwrite: function(array_strings) {
         let string = array_strings.join(this.newline);
-		return GLib.file_set_contents(this.path, string, string.length, null);
+        return GLib.file_set_contents(this.path, string, string.length, null);
     },
 
     create: function() {
         if(this.exists()) {
             return true;
         }
-		if(!this.is_top_level()) {
-			let directory = this.get_parent_directory();
+        if(!this.is_top_level()) {
+            let directory = this.get_parent_directory();
             directory.create();
         }
         return this._create();
@@ -69,7 +73,7 @@ File.prototype = {
     },
 
     remove: function() {
-		return this.file.delete(null, null);
+        return this.file.delete(null, null);
     }
 };
 
@@ -78,7 +82,7 @@ File.prototype = {
 
 
 function Directory(path) {
-	this._init(path);
+    this._init(path);
 };
 
 Directory.prototype = {
@@ -86,11 +90,11 @@ Directory.prototype = {
     _init: function(path) {
         this.separator = "/";
         this.path = path.endsWith(this.separator) ? path : path + this.separator;
-        this.directory = Gio.file_new_for_path(this.path); 
+        this.directory = Gio.file_new_for_path(this.path);
     },
 
     exists: function() {
-		return GLib.file_test(this.path, GLib.FileTest.IS_DIR) && GLib.file_test(this.path, GLib.FileTest.EXISTS);
+        return GLib.file_test(this.path, GLib.FileTest.IS_DIR) && GLib.file_test(this.path, GLib.FileTest.EXISTS);
     },
 
     create: function() {
@@ -102,14 +106,14 @@ Directory.prototype = {
     },
 
     create_parent_directories: function() {
-		if(this.is_top_level()) {
-			return;
+        if(this.is_top_level()) {
+            return;
         }
         let directories_stack = [];
         let parent = this.get_parent_directory();
         while(!parent.exists()) {
             directories_stack.push(parent);
-			parent = parent.get_parent_directory();
+            parent = parent.get_parent_directory();
         }
         for(let i = 0; i < directories_stack.length; ++i) {
             directories_stack[i].create();
@@ -131,7 +135,7 @@ Directory.prototype = {
     },
 
     removeIfEmpty: function() {
-		return this.directory.delete(null, null);
+        return this.directory.delete(null, null);
     }
 };
 

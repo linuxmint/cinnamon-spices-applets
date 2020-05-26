@@ -3,58 +3,74 @@ const Cinnamon = imports.gi.Cinnamon;
 const Applet = imports.ui.applet;
 const PopupMenu = imports.ui.popupMenu;
 const Mainloop = imports.mainloop;
-const Main = imports.ui.main;
 const Util = imports.misc.util;
 const GLib = imports.gi.GLib;
+const Gio = imports.gi.Gio;
 const Lang = imports.lang;
-const AppletMeta = imports.ui.appletManager.applets["ShellTools@abgoyal"];
-const AppletDir = imports.ui.appletManager.appletMeta["ShellTools@abgoyal"].path;
-
-const IconsFile = GLib.build_filenamev([AppletDir, 'tools_icon.svg']);
-const ToolsFile = GLib.build_filenamev([AppletDir, 'tools.json']);
-const ToolsProcessor = GLib.build_filenamev([AppletDir, 'processTools.sh']);
-const ToolsDir = GLib.build_filenamev([AppletDir, 'tools']);
-const StateFile = GLib.build_filenamev([AppletDir, 'state.sh']);
 
 
-function MyApplet(orientation) {
-    this._init(orientation);
+function MyApplet(metadata, orientation) {
+    this._init(metadata, orientation);
 }
 
 MyApplet.prototype = {
 
     __proto__: Applet.IconApplet.prototype,
 
-    _init: function(orientation) {        
+    _init: function(metadata, orientation) {
         Applet.IconApplet.prototype._init.call(this, orientation);
-        
-        try {
-            this.set_applet_icon_path(IconsFile);   
+
+        this._orientation = orientation;
+        this.metadata = metadata;
+        this.configFilePath = GLib.get_home_dir() + '/.cinnamon/configs/' + metadata.uuid;
+        let configFile = Gio.file_new_for_path(this.configFilePath);
+        if (!configFile.query_exists(null)) {
+            Util.spawnCommandLine('mkdir ' + this.configFilePath);
+            Mainloop.timeout_add(2000, ()=>this.__init());
+        } else {
+            this.__init();
+        }
+    },
+
+    __init: function() {
+
+        this.iconsFile = GLib.build_filenamev([this.metadata.path, 'icon.svg']);
+        this.toolsFile = GLib.build_filenamev([this.configFilePath, 'tools.json']);
+        this.toolsProcessor = GLib.build_filenamev([this.configFilePath, 'processTools.sh']);
+        this.toolsDir = GLib.build_filenamev([this.configFilePath, 'tools']);
+        this.stateFile = GLib.build_filenamev([this.configFilePath, 'state.sh']);
+
+        const setupApplet = () => {
+            this.set_applet_icon_path(this.iconsFile);
             this.set_applet_tooltip(_("Shell Tools"));
             this._updateFrequencySeconds = 15;
             // make sure the helper scripts have execute permissions, or things break
             // by default, after install, the scripts do not have execute permissions
-            Util.spawnCommandLine("chmod  744 " + ToolsProcessor);
-            Util.spawnCommandLine("chmod -R 744 " + ToolsDir);
-            Util.spawnCommandLine("rm -f " + StateFile);
-    
+            Util.spawnCommandLine("chmod  744 " + this.toolsProcessor);
+            Util.spawnCommandLine("chmod -R 744 " + this.toolsDir);
+            Util.spawnCommandLine("rm -f " + this.stateFile);
+
             this.menuManager = new PopupMenu.PopupMenuManager(this);
-            this._orientation = orientation;
             this.menu = new Applet.AppletPopupMenu(this, this._orientation);
             this.menuManager.addMenu(this.menu);
-        }
-        catch (e) {
-            global.logError(e);
-        }
 
-        this._periodicProcessTools();
-        this.setupDynamicMenu(ToolsFile);
+            this._periodicProcessTools();
+            Mainloop.timeout_add(2000, Lang.bind(this, this.setupDynamicMenu, this.toolsFile));
+        };
 
+        let scriptDir = Gio.file_new_for_path(this.toolsFile);
+        if (!scriptDir.query_exists(null)) {
+            let cmd = 'bash -c "' + 'cp -avrf ' + this.metadata.path + '/scripts/* ' + this.configFilePath + '"'
+            Util.spawnCommandLine(cmd);
+            Mainloop.timeout_add(2000, setupApplet);
+        } else {
+            setupApplet();
+        }
     },
 
     on_applet_clicked: function(event) {
-        this.setupDynamicMenu(ToolsFile);
-        this.menu.toggle();        
+        this.setupDynamicMenu(this.toolsFile);
+        this.menu.toggle();
     },
 
     on_orientation_changed: function (orientation) {
@@ -75,21 +91,21 @@ MyApplet.prototype = {
     },
 
     _processTools: function() {
-        Util.spawnCommandLine(ToolsProcessor + " " + "\"" +  AppletDir + "\"" + " " + this._updateFrequencySeconds);
+        Util.spawnCommandLine(this.toolsProcessor + " " + "\"" +  this.configFilePath + "\"" + " " + this._updateFrequencySeconds);
     },
 
     setupDynamicMenu: function(f) {
 
             this.menu.removeAll();
             this._contentSection = new PopupMenu.PopupMenuSection();
-            this.menu.addMenuItem(this._contentSection);                    
- 
+            this.menu.addMenuItem(this._contentSection);
+
             tools = eval(Cinnamon.get_file_contents_utf8_sync(f));
 
             for (let i = 0; i < tools.length; i++) {
                 let tool = tools[i];
-                toolName = tool[0].trim(' ');
-               
+                let toolName = tool[0].trim(' ');
+
                 if (toolName == "-") {
                     this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
                 }
@@ -99,7 +115,7 @@ MyApplet.prototype = {
                 }
                 else {
                     this.menu.addAction(_(toolName), function(event) {
-                        toolCmd =  tool[1].trim(' ');
+                        let toolCmd =  tool[1].trim(' ');
                         Util.spawnCommandLine(toolCmd);
                     })
                 }
@@ -108,11 +124,11 @@ MyApplet.prototype = {
     },
 
 
-    
+
 };
 
-function main(metadata, orientation) {  
-    let myApplet = new MyApplet(orientation);
-    return myApplet;      
+function main(metadata, orientation) {
+    let myApplet = new MyApplet(metadata, orientation);
+    return myApplet;
 }
 

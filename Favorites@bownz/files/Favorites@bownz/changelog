@@ -1,6 +1,0 @@
-1.1.3 -Added Tooltips that display either the App title (if labels are disabled) or the app description (if labels are enabled). Setting in Applet.js to disable all tooltips. (May 27th)
-1.1.2 - Fixed the width issue in certain themes A LITTLE. (May 18th)
-1.1.1 - Fixed the menu so it looks more compact. Cleaner imo. (STILL May 15)
-1.1.0 - Added Labels, And added options in the applet.js file, lines 22-28. (May 15)
-1.0.1 - Bugfix  (May 15)
-1.0.0 - Initial Release (only Icon for each favorite, no options.)

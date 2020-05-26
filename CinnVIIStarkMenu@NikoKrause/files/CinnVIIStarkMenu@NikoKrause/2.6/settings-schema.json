@@ -1,0 +1,826 @@
+{
+ "head-menu-layout" : {
+    "type" : "header",
+    "description" : "Stark-Menu/MATE-Menu"
+ },
+ "menu-layout" : {
+    "type": "combobox",
+    "default": "stark-menu",
+    "options": {
+	    "Stark-Menu": "stark-menu",
+	    "MATE-Menu": "mate-menu"
+     },
+    "description" : "Menu layout",
+    "tooltip" : "Choose between Stark-Menu and MATE-Menu layout"
+ },
+ "separator-settings": {
+    "type": "separator"
+ },
+ "head-settings" : {
+    "type" : "header",
+    "description" : "General Settings"
+ },
+ "overlay-key" : {
+    "type" : "keybinding",
+    "description" : "Keyboard shortcut to open and close the menu",
+    "default" : "Super_L::Super_R"
+ },
+ "menu-icon-custom" : {
+    "type" : "checkbox",
+    "default" : false,
+    "description" : "Use a custom icon",
+    "tooltip" : "Unchecking this allows the theme to set the icon"
+ },
+ "menu-icon" : {
+    "type" : "iconfilechooser",
+    "default" : "/usr/share/cinnamon/theme/menu-symbolic.svg",
+    "description" : "Icon",
+    "tooltip" : "Select an icon to show in the panel.",
+    "dependency" : "menu-icon-custom",
+    "indent" : true
+ },
+ "menu-label" : {
+    "type" : "entry",
+    "default" : "Menu",
+    "description" : "'Menu'-Button label",
+    "tooltip" : "Enter custom text to show in the panel."
+ },
+ "all-programs-label" : {
+    "type" : "entry",
+    "default" : "All Programs",
+    "description" : "'All Programs'-Button label",
+    "tooltip" : "Enter custom text for the 'All Programs' button."
+ },
+ "favorites-label" : {
+    "type" : "entry",
+    "default" : "Favorites",
+    "description" : "'Favorites'-Button label",
+    "tooltip" : "Enter custom text for the 'Favorites' button."
+ },
+ "show-apps-description-on-buttons" : {
+    "type" : "checkbox",
+    "default" : false,
+    "description" : "Show application's description under their titles",
+    "tooltip" : "Choose whether or not to show the application description on the application buttons."
+ },
+ "show-places" : {
+    "type" : "checkbox",
+    "default" : true,
+    "description": "Show bookmarks and places",
+    "tooltip": "Choose whether or not to show bookmarks and places in the menu."
+ },
+ "enable-autoscroll" : {
+    "type" : "checkbox",
+    "default" : true,
+    "description": "Enable autoscrolling in application list",
+    "tooltip": "Choose whether or not to enable smooth autoscrolling in the application list."
+ },
+ "search-filesystem" : {
+    "type" : "checkbox",
+    "default" : false,
+    "description": "Enable filesystem path entry in search box",
+    "tooltip": "Allows path entry in the menu search box."
+ },
+ "activate-on-hover" : {
+    "type" : "checkbox",
+    "default" : false,
+    "description": "Open the menu when I move my mouse over it",
+    "tooltip": "Enable opening the menu when the mouse enters the applet"
+ },
+ "hover-delay" : {
+    "type": "spinbutton",
+    "default" : 0,
+    "min" : 0,
+    "max" : 1000,
+    "step" : 50,
+    "units" : "milliseconds",
+    "description" : "Category hover delay",
+    "tooltip" : "Delay between switching categories"
+ },
+ "enable-animation" : {
+    "type": "checkbox",
+    "default": false,
+    "description": "Use menu animations",
+    "tooltip": "Allow the menu to animate on open and close"
+ },
+ "menu-editor-button" : {
+    "type" : "button",
+    "description" : "Open the menu editor",
+    "callback" : "_launch_editor",
+    "tooltip" : "Press this button to customize your menu entries."
+ },
+ "separator-show-hide-icons": {
+    "type": "separator"
+ },
+ "head-button-show-hide-icons" : {
+    "type" : "header",
+    "description" : "Icons"
+ },
+ "show-category-icons" : {
+    "type" : "checkbox",
+    "default" : true,
+    "description" : "Show category icons",
+    "tooltip" : "Choose whether or not to show icons on categories."
+ },
+ "show-application-icons" : {
+    "type" : "checkbox",
+    "default" : true,
+    "description" : "Show application icons",
+    "tooltip" : "Choose whether or not to show icons on applications."
+ },
+ "show-context-menu-icons" : {
+    "type" : "checkbox",
+    "default" : true,
+    "description" : "Show context menu icons",
+    "tooltip" : "Choose whether or not to show icons on context menus."
+ },
+ "show-favorite-icons" : {
+    "type" : "checkbox",
+    "default" : true,
+    "description" : "Show favorite icons",
+    "tooltip" : "Choose whether or not to show icons on favorites."
+ },
+ "favorite-button-size" : {
+    "type": "spinbutton",
+    "default" : 32,
+    "min" : 12,
+    "max" : 64,
+    "step" : 1,
+    "units" : "pixels",
+    "description" : "Size of the favorite buttons",
+    "tooltip" : "Change the size of the favorite buttons"
+ },
+ "separator-sidebar-layout": {
+    "type": "separator"
+ },
+ "head-sidebar-layout" : {
+    "type" : "header",
+    "description" : "Sidebar Layout"
+ },
+ "show-sidebar" : {
+    "type" : "checkbox",
+    "default" : true,
+    "description": "Show sidebar on menu",
+    "tooltip": "Choose whether or not to show the sidebar."
+ },
+ "user-box-layout" : {
+    "type" : "combobox",
+    "default" : "userNameAndIcon",
+    "options" : {
+        "User picture and user name": "userNameAndIcon",
+        "User picture only": "userIcon",
+        "Hide": "userHide"
+    },
+    "description" : "User account info box style",
+    "tooltip" : "Choose whether to show the user name and/or user picture.",
+    "dependency" : "show-sidebar",
+    "indent" : true
+ },
+ "quicklauncher-layout" : {
+    "type": "combobox",
+    "default": "both",
+    "options": {
+         "Icons and Labels": "both",
+         "Icons only": "icons",
+         "Labels only": "labels"
+     },
+    "description": "Quicklauncher button style",
+    "tooltip": "Choose whether to show icons and/or labels on the quicklauncher buttons.",
+    "dependency" : "show-sidebar",
+    "indent" : true
+ },
+ "show-shutdown-menu" : {
+    "type" : "checkbox",
+    "default" : true,
+    "description": "Show quit buttons",
+    "tooltip": "Choose whether or not to show the quit buttons."
+ },
+ "shutdown-menu-layout" : {
+    "type": "combobox",
+    "default": "vertical",
+    "options": {
+	    "DropDown": "dropdown",
+	    "Vertical": "vertical",
+        "Horizontal": "horizontal"
+     },
+    "description": "Quit buttons layout",
+    "tooltip": "Choose the layout of the quit options.",
+    "dependency" : "show-shutdown-menu",
+    "indent" : true
+ },
+ "shutdown-label" : {
+    "type" : "entry",
+    "default" : "Quit",
+    "description" : "'Quit'-Button label",
+    "tooltip" : "Enter custom text for the 'Quit' button.",
+    "dependency" : "show-shutdown-menu",
+    "indent" : true
+ },
+ "separator-custom-quicklauncher": {
+    "type": "separator"
+ },
+ "head-custom-quicklauncher" : {
+    "type" : "header",
+    "description" : "Custom Quicklauncher"
+ },
+ "quicklauncher-0-checkbox" : {
+    "type" : "checkbox",
+    "default" : true,
+    "description" : "Show quicklauncher on the sidebar",
+    "tooltip" : "Choose whether or not to show this quicklauncher in the sidebar."
+ },
+ "quicklauncher-0-label" : {
+    "type" : "entry",
+    "default" : "separator",
+    "description" : "Quicklauncher label",
+    "tooltip" : "Enter label for the quicklauncher",
+    "dependency" : "quicklauncher-0-checkbox",
+    "indent" : true
+ },
+ "quicklauncher-0-icon": {
+    "type": "iconfilechooser",
+    "default" : "",
+    "description" : "Quicklauncher icon",
+    "tooltip" : "Select an icon file or type an icon name into the entry box for the quicklauncher",
+    "dependency" : "quicklauncher-0-checkbox",
+    "indent" : true
+ },
+ "quicklauncher-0-command" : {
+    "type" : "entry",
+    "default" : "",
+    "description" : "Command to launch",
+    "tooltip" : "Enter command to start the quicklauncher",
+    "dependency" : "quicklauncher-0-checkbox",
+    "indent" : true
+ },
+ "quicklauncher-1-checkbox" : {
+    "type" : "checkbox",
+    "default" : true,
+    "description" : "Show quicklauncher on the sidebar",
+    "tooltip" : "Choose whether or not to show this quicklauncher in the sidebar."
+ },
+ "quicklauncher-1-label" : {
+    "type" : "entry",
+    "default" : "Home",
+    "description" : "Quicklauncher label",
+    "tooltip" : "Enter label for the quicklauncher",
+    "dependency" : "quicklauncher-1-checkbox",
+    "indent" : true
+ },
+ "quicklauncher-1-icon": {
+    "type": "iconfilechooser",
+    "default" : "user-home",
+    "description" : "Quicklauncher icon",
+    "tooltip" : "Select an icon file or type an icon name into the entry box for the quicklauncher",
+    "dependency" : "quicklauncher-1-checkbox",
+    "indent" : true
+ },
+ "quicklauncher-1-command" : {
+    "type" : "entry",
+    "default" : "nemo",
+    "description" : "Command to launch",
+    "tooltip" : "Enter command for the quicklauncher",
+    "dependency" : "quicklauncher-1-checkbox",
+    "indent" : true
+ },
+ "quicklauncher-2-checkbox" : {
+    "type" : "checkbox",
+    "default" : true,
+    "description" : "Show quicklauncher on the sidebar",
+    "tooltip" : "Choose whether or not to show this quicklauncher in the sidebar."
+ },
+ "quicklauncher-2-label" : {
+    "type" : "entry",
+    "default" : "Documents",
+    "description" : "Quicklauncher label",
+    "tooltip" : "Enter label for the quicklauncher",
+    "dependency" : "quicklauncher-2-checkbox",
+    "indent" : true
+ },
+ "quicklauncher-2-icon": {
+    "type": "iconfilechooser",
+    "default" : "folder-documents",
+    "description" : "Quicklauncher icon",
+    "tooltip" : "Select an icon file or type an icon name into the entry box for the quicklauncher",
+    "dependency" : "quicklauncher-2-checkbox",
+    "indent" : true
+ },
+ "quicklauncher-2-command" : {
+    "type" : "entry",
+    "default" : "nemo Documents",
+    "description" : "Command to launch",
+    "tooltip" : "Enter command for the quicklauncher",
+    "dependency" : "quicklauncher-2-checkbox",
+    "indent" : true
+ },
+ "quicklauncher-3-checkbox" : {
+    "type" : "checkbox",
+    "default" : true,
+    "description" : "Show quicklauncher on the sidebar",
+    "tooltip" : "Choose whether or not to show this quicklauncher in the sidebar."
+ },
+ "quicklauncher-3-label" : {
+    "type" : "entry",
+    "default" : "Pictures",
+    "description" : "Quicklauncher label",
+    "tooltip" : "Enter label for the quicklauncher",
+    "dependency" : "quicklauncher-3-checkbox",
+    "indent" : true
+ },
+ "quicklauncher-3-icon": {
+    "type": "iconfilechooser",
+    "default" : "folder-pictures",
+    "description" : "Quicklauncher icon",
+    "tooltip" : "Select an icon file or type an icon name into the entry box for the quicklauncher",
+    "dependency" : "quicklauncher-3-checkbox",
+    "indent" : true
+ },
+ "quicklauncher-3-command" : {
+    "type" : "entry",
+    "default" : "nemo Pictures",
+    "description" : "Command to launch",
+    "tooltip" : "Enter command for the quicklauncher",
+    "dependency" : "quicklauncher-3-checkbox",
+    "indent" : true
+ },
+ "quicklauncher-4-checkbox" : {
+    "type" : "checkbox",
+    "default" : true,
+    "description" : "Show quicklauncher on the sidebar",
+    "tooltip" : "Choose whether or not to show this quicklauncher in the sidebar."
+ },
+ "quicklauncher-4-label" : {
+    "type" : "entry",
+    "default" : "Music",
+    "description" : "Quicklauncher label",
+    "tooltip" : "Enter label for the quicklauncher",
+    "dependency" : "quicklauncher-4-checkbox",
+    "indent" : true
+ },
+ "quicklauncher-4-icon": {
+    "type": "iconfilechooser",
+    "default" : "folder-music",
+    "description" : "Quicklauncher icon",
+    "tooltip" : "Select an icon file or type an icon name into the entry box for the quicklauncher",
+    "dependency" : "quicklauncher-4-checkbox",
+    "indent" : true
+ },
+ "quicklauncher-4-command" : {
+    "type" : "entry",
+    "default" : "nemo Music",
+    "description" : "Command to launch",
+    "tooltip" : "Enter command for the quicklauncher",
+    "dependency" : "quicklauncher-4-checkbox",
+    "indent" : true
+ },
+ "quicklauncher-5-checkbox" : {
+    "type" : "checkbox",
+    "default" : true,
+    "description" : "Show quicklauncher on the sidebar",
+    "tooltip" : "Choose whether or not to show this quicklauncher in the sidebar."
+ },
+ "quicklauncher-5-label" : {
+    "type" : "entry",
+    "default" : "Videos",
+    "description" : "Quicklauncher label",
+    "tooltip" : "Enter label for the quicklauncher",
+    "dependency" : "quicklauncher-5-checkbox",
+    "indent" : true
+ },
+ "quicklauncher-5-icon": {
+    "type": "iconfilechooser",
+    "default" : "folder-videos",
+    "description" : "Quicklauncher icon",
+    "tooltip" : "Select an icon file or type an icon name into the entry box for the quicklauncher",
+    "dependency" : "quicklauncher-5-checkbox",
+    "indent" : true
+ },
+ "quicklauncher-5-command" : {
+    "type" : "entry",
+    "default" : "nemo Videos",
+    "description" : "Command to launch",
+    "tooltip" : "Enter command for the quicklauncher",
+    "dependency" : "quicklauncher-5-checkbox",
+    "indent" : true
+ },
+ "quicklauncher-6-checkbox" : {
+    "type" : "checkbox",
+    "default" : true,
+    "description" : "Show quicklauncher on the sidebar",
+    "tooltip" : "Choose whether or not to show this quicklauncher in the sidebar."
+ },
+ "quicklauncher-6-label" : {
+    "type" : "entry",
+    "default" : "Downloads",
+    "description" : "Quicklauncher label",
+    "tooltip" : "Enter label for the quicklauncher",
+    "dependency" : "quicklauncher-6-checkbox",
+    "indent" : true
+ },
+ "quicklauncher-6-icon": {
+    "type": "iconfilechooser",
+    "default" : "folder-download",
+    "description" : "Quicklauncher icon",
+    "tooltip" : "Select an icon file or type an icon name into the entry box for the quicklauncher",
+    "dependency" : "quicklauncher-6-checkbox",
+    "indent" : true
+ },
+ "quicklauncher-6-command" : {
+    "type" : "entry",
+    "default" : "nemo Downloads",
+    "description" : "Command to launch",
+    "tooltip" : "Enter command for the quicklauncher",
+    "dependency" : "quicklauncher-6-checkbox",
+    "indent" : true
+ },
+ "quicklauncher-7-checkbox" : {
+    "type" : "checkbox",
+    "default" : true,
+    "description" : "Show quicklauncher on the sidebar",
+    "tooltip" : "Choose whether or not to show this quicklauncher in the sidebar."
+ },
+ "quicklauncher-7-label" : {
+    "type" : "entry",
+    "default" : "separator",
+    "description" : "Quicklauncher label",
+    "tooltip" : "Enter label for the quicklauncher",
+    "dependency" : "quicklauncher-7-checkbox",
+    "indent" : true
+ },
+ "quicklauncher-7-icon": {
+    "type": "iconfilechooser",
+    "default" : "",
+    "description" : "Quicklauncher icon",
+    "tooltip" : "Select an icon file or type an icon name into the entry box for the quicklauncher",
+    "dependency" : "quicklauncher-7-checkbox",
+    "indent" : true
+ },
+ "quicklauncher-7-command" : {
+    "type" : "entry",
+    "default" : "",
+    "description" : "Command to launch",
+    "tooltip" : "Enter command to start the quicklauncher",
+    "dependency" : "quicklauncher-7-checkbox",
+    "indent" : true
+ },
+ "quicklauncher-8-checkbox" : {
+    "type" : "checkbox",
+    "default" : true,
+    "description" : "Show quicklauncher on the sidebar",
+    "tooltip" : "Choose whether or not to show this quicklauncher in the sidebar."
+ },
+ "quicklauncher-8-label" : {
+    "type" : "entry",
+    "default" : "Computer",
+    "description" : "Quicklauncher label",
+    "tooltip" : "Enter label for the quicklauncher",
+    "dependency" : "quicklauncher-8-checkbox",
+    "indent" : true
+ },
+ "quicklauncher-8-icon": {
+    "type": "iconfilechooser",
+    "default" : "computer",
+    "description" : "Quicklauncher icon",
+    "tooltip" : "Select an icon file or type an icon name into the entry box for the quicklauncher",
+    "dependency" : "quicklauncher-8-checkbox",
+    "indent" : true
+ },
+ "quicklauncher-8-command" : {
+    "type" : "entry",
+    "default" : "nemo computer:///",
+    "description" : "Command to launch",
+    "tooltip" : "Enter command for the quicklauncher",
+    "dependency" : "quicklauncher-8-checkbox",
+    "indent" : true
+ },
+ "quicklauncher-9-checkbox" : {
+    "type" : "checkbox",
+    "default" : true,
+    "description" : "Show quicklauncher on the sidebar",
+    "tooltip" : "Choose whether or not to show this quicklauncher in the sidebar."
+ },
+ "quicklauncher-9-label" : {
+    "type" : "entry",
+    "default" : "System Settings",
+    "description" : "Quicklauncher label",
+    "tooltip" : "Enter label for the quicklauncher",
+    "dependency" : "quicklauncher-9-checkbox",
+    "indent" : true
+ },
+ "quicklauncher-9-icon": {
+    "type": "iconfilechooser",
+    "default" : "preferences-system",
+    "description" : "Quicklauncher icon",
+    "tooltip" : "Select an icon file or type an icon name into the entry box for the quicklauncher",
+    "dependency" : "quicklauncher-9-checkbox",
+    "indent" : true
+ },
+ "quicklauncher-9-command" : {
+    "type" : "entry",
+    "default" : "cinnamon-settings",
+    "description" : "Command to launch",
+    "tooltip" : "Enter command for the quicklauncher",
+    "dependency" : "quicklauncher-9-checkbox",
+    "indent" : true
+ },
+ "quicklauncher-10-checkbox" : {
+    "type" : "checkbox",
+    "default" : true,
+    "description" : "Show quicklauncher on the sidebar",
+    "tooltip" : "Choose whether or not to show this quicklauncher in the sidebar."
+ },
+ "quicklauncher-10-label" : {
+    "type" : "entry",
+    "default" : "Printers",
+    "description" : "Quicklauncher label",
+    "tooltip" : "Enter label for the quicklauncher",
+    "dependency" : "quicklauncher-10-checkbox",
+    "indent" : true
+ },
+ "quicklauncher-10-icon": {
+    "type": "iconfilechooser",
+    "default" : "printer",
+    "description" : "Quicklauncher icon",
+    "tooltip" : "Select an icon file or type an icon name into the entry box for the quicklauncher",
+    "dependency" : "quicklauncher-10-checkbox",
+    "indent" : true
+ },
+ "quicklauncher-10-command" : {
+    "type" : "entry",
+    "default" : "system-config-printer",
+    "description" : "Command to launch",
+    "tooltip" : "Enter command for the quicklauncher",
+    "dependency" : "quicklauncher-10-checkbox",
+    "indent" : true
+ },
+ "quicklauncher-11-checkbox" : {
+    "type" : "checkbox",
+    "default" : true,
+    "description" : "Show quicklauncher on the sidebar",
+    "tooltip" : "Choose whether or not to show this quicklauncher in the sidebar."
+ },
+ "quicklauncher-11-label" : {
+    "type" : "entry",
+    "default" : "Terminal",
+    "description" : "Quicklauncher label",
+    "tooltip" : "Enter label for the quicklauncher",
+    "dependency" : "quicklauncher-11-checkbox",
+    "indent" : true
+ },
+ "quicklauncher-11-icon": {
+    "type": "iconfilechooser",
+    "default" : "terminal",
+    "description" : "Quicklauncher icon",
+    "tooltip" : "Select an icon file or type an icon name into the entry box for the quicklauncher",
+    "dependency" : "quicklauncher-11-checkbox",
+    "indent" : true
+ },
+ "quicklauncher-11-command" : {
+    "type" : "entry",
+    "default" : "gnome-terminal",
+    "description" : "Command to launch",
+    "tooltip" : "Enter command for the quicklauncher",
+    "dependency" : "quicklauncher-11-checkbox",
+    "indent" : true
+ },
+ "quicklauncher-12-checkbox" : {
+    "type" : "checkbox",
+    "default" : true,
+    "description" : "Show quicklauncher on the sidebar",
+    "tooltip" : "Choose whether or not to show this quicklauncher in the sidebar."
+ },
+ "quicklauncher-12-label" : {
+    "type" : "entry",
+    "default" : "System Info",
+    "description" : "Quicklauncher label",
+    "tooltip" : "Enter label for the quicklauncher",
+    "dependency" : "quicklauncher-12-checkbox",
+    "indent" : true
+ },
+ "quicklauncher-12-icon": {
+    "type": "iconfilechooser",
+    "default" : "cs-details",
+    "description" : "Quicklauncher icon",
+    "tooltip" : "Select an icon file or type an icon name into the entry box for the quicklauncher",
+    "dependency" : "quicklauncher-12-checkbox",
+    "indent" : true
+ },
+ "quicklauncher-12-command" : {
+    "type" : "entry",
+    "default" : "cinnamon-settings info",
+    "description" : "Command to launch",
+    "tooltip" : "Enter command to start the quicklauncher",
+    "dependency" : "quicklauncher-12-checkbox",
+    "indent" : true
+ },
+ "quicklauncher-13-checkbox" : {
+    "type" : "checkbox",
+    "default" : true,
+    "description" : "Show quicklauncher on the sidebar",
+    "tooltip" : "Choose whether or not to show this quicklauncher in the sidebar."
+ },
+ "quicklauncher-13-label" : {
+    "type" : "entry",
+    "default" : "separator",
+    "description" : "Quicklauncher label",
+    "tooltip" : "Enter label for the quicklauncher",
+    "dependency" : "quicklauncher-13-checkbox",
+    "indent" : true
+ },
+ "quicklauncher-13-icon": {
+    "type": "iconfilechooser",
+    "default" : "",
+    "description" : "Quicklauncher icon",
+    "tooltip" : "Select an icon file or type an icon name into the entry box for the quicklauncher",
+    "dependency" : "quicklauncher-13-checkbox",
+    "indent" : true
+ },
+ "quicklauncher-13-command" : {
+    "type" : "entry",
+    "default" : "",
+    "description" : "Command to launch",
+    "tooltip" : "Enter command to start the quicklauncher",
+    "dependency" : "quicklauncher-13-checkbox",
+    "indent" : true
+ },
+ "quicklauncher-14-checkbox" : {
+    "type" : "checkbox",
+    "default" : false,
+    "description" : "Show quicklauncher on the sidebar",
+    "tooltip" : "Choose whether or not to show this quicklauncher in the sidebar."
+ },
+ "quicklauncher-14-label" : {
+    "type" : "entry",
+    "default" : "",
+    "description" : "Quicklauncher label",
+    "tooltip" : "Enter label for the quicklauncher",
+    "dependency" : "quicklauncher-14-checkbox",
+    "indent" : true
+ },
+ "quicklauncher-14-icon": {
+    "type": "iconfilechooser",
+    "default" : "",
+    "description" : "Quicklauncher icon",
+    "tooltip" : "Select an icon file or type an icon name into the entry box for the quicklauncher",
+    "dependency" : "quicklauncher-14-checkbox",
+    "indent" : true
+ },
+ "quicklauncher-14-command" : {
+    "type" : "entry",
+    "default" : "",
+    "description" : "Command to launch",
+    "tooltip" : "Enter command to start the quicklauncher",
+    "dependency" : "quicklauncher-14-checkbox",
+    "indent" : true
+ },
+ "quicklauncher-15-checkbox" : {
+    "type" : "checkbox",
+    "default" : false,
+    "description" : "Show quicklauncher on the sidebar",
+    "tooltip" : "Choose whether or not to show this quicklauncher in the sidebar."
+ },
+ "quicklauncher-15-label" : {
+    "type" : "entry",
+    "default" : "",
+    "description" : "Quicklauncher label",
+    "tooltip" : "Enter label for the quicklauncher",
+    "dependency" : "quicklauncher-15-checkbox",
+    "indent" : true
+ },
+ "quicklauncher-15-icon": {
+    "type": "iconfilechooser",
+    "default" : "",
+    "description" : "Quicklauncher icon",
+    "tooltip" : "Select an icon file or type an icon name into the entry box for the quicklauncher",
+    "dependency" : "quicklauncher-15-checkbox",
+    "indent" : true
+ },
+ "quicklauncher-15-command" : {
+    "type" : "entry",
+    "default" : "",
+    "description" : "Command to launch",
+    "tooltip" : "Enter command to start the quicklauncher",
+    "dependency" : "quicklauncher-15-checkbox",
+    "indent" : true
+ },
+ "quicklauncher-16-checkbox" : {
+    "type" : "checkbox",
+    "default" : false,
+    "description" : "Show quicklauncher on the sidebar",
+    "tooltip" : "Choose whether or not to show this quicklauncher in the sidebar."
+ },
+ "quicklauncher-16-label" : {
+    "type" : "entry",
+    "default" : "",
+    "description" : "Quicklauncher label",
+    "tooltip" : "Enter label for the quicklauncher",
+    "dependency" : "quicklauncher-16-checkbox",
+    "indent" : true
+ },
+ "quicklauncher-16-icon": {
+    "type": "iconfilechooser",
+    "default" : "",
+    "description" : "Quicklauncher icon",
+    "tooltip" : "Select an icon file or type an icon name into the entry box for the quicklauncher",
+    "dependency" : "quicklauncher-16-checkbox",
+    "indent" : true
+ },
+ "quicklauncher-16-command" : {
+    "type" : "entry",
+    "default" : "",
+    "description" : "Command to launch",
+    "tooltip" : "Enter command to start the quicklauncher",
+    "dependency" : "quicklauncher-16-checkbox",
+    "indent" : true
+ },
+ "quicklauncher-17-checkbox" : {
+    "type" : "checkbox",
+    "default" : false,
+    "description" : "Show quicklauncher on the sidebar",
+    "tooltip" : "Choose whether or not to show this quicklauncher in the sidebar."
+ },
+ "quicklauncher-17-label" : {
+    "type" : "entry",
+    "default" : "",
+    "description" : "Quicklauncher label",
+    "tooltip" : "Enter label for the quicklauncher",
+    "dependency" : "quicklauncher-17-checkbox",
+    "indent" : true
+ },
+ "quicklauncher-17-icon": {
+    "type": "iconfilechooser",
+    "default" : "",
+    "description" : "Quicklauncher icon",
+    "tooltip" : "Select an icon file or type an icon name into the entry box for the quicklauncher",
+    "dependency" : "quicklauncher-17-checkbox",
+    "indent" : true
+ },
+ "quicklauncher-17-command" : {
+    "type" : "entry",
+    "default" : "",
+    "description" : "Command to launch",
+    "tooltip" : "Enter command to start the quicklauncher",
+    "dependency" : "quicklauncher-17-checkbox",
+    "indent" : true
+ },
+ "quicklauncher-18-checkbox" : {
+    "type" : "checkbox",
+    "default" : false,
+    "description" : "Show quicklauncher on the sidebar",
+    "tooltip" : "Choose whether or not to show this quicklauncher in the sidebar."
+ },
+ "quicklauncher-18-label" : {
+    "type" : "entry",
+    "default" : "",
+    "description" : "Quicklauncher label",
+    "tooltip" : "Enter label for the quicklauncher",
+    "dependency" : "quicklauncher-18-checkbox",
+    "indent" : true
+ },
+ "quicklauncher-18-icon": {
+    "type": "iconfilechooser",
+    "default" : "",
+    "description" : "Quicklauncher icon",
+    "tooltip" : "Select an icon file or type an icon name into the entry box for the quicklauncher",
+    "dependency" : "quicklauncher-18-checkbox",
+    "indent" : true
+ },
+ "quicklauncher-18-command" : {
+    "type" : "entry",
+    "default" : "",
+    "description" : "Command to launch",
+    "tooltip" : "Enter command to start the quicklauncher",
+    "dependency" : "quicklauncher-18-checkbox",
+    "indent" : true
+ },
+ "quicklauncher-19-checkbox" : {
+    "type" : "checkbox",
+    "default" : false,
+    "description" : "Show quicklauncher on the sidebar",
+    "tooltip" : "Choose whether or not to show this quicklauncher in the sidebar."
+ },
+ "quicklauncher-19-label" : {
+    "type" : "entry",
+    "default" : "",
+    "description" : "Quicklauncher label",
+    "tooltip" : "Enter label for the quicklauncher",
+    "dependency" : "quicklauncher-19-checkbox",
+    "indent" : true
+ },
+ "quicklauncher-19-icon": {
+    "type": "iconfilechooser",
+    "default" : "",
+    "description" : "Quicklauncher icon",
+    "tooltip" : "Select an icon file or type an icon name into the entry box for the quicklauncher",
+    "dependency" : "quicklauncher-19-checkbox",
+    "indent" : true
+ },
+ "quicklauncher-19-command" : {
+    "type" : "entry",
+    "default" : "",
+    "description" : "Command to launch",
+    "tooltip" : "Enter command to start the quicklauncher",
+    "dependency" : "quicklauncher-19-checkbox",
+    "indent" : true
+ }
+}

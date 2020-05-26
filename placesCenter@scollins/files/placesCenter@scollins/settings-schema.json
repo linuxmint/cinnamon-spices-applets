@@ -1,28 +1,73 @@
 {
-    "general": {
-        "type": "header",
-        "description": "General Settings"
+    "layout": {
+        "type": "layout",
+        "pages": ["generalPage", "userPage", "systemPage", "recentPage"],
+        "generalPage": {
+            "type": "page",
+            "title": "General",
+            "sections": ["panel", "menu"]
+        },
+        "userPage": {
+            "type": "page",
+            "title": "User",
+            "sections": ["userSection"]
+        },
+        "systemPage": {
+            "type": "page",
+            "title": "System",
+            "sections": ["systemSection"]
+        },
+        "recentPage": {
+            "type": "page",
+            "title": "Recent documents",
+            "sections": ["recentSection"]
+        },
+        "panel": {
+            "type": "section",
+            "title": "Panel settings",
+            "keys": ["panelIcon", "panelText", "middleClickPath"]
+        },
+        "menu": {
+            "type": "section",
+            "title": "Menu settings",
+            "keys": ["keyOpen", "iconSize"]
+        },
+        "userSection": {
+            "type": "section",
+            "title": "User section",
+            "keys": ["showDesktop", "showTrash", "userCustomPlaces"]
+        },
+        "systemSection": {
+            "type": "section",
+            "title": "System section",
+            "keys": ["showComputer", "showRoot", "showVolumes", "onlyShowMounted", "showNetwork", "systemCustomPlaces"]
+        },
+        "recentSection": {
+            "type": "section",
+            "title": "Recent documents",
+            "keys": ["showRecentDocuments", "recentSizeLimit", "btnPrivacy"]
+        }
     },
-    
+
     "panelIcon": {
         "type": "iconfilechooser",
         "description": "Panel icon",
         "default": "folder",
         "tooltip": "Accepts icon name or direct path (supports symbolic icons)"
     },
-    
+
     "panelText": {
         "type": "entry",
         "description": "Panel text",
         "default": ""
     },
-    
+
     "keyOpen": {
         "type": "keybinding",
-        "description": "Menu shorcut key",
+        "description": "Menu shortcut key",
         "default": "<Super>p"
     },
-    
+
     "iconSize": {
         "type": "spinbutton",
         "default": 20,
@@ -30,32 +75,31 @@
         "max": 50,
         "units": "px",
         "step": 2,
-        "description": "Icon size"
+        "description": "Menu icon size"
     },
-    
-    "sep1": {
-        "type": "separator"
+
+    "middleClickPath": {
+        "type": "filechooser",
+        "description": "Open on middle click",
+        "default": "~/",
+        "select-dir": true,
+        "tooltip": "Leave blank to disable"
     },
-    
-    "userSection": {
-        "type": "header",
-        "description": "User Section"
-    },
-    
+
     "showDesktop": {
         "type": "checkbox",
         "description": "Show desktop",
         "default": true
     },
-    
+
     "userCustomPlaces": {
         "type": "textview",
         "description": "Custom places",
         "default": "",
         "height": 50,
-        "tooltip": "List of uris/file paths to be included. Entries may be separated by either a comma(,) or by a new-line. You can set the name to be displayed by adding :customName after the location."
+        "tooltip": "List of uris/file paths to be included. Entries may be separated by either a comma(,) or by a new-line. You can set the name to be displayed by adding :customName after the location. You can likewise set an icon name by adding :iconName after the custom name."
     },
-    
+
     "showTrash": {
         "type": "combobox",
         "description": "Show trash",
@@ -66,34 +110,25 @@
             "When not empty": 2
         }
     },
-    
-    "sep2": {
-        "type": "separator"
-    },
-    
-    "places": {
-        "type": "header",
-        "description": "System Section"
-    },
-    
+
     "showComputer": {
         "type": "checkbox",
         "description": "Show computer",
         "default": true
     },
-    
+
     "showRoot": {
         "type": "checkbox",
         "description": "Show file system",
         "default": true
     },
-    
+
     "showVolumes": {
         "type": "checkbox",
         "description": "Show volumes",
         "default": true
     },
-    
+
     "onlyShowMounted": {
         "type": "checkbox",
         "description": "Only show mounted drives",
@@ -101,45 +136,47 @@
         "indent": true,
         "dependency": "showVolumes"
     },
-    
+
     "showNetwork": {
         "type": "checkbox",
         "description": "Show network",
         "default": true
     },
-    
+
     "systemCustomPlaces": {
         "type": "textview",
         "description": "Custom places",
         "default": "",
         "height": 50,
-        "tooltip": "List of uris/file paths to be included. Entries may be separated by either a comma(,) or by a new-line. You can set the name to be displayed by adding :customName after the location."
+        "tooltip": "List of uris/file paths to be included. Entries may be separated by either a comma(,) or by a new-line. You can set the name to be displayed by adding :customName after the location. You can likewise set an icon name by adding :iconName after the custom name."
     },
-    
-    "sep3": {
-        "type": "separator"
-    },
-    
-    "recent": {
-        "type": "header",
-        "description": "Recent Documents"
-    },
-    
+
     "showRecentDocuments": {
         "type": "checkbox",
         "description": "Show recent documents",
         "default": false
     },
-    
+
     "recentSizeLimit": {
-        "type": "spinbutton",
+        "type": "combobox",
         "default": 10,
-        "min": 0,
-        "max": 30,
-        "units": "",
-        "step": 1,
+        "options": {
+            "5": 5,
+            "10": 10,
+            "15": 15,
+            "20": 20,
+            "25": 25,
+            "30": 30,
+            "All Recent Documents": 0
+        },
         "description": "Number to show",
         "indent": true,
         "dependency": "showRecentDocuments"
+    },
+
+    "btnPrivacy": {
+        "type": "button",
+        "description": "Privacy",
+        "callback": "on_btnPrivacy_pressed"
     }
 }

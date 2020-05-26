@@ -1,0 +1,10 @@
+#!/bin/bash
+
+cd ..
+
+for UUID in *
+do
+    if [ $UUID != "README.md" ]; then
+        bash ./validate-spice $UUID
+    fi
+done

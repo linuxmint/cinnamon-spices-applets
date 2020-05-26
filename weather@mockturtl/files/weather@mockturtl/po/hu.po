@@ -2,461 +2,1293 @@
 # Copyright (C) 2013 THE Neroth-gnome-shell-extension-weather'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the Neroth-gnome-shell-extension-weather package.
 # Bojtos PÃ©ter <ptr@ulx.hu>, 2013.
-#
 msgid ""
 msgstr ""
 "Project-Id-Version: Neroth-gnome-shell-extension-weather 3696468\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-12 12:27-0400\n"
-"PO-Revision-Date: 2013-01-18 15:07+0100\n"
-"Last-Translator: Bojtos Péter <ptr@ulx.hu>\n"
+"POT-Creation-Date: 2020-03-04 21:37+0000\n"
+"PO-Revision-Date: 2020-03-11 20:54+0000\n"
+"Last-Translator: Attila Greguss <floyd0122@gmail.com>\n"
 "Language-Team: Hungarian\n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 2.3\n"
 
-#: applet.js:249
+#: applet.js:337 3.0/applet.js:189 3.8/applet.js:138
 msgid "..."
-msgstr "..."
+msgstr "…"
 
-#: applet.js:250
+#: applet.js:338 3.0/applet.js:190 3.8/applet.js:139
 msgid "Click to open"
 msgstr "Megnyitás"
 
-#: applet.js:289
-#, fuzzy
+#: applet.js:389
 msgid "Settings"
-msgstr "Meteorológiai beállítások"
+msgstr "Beállítások"
 
-#: applet.js:555
+#: applet.js:511
+msgid "No location provided"
+msgstr "Hely nincs megadva"
+
+#: applet.js:610
+msgid "Cloudiness:"
+msgstr "Felhőzet:"
+
+#: applet.js:634
 msgid "Sunrise"
 msgstr "Napfelkelte"
 
-#: applet.js:556
+#: applet.js:635
 msgid "Sunset"
 msgstr "Napnyugta"
 
-#: applet.js:648
+#: applet.js:708 3.0/applet.js:876 3.8/applet.js:755
 msgid "Loading current weather ..."
-msgstr "Aktuális időjárás betöltése"
+msgstr "Időjárás betöltése…"
 
-#: applet.js:649
+#: applet.js:709 3.0/applet.js:879 3.8/applet.js:758
 msgid "Loading future weather ..."
-msgstr "Időjárás előrejelzés betöltése ..."
+msgstr "Időjárás-előrejelzés betöltése…"
 
-#: applet.js:671
+#: applet.js:731 3.0/applet.js:903 3.8/applet.js:782
 msgid "Loading ..."
-msgstr "Betöltés ..."
+msgstr "Betöltés…"
 
-#: applet.js:677
+#: applet.js:737 3.0/applet.js:193 3.0/applet.js:893 3.8/applet.js:142
+#: 3.8/applet.js:772
 msgid "Refresh"
-msgstr ""
+msgstr "Frissítés"
 
-#: applet.js:740
-#, fuzzy
+#: applet.js:802 3.0/applet.js:949 3.8/applet.js:828
 msgid "Temperature:"
-msgstr "Hőmérsékleti egység"
+msgstr "Hőmérséklet:"
 
-#: applet.js:742
+#: applet.js:804 3.0/applet.js:950 3.8/applet.js:829
 msgid "Humidity:"
 msgstr "Páratartalom:"
 
-#: applet.js:744
+#: applet.js:806 3.0/applet.js:951 3.8/applet.js:830
 msgid "Pressure:"
 msgstr "Légnyomás:"
 
-#: applet.js:746
+#: applet.js:808 3.0/applet.js:952 3.8/applet.js:831
 msgid "Wind:"
 msgstr "Szél:"
 
-#: applet.js:748
-msgid "Wind Chill:"
-msgstr "Szélérzet:"
-
-#: applet.js:953
-msgid "Tornado"
-msgstr "Tornádó"
-
-#: applet.js:955
-msgid "Tropical storm"
-msgstr "Trópusi vihar"
-
-#: applet.js:957
-msgid "Hurricane"
-msgstr "Hurrikán"
-
-#: applet.js:959
-msgid "Severe thunderstorms"
-msgstr "Erős zivatar"
-
-#: applet.js:961
-msgid "Thunderstorms"
-msgstr "Zivatar"
-
-#: applet.js:963
-msgid "Mixed rain and snow"
-msgstr "Havas eső"
-
-#: applet.js:965
-msgid "Mixed rain and sleet"
-msgstr "Ónos eső"
-
-#: applet.js:967
-msgid "Mixed snow and sleet"
-msgstr "Ónos eső és dara"
-
-#: applet.js:969
-msgid "Freezing drizzle"
-msgstr "Fagyos, szitáló eső"
-
-#: applet.js:971
-msgid "Drizzle"
-msgstr "Szitáló eső"
-
-#: applet.js:973
-msgid "Freezing rain"
-msgstr "Fagyos eső"
-
-#: applet.js:975 applet.js:977
-msgid "Showers"
-msgstr "Zápor"
-
-#: applet.js:979
-msgid "Snow flurries"
-msgstr "Hózápor"
-
-#: applet.js:981
-msgid "Light snow showers"
-msgstr "Enyhe, havas zápor"
-
-#: applet.js:983
-msgid "Blowing snow"
-msgstr "Hófúvás"
-
-#: applet.js:985
-msgid "Snow"
-msgstr "Havazás"
-
-#: applet.js:987
-msgid "Hail"
-msgstr "Zápor"
-
-#: applet.js:989
-msgid "Sleet"
-msgstr "Ónos eső"
-
-#: applet.js:991
-msgid "Dust"
-msgstr "Por"
-
-#: applet.js:993
-msgid "Foggy"
-msgstr "Ködös"
-
-#: applet.js:995
-msgid "Haze"
-msgstr "Pára"
-
-#: applet.js:997
-msgid "Smoky"
-msgstr "Párás"
-
-#: applet.js:999
-msgid "Blustery"
-msgstr "Enyhén szeles"
-
-#: applet.js:1001
-msgid "Windy"
-msgstr "Szeles"
-
-#: applet.js:1003
-msgid "Cold"
-msgstr "Fagy"
-
-#: applet.js:1005
-msgid "Cloudy"
-msgstr "Felhős"
-
-#: applet.js:1008
-msgid "Mostly cloudy"
-msgstr "Jobbára felhős"
-
-#: applet.js:1011 applet.js:1037
-msgid "Partly cloudy"
-msgstr "Részben felhős"
-
-#: applet.js:1013
-msgid "Clear"
-msgstr "Tiszta"
-
-#: applet.js:1015
-msgid "Sunny"
-msgstr "Napos"
-
-#: applet.js:1018
-msgid "Fair"
-msgstr "Derült"
-
-#: applet.js:1020
-msgid "Mixed rain and hail"
-msgstr "Eső és jégeső"
-
-#: applet.js:1022
-msgid "Hot"
-msgstr "Forró"
-
-#: applet.js:1024
-msgid "Isolated thunderstorms"
-msgstr "Helyi viharok"
-
-#: applet.js:1027
-msgid "Scattered thunderstorms"
-msgstr "Szórványos viharok"
-
-#: applet.js:1029
-msgid "Scattered showers"
-msgstr "Szórványos zápor"
-
-#: applet.js:1031 applet.js:1035
-msgid "Heavy snow"
-msgstr "Erős hóesés"
-
-#: applet.js:1033
-msgid "Scattered snow showers"
-msgstr "Szórványos hózápor"
-
-#: applet.js:1039
-msgid "Thundershowers"
-msgstr "Felhőszakadás"
-
-#: applet.js:1041
-msgid "Snow showers"
-msgstr "Hózápor"
-
-#: applet.js:1043
-msgid "Isolated thundershowers"
-msgstr "Helyi felhőszakadás"
-
-#: applet.js:1046
-msgid "Not available"
-msgstr "Nem elérhető"
-
-#: applet.js:1051
-msgid "Monday"
-msgstr "Hétfő"
-
-#: applet.js:1051
-msgid "Tuesday"
-msgstr "Kedd"
-
-#: applet.js:1051
-msgid "Wednesday"
-msgstr "Szerda"
-
-#: applet.js:1051
-msgid "Thursday"
-msgstr "Csütörtök"
-
-#: applet.js:1051
-msgid "Friday"
-msgstr "Péntek"
-
-#: applet.js:1051
-msgid "Saturday"
-msgstr "Szombat"
-
-#: applet.js:1051
+#: applet.js:1026 3.0/utils.js:146 3.8/utils.js:103
 msgid "Sunday"
 msgstr "Vasárnap"
 
-#: applet.js:1056
+#: applet.js:1026 3.0/utils.js:146 3.8/utils.js:103
+msgid "Monday"
+msgstr "Hétfő"
+
+#: applet.js:1026 3.0/utils.js:146 3.8/utils.js:103
+msgid "Tuesday"
+msgstr "Kedd"
+
+#: applet.js:1026 3.0/utils.js:146 3.8/utils.js:103
+msgid "Wednesday"
+msgstr "Szerda"
+
+#: applet.js:1026 3.0/utils.js:146 3.8/utils.js:103
+msgid "Thursday"
+msgstr "Csütörtök"
+
+#: applet.js:1026 3.0/utils.js:146 3.8/utils.js:103
+msgid "Friday"
+msgstr "Péntek"
+
+#: applet.js:1026 3.0/utils.js:146 3.8/utils.js:103
+msgid "Saturday"
+msgstr "Szombat"
+
+#: applet.js:1030 3.0/utils.js:302 3.8/utils.js:255
 msgid "N"
 msgstr "É"
 
-#: applet.js:1056
+#: applet.js:1030 3.0/utils.js:302 3.8/utils.js:255
 msgid "NE"
 msgstr "ÉK"
 
-#: applet.js:1056
+#: applet.js:1030 3.0/utils.js:302 3.8/utils.js:255
 msgid "E"
 msgstr "K"
 
-#: applet.js:1056
+#: applet.js:1030 3.0/utils.js:302 3.8/utils.js:255
 msgid "SE"
 msgstr "DK"
 
-#: applet.js:1056
+#: applet.js:1030 3.0/utils.js:302 3.8/utils.js:255
 msgid "S"
 msgstr "D"
 
-#: applet.js:1056
+#: applet.js:1030 3.0/utils.js:302 3.8/utils.js:255
 msgid "SW"
 msgstr "DNY"
 
-#: applet.js:1056
+#: applet.js:1030 3.0/utils.js:302 3.8/utils.js:255
 msgid "W"
 msgstr "NY"
 
-#: applet.js:1056
+#: applet.js:1030 3.0/utils.js:302 3.8/utils.js:255
 msgid "NW"
 msgstr "ÉNY"
 
-#. cinnamon-weather->settings-schema.json->woeidLookup->description
-msgid "Get WOEID"
-msgstr "WOEID beszerzése"
+#: applet.js:1080
+msgid "Service Unavailable"
+msgstr "Szolgáltató nem elérhető"
 
-#. cinnamon-weather->settings-schema.json->verticalOrientation->description
-msgid "Vertical orientation"
+#: applet.js:1084 3.0/applet.js:148 3.0/applet.js:150 3.0/applet.js:152
+#: 3.0/applet.js:155 3.0/applet.js:158 3.0/applet.js:159 3.0/applet.js:160
+#: 3.0/applet.js:161 3.8/applet.js:98 3.8/applet.js:100 3.8/applet.js:102
+#: 3.8/applet.js:105 3.8/applet.js:108 3.8/applet.js:109 3.8/applet.js:110
+#: 3.8/applet.js:111
+msgid "Service Error"
+msgstr "Szolgáltató hiba"
+
+#: applet.js:1086
+msgid "Wrong API Key"
+msgstr "Rossz API-kulcs"
+
+#: applet.js:1089
+msgid "City Not found"
+msgstr "Város nem található"
+
+#: applet.js:1092
+msgid "Key Temp. Blocked"
+msgstr "Kulcs ideiglenesen letilva"
+
+#: 3.0/utils.js:196 3.8/utils.js:149
+msgid "Calm"
+msgstr "Szélcsend"
+
+#: 3.0/utils.js:199 3.8/utils.js:152
+msgid "Light air"
+msgstr "Gyenge szellő"
+
+#: 3.0/utils.js:202 3.8/utils.js:155
+msgid "Light breeze"
+msgstr "Enyhe szél"
+
+#: 3.0/utils.js:205 3.8/utils.js:158
+msgid "Gentle breeze"
+msgstr "Gyenge szél"
+
+#: 3.0/utils.js:208 3.8/utils.js:161
+msgid "Moderate breeze"
+msgstr "Mérsékelt szél"
+
+#: 3.0/utils.js:211 3.8/utils.js:164
+msgid "Fresh breeze"
+msgstr "Élénk szél"
+
+#: 3.0/utils.js:214 3.8/utils.js:167
+msgid "Strong breeze"
+msgstr "Erős szél"
+
+#: 3.0/utils.js:217 3.8/utils.js:170
+msgid "Near gale"
+msgstr "Viharos szél"
+
+#: 3.0/utils.js:220 3.8/utils.js:173
+msgid "Gale"
+msgstr "Élénk viharos szél"
+
+#: 3.0/utils.js:223 3.8/utils.js:176
+msgid "Strong gale"
+msgstr "Heves vihar"
+
+#: 3.0/utils.js:226 3.8/utils.js:179
+msgid "Storm"
+msgstr "Szélvész"
+
+#: 3.0/utils.js:229 3.8/utils.js:182
+msgid "Violent storm"
+msgstr "Heves szélvész"
+
+#: 3.0/utils.js:231 3.8/utils.js:184
+msgid "Hurricane"
+msgstr "Orkán"
+
+#: 3.0/met_norway.js:149 3.0/openWeatherMap.js:150 3.8/met_norway.js:96
+#: 3.8/openWeatherMap.js:92
+msgid "Cloudiness"
+msgstr "Felhőzet"
+
+#: 3.0/met_norway.js:315 3.0/met_norway.js:316 3.8/met_norway.js:262
+#: 3.8/met_norway.js:263
+msgid "Cloudy"
+msgstr "Felhős"
+
+#: 3.0/met_norway.js:322 3.0/met_norway.js:323 3.0/met_norway.js:329
+#: 3.0/met_norway.js:330 3.0/met_norway.js:336 3.0/openWeatherMap.js:388
+#: 3.8/met_norway.js:269 3.8/met_norway.js:270 3.8/met_norway.js:276
+#: 3.8/met_norway.js:277 3.8/met_norway.js:283 3.8/openWeatherMap.js:329
+msgid "Drizzle"
+msgstr "Szitáló eső"
+
+#: 3.0/met_norway.js:337 3.8/met_norway.js:284
+msgid "Drizzle with Thunderstorms"
+msgstr "Szitáló eső elszórt viharokkal"
+
+#: 3.0/met_norway.js:343 3.8/met_norway.js:290
+msgid "Mostly Drizzle"
+msgstr "Nagyrészt szitáló eső"
+
+#: 3.0/met_norway.js:344 3.8/met_norway.js:291
+msgid "Mostly Drizzle with Thunderstorms"
+msgstr "Nagyrészt szitáló eső viharokkal"
+
+#: 3.0/met_norway.js:350 3.0/met_norway.js:351 3.0/openWeatherMap.js:420
+#: 3.8/met_norway.js:297 3.8/met_norway.js:298 3.8/openWeatherMap.js:361
+msgid "Fog"
+msgstr "Köd"
+
+#: 3.0/met_norway.js:357 3.0/met_norway.js:358 3.0/met_norway.js:364
+#: 3.0/met_norway.js:371 3.0/met_norway.js:378 3.8/met_norway.js:304
+#: 3.8/met_norway.js:305 3.8/met_norway.js:311 3.8/met_norway.js:318
+#: 3.8/met_norway.js:325
+msgid "Heavy Sleet"
+msgstr "Intenzív havas esőzés"
+
+#: 3.0/met_norway.js:365 3.8/met_norway.js:312
+msgid "Mostly Heavy Sleet"
+msgstr "Nagyrészt intenzív havas eső"
+
+#: 3.0/met_norway.js:372 3.8/met_norway.js:319
+msgid "Heavy Sleet with Thunderstorms"
+msgstr "Intenzív havas eső viharral"
+
+#: 3.0/met_norway.js:379 3.8/met_norway.js:326
+msgid "Mostly Heavy Sleet with Thunderstorms"
+msgstr "Nagyrészt intenzív havas eső viharral"
+
+#: 3.0/met_norway.js:385 3.0/met_norway.js:386 3.0/met_norway.js:392
+#: 3.0/met_norway.js:399 3.0/met_norway.js:406 3.0/met_norway.js:407
+#: 3.8/met_norway.js:332 3.8/met_norway.js:333 3.8/met_norway.js:339
+#: 3.8/met_norway.js:346 3.8/met_norway.js:353 3.8/met_norway.js:354
+msgid "Heavy Snow"
+msgstr "Erős havazás"
+
+#: 3.0/met_norway.js:393 3.0/met_norway.js:400 3.8/met_norway.js:340
+#: 3.8/met_norway.js:347
+msgid "Heavy Snow with Thunderstorms"
+msgstr "Erős viharos havazás"
+
+#: 3.0/met_norway.js:413 3.0/met_norway.js:414 3.8/met_norway.js:360
+#: 3.8/met_norway.js:361
+msgid "Few Clouds"
+msgstr "Enyhén felhős"
+
+#: 3.0/met_norway.js:420 3.0/met_norway.js:421 3.0/met_norway.js:427
+#: 3.0/met_norway.js:428 3.0/met_norway.js:434 3.0/met_norway.js:441
+#: 3.8/met_norway.js:367 3.8/met_norway.js:368 3.8/met_norway.js:374
+#: 3.8/met_norway.js:375 3.8/met_norway.js:381 3.8/met_norway.js:388
+msgid "Light Rain"
+msgstr "Gyenge eső"
+
+#: 3.0/met_norway.js:435 3.8/met_norway.js:382
+msgid "Light Rain with Thunderstorms"
+msgstr "Gyenge eső elszórt viharokkal"
+
+#: 3.0/met_norway.js:442 3.8/met_norway.js:389
+msgid "Mostly Ligh Rain with Thunderstorms"
+msgstr "Nagyrészt gyenge eső elszórt viharokkal"
+
+#: 3.0/met_norway.js:448 3.0/met_norway.js:449 3.0/met_norway.js:455
+#: 3.0/met_norway.js:462 3.0/met_norway.js:469 3.8/met_norway.js:395
+#: 3.8/met_norway.js:396 3.8/met_norway.js:402 3.8/met_norway.js:409
+#: 3.8/met_norway.js:416
+msgid "Light Sleet"
+msgstr "Gyenge havas eső"
+
+#: 3.0/met_norway.js:456 3.8/met_norway.js:403
+msgid "Mostly Light Sleet"
+msgstr "Nagyrészt gyenge havas eső"
+
+#: 3.0/met_norway.js:463 3.8/met_norway.js:410
+msgid "Light Sleet with Thunderstorms"
+msgstr "Gyenge havas eső elszórt viharokkal"
+
+#: 3.0/met_norway.js:470 3.8/met_norway.js:417
+msgid "Mostly Light Sleet with Thunderstorms"
+msgstr "Nagyrészt gyenge havas eső elszórt viharokkal"
+
+#: 3.0/met_norway.js:476 3.0/met_norway.js:477 3.0/met_norway.js:483
+#: 3.0/met_norway.js:490 3.0/met_norway.js:497 3.8/met_norway.js:423
+#: 3.8/met_norway.js:424 3.8/met_norway.js:430 3.8/met_norway.js:437
+#: 3.8/met_norway.js:444
+msgid "Light Snow"
+msgstr "Enyhe havazás"
+
+#: 3.0/met_norway.js:484 3.8/met_norway.js:431
+msgid "Mostly Light Snow"
+msgstr "Nagyrészt enyhe havazás"
+
+#: 3.0/met_norway.js:491 3.8/met_norway.js:438
+msgid "Light Snow with Thunderstorms"
+msgstr "Nagyrészt enyhe havazás viharokkal"
+
+#: 3.0/met_norway.js:498 3.8/met_norway.js:445
+msgid "Mostly Light Snow with Thunderstorms"
+msgstr "Nagyrészt enyhe havazás viharokkal"
+
+#: 3.0/met_norway.js:504 3.0/met_norway.js:505 3.8/met_norway.js:451
+#: 3.8/met_norway.js:452
+msgid "Partly Cloudy"
+msgstr "Közepesen felhős"
+
+#: 3.0/met_norway.js:511 3.0/met_norway.js:512 3.0/met_norway.js:525
+#: 3.0/met_norway.js:532 3.8/met_norway.js:458 3.8/met_norway.js:459
+#: 3.8/met_norway.js:472 3.8/met_norway.js:479
+msgid "Rain"
+msgstr "Eső"
+
+#: 3.0/met_norway.js:518 3.0/met_norway.js:519 3.8/met_norway.js:465
+#: 3.8/met_norway.js:466
+msgid "Mostly Rainy"
+msgstr "Nagyrészt esős idő"
+
+#: 3.0/met_norway.js:526 3.8/met_norway.js:473
+msgid "Rain with Thunderstorms"
+msgstr "Eső elszórt viharokkal"
+
+#: 3.0/met_norway.js:533 3.8/met_norway.js:480
+msgid "Mostly Rainy with Thunderstorms"
+msgstr "Nagyrészt esős idő elszórt viharokkal"
+
+#: 3.0/met_norway.js:539 3.0/met_norway.js:540 3.0/met_norway.js:546
+#: 3.0/met_norway.js:553 3.0/met_norway.js:560 3.0/openWeatherMap.js:409
+#: 3.8/met_norway.js:486 3.8/met_norway.js:487 3.8/met_norway.js:493
+#: 3.8/met_norway.js:500 3.8/met_norway.js:507 3.8/openWeatherMap.js:350
+msgid "Sleet"
+msgstr "Havas eső"
+
+#: 3.0/met_norway.js:547 3.8/met_norway.js:494
+msgid "Mostly Sleet"
+msgstr "Nagyrészt havas eső"
+
+#: 3.0/met_norway.js:554 3.8/met_norway.js:501
+msgid "Mostly Sleet with Thunderstorms"
+msgstr "Nagyrészt havas eső viharokkal"
+
+#: 3.0/met_norway.js:561 3.8/met_norway.js:508
+msgid "Sleet with Thunderstorms"
+msgstr "Havas eső viharokkal"
+
+#: 3.0/met_norway.js:567 3.0/met_norway.js:588 3.0/openWeatherMap.js:407
+#: 3.8/met_norway.js:514 3.8/met_norway.js:535 3.8/openWeatherMap.js:348
+msgid "Snow"
+msgstr "Havazás"
+
+#: 3.0/met_norway.js:568 3.8/met_norway.js:515
+msgid "Snowy"
+msgstr "Havazás"
+
+#: 3.0/met_norway.js:574 3.0/met_norway.js:575 3.0/met_norway.js:581
+#: 3.8/met_norway.js:521 3.8/met_norway.js:522 3.8/met_norway.js:528
+msgid "Mostly Snowy"
+msgstr "Nagyrészt havazás"
+
+#: 3.0/met_norway.js:582 3.8/met_norway.js:529
+#, fuzzy
+#| msgid "Mostly Rainy with Thunderstorms"
+msgid "Mostly Snowy with Thunderstorms"
+msgstr "Nagyrészt esős idő elszórt viharokkal"
+
+#: 3.0/met_norway.js:589 3.8/met_norway.js:536
+#, fuzzy
+#| msgid "Heavy Snow with Thunderstorms"
+msgid "Snowy with Thunderstorms"
+msgstr "Erős viharos havazás"
+
+#: 3.0/met_norway.js:595 3.0/met_norway.js:596 3.0/openWeatherMap.js:426
+#: 3.8/met_norway.js:542 3.8/met_norway.js:543 3.8/openWeatherMap.js:367
+msgid "Clear"
+msgstr "Napos idő"
+
+#: 3.0/ipApi.js:88 3.8/ipApi.js:42
+msgid "Could not obtain location"
+msgstr "Helyzetmeghatározás sikertelen"
+
+#: 3.0/ipApi.js:94 3.8/ipApi.js:48
+msgid ""
+"Location Service responded with errors, please see the logs in Looking Glass"
+msgstr ""
+"Helymeghatározás nem sikerült, a logok megtekinthetők a Looking Glass-ban"
+
+#: 3.0/darkSky.js:65 3.8/darkSky.js:29
+msgid "and"
+msgstr "és"
+
+#: 3.0/darkSky.js:65 3.8/darkSky.js:29
+msgid "until"
+msgstr "amíg"
+
+#: 3.0/darkSky.js:65 3.8/darkSky.js:29
+msgid "in"
 msgstr ""
 
-#. cinnamon-weather->settings-schema.json->showTextInPanel->description
-#, fuzzy
-msgid "Display current temperature in panel"
-msgstr "Hőmérséklet kijelzése panelen"
+#: 3.0/darkSky.js:138 3.0/weatherbit.js:149 3.8/darkSky.js:90
+#: 3.8/weatherbit.js:93
+msgid "Feels Like"
+msgstr "Hőérzet"
 
-#. cinnamon-weather->settings-schema.json->woeid->description
-#, fuzzy
-msgid "WOEID"
-msgstr "WOEID beszerzése"
+#: 3.0/darkSky.js:164 3.8/darkSky.js:116
+msgid "Failed to Process Weather Info"
+msgstr "Nem sikerült feldolgozni az időjárás-jelentést"
 
-#. cinnamon-weather->settings-schema.json->woeid->tooltip
-msgid "Where On Earth ID"
-msgstr "Helyazonosító (WOEID)"
+#: 3.0/darkSky.js:187 3.8/darkSky.js:139
+msgid ""
+"Please enter API key in settings,\n"
+"or get one first on https://darksky.net/dev/register"
+msgstr ""
+"API kulcs megadása szükséges a beállíításokban,\n"
+"vagy szerezzen egyet a https://darksky.net/dev/register oldalon"
 
-#. cinnamon-weather->settings-schema.json->temperatureUnit->description
-#, fuzzy
+#: 3.0/darkSky.js:225 3.0/weatherbit.js:240 3.8/darkSky.js:177
+#: 3.8/weatherbit.js:184
+msgid ""
+"Please Make sure you\n"
+"entered the API key correctly and your account is not locked"
+msgstr "Ellenőrizze hogy az API kulcs helyes és az account nincs blockolva"
+
+#: 3.0/openWeatherMap.js:160 3.0/weatherbit.js:159 3.8/openWeatherMap.js:102
+#: 3.8/weatherbit.js:103
+msgid "Failed to Process Current Weather Info"
+msgstr "Nem sikerült feldolgozni a jelenlegi időjárás-jelentést"
+
+#: 3.0/openWeatherMap.js:187 3.0/weatherbit.js:186 3.8/openWeatherMap.js:129
+#: 3.8/weatherbit.js:130
+msgid "Failed to Process Forecast Info"
+msgstr "Nem sikerült feldolgozni az időjárás-előrejelzést"
+
+#: 3.0/openWeatherMap.js:204 3.8/openWeatherMap.js:146
+msgid "Please enter a Location in settings"
+msgstr "Kérem adja meg a helyzetet az applet beállításaiban"
+
+#: 3.0/openWeatherMap.js:253 3.8/openWeatherMap.js:195
+msgid "Please make sure Location is in the correct format in the Settings"
+msgstr "Kérem ellenőrizze hogy a helyzet megfelelő formátumban van megadva"
+
+#: 3.0/openWeatherMap.js:257 3.8/openWeatherMap.js:199
+msgid "Make sure you entered the correct key in settings"
+msgstr "Ellenőrizze hogy az API kulcs korrekt a beállításokban"
+
+#: 3.0/openWeatherMap.js:261 3.0/openWeatherMap.js:281
+#: 3.8/openWeatherMap.js:203 3.8/openWeatherMap.js:223
+msgid ""
+"Location not found, make sure location is available or it is in the correct "
+"format"
+msgstr ""
+"Hely nem található, ellenőrizze hogy a hely elérhető és a korrekt "
+"formátumban van megadva"
+
+#: 3.0/openWeatherMap.js:265 3.8/openWeatherMap.js:207
+msgid "If this problem persists, please contact the Author of this applet"
+msgstr ""
+"Ha a hiba továbbra is fennáll, vegye fel a kapcsolatot az applet "
+"fejlesztőjével"
+
+#: 3.0/openWeatherMap.js:269 3.8/openWeatherMap.js:211
+msgid "Unknown Error, please see the logs in Looking Glass"
+msgstr "Ismeretlen hiba, a hibaüzenet megtekinthető a Looking Glass-ban"
+
+#: 3.0/openWeatherMap.js:377 3.8/openWeatherMap.js:318
+msgid "Thunderstorm with light rain"
+msgstr "Vihar enyhe esővel"
+
+#: 3.0/openWeatherMap.js:378 3.8/openWeatherMap.js:319
+msgid "Thunderstorm with rain"
+msgstr "Vihar esővel"
+
+#: 3.0/openWeatherMap.js:379 3.8/openWeatherMap.js:320
+msgid "Thunderstorm with heavy rain"
+msgstr "Vihar erős esőzéssel"
+
+#: 3.0/openWeatherMap.js:380 3.8/openWeatherMap.js:321
+msgid "Light thunderstorm"
+msgstr "Enyhe vihar"
+
+#: 3.0/openWeatherMap.js:381 3.8/openWeatherMap.js:322
+msgid "Thunderstorm"
+msgstr "Vihar"
+
+#: 3.0/openWeatherMap.js:382 3.8/openWeatherMap.js:323
+msgid "Heavy thunderstorm"
+msgstr "Erős vihar"
+
+#: 3.0/openWeatherMap.js:383 3.8/openWeatherMap.js:324
+msgid "Ragged thunderstorm"
+msgstr "Viharok"
+
+#: 3.0/openWeatherMap.js:384 3.8/openWeatherMap.js:325
+msgid "Thunderstorm with light drizzle"
+msgstr "Vihar enyhén szitáló esővel"
+
+#: 3.0/openWeatherMap.js:385 3.8/openWeatherMap.js:326
+msgid "Thunderstorm with drizzle"
+msgstr "Vihar szitáló esővel"
+
+#: 3.0/openWeatherMap.js:386 3.8/openWeatherMap.js:327
+msgid "Thunderstorm with heavy drizzle"
+msgstr "Vihar erősen szitáló esővel"
+
+#: 3.0/openWeatherMap.js:387 3.8/openWeatherMap.js:328
+msgid "Light intensity drizzle"
+msgstr "Enyhe szitáló eső"
+
+#: 3.0/openWeatherMap.js:389 3.8/openWeatherMap.js:330
+msgid "Heavy intensity drizzle"
+msgstr "Erősen szitáló eső"
+
+#: 3.0/openWeatherMap.js:390 3.8/openWeatherMap.js:331
+msgid "Light intensity drizzle rain"
+msgstr "Enyhén szitáló eső"
+
+#: 3.0/openWeatherMap.js:391 3.8/openWeatherMap.js:332
+msgid "Drizzle rain"
+msgstr "Szitáló eső"
+
+#: 3.0/openWeatherMap.js:392 3.8/openWeatherMap.js:333
+msgid "Heavy intensity drizzle rain"
+msgstr "Erősen szitáló eső"
+
+#: 3.0/openWeatherMap.js:393 3.8/openWeatherMap.js:334
+msgid "Shower rain and drizzle"
+msgstr "Zápor és szitáló eső"
+
+#: 3.0/openWeatherMap.js:394 3.8/openWeatherMap.js:335
+msgid "Heavy shower rain and drizzle"
+msgstr "Erős Zápor és szitáló eső"
+
+#: 3.0/openWeatherMap.js:395 3.8/openWeatherMap.js:336
+msgid "Shower drizzle"
+msgstr "Szitáló záporeső"
+
+#: 3.0/openWeatherMap.js:396 3.8/openWeatherMap.js:337
+msgid "Light rain"
+msgstr "Enyhe eső"
+
+#: 3.0/openWeatherMap.js:397 3.8/openWeatherMap.js:338
+msgid "Moderate rain"
+msgstr "Esőzés"
+
+#: 3.0/openWeatherMap.js:398 3.8/openWeatherMap.js:339
+msgid "Heavy intensity rain"
+msgstr "Erős esőzés"
+
+#: 3.0/openWeatherMap.js:399 3.8/openWeatherMap.js:340
+msgid "Very heavy rain"
+msgstr "Nagyon erős esőzés"
+
+#: 3.0/openWeatherMap.js:400 3.8/openWeatherMap.js:341
+msgid "Extreme rain"
+msgstr "Hatalmas Esőzés"
+
+#: 3.0/openWeatherMap.js:401 3.8/openWeatherMap.js:342
+msgid "Freezing rain"
+msgstr "Fagyos eső"
+
+#: 3.0/openWeatherMap.js:402 3.8/openWeatherMap.js:343
+msgid "Light intensity shower rain"
+msgstr "Enye záporeső"
+
+#: 3.0/openWeatherMap.js:403 3.8/openWeatherMap.js:344
+msgid "Shower rain"
+msgstr "Záporeső"
+
+#: 3.0/openWeatherMap.js:404 3.8/openWeatherMap.js:345
+msgid "Heavy intensity shower rain"
+msgstr "Erős záporeső"
+
+#: 3.0/openWeatherMap.js:405 3.8/openWeatherMap.js:346
+msgid "Ragged shower rain"
+msgstr "Szakadozott záporeső"
+
+#: 3.0/openWeatherMap.js:406 3.8/openWeatherMap.js:347
+msgid "Light snow"
+msgstr "Enyhe havazás"
+
+#: 3.0/openWeatherMap.js:408 3.8/openWeatherMap.js:349
+msgid "Heavy snow"
+msgstr "Erős Havazás"
+
+#: 3.0/openWeatherMap.js:410 3.8/openWeatherMap.js:351
+msgid "Shower sleet"
+msgstr "Havas záporeső"
+
+#: 3.0/openWeatherMap.js:411 3.8/openWeatherMap.js:352
+msgid "Light rain and snow"
+msgstr "Enyhe esőzés és havazás"
+
+#: 3.0/openWeatherMap.js:412 3.8/openWeatherMap.js:353
+msgid "Rain and snow"
+msgstr "Esőzés és havazás"
+
+#: 3.0/openWeatherMap.js:413 3.8/openWeatherMap.js:354
+msgid "Light shower snow"
+msgstr "Enye elszórt havazás"
+
+#: 3.0/openWeatherMap.js:414 3.8/openWeatherMap.js:355
+msgid "Shower snow"
+msgstr "Elszórt havazás"
+
+#: 3.0/openWeatherMap.js:415 3.8/openWeatherMap.js:356
+msgid "Heavy shower snow"
+msgstr "Erős elszórt havazás"
+
+#: 3.0/openWeatherMap.js:416 3.8/openWeatherMap.js:357
+msgid "Mist"
+msgstr "Köd"
+
+#: 3.0/openWeatherMap.js:417 3.8/openWeatherMap.js:358
+msgid "Smoke"
+msgstr "Füst"
+
+#: 3.0/openWeatherMap.js:418 3.8/openWeatherMap.js:359
+msgid "Haze"
+msgstr "Pára"
+
+#: 3.0/openWeatherMap.js:419 3.8/openWeatherMap.js:360
+msgid "Sand, dust whirls"
+msgstr "Homok, porfelhők"
+
+#: 3.0/openWeatherMap.js:421 3.8/openWeatherMap.js:362
+msgid "Sand"
+msgstr "Homok"
+
+#: 3.0/openWeatherMap.js:422 3.8/openWeatherMap.js:363
+msgid "Dust"
+msgstr "Por"
+
+#: 3.0/openWeatherMap.js:423 3.8/openWeatherMap.js:364
+msgid "Volcanic ash"
+msgstr "Vulkáni hamu"
+
+#: 3.0/openWeatherMap.js:424 3.8/openWeatherMap.js:365
+msgid "Squalls"
+msgstr "Szélllökések"
+
+#: 3.0/openWeatherMap.js:425 3.8/openWeatherMap.js:366
+msgid "Tornado"
+msgstr "Tornádó"
+
+#: 3.0/openWeatherMap.js:427 3.8/openWeatherMap.js:368
+msgid "Clear sky"
+msgstr "Napos idő"
+
+#: 3.0/openWeatherMap.js:428 3.8/openWeatherMap.js:369
+msgid "Sky is clear"
+msgstr "Napos idő"
+
+#: 3.0/openWeatherMap.js:429 3.8/openWeatherMap.js:370
+msgid "Clouds"
+msgstr "Felhős"
+
+#: 3.0/openWeatherMap.js:430 3.8/openWeatherMap.js:371
+msgid "Few clouds"
+msgstr "Enyhén felhős"
+
+#: 3.0/openWeatherMap.js:431 3.8/openWeatherMap.js:372
+msgid "Scattered clouds"
+msgstr "Gyengén felhős"
+
+#: 3.0/openWeatherMap.js:432 3.8/openWeatherMap.js:373
+msgid "Broken clouds"
+msgstr "Szakadozott felhőzet"
+
+#: 3.0/openWeatherMap.js:433 3.8/openWeatherMap.js:374
+msgid "Overcast clouds"
+msgstr "Borult idő"
+
+#: 3.0/weatherbit.js:217 3.8/weatherbit.js:161
+msgid ""
+"Please enter API key in settings,\n"
+"or get one first on https://www.weatherbit.io/account/create"
+msgstr ""
+"Adjon meg egy API kulcsot az applet beállításaiban,\n"
+"vagy szerezzen egyet a https://www.weatherbit.io/account/create oldalról"
+
+#: 3.0/applet.js:147 3.8/applet.js:97
+msgid "Error"
+msgstr "Hiba"
+
+#: 3.0/applet.js:149 3.8/applet.js:99
+msgid "Incorrect API Key"
+msgstr "Rossz API-kulcs"
+
+#: 3.0/applet.js:151 3.8/applet.js:101
+msgid "Incorrect Location Format"
+msgstr "Hibás helyzet formátum"
+
+#: 3.0/applet.js:153 3.8/applet.js:103
+msgid "Key Blocked"
+msgstr "Kulcs ideiglenesen letilva"
+
+#: 3.0/applet.js:154 3.8/applet.js:104
+msgid "Can't find location"
+msgstr "Hely nem található"
+
+#: 3.0/applet.js:156 3.8/applet.js:106
+msgid "No Api Key"
+msgstr "Nincs API-kulcs megadva"
+
+#: 3.0/applet.js:157 3.8/applet.js:107
+msgid "No Location"
+msgstr "A hely nincs megadva"
+
+#: 3.0/applet.js:162 3.8/applet.js:112
+msgid "Missing Packages"
+msgstr "Hiányzó szoftverek"
+
+#: 3.0/applet.js:168 3.8/applet.js:118
+msgid "Weather Applet"
+msgstr "Időjárás Applet"
+
+#: 3.0/applet.js:427 3.8/applet.js:320
+msgid ""
+"Unexpected Error While Refreshing Weather, please see log in Looking Glass"
+msgstr ""
+"Ismeretlen hiba frissítés közben, hibaüzenet megtekinthető a Looking Glass-"
+"ban"
+
+#: 3.0/applet.js:458 3.8/applet.js:342
+msgid "Make sure you entered a location or use Automatic location instead"
+msgstr ""
+"Ellenőrizze hogy van-e helyzet megadva vagy használja az automatikus helyzet-"
+"meghatározást"
+
+#: 3.0/applet.js:570 3.8/applet.js:451
+msgid ""
+"Could not update weather for a while...\n"
+"are you connected to the internet?"
+msgstr ""
+"Előrejelzés frissítése nem sikerült...\n"
+"csatlakoztatva van az internet?"
+
+#: 3.0/applet.js:584 3.8/applet.js:465
+msgid "Network Error, please check logs in Looking Glass"
+msgstr ""
+"Hálózati hiba frissítés közben, hibaüzenet megtekinthető a Looking Glass-ban"
+
+#: 3.0/applet.js:706 3.8/applet.js:585
+msgid "Updated"
+msgstr "Frissítve"
+
+#: 3.0/applet.js:823 3.8/applet.js:702
+msgid "Today"
+msgstr "Ma"
+
+#: 3.0/applet.js:825 3.8/applet.js:704
+msgid "Tomorrow"
+msgstr "Holnap"
+
+#. metadata.json->name
+msgid "Weather"
+msgstr "Időjárás"
+
+#. metadata.json->description
+msgid "View your local weather forecast"
+msgstr "Helyi időjárás-előrejelzés megtekintése"
+
+#. settings-schema.json->head->description
+msgid "Settings for weather@mockturtl 1.8+"
+msgstr "Beállítások a weather@mockturtl 1.8+ applethez"
+
+#. settings-schema.json->keybinding->description
+#. 3.0->settings-schema.json->keybinding->description
+#. 3.8->settings-schema.json->keybinding->description
+msgid "Set the keybinding to call the menu"
+msgstr "Gyorsbillentyű-kombináció hozzárendelése a menü megnyitásához"
+
+#. settings-schema.json->providerSettings->description
+msgid "Weather Provider Settings"
+msgstr "Időjárás szolgáltató beállítások"
+
+#. settings-schema.json->dataService->description
+#. 3.0->settings-schema.json->dataService->description
+#. 3.8->settings-schema.json->dataService->description
+msgid "Data service"
+msgstr "Adat-szolgáltató"
+
+#. settings-schema.json->dataService->options
+#. 3.0->settings-schema.json->dataService->options
+#. 3.8->settings-schema.json->dataService->options
+msgid "OpenWeatherMap"
+msgstr "OpenWeatherMap"
+
+#. settings-schema.json->location->description
+#. 3.0->settings-schema.json->location->description
+#. 3.8->settings-schema.json->location->description
+msgid "Location"
+msgstr "Helyzet"
+
+#. settings-schema.json->location->tooltip
+#. 3.0->settings-schema.json->location->tooltip
+#. 3.8->settings-schema.json->location->tooltip
+msgid ""
+"Acceptable inputs: City,CountryCode or Zipcode,CountryCode or Latitude,"
+"Longtitude"
+msgstr ""
+"Elfogadható formátum: város,országkód, vagy irányítószám,országkód vagy "
+"szélesség,hosszúság"
+
+#. settings-schema.json->getLocation->description
+msgid "Setup Location"
+msgstr "Hely megadása"
+
+#. settings-schema.json->getLocation->tooltip
+#. 3.0->settings-schema.json->getLocation->tooltip
+#. 3.8->settings-schema.json->getLocation->tooltip
+msgid "Opens webpage guide"
+msgstr "Megnyitja a weboldalon lévő kézikönyvet"
+
+#. settings-schema.json->personalSettings->description
+msgid "Personal Settings"
+msgstr "Személyes beállítások"
+
+#. settings-schema.json->temperatureUnit->description
+#. 3.0->settings-schema.json->temperatureUnit->description
+#. 3.8->settings-schema.json->temperatureUnit->description
 msgid "Temperature unit"
-msgstr "Hőmérséklet egysége"
+msgstr "Hőmérséklet mértékegység"
 
-#. cinnamon-weather->settings-schema.json->temperatureUnit->options
-msgid "fahrenheit"
-msgstr "Fahrenheit"
-
-#. cinnamon-weather->settings-schema.json->temperatureUnit->options
+#. settings-schema.json->temperatureUnit->options
+#. 3.0->settings-schema.json->temperatureUnit->options
+#. 3.8->settings-schema.json->temperatureUnit->options
 msgid "celsius"
 msgstr "Celsius"
 
-#. cinnamon-weather->settings-schema.json->translateCondition->description
-#, fuzzy
-msgid "Translate condition"
-msgstr "Fordítási feltételek"
+#. settings-schema.json->temperatureUnit->options
+#. 3.0->settings-schema.json->temperatureUnit->options
+#. 3.8->settings-schema.json->temperatureUnit->options
+msgid "fahrenheit"
+msgstr "Fahrenheit"
 
-#. cinnamon-weather->settings-schema.json->locationLabelOverride->description
-msgid "Override location label"
-msgstr "Hely megjelenített neve"
+#. settings-schema.json->temperatureHighFirst->description
+#. 3.0->settings-schema.json->temperatureHighFirst->description
+#. 3.8->settings-schema.json->temperatureHighFirst->description
+msgid "Show high temperature first in forecast"
+msgstr "Előrejelzésben a maximum hőmérséklet legyen elöl."
 
-#. cinnamon-weather->settings-schema.json->show24Hours->description
-msgid "Display time in 24 hour format"
-msgstr "Idő 24 órás formátumban"
-
-#. cinnamon-weather->settings-schema.json->forecastDays->description
-msgid "Forecast length"
-msgstr ""
-
-#. cinnamon-weather->settings-schema.json->forecastDays->units
-msgid "days"
-msgstr ""
-
-#. cinnamon-weather->settings-schema.json->showSunrise->description
-msgid "Show sunrise / sunset times"
-msgstr "Napfelkelte/-nyugta kijelzése"
-
-#. cinnamon-weather->settings-schema.json->windSpeedUnit->description
-#, fuzzy
+#. settings-schema.json->windSpeedUnit->description
+#. 3.0->settings-schema.json->windSpeedUnit->description
+#. 3.8->settings-schema.json->windSpeedUnit->description
 msgid "Wind speed unit"
-msgstr "Szélerősség egység"
+msgstr "Szélerősség mértékegység"
 
-#. cinnamon-weather->settings-schema.json->windSpeedUnit->options
+#. settings-schema.json->windSpeedUnit->options
+#. 3.0->settings-schema.json->windSpeedUnit->options
+#. 3.8->settings-schema.json->windSpeedUnit->options
 msgid "kph"
-msgstr ""
+msgstr "km/h"
 
-#. cinnamon-weather->settings-schema.json->windSpeedUnit->options
+#. settings-schema.json->windSpeedUnit->options
+#. 3.0->settings-schema.json->windSpeedUnit->options
+#. 3.8->settings-schema.json->windSpeedUnit->options
+msgid "mph"
+msgstr "m/h"
+
+#. settings-schema.json->windSpeedUnit->options
+#. 3.0->settings-schema.json->windSpeedUnit->options
+#. 3.8->settings-schema.json->windSpeedUnit->options
 msgid "m/s"
-msgstr ""
+msgstr "m/s"
 
-#. cinnamon-weather->settings-schema.json->windSpeedUnit->options
+#. settings-schema.json->windSpeedUnit->options
+#. 3.0->settings-schema.json->windSpeedUnit->options
+#. 3.8->settings-schema.json->windSpeedUnit->options
 msgid "knots"
 msgstr "csomó"
 
-#. cinnamon-weather->settings-schema.json->windSpeedUnit->options
-msgid "mph"
-msgstr ""
-
-#. cinnamon-weather->settings-schema.json->showCommentInPanel->description
-msgid "Show the weather condition (e.g., \"Windy\", \"Clear\") in the panel"
-msgstr "Időjárási körülmények (pl.: 'Szeles', 'Tiszta') kijelzése panelen"
-
-#. cinnamon-weather->settings-schema.json->pressureUnit->description
+#. settings-schema.json->pressureUnit->description
+#. 3.0->settings-schema.json->pressureUnit->description
+#. 3.8->settings-schema.json->pressureUnit->description
 msgid "Atmospheric pressure unit"
-msgstr "Légköri nyomás egysége"
+msgstr "Légköri nyomás mértékegység"
 
-#. cinnamon-weather->settings-schema.json->pressureUnit->options
-msgid "psi"
-msgstr ""
+#. settings-schema.json->pressureUnit->options
+#. 3.0->settings-schema.json->pressureUnit->options
+#. 3.8->settings-schema.json->pressureUnit->options
+msgid "hPa"
+msgstr "hPa"
 
-#. cinnamon-weather->settings-schema.json->pressureUnit->options
-msgid "atm"
-msgstr ""
-
-#. cinnamon-weather->settings-schema.json->pressureUnit->options
-msgid "kPa"
-msgstr ""
-
-#. cinnamon-weather->settings-schema.json->pressureUnit->options
-msgid "Pa"
-msgstr ""
-
-#. cinnamon-weather->settings-schema.json->pressureUnit->options
-msgid "mm Hg"
-msgstr ""
-
-#. cinnamon-weather->settings-schema.json->pressureUnit->options
-msgid "at"
-msgstr ""
-
-#. cinnamon-weather->settings-schema.json->pressureUnit->options
-msgid "mbar"
-msgstr ""
-
-#. cinnamon-weather->settings-schema.json->pressureUnit->options
+#. settings-schema.json->pressureUnit->options
+#. 3.0->settings-schema.json->pressureUnit->options
+#. 3.8->settings-schema.json->pressureUnit->options
 msgid "in Hg"
+msgstr "in Hg"
+
+#. settings-schema.json->pressureUnit->options
+#. 3.0->settings-schema.json->pressureUnit->options
+#. 3.8->settings-schema.json->pressureUnit->options
+msgid "mm Hg"
+msgstr "mm Hg"
+
+#. settings-schema.json->pressureUnit->options
+#. 3.0->settings-schema.json->pressureUnit->options
+#. 3.8->settings-schema.json->pressureUnit->options
+msgid "psi"
+msgstr "psi"
+
+#. settings-schema.json->pressureUnit->options
+#. 3.0->settings-schema.json->pressureUnit->options
+#. 3.8->settings-schema.json->pressureUnit->options
+msgid "at"
+msgstr "at"
+
+#. settings-schema.json->pressureUnit->options
+#. 3.0->settings-schema.json->pressureUnit->options
+#. 3.8->settings-schema.json->pressureUnit->options
+msgid "atm"
+msgstr "atm"
+
+#. settings-schema.json->pressureUnit->options
+#. 3.0->settings-schema.json->pressureUnit->options
+#. 3.8->settings-schema.json->pressureUnit->options
+msgid "Pa"
+msgstr "Pa"
+
+#. settings-schema.json->verticalOrientation->description
+msgid "Vertical orientation"
+msgstr "Függőleges elrendezés"
+
+#. settings-schema.json->showSunrise->description
+#. 3.0->settings-schema.json->showSunrise->description
+#. 3.8->settings-schema.json->showSunrise->description
+msgid "Show sunrise / sunset times"
+msgstr "Napfelkelte és napnyugta mutatása"
+
+#. settings-schema.json->show24Hours->description
+#. 3.0->settings-schema.json->show24Hours->description
+#. 3.8->settings-schema.json->show24Hours->description
+msgid "Display time in 24 hour format"
+msgstr "Huszonnégy órás időformátum"
+
+#. settings-schema.json->forecastDays->units
+#. 3.0->settings-schema.json->forecastDays->units
+#. 3.8->settings-schema.json->forecastDays->units
+msgid "days"
+msgstr "napok"
+
+#. settings-schema.json->forecastDays->description
+#. 3.0->settings-schema.json->forecastDays->description
+#. 3.8->settings-schema.json->forecastDays->description
+msgid "Forecast length"
+msgstr "Előrejelzés hossza"
+
+#. settings-schema.json->translateCondition->description
+msgid "Translate condition"
+msgstr "Időjárás lefordítása"
+
+#. settings-schema.json->useSymbolicIcons->description
+msgid "Symbolic icons"
+msgstr "Szimbolikus ikonok"
+
+#. settings-schema.json->showTextInPanel->description
+#. 3.0->settings-schema.json->showTextInPanel->description
+#. 3.8->settings-schema.json->showTextInPanel->description
+msgid "Display current temperature in panel"
+msgstr "Hőmérséklet kijelzése a Panelen"
+
+#. settings-schema.json->showCommentInPanel->description
+#. 3.0->settings-schema.json->showCommentInPanel->description
+#. 3.8->settings-schema.json->showCommentInPanel->description
+msgid "Show the weather condition (e.g., \"Windy\", \"Clear\") in the panel"
 msgstr ""
+"Időjárási körülmények (például: „Szeles”, „Tiszta”) kijelzése a Panelen"
 
-#. cinnamon-weather->settings-schema.json->refreshInterval->description
-msgid "Update interval"
-msgstr "Frissítési időköz"
+#. settings-schema.json->locationLabelOverride->description
+#. 3.0->settings-schema.json->locationLabelOverride->description
+#. 3.8->settings-schema.json->locationLabelOverride->description
+msgid "Override location label"
+msgstr "Megjelenített hely felülírása"
 
-#. cinnamon-weather->settings-schema.json->refreshInterval->units
+#. settings-schema.json->refreshInterval->units
+#. 3.0->settings-schema.json->refreshInterval->units
+#. 3.8->settings-schema.json->refreshInterval->units
 msgid "minutes"
 msgstr "perc"
 
-#. cinnamon-weather->settings-schema.json->useSymbolicIcons->description
+#. settings-schema.json->refreshInterval->description
+#. 3.0->settings-schema.json->refreshInterval->description
+#. 3.8->settings-schema.json->refreshInterval->description
+msgid "Update interval"
+msgstr "Frissítési időköz"
+
+#. 3.0->settings-schema.json->head->description
+msgid "Settings for weather@mockturtl 3.0+"
+msgstr "Beállítások a weather@mockturtl 3.0+ applethez"
+
+#. 3.0->settings-schema.json->descriptions->description
+#. 3.8->settings-schema.json->descriptions->description
+msgid "Weather service information"
+msgstr "Időjárási szolgáltató információ"
+
+#. 3.0->settings-schema.json->openWM->description
+#. 3.8->settings-schema.json->openWM->description
+msgid "OpenWeatherMap - The default, works out of the box."
+msgstr "OpenWeatherMap - Alapértelmezett, kulcs nélkül működik."
+
+#. 3.0->settings-schema.json->darkS->description
+#. 3.8->settings-schema.json->darkS->description
+msgid ""
+"DarkSky - Needs key, please click on 'Setup API Key and Location' for the "
+"steps how to obtain one."
+msgstr ""
+"DarkSky - Kulcs szükséges, kérem kattintson az 'API-kulcs és földrajzi "
+"helyzet beállítása' gombra a lépések megtekintéséhez."
+
+#. 3.0->settings-schema.json->METN->description
+msgid ""
+"MET Norway - Current weather is shown for the next hour, and the daily "
+"forecasts \n"
+"are generated from 6 hour forecasts, so it can look incorrect sometimes."
+msgstr ""
+"MET Norvégia - Időjárás-jelentés mindig a következő órát mutatja, \n"
+"és a napi előrejelzések 6-órás előrejelzésekből vannak generálva, úgyhogy "
+"nem biztos hogy mindig pontosak."
+
+#. 3.0->settings-schema.json->WB->description
+msgid ""
+"WeatherBit - Minimum of 10min refresh rate is recommended or you might "
+"exceed you daily quota.\n"
+"Needs a key, please click on 'Setup API Key and Location' for the steps how "
+"to obtain one."
+msgstr ""
+"Weatherbit - Minimum 10 perces frissítési idő ajánlott, vagy az applet "
+"túllépi a napi megengedett 500 kérést.\n"
+"Kulcs szükséges, kérem kattintson az 'API-kulcs és földrajzi helyzet "
+"beállítása' gombra a lépések megtekintéséhez."
+
+#. 3.0->settings-schema.json->providerSettings->description
+#. 3.8->settings-schema.json->providerSettings->description
+msgid "Weather Provider Options"
+msgstr "Időjárás szolgáltató beállítások"
+
+#. 3.0->settings-schema.json->dataService->options
+#. 3.8->settings-schema.json->dataService->options
+msgid "DarkSky (key needed)"
+msgstr "DarkSky (kulcs szükséges)"
+
+#. 3.0->settings-schema.json->dataService->options
+#. 3.8->settings-schema.json->dataService->options
+msgid "MET Norway"
+msgstr "MET Norvégia"
+
+#. 3.0->settings-schema.json->dataService->options
+#. 3.8->settings-schema.json->dataService->options
+msgid "Weatherbit (key needed)"
+msgstr "Weatherbit (kulcs szükséges)"
+
+#. 3.0->settings-schema.json->apiKey->description
+#. 3.8->settings-schema.json->apiKey->description
+msgid "API Key"
+msgstr "API-kulcs"
+
+#. 3.0->settings-schema.json->apiKey->tooltip
+#. 3.8->settings-schema.json->apiKey->tooltip
+msgid "Copy this from your account of the used Data service and paste it here."
+msgstr "Ide másolja be az API-kulcsot amit az adat-szolgáltatótól kapott."
+
+#. 3.0->settings-schema.json->manualLocation->description
+#. 3.8->settings-schema.json->manualLocation->description
+msgid "Manual Location"
+msgstr "Földrajzi helyzet kézi megadása"
+
+#. 3.0->settings-schema.json->manualLocation->tooltip
+#. 3.8->settings-schema.json->manualLocation->tooltip
+msgid "Enable this if your location is not accurate"
+msgstr "Akkor engedélyezze, amikor a helyzetmeghatározás pontatlan"
+
+#. 3.0->settings-schema.json->getLocation->description
+#. 3.8->settings-schema.json->getLocation->description
+msgid "Setup API Key and Location"
+msgstr "API-kulcs és földrajzi helyzet beállítása"
+
+#. 3.0->settings-schema.json->unitSettings->description
+#. 3.8->settings-schema.json->unitSettings->description
+msgid "Units"
+msgstr "Egységek"
+
+#. 3.0->settings-schema.json->windSpeedUnit->options
+#. 3.8->settings-schema.json->windSpeedUnit->options
+msgid "Beaufort"
+msgstr ""
+
+#. 3.0->settings-schema.json->panelSettings->description
+#. 3.8->settings-schema.json->panelSettings->description
+msgid "Panel options"
+msgstr "Panel beállítások"
+
+#. 3.0->settings-schema.json->showCommentInPanel->tooltip
+#. 3.8->settings-schema.json->showCommentInPanel->tooltip
+msgid "Only works with horizontal panels"
+msgstr "Csak vízszintes panelekben működik"
+
+#. 3.0->settings-schema.json->tempTextOverride->description
+#. 3.8->settings-schema.json->tempTextOverride->description
 #, fuzzy
-msgid "Symbolic icons"
-msgstr "Jelképes ikonok"
+#| msgid "Override location label"
+msgid "Override label on panel"
+msgstr "Megjelenített hely felülírása"
 
-#. cinnamon-weather->metadata.json->description
-msgid "View your local weather forecast"
+#. 3.0->settings-schema.json->tempTextOverride->tooltip
+#. 3.8->settings-schema.json->tempTextOverride->tooltip
+msgid ""
+"Available values are: {c} is condition, {t} is temperature and {u} is unit.\n"
+"Can be used if label does not fit on vertical panel, among other smart "
+"things."
 msgstr ""
 
-#. cinnamon-weather->metadata.json->name
-msgid "Weather"
+#. 3.0->settings-schema.json->useCustomAppletIcons->description
+#. 3.8->settings-schema.json->useCustomAppletIcons->description
+msgid "Use custom icons on the panel"
+msgstr "Egyéni ikonok használata a panelen"
+
+#. 3.0->settings-schema.json->displaySettings->description
+#. 3.8->settings-schema.json->displaySettings->description
+msgid "Presentation"
+msgstr "Külső"
+
+#. 3.0->settings-schema.json->verticalOrientation->description
+#. 3.8->settings-schema.json->verticalOrientation->description
+msgid "Show forecast vertically"
+msgstr "Előrejelzések mutatása függőlegesen"
+
+#. 3.0->settings-schema.json->tempRussianStyle->description
+#. 3.8->settings-schema.json->tempRussianStyle->description
+#, fuzzy
+#| msgid "Show high temperature first in forecast"
+msgid "Show temperature Russian style"
+msgstr "Előrejelzésben a maximum hőmérséklet legyen elöl."
+
+#. 3.0->settings-schema.json->conditionSettings->description
+#. 3.8->settings-schema.json->conditionSettings->description
+msgid "Weather Conditions"
+msgstr "Időjárás"
+
+#. 3.0->settings-schema.json->translateCondition->description
+#. 3.8->settings-schema.json->translateCondition->description
+msgid "Translate conditions"
+msgstr "Időjárás lefordítása"
+
+#. 3.0->settings-schema.json->shortConditions->description
+#. 3.8->settings-schema.json->shortConditions->description
+msgid "Less verbose conditions"
+msgstr "Rövidebb leírás megjelenítése az időjárási körülményekhez"
+
+#. 3.0->settings-schema.json->shortConditions->tooltip
+#. 3.8->settings-schema.json->shortConditions->tooltip
+msgid "Currently only used with DarkSky "
+msgstr "Jelenleg csak DarkSky-t érinti "
+
+#. 3.0->settings-schema.json->iconSettings->description
+#. 3.8->settings-schema.json->iconSettings->description
+msgid "Icons"
+msgstr "Ikonok"
+
+#. 3.0->settings-schema.json->useSymbolicIcons->description
+#. 3.8->settings-schema.json->useSymbolicIcons->description
+msgid "Use symbolic icons in the applet"
+msgstr "Szimbolikus ikonok használata az appletben"
+
+#. 3.0->settings-schema.json->useCustomMenuIcons->description
+#. 3.8->settings-schema.json->useCustomMenuIcons->description
+#, fuzzy
+#| msgid "Use custom icons on the panel"
+msgid "Use custom icons in the popup menu"
+msgstr "Egyéni ikonok használata a panelen"
+
+#. 3.0->settings-schema.json->credits->description
+#. 3.8->settings-schema.json->credits->description
+msgid ""
+"powered by: OpenWeatherMap, DarkSky, ipapi. Big Thanks to OpenWeatherMap for "
+"their support!"
+msgstr ""
+"az OpenWeatherMap, a DarkSky és az ipapi segítségével létrehozva. Külön "
+"köszönet OpenWeatherMap szolgáltatásnak a segítségükért."
+
+#. 3.8->settings-schema.json->head->description
+msgid "Settings for weather@mockturtl 3.8+"
+msgstr "Beállítások a weather@mockturtl 3.8+ applethez"
+
+#. 3.8->settings-schema.json->METN->description
+msgid ""
+"MET Norway - Current weather is shown for the next hour, and the daily "
+"forecasts are generated from 6 hour forecasts, so it can look incorrect "
+"sometimes."
+msgstr ""
+"MET Norvégia - Időjárás-jelentés mindig a következő órát mutatja, és a napi "
+"előrejelzések 6-órás előrejelzésekből vannak generálva, úgyhogy nem biztos "
+"hogy mindig pontosak."
+
+#. 3.8->settings-schema.json->WB->description
+msgid ""
+"WeatherBit - Minimum of 10min refresh rate is recommended or you might "
+"exceed you daily quota. Needs a key, please click on 'Setup API Key and "
+"Location' for the steps how to obtain one."
+msgstr ""
+"Weatherbit - Minimum 10 perces frissítési idő ajánlott, vagy az applet "
+"túllépi a napi megengedett 500 kérést. Kulcs szükséges, kérem kattintson az "
+"'API-kulcs és földrajzi helyzet beállítása' gombra a lépések megtekintéséhez."
+
+#. 3.8->settings-schema.json->useCustomMenuIcons->tooltip
+msgid "Iconset is weather-icons by Erik Flowers"
 msgstr ""
 
-#~ msgid "Show 5-day forecast"
-#~ msgstr "5 napos előrejelzés kijelzése"
+#~ msgid "Heavy Snow with Thunderstorm"
+#~ msgstr "Erős viharos havazás"
+
+#~ msgid "Mostly Snowy with Thunder"
+#~ msgstr "Nagyrészt havazás viharokkal"
+
+#~ msgid "Snowy with Thunder"
+#~ msgstr "Viharos havazás"
+
+#~ msgid "Wrong Location"
+#~ msgstr "A hely rosszul van megadva"
+
+#~ msgid "Location Not found"
+#~ msgstr "A hely nem található"
+
+#~ msgid "Parsing weather information failed :("
+#~ msgstr "Időjárási információ feldolgozása nem sikerült"
+
+#~ msgid "Unknown Error"
+#~ msgstr "Ismeretlen Hiba"
+
+#~ msgid "No/Bad response from Data Service"
+#~ msgstr "Nincs vagy rossz válasz érkezett az adat-szolgáltatótól"
+
+#~ msgid "Settings for weather@mockturtl 3.6"
+#~ msgstr "Időjárás kisalkalmazás 3.6 beállítások"
+
+#~ msgid "DarkSky"
+#~ msgstr "DarkSky"
+
+#~ msgid "Use this if your location is not accurate"
+#~ msgstr "Kapcsold be ha a helyzeted nem elég pontos"
+
+#~ msgid "WOEID"
+#~ msgstr "WOEID"
+
+#~ msgid "Where On Earth ID"
+#~ msgstr "Helyazonosító (WOEID)"
+
+#~ msgid "kPa"
+#~ msgstr "kPa"
+
+#~ msgid "mbar"
+#~ msgstr "mbar"
 
 #~ msgid "Please wait"
 #~ msgstr "Kérem várjon"
-
-#~ msgid "Today"
-#~ msgstr "Ma"
-
-#~ msgid "Tomorrow"
-#~ msgstr "Holnap"
 
 #~ msgid "Schema \"%s\" not found."
 #~ msgstr "\"%s\" minta nem található."
@@ -464,47 +1296,11 @@ msgstr ""
 #~ msgid "Locations"
 #~ msgstr "Helyek"
 
-#~ msgid "Reload Weather Information"
-#~ msgstr "Meteorológiai információ újratöltése"
-
 #~ msgid "Invalid city"
 #~ msgstr "Érvénytelen város"
 
-#~ msgid "Calm"
-#~ msgstr "Szélcsend"
-
-#~ msgid "Light air"
-#~ msgstr "Tiszta levegő"
-
-#~ msgid "Light breeze"
-#~ msgstr "Könnyű szellő"
-
-#~ msgid "Gentle breeze"
-#~ msgstr "Gyenge fuvallat"
-
-#~ msgid "Moderate breeze"
-#~ msgstr "Mérsékelt szellő"
-
-#~ msgid "Fresh breeze"
-#~ msgstr "Frissítő szellő"
-
-#~ msgid "Strong breeze"
-#~ msgstr "Erős szél"
-
-#~ msgid "Moderate gale"
-#~ msgstr "Mérsékelt, viharos szél"
-
 #~ msgid "Fresh gale"
 #~ msgstr "Frissítő, viharos szél"
-
-#~ msgid "Strong gale"
-#~ msgstr "Erős viharos szél"
-
-#~ msgid "Storm"
-#~ msgstr "Vihar"
-
-#~ msgid "Violent storm"
-#~ msgstr "Heves vihar"
 
 #~ msgid "Yesterday"
 #~ msgstr "Tegnap"
@@ -514,10 +1310,6 @@ msgstr ""
 
 #~ msgid "In %s days"
 #~ msgstr "%s napban"
-
-#, fuzzy
-#~ msgid "Feels like:"
-#~ msgstr "Hőérzet:"
 
 #~ msgid "Pressure Unit"
 #~ msgstr "Nyomás egysége"

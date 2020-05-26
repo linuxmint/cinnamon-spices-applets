@@ -6,6 +6,14 @@ const Settings = imports.ui.settings;
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const St = imports.gi.St;
+const Gettext = imports.gettext;
+const UUID = "profile-switcher@pixunil";
+
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+
+function _(str) {
+  return Gettext.dgettext(UUID, str);
+}
 
 //bind function with exception catching
 function bind(func, context){
@@ -87,7 +95,7 @@ ProfileMenuItem.prototype = {
         removeItem.activate = bind(manager.removeProfile, manager, this);
         this.menu.addMenuItem(removeItem);
 
-        let removeItem = new IconMenuItem(_("Rename Profile"), "text-editor");
+        removeItem = new IconMenuItem(_("Rename Profile"), "text-editor");
         removeItem.connect("activate", bind(manager.renameProfile, manager, this));
         this.menu.addMenuItem(removeItem);
     },

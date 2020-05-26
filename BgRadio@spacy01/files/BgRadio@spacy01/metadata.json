@@ -1,7 +1,7 @@
 {
     "uuid": "BgRadio@spacy01", 
-    "icon": "multimedia-volume-control", 
-    "last-edited": "1416512548", 
-    "name": "BgRadio", 
-    "description": "The most famous Bulgarian radio stations. Some of the streams are available only from bulgaria. This applet requires moc player."
+   "description": "The most famous bulgarian radio and TV streams. Some of the streams are available only from bulgaria. To watch a TVs, you'll need to install rtmpdump and mpv packages.",
+    "name": "Bulgarian Radio and TV Streams", 
+    "last-edited": 1508561972, 
+    "icon": "tvtime"
 }

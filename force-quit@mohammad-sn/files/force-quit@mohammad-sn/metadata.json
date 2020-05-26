@@ -1,8 +1,0 @@
-{
-    "last-edited": "1428098800", 
-    "description": "Click on the applet to launch xkill and force any window to quit immediately", 
-    "icon": "window-close", 
-    "uuid": "force-quit@mohammad-sn", 
-    "name": "Force Quit II", 
-    "tooltip": "Click here to kill a window"
-}

@@ -1,0 +1,228 @@
+# Swedish translation for hwmonitor@sylfurd.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Åke Engelbrektson <eson@svenskasprakfiler.se>, 2017.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: hwmonitor@sylfurd\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-05-16 11:07+0200\n"
+"PO-Revision-Date: 2017-05-16 11:11+0200\n"
+"Language-Team: Svenska Språkfiler <contactform@svenskasprakfiler.se>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: sv\n"
+
+#: applet.js:45
+msgid "Dependence missing"
+msgstr "Beroende saknas"
+
+#: applet.js:45
+msgid "Please install the GTop package\n"
+msgstr "Installera GTop-paketet\n"
+
+#: applet.js:49
+msgid "to use the applet %s"
+msgstr "för att använda panelprogrammet %s"
+
+#: applet.js:72
+msgid "Open System Monitor"
+msgstr "Öppna systemövervakaren"
+
+#: applet.js:72
+msgid "Restart 'Graphical hardware monitor'"
+msgstr "Starta om 'grafisk hårdvaruövervakare'"
+
+#: applet.js:283
+msgid "CPU"
+msgstr "CPU"
+
+#: applet.js:306
+msgid "MEM"
+msgstr "MINNE"
+
+#. hwmonitor@sylfurd->metadata.json->description
+msgid "Displaying realtime CPU and memory load"
+msgstr "Visar CPU- och minnesbelastning i realtid"
+
+#. hwmonitor@sylfurd->metadata.json->name
+msgid "Graphical hardware monitor"
+msgstr "Grafisk hårdvaruövervakare"
+
+#. settings-schema.json->main-section->description
+msgid "Graphical hardware monitor settings."
+msgstr "Inställningar för Grafisk hårdvaruövervakare"
+
+#. settings-schema.json->graph_width->units
+#. settings-schema.json->graph_height->units
+msgid "pixels"
+msgstr "pixlar"
+
+#. settings-schema.json->graph_width->description
+msgid "Horizontal panel graph width"
+msgstr "Grafernas bredd för horisontella paneler"
+
+#. settings-schema.json->graph_height->description
+msgid "Vertical panel graph height"
+msgstr "Grafernas bredd för vertikala paneler"
+
+#. settings-schema.json->frequency->options
+msgid "0.5"
+msgstr "0,5"
+
+#. settings-schema.json->frequency->options
+msgid "1.0"
+msgstr "1,0"
+
+#. settings-schema.json->frequency->options
+msgid "2.0"
+msgstr "2,0"
+
+#. settings-schema.json->frequency->options
+msgid "3.0"
+msgstr "3,0"
+
+#. settings-schema.json->frequency->options
+msgid "4.0"
+msgstr "4,0"
+
+#. settings-schema.json->frequency->options
+msgid "5.0"
+msgstr "5,0"
+
+#. settings-schema.json->frequency->options
+msgid "10.0"
+msgstr "10,0"
+
+#. settings-schema.json->frequency->description
+msgid "Update frequency (seconds)"
+msgstr "Uppdateringsfrekvens (sekunder)"
+
+#. settings-schema.json->frequency->tooltip
+msgid "The amount of time (in seconds) between the graph updates."
+msgstr "Tiden (i sekunder) mellan grafernas uppdateringar."
+
+#. settings-schema.json->label_section->description
+msgid "Custom graph labels"
+msgstr "Anpassade grafrubriker"
+
+#. settings-schema.json->custom_labels->description
+msgid "Use custom graph labels"
+msgstr "Använd anpassade grafrubriker"
+
+#. settings-schema.json->custom_labels->tooltip
+msgid "Choose your own labels for the graphs"
+msgstr "Välj dina egna anpassade grafrubriker"
+
+#. settings-schema.json->cpu_label->description
+msgid "Set the label for the CPU graph"
+msgstr "Välj rubrik för CPU-grafen"
+
+#. settings-schema.json->mem_label->description
+msgid "Set the label for the memory graph"
+msgstr "Välj rubrik för minnes-grafen"
+
+#. settings-schema.json->theme_section->description
+msgid "Theme"
+msgstr "Tema"
+
+#. settings-schema.json->theme->tooltip
+msgid "Use custom theme to select colors that matches your current theme."
+msgstr "Använd ett anpassat tema för att välja färger som matchar ditt nuvarande tema."
+
+#. settings-schema.json->theme->options
+msgid "dark theme"
+msgstr "mörkt tema"
+
+#. settings-schema.json->theme->options
+msgid "light theme"
+msgstr "ljust tema"
+
+#. settings-schema.json->theme->options
+msgid "custom theme"
+msgstr "anpassat tema"
+
+#. settings-schema.json->border_color->description
+msgid "Border color"
+msgstr "Ramfärg"
+
+#. settings-schema.json->border_color->tooltip
+msgid "Click the button to select a border color for the graphs"
+msgstr "Klicka på knappen för att sätta färgen på ramen"
+
+#. settings-schema.json->background_color1->description
+msgid "Background color 1"
+msgstr "Bakgrundsfärg 1"
+
+#. settings-schema.json->background_color1->tooltip
+msgid "Click the button to select a starting color for the linear gradient of the graph background"
+msgstr "Klicka på knappen för att sätta startfärgen på den grafens linjära gradient"
+
+#. settings-schema.json->background_color2->description
+msgid "Background color 2"
+msgstr "Bakgrundsfärg 2"
+
+#. settings-schema.json->background_color2->tooltip
+msgid "Click the button to select a ending color for the linear gradient of the graph background"
+msgstr "Klicka på knappen för att sätta slutfärgen på den grafens linjära gradient"
+
+#. settings-schema.json->label_color->description
+msgid "Label color"
+msgstr "Rubrikfärg"
+
+#. settings-schema.json->label_color->tooltip
+msgid "Click the button to select a label color"
+msgstr "Klicka på knappen för att sätta rubrikfärgen"
+
+#. settings-schema.json->graph_color1->description
+msgid "Graph color 1"
+msgstr "Graffärg 1"
+
+#. settings-schema.json->graph_color1->tooltip
+msgid "Click the button to select a starting color for the linear gradient of the graph colors. Offset for the first color is always 0."
+msgstr "Klicka på knappen för att sätta startfärgen för grafens linjära gradient. Gränsvärdet för första färgen är alltid 0."
+
+#. settings-schema.json->graph_color2->description
+msgid "Graph color 2"
+msgstr "Graffärg 2"
+
+#. settings-schema.json->graph_color2->tooltip
+msgid "Click the button to select a first middle color for the linear gradient of the graph colors."
+msgstr "Klicka på knappen för att sätta den första mittfärgen för grafens linjära gradient."
+
+#. settings-schema.json->graph_color3->description
+msgid "Graph color 3"
+msgstr "Graffärg 3"
+
+#. settings-schema.json->graph_color3->tooltip
+msgid "Click the button to select a second middle color for the linear gradient of the graph colors."
+msgstr "Klicka på knappen för att sätta den andra mittfärgen för grafens linjära gradient."
+
+#. settings-schema.json->graph_color4->description
+msgid "Graph color 4"
+msgstr "Graffärg 4"
+
+#. settings-schema.json->graph_color4->tooltip
+msgid "Click the button to select a ending color for the linear gradient of the graph colors. Offset for the last color is always 1."
+msgstr "Klicka på knappen för att sätta slutfärgen för grafens linjära gradient. Gränsvärdet för sista färgen är alltid 1."
+
+#. settings-schema.json->graph_offset2->description
+msgid "Offset for graph color 2"
+msgstr "Gränsvärde för graffärg 2"
+
+#. settings-schema.json->graph_offset2->tooltip
+msgid "Offset for first middle color of the linear gradient"
+msgstr "Gränsvärde för den första mittfärgen i den linjära gradienten"
+
+#. settings-schema.json->graph_offset3->description
+msgid "Offset for graph color 3"
+msgstr "Gränsvärde för graffärg 3"
+
+#. settings-schema.json->graph_offset3->tooltip
+msgid "Offset for first second color of the linear gradient"
+msgstr "Gränsvärde för den andra mittfärgen i den linjära gradienten"

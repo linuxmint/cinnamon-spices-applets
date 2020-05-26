@@ -1,0 +1,6 @@
+{
+  "description": "This simple radio for Cinnamon. Require moc player. In setting you may add, edit and remove stations.",
+  "max-instances": 1,
+  "uuid": "radio@driglu4it",
+  "name": "Radio++"
+}

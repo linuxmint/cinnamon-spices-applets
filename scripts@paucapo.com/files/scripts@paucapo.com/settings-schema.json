@@ -19,7 +19,7 @@
       "default" : true,
       "description" : "Show title"
    },
-   "title": {
+   "paneltitle": {
       "type" : "entry",
       "default" : "Scripts",
       "description" : "Title"

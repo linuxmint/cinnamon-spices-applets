@@ -1,8 +1,0 @@
-Quick Menu applet ToDo list:
-＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿＿
-Archive:
- ✔ **Better handling of file types without a handler:** Currently, if the menu lists a file that has no recognizeble handler to open it, it can't be opened from the menu. @low @done (16-12-21 03:52) @project(Quick Menu applet ToDo list)
-  Maybe add a context menu that shows an "Open with" item?
- ✔ **Re-design the "Auto-update menu" option:** Right now, this option is kind of dumb. If said option is enabled, it will re-create the menu every time it's opened. @low @done (16-12-21 03:51) @project(Quick Menu applet ToDo list)
-  A better implementation could be the monitoring of the main folder (and now with symlinks support added, monitoring those as well) and update the menu just when it's needed.
- ✔ **Sub-menus inside sub-menus are a disaster:** Not possible to fix this. Clutter sub-menus are an aberration from nature. @ultralow @done (16-12-21 03:51) @project(Quick Menu applet ToDo list)

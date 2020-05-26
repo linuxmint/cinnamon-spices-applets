@@ -1,0 +1,51 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-04-20 22:50+0800\n"
+"PO-Revision-Date: 2019-10-17 22:04+0200\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
+"Language-Team: \n"
+"X-Generator: Poedit 2.2.1\n"
+
+#. sshlauncher@sumo->metadata.json->name
+#: applet.js:30 applet.js:43 applet.js:103
+msgid "SSH Launcher"
+msgstr "SSH Launcher"
+
+#: applet.js:57
+msgid "Background (-fN)"
+msgstr "Background (-fN)"
+
+#: applet.js:60
+msgid "Forward X11 (-X)"
+msgstr "Forward X11 (-X)"
+
+#: applet.js:81
+msgid "ERROR. "
+msgstr "ERRORE. "
+
+#: applet.js:84
+msgid "Edit SSH config"
+msgstr "Modifica configurazione SSH"
+
+#: applet.js:88
+msgid "Force Update from SSH config"
+msgstr "Forza Aggiornamento da config SSH"
+
+#: applet.js:103
+msgid "Connection opened to "
+msgstr "Connessione stabilita a "
+
+#. sshlauncher@sumo->metadata.json->description
+msgid "An applet to connect to SSH hosts configured in ~/.ssh/config"
+msgstr "Un'applet per connettersi agli host SSH configurati in ~/.ssh/config"
