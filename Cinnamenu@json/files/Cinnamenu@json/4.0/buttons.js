@@ -28,14 +28,14 @@ const USER_DESKTOP_PATH = getUserDesktopDir();
 const canUninstall = GLib.file_test('/usr/bin/cinnamon-remove-application', GLib.FileTest.EXISTS);
 
 class CategoryListButton extends PopupBaseMenuItem {
-    constructor(state, dir, altNameText, altIconName, selectorMethod) {
+    constructor(state, dir, altNameText, altIconName) {
         super({ hover: false, activate: false });
         this.state = state;
         this.connectIds = [
             this.state.connect({
                 menuOpened: () => {
                     if (this.id === this.state.settings.currentCategory) {
-                        this.actor.set_style_class_name('menu-category-button-selected')
+                        this.actor.set_style_class_name('menu-category-button-selected');
                     }
                 }
             }),
@@ -48,10 +48,6 @@ class CategoryListButton extends PopupBaseMenuItem {
             })
         ];
         this.signals = new SignalManager(null);
-        if (!selectorMethod) {
-            selectorMethod = 'selectCategory';
-        }
-        this.selectorMethod = selectorMethod;
 
         this.index = -1;
         let isStrDir = typeof dir === 'string';
@@ -234,7 +230,7 @@ class CategoryListButton extends PopupBaseMenuItem {
         PopupBaseMenuItem.prototype.destroy.call(this);
         unref(this);
     }
-};
+}
 
 class ApplicationContextMenuItem extends PopupBaseMenuItem {
     constructor(state, buttonState, label, action, iconName) {
@@ -264,7 +260,7 @@ class ApplicationContextMenuItem extends PopupBaseMenuItem {
         // so unless we turn the context menu into a modal somehow (not likely since it will fight for input with the
         // parent), this is the most practical solution for the grid.
         this.actor.set_style('padding-left: 6px !important; padding-right: 0px !important; width: 215px !important;');
-        this.setColumnWidths([8, 132])
+        this.setColumnWidths([8, 132]);
     }
 
     handleEnter() {
@@ -348,7 +344,7 @@ class ApplicationContextMenuItem extends PopupBaseMenuItem {
         PopupBaseMenuItem.prototype.destroy.call(this);
         unref(this);
     }
-};
+}
 
 class AppListGridButton extends PopupBaseMenuItem {
     constructor(state, app, appType, appIndex, appListLength) {
@@ -557,8 +553,8 @@ class AppListGridButton extends PopupBaseMenuItem {
         if (this.buttonState.appType === ApplicationType._applications) {
             this.menu = new PopupSubMenu(this.actor);
             this.menu.actor.set_style_class_name('menu menu-context-menu menu-background starkmenu-background');
-            this.menu.actor.set_style('width: 225px !important;')
-            this.menu.actor.set_opacity(245)
+            this.menu.actor.set_style('width: 225px !important;');
+            this.menu.actor.set_opacity(245);
             this.menu.isOpen = false;
             this.buttonBox.add_actor(this.menu.actor);
         } else {
@@ -948,7 +944,7 @@ class AppListGridButton extends PopupBaseMenuItem {
             }
         }
         this.menu.toggle_with_options(this.state.settings.enableAnimation);
-        return true
+        return true;
     }
 
     clearSearchFormatting() {
@@ -973,7 +969,7 @@ class AppListGridButton extends PopupBaseMenuItem {
         PopupBaseMenuItem.prototype.destroy.call(this);
         unref(this);
     }
-};
+}
 
 class GroupButton extends PopupBaseMenuItem {
     constructor(state, iconName, iconSize, name, description, callback) {
@@ -1145,6 +1141,6 @@ class GroupButton extends PopupBaseMenuItem {
         super.destroy();
         unref(this);
     }
-};
+}
 
 module.exports = {CategoryListButton, AppListGridButton, GroupButton};
