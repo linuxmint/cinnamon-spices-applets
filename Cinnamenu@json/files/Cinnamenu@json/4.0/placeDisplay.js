@@ -69,12 +69,12 @@ class PlaceInfo {
         return tryFn(
             () => {
                 return this.file.query_info('standard::display-name', 0, null)
-                .get_display_name()
+                .get_display_name();
             },
-            () => this.file.get_basename(),
+            () => this.file.get_basename()
         );
     }
-};
+}
 
 class PlaceDeviceInfo extends PlaceInfo {
     constructor(kind, mount) {
@@ -82,7 +82,7 @@ class PlaceDeviceInfo extends PlaceInfo {
         this.mount = mount;
         this.icon = mount.get_icon();
     }
-};
+}
 
 const DEFAULT_DIRECTORIES = [   GLib.UserDirectory.DIRECTORY_DOCUMENTS,
                                 GLib.UserDirectory.DIRECTORY_DOWNLOAD,
@@ -253,7 +253,7 @@ class PlacesManager {
             }
 
             this.places.bookmarks = bookmarks;
-        }).catch((e) => global.logError(e))
+        }).catch((e) => global.logError(e));
     }
 
     addMount(kind, mount) {
@@ -270,4 +270,4 @@ class PlacesManager {
             this.monitor.cancel();
         }
     }
-};
+}
