@@ -35,6 +35,7 @@ class Yahoo implements WeatherProvider {
     //--------------------------------------------------------
     //  Properties
     //--------------------------------------------------------
+    public name = "Yahoo";
     private app: WeatherApplet
 
     constructor(_app: WeatherApplet) {

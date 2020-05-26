@@ -21,6 +21,7 @@ var CelsiusToKelvin = utils.CelsiusToKelvin;
 var SunCalc = importModule("sunCalc").SunCalc;
 class MetNorway {
     constructor(app) {
+        this.name = "MET Norway";
         this.baseUrl = "https://api.met.no/weatherapi/locationforecast/1.9/.json?";
         this.ctx = this;
         this.app = app;

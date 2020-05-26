@@ -56,6 +56,7 @@ var icons = utils.icons;
 var weatherIconSafely = utils.weatherIconSafely;
 var Weatherbit = (function () {
     function Weatherbit(_app) {
+        this.name = "WeatherBit";
         this.descriptionLinelength = 25;
         this.supportedLanguages = [
             'ar', 'az', 'be', 'bg', 'bs', 'ca', 'cz', 'da', 'de', 'el', 'en',

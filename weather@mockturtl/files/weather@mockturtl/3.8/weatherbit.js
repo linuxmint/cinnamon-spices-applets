@@ -20,6 +20,7 @@ var icons = utils.icons;
 var weatherIconSafely = utils.weatherIconSafely;
 class Weatherbit {
     constructor(_app) {
+        this.name = "WeatherBit";
         this.descriptionLinelength = 25;
         this.supportedLanguages = [
             'ar', 'az', 'be', 'bg', 'bs', 'ca', 'cz', 'da', 'de', 'el', 'en',

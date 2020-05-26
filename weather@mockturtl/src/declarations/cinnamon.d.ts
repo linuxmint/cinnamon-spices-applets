@@ -351,7 +351,13 @@ declare namespace imports.gi.St {
     }
     export class BoxLayout extends Widget {
         constructor(options ? : any)
+        /** Deprecated, use add_child instead */
         add_actor(element: Widget): void;
+        add_child(element: Widget): void;
+        /** private function by default? */
+        add(element: Widget, options: any): void;
+        destroy_all_children(): void;
+
     }
     export class Bin extends Widget {
         constructor(options ? : any)
@@ -463,6 +469,12 @@ declare namespace imports.gi.St {
     export enum IconType {
         SYMBOLIC,
         FULLCOLOR
+    }
+
+    export enum Align {
+        START,
+        MIDDLE,
+        END
     }
 
     /*export enum PolicyType {

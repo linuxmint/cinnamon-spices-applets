@@ -57,6 +57,7 @@ var CelsiusToKelvin = utils.CelsiusToKelvin;
 var SunCalc = importModule("sunCalc").SunCalc;
 var MetNorway = (function () {
     function MetNorway(app) {
+        this.name = "MET Norway";
         this.baseUrl = "https://api.met.no/weatherapi/locationforecast/1.9/.json?";
         this.ctx = this;
         this.app = app;

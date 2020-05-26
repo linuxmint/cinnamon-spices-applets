@@ -62,7 +62,7 @@ var Lang = imports.lang;
 var keybindingManager = imports.ui.main.keybindingManager;
 var timeout_add_seconds = imports.mainloop.timeout_add_seconds;
 var _a = imports.gi.Soup, Message = _a.Message, Session = _a.Session, ProxyResolverDefault = _a.ProxyResolverDefault, SessionAsync = _a.SessionAsync;
-var _b = imports.gi.St, Bin = _b.Bin, DrawingArea = _b.DrawingArea, BoxLayout = _b.BoxLayout, Side = _b.Side, IconType = _b.IconType, Label = _b.Label, Icon = _b.Icon, Button = _b.Button;
+var _b = imports.gi.St, Bin = _b.Bin, DrawingArea = _b.DrawingArea, BoxLayout = _b.BoxLayout, Side = _b.Side, IconType = _b.IconType, Label = _b.Label, Icon = _b.Icon, Button = _b.Button, Align = _b.Align;
 var get_language_names = imports.gi.GLib.get_language_names;
 var _c = imports.ui.applet, TextIconApplet = _c.TextIconApplet, AllowedLayout = _c.AllowedLayout, AppletPopupMenu = _c.AppletPopupMenu, MenuItem = _c.MenuItem;
 var PopupMenuManager = imports.ui.popupMenu.PopupMenuManager;
@@ -425,6 +425,7 @@ var WeatherApplet = (function (_super) {
                     case 8:
                         if (_a)
                             return [2];
+                        this.ui.displayBar(this.provider);
                         this.log.Print("Weather Information refreshed");
                         this.loop.ResetErrorCount();
                         return [2, "success"];
@@ -664,16 +665,25 @@ var UI = (function () {
         this._futureWeather = new Bin({ style_class: STYLE_FORECAST });
         this._separatorArea = new DrawingArea({ style_class: STYLE_POPUP_SEPARATOR_MENU_ITEM });
         this._separatorArea.connect(SIGNAL_REPAINT, Lang.bind(this, this._onSeparatorAreaRepaint));
+        this._separatorArea2 = new DrawingArea({ style_class: STYLE_POPUP_SEPARATOR_MENU_ITEM });
+        this._separatorArea2.connect(SIGNAL_REPAINT, Lang.bind(this, this._onSeparatorAreaRepaint));
+        this._bar = new BoxLayout({
+            vertical: false,
+            style_class: STYLE_BAR
+        });
         var mainBox = new BoxLayout({ vertical: true });
         mainBox.add_actor(this._currentWeather);
         mainBox.add_actor(this._separatorArea);
         mainBox.add_actor(this._futureWeather);
+        mainBox.add_actor(this._separatorArea2);
+        mainBox.add_actor(this._bar);
         this.menu.addActor(mainBox);
     };
     UI.prototype.rebuild = function (config) {
         this.showLoadingUi();
         this.rebuildCurrentWeatherUi(config);
         this.rebuildFutureWeatherUi(config);
+        this.rebuildBar(config);
     };
     UI.prototype.UpdateIconType = function (iconType) {
         this._currentWeatherIcon.icon_type = iconType;
@@ -846,6 +856,9 @@ var UI = (function () {
         }
     };
     ;
+    UI.prototype.displayBar = function (provider) {
+        this._providerCredit.text = _("Powered by") + " " + provider.name;
+    };
     UI.prototype.unitToUnicode = function (unit) {
         return unit == "fahrenheit" ? '\u2109' : '\u2103';
     };
@@ -876,9 +889,13 @@ var UI = (function () {
         if (this._futureWeather.get_child() != null)
             this._futureWeather.get_child().destroy();
     };
+    UI.prototype.destroyBar = function () {
+        this._bar.destroy_all_children();
+    };
     UI.prototype.showLoadingUi = function () {
         this.destroyCurrentWeather();
         this.destroyFutureWeather();
+        this.destroyBar();
         this._currentWeather.set_child(new Label({
             text: _('Loading current weather ...')
         }));
@@ -1013,6 +1030,17 @@ var UI = (function () {
             this._forecast[i] = forecastWeather;
             this._forecastBox.add_actor(forecastBox);
         }
+    };
+    UI.prototype.rebuildBar = function (config) {
+        this.destroyBar();
+        this._providerCredit = new Label({ text: _(ELLIPSIS), });
+        this._bar.add(this._providerCredit, {
+            x_fill: false,
+            x_align: Align.END,
+            y_align: Align.MIDDLE,
+            y_fill: false,
+            expand: true
+        });
     };
     return UI;
 }());
@@ -1221,6 +1249,7 @@ var STYLE_POPUP_SEPARATOR_MENU_ITEM = 'popup-separator-menu-item';
 var STYLE_CURRENT = 'current';
 var STYLE_FORECAST = 'forecast';
 var STYLE_WEATHER_MENU = 'weather-menu';
+var STYLE_BAR = 'bottombar';
 var BLANK = '   ';
 var ELLIPSIS = '...';
 var EN_DASH = '\u2013';

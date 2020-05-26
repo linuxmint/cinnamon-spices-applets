@@ -74,3 +74,8 @@
 .weather-config {
   padding-right: 10px;
 }
+
+.bottombar {
+    padding: 7px 10px 7px 10px;
+    color: #999999;
+}

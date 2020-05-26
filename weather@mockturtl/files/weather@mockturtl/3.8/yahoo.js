@@ -21,6 +21,7 @@ var icons = utils.icons;
 var weatherIconSafely = utils.weatherIconSafely;
 class Yahoo {
     constructor(_app) {
+        this.name = "Yahoo";
         this.app = _app;
     }
     async GetWeather() {

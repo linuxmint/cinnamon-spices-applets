@@ -57,6 +57,7 @@ var icons = utils.icons;
 var weatherIconSafely = utils.weatherIconSafely;
 var Yahoo = (function () {
     function Yahoo(_app) {
+        this.name = "Yahoo";
         this.app = _app;
     }
     Yahoo.prototype.GetWeather = function () {

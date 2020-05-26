@@ -23,6 +23,7 @@ var icons = utils.icons;
 var weatherIconSafely = utils.weatherIconSafely;
 class DarkSky {
     constructor(_app) {
+        this.name = "DarkSky";
         this.descriptionLinelength = 25;
         this.supportedLanguages = [
             'ar', 'az', 'be', 'bg', 'bs', 'ca', 'cs', 'da', 'de', 'el', 'en', 'es',

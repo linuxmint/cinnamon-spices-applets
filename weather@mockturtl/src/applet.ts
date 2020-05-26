@@ -26,7 +26,7 @@ const { timeout_add_seconds } = imports.mainloop;
 const { Message, Session, ProxyResolverDefault, SessionAsync } = imports.gi.Soup;
 // http://developer.gnome.org/st/stable/
 //const St: typeof imports.gi.St = imports.gi.St;
-const { Bin, DrawingArea, BoxLayout, Side, IconType, Label, Icon, Button } = imports.gi.St;
+const { Bin, DrawingArea, BoxLayout, Side, IconType, Label, Icon, Button, Align } = imports.gi.St;
 const { get_language_names } = imports.gi.GLib;
 // * /usr/share/cinnamon/js/
 const { TextIconApplet, AllowedLayout, AppletPopupMenu, MenuItem} = imports.ui.applet;
@@ -433,6 +433,7 @@ class WeatherApplet extends TextIconApplet {
 
       if (rebuild) this.ui.rebuild(this.config);
       if (!await this.ui.displayWeather(this.weather, this.config) || !await this.ui.displayForecast(this.weather, this.forecasts, this.config)) return;
+      this.ui.displayBar(this.provider);
       this.log.Print("Weather Information refreshed");
       this.loop.ResetErrorCount();
       return "success";
@@ -694,7 +695,9 @@ class UI {
     // UI elements
     private _currentWeather: imports.gi.St.Bin;
     private _separatorArea: imports.gi.St.DrawingArea;
+    private _separatorArea2: imports.gi.St.DrawingArea;
     private _futureWeather: imports.gi.St.Bin;
+    private _bar: imports.gi.St.BoxLayout;
     private _currentWeatherIcon: imports.gi.St.Icon;
     private _currentWeatherSummary: imports.gi.St.Label;
     private _currentWeatherLocation: imports.gi.St.Button;
@@ -708,6 +711,7 @@ class UI {
     private _currentWeatherApiUniqueCap: imports.gi.St.Label;
     private _forecast: ForecastUI[];
     private _forecastBox: imports.gi.St.BoxLayout;
+    private _providerCredit: imports.gi.St.Label;
 
     private app: WeatherApplet;
       /** Rolldown menu itself */
@@ -736,20 +740,30 @@ class UI {
       //  horizontal rule
       this._separatorArea = new DrawingArea({ style_class: STYLE_POPUP_SEPARATOR_MENU_ITEM });
       this._separatorArea.connect(SIGNAL_REPAINT, Lang.bind(this, this._onSeparatorAreaRepaint))
+      this._separatorArea2 = new DrawingArea({ style_class: STYLE_POPUP_SEPARATOR_MENU_ITEM });
+      this._separatorArea2.connect(SIGNAL_REPAINT, Lang.bind(this, this._onSeparatorAreaRepaint))
+
+      this._bar = new BoxLayout({
+        vertical: false,
+        style_class: STYLE_BAR
+      });
       // build menu
       let mainBox = new BoxLayout({ vertical: true })
 
       mainBox.add_actor(this._currentWeather)
       mainBox.add_actor(this._separatorArea)
       mainBox.add_actor(this._futureWeather)
+      mainBox.add_actor(this._separatorArea2)
+      mainBox.add_actor(this._bar)
       this.menu.addActor(mainBox)
     }
 
     /** Fully rebuilds UI */
     public rebuild(config: Config): void {
-      this.showLoadingUi()
-      this.rebuildCurrentWeatherUi(config)
-      this.rebuildFutureWeatherUi(config)
+      this.showLoadingUi();
+      this.rebuildCurrentWeatherUi(config);
+      this.rebuildFutureWeatherUi(config);
+      this.rebuildBar(config);
     }
 
     /** Changes all icon's type what are affected by
@@ -972,6 +986,10 @@ class UI {
       }
     };
 
+    public displayBar(provider: WeatherProvider) {
+      this._providerCredit.text = _("Powered by") + " " + provider.name;
+    }
+
     private unitToUnicode(unit: WeatherUnits): string {
       return unit == "fahrenheit" ? '\u2109' : '\u2103'
     }
@@ -1007,11 +1025,16 @@ class UI {
       if (this._futureWeather.get_child() != null)
         this._futureWeather.get_child().destroy()
     }
+
+    private destroyBar(): void {
+      this._bar.destroy_all_children();
+    }
   
     /** Destroys UI first then shows initial UI */
     private showLoadingUi(): void {
       this.destroyCurrentWeather()
       this.destroyFutureWeather()
+      this.destroyBar()
       this._currentWeather.set_child(new Label({
         text: _('Loading current weather ...')
       }))
@@ -1180,6 +1203,18 @@ class UI {
         this._forecast[i] = forecastWeather
         this._forecastBox.add_actor(forecastBox)
       }
+    }
+
+    private rebuildBar(config: Config) {
+      this.destroyBar();
+      this._providerCredit = new Label({ text: _(ELLIPSIS),});
+      this._bar.add(this._providerCredit, {
+        x_fill: false,
+        x_align: Align.END,
+        y_align: Align.MIDDLE,
+        y_fill: false,
+        expand: true
+      });
     }
 }
 
@@ -1454,6 +1489,7 @@ const STYLE_POPUP_SEPARATOR_MENU_ITEM = 'popup-separator-menu-item'
 const STYLE_CURRENT = 'current'
 const STYLE_FORECAST = 'forecast'
 const STYLE_WEATHER_MENU = 'weather-menu'
+const STYLE_BAR = 'bottombar'
 
 // Magic strings
 const BLANK = '   ';
@@ -1652,6 +1688,7 @@ interface WeatherProvider {
    * "this" (context) is not accessible here
   */
   HandleHTTPError?:(error: HttpError, uiError: AppletError) => AppletError;
+  name: string;
 }
 
 interface AppletError {

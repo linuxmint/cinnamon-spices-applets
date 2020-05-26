@@ -13,7 +13,7 @@ const Lang = imports.lang;
 const keybindingManager = imports.ui.main.keybindingManager;
 const { timeout_add_seconds } = imports.mainloop;
 const { Message, Session, ProxyResolverDefault, SessionAsync } = imports.gi.Soup;
-const { Bin, DrawingArea, BoxLayout, Side, IconType, Label, Icon, Button } = imports.gi.St;
+const { Bin, DrawingArea, BoxLayout, Side, IconType, Label, Icon, Button, Align } = imports.gi.St;
 const { get_language_names } = imports.gi.GLib;
 const { TextIconApplet, AllowedLayout, AppletPopupMenu, MenuItem } = imports.ui.applet;
 const { PopupMenuManager } = imports.ui.popupMenu;
@@ -318,6 +318,7 @@ class WeatherApplet extends TextIconApplet {
                 this.ui.rebuild(this.config);
             if (!await this.ui.displayWeather(this.weather, this.config) || !await this.ui.displayForecast(this.weather, this.forecasts, this.config))
                 return;
+            this.ui.displayBar(this.provider);
             this.log.Print("Weather Information refreshed");
             this.loop.ResetErrorCount();
             return "success";
@@ -543,16 +544,25 @@ class UI {
         this._futureWeather = new Bin({ style_class: STYLE_FORECAST });
         this._separatorArea = new DrawingArea({ style_class: STYLE_POPUP_SEPARATOR_MENU_ITEM });
         this._separatorArea.connect(SIGNAL_REPAINT, Lang.bind(this, this._onSeparatorAreaRepaint));
+        this._separatorArea2 = new DrawingArea({ style_class: STYLE_POPUP_SEPARATOR_MENU_ITEM });
+        this._separatorArea2.connect(SIGNAL_REPAINT, Lang.bind(this, this._onSeparatorAreaRepaint));
+        this._bar = new BoxLayout({
+            vertical: false,
+            style_class: STYLE_BAR
+        });
         let mainBox = new BoxLayout({ vertical: true });
         mainBox.add_actor(this._currentWeather);
         mainBox.add_actor(this._separatorArea);
         mainBox.add_actor(this._futureWeather);
+        mainBox.add_actor(this._separatorArea2);
+        mainBox.add_actor(this._bar);
         this.menu.addActor(mainBox);
     }
     rebuild(config) {
         this.showLoadingUi();
         this.rebuildCurrentWeatherUi(config);
         this.rebuildFutureWeatherUi(config);
+        this.rebuildBar(config);
     }
     UpdateIconType(iconType) {
         this._currentWeatherIcon.icon_type = iconType;
@@ -725,6 +735,9 @@ class UI {
         }
     }
     ;
+    displayBar(provider) {
+        this._providerCredit.text = _("Powered by") + " " + provider.name;
+    }
     unitToUnicode(unit) {
         return unit == "fahrenheit" ? '\u2109' : '\u2103';
     }
@@ -755,9 +768,13 @@ class UI {
         if (this._futureWeather.get_child() != null)
             this._futureWeather.get_child().destroy();
     }
+    destroyBar() {
+        this._bar.destroy_all_children();
+    }
     showLoadingUi() {
         this.destroyCurrentWeather();
         this.destroyFutureWeather();
+        this.destroyBar();
         this._currentWeather.set_child(new Label({
             text: _('Loading current weather ...')
         }));
@@ -892,6 +909,17 @@ class UI {
             this._forecast[i] = forecastWeather;
             this._forecastBox.add_actor(forecastBox);
         }
+    }
+    rebuildBar(config) {
+        this.destroyBar();
+        this._providerCredit = new Label({ text: _(ELLIPSIS), });
+        this._bar.add(this._providerCredit, {
+            x_fill: false,
+            x_align: Align.END,
+            y_align: Align.MIDDLE,
+            y_fill: false,
+            expand: true
+        });
     }
 }
 class Config {
@@ -1079,6 +1107,7 @@ const STYLE_POPUP_SEPARATOR_MENU_ITEM = 'popup-separator-menu-item';
 const STYLE_CURRENT = 'current';
 const STYLE_FORECAST = 'forecast';
 const STYLE_WEATHER_MENU = 'weather-menu';
+const STYLE_BAR = 'bottombar';
 const BLANK = '   ';
 const ELLIPSIS = '...';
 const EN_DASH = '\u2013';
