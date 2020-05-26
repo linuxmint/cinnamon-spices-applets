@@ -928,27 +928,30 @@ var UI = (function () {
         this._currentWeatherSunrise = new Label(textOb);
         this._currentWeatherSunset = new Label(textOb);
         var sunriseBox = new BoxLayout();
-        var sunriseTextBin = new Bin();
-        sunriseTextBin.set_child(this._currentWeatherSunrise);
-        var sunriseIcon = new Icon({
-            icon_name: "sunrise-symbolic",
-            icon_type: IconType.SYMBOLIC,
-            icon_size: 25
-        });
-        if (config._showSunrise)
-            sunriseBox.add_actor(sunriseIcon);
-        sunriseBox.add_actor(sunriseTextBin);
         var sunsetBox = new BoxLayout();
-        var sunsetTextBin = new Bin();
-        sunsetTextBin.set_child(this._currentWeatherSunset);
-        var sunsetIcon = new Icon({
-            icon_name: "sunset-symbolic",
-            icon_type: IconType.SYMBOLIC,
-            icon_size: 25
-        });
-        if (config._showSunrise)
+        if (config._showSunrise) {
+            var sunsetIcon = new Icon({
+                icon_name: "sunset-symbolic",
+                icon_type: IconType.SYMBOLIC,
+                icon_size: 25
+            });
+            var sunriseIcon = new Icon({
+                icon_name: "sunrise-symbolic",
+                icon_type: IconType.SYMBOLIC,
+                icon_size: 25
+            });
+            sunriseBox.add_actor(sunriseIcon);
             sunsetBox.add_actor(sunsetIcon);
-        sunsetBox.add_actor(sunsetTextBin);
+        }
+        var textOptions = {
+            x_fill: false,
+            x_align: Align.START,
+            y_align: Align.MIDDLE,
+            y_fill: false,
+            expand: true
+        };
+        sunriseBox.add(this._currentWeatherSunrise, textOptions);
+        sunsetBox.add(this._currentWeatherSunset, textOptions);
         var ab_spacerlabel = new Label({ text: BLANK });
         var bb_spacerlabel = new Label({ text: BLANK });
         var sunBox = new BoxLayout({ style_class: STYLE_ASTRONOMY });

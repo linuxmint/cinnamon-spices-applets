@@ -355,7 +355,7 @@ declare namespace imports.gi.St {
         add_actor(element: Widget): void;
         add_child(element: Widget): void;
         /** private function by default? */
-        add(element: Widget, options: any): void;
+        add(element: Widget, options?: AddOptions): void;
         destroy_all_children(): void;
 
     }
@@ -496,6 +496,14 @@ declare namespace imports.gi.St {
 
     export interface Shadow {
 
+    }
+
+    export interface AddOptions {
+        x_fill: boolean;
+        x_align: Align;
+        y_align: Align;
+        y_fill: boolean;
+        expand: boolean;
     }
 }
 
