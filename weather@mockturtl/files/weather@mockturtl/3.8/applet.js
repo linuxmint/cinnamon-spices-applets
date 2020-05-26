@@ -16,7 +16,7 @@ const { Message, Session, ProxyResolverDefault, SessionAsync } = imports.gi.Soup
 const { Bin, DrawingArea, BoxLayout, Side, IconType, Label, Icon, Button, Align } = imports.gi.St;
 const { get_language_names } = imports.gi.GLib;
 const { TextIconApplet, AllowedLayout, AppletPopupMenu, MenuItem } = imports.ui.applet;
-const { PopupMenuManager } = imports.ui.popupMenu;
+const { PopupMenuManager, PopupSeparatorMenuItem } = imports.ui.popupMenu;
 const { AppletSettings, BindingDirection } = imports.ui.settings;
 const { spawnCommandLine, spawn_async } = imports.misc.util;
 const { SystemNotificationSource, Notification } = imports.ui.messageTray;
@@ -542,19 +542,19 @@ class UI {
     BuildPopupMenu() {
         this._currentWeather = new Bin({ style_class: STYLE_CURRENT });
         this._futureWeather = new Bin({ style_class: STYLE_FORECAST });
-        this._separatorArea = new DrawingArea({ style_class: STYLE_POPUP_SEPARATOR_MENU_ITEM });
-        this._separatorArea.connect(SIGNAL_REPAINT, Lang.bind(this, this._onSeparatorAreaRepaint));
-        this._separatorArea2 = new DrawingArea({ style_class: STYLE_POPUP_SEPARATOR_MENU_ITEM });
-        this._separatorArea2.connect(SIGNAL_REPAINT, Lang.bind(this, this._onSeparatorAreaRepaint));
+        this._separatorArea = new PopupSeparatorMenuItem();
+        this._separatorArea2 = new PopupSeparatorMenuItem();
+        this._separatorArea.actor.remove_style_class_name("popup-menu-item");
+        this._separatorArea2.actor.remove_style_class_name("popup-menu-item");
         this._bar = new BoxLayout({
             vertical: false,
             style_class: STYLE_BAR
         });
         let mainBox = new BoxLayout({ vertical: true });
         mainBox.add_actor(this._currentWeather);
-        mainBox.add_actor(this._separatorArea);
+        mainBox.add_actor(this._separatorArea.actor);
         mainBox.add_actor(this._futureWeather);
-        mainBox.add_actor(this._separatorArea2);
+        mainBox.add_actor(this._separatorArea2.actor);
         mainBox.add_actor(this._bar);
         this.menu.addActor(mainBox);
     }

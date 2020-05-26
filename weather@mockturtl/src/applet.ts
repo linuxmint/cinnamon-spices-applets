@@ -30,7 +30,7 @@ const { Bin, DrawingArea, BoxLayout, Side, IconType, Label, Icon, Button, Align 
 const { get_language_names } = imports.gi.GLib;
 // * /usr/share/cinnamon/js/
 const { TextIconApplet, AllowedLayout, AppletPopupMenu, MenuItem} = imports.ui.applet;
-const { PopupMenuManager } = imports.ui.popupMenu;
+const { PopupMenuManager, PopupSeparatorMenuItem } = imports.ui.popupMenu;
 const { AppletSettings, BindingDirection } = imports.ui.settings;
 const { spawnCommandLine, spawn_async } = imports.misc.util;
 const { SystemNotificationSource, Notification } = imports.ui.messageTray;
@@ -694,8 +694,8 @@ class Log {
 class UI {
     // UI elements
     private _currentWeather: imports.gi.St.Bin;
-    private _separatorArea: imports.gi.St.DrawingArea;
-    private _separatorArea2: imports.gi.St.DrawingArea;
+    private _separatorArea: imports.ui.popupMenu.PopupSeparatorMenuItem;
+    private _separatorArea2: imports.ui.popupMenu.PopupSeparatorMenuItem;
     private _futureWeather: imports.gi.St.Bin;
     private _bar: imports.gi.St.BoxLayout;
     private _currentWeatherIcon: imports.gi.St.Icon;
@@ -738,10 +738,11 @@ class UI {
       //  tomorrow's forecast
       this._futureWeather = new Bin({ style_class: STYLE_FORECAST });
       //  horizontal rule
-      this._separatorArea = new DrawingArea({ style_class: STYLE_POPUP_SEPARATOR_MENU_ITEM });
-      this._separatorArea.connect(SIGNAL_REPAINT, Lang.bind(this, this._onSeparatorAreaRepaint))
-      this._separatorArea2 = new DrawingArea({ style_class: STYLE_POPUP_SEPARATOR_MENU_ITEM });
-      this._separatorArea2.connect(SIGNAL_REPAINT, Lang.bind(this, this._onSeparatorAreaRepaint))
+
+      this._separatorArea = new PopupSeparatorMenuItem()
+      this._separatorArea2 = new PopupSeparatorMenuItem()
+      this._separatorArea.actor.remove_style_class_name("popup-menu-item");
+      this._separatorArea2.actor.remove_style_class_name("popup-menu-item");
 
       this._bar = new BoxLayout({
         vertical: false,
@@ -751,9 +752,9 @@ class UI {
       let mainBox = new BoxLayout({ vertical: true })
 
       mainBox.add_actor(this._currentWeather)
-      mainBox.add_actor(this._separatorArea)
+      mainBox.add_actor(this._separatorArea.actor)
       mainBox.add_actor(this._futureWeather)
-      mainBox.add_actor(this._separatorArea2)
+      mainBox.add_actor(this._separatorArea2.actor)
       mainBox.add_actor(this._bar)
       this.menu.addActor(mainBox)
     }
@@ -993,26 +994,6 @@ class UI {
     private unitToUnicode(unit: WeatherUnits): string {
       return unit == "fahrenheit" ? '\u2109' : '\u2103'
     }
-
-    /** Painted on panel toggle */
-    private _onSeparatorAreaRepaint(area: imports.gi.St.DrawingArea) {
-      let cr = area.get_context()
-      let themeNode = area.get_theme_node()
-      let [width, height] = area.get_surface_size()
-      let margin = themeNode.get_length('-margin-horizontal')
-      let gradientHeight = themeNode.get_length('-gradient-height')
-      let startColor = themeNode.get_color('-gradient-start')
-      let endColor = themeNode.get_color('-gradient-end')
-      let gradientWidth = (width - margin * 2)
-      let gradientOffset = (height - gradientHeight) / 2
-      let pattern = new LinearGradient(margin, gradientOffset, width - margin, gradientOffset + gradientHeight)
-      pattern.addColorStopRGBA(0, startColor.red / 255, startColor.green / 255, startColor.blue / 255, startColor.alpha / 255)
-      pattern.addColorStopRGBA(0.5, endColor.red / 255, endColor.green / 255, endColor.blue / 255, endColor.alpha / 255)
-      pattern.addColorStopRGBA(1, startColor.red / 255, startColor.green / 255, startColor.blue / 255, startColor.alpha / 255)
-      cr.setSource(pattern)
-      cr.rectangle(margin, gradientOffset, gradientWidth, gradientHeight)
-      cr.fill()
-    };
 
     /** Destroys current weather UI box */
     private destroyCurrentWeather(): void {

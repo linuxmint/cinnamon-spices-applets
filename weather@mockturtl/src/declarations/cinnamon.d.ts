@@ -272,6 +272,10 @@ declare namespace imports.ui.popupMenu {
     export class PopupIconMenuItem {
 
     }
+
+    export class PopupSeparatorMenuItem {
+        actor: gi.St.Widget;
+    }
 }
 declare namespace imports.ui.settings {
     export class AppletSettings {
@@ -345,6 +349,7 @@ declare namespace imports.gi.St {
         connect(id: string, binding: (...args: any) => any): void;
         add_style_class_name(style_class: string): void; 
         get_style_class_name(): string;
+        remove_style_class_name(style_class: string): void;
         get_style(): string;
         get_theme(): imports.gi.St.Theme;
         get_theme_node(): ThemeNode;

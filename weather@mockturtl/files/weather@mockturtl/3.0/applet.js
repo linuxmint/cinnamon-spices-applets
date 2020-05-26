@@ -65,10 +65,10 @@ var _a = imports.gi.Soup, Message = _a.Message, Session = _a.Session, ProxyResol
 var _b = imports.gi.St, Bin = _b.Bin, DrawingArea = _b.DrawingArea, BoxLayout = _b.BoxLayout, Side = _b.Side, IconType = _b.IconType, Label = _b.Label, Icon = _b.Icon, Button = _b.Button, Align = _b.Align;
 var get_language_names = imports.gi.GLib.get_language_names;
 var _c = imports.ui.applet, TextIconApplet = _c.TextIconApplet, AllowedLayout = _c.AllowedLayout, AppletPopupMenu = _c.AppletPopupMenu, MenuItem = _c.MenuItem;
-var PopupMenuManager = imports.ui.popupMenu.PopupMenuManager;
-var _d = imports.ui.settings, AppletSettings = _d.AppletSettings, BindingDirection = _d.BindingDirection;
-var _e = imports.misc.util, spawnCommandLine = _e.spawnCommandLine, spawn_async = _e.spawn_async;
-var _f = imports.ui.messageTray, SystemNotificationSource = _f.SystemNotificationSource, Notification = _f.Notification;
+var _d = imports.ui.popupMenu, PopupMenuManager = _d.PopupMenuManager, PopupSeparatorMenuItem = _d.PopupSeparatorMenuItem;
+var _e = imports.ui.settings, AppletSettings = _e.AppletSettings, BindingDirection = _e.BindingDirection;
+var _f = imports.misc.util, spawnCommandLine = _f.spawnCommandLine, spawn_async = _f.spawn_async;
+var _g = imports.ui.messageTray, SystemNotificationSource = _g.SystemNotificationSource, Notification = _g.Notification;
 var messageTray = imports.ui.main.messageTray;
 var utils = importModule("utils");
 var GetDayName = utils.GetDayName;
@@ -663,19 +663,19 @@ var UI = (function () {
     UI.prototype.BuildPopupMenu = function () {
         this._currentWeather = new Bin({ style_class: STYLE_CURRENT });
         this._futureWeather = new Bin({ style_class: STYLE_FORECAST });
-        this._separatorArea = new DrawingArea({ style_class: STYLE_POPUP_SEPARATOR_MENU_ITEM });
-        this._separatorArea.connect(SIGNAL_REPAINT, Lang.bind(this, this._onSeparatorAreaRepaint));
-        this._separatorArea2 = new DrawingArea({ style_class: STYLE_POPUP_SEPARATOR_MENU_ITEM });
-        this._separatorArea2.connect(SIGNAL_REPAINT, Lang.bind(this, this._onSeparatorAreaRepaint));
+        this._separatorArea = new PopupSeparatorMenuItem();
+        this._separatorArea2 = new PopupSeparatorMenuItem();
+        this._separatorArea.actor.remove_style_class_name("popup-menu-item");
+        this._separatorArea2.actor.remove_style_class_name("popup-menu-item");
         this._bar = new BoxLayout({
             vertical: false,
             style_class: STYLE_BAR
         });
         var mainBox = new BoxLayout({ vertical: true });
         mainBox.add_actor(this._currentWeather);
-        mainBox.add_actor(this._separatorArea);
+        mainBox.add_actor(this._separatorArea.actor);
         mainBox.add_actor(this._futureWeather);
-        mainBox.add_actor(this._separatorArea2);
+        mainBox.add_actor(this._separatorArea2.actor);
         mainBox.add_actor(this._bar);
         this.menu.addActor(mainBox);
     };
