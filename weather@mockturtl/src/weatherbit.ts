@@ -34,7 +34,10 @@ class Weatherbit implements WeatherProvider {
     //--------------------------------------------------------
     //  Properties
     //--------------------------------------------------------
-    public name = "WeatherBit";
+    public readonly name = "WeatherBit";
+    public readonly supportsHourly = true;
+    public readonly maxForecastSupport = 16;
+
     private descriptionLinelength = 25;
     private supportedLanguages = [
         'ar', 'az', 'be', 'bg', 'bs', 'ca', 'cz', 'da', 'de', 'el', 'en',
@@ -149,7 +152,7 @@ class Weatherbit implements WeatherProvider {
     private ParseForecast(json: any, self: Weatherbit): ForecastData[] {
       let forecasts: ForecastData[] = [];
       try {
-        for (let i = 0; i < self.app.config._forecastDays; i++) {
+        for (let i = 0; i < json.data.length; i++) {
           let day = json.data[i];
           let forecast: ForecastData = {          
               date: new Date(day.ts * 1000),

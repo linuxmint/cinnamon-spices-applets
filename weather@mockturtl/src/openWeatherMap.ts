@@ -35,7 +35,10 @@ class OpenWeatherMap implements WeatherProvider {
     //--------------------------------------------------------
     //  Properties
     //--------------------------------------------------------
-    public name = "OpenWeatherMap";
+    public readonly name = "OpenWeatherMap";
+    public readonly maxForecastSupport = 7;
+    public readonly supportsHourly = true;
+
     private supportedLanguages = ["af", "ar", "az", "bg", "ca", "cz", "da", "de", "el", "en", "eu", "fa", "fi",
      "fr", "gl", "he", "hi", "hr", "hu", "id", "it", "ja", "kr", "la", "lt", "mk", "no", "nl", "pl",
       "pt", "pt_br", "ro", "ru", "se", "sk", "sl", "sp", "es", "sr", "th", "tr", "ua", "uk", "vi", "zh_cn", "zh_tw", "zu"];
@@ -118,7 +121,7 @@ class OpenWeatherMap implements WeatherProvider {
           };
 
           let forecasts: ForecastData[] = [];
-          for (let i = 0; i < self.app.config._forecastDays; i++) {
+          for (let i = 0; i < json.daily.length; i++) {
             let day = json.daily[i];
             let forecast: ForecastData = {          
                 date: new Date(day.dt * 1000),

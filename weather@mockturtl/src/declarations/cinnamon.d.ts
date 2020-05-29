@@ -342,8 +342,18 @@ declare namespace imports.gi.Soup {
     }
 
 }
+
+declare namespace imports.gi.Clutter {
+    export class GridLayout {
+        constructor(options: any);
+        set_column_homogeneous(bool: boolean): void;
+        attach(widget: imports.gi.St.Widget, col: number, row: number, colspan: number, rowspan: number): void;
+    }
+}
+
 declare namespace imports.gi.St {
     export class Widget {
+        constructor(options?: any);
         destroy(): void;
         style_class: string;
         connect(id: string, binding: (...args: any) => any): void;

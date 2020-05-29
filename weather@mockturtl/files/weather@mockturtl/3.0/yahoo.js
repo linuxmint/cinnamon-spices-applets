@@ -58,6 +58,8 @@ var weatherIconSafely = utils.weatherIconSafely;
 var Yahoo = (function () {
     function Yahoo(_app) {
         this.name = "Yahoo";
+        this.maxForecastSupport = 10;
+        this.supportsHourly = false;
         this.app = _app;
     }
     Yahoo.prototype.GetWeather = function () {
@@ -146,7 +148,7 @@ var Yahoo = (function () {
                 },
                 forecasts: []
             };
-            for (var i = 0; i < this.app.config._forecastDays; i++) {
+            for (var i = 0; i < json.forecasts.length; i++) {
                 var day = json.forecasts[i];
                 var forecast = {
                     date: new Date(day.date * 1000),

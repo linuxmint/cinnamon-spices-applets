@@ -60,6 +60,8 @@ var weatherIconSafely = utils.weatherIconSafely;
 var DarkSky = (function () {
     function DarkSky(_app) {
         this.name = "DarkSky";
+        this.maxForecastSupport = 8;
+        this.supportsHourly = false;
         this.descriptionLinelength = 25;
         this.supportedLanguages = [
             'ar', 'az', 'be', 'bg', 'bs', 'ca', 'cs', 'da', 'de', 'el', 'en', 'es',
@@ -147,7 +149,7 @@ var DarkSky = (function () {
                 },
                 forecasts: []
             };
-            for (var i = 0; i < this.app.config._forecastDays; i++) {
+            for (var i = 0; i < json.daily.data.length; i++) {
                 var day = json.daily.data[i];
                 var forecast = {
                     date: new Date(day.time * 1000),

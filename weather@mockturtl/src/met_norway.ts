@@ -23,7 +23,11 @@ var CelsiusToKelvin = utils.CelsiusToKelvin as (celsius: number) => number;
 var SunCalc = importModule("sunCalc").SunCalc;
 
 class MetNorway implements WeatherProvider {
-    public name = "MET Norway";
+    public readonly name = "MET Norway";
+    public readonly maxForecastSupport = 10;
+    public readonly supportsHourly = false;
+
+
     private ctx: MetNorway
     private app: WeatherApplet
     private baseUrl = "https://api.met.no/weatherapi/locationforecast/1.9/.json?"

@@ -24,6 +24,8 @@ var weatherIconSafely = utils.weatherIconSafely;
 class DarkSky {
     constructor(_app) {
         this.name = "DarkSky";
+        this.maxForecastSupport = 8;
+        this.supportsHourly = false;
         this.descriptionLinelength = 25;
         this.supportedLanguages = [
             'ar', 'az', 'be', 'bg', 'bs', 'ca', 'cs', 'da', 'de', 'el', 'en', 'es',
@@ -99,7 +101,7 @@ class DarkSky {
                 },
                 forecasts: []
             };
-            for (let i = 0; i < this.app.config._forecastDays; i++) {
+            for (let i = 0; i < json.daily.data.length; i++) {
                 let day = json.daily.data[i];
                 let forecast = {
                     date: new Date(day.time * 1000),

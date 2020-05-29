@@ -13,7 +13,8 @@ const Lang = imports.lang;
 const keybindingManager = imports.ui.main.keybindingManager;
 const { timeout_add_seconds } = imports.mainloop;
 const { Message, Session, ProxyResolverDefault, SessionAsync } = imports.gi.Soup;
-const { Bin, DrawingArea, BoxLayout, Side, IconType, Label, Icon, Button, Align } = imports.gi.St;
+const { Bin, DrawingArea, BoxLayout, Side, IconType, Label, Icon, Button, Align, Widget } = imports.gi.St;
+const { GridLayout } = imports.gi.Clutter;
 const { get_language_names } = imports.gi.GLib;
 const { TextIconApplet, AllowedLayout, AppletPopupMenu, MenuItem } = imports.ui.applet;
 const { PopupMenuManager, PopupSeparatorMenuItem } = imports.ui.popupMenu;
@@ -124,6 +125,7 @@ class WeatherApplet extends TextIconApplet {
         this.SetAppletOnPanel();
         this.config = new Config(this, instanceId);
         this.AddRefreshButton();
+        this.LoadProvider();
         this.ui = new UI(this, orientation);
         this.ui.rebuild(this.config);
         this.loop = new WeatherLoop(this, instanceId);
@@ -256,6 +258,42 @@ class WeatherApplet extends TextIconApplet {
     }
     on_panel_height_changed() {
     }
+    GetMaxForecastDays() {
+        if (!this.provider)
+            return this.config._forecastDays;
+        return Math.min(this.config._forecastDays, this.provider.maxForecastSupport);
+    }
+    LoadProvider() {
+        switch (this.config._dataService) {
+            case DATA_SERVICE.DARK_SKY:
+                if (darkSky == null)
+                    var darkSky = importModule('darkSky');
+                this.provider = new darkSky.DarkSky(this);
+                break;
+            case DATA_SERVICE.OPEN_WEATHER_MAP:
+                if (openWeatherMap == null)
+                    var openWeatherMap = importModule("openWeatherMap");
+                this.provider = new openWeatherMap.OpenWeatherMap(this);
+                break;
+            case DATA_SERVICE.MET_NORWAY:
+                if (metNorway == null)
+                    var metNorway = importModule("met_norway");
+                this.provider = new metNorway.MetNorway(this);
+                break;
+            case DATA_SERVICE.WEATHERBIT:
+                if (weatherbit == null)
+                    var weatherbit = importModule("weatherbit");
+                this.provider = new weatherbit.Weatherbit(this);
+                break;
+            case DATA_SERVICE.YAHOO:
+                if (yahoo == null)
+                    var yahoo = importModule("yahoo");
+                this.provider = new yahoo.Yahoo(this);
+                break;
+            default:
+                return null;
+        }
+    }
     constructJsLocale(locale) {
         let jsLocale = locale.split(".")[0];
         let tmp = jsLocale.split("_");
@@ -278,35 +316,7 @@ class WeatherApplet extends TextIconApplet {
             return "error";
         }
         try {
-            switch (this.config._dataService) {
-                case DATA_SERVICE.DARK_SKY:
-                    if (darkSky == null)
-                        var darkSky = importModule('darkSky');
-                    this.provider = new darkSky.DarkSky(this);
-                    break;
-                case DATA_SERVICE.OPEN_WEATHER_MAP:
-                    if (openWeatherMap == null)
-                        var openWeatherMap = importModule("openWeatherMap");
-                    this.provider = new openWeatherMap.OpenWeatherMap(this);
-                    break;
-                case DATA_SERVICE.MET_NORWAY:
-                    if (metNorway == null)
-                        var metNorway = importModule("met_norway");
-                    this.provider = new metNorway.MetNorway(this);
-                    break;
-                case DATA_SERVICE.WEATHERBIT:
-                    if (weatherbit == null)
-                        var weatherbit = importModule("weatherbit");
-                    this.provider = new weatherbit.Weatherbit(this);
-                    break;
-                case DATA_SERVICE.YAHOO:
-                    if (yahoo == null)
-                        var yahoo = importModule("yahoo");
-                    this.provider = new yahoo.Yahoo(this);
-                    break;
-                default:
-                    return "error";
-            }
+            this.LoadProvider();
             let weatherInfo = await this.provider.GetWeather();
             if (!weatherInfo) {
                 this.log.Error("Unable to obtain Weather Information");
@@ -741,25 +751,6 @@ class UI {
     unitToUnicode(unit) {
         return unit == "fahrenheit" ? '\u2109' : '\u2103';
     }
-    _onSeparatorAreaRepaint(area) {
-        let cr = area.get_context();
-        let themeNode = area.get_theme_node();
-        let [width, height] = area.get_surface_size();
-        let margin = themeNode.get_length('-margin-horizontal');
-        let gradientHeight = themeNode.get_length('-gradient-height');
-        let startColor = themeNode.get_color('-gradient-start');
-        let endColor = themeNode.get_color('-gradient-end');
-        let gradientWidth = (width - margin * 2);
-        let gradientOffset = (height - gradientHeight) / 2;
-        let pattern = new LinearGradient(margin, gradientOffset, width - margin, gradientOffset + gradientHeight);
-        pattern.addColorStopRGBA(0, startColor.red / 255, startColor.green / 255, startColor.blue / 255, startColor.alpha / 255);
-        pattern.addColorStopRGBA(0.5, endColor.red / 255, endColor.green / 255, endColor.blue / 255, endColor.alpha / 255);
-        pattern.addColorStopRGBA(1, startColor.red / 255, startColor.green / 255, startColor.blue / 255, startColor.alpha / 255);
-        cr.setSource(pattern);
-        cr.rectangle(margin, gradientOffset, gradientWidth, gradientHeight);
-        cr.fill();
-    }
-    ;
     destroyCurrentWeather() {
         if (this._currentWeather.get_child() != null)
             this._currentWeather.get_child().destroy();
@@ -877,40 +868,68 @@ class UI {
     rebuildFutureWeatherUi(config) {
         this.destroyFutureWeather();
         this._forecast = [];
-        this._forecastBox = new BoxLayout({
-            vertical: config._verticalOrientation,
+        this._forecastBox = new GridLayout({
+            orientation: config._verticalOrientation
+        });
+        this._forecastBox.set_column_homogeneous(true);
+        let table = new Widget({
+            layout_manager: this._forecastBox,
             style_class: STYLE_FORECAST_CONTAINER
         });
-        this._futureWeather.set_child(this._forecastBox);
-        for (let i = 0; i < config._forecastDays; i++) {
-            let forecastWeather = {
-                Icon: new Icon,
-                Day: new Label,
-                Summary: new Label,
-                Temperature: new Label,
-            };
+        this._futureWeather.set_child(table);
+        let maxDays = this.app.GetMaxForecastDays();
+        let maxRow = config._forecastRows;
+        let maxCol = config._forecastColumns;
+        if (config._verticalOrientation) {
+            [maxRow, maxCol] = [maxCol, maxRow];
+        }
+        let curRow = 0;
+        let curCol = 0;
+        for (let i = 0; i < maxDays; i++) {
+            let forecastWeather = {};
+            if (curCol >= maxCol) {
+                curRow++;
+                curCol = 0;
+            }
+            if (curRow >= maxRow)
+                break;
             forecastWeather.Icon = new Icon({
                 icon_type: config.IconType(),
                 icon_size: 48,
                 icon_name: APPLET_ICON,
                 style_class: STYLE_FORECAST_ICON
             });
-            forecastWeather.Day = new Label({ style_class: STYLE_FORECAST_DAY });
-            forecastWeather.Summary = new Label({ style_class: STYLE_FORECAST_SUMMARY });
-            forecastWeather.Temperature = new Label({ style_class: STYLE_FORECAST_TEMPERATURE });
-            let dataBin = new Bin();
-            let dataBox = new BoxLayout({ vertical: true, style_class: STYLE_FORECAST_DATABOX });
-            dataBox.add_actor(forecastWeather.Day);
-            dataBox.add_actor(forecastWeather.Summary);
-            dataBox.add_actor(forecastWeather.Temperature);
-            dataBin.set_child(dataBox);
-            let forecastBox = new BoxLayout({
+            forecastWeather.Day = new Label({
+                style_class: STYLE_FORECAST_DAY,
+                reactive: true
+            });
+            forecastWeather.Summary = new Label({
+                style_class: STYLE_FORECAST_SUMMARY,
+                reactive: true
+            });
+            forecastWeather.Temperature = new Label({
+                style_class: STYLE_FORECAST_TEMPERATURE
+            });
+            let by = new BoxLayout({
+                vertical: true,
+                style_class: STYLE_FORECAST_DATABOX
+            });
+            by.add_actor(forecastWeather.Day);
+            by.add_actor(forecastWeather.Summary);
+            by.add_actor(forecastWeather.Temperature);
+            let bb = new BoxLayout({
                 style_class: STYLE_FORECAST_BOX
             });
-            forecastBox.add_actor(forecastWeather.Icon);
-            forecastBox.add_actor(dataBin);
+            bb.add_actor(forecastWeather.Icon);
+            bb.add_actor(by);
             this._forecast[i] = forecastWeather;
-            this._forecastBox.add_actor(forecastBox);
+            if (!config._verticalOrientation) {
+                this._forecastBox.attach(bb, curCol, curRow, 1, 1);
+            }
+            else {
+                this._forecastBox.attach(bb, curRow, curCol, 1, 1);
+            }
+            curCol++;
         }
     }
     rebuildBar(config) {
@@ -944,13 +963,15 @@ class Config {
             WEATHER_SHOW_SUNRISE_KEY: "showSunrise",
             WEATHER_SHOW_24HOURS_KEY: "show24Hours",
             WEATHER_FORECAST_DAYS: "forecastDays",
+            WEATHER_FORECAST_COLS: "forecastColumns",
+            WEATHER_FORECAST_ROWS: "forecastRows",
             WEATHER_REFRESH_INTERVAL: "refreshInterval",
             WEATHER_PRESSURE_UNIT_KEY: "pressureUnit",
             WEATHER_SHORT_CONDITIONS_KEY: "shortConditions",
             WEATHER_MANUAL_LOCATION: "manualLocation",
             WEATHER_USE_CUSTOM_APPLETICONS_KEY: 'useCustomAppletIcons',
             WEATHER_USE_CUSTOM_MENUICONS_KEY: "useCustomMenuIcons",
-            WEATHER_RUSSIAN_STYLE: "tempRussianStyle"
+            WEATHER_RUSSIAN_STYLE: "tempRussianStyle",
         };
         this.app = app;
         this.settings = new AppletSettings(this, UUID, instanceID);

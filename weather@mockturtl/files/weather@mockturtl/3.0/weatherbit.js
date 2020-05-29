@@ -57,6 +57,8 @@ var weatherIconSafely = utils.weatherIconSafely;
 var Weatherbit = (function () {
     function Weatherbit(_app) {
         this.name = "WeatherBit";
+        this.supportsHourly = true;
+        this.maxForecastSupport = 16;
         this.descriptionLinelength = 25;
         this.supportedLanguages = [
             'ar', 'az', 'be', 'bg', 'bs', 'ca', 'cz', 'da', 'de', 'el', 'en',
@@ -173,7 +175,7 @@ var Weatherbit = (function () {
     Weatherbit.prototype.ParseForecast = function (json, self) {
         var forecasts = [];
         try {
-            for (var i = 0; i < self.app.config._forecastDays; i++) {
+            for (var i = 0; i < json.data.length; i++) {
                 var day = json.data[i];
                 var forecast = {
                     date: new Date(day.ts * 1000),

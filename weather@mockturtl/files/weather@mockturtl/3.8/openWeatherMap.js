@@ -24,6 +24,8 @@ var nonempty = utils.nonempty;
 class OpenWeatherMap {
     constructor(_app) {
         this.name = "OpenWeatherMap";
+        this.maxForecastSupport = 7;
+        this.supportsHourly = true;
         this.supportedLanguages = ["af", "ar", "az", "bg", "ca", "cz", "da", "de", "el", "en", "eu", "fa", "fi",
             "fr", "gl", "he", "hi", "hr", "hu", "id", "it", "ja", "kr", "la", "lt", "mk", "no", "nl", "pl",
             "pt", "pt_br", "ro", "ru", "se", "sk", "sl", "sp", "es", "sr", "th", "tr", "ua", "uk", "vi", "zh_cn", "zh_tw", "zu"];
@@ -88,7 +90,7 @@ class OpenWeatherMap {
                 forecasts: []
             };
             let forecasts = [];
-            for (let i = 0; i < self.app.config._forecastDays; i++) {
+            for (let i = 0; i < json.daily.length; i++) {
                 let day = json.daily[i];
                 let forecast = {
                     date: new Date(day.dt * 1000),

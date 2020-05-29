@@ -37,7 +37,10 @@ class DarkSky implements WeatherProvider {
     //--------------------------------------------------------
     //  Properties
     //--------------------------------------------------------
-    public name = "DarkSky";
+    public readonly name = "DarkSky";
+    public readonly maxForecastSupport = 8;
+    public readonly supportsHourly = false;
+
     private descriptionLinelength = 25;
     private supportedLanguages = [
         'ar', 'az', 'be', 'bg', 'bs', 'ca', 'cs', 'da', 'de', 'el', 'en', 'es',
@@ -128,7 +131,7 @@ class DarkSky implements WeatherProvider {
                 forecasts: []
             }
             // Forecast
-            for (let i = 0; i < this.app.config._forecastDays; i++) {
+            for (let i = 0; i < json.daily.data.length; i++) {
                 let day = json.daily.data[i];
                 let forecast: ForecastData = {          
                     date: new Date(day.time * 1000),         
