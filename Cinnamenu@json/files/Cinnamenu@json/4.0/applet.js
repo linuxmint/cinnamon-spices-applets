@@ -1444,11 +1444,9 @@ class CinnamenuApplet extends TextIconApplet {
                 }
             }
         }
-
         if (pattern) {
             let _res = [];
-            let searchableProps = ['name', 'description', 'keywords', 'id'];
-
+            // Search in the beginning of the Application name
             for (let i = 0, len = res.length; i < len; i++) {
                 let name = res[i].get_name();
                 let keywords = res[i].get_keywords();
@@ -1456,27 +1454,49 @@ class CinnamenuApplet extends TextIconApplet {
                                           keywords: keywords || name,
                                           description: res[i].get_description(),
                                           id: res[i].get_id().replace(/\.desktop$/, ''),
-                                          type: ApplicationType._applications });
-
-                let match = null;
-                for (let z = 0, len = searchableProps.length; z < len; z++ ) {
-                    if (this.state.settings.enableWindows && res[i].state > 0) {
-                        continue;
-                    }
-                    match = fuzzy(pattern, res[i][searchableProps[z]], fuzzyOptions);
-                    if (res[i][searchableProps[z]] && match.score > searchThresholds[searchableProps[z]]) {
-                        const markdownProps = ['name', 'description'];
-                        res[i].score = match.score;
-                        if (markdownProps.indexOf(searchableProps[z]) > -1) {
-                            res[i][searchableProps[z]] = match.result;
-                        }
-                        _res.push(res[i]);
-                        break;
-                    }
-                }
-            }
-            res = _res;
-            _res = null;
+                                          type: ApplicationType._applications
+              });
+              if (name.toLowerCase().startsWith(pattern.toLowerCase())) {
+                  res[i]['name'] = "<b><u>" + name.substring(0, pattern.length) + "</u></b>" + name.substring(pattern.length)
+                  res[i].score = 2;
+                  _res.push(res[i]);
+              }
+          }
+    
+          // Search inside the application name
+          for (let i = 0, len = res.length; i < len; i++) {
+              let name = res[i].get_name();
+              if (name.toLowerCase().includes(pattern.toLowerCase())) {
+                  let index = name.toLowerCase().indexOf(pattern.toLowerCase()) 
+                  res[i]['name'] = name.substring(0, index) + "<b><u>" + name.substring(index, index+pattern.length) + "</u></b>" + name.substring(index+pattern.length);
+                  res[i].score = 1.5;
+                  _res.push(res[i]);
+              }
+          }
+          let searchableProps = ['name', 'description', 'keywords', 'id'];
+    
+          // Fuzzy search in the remaining application details
+          for (let i = 0, len = res.length; i < len; i++) {
+              let match = null;
+              for (let z = 0, len = searchableProps.length; z < len; z++ ) {
+                  if (this.state.settings.enableWindows && res[i].state > 0) {
+                      continue;
+                  }
+                  match = fuzzy(pattern, res[i][searchableProps[z]], fuzzyOptions)
+                  if (res[i][searchableProps[z]] && match.score > searchThresholds[searchableProps[z]]) {
+                      if (res[i].score > match.score) continue;
+                      res[i].score = match.score;
+                      if (markdownProps.indexOf(searchableProps[z]) > -1) {
+                          res[i][searchableProps[z]] = match.result;
+                      }
+                      _res.push(res[i]);
+                      break;
+                  }
+              }
+          }
+    
+          res = _res;
+          _res = null;
         }
 
         // Ignore favorites when sorting
