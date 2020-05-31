@@ -1,7 +1,67 @@
 {
-    "section1": {
-        "type": "section",
-        "description": "Display"
+    "layout": {
+        "type": "layout",
+        "pages": [
+            "page1",
+            "page2"
+        ],
+        "page1": {
+            "type": "page",
+            "title": "Calendar",
+            "sections": [
+                "section1",
+                "section2",
+                "section3"
+            ]
+        },
+        "page2": {
+            "type": "page",
+            "title": "World Clocks",
+            "sections": [
+                "section4"
+            ]
+        },
+        "section1": {
+            "type": "section",
+            "title": "Display",
+            "keys": [
+                "show-week-numbers",
+                "weekend-length",
+                "use-custom-format",
+                "custom-format",
+                "format-button"
+            ]
+        },
+        "section2": {
+            "type": "section",
+            "title": "Get Public Holidays for",
+            "keys": [
+                "country",
+                "has_region",
+                "region_aus",
+                "region_can",
+                "region_deu",
+                "region_nzl",
+                "region_svk",
+                "region_che",
+                "region_gbr",
+                "region_usa"
+            ]
+        },
+        "section3": {
+            "type": "section",
+            "title": "Keyboard shortcuts",
+            "keys": [
+                "keyOpen"
+            ]
+        },
+        "section4": {
+            "type": "section",
+            "title": "Show World Times",
+            "keys": [
+                "worldclocks"
+            ]
+        }
     },
     "show-week-numbers": {
         "type": "switch",
@@ -40,10 +100,6 @@
         "dependency": "use-custom-format",
         "callback": "on_custom_format_button_pressed",
         "tooltip": "Click this button to know more about the syntax for date formats."
-    },
-    "section2": {
-        "type": "section",
-        "description": "Get Public Holidays for"
     },
     "country": {
         "type": "combobox",
@@ -105,7 +161,16 @@
     },
     "has_region": {
         "type": "generic",
-        "default": ["aus", "can", "deu", "nzl", "svk", "che", "gbr", "usa"]
+        "default": [
+            "aus",
+            "can",
+            "deu",
+            "nzl",
+            "svk",
+            "che",
+            "gbr",
+            "usa"
+        ]
     },
     "region_aus": {
         "type": "combobox",
@@ -314,14 +379,29 @@
         },
         "dependency": "country=usa"
     },
-    "section3": {
-        "type": "section",
-        "description": "Keyboard shortcuts"
-    },
     "keyOpen": {
         "type": "keybinding",
         "description": "Show calendar",
         "default": "<Super>c",
         "tooltip": "Set keybinding(s) to show the calendar."
+    },
+    "worldclocks": {
+        "type": "custom",
+        "description": "World Clocks",
+        "file": "settings_widgets.py",
+        "widget": "ClocksList",
+        "columns": [
+            {
+                "id": "label",
+                "title": "Display name",
+                "type": "string"
+            },
+            {
+                "id": "timezone",
+                "title": "Timezone",
+                "type": "string"
+            }
+        ],
+        "default": []
     }
 }

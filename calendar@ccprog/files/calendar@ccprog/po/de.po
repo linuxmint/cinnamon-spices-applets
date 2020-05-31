@@ -2,6 +2,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: calendar@ccprog VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-05-31 18:21+0200\n"
 "PO-Revision-Date: 2020-05-25 10:28+0200\n"
 "Last-Translator: Claus Colloseus <ccprog@gmx.de>\n"
 "Language-Team: German\n"
@@ -10,6 +12,19 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. settings-schema.json->page2->title
+#. settings-schema.json->worldclocks->description
+msgid "World Clocks"
+msgstr "Weltzeituhren"
+
+#. settings-schema.json->section2->title
+msgid "Get Public Holidays for"
+msgstr "Nutze Feiertage für"
+
+#. settings-schema.json->section4->title
+msgid "Show World Times"
+msgstr "Zeige Weltzeiten"
 
 #. settings-schema.json->weekend-length->description
 msgid "Mark as weekend days"
@@ -26,10 +41,6 @@ msgstr "Ein Tag"
 #. settings-schema.json->weekend-length->options
 msgid "Two days"
 msgstr "Zwei Tage"
-
-#. settings-schema.json->section2->description
-msgid "Get Public Holidays for"
-msgstr "Nutze Feiertage für"
 
 #. settings-schema.json->country->description
 msgid "Country"
@@ -822,9 +833,13 @@ msgstr ""
 msgid "Wyoming"
 msgstr ""
 
-#. settings-schema.json->section3->description
-msgid "Keyboard shortcuts"
-msgstr ""
+#. settings-schema.json->worldclocks->columns->title
+msgid "Display name"
+msgstr "Anzeigename"
+
+#. settings-schema.json->worldclocks->columns->title
+msgid "Timezone"
+msgstr "Zeitzone"
 
 #. metadata.json->name
 msgid "Calendar with public Holidays"

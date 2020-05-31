@@ -10,6 +10,7 @@ const PopupMenu = imports.ui.popupMenu;
 const UPowerGlib = imports.gi.UPowerGlib;
 const Settings = imports.ui.settings;
 const Calendar = require("./calendar");
+const Worldclocks = require("./worldclocks");
 const CinnamonDesktop = imports.gi.CinnamonDesktop;
 const Main = imports.ui.main;
 
@@ -90,10 +91,25 @@ class CinnamonCalendarApplet extends Applet.TextApplet {
             } catch (e) {
                 this._upClient.connect("notify::resume", this._updateClockAndDate.bind(this));
             }
+
+            this.settings.connect("changed::worldclocks",this._onWorldclocksChanged.bind(this));
+            this.worldsettings = {
+                clocks: this.settings.getValue('worldclocks')
+            };
+
+            this._worldclocks = new Worldclocks.Worldclocks(this.menu);
+
+            this._updateFormatString();
         }
         catch (e) {
             global.logError(e);
         }
+    }
+
+    _onWorldclocksChanged(setting_provider, oldval, newval) {
+        this.worldsettings.clocks = newval;
+        this._worldclocks.buildClocks(this.worldsettings);
+        this._worldclocks.updateClocks();
     }
 
     _setKeybinding() {
@@ -128,32 +144,31 @@ class CinnamonCalendarApplet extends Applet.TextApplet {
 
     _updateFormatString() {
         let in_vertical_panel = (this.orientation === St.Side.LEFT || this.orientation === St.Side.RIGHT);
+        let world_string = this.custom_format;
+        let main_string = this.custom_format;
 
         if (this.use_custom_format) {
-            if (!this.clock.set_format_string(this.custom_format)) {
+            if (!this.clock.set_format_string(world_string)) {
                 global.logError("Calendar applet: bad time format string - check your string.");
-                this.clock.set_format_string("~CLOCK FORMAT ERROR~ %l:%M %p");
+                world_string = main_string = "~CLOCK FORMAT ERROR~ %l:%M %p";
             }
-        } else if (in_vertical_panel) {
+        } else {
             let use_24h = this.desktop_settings.get_boolean("clock-use-24h");
             let show_seconds = this.desktop_settings.get_boolean("clock-show-seconds");
 
             if (use_24h) {
-                if (show_seconds) {
-                    this.clock.set_format_string("%H%n%M%n%S");
-                } else {
-                    this.clock.set_format_string("%H%n%M%");
-                }
+                main_string = show_seconds ? "%H%n%M%n%S" : "%H%n%M%";
+                world_string = show_seconds ? "%H:%M:%S (%a)" : "%H:%M (%a)";
             } else {
-                if (show_seconds) {
-                    this.clock.set_format_string("%l%n%M%n%S");
-                } else {
-                    this.clock.set_format_string("%l%n%M%");
-                }
+                main_string = show_seconds ? "%l%n%M%n%S" : "%l%n%M%";
+                world_string = show_seconds ? "%l:%M:%S (%a)" : "%l:%M (%a)";
             }
-        } else {
-            this.clock.set_format_string(null);
+            if (!in_vertical_panel) main_string = null;
         }
+
+        this.clock.set_format_string(main_string);
+        this.worldsettings.format = world_string;
+        this._worldclocks.buildClocks(this.worldsettings);
     }
 
     _updateClockAndDate() {
@@ -171,6 +186,8 @@ class CinnamonCalendarApplet extends Applet.TextApplet {
 
         this._date.set_text(dateFormattedFull);
         this.set_applet_tooltip(dateFormattedFull);
+
+        this._worldclocks.updateClocks();
     }
 
     on_applet_added_to_panel() {
@@ -205,9 +222,8 @@ class CinnamonCalendarApplet extends Applet.TextApplet {
     }
 
     _updateCalendar () {
-        let now = new Date();
-
-        this._calendar.setDate(now, true);
+        this._calendar.setDate(new Date(), true);
+        this._worldclocks.updateClocks();
     }
 
     on_orientation_changed (orientation) {
