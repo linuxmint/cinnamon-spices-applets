@@ -349,6 +349,12 @@ declare namespace imports.gi.Clutter {
         set_column_homogeneous(bool: boolean): void;
         attach(widget: imports.gi.St.Widget, col: number, row: number, colspan: number, rowspan: number): void;
     }
+
+    export class Actor {
+        add_child(child: any): void;
+        hide(): void;
+        show(): void;
+    }
 }
 
 declare namespace imports.gi.St {
@@ -363,6 +369,8 @@ declare namespace imports.gi.St {
         get_style(): string;
         get_theme(): imports.gi.St.Theme;
         get_theme_node(): ThemeNode;
+        show(): void;
+        hide(): void;
     }
     export class BoxLayout extends Widget {
         constructor(options ? : any)

@@ -27,7 +27,7 @@ const { Message, Session, ProxyResolverDefault, SessionAsync } = imports.gi.Soup
 // http://developer.gnome.org/st/stable/
 //const St: typeof imports.gi.St = imports.gi.St;
 const { Bin, DrawingArea, BoxLayout, Side, IconType, Label, Icon, Button, Align, Widget } = imports.gi.St;
-const { GridLayout } = imports.gi.Clutter;
+const { GridLayout, Actor } = imports.gi.Clutter;
 const { get_language_names } = imports.gi.GLib;
 // * /usr/share/cinnamon/js/
 const { TextIconApplet, AllowedLayout, AppletPopupMenu, MenuItem} = imports.ui.applet;
@@ -441,7 +441,7 @@ class WeatherApplet extends TextIconApplet {
       this.ProcessWeatherData(weatherInfo, locationData);
 
       if (rebuild) this.ui.rebuild(this.config);
-      if (!await this.ui.displayWeather(this.weather, this.config) || !await this.ui.displayForecast(this.weather, this.forecasts, this.config)) return;
+      if (!this.ui.displayWeather(this.weather, this.config) || !this.ui.displayForecast(this.weather, this.forecasts, this.config)) return;
       this.ui.displayBar(this.provider);
       this.log.Print("Weather Information refreshed");
       this.loop.ResetErrorCount();
@@ -722,6 +722,11 @@ class UI {
     private _forecastBox: imports.gi.Clutter.GridLayout;
     private _providerCredit: imports.gi.St.Label;
 
+
+    private _hourlyButton: imports.gi.St.Button;
+    private _hourlyContainer: imports.gi.St.Bin;
+    private hourlyToggled: boolean = false;
+
     private app: WeatherApplet;
       /** Rolldown menu itself */
     public menu: imports.ui.applet.AppletPopupMenu;
@@ -752,6 +757,7 @@ class UI {
       this._separatorArea2 = new PopupSeparatorMenuItem()
       this._separatorArea.actor.remove_style_class_name("popup-menu-item");
       this._separatorArea2.actor.remove_style_class_name("popup-menu-item");
+      this._hourlyContainer = new Bin();
 
       this._bar = new BoxLayout({
         vertical: false,
@@ -761,6 +767,7 @@ class UI {
       let mainBox = new BoxLayout({ vertical: true })
 
       mainBox.add_actor(this._currentWeather)
+      mainBox.add_actor(this._hourlyContainer);
       mainBox.add_actor(this._separatorArea.actor)
       mainBox.add_actor(this._futureWeather)
       mainBox.add_actor(this._separatorArea2.actor)
@@ -772,6 +779,7 @@ class UI {
     public rebuild(config: Config): void {
       this.showLoadingUi();
       this.rebuildCurrentWeatherUi(config);
+      this.rebuildHourlyWeatherUi(config);
       this.rebuildFutureWeatherUi(config);
       this.rebuildBar(config);
     }
@@ -1252,6 +1260,18 @@ class UI {
 
     private rebuildBar(config: Config) {
       this.destroyBar();
+      this._hourlyButton = new Button({ reactive: true, label: _('Show Hourly'), });
+      this._hourlyButton.style_class = STYLE_LOCATION_LINK;
+      this._hourlyButton.connect(SIGNAL_CLICKED, Lang.bind(this, this.ToggleHourlyWeather));
+
+      this._bar.add(this._hourlyButton, {
+        x_fill: false,
+        x_align: Align.MIDDLE,
+        y_align: Align.MIDDLE,
+        y_fill: false,
+        expand: true
+      })
+
       this._providerCredit = new Label({ text: _(ELLIPSIS),});
       this._bar.add(this._providerCredit, {
         x_fill: false,
@@ -1260,6 +1280,34 @@ class UI {
         y_fill: false,
         expand: true
       });
+    }
+
+    private rebuildHourlyWeatherUi(config: Config){
+        this._hourlyContainer.set_child(new Label({text: "I am an hourly container"}));
+        this.HideHourlyWeather();
+    }
+
+    public ShowHourlyWeather(): void {
+        this._hourlyContainer.show();
+        this.hourlyToggled = true;
+    }
+
+    public HideHourlyWeather(): void {
+        this._hourlyContainer.hide();
+        this.hourlyToggled = false;
+    }
+
+    public ToggleHourlyWeather(): void {
+      global.log("runs")
+      if (this.hourlyToggled) {
+        this.HideHourlyWeather();
+        global.log("toggled on")
+      }
+      else {
+        this.ShowHourlyWeather();
+        this.app.log.Print("test")
+        global.log("toggled off")
+      } 
     }
 }
 

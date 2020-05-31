@@ -63,13 +63,13 @@ var keybindingManager = imports.ui.main.keybindingManager;
 var timeout_add_seconds = imports.mainloop.timeout_add_seconds;
 var _a = imports.gi.Soup, Message = _a.Message, Session = _a.Session, ProxyResolverDefault = _a.ProxyResolverDefault, SessionAsync = _a.SessionAsync;
 var _b = imports.gi.St, Bin = _b.Bin, DrawingArea = _b.DrawingArea, BoxLayout = _b.BoxLayout, Side = _b.Side, IconType = _b.IconType, Label = _b.Label, Icon = _b.Icon, Button = _b.Button, Align = _b.Align, Widget = _b.Widget;
-var GridLayout = imports.gi.Clutter.GridLayout;
+var _c = imports.gi.Clutter, GridLayout = _c.GridLayout, Actor = _c.Actor;
 var get_language_names = imports.gi.GLib.get_language_names;
-var _c = imports.ui.applet, TextIconApplet = _c.TextIconApplet, AllowedLayout = _c.AllowedLayout, AppletPopupMenu = _c.AppletPopupMenu, MenuItem = _c.MenuItem;
-var _d = imports.ui.popupMenu, PopupMenuManager = _d.PopupMenuManager, PopupSeparatorMenuItem = _d.PopupSeparatorMenuItem;
-var _e = imports.ui.settings, AppletSettings = _e.AppletSettings, BindingDirection = _e.BindingDirection;
-var _f = imports.misc.util, spawnCommandLine = _f.spawnCommandLine, spawn_async = _f.spawn_async;
-var _g = imports.ui.messageTray, SystemNotificationSource = _g.SystemNotificationSource, Notification = _g.Notification;
+var _d = imports.ui.applet, TextIconApplet = _d.TextIconApplet, AllowedLayout = _d.AllowedLayout, AppletPopupMenu = _d.AppletPopupMenu, MenuItem = _d.MenuItem;
+var _e = imports.ui.popupMenu, PopupMenuManager = _e.PopupMenuManager, PopupSeparatorMenuItem = _e.PopupSeparatorMenuItem;
+var _f = imports.ui.settings, AppletSettings = _f.AppletSettings, BindingDirection = _f.BindingDirection;
+var _g = imports.misc.util, spawnCommandLine = _g.spawnCommandLine, spawn_async = _g.spawn_async;
+var _h = imports.ui.messageTray, SystemNotificationSource = _h.SystemNotificationSource, Notification = _h.Notification;
 var messageTray = imports.ui.main.messageTray;
 var utils = importModule("utils");
 var GetDayName = utils.GetDayName;
@@ -393,29 +393,29 @@ var WeatherApplet = (function (_super) {
     };
     WeatherApplet.prototype.refreshWeather = function (rebuild) {
         return __awaiter(this, void 0, void 0, function () {
-            var locationData, e_1, weatherInfo, _a, e_2;
-            return __generator(this, function (_b) {
-                switch (_b.label) {
+            var locationData, e_1, weatherInfo, e_2;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
                     case 0:
                         this.encounteredError = false;
                         locationData = null;
-                        _b.label = 1;
+                        _a.label = 1;
                     case 1:
-                        _b.trys.push([1, 3, , 4]);
+                        _a.trys.push([1, 3, , 4]);
                         return [4, this.ValidateLocation()];
                     case 2:
-                        locationData = _b.sent();
+                        locationData = _a.sent();
                         return [3, 4];
                     case 3:
-                        e_1 = _b.sent();
+                        e_1 = _a.sent();
                         this.log.Error(e_1);
                         return [2, "error"];
                     case 4:
-                        _b.trys.push([4, 9, , 10]);
+                        _a.trys.push([4, 6, , 7]);
                         this.LoadProvider();
                         return [4, this.provider.GetWeather()];
                     case 5:
-                        weatherInfo = _b.sent();
+                        weatherInfo = _a.sent();
                         if (!weatherInfo) {
                             this.log.Error("Unable to obtain Weather Information");
                             return [2, "failure"];
@@ -424,27 +424,18 @@ var WeatherApplet = (function (_super) {
                         this.ProcessWeatherData(weatherInfo, locationData);
                         if (rebuild)
                             this.ui.rebuild(this.config);
-                        return [4, this.ui.displayWeather(this.weather, this.config)];
-                    case 6:
-                        _a = !(_b.sent());
-                        if (_a) return [3, 8];
-                        return [4, this.ui.displayForecast(this.weather, this.forecasts, this.config)];
-                    case 7:
-                        _a = !(_b.sent());
-                        _b.label = 8;
-                    case 8:
-                        if (_a)
+                        if (!this.ui.displayWeather(this.weather, this.config) || !this.ui.displayForecast(this.weather, this.forecasts, this.config))
                             return [2];
                         this.ui.displayBar(this.provider);
                         this.log.Print("Weather Information refreshed");
                         this.loop.ResetErrorCount();
                         return [2, "success"];
-                    case 9:
-                        e_2 = _b.sent();
+                    case 6:
+                        e_2 = _a.sent();
                         this.log.Error("Generic Error while refreshing Weather info: " + e_2);
                         this.HandleError({ type: "hard", detail: "unknown", message: _("Unexpected Error While Refreshing Weather, please see log in Looking Glass") });
                         return [2, "failure"];
-                    case 10: return [2];
+                    case 7: return [2];
                 }
             });
         });
@@ -662,6 +653,7 @@ var Log = (function () {
 }());
 var UI = (function () {
     function UI(app, orientation) {
+        this.hourlyToggled = false;
         this.app = app;
         this.menuManager = new PopupMenuManager(this.app);
         this.menu = new AppletPopupMenu(this.app, orientation);
@@ -677,12 +669,14 @@ var UI = (function () {
         this._separatorArea2 = new PopupSeparatorMenuItem();
         this._separatorArea.actor.remove_style_class_name("popup-menu-item");
         this._separatorArea2.actor.remove_style_class_name("popup-menu-item");
+        this._hourlyContainer = new Bin();
         this._bar = new BoxLayout({
             vertical: false,
             style_class: STYLE_BAR
         });
         var mainBox = new BoxLayout({ vertical: true });
         mainBox.add_actor(this._currentWeather);
+        mainBox.add_actor(this._hourlyContainer);
         mainBox.add_actor(this._separatorArea.actor);
         mainBox.add_actor(this._futureWeather);
         mainBox.add_actor(this._separatorArea2.actor);
@@ -692,6 +686,7 @@ var UI = (function () {
     UI.prototype.rebuild = function (config) {
         this.showLoadingUi();
         this.rebuildCurrentWeatherUi(config);
+        this.rebuildHourlyWeatherUi(config);
         this.rebuildFutureWeatherUi(config);
         this.rebuildBar(config);
     };
@@ -1056,6 +1051,16 @@ var UI = (function () {
     };
     UI.prototype.rebuildBar = function (config) {
         this.destroyBar();
+        this._hourlyButton = new Button({ reactive: true, label: _('Refresh'), });
+        this._hourlyButton.style_class = STYLE_LOCATION_LINK;
+        this._hourlyButton.connect(SIGNAL_CLICKED, Lang.bind(this, this.ToggleHourlyWeather));
+        this._bar.add(this._hourlyButton, {
+            x_fill: false,
+            x_align: Align.MIDDLE,
+            y_align: Align.MIDDLE,
+            y_fill: false,
+            expand: true
+        });
         this._providerCredit = new Label({ text: _(ELLIPSIS), });
         this._bar.add(this._providerCredit, {
             x_fill: false,
@@ -1064,6 +1069,30 @@ var UI = (function () {
             y_fill: false,
             expand: true
         });
+    };
+    UI.prototype.rebuildHourlyWeatherUi = function (config) {
+        this._hourlyContainer.set_child(new Label({ text: "I am an hourly container" }));
+        this.HideHourlyWeather();
+    };
+    UI.prototype.ShowHourlyWeather = function () {
+        this._hourlyContainer.show();
+        this.hourlyToggled = true;
+    };
+    UI.prototype.HideHourlyWeather = function () {
+        this._hourlyContainer.hide();
+        this.hourlyToggled = false;
+    };
+    UI.prototype.ToggleHourlyWeather = function () {
+        global.log("runs");
+        if (this.hourlyToggled) {
+            this.HideHourlyWeather();
+            global.log("toggled on");
+        }
+        else {
+            this.ShowHourlyWeather();
+            this.app.log.Print("test");
+            global.log("toggled off");
+        }
     };
     return UI;
 }());
