@@ -64,9 +64,9 @@ const readFirefoxBookmarks = function(appInfo, profileDir) {
       return [
         result.get_value_at(0, row),
         result.get_value_at(1, row)
-      ]
+      ];
     }, () => [null, null]);
-  }
+  };
 
   for (let row = 0; row < nRows; row++) {
     let [name, uri] = handleMeta(result, row);
@@ -79,7 +79,7 @@ const readFirefoxBookmarks = function(appInfo, profileDir) {
     });
   }
   return bookmarks;
-}
+};
 
 function readFirefoxProfiles(appSystem) {
   if (!Gda) return [];
@@ -187,9 +187,9 @@ const readChromiumBookmarks = function(bookmarks, path = ['chromium', 'Default',
         }
         recurseBookmarks(children);
       }
-      resolve(bookmarks)
+      resolve(bookmarks);
     }).catch(() => resolve(bookmarks));
   });
-}
+};
 
 module.exports = {readChromiumBookmarks, readFirefoxProfiles, Gda};
