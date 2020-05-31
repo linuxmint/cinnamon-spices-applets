@@ -97,7 +97,7 @@ const fuzzy = function (q, str, opts) {
 
       // Reset counter to the actual position in string
       lastI = i;
-    } else {
+  } else {
       result += originalStr[i];
     }
 
@@ -117,6 +117,6 @@ const fuzzy = function (q, str, opts) {
     score: 0,
     result: str
   };
-}
+};
 
 module.exports = fuzzy;

@@ -9,6 +9,10 @@ Issues can be reported here : [Issues](https://github.com/linuxmint/cinnamon-spi
 
 ### Changes
 
+**Version 1.3.1**:
+* **Bug Fix
+    * Fixed a bug that crashed the applet if the hardcoded default was not a valid device option. The default is now the first device listed after scanning for devices on the system instead of "sda".
+
 **Version 1.3**:
 * **Bug Fixes and Feature Enhancements**: Disk Usage Stats
     * Fixed a bug that prevented device mapper volumes (LVM, dm-crypt LUKS, etc.) from displaying usage statistics details or graphs.
@@ -50,11 +54,11 @@ Issues can be reported here : [Issues](https://github.com/linuxmint/cinnamon-spi
 
 ### Requirements
 
-**Graphical Hardware Monitor** requires the **Gtop** package to collect system information. It might already be installed on your system, but if the applet or graph is not shown, you might need to install the **Gtop** package manually.
+**Graphical Hardware Monitor** requires the **Gtop** and **GUdev** packages to collect system information. It might already be installed on your system, but if the applet or graph is not shown, you might need to install the packages manually.
 
-* **Ubuntu/Mint**: install the package **gir1.2-gtop-2.0**
-* **Fedora**: install the package **libgtop2-devel**
-* **Arch/Manjaro**: install the package **libgtop**
+* **Debian/Ubuntu/Mint**: install the packages **gir1.2-gtop-2.0** and **gir1.2-gudev-1.0**
+* **Fedora**: install the package **libgtop2-devel** and **libgudev**
+* **Arch/Manjaro**: install the package **libgtop** and **libgudev**
 
 ### Example
 

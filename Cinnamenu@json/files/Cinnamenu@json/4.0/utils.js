@@ -5,13 +5,13 @@ const {each} = imports.misc.util;
 
 // Work around Cinnamon#8201
 const tryFn = function(callback, errCallback) {
-  try {
-      return callback();
-  } catch (e) {
-      if (typeof errCallback === 'function') {
-          return errCallback(e);
-      }
-  }
+    try {
+        return callback();
+    } catch (e) {
+        if (typeof errCallback === 'function') {
+            return errCallback(e);
+        }
+    }
 };
 
 // Recursive each wrapper, for asynchronous iteration
@@ -23,7 +23,7 @@ const rEach = (array, cb, finishCb, i = -1) => {
   }
   let next = () => rEach(array, cb, finishCb, i);
   cb(array[i], i, next);
-}
+};
 
 const sortBy = function(array = [], property = '', direction = 'asc') {
   let arg;
@@ -38,7 +38,7 @@ const sortBy = function(array = [], property = '', direction = 'asc') {
     }
     return a[property] === b[property] ? 0 : +(arg) || -1;
   });
-}
+};
 
 const readFileAsync = function(file, opts = {utf8: true}) {
   const {utf8} = opts;
@@ -94,12 +94,12 @@ const writeFileAsync = function(file, data) {
       });
     });
   });
-}
+};
 
 const readJSONAsync = function(file) {
   return readFileAsync(file).then(function(json) {
     return JSON.parse(json);
-  })
+  });
 };
 
 const copyFileAsync = function(file, destinationFile, userData) {
@@ -114,11 +114,11 @@ const copyFileAsync = function(file, destinationFile, userData) {
         tryFn(function() {
           if (!file.copy_finish(taskJob)) return reject(new Error('File cannot be copied.'));
           resolve(userData);
-        }, (e) => reject(e));
+      }, (e) => reject(e));
       }
     );
   });
-}
+};
 
 const buildSettings = function(fds, knownProviders, schema, schemaFile, backupSchemaFile, next) {
   // Build the schema file with the available search provider UUIDs.
@@ -138,13 +138,14 @@ const buildSettings = function(fds, knownProviders, schema, schemaFile, backupSc
       // Restore from the backup schema if it exists
       copyFileAsync(backupSchemaFile, schemaFile).then(next);
     });
-  }
+  };
 
   rEach(fds, function(fd, i, nextIter) {
     let [dir, files] = fd;
     rEach(files, function(file, f, nextIter2) {
       let name = file.get_name();
-      if (name.indexOf('@') === -1) return nextIter2();
+      if (name.indexOf('@') === -1)
+        return nextIter2();
       readJSONAsync(`${dir.get_path()}/${name}/metadata.json`).then(function(json) {
         changed = true;
         knownProviders.push(name);
@@ -155,57 +156,53 @@ const buildSettings = function(fds, knownProviders, schema, schemaFile, backupSc
           description: json.name,
           tooltip: json.description,
           dependency: 'enable-search-providers'
-        }
+        };
         nextIter2();
       }).catch(nextIter2);
-    }, nextIter)
+    }, nextIter);
   }, finish);
 };
 
-const setSchema = function(path, categoryButtons, startupCategory, cb) {
+const setSchema = function(path, cb) {
     let schemaFile = Gio.File.new_for_path(path + '/settings-schema.json');
     let backupSchemaFile = Gio.File.new_for_path(path + '/settings-schema-backup.json');
-    let startupCategoryValid = false;
     let knownProviders = [];
-    let next = () => cb(knownProviders, startupCategoryValid);
+    let next = () => cb(knownProviders);
 
     readJSONAsync(schemaFile)
         .then(function(schema) {
-            each(categoryButtons, function(category) {
-                          schema.startupCategory.options[category.categoryNameText] = category.id;
-                          if (category.id === startupCategory) startupCategoryValid = true; });
             // Back up the schema file if it doesn't exist.
             if (!backupSchemaFile.query_exists(null)) {
                 return copyFileAsync(schemaFile, backupSchemaFile, schema);
             }
-            return Promise.resolve(schema); })
-        .then(function(schema) {
-            let providerFiles = [];
-            let dataDir = Gio.File.new_for_path(global.datadir + '/search_providers');
-            let userDataDir = Gio.File.new_for_path(global.userdatadir + '/search_providers');
-            if (dataDir.query_exists(null)) {
-              listDirAsync(dataDir, (files) => {
-                providerFiles = providerFiles.concat([[dataDir, files]]);
-                if (userDataDir.query_exists(null)) {
-                  listDirAsync(userDataDir, (files) => {
-                    providerFiles = providerFiles.concat([[userDataDir, files]]);
-                    buildSettings(providerFiles, knownProviders, schema, schemaFile, backupSchemaFile, next);
+            return Promise.resolve(schema);
+        }).then(function(schema) {
+                let providerFiles = [];
+                let dataDir = Gio.File.new_for_path(global.datadir + '/search_providers');
+                let userDataDir = Gio.File.new_for_path(global.userdatadir + '/search_providers');
+                if (dataDir.query_exists(null)) {
+                  listDirAsync(dataDir, (files) => {
+                    providerFiles = providerFiles.concat([[dataDir, files]]);
+                    if (userDataDir.query_exists(null)) {
+                      listDirAsync(userDataDir, (files) => {
+                            providerFiles = providerFiles.concat([[userDataDir, files]]);
+                            buildSettings(providerFiles, knownProviders, schema, schemaFile, backupSchemaFile, next);
+                            });
+                    } else {
+                      buildSettings(providerFiles, knownProviders, schema, schemaFile, backupSchemaFile, next);
+                    }
                   });
+                } else if (userDataDir.query_exists(null)) {
+                    listDirAsync(userDataDir, (files) => {
+                        buildSettings([[userDataDir, files]], knownProviders, schema, schemaFile, backupSchemaFile, next);
+                    });
                 } else {
-                  buildSettings(providerFiles, knownProviders, schema, schemaFile, backupSchemaFile, next);
+                    next();
                 }
-              });
-            } else if (userDataDir.query_exists(null)) {
-              listDirAsync(userDataDir, (files) => {
-                buildSettings([[userDataDir, files]], knownProviders, schema, schemaFile, backupSchemaFile, next);
-              });
-            } else {
-              next();
-            }
-  }).catch(function(e) {
-    global.log(e);
-    copyFileAsync(backupSchemaFile, schemaFile).then(next);
-  });
+        }).catch(function(e) {
+                global.log(e);
+                copyFileAsync(backupSchemaFile, schemaFile).then(next);
+        });
 };
 
 module.exports = {tryFn, sortBy, readFileAsync, readJSONAsync, setSchema};
