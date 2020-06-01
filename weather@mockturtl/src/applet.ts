@@ -2,12 +2,12 @@
  * @param path Filename without extension
  */
 function importModule(path: string): any {
-  if (typeof require !== 'undefined') {
-    return require('./' + path);
-  } else {
-    if (!AppletDir) var AppletDir = imports.ui.appletManager.applets['weather@mockturtl'];
-    return AppletDir[path];
-  }
+    if (typeof require !== 'undefined') {
+      return require('./' + path);
+    } else {
+      if (!AppletDir) var AppletDir = imports.ui.appletManager.applets['weather@mockturtl'];
+      return AppletDir[path];
+    }
 }
 
 /**
@@ -749,7 +749,12 @@ class UI {
       this.menu.box.add_style_class_name(STYLE_WEATHER_MENU);  
       this.app.log.Debug("Popup Menu applied classes are: " + this.menu.box.get_style_class_name());
       this.menuManager.addMenu(this.menu);
+      this.menuManager._signals.connect(this.menu, "open-state-changed", this.PopupMenuToggled, this);
       this.BuildPopupMenu();
+    }
+
+    private PopupMenuToggled(caller: any, data: any) {
+      if (data == false) this.HideHourlyWeather();
     }
 
     /** Creates the skeleton of the popup menu */
@@ -758,15 +763,16 @@ class UI {
       this._currentWeather = new Bin({ style_class: STYLE_CURRENT });
       //  tomorrow's forecast
       this._futureWeather = new Bin({ style_class: STYLE_FORECAST });
-      //  horizontal rule
 
+      // Creating Separators and removing styling to make them span full width 
       this._separatorArea = new PopupSeparatorMenuItem()
       this._separatorAreaHourly = new PopupSeparatorMenuItem();
-      this._separatorAreaHourly.actor.hide();
       this._separatorArea2 = new PopupSeparatorMenuItem()
       this._separatorArea.actor.remove_style_class_name("popup-menu-item");
       this._separatorAreaHourly.actor.remove_style_class_name("popup-menu-item");
       this._separatorArea2.actor.remove_style_class_name("popup-menu-item");
+
+      // Hourly Weather
       this._hourlyScrollView = new ScrollView(
         {
           hscrollbar_policy: PolicyType.NEVER,
@@ -778,27 +784,21 @@ class UI {
           x_align: Align.START
         }
       );
+      // Stop event passing whil scrolling to prevent jankyness
       let vscroll = this._hourlyScrollView.get_vscroll_bar();
-      vscroll.connect("scroll-start",
-            () => {
-                this.menu.passEvents = true;
-            });
-            vscroll.connect("scroll-stop",
-            () => {
-                this.menu.passEvents = false;
-            });
+      vscroll.connect("scroll-start", () => {this.menu.passEvents = true;});
+      vscroll.connect("scroll-stop", () => {this.menu.passEvents = false;});
+      this._separatorAreaHourly.actor.hide();
       this._hourlyScrollView.hide();
       this._hourlyScrollView.clip_to_allocation = true;
       this._hourlyBox = new BoxLayout({ vertical: true });
       this._hourlyScrollView.add_actor(this._hourlyBox)
 
-      this._bar = new BoxLayout({
-        vertical: false,
-        style_class: STYLE_BAR
-      });
+      // Bottom bar
+      this._bar = new BoxLayout({ vertical: false, style_class: STYLE_BAR });
+
       // build menu
       let mainBox = new BoxLayout({ vertical: true })
-
       mainBox.add_actor(this._currentWeather)
       mainBox.add_actor(this._separatorAreaHourly.actor);
       mainBox.add_actor(this._hourlyScrollView);
@@ -1306,9 +1306,16 @@ class UI {
         y_fill: false,
         expand: true
       })
-
-      this._hourlyButton = new Button({ reactive: true, label: _('Show Hourly'), });
-      this._hourlyButton.style_class = STYLE_LOCATION_LINK;
+      this._hourlyButton = new Button({ 
+          reactive: true,
+          can_focus: true,
+          child: new Icon({
+            icon_type: IconType.SYMBOLIC,
+            icon_size: 12,
+            icon_name: "custom-down-arrow-symbolic"
+          }),
+          style_class: STYLE_LOCATION_LINK
+      });
       this._hourlyButton.connect(SIGNAL_CLICKED, Lang.bind(this, this.ToggleHourlyWeather));
       this._bar.add(this._hourlyButton, {
         x_fill: false,
@@ -1337,12 +1344,11 @@ class UI {
 
     public ShowHourlyWeather(): void {
         this._separatorAreaHourly.actor.show();
+        this._hourlyButton.child.icon_name = "custom-up-arrow-symbolic";
         this._hourlyScrollView.show();
         if (global.settings.get_boolean("desktop-effects-on-menus")) {
           this._hourlyScrollView.height = 0;
           let [minHeight, naturalHeight] = this._hourlyBox.get_preferred_height(-1);
-          global.log(naturalHeight.toString())
-          global.log(minHeight.toString())
           addTween(this._hourlyScrollView,
             {
               height: naturalHeight,
@@ -1361,6 +1367,7 @@ class UI {
     /**open-state-changed event */
     public HideHourlyWeather(): void {
         this._separatorAreaHourly.actor.hide();
+        this._hourlyButton.child.icon_name = "custom-down-arrow-symbolic";
         if (global.settings.get_boolean("desktop-effects-on-menus")) {
           addTween(this._hourlyScrollView,
             {
@@ -1920,6 +1927,8 @@ type GUIDStore = {
  * Available icons in icons folder
  */
 type CustomIcons = 
+"custom-down-arrow-symbolic" |
+"custom-up-arrow-symbolic" |
 "alien-symbolic" |
 "barometer-symbolic" |
 "celsius-symbolic" |

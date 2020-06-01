@@ -662,15 +662,19 @@ var UI = (function () {
         this.menu.box.add_style_class_name(STYLE_WEATHER_MENU);
         this.app.log.Debug("Popup Menu applied classes are: " + this.menu.box.get_style_class_name());
         this.menuManager.addMenu(this.menu);
+        this.menuManager._signals.connect(this.menu, "open-state-changed", this.PopupMenuToggled, this);
         this.BuildPopupMenu();
     }
+    UI.prototype.PopupMenuToggled = function (caller, data) {
+        if (data == false)
+            this.HideHourlyWeather();
+    };
     UI.prototype.BuildPopupMenu = function () {
         var _this = this;
         this._currentWeather = new Bin({ style_class: STYLE_CURRENT });
         this._futureWeather = new Bin({ style_class: STYLE_FORECAST });
         this._separatorArea = new PopupSeparatorMenuItem();
         this._separatorAreaHourly = new PopupSeparatorMenuItem();
-        this._separatorAreaHourly.actor.hide();
         this._separatorArea2 = new PopupSeparatorMenuItem();
         this._separatorArea.actor.remove_style_class_name("popup-menu-item");
         this._separatorAreaHourly.actor.remove_style_class_name("popup-menu-item");
@@ -684,20 +688,14 @@ var UI = (function () {
             x_align: Align.START
         });
         var vscroll = this._hourlyScrollView.get_vscroll_bar();
-        vscroll.connect("scroll-start", function () {
-            _this.menu.passEvents = true;
-        });
-        vscroll.connect("scroll-stop", function () {
-            _this.menu.passEvents = false;
-        });
+        vscroll.connect("scroll-start", function () { _this.menu.passEvents = true; });
+        vscroll.connect("scroll-stop", function () { _this.menu.passEvents = false; });
+        this._separatorAreaHourly.actor.hide();
         this._hourlyScrollView.hide();
         this._hourlyScrollView.clip_to_allocation = true;
         this._hourlyBox = new BoxLayout({ vertical: true });
         this._hourlyScrollView.add_actor(this._hourlyBox);
-        this._bar = new BoxLayout({
-            vertical: false,
-            style_class: STYLE_BAR
-        });
+        this._bar = new BoxLayout({ vertical: false, style_class: STYLE_BAR });
         var mainBox = new BoxLayout({ vertical: true });
         mainBox.add_actor(this._currentWeather);
         mainBox.add_actor(this._separatorAreaHourly.actor);
@@ -1087,8 +1085,16 @@ var UI = (function () {
             y_fill: false,
             expand: true
         });
-        this._hourlyButton = new Button({ reactive: true, label: _('Show Hourly'), });
-        this._hourlyButton.style_class = STYLE_LOCATION_LINK;
+        this._hourlyButton = new Button({
+            reactive: true,
+            can_focus: true,
+            child: new Icon({
+                icon_type: IconType.SYMBOLIC,
+                icon_size: 12,
+                icon_name: "custom-down-arrow-symbolic"
+            }),
+            style_class: STYLE_LOCATION_LINK
+        });
         this._hourlyButton.connect(SIGNAL_CLICKED, Lang.bind(this, this.ToggleHourlyWeather));
         this._bar.add(this._hourlyButton, {
             x_fill: false,
@@ -1115,12 +1121,11 @@ var UI = (function () {
     UI.prototype.ShowHourlyWeather = function () {
         var _this = this;
         this._separatorAreaHourly.actor.show();
+        this._hourlyButton.child.icon_name = "custom-up-arrow-symbolic";
         this._hourlyScrollView.show();
         if (global.settings.get_boolean("desktop-effects-on-menus")) {
             this._hourlyScrollView.height = 0;
             var _a = this._hourlyBox.get_preferred_height(-1), minHeight = _a[0], naturalHeight_1 = _a[1];
-            global.log(naturalHeight_1.toString());
-            global.log(minHeight.toString());
             addTween(this._hourlyScrollView, {
                 height: naturalHeight_1,
                 time: 0.25,
@@ -1135,6 +1140,7 @@ var UI = (function () {
     UI.prototype.HideHourlyWeather = function () {
         var _this = this;
         this._separatorAreaHourly.actor.hide();
+        this._hourlyButton.child.icon_name = "custom-down-arrow-symbolic";
         if (global.settings.get_boolean("desktop-effects-on-menus")) {
             addTween(this._hourlyScrollView, {
                 height: 0,

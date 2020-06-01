@@ -257,6 +257,12 @@ declare namespace imports.ui.messageTray {
     }
 }
 
+declare namespace imports.misc.signalManager {
+    export class SignalManager {
+        connect(obj: any, sigName: string, callback: Function, bind: any, force?: boolean): void
+    }
+}
+
 declare namespace imports.ui.popupMenu {
     export class PopupMenuBase {
         constructor(context: any);
@@ -265,6 +271,7 @@ declare namespace imports.ui.popupMenu {
     export class PopupMenuManager {
         constructor(context: any);
         addMenu(menu: any): void;
+        _signals: misc.signalManager.SignalManager;
     }
     export class PopupMenu extends PopupMenuBase {
         constructor();
@@ -424,6 +431,7 @@ declare namespace imports.gi.St {
         reactive: boolean;
         label: string;
         url: string;
+        child: any;
         constructor(options ? : any);
     }
 
