@@ -4,6 +4,7 @@ declare class global {
     static log(...text: Array < string > ): void;
     static logError(...text: Array < string > ): void;
     static create_app_launch_context(): imports.gi.Gio.AppLaunchContext;
+    static settings: any;
 }
 
 declare namespace imports.cairo {
@@ -211,6 +212,7 @@ declare namespace imports.ui.applet {
         setCustomStyleClass(classname: string): void;
         addActor(menu: any): void;
         toggle(): void;
+        passEvents: boolean;
     }
 
     /**
@@ -297,6 +299,10 @@ declare namespace imports.ui.appletManager {
     export var appletMeta: any;
 }
 
+declare namespace imports.ui.tweener {
+    export function addTween(actor: gi.St.Widget, params: any): void;
+}
+
 declare namespace imports.mainloop {
     /**
      * Calls callback function after given seconds
@@ -352,13 +358,23 @@ declare namespace imports.gi.Clutter {
 
     export class Actor {
         add_child(child: any): void;
+        add_actor(element: any): void;
         hide(): void;
         show(): void;
+        get_preferred_height(number: number): number[];
+        destroy_all_children(): void;
+        remove_all_children(): void;
+        height: number;
+        set_height(height: number): void;
+        remove_clip(): void;
+        set_size(width: number, height: number): void;
+        opacity: number;
+        clip_to_allocation: boolean;
     }
 }
 
 declare namespace imports.gi.St {
-    export class Widget {
+    export class Widget extends Clutter.Actor {
         constructor(options?: any);
         destroy(): void;
         style_class: string;
@@ -377,9 +393,9 @@ declare namespace imports.gi.St {
         /** Deprecated, use add_child instead */
         add_actor(element: Widget): void;
         add_child(element: Widget): void;
-        /** private function by default? */
         add(element: Widget, options?: AddOptions): void;
-        destroy_all_children(): void;
+        /** private function by default? */
+
 
     }
     export class Bin extends Widget {
@@ -411,9 +427,10 @@ declare namespace imports.gi.St {
         constructor(options ? : any);
     }
 
-    export class ScrollView  extends Bin {
+    export class ScrollView  extends Widget {
         set_row_size(row_size:number): void;
         set_policy(hscroll: any, vscroll: any): void;
+        get_vscroll_bar(): any;
         constructor(options ? : any);
     }
 
@@ -522,11 +539,11 @@ declare namespace imports.gi.St {
     }
 
     export interface AddOptions {
-        x_fill: boolean;
-        x_align: Align;
-        y_align: Align;
-        y_fill: boolean;
-        expand: boolean;
+        x_fill?: boolean;
+        x_align?: Align;
+        y_align?: Align;
+        y_fill?: boolean;
+        expand?: boolean;
     }
 }
 

@@ -62,9 +62,11 @@ var Lang = imports.lang;
 var keybindingManager = imports.ui.main.keybindingManager;
 var timeout_add_seconds = imports.mainloop.timeout_add_seconds;
 var _a = imports.gi.Soup, Message = _a.Message, Session = _a.Session, ProxyResolverDefault = _a.ProxyResolverDefault, SessionAsync = _a.SessionAsync;
-var _b = imports.gi.St, Bin = _b.Bin, DrawingArea = _b.DrawingArea, BoxLayout = _b.BoxLayout, Side = _b.Side, IconType = _b.IconType, Label = _b.Label, Icon = _b.Icon, Button = _b.Button, Align = _b.Align, Widget = _b.Widget;
+var _b = imports.gi.St, Bin = _b.Bin, DrawingArea = _b.DrawingArea, BoxLayout = _b.BoxLayout, Side = _b.Side, IconType = _b.IconType, Label = _b.Label, ScrollView = _b.ScrollView, Icon = _b.Icon, Button = _b.Button, Align = _b.Align, Widget = _b.Widget;
 var _c = imports.gi.Clutter, GridLayout = _c.GridLayout, Actor = _c.Actor;
 var get_language_names = imports.gi.GLib.get_language_names;
+var PolicyType = imports.gi.Gtk.PolicyType;
+var addTween = imports.ui.tweener.addTween;
 var _d = imports.ui.applet, TextIconApplet = _d.TextIconApplet, AllowedLayout = _d.AllowedLayout, AppletPopupMenu = _d.AppletPopupMenu, MenuItem = _d.MenuItem;
 var _e = imports.ui.popupMenu, PopupMenuManager = _e.PopupMenuManager, PopupSeparatorMenuItem = _e.PopupSeparatorMenuItem;
 var _f = imports.ui.settings, AppletSettings = _f.AppletSettings, BindingDirection = _f.BindingDirection;
@@ -663,20 +665,43 @@ var UI = (function () {
         this.BuildPopupMenu();
     }
     UI.prototype.BuildPopupMenu = function () {
+        var _this = this;
         this._currentWeather = new Bin({ style_class: STYLE_CURRENT });
         this._futureWeather = new Bin({ style_class: STYLE_FORECAST });
         this._separatorArea = new PopupSeparatorMenuItem();
+        this._separatorAreaHourly = new PopupSeparatorMenuItem();
+        this._separatorAreaHourly.actor.hide();
         this._separatorArea2 = new PopupSeparatorMenuItem();
         this._separatorArea.actor.remove_style_class_name("popup-menu-item");
+        this._separatorAreaHourly.actor.remove_style_class_name("popup-menu-item");
         this._separatorArea2.actor.remove_style_class_name("popup-menu-item");
-        this._hourlyContainer = new Bin();
+        this._hourlyScrollView = new ScrollView({
+            hscrollbar_policy: PolicyType.NEVER,
+            vscrollbar_policy: PolicyType.NEVER,
+            x_fill: true,
+            y_fill: false,
+            y_align: Align.MIDDLE,
+            x_align: Align.START
+        });
+        var vscroll = this._hourlyScrollView.get_vscroll_bar();
+        vscroll.connect("scroll-start", function () {
+            _this.menu.passEvents = true;
+        });
+        vscroll.connect("scroll-stop", function () {
+            _this.menu.passEvents = false;
+        });
+        this._hourlyScrollView.hide();
+        this._hourlyScrollView.clip_to_allocation = true;
+        this._hourlyBox = new BoxLayout({ vertical: true });
+        this._hourlyScrollView.add_actor(this._hourlyBox);
         this._bar = new BoxLayout({
             vertical: false,
             style_class: STYLE_BAR
         });
         var mainBox = new BoxLayout({ vertical: true });
         mainBox.add_actor(this._currentWeather);
-        mainBox.add_actor(this._hourlyContainer);
+        mainBox.add_actor(this._separatorAreaHourly.actor);
+        mainBox.add_actor(this._hourlyScrollView);
         mainBox.add_actor(this._separatorArea.actor);
         mainBox.add_actor(this._futureWeather);
         mainBox.add_actor(this._separatorArea2.actor);
@@ -878,6 +903,9 @@ var UI = (function () {
     UI.prototype.destroyBar = function () {
         this._bar.destroy_all_children();
     };
+    UI.prototype.destroyHourlyWeatherUi = function () {
+        this._hourlyBox.destroy_all_children();
+    };
     UI.prototype.showLoadingUi = function () {
         this.destroyCurrentWeather();
         this.destroyFutureWeather();
@@ -1051,7 +1079,15 @@ var UI = (function () {
     };
     UI.prototype.rebuildBar = function (config) {
         this.destroyBar();
-        this._hourlyButton = new Button({ reactive: true, label: _('Refresh'), });
+        this._timestamp = new Label({ text: "Placeholder" });
+        this._bar.add(this._timestamp, {
+            x_fill: false,
+            x_align: Align.START,
+            y_align: Align.MIDDLE,
+            y_fill: false,
+            expand: true
+        });
+        this._hourlyButton = new Button({ reactive: true, label: _('Show Hourly'), });
         this._hourlyButton.style_class = STYLE_LOCATION_LINK;
         this._hourlyButton.connect(SIGNAL_CLICKED, Lang.bind(this, this.ToggleHourlyWeather));
         this._bar.add(this._hourlyButton, {
@@ -1071,27 +1107,57 @@ var UI = (function () {
         });
     };
     UI.prototype.rebuildHourlyWeatherUi = function (config) {
-        this._hourlyContainer.set_child(new Label({ text: "I am an hourly container" }));
-        this.HideHourlyWeather();
+        this.destroyHourlyWeatherUi();
+        this._hourlyLabel = new Label({ text: "I am an hourly container" });
+        this._hourlyBox.add_child(this._hourlyLabel);
+        this._hourlyBox.add_child(new Button({ reactive: true, label: _('Show Hourly'), }));
     };
     UI.prototype.ShowHourlyWeather = function () {
-        this._hourlyContainer.show();
+        var _this = this;
+        this._separatorAreaHourly.actor.show();
+        this._hourlyScrollView.show();
+        if (global.settings.get_boolean("desktop-effects-on-menus")) {
+            this._hourlyScrollView.height = 0;
+            var _a = this._hourlyBox.get_preferred_height(-1), minHeight = _a[0], naturalHeight_1 = _a[1];
+            global.log(naturalHeight_1.toString());
+            global.log(minHeight.toString());
+            addTween(this._hourlyScrollView, {
+                height: naturalHeight_1,
+                time: 0.25,
+                onUpdate: function () { },
+                onComplete: function () {
+                    _this._hourlyScrollView.set_height(naturalHeight_1);
+                }
+            });
+        }
         this.hourlyToggled = true;
     };
     UI.prototype.HideHourlyWeather = function () {
-        this._hourlyContainer.hide();
+        var _this = this;
+        this._separatorAreaHourly.actor.hide();
+        if (global.settings.get_boolean("desktop-effects-on-menus")) {
+            addTween(this._hourlyScrollView, {
+                height: 0,
+                time: 0.25,
+                onUpdate: function () { },
+                onComplete: function () {
+                    _this._hourlyScrollView.set_height(-1);
+                    _this._hourlyScrollView.hide();
+                }
+            });
+        }
+        else {
+            this._hourlyScrollView.set_height(-1);
+            this._hourlyScrollView.hide();
+        }
         this.hourlyToggled = false;
     };
     UI.prototype.ToggleHourlyWeather = function () {
-        global.log("runs");
         if (this.hourlyToggled) {
             this.HideHourlyWeather();
-            global.log("toggled on");
         }
         else {
             this.ShowHourlyWeather();
-            this.app.log.Print("test");
-            global.log("toggled off");
         }
     };
     return UI;
