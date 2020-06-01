@@ -133,7 +133,7 @@ const buildSettings = function(fds, knownProviders, schema, schemaFile, backupSc
 
     // The default title for the extensions section tells the user no extensions are found.
     schema.layout.extensionProvidersSection.title = 'Extensions';
-    let json = JSON.stringify(schema);
+    let json = JSON.stringify(schema,null,4);
     writeFileAsync(schemaFile, json).then(next).catch(function() {
       // Restore from the backup schema if it exists
       copyFileAsync(backupSchemaFile, schemaFile).then(next);

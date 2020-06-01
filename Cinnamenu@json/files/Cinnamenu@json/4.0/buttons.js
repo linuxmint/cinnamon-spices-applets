@@ -69,8 +69,8 @@ class CategoryListButton extends PopupBaseMenuItem {
                 if (this.icon_name) {
                     this.icon = TextureCache.get_default().load_gicon(null, icon, this.state.settings.categoryIconSize);
                 } else {
-                    icon = dir.get_icon() && typeof dir.get_icon().get_names === 'function'
-                                                    ? dir.get_icon().get_names().toString() : 'error';
+                    icon = dir.get_icon() && typeof dir.get_icon().get_names === 'function' ?
+                                                                dir.get_icon().get_names().toString() : 'error';
                     this.icon = new Icon({
                         icon_name: icon,
                         icon_size: this.state.settings.categoryIconSize
@@ -93,7 +93,7 @@ class CategoryListButton extends PopupBaseMenuItem {
         this.label.realize();
 
         this.actor._delegate = {
-            handleDragOver: (source, /* actor, x, y, time */) => {
+            handleDragOver: (source /*, actor, x, y, time */) => {
                 if (!source.index || source.index === this.index) {
                         return DragMotionResult.NO_DROP;
                 }
@@ -101,7 +101,7 @@ class CategoryListButton extends PopupBaseMenuItem {
                 this.actor.set_opacity(50);
                 return DragMotionResult.MOVE_DROP;
             },
-            acceptDrop: (source, /* actor, x, y, time */) => {
+            acceptDrop: (source /*, actor, x, y, time */) => {
                 if (!source.index || source.index === this.index) {
                     this.state.set({dragIndex: -1});
                     return DragMotionResult.NO_DROP;
@@ -327,8 +327,8 @@ class ApplicationContextMenuItem extends PopupBaseMenuItem {
                 this.state.trigger('removeFavorite', this.buttonState.app.get_id());
                 break;
             case 'uninstall':
-                spawnCommandLine('/usr/bin/cinnamon-remove-application \''
-                                                    + this.buttonState.app.get_app_info().get_filename() + '\'');
+                spawnCommandLine('/usr/bin/cinnamon-remove-application \'' +
+                                                    this.buttonState.app.get_app_info().get_filename() + '\'');
                 this.state.trigger('closeMenu');
                 break;
             case 'run_with_nvidia_gpu':
@@ -388,9 +388,9 @@ class AppListGridButton extends PopupBaseMenuItem {
 
         // DND
         this.actor._delegate = {
-            handleDragOver: (source, /* actor, x, y, time */) => {
-                if (!source.appIndex || source.appIndex === this.buttonState.appIndex
-                                                || this.state.currentCategory !== 'favorites') {
+            handleDragOver: (source /*, actor, x, y, time */) => {
+                if (!source.appIndex || source.appIndex === this.buttonState.appIndex ||
+                                                this.state.currentCategory !== 'favorites') {
                     return DragMotionResult.NO_DROP;
                 }
                 this.state.set({dragIndex: this.buttonState.appIndex});
@@ -399,9 +399,9 @@ class AppListGridButton extends PopupBaseMenuItem {
                 this.actor.set_opacity(50);
                 return DragMotionResult.MOVE_DROP;
             },
-            acceptDrop: (source, /* actor, x, y, time */) => {
-                if (!source.appIndex || source.appIndex === this.buttonState.appIndex
-                                                || this.state.currentCategory !== 'favorites') {
+            acceptDrop: (source /*, actor, x, y, time */) => {
+                if (!source.appIndex || source.appIndex === this.buttonState.appIndex ||
+                                                this.state.currentCategory !== 'favorites') {
                     this.state.set({dragIndex: -1});
                     return DragMotionResult.NO_DROP;
                 }
@@ -495,9 +495,8 @@ class AppListGridButton extends PopupBaseMenuItem {
         });
 
         this.dot = new Widget({
-            style: 'width: 4px; height: 4px; background-color: '
-                                    + this.state.theme.foregroundColor
-                                    + '; margin-bottom: 2px; border-radius: 128px;',
+            style: 'width: 4px; height: 4px; background-color: ' + this.state.theme.foregroundColor +
+                                                                        '; margin-bottom: 2px; border-radius: 128px;',
             layout_manager: new BinLayout(),
             x_expand: true,
             y_expand: false,
@@ -612,8 +611,8 @@ class AppListGridButton extends PopupBaseMenuItem {
     }
 
     handleParentChange() {
-        if (this.state.settings.descriptionPlacement === PlacementUNDER || this.buttonState.app.shouldHighlight
-                                                                                  || this.state.searchActive) {
+        if (this.state.settings.descriptionPlacement === PlacementUNDER || this.buttonState.app.shouldHighlight ||
+                                                                                                this.state.searchActive) {
             this.formatLabel({});
         }
         if (!this.buttonState.app.description && this.buttonState.appType === ApplicationType._applications) {
@@ -693,8 +692,8 @@ class AppListGridButton extends PopupBaseMenuItem {
         }
         this.tooltipMarkup = tooltipMarkup;
         let clutterText = this.label.get_clutter_text();
-        if (clutterText && (this.state.settings.descriptionPlacement === PlacementUNDER
-                        || this.state.searchActive || this.buttonState.app.shouldHighlight) || opts.removeFormatting) {
+        if (clutterText && (this.state.settings.descriptionPlacement === PlacementUNDER ||
+                                this.state.searchActive || this.buttonState.app.shouldHighlight) || opts.removeFormatting) {
             clutterText.set_markup(markup);
             clutterText.ellipsize = EllipsizeMode.END;
         }
@@ -982,22 +981,21 @@ class GroupButton extends PopupBaseMenuItem {
         this.callback = callback;
 
         let monitorHeight = Main.layoutManager.primaryMonitor.height;
-        let realSize = (0.7 * monitorHeight) / 4;
-        let adjustedIconSize = 0.6 * realSize / global.ui_scale;
-        if (adjustedIconSize > iconSize) {
-            adjustedIconSize = iconSize;
-        }
-        this.actor.style = 'padding-top: ' + (adjustedIconSize / 3)
-                                                + 'px;padding-bottom: ' + (adjustedIconSize / 3) + 'px;';
+        let maximumIconSize = 0.1 * monitorHeight / global.ui_scale;
+        let adjustedIconSize = Math.min(maximumIconSize,iconSize);
+
+        this.actor.style = 'padding-top: ' + (adjustedIconSize / 3) +
+                                                'px;padding-bottom: ' + (adjustedIconSize / 3) + 'px;';
         this.actor.set_style_class_name('menu-favorites-button');
         this.entered = null;
 
         if (iconName && iconSize) {
             let iconObj = {
                 icon_size: adjustedIconSize,
-                icon_type: adjustedIconSize <= 25 ? IconType.SYMBOLIC : IconType.FULLCOLOR
+                icon_type: IconType.FULLCOLOR
+                //icon_type: adjustedIconSize <= 25 ? IconType.SYMBOLIC : IconType.FULLCOLOR
             };
-            if (iconName === 'user') {
+            if (iconName === 'user-info') {
                 this.defaultAvatar = new Gio.ThemedIcon({
                     name: 'avatar-default'
                 });
@@ -1048,9 +1046,7 @@ class GroupButton extends PopupBaseMenuItem {
         if (this.user || this.icon.icon_name.indexOf('view') === -1) {
             this.state.trigger('closeMenu');
         }
-        if (this.icon.icon_name && this.icon.icon_name.indexOf('view') > -1) {
-            this.toggleViewMode();
-        } else if (this.callback) {
+        if (this.callback) {
             this.callback();
         }
         return true;
@@ -1076,8 +1072,7 @@ class GroupButton extends PopupBaseMenuItem {
                 [x, y],
                 0,
                 0,
-                `<span>${this.name}${this.description ? '\n<span size="small">'
-                                                                    + this.description + '</span>' : ''}</span>`
+                `<span>${this.name}${this.description ? '\n<span size="small">' + this.description + '</span>' : ''}</span>`
             );
         } else {
             this.state.trigger('setSelectedTitleText', this.name);
@@ -1110,25 +1105,6 @@ class GroupButton extends PopupBaseMenuItem {
         });
         this.addActor(this.icon);
         this.icon.realize();
-    }
-
-    toggleViewMode() {
-        if (this.state.isListView) {
-            this.state.set({isListView: false});
-            this.setIcon('view-list-symbolic');
-            this.name = _('List View');
-            this.description = _('Switch to list view');
-            this.state.trigger('setSettingsValue', 'startup-view-mode', 1);
-        } else {
-            this.state.set({isListView: true});
-            this.setIcon('view-grid-symbolic');
-            this.name = _('Grid View');
-            this.description = _('Switch to grid view');
-            this.state.trigger('setSettingsValue', 'startup-view-mode', 0);
-        }
-        this.state.trigger('switchApplicationsView', true);
-        this.handleLeave();
-        setTimeout(() => this.handleEnter(), 300);
     }
 
     destroy() {
