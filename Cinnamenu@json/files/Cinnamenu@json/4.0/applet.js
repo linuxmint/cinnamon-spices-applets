@@ -55,10 +55,7 @@ class CinnamenuApplet extends TextIconApplet {
         this.appFavorites = getAppFavorites();
         this.state = createStore({
                     cinnamon36: typeof this._newPanelId !== 'undefined',
-                    orientation,
-                    recentEnabled: this.privacy_settings.get_boolean(REMEMBER_RECENT_KEY),
                     settings: {},
-                    favorites: this.appFavorites.getFavorites(),
                     knownProviders: [],
                     enabledProviders: global.settings.get_strv('enabled-search-providers'),
                     theme: null,
@@ -72,13 +69,15 @@ class CinnamenuApplet extends TextIconApplet {
                     searchActive: false,
                     itemEntered: false,
                     contextMenuIsOpen: null,
-                    menuHeight: 0,
                     expressionActive: false,
                     searchWebErrorsShown: false,
                     displayed: false,
                     isNewInstance: true,
                     dragIndex: -1,
                     isBumblebeeInstalled: GLib.file_test('/usr/bin/optirun', GLib.FileTest.EXISTS) });
+        this.recentEnabled = this.privacy_settings.get_boolean(REMEMBER_RECENT_KEY);
+        this.favorites = this.appFavorites.getFavorites();
+
         this.state.connect({
             currentCategory: ({currentCategory}) => {
                     this.setActiveCategoryStyle();
@@ -210,7 +209,7 @@ class CinnamenuApplet extends TextIconApplet {
         this.signals.connect(this.appSystem, 'installed-changed', (...args) => this.refresh(...args));
         this.signals.connect(this.appFavorites, 'changed', (...args) => this.onFavoritesChanged(...args));
         this.signals.connect(this.menu, 'open-state-changed', (...args) => this.onOpenStateToggled(...args));
-        this.signals.connect(global, 'scale-changed', () => this.state.set({menuHeight: 0}));
+        //this.signals.connect(global, 'scale-changed', () => this.state.set({menuHeight: 0}));
 
         this.categoryButtons = [];
         this.powerGroupButtons = [];
@@ -245,6 +244,7 @@ class CinnamenuApplet extends TextIconApplet {
 
     getGridWidth() {
         if (!this.state) return 0;
+        //size grid so that column widths are slightly wider when there are fewer columns
         return (this.state.settings.appsGridColumnCount * 130 + 80) * global.ui_scale;
     }
 
@@ -361,8 +361,8 @@ class CinnamenuApplet extends TextIconApplet {
             if (this.state.settings.menuIconCustom) {
                 if (this.state.settings.menuIcon === '') {
                     this.set_applet_icon_name('');
-                } else if (GLib.path_is_absolute(this.state.settings.menuIcon)
-                                    && GLib.file_test(this.state.settings.menuIcon, GLib.FileTest.EXISTS)) {
+                } else if (GLib.path_is_absolute(this.state.settings.menuIcon) &&
+                                    GLib.file_test(this.state.settings.menuIcon, GLib.FileTest.EXISTS)) {
                     if (this.state.settings.menuIcon.includes('-symbolic')) {
                         this.set_applet_icon_symbolic_path(this.state.settings.menuIcon);
                     } else {
@@ -376,12 +376,8 @@ class CinnamenuApplet extends TextIconApplet {
                     }
                 }
             } else {
-                let iconName = global.settings.get_string('app-menu-icon-name');
-                if (iconName.includes('-symbolic')) {
-                    this.set_applet_icon_symbolic_name(iconName);
-                } else {
-                    this.set_applet_icon_name(iconName);
-                }
+                this.set_applet_icon_path(__meta.path + '/icon.png');
+                /*let iconName = global.settings.get_string('app-menu-icon-name');*/
             }
         }, () => {
             global.logWarning('Could not load icon file ' + this.state.settings.menuIcon + ' for menu button');
@@ -424,7 +420,7 @@ class CinnamenuApplet extends TextIconApplet {
     }
 
     onFavoritesChanged() {
-        this.state.set({favorites: this.appFavorites.getFavorites()});
+        this.favorites = this.appFavorites.getFavorites();
         // Check if the menu has been rendered at least once
         if (this.applicationsGridBox && this.applicationsListBox) {
             this.switchApplicationsView(true);
@@ -495,11 +491,10 @@ class CinnamenuApplet extends TextIconApplet {
                 height = Math.round(Math.abs(monitorHeight * 0.55));
             }
         }
-
+        //this.mainBox.height = height;
         this.groupCategoriesWorkspacesScrollBox.height = height;
         this.applicationsScrollBox.height = height;
         this.actor.style += `max-height: ${height}px`;
-        this.state.set({menuHeight: height});
         this.applyConstraints();
     }
 
@@ -682,8 +677,8 @@ class CinnamenuApplet extends TextIconApplet {
         let appletMenuThemeNode = this.menu.actor.get_theme_node();
         this.state.set({
                 theme: { // TODO: Find a proper class for button app state dots
-                      foregroundColor: appletMenuThemeNode.get_foreground_color().to_string().substring(0, 7),
-                  } });
+                      foregroundColor: appletMenuThemeNode.get_foreground_color().to_string().substring(0, 7)
+                       } });
     }
 
     onOpenStateToggled(menu, open) {
@@ -717,7 +712,7 @@ class CinnamenuApplet extends TextIconApplet {
     }
 
     onEnableRecentChange() {
-        this.state.set({recentEnabled: this.privacy_settings.get_boolean(REMEMBER_RECENT_KEY)});
+        this.recentEnabled = this.privacy_settings.get_boolean(REMEMBER_RECENT_KEY);
         this.refresh(true);
     }
 
@@ -725,14 +720,14 @@ class CinnamenuApplet extends TextIconApplet {
         this.refresh(true);
     }
 
-    onEnableBookmarksChange(enableBookmarks, fromInit = false) {
+    onEnableBookmarksChange(enableBookmarks, fromInit = false) { //web bookmarks
         if (enableBookmarks) {
             this.bookmarksManager = new BookmarksManager(this.appSystem);
         } else if (this.bookmarksManager) {
             this.bookmarksManager = null;
         }
         if (!fromInit) {
-            this.refresh(True);//??
+            this.refresh(true);
         }
     }
 
@@ -746,7 +741,6 @@ class CinnamenuApplet extends TextIconApplet {
         this.clearAll();
         this.destroyDisplayed();
         this.state.set({  displayed: false,
-                          menuHeight: 0,
                           startupCategoryOptionsEmpty });
         this.mxOffset = null;
         this.categoryButtons = [];
@@ -862,7 +856,6 @@ class CinnamenuApplet extends TextIconApplet {
     loadAppCategories(dir, rootDir, dirId) {
         let iter = dir.iter();
         let nextType;
-        let shouldResetMenuHeight = false;
         while ((nextType = iter.next()) !== CMenu.TreeItemType.INVALID) {
             if (nextType === CMenu.TreeItemType.ENTRY) {
                 let entry = iter.get_entry();
@@ -883,7 +876,6 @@ class CinnamenuApplet extends TextIconApplet {
                     if (!appIsKnown) {
                         if (!this.state.isNewInstance) {
                             app.shouldHighlight = true;
-                            shouldResetMenuHeight = true;
                         } else {
                             this.knownApps.push(id);
                         }
@@ -897,7 +889,6 @@ class CinnamenuApplet extends TextIconApplet {
                 }
             }
         }
-        if (shouldResetMenuHeight) this.state.set({menuHeight: 0});
     }
 
     resetCategoryOrder() {
@@ -971,9 +962,9 @@ class CinnamenuApplet extends TextIconApplet {
         }
         let params = [
             [this.state.settings.showPlaces, 'places', _('Places'), 'folder'],
-            [this.state.recentEnabled, 'recent', _('Recent Files'), 'folder-recent'],
-            [this.state.settings.enableBookmarks, 'bookmarks', _('Bookmarks'), 'emblem-favorite'],
-            [true, 'favorites', _('Favorite Apps'), 'address-book-new'] ];
+            [this.recentEnabled, 'recent', _('Recent Files'), 'folder-recent'],
+            [this.state.settings.enableBookmarks, 'bookmarks', _('Bookmarks'), 'user-bookmarks'],
+            [true, 'favorites', _('Favorite Apps'), 'emblem-favorite'] ];
         for (let i = 0; i < params.length; i++) {
             if (!params[i][0]) {
                 continue;
@@ -1121,8 +1112,8 @@ class CinnamenuApplet extends TextIconApplet {
     isNotInScrollView(button) {
         let adjustment = this.applicationsScrollBox.get_vscroll_bar().get_adjustment();
         let currentScrollValue = adjustment.get_value();
-        let boxHeight = this.applicationsScrollBox.get_allocation_box().y2
-                                              - this.applicationsScrollBox.get_allocation_box().y1;
+        let boxHeight = this.applicationsScrollBox.get_allocation_box().y2 -
+                                                        this.applicationsScrollBox.get_allocation_box().y1;
         let allocationBox = button.actor.get_allocation_box();
         return boxHeight + currentScrollValue < allocationBox.y2 + 100;
     }
@@ -1187,8 +1178,8 @@ class CinnamenuApplet extends TextIconApplet {
         this.activeContainer = this.state.isListView ? this.applicationsListBox : this.applicationsGridBox;
         let buttons = this.getActiveButtons();
         let refItemIndex = findIndex(buttons, (button) => {
-                    return (button.actor.has_style_class_name('menu-application-button-selected')
-                                                        || button.entered != null || button.menu.isOpen); });
+                    return (button.actor.has_style_class_name('menu-application-button-selected') ||
+                                                            button.entered != null || button.menu.isOpen); });
         if (refItemIndex > -1 && buttons[refItemIndex]) {
             if (buttons[refItemIndex].menu.isOpen) {
                 buttons[refItemIndex].closeMenu();
@@ -1376,7 +1367,7 @@ class CinnamenuApplet extends TextIconApplet {
     }
 
     listRecent(pattern) {
-        if (!this.state.recentEnabled) {
+        if (!this.recentEnabled) {
             return [];
         }
         let {_infosByTimestamp} = this.recentManager;
@@ -1433,7 +1424,7 @@ class CinnamenuApplet extends TextIconApplet {
         let res = [];
 
         if (categoryMenuId === 'favorites') {
-            res = this.state.favorites;
+            res = this.favorites;
         } else {
             if (categoryMenuId && categoryMenuId !== 'all') {
                 res = this.applicationsByCategory[categoryMenuId];
@@ -1535,8 +1526,8 @@ class CinnamenuApplet extends TextIconApplet {
 
         let buttons = this.getActiveButtons();
         let refItemIndex = findIndex(buttons, (button) => {
-            return (button.actor.has_style_class_name('menu-application-button-selected')
-                                              || button.entered != null || button.menu.isOpen);  });
+            return (button.actor.has_style_class_name('menu-application-button-selected') ||
+                                                        button.entered != null || button.menu.isOpen);  });
 
         let refCategoryIndex = findIndex(this.categoryButtons, (button) => {
                                                             return button.entered != null; });
@@ -2054,155 +2045,12 @@ class CinnamenuApplet extends TextIconApplet {
     }
 
     display() {
-        this.state.set({ isListView: this.state.settings.startupViewMode === ApplicationsViewModeLIST,
-                         displayed: true });
-
-        let section = new PopupMenuSection();
-
-        this.mainBox = new St.BoxLayout({ //style_class: 'menu-applications-outer-box',
-                                          vertical: true,
-                                          show_on_set_parent: false }); // menu
-
-        // Middle pane holds categories/places/power, applications, workspaces (packed horizontally)
-        this.middlePane = new St.BoxLayout({ style_class: '' });
-
-        // Bottom pane holds power group and selected app description (packed horizontally)
-        this.bottomPane = new St.BoxLayout({ style: 'padding-top: 12px;' });
-
-        // groupCategoriesWorkspacesWrapper bin wraps categories and workspaces
-        this.groupCategoriesWorkspacesWrapper = new St.BoxLayout({
-                              style_class: 'cinnamenu-categories-workspaces-wrapper',
-                              //style: 'max-width: 185px;',
-                              vertical: true });
-
-        // groupCategoriesWorkspacesScrollBox allows categories or workspaces to scroll vertically
-        this.groupCategoriesWorkspacesScrollBox = new St.ScrollView({
-                                          x_fill: true,
-                                          y_fill: false,
-                                          y_align: St.Align.START,
-                                          style_class: 'vfade menu-applications-scrollbox' });
-
-        let vscrollCategories = this.groupCategoriesWorkspacesScrollBox.get_vscroll_bar();
-        this.displaySignals.connect(vscrollCategories, 'scroll-start', () => { this.menu.passEvents = true; });
-        this.displaySignals.connect(vscrollCategories, 'scroll-stop', () => { this.menu.passEvents = false; });
-        this.groupCategoriesWorkspacesScrollBox.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.NEVER);
-        this.groupCategoriesWorkspacesScrollBox.set_auto_scrolling(this.state.settings.enableAutoScroll);
-        this.groupCategoriesWorkspacesScrollBox.set_mouse_scrolling(true);
-
-        // selectedAppBox
-        this.selectedAppBox = new St.BoxLayout({
-                                    style_class: 'menu-selected-app-box',
-                                    style: 'text-align: left;width:100px;',
-                                    vertical: true });
-        this.selectedAppTitle = new St.Label({ style_class: 'menu-selected-app-title',
-                                               text: '' });
-        this.selectedAppBox.add_actor(this.selectedAppTitle);
-        this.selectedAppDescription = new St.Label({
-                                  style_class: 'menu-selected-app-description',
-                                  text: '' });
-        this.selectedAppBox.add_actor(this.selectedAppDescription);
-
-        this.searchInactiveIcon = new St.Icon({ style_class: 'menu-search-entry-icon',
-                                                icon_name: 'edit-find' });
-        this.searchActiveIcon = new St.Icon({ style_class: 'menu-search-entry-icon',
-                                              icon_name: 'edit-clear' });
-        this.searchBox = new St.BoxLayout({ style_class: 'menu-search-box',
-                                            style: 'padding-right: 7px;' });
-        this.searchEntry = new St.Entry({ name: 'menu-search-entry',
-                                          hint_text: hintText,
-                                          track_hover: true,
-                                          can_focus: true, });
-
-        this.searchEntry.set_primary_icon(this.searchInactiveIcon);
-        this.searchBox.add(this.searchEntry, {  expand: true,
-                                                x_align: St.Align.START,
-                                                y_align: St.Align.START });
-
-        this.searchEntryText = this.searchEntry.clutter_text;
-        this.displaySignals.connect(this.searchEntryText, 'text-changed', (...args) => this.onSearchTextChanged(...args));
-        this.displaySignals.connect(this.searchEntryText, 'key-press-event', (...args) => this.onMenuKeyPress(...args));
-        this.previousSearchPattern = '';
-
-        // Load Places
-        if (PlaceDisplay && this.state.settings.showPlaces) {
-            this.placesManager = new PlaceDisplay.PlacesManager(false);
-        } else if (this.placesManager) {
-            this.placesManager.destroy();
-            this.placesManager = null;
-        }
-
-        // ApplicationsBox (ListView / GridView)
-        this.applicationsScrollBox = new St.ScrollView({  x_fill: true,
-                                                          y_fill: false,
-                                                          y_align: St.Align.START,
-                                                          style_class: 'vfade menu-applications-scrollbox' });
-        let vscrollApplications = this.applicationsScrollBox.get_vscroll_bar();
-        this.displaySignals.connect(vscrollApplications, 'scroll-start', () => {
-                                                        this.menu.passEvents = true; });
-        this.displaySignals.connect(vscrollApplications, 'scroll-stop', () => {
-                                                    this.menu.passEvents = false; });
-        this.applicationsListBox = new St.BoxLayout({ style_class: 'cinnamenu-applications-list-box',
-                                                      style: 'min-width: 300px;',
-                                                      vertical: true });
-        this.applicationsGridBox = new Clutter.Actor({ layout_manager: new Clutter.GridLayout(),
-                                                       reactive: true,
-                                                       width: this.getGridWidth() });
-        this.applicationsBoxWrapper = new St.BoxLayout({  style_class: 'menu-applications-inner-box',
-                                                          style: 'min-width: 275px',
-                                                          vertical: true,
-                                                          reactive: true });
-        this.answerText = new St.Label({  style_class: 'menu-selected-app-title',
-                                          style: 'padding-top: 14px; min-width: 240px; text-align; center;',
-                                          text: '',
-                                          show_on_set_parent: false });
-        this.applicationsBoxWrapper.add(this.answerText, {  x_fill: false,
-                                                            y_fill: false,
-                                                            x_align: St.Align.MIDDLE,
-                                                            y_align: St.Align.START });
-        this.applicationsBoxWrapper.add(this.applicationsGridBox, { x_fill: false,
-                                                                    y_fill: false,
-                                                                    x_align: St.Align.START,
-                                                                    y_align: St.Align.START });
-        this.applicationsBoxWrapper.add(this.applicationsListBox, { x_fill: true,
-                                                                    y_fill: false,
-                                                                    x_align: St.Align.START,
-                                                                    y_align: St.Align.START });
-        this.applicationsScrollBox.add_actor(this.applicationsBoxWrapper);
-        this.applicationsScrollBox.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC);
-        this.applicationsScrollBox.set_auto_scrolling(this.state.settings.enableAutoScroll);
-        this.applicationsScrollBox.set_mouse_scrolling(true);
-
-        this.categoriesOverlayBox = new St.Widget();
-
-        // CategoriesBox
-        this.categoriesBox = new St.BoxLayout({ style_class: 'menu-categories-box',
-                                                vertical: true });
-        this.categoriesOverlayBox.add_actor(this.categoriesBox);
-
-        // Build categories
-        this.buildCategories();
-
+        this.state.set({ isListView: this.state.settings.startupViewMode === ApplicationsViewModeLIST, displayed: true });
+        //==================bottomPane================
         // PowerGroupBox
-        this.powerGroupBox = new St.BoxLayout({ style_class: '',
-                                                style: 'padding-left: 13px;' });
-        this.powerGroupButtons.push(new GroupButton(  this.state,
-                                                      'user',
-                                                      16,
-                                                      '',
-                                                      _('Account details'),
-                                                      () => spawnCommandLine('cinnamon-settings user') ));
-        this.powerGroupButtons.push(new GroupButton(
-                          this.state,
-                          this.state.isListView ? 'view-grid-symbolic' : 'view-list-symbolic',
-                          16,
-                          this.state.isListView ? _('Grid View') : _('List View'),
-                          this.state.isListView ? _('Switch to grid view') : _('Switch to list view') ));
-        this.powerGroupButtons.push(new GroupButton(
-                      this.state,
-                      'system-lock-screen',
-                      16,
-                      _('Lock Screen'),
-                      _('Lock the screen'),
+        this.powerGroupButtons.push(new GroupButton( this.state, 'user-info', 24, '', _('Account details'),
+                                                            () => spawnCommandLine('cinnamon-settings user') ));
+        this.powerGroupButtons.push(new GroupButton( this.state, 'system-lock-screen', 24, _('Lock Screen'), _('Lock the screen'),
                       () => {
                                 let screensaver_settings = new Gio.Settings({
                                                   schema_id: 'org.cinnamon.desktop.screensaver' });
@@ -2216,48 +2064,45 @@ class CinnamenuApplet extends TextIconApplet {
                                 } else {
                                     this.screenSaverProxy.LockRemote('');
                                 } } ));
-        this.powerGroupButtons.push(new GroupButton(
-                                              this.state,
-                                              'application-exit',
-                                              16,
-                                              _('Logout'),
-                                              _('Leave the session'),
-                                              () => this.session.LogoutRemote(0) ));
-        this.powerGroupButtons.push(new GroupButton(
-                                              this.state,
-                                              'system-shutdown',
-                                              16,
-                                              _('Quit'),
-                                              _('Shutdown the computer'),
-                                              () => this.session.ShutdownRemote() ));
-        let powerGroupBoxChildProperties = {  x_fill: false,
-                                              y_fill: false,
-                                              x_align: St.Align.MIDDLE,
-                                              y_align: St.Align.MIDDLE };
+        this.powerGroupButtons.push(new GroupButton( this.state, 'system-log-out', 24, _('Logout'),
+                                              _('Leave the session'), () => this.session.LogoutRemote(0) ));
+        this.powerGroupButtons.push(new GroupButton( this.state, 'system-shutdown', 24, _('Quit'),
+                                              _('Shutdown the computer'), () => this.session.ShutdownRemote() ));
+        this.powerGroupBox = new St.BoxLayout({ style_class: '', style: 'padding-left: 13px;' });
         for (let i = 0; i < this.powerGroupButtons.length; i++) {
-            this.powerGroupBox.add(this.powerGroupButtons[i].actor, powerGroupBoxChildProperties);
+            this.powerGroupBox.add(this.powerGroupButtons[i].actor, {   x_fill: false,
+                                                                        y_fill: false,
+                                                                        x_align: St.Align.MIDDLE,
+                                                                        y_align: St.Align.MIDDLE });
         }
 
-        // Place boxes in proper containers. The order added determines position
-        this.groupCategoriesWorkspacesWrapper.add(this.categoriesOverlayBox, {
-                                              x_fill: false,
-                                              y_fill: true,
-                                              x_align: St.Align.START,
-                                              y_align: St.Align.END,
-                                              y_expand: true,
-                                              expand: false });
-        this.groupCategoriesWorkspacesScrollBox.add_actor(this.groupCategoriesWorkspacesWrapper);
+        // selectedAppBox
+        this.selectedAppTitle = new St.Label({ style_class: 'menu-selected-app-title', text: '' });
+        this.selectedAppDescription = new St.Label({ style_class: 'menu-selected-app-description', text: '' });
+        this.selectedAppBox = new St.BoxLayout({ style_class: 'menu-selected-app-box',
+                                                 style: 'text-align: left;width:100px;',
+                                                 vertical: true });
+        this.selectedAppBox.add_actor(this.selectedAppTitle);
+        this.selectedAppBox.add_actor(this.selectedAppDescription);
 
-        this.middlePane.add(this.groupCategoriesWorkspacesScrollBox, {
-                                      x_fill: false,
-                                      y_fill: false,
-                                      x_align: St.Align.START,
-                                      y_align: St.Align.START });
-        this.middlePane.add(this.applicationsScrollBox, { x_fill: false,
-                                                          y_fill: false,
-                                                          x_align: St.Align.START,
-                                                          y_align: St.Align.START,
-                                                          expand: true });
+        //searchBox
+        this.searchInactiveIcon = new St.Icon({ style_class: 'menu-search-entry-icon', icon_name: 'edit-find' });
+        this.searchActiveIcon = new St.Icon({ style_class: 'menu-search-entry-icon', icon_name: 'edit-clear' });
+        this.searchEntry = new St.Entry({ name: 'menu-search-entry',
+                                          hint_text: hintText,
+                                          track_hover: true,
+                                          can_focus: true, });
+        this.searchEntryText = this.searchEntry.clutter_text;
+        this.displaySignals.connect(this.searchEntryText, 'text-changed', (...args) => this.onSearchTextChanged(...args));
+        this.displaySignals.connect(this.searchEntryText, 'key-press-event', (...args) => this.onMenuKeyPress(...args));
+        this.previousSearchPattern = '';
+        this.searchEntry.set_primary_icon(this.searchInactiveIcon);
+        this.searchBox = new St.BoxLayout({ style_class: 'menu-search-box', style: 'padding-right: 7px;' });
+        this.searchBox.add(this.searchEntry, {  expand: true,
+                                                x_align: St.Align.START,
+                                                y_align: St.Align.START });
+        // Bottom pane holds power group, selected app description and search box (packed horizontally)
+        this.bottomPane = new St.BoxLayout({ style: 'padding-top: 12px;' });
 
         this.bottomPane.add(this.powerGroupBox, { expand: false,
                                                   x_fill: false,
@@ -2287,13 +2132,114 @@ class CinnamenuApplet extends TextIconApplet {
                                               y_align: St.Align.MIDDLE,
                                               align_end: true });
 
+
+        //=================middlePane===============
+        // Load Places
+        if (PlaceDisplay && this.state.settings.showPlaces) {
+            this.placesManager = new PlaceDisplay.PlacesManager(false);
+        } else if (this.placesManager) {
+            this.placesManager.destroy();
+            this.placesManager = null;
+        }
+        //-------------applicationsScrollBox---------------
+        // ApplicationsBox (ListView / GridView)
+        this.applicationsListBox = new St.BoxLayout({ style_class: 'cinnamenu-applications-list-box',
+                                                      style: 'min-width: 300px;',
+                                                      vertical: true });
+        this.applicationsGridBox = new Clutter.Actor({ layout_manager: new Clutter.GridLayout(),
+                                                       reactive: true,
+                                                       width: this.getGridWidth() });
+        this.answerText = new St.Label({ style_class: 'menu-selected-app-title',
+                                         style: 'padding-top: 14px; min-width: 240px; text-align; center;',
+                                         text: '',
+                                         show_on_set_parent: false });
+        this.applicationsBoxWrapper = new St.BoxLayout({  style_class: 'menu-applications-inner-box',
+                                                          style: 'min-width: 275px',
+                                                          vertical: true,
+                                                          reactive: true });
+
+        this.applicationsBoxWrapper.add(this.answerText, {  x_fill: false,
+                                                            y_fill: false,
+                                                            x_align: St.Align.MIDDLE,
+                                                            y_align: St.Align.START });
+        this.applicationsBoxWrapper.add(this.applicationsGridBox, { x_fill: false,
+                                                                    y_fill: false,
+                                                                    x_align: St.Align.START,
+                                                                    y_align: St.Align.START });
+        this.applicationsBoxWrapper.add(this.applicationsListBox, { x_fill: true,
+                                                                    y_fill: false,
+                                                                    x_align: St.Align.START,
+                                                                    y_align: St.Align.START });
+        this.applicationsScrollBox = new St.ScrollView({  x_fill: true,
+                                                          y_fill: false,
+                                                          y_align: St.Align.START,
+                                                          style_class: 'vfade menu-applications-scrollbox' });
+        let vscrollApplications = this.applicationsScrollBox.get_vscroll_bar();
+        this.displaySignals.connect(vscrollApplications, 'scroll-start', () => { this.menu.passEvents = true; });
+        this.displaySignals.connect(vscrollApplications, 'scroll-stop', () => { this.menu.passEvents = false; });
+        this.applicationsScrollBox.add_actor(this.applicationsBoxWrapper);
+        this.applicationsScrollBox.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC);
+        this.applicationsScrollBox.set_auto_scrolling(this.state.settings.enableAutoScroll);
+        this.applicationsScrollBox.set_mouse_scrolling(true);
+        //------------groupCategoriesWorkspacesScrollBox------------
+        // CategoriesBox
+        this.categoriesBox = new St.BoxLayout({ style_class: 'menu-categories-box', vertical: true });
+        this.categoriesOverlayBox = new St.Widget();
+        this.categoriesOverlayBox.add_actor(this.categoriesBox);
+        // Build categories
+        this.buildCategories();
+
+        // Place boxes in proper containers. The order added determines position
+        // groupCategoriesWorkspacesWrapper bin wraps categories and workspaces
+        this.groupCategoriesWorkspacesWrapper = new St.BoxLayout({  style_class: 'cinnamenu-categories-workspaces-wrapper',
+                                                                    //style: 'max-width: 185px;',
+                                                                    vertical: true });
+        this.groupCategoriesWorkspacesWrapper.add(this.categoriesOverlayBox, {
+                                              x_fill: false,
+                                              y_fill: true,
+                                              x_align: St.Align.START,
+                                              y_align: St.Align.END,
+                                              y_expand: true,
+                                              expand: false });
+        // groupCategoriesWorkspacesScrollBox allows categories or workspaces to scroll vertically
+        this.groupCategoriesWorkspacesScrollBox = new St.ScrollView({
+                                            x_fill: true,
+                                            y_fill: false,
+                                            y_align: St.Align.START,
+                                            style_class: 'vfade menu-applications-scrollbox' });
+
+        let vscrollCategories = this.groupCategoriesWorkspacesScrollBox.get_vscroll_bar();
+        this.displaySignals.connect(vscrollCategories, 'scroll-start', () => { this.menu.passEvents = true; });
+        this.displaySignals.connect(vscrollCategories, 'scroll-stop', () => { this.menu.passEvents = false; });
+        this.groupCategoriesWorkspacesScrollBox.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.NEVER);
+        this.groupCategoriesWorkspacesScrollBox.set_auto_scrolling(this.state.settings.enableAutoScroll);
+        this.groupCategoriesWorkspacesScrollBox.set_mouse_scrolling(true);
+        this.groupCategoriesWorkspacesScrollBox.add_actor(this.groupCategoriesWorkspacesWrapper);
+
+        // Middle pane holds categories/places/power, applications, workspaces (packed horizontally)
+        this.middlePane = new St.BoxLayout({ style_class: '' });
+        this.middlePane.add(this.groupCategoriesWorkspacesScrollBox, {
+                                      x_fill: false,
+                                      y_fill: false,
+                                      x_align: St.Align.START,
+                                      y_align: St.Align.START });
+        this.middlePane.add(this.applicationsScrollBox, { x_fill: false,
+                                                          y_fill: false,
+                                                          x_align: St.Align.START,
+                                                          y_align: St.Align.START,
+                                                          expand: true });
+
+        //=============mainBox================
+        this.mainBox = new St.BoxLayout({ style_class: 'menu-applications-outer-box',
+                                        vertical: true,
+                                        show_on_set_parent: false }); // menu
+        this.mainBox.add_style_class_name('menu-applications-box'); //this is to support old themes
         // mainbox packs vertically
         this.mainBox.add_actor(this.middlePane);
         this.mainBox.add(this.bottomPane);
-
         // add all to section
+        let section = new PopupMenuSection();
         section.actor.add_actor(this.mainBox);
-
         // add section as menu item
         this.menu.addMenuItem(section);
 
