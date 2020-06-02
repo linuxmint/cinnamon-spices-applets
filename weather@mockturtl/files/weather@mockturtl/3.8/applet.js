@@ -23,6 +23,7 @@ const { PopupMenuManager, PopupSeparatorMenuItem } = imports.ui.popupMenu;
 const { AppletSettings, BindingDirection } = imports.ui.settings;
 const { spawnCommandLine, spawn_async } = imports.misc.util;
 const { SystemNotificationSource, Notification } = imports.ui.messageTray;
+const { SignalManager } = imports.misc.signalManager;
 const { messageTray } = imports.ui.main;
 var utils = importModule("utils");
 var GetDayName = utils.GetDayName;
@@ -407,7 +408,7 @@ class WeatherApplet extends TextIconApplet {
         if (!!weatherInfo.extra_field)
             this.weather.extra_field = weatherInfo.extra_field;
         this.forecasts = weatherInfo.forecasts;
-        this.hourlyForecasts = weatherInfo.hourlyForecasts;
+        this.hourlyForecasts = (!weatherInfo.hourlyForecasts) ? [] : weatherInfo.hourlyForecasts;
     }
     wipeData() {
         if (this.weather == null) {
@@ -641,7 +642,8 @@ class UI {
         let [minWidth, naturalWidth] = this._hourlyScrollView.get_preferred_width(-1);
         this._separatorAreaHourly.actor.show();
         this._hourlyScrollView.width = minWidth;
-        this._hourlyButton.child.icon_name = "custom-up-arrow-symbolic";
+        if (!!this._hourlyButton.child)
+            this._hourlyButton.child.icon_name = "custom-up-arrow-symbolic";
         this._hourlyScrollView.show();
         if (this.hourlyNeverOpened) {
             this.hourlyNeverOpened = false;
@@ -662,7 +664,8 @@ class UI {
     }
     HideHourlyWeather() {
         this._separatorAreaHourly.actor.hide();
-        this._hourlyButton.child.icon_name = "custom-down-arrow-symbolic";
+        if (!!this._hourlyButton.child)
+            this._hourlyButton.child.icon_name = "custom-down-arrow-symbolic";
         if (global.settings.get_boolean("desktop-effects-on-menus")) {
             addTween(this._hourlyScrollView, {
                 height: 0,
@@ -681,6 +684,7 @@ class UI {
         this.hourlyToggled = false;
     }
     ToggleHourlyWeather() {
+        global.log("runs");
         if (this.hourlyToggled) {
             this.HideHourlyWeather();
         }
@@ -793,6 +797,8 @@ class UI {
             }
             this._currentWeatherLocation.label = location;
             this._currentWeatherLocation.url = weather.location.url;
+            if (!weather.location.url)
+                this._locationButton.disable();
             let sunriseText = "";
             let sunsetText = "";
             if (weather.sunrise != null && weather.sunset != null && config._showSunrise) {
@@ -913,11 +919,13 @@ class UI {
             icon_name: APPLET_ICON,
             style_class: STYLE_ICON
         });
-        this._currentWeatherLocation = new Button({ reactive: true, label: _('Refresh'), });
-        this._currentWeatherLocation.style_class = STYLE_LOCATION_LINK;
+        this._locationButton = new WeatherButton({ reactive: true, label: _('Refresh'), });
+        this._currentWeatherLocation = this._locationButton.actor;
         this._currentWeatherLocation.connect(SIGNAL_CLICKED, Lang.bind(this, function () {
-            if (this._currentWeatherLocation.url == null)
+            if (this.app.encounteredError)
                 this.app.refreshWeather(true);
+            else if (this._currentWeatherLocation.url == null)
+                return;
             else
                 this.app.OpenUrl(this._currentWeatherLocation);
         }));
@@ -1067,9 +1075,9 @@ class UI {
             x_align: Align.START,
             y_align: Align.MIDDLE,
             y_fill: false,
-            expand: false
+            expand: true
         });
-        this._hourlyButton = new Button({
+        this._hourlyButton = new WeatherButton({
             reactive: true,
             can_focus: true,
             child: new Icon({
@@ -1077,8 +1085,7 @@ class UI {
                 icon_size: 12,
                 icon_name: "custom-down-arrow-symbolic"
             }),
-            style_class: STYLE_LOCATION_LINK
-        });
+        }).actor;
         this._hourlyButton.connect(SIGNAL_CLICKED, Lang.bind(this, this.ToggleHourlyWeather));
         this._bar.add(this._hourlyButton, {
             x_fill: false,
@@ -1087,14 +1094,17 @@ class UI {
             y_fill: false,
             expand: true
         });
-        this._providerCredit = new Button({ label: _(ELLIPSIS), reactive: true, style_class: STYLE_LOCATION_LINK });
+        if (this.app.GetMaxHourlyForecasts() <= 0) {
+            this._hourlyButton.child = null;
+        }
+        this._providerCredit = new WeatherButton({ label: _(ELLIPSIS), reactive: true }).actor;
         this._providerCredit.connect(SIGNAL_CLICKED, Lang.bind(this, this.app.OpenUrl));
         this._bar.add(this._providerCredit, {
             x_fill: false,
             x_align: Align.END,
             y_align: Align.MIDDLE,
             y_fill: false,
-            expand: false
+            expand: true
         });
     }
     rebuildHourlyWeatherUi(config) {
@@ -1292,6 +1302,32 @@ class WeatherLoop {
     }
     GetSecondsUntilNextRefresh() {
         return (this.errorCount > 0) ? (this.errorCount) * this.LOOP_INTERVAL : this.LOOP_INTERVAL;
+    }
+}
+class WeatherButton {
+    constructor(options) {
+        this.signals = new SignalManager();
+        this.disabled = false;
+        this.actor = new Button(options);
+        this.actor.add_style_class_name("popup-menu-item");
+        this.actor.style = 'padding-top: 0px;padding-bottom: 0px; padding-right: 2px; padding-left: 2px; border-radius: 2px;';
+        this.signals.connect(this.actor, 'enter-event', this.handleEnter, this);
+        this.signals.connect(this.actor, 'leave-event', this.handleLeave, this);
+    }
+    handleEnter(actor) {
+        if (!this.disabled)
+            this.actor.add_style_pseudo_class('active');
+    }
+    handleLeave() {
+        this.actor.remove_style_pseudo_class('active');
+    }
+    disable() {
+        this.disabled = true;
+        this.actor.reactive = false;
+    }
+    enable() {
+        this.disabled = false;
+        this.actor.reactive = true;
     }
 }
 const SIGNAL_CHANGED = 'changed::';

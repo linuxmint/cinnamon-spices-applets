@@ -181,7 +181,7 @@
     "type": "spinbutton",
     "default": 5,
     "min": 1,
-    "max": 7,
+    "max": 16,
     "units": "columns",
     "step": 1,
     "description": "Maximum number of columns for forecast"
@@ -190,7 +190,7 @@
     "type": "spinbutton",
     "default": 4,
     "min": 1,
-    "max": 7,
+    "max": 16,
     "units": "rows",
     "step": 1,
     "description": "Maximum number of rows for forecast"

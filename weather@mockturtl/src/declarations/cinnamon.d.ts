@@ -402,14 +402,17 @@ declare namespace imports.gi.St {
         destroy(): void;
         style_class: string;
         connect(id: string, binding: (...args: any) => any): void;
-        add_style_class_name(style_class: string): void; 
+		add_style_class_name(style_class: string): void; 
+		add_style_pseudo_class(style_class: string): void; 
+		remove_style_pseudo_class(pseudo_class: string): void;
         get_style_class_name(): string;
         remove_style_class_name(style_class: string): void;
         get_style(): string;
         get_theme(): imports.gi.St.Theme;
         get_theme_node(): ThemeNode;
         show(): void;
-        hide(): void;
+		hide(): void;
+		style: string;
     }
     export class BoxLayout extends Widget {
         constructor(options ? : any)

@@ -72,6 +72,7 @@ var _e = imports.ui.popupMenu, PopupMenuManager = _e.PopupMenuManager, PopupSepa
 var _f = imports.ui.settings, AppletSettings = _f.AppletSettings, BindingDirection = _f.BindingDirection;
 var _g = imports.misc.util, spawnCommandLine = _g.spawnCommandLine, spawn_async = _g.spawn_async;
 var _h = imports.ui.messageTray, SystemNotificationSource = _h.SystemNotificationSource, Notification = _h.Notification;
+var SignalManager = imports.misc.signalManager.SignalManager;
 var messageTray = imports.ui.main.messageTray;
 var utils = importModule("utils");
 var GetDayName = utils.GetDayName;
@@ -517,7 +518,7 @@ var WeatherApplet = (function (_super) {
         if (!!weatherInfo.extra_field)
             this.weather.extra_field = weatherInfo.extra_field;
         this.forecasts = weatherInfo.forecasts;
-        this.hourlyForecasts = weatherInfo.hourlyForecasts;
+        this.hourlyForecasts = (!weatherInfo.hourlyForecasts) ? [] : weatherInfo.hourlyForecasts;
     };
     WeatherApplet.prototype.wipeData = function () {
         if (this.weather == null) {
@@ -765,7 +766,8 @@ var UI = (function () {
         var _b = this._hourlyScrollView.get_preferred_width(-1), minWidth = _b[0], naturalWidth = _b[1];
         this._separatorAreaHourly.actor.show();
         this._hourlyScrollView.width = minWidth;
-        this._hourlyButton.child.icon_name = "custom-up-arrow-symbolic";
+        if (!!this._hourlyButton.child)
+            this._hourlyButton.child.icon_name = "custom-up-arrow-symbolic";
         this._hourlyScrollView.show();
         if (this.hourlyNeverOpened) {
             this.hourlyNeverOpened = false;
@@ -787,7 +789,8 @@ var UI = (function () {
     UI.prototype.HideHourlyWeather = function () {
         var _this = this;
         this._separatorAreaHourly.actor.hide();
-        this._hourlyButton.child.icon_name = "custom-down-arrow-symbolic";
+        if (!!this._hourlyButton.child)
+            this._hourlyButton.child.icon_name = "custom-down-arrow-symbolic";
         if (global.settings.get_boolean("desktop-effects-on-menus")) {
             addTween(this._hourlyScrollView, {
                 height: 0,
@@ -806,6 +809,7 @@ var UI = (function () {
         this.hourlyToggled = false;
     };
     UI.prototype.ToggleHourlyWeather = function () {
+        global.log("runs");
         if (this.hourlyToggled) {
             this.HideHourlyWeather();
         }
@@ -918,6 +922,8 @@ var UI = (function () {
             }
             this._currentWeatherLocation.label = location;
             this._currentWeatherLocation.url = weather.location.url;
+            if (!weather.location.url)
+                this._locationButton.disable();
             var sunriseText = "";
             var sunsetText = "";
             if (weather.sunrise != null && weather.sunset != null && config._showSunrise) {
@@ -1038,11 +1044,13 @@ var UI = (function () {
             icon_name: APPLET_ICON,
             style_class: STYLE_ICON
         });
-        this._currentWeatherLocation = new Button({ reactive: true, label: _('Refresh'), });
-        this._currentWeatherLocation.style_class = STYLE_LOCATION_LINK;
+        this._locationButton = new WeatherButton({ reactive: true, label: _('Refresh'), });
+        this._currentWeatherLocation = this._locationButton.actor;
         this._currentWeatherLocation.connect(SIGNAL_CLICKED, Lang.bind(this, function () {
-            if (this._currentWeatherLocation.url == null)
+            if (this.app.encounteredError)
                 this.app.refreshWeather(true);
+            else if (this._currentWeatherLocation.url == null)
+                return;
             else
                 this.app.OpenUrl(this._currentWeatherLocation);
         }));
@@ -1193,9 +1201,9 @@ var UI = (function () {
             x_align: Align.START,
             y_align: Align.MIDDLE,
             y_fill: false,
-            expand: false
+            expand: true
         });
-        this._hourlyButton = new Button({
+        this._hourlyButton = new WeatherButton({
             reactive: true,
             can_focus: true,
             child: new Icon({
@@ -1203,8 +1211,7 @@ var UI = (function () {
                 icon_size: 12,
                 icon_name: "custom-down-arrow-symbolic"
             }),
-            style_class: STYLE_LOCATION_LINK
-        });
+        }).actor;
         this._hourlyButton.connect(SIGNAL_CLICKED, Lang.bind(this, this.ToggleHourlyWeather));
         this._bar.add(this._hourlyButton, {
             x_fill: false,
@@ -1213,14 +1220,17 @@ var UI = (function () {
             y_fill: false,
             expand: true
         });
-        this._providerCredit = new Button({ label: _(ELLIPSIS), reactive: true, style_class: STYLE_LOCATION_LINK });
+        if (this.app.GetMaxHourlyForecasts() <= 0) {
+            this._hourlyButton.child = null;
+        }
+        this._providerCredit = new WeatherButton({ label: _(ELLIPSIS), reactive: true }).actor;
         this._providerCredit.connect(SIGNAL_CLICKED, Lang.bind(this, this.app.OpenUrl));
         this._bar.add(this._providerCredit, {
             x_fill: false,
             x_align: Align.END,
             y_align: Align.MIDDLE,
             y_fill: false,
-            expand: false
+            expand: true
         });
     };
     UI.prototype.rebuildHourlyWeatherUi = function (config) {
@@ -1440,6 +1450,33 @@ var WeatherLoop = (function () {
         return (this.errorCount > 0) ? (this.errorCount) * this.LOOP_INTERVAL : this.LOOP_INTERVAL;
     };
     return WeatherLoop;
+}());
+var WeatherButton = (function () {
+    function WeatherButton(options) {
+        this.signals = new SignalManager();
+        this.disabled = false;
+        this.actor = new Button(options);
+        this.actor.add_style_class_name("popup-menu-item");
+        this.actor.style = 'padding-top: 0px;padding-bottom: 0px; padding-right: 2px; padding-left: 2px; border-radius: 2px;';
+        this.signals.connect(this.actor, 'enter-event', this.handleEnter, this);
+        this.signals.connect(this.actor, 'leave-event', this.handleLeave, this);
+    }
+    WeatherButton.prototype.handleEnter = function (actor) {
+        if (!this.disabled)
+            this.actor.add_style_pseudo_class('active');
+    };
+    WeatherButton.prototype.handleLeave = function () {
+        this.actor.remove_style_pseudo_class('active');
+    };
+    WeatherButton.prototype.disable = function () {
+        this.disabled = true;
+        this.actor.reactive = false;
+    };
+    WeatherButton.prototype.enable = function () {
+        this.disabled = false;
+        this.actor.reactive = true;
+    };
+    return WeatherButton;
 }());
 var SIGNAL_CHANGED = 'changed::';
 var SIGNAL_CLICKED = 'clicked';

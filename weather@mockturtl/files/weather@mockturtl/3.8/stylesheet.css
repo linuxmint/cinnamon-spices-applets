@@ -77,7 +77,6 @@
 
 .bottombar {
     padding: 7px 10px 7px 10px;
-    color: #999999;
 }
 
 .hourly-time {
@@ -96,4 +95,9 @@
 
 .hourly-icon {
     padding: 5px 10px 5px 10px;
+}
+
+.weather-button:active
+.weather-button:hover {
+	color: unset !important;
 }
