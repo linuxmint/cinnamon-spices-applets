@@ -41,6 +41,7 @@ class DarkSky implements WeatherProvider {
     public readonly maxForecastSupport = 8;
     public readonly supportsHourly = false;
     public readonly website = "https://darksky.net/poweredby/";
+    public readonly maxHourlyForecastSupport = 168;
 
     private descriptionLinelength = 25;
     private supportedLanguages = [

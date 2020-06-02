@@ -1881,6 +1881,7 @@ interface WeatherProvider {
   HandleHTTPError?:(error: HttpError, uiError: AppletError) => AppletError;
   name: string;
   maxForecastSupport: number;
+  maxHourlyForecastSupport: number;
   supportsHourly: boolean;
   website: string;
 }

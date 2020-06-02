@@ -38,8 +38,8 @@ class Weatherbit implements WeatherProvider {
     public readonly supportsHourly = true;
     public readonly maxForecastSupport = 16;
     public readonly website = "https://www.weatherbit.io/";
+    public readonly maxHourlyForecastSupport = 240;
 
-    private descriptionLinelength = 25;
     private supportedLanguages = [
         'ar', 'az', 'be', 'bg', 'bs', 'ca', 'cz', 'da', 'de', 'el', 'en',
         'et', 'fi', 'fr', 'hr', 'hu', 'id', 'is', 'it',
@@ -48,8 +48,6 @@ class Weatherbit implements WeatherProvider {
 
     private current_url = "https://api.weatherbit.io/v2.0/current?";
     private daily_url = "https://api.weatherbit.io/v2.0/forecast/daily?";
-    
-    private unit: queryUnits = null;
 
     private app: WeatherApplet
 

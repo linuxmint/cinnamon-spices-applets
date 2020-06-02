@@ -24,7 +24,7 @@ class Weatherbit {
         this.supportsHourly = true;
         this.maxForecastSupport = 16;
         this.website = "https://www.weatherbit.io/";
-        this.descriptionLinelength = 25;
+        this.maxHourlyForecastSupport = 240;
         this.supportedLanguages = [
             'ar', 'az', 'be', 'bg', 'bs', 'ca', 'cz', 'da', 'de', 'el', 'en',
             'et', 'fi', 'fr', 'hr', 'hu', 'id', 'is', 'it',
@@ -33,7 +33,6 @@ class Weatherbit {
         ];
         this.current_url = "https://api.weatherbit.io/v2.0/current?";
         this.daily_url = "https://api.weatherbit.io/v2.0/forecast/daily?";
-        this.unit = null;
         this.app = _app;
     }
     async GetWeather() {

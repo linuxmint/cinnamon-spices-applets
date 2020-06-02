@@ -61,6 +61,7 @@ var Yahoo = (function () {
         this.maxForecastSupport = 10;
         this.supportsHourly = false;
         this.website = "https://www.yahoo.com/news/weather/";
+        this.maxHourlyForecastSupport = 0;
         this.app = _app;
     }
     Yahoo.prototype.GetWeather = function () {

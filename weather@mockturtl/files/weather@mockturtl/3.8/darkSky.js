@@ -27,6 +27,7 @@ class DarkSky {
         this.maxForecastSupport = 8;
         this.supportsHourly = false;
         this.website = "https://darksky.net/poweredby/";
+        this.maxHourlyForecastSupport = 168;
         this.descriptionLinelength = 25;
         this.supportedLanguages = [
             'ar', 'az', 'be', 'bg', 'bs', 'ca', 'cs', 'da', 'de', 'el', 'en', 'es',

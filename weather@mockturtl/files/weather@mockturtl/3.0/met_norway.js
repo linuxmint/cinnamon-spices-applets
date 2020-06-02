@@ -61,6 +61,7 @@ var MetNorway = (function () {
         this.maxForecastSupport = 10;
         this.supportsHourly = false;
         this.website = "https://www.met.no/en";
+        this.maxHourlyForecastSupport = 72;
         this.baseUrl = "https://api.met.no/weatherapi/locationforecast/1.9/.json?";
         this.ctx = this;
         this.app = app;
