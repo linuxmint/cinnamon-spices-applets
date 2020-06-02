@@ -139,6 +139,7 @@ class WeatherApplet extends TextIconApplet {
   private weather: Weather = null;
   /** Stores all forecast information */
   private forecasts: Array < ForecastData > = [];
+  private hourlyForecasts: HourlyForecastData[] = [];
 
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////  
@@ -373,6 +374,11 @@ class WeatherApplet extends TextIconApplet {
     return Math.min(this.config._forecastDays, this.provider.maxForecastSupport);
   }
 
+  public GetMaxHourlyForecasts(): number {
+    if (!this.provider) return this.config._forecastHours;
+    return Math.min(this.config._forecastHours, this.provider.maxHourlyForecastSupport);
+  }
+
   private LoadProvider(): void {
     switch (this.config._dataService) {
       case DATA_SERVICE.DARK_SKY:           // No City Info
@@ -443,7 +449,10 @@ class WeatherApplet extends TextIconApplet {
       this.ProcessWeatherData(weatherInfo, locationData);
 
       if (rebuild) this.ui.rebuild(this.config);
-      if (!this.ui.displayWeather(this.weather, this.config) || !this.ui.displayForecast(this.weather, this.forecasts, this.config)) return;
+      if (
+        !this.ui.displayWeather(this.weather, this.config) 
+        || !this.ui.displayForecast(this.weather, this.forecasts, this.config)
+        || !this.ui.displayHourlyForecast(this.hourlyForecasts, this.config)) return;
       this.ui.displayBar(this.provider);
       this.log.Print("Weather Information refreshed");
       this.loop.ResetErrorCount();
@@ -513,6 +522,7 @@ class WeatherApplet extends TextIconApplet {
     if (!!weatherInfo.location.url) this.weather.location.url = weatherInfo.location.url;
     if (!!weatherInfo.extra_field) this.weather.extra_field = weatherInfo.extra_field;
     this.forecasts = weatherInfo.forecasts;
+    this.hourlyForecasts = weatherInfo.hourlyForecasts;
 
     // Estimation
     //this.weather.location.tzOffset = Math.round(this.weather.coord.lon/15) * 3600;
@@ -648,7 +658,9 @@ class WeatherApplet extends TextIconApplet {
         uiError.detail = error.message;
         uiError.code = error.code;
         if (error.message == "bad api response - non json") uiError.type = "hard";
-        if (!!callback && callback instanceof Function) uiError = callback(error, uiError);
+        if (!!callback && callback instanceof Function) {
+          uiError = callback(error, uiError);
+        }
     }
     ctx.HandleError(uiError);
   }
@@ -729,8 +741,9 @@ class UI {
     private _hourlyButton: imports.gi.St.Button;
     private _hourlyScrollView: imports.gi.St.ScrollView;
     private _hourlyBox: imports.gi.St.BoxLayout;
-    private _hourlyLabel: imports.gi.St.Label;
+    private _hourlyForecasts: HourlyForecastUI[];
     private hourlyToggled: boolean = false;
+    private hourlyOpenedFirstTime: boolean = true;
 
     private _timestamp: imports.gi.St.Label;
 
@@ -775,23 +788,27 @@ class UI {
       // Hourly Weather
       this._hourlyScrollView = new ScrollView(
         {
-          hscrollbar_policy: PolicyType.NEVER,
+          hscrollbar_policy: PolicyType.AUTOMATIC,
           vscrollbar_policy: PolicyType.NEVER,
           /*style_class: "xCenter-scrollBox",*/
-          x_fill: true,
+          x_fill: false,
           y_fill: false,
           y_align: Align.MIDDLE,
-          x_align: Align.START
+          x_align: Align.MIDDLE
         }
       );
-      // Stop event passing whil scrolling to prevent jankyness
+      this._hourlyScrollView.overlay_scrollbars = true;
+      // Stop event passing while scrolling to prevent jankyness
       let vscroll = this._hourlyScrollView.get_vscroll_bar();
       vscroll.connect("scroll-start", () => {this.menu.passEvents = true;});
       vscroll.connect("scroll-stop", () => {this.menu.passEvents = false;});
+      let hscroll = this._hourlyScrollView.get_hscroll_bar();
+      hscroll.connect("scroll-start", () => {this.menu.passEvents = true;});
+      hscroll.connect("scroll-stop", () => {this.menu.passEvents = false;});
       this._separatorAreaHourly.actor.hide();
       this._hourlyScrollView.hide();
       this._hourlyScrollView.clip_to_allocation = true;
-      this._hourlyBox = new BoxLayout({ vertical: true });
+      this._hourlyBox = new BoxLayout({ vertical: false, style_class: "hourly-box" });
       this._hourlyScrollView.add_actor(this._hourlyBox)
 
       // Bottom bar
@@ -816,15 +833,19 @@ class UI {
       this.rebuildHourlyWeatherUi(config);
       this.rebuildFutureWeatherUi(config);
       this.rebuildBar(config);
+      this.hourlyOpenedFirstTime = true;
     }
 
     /** Changes all icon's type what are affected by
      * the "use symbolic icons" setting
      */
     public UpdateIconType(iconType: imports.gi.St.IconType): void {
-      this._currentWeatherIcon.icon_type = iconType
+      this._currentWeatherIcon.icon_type = iconType;
       for (let i = 0; i < this._forecast.length; i++) {
-        this._forecast[i].Icon.icon_type = iconType
+        this._forecast[i].Icon.icon_type = iconType;
+      }
+      for (let i = 0; i < this._hourlyForecasts.length; i++) {
+        this._hourlyForecasts[i].Icon.icon_type = iconType;
       }
     }
 
@@ -1041,6 +1062,28 @@ class UI {
     public displayBar(provider: WeatherProvider) {
       this._providerCredit.label = _("Powered by") + " " + provider.name;
       this._providerCredit.url = provider.website;
+    }
+
+    public displayHourlyForecast(forecasts: HourlyForecastData[], config: Config): boolean {
+      let max = Math.min(forecasts.length, this._hourlyForecasts.length);
+      for (let index = 0; index < max; index++) {
+        const hour = forecasts[index];
+        const ui = this._hourlyForecasts[index];
+
+        ui.Hour.text = AwareDateString(hour.date, this.app.currentLocale, config._show24Hours);
+        ui.Temperature.text = TempToUserConfig(hour.temp, config._temperatureUnit, config._tempRussianStyle) + " " + this.unitToUnicode(config._temperatureUnit);
+        ui.Icon.icon_name = (config._useCustomMenuIcons) ? hour.condition.customIcon : hour.condition.icon;
+        ui.Summary.text = hour.condition.main;
+        if (!!hour.precipation) {
+          ui.Precipation.text = hour.precipation + " mm";
+        }
+        if (!!hour.snow) {
+          ui.Precipation.text = hour.snow + " mm";
+        }
+
+      }
+
+      return true;
     }
 
     private unitToUnicode(unit: WeatherUnits): string {
@@ -1344,18 +1387,55 @@ class UI {
 
     private rebuildHourlyWeatherUi(config: Config) {
       this.destroyHourlyWeatherUi();
-      this._hourlyLabel = new Label({text: "I am an hourly container"});
-      this._hourlyBox.add_child(this._hourlyLabel)
-      this._hourlyBox.add_child(new Button({ reactive: true, label: _('Show Hourly'), }))
+      let hours = this.app.GetMaxHourlyForecasts();
+      this._hourlyForecasts = []
+      for (let index = 0; index < hours; index++) {
+        let box = new BoxLayout({vertical: true});
+        this._hourlyForecasts.push({
+          Hour: new Label({text: "Hour", style_class: "hourly-time"}),
+          Icon: new Icon({
+            icon_type: config.IconType(),
+            icon_size: 24,
+            icon_name: APPLET_ICON,
+            style_class: "hourly-icon"
+          }),
+          Precipation: new Label({text: " ", style_class: "hourly-data"}),
+          Summary: new Label({text: "summary", style_class: "hourly-data"}),
+          Temperature: new Label({text: "temp", style_class: "hourly-data"})
+        })
+        box.add_child(this._hourlyForecasts[index].Hour);
+        box.add_child(this._hourlyForecasts[index].Icon);
+        box.add_child(this._hourlyForecasts[index].Summary);
+        box.add_child(this._hourlyForecasts[index].Temperature);
+        box.add_child(this._hourlyForecasts[index].Precipation);
+        this._hourlyBox.add(box, {
+          x_fill: false,
+          x_align: Align.MIDDLE,
+          y_align: Align.MIDDLE,
+          y_fill: false,
+          expand: true
+        });
+      }
+      
     }
 
     public ShowHourlyWeather(): void {
+        let [minHeight, naturalHeight] = this._hourlyScrollView.get_preferred_height(-1);
+        let [minWidth, naturalWidth] = this._hourlyScrollView.get_preferred_width(-1);
         this._separatorAreaHourly.actor.show();
+        global.log(minHeight.toString());
+        global.log(naturalHeight.toString());
+        this._hourlyScrollView.width = minWidth;
         this._hourlyButton.child.icon_name = "custom-up-arrow-symbolic";
         this._hourlyScrollView.show();
+        // workaround: first time after rebuilding ScrollView's naturalHeight
+        // always missing 23 pixels, so it is added back in
+        if (this.hourlyOpenedFirstTime) {
+          this.hourlyOpenedFirstTime = false;
+          naturalHeight += 23;
+        }
         if (global.settings.get_boolean("desktop-effects-on-menus")) {
           this._hourlyScrollView.height = 0;
-          let [minHeight, naturalHeight] = this._hourlyBox.get_preferred_height(-1);
           addTween(this._hourlyScrollView,
             {
               height: naturalHeight,
@@ -1371,7 +1451,6 @@ class UI {
         this.hourlyToggled = true;
     }
 
-    /**open-state-changed event */
     public HideHourlyWeather(): void {
         this._separatorAreaHourly.actor.hide();
         this._hourlyButton.child.icon_name = "custom-down-arrow-symbolic";
@@ -1384,7 +1463,6 @@ class UI {
               onComplete: () => {
                   this._hourlyScrollView.set_height(-1);
                   this._hourlyScrollView.hide();
-                  //this.emit('open-state-changed', true);
               }
             });
         }
@@ -1413,29 +1491,30 @@ class Config {
  * Keys matching the ones in settings-schema.json
  */
   KEYS: SettingKeys  =  {
-    WEATHER_DATA_SERVICE : "dataService",
-    WEATHER_API_KEY:  "apiKey",
-    WEATHER_TEMPERATURE_UNIT_KEY: "temperatureUnit",
-    WEATHER_TEMPERATURE_HIGH_FIRST_KEY:  "temperatureHighFirst",
-    WEATHER_WIND_SPEED_UNIT_KEY: "windSpeedUnit",
-    WEATHER_CITY_KEY:  "locationLabelOverride",
-    WEATHER_TRANSLATE_CONDITION_KEY:  "translateCondition",
-    WEATHER_VERTICAL_ORIENTATION_KEY:  "verticalOrientation",
-    WEATHER_SHOW_TEXT_IN_PANEL_KEY:  "showTextInPanel",
-    WEATHER_TEMP_TEXT_OVERRIDE: "tempTextOverride",
-    WEATHER_SHOW_COMMENT_IN_PANEL_KEY:  "showCommentInPanel",
-    WEATHER_SHOW_SUNRISE_KEY: "showSunrise",
-    WEATHER_SHOW_24HOURS_KEY:  "show24Hours",
-    WEATHER_FORECAST_DAYS:  "forecastDays",
-    WEATHER_FORECAST_COLS: "forecastColumns",
-    WEATHER_FORECAST_ROWS: "forecastRows",
-    WEATHER_REFRESH_INTERVAL: "refreshInterval",
-    WEATHER_PRESSURE_UNIT_KEY: "pressureUnit",
-    WEATHER_SHORT_CONDITIONS_KEY:  "shortConditions",
-    WEATHER_MANUAL_LOCATION:  "manualLocation",
-    WEATHER_USE_CUSTOM_APPLETICONS_KEY: 'useCustomAppletIcons',
-    WEATHER_USE_CUSTOM_MENUICONS_KEY: "useCustomMenuIcons",
-    WEATHER_RUSSIAN_STYLE: "tempRussianStyle",
+    DATA_SERVICE : "dataService",
+    API_KEY:  "apiKey",
+    TEMPERATURE_UNIT_KEY: "temperatureUnit",
+    TEMPERATURE_HIGH_FIRST:  "temperatureHighFirst",
+    WIND_SPEED_UNIT: "windSpeedUnit",
+    CITY:  "locationLabelOverride",
+    TRANSLATE_CONDITION:  "translateCondition",
+    VERTICAL_ORIENTATION:  "verticalOrientation",
+    SHOW_TEXT_IN_PANEL:  "showTextInPanel",
+    TEMP_TEXT_OVERRIDE: "tempTextOverride",
+    SHOW_COMMENT_IN_PANEL:  "showCommentInPanel",
+    SHOW_SUNRISE: "showSunrise",
+    SHOW_24HOURS:  "show24Hours",
+    FORECAST_DAYS:  "forecastDays",
+    FORECAST_HOURS: "forecastHours",
+    FORECAST_COLS: "forecastColumns",
+    FORECAST_ROWS: "forecastRows",
+    REFRESH_INTERVAL: "refreshInterval",
+    PRESSURE_UNIT: "pressureUnit",
+    SHORT_CONDITIONS:  "shortConditions",
+    MANUAL_LOCATION:  "manualLocation",
+    USE_CUSTOM_APPLETICONS: 'useCustomAppletIcons',
+    USE_CUSTOM_MENUICONS: "useCustomMenuIcons",
+    RUSSIAN_STYLE: "tempRussianStyle",
   }
 
   // Settings variables to bind to
@@ -1450,6 +1529,7 @@ class Config {
   public readonly _show24Hours: boolean;
   public readonly _apiKey: string;
   public readonly _forecastDays: number;
+  public readonly _forecastHours: number;
   public readonly _forecastColumns: number;
   public readonly _forecastRows: number;
   public readonly _verticalOrientation: boolean;
@@ -1710,33 +1790,6 @@ type WeatherWindSpeedUnits = 'kph' | 'mph' | 'm/s' | 'Knots' | 'Beaufort';
 type WeatherPressureUnits = 'hPa'|'mm Hg'|'in Hg'|'Pa'|'psi'|'atm'|'at';
 
 
-interface Forecast {
-  dateTime: Date,
-  main: {
-    /** Kelvin */
-    temp?: number,
-    /**Kelvin */
-    temp_min: number,
-    /**Kelvin */
-    temp_max: number,
-    pressure ?: number,
-    sea_level?: number,
-    grnd_level?: number,
-    humidity?: number,
-  },
-  condition: {
-    id?: string,
-    main: string,
-    description: string,
-    icon: string,
-    customIcon: CustomIcons
-  },
-  clouds?: number,
-  wind?: {
-    speed: number,
-    deg: number,
-  }
-}
 
 interface Weather {
   date: Date,
@@ -1820,6 +1873,7 @@ interface WeatherData {
   humidity: number;
   condition: Condition
   forecasts: ForecastData[];
+  hourlyForecasts?: HourlyForecastData[]
   extra_field?: {
     name: string,
     /**
@@ -1833,11 +1887,24 @@ interface WeatherData {
 interface ForecastData {
   /** Set to 12:00 if possible */
   date: Date,
-    /** Kelvin */
-    temp_min: number,
-    /** Kelvin */
-    temp_max: number,
+  /** Kelvin */
+  temp_min: number,
+  /** Kelvin */
+  temp_max: number,
   condition: Condition
+}
+
+
+interface HourlyForecastData {
+  /** Set to 12:00 if possible */
+  date: Date,
+  /** Kelvin */
+  temp: number,
+  condition: Condition
+  /** in mm */
+  precipation?: number;
+  /** in mm */
+  snow?: number
 }
 
 interface LocationData {
@@ -1863,6 +1930,14 @@ interface ForecastUI {
     Day: imports.gi.St.Label,
     Summary: imports.gi.St.Label,
     Temperature: imports.gi.St.Label,
+}
+
+interface HourlyForecastUI {
+  Icon: imports.gi.St.Icon,
+  Hour: imports.gi.St.Label,
+  Summary: imports.gi.St.Label,
+  Temperature: imports.gi.St.Label,
+  Precipation: imports.gi.St.Label
 }
 
 type SettingKeys = {

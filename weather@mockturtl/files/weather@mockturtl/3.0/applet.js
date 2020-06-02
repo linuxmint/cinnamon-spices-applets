@@ -142,6 +142,7 @@ var WeatherApplet = (function (_super) {
         var _this = _super.call(this, orientation, panelHeight, instanceId) || this;
         _this.weather = null;
         _this.forecasts = [];
+        _this.hourlyForecasts = [];
         _this.currentLocale = null;
         _this._httpSession = new SessionAsync();
         _this.appletDir = imports.ui.appletManager.appletMeta[UUID].path;
@@ -351,6 +352,11 @@ var WeatherApplet = (function (_super) {
             return this.config._forecastDays;
         return Math.min(this.config._forecastDays, this.provider.maxForecastSupport);
     };
+    WeatherApplet.prototype.GetMaxHourlyForecasts = function () {
+        if (!this.provider)
+            return this.config._forecastHours;
+        return Math.min(this.config._forecastHours, this.provider.maxHourlyForecastSupport);
+    };
     WeatherApplet.prototype.LoadProvider = function () {
         switch (this.config._dataService) {
             case DATA_SERVICE.DARK_SKY:
@@ -426,7 +432,9 @@ var WeatherApplet = (function (_super) {
                         this.ProcessWeatherData(weatherInfo, locationData);
                         if (rebuild)
                             this.ui.rebuild(this.config);
-                        if (!this.ui.displayWeather(this.weather, this.config) || !this.ui.displayForecast(this.weather, this.forecasts, this.config))
+                        if (!this.ui.displayWeather(this.weather, this.config)
+                            || !this.ui.displayForecast(this.weather, this.forecasts, this.config)
+                            || !this.ui.displayHourlyForecast(this.hourlyForecasts, this.config))
                             return [2];
                         this.ui.displayBar(this.provider);
                         this.log.Print("Weather Information refreshed");
@@ -504,6 +512,7 @@ var WeatherApplet = (function (_super) {
         if (!!weatherInfo.extra_field)
             this.weather.extra_field = weatherInfo.extra_field;
         this.forecasts = weatherInfo.forecasts;
+        this.hourlyForecasts = weatherInfo.hourlyForecasts;
     };
     WeatherApplet.prototype.wipeData = function () {
         if (this.weather == null) {
@@ -604,8 +613,9 @@ var WeatherApplet = (function (_super) {
             uiError.code = error.code;
             if (error.message == "bad api response - non json")
                 uiError.type = "hard";
-            if (!!callback && callback instanceof Function)
+            if (!!callback && callback instanceof Function) {
                 uiError = callback(error, uiError);
+            }
         }
         ctx.HandleError(uiError);
     };
@@ -656,6 +666,7 @@ var Log = (function () {
 var UI = (function () {
     function UI(app, orientation) {
         this.hourlyToggled = false;
+        this.hourlyOpenedFirstTime = true;
         this.app = app;
         this.menuManager = new PopupMenuManager(this.app);
         this.menu = new AppletPopupMenu(this.app, orientation);
@@ -680,20 +691,24 @@ var UI = (function () {
         this._separatorAreaHourly.actor.remove_style_class_name("popup-menu-item");
         this._separatorArea2.actor.remove_style_class_name("popup-menu-item");
         this._hourlyScrollView = new ScrollView({
-            hscrollbar_policy: PolicyType.NEVER,
+            hscrollbar_policy: PolicyType.AUTOMATIC,
             vscrollbar_policy: PolicyType.NEVER,
-            x_fill: true,
+            x_fill: false,
             y_fill: false,
             y_align: Align.MIDDLE,
-            x_align: Align.START
+            x_align: Align.MIDDLE
         });
+        this._hourlyScrollView.overlay_scrollbars = true;
         var vscroll = this._hourlyScrollView.get_vscroll_bar();
         vscroll.connect("scroll-start", function () { _this.menu.passEvents = true; });
         vscroll.connect("scroll-stop", function () { _this.menu.passEvents = false; });
+        var hscroll = this._hourlyScrollView.get_hscroll_bar();
+        hscroll.connect("scroll-start", function () { _this.menu.passEvents = true; });
+        hscroll.connect("scroll-stop", function () { _this.menu.passEvents = false; });
         this._separatorAreaHourly.actor.hide();
         this._hourlyScrollView.hide();
         this._hourlyScrollView.clip_to_allocation = true;
-        this._hourlyBox = new BoxLayout({ vertical: true });
+        this._hourlyBox = new BoxLayout({ vertical: false, style_class: "hourly-box" });
         this._hourlyScrollView.add_actor(this._hourlyBox);
         this._bar = new BoxLayout({ vertical: false, style_class: STYLE_BAR });
         var mainBox = new BoxLayout({ vertical: true });
@@ -712,11 +727,15 @@ var UI = (function () {
         this.rebuildHourlyWeatherUi(config);
         this.rebuildFutureWeatherUi(config);
         this.rebuildBar(config);
+        this.hourlyOpenedFirstTime = true;
     };
     UI.prototype.UpdateIconType = function (iconType) {
         this._currentWeatherIcon.icon_type = iconType;
         for (var i = 0; i < this._forecast.length; i++) {
             this._forecast[i].Icon.icon_type = iconType;
+        }
+        for (var i = 0; i < this._hourlyForecasts.length; i++) {
+            this._hourlyForecasts[i].Icon.icon_type = iconType;
         }
     };
     UI.prototype.DisplayErrorMessage = function (msg) {
@@ -887,6 +906,24 @@ var UI = (function () {
     UI.prototype.displayBar = function (provider) {
         this._providerCredit.label = _("Powered by") + " " + provider.name;
         this._providerCredit.url = provider.website;
+    };
+    UI.prototype.displayHourlyForecast = function (forecasts, config) {
+        var max = Math.min(forecasts.length, this._hourlyForecasts.length);
+        for (var index = 0; index < max; index++) {
+            var hour = forecasts[index];
+            var ui = this._hourlyForecasts[index];
+            ui.Hour.text = AwareDateString(hour.date, this.app.currentLocale, config._show24Hours);
+            ui.Temperature.text = TempToUserConfig(hour.temp, config._temperatureUnit, config._tempRussianStyle) + " " + this.unitToUnicode(config._temperatureUnit);
+            ui.Icon.icon_name = (config._useCustomMenuIcons) ? hour.condition.customIcon : hour.condition.icon;
+            ui.Summary.text = hour.condition.main;
+            if (!!hour.precipation) {
+                ui.Precipation.text = hour.precipation + " mm";
+            }
+            if (!!hour.snow) {
+                ui.Precipation.text = hour.snow + " mm";
+            }
+        }
+        return true;
     };
     UI.prototype.unitToUnicode = function (unit) {
         return unit == "fahrenheit" ? '\u2109' : '\u2103';
@@ -1118,24 +1155,58 @@ var UI = (function () {
     };
     UI.prototype.rebuildHourlyWeatherUi = function (config) {
         this.destroyHourlyWeatherUi();
-        this._hourlyLabel = new Label({ text: "I am an hourly container" });
-        this._hourlyBox.add_child(this._hourlyLabel);
-        this._hourlyBox.add_child(new Button({ reactive: true, label: _('Show Hourly'), }));
+        var hours = this.app.GetMaxHourlyForecasts();
+        this._hourlyForecasts = [];
+        for (var index = 0; index < hours; index++) {
+            var box = new BoxLayout({ vertical: true });
+            this._hourlyForecasts.push({
+                Hour: new Label({ text: "Hour", style_class: "hourly-time" }),
+                Icon: new Icon({
+                    icon_type: config.IconType(),
+                    icon_size: 24,
+                    icon_name: APPLET_ICON,
+                    style_class: "hourly-icon"
+                }),
+                Precipation: new Label({ text: " ", style_class: "hourly-data" }),
+                Summary: new Label({ text: "summary", style_class: "hourly-data" }),
+                Temperature: new Label({ text: "temp", style_class: "hourly-data" })
+            });
+            box.add_child(this._hourlyForecasts[index].Hour);
+            box.add_child(this._hourlyForecasts[index].Icon);
+            box.add_child(this._hourlyForecasts[index].Summary);
+            box.add_child(this._hourlyForecasts[index].Temperature);
+            box.add_child(this._hourlyForecasts[index].Precipation);
+            this._hourlyBox.add(box, {
+                x_fill: false,
+                x_align: Align.MIDDLE,
+                y_align: Align.MIDDLE,
+                y_fill: false,
+                expand: true
+            });
+        }
     };
     UI.prototype.ShowHourlyWeather = function () {
         var _this = this;
+        var _a = this._hourlyScrollView.get_preferred_height(-1), minHeight = _a[0], naturalHeight = _a[1];
+        var _b = this._hourlyScrollView.get_preferred_width(-1), minWidth = _b[0], naturalWidth = _b[1];
         this._separatorAreaHourly.actor.show();
+        global.log(minHeight.toString());
+        global.log(naturalHeight.toString());
+        this._hourlyScrollView.width = minWidth;
         this._hourlyButton.child.icon_name = "custom-up-arrow-symbolic";
         this._hourlyScrollView.show();
+        if (this.hourlyOpenedFirstTime) {
+            this.hourlyOpenedFirstTime = false;
+            naturalHeight += 23;
+        }
         if (global.settings.get_boolean("desktop-effects-on-menus")) {
             this._hourlyScrollView.height = 0;
-            var _a = this._hourlyBox.get_preferred_height(-1), minHeight = _a[0], naturalHeight_1 = _a[1];
             addTween(this._hourlyScrollView, {
-                height: naturalHeight_1,
+                height: naturalHeight,
                 time: 0.25,
                 onUpdate: function () { },
                 onComplete: function () {
-                    _this._hourlyScrollView.set_height(naturalHeight_1);
+                    _this._hourlyScrollView.set_height(naturalHeight);
                 }
             });
         }
@@ -1177,29 +1248,30 @@ var Config = (function () {
         this.WEATHER_LOCATION = "location";
         this.WEATHER_USE_SYMBOLIC_ICONS_KEY = 'useSymbolicIcons';
         this.KEYS = {
-            WEATHER_DATA_SERVICE: "dataService",
-            WEATHER_API_KEY: "apiKey",
-            WEATHER_TEMPERATURE_UNIT_KEY: "temperatureUnit",
-            WEATHER_TEMPERATURE_HIGH_FIRST_KEY: "temperatureHighFirst",
-            WEATHER_WIND_SPEED_UNIT_KEY: "windSpeedUnit",
-            WEATHER_CITY_KEY: "locationLabelOverride",
-            WEATHER_TRANSLATE_CONDITION_KEY: "translateCondition",
-            WEATHER_VERTICAL_ORIENTATION_KEY: "verticalOrientation",
-            WEATHER_SHOW_TEXT_IN_PANEL_KEY: "showTextInPanel",
-            WEATHER_TEMP_TEXT_OVERRIDE: "tempTextOverride",
-            WEATHER_SHOW_COMMENT_IN_PANEL_KEY: "showCommentInPanel",
-            WEATHER_SHOW_SUNRISE_KEY: "showSunrise",
-            WEATHER_SHOW_24HOURS_KEY: "show24Hours",
-            WEATHER_FORECAST_DAYS: "forecastDays",
-            WEATHER_FORECAST_COLS: "forecastColumns",
-            WEATHER_FORECAST_ROWS: "forecastRows",
-            WEATHER_REFRESH_INTERVAL: "refreshInterval",
-            WEATHER_PRESSURE_UNIT_KEY: "pressureUnit",
-            WEATHER_SHORT_CONDITIONS_KEY: "shortConditions",
-            WEATHER_MANUAL_LOCATION: "manualLocation",
-            WEATHER_USE_CUSTOM_APPLETICONS_KEY: 'useCustomAppletIcons',
-            WEATHER_USE_CUSTOM_MENUICONS_KEY: "useCustomMenuIcons",
-            WEATHER_RUSSIAN_STYLE: "tempRussianStyle",
+            DATA_SERVICE: "dataService",
+            API_KEY: "apiKey",
+            TEMPERATURE_UNIT_KEY: "temperatureUnit",
+            TEMPERATURE_HIGH_FIRST: "temperatureHighFirst",
+            WIND_SPEED_UNIT: "windSpeedUnit",
+            CITY: "locationLabelOverride",
+            TRANSLATE_CONDITION: "translateCondition",
+            VERTICAL_ORIENTATION: "verticalOrientation",
+            SHOW_TEXT_IN_PANEL: "showTextInPanel",
+            TEMP_TEXT_OVERRIDE: "tempTextOverride",
+            SHOW_COMMENT_IN_PANEL: "showCommentInPanel",
+            SHOW_SUNRISE: "showSunrise",
+            SHOW_24HOURS: "show24Hours",
+            FORECAST_DAYS: "forecastDays",
+            FORECAST_HOURS: "forecastHours",
+            FORECAST_COLS: "forecastColumns",
+            FORECAST_ROWS: "forecastRows",
+            REFRESH_INTERVAL: "refreshInterval",
+            PRESSURE_UNIT: "pressureUnit",
+            SHORT_CONDITIONS: "shortConditions",
+            MANUAL_LOCATION: "manualLocation",
+            USE_CUSTOM_APPLETICONS: 'useCustomAppletIcons',
+            USE_CUSTOM_MENUICONS: "useCustomMenuIcons",
+            RUSSIAN_STYLE: "tempRussianStyle",
         };
         this.app = app;
         this.settings = new AppletSettings(this, UUID, instanceID);

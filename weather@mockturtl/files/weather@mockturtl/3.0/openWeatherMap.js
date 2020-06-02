@@ -153,6 +153,28 @@ var OpenWeatherMap = (function () {
                 forecasts.push(forecast);
             }
             weather.forecasts = forecasts;
+            var hourly = [];
+            for (var index = 0; index < json.hourly.length; index++) {
+                var hour = json.hourly[index];
+                var forecast = {
+                    date: new Date(hour.dt * 1000),
+                    temp: hour.temp,
+                    condition: {
+                        main: hour.weather[0].main,
+                        description: hour.weather[0].description,
+                        icon: weatherIconSafely(self.ResolveIcon(hour.weather[0].icon), self.app.config.IconType()),
+                        customIcon: self.ResolveCustomIcon(hour.weather[0].icon)
+                    }
+                };
+                if (!!hour.rain) {
+                    forecast.precipation = hour.rain["1h"];
+                }
+                if (!!hour.snow) {
+                    forecast.snow = hour.snow["1h"];
+                }
+                hourly.push(forecast);
+            }
+            weather.hourlyForecasts = hourly;
             return weather;
         }
         catch (e) {

@@ -236,6 +236,12 @@ var DarkSky = (function () {
             uiError.type = "hard";
             uiError.userError = true;
         }
+        if (error.code == 401) {
+            uiError.detail = "no key";
+            uiError.message = _("Please Make sure you\nentered the API key what you have from DarkSky");
+            uiError.type = "hard";
+            uiError.userError = true;
+        }
         return uiError;
     };
     DarkSky.prototype.ProcessSummary = function (summary) {

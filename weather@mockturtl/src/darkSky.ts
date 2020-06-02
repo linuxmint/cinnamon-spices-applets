@@ -225,6 +225,12 @@ class DarkSky implements WeatherProvider {
             uiError.type = "hard";
             uiError.userError = true;
         }
+        if (error.code == 401) { // DarkSky returns auth error on the http level when key is wrong
+            uiError.detail = "no key"
+            uiError.message = _("Please Make sure you\nentered the API key what you have from DarkSky");
+            uiError.type = "hard";
+            uiError.userError = true;
+        }
         return uiError;
     }
 

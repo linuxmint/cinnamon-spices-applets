@@ -1,7 +1,7 @@
 declare function require(path: string): any;
 
 declare class global {
-    static log(...text: Array < string > ): void;
+    static log(...any: Array < string > ): void;
     static logError(...text: Array < string > ): void;
     static create_app_launch_context(): imports.gi.Gio.AppLaunchContext;
     static settings: any;
@@ -368,10 +368,12 @@ declare namespace imports.gi.Clutter {
         add_actor(element: any): void;
         hide(): void;
         show(): void;
-        get_preferred_height(number: number): number[];
+        get_preferred_height(for_width: number): number[];
+        get_preferred_width(for_height: number): number[]; 
         destroy_all_children(): void;
         remove_all_children(): void;
         height: number;
+        width: number;
         set_height(height: number): void;
         remove_clip(): void;
         set_size(width: number, height: number): void;
@@ -439,6 +441,9 @@ declare namespace imports.gi.St {
         set_row_size(row_size:number): void;
         set_policy(hscroll: any, vscroll: any): void;
         get_vscroll_bar(): any;
+        get_hscroll_bar(): any;
+        overlay_scrollbars: boolean; 
+        clip_to_allocation: boolean;
         constructor(options ? : any);
     }
 
