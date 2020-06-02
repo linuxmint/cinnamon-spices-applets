@@ -187,6 +187,7 @@ class QRedshift extends Applet.TextIconApplet {
                 this.dc_Slider._onScrollEvent(actor, event);
             } else if (action === 'bright') {
                 this.db_Slider._onScrollEvent(actor, event);
+                this.nb_Slider._onScrollEvent(actor, event);
             } else if (action === 'gamma') {
                 this.gm_Slider._onScrollEvent(actor, event);
             }

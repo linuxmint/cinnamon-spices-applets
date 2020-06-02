@@ -1,102 +1,102 @@
-# Turkish translation for qredshift@quintao.
+# Bulgarian translation for qredshift@quintao.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# Gökhan Gökkaya <gokhanlnx@gmail.com>, 2019.
+# Peyu Yovev <spacy00001@gmail.com>, 2020.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-04 08:58-0300\n"
-"PO-Revision-Date: 2020-01-04 09:17-0300\n"
-"Last-Translator: Gökhan Gökkaya <gokhanlnx@gmail.com>\n"
+"POT-Creation-Date: 2020-01-04 13:58-0300\n"
+"PO-Revision-Date: 2020-04-18 10:45+0300\n"
 "Language-Team: \n"
-"Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.4\n"
+"X-Generator: Poedit 2.2.1\n"
+"Last-Translator: Peyu Yovev <spacy00001@gmail.com>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: bg\n"
 
-#: applet.js:110
+#: applet.js 115
 msgid "REDSHIFT NOT INSTALLED!"
-msgstr "REDSHIFT KURULU DEĞİL!"
+msgstr "REDSHIFT НЕ Е ИНСТАЛИРАН!"
 
-#: applet.js:111
+#: applet.js 116
 msgid "Requires Redshift: sudo apt-get install redshift"
-msgstr "Redshift gerekiyor: sudo apt-get install redshift"
+msgstr "Изисква се Redshift: sudo apt-get install redshift"
 
-#: applet.js:114 applet.js:154
+#: applet.js:119 applet.js:159
 msgid "Reload Applet"
-msgstr "Uygulamacığı Yeniden Yükle"
+msgstr "Презареди аплета"
 
-#: applet.js:159
+#: applet.js 164
 msgid "Recompile Translations"
-msgstr "Recompile Translations"
+msgstr "Прекомпилирай преводите"
 
 #. settings-schema.json->enabled->description
-#: applet.js:333
+#: applet.js 356
 msgid "Enabled"
-msgstr "Etkin"
+msgstr "Включен"
 
-#: applet.js:341 applet.js:387
+#: applet.js:364 applet.js:410
 msgid "Temp:"
-msgstr "Sıcaklık:"
+msgstr "Темп:"
 
-#: applet.js:352 applet.js:398
+#: applet.js:375 applet.js:421
 msgid "Bright:"
-msgstr "Parlaklık:"
+msgstr "Яркост:"
 
-#: applet.js:364 applet.js:610
+#: applet.js:387 applet.js:635
 msgid "Gamma:"
-msgstr "Gama:"
+msgstr "Гама:"
 
 #. settings-schema.json->enabledNight->description
-#: applet.js:379
+#: applet.js:402
 msgid "Night Enabled"
-msgstr "Gece Kipi Etkin"
+msgstr "Нощен режим"
 
 #. settings-schema.json->iconLabel->description
-#: applet.js:441
+#: applet.js:464
 msgid "Show Label"
-msgstr "Etiket Göster"
+msgstr "Покажи етикет"
 
-#: applet.js:593
+#: applet.js 618
 msgid "On"
-msgstr "Açık"
+msgstr "Вкл."
 
-#: applet.js:593 applet.js:595
+#: applet.js:618 applet.js 620
 msgid "Off"
-msgstr "Kapalı"
+msgstr "Изкл."
 
-#: applet.js:601
+#: applet.js 626
 msgid "Day Temperature"
-msgstr "Gün Sıcaklığı"
+msgstr "Дневна температура"
 
-#: applet.js:602
+#: applet.js 627
 msgid "Day Brightness"
-msgstr "Gün Parlaklığı"
+msgstr "Дневна яркост"
 
-#: applet.js:604
+#: applet.js 629
 msgid "Night Temperature"
-msgstr "Gece Sıcaklığı"
+msgstr "Нощна температура"
 
-#: applet.js:605
+#: applet.js 630
 msgid "Night Brightness"
-msgstr "Gece Parlaklığı"
+msgstr "Нощна яркост"
 
 #. settings-schema.json->labelScrollAction->options
 #. settings-schema.json->dayTemp->description
 #. settings-schema.json->nightTemp->description
-#: applet.js:607
+#: applet.js 632
 msgid "Temperature"
-msgstr "Sıcaklık"
+msgstr "Температура"
 
 #. settings-schema.json->dayBrightness->description
 #. settings-schema.json->nightBrightness->description
-#: applet.js:608
+#: applet.js:633
 msgid "Brightness"
-msgstr "Parlaklık"
+msgstr "Яркост"
 
 #. metadata.json->name
 msgid "QRedshift"
@@ -107,52 +107,64 @@ msgid ""
 "Sets brightness, gamma levels and color temperature with Redshift.\n"
 "This applet conflicts with redshift-gtk, make sure you remove it."
 msgstr ""
-"Redshift ile parlaklık, gama seviyesi ve renk sıcaklığını ayarlar.\n"
-"This applet conflicts with redshift-gtk, make sure you remove it."
+"Задаване нива на яркост, гама  и цветова температура с Redshift.\n"
+"Този аплет е в конфликт с redshift-gtk, убедете се че сте го махнали."
 
 #. settings-schema.json->panel-options->title
 msgid "Settings"
-msgstr "Ayarlar"
+msgstr "Настройки"
 
 #. settings-schema.json->panel-location->title
 msgid "Location"
-msgstr "Konum"
+msgstr "Локация"
+
+#. settings-schema.json->panel-shortcuts->title
+msgid "Shortcuts"
+msgstr "Бързи клавиши"
+
+#. settings-schema.json->info-section->title
+msgid "Tips"
+msgstr "Съвети"
 
 #. settings-schema.json->opt-section->title
 msgid "Options"
-msgstr "Seçenekler"
+msgstr "Опции"
 
 #. settings-schema.json->day-section->title
 msgid "Day Settings"
-msgstr "Gün Ayarları"
+msgstr "Дневни настройки"
 
 #. settings-schema.json->night-section->title
 msgid "Night Settings"
-msgstr "Gece Ayarları"
+msgstr "Нощни настройки"
+
+#. settings-schema.json->keybind-section->title
+msgid "Key Bindings"
+msgstr "Клавишни комбинаци"
 
 #. settings-schema.json->location-section->title
 msgid "Location Settings"
-msgstr "Konum Ayarları"
+msgstr "Настройки за локация"
 
 #. settings-schema.json->autoUpdate->description
 msgid "Auto Update"
-msgstr "Otomatik Güncelle"
+msgstr "Автоматично обновяване"
 
 #. settings-schema.json->autoUpdate->tooltip
 msgid "Continuously adjust color temperature"
-msgstr "Renk sıcaklığını sürekli olarak ayarla"
+msgstr "Постоянно пренагласяне на цветовата температура"
 
 #. settings-schema.json->autoUpdateInterval->units
 msgid "Sec."
-msgstr "San."
+msgstr "Сек."
 
 #. settings-schema.json->autoUpdateInterval->description
 msgid "Update interval"
-msgstr "Güncelleme aralığı"
+msgstr "Интервал на обновяване"
 
 #. settings-schema.json->adjustmentMethod->description
 msgid "Adjustment Method"
-msgstr "Ayarlama Yöntemi"
+msgstr "Метод на пренагласяне"
 
 #. settings-schema.json->adjustmentMethod->options
 msgid "needload"
@@ -168,32 +180,33 @@ msgstr "vidmode"
 
 #. settings-schema.json->adjustmentMethod->tooltip
 msgid "Method to use to set color temperature"
-msgstr "Renk sıcaklığını ayarlamak için kullanılacak yöntem"
+msgstr "Метод на използване за настройка на цветовата температура"
 
 #. settings-schema.json->labelScrollAction->description
 msgid "Icon Scroll Action"
-msgstr "Simge Kaydırma Eylemi"
+msgstr "Действие  при скрол върху иконката"
 
 #. settings-schema.json->labelScrollAction->options
 msgid "Disabled"
-msgstr "Pasif"
+msgstr "Изключено"
 
 #. settings-schema.json->labelScrollAction->options
+#. settings-schema.json->keyToggle->description
 msgid "On/Off"
-msgstr "Açık/Kapalı"
+msgstr "Вкл/Изкл"
 
 #. settings-schema.json->labelScrollAction->options
 msgid "Bright"
-msgstr "Parlaklık"
+msgstr "Яркост"
 
 #. settings-schema.json->labelScrollAction->options
 #. settings-schema.json->gammaMix->description
 msgid "Gamma"
-msgstr "Gama"
+msgstr "Гама"
 
 #. settings-schema.json->labelScrollAction->tooltip
 msgid "Action when scroll on applet icon."
-msgstr "Uygulamacık simgesi üstünde kaydırma eylemi."
+msgstr "Действие, когато скролнете върху иконката."
 
 #. settings-schema.json->dayTemp->units
 #. settings-schema.json->nightTemp->units
@@ -207,38 +220,43 @@ msgstr "%"
 
 #. settings-schema.json->locationRemote->description
 msgid "Remote Location"
-msgstr "Uzak Konum"
+msgstr "Далечна локация"
 
 #. settings-schema.json->locationRemote->tooltip
 #. settings-schema.json->locationUpdate->tooltip
 msgid "Native geoclue on redshift can make the experience slow."
-msgstr "Doğal geoclue kullanımı Redshift deneyimini yavaşlatabilir."
+msgstr "Вградената геолокация на redshift може да доведе до забавяния."
 
 #. settings-schema.json->locationUpdate->description
 msgid "Update Location"
-msgstr "Konumu Güncelle"
+msgstr "Обнови локацията"
 
 #. settings-schema.json->locationLatitude->description
 msgid "Latitude"
-msgstr "Enlem"
+msgstr "Ширина"
 
 #. settings-schema.json->locationLongitude->description
 msgid "Longitude"
-msgstr "Boylam"
+msgstr "Дължина"
 
 #. settings-schema.json->aboutLocation->description
 msgid ""
 "Native geoclue on redshift can make the experience slow.\n"
 "Using: https://geolocation-db.com/"
 msgstr ""
-"Doğal geoclue kullanımı Redshift deneyimini yavaşlatabilir.\n"
-"Kullanım: https://geolocation-db.com/"
+"Вградената геолокация на redshift може да доведе до забавяния.\n"
+"Използване на: https://geolocation-db.com/"
 
-#~ msgid "Temperature:"
-#~ msgstr "Sıcaklık:"
+#. settings-schema.json->textTips->description
+msgid "* Right-click the sliders to reset the default (neutral) value."
+msgstr ""
+"*Десен клик на плъзгачите връща стойността по подразбиране (неутралната)."
 
-#~ msgid "Brightness:"
-#~ msgstr "Parlaklık:"
-
-#~ msgid "Sec"
-#~ msgstr "San"
+#. settings-schema.json->textInfo->description
+msgid ""
+"If you like and use this applet take the time to visit it's page on Cinnamon "
+"Spices and give it a star. You only need a github account to do this."
+msgstr ""
+"Ако сте харесали този аплет, намерете време да посетите страницата с аплети "
+"на Cinnamon и да му сложите звезда. За да сторите това, ще имате нужда само "
+"от github акаунт."
