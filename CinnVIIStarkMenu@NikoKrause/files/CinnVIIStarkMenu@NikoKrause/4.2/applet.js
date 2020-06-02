@@ -1804,9 +1804,9 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
 
         this._updateKeybinding();
 
-        this.settings.bind("all-programs-label", "allProgramsLabel", null);
-        this.settings.bind("favorites-label", "favoritesLabel", null);
-        this.settings.bind("shutdown-label", "shutdownLabel", null);
+        this.settings.bind("all-programs-label", "allProgramsLabel", this._updateCustomLabels);
+        this.settings.bind("favorites-label", "favoritesLabel", this._updateCustomLabels);
+        this.settings.bind("shutdown-label", "shutdownLabel", this._updateCustomLabels);
 
         Main.themeManager.connect("theme-set", Lang.bind(this, this._updateIconAndLabel));
         this._updateIconAndLabel();
@@ -3460,8 +3460,7 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
         this.categoriesApplicationsBox.actor.add_actor(this.categoriesOverlayBox);
         this.categoriesApplicationsBox.actor.add_actor(this.applicationsScrollBox);
 
-        let fav_obj = new FavoritesBox();
-        this.favoritesBox = fav_obj.actor;
+        this.favoritesBox = new FavoritesBox().actor;
         this.favsBox.add(this.favoritesBox, { y_align: St.Align.END, y_fill: false });
 
         this.separator = new PopupMenu.PopupSeparatorMenuItem();
@@ -3487,7 +3486,6 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
         this.leftPane.set_child(this.favsBox);
 
         this.selectedAppBox = new St.BoxLayout({ style_class: 'menu-selected-app-box', vertical: true });
-        //this.selectedAppBox.add_style_class_name("starkmenu-selected-app-box");
 
         //if (this.selectedAppBox.peek_theme_node() == null ||
         //    this.selectedAppBox.get_theme_node().get_length('height') == 0)
@@ -3620,10 +3618,8 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
     }
 
     _select_category (name) {
-        if (name === this.lastSelectedCategory) {
+        if (name === this.lastSelectedCategory)
             return;
-        }
-
         this.lastSelectedCategory = name;
 
         if (name === "places") {
@@ -3885,9 +3881,9 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
             this.selectedAppDescription.set_text("");
         }
 
-        SearchProviderManager.launch_all(pattern, Lang.bind(this, function(provider, results){
-            try{
-                for (var i in results){
+        SearchProviderManager.launch_all(pattern, Lang.bind(this, function(provider, results) {
+            try {
+                for (var i in results) {
                     if (results[i].type != 'software')
                     {
                         let button = new SearchProviderResultButton(this, provider, results[i]);
@@ -3904,7 +3900,9 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
                         }
                     }
                 }
-            }catch(e){global.log(e);}
+            } catch(e) {
+                global.log(e);
+            }
         }));
 
         return false;
