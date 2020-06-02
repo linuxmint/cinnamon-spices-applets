@@ -144,17 +144,19 @@ class WeatherApplet extends TextIconApplet {
   ///////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////  
 
-  public currentLocale: string = null;
-  public log: Log;
+
 
   /** Soup session (see https://bugzilla.gnome.org/show_bug.cgi?id=661323#c64) */
-  private _httpSession = new SessionAsync();
+  private readonly _httpSession = new SessionAsync();
   /** Running applet's path*/
-  public appletDir: string = imports.ui.appletManager.appletMeta[UUID].path;
-  private msgSource: imports.ui.messageTray.SystemNotificationSource;
-  private loop: WeatherLoop;
-  public config: Config;
-  private ui: UI;
+  public readonly appletDir: string = imports.ui.appletManager.appletMeta[UUID].path;
+  private readonly msgSource: imports.ui.messageTray.SystemNotificationSource;
+
+  public readonly currentLocale: string = null;
+  public readonly log: Log;
+  private readonly loop: WeatherLoop;
+  public readonly config: Config;
+  public readonly ui: UI;
 
   private provider: WeatherProvider; // API
   private locProvider = new ipApi.IpApi(this); // IP location lookup
@@ -369,6 +371,14 @@ class WeatherApplet extends TextIconApplet {
   //
   //----------------------------------------------------------------------
 
+  public OpenUrl(element: imports.gi.St.Button) {
+    if (!element.url) return;
+    imports.gi.Gio.app_info_launch_default_for_uri(
+      element.url,
+      global.create_app_launch_context()
+    )
+  }
+
   public GetMaxForecastDays(): number {
     if (!this.provider) return this.config._forecastDays;
     return Math.min(this.config._forecastDays, this.provider.maxForecastSupport);
@@ -452,8 +462,9 @@ class WeatherApplet extends TextIconApplet {
       if (
         !this.ui.displayWeather(this.weather, this.config) 
         || !this.ui.displayForecast(this.weather, this.forecasts, this.config)
-        || !this.ui.displayHourlyForecast(this.hourlyForecasts, this.config)) return;
-      this.ui.displayBar(this.provider);
+        || !this.ui.displayHourlyForecast(this.hourlyForecasts, this.config)
+        || !this.ui.displayBar(this.weather, this.provider, this.config)) return;
+      
       this.log.Print("Weather Information refreshed");
       this.loop.ResetErrorCount();
       return "success";
@@ -497,7 +508,7 @@ class WeatherApplet extends TextIconApplet {
     return null;
   }
 
-  /** Injects Data into Weather and Forecast Objects to display later */
+  /** Injects Data into Weather object to display later */
   private ProcessWeatherData(weatherInfo: WeatherData, locationData: LocationData) {
     if (!!locationData) { // Automatic location
       this.weather.location.city = locationData.city;
@@ -715,13 +726,13 @@ class Log {
 
 /** Roll-down Popup Menu */
 class UI {
-    // UI elements
-    private _currentWeather: imports.gi.St.Bin;
+    // Separators
     private _separatorArea: imports.ui.popupMenu.PopupSeparatorMenuItem;
     private _separatorArea2: imports.ui.popupMenu.PopupSeparatorMenuItem;
     private _separatorAreaHourly: imports.ui.popupMenu.PopupSeparatorMenuItem;
-    private _futureWeather: imports.gi.St.Bin;
-    private _bar: imports.gi.St.BoxLayout;
+    
+    //Current Weather
+    private _currentWeather: imports.gi.St.Bin;
     private _currentWeatherIcon: imports.gi.St.Icon;
     private _currentWeatherSummary: imports.gi.St.Label;
     private _currentWeatherLocation: imports.gi.St.Button;
@@ -733,22 +744,30 @@ class UI {
     private _currentWeatherWind: imports.gi.St.Label;
     private _currentWeatherApiUnique: imports.gi.St.Label;
     private _currentWeatherApiUniqueCap: imports.gi.St.Label;
+
+    // Daily Weather
+    private _futureWeather: imports.gi.St.Bin;
     private _forecast: ForecastUI[];
     private _forecastBox: imports.gi.Clutter.GridLayout;
+
+    // Bottom Bar
     private _providerCredit: imports.gi.St.Button;
-
-
+    private _bar: imports.gi.St.BoxLayout;
     private _hourlyButton: imports.gi.St.Button;
+    private _timestamp: imports.gi.St.Label;
+
+    // Hourly Weather
     private _hourlyScrollView: imports.gi.St.ScrollView;
     private _hourlyBox: imports.gi.St.BoxLayout;
     private _hourlyForecasts: HourlyForecastUI[];
-    private hourlyToggled: boolean = false;
-    private hourlyOpenedFirstTime: boolean = true;
 
-    private _timestamp: imports.gi.St.Label;
+    // State variables
+    private hourlyToggled: boolean = false;
+    private hourlyNeverOpened: boolean = true;
 
     private app: WeatherApplet;
-      /** Rolldown menu itself */
+
+    /** Rolldown menu itself */
     public menu: imports.ui.applet.AppletPopupMenu;
     private menuManager: imports.ui.popupMenu.PopupMenuManager;
 
@@ -767,17 +786,18 @@ class UI {
     }
 
     private PopupMenuToggled(caller: any, data: any) {
+      // data - true is opened, false is closed
       if (data == false) this.HideHourlyWeather();
     }
 
     /** Creates the skeleton of the popup menu */
     private BuildPopupMenu(): void {
-      //  today's forecast
+      //  Current Weather
       this._currentWeather = new Bin({ style_class: STYLE_CURRENT });
-      //  tomorrow's forecast
+      //  Daily Weather
       this._futureWeather = new Bin({ style_class: STYLE_FORECAST });
 
-      // Creating Separators and removing styling to make them span full width 
+      // Separators and removing styling to make them span full width 
       this._separatorArea = new PopupSeparatorMenuItem()
       this._separatorAreaHourly = new PopupSeparatorMenuItem();
       this._separatorArea2 = new PopupSeparatorMenuItem()
@@ -790,7 +810,6 @@ class UI {
         {
           hscrollbar_policy: PolicyType.AUTOMATIC,
           vscrollbar_policy: PolicyType.NEVER,
-          /*style_class: "xCenter-scrollBox",*/
           x_fill: false,
           y_fill: false,
           y_align: Align.MIDDLE,
@@ -814,7 +833,7 @@ class UI {
       // Bottom bar
       this._bar = new BoxLayout({ vertical: false, style_class: STYLE_BAR });
 
-      // build menu
+      // Add everything to the PopupMenu
       let mainBox = new BoxLayout({ vertical: true })
       mainBox.add_actor(this._currentWeather)
       mainBox.add_actor(this._separatorAreaHourly.actor);
@@ -833,7 +852,7 @@ class UI {
       this.rebuildHourlyWeatherUi(config);
       this.rebuildFutureWeatherUi(config);
       this.rebuildBar(config);
-      this.hourlyOpenedFirstTime = true;
+      this.hourlyNeverOpened = true;
     }
 
     /** Changes all icon's type what are affected by
@@ -850,7 +869,67 @@ class UI {
     }
 
     public DisplayErrorMessage(msg: string) {
-      this._currentWeatherSunset.text = msg;
+      this._timestamp.text = msg;
+    }
+
+    public ShowHourlyWeather(): void {
+      let [minHeight, naturalHeight] = this._hourlyScrollView.get_preferred_height(-1);
+      let [minWidth, naturalWidth] = this._hourlyScrollView.get_preferred_width(-1);
+      this._separatorAreaHourly.actor.show();
+      this._hourlyScrollView.width = minWidth;
+      this._hourlyButton.child.icon_name = "custom-up-arrow-symbolic";
+      this._hourlyScrollView.show();
+      // workaround: first time after rebuilding ScrollView's naturalHeight
+      // always missing 23 pixels, so it is added back in
+      if (this.hourlyNeverOpened) {
+        this.hourlyNeverOpened = false;
+        naturalHeight += 23;
+      }
+      if (global.settings.get_boolean("desktop-effects-on-menus")) {
+        this._hourlyScrollView.height = 0;
+        addTween(this._hourlyScrollView,
+          {
+            height: naturalHeight,
+            time: 0.25,
+            onUpdate: () => {},
+            onComplete: () => {
+                this._hourlyScrollView.set_height(naturalHeight);
+            }
+          });
+      }
+      
+      this.hourlyToggled = true;
+    }
+
+    public HideHourlyWeather(): void {
+        this._separatorAreaHourly.actor.hide();
+        this._hourlyButton.child.icon_name = "custom-down-arrow-symbolic";
+        if (global.settings.get_boolean("desktop-effects-on-menus")) {
+          addTween(this._hourlyScrollView,
+            {
+              height: 0,
+              time: 0.25,
+              onUpdate: () => {},
+              onComplete: () => {
+                  this._hourlyScrollView.set_height(-1);
+                  this._hourlyScrollView.hide();
+              }
+            });
+        }
+        else {
+          this._hourlyScrollView.set_height(-1);
+          this._hourlyScrollView.hide();
+        }
+        this.hourlyToggled = false;
+    }
+
+    public ToggleHourlyWeather(): void {
+      if (this.hourlyToggled) {
+        this.HideHourlyWeather();
+      }
+      else {
+        this.ShowHourlyWeather();
+      } 
     }
 
     /** Injects data from weather object into the popupMenu */
@@ -1059,9 +1138,11 @@ class UI {
       }
     };
 
-    public displayBar(provider: WeatherProvider) {
+    public displayBar(weather: Weather, provider: WeatherProvider, config: Config): boolean {
       this._providerCredit.label = _("Powered by") + " " + provider.name;
       this._providerCredit.url = provider.website;
+      this._timestamp.text = _("As of") + " " + AwareDateString(weather.date, this.app.currentLocale, config._show24Hours);
+      return true;
     }
 
     public displayHourlyForecast(forecasts: HourlyForecastData[], config: Config): boolean {
@@ -1106,7 +1187,7 @@ class UI {
       this._bar.destroy_all_children();
     }
 
-    private destroyHourlyWeatherUi(): void {
+    private destroyHourlyWeather(): void {
       this._hourlyBox.destroy_all_children();
     }
   
@@ -1141,14 +1222,8 @@ class UI {
       this._currentWeatherLocation = new Button({ reactive: true, label: _('Refresh'), });
       this._currentWeatherLocation.style_class = STYLE_LOCATION_LINK;
       this._currentWeatherLocation.connect(SIGNAL_CLICKED, Lang.bind(this, function () {
-        if (this._currentWeatherLocation.url == null) {
-          this.refreshWeather();
-        } else {
-          imports.gi.Gio.app_info_launch_default_for_uri(
-            this._currentWeatherLocation.url,
-            global.create_app_launch_context()
-          )
-        }
+        if (this._currentWeatherLocation.url == null) this.app.refreshWeather(true);
+        else this.app.OpenUrl(this._currentWeatherLocation);
       }));
   
       // Sunset/sunrise
@@ -1348,8 +1423,9 @@ class UI {
         x_align: Align.START,
         y_align: Align.MIDDLE,
         y_fill: false,
-        expand: true
-      })
+        expand: false
+	  })
+
       this._hourlyButton = new Button({ 
           reactive: true,
           can_focus: true,
@@ -1370,23 +1446,18 @@ class UI {
       })
 
       this._providerCredit = new Button({ label: _(ELLIPSIS), reactive: true, style_class: STYLE_LOCATION_LINK});
-      this._providerCredit.connect(SIGNAL_CLICKED, Lang.bind(this, function () {
-          imports.gi.Gio.app_info_launch_default_for_uri(
-            this._providerCredit.url,
-            global.create_app_launch_context()
-          )
-      }));
+      this._providerCredit.connect(SIGNAL_CLICKED, Lang.bind(this, this.app.OpenUrl));
       this._bar.add(this._providerCredit, {
         x_fill: false,
         x_align: Align.END,
         y_align: Align.MIDDLE,
         y_fill: false,
-        expand: true
+        expand: false
       });
     }
 
     private rebuildHourlyWeatherUi(config: Config) {
-      this.destroyHourlyWeatherUi();
+      this.destroyHourlyWeather();
       let hours = this.app.GetMaxHourlyForecasts();
       this._hourlyForecasts = []
       for (let index = 0; index < hours; index++) {
@@ -1400,8 +1471,8 @@ class UI {
             style_class: "hourly-icon"
           }),
           Precipation: new Label({text: " ", style_class: "hourly-data"}),
-          Summary: new Label({text: "summary", style_class: "hourly-data"}),
-          Temperature: new Label({text: "temp", style_class: "hourly-data"})
+          Summary: new Label({text: _(ELLIPSIS), style_class: "hourly-data"}),
+          Temperature: new Label({text: _(ELLIPSIS), style_class: "hourly-data"})
         })
         box.add_child(this._hourlyForecasts[index].Hour);
         box.add_child(this._hourlyForecasts[index].Icon);
@@ -1417,69 +1488,6 @@ class UI {
         });
       }
       
-    }
-
-    public ShowHourlyWeather(): void {
-        let [minHeight, naturalHeight] = this._hourlyScrollView.get_preferred_height(-1);
-        let [minWidth, naturalWidth] = this._hourlyScrollView.get_preferred_width(-1);
-        this._separatorAreaHourly.actor.show();
-        global.log(minHeight.toString());
-        global.log(naturalHeight.toString());
-        this._hourlyScrollView.width = minWidth;
-        this._hourlyButton.child.icon_name = "custom-up-arrow-symbolic";
-        this._hourlyScrollView.show();
-        // workaround: first time after rebuilding ScrollView's naturalHeight
-        // always missing 23 pixels, so it is added back in
-        if (this.hourlyOpenedFirstTime) {
-          this.hourlyOpenedFirstTime = false;
-          naturalHeight += 23;
-        }
-        if (global.settings.get_boolean("desktop-effects-on-menus")) {
-          this._hourlyScrollView.height = 0;
-          addTween(this._hourlyScrollView,
-            {
-              height: naturalHeight,
-              time: 0.25,
-              onUpdate: () => {},
-              onComplete: () => {
-                  this._hourlyScrollView.set_height(naturalHeight);
-                  //this.emit('open-state-changed', true);
-              }
-            });
-        }
-        
-        this.hourlyToggled = true;
-    }
-
-    public HideHourlyWeather(): void {
-        this._separatorAreaHourly.actor.hide();
-        this._hourlyButton.child.icon_name = "custom-down-arrow-symbolic";
-        if (global.settings.get_boolean("desktop-effects-on-menus")) {
-          addTween(this._hourlyScrollView,
-            {
-              height: 0,
-              time: 0.25,
-              onUpdate: () => {},
-              onComplete: () => {
-                  this._hourlyScrollView.set_height(-1);
-                  this._hourlyScrollView.hide();
-              }
-            });
-        }
-        else {
-          this._hourlyScrollView.set_height(-1);
-          this._hourlyScrollView.hide();
-        }
-        this.hourlyToggled = false;
-    }
-
-    public ToggleHourlyWeather(): void {
-      if (this.hourlyToggled) {
-        this.HideHourlyWeather();
-      }
-      else {
-        this.ShowHourlyWeather();
-      } 
     }
 }
 
@@ -1574,12 +1582,13 @@ class Config {
     keybindingManager.addHotKey(
       UUID, this.keybinding, Lang.bind(this.app, this.app.on_applet_clicked));
 
-    this.settings.connect(SIGNAL_CHANGED + this.WEATHER_USE_SYMBOLIC_ICONS_KEY, Lang.bind(this, function () {
-      // Static type checking does not work here
-      this.app.ui.UpdateIconType(this.IconType());
-      this.app.refreshWeather()
-      this.app.log.Debug("Symbolic icon setting changed");
-    }))    
+    this.settings.connect(SIGNAL_CHANGED + this.WEATHER_USE_SYMBOLIC_ICONS_KEY, Lang.bind(this, this.IconTypeChanged));    
+  }
+
+  private IconTypeChanged() {
+    this.app.ui.UpdateIconType(this.IconType());
+    this.app.refreshWeather(false)
+    this.app.log.Debug("Symbolic icon setting changed");
   }
 
     /**
