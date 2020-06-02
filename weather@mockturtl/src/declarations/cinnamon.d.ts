@@ -378,8 +378,22 @@ declare namespace imports.gi.Clutter {
         remove_clip(): void;
         set_size(width: number, height: number): void;
         opacity: number;
-        clip_to_allocation: boolean;
-    }
+		clip_to_allocation: boolean;
+		set_x_align(x_align: ActorAlign): void;
+		set_y_align(y_align: ActorAlign): void;
+	}
+	
+	export enum ActorAlign {
+		CENTER,
+		END,
+		FILL,
+		START
+	}
+
+	export enum Orientation {
+		HORIZONTAL,
+		VERTICAL
+	}
 }
 
 declare namespace imports.gi.St {

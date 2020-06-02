@@ -461,6 +461,7 @@ class WeatherApplet extends TextIconApplet {
         this.weather.condition.icon = null;
         this.weather.extra_field = null;
         this.forecasts = [];
+        this.hourlyForecasts = [];
     }
     ;
     DisplayError(title, msg) {

@@ -571,6 +571,7 @@ var WeatherApplet = (function (_super) {
         this.weather.condition.icon = null;
         this.weather.extra_field = null;
         this.forecasts = [];
+        this.hourlyForecasts = [];
     };
     ;
     WeatherApplet.prototype.DisplayError = function (title, msg) {
