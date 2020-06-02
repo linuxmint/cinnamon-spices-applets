@@ -92,6 +92,15 @@
     "step": 1,
     "description": "Forecast length"
   },
+  "forecastHours": {
+    "type": "spinbutton",
+    "default": 12,
+    "min": 3,
+    "max": 24,
+    "units": "hours",
+    "step": 1,
+    "description": "Hourly Forecast length"
+  },
   "unitSettings": {
     "type": "header",
     "description": "Units"

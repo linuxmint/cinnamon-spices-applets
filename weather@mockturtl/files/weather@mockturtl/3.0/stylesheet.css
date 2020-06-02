@@ -79,3 +79,21 @@
     padding: 7px 10px 7px 10px;
     color: #999999;
 }
+
+.hourly-time {
+    color: #999999;
+    font-size: 90%;
+    text-align: center;
+}
+
+.hourly-data {
+    text-align: center;
+}
+
+.hourly-box {
+    padding: 10px 10px 0px 10px;
+}
+
+.hourly-icon {
+    padding: 5px 10px 5px 10px;
+}

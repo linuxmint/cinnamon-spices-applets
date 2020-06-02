@@ -94,7 +94,7 @@
   },
   "forecastHours": {
     "type": "spinbutton",
-    "default": 10,
+    "default": 12,
     "min": 3,
     "max": 24,
     "units": "hours",

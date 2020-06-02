@@ -785,9 +785,12 @@ class UI {
       this.BuildPopupMenu();
     }
 
-    private PopupMenuToggled(caller: any, data: any) {
-      // data - true is opened, false is closed
-      if (data == false) this.HideHourlyWeather();
+    private async PopupMenuToggled(caller: any, data: any) {
+		// data - true is opened, false is closed
+		if (data == false) {
+			await delay(100); // Closing after popup menu is closed 
+			this.HideHourlyWeather();
+		}
     }
 
     /** Creates the skeleton of the popup menu */

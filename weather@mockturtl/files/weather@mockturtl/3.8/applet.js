@@ -569,9 +569,11 @@ class UI {
         this.menuManager._signals.connect(this.menu, "open-state-changed", this.PopupMenuToggled, this);
         this.BuildPopupMenu();
     }
-    PopupMenuToggled(caller, data) {
-        if (data == false)
+    async PopupMenuToggled(caller, data) {
+        if (data == false) {
+            await delay(100);
             this.HideHourlyWeather();
+        }
     }
     BuildPopupMenu() {
         this._currentWeather = new Bin({ style_class: STYLE_CURRENT });
