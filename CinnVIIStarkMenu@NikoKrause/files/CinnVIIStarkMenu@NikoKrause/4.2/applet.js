@@ -2832,7 +2832,7 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
                     // Parent directory for /usr/include/ is /usr/. So need to add fake name('a').
                     let text = this.searchEntry.get_text().concat('/a');
                     let prefix;
-                    if (text.lastIndexOf(' ') == -1)
+                    if (!text.includes(' '))
                         prefix = text;
                     else
                         prefix = text.substr(text.lastIndexOf(' ') + 1);
@@ -2843,7 +2843,7 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
                 if (symbol === Clutter.Tab) {
                     let text = actor.get_text();
                     let prefix;
-                    if (text.lastIndexOf(' ') == -1)
+                    if (!text.includes(' '))
                         prefix = text;
                     else
                         prefix = text.substr(text.lastIndexOf(' ') + 1);
@@ -3079,6 +3079,7 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
             Mainloop.source_remove(this.vector_update_loop);
             this.vector_update_loop = 0;
         }
+
         if (this.actor_motion_id > 0 && this.current_motion_actor != null) {
             this.current_motion_actor.disconnect(this.actor_motion_id);
             this.actor_motion_id = 0;
@@ -3399,6 +3400,7 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
                                      track_hover: true,
                                      can_focus: true });
         this.searchEntry.set_secondary_icon(this._searchInactiveIcon);
+        this.searchBox.add(this.searchEntry, {x_fill: true, x_align: St.Align.START, y_align: St.Align.MIDDLE, y_fill: false, expand: true});
         this.searchActive = false;
         this.searchEntryText = this.searchEntry.clutter_text;
         this.searchEntryText.connect('text-changed', Lang.bind(this, this._onSearchTextChanged));
@@ -3498,8 +3500,7 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
         this.selectedAppDescription = new St.Label({ style_class: 'menu-selected-app-description', text: "" });
         this.selectedAppBox.add_actor(this.selectedAppDescription);
         this.selectedAppBox._delegate = null;
-        //this.appsBox.add_actor(this.selectedAppBox);
-        this.searchBox.add_actor(this.searchEntry);
+
         this.leftPaneBox.add_actor(this.leftPane);
         this.leftPaneBox.add(this.favExpandBin, { expand: true });
         this.leftPaneBox.add_actor(this.separator.actor);
