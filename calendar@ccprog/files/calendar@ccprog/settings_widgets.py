@@ -55,7 +55,7 @@ class ClocksList(JSONSettingsList):
         for tz in pytz.common_timezones:
             try:
                 region, city = tz.split('/', maxsplit=1)
-            except:
+            except ValueError:
                 continue
 
             if region not in self.region_map:
