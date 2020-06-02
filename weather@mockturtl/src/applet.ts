@@ -723,7 +723,7 @@ class UI {
     private _currentWeatherApiUniqueCap: imports.gi.St.Label;
     private _forecast: ForecastUI[];
     private _forecastBox: imports.gi.Clutter.GridLayout;
-    private _providerCredit: imports.gi.St.Label;
+    private _providerCredit: imports.gi.St.Button;
 
 
     private _hourlyButton: imports.gi.St.Button;
@@ -1039,7 +1039,8 @@ class UI {
     };
 
     public displayBar(provider: WeatherProvider) {
-      this._providerCredit.text = _("Powered by") + " " + provider.name;
+      this._providerCredit.label = _("Powered by") + " " + provider.name;
+      this._providerCredit.url = provider.website;
     }
 
     private unitToUnicode(unit: WeatherUnits): string {
@@ -1325,7 +1326,13 @@ class UI {
         expand: true
       })
 
-      this._providerCredit = new Label({ text: _(ELLIPSIS),});
+      this._providerCredit = new Button({ label: _(ELLIPSIS), reactive: true, style_class: STYLE_LOCATION_LINK});
+      this._providerCredit.connect(SIGNAL_CLICKED, Lang.bind(this, function () {
+          imports.gi.Gio.app_info_launch_default_for_uri(
+            this._providerCredit.url,
+            global.create_app_launch_context()
+          )
+      }));
       this._bar.add(this._providerCredit, {
         x_fill: false,
         x_align: Align.END,
@@ -1875,6 +1882,7 @@ interface WeatherProvider {
   name: string;
   maxForecastSupport: number;
   supportsHourly: boolean;
+  website: string;
 }
 
 interface AppletError {

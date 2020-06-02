@@ -23,6 +23,7 @@ class Weatherbit {
         this.name = "WeatherBit";
         this.supportsHourly = true;
         this.maxForecastSupport = 16;
+        this.website = "https://www.weatherbit.io/";
         this.descriptionLinelength = 25;
         this.supportedLanguages = [
             'ar', 'az', 'be', 'bg', 'bs', 'ca', 'cz', 'da', 'de', 'el', 'en',

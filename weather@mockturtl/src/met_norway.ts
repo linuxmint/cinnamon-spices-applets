@@ -26,7 +26,7 @@ class MetNorway implements WeatherProvider {
     public readonly name = "MET Norway";
     public readonly maxForecastSupport = 10;
     public readonly supportsHourly = false;
-
+    public readonly website = "https://www.met.no/en";
 
     private ctx: MetNorway
     private app: WeatherApplet

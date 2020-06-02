@@ -38,6 +38,7 @@ class Yahoo implements WeatherProvider {
     public name = "Yahoo";
     public maxForecastSupport = 10;
     public supportsHourly = false;
+    public readonly website = "https://www.yahoo.com/news/weather/";
 
 
     private app: WeatherApplet

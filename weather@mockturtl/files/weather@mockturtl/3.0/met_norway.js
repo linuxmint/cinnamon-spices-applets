@@ -60,6 +60,7 @@ var MetNorway = (function () {
         this.name = "MET Norway";
         this.maxForecastSupport = 10;
         this.supportsHourly = false;
+        this.website = "https://www.met.no/en";
         this.baseUrl = "https://api.met.no/weatherapi/locationforecast/1.9/.json?";
         this.ctx = this;
         this.app = app;

@@ -38,6 +38,7 @@ class OpenWeatherMap implements WeatherProvider {
     public readonly name = "OpenWeatherMap";
     public readonly maxForecastSupport = 7;
     public readonly supportsHourly = true;
+    public readonly website = "https://openweathermap.org/";
 
     private supportedLanguages = ["af", "ar", "az", "bg", "ca", "cz", "da", "de", "el", "en", "eu", "fa", "fi",
      "fr", "gl", "he", "hi", "hr", "hu", "id", "it", "ja", "kr", "la", "lt", "mk", "no", "nl", "pl",
@@ -93,7 +94,7 @@ class OpenWeatherMap implements WeatherProvider {
             location: {
               //city: json.name,
               //country: json.sys.country,
-              url: null, // "https://openweathermap.org/city/" + json.id,
+              url: "https://openweathermap.org/city/",
               timeZone: json.timezone
             },
             date: new Date((json.current.dt) * 1000),

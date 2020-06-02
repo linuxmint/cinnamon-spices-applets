@@ -62,6 +62,7 @@ var DarkSky = (function () {
         this.name = "DarkSky";
         this.maxForecastSupport = 8;
         this.supportsHourly = false;
+        this.website = "https://darksky.net/poweredby/";
         this.descriptionLinelength = 25;
         this.supportedLanguages = [
             'ar', 'az', 'be', 'bg', 'bs', 'ca', 'cs', 'da', 'de', 'el', 'en', 'es',

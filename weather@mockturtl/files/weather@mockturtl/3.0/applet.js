@@ -885,7 +885,8 @@ var UI = (function () {
     };
     ;
     UI.prototype.displayBar = function (provider) {
-        this._providerCredit.text = _("Powered by") + " " + provider.name;
+        this._providerCredit.label = _("Powered by") + " " + provider.name;
+        this._providerCredit.url = provider.website;
     };
     UI.prototype.unitToUnicode = function (unit) {
         return unit == "fahrenheit" ? '\u2109' : '\u2103';
@@ -1103,7 +1104,10 @@ var UI = (function () {
             y_fill: false,
             expand: true
         });
-        this._providerCredit = new Label({ text: _(ELLIPSIS), });
+        this._providerCredit = new Button({ label: _(ELLIPSIS), reactive: true, style_class: STYLE_LOCATION_LINK });
+        this._providerCredit.connect(SIGNAL_CLICKED, Lang.bind(this, function () {
+            imports.gi.Gio.app_info_launch_default_for_uri(this._providerCredit.url, global.create_app_launch_context());
+        }));
         this._bar.add(this._providerCredit, {
             x_fill: false,
             x_align: Align.END,

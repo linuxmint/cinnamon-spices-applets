@@ -24,6 +24,7 @@ class Yahoo {
         this.name = "Yahoo";
         this.maxForecastSupport = 10;
         this.supportsHourly = false;
+        this.website = "https://www.yahoo.com/news/weather/";
         this.app = _app;
     }
     async GetWeather() {

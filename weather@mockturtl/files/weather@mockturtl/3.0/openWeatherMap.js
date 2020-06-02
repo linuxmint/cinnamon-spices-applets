@@ -62,6 +62,7 @@ var OpenWeatherMap = (function () {
         this.name = "OpenWeatherMap";
         this.maxForecastSupport = 7;
         this.supportsHourly = true;
+        this.website = "https://openweathermap.org/";
         this.supportedLanguages = ["af", "ar", "az", "bg", "ca", "cz", "da", "de", "el", "en", "eu", "fa", "fi",
             "fr", "gl", "he", "hi", "hr", "hu", "id", "it", "ja", "kr", "la", "lt", "mk", "no", "nl", "pl",
             "pt", "pt_br", "ro", "ru", "se", "sk", "sl", "sp", "es", "sr", "th", "tr", "ua", "uk", "vi", "zh_cn", "zh_tw", "zu"];
@@ -108,7 +109,7 @@ var OpenWeatherMap = (function () {
                     lon: json.lon
                 },
                 location: {
-                    url: null,
+                    url: "https://openweathermap.org/city/",
                     timeZone: json.timezone
                 },
                 date: new Date((json.current.dt) * 1000),
