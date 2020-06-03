@@ -63,15 +63,16 @@ var keybindingManager = imports.ui.main.keybindingManager;
 var timeout_add_seconds = imports.mainloop.timeout_add_seconds;
 var _a = imports.gi.Soup, Message = _a.Message, Session = _a.Session, ProxyResolverDefault = _a.ProxyResolverDefault, SessionAsync = _a.SessionAsync;
 var _b = imports.gi.St, Bin = _b.Bin, DrawingArea = _b.DrawingArea, BoxLayout = _b.BoxLayout, Side = _b.Side, IconType = _b.IconType, Label = _b.Label, ScrollView = _b.ScrollView, Icon = _b.Icon, Button = _b.Button, Align = _b.Align, Widget = _b.Widget;
-var _c = imports.gi.Clutter, GridLayout = _c.GridLayout, Actor = _c.Actor;
+var _c = imports.gi.Clutter, GridLayout = _c.GridLayout, Actor = _c.Actor, Orientation = _c.Orientation;
+var _d = imports.gi.Pango, EllipsizeMode = _d.EllipsizeMode, WrapMode = _d.WrapMode;
 var get_language_names = imports.gi.GLib.get_language_names;
 var PolicyType = imports.gi.Gtk.PolicyType;
 var addTween = imports.ui.tweener.addTween;
-var _d = imports.ui.applet, TextIconApplet = _d.TextIconApplet, AllowedLayout = _d.AllowedLayout, AppletPopupMenu = _d.AppletPopupMenu, MenuItem = _d.MenuItem;
-var _e = imports.ui.popupMenu, PopupMenuManager = _e.PopupMenuManager, PopupSeparatorMenuItem = _e.PopupSeparatorMenuItem;
-var _f = imports.ui.settings, AppletSettings = _f.AppletSettings, BindingDirection = _f.BindingDirection;
-var _g = imports.misc.util, spawnCommandLine = _g.spawnCommandLine, spawn_async = _g.spawn_async;
-var _h = imports.ui.messageTray, SystemNotificationSource = _h.SystemNotificationSource, Notification = _h.Notification;
+var _e = imports.ui.applet, TextIconApplet = _e.TextIconApplet, AllowedLayout = _e.AllowedLayout, AppletPopupMenu = _e.AppletPopupMenu, MenuItem = _e.MenuItem;
+var _f = imports.ui.popupMenu, PopupMenuManager = _f.PopupMenuManager, PopupSeparatorMenuItem = _f.PopupSeparatorMenuItem;
+var _g = imports.ui.settings, AppletSettings = _g.AppletSettings, BindingDirection = _g.BindingDirection;
+var _h = imports.misc.util, spawnCommandLine = _h.spawnCommandLine, spawn_async = _h.spawn_async;
+var _j = imports.ui.messageTray, SystemNotificationSource = _j.SystemNotificationSource, Notification = _j.Notification;
 var SignalManager = imports.misc.signalManager.SignalManager;
 var messageTray = imports.ui.main.messageTray;
 var utils = importModule("utils");
@@ -712,8 +713,8 @@ var UI = (function () {
         this._hourlyScrollView = new ScrollView({
             hscrollbar_policy: PolicyType.AUTOMATIC,
             vscrollbar_policy: PolicyType.NEVER,
-            x_fill: false,
-            y_fill: false,
+            x_fill: true,
+            y_fill: true,
             y_align: Align.MIDDLE,
             x_align: Align.MIDDLE
         });
@@ -726,8 +727,8 @@ var UI = (function () {
         hscroll.connect("scroll-stop", function () { _this.menu.passEvents = false; });
         this._separatorAreaHourly.actor.hide();
         this._hourlyScrollView.hide();
-        this._hourlyScrollView.clip_to_allocation = true;
-        this._hourlyBox = new BoxLayout({ vertical: false, style_class: "hourly-box" });
+        this._hourlyScrollView.set_clip_to_allocation(true);
+        this._hourlyBox = new BoxLayout({ style_class: "hourly-box" });
         this._hourlyScrollView.add_actor(this._hourlyBox);
         this._bar = new BoxLayout({ vertical: false, style_class: STYLE_BAR });
         var mainBox = new BoxLayout({ vertical: true });
@@ -764,8 +765,8 @@ var UI = (function () {
         var _this = this;
         var _a = this._hourlyScrollView.get_preferred_height(-1), minHeight = _a[0], naturalHeight = _a[1];
         var _b = this._hourlyScrollView.get_preferred_width(-1), minWidth = _b[0], naturalWidth = _b[1];
+        this._hourlyScrollView.set_width(minWidth);
         this._separatorAreaHourly.actor.show();
-        this._hourlyScrollView.width = minWidth;
         if (!!this._hourlyButton.child)
             this._hourlyButton.child.icon_name = "custom-up-arrow-symbolic";
         this._hourlyScrollView.show();
@@ -809,7 +810,6 @@ var UI = (function () {
         this.hourlyToggled = false;
     };
     UI.prototype.ToggleHourlyWeather = function () {
-        global.log("runs");
         if (this.hourlyToggled) {
             this.HideHourlyWeather();
         }
@@ -1250,17 +1250,19 @@ var UI = (function () {
                 Summary: new Label({ text: _(ELLIPSIS), style_class: "hourly-data" }),
                 Temperature: new Label({ text: _(ELLIPSIS), style_class: "hourly-data" })
             });
+            this._hourlyForecasts[index].Summary.clutter_text.set_line_wrap(true);
+            this._hourlyForecasts[index].Summary.set_width(85);
             box.add_child(this._hourlyForecasts[index].Hour);
             box.add_child(this._hourlyForecasts[index].Icon);
             box.add_child(this._hourlyForecasts[index].Summary);
             box.add_child(this._hourlyForecasts[index].Temperature);
             box.add_child(this._hourlyForecasts[index].Precipation);
             this._hourlyBox.add(box, {
-                x_fill: false,
+                x_fill: true,
                 x_align: Align.MIDDLE,
                 y_align: Align.MIDDLE,
-                y_fill: false,
-                expand: true
+                y_fill: true,
+                expand: false
             });
         }
     };

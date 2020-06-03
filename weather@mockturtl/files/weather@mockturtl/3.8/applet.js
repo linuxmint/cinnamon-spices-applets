@@ -14,7 +14,8 @@ const keybindingManager = imports.ui.main.keybindingManager;
 const { timeout_add_seconds } = imports.mainloop;
 const { Message, Session, ProxyResolverDefault, SessionAsync } = imports.gi.Soup;
 const { Bin, DrawingArea, BoxLayout, Side, IconType, Label, ScrollView, Icon, Button, Align, Widget } = imports.gi.St;
-const { GridLayout, Actor } = imports.gi.Clutter;
+const { GridLayout, Actor, Orientation } = imports.gi.Clutter;
+const { EllipsizeMode, WrapMode } = imports.gi.Pango;
 const { get_language_names } = imports.gi.GLib;
 const { PolicyType } = imports.gi.Gtk;
 const { addTween } = imports.ui.tweener;
@@ -589,8 +590,8 @@ class UI {
         this._hourlyScrollView = new ScrollView({
             hscrollbar_policy: PolicyType.AUTOMATIC,
             vscrollbar_policy: PolicyType.NEVER,
-            x_fill: false,
-            y_fill: false,
+            x_fill: true,
+            y_fill: true,
             y_align: Align.MIDDLE,
             x_align: Align.MIDDLE
         });
@@ -603,8 +604,8 @@ class UI {
         hscroll.connect("scroll-stop", () => { this.menu.passEvents = false; });
         this._separatorAreaHourly.actor.hide();
         this._hourlyScrollView.hide();
-        this._hourlyScrollView.clip_to_allocation = true;
-        this._hourlyBox = new BoxLayout({ vertical: false, style_class: "hourly-box" });
+        this._hourlyScrollView.set_clip_to_allocation(true);
+        this._hourlyBox = new BoxLayout({ style_class: "hourly-box" });
         this._hourlyScrollView.add_actor(this._hourlyBox);
         this._bar = new BoxLayout({ vertical: false, style_class: STYLE_BAR });
         let mainBox = new BoxLayout({ vertical: true });
@@ -640,8 +641,8 @@ class UI {
     ShowHourlyWeather() {
         let [minHeight, naturalHeight] = this._hourlyScrollView.get_preferred_height(-1);
         let [minWidth, naturalWidth] = this._hourlyScrollView.get_preferred_width(-1);
+        this._hourlyScrollView.set_width(minWidth);
         this._separatorAreaHourly.actor.show();
-        this._hourlyScrollView.width = minWidth;
         if (!!this._hourlyButton.child)
             this._hourlyButton.child.icon_name = "custom-up-arrow-symbolic";
         this._hourlyScrollView.show();
@@ -684,7 +685,6 @@ class UI {
         this.hourlyToggled = false;
     }
     ToggleHourlyWeather() {
-        global.log("runs");
         if (this.hourlyToggled) {
             this.HideHourlyWeather();
         }
@@ -1124,17 +1124,19 @@ class UI {
                 Summary: new Label({ text: _(ELLIPSIS), style_class: "hourly-data" }),
                 Temperature: new Label({ text: _(ELLIPSIS), style_class: "hourly-data" })
             });
+            this._hourlyForecasts[index].Summary.clutter_text.set_line_wrap(true);
+            this._hourlyForecasts[index].Summary.set_width(85);
             box.add_child(this._hourlyForecasts[index].Hour);
             box.add_child(this._hourlyForecasts[index].Icon);
             box.add_child(this._hourlyForecasts[index].Summary);
             box.add_child(this._hourlyForecasts[index].Temperature);
             box.add_child(this._hourlyForecasts[index].Precipation);
             this._hourlyBox.add(box, {
-                x_fill: false,
+                x_fill: true,
                 x_align: Align.MIDDLE,
                 y_align: Align.MIDDLE,
-                y_fill: false,
-                expand: true
+                y_fill: true,
+                expand: false
             });
         }
     }

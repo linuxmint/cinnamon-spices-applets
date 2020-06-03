@@ -27,7 +27,8 @@ const { Message, Session, ProxyResolverDefault, SessionAsync } = imports.gi.Soup
 // http://developer.gnome.org/st/stable/
 //const St: typeof imports.gi.St = imports.gi.St;
 const { Bin, DrawingArea, BoxLayout, Side, IconType, Label, ScrollView, Icon, Button, Align, Widget } = imports.gi.St;
-const { GridLayout, Actor } = imports.gi.Clutter;
+const { GridLayout, Actor, Orientation } = imports.gi.Clutter;
+const { EllipsizeMode, WrapMode } = imports.gi.Pango;
 const { get_language_names } = imports.gi.GLib;
 const { PolicyType } = imports.gi.Gtk;
 const { addTween } = imports.ui.tweener;
@@ -762,7 +763,7 @@ class UI {
 
     // Hourly Weather
     private _hourlyScrollView: imports.gi.St.ScrollView;
-    private _hourlyBox: imports.gi.St.BoxLayout;
+	private _hourlyBox: imports.gi.St.BoxLayout;
     private _hourlyForecasts: HourlyForecastUI[];
 
     // State variables
@@ -815,12 +816,12 @@ class UI {
 		// Hourly Weather
 		this._hourlyScrollView = new ScrollView(
 			{
-			hscrollbar_policy: PolicyType.AUTOMATIC,
-			vscrollbar_policy: PolicyType.NEVER,
-			x_fill: false,
-			y_fill: false,
-			y_align: Align.MIDDLE,
-			x_align: Align.MIDDLE
+				hscrollbar_policy: PolicyType.AUTOMATIC,
+				vscrollbar_policy: PolicyType.NEVER,
+				x_fill: true,
+				y_fill: true,
+				y_align: Align.MIDDLE,
+				x_align: Align.MIDDLE
 			}
 		);
 		this._hourlyScrollView.overlay_scrollbars = true;
@@ -833,8 +834,11 @@ class UI {
 		hscroll.connect("scroll-stop", () => {this.menu.passEvents = false;});
 		this._separatorAreaHourly.actor.hide();
 		this._hourlyScrollView.hide();
-		this._hourlyScrollView.clip_to_allocation = true;
-		this._hourlyBox = new BoxLayout({ vertical: false, style_class: "hourly-box" });
+		this._hourlyScrollView.set_clip_to_allocation(true);
+		this._hourlyBox = new BoxLayout({style_class: "hourly-box"});
+		// Only add_actor works with ScrollView for some reason, not add_child
+		// and only BoxLayout results in drawn stuff inside the ScrollView.
+		// (Only Boxlayout and Viewport implements St.Scrollable needed inside a scrollview)
 		this._hourlyScrollView.add_actor(this._hourlyBox)
 
 		// Bottom bar
@@ -882,8 +886,8 @@ class UI {
 	public ShowHourlyWeather(): void {
 		let [minHeight, naturalHeight] = this._hourlyScrollView.get_preferred_height(-1);
 		let [minWidth, naturalWidth] = this._hourlyScrollView.get_preferred_width(-1);
+		this._hourlyScrollView.set_width(minWidth);
 		this._separatorAreaHourly.actor.show();
-		this._hourlyScrollView.width = minWidth;
 		if (!!this._hourlyButton.child) this._hourlyButton.child.icon_name = "custom-up-arrow-symbolic";
 		this._hourlyScrollView.show();
 		// workaround: first time after rebuilding ScrollView's naturalHeight
@@ -910,17 +914,19 @@ class UI {
 
 	public HideHourlyWeather(): void {
 		this._separatorAreaHourly.actor.hide();
+		//TODO: scroll back to the beginning?
 		if (!!this._hourlyButton.child) this._hourlyButton.child.icon_name = "custom-down-arrow-symbolic";
 		if (global.settings.get_boolean("desktop-effects-on-menus")) {
-		addTween(this._hourlyScrollView,
-			{
-			height: 0,
-			time: 0.25,
-			onUpdate: () => {},
-			onComplete: () => {
-				this._hourlyScrollView.set_height(-1);
-				this._hourlyScrollView.hide();
-			}
+			// TODO: eliminate Clutter Warnings on collapse in logs
+			addTween(this._hourlyScrollView,
+				{
+					height: 0,
+					time: 0.25,
+					onUpdate: () => {},
+					onComplete: () => {
+						this._hourlyScrollView.set_height(-1);
+						this._hourlyScrollView.hide();
+				}
 			});
 		}
 		else {
@@ -931,7 +937,6 @@ class UI {
 	}
 
 	public ToggleHourlyWeather(): void {
-		global.log("runs")
 		if (this.hourlyToggled) {
 			this.HideHourlyWeather();
 		}
@@ -1475,28 +1480,31 @@ class UI {
 		for (let index = 0; index < hours; index++) {
 			let box = new BoxLayout({vertical: true});
 			this._hourlyForecasts.push({
-			Hour: new Label({text: "Hour", style_class: "hourly-time"}),
-			Icon: new Icon({
-				icon_type: config.IconType(),
-				icon_size: 24,
-				icon_name: APPLET_ICON,
-				style_class: "hourly-icon"
-			}),
-			Precipation: new Label({text: " ", style_class: "hourly-data"}),
-			Summary: new Label({text: _(ELLIPSIS), style_class: "hourly-data"}),
-			Temperature: new Label({text: _(ELLIPSIS), style_class: "hourly-data"})
+				Hour: new Label({text: "Hour", style_class: "hourly-time"}),
+				Icon: new Icon({
+					icon_type: config.IconType(),
+					icon_size: 24,
+					icon_name: APPLET_ICON,
+					style_class: "hourly-icon"
+				}),
+				Precipation: new Label({text: " ", style_class: "hourly-data"}),
+				Summary: new Label({text: _(ELLIPSIS), style_class: "hourly-data"}),
+				Temperature: new Label({text: _(ELLIPSIS), style_class: "hourly-data"})
 			})
+			// TODO: Fix issue where text is Ellided instead of wrapped when its too long
+			this._hourlyForecasts[index].Summary.clutter_text.set_line_wrap(true);
+			this._hourlyForecasts[index].Summary.set_width(85);
 			box.add_child(this._hourlyForecasts[index].Hour);
 			box.add_child(this._hourlyForecasts[index].Icon);
 			box.add_child(this._hourlyForecasts[index].Summary);
 			box.add_child(this._hourlyForecasts[index].Temperature);
 			box.add_child(this._hourlyForecasts[index].Precipation);
 			this._hourlyBox.add(box, {
-			x_fill: false,
-			x_align: Align.MIDDLE,
-			y_align: Align.MIDDLE,
-			y_fill: false,
-			expand: true
+				x_fill: true,
+				x_align: Align.MIDDLE,
+				y_align: Align.MIDDLE,
+				y_fill: true,
+				expand: false
 			});
 		}
       
@@ -2064,6 +2072,11 @@ interface Condition {
 
 type GUIDStore = {
   	[key: number]: string
+}
+
+interface SunTimes {
+    sunrise: Date;
+    sunset: Date
 }
 
 /**

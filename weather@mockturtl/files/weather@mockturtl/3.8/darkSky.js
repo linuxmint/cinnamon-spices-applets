@@ -20,6 +20,7 @@ var FahrenheitToKelvin = utils.FahrenheitToKelvin;
 var CelsiusToKelvin = utils.CelsiusToKelvin;
 var MPHtoMPS = utils.MPHtoMPS;
 var icons = utils.icons;
+var IsNight = utils.IsNight;
 var weatherIconSafely = utils.weatherIconSafely;
 class DarkSky {
     constructor(_app) {
@@ -128,7 +129,7 @@ class DarkSky {
                     condition: {
                         main: this.GetShortSummary(hour.summary),
                         description: this.ProcessSummary(hour.summary),
-                        icon: weatherIconSafely(this.ResolveIcon(hour.icon, { sunrise: sunrise, sunset: sunset }), this.app.config.IconType()),
+                        icon: weatherIconSafely(this.ResolveIcon(hour.icon, { sunrise: sunrise, sunset: sunset }, new Date(hour.time * 1000)), this.app.config.IconType()),
                         customIcon: this.ResolveCustomIcon(hour.icon)
                     },
                     precipation: {
@@ -259,15 +260,7 @@ class DarkSky {
     WordBanned(word) {
         return this.DarkSkyFilterWords.indexOf(word) != -1;
     }
-    IsNight(sunTimes) {
-        if (!sunTimes)
-            return false;
-        let now = new Date();
-        if (now < sunTimes.sunrise || now > sunTimes.sunset)
-            return true;
-        return false;
-    }
-    ResolveIcon(icon, sunTimes) {
+    ResolveIcon(icon, sunTimes, date) {
         switch (icon) {
             case "rain":
                 return [icons.rain, icons.showers_scattered, icons.rain_freezing];
@@ -278,9 +271,9 @@ class DarkSky {
             case "fog":
                 return [icons.fog];
             case "wind":
-                return (sunTimes && this.IsNight(sunTimes)) ? ["weather-wind", "wind", "weather-breeze", icons.clouds, icons.few_clouds_night] : ["weather-wind", "wind", "weather-breeze", icons.clouds, icons.few_clouds_day];
+                return (sunTimes && IsNight(sunTimes, date)) ? ["weather-windy", "wind", "weather-breeze", icons.clouds, icons.few_clouds_night] : ["weather-windy", "wind", "weather-breeze", icons.clouds, icons.few_clouds_day];
             case "cloudy":
-                return (sunTimes && this.IsNight(sunTimes)) ? [icons.overcast, icons.clouds, icons.few_clouds_night] : [icons.overcast, icons.clouds, icons.few_clouds_day];
+                return (sunTimes && IsNight(sunTimes, date)) ? [icons.overcast, icons.clouds, icons.few_clouds_night] : [icons.overcast, icons.clouds, icons.few_clouds_day];
             case "partly-cloudy-night":
                 return [icons.few_clouds_night];
             case "partly-cloudy-day":

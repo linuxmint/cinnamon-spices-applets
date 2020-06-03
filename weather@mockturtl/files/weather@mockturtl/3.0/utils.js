@@ -151,6 +151,19 @@ var getDayName = function (dayNum) {
     var days = [_('Sunday'), _('Monday'), _('Tuesday'), _('Wednesday'), _('Thursday'), _('Friday'), _('Saturday')];
     return days[dayNum];
 };
+var MilitaryTime = function (date) {
+    return date.getHours() * 1000 + date.getMinutes();
+};
+var IsNight = function (sunTimes, date) {
+    if (!sunTimes)
+        return false;
+    var time = (!!date) ? MilitaryTime(date) : MilitaryTime(new Date());
+    var sunrise = MilitaryTime(sunTimes.sunrise);
+    var sunset = MilitaryTime(sunTimes.sunset);
+    if (time >= sunrise && time < sunset)
+        return false;
+    return true;
+};
 var timeToUserUnits = function (date, show24Hours) {
     var timeStr = util_format_date('%H:%M', date.getTime());
     var time = timeStr.split(':');
@@ -321,14 +334,28 @@ var icons = {
     few_clouds_day: 'weather-few-clouds',
     few_clouds_night: 'weather-few-clouds-night',
     clouds: 'weather-clouds',
+    many_clouds: 'weather-many-clouds',
     overcast: 'weather_overcast',
     showers_scattered: 'weather-showers-scattered',
+    showers_scattered_day: 'weather-showers-scattered-day',
+    showers_scattered_night: 'weather-showers-scattered-night',
+    shower_day: 'weather-showers-day',
+    shower_night: 'weather-showers-night',
     showers: 'weather-showers',
     rain: 'weather-rain',
     rain_freezing: 'weather-freezing-rain',
     snow: 'weather-snow',
+    snow_day: 'weather-snow',
+    snow_night: 'weather-snow-night',
+    snow_rain: 'weather-snow-rain',
+    snow_scattered: 'weather-snow-scattered',
+    snow_scattered_day: 'weather-snow-scattered-day',
+    snow_scattered_night: 'weather-snow-scattered-night',
     storm: 'weather-storm',
+    hail: 'weather-hail',
     fog: 'weather-fog',
+    tornado: 'weather-tornado',
+    wind: 'weather-windy',
     alert: 'weather-severe-alert'
 };
 var weatherIconSafely = function (code, icon_type) {
