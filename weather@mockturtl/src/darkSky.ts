@@ -96,7 +96,7 @@ class DarkSky implements WeatherProvider {
     };
 
 
-    private ParseWeather(json: any): WeatherData {
+    private ParseWeather(json: DarkSkyPayload): WeatherData {
         try {
             let sunrise = new Date(json.daily.data[0].sunriseTime * 1000);
             let sunset = new Date(json.daily.data[0].sunsetTime * 1000)
@@ -130,7 +130,8 @@ class DarkSky implements WeatherProvider {
                     value: this.ToKelvin(json.currently.apparentTemperature),
                     type: "temperature"
                 },
-                forecasts: []
+				forecasts: [],
+				hourlyForecasts: []
             }
             // Forecast
             for (let i = 0; i < json.daily.data.length; i++) {
@@ -153,7 +154,30 @@ class DarkSky implements WeatherProvider {
                   forecast.date.setHours(forecast.date.getHours() + 12);
 
                   result.forecasts.push(forecast);
-            }
+			}
+
+			for (let i = 0; i < json.hourly.data.length; i++) {
+                let hour = json.hourly.data[i];
+                let forecast: HourlyForecastData = {          
+                    date: new Date(hour.time * 1000),         
+					temp: this.ToKelvin(hour.temperature),                  
+                    condition: {
+                      main: this.GetShortSummary(hour.summary),               
+                      description: this.ProcessSummary(hour.summary),        
+                      icon: weatherIconSafely(this.ResolveIcon(hour.icon, {sunrise: sunrise, sunset: sunset}), this.app.config.IconType()),    
+                      customIcon: this.ResolveCustomIcon(hour.icon)           
+					},
+					precipation: {
+						type: hour.precipType as PrecipationType,
+						volume: hour.precipProbability,
+						chance: hour.precipProbability * 100
+					}
+                  };
+
+                  result.hourlyForecasts.push(forecast);
+			}
+			
+
             return result;
         }
         catch(e) {
@@ -187,7 +211,7 @@ class DarkSky implements WeatherProvider {
         }
         if (isCoordinate(location)) {
             query = this.query + key + "/" + location + 
-            "?exclude=minutely,hourly,flags" + "&units=" + this.unit;
+            "?exclude=minutely,flags" + "&units=" + this.unit;
             let locale = this.ConvertToAPILocale(this.app.currentLocale);
             if (isLangSupported(locale, this.supportedLanguages) && this.app.config._translateCondition) {
                 query = query + "&lang=" + locale;
@@ -250,7 +274,8 @@ class DarkSky implements WeatherProvider {
     };
 
     private GetShortSummary(summary: string): string {
-        let processed = summary.split(" ");
+		let processed = summary.split(" ");
+		if (processed.length == 1) return processed[0];
         let result = "";
         for (let i = 0; i < 2; i++) {
             if (!/[\(\)]/.test(processed[i]) && !this.WordBanned(processed[i])) {
@@ -391,5 +416,105 @@ type queryUnits = 'si' | 'us' | 'uk2';
 interface SunTimes {
     sunrise: Date;
     sunset: Date
+}
+
+interface DarkSkyHourlyPayload {
+	time: number;
+	summary: string;
+	icon: string;
+	precipIntensity: number;
+	precipProbability: number;
+	precipType: string;
+	temperature: number;
+	apparentTemperature: number;
+	dewPoint: number;
+	humidity: number;
+	pressure: number;
+	windSpeed: number;
+	windGust: number;
+	windBearing: number;
+	cloudCover: number;
+	uvIndex: number;
+	visibility: number;
+	ozone: number;
+}
+
+interface DarkSkyDailyPayload {
+	time: number;
+	summary: string;
+	icon: string;
+	sunriseTime: number;
+	sunsetTime: number;
+	moonPhase: number;
+	precipIntensity: number;
+	precipIntensityMax: number;
+	precipIntensityMaxTime: number;
+	precipProbability: number;
+	precipType: string;
+	temperatureHigh: number;
+	temperatureHighTime: number;
+	temperatureLow: number;
+	temperatureLowTime: number;
+	apparentTemperatureHigh: number;
+	apparentTemperatureHighTime: number;
+	apparentTemperatureLow: number;
+	apparentTemperatureLowTime: number;
+	dewPoint: number;
+	humidity: number;
+	pressure: number;
+	windSpeed: number;
+	windGust: number;
+	windGustTime: number;
+	windBearing: number;
+	cloudCover: number;
+	uvIndex: number;
+	uvIndexTime: number;
+	visibility: number;
+	ozone: number;
+	temperatureMin: number;
+	temperatureMinTime: number;
+	temperatureMax: number;
+	temperatureMaxTime: number;
+	apparentTemperatureMin: number;
+	apparentTemperatureMinTime: number;
+	apparentTemperatureMax: number;
+	apparentTemperatureMaxTime: number;
+}
+interface DarkSkyPayload {
+	latitude: number;
+	longitude: number;
+	timezone: string;
+	currently: {
+		/** Unix timestamp in seconds */
+		time: number;
+		summary: string;
+		icon: string;
+		nearestStormDistance: number;
+        nearestStormBearing: number;
+        precipIntensity: number;
+        precipProbability: number;
+        temperature: number;
+        apparentTemperature: number;
+        dewPoint: number;
+        humidity: number;
+        pressure: number;
+        windSpeed: number;
+        windGust: number;
+        windBearing: number;
+        cloudCover: number;
+        uvIndex: number;
+        visibility: number;
+        ozone: number;
+    },
+    hourly: {
+        summary: string;
+        icon: string;
+        data: DarkSkyHourlyPayload[];
+	}
+	daily: {
+        summary: string;
+        icon: string;
+		data: DarkSkyDailyPayload[]
+	}
 }
 

@@ -1164,13 +1164,10 @@ class UI {
 			ui.Temperature.text = TempToUserConfig(hour.temp, config._temperatureUnit, config._tempRussianStyle) + " " + this.unitToUnicode(config._temperatureUnit);
 			ui.Icon.icon_name = (config._useCustomMenuIcons) ? hour.condition.customIcon : hour.condition.icon;
 			ui.Summary.text = hour.condition.main;
-			if (!!hour.precipation) {
-			ui.Precipation.text = hour.precipation + " mm";
+			if (!!hour.precipation && hour.precipation.volume > 0) {
+				ui.Precipation.text = hour.precipation.volume + " mm";
+				if (!!hour.precipation.chance) ui.Precipation.text += (", " + Math.round(hour.precipation.chance) + "%")
 			}
-			if (!!hour.snow) {
-			ui.Precipation.text = hour.snow + " mm";
-			}
-
 		}
 
 		return true;
@@ -1958,11 +1955,16 @@ interface HourlyForecastData {
 	/** Kelvin */
 	temp: number,
 	condition: Condition
-	/** in mm */
-	precipation?: number;
-	/** in mm */
-	snow?: number
+	precipation?: {
+		type: PrecipationType,
+		/** in mm */
+		volume: number,
+		/** % */
+		chance?: number
+	};
 }
+
+type PrecipationType = "rain" | "snow";
 
 interface LocationData {
 	lat: number,

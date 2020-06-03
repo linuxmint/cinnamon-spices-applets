@@ -86,7 +86,7 @@
 }
 
 .hourly-data {
-    text-align: center;
+	text-align: center;
 }
 
 .hourly-box {
@@ -94,10 +94,5 @@
 }
 
 .hourly-icon {
-    padding: 5px 10px 5px 10px;
-}
-
-.weather-button:active
-.weather-button:hover {
-	color: unset !important;
+    padding: 5px 20px 5px 20px;
 }

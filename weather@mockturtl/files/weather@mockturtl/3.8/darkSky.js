@@ -101,7 +101,8 @@ class DarkSky {
                     value: this.ToKelvin(json.currently.apparentTemperature),
                     type: "temperature"
                 },
-                forecasts: []
+                forecasts: [],
+                hourlyForecasts: []
             };
             for (let i = 0; i < json.daily.data.length; i++) {
                 let day = json.daily.data[i];
@@ -118,6 +119,25 @@ class DarkSky {
                 };
                 forecast.date.setHours(forecast.date.getHours() + 12);
                 result.forecasts.push(forecast);
+            }
+            for (let i = 0; i < json.hourly.data.length; i++) {
+                let hour = json.hourly.data[i];
+                let forecast = {
+                    date: new Date(hour.time * 1000),
+                    temp: this.ToKelvin(hour.temperature),
+                    condition: {
+                        main: this.GetShortSummary(hour.summary),
+                        description: this.ProcessSummary(hour.summary),
+                        icon: weatherIconSafely(this.ResolveIcon(hour.icon, { sunrise: sunrise, sunset: sunset }), this.app.config.IconType()),
+                        customIcon: this.ResolveCustomIcon(hour.icon)
+                    },
+                    precipation: {
+                        type: hour.precipType,
+                        volume: hour.precipProbability,
+                        chance: hour.precipProbability * 100
+                    }
+                };
+                result.hourlyForecasts.push(forecast);
             }
             return result;
         }
@@ -152,7 +172,7 @@ class DarkSky {
         }
         if (isCoordinate(location)) {
             query = this.query + key + "/" + location +
-                "?exclude=minutely,hourly,flags" + "&units=" + this.unit;
+                "?exclude=minutely,flags" + "&units=" + this.unit;
             let locale = this.ConvertToAPILocale(this.app.currentLocale);
             if (isLangSupported(locale, this.supportedLanguages) && this.app.config._translateCondition) {
                 query = query + "&lang=" + locale;
@@ -213,6 +233,8 @@ class DarkSky {
     ;
     GetShortSummary(summary) {
         let processed = summary.split(" ");
+        if (processed.length == 1)
+            return processed[0];
         let result = "";
         for (let i = 0; i < 2; i++) {
             if (!/[\(\)]/.test(processed[i]) && !this.WordBanned(processed[i])) {

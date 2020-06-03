@@ -149,7 +149,8 @@ var DarkSky = (function () {
                     value: this.ToKelvin(json.currently.apparentTemperature),
                     type: "temperature"
                 },
-                forecasts: []
+                forecasts: [],
+                hourlyForecasts: []
             };
             for (var i = 0; i < json.daily.data.length; i++) {
                 var day = json.daily.data[i];
@@ -166,6 +167,25 @@ var DarkSky = (function () {
                 };
                 forecast.date.setHours(forecast.date.getHours() + 12);
                 result.forecasts.push(forecast);
+            }
+            for (var i = 0; i < json.hourly.data.length; i++) {
+                var hour = json.hourly.data[i];
+                var forecast = {
+                    date: new Date(hour.time * 1000),
+                    temp: this.ToKelvin(hour.temperature),
+                    condition: {
+                        main: this.GetShortSummary(hour.summary),
+                        description: this.ProcessSummary(hour.summary),
+                        icon: weatherIconSafely(this.ResolveIcon(hour.icon, { sunrise: sunrise, sunset: sunset }), this.app.config.IconType()),
+                        customIcon: this.ResolveCustomIcon(hour.icon)
+                    },
+                    precipation: {
+                        type: hour.precipType,
+                        volume: hour.precipProbability,
+                        chance: hour.precipProbability * 100
+                    }
+                };
+                result.hourlyForecasts.push(forecast);
             }
             return result;
         }
@@ -200,7 +220,7 @@ var DarkSky = (function () {
         }
         if (isCoordinate(location)) {
             query = this.query + key + "/" + location +
-                "?exclude=minutely,hourly,flags" + "&units=" + this.unit;
+                "?exclude=minutely,flags" + "&units=" + this.unit;
             var locale = this.ConvertToAPILocale(this.app.currentLocale);
             if (isLangSupported(locale, this.supportedLanguages) && this.app.config._translateCondition) {
                 query = query + "&lang=" + locale;
@@ -261,6 +281,8 @@ var DarkSky = (function () {
     ;
     DarkSky.prototype.GetShortSummary = function (summary) {
         var processed = summary.split(" ");
+        if (processed.length == 1)
+            return processed[0];
         var result = "";
         for (var i = 0; i < 2; i++) {
             if (!/[\(\)]/.test(processed[i]) && !this.WordBanned(processed[i])) {

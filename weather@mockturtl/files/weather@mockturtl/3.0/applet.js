@@ -996,11 +996,10 @@ var UI = (function () {
             ui.Temperature.text = TempToUserConfig(hour.temp, config._temperatureUnit, config._tempRussianStyle) + " " + this.unitToUnicode(config._temperatureUnit);
             ui.Icon.icon_name = (config._useCustomMenuIcons) ? hour.condition.customIcon : hour.condition.icon;
             ui.Summary.text = hour.condition.main;
-            if (!!hour.precipation) {
-                ui.Precipation.text = hour.precipation + " mm";
-            }
-            if (!!hour.snow) {
-                ui.Precipation.text = hour.snow + " mm";
+            if (!!hour.precipation && hour.precipation.volume > 0) {
+                ui.Precipation.text = hour.precipation.volume + " mm";
+                if (!!hour.precipation.chance)
+                    ui.Precipation.text += (", " + Math.round(hour.precipation.chance) + "%");
             }
         }
         return true;

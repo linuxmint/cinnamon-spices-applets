@@ -119,13 +119,19 @@ class OpenWeatherMap {
                         description: hour.weather[0].description,
                         icon: weatherIconSafely(self.ResolveIcon(hour.weather[0].icon), self.app.config.IconType()),
                         customIcon: self.ResolveCustomIcon(hour.weather[0].icon)
-                    }
+                    },
                 };
                 if (!!hour.rain) {
-                    forecast.precipation = hour.rain["1h"];
+                    forecast.precipation = {
+                        volume: hour.rain["1h"],
+                        type: "rain"
+                    };
                 }
                 if (!!hour.snow) {
-                    forecast.snow = hour.snow["1h"];
+                    forecast.precipation = {
+                        volume: hour.snow["1h"],
+                        type: "snow"
+                    };
                 }
                 hourly.push(forecast);
             }
