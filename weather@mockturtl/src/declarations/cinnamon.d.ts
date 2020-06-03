@@ -4,7 +4,9 @@ declare class global {
     static log(...any: Array < any > ): void;
     static logError(...text: Array < string > ): void;
     static create_app_launch_context(): imports.gi.Gio.AppLaunchContext;
-    static settings: any;
+	static settings: any;
+	static set_cursor(cursor: imports.gi.Cinnamon.Cursor): void;
+	static unset_cursor(): void;
 }
 
 declare namespace imports.cairo {
@@ -322,7 +324,11 @@ declare namespace imports.mainloop {
 }
 
 declare namespace imports.gi.Cinnamon {
-    function util_format_date(format: string, milliseconds: number): string;
+	function util_format_date(format: string, milliseconds: number): string;
+	enum Cursor {
+		//INCOMPLETE
+		POINTING_HAND,
+	}
 }
 declare namespace imports.gi.Soup {
     export class SessionAsync {

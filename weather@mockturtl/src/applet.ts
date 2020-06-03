@@ -146,8 +146,6 @@ class WeatherApplet extends TextIconApplet {
 	///////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////  
 
-
-
 	/** Soup session (see https://bugzilla.gnome.org/show_bug.cgi?id=661323#c64) */
 	private readonly _httpSession = new SessionAsync();
 	/** Running applet's path*/
@@ -348,6 +346,12 @@ class WeatherApplet extends TextIconApplet {
 
 	/** Override function */
 	private on_applet_removed_from_panel(deleteConfig: any) {
+		// TODO: Proper unload
+		//this.unloadStylesheet();
+        //Main.keybindingManager.removeHotKey(this.menu_keybinding_name);
+        //this.sigMan.disconnectAllSignals();
+        //this.settings && this.settings.finalize();
+        //$.Debugger.destroy();
 		this.log.Print("Removing applet instance...")
 		this.loop.Stop();
 	}
@@ -1777,10 +1781,12 @@ class WeatherButton {
 
 	handleEnter(actor?: WeatherButton) {
 		if (!this.disabled) this.actor.add_style_pseudo_class('active');
-	}
+		//global.set_cursor(imports.gi.Cinnamon.Cursor.POINTING_HAND);
+    }
 
 	handleLeave() {
 		this.actor.remove_style_pseudo_class('active');
+		//global.unset_cursor()
 	}
 
 	disable() {
