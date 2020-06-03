@@ -178,7 +178,9 @@ class MetNorway implements WeatherProvider {
         forecasts.push(forecast);
       }
       return forecasts;
-    }
+	}
+	
+	// TODO: Build Hourly Forecasts
 
     // -------------------------------------------
     //

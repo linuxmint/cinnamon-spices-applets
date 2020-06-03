@@ -36,11 +36,11 @@ class Weatherbit {
         this.app = _app;
     }
     async GetWeather() {
+        let forecastResult = this.GetData(this.daily_url, this.ParseForecast);
         let currentResult = await this.GetData(this.current_url, this.ParseCurrent);
         if (!currentResult)
             return null;
-        let forecastResult = await this.GetData(this.daily_url, this.ParseForecast);
-        currentResult.forecasts = forecastResult;
+        currentResult.forecasts = await forecastResult;
         return currentResult;
     }
     ;

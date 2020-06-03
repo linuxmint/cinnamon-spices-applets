@@ -73,18 +73,20 @@ var Weatherbit = (function () {
     }
     Weatherbit.prototype.GetWeather = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var currentResult, forecastResult;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4, this.GetData(this.current_url, this.ParseCurrent)];
+            var forecastResult, currentResult, _a;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        forecastResult = this.GetData(this.daily_url, this.ParseForecast);
+                        return [4, this.GetData(this.current_url, this.ParseCurrent)];
                     case 1:
-                        currentResult = _a.sent();
+                        currentResult = _b.sent();
                         if (!currentResult)
                             return [2, null];
-                        return [4, this.GetData(this.daily_url, this.ParseForecast)];
+                        _a = currentResult;
+                        return [4, forecastResult];
                     case 2:
-                        forecastResult = _a.sent();
-                        currentResult.forecasts = forecastResult;
+                        _a.forecasts = _b.sent();
                         return [2, currentResult];
                 }
             });

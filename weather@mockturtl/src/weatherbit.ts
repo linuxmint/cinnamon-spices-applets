@@ -59,10 +59,10 @@ class Weatherbit implements WeatherProvider {
     //  Functions
     //--------------------------------------------------------
     public async GetWeather(): Promise<WeatherData> {
-        let currentResult = await this.GetData(this.current_url, this.ParseCurrent) as WeatherData;
-        if (!currentResult) return null;
-        let forecastResult = await this.GetData(this.daily_url, this.ParseForecast) as ForecastData[];
-        currentResult.forecasts = forecastResult;
+		let forecastResult = this.GetData(this.daily_url, this.ParseForecast) as Promise<ForecastData[]>;
+		let currentResult = await this.GetData(this.current_url, this.ParseCurrent) as WeatherData;
+		if (!currentResult) return null;
+        currentResult.forecasts = await forecastResult;
         return currentResult;
     };
 
@@ -173,7 +173,9 @@ class Weatherbit implements WeatherProvider {
           self.app.HandleError({type: "soft", service: "weatherbit", detail: "unusal payload", message: _("Failed to Process Forecast Info")})
           return null; 
       }
-    };
+	};
+	
+	// TODO: Build Hourly Forecasts
 
     private TimeToDate(time: string, hourDiff: number): Date {
         let hoursMinutes = time.split(":");
