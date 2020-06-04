@@ -84,9 +84,9 @@ class MetNorway {
                 parsedHourly.push(this.ParseHourlyForecast(item, fromDate, toDate));
             }
         }
-        let forecasts = this.BuildForecasts(parsed6hourly);
         let weather = this.BuildWeather(this.GetEarliestDataForToday(parsedWeathers), this.GetEarliestDataForToday(parsedHourly));
-        weather.forecasts = forecasts;
+        weather.hourlyForecasts = this.BuildHourlyForecasts(parsedHourly, parsed6hourly);
+        weather.forecasts = this.BuildForecasts(parsed6hourly);
         return weather;
     }
     BuildWeather(weather, hourly) {
@@ -150,6 +150,25 @@ class MetNorway {
             forecast.temp_max = CelsiusToKelvin(forecast.temp_max);
             forecast.temp_min = CelsiusToKelvin(forecast.temp_min);
             forecast.condition = this.ResolveCondition(this.GetMostSevereCondition(conditionCounter));
+            forecasts.push(forecast);
+        }
+        return forecasts;
+    }
+    BuildHourlyForecasts(hours, days) {
+        let forecasts = [];
+        for (let i = 0; i < hours.length; i++) {
+            const hour = hours[i];
+            let forecast = {
+                condition: this.ResolveCondition(hour.symbol),
+                date: hour.from,
+                temp: CelsiusToKelvin((days[i].minTemperature + days[i].maxTemperature) / 2),
+            };
+            if (!!hour.precipitation) {
+                forecast.precipation = {
+                    type: "rain",
+                    volume: hour.precipitation
+                };
+            }
             forecasts.push(forecast);
         }
         return forecasts;
@@ -238,6 +257,7 @@ class MetNorway {
     }
     ParseHourlyForecast(element, from, to) {
         return {
+            precipitation: parseFloat(element.precipitation["value"]),
             from: from,
             to: to,
             symbol: element.symbol["id"],

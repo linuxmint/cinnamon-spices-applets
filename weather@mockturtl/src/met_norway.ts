@@ -102,9 +102,9 @@ class MetNorway implements WeatherProvider {
         }
         
         // Building weather data
-        let forecasts: ForecastData[] = this.BuildForecasts(parsed6hourly);
-        let weather = this.BuildWeather(this.GetEarliestDataForToday(parsedWeathers) as WeatherForecast, this.GetEarliestDataForToday(parsedHourly) as HourlyForecast);
-        weather.forecasts = forecasts;
+		let weather = this.BuildWeather(this.GetEarliestDataForToday(parsedWeathers) as WeatherForecast, this.GetEarliestDataForToday(parsedHourly) as HourlyForecast);
+		weather.hourlyForecasts = this.BuildHourlyForecasts(parsedHourly, parsed6hourly);
+        weather.forecasts = this.BuildForecasts(parsed6hourly);
 
         return weather;
     }
@@ -179,8 +179,31 @@ class MetNorway implements WeatherProvider {
       }
       return forecasts;
 	}
+
+	private BuildHourlyForecasts(hours: HourlyForecast[], days: SixHourForecast[]): HourlyForecastData[] {
+		let forecasts: HourlyForecastData[] = [];
+  
+		for (let i = 0; i < hours.length; i++) {
+			const hour = hours[i];
+			let forecast: HourlyForecastData = {
+				condition: this.ResolveCondition(hour.symbol),
+				date: hour.from,
+				// Get temp by averaging the 6-hour Max-Min temp.
+				// Big differences can be skew it, but this is the best we've got
+				temp: CelsiusToKelvin((days[i].minTemperature + days[i].maxTemperature) / 2),
+			}
+
+			if (!!hour.precipitation) {
+				forecast.precipation = {
+					type: "rain",
+					volume: hour.precipitation
+				}
+			}
 	
-	// TODO: Build Hourly Forecasts
+			forecasts.push(forecast);
+			}
+			return forecasts;
+	  }
 
     // -------------------------------------------
     //
@@ -293,7 +316,7 @@ class MetNorway implements WeatherProvider {
 
     private ParseHourlyForecast(element: any, from: Date, to: Date): HourlyForecast {
       return {
-        //precipitation: parseFloat(element.precipitation["value"]),
+        precipitation: parseFloat(element.precipitation["value"]),
         from: from,
         to: to,
         symbol: element.symbol["id"],

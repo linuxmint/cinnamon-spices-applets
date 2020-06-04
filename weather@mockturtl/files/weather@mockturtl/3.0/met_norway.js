@@ -111,7 +111,7 @@ var MetNorway = (function () {
     };
     MetNorway.prototype.ParseWeather = function (json) {
         return __awaiter(this, void 0, void 0, function () {
-            var parsedWeathers, parsed6hourly, parsedHourly, i, element, fromDate, toDate, item, temp, minTemp, symbol, forecasts, weather;
+            var parsedWeathers, parsed6hourly, parsedHourly, i, element, fromDate, toDate, item, temp, minTemp, symbol, weather;
             return __generator(this, function (_a) {
                 json = json.product.time;
                 parsedWeathers = [];
@@ -135,9 +135,9 @@ var MetNorway = (function () {
                         parsedHourly.push(this.ParseHourlyForecast(item, fromDate, toDate));
                     }
                 }
-                forecasts = this.BuildForecasts(parsed6hourly);
                 weather = this.BuildWeather(this.GetEarliestDataForToday(parsedWeathers), this.GetEarliestDataForToday(parsedHourly));
-                weather.forecasts = forecasts;
+                weather.hourlyForecasts = this.BuildHourlyForecasts(parsedHourly, parsed6hourly);
+                weather.forecasts = this.BuildForecasts(parsed6hourly);
                 return [2, weather];
             });
         });
@@ -203,6 +203,25 @@ var MetNorway = (function () {
             forecast.temp_max = CelsiusToKelvin(forecast.temp_max);
             forecast.temp_min = CelsiusToKelvin(forecast.temp_min);
             forecast.condition = this.ResolveCondition(this.GetMostSevereCondition(conditionCounter));
+            forecasts.push(forecast);
+        }
+        return forecasts;
+    };
+    MetNorway.prototype.BuildHourlyForecasts = function (hours, days) {
+        var forecasts = [];
+        for (var i = 0; i < hours.length; i++) {
+            var hour = hours[i];
+            var forecast = {
+                condition: this.ResolveCondition(hour.symbol),
+                date: hour.from,
+                temp: CelsiusToKelvin((days[i].minTemperature + days[i].maxTemperature) / 2),
+            };
+            if (!!hour.precipitation) {
+                forecast.precipation = {
+                    type: "rain",
+                    volume: hour.precipitation
+                };
+            }
             forecasts.push(forecast);
         }
         return forecasts;
@@ -291,6 +310,7 @@ var MetNorway = (function () {
     };
     MetNorway.prototype.ParseHourlyForecast = function (element, from, to) {
         return {
+            precipitation: parseFloat(element.precipitation["value"]),
             from: from,
             to: to,
             symbol: element.symbol["id"],
