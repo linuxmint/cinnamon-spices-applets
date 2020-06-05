@@ -1,0 +1,8 @@
+{
+    "uuid": "kdeccc@Severga",
+    "name": "KDE Connect Control Center",
+    "description": "Applet to provide access to some KDE Connect functionality",
+    "icon": "phone-symbolic",
+    "hide-configuration": true,
+    "last-edited": 1589639452
+}
