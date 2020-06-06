@@ -434,6 +434,7 @@ declare namespace imports.gi.St {
         show(): void;
 		hide(): void;
 		style: string;
+		layout_manager: any
     }
     export class BoxLayout extends Widget {
         constructor(options ? : any)
@@ -480,12 +481,21 @@ declare namespace imports.gi.St {
     export class ScrollView  extends Widget {
         set_row_size(row_size:number): void;
         set_policy(hscroll: any, vscroll: any): void;
-        get_vscroll_bar(): any;
-        get_hscroll_bar(): any;
+        get_vscroll_bar(): ScrollBar;
+        get_hscroll_bar(): ScrollBar;
         overlay_scrollbars: boolean; 
         clip_to_allocation: boolean;
         constructor(options ? : any);
-    }
+	}
+	
+	export class ScrollBar extends Widget {
+		get_adjustment(): Adjustment;
+		set_adjustment(adjustment: Adjustment): void;
+	}
+
+	export class Adjustment {
+		set_value(value: number): void; 
+	}
 
     export class Theme {
         constructor();

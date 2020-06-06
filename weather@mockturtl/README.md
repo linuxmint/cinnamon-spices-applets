@@ -25,8 +25,6 @@ In **Manual Location** mode the applet **only** **accepts Coordinates** in Latit
 
 OpenWeatherMap does not require API key anymore! Big Thanks to them for supporting this applet!
 
-*The applet does not support City name, WOEID or ZIP code as location, in prepapration for adding hourly forecasts. Apololgies for the removed feature.*
-
 ### DarkSky
 
 ***[DarkSky has been aquired by Apple](https://blog.darksky.net/dark-sky-has-a-new-home/)** as of March 31, 2020. It does not allow new signups, and it will cease to function at the end of 2021.
@@ -47,7 +45,7 @@ OpenWeatherMap does not require API key anymore! Big Thanks to them for supporti
 
 ### Yahoo
 
-Current weather refreshes every 2 hours.
+* Current weather refreshes every 2 hours.
 
 ## Requirements
 
