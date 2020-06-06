@@ -199,6 +199,12 @@ var get = function (p, o) {
         return (xs && xs[x]) ? xs[x] : null;
     }, o);
 };
+var GetFuncName = function (func) {
+    if (!!func.name)
+        return func.name;
+    var result = /^function\s+([\w\$]+)\s*\(/.exec(func.toString());
+    return result ? result[1] : '';
+};
 var MPStoUserUnits = function (mps, units) {
     if (mps == null)
         return null;

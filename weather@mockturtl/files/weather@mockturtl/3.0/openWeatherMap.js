@@ -59,6 +59,7 @@ var get = utils.get;
 var nonempty = utils.nonempty;
 var OpenWeatherMap = (function () {
     function OpenWeatherMap(_app) {
+        this.prettyName = "OpenWeatherMap";
         this.name = "OpenWeatherMap";
         this.maxForecastSupport = 7;
         this.supportsHourly = true;

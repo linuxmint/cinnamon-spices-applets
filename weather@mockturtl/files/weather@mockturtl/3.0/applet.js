@@ -85,6 +85,7 @@ var compassDirection = utils.compassDirection;
 var MPStoUserUnits = utils.MPStoUserUnits;
 var nonempty = utils.nonempty;
 var AwareDateString = utils.AwareDateString;
+var get = utils.get;
 var delay = utils.delay;
 if (typeof Promise != "function") {
     var promisePoly = importModule("promise-polyfill");
@@ -180,7 +181,7 @@ var WeatherApplet = (function (_super) {
         _this.SetAppletOnPanel();
         _this.config = new Config(_this, instanceId);
         _this.AddRefreshButton();
-        _this.LoadProvider();
+        _this.EnsureProvider();
         _this.ui = new UI(_this, orientation);
         _this.ui.rebuild(_this.config);
         _this.loop = new WeatherLoop(_this, instanceId);
@@ -364,32 +365,44 @@ var WeatherApplet = (function (_super) {
             return this.config._forecastHours;
         return Math.min(this.config._forecastHours, this.provider.maxHourlyForecastSupport);
     };
-    WeatherApplet.prototype.LoadProvider = function () {
+    WeatherApplet.prototype.EnsureProvider = function (force) {
+        if (force === void 0) { force = false; }
+        var currentName = get(["name"], this.provider);
         switch (this.config._dataService) {
             case DATA_SERVICE.DARK_SKY:
                 if (darkSky == null)
                     var darkSky = importModule('darkSky');
-                this.provider = new darkSky.DarkSky(this);
+                if (currentName != "DarkSky" || force) {
+                    this.provider = new darkSky.DarkSky(this);
+                }
                 break;
             case DATA_SERVICE.OPEN_WEATHER_MAP:
                 if (openWeatherMap == null)
                     var openWeatherMap = importModule("openWeatherMap");
-                this.provider = new openWeatherMap.OpenWeatherMap(this);
+                if (currentName != "OpenWeatherMap" || force) {
+                    this.provider = new openWeatherMap.OpenWeatherMap(this);
+                }
                 break;
             case DATA_SERVICE.MET_NORWAY:
                 if (metNorway == null)
                     var metNorway = importModule("met_norway");
-                this.provider = new metNorway.MetNorway(this);
+                if (currentName != "MetNorway" || force) {
+                    this.provider = new metNorway.MetNorway(this);
+                }
                 break;
             case DATA_SERVICE.WEATHERBIT:
                 if (weatherbit == null)
                     var weatherbit = importModule("weatherbit");
-                this.provider = new weatherbit.Weatherbit(this);
+                if (currentName != "Weatherbit" || force) {
+                    this.provider = new weatherbit.Weatherbit(this);
+                }
                 break;
             case DATA_SERVICE.YAHOO:
                 if (yahoo == null)
                     var yahoo = importModule("yahoo");
-                this.provider = new yahoo.Yahoo(this);
+                if (currentName != "Yahoo" || force) {
+                    this.provider = new yahoo.Yahoo(this);
+                }
                 break;
             default:
                 return null;
@@ -427,7 +440,7 @@ var WeatherApplet = (function (_super) {
                         return [2, "error"];
                     case 4:
                         _a.trys.push([4, 6, , 7]);
-                        this.LoadProvider();
+                        this.EnsureProvider(rebuild);
                         return [4, this.provider.GetWeather()];
                     case 5:
                         weatherInfo = _a.sent();
@@ -443,7 +456,7 @@ var WeatherApplet = (function (_super) {
                             || !this.ui.displayForecast(this.weather, this.forecasts, this.config)
                             || !this.ui.displayHourlyForecast(this.hourlyForecasts, this.config)
                             || !this.ui.displayBar(this.weather, this.provider, this.config))
-                            return [2];
+                            return [2, "failure"];
                         this.log.Print("Weather Information refreshed");
                         this.loop.ResetErrorCount();
                         return [2, "success"];
@@ -982,7 +995,7 @@ var UI = (function () {
     };
     ;
     UI.prototype.displayBar = function (weather, provider, config) {
-        this._providerCredit.label = _("Powered by") + " " + provider.name;
+        this._providerCredit.label = _("Powered by") + " " + provider.prettyName;
         this._providerCredit.url = provider.website;
         this._timestamp.text = _("As of") + " " + AwareDateString(weather.date, this.app.currentLocale, config._show24Hours);
         return true;
@@ -1267,7 +1280,7 @@ var UI = (function () {
                 x_align: Align.MIDDLE,
                 y_align: Align.MIDDLE,
                 y_fill: true,
-                expand: false
+                expand: true
             });
         }
     };

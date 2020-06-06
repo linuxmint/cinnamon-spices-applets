@@ -14,29 +14,40 @@ In **Manual Location** mode the applet **only** **accepts Coordinates** in Latit
 
 ## Weather providers to choose from
 
+| Weather Providers          | OpenWeatherMap | DarkSky | MET Norway | WeatherBit | Yahoo                     |
+| -------------------------- | -------------- | ------- | ---------- | ---------- | ------------------------- |
+| **Needs API key**          | No             | Yes*    | No         | Yes        | No                        |
+| **Maximum Forecast Days**  | 7              | 8       | 10         | 16         | 10                        |
+| **Maximum Forecast Hours** | 48             | 168     | 48         | 0**        | 0                         |
+| **Required Packages**      | --             | --      | --         | --         | python3-requests-oauthlib |
+
 ### OpenWeatherMap
 
 OpenWeatherMap does not require API key anymore! Big Thanks to them for supporting this applet!
 
 *The applet does not support City name, WOEID or ZIP code as location, in prepapration for adding hourly forecasts. Apololgies for the removed feature.*
 
-### DarkSky - needs API key
+### DarkSky
 
-**[DarkSky has been aquired by Apple](https://blog.darksky.net/dark-sky-has-a-new-home/)** as of March 31, 2020. It does not allow new signups, and it will cease to function at the end of 2021.
+***[DarkSky has been aquired by Apple](https://blog.darksky.net/dark-sky-has-a-new-home/)** as of March 31, 2020. It does not allow new signups, and it will cease to function at the end of 2021.
 
 ### MET Norway
 
-Current weather is shown for the next hour, and the daily forecasts are generated from 6 hour forecasts, so it can look incorrect sometimes (did my best).
+* Current weather is shown for the next hour
+
+* Daily forecasts are generated from 6 hour forecasts, so it can look incorrect sometimes (did my best).
 
 ### Weatherbit.io
 
-**Needs API key.** Go to [Weatherbit.io](https://www.weatherbit.io/account/create) and create an account. Then go your [Dashboard](https://www.weatherbit.io/account/dashboard) where you should find your secret key already created.
+* **Needs API key.** Go to [Weatherbit.io](https://www.weatherbit.io/account/create) and create an account. Then go your [Dashboard](https://www.weatherbit.io/account/dashboard) where you should find your secret key already created.
 
-At least 10 minutes as refresh rate is recommended, since otherwise you might exceed you daily quota.
+* At least 10 minutes as refresh rate is recommended, since otherwise you might exceed you daily quota.
+
+* **Hourly Weather forecast requires a non-free account
 
 ### Yahoo
 
-Requires the python3-requests-oauthlib package installed, current weather refreshes every 2 hours.
+Current weather refreshes every 2 hours.
 
 ## Requirements
 
