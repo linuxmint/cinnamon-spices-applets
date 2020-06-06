@@ -341,6 +341,16 @@ var isLangSupported = function(lang: string, languages: Array < string > ): bool
     return false;
 };
 
+var Sentencify = function(words: string[]): string {
+	let result = "";
+	for (let index = 0; index < words.length; index++) {
+		const element = words[index];
+		if (index != 0) result+= " ";
+		result+= element;
+	}
+	return result;
+}
+
 const icons = {
   clear_day: 'weather-clear',
   clear_night: 'weather-clear-night',

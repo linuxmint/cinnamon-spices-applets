@@ -26,6 +26,7 @@ var MPHtoMPS = utils.MPHtoMPS as (speed: number) => number;
 var icons = utils.icons;
 var IsNight = utils.IsNight as (sunTimes: SunTimes, date?: Date) => boolean;
 var weatherIconSafely = utils.weatherIconSafely as (code: string[], icon_type: imports.gi.St.IconType) => string;
+var Sentencify = utils.Sentencify as (words: string[]) => string;
 
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
@@ -56,7 +57,7 @@ class DarkSky implements WeatherProvider {
     private query = "https://api.darksky.net/forecast/";
 
       // DarkSky Filter words for short conditions, won't work on every language
-    private DarkSkyFilterWords = [_("and"), _("until"), _("in")];
+    private DarkSkyFilterWords = [_("and"), _("until"), _("in"), _("Possible")];
     
     private unit: queryUnits = null;
 
@@ -279,15 +280,16 @@ class DarkSky implements WeatherProvider {
     private GetShortSummary(summary: string): string {
 		let processed = summary.split(" ");
 		if (processed.length == 1) return processed[0];
-        let result = "";
-        for (let i = 0; i < 2; i++) {
+        let result: string[] = [];
+        for (let i = 0; i < processed.length; i++) {
             if (!/[\(\)]/.test(processed[i]) && !this.WordBanned(processed[i])) {
-                result = result + processed[i] + " ";
-            }
+                result.push(processed[i]) + " ";
+			}
+			if (result.length == 2) break;
         }
-        return result;
-    };
-
+        return Sentencify(result);
+	};
+	
     private GetShortCurrentSummary(summary: string): string {
         let processed = summary.split(" ");
         let result = "";

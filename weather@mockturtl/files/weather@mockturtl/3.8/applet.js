@@ -877,6 +877,8 @@ class UI {
                     ui.Precipation.text += (", " + Math.round(hour.precipation.chance) + "%");
             }
         }
+        if (max <= 0)
+            this.HideHourlyToggle();
         return true;
     }
     unitToUnicode(unit) {
@@ -1094,7 +1096,7 @@ class UI {
             expand: true
         });
         if (this.app.GetMaxHourlyForecasts() <= 0) {
-            this._hourlyButton.child = null;
+            this.HideHourlyToggle();
         }
         this._providerCredit = new WeatherButton({ label: _(ELLIPSIS), reactive: true }).actor;
         this._providerCredit.connect(SIGNAL_CLICKED, Lang.bind(this, this.app.OpenUrl));
@@ -1105,6 +1107,9 @@ class UI {
             y_fill: false,
             expand: true
         });
+    }
+    HideHourlyToggle() {
+        this._hourlyButton.child = null;
     }
     rebuildHourlyWeatherUi(config) {
         this.destroyHourlyWeather();

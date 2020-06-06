@@ -24,7 +24,7 @@ class Weatherbit {
         this.supportsHourly = true;
         this.maxForecastSupport = 16;
         this.website = "https://www.weatherbit.io/";
-        this.maxHourlyForecastSupport = 240;
+        this.maxHourlyForecastSupport = 48;
         this.supportedLanguages = [
             'ar', 'az', 'be', 'bg', 'bs', 'ca', 'cz', 'da', 'de', 'el', 'en',
             'et', 'fi', 'fr', 'hr', 'hu', 'id', 'is', 'it',

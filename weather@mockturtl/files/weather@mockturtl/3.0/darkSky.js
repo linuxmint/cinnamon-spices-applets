@@ -58,6 +58,7 @@ var MPHtoMPS = utils.MPHtoMPS;
 var icons = utils.icons;
 var IsNight = utils.IsNight;
 var weatherIconSafely = utils.weatherIconSafely;
+var Sentencify = utils.Sentencify;
 var DarkSky = (function () {
     function DarkSky(_app) {
         this.name = "DarkSky";
@@ -73,7 +74,7 @@ var DarkSky = (function () {
             'sv', 'tet', 'tr', 'uk', 'x-pig-latin', 'zh', 'zh-tw'
         ];
         this.query = "https://api.darksky.net/forecast/";
-        this.DarkSkyFilterWords = [_("and"), _("until"), _("in")];
+        this.DarkSkyFilterWords = [_("and"), _("until"), _("in"), _("Possible")];
         this.unit = null;
         this.app = _app;
     }
@@ -284,13 +285,15 @@ var DarkSky = (function () {
         var processed = summary.split(" ");
         if (processed.length == 1)
             return processed[0];
-        var result = "";
-        for (var i = 0; i < 2; i++) {
+        var result = [];
+        for (var i = 0; i < processed.length; i++) {
             if (!/[\(\)]/.test(processed[i]) && !this.WordBanned(processed[i])) {
-                result = result + processed[i] + " ";
+                result.push(processed[i]) + " ";
             }
+            if (result.length == 2)
+                break;
         }
-        return result;
+        return Sentencify(result);
     };
     ;
     DarkSky.prototype.GetShortCurrentSummary = function (summary) {

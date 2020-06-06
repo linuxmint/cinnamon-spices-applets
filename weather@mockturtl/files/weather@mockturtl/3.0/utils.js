@@ -328,6 +328,16 @@ var isLangSupported = function (lang, languages) {
     }
     return false;
 };
+var Sentencify = function (words) {
+    var result = "";
+    for (var index = 0; index < words.length; index++) {
+        var element = words[index];
+        if (index != 0)
+            result += " ";
+        result += element;
+    }
+    return result;
+};
 var icons = {
     clear_day: 'weather-clear',
     clear_night: 'weather-clear-night',

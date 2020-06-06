@@ -136,7 +136,7 @@ var MetNorway = (function () {
                     }
                 }
                 weather = this.BuildWeather(this.GetEarliestDataForToday(parsedWeathers), this.GetEarliestDataForToday(parsedHourly));
-                weather.hourlyForecasts = this.BuildHourlyForecasts(parsedHourly, parsed6hourly);
+                weather.hourlyForecasts = this.BuildHourlyForecasts(parsedHourly, parsedWeathers);
                 weather.forecasts = this.BuildForecasts(parsed6hourly);
                 return [2, weather];
             });
@@ -207,14 +207,14 @@ var MetNorway = (function () {
         }
         return forecasts;
     };
-    MetNorway.prototype.BuildHourlyForecasts = function (hours, days) {
+    MetNorway.prototype.BuildHourlyForecasts = function (hours, current) {
         var forecasts = [];
         for (var i = 0; i < hours.length; i++) {
             var hour = hours[i];
             var forecast = {
                 condition: this.ResolveCondition(hour.symbol),
                 date: hour.from,
-                temp: CelsiusToKelvin((days[i].minTemperature + days[i].maxTemperature) / 2),
+                temp: CelsiusToKelvin(current[i].temperature),
             };
             if (!!hour.precipitation) {
                 forecast.precipation = {

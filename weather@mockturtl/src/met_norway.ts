@@ -103,7 +103,7 @@ class MetNorway implements WeatherProvider {
         
         // Building weather data
 		let weather = this.BuildWeather(this.GetEarliestDataForToday(parsedWeathers) as WeatherForecast, this.GetEarliestDataForToday(parsedHourly) as HourlyForecast);
-		weather.hourlyForecasts = this.BuildHourlyForecasts(parsedHourly, parsed6hourly);
+		weather.hourlyForecasts = this.BuildHourlyForecasts(parsedHourly, parsedWeathers);
         weather.forecasts = this.BuildForecasts(parsed6hourly);
 
         return weather;
@@ -180,7 +180,7 @@ class MetNorway implements WeatherProvider {
       return forecasts;
 	}
 
-	private BuildHourlyForecasts(hours: HourlyForecast[], days: SixHourForecast[]): HourlyForecastData[] {
+	private BuildHourlyForecasts(hours: HourlyForecast[], current: WeatherForecast[]): HourlyForecastData[] {
 		let forecasts: HourlyForecastData[] = [];
   
 		for (let i = 0; i < hours.length; i++) {
@@ -188,9 +188,7 @@ class MetNorway implements WeatherProvider {
 			let forecast: HourlyForecastData = {
 				condition: this.ResolveCondition(hour.symbol),
 				date: hour.from,
-				// Get temp by averaging the 6-hour Max-Min temp.
-				// Big differences can be skew it, but this is the best we've got
-				temp: CelsiusToKelvin((days[i].minTemperature + days[i].maxTemperature) / 2),
+				temp: CelsiusToKelvin(current[i].temperature),
 			}
 
 			if (!!hour.precipitation) {

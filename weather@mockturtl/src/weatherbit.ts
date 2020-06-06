@@ -38,7 +38,7 @@ class Weatherbit implements WeatherProvider {
     public readonly supportsHourly = true;
     public readonly maxForecastSupport = 16;
     public readonly website = "https://www.weatherbit.io/";
-    public readonly maxHourlyForecastSupport = 240;
+    public readonly maxHourlyForecastSupport = 48; // TODO: Check dynamically if by access control if available
 
     private supportedLanguages = [
         'ar', 'az', 'be', 'bg', 'bs', 'ca', 'cz', 'da', 'de', 'el', 'en',

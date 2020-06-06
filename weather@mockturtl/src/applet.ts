@@ -1179,6 +1179,8 @@ class UI {
 			}
 		}
 
+		if (max <= 0) this.HideHourlyToggle();
+
 		return true;
     }
 
@@ -1462,7 +1464,7 @@ class UI {
 
 		// Hide if Hourly forecasts are not supported
 		if (this.app.GetMaxHourlyForecasts() <= 0) {
-			this._hourlyButton.child = null;
+			this.HideHourlyToggle();
 		}
 
 		this._providerCredit = new WeatherButton({ label: _(ELLIPSIS), reactive: true}).actor;
@@ -1475,7 +1477,11 @@ class UI {
 			y_fill: false,
 			expand: true
 		});
-    }
+	}
+
+	private HideHourlyToggle() {
+		this._hourlyButton.child = null;
+	}
 
     private rebuildHourlyWeatherUi(config: Config) {
 		this.destroyHourlyWeather();

@@ -281,6 +281,16 @@ var isLangSupported = function (lang, languages) {
     }
     return false;
 };
+var Sentencify = function (words) {
+    let result = "";
+    for (let index = 0; index < words.length; index++) {
+        const element = words[index];
+        if (index != 0)
+            result += " ";
+        result += element;
+    }
+    return result;
+};
 const icons = {
     clear_day: 'weather-clear',
     clear_night: 'weather-clear-night',
