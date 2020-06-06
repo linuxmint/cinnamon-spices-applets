@@ -677,6 +677,7 @@ class UI {
     }
     HideHourlyWeather() {
         this._separatorAreaHourly.actor.hide();
+        let hscroll = this._hourlyScrollView.get_hscroll_bar();
         if (!!this._hourlyButton.child)
             this._hourlyButton.child.icon_name = "custom-down-arrow-symbolic";
         if (global.settings.get_boolean("desktop-effects-on-menus")) {
@@ -687,6 +688,7 @@ class UI {
                 onComplete: () => {
                     this._hourlyScrollView.set_height(-1);
                     this._hourlyScrollView.hide();
+                    hscroll.get_adjustment().set_value(0);
                 }
             });
         }

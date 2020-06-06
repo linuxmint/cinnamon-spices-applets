@@ -934,7 +934,7 @@ class UI {
 
 	public HideHourlyWeather(): void {
 		this._separatorAreaHourly.actor.hide();
-		//TODO: scroll back to the beginning?
+		let hscroll = this._hourlyScrollView.get_hscroll_bar();
 		if (!!this._hourlyButton.child) this._hourlyButton.child.icon_name = "custom-down-arrow-symbolic";
 		if (global.settings.get_boolean("desktop-effects-on-menus")) {
 			// TODO: eliminate Clutter Warnings on collapse in logs
@@ -946,8 +946,11 @@ class UI {
 					onComplete: () => {
 						this._hourlyScrollView.set_height(-1);
 						this._hourlyScrollView.hide();
+						// Scroll back to the start
+						hscroll.get_adjustment().set_value(0);
+					}
 				}
-			});
+			);
 		}
 		else {
 			this._hourlyScrollView.set_height(-1);

@@ -803,6 +803,7 @@ var UI = (function () {
     UI.prototype.HideHourlyWeather = function () {
         var _this = this;
         this._separatorAreaHourly.actor.hide();
+        var hscroll = this._hourlyScrollView.get_hscroll_bar();
         if (!!this._hourlyButton.child)
             this._hourlyButton.child.icon_name = "custom-down-arrow-symbolic";
         if (global.settings.get_boolean("desktop-effects-on-menus")) {
@@ -813,6 +814,7 @@ var UI = (function () {
                 onComplete: function () {
                     _this._hourlyScrollView.set_height(-1);
                     _this._hourlyScrollView.hide();
+                    hscroll.get_adjustment().set_value(0);
                 }
             });
         }
