@@ -434,7 +434,6 @@ declare namespace imports.gi.St {
         show(): void;
 		hide(): void;
 		style: string;
-		layout_manager: any
     }
     export class BoxLayout extends Widget {
         constructor(options ? : any)
