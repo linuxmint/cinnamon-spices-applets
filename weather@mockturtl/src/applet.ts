@@ -904,18 +904,20 @@ class UI {
 	}
 
 	public ShowHourlyWeather(): void {
+		// In some cases the preferred height is not calculated
+		// properly for the first time, so we work around by opening and closing it once
+		if (this.hourlyNeverOpened) {
+			this.hourlyNeverOpened = false;
+			this._hourlyScrollView.show();
+			this._hourlyScrollView.hide();
+		}
+
 		let [minHeight, naturalHeight] = this._hourlyScrollView.get_preferred_height(-1);
 		let [minWidth, naturalWidth] = this._hourlyScrollView.get_preferred_width(-1);
 		this._hourlyScrollView.set_width(minWidth);
 		this._separatorAreaHourly.actor.show();
 		if (!!this._hourlyButton.child) this._hourlyButton.child.icon_name = "custom-up-arrow-symbolic";
 		this._hourlyScrollView.show();
-		// workaround: first time after rebuilding ScrollView's naturalHeight
-		// always missing 23 pixels, so it is added back in
-		if (this.hourlyNeverOpened) {
-			this.hourlyNeverOpened = false;
-			naturalHeight += 23;
-		}
 		if (global.settings.get_boolean("desktop-effects-on-menus")) {
 			this._hourlyScrollView.height = 0;
 			addTween(this._hourlyScrollView,

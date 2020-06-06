@@ -776,6 +776,11 @@ var UI = (function () {
     };
     UI.prototype.ShowHourlyWeather = function () {
         var _this = this;
+        if (this.hourlyNeverOpened) {
+            this.hourlyNeverOpened = false;
+            this._hourlyScrollView.show();
+            this._hourlyScrollView.hide();
+        }
         var _a = this._hourlyScrollView.get_preferred_height(-1), minHeight = _a[0], naturalHeight = _a[1];
         var _b = this._hourlyScrollView.get_preferred_width(-1), minWidth = _b[0], naturalWidth = _b[1];
         this._hourlyScrollView.set_width(minWidth);
@@ -783,10 +788,6 @@ var UI = (function () {
         if (!!this._hourlyButton.child)
             this._hourlyButton.child.icon_name = "custom-up-arrow-symbolic";
         this._hourlyScrollView.show();
-        if (this.hourlyNeverOpened) {
-            this.hourlyNeverOpened = false;
-            naturalHeight += 23;
-        }
         if (global.settings.get_boolean("desktop-effects-on-menus")) {
             this._hourlyScrollView.height = 0;
             addTween(this._hourlyScrollView, {
