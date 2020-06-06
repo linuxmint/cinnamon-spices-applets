@@ -152,6 +152,12 @@ var KPHtoMPS = function (speed) {
     return speed / WEATHER_CONV_KPH_IN_MPS;
 };
 const get = (p, o) => p.reduce((xs, x) => (xs && xs[x]) ? xs[x] : null, o);
+var GetFuncName = function (func) {
+    if (!!func.name)
+        return func.name;
+    var result = /^function\s+([\w\$]+)\s*\(/.exec(func.toString());
+    return result ? result[1] : '';
+};
 var MPStoUserUnits = function (mps, units) {
     if (mps == null)
         return null;

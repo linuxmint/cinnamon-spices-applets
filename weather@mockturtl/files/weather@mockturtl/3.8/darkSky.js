@@ -25,6 +25,7 @@ var weatherIconSafely = utils.weatherIconSafely;
 var Sentencify = utils.Sentencify;
 class DarkSky {
     constructor(_app) {
+        this.prettyName = "DarkSky";
         this.name = "DarkSky";
         this.maxForecastSupport = 8;
         this.supportsHourly = false;

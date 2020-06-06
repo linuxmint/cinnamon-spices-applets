@@ -188,9 +188,18 @@ var KPHtoMPS = function(speed: number): number {
     return speed / WEATHER_CONV_KPH_IN_MPS;
   };
 
-const get = (p: string[], o: any) =>
+const get = (p: string[], o: any): any =>
   p.reduce((xs, x) =>
-    (xs && xs[x]) ? xs[x] : null, o);
+	(xs && xs[x]) ? xs[x] : null, o);
+	
+var GetFuncName = function(func: Function): string {
+	// ES6
+	if (!!func.name) return func.name;
+	// ES5
+	// https://stackoverflow.com/a/17923727
+	var result = /^function\s+([\w\$]+)\s*\(/.exec( func.toString() )
+	return  result  ?  result[ 1 ]  :  '' // for an anonymous function there won't be a match
+}
 
 var MPStoUserUnits = function(mps: number, units: WeatherWindSpeedUnits): string {
     if (mps == null) return null;

@@ -51,6 +51,7 @@ var compassDirection = utils.compassDirection as (deg: number) => string;
 var MPStoUserUnits = utils.MPStoUserUnits as (mps: number, units: WeatherWindSpeedUnits) => string;
 var nonempty = utils.nonempty as (str: string) => boolean;
 var AwareDateString = utils.AwareDateString as (date: Date, locale: string, hours24Format: boolean) => string;
+var get = utils.get as (p: string[], o: any) => any;
 const delay = utils.delay as (ms: number) => Promise<void>;
 
 // This always evaluates to True because "var Promise" line exists inside 
@@ -183,7 +184,7 @@ class WeatherApplet extends TextIconApplet {
 		this.SetAppletOnPanel(); 
 		this.config = new Config(this, instanceId);
 		this.AddRefreshButton();
-		this.LoadProvider();
+		this.EnsureProvider();
 		this.ui = new UI(this, orientation);
 		this.ui.rebuild(this.config);
 		this.loop = new WeatherLoop(this, instanceId);
@@ -226,30 +227,30 @@ class WeatherApplet extends TextIconApplet {
 	 */
 	public async LoadJsonAsync(query: string): Promise <any> {
 		let json = await new Promise((resolve: any, reject: any) => {
-		let message = Message.new('GET', query);
-		this._httpSession.queue_message(message, (session: any, message: any) => {
+			let message = Message.new('GET', query);
+			this._httpSession.queue_message(message, (session: any, message: any) => {
 
-			if (!message) 
-			reject({code: 0, message: "no network response", reason_phrase: "no network response"} as HttpError);
+				if (!message) 
+					reject({code: 0, message: "no network response", reason_phrase: "no network response"} as HttpError);
 
-			if (message.status_code != 200) 
-			reject({code: message.status_code, message: "bad status code", reason_phrase: message.reason_phrase } as HttpError)
-			
-			if (!message.response_body) 
-			reject({code: message.status_code, message: "no reponse body", reason_phrase: message.reason_phrase} as HttpError);
-			
-			if (!message.response_body.data) 
-			reject({code: message.status_code, message: "no respone data", reason_phrase: message.reason_phrase} as HttpError);
-			
-			try {
-			this.log.Debug("API full response: " + message.response_body.data.toString());
-			let payload = JSON.parse(message.response_body.data);
-			resolve(payload);
-			} catch (e) { // Payload is not JSON
-			this.log.Error("Error: API response is not JSON. The response: " + message.response_body.data);
-			reject({code: message.status_code, message: "bad api response - non json", reason_phrase: e} as HttpError);
-			}
-		});
+				if (message.status_code != 200) 
+					reject({code: message.status_code, message: "bad status code", reason_phrase: message.reason_phrase } as HttpError)
+				
+				if (!message.response_body) 
+					reject({code: message.status_code, message: "no reponse body", reason_phrase: message.reason_phrase} as HttpError);
+				
+				if (!message.response_body.data) 
+					reject({code: message.status_code, message: "no respone data", reason_phrase: message.reason_phrase} as HttpError);
+				
+				try {
+					this.log.Debug("API full response: " + message.response_body.data.toString());
+					let payload = JSON.parse(message.response_body.data);
+					resolve(payload);
+				} catch (e) { // Payload is not JSON
+					this.log.Error("Error: API response is not JSON. The response: " + message.response_body.data);
+					reject({code: message.status_code, message: "bad api response - non json", reason_phrase: e} as HttpError);
+				}
+			});
 		});
 		return json;
 	};
@@ -257,9 +258,9 @@ class WeatherApplet extends TextIconApplet {
 	/** Spawn a command and await for the output it gives */
 	public async SpawnProcess(command: string[]): Promise<any> {
 		let json = await new Promise((resolve: any, reject: any) => {
-		spawn_async(command, (aStdout: any) => {
-			resolve(aStdout);
-		});
+			spawn_async(command, (aStdout: any) => {
+				resolve(aStdout);
+			});
 		});
 		return json;
 	}
@@ -271,25 +272,25 @@ class WeatherApplet extends TextIconApplet {
 	 */
 	public async LoadAsync(query: string): Promise <any> {
 		let data = await new Promise((resolve: any, reject: any) => {
-		let message = Message.new('GET', query);
-		this._httpSession.queue_message(message, (session: any, message: any) => {
+			let message = Message.new('GET', query);
+			this._httpSession.queue_message(message, (session: any, message: any) => {
 
-			if (!message) 
-			reject({code: 0, message: "no network response", reason_phrase: "no network response"} as HttpError);
+				if (!message) 
+				reject({code: 0, message: "no network response", reason_phrase: "no network response"} as HttpError);
 
-			if (message.status_code != 200) 
-			reject({code: message.status_code, message: "bad status code", reason_phrase: message.reason_phrase } as HttpError)
-			
-			if (!message.response_body) 
-			reject({code: message.status_code, message: "no reponse body", reason_phrase: message.reason_phrase} as HttpError);
-			
-			if (!message.response_body.data) 
-			reject({code: message.status_code, message: "no respone data", reason_phrase: message.reason_phrase} as HttpError);
-			
-			this.log.Debug("API full response: " + message.response_body.data.toString());
-			let payload = message.response_body.data;
-			resolve(payload);
-		});
+				if (message.status_code != 200) 
+				reject({code: message.status_code, message: "bad status code", reason_phrase: message.reason_phrase } as HttpError)
+				
+				if (!message.response_body) 
+				reject({code: message.status_code, message: "no reponse body", reason_phrase: message.reason_phrase} as HttpError);
+				
+				if (!message.response_body.data) 
+				reject({code: message.status_code, message: "no respone data", reason_phrase: message.reason_phrase} as HttpError);
+				
+				this.log.Debug("API full response: " + message.response_body.data.toString());
+				let payload = message.response_body.data;
+				resolve(payload);
+			});
 		});
 		return data;
 	};
@@ -380,8 +381,8 @@ class WeatherApplet extends TextIconApplet {
 	public OpenUrl(element: imports.gi.St.Button) {
 		if (!element.url) return;
 		imports.gi.Gio.app_info_launch_default_for_uri(
-		element.url,
-		global.create_app_launch_context()
+			element.url,
+			global.create_app_launch_context()
 		)
 	}
 
@@ -395,30 +396,45 @@ class WeatherApplet extends TextIconApplet {
 		return Math.min(this.config._forecastHours, this.provider.maxHourlyForecastSupport);
 	}
 
-	private LoadProvider(): void {
+	/**
+	 * Lazy load provider
+	 * @param force Force provider reinitialisation
+	 */
+	private EnsureProvider(force: boolean = false): void {
+		let currentName = get(["name"], this.provider) as Services;
 		switch (this.config._dataService) {
-		case DATA_SERVICE.DARK_SKY:           // No City Info
-			if (darkSky == null) var darkSky = importModule('darkSky');
-			this.provider = new darkSky.DarkSky(this);
-			break;
-		case DATA_SERVICE.OPEN_WEATHER_MAP:   // No TZ info
-			if (openWeatherMap == null) var openWeatherMap = importModule("openWeatherMap");
-			this.provider = new openWeatherMap.OpenWeatherMap(this);
-			break;
-		case DATA_SERVICE.MET_NORWAY:         // No TZ or city info
-			if (metNorway == null) var metNorway = importModule("met_norway");
-			this.provider = new metNorway.MetNorway(this);
-			break;
-		case DATA_SERVICE.WEATHERBIT:
-			if (weatherbit == null) var weatherbit = importModule("weatherbit");
-			this.provider = new weatherbit.Weatherbit(this);
-			break;
-		case DATA_SERVICE.YAHOO:
-			if (yahoo == null) var yahoo = importModule("yahoo");
-			this.provider = new yahoo.Yahoo(this);
-			break;
-		default:
-			return null;
+			case DATA_SERVICE.DARK_SKY:           // No City Info
+				if (darkSky == null) var darkSky = importModule('darkSky');
+				if (currentName != "DarkSky" || force) {
+					this.provider = new darkSky.DarkSky(this);
+				}
+				break;
+			case DATA_SERVICE.OPEN_WEATHER_MAP:   // No City Info
+				if (openWeatherMap == null) var openWeatherMap = importModule("openWeatherMap");
+				if (currentName != "OpenWeatherMap" || force) {
+					this.provider = new openWeatherMap.OpenWeatherMap(this);
+				}
+				break;
+			case DATA_SERVICE.MET_NORWAY:         // No TZ or city info
+				if (metNorway == null) var metNorway = importModule("met_norway");
+				if (currentName != "MetNorway" || force) {
+					this.provider = new metNorway.MetNorway(this);
+				} 
+				break;
+			case DATA_SERVICE.WEATHERBIT:
+				if (weatherbit == null) var weatherbit = importModule("weatherbit");
+				if (currentName != "Weatherbit" || force) {
+					this.provider = new weatherbit.Weatherbit(this);
+				}
+				break;
+			case DATA_SERVICE.YAHOO:
+				if (yahoo == null) var yahoo = importModule("yahoo");
+				if (currentName != "Yahoo" || force) {
+					this.provider = new yahoo.Yahoo(this);
+				}
+				break;
+			default:
+				return null;
 		}
 	}
 
@@ -446,39 +462,39 @@ class WeatherApplet extends TextIconApplet {
 
 		let locationData: LocationData = null;
 		try {
-		locationData = await this.ValidateLocation();
+			locationData = await this.ValidateLocation();
 		}
 		catch(e) {
-		this.log.Error(e);
-		return "error";
+			this.log.Error(e);
+			return "error";
 		}
 
 		try {
-		this.LoadProvider();
-		let weatherInfo = await this.provider.GetWeather();
-		if (!weatherInfo) {
-			this.log.Error("Unable to obtain Weather Information");
-			return "failure";
-		}
+			this.EnsureProvider(rebuild);
+			let weatherInfo = await this.provider.GetWeather();
+			if (!weatherInfo) {
+				this.log.Error("Unable to obtain Weather Information");
+				return "failure";
+			}
 
-		this.wipeData();
-		this.ProcessWeatherData(weatherInfo, locationData);
+			this.wipeData();
+			this.ProcessWeatherData(weatherInfo, locationData);
 
-		if (rebuild) this.ui.rebuild(this.config);
-		if (
-			!this.ui.displayWeather(this.weather, this.config) 
-			|| !this.ui.displayForecast(this.weather, this.forecasts, this.config)
-			|| !this.ui.displayHourlyForecast(this.hourlyForecasts, this.config)
-			|| !this.ui.displayBar(this.weather, this.provider, this.config)) return;
-		
-		this.log.Print("Weather Information refreshed");
-		this.loop.ResetErrorCount();
-		return "success";
+			if (rebuild) this.ui.rebuild(this.config);
+			if (
+				!this.ui.displayWeather(this.weather, this.config) 
+				|| !this.ui.displayForecast(this.weather, this.forecasts, this.config)
+				|| !this.ui.displayHourlyForecast(this.hourlyForecasts, this.config)
+				|| !this.ui.displayBar(this.weather, this.provider, this.config)) return "failure";
+			
+			this.log.Print("Weather Information refreshed");
+			this.loop.ResetErrorCount();
+			return "success";
 		} 
 		catch (e) {
-		this.log.Error("Generic Error while refreshing Weather info: " + e);
-		this.HandleError({type: "hard", detail: "unknown", message: _("Unexpected Error While Refreshing Weather, please see log in Looking Glass")});
-		return "failure";
+			this.log.Error("Generic Error while refreshing Weather info: " + e);
+			this.HandleError({type: "hard", detail: "unknown", message: _("Unexpected Error While Refreshing Weather, please see log in Looking Glass")});
+			return "failure";
 		}
 	};
 
@@ -662,10 +678,10 @@ class WeatherApplet extends TextIconApplet {
 	/** Callback handles any service specific logic */
 	public HandleHTTPError(service: ApiService, error: HttpError, ctx: WeatherApplet, callback?: (error: HttpError, uiError: AppletError) => AppletError) {
 		let uiError = {
-		type: "soft",
-		detail: "unknown",
-		message: _("Network Error, please check logs in Looking Glass"),
-		service: service
+			type: "soft",
+			detail: "unknown",
+			message: _("Network Error, please check logs in Looking Glass"),
+			service: service
 		} as AppletError;
 
 		if (typeof error === 'string' || error instanceof String) {   
@@ -677,7 +693,7 @@ class WeatherApplet extends TextIconApplet {
 			uiError.code = error.code;
 			if (error.message == "bad api response - non json") uiError.type = "hard";
 			if (!!callback && callback instanceof Function) {
-			uiError = callback(error, uiError);
+				uiError = callback(error, uiError);
 			}
 		}
 		ctx.HandleError(uiError);
@@ -1157,7 +1173,7 @@ class UI {
     };
 
     public displayBar(weather: Weather, provider: WeatherProvider, config: Config): boolean {
-		this._providerCredit.label = _("Powered by") + " " + provider.name;
+		this._providerCredit.label = _("Powered by") + " " + provider.prettyName;
 		this._providerCredit.url = provider.website;
 		this._timestamp.text = _("As of") + " " + AwareDateString(weather.date, this.app.currentLocale, config._show24Hours);
 		return true;
@@ -1514,7 +1530,7 @@ class UI {
 				x_align: Align.MIDDLE,
 				y_align: Align.MIDDLE,
 				y_fill: true,
-				expand: false
+				expand: true
 			});
 		}
       
@@ -2033,7 +2049,8 @@ interface WeatherProvider {
 	 * "this" (context) is not accessible here
 	 */
 	HandleHTTPError?:(error: HttpError, uiError: AppletError) => AppletError;
-	name: string;
+	prettyName: string;
+	name: Services;
 	maxForecastSupport: number;
 	maxHourlyForecastSupport: number;
 	supportsHourly: boolean;

@@ -36,6 +36,7 @@ var compassDirection = utils.compassDirection;
 var MPStoUserUnits = utils.MPStoUserUnits;
 var nonempty = utils.nonempty;
 var AwareDateString = utils.AwareDateString;
+var get = utils.get;
 const delay = utils.delay;
 if (typeof Promise != "function") {
     var promisePoly = importModule("promise-polyfill");
@@ -130,7 +131,7 @@ class WeatherApplet extends TextIconApplet {
         this.SetAppletOnPanel();
         this.config = new Config(this, instanceId);
         this.AddRefreshButton();
-        this.LoadProvider();
+        this.EnsureProvider();
         this.ui = new UI(this, orientation);
         this.ui.rebuild(this.config);
         this.loop = new WeatherLoop(this, instanceId);
@@ -278,32 +279,43 @@ class WeatherApplet extends TextIconApplet {
             return this.config._forecastHours;
         return Math.min(this.config._forecastHours, this.provider.maxHourlyForecastSupport);
     }
-    LoadProvider() {
+    EnsureProvider(force = false) {
+        let currentName = get(["name"], this.provider);
         switch (this.config._dataService) {
             case DATA_SERVICE.DARK_SKY:
                 if (darkSky == null)
                     var darkSky = importModule('darkSky');
-                this.provider = new darkSky.DarkSky(this);
+                if (currentName != "DarkSky" || force) {
+                    this.provider = new darkSky.DarkSky(this);
+                }
                 break;
             case DATA_SERVICE.OPEN_WEATHER_MAP:
                 if (openWeatherMap == null)
                     var openWeatherMap = importModule("openWeatherMap");
-                this.provider = new openWeatherMap.OpenWeatherMap(this);
+                if (currentName != "OpenWeatherMap" || force) {
+                    this.provider = new openWeatherMap.OpenWeatherMap(this);
+                }
                 break;
             case DATA_SERVICE.MET_NORWAY:
                 if (metNorway == null)
                     var metNorway = importModule("met_norway");
-                this.provider = new metNorway.MetNorway(this);
+                if (currentName != "MetNorway" || force) {
+                    this.provider = new metNorway.MetNorway(this);
+                }
                 break;
             case DATA_SERVICE.WEATHERBIT:
                 if (weatherbit == null)
                     var weatherbit = importModule("weatherbit");
-                this.provider = new weatherbit.Weatherbit(this);
+                if (currentName != "Weatherbit" || force) {
+                    this.provider = new weatherbit.Weatherbit(this);
+                }
                 break;
             case DATA_SERVICE.YAHOO:
                 if (yahoo == null)
                     var yahoo = importModule("yahoo");
-                this.provider = new yahoo.Yahoo(this);
+                if (currentName != "Yahoo" || force) {
+                    this.provider = new yahoo.Yahoo(this);
+                }
                 break;
             default:
                 return null;
@@ -331,7 +343,7 @@ class WeatherApplet extends TextIconApplet {
             return "error";
         }
         try {
-            this.LoadProvider();
+            this.EnsureProvider(rebuild);
             let weatherInfo = await this.provider.GetWeather();
             if (!weatherInfo) {
                 this.log.Error("Unable to obtain Weather Information");
@@ -345,7 +357,7 @@ class WeatherApplet extends TextIconApplet {
                 || !this.ui.displayForecast(this.weather, this.forecasts, this.config)
                 || !this.ui.displayHourlyForecast(this.hourlyForecasts, this.config)
                 || !this.ui.displayBar(this.weather, this.provider, this.config))
-                return;
+                return "failure";
             this.log.Print("Weather Information refreshed");
             this.loop.ResetErrorCount();
             return "success";
@@ -857,7 +869,7 @@ class UI {
     }
     ;
     displayBar(weather, provider, config) {
-        this._providerCredit.label = _("Powered by") + " " + provider.name;
+        this._providerCredit.label = _("Powered by") + " " + provider.prettyName;
         this._providerCredit.url = provider.website;
         this._timestamp.text = _("As of") + " " + AwareDateString(weather.date, this.app.currentLocale, config._show24Hours);
         return true;
@@ -1141,7 +1153,7 @@ class UI {
                 x_align: Align.MIDDLE,
                 y_align: Align.MIDDLE,
                 y_fill: true,
-                expand: false
+                expand: true
             });
         }
     }

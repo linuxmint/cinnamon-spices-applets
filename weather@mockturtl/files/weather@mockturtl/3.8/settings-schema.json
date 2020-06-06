@@ -32,6 +32,13 @@
     "type": "label",
     "description": "Yahoo - Requires 'python3-requests-oauthlib' package installed (for Arch based distros 'python-requests-oauthlib'), Updates every 2 hours."
   },
+  "moreInfo": {
+    "type": "button",
+    "indent": true,
+    "description": "More Information",
+    "callback": "locationLookup",
+    "tooltip": "Opens webpage guide"
+  },
   "providerSettings": {
     "type": "header",
     "description": "Weather Provider Options"
@@ -96,7 +103,7 @@
     "type": "spinbutton",
     "default": 12,
     "min": 3,
-    "max": 24,
+    "max": 48,
     "units": "hours",
     "step": 1,
     "description": "Hourly Forecast length"

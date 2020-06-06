@@ -41,7 +41,8 @@ class DarkSky implements WeatherProvider {
     //--------------------------------------------------------
     //  Properties
     //--------------------------------------------------------
-    public readonly name = "DarkSky";
+	public readonly prettyName = "DarkSky";
+	public readonly name = "DarkSky";
     public readonly maxForecastSupport = 8;
     public readonly supportsHourly = false;
     public readonly website = "https://darksky.net/poweredby/";
@@ -289,7 +290,7 @@ class DarkSky implements WeatherProvider {
         }
         return Sentencify(result);
 	};
-	
+
     private GetShortCurrentSummary(summary: string): string {
         let processed = summary.split(" ");
         let result = "";

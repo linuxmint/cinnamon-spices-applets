@@ -57,6 +57,7 @@ var icons = utils.icons;
 var weatherIconSafely = utils.weatherIconSafely;
 var Yahoo = (function () {
     function Yahoo(_app) {
+        this.prettyName = "Yahoo";
         this.name = "Yahoo";
         this.maxForecastSupport = 10;
         this.supportsHourly = false;

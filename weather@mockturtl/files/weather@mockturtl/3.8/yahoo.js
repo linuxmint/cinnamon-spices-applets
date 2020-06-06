@@ -21,6 +21,7 @@ var icons = utils.icons;
 var weatherIconSafely = utils.weatherIconSafely;
 class Yahoo {
     constructor(_app) {
+        this.prettyName = "Yahoo";
         this.name = "Yahoo";
         this.maxForecastSupport = 10;
         this.supportsHourly = false;

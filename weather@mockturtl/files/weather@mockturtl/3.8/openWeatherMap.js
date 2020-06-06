@@ -23,6 +23,7 @@ var get = utils.get;
 var nonempty = utils.nonempty;
 class OpenWeatherMap {
     constructor(_app) {
+        this.prettyName = "OpenWeatherMap";
         this.name = "OpenWeatherMap";
         this.maxForecastSupport = 7;
         this.supportsHourly = true;
