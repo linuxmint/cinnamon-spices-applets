@@ -61,14 +61,17 @@ Right-click to access `cinnamon-settings` -> _Applets -> Configure_.
 
 ## Future Plans
 
-* Add some kind of hourly forecast on middle click
 * Switch to MET Norway API v2.0 when it comes out (has a better iconnaming scheme for conditions)
 
 ## Known Issues
 
+* Hourly weather forecast does not fit if it's too long and elided, e.g.: "Mostly Clou..."
+
+* Hourly forecast toggle button is not centered to the middle of the popup menu
+
 * Sunset/Sunrise is not displayed correctly if there is a mismatch between the Location Timezone and System Timezone when using Manual Location
+
 * DarkSky verbose conditions are only in cm/celsius or in/fahrenheit
-* Location button does not indicate that its hovered over with light themes.
 
 ### Troubleshooting
 
