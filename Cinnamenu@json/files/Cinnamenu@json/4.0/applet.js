@@ -23,7 +23,7 @@ const {launch_all} = imports.ui.searchProviderManager;
 const {makeDraggable} = imports.ui.dnd;
 const {spawnCommandLine, latinise, each, find, findIndex, map} = imports.misc.util;
 const {createStore} = imports.misc.state;
-const {tryFn, sortBy, setSchema} = require('./utils');
+const {tryFn, sortBy} = require('./utils');
 const fuzzy = require('./fuzzy');
 const { _, ApplicationType, AppTypes } = require('./constants');
 const searchThresholds = {  id: 0.2,
@@ -32,13 +32,12 @@ const searchThresholds = {  id: 0.2,
                             keywords: 0.2,
                             title: 0.2 };
 const ApplicationsViewModeLIST = 0, ApplicationsViewModeGRID = 1;
-const PlacementTOOLTIP = 1, PlacementUNDER = 2, PlacementBOTTOM = 3, PlacementNONE =4;
+const PlacementTOOLTIP = 1, PlacementUNDER = 2, PlacementNONE =3;
 const REMEMBER_RECENT_KEY = 'remember-recent-files';
-const fuzzyOptions = { before: '<b><u>', after: '</u></b>' };
 const {CategoryListButton, AppListGridButton, GroupButton} = require('./buttons');
 const {Gda} = require('./browserBookmarks');
 const PlaceDisplay = require('./placeDisplay');
-const { BookmarksManager } = require('./bookmarksManager');
+const {BookmarksManager} = require('./bookmarksManager');
 const hintText = _('Type to search...');
 
 class CinnamenuApplet extends TextIconApplet {
@@ -56,27 +55,25 @@ class CinnamenuApplet extends TextIconApplet {
         this.state = createStore({
                     cinnamon36: typeof this._newPanelId !== 'undefined',
                     settings: {},
-                    knownProviders: [],
                     enabledProviders: global.settings.get_strv('enabled-search-providers'),
                     theme: null,
                     isListView: false,
                     iconSize: 64,
                     currentCategory: 'favorites',
-                    startupCategoryOptionsEmpty: true,
                     categoryDragged: false,
                     fallbackDescription: '',
-                    appletReady: false,
                     searchActive: false,
-                    itemEntered: false,
                     contextMenuIsOpen: null,
-                    expressionActive: false,
-                    searchWebErrorsShown: false,
-                    displayed: false,
-                    isNewInstance: true,
                     dragIndex: -1,
                     isBumblebeeInstalled: GLib.file_test('/usr/bin/optirun', GLib.FileTest.EXISTS) });
         this.recentEnabled = this.privacy_settings.get_boolean(REMEMBER_RECENT_KEY);
         this.favorites = this.appFavorites.getFavorites();
+        this.knownProviders = [];
+        this.appletReady = false;
+        this.searchWebErrorsShown = false;
+        this.displayed = false;
+        this.isNewInstance = true;
+        this.expressionActive = false;
 
         this.state.connect({
             currentCategory: ({currentCategory}) => {
@@ -88,56 +85,13 @@ class CinnamenuApplet extends TextIconApplet {
                                                       } },
             clearEnteredActors: () => this.clearEnteredActors(),
             makeVectorBox: (actor) => this.makeVectorBox(actor),
-            setTooltip: (coords, width, height, text) => {
-                    if (!text) {
-                        this.tooltip.hide();
-                        return;
-                    }
-                    let [x, y] = coords;
-                    let clutterText = this.tooltip._tooltip.get_clutter_text();
-                    if (clutterText) {
-                        clutterText.set_markup(text);
-                    } else {
-                        this.tooltip.set_text(text.replace(/(<([^>]+)>)/ig, ''));
-                    }
-                    if (width && height) {
-                        if (this.state.isListView) {
-                            x += width + 80;
-                            y -= 14;
-                            // Don't let the tooltip cover menu items when the menu
-                            // is oriented next to the right side of the monitor.
-                            let {style_class} = this._panelLocation;
-                            if (style_class === 'panelRight' || style_class === 'panelLeft vertical') {
-                                y += height;
-                            }
-                        } else {
-                            y += height;
-                        }
-                    }
-                    this.tooltip.mousePosition = [x, y];
-                    if (!this.state.settings.tooltipDelay) {
-                        this.tooltip.show();
-                        return;
-                    }
-                    setTimeout(() => {  if (!this.state.itemEntered) {
-                                          return;
-                                        }
-                                        this.tooltip.show();
-                                     }, this.state.settings.tooltipDelay); },
+            setTooltip: (...args) => this.showTooltip(...args),
             setKeyFocus: () => global.stage.set_key_focus(this.searchEntry),
-            setSelectedTitleText: (text) => this.selectedAppTitle.set_text(text),
-            setSelectedDescriptionText: (text) => this.selectedAppDescription.set_text(text),
-            getSelectedTitleClutterText: () => this.selectedAppTitle.get_clutter_text(),
-            getSelectedDescriptionClutterText: () => this.selectedAppDescription.get_clutter_text(),
             toggleSearchVisibility: (bool) => {
                     if (bool) {
-                        this.selectedAppBox.hide();
-                        this.searchBox.show();
                         global.stage.set_key_focus(this.searchEntry);
                     } else {
                         global.stage.set_key_focus(this.actor);
-                        this.searchBox.hide();
-                        this.selectedAppBox.show();
                     }
                     this.setActiveCategoryStyle(); },
             openMenu: () => this.menu.open(),
@@ -172,17 +126,7 @@ class CinnamenuApplet extends TextIconApplet {
                                             this.categoryButtons[i].handleLeave();
                                         }
                                     } },
-            removeFavorite: (id) => this.appFavorites.removeFavorite(id),
-            switchApplicationsView: (fromToggle) => this.switchApplicationsView(fromToggle),
-            setSettingsValue: (k, v) => this.settings.setValue(k, v),
-            setIsListView: () => {
-                                if (this.state.isListView) {
-                                    this.state.set({iconSize: this.state.settings.appsListIconSize > 0 ?
-                                                                    this.state.settings.appsListIconSize : 28});
-                                } else {
-                                    this.state.set({iconSize: this.state.settings.appsGridIconSize > 0 ?
-                                                                    this.state.settings.appsGridIconSize : 64});
-                                } } });
+            removeFavorite: (id) => this.appFavorites.removeFavorite(id)  });
         //createMenu
         this.orientation = orientation;
         this.menuManager = new PopupMenuManager(this);
@@ -230,7 +174,7 @@ class CinnamenuApplet extends TextIconApplet {
         // Init settings
         this.loadSettings();
         this.initCategories();
-        this.state.set({ isListView: this.state.settings.startupViewMode === ApplicationsViewModeLIST,
+        this.state.set({ isListView: this.state.settings.applicationsViewMode === ApplicationsViewModeLIST,
                          fallbackDescription: (this.state.settings.descriptionPlacement != PlacementNONE) ?
                                                                         _('No description available') : '' });
         global.settings.connect('changed::enabled-search-providers',
@@ -240,6 +184,41 @@ class CinnamenuApplet extends TextIconApplet {
         this.updateIconAndLabel();
         this.updateActivateOnHover();
         this.updateKeybinding();
+    }
+
+    showTooltip(coords, width, height, text) {
+        if (!text) {
+            this.state.itemEntered = false;
+            this.tooltip.hide();
+            return;
+        }
+        let [x, y] = coords;
+        let clutterText = this.tooltip._tooltip.get_clutter_text();
+        if (clutterText) {
+            clutterText.set_markup(text);
+        } else {
+            this.tooltip.set_text(text.replace(/(<([^>]+)>)/ig, ''));
+        }
+        if (width && height) {
+            if (this.state.isListView) {
+                x += width + 80;
+                y -= 14;
+                // Don't let the tooltip cover menu items when the menu
+                // is oriented next to the right side of the monitor.
+                let {style_class} = this._panelLocation;
+                if (style_class === 'panelRight' || style_class === 'panelLeft vertical') {
+                    y += height;
+                }
+            } else {
+                y += height;
+            }
+        }
+        this.tooltip.mousePosition = [x, y];
+        this.state.itemEntered = true;
+        setTimeout(() => {  if (this.state.itemEntered) {
+                                this.tooltip.show();
+                            }
+                         }, 250);
     }
 
     getGridWidth() {
@@ -273,11 +252,11 @@ class CinnamenuApplet extends TextIconApplet {
 
     on_applet_reloaded() {
         if (!this.state) return;
-        let {knownProviders, enabledProviders} = this.state;
+        let {enabledProviders} = this.state;
         global.cinnamenuBuffer = {
             settings: this.settings,
             state: this.state.settings,
-            knownProviders,
+            knownProviders: this.knownProviders,
             enabledProviders
         };
     }
@@ -298,7 +277,7 @@ class CinnamenuApplet extends TextIconApplet {
         if (!this.state) {
             return;
         }
-        this.state.set({appletReady: true});
+        this.appletReady = true;
     }
 
     on_applet_removed_from_panel() {
@@ -437,7 +416,7 @@ class CinnamenuApplet extends TextIconApplet {
     }
 
     onIconsChanged() {
-        if (!this.state || !this.state.appletReady) {
+        if (!this.state || !this.appletReady) {
             return;
         }
         this.refresh();
@@ -466,8 +445,8 @@ class CinnamenuApplet extends TextIconApplet {
         if (enabledProviders.length === 0) return;
         this.state.set({enabledProviders});
         // Synchronize search provider settings
-        for (let i = 0; i < this.state.knownProviders.length; i++) {
-            this.settings.setValue(this.state.knownProviders[i], enabledProviders.indexOf(this.state.knownProviders[i]) > -1);
+        for (let i = 0; i < this.knownProviders.length; i++) {
+            this.settings.setValue(this.knownProviders[i], enabledProviders.indexOf(this.knownProviders[i]) > -1);
         }
     }
 
@@ -499,17 +478,8 @@ class CinnamenuApplet extends TextIconApplet {
     }
 
     applyConstraints() {
-        if (this.state.settings.descriptionPlacement === PlacementBOTTOM && this.state.isListView) {
-            let node = this.searchBox.peek_theme_node();
-            if (node) {
-                let padding = node.get_length('padding');
-                this.bottomPane.style = `min-height: ${this.bottomPane.height - padding}px;`;
-                this.searchEntry.width = this.selectedAppBox.width;
-            }
-        } else {
-            let searchWidth = this.searchBox.width - this.categoriesBox.width;
-            this.searchEntry.width = searchWidth > 0 ? searchWidth : this.searchEntry.width;
-        }
+        let searchWidth = this.searchBox.width - this.categoriesBox.width;
+        this.searchEntry.width = searchWidth > 0 ? searchWidth : this.searchEntry.width;
 
         this.actor.style += `max-width: ${this.mainBox.width}px;max-height: ${this.mainBox.height}px;`;
         this.groupCategoriesWorkspacesScrollBox.style += `max-width: ${this.categoriesBox.width}px;`;
@@ -577,11 +547,6 @@ class CinnamenuApplet extends TextIconApplet {
                 cb: this.onEnableBookmarksChange
             },
             {
-                key: 'enable-windows',
-                value: 'enableWindows',
-                cb: null
-            },
-            {
                 key: 'enable-search-providers',
                 value: 'enableSearchProviders',
                 cb: null
@@ -592,8 +557,8 @@ class CinnamenuApplet extends TextIconApplet {
                 cb: this.updateIconAndLabel
             },
             {
-                key: 'startup-view-mode',
-                value: 'startupViewMode',
+                key: 'applications-view-mode',
+                value: 'applicationsViewMode',
                 cb: this.refresh
             },
             {
@@ -642,11 +607,6 @@ class CinnamenuApplet extends TextIconApplet {
                 cb: this.refresh
             },
             {
-                key: 'tooltip-delay',
-                value: 'tooltipDelay',
-                cb: null
-            },
-            {
                 key: 'enable-custom-menu-height',
                 value: 'enableCustomMenuHeight',
                 cb: this.updateCustomHeight
@@ -658,8 +618,8 @@ class CinnamenuApplet extends TextIconApplet {
             }
         ];
 
-        for (let i = 0; i < this.state.knownProviders.length; i++) {
-            let provider = this.state.knownProviders[i];
+        for (let i = 0; i < this.knownProviders.length; i++) {
+            let provider = this.knownProviders[i];
             settingsProps.push({ key: provider,
                                  value: provider,
                                  cb: this.searchProviderChange(provider) });
@@ -686,7 +646,7 @@ class CinnamenuApplet extends TextIconApplet {
             return false;
         }
         if (open) {
-            if (!this.state.displayed) {
+            if (!this.displayed) {
                 this.display();
             }
 
@@ -697,7 +657,7 @@ class CinnamenuApplet extends TextIconApplet {
             this.switchApplicationsView(false);
             // Display startup apps
             this.resetDisplayState();
-            this.state.trigger('menuOpened');
+            //this.state.trigger('menuOpened');
             this.mainBox.show();
             // Do height/constraint adjustments after actors are rendered and on the stage.
             this.customMenuHeightChange();
@@ -713,11 +673,11 @@ class CinnamenuApplet extends TextIconApplet {
 
     onEnableRecentChange() {
         this.recentEnabled = this.privacy_settings.get_boolean(REMEMBER_RECENT_KEY);
-        this.refresh(true);
+        this.refresh();
     }
 
     onEnablePlacesChange() {
-        this.refresh(true);
+        this.refresh();
     }
 
     onEnableBookmarksChange(enableBookmarks, fromInit = false) { //web bookmarks
@@ -727,11 +687,11 @@ class CinnamenuApplet extends TextIconApplet {
             this.bookmarksManager = null;
         }
         if (!fromInit) {
-            this.refresh(true);
+            this.refresh();
         }
     }
 
-    refresh(startupCategoryOptionsEmpty = false) {
+    refresh() {
         // TBD: For some reason the onEnable* settings callbacks get called several times per settings change,
         // This is causing the start up category to reset, so throttling this function to 250ms prevents excess invocation.
         let now = Date.now();
@@ -740,8 +700,7 @@ class CinnamenuApplet extends TextIconApplet {
 
         this.clearAll();
         this.destroyDisplayed();
-        this.state.set({  displayed: false,
-                          startupCategoryOptionsEmpty });
+        this.displayed = false;
         this.mxOffset = null;
         this.categoryButtons = [];
         this.initCategories(false);
@@ -874,7 +833,7 @@ class CinnamenuApplet extends TextIconApplet {
                     }
                     let appIsKnown = this.knownApps.indexOf(id) > -1;
                     if (!appIsKnown) {
-                        if (!this.state.isNewInstance) {
+                        if (!this.isNewInstance) {
                             app.shouldHighlight = true;
                         } else {
                             this.knownApps.push(id);
@@ -1002,19 +961,6 @@ class CinnamenuApplet extends TextIconApplet {
             this.categoryButtons.push(button);
         }
 
-        if ((categoriesChanged || this.state.startupCategoryOptionsEmpty) && !isReRender) {
-            setSchema(__meta.path, (knownProviders) => {
-                            this.state.set({    knownProviders,
-                                                startupCategoryOptionsEmpty: false });
-                            if (this.state.isNewInstance) {
-                                this.onEnabledSearchProvidersChange();
-                            }
-                            this.settings.setValue('currentCategory', 'favorites');
-                            //this.loadSettings();??
-                        });
-            this.state.startupCategoryOptionsEmpty = false;
-        }
-
         buttons = undefined;
     }
 
@@ -1065,15 +1011,7 @@ class CinnamenuApplet extends TextIconApplet {
     }
 
     switchApplicationsView(fromToggle) {
-        // In the case of the descriptionPlacement in the bottom pane, we need to toggle insertion
-        // of selectedAppBox in between powerGroupBox and searchBox - much simpler to do a full refresh.
-        if (fromToggle && this.state.settings.descriptionPlacement === PlacementBOTTOM) {
-            this.menu.close();
-            this.refresh();
-            this.menu.open();
-            return;
-        }
-        let isListView = this.state.settings.startupViewMode === ApplicationsViewModeLIST;
+        let isListView = this.state.settings.applicationsViewMode === ApplicationsViewModeLIST;
         let iconSize;
         if (isListView) {
             iconSize = this.state.settings.appsListIconSize > 0 ? this.state.settings.appsListIconSize : 28;
@@ -1218,45 +1156,6 @@ class CinnamenuApplet extends TextIconApplet {
         }
     }
 
-    listWindows(pattern) {
-        if (!this.state.settings.enableWindows) {
-            return [];
-        }
-        let windows = [];
-        let indexes = Array(global.screen.get_n_workspaces());
-        for (let i = 0; i < indexes.length; i++) {
-            windows = windows.concat(global.screen.get_workspace_by_index(i).list_windows());
-        }
-        let res = [];
-        let searchableProps = ['title', 'description', 'id'];
-        for (let i = 0, len = windows.length; i < len; i++) {
-            if (!windows[i] || !windows[i].title) {
-                continue;
-            }
-            let match = null;
-            let app = this.tracker.get_window_app(windows[i]);
-            if (!app || !app.name) {
-                continue;
-            }
-            let appObject = { description: app.name, };
-            windows[i].description = app.name;
-            windows[i].id = windows[i].get_wm_class().toLowerCase();
-            for (let z = 0; z < searchableProps.length; z++) {
-                match = fuzzy(pattern, windows[i][searchableProps[z]], fuzzyOptions);
-                if (match.score > searchThresholds[searchableProps[z]]) {
-                    appObject._icon = app.create_icon_texture(this.state.iconSize);
-                    appObject.type = ApplicationType._windows;
-                    appObject.name = !z ? match.result : windows[i].title;
-                    appObject.score = match.score;
-                    appObject.window = windows[i];
-                    res.push(appObject);
-                    break;
-                }
-            }
-        }
-        return res;
-    }
-
     listPlaces(pattern) {
         if (!this.placesManager || !this.state.settings.showPlaces) {
             return [];
@@ -1265,7 +1164,8 @@ class CinnamenuApplet extends TextIconApplet {
         let res = [];
         let match = null;
         for (let i = 0, len = places.length; i < len; i++) {
-            if (pattern) match = fuzzy(pattern, places[i].name, fuzzyOptions);
+            if (pattern)
+                match = fuzzy(pattern, places[i].name);
             if (!pattern || match.score > searchThresholds.name) {
                 places[i].type = ApplicationType._places;
                 places[i].description = places[i].file.get_path();
@@ -1287,7 +1187,7 @@ class CinnamenuApplet extends TextIconApplet {
         let res = [];
         let match = null;
         for (let i = 0, len = bookmarks.length; i < len; i++) {
-            if (pattern) match = fuzzy(pattern, bookmarks[i].name, fuzzyOptions);
+            if (pattern) match = fuzzy(pattern, bookmarks[i].name);
             if (!pattern || match.score > searchThresholds.name) {
                 bookmarks[i].type = ApplicationType._places;
                 bookmarks[i].description = bookmarks[i].file.get_path();
@@ -1309,7 +1209,7 @@ class CinnamenuApplet extends TextIconApplet {
         let res = [];
         let match = null;
         for (let i = 0, len = devices.length; i < len; i++) {
-            if (pattern) match = fuzzy(pattern, devices[i].name, fuzzyOptions);
+            if (pattern) match = fuzzy(pattern, devices[i].name);
             if (!pattern || match.score > searchThresholds.name) {
                 devices[i].type = ApplicationType._places;
                 devices[i].description = devices[i].file.get_path();
@@ -1327,14 +1227,14 @@ class CinnamenuApplet extends TextIconApplet {
         if (!this.state.settings.enableBookmarks) {
             return [];
         }
-        if (!this.state.searchWebErrorsShown && !Gda) {
+        if (!this.searchWebErrorsShown && !Gda) {
             this.answerText.set_text(_('gir1.2-gda-5.0 package required for Firefox and Midori bookmarks.'));
             this.answerText.show();
-        } else if (this.answerText.is_visible() && !this.state.expressionActive) {
+        } else if (this.answerText.is_visible() && !this.expressionActive) {
             this.answerText.hide();
         }
 
-        this.state.set({searchWebErrorsShown: true});
+        this.searchWebErrorsShown = true;
 
         let res = [];
         let arr = this.bookmarksManager.state;
@@ -1349,7 +1249,7 @@ class CinnamenuApplet extends TextIconApplet {
             let match = null;
             if (pattern) {
                 for (let z = 0, len = searchableProps.length; z < len; z++ ) {
-                    match = fuzzy(pattern, bookmark[searchableProps[z]], fuzzyOptions);
+                    match = fuzzy(pattern, bookmark[searchableProps[z]]);
                     if (bookmark[searchableProps[z]] && match.score > 0.2) {
                         bookmark.score = match.score;
                         bookmark[searchableProps[z]] = match.result;
@@ -1362,7 +1262,6 @@ class CinnamenuApplet extends TextIconApplet {
                 res.push(bookmark);
             }
         }
-
         return res;
     }
 
@@ -1404,7 +1303,7 @@ class CinnamenuApplet extends TextIconApplet {
               let match = null;
               if (pattern) {
                   for (let z = 0, len = searchableProps.length; z < len; z++) {
-                      match = fuzzy(pattern, recentItem[searchableProps[z]], fuzzyOptions);
+                      match = fuzzy(pattern, recentItem[searchableProps[z]]);
                       if (recentItem[searchableProps[z]] && match.score > 0.6) {
                           recentItem.score = match.score;
                           recentItem[searchableProps[z]] = match.result;
@@ -1451,10 +1350,7 @@ class CinnamenuApplet extends TextIconApplet {
 
                 let match = null;
                 for (let z = 0, len = searchableProps.length; z < len; z++ ) {
-                    if (this.state.settings.enableWindows && res[i].state > 0) {
-                        continue;
-                    }
-                    match = fuzzy(pattern, res[i][searchableProps[z]], fuzzyOptions);
+                    match = fuzzy(pattern, res[i][searchableProps[z]]);
                     if (res[i][searchableProps[z]] && match.score > searchThresholds[searchableProps[z]]) {
                         const markdownProps = ['name', 'description'];
                         res[i].score = match.score;
@@ -1523,7 +1419,7 @@ class CinnamenuApplet extends TextIconApplet {
         }
 
         let ctrlKey = modifierState & Clutter.ModifierType.CONTROL_MASK || symbol === 65507 || symbol === 65508;
-
+        //global.log("ctrl:"+ctrlKey+", alt:"+modifierState);
         let buttons = this.getActiveButtons();
         let refItemIndex = findIndex(buttons, (button) => {
             return (button.actor.has_style_class_name('menu-application-button-selected') ||
@@ -1548,8 +1444,8 @@ class CinnamenuApplet extends TextIconApplet {
                 contextMenuChildren = buttons[refItemIndex].contextMenuButtons;
                 refContextMenuItemIndex = findIndex(contextMenuChildren, (button) => {
                                               return button.actor.has_style_pseudo_class('active'); });
-                enteredContextMenuItemExists = refContextMenuItemIndex > -1
-                                                        && contextMenuChildren[refContextMenuItemIndex] != null;
+                enteredContextMenuItemExists = refContextMenuItemIndex > -1 &&
+                                                        contextMenuChildren[refContextMenuItemIndex] != null;
                 if (enteredContextMenuItemExists) {
                     contextMenuChildren[refContextMenuItemIndex].handleLeave();
                 } else {
@@ -1567,16 +1463,14 @@ class CinnamenuApplet extends TextIconApplet {
         }
         let startingCategoryIndex = findIndex(this.categoryButtons, (button) => {
                                                   return this.state.currentCategory === button.id; });
-        startingCategoryIndex = ( this.state.settings.enableBookmarks
-                                        && startingCategoryIndex <= 0 ) ? 1 : startingCategoryIndex;
+        startingCategoryIndex = ( this.state.settings.enableBookmarks && startingCategoryIndex <= 0 ) ?
+                                                                                    1 : startingCategoryIndex;
 
         const previousItemNavigation = (index) => {
-            let up = (typeof buttons[index] === 'undefined' && enteredItemExists
-              || typeof this.categoryButtons[refCategoryIndex - 1] === 'undefined' && enteredCategoryExists
-              || typeof this.powerGroupButtons[refPowerGroupItemIndex - 1] === 'undefined' && enteredPowerGroupItemExists);
-            if (index < 0) {
-                index = 0;
-            }
+            let up = (typeof buttons[index] === 'undefined' && enteredItemExists ||
+                typeof this.categoryButtons[refCategoryIndex - 1] === 'undefined' && enteredCategoryExists ||
+                typeof this.powerGroupButtons[refPowerGroupItemIndex - 1] === 'undefined' && enteredPowerGroupItemExists);
+            index = Math.max(index,0);
             if (contextMenuChildren[index] && refContextMenuItemIndex !== index) {
                 contextMenuChildren[index].handleEnter();
             } else if (enteredItemExists && buttons[refItemIndex].menu.isOpen) {
@@ -1597,9 +1491,9 @@ class CinnamenuApplet extends TextIconApplet {
         };
 
         const nextItemNavigation = (index) => {
-            let down = (typeof buttons[index] === 'undefined' && enteredItemExists
-              || typeof this.categoryButtons[refCategoryIndex + 1] === 'undefined' && enteredCategoryExists
-              || typeof this.powerGroupButtons[refPowerGroupItemIndex + 1] === 'undefined' && enteredPowerGroupItemExists);
+            let down = (typeof buttons[index] === 'undefined' && enteredItemExists ||
+                typeof this.categoryButtons[refCategoryIndex + 1] === 'undefined' && enteredCategoryExists ||
+                typeof this.powerGroupButtons[refPowerGroupItemIndex + 1] === 'undefined' && enteredPowerGroupItemExists);
             if (index < 0) {
                 index = 0;
             }
@@ -1619,9 +1513,8 @@ class CinnamenuApplet extends TextIconApplet {
         };
 
         const leftNavigation = () => {
-            if ((enteredItemExists && refItemIndex === 0)
-                          || (enteredItemExists && this.state.isListView)
-                          || (!enteredItemExists && !enteredCategoryExists && !enteredPowerGroupItemExists)) {
+            if ((enteredItemExists && refItemIndex === 0) || (enteredItemExists && this.state.isListView) ||
+                                (!enteredItemExists && !enteredCategoryExists && !enteredPowerGroupItemExists)) {
                 if (this.state.searchActive) {
                     buttons[refItemIndex].handleEnter();
                     return;
@@ -1744,8 +1637,14 @@ class CinnamenuApplet extends TextIconApplet {
                 return true;
             case symbol === Clutter.ISO_Left_Tab:
             case symbol === Clutter.Tab:
-                tabNavigation();
-                return true;
+                if (modifierState === 8) { //Alt-Tab was pressed. Close menu as alt-tab is used for app-switcher in cinnamon
+                    this.state.trigger('closeMenu');
+                    return false;
+                }else{
+                    tabNavigation();
+                    return true;
+                }
+                break;
             case symbol === Clutter.KEY_Escape:
             case symbol === Clutter.Escape:
                 if (enteredItemExists && buttons[refItemIndex].menu.isOpen) {
@@ -1760,6 +1659,7 @@ class CinnamenuApplet extends TextIconApplet {
                 }
                 return true;
             default:
+            return false;
         }
     }
 
@@ -1802,14 +1702,14 @@ class CinnamenuApplet extends TextIconApplet {
         if (this.searchEntry) {
             this.searchEntry.set_text('');
         }
-        this.state.set({ searchActive: false,
-                         expressionActive: false });
+        this.state.set({ searchActive: false });
+        this.expressionActive = false;
         if (this.activeContainer) {
             this.activeContainer.show();
         }
         if (!this.activeContainer) {
-            this.activeContainer = this.state.settings.startupViewMode === ApplicationsViewModeLIST
-                                                               ? this.applicationsListBox : this.applicationsGridBox;
+            this.activeContainer = this.state.settings.applicationsViewMode === ApplicationsViewModeLIST ?
+                                                               this.applicationsListBox : this.applicationsGridBox;
         }
 
         // Since we don't want to monitor which windows need added or removed like a window list applet,
@@ -1820,9 +1720,8 @@ class CinnamenuApplet extends TextIconApplet {
             if (!this.allItems[i]) {
               continue;
             }
-            if (this.state.settings.enableWindows && this.allItems[i].buttonState.appType === ApplicationType._windows
-                                                || this.state.settings.enableSearchProviders
-                                                && this.allItems[i].buttonState.appType === ApplicationType._providers) {
+            if (this.state.settings.enableSearchProviders &&
+                                        this.allItems[i].buttonState.appType === ApplicationType._providers) {
                 this.allItems[i].destroy(true);
                 this.allItems[i] = undefined;
             } else {
@@ -1831,8 +1730,6 @@ class CinnamenuApplet extends TextIconApplet {
             }
         }
         this.allItems = allItems;
-        this.selectedAppTitle.set_text('');
-        this.selectedAppDescription.set_text('');
         global.stage.set_key_focus(this.searchEntry);
     }
 
@@ -1871,7 +1768,7 @@ class CinnamenuApplet extends TextIconApplet {
             }
 
             this.searchEntry.set_secondary_icon(null);
-            this.state.trigger('menuOpened');
+            //this.state.trigger('menuOpened');
         }
         setTimeout(() => this.doSearch(searchText), 0);
     }
@@ -1884,18 +1781,6 @@ class CinnamenuApplet extends TextIconApplet {
         }
         this.previousSearchPattern = pattern;
 
-        // Convenience calculator
-        if (pattern.search(/([-+]?[0-9]*\.?[0-9]+[/+\-*])+([-+]?[0-9]*\.?[0-9]+)/gm) > -1) {
-            tryFn(() => {
-                let answer = eval(pattern);
-                let answerText = pattern + ' = ' + answer;
-                this.answerText.set_text(answerText);
-                this.answerText.show();
-                this.activeContainer.hide();
-                this.state.set({expressionActive: true});
-            }, () => this.state.set({expressionActive: false}));
-        }
-
         let acResults = []; // search box autocompletion results
         if (this.state.settings.searchFilesystem) {
             // Don't use the pattern here, as filesystem is case sensitive
@@ -1906,19 +1791,10 @@ class CinnamenuApplet extends TextIconApplet {
                             .concat(this.listPlaces(pattern))
                             .concat(this.listWebBookmarks(pattern))
                             .concat(this.listRecent(pattern))
-                            .concat(acResults)
-                            .concat(this.listWindows(pattern));
+                            .concat(acResults);
 
-        const finish = () => {
-                                sortBy(results, 'score', 'desc');
-                                this.clearApplicationsBox();
-                                this.displayApplications(results);
-
-                                let buttons = this.getActiveButtons();
-                                if (buttons.length === 0) return;
-                                buttons[0].handleEnter(); };
-        if (this.state.settings.enableSearchProviders && this.state.enabledProviders.length > 0
-                                                                                  && pattern.length > 2) {
+        if (this.state.settings.enableSearchProviders && this.state.enabledProviders.length > 0 &&
+                                                                                  pattern.length > 2) {
             const listSearchProviders = (pattern, cb) => {
                 launch_all(pattern, (provider, results) => {
                     for (let i = 0; i < results.length; i++) {
@@ -1947,10 +1823,16 @@ class CinnamenuApplet extends TextIconApplet {
                     if (!this.state.searchActive || !providerResults || providerResults.length === 0)
                         return;
                     results = results.concat(providerResults);
-                    finish(); });
-        } else {
-            finish();
+                    });
         }
+
+        sortBy(results, 'score', 'desc');
+        this.clearApplicationsBox();
+        this.displayApplications(results);
+
+        let buttons = this.getActiveButtons();
+        if (buttons.length === 0) return;
+        buttons[0].handleEnter();
 
         return false;
     }
@@ -1977,8 +1859,8 @@ class CinnamenuApplet extends TextIconApplet {
             let appButton;
             let refAppButton = -1;
             for (let i = 0, _len = this.allItems.length; i < _len; i++) {
-                if (this.allItems[i] && (this.allItems[i].buttonState.appType === ApplicationType._places
-                        && this.allItems[i].buttonState.app.name === app || this.allItems[i].buttonState.app === app)) {
+                if (this.allItems[i] && (this.allItems[i].buttonState.appType === ApplicationType._places &&
+                        this.allItems[i].buttonState.app.name === app || this.allItems[i].buttonState.app === app)) {
                     refAppButton = i;
                     break;
                 }
@@ -2014,8 +1896,8 @@ class CinnamenuApplet extends TextIconApplet {
             }
         };
 
-        if (!this.state.searchActive && lastApp && !lastApp.clearList && this.state.currentCategory
-                                                               && this.state.currentCategory !== 'favorites') {
+        if (!this.state.searchActive && lastApp && !lastApp.clearList && this.state.currentCategory &&
+                                                               this.state.currentCategory !== 'favorites') {
             sortBy(appList, 'name', 'asc');
         }
         let index = -1;
@@ -2045,7 +1927,8 @@ class CinnamenuApplet extends TextIconApplet {
     }
 
     display() {
-        this.state.set({ isListView: this.state.settings.startupViewMode === ApplicationsViewModeLIST, displayed: true });
+        this.state.set({ isListView: this.state.settings.applicationsViewMode === ApplicationsViewModeLIST });
+        this.displayed = true;
         //==================bottomPane================
         // PowerGroupBox
         this.powerGroupButtons.push(new GroupButton( this.state, 'user-info', 24, '', _('Account details'),
@@ -2076,15 +1959,6 @@ class CinnamenuApplet extends TextIconApplet {
                                                                         y_align: St.Align.MIDDLE });
         }
 
-        // selectedAppBox
-        this.selectedAppTitle = new St.Label({ style_class: 'menu-selected-app-title', text: '' });
-        this.selectedAppDescription = new St.Label({ style_class: 'menu-selected-app-description', text: '' });
-        this.selectedAppBox = new St.BoxLayout({ style_class: 'menu-selected-app-box',
-                                                 style: 'text-align: left;width:100px;',
-                                                 vertical: true });
-        this.selectedAppBox.add_actor(this.selectedAppTitle);
-        this.selectedAppBox.add_actor(this.selectedAppDescription);
-
         //searchBox
         this.searchInactiveIcon = new St.Icon({ style_class: 'menu-search-entry-icon', icon_name: 'edit-find' });
         this.searchActiveIcon = new St.Icon({ style_class: 'menu-search-entry-icon', icon_name: 'edit-clear' });
@@ -2101,7 +1975,7 @@ class CinnamenuApplet extends TextIconApplet {
         this.searchBox.add(this.searchEntry, {  expand: true,
                                                 x_align: St.Align.START,
                                                 y_align: St.Align.START });
-        // Bottom pane holds power group, selected app description and search box (packed horizontally)
+        // Bottom pane holds power group and search box (packed horizontally)
         this.bottomPane = new St.BoxLayout({ style: 'padding-top: 12px;' });
 
         this.bottomPane.add(this.powerGroupBox, { expand: false,
@@ -2109,21 +1983,6 @@ class CinnamenuApplet extends TextIconApplet {
                                                   y_fill: false,
                                                   x_align: St.Align.START,
                                                   y_align: St.Align.MIDDLE });
-
-        if (this.state.settings.descriptionPlacement === PlacementBOTTOM) {
-            this.bottomPane.add(this.selectedAppBox, {
-                                          x_fill: true,
-                                          y_fill: false,
-                                          x_align: St.Align.START,
-                                          y_align: St.Align.MIDDLE,
-                                          expand: true,
-                                          align_end: false,
-                                          show_on_set_parent: false });
-            if (this.state.isListView) {
-                this.selectedAppBox.hide();
-                this.selectedAppBox.style += 'text-align: right;';
-            }
-        }
 
         this.bottomPane.add(this.searchBox, { expand: true,
                                               x_fill: true,
@@ -2253,9 +2112,7 @@ class CinnamenuApplet extends TextIconApplet {
         this.tooltip = new Tooltip(this.mainBox, '');
         this.tooltip._tooltip.set_style('text-align: left;');
 
-        if (this.state.isNewInstance) {
-            this.state.set({isNewInstance: false});
-        }
+        this.isNewInstance = false;
     }
 
     destroyContainer(container) {
