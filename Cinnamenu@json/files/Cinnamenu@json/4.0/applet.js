@@ -1443,7 +1443,7 @@ class CinnamenuApplet extends TextIconApplet {
 			let item = items[i];
 			let match = null;
 			for (let z = 0, len = searchableProps.length; z < len; z++) {
-				match = fuzzy(pattern, item[searchableProps[z]], fuzzyOptions);
+				match = fuzzy(pattern, item[searchableProps[z]]);
 				if (!!item.score && item.score > match.score) continue;
 				if (item[searchableProps[z]] && match.score > 0.6) {
 					item.score = match.score;
