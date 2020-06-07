@@ -30,7 +30,17 @@ const searchThresholds = {  id: 0.2,
                             name: 0.1,
                             description: 0.1,
                             keywords: 0.2,
-                            title: 0.2 };
+							title: 0.2 };
+const propWeights = {
+	start: {
+		name: 3,
+		description: 1.5
+	},
+	inside: {
+		name: 2,
+		description: 1.1
+	},
+}
 const ApplicationsViewModeLIST = 0, ApplicationsViewModeGRID = 1;
 const PlacementTOOLTIP = 1, PlacementUNDER = 2, PlacementBOTTOM = 3, PlacementNONE =4;
 const REMEMBER_RECENT_KEY = 'remember-recent-files';
@@ -1406,28 +1416,15 @@ class CinnamenuApplet extends TextIconApplet {
 
         if (pattern) {
           let _res = [];
-          let searchableProps = ['name', 'description'];
-
-          for (let i = 0, len = res.length; i < len; i++) {
-              let recentItem = res[i];
-              let match = null;
-              if (pattern) {
-                  for (let z = 0, len = searchableProps.length; z < len; z++) {
-                      match = fuzzy(pattern, recentItem[searchableProps[z]], fuzzyOptions);
-                      if (recentItem[searchableProps[z]] && match.score > 0.6) {
-                          recentItem.score = match.score;
-                          recentItem[searchableProps[z]] = match.result;
-                          _res.push(recentItem);
-                          break;
-                      }
-                  }
-              }
-          }
+		  let searchableProps = ['name', 'description'];
+		  _res = _res.concat(this.findAtBeginning(res, pattern));
+		  _res = _res.concat(this.findInside(res, searchableProps, pattern));
+		  _res = _res.concat(this.findFuzzy(res, searchableProps, pattern));
 
           res = _res;
         }
         return res;
-    }
+	}
 
     listApplications(categoryMenuId, pattern) {
         let res = [];
@@ -1445,58 +1442,27 @@ class CinnamenuApplet extends TextIconApplet {
             }
         }
         if (pattern) {
-            let _res = [];
-            // Search in the beginning of the Application name
+			let _results = [];
+			// Prepare items
             for (let i = 0, len = res.length; i < len; i++) {
                 let name = res[i].get_name();
                 let keywords = res[i].get_keywords();
-                Object.assign(res[i], {   name: name,
-                                          keywords: keywords || name,
-                                          description: res[i].get_description(),
-                                          id: res[i].get_id().replace(/\.desktop$/, ''),
-                                          type: ApplicationType._applications
-              });
-              if (name.toLowerCase().startsWith(pattern.toLowerCase())) {
-                  res[i]['name'] = "<b><u>" + name.substring(0, pattern.length) + "</u></b>" + name.substring(pattern.length)
-                  res[i].score = 2;
-                  _res.push(res[i]);
-              }
-          }
-    
-          // Search inside the application name
-          for (let i = 0, len = res.length; i < len; i++) {
-              let name = res[i].get_name();
-              if (name.toLowerCase().includes(pattern.toLowerCase())) {
-                  let index = name.toLowerCase().indexOf(pattern.toLowerCase()) 
-                  res[i]['name'] = name.substring(0, index) + "<b><u>" + name.substring(index, index+pattern.length) + "</u></b>" + name.substring(index+pattern.length);
-                  res[i].score = 1.5;
-                  _res.push(res[i]);
-              }
-          }
-          let searchableProps = ['name', 'description', 'keywords', 'id'];
-    
-          // Fuzzy search in the remaining application details
-          for (let i = 0, len = res.length; i < len; i++) {
-              let match = null;
-              for (let z = 0, len = searchableProps.length; z < len; z++ ) {
-                  if (this.state.settings.enableWindows && res[i].state > 0) {
-                      continue;
-                  }
-                  match = fuzzy(pattern, res[i][searchableProps[z]], fuzzyOptions)
-                  if (res[i][searchableProps[z]] && match.score > searchThresholds[searchableProps[z]]) {
-                      if (res[i].score > match.score) continue;
-                      res[i].score = match.score;
-                      if (markdownProps.indexOf(searchableProps[z]) > -1) {
-                          res[i][searchableProps[z]] = match.result;
-                      }
-                      _res.push(res[i]);
-                      break;
-                  }
-              }
-          }
-    
-          res = _res;
-          _res = null;
+                Object.assign(res[i], {   
+					name: name,
+					keywords: keywords || name,
+					description: res[i].get_description(),
+					id: res[i].get_id().replace(/\.desktop$/, ''),
+					type: ApplicationType._applications
+              	});
+			}
+
+			let searchableProps = ['name', 'description', 'keywords', 'id'];
+			let searchablePropsInside = ['name', 'description'];
+			_results = _results.concat(this.findAtBeginning(res, pattern));
+			_results = _results.concat(this.findInside(res, searchablePropsInside, pattern));
+			_results = _results.concat(this.findFuzzy(res, searchableProps, pattern));
+			res = _results;
+			_results = null;
         }
 
         // Ignore favorites when sorting
@@ -1525,7 +1491,80 @@ class CinnamenuApplet extends TextIconApplet {
         }
         res = undefined;
         return items;
-    }
+	}
+	
+		/**
+	 * Search in the beginning of an item name
+	 * @param {any[]} items what has name property
+	 * @param {string} pattern 
+	 */
+	findAtBeginning(items, pattern) {
+		let results = [];
+		for (let i = 0, len = items.length; i < len; i++) {
+			let item = items[i];
+			if (item.name.toLowerCase().startsWith(pattern.toLowerCase())) {
+				item['name'] = "<b><u>" + item.name.substring(0, pattern.length) + "</u></b>" + item.name.substring(pattern.length)
+				item.score = 3;
+				results.push(item);
+			}
+		}
+		return results;
+	}
+
+	/**
+	 * string eearch inside object properties
+	 * @param {*} items what
+	 * @param {string[]} properties what the function will search in
+	 * @param {string} pattern 
+	 */
+	findInside(items, searchableProps, pattern) {
+		let results = [];
+		for (let i = 0, len = items.length; i < len; i++) {
+			let item = items[i];
+			for (let index = 0, leng = searchableProps.length; index < leng; index++) {
+				let prop = searchableProps[index];
+				let text = item[prop];
+				if (!text) continue;
+
+				if (text.toLowerCase().includes(pattern.toLowerCase())) {
+					let expectedScore =  (!!propWeights.inside[prop]) ? propWeights.inside[prop] : 1.5;
+					//if (!!item.score && item.score > expectedScore) continue;
+					let index = text.toLowerCase().indexOf(pattern.toLowerCase()) 
+					item[prop] = text.substring(0, index) + "<b><u>" + text.substring(index, index+pattern.length) + "</u></b>" + text.substring(index+pattern.length);
+					item.score = expectedScore;
+					results.push(item);
+					break;
+				}
+			}
+			
+		}
+		return results;
+	}
+	
+	/**
+	 * 
+	 * @param {any[]} items what has name property
+	 * @param {string[]} searchableProps 
+	 */
+	findFuzzy(items, searchableProps, pattern) {
+		let results = [];
+
+		for (let i = 0, len = items.length; i < len; i++) {
+			let item = items[i];
+			let match = null;
+			for (let z = 0, len = searchableProps.length; z < len; z++) {
+				match = fuzzy(pattern, item[searchableProps[z]], fuzzyOptions);
+				if (!!item.score && item.score > match.score) continue;
+				if (item[searchableProps[z]] && match.score > 0.6) {
+					item.score = match.score;
+					item[searchableProps[z]] = match.result;
+					results.push(item);
+					break;
+				}
+			}
+		}
+		return results;
+	}
 
     resetDisplayState() {
         let {currentCategory} = this.state;
