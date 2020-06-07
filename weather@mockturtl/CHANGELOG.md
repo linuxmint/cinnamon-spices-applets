@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.6.1
+
+* Fix [#3059](https://github.com/linuxmint/cinnamon-spices-applets/issues/3059)
+
 ## 2.6.0
 
 * Add Hourly forecast support

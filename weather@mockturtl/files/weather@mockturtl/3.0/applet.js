@@ -1011,6 +1011,9 @@ var UI = (function () {
             ui.Hour.text = AwareDateString(hour.date, this.app.currentLocale, config._show24Hours);
             ui.Temperature.text = TempToUserConfig(hour.temp, config._temperatureUnit, config._tempRussianStyle) + " " + this.unitToUnicode(config._temperatureUnit);
             ui.Icon.icon_name = (config._useCustomMenuIcons) ? hour.condition.customIcon : hour.condition.icon;
+            hour.condition.main = capitalizeFirstLetter(hour.condition.main);
+            if (config._translateCondition)
+                hour.condition.main = _(hour.condition.main);
             ui.Summary.text = hour.condition.main;
             if (!!hour.precipation && hour.precipation.volume > 0) {
                 ui.Precipation.text = hour.precipation.volume + " mm";
