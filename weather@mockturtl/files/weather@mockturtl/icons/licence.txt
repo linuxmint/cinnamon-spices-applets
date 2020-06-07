@@ -3,5 +3,10 @@ Notice: Icons used are named "weather-icons" available from here: https://github
 Licence: OFL Licence
 https://scripts.sil.org/cms/scripts/page.php?site_id=nrsi&id=OFL
 
+Weather icons are changed (enlarged) to fit their canvas.
 Icons created to extend the iconset by Attila Greguss:
 	sleet-storm-symbolic.svg
+
+
+"custom-up-arrow-symbolic" and "custom-down-arrow-symbolic" icons made by Roundicons from www.flaticon.com.
+https://www.flaticon.com/packs/pointers-3

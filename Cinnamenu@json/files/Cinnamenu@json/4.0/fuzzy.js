@@ -26,7 +26,7 @@ SOFTWARE.
 
 const {stripMarkupRegex} = require('./constants');
 
-const fuzzy = function (q, str, opts) {
+const fuzzy = function (q, str) {
   if (typeof q !== 'string' || typeof str !== 'string') {
     return {
       score: 0,
@@ -52,21 +52,13 @@ const fuzzy = function (q, str, opts) {
   // Keep original str for case
   let originalStr = str;
 
-  opts = Object.assign({
-    caseSensitive: false,
-    before: '',
-    after: ''
-  }, opts);
-
-  if (!opts.caseSensitive) {
-    q = q.toLowerCase();
-    str = str.toLowerCase();
-  }
+  q = q.toLowerCase();
+  str = str.toLowerCase();
 
   if (q === str) {
     return {
       score: 1,
-      result: opts.before + originalStr + opts.after
+      result: '<b>' + originalStr + '</b>'
     };
   }
 
@@ -87,7 +79,7 @@ const fuzzy = function (q, str, opts) {
     const c = str[i];
 
     if (c === q[pos]) {
-      result += opts.before + originalStr[i] + opts.after;
+      result += '<b>' + originalStr[i] + '</b>';
 
       // Move to the next pattern character
       pos += 1;
@@ -97,7 +89,7 @@ const fuzzy = function (q, str, opts) {
 
       // Reset counter to the actual position in string
       lastI = i;
-  } else {
+    } else {
       result += originalStr[i];
     }
 

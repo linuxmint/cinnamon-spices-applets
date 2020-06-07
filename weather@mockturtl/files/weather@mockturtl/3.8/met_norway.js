@@ -21,6 +21,12 @@ var CelsiusToKelvin = utils.CelsiusToKelvin;
 var SunCalc = importModule("sunCalc").SunCalc;
 class MetNorway {
     constructor(app) {
+        this.prettyName = "MET Norway";
+        this.name = "MetNorway";
+        this.maxForecastSupport = 10;
+        this.supportsHourly = false;
+        this.website = "https://www.met.no/en";
+        this.maxHourlyForecastSupport = 72;
         this.baseUrl = "https://api.met.no/weatherapi/locationforecast/1.9/.json?";
         this.ctx = this;
         this.app = app;
@@ -79,9 +85,9 @@ class MetNorway {
                 parsedHourly.push(this.ParseHourlyForecast(item, fromDate, toDate));
             }
         }
-        let forecasts = this.BuildForecasts(parsed6hourly);
         let weather = this.BuildWeather(this.GetEarliestDataForToday(parsedWeathers), this.GetEarliestDataForToday(parsedHourly));
-        weather.forecasts = forecasts;
+        weather.hourlyForecasts = this.BuildHourlyForecasts(parsedHourly, parsedWeathers);
+        weather.forecasts = this.BuildForecasts(parsed6hourly);
         return weather;
     }
     BuildWeather(weather, hourly) {
@@ -145,6 +151,25 @@ class MetNorway {
             forecast.temp_max = CelsiusToKelvin(forecast.temp_max);
             forecast.temp_min = CelsiusToKelvin(forecast.temp_min);
             forecast.condition = this.ResolveCondition(this.GetMostSevereCondition(conditionCounter));
+            forecasts.push(forecast);
+        }
+        return forecasts;
+    }
+    BuildHourlyForecasts(hours, current) {
+        let forecasts = [];
+        for (let i = 0; i < hours.length; i++) {
+            const hour = hours[i];
+            let forecast = {
+                condition: this.ResolveCondition(hour.symbol),
+                date: hour.from,
+                temp: CelsiusToKelvin(current[i].temperature),
+            };
+            if (!!hour.precipitation) {
+                forecast.precipation = {
+                    type: "rain",
+                    volume: hour.precipitation
+                };
+            }
             forecasts.push(forecast);
         }
         return forecasts;
@@ -233,6 +258,7 @@ class MetNorway {
     }
     ParseHourlyForecast(element, from, to) {
         return {
+            precipitation: parseFloat(element.precipitation["value"]),
             from: from,
             to: to,
             symbol: element.symbol["id"],
@@ -391,7 +417,7 @@ class MetNorway {
                 return {
                     customIcon: (checkIfNight && this.IsNight()) ? "night-rain-symbolic" : "day-rain-symbolic",
                     main: _("Light Rain"),
-                    description: _("Mostly Ligh Rain with Thunderstorms"),
+                    description: _("Mostly Light Rain with Thunderstorms"),
                     icon: weatherIconSafely([icons.showers_scattered, icons.rain, icons.alert], iconType)
                 };
             case "LightSleet":
@@ -462,28 +488,28 @@ class MetNorway {
                     customIcon: "rain-symbolic",
                     main: _("Rain"),
                     description: _("Rain"),
-                    icon: weatherIconSafely([icons.rain, icons.rain_freezing, icons.alert], iconType)
+                    icon: weatherIconSafely([icons.rain, icons.rain_freezing, icons.showers_scattered, icons.alert], iconType)
                 };
             case "RainSun":
                 return {
                     customIcon: (checkIfNight && this.IsNight()) ? "night-rain-symbolic" : "day-rain-symbolic",
                     main: _("Mostly Rainy"),
                     description: _("Mostly Rainy"),
-                    icon: weatherIconSafely([icons.rain, icons.rain_freezing, icons.alert], iconType)
+                    icon: weatherIconSafely([icons.rain, icons.rain_freezing, icons.showers_scattered, icons.alert], iconType)
                 };
             case "RainThunder":
                 return {
                     customIcon: "thunderstorm-symbolic",
                     main: _("Rain"),
                     description: _("Rain with Thunderstorms"),
-                    icon: weatherIconSafely([icons.storm, icons.rain, icons.rain_freezing, icons.alert], iconType)
+                    icon: weatherIconSafely([icons.storm, icons.rain, icons.rain_freezing, icons.showers_scattered, icons.alert], iconType)
                 };
             case "RainThunderSun":
                 return {
                     customIcon: (checkIfNight && this.IsNight()) ? "night-thunderstorm-symbolic" : "day-thunderstorm-symbolic",
                     main: _("Rain"),
                     description: _("Mostly Rainy with Thunderstorms"),
-                    icon: weatherIconSafely([icons.storm, icons.rain, icons.rain_freezing, icons.alert], iconType)
+                    icon: weatherIconSafely([icons.storm, icons.rain, icons.rain_freezing, icons.showers_scattered, icons.alert], iconType)
                 };
             case "Sleet":
                 return {

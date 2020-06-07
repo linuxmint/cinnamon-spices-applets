@@ -18,9 +18,15 @@ var isCoordinate = utils.isCoordinate;
 var isLangSupported = utils.isLangSupported;
 var icons = utils.icons;
 var weatherIconSafely = utils.weatherIconSafely;
+var GetFuncName = utils.GetFuncName;
 class Weatherbit {
     constructor(_app) {
-        this.descriptionLinelength = 25;
+        this.prettyName = "WeatherBit";
+        this.name = "Weatherbit";
+        this.supportsHourly = true;
+        this.maxForecastSupport = 16;
+        this.website = "https://www.weatherbit.io/";
+        this.maxHourlyForecastSupport = 48;
         this.supportedLanguages = [
             'ar', 'az', 'be', 'bg', 'bs', 'ca', 'cz', 'da', 'de', 'el', 'en',
             'et', 'fi', 'fr', 'hr', 'hu', 'id', 'is', 'it',
@@ -29,15 +35,20 @@ class Weatherbit {
         ];
         this.current_url = "https://api.weatherbit.io/v2.0/current?";
         this.daily_url = "https://api.weatherbit.io/v2.0/forecast/daily?";
-        this.unit = null;
+        this.hourly_url = "https://api.weatherbit.io/v2.0/forecast/hourly?";
+        this.hourlyAccess = true;
         this.app = _app;
     }
     async GetWeather() {
+        let forecastResult = this.GetData(this.daily_url, this.ParseForecast);
+        let hourlyForecastResult = null;
+        if (!!this.hourlyAccess)
+            hourlyForecastResult = this.GetData(this.hourly_url, this.ParseHourlyForecast);
         let currentResult = await this.GetData(this.current_url, this.ParseCurrent);
         if (!currentResult)
             return null;
-        let forecastResult = await this.GetData(this.daily_url, this.ParseForecast);
-        currentResult.forecasts = forecastResult;
+        currentResult.forecasts = await forecastResult;
+        currentResult.hourlyForecasts = (!hourlyForecastResult) ? [] : await hourlyForecastResult;
         return currentResult;
     }
     ;
@@ -50,6 +61,11 @@ class Weatherbit {
                 json = await this.app.LoadJsonAsync(query);
             }
             catch (e) {
+                if (GetFuncName(ParseFunction) == GetFuncName(this.ParseHourlyForecast) && e.code == 403) {
+                    this.app.log.Print("Hourly forecast is inaccessible, skipping");
+                    this.hourlyAccess = false;
+                    return null;
+                }
                 this.app.HandleHTTPError("weatherbit", e, this.app, this.HandleHTTPError);
                 return null;
             }
@@ -116,7 +132,7 @@ class Weatherbit {
     ParseForecast(json, self) {
         let forecasts = [];
         try {
-            for (let i = 0; i < self.app.config._forecastDays; i++) {
+            for (let i = 0; i < json.data.length; i++) {
                 let day = json.data[i];
                 let forecast = {
                     date: new Date(day.ts * 1000),
@@ -140,6 +156,40 @@ class Weatherbit {
         }
     }
     ;
+    ParseHourlyForecast(json, self) {
+        let forecasts = [];
+        try {
+            for (let i = 0; i < json.data.length; i++) {
+                let hour = json.data[i];
+                let forecast = {
+                    date: new Date(hour.ts * 1000),
+                    temp: hour.temp,
+                    condition: {
+                        main: hour.weather.description,
+                        description: hour.weather.description,
+                        icon: weatherIconSafely(self.ResolveIcon(hour.weather.icon), self.app.config.IconType()),
+                        customIcon: self.ResolveCustomIcon(hour.weather.icon)
+                    },
+                    precipation: {
+                        type: "rain",
+                        volume: hour.precip,
+                        chance: hour.pop
+                    }
+                };
+                if (hour.snow != 0) {
+                    forecast.precipation.type = "snow";
+                    forecast.precipation.volume = hour.snow;
+                }
+                forecasts.push(forecast);
+            }
+            return forecasts;
+        }
+        catch (e) {
+            self.app.log.Error("Weatherbit Forecast Parsing error: " + e);
+            self.app.HandleError({ type: "soft", service: "weatherbit", detail: "unusal payload", message: _("Failed to Process Forecast Info") });
+            return null;
+        }
+    }
     TimeToDate(time, hourDiff) {
         let hoursMinutes = time.split(":");
         let date = new Date();

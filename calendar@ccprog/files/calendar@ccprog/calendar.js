@@ -9,6 +9,7 @@ const Signals = imports.signals;
 const Pango = imports.gi.Pango;
 const Gettext_gtk30 = imports.gettext.domain("gtk30");
 const Cinnamon = imports.gi.Cinnamon;
+const Utils = require("./utils");
 
 const MSECS_IN_DAY = 24 * 60 * 60 * 1000;
 const WEEKDATE_HEADER_WIDTH_DIGITS = 3;
@@ -17,9 +18,12 @@ const WEEKEND_LENGHTE_KEY = "weekend-length";
 const FIRST_WEEKDAY_KEY = "first-day-of-week";
 const DESKTOP_SCHEMA = "org.cinnamon.desktop.interface";
 
-const timeinfo = require("./utils").getInfo("LC_TIME");
+const timeinfo = Utils.getInfo("LC_TIME");
 const LC_ABDAY = timeinfo.abday.split(";");
 const LC_FIRST_WORKDAY = (timeinfo.first_workday + 6) % 7;
+
+const Langinfo = Utils.getInfo("LC_ADDRESS");
+const LC_AB3 = Langinfo.country_ab3.toLowerCase();
 
 const Holidays = require("./holidays");
 
@@ -162,6 +166,21 @@ class Calendar {
 
         this.holiday = new Holidays.HolidayData().getProvider();
 
+        this.settings.bind("country", "country", this._onPlaceChanged.bind(this));
+        this.regions = {};
+
+        for (let country of this.settings.getValue("has_region")) {
+            this.settings.bindWithObject(this.regions, "region_" + country, country,
+                this._onPlaceChanged.bind(this));
+        }
+
+        if (this.country == null) {
+            this.country = LC_AB3;
+        }
+        if (this.regions[this.country] != null) {
+            this._onPlaceChanged();
+        }
+
         // Start off with the current date
         this._selectedDate = new Date();
 
@@ -180,6 +199,10 @@ class Calendar {
         }
         this._buildHeader();
         this._update(false);
+    }
+
+    _onPlaceChanged() {
+        this.holiday.setPlace(this.country, this.regions[this.country]);
     }
 
     // Sets the calendar to show a specific date
@@ -248,8 +271,6 @@ class Calendar {
         iter.setSeconds(0); // Leap second protection. Hah!
         iter.setHours(12);
         for (let i = 0; i < 7; i++) {
-            // Could use iter.toLocaleFormat("%a") but that normally gives three characters
-            // and we want, ideally, a single character for e.g. S M T W T F S
             let customDayAbbrev = _getCalendarDayAbbreviation(iter.getDay());
             let label = new St.Label({ style_class: "calendar-day-base calendar-day-heading",
                                        text: customDayAbbrev });

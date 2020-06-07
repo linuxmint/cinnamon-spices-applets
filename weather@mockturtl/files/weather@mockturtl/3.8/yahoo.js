@@ -21,6 +21,12 @@ var icons = utils.icons;
 var weatherIconSafely = utils.weatherIconSafely;
 class Yahoo {
     constructor(_app) {
+        this.prettyName = "Yahoo";
+        this.name = "Yahoo";
+        this.maxForecastSupport = 10;
+        this.supportsHourly = false;
+        this.website = "https://www.yahoo.com/news/weather/";
+        this.maxHourlyForecastSupport = 0;
         this.app = _app;
     }
     async GetWeather() {
@@ -97,7 +103,7 @@ class Yahoo {
                 },
                 forecasts: []
             };
-            for (let i = 0; i < this.app.config._forecastDays; i++) {
+            for (let i = 0; i < json.forecasts.length; i++) {
                 let day = json.forecasts[i];
                 let forecast = {
                     date: new Date(day.date * 1000),

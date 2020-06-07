@@ -1,9 +1,12 @@
 declare function require(path: string): any;
 
 declare class global {
-    static log(...text: Array < string > ): void;
+    static log(...any: Array < any > ): void;
     static logError(...text: Array < string > ): void;
     static create_app_launch_context(): imports.gi.Gio.AppLaunchContext;
+	static settings: any;
+	static set_cursor(cursor: imports.gi.Cinnamon.Cursor): void;
+	static unset_cursor(): void;
 }
 
 declare namespace imports.cairo {
@@ -211,6 +214,7 @@ declare namespace imports.ui.applet {
         setCustomStyleClass(classname: string): void;
         addActor(menu: any): void;
         toggle(): void;
+        passEvents: boolean;
     }
 
     /**
@@ -255,6 +259,12 @@ declare namespace imports.ui.messageTray {
     }
 }
 
+declare namespace imports.misc.signalManager {
+    export class SignalManager {
+        connect(obj: any, sigName: string, callback: Function, bind: any, force?: boolean): void
+    }
+}
+
 declare namespace imports.ui.popupMenu {
     export class PopupMenuBase {
         constructor(context: any);
@@ -263,6 +273,7 @@ declare namespace imports.ui.popupMenu {
     export class PopupMenuManager {
         constructor(context: any);
         addMenu(menu: any): void;
+        _signals: misc.signalManager.SignalManager;
     }
     export class PopupMenu extends PopupMenuBase {
         constructor();
@@ -271,6 +282,10 @@ declare namespace imports.ui.popupMenu {
     }
     export class PopupIconMenuItem {
 
+    }
+
+    export class PopupSeparatorMenuItem {
+        actor: gi.St.Widget;
     }
 }
 declare namespace imports.ui.settings {
@@ -293,6 +308,10 @@ declare namespace imports.ui.appletManager {
     export var appletMeta: any;
 }
 
+declare namespace imports.ui.tweener {
+    export function addTween(actor: gi.St.Widget, params: any): void;
+}
+
 declare namespace imports.mainloop {
     /**
      * Calls callback function after given seconds
@@ -305,7 +324,11 @@ declare namespace imports.mainloop {
 }
 
 declare namespace imports.gi.Cinnamon {
-    function util_format_date(format: string, milliseconds: number): string;
+	function util_format_date(format: string, milliseconds: number): string;
+	enum Cursor {
+		//INCOMPLETE
+		POINTING_HAND,
+	}
 }
 declare namespace imports.gi.Soup {
     export class SessionAsync {
@@ -338,20 +361,89 @@ declare namespace imports.gi.Soup {
     }
 
 }
+
+declare namespace imports.gi.Clutter {
+    export class GridLayout {
+        constructor(options: any);
+		set_column_homogeneous(homogeneous: boolean): void;
+		set_row_homogeneous(homogeneous: boolean): void; 
+		set_column_spacing(spacing: number): void;
+		set_row_spacing(spacing: number): void;
+        attach(widget: imports.gi.St.Widget, col: number, row: number, colspan: number, rowspan: number): void;
+    }
+
+    export class Actor {
+        add_child(child: any): void;
+        add_actor(element: any): void;
+        hide(): void;
+        show(): void;
+        get_preferred_height(for_width: number): number[];
+		get_preferred_width(for_height: number): number[]; 
+		set_clip_to_allocation(clip_set: boolean): void; 
+        destroy_all_children(): void;
+        remove_all_children(): void;
+        height: number;
+		width: number;
+		set_width(width: number): void; 
+        set_height(height: number): void;
+        remove_clip(): void;
+        set_size(width: number, height: number): void;
+        opacity: number;
+		//clip_to_allocation: boolean;
+		set_x_align(x_align: ActorAlign): void;
+		set_y_align(y_align: ActorAlign): void;
+		set_x_expand(expand: boolean): void;
+		set_y_expand(expand: boolean): void;
+	}
+
+	export class Text extends Actor {
+		set_line_wrap(line_wrap: boolean): void; 
+		set_ellipsize(mode: gi.Pango.EllipsizeMode): void; 
+		set_line_alignment(alignment: gi.Pango.Alignment): void; 
+		set_line_wrap_mode(wrap_mode: gi.Pango.WrapMode): void; 
+		get_layout(): gi.Pango.Layout;
+	}
+	
+	export enum ActorAlign {
+		CENTER,
+		END,
+		FILL,
+		START
+	}
+
+	export enum Orientation {
+		HORIZONTAL,
+		VERTICAL
+	}
+}
+
 declare namespace imports.gi.St {
-    export class Widget {
+    export class Widget extends Clutter.Actor {
+        constructor(options?: any);
         destroy(): void;
         style_class: string;
         connect(id: string, binding: (...args: any) => any): void;
-        add_style_class_name(style_class: string): void; 
+		add_style_class_name(style_class: string): void; 
+		add_style_pseudo_class(style_class: string): void; 
+		remove_style_pseudo_class(pseudo_class: string): void;
         get_style_class_name(): string;
+        remove_style_class_name(style_class: string): void;
         get_style(): string;
         get_theme(): imports.gi.St.Theme;
         get_theme_node(): ThemeNode;
+        show(): void;
+		hide(): void;
+		style: string;
     }
     export class BoxLayout extends Widget {
         constructor(options ? : any)
+        /** Deprecated, use add_child instead */
         add_actor(element: Widget): void;
+        add_child(element: Widget): void;
+        add(element: Widget, options?: AddOptions): void;
+        /** private function by default? */
+
+
     }
     export class Bin extends Widget {
         constructor(options ? : any)
@@ -366,7 +458,9 @@ declare namespace imports.gi.St {
         width: number;
     }
     export class Label extends Widget {
-        text: string;
+		text: string;
+		get_clutter_text(): gi.Clutter.Text;
+		clutter_text: gi.Clutter.Text;
         constructor(options ? : any);
     }
     export class Icon extends Widget {
@@ -379,14 +473,28 @@ declare namespace imports.gi.St {
         reactive: boolean;
         label: string;
         url: string;
+        child: any;
         constructor(options ? : any);
     }
 
-    export class ScrollView  extends Bin {
+    export class ScrollView  extends Widget {
         set_row_size(row_size:number): void;
         set_policy(hscroll: any, vscroll: any): void;
+        get_vscroll_bar(): ScrollBar;
+        get_hscroll_bar(): ScrollBar;
+        overlay_scrollbars: boolean; 
+        clip_to_allocation: boolean;
         constructor(options ? : any);
-    }
+	}
+	
+	export class ScrollBar extends Widget {
+		get_adjustment(): Adjustment;
+		set_adjustment(adjustment: Adjustment): void;
+	}
+
+	export class Adjustment {
+		set_value(value: number): void; 
+	}
 
     export class Theme {
         constructor();
@@ -465,6 +573,12 @@ declare namespace imports.gi.St {
         FULLCOLOR
     }
 
+    export enum Align {
+        START,
+        MIDDLE,
+        END
+    }
+
     /*export enum PolicyType {
         ALWAYS,
         AUTOMATIC,
@@ -484,6 +598,14 @@ declare namespace imports.gi.St {
 
     export interface Shadow {
 
+    }
+
+    export interface AddOptions {
+        x_fill?: boolean;
+        x_align?: Align;
+        y_align?: Align;
+        y_fill?: boolean;
+        expand?: boolean;
     }
 }
 
