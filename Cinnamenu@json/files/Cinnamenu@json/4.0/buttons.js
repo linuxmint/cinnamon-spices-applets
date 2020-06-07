@@ -22,7 +22,7 @@ const {createStore} = imports.misc.state;
 
 const {_, ApplicationType, stripMarkupRegex} = require('./constants');
 const {tryFn} = require('./utils');
-const PlacementTOOLTIP = 1, PlacementUNDER = 2, PlacementBOTTOM = 3, PlacementNONE =4;
+const PlacementTOOLTIP = 1, PlacementUNDER = 2, PlacementNONE = 3;
 
 const USER_DESKTOP_PATH = getUserDesktopDir();
 const canUninstall = GLib.file_test('/usr/bin/cinnamon-remove-application', GLib.FileTest.EXISTS);
@@ -32,21 +32,13 @@ class CategoryListButton extends PopupBaseMenuItem {
         super({ hover: false, activate: false });
         this.state = state;
         this.connectIds = [
-            this.state.connect({
-                menuOpened: () => {
-                    if (this.id === this.state.settings.currentCategory) {
-                        this.actor.set_style_class_name('menu-category-button-selected');
-                    }
-                }
-            }),
-            this.state.connect({
-                dragIndex: () => {
-                    if (this.state.dragIndex !== this.index && this.actor.opacity === 50) {
-                        this.actor.set_opacity(255);
-                    }
-                }
-            })
-        ];
+                    this.state.connect({
+                                dragIndex: () => {
+                                        if (this.state.dragIndex !== this.index && this.actor.opacity === 50) {
+                                            this.actor.set_opacity(255);
+                                        }        }
+                                       })
+                          ];
         this.signals = new SignalManager(null);
 
         this.index = -1;
@@ -88,7 +80,8 @@ class CategoryListButton extends PopupBaseMenuItem {
 
         this.categoryNameText = categoryNameText;
         this.label = new Label({ text: this.categoryNameText,
-                                 style_class: 'menu-category-button-label' });
+                                 style_class: 'menu-category-button-label'
+                              });
         this.addActor(this.label);
         this.label.realize();
 
@@ -376,9 +369,9 @@ class AppListGridButton extends PopupBaseMenuItem {
                     toggleMenu: () => this.toggleMenu() });
 
         this.actor.set_style_class_name('menu-application-button');
-        //if (!this.state.isListView) {
-        //  this.actor.set_style('padding-left: 5px; padding-right: 5px;');
-        //}
+        if (!this.state.isListView) {
+            this.actor.set_style('padding-left: 0px; padding-right: 0px;');
+        }
         this.actor.x_align = this.state.isListView ? Align.START : Align.MIDDLE;
         this.actor.y_align = Align.MIDDLE;
 
@@ -419,8 +412,6 @@ class AppListGridButton extends PopupBaseMenuItem {
         this.contextMenuButtons = [];
         this.description = '';
         this.entered = null;
-
-        this.iconContainer = new BoxLayout();
 
         // appType 0 = application, appType 1 = place, appType 2 = recent
         // Filesystem autocompletion
@@ -487,42 +478,46 @@ class AppListGridButton extends PopupBaseMenuItem {
                 });
             }
         }
-
         this.label = new Label({
             text: this.buttonState.app.name,
             style_class: 'menu-application-button-label',
-            style: 'padding-right: 5px; padding-left: 5px'
+            style: 'padding-right: 2px; padding-left: 2px'
         });
-
         this.dot = new Widget({
-            style: 'width: 4px; height: 4px; background-color: ' + this.state.theme.foregroundColor +
-                                                                        '; margin-bottom: 2px; border-radius: 128px;',
+            style: this.state.isListView ?
+            'width: 2px; height: 12px; background-color: ' + this.state.theme.foregroundColor +
+                                                '; margin: 0px; border: 1px; border-radius: 10px;' :
+            'width: 32px; height: 2px; background-color: ' + this.state.theme.foregroundColor +
+                                                '; margin: 0px; border: 1px; border-radius: 10px;',
             layout_manager: new BinLayout(),
-            x_expand: true,
+            x_expand: false,
             y_expand: false,
-            x_align: ActorAlign.CENTER,
-            y_align: ActorAlign.END
         });
+        this.iconContainer = new BoxLayout();
+        if (this.icon) {
+            this.iconContainer.add(this.icon, {
+                x_fill: false,
+                y_fill: false,
+                x_align: Align.MIDDLE,
+                y_align: Align.MIDDLE
+            });
+        }
 
         this.buttonBox = new BoxLayout({
             vertical: !this.state.isListView,
             width: 240 * global.ui_scale,
             y_expand: false
         });
-
-        if (this.icon) {
-            this.iconContainer.add(this.icon, {
-                x_fill: false,
-                y_fill: false,
-                x_align: this.state.isListView ? Align.END : Align.MIDDLE,
-                y_align: this.state.isListView ? Align.END : Align.START
-            });
-        }
-
         this.buttonBox.add(this.iconContainer, {
             x_fill: false,
             y_fill: false,
             x_align: this.state.isListView ? Align.START : Align.MIDDLE,
+            y_align: Align.MIDDLE
+        });
+        this.buttonBox.add(this.dot, {
+            x_fill: false,
+            y_fill: false,
+            x_align: Align.MIDDLE,
             y_align: Align.MIDDLE
         });
         this.buttonBox.add(this.label, {
@@ -531,22 +526,6 @@ class AppListGridButton extends PopupBaseMenuItem {
             x_align: this.state.isListView ? Align.START : Align.MIDDLE,
             y_align: Align.MIDDLE
         });
-        this.iconContainer.add(this.dot, {
-            x_fill: false,
-            y_fill: true,
-            x_align: this.state.isListView ? Align.END : Align.MIDDLE,
-            y_align: this.state.isListView ? Align.END : Align.START
-        });
-
-        if (this.state.isListView) {
-            // Position the dot diagonally to the bottom right corner of the icon
-            this.dot.anchor_y = -4;
-            this.dot.anchor_x = 2;
-            this.label.set_style('min-width: 230px;');
-        } else {
-            this.dot.anchor_y = -2;
-            this.dot.anchor_x = 4;
-        }
 
         // Context menu
         if (this.buttonState.appType === ApplicationType._applications) {
@@ -621,7 +600,7 @@ class AppListGridButton extends PopupBaseMenuItem {
     }
 
     formatLabel(opts) {
-        let limit = 50; //this.state.isListView ? 80 : 300;
+        let limit = 100; //this.state.isListView ? 80 : 300;
         let name = this.buttonState.app.name.replace(/&/g, '&amp;');
         let description = this.buttonState.app.description ? this.buttonState.app.description.replace(/&/g, '&amp;') : '';
         if (this.description) {
@@ -629,7 +608,6 @@ class AppListGridButton extends PopupBaseMenuItem {
             diff = Array(Math.abs(Math.ceil(diff))).join(' ');
             description = description + diff;
         }
-
         if (opts.removeFormatting) {
             this.buttonState.app.name = this.buttonState.app.name.replace(stripMarkupRegex, '');
             if (this.buttonState.app.description) {
@@ -641,49 +619,30 @@ class AppListGridButton extends PopupBaseMenuItem {
         let markup = '<span>' + name + '</span>';
         if (this.state.settings.descriptionPlacement === PlacementUNDER) {
             if (!this.state.isListView) {
-                let width = this.description ? this.description.length : description ? description.length : 0;
-                this.label.set_style('text-align: center;min-width: ' + width.toString() + 'px;');
+                let width = this.description ? this.description.length :  ( description ? description.length : 0 );
+                this.label.set_style('text-align: center;'); //min-width: ' + width.toString() + 'px;');
             }
             markup += '\n<span size="small">' + description + '</span>';
         }
         let tooltipMarkup;
-        let tooltipShouldShowName = this.buttonState.appType !== ApplicationType._applications;
+        //let tooltipShouldShowName = this.buttonState.appType !== ApplicationType._applications;
         if (this.state.settings.descriptionPlacement === PlacementTOOLTIP && opts.tooltipFormat) {
             const wordWrap = function(text, limit) {
                 let regex = '.{1,' + limit + '}(\\s|$)|\\S+?(\\s|$)';
                 return text.match(RegExp(regex, 'g')).join('\n');
             };
-            if (tooltipShouldShowName) {
-                let tooltipName = name;
-                if (tooltipName.length > limit) {
-                    tooltipName = wordWrap(name, limit);
-                }
-                tooltipMarkup = '<span>' + tooltipName + '</span>';
+            let tooltipName = name;
+            if (tooltipName.length > limit) {
+                tooltipName = wordWrap(name, limit);
             }
+            tooltipMarkup = '<span>' + tooltipName + '</span>';
+
             if (description.length > 0) {
                 let tooltipDescription = description;
                 if (description.length > limit) {
                     tooltipDescription = wordWrap(description, limit);
                 }
-                if (tooltipShouldShowName) {
-                    tooltipMarkup += '\n<span size="small">' + tooltipDescription + '</span>';
-                } else {
-                    tooltipMarkup = tooltipDescription;
-                }
-            }
-        } else if (this.state.settings.descriptionPlacement != PlacementTOOLTIP) {
-            if (this.state.searchActive) {
-                let nameClutterText = this.state.trigger('getSelectedTitleClutterText');
-                if (nameClutterText) {
-                    nameClutterText.set_markup(name);
-                }
-                let descriptionClutterText = this.state.trigger('getSelectedDescriptionClutterText');
-                if (descriptionClutterText) {
-                    descriptionClutterText.set_markup(description);
-                }
-            } else {
-                this.state.trigger('setSelectedTitleText', name);
-                this.state.trigger('setSelectedDescriptionText', description);
+                tooltipMarkup += '\n<span size="small">' + tooltipDescription + '</span>';
             }
         }
 
@@ -693,7 +652,7 @@ class AppListGridButton extends PopupBaseMenuItem {
         this.tooltipMarkup = tooltipMarkup;
         let clutterText = this.label.get_clutter_text();
         if (clutterText && (this.state.settings.descriptionPlacement === PlacementUNDER ||
-                                this.state.searchActive || this.buttonState.app.shouldHighlight) || opts.removeFormatting) {
+                        this.state.searchActive || this.buttonState.app.shouldHighlight) || opts.removeFormatting) {
             clutterText.set_markup(markup);
             clutterText.ellipsize = EllipsizeMode.END;
         }
@@ -710,38 +669,32 @@ class AppListGridButton extends PopupBaseMenuItem {
 
         if (event) {
             this.state.trigger('clearEnteredActors');
-            if (this.state.settings.descriptionPlacement === PlacementBOTTOM && this.state.isListView) {
-                this.state.trigger('toggleSearchVisibility', false);
-            }
         } else {
             this.state.trigger('scrollToButton', this);
         }
 
         this.entered = true;
-        this.state.set({itemEntered: true});
         this.actor.set_style_class_name('menu-application-button-selected');
 
         // Check marquee conditions, and set it up
-        let labelWidth, actorWidth, allocatedTextLength;
+        let labelWidth, actorWidth;
         if (this.state.settings.descriptionPlacement === PlacementUNDER) {
             labelWidth = this.label.get_size()[0];
             actorWidth = this.actor.get_size()[0];
-            allocatedTextLength = this.state.isListView ? 80 : (this.state.settings.appsGridColumnCount * 8);
         } else {
             this.formatLabel({});
-            labelWidth = this.buttonState.app.description ? this.buttonState.app.description.length
-                                          : (this.buttonState.app.name ? this.buttonState.app.name : 16);
+            labelWidth = this.buttonState.app.description ? this.buttonState.app.description.length :
+                                          (this.buttonState.app.name ? this.buttonState.app.name : 16);
             actorWidth = 16;
-            allocatedTextLength = 16;
         }
         if (labelWidth > actorWidth && this.state.settings.descriptionPlacement != PlacementTOOLTIP) {
-            this.description = this.buttonState.app.description.replace(stripMarkupRegex, '');
+            //this.description = this.buttonState.app.description.replace(stripMarkupRegex, '');
         } else {
-          this.formatLabel({tooltipFormat: true});
-          if (this.state.settings.descriptionPlacement === PlacementTOOLTIP) {
-              let {width, height} = this.actor;
-              this.state.trigger('setTooltip', this.actor.get_transformed_position(), width, height, this.tooltipMarkup);
-          }
+            this.formatLabel({tooltipFormat: true});
+            if (this.state.settings.descriptionPlacement === PlacementTOOLTIP) {
+                let {width, height} = this.actor;
+                this.state.trigger('setTooltip', this.actor.get_transformed_position(), width, height, this.tooltipMarkup);
+            }
         }
         return false;
     }
@@ -751,12 +704,7 @@ class AppListGridButton extends PopupBaseMenuItem {
             return false;
         }
 
-        if (event && this.state.settings.descriptionPlacement === PlacementBOTTOM && this.state.isListView) {
-            this.state.trigger('toggleSearchVisibility', true);
-        }
-
         this.entered = null;
-        this.state.set({itemEntered: false});
         this.actor.set_style_class_name('menu-application-button');
         if (this.description) {
             this.buttonState.app.description = this.description;
@@ -764,9 +712,6 @@ class AppListGridButton extends PopupBaseMenuItem {
         }
         if (this.state.settings.descriptionPlacement === PlacementTOOLTIP) {
             this.state.trigger('setTooltip');
-        } else if (this.state.settings.descriptionPlacement !== PlacementUNDER) {
-            this.state.trigger('setSelectedTitleText', '');
-            this.state.trigger('setSelectedDescriptionText', '');
         }
     }
 
@@ -1043,7 +988,7 @@ class GroupButton extends PopupBaseMenuItem {
         if (event && event.get_button() > 1) {
             return;
         }
-        if (this.user || this.icon.icon_name.indexOf('view') === -1) {
+        if (this.user || true /*this.icon.icon_name.indexOf('view') === -1*/) { //??
             this.state.trigger('closeMenu');
         }
         if (this.callback) {
@@ -1067,18 +1012,8 @@ class GroupButton extends PopupBaseMenuItem {
                 y += 12;
                 x += 20;
             }
-            this.state.trigger(
-                'setTooltip',
-                [x, y],
-                0,
-                0,
-                `<span>${this.name}${this.description ? '\n<span size="small">' + this.description + '</span>' : ''}</span>`
-            );
-        } else {
-            this.state.trigger('setSelectedTitleText', this.name);
-            if (this.description) {
-                this.state.trigger('setSelectedDescriptionText', this.description);
-            }
+            let text = `<span>${this.name}${this.description ? '</span>\n<span size="small">' + this.description : ''}</span>`;
+            this.state.trigger('setTooltip', [x, y], 0, 0,text);
         }
     }
 
@@ -1087,11 +1022,6 @@ class GroupButton extends PopupBaseMenuItem {
         this.actor.remove_style_pseudo_class('hover');
         if (this.state.settings.descriptionPlacement === PlacementTOOLTIP) {
             this.state.trigger('setTooltip');
-        } else {
-            this.state.trigger('setSelectedTitleText', '');
-            if (this.description) {
-                this.state.trigger('setSelectedDescriptionText', '');
-            }
         }
     }
 
