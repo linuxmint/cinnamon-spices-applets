@@ -23,6 +23,13 @@ var CelsiusToKelvin = utils.CelsiusToKelvin as (celsius: number) => number;
 var SunCalc = importModule("sunCalc").SunCalc;
 
 class MetNorway implements WeatherProvider {
+	public readonly prettyName = "MET Norway";
+	public readonly name = "MetNorway";
+    public readonly maxForecastSupport = 10;
+    public readonly supportsHourly = false;
+    public readonly website = "https://www.met.no/en";
+    public readonly maxHourlyForecastSupport = 72; // probably less
+
     private ctx: MetNorway
     private app: WeatherApplet
     private baseUrl = "https://api.met.no/weatherapi/locationforecast/1.9/.json?"
@@ -96,9 +103,9 @@ class MetNorway implements WeatherProvider {
         }
         
         // Building weather data
-        let forecasts: ForecastData[] = this.BuildForecasts(parsed6hourly);
-        let weather = this.BuildWeather(this.GetEarliestDataForToday(parsedWeathers) as WeatherForecast, this.GetEarliestDataForToday(parsedHourly) as HourlyForecast);
-        weather.forecasts = forecasts;
+		let weather = this.BuildWeather(this.GetEarliestDataForToday(parsedWeathers) as WeatherForecast, this.GetEarliestDataForToday(parsedHourly) as HourlyForecast);
+		weather.hourlyForecasts = this.BuildHourlyForecasts(parsedHourly, parsedWeathers);
+        weather.forecasts = this.BuildForecasts(parsed6hourly);
 
         return weather;
     }
@@ -172,7 +179,30 @@ class MetNorway implements WeatherProvider {
         forecasts.push(forecast);
       }
       return forecasts;
-    }
+	}
+
+	private BuildHourlyForecasts(hours: HourlyForecast[], current: WeatherForecast[]): HourlyForecastData[] {
+		let forecasts: HourlyForecastData[] = [];
+  
+		for (let i = 0; i < hours.length; i++) {
+			const hour = hours[i];
+			let forecast: HourlyForecastData = {
+				condition: this.ResolveCondition(hour.symbol),
+				date: hour.from,
+				temp: CelsiusToKelvin(current[i].temperature),
+			}
+
+			if (!!hour.precipitation) {
+				forecast.precipation = {
+					type: "rain",
+					volume: hour.precipitation
+				}
+			}
+	
+			forecasts.push(forecast);
+			}
+			return forecasts;
+	  }
 
     // -------------------------------------------
     //
@@ -285,7 +315,7 @@ class MetNorway implements WeatherProvider {
 
     private ParseHourlyForecast(element: any, from: Date, to: Date): HourlyForecast {
       return {
-        //precipitation: parseFloat(element.precipitation["value"]),
+        precipitation: parseFloat(element.precipitation["value"]),
         from: from,
         to: to,
         symbol: element.symbol["id"],
@@ -445,7 +475,7 @@ class MetNorway implements WeatherProvider {
           return {
             customIcon : (checkIfNight && this.IsNight()) ? "night-rain-symbolic" : "day-rain-symbolic",
             main: _("Light Rain"),
-            description: _("Mostly Ligh Rain with Thunderstorms"),
+            description: _("Mostly Light Rain with Thunderstorms"),
             icon: weatherIconSafely([icons.showers_scattered, icons.rain, icons.alert], iconType)
           }
         case "LightSleet":
@@ -516,28 +546,28 @@ class MetNorway implements WeatherProvider {
             customIcon : "rain-symbolic",
             main: _("Rain"),
             description: _("Rain"),
-            icon: weatherIconSafely([icons.rain, icons.rain_freezing, icons.alert], iconType)
+            icon: weatherIconSafely([icons.rain, icons.rain_freezing, icons.showers_scattered, icons.alert], iconType)
           }
         case "RainSun":
           return {
             customIcon : (checkIfNight && this.IsNight()) ? "night-rain-symbolic" : "day-rain-symbolic",
             main: _("Mostly Rainy"),
             description: _("Mostly Rainy"),
-            icon: weatherIconSafely([icons.rain, icons.rain_freezing, icons.alert], iconType)
+            icon: weatherIconSafely([icons.rain, icons.rain_freezing, icons.showers_scattered, icons.alert], iconType)
           }
         case "RainThunder":
           return {
             customIcon : "thunderstorm-symbolic",
             main: _("Rain"),
             description: _("Rain with Thunderstorms"),
-            icon: weatherIconSafely([icons.storm, icons.rain, icons.rain_freezing, icons.alert], iconType)
+            icon: weatherIconSafely([icons.storm, icons.rain, icons.rain_freezing, icons.showers_scattered, icons.alert], iconType)
           }
         case "RainThunderSun":
           return {
             customIcon : (checkIfNight && this.IsNight()) ? "night-thunderstorm-symbolic" : "day-thunderstorm-symbolic",
             main: _("Rain"),
             description: _("Mostly Rainy with Thunderstorms"),
-            icon: weatherIconSafely([icons.storm, icons.rain, icons.rain_freezing, icons.alert], iconType)
+            icon: weatherIconSafely([icons.storm, icons.rain, icons.rain_freezing, icons.showers_scattered, icons.alert], iconType)
           }
         case "Sleet":
           return {

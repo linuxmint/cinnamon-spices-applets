@@ -132,6 +132,24 @@ var getDayName = function(dayNum: number): string {
     return days[dayNum];
 }
 
+/**
+ * 
+ * @param date 
+ * @returns number in format HHMM, can be compared directly
+ */
+var	MilitaryTime = function(date: Date): number {
+	return date.getHours() * 1000 + date.getMinutes();
+}
+
+var IsNight = function(sunTimes: SunTimes, date?: Date): boolean {
+	if (!sunTimes) return false;
+	let time = (!!date) ? MilitaryTime(date) : MilitaryTime(new Date());
+	let sunrise = MilitaryTime(sunTimes.sunrise);
+	let sunset = MilitaryTime(sunTimes.sunset);
+	if (time >= sunrise && time < sunset) return false;
+	return true;
+}
+
 // Takes Time in %H:%M string format
 var timeToUserUnits = function(date: Date, show24Hours: boolean) {
     let timeStr = util_format_date('%H:%M', date.getTime());
@@ -170,9 +188,18 @@ var KPHtoMPS = function(speed: number): number {
     return speed / WEATHER_CONV_KPH_IN_MPS;
   };
 
-const get = (p: string[], o: any) =>
+const get = (p: string[], o: any): any =>
   p.reduce((xs, x) =>
-    (xs && xs[x]) ? xs[x] : null, o);
+	(xs && xs[x]) ? xs[x] : null, o);
+	
+var GetFuncName = function(func: Function): string {
+	// ES6
+	if (!!func.name) return func.name;
+	// ES5
+	// https://stackoverflow.com/a/17923727
+	var result = /^function\s+([\w\$]+)\s*\(/.exec( func.toString() )
+	return  result  ?  result[ 1 ]  :  '' // for an anonymous function there won't be a match
+}
 
 var MPStoUserUnits = function(mps: number, units: WeatherWindSpeedUnits): string {
     if (mps == null) return null;
@@ -323,20 +350,44 @@ var isLangSupported = function(lang: string, languages: Array < string > ): bool
     return false;
 };
 
+var Sentencify = function(words: string[]): string {
+	let result = "";
+	for (let index = 0; index < words.length; index++) {
+		const element = words[index];
+		if (index != 0) result+= " ";
+		result+= element;
+	}
+	return result;
+}
+
 const icons = {
   clear_day: 'weather-clear',
   clear_night: 'weather-clear-night',
   few_clouds_day: 'weather-few-clouds',
   few_clouds_night: 'weather-few-clouds-night',
   clouds: 'weather-clouds',
+  many_clouds: 'weather-many-clouds',
   overcast: 'weather_overcast',
   showers_scattered: 'weather-showers-scattered',
+  showers_scattered_day: 'weather-showers-scattered-day',
+  showers_scattered_night: 'weather-showers-scattered-night',
+  shower_day: 'weather-showers-day',
+  shower_night: 'weather-showers-night',
   showers: 'weather-showers',
   rain: 'weather-rain',
   rain_freezing: 'weather-freezing-rain',
   snow: 'weather-snow',
+  snow_day: 'weather-snow',
+  snow_night: 'weather-snow-night',
+  snow_rain: 'weather-snow-rain',
+  snow_scattered: 'weather-snow-scattered',
+  snow_scattered_day: 'weather-snow-scattered-day',
+  snow_scattered_night: 'weather-snow-scattered-night',
   storm: 'weather-storm',
+  hail: 'weather-hail',
   fog: 'weather-fog',
+  tornado: 'weather-tornado',
+  wind: 'weather-windy',
   alert: 'weather-severe-alert'
 }
 

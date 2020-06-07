@@ -20,9 +20,17 @@ var FahrenheitToKelvin = utils.FahrenheitToKelvin;
 var CelsiusToKelvin = utils.CelsiusToKelvin;
 var MPHtoMPS = utils.MPHtoMPS;
 var icons = utils.icons;
+var IsNight = utils.IsNight;
 var weatherIconSafely = utils.weatherIconSafely;
+var Sentencify = utils.Sentencify;
 class DarkSky {
     constructor(_app) {
+        this.prettyName = "DarkSky";
+        this.name = "DarkSky";
+        this.maxForecastSupport = 8;
+        this.supportsHourly = false;
+        this.website = "https://darksky.net/poweredby/";
+        this.maxHourlyForecastSupport = 168;
         this.descriptionLinelength = 25;
         this.supportedLanguages = [
             'ar', 'az', 'be', 'bg', 'bs', 'ca', 'cs', 'da', 'de', 'el', 'en', 'es',
@@ -31,7 +39,7 @@ class DarkSky {
             'sv', 'tet', 'tr', 'uk', 'x-pig-latin', 'zh', 'zh-tw'
         ];
         this.query = "https://api.darksky.net/forecast/";
-        this.DarkSkyFilterWords = [_("and"), _("until"), _("in")];
+        this.DarkSkyFilterWords = [_("and"), _("until"), _("in"), _("Possible")];
         this.unit = null;
         this.app = _app;
     }
@@ -96,9 +104,10 @@ class DarkSky {
                     value: this.ToKelvin(json.currently.apparentTemperature),
                     type: "temperature"
                 },
-                forecasts: []
+                forecasts: [],
+                hourlyForecasts: []
             };
-            for (let i = 0; i < this.app.config._forecastDays; i++) {
+            for (let i = 0; i < json.daily.data.length; i++) {
                 let day = json.daily.data[i];
                 let forecast = {
                     date: new Date(day.time * 1000),
@@ -113,6 +122,25 @@ class DarkSky {
                 };
                 forecast.date.setHours(forecast.date.getHours() + 12);
                 result.forecasts.push(forecast);
+            }
+            for (let i = 0; i < json.hourly.data.length; i++) {
+                let hour = json.hourly.data[i];
+                let forecast = {
+                    date: new Date(hour.time * 1000),
+                    temp: this.ToKelvin(hour.temperature),
+                    condition: {
+                        main: this.GetShortSummary(hour.summary),
+                        description: this.ProcessSummary(hour.summary),
+                        icon: weatherIconSafely(this.ResolveIcon(hour.icon, { sunrise: sunrise, sunset: sunset }, new Date(hour.time * 1000)), this.app.config.IconType()),
+                        customIcon: this.ResolveCustomIcon(hour.icon)
+                    },
+                    precipation: {
+                        type: hour.precipType,
+                        volume: hour.precipProbability,
+                        chance: hour.precipProbability * 100
+                    }
+                };
+                result.hourlyForecasts.push(forecast);
             }
             return result;
         }
@@ -147,7 +175,7 @@ class DarkSky {
         }
         if (isCoordinate(location)) {
             query = this.query + key + "/" + location +
-                "?exclude=minutely,hourly,flags" + "&units=" + this.unit;
+                "?exclude=minutely,flags" + "&units=" + this.unit;
             let locale = this.ConvertToAPILocale(this.app.currentLocale);
             if (isLangSupported(locale, this.supportedLanguages) && this.app.config._translateCondition) {
                 query = query + "&lang=" + locale;
@@ -183,6 +211,12 @@ class DarkSky {
             uiError.type = "hard";
             uiError.userError = true;
         }
+        if (error.code == 401) {
+            uiError.detail = "no key";
+            uiError.message = _("Please Make sure you\nentered the API key what you have from DarkSky");
+            uiError.type = "hard";
+            uiError.userError = true;
+        }
         return uiError;
     }
     ProcessSummary(summary) {
@@ -202,13 +236,17 @@ class DarkSky {
     ;
     GetShortSummary(summary) {
         let processed = summary.split(" ");
-        let result = "";
-        for (let i = 0; i < 2; i++) {
+        if (processed.length == 1)
+            return processed[0];
+        let result = [];
+        for (let i = 0; i < processed.length; i++) {
             if (!/[\(\)]/.test(processed[i]) && !this.WordBanned(processed[i])) {
-                result = result + processed[i] + " ";
+                result.push(processed[i]) + " ";
             }
+            if (result.length == 2)
+                break;
         }
-        return result;
+        return Sentencify(result);
     }
     ;
     GetShortCurrentSummary(summary) {
@@ -226,15 +264,7 @@ class DarkSky {
     WordBanned(word) {
         return this.DarkSkyFilterWords.indexOf(word) != -1;
     }
-    IsNight(sunTimes) {
-        if (!sunTimes)
-            return false;
-        let now = new Date();
-        if (now < sunTimes.sunrise || now > sunTimes.sunset)
-            return true;
-        return false;
-    }
-    ResolveIcon(icon, sunTimes) {
+    ResolveIcon(icon, sunTimes, date) {
         switch (icon) {
             case "rain":
                 return [icons.rain, icons.showers_scattered, icons.rain_freezing];
@@ -245,9 +275,9 @@ class DarkSky {
             case "fog":
                 return [icons.fog];
             case "wind":
-                return (sunTimes && this.IsNight(sunTimes)) ? ["weather-wind", "wind", "weather-breeze", icons.clouds, icons.few_clouds_night] : ["weather-wind", "wind", "weather-breeze", icons.clouds, icons.few_clouds_day];
+                return (sunTimes && IsNight(sunTimes, date)) ? ["weather-windy", "wind", "weather-breeze", icons.clouds, icons.few_clouds_night] : ["weather-windy", "wind", "weather-breeze", icons.clouds, icons.few_clouds_day];
             case "cloudy":
-                return (sunTimes && this.IsNight(sunTimes)) ? [icons.overcast, icons.clouds, icons.few_clouds_night] : [icons.overcast, icons.clouds, icons.few_clouds_day];
+                return (sunTimes && IsNight(sunTimes, date)) ? [icons.overcast, icons.clouds, icons.few_clouds_night] : [icons.overcast, icons.clouds, icons.few_clouds_day];
             case "partly-cloudy-night":
                 return [icons.few_clouds_night];
             case "partly-cloudy-day":

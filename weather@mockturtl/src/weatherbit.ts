@@ -20,6 +20,7 @@ var isCoordinate = utils.isCoordinate as (text: any) => boolean;
 var isLangSupported = utils.isLangSupported as (lang: string, languages: Array <string> ) => boolean;
 var icons = utils.icons;
 var weatherIconSafely = utils.weatherIconSafely as (code: string[], icon_type: imports.gi.St.IconType) => string;
+var GetFuncName = utils.GetFuncName as (func: Function) => string;
 
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
@@ -34,7 +35,13 @@ class Weatherbit implements WeatherProvider {
     //--------------------------------------------------------
     //  Properties
     //--------------------------------------------------------
-    private descriptionLinelength = 25;
+	public readonly prettyName = "WeatherBit";
+	public readonly name = "Weatherbit";
+    public readonly supportsHourly = true;
+    public readonly maxForecastSupport = 16;
+    public readonly website = "https://www.weatherbit.io/";
+    public readonly maxHourlyForecastSupport = 48;
+
     private supportedLanguages = [
         'ar', 'az', 'be', 'bg', 'bs', 'ca', 'cz', 'da', 'de', 'el', 'en',
         'et', 'fi', 'fr', 'hr', 'hu', 'id', 'is', 'it',
@@ -42,11 +49,11 @@ class Weatherbit implements WeatherProvider {
         'sv', 'tr', 'uk', 'zh', 'zh-tw'];
 
     private current_url = "https://api.weatherbit.io/v2.0/current?";
-    private daily_url = "https://api.weatherbit.io/v2.0/forecast/daily?";
-    
-    private unit: queryUnits = null;
+	private daily_url = "https://api.weatherbit.io/v2.0/forecast/daily?";
+	private hourly_url = "https://api.weatherbit.io/v2.0/forecast/hourly?";
 
-    private app: WeatherApplet
+	private app: WeatherApplet;
+	private hourlyAccess = true;
 
     constructor(_app: WeatherApplet) {
         this.app = _app;
@@ -56,10 +63,13 @@ class Weatherbit implements WeatherProvider {
     //  Functions
     //--------------------------------------------------------
     public async GetWeather(): Promise<WeatherData> {
-        let currentResult = await this.GetData(this.current_url, this.ParseCurrent) as WeatherData;
-        if (!currentResult) return null;
-        let forecastResult = await this.GetData(this.daily_url, this.ParseForecast) as ForecastData[];
-        currentResult.forecasts = forecastResult;
+		let forecastResult = this.GetData(this.daily_url, this.ParseForecast) as Promise<ForecastData[]>;
+		let hourlyForecastResult = null;
+		if (!!this.hourlyAccess) hourlyForecastResult = this.GetData(this.hourly_url, this.ParseHourlyForecast) as Promise<HourlyForecastData[]>;
+		let currentResult = await this.GetData(this.current_url, this.ParseCurrent) as WeatherData;
+		if (!currentResult) return null;
+		currentResult.forecasts = await forecastResult;
+		currentResult.hourlyForecasts = (!hourlyForecastResult) ? [] : await hourlyForecastResult;
         return currentResult;
     };
 
@@ -70,7 +80,7 @@ class Weatherbit implements WeatherProvider {
      * @param baseUrl 
      * @param ParseFunction returns WeatherData or ForecastData Object
      */
-    private async GetData(baseUrl: string, ParseFunction: (json: any, context: any) => WeatherData | ForecastData[]): Promise<WeatherData | ForecastData[]> {
+    private async GetData(baseUrl: string, ParseFunction: (json: any, context: any) => WeatherData | ForecastData[] | HourlyForecastData[]) {
         let query = this.ConstructQuery(baseUrl);
         let json;
         if (query != null) {
@@ -79,21 +89,28 @@ class Weatherbit implements WeatherProvider {
                 json = await this.app.LoadJsonAsync(query);
             }
             catch(e) {
-              this.app.HandleHTTPError("weatherbit", e, this.app, this.HandleHTTPError);
-                return null;
+				// Skip Hourly forecast if it is forbidden (403)
+				if (GetFuncName(ParseFunction) == GetFuncName(this.ParseHourlyForecast) && e.code == 403) {
+					this.app.log.Print("Hourly forecast is inaccessible, skipping")
+					this.hourlyAccess = false;
+					return null;
+				}
+              	this.app.HandleHTTPError("weatherbit", e, this.app, this.HandleHTTPError);
+            	return null;
             }
 
             if (json == null) {
-              this.app.HandleError({type: "soft", detail: "no api response", service: "weatherbit"});
-              return null;                 
+				this.app.HandleError({type: "soft", detail: "no api response", service: "weatherbit"});
+				return null;                 
             }
 
             return ParseFunction(json, this);
         }
         else {
-          return null;
+          	return null;
         }       
-    };
+	};
+
 
 
     private ParseCurrent(json: any, self: Weatherbit): WeatherData {
@@ -148,7 +165,7 @@ class Weatherbit implements WeatherProvider {
     private ParseForecast(json: any, self: Weatherbit): ForecastData[] {
       let forecasts: ForecastData[] = [];
       try {
-        for (let i = 0; i < self.app.config._forecastDays; i++) {
+        for (let i = 0; i < json.data.length; i++) {
           let day = json.data[i];
           let forecast: ForecastData = {          
               date: new Date(day.ts * 1000),
@@ -170,7 +187,43 @@ class Weatherbit implements WeatherProvider {
           self.app.HandleError({type: "soft", service: "weatherbit", detail: "unusal payload", message: _("Failed to Process Forecast Info")})
           return null; 
       }
-    };
+	};
+
+	private ParseHourlyForecast(json: any, self: Weatherbit): HourlyForecastData[] { 
+		let forecasts: HourlyForecastData[] = [];
+		try {
+			for (let i = 0; i < json.data.length; i++) {
+				let hour = json.data[i];
+				let forecast: HourlyForecastData = {          
+					date: new Date(hour.ts * 1000),
+					temp: hour.temp,
+					condition: {
+						main: hour.weather.description,
+						description: hour.weather.description,
+						icon: weatherIconSafely(self.ResolveIcon(hour.weather.icon), self.app.config.IconType()),
+						customIcon: self.ResolveCustomIcon(hour.weather.icon)
+					},
+					precipation: {
+						type: "rain",
+						volume: hour.precip,
+						chance: hour.pop
+					}
+				};
+				if (hour.snow != 0) {
+					forecast.precipation.type = "snow";
+					forecast.precipation.volume = hour.snow;
+				}
+				forecasts.push(forecast);         
+			}
+			return forecasts;
+		}
+		catch(e) {
+			self.app.log.Error("Weatherbit Forecast Parsing error: " + e);
+			self.app.HandleError({type: "soft", service: "weatherbit", detail: "unusal payload", message: _("Failed to Process Forecast Info")})
+			return null; 
+		}
+	}
+
 
     private TimeToDate(time: string, hourDiff: number): Date {
         let hoursMinutes = time.split(":");
@@ -242,7 +295,7 @@ class Weatherbit implements WeatherProvider {
 
     /** Handles API Scpecific HTTP errors  */
     public HandleHTTPError(error: HttpError, uiError: AppletError): AppletError {
-        if (error.code == 403) { // DarkSky returns auth error on the http level when key is wrong
+        if (error.code == 403) {
             uiError.detail = "bad key"
             uiError.message = _("Please Make sure you\nentered the API key correctly and your account is not locked");
             uiError.type = "hard";
