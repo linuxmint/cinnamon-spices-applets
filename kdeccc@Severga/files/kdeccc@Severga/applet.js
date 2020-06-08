@@ -34,6 +34,13 @@ MyApplet.prototype = {
 	_init: function(orientation, panel_height, instance_id) {        
 		Applet.TextIconApplet.prototype._init.call(this, orientation, panel_height, instance_id);
 		
+		try {
+			this.setAllowedLayout(Applet.AllowedLayout.BOTH);
+			this.set_show_label_in_vertical_panels(false);
+		}
+		catch (e) {
+			global.logError(e);
+		}
 		this.set_applet_icon_symbolic_name("phone-symbolic");
 		this._applet_context_menu.addCommandlineAction("Configure KDE Connect", "kcmshell5 kcm_kdeconnect");
 		this._applet_context_menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
