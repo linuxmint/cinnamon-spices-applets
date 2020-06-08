@@ -108,6 +108,9 @@ function getImageAtScale(imageFileName, width, height) {
   return actor;
 }
 
+/**
+ * Class SpicesUpdate
+ */
 
 class SpicesUpdate extends Applet.TextIconApplet {
   constructor (metadata, orientation, panelHeight, instance_id) {
@@ -194,7 +197,8 @@ class SpicesUpdate extends Applet.TextIconApplet {
     this.defaultColor = "#000000FF";
 
     // Monitoring metadata.json files and png directories
-    this.monitors = new Array();
+    this.monitors = []; // new Array();
+    this.alreadyMonitored = []; // Contains the UUIDs of xlets already monitored, to avoid multiple monitoring.
 
     // Monitoring png directories: Ids
     this.monitorsPngId = {
@@ -581,6 +585,10 @@ class SpicesUpdate extends Applet.TextIconApplet {
       notification.connect('action-invoked', (self, action) => {
             if (action == "spices-update") {
               Util.spawnCommandLine("%s %s -t 1 -s %s".format(CS_PATH, type.toString(), SORT));
+              //let notifIndex = this.notifications.indexOf(notification);
+              //if (notifIndex > -1)
+              //  this.notifications.splice(notifIndex, 1);
+              //notification.destroy(3);
             } else {
               if (this.force_notifications === true) {
                 while (this.notifications.length != 0) {
@@ -590,7 +598,10 @@ class SpicesUpdate extends Applet.TextIconApplet {
               } else {
                 this.old_message[type] = "";
                 this.old_watch_message[type] = "";
-                notification.destroy(3)
+                //let notifIndex = this.notifications.indexOf(notification);
+                //if (notifIndex > -1)
+                //  this.notifications.splice(notifIndex, 1);
+                notification.destroy(3);
               }
               this._on_refresh_pressed();
             }
@@ -1510,6 +1521,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
   }; // End of _on_pngDir_changed
 
   monitor_metadatajson(type, uuid) {
+    if (this.alreadyMonitored.indexOf(uuid) > -1) return;
     let metadataFileName = DIR_MAP[type] + "/" + uuid + "/metadata.json";
     let metadataFile = Gio.file_new_for_path(metadataFileName);
 
@@ -1524,6 +1536,8 @@ class SpicesUpdate extends Applet.TextIconApplet {
         let monitor = metadataFile.monitor(0, null);
         let Id = monitor.connect('changed', (type, uuid) => this._on_metadatajson_changed(type, uuid));
         this.monitors.push([monitor, Id]);
+        this.alreadyMonitored.push(uuid);
+        if (DEBUG()) log("alreadyMonitored = " + this.alreadyMonitored.toString());
       } catch(e) {
         // Nothing to do.
       }
@@ -1666,6 +1680,17 @@ class SpicesUpdate extends Applet.TextIconApplet {
 
   }; // End of makeMenu
 
+  destroy_all_notifications() {
+    while (this.notifications.length != 0) {
+      let n = this.notifications.pop();
+      n.destroy(3)
+    }
+    for (let t of TYPES) {
+      this.old_message[t] = "";
+      this.old_watch_message[t] = "";
+    };
+  }; // End of destroy_all_notifications
+
   _on_refresh_pressed() {
     this.first_loop = false;
     this.refresh_requested = true;
@@ -1686,6 +1711,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
       monitor.disconnect(Id)
     }
     this.monitors = [];
+    this.alreadyMonitored = [];
     for (let type of TYPES) this.monitorsPngId[type] = 0;
     // Reload this applet
     Extension.reloadExtension(UUID, Extension.Type.APPLET);
@@ -1816,7 +1842,10 @@ class SpicesUpdate extends Applet.TextIconApplet {
             monitor.disconnect(Id)
           }
           this.monitors = [];
+          this.alreadyMonitored = [];
           for (let type of TYPES) this.monitorsPngId[type] = 0;
+
+          //this.destroy_all_notifications();
 
           this.populateSettingsUnprotectedApplets();
           this.populateSettingsUnprotectedDesklets();
@@ -1845,7 +1874,6 @@ class SpicesUpdate extends Applet.TextIconApplet {
                   message = "Some " + t + " need update:"
                 }
                 let new_message = _(message) + "\n\t" + must_be_updated.join("\n\t");
-                //if (this.force_notifications || new_message != this.old_message[t]) { // One notification is sufficient!
                 if (this.force_notifications || this.old_message[t].indexOf(new_message) == -1) { // One notification is sufficient!
                   if (this.general_notifications) {
                     if (this.general_type_notif === "minimal") notify_send(this._clean_str(new_message));
