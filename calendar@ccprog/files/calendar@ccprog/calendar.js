@@ -174,12 +174,11 @@ class Calendar {
                 this._onPlaceChanged.bind(this));
         }
 
-        if (this.country == null) {
-            this.country = LC_AB3;
+        if (this.settings.getValue("country") == null) {
+            this.settings.setValue("country", LC_AB3);
         }
-        if (this.regions[this.country] != null) {
-            this._onPlaceChanged();
-        }
+        // must be called once inside constructor, see issues/3063
+        this._onPlaceChanged();
 
         // Start off with the current date
         this._selectedDate = new Date();
@@ -202,7 +201,8 @@ class Calendar {
     }
 
     _onPlaceChanged() {
-        this.holiday.setPlace(this.country, this.regions[this.country]);
+        const country = this.settings.getValue('country') || LC_AB3;
+        this.holiday.setPlace(country, this.regions[country]);
     }
 
     // Sets the calendar to show a specific date
