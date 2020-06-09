@@ -41,7 +41,7 @@
         "menu-icons" : {
             "type" : "section",
             "title" : "Icons and Labels",
-            "keys" : ["show-category-icons", "show-application-icons", "show-context-menu-icons", "show-favorite-icons", "favorite-button-size", "all-programs-label", "favorites-label"]
+            "keys" : ["show-category-icons", "show-application-icons", "show-favorite-icons", "favorite-button-size", "all-programs-label", "favorites-label"]
         },
         "menu-behave" : {
             "type" : "section",
@@ -187,12 +187,6 @@
     "default" : true,
     "description" : "Show application icons",
     "tooltip" : "Choose whether or not to show icons on applications."
- },
- "show-context-menu-icons" : {
-    "type" : "switch",
-    "default" : true,
-    "description" : "Show context menu icons",
-    "tooltip" : "Choose whether or not to show icons on context menus."
  },
  "show-favorite-icons" : {
     "type" : "switch",

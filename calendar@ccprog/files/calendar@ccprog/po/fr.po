@@ -17,7 +17,7 @@ msgstr ""
 #. settings-schema.json->page2->title
 #. settings-schema.json->worldclocks->description
 msgid "World Clocks"
-msgstr ""
+msgstr "Horloges mondiales"
 
 #. settings-schema.json->section2->title
 msgid "Get Public Holidays for"
@@ -25,7 +25,7 @@ msgstr "Obtenez les jours fériés pour"
 
 #. settings-schema.json->section4->title
 msgid "Show World Times"
-msgstr ""
+msgstr "Afficher les heures mondiales"
 
 #. settings-schema.json->weekend-length->description
 msgid "Mark as weekend days"
@@ -837,11 +837,11 @@ msgstr "Wyoming"
 
 #. settings-schema.json->worldclocks->columns->title
 msgid "Display name"
-msgstr ""
+msgstr "Nom affiché"
 
 #. settings-schema.json->worldclocks->columns->title
 msgid "Timezone"
-msgstr ""
+msgstr "Fuseau horaire"
 
 #. metadata.json->name
 msgid "Calendar with public Holidays"

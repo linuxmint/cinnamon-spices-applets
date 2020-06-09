@@ -23,6 +23,12 @@ var get = utils.get;
 var nonempty = utils.nonempty;
 class OpenWeatherMap {
     constructor(_app) {
+        this.prettyName = "OpenWeatherMap";
+        this.name = "OpenWeatherMap";
+        this.maxForecastSupport = 7;
+        this.supportsHourly = true;
+        this.website = "https://openweathermap.org/";
+        this.maxHourlyForecastSupport = 48;
         this.supportedLanguages = ["af", "ar", "az", "bg", "ca", "cz", "da", "de", "el", "en", "eu", "fa", "fi",
             "fr", "gl", "he", "hi", "hr", "hu", "id", "it", "ja", "kr", "la", "lt", "mk", "no", "nl", "pl",
             "pt", "pt_br", "ro", "ru", "se", "sk", "sl", "sp", "es", "sr", "th", "tr", "ua", "uk", "vi", "zh_cn", "zh_tw", "zu"];
@@ -60,7 +66,7 @@ class OpenWeatherMap {
                     lon: json.lon
                 },
                 location: {
-                    url: null,
+                    url: "https://openweathermap.org/city/",
                     timeZone: json.timezone
                 },
                 date: new Date((json.current.dt) * 1000),
@@ -87,7 +93,7 @@ class OpenWeatherMap {
                 forecasts: []
             };
             let forecasts = [];
-            for (let i = 0; i < self.app.config._forecastDays; i++) {
+            for (let i = 0; i < json.daily.length; i++) {
                 let day = json.daily[i];
                 let forecast = {
                     date: new Date(day.dt * 1000),
@@ -103,6 +109,34 @@ class OpenWeatherMap {
                 forecasts.push(forecast);
             }
             weather.forecasts = forecasts;
+            let hourly = [];
+            for (let index = 0; index < json.hourly.length; index++) {
+                const hour = json.hourly[index];
+                let forecast = {
+                    date: new Date(hour.dt * 1000),
+                    temp: hour.temp,
+                    condition: {
+                        main: hour.weather[0].main,
+                        description: hour.weather[0].description,
+                        icon: weatherIconSafely(self.ResolveIcon(hour.weather[0].icon), self.app.config.IconType()),
+                        customIcon: self.ResolveCustomIcon(hour.weather[0].icon)
+                    },
+                };
+                if (!!hour.rain) {
+                    forecast.precipation = {
+                        volume: hour.rain["1h"],
+                        type: "rain"
+                    };
+                }
+                if (!!hour.snow) {
+                    forecast.precipation = {
+                        volume: hour.snow["1h"],
+                        type: "snow"
+                    };
+                }
+                hourly.push(forecast);
+            }
+            weather.hourlyForecasts = hourly;
             return weather;
         }
         catch (e) {

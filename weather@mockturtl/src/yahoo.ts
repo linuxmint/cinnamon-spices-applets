@@ -35,6 +35,14 @@ class Yahoo implements WeatherProvider {
     //--------------------------------------------------------
     //  Properties
     //--------------------------------------------------------
+	public readonly prettyName = "Yahoo";
+	public readonly name = "Yahoo";
+    public readonly maxForecastSupport = 10;
+    public readonly supportsHourly = false;
+    public readonly website = "https://www.yahoo.com/news/weather/";
+    public readonly maxHourlyForecastSupport = 0;
+
+
     private app: WeatherApplet
 
     constructor(_app: WeatherApplet) {
@@ -124,7 +132,7 @@ class Yahoo implements WeatherProvider {
                 forecasts: []
             }
             // Forecast
-            for (let i = 0; i < this.app.config._forecastDays; i++) {
+            for (let i = 0; i < json.forecasts.length; i++) {
                 let day = json.forecasts[i];
                 let forecast: ForecastData = {          
                     date: new Date(day.date * 1000),         

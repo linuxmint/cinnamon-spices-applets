@@ -35,6 +35,13 @@ class OpenWeatherMap implements WeatherProvider {
     //--------------------------------------------------------
     //  Properties
     //--------------------------------------------------------
+	public readonly prettyName = "OpenWeatherMap";
+	public readonly name = "OpenWeatherMap";
+    public readonly maxForecastSupport = 7;
+    public readonly supportsHourly = true;
+    public readonly website = "https://openweathermap.org/";
+    public readonly maxHourlyForecastSupport = 48;
+
     private supportedLanguages = ["af", "ar", "az", "bg", "ca", "cz", "da", "de", "el", "en", "eu", "fa", "fi",
      "fr", "gl", "he", "hi", "hr", "hu", "id", "it", "ja", "kr", "la", "lt", "mk", "no", "nl", "pl",
       "pt", "pt_br", "ro", "ru", "se", "sk", "sl", "sp", "es", "sr", "th", "tr", "ua", "uk", "vi", "zh_cn", "zh_tw", "zu"];
@@ -89,7 +96,7 @@ class OpenWeatherMap implements WeatherProvider {
             location: {
               //city: json.name,
               //country: json.sys.country,
-              url: null, // "https://openweathermap.org/city/" + json.id,
+              url: "https://openweathermap.org/city/",
               timeZone: json.timezone
             },
             date: new Date((json.current.dt) * 1000),
@@ -117,7 +124,7 @@ class OpenWeatherMap implements WeatherProvider {
           };
 
           let forecasts: ForecastData[] = [];
-          for (let i = 0; i < self.app.config._forecastDays; i++) {
+          for (let i = 0; i < json.daily.length; i++) {
             let day = json.daily[i];
             let forecast: ForecastData = {          
                 date: new Date(day.dt * 1000),
@@ -132,7 +139,37 @@ class OpenWeatherMap implements WeatherProvider {
             };
             forecasts.push(forecast);         
           }
-          weather.forecasts = forecasts;          
+          weather.forecasts = forecasts;  
+          
+          let hourly: HourlyForecastData[] = [];
+          for (let index = 0; index < json.hourly.length; index++) {
+            const hour = json.hourly[index];
+            let forecast: HourlyForecastData = {
+              date: new Date(hour.dt * 1000),
+              temp: hour.temp,
+              condition: {
+                main: hour.weather[0].main,
+                description: hour.weather[0].description,
+                icon: weatherIconSafely(self.ResolveIcon(hour.weather[0].icon), self.app.config.IconType()),
+                customIcon: self.ResolveCustomIcon(hour.weather[0].icon)
+			  }, 
+            }
+            if (!!hour.rain) {
+				forecast.precipation = {
+					volume: hour.rain["1h"],
+					type: "rain"
+				}
+			}
+			// Snow takes precedence
+            if (!!hour.snow) {
+				forecast.precipation = {
+					volume: hour.snow["1h"],
+					type: "snow"
+				}
+            }
+            hourly.push(forecast);
+          }
+          weather.hourlyForecasts = hourly;
           return weather; 
         }
         catch(e) { 

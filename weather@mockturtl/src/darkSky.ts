@@ -15,6 +15,8 @@ function _(str: string): string {
   return imports.gettext.dgettext(UUID, str)
 }
 
+// Unable to use type declarations with imports like this, so
+// typing it manually again.
 var utils = importModule("utils");
 var isCoordinate = utils.isCoordinate as (text: any) => boolean;
 var isLangSupported = utils.isLangSupported as (lang: string, languages: Array <string> ) => boolean;
@@ -22,7 +24,9 @@ var FahrenheitToKelvin = utils.FahrenheitToKelvin as (fahr: number) => number;
 var CelsiusToKelvin = utils.CelsiusToKelvin as (celsius: number) => number;
 var MPHtoMPS = utils.MPHtoMPS as (speed: number) => number;
 var icons = utils.icons;
+var IsNight = utils.IsNight as (sunTimes: SunTimes, date?: Date) => boolean;
 var weatherIconSafely = utils.weatherIconSafely as (code: string[], icon_type: imports.gi.St.IconType) => string;
+var Sentencify = utils.Sentencify as (words: string[]) => string;
 
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
@@ -37,6 +41,13 @@ class DarkSky implements WeatherProvider {
     //--------------------------------------------------------
     //  Properties
     //--------------------------------------------------------
+	public readonly prettyName = "DarkSky";
+	public readonly name = "DarkSky";
+    public readonly maxForecastSupport = 8;
+    public readonly supportsHourly = false;
+    public readonly website = "https://darksky.net/poweredby/";
+    public readonly maxHourlyForecastSupport = 168;
+
     private descriptionLinelength = 25;
     private supportedLanguages = [
         'ar', 'az', 'be', 'bg', 'bs', 'ca', 'cs', 'da', 'de', 'el', 'en', 'es',
@@ -47,7 +58,7 @@ class DarkSky implements WeatherProvider {
     private query = "https://api.darksky.net/forecast/";
 
       // DarkSky Filter words for short conditions, won't work on every language
-    private DarkSkyFilterWords = [_("and"), _("until"), _("in")];
+    private DarkSkyFilterWords = [_("and"), _("until"), _("in"), _("Possible")];
     
     private unit: queryUnits = null;
 
@@ -90,7 +101,7 @@ class DarkSky implements WeatherProvider {
     };
 
 
-    private ParseWeather(json: any): WeatherData {
+    private ParseWeather(json: DarkSkyPayload): WeatherData {
         try {
             let sunrise = new Date(json.daily.data[0].sunriseTime * 1000);
             let sunset = new Date(json.daily.data[0].sunsetTime * 1000)
@@ -124,10 +135,11 @@ class DarkSky implements WeatherProvider {
                     value: this.ToKelvin(json.currently.apparentTemperature),
                     type: "temperature"
                 },
-                forecasts: []
+				forecasts: [],
+				hourlyForecasts: []
             }
             // Forecast
-            for (let i = 0; i < this.app.config._forecastDays; i++) {
+            for (let i = 0; i < json.daily.data.length; i++) {
                 let day = json.daily.data[i];
                 let forecast: ForecastData = {          
                     date: new Date(day.time * 1000),         
@@ -147,7 +159,30 @@ class DarkSky implements WeatherProvider {
                   forecast.date.setHours(forecast.date.getHours() + 12);
 
                   result.forecasts.push(forecast);
-            }
+			}
+
+			for (let i = 0; i < json.hourly.data.length; i++) {
+                let hour = json.hourly.data[i];
+                let forecast: HourlyForecastData = {          
+                    date: new Date(hour.time * 1000),         
+					temp: this.ToKelvin(hour.temperature),                  
+                    condition: {
+                      main: this.GetShortSummary(hour.summary),               
+                      description: this.ProcessSummary(hour.summary),        
+                      icon: weatherIconSafely(this.ResolveIcon(hour.icon, {sunrise: sunrise, sunset: sunset}, new Date(hour.time * 1000)), this.app.config.IconType()),    
+                      customIcon: this.ResolveCustomIcon(hour.icon)           
+					},
+					precipation: {
+						type: hour.precipType as PrecipationType,
+						volume: hour.precipProbability,
+						chance: hour.precipProbability * 100
+					}
+				};
+
+				result.hourlyForecasts.push(forecast);
+			}
+			
+
             return result;
         }
         catch(e) {
@@ -181,7 +216,7 @@ class DarkSky implements WeatherProvider {
         }
         if (isCoordinate(location)) {
             query = this.query + key + "/" + location + 
-            "?exclude=minutely,hourly,flags" + "&units=" + this.unit;
+            "?exclude=minutely,flags" + "&units=" + this.unit;
             let locale = this.ConvertToAPILocale(this.app.currentLocale);
             if (isLangSupported(locale, this.supportedLanguages) && this.app.config._translateCondition) {
                 query = query + "&lang=" + locale;
@@ -219,6 +254,12 @@ class DarkSky implements WeatherProvider {
             uiError.type = "hard";
             uiError.userError = true;
         }
+        if (error.code == 401) { // DarkSky returns auth error on the http level when key is wrong
+            uiError.detail = "no key"
+            uiError.message = _("Please Make sure you\nentered the API key what you have from DarkSky");
+            uiError.type = "hard";
+            uiError.userError = true;
+        }
         return uiError;
     }
 
@@ -238,15 +279,17 @@ class DarkSky implements WeatherProvider {
     };
 
     private GetShortSummary(summary: string): string {
-        let processed = summary.split(" ");
-        let result = "";
-        for (let i = 0; i < 2; i++) {
+		let processed = summary.split(" ");
+		if (processed.length == 1) return processed[0];
+        let result: string[] = [];
+        for (let i = 0; i < processed.length; i++) {
             if (!/[\(\)]/.test(processed[i]) && !this.WordBanned(processed[i])) {
-                result = result + processed[i] + " ";
-            }
+                result.push(processed[i]) + " ";
+			}
+			if (result.length == 2) break;
         }
-        return result;
-    };
+        return Sentencify(result);
+	};
 
     private GetShortCurrentSummary(summary: string): string {
         let processed = summary.split(" ");
@@ -265,14 +308,7 @@ class DarkSky implements WeatherProvider {
         return this.DarkSkyFilterWords.indexOf(word) != -1;
     }
 
-    private IsNight(sunTimes: SunTimes): boolean {
-        if (!sunTimes) return false;
-        let now = new Date();
-        if (now < sunTimes.sunrise || now > sunTimes.sunset) return true;
-        return false;
-    }
-
-    private ResolveIcon(icon: string, sunTimes?: SunTimes): string[] {
+    private ResolveIcon(icon: string, sunTimes?: SunTimes, date?: Date): string[] {
         switch (icon) {
             case "rain":
               return [icons.rain, icons.showers_scattered, icons.rain_freezing]
@@ -284,9 +320,9 @@ class DarkSky implements WeatherProvider {
               return [icons.fog]
             // There is no guarantee that there is a wind icon
             case "wind":
-                return (sunTimes && this.IsNight(sunTimes)) ? ["weather-wind", "wind", "weather-breeze", icons.clouds, icons.few_clouds_night] : ["weather-wind", "wind", "weather-breeze", icons.clouds, icons.few_clouds_day]
+                return (sunTimes && IsNight(sunTimes, date)) ? ["weather-windy", "wind", "weather-breeze", icons.clouds, icons.few_clouds_night] : ["weather-windy", "wind", "weather-breeze", icons.clouds, icons.few_clouds_day]
             case "cloudy":/* mostly cloudy (day) */
-              return (sunTimes && this.IsNight(sunTimes)) ? [icons.overcast, icons.clouds, icons.few_clouds_night] : [icons.overcast, icons.clouds, icons.few_clouds_day]
+              return (sunTimes && IsNight(sunTimes, date)) ? [icons.overcast, icons.clouds, icons.few_clouds_night] : [icons.overcast, icons.clouds, icons.few_clouds_day]
             case "partly-cloudy-night":
               return [icons.few_clouds_night]
             case "partly-cloudy-day":
@@ -376,8 +412,104 @@ class DarkSky implements WeatherProvider {
  * - 'uk2' return miles/hour and Celsius
  */
 type queryUnits = 'si' | 'us' | 'uk2';
-interface SunTimes {
-    sunrise: Date;
-    sunset: Date
+
+interface DarkSkyHourlyPayload {
+	time: number;
+	summary: string;
+	icon: string;
+	precipIntensity: number;
+	precipProbability: number;
+	precipType: string;
+	temperature: number;
+	apparentTemperature: number;
+	dewPoint: number;
+	humidity: number;
+	pressure: number;
+	windSpeed: number;
+	windGust: number;
+	windBearing: number;
+	cloudCover: number;
+	uvIndex: number;
+	visibility: number;
+	ozone: number;
+}
+
+interface DarkSkyDailyPayload {
+	time: number;
+	summary: string;
+	icon: string;
+	sunriseTime: number;
+	sunsetTime: number;
+	moonPhase: number;
+	precipIntensity: number;
+	precipIntensityMax: number;
+	precipIntensityMaxTime: number;
+	precipProbability: number;
+	precipType: string;
+	temperatureHigh: number;
+	temperatureHighTime: number;
+	temperatureLow: number;
+	temperatureLowTime: number;
+	apparentTemperatureHigh: number;
+	apparentTemperatureHighTime: number;
+	apparentTemperatureLow: number;
+	apparentTemperatureLowTime: number;
+	dewPoint: number;
+	humidity: number;
+	pressure: number;
+	windSpeed: number;
+	windGust: number;
+	windGustTime: number;
+	windBearing: number;
+	cloudCover: number;
+	uvIndex: number;
+	uvIndexTime: number;
+	visibility: number;
+	ozone: number;
+	temperatureMin: number;
+	temperatureMinTime: number;
+	temperatureMax: number;
+	temperatureMaxTime: number;
+	apparentTemperatureMin: number;
+	apparentTemperatureMinTime: number;
+	apparentTemperatureMax: number;
+	apparentTemperatureMaxTime: number;
+}
+interface DarkSkyPayload {
+	latitude: number;
+	longitude: number;
+	timezone: string;
+	currently: {
+		/** Unix timestamp in seconds */
+		time: number;
+		summary: string;
+		icon: string;
+		nearestStormDistance: number;
+        nearestStormBearing: number;
+        precipIntensity: number;
+        precipProbability: number;
+        temperature: number;
+        apparentTemperature: number;
+        dewPoint: number;
+        humidity: number;
+        pressure: number;
+        windSpeed: number;
+        windGust: number;
+        windBearing: number;
+        cloudCover: number;
+        uvIndex: number;
+        visibility: number;
+        ozone: number;
+    },
+    hourly: {
+        summary: string;
+        icon: string;
+        data: DarkSkyHourlyPayload[];
+	}
+	daily: {
+        summary: string;
+        icon: string;
+		data: DarkSkyDailyPayload[]
+	}
 }
 

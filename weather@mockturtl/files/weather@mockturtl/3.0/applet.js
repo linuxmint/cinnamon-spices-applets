@@ -62,13 +62,18 @@ var Lang = imports.lang;
 var keybindingManager = imports.ui.main.keybindingManager;
 var timeout_add_seconds = imports.mainloop.timeout_add_seconds;
 var _a = imports.gi.Soup, Message = _a.Message, Session = _a.Session, ProxyResolverDefault = _a.ProxyResolverDefault, SessionAsync = _a.SessionAsync;
-var _b = imports.gi.St, Bin = _b.Bin, DrawingArea = _b.DrawingArea, BoxLayout = _b.BoxLayout, Side = _b.Side, IconType = _b.IconType, Label = _b.Label, Icon = _b.Icon, Button = _b.Button;
+var _b = imports.gi.St, Bin = _b.Bin, DrawingArea = _b.DrawingArea, BoxLayout = _b.BoxLayout, Side = _b.Side, IconType = _b.IconType, Label = _b.Label, ScrollView = _b.ScrollView, Icon = _b.Icon, Button = _b.Button, Align = _b.Align, Widget = _b.Widget;
+var _c = imports.gi.Clutter, GridLayout = _c.GridLayout, Actor = _c.Actor, Orientation = _c.Orientation;
+var _d = imports.gi.Pango, EllipsizeMode = _d.EllipsizeMode, WrapMode = _d.WrapMode;
 var get_language_names = imports.gi.GLib.get_language_names;
-var _c = imports.ui.applet, TextIconApplet = _c.TextIconApplet, AllowedLayout = _c.AllowedLayout, AppletPopupMenu = _c.AppletPopupMenu, MenuItem = _c.MenuItem;
-var PopupMenuManager = imports.ui.popupMenu.PopupMenuManager;
-var _d = imports.ui.settings, AppletSettings = _d.AppletSettings, BindingDirection = _d.BindingDirection;
-var _e = imports.misc.util, spawnCommandLine = _e.spawnCommandLine, spawn_async = _e.spawn_async;
-var _f = imports.ui.messageTray, SystemNotificationSource = _f.SystemNotificationSource, Notification = _f.Notification;
+var PolicyType = imports.gi.Gtk.PolicyType;
+var addTween = imports.ui.tweener.addTween;
+var _e = imports.ui.applet, TextIconApplet = _e.TextIconApplet, AllowedLayout = _e.AllowedLayout, AppletPopupMenu = _e.AppletPopupMenu, MenuItem = _e.MenuItem;
+var _f = imports.ui.popupMenu, PopupMenuManager = _f.PopupMenuManager, PopupSeparatorMenuItem = _f.PopupSeparatorMenuItem;
+var _g = imports.ui.settings, AppletSettings = _g.AppletSettings, BindingDirection = _g.BindingDirection;
+var _h = imports.misc.util, spawnCommandLine = _h.spawnCommandLine, spawn_async = _h.spawn_async;
+var _j = imports.ui.messageTray, SystemNotificationSource = _j.SystemNotificationSource, Notification = _j.Notification;
+var SignalManager = imports.misc.signalManager.SignalManager;
 var messageTray = imports.ui.main.messageTray;
 var utils = importModule("utils");
 var GetDayName = utils.GetDayName;
@@ -80,6 +85,7 @@ var compassDirection = utils.compassDirection;
 var MPStoUserUnits = utils.MPStoUserUnits;
 var nonempty = utils.nonempty;
 var AwareDateString = utils.AwareDateString;
+var get = utils.get;
 var delay = utils.delay;
 if (typeof Promise != "function") {
     var promisePoly = importModule("promise-polyfill");
@@ -139,9 +145,10 @@ var WeatherApplet = (function (_super) {
         var _this = _super.call(this, orientation, panelHeight, instanceId) || this;
         _this.weather = null;
         _this.forecasts = [];
-        _this.currentLocale = null;
+        _this.hourlyForecasts = [];
         _this._httpSession = new SessionAsync();
         _this.appletDir = imports.ui.appletManager.appletMeta[UUID].path;
+        _this.currentLocale = null;
         _this.locProvider = new ipApi.IpApi(_this);
         _this.encounteredError = false;
         _this.errMsg = {
@@ -174,6 +181,7 @@ var WeatherApplet = (function (_super) {
         _this.SetAppletOnPanel();
         _this.config = new Config(_this, instanceId);
         _this.AddRefreshButton();
+        _this.EnsureProvider();
         _this.ui = new UI(_this, orientation);
         _this.ui.rebuild(_this.config);
         _this.loop = new WeatherLoop(_this, instanceId);
@@ -342,6 +350,64 @@ var WeatherApplet = (function (_super) {
     };
     WeatherApplet.prototype.on_panel_height_changed = function () {
     };
+    WeatherApplet.prototype.OpenUrl = function (element) {
+        if (!element.url)
+            return;
+        imports.gi.Gio.app_info_launch_default_for_uri(element.url, global.create_app_launch_context());
+    };
+    WeatherApplet.prototype.GetMaxForecastDays = function () {
+        if (!this.provider)
+            return this.config._forecastDays;
+        return Math.min(this.config._forecastDays, this.provider.maxForecastSupport);
+    };
+    WeatherApplet.prototype.GetMaxHourlyForecasts = function () {
+        if (!this.provider)
+            return this.config._forecastHours;
+        return Math.min(this.config._forecastHours, this.provider.maxHourlyForecastSupport);
+    };
+    WeatherApplet.prototype.EnsureProvider = function (force) {
+        if (force === void 0) { force = false; }
+        var currentName = get(["name"], this.provider);
+        switch (this.config._dataService) {
+            case DATA_SERVICE.DARK_SKY:
+                if (darkSky == null)
+                    var darkSky = importModule('darkSky');
+                if (currentName != "DarkSky" || force) {
+                    this.provider = new darkSky.DarkSky(this);
+                }
+                break;
+            case DATA_SERVICE.OPEN_WEATHER_MAP:
+                if (openWeatherMap == null)
+                    var openWeatherMap = importModule("openWeatherMap");
+                if (currentName != "OpenWeatherMap" || force) {
+                    this.provider = new openWeatherMap.OpenWeatherMap(this);
+                }
+                break;
+            case DATA_SERVICE.MET_NORWAY:
+                if (metNorway == null)
+                    var metNorway = importModule("met_norway");
+                if (currentName != "MetNorway" || force) {
+                    this.provider = new metNorway.MetNorway(this);
+                }
+                break;
+            case DATA_SERVICE.WEATHERBIT:
+                if (weatherbit == null)
+                    var weatherbit = importModule("weatherbit");
+                if (currentName != "Weatherbit" || force) {
+                    this.provider = new weatherbit.Weatherbit(this);
+                }
+                break;
+            case DATA_SERVICE.YAHOO:
+                if (yahoo == null)
+                    var yahoo = importModule("yahoo");
+                if (currentName != "Yahoo" || force) {
+                    this.provider = new yahoo.Yahoo(this);
+                }
+                break;
+            default:
+                return null;
+        }
+    };
     WeatherApplet.prototype.constructJsLocale = function (locale) {
         var jsLocale = locale.split(".")[0];
         var tmp = jsLocale.split("_");
@@ -355,57 +421,29 @@ var WeatherApplet = (function (_super) {
     };
     WeatherApplet.prototype.refreshWeather = function (rebuild) {
         return __awaiter(this, void 0, void 0, function () {
-            var locationData, e_1, darkSky, openWeatherMap, metNorway, weatherbit, yahoo, weatherInfo, _a, e_2;
-            return __generator(this, function (_b) {
-                switch (_b.label) {
+            var locationData, e_1, weatherInfo, e_2;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
                     case 0:
                         this.encounteredError = false;
                         locationData = null;
-                        _b.label = 1;
+                        _a.label = 1;
                     case 1:
-                        _b.trys.push([1, 3, , 4]);
+                        _a.trys.push([1, 3, , 4]);
                         return [4, this.ValidateLocation()];
                     case 2:
-                        locationData = _b.sent();
+                        locationData = _a.sent();
                         return [3, 4];
                     case 3:
-                        e_1 = _b.sent();
+                        e_1 = _a.sent();
                         this.log.Error(e_1);
                         return [2, "error"];
                     case 4:
-                        _b.trys.push([4, 9, , 10]);
-                        switch (this.config._dataService) {
-                            case DATA_SERVICE.DARK_SKY:
-                                if (darkSky == null)
-                                    darkSky = importModule('darkSky');
-                                this.provider = new darkSky.DarkSky(this);
-                                break;
-                            case DATA_SERVICE.OPEN_WEATHER_MAP:
-                                if (openWeatherMap == null)
-                                    openWeatherMap = importModule("openWeatherMap");
-                                this.provider = new openWeatherMap.OpenWeatherMap(this);
-                                break;
-                            case DATA_SERVICE.MET_NORWAY:
-                                if (metNorway == null)
-                                    metNorway = importModule("met_norway");
-                                this.provider = new metNorway.MetNorway(this);
-                                break;
-                            case DATA_SERVICE.WEATHERBIT:
-                                if (weatherbit == null)
-                                    weatherbit = importModule("weatherbit");
-                                this.provider = new weatherbit.Weatherbit(this);
-                                break;
-                            case DATA_SERVICE.YAHOO:
-                                if (yahoo == null)
-                                    yahoo = importModule("yahoo");
-                                this.provider = new yahoo.Yahoo(this);
-                                break;
-                            default:
-                                return [2, "error"];
-                        }
+                        _a.trys.push([4, 6, , 7]);
+                        this.EnsureProvider(rebuild);
                         return [4, this.provider.GetWeather()];
                     case 5:
-                        weatherInfo = _b.sent();
+                        weatherInfo = _a.sent();
                         if (!weatherInfo) {
                             this.log.Error("Unable to obtain Weather Information");
                             return [2, "failure"];
@@ -414,26 +452,20 @@ var WeatherApplet = (function (_super) {
                         this.ProcessWeatherData(weatherInfo, locationData);
                         if (rebuild)
                             this.ui.rebuild(this.config);
-                        return [4, this.ui.displayWeather(this.weather, this.config)];
-                    case 6:
-                        _a = !(_b.sent());
-                        if (_a) return [3, 8];
-                        return [4, this.ui.displayForecast(this.weather, this.forecasts, this.config)];
-                    case 7:
-                        _a = !(_b.sent());
-                        _b.label = 8;
-                    case 8:
-                        if (_a)
-                            return [2];
+                        if (!this.ui.displayWeather(this.weather, this.config)
+                            || !this.ui.displayForecast(this.weather, this.forecasts, this.config)
+                            || !this.ui.displayHourlyForecast(this.hourlyForecasts, this.config)
+                            || !this.ui.displayBar(this.weather, this.provider, this.config))
+                            return [2, "failure"];
                         this.log.Print("Weather Information refreshed");
                         this.loop.ResetErrorCount();
                         return [2, "success"];
-                    case 9:
-                        e_2 = _b.sent();
+                    case 6:
+                        e_2 = _a.sent();
                         this.log.Error("Generic Error while refreshing Weather info: " + e_2);
                         this.HandleError({ type: "hard", detail: "unknown", message: _("Unexpected Error While Refreshing Weather, please see log in Looking Glass") });
                         return [2, "failure"];
-                    case 10: return [2];
+                    case 7: return [2];
                 }
             });
         });
@@ -500,6 +532,7 @@ var WeatherApplet = (function (_super) {
         if (!!weatherInfo.extra_field)
             this.weather.extra_field = weatherInfo.extra_field;
         this.forecasts = weatherInfo.forecasts;
+        this.hourlyForecasts = (!weatherInfo.hourlyForecasts) ? [] : weatherInfo.hourlyForecasts;
     };
     WeatherApplet.prototype.wipeData = function () {
         if (this.weather == null) {
@@ -553,6 +586,7 @@ var WeatherApplet = (function (_super) {
         this.weather.condition.icon = null;
         this.weather.extra_field = null;
         this.forecasts = [];
+        this.hourlyForecasts = [];
     };
     ;
     WeatherApplet.prototype.DisplayError = function (title, msg) {
@@ -600,8 +634,9 @@ var WeatherApplet = (function (_super) {
             uiError.code = error.code;
             if (error.message == "bad api response - non json")
                 uiError.type = "hard";
-            if (!!callback && callback instanceof Function)
+            if (!!callback && callback instanceof Function) {
                 uiError = callback(error, uiError);
+            }
         }
         ctx.HandleError(uiError);
     };
@@ -651,38 +686,152 @@ var Log = (function () {
 }());
 var UI = (function () {
     function UI(app, orientation) {
+        this.hourlyToggled = false;
+        this.hourlyNeverOpened = true;
         this.app = app;
         this.menuManager = new PopupMenuManager(this.app);
         this.menu = new AppletPopupMenu(this.app, orientation);
         this.menu.box.add_style_class_name(STYLE_WEATHER_MENU);
         this.app.log.Debug("Popup Menu applied classes are: " + this.menu.box.get_style_class_name());
         this.menuManager.addMenu(this.menu);
+        this.menuManager._signals.connect(this.menu, "open-state-changed", this.PopupMenuToggled, this);
         this.BuildPopupMenu();
     }
+    UI.prototype.PopupMenuToggled = function (caller, data) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        if (!(data == false)) return [3, 2];
+                        return [4, delay(100)];
+                    case 1:
+                        _a.sent();
+                        this.HideHourlyWeather();
+                        _a.label = 2;
+                    case 2: return [2];
+                }
+            });
+        });
+    };
     UI.prototype.BuildPopupMenu = function () {
+        var _this = this;
         this._currentWeather = new Bin({ style_class: STYLE_CURRENT });
         this._futureWeather = new Bin({ style_class: STYLE_FORECAST });
-        this._separatorArea = new DrawingArea({ style_class: STYLE_POPUP_SEPARATOR_MENU_ITEM });
-        this._separatorArea.connect(SIGNAL_REPAINT, Lang.bind(this, this._onSeparatorAreaRepaint));
+        this._separatorArea = new PopupSeparatorMenuItem();
+        this._separatorAreaHourly = new PopupSeparatorMenuItem();
+        this._separatorArea2 = new PopupSeparatorMenuItem();
+        this._separatorArea.actor.remove_style_class_name("popup-menu-item");
+        this._separatorAreaHourly.actor.remove_style_class_name("popup-menu-item");
+        this._separatorArea2.actor.remove_style_class_name("popup-menu-item");
+        this._hourlyScrollView = new ScrollView({
+            hscrollbar_policy: PolicyType.AUTOMATIC,
+            vscrollbar_policy: PolicyType.NEVER,
+            x_fill: true,
+            y_fill: true,
+            y_align: Align.MIDDLE,
+            x_align: Align.MIDDLE
+        });
+        this._hourlyScrollView.overlay_scrollbars = true;
+        var vscroll = this._hourlyScrollView.get_vscroll_bar();
+        vscroll.connect("scroll-start", function () { _this.menu.passEvents = true; });
+        vscroll.connect("scroll-stop", function () { _this.menu.passEvents = false; });
+        var hscroll = this._hourlyScrollView.get_hscroll_bar();
+        hscroll.connect("scroll-start", function () { _this.menu.passEvents = true; });
+        hscroll.connect("scroll-stop", function () { _this.menu.passEvents = false; });
+        this._separatorAreaHourly.actor.hide();
+        this._hourlyScrollView.hide();
+        this._hourlyScrollView.set_clip_to_allocation(true);
+        this._hourlyBox = new BoxLayout({ style_class: "hourly-box" });
+        this._hourlyScrollView.add_actor(this._hourlyBox);
+        this._bar = new BoxLayout({ vertical: false, style_class: STYLE_BAR });
         var mainBox = new BoxLayout({ vertical: true });
         mainBox.add_actor(this._currentWeather);
-        mainBox.add_actor(this._separatorArea);
+        mainBox.add_actor(this._separatorAreaHourly.actor);
+        mainBox.add_actor(this._hourlyScrollView);
+        mainBox.add_actor(this._separatorArea.actor);
         mainBox.add_actor(this._futureWeather);
+        mainBox.add_actor(this._separatorArea2.actor);
+        mainBox.add_actor(this._bar);
         this.menu.addActor(mainBox);
     };
     UI.prototype.rebuild = function (config) {
         this.showLoadingUi();
         this.rebuildCurrentWeatherUi(config);
+        this.rebuildHourlyWeatherUi(config);
         this.rebuildFutureWeatherUi(config);
+        this.rebuildBar(config);
+        this.hourlyNeverOpened = true;
     };
     UI.prototype.UpdateIconType = function (iconType) {
         this._currentWeatherIcon.icon_type = iconType;
         for (var i = 0; i < this._forecast.length; i++) {
             this._forecast[i].Icon.icon_type = iconType;
         }
+        for (var i = 0; i < this._hourlyForecasts.length; i++) {
+            this._hourlyForecasts[i].Icon.icon_type = iconType;
+        }
     };
     UI.prototype.DisplayErrorMessage = function (msg) {
-        this._currentWeatherSunset.text = msg;
+        this._timestamp.text = msg;
+    };
+    UI.prototype.ShowHourlyWeather = function () {
+        var _this = this;
+        if (this.hourlyNeverOpened) {
+            this.hourlyNeverOpened = false;
+            this._hourlyScrollView.show();
+            this._hourlyScrollView.hide();
+        }
+        var _a = this._hourlyScrollView.get_preferred_height(-1), minHeight = _a[0], naturalHeight = _a[1];
+        var _b = this._hourlyScrollView.get_preferred_width(-1), minWidth = _b[0], naturalWidth = _b[1];
+        this._hourlyScrollView.set_width(minWidth);
+        this._separatorAreaHourly.actor.show();
+        if (!!this._hourlyButton.child)
+            this._hourlyButton.child.icon_name = "custom-up-arrow-symbolic";
+        this._hourlyScrollView.show();
+        if (global.settings.get_boolean("desktop-effects-on-menus")) {
+            this._hourlyScrollView.height = 0;
+            addTween(this._hourlyScrollView, {
+                height: naturalHeight,
+                time: 0.25,
+                onUpdate: function () { },
+                onComplete: function () {
+                    _this._hourlyScrollView.set_height(naturalHeight);
+                }
+            });
+        }
+        this.hourlyToggled = true;
+    };
+    UI.prototype.HideHourlyWeather = function () {
+        var _this = this;
+        this._separatorAreaHourly.actor.hide();
+        var hscroll = this._hourlyScrollView.get_hscroll_bar();
+        if (!!this._hourlyButton.child)
+            this._hourlyButton.child.icon_name = "custom-down-arrow-symbolic";
+        if (global.settings.get_boolean("desktop-effects-on-menus")) {
+            addTween(this._hourlyScrollView, {
+                height: 0,
+                time: 0.25,
+                onUpdate: function () { },
+                onComplete: function () {
+                    _this._hourlyScrollView.set_height(-1);
+                    _this._hourlyScrollView.hide();
+                    hscroll.get_adjustment().set_value(0);
+                }
+            });
+        }
+        else {
+            this._hourlyScrollView.set_height(-1);
+            this._hourlyScrollView.hide();
+        }
+        this.hourlyToggled = false;
+    };
+    UI.prototype.ToggleHourlyWeather = function () {
+        if (this.hourlyToggled) {
+            this.HideHourlyWeather();
+        }
+        else {
+            this.ShowHourlyWeather();
+        }
     };
     UI.prototype.displayWeather = function (weather, config) {
         try {
@@ -789,6 +938,8 @@ var UI = (function () {
             }
             this._currentWeatherLocation.label = location;
             this._currentWeatherLocation.url = weather.location.url;
+            if (!weather.location.url)
+                this._locationButton.disable();
             var sunriseText = "";
             var sunsetText = "";
             if (weather.sunrise != null && weather.sunset != null && config._showSunrise) {
@@ -846,28 +997,37 @@ var UI = (function () {
         }
     };
     ;
+    UI.prototype.displayBar = function (weather, provider, config) {
+        this._providerCredit.label = _("Powered by") + " " + provider.prettyName;
+        this._providerCredit.url = provider.website;
+        this._timestamp.text = _("As of") + " " + AwareDateString(weather.date, this.app.currentLocale, config._show24Hours);
+        return true;
+    };
+    UI.prototype.displayHourlyForecast = function (forecasts, config) {
+        var max = Math.min(forecasts.length, this._hourlyForecasts.length);
+        for (var index = 0; index < max; index++) {
+            var hour = forecasts[index];
+            var ui = this._hourlyForecasts[index];
+            ui.Hour.text = AwareDateString(hour.date, this.app.currentLocale, config._show24Hours);
+            ui.Temperature.text = TempToUserConfig(hour.temp, config._temperatureUnit, config._tempRussianStyle) + " " + this.unitToUnicode(config._temperatureUnit);
+            ui.Icon.icon_name = (config._useCustomMenuIcons) ? hour.condition.customIcon : hour.condition.icon;
+            hour.condition.main = capitalizeFirstLetter(hour.condition.main);
+            if (config._translateCondition)
+                hour.condition.main = _(hour.condition.main);
+            ui.Summary.text = hour.condition.main;
+            if (!!hour.precipation && hour.precipation.volume > 0) {
+                ui.Precipation.text = hour.precipation.volume + " mm";
+                if (!!hour.precipation.chance)
+                    ui.Precipation.text += (", " + Math.round(hour.precipation.chance) + "%");
+            }
+        }
+        if (max <= 0)
+            this.HideHourlyToggle();
+        return true;
+    };
     UI.prototype.unitToUnicode = function (unit) {
         return unit == "fahrenheit" ? '\u2109' : '\u2103';
     };
-    UI.prototype._onSeparatorAreaRepaint = function (area) {
-        var cr = area.get_context();
-        var themeNode = area.get_theme_node();
-        var _a = area.get_surface_size(), width = _a[0], height = _a[1];
-        var margin = themeNode.get_length('-margin-horizontal');
-        var gradientHeight = themeNode.get_length('-gradient-height');
-        var startColor = themeNode.get_color('-gradient-start');
-        var endColor = themeNode.get_color('-gradient-end');
-        var gradientWidth = (width - margin * 2);
-        var gradientOffset = (height - gradientHeight) / 2;
-        var pattern = new LinearGradient(margin, gradientOffset, width - margin, gradientOffset + gradientHeight);
-        pattern.addColorStopRGBA(0, startColor.red / 255, startColor.green / 255, startColor.blue / 255, startColor.alpha / 255);
-        pattern.addColorStopRGBA(0.5, endColor.red / 255, endColor.green / 255, endColor.blue / 255, endColor.alpha / 255);
-        pattern.addColorStopRGBA(1, startColor.red / 255, startColor.green / 255, startColor.blue / 255, startColor.alpha / 255);
-        cr.setSource(pattern);
-        cr.rectangle(margin, gradientOffset, gradientWidth, gradientHeight);
-        cr.fill();
-    };
-    ;
     UI.prototype.destroyCurrentWeather = function () {
         if (this._currentWeather.get_child() != null)
             this._currentWeather.get_child().destroy();
@@ -876,9 +1036,16 @@ var UI = (function () {
         if (this._futureWeather.get_child() != null)
             this._futureWeather.get_child().destroy();
     };
+    UI.prototype.destroyBar = function () {
+        this._bar.destroy_all_children();
+    };
+    UI.prototype.destroyHourlyWeather = function () {
+        this._hourlyBox.destroy_all_children();
+    };
     UI.prototype.showLoadingUi = function () {
         this.destroyCurrentWeather();
         this.destroyFutureWeather();
+        this.destroyBar();
         this._currentWeather.set_child(new Label({
             text: _('Loading current weather ...')
         }));
@@ -897,41 +1064,44 @@ var UI = (function () {
             icon_name: APPLET_ICON,
             style_class: STYLE_ICON
         });
-        this._currentWeatherLocation = new Button({ reactive: true, label: _('Refresh'), });
-        this._currentWeatherLocation.style_class = STYLE_LOCATION_LINK;
+        this._locationButton = new WeatherButton({ reactive: true, label: _('Refresh'), });
+        this._currentWeatherLocation = this._locationButton.actor;
         this._currentWeatherLocation.connect(SIGNAL_CLICKED, Lang.bind(this, function () {
-            if (this._currentWeatherLocation.url == null) {
-                this.refreshWeather();
-            }
-            else {
-                imports.gi.Gio.app_info_launch_default_for_uri(this._currentWeatherLocation.url, global.create_app_launch_context());
-            }
+            if (this.app.encounteredError)
+                this.app.refreshWeather(true);
+            else if (this._currentWeatherLocation.url == null)
+                return;
+            else
+                this.app.OpenUrl(this._currentWeatherLocation);
         }));
         this._currentWeatherSummary = new Label({ text: _('Loading ...'), style_class: STYLE_SUMMARY });
         this._currentWeatherSunrise = new Label(textOb);
         this._currentWeatherSunset = new Label(textOb);
         var sunriseBox = new BoxLayout();
-        var sunriseTextBin = new Bin();
-        sunriseTextBin.set_child(this._currentWeatherSunrise);
-        var sunriseIcon = new Icon({
-            icon_name: "sunrise-symbolic",
-            icon_type: IconType.SYMBOLIC,
-            icon_size: 25
-        });
-        if (config._showSunrise)
-            sunriseBox.add_actor(sunriseIcon);
-        sunriseBox.add_actor(sunriseTextBin);
         var sunsetBox = new BoxLayout();
-        var sunsetTextBin = new Bin();
-        sunsetTextBin.set_child(this._currentWeatherSunset);
-        var sunsetIcon = new Icon({
-            icon_name: "sunset-symbolic",
-            icon_type: IconType.SYMBOLIC,
-            icon_size: 25
-        });
-        if (config._showSunrise)
+        if (config._showSunrise) {
+            var sunsetIcon = new Icon({
+                icon_name: "sunset-symbolic",
+                icon_type: IconType.SYMBOLIC,
+                icon_size: 25
+            });
+            var sunriseIcon = new Icon({
+                icon_name: "sunrise-symbolic",
+                icon_type: IconType.SYMBOLIC,
+                icon_size: 25
+            });
+            sunriseBox.add_actor(sunriseIcon);
             sunsetBox.add_actor(sunsetIcon);
-        sunsetBox.add_actor(sunsetTextBin);
+        }
+        var textOptions = {
+            x_fill: false,
+            x_align: Align.START,
+            y_align: Align.MIDDLE,
+            y_fill: false,
+            expand: true
+        };
+        sunriseBox.add(this._currentWeatherSunrise, textOptions);
+        sunsetBox.add(this._currentWeatherSunset, textOptions);
         var ab_spacerlabel = new Label({ text: BLANK });
         var bb_spacerlabel = new Label({ text: BLANK });
         var sunBox = new BoxLayout({ style_class: STYLE_ASTRONOMY });
@@ -976,42 +1146,148 @@ var UI = (function () {
     };
     ;
     UI.prototype.rebuildFutureWeatherUi = function (config) {
+        var _a;
         this.destroyFutureWeather();
         this._forecast = [];
-        this._forecastBox = new BoxLayout({
-            vertical: config._verticalOrientation,
+        this._forecastBox = new GridLayout({
+            orientation: config._verticalOrientation
+        });
+        this._forecastBox.set_column_homogeneous(true);
+        var table = new Widget({
+            layout_manager: this._forecastBox,
             style_class: STYLE_FORECAST_CONTAINER
         });
-        this._futureWeather.set_child(this._forecastBox);
-        for (var i = 0; i < config._forecastDays; i++) {
-            var forecastWeather = {
-                Icon: new Icon,
-                Day: new Label,
-                Summary: new Label,
-                Temperature: new Label,
-            };
+        this._futureWeather.set_child(table);
+        var maxDays = this.app.GetMaxForecastDays();
+        var maxRow = config._forecastRows;
+        var maxCol = config._forecastColumns;
+        if (config._verticalOrientation) {
+            _a = [maxCol, maxRow], maxRow = _a[0], maxCol = _a[1];
+        }
+        var curRow = 0;
+        var curCol = 0;
+        for (var i = 0; i < maxDays; i++) {
+            var forecastWeather = {};
+            if (curCol >= maxCol) {
+                curRow++;
+                curCol = 0;
+            }
+            if (curRow >= maxRow)
+                break;
             forecastWeather.Icon = new Icon({
                 icon_type: config.IconType(),
                 icon_size: 48,
                 icon_name: APPLET_ICON,
                 style_class: STYLE_FORECAST_ICON
             });
-            forecastWeather.Day = new Label({ style_class: STYLE_FORECAST_DAY });
-            forecastWeather.Summary = new Label({ style_class: STYLE_FORECAST_SUMMARY });
-            forecastWeather.Temperature = new Label({ style_class: STYLE_FORECAST_TEMPERATURE });
-            var dataBin = new Bin();
-            var dataBox = new BoxLayout({ vertical: true, style_class: STYLE_FORECAST_DATABOX });
-            dataBox.add_actor(forecastWeather.Day);
-            dataBox.add_actor(forecastWeather.Summary);
-            dataBox.add_actor(forecastWeather.Temperature);
-            dataBin.set_child(dataBox);
-            var forecastBox = new BoxLayout({
+            forecastWeather.Day = new Label({
+                style_class: STYLE_FORECAST_DAY,
+                reactive: true
+            });
+            forecastWeather.Summary = new Label({
+                style_class: STYLE_FORECAST_SUMMARY,
+                reactive: true
+            });
+            forecastWeather.Temperature = new Label({
+                style_class: STYLE_FORECAST_TEMPERATURE
+            });
+            var by = new BoxLayout({
+                vertical: true,
+                style_class: STYLE_FORECAST_DATABOX
+            });
+            by.add_actor(forecastWeather.Day);
+            by.add_actor(forecastWeather.Summary);
+            by.add_actor(forecastWeather.Temperature);
+            var bb = new BoxLayout({
                 style_class: STYLE_FORECAST_BOX
             });
-            forecastBox.add_actor(forecastWeather.Icon);
-            forecastBox.add_actor(dataBin);
+            bb.add_actor(forecastWeather.Icon);
+            bb.add_actor(by);
             this._forecast[i] = forecastWeather;
-            this._forecastBox.add_actor(forecastBox);
+            if (!config._verticalOrientation) {
+                this._forecastBox.attach(bb, curCol, curRow, 1, 1);
+            }
+            else {
+                this._forecastBox.attach(bb, curRow, curCol, 1, 1);
+            }
+            curCol++;
+        }
+    };
+    UI.prototype.rebuildBar = function (config) {
+        this.destroyBar();
+        this._timestamp = new Label({ text: "Placeholder" });
+        this._bar.add(this._timestamp, {
+            x_fill: false,
+            x_align: Align.START,
+            y_align: Align.MIDDLE,
+            y_fill: false,
+            expand: true
+        });
+        this._hourlyButton = new WeatherButton({
+            reactive: true,
+            can_focus: true,
+            child: new Icon({
+                icon_type: IconType.SYMBOLIC,
+                icon_size: 12,
+                icon_name: "custom-down-arrow-symbolic"
+            }),
+        }).actor;
+        this._hourlyButton.connect(SIGNAL_CLICKED, Lang.bind(this, this.ToggleHourlyWeather));
+        this._bar.add(this._hourlyButton, {
+            x_fill: false,
+            x_align: Align.MIDDLE,
+            y_align: Align.MIDDLE,
+            y_fill: false,
+            expand: true
+        });
+        if (this.app.GetMaxHourlyForecasts() <= 0) {
+            this.HideHourlyToggle();
+        }
+        this._providerCredit = new WeatherButton({ label: _(ELLIPSIS), reactive: true }).actor;
+        this._providerCredit.connect(SIGNAL_CLICKED, Lang.bind(this, this.app.OpenUrl));
+        this._bar.add(this._providerCredit, {
+            x_fill: false,
+            x_align: Align.END,
+            y_align: Align.MIDDLE,
+            y_fill: false,
+            expand: true
+        });
+    };
+    UI.prototype.HideHourlyToggle = function () {
+        this._hourlyButton.child = null;
+    };
+    UI.prototype.rebuildHourlyWeatherUi = function (config) {
+        this.destroyHourlyWeather();
+        var hours = this.app.GetMaxHourlyForecasts();
+        this._hourlyForecasts = [];
+        for (var index = 0; index < hours; index++) {
+            var box = new BoxLayout({ vertical: true });
+            this._hourlyForecasts.push({
+                Hour: new Label({ text: "Hour", style_class: "hourly-time" }),
+                Icon: new Icon({
+                    icon_type: config.IconType(),
+                    icon_size: 24,
+                    icon_name: APPLET_ICON,
+                    style_class: "hourly-icon"
+                }),
+                Precipation: new Label({ text: " ", style_class: "hourly-data" }),
+                Summary: new Label({ text: _(ELLIPSIS), style_class: "hourly-data" }),
+                Temperature: new Label({ text: _(ELLIPSIS), style_class: "hourly-data" })
+            });
+            this._hourlyForecasts[index].Summary.clutter_text.set_line_wrap(true);
+            this._hourlyForecasts[index].Summary.set_width(85);
+            box.add_child(this._hourlyForecasts[index].Hour);
+            box.add_child(this._hourlyForecasts[index].Icon);
+            box.add_child(this._hourlyForecasts[index].Summary);
+            box.add_child(this._hourlyForecasts[index].Temperature);
+            box.add_child(this._hourlyForecasts[index].Precipation);
+            this._hourlyBox.add(box, {
+                x_fill: true,
+                x_align: Align.MIDDLE,
+                y_align: Align.MIDDLE,
+                y_fill: true,
+                expand: true
+            });
         }
     };
     return UI;
@@ -1021,27 +1297,30 @@ var Config = (function () {
         this.WEATHER_LOCATION = "location";
         this.WEATHER_USE_SYMBOLIC_ICONS_KEY = 'useSymbolicIcons';
         this.KEYS = {
-            WEATHER_DATA_SERVICE: "dataService",
-            WEATHER_API_KEY: "apiKey",
-            WEATHER_TEMPERATURE_UNIT_KEY: "temperatureUnit",
-            WEATHER_TEMPERATURE_HIGH_FIRST_KEY: "temperatureHighFirst",
-            WEATHER_WIND_SPEED_UNIT_KEY: "windSpeedUnit",
-            WEATHER_CITY_KEY: "locationLabelOverride",
-            WEATHER_TRANSLATE_CONDITION_KEY: "translateCondition",
-            WEATHER_VERTICAL_ORIENTATION_KEY: "verticalOrientation",
-            WEATHER_SHOW_TEXT_IN_PANEL_KEY: "showTextInPanel",
-            WEATHER_TEMP_TEXT_OVERRIDE: "tempTextOverride",
-            WEATHER_SHOW_COMMENT_IN_PANEL_KEY: "showCommentInPanel",
-            WEATHER_SHOW_SUNRISE_KEY: "showSunrise",
-            WEATHER_SHOW_24HOURS_KEY: "show24Hours",
-            WEATHER_FORECAST_DAYS: "forecastDays",
-            WEATHER_REFRESH_INTERVAL: "refreshInterval",
-            WEATHER_PRESSURE_UNIT_KEY: "pressureUnit",
-            WEATHER_SHORT_CONDITIONS_KEY: "shortConditions",
-            WEATHER_MANUAL_LOCATION: "manualLocation",
-            WEATHER_USE_CUSTOM_APPLETICONS_KEY: 'useCustomAppletIcons',
-            WEATHER_USE_CUSTOM_MENUICONS_KEY: "useCustomMenuIcons",
-            WEATHER_RUSSIAN_STYLE: "tempRussianStyle"
+            DATA_SERVICE: "dataService",
+            API_KEY: "apiKey",
+            TEMPERATURE_UNIT_KEY: "temperatureUnit",
+            TEMPERATURE_HIGH_FIRST: "temperatureHighFirst",
+            WIND_SPEED_UNIT: "windSpeedUnit",
+            CITY: "locationLabelOverride",
+            TRANSLATE_CONDITION: "translateCondition",
+            VERTICAL_ORIENTATION: "verticalOrientation",
+            SHOW_TEXT_IN_PANEL: "showTextInPanel",
+            TEMP_TEXT_OVERRIDE: "tempTextOverride",
+            SHOW_COMMENT_IN_PANEL: "showCommentInPanel",
+            SHOW_SUNRISE: "showSunrise",
+            SHOW_24HOURS: "show24Hours",
+            FORECAST_DAYS: "forecastDays",
+            FORECAST_HOURS: "forecastHours",
+            FORECAST_COLS: "forecastColumns",
+            FORECAST_ROWS: "forecastRows",
+            REFRESH_INTERVAL: "refreshInterval",
+            PRESSURE_UNIT: "pressureUnit",
+            SHORT_CONDITIONS: "shortConditions",
+            MANUAL_LOCATION: "manualLocation",
+            USE_CUSTOM_APPLETICONS: 'useCustomAppletIcons',
+            USE_CUSTOM_MENUICONS: "useCustomMenuIcons",
+            RUSSIAN_STYLE: "tempRussianStyle",
         };
         this.app = app;
         this.settings = new AppletSettings(this, UUID, instanceID);
@@ -1056,11 +1335,12 @@ var Config = (function () {
         this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, this.WEATHER_LOCATION, ("_" + this.WEATHER_LOCATION), Lang.bind(this.app, this.app.refreshAndRebuild), null);
         this.settings.bindProperty(BindingDirection.IN, "keybinding", "keybinding", Lang.bind(this.app, this.app._onKeySettingsUpdated), null);
         keybindingManager.addHotKey(UUID, this.keybinding, Lang.bind(this.app, this.app.on_applet_clicked));
-        this.settings.connect(SIGNAL_CHANGED + this.WEATHER_USE_SYMBOLIC_ICONS_KEY, Lang.bind(this, function () {
-            this.app.ui.UpdateIconType(this.IconType());
-            this.app.refreshWeather();
-            this.app.log.Debug("Symbolic icon setting changed");
-        }));
+        this.settings.connect(SIGNAL_CHANGED + this.WEATHER_USE_SYMBOLIC_ICONS_KEY, Lang.bind(this, this.IconTypeChanged));
+    };
+    Config.prototype.IconTypeChanged = function () {
+        this.app.ui.UpdateIconType(this.IconType());
+        this.app.refreshWeather(false);
+        this.app.log.Debug("Symbolic icon setting changed");
     };
     Config.prototype.IconType = function () {
         return this.settings.getValue(this.WEATHER_USE_SYMBOLIC_ICONS_KEY) ?
@@ -1196,6 +1476,33 @@ var WeatherLoop = (function () {
     };
     return WeatherLoop;
 }());
+var WeatherButton = (function () {
+    function WeatherButton(options) {
+        this.signals = new SignalManager();
+        this.disabled = false;
+        this.actor = new Button(options);
+        this.actor.add_style_class_name("popup-menu-item");
+        this.actor.style = 'padding-top: 0px;padding-bottom: 0px; padding-right: 2px; padding-left: 2px; border-radius: 2px;';
+        this.signals.connect(this.actor, 'enter-event', this.handleEnter, this);
+        this.signals.connect(this.actor, 'leave-event', this.handleLeave, this);
+    }
+    WeatherButton.prototype.handleEnter = function (actor) {
+        if (!this.disabled)
+            this.actor.add_style_pseudo_class('active');
+    };
+    WeatherButton.prototype.handleLeave = function () {
+        this.actor.remove_style_pseudo_class('active');
+    };
+    WeatherButton.prototype.disable = function () {
+        this.disabled = true;
+        this.actor.reactive = false;
+    };
+    WeatherButton.prototype.enable = function () {
+        this.disabled = false;
+        this.actor.reactive = true;
+    };
+    return WeatherButton;
+}());
 var SIGNAL_CHANGED = 'changed::';
 var SIGNAL_CLICKED = 'clicked';
 var SIGNAL_REPAINT = 'repaint';
@@ -1221,6 +1528,7 @@ var STYLE_POPUP_SEPARATOR_MENU_ITEM = 'popup-separator-menu-item';
 var STYLE_CURRENT = 'current';
 var STYLE_FORECAST = 'forecast';
 var STYLE_WEATHER_MENU = 'weather-menu';
+var STYLE_BAR = 'bottombar';
 var BLANK = '   ';
 var ELLIPSIS = '...';
 var EN_DASH = '\u2013';

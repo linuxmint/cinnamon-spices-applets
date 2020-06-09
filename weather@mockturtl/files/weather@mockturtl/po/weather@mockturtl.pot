@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-26 10:36+0100\n"
+"POT-Creation-Date: 2020-06-06 19:29+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,11 +17,11 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: applet.js:337 3.0/applet.js:191 3.8/applet.js:140
+#: applet.js:337 3.0/applet.js:199 3.8/applet.js:148
 msgid "..."
 msgstr ""
 
-#: applet.js:338 3.0/applet.js:192 3.8/applet.js:141
+#: applet.js:338 3.0/applet.js:200 3.8/applet.js:149
 msgid "Click to open"
 msgstr ""
 
@@ -45,36 +45,36 @@ msgstr ""
 msgid "Sunset"
 msgstr ""
 
-#: applet.js:708 3.0/applet.js:883 3.8/applet.js:762
+#: applet.js:708 3.0/applet.js:1047 3.8/applet.js:921
 msgid "Loading current weather ..."
 msgstr ""
 
-#: applet.js:709 3.0/applet.js:886 3.8/applet.js:765
+#: applet.js:709 3.0/applet.js:1050 3.8/applet.js:924
 msgid "Loading future weather ..."
 msgstr ""
 
-#: applet.js:731 3.0/applet.js:910 3.8/applet.js:789
+#: applet.js:731 3.0/applet.js:1074 3.8/applet.js:948
 msgid "Loading ..."
 msgstr ""
 
-#: applet.js:737 3.0/applet.js:195 3.0/applet.js:900 3.8/applet.js:144
-#: 3.8/applet.js:779
+#: applet.js:737 3.0/applet.js:203 3.0/applet.js:1064 3.8/applet.js:152
+#: 3.8/applet.js:938
 msgid "Refresh"
 msgstr ""
 
-#: applet.js:802 3.0/applet.js:956 3.8/applet.js:835
+#: applet.js:802 3.0/applet.js:1123 3.8/applet.js:997
 msgid "Temperature:"
 msgstr ""
 
-#: applet.js:804 3.0/applet.js:957 3.8/applet.js:836
+#: applet.js:804 3.0/applet.js:1124 3.8/applet.js:998
 msgid "Humidity:"
 msgstr ""
 
-#: applet.js:806 3.0/applet.js:958 3.8/applet.js:837
+#: applet.js:806 3.0/applet.js:1125 3.8/applet.js:999
 msgid "Pressure:"
 msgstr ""
 
-#: applet.js:808 3.0/applet.js:959 3.8/applet.js:838
+#: applet.js:808 3.0/applet.js:1126 3.8/applet.js:1000
 msgid "Wind:"
 msgstr ""
 
@@ -106,35 +106,35 @@ msgstr ""
 msgid "Saturday"
 msgstr ""
 
-#: applet.js:1030 3.0/utils.js:309 3.8/utils.js:262
+#: applet.js:1030 3.0/utils.js:328 3.8/utils.js:281
 msgid "N"
 msgstr ""
 
-#: applet.js:1030 3.0/utils.js:309 3.8/utils.js:262
+#: applet.js:1030 3.0/utils.js:328 3.8/utils.js:281
 msgid "NE"
 msgstr ""
 
-#: applet.js:1030 3.0/utils.js:309 3.8/utils.js:262
+#: applet.js:1030 3.0/utils.js:328 3.8/utils.js:281
 msgid "E"
 msgstr ""
 
-#: applet.js:1030 3.0/utils.js:309 3.8/utils.js:262
+#: applet.js:1030 3.0/utils.js:328 3.8/utils.js:281
 msgid "SE"
 msgstr ""
 
-#: applet.js:1030 3.0/utils.js:309 3.8/utils.js:262
+#: applet.js:1030 3.0/utils.js:328 3.8/utils.js:281
 msgid "S"
 msgstr ""
 
-#: applet.js:1030 3.0/utils.js:309 3.8/utils.js:262
+#: applet.js:1030 3.0/utils.js:328 3.8/utils.js:281
 msgid "SW"
 msgstr ""
 
-#: applet.js:1030 3.0/utils.js:309 3.8/utils.js:262
+#: applet.js:1030 3.0/utils.js:328 3.8/utils.js:281
 msgid "W"
 msgstr ""
 
-#: applet.js:1030 3.0/utils.js:309 3.8/utils.js:262
+#: applet.js:1030 3.0/utils.js:328 3.8/utils.js:281
 msgid "NW"
 msgstr ""
 
@@ -142,11 +142,11 @@ msgstr ""
 msgid "Service Unavailable"
 msgstr ""
 
-#: applet.js:1084 3.0/applet.js:149 3.0/applet.js:151 3.0/applet.js:153
-#: 3.0/applet.js:156 3.0/applet.js:159 3.0/applet.js:160 3.0/applet.js:161
-#: 3.0/applet.js:162 3.8/applet.js:99 3.8/applet.js:101 3.8/applet.js:103
-#: 3.8/applet.js:106 3.8/applet.js:109 3.8/applet.js:110 3.8/applet.js:111
-#: 3.8/applet.js:112
+#: applet.js:1084 3.0/applet.js:156 3.0/applet.js:158 3.0/applet.js:160
+#: 3.0/applet.js:163 3.0/applet.js:166 3.0/applet.js:167 3.0/applet.js:168
+#: 3.0/applet.js:169 3.8/applet.js:106 3.8/applet.js:108 3.8/applet.js:110
+#: 3.8/applet.js:113 3.8/applet.js:116 3.8/applet.js:117 3.8/applet.js:118
+#: 3.8/applet.js:119
 msgid "Service Error"
 msgstr ""
 
@@ -162,414 +162,414 @@ msgstr ""
 msgid "Key Temp. Blocked"
 msgstr ""
 
-#: 3.0/utils.js:203 3.8/utils.js:156
+#: 3.0/utils.js:222 3.8/utils.js:175
 msgid "Calm"
 msgstr ""
 
-#: 3.0/utils.js:206 3.8/utils.js:159
+#: 3.0/utils.js:225 3.8/utils.js:178
 msgid "Light air"
 msgstr ""
 
-#: 3.0/utils.js:209 3.8/utils.js:162
+#: 3.0/utils.js:228 3.8/utils.js:181
 msgid "Light breeze"
 msgstr ""
 
-#: 3.0/utils.js:212 3.8/utils.js:165
+#: 3.0/utils.js:231 3.8/utils.js:184
 msgid "Gentle breeze"
 msgstr ""
 
-#: 3.0/utils.js:215 3.8/utils.js:168
+#: 3.0/utils.js:234 3.8/utils.js:187
 msgid "Moderate breeze"
 msgstr ""
 
-#: 3.0/utils.js:218 3.8/utils.js:171
+#: 3.0/utils.js:237 3.8/utils.js:190
 msgid "Fresh breeze"
 msgstr ""
 
-#: 3.0/utils.js:221 3.8/utils.js:174
+#: 3.0/utils.js:240 3.8/utils.js:193
 msgid "Strong breeze"
 msgstr ""
 
-#: 3.0/utils.js:224 3.8/utils.js:177
+#: 3.0/utils.js:243 3.8/utils.js:196
 msgid "Near gale"
 msgstr ""
 
-#: 3.0/utils.js:227 3.8/utils.js:180
+#: 3.0/utils.js:246 3.8/utils.js:199
 msgid "Gale"
 msgstr ""
 
-#: 3.0/utils.js:230 3.8/utils.js:183
+#: 3.0/utils.js:249 3.8/utils.js:202
 msgid "Strong gale"
 msgstr ""
 
-#: 3.0/utils.js:233 3.8/utils.js:186
+#: 3.0/utils.js:252 3.8/utils.js:205
 msgid "Storm"
 msgstr ""
 
-#: 3.0/utils.js:236 3.8/utils.js:189
+#: 3.0/utils.js:255 3.8/utils.js:208
 msgid "Violent storm"
 msgstr ""
 
-#: 3.0/utils.js:238 3.0/yahoo.js:451 3.8/utils.js:191 3.8/yahoo.js:402
+#: 3.0/utils.js:257 3.0/yahoo.js:457 3.8/utils.js:210 3.8/yahoo.js:408
 msgid "Hurricane"
 msgstr ""
 
-#: 3.0/yahoo.js:79 3.8/yahoo.js:34
+#: 3.0/yahoo.js:85 3.8/yahoo.js:40
 msgid ""
 "Unknown Error happened while calling Yahoo bridge,\n"
 " see Looking Glass log for errors"
 msgstr ""
 
-#: 3.0/yahoo.js:92 3.8/yahoo.js:47
+#: 3.0/yahoo.js:98 3.8/yahoo.js:53
 msgid ""
 "Yahoo bridge responded in bad format,\n"
 " see Looking Glass log for errors"
 msgstr ""
 
-#: 3.0/yahoo.js:142 3.0/darkSky.js:143 3.0/weatherbit.js:157 3.8/yahoo.js:94
-#: 3.8/darkSky.js:95 3.8/weatherbit.js:101
+#: 3.0/yahoo.js:148 3.0/darkSky.js:151 3.0/weatherbit.js:184 3.8/yahoo.js:100
+#: 3.8/darkSky.js:103 3.8/weatherbit.js:117
 msgid "Feels Like"
 msgstr ""
 
-#: 3.0/yahoo.js:167 3.0/darkSky.js:169 3.8/yahoo.js:119 3.8/darkSky.js:121
+#: 3.0/yahoo.js:173 3.0/darkSky.js:197 3.8/yahoo.js:125 3.8/darkSky.js:149
 msgid "Failed to Process Weather Info"
 msgstr ""
 
-#: 3.0/yahoo.js:449 3.0/openWeatherMap.js:394 3.8/yahoo.js:400
-#: 3.8/openWeatherMap.js:348
+#: 3.0/yahoo.js:455 3.0/openWeatherMap.js:428 3.8/yahoo.js:406
+#: 3.8/openWeatherMap.js:382
 msgid "Tornado"
 msgstr ""
 
-#: 3.0/yahoo.js:450 3.8/yahoo.js:401
+#: 3.0/yahoo.js:456 3.8/yahoo.js:407
 msgid "Tropical Storm"
 msgstr ""
 
-#: 3.0/yahoo.js:452 3.8/yahoo.js:403
+#: 3.0/yahoo.js:458 3.8/yahoo.js:409
 msgid "Severe Thunderstorms"
 msgstr ""
 
-#: 3.0/yahoo.js:453 3.8/yahoo.js:404
+#: 3.0/yahoo.js:459 3.8/yahoo.js:410
 msgid "Thunderstorms"
 msgstr ""
 
-#: 3.0/yahoo.js:454 3.8/yahoo.js:405
+#: 3.0/yahoo.js:460 3.8/yahoo.js:411
 msgid "Mixed Rain and Snow"
 msgstr ""
 
-#: 3.0/yahoo.js:455 3.8/yahoo.js:406
+#: 3.0/yahoo.js:461 3.8/yahoo.js:412
 msgid "Mixed Rain and Sleet"
 msgstr ""
 
-#: 3.0/yahoo.js:456 3.8/yahoo.js:407
+#: 3.0/yahoo.js:462 3.8/yahoo.js:413
 msgid "Mixed Snow and Sleet"
 msgstr ""
 
-#: 3.0/yahoo.js:457 3.8/yahoo.js:408
+#: 3.0/yahoo.js:463 3.8/yahoo.js:414
 msgid "Freezing Drizzle"
 msgstr ""
 
-#: 3.0/yahoo.js:458 3.0/met_norway.js:327 3.0/met_norway.js:328
-#: 3.0/met_norway.js:334 3.0/met_norway.js:335 3.0/met_norway.js:341
-#: 3.0/openWeatherMap.js:357 3.8/yahoo.js:409 3.8/met_norway.js:274
-#: 3.8/met_norway.js:275 3.8/met_norway.js:281 3.8/met_norway.js:282
-#: 3.8/met_norway.js:288 3.8/openWeatherMap.js:311
+#: 3.0/yahoo.js:464 3.0/met_norway.js:353 3.0/met_norway.js:354
+#: 3.0/met_norway.js:360 3.0/met_norway.js:361 3.0/met_norway.js:367
+#: 3.0/openWeatherMap.js:391 3.8/yahoo.js:415 3.8/met_norway.js:300
+#: 3.8/met_norway.js:301 3.8/met_norway.js:307 3.8/met_norway.js:308
+#: 3.8/met_norway.js:314 3.8/openWeatherMap.js:345
 msgid "Drizzle"
 msgstr ""
 
-#: 3.0/yahoo.js:459 3.8/yahoo.js:410
+#: 3.0/yahoo.js:465 3.8/yahoo.js:416
 msgid "Freezing Rain"
 msgstr ""
 
-#: 3.0/yahoo.js:460 3.8/yahoo.js:411
+#: 3.0/yahoo.js:466 3.8/yahoo.js:417
 msgid "Showers"
 msgstr ""
 
-#: 3.0/yahoo.js:461 3.0/met_norway.js:516 3.0/met_norway.js:517
-#: 3.0/met_norway.js:530 3.0/met_norway.js:537 3.8/yahoo.js:412
-#: 3.8/met_norway.js:463 3.8/met_norway.js:464 3.8/met_norway.js:477
-#: 3.8/met_norway.js:484
+#: 3.0/yahoo.js:467 3.0/met_norway.js:542 3.0/met_norway.js:543
+#: 3.0/met_norway.js:556 3.0/met_norway.js:563 3.8/yahoo.js:418
+#: 3.8/met_norway.js:489 3.8/met_norway.js:490 3.8/met_norway.js:503
+#: 3.8/met_norway.js:510
 msgid "Rain"
 msgstr ""
 
-#: 3.0/yahoo.js:462 3.8/yahoo.js:413
+#: 3.0/yahoo.js:468 3.8/yahoo.js:419
 msgid "Snow Flurries"
 msgstr ""
 
-#: 3.0/yahoo.js:463 3.8/yahoo.js:414
+#: 3.0/yahoo.js:469 3.8/yahoo.js:420
 msgid "Light Snow Showers"
 msgstr ""
 
-#: 3.0/yahoo.js:464 3.8/yahoo.js:415
+#: 3.0/yahoo.js:470 3.8/yahoo.js:421
 msgid "Blowing Snow"
 msgstr ""
 
-#: 3.0/yahoo.js:465 3.0/met_norway.js:572 3.0/met_norway.js:593
-#: 3.0/openWeatherMap.js:376 3.8/yahoo.js:416 3.8/met_norway.js:519
-#: 3.8/met_norway.js:540 3.8/openWeatherMap.js:330
+#: 3.0/yahoo.js:471 3.0/met_norway.js:598 3.0/met_norway.js:619
+#: 3.0/openWeatherMap.js:410 3.8/yahoo.js:422 3.8/met_norway.js:545
+#: 3.8/met_norway.js:566 3.8/openWeatherMap.js:364
 msgid "Snow"
 msgstr ""
 
-#: 3.0/yahoo.js:466 3.8/yahoo.js:417
+#: 3.0/yahoo.js:472 3.8/yahoo.js:423
 msgid "Hail"
 msgstr ""
 
-#: 3.0/yahoo.js:467 3.0/met_norway.js:544 3.0/met_norway.js:545
-#: 3.0/met_norway.js:551 3.0/met_norway.js:558 3.0/met_norway.js:565
-#: 3.0/openWeatherMap.js:378 3.8/yahoo.js:418 3.8/met_norway.js:491
-#: 3.8/met_norway.js:492 3.8/met_norway.js:498 3.8/met_norway.js:505
-#: 3.8/met_norway.js:512 3.8/openWeatherMap.js:332
+#: 3.0/yahoo.js:473 3.0/met_norway.js:570 3.0/met_norway.js:571
+#: 3.0/met_norway.js:577 3.0/met_norway.js:584 3.0/met_norway.js:591
+#: 3.0/openWeatherMap.js:412 3.8/yahoo.js:424 3.8/met_norway.js:517
+#: 3.8/met_norway.js:518 3.8/met_norway.js:524 3.8/met_norway.js:531
+#: 3.8/met_norway.js:538 3.8/openWeatherMap.js:366
 msgid "Sleet"
 msgstr ""
 
-#: 3.0/yahoo.js:468 3.0/openWeatherMap.js:391 3.8/yahoo.js:419
-#: 3.8/openWeatherMap.js:345
+#: 3.0/yahoo.js:474 3.0/openWeatherMap.js:425 3.8/yahoo.js:425
+#: 3.8/openWeatherMap.js:379
 msgid "Dust"
 msgstr ""
 
-#: 3.0/yahoo.js:469 3.8/yahoo.js:420
+#: 3.0/yahoo.js:475 3.8/yahoo.js:426
 msgid "Foggy"
 msgstr ""
 
-#: 3.0/yahoo.js:470 3.0/openWeatherMap.js:387 3.8/yahoo.js:421
-#: 3.8/openWeatherMap.js:341
+#: 3.0/yahoo.js:476 3.0/openWeatherMap.js:421 3.8/yahoo.js:427
+#: 3.8/openWeatherMap.js:375
 msgid "Haze"
 msgstr ""
 
-#: 3.0/yahoo.js:471 3.8/yahoo.js:422
+#: 3.0/yahoo.js:477 3.8/yahoo.js:428
 msgid "Smoky"
 msgstr ""
 
-#: 3.0/yahoo.js:472 3.8/yahoo.js:423
+#: 3.0/yahoo.js:478 3.8/yahoo.js:429
 msgid "Blustery"
 msgstr ""
 
-#: 3.0/yahoo.js:473 3.8/yahoo.js:424
+#: 3.0/yahoo.js:479 3.8/yahoo.js:430
 msgid "Windy"
 msgstr ""
 
-#: 3.0/yahoo.js:474 3.8/yahoo.js:425
+#: 3.0/yahoo.js:480 3.8/yahoo.js:431
 msgid "Cold"
 msgstr ""
 
-#: 3.0/yahoo.js:475 3.0/met_norway.js:320 3.0/met_norway.js:321
-#: 3.8/yahoo.js:426 3.8/met_norway.js:267 3.8/met_norway.js:268
+#: 3.0/yahoo.js:481 3.0/met_norway.js:346 3.0/met_norway.js:347
+#: 3.8/yahoo.js:432 3.8/met_norway.js:293 3.8/met_norway.js:294
 msgid "Cloudy"
 msgstr ""
 
-#: 3.0/yahoo.js:476 3.8/yahoo.js:427
+#: 3.0/yahoo.js:482 3.8/yahoo.js:433
 msgid "Mostly Cloudy"
 msgstr ""
 
-#: 3.0/yahoo.js:477 3.0/met_norway.js:509 3.0/met_norway.js:510
-#: 3.8/yahoo.js:428 3.8/met_norway.js:456 3.8/met_norway.js:457
+#: 3.0/yahoo.js:483 3.0/met_norway.js:535 3.0/met_norway.js:536
+#: 3.8/yahoo.js:434 3.8/met_norway.js:482 3.8/met_norway.js:483
 msgid "Partly Cloudy"
 msgstr ""
 
-#: 3.0/yahoo.js:478 3.0/met_norway.js:600 3.0/met_norway.js:601
-#: 3.0/openWeatherMap.js:395 3.8/yahoo.js:429 3.8/met_norway.js:547
-#: 3.8/met_norway.js:548 3.8/openWeatherMap.js:349
+#: 3.0/yahoo.js:484 3.0/met_norway.js:626 3.0/met_norway.js:627
+#: 3.0/openWeatherMap.js:429 3.8/yahoo.js:435 3.8/met_norway.js:573
+#: 3.8/met_norway.js:574 3.8/openWeatherMap.js:383
 msgid "Clear"
 msgstr ""
 
-#: 3.0/yahoo.js:479 3.8/yahoo.js:430
+#: 3.0/yahoo.js:485 3.8/yahoo.js:436
 msgid "Sunny"
 msgstr ""
 
-#: 3.0/yahoo.js:480 3.8/yahoo.js:431
+#: 3.0/yahoo.js:486 3.8/yahoo.js:437
 msgid "Fair"
 msgstr ""
 
-#: 3.0/yahoo.js:481 3.8/yahoo.js:432
+#: 3.0/yahoo.js:487 3.8/yahoo.js:438
 msgid "Mixed Rain and Hail"
 msgstr ""
 
-#: 3.0/yahoo.js:482 3.8/yahoo.js:433
+#: 3.0/yahoo.js:488 3.8/yahoo.js:439
 msgid "Hot"
 msgstr ""
 
-#: 3.0/yahoo.js:483 3.8/yahoo.js:434
+#: 3.0/yahoo.js:489 3.8/yahoo.js:440
 msgid "Isolated Thunderstorms"
 msgstr ""
 
-#: 3.0/yahoo.js:484 3.8/yahoo.js:435
+#: 3.0/yahoo.js:490 3.8/yahoo.js:441
 msgid "Scattered Thunderstorms"
 msgstr ""
 
-#: 3.0/yahoo.js:485 3.8/yahoo.js:436
+#: 3.0/yahoo.js:491 3.8/yahoo.js:442
 msgid "Scattered Showers"
 msgstr ""
 
-#: 3.0/yahoo.js:486 3.8/yahoo.js:437
+#: 3.0/yahoo.js:492 3.8/yahoo.js:443
 msgid "Heavy Rain"
 msgstr ""
 
-#: 3.0/yahoo.js:487 3.8/yahoo.js:438
+#: 3.0/yahoo.js:493 3.8/yahoo.js:444
 msgid "Scattered Snow Showers"
 msgstr ""
 
-#: 3.0/yahoo.js:488 3.0/met_norway.js:390 3.0/met_norway.js:391
-#: 3.0/met_norway.js:397 3.0/met_norway.js:404 3.0/met_norway.js:411
-#: 3.0/met_norway.js:412 3.8/yahoo.js:439 3.8/met_norway.js:337
-#: 3.8/met_norway.js:338 3.8/met_norway.js:344 3.8/met_norway.js:351
-#: 3.8/met_norway.js:358 3.8/met_norway.js:359
+#: 3.0/yahoo.js:494 3.0/met_norway.js:416 3.0/met_norway.js:417
+#: 3.0/met_norway.js:423 3.0/met_norway.js:430 3.0/met_norway.js:437
+#: 3.0/met_norway.js:438 3.8/yahoo.js:445 3.8/met_norway.js:363
+#: 3.8/met_norway.js:364 3.8/met_norway.js:370 3.8/met_norway.js:377
+#: 3.8/met_norway.js:384 3.8/met_norway.js:385
 msgid "Heavy Snow"
 msgstr ""
 
-#: 3.0/yahoo.js:489 3.8/yahoo.js:440
+#: 3.0/yahoo.js:495 3.8/yahoo.js:446
 msgid "Blizzard"
 msgstr ""
 
-#: 3.0/yahoo.js:490 3.8/yahoo.js:441
+#: 3.0/yahoo.js:496 3.8/yahoo.js:447
 msgid "Not Available"
 msgstr ""
 
-#: 3.0/yahoo.js:491 3.8/yahoo.js:442
+#: 3.0/yahoo.js:497 3.8/yahoo.js:448
 msgid "Scattered Thundershowers"
 msgstr ""
 
-#: 3.0/met_norway.js:154 3.0/openWeatherMap.js:128 3.8/met_norway.js:101
-#: 3.8/openWeatherMap.js:83
+#: 3.0/met_norway.js:160 3.0/openWeatherMap.js:134 3.8/met_norway.js:107
+#: 3.8/openWeatherMap.js:89
 msgid "Cloudiness"
 msgstr ""
 
-#: 3.0/met_norway.js:342 3.8/met_norway.js:289
+#: 3.0/met_norway.js:368 3.8/met_norway.js:315
 msgid "Drizzle with Thunderstorms"
 msgstr ""
 
-#: 3.0/met_norway.js:348 3.8/met_norway.js:295
+#: 3.0/met_norway.js:374 3.8/met_norway.js:321
 msgid "Mostly Drizzle"
 msgstr ""
 
-#: 3.0/met_norway.js:349 3.8/met_norway.js:296
+#: 3.0/met_norway.js:375 3.8/met_norway.js:322
 msgid "Mostly Drizzle with Thunderstorms"
 msgstr ""
 
-#: 3.0/met_norway.js:355 3.0/met_norway.js:356 3.0/openWeatherMap.js:389
-#: 3.8/met_norway.js:302 3.8/met_norway.js:303 3.8/openWeatherMap.js:343
+#: 3.0/met_norway.js:381 3.0/met_norway.js:382 3.0/openWeatherMap.js:423
+#: 3.8/met_norway.js:328 3.8/met_norway.js:329 3.8/openWeatherMap.js:377
 msgid "Fog"
 msgstr ""
 
-#: 3.0/met_norway.js:362 3.0/met_norway.js:363 3.0/met_norway.js:369
-#: 3.0/met_norway.js:376 3.0/met_norway.js:383 3.8/met_norway.js:309
-#: 3.8/met_norway.js:310 3.8/met_norway.js:316 3.8/met_norway.js:323
-#: 3.8/met_norway.js:330
+#: 3.0/met_norway.js:388 3.0/met_norway.js:389 3.0/met_norway.js:395
+#: 3.0/met_norway.js:402 3.0/met_norway.js:409 3.8/met_norway.js:335
+#: 3.8/met_norway.js:336 3.8/met_norway.js:342 3.8/met_norway.js:349
+#: 3.8/met_norway.js:356
 msgid "Heavy Sleet"
 msgstr ""
 
-#: 3.0/met_norway.js:370 3.8/met_norway.js:317
+#: 3.0/met_norway.js:396 3.8/met_norway.js:343
 msgid "Mostly Heavy Sleet"
 msgstr ""
 
-#: 3.0/met_norway.js:377 3.8/met_norway.js:324
+#: 3.0/met_norway.js:403 3.8/met_norway.js:350
 msgid "Heavy Sleet with Thunderstorms"
 msgstr ""
 
-#: 3.0/met_norway.js:384 3.8/met_norway.js:331
+#: 3.0/met_norway.js:410 3.8/met_norway.js:357
 msgid "Mostly Heavy Sleet with Thunderstorms"
 msgstr ""
 
-#: 3.0/met_norway.js:398 3.0/met_norway.js:405 3.8/met_norway.js:345
-#: 3.8/met_norway.js:352
+#: 3.0/met_norway.js:424 3.0/met_norway.js:431 3.8/met_norway.js:371
+#: 3.8/met_norway.js:378
 msgid "Heavy Snow with Thunderstorms"
 msgstr ""
 
-#: 3.0/met_norway.js:418 3.0/met_norway.js:419 3.8/met_norway.js:365
-#: 3.8/met_norway.js:366
+#: 3.0/met_norway.js:444 3.0/met_norway.js:445 3.8/met_norway.js:391
+#: 3.8/met_norway.js:392
 msgid "Few Clouds"
 msgstr ""
 
-#: 3.0/met_norway.js:425 3.0/met_norway.js:426 3.0/met_norway.js:432
-#: 3.0/met_norway.js:433 3.0/met_norway.js:439 3.0/met_norway.js:446
-#: 3.8/met_norway.js:372 3.8/met_norway.js:373 3.8/met_norway.js:379
-#: 3.8/met_norway.js:380 3.8/met_norway.js:386 3.8/met_norway.js:393
+#: 3.0/met_norway.js:451 3.0/met_norway.js:452 3.0/met_norway.js:458
+#: 3.0/met_norway.js:459 3.0/met_norway.js:465 3.0/met_norway.js:472
+#: 3.8/met_norway.js:398 3.8/met_norway.js:399 3.8/met_norway.js:405
+#: 3.8/met_norway.js:406 3.8/met_norway.js:412 3.8/met_norway.js:419
 msgid "Light Rain"
 msgstr ""
 
-#: 3.0/met_norway.js:440 3.8/met_norway.js:387
+#: 3.0/met_norway.js:466 3.8/met_norway.js:413
 msgid "Light Rain with Thunderstorms"
 msgstr ""
 
-#: 3.0/met_norway.js:447 3.8/met_norway.js:394
-msgid "Mostly Ligh Rain with Thunderstorms"
+#: 3.0/met_norway.js:473 3.8/met_norway.js:420
+msgid "Mostly Light Rain with Thunderstorms"
 msgstr ""
 
-#: 3.0/met_norway.js:453 3.0/met_norway.js:454 3.0/met_norway.js:460
-#: 3.0/met_norway.js:467 3.0/met_norway.js:474 3.8/met_norway.js:400
-#: 3.8/met_norway.js:401 3.8/met_norway.js:407 3.8/met_norway.js:414
-#: 3.8/met_norway.js:421
+#: 3.0/met_norway.js:479 3.0/met_norway.js:480 3.0/met_norway.js:486
+#: 3.0/met_norway.js:493 3.0/met_norway.js:500 3.8/met_norway.js:426
+#: 3.8/met_norway.js:427 3.8/met_norway.js:433 3.8/met_norway.js:440
+#: 3.8/met_norway.js:447
 msgid "Light Sleet"
 msgstr ""
 
-#: 3.0/met_norway.js:461 3.8/met_norway.js:408
+#: 3.0/met_norway.js:487 3.8/met_norway.js:434
 msgid "Mostly Light Sleet"
 msgstr ""
 
-#: 3.0/met_norway.js:468 3.8/met_norway.js:415
+#: 3.0/met_norway.js:494 3.8/met_norway.js:441
 msgid "Light Sleet with Thunderstorms"
 msgstr ""
 
-#: 3.0/met_norway.js:475 3.8/met_norway.js:422
+#: 3.0/met_norway.js:501 3.8/met_norway.js:448
 msgid "Mostly Light Sleet with Thunderstorms"
 msgstr ""
 
-#: 3.0/met_norway.js:481 3.0/met_norway.js:482 3.0/met_norway.js:488
-#: 3.0/met_norway.js:495 3.0/met_norway.js:502 3.8/met_norway.js:428
-#: 3.8/met_norway.js:429 3.8/met_norway.js:435 3.8/met_norway.js:442
-#: 3.8/met_norway.js:449
+#: 3.0/met_norway.js:507 3.0/met_norway.js:508 3.0/met_norway.js:514
+#: 3.0/met_norway.js:521 3.0/met_norway.js:528 3.8/met_norway.js:454
+#: 3.8/met_norway.js:455 3.8/met_norway.js:461 3.8/met_norway.js:468
+#: 3.8/met_norway.js:475
 msgid "Light Snow"
 msgstr ""
 
-#: 3.0/met_norway.js:489 3.8/met_norway.js:436
+#: 3.0/met_norway.js:515 3.8/met_norway.js:462
 msgid "Mostly Light Snow"
 msgstr ""
 
-#: 3.0/met_norway.js:496 3.8/met_norway.js:443
+#: 3.0/met_norway.js:522 3.8/met_norway.js:469
 msgid "Light Snow with Thunderstorms"
 msgstr ""
 
-#: 3.0/met_norway.js:503 3.8/met_norway.js:450
+#: 3.0/met_norway.js:529 3.8/met_norway.js:476
 msgid "Mostly Light Snow with Thunderstorms"
 msgstr ""
 
-#: 3.0/met_norway.js:523 3.0/met_norway.js:524 3.8/met_norway.js:470
-#: 3.8/met_norway.js:471
+#: 3.0/met_norway.js:549 3.0/met_norway.js:550 3.8/met_norway.js:496
+#: 3.8/met_norway.js:497
 msgid "Mostly Rainy"
 msgstr ""
 
-#: 3.0/met_norway.js:531 3.8/met_norway.js:478
+#: 3.0/met_norway.js:557 3.8/met_norway.js:504
 msgid "Rain with Thunderstorms"
 msgstr ""
 
-#: 3.0/met_norway.js:538 3.8/met_norway.js:485
+#: 3.0/met_norway.js:564 3.8/met_norway.js:511
 msgid "Mostly Rainy with Thunderstorms"
 msgstr ""
 
-#: 3.0/met_norway.js:552 3.8/met_norway.js:499
+#: 3.0/met_norway.js:578 3.8/met_norway.js:525
 msgid "Mostly Sleet"
 msgstr ""
 
-#: 3.0/met_norway.js:559 3.8/met_norway.js:506
+#: 3.0/met_norway.js:585 3.8/met_norway.js:532
 msgid "Mostly Sleet with Thunderstorms"
 msgstr ""
 
-#: 3.0/met_norway.js:566 3.8/met_norway.js:513
+#: 3.0/met_norway.js:592 3.8/met_norway.js:539
 msgid "Sleet with Thunderstorms"
 msgstr ""
 
-#: 3.0/met_norway.js:573 3.8/met_norway.js:520
+#: 3.0/met_norway.js:599 3.8/met_norway.js:546
 msgid "Snowy"
 msgstr ""
 
-#: 3.0/met_norway.js:579 3.0/met_norway.js:580 3.0/met_norway.js:586
-#: 3.8/met_norway.js:526 3.8/met_norway.js:527 3.8/met_norway.js:533
+#: 3.0/met_norway.js:605 3.0/met_norway.js:606 3.0/met_norway.js:612
+#: 3.8/met_norway.js:552 3.8/met_norway.js:553 3.8/met_norway.js:559
 msgid "Mostly Snowy"
 msgstr ""
 
-#: 3.0/met_norway.js:587 3.8/met_norway.js:534
+#: 3.0/met_norway.js:613 3.8/met_norway.js:560
 msgid "Mostly Snowy with Thunderstorms"
 msgstr ""
 
-#: 3.0/met_norway.js:594 3.8/met_norway.js:541
+#: 3.0/met_norway.js:620 3.8/met_norway.js:567
 msgid "Snowy with Thunderstorms"
 msgstr ""
 
@@ -582,338 +582,353 @@ msgid ""
 "Location Service responded with errors, please see the logs in Looking Glass"
 msgstr ""
 
-#: 3.0/darkSky.js:70 3.8/darkSky.js:34
+#: 3.0/darkSky.js:78 3.8/darkSky.js:42
 msgid "and"
 msgstr ""
 
-#: 3.0/darkSky.js:70 3.8/darkSky.js:34
+#: 3.0/darkSky.js:78 3.8/darkSky.js:42
 msgid "until"
 msgstr ""
 
-#: 3.0/darkSky.js:70 3.8/darkSky.js:34
+#: 3.0/darkSky.js:78 3.8/darkSky.js:42
 msgid "in"
 msgstr ""
 
-#: 3.0/darkSky.js:192 3.8/darkSky.js:144
+#: 3.0/darkSky.js:78 3.8/darkSky.js:42
+msgid "Possible"
+msgstr ""
+
+#: 3.0/darkSky.js:220 3.8/darkSky.js:172
 msgid ""
 "Please enter API key in settings,\n"
 "or get one first on https://darksky.net/dev/register"
 msgstr ""
 
-#: 3.0/darkSky.js:230 3.0/weatherbit.js:257 3.8/darkSky.js:182
-#: 3.8/weatherbit.js:201
+#: 3.0/darkSky.js:258 3.0/weatherbit.js:318 3.8/darkSky.js:210
+#: 3.8/weatherbit.js:251
 msgid ""
 "Please Make sure you\n"
 "entered the API key correctly and your account is not locked"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:155 3.0/weatherbit.js:167 3.8/openWeatherMap.js:110
-#: 3.8/weatherbit.js:111
+#: 3.0/darkSky.js:264 3.8/darkSky.js:216
+msgid ""
+"Please Make sure you\n"
+"entered the API key what you have from DarkSky"
+msgstr ""
+
+#: 3.0/openWeatherMap.js:189 3.0/weatherbit.js:194 3.8/openWeatherMap.js:144
+#: 3.8/weatherbit.js:127
 msgid "Failed to Process Current Weather Info"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:178 3.8/openWeatherMap.js:133
+#: 3.0/openWeatherMap.js:212 3.8/openWeatherMap.js:167
 msgid "Please enter a Location in settings"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:183 3.8/openWeatherMap.js:138
+#: 3.0/openWeatherMap.js:217 3.8/openWeatherMap.js:172
 msgid "Please enter location in the correct format (coordinates)"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:222 3.8/openWeatherMap.js:177
+#: 3.0/openWeatherMap.js:256 3.8/openWeatherMap.js:211
 msgid "Please make sure Location is in the correct format in the Settings"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:226 3.8/openWeatherMap.js:181
+#: 3.0/openWeatherMap.js:260 3.8/openWeatherMap.js:215
 msgid "Make sure you entered the correct key in settings"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:230 3.0/openWeatherMap.js:250
-#: 3.8/openWeatherMap.js:185 3.8/openWeatherMap.js:205
+#: 3.0/openWeatherMap.js:264 3.0/openWeatherMap.js:284
+#: 3.8/openWeatherMap.js:219 3.8/openWeatherMap.js:239
 msgid ""
 "Location not found, make sure location is available or it is in the correct "
 "format"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:234 3.8/openWeatherMap.js:189
+#: 3.0/openWeatherMap.js:268 3.8/openWeatherMap.js:223
 msgid "If this problem persists, please contact the Author of this applet"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:238 3.8/openWeatherMap.js:193
+#: 3.0/openWeatherMap.js:272 3.8/openWeatherMap.js:227
 msgid "Unknown Error, please see the logs in Looking Glass"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:346 3.8/openWeatherMap.js:300
+#: 3.0/openWeatherMap.js:380 3.8/openWeatherMap.js:334
 msgid "Thunderstorm with light rain"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:347 3.8/openWeatherMap.js:301
+#: 3.0/openWeatherMap.js:381 3.8/openWeatherMap.js:335
 msgid "Thunderstorm with rain"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:348 3.8/openWeatherMap.js:302
+#: 3.0/openWeatherMap.js:382 3.8/openWeatherMap.js:336
 msgid "Thunderstorm with heavy rain"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:349 3.8/openWeatherMap.js:303
+#: 3.0/openWeatherMap.js:383 3.8/openWeatherMap.js:337
 msgid "Light thunderstorm"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:350 3.8/openWeatherMap.js:304
+#: 3.0/openWeatherMap.js:384 3.8/openWeatherMap.js:338
 msgid "Thunderstorm"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:351 3.8/openWeatherMap.js:305
+#: 3.0/openWeatherMap.js:385 3.8/openWeatherMap.js:339
 msgid "Heavy thunderstorm"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:352 3.8/openWeatherMap.js:306
+#: 3.0/openWeatherMap.js:386 3.8/openWeatherMap.js:340
 msgid "Ragged thunderstorm"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:353 3.8/openWeatherMap.js:307
+#: 3.0/openWeatherMap.js:387 3.8/openWeatherMap.js:341
 msgid "Thunderstorm with light drizzle"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:354 3.8/openWeatherMap.js:308
+#: 3.0/openWeatherMap.js:388 3.8/openWeatherMap.js:342
 msgid "Thunderstorm with drizzle"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:355 3.8/openWeatherMap.js:309
+#: 3.0/openWeatherMap.js:389 3.8/openWeatherMap.js:343
 msgid "Thunderstorm with heavy drizzle"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:356 3.8/openWeatherMap.js:310
+#: 3.0/openWeatherMap.js:390 3.8/openWeatherMap.js:344
 msgid "Light intensity drizzle"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:358 3.8/openWeatherMap.js:312
+#: 3.0/openWeatherMap.js:392 3.8/openWeatherMap.js:346
 msgid "Heavy intensity drizzle"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:359 3.8/openWeatherMap.js:313
+#: 3.0/openWeatherMap.js:393 3.8/openWeatherMap.js:347
 msgid "Light intensity drizzle rain"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:360 3.8/openWeatherMap.js:314
+#: 3.0/openWeatherMap.js:394 3.8/openWeatherMap.js:348
 msgid "Drizzle rain"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:361 3.8/openWeatherMap.js:315
+#: 3.0/openWeatherMap.js:395 3.8/openWeatherMap.js:349
 msgid "Heavy intensity drizzle rain"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:362 3.8/openWeatherMap.js:316
+#: 3.0/openWeatherMap.js:396 3.8/openWeatherMap.js:350
 msgid "Shower rain and drizzle"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:363 3.8/openWeatherMap.js:317
+#: 3.0/openWeatherMap.js:397 3.8/openWeatherMap.js:351
 msgid "Heavy shower rain and drizzle"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:364 3.8/openWeatherMap.js:318
+#: 3.0/openWeatherMap.js:398 3.8/openWeatherMap.js:352
 msgid "Shower drizzle"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:365 3.8/openWeatherMap.js:319
+#: 3.0/openWeatherMap.js:399 3.8/openWeatherMap.js:353
 msgid "Light rain"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:366 3.8/openWeatherMap.js:320
+#: 3.0/openWeatherMap.js:400 3.8/openWeatherMap.js:354
 msgid "Moderate rain"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:367 3.8/openWeatherMap.js:321
+#: 3.0/openWeatherMap.js:401 3.8/openWeatherMap.js:355
 msgid "Heavy intensity rain"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:368 3.8/openWeatherMap.js:322
+#: 3.0/openWeatherMap.js:402 3.8/openWeatherMap.js:356
 msgid "Very heavy rain"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:369 3.8/openWeatherMap.js:323
+#: 3.0/openWeatherMap.js:403 3.8/openWeatherMap.js:357
 msgid "Extreme rain"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:370 3.8/openWeatherMap.js:324
+#: 3.0/openWeatherMap.js:404 3.8/openWeatherMap.js:358
 msgid "Freezing rain"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:371 3.8/openWeatherMap.js:325
+#: 3.0/openWeatherMap.js:405 3.8/openWeatherMap.js:359
 msgid "Light intensity shower rain"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:372 3.8/openWeatherMap.js:326
+#: 3.0/openWeatherMap.js:406 3.8/openWeatherMap.js:360
 msgid "Shower rain"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:373 3.8/openWeatherMap.js:327
+#: 3.0/openWeatherMap.js:407 3.8/openWeatherMap.js:361
 msgid "Heavy intensity shower rain"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:374 3.8/openWeatherMap.js:328
+#: 3.0/openWeatherMap.js:408 3.8/openWeatherMap.js:362
 msgid "Ragged shower rain"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:375 3.8/openWeatherMap.js:329
+#: 3.0/openWeatherMap.js:409 3.8/openWeatherMap.js:363
 msgid "Light snow"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:377 3.8/openWeatherMap.js:331
+#: 3.0/openWeatherMap.js:411 3.8/openWeatherMap.js:365
 msgid "Heavy snow"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:379 3.8/openWeatherMap.js:333
+#: 3.0/openWeatherMap.js:413 3.8/openWeatherMap.js:367
 msgid "Shower sleet"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:380 3.8/openWeatherMap.js:334
+#: 3.0/openWeatherMap.js:414 3.8/openWeatherMap.js:368
 msgid "Light rain and snow"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:381 3.8/openWeatherMap.js:335
+#: 3.0/openWeatherMap.js:415 3.8/openWeatherMap.js:369
 msgid "Rain and snow"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:382 3.8/openWeatherMap.js:336
+#: 3.0/openWeatherMap.js:416 3.8/openWeatherMap.js:370
 msgid "Light shower snow"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:383 3.8/openWeatherMap.js:337
+#: 3.0/openWeatherMap.js:417 3.8/openWeatherMap.js:371
 msgid "Shower snow"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:384 3.8/openWeatherMap.js:338
+#: 3.0/openWeatherMap.js:418 3.8/openWeatherMap.js:372
 msgid "Heavy shower snow"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:385 3.8/openWeatherMap.js:339
+#: 3.0/openWeatherMap.js:419 3.8/openWeatherMap.js:373
 msgid "Mist"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:386 3.8/openWeatherMap.js:340
+#: 3.0/openWeatherMap.js:420 3.8/openWeatherMap.js:374
 msgid "Smoke"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:388 3.8/openWeatherMap.js:342
+#: 3.0/openWeatherMap.js:422 3.8/openWeatherMap.js:376
 msgid "Sand, dust whirls"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:390 3.8/openWeatherMap.js:344
+#: 3.0/openWeatherMap.js:424 3.8/openWeatherMap.js:378
 msgid "Sand"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:392 3.8/openWeatherMap.js:346
+#: 3.0/openWeatherMap.js:426 3.8/openWeatherMap.js:380
 msgid "Volcanic ash"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:393 3.8/openWeatherMap.js:347
+#: 3.0/openWeatherMap.js:427 3.8/openWeatherMap.js:381
 msgid "Squalls"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:396 3.8/openWeatherMap.js:350
+#: 3.0/openWeatherMap.js:430 3.8/openWeatherMap.js:384
 msgid "Clear sky"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:397 3.8/openWeatherMap.js:351
+#: 3.0/openWeatherMap.js:431 3.8/openWeatherMap.js:385
 msgid "Sky is clear"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:398 3.8/openWeatherMap.js:352
+#: 3.0/openWeatherMap.js:432 3.8/openWeatherMap.js:386
 msgid "Clouds"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:399 3.8/openWeatherMap.js:353
+#: 3.0/openWeatherMap.js:433 3.8/openWeatherMap.js:387
 msgid "Few clouds"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:400 3.8/openWeatherMap.js:354
+#: 3.0/openWeatherMap.js:434 3.8/openWeatherMap.js:388
 msgid "Scattered clouds"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:401 3.8/openWeatherMap.js:355
+#: 3.0/openWeatherMap.js:435 3.8/openWeatherMap.js:389
 msgid "Broken clouds"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:402 3.8/openWeatherMap.js:356
+#: 3.0/openWeatherMap.js:436 3.8/openWeatherMap.js:390
 msgid "Overcast clouds"
 msgstr ""
 
-#: 3.0/weatherbit.js:194 3.8/weatherbit.js:138
+#: 3.0/weatherbit.js:221 3.0/weatherbit.js:256 3.8/weatherbit.js:154
+#: 3.8/weatherbit.js:189
 msgid "Failed to Process Forecast Info"
 msgstr ""
 
-#: 3.0/weatherbit.js:234 3.8/weatherbit.js:178
+#: 3.0/weatherbit.js:295 3.8/weatherbit.js:228
 msgid ""
 "Please enter API key in settings,\n"
 "or get one first on https://www.weatherbit.io/account/create"
 msgstr ""
 
-#: 3.0/applet.js:148 3.8/applet.js:98
+#: 3.0/applet.js:155 3.8/applet.js:105
 msgid "Error"
 msgstr ""
 
-#: 3.0/applet.js:150 3.8/applet.js:100
+#: 3.0/applet.js:157 3.8/applet.js:107
 msgid "Incorrect API Key"
 msgstr ""
 
-#: 3.0/applet.js:152 3.8/applet.js:102
+#: 3.0/applet.js:159 3.8/applet.js:109
 msgid "Incorrect Location Format"
 msgstr ""
 
-#: 3.0/applet.js:154 3.8/applet.js:104
+#: 3.0/applet.js:161 3.8/applet.js:111
 msgid "Key Blocked"
 msgstr ""
 
-#: 3.0/applet.js:155 3.8/applet.js:105
+#: 3.0/applet.js:162 3.8/applet.js:112
 msgid "Can't find location"
 msgstr ""
 
-#: 3.0/applet.js:157 3.8/applet.js:107
+#: 3.0/applet.js:164 3.8/applet.js:114
 msgid "No Api Key"
 msgstr ""
 
-#: 3.0/applet.js:158 3.8/applet.js:108
+#: 3.0/applet.js:165 3.8/applet.js:115
 msgid "No Location"
 msgstr ""
 
-#: 3.0/applet.js:163 3.8/applet.js:113
+#: 3.0/applet.js:170 3.8/applet.js:120
 msgid "Missing Packages"
 msgstr ""
 
-#: 3.0/applet.js:170 3.8/applet.js:120
+#: 3.0/applet.js:177 3.8/applet.js:127
 msgid "Weather Applet"
 msgstr ""
 
-#: 3.0/applet.js:434 3.8/applet.js:327
+#: 3.0/applet.js:466 3.8/applet.js:367
 msgid ""
 "Unexpected Error While Refreshing Weather, please see log in Looking Glass"
 msgstr ""
 
-#: 3.0/applet.js:465 3.8/applet.js:349
+#: 3.0/applet.js:497 3.8/applet.js:389
 msgid "Make sure you entered a location or use Automatic location instead"
 msgstr ""
 
-#: 3.0/applet.js:577 3.8/applet.js:458
+#: 3.0/applet.js:611 3.8/applet.js:500
 msgid ""
 "Could not update weather for a while...\n"
 "are you connected to the internet?"
 msgstr ""
 
-#: 3.0/applet.js:591 3.8/applet.js:472
+#: 3.0/applet.js:625 3.8/applet.js:514
 msgid "Network Error, please check logs in Looking Glass"
 msgstr ""
 
-#: 3.0/applet.js:713 3.8/applet.js:592
+#: 3.0/applet.js:862 3.0/applet.js:1003 3.8/applet.js:736 3.8/applet.js:877
 msgid "As of"
 msgstr ""
 
-#: 3.0/applet.js:830 3.8/applet.js:709
+#: 3.0/applet.js:981 3.8/applet.js:855
 msgid "Today"
 msgstr ""
 
-#: 3.0/applet.js:832 3.8/applet.js:711
+#: 3.0/applet.js:983 3.8/applet.js:857
 msgid "Tomorrow"
+msgstr ""
+
+#: 3.0/applet.js:1001 3.8/applet.js:875
+msgid "Powered by"
 msgstr ""
 
 #. metadata.json->name
@@ -965,7 +980,9 @@ msgid "Setup Location"
 msgstr ""
 
 #. settings-schema.json->getLocation->tooltip
+#. 3.0->settings-schema.json->moreInfo->tooltip
 #. 3.0->settings-schema.json->getLocation->tooltip
+#. 3.8->settings-schema.json->moreInfo->tooltip
 #. 3.8->settings-schema.json->getLocation->tooltip
 msgid "Opens webpage guide"
 msgstr ""
@@ -1183,6 +1200,11 @@ msgid ""
 "based distros 'python-requests-oauthlib'), Updates every 2 hours."
 msgstr ""
 
+#. 3.0->settings-schema.json->moreInfo->description
+#. 3.8->settings-schema.json->moreInfo->description
+msgid "More Information"
+msgstr ""
+
 #. 3.0->settings-schema.json->providerSettings->description
 #. 3.8->settings-schema.json->providerSettings->description
 msgid "Weather Provider Options"
@@ -1244,6 +1266,16 @@ msgstr ""
 msgid "Setup API Key and Location"
 msgstr ""
 
+#. 3.0->settings-schema.json->forecastHours->units
+#. 3.8->settings-schema.json->forecastHours->units
+msgid "hours"
+msgstr ""
+
+#. 3.0->settings-schema.json->forecastHours->description
+#. 3.8->settings-schema.json->forecastHours->description
+msgid "Hourly Forecast length"
+msgstr ""
+
 #. 3.0->settings-schema.json->unitSettings->description
 #. 3.8->settings-schema.json->unitSettings->description
 msgid "Units"
@@ -1289,6 +1321,26 @@ msgstr ""
 #. 3.0->settings-schema.json->verticalOrientation->description
 #. 3.8->settings-schema.json->verticalOrientation->description
 msgid "Show forecast vertically"
+msgstr ""
+
+#. 3.0->settings-schema.json->forecastColumns->units
+#. 3.8->settings-schema.json->forecastColumns->units
+msgid "columns"
+msgstr ""
+
+#. 3.0->settings-schema.json->forecastColumns->description
+#. 3.8->settings-schema.json->forecastColumns->description
+msgid "Maximum number of columns for forecast"
+msgstr ""
+
+#. 3.0->settings-schema.json->forecastRows->units
+#. 3.8->settings-schema.json->forecastRows->units
+msgid "rows"
+msgstr ""
+
+#. 3.0->settings-schema.json->forecastRows->description
+#. 3.8->settings-schema.json->forecastRows->description
+msgid "Maximum number of rows for forecast"
 msgstr ""
 
 #. 3.0->settings-schema.json->tempRussianStyle->description

@@ -874,9 +874,9 @@ declare namespace imports.gi.Pango {
     
     
     enum Alignment {
-        left = 0,
-        center = 1,
-        right = 2
+        LEFT = 0,
+        CENTER = 1,
+        RIGHT = 2
     }
     
     
@@ -961,10 +961,10 @@ declare namespace imports.gi.Pango {
     
     
     enum EllipsizeMode {
-        none = 0,
-        start = 1,
-        middle = 2,
-        end = 3
+        NONE = 0,
+        START = 1,
+        MIDDLE = 2,
+        END = 3
     }
     
     
@@ -1182,9 +1182,9 @@ declare namespace imports.gi.Pango {
     
     
     enum WrapMode {
-        word = 0,
-        char = 1,
-        word_char = 2
+        WORD = 0,
+        CHAR = 1,
+        WORD_CHAR = 2
     }
     
     

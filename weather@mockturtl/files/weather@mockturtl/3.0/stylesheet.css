@@ -7,12 +7,6 @@
 .weather-current-location-link {
     text-align: center;
 }
-.weather-current-location-link:selected,
-.weather-current-location-link:hover {
-    background-gradient-direction: vertical;
-    background-gradient-start: rgba(255, 255, 255, 0.1);
-    background-gradient-end: rgba(255, 255, 255, 0.1);
-}
 
 .weather-current-summarybox {
     padding-top: 5px;
@@ -73,4 +67,27 @@
 
 .weather-config {
   padding-right: 10px;
+}
+
+.bottombar {
+	padding: 7px 10px 7px 10px;
+}
+
+.hourly-time {
+    color: #999999;
+    font-size: 90%;
+    text-align: center;
+}
+
+.hourly-data {
+	text-align: center;
+	padding: 0px 5px;
+}
+
+.hourly-box {
+    padding: 10px 10px 0px 10px;
+}
+
+.hourly-icon {
+    padding: 5px 10px 5px 10px;
 }

@@ -1,5 +1,21 @@
 # Changelog
 
+## 2.6.1
+
+* Fix [#3059](https://github.com/linuxmint/cinnamon-spices-applets/issues/3059)
+
+## 2.6.0
+
+* Add Hourly forecast support
+
+* Add bottom bar with credit for the provider in use (with toggle for Hourly forecast) due to legal reasons with OpenWeatherMap and DarkSky
+
+* Custom icons changed to fit their bounding boxes
+
+* Make Daily forecasts tileable
+
+* Fix [#2892](https://github.com/linuxmint/cinnamon-spices-applets/issues/2892), buttons adhere to current theme
+
 ## 2.5.0
 
 * Fixes [#2980](https://github.com/linuxmint/cinnamon-spices-applets/issues/2980) and [#2979](https://github.com/linuxmint/cinnamon-spices-applets/issues/2979)
