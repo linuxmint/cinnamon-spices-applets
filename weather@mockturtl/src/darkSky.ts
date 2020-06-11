@@ -26,7 +26,6 @@ var MPHtoMPS = utils.MPHtoMPS as (speed: number) => number;
 var icons = utils.icons;
 var IsNight = utils.IsNight as (sunTimes: SunTimes, date?: Date) => boolean;
 var weatherIconSafely = utils.weatherIconSafely as (code: string[], icon_type: imports.gi.St.IconType) => string;
-var Sentencify = utils.Sentencify as (words: string[]) => string;
 
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
@@ -44,7 +43,6 @@ class DarkSky implements WeatherProvider {
 	public readonly prettyName = "DarkSky";
 	public readonly name = "DarkSky";
     public readonly maxForecastSupport = 8;
-    public readonly supportsHourly = false;
     public readonly website = "https://darksky.net/poweredby/";
     public readonly maxHourlyForecastSupport = 168;
 
@@ -288,7 +286,7 @@ class DarkSky implements WeatherProvider {
 			}
 			if (result.length == 2) break;
         }
-        return Sentencify(result);
+        return result.join(" ");
 	};
 
     private GetShortCurrentSummary(summary: string): string {

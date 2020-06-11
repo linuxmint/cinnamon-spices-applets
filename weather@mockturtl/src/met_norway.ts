@@ -3,16 +3,16 @@ export {}
 
 function importModule(path: string): any {
     if (typeof require !== 'undefined') {
-      return require('./' + path);
+        return require('./' + path);
     } else {
-      if (!AppletDir) var AppletDir = imports.ui.appletManager.applets['weather@mockturtl'];
-      return AppletDir[path];
+        if (!AppletDir) var AppletDir = imports.ui.appletManager.applets['weather@mockturtl'];
+        return AppletDir[path];
     }
 }
 const UUID = "weather@mockturtl"
 imports.gettext.bindtextdomain(UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
 function _(str: string): string {
-  return imports.gettext.dgettext(UUID, str)
+    return imports.gettext.dgettext(UUID, str)
 }
 
 var utils = importModule("utils");
@@ -23,10 +23,9 @@ var CelsiusToKelvin = utils.CelsiusToKelvin as (celsius: number) => number;
 var SunCalc = importModule("sunCalc").SunCalc;
 
 class MetNorway implements WeatherProvider {
-	public readonly prettyName = "MET Norway";
-	public readonly name = "MetNorway";
+    public readonly prettyName = "MET Norway";
+    public readonly name = "MetNorway";
     public readonly maxForecastSupport = 10;
-    public readonly supportsHourly = false;
     public readonly website = "https://www.met.no/en";
     public readonly maxHourlyForecastSupport = 72; // probably less
 
@@ -83,102 +82,102 @@ class MetNorway implements WeatherProvider {
         let parsed6hourly: SixHourForecast[] = [];
         let parsedHourly: HourlyForecast[] = [];
         for (let i = 0; i < json.length; i++) {
-          const element = json[i];
-          let fromDate = new Date(element["from"]);
-          let toDate = new Date(element["to"]);
-          let item = element.location;
+            const element = json[i];
+            let fromDate = new Date(element["from"]);
+            let toDate = new Date(element["to"]);
+            let item = element.location;
 
-          let temp = item.temperature;
-          let minTemp = item.minTemperature;
-          let symbol = item.symbol;
-          if (!!temp) { // Current observations
-            parsedWeathers.push(this.ParseCurrentWeather(item, fromDate, toDate));
-          }
-          else if (!!minTemp && !!symbol) { // 6-hour forecast
-            parsed6hourly.push(this.Parse6HourForecast(item, fromDate, toDate));
-          }
-          else if (!minTemp && !!symbol) { // Hourly forecats with condition
-            parsedHourly.push(this.ParseHourlyForecast(item, fromDate, toDate));
-          }
+            let temp = item.temperature;
+            let minTemp = item.minTemperature;
+            let symbol = item.symbol;
+            if (!!temp) { // Current observations
+                parsedWeathers.push(this.ParseCurrentWeather(item, fromDate, toDate));
+            }
+            else if (!!minTemp && !!symbol) { // 6-hour forecast
+                parsed6hourly.push(this.Parse6HourForecast(item, fromDate, toDate));
+            }
+            else if (!minTemp && !!symbol) { // Hourly forecats with condition
+                parsedHourly.push(this.ParseHourlyForecast(item, fromDate, toDate));
+            }
         }
         
         // Building weather data
-		let weather = this.BuildWeather(this.GetEarliestDataForToday(parsedWeathers) as WeatherForecast, this.GetEarliestDataForToday(parsedHourly) as HourlyForecast);
-		weather.hourlyForecasts = this.BuildHourlyForecasts(parsedHourly, parsedWeathers);
+        let weather = this.BuildWeather(this.GetEarliestDataForToday(parsedWeathers) as WeatherForecast, this.GetEarliestDataForToday(parsedHourly) as HourlyForecast);
+        weather.hourlyForecasts = this.BuildHourlyForecasts(parsedHourly, parsedWeathers);
         weather.forecasts = this.BuildForecasts(parsed6hourly);
 
         return weather;
     }
 
     private BuildWeather(weather: WeatherForecast, hourly: HourlyForecast): WeatherData {
-      let times = this.sunCalc.getTimes(new Date(), weather.lat, weather.lon, hourly.altitude);
-      this.sunTimes = times;
+        let times = this.sunCalc.getTimes(new Date(), weather.lat, weather.lon, hourly.altitude);
+        this.sunTimes = times;
 
-      let result: WeatherData = {
-        temperature: CelsiusToKelvin(weather.temperature),
-        coord: {
-          lat: weather.lat,
-          lon: weather.lon
-        },
-        date: weather.from,
-        condition: this.ResolveCondition(hourly.symbol, true),
-        humidity: weather.humidity,
-        pressure: weather.pressure,
-        extra_field: {
-          name: _("Cloudiness"),
-          type: "percent",
-          value: weather.cloudiness
-        },
-        sunrise: times.sunrise,
-        sunset: times.sunset,
-        wind: {
-          degree: weather.windDirection,
-          speed: weather.windSpeed
-        },
-        location: {
-          url: null,
-        },
-        forecasts: []
-    };
-    return result;
+        let result: WeatherData = {
+            temperature: CelsiusToKelvin(weather.temperature),
+            coord: {
+                lat: weather.lat,
+                lon: weather.lon
+            },
+            date: weather.from,
+            condition: this.ResolveCondition(hourly.symbol, true),
+            humidity: weather.humidity,
+            pressure: weather.pressure,
+            extra_field: {
+                name: _("Cloudiness"),
+                type: "percent",
+                value: weather.cloudiness
+            },
+            sunrise: times.sunrise,
+            sunset: times.sunset,
+            wind: {
+                degree: weather.windDirection,
+                speed: weather.windSpeed
+            },
+            location: {
+                url: null,
+            },
+            forecasts: []
+        };
+        return result;
     }
 
     private BuildForecasts(forecastsData: SixHourForecast[]): ForecastData[] {
-      let forecasts: ForecastData[] = [];
-      let days: Array<SixHourForecast[]> = this.SortDataByDay(forecastsData) as Array<SixHourForecast[]>;
+        let forecasts: ForecastData[] = [];
+        let days: Array<SixHourForecast[]> = this.SortDataByDay(forecastsData) as Array<SixHourForecast[]>;
 
-      for (let i = 0; i < days.length; i++) {
-        let forecast: ForecastData = {
-          condition: {
-            customIcon: "cloudy-symbolic",
-            description: "",
-            icon: "weather-severe-alert",
-            main: ""
-          },
-          date: null,
-          temp_max: Number.NEGATIVE_INFINITY,
-          temp_min: Number.POSITIVE_INFINITY
+        for (let i = 0; i < days.length; i++) {
+            let forecast: ForecastData = {
+                condition: {
+                    customIcon: "cloudy-symbolic",
+                    description: "",
+                    icon: "weather-severe-alert",
+                    main: ""
+                },
+                date: null,
+                temp_max: Number.NEGATIVE_INFINITY,
+                temp_min: Number.POSITIVE_INFINITY
+            }
+
+          // Get min/max temp from 6-hourly data
+          // get condition from hourly data
+          let conditionCounter: ConditionCount = {};
+          for (let j = 0; j < days[i].length; j++) {
+            const element = days[i][j];
+            forecast.date = element.from;
+            if (element.maxTemperature > forecast.temp_max) forecast.temp_max = element.maxTemperature;
+            if (element.minTemperature < forecast.temp_min) forecast.temp_min = element.minTemperature;
+            if (!conditionCounter[element.symbolID]) conditionCounter[element.symbolID] = {count: 0, name: element.symbol};
+            conditionCounter[element.symbolID].count = conditionCounter[element.symbolID].count + 1;
+          }
+
+          forecast.temp_max = CelsiusToKelvin(forecast.temp_max);
+          forecast.temp_min = CelsiusToKelvin(forecast.temp_min);
+          forecast.condition = this.ResolveCondition(this.GetMostSevereCondition(conditionCounter));
+
+          forecasts.push(forecast);
         }
-
-        // Get min/max temp from 6-hourly data
-        // get condition from hourly data
-        let conditionCounter: ConditionCount = {};
-        for (let j = 0; j < days[i].length; j++) {
-          const element = days[i][j];
-          forecast.date = element.from;
-          if (element.maxTemperature > forecast.temp_max) forecast.temp_max = element.maxTemperature;
-          if (element.minTemperature < forecast.temp_min) forecast.temp_min = element.minTemperature;
-          if (!conditionCounter[element.symbolID]) conditionCounter[element.symbolID] = {count: 0, name: element.symbol};
-          conditionCounter[element.symbolID].count = conditionCounter[element.symbolID].count + 1;
-        }
-
-        forecast.temp_max = CelsiusToKelvin(forecast.temp_max);
-        forecast.temp_min = CelsiusToKelvin(forecast.temp_min);
-        forecast.condition = this.ResolveCondition(this.GetMostSevereCondition(conditionCounter));
-
-        forecasts.push(forecast);
-      }
-      return forecasts;
+        return forecasts;
 	}
 
 	private BuildHourlyForecasts(hours: HourlyForecast[], current: WeatherForecast[]): HourlyForecastData[] {

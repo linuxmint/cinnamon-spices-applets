@@ -38,7 +38,6 @@ class OpenWeatherMap implements WeatherProvider {
 	public readonly prettyName = "OpenWeatherMap";
 	public readonly name = "OpenWeatherMap";
     public readonly maxForecastSupport = 7;
-    public readonly supportsHourly = true;
     public readonly website = "https://openweathermap.org/";
     public readonly maxHourlyForecastSupport = 48;
 

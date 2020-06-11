@@ -97,7 +97,7 @@ const APPLET_ICON = "view-refresh-symbolic"
 const REFRESH_ICON = "view-refresh";
 const CMD_SETTINGS = "cinnamon-settings applets " + UUID
 
-type Services = "OpenWeatherMap" | "DarkSky" | "MetNorway" | "Weatherbit" | "Yahoo";
+type Services = "OpenWeatherMap" | "DarkSky" | "MetNorway" | "Weatherbit" | "Yahoo" | "Climacell";
 type ServiceMap = {
   	[key: string]: Services
 }
@@ -110,7 +110,8 @@ const DATA_SERVICE: ServiceMap = {
 	DARK_SKY: "DarkSky",
 	MET_NORWAY: "MetNorway",
 	WEATHERBIT: "Weatherbit",
-	YAHOO: "Yahoo"
+	YAHOO: "Yahoo",
+	CLIMACELL: "Climacell"
 }
 
 //----------------------------------------------------------------------
@@ -404,33 +405,39 @@ class WeatherApplet extends TextIconApplet {
 		let currentName = get(["name"], this.provider) as Services;
 		switch (this.config._dataService) {
 			case DATA_SERVICE.DARK_SKY:           // No City Info
-				if (darkSky == null) var darkSky = importModule('darkSky');
+				if (!darkSky) var darkSky = importModule('darkSky');
 				if (currentName != "DarkSky" || force) {
 					this.provider = new darkSky.DarkSky(this);
 				}
 				break;
 			case DATA_SERVICE.OPEN_WEATHER_MAP:   // No City Info
-				if (openWeatherMap == null) var openWeatherMap = importModule("openWeatherMap");
+				if (!openWeatherMap) var openWeatherMap = importModule("openWeatherMap");
 				if (currentName != "OpenWeatherMap" || force) {
 					this.provider = new openWeatherMap.OpenWeatherMap(this);
 				}
 				break;
 			case DATA_SERVICE.MET_NORWAY:         // No TZ or city info
-				if (metNorway == null) var metNorway = importModule("met_norway");
+				if (!metNorway) var metNorway = importModule("met_norway");
 				if (currentName != "MetNorway" || force) {
 					this.provider = new metNorway.MetNorway(this);
 				} 
 				break;
 			case DATA_SERVICE.WEATHERBIT:
-				if (weatherbit == null) var weatherbit = importModule("weatherbit");
+				if (!weatherbit) var weatherbit = importModule("weatherbit");
 				if (currentName != "Weatherbit" || force) {
 					this.provider = new weatherbit.Weatherbit(this);
 				}
 				break;
 			case DATA_SERVICE.YAHOO:
-				if (yahoo == null) var yahoo = importModule("yahoo");
+				if (!yahoo) var yahoo = importModule("yahoo");
 				if (currentName != "Yahoo" || force) {
 					this.provider = new yahoo.Yahoo(this);
+				}
+				break;
+			case DATA_SERVICE.CLIMACELL:
+				if (!climacell) var climacell = importModule("climacell");
+				if (currentName != "Climacell" || force) {
+					this.provider = new climacell.Climacell(this);
 				}
 				break;
 			default:
@@ -2062,7 +2069,6 @@ interface WeatherProvider {
 	name: Services;
 	maxForecastSupport: number;
 	maxHourlyForecastSupport: number;
-	supportsHourly: boolean;
 	website: string;
 }
 
@@ -2089,7 +2095,7 @@ type RefreshState = "success" | "failure" | "error";
  *  soft will show a subtle hint that the refresh failed (NOT IMPLEMENTED)
  */
 type ErrorSeverity = "hard" |  "soft";
-type ApiService = "ipapi" | "darksky" | "openweathermap" | "met-norway" | "weatherbit" | "yahoo";
+type ApiService = "ipapi" | "darksky" | "openweathermap" | "met-norway" | "weatherbit" | "yahoo" | "climacell";
 type ErrorDetail = "no key" | "bad key" | "no location" | "bad location format" |
   "location not found" | "no network response" | "no api response" | 
   "bad api response - non json" | "bad api response" | "no reponse body" | 

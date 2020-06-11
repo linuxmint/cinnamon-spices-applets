@@ -38,7 +38,6 @@ class Yahoo implements WeatherProvider {
 	public readonly prettyName = "Yahoo";
 	public readonly name = "Yahoo";
     public readonly maxForecastSupport = 10;
-    public readonly supportsHourly = false;
     public readonly website = "https://www.yahoo.com/news/weather/";
     public readonly maxHourlyForecastSupport = 0;
 

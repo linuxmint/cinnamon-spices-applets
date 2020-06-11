@@ -37,7 +37,6 @@ class Weatherbit implements WeatherProvider {
     //--------------------------------------------------------
 	public readonly prettyName = "WeatherBit";
 	public readonly name = "Weatherbit";
-    public readonly supportsHourly = true;
     public readonly maxForecastSupport = 16;
     public readonly website = "https://www.weatherbit.io/";
     public readonly maxHourlyForecastSupport = 48;
