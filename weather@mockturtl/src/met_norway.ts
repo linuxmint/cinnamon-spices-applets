@@ -17,10 +17,10 @@ function _(str: string): string {
 
 var utils = importModule("utils");
 var isCoordinate = utils.isCoordinate as (text: any) => boolean;
-var icons = utils.icons;
-var weatherIconSafely = utils.weatherIconSafely as (code: string[], icon_type: imports.gi.St.IconType) => string;
+var weatherIconSafely = utils.weatherIconSafely as (code: BuiltinIcons[], icon_type: imports.gi.St.IconType) => BuiltinIcons;
 var CelsiusToKelvin = utils.CelsiusToKelvin as (celsius: number) => number;
 var SunCalc = importModule("sunCalc").SunCalc;
+var IsNight = utils.IsNight as (sunTimes: SunTimes, date?: Date) => boolean;
 
 class MetNorway implements WeatherProvider {
     public readonly prettyName = "MET Norway";
@@ -120,7 +120,7 @@ class MetNorway implements WeatherProvider {
                 lon: weather.lon
             },
             date: weather.from,
-            condition: this.ResolveCondition(hourly.symbol, true),
+            condition: this.ResolveCondition(hourly.symbol, IsNight(times)),
             humidity: weather.humidity,
             pressure: weather.pressure,
             extra_field: {
@@ -186,7 +186,7 @@ class MetNorway implements WeatherProvider {
 		for (let i = 0; i < hours.length; i++) {
 			const hour = hours[i];
 			let forecast: HourlyForecastData = {
-				condition: this.ResolveCondition(hour.symbol),
+				condition: this.ResolveCondition(hour.symbol, IsNight(this.sunTimes, hour.from)),
 				date: hour.from,
 				temp: CelsiusToKelvin(current[i].temperature),
 			}
@@ -333,14 +333,7 @@ class MetNorway implements WeatherProvider {
         return url;
     }
 
-    private IsNight(): boolean {
-      if (!this.sunTimes) return false;
-      let now = new Date();
-      if (now < this.sunTimes.sunrise || now > this.sunTimes.sunset) return true;
-      return false;
-    }
-
-    private ResolveCondition(icon: string, checkIfNight?: boolean): Condition {
+    private ResolveCondition(icon: string, isNight: boolean = false): Condition {
       let condition: Conditions = icon.replace("Dark_", "") as Conditions;
       let iconType = this.app.config.IconType();
       switch (condition) {
@@ -349,287 +342,287 @@ class MetNorway implements WeatherProvider {
             customIcon : "cloudy-symbolic",
             main: _("Cloudy"),
             description: _("Cloudy"),
-            icon: weatherIconSafely([icons.overcast, icons.clouds, icons.few_clouds_day], iconType)
+            icon: weatherIconSafely(["weather-overcast", "weather-clouds", "weather-few-clouds"], iconType)
           }
         case "Drizzle":
           return {
             customIcon : "showers-symbolic",
             main: _("Drizzle"),
             description: _("Drizzle"),
-            icon: weatherIconSafely([icons.rain, icons.showers_scattered, icons.rain_freezing, icons.alert], iconType)
+            icon: weatherIconSafely(["weather-rain", "weather-showers-scattered", "weather-freezing-rain", "weather-severe-alert"], iconType)
           }
         case "DrizzleSun":
           return {
-            customIcon : (checkIfNight && this.IsNight()) ? "night-showers-symbolic" : "day-showers-symbolic",
+            customIcon : (isNight) ? "night-showers-symbolic" : "day-showers-symbolic",
             main: _("Drizzle"),
             description: _("Drizzle"),
-            icon: weatherIconSafely([icons.showers_scattered, icons.rain_freezing, icons.alert], iconType)
+            icon: weatherIconSafely(["weather-showers-scattered", "weather-freezing-rain", "weather-severe-alert"], iconType)
           }
         case "DrizzleThunder":
           return {
             customIcon : "storm-showers-symbolic",
             main: _("Drizzle"),
             description: _("Drizzle with Thunderstorms"),
-            icon: weatherIconSafely([icons.showers_scattered, icons.rain_freezing, icons.alert], iconType)
+            icon: weatherIconSafely(["weather-showers-scattered", "weather-freezing-rain", "weather-severe-alert"], iconType)
           }
         case "DrizzleThunderSun":
           return {
             customIcon : "day-storm-showers-symbolic",
             main: _("Mostly Drizzle"),
             description: _("Mostly Drizzle with Thunderstorms"),
-            icon: weatherIconSafely([icons.rain, icons.showers_scattered, icons.rain_freezing, icons.alert], iconType)
+            icon: weatherIconSafely(["weather-rain", "weather-showers-scattered", "weather-freezing-rain", "weather-severe-alert"], iconType)
           }
         case "Fog":
           return {
             customIcon : "fog-symbolic",
             main: _("Fog"),
             description: _("Fog"),
-            icon: weatherIconSafely([icons.fog, icons.alert], iconType)
+            icon: weatherIconSafely(["weather-fog", "weather-severe-alert"], iconType)
           }
         case "HeavySleet":
           return {
             customIcon : "sleet-symbolic",
             main: _("Heavy Sleet"),
             description: _("Heavy Sleet"),
-            icon: weatherIconSafely([icons.rain_freezing, icons.rain, icons.alert], iconType)
+            icon: weatherIconSafely(["weather-freezing-rain", "weather-rain", "weather-severe-alert"], iconType)
           }
         case "HeavySleetSun":
           return {
-            customIcon : (checkIfNight && this.IsNight()) ? "night-sleet-symbolic" : "day-sleet-symbolic",
+            customIcon : (isNight) ? "night-sleet-symbolic" : "day-sleet-symbolic",
             main: _("Heavy Sleet"),
             description: _("Mostly Heavy Sleet"),
-            icon: weatherIconSafely([icons.rain_freezing, icons.rain, icons.alert], iconType)
+            icon: weatherIconSafely(["weather-freezing-rain", "weather-rain", "weather-severe-alert"], iconType)
           }
         case "HeavySleetThunder":
           return {
             customIcon : "sleet-storm-symbolic",
             main: _("Heavy Sleet"),
             description: _("Heavy Sleet with Thunderstorms"),
-            icon: weatherIconSafely([icons.rain_freezing, icons.rain, icons.alert], iconType)
+            icon: weatherIconSafely(["weather-freezing-rain", "weather-rain", "weather-severe-alert"], iconType)
           }
         case "HeavySleetThunderSun":
           return {
-            customIcon : (checkIfNight && this.IsNight()) ? "night-sleet-storm-symbolic" : "day-sleet-storm-symbolic",
+            customIcon : (isNight) ? "night-sleet-storm-symbolic" : "day-sleet-storm-symbolic",
             main: _("Heavy Sleet"),
             description: _("Mostly Heavy Sleet with Thunderstorms"),
-            icon: weatherIconSafely([icons.rain_freezing, icons.rain, icons.alert], iconType)
+            icon: weatherIconSafely(["weather-freezing-rain", "weather-rain", "weather-severe-alert"], iconType)
           }
         case "HeavySnow":
           return {
             customIcon : "snow-symbolic",
             main: _("Heavy Snow"),
             description: _("Heavy Snow"),
-            icon: weatherIconSafely([icons.snow, icons.alert], iconType)
+            icon: weatherIconSafely(["weather-snow", "weather-severe-alert"], iconType)
           }
         case "HeavySnowThunder":
           return {
             customIcon : "snow-symbolic",
             main: _("Heavy Snow"),
             description: _("Heavy Snow with Thunderstorms"),
-            icon: weatherIconSafely([icons.snow, icons.alert], iconType)
+            icon: weatherIconSafely(["weather-snow", "weather-severe-alert"], iconType)
           }
         case "HeavySnowThunderSun":
           return {
-            customIcon : (checkIfNight && this.IsNight()) ? "night-snow-thunderstorm-symbolic" : "day-snow-thunderstorm-symbolic",
+            customIcon : (isNight) ? "night-snow-thunderstorm-symbolic" : "day-snow-thunderstorm-symbolic",
             main: _("Heavy Snow"),
             description: _("Heavy Snow with Thunderstorms"),
-            icon: weatherIconSafely([icons.snow, icons.alert], iconType)
+            icon: weatherIconSafely(["weather-snow", "weather-severe-alert"], iconType)
           }
         case "HeavySnowSun":
           return {
-            customIcon : (checkIfNight && this.IsNight()) ? "night-snow-symbolic" : "day-snow-symbolic",
+            customIcon : (isNight) ? "night-snow-symbolic" : "day-snow-symbolic",
             main: _("Heavy Snow"),
             description: _("Heavy Snow"),
-            icon: weatherIconSafely([icons.snow, icons.alert], iconType)
+            icon: weatherIconSafely(["weather-snow", "weather-severe-alert"], iconType)
           }
         case "LightCloud":
           return {
-            customIcon : (checkIfNight && this.IsNight()) ? "night-cloudy-symbolic" : "day-cloudy-symbolic",
+            customIcon : (isNight) ? "night-cloudy-symbolic" : "day-cloudy-symbolic",
             main: _("Few Clouds"),
             description: _("Few Clouds"),
-            icon: weatherIconSafely((checkIfNight && this.IsNight()) ? [icons.few_clouds_night, icons.alert] : [icons.few_clouds_day, icons.alert], iconType)
+            icon: weatherIconSafely((isNight) ? ["weather-few-clouds-night", "weather-severe-alert"] : ["weather-few-clouds", "weather-severe-alert"], iconType)
           }
         case "LightRain":
           return {
-            customIcon : (checkIfNight && this.IsNight()) ? "rain-symbolic" : "rain-symbolic",
+            customIcon : (isNight) ? "rain-symbolic" : "rain-symbolic",
             main: _("Light Rain"),
             description: _("Light Rain"),
-            icon: weatherIconSafely([icons.showers_scattered, icons.rain, icons.alert], iconType)
+            icon: weatherIconSafely(["weather-showers-scattered", "weather-rain", "weather-severe-alert"], iconType)
           }
         case "LightRainSun":
           return {
-            customIcon : (checkIfNight && this.IsNight()) ? "night-rain-symbolic" : "day-rain-symbolic",
+            customIcon : (isNight) ? "night-rain-symbolic" : "day-rain-symbolic",
             main: _("Light Rain"),
             description: _("Light Rain"),
-            icon: weatherIconSafely([icons.showers_scattered, icons.rain, icons.alert], iconType)
+            icon: weatherIconSafely(["weather-showers-scattered", "weather-rain", "weather-severe-alert"], iconType)
           }
         case "LightRainThunder":
           return {
             customIcon : "rain-symbolic",
             main: _("Light Rain"),
             description: _("Light Rain with Thunderstorms"),
-            icon: weatherIconSafely([icons.showers_scattered, icons.rain, icons.alert], iconType)
+            icon: weatherIconSafely(["weather-showers-scattered", "weather-rain", "weather-severe-alert"], iconType)
           }
         case "LightRainThunderSun":
           return {
-            customIcon : (checkIfNight && this.IsNight()) ? "night-rain-symbolic" : "day-rain-symbolic",
+            customIcon : (isNight) ? "night-rain-symbolic" : "day-rain-symbolic",
             main: _("Light Rain"),
             description: _("Mostly Light Rain with Thunderstorms"),
-            icon: weatherIconSafely([icons.showers_scattered, icons.rain, icons.alert], iconType)
+            icon: weatherIconSafely(["weather-showers-scattered", "weather-rain", "weather-severe-alert"], iconType)
           }
         case "LightSleet":
           return {
             customIcon : "sleet-symbolic",
             main: _("Light Sleet"),
             description: _("Light Sleet"),
-            icon: weatherIconSafely([icons.rain_freezing, icons.showers, icons.alert], iconType)
+            icon: weatherIconSafely(["weather-freezing-rain", "weather-showers", "weather-severe-alert"], iconType)
           }
         case "LightSleetSun":
           return {
-            customIcon : (checkIfNight && this.IsNight()) ? "night-sleet-symbolic" : "day-sleet-symbolic",
+            customIcon : (isNight) ? "night-sleet-symbolic" : "day-sleet-symbolic",
             main: _("Light Sleet"),
             description: _("Mostly Light Sleet"),
-            icon: weatherIconSafely([icons.rain_freezing, icons.showers, icons.alert], iconType)
+            icon: weatherIconSafely(["weather-freezing-rain", "weather-showers", "weather-severe-alert"], iconType)
           }
         case "LightSleetThunder":
           return {
             customIcon : "sleet-symbolic",
             main: _("Light Sleet"),
             description: _("Light Sleet with Thunderstorms"),
-            icon: weatherIconSafely([icons.rain_freezing, icons.showers, icons.alert], iconType)
+            icon: weatherIconSafely(["weather-freezing-rain", "weather-showers", "weather-severe-alert"], iconType)
           }
         case "LightSleetThunderSun":
           return {
-            customIcon : (checkIfNight && this.IsNight()) ? "night-sleet-storm-symbolic" : "day-sleet-storm-symbolic",
+            customIcon : (isNight) ? "night-sleet-storm-symbolic" : "day-sleet-storm-symbolic",
             main: _("Light Sleet"),
             description: _("Mostly Light Sleet with Thunderstorms"),
-            icon: weatherIconSafely([icons.rain_freezing, icons.showers, icons.alert], iconType)
+            icon: weatherIconSafely(["weather-freezing-rain", "weather-showers", "weather-severe-alert"], iconType)
           }
         case "LightSnow":
           return {
             customIcon : "snow-symbolic",
             main: _("Light Snow"),
             description: _("Light Snow"),
-            icon: weatherIconSafely([icons.snow, icons.alert], iconType)
+            icon: weatherIconSafely(["weather-snow", "weather-severe-alert"], iconType)
           }
         case "LightSnowSun":
           return {
-            customIcon : (checkIfNight && this.IsNight()) ? "night-snow-symbolic" : "day-snow-symbolic",
+            customIcon : (isNight) ? "night-snow-symbolic" : "day-snow-symbolic",
             main: _("Light Snow"),
             description: _("Mostly Light Snow"),
-            icon: weatherIconSafely([icons.snow, icons.alert], iconType)
+            icon: weatherIconSafely(["weather-snow", "weather-severe-alert"], iconType)
           }
         case "LightSnowThunder":
           return {
             customIcon : "snow-symbolic",
             main: _("Light Snow"),
             description: _("Light Snow with Thunderstorms"),
-            icon: weatherIconSafely([icons.snow, icons.alert], iconType)
+            icon: weatherIconSafely(["weather-snow", "weather-severe-alert"], iconType)
           }
         case "LightSnowThunderSun":
           return {
-            customIcon : (checkIfNight && this.IsNight()) ? "night-snow-thunderstorm-symbolic" : "day-snow-thunderstorm-symbolic",
+            customIcon : (isNight) ? "night-snow-thunderstorm-symbolic" : "day-snow-thunderstorm-symbolic",
             main: _("Light Snow"),
             description: _("Mostly Light Snow with Thunderstorms"),
-            icon: weatherIconSafely([icons.snow, icons.alert], iconType)
+            icon: weatherIconSafely(["weather-snow", "weather-severe-alert"], iconType)
           }
         case "PartlyCloud":
           return {
-            customIcon : (checkIfNight && this.IsNight()) ? "night-cloudy-symbolic" : "day-cloudy-symbolic",
+            customIcon : (isNight) ? "night-cloudy-symbolic" : "day-cloudy-symbolic",
             main: _("Partly Cloudy"),
             description: _("Partly Cloudy"),
-            icon: weatherIconSafely((checkIfNight && this.IsNight()) ? [icons.few_clouds_night, icons.clouds, icons.overcast, icons.alert] : [icons.few_clouds_day, icons.clouds, icons.overcast, icons.alert], iconType)
+            icon: weatherIconSafely((isNight) ? ["weather-few-clouds-night", "weather-clouds", "weather-overcast", "weather-severe-alert"] : ["weather-few-clouds", "weather-clouds", "weather-overcast", "weather-severe-alert"], iconType)
           }
         case "Rain":
           return {
             customIcon : "rain-symbolic",
             main: _("Rain"),
             description: _("Rain"),
-            icon: weatherIconSafely([icons.rain, icons.rain_freezing, icons.showers_scattered, icons.alert], iconType)
+            icon: weatherIconSafely(["weather-rain", "weather-freezing-rain", "weather-showers-scattered", "weather-severe-alert"], iconType)
           }
         case "RainSun":
           return {
-            customIcon : (checkIfNight && this.IsNight()) ? "night-rain-symbolic" : "day-rain-symbolic",
+            customIcon : (isNight) ? "night-rain-symbolic" : "day-rain-symbolic",
             main: _("Mostly Rainy"),
             description: _("Mostly Rainy"),
-            icon: weatherIconSafely([icons.rain, icons.rain_freezing, icons.showers_scattered, icons.alert], iconType)
+            icon: weatherIconSafely(["weather-rain", "weather-freezing-rain", "weather-showers-scattered", "weather-severe-alert"], iconType)
           }
         case "RainThunder":
           return {
             customIcon : "thunderstorm-symbolic",
             main: _("Rain"),
             description: _("Rain with Thunderstorms"),
-            icon: weatherIconSafely([icons.storm, icons.rain, icons.rain_freezing, icons.showers_scattered, icons.alert], iconType)
+            icon: weatherIconSafely(["weather-storm", "weather-rain", "weather-freezing-rain", "weather-showers-scattered", "weather-severe-alert"], iconType)
           }
         case "RainThunderSun":
           return {
-            customIcon : (checkIfNight && this.IsNight()) ? "night-thunderstorm-symbolic" : "day-thunderstorm-symbolic",
+            customIcon : (isNight) ? "night-thunderstorm-symbolic" : "day-thunderstorm-symbolic",
             main: _("Rain"),
             description: _("Mostly Rainy with Thunderstorms"),
-            icon: weatherIconSafely([icons.storm, icons.rain, icons.rain_freezing, icons.showers_scattered, icons.alert], iconType)
+            icon: weatherIconSafely(["weather-storm", "weather-rain", "weather-freezing-rain", "weather-showers-scattered", "weather-severe-alert"], iconType)
           }
         case "Sleet":
           return {
             customIcon : "sleet-symbolic",
             main: _("Sleet"),
             description: _("Sleet"),
-            icon: weatherIconSafely([icons.rain_freezing, icons.showers, icons.alert], iconType)
+            icon: weatherIconSafely(["weather-freezing-rain", "weather-showers", "weather-severe-alert"], iconType)
           }
         case "SleetSun":
           return {
-            customIcon : (checkIfNight && this.IsNight()) ? "night-sleet-symbolic" : "day-sleet-symbolic",
+            customIcon : (isNight) ? "night-sleet-symbolic" : "day-sleet-symbolic",
             main: _("Sleet"),
             description: _("Mostly Sleet"),
-            icon: weatherIconSafely([icons.rain_freezing, icons.showers, icons.alert], iconType)
+            icon: weatherIconSafely(["weather-freezing-rain", "weather-showers", "weather-severe-alert"], iconType)
           }
         case "SleetSunThunder":
           return {
-            customIcon : (checkIfNight && this.IsNight()) ? "night-sleet-storm-symbolic" : "day-sleet-storm-symbolic",
+            customIcon : (isNight) ? "night-sleet-storm-symbolic" : "day-sleet-storm-symbolic",
             main: _("Sleet"),
             description: _("Mostly Sleet with Thunderstorms"),
-            icon: weatherIconSafely([icons.rain_freezing, icons.showers, icons.alert], iconType)
+            icon: weatherIconSafely(["weather-freezing-rain", "weather-showers", "weather-severe-alert"], iconType)
           }
         case "SleetThunder":
           return {
             customIcon : "sleet-storm-symbolic",
             main: _("Sleet"),
             description: _("Sleet with Thunderstorms"),
-            icon: weatherIconSafely([icons.rain_freezing, icons.showers, icons.alert], iconType)
+            icon: weatherIconSafely(["weather-freezing-rain", "weather-showers", "weather-severe-alert"], iconType)
           }
         case "Snow":
           return {
             customIcon : "snow-symbolic",
             main: _("Snow"),
             description: _("Snowy"),
-            icon: weatherIconSafely([icons.snow, icons.alert], iconType)
+            icon: weatherIconSafely(["weather-snow", "weather-severe-alert"], iconType)
           }
         case "SnowSun":
           return {
-            customIcon : (checkIfNight && this.IsNight()) ? "night-snow-symbolic" : "day-snow-symbolic",
+            customIcon : (isNight) ? "night-snow-symbolic" : "day-snow-symbolic",
             main: _("Mostly Snowy"),
             description: _("Mostly Snowy"),
-            icon: weatherIconSafely([icons.snow, icons.alert], iconType)
+            icon: weatherIconSafely(["weather-snow", "weather-severe-alert"], iconType)
           }
         case "SnowSunThunder":
           return {
-            customIcon : (checkIfNight && this.IsNight()) ? "night-snow-thunderstorm-symbolic" : "day-snow-thunderstorm-symbolic",
+            customIcon : (isNight) ? "night-snow-thunderstorm-symbolic" : "day-snow-thunderstorm-symbolic",
             main: _("Mostly Snowy"),
             description: _("Mostly Snowy with Thunderstorms"),
-            icon: weatherIconSafely([icons.snow, icons.alert], iconType)
+            icon: weatherIconSafely(["weather-snow", "weather-severe-alert"], iconType)
           }
         case "SnowThunder":
           return {
             customIcon : "snow-symbolic",
             main: _("Snow"),
             description: _("Snowy with Thunderstorms"),
-            icon: weatherIconSafely([icons.snow, icons.alert], iconType)
+            icon: weatherIconSafely(["weather-snow", "weather-severe-alert"], iconType)
           }
         case "Sun":
           return {
-            customIcon : (checkIfNight && this.IsNight()) ? "night-clear-symbolic" : "day-sunny-symbolic",
+            customIcon : (isNight) ? "night-clear-symbolic" : "day-sunny-symbolic",
             main: _("Clear"),
             description: _("Clear"),
-            icon: weatherIconSafely((checkIfNight && this.IsNight()) ? [icons.clear_night, icons.alert] : [icons.clear_day, icons.alert], iconType)
+            icon: weatherIconSafely((isNight) ? ["weather-clear-night", "weather-severe-alert"] : ["weather-clear", "weather-severe-alert"], iconType)
           }
       }
     }

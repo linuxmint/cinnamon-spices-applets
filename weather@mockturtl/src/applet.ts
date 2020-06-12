@@ -2110,7 +2110,7 @@ interface Condition {
 	/** Long Description */
 	description: string,
 	/** GTK icon name */
-	icon: string,
+	icon: BuiltinIcons,
 	customIcon: CustomIcons
 }
 
@@ -2122,6 +2122,41 @@ interface SunTimes {
     sunrise: Date;
     sunset: Date
 }
+
+/**
+ * names of icons what might be available
+ */
+type BuiltinIcons = 
+	"weather-clear" |
+	"weather-clear-night" |
+	"weather-few-clouds" |
+	"weather-few-clouds-night" |
+	"weather-clouds" |
+	"weather-many-clouds" |
+	"weather-overcast" |
+	"weather-showers-scattered" |
+	"weather-showers-scattered-day" |
+	"weather-showers-scattered-night" |
+	"weather-showers-day" |
+	"weather-showers-night" |
+	"weather-showers" |
+	"weather-rain" |
+	"weather-freezing-rain" |
+	"weather-snow" |
+	"weather-snow-day" |
+	"weather-snow-night" |
+	"weather-snow-rain" |
+	"weather-snow-scattered" |
+	"weather-snow-scattered-day" |
+	"weather-snow-scattered-night" |
+	"weather-storm" |
+	"weather-hail" |
+	"weather-fog" |
+	"weather-tornado" |
+	"weather-windy" |
+	"weather-breeze" |
+	"weather-clouds-night" |
+	"weather-severe-alert";
 
 /**
  * Available icons in icons folder

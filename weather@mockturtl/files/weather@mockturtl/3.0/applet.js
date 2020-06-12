@@ -126,7 +126,8 @@ var DATA_SERVICE = {
     DARK_SKY: "DarkSky",
     MET_NORWAY: "MetNorway",
     WEATHERBIT: "Weatherbit",
-    YAHOO: "Yahoo"
+    YAHOO: "Yahoo",
+    CLIMACELL: "Climacell"
 };
 imports.gettext.bindtextdomain(UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
 function _(str) {
@@ -370,38 +371,45 @@ var WeatherApplet = (function (_super) {
         var currentName = get(["name"], this.provider);
         switch (this.config._dataService) {
             case DATA_SERVICE.DARK_SKY:
-                if (darkSky == null)
+                if (!darkSky)
                     var darkSky = importModule('darkSky');
                 if (currentName != "DarkSky" || force) {
                     this.provider = new darkSky.DarkSky(this);
                 }
                 break;
             case DATA_SERVICE.OPEN_WEATHER_MAP:
-                if (openWeatherMap == null)
+                if (!openWeatherMap)
                     var openWeatherMap = importModule("openWeatherMap");
                 if (currentName != "OpenWeatherMap" || force) {
                     this.provider = new openWeatherMap.OpenWeatherMap(this);
                 }
                 break;
             case DATA_SERVICE.MET_NORWAY:
-                if (metNorway == null)
+                if (!metNorway)
                     var metNorway = importModule("met_norway");
                 if (currentName != "MetNorway" || force) {
                     this.provider = new metNorway.MetNorway(this);
                 }
                 break;
             case DATA_SERVICE.WEATHERBIT:
-                if (weatherbit == null)
+                if (!weatherbit)
                     var weatherbit = importModule("weatherbit");
                 if (currentName != "Weatherbit" || force) {
                     this.provider = new weatherbit.Weatherbit(this);
                 }
                 break;
             case DATA_SERVICE.YAHOO:
-                if (yahoo == null)
+                if (!yahoo)
                     var yahoo = importModule("yahoo");
                 if (currentName != "Yahoo" || force) {
                     this.provider = new yahoo.Yahoo(this);
+                }
+                break;
+            case DATA_SERVICE.CLIMACELL:
+                if (!climacell)
+                    var climacell = importModule("climacell");
+                if (currentName != "Climacell" || force) {
+                    this.provider = new climacell.Climacell(this);
                 }
                 break;
             default:
