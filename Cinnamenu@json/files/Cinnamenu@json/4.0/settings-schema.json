@@ -48,9 +48,7 @@
                 "show-places",
                 "enable-bookmarks",
                 "privacy-settings-button",
-                "menu-editor-button",
-                "resetCategoryOrder-button",
-                "categories"
+                "menu-editor-button"
             ]
         },
         "panel-behave":{
@@ -96,13 +94,6 @@
         }
     },
 
-    "categories":{
-        "type":"generic",
-        "default":[
-
-        ]
-    },
-    
     "applications-view-mode":{
         "type":"combobox",
         "default":1,
@@ -145,13 +136,12 @@
         "type":"spinbutton",
         "default":4,
         "min":3,
-        "max":12,
+        "max":16,
         "step":1,
         "units":"columns",
         "description":"Number of columns in apps grid",
         "tooltip":"Number of columns in apps grid"
     },
-
     "show-places":{
         "type":"switch",
         "default":true,
@@ -166,7 +156,7 @@
     },
     "privacy-settings-button":{
         "type":"button",
-        "description":"Toggle recent files",
+        "description":"Recent files settings",
         "callback":"launchPrivacySettings",
         "tooltip":"Press this button to customize your privacy settings."
     },
@@ -175,11 +165,6 @@
         "description":"Open the menu editor",
         "callback":"launchEditor",
         "tooltip":"Press this button to customize your menu entries."
-    },
-    "resetCategoryOrder-button":{
-        "type":"button",
-        "description":"Reset category order",
-        "callback":"resetCategoryOrder"
     },
 
     "overlay-key":{
