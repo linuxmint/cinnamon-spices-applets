@@ -84,8 +84,7 @@ class CinnamenuApplet extends TextIconApplet {
                                                           this.vectorBox.hide();
                                                       } },
             clearEnteredActors: () => this.clearEnteredActors(),
-            makeVectorBox: (actor) => this.makeVectorBox(actor),
-            setTooltip: (...args) => this.showTooltip(...args),
+            setTooltip: (...args) => this.setTooltip(...args),
             setKeyFocus: () => global.stage.set_key_focus(this.searchEntry),
             toggleSearchVisibility: (bool) => {
                     if (bool) {
@@ -108,24 +107,6 @@ class CinnamenuApplet extends TextIconApplet {
                                                 this.appFavorites.moveFavoriteToPos(id, index);
                                                 return false; });
                                               },
-            moveCategoryToPos: (id1, id2) => {
-                                    let categories = this.state.settings.categories.slice();
-                                    let oldIndex = categories.indexOf(id1);
-                                    let newIndex = categories.indexOf(id2);
-                                    categories.splice(oldIndex, 1);
-                                    let categories1 = categories.slice(0, newIndex);
-                                    let categories2 = categories.slice(newIndex, categories.length);
-                                    categories = categories1.concat([id1]).concat(categories2);
-                                    this.settings.setValue('categories', categories);
-                                    this.state.set({dragIndex: -1});
-                                    this.buildCategories();
-                                    for (let i = 0, len = this.categoryButtons.length; i < len; i++) {
-                                        if (this.categoryButtons[i].id === id2) {
-                                            this.categoryButtons[i].handleEnter();
-                                        } else if (this.categoryButtons[i].entered) {
-                                            this.categoryButtons[i].handleLeave();
-                                        }
-                                    } },
             removeFavorite: (id) => this.appFavorites.removeFavorite(id)  });
         //createMenu
         this.orientation = orientation;
@@ -186,12 +167,14 @@ class CinnamenuApplet extends TextIconApplet {
         this.updateKeybinding();
     }
 
-    showTooltip(coords, width, height, text) {
+    setTooltip(coords, width, height, text) {
         if (!text) {
-            this.state.itemEntered = false;
+            this.showTooltip = false;
             this.tooltip.hide();
             return;
         }
+        this.showTooltip = true;
+
         let [x, y] = coords;
         let clutterText = this.tooltip._tooltip.get_clutter_text();
         if (clutterText) {
@@ -201,7 +184,7 @@ class CinnamenuApplet extends TextIconApplet {
         }
         if (width && height) {
             if (this.state.isListView) {
-                x += width + 80;
+                x += width + 40;
                 y -= 14;
                 // Don't let the tooltip cover menu items when the menu
                 // is oriented next to the right side of the monitor.
@@ -214,8 +197,7 @@ class CinnamenuApplet extends TextIconApplet {
             }
         }
         this.tooltip.mousePosition = [x, y];
-        this.state.itemEntered = true;
-        setTimeout(() => {  if (this.state.itemEntered) {
+        setTimeout(() => {  if (this.showTooltip) {
                                 this.tooltip.show();
                             }
                          }, 250);
@@ -463,7 +445,7 @@ class CinnamenuApplet extends TextIconApplet {
         let {enableCustomMenuHeight} = this.state.settings;
 
         if (enableCustomMenuHeight) {
-            height = Math.min(this.state.settings.customMenuHeight, customHeightLimit);
+            height = Math.min(this.state.settings.customMenuHeight * global.ui_scale, customHeightLimit);
         } else {
             height = this.categoriesBox.height + this.bottomPane.height;
             if (height >= customHeightLimit) {
@@ -495,11 +477,6 @@ class CinnamenuApplet extends TextIconApplet {
     // function to bind preference setting changes
     bindSettingsChanges() {
         let settingsProps = [
-            {
-                key: 'categories',
-                value: 'categories',
-                cb: null
-            },
             {
                 key: 'menu-icon-custom',
                 value: 'menuIconCustom',
@@ -723,95 +700,6 @@ class CinnamenuApplet extends TextIconApplet {
         return buttons;
     }
 
-   /*
-    * The vectorBox overlays the the categoriesBox to aid in navigation from categories to apps
-    * by preventing misselections. It is set to the same size as the categoriesOverlayBox and
-    * categoriesBox.
-    *
-    * The actor is a quadrilateral that we turn into a triangle by setting the A and B vertices to
-    * the same position. The size and origin of the vectorBox are calculated in getVectorInfo().
-    * Using those properties, the bounding box is sized as (w, h) and the triangle is defined as
-    * follows:
-    *   _____
-    *  |    /|D
-    *  |   / |     AB: (mx, my)
-    *  | A/  |      C: (w, h)
-    *  | B\  |      D: (w, 0)
-    *  |   \ |
-    *  |____\|C
-    */
-    getVectorInfo(buttonHeight) {
-        let [mx, my, , ] = global.get_pointer();
-        // Slightly distance the polygon from the cursor so categories update quickly.
-        if (!this.mxOffset) {
-            let mxOffset = Math.floor(buttonHeight / 38);
-            mxOffset = mxOffset < 0 ? 0 : mxOffset;
-            this.mxOffset = mxOffset;
-        }
-        mx += this.mxOffset;
-        let bw, bh, bx, by;
-        if (!this.categoriesScrollBoxTransformedSize) {
-            this.categoriesScrollBoxTransformedSize = this.groupCategoriesWorkspacesScrollBox.get_transformed_size();
-        }
-        if (!this.categoriesScrollBoxTransformedPosition) {
-            this.categoriesScrollBoxTransformedPosition = this.groupCategoriesWorkspacesScrollBox.get_transformed_position();
-        }
-        [bw, bh] = this.categoriesScrollBoxTransformedSize;
-        [bx, by] = this.categoriesScrollBoxTransformedPosition;
-        let xformed_mx = mx - bx;
-        let xformed_my = my - by;
-        if (xformed_mx < 0 || xformed_mx > bw || xformed_my < 0 || xformed_my > bh) {
-            return null;
-        }
-        return {
-            mx: xformed_mx,
-            my: xformed_my,
-            w: bw,
-            h: bh
-        };
-    }
-
-    makeVectorBox(actor) {
-        let vi = this.getVectorInfo(actor.height);
-        if (!vi) return;
-        let config = {
-            debug: false,
-            width: vi.w - 1,
-            height: vi.h,
-            ulc_x: vi.mx,
-            ulc_y: vi.my,
-            llc_x: vi.mx,
-            llc_y: vi.my,
-            urc_x: vi.w,
-            urc_y: 0,
-            lrc_x: vi.w,
-            lrc_y: vi.h
-        };
-        if (!this.vectorBox || this.vectorBox.is_finalized()) {
-            this.vectorBox = new St.Polygon(config);
-            this.vectorBox._delegate = actor._delegate;
-            this.draggableVectorBox = makeDraggable(this.vectorBox);
-            this.categoriesOverlayBox.add_actor(this.vectorBox);
-            this.vectorBox.set_reactive(true);
-            this.vectorBox.show();
-            this.applicationsBoxWrapper.connect('enter-event', () => {
-                                      if (!this.vectorBox) return;
-                                      this.vectorBox.set_reactive(false); });
-            this.draggableVectorBoxId = this.draggableVectorBox.connect('drag-begin', () => {
-                                      if (!this.vectorBox) return;
-                                      this.vectorBox.set_reactive(false);
-                                      this.vectorBox.hide(); });
-        } else {
-            this.vectorBox._delegate = actor._delegate;
-            if (!this.vectorBox.reactive) this.vectorBox.set_reactive(true);
-            if (!this.vectorBox.visible) this.vectorBox.show();
-            let keys = Object.keys(config);
-            for (let i = 0; i < keys.length; i++) {
-                this.vectorBox[keys[i]] = config[keys[i]];
-            }
-        }
-    }
-
     loadAppCategories(dir, rootDir, dirId) {
         let iter = dir.iter();
         let nextType;
@@ -848,15 +736,6 @@ class CinnamenuApplet extends TextIconApplet {
                 }
             }
         }
-    }
-
-    resetCategoryOrder() {
-        if (!this.categoriesBox) {
-            return;
-        }
-        this.categoriesBox.remove_all_children();
-        this.settings.setValue('categories', []);
-        this.buildCategories();
     }
 
     initCategories(isReRender) {
@@ -938,27 +817,11 @@ class CinnamenuApplet extends TextIconApplet {
                 buttons.push(new CategoryListButton( this.state, params[i][1], params[i][2], params[i][3] ));
             }
         }
-        if (this.state.settings.categories.length === 0) {
-            this.settings.setValue('categories', map(buttons, (button) => button.id));
-        }
+
         this.categoryButtons = [];
-        // If a category option is enabled after the settings are set, or an application is installed
-        // using a new category, we need to update the category order settings so it will render.
-        if (buttons.length !== this.state.settings.categories.length - 1) {
-            categoriesChanged = true;
-            for (let i = 0; i < buttons.length; i++) {
-                if (this.state.settings.categories.indexOf(buttons[i].id) === -1) {
-                    this.state.settings.categories.push(buttons[i].id);
-                }
-            }
-        }
-        for (let i = 0; i < this.state.settings.categories.length; i++) {
-            let button = find(buttons, (button) => button.id === this.state.settings.categories[i]);
-            if (!button) {
-                continue;
-            }
-            button.index = i;
-            this.categoryButtons.push(button);
+        for (let i = 0; i < buttons.length; i++) {
+            buttons[i].index = i;
+            this.categoryButtons.push(buttons[i]);
         }
 
         buttons = undefined;
@@ -1351,6 +1214,7 @@ class CinnamenuApplet extends TextIconApplet {
                 let match = null;
                 for (let z = 0, len = searchableProps.length; z < len; z++ ) {
                     match = fuzzy(pattern, res[i][searchableProps[z]]);
+
                     if (res[i][searchableProps[z]] && match.score > searchThresholds[searchableProps[z]]) {
                         const markdownProps = ['name', 'description'];
                         res[i].score = match.score;
@@ -1361,6 +1225,7 @@ class CinnamenuApplet extends TextIconApplet {
                         break;
                     }
                 }
+
             }
             res = _res;
             _res = null;
@@ -1931,26 +1796,14 @@ class CinnamenuApplet extends TextIconApplet {
         this.displayed = true;
         //==================bottomPane================
         // PowerGroupBox
-        this.powerGroupButtons.push(new GroupButton( this.state, 'user-info', 24, '', _('Account details'),
-                                                            () => spawnCommandLine('cinnamon-settings user') ));
-        this.powerGroupButtons.push(new GroupButton( this.state, 'system-lock-screen', 24, _('Lock Screen'), _('Lock the screen'),
-                      () => {
-                                let screensaver_settings = new Gio.Settings({
-                                                  schema_id: 'org.cinnamon.desktop.screensaver' });
-                                let screensaver_dialog = Gio.file_new_for_path('/usr/bin/cinnamon-screensaver-command');
-                                if (screensaver_dialog.query_exists(null)) {
-                                    if (screensaver_settings.get_boolean('ask-for-away-message')) {
-                                      spawnCommandLine('cinnamon-screensaver-lock-dialog');
-                                    } else {
-                                      spawnCommandLine('cinnamon-screensaver-command --lock');
-                                    }
-                                } else {
-                                    this.screenSaverProxy.LockRemote('');
-                                } } ));
+        this.powerGroupButtons.push(new GroupButton( this.state, 'preferences-system', 24, _('System settings'),
+                                            _('Cinnamon control center'), () => spawnCommandLine('cinnamon-settings') ));
+        this.powerGroupButtons.push(new GroupButton( this.state, 'system-lock-screen', 24, _('Lock Screen'),
+                    _('Lock the screen'), () => spawnCommandLine('cinnamon-screensaver-command --lock') ));
         this.powerGroupButtons.push(new GroupButton( this.state, 'system-log-out', 24, _('Logout'),
-                                              _('Leave the session'), () => this.session.LogoutRemote(0) ));
+                                          _('Leave the session'), () => spawnCommandLine('cinnamon-session-quit') ));
         this.powerGroupButtons.push(new GroupButton( this.state, 'system-shutdown', 24, _('Quit'),
-                                              _('Shutdown the computer'), () => this.session.ShutdownRemote() ));
+                                _('Shutdown the computer'), () => spawnCommandLine('cinnamon-session-quit --power-off') ));
         this.powerGroupBox = new St.BoxLayout({ style_class: '', style: 'padding-left: 13px;' });
         for (let i = 0; i < this.powerGroupButtons.length; i++) {
             this.powerGroupBox.add(this.powerGroupButtons[i].actor, {   x_fill: false,
@@ -2096,6 +1949,7 @@ class CinnamenuApplet extends TextIconApplet {
         // mainbox packs vertically
         this.mainBox.add_actor(this.middlePane);
         this.mainBox.add(this.bottomPane);
+
         // add all to section
         let section = new PopupMenuSection();
         section.actor.add_actor(this.mainBox);
