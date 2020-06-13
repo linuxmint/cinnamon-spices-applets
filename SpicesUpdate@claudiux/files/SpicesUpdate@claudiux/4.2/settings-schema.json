@@ -159,7 +159,7 @@
   },
   "check_new_applets": {
     "type": "switch",
-    "default": true,
+    "default": false,
     "dependency": "check_applets",
     "description": "Check regularly whether new applets are available",
     "tooltip": "If new applets do not concern you, uncheck this box."
@@ -208,13 +208,13 @@
   },
   "check_desklets": {
     "type": "switch",
-    "default": true,
+    "default": false,
     "description": "Check regularly whether your desklets are up to date",
     "tooltip": "If desklets updates do not concern you, uncheck this box."
   },
   "check_new_desklets": {
     "type": "switch",
-    "default": true,
+    "default": false,
     "dependency": "check_desklets",
     "description": "Check regularly whether new desklets are available",
     "tooltip": "If new desklets do not concern you, uncheck this box."
@@ -263,13 +263,13 @@
   },
   "check_extensions": {
     "type": "switch",
-    "default": true,
+    "default": false,
     "description": "Check regularly whether your extensions are up to date",
     "tooltip": "If extensions updates do not concern you, uncheck this box."
   },
   "check_new_extensions": {
     "type": "switch",
-    "default": true,
+    "default": false,
     "dependency": "check_extensions",
     "description": "Check regularly whether new extensions are available",
     "tooltip": "If new extensions do not concern you, uncheck this box."
