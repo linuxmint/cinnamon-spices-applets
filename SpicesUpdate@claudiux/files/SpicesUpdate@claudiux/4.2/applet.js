@@ -885,7 +885,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
                         name = info.get_name().toString();
                         if (this.unprotectedDico[type][name] === undefined) {
                             this.unprotectedList[type].push({"name": name, "isunprotected": true, "requestnewdownload": false});
-                            //this.unprotectedDico[type][name] = {"name": name, "isunprotected": true};
+                            this.unprotectedDico[type][name] = {};
                             this.unprotectedDico[type][name]["name"] = name;
                             this.unprotectedDico[type][name]["isunprotected"] = true;
                             this._get_last_edited_from_metadata(type, name);
