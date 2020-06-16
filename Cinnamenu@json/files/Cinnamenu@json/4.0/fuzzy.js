@@ -23,92 +23,72 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 */
+const {latinise} = imports.misc.util;
 
 const {stripMarkupRegex} = require('./constants');
 
 const fuzzy = function (q, str) {
-  if (typeof q !== 'string' || typeof str !== 'string') {
-    return {
-      score: 0,
-      result: str
-    };
-  }
+    let originalStr = str;  // Keep original str for case
+    q = q.toLowerCase();
+    str = str.toLowerCase();
 
-  if (!str) {
-    return {
-      score: 0,
-      result: str
-    };
-  }
+    let result = '';
+    let steps = 0;
+    let pos = 0;
+    let lastI = 0;
 
-  if (!q) {
-    return {
-      score: 1,
-      result: str
-    };
-  }
-  str = str.replace(stripMarkupRegex, '');
-
-  // Keep original str for case
-  let originalStr = str;
-
-  q = q.toLowerCase();
-  str = str.toLowerCase();
-
-  if (q === str) {
-    return {
-      score: 1,
-      result: '<b>' + originalStr + '</b>'
-    };
-  }
-
-  // String with surrounded results
-  let result = '';
-
-  // Number of spaces between matches
-  let steps = 0;
-
-  // Actual pattern position
-  let pos = 0;
-
-  // Last match position
-  let lastI = 0;
-
-  let i = 0;
-  while (i < str.length) {
-    const c = str[i];
-
-    if (c === q[pos]) {
-      result += '<b>' + originalStr[i] + '</b>';
-
-      // Move to the next pattern character
-      pos += 1;
-
-      // Add spaces between the last match to steps
-      steps += (i - lastI);
-
-      // Reset counter to the actual position in string
-      lastI = i;
-    } else {
-      result += originalStr[i];
+    let i = 0;
+    while (i < str.length) {
+        const c = str[i];
+        if (c === q[pos]) {
+            result += '<b>' + originalStr[i] + '</b>';
+            ++pos;
+            steps += (i - lastI);
+            lastI = i;
+        } else {
+            result += originalStr[i];
+        }
+        ++i;
     }
-
-    ++i;
-  }
-
-  if (pos === q.length) {
-    // Score between 0 and 1 calculated by the number of spaces
-    // between letters and the string length.
-    // The biggest the score is the better
-    const score = q.length / (steps + 1);
-
-    return {score, result};
-  }
-
-  return {
-    score: 0,
-    result: str
-  };
+    if (pos === q.length) {
+        // Score between 0 and 1 calculated by the number of spaces between letters
+        // and the string length. The bigger the score is the better
+        const score = q.length / (steps + 1);
+        return {score, result};
+    }
+    return { score: 0, result: str };
 };
 
-module.exports = fuzzy;
+const searchStr = function (q, str, splitChar, highlightMatch) {
+    if ( !(typeof q === 'string' && q && typeof str === 'string' && str) ) {
+        return { score: 0, result: str };
+    }
+    str = str.replace(stripMarkupRegex, '');
+
+    const str2 = latinise(str.toLowerCase());
+    const q2 = latinise(q.toLowerCase());
+    let score = 0;
+    if (str2.split(splitChar).some(word => word.startsWith(q2))) { //match substring (word start only)
+        score = 1.2;
+    } else if (str2.indexOf(q2) !== -1) { //else match substring
+        score = 1.1;
+    } else { //else fuzzy match and return
+        let fuzzyMatch = fuzzy(q, str);
+        if (highlightMatch) {
+            return {score: fuzzyMatch.score, result: fuzzyMatch.result};
+        } else {
+            return {score: fuzzyMatch.score, result: str};
+        }
+    }
+    //return result of substring match
+    if (highlightMatch) {
+        const foundposition = str2.indexOf(q2);
+        const markup = str.slice(0, foundposition) + "<b>" + str.slice(foundposition, foundposition + q.length) +
+                                    "</b>" + str.slice(foundposition + q.length, str.length);
+        return {score: score, result: markup};
+    } else {
+        return {score: score, result: str};
+    }
+};
+
+module.exports = searchStr;

@@ -85,10 +85,65 @@ class CategoryListButton extends PopupBaseMenuItem {
         this.addActor(this.label);
         this.label.realize();
 
+        //?undo
+        this.actor._delegate = {
+            handleDragOver: (source /*, actor, x, y, time */) => {
+                if (!source.index || source.index === this.index) {
+                        return DragMotionResult.NO_DROP;
+                }
+                this.state.set({dragIndex: this.index});
+                this.actor.set_opacity(50);
+                return DragMotionResult.MOVE_DROP;
+            },
+            acceptDrop: (source /*, actor, x, y, time */) => {
+                if (!source.index || source.index === this.index) {
+                    this.state.set({dragIndex: -1});
+                    return DragMotionResult.NO_DROP;
+                }
+                this.state.trigger('moveCategoryToPos', source.id, this.id);
+                return true;
+            },
+            getDragActorSource: () => this.actor,
+            _getDragActor: () => new Clone({source: this.actor}),
+            getDragActor: () => new Clone({source: this.icon}),
+            isDraggableApp: false,
+            index: this.index,
+            id: this.id
+        };
+
+        this.draggable = makeDraggable(this.actor);
+
         // Connect signals
+        this.signals.connect(this.draggable, 'drag-begin', (...args) => this.onDragBegin(...args));
+        this.signals.connect(this.draggable, 'drag-cancelled', (...args) => this.onDragCancelled(...args));
+        this.signals.connect(this.draggable, 'drag-end', (...args) => this.onDragEnd(...args));
+        //?undo
+
         this.signals.connect(this.actor, 'enter-event', (...args) => this.handleEnter(...args));
         this.signals.connect(this.actor, 'leave-event', (...args) => this.handleLeave(...args));
         this.signals.connect(this.actor, 'button-release-event', (...args) => this.handleButtonRelease(...args));
+    }
+
+    onDragBegin() {
+        this.actor.set_opacity(51);
+        this.state.set({categoryDragged: true});
+    }
+
+    onDragCancelled() {
+        this.actor.set_opacity(255);
+        this.state.set({categoryDragged: false});
+    }
+
+    onDragEnd() {
+        this.actor.set_opacity(255);
+        setTimeout(() => this.state.set({categoryDragged: false}), 0);
+    }
+
+    _clearDragPlaceholder() {
+        if (this.state.dragPlaceholder) {
+            this.state.dragPlaceholder.destroy();
+            this.state.dragPlaceholder = null;
+        }
     }
 
     selectCategory() {
@@ -104,8 +159,18 @@ class CategoryListButton extends PopupBaseMenuItem {
         if (this.disabled) {
             return false;
         }
-        this.state.trigger('scrollToButton', this, true);
-        
+
+        if (event) {//?undo
+            this.state.trigger('clearEnteredActors');
+            if (!this.state.settings.categoryClick) {
+                setTimeout(() => this.state.trigger('makeVectorBox', this.actor), 0);
+            }
+        } else {
+            this.state.trigger('scrollToButton', this, true);
+        }
+
+        //this.state.trigger('scrollToButton', this, true);
+
         this.entered = true;
         if (this.state.settings.categoryClick) {
             this.actor.set_style_class_name('menu-category-button-selected');
@@ -351,6 +416,7 @@ class AppListGridButton extends PopupBaseMenuItem {
 
         this.signals = new SignalManager(null);
         this.contextMenuButtons = [];
+        //this.description = ''; //why did i delete this line?
         this.entered = null;
 
         // appType 0 = application, appType 1 = place, appType 2 = recent

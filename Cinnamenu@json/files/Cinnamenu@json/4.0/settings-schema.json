@@ -48,7 +48,9 @@
                 "show-places",
                 "enable-bookmarks",
                 "privacy-settings-button",
-                "menu-editor-button"
+                "menu-editor-button",
+                "resetCategoryOrder-button",
+                "categories"
             ]
         },
         "panel-behave":{
@@ -92,6 +94,13 @@
                 "apps-grid-icon-size"
             ]
         }
+    },
+
+    "categories":{
+        "type":"generic",
+        "default":[
+
+        ]
     },
 
     "applications-view-mode":{
@@ -165,6 +174,11 @@
         "description":"Open the menu editor",
         "callback":"launchEditor",
         "tooltip":"Press this button to customize your menu entries."
+    },
+    "resetCategoryOrder-button":{
+        "type":"button",
+        "description":"Reset category order",
+        "callback":"resetCategoryOrder"
     },
 
     "overlay-key":{
