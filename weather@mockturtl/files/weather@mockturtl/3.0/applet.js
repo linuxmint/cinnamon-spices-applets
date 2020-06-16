@@ -1023,10 +1023,17 @@ var UI = (function () {
             if (config._translateCondition)
                 hour.condition.main = _(hour.condition.main);
             ui.Summary.text = hour.condition.main;
-            if (!!hour.precipation && hour.precipation.volume > 0) {
-                ui.Precipation.text = hour.precipation.volume + " mm";
-                if (!!hour.precipation.chance)
-                    ui.Precipation.text += (", " + Math.round(hour.precipation.chance) + "%");
+            if (!!hour.precipation && hour.precipation.type != "none") {
+                var precipationText = null;
+                if (!!hour.precipation.volume && hour.precipation.volume > 0) {
+                    precipationText = hour.precipation.volume + " mm";
+                }
+                if (hour.precipation.chance != null || hour.precipation.chance != undefined) {
+                    precipationText = (precipationText == null) ? "" : (precipationText + ", ");
+                    precipationText += (Math.round(hour.precipation.chance).toString() + "%");
+                }
+                if (precipationText != null)
+                    ui.Precipation.text = precipationText;
             }
         }
         if (max <= 0)

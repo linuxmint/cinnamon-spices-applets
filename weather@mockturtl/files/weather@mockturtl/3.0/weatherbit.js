@@ -384,9 +384,9 @@ var Weatherbit = (function () {
             case "c03d":
                 return ["weather-clouds", "weather-few-clouds", "weather-overcast"];
             case "c03n":
-                return ["weather-clouds", "weather-few-clouds-night", "weather-overcast"];
+                return ["weather-clouds-night", "weather-few-clouds-night", "weather-overcast"];
             case "c04n":
-                return ["weather-overcast", "weather-clouds", "weather-few-clouds-night"];
+                return ["weather-overcast", "weather-clouds-night", "weather-few-clouds-night"];
             case "c04d":
                 return ["weather-overcast", "weather-clouds", "weather-few-clouds"];
             case "u00d":

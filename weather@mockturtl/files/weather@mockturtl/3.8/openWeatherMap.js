@@ -261,11 +261,11 @@ class OpenWeatherMap {
             case "04d":
                 return ["weather-overcast", "weather-clouds", "weather-few-clouds"];
             case "04n":
-                return ["weather-overcast", "weather-clouds", "weather-few-clouds"];
+                return ["weather-overcast", "weather-clouds-night", "weather-few-clouds-night"];
             case "03n":
                 return ['weather-clouds-night', "weather-few-clouds-night"];
             case "03d":
-                return ["weather-clouds", "weather-overcast", "weather-few-clouds"];
+                return ["weather-clouds", "weather-few-clouds", "weather-overcast"];
             case "02n":
                 return ["weather-few-clouds-night"];
             case "02d":
