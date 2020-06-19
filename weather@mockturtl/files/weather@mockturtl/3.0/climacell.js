@@ -288,7 +288,7 @@ var Climacell = (function () {
                     customIcon: "hail-symbolic",
                     description: _("Light Freezing Rain"),
                     main: _("Freezing Rain"),
-                    icon: weatherIconSafely(["weather-showers-scattered", "weather-rain", "weather-freezing-rain"], this.app.config.IconType())
+                    icon: weatherIconSafely(["weather-showers-scattered", "weather-freezing-rain", "weather-rain"], this.app.config.IconType())
                 };
             case ("freezing_drizzle"):
                 return {

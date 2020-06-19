@@ -223,7 +223,7 @@ var WeatherApplet = (function (_super) {
                             _this._httpSession.queue_message(message, function (session, message) {
                                 if (!message)
                                     reject({ code: 0, message: "no network response", reason_phrase: "no network response" });
-                                if (message.status_code != 200)
+                                if (message.status_code > 300 || message.status_code < 200)
                                     reject({ code: message.status_code, message: "bad status code", reason_phrase: message.reason_phrase });
                                 if (!message.response_body)
                                     reject({ code: message.status_code, message: "no reponse body", reason_phrase: message.reason_phrase });
@@ -276,7 +276,7 @@ var WeatherApplet = (function (_super) {
                             _this._httpSession.queue_message(message, function (session, message) {
                                 if (!message)
                                     reject({ code: 0, message: "no network response", reason_phrase: "no network response" });
-                                if (message.status_code != 200)
+                                if (message.status_code > 300 || message.status_code < 200)
                                     reject({ code: message.status_code, message: "bad status code", reason_phrase: message.reason_phrase });
                                 if (!message.response_body)
                                     reject({ code: message.status_code, message: "no reponse body", reason_phrase: message.reason_phrase });
@@ -605,7 +605,7 @@ var WeatherApplet = (function (_super) {
     };
     ;
     WeatherApplet.prototype.HandleError = function (error) {
-        if (this.encounteredError)
+        if (this.encounteredError == true)
             return;
         this.encounteredError = true;
         if (error.type == "hard") {
@@ -1000,6 +1000,12 @@ var UI = (function () {
             return true;
         }
         catch (e) {
+            this.app.HandleError({
+                type: "hard",
+                detail: "unknown",
+                message: "Forecast parsing failed: " + e.toString(),
+                userError: false
+            });
             this.app.log.Error("DisplayForecastError " + e);
             return false;
         }
@@ -1406,7 +1412,7 @@ var WeatherLoop = (function () {
                         _a.trys.push([1, 7, , 8]);
                         if (this.IsStray())
                             return [2];
-                        if (this.app.encounteredError)
+                        if (this.app.encounteredError == true)
                             this.IncrementErrorCount();
                         this.ValidateLastUpdate();
                         if (!this.pauseRefresh) return [3, 3];

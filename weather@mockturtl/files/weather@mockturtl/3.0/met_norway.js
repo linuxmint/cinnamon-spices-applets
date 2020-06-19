@@ -61,8 +61,8 @@ var MetNorway = (function () {
         this.name = "MetNorway";
         this.maxForecastSupport = 10;
         this.website = "https://www.met.no/en";
-        this.maxHourlyForecastSupport = 72;
-        this.baseUrl = "https://api.met.no/weatherapi/locationforecast/1.9/.json?";
+        this.maxHourlyForecastSupport = 48;
+        this.baseUrl = "https://api.met.no/weatherapi/locationforecast/2.0/complete?";
         this.ctx = this;
         this.app = app;
         this.sunCalc = new SunCalc();
@@ -109,68 +109,72 @@ var MetNorway = (function () {
             });
         });
     };
-    MetNorway.prototype.ParseWeather = function (json) {
-        return __awaiter(this, void 0, void 0, function () {
-            var parsedWeathers, parsed6hourly, parsedHourly, i, element, fromDate, toDate, item, temp, minTemp, symbol, weather;
-            return __generator(this, function (_a) {
-                json = json.product.time;
-                parsedWeathers = [];
-                parsed6hourly = [];
-                parsedHourly = [];
-                for (i = 0; i < json.length; i++) {
-                    element = json[i];
-                    fromDate = new Date(element["from"]);
-                    toDate = new Date(element["to"]);
-                    item = element.location;
-                    temp = item.temperature;
-                    minTemp = item.minTemperature;
-                    symbol = item.symbol;
-                    if (!!temp) {
-                        parsedWeathers.push(this.ParseCurrentWeather(item, fromDate, toDate));
-                    }
-                    else if (!!minTemp && !!symbol) {
-                        parsed6hourly.push(this.Parse6HourForecast(item, fromDate, toDate));
-                    }
-                    else if (!minTemp && !!symbol) {
-                        parsedHourly.push(this.ParseHourlyForecast(item, fromDate, toDate));
-                    }
-                }
-                weather = this.BuildWeather(this.GetEarliestDataForToday(parsedWeathers), this.GetEarliestDataForToday(parsedHourly));
-                weather.hourlyForecasts = this.BuildHourlyForecasts(parsedHourly, parsedWeathers);
-                weather.forecasts = this.BuildForecasts(parsed6hourly);
-                return [2, weather];
-            });
-        });
+    MetNorway.prototype.RemoveEarlierElements = function (json) {
+        var now = new Date();
+        var startIndex = -1;
+        for (var i = 0; i < json.properties.timeseries.length; i++) {
+            var element = json.properties.timeseries[i];
+            var timestamp = new Date(element.time);
+            if (timestamp < now && now.getHours() != timestamp.getHours()) {
+                startIndex = i;
+            }
+            else {
+                break;
+            }
+        }
+        if (startIndex != -1) {
+            this.app.log.Debug("Removing outdated weather information...");
+            global.log(json.properties.timeseries.splice(0, startIndex + 1));
+        }
+        return json;
     };
-    MetNorway.prototype.BuildWeather = function (weather, hourly) {
-        var times = this.sunCalc.getTimes(new Date(), weather.lat, weather.lon, hourly.altitude);
-        this.sunTimes = times;
+    MetNorway.prototype.ParseWeather = function (json) {
+        json = this.RemoveEarlierElements(json);
+        var times = this.sunCalc.getTimes(new Date(), json.geometry.coordinates[1], json.geometry.coordinates[0], json.geometry.coordinates[2]);
+        var current = json.properties.timeseries[0];
         var result = {
-            temperature: CelsiusToKelvin(weather.temperature),
+            temperature: CelsiusToKelvin(current.data.instant.details.air_temperature),
             coord: {
-                lat: weather.lat,
-                lon: weather.lon
+                lat: json.geometry.coordinates[1],
+                lon: json.geometry.coordinates[0]
             },
-            date: weather.from,
-            condition: this.ResolveCondition(hourly.symbol, IsNight(times)),
-            humidity: weather.humidity,
-            pressure: weather.pressure,
+            date: new Date(current.time),
+            condition: this.ResolveCondition(current.data.next_1_hours.summary.symbol_code, IsNight(times)),
+            humidity: current.data.instant.details.relative_humidity,
+            pressure: current.data.instant.details.air_pressure_at_sea_level,
             extra_field: {
                 name: _("Cloudiness"),
                 type: "percent",
-                value: weather.cloudiness
+                value: current.data.instant.details.cloud_area_fraction
             },
             sunrise: times.sunrise,
             sunset: times.sunset,
             wind: {
-                degree: weather.windDirection,
-                speed: weather.windSpeed
+                degree: current.data.instant.details.wind_from_direction,
+                speed: current.data.instant.details.wind_speed
             },
             location: {
                 url: null,
             },
             forecasts: []
         };
+        var hourlyForecasts = [];
+        for (var i = 0; i < json.properties.timeseries.length; i++) {
+            var element = json.properties.timeseries[i];
+            if (!!element.data.next_1_hours) {
+                hourlyForecasts.push({
+                    date: new Date(element.time),
+                    temp: CelsiusToKelvin(element.data.instant.details.air_temperature),
+                    precipation: {
+                        type: "rain",
+                        volume: element.data.next_1_hours.details.precipitation_amount
+                    },
+                    condition: this.ResolveCondition(element.data.next_1_hours.summary.symbol_code, IsNight(times, new Date(element.time)))
+                });
+            }
+        }
+        result.hourlyForecasts = hourlyForecasts;
+        result.forecasts = this.BuildForecasts(json.properties.timeseries);
         return result;
     };
     MetNorway.prototype.BuildForecasts = function (forecastsData) {
@@ -191,14 +195,18 @@ var MetNorway = (function () {
             var conditionCounter = {};
             for (var j = 0; j < days[i].length; j++) {
                 var element = days[i][j];
-                forecast.date = element.from;
-                if (element.maxTemperature > forecast.temp_max)
-                    forecast.temp_max = element.maxTemperature;
-                if (element.minTemperature < forecast.temp_min)
-                    forecast.temp_min = element.minTemperature;
-                if (!conditionCounter[element.symbolID])
-                    conditionCounter[element.symbolID] = { count: 0, name: element.symbol };
-                conditionCounter[element.symbolID].count = conditionCounter[element.symbolID].count + 1;
+                if (!element.data.next_6_hours)
+                    continue;
+                forecast.date = new Date(element.time);
+                if (element.data.next_6_hours.details.air_temperature_max > forecast.temp_max)
+                    forecast.temp_max = element.data.next_6_hours.details.air_temperature_max;
+                if (element.data.next_6_hours.details.air_temperature_min < forecast.temp_min)
+                    forecast.temp_min = element.data.next_6_hours.details.air_temperature_min;
+                var symbol = element.data.next_6_hours.summary.symbol_code.split("_")[0];
+                var severity = conditionSeverity[symbol];
+                if (!conditionCounter[severity])
+                    conditionCounter[severity] = { count: 0, name: symbol };
+                conditionCounter[severity].count = conditionCounter[severity].count + 1;
             }
             forecast.temp_max = CelsiusToKelvin(forecast.temp_max);
             forecast.temp_min = CelsiusToKelvin(forecast.temp_min);
@@ -207,33 +215,14 @@ var MetNorway = (function () {
         }
         return forecasts;
     };
-    MetNorway.prototype.BuildHourlyForecasts = function (hours, current) {
-        var forecasts = [];
-        for (var i = 0; i < hours.length; i++) {
-            var hour = hours[i];
-            var forecast = {
-                condition: this.ResolveCondition(hour.symbol, IsNight(this.sunTimes, hour.from)),
-                date: hour.from,
-                temp: CelsiusToKelvin(current[i].temperature),
-            };
-            if (!!hour.precipitation) {
-                forecast.precipation = {
-                    type: "rain",
-                    volume: hour.precipitation
-                };
-            }
-            forecasts.push(forecast);
-        }
-        return forecasts;
-    };
     MetNorway.prototype.GetEarliestDataForToday = function (events) {
         var earliest = 0;
         for (var i = 0; i < events.length; i++) {
-            var element = events[i];
-            var earliestElement = events[earliest];
-            if (element.from.toDateString() != new Date().toDateString())
+            var earliestElementTime = new Date(events[earliest].time);
+            var timestamp = new Date(events[i].time);
+            if (timestamp.toDateString() != new Date().toDateString())
                 continue;
-            if (earliestElement.from < element.from)
+            if (earliestElementTime < timestamp)
                 continue;
             earliest = i;
         }
@@ -241,17 +230,18 @@ var MetNorway = (function () {
     };
     MetNorway.prototype.SortDataByDay = function (data) {
         var days = [];
-        var currentDay = this.GetEarliestDataForToday(data).from;
+        var currentDay = new Date(this.GetEarliestDataForToday(data).time);
         var dayIndex = 0;
         days.push([]);
         for (var i = 0; i < data.length; i++) {
             var element = data[i];
-            if (element.from.toDateString() == currentDay.toDateString()) {
+            var timestamp = new Date(element.time);
+            if (timestamp.toDateString() == currentDay.toDateString()) {
                 days[dayIndex].push(element);
             }
-            else if (element.from.toDateString() != currentDay.toDateString()) {
+            else if (timestamp.toDateString() != currentDay.toDateString()) {
                 dayIndex++;
-                currentDay = element.from;
+                currentDay = timestamp;
                 days.push([]);
                 days[dayIndex].push(element);
             }
@@ -266,8 +256,7 @@ var MetNorway = (function () {
             if (count[result].count < count[key].count)
                 result = parseInt(key);
         }
-        var condition = count[result].name.replace("Dark_", "");
-        return condition;
+        return count[result].name;
     };
     MetNorway.prototype.GetMostSevereCondition = function (conditions) {
         var result = null;
@@ -283,41 +272,6 @@ var MetNorway = (function () {
         }
         return conditions[result].name;
     };
-    MetNorway.prototype.ParseCurrentWeather = function (element, from, to) {
-        return {
-            temperature: parseFloat(element.temperature['value']),
-            lat: element["latitude"],
-            lon: element["longitude"],
-            windDirection: parseFloat(element.windDirection["deg"]),
-            windSpeed: parseFloat(element.windSpeed["mps"]),
-            humidity: parseFloat(element.humidity["value"]),
-            pressure: parseFloat(element.pressure["value"]),
-            cloudiness: parseFloat(element.cloudiness["percent"]),
-            from: from,
-            to: to
-        };
-    };
-    MetNorway.prototype.Parse6HourForecast = function (element, from, to) {
-        return {
-            minTemperature: parseFloat(element.minTemperature["value"]),
-            maxTemperature: parseFloat(element.maxTemperature["value"]),
-            from: from,
-            to: to,
-            altitude: parseInt(element.altitude),
-            symbol: element.symbol["id"],
-            symbolID: element.symbol["number"]
-        };
-    };
-    MetNorway.prototype.ParseHourlyForecast = function (element, from, to) {
-        return {
-            precipitation: parseFloat(element.precipitation["value"]),
-            from: from,
-            to: to,
-            symbol: element.symbol["id"],
-            symbolID: element.symbol["number"],
-            altitude: parseInt(element.altitude)
-        };
-    };
     MetNorway.prototype.GetUrl = function () {
         var location = this.app.config._location.replace(" ", "");
         var url = this.baseUrl + "lat=";
@@ -327,299 +281,356 @@ var MetNorway = (function () {
         url += (latLon[0] + "&lon=" + latLon[1]);
         return url;
     };
+    MetNorway.prototype.DeconstructCondtition = function (icon) {
+        var condition = icon.split("_");
+        return {
+            timeOfDay: condition[1],
+            condition: condition[0]
+        };
+    };
     MetNorway.prototype.ResolveCondition = function (icon, isNight) {
         if (isNight === void 0) { isNight = false; }
-        var condition = icon.replace("Dark_", "");
+        var weather = this.DeconstructCondtition(icon);
         var iconType = this.app.config.IconType();
-        switch (condition) {
-            case "Cloud":
+        switch (weather.condition) {
+            case "clearsky":
+                return {
+                    customIcon: (isNight) ? "night-clear-symbolic" : "day-sunny-symbolic",
+                    main: _("Clear Sky"),
+                    description: _("Clear Sky"),
+                    icon: weatherIconSafely((isNight) ? ["weather-clear-night", "weather-severe-alert"] : ["weather-clear", "weather-severe-alert"], iconType)
+                };
+            case "cloudy":
                 return {
                     customIcon: "cloudy-symbolic",
                     main: _("Cloudy"),
                     description: _("Cloudy"),
-                    icon: weatherIconSafely(["weather-overcast", "weather-clouds", "weather-few-clouds"], iconType)
+                    icon: weatherIconSafely((isNight) ? ["weather-overcast", "weather-clouds-night", "weather-few-clouds-night"] : ["weather-overcast", "weather-clouds", "weather-few-clouds"], iconType)
                 };
-            case "Drizzle":
+            case "fair":
                 return {
-                    customIcon: "showers-symbolic",
-                    main: _("Drizzle"),
-                    description: _("Drizzle"),
-                    icon: weatherIconSafely(["weather-rain", "weather-showers-scattered", "weather-freezing-rain", "weather-severe-alert"], iconType)
+                    customIcon: (isNight) ? "night-cloudy-symbolic" : "day-cloudy-symbolic",
+                    main: _("Fair"),
+                    description: _("Fair"),
+                    icon: weatherIconSafely((isNight) ? ["weather-fog", "weather-severe-alert"] : [], iconType)
                 };
-            case "DrizzleSun":
-                return {
-                    customIcon: (isNight) ? "night-showers-symbolic" : "day-showers-symbolic",
-                    main: _("Drizzle"),
-                    description: _("Drizzle"),
-                    icon: weatherIconSafely(["weather-showers-scattered", "weather-freezing-rain", "weather-severe-alert"], iconType)
-                };
-            case "DrizzleThunder":
-                return {
-                    customIcon: "storm-showers-symbolic",
-                    main: _("Drizzle"),
-                    description: _("Drizzle with Thunderstorms"),
-                    icon: weatherIconSafely(["weather-showers-scattered", "weather-freezing-rain", "weather-severe-alert"], iconType)
-                };
-            case "DrizzleThunderSun":
-                return {
-                    customIcon: "day-storm-showers-symbolic",
-                    main: _("Mostly Drizzle"),
-                    description: _("Mostly Drizzle with Thunderstorms"),
-                    icon: weatherIconSafely(["weather-rain", "weather-showers-scattered", "weather-freezing-rain", "weather-severe-alert"], iconType)
-                };
-            case "Fog":
+            case "fog":
                 return {
                     customIcon: "fog-symbolic",
                     main: _("Fog"),
                     description: _("Fog"),
                     icon: weatherIconSafely(["weather-fog", "weather-severe-alert"], iconType)
                 };
-            case "HeavySleet":
+            case "heavyrain":
+                return {
+                    customIcon: "rain-symbolic",
+                    main: _("Heavy Rain"),
+                    description: _("Heavy rain"),
+                    icon: weatherIconSafely(["weather-severe-alert"], iconType)
+                };
+            case "heavyrainandthunder":
+                return {
+                    customIcon: "thunderstorm-symbolic",
+                    main: _("Heavy Rain"),
+                    description: _("Heavy rain and thunder"),
+                    icon: weatherIconSafely(["weather-severe-alert"], iconType)
+                };
+            case "heavyrainshowers":
+                return {
+                    customIcon: (isNight) ? "night-alt-rain-symbolic" : "day-rain-symbolic",
+                    main: _("Heavy Rain"),
+                    description: _("Heavy rain showers"),
+                    icon: weatherIconSafely(["weather-severe-alert"], iconType)
+                };
+            case "heavyrainshowersandthunder":
+                return {
+                    customIcon: (IsNight) ? "night-alt-thunderstorm-symbolic" : "day-thunderstorm-symbolic",
+                    main: _("Heavy Rain"),
+                    description: _("Heavy rain showers and thunder"),
+                    icon: weatherIconSafely(["weather-severe-alert"], iconType)
+                };
+            case "heavysleet":
                 return {
                     customIcon: "sleet-symbolic",
                     main: _("Heavy Sleet"),
                     description: _("Heavy Sleet"),
                     icon: weatherIconSafely(["weather-freezing-rain", "weather-rain", "weather-severe-alert"], iconType)
                 };
-            case "HeavySleetSun":
-                return {
-                    customIcon: (isNight) ? "night-sleet-symbolic" : "day-sleet-symbolic",
-                    main: _("Heavy Sleet"),
-                    description: _("Mostly Heavy Sleet"),
-                    icon: weatherIconSafely(["weather-freezing-rain", "weather-rain", "weather-severe-alert"], iconType)
-                };
-            case "HeavySleetThunder":
+            case "heavysleetandthunder":
                 return {
                     customIcon: "sleet-storm-symbolic",
                     main: _("Heavy Sleet"),
-                    description: _("Heavy Sleet with Thunderstorms"),
+                    description: _("Heavy Sleet and thunder"),
                     icon: weatherIconSafely(["weather-freezing-rain", "weather-rain", "weather-severe-alert"], iconType)
                 };
-            case "HeavySleetThunderSun":
+            case "heavysleetshowers":
                 return {
-                    customIcon: (isNight) ? "night-sleet-storm-symbolic" : "day-sleet-storm-symbolic",
+                    customIcon: (isNight) ? "night-alt-sleet-symbolic" : "day-sleet-symbolic",
                     main: _("Heavy Sleet"),
-                    description: _("Mostly Heavy Sleet with Thunderstorms"),
-                    icon: weatherIconSafely(["weather-freezing-rain", "weather-rain", "weather-severe-alert"], iconType)
+                    description: _("Heavy sleet showers"),
+                    icon: weatherIconSafely(["weather-severe-alert"], iconType)
                 };
-            case "HeavySnow":
+            case "heavysleetshowersandthunder":
+                return {
+                    customIcon: (IsNight) ? "night-alt-sleet-storm-symbolic" : "day-sleet-storm-symbolic",
+                    main: _("Heavy Sleet"),
+                    description: _("Heavy sleet showers and thunder"),
+                    icon: weatherIconSafely(["weather-severe-alert"], iconType)
+                };
+            case "heavysnow":
                 return {
                     customIcon: "snow-symbolic",
                     main: _("Heavy Snow"),
                     description: _("Heavy Snow"),
                     icon: weatherIconSafely(["weather-snow", "weather-severe-alert"], iconType)
                 };
-            case "HeavySnowThunder":
+            case "heavysnowandthunder":
                 return {
                     customIcon: "snow-symbolic",
                     main: _("Heavy Snow"),
-                    description: _("Heavy Snow with Thunderstorms"),
+                    description: _("Heavy Snow and thunder"),
                     icon: weatherIconSafely(["weather-snow", "weather-severe-alert"], iconType)
                 };
-            case "HeavySnowThunderSun":
+            case "heavysnowshowers":
                 return {
-                    customIcon: (isNight) ? "night-snow-thunderstorm-symbolic" : "day-snow-thunderstorm-symbolic",
+                    customIcon: (isNight) ? "night-alt-snow-symbolic" : "day-snow-symbolic",
                     main: _("Heavy Snow"),
-                    description: _("Heavy Snow with Thunderstorms"),
-                    icon: weatherIconSafely(["weather-snow", "weather-severe-alert"], iconType)
+                    description: _("Heavy snow showers"),
+                    icon: weatherIconSafely(["weather-severe-alert"], iconType)
                 };
-            case "HeavySnowSun":
+            case "heavysnowshowersandthunder":
                 return {
-                    customIcon: (isNight) ? "night-snow-symbolic" : "day-snow-symbolic",
+                    customIcon: (isNight) ? "night-alt-snow-thunderstorm-symbolic" : "day-snow-thunderstorm-symbolic",
                     main: _("Heavy Snow"),
-                    description: _("Heavy Snow"),
-                    icon: weatherIconSafely(["weather-snow", "weather-severe-alert"], iconType)
+                    description: _("Heavy snow showers and thunder"),
+                    icon: weatherIconSafely(["weather-severe-alert"], iconType)
                 };
-            case "LightCloud":
+            case "lightrain":
                 return {
-                    customIcon: (isNight) ? "night-cloudy-symbolic" : "day-cloudy-symbolic",
-                    main: _("Few Clouds"),
-                    description: _("Few Clouds"),
-                    icon: weatherIconSafely((isNight) ? ["weather-few-clouds-night", "weather-severe-alert"] : ["weather-few-clouds", "weather-severe-alert"], iconType)
-                };
-            case "LightRain":
-                return {
-                    customIcon: (isNight) ? "rain-symbolic" : "rain-symbolic",
+                    customIcon: "rain-mix-symbolic",
                     main: _("Light Rain"),
                     description: _("Light Rain"),
                     icon: weatherIconSafely(["weather-showers-scattered", "weather-rain", "weather-severe-alert"], iconType)
                 };
-            case "LightRainSun":
+            case "lightrainandthunder":
                 return {
-                    customIcon: (isNight) ? "night-rain-symbolic" : "day-rain-symbolic",
+                    customIcon: "rain-mix-storm-symbolic",
                     main: _("Light Rain"),
-                    description: _("Light Rain"),
+                    description: _("Light Rain and thunder"),
                     icon: weatherIconSafely(["weather-showers-scattered", "weather-rain", "weather-severe-alert"], iconType)
                 };
-            case "LightRainThunder":
+            case "lightrainshowers":
                 return {
-                    customIcon: "rain-symbolic",
+                    customIcon: (isNight) ? "night-alt-rain-mix-symbolic" : "day-rain-mix-symbolic",
                     main: _("Light Rain"),
-                    description: _("Light Rain with Thunderstorms"),
-                    icon: weatherIconSafely(["weather-showers-scattered", "weather-rain", "weather-severe-alert"], iconType)
+                    description: _("Light rain showers"),
+                    icon: weatherIconSafely(["weather-severe-alert"], iconType)
                 };
-            case "LightRainThunderSun":
+            case "lightrainshowersandthunder":
                 return {
-                    customIcon: (isNight) ? "night-rain-symbolic" : "day-rain-symbolic",
-                    main: _("Light Rain"),
-                    description: _("Mostly Light Rain with Thunderstorms"),
-                    icon: weatherIconSafely(["weather-showers-scattered", "weather-rain", "weather-severe-alert"], iconType)
+                    customIcon: (isNight) ? "night-alt-rain-mix-storm-symbolic" : "day-rain-mix-storm-symbolic",
+                    main: _("Ligth Rain"),
+                    description: _("Light rain showers and thunder"),
+                    icon: weatherIconSafely(["weather-severe-alert"], iconType)
                 };
-            case "LightSleet":
+            case "lightsleet":
                 return {
                     customIcon: "sleet-symbolic",
                     main: _("Light Sleet"),
                     description: _("Light Sleet"),
                     icon: weatherIconSafely(["weather-freezing-rain", "weather-showers", "weather-severe-alert"], iconType)
                 };
-            case "LightSleetSun":
+            case "lightsleetandthunder":
                 return {
-                    customIcon: (isNight) ? "night-sleet-symbolic" : "day-sleet-symbolic",
+                    customIcon: "sleet-storm-symbolic",
                     main: _("Light Sleet"),
-                    description: _("Mostly Light Sleet"),
+                    description: _("Light Sleet and thunder"),
                     icon: weatherIconSafely(["weather-freezing-rain", "weather-showers", "weather-severe-alert"], iconType)
                 };
-            case "LightSleetThunder":
+            case "lightsleetshowers":
                 return {
-                    customIcon: "sleet-symbolic",
+                    customIcon: (IsNight) ? "night-alt-sleet-symbolic" : "day-sleet-symbolic",
                     main: _("Light Sleet"),
-                    description: _("Light Sleet with Thunderstorms"),
-                    icon: weatherIconSafely(["weather-freezing-rain", "weather-showers", "weather-severe-alert"], iconType)
+                    description: _("Light sleet showers"),
+                    icon: weatherIconSafely(["weather-severe-alert"], iconType)
                 };
-            case "LightSleetThunderSun":
+            case "lightssleetshowersandthunder":
                 return {
-                    customIcon: (isNight) ? "night-sleet-storm-symbolic" : "day-sleet-storm-symbolic",
+                    customIcon: (IsNight) ? "night-alt-sleet-storm-symbolic" : "day-sleet-storm-symbolic",
                     main: _("Light Sleet"),
-                    description: _("Mostly Light Sleet with Thunderstorms"),
-                    icon: weatherIconSafely(["weather-freezing-rain", "weather-showers", "weather-severe-alert"], iconType)
+                    description: _("Light sleet showers and thunder"),
+                    icon: weatherIconSafely(["weather-severe-alert"], iconType)
                 };
-            case "LightSnow":
+            case "lightsnow":
                 return {
                     customIcon: "snow-symbolic",
                     main: _("Light Snow"),
                     description: _("Light Snow"),
                     icon: weatherIconSafely(["weather-snow", "weather-severe-alert"], iconType)
                 };
-            case "LightSnowSun":
+            case "lightsnowandthunder":
                 return {
-                    customIcon: (isNight) ? "night-snow-symbolic" : "day-snow-symbolic",
+                    customIcon: "snow-storm-symbolic",
                     main: _("Light Snow"),
-                    description: _("Mostly Light Snow"),
+                    description: _("Light snow and thunder"),
                     icon: weatherIconSafely(["weather-snow", "weather-severe-alert"], iconType)
                 };
-            case "LightSnowThunder":
+            case "lightsnowshowers":
                 return {
-                    customIcon: "snow-symbolic",
+                    customIcon: (isNight) ? "night-alt-snow-symbolic" : "day-snow-symbolic",
                     main: _("Light Snow"),
-                    description: _("Light Snow with Thunderstorms"),
-                    icon: weatherIconSafely(["weather-snow", "weather-severe-alert"], iconType)
+                    description: _("Light snow showers"),
+                    icon: weatherIconSafely(["weather-severe-alert"], iconType)
                 };
-            case "LightSnowThunderSun":
+            case "lightssnowshowersandthunder":
                 return {
-                    customIcon: (isNight) ? "night-snow-thunderstorm-symbolic" : "day-snow-thunderstorm-symbolic",
+                    customIcon: (isNight) ? "night-alt-snow-thunderstorm-symbolic" : "day-snow-thunderstorm-symbolic",
                     main: _("Light Snow"),
-                    description: _("Mostly Light Snow with Thunderstorms"),
-                    icon: weatherIconSafely(["weather-snow", "weather-severe-alert"], iconType)
+                    description: _("Light snow showers and thunder"),
+                    icon: weatherIconSafely(["weather-severe-alert"], iconType)
                 };
-            case "PartlyCloud":
+            case "partlycloudy":
                 return {
-                    customIcon: (isNight) ? "night-cloudy-symbolic" : "day-cloudy-symbolic",
+                    customIcon: (isNight) ? "night-alt-cloudy-symbolic" : "day-cloudy-symbolic",
                     main: _("Partly Cloudy"),
                     description: _("Partly Cloudy"),
                     icon: weatherIconSafely((isNight) ? ["weather-few-clouds-night", "weather-clouds", "weather-overcast", "weather-severe-alert"] : ["weather-few-clouds", "weather-clouds", "weather-overcast", "weather-severe-alert"], iconType)
                 };
-            case "Rain":
+            case "rain":
                 return {
                     customIcon: "rain-symbolic",
                     main: _("Rain"),
                     description: _("Rain"),
                     icon: weatherIconSafely(["weather-rain", "weather-freezing-rain", "weather-showers-scattered", "weather-severe-alert"], iconType)
                 };
-            case "RainSun":
-                return {
-                    customIcon: (isNight) ? "night-rain-symbolic" : "day-rain-symbolic",
-                    main: _("Mostly Rainy"),
-                    description: _("Mostly Rainy"),
-                    icon: weatherIconSafely(["weather-rain", "weather-freezing-rain", "weather-showers-scattered", "weather-severe-alert"], iconType)
-                };
-            case "RainThunder":
+            case "rainandthunder":
                 return {
                     customIcon: "thunderstorm-symbolic",
                     main: _("Rain"),
-                    description: _("Rain with Thunderstorms"),
+                    description: _("Rain and thunder"),
                     icon: weatherIconSafely(["weather-storm", "weather-rain", "weather-freezing-rain", "weather-showers-scattered", "weather-severe-alert"], iconType)
                 };
-            case "RainThunderSun":
+            case "rainshowers":
                 return {
-                    customIcon: (isNight) ? "night-thunderstorm-symbolic" : "day-thunderstorm-symbolic",
-                    main: _("Rain"),
-                    description: _("Mostly Rainy with Thunderstorms"),
-                    icon: weatherIconSafely(["weather-storm", "weather-rain", "weather-freezing-rain", "weather-showers-scattered", "weather-severe-alert"], iconType)
+                    customIcon: (isNight) ? "night-alt-rain-mix-symbolic" : "day-rain-mix-symbolic",
+                    main: _("Rain Showers"),
+                    description: _("Rain showers"),
+                    icon: weatherIconSafely(["weather-severe-alert"], iconType)
                 };
-            case "Sleet":
+            case "rainshowersandthunder":
+                return {
+                    customIcon: (isNight) ? "night-alt-rain-mix-storm-symbolic" : "day-rain-mix-storm-symbolic",
+                    main: _("Rain Showers"),
+                    description: _("Rain showers and thunder"),
+                    icon: weatherIconSafely(["weather-severe-alert"], iconType)
+                };
+            case "sleet":
                 return {
                     customIcon: "sleet-symbolic",
                     main: _("Sleet"),
                     description: _("Sleet"),
                     icon: weatherIconSafely(["weather-freezing-rain", "weather-showers", "weather-severe-alert"], iconType)
                 };
-            case "SleetSun":
-                return {
-                    customIcon: (isNight) ? "night-sleet-symbolic" : "day-sleet-symbolic",
-                    main: _("Sleet"),
-                    description: _("Mostly Sleet"),
-                    icon: weatherIconSafely(["weather-freezing-rain", "weather-showers", "weather-severe-alert"], iconType)
-                };
-            case "SleetSunThunder":
-                return {
-                    customIcon: (isNight) ? "night-sleet-storm-symbolic" : "day-sleet-storm-symbolic",
-                    main: _("Sleet"),
-                    description: _("Mostly Sleet with Thunderstorms"),
-                    icon: weatherIconSafely(["weather-freezing-rain", "weather-showers", "weather-severe-alert"], iconType)
-                };
-            case "SleetThunder":
+            case "sleetandthunder":
                 return {
                     customIcon: "sleet-storm-symbolic",
                     main: _("Sleet"),
-                    description: _("Sleet with Thunderstorms"),
+                    description: _("Sleet and thunder"),
                     icon: weatherIconSafely(["weather-freezing-rain", "weather-showers", "weather-severe-alert"], iconType)
                 };
-            case "Snow":
+            case "sleetshowers":
+                return {
+                    customIcon: (isNight) ? "night-alt-sleet-symbolic" : "day-sleet-symbolic",
+                    main: _("Sleet"),
+                    description: _("Sleet showers"),
+                    icon: weatherIconSafely(["weather-severe-alert"], iconType)
+                };
+            case "sleetshowersandthunder":
+                return {
+                    customIcon: (isNight) ? "night-alt-sleet-storm-symbolic" : "day-sleet-storm-symbolic",
+                    main: _("Sleet"),
+                    description: _("Sleet showers and thunder"),
+                    icon: weatherIconSafely(["weather-severe-alert"], iconType)
+                };
+            case "snow":
                 return {
                     customIcon: "snow-symbolic",
                     main: _("Snow"),
-                    description: _("Snowy"),
+                    description: _("Snow"),
                     icon: weatherIconSafely(["weather-snow", "weather-severe-alert"], iconType)
                 };
-            case "SnowSun":
+            case "snowandthunder":
                 return {
-                    customIcon: (isNight) ? "night-snow-symbolic" : "day-snow-symbolic",
-                    main: _("Mostly Snowy"),
-                    description: _("Mostly Snowy"),
-                    icon: weatherIconSafely(["weather-snow", "weather-severe-alert"], iconType)
-                };
-            case "SnowSunThunder":
-                return {
-                    customIcon: (isNight) ? "night-snow-thunderstorm-symbolic" : "day-snow-thunderstorm-symbolic",
-                    main: _("Mostly Snowy"),
-                    description: _("Mostly Snowy with Thunderstorms"),
-                    icon: weatherIconSafely(["weather-snow", "weather-severe-alert"], iconType)
-                };
-            case "SnowThunder":
-                return {
-                    customIcon: "snow-symbolic",
+                    customIcon: "snow-storm-symbolic",
                     main: _("Snow"),
-                    description: _("Snowy with Thunderstorms"),
+                    description: _("Snow and thunder"),
                     icon: weatherIconSafely(["weather-snow", "weather-severe-alert"], iconType)
                 };
-            case "Sun":
+            case "snowshowers":
                 return {
-                    customIcon: (isNight) ? "night-clear-symbolic" : "day-sunny-symbolic",
-                    main: _("Clear"),
-                    description: _("Clear"),
-                    icon: weatherIconSafely((isNight) ? ["weather-clear-night", "weather-severe-alert"] : ["weather-clear", "weather-severe-alert"], iconType)
+                    customIcon: (isNight) ? "night-alt-snow-symbolic" : "day-snow-symbolic",
+                    main: _("Snow Showers"),
+                    description: _("Snow showers"),
+                    icon: weatherIconSafely(["weather-severe-alert"], iconType)
+                };
+            case "snowshowersandthunder":
+                return {
+                    customIcon: (isNight) ? "night-alt-snow-thunderstorm-symbolic" : "day-snow-thunderstorm-symbolic",
+                    main: _("Snow Showers"),
+                    description: _("Snow showers and thunder"),
+                    icon: weatherIconSafely(["weather-severe-alert"], iconType)
+                };
+            default:
+                return {
+                    customIcon: "cloud-refresh-symbolic",
+                    main: _(""),
+                    description: _(""),
+                    icon: weatherIconSafely(["weather-severe-alert"], iconType)
                 };
         }
     };
     return MetNorway;
 }());
+var conditionSeverity = {
+    clearsky: 1,
+    cloudy: 4,
+    fair: 2,
+    fog: 15,
+    heavyrain: 10,
+    heavyrainandthunder: 11,
+    heavyrainshowers: 41,
+    heavyrainshowersandthunder: 25,
+    heavysleet: 48,
+    heavysleetandthunder: 32,
+    heavysleetshowers: 43,
+    heavysleetshowersandthunder: 27,
+    heavysnow: 50,
+    heavysnowandthunder: 34,
+    heavysnowshowers: 45,
+    heavysnowshowersandthunder: 29,
+    lightrain: 46,
+    lightrainandthunder: 30,
+    lightrainshowers: 40,
+    lightrainshowersandthunder: 24,
+    lightsleet: 47,
+    lightsleetandthunder: 31,
+    lightsleetshowers: 42,
+    lightsnow: 49,
+    lightsnowandthunder: 33,
+    lightsnowshowers: 44,
+    lightssleetshowersandthunder: 26,
+    lightssnowshowersandthunder: 28,
+    partlycloudy: 3,
+    rain: 9,
+    rainandthunder: 22,
+    rainshowers: 5,
+    rainshowersandthunder: 6,
+    sleet: 12,
+    sleetandthunder: 23,
+    sleetshowers: 7,
+    sleetshowersandthunder: 20,
+    snow: 13,
+    snowandthunder: 14,
+    snowshowers: 8,
+    snowshowersandthunder: 21
+};
