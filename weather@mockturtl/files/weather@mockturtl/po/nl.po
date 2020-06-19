@@ -629,7 +629,7 @@ msgid ""
 "entered the API key what you have from DarkSky"
 msgstr ""
 "Zorg er a.u.b. voor dat u\n"
-"de API-sleutel ingevoerd  van DarkSky"
+"de API-sleutel van DarkSky hebt ingevoerd"
 
 #: 3.0/openWeatherMap.js:189 3.0/weatherbit.js:194 3.8/openWeatherMap.js:144
 #: 3.8/weatherbit.js:127
