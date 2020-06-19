@@ -312,7 +312,7 @@ var MetNorway = (function () {
                     customIcon: (isNight) ? "night-cloudy-symbolic" : "day-cloudy-symbolic",
                     main: _("Fair"),
                     description: _("Fair"),
-                    icon: weatherIconSafely((isNight) ? ["weather-fog", "weather-severe-alert"] : [], iconType)
+                    icon: weatherIconSafely((isNight) ? ["weather-few-clouds-night", "weather-clouds-night", "weather-overcast"] : ["weather-few-clouds", "weather-clouds", "weather-overcast"], iconType)
                 };
             case "fog":
                 return {
@@ -326,28 +326,28 @@ var MetNorway = (function () {
                     customIcon: "rain-symbolic",
                     main: _("Heavy Rain"),
                     description: _("Heavy rain"),
-                    icon: weatherIconSafely(["weather-severe-alert"], iconType)
+                    icon: weatherIconSafely(["weather-rain", "weather-freezing-rain", "weather-showers-scattered"], iconType)
                 };
             case "heavyrainandthunder":
                 return {
                     customIcon: "thunderstorm-symbolic",
                     main: _("Heavy Rain"),
                     description: _("Heavy rain and thunder"),
-                    icon: weatherIconSafely(["weather-severe-alert"], iconType)
+                    icon: weatherIconSafely(["weather-rain", "weather-freezing-rain", "weather-showers-scattered"], iconType)
                 };
             case "heavyrainshowers":
                 return {
                     customIcon: (isNight) ? "night-alt-rain-symbolic" : "day-rain-symbolic",
                     main: _("Heavy Rain"),
                     description: _("Heavy rain showers"),
-                    icon: weatherIconSafely(["weather-severe-alert"], iconType)
+                    icon: weatherIconSafely(["weather-showers", "weather-showers-scattered", "weather-freezing-rain"], iconType)
                 };
             case "heavyrainshowersandthunder":
                 return {
                     customIcon: (IsNight) ? "night-alt-thunderstorm-symbolic" : "day-thunderstorm-symbolic",
                     main: _("Heavy Rain"),
                     description: _("Heavy rain showers and thunder"),
-                    icon: weatherIconSafely(["weather-severe-alert"], iconType)
+                    icon: weatherIconSafely(["weather-showers", "weather-showers-scattered", "weather-freezing-rain"], iconType)
                 };
             case "heavysleet":
                 return {
@@ -368,14 +368,14 @@ var MetNorway = (function () {
                     customIcon: (isNight) ? "night-alt-sleet-symbolic" : "day-sleet-symbolic",
                     main: _("Heavy Sleet"),
                     description: _("Heavy sleet showers"),
-                    icon: weatherIconSafely(["weather-severe-alert"], iconType)
+                    icon: weatherIconSafely(["weather-showers", "weather-showers-scattered", "weather-freezing-rain"], iconType)
                 };
             case "heavysleetshowersandthunder":
                 return {
                     customIcon: (IsNight) ? "night-alt-sleet-storm-symbolic" : "day-sleet-storm-symbolic",
                     main: _("Heavy Sleet"),
                     description: _("Heavy sleet showers and thunder"),
-                    icon: weatherIconSafely(["weather-severe-alert"], iconType)
+                    icon: weatherIconSafely(["weather-showers", "weather-showers-scattered", "weather-freezing-rain"], iconType)
                 };
             case "heavysnow":
                 return {
@@ -396,14 +396,14 @@ var MetNorway = (function () {
                     customIcon: (isNight) ? "night-alt-snow-symbolic" : "day-snow-symbolic",
                     main: _("Heavy Snow"),
                     description: _("Heavy snow showers"),
-                    icon: weatherIconSafely(["weather-severe-alert"], iconType)
+                    icon: weatherIconSafely(["weather-snow-scattered", "weather-snow"], iconType)
                 };
             case "heavysnowshowersandthunder":
                 return {
                     customIcon: (isNight) ? "night-alt-snow-thunderstorm-symbolic" : "day-snow-thunderstorm-symbolic",
                     main: _("Heavy Snow"),
                     description: _("Heavy snow showers and thunder"),
-                    icon: weatherIconSafely(["weather-severe-alert"], iconType)
+                    icon: weatherIconSafely(["weather-snow-scattered", "weather-snow"], iconType)
                 };
             case "lightrain":
                 return {
@@ -424,14 +424,14 @@ var MetNorway = (function () {
                     customIcon: (isNight) ? "night-alt-rain-mix-symbolic" : "day-rain-mix-symbolic",
                     main: _("Light Rain"),
                     description: _("Light rain showers"),
-                    icon: weatherIconSafely(["weather-severe-alert"], iconType)
+                    icon: weatherIconSafely(["weather-showers-scattered", "weather-rain", "weather-severe-alert"], iconType)
                 };
             case "lightrainshowersandthunder":
                 return {
                     customIcon: (isNight) ? "night-alt-rain-mix-storm-symbolic" : "day-rain-mix-storm-symbolic",
                     main: _("Ligth Rain"),
                     description: _("Light rain showers and thunder"),
-                    icon: weatherIconSafely(["weather-severe-alert"], iconType)
+                    icon: weatherIconSafely(["weather-showers-scattered", "weather-rain", "weather-severe-alert"], iconType)
                 };
             case "lightsleet":
                 return {
@@ -452,14 +452,14 @@ var MetNorway = (function () {
                     customIcon: (IsNight) ? "night-alt-sleet-symbolic" : "day-sleet-symbolic",
                     main: _("Light Sleet"),
                     description: _("Light sleet showers"),
-                    icon: weatherIconSafely(["weather-severe-alert"], iconType)
+                    icon: weatherIconSafely(["weather-freezing-rain", "weather-showers", "weather-severe-alert"], iconType)
                 };
             case "lightssleetshowersandthunder":
                 return {
                     customIcon: (IsNight) ? "night-alt-sleet-storm-symbolic" : "day-sleet-storm-symbolic",
                     main: _("Light Sleet"),
                     description: _("Light sleet showers and thunder"),
-                    icon: weatherIconSafely(["weather-severe-alert"], iconType)
+                    icon: weatherIconSafely(["weather-freezing-rain", "weather-showers", "weather-severe-alert"], iconType)
                 };
             case "lightsnow":
                 return {
@@ -480,21 +480,21 @@ var MetNorway = (function () {
                     customIcon: (isNight) ? "night-alt-snow-symbolic" : "day-snow-symbolic",
                     main: _("Light Snow"),
                     description: _("Light snow showers"),
-                    icon: weatherIconSafely(["weather-severe-alert"], iconType)
+                    icon: weatherIconSafely(["weather-snow-scattered", "weather-snow"], iconType)
                 };
             case "lightssnowshowersandthunder":
                 return {
                     customIcon: (isNight) ? "night-alt-snow-thunderstorm-symbolic" : "day-snow-thunderstorm-symbolic",
                     main: _("Light Snow"),
                     description: _("Light snow showers and thunder"),
-                    icon: weatherIconSafely(["weather-severe-alert"], iconType)
+                    icon: weatherIconSafely(["weather-snow-scattered", "weather-snow"], iconType)
                 };
             case "partlycloudy":
                 return {
                     customIcon: (isNight) ? "night-alt-cloudy-symbolic" : "day-cloudy-symbolic",
                     main: _("Partly Cloudy"),
                     description: _("Partly Cloudy"),
-                    icon: weatherIconSafely((isNight) ? ["weather-few-clouds-night", "weather-clouds", "weather-overcast", "weather-severe-alert"] : ["weather-few-clouds", "weather-clouds", "weather-overcast", "weather-severe-alert"], iconType)
+                    icon: weatherIconSafely((isNight) ? ["weather-clouds-night", "weather-few-clouds-night", "weather-overcast", "weather-severe-alert"] : ["weather-clouds", "weather-few-clouds", "weather-overcast", "weather-severe-alert"], iconType)
                 };
             case "rain":
                 return {
@@ -515,14 +515,14 @@ var MetNorway = (function () {
                     customIcon: (isNight) ? "night-alt-rain-mix-symbolic" : "day-rain-mix-symbolic",
                     main: _("Rain Showers"),
                     description: _("Rain showers"),
-                    icon: weatherIconSafely(["weather-severe-alert"], iconType)
+                    icon: weatherIconSafely(["weather-showers-scattered", "weather-rain", "weather-freezing-rain"], iconType)
                 };
             case "rainshowersandthunder":
                 return {
                     customIcon: (isNight) ? "night-alt-rain-mix-storm-symbolic" : "day-rain-mix-storm-symbolic",
                     main: _("Rain Showers"),
                     description: _("Rain showers and thunder"),
-                    icon: weatherIconSafely(["weather-severe-alert"], iconType)
+                    icon: weatherIconSafely(["weather-showers-scattered", "weather-rain", "weather-freezing-rain", "weather-severe-alert"], iconType)
                 };
             case "sleet":
                 return {
@@ -543,14 +543,14 @@ var MetNorway = (function () {
                     customIcon: (isNight) ? "night-alt-sleet-symbolic" : "day-sleet-symbolic",
                     main: _("Sleet"),
                     description: _("Sleet showers"),
-                    icon: weatherIconSafely(["weather-severe-alert"], iconType)
+                    icon: weatherIconSafely(["weather-freezing-rain", "weather-showers", "weather-severe-alert"], iconType)
                 };
             case "sleetshowersandthunder":
                 return {
                     customIcon: (isNight) ? "night-alt-sleet-storm-symbolic" : "day-sleet-storm-symbolic",
                     main: _("Sleet"),
                     description: _("Sleet showers and thunder"),
-                    icon: weatherIconSafely(["weather-severe-alert"], iconType)
+                    icon: weatherIconSafely(["weather-freezing-rain", "weather-showers", "weather-severe-alert"], iconType)
                 };
             case "snow":
                 return {
@@ -571,14 +571,14 @@ var MetNorway = (function () {
                     customIcon: (isNight) ? "night-alt-snow-symbolic" : "day-snow-symbolic",
                     main: _("Snow Showers"),
                     description: _("Snow showers"),
-                    icon: weatherIconSafely(["weather-severe-alert"], iconType)
+                    icon: weatherIconSafely(["weather-snow-scattered", "weather-snow"], iconType)
                 };
             case "snowshowersandthunder":
                 return {
                     customIcon: (isNight) ? "night-alt-snow-thunderstorm-symbolic" : "day-snow-thunderstorm-symbolic",
                     main: _("Snow Showers"),
                     description: _("Snow showers and thunder"),
-                    icon: weatherIconSafely(["weather-severe-alert"], iconType)
+                    icon: weatherIconSafely(["weather-snow-scattered", "weather-snow"], iconType)
                 };
             default:
                 this.app.log.Error("condition code not found: " + weather.condition);
