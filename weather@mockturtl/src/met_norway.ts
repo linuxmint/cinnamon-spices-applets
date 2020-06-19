@@ -246,8 +246,6 @@ class MetNorway implements WeatherProvider {
     }
 
     private GetMostSevereCondition(conditions: ConditionCount): string {
-      // Refer to
-      // https://api.met.no/weatherapi/weathericon/1.1/documentation
       // for Weather conditions
       //this.app.log.Debug(JSON.stringify(conditions));
 
@@ -288,7 +286,6 @@ class MetNorway implements WeatherProvider {
 	}
 
     private ResolveCondition(icon: string, isNight: boolean = false): Condition {
-		//TODO: do normal icons
 		let weather = this.DeconstructCondtition(icon);
 		let iconType = this.app.config.IconType();
 		switch (weather.condition) {
