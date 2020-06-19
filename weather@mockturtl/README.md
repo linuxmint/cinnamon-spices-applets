@@ -14,12 +14,14 @@ In **Manual Location** mode the applet **only** **accepts Coordinates** in Latit
 
 ## Weather providers to choose from
 
-| Weather Providers          | OpenWeatherMap | DarkSky | MET Norway | WeatherBit | Yahoo                     |
-| -------------------------- | -------------- | ------- | ---------- | ---------- | ------------------------- |
-| **Needs API key**          | No             | Yes*    | No         | Yes        | No                        |
-| **Maximum Forecast Days**  | 7              | 8       | 10         | 16         | 10                        |
-| **Maximum Forecast Hours** | 48             | 168     | 48         | 0**        | 0                         |
-| **Required Packages**      | --             | --      | --         | --         | python3-requests-oauthlib |
+| Weather Providers  | Needs API key | **Maximum Forecast Days** | **Maximum Forecast Hours** | Required Packages         |
+| ------------------ | ------------- | ------------------------- | -------------------------- | ------------------------- |
+| **OpenWeatherMap** | No            | 7                         | 48                         | --                        |
+| **DarkSky**        | Yes*          | 8                         | 168                        | --                        |
+| **MET Norway**     | No            | 10                        | 48                         | --                        |
+| **WeatherBit**     | Yes           | 16                        | 0**                        | --                        |
+| **Yahoo**          | No            | 10                        | 0                          | --                        |
+| **Climacell**      | Yes           | 16                        | 96                         | python3-requests-oauthlib |
 
 ### OpenWeatherMap
 
@@ -46,6 +48,12 @@ OpenWeatherMap does not require API key anymore! Big Thanks to them for supporti
 ### Yahoo
 
 * Current weather refreshes every 2 hours.
+
+### Climacell
+
+* API key can be obtained [here](https://developer.climacell.co/sign-up). Register and the API key will be shown in the Overview section.
+
+
 
 ## Requirements
 

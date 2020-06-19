@@ -12,30 +12,10 @@
     "type": "header",
     "description": "Weather service information"
   },
-  "openWM": {
-    "type": "label",
-    "description": "OpenWeatherMap - The default, works out of the box, only accepts coordinates as a location now!"
-  },
-  "darkS": {
-    "type": "label",
-    "description": "DarkSky - Needs key, please click on 'Setup API Key and Location' for the steps how to obtain one."
-  },
-  "METN": {
-    "type": "label",
-    "description": "MET Norway - Current weather is shown for the next hour, and the daily forecasts \nare generated from 6 hour forecasts, so it can look incorrect sometimes."
-  },
-  "WB": {
-    "type": "label",
-    "description": "WeatherBit - At least 10 minutes as refresh rate is recommended,\nsince otherwise you might exceed you daily quota."
-  },
-  "Yahoo": {
-    "type": "label",
-    "description": "Yahoo - Requires 'python3-requests-oauthlib' package installed (for Arch\nbased distros 'python-requests-oauthlib'), Updates every 2 hours."
-  },
   "moreInfo": {
     "type": "button",
     "indent": true,
-    "description": "More Information",
+    "description": "Click here for detailed description",
     "callback": "locationLookup",
     "tooltip": "Opens webpage guide"
   },
@@ -52,7 +32,8 @@
       "DarkSky (key needed)": "DarkSky",
       "MET Norway": "MetNorway",
       "Weatherbit (key needed)": "Weatherbit",
-      "Yahoo": "Yahoo"
+	  "Yahoo": "Yahoo",
+	  "Climacell (key needed)": "Climacell"
     }
   },
   "apiKey": {

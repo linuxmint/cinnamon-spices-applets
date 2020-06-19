@@ -600,10 +600,11 @@ class MetNorway implements WeatherProvider {
 					icon: weatherIconSafely(["weather-severe-alert"], iconType)
 				}
 			default:
+				this.app.log.Error("condition code not found: " + weather.condition);
 				return {
 					customIcon : "cloud-refresh-symbolic",
-					main: _(""),
-					description: _(""),
+					main: _("Unknown"),
+					description: _("Unknown"),
 					icon: weatherIconSafely(["weather-severe-alert"], iconType)
 				}
 		}

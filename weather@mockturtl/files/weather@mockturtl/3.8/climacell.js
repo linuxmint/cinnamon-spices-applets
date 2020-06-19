@@ -348,10 +348,11 @@ class Climacell {
                     icon: weatherIconSafely((isNight) ? ["weather-clear-night"] : ["weather-clear"], this.app.config.IconType())
                 };
             default:
+                this.app.log.Error("condition code not found: " + condition);
                 return {
                     customIcon: "refresh-symbolic",
-                    description: _(""),
-                    main: _(""),
+                    description: _("Unknown"),
+                    main: _("Unknown"),
                     icon: weatherIconSafely(["weather-severe-alert"], this.app.config.IconType())
                 };
         }
