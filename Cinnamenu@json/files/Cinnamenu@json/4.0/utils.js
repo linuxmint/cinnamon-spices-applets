@@ -12,21 +12,6 @@ const tryFn = function(callback, errCallback) {
     }
 };
 
-const sortBy = function(array = [], property = '', direction = 'asc') {
-  let arg;
-  array.sort(function(a, b) {
-    if (!a || !b || !a[property] || !b[property]) {
-      return -1;
-    }
-    if (typeof (a[property] || b[property]) === 'number') {
-      arg = direction === 'asc' ? a[property] - b[property] : b[property] - a[property];
-    } else {
-      arg = direction ===  'asc' ? a[property] > b[property] : a[property] < b[property];
-    }
-    return a[property] === b[property] ? 0 : +(arg) || -1;
-  });
-};
-
 const readFileAsync = function(file, opts = {utf8: true}) {
   const {utf8} = opts;
   return new Promise(function(resolve, reject) {
@@ -55,4 +40,4 @@ const readJSONAsync = function(file) {
 };
 
 
-module.exports = {tryFn, sortBy, readFileAsync, readJSONAsync};
+module.exports = {tryFn, readFileAsync, readJSONAsync};

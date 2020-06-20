@@ -35,6 +35,8 @@
             "title":"Layout",
             "keys":[
                 "applications-view-mode",
+                "powergroup-placement",
+                "add-favorites",
                 "description-placement",
                 "enable-custom-menu-height",
                 "custom-menu-height",
@@ -122,7 +124,25 @@
             "Under titles":2,
             "None":3
         },
-        "tooltip":"Choose where application descriptions will be placed, or select \"None\" to disable."
+        "tooltip":"Choose where to show application descriptions."
+    },
+    "powergroup-placement":{
+        "type":"combobox",
+        "default":1,
+        "description":"Session buttons location",
+        "options":{
+            "Top":0,
+            "Bottom":1,
+            "Left":2,
+            "Right":3
+        },
+        "tooltip":"Choose where to show the session (quit, Logout, etc.) buttons."
+    },
+    "add-favorites":{
+        "type":"switch",
+        "default":true,
+        "description":"Add favorites to session buttons.",
+        "tooltip":"Show your favorite app icons next to the session buttons."
     },
     "enable-custom-menu-height":{
         "type":"switch",
