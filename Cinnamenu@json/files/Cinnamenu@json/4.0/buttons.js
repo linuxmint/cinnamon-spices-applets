@@ -890,7 +890,7 @@ class AppListGridButton extends PopupBaseMenuItem {
 }
 
 class GroupButton extends PopupBaseMenuItem {
-    constructor(state, iconName, iconSize, name, description, callback) {
+    constructor(state, icon, name, description, callback) {
         super({ hover: false,
                 activate: false });
         this.state = state;
@@ -904,15 +904,8 @@ class GroupButton extends PopupBaseMenuItem {
         this.actor.set_style_class_name('menu-favorites-button');
         this.entered = null;
 
-        if (iconName && iconSize) {
-            let iconObj = {
-                icon_size: iconSize,
-                icon_type: IconType.FULLCOLOR
-                //icon_type: adjustedIconSize <= 25 ? IconType.SYMBOLIC : IconType.FULLCOLOR
-            };
-            iconObj.icon_name = iconName;
-            this.iconSize = iconSize;
-            this.icon = new Icon(iconObj);
+        if (icon) {
+            this.icon = icon;
             this.addActor(this.icon);
             this.icon.realize();
         }
@@ -925,9 +918,7 @@ class GroupButton extends PopupBaseMenuItem {
         if (event && event.get_button() > 1) {
             return;
         }
-        if (this.user || true /*this.icon.icon_name.indexOf('view') === -1*/) { //??
-            this.state.trigger('closeMenu');
-        }
+        this.state.trigger('closeMenu');
         if (this.callback) {
             this.callback();
         }
@@ -943,12 +934,7 @@ class GroupButton extends PopupBaseMenuItem {
         this.actor.add_style_pseudo_class('hover');
         //show tooltip
         let [x, y] = this.actor.get_transformed_position();
-        y -= ((this.actor.height * 2) + 8);
-        x -= (this.actor.width / 2) - 8;
-        if (global.ui_scale > 1) {
-            y += 12;
-            x += 20;
-        }
+        y += (this.actor.height / 2) * global.ui_scale + 8;
         let text = `<span>${this.name}</span>`;
         if (this.description) {
             text += '\n<span size="small">' + this.description + '</span>';
@@ -962,7 +948,7 @@ class GroupButton extends PopupBaseMenuItem {
         this.state.trigger('setTooltip');//hide tooltip
     }
 
-    setIcon(iconName) {
+    /*setIcon(iconName) {
         this.removeActor(this.icon);
         this.icon.destroy();
         this.icon = this.icon = new Icon({
@@ -972,7 +958,7 @@ class GroupButton extends PopupBaseMenuItem {
         });
         this.addActor(this.icon);
         this.icon.realize();
-    }
+    }*/
 
     destroy() {
         this.signals.disconnectAllSignals();
