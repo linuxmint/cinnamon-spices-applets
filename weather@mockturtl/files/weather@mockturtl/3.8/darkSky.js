@@ -19,16 +19,13 @@ var isLangSupported = utils.isLangSupported;
 var FahrenheitToKelvin = utils.FahrenheitToKelvin;
 var CelsiusToKelvin = utils.CelsiusToKelvin;
 var MPHtoMPS = utils.MPHtoMPS;
-var icons = utils.icons;
 var IsNight = utils.IsNight;
 var weatherIconSafely = utils.weatherIconSafely;
-var Sentencify = utils.Sentencify;
 class DarkSky {
     constructor(_app) {
         this.prettyName = "DarkSky";
         this.name = "DarkSky";
         this.maxForecastSupport = 8;
-        this.supportsHourly = false;
         this.website = "https://darksky.net/poweredby/";
         this.maxHourlyForecastSupport = 168;
         this.descriptionLinelength = 25;
@@ -246,7 +243,7 @@ class DarkSky {
             if (result.length == 2)
                 break;
         }
-        return Sentencify(result);
+        return result.join(" ");
     }
     ;
     GetShortCurrentSummary(summary) {
@@ -267,31 +264,31 @@ class DarkSky {
     ResolveIcon(icon, sunTimes, date) {
         switch (icon) {
             case "rain":
-                return [icons.rain, icons.showers_scattered, icons.rain_freezing];
+                return ["weather-rain", "weather-showers-scattered", "weather-freezing-rain"];
             case "snow":
-                return [icons.snow];
+                return ["weather-snow"];
             case "sleet":
-                return [icons.rain_freezing, icons.rain, icons.showers_scattered];
+                return ["weather-freezing-rain", "weather-rain", "weather-showers-scattered"];
             case "fog":
-                return [icons.fog];
+                return ["weather-fog"];
             case "wind":
-                return (sunTimes && IsNight(sunTimes, date)) ? ["weather-windy", "wind", "weather-breeze", icons.clouds, icons.few_clouds_night] : ["weather-windy", "wind", "weather-breeze", icons.clouds, icons.few_clouds_day];
+                return (sunTimes && IsNight(sunTimes, date)) ? ["weather-windy", "weather-breeze", "weather-clouds", "weather-few-clouds-night"] : ["weather-windy", "weather-breeze", "weather-clouds", "weather-few-clouds"];
             case "cloudy":
-                return (sunTimes && IsNight(sunTimes, date)) ? [icons.overcast, icons.clouds, icons.few_clouds_night] : [icons.overcast, icons.clouds, icons.few_clouds_day];
+                return (sunTimes && IsNight(sunTimes, date)) ? ["weather-overcast", "weather-clouds", "weather-few-clouds-night"] : ["weather-overcast", "weather-clouds", "weather-few-clouds"];
             case "partly-cloudy-night":
-                return [icons.few_clouds_night];
+                return ["weather-few-clouds-night"];
             case "partly-cloudy-day":
-                return [icons.few_clouds_day];
+                return ["weather-few-clouds"];
             case "clear-night":
-                return [icons.clear_night];
+                return ["weather-clear-night"];
             case "clear-day":
-                return [icons.clear_day];
+                return ["weather-clear"];
             case "storm":
-                return [icons.storm];
+                return ["weather-storm"];
             case "showers":
-                return [icons.showers, icons.showers_scattered];
+                return ["weather-showers", "weather-showers-scattered"];
             default:
-                return [icons.alert];
+                return ["weather-severe-alert"];
         }
     }
     ;

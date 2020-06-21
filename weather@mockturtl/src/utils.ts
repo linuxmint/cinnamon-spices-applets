@@ -138,7 +138,7 @@ var getDayName = function(dayNum: number): string {
  * @returns number in format HHMM, can be compared directly
  */
 var	MilitaryTime = function(date: Date): number {
-	return date.getHours() * 1000 + date.getMinutes();
+	return date.getHours() * 100 + date.getMinutes();
 }
 
 var IsNight = function(sunTimes: SunTimes, date?: Date): boolean {
@@ -360,39 +360,8 @@ var Sentencify = function(words: string[]): string {
 	return result;
 }
 
-const icons = {
-  clear_day: 'weather-clear',
-  clear_night: 'weather-clear-night',
-  few_clouds_day: 'weather-few-clouds',
-  few_clouds_night: 'weather-few-clouds-night',
-  clouds: 'weather-clouds',
-  many_clouds: 'weather-many-clouds',
-  overcast: 'weather_overcast',
-  showers_scattered: 'weather-showers-scattered',
-  showers_scattered_day: 'weather-showers-scattered-day',
-  showers_scattered_night: 'weather-showers-scattered-night',
-  shower_day: 'weather-showers-day',
-  shower_night: 'weather-showers-night',
-  showers: 'weather-showers',
-  rain: 'weather-rain',
-  rain_freezing: 'weather-freezing-rain',
-  snow: 'weather-snow',
-  snow_day: 'weather-snow',
-  snow_night: 'weather-snow-night',
-  snow_rain: 'weather-snow-rain',
-  snow_scattered: 'weather-snow-scattered',
-  snow_scattered_day: 'weather-snow-scattered-day',
-  snow_scattered_night: 'weather-snow-scattered-night',
-  storm: 'weather-storm',
-  hail: 'weather-hail',
-  fog: 'weather-fog',
-  tornado: 'weather-tornado',
-  wind: 'weather-windy',
-  alert: 'weather-severe-alert'
-}
-
   // Passing appropriate resolver function for the API, and the code
-var weatherIconSafely = function (code: string[], icon_type: imports.gi.St.IconType): string {
+var weatherIconSafely = function (code: BuiltinIcons[], icon_type: imports.gi.St.IconType): BuiltinIcons {
     for (let i = 0; i < code.length; i++) {
       if (hasIcon(code[i], icon_type))
         return code[i]

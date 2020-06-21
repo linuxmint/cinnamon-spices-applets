@@ -52,14 +52,12 @@ function _(str) {
 var utils = importModule("utils");
 var isCoordinate = utils.isCoordinate;
 var isLangSupported = utils.isLangSupported;
-var icons = utils.icons;
 var weatherIconSafely = utils.weatherIconSafely;
 var GetFuncName = utils.GetFuncName;
 var Weatherbit = (function () {
     function Weatherbit(_app) {
         this.prettyName = "WeatherBit";
         this.name = "Weatherbit";
-        this.supportsHourly = true;
         this.maxForecastSupport = 16;
         this.website = "https://www.weatherbit.io/";
         this.maxHourlyForecastSupport = 48;
@@ -77,33 +75,27 @@ var Weatherbit = (function () {
     }
     Weatherbit.prototype.GetWeather = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var forecastResult, hourlyForecastResult, currentResult, _a, _b, _c;
-            return __generator(this, function (_d) {
-                switch (_d.label) {
+            var forecastPromise, hourlyPromise, currentResult, forecastResult, hourlyResult;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
                     case 0:
-                        forecastResult = this.GetData(this.daily_url, this.ParseForecast);
-                        hourlyForecastResult = null;
+                        forecastPromise = this.GetData(this.daily_url, this.ParseForecast);
+                        hourlyPromise = null;
                         if (!!this.hourlyAccess)
-                            hourlyForecastResult = this.GetData(this.hourly_url, this.ParseHourlyForecast);
+                            hourlyPromise = this.GetData(this.hourly_url, this.ParseHourlyForecast);
                         return [4, this.GetData(this.current_url, this.ParseCurrent)];
                     case 1:
-                        currentResult = _d.sent();
+                        currentResult = _a.sent();
                         if (!currentResult)
                             return [2, null];
-                        _a = currentResult;
-                        return [4, forecastResult];
+                        return [4, forecastPromise];
                     case 2:
-                        _a.forecasts = _d.sent();
-                        _b = currentResult;
-                        if (!(!hourlyForecastResult)) return [3, 3];
-                        _c = [];
-                        return [3, 5];
-                    case 3: return [4, hourlyForecastResult];
-                    case 4:
-                        _c = _d.sent();
-                        _d.label = 5;
-                    case 5:
-                        _b.hourlyForecasts = _c;
+                        forecastResult = _a.sent();
+                        currentResult.forecasts = (!forecastResult) ? [] : forecastResult;
+                        return [4, hourlyPromise];
+                    case 3:
+                        hourlyResult = _a.sent();
+                        currentResult.hourlyForecasts = (!hourlyResult) ? [] : hourlyResult;
                         return [2, currentResult];
                 }
             });
@@ -333,14 +325,14 @@ var Weatherbit = (function () {
             case "t04d":
             case "t05n":
             case "t05d":
-                return [icons.storm];
+                return ["weather-storm"];
             case "d01d":
             case "d01n":
             case "d02d":
             case "d02n":
             case "d03d":
             case "d03n":
-                return [icons.showers_scattered, icons.rain, icons.rain_freezing];
+                return ["weather-showers-scattered", "weather-rain", "weather-freezing-rain"];
             case "r01d":
             case "r01n":
             case "r02d":
@@ -353,7 +345,7 @@ var Weatherbit = (function () {
             case "r05n":
             case "r06d":
             case "r06n":
-                return [icons.rain, icons.rain_freezing, icons.showers_scattered];
+                return ["weather-rain", "weather-freezing-rain", "weather-showers-scattered"];
             case "s01d":
             case "s01n":
             case "s02d":
@@ -364,10 +356,10 @@ var Weatherbit = (function () {
             case "s04n":
             case "s06d":
             case "s06n":
-                return [icons.snow];
+                return ["weather-snow"];
             case "s05d":
             case "s05n":
-                return [icons.rain_freezing, icons.rain, icons.showers_scattered];
+                return ["weather-freezing-rain", "weather-rain", "weather-showers-scattered"];
             case "a01d":
             case "a01n":
             case "a02d":
@@ -380,28 +372,28 @@ var Weatherbit = (function () {
             case "a05n":
             case "a06d":
             case "a06n":
-                return [icons.fog];
+                return ["weather-fog"];
             case "c02d":
-                return [icons.few_clouds_day];
+                return ["weather-few-clouds"];
             case "c02n":
-                return [icons.few_clouds_night];
+                return ["weather-few-clouds-night"];
             case "c01n":
-                return [icons.clear_night];
+                return ["weather-clear-night"];
             case "c01d":
-                return [icons.clear_day];
+                return ["weather-clear"];
             case "c03d":
-                return [icons.clouds, icons.few_clouds_day, icons.overcast];
+                return ["weather-clouds", "weather-few-clouds", "weather-overcast"];
             case "c03n":
-                return [icons.clouds, icons.few_clouds_night, icons.overcast];
+                return ["weather-clouds-night", "weather-few-clouds-night", "weather-overcast"];
             case "c04n":
-                return [icons.overcast, icons.clouds, icons.few_clouds_night];
+                return ["weather-overcast", "weather-clouds-night", "weather-few-clouds-night"];
             case "c04d":
-                return [icons.overcast, icons.clouds, icons.few_clouds_day];
+                return ["weather-overcast", "weather-clouds", "weather-few-clouds"];
             case "u00d":
             case "u00n":
-                return [icons.alert];
+                return ["weather-severe-alert"];
             default:
-                return [icons.alert];
+                return ["weather-severe-alert"];
         }
     };
     ;

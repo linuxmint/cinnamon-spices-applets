@@ -126,7 +126,8 @@ var DATA_SERVICE = {
     DARK_SKY: "DarkSky",
     MET_NORWAY: "MetNorway",
     WEATHERBIT: "Weatherbit",
-    YAHOO: "Yahoo"
+    YAHOO: "Yahoo",
+    CLIMACELL: "Climacell"
 };
 imports.gettext.bindtextdomain(UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
 function _(str) {
@@ -222,7 +223,7 @@ var WeatherApplet = (function (_super) {
                             _this._httpSession.queue_message(message, function (session, message) {
                                 if (!message)
                                     reject({ code: 0, message: "no network response", reason_phrase: "no network response" });
-                                if (message.status_code != 200)
+                                if (message.status_code > 300 || message.status_code < 200)
                                     reject({ code: message.status_code, message: "bad status code", reason_phrase: message.reason_phrase });
                                 if (!message.response_body)
                                     reject({ code: message.status_code, message: "no reponse body", reason_phrase: message.reason_phrase });
@@ -275,7 +276,7 @@ var WeatherApplet = (function (_super) {
                             _this._httpSession.queue_message(message, function (session, message) {
                                 if (!message)
                                     reject({ code: 0, message: "no network response", reason_phrase: "no network response" });
-                                if (message.status_code != 200)
+                                if (message.status_code > 300 || message.status_code < 200)
                                     reject({ code: message.status_code, message: "bad status code", reason_phrase: message.reason_phrase });
                                 if (!message.response_body)
                                     reject({ code: message.status_code, message: "no reponse body", reason_phrase: message.reason_phrase });
@@ -370,38 +371,45 @@ var WeatherApplet = (function (_super) {
         var currentName = get(["name"], this.provider);
         switch (this.config._dataService) {
             case DATA_SERVICE.DARK_SKY:
-                if (darkSky == null)
+                if (!darkSky)
                     var darkSky = importModule('darkSky');
                 if (currentName != "DarkSky" || force) {
                     this.provider = new darkSky.DarkSky(this);
                 }
                 break;
             case DATA_SERVICE.OPEN_WEATHER_MAP:
-                if (openWeatherMap == null)
+                if (!openWeatherMap)
                     var openWeatherMap = importModule("openWeatherMap");
                 if (currentName != "OpenWeatherMap" || force) {
                     this.provider = new openWeatherMap.OpenWeatherMap(this);
                 }
                 break;
             case DATA_SERVICE.MET_NORWAY:
-                if (metNorway == null)
+                if (!metNorway)
                     var metNorway = importModule("met_norway");
                 if (currentName != "MetNorway" || force) {
                     this.provider = new metNorway.MetNorway(this);
                 }
                 break;
             case DATA_SERVICE.WEATHERBIT:
-                if (weatherbit == null)
+                if (!weatherbit)
                     var weatherbit = importModule("weatherbit");
                 if (currentName != "Weatherbit" || force) {
                     this.provider = new weatherbit.Weatherbit(this);
                 }
                 break;
             case DATA_SERVICE.YAHOO:
-                if (yahoo == null)
+                if (!yahoo)
                     var yahoo = importModule("yahoo");
                 if (currentName != "Yahoo" || force) {
                     this.provider = new yahoo.Yahoo(this);
+                }
+                break;
+            case DATA_SERVICE.CLIMACELL:
+                if (!climacell)
+                    var climacell = importModule("climacell");
+                if (currentName != "Climacell" || force) {
+                    this.provider = new climacell.Climacell(this);
                 }
                 break;
             default:
@@ -597,7 +605,7 @@ var WeatherApplet = (function (_super) {
     };
     ;
     WeatherApplet.prototype.HandleError = function (error) {
-        if (this.encounteredError)
+        if (this.encounteredError == true)
             return;
         this.encounteredError = true;
         if (error.type == "hard") {
@@ -992,6 +1000,12 @@ var UI = (function () {
             return true;
         }
         catch (e) {
+            this.app.HandleError({
+                type: "hard",
+                detail: "unknown",
+                message: "Forecast parsing failed: " + e.toString(),
+                userError: false
+            });
             this.app.log.Error("DisplayForecastError " + e);
             return false;
         }
@@ -1015,10 +1029,17 @@ var UI = (function () {
             if (config._translateCondition)
                 hour.condition.main = _(hour.condition.main);
             ui.Summary.text = hour.condition.main;
-            if (!!hour.precipation && hour.precipation.volume > 0) {
-                ui.Precipation.text = hour.precipation.volume + " mm";
-                if (!!hour.precipation.chance)
-                    ui.Precipation.text += (", " + Math.round(hour.precipation.chance) + "%");
+            if (!!hour.precipation && hour.precipation.type != "none") {
+                var precipationText = null;
+                if (!!hour.precipation.volume && hour.precipation.volume > 0) {
+                    precipationText = hour.precipation.volume + " mm";
+                }
+                if (hour.precipation.chance != null || hour.precipation.chance != undefined) {
+                    precipationText = (precipationText == null) ? "" : (precipationText + ", ");
+                    precipationText += (Math.round(hour.precipation.chance).toString() + "%");
+                }
+                if (precipationText != null)
+                    ui.Precipation.text = precipationText;
             }
         }
         if (max <= 0)
@@ -1391,7 +1412,7 @@ var WeatherLoop = (function () {
                         _a.trys.push([1, 7, , 8]);
                         if (this.IsStray())
                             return [2];
-                        if (this.app.encounteredError)
+                        if (this.app.encounteredError == true)
                             this.IncrementErrorCount();
                         this.ValidateLastUpdate();
                         if (!this.pauseRefresh) return [3, 3];
