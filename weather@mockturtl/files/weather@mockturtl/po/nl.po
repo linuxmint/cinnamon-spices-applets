@@ -11,7 +11,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-06-19 14:27+0100\n"
 "PO-Revision-Date: 2020-06-21 10:46+0200\n"
-"Last-Translator: Jurien (French77) <Jurien@protonmail.com>\n"
+"Last-Translator: Pjotr <pjotrvertaalt@gmail.com>\n"
 "Language-Team: Dutch\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
@@ -267,11 +267,11 @@ msgstr "Mengsel van regen en sneeuw"
 
 #: 3.0/yahoo.js:459 3.8/yahoo.js:410
 msgid "Mixed Rain and Sleet"
-msgstr "Mengsel van regen en natte sneeuw"
+msgstr "Mengsel van regen en hagel"
 
 #: 3.0/yahoo.js:460 3.8/yahoo.js:411
 msgid "Mixed Snow and Sleet"
-msgstr "Mengsel van sneeuw en natte sneeuw"
+msgstr "Mengsel van sneeuw en hagel"
 
 #: 3.0/yahoo.js:461 3.0/climacell.js:297 3.8/yahoo.js:412 3.8/climacell.js:235
 msgid "Freezing Drizzle"
@@ -330,7 +330,7 @@ msgstr "Hagel"
 #: 3.8/met_norway.js:482 3.8/met_norway.js:488 3.8/met_norway.js:495
 #: 3.8/met_norway.js:502 3.8/openWeatherMap.js:364
 msgid "Sleet"
-msgstr "Natte sneeuw"
+msgstr "Hagel"
 
 #: 3.0/yahoo.js:472 3.0/openWeatherMap.js:423 3.8/yahoo.js:423
 #: 3.8/openWeatherMap.js:377
@@ -470,11 +470,11 @@ msgstr "Zware regenval"
 
 #: 3.0/met_norway.js:335 3.8/met_norway.js:286
 msgid "Heavy rain and thunder"
-msgstr "Zware regen- en onweer"
+msgstr "Zware regenval en onweer"
 
 #: 3.0/met_norway.js:342 3.8/met_norway.js:293
 msgid "Heavy rain showers"
-msgstr "Zware regen buien"
+msgstr "Zware regenbuien"
 
 #: 3.0/met_norway.js:349 3.8/met_norway.js:300
 msgid "Heavy rain showers and thunder"
@@ -485,31 +485,31 @@ msgstr "Zware regenbuien en onweer"
 #: 3.8/met_norway.js:307 3.8/met_norway.js:313 3.8/met_norway.js:320
 #: 3.8/met_norway.js:327
 msgid "Heavy Sleet"
-msgstr "Zware hagel buien"
+msgstr "Zware hagelbuien"
 
 #: 3.0/met_norway.js:363 3.8/met_norway.js:314
 msgid "Heavy Sleet and thunder"
-msgstr "Zware hagel buien met onweer"
+msgstr "Zware hagelbuien met onweer"
 
 #: 3.0/met_norway.js:370 3.8/met_norway.js:321
 msgid "Heavy sleet showers"
-msgstr "Zware hagel buien"
+msgstr "Zware hagelbuien"
 
 #: 3.0/met_norway.js:377 3.8/met_norway.js:328
 msgid "Heavy sleet showers and thunder"
-msgstr "Zware hagel buien en onweer"
+msgstr "Zware hagelbuien en onweer"
 
 #: 3.0/met_norway.js:391 3.8/met_norway.js:342
 msgid "Heavy Snow and thunder"
-msgstr "Zware sneeuw en onweer"
+msgstr "Zware sneeuwval en onweer"
 
 #: 3.0/met_norway.js:398 3.8/met_norway.js:349
 msgid "Heavy snow showers"
-msgstr "Zware sneeuw buien"
+msgstr "Zware sneeuwbuien"
 
 #: 3.0/met_norway.js:405 3.8/met_norway.js:356
 msgid "Heavy snow showers and thunder"
-msgstr "Zware sneeuw buien en onweer"
+msgstr "Zware sneeuwbuien en onweer"
 
 #: 3.0/met_norway.js:411 3.0/met_norway.js:412 3.0/met_norway.js:418
 #: 3.0/met_norway.js:425 3.0/climacell.js:268 3.0/climacell.js:269
@@ -524,7 +524,7 @@ msgstr "Lichte regen en onweer"
 
 #: 3.0/met_norway.js:426 3.8/met_norway.js:377
 msgid "Light rain showers"
-msgstr "Lichte regen buien"
+msgstr "Lichte regenbuien"
 
 #: 3.0/met_norway.js:432 3.8/met_norway.js:383
 msgid "Ligth Rain"
@@ -532,26 +532,26 @@ msgstr "Lichte regen"
 
 #: 3.0/met_norway.js:433 3.8/met_norway.js:384
 msgid "Light rain showers and thunder"
-msgstr "Lichte regen buien en onweer"
+msgstr "Lichte regenbuien en onweer"
 
 #: 3.0/met_norway.js:439 3.0/met_norway.js:440 3.0/met_norway.js:446
 #: 3.0/met_norway.js:453 3.0/met_norway.js:460 3.8/met_norway.js:390
 #: 3.8/met_norway.js:391 3.8/met_norway.js:397 3.8/met_norway.js:404
 #: 3.8/met_norway.js:411
 msgid "Light Sleet"
-msgstr "Lichte hagel bui"
+msgstr "Lichte hagelbui"
 
 #: 3.0/met_norway.js:447 3.8/met_norway.js:398
 msgid "Light Sleet and thunder"
-msgstr "Lichte hagel bui en onweer"
+msgstr "Lichte hagelbui en onweer"
 
 #: 3.0/met_norway.js:454 3.8/met_norway.js:405
 msgid "Light sleet showers"
-msgstr "Lichte hagel buien"
+msgstr "Lichte hagelbuien"
 
 #: 3.0/met_norway.js:461 3.8/met_norway.js:412
 msgid "Light sleet showers and thunder"
-msgstr "Lichte hagel buien en onweer"
+msgstr "Lichte hagelbuien en onweer"
 
 #: 3.0/met_norway.js:467 3.0/met_norway.js:468 3.0/met_norway.js:474
 #: 3.0/met_norway.js:481 3.0/met_norway.js:488 3.0/climacell.js:345
@@ -567,11 +567,11 @@ msgstr "Lichte sneeuwval en onweersbuien"
 
 #: 3.0/met_norway.js:482 3.8/met_norway.js:433
 msgid "Light snow showers"
-msgstr "Lichte sneeuw buien"
+msgstr "Lichte sneeuwbuien"
 
 #: 3.0/met_norway.js:489 3.8/met_norway.js:440
 msgid "Light snow showers and thunder"
-msgstr "Lichte sneeuw buien en onweer"
+msgstr "Lichte sneeuwbuien en onweer"
 
 #: 3.0/met_norway.js:510 3.8/met_norway.js:461
 msgid "Rain and thunder"
@@ -580,27 +580,27 @@ msgstr "Regen en onweer"
 #: 3.0/met_norway.js:516 3.0/met_norway.js:523 3.8/met_norway.js:467
 #: 3.8/met_norway.js:474
 msgid "Rain Showers"
-msgstr "Regen Buien"
+msgstr "Regenbuien"
 
 #: 3.0/met_norway.js:517 3.8/met_norway.js:468
 msgid "Rain showers"
-msgstr "Regen buien"
+msgstr "Regenbuien"
 
 #: 3.0/met_norway.js:524 3.8/met_norway.js:475
 msgid "Rain showers and thunder"
-msgstr "Regen buien en onweer"
+msgstr "Regenbuien en onweer"
 
 #: 3.0/met_norway.js:538 3.8/met_norway.js:489
 msgid "Sleet and thunder"
-msgstr "Hagel en onweersbuien"
+msgstr "Hagel en onweer"
 
 #: 3.0/met_norway.js:545 3.8/met_norway.js:496
 msgid "Sleet showers"
-msgstr "Hagel buien"
+msgstr "Hagelbuien"
 
 #: 3.0/met_norway.js:552 3.8/met_norway.js:503
 msgid "Sleet showers and thunder"
-msgstr "Hagel buien en onweer"
+msgstr "Hagelbuien en onweer"
 
 #: 3.0/met_norway.js:566 3.8/met_norway.js:517
 msgid "Snow and thunder"
@@ -609,15 +609,15 @@ msgstr "Sneeuw en onweer"
 #: 3.0/met_norway.js:572 3.0/met_norway.js:579 3.8/met_norway.js:523
 #: 3.8/met_norway.js:530
 msgid "Snow Showers"
-msgstr "Sneeuw Buien"
+msgstr "Sneeuwbuien"
 
 #: 3.0/met_norway.js:573 3.8/met_norway.js:524
 msgid "Snow showers"
-msgstr "Sneeuw buien"
+msgstr "Sneeuwbuien"
 
 #: 3.0/met_norway.js:580 3.8/met_norway.js:531
 msgid "Snow showers and thunder"
-msgstr "Sneeuw buien en onweer"
+msgstr "Sneeuwbuien en onweer"
 
 #: 3.0/met_norway.js:587 3.0/met_norway.js:588 3.0/climacell.js:416
 #: 3.0/climacell.js:417 3.8/met_norway.js:538 3.8/met_norway.js:539
@@ -687,11 +687,11 @@ msgstr ""
 #: 3.0/climacell.js:254 3.0/climacell.js:255 3.8/climacell.js:192
 #: 3.8/climacell.js:193
 msgid "Substantial Rain"
-msgstr "Aanzienlijke hoeveelheid regen"
+msgstr "Veel regen"
 
 #: 3.0/climacell.js:275 3.8/climacell.js:213
 msgid "Substantial Freezing Rain"
-msgstr "Aanzienlijke hoeveelheid ijzel"
+msgstr "Veel ijzel"
 
 #: 3.0/climacell.js:289 3.8/climacell.js:227
 msgid "Light Freezing Rain"
@@ -708,7 +708,7 @@ msgstr "Lichte motregen"
 
 #: 3.0/climacell.js:310 3.8/climacell.js:248
 msgid "Substantial Ice Pellets"
-msgstr "Aanzienlijke hoeveelheid hagel"
+msgstr "Veel hagel"
 
 #: 3.0/climacell.js:311 3.0/climacell.js:317 3.0/climacell.js:318
 #: 3.0/climacell.js:325 3.8/climacell.js:249 3.8/climacell.js:255
@@ -723,7 +723,7 @@ msgstr "Lichte hagel"
 #: 3.0/climacell.js:331 3.0/climacell.js:332 3.8/climacell.js:269
 #: 3.8/climacell.js:270
 msgid "Substantial Snow"
-msgstr "Aanzienlijke hoeveelheid Sneeuw"
+msgstr "Veel sneeuw"
 
 #: 3.0/climacell.js:352 3.0/climacell.js:353 3.8/climacell.js:290
 #: 3.8/climacell.js:291
@@ -743,7 +743,7 @@ msgstr "Lichte mist"
 #: 3.0/climacell.js:401 3.0/climacell.js:402 3.8/climacell.js:339
 #: 3.8/climacell.js:340
 msgid "Mostly Clear"
-msgstr "Overwegend Helder"
+msgstr "Overwegend helder"
 
 #: 3.0/openWeatherMap.js:187 3.0/weatherbit.js:186 3.8/openWeatherMap.js:142
 #: 3.8/weatherbit.js:127
@@ -787,7 +787,7 @@ msgstr "Onbekende fout, zie a.u.b. de logboeken in Looking Glass"
 
 #: 3.0/openWeatherMap.js:378 3.8/openWeatherMap.js:332
 msgid "Thunderstorm with light rain"
-msgstr "Onweer met lichte regenval"
+msgstr "Onweer met lichte regen"
 
 #: 3.0/openWeatherMap.js:379 3.8/openWeatherMap.js:333
 msgid "Thunderstorm with rain"
@@ -903,7 +903,7 @@ msgstr "Zware sneeuwval"
 
 #: 3.0/openWeatherMap.js:411 3.8/openWeatherMap.js:365
 msgid "Shower sleet"
-msgstr "Natte-sneeuwbuien"
+msgstr "Hagelbuien"
 
 #: 3.0/openWeatherMap.js:412 3.8/openWeatherMap.js:366
 msgid "Light rain and snow"
@@ -1512,7 +1512,7 @@ msgstr "Instellingen voor weather@mockturtl 3.8+"
 
 #. 3.8->settings-schema.json->descriptions->description
 msgid "Weather provider information"
-msgstr "Weersverstrekker informatie"
+msgstr "Weersverstrekkerinformatie"
 
 #. 3.8->settings-schema.json->useCustomMenuIcons->tooltip
 msgid "Iconset is weather-icons by Erik Flowers"
