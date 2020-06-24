@@ -1348,8 +1348,8 @@ class CinnamenuApplet extends TextIconApplet {
         if (startingCategoryIndex < 0) {
             startingCategoryIndex = 0;
         }
-        global.log("refContextMenuItemIndex: "+refContextMenuItemIndex+" refItemIndex:"+refItemIndex+
-                " refCategoryIndex:"+refCategoryIndex+" refPowerGroupItemIndex:"+refPowerGroupItemIndex);
+        //global.log("refContextMenuItemIndex: "+refContextMenuItemIndex+" refItemIndex:"+refItemIndex+
+        //        " refCategoryIndex:"+refCategoryIndex+" refPowerGroupItemIndex:"+refPowerGroupItemIndex);
         const nextPowerGroupItem = () => {
             if (refPowerGroupItemIndex < powerGroupButtons.length - 1) {
                     powerGroupButtons[refPowerGroupItemIndex + 1].handleEnter();
