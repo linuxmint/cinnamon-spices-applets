@@ -97,7 +97,7 @@ const APPLET_ICON = "view-refresh-symbolic"
 const REFRESH_ICON = "view-refresh";
 const CMD_SETTINGS = "cinnamon-settings applets " + UUID
 
-type Services = "OpenWeatherMap" | "DarkSky" | "MetNorway" | "Weatherbit" | "Yahoo" | "Climacell";
+type Services = "OpenWeatherMap" | "DarkSky" | "MetNorway" | "Weatherbit" | "Yahoo" | "Climacell" | "Met Office UK";
 type ServiceMap = {
   	[key: string]: Services
 }
@@ -111,7 +111,8 @@ const DATA_SERVICE: ServiceMap = {
 	MET_NORWAY: "MetNorway",
 	WEATHERBIT: "Weatherbit",
 	YAHOO: "Yahoo",
-	CLIMACELL: "Climacell"
+	CLIMACELL: "Climacell",
+	MET_UK: "Met Office UK"
 }
 
 //----------------------------------------------------------------------
@@ -406,39 +407,31 @@ class WeatherApplet extends TextIconApplet {
 		switch (this.config._dataService) {
 			case DATA_SERVICE.DARK_SKY:           // No City Info
 				if (!darkSky) var darkSky = importModule('darkSky');
-				if (currentName != "DarkSky" || force) {
-					this.provider = new darkSky.DarkSky(this);
-				}
+				if (currentName != "DarkSky" || force) this.provider = new darkSky.DarkSky(this);
 				break;
 			case DATA_SERVICE.OPEN_WEATHER_MAP:   // No City Info
 				if (!openWeatherMap) var openWeatherMap = importModule("openWeatherMap");
-				if (currentName != "OpenWeatherMap" || force) {
-					this.provider = new openWeatherMap.OpenWeatherMap(this);
-				}
+				if (currentName != "OpenWeatherMap" || force) this.provider = new openWeatherMap.OpenWeatherMap(this);
 				break;
 			case DATA_SERVICE.MET_NORWAY:         // No TZ or city info
 				if (!metNorway) var metNorway = importModule("met_norway");
-				if (currentName != "MetNorway" || force) {
-					this.provider = new metNorway.MetNorway(this);
-				} 
+				if (currentName != "MetNorway" || force) this.provider = new metNorway.MetNorway(this);
 				break;
 			case DATA_SERVICE.WEATHERBIT:
 				if (!weatherbit) var weatherbit = importModule("weatherbit");
-				if (currentName != "Weatherbit" || force) {
-					this.provider = new weatherbit.Weatherbit(this);
-				}
+				if (currentName != "Weatherbit" || force) this.provider = new weatherbit.Weatherbit(this);
 				break;
 			case DATA_SERVICE.YAHOO:
 				if (!yahoo) var yahoo = importModule("yahoo");
-				if (currentName != "Yahoo" || force) {
-					this.provider = new yahoo.Yahoo(this);
-				}
+				if (currentName != "Yahoo" || force) this.provider = new yahoo.Yahoo(this);
 				break;
 			case DATA_SERVICE.CLIMACELL:
 				if (!climacell) var climacell = importModule("climacell");
-				if (currentName != "Climacell" || force) {
-					this.provider = new climacell.Climacell(this);
-				}
+				if (currentName != "Climacell" || force) this.provider = new climacell.Climacell(this);
+				break;
+			case DATA_SERVICE.MET_UK:
+				if (!met_uk) var met_uk = importModule("met_uk");
+				if (currentName != "Met Office UK" || force) this.provider = new met_uk.MetUk(this);
 				break;
 			default:
 				return null;
@@ -1215,7 +1208,7 @@ class UI {
 				if (!!hour.precipation.volume && hour.precipation.volume > 0) {
 					precipationText = hour.precipation.volume + " mm";
 				}
-				if (hour.precipation.chance != null || hour.precipation.chance != undefined) {
+				if (!!hour.precipation.chance) {
 					precipationText = (precipationText == null) ? "" : (precipationText + ", ")
 					precipationText += (Math.round(hour.precipation.chance).toString() + "%")
 				}
@@ -2107,11 +2100,11 @@ type RefreshState = "success" | "failure" | "error";
  *  soft will show a subtle hint that the refresh failed (NOT IMPLEMENTED)
  */
 type ErrorSeverity = "hard" |  "soft";
-type ApiService = "ipapi" | "darksky" | "openweathermap" | "met-norway" | "weatherbit" | "yahoo" | "climacell";
+type ApiService = "ipapi" | "darksky" | "openweathermap" | "met-norway" | "weatherbit" | "yahoo" | "climacell" | "met-uk";
 type ErrorDetail = "no key" | "bad key" | "no location" | "bad location format" |
   "location not found" | "no network response" | "no api response" | 
   "bad api response - non json" | "bad api response" | "no reponse body" | 
-  "no respone data" | "unusal payload" | "key blocked"| "unknown" | "bad status code" | "import error";
+  "no respone data" | "unusal payload" | "key blocked" | "unknown" | "bad status code" | "import error";
 type NiceErrorDetail = {
   	[key in ErrorDetail]: string;
 }

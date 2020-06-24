@@ -33,7 +33,8 @@
       "MET Norway": "MetNorway",
       "Weatherbit (key needed)": "Weatherbit",
 	  "Yahoo": "Yahoo",
-	  "Climacell (key needed)": "Climacell"
+	  "Climacell (key needed)": "Climacell",
+	  "Met Office UK": "Met Office UK"
     }
   },
   "apiKey": {

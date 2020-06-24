@@ -127,7 +127,8 @@ var DATA_SERVICE = {
     MET_NORWAY: "MetNorway",
     WEATHERBIT: "Weatherbit",
     YAHOO: "Yahoo",
-    CLIMACELL: "Climacell"
+    CLIMACELL: "Climacell",
+    MET_UK: "Met Office UK"
 };
 imports.gettext.bindtextdomain(UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
 function _(str) {
@@ -373,44 +374,44 @@ var WeatherApplet = (function (_super) {
             case DATA_SERVICE.DARK_SKY:
                 if (!darkSky)
                     var darkSky = importModule('darkSky');
-                if (currentName != "DarkSky" || force) {
+                if (currentName != "DarkSky" || force)
                     this.provider = new darkSky.DarkSky(this);
-                }
                 break;
             case DATA_SERVICE.OPEN_WEATHER_MAP:
                 if (!openWeatherMap)
                     var openWeatherMap = importModule("openWeatherMap");
-                if (currentName != "OpenWeatherMap" || force) {
+                if (currentName != "OpenWeatherMap" || force)
                     this.provider = new openWeatherMap.OpenWeatherMap(this);
-                }
                 break;
             case DATA_SERVICE.MET_NORWAY:
                 if (!metNorway)
                     var metNorway = importModule("met_norway");
-                if (currentName != "MetNorway" || force) {
+                if (currentName != "MetNorway" || force)
                     this.provider = new metNorway.MetNorway(this);
-                }
                 break;
             case DATA_SERVICE.WEATHERBIT:
                 if (!weatherbit)
                     var weatherbit = importModule("weatherbit");
-                if (currentName != "Weatherbit" || force) {
+                if (currentName != "Weatherbit" || force)
                     this.provider = new weatherbit.Weatherbit(this);
-                }
                 break;
             case DATA_SERVICE.YAHOO:
                 if (!yahoo)
                     var yahoo = importModule("yahoo");
-                if (currentName != "Yahoo" || force) {
+                if (currentName != "Yahoo" || force)
                     this.provider = new yahoo.Yahoo(this);
-                }
                 break;
             case DATA_SERVICE.CLIMACELL:
                 if (!climacell)
                     var climacell = importModule("climacell");
-                if (currentName != "Climacell" || force) {
+                if (currentName != "Climacell" || force)
                     this.provider = new climacell.Climacell(this);
-                }
+                break;
+            case DATA_SERVICE.MET_UK:
+                if (!met_uk)
+                    var met_uk = importModule("met_uk");
+                if (currentName != "Met Office UK" || force)
+                    this.provider = new met_uk.MetUk(this);
                 break;
             default:
                 return null;
@@ -1034,7 +1035,7 @@ var UI = (function () {
                 if (!!hour.precipation.volume && hour.precipation.volume > 0) {
                     precipationText = hour.precipation.volume + " mm";
                 }
-                if (hour.precipation.chance != null || hour.precipation.chance != undefined) {
+                if (!!hour.precipation.chance) {
                     precipationText = (precipationText == null) ? "" : (precipationText + ", ");
                     precipationText += (Math.round(hour.precipation.chance).toString() + "%");
                 }
