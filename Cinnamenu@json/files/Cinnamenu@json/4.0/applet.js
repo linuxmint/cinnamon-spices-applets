@@ -1295,7 +1295,7 @@ class CinnamenuApplet extends TextIconApplet {
         const powerGroupButtons = this.powerGroupBox.getButtons();
 
         let ctrlKey = modifierState & Clutter.ModifierType.CONTROL_MASK || symbol === 65507 || symbol === 65508;
-        //global.log("ctrl:"+ctrlKey+", alt:"+modifierState);
+
         let buttons = this.getActiveButtons();
         let refItemIndex = findIndex(buttons, (button) => {
             return (button.actor.has_style_class_name('menu-application-button-selected') ||
@@ -1303,20 +1303,24 @@ class CinnamenuApplet extends TextIconApplet {
 
         let refCategoryIndex = findIndex(this.categoryButtons, (button) => {
                                                             return button.entered != null; });
+        if (refCategoryIndex < 0) {
+            refCategoryIndex = findIndex(this.categoryButtons, (button) => {
+                                              return this.state.currentCategory === button.id; });
+        }
 
         let refPowerGroupItemIndex = findIndex(powerGroupButtons, (button) => {
                                                                   return button.entered != null; });
 
-        let contextMenuChildren = [];
-        let refContextMenuItemIndex = -1;
-
         let enteredItemExists = refItemIndex > -1 && buttons[refItemIndex] != null;
         let enteredCategoryExists = refCategoryIndex > -1 && this.categoryButtons[refCategoryIndex] != null;
         let enteredPowerGroupItemExists = refPowerGroupItemIndex > -1 && powerGroupButtons[refPowerGroupItemIndex] != null;
+
         let enteredContextMenuItemExists = false;
+        let contextMenuChildren = [];
+        let refContextMenuItemIndex = -1;
 
         if (enteredItemExists) {
-            if ((ctrlKey || buttons[refItemIndex].menu.isOpen) && buttons[refItemIndex].menu.box) {
+            if (buttons[refItemIndex].menu.isOpen && buttons[refItemIndex].menu.box) {
                 contextMenuChildren = buttons[refItemIndex].contextMenuButtons;
                 refContextMenuItemIndex = findIndex(contextMenuChildren, (button) => {
                                               return button.actor.has_style_pseudo_class('active'); });
@@ -1339,102 +1343,158 @@ class CinnamenuApplet extends TextIconApplet {
         }
         let startingCategoryIndex = findIndex(this.categoryButtons, (button) => {
                                                   return this.state.currentCategory === button.id; });
-        startingCategoryIndex = ( this.state.settings.enableBookmarks && startingCategoryIndex <= 0 ) ?
-                                                                                    1 : startingCategoryIndex;
-
-        const previousItemNavigation = (index) => {
-            let up = (typeof buttons[index] === 'undefined' && enteredItemExists ||
-                typeof this.categoryButtons[refCategoryIndex - 1] === 'undefined' && enteredCategoryExists );// ||
-                //typeof powerGroupButtons[refPowerGroupItemIndex - 1] === 'undefined' && enteredPowerGroupItemExists);
-            index = Math.max(index,0);
-            if (contextMenuChildren[index] && refContextMenuItemIndex !== index) {
-                contextMenuChildren[index].handleEnter();
-            } else if (enteredItemExists && buttons[refItemIndex].menu.isOpen) {
-                contextMenuChildren[contextMenuChildren.length - 1].handleEnter();
-            } else if (up && !enteredItemExists) {
-                this.categoryButtons[startingCategoryIndex].handleEnter();
-            } else if (enteredPowerGroupItemExists) {
-                if (refPowerGroupItemIndex === 0) {
-                    refPowerGroupItemIndex = powerGroupButtons.length;
-                }
-                powerGroupButtons[refPowerGroupItemIndex - 1].handleEnter();
-            } else if (enteredItemExists) {
-                if (up && !this.state.isListView && refItemIndex <= this.state.settings.appsGridColumnCount - 1) {
-                    buttons[refItemIndex].handleEnter();
-                } else {
-                    buttons[index].handleEnter();
-                }
-            } else if (enteredCategoryExists) {
-                this.categoryButtons[refCategoryIndex - 1].handleEnter();
+        //startingCategoryIndex = ( this.state.settings.enableBookmarks && startingCategoryIndex <= 0 ) ?
+        //                                                                            1 : startingCategoryIndex;
+        if (startingCategoryIndex < 0) {
+            startingCategoryIndex = 0;
+        }
+        global.log("refContextMenuItemIndex: "+refContextMenuItemIndex+" refItemIndex:"+refItemIndex+
+                " refCategoryIndex:"+refCategoryIndex+" refPowerGroupItemIndex:"+refPowerGroupItemIndex);
+        const nextPowerGroupItem = () => {
+            if (refPowerGroupItemIndex < powerGroupButtons.length - 1) {
+                    powerGroupButtons[refPowerGroupItemIndex + 1].handleEnter();
+            } else {
+                powerGroupButtons[0].handleEnter();
             }
         };
 
-        const nextItemNavigation = (index) => {
-            let down = (typeof buttons[index] === 'undefined' && enteredItemExists ||
-                typeof this.categoryButtons[refCategoryIndex + 1] === 'undefined' && enteredCategoryExists ||
-                typeof powerGroupButtons[refPowerGroupItemIndex + 1] === 'undefined' && enteredPowerGroupItemExists);
-            if (index < 0) {
-                index = 0;
-            }
-            if (contextMenuChildren[index] && refContextMenuItemIndex !== index) {
-                contextMenuChildren[index].handleEnter();
-            } else if (enteredItemExists && buttons[refItemIndex].menu.isOpen) {
-                contextMenuChildren[0].handleEnter();
-            } else if (down) {
-                powerGroupButtons[0].handleEnter();
-            } else if (enteredPowerGroupItemExists) {
-                powerGroupButtons[refPowerGroupItemIndex + 1].handleEnter();
-            } else if (enteredCategoryExists) {
-                this.categoryButtons[refCategoryIndex + 1].handleEnter();
-            } else if (buttons[index]) {
-                buttons[index].handleEnter();
+        const previousPowerGroupItem = () => {
+            if (refPowerGroupItemIndex === 0) {
+                    powerGroupButtons[powerGroupButtons.length -1].handleEnter();
+            } else {
+                powerGroupButtons[refPowerGroupItemIndex - 1].handleEnter();
             }
         };
 
         const leftNavigation = () => {
-            //global.log("ln");
-            if ((enteredItemExists && refItemIndex === 0) || (enteredItemExists && this.state.isListView) ||
-                                (!enteredItemExists && !enteredCategoryExists && !enteredPowerGroupItemExists)) {
-                if (this.state.searchActive) {
-                    buttons[refItemIndex].handleEnter();
-                    return;
+            if (enteredContextMenuItemExists) {
+                contextMenuChildren[refContextMenuItemIndex].handleEnter();//Ignore
+            } else if (enteredPowerGroupItemExists) {
+                if (this.state.settings.powergroupPlacement === 2 ||  //left or right
+                                                        this.state.settings.powergroupPlacement === 3) {
+                    this.categoryButtons[startingCategoryIndex].handleEnter();
+                } else {
+                    previousPowerGroupItem();
                 }
-                if (!enteredCategoryExists) {
-                    if (typeof this.categoryButtons[startingCategoryIndex] !== 'undefined') {
-                        this.categoryButtons[startingCategoryIndex].handleEnter();
+            } else if (enteredItemExists) {
+                if (buttons[refItemIndex].menu.isOpen) {
+                    buttons[refItemIndex].handleEnter();//ignore
+                } else if (this.state.isListView) {
+                    this.categoryButtons[startingCategoryIndex].handleEnter();
+                } else {
+                    if (refItemIndex > 0) {
+                        buttons[refItemIndex - 1].handleEnter();
                     } else {
-                        this.categoryButtons[this.categoryButtons.length - 1].handleEnter();
+                        buttons[buttons.length - 1].handleEnter();
                     }
                 }
-                //global.log("ln1");
-            } else if (this.state.searchActive && enteredPowerGroupItemExists && refPowerGroupItemIndex === 0) {
-                powerGroupButtons[powerGroupButtons.length - 1].handleEnter();
-                //global.log("ln2");
-            } else if (!enteredCategoryExists) {
-                previousItemNavigation(refItemIndex - 1);
+            } else if (enteredCategoryExists) {
+                powerGroupButtons[0].handleEnter();
             }
         };
 
         const rightNavigation = () => {
-            if (enteredItemExists && refItemIndex === buttons.length - 1) {
+            if (enteredContextMenuItemExists) {
+                contextMenuChildren[refContextMenuItemIndex].handleEnter();//Ignore
+            } else if (enteredPowerGroupItemExists) {
+                if (this.state.settings.powergroupPlacement === 2 ||
+                                                            this.state.settings.powergroupPlacement === 3) {
+                    this.categoryButtons[startingCategoryIndex].handleEnter();
+                } else {
+                    nextPowerGroupItem();
+                }
+            } else if (enteredItemExists) {
+                if (buttons[refItemIndex].menu.isOpen) {
+                    buttons[refItemIndex].handleEnter();//ignore
+                } else if (this.state.isListView) {
+                    buttons[refItemIndex].handleEnter();//ignore
+                } else {
+                    if (buttons[refItemIndex + 1]) {
+                        buttons[refItemIndex + 1].handleEnter();
+                    } else {
+                        buttons[0].handleEnter();
+                    }
+                }
+            } else if (enteredCategoryExists) {
                 buttons[0].handleEnter();
-            } else if (this.state.isListView && enteredItemExists) {
-                buttons[refItemIndex].handleEnter();
-            } else {
-                enteredCategoryExists = null;
-                nextItemNavigation(refItemIndex + 1);
             }
         };
 
         const downNavigation = () => {
             if (enteredContextMenuItemExists) {
-                nextItemNavigation(refContextMenuItemIndex + 1);
+                if (contextMenuChildren[refContextMenuItemIndex + 1]) {
+                    contextMenuChildren[refContextMenuItemIndex + 1].handleEnter();
+                } else {
+                    contextMenuChildren[0].handleEnter();
+                }
             } else if (enteredPowerGroupItemExists) {
-                powerGroupButtons[refPowerGroupItemIndex].handleEnter();
-            } else if (this.state.isListView || enteredContextMenuItemExists) {
-                nextItemNavigation(refItemIndex + 1);
-            } else {
-                nextItemNavigation((refItemIndex + 1) + (this.state.settings.appsGridColumnCount - 1));
+                if (this.state.settings.powergroupPlacement === 0 ||
+                                                        this.state.settings.powergroupPlacement === 1) {
+                    this.categoryButtons[startingCategoryIndex].handleEnter();
+                } else {
+                    nextPowerGroupItem();
+                }
+            } else if (enteredItemExists) {
+                if (buttons[refItemIndex].menu.isOpen) {
+                        contextMenuChildren[0].handleEnter();
+                } else if (this.state.isListView) {
+                    if (buttons[refItemIndex + 1]) {
+                        buttons[refItemIndex + 1].handleEnter();
+                    } else {
+                        buttons[0].handleEnter();
+                    }
+                } else {//grid view
+                    if (buttons[refItemIndex + this.state.settings.appsGridColumnCount]) {
+                        buttons[refItemIndex + this.state.settings.appsGridColumnCount].handleEnter();
+                    } else {
+                        buttons[buttons.length - 1].handleEnter();
+                    }
+                }
+            } else if (enteredCategoryExists) {
+                if (this.categoryButtons[refCategoryIndex + 1]) {
+                    this.categoryButtons[refCategoryIndex + 1].handleEnter();
+                } else {
+                    this.categoryButtons[0].handleEnter();
+                }
+            }
+        };
+
+        const upNavigation = () => {
+            if (enteredContextMenuItemExists) {
+                if (refContextMenuItemIndex > 0) {
+                    contextMenuChildren[refContextMenuItemIndex - 1].handleEnter();
+                } else {
+                    contextMenuChildren[contextMenuChildren.length - 1].handleEnter();
+                }
+            } else if (enteredPowerGroupItemExists) {
+                if (this.state.settings.powergroupPlacement === 0 ||
+                                                        this.state.settings.powergroupPlacement === 1) {
+                    this.categoryButtons[startingCategoryIndex].handleEnter();
+                } else {
+                    previousPowerGroupItem();
+                }
+            } else if (enteredItemExists) {
+                if (buttons[refItemIndex].menu.isOpen) {
+                        contextMenuChildren[contextMenuChildren.length - 1].handleEnter();
+                } else if (this.state.isListView) {
+                    if (refItemIndex > 0) {
+                        buttons[refItemIndex - 1].handleEnter();
+                    } else {
+                        buttons[buttons.length - 1].handleEnter();
+                    }
+                } else {
+                    if (buttons[refItemIndex - this.state.settings.appsGridColumnCount]) {
+                        buttons[refItemIndex - this.state.settings.appsGridColumnCount].handleEnter();
+                    } else {
+                        buttons[0].handleEnter();
+                    }
+                }
+            } else if (enteredCategoryExists) {
+                if (refCategoryIndex > 0) {
+                    this.categoryButtons[refCategoryIndex - 1].handleEnter();
+                } else {
+                    this.categoryButtons[this.categoryButtons.length - 1].handleEnter();
+                }
             }
         };
 
@@ -1445,18 +1505,6 @@ class CinnamenuApplet extends TextIconApplet {
                 this.categoryButtons[startingCategoryIndex].handleEnter();
             } else {
                 buttons[0].handleEnter();
-            }
-        };
-
-        const upNavigation = () => {
-            if (enteredContextMenuItemExists) {
-                previousItemNavigation(refContextMenuItemIndex - 1);
-            } else if (enteredPowerGroupItemExists) {
-                tabNavigation();
-            } else if (this.state.isListView) {
-                previousItemNavigation(refItemIndex - 1);
-            } else {
-                previousItemNavigation((refItemIndex - 1) - (this.state.settings.appsGridColumnCount - 1));
             }
         };
 
@@ -1522,15 +1570,14 @@ class CinnamenuApplet extends TextIconApplet {
                 if (modifierState === 8) { //Alt-Tab was pressed. Close menu as alt-tab is used for app-switcher in cinnamon
                     this.state.trigger('closeMenu');
                     return false;
-                }else{
-                    tabNavigation();
-                    return true;
                 }
-                break;
+                tabNavigation();
+                return true;
             case symbol === Clutter.KEY_Escape:
             case symbol === Clutter.Escape:
                 if (enteredItemExists && buttons[refItemIndex].menu.isOpen) {
                     buttons[refItemIndex].toggleMenu();
+                    buttons[refItemIndex].handleEnter()
                     return true;
                 }
                 this.menu.close();
@@ -1987,7 +2034,7 @@ class CinnamenuApplet extends TextIconApplet {
             this.categoryButtons[i] = null;
         }
         this.categoryButtons = [];
-        
+
         if (this.powerGroupBox) {
             this.powerGroupBox.destroy();
             this.powerGroupBox=null;
@@ -2052,12 +2099,21 @@ class PowerGroupBox {
         }
         const iconObj = { icon_size: 28,
                           icon_type: IconType.FULLCOLOR };
-        /*iconObj.icon_name = 'preferences-system';
-        items.push(new GroupButton( this.state, new Icon(iconObj), _('System settings'),
-                                            _('Cinnamon control center'), () => spawnCommandLine('cinnamon-settings') ));*/
         iconObj.icon_name = 'system-lock-screen';
         this.items.push(new GroupButton( this.state, new Icon(iconObj), _('Lock Screen'),
-                    _('Lock the screen'), () => spawnCommandLine('cinnamon-screensaver-command --lock') ));
+                    _('Lock the screen'), () => {
+                        let screensaver_settings = new Gio.Settings({
+                                                    schema_id: 'org.cinnamon.desktop.screensaver' });
+                        let screensaver_dialog = Gio.file_new_for_path('/usr/bin/cinnamon-screensaver-command');
+                        if (screensaver_dialog.query_exists(null)) {
+                            if (screensaver_settings.get_boolean('ask-for-away-message')) {
+                                spawnCommandLine('cinnamon-screensaver-lock-dialog');
+                            } else {
+                                spawnCommandLine('cinnamon-screensaver-command --lock');//
+                            }
+                        } else {
+                            this.screenSaverProxy.LockRemote('');
+                        } }));
         iconObj.icon_name = 'system-log-out';
         this.items.push(new GroupButton( this.state, new Icon(iconObj), _('Logout'),
                                           _('Leave the session'), () => spawnCommandLine('cinnamon-session-quit') ));
