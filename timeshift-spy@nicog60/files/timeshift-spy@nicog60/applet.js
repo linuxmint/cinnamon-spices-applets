@@ -6,11 +6,15 @@ const Json      = imports.gi.Json;
 const PopupMenu = imports.ui.popupMenu;
 const Gettext   = imports.gettext;
 
-// Get text boilerplate
-Gettext.textdomain("timeshift-spy@nicog60");
-Gettext.bindtextdomain("timeshift-spy@nicog60n", GLib.get_home_dir() + '/.local/share/locale');
+const UUID = "timeshift-spy@nicog60";
 
-const _ = Gettext.gettext;
+const _ = (str) => {
+    let translation = Gettext.gettext(str);
+    if (translation !== str) {
+      return translation;
+    }
+    return Gettext.dgettext(UUID, str);
+}
 
 /**
  * This applet aim to quickly display de status of Timeshift, even if it is
@@ -26,7 +30,7 @@ const _ = Gettext.gettext;
  * - 'info.json' which summarise the snapshot and tells timeshift it is a
  *   valid one.
  * - 'rsync-log-changes' which summarise what changed in the current snapshot
- * 
+ *
  * If a snapshot directory is named after the current date and those 2 files are
  * missing, it means Timeshift and rsync are working on a snapshot.
  */
@@ -49,6 +53,8 @@ class TimeshiftSpy extends Applet.IconApplet {
      */
     constructor(orientation, panelHeight, instanceId) {
         super(orientation, panelHeight, instanceId)
+
+        Gettext.bindtextdomain(UUID, GLib.get_home_dir() + '/.local/share/locale')
 
         this.init_members()
 
