@@ -22,6 +22,7 @@ In **Manual Location** mode the applet **only** **accepts Coordinates** in Latit
 | **WeatherBit**     | Yes           | 16                        | 0**                        | --                        |
 | **Yahoo**          | No            | 10                        | 0                          | --                        |
 | **Climacell**      | Yes           | 16                        | 96                         | python3-requests-oauthlib |
+| **Met Office UK**  | No            | 5                         | 36***                      | --                        |
 
 ### OpenWeatherMap
 
@@ -53,7 +54,11 @@ OpenWeatherMap does not require API key anymore! Big Thanks to them for supporti
 
 * API key can be obtained [here](https://developer.climacell.co/sign-up). Register and the API key will be shown in the Overview section.
 
+### Met Office UK
 
+* Only covers the UK!
+
+* ***Hourly Weather is 3-hourly weather
 
 ## Requirements
 
