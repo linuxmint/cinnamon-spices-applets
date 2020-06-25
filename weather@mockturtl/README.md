@@ -56,7 +56,7 @@ OpenWeatherMap does not require API key anymore! Big Thanks to them for supporti
 
 ### Met Office UK
 
-* Only covers the UK!
+* Only covers the UK! It uses the nearest forecast and observation site in a 100km, it displays an error if it does not find one.
 
 * ***Hourly Weather is 3-hourly weather
 

@@ -23,6 +23,7 @@ var IsNight = utils.IsNight as (sunTimes: SunTimes, date?: Date) => boolean;
 var CelsiusToKelvin = utils.CelsiusToKelvin as (celsius: number) => number;
 var MPHtoMPS = utils.MPHtoMPS as (speed: number) => number;
 var compassToDeg = utils.compassToDeg as (compass: string) => number;
+var GetDistance = utils.GetDistance as (lat1: number, lon1: number, lat2: number, lon2: number) => number
 
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
@@ -89,6 +90,7 @@ class MetUk implements WeatherProvider {
 		this.app.log.Debug("Forecast site found: " + JSON.stringify(this.forecastSite, null, 2))
 		this.app.log.Debug("Observation site found: " + JSON.stringify(this.observationSite, null, 2))
 		if (this.forecastSite.dist > 100000 || this.observationSite.dist > 100000) {
+			// TODO: Validate that this does not happen with uk locations
 			this.app.log.Error("User is probably not in UK, aborting");
 			this.app.HandleError({
 				type: "hard",
@@ -286,38 +288,15 @@ class MetUk implements WeatherProvider {
 		let sites = siteList.Locations.Location as WeatherSite[];
 		let latlong = loc.split(","); 
 		let closest = sites[0];
-		closest.dist = this.GetDistance(parseFloat(closest.latitude), parseFloat(closest.longitude), parseFloat(latlong[0]), parseFloat(latlong[1]));
+		closest.dist = GetDistance(parseFloat(closest.latitude), parseFloat(closest.longitude), parseFloat(latlong[0]), parseFloat(latlong[1]));
 		for (let index = 0; index < sites.length; index++) {
 			const element = sites[index];
-			element.dist = this.GetDistance(parseFloat(element.latitude), parseFloat(element.longitude), parseFloat(latlong[0]), parseFloat(latlong[1]));
+			element.dist = GetDistance(parseFloat(element.latitude), parseFloat(element.longitude), parseFloat(latlong[0]), parseFloat(latlong[1]));
 			if (element.dist < closest.dist) {
 				closest = element;
 			}
 		}
 		return closest;
-	}
-	
-	/**
-	 * https://www.movable-type.co.uk/scripts/latlong.html
-	 * @param lat1 
-	 * @param lon1 
-	 * @param lat2 
-	 * @param lon2 
-	 * @returns distance in metres
-	 */
-	private GetDistance(lat1: number, lon1: number, lat2: number, lon2: number): number {
-		const R = 6371e3; // metres
-		const φ1 = lat1 * Math.PI/180; // φ, λ in radians
-		const φ2 = lat2 * Math.PI/180;
-		const Δφ = (lat2-lat1) * Math.PI/180;
-		const Δλ = (lon2-lon1) * Math.PI/180;
-
-		const a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
-				Math.cos(φ1) * Math.cos(φ2) *
-				Math.sin(Δλ/2) * Math.sin(Δλ/2);
-		const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-
-		return R * c; // in metres
 	}
 
     private ResolveCondition(icon: string): Condition {

@@ -54,20 +54,18 @@ var setTimeout = function (func, ms) {
     }, null);
     return id;
 };
-var delay = function (ms) {
-    return __awaiter(this, void 0, void 0, function () {
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0: return [4, new Promise(function (resolve, reject) {
-                        setTimeout(function () {
-                            resolve();
-                        }, ms);
-                    })];
-                case 1: return [2, _a.sent()];
-            }
-        });
+var delay = function (ms) { return __awaiter(void 0, void 0, void 0, function () {
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4, new Promise(function (resolve, reject) {
+                    setTimeout(function () {
+                        resolve();
+                    }, ms);
+                })];
+            case 1: return [2, _a.sent()];
+        }
     });
-};
+}); };
 var clearTimeout = function (id) {
     source_remove(id);
 };
@@ -81,6 +79,18 @@ var setInterval = function (func, ms) {
         return true;
     }, null);
     return id;
+};
+var GetDistance = function (lat1, lon1, lat2, lon2) {
+    var R = 6371e3;
+    var φ1 = lat1 * Math.PI / 180;
+    var φ2 = lat2 * Math.PI / 180;
+    var Δφ = (lat2 - lat1) * Math.PI / 180;
+    var Δλ = (lon2 - lon1) * Math.PI / 180;
+    var a = Math.sin(Δφ / 2) * Math.sin(Δφ / 2) +
+        Math.cos(φ1) * Math.cos(φ2) *
+            Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return R * c;
 };
 var clearInterval = function (id) {
     source_remove(id);
@@ -124,7 +134,7 @@ var GetHoursMinutes = function (date, locale, hours24Format, tz) {
             return timeToUserUnits(date, hours24Format);
     }
 };
-var AwareDateString = function (date, locale, hours24Format) {
+var AwareDateString = function (date, locale, hours24Format, tz) {
     var support = isLocaleStringSupported();
     var now = new Date();
     var params = {
@@ -141,6 +151,7 @@ var AwareDateString = function (date, locale, hours24Format) {
     }
     switch (support) {
         case "full":
+            return date.toLocaleString(locale, { timeZone: tz, hour: "numeric", minute: "numeric", hour12: !hours24Format });
         case "notz":
             return date.toLocaleString(locale, { hour: "numeric", minute: "numeric", hour12: !hours24Format });
         case "none":
@@ -214,6 +225,8 @@ var capitalizeFirstLetter = function (description) {
     return description.charAt(0).toUpperCase() + description.slice(1);
 };
 var KPHtoMPS = function (speed) {
+    if (speed == null)
+        return null;
     return speed / WEATHER_CONV_KPH_IN_MPS;
 };
 var get = function (p, o) {
@@ -296,12 +309,18 @@ var TempToUserConfig = function (kelvin, units, russianStyle) {
     return temp.toString();
 };
 var CelsiusToKelvin = function (celsius) {
+    if (celsius == null)
+        return null;
     return (celsius + 273.15);
 };
 var FahrenheitToKelvin = function (fahr) {
+    if (fahr == null)
+        return null;
     return ((fahr - 32) / 1.8 + 273.15);
 };
 var MPHtoMPS = function (speed) {
+    if (speed == null)
+        return null;
     return speed * 0.44704;
 };
 var PressToUserUnits = function (hpa, units) {

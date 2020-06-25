@@ -79,7 +79,8 @@ const DATA_SERVICE = {
     WEATHERBIT: "Weatherbit",
     YAHOO: "Yahoo",
     CLIMACELL: "Climacell",
-    MET_UK: "Met Office UK"
+    MET_UK: "Met Office UK",
+    US_WEATHER: "US Weather"
 };
 imports.gettext.bindtextdomain(UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
 function _(str) {
@@ -325,6 +326,12 @@ class WeatherApplet extends TextIconApplet {
                     var met_uk = importModule("met_uk");
                 if (currentName != "Met Office UK" || force)
                     this.provider = new met_uk.MetUk(this);
+                break;
+            case DATA_SERVICE.US_WEATHER:
+                if (!us_weather)
+                    var us_weather = importModule("us_weather");
+                if (currentName != "US Weather" || force)
+                    this.provider = new us_weather.USWeather(this);
                 break;
             default:
                 return null;
@@ -841,7 +848,10 @@ class UI {
     ;
     displayForecast(weather, forecasts, config) {
         try {
-            for (let i = 0; i < this._forecast.length; i++) {
+            if (!forecasts)
+                return false;
+            let len = Math.min(this._forecast.length, forecasts.length);
+            for (let i = 0; i < len; i++) {
                 let forecastData = forecasts[i];
                 let forecastUi = this._forecast[i];
                 let t_low = TempToUserConfig(forecastData.temp_min, config._temperatureUnit, config._tempRussianStyle);

@@ -50,7 +50,7 @@ var PressToUserUnits = utils.PressToUserUnits as (hpa: number, units: WeatherPre
 var compassDirection = utils.compassDirection as (deg: number) => string;
 var MPStoUserUnits = utils.MPStoUserUnits as (mps: number, units: WeatherWindSpeedUnits) => string;
 var nonempty = utils.nonempty as (str: string) => boolean;
-var AwareDateString = utils.AwareDateString as (date: Date, locale: string, hours24Format: boolean) => string;
+var AwareDateString = utils.AwareDateString as (date: Date, locale: string, hours24Format: boolean, tz?: string) => string;
 var get = utils.get as (p: string[], o: any) => any;
 const delay = utils.delay as (ms: number) => Promise<void>;
 
@@ -97,7 +97,7 @@ const APPLET_ICON = "view-refresh-symbolic"
 const REFRESH_ICON = "view-refresh";
 const CMD_SETTINGS = "cinnamon-settings applets " + UUID
 
-type Services = "OpenWeatherMap" | "DarkSky" | "MetNorway" | "Weatherbit" | "Yahoo" | "Climacell" | "Met Office UK";
+type Services = "OpenWeatherMap" | "DarkSky" | "MetNorway" | "Weatherbit" | "Yahoo" | "Climacell" | "Met Office UK" | "US Weather";
 type ServiceMap = {
   	[key: string]: Services
 }
@@ -112,7 +112,8 @@ const DATA_SERVICE: ServiceMap = {
 	WEATHERBIT: "Weatherbit",
 	YAHOO: "Yahoo",
 	CLIMACELL: "Climacell",
-	MET_UK: "Met Office UK"
+	MET_UK: "Met Office UK",
+	US_WEATHER: "US Weather"
 }
 
 //----------------------------------------------------------------------
@@ -432,6 +433,10 @@ class WeatherApplet extends TextIconApplet {
 			case DATA_SERVICE.MET_UK:
 				if (!met_uk) var met_uk = importModule("met_uk");
 				if (currentName != "Met Office UK" || force) this.provider = new met_uk.MetUk(this);
+				break;
+			case DATA_SERVICE.US_WEATHER:
+				if (!us_weather) var us_weather = importModule("us_weather");
+				if (currentName != "US Weather" || force) this.provider = new us_weather.USWeather(this);
 				break;
 			default:
 				return null;
@@ -1133,7 +1138,9 @@ class UI {
     /** Injects data from forecasts array into popupMenu */
     public displayForecast(weather: Weather, forecasts: ForecastData[], config: Config): boolean {
 		try {
-			for (let i = 0; i < this._forecast.length; i++) {
+			if (!forecasts) return false;
+			let len = Math.min(this._forecast.length, forecasts.length);
+			for (let i = 0; i < len; i++) {
 				let forecastData = forecasts[i];
 				let forecastUi = this._forecast[i];
 
@@ -2100,7 +2107,7 @@ type RefreshState = "success" | "failure" | "error";
  *  soft will show a subtle hint that the refresh failed (NOT IMPLEMENTED)
  */
 type ErrorSeverity = "hard" |  "soft";
-type ApiService = "ipapi" | "darksky" | "openweathermap" | "met-norway" | "weatherbit" | "yahoo" | "climacell" | "met-uk";
+type ApiService = "ipapi" | "darksky" | "openweathermap" | "met-norway" | "weatherbit" | "yahoo" | "climacell" | "met-uk" | "us-weather";
 type ErrorDetail = "no key" | "bad key" | "no location" | "bad location format" |
   "location not found" | "no network response" | "no api response" | 
   "bad api response - non json" | "bad api response" | "no reponse body" | 

@@ -128,7 +128,8 @@ var DATA_SERVICE = {
     WEATHERBIT: "Weatherbit",
     YAHOO: "Yahoo",
     CLIMACELL: "Climacell",
-    MET_UK: "Met Office UK"
+    MET_UK: "Met Office UK",
+    US_WEATHER: "US Weather"
 };
 imports.gettext.bindtextdomain(UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
 function _(str) {
@@ -412,6 +413,12 @@ var WeatherApplet = (function (_super) {
                     var met_uk = importModule("met_uk");
                 if (currentName != "Met Office UK" || force)
                     this.provider = new met_uk.MetUk(this);
+                break;
+            case DATA_SERVICE.US_WEATHER:
+                if (!us_weather)
+                    var us_weather = importModule("us_weather");
+                if (currentName != "US Weather" || force)
+                    this.provider = new us_weather.USWeather(this);
                 break;
             default:
                 return null;
@@ -967,7 +974,10 @@ var UI = (function () {
     ;
     UI.prototype.displayForecast = function (weather, forecasts, config) {
         try {
-            for (var i = 0; i < this._forecast.length; i++) {
+            if (!forecasts)
+                return false;
+            var len = Math.min(this._forecast.length, forecasts.length);
+            for (var i = 0; i < len; i++) {
                 var forecastData = forecasts[i];
                 var forecastUi = this._forecast[i];
                 var t_low = TempToUserConfig(forecastData.temp_min, config._temperatureUnit, config._tempRussianStyle);

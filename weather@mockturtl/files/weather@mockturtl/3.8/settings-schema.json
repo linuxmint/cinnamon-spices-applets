@@ -34,7 +34,8 @@
       "Weatherbit (key needed)": "Weatherbit",
       "Yahoo": "Yahoo",
 	  "Climacell (key needed)": "Climacell",
-	  "Met Office UK": "Met Office UK"
+	  "Met Office UK": "Met Office UK",
+	  "US Weather": "US Weather"
     }
   },
   "apiKey": {

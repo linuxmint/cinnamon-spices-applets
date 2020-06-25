@@ -26,7 +26,7 @@ var setTimeout = function(func: any, ms: number) {
   return id;
 };
 
-var delay = async function(ms: number) : Promise<void> {
+var delay = async (ms: number) : Promise<void> => {
   return await new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve();
@@ -34,7 +34,7 @@ var delay = async function(ms: number) : Promise<void> {
   });
 }
 
-const clearTimeout = function(id: any) {
+const clearTimeout = (id: any) => {
   source_remove(id);
 };
 
@@ -52,11 +52,34 @@ const setInterval = function(func: any, ms: number) {
   return id;
 };
 
-const clearInterval = function(id: any) {
+	/**
+	 * https://www.movable-type.co.uk/scripts/latlong.html
+	 * @param lat1 
+	 * @param lon1 
+	 * @param lat2 
+	 * @param lon2 
+	 * @returns distance in metres
+	 */
+var GetDistance = (lat1: number, lon1: number, lat2: number, lon2: number): number => {
+		const R = 6371e3; // metres
+		const φ1 = lat1 * Math.PI/180; // φ, λ in radians
+		const φ2 = lat2 * Math.PI/180;
+		const Δφ = (lat2-lat1) * Math.PI/180;
+		const Δλ = (lon2-lon1) * Math.PI/180;
+
+		const a = Math.sin(Δφ/2) * Math.sin(Δφ/2) +
+				Math.cos(φ1) * Math.cos(φ2) *
+				Math.sin(Δλ/2) * Math.sin(Δλ/2);
+		const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+
+		return R * c; // in metres
+}
+
+const clearInterval = (id: any) => {
   source_remove(id);
 };
 
-var isLocaleStringSupported = function(): localeStringSupport {
+var isLocaleStringSupported = (): localeStringSupport => {
     let date  = new Date(1565548657987); // Set Date to test support
     try {
         let output = date.toLocaleString('en-GB', {timeZone: 'Europe/London', hour: "numeric"});
@@ -70,7 +93,7 @@ var isLocaleStringSupported = function(): localeStringSupport {
 
 type localeStringSupport = "none" | "notz" | "full";
 
-var GetDayName = function(date: Date, locale:string, tz?: string): string {
+var GetDayName = (date: Date, locale:string, tz?: string): string => {
     let support: localeStringSupport = isLocaleStringSupported();
     // No timezone, Date passed in corrected with offset
     if (!tz && support == "full") support = "notz";
@@ -85,7 +108,7 @@ var GetDayName = function(date: Date, locale:string, tz?: string): string {
     }
 }
 
-var GetHoursMinutes = function(date: Date, locale: string, hours24Format: boolean, tz?: string): string {
+var GetHoursMinutes = (date: Date, locale: string, hours24Format: boolean, tz?: string): string => {
     let support: localeStringSupport = isLocaleStringSupported();
     // No timezone, Date passed in corrected with offset
     if (!tz && support == "full") support = "notz";
@@ -100,7 +123,7 @@ var GetHoursMinutes = function(date: Date, locale: string, hours24Format: boolea
     }
 }
 
-var AwareDateString = function(date: Date, locale: string, hours24Format: boolean): string {
+var AwareDateString = (date: Date, locale: string, hours24Format: boolean, tz?: string): string => {
     let support: localeStringSupport = isLocaleStringSupported();
     let now = new Date();
     let params: any = {
@@ -120,14 +143,15 @@ var AwareDateString = function(date: Date, locale: string, hours24Format: boolea
 
     switch(support) {
       case "full":
+		  return date.toLocaleString(locale, {timeZone: tz, hour: "numeric", minute: "numeric", hour12: !hours24Format});
       case "notz":
-          return date.toLocaleString(locale, {hour: "numeric", minute: "numeric", hour12: !hours24Format});
+          	return date.toLocaleString(locale, {hour: "numeric", minute: "numeric", hour12: !hours24Format});
       case "none":
-          return timeToUserUnits(date, hours24Format);  // Displaying only time
+          	return timeToUserUnits(date, hours24Format);  // Displaying only time
   }
 }
 
-var getDayName = function(dayNum: number): string {
+var getDayName = (dayNum: number): string => {
     let days = [_('Sunday'), _('Monday'), _('Tuesday'), _('Wednesday'), _('Thursday'), _('Friday'), _('Saturday')]
     return days[dayNum];
 }
@@ -137,11 +161,11 @@ var getDayName = function(dayNum: number): string {
  * @param date 
  * @returns number in format HHMM, can be compared directly
  */
-var	MilitaryTime = function(date: Date): number {
+var	MilitaryTime = (date: Date): number => {
 	return date.getHours() * 100 + date.getMinutes();
 }
 
-var IsNight = function(sunTimes: SunTimes, date?: Date): boolean {
+var IsNight = (sunTimes: SunTimes, date?: Date): boolean => {
 	if (!sunTimes) return false;
 	let time = (!!date) ? MilitaryTime(date) : MilitaryTime(new Date());
 	let sunrise = MilitaryTime(sunTimes.sunrise);
@@ -150,7 +174,7 @@ var IsNight = function(sunTimes: SunTimes, date?: Date): boolean {
 	return true;
 }
 
-var compassToDeg = function(compass: string): number {
+var compassToDeg = (compass: string): number => {
 	compass = compass.toUpperCase();
 	switch(compass) {
 		case "N": return 0;
@@ -174,7 +198,7 @@ var compassToDeg = function(compass: string): number {
 }
 
 // Takes Time in %H:%M string format
-var timeToUserUnits = function(date: Date, show24Hours: boolean) {
+var timeToUserUnits = (date: Date, show24Hours: boolean) => {
     let timeStr = util_format_date('%H:%M', date.getTime());
     let time = timeStr.split(':');
     //Remove Leading 0
@@ -200,14 +224,15 @@ const WEATHER_CONV_MPH_IN_MPS = 2.23693629
 const WEATHER_CONV_KPH_IN_MPS = 3.6
 const WEATHER_CONV_KNOTS_IN_MPS = 1.94384449
 
-var capitalizeFirstLetter = function (description: string): string {
+var capitalizeFirstLetter = (description: string): string => {
     if ((description == undefined || description == null)) {
       return "";
     }
     return description.charAt(0).toUpperCase() + description.slice(1);
   };
 
-var KPHtoMPS = function(speed: number): number {
+var KPHtoMPS = (speed: number): number => {
+	if (speed == null) return null;
     return speed / WEATHER_CONV_KPH_IN_MPS;
   };
 
@@ -215,7 +240,7 @@ const get = (p: string[], o: any): any =>
   p.reduce((xs, x) =>
 	(xs && xs[x]) ? xs[x] : null, o);
 	
-var GetFuncName = function(func: Function): string {
+var GetFuncName = (func: Function): string => {
 	// ES6
 	if (!!func.name) return func.name;
 	// ES5
@@ -224,7 +249,7 @@ var GetFuncName = function(func: Function): string {
 	return  result  ?  result[ 1 ]  :  '' // for an anonymous function there won't be a match
 }
 
-var MPStoUserUnits = function(mps: number, units: WeatherWindSpeedUnits): string {
+var MPStoUserUnits = (mps: number, units: WeatherWindSpeedUnits): string => {
     if (mps == null) return null;
     // Override wind units with our preference, takes Meter/Second wind speed
     switch (units) {
@@ -283,7 +308,7 @@ var MPStoUserUnits = function(mps: number, units: WeatherWindSpeedUnits): string
   }
 
   // Conversion from Kelvin
-var TempToUserConfig = function(kelvin: number, units: WeatherUnits, russianStyle: boolean): string {
+var TempToUserConfig = (kelvin: number, units: WeatherUnits, russianStyle: boolean): string => {
   let temp;
   if (units == "celsius") {
     temp = Math.round((kelvin - 273.15));
@@ -299,20 +324,23 @@ var TempToUserConfig = function(kelvin: number, units: WeatherUnits, russianStyl
   return temp.toString();
 }
 
-var CelsiusToKelvin = function(celsius: number): number {
+var CelsiusToKelvin = (celsius: number): number => {
+	if (celsius == null) return null;
     return (celsius + 273.15);
   }
 
-var FahrenheitToKelvin = function(fahr: number): number {
+var FahrenheitToKelvin = (fahr: number): number => {
+	if (fahr == null) return null;
     return ((fahr - 32) / 1.8 + 273.15);
   };
 
-var MPHtoMPS = function(speed: number): number {
+var MPHtoMPS = (speed: number): number => {
+	if (speed == null) return null;
     return speed * 0.44704;
   }
 
   // Conversion from hPa
-var PressToUserUnits = function(hpa: number, units: WeatherPressureUnits): number {
+var PressToUserUnits = (hpa: number, units: WeatherPressureUnits): number => {
     switch (units) {
       case "hPa":
         return hpa;
@@ -331,49 +359,49 @@ var PressToUserUnits = function(hpa: number, units: WeatherPressureUnits): numbe
     }
   };
 
-var isNumeric = function(n: any): boolean {
+var isNumeric = (n: any): boolean => {
     return !isNaN(parseFloat(n)) && isFinite(n);
   }
 
-var isString = function(text: any): boolean {
+var isString = (text: any): boolean => {
     if (typeof text == 'string' || text instanceof String) {
       return true;
     }
     return false;
   }
 
-var isID = function(text: any): boolean {
+var isID = (text: any): boolean => {
     if (text.length == 7 && isNumeric(text)) {
       return true;
     }
     return false;
   };
 
-var isCoordinate = function(text: any): boolean {
+var isCoordinate = (text: any): boolean => {
     if (/^-?\d{1,3}(?:\.\d*)?,-?\d{1,3}(?:\.\d*)?/.test(text)) {
       return true;
     }
     return false;
   }
 
-var nonempty = function(str: string): boolean {
+var nonempty = (str: string): boolean => {
     return (str != null && str.length > 0 && str != undefined)
   }
 
-var compassDirection = function(deg: number): string {
+var compassDirection = (deg: number): string => {
     let directions = [_('N'), _('NE'), _('E'), _('SE'), _('S'), _('SW'), _('W'), _('NW')]
     //let directions = [_('⬇'), _('⬋'), _('⬅'), _('⬉'), _('⬆'), _('⬈'), _('➞'), _('⬊')]
     return directions[Math.round(deg / 45) % directions.length]
   }
 
-var isLangSupported = function(lang: string, languages: Array < string > ): boolean {
+var isLangSupported = (lang: string, languages: Array < string > ): boolean => {
     if (languages.indexOf(lang) != -1) {
       return true;
     }
     return false;
 };
 
-var Sentencify = function(words: string[]): string {
+var Sentencify = (words: string[]): string => {
 	let result = "";
 	for (let index = 0; index < words.length; index++) {
 		const element = words[index];
@@ -384,7 +412,7 @@ var Sentencify = function(words: string[]): string {
 }
 
   // Passing appropriate resolver function for the API, and the code
-var weatherIconSafely = function (code: BuiltinIcons[], icon_type: imports.gi.St.IconType): BuiltinIcons {
+var weatherIconSafely = (code: BuiltinIcons[], icon_type: imports.gi.St.IconType): BuiltinIcons => {
     for (let i = 0; i < code.length; i++) {
       if (hasIcon(code[i], icon_type))
         return code[i]
@@ -392,6 +420,6 @@ var weatherIconSafely = function (code: BuiltinIcons[], icon_type: imports.gi.St
     return 'weather-severe-alert'
   }
 
-var hasIcon = function (icon: string, icon_type: imports.gi.St.IconType): boolean {
+var hasIcon = (icon: string, icon_type: imports.gi.St.IconType): boolean => {
   return IconTheme.get_default().has_icon(icon + (icon_type == IconType.SYMBOLIC ? '-symbolic' : ''))
 }

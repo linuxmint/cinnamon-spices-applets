@@ -18,14 +18,14 @@ var setTimeout = function (func, ms) {
     }, null);
     return id;
 };
-var delay = async function (ms) {
+var delay = async (ms) => {
     return await new Promise((resolve, reject) => {
         setTimeout(() => {
             resolve();
         }, ms);
     });
 };
-const clearTimeout = function (id) {
+const clearTimeout = (id) => {
     source_remove(id);
 };
 const setInterval = function (func, ms) {
@@ -39,10 +39,22 @@ const setInterval = function (func, ms) {
     }, null);
     return id;
 };
-const clearInterval = function (id) {
+var GetDistance = (lat1, lon1, lat2, lon2) => {
+    const R = 6371e3;
+    const φ1 = lat1 * Math.PI / 180;
+    const φ2 = lat2 * Math.PI / 180;
+    const Δφ = (lat2 - lat1) * Math.PI / 180;
+    const Δλ = (lon2 - lon1) * Math.PI / 180;
+    const a = Math.sin(Δφ / 2) * Math.sin(Δφ / 2) +
+        Math.cos(φ1) * Math.cos(φ2) *
+            Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return R * c;
+};
+const clearInterval = (id) => {
     source_remove(id);
 };
-var isLocaleStringSupported = function () {
+var isLocaleStringSupported = () => {
     let date = new Date(1565548657987);
     try {
         let output = date.toLocaleString('en-GB', { timeZone: 'Europe/London', hour: "numeric" });
@@ -54,7 +66,7 @@ var isLocaleStringSupported = function () {
         return "notz";
     }
 };
-var GetDayName = function (date, locale, tz) {
+var GetDayName = (date, locale, tz) => {
     let support = isLocaleStringSupported();
     if (!tz && support == "full")
         support = "notz";
@@ -68,7 +80,7 @@ var GetDayName = function (date, locale, tz) {
             ;
     }
 };
-var GetHoursMinutes = function (date, locale, hours24Format, tz) {
+var GetHoursMinutes = (date, locale, hours24Format, tz) => {
     let support = isLocaleStringSupported();
     if (!tz && support == "full")
         support = "notz";
@@ -81,7 +93,7 @@ var GetHoursMinutes = function (date, locale, hours24Format, tz) {
             return timeToUserUnits(date, hours24Format);
     }
 };
-var AwareDateString = function (date, locale, hours24Format) {
+var AwareDateString = (date, locale, hours24Format, tz) => {
     let support = isLocaleStringSupported();
     let now = new Date();
     let params = {
@@ -98,20 +110,21 @@ var AwareDateString = function (date, locale, hours24Format) {
     }
     switch (support) {
         case "full":
+            return date.toLocaleString(locale, { timeZone: tz, hour: "numeric", minute: "numeric", hour12: !hours24Format });
         case "notz":
             return date.toLocaleString(locale, { hour: "numeric", minute: "numeric", hour12: !hours24Format });
         case "none":
             return timeToUserUnits(date, hours24Format);
     }
 };
-var getDayName = function (dayNum) {
+var getDayName = (dayNum) => {
     let days = [_('Sunday'), _('Monday'), _('Tuesday'), _('Wednesday'), _('Thursday'), _('Friday'), _('Saturday')];
     return days[dayNum];
 };
-var MilitaryTime = function (date) {
+var MilitaryTime = (date) => {
     return date.getHours() * 100 + date.getMinutes();
 };
-var IsNight = function (sunTimes, date) {
+var IsNight = (sunTimes, date) => {
     if (!sunTimes)
         return false;
     let time = (!!date) ? MilitaryTime(date) : MilitaryTime(new Date());
@@ -121,7 +134,7 @@ var IsNight = function (sunTimes, date) {
         return false;
     return true;
 };
-var compassToDeg = function (compass) {
+var compassToDeg = (compass) => {
     compass = compass.toUpperCase();
     switch (compass) {
         case "N": return 0;
@@ -143,7 +156,7 @@ var compassToDeg = function (compass) {
         default: return null;
     }
 };
-var timeToUserUnits = function (date, show24Hours) {
+var timeToUserUnits = (date, show24Hours) => {
     let timeStr = util_format_date('%H:%M', date.getTime());
     let time = timeStr.split(':');
     if (time[0].charAt(0) == "0") {
@@ -164,23 +177,25 @@ var timeToUserUnits = function (date, show24Hours) {
 const WEATHER_CONV_MPH_IN_MPS = 2.23693629;
 const WEATHER_CONV_KPH_IN_MPS = 3.6;
 const WEATHER_CONV_KNOTS_IN_MPS = 1.94384449;
-var capitalizeFirstLetter = function (description) {
+var capitalizeFirstLetter = (description) => {
     if ((description == undefined || description == null)) {
         return "";
     }
     return description.charAt(0).toUpperCase() + description.slice(1);
 };
-var KPHtoMPS = function (speed) {
+var KPHtoMPS = (speed) => {
+    if (speed == null)
+        return null;
     return speed / WEATHER_CONV_KPH_IN_MPS;
 };
 const get = (p, o) => p.reduce((xs, x) => (xs && xs[x]) ? xs[x] : null, o);
-var GetFuncName = function (func) {
+var GetFuncName = (func) => {
     if (!!func.name)
         return func.name;
     var result = /^function\s+([\w\$]+)\s*\(/.exec(func.toString());
     return result ? result[1] : '';
 };
-var MPStoUserUnits = function (mps, units) {
+var MPStoUserUnits = (mps, units) => {
     if (mps == null)
         return null;
     switch (units) {
@@ -232,7 +247,7 @@ var MPStoUserUnits = function (mps, units) {
             return "12 (" + _("Hurricane") + ")";
     }
 };
-var TempToUserConfig = function (kelvin, units, russianStyle) {
+var TempToUserConfig = (kelvin, units, russianStyle) => {
     let temp;
     if (units == "celsius") {
         temp = Math.round((kelvin - 273.15));
@@ -248,16 +263,22 @@ var TempToUserConfig = function (kelvin, units, russianStyle) {
         temp = "+" + temp.toString();
     return temp.toString();
 };
-var CelsiusToKelvin = function (celsius) {
+var CelsiusToKelvin = (celsius) => {
+    if (celsius == null)
+        return null;
     return (celsius + 273.15);
 };
-var FahrenheitToKelvin = function (fahr) {
+var FahrenheitToKelvin = (fahr) => {
+    if (fahr == null)
+        return null;
     return ((fahr - 32) / 1.8 + 273.15);
 };
-var MPHtoMPS = function (speed) {
+var MPHtoMPS = (speed) => {
+    if (speed == null)
+        return null;
     return speed * 0.44704;
 };
-var PressToUserUnits = function (hpa, units) {
+var PressToUserUnits = (hpa, units) => {
     switch (units) {
         case "hPa":
             return hpa;
@@ -275,41 +296,41 @@ var PressToUserUnits = function (hpa, units) {
             return Math.round((hpa * 0.01450377) * 100) / 100;
     }
 };
-var isNumeric = function (n) {
+var isNumeric = (n) => {
     return !isNaN(parseFloat(n)) && isFinite(n);
 };
-var isString = function (text) {
+var isString = (text) => {
     if (typeof text == 'string' || text instanceof String) {
         return true;
     }
     return false;
 };
-var isID = function (text) {
+var isID = (text) => {
     if (text.length == 7 && isNumeric(text)) {
         return true;
     }
     return false;
 };
-var isCoordinate = function (text) {
+var isCoordinate = (text) => {
     if (/^-?\d{1,3}(?:\.\d*)?,-?\d{1,3}(?:\.\d*)?/.test(text)) {
         return true;
     }
     return false;
 };
-var nonempty = function (str) {
+var nonempty = (str) => {
     return (str != null && str.length > 0 && str != undefined);
 };
-var compassDirection = function (deg) {
+var compassDirection = (deg) => {
     let directions = [_('N'), _('NE'), _('E'), _('SE'), _('S'), _('SW'), _('W'), _('NW')];
     return directions[Math.round(deg / 45) % directions.length];
 };
-var isLangSupported = function (lang, languages) {
+var isLangSupported = (lang, languages) => {
     if (languages.indexOf(lang) != -1) {
         return true;
     }
     return false;
 };
-var Sentencify = function (words) {
+var Sentencify = (words) => {
     let result = "";
     for (let index = 0; index < words.length; index++) {
         const element = words[index];
@@ -319,13 +340,13 @@ var Sentencify = function (words) {
     }
     return result;
 };
-var weatherIconSafely = function (code, icon_type) {
+var weatherIconSafely = (code, icon_type) => {
     for (let i = 0; i < code.length; i++) {
         if (hasIcon(code[i], icon_type))
             return code[i];
     }
     return 'weather-severe-alert';
 };
-var hasIcon = function (icon, icon_type) {
+var hasIcon = (icon, icon_type) => {
     return IconTheme.get_default().has_icon(icon + (icon_type == IconType.SYMBOLIC ? '-symbolic' : ''));
 };

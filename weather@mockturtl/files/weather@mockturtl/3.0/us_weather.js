@@ -55,34 +55,30 @@ var weatherIconSafely = utils.weatherIconSafely;
 var SunCalc = importModule("sunCalc").SunCalc;
 var IsNight = utils.IsNight;
 var CelsiusToKelvin = utils.CelsiusToKelvin;
-var MPHtoMPS = utils.MPHtoMPS;
+var FahrenheitToKelvin = utils.FahrenheitToKelvin;
+var KPHtoMPS = utils.MPHtoMPS;
 var compassToDeg = utils.compassToDeg;
 var GetDistance = utils.GetDistance;
-var MetUk = (function () {
-    function MetUk(_app) {
-        this.prettyName = "Met Office UK";
-        this.name = "Met Office UK";
-        this.maxForecastSupport = 5;
+var USWeather = (function () {
+    function USWeather(_app) {
+        this.prettyName = "US Weather";
+        this.name = "US Weather";
+        this.maxForecastSupport = 7;
         this.website = "https://www.metoffice.gov.uk/";
-        this.maxHourlyForecastSupport = 36;
-        this.baseUrl = "http://datapoint.metoffice.gov.uk/public/data/val/";
-        this.forecastPrefix = "wxfcs/all/json/";
-        this.threeHourlyUrl = "?res=3hourly";
-        this.dailyUrl = "?res=daily";
-        this.currentPrefix = "wxobs/all/json/";
-        this.sitesUrl = "sitelist";
-        this.key = "key=05de1ee8-de70-46aa-9b41-299d4cc60219";
-        this.hourlyAccess = true;
-        this.forecastSite = null;
-        this.observationSite = null;
+        this.maxHourlyForecastSupport = 156;
+        this.sitesUrl = "https://api.weather.gov/points/";
+        this.grid = null;
+        this.MAX_STATION_DIST = 50000;
+        this.stations = null;
+        this.previousLoc = null;
         this.app = _app;
         this.sunCalc = new SunCalc();
     }
-    MetUk.prototype.GetWeather = function () {
+    USWeather.prototype.GetWeather = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var forecastSitelist, currentSitelist, forecastPromise, hourlyPromise, currentResult, forecastResult, hourlyResult;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
+            var siteData, stations, observations, index, element, latlong, _a, _b, _c, hourlyForecastPromise, forecastPromise, hourly, weather, _d, _e;
+            return __generator(this, function (_f) {
+                switch (_f.label) {
                     case 0:
                         if (!isCoordinate(this.app.config._location)) {
                             this.app.HandleError({
@@ -95,175 +91,168 @@ var MetUk = (function () {
                             this.app.log.Error("MET UK - Location is not coordinate, aborting");
                             return [2, null];
                         }
-                        return [4, this.app.LoadJsonAsync(this.baseUrl + this.forecastPrefix + this.sitesUrl + "?" + this.key)];
+                        if (!(!this.grid || !this.stations || this.previousLoc != this.app.config._location)) return [3, 3];
+                        this.previousLoc = this.app.config._location;
+                        return [4, this.app.LoadJsonAsync(this.sitesUrl + this.app.config._location)];
                     case 1:
-                        forecastSitelist = _a.sent();
-                        return [4, this.app.LoadJsonAsync(this.baseUrl + this.currentPrefix + this.sitesUrl + "?" + this.key)];
+                        siteData = _f.sent();
+                        this.grid = siteData;
+                        return [4, this.app.LoadJsonAsync(this.grid.properties.observationStations)];
                     case 2:
-                        currentSitelist = _a.sent();
-                        this.forecastSite = this.GetClosestSite(forecastSitelist, this.app.config._location);
-                        this.observationSite = this.GetClosestSite(currentSitelist, this.app.config._location);
-                        this.app.log.Debug("Forecast site found: " + JSON.stringify(this.forecastSite, null, 2));
-                        this.app.log.Debug("Observation site found: " + JSON.stringify(this.observationSite, null, 2));
-                        if (this.forecastSite.dist > 100000 || this.observationSite.dist > 100000) {
-                            this.app.log.Error("User is probably not in UK, aborting");
-                            this.app.HandleError({
-                                type: "hard",
-                                userError: true,
-                                detail: "location not found",
-                                message: "MET Office UK only covers the UK, please make sure your location is in the country",
-                                service: "met-uk"
-                            });
-                            return [2, null];
-                        }
-                        forecastPromise = this.GetData(this.baseUrl + this.forecastPrefix + this.forecastSite.id + this.dailyUrl + "&" + this.key, this.ParseForecast);
-                        hourlyPromise = null;
-                        if (!!this.hourlyAccess)
-                            hourlyPromise = this.GetData(this.baseUrl + this.forecastPrefix + this.forecastSite.id + this.threeHourlyUrl + "&" + this.key, this.ParseHourlyForecast);
-                        return [4, this.GetData(this.baseUrl + this.currentPrefix + this.observationSite.id + "?res=hourly&" + this.key, this.ParseCurrent)];
+                        stations = _f.sent();
+                        this.stations = stations.features;
+                        _f.label = 3;
                     case 3:
-                        currentResult = _a.sent();
-                        if (!currentResult)
-                            return [2, null];
-                        return [4, forecastPromise];
+                        observations = [];
+                        index = 0;
+                        _f.label = 4;
                     case 4:
-                        forecastResult = _a.sent();
-                        currentResult.forecasts = (!forecastResult) ? [] : forecastResult;
-                        return [4, hourlyPromise];
+                        if (!(index < this.stations.length)) return [3, 9];
+                        element = this.stations[index];
+                        latlong = this.app.config._location.split(",");
+                        element.dist = GetDistance(element.geometry.coordinates[1], element.geometry.coordinates[0], parseFloat(latlong[0]), parseFloat(latlong[1]));
+                        if (element.dist > this.MAX_STATION_DIST)
+                            return [3, 9];
+                        _f.label = 5;
                     case 5:
-                        hourlyResult = _a.sent();
-                        currentResult.hourlyForecasts = (!hourlyResult) ? [] : hourlyResult;
-                        return [2, currentResult];
-                }
-            });
-        });
-    };
-    ;
-    MetUk.prototype.GetData = function (query, ParseFunction) {
-        return __awaiter(this, void 0, void 0, function () {
-            var json, e_1;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        if (!(query != null)) return [3, 5];
-                        this.app.log.Debug("Query: " + query);
-                        _a.label = 1;
-                    case 1:
-                        _a.trys.push([1, 3, , 4]);
-                        return [4, this.app.LoadJsonAsync(query)];
-                    case 2:
-                        json = _a.sent();
+                        _f.trys.push([5, 7, , 8]);
+                        this.app.log.Debug("Observation query is: " + this.stations[index].id + "/observations/latest");
+                        _b = (_a = observations).push;
+                        return [4, this.app.LoadJsonAsync(this.stations[index].id + "/observations/latest")];
+                    case 6:
+                        _b.apply(_a, [_f.sent()]);
+                        return [3, 8];
+                    case 7:
+                        _c = _f.sent();
+                        this.app.log.Debug("Failed to get observations from " + this.stations[index].id);
+                        return [3, 8];
+                    case 8:
+                        index++;
                         return [3, 4];
-                    case 3:
-                        e_1 = _a.sent();
-                        this.app.HandleHTTPError("met-uk", e_1, this.app, null);
-                        return [2, null];
-                    case 4:
-                        if (json == null) {
-                            this.app.HandleError({ type: "soft", detail: "no api response", service: "met-uk" });
-                            return [2, null];
-                        }
-                        return [2, ParseFunction(json, this)];
-                    case 5: return [2, null];
+                    case 9:
+                        hourlyForecastPromise = this.app.LoadJsonAsync(this.grid.properties.forecastHourly);
+                        forecastPromise = this.app.LoadJsonAsync(this.grid.properties.forecast);
+                        return [4, hourlyForecastPromise];
+                    case 10:
+                        hourly = _f.sent();
+                        weather = this.ParseCurrent(observations, hourly);
+                        _d = weather;
+                        _e = this.ParseForecast;
+                        return [4, forecastPromise];
+                    case 11:
+                        _d.forecasts = _e.apply(this, [_f.sent()]);
+                        return [2, weather];
                 }
             });
         });
     };
     ;
-    MetUk.prototype.ParseCurrent = function (json, self) {
-        var timestamp = new Date(json.SiteRep.DV.dataDate);
-        var observation = self.GetLatestObservation(json.SiteRep.DV.Location.Period, timestamp);
-        if (!observation) {
+    USWeather.prototype.MeshObservationData = function (observations) {
+        if (observations.length < 1)
+            return null;
+        var result = observations[0];
+        for (var index = 1; index < observations.length; index++) {
+            var element = observations[index];
+            if (result.properties.icon == null) {
+                result.properties.icon = element.properties.icon;
+                result.properties.textDescription = element.properties.textDescription;
+            }
+            if (result.properties.temperature.value == null)
+                result.properties.temperature.value = element.properties.temperature.value;
+            if (result.properties.windSpeed.value == null)
+                result.properties.windSpeed.value = element.properties.windSpeed.value;
+            if (result.properties.windDirection.value == null)
+                result.properties.windDirection.value = element.properties.windDirection.value;
+            if (result.properties.barometricPressure.value == null)
+                result.properties.barometricPressure.value = element.properties.barometricPressure.value;
+            if (result.properties.relativeHumidity.value == null)
+                result.properties.relativeHumidity.value = element.properties.relativeHumidity.value;
+            if (result.properties.windChill.value == null)
+                result.properties.windChill.value = element.properties.windChill.value;
+            if (result.properties.visibility.value == null)
+                result.properties.visibility.value = element.properties.visibility.value;
+        }
+        return result;
+    };
+    USWeather.prototype.ParseCurrent = function (json, hourly) {
+        if (json.length == 0) {
+            this.app.log.Error("No observation stations/data are available");
             return null;
         }
-        var times = self.sunCalc.getTimes(new Date(), parseFloat(json.SiteRep.DV.Location.lat), parseFloat(json.SiteRep.DV.Location.lon), parseFloat(json.SiteRep.DV.Location.elevation));
+        var observation = this.MeshObservationData(json);
+        var timestamp = new Date(observation.properties.timestamp);
+        var times = this.sunCalc.getTimes(new Date(), observation.geometry.coordinates[1], observation.geometry.coordinates[0], observation.properties.elevation.value);
         try {
             var weather = {
                 coord: {
-                    lat: parseFloat(json.SiteRep.DV.Location.lat),
-                    lon: parseFloat(json.SiteRep.DV.Location.lon)
+                    lat: observation.geometry.coordinates[1],
+                    lon: observation.geometry.coordinates[0]
                 },
                 location: {
                     city: null,
                     country: null,
                     url: null,
-                    timeZone: null
+                    timeZone: this.stations[0].properties.timeZone
                 },
                 date: timestamp,
                 sunrise: times.sunrise,
                 sunset: times.sunset,
                 wind: {
-                    speed: MPHtoMPS(parseFloat(observation.S)),
-                    degree: compassToDeg(observation.D)
+                    speed: KPHtoMPS(observation.properties.windSpeed.value),
+                    degree: observation.properties.windDirection.value
                 },
-                temperature: CelsiusToKelvin(parseFloat(observation.T)),
-                pressure: parseFloat(observation.P),
-                humidity: parseFloat(observation.H),
-                condition: self.ResolveCondition(observation.W),
-                extra_field: {
-                    name: _("Visibility"),
-                    value: self.VisibilityToText(observation.V),
-                    type: "string"
-                },
+                temperature: CelsiusToKelvin(observation.properties.temperature.value),
+                pressure: observation.properties.barometricPressure.value / 100,
+                humidity: observation.properties.relativeHumidity.value,
+                condition: this.ResolveCondition(observation.properties.icon, IsNight(times)),
                 forecasts: []
             };
+            if (observation.properties.windChill.value != null) {
+                weather.extra_field = {
+                    name: _("Feels Like"),
+                    value: CelsiusToKelvin(observation.properties.windChill.value),
+                    type: "temperature"
+                };
+            }
+            if (weather.condition == null) {
+                weather.condition = this.ResolveCondition(hourly.properties.periods[0].icon);
+            }
             return weather;
         }
         catch (e) {
-            self.app.log.Error("Met UK Weather Parsing error: " + e);
-            self.app.HandleError({ type: "soft", service: "met-uk", detail: "unusal payload", message: _("Failed to Process Current Weather Info") });
+            this.app.log.Error("US Weather Parsing error: " + e);
+            this.app.HandleError({ type: "soft", service: "us-weather", detail: "unusal payload", message: _("Failed to Process Current Weather Info") });
             return null;
         }
     };
     ;
-    MetUk.prototype.ParseForecast = function (json, self) {
+    USWeather.prototype.ParseForecast = function (json) {
         var forecasts = [];
         try {
-            for (var i = 0; i < json.SiteRep.DV.Location.Period.length; i++) {
-                var element = json.SiteRep.DV.Location.Period[i];
-                var day = element.Rep[0];
-                var night = element.Rep[1];
+            for (var i = 0; i < json.properties.periods.length; i += 2) {
+                var day = json.properties.periods[i];
+                var night = json.properties.periods[i + 1];
                 var forecast = {
-                    date: new Date(self.PartialToISOString(element.value)),
-                    temp_min: CelsiusToKelvin(parseFloat(night.Nm)),
-                    temp_max: CelsiusToKelvin(parseFloat(day.Dm)),
-                    condition: self.ResolveCondition(day.W),
+                    date: new Date(day.startTime),
+                    temp_min: FahrenheitToKelvin(night.temperature),
+                    temp_max: FahrenheitToKelvin(day.temperature),
+                    condition: this.ResolveCondition(day.icon),
                 };
                 forecasts.push(forecast);
             }
             return forecasts;
         }
         catch (e) {
-            self.app.log.Error("MET UK Forecast Parsing error: " + e);
-            self.app.HandleError({ type: "soft", service: "met-uk", detail: "unusal payload", message: _("Failed to Process Forecast Info") });
+            this.app.log.Error("MET UK Forecast Parsing error: " + e);
+            this.app.HandleError({ type: "soft", service: "met-uk", detail: "unusal payload", message: _("Failed to Process Forecast Info") });
             return null;
         }
     };
     ;
-    MetUk.prototype.ParseHourlyForecast = function (json, self) {
+    USWeather.prototype.ParseHourlyForecast = function (json, self) {
         var forecasts = [];
         try {
             for (var i = 0; i < json.SiteRep.DV.Location.Period.length; i++) {
-                var day = json.SiteRep.DV.Location.Period[i];
-                var date = new Date(self.PartialToISOString(day.value));
-                for (var index = 0; index < day.Rep.length; index++) {
-                    var hour = day.Rep[index];
-                    var timestamp = new Date(date.getTime());
-                    timestamp.setHours(timestamp.getHours() + (parseInt(hour.$) / 60));
-                    if (timestamp < new Date())
-                        continue;
-                    var forecast = {
-                        date: timestamp,
-                        temp: CelsiusToKelvin(parseFloat(hour.T)),
-                        condition: self.ResolveCondition(hour.W),
-                        precipation: {
-                            type: "rain",
-                            volume: null,
-                            chance: parseFloat(hour.Pp)
-                        }
-                    };
-                    forecasts.push(forecast);
-                }
             }
             return forecasts;
         }
@@ -273,268 +262,245 @@ var MetUk = (function () {
             return null;
         }
     };
-    MetUk.prototype.VisibilityToText = function (dist) {
-        var distance = parseInt(dist);
-        if (distance < 1000)
-            return _("Very poor - Less than 1 km");
-        if (distance < 4000)
-            return _("Poor - Between 1-4 km");
-        if (distance < 10000)
-            return _("Moderate - Between 4-10 km");
-        if (distance < 20000)
-            return _("Good - Between 10-20 km");
-        if (distance < 40000)
-            return _("Very good - Between 20-40 km");
-        return _("Excellent - More than 40 km");
-    };
-    MetUk.prototype.GetLatestObservation = function (observations, day) {
-        for (var index = 0; index < observations.length; index++) {
-            var element = observations[index];
-            var date = new Date(this.PartialToISOString(element.value));
-            if (date.toLocaleDateString() != day.toLocaleDateString())
-                continue;
-            return element.Rep[element.Rep.length - 1];
-        }
-        return null;
-    };
-    MetUk.prototype.PartialToISOString = function (date) {
-        return (date.replace("Z", "")) + "T00:00:00Z";
-    };
-    MetUk.prototype.GetClosestSite = function (siteList, loc) {
-        var sites = siteList.Locations.Location;
-        var latlong = loc.split(",");
-        var closest = sites[0];
-        closest.dist = GetDistance(parseFloat(closest.latitude), parseFloat(closest.longitude), parseFloat(latlong[0]), parseFloat(latlong[1]));
-        for (var index = 0; index < sites.length; index++) {
-            var element = sites[index];
-            element.dist = GetDistance(parseFloat(element.latitude), parseFloat(element.longitude), parseFloat(latlong[0]), parseFloat(latlong[1]));
-            if (element.dist < closest.dist) {
-                closest = element;
-            }
-        }
-        return closest;
-    };
-    MetUk.prototype.ResolveCondition = function (icon) {
+    USWeather.prototype.ResolveCondition = function (icon, isNight) {
+        if (isNight === void 0) { isNight = false; }
+        if (icon == null)
+            return null;
+        var code = icon.match(/(?!\/)[a-z_]+(?=\?)/);
         var iconType = this.app.config.IconType();
-        switch (icon) {
-            case "NA":
-                return {
-                    main: _("Unknown"),
-                    description: _("Unknown"),
-                    customIcon: "cloud-refresh-symbolic",
-                    icon: weatherIconSafely(["weather-severe-alert"], iconType)
-                };
-            case "0":
+        switch (code[0]) {
+            case "skc":
                 return {
                     main: _("Clear"),
                     description: _("Clear"),
-                    customIcon: "night-clear-symbolic",
+                    customIcon: (isNight) ? "night-clear-symbolic" : "day-sunny-symbolic",
+                    icon: weatherIconSafely(["weather-severe-alert"], iconType)
+                };
+            case "few":
+                return {
+                    main: _("Few Clouds"),
+                    description: _("Few clouds"),
+                    customIcon: (isNight) ? "night-alt-cloudy-symbolic" : "day-cloudy-symbolic",
                     icon: weatherIconSafely(["weather-clear-night", "weather-severe-alert"], iconType)
                 };
-            case "1":
+            case "sct":
                 return {
-                    main: _("Sunny"),
-                    description: _("Sunny"),
-                    customIcon: "day-sunny-symbolic",
+                    main: _("Partly Cloudy"),
+                    description: _("Partly cloudy"),
+                    customIcon: (isNight) ? "night-alt-cloudy-symbolic" : "day-cloudy-symbolic",
                     icon: weatherIconSafely(["weather-clear", "weather-severe-alert"], iconType)
                 };
-            case "2":
+            case "bkn":
                 return {
-                    main: _("Partly Cloudy"),
-                    description: _("Partly Cloudy"),
-                    customIcon: "night-alt-cloudy-symbolic",
+                    main: _("Mostly Cloudy"),
+                    description: _("Mostly cloudy"),
+                    customIcon: (isNight) ? "night-alt-cloudy-symbolic" : "day-cloudy-symbolic",
                     icon: weatherIconSafely(["weather-clouds-night", "weather-overcast", "weather-severe-alert"], iconType)
                 };
-            case "3":
+            case "ovc":
                 return {
-                    main: _("Partly Cloudy"),
-                    description: _("Partly Cloudy"),
-                    customIcon: "day-cloudy-symbolic",
+                    main: _("Overcast"),
+                    description: _("Overcast"),
+                    customIcon: "cloudy-symbolic",
                     icon: weatherIconSafely(["weather-clouds", "weather-overcast", "weather-severe-alert"], iconType)
                 };
-            case "4":
+            case "wind_skc":
                 return {
                     main: _("Unknown"),
                     description: _("Unknown"),
                     customIcon: "cloud-refresh-symbolic",
                     icon: weatherIconSafely(["weather-severe-alert"], iconType)
                 };
-            case "5":
+            case "wind_few":
                 return {
                     main: _("Mist"),
                     description: _("Mist"),
                     customIcon: "fog-symbolic",
                     icon: weatherIconSafely(["weather-fog", "weather-severe-alert"], iconType)
                 };
-            case "6":
+            case "wind_sct":
                 return {
                     main: _("Fog"),
                     description: _("Fog"),
                     customIcon: "fog-symbolic",
                     icon: weatherIconSafely(["weather-fog", "weather-severe-alert"], iconType)
                 };
-            case "7":
+            case "wind_bkn":
                 return {
                     main: _("Cloudy"),
                     description: _("Cloudy"),
                     customIcon: "cloud-symbolic",
                     icon: weatherIconSafely(["weather-overcast", "weather-many-clouds", "weather-severe-alert"], iconType)
                 };
-            case "8":
+            case "wind_ovc":
                 return {
                     main: _("Overcast"),
                     description: _("Overcast"),
                     customIcon: "cloudy-symbolic",
                     icon: weatherIconSafely(["weather-overcast", "weather-many-clouds", "weather-severe-alert"], iconType)
                 };
-            case "9":
+            case "snow":
                 return {
                     main: _("Light Rain"),
                     description: _("Light rain shower"),
                     customIcon: "night-alt-showers-symbolic",
                     icon: weatherIconSafely(["weather-showers-scattered-night", "weather-showers-night", "weather-showers-scattered", "weather-showers", "weather-freezing-rain", "weather-severe-alert"], iconType)
                 };
-            case "10":
+            case "rain_snow":
                 return {
                     main: _("Light Rain"),
                     description: _("Light rain shower"),
                     customIcon: "day-showers-symbolic",
                     icon: weatherIconSafely(["weather-showers-scattered-day", "weather-showers-day", "weather-showers-scattered", "weather-showers", "weather-freezing-rain", "weather-severe-alert"], iconType)
                 };
-            case "11":
+            case "rain_sleet":
                 return {
                     main: _("Drizzle"),
                     description: _("Drizzle"),
                     customIcon: "showers-symbolic",
                     icon: weatherIconSafely(["weather-showers-scattered", "weather-showers", "weather-rain", "weather-freezing-rain", "weather-severe-alert"], iconType)
                 };
-            case "12":
+            case "snow_sleet":
                 return {
                     main: _("Light Rain"),
                     description: _("Light rain"),
                     customIcon: "showers-symbolic",
                     icon: weatherIconSafely(["weather-showers-scattered", "weather-showers", "weather-rain", "weather-freezing-rain", "weather-severe-alert"], iconType)
                 };
-            case "13":
+            case "fzra":
                 return {
                     main: _("Heavy Rain"),
                     description: _("Heavy rain shower"),
                     customIcon: "night-alt-rain-symbolic",
                     icon: weatherIconSafely(["weather-showers-night", "weather-showers", "weather-showers-scattered", "weather-severe-alert"], iconType)
                 };
-            case "14":
+            case "rain_fzra":
                 return {
                     main: _("Heavy Rain"),
                     description: _("Heavy rain shower"),
                     customIcon: "day-rain-symbolic",
                     icon: weatherIconSafely(["weather-showers-day", "weather-showers", "weather-showers-scattered", "weather-severe-alert"], iconType)
                 };
-            case "15":
+            case "snow_fzra":
                 return {
                     main: _("Heavy Rain"),
                     description: _("Heavy Rain"),
                     customIcon: "rain-symbolic",
                     icon: weatherIconSafely(["weather-showers", "weather-showers-scattered", "weather-severe-alert"], iconType)
                 };
-            case "16":
+            case "sleet":
                 return {
                     main: _("Sleet"),
                     description: _("Sleet shower"),
                     customIcon: "night-alt-rain-mix-symbolic",
                     icon: weatherIconSafely(["weather-showers-night", "weather-showers", "weather-showers-scattered", "weather-severe-alert"], iconType)
                 };
-            case "17":
+            case "rain":
                 return {
                     main: _("Sleet"),
                     description: _("Sleet shower"),
                     customIcon: "day-rain-mix-symbolic",
                     icon: weatherIconSafely(["weather-showers-day", "weather-showers", "weather-showers-scattered", "weather-severe-alert"], iconType)
                 };
-            case "18":
+            case "rain_showers":
                 return {
                     main: _("Sleet"),
                     description: _("Sleet"),
                     customIcon: "rain-mix-symbolic",
                     icon: weatherIconSafely(["weather-showers", "weather-showers-scattered", "weather-severe-alert"], iconType)
                 };
-            case "19":
+            case "rain_showers_hi":
                 return {
                     main: _("Hail"),
                     description: _("Hail shower"),
                     customIcon: "night-alt-hail-symbolic",
                     icon: weatherIconSafely(["weather-showers-night", "weather-showers", "weather-showers-scattered", "weather-severe-alert"], iconType)
                 };
-            case "20":
+            case "tsra":
                 return {
                     main: _("Hail"),
                     description: _("Hail shower"),
                     customIcon: "day-hail-symbolic",
                     icon: weatherIconSafely(["weather-showers-day", "weather-showers", "weather-showers-scattered", "weather-severe-alert"], iconType)
                 };
-            case "21":
+            case "tsra_sct":
                 return {
                     main: _("Hail"),
                     description: _("Hail"),
                     customIcon: "hail-symbolic",
                     icon: weatherIconSafely(["weather-showers", "weather-showers-scattered", "weather-severe-alert"], iconType)
                 };
-            case "22":
+            case "tsra_hi":
                 return {
                     main: _("Light Snow"),
                     description: _("Light snow shower"),
                     customIcon: "night-alt-snow-symbolic",
                     icon: weatherIconSafely(["weather-snow-scattered", "weather-snow", "weather-severe-alert"], iconType)
                 };
-            case "23":
+            case "tornado":
                 return {
                     main: _("Light Snow"),
                     description: _("Light snow shower"),
                     customIcon: "day-snow-symbolic",
                     icon: weatherIconSafely(["weather-snow-scattered", "weather-snow", "weather-severe-alert"], iconType)
                 };
-            case "24":
+            case "hurricane":
                 return {
                     main: _("Light Snow"),
                     description: _("Light snow"),
                     customIcon: "snow-symbolic",
                     icon: weatherIconSafely(["weather-snow-scattered", "weather-snow", "weather-severe-alert"], iconType)
                 };
-            case "25":
+            case "tropical_storm":
                 return {
                     main: _("Heavy Snow"),
                     description: _("Heavy snow shower"),
                     customIcon: "night-alt-snow-symbolic",
                     icon: weatherIconSafely(["weather-snow", "weather-snow-scattered", "weather-severe-alert"], iconType)
                 };
-            case "26":
+            case "dust":
                 return {
                     main: _("Heavy Snow"),
                     description: _("Heavy snow shower"),
                     customIcon: "day-snow-symbolic",
                     icon: weatherIconSafely(["weather-snow", "weather-snow-scattered", "weather-severe-alert"], iconType)
                 };
-            case "27":
+            case "smoke":
                 return {
                     main: _("Heavy Snow"),
                     description: _("Heavy snow"),
                     customIcon: "snow-symbolic",
                     icon: weatherIconSafely(["weather-snow", "weather-snow-scattered", "weather-severe-alert"], iconType)
                 };
-            case "28":
+            case "haze":
                 return {
                     main: _("Thunder"),
                     description: _("Thunder shower"),
                     customIcon: "day-storm-showers-symbolic",
                     icon: weatherIconSafely(["weather-storm", "weather-severe-alert"], iconType)
                 };
-            case "29":
+            case "hot":
                 return {
                     main: _("Thunder"),
                     description: _("Thunder shower"),
                     customIcon: "night-alt-storm-showers-symbolic",
                     icon: weatherIconSafely(["weather-storm", "weather-severe-alert"], iconType)
                 };
-            case "30":
+            case "cold":
+                return {
+                    main: _("Thunder"),
+                    description: _("UnThunderknown"),
+                    customIcon: "thunderstorm-symbolic",
+                    icon: weatherIconSafely(["weather-storm", "weather-severe-alert"], iconType)
+                };
+            case "blizzard":
+                return {
+                    main: _("Thunder"),
+                    description: _("UnThunderknown"),
+                    customIcon: "thunderstorm-symbolic",
+                    icon: weatherIconSafely(["weather-storm", "weather-severe-alert"], iconType)
+                };
+            case "fog":
                 return {
                     main: _("Thunder"),
                     description: _("UnThunderknown"),
@@ -551,6 +517,6 @@ var MetUk = (function () {
         }
     };
     ;
-    return MetUk;
+    return USWeather;
 }());
 ;
