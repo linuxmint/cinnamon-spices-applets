@@ -23,7 +23,8 @@ var IsNight = utils.IsNight as (sunTimes: SunTimes, date?: Date) => boolean;
 var CelsiusToKelvin = utils.CelsiusToKelvin as (celsius: number) => number;
 var MPHtoMPS = utils.MPHtoMPS as (speed: number) => number;
 var compassToDeg = utils.compassToDeg as (compass: string) => number;
-var GetDistance = utils.GetDistance as (lat1: number, lon1: number, lat2: number, lon2: number) => number
+var GetDistance = utils.GetDistance as (lat1: number, lon1: number, lat2: number, lon2: number) => number;
+const get = utils.get as (p: string[], o: any) => any;
 
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
@@ -103,15 +104,30 @@ class MetUk implements WeatherProvider {
 		}
 
 		let forecastPromise = this.GetData(this.baseUrl + this.forecastPrefix + this.forecastSite.id + this.dailyUrl + "&" + this.key, this.ParseForecast) as Promise<ForecastData[]>;
-		let hourlyPromise = null;
-		if (!!this.hourlyAccess) hourlyPromise = this.GetData(this.baseUrl + this.forecastPrefix + this.forecastSite.id + this.threeHourlyUrl + "&" + this.key, this.ParseHourlyForecast) as Promise<HourlyForecastData[]>;
-		let currentResult = await this.GetData(this.baseUrl + this.currentPrefix + this.observationSite.id + "?res=hourly&" + this.key, this.ParseCurrent) as WeatherData;
+		let hourlyPayload = null;
+		try {
+			hourlyPayload = await this.app.LoadJsonAsync(this.baseUrl + this.forecastPrefix + this.forecastSite.id + this.threeHourlyUrl + "&" + this.key);
+		}
+		catch(e) {
+			this.app.log.Error("Failed to obtaion three-hourly weather, error: " + JSON.stringify(e, null, 2));
+			return null;
+		}
+		
+		let currentResult = null;
+		try {
+			let json = await this.app.LoadJsonAsync(this.baseUrl + this.currentPrefix + this.observationSite.id + "?res=hourly&" + this.key);
+			currentResult = this.ParseCurrent(json, hourlyPayload, this);
+		}
+		catch(e) {
+			this.app.log.Error("Failed to obtaion current weather, error: " + JSON.stringify(e, null, 2))
+			return null;
+		}
+		
 		if (!currentResult) return null;
 		
 		let forecastResult = await forecastPromise;
 		currentResult.forecasts = (!forecastResult) ? [] : forecastResult;
-		let hourlyResult = await hourlyPromise;
-		currentResult.hourlyForecasts = (!hourlyResult) ? [] : hourlyResult;
+		currentResult.hourlyForecasts = (!hourlyPayload) ? [] : this.ParseHourlyForecast(hourlyPayload, this);
         return currentResult;
 	};
 
@@ -146,46 +162,101 @@ class MetUk implements WeatherProvider {
         }       
 	};
 
-    private ParseCurrent(json: METPayload, self: MetUk): WeatherData {
+    private ParseCurrent(json: METPayload, threeHourly: METPayload, self: MetUk): WeatherData {
 		let timestamp = new Date(json.SiteRep.DV.dataDate);
 		let observation = self.GetLatestObservation(json.SiteRep.DV.Location.Period, timestamp);
 		if (!observation) {
-			// TODO: get from 3-hourly if not available
 			return null;
 		}
         let times = self.sunCalc.getTimes(new Date(), parseFloat(json.SiteRep.DV.Location.lat), parseFloat(json.SiteRep.DV.Location.lon), parseFloat(json.SiteRep.DV.Location.elevation));
         try {
-          let weather: WeatherData = {
-            coord: {
-              lat: parseFloat(json.SiteRep.DV.Location.lat),
-              lon: parseFloat(json.SiteRep.DV.Location.lon)
-            },
-            location: {
-              city: null,
-              country: null,
-              url: null,
-              timeZone: null
-            },
-            date: timestamp,
-            sunrise: times.sunrise,
-            sunset: times.sunset,
-            wind: {
-              speed: MPHtoMPS(parseFloat(observation.S)),
-              degree: compassToDeg(observation.D)
-            },
-            temperature: CelsiusToKelvin(parseFloat(observation.T)),
-            pressure: parseFloat(observation.P),
-            humidity: parseFloat(observation.H),
-            condition: self.ResolveCondition(observation.W),
-            extra_field: {
-              name: _("Visibility"),
-              value: self.VisibilityToText(observation.V),
-              type: "string"
-            },
-            forecasts: []
-          };
+			let weather: WeatherData = {
+				coord: {
+					lat: parseFloat(json.SiteRep.DV.Location.lat),
+					lon: parseFloat(json.SiteRep.DV.Location.lon)
+				},
+				location: {
+					city: null,
+					country: null,
+					url: null,
+					timeZone: null
+				},
+					date: timestamp,
+					sunrise: times.sunrise,
+					sunset: times.sunset,
+				wind: {
+					speed: null,
+					degree: null
+				},
+				temperature: null,
+				pressure: null,
+				humidity: null,
+				condition: null,
+				forecasts: []
+			};
+
+		  	if (get(["V"], observation) != null) {
+				weather.extra_field = {
+					name: _("Visibility"),
+					value: self.VisibilityToText(observation.V),
+					type: "string"
+				}
+			}
+
+			if (get(["S"], observation) != null) {
+				weather.wind.speed = MPHtoMPS(parseFloat(observation.S));
+			}
+
+			if (get(["D"], observation) != null) {
+				weather.wind.degree = compassToDeg(observation.D);
+			}
+			if (get(["T"], observation) != null) {
+				weather.temperature = CelsiusToKelvin(parseFloat(observation.T));
+			}
+			if (get(["P"], observation) != null) {
+				weather.pressure = parseFloat(observation.P);
+			}
+			if (get(["H"], observation) != null) {
+				weather.humidity = parseFloat(observation.H);
+			}
+			if (get(["W"], observation) != null) {
+				weather.condition = self.ResolveCondition(observation.W)
+			}
+
+			if (threeHourly == null) return weather;
+
+		  	// fill in from 3-hourly weather what's missing
+			let relevantForecast = this.GetFirstForecast(threeHourly);
+			
+			if (weather.condition == null) {
+				weather.condition = self.ResolveCondition(relevantForecast.W)
+			}
+
+			if (weather.wind.speed == null && get(["S"], relevantForecast) != null) {
+				weather.wind.speed = MPHtoMPS(parseFloat(relevantForecast.S));
+			}
+
+			if (weather.wind.degree == null && get(["D"], relevantForecast) != null) {
+				weather.wind.degree = compassToDeg(relevantForecast.D);
+			}
+
+			if (!weather.extra_field && get(["V"], relevantForecast) != null) {
+				weather.extra_field = {
+					name: _("Visibility"),
+					value: self.VisibilityToText(relevantForecast.V),
+					type: "string"
+				}
+			}
+
+			if (weather.humidity == null && get(["H"], relevantForecast) != null) {
+				weather.humidity = parseFloat(relevantForecast.H);
+			}
+
+			if (weather.temperature == null && get(["T"], relevantForecast) != null) {
+				weather.temperature = CelsiusToKelvin(parseFloat(relevantForecast.T));
+			}
           
-          return weather; 
+        	return weather; 
         }
         catch(e) { 
           self.app.log.Error("Met UK Weather Parsing error: " + e);
@@ -193,6 +264,23 @@ class MetUk implements WeatherProvider {
           return null; 
         }
 	};
+
+	private GetFirstForecast(threeHourlyPayload: METPayload): ThreeHourPayload {
+		for (let i = 0; i < threeHourlyPayload.SiteRep.DV.Location.Period.length; i++) {
+			let day = threeHourlyPayload.SiteRep.DV.Location.Period[i];
+			let date = new Date(this.PartialToISOString(day.value));
+			for (let index = 0; index < day.Rep.length; index++) {
+				const hour = day.Rep[index] as ThreeHourPayload;
+				let timestamp = new Date(date.getTime());
+				timestamp.setHours(timestamp.getHours() + (parseInt(hour.$)/60));
+				let threshold = new Date();
+				// Show the previous 3-hour forecast until it reaches the next one
+				threshold.setHours(threshold.getHours() - 3);
+				if (timestamp < threshold) continue;
+				return hour;
+			}
+		}
+	}
 	
 
 
@@ -230,7 +318,10 @@ class MetUk implements WeatherProvider {
 					const hour = day.Rep[index] as ThreeHourPayload;
 					let timestamp = new Date(date.getTime());
 					timestamp.setHours(timestamp.getHours() + (parseInt(hour.$)/60));
-					if (timestamp < new Date()) continue;
+					let threshold = new Date();
+					// Show the previous 3-hour forecast until it reaches the next one
+					threshold.setHours(threshold.getHours() - 3);
+					if (timestamp < threshold) continue;
 
 					let forecast: HourlyForecastData = {          
 						date: timestamp,
@@ -257,6 +348,7 @@ class MetUk implements WeatherProvider {
 	/** https://www.metoffice.gov.uk/services/data/datapoint/code-definitions */
 	private VisibilityToText(dist: string): string {
 		let distance = parseInt(dist);
+		//TODO: Add conversion to mph if needed 
 		if (distance < 1000) return _("Very poor - Less than 1 km");
 		if (distance < 4000) return _("Poor - Between 1-4 km");
 		if (distance < 10000) return _("Moderate - Between 4-10 km");
@@ -587,17 +679,17 @@ interface ObservationPayload {
 	/** Humidity, %? */
 	H: string;
 	/** Pressure, hpa? */
-	P: string;
+	P?: string;
 	/** Wind speed, mph? */
 	S: string;
 	/** Temperature, C? */
 	T: string;
 	/** Visibility, m? */
-	V: string;
+	V?: string;
 	/** Weather type, https://www.metoffice.gov.uk/services/data/datapoint/code-definitions */
-	W: string;
+	W?: string;
 	/** Pressure tendency, Pa/s? */
-	Pt: string;
+	Pt?: string;
 	/** Dew Point, C? */
 	Dp: string;
 	/** Minutes after midnight on the day */
@@ -613,6 +705,8 @@ interface ThreeHourPayload {
 	S: string;
 	/** Feels like temperature, C? */
 	F: string;
+	/** Screen Relative Humidity, % */
+	H?: string;
 	/** Temperature, C? */
 	T: string;
 	/** Visibility type, https://www.metoffice.gov.uk/services/data/datapoint/code-definitions */

@@ -58,6 +58,7 @@ var CelsiusToKelvin = utils.CelsiusToKelvin;
 var MPHtoMPS = utils.MPHtoMPS;
 var compassToDeg = utils.compassToDeg;
 var GetDistance = utils.GetDistance;
+var get = utils.get;
 var MetUk = (function () {
     function MetUk(_app) {
         this.prettyName = "Met Office UK";
@@ -80,7 +81,7 @@ var MetUk = (function () {
     }
     MetUk.prototype.GetWeather = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var forecastSitelist, currentSitelist, forecastPromise, hourlyPromise, currentResult, forecastResult, hourlyResult;
+            var forecastSitelist, currentSitelist, forecastPromise, hourlyPayload, e_1, currentResult, json, e_2, forecastResult;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -117,22 +118,40 @@ var MetUk = (function () {
                             return [2, null];
                         }
                         forecastPromise = this.GetData(this.baseUrl + this.forecastPrefix + this.forecastSite.id + this.dailyUrl + "&" + this.key, this.ParseForecast);
-                        hourlyPromise = null;
-                        if (!!this.hourlyAccess)
-                            hourlyPromise = this.GetData(this.baseUrl + this.forecastPrefix + this.forecastSite.id + this.threeHourlyUrl + "&" + this.key, this.ParseHourlyForecast);
-                        return [4, this.GetData(this.baseUrl + this.currentPrefix + this.observationSite.id + "?res=hourly&" + this.key, this.ParseCurrent)];
+                        hourlyPayload = null;
+                        _a.label = 3;
                     case 3:
-                        currentResult = _a.sent();
+                        _a.trys.push([3, 5, , 6]);
+                        return [4, this.app.LoadJsonAsync(this.baseUrl + this.forecastPrefix + this.forecastSite.id + this.threeHourlyUrl + "&" + this.key)];
+                    case 4:
+                        hourlyPayload = _a.sent();
+                        return [3, 6];
+                    case 5:
+                        e_1 = _a.sent();
+                        this.app.log.Error("Failed to obtaion three-hourly weather, error: " + JSON.stringify(e_1, null, 2));
+                        return [2, null];
+                    case 6:
+                        currentResult = null;
+                        _a.label = 7;
+                    case 7:
+                        _a.trys.push([7, 9, , 10]);
+                        return [4, this.app.LoadJsonAsync(this.baseUrl + this.currentPrefix + this.observationSite.id + "?res=hourly&" + this.key)];
+                    case 8:
+                        json = _a.sent();
+                        currentResult = this.ParseCurrent(json, hourlyPayload, this);
+                        return [3, 10];
+                    case 9:
+                        e_2 = _a.sent();
+                        this.app.log.Error("Failed to obtaion current weather, error: " + JSON.stringify(e_2, null, 2));
+                        return [2, null];
+                    case 10:
                         if (!currentResult)
                             return [2, null];
                         return [4, forecastPromise];
-                    case 4:
+                    case 11:
                         forecastResult = _a.sent();
                         currentResult.forecasts = (!forecastResult) ? [] : forecastResult;
-                        return [4, hourlyPromise];
-                    case 5:
-                        hourlyResult = _a.sent();
-                        currentResult.hourlyForecasts = (!hourlyResult) ? [] : hourlyResult;
+                        currentResult.hourlyForecasts = (!hourlyPayload) ? [] : this.ParseHourlyForecast(hourlyPayload, this);
                         return [2, currentResult];
                 }
             });
@@ -141,7 +160,7 @@ var MetUk = (function () {
     ;
     MetUk.prototype.GetData = function (query, ParseFunction) {
         return __awaiter(this, void 0, void 0, function () {
-            var json, e_1;
+            var json, e_3;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -155,8 +174,8 @@ var MetUk = (function () {
                         json = _a.sent();
                         return [3, 4];
                     case 3:
-                        e_1 = _a.sent();
-                        this.app.HandleHTTPError("met-uk", e_1, this.app, null);
+                        e_3 = _a.sent();
+                        this.app.HandleHTTPError("met-uk", e_3, this.app, null);
                         return [2, null];
                     case 4:
                         if (json == null) {
@@ -170,7 +189,7 @@ var MetUk = (function () {
         });
     };
     ;
-    MetUk.prototype.ParseCurrent = function (json, self) {
+    MetUk.prototype.ParseCurrent = function (json, threeHourly, self) {
         var timestamp = new Date(json.SiteRep.DV.dataDate);
         var observation = self.GetLatestObservation(json.SiteRep.DV.Location.Period, timestamp);
         if (!observation) {
@@ -193,20 +212,65 @@ var MetUk = (function () {
                 sunrise: times.sunrise,
                 sunset: times.sunset,
                 wind: {
-                    speed: MPHtoMPS(parseFloat(observation.S)),
-                    degree: compassToDeg(observation.D)
+                    speed: null,
+                    degree: null
                 },
-                temperature: CelsiusToKelvin(parseFloat(observation.T)),
-                pressure: parseFloat(observation.P),
-                humidity: parseFloat(observation.H),
-                condition: self.ResolveCondition(observation.W),
-                extra_field: {
+                temperature: null,
+                pressure: null,
+                humidity: null,
+                condition: null,
+                forecasts: []
+            };
+            if (get(["V"], observation) != null) {
+                weather.extra_field = {
                     name: _("Visibility"),
                     value: self.VisibilityToText(observation.V),
                     type: "string"
-                },
-                forecasts: []
-            };
+                };
+            }
+            if (get(["S"], observation) != null) {
+                weather.wind.speed = MPHtoMPS(parseFloat(observation.S));
+            }
+            if (get(["D"], observation) != null) {
+                weather.wind.degree = compassToDeg(observation.D);
+            }
+            if (get(["T"], observation) != null) {
+                weather.temperature = CelsiusToKelvin(parseFloat(observation.T));
+            }
+            if (get(["P"], observation) != null) {
+                weather.pressure = parseFloat(observation.P);
+            }
+            if (get(["H"], observation) != null) {
+                weather.humidity = parseFloat(observation.H);
+            }
+            if (get(["W"], observation) != null) {
+                weather.condition = self.ResolveCondition(observation.W);
+            }
+            if (threeHourly == null)
+                return weather;
+            var relevantForecast = this.GetFirstForecast(threeHourly);
+            if (weather.condition == null) {
+                weather.condition = self.ResolveCondition(relevantForecast.W);
+            }
+            if (weather.wind.speed == null && get(["S"], relevantForecast) != null) {
+                weather.wind.speed = MPHtoMPS(parseFloat(relevantForecast.S));
+            }
+            if (weather.wind.degree == null && get(["D"], relevantForecast) != null) {
+                weather.wind.degree = compassToDeg(relevantForecast.D);
+            }
+            if (!weather.extra_field && get(["V"], relevantForecast) != null) {
+                weather.extra_field = {
+                    name: _("Visibility"),
+                    value: self.VisibilityToText(relevantForecast.V),
+                    type: "string"
+                };
+            }
+            if (weather.humidity == null && get(["H"], relevantForecast) != null) {
+                weather.humidity = parseFloat(relevantForecast.H);
+            }
+            if (weather.temperature == null && get(["T"], relevantForecast) != null) {
+                weather.temperature = CelsiusToKelvin(parseFloat(relevantForecast.T));
+            }
             return weather;
         }
         catch (e) {
@@ -216,6 +280,22 @@ var MetUk = (function () {
         }
     };
     ;
+    MetUk.prototype.GetFirstForecast = function (threeHourlyPayload) {
+        for (var i = 0; i < threeHourlyPayload.SiteRep.DV.Location.Period.length; i++) {
+            var day = threeHourlyPayload.SiteRep.DV.Location.Period[i];
+            var date = new Date(this.PartialToISOString(day.value));
+            for (var index = 0; index < day.Rep.length; index++) {
+                var hour = day.Rep[index];
+                var timestamp = new Date(date.getTime());
+                timestamp.setHours(timestamp.getHours() + (parseInt(hour.$) / 60));
+                var threshold = new Date();
+                threshold.setHours(threshold.getHours() - 3);
+                if (timestamp < threshold)
+                    continue;
+                return hour;
+            }
+        }
+    };
     MetUk.prototype.ParseForecast = function (json, self) {
         var forecasts = [];
         try {
@@ -250,7 +330,9 @@ var MetUk = (function () {
                     var hour = day.Rep[index];
                     var timestamp = new Date(date.getTime());
                     timestamp.setHours(timestamp.getHours() + (parseInt(hour.$) / 60));
-                    if (timestamp < new Date())
+                    var threshold = new Date();
+                    threshold.setHours(threshold.getHours() - 3);
+                    if (timestamp < threshold)
                         continue;
                     var forecast = {
                         date: timestamp,
