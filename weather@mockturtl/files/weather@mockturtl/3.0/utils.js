@@ -151,6 +151,8 @@ var AwareDateString = function (date, locale, hours24Format, tz) {
     }
     switch (support) {
         case "full":
+            if (tz == null || tz == "")
+                tz = undefined;
             return date.toLocaleString(locale, { timeZone: tz, hour: "numeric", minute: "numeric", hour12: !hours24Format });
         case "notz":
             return date.toLocaleString(locale, { hour: "numeric", minute: "numeric", hour12: !hours24Format });
@@ -176,6 +178,8 @@ var IsNight = function (sunTimes, date) {
     return true;
 };
 var compassToDeg = function (compass) {
+    if (!compass)
+        return null;
     compass = compass.toUpperCase();
     switch (compass) {
         case "N": return 0;
@@ -319,7 +323,7 @@ var FahrenheitToKelvin = function (fahr) {
     return ((fahr - 32) / 1.8 + 273.15);
 };
 var MPHtoMPS = function (speed) {
-    if (speed == null)
+    if (speed == null || speed == undefined)
         return null;
     return speed * 0.44704;
 };

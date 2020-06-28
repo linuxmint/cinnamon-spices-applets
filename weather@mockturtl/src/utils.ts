@@ -143,6 +143,8 @@ var AwareDateString = (date: Date, locale: string, hours24Format: boolean, tz?: 
 
     switch(support) {
       case "full":
+		  // function only accepts undefined if tz is not known
+		  if (tz == null || tz == "") tz = undefined;
 		  return date.toLocaleString(locale, {timeZone: tz, hour: "numeric", minute: "numeric", hour12: !hours24Format});
       case "notz":
           	return date.toLocaleString(locale, {hour: "numeric", minute: "numeric", hour12: !hours24Format});
@@ -175,6 +177,7 @@ var IsNight = (sunTimes: SunTimes, date?: Date): boolean => {
 }
 
 var compassToDeg = (compass: string): number => {
+	if (!compass) return null;
 	compass = compass.toUpperCase();
 	switch(compass) {
 		case "N": return 0;
@@ -335,7 +338,7 @@ var FahrenheitToKelvin = (fahr: number): number => {
   };
 
 var MPHtoMPS = (speed: number): number => {
-	if (speed == null) return null;
+	if (speed == null || speed == undefined) return null;
     return speed * 0.44704;
   }
 
