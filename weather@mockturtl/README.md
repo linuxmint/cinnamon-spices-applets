@@ -14,19 +14,22 @@ In **Manual Location** mode the applet **only** **accepts Coordinates** in Latit
 
 ## Weather providers to choose from
 
-| Weather Providers  | Needs API key | **Maximum Forecast Days** | **Maximum Forecast Hours** | Required Packages         |
-| ------------------ | ------------- | ------------------------- | -------------------------- | ------------------------- |
-| **OpenWeatherMap** | No            | 7                         | 48                         | --                        |
-| **DarkSky**        | Yes*          | 8                         | 168                        | --                        |
-| **MET Norway**     | No            | 10                        | 48                         | --                        |
-| **WeatherBit**     | Yes           | 16                        | 0**                        | --                        |
-| **Yahoo**          | No            | 10                        | 0                          | --                        |
-| **Climacell**      | Yes           | 16                        | 96                         | python3-requests-oauthlib |
-| **Met Office UK**  | No            | 5                         | 36***                      | --                        |
+| Weather Providers       | Needs API key | **Maximum Forecast Days** | **Maximum Forecast Hours** | Required Packages         |
+| ----------------------- | ------------- | ------------------------- | -------------------------- | ------------------------- |
+| **OpenWeatherMap**      | No            | 7                         | 48                         | --                        |
+| **DarkSky**             | Yes*          | 8                         | 168                        | --                        |
+| **MET Norway**          | No            | 10                        | 48                         | --                        |
+| **WeatherBit**          | Yes           | 16                        | 0**                        | --                        |
+| **Yahoo**               | No            | 10                        | 0                          | python3-requests-oauthlib |
+| **Climacell**           | Yes           | 16                        | 96                         | --                        |
+| **Met Office UK**       | No            | 5                         | 36***                      | --                        |
+| **US National Weather** | No            | 7                         | 156                        | --                        |
 
 ### OpenWeatherMap
 
-OpenWeatherMap does not require API key anymore! Big Thanks to them for supporting this applet!
+OpenWeatherMap does not require an API key. Big Thanks to them for supporting this applet!
+
+This is the default provider.
 
 ### DarkSky
 
@@ -59,6 +62,12 @@ OpenWeatherMap does not require API key anymore! Big Thanks to them for supporti
 * Only covers the UK! It uses the nearest forecast and observation site in a 100km, it displays an error if it does not find one.
 
 * ***Hourly Weather is 3-hourly weather
+
+### US National Weather
+
+* Only cover the area of US!
+
+* Observations are quite spotty so it combines multiple observations stations if needed in a 50km area, when needed. 
 
 ## Requirements
 
