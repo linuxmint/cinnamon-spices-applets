@@ -81,17 +81,16 @@ var MetUk = (function () {
         this.app = _app;
         this.sunCalc = new SunCalc();
     }
-    MetUk.prototype.GetWeather = function () {
+    MetUk.prototype.GetWeather = function (newLoc) {
         return __awaiter(this, void 0, void 0, function () {
-            var loc, forecastSitelist, currentSitelist, e_1, index, element, forecastPromise, hourlyPayload, observations, index, element, _a, _b, _c, currentResult, forecastResult, threeHourlyForecast;
+            var forecastSitelist, currentSitelist, e_1, index, element, forecastPromise, hourlyPayload, observations, index, element, _a, _b, _c, currentResult, forecastResult, threeHourlyForecast;
             return __generator(this, function (_d) {
                 switch (_d.label) {
                     case 0:
-                        loc = this.app.config.GetLocation(true);
-                        if (loc == null)
+                        if (newLoc == null)
                             return [2, null];
-                        if (!(this.currentLoc != loc || this.forecastSite == null || this.observationSites == null || this.observationSites.length == 0)) return [3, 6];
-                        this.currentLoc = loc;
+                        if (!(this.currentLoc != newLoc || this.forecastSite == null || this.observationSites == null || this.observationSites.length == 0)) return [3, 6];
+                        this.currentLoc = newLoc;
                         forecastSitelist = null;
                         currentSitelist = null;
                         _d.label = 1;
@@ -114,7 +113,7 @@ var MetUk = (function () {
                         this.observationSites = [];
                         for (index = 0; index < currentSitelist.Locations.Location.length; index++) {
                             element = currentSitelist.Locations.Location[index];
-                            element.dist = GetDistance(parseFloat(element.latitude), parseFloat(element.longitude), loc.lat, loc.lon);
+                            element.dist = GetDistance(parseFloat(element.latitude), parseFloat(element.longitude), newLoc.lat, newLoc.lon);
                             if (element.dist > this.MAX_STATION_DIST)
                                 continue;
                             this.observationSites.push(element);
@@ -123,7 +122,7 @@ var MetUk = (function () {
                         this.app.log.Debug("Observation sites found: " + JSON.stringify(this.observationSites, null, 2));
                         _d.label = 6;
                     case 6:
-                        if (this.observationSites.length == 0 || this.forecastSite.dist > 100000) {
+                        if (this.observationSites == null || this.observationSites.length == 0 || this.forecastSite.dist > 100000) {
                             this.app.log.Error("User is probably not in UK, aborting");
                             this.app.HandleError({
                                 type: "hard",
@@ -345,6 +344,8 @@ var MetUk = (function () {
         return _("Excellent - More than") + " " + MetretoUserUnits(40000, unit) + " " + unit;
     };
     MetUk.prototype.SortObservationSites = function (observations) {
+        if (observations == null)
+            return null;
         if (observations.length == 0)
             return null;
         observations = observations.sort(function (a, b) {

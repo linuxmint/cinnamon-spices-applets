@@ -490,16 +490,17 @@ class WeatherApplet extends TextIconApplet {
 
 		let locationData: LocationData = null;
 		try {
-			locationData = await this.ValidateLocation();
+			locationData = await this.EnsureLocation();
 		}
 		catch(e) {
 			this.log.Error(e);
 			return "error";
 		}
+		if (locationData == null) return "error";
 
 		try {
 			this.EnsureProvider(rebuild);
-			let weatherInfo = await this.provider.GetWeather();
+			let weatherInfo = await this.provider.GetWeather({lat: locationData.lat, lon: locationData.lon, text: this.config._location});
 			if (!weatherInfo) {
 				this.log.Error("Unable to obtain Weather Information");
 				return "failure";
@@ -531,36 +532,64 @@ class WeatherApplet extends TextIconApplet {
 	 * null if manual location is on and throws and error
 	 * if there is an issue with any of them
 	 */
-	private async ValidateLocation(): Promise<LocationData> {
+	private async EnsureLocation(): Promise<LocationData> {
 		// Autmatic location
 		let location: LocationData = null;
 		if (!this.config._manualLocation) { 
-		location = await this.locProvider.GetLocation();
-		// TODO: show user facing error on not network-related errors
-		if (!location) throw new Error(null);
+			location = await this.locProvider.GetLocation();
+			// TODO: show user facing error on not network-related errors
+			if (!location) throw new Error(null);
 
-		let loc = location.lat + "," + location.lon;
-		this.config.SetLocation(loc);
-		return location;
+			let loc = location.lat + "," + location.lon;
+			this.config.SetLocation(loc);
+			return location;
+		}
 
 		// Manual Location
-		} else { 
-		//TODO: Add Geolocation to get coordinates if possible and caching
-		// example: https://nominatim.openstreetmap.org/search/{search query}?format=json
-		// URLencode search string!!!
-		/// encodeURI(uri);
+		
 		// Verifying User Input
-		let loc = this.config._location.replace(" ", "");
+		let loc = this.config._location.trim();
 		if (loc == undefined || loc == "") {
 			this.HandleError({
 				type: "hard",
 				detail: "no location",
 				userError: true,
-				message: _("Make sure you entered a location or use Automatic location instead")});
-				throw new Error("No location given when setting is on Manual Location");
+				message: _("Make sure you entered a location or use Automatic location instead")
+			});
+			throw new Error("No location given when setting is on Manual Location");
+			return null;
+		}
+		if (isCoordinate(loc)) {
+			// Get Location
+			let coords = this.config.GetLocation(true);
+			if (coords == null) return null;
+			return {
+				lat: coords.lat,
+				lon: coords.lon,
+				city: null,
+				country: null,
+				mobile: null,
+				timeZone: null
 			}
 		}
-		return null;
+
+		// Attempt to search for text
+		this.log.Debug("Location is text")
+		// TODO: Factor out geolocation
+		let locationData = await this.LoadJsonAsync("https://nominatim.openstreetmap.org/search/" + encodeURIComponent(loc) + "?format=json&addressdetails=1");
+		if (locationData.length == 0) {
+			//TODO: Add user facing error
+			return null;
+		} 
+		this.log.Debug("Location is found, payload: " + JSON.stringify(locationData, null, 2));
+		return {
+			lat: parseFloat(locationData[0].lat),
+			lon: parseFloat(locationData[0].lon),
+			city: locationData[0].address.city || locationData[0].address.town,
+			country: locationData[0].address.country,
+			timeZone: null,
+			mobile: null
+		}
 	}
 
 	/** Injects Data into Weather object to display later */
@@ -1657,8 +1686,7 @@ class Config {
 	public readonly _tempTextOverride: string;
 	public readonly _tempRussianStyle: boolean;
 
-	//TODO: Add Option to units to based on userLocale
-	//TODO: Add logic to determine distance, speed, temperature units based on userlocale
+	//TODO: Add Option to units (default) what is based on userLocale?
 
 	public keybinding: any;
 
@@ -1682,7 +1710,7 @@ class Config {
 
 		// Settings what need special care
 		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
-		this.WEATHER_LOCATION, ("_" + this.WEATHER_LOCATION), Lang.bind(this.app, this.app.refreshAndRebuild), null);
+		this.WEATHER_LOCATION, ("_" + this.WEATHER_LOCATION), Lang.bind(this, this.OnLocationChanged), null);
 
 		this.settings.bindProperty(BindingDirection.IN, "keybinding",
 		"keybinding", Lang.bind(this.app, this.app._onKeySettingsUpdated), null);
@@ -1707,6 +1735,10 @@ class Config {
 		IconType.SYMBOLIC :
 		IconType.FULLCOLOR
 	};
+
+	private OnLocationChanged() {
+		this.app.refreshAndRebuild();
+	}
 
 	public SetLocation(value: string) {
 		this.settings.setValue(this.WEATHER_LOCATION, value);
@@ -2141,7 +2173,7 @@ type SettingKeys = {
  * A WeatherProvider must implement this interface.
  */
 interface WeatherProvider {
-	GetWeather(): Promise<WeatherData>;
+	GetWeather(loc: Location): Promise<WeatherData>;
 	/** Used as to extend the same named function in the Applet Class.
 	 * 
 	 * "this" (context) is not accessible here

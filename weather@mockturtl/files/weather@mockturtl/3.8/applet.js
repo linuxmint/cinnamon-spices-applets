@@ -369,15 +369,17 @@ class WeatherApplet extends TextIconApplet {
         this.encounteredError = false;
         let locationData = null;
         try {
-            locationData = await this.ValidateLocation();
+            locationData = await this.EnsureLocation();
         }
         catch (e) {
             this.log.Error(e);
             return "error";
         }
+        if (locationData == null)
+            return "error";
         try {
             this.EnsureProvider(rebuild);
-            let weatherInfo = await this.provider.GetWeather();
+            let weatherInfo = await this.provider.GetWeather({ lat: locationData.lat, lon: locationData.lon, text: this.config._location });
             if (!weatherInfo) {
                 this.log.Error("Unable to obtain Weather Information");
                 return "failure";
@@ -402,7 +404,7 @@ class WeatherApplet extends TextIconApplet {
         }
     }
     ;
-    async ValidateLocation() {
+    async EnsureLocation() {
         let location = null;
         if (!this.config._manualLocation) {
             location = await this.locProvider.GetLocation();
@@ -412,19 +414,44 @@ class WeatherApplet extends TextIconApplet {
             this.config.SetLocation(loc);
             return location;
         }
-        else {
-            let loc = this.config._location.replace(" ", "");
-            if (loc == undefined || loc == "") {
-                this.HandleError({
-                    type: "hard",
-                    detail: "no location",
-                    userError: true,
-                    message: _("Make sure you entered a location or use Automatic location instead")
-                });
-                throw new Error("No location given when setting is on Manual Location");
-            }
+        let loc = this.config._location.trim();
+        if (loc == undefined || loc == "") {
+            this.HandleError({
+                type: "hard",
+                detail: "no location",
+                userError: true,
+                message: _("Make sure you entered a location or use Automatic location instead")
+            });
+            throw new Error("No location given when setting is on Manual Location");
+            return null;
         }
-        return null;
+        if (isCoordinate(loc)) {
+            let coords = this.config.GetLocation(true);
+            if (coords == null)
+                return null;
+            return {
+                lat: coords.lat,
+                lon: coords.lon,
+                city: null,
+                country: null,
+                mobile: null,
+                timeZone: null
+            };
+        }
+        this.log.Debug("Location is text");
+        let locationData = await this.LoadJsonAsync("https://nominatim.openstreetmap.org/search/" + encodeURIComponent(loc) + "?format=json&addressdetails=1");
+        if (locationData.length == 0) {
+            return null;
+        }
+        this.log.Debug("Location is found, payload: " + JSON.stringify(locationData, null, 2));
+        return {
+            lat: parseFloat(locationData[0].lat),
+            lon: parseFloat(locationData[0].lon),
+            city: locationData[0].address.city || locationData[0].address.town,
+            country: locationData[0].address.country,
+            timeZone: null,
+            mobile: null
+        };
     }
     ProcessWeatherData(weatherInfo, locationData) {
         if (!!locationData) {
@@ -1254,7 +1281,7 @@ class Config {
             let keyProp = "_" + key;
             this.settings.bindProperty(BindingDirection.IN, key, keyProp, Lang.bind(this.app, this.app.refreshAndRebuild), null);
         }
-        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, this.WEATHER_LOCATION, ("_" + this.WEATHER_LOCATION), Lang.bind(this.app, this.app.refreshAndRebuild), null);
+        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, this.WEATHER_LOCATION, ("_" + this.WEATHER_LOCATION), Lang.bind(this, this.OnLocationChanged), null);
         this.settings.bindProperty(BindingDirection.IN, "keybinding", "keybinding", Lang.bind(this.app, this.app._onKeySettingsUpdated), null);
         keybindingManager.addHotKey(UUID, this.keybinding, Lang.bind(this.app, this.app.on_applet_clicked));
         this.settings.connect(SIGNAL_CHANGED + this.WEATHER_USE_SYMBOLIC_ICONS_KEY, Lang.bind(this, this.IconTypeChanged));
@@ -1270,6 +1297,9 @@ class Config {
             IconType.FULLCOLOR;
     }
     ;
+    OnLocationChanged() {
+        this.app.refreshAndRebuild();
+    }
     SetLocation(value) {
         this.settings.setValue(this.WEATHER_LOCATION, value);
     }

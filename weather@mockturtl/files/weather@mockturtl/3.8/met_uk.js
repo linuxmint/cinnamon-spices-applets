@@ -45,12 +45,11 @@ class MetUk {
         this.app = _app;
         this.sunCalc = new SunCalc();
     }
-    async GetWeather() {
-        let loc = this.app.config.GetLocation(true);
-        if (loc == null)
+    async GetWeather(newLoc) {
+        if (newLoc == null)
             return null;
-        if (this.currentLoc != loc || this.forecastSite == null || this.observationSites == null || this.observationSites.length == 0) {
-            this.currentLoc = loc;
+        if (this.currentLoc != newLoc || this.forecastSite == null || this.observationSites == null || this.observationSites.length == 0) {
+            this.currentLoc = newLoc;
             let forecastSitelist = null;
             let currentSitelist = null;
             try {
@@ -66,7 +65,7 @@ class MetUk {
             this.observationSites = [];
             for (let index = 0; index < currentSitelist.Locations.Location.length; index++) {
                 const element = currentSitelist.Locations.Location[index];
-                element.dist = GetDistance(parseFloat(element.latitude), parseFloat(element.longitude), loc.lat, loc.lon);
+                element.dist = GetDistance(parseFloat(element.latitude), parseFloat(element.longitude), newLoc.lat, newLoc.lon);
                 if (element.dist > this.MAX_STATION_DIST)
                     continue;
                 this.observationSites.push(element);
@@ -74,7 +73,7 @@ class MetUk {
             this.observationSites = this.SortObservationSites(this.observationSites);
             this.app.log.Debug("Observation sites found: " + JSON.stringify(this.observationSites, null, 2));
         }
-        if (this.observationSites.length == 0 || this.forecastSite.dist > 100000) {
+        if (this.observationSites == null || this.observationSites.length == 0 || this.forecastSite.dist > 100000) {
             this.app.log.Error("User is probably not in UK, aborting");
             this.app.HandleError({
                 type: "hard",
@@ -268,6 +267,8 @@ class MetUk {
         return _("Excellent - More than") + " " + MetretoUserUnits(40000, unit) + " " + unit;
     }
     SortObservationSites(observations) {
+        if (observations == null)
+            return null;
         if (observations.length == 0)
             return null;
         observations = observations.sort((a, b) => {

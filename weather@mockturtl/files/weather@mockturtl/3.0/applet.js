@@ -463,7 +463,7 @@ var WeatherApplet = (function (_super) {
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
-                        return [4, this.ValidateLocation()];
+                        return [4, this.EnsureLocation()];
                     case 2:
                         locationData = _a.sent();
                         return [3, 4];
@@ -472,10 +472,14 @@ var WeatherApplet = (function (_super) {
                         this.log.Error(e_1);
                         return [2, "error"];
                     case 4:
-                        _a.trys.push([4, 6, , 7]);
-                        this.EnsureProvider(rebuild);
-                        return [4, this.provider.GetWeather()];
+                        if (locationData == null)
+                            return [2, "error"];
+                        _a.label = 5;
                     case 5:
+                        _a.trys.push([5, 7, , 8]);
+                        this.EnsureProvider(rebuild);
+                        return [4, this.provider.GetWeather({ lat: locationData.lat, lon: locationData.lon, text: this.config._location })];
+                    case 6:
                         weatherInfo = _a.sent();
                         if (!weatherInfo) {
                             this.log.Error("Unable to obtain Weather Information");
@@ -493,20 +497,20 @@ var WeatherApplet = (function (_super) {
                         this.log.Print("Weather Information refreshed");
                         this.loop.ResetErrorCount();
                         return [2, "success"];
-                    case 6:
+                    case 7:
                         e_2 = _a.sent();
                         this.log.Error("Generic Error while refreshing Weather info: " + e_2);
                         this.HandleError({ type: "hard", detail: "unknown", message: _("Unexpected Error While Refreshing Weather, please see log in Looking Glass") });
                         return [2, "failure"];
-                    case 7: return [2];
+                    case 8: return [2];
                 }
             });
         });
     };
     ;
-    WeatherApplet.prototype.ValidateLocation = function () {
+    WeatherApplet.prototype.EnsureLocation = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var location, loc, loc;
+            var location, loc_1, loc, coords, locationData;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -517,11 +521,11 @@ var WeatherApplet = (function (_super) {
                         location = _a.sent();
                         if (!location)
                             throw new Error(null);
-                        loc = location.lat + "," + location.lon;
-                        this.config.SetLocation(loc);
+                        loc_1 = location.lat + "," + location.lon;
+                        this.config.SetLocation(loc_1);
                         return [2, location];
                     case 2:
-                        loc = this.config._location.replace(" ", "");
+                        loc = this.config._location.trim();
                         if (loc == undefined || loc == "") {
                             this.HandleError({
                                 type: "hard",
@@ -530,9 +534,37 @@ var WeatherApplet = (function (_super) {
                                 message: _("Make sure you entered a location or use Automatic location instead")
                             });
                             throw new Error("No location given when setting is on Manual Location");
+                            return [2, null];
                         }
-                        _a.label = 3;
-                    case 3: return [2, null];
+                        if (isCoordinate(loc)) {
+                            coords = this.config.GetLocation(true);
+                            if (coords == null)
+                                return [2, null];
+                            return [2, {
+                                    lat: coords.lat,
+                                    lon: coords.lon,
+                                    city: null,
+                                    country: null,
+                                    mobile: null,
+                                    timeZone: null
+                                }];
+                        }
+                        this.log.Debug("Location is text");
+                        return [4, this.LoadJsonAsync("https://nominatim.openstreetmap.org/search/" + encodeURIComponent(loc) + "?format=json&addressdetails=1")];
+                    case 3:
+                        locationData = _a.sent();
+                        if (locationData.length == 0) {
+                            return [2, null];
+                        }
+                        this.log.Debug("Location is found, payload: " + JSON.stringify(locationData, null, 2));
+                        return [2, {
+                                lat: parseFloat(locationData[0].lat),
+                                lon: parseFloat(locationData[0].lon),
+                                city: locationData[0].address.city || locationData[0].address.town,
+                                country: locationData[0].address.country,
+                                timeZone: null,
+                                mobile: null
+                            }];
                 }
             });
         });
@@ -1382,7 +1414,7 @@ var Config = (function () {
             var keyProp = "_" + key;
             this.settings.bindProperty(BindingDirection.IN, key, keyProp, Lang.bind(this.app, this.app.refreshAndRebuild), null);
         }
-        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, this.WEATHER_LOCATION, ("_" + this.WEATHER_LOCATION), Lang.bind(this.app, this.app.refreshAndRebuild), null);
+        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, this.WEATHER_LOCATION, ("_" + this.WEATHER_LOCATION), Lang.bind(this, this.OnLocationChanged), null);
         this.settings.bindProperty(BindingDirection.IN, "keybinding", "keybinding", Lang.bind(this.app, this.app._onKeySettingsUpdated), null);
         keybindingManager.addHotKey(UUID, this.keybinding, Lang.bind(this.app, this.app.on_applet_clicked));
         this.settings.connect(SIGNAL_CHANGED + this.WEATHER_USE_SYMBOLIC_ICONS_KEY, Lang.bind(this, this.IconTypeChanged));
@@ -1398,6 +1430,9 @@ var Config = (function () {
             IconType.FULLCOLOR;
     };
     ;
+    Config.prototype.OnLocationChanged = function () {
+        this.app.refreshAndRebuild();
+    };
     Config.prototype.SetLocation = function (value) {
         this.settings.setValue(this.WEATHER_LOCATION, value);
     };

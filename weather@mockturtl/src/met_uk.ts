@@ -73,13 +73,12 @@ class MetUk implements WeatherProvider {
     //--------------------------------------------------------
     //  Functions
     //--------------------------------------------------------
-    public async GetWeather(): Promise<WeatherData> {
-		let loc = this.app.config.GetLocation(true);
-		if (loc == null) return null;
+    public async GetWeather(newLoc: Location): Promise<WeatherData> {
+		if (newLoc == null) return null;
 		
 		// Get closest sites
-		if (this.currentLoc != loc || this.forecastSite == null || this.observationSites == null || this.observationSites.length == 0) {
-			this.currentLoc = loc;
+		if (this.currentLoc != newLoc || this.forecastSite == null || this.observationSites == null || this.observationSites.length == 0) {
+			this.currentLoc = newLoc;
 			let forecastSitelist = null;
 			let currentSitelist = null;
 			try {
@@ -96,7 +95,7 @@ class MetUk implements WeatherProvider {
 			this.observationSites = [];
 			for (let index = 0; index < currentSitelist.Locations.Location.length; index++) {
 				const element = currentSitelist.Locations.Location[index];
-				element.dist = GetDistance(parseFloat(element.latitude), parseFloat(element.longitude), loc.lat, loc.lon);
+				element.dist = GetDistance(parseFloat(element.latitude), parseFloat(element.longitude), newLoc.lat, newLoc.lon);
 				if (element.dist > this.MAX_STATION_DIST) continue; // do not include stations outside area
 				this.observationSites.push(element);
 			}
@@ -108,7 +107,7 @@ class MetUk implements WeatherProvider {
 		}
 
 		// Validation
-		if (this.observationSites.length == 0 || this.forecastSite.dist > 100000) {
+		if (this.observationSites == null || this.observationSites.length == 0 || this.forecastSite.dist > 100000) {
 			// TODO: Validate that this does not happen with uk locations
 			this.app.log.Error("User is probably not in UK, aborting");
 			this.app.HandleError({
@@ -309,7 +308,6 @@ class MetUk implements WeatherProvider {
 	private VisibilityToText(dist: string): string {
 		let distance = parseInt(dist);
 		let unit = this.app.config._distanceUnit;
-		//TODO: Add conversion to mph if needed 
 		if (distance < 1000) return _("Very poor - Less than") + " " + MetretoUserUnits(1000, unit) + unit;
 		if (distance < 4000) return _("Poor - Between") + " " + MetretoUserUnits(1000, unit) + "-" +  MetretoUserUnits(4000, unit) + " " + unit;
 		if (distance < 10000) return _("Moderate - Between") + " " + MetretoUserUnits(4000, unit) + "-" +  MetretoUserUnits(10000, unit) + " " + unit;
@@ -319,6 +317,7 @@ class MetUk implements WeatherProvider {
 	}
 
 	private SortObservationSites(observations: WeatherSite[]): WeatherSite[] {
+		if (observations == null) return null;
 		if (observations.length == 0) return null;
 		observations = observations.sort((a, b) => {
 			if (a.dist < b.dist) return -1;
