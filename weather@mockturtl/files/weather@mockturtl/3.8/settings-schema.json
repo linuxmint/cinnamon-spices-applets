@@ -67,7 +67,8 @@
 			"keys":[
 				"temperatureUnit",
 				"windSpeedUnit",
-				"pressureUnit"
+				"pressureUnit",
+				"distanceUnit"
 			]
 		},
 		"keybindings" : {
@@ -236,6 +237,15 @@
 			"at": "at",
 			"atm": "atm",
 			"Pa": "Pa"
+		}
+	},
+	"distanceUnit": {
+		"type": "combobox",
+		"default": "km",
+		"description": "Distance unit",
+		"options": {
+			"Kilometres": "km",
+			"Miles": "m"
 		}
 	},
 	"showTextInPanel": {

@@ -1598,15 +1598,16 @@ class Config {
 	WEATHER_LOCATION = "location"
 	WEATHER_USE_SYMBOLIC_ICONS_KEY = 'useSymbolicIcons'
 
-/**
- * Keys matching the ones in settings-schema.json
- */
+	/**
+	 * Keys matching the ones in settings-schema.json
+	 */
 	KEYS: SettingKeys  =  {
 		DATA_SERVICE : "dataService",
 		API_KEY:  "apiKey",
 		TEMPERATURE_UNIT_KEY: "temperatureUnit",
 		TEMPERATURE_HIGH_FIRST:  "temperatureHighFirst",
 		WIND_SPEED_UNIT: "windSpeedUnit",
+		DISTANCE_UNIT: "distanceUnit",
 		CITY:  "locationLabelOverride",
 		TRANSLATE_CONDITION:  "translateCondition",
 		VERTICAL_ORIENTATION:  "verticalOrientation",
@@ -1637,6 +1638,7 @@ class Config {
 	public readonly _temperatureUnit: WeatherUnits;
 	public readonly _pressureUnit: WeatherPressureUnits;
 	public readonly _windSpeedUnit: WeatherWindSpeedUnits;
+	public readonly _distanceUnit: DistanceUnits;
 	public readonly _show24Hours: boolean;
 	public readonly _apiKey: string;
 	public readonly _forecastDays: number;
@@ -1654,7 +1656,6 @@ class Config {
 	public readonly _useCustomMenuIcons: boolean;
 	public readonly _tempTextOverride: string;
 	public readonly _tempRussianStyle: boolean;
-	// TODO: do distance unit
 
 	//TODO: Add Option to units to based on userLocale
 	//TODO: Add logic to determine distance, speed, temperature units based on userlocale
@@ -1969,7 +1970,8 @@ type WeatherWindSpeedUnits = 'kph' | 'mph' | 'm/s' | 'Knots' | 'Beaufort';
 /** Units used in Options. Change Options list if You change this! */
 type WeatherPressureUnits = 'hPa'|'mm Hg'|'in Hg'|'Pa'|'psi'|'atm'|'at';
 
-
+/** Change settings-schem if you change this! */
+type DistanceUnits = 'km' | 'm';
 
 interface Weather {
 	date: Date,

@@ -1223,6 +1223,7 @@ class Config {
             TEMPERATURE_UNIT_KEY: "temperatureUnit",
             TEMPERATURE_HIGH_FIRST: "temperatureHighFirst",
             WIND_SPEED_UNIT: "windSpeedUnit",
+            DISTANCE_UNIT: "distanceUnit",
             CITY: "locationLabelOverride",
             TRANSLATE_CONDITION: "translateCondition",
             VERTICAL_ORIENTATION: "verticalOrientation",

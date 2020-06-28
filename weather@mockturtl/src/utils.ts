@@ -362,6 +362,16 @@ var PressToUserUnits = (hpa: number, units: WeatherPressureUnits): number => {
     }
   };
 
+var KmToM = (km: number): number => {
+	if (km == null) return null;
+	return km * 0.6213712;
+}
+
+var MetretoUserUnits = (m: number, distanceUnit: DistanceUnits): number => {
+	if (distanceUnit == "km") return Math.round(m / 1000 * 10) / 10;
+	return Math.round(KmToM(m / 1000)*10) / 10;
+}
+
 var isNumeric = (n: any): boolean => {
     return !isNaN(parseFloat(n)) && isFinite(n);
   }

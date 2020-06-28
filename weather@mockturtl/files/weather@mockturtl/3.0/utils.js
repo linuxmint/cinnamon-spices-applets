@@ -345,6 +345,16 @@ var PressToUserUnits = function (hpa, units) {
             return Math.round((hpa * 0.01450377) * 100) / 100;
     }
 };
+var KmToM = function (km) {
+    if (km == null)
+        return null;
+    return km * 0.6213712;
+};
+var MetretoUserUnits = function (m, distanceUnit) {
+    if (distanceUnit == "km")
+        return Math.round(m / 1000 * 10) / 10;
+    return Math.round(KmToM(m / 1000) * 10) / 10;
+};
 var isNumeric = function (n) {
     return !isNaN(parseFloat(n)) && isFinite(n);
 };

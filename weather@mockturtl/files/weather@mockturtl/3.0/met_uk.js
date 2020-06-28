@@ -59,6 +59,7 @@ var MPHtoMPS = utils.MPHtoMPS;
 var compassToDeg = utils.compassToDeg;
 var GetDistance = utils.GetDistance;
 var get = utils.get;
+var MetretoUserUnits = utils.MetretoUserUnits;
 var MetUk = (function () {
     function MetUk(_app) {
         this.prettyName = "Met Office UK";
@@ -330,17 +331,18 @@ var MetUk = (function () {
     };
     MetUk.prototype.VisibilityToText = function (dist) {
         var distance = parseInt(dist);
+        var unit = this.app.config._distanceUnit;
         if (distance < 1000)
-            return _("Very poor - Less than 1 km");
+            return _("Very poor - Less than") + " " + MetretoUserUnits(1000, unit) + unit;
         if (distance < 4000)
-            return _("Poor - Between 1-4 km");
+            return _("Poor - Between") + " " + MetretoUserUnits(1000, unit) + "-" + MetretoUserUnits(4000, unit) + " " + unit;
         if (distance < 10000)
-            return _("Moderate - Between 4-10 km");
+            return _("Moderate - Between") + " " + MetretoUserUnits(4000, unit) + "-" + MetretoUserUnits(10000, unit) + " " + unit;
         if (distance < 20000)
-            return _("Good - Between 10-20 km");
+            return _("Good - Between") + " " + MetretoUserUnits(10000, unit) + "-" + MetretoUserUnits(20000, unit) + " " + unit;
         if (distance < 40000)
-            return _("Very good - Between 20-40 km");
-        return _("Excellent - More than 40 km");
+            return _("Very good - Between") + " " + MetretoUserUnits(20000, unit) + "-" + MetretoUserUnits(40000, unit) + " " + unit;
+        return _("Excellent - More than") + " " + MetretoUserUnits(40000, unit) + " " + unit;
     };
     MetUk.prototype.SortObservationSites = function (observations) {
         if (observations.length == 0)

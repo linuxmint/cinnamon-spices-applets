@@ -25,6 +25,7 @@ var MPHtoMPS = utils.MPHtoMPS as (speed: number) => number;
 var compassToDeg = utils.compassToDeg as (compass: string) => number;
 var GetDistance = utils.GetDistance as (lat1: number, lon1: number, lat2: number, lon2: number) => number;
 const get = utils.get as (p: string[], o: any) => any;
+var MetretoUserUnits = utils.MetretoUserUnits as (m: number, distanceUnit: DistanceUnits) => number;
 
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
@@ -307,13 +308,14 @@ class MetUk implements WeatherProvider {
 	/** https://www.metoffice.gov.uk/services/data/datapoint/code-definitions */
 	private VisibilityToText(dist: string): string {
 		let distance = parseInt(dist);
+		let unit = this.app.config._distanceUnit;
 		//TODO: Add conversion to mph if needed 
-		if (distance < 1000) return _("Very poor - Less than 1 km");
-		if (distance < 4000) return _("Poor - Between 1-4 km");
-		if (distance < 10000) return _("Moderate - Between 4-10 km");
-		if (distance < 20000) return _("Good - Between 10-20 km");
-		if (distance < 40000) return _("Very good - Between 20-40 km");
-		return _("Excellent - More than 40 km");
+		if (distance < 1000) return _("Very poor - Less than") + " " + MetretoUserUnits(1000, unit) + unit;
+		if (distance < 4000) return _("Poor - Between") + " " + MetretoUserUnits(1000, unit) + "-" +  MetretoUserUnits(4000, unit) + " " + unit;
+		if (distance < 10000) return _("Moderate - Between") + " " + MetretoUserUnits(4000, unit) + "-" +  MetretoUserUnits(10000, unit) + " " + unit;
+		if (distance < 20000) return _("Good - Between") + " " + MetretoUserUnits(10000, unit) + "-" +  MetretoUserUnits(20000, unit) + " " + unit;
+		if (distance < 40000) return _("Very good - Between") + " " + MetretoUserUnits(20000, unit) + "-" +  MetretoUserUnits(40000, unit) + " " + unit;
+		return _("Excellent - More than") + " " + MetretoUserUnits(40000, unit) + " " + unit;
 	}
 
 	private SortObservationSites(observations: WeatherSite[]): WeatherSite[] {
