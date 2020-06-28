@@ -290,10 +290,11 @@ class MetUk {
             return result;
         for (let index = 1; index < observations.length; index++) {
             let nextObservation = this.GetLatestObservation(observations[index].SiteRep.DV.Location.Period, new Date());
-            let debugText = " Observation data missing, plugged in from " +
+            let debugText = " Observation data missing, plugged in from ID " +
                 observations[index].SiteRep.DV.Location.i + ", index " + index +
                 ", distance "
-                + GetDistance(parseFloat(observations[index].SiteRep.DV.Location.lat), parseFloat(observations[index].SiteRep.DV.Location.lon), this.currentLoc.lat, this.currentLoc.lon) + " metres";
+                + Math.round(GetDistance(parseFloat(observations[index].SiteRep.DV.Location.lat), parseFloat(observations[index].SiteRep.DV.Location.lon), this.currentLoc.lat, this.currentLoc.lon))
+                + " metres";
             if (get(["V"], result) == null) {
                 result.V = get(["V"], nextObservation);
                 this.app.log.Debug("Visibility" + debugText);

@@ -934,7 +934,7 @@ class UI {
 	public ShowHourlyWeather(): void {
 		// In some cases the preferred height is not calculated
 		// properly for the first time, so we work around by opening and closing it once
-		if (this.hourlyNeverOpened) { // TODO: do this after theme change as well
+		if (this.hourlyNeverOpened) { // TODO: do this after theme change as well https://github.com/linuxmint/cinnamon-spices-applets/issues/3102#issuecomment-650624802
 			this.hourlyNeverOpened = false;
 			this._hourlyScrollView.show();
 			this._hourlyScrollView.hide();

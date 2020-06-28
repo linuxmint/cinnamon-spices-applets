@@ -16,7 +16,6 @@ function _(str: string): string {
 }
 
 var utils = importModule("utils");
-var isCoordinate = utils.isCoordinate as (text: any) => boolean;
 var weatherIconSafely = utils.weatherIconSafely as (code: BuiltinIcons[], icon_type: imports.gi.St.IconType) => BuiltinIcons;
 var SunCalc = importModule("sunCalc").SunCalc;
 var IsNight = utils.IsNight as (sunTimes: SunTimes, date?: Date) => boolean;
@@ -149,6 +148,7 @@ class USWeather implements WeatherProvider {
 		if (observations.length == 1) return result;
 		for (let index = 1; index < observations.length; index++) {
 			const element = observations[index];
+			// TODO: Add debug log when meshing happens like in MET UK
 			if (result.properties.icon == null) {
 				result.properties.icon = element.properties.icon;
 				result.properties.textDescription = element.properties.textDescription;
@@ -323,7 +323,7 @@ class USWeather implements WeatherProvider {
 					customIcon: "cloudy-symbolic",
 					icon: weatherIconSafely(["weather-clouds", "weather-overcast", "weather-severe-alert"], iconType)
 				}
-				// TODO: WEATHER
+				// TODO: WEATHER CONDITIONS ARE DONE UP TO THIS POINT
 			case "wind_skc": // Fair/clear and windy
 				return {
 					main: _("Unknown"),

@@ -50,7 +50,6 @@ function _(str) {
     return imports.gettext.dgettext(UUID, str);
 }
 var utils = importModule("utils");
-var isCoordinate = utils.isCoordinate;
 var weatherIconSafely = utils.weatherIconSafely;
 var SunCalc = importModule("sunCalc").SunCalc;
 var IsNight = utils.IsNight;
