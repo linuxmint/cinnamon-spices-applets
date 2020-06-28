@@ -37,31 +37,43 @@ class MetUk {
         this.currentPrefix = "wxobs/all/json/";
         this.sitesUrl = "sitelist";
         this.key = "key=05de1ee8-de70-46aa-9b41-299d4cc60219";
-        this.hourlyAccess = true;
         this.forecastSite = null;
-        this.observationSite = null;
+        this.observationSites = null;
+        this.currentLoc = null;
+        this.MAX_STATION_DIST = 50000;
         this.app = _app;
         this.sunCalc = new SunCalc();
     }
     async GetWeather() {
-        if (!isCoordinate(this.app.config._location)) {
-            this.app.HandleError({
-                detail: "bad location format",
-                type: "hard",
-                userError: true,
-                service: "met-uk",
-                message: "Please make sure location is in the correct format"
-            });
-            this.app.log.Error("MET UK - Location is not coordinate, aborting");
+        let loc = this.app.config.GetLocation(true);
+        if (loc == null)
             return null;
+        if (this.currentLoc != loc || this.forecastSite == null || this.observationSites == null || this.observationSites.length == 0) {
+            this.currentLoc = loc;
+            let forecastSitelist = null;
+            let currentSitelist = null;
+            try {
+                forecastSitelist = await this.app.LoadJsonAsync(this.baseUrl + this.forecastPrefix + this.sitesUrl + "?" + this.key);
+                currentSitelist = await this.app.LoadJsonAsync(this.baseUrl + this.currentPrefix + this.sitesUrl + "?" + this.key);
+            }
+            catch (e) {
+                this.app.log.Error("Failed to get sitelist, error: " + JSON.stringify(e, null, 2));
+                return null;
+            }
+            this.forecastSite = this.GetClosestSite(forecastSitelist, this.app.config._location);
+            this.app.log.Debug("Forecast site found: " + JSON.stringify(this.forecastSite, null, 2));
+            this.observationSites = [];
+            for (let index = 0; index < currentSitelist.Locations.Location.length; index++) {
+                const element = currentSitelist.Locations.Location[index];
+                element.dist = GetDistance(parseFloat(element.latitude), parseFloat(element.longitude), loc.lat, loc.lon);
+                if (element.dist > this.MAX_STATION_DIST)
+                    continue;
+                this.observationSites.push(element);
+            }
+            this.observationSites = this.SortObservationSites(this.observationSites);
+            this.app.log.Debug("Observation sites found: " + JSON.stringify(this.observationSites, null, 2));
         }
-        let forecastSitelist = await this.app.LoadJsonAsync(this.baseUrl + this.forecastPrefix + this.sitesUrl + "?" + this.key);
-        let currentSitelist = await this.app.LoadJsonAsync(this.baseUrl + this.currentPrefix + this.sitesUrl + "?" + this.key);
-        this.forecastSite = this.GetClosestSite(forecastSitelist, this.app.config._location);
-        this.observationSite = this.GetClosestSite(currentSitelist, this.app.config._location);
-        this.app.log.Debug("Forecast site found: " + JSON.stringify(this.forecastSite, null, 2));
-        this.app.log.Debug("Observation site found: " + JSON.stringify(this.observationSite, null, 2));
-        if (this.forecastSite.dist > 100000 || this.observationSite.dist > 100000) {
+        if (this.observationSites.length == 0 || this.forecastSite.dist > 100000) {
             this.app.log.Error("User is probably not in UK, aborting");
             this.app.HandleError({
                 type: "hard",
@@ -73,28 +85,26 @@ class MetUk {
             return null;
         }
         let forecastPromise = this.GetData(this.baseUrl + this.forecastPrefix + this.forecastSite.id + this.dailyUrl + "&" + this.key, this.ParseForecast);
-        let hourlyPayload = null;
-        try {
-            hourlyPayload = await this.app.LoadJsonAsync(this.baseUrl + this.forecastPrefix + this.forecastSite.id + this.threeHourlyUrl + "&" + this.key);
-        }
-        catch (e) {
-            this.app.log.Error("Failed to obtaion three-hourly weather, error: " + JSON.stringify(e, null, 2));
-            return null;
+        let hourlyPayload = this.GetData(this.baseUrl + this.forecastPrefix + this.forecastSite.id + this.threeHourlyUrl + "&" + this.key, this.ParseHourlyForecast);
+        let observations = [];
+        for (let index = 0; index < this.observationSites.length; index++) {
+            const element = this.observationSites[index];
+            try {
+                this.app.log.Debug("Getting observation data from station: " + element.id);
+                observations.push(await this.app.LoadJsonAsync(this.baseUrl + this.currentPrefix + element.id + "?res=hourly&" + this.key));
+            }
+            catch (_a) {
+                this.app.log.Debug("Failed to get observations from " + element.id);
+            }
         }
         let currentResult = null;
-        try {
-            let json = await this.app.LoadJsonAsync(this.baseUrl + this.currentPrefix + this.observationSite.id + "?res=hourly&" + this.key);
-            currentResult = this.ParseCurrent(json, hourlyPayload, this);
-        }
-        catch (e) {
-            this.app.log.Error("Failed to obtaion current weather, error: " + JSON.stringify(e, null, 2));
-            return null;
-        }
+        currentResult = this.ParseCurrent(observations);
         if (!currentResult)
             return null;
         let forecastResult = await forecastPromise;
         currentResult.forecasts = (!forecastResult) ? [] : forecastResult;
-        currentResult.hourlyForecasts = (!hourlyPayload) ? [] : this.ParseHourlyForecast(hourlyPayload, this);
+        let threeHourlyForecast = await hourlyPayload;
+        currentResult.hourlyForecasts = (!threeHourlyForecast) ? [] : threeHourlyForecast;
         return currentResult;
     }
     ;
@@ -120,18 +130,17 @@ class MetUk {
         }
     }
     ;
-    ParseCurrent(json, threeHourly, self) {
-        let timestamp = new Date(json.SiteRep.DV.dataDate);
-        let observation = self.GetLatestObservation(json.SiteRep.DV.Location.Period, timestamp);
+    ParseCurrent(json) {
+        let observation = this.MeshObservations(json);
         if (!observation) {
             return null;
         }
-        let times = self.sunCalc.getTimes(new Date(), parseFloat(json.SiteRep.DV.Location.lat), parseFloat(json.SiteRep.DV.Location.lon), parseFloat(json.SiteRep.DV.Location.elevation));
+        let times = this.sunCalc.getTimes(new Date(), parseFloat(json[0].SiteRep.DV.Location.lat), parseFloat(json[0].SiteRep.DV.Location.lon), parseFloat(json[0].SiteRep.DV.Location.elevation));
         try {
             let weather = {
                 coord: {
-                    lat: parseFloat(json.SiteRep.DV.Location.lat),
-                    lon: parseFloat(json.SiteRep.DV.Location.lon)
+                    lat: parseFloat(json[0].SiteRep.DV.Location.lat),
+                    lon: parseFloat(json[0].SiteRep.DV.Location.lon)
                 },
                 location: {
                     city: null,
@@ -139,7 +148,7 @@ class MetUk {
                     url: null,
                     timeZone: null
                 },
-                date: timestamp,
+                date: new Date(json[0].SiteRep.DV.dataDate),
                 sunrise: times.sunrise,
                 sunset: times.sunset,
                 wind: {
@@ -149,13 +158,13 @@ class MetUk {
                 temperature: null,
                 pressure: null,
                 humidity: null,
-                condition: null,
+                condition: this.ResolveCondition(get(["W"], observation)),
                 forecasts: []
             };
             if (get(["V"], observation) != null) {
                 weather.extra_field = {
                     name: _("Visibility"),
-                    value: self.VisibilityToText(observation.V),
+                    value: this.VisibilityToText(observation.V),
                     type: "string"
                 };
             }
@@ -174,59 +183,15 @@ class MetUk {
             if (get(["H"], observation) != null) {
                 weather.humidity = parseFloat(observation.H);
             }
-            if (get(["W"], observation) != null) {
-                weather.condition = self.ResolveCondition(observation.W);
-            }
-            if (threeHourly == null)
-                return weather;
-            let relevantForecast = this.GetFirstForecast(threeHourly);
-            if (weather.condition == null) {
-                weather.condition = self.ResolveCondition(relevantForecast.W);
-            }
-            if (weather.wind.speed == null && get(["S"], relevantForecast) != null) {
-                weather.wind.speed = MPHtoMPS(parseFloat(relevantForecast.S));
-            }
-            if (weather.wind.degree == null && get(["D"], relevantForecast) != null) {
-                weather.wind.degree = compassToDeg(relevantForecast.D);
-            }
-            if (!weather.extra_field && get(["V"], relevantForecast) != null) {
-                weather.extra_field = {
-                    name: _("Visibility"),
-                    value: self.VisibilityToText(relevantForecast.V),
-                    type: "string"
-                };
-            }
-            if (weather.humidity == null && get(["H"], relevantForecast) != null) {
-                weather.humidity = parseFloat(relevantForecast.H);
-            }
-            if (weather.temperature == null && get(["T"], relevantForecast) != null) {
-                weather.temperature = CelsiusToKelvin(parseFloat(relevantForecast.T));
-            }
             return weather;
         }
         catch (e) {
-            self.app.log.Error("Met UK Weather Parsing error: " + e);
-            self.app.HandleError({ type: "soft", service: "met-uk", detail: "unusal payload", message: _("Failed to Process Current Weather Info") });
+            this.app.log.Error("Met UK Weather Parsing error: " + e);
+            this.app.HandleError({ type: "soft", service: "met-uk", detail: "unusal payload", message: _("Failed to Process Current Weather Info") });
             return null;
         }
     }
     ;
-    GetFirstForecast(threeHourlyPayload) {
-        for (let i = 0; i < threeHourlyPayload.SiteRep.DV.Location.Period.length; i++) {
-            let day = threeHourlyPayload.SiteRep.DV.Location.Period[i];
-            let date = new Date(this.PartialToISOString(day.value));
-            for (let index = 0; index < day.Rep.length; index++) {
-                const hour = day.Rep[index];
-                let timestamp = new Date(date.getTime());
-                timestamp.setHours(timestamp.getHours() + (parseInt(hour.$) / 60));
-                let threshold = new Date();
-                threshold.setHours(threshold.getHours() - 3);
-                if (timestamp < threshold)
-                    continue;
-                return hour;
-            }
-        }
-    }
     ParseForecast(json, self) {
         let forecasts = [];
         try {
@@ -299,6 +264,66 @@ class MetUk {
         if (distance < 40000)
             return _("Very good - Between 20-40 km");
         return _("Excellent - More than 40 km");
+    }
+    SortObservationSites(observations) {
+        let loc = this.app.config.GetLocation();
+        if (loc == null)
+            return null;
+        if (observations.length == 0)
+            return null;
+        observations = observations.sort((a, b) => {
+            if (a.dist < b.dist)
+                return -1;
+            if (a.dist == b.dist)
+                return 0;
+            return 1;
+        });
+        return observations;
+    }
+    MeshObservations(observations) {
+        if (!observations)
+            return null;
+        if (observations.length == 0)
+            return null;
+        let result = this.GetLatestObservation(observations[0].SiteRep.DV.Location.Period, new Date());
+        if (observations.length == 1)
+            return result;
+        for (let index = 1; index < observations.length; index++) {
+            let nextObservation = this.GetLatestObservation(observations[index].SiteRep.DV.Location.Period, new Date());
+            let debugText = " Observation data missing, plugged in from " +
+                observations[index].SiteRep.DV.Location.i + ", index " + index +
+                ", distance "
+                + GetDistance(parseFloat(observations[index].SiteRep.DV.Location.lat), parseFloat(observations[index].SiteRep.DV.Location.lon), this.currentLoc.lat, this.currentLoc.lon) + " metres";
+            if (get(["V"], result) == null) {
+                result.V = get(["V"], nextObservation);
+                this.app.log.Debug("Visibility" + debugText);
+            }
+            if (get(["W"], result) == null) {
+                result.W = get(["W"], nextObservation);
+                this.app.log.Debug("Weather condition" + debugText);
+            }
+            if (get(["S"], result) == null) {
+                result.S = get(["S"], nextObservation);
+                this.app.log.Debug("Wind Speed" + debugText);
+            }
+            if (get(["D"], result) == null) {
+                result.D = get(["D"], nextObservation);
+                this.app.log.Debug("Wind degree" + debugText);
+            }
+            if (get(["T"], result) == null) {
+                result.T = get(["T"], nextObservation);
+                this.app.log.Debug("Temperature" + debugText);
+            }
+            if (get(["P"], result) == null) {
+                result.P = get(["P"], nextObservation);
+                this.app.log.Debug("Pressure" + debugText);
+            }
+            if (get(["H"], result) == null) {
+                result.H = get(["H"], nextObservation);
+                this.app.log.Debug("Humidity" + debugText);
+            }
+        }
+        return result;
     }
     GetLatestObservation(observations, day) {
         for (let index = 0; index < observations.length; index++) {

@@ -73,40 +73,56 @@ var MetUk = (function () {
         this.currentPrefix = "wxobs/all/json/";
         this.sitesUrl = "sitelist";
         this.key = "key=05de1ee8-de70-46aa-9b41-299d4cc60219";
-        this.hourlyAccess = true;
         this.forecastSite = null;
-        this.observationSite = null;
+        this.observationSites = null;
+        this.currentLoc = null;
+        this.MAX_STATION_DIST = 50000;
         this.app = _app;
         this.sunCalc = new SunCalc();
     }
     MetUk.prototype.GetWeather = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var forecastSitelist, currentSitelist, forecastPromise, hourlyPayload, e_1, currentResult, json, e_2, forecastResult;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
+            var loc, forecastSitelist, currentSitelist, e_1, index, element, forecastPromise, hourlyPayload, observations, index, element, _a, _b, _c, currentResult, forecastResult, threeHourlyForecast;
+            return __generator(this, function (_d) {
+                switch (_d.label) {
                     case 0:
-                        if (!isCoordinate(this.app.config._location)) {
-                            this.app.HandleError({
-                                detail: "bad location format",
-                                type: "hard",
-                                userError: true,
-                                service: "met-uk",
-                                message: "Please make sure location is in the correct format"
-                            });
-                            this.app.log.Error("MET UK - Location is not coordinate, aborting");
+                        loc = this.app.config.GetLocation(true);
+                        if (loc == null)
                             return [2, null];
-                        }
-                        return [4, this.app.LoadJsonAsync(this.baseUrl + this.forecastPrefix + this.sitesUrl + "?" + this.key)];
+                        if (!(this.currentLoc != loc || this.forecastSite == null || this.observationSites == null || this.observationSites.length == 0)) return [3, 6];
+                        this.currentLoc = loc;
+                        forecastSitelist = null;
+                        currentSitelist = null;
+                        _d.label = 1;
                     case 1:
-                        forecastSitelist = _a.sent();
-                        return [4, this.app.LoadJsonAsync(this.baseUrl + this.currentPrefix + this.sitesUrl + "?" + this.key)];
+                        _d.trys.push([1, 4, , 5]);
+                        return [4, this.app.LoadJsonAsync(this.baseUrl + this.forecastPrefix + this.sitesUrl + "?" + this.key)];
                     case 2:
-                        currentSitelist = _a.sent();
+                        forecastSitelist = _d.sent();
+                        return [4, this.app.LoadJsonAsync(this.baseUrl + this.currentPrefix + this.sitesUrl + "?" + this.key)];
+                    case 3:
+                        currentSitelist = _d.sent();
+                        return [3, 5];
+                    case 4:
+                        e_1 = _d.sent();
+                        this.app.log.Error("Failed to get sitelist, error: " + JSON.stringify(e_1, null, 2));
+                        return [2, null];
+                    case 5:
                         this.forecastSite = this.GetClosestSite(forecastSitelist, this.app.config._location);
-                        this.observationSite = this.GetClosestSite(currentSitelist, this.app.config._location);
                         this.app.log.Debug("Forecast site found: " + JSON.stringify(this.forecastSite, null, 2));
-                        this.app.log.Debug("Observation site found: " + JSON.stringify(this.observationSite, null, 2));
-                        if (this.forecastSite.dist > 100000 || this.observationSite.dist > 100000) {
+                        this.observationSites = [];
+                        for (index = 0; index < currentSitelist.Locations.Location.length; index++) {
+                            element = currentSitelist.Locations.Location[index];
+                            element.dist = GetDistance(parseFloat(element.latitude), parseFloat(element.longitude), loc.lat, loc.lon);
+                            if (element.dist > this.MAX_STATION_DIST)
+                                continue;
+                            this.observationSites.push(element);
+                        }
+                        this.observationSites = this.SortObservationSites(this.observationSites);
+                        this.app.log.Debug("Observation sites found: " + JSON.stringify(this.observationSites, null, 2));
+                        _d.label = 6;
+                    case 6:
+                        if (this.observationSites.length == 0 || this.forecastSite.dist > 100000) {
                             this.app.log.Error("User is probably not in UK, aborting");
                             this.app.HandleError({
                                 type: "hard",
@@ -118,40 +134,42 @@ var MetUk = (function () {
                             return [2, null];
                         }
                         forecastPromise = this.GetData(this.baseUrl + this.forecastPrefix + this.forecastSite.id + this.dailyUrl + "&" + this.key, this.ParseForecast);
-                        hourlyPayload = null;
-                        _a.label = 3;
-                    case 3:
-                        _a.trys.push([3, 5, , 6]);
-                        return [4, this.app.LoadJsonAsync(this.baseUrl + this.forecastPrefix + this.forecastSite.id + this.threeHourlyUrl + "&" + this.key)];
-                    case 4:
-                        hourlyPayload = _a.sent();
-                        return [3, 6];
-                    case 5:
-                        e_1 = _a.sent();
-                        this.app.log.Error("Failed to obtaion three-hourly weather, error: " + JSON.stringify(e_1, null, 2));
-                        return [2, null];
-                    case 6:
-                        currentResult = null;
-                        _a.label = 7;
+                        hourlyPayload = this.GetData(this.baseUrl + this.forecastPrefix + this.forecastSite.id + this.threeHourlyUrl + "&" + this.key, this.ParseHourlyForecast);
+                        observations = [];
+                        index = 0;
+                        _d.label = 7;
                     case 7:
-                        _a.trys.push([7, 9, , 10]);
-                        return [4, this.app.LoadJsonAsync(this.baseUrl + this.currentPrefix + this.observationSite.id + "?res=hourly&" + this.key)];
+                        if (!(index < this.observationSites.length)) return [3, 12];
+                        element = this.observationSites[index];
+                        _d.label = 8;
                     case 8:
-                        json = _a.sent();
-                        currentResult = this.ParseCurrent(json, hourlyPayload, this);
-                        return [3, 10];
+                        _d.trys.push([8, 10, , 11]);
+                        this.app.log.Debug("Getting observation data from station: " + element.id);
+                        _b = (_a = observations).push;
+                        return [4, this.app.LoadJsonAsync(this.baseUrl + this.currentPrefix + element.id + "?res=hourly&" + this.key)];
                     case 9:
-                        e_2 = _a.sent();
-                        this.app.log.Error("Failed to obtaion current weather, error: " + JSON.stringify(e_2, null, 2));
-                        return [2, null];
+                        _b.apply(_a, [_d.sent()]);
+                        return [3, 11];
                     case 10:
+                        _c = _d.sent();
+                        this.app.log.Debug("Failed to get observations from " + element.id);
+                        return [3, 11];
+                    case 11:
+                        index++;
+                        return [3, 7];
+                    case 12:
+                        currentResult = null;
+                        currentResult = this.ParseCurrent(observations);
                         if (!currentResult)
                             return [2, null];
                         return [4, forecastPromise];
-                    case 11:
-                        forecastResult = _a.sent();
+                    case 13:
+                        forecastResult = _d.sent();
                         currentResult.forecasts = (!forecastResult) ? [] : forecastResult;
-                        currentResult.hourlyForecasts = (!hourlyPayload) ? [] : this.ParseHourlyForecast(hourlyPayload, this);
+                        return [4, hourlyPayload];
+                    case 14:
+                        threeHourlyForecast = _d.sent();
+                        currentResult.hourlyForecasts = (!threeHourlyForecast) ? [] : threeHourlyForecast;
                         return [2, currentResult];
                 }
             });
@@ -160,7 +178,7 @@ var MetUk = (function () {
     ;
     MetUk.prototype.GetData = function (query, ParseFunction) {
         return __awaiter(this, void 0, void 0, function () {
-            var json, e_3;
+            var json, e_2;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -174,8 +192,8 @@ var MetUk = (function () {
                         json = _a.sent();
                         return [3, 4];
                     case 3:
-                        e_3 = _a.sent();
-                        this.app.HandleHTTPError("met-uk", e_3, this.app, null);
+                        e_2 = _a.sent();
+                        this.app.HandleHTTPError("met-uk", e_2, this.app, null);
                         return [2, null];
                     case 4:
                         if (json == null) {
@@ -189,18 +207,17 @@ var MetUk = (function () {
         });
     };
     ;
-    MetUk.prototype.ParseCurrent = function (json, threeHourly, self) {
-        var timestamp = new Date(json.SiteRep.DV.dataDate);
-        var observation = self.GetLatestObservation(json.SiteRep.DV.Location.Period, timestamp);
+    MetUk.prototype.ParseCurrent = function (json) {
+        var observation = this.MeshObservations(json);
         if (!observation) {
             return null;
         }
-        var times = self.sunCalc.getTimes(new Date(), parseFloat(json.SiteRep.DV.Location.lat), parseFloat(json.SiteRep.DV.Location.lon), parseFloat(json.SiteRep.DV.Location.elevation));
+        var times = this.sunCalc.getTimes(new Date(), parseFloat(json[0].SiteRep.DV.Location.lat), parseFloat(json[0].SiteRep.DV.Location.lon), parseFloat(json[0].SiteRep.DV.Location.elevation));
         try {
             var weather = {
                 coord: {
-                    lat: parseFloat(json.SiteRep.DV.Location.lat),
-                    lon: parseFloat(json.SiteRep.DV.Location.lon)
+                    lat: parseFloat(json[0].SiteRep.DV.Location.lat),
+                    lon: parseFloat(json[0].SiteRep.DV.Location.lon)
                 },
                 location: {
                     city: null,
@@ -208,7 +225,7 @@ var MetUk = (function () {
                     url: null,
                     timeZone: null
                 },
-                date: timestamp,
+                date: new Date(json[0].SiteRep.DV.dataDate),
                 sunrise: times.sunrise,
                 sunset: times.sunset,
                 wind: {
@@ -218,13 +235,13 @@ var MetUk = (function () {
                 temperature: null,
                 pressure: null,
                 humidity: null,
-                condition: null,
+                condition: this.ResolveCondition(get(["W"], observation)),
                 forecasts: []
             };
             if (get(["V"], observation) != null) {
                 weather.extra_field = {
                     name: _("Visibility"),
-                    value: self.VisibilityToText(observation.V),
+                    value: this.VisibilityToText(observation.V),
                     type: "string"
                 };
             }
@@ -243,59 +260,15 @@ var MetUk = (function () {
             if (get(["H"], observation) != null) {
                 weather.humidity = parseFloat(observation.H);
             }
-            if (get(["W"], observation) != null) {
-                weather.condition = self.ResolveCondition(observation.W);
-            }
-            if (threeHourly == null)
-                return weather;
-            var relevantForecast = this.GetFirstForecast(threeHourly);
-            if (weather.condition == null) {
-                weather.condition = self.ResolveCondition(relevantForecast.W);
-            }
-            if (weather.wind.speed == null && get(["S"], relevantForecast) != null) {
-                weather.wind.speed = MPHtoMPS(parseFloat(relevantForecast.S));
-            }
-            if (weather.wind.degree == null && get(["D"], relevantForecast) != null) {
-                weather.wind.degree = compassToDeg(relevantForecast.D);
-            }
-            if (!weather.extra_field && get(["V"], relevantForecast) != null) {
-                weather.extra_field = {
-                    name: _("Visibility"),
-                    value: self.VisibilityToText(relevantForecast.V),
-                    type: "string"
-                };
-            }
-            if (weather.humidity == null && get(["H"], relevantForecast) != null) {
-                weather.humidity = parseFloat(relevantForecast.H);
-            }
-            if (weather.temperature == null && get(["T"], relevantForecast) != null) {
-                weather.temperature = CelsiusToKelvin(parseFloat(relevantForecast.T));
-            }
             return weather;
         }
         catch (e) {
-            self.app.log.Error("Met UK Weather Parsing error: " + e);
-            self.app.HandleError({ type: "soft", service: "met-uk", detail: "unusal payload", message: _("Failed to Process Current Weather Info") });
+            this.app.log.Error("Met UK Weather Parsing error: " + e);
+            this.app.HandleError({ type: "soft", service: "met-uk", detail: "unusal payload", message: _("Failed to Process Current Weather Info") });
             return null;
         }
     };
     ;
-    MetUk.prototype.GetFirstForecast = function (threeHourlyPayload) {
-        for (var i = 0; i < threeHourlyPayload.SiteRep.DV.Location.Period.length; i++) {
-            var day = threeHourlyPayload.SiteRep.DV.Location.Period[i];
-            var date = new Date(this.PartialToISOString(day.value));
-            for (var index = 0; index < day.Rep.length; index++) {
-                var hour = day.Rep[index];
-                var timestamp = new Date(date.getTime());
-                timestamp.setHours(timestamp.getHours() + (parseInt(hour.$) / 60));
-                var threshold = new Date();
-                threshold.setHours(threshold.getHours() - 3);
-                if (timestamp < threshold)
-                    continue;
-                return hour;
-            }
-        }
-    };
     MetUk.prototype.ParseForecast = function (json, self) {
         var forecasts = [];
         try {
@@ -368,6 +341,66 @@ var MetUk = (function () {
         if (distance < 40000)
             return _("Very good - Between 20-40 km");
         return _("Excellent - More than 40 km");
+    };
+    MetUk.prototype.SortObservationSites = function (observations) {
+        var loc = this.app.config.GetLocation();
+        if (loc == null)
+            return null;
+        if (observations.length == 0)
+            return null;
+        observations = observations.sort(function (a, b) {
+            if (a.dist < b.dist)
+                return -1;
+            if (a.dist == b.dist)
+                return 0;
+            return 1;
+        });
+        return observations;
+    };
+    MetUk.prototype.MeshObservations = function (observations) {
+        if (!observations)
+            return null;
+        if (observations.length == 0)
+            return null;
+        var result = this.GetLatestObservation(observations[0].SiteRep.DV.Location.Period, new Date());
+        if (observations.length == 1)
+            return result;
+        for (var index = 1; index < observations.length; index++) {
+            var nextObservation = this.GetLatestObservation(observations[index].SiteRep.DV.Location.Period, new Date());
+            var debugText = " Observation data missing, plugged in from " +
+                observations[index].SiteRep.DV.Location.i + ", index " + index +
+                ", distance "
+                + GetDistance(parseFloat(observations[index].SiteRep.DV.Location.lat), parseFloat(observations[index].SiteRep.DV.Location.lon), this.currentLoc.lat, this.currentLoc.lon) + " metres";
+            if (get(["V"], result) == null) {
+                result.V = get(["V"], nextObservation);
+                this.app.log.Debug("Visibility" + debugText);
+            }
+            if (get(["W"], result) == null) {
+                result.W = get(["W"], nextObservation);
+                this.app.log.Debug("Weather condition" + debugText);
+            }
+            if (get(["S"], result) == null) {
+                result.S = get(["S"], nextObservation);
+                this.app.log.Debug("Wind Speed" + debugText);
+            }
+            if (get(["D"], result) == null) {
+                result.D = get(["D"], nextObservation);
+                this.app.log.Debug("Wind degree" + debugText);
+            }
+            if (get(["T"], result) == null) {
+                result.T = get(["T"], nextObservation);
+                this.app.log.Debug("Temperature" + debugText);
+            }
+            if (get(["P"], result) == null) {
+                result.P = get(["P"], nextObservation);
+                this.app.log.Debug("Pressure" + debugText);
+            }
+            if (get(["H"], result) == null) {
+                result.H = get(["H"], nextObservation);
+                this.app.log.Debug("Humidity" + debugText);
+            }
+        }
+        return result;
     };
     MetUk.prototype.GetLatestObservation = function (observations, day) {
         for (var index = 0; index < observations.length; index++) {
