@@ -38,6 +38,7 @@ var nonempty = utils.nonempty;
 var AwareDateString = utils.AwareDateString;
 var get = utils.get;
 const delay = utils.delay;
+var isCoordinate = utils.isCoordinate;
 if (typeof Promise != "function") {
     var promisePoly = importModule("promise-polyfill");
     var finallyConstructor = promisePoly.finallyConstructor;
@@ -167,14 +168,22 @@ class WeatherApplet extends TextIconApplet {
         let json = await new Promise((resolve, reject) => {
             let message = Message.new('GET', query);
             this._httpSession.queue_message(message, (session, message) => {
-                if (!message)
-                    reject({ code: 0, message: "no network response", reason_phrase: "no network response" });
-                if (message.status_code > 300 || message.status_code < 200)
-                    reject({ code: message.status_code, message: "bad status code", reason_phrase: message.reason_phrase });
-                if (!message.response_body)
-                    reject({ code: message.status_code, message: "no reponse body", reason_phrase: message.reason_phrase });
-                if (!message.response_body.data)
-                    reject({ code: message.status_code, message: "no respone data", reason_phrase: message.reason_phrase });
+                if (!message) {
+                    reject({ code: 0, message: "no network response", reason_phrase: "no network response", data: get(["response_body", "data"], message) });
+                    return;
+                }
+                if (message.status_code > 300 || message.status_code < 200) {
+                    reject({ code: message.status_code, message: "bad status code", reason_phrase: message.reason_phrase, data: get(["response_body", "data"], message) });
+                    return;
+                }
+                if (!message.response_body) {
+                    reject({ code: message.status_code, message: "no reponse body", reason_phrase: message.reason_phrase, data: get(["response_body", "data"], message) });
+                    return;
+                }
+                if (!message.response_body.data) {
+                    reject({ code: message.status_code, message: "no respone data", reason_phrase: message.reason_phrase, data: get(["response_body", "data"], message) });
+                    return;
+                }
                 try {
                     this.log.Debug("API full response: " + message.response_body.data.toString());
                     let payload = JSON.parse(message.response_body.data);
@@ -201,14 +210,22 @@ class WeatherApplet extends TextIconApplet {
         let data = await new Promise((resolve, reject) => {
             let message = Message.new('GET', query);
             this._httpSession.queue_message(message, (session, message) => {
-                if (!message)
+                if (!message) {
                     reject({ code: 0, message: "no network response", reason_phrase: "no network response" });
-                if (message.status_code > 300 || message.status_code < 200)
+                    return;
+                }
+                if (message.status_code > 300 || message.status_code < 200) {
                     reject({ code: message.status_code, message: "bad status code", reason_phrase: message.reason_phrase });
-                if (!message.response_body)
+                    return;
+                }
+                if (!message.response_body) {
                     reject({ code: message.status_code, message: "no reponse body", reason_phrase: message.reason_phrase });
-                if (!message.response_body.data)
+                    return;
+                }
+                if (!message.response_body.data) {
                     reject({ code: message.status_code, message: "no respone data", reason_phrase: message.reason_phrase });
+                    return;
+                }
                 this.log.Debug("API full response: " + message.response_body.data.toString());
                 let payload = message.response_body.data;
                 resolve(payload);
@@ -371,7 +388,7 @@ class WeatherApplet extends TextIconApplet {
                 this.ui.rebuild(this.config);
             if (!this.ui.displayWeather(this.weather, this.config)
                 || !this.ui.displayForecast(this.weather, this.forecasts, this.config)
-                || !this.ui.displayHourlyForecast(this.hourlyForecasts, this.config)
+                || !this.ui.displayHourlyForecast(this.hourlyForecasts, this.config, this.weather.location.timeZone)
                 || !this.ui.displayBar(this.weather, this.provider, this.config))
                 return "failure";
             this.log.Print("Weather Information refreshed");
@@ -902,12 +919,12 @@ class UI {
         this._timestamp.text = _("As of") + " " + AwareDateString(weather.date, this.app.currentLocale, config._show24Hours);
         return true;
     }
-    displayHourlyForecast(forecasts, config) {
+    displayHourlyForecast(forecasts, config, tz) {
         let max = Math.min(forecasts.length, this._hourlyForecasts.length);
         for (let index = 0; index < max; index++) {
             const hour = forecasts[index];
             const ui = this._hourlyForecasts[index];
-            ui.Hour.text = AwareDateString(hour.date, this.app.currentLocale, config._show24Hours);
+            ui.Hour.text = AwareDateString(hour.date, this.app.currentLocale, config._show24Hours, tz);
             ui.Temperature.text = TempToUserConfig(hour.temp, config._temperatureUnit, config._tempRussianStyle) + " " + this.unitToUnicode(config._temperatureUnit);
             ui.Icon.icon_name = (config._useCustomMenuIcons) ? hour.condition.customIcon : hour.condition.icon;
             hour.condition.main = capitalizeFirstLetter(hour.condition.main);
@@ -1254,6 +1271,35 @@ class Config {
     ;
     SetLocation(value) {
         this.settings.setValue(this.WEATHER_LOCATION, value);
+    }
+    GetLocation(triggerError = false) {
+        if (!this.app.config._location || this.app.config._location == "") {
+            if (triggerError)
+                this.app.HandleError({
+                    detail: "no location",
+                    type: "hard",
+                    userError: true,
+                    message: "Please make sure you entered a location or turn off Manual Location"
+                });
+            return null;
+        }
+        let loc = this.app.config._location.replace(" ", "");
+        if (!isCoordinate(loc)) {
+            if (triggerError)
+                this.app.HandleError({
+                    detail: "bad location format",
+                    type: "hard",
+                    userError: true,
+                    message: "Please make sure location is in the correct format"
+                });
+            return null;
+        }
+        let latlong = loc.split(",");
+        return {
+            lat: parseFloat(latlong[0]),
+            lon: parseFloat(latlong[1]),
+            text: loc
+        };
     }
     noApiKey() {
         if (this._apiKey == undefined || this._apiKey == "") {

@@ -87,6 +87,7 @@ var nonempty = utils.nonempty;
 var AwareDateString = utils.AwareDateString;
 var get = utils.get;
 var delay = utils.delay;
+var isCoordinate = utils.isCoordinate;
 if (typeof Promise != "function") {
     var promisePoly = importModule("promise-polyfill");
     var finallyConstructor = promisePoly.finallyConstructor;
@@ -223,14 +224,22 @@ var WeatherApplet = (function (_super) {
                     case 0: return [4, new Promise(function (resolve, reject) {
                             var message = Message.new('GET', query);
                             _this._httpSession.queue_message(message, function (session, message) {
-                                if (!message)
-                                    reject({ code: 0, message: "no network response", reason_phrase: "no network response" });
-                                if (message.status_code > 300 || message.status_code < 200)
-                                    reject({ code: message.status_code, message: "bad status code", reason_phrase: message.reason_phrase });
-                                if (!message.response_body)
-                                    reject({ code: message.status_code, message: "no reponse body", reason_phrase: message.reason_phrase });
-                                if (!message.response_body.data)
-                                    reject({ code: message.status_code, message: "no respone data", reason_phrase: message.reason_phrase });
+                                if (!message) {
+                                    reject({ code: 0, message: "no network response", reason_phrase: "no network response", data: get(["response_body", "data"], message) });
+                                    return;
+                                }
+                                if (message.status_code > 300 || message.status_code < 200) {
+                                    reject({ code: message.status_code, message: "bad status code", reason_phrase: message.reason_phrase, data: get(["response_body", "data"], message) });
+                                    return;
+                                }
+                                if (!message.response_body) {
+                                    reject({ code: message.status_code, message: "no reponse body", reason_phrase: message.reason_phrase, data: get(["response_body", "data"], message) });
+                                    return;
+                                }
+                                if (!message.response_body.data) {
+                                    reject({ code: message.status_code, message: "no respone data", reason_phrase: message.reason_phrase, data: get(["response_body", "data"], message) });
+                                    return;
+                                }
                                 try {
                                     _this.log.Debug("API full response: " + message.response_body.data.toString());
                                     var payload = JSON.parse(message.response_body.data);
@@ -276,14 +285,22 @@ var WeatherApplet = (function (_super) {
                     case 0: return [4, new Promise(function (resolve, reject) {
                             var message = Message.new('GET', query);
                             _this._httpSession.queue_message(message, function (session, message) {
-                                if (!message)
+                                if (!message) {
                                     reject({ code: 0, message: "no network response", reason_phrase: "no network response" });
-                                if (message.status_code > 300 || message.status_code < 200)
+                                    return;
+                                }
+                                if (message.status_code > 300 || message.status_code < 200) {
                                     reject({ code: message.status_code, message: "bad status code", reason_phrase: message.reason_phrase });
-                                if (!message.response_body)
+                                    return;
+                                }
+                                if (!message.response_body) {
                                     reject({ code: message.status_code, message: "no reponse body", reason_phrase: message.reason_phrase });
-                                if (!message.response_body.data)
+                                    return;
+                                }
+                                if (!message.response_body.data) {
                                     reject({ code: message.status_code, message: "no respone data", reason_phrase: message.reason_phrase });
+                                    return;
+                                }
                                 _this.log.Debug("API full response: " + message.response_body.data.toString());
                                 var payload = message.response_body.data;
                                 resolve(payload);
@@ -470,7 +487,7 @@ var WeatherApplet = (function (_super) {
                             this.ui.rebuild(this.config);
                         if (!this.ui.displayWeather(this.weather, this.config)
                             || !this.ui.displayForecast(this.weather, this.forecasts, this.config)
-                            || !this.ui.displayHourlyForecast(this.hourlyForecasts, this.config)
+                            || !this.ui.displayHourlyForecast(this.hourlyForecasts, this.config, this.weather.location.timeZone)
                             || !this.ui.displayBar(this.weather, this.provider, this.config))
                             return [2, "failure"];
                         this.log.Print("Weather Information refreshed");
@@ -1028,12 +1045,12 @@ var UI = (function () {
         this._timestamp.text = _("As of") + " " + AwareDateString(weather.date, this.app.currentLocale, config._show24Hours);
         return true;
     };
-    UI.prototype.displayHourlyForecast = function (forecasts, config) {
+    UI.prototype.displayHourlyForecast = function (forecasts, config, tz) {
         var max = Math.min(forecasts.length, this._hourlyForecasts.length);
         for (var index = 0; index < max; index++) {
             var hour = forecasts[index];
             var ui = this._hourlyForecasts[index];
-            ui.Hour.text = AwareDateString(hour.date, this.app.currentLocale, config._show24Hours);
+            ui.Hour.text = AwareDateString(hour.date, this.app.currentLocale, config._show24Hours, tz);
             ui.Temperature.text = TempToUserConfig(hour.temp, config._temperatureUnit, config._tempRussianStyle) + " " + this.unitToUnicode(config._temperatureUnit);
             ui.Icon.icon_name = (config._useCustomMenuIcons) ? hour.condition.customIcon : hour.condition.icon;
             hour.condition.main = capitalizeFirstLetter(hour.condition.main);
@@ -1382,6 +1399,36 @@ var Config = (function () {
     ;
     Config.prototype.SetLocation = function (value) {
         this.settings.setValue(this.WEATHER_LOCATION, value);
+    };
+    Config.prototype.GetLocation = function (triggerError) {
+        if (triggerError === void 0) { triggerError = false; }
+        if (!this.app.config._location || this.app.config._location == "") {
+            if (triggerError)
+                this.app.HandleError({
+                    detail: "no location",
+                    type: "hard",
+                    userError: true,
+                    message: "Please make sure you entered a location or turn off Manual Location"
+                });
+            return null;
+        }
+        var loc = this.app.config._location.replace(" ", "");
+        if (!isCoordinate(loc)) {
+            if (triggerError)
+                this.app.HandleError({
+                    detail: "bad location format",
+                    type: "hard",
+                    userError: true,
+                    message: "Please make sure location is in the correct format"
+                });
+            return null;
+        }
+        var latlong = loc.split(",");
+        return {
+            lat: parseFloat(latlong[0]),
+            lon: parseFloat(latlong[1]),
+            text: loc
+        };
     };
     Config.prototype.noApiKey = function () {
         if (this._apiKey == undefined || this._apiKey == "") {
