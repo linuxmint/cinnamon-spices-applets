@@ -1,3 +1,9 @@
+//TODO: Do changelog
+//TODO: Add Add stuff to readme abaout US weather and MET office
+//TODO: do 3.0 settings schema as well
+//TODO: Add info back to settings-schema
+
+
 /**
  * @param path Filename without extension
  */
