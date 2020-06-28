@@ -34,34 +34,51 @@ class USWeather {
         this.grid = null;
         this.MAX_STATION_DIST = 50000;
         this.stations = null;
-        this.previousLoc = null;
+        this.currentLoc = null;
         this.app = _app;
         this.sunCalc = new SunCalc();
     }
     async GetWeather() {
-        if (!isCoordinate(this.app.config._location)) {
-            this.app.HandleError({
-                detail: "bad location format",
-                type: "hard",
-                userError: true,
-                service: "met-uk",
-                message: "Please make sure location is in the correct format"
-            });
-            this.app.log.Error("MET UK - Location is not coordinate, aborting");
+        let loc = this.app.config.GetLocation(true);
+        if (loc == null)
             return null;
-        }
-        if (!this.grid || !this.stations || this.previousLoc != this.app.config._location) {
-            this.previousLoc = this.app.config._location;
-            let siteData = await this.app.LoadJsonAsync(this.sitesUrl + this.app.config._location);
-            this.grid = siteData;
-            let stations = await this.app.LoadJsonAsync(this.grid.properties.observationStations);
-            this.stations = stations.features;
+        if (!this.grid || !this.stations || this.currentLoc.text != loc.text) {
+            this.currentLoc = loc;
+            try {
+                let siteData = await this.app.LoadJsonAsync(this.sitesUrl + loc.text);
+                this.grid = siteData;
+                this.app.log.Debug("Grid found: " + JSON.stringify(siteData, null, 2));
+            }
+            catch (e) {
+                let error = e;
+                if (error.code == 404) {
+                    let data = JSON.parse(error.data);
+                    if (data.title == "Data Unavailable For Requested Point") {
+                        this.app.HandleError({
+                            type: "hard",
+                            userError: true,
+                            detail: "bad location format",
+                            service: "us-weather",
+                            message: _("Location is outside US, please use a different provider.")
+                        });
+                    }
+                }
+                this.app.log.Error("Failed to Obtain Grid data, error: " + JSON.stringify(e, null, 2));
+                return null;
+            }
+            try {
+                let stations = await this.app.LoadJsonAsync(this.grid.properties.observationStations);
+                this.stations = stations.features;
+            }
+            catch (e) {
+                this.app.log.Error("Failed to obtain station data, error: " + JSON.stringify(e, null, 2));
+                return null;
+            }
         }
         let observations = [];
         for (let index = 0; index < this.stations.length; index++) {
             const element = this.stations[index];
-            let latlong = this.app.config._location.split(",");
-            element.dist = GetDistance(element.geometry.coordinates[1], element.geometry.coordinates[0], parseFloat(latlong[0]), parseFloat(latlong[1]));
+            element.dist = GetDistance(element.geometry.coordinates[1], element.geometry.coordinates[0], loc.lat, loc.lon);
             if (element.dist > this.MAX_STATION_DIST)
                 break;
             try {
@@ -72,11 +89,21 @@ class USWeather {
                 this.app.log.Debug("Failed to get observations from " + this.stations[index].id);
             }
         }
-        let hourlyForecastPromise = this.app.LoadJsonAsync(this.grid.properties.forecastHourly);
-        let forecastPromise = this.app.LoadJsonAsync(this.grid.properties.forecast);
-        let hourly = await hourlyForecastPromise;
+        let hourly = null;
+        let forecast = null;
+        try {
+            let hourlyForecastPromise = this.app.LoadJsonAsync(this.grid.properties.forecastHourly);
+            let forecastPromise = this.app.LoadJsonAsync(this.grid.properties.forecast);
+            hourly = await hourlyForecastPromise;
+            forecast = await forecastPromise;
+        }
+        catch (e) {
+            let error = e;
+            this.app.log.Error("Failed to obtain forecast Data, error: " + JSON.stringify(e, null, 2));
+            return null;
+        }
         let weather = this.ParseCurrent(observations, hourly);
-        weather.forecasts = this.ParseForecast(await forecastPromise);
+        weather.forecasts = this.ParseForecast(forecast);
         return weather;
     }
     ;
@@ -84,6 +111,8 @@ class USWeather {
         if (observations.length < 1)
             return null;
         let result = observations[0];
+        if (observations.length == 1)
+            return result;
         for (let index = 1; index < observations.length; index++) {
             const element = observations[index];
             if (result.properties.icon == null) {
@@ -124,7 +153,7 @@ class USWeather {
                 location: {
                     city: null,
                     country: null,
-                    url: null,
+                    url: "https://forecast.weather.gov/MapClick.php?lat=" + this.currentLoc.lat.toString() + "&lon=" + this.currentLoc.lon.toString(),
                     timeZone: this.stations[0].properties.timeZone
                 },
                 date: timestamp,
@@ -147,7 +176,7 @@ class USWeather {
                     type: "temperature"
                 };
             }
-            if (weather.condition == null) {
+            if (weather.condition == null && hourly != null) {
                 weather.condition = this.ResolveCondition(hourly.properties.periods[0].icon);
             }
             return weather;
