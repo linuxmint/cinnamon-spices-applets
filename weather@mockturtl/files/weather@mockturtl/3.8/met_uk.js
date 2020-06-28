@@ -266,9 +266,6 @@ class MetUk {
         return _("Excellent - More than 40 km");
     }
     SortObservationSites(observations) {
-        let loc = this.app.config.GetLocation();
-        if (loc == null)
-            return null;
         if (observations.length == 0)
             return null;
         observations = observations.sort((a, b) => {

@@ -317,8 +317,6 @@ class MetUk implements WeatherProvider {
 	}
 
 	private SortObservationSites(observations: WeatherSite[]): WeatherSite[] {
-		let loc = this.app.config.GetLocation();
-		if (loc == null) return null;
 		if (observations.length == 0) return null;
 		observations = observations.sort((a, b) => {
 			if (a.dist < b.dist) return -1;

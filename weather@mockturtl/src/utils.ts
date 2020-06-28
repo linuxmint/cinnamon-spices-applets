@@ -380,8 +380,9 @@ var isID = (text: any): boolean => {
     return false;
   };
 
-var isCoordinate = (text: any): boolean => {
-    if (/^-?\d{1,3}(?:\.\d*)?,-?\d{1,3}(?:\.\d*)?/.test(text)) {
+var isCoordinate = (text: string): boolean => {
+	text = text.trim();
+    if (/^-?\d{1,3}(?:\.\d*)?,(\s)*-?\d{1,3}(?:\.\d*)?/.test(text)) {
       return true;
     }
     return false;

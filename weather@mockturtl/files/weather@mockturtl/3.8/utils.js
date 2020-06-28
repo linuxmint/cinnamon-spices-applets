@@ -316,7 +316,8 @@ var isID = (text) => {
     return false;
 };
 var isCoordinate = (text) => {
-    if (/^-?\d{1,3}(?:\.\d*)?,-?\d{1,3}(?:\.\d*)?/.test(text)) {
+    text = text.trim();
+    if (/^-?\d{1,3}(?:\.\d*)?,(\s)*-?\d{1,3}(?:\.\d*)?/.test(text)) {
         return true;
     }
     return false;

@@ -343,9 +343,6 @@ var MetUk = (function () {
         return _("Excellent - More than 40 km");
     };
     MetUk.prototype.SortObservationSites = function (observations) {
-        var loc = this.app.config.GetLocation();
-        if (loc == null)
-            return null;
         if (observations.length == 0)
             return null;
         observations = observations.sort(function (a, b) {

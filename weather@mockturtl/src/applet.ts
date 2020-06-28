@@ -536,6 +536,7 @@ class WeatherApplet extends TextIconApplet {
 		let location: LocationData = null;
 		if (!this.config._manualLocation) { 
 		location = await this.locProvider.GetLocation();
+		// TODO: show user facing error on not network-related errors
 		if (!location) throw new Error(null);
 
 		let loc = location.lat + "," + location.lon;
@@ -544,16 +545,20 @@ class WeatherApplet extends TextIconApplet {
 
 		// Manual Location
 		} else { 
+		//TODO: Add Geolocation to get coordinates if possible and caching
+		// example: https://nominatim.openstreetmap.org/search/{search query}?format=json
+		// URLencode search string!!!
+		/// encodeURI(uri);
 		// Verifying User Input
 		let loc = this.config._location.replace(" ", "");
 		if (loc == undefined || loc == "") {
 			this.HandleError({
-			type: "hard",
-			detail: "no location",
-			userError: true,
-			message: _("Make sure you entered a location or use Automatic location instead")});
-			throw new Error("No location given when setting is on Manual Location");
-		}
+				type: "hard",
+				detail: "no location",
+				userError: true,
+				message: _("Make sure you entered a location or use Automatic location instead")});
+				throw new Error("No location given when setting is on Manual Location");
+			}
 		}
 		return null;
 	}
@@ -1651,6 +1656,9 @@ class Config {
 	public readonly _tempRussianStyle: boolean;
 	// TODO: do distance unit
 
+	//TODO: Add Option to units to based on userLocale
+	//TODO: Add logic to determine distance, speed, temperature units based on userlocale
+
 	public keybinding: any;
 
 	private settings: imports.ui.settings.AppletSettings;
@@ -1662,7 +1670,7 @@ class Config {
 		this.BindSettings();
 	}
 
-  /** Attaches settings to functions */
+  	/** Attaches settings to functions */
 	private BindSettings() {
 		for (let k in this.KEYS) {
 		let key = this.KEYS[k];
@@ -1690,7 +1698,7 @@ class Config {
 		this.app.log.Debug("Symbolic icon setting changed");
 	}
 
-		/**
+	/**
 	 * Gets Icon type based on user config
 	 */
 	public IconType(): imports.gi.St.IconType {
