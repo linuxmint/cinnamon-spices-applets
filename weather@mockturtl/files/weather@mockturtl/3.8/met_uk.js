@@ -285,11 +285,15 @@ class MetUk {
             return null;
         if (observations.length == 0)
             return null;
-        let result = this.GetLatestObservation(observations[0].SiteRep.DV.Location.Period, new Date());
+        let result = this.GetLatestObservation(get(["SiteRep", "DV", "Location", "Period"], observations[0]), new Date());
         if (observations.length == 1)
             return result;
-        for (let index = 1; index < observations.length; index++) {
+        for (let index = 0; index < observations.length; index++) {
+            if (get(["SiteRep", "DV", "Location", "Period"], observations[index]) == null)
+                continue;
             let nextObservation = this.GetLatestObservation(observations[index].SiteRep.DV.Location.Period, new Date());
+            if (result == null)
+                result = nextObservation;
             let debugText = " Observation data missing, plugged in from ID " +
                 observations[index].SiteRep.DV.Location.i + ", index " + index +
                 ", distance "
@@ -327,6 +331,8 @@ class MetUk {
         return result;
     }
     GetLatestObservation(observations, day) {
+        if (observations == null)
+            return null;
         for (let index = 0; index < observations.length; index++) {
             const element = observations[index];
             let date = new Date(this.PartialToISOString(element.value));

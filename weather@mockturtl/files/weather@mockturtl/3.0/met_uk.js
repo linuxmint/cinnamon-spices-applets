@@ -362,11 +362,15 @@ var MetUk = (function () {
             return null;
         if (observations.length == 0)
             return null;
-        var result = this.GetLatestObservation(observations[0].SiteRep.DV.Location.Period, new Date());
+        var result = this.GetLatestObservation(get(["SiteRep", "DV", "Location", "Period"], observations[0]), new Date());
         if (observations.length == 1)
             return result;
-        for (var index = 1; index < observations.length; index++) {
+        for (var index = 0; index < observations.length; index++) {
+            if (get(["SiteRep", "DV", "Location", "Period"], observations[index]) == null)
+                continue;
             var nextObservation = this.GetLatestObservation(observations[index].SiteRep.DV.Location.Period, new Date());
+            if (result == null)
+                result = nextObservation;
             var debugText = " Observation data missing, plugged in from ID " +
                 observations[index].SiteRep.DV.Location.i + ", index " + index +
                 ", distance "
@@ -404,6 +408,8 @@ var MetUk = (function () {
         return result;
     };
     MetUk.prototype.GetLatestObservation = function (observations, day) {
+        if (observations == null)
+            return null;
         for (var index = 0; index < observations.length; index++) {
             var element = observations[index];
             var date = new Date(this.PartialToISOString(element.value));

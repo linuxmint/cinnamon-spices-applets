@@ -335,10 +335,13 @@ class MetUk implements WeatherProvider {
 	private MeshObservations(observations: METPayload[]): ObservationPayload {
 		if (!observations) return null;
 		if (observations.length == 0) return null;
-		let result: ObservationPayload = this.GetLatestObservation(observations[0].SiteRep.DV.Location.Period, new Date());
+		// Sometimes Location property is missing
+		let result: ObservationPayload = this.GetLatestObservation(get(["SiteRep", "DV", "Location", "Period"], observations[0]), new Date());
 		if (observations.length == 1) return result;
-		for (let index = 1; index < observations.length; index++) {
+		for (let index = 0; index < observations.length; index++) {
+			if (get(["SiteRep", "DV", "Location", "Period"], observations[index]) == null) continue;
 			let nextObservation = this.GetLatestObservation(observations[index].SiteRep.DV.Location.Period, new Date());
+			if (result == null) result = nextObservation;
 			let debugText = 
 				" Observation data missing, plugged in from ID " + 
 				observations[index].SiteRep.DV.Location.i + ", index " + index +
@@ -388,6 +391,7 @@ class MetUk implements WeatherProvider {
 	 * @param day 
 	 */
 	private GetLatestObservation(observations: Period[], day: Date): ObservationPayload {
+		if (observations == null) return null;
 		for (let index = 0; index < observations.length; index++) {
 			const element = observations[index];
 			let date = new Date(this.PartialToISOString(element.value));
