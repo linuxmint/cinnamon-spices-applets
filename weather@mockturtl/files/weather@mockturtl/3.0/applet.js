@@ -153,6 +153,7 @@ var WeatherApplet = (function (_super) {
         _this._httpSession = new SessionAsync();
         _this.appletDir = imports.ui.appletManager.appletMeta[UUID].path;
         _this.currentLocale = null;
+        _this.lock = false;
         _this.locProvider = new ipApi.IpApi(_this);
         _this.encounteredError = false;
         _this.errMsg = {
@@ -203,6 +204,17 @@ var WeatherApplet = (function (_super) {
         this.set_applet_label(_("..."));
         this.set_applet_tooltip(_("Click to open"));
     };
+    WeatherApplet.prototype.Lock = function () {
+        return this.lock;
+    };
+    WeatherApplet.prototype.Unlock = function () {
+        this.lock = false;
+        if (this.config.rebuildTriggeredWhileLocked) {
+            this.log.Print("Refreshing triggered by config change while refrehing, starting now...");
+            this.config.rebuildTriggeredWhileLocked = false;
+            this.refreshAndRebuild();
+        }
+    };
     WeatherApplet.prototype.AddRefreshButton = function () {
         var itemLabel = _("Refresh");
         var refreshMenuItem = new MenuItem(itemLabel, REFRESH_ICON, Lang.bind(this, function () {
@@ -212,7 +224,10 @@ var WeatherApplet = (function (_super) {
     };
     WeatherApplet.prototype.refreshAndRebuild = function () {
         this.loop.Resume();
+        if (this.Lock())
+            return false;
         this.refreshWeather(true);
+        return true;
     };
     ;
     WeatherApplet.prototype.LoadJsonAsync = function (query) {
@@ -458,7 +473,12 @@ var WeatherApplet = (function (_super) {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
+                        if (this.lock) {
+                            this.log.Print("Refreshing in progress, refresh skipped.");
+                            return [2, "locked"];
+                        }
                         this.encounteredError = false;
+                        this.lock = true;
                         locationData = null;
                         _a.label = 1;
                     case 1:
@@ -470,19 +490,23 @@ var WeatherApplet = (function (_super) {
                     case 3:
                         e_1 = _a.sent();
                         this.log.Error(e_1);
+                        this.Unlock();
                         return [2, "error"];
                     case 4:
-                        if (locationData == null)
+                        if (locationData == null) {
+                            this.Unlock();
                             return [2, "error"];
+                        }
                         _a.label = 5;
                     case 5:
                         _a.trys.push([5, 7, , 8]);
-                        this.EnsureProvider(rebuild);
+                        this.EnsureProvider();
                         return [4, this.provider.GetWeather({ lat: locationData.lat, lon: locationData.lon, text: this.config._location })];
                     case 6:
                         weatherInfo = _a.sent();
                         if (!weatherInfo) {
                             this.log.Error("Unable to obtain Weather Information");
+                            this.lock = false;
                             return [2, "failure"];
                         }
                         this.wipeData();
@@ -492,15 +516,19 @@ var WeatherApplet = (function (_super) {
                         if (!this.ui.displayWeather(this.weather, this.config)
                             || !this.ui.displayForecast(this.weather, this.forecasts, this.config)
                             || !this.ui.displayHourlyForecast(this.hourlyForecasts, this.config, this.weather.location.timeZone)
-                            || !this.ui.displayBar(this.weather, this.provider, this.config))
+                            || !this.ui.displayBar(this.weather, this.provider, this.config)) {
+                            this.Unlock();
                             return [2, "failure"];
+                        }
                         this.log.Print("Weather Information refreshed");
                         this.loop.ResetErrorCount();
+                        this.Unlock();
                         return [2, "success"];
                     case 7:
                         e_2 = _a.sent();
                         this.log.Error("Generic Error while refreshing Weather info: " + e_2);
                         this.HandleError({ type: "hard", detail: "unknown", message: _("Unexpected Error While Refreshing Weather, please see log in Looking Glass") });
+                        this.Unlock();
                         return [2, "failure"];
                     case 8: return [2];
                 }
@@ -828,6 +856,8 @@ var UI = (function () {
         this.hourlyNeverOpened = true;
     };
     UI.prototype.UpdateIconType = function (iconType) {
+        if (iconType == IconType.FULLCOLOR && this.app.config._useCustomMenuIcons)
+            return;
         this._currentWeatherIcon.icon_type = iconType;
         for (var i = 0; i < this._forecast.length; i++) {
             this._forecast[i].Icon.icon_type = iconType;
@@ -1404,6 +1434,7 @@ var Config = (function () {
             USE_CUSTOM_MENUICONS: "useCustomMenuIcons",
             RUSSIAN_STYLE: "tempRussianStyle",
         };
+        this.rebuildTriggeredWhileLocked = false;
         this.app = app;
         this.settings = new AppletSettings(this, UUID, instanceID);
         this.BindSettings();
@@ -1412,7 +1443,7 @@ var Config = (function () {
         for (var k in this.KEYS) {
             var key = this.KEYS[k];
             var keyProp = "_" + key;
-            this.settings.bindProperty(BindingDirection.IN, key, keyProp, Lang.bind(this.app, this.app.refreshAndRebuild), null);
+            this.settings.bindProperty(BindingDirection.IN, key, keyProp, Lang.bind(this, this.OnSettingChanged), null);
         }
         this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, this.WEATHER_LOCATION, ("_" + this.WEATHER_LOCATION), Lang.bind(this, this.OnLocationChanged), null);
         this.settings.bindProperty(BindingDirection.IN, "keybinding", "keybinding", Lang.bind(this.app, this.app._onKeySettingsUpdated), null);
@@ -1421,7 +1452,6 @@ var Config = (function () {
     };
     Config.prototype.IconTypeChanged = function () {
         this.app.ui.UpdateIconType(this.IconType());
-        this.app.refreshWeather(false);
         this.app.log.Debug("Symbolic icon setting changed");
     };
     Config.prototype.IconType = function () {
@@ -1431,7 +1461,14 @@ var Config = (function () {
     };
     ;
     Config.prototype.OnLocationChanged = function () {
-        this.app.refreshAndRebuild();
+        var locked = this.app.refreshAndRebuild();
+        if (locked)
+            this.rebuildTriggeredWhileLocked = true;
+    };
+    Config.prototype.OnSettingChanged = function () {
+        var locked = this.app.refreshAndRebuild();
+        if (locked)
+            this.rebuildTriggeredWhileLocked = true;
     };
     Config.prototype.SetLocation = function (value) {
         this.settings.setValue(this.WEATHER_LOCATION, value);
@@ -1523,6 +1560,8 @@ var WeatherLoop = (function () {
                         return [4, this.app.refreshWeather(false)];
                     case 4:
                         state = _a.sent();
+                        if (state == "locked")
+                            this.app.log.Print("App locked, refresh skipped");
                         if (state == "success") {
                             this.lastUpdated = new Date();
                         }

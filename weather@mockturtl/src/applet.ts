@@ -168,6 +168,7 @@ class WeatherApplet extends TextIconApplet {
 	private readonly loop: WeatherLoop;
 	public readonly config: Config;
 	public readonly ui: UI;
+	private lock = false;
 
 	private provider: WeatherProvider; // API
 	private locProvider = new ipApi.IpApi(this); // IP location lookup
@@ -215,6 +216,20 @@ class WeatherApplet extends TextIconApplet {
 		this.set_applet_tooltip(_("Click to open"));
 	}
 
+	public Lock(): boolean {
+		return this.lock;
+	}
+
+	private Unlock(): void {
+		this.lock = false;
+		if (this.config.rebuildTriggeredWhileLocked) {
+			this.log.Print("Refreshing triggered by config change while refrehing, starting now...");
+			this.config.rebuildTriggeredWhileLocked = false;
+			this.refreshAndRebuild();
+		}
+
+	}
+
 	/** Into right-click context menu */
 	private AddRefreshButton(): void {
 		let itemLabel = _("Refresh")
@@ -224,9 +239,14 @@ class WeatherApplet extends TextIconApplet {
 		this._applet_context_menu.addMenuItem(refreshMenuItem);
 	}
 
-	public refreshAndRebuild(): void {
+	/**
+	 * @returns boolean true if refresh function was locked while called
+	 */
+	public refreshAndRebuild(): boolean {
 		this.loop.Resume();
+		if (this.Lock()) return false;
 		this.refreshWeather(true);
+		return true;
 	};
 
 	/**
@@ -486,7 +506,12 @@ class WeatherApplet extends TextIconApplet {
 	 * @param rebuild 
 	 */
 	public async refreshWeather(rebuild: boolean): Promise <RefreshState> {
+		if (this.lock) {
+			this.log.Print("Refreshing in progress, refresh skipped.");
+			return "locked";
+		}
 		this.encounteredError = false;
+		this.lock = true;
 
 		let locationData: LocationData = null;
 		try {
@@ -494,15 +519,21 @@ class WeatherApplet extends TextIconApplet {
 		}
 		catch(e) {
 			this.log.Error(e);
+			this.Unlock();
 			return "error";
 		}
-		if (locationData == null) return "error";
+		if (locationData == null) {
+			// TODO: Add user facing error?
+			this.Unlock();
+			return "error";
+		}
 
 		try {
-			this.EnsureProvider(rebuild);
+			this.EnsureProvider();
 			let weatherInfo = await this.provider.GetWeather({lat: locationData.lat, lon: locationData.lon, text: this.config._location});
 			if (!weatherInfo) {
 				this.log.Error("Unable to obtain Weather Information");
+				this.lock = false;
 				return "failure";
 			}
 
@@ -514,15 +545,20 @@ class WeatherApplet extends TextIconApplet {
 				!this.ui.displayWeather(this.weather, this.config) 
 				|| !this.ui.displayForecast(this.weather, this.forecasts, this.config)
 				|| !this.ui.displayHourlyForecast(this.hourlyForecasts, this.config, this.weather.location.timeZone)
-				|| !this.ui.displayBar(this.weather, this.provider, this.config)) return "failure";
+				|| !this.ui.displayBar(this.weather, this.provider, this.config)) {
+					this.Unlock();
+					return "failure";
+				}
 			
 			this.log.Print("Weather Information refreshed");
 			this.loop.ResetErrorCount();
+			this.Unlock();
 			return "success";
 		} 
 		catch (e) {
 			this.log.Error("Generic Error while refreshing Weather info: " + e);
 			this.HandleError({type: "hard", detail: "unknown", message: _("Unexpected Error While Refreshing Weather, please see log in Looking Glass")});
+			this.Unlock();
 			return "failure";
 		}
 	};
@@ -952,6 +988,7 @@ class UI {
 	 * the "use symbolic icons" setting
 	 */
 	public UpdateIconType(iconType: imports.gi.St.IconType): void {
+		if (iconType == IconType.FULLCOLOR && this.app.config._useCustomMenuIcons) return;
 		this._currentWeatherIcon.icon_type = iconType;
 		for (let i = 0; i < this._forecast.length; i++) {
 			this._forecast[i].Icon.icon_type = iconType;
@@ -1690,6 +1727,8 @@ class Config {
 
 	public keybinding: any;
 
+	public rebuildTriggeredWhileLocked = false;
+
 	private settings: imports.ui.settings.AppletSettings;
 	private app: WeatherApplet;
 
@@ -1705,7 +1744,7 @@ class Config {
 		let key = this.KEYS[k];
 		let keyProp = "_" + key;
 		this.settings.bindProperty(BindingDirection.IN,
-			key, keyProp, Lang.bind(this.app, this.app.refreshAndRebuild), null);
+			key, keyProp, Lang.bind(this, this.OnSettingChanged), null);
 		}
 
 		// Settings what need special care
@@ -1723,7 +1762,6 @@ class Config {
 
 	private IconTypeChanged() {
 		this.app.ui.UpdateIconType(this.IconType());
-		this.app.refreshWeather(false)
 		this.app.log.Debug("Symbolic icon setting changed");
 	}
 
@@ -1737,7 +1775,13 @@ class Config {
 	};
 
 	private OnLocationChanged() {
-		this.app.refreshAndRebuild();
+		let locked = this.app.refreshAndRebuild();
+		if (locked) this.rebuildTriggeredWhileLocked = true;
+	}
+
+	private OnSettingChanged() {
+		let locked = this.app.refreshAndRebuild();
+		if (locked) this.rebuildTriggeredWhileLocked = true;
 	}
 
 	public SetLocation(value: string) {
@@ -1820,6 +1864,8 @@ class WeatherLoop {
 
 	/** Main loop */
 	public async Start(): Promise<void> {
+		//TODO: lock loop if already runs, or prevent refreshweather called multiple times
+		// errorencountered stayed up because of time to obtain data
 		while(true) {
 			try {
 				if (this.IsStray()) return;       
@@ -1838,6 +1884,7 @@ class WeatherLoop {
 					+ " seconds, refreshInterval " + this.app.config._refreshInterval + " minutes");
 					
 					let state = await this.app.refreshWeather(false);
+					if (state == "locked") this.app.log.Print("App locked, refresh skipped");
 					if (state == "success") {
 						this.lastUpdated = new Date();
 					}
@@ -2203,7 +2250,7 @@ interface HttpError {
 	data: any;
 }
 
-type RefreshState = "success" | "failure" | "error";
+type RefreshState = "success" | "failure" | "error" | "locked";
 
 /** hard will not force a refresh and cleans the applet ui.
  * 
