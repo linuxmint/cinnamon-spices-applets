@@ -157,6 +157,7 @@ var WeatherApplet = (function (_super) {
         _this.currentLocale = null;
         _this.lock = false;
         _this.locProvider = new ipApi.IpApi(_this);
+        _this.geoLocationService = new GeoLocation(_this);
         _this.encounteredError = false;
         _this.errMsg = {
             unknown: _("Error"),
@@ -174,7 +175,8 @@ var WeatherApplet = (function (_super) {
             "no reponse body": _("Service Error"),
             "no respone data": _("Service Error"),
             "unusal payload": _("Service Error"),
-            "import error": _("Missing Packages")
+            "import error": _("Missing Packages"),
+            "location not covered": _("Location not covered"),
         };
         _this.log = new Log(instanceId);
         _this.currentLocale = _this.constructJsLocale(get_language_names()[0]);
@@ -227,9 +229,9 @@ var WeatherApplet = (function (_super) {
     WeatherApplet.prototype.refreshAndRebuild = function () {
         this.loop.Resume();
         if (this.Lock())
-            return false;
+            return true;
         this.refreshWeather(true);
-        return true;
+        return false;
     };
     ;
     WeatherApplet.prototype.LoadJsonAsync = function (query) {
@@ -258,7 +260,7 @@ var WeatherApplet = (function (_super) {
                                     return;
                                 }
                                 try {
-                                    _this.log.Debug("API full response: " + message.response_body.data.toString());
+                                    _this.log.Debug2("API full response: " + message.response_body.data.toString());
                                     var payload = JSON.parse(message.response_body.data);
                                     resolve(payload);
                                 }
@@ -318,7 +320,7 @@ var WeatherApplet = (function (_super) {
                                     reject({ code: message.status_code, message: "no respone data", reason_phrase: message.reason_phrase });
                                     return;
                                 }
-                                _this.log.Debug("API full response: " + message.response_body.data.toString());
+                                _this.log.Debug2("API full response: " + message.response_body.data.toString());
                                 var payload = message.response_body.data;
                                 resolve(payload);
                             });
@@ -485,7 +487,7 @@ var WeatherApplet = (function (_super) {
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
-                        return [4, this.EnsureLocation()];
+                        return [4, this.config.EnsureLocation()];
                     case 2:
                         locationData = _a.sent();
                         return [3, 4];
@@ -497,18 +499,18 @@ var WeatherApplet = (function (_super) {
                     case 4:
                         if (locationData == null) {
                             this.Unlock();
-                            return [2, "error"];
+                            return [2, "failure"];
                         }
                         _a.label = 5;
                     case 5:
                         _a.trys.push([5, 7, , 8]);
                         this.EnsureProvider();
-                        return [4, this.provider.GetWeather({ lat: locationData.lat, lon: locationData.lon, text: this.config._location })];
+                        return [4, this.provider.GetWeather({ lat: locationData.lat, lon: locationData.lon, text: locationData.lat.toString() + "," + locationData.lon.toString() })];
                     case 6:
                         weatherInfo = _a.sent();
-                        if (!weatherInfo) {
+                        if (weatherInfo == null) {
                             this.log.Error("Unable to obtain Weather Information");
-                            this.lock = false;
+                            this.Unlock();
                             return [2, "failure"];
                         }
                         this.wipeData();
@@ -538,67 +540,6 @@ var WeatherApplet = (function (_super) {
         });
     };
     ;
-    WeatherApplet.prototype.EnsureLocation = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            var location, loc_1, loc, coords, locationData;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        location = null;
-                        if (!!this.config._manualLocation) return [3, 2];
-                        return [4, this.locProvider.GetLocation()];
-                    case 1:
-                        location = _a.sent();
-                        if (!location)
-                            throw new Error(null);
-                        loc_1 = location.lat + "," + location.lon;
-                        this.config.SetLocation(loc_1);
-                        return [2, location];
-                    case 2:
-                        loc = this.config._location.trim();
-                        if (loc == undefined || loc == "") {
-                            this.HandleError({
-                                type: "hard",
-                                detail: "no location",
-                                userError: true,
-                                message: _("Make sure you entered a location or use Automatic location instead")
-                            });
-                            throw new Error("No location given when setting is on Manual Location");
-                            return [2, null];
-                        }
-                        if (isCoordinate(loc)) {
-                            coords = this.config.GetLocation(true);
-                            if (coords == null)
-                                return [2, null];
-                            return [2, {
-                                    lat: coords.lat,
-                                    lon: coords.lon,
-                                    city: null,
-                                    country: null,
-                                    mobile: null,
-                                    timeZone: null
-                                }];
-                        }
-                        this.log.Debug("Location is text");
-                        return [4, this.LoadJsonAsync("https://nominatim.openstreetmap.org/search/" + encodeURIComponent(loc) + "?format=json&addressdetails=1")];
-                    case 3:
-                        locationData = _a.sent();
-                        if (locationData.length == 0) {
-                            return [2, null];
-                        }
-                        this.log.Debug("Location is found, payload: " + JSON.stringify(locationData, null, 2));
-                        return [2, {
-                                lat: parseFloat(locationData[0].lat),
-                                lon: parseFloat(locationData[0].lon),
-                                city: locationData[0].address.city || locationData[0].address.town,
-                                country: locationData[0].address.country,
-                                timeZone: null,
-                                mobile: null
-                            }];
-                }
-            });
-        });
-    };
     WeatherApplet.prototype.ProcessWeatherData = function (weatherInfo, locationData) {
         if (!!locationData) {
             this.weather.location.city = locationData.city;
@@ -695,7 +636,9 @@ var WeatherApplet = (function (_super) {
         if (this.encounteredError == true)
             return;
         this.encounteredError = true;
+        this.log.Debug("User facing Error received, error: " + JSON.stringify(error, null, 2));
         if (error.type == "hard") {
+            this.log.Debug("Displaying hard error");
             this.ui.rebuild(this.config);
             this.DisplayError(this.errMsg[error.detail], (!error.message) ? "" : error.message);
         }
@@ -740,6 +683,7 @@ var WeatherApplet = (function (_super) {
 var Log = (function () {
     function Log(_instanceId) {
         this.debug = false;
+        this.level = 1;
         this.ID = _instanceId;
         this.appletDir = imports.ui.appletManager.appletMeta[UUID].path;
         this.debug = this.DEBUG();
@@ -770,6 +714,11 @@ var Log = (function () {
     ;
     Log.prototype.Debug = function (message) {
         if (this.debug) {
+            this.Print(message);
+        }
+    };
+    Log.prototype.Debug2 = function (message) {
+        if (this.debug && this.level > 1) {
             this.Print(message);
         }
     };
@@ -1469,11 +1418,6 @@ var Config = (function () {
             clearTimeout(this.doneTypingLocation);
         this.doneTypingLocation = setTimeout(Lang.bind(this, this.DoneTypingLocation), 3000);
     };
-    Config.prototype.OnSettingChanged = function () {
-        var locked = this.app.refreshAndRebuild();
-        if (locked)
-            this.rebuildTriggeredWhileLocked = true;
-    };
     Config.prototype.DoneTypingLocation = function () {
         this.app.log.Debug("User has finished typing, beginning refresh");
         this.doneTypingLocation = null;
@@ -1481,38 +1425,13 @@ var Config = (function () {
         if (locked)
             this.rebuildTriggeredWhileLocked = true;
     };
+    Config.prototype.OnSettingChanged = function () {
+        var locked = this.app.refreshAndRebuild();
+        if (locked)
+            this.rebuildTriggeredWhileLocked = true;
+    };
     Config.prototype.SetLocation = function (value) {
         this.settings.setValue(this.WEATHER_LOCATION, value);
-    };
-    Config.prototype.GetLocation = function (triggerError) {
-        if (triggerError === void 0) { triggerError = false; }
-        if (!this.app.config._location || this.app.config._location == "") {
-            if (triggerError)
-                this.app.HandleError({
-                    detail: "no location",
-                    type: "hard",
-                    userError: true,
-                    message: "Please make sure you entered a location or turn off Manual Location"
-                });
-            return null;
-        }
-        var loc = this.app.config._location.replace(" ", "");
-        if (!isCoordinate(loc)) {
-            if (triggerError)
-                this.app.HandleError({
-                    detail: "bad location format",
-                    type: "hard",
-                    userError: true,
-                    message: "Please make sure location is in the correct format"
-                });
-            return null;
-        }
-        var latlong = loc.split(",");
-        return {
-            lat: parseFloat(latlong[0]),
-            lon: parseFloat(latlong[1]),
-            text: loc
-        };
     };
     Config.prototype.noApiKey = function () {
         if (this._apiKey == undefined || this._apiKey == "") {
@@ -1521,6 +1440,56 @@ var Config = (function () {
         return false;
     };
     ;
+    Config.prototype.EnsureLocation = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var location, loc_1, loc, latlong, locationData;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        if (!!this._manualLocation) return [3, 2];
+                        return [4, this.app.locProvider.GetLocation()];
+                    case 1:
+                        location = _a.sent();
+                        if (!location)
+                            return [2, null];
+                        loc_1 = location.lat + "," + location.lon;
+                        this.app.log.Debug("Location setting is now: " + loc_1);
+                        this.SetLocation(loc_1);
+                        return [2, location];
+                    case 2:
+                        loc = this._location;
+                        if (loc == undefined || loc.trim() == "") {
+                            this.app.HandleError({
+                                type: "hard",
+                                detail: "no location",
+                                userError: true,
+                                message: _("Make sure you entered a location or use Automatic location instead")
+                            });
+                            return [2, null];
+                        }
+                        if (isCoordinate(loc)) {
+                            loc = loc.replace(" ", "");
+                            latlong = loc.split(",");
+                            return [2, {
+                                    lat: parseFloat(latlong[0]),
+                                    lon: parseFloat(latlong[1]),
+                                    city: null,
+                                    country: null,
+                                    mobile: null,
+                                    timeZone: null
+                                }];
+                        }
+                        this.app.log.Debug("Location is text, geolocating...");
+                        return [4, this.app.geoLocationService.GetLocation(loc)];
+                    case 3:
+                        locationData = _a.sent();
+                        if (locationData == null)
+                            return [2, null];
+                        return [2, locationData];
+                }
+            });
+        });
+    };
     return Config;
 }());
 var WeatherLoop = (function () {
@@ -1572,10 +1541,9 @@ var WeatherLoop = (function () {
                     case 4:
                         state = _a.sent();
                         if (state == "locked")
-                            this.app.log.Print("App locked, refresh skipped");
-                        if (state == "success") {
+                            this.app.log.Print("App locked, refresh skipped in main loop");
+                        if (state == "success" || state == "locked")
                             this.lastUpdated = new Date();
-                        }
                         return [3, 6];
                     case 5:
                         this.app.log.Debug("No need to update yet, skipping");
@@ -1667,6 +1635,65 @@ var WeatherButton = (function () {
         this.actor.reactive = true;
     };
     return WeatherButton;
+}());
+var GeoLocation = (function () {
+    function GeoLocation(app) {
+        this.url = "https://nominatim.openstreetmap.org/search/";
+        this.params = "?format=json&addressdetails=1";
+        this.app = null;
+        this.cache = {};
+        this.app = app;
+    }
+    GeoLocation.prototype.GetLocation = function (searchText) {
+        return __awaiter(this, void 0, void 0, function () {
+            var cached, locationData, result, e_4;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        searchText = searchText.trim();
+                        cached = get([searchText], this.cache);
+                        if (cached != null) {
+                            this.app.log.Debug("Returning cached geolocation info for '" + searchText + "'.");
+                            return [2, cached];
+                        }
+                        return [4, this.app.LoadJsonAsync(this.url + encodeURIComponent(searchText) + this.params)];
+                    case 1:
+                        locationData = _a.sent();
+                        if (locationData.length == 0) {
+                            this.app.HandleError({
+                                type: "hard",
+                                detail: "bad location format",
+                                message: _("Could not find location based on address, please check if it's right")
+                            });
+                            return [2, null];
+                        }
+                        this.app.log.Debug("Location is found, payload: " + JSON.stringify(locationData, null, 2));
+                        result = {
+                            lat: parseFloat(locationData[0].lat),
+                            lon: parseFloat(locationData[0].lon),
+                            city: locationData[0].address.city || locationData[0].address.town,
+                            country: locationData[0].address.country,
+                            timeZone: null,
+                            mobile: null
+                        };
+                        this.cache[searchText] = result;
+                        return [2, result];
+                    case 2:
+                        e_4 = _a.sent();
+                        this.app.log.Error("Could not geolocate, error: " + JSON.stringify(e_4, null, 2));
+                        this.app.HandleError({
+                            type: "soft",
+                            detail: "bad api response",
+                            message: _("Failed to call Geolocation API, see Looking Glass for errors.")
+                        });
+                        return [2, null];
+                    case 3: return [2];
+                }
+            });
+        });
+    };
+    return GeoLocation;
 }());
 var SIGNAL_CHANGED = 'changed::';
 var SIGNAL_CLICKED = 'clicked';

@@ -63,8 +63,7 @@ class USWeather implements WeatherProvider {
     //--------------------------------------------------------
     //  Functions
     //--------------------------------------------------------
-    public async GetWeather(): Promise<WeatherData> {
-		let loc = this.app.config.GetLocation(true);
+    public async GetWeather(loc: Location): Promise<WeatherData> {
 		if (loc == null) return null;
 
 		// getting grid and station data
@@ -83,7 +82,7 @@ class USWeather implements WeatherProvider {
 						this.app.HandleError({
 							type: "hard",
 							userError: true,
-							detail: "bad location format",
+							detail: "location not covered",
 							service: "us-weather",
 							message: _("Location is outside US, please use a different provider.")
 						})

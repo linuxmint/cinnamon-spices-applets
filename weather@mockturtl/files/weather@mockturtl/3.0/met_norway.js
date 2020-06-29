@@ -67,13 +67,13 @@ var MetNorway = (function () {
         this.app = app;
         this.sunCalc = new SunCalc();
     }
-    MetNorway.prototype.GetWeather = function () {
+    MetNorway.prototype.GetWeather = function (loc) {
         return __awaiter(this, void 0, void 0, function () {
             var query, json, e_1;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        query = this.GetUrl();
+                        query = this.GetUrl(loc);
                         if (!(query != "" && query != null)) return [3, 6];
                         this.app.log.Debug("MET Norway API query: " + query);
                         _a.label = 1;
@@ -272,13 +272,9 @@ var MetNorway = (function () {
         }
         return conditions[result].name;
     };
-    MetNorway.prototype.GetUrl = function () {
-        var location = this.app.config._location.replace(" ", "");
+    MetNorway.prototype.GetUrl = function (loc) {
         var url = this.baseUrl + "lat=";
-        if (!isCoordinate(location))
-            return "";
-        var latLon = location.split(",");
-        url += (latLon[0] + "&lon=" + latLon[1]);
+        url += (loc.lat + "&lon=" + loc.lon);
         return url;
     };
     MetNorway.prototype.DeconstructCondtition = function (icon) {

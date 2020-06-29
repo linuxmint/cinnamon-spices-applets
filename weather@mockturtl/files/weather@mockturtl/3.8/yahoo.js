@@ -27,12 +27,11 @@ class Yahoo {
         this.maxHourlyForecastSupport = 0;
         this.app = _app;
     }
-    async GetWeather() {
-        let loc = this.ConstructLoc();
+    async GetWeather(loc) {
         let json;
         if (loc != null) {
             try {
-                json = await this.app.SpawnProcess(["python3", this.app.appletDir + "/../yahoo-bridge.py", "--params", JSON.stringify({ lat: loc[0].toString(), lon: loc[1].toString() })]);
+                json = await this.app.SpawnProcess(["python3", this.app.appletDir + "/../yahoo-bridge.py", "--params", JSON.stringify({ lat: loc.lat.toString(), lon: loc.lon.toString() })]);
             }
             catch (e) {
                 this.app.HandleError({ type: "hard", service: "yahoo", detail: "unknown", message: _("Unknown Error happened while calling Yahoo bridge,\n see Looking Glass log for errors") });
@@ -121,18 +120,6 @@ class Yahoo {
         catch (e) {
             this.app.log.Error("DarkSky payload parsing error: " + e);
             this.app.HandleError({ type: "soft", detail: "unusal payload", service: "darksky", message: _("Failed to Process Weather Info") });
-            return null;
-        }
-    }
-    ;
-    ConstructLoc() {
-        let location = this.app.config._location.replace(" ", "");
-        if (isCoordinate(location)) {
-            return location.split(",");
-        }
-        else {
-            this.app.log.Error("Yahoo: Location is not a coordinate");
-            this.app.HandleError({ type: "hard", detail: "bad location format", service: "darksky", userError: true, message: ("Please Check the location,\nmake sure it is a coordinate") });
             return null;
         }
     }

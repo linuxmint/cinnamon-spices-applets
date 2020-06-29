@@ -40,8 +40,8 @@ class DarkSky {
         this.unit = null;
         this.app = _app;
     }
-    async GetWeather() {
-        let query = this.ConstructQuery();
+    async GetWeather(loc) {
+        let query = this.ConstructQuery(loc);
         let json;
         if (query != "" && query != null) {
             this.app.log.Debug("DarkSky API query: " + query);
@@ -155,11 +155,10 @@ class DarkSky {
         let lang = systemLocale.split("-")[0];
         return lang;
     }
-    ConstructQuery() {
+    ConstructQuery(loc) {
         this.SetQueryUnit();
         let query;
         let key = this.app.config._apiKey.replace(" ", "");
-        let location = this.app.config._location.replace(" ", "");
         if (this.app.config.noApiKey()) {
             this.app.log.Error("DarkSky: No API Key given");
             this.app.HandleError({
@@ -170,22 +169,14 @@ class DarkSky {
             });
             return "";
         }
-        if (isCoordinate(location)) {
-            query = this.query + key + "/" + location +
-                "?exclude=minutely,flags" + "&units=" + this.unit;
-            let locale = this.ConvertToAPILocale(this.app.currentLocale);
-            if (isLangSupported(locale, this.supportedLanguages) && this.app.config._translateCondition) {
-                query = query + "&lang=" + locale;
-            }
-            return query;
+        query = this.query + key + "/" + loc.text +
+            "?exclude=minutely,flags" + "&units=" + this.unit;
+        let locale = this.ConvertToAPILocale(this.app.currentLocale);
+        if (isLangSupported(locale, this.supportedLanguages) && this.app.config._translateCondition) {
+            query = query + "&lang=" + locale;
         }
-        else {
-            this.app.log.Error("DarkSky: Location is not a coordinate");
-            this.app.HandleError({ type: "hard", detail: "bad location format", service: "darksky", userError: true, message: ("Please Check the location,\nmake sure it is a coordinate") });
-            return "";
-        }
+        return query;
     }
-    ;
     HandleResponseErrors(json) {
         let code = json.code;
         let error = json.error;

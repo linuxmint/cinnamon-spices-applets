@@ -73,13 +73,12 @@ var USWeather = (function () {
         this.app = _app;
         this.sunCalc = new SunCalc();
     }
-    USWeather.prototype.GetWeather = function () {
+    USWeather.prototype.GetWeather = function (loc) {
         return __awaiter(this, void 0, void 0, function () {
-            var loc, siteData, e_1, error, data, stations, e_2, observations, index, element, _a, _b, _c, hourly, forecast, hourlyForecastPromise, forecastPromise, e_3, error, weather;
+            var siteData, e_1, error, data, stations, e_2, observations, index, element, _a, _b, _c, hourly, forecast, hourlyForecastPromise, forecastPromise, e_3, error, weather;
             return __generator(this, function (_d) {
                 switch (_d.label) {
                     case 0:
-                        loc = this.app.config.GetLocation(true);
                         if (loc == null)
                             return [2, null];
                         if (!(!this.grid || !this.stations || this.currentLoc.text != loc.text)) return [3, 7];
@@ -102,7 +101,7 @@ var USWeather = (function () {
                                 this.app.HandleError({
                                     type: "hard",
                                     userError: true,
-                                    detail: "bad location format",
+                                    detail: "location not covered",
                                     service: "us-weather",
                                     message: _("Location is outside US, please use a different provider.")
                                 });

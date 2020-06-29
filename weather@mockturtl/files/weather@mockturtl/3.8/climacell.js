@@ -45,17 +45,17 @@ class Climacell {
         this.unit = "si";
         this.app = _app;
     }
-    async GetWeather() {
-        let hourly = this.GetData("hourly", this.ParseHourly);
-        let daily = this.GetData("daily", this.ParseDaily);
-        let current = await this.GetData("current", this.ParseWeather);
+    async GetWeather(loc) {
+        let hourly = this.GetData("hourly", loc, this.ParseHourly);
+        let daily = this.GetData("daily", loc, this.ParseDaily);
+        let current = await this.GetData("current", loc, this.ParseWeather);
         current.forecasts = await daily;
         current.hourlyForecasts = await hourly;
         return current;
     }
     ;
-    async GetData(baseUrl, ParseFunction) {
-        let query = this.ConstructQuery(baseUrl);
+    async GetData(baseUrl, loc, ParseFunction) {
+        let query = this.ConstructQuery(baseUrl, loc);
         let json;
         if (query != null) {
             this.app.log.Debug("Query: " + query);
@@ -157,10 +157,9 @@ class Climacell {
         }
         return results;
     }
-    ConstructQuery(subcall) {
+    ConstructQuery(subcall, loc) {
         let query;
         let key = this.app.config._apiKey.replace(" ", "");
-        let location = this.app.config._location.replace(" ", "");
         if (this.app.config.noApiKey()) {
             this.app.log.Error("Climacell: No API Key given");
             this.app.HandleError({
@@ -171,17 +170,9 @@ class Climacell {
             });
             return null;
         }
-        if (isCoordinate(location)) {
-            let loc = location.split(",");
-            query = this.baseUrl + this.callData[subcall].url + "?apikey=" + key + "&lat=" + loc[0] + "&lon=" + loc[1] + "&unit_system=" + this.unit + "&fields=" + this.callData[subcall].required_fields.join();
-            global.log(query);
-            return query;
-        }
-        else {
-            this.app.log.Error("Climacell: Location is not a coordinate");
-            this.app.HandleError({ type: "hard", detail: "bad location format", service: "darksky", userError: true, message: ("Please Check the location,\nmake sure it is a coordinate") });
-            return null;
-        }
+        query = this.baseUrl + this.callData[subcall].url + "?apikey=" + key + "&lat=" + loc.lat + "&lon=" + loc.lon + "&unit_system=" + this.unit + "&fields=" + this.callData[subcall].required_fields.join();
+        global.log(query);
+        return query;
     }
     ;
     ResolveCondition(condition, isNight = false) {

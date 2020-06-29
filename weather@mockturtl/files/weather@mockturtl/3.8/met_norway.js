@@ -31,8 +31,8 @@ class MetNorway {
         this.app = app;
         this.sunCalc = new SunCalc();
     }
-    async GetWeather() {
-        let query = this.GetUrl();
+    async GetWeather(loc) {
+        let query = this.GetUrl(loc);
         let json;
         if (query != "" && query != null) {
             this.app.log.Debug("MET Norway API query: " + query);
@@ -224,13 +224,9 @@ class MetNorway {
         }
         return conditions[result].name;
     }
-    GetUrl() {
-        let location = this.app.config._location.replace(" ", "");
+    GetUrl(loc) {
         let url = this.baseUrl + "lat=";
-        if (!isCoordinate(location))
-            return "";
-        let latLon = location.split(",");
-        url += (latLon[0] + "&lon=" + latLon[1]);
+        url += (loc.lat + "&lon=" + loc.lon);
         return url;
     }
     DeconstructCondtition(icon) {

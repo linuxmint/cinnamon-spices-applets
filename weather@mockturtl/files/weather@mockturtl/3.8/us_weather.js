@@ -37,8 +37,7 @@ class USWeather {
         this.app = _app;
         this.sunCalc = new SunCalc();
     }
-    async GetWeather() {
-        let loc = this.app.config.GetLocation(true);
+    async GetWeather(loc) {
         if (loc == null)
             return null;
         if (!this.grid || !this.stations || this.currentLoc.text != loc.text) {
@@ -56,7 +55,7 @@ class USWeather {
                         this.app.HandleError({
                             type: "hard",
                             userError: true,
-                            detail: "bad location format",
+                            detail: "location not covered",
                             service: "us-weather",
                             message: _("Location is outside US, please use a different provider.")
                         });

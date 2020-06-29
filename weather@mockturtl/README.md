@@ -63,7 +63,7 @@ Sometimes it takes like 5-10 seconds to obtain weather, please be patient when i
 
 * Only covers the UK! 
 
-* It uses the nearest forecast site and observation sites in an 50km area, it displays an error if it does not find one.
+* It uses the nearest forecast site and observation sites in an 50km area, it displays an error if it does not find any. There are less observation sites than forecast sites.
 
 * ***Hourly Weather is 3-hourly weather
 
@@ -73,7 +73,7 @@ Sometimes it takes like 5-10 seconds to obtain weather, please be patient when i
 
 * Only cover the area of US!
 
-* Observations are quite spotty so it combines multiple observations stations if needed in a 50km area, when needed. 
+* Observations are quite spotty so it combines multiple observations stations if needed in a 50km area.
 
 ## Requirements
 

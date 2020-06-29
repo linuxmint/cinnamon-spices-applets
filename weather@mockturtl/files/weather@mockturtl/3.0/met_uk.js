@@ -89,7 +89,7 @@ var MetUk = (function () {
                     case 0:
                         if (newLoc == null)
                             return [2, null];
-                        if (!(this.currentLoc != newLoc || this.forecastSite == null || this.observationSites == null || this.observationSites.length == 0)) return [3, 6];
+                        if (!(this.currentLoc == null || this.currentLoc.text != newLoc.text || this.forecastSite == null || this.observationSites == null || this.observationSites.length == 0)) return [3, 6];
                         this.currentLoc = newLoc;
                         forecastSitelist = null;
                         currentSitelist = null;
@@ -108,7 +108,7 @@ var MetUk = (function () {
                         this.app.log.Error("Failed to get sitelist, error: " + JSON.stringify(e_1, null, 2));
                         return [2, null];
                     case 5:
-                        this.forecastSite = this.GetClosestSite(forecastSitelist, this.app.config._location);
+                        this.forecastSite = this.GetClosestSite(forecastSitelist, newLoc);
                         this.app.log.Debug("Forecast site found: " + JSON.stringify(this.forecastSite, null, 2));
                         this.observationSites = [];
                         for (index = 0; index < currentSitelist.Locations.Location.length; index++) {
@@ -120,14 +120,17 @@ var MetUk = (function () {
                         }
                         this.observationSites = this.SortObservationSites(this.observationSites);
                         this.app.log.Debug("Observation sites found: " + JSON.stringify(this.observationSites, null, 2));
-                        _d.label = 6;
+                        return [3, 7];
                     case 6:
+                        this.app.log.Debug("Site data downloading skipped");
+                        _d.label = 7;
+                    case 7:
                         if (this.observationSites == null || this.observationSites.length == 0 || this.forecastSite.dist > 100000) {
                             this.app.log.Error("User is probably not in UK, aborting");
                             this.app.HandleError({
                                 type: "hard",
                                 userError: true,
-                                detail: "location not found",
+                                detail: "location not covered",
                                 message: "MET Office UK only covers the UK, please make sure your location is in the country",
                                 service: "met-uk"
                             });
@@ -137,37 +140,37 @@ var MetUk = (function () {
                         hourlyPayload = this.GetData(this.baseUrl + this.forecastPrefix + this.forecastSite.id + this.threeHourlyUrl + "&" + this.key, this.ParseHourlyForecast);
                         observations = [];
                         index = 0;
-                        _d.label = 7;
-                    case 7:
-                        if (!(index < this.observationSites.length)) return [3, 12];
-                        element = this.observationSites[index];
                         _d.label = 8;
                     case 8:
-                        _d.trys.push([8, 10, , 11]);
+                        if (!(index < this.observationSites.length)) return [3, 13];
+                        element = this.observationSites[index];
+                        _d.label = 9;
+                    case 9:
+                        _d.trys.push([9, 11, , 12]);
                         this.app.log.Debug("Getting observation data from station: " + element.id);
                         _b = (_a = observations).push;
                         return [4, this.app.LoadJsonAsync(this.baseUrl + this.currentPrefix + element.id + "?res=hourly&" + this.key)];
-                    case 9:
-                        _b.apply(_a, [_d.sent()]);
-                        return [3, 11];
                     case 10:
+                        _b.apply(_a, [_d.sent()]);
+                        return [3, 12];
+                    case 11:
                         _c = _d.sent();
                         this.app.log.Debug("Failed to get observations from " + element.id);
-                        return [3, 11];
-                    case 11:
-                        index++;
-                        return [3, 7];
+                        return [3, 12];
                     case 12:
+                        index++;
+                        return [3, 8];
+                    case 13:
                         currentResult = null;
                         currentResult = this.ParseCurrent(observations);
                         if (!currentResult)
                             return [2, null];
                         return [4, forecastPromise];
-                    case 13:
+                    case 14:
                         forecastResult = _d.sent();
                         currentResult.forecasts = (!forecastResult) ? [] : forecastResult;
                         return [4, hourlyPayload];
-                    case 14:
+                    case 15:
                         threeHourlyForecast = _d.sent();
                         currentResult.hourlyForecasts = (!threeHourlyForecast) ? [] : threeHourlyForecast;
                         return [2, currentResult];
@@ -424,12 +427,11 @@ var MetUk = (function () {
     };
     MetUk.prototype.GetClosestSite = function (siteList, loc) {
         var sites = siteList.Locations.Location;
-        var latlong = loc.split(",");
         var closest = sites[0];
-        closest.dist = GetDistance(parseFloat(closest.latitude), parseFloat(closest.longitude), parseFloat(latlong[0]), parseFloat(latlong[1]));
+        closest.dist = GetDistance(parseFloat(closest.latitude), parseFloat(closest.longitude), loc.lat, loc.lon);
         for (var index = 0; index < sites.length; index++) {
             var element = sites[index];
-            element.dist = GetDistance(parseFloat(element.latitude), parseFloat(element.longitude), parseFloat(latlong[0]), parseFloat(latlong[1]));
+            element.dist = GetDistance(parseFloat(element.latitude), parseFloat(element.longitude), loc.lat, loc.lon);
             if (element.dist < closest.dist) {
                 closest = element;
             }

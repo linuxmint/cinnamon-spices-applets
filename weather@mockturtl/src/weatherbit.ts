@@ -60,11 +60,11 @@ class Weatherbit implements WeatherProvider {
     //--------------------------------------------------------
     //  Functions
     //--------------------------------------------------------
-    public async GetWeather(): Promise<WeatherData> {
-		let forecastPromise = this.GetData(this.daily_url, this.ParseForecast) as Promise<ForecastData[]>;
+    public async GetWeather(loc: Location): Promise<WeatherData> {
+		let forecastPromise = this.GetData(this.daily_url, loc, this.ParseForecast) as Promise<ForecastData[]>;
 		let hourlyPromise = null;
-		if (!!this.hourlyAccess) hourlyPromise = this.GetData(this.hourly_url, this.ParseHourlyForecast) as Promise<HourlyForecastData[]>;
-		let currentResult = await this.GetData(this.current_url, this.ParseCurrent) as WeatherData;
+		if (!!this.hourlyAccess) hourlyPromise = this.GetData(this.hourly_url, loc, this.ParseHourlyForecast) as Promise<HourlyForecastData[]>;
+		let currentResult = await this.GetData(this.current_url, loc, this.ParseCurrent) as WeatherData;
 		if (!currentResult) return null;
 		
 		let forecastResult = await forecastPromise;
@@ -81,8 +81,8 @@ class Weatherbit implements WeatherProvider {
      * @param baseUrl 
      * @param ParseFunction returns WeatherData or ForecastData Object
      */
-    private async GetData(baseUrl: string, ParseFunction: (json: any, context: any) => WeatherData | ForecastData[] | HourlyForecastData[]) {
-        let query = this.ConstructQuery(baseUrl);
+    private async GetData(baseUrl: string, loc: Location,  ParseFunction: (json: any, context: any) => WeatherData | ForecastData[] | HourlyForecastData[]) {
+        let query = this.ConstructQuery(baseUrl, loc);
         let json;
         if (query != null) {
             this.app.log.Debug("Query: " + query);
@@ -266,9 +266,8 @@ class Weatherbit implements WeatherProvider {
         return lang;
     }
 
-    private ConstructQuery(query: string): string {
+    private ConstructQuery(query: string, loc: Location): string {
         let key = this.app.config._apiKey.replace(" ", "");
-        let location = this.app.config._location.replace(" ", "");
         if (this.app.config.noApiKey()) {
             this.app.log.Error("DarkSky: No API Key given");
             this.app.HandleError({
@@ -277,21 +276,14 @@ class Weatherbit implements WeatherProvider {
                   "detail": "no key",
                    message: _("Please enter API key in settings,\nor get one first on https://www.weatherbit.io/account/create")});
             return "";
-        }
-        if (isCoordinate(location)) {
-            let latLong = location.split(",");
-            query = query + "key="+ key + "&lat=" + latLong[0] + "&lon=" + latLong[1] + "&units=S"
-            let lang = this.ConvertToAPILocale(this.app.currentLocale);
-            if (isLangSupported(lang, this.supportedLanguages) && this.app.config._translateCondition) {
-                query = query + "&lang=" + lang;
-            }
-            return query;
-        }
-        else {
-            this.app.log.Error("Weatherbit: Location is not a coordinate");
-            this.app.HandleError({type: "hard", detail: "bad location format", service:"weatherbit", userError: true, message: ("Please Check the location,\nmake sure it is a coordinate") })
-            return "";
-        }
+		}
+		
+		query = query + "key="+ key + "&lat=" + loc.lat + "&lon=" + loc.lon + "&units=S"
+		let lang = this.ConvertToAPILocale(this.app.currentLocale);
+		if (isLangSupported(lang, this.supportedLanguages) && this.app.config._translateCondition) {
+			query = query + "&lang=" + lang;
+		}
+		return query;
     };
 
     /** Handles API Scpecific HTTP errors  */

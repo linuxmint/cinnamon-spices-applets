@@ -55,8 +55,8 @@ class OpenWeatherMap implements WeatherProvider {
     //  Functions
     //--------------------------------------------------------
 
-    public async GetWeather(): Promise<WeatherData> {
-      let query = this.ConstructQuery(this.base_url);
+    public async GetWeather(loc: Location): Promise<WeatherData> {
+      let query = this.ConstructQuery(this.base_url, loc);
       let json;
       if (query != null) {
           this.app.log.Debug("Query: " + query);
@@ -178,38 +178,16 @@ class OpenWeatherMap implements WeatherProvider {
     };
 
 
-    private ConstructQuery(baseUrl: string): string {
+    private ConstructQuery(baseUrl: string, loc: Location): string {
         let query = baseUrl;
-        let locString = this.ParseLocation();
-        if (locString != null) {
-            query = query + locString + "&appid=";
-             // Append Language if supported and enabled
-            query += "1c73f8259a86c6fd43c7163b543c8640";
-            let locale: string = this.ConvertToAPILocale(this.app.currentLocale);
-            if (this.app.config._translateCondition && isLangSupported(locale, this.supportedLanguages)) {
-                query = query + "&lang=" + locale;
-            }
-            return query;
-        }
-        return null;
-    };
-
-    private ParseLocation(): string {
-        let loc = this.app.config._location.replace(/ /g, "");
-        if (!nonempty(loc)) {
-          this.app.HandleError({type: "hard", userError: true, "detail": "no location", message: _("Please enter a Location in settings")});
-          this.app.log.Error("OpenWeatherMap: No Location was provided");
-          return null;
-        }
-
-        if (!isCoordinate(loc)) {
-          this.app.HandleError({type: "hard", userError: true, "detail": "bad location format", message: _("Please enter location in the correct format (coordinates)")});
-          this.app.log.Error("OpenWeatherMap: Location was provided in bad format");
-          return null;
-        }
-
-        let locArr = loc.split(',');
-        return "lat=" + locArr[0] + "&lon=" + locArr[1];
+		query = query + "lat=" + loc.lat + "&lon=" + loc.lon + "&appid=";
+		query += "1c73f8259a86c6fd43c7163b543c8640";
+		// Append Language if supported and enabled
+		let locale: string = this.ConvertToAPILocale(this.app.currentLocale);
+		if (this.app.config._translateCondition && isLangSupported(locale, this.supportedLanguages)) {
+			query = query + "&lang=" + locale;
+		}
+		return query;
     };
 
     private ConvertToAPILocale(systemLocale: string) {

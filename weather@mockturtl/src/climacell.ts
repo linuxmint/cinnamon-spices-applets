@@ -71,10 +71,10 @@ class Climacell implements WeatherProvider {
     //--------------------------------------------------------
     //  Functions
     //--------------------------------------------------------
-    public async GetWeather(): Promise<WeatherData> {
-        let hourly = this.GetData("hourly", this.ParseHourly) as Promise<HourlyForecastData[]>;
-        let daily = this.GetData("daily", this.ParseDaily) as Promise<ForecastData[]>;
-        let current = await this.GetData("current", this.ParseWeather) as WeatherData;
+    public async GetWeather(loc: Location): Promise<WeatherData> {
+        let hourly = this.GetData("hourly", loc, this.ParseHourly) as Promise<HourlyForecastData[]>;
+        let daily = this.GetData("daily", loc, this.ParseDaily) as Promise<ForecastData[]>;
+        let current = await this.GetData("current", loc, this.ParseWeather) as WeatherData;
         current.forecasts = await daily;
         current.hourlyForecasts = await hourly;
 
@@ -88,8 +88,8 @@ class Climacell implements WeatherProvider {
      * @param baseUrl 
      * @param ParseFunction returns WeatherData or ForecastData Object
      */
-    private async GetData(baseUrl: CallType, ParseFunction: (json: any, context: any) => WeatherData | ForecastData[] | HourlyForecastData[]) {
-        let query = this.ConstructQuery(baseUrl);
+    private async GetData(baseUrl: CallType, loc: Location, ParseFunction: (json: any, context: any) => WeatherData | ForecastData[] | HourlyForecastData[]) {
+        let query = this.ConstructQuery(baseUrl, loc);
         let json;
         if (query != null) {
             this.app.log.Debug("Query: " + query);
@@ -198,10 +198,9 @@ class Climacell implements WeatherProvider {
         return results;
     }
 
-    private ConstructQuery(subcall: CallType): string {
+    private ConstructQuery(subcall: CallType, loc: Location): string {
         let query;
         let key = this.app.config._apiKey.replace(" ", "");
-        let location = this.app.config._location.replace(" ", "");
         if (this.app.config.noApiKey()) {
             this.app.log.Error("Climacell: No API Key given");
             this.app.HandleError({
@@ -211,17 +210,9 @@ class Climacell implements WeatherProvider {
                 message: _("Please enter API key in settings,\nor get one first on " + "https://developer.climacell.co/sign-up")});
             return null;
         }
-        if (isCoordinate(location)) {
-			let loc = location.split(",")
-			query = this.baseUrl + this.callData[subcall].url + "?apikey=" + key + "&lat=" + loc[0] + "&lon=" + loc[1] + "&unit_system=" + this.unit + "&fields=" +  this.callData[subcall].required_fields.join();
-			global.log(query)
-            return query;
-        }
-        else {
-            this.app.log.Error("Climacell: Location is not a coordinate");
-            this.app.HandleError({type: "hard", detail: "bad location format", service:"darksky", userError: true, message: ("Please Check the location,\nmake sure it is a coordinate") })
-            return null;
-        }
+		query = this.baseUrl + this.callData[subcall].url + "?apikey=" + key + "&lat=" + loc.lat + "&lon=" + loc.lon + "&unit_system=" + this.unit + "&fields=" +  this.callData[subcall].required_fields.join();
+		global.log(query)
+		return query;
     };
 
     private ResolveCondition(condition: string, isNight: boolean = false): Condition {

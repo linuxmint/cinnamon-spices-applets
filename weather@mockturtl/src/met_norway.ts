@@ -40,8 +40,8 @@ class MetNorway implements WeatherProvider {
         this.sunCalc = new SunCalc();
     }
 
-    public async GetWeather(): Promise<WeatherData> {
-        let query = this.GetUrl();
+    public async GetWeather(loc: Location): Promise<WeatherData> {
+        let query = this.GetUrl(loc);
         let json: any;
         if (query != "" && query != null) {
             this.app.log.Debug("MET Norway API query: " + query);
@@ -266,13 +266,9 @@ class MetNorway implements WeatherProvider {
       return conditions[result].name;
     }
 
-    private GetUrl(): string {
-        let location = this.app.config._location.replace(" ", "");
+    private GetUrl(loc: Location): string {
         let url = this.baseUrl + "lat=";
-        if (!isCoordinate(location)) return "";
-
-        let latLon = location.split(",");
-        url += (latLon[0] + "&lon=" + latLon[1]);
+        url += (loc.lat + "&lon=" + loc.lon);
         return url;
 	}
 	

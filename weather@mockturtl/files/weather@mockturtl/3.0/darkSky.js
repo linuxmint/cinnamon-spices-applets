@@ -76,13 +76,13 @@ var DarkSky = (function () {
         this.unit = null;
         this.app = _app;
     }
-    DarkSky.prototype.GetWeather = function () {
+    DarkSky.prototype.GetWeather = function (loc) {
         return __awaiter(this, void 0, void 0, function () {
             var query, json, e_1;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        query = this.ConstructQuery();
+                        query = this.ConstructQuery(loc);
                         if (!(query != "" && query != null)) return [3, 5];
                         this.app.log.Debug("DarkSky API query: " + query);
                         _a.label = 1;
@@ -203,11 +203,10 @@ var DarkSky = (function () {
         var lang = systemLocale.split("-")[0];
         return lang;
     };
-    DarkSky.prototype.ConstructQuery = function () {
+    DarkSky.prototype.ConstructQuery = function (loc) {
         this.SetQueryUnit();
         var query;
         var key = this.app.config._apiKey.replace(" ", "");
-        var location = this.app.config._location.replace(" ", "");
         if (this.app.config.noApiKey()) {
             this.app.log.Error("DarkSky: No API Key given");
             this.app.HandleError({
@@ -218,22 +217,14 @@ var DarkSky = (function () {
             });
             return "";
         }
-        if (isCoordinate(location)) {
-            query = this.query + key + "/" + location +
-                "?exclude=minutely,flags" + "&units=" + this.unit;
-            var locale = this.ConvertToAPILocale(this.app.currentLocale);
-            if (isLangSupported(locale, this.supportedLanguages) && this.app.config._translateCondition) {
-                query = query + "&lang=" + locale;
-            }
-            return query;
+        query = this.query + key + "/" + loc.text +
+            "?exclude=minutely,flags" + "&units=" + this.unit;
+        var locale = this.ConvertToAPILocale(this.app.currentLocale);
+        if (isLangSupported(locale, this.supportedLanguages) && this.app.config._translateCondition) {
+            query = query + "&lang=" + locale;
         }
-        else {
-            this.app.log.Error("DarkSky: Location is not a coordinate");
-            this.app.HandleError({ type: "hard", detail: "bad location format", service: "darksky", userError: true, message: ("Please Check the location,\nmake sure it is a coordinate") });
-            return "";
-        }
+        return query;
     };
-    ;
     DarkSky.prototype.HandleResponseErrors = function (json) {
         var code = json.code;
         var error = json.error;

@@ -68,8 +68,8 @@ class DarkSky implements WeatherProvider {
     //--------------------------------------------------------
     //  Functions
     //--------------------------------------------------------
-    public async GetWeather(): Promise<WeatherData> {
-        let query = this.ConstructQuery();
+    public async GetWeather(loc: Location): Promise<WeatherData> {
+        let query = this.ConstructQuery(loc);
         let json;
         if (query != "" && query != null) {
             this.app.log.Debug("DarkSky API query: " + query);
@@ -197,11 +197,10 @@ class DarkSky implements WeatherProvider {
         return lang;
     }
 
-    private ConstructQuery(): string {
+    private ConstructQuery(loc: Location): string {
         this.SetQueryUnit();
         let query;
         let key = this.app.config._apiKey.replace(" ", "");
-        let location = this.app.config._location.replace(" ", "");
         if (this.app.config.noApiKey()) {
             this.app.log.Error("DarkSky: No API Key given");
             this.app.HandleError({
@@ -211,22 +210,14 @@ class DarkSky implements WeatherProvider {
                    message: _("Please enter API key in settings,\nor get one first on https://darksky.net/dev/register")});
             return "";
         }
-        if (isCoordinate(location)) {
-            query = this.query + key + "/" + location + 
-            "?exclude=minutely,flags" + "&units=" + this.unit;
-            let locale = this.ConvertToAPILocale(this.app.currentLocale);
-            if (isLangSupported(locale, this.supportedLanguages) && this.app.config._translateCondition) {
-                query = query + "&lang=" + locale;
-            }
-            return query;
-        }
-        else {
-            this.app.log.Error("DarkSky: Location is not a coordinate");
-            this.app.HandleError({type: "hard", detail: "bad location format", service:"darksky", userError: true, message: ("Please Check the location,\nmake sure it is a coordinate") })
-            return "";
-        }
-    };
-
+		query = this.query + key + "/" + loc.text + 
+		"?exclude=minutely,flags" + "&units=" + this.unit;
+		let locale = this.ConvertToAPILocale(this.app.currentLocale);
+		if (isLangSupported(locale, this.supportedLanguages) && this.app.config._translateCondition) {
+			query = query + "&lang=" + locale;
+		}
+		return query;
+    }
 
     private HandleResponseErrors(json: any): void {
         let code = json.code;

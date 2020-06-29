@@ -73,17 +73,17 @@ var Weatherbit = (function () {
         this.hourlyAccess = true;
         this.app = _app;
     }
-    Weatherbit.prototype.GetWeather = function () {
+    Weatherbit.prototype.GetWeather = function (loc) {
         return __awaiter(this, void 0, void 0, function () {
             var forecastPromise, hourlyPromise, currentResult, forecastResult, hourlyResult;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        forecastPromise = this.GetData(this.daily_url, this.ParseForecast);
+                        forecastPromise = this.GetData(this.daily_url, loc, this.ParseForecast);
                         hourlyPromise = null;
                         if (!!this.hourlyAccess)
-                            hourlyPromise = this.GetData(this.hourly_url, this.ParseHourlyForecast);
-                        return [4, this.GetData(this.current_url, this.ParseCurrent)];
+                            hourlyPromise = this.GetData(this.hourly_url, loc, this.ParseHourlyForecast);
+                        return [4, this.GetData(this.current_url, loc, this.ParseCurrent)];
                     case 1:
                         currentResult = _a.sent();
                         if (!currentResult)
@@ -102,13 +102,13 @@ var Weatherbit = (function () {
         });
     };
     ;
-    Weatherbit.prototype.GetData = function (baseUrl, ParseFunction) {
+    Weatherbit.prototype.GetData = function (baseUrl, loc, ParseFunction) {
         return __awaiter(this, void 0, void 0, function () {
             var query, json, e_1;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        query = this.ConstructQuery(baseUrl);
+                        query = this.ConstructQuery(baseUrl, loc);
                         if (!(query != null)) return [3, 5];
                         this.app.log.Debug("Query: " + query);
                         _a.label = 1;
@@ -275,9 +275,8 @@ var Weatherbit = (function () {
         }
         return lang;
     };
-    Weatherbit.prototype.ConstructQuery = function (query) {
+    Weatherbit.prototype.ConstructQuery = function (query, loc) {
         var key = this.app.config._apiKey.replace(" ", "");
-        var location = this.app.config._location.replace(" ", "");
         if (this.app.config.noApiKey()) {
             this.app.log.Error("DarkSky: No API Key given");
             this.app.HandleError({
@@ -288,20 +287,12 @@ var Weatherbit = (function () {
             });
             return "";
         }
-        if (isCoordinate(location)) {
-            var latLong = location.split(",");
-            query = query + "key=" + key + "&lat=" + latLong[0] + "&lon=" + latLong[1] + "&units=S";
-            var lang = this.ConvertToAPILocale(this.app.currentLocale);
-            if (isLangSupported(lang, this.supportedLanguages) && this.app.config._translateCondition) {
-                query = query + "&lang=" + lang;
-            }
-            return query;
+        query = query + "key=" + key + "&lat=" + loc.lat + "&lon=" + loc.lon + "&units=S";
+        var lang = this.ConvertToAPILocale(this.app.currentLocale);
+        if (isLangSupported(lang, this.supportedLanguages) && this.app.config._translateCondition) {
+            query = query + "&lang=" + lang;
         }
-        else {
-            this.app.log.Error("Weatherbit: Location is not a coordinate");
-            this.app.HandleError({ type: "hard", detail: "bad location format", service: "weatherbit", userError: true, message: ("Please Check the location,\nmake sure it is a coordinate") });
-            return "";
-        }
+        return query;
     };
     ;
     Weatherbit.prototype.HandleHTTPError = function (error, uiError) {
