@@ -88,6 +88,8 @@ var AwareDateString = utils.AwareDateString;
 var get = utils.get;
 var delay = utils.delay;
 var isCoordinate = utils.isCoordinate;
+var setTimeout = utils.setTimeout;
+var clearTimeout = utils.clearTimeout;
 if (typeof Promise != "function") {
     var promisePoly = importModule("promise-polyfill");
     var finallyConstructor = promisePoly.finallyConstructor;
@@ -1435,6 +1437,7 @@ var Config = (function () {
             RUSSIAN_STYLE: "tempRussianStyle",
         };
         this.rebuildTriggeredWhileLocked = false;
+        this.doneTypingLocation = null;
         this.app = app;
         this.settings = new AppletSettings(this, UUID, instanceID);
         this.BindSettings();
@@ -1461,11 +1464,19 @@ var Config = (function () {
     };
     ;
     Config.prototype.OnLocationChanged = function () {
+        this.app.log.Debug("User changed location, waiting 3 seconds...");
+        if (this.doneTypingLocation != null)
+            clearTimeout(this.doneTypingLocation);
+        this.doneTypingLocation = setTimeout(Lang.bind(this, this.DoneTypingLocation), 3000);
+    };
+    Config.prototype.OnSettingChanged = function () {
         var locked = this.app.refreshAndRebuild();
         if (locked)
             this.rebuildTriggeredWhileLocked = true;
     };
-    Config.prototype.OnSettingChanged = function () {
+    Config.prototype.DoneTypingLocation = function () {
+        this.app.log.Debug("User has finished typing, beginning refresh");
+        this.doneTypingLocation = null;
         var locked = this.app.refreshAndRebuild();
         if (locked)
             this.rebuildTriggeredWhileLocked = true;

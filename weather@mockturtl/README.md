@@ -59,11 +59,17 @@ This is the default provider.
 
 ### Met Office UK
 
-* Only covers the UK! It uses the nearest forecast and observation site in a 100km, it displays an error if it does not find one.
+Sometimes it takes like 5-10 seconds to obtain weather, please be patient when it loads up the first time.
+
+* Only covers the UK! 
+
+* It uses the nearest forecast site and observation sites in an 50km area, it displays an error if it does not find one.
 
 * ***Hourly Weather is 3-hourly weather
 
 ### US National Weather
+
+Sometimes it takes like 5-10 seconds to obtain weather, please be patient when it loads up the first time.
 
 * Only cover the area of US!
 

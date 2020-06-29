@@ -167,8 +167,8 @@
 		"type": "entry",
 		"default": "London,UK",
 		"dependency": "manualLocation",
-		"description": "Location - Coordinates",
-		"tooltip": "Acceptable inputs is Latitude,Longtitude. e.g.: 68.1932,17.1426"
+		"description": "Location",
+		"tooltip": "Acceptable inputs are Latitude,Longtitude. e.g.: 68.1932,17.1426 or an address.\nWaits for 3 seconds after you stop typing then refreshes the weather."
 	},
 	"getLocation": {
 		"type": "button",

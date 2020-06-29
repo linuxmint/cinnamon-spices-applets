@@ -60,12 +60,14 @@ var AwareDateString = utils.AwareDateString as (date: Date, locale: string, hour
 var get = utils.get as (p: string[], o: any) => any;
 const delay = utils.delay as (ms: number) => Promise<void>;
 var isCoordinate = utils.isCoordinate as (text: any) => boolean;
+var setTimeout = utils.setTimeout as (func: any, ms: number) => any;
+const clearTimeout = utils.clearTimeout as (id: any) => void;
 
 // This always evaluates to True because "var Promise" line exists inside 
 if (typeof Promise != "function") {
 	var promisePoly = importModule("promise-polyfill");
 	var finallyConstructor = promisePoly.finallyConstructor;
-	var setTimeout = promisePoly.setTimeout as (func: any, ms: number) => void;
+	var setTimeout = promisePoly.setTimeout as (func: any, ms: number) => any;
 	var setTimeoutFunc = promisePoly.setTimeoutFunc;
 	var isArray = promisePoly.isArray;
 	var noop = promisePoly.noop;
@@ -611,7 +613,7 @@ class WeatherApplet extends TextIconApplet {
 
 		// Attempt to search for text
 		this.log.Debug("Location is text")
-		// TODO: Factor out geolocation
+		// TODO: Factor out geolocation, add try/catch
 		let locationData = await this.LoadJsonAsync("https://nominatim.openstreetmap.org/search/" + encodeURIComponent(loc) + "?format=json&addressdetails=1");
 		if (locationData.length == 0) {
 			//TODO: Add user facing error
@@ -1728,6 +1730,8 @@ class Config {
 	public keybinding: any;
 
 	public rebuildTriggeredWhileLocked = false;
+	/** Timeout */
+	private doneTypingLocation: any = null;
 
 	private settings: imports.ui.settings.AppletSettings;
 	private app: WeatherApplet;
@@ -1774,12 +1778,22 @@ class Config {
 		IconType.FULLCOLOR
 	};
 
+	/** It was spamming refresh before, changed to wait until user stopped typing fro 3 seconds */
 	private OnLocationChanged() {
+		this.app.log.Debug("User changed location, waiting 3 seconds...");
+		if (this.doneTypingLocation != null) clearTimeout(this.doneTypingLocation);
+		this.doneTypingLocation = setTimeout(Lang.bind(this, this.DoneTypingLocation), 3000);
+	}
+
+	private OnSettingChanged() {
 		let locked = this.app.refreshAndRebuild();
 		if (locked) this.rebuildTriggeredWhileLocked = true;
 	}
 
-	private OnSettingChanged() {
+	/** Called when 3 seconds is up with no change in location */
+	private DoneTypingLocation() {
+		this.app.log.Debug("User has finished typing, beginning refresh");
+		this.doneTypingLocation = null;
 		let locked = this.app.refreshAndRebuild();
 		if (locked) this.rebuildTriggeredWhileLocked = true;
 	}
