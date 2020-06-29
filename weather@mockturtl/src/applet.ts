@@ -1234,7 +1234,7 @@ class UI {
     public displayBar(weather: Weather, provider: WeatherProvider, config: Config): boolean {
 		this._providerCredit.label = _("Powered by") + " " + provider.prettyName;
 		this._providerCredit.url = provider.website;
-		// TODO: show site data if exists
+		// TODO: show site data if exists? if possible - like 1km from here
 		this._timestamp.text = _("As of") + " " + AwareDateString(weather.date, this.app.currentLocale, config._show24Hours);
 		return true;
     }

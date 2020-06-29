@@ -147,18 +147,50 @@ class USWeather implements WeatherProvider {
 		if (observations.length == 1) return result;
 		for (let index = 1; index < observations.length; index++) {
 			const element = observations[index];
-			// TODO: Add debug log when meshing happens like in MET UK
+			let debugText = 
+				" Observation data missing, plugged in from ID " + 
+				element.id + ", index " + index +
+				", distance " 
+				+ Math.round(GetDistance(
+					element.geometry.coordinates[1],
+					element.geometry.coordinates[0],
+					this.currentLoc.lat,
+					this.currentLoc.lon
+				))
+				+ " metres";
 			if (result.properties.icon == null) {
 				result.properties.icon = element.properties.icon;
 				result.properties.textDescription = element.properties.textDescription;
+				this.app.log.Debug("Weather condition" + debugText);
 			}
-			if (result.properties.temperature.value == null) result.properties.temperature.value =element.properties.temperature.value;
-			if (result.properties.windSpeed.value == null) result.properties.windSpeed.value = element.properties.windSpeed.value;
-			if (result.properties.windDirection.value == null) result.properties.windDirection.value = element.properties.windDirection.value;
-			if (result.properties.barometricPressure.value == null) result.properties.barometricPressure.value = element.properties.barometricPressure.value;
-			if (result.properties.relativeHumidity.value == null) result.properties.relativeHumidity.value = element.properties.relativeHumidity.value;
-			if (result.properties.windChill.value == null) result.properties.windChill.value = element.properties.windChill.value;
-			if (result.properties.visibility.value == null) result.properties.visibility.value = element.properties.visibility.value;
+			if (result.properties.temperature.value == null) {
+				result.properties.temperature.value = element.properties.temperature.value;
+				this.app.log.Debug("Temperature" + debugText);
+			}
+			if (result.properties.windSpeed.value == null) {
+				result.properties.windSpeed.value = element.properties.windSpeed.value;
+				this.app.log.Debug("Wind Speed" + debugText);
+			}
+			if (result.properties.windDirection.value == null) {
+				result.properties.windDirection.value = element.properties.windDirection.value;
+				this.app.log.Debug("Wind degree" + debugText);
+			}
+			if (result.properties.barometricPressure.value == null) {
+				result.properties.barometricPressure.value = element.properties.barometricPressure.value;
+				this.app.log.Debug("Pressure" + debugText);
+			}
+			if (result.properties.relativeHumidity.value == null) {
+				result.properties.relativeHumidity.value = element.properties.relativeHumidity.value;
+				this.app.log.Debug("Humidity" + debugText);
+			}
+			if (result.properties.windChill.value == null) {
+				result.properties.windChill.value = element.properties.windChill.value;
+				this.app.log.Debug("WindChill" + debugText);
+			}
+			if (result.properties.visibility.value == null) {
+				result.properties.visibility.value = element.properties.visibility.value;
+				this.app.log.Debug("Visibility" + debugText);
+			}
 		}
 		return result;
 	}

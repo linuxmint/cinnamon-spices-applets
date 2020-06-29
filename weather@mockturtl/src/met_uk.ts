@@ -77,7 +77,7 @@ class MetUk implements WeatherProvider {
 		if (newLoc == null) return null;
 		
 		// Get closest sites
-		if (this.currentLoc != newLoc || this.forecastSite == null || this.observationSites == null || this.observationSites.length == 0) {
+		if (this.currentLoc == null || this.currentLoc.text != newLoc.text || this.forecastSite == null || this.observationSites == null || this.observationSites.length == 0) {
 			this.currentLoc = newLoc;
 			let forecastSitelist = null;
 			let currentSitelist = null;
@@ -89,7 +89,7 @@ class MetUk implements WeatherProvider {
 				this.app.log.Error("Failed to get sitelist, error: " + JSON.stringify(e, null, 2));
 				return null;
 			}
-			this.forecastSite = this.GetClosestSite(forecastSitelist, this.app.config._location);
+			this.forecastSite = this.GetClosestSite(forecastSitelist, newLoc);
 			this.app.log.Debug("Forecast site found: " + JSON.stringify(this.forecastSite, null, 2))
 			// Get close observation sites
 			this.observationSites = [];
@@ -103,7 +103,9 @@ class MetUk implements WeatherProvider {
 			// ascending by distance
 			this.observationSites = this.SortObservationSites(this.observationSites);
 			this.app.log.Debug("Observation sites found: " + JSON.stringify(this.observationSites, null, 2));
-
+		}
+		else {
+			this.app.log.Debug("Site data downloading skipped");
 		}
 
 		// Validation
@@ -113,7 +115,7 @@ class MetUk implements WeatherProvider {
 			this.app.HandleError({
 				type: "hard",
 				userError: true,
-				detail: "location not found",
+				detail: "location not covered",
 				message: "MET Office UK only covers the UK, please make sure your location is in the country",
 				service: "met-uk"
 			})
@@ -408,14 +410,13 @@ class MetUk implements WeatherProvider {
 		return (date.replace("Z", "")) + "T00:00:00Z";
 	}
 
-	private GetClosestSite(siteList: any, loc: string): WeatherSite {
+	private GetClosestSite(siteList: any, loc: Location): WeatherSite {
 		let sites = siteList.Locations.Location as WeatherSite[];
-		let latlong = loc.split(","); 
 		let closest = sites[0];
-		closest.dist = GetDistance(parseFloat(closest.latitude), parseFloat(closest.longitude), parseFloat(latlong[0]), parseFloat(latlong[1]));
+		closest.dist = GetDistance(parseFloat(closest.latitude), parseFloat(closest.longitude), loc.lat, loc.lon);
 		for (let index = 0; index < sites.length; index++) {
 			const element = sites[index];
-			element.dist = GetDistance(parseFloat(element.latitude), parseFloat(element.longitude), parseFloat(latlong[0]), parseFloat(latlong[1]));
+			element.dist = GetDistance(parseFloat(element.latitude), parseFloat(element.longitude), loc.lat, loc.lon);
 			if (element.dist < closest.dist) {
 				closest = element;
 			}
