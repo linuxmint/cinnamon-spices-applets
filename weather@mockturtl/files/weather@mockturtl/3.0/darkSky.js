@@ -84,7 +84,6 @@ var DarkSky = (function () {
                     case 0:
                         query = this.ConstructQuery(loc);
                         if (!(query != "" && query != null)) return [3, 5];
-                        this.app.log.Debug("DarkSky API query: " + query);
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);

@@ -107,6 +107,15 @@ var USWeather = (function () {
                                 });
                             }
                         }
+                        else {
+                            this.app.HandleError({
+                                type: "soft",
+                                userError: true,
+                                detail: "no network response",
+                                service: "us-weather",
+                                message: _("Unexpected response from API")
+                            });
+                        }
                         this.app.log.Error("Failed to Obtain Grid data, error: " + JSON.stringify(e_1, null, 2));
                         return [2, null];
                     case 4:
@@ -119,6 +128,13 @@ var USWeather = (function () {
                     case 6:
                         e_2 = _d.sent();
                         this.app.log.Error("Failed to obtain station data, error: " + JSON.stringify(e_2, null, 2));
+                        this.app.HandleError({
+                            type: "soft",
+                            userError: true,
+                            detail: "no network response",
+                            service: "us-weather",
+                            message: _("Unexpected response from API")
+                        });
                         return [2, null];
                     case 7:
                         observations = [];
@@ -133,7 +149,6 @@ var USWeather = (function () {
                         _d.label = 9;
                     case 9:
                         _d.trys.push([9, 11, , 12]);
-                        this.app.log.Debug("Observation query is: " + this.stations[index].id + "/observations/latest");
                         _b = (_a = observations).push;
                         return [4, this.app.LoadJsonAsync(this.stations[index].id + "/observations/latest")];
                     case 10:
@@ -152,7 +167,7 @@ var USWeather = (function () {
                         _d.label = 14;
                     case 14:
                         _d.trys.push([14, 17, , 18]);
-                        hourlyForecastPromise = this.app.LoadJsonAsync(this.grid.properties.forecastHourly);
+                        hourlyForecastPromise = this.app.LoadJsonAsync(this.grid.properties.forecastHourly + "?units=si");
                         forecastPromise = this.app.LoadJsonAsync(this.grid.properties.forecast);
                         return [4, hourlyForecastPromise];
                     case 15:

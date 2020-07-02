@@ -37,7 +37,6 @@ class OpenWeatherMap {
         let query = this.ConstructQuery(this.base_url, loc);
         let json;
         if (query != null) {
-            this.app.log.Debug("Query: " + query);
             try {
                 json = await this.app.LoadJsonAsync(query);
             }

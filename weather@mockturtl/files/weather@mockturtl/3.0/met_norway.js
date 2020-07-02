@@ -75,7 +75,6 @@ var MetNorway = (function () {
                     case 0:
                         query = this.GetUrl(loc);
                         if (!(query != "" && query != null)) return [3, 6];
-                        this.app.log.Debug("MET Norway API query: " + query);
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);

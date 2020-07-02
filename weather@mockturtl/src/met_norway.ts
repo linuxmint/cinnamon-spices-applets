@@ -44,7 +44,6 @@ class MetNorway implements WeatherProvider {
         let query = this.GetUrl(loc);
         let json: any;
         if (query != "" && query != null) {
-            this.app.log.Debug("MET Norway API query: " + query);
             try {
                 json = await this.app.LoadAsync(query);
             }

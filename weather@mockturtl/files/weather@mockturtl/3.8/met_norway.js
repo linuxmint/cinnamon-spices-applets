@@ -35,7 +35,6 @@ class MetNorway {
         let query = this.GetUrl(loc);
         let json;
         if (query != "" && query != null) {
-            this.app.log.Debug("MET Norway API query: " + query);
             try {
                 json = await this.app.LoadAsync(query);
             }

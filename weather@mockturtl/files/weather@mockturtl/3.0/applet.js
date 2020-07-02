@@ -243,9 +243,19 @@ var WeatherApplet = (function (_super) {
                 switch (_a.label) {
                     case 0: return [4, new Promise(function (resolve, reject) {
                             var message = Message.new('GET', query);
+                            _this.log.Debug("URL called: " + query);
                             _this._httpSession.queue_message(message, function (session, message) {
                                 if (!message) {
                                     reject({ code: 0, message: "no network response", reason_phrase: "no network response", data: get(["response_body", "data"], message) });
+                                    return;
+                                }
+                                if (message.status_code >= 400 && message.status_code < 500) {
+                                    reject({ code: message.status_code, message: "bad status code", reason_phrase: message.reason_phrase, data: get(["response_body", "data"], message) });
+                                    _this.HandleError({
+                                        detail: "bad api response",
+                                        type: "hard",
+                                        message: _("API returned status code between 400 and 500")
+                                    });
                                     return;
                                 }
                                 if (message.status_code > 300 || message.status_code < 200) {
@@ -511,6 +521,11 @@ var WeatherApplet = (function (_super) {
                         weatherInfo = _a.sent();
                         if (weatherInfo == null) {
                             this.log.Error("Unable to obtain Weather Information");
+                            this.HandleError({
+                                type: "hard",
+                                detail: "unknown",
+                                message: _("Could not get weather information"),
+                            });
                             this.Unlock();
                             return [2, "failure"];
                         }
@@ -657,7 +672,7 @@ var WeatherApplet = (function (_super) {
         var nextRefresh = this.loop.GetSecondsUntilNextRefresh();
         this.log.Error("Retrying in the next " + nextRefresh.toString() + " seconds...");
     };
-    WeatherApplet.prototype.HandleHTTPError = function (service, error, ctx, callback) {
+    WeatherApplet.prototype.HandleHTTPError = function (service, error, ctx, override) {
         var uiError = {
             type: "soft",
             detail: "unknown",
@@ -673,8 +688,8 @@ var WeatherApplet = (function (_super) {
             uiError.code = error.code;
             if (error.message == "bad api response - non json")
                 uiError.type = "hard";
-            if (!!callback && callback instanceof Function) {
-                uiError = callback(error, uiError);
+            if (!!override && override instanceof Function) {
+                uiError = override(error, uiError);
             }
         }
         ctx.HandleError(uiError);

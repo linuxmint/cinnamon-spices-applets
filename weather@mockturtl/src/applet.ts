@@ -1,5 +1,5 @@
 //TODO: Do changelog
-//TODO: Add Add stuff to readme abaout US weather and MET office
+//TODO: Add Add stuff to readme about US weather and MET office
 //TODO: do 3.0 settings schema as well
 //TODO: Add info back to settings-schema
 
@@ -254,7 +254,6 @@ class WeatherApplet extends TextIconApplet {
 	};
 
 	/**
-	 * DEPRECATED - 
 	 * Handles obtaining JSON over http. 
 	 * returns HTTPError object on fail.
 	 * @param query fully constructed url
@@ -262,10 +261,21 @@ class WeatherApplet extends TextIconApplet {
 	public async LoadJsonAsync(query: string): Promise <any> {
 		let json = await new Promise((resolve: any, reject: any) => {
 			let message = Message.new('GET', query);
+			this.log.Debug("URL called: " + query);
 			this._httpSession.queue_message(message, (session: any, message: any) => {
 
 				if (!message) {
 					reject({code: 0, message: "no network response", reason_phrase: "no network response", data: get(["response_body", "data"], message)} as HttpError);
+					return;
+				}
+
+				if (message.status_code >= 400 && message.status_code < 500) {
+					reject({code: message.status_code, message: "bad status code", reason_phrase: message.reason_phrase, data: get(["response_body", "data"], message) } as HttpError);
+					this.HandleError({
+						detail: "bad api response",
+						type: "hard",
+						message: _("API returned status code between 400 and 500")
+					})
 					return;
 				}
 					
@@ -537,6 +547,11 @@ class WeatherApplet extends TextIconApplet {
 			let weatherInfo = await this.provider.GetWeather({lat: locationData.lat, lon: locationData.lon, text: locationData.lat.toString() + "," + locationData.lon.toString()});
 			if (weatherInfo == null) {
 				this.log.Error("Unable to obtain Weather Information");
+				this.HandleError({
+					type: "hard",
+					detail: "unknown",
+					message: _("Could not get weather information"),
+				})
 				this.Unlock();
 				return "failure";
 			}
@@ -715,7 +730,7 @@ class WeatherApplet extends TextIconApplet {
 	}
 
 	/** Callback handles any service specific logic */
-	public HandleHTTPError(service: ApiService, error: HttpError, ctx: WeatherApplet, callback?: (error: HttpError, uiError: AppletError) => AppletError) {
+	public HandleHTTPError(service: ApiService, error: HttpError, ctx: WeatherApplet, override?: (error: HttpError, uiError: AppletError) => AppletError) {
 		let uiError = {
 			type: "soft",
 			detail: "unknown",
@@ -731,8 +746,8 @@ class WeatherApplet extends TextIconApplet {
 			uiError.detail = error.message;
 			uiError.code = error.code;
 			if (error.message == "bad api response - non json") uiError.type = "hard";
-			if (!!callback && callback instanceof Function) {
-				uiError = callback(error, uiError);
+			if (!!override && override instanceof Function) {
+				uiError = override(error, uiError);
 			}
 		}
 		ctx.HandleError(uiError);

@@ -77,7 +77,6 @@ var OpenWeatherMap = (function () {
                     case 0:
                         query = this.ConstructQuery(this.base_url, loc);
                         if (!(query != null)) return [3, 5];
-                        this.app.log.Debug("Query: " + query);
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);

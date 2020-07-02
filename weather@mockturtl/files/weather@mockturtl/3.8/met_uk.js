@@ -58,6 +58,13 @@ class MetUk {
             }
             catch (e) {
                 this.app.log.Error("Failed to get sitelist, error: " + JSON.stringify(e, null, 2));
+                this.app.HandleError({
+                    type: "soft",
+                    userError: true,
+                    detail: "no network response",
+                    service: "met-uk",
+                    message: _("Unexpected response from API")
+                });
                 return null;
             }
             this.forecastSite = this.GetClosestSite(forecastSitelist, newLoc);
@@ -97,6 +104,13 @@ class MetUk {
                 observations.push(await this.app.LoadJsonAsync(this.baseUrl + this.currentPrefix + element.id + "?res=hourly&" + this.key));
             }
             catch (_a) {
+                this.app.HandleError({
+                    type: "soft",
+                    userError: true,
+                    detail: "no network response",
+                    service: "us-weather",
+                    message: _("Unexpected response from API")
+                });
                 this.app.log.Debug("Failed to get observations from " + element.id);
             }
         }

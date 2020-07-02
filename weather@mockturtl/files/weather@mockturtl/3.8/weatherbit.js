@@ -56,7 +56,6 @@ class Weatherbit {
         let query = this.ConstructQuery(baseUrl, loc);
         let json;
         if (query != null) {
-            this.app.log.Debug("Query: " + query);
             try {
                 json = await this.app.LoadJsonAsync(query);
             }

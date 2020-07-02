@@ -44,7 +44,6 @@ class DarkSky {
         let query = this.ConstructQuery(loc);
         let json;
         if (query != "" && query != null) {
-            this.app.log.Debug("DarkSky API query: " + query);
             try {
                 json = await this.app.LoadJsonAsync(query);
             }

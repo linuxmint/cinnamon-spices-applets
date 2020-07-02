@@ -106,6 +106,13 @@ var MetUk = (function () {
                     case 4:
                         e_1 = _d.sent();
                         this.app.log.Error("Failed to get sitelist, error: " + JSON.stringify(e_1, null, 2));
+                        this.app.HandleError({
+                            type: "soft",
+                            userError: true,
+                            detail: "no network response",
+                            service: "met-uk",
+                            message: _("Unexpected response from API")
+                        });
                         return [2, null];
                     case 5:
                         this.forecastSite = this.GetClosestSite(forecastSitelist, newLoc);
@@ -155,6 +162,13 @@ var MetUk = (function () {
                         return [3, 12];
                     case 11:
                         _c = _d.sent();
+                        this.app.HandleError({
+                            type: "soft",
+                            userError: true,
+                            detail: "no network response",
+                            service: "us-weather",
+                            message: _("Unexpected response from API")
+                        });
                         this.app.log.Debug("Failed to get observations from " + element.id);
                         return [3, 12];
                     case 12:

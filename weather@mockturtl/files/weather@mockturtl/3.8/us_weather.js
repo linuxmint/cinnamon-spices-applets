@@ -61,6 +61,15 @@ class USWeather {
                         });
                     }
                 }
+                else {
+                    this.app.HandleError({
+                        type: "soft",
+                        userError: true,
+                        detail: "no network response",
+                        service: "us-weather",
+                        message: _("Unexpected response from API")
+                    });
+                }
                 this.app.log.Error("Failed to Obtain Grid data, error: " + JSON.stringify(e, null, 2));
                 return null;
             }
@@ -70,6 +79,13 @@ class USWeather {
             }
             catch (e) {
                 this.app.log.Error("Failed to obtain station data, error: " + JSON.stringify(e, null, 2));
+                this.app.HandleError({
+                    type: "soft",
+                    userError: true,
+                    detail: "no network response",
+                    service: "us-weather",
+                    message: _("Unexpected response from API")
+                });
                 return null;
             }
         }
@@ -80,7 +96,6 @@ class USWeather {
             if (element.dist > this.MAX_STATION_DIST)
                 break;
             try {
-                this.app.log.Debug("Observation query is: " + this.stations[index].id + "/observations/latest");
                 observations.push(await this.app.LoadJsonAsync(this.stations[index].id + "/observations/latest"));
             }
             catch (_a) {
@@ -90,7 +105,7 @@ class USWeather {
         let hourly = null;
         let forecast = null;
         try {
-            let hourlyForecastPromise = this.app.LoadJsonAsync(this.grid.properties.forecastHourly);
+            let hourlyForecastPromise = this.app.LoadJsonAsync(this.grid.properties.forecastHourly + "?units=si");
             let forecastPromise = this.app.LoadJsonAsync(this.grid.properties.forecast);
             hourly = await hourlyForecastPromise;
             forecast = await forecastPromise;

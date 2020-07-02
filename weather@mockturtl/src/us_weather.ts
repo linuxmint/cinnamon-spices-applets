@@ -88,6 +88,15 @@ class USWeather implements WeatherProvider {
 						})
 					}
 				}
+				else {
+					this.app.HandleError({
+						type: "soft",
+						userError: true,
+						detail: "no network response",
+						service: "us-weather",
+						message: _("Unexpected response from API")
+					})
+				}
 				this.app.log.Error("Failed to Obtain Grid data, error: " + JSON.stringify(e, null, 2));
 				return null;
 			}
@@ -99,6 +108,13 @@ class USWeather implements WeatherProvider {
 			}
 			catch(e) {
 				this.app.log.Error("Failed to obtain station data, error: " + JSON.stringify(e, null, 2));
+				this.app.HandleError({
+					type: "soft",
+					userError: true,
+					detail: "no network response",
+					service: "us-weather",
+					message: _("Unexpected response from API")
+				})
 				return null;
 			}	
 		}
@@ -109,7 +125,7 @@ class USWeather implements WeatherProvider {
 			element.dist = GetDistance(element.geometry.coordinates[1], element.geometry.coordinates[0], loc.lat, loc.lon);
 			if (element.dist > this.MAX_STATION_DIST) break;
 			try {
-				this.app.log.Debug("Observation query is: " + this.stations[index].id + "/observations/latest")
+				//this.app.log.Debug("Observation query is: " + this.stations[index].id + "/observations/latest")
 				observations.push(await this.app.LoadJsonAsync(this.stations[index].id + "/observations/latest"))
 			}
 			catch {
@@ -120,7 +136,7 @@ class USWeather implements WeatherProvider {
 		let hourly = null;
 		let forecast = null;
 		try {
-			let hourlyForecastPromise = this.app.LoadJsonAsync(this.grid.properties.forecastHourly) as Promise<ForecastsPayload>;
+			let hourlyForecastPromise = this.app.LoadJsonAsync(this.grid.properties.forecastHourly + "?units=si") as Promise<ForecastsPayload>;
 			let forecastPromise = this.app.LoadJsonAsync(this.grid.properties.forecast) as Promise<ForecastsPayload>;
 			hourly = await hourlyForecastPromise;
 			forecast = await forecastPromise;

@@ -187,9 +187,19 @@ class WeatherApplet extends TextIconApplet {
     async LoadJsonAsync(query) {
         let json = await new Promise((resolve, reject) => {
             let message = Message.new('GET', query);
+            this.log.Debug("URL called: " + query);
             this._httpSession.queue_message(message, (session, message) => {
                 if (!message) {
                     reject({ code: 0, message: "no network response", reason_phrase: "no network response", data: get(["response_body", "data"], message) });
+                    return;
+                }
+                if (message.status_code >= 400 && message.status_code < 500) {
+                    reject({ code: message.status_code, message: "bad status code", reason_phrase: message.reason_phrase, data: get(["response_body", "data"], message) });
+                    this.HandleError({
+                        detail: "bad api response",
+                        type: "hard",
+                        message: _("API returned status code between 400 and 500")
+                    });
                     return;
                 }
                 if (message.status_code > 300 || message.status_code < 200) {
@@ -410,6 +420,11 @@ class WeatherApplet extends TextIconApplet {
             let weatherInfo = await this.provider.GetWeather({ lat: locationData.lat, lon: locationData.lon, text: locationData.lat.toString() + "," + locationData.lon.toString() });
             if (weatherInfo == null) {
                 this.log.Error("Unable to obtain Weather Information");
+                this.HandleError({
+                    type: "hard",
+                    detail: "unknown",
+                    message: _("Could not get weather information"),
+                });
                 this.Unlock();
                 return "failure";
             }
@@ -553,7 +568,7 @@ class WeatherApplet extends TextIconApplet {
         let nextRefresh = this.loop.GetSecondsUntilNextRefresh();
         this.log.Error("Retrying in the next " + nextRefresh.toString() + " seconds...");
     }
-    HandleHTTPError(service, error, ctx, callback) {
+    HandleHTTPError(service, error, ctx, override) {
         let uiError = {
             type: "soft",
             detail: "unknown",
@@ -569,8 +584,8 @@ class WeatherApplet extends TextIconApplet {
             uiError.code = error.code;
             if (error.message == "bad api response - non json")
                 uiError.type = "hard";
-            if (!!callback && callback instanceof Function) {
-                uiError = callback(error, uiError);
+            if (!!override && override instanceof Function) {
+                uiError = override(error, uiError);
             }
         }
         ctx.HandleError(uiError);
