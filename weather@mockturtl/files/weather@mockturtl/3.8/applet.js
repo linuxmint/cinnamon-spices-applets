@@ -1356,6 +1356,10 @@ class Config {
         let locationData = await this.app.geoLocationService.GetLocation(loc);
         if (locationData == null)
             return null;
+        if (!!locationData.address_string) {
+            this.app.log.Debug("Address found via address search, placing found full address '" + locationData.address_string + "' back to location entry");
+            this.SetLocation(locationData.address_string);
+        }
         return locationData;
     }
 }
@@ -1515,7 +1519,8 @@ class GeoLocation {
                 city: locationData[0].address.city || locationData[0].address.town,
                 country: locationData[0].address.country,
                 timeZone: null,
-                mobile: null
+                mobile: null,
+                address_string: locationData[0].display_name
             };
             this.cache[searchText] = result;
             return result;

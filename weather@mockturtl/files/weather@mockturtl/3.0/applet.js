@@ -1486,6 +1486,10 @@ var Config = (function () {
                         locationData = _a.sent();
                         if (locationData == null)
                             return [2, null];
+                        if (!!locationData.address_string) {
+                            this.app.log.Debug("Address found via address search, placing found full address '" + locationData.address_string + "' back to location entry");
+                            this.SetLocation(locationData.address_string);
+                        }
                         return [2, locationData];
                 }
             });
@@ -1676,7 +1680,8 @@ var GeoLocation = (function () {
                             city: locationData[0].address.city || locationData[0].address.town,
                             country: locationData[0].address.country,
                             timeZone: null,
-                            mobile: null
+                            mobile: null,
+                            address_string: locationData[0].display_name
                         };
                         this.cache[searchText] = result;
                         return [2, result];
