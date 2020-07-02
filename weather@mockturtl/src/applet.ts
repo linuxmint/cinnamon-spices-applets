@@ -62,6 +62,7 @@ const delay = utils.delay as (ms: number) => Promise<void>;
 var isCoordinate = utils.isCoordinate as (text: any) => boolean;
 var setTimeout = utils.setTimeout as (func: any, ms: number) => any;
 const clearTimeout = utils.clearTimeout as (id: any) => void;
+var MillimeterToUserUnits = utils.MillimeterToUserUnits as (mm: number, distanceUnit: DistanceUnits) => number;
 
 // This always evaluates to True because "var Promise" line exists inside 
 if (typeof Promise != "function") {
@@ -1255,7 +1256,7 @@ class UI {
 			if (!!hour.precipation && hour.precipation.type != "none") {
 				let precipationText = null;
 				if (!!hour.precipation.volume && hour.precipation.volume > 0) {
-					precipationText = hour.precipation.volume + " mm";
+					precipationText = MillimeterToUserUnits(hour.precipation.volume, this.app.config._distanceUnit) + " " + ((this.app.config._distanceUnit == "metric") ? _("mm") : _("in"));
 				}
 				if (!!hour.precipation.chance) {
 					precipationText = (precipationText == null) ? "" : (precipationText + ", ")
@@ -2087,7 +2088,7 @@ type WeatherWindSpeedUnits = 'kph' | 'mph' | 'm/s' | 'Knots' | 'Beaufort';
 type WeatherPressureUnits = 'hPa'|'mm Hg'|'in Hg'|'Pa'|'psi'|'atm'|'at';
 
 /** Change settings-schem if you change this! */
-type DistanceUnits = 'km' | 'm';
+type DistanceUnits = 'metric' | 'imperial';
 
 interface Weather {
 	date: Date,

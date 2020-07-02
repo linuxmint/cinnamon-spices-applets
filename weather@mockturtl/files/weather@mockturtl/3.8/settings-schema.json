@@ -241,11 +241,11 @@
 	},
 	"distanceUnit": {
 		"type": "combobox",
-		"default": "km",
+		"default": "metric",
 		"description": "Distance unit",
 		"options": {
-			"Kilometres": "km",
-			"Miles": "m"
+			"Metric": "metric",
+			"Imperial": "imperial"
 		}
 	},
 	"showTextInPanel": {

@@ -90,6 +90,7 @@ var delay = utils.delay;
 var isCoordinate = utils.isCoordinate;
 var setTimeout = utils.setTimeout;
 var clearTimeout = utils.clearTimeout;
+var MillimeterToUserUnits = utils.MillimeterToUserUnits;
 if (typeof Promise != "function") {
     var promisePoly = importModule("promise-polyfill");
     var finallyConstructor = promisePoly.finallyConstructor;
@@ -1073,7 +1074,7 @@ var UI = (function () {
             if (!!hour.precipation && hour.precipation.type != "none") {
                 var precipationText = null;
                 if (!!hour.precipation.volume && hour.precipation.volume > 0) {
-                    precipationText = hour.precipation.volume + " mm";
+                    precipationText = MillimeterToUserUnits(hour.precipation.volume, this.app.config._distanceUnit) + " " + ((this.app.config._distanceUnit == "metric") ? _("mm") : _("in"));
                 }
                 if (!!hour.precipation.chance) {
                     precipationText = (precipationText == null) ? "" : (precipationText + ", ");

@@ -368,8 +368,13 @@ var KmToM = (km: number): number => {
 }
 
 var MetretoUserUnits = (m: number, distanceUnit: DistanceUnits): number => {
-	if (distanceUnit == "km") return Math.round(m / 1000 * 10) / 10;
+	if (distanceUnit == "metric") return Math.round(m / 1000 * 10) / 10;
 	return Math.round(KmToM(m / 1000)*10) / 10;
+}
+
+var MillimeterToUserUnits = (mm: number, distanceUnit: DistanceUnits): number => {
+	if (distanceUnit == "metric") return Math.round(mm * 100) / 100;
+	return Math.round(mm * 0.03937*100) / 100;
 }
 
 var isNumeric = (n: any): boolean => {
