@@ -104,7 +104,6 @@ class USWeather implements WeatherProvider {
 			try {
 				let stations = await this.app.LoadJsonAsync(this.grid.properties.observationStations) as StationsPayload;
 				this.stations = stations.features;
-				//  TODO: Validate stations?
 			}
 			catch(e) {
 				this.app.log.Error("Failed to obtain station data, error: " + JSON.stringify(e, null, 2));
@@ -148,8 +147,8 @@ class USWeather implements WeatherProvider {
 		}
 		
 		let weather = this.ParseCurrent(observations as any[], hourly);
-		// TODO: Parse Hourly Weather
 		weather.forecasts = this.ParseForecast(forecast);
+		weather.hourlyForecasts = this.ParseHourlyForecast(hourly, this);
 
 		return weather;
 	};
@@ -292,34 +291,25 @@ class USWeather implements WeatherProvider {
 	  }
 	};
 
-	private ParseHourlyForecast(json: any, self: USWeather): HourlyForecastData[] { 
+	private ParseHourlyForecast(json: ForecastsPayload, self: USWeather): HourlyForecastData[] { 
 		let forecasts: HourlyForecastData[] = [];
 		try {
-			for (let i = 0; i < json.SiteRep.DV.Location.Period.length; i++) {
-				/*let day = json.SiteRep.DV.Location.Period[i];
-				for (let index = 0; index < day.Rep.length; index++) {
-					const hour = day.Rep[index] as ThreeHourPayload;
-					let timestamp = new Date(date.getTime());
-					timestamp.setHours(timestamp.getHours() + (parseInt(hour.$)/60));
-					if (timestamp < new Date()) continue;
+			for (let i = 0; i < json.properties.periods.length; i++) {
+				let hour = json.properties.periods[i];
+					let timestamp = new Date(hour.startTime);
 
 					let forecast: HourlyForecastData = {          
 						date: timestamp,
-						temp: CelsiusToKelvin(parseFloat(hour.T)),
-						condition: self.ResolveCondition(hour.W),
-						precipation: {
-							type: "rain",
-							volume: null,
-							chance: parseFloat(hour.Pp)
-						}
-					};
+						temp: CelsiusToKelvin(hour.temperature),
+						condition: self.ResolveCondition(hour.icon),
+						precipation: null
+					}
 					forecasts.push(forecast);      
-				}  */
 			}
 			return forecasts;
 		}
 		catch(e) {
-			self.app.log.Error("MET UK Forecast Parsing error: " + e);
+			self.app.log.Error("US Weather service Forecast Parsing error: " + e);
 			self.app.HandleError({type: "soft", service: "met-uk", detail: "unusal payload", message: _("Failed to Process Forecast Info")})
 			return null; 
 		}

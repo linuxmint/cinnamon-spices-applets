@@ -117,6 +117,7 @@ class USWeather {
         }
         let weather = this.ParseCurrent(observations, hourly);
         weather.forecasts = this.ParseForecast(forecast);
+        weather.hourlyForecasts = this.ParseHourlyForecast(hourly, this);
         return weather;
     }
     ;
@@ -247,12 +248,21 @@ class USWeather {
     ParseHourlyForecast(json, self) {
         let forecasts = [];
         try {
-            for (let i = 0; i < json.SiteRep.DV.Location.Period.length; i++) {
+            for (let i = 0; i < json.properties.periods.length; i++) {
+                let hour = json.properties.periods[i];
+                let timestamp = new Date(hour.startTime);
+                let forecast = {
+                    date: timestamp,
+                    temp: CelsiusToKelvin(hour.temperature),
+                    condition: self.ResolveCondition(hour.icon),
+                    precipation: null
+                };
+                forecasts.push(forecast);
             }
             return forecasts;
         }
         catch (e) {
-            self.app.log.Error("MET UK Forecast Parsing error: " + e);
+            self.app.log.Error("US Weather service Forecast Parsing error: " + e);
             self.app.HandleError({ type: "soft", service: "met-uk", detail: "unusal payload", message: _("Failed to Process Forecast Info") });
             return null;
         }

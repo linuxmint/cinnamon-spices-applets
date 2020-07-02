@@ -184,6 +184,7 @@ var USWeather = (function () {
                     case 18:
                         weather = this.ParseCurrent(observations, hourly);
                         weather.forecasts = this.ParseForecast(forecast);
+                        weather.hourlyForecasts = this.ParseHourlyForecast(hourly, this);
                         return [2, weather];
                 }
             });
@@ -317,12 +318,21 @@ var USWeather = (function () {
     USWeather.prototype.ParseHourlyForecast = function (json, self) {
         var forecasts = [];
         try {
-            for (var i = 0; i < json.SiteRep.DV.Location.Period.length; i++) {
+            for (var i = 0; i < json.properties.periods.length; i++) {
+                var hour = json.properties.periods[i];
+                var timestamp = new Date(hour.startTime);
+                var forecast = {
+                    date: timestamp,
+                    temp: CelsiusToKelvin(hour.temperature),
+                    condition: self.ResolveCondition(hour.icon),
+                    precipation: null
+                };
+                forecasts.push(forecast);
             }
             return forecasts;
         }
         catch (e) {
-            self.app.log.Error("MET UK Forecast Parsing error: " + e);
+            self.app.log.Error("US Weather service Forecast Parsing error: " + e);
             self.app.HandleError({ type: "soft", service: "met-uk", detail: "unusal payload", message: _("Failed to Process Forecast Info") });
             return null;
         }
