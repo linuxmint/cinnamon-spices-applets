@@ -1,5 +1,6 @@
 //const Mainloop = imports.mainloop;
 const Gio = imports.gi.Gio;
+const Gtk = imports.gi.Gtk;
 const GLib = imports.gi.GLib;
 const {Clone, BinLayout, ActorAlign} = imports.gi.Clutter;
 const {   TextureCache,
@@ -21,7 +22,7 @@ const {spawnCommandLine, spawn, unref} = imports.misc.util;
 const {createStore} = imports.misc.state;
 
 const {_, ApplicationType, stripMarkupRegex} = require('./constants');
-const {tryFn} = require('./utils');
+const {tryFn, ShowTooltip} = require('./utils');
 const PlacementTOOLTIP = 1, PlacementUNDER = 2, PlacementNONE = 3;
 
 const USER_DESKTOP_PATH = getUserDesktopDir();
@@ -575,6 +576,9 @@ class AppListGridButton extends PopupBaseMenuItem {
 
     onDragBegin() {
         this.actor.set_opacity(51);
+        if (this.tooltip) {
+            this.tooltip.destroy();
+        }
     }
 
     onDragCancelled() {
@@ -614,7 +618,6 @@ class AppListGridButton extends PopupBaseMenuItem {
             markup += '\n<span size="small">' + description + '</span>';
         }
 
-
         if (this.buttonState.app.shouldHighlight) {
             markup = '<b>' + markup + '</b>';
         }
@@ -630,7 +633,7 @@ class AppListGridButton extends PopupBaseMenuItem {
         let name = this.buttonState.app.name.replace(/&/g, '&amp;');
         let description = this.buttonState.app.description ? this.buttonState.app.description.replace(/&/g, '&amp;') : '';
         let tooltipMarkup;
-        let limit = 100; //this.state.isListView ? 80 : 300;
+        let limit = 100;
         const wordWrap = function(text, limit) {
             let regex = '.{1,' + limit + '}(\\s|$)|\\S+?(\\s|$)';
             return text.match(RegExp(regex, 'g')).join('\n');
@@ -671,8 +674,26 @@ class AppListGridButton extends PopupBaseMenuItem {
 
         if (this.state.settings.descriptionPlacement === PlacementTOOLTIP) {
             this.formatTooltip();
+            let [x, y] = this.actor.get_transformed_position();
+            let y_extra = 0;
             let {width, height} = this.actor;
-            this.state.trigger('setTooltip', this.actor.get_transformed_position(), width, height, this.tooltipMarkup);
+            let center_x = false; //should tooltip x pos. be centered on x
+            if (this.state.isListView) {
+                x += width + 20 * global.ui_scale;
+                //y = y;
+                // Don't let the tooltip cover menu items when the menu
+                // is oriented next to the right side of the monitor.
+                const {style_class} = this.state.panelLocation;
+                if (style_class === 'panelRight') {//TODO: also detect when panel is vertical-right
+                    y += height + 8 * global.ui_scale;
+                }
+            } else {//grid view
+                x += Math.floor(width / 2);
+                y += height + 8 * global.ui_scale;
+                center_x = true;
+            }
+
+            this.tooltip = new ShowTooltip(this.actor, x, y, center_x, this.tooltipMarkup);
         }
         return false;
     }
@@ -684,8 +705,8 @@ class AppListGridButton extends PopupBaseMenuItem {
 
         this.entered = null;
         this.actor.set_style_class_name('menu-application-button');
-        if (this.state.settings.descriptionPlacement === PlacementTOOLTIP) {
-            this.state.trigger('setTooltip');
+        if (this.tooltip) {
+            this.tooltip.destroy();
         }
     }
 
@@ -694,13 +715,38 @@ class AppListGridButton extends PopupBaseMenuItem {
     }
 
     handleButtonRelease(actor, e) {
+        const prepareGridContextMenu = () => {
+            this.buttonBox.height = this.buttonBox.get_preferred_size()[1];
+            let x = -20, y = 20;
+            if (this.buttonState.column === this.state.settings.appsGridColumnCount - 1) {
+                x = 20;
+            }
+            if (this.state.trigger('isNotInScrollView', this)) {
+                y = Math.round(this.actor.height * 1.9);
+            }
+            this.menu.actor.anchor_x = x;
+            this.menu.actor.anchor_y = y;
+        };
+
+        const closeOtherContextMenus = () => {
+            const buttons = this.state.trigger('getActiveButtons');
+            for (let i = 0, len = buttons.length; i < len; i++) {
+                if (buttons[i].buttonState.appIndex !== this.buttonState.appIndex) {
+                    buttons[i].closeMenu();
+                    buttons[i].handleLeave(true);
+                }
+            }
+        };
+
         let button = !e ? 3 : e.get_button();
         if (button === 1) {//left click
             if (this.state.contextMenuIsOpen != null) {
                 if (this.menu.isOpen && this.menu._activeMenuItem) {
                     this.menu._activeMenuItem.activate();
                 } else {
-                    this.activateContextMenus(e, true);
+                    if (!this.menu.isOpen) {
+                        closeOtherContextMenus();
+                    }
                     this.state.set({contextMenuIsOpen: null});
                 }
                 return false;
@@ -708,9 +754,15 @@ class AppListGridButton extends PopupBaseMenuItem {
             this.activate(e);
         } else if (button === 3) {//right click
             if (!this.state.isListView && this.buttonState.appType === ApplicationType._applications) {
-                this.prepareContextMenu();
+                prepareGridContextMenu();
             }
-            this.activateContextMenus(e);
+            if (!this.menu.isOpen) {
+                closeOtherContextMenus();
+            }
+            if (this.tooltip) {
+                this.tooltip.destroy();
+            }
+            this.toggleMenu();
         }
         return true;
     }
@@ -735,7 +787,9 @@ class AppListGridButton extends PopupBaseMenuItem {
             }
         } else if (this.buttonState.appType === ApplicationType._recent) {
             if (this.buttonState.app.clearList) {
-                this.state.trigger('purgeRecentItems');
+                Gtk.RecentManager.get_default().purge_items();
+                this.state.set({currentCategory: 'all'});
+                return;
             } else {
                 Gio.app_info_launch_default_for_uri(this.buttonState.app.uri, global.create_app_launch_context());
             }
@@ -745,22 +799,6 @@ class AppListGridButton extends PopupBaseMenuItem {
             this.buttonState.app.activate(this.buttonState.app);
         }
         this.state.trigger('closeMenu');
-    }
-
-    activateContextMenus(event, closeAll) {
-        if (!this.menu.isOpen) {
-            // Make sure all other context menus are closed before toggle.
-            let buttons = this.state.trigger('getActiveButtons');
-            for (let i = 0, len = buttons.length; i < len; i++) {
-                if (buttons[i].buttonState.appIndex !== this.buttonState.appIndex) {
-                    buttons[i].closeMenu();
-                    buttons[i].handleLeave(true);
-                }
-            }
-        }
-        if (!closeAll) {
-            this.toggleMenu();
-        }
     }
 
     onStateChanged() {
@@ -783,27 +821,6 @@ class AppListGridButton extends PopupBaseMenuItem {
         }
         this.menu.close();
         if (this.state.isListView) this.label.show();
-    }
-
-    prepareContextMenu() {
-        this.buttonBox.height = this.buttonBox.get_preferred_size()[1];
-        let x = -20, y = 20;
-        if (this.buttonState.column === this.state.settings.appsGridColumnCount - 1) {
-            x = 20;
-        }
-        // Due to changes to St in Cinnamon 3.6, the context menu lost its fixed positioning over other actors in the
-        // grid view. Using anchor_x/y properties restores it without issue on 3.6, but causes the icon positioning to
-        // shift to the right on Cinnamon <= 3.4. Minor workaround here until a better fix is implemented. anchor_x/y
-        // is deprecated, but the pivot_point property doesn't seem to do anything in this situation.
-        if (!this.state.cinnamon36) {
-            this.icon.anchor_x = 0;
-            this.icon.anchor_y = 0;
-        }
-        if (this.state.trigger('isNotInScrollView', this)) {
-            y = Math.round(this.actor.height * 1.9);
-        }
-        this.menu.actor.anchor_x = x;
-        this.menu.actor.anchor_y = y;
     }
 
     toggleMenu() {
@@ -837,7 +854,7 @@ class AppListGridButton extends PopupBaseMenuItem {
             }
             if (this.state.trigger('isFavorite', this.buttonState.app.get_id())) {
                 addMenuItem(this, new ApplicationContextMenuItem(this.state, this.buttonState,
-                                                _('Remove from favorites'), 'remove_from_favorites', 'starred'));
+                                                _('Remove favorite'), 'remove_from_favorites', 'starred'));
             } else {
                 addMenuItem(this, new ApplicationContextMenuItem(this.state, this.buttonState,
                                                 _('Add to favorites'), 'add_to_favorites', 'non-starred'));
@@ -873,6 +890,9 @@ class AppListGridButton extends PopupBaseMenuItem {
         this.state.disconnect(this.connectId);
         this.signals.disconnectAllSignals();
 
+        if (this.tooltip) {
+            this.tooltip.destroy();
+        }
         if (!skipDestroy) {
             this.dot.destroy();
             this.label.destroy();
@@ -918,7 +938,6 @@ class GroupButton extends PopupBaseMenuItem {
         if (event && event.get_button() > 1) {
             return;
         }
-        this.state.trigger('closeMenu');
         if (this.callback) {
             this.callback();
         }
@@ -932,20 +951,22 @@ class GroupButton extends PopupBaseMenuItem {
         this.entered = true;
         if (!this.actor) return;
         this.actor.add_style_pseudo_class('hover');
+
         //show tooltip
         let [x, y] = this.actor.get_transformed_position();
-        y += (this.actor.height / 2) * global.ui_scale + 8;
+        x += this.actor.width + 2 * global.ui_scale;
+        y += this.actor.height + 6 * global.ui_scale;
         let text = `<span>${this.name}</span>`;
         if (this.description) {
             text += '\n<span size="small">' + this.description + '</span>';
         }
-        this.state.trigger('setTooltip', [x, y], 0, 0,text);
+        this.tooltip = new ShowTooltip(this.actor, x, y, false /*don't center x*/, text);
     }
 
     handleLeave() {
         this.entered = null;
         this.actor.remove_style_pseudo_class('hover');
-        this.state.trigger('setTooltip');//hide tooltip
+        this.tooltip.destroy();
     }
 
     /*setIcon(iconName) {
