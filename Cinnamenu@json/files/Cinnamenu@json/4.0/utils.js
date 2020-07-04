@@ -39,5 +39,59 @@ const readJSONAsync = function(file) {
   });
 };
 
+const Mainloop = imports.mainloop;
+const Lang = imports.lang;
+const St = imports.gi.St;
+const Main = imports.ui.main;
 
-module.exports = {tryFn, readFileAsync, readJSONAsync};
+class ShowTooltip {
+    constructor(actor, xpos, ypos, center_x, text) {
+        this.actor = actor;
+        this.xpos = xpos;
+        this.ypos = ypos;
+        this.center_x = center_x;
+        this.text = text;
+        if (this.text && this.text !== '') {
+            this.showTimer = Mainloop.timeout_add(250, Lang.bind(this, this.show));
+        }
+    }
+
+    show() {
+        this.showTimer = null;
+
+        this.tooltip = new St.Label({
+            name: 'Tooltip'
+        });
+        this.tooltip.show_on_set_parent = false;
+        Main.uiGroup.add_actor(this.tooltip);
+        this.tooltip.set_text(this.text);
+        this.tooltip.get_clutter_text().set_use_markup(true);
+        this.tooltip.set_style('text-align: left;');
+
+        let tooltipWidth = this.tooltip.get_allocation_box().x2 - this.tooltip.get_allocation_box().x1;
+        let monitor = Main.layoutManager.findMonitorForActor(this.actor);
+        let tooltipLeft = this.xpos;
+        if (this.center_x) {
+            tooltipLeft -= Math.floor(tooltipWidth / 2);
+        }
+        tooltipLeft = Math.max(tooltipLeft, monitor.x);
+        tooltipLeft = Math.min(tooltipLeft, monitor.x + monitor.width - tooltipWidth);
+
+        this.tooltip.set_position(tooltipLeft, this.ypos);
+        this.tooltip.raise_top();
+        this.tooltip.show();
+    }
+
+    destroy() {
+        if (this.showTimer) {
+            Mainloop.source_remove(this.showTimer);
+            this.showTimer = null;
+        }
+        if (this.tooltip) {
+            this.tooltip.destroy();
+        }
+    }
+}
+
+
+module.exports = {tryFn, readFileAsync, readJSONAsync, ShowTooltip};

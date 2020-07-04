@@ -136,7 +136,7 @@
             "Left":2,
             "Right":3
         },
-        "tooltip":"Choose where to show the session (quit, Logout, etc.) buttons."
+        "tooltip":"Choose where to show the session (quit, logout, etc.) buttons."
     },
     "add-favorites":{
         "type":"switch",
