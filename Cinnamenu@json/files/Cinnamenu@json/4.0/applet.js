@@ -41,7 +41,7 @@ const {CategoryListButton, AppListGridButton, GroupButton} = require('./buttons'
 const {Gda} = require('./browserBookmarks');
 const PlaceDisplay = require('./placeDisplay');
 const {BookmarksManager} = require('./bookmarksManager');
-const hintText = _('Type to search...');
+const HINT_TEXT = _('Type to search...');
 const SEARCH_THRESHOLD = 0.2;
 
 class CinnamenuApplet extends TextIconApplet {
@@ -88,10 +88,10 @@ class CinnamenuApplet extends TextIconApplet {
                                                       } },
             clearEnteredActors: () => this.clearEnteredActors(),
             makeVectorBox: (actor) => this.makeVectorBox(actor), //?undo
-            setKeyFocus: () => global.stage.set_key_focus(this.searchEntry),
+            setKeyFocus: () => global.stage.set_key_focus(this.search.searchEntry),
             /*toggleSearchVisibility: (bool) => {
                     if (bool) {
-                        global.stage.set_key_focus(this.searchEntry);
+                        global.stage.set_key_focus(this.search.searchEntry);
                     } else {
                         global.stage.set_key_focus(this.actor);
                     }
@@ -189,6 +189,8 @@ class CinnamenuApplet extends TextIconApplet {
         if (!this.state) return 0;
         //size grid so that column widths are slightly wider when there are fewer columns
         let width = (this.state.settings.appsGridColumnCount * 130 + 80) * global.ui_scale;
+        //bigger if large icons
+        width = Math.max(width, this.state.iconSize * this.state.settings.appsGridColumnCount * 1.5);
         //ensure column width is a integer.
         width = Math.round(width / this.state.settings.appsGridColumnCount) * this.state.settings.appsGridColumnCount;
         return width;
@@ -425,8 +427,8 @@ class CinnamenuApplet extends TextIconApplet {
     }
 
     applyConstraints() {
-        const searchWidth = this.searchBox.width - this.categoriesBox.width;
-        this.searchEntry.width = searchWidth > 0 ? searchWidth : this.searchEntry.width;
+        const searchWidth = this.search.searchBox.width - this.categoriesBox.width;
+        this.search.searchEntry.width = searchWidth > 0 ? searchWidth : this.search.searchEntry.width;
 
         this.actor.style += `max-width: ${this.mainBox.width}px; max-height: ${this.mainBox.height}px;`;
         this.groupCategoriesWorkspacesScrollBox.style += `max-width: ${this.categoriesBox.width}px;`;
@@ -835,7 +837,9 @@ class CinnamenuApplet extends TextIconApplet {
     }
 
     selectCategory(categoryId) {
-        if (this.willUnmount) return;
+        if (this.willUnmount || this.state.currentCategory !== categoryId) {
+            return;
+        }
         this.clearApplicationsBox();
         switch (categoryId) {
             case 'places':
@@ -1492,17 +1496,38 @@ class CinnamenuApplet extends TextIconApplet {
             }
         };
 
+        /*const moveCategory = (direction) => {
+            if (!enteredItemExists && !enteredPowerGroupItemExists && !enteredContextMenuItemExists &&
+                                                                                    enteredCategoryExists) {
+                if (direction === "up" && refCategoryIndex > 0) {
+                    this.state.trigger('moveCategoryToPos', this.categoryButtons[refCategoryIndex].id,
+                                                        this.categoryButtons[refCategoryIndex - 1].id);
+                    this.categoryButtons[refCategoryIndex - 1].handleEnter();
+                } else if (direction === "down" && refCategoryIndex < this.categoryButtons.length - 1) {
+                    this.state.trigger('moveCategoryToPos', this.categoryButtons[refCategoryIndex].id,
+                                                        this.categoryButtons[refCategoryIndex + 1].id);
+                    this.categoryButtons[refCategoryIndex + 1].handleEnter();
+                }
+            }
+        };*/
+
         switch (true) {
             case symbol === Clutter.KP_Enter:
             case symbol === Clutter.KEY_Return:
                 activateItem();
                 return true;
-            case symbol === Clutter.KEY_Up:
+            case (symbol === Clutter.KEY_Up && !ctrlKey):
                 upNavigation();
                 return true;
-            case symbol === Clutter.KEY_Down:
+            /*case (symbol === Clutter.KEY_Up && modifierState === 4)://ctrl up
+                moveCategory("up");
+                return true;*/
+            case (symbol === Clutter.KEY_Down && !ctrlKey):
                 downNavigation();
                 return true;
+            /*case (symbol === Clutter.KEY_Down && modifierState === 4)://ctrl down
+                moveCategory("down");
+                return true;*/
             case symbol === Clutter.KEY_Page_Up:
                 if (enteredItemExists) {
                     buttons[0].handleEnter();
@@ -1521,10 +1546,10 @@ class CinnamenuApplet extends TextIconApplet {
                     powerGroupButtons[powerGroupButtons.length - 1].handleEnter();
                 }
                 return true;
-            case symbol === Clutter.KEY_Right:
+            case (symbol === Clutter.KEY_Right && !ctrlKey):
                 rightNavigation();
                 return true;
-            case symbol === Clutter.KEY_Left:
+            case (symbol === Clutter.KEY_Left && !ctrlKey):
                 leftNavigation();
                 return true;
             case symbol === Clutter.ISO_Left_Tab:
@@ -1544,11 +1569,11 @@ class CinnamenuApplet extends TextIconApplet {
                 }
                 this.menu.close();
                 return true;
-            case ctrlKey: //??
+            /*case ctrlKey: //??
                 if (enteredItemExists) {
                     buttons[refItemIndex].handleEnter();
                 }
-                return true;
+                return true;*/
             default:
             return false;
         }
@@ -1590,8 +1615,8 @@ class CinnamenuApplet extends TextIconApplet {
         if (this.answerText) {
             this.answerText.set_text('');
         }
-        if (this.searchEntry) {
-            this.searchEntry.set_text('');
+        if (this.search) {
+            this.search.searchEntry.set_text('');
         }
         this.state.set({ searchActive: false });
         if (this.activeContainer) {
@@ -1620,13 +1645,12 @@ class CinnamenuApplet extends TextIconApplet {
             }
         }
         this.allItems = allItems;
-        global.stage.set_key_focus(this.searchEntry);
+        global.stage.set_key_focus(this.search.searchEntry);
     }
 
     onSearchTextChanged() {
-        const searchText = this.searchEntryText.get_text();
-
-        if (searchText === hintText) {
+        const searchText = this.search.searchEntryText.get_text();
+        if (searchText === HINT_TEXT) {
             return;
         }
 
@@ -1644,38 +1668,38 @@ class CinnamenuApplet extends TextIconApplet {
         }
 
         this.state.set({searchActive: searchText.length > 0});
-
+        this.currentSearchStr = searchText;
         if (this.state.searchActive) {
             this.clearEnteredActors();
-            this.searchEntry.set_secondary_icon(this.searchActiveIcon);
+            this.search.showSecondaryIcon(true);
 
-            if (!this.signals.isConnected('secondary-icon-clicked', this.searchEntry)) {
-                this.signals.connect(this.searchEntry, 'secondary-icon-clicked', () => {
+            if (!this.signals.isConnected('secondary-icon-clicked', this.search.searchEntry)) {
+                this.signals.connect(this.search.searchEntry, 'secondary-icon-clicked', () => {
                                                             this.clearEnteredActors();
-                                                            this.searchEntryText.set_text('');
+                                                            this.search.searchEntryText.set_text('');
                                                             this.onSearchTextChanged();
                                                             //this.resetDisplayState
                                                             }, this);
             }
-        } else {
-            if (this.signals.isConnected('secondary-icon-clicked', this.searchEntry)) {
-                this.signals.disconnect('secondary-icon-clicked', this.searchEntry, this);
-            }
+            setTimeout(() => this.doSearch(searchText), 0);
 
-            this.searchEntry.set_secondary_icon(null);
+        } else {
+            if (this.signals.isConnected('secondary-icon-clicked', this.search.searchEntry)) {
+                this.signals.disconnect('secondary-icon-clicked', this.search.searchEntry, this);
+            }
+            this.search.showSecondaryIcon(false);
+            this.previousSearchPattern = '';
         }
-        //setTimeout(() => this.doSearch(searchText), 0);
-        this.doSearch(searchText);
     }
 
     doSearch(text) {
+        if (text !== this.currentSearchStr) return;
         if (!text || !text.trim()) return;
         let pattern = latinise(text.trim().toLowerCase());
-
-        /*if (pattern === this.previousSearchPattern) {
+        if (pattern === this.previousSearchPattern) {
             return false;
         }
-        this.previousSearchPattern = pattern;*/
+        this.previousSearchPattern = pattern;
 
         let acResults = []; // search box autocompletion results
         if (this.state.settings.searchFilesystem) {
@@ -1838,25 +1862,21 @@ class CinnamenuApplet extends TextIconApplet {
         this.powerGroupBox = new PowerGroupBox(this.state);
         this.powerGroupBox.populate(this.listApplications('favorites',''));
         //searchBox
-        this.searchInactiveIcon = new St.Icon({ style_class: 'menu-search-entry-icon', icon_name: 'edit-find' });
-        this.searchActiveIcon = new St.Icon({ style_class: 'menu-search-entry-icon', icon_name: 'edit-clear' });
-        this.searchEntry = new St.Entry({ name: 'menu-search-entry', hint_text: hintText,
-                                          track_hover: true, can_focus: true, });
-        this.searchEntryText = this.searchEntry.clutter_text;
-        this.displaySignals.connect(this.searchEntryText, 'text-changed', (...args) => this.onSearchTextChanged(...args));
-        this.displaySignals.connect(this.searchEntryText, 'key-press-event', (...args) => this.onMenuKeyPress(...args));
-        this.previousSearchPattern = '';
-        this.searchEntry.set_primary_icon(this.searchInactiveIcon);
-        this.searchBox = new St.BoxLayout({ style_class: 'menu-search-box',
-                                            style: 'padding-right: 7px; min-width: 160px;' });
-        this.searchBox.add(this.searchEntry, {  expand: true, x_align: St.Align.START, y_align: St.Align.START });
+        this.search = new Search(this.state);
+
+        this.displaySignals.connect(this.search.searchEntryText, 'text-changed',
+                                                        (...args) => this.onSearchTextChanged(...args));
+        this.displaySignals.connect(this.search.searchEntryText, 'key-press-event',
+                                                            (...args) => this.onMenuKeyPress(...args));
+        //this.previousSearchPattern = '';
+
         // Bottom pane holds power group and search box (packed horizontally)
         this.bottomPane = new St.BoxLayout({ /*style: 'padding-top: 12px;'*/ });
         if (powergroupPlacement === 0 || powergroupPlacement === 1) {//top or bottom
             this.bottomPane.add(this.powerGroupBox.box, { expand: false, x_fill: false, y_fill: false,
                                                   x_align: St.Align.START, y_align: St.Align.MIDDLE });
         }
-        this.bottomPane.add(this.searchBox, { expand: true, x_fill: true, y_fill: false,
+        this.bottomPane.add(this.search.searchBox, { expand: true, x_fill: true, y_fill: false,
                                         x_align: St.Align.END, y_align: St.Align.MIDDLE, align_end: true });
 
         //=================middlePane===============
@@ -1983,8 +2003,7 @@ class CinnamenuApplet extends TextIconApplet {
 
     destroyDisplayed() {
         this.displaySignals.disconnectAllSignals();
-        let containers = [  'searchBox',
-                            'categoriesBox',
+        const containers = ['categoriesBox',
                             'applicationsGridBox',
                             'applicationsListBox',
                             'applicationsBoxWrapper',
@@ -2000,6 +2019,10 @@ class CinnamenuApplet extends TextIconApplet {
         }
         this.categoryButtons = [];
 
+        if (this.search) {
+            this.destroyContainer(this.search.searchBox);
+            this.search = null;
+        }
         if (this.powerGroupBox) {
             this.powerGroupBox.destroy();
             this.powerGroupBox=null;
@@ -2032,6 +2055,31 @@ class CinnamenuApplet extends TextIconApplet {
         this.destroyDisplayed();
         this.menu.destroy();
     }
+}
+
+class Search {
+    constructor(state) {
+        this.state = state;
+        const searchInactiveIcon = new St.Icon({ style_class: 'menu-search-entry-icon', icon_name: 'edit-find' });
+        this.searchActiveIcon = new St.Icon({ style_class: 'menu-search-entry-icon', icon_name: 'edit-clear' });
+        this.searchEntry = new St.Entry({ name: 'menu-search-entry', hint_text: HINT_TEXT,
+                                          track_hover: true, can_focus: true, });
+        this.searchEntryText = this.searchEntry.clutter_text;
+
+        this.searchEntry.set_primary_icon(searchInactiveIcon);
+        this.searchBox = new St.BoxLayout({ style_class: 'menu-search-box',
+                                            style: 'padding-right: 7px; min-width: 160px;' });
+        this.searchBox.add(this.searchEntry, {  expand: true, x_align: St.Align.START, y_align: St.Align.START });
+    }
+
+    showSecondaryIcon(show) {
+        if (show) {
+            this.searchEntry.set_secondary_icon(this.searchActiveIcon);
+        } else {
+            this.searchEntry.set_secondary_icon(null);
+        }
+    }
+
 }
 
 class PowerGroupBox {
