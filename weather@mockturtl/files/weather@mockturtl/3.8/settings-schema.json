@@ -37,15 +37,13 @@
             "title":"Help",
             "sections":[
 				"provider-info",
-				"location-info",
-				"credits"
+				"location-info"
 			]
 		},
 		"provider-info" : {
 			"type":"section",
 			"title":"Weather provider details",
 			"keys":[
-				"moreInfo",
 				"openWM",
 				"darkS",
 				"METN",
@@ -133,24 +131,12 @@
 				"useCustomMenuIcons",
 				"useCustomAppletIcons"
 			]
-		},
-		"credits" : {
-			"type":"section",
-			"title":"powered by: OpenWeatherMap, DarkSky, MET Norway, Weatherbit, Yahoo and ip-api.\nBig Thanks to OpenWeatherMap for their FOSS support!",
-			"keys":[]
 		}
 	},
 	"keybinding": {
 		"type": "keybinding",
 		"description": "Set the keybinding to call the menu",
 		"default": "<Super><Shift>w"
-	},
-	"moreInfo": {
-		"type": "button",
-		"indent": true,
-		"description": "Click here for detailed description",
-		"callback": "locationLookup",
-		"tooltip": "Opens webpage guide"
 	},
 	"dataService": {
 		"type": "radiogroup",
@@ -362,23 +348,23 @@
 	},
 	"openWM": {
 		"type": "label",
-		"description": "OpenWeatherMap - The default, works out of the box."
+		"description": "OpenWeatherMap:\nThe default, works out of the box.\nBig Thanks to them supporting free open source projects, like this!"
 	},
 	"darkS": {
 		"type": "label",
-		"description": "DarkSky - Needs key, please click on 'Setup API Key and Location' for the steps how to obtain one."
+		"description": "DarkSky:\nNeeds key, please click on 'Setup API Key and Location' for the steps how to obtain one."
 	},
 	"METN": {
 		"type": "label",
-		"description": "MET Norway - Current weather is shown for the next hour, and the daily forecasts are generated from 6 hour forecasts, so it can look incorrect sometimes."
+		"description": "MET Norway:\nCurrent weather is shown for the next hour, and the daily forecasts are generated from 6 hour forecasts, so it can look incorrect sometimes."
 	},
 	"WB": {
 		"type": "label",
-		"description": "WeatherBit - At least 10 minutes as refresh rate is recommended, since otherwise you might exceed you daily quota."
+		"description": "WeatherBit:\nAt least 10 minutes as refresh rate is recommended, since otherwise you might exceed you daily quota."
 	},
 	"Yahoo": {
 		"type": "label",
-		"description": "Yahoo - Requires 'python3-requests-oauthlib' package installed (for Arch based distros 'python-requests-oauthlib'), Updates every 2 hours."
+		"description": "Yahoo:\nRequires 'python3-requests-oauthlib' package installed (for Arch based distros 'python-requests-oauthlib'), Updates every 2 hours."
 	},
 	"Climacell": {
 		"type": "label",
