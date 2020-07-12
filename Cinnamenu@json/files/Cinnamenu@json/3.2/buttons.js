@@ -397,6 +397,7 @@ ApplicationContextMenuItem.prototype = {
         } catch (e) {
             logError(e, "Could not launch app with dedicated gpu: ");
         }
+        this.state.trigger('closeMenu');
         break;
       case 'run_with_nvidia_gpu':
         Util.spawnCommandLine('optirun gtk-launch ' + this.buttonState.app.get_id());
