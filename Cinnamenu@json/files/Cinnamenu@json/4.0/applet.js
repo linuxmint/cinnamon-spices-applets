@@ -69,6 +69,7 @@ class CinnamenuApplet extends TextIconApplet {
                     searchActive: false,
                     contextMenuIsOpen: null,
                     dragIndex: -1,
+                    gpu_offload_supported: Main.gpu_offload_supported,
                     isBumblebeeInstalled: GLib.file_test('/usr/bin/optirun', GLib.FileTest.EXISTS) });
         this.recentEnabled = this.privacy_settings.get_boolean(REMEMBER_RECENT_KEY);
         this.favorites = this.appFavorites.getFavorites();
