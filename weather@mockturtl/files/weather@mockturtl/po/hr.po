@@ -1055,7 +1055,7 @@ msgstr ""
 
 #: 3.0/applet.js:870 3.0/applet.js:1017 3.8/applet.js:744 3.8/applet.js:891
 msgid "As of"
-msgstr "U"
+msgstr "Nadopunjeno u"
 
 #: 3.0/applet.js:989 3.8/applet.js:863
 msgid "Today"
