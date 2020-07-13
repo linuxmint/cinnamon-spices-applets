@@ -3,8 +3,7 @@ const Gio = imports.gi.Gio;
 const Lang = imports.lang;
 const Main = imports.ui.main;
 
-const {_} = require('./constants');
-const {readFileAsync, tryFn} = require('./utils');
+const {_, readFileAsync, tryFn} = require('./utils');
 
 class PlaceInfo {
     constructor(kind, file, name, icon) {

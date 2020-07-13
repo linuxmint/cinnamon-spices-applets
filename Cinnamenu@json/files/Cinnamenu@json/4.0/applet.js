@@ -3,7 +3,6 @@ const Gtk = imports.gi.Gtk;
 const GLib = imports.gi.GLib;
 const CMenu = imports.gi.CMenu;
 const Clutter = imports.gi.Clutter;
-//const {BinLayout} = imports.gi.Clutter;
 const Cinnamon = imports.gi.Cinnamon;
 const St = imports.gi.St;
 const {   TextureCache,
@@ -31,18 +30,15 @@ const {launch_all} = imports.ui.searchProviderManager;
 const {makeDraggable} = imports.ui.dnd;
 const {spawnCommandLine, latinise, each, find, findIndex, map} = imports.misc.util;
 const {createStore} = imports.misc.state;
-const {tryFn} = require('./utils');
-const searchStr = require('./fuzzy');
-const { _, ApplicationType, AppTypes } = require('./constants');
+const {_, ApplicationType, AppTypes, tryFn, searchStr} = require('./utils');
 const ApplicationsViewModeLIST = 0, ApplicationsViewModeGRID = 1;
 const PlacementTOOLTIP = 1, PlacementUNDER = 2, PlacementNONE =3;
 const REMEMBER_RECENT_KEY = 'remember-recent-files';
 const {CategoryListButton, AppListGridButton, GroupButton} = require('./buttons');
-const {Gda} = require('./browserBookmarks');
 const PlaceDisplay = require('./placeDisplay');
-const {BookmarksManager} = require('./bookmarksManager');
+const {Gda, BookmarksManager} = require('./browserBookmarks');
 const HINT_TEXT = _('Type to search...');
-const SEARCH_THRESHOLD = 0.2;
+const SEARCH_THRESHOLD = 0.4;
 
 class CinnamenuApplet extends TextIconApplet {
     constructor(metadata, orientation, panel_height, instance_id) {
@@ -59,13 +55,12 @@ class CinnamenuApplet extends TextIconApplet {
         this.state = createStore({
                     settings: {},
                     enabledProviders: global.settings.get_strv('enabled-search-providers'),
-                    theme: null,
                     isListView: false,
                     panelLocation: null,
                     iconSize: 64,
+                    theme: null,
                     currentCategory: 'favorites',
                     categoryDragged: false,
-                    fallbackDescription: '',
                     searchActive: false,
                     contextMenuIsOpen: null,
                     dragIndex: -1,
@@ -90,13 +85,6 @@ class CinnamenuApplet extends TextIconApplet {
             clearEnteredActors: () => this.clearEnteredActors(),
             makeVectorBox: (actor) => this.makeVectorBox(actor), //?undo
             setKeyFocus: () => global.stage.set_key_focus(this.search.searchEntry),
-            /*toggleSearchVisibility: (bool) => {
-                    if (bool) {
-                        global.stage.set_key_focus(this.search.searchEntry);
-                    } else {
-                        global.stage.set_key_focus(this.actor);
-                    }
-                    this.setActiveCategoryStyle(); },*/
             openMenu: () => this.menu.open(),
             closeMenu: () => this.menu.close(),
             getAppsGridBoxWidth: () => this.applicationsGridBox.width,
@@ -145,8 +133,8 @@ class CinnamenuApplet extends TextIconApplet {
         this.signals.connect(this.privacy_settings, 'changed::' + REMEMBER_RECENT_KEY, () => this.onEnableRecentChange());
 
         // FS search
-        this.pathCompleter = new Gio.FilenameCompleter();
-        this.pathCompleter.set_dirs_only(false);
+        //this.pathCompleter = new Gio.FilenameCompleter();
+        //this.pathCompleter.set_dirs_only(false);
 
         this.signals.connect(Main.themeManager, 'theme-set', () => this.onThemeChanged());
 
@@ -174,9 +162,7 @@ class CinnamenuApplet extends TextIconApplet {
         // Init settings
         this.loadSettings();
         this.initCategories();
-        this.state.set({ isListView: this.state.settings.applicationsViewMode === ApplicationsViewModeLIST,
-                         fallbackDescription: (this.state.settings.descriptionPlacement != PlacementNONE) ?
-                                                                        _('No description available') : '' });
+        this.state.set({ isListView: this.state.settings.applicationsViewMode === ApplicationsViewModeLIST });
         global.settings.connect('changed::enabled-search-providers',
                                                     (...args) => this.onEnabledSearchProvidersChange(...args));
 
@@ -466,7 +452,7 @@ class CinnamenuApplet extends TextIconApplet {
 
             { key: 'category-click',            value: 'categoryClick',         cb: null },
             { key: 'enable-autoscroll',         value: 'enableAutoScroll',      cb: this.refresh },
-            { key: 'search-filesystem',         value: 'searchFilesystem',      cb: this.refresh },
+            //{ key: 'search-filesystem',         value: 'searchFilesystem',      cb: this.refresh },
             { key: 'enable-search-providers',   value: 'enableSearchProviders', cb: null },
 
             { key: 'menu-icon-custom',          value: 'menuIconCustom',        cb: this.updateIconAndLabel },
@@ -1015,13 +1001,13 @@ class CinnamenuApplet extends TextIconApplet {
         for (let i = 0, len = places.length; i < len; i++) {
             let match;
             if (pattern) {
-                match = searchStr(pattern, places[i].name, " ", true);
+                match = searchStr(pattern, places[i].name);
             }
             if (!pattern || match.score > SEARCH_THRESHOLD) {
                 places[i].type = ApplicationType._places;
                 places[i].description = places[i].file.get_path();
                 if (pattern) {
-                    places[i].name = match.result;
+                    places[i].nameWithSearchMarkup = match.result;
                     places[i].score = match.score;
                 }
                 res.push(places[i]);
@@ -1039,13 +1025,13 @@ class CinnamenuApplet extends TextIconApplet {
         for (let i = 0, len = bookmarks.length; i < len; i++) {
             let match;
             if (pattern) {
-                match = searchStr(pattern, bookmarks[i].name, " ", true);
+                match = searchStr(pattern, bookmarks[i].name);
             }
             if (!pattern || match.score > SEARCH_THRESHOLD) {
                 bookmarks[i].type = ApplicationType._places;
                 bookmarks[i].description = bookmarks[i].file.get_path();
                 if (pattern) {
-                    bookmarks[i].name = match.result;
+                    bookmarks[i].nameWithSearchMarkup = match.result;
                     bookmarks[i].score = match.score;
                 }
                 res.push(bookmarks[i]);
@@ -1063,13 +1049,13 @@ class CinnamenuApplet extends TextIconApplet {
         for (let i = 0, len = devices.length; i < len; i++) {
             let match;
             if (pattern) {
-                match = searchStr(pattern, devices[i].name, " ", true);
+                match = searchStr(pattern, devices[i].name);
             }
             if (!pattern || match.score > SEARCH_THRESHOLD) {
                 devices[i].type = ApplicationType._places;
                 devices[i].description = devices[i].file.get_path();
                 if (pattern) {
-                    devices[i].name = match.result;
+                    devices[i].nameWithSearchMarkup = match.result;
                     devices[i].score = match.score;
                 }
                 res.push(devices[i]);
@@ -1101,10 +1087,10 @@ class CinnamenuApplet extends TextIconApplet {
                 continue;
             }
             if (pattern && bookmark.name) {
-                let match = searchStr(pattern, bookmark.name, " ", true);
+                let match = searchStr(pattern, bookmark.name);
                 if (match.score > SEARCH_THRESHOLD) {
                     bookmark.score = match.score;
-                    bookmark.name = match.result;
+                    bookmark.nameWithSearchMarkup = match.result;
                     res.push(bookmark);
                 }
             }
@@ -1147,10 +1133,10 @@ class CinnamenuApplet extends TextIconApplet {
             let _res = [];
             for (let i = 0, len = res.length; i < len; i++) {
                 let recentItem = res[i];
-                let match = searchStr(pattern, recentItem.name, " ", true);
+                let match = searchStr(pattern, recentItem.name);
                 if (recentItem.name && match.score > SEARCH_THRESHOLD) {
                     recentItem.score = match.score;
-                    recentItem.name = match.result;
+                    recentItem.nameWithSearchMarkup = match.result;
                     _res.push(recentItem);
                 }
             }
@@ -1185,17 +1171,19 @@ class CinnamenuApplet extends TextIconApplet {
                                           description: res[i].get_description(),
                                           id: res[i].get_id().replace(/\.desktop$/, ''),
                                           type: ApplicationType._applications });
-                const match1 = searchStr(pattern, res[i].name, " ", true);
-                const match2 = searchStr(pattern, res[i].description, " ", true);
-                const match3 = searchStr(pattern, res[i].keywords, ";", false);
+                const match1 = searchStr(pattern, res[i].name);
+                const match2 = searchStr(pattern, res[i].description);
+                const match3 = searchStr(pattern, res[i].keywords);
                 if (match3.score < 0.7) {match3.score = 0;} //ignore keyword match if it's not an almost exact match
-                const match4 = searchStr(pattern, res[i].id, ".", false);
+                const match4 = searchStr(pattern, res[i].id);
                 if (match4.score < 0.7) {match4.score = 0;} //ignore id match if it's not an almost exact match
                 const bestMatchScore = Math.max(match1.score,match2.score,match3.score,match4.score);
                 if (bestMatchScore > SEARCH_THRESHOLD) {
                     res[i].score = bestMatchScore;
-                    res[i].name = match1.result;
-                    res[i].description = match2.result;
+                    res[i].nameWithSearchMarkup = match1.result;
+                    res[i].descriptionWithSearchMarkup = match2.result;
+                    res[i].keywordsWithSearchMarkup = match3.result;
+                    res[i].idWithSearchMarkup = match4.result;
                     _res.push(res[i]);
                 }
             }
@@ -1555,7 +1543,8 @@ class CinnamenuApplet extends TextIconApplet {
                 return true;
             case symbol === Clutter.ISO_Left_Tab:
             case symbol === Clutter.Tab:
-                if (modifierState === 8) { //Alt-Tab was pressed. Close menu as alt-tab is used for app-switcher in cinnamon
+                if (modifierState === 8) {  //Alt-Tab was pressed. Close menu as alt-tab is
+                                            //used for app-switcher in cinnamon
                     this.state.trigger('closeMenu');
                     return false;
                 }
@@ -1568,31 +1557,14 @@ class CinnamenuApplet extends TextIconApplet {
                     buttons[refItemIndex].handleEnter()
                     return true;
                 }
-                this.menu.close();
+                this.state.trigger('closeMenu');
                 return true;
-            /*case ctrlKey: //??
-                if (enteredItemExists) {
-                    buttons[refItemIndex].handleEnter();
-                }
-                return true;*/
             default:
             return false;
         }
     }
 
-    getCompletion(text) {
-        if (text.indexOf('/') !== -1) {
-            if (text.substr(text.length - 1) === '/') {
-                return '';
-            } else {
-                return this.pathCompleter.get_completion_suffix(text);
-            }
-        } else {
-            return false;
-        }
-    }
-
-    getCompletions(text) {
+    /*getCompletions(text) {
         if (text.includes('/')) {
             return map(this.pathCompleter.get_completions(text), function(path) {
                                         if (path.charAt(0) === '~') {
@@ -1610,7 +1582,7 @@ class CinnamenuApplet extends TextIconApplet {
         } else {
           return [];
         }
-    }
+    }*/
 
     resetSearch() {
         if (this.answerText) {
@@ -1641,7 +1613,10 @@ class CinnamenuApplet extends TextIconApplet {
                 this.allItems[i].destroy(true);
                 this.allItems[i] = undefined;
             } else {
-                this.allItems[i].clearSearchFormatting();
+                this.allItems[i].buttonState.app.nameWithSearchMarkup = null;
+                this.allItems[i].buttonState.app.descriptionWithSearchMarkup = null;
+                this.allItems[i].buttonState.app.keywordsWithSearchMarkup = null;
+                this.allItems[i].buttonState.app.idWithSearchMarkup = null;
                 allItems.push(this.allItems[i]);
             }
         }
@@ -1694,24 +1669,30 @@ class CinnamenuApplet extends TextIconApplet {
     }
 
     doSearch(text) {
+        //this fuction has been called asynchronously meaning that a keypress may have changed the
+        //search query before this function is called. Check that this search is still valid.
         if (text !== this.currentSearchStr) return;
         if (!text || !text.trim()) return;
         let pattern = latinise(text.trim().toLowerCase());
+        //Don't repeat the same search. This can happen if a key and backspace are pressed in quick
+        //succession while a previous search is being carried out.
         if (pattern === this.previousSearchPattern) {
             return false;
         }
         this.previousSearchPattern = pattern;
 
-        let acResults = []; // search box autocompletion results
+        /*let acResults = []; // search box autocompletion results
         if (this.state.settings.searchFilesystem) {
             // Don't use the pattern here, as filesystem is case sensitive
             acResults = this.getCompletions(text);
-        }
+        }*/
         let results = this.listApplications(null, pattern)
                             .concat(this.listPlaces(pattern))
+                            .concat(this.listBookmarks(pattern))
+                            .concat(this.listDevices(pattern))
                             .concat(this.listWebBookmarks(pattern))
-                            .concat(this.listRecent(pattern))
-                            .concat(acResults);
+                            .concat(this.listRecent(pattern));
+                            //.concat(acResults);
 
         if (this.state.settings.enableSearchProviders && this.state.enabledProviders.length > 0 &&
                                                                                   pattern.length > 2) {
@@ -1739,7 +1720,8 @@ class CinnamenuApplet extends TextIconApplet {
                 });
             };
             listSearchProviders(pattern, (providerResults) => {
-                    // Since the provider results are asynchronous, the search state may have ended by the time they return.
+                    // Since the provider results are asynchronous, the search state may have ended by
+                    // the time they return.
                     if (!this.state.searchActive || !providerResults || providerResults.length === 0)
                         return;
                     results = results.concat(providerResults);
@@ -1847,7 +1829,6 @@ class CinnamenuApplet extends TextIconApplet {
                 createAppButton(appList[z], appList[z].type, len, index);
             }
         }
-        //this.columnsCount = columnsCount;
 
         if (this.state.currentCategory === 'bookmarks') this.answerText.hide();
     }
@@ -1860,7 +1841,7 @@ class CinnamenuApplet extends TextIconApplet {
         // PowerGroupBox
 
         const powergroupPlacement = this.state.settings.powergroupPlacement;
-        this.powerGroupBox = new PowerGroupBox(this.state);
+        this.powerGroupBox = new PowerGroupBox(this.state, powergroupPlacement);
         this.powerGroupBox.populate(this.listApplications('favorites',''));
         //searchBox
         this.search = new Search(this.state);
@@ -2084,9 +2065,8 @@ class Search {
 }
 
 class PowerGroupBox {
-    constructor (state) {
+    constructor (state, powergroupPlacement) {
         this.state = state;
-        const powergroupPlacement = this.state.settings.powergroupPlacement;
         if (powergroupPlacement === 0 || powergroupPlacement === 1) {//top or bottom
             this.box = new St.BoxLayout({ style_class: '' /*, style: 'padding-left: 13px;'*/  });
         } else {

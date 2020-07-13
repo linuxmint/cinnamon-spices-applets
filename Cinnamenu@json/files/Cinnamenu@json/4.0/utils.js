@@ -1,5 +1,22 @@
-const Gio = imports.gi.Gio;
-const ByteArray = imports.byteArray;
+const SEARCH_DEBUG = false;
+const Gettext = imports.gettext;
+
+function _(str) {
+    let cinnamonTranslation = Gettext.gettext(str);
+    if (cinnamonTranslation !== str) {
+        return cinnamonTranslation;
+    }
+    return Gettext.dgettext('Cinnamenu@json', str);
+}
+
+const ApplicationType = {
+    _applications: 0,
+    _places: 1,
+    _recent: 2,
+    _providers: 3,
+    //_completions: 4,
+};
+const AppTypes = Object.keys(ApplicationType);
 
 // Work around Cinnamon#8201
 const tryFn = function(callback, errCallback) {
@@ -11,6 +28,11 @@ const tryFn = function(callback, errCallback) {
         }
     }
 };
+
+//=========================================
+
+const Gio = imports.gi.Gio;
+const ByteArray = imports.byteArray;
 
 const readFileAsync = function(file, opts = {utf8: true}) {
   const {utf8} = opts;
@@ -38,6 +60,8 @@ const readJSONAsync = function(file) {
     return JSON.parse(json);
   });
 };
+
+//===========================================================
 
 const Mainloop = imports.mainloop;
 const Lang = imports.lang;
@@ -89,9 +113,96 @@ class ShowTooltip {
         }
         if (this.tooltip) {
             this.tooltip.destroy();
+            this.tooltip = null;
         }
     }
 }
 
+//===================================================
 
-module.exports = {tryFn, readFileAsync, readJSONAsync, ShowTooltip};
+const {latinise} = imports.misc.util;
+
+const searchStr = function (q, str) {
+    const highlightMatch = true;
+    if ( !(typeof q === 'string' && q && typeof str === 'string' && str) ) {
+        return { score: 0, result: str };
+    }
+
+    const str2 = latinise(str.toLowerCase());
+    const q2 = q; //latinise(q.toLowerCase()); //already done in doSearch()
+    let score = 0;
+    if ((new RegExp('\\b'+q2)).test(str2)) { //match substring from beginning of words
+        score = 1.2;
+    } else if (str2.indexOf(q2) !== -1) { //else match substring
+        score = 1.1;
+    } else { //else fuzzy match and return
+        const qletters = q2.replace(/\W/g, ''); //remove anything that isn't a letter from query
+        //make regexp. eg. if qletters='abc' then regex='/(a|b|c)+/g'
+        let partregexp = '';
+        for (let i=0; i<qletters.length-1; i++) {
+            partregexp += qletters[i]+'|';
+        }
+        partregexp += qletters[qletters.length-1];
+        const regex = new RegExp('('+partregexp+')+', 'g');
+
+        //find longest substring of str2 made up of letters from qletters
+        const found = str2.match(regex);
+        let length = 0;
+        let longest;
+        if (found) {
+            for(let i=0; i < found.length; i++){
+                if(found[i].length > length){
+                    length = found[i].length;
+                    longest = found[i];
+                }
+            }
+        }
+
+        if (longest) {
+            //get a score for similarity by counting 2 letter pairs (bigrams) that match
+            let bigrams_score;
+            if (qletters.length >= 2) {
+                const max_bigrams = qletters.length -1;
+                let found_bigrams = 0;
+                for (let qi = 0; qi < max_bigrams; qi++ ) {
+                    if (longest.indexOf(qletters[qi] + qletters[qi+1]) >= 0) {
+                        found_bigrams++;
+                    }
+                }
+                bigrams_score = found_bigrams / max_bigrams;
+            } else {
+                bigrams_score = 1;
+            }
+
+            let markup = '';
+            if (highlightMatch) { //highlight match
+                const foundposition = str2.indexOf(longest);
+                markup = str.slice(0, foundposition) + '<b>' +
+                            str.slice(foundposition, foundposition + longest.length) + '</b>' +
+                                                str.slice(foundposition + longest.length, str.length);
+            } else {
+                markup = str;
+            }
+            let score = Math.min(longest.length / q2.length, 1.0) * bigrams_score;
+            if (SEARCH_DEBUG) {
+                markup += ':'+score+":"+bigrams_score;
+            }
+            return {score: score, result: markup};
+        } else {
+            return {score: 0, result: ''};
+        }
+    }
+    //return result of substring match
+    if (highlightMatch) {
+        const foundposition = str2.indexOf(q2);
+        const markup = str.slice(0, foundposition) + "<b>" +
+                                    str.slice(foundposition, foundposition + q.length) + "</b>" +
+                                                    str.slice(foundposition + q.length, str.length);
+        return {score: score, result: markup};
+    } else {
+        return {score: score, result: str};
+    }
+};
+
+module.exports = {SEARCH_DEBUG, _, ApplicationType, AppTypes, tryFn, readFileAsync, readJSONAsync,
+                                                                            ShowTooltip, searchStr};

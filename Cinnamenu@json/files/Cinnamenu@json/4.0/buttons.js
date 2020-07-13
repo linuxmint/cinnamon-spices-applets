@@ -1,4 +1,3 @@
-//const Mainloop = imports.mainloop;
 const Gio = imports.gi.Gio;
 const Gtk = imports.gi.Gtk;
 const GLib = imports.gi.GLib;
@@ -21,12 +20,12 @@ const {SignalManager} = imports.misc.signalManager;
 const {spawnCommandLine, spawn, unref} = imports.misc.util;
 const {createStore} = imports.misc.state;
 
-const {_, ApplicationType, stripMarkupRegex} = require('./constants');
-const {tryFn, ShowTooltip} = require('./utils');
+const {SEARCH_DEBUG, _, ApplicationType, tryFn, ShowTooltip} = require('./utils');
 const PlacementTOOLTIP = 1, PlacementUNDER = 2, PlacementNONE = 3;
-
+const SHOW_SEARCH_MARKUP_IN_TOOLTIP = true;
+const FALL_BACK_DESCRIPTION = _('No description available');
 const USER_DESKTOP_PATH = getUserDesktopDir();
-const canUninstall = GLib.file_test('/usr/bin/cinnamon-remove-application', GLib.FileTest.EXISTS);
+const CAN_UNINSTALL = GLib.file_test('/usr/bin/cinnamon-remove-application', GLib.FileTest.EXISTS);
 
 class CategoryListButton extends PopupBaseMenuItem {
     constructor(state, dir, altNameText, altIconName) {
@@ -331,11 +330,11 @@ class ApplicationContextMenuItem extends PopupBaseMenuItem {
                                                     this.buttonState.app.get_app_info().get_filename() + '\'');
                 this.state.trigger('closeMenu');
                 break;
-            case "offload_launch":
+            case 'offload_launch':
                 try {
                     this.buttonState.app.launch_offloaded(0, [], -1);
                 } catch (e) {
-                    logError(e, "Could not launch app with dedicated gpu: ");
+                    logError(e, 'Could not launch app with dedicated gpu: ');
                 }
                 this.state.trigger('closeMenu');
                 break;
@@ -425,22 +424,22 @@ class AppListGridButton extends PopupBaseMenuItem {
 
         this.signals = new SignalManager(null);
         this.contextMenuButtons = [];
-        //this.description = ''; //why did i delete this line?
+        //this.description = ''; //??
         this.entered = null;
 
         // appType 0 = application, appType 1 = place, appType 2 = recent
         // Filesystem autocompletion
-        if (appType === ApplicationType._completions) {
+        /*if (appType === ApplicationType._completions) {
             this.buttonState.appType = ApplicationType._places;
             this.file = Gio.file_new_for_path(this.buttonState.app.name);
             tryFn(
                 () => this.handler = this.file.query_default_handler(null),
                 () => this.handler = null
             );
-        }
+        }*/
 
         // Don't show protocol handlers
-        if (this.buttonState.app.description) {
+        /*if (this.buttonState.app.description) {
             let slice = this.buttonState.app.description.slice(0, 7);
             if (slice === 'https://' || slice === 'http://' || slice === 'file://') {
                 this.buttonState.app.description = this.buttonState.app.description.slice(7);
@@ -448,19 +447,15 @@ class AppListGridButton extends PopupBaseMenuItem {
             if (this.buttonState.app.description.slice(-1) === '/') {
                 this.buttonState.app.description = this.buttonState.app.description.slice(0, -1);
             }
-        } else if (this.buttonState.appType === ApplicationType._applications) {
-            this.buttonState.app.description = this.state.fallbackDescription;
+        } */
+        if (!this.buttonState.app.description && this.buttonState.appType === ApplicationType._applications) {
+            this.buttonState.app.description = FALL_BACK_DESCRIPTION;
         }
 
         // Icons
         if (this.state.settings.showApplicationIcons) {
             if (this.buttonState.appType === ApplicationType._applications) {
                 this.icon = this.buttonState.app.create_icon_texture(this.state.iconSize);
-            } else if (this.buttonState.appType === ApplicationType._windows) {
-                // Used instead of metaWindow.icon because create_icon_texture creates
-                // higher resolution icons.
-                this.icon = this.buttonState.app._icon;
-                this.buttonState.app._icon = null;
             } else if (this.buttonState.appType === ApplicationType._places) {
                 let iconObj = {
                     icon_size: this.state.iconSize
@@ -494,10 +489,13 @@ class AppListGridButton extends PopupBaseMenuItem {
             }
         }
         this.label = new Label({
-            text: this.buttonState.app.name,
             style_class: 'menu-application-button-label',
             style: 'padding-right: 2px; padding-left: 2px'
         });
+        if (!this.state.isListView && this.state.settings.descriptionPlacement === PlacementUNDER) {
+            this.label.set_style('text-align: center;');
+        }
+        this.formatLabel();
         this.dot = new Widget({
             style: this.state.isListView ?
             'width: 2px; height: 12px; background-color: ' + this.state.theme.foregroundColor +
@@ -579,7 +577,7 @@ class AppListGridButton extends PopupBaseMenuItem {
         this.signals.connect(this.actor, 'button-release-event', (...args) => this.handleButtonRelease(...args));
         this.signals.connect(this.actor, 'enter-event', (...args) => this.handleEnter(...args));
         this.signals.connect(this.actor, 'leave-event', (...args) => this.handleLeave(...args));
-        this.signals.connect(this.actor, 'parent-set', (...args) => this.handleParentChange(...args));
+        //this.signals.connect(this.actor, 'parent-set', (...args) => this.handleParentChange(...args));
     }
 
     onDragBegin() {
@@ -598,68 +596,29 @@ class AppListGridButton extends PopupBaseMenuItem {
     }
 
     handleParentChange() {
-        if (this.state.settings.descriptionPlacement === PlacementUNDER || this.buttonState.app.shouldHighlight ||
-                                                                                                this.state.searchActive) {
-            this.formatLabel(false);
-        }
+        this.formatLabel();
+
         if (!this.buttonState.app.description && this.buttonState.appType === ApplicationType._applications) {
-            this.buttonState.app.description = this.state.fallbackDescription;
+            this.buttonState.app.description = FALL_BACK_DESCRIPTION;
         }
     }
 
-    formatLabel(removeSearchMarkup = false) {
+    formatLabel() {
         let name = this.buttonState.app.name.replace(/&/g, '&amp;');
         let description = this.buttonState.app.description ? this.buttonState.app.description.replace(/&/g, '&amp;') : '';
-        if (removeSearchMarkup) {
-            this.buttonState.app.name = this.buttonState.app.name.replace(stripMarkupRegex, '');
-            if (this.buttonState.app.description) {
-                this.buttonState.app.description = this.buttonState.app.description.replace(stripMarkupRegex, '');
-            }
-            description = description.replace(stripMarkupRegex, '');
-        }
 
         let markup = '<span>' + name + '</span>';
         if (this.state.settings.descriptionPlacement === PlacementUNDER) {
-            if (!this.state.isListView) {
-                this.label.set_style('text-align: center;');
-            }
             markup += '\n<span size="small">' + description + '</span>';
         }
 
         if (this.buttonState.app.shouldHighlight) {
             markup = '<b>' + markup + '</b>';
         }
-        let clutterText = this.label.get_clutter_text();
-        if (clutterText && (this.state.settings.descriptionPlacement === PlacementUNDER ||
-                        this.state.searchActive || this.buttonState.app.shouldHighlight) || removeSearchMarkup) {
-            clutterText.set_markup(markup);
-            clutterText.ellipsize = EllipsizeMode.END;
-        }
-    }
 
-    formatTooltip() {
-        let name = this.buttonState.app.name.replace(/&/g, '&amp;');
-        let description = this.buttonState.app.description ? this.buttonState.app.description.replace(/&/g, '&amp;') : '';
-        let tooltipMarkup;
-        let limit = 100;
-        const wordWrap = function(text, limit) {
-            let regex = '.{1,' + limit + '}(\\s|$)|\\S+?(\\s|$)';
-            return text.match(RegExp(regex, 'g')).join('\n');
-        };
-        let tooltipName = name;
-        if (tooltipName.length > limit) {
-            tooltipName = wordWrap(name, limit);
-        }
-        tooltipMarkup = '<span>' + tooltipName + '</span>';
-
-        if (description.length > 0) {
-            let tooltipDescription = description;
-            if (description.length > limit) {
-                tooltipDescription = wordWrap(description, limit);
-            }
-            tooltipMarkup += '\n<span size="small">' + tooltipDescription + '</span>';
-        }
-        this.tooltipMarkup = tooltipMarkup;
+        const clutterText = this.label.get_clutter_text();
+        clutterText.set_markup(markup);
+        clutterText.ellipsize = EllipsizeMode.END;
     }
 
     _onKeyFocusIn() {
@@ -681,7 +640,24 @@ class AppListGridButton extends PopupBaseMenuItem {
         this.actor.set_style_class_name('menu-application-button-selected');
 
         if (this.state.settings.descriptionPlacement === PlacementTOOLTIP) {
-            this.formatTooltip();
+            const wordWrap = text => text.match( /.{1,80}(\s|$|-|=|\+)|\S+?(\s|$|-|=|\+)/g ).join('\n');
+            let tooltipMarkup = '<span>' + wordWrap(this.buttonState.app.nameWithSearchMarkup && SHOW_SEARCH_MARKUP_IN_TOOLTIP ?
+                                this.buttonState.app.nameWithSearchMarkup : this.buttonState.app.name) + '</span>';
+            if (this.buttonState.app.description) {
+                tooltipMarkup += '\n<span size="small">' + wordWrap(this.buttonState.app.descriptionWithSearchMarkup &&
+                                            SHOW_SEARCH_MARKUP_IN_TOOLTIP ? this.buttonState.app.descriptionWithSearchMarkup :
+                                                                                this.buttonState.app.description) + '</span>';
+            }
+            if (SEARCH_DEBUG) {
+                if (SHOW_SEARCH_MARKUP_IN_TOOLTIP && this.buttonState.app.keywordsWithSearchMarkup) {
+                    tooltipMarkup += '\n<span size="small">' + wordWrap(this.buttonState.app.keywordsWithSearchMarkup) + '</span>';
+                }
+                if (SHOW_SEARCH_MARKUP_IN_TOOLTIP && this.buttonState.app.idWithSearchMarkup) {
+                    tooltipMarkup += '\n<span size="small">' + wordWrap(this.buttonState.app.idWithSearchMarkup) + '</span>';
+                }
+            }
+            tooltipMarkup = tooltipMarkup.replace(/&/g, '&amp;');
+
             let [x, y] = this.actor.get_transformed_position();
             let y_extra = 0;
             let {width, height} = this.actor;
@@ -700,8 +676,10 @@ class AppListGridButton extends PopupBaseMenuItem {
                 y += height + 8 * global.ui_scale;
                 center_x = true;
             }
-
-            this.tooltip = new ShowTooltip(this.actor, x, y, center_x, this.tooltipMarkup);
+            if (!this.tooltip) {/*handleEnter may have been called twice, once with key nav and again with mouse.
+                                 *In which case, don't create new tooltip*/
+                this.tooltip = new ShowTooltip(this.actor, x, y, center_x, tooltipMarkup);
+            }
         }
         return false;
     }
@@ -715,6 +693,7 @@ class AppListGridButton extends PopupBaseMenuItem {
         this.actor.set_style_class_name('menu-application-button');
         if (this.tooltip) {
             this.tooltip.destroy();
+            this.tooltip = null;
         }
     }
 
@@ -801,8 +780,6 @@ class AppListGridButton extends PopupBaseMenuItem {
             } else {
                 Gio.app_info_launch_default_for_uri(this.buttonState.app.uri, global.create_app_launch_context());
             }
-        } else if (this.buttonState.appType === ApplicationType._windows) {
-            Main.activateWindow(this.buttonState.app.window, global.get_current_time());
         } else if (this.buttonState.appType === ApplicationType._providers) {
             this.buttonState.app.activate(this.buttonState.app);
         }
@@ -853,6 +830,7 @@ class AppListGridButton extends PopupBaseMenuItem {
                 t.contextMenuButtons.push(instance);
                 t.menu.addMenuItem(t.contextMenuButtons[t.contextMenuButtons.length - 1]);
             };
+
             if (this.state.gpu_offload_supported) {
                 addMenuItem(this, new ApplicationContextMenuItem(this.state, this.buttonState,
                                                         _('Run with NVIDIA GPU'), 'offload_launch', 'cpu'));
@@ -873,10 +851,11 @@ class AppListGridButton extends PopupBaseMenuItem {
                 addMenuItem(this, new ApplicationContextMenuItem(this.state, this.buttonState,
                                                 _('Add to favorites'), 'add_to_favorites', 'non-starred'));
             }
-            if (canUninstall) {
+            if (CAN_UNINSTALL) {
                 addMenuItem(this, new ApplicationContextMenuItem(this.state, this.buttonState,
                                                         _('Uninstall'), 'uninstall', 'edit-delete'));
             }
+
             if (this.state.isListView) {
                 this.label.hide();
             } else {
@@ -884,15 +863,11 @@ class AppListGridButton extends PopupBaseMenuItem {
                 let parent = this.actor.get_parent();
                 if (!parent) return true; // Favorite change
                 this.actor.get_parent().set_child_above_sibling(this.actor, null);
-
+                //this.actor.show_on_set_parent = false;
             }
         }
         this.menu.toggle_with_options(this.state.settings.enableAnimation);
         return true;
-    }
-
-    clearSearchFormatting() {
-        this.formatLabel(true);
     }
 
     destroy(skipDestroy) {
