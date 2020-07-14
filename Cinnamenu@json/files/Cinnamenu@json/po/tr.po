@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cinnamenu 3.2.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-31 01:03-0500\n"
+"POT-Creation-Date: 2020-07-13 18:22+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Serdar Sağlam <teknomobil@yandex.com>\n"
 "Language-Team: Serdar <teknomobil@yandex.com>\n"
@@ -10,408 +10,468 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.1\n"
+"X-Generator: Poedit 2.3.1\n"
 
-#: buttons.js:382
-msgid "Please provide your password to uninstall this application"
-msgstr "Bu uygulamayı kaldırmak için lütfen şifrenizi girin"
+#: 3.2/applet.js:92 4.0/applet.js:40
+msgid "Type to search..."
+msgstr "Aramak için yaz..."
 
-#: buttons.js:1020
-msgid "Add to panel"
-msgstr "Panele ekle"
+#: 3.2/applet.js:157 4.0/applet.js:50
+msgid "Initializing"
+msgstr "Başlatılıyor"
 
-#: buttons.js:1022
-msgid "Add to desktop"
-msgstr "Masaüstüne ekle"
+#: 3.2/applet.js:284 4.0/buttons.js:26
+msgid "No description available"
+msgstr "Açıklama mevcut değil"
 
-#: buttons.js:1025
-msgid "Remove from favorites"
-msgstr "Favorilerden kaldır"
+#: 3.2/applet.js:977 4.0/applet.js:715
+msgid "All Applications"
+msgstr "Tüm Uygulamalar"
 
-#: buttons.js:1027
-msgid "Add to favorites"
-msgstr "Favorilere ekle"
+#: 3.2/applet.js:1015 4.0/applet.js:756
+msgid "Places"
+msgstr "Yerler"
 
-#: buttons.js:1029
-msgid "Uninstall"
-msgstr "Kaldır"
+#: 3.2/applet.js:1016 4.0/applet.js:757
+msgid "Recent Files"
+msgstr "Son Dosyalar"
 
-#: buttons.js:1031
-msgid "Run with NVIDIA GPU"
-msgstr "NVIDIA GPU ile çalıştır"
+#: 3.2/applet.js:1017 4.0/applet.js:758
+msgid "Bookmarks"
+msgstr "Yer İmleri"
 
-#: buttons.js:1228 applet.js:2253
-msgid "List View"
-msgstr "Liste Görünümü"
+#: 3.2/applet.js:1018 4.0/applet.js:759
+msgid "Favorite Apps"
+msgstr "Favorilerim"
 
-#: buttons.js:1229 applet.js:2254
-msgid "Switch to list view"
-msgstr "Liste görünümüne geç"
+#: 3.2/applet.js:1351 4.0/applet.js:1072
+msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
+msgstr "Firefox ve Midori yer imleri için gir1.2-gda-5.0 paketi gerekli."
 
-#: buttons.js:1234 applet.js:2253
+#: 3.2/applet.js:1415 4.0/applet.js:1121
+msgid "Clear List"
+msgstr "Listeyi Temizle"
+
+#: 3.2/applet.js:1426 4.0/applet.js:1128
+msgid "No recent documents"
+msgstr "Yakın tarihli belge yok"
+
+#: 3.2/applet.js:2278
+msgid "Account details"
+msgstr "Hesap ayrıntıları"
+
+#: 3.2/applet.js:2285 3.2/buttons.js:1260
 msgid "Grid View"
 msgstr "Izgara Görünümü"
 
-#: buttons.js:1235 applet.js:2254
+#: 3.2/applet.js:2285 3.2/buttons.js:1254
+msgid "List View"
+msgstr "Liste Görünümü"
+
+#: 3.2/applet.js:2286 3.2/buttons.js:1261
 msgid "Switch to grid view"
 msgstr "Izgara görünümüne geç"
 
-#: placeDisplay.js:57
+#: 3.2/applet.js:2286 3.2/buttons.js:1255
+msgid "Switch to list view"
+msgstr "Liste görünümüne geç"
+
+#: 3.2/applet.js:2292 4.0/applet.js:2092
+msgid "Lock Screen"
+msgstr "Ekranı Kilitle"
+
+#: 3.2/applet.js:2293 4.0/applet.js:2093
+msgid "Lock the screen"
+msgstr "Ekranı kilitle"
+
+#: 3.2/applet.js:2314 4.0/applet.js:2108
+msgid "Logout"
+msgstr "Çıkış Yap"
+
+#: 3.2/applet.js:2315 4.0/applet.js:2109
+msgid "Leave the session"
+msgstr "Oturumu açık tut"
+
+#: 3.2/applet.js:2322 4.0/applet.js:2112
+msgid "Quit"
+msgstr "Çık"
+
+#: 3.2/applet.js:2323 4.0/applet.js:2113
+msgid "Shutdown the computer"
+msgstr "Bilgisayarı kapat"
+
+#: 3.2/placeDisplay.js:57 4.0/placeDisplay.js:35
 #, javascript-format
 msgid "Failed to launch \"%s\""
 msgstr "Başlatılamadı \"%s\""
 
-#: placeDisplay.js:146
+#: 3.2/placeDisplay.js:146 4.0/placeDisplay.js:102
 msgid "Home"
 msgstr "Başlangıç"
 
-#: placeDisplay.js:220
+#: 3.2/placeDisplay.js:220 4.0/placeDisplay.js:144
 msgid "Computer"
 msgstr "Bilgisayar"
 
-#: placeDisplay.js:224
+#: 3.2/placeDisplay.js:224 4.0/placeDisplay.js:146
 msgid "Browse network"
 msgstr "Ağa göz at"
 
-#: applet.js:84
-msgid "Type to search..."
-msgstr "Aramak için yaz..."
+#: 3.2/buttons.js:1045 3.2/buttons.js:1047 4.0/buttons.js:836
+#: 4.0/buttons.js:839
+msgid "Run with NVIDIA GPU"
+msgstr "NVIDIA GPU ile çalıştır"
 
-#: applet.js:149
-msgid "Initializing"
-msgstr "Başlatılıyor"
+#: 3.2/buttons.js:1049 4.0/buttons.js:842
+msgid "Add to panel"
+msgstr "Panele ekle"
 
-#: applet.js:275
-msgid "No description available"
-msgstr "Açıklama mevcut değil"
+#: 3.2/buttons.js:1051 4.0/buttons.js:845
+msgid "Add to desktop"
+msgstr "Masaüstüne ekle"
 
-#: applet.js:956
-msgid "All Applications"
-msgstr "Tüm Uygulamalar"
+#: 3.2/buttons.js:1054
+msgid "Remove from favorites"
+msgstr "Favorilerden kaldır"
 
-#: applet.js:994
-msgid "Places"
-msgstr "Yerler"
+#: 3.2/buttons.js:1056 4.0/buttons.js:852
+msgid "Add to favorites"
+msgstr "Favorilere ekle"
 
-#: applet.js:995
-msgid "Recent Files"
-msgstr "Son Dosyalar"
+#: 3.2/buttons.js:1059 4.0/buttons.js:856
+msgid "Uninstall"
+msgstr "Kaldır"
 
-#: applet.js:996
-msgid "Bookmarks"
-msgstr "Yer İmleri"
+#: 4.0/applet.js:233 4.0/applet.js:1230
+msgid "Please wait..."
+msgstr ""
 
-#: applet.js:997
-msgid "Favorite Apps"
-msgstr "Favorilerim"
-
-#: applet.js:1282
-msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
-msgstr "Firefox ve Midori yer imleri için gir1.2-gda-5.0 paketi gerekli."
-
-#: applet.js:1362
-msgid "Clear List"
-msgstr "Listeyi Temizle"
-
-#: applet.js:1373
-msgid "No recent documents"
-msgstr "Yakın tarihli belge yok"
-
-#: applet.js:2246
-msgid "Account details"
-msgstr "Hesap ayrıntıları"
-
-#: applet.js:2260
-msgid "Lock Screen"
-msgstr "Ekranı Kilitle"
-
-#: applet.js:2261
-msgid "Lock the screen"
-msgstr "Ekranı kilitle"
-
-#: applet.js:2282
-msgid "Logout"
-msgstr "Çıkış Yap"
-
-#: applet.js:2283
-msgid "Leave the session"
-msgstr "Oturumu açık tut"
-
-#: applet.js:2290
-msgid "Quit"
-msgstr "Çık"
-
-#: applet.js:2291
-msgid "Shutdown the computer"
-msgstr "Bilgisayarı kapat"
+#: 4.0/buttons.js:849
+#, fuzzy
+#| msgid "Remove from favorites"
+msgid "Remove favorite"
+msgstr "Favorilerden kaldır"
 
 #. metadata.json->name
-#. settings-schema.json->cinnamenuProvidersSection->title
+#. 3.2->settings-schema.json->cinnamenuProvidersSection->title
 msgid "Cinnamenu"
 msgstr "Cinnamenü"
 
 #. metadata.json->description
 msgid ""
-"A flexible menu providing formatting options, web bookmarks, open window "
-"lookup, and search provider support with fuzzy searching."
+"A flexible menu providing formatting options, web bookmarks, search provider "
+"support and fuzzy searching."
 msgstr ""
-"Özelleştirilebilir menü, simge boyutları kategori boyutları ayarlanabilir. "
-"Arama motorları ve yer imleri eklenebilir, şeffaf arka plan desteklidir."
+"Biçimlendirme seçenekleri, web yer imleri, arama sağlayıcı desteği ve "
+"bulanık arama sağlayan esnek bir menü."
 
-#. settings-schema.json->panel->title
+#. metadata.json->comments
+msgid ""
+"Made possible thanks to the efforts of contributors to the Cinnamon menu, "
+"Gnomenu, and the contributors to projects they derived from."
+msgstr ""
+
+#. 3.2->settings-schema.json->panel->title
+#. 4.0->settings-schema.json->behaviour->title
 msgid "Behavior"
 msgstr "Davranış"
 
-#. settings-schema.json->appearance->title
+#. 3.2->settings-schema.json->appearance->title
+#. 4.0->settings-schema.json->appearance->title
 msgid "Appearance"
 msgstr "Görünüm"
 
-#. settings-schema.json->menu->title
+#. 3.2->settings-schema.json->menu->title
+#. 4.0->settings-schema.json->layout->title
 msgid "Layout and Content"
 msgstr "Yerleşim ve İçerik"
 
-#. settings-schema.json->providers->title
+#. 3.2->settings-schema.json->providers->title
 msgid "Search Providers"
 msgstr "Arama Sağlayıcıları"
 
-#. settings-schema.json->extensionProvidersSection->title
+#. 3.2->settings-schema.json->extensionProvidersSection->title
 msgid "No search provider extensions found"
 msgstr "Hiçbir arama sağlayıcı eklentisi bulunamadı"
 
-#. settings-schema.json->panel-appear->title
-#. settings-schema.json->panel-behave->title
+#. 3.2->settings-schema.json->panel-appear->title
+#. 3.2->settings-schema.json->panel-behave->title
+#. 4.0->settings-schema.json->panel-behave->title
+#. 4.0->settings-schema.json->panel-appear->title
 msgid "Panel"
 msgstr "Panel"
 
-#. settings-schema.json->menu-behave->title
-#. settings-schema.json->menu-icons->title
+#. 3.2->settings-schema.json->menu-behave->title
+#. 3.2->settings-schema.json->menu-icons->title
+#. 4.0->settings-schema.json->menu-icons->title
 msgid "Menu"
 msgstr "Menü"
 
-#. settings-schema.json->menu-layout->title
+#. 3.2->settings-schema.json->menu-layout->title
+#. 4.0->settings-schema.json->menu-layout->title
 msgid "Layout"
 msgstr "Düzen"
 
-#. settings-schema.json->menu-content->title
+#. 3.2->settings-schema.json->menu-content->title
+#. 4.0->settings-schema.json->menu-content->title
 msgid "Content"
 msgstr "İçerik"
 
-#. settings-schema.json->privacy-settings-button->description
+#. 3.2->settings-schema.json->privacy-settings-button->description
 msgid "Toggle recent files"
 msgstr "Son kullanılan dosyalar"
 
-#. settings-schema.json->privacy-settings-button->tooltip
+#. 3.2->settings-schema.json->privacy-settings-button->tooltip
+#. 4.0->settings-schema.json->privacy-settings-button->tooltip
 msgid "Press this button to customize your privacy settings."
 msgstr "Gizlilik ayarlarınızı özelleştirmek için bu düğmeye basın."
 
-#. settings-schema.json->menu-editor-button->description
+#. 3.2->settings-schema.json->menu-editor-button->description
+#. 4.0->settings-schema.json->menu-editor-button->description
 msgid "Open the menu editor"
 msgstr "Menü düzenleyiciyi aç"
 
-#. settings-schema.json->menu-editor-button->tooltip
+#. 3.2->settings-schema.json->menu-editor-button->tooltip
+#. 4.0->settings-schema.json->menu-editor-button->tooltip
 msgid "Press this button to customize your menu entries."
 msgstr "Menü girişlerinizi özelleştirmek için bu düğmeye basın."
 
-#. settings-schema.json->resetCategoryOrder-button->description
+#. 3.2->settings-schema.json->resetCategoryOrder-button->description
+#. 4.0->settings-schema.json->resetCategoryOrder-button->description
 msgid "Reset category order"
 msgstr "Kategori sırasını sıfırla"
 
-#. settings-schema.json->menu-icon-custom->description
+#. 3.2->settings-schema.json->menu-icon-custom->description
+#. 4.0->settings-schema.json->menu-icon-custom->description
 msgid "Use a custom icon"
 msgstr "Özel bir simge kullan"
 
-#. settings-schema.json->menu-icon-custom->tooltip
+#. 3.2->settings-schema.json->menu-icon-custom->tooltip
+#. 4.0->settings-schema.json->menu-icon-custom->tooltip
 msgid "Unchecking this allows the theme to set the icon"
 msgstr "Seçeneğin işaretini kaldırmak, temanın simgeyi ayarlamasını sağlar"
 
-#. settings-schema.json->menu-icon->description
+#. 3.2->settings-schema.json->menu-icon->description
+#. 4.0->settings-schema.json->menu-icon->description
 msgid "Icon"
 msgstr "Simge"
 
-#. settings-schema.json->menu-icon->tooltip
+#. 3.2->settings-schema.json->menu-icon->tooltip
+#. 4.0->settings-schema.json->menu-icon->tooltip
 msgid "Select an icon to show in the panel."
 msgstr "Panelde gösterilecek bir simge seçin."
 
-#. settings-schema.json->menu-label->description
-#. settings-schema.json->menu-label->tooltip
+#. 3.2->settings-schema.json->menu-label->description
+#. 3.2->settings-schema.json->menu-label->tooltip
+#. 4.0->settings-schema.json->menu-label->description
+#. 4.0->settings-schema.json->menu-label->tooltip
 msgid "Set the custom menu button icon name"
 msgstr "Menü simge ismini ayarla"
 
-#. settings-schema.json->category-icon-size->units
-#. settings-schema.json->apps-list-icon-size->units
-#. settings-schema.json->apps-grid-icon-size->units
+#. 3.2->settings-schema.json->category-icon-size->units
+#. 3.2->settings-schema.json->apps-list-icon-size->units
+#. 3.2->settings-schema.json->apps-grid-icon-size->units
+#. 4.0->settings-schema.json->category-icon-size->units
+#. 4.0->settings-schema.json->apps-list-icon-size->units
+#. 4.0->settings-schema.json->apps-grid-icon-size->units
 msgid "pixels"
 msgstr "piksel"
 
-#. settings-schema.json->category-icon-size->description
-#. settings-schema.json->category-icon-size->tooltip
+#. 3.2->settings-schema.json->category-icon-size->description
+#. 3.2->settings-schema.json->category-icon-size->tooltip
+#. 4.0->settings-schema.json->category-icon-size->description
+#. 4.0->settings-schema.json->category-icon-size->tooltip
 msgid "Category icon size"
 msgstr "Kategori simge boyutu"
 
-#. settings-schema.json->apps-list-icon-size->description
-#. settings-schema.json->apps-list-icon-size->tooltip
+#. 3.2->settings-schema.json->apps-list-icon-size->description
+#. 3.2->settings-schema.json->apps-list-icon-size->tooltip
+#. 4.0->settings-schema.json->apps-list-icon-size->description
+#. 4.0->settings-schema.json->apps-list-icon-size->tooltip
 msgid "Applications list icon size"
 msgstr "Uygulama listesi simge boyutu"
 
-#. settings-schema.json->apps-grid-icon-size->description
-#. settings-schema.json->apps-grid-icon-size->tooltip
+#. 3.2->settings-schema.json->apps-grid-icon-size->description
+#. 3.2->settings-schema.json->apps-grid-icon-size->tooltip
+#. 4.0->settings-schema.json->apps-grid-icon-size->description
+#. 4.0->settings-schema.json->apps-grid-icon-size->tooltip
 msgid "Applications grid icon size"
 msgstr "Uygulama listesi ızgara simge boyutu"
 
-#. settings-schema.json->overlay-key->description
+#. 3.2->settings-schema.json->overlay-key->description
+#. 4.0->settings-schema.json->overlay-key->description
 msgid "Keyboard shortcut to open and close the menu"
 msgstr "Menüyü açıp kapatmak için klavye kısayolu"
 
-#. settings-schema.json->activate-on-hover->description
+#. 3.2->settings-schema.json->activate-on-hover->description
+#. 4.0->settings-schema.json->activate-on-hover->description
 msgid "Open the menu when I move my mouse over it"
 msgstr "Fareyi üstüne getirdiğimde menüyü aç"
 
-#. settings-schema.json->activate-on-hover->tooltip
+#. 3.2->settings-schema.json->activate-on-hover->tooltip
+#. 4.0->settings-schema.json->activate-on-hover->tooltip
 msgid "Enable opening the menu when the mouse enters the applet"
 msgstr ""
 "Fare menü uygulamacığının üstüne geldiğinde menü açılmasını etkinleştir"
 
-#. settings-schema.json->hover-delay->units
-#. settings-schema.json->tooltip-delay->units
+#. 3.2->settings-schema.json->hover-delay->units
+#. 3.2->settings-schema.json->tooltip-delay->units
+#. 4.0->settings-schema.json->hover-delay->units
 msgid "milliseconds"
 msgstr "milisaniye"
 
-#. settings-schema.json->hover-delay->description
+#. 3.2->settings-schema.json->hover-delay->description
+#. 4.0->settings-schema.json->hover-delay->description
 msgid "Menu hover delay:"
 msgstr "Menü bekleme gecikmesi:"
 
-#. settings-schema.json->hover-delay->tooltip
+#. 3.2->settings-schema.json->hover-delay->tooltip
+#. 4.0->settings-schema.json->hover-delay->tooltip
 msgid "Delay between switching categories"
 msgstr "Kategoriler arası geçişlerdeki gecikme"
 
-#. settings-schema.json->enable-animation->description
+#. 3.2->settings-schema.json->enable-animation->description
+#. 4.0->settings-schema.json->enable-animation->description
 msgid "Use menu animations"
 msgstr "Menü animasyonları kullan"
 
-#. settings-schema.json->enable-animation->tooltip
+#. 3.2->settings-schema.json->enable-animation->tooltip
+#. 4.0->settings-schema.json->enable-animation->tooltip
 msgid "Allow the menu to animate on open and close"
 msgstr "Açarken ve kapanırken menü animasyonuna izin ver"
 
-#. settings-schema.json->category-click->description
+#. 3.2->settings-schema.json->category-click->description
+#. 4.0->settings-schema.json->category-click->description
 msgid "Activate categories on click"
 msgstr "Kategorileri tıklatarak açın"
 
-#. settings-schema.json->category-click->tooltip
+#. 3.2->settings-schema.json->category-click->tooltip
+#. 4.0->settings-schema.json->category-click->tooltip
 msgid ""
 "When enabled, category views are activated on click instead of on hover."
 msgstr "Kategoriler içindeki uygulama listelerine tıklayarak ulaşırsınız."
 
-#. settings-schema.json->enable-autoscroll->description
+#. 3.2->settings-schema.json->enable-autoscroll->description
+#. 4.0->settings-schema.json->enable-autoscroll->description
 msgid "Enable autoscrolling in application list"
 msgstr "Uygulama listesinde otomatik kaydırmayı etkinleştir"
 
-#. settings-schema.json->enable-autoscroll->tooltip
+#. 3.2->settings-schema.json->enable-autoscroll->tooltip
+#. 4.0->settings-schema.json->enable-autoscroll->tooltip
 msgid ""
 "Choose whether or not to enable smooth autoscrolling in the application list."
 msgstr ""
 "Uygulamada sorunsuz otomatik gezinmeyi etkinleştirip etkinleştirmemesini "
 "seçin."
 
-#. settings-schema.json->enable-bookmarks->description
+#. 3.2->settings-schema.json->enable-bookmarks->description
+#. 4.0->settings-schema.json->enable-bookmarks->description
 msgid "Show web bookmarks"
 msgstr "Tarayıcı yer imlerini göster"
 
-#. settings-schema.json->enable-bookmarks->tooltip
+#. 3.2->settings-schema.json->enable-bookmarks->tooltip
+#. 4.0->settings-schema.json->enable-bookmarks->tooltip
 msgid "Choose whether or not bookmarks are indexed in the menu."
 msgstr "Bilgisayar menüsünde bulunan yer imlerini göster."
 
-#. settings-schema.json->enable-windows->description
+#. 3.2->settings-schema.json->enable-windows->description
 msgid "Enable searching of open windows"
 msgstr "Açık pencerelerde aramayı etkinleştir"
 
-#. settings-schema.json->enable-windows->tooltip
+#. 3.2->settings-schema.json->enable-windows->tooltip
 msgid "Choose whether or not open windows are indexed in menu searches."
 msgstr "Açık pencerelerin menü aramalarına dahil edilip edilmeyeceğini seçin."
 
-#. settings-schema.json->enable-search-providers->description
+#. 3.2->settings-schema.json->enable-search-providers->description
+#. 4.0->settings-schema.json->enable-search-providers->description
 msgid "Enable search providers"
 msgstr "Arama sağlayıcılarını etkinleştir"
 
-#. settings-schema.json->enable-search-providers->tooltip
+#. 3.2->settings-schema.json->enable-search-providers->tooltip
+#. 4.0->settings-schema.json->enable-search-providers->tooltip
 msgid ""
 "Choose whether or not search provider results are indexed in menu searches."
 msgstr ""
 "Arama sağlayıcısı sonuçlarının menü aramalarına dahil edilip edilmeyeceğini "
 "seçin."
 
-#. settings-schema.json->get-providers->description
+#. 3.2->settings-schema.json->get-providers->description
+#. 4.0->settings-schema.json->get-providers->description
 msgid "Example Search Providers"
 msgstr "Arama Sağlayıcıları Eklentileri"
 
-#. settings-schema.json->startup-view-mode->description
-#. settings-schema.json->startup-view-mode->tooltip
+#. 3.2->settings-schema.json->startup-view-mode->description
+#. 3.2->settings-schema.json->startup-view-mode->tooltip
 msgid "Startup applications view mode"
 msgstr "Başlangıç uygulamaları görünüm kipi"
 
-#. settings-schema.json->startup-view-mode->options
+#. 3.2->settings-schema.json->startup-view-mode->options
+#. 4.0->settings-schema.json->applications-view-mode->options
 msgid "List"
 msgstr "Liste"
 
-#. settings-schema.json->startup-view-mode->options
+#. 3.2->settings-schema.json->startup-view-mode->options
+#. 4.0->settings-schema.json->applications-view-mode->options
 msgid "Grid"
 msgstr "Izgara"
 
-#. settings-schema.json->apps-grid-column-count->units
+#. 3.2->settings-schema.json->apps-grid-column-count->units
+#. 4.0->settings-schema.json->apps-grid-column-count->units
 msgid "columns"
 msgstr "sütun"
 
-#. settings-schema.json->apps-grid-column-count->description
-#. settings-schema.json->apps-grid-column-count->tooltip
+#. 3.2->settings-schema.json->apps-grid-column-count->description
+#. 3.2->settings-schema.json->apps-grid-column-count->tooltip
+#. 4.0->settings-schema.json->apps-grid-column-count->description
+#. 4.0->settings-schema.json->apps-grid-column-count->tooltip
 msgid "Number of columns in apps grid"
 msgstr "Uygulama kılavuzundaki sütun sayısı"
 
-#. settings-schema.json->show-places->description
+#. 3.2->settings-schema.json->show-places->description
+#. 4.0->settings-schema.json->show-places->description
 msgid "Show bookmarks and places"
 msgstr "Yer imlerini ve yerleri göster"
 
-#. settings-schema.json->show-places->tooltip
+#. 3.2->settings-schema.json->show-places->tooltip
+#. 4.0->settings-schema.json->show-places->tooltip
 msgid "Choose whether or not to show bookmarks and places in the menu."
 msgstr "Menüde yer imlerinin ve yerlerin gösterilip gösterilmeyeceğini seçin."
 
-#. settings-schema.json->show-application-icons->description
+#. 3.2->settings-schema.json->show-application-icons->description
+#. 4.0->settings-schema.json->show-application-icons->description
 msgid "Show application icons"
 msgstr "Uygulama simgelerini göster"
 
-#. settings-schema.json->show-application-icons->tooltip
+#. 3.2->settings-schema.json->show-application-icons->tooltip
+#. 4.0->settings-schema.json->show-application-icons->tooltip
 msgid "Choose whether or not to show icons on applications."
 msgstr "Uygulamalardaki simgelerin gösterilip gösterilmeyeceğini seçin."
 
-#. settings-schema.json->show-category-icons->description
+#. 3.2->settings-schema.json->show-category-icons->description
+#. 4.0->settings-schema.json->show-category-icons->description
 msgid "Show category icons"
 msgstr "Kategori simgelerini göster"
 
-#. settings-schema.json->show-category-icons->tooltip
+#. 3.2->settings-schema.json->show-category-icons->tooltip
+#. 4.0->settings-schema.json->show-category-icons->tooltip
 msgid "Choose whether or not to show icons on categories."
 msgstr "Kategorilerdeki simgelerin gösterilip gösterilmeyeceğini seçin."
 
-#. settings-schema.json->search-filesystem->description
-msgid "Enable filesystem path entry in search box"
-msgstr "Arama kutusuna dosya sistemi yolu girişini etkinleştir"
-
-#. settings-schema.json->search-filesystem->tooltip
-msgid "Allows path entry in the menu search box."
-msgstr "Menü arama kutusuna yol girişini sağlar."
-
-#. settings-schema.json->show-apps-description-on-buttons->description
+#. 3.2->settings-schema.json->show-apps-description-on-buttons->description
 msgid "Show application descriptions under titles"
 msgstr "Uygulama açıklamalarını listede göster"
 
-#. settings-schema.json->show-apps-description-on-buttons->tooltip
+#. 3.2->settings-schema.json->show-apps-description-on-buttons->tooltip
 msgid ""
 "Choose whether or not to show the application description on the application "
 "buttons."
 msgstr "Listede uygulama açıklamasının gösterilip gösterilmeyeceğini seçin."
 
-#. settings-schema.json->show-tooltips->description
+#. 3.2->settings-schema.json->show-tooltips->description
 msgid "Show tooltips"
 msgstr "Araç ipuçlarını göster"
 
-#. settings-schema.json->show-tooltips->tooltip
+#. 3.2->settings-schema.json->show-tooltips->tooltip
 msgid ""
 "When enabled, tooltips containing the item's name or description is shown "
 "when hovered over."
@@ -419,61 +479,120 @@ msgstr ""
 "Etkinleştirildiğinde, uygulamaların açıklamasını içeren araç ipuçları "
 "gösterilir."
 
-#. settings-schema.json->tooltip-delay->description
+#. 3.2->settings-schema.json->tooltip-delay->description
 msgid "Tooltip delay"
 msgstr "Araç ipucu gecikmesi"
 
-#. settings-schema.json->tooltip-delay->tooltip
+#. 3.2->settings-schema.json->tooltip-delay->tooltip
 msgid ""
 "The delay time in milliseconds for tooltips when hovering over a menu item."
 msgstr "Araç ipuçları için milisaniye cinsinden gecikme süresi."
 
-#. settings-schema.json->enable-custom-menu-height->description
-#. settings-schema.json->enable-custom-menu-height->tooltip
+#. 3.2->settings-schema.json->enable-custom-menu-height->description
+#. 3.2->settings-schema.json->enable-custom-menu-height->tooltip
+#. 4.0->settings-schema.json->enable-custom-menu-height->description
+#. 4.0->settings-schema.json->enable-custom-menu-height->tooltip
 msgid "Use a custom menu height"
 msgstr "Özel bir menü yüksekliği kullanın"
 
-#. settings-schema.json->custom-menu-height->units
+#. 3.2->settings-schema.json->custom-menu-height->units
+#. 4.0->settings-schema.json->custom-menu-height->units
 msgid "px"
 msgstr "piksel"
 
-#. settings-schema.json->custom-menu-height->description
-#. settings-schema.json->custom-menu-height->tooltip
+#. 3.2->settings-schema.json->custom-menu-height->description
+#. 3.2->settings-schema.json->custom-menu-height->tooltip
+#. 4.0->settings-schema.json->custom-menu-height->description
+#. 4.0->settings-schema.json->custom-menu-height->tooltip
 msgid "Custom menu height"
 msgstr "Özel menü yüksekliği"
 
-#. settings-schema.json->description-placement->description
+#. 4.0->settings-schema.json->applications-view-mode->description
+msgid "Applications view mode"
+msgstr "Uygulama görüntüleme modu"
+
+#. 4.0->settings-schema.json->applications-view-mode->tooltip
+msgid "View applications as list or grid"
+msgstr "Uygulamaları liste veya ızgara olarak görüntüleme"
+
+#. 4.0->settings-schema.json->description-placement->description
 msgid "Application description placement"
 msgstr "Uygulama açıklaması yerleşimi"
 
-#. settings-schema.json->description-placement->options
+#. 4.0->settings-schema.json->description-placement->options
 msgid "Tooltips"
 msgstr "Araç ipuçları"
 
-#. settings-schema.json->description-placement->options
+#. 4.0->settings-schema.json->description-placement->options
 msgid "Under titles"
 msgstr "Başlıkların altında"
 
-#. settings-schema.json->description-placement->options
-msgid "Bottom pane"
-msgstr "Alt bölme"
-
-#. settings-schema.json->description-placement->options
+#. 4.0->settings-schema.json->description-placement->options
 msgid "None"
 msgstr "Yok"
 
-#. settings-schema.json->description-placement->tooltip
-msgid ""
-"Choose where application descriptions will be placed, or select \"None\" to "
-"disable."
-msgstr ""
-"Uygulama açıklamalarının nereye yerleştirileceğini veya devre dışı bırakmak "
-"için \"Yok\" u seç."
+#. 4.0->settings-schema.json->description-placement->tooltip
+#, fuzzy
+#| msgid ""
+#| "Choose whether or not to show the application description on the "
+#| "application buttons."
+msgid "Choose where to show application descriptions."
+msgstr "Listede uygulama açıklamasının gösterilip gösterilmeyeceğini seçin."
 
-#. settings-schema.json->startupCategory->description
-msgid "Startup category"
-msgstr "Başlangıç kategorisi"
+#. 4.0->settings-schema.json->powergroup-placement->description
+msgid "Session buttons location"
+msgstr "Oturum düğmelerinin konumu"
 
-#. settings-schema.json->startupCategory->tooltip
-msgid "Category first seen when the menu is opened"
-msgstr "Kategori ilk menü açıldığında görülür"
+#. 4.0->settings-schema.json->powergroup-placement->options
+msgid "Top"
+msgstr "Tepede"
+
+#. 4.0->settings-schema.json->powergroup-placement->options
+msgid "Bottom"
+msgstr "Alt bölme"
+
+#. 4.0->settings-schema.json->powergroup-placement->options
+msgid "Left"
+msgstr "Sola"
+
+#. 4.0->settings-schema.json->powergroup-placement->options
+msgid "Right"
+msgstr "Sağa"
+
+#. 4.0->settings-schema.json->powergroup-placement->tooltip
+msgid "Choose where to show the session (quit, logout, etc.) buttons."
+msgstr "Oturum (çık, çık, vb.) Düğmelerinin nerede gösterileceğini seçin."
+
+#. 4.0->settings-schema.json->add-favorites->description
+msgid "Add favorites to session buttons."
+msgstr "Oturum düğmelerine sık kullanılanlar ekleyin."
+
+#. 4.0->settings-schema.json->add-favorites->tooltip
+msgid "Show your favorite app icons next to the session buttons."
+msgstr "Oturum düğmelerinin yanında favori uygulama simgelerinizi gösterin."
+
+#. 4.0->settings-schema.json->privacy-settings-button->description
+msgid "Recent files settings"
+msgstr "Son dosya ayarları"
+
+#~ msgid "Please provide your password to uninstall this application"
+#~ msgstr "Bu uygulamayı kaldırmak için lütfen şifrenizi girin"
+
+#~ msgid "Enable filesystem path entry in search box"
+#~ msgstr "Arama kutusuna dosya sistemi yolu girişini etkinleştir"
+
+#~ msgid "Allows path entry in the menu search box."
+#~ msgstr "Menü arama kutusuna yol girişini sağlar."
+
+#~ msgid ""
+#~ "Choose where application descriptions will be placed, or select \"None\" "
+#~ "to disable."
+#~ msgstr ""
+#~ "Uygulama açıklamalarının nereye yerleştirileceğini veya devre dışı "
+#~ "bırakmak için \"Yok\" u seç."
+
+#~ msgid "Startup category"
+#~ msgstr "Başlangıç kategorisi"
+
+#~ msgid "Category first seen when the menu is opened"
+#~ msgstr "Kategori ilk menü açıldığında görülür"

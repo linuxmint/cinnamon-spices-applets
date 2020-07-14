@@ -1,210 +1,204 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-13 18:22+0100\n"
-"PO-Revision-Date: 2020-07-13 21:23+0100\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
-"Language: ro\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Language: lt\n"
 "X-Generator: Poedit 2.3.1\n"
-"Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?"
-"2:1));\n"
 
-#: 3.2/applet.js:92 4.0/applet.js:40
+#. 3.2/applet.js:92 4.0/applet.js:40
 msgid "Type to search..."
-msgstr "Scrie pentru a căuta..."
+msgstr "Įveskite paiešką ..."
 
-#: 3.2/applet.js:157 4.0/applet.js:50
+#. 3.2/applet.js:157 4.0/applet.js:50
 msgid "Initializing"
-msgstr "Inițializare"
+msgstr "Inicijavimas"
 
-#: 3.2/applet.js:284 4.0/buttons.js:26
+#. 3.2/applet.js:284 4.0/buttons.js:26
 msgid "No description available"
-msgstr "Nu este disponibilă o descriere"
+msgstr "Aprašo nėra"
 
-#: 3.2/applet.js:977 4.0/applet.js:715
+#. 3.2/applet.js:977 4.0/applet.js:715
 msgid "All Applications"
-msgstr "Toate Aplicațiile"
+msgstr "Visos programos"
 
-#: 3.2/applet.js:1015 4.0/applet.js:756
+#. 3.2/applet.js:1015 4.0/applet.js:756
 msgid "Places"
-msgstr "Locuri"
+msgstr "Vietos"
 
-#: 3.2/applet.js:1016 4.0/applet.js:757
+#. 3.2/applet.js:1016 4.0/applet.js:757
 msgid "Recent Files"
-msgstr "Fișiere recente"
+msgstr "Naujausi failai"
 
-#: 3.2/applet.js:1017 4.0/applet.js:758
+#. 3.2/applet.js:1017 4.0/applet.js:758
 msgid "Bookmarks"
-msgstr "Marcaje"
+msgstr "Žymos"
 
-#: 3.2/applet.js:1018 4.0/applet.js:759
+#. 3.2/applet.js:1018 4.0/applet.js:759
 msgid "Favorite Apps"
-msgstr "Aplicații favorite"
+msgstr "Mėgstamiausios programos"
 
-#: 3.2/applet.js:1351 4.0/applet.js:1072
+#. 3.2/applet.js:1351 4.0/applet.js:1072
 msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
-msgstr "Pachetul gir1.2-gda-5.0 este necesar pentru marcaje Firefox și Midori."
+msgstr "reikalingas„ gir1.2-gda-5.0 “paketas„ Firefox “ir„ Midori “žymėms."
 
-#: 3.2/applet.js:1415 4.0/applet.js:1121
+#. 3.2/applet.js:1415 4.0/applet.js:1121
 msgid "Clear List"
-msgstr "Curăță lista"
+msgstr "Išvalyti sąrašą"
 
-#: 3.2/applet.js:1426 4.0/applet.js:1128
+#. 3.2/applet.js:1426 4.0/applet.js:1128
 msgid "No recent documents"
-msgstr "Nu sunt documente recente"
+msgstr "Nėra naujausių dokumentų"
 
-#: 3.2/applet.js:2278
+#. 3.2/applet.js:2278
 msgid "Account details"
-msgstr "Detaliile contului"
+msgstr "Sąskaitos duomenys"
 
-#: 3.2/applet.js:2285 3.2/buttons.js:1260
+#. 3.2/applet.js:2285 3.2/buttons.js:1260
 msgid "Grid View"
-msgstr "Vedere grilă"
+msgstr "Tinklelis"
 
-#: 3.2/applet.js:2285 3.2/buttons.js:1254
+#. 3.2/applet.js:2285 3.2/buttons.js:1254
 msgid "List View"
-msgstr "Vedere listă"
+msgstr "Sąrašo vaizdas"
 
-#: 3.2/applet.js:2286 3.2/buttons.js:1261
+#. 3.2/applet.js:2286 3.2/buttons.js:1261
 msgid "Switch to grid view"
-msgstr "Schimbă la vedere grilă"
+msgstr "Perjungti į tinklelio rodinį"
 
-#: 3.2/applet.js:2286 3.2/buttons.js:1255
+#. 3.2/applet.js:2286 3.2/buttons.js:1255
 msgid "Switch to list view"
-msgstr "Schimbă la vedere listă"
-
-#: 3.2/applet.js:2292 4.0/applet.js:2092
-msgid "Lock Screen"
-msgstr "Ecran de blocare"
-
-#: 3.2/applet.js:2293 4.0/applet.js:2093
-msgid "Lock the screen"
-msgstr "Blochează ecranul"
-
-#: 3.2/applet.js:2314 4.0/applet.js:2108
-msgid "Logout"
-msgstr "Delogare"
-
-#: 3.2/applet.js:2315 4.0/applet.js:2109
-msgid "Leave the session"
-msgstr "Părăsește sesiunea"
-
-#: 3.2/applet.js:2322 4.0/applet.js:2112
-msgid "Quit"
-msgstr "Închide"
-
-#: 3.2/applet.js:2323 4.0/applet.js:2113
-msgid "Shutdown the computer"
-msgstr "Închide calculatorul"
-
-#: 3.2/placeDisplay.js:57 4.0/placeDisplay.js:35
-#, javascript-format
-msgid "Failed to launch \"%s\""
-msgstr "Nu s-a putut lansa \"%s\""
-
-#: 3.2/placeDisplay.js:146 4.0/placeDisplay.js:102
-msgid "Home"
-msgstr "Acasă"
-
-#: 3.2/placeDisplay.js:220 4.0/placeDisplay.js:144
-msgid "Computer"
-msgstr "Calculator"
-
-#: 3.2/placeDisplay.js:224 4.0/placeDisplay.js:146
-msgid "Browse network"
-msgstr "Navighează rețeaua"
-
-#: 3.2/buttons.js:1045 3.2/buttons.js:1047 4.0/buttons.js:836
-#: 4.0/buttons.js:839
-msgid "Run with NVIDIA GPU"
-msgstr "Rulează cu placa grafică NVIDIA"
-
-#: 3.2/buttons.js:1049 4.0/buttons.js:842
-msgid "Add to panel"
-msgstr "Adaugă la panou"
-
-#: 3.2/buttons.js:1051 4.0/buttons.js:845
-msgid "Add to desktop"
-msgstr "Adaugă la desktop"
-
-#: 3.2/buttons.js:1054
-msgid "Remove from favorites"
-msgstr "Scoate din favorite"
-
-#: 3.2/buttons.js:1056 4.0/buttons.js:852
-msgid "Add to favorites"
-msgstr "Adaugă la favorite"
-
-#: 3.2/buttons.js:1059 4.0/buttons.js:856
-msgid "Uninstall"
-msgstr "Dezinstalează"
-
-#: 4.0/applet.js:233 4.0/applet.js:1230
-msgid "Please wait..."
 msgstr ""
 
-#: 4.0/buttons.js:849
+#. 3.2/applet.js:2292 4.0/applet.js:2092
+msgid "Lock Screen"
+msgstr "Užrakinti ekraną"
+
+#. 3.2/applet.js:2293 4.0/applet.js:2093
+msgid "Lock the screen"
+msgstr "Užrakinti ekraną"
+
+#. 3.2/applet.js:2314 4.0/applet.js:2108
+msgid "Logout"
+msgstr "Atsijungti"
+
+#. 3.2/applet.js:2315 4.0/applet.js:2109
+msgid "Leave the session"
+msgstr "Palikti sesiją"
+
+#. 3.2/applet.js:2322 4.0/applet.js:2112
+msgid "Quit"
+msgstr "Baigti"
+
+#. 3.2/applet.js:2323 4.0/applet.js:2113
+msgid "Shutdown the computer"
+msgstr "Išjungti kompiuterį"
+
+#. 3.2/placeDisplay.js:57 4.0/placeDisplay.js:35
+#, javascript-format
+msgid "Failed to launch \"%s\""
+msgstr "Nepavyko paleisti \"%s\""
+
+#. 3.2/placeDisplay.js:146 4.0/placeDisplay.js:102
+msgid "Home"
+msgstr "Home"
+
+#. 3.2/placeDisplay.js:220 4.0/placeDisplay.js:144
+msgid "Computer"
+msgstr "Computer"
+
+#. 3.2/placeDisplay.js:224 4.0/placeDisplay.js:146
+msgid "Browse network"
+msgstr "Naršyti tinklą"
+
+#. 3.2/buttons.js:1045 3.2/buttons.js:1047 4.0/buttons.js:836
+#. 4.0/buttons.js:839
+msgid "Run with NVIDIA GPU"
+msgstr "Vykdyti su NVIDIA GPU"
+
+#. 3.2/buttons.js:1049 4.0/buttons.js:842
+msgid "Add to panel"
+msgstr "Pridėti prie skydelio"
+
+#. 3.2/buttons.js:1051 4.0/buttons.js:845
+msgid "Add to desktop"
+msgstr "Pridėti prie darbalaukio"
+
+#. 3.2/buttons.js:1054
+msgid "Remove from favorites"
+msgstr "Pašalinti iš parankinių"
+
+#. 3.2/buttons.js:1056 4.0/buttons.js:852
+msgid "Add to favorites"
+msgstr "Įtraukti į adresyną"
+
+#. 3.2/buttons.js:1059 4.0/buttons.js:856
+msgid "Uninstall"
+msgstr "Pašalinti"
+
+#. 4.0/applet.js:233 4.0/applet.js:1230
+msgid "Please wait..."
+msgstr "Prašome palaukti ..."
+
+#. 4.0/buttons.js:849
 msgid "Remove favorite"
-msgstr "Eliminați favoritul"
+msgstr "Pašalinti mėgstamą"
 
 #. metadata.json->name
 #. 3.2->settings-schema.json->cinnamenuProvidersSection->title
 msgid "Cinnamenu"
-msgstr "Cinnamenu"
+msgstr ""
 
 #. metadata.json->description
 msgid ""
-"A flexible menu providing formatting options, web bookmarks, search provider "
-"support and fuzzy searching."
+"A flexible menu providing formatting options, web bookmarks, search provider support "
+"and fuzzy searching."
 msgstr ""
-"Un meniu flexibil care oferă opțiuni de formatare, semne de carte web, "
-"asistență pentru furnizorii de căutare și căutare incorectă."
+"Lankstus meniu, kuriame pateikiamos formatavimo parinktys, žiniatinklio žymės, paieškos "
+"teikėjo palaikymas ir neaiški paieška."
 
 #. metadata.json->comments
 msgid ""
-"Made possible thanks to the efforts of contributors to the Cinnamon menu, "
-"Gnomenu, and the contributors to projects they derived from."
+"Made possible thanks to the efforts of contributors to the Cinnamon menu, Gnomenu, and "
+"the contributors to projects they derived from."
 msgstr ""
+"Tai įmanoma dėl Cinamono meniu „Gnomenu“ bendradarbių ir projektų, iš kurių jie kilo, "
+"pastangų."
 
 #. 3.2->settings-schema.json->panel->title
 #. 4.0->settings-schema.json->behaviour->title
 msgid "Behavior"
-msgstr "Comportament"
+msgstr "Elgesys"
 
 #. 3.2->settings-schema.json->appearance->title
 #. 4.0->settings-schema.json->appearance->title
 msgid "Appearance"
-msgstr "Aspect"
+msgstr "Išvaizda"
 
 #. 3.2->settings-schema.json->menu->title
 #. 4.0->settings-schema.json->layout->title
 msgid "Layout and Content"
-msgstr "Amplasare și conținut"
+msgstr "Išdėstymas ir turinys"
 
 #. 3.2->settings-schema.json->providers->title
 msgid "Search Providers"
-msgstr "Furnizori de căutare"
+msgstr "Paieškos teikėjai"
 
 #. 3.2->settings-schema.json->extensionProvidersSection->title
 msgid "No search provider extensions found"
-msgstr "Nu s-a găsit nicio extensie pentru furnizori de căutare"
+msgstr "Nerasta paieškos paslaugų teikėjo plėtinių"
 
 #. 3.2->settings-schema.json->panel-appear->title
 #. 3.2->settings-schema.json->panel-behave->title
 #. 4.0->settings-schema.json->panel-behave->title
 #. 4.0->settings-schema.json->panel-appear->title
 msgid "Panel"
-msgstr "Panou"
+msgstr "Skydas"
 
 #. 3.2->settings-schema.json->menu-behave->title
 #. 3.2->settings-schema.json->menu-icons->title
@@ -215,63 +209,63 @@ msgstr "Meniu"
 #. 3.2->settings-schema.json->menu-layout->title
 #. 4.0->settings-schema.json->menu-layout->title
 msgid "Layout"
-msgstr "Amplasare"
+msgstr "Maketas"
 
 #. 3.2->settings-schema.json->menu-content->title
 #. 4.0->settings-schema.json->menu-content->title
 msgid "Content"
-msgstr "Conținut"
+msgstr "Turinys"
 
 #. 3.2->settings-schema.json->privacy-settings-button->description
 msgid "Toggle recent files"
-msgstr "Comută fișiere recente"
+msgstr "Perjungti naujausius failus"
 
 #. 3.2->settings-schema.json->privacy-settings-button->tooltip
 #. 4.0->settings-schema.json->privacy-settings-button->tooltip
 msgid "Press this button to customize your privacy settings."
-msgstr "Apasă acest buton pentru a personaliza setările de intimitate."
+msgstr "Paspauskite šį mygtuką norėdami tinkinti savo privatumo nustatymus."
 
 #. 3.2->settings-schema.json->menu-editor-button->description
 #. 4.0->settings-schema.json->menu-editor-button->description
 msgid "Open the menu editor"
-msgstr "Deschide editorul meniului"
+msgstr "Atidaryti meniu rengyklę"
 
 #. 3.2->settings-schema.json->menu-editor-button->tooltip
 #. 4.0->settings-schema.json->menu-editor-button->tooltip
 msgid "Press this button to customize your menu entries."
-msgstr "Apasă acest buton pentru a personaliza articolele din meniu."
+msgstr "Paspauskite šį mygtuką norėdami tinkinti savo meniu įrašus."
 
 #. 3.2->settings-schema.json->resetCategoryOrder-button->description
 #. 4.0->settings-schema.json->resetCategoryOrder-button->description
 msgid "Reset category order"
-msgstr "Resetează ordinea categoriilor"
+msgstr "Iš naujo nustatyti kategorijos užsakymą"
 
 #. 3.2->settings-schema.json->menu-icon-custom->description
 #. 4.0->settings-schema.json->menu-icon-custom->description
 msgid "Use a custom icon"
-msgstr "Folosește o pictogramă personalizată"
+msgstr "Naudoti pasirinktinę piktogramą"
 
 #. 3.2->settings-schema.json->menu-icon-custom->tooltip
 #. 4.0->settings-schema.json->menu-icon-custom->tooltip
 msgid "Unchecking this allows the theme to set the icon"
-msgstr "Debifarea aici permite temei să seteze pictograma"
+msgstr "Panaikinus žymėjimą, tema gali nustatyti piktogramą"
 
 #. 3.2->settings-schema.json->menu-icon->description
 #. 4.0->settings-schema.json->menu-icon->description
 msgid "Icon"
-msgstr "Pictogramă"
+msgstr "Piktograma"
 
 #. 3.2->settings-schema.json->menu-icon->tooltip
 #. 4.0->settings-schema.json->menu-icon->tooltip
 msgid "Select an icon to show in the panel."
-msgstr "Alege o pictogramă pentru a fi afișată în panou."
+msgstr "Pasirinkite piktogramą, kuri bus rodoma skydelyje"
 
 #. 3.2->settings-schema.json->menu-label->description
 #. 3.2->settings-schema.json->menu-label->tooltip
 #. 4.0->settings-schema.json->menu-label->description
 #. 4.0->settings-schema.json->menu-label->tooltip
 msgid "Set the custom menu button icon name"
-msgstr "Setează un nume personalizat pentru pictograma butonului meniului"
+msgstr "Nustatyti pasirinktinio meniu mygtuko piktogramos pavadinimą"
 
 #. 3.2->settings-schema.json->category-icon-size->units
 #. 3.2->settings-schema.json->apps-list-icon-size->units
@@ -280,324 +274,286 @@ msgstr "Setează un nume personalizat pentru pictograma butonului meniului"
 #. 4.0->settings-schema.json->apps-list-icon-size->units
 #. 4.0->settings-schema.json->apps-grid-icon-size->units
 msgid "pixels"
-msgstr "pixeli"
+msgstr "pikselių"
 
 #. 3.2->settings-schema.json->category-icon-size->description
 #. 3.2->settings-schema.json->category-icon-size->tooltip
 #. 4.0->settings-schema.json->category-icon-size->description
 #. 4.0->settings-schema.json->category-icon-size->tooltip
 msgid "Category icon size"
-msgstr "Mărimea pictogramelor categoriilor"
+msgstr "Kategorijos piktogramos dydis"
 
 #. 3.2->settings-schema.json->apps-list-icon-size->description
 #. 3.2->settings-schema.json->apps-list-icon-size->tooltip
 #. 4.0->settings-schema.json->apps-list-icon-size->description
 #. 4.0->settings-schema.json->apps-list-icon-size->tooltip
 msgid "Applications list icon size"
-msgstr "Mărimea pictogramei în lista de aplicații"
+msgstr "Programų sąrašo piktogramos dydis"
 
 #. 3.2->settings-schema.json->apps-grid-icon-size->description
 #. 3.2->settings-schema.json->apps-grid-icon-size->tooltip
 #. 4.0->settings-schema.json->apps-grid-icon-size->description
 #. 4.0->settings-schema.json->apps-grid-icon-size->tooltip
 msgid "Applications grid icon size"
-msgstr "Mărimea pictogramei în grila de aplicații"
+msgstr "Programų tinklelio piktogramos dydis"
 
 #. 3.2->settings-schema.json->overlay-key->description
 #. 4.0->settings-schema.json->overlay-key->description
 msgid "Keyboard shortcut to open and close the menu"
-msgstr "Scurtătura de pe tastatură pentru a deschide și închide meniul"
+msgstr "Spartusis klavišas meniu atidarymui ir uždarymui"
 
 #. 3.2->settings-schema.json->activate-on-hover->description
 #. 4.0->settings-schema.json->activate-on-hover->description
 msgid "Open the menu when I move my mouse over it"
-msgstr "Deschide meniul când pun cursorul pe el"
+msgstr "Atidarykite meniu perkeldami pelę virš jo"
 
 #. 3.2->settings-schema.json->activate-on-hover->tooltip
 #. 4.0->settings-schema.json->activate-on-hover->tooltip
 msgid "Enable opening the menu when the mouse enters the applet"
-msgstr "Permite deschiderea meniului când mouse-ul intră în applet"
+msgstr "Įgalinti meniu atidarymą, kai pelė įveda programėlę"
 
 #. 3.2->settings-schema.json->hover-delay->units
 #. 3.2->settings-schema.json->tooltip-delay->units
 #. 4.0->settings-schema.json->hover-delay->units
 msgid "milliseconds"
-msgstr "milisecunde"
+msgstr "milisekundės"
 
 #. 3.2->settings-schema.json->hover-delay->description
 #. 4.0->settings-schema.json->hover-delay->description
 msgid "Menu hover delay:"
-msgstr "Întărziere la cursor deasupra meniului:"
+msgstr "Meniu užvedimo atidėjimas:"
 
 #. 3.2->settings-schema.json->hover-delay->tooltip
 #. 4.0->settings-schema.json->hover-delay->tooltip
 msgid "Delay between switching categories"
-msgstr "Întârziere la schimbarea categoriilor"
+msgstr ""
 
 #. 3.2->settings-schema.json->enable-animation->description
 #. 4.0->settings-schema.json->enable-animation->description
 msgid "Use menu animations"
-msgstr "Folosește animații pentru meniu"
+msgstr "Naudoti meniu animaciją"
 
 #. 3.2->settings-schema.json->enable-animation->tooltip
 #. 4.0->settings-schema.json->enable-animation->tooltip
 msgid "Allow the menu to animate on open and close"
-msgstr "Permite animarea meniului la deschidere și închidere"
+msgstr "Leisti meniu animuoti atidarant ir uždarant"
 
 #. 3.2->settings-schema.json->category-click->description
 #. 4.0->settings-schema.json->category-click->description
 msgid "Activate categories on click"
-msgstr "Activează categorii când dau click"
+msgstr "Suaktyvinkite kategorijas spustelėdami"
 
 #. 3.2->settings-schema.json->category-click->tooltip
 #. 4.0->settings-schema.json->category-click->tooltip
-msgid ""
-"When enabled, category views are activated on click instead of on hover."
-msgstr ""
-"Când este activat, vederile categoriilor sunt activate la click, nu la "
-"punerea cursorului pe ele."
+msgid "When enabled, category views are activated on click instead of on hover."
+msgstr "Kai įjungta, kategorijų rodiniai suaktyvinami spustelėjus, o ne užvedus pelę"
 
 #. 3.2->settings-schema.json->enable-autoscroll->description
 #. 4.0->settings-schema.json->enable-autoscroll->description
 msgid "Enable autoscrolling in application list"
-msgstr "Activează derularea automată în lista de aplicații"
+msgstr "Įgalinti automatinį slinktį programų sąraše"
 
 #. 3.2->settings-schema.json->enable-autoscroll->tooltip
 #. 4.0->settings-schema.json->enable-autoscroll->tooltip
-msgid ""
-"Choose whether or not to enable smooth autoscrolling in the application list."
-msgstr "Alege dacă derularea fluentă este activată în lista de aplicații."
+msgid "Choose whether or not to enable smooth autoscrolling in the application list."
+msgstr "Pasirinkite, ar programų sąraše įgalinti sklandų automatinį slinktį."
 
 #. 3.2->settings-schema.json->enable-bookmarks->description
 #. 4.0->settings-schema.json->enable-bookmarks->description
 msgid "Show web bookmarks"
-msgstr "Arată marcaje web"
+msgstr "Rodyti žiniatinklio žymes"
 
 #. 3.2->settings-schema.json->enable-bookmarks->tooltip
 #. 4.0->settings-schema.json->enable-bookmarks->tooltip
 msgid "Choose whether or not bookmarks are indexed in the menu."
-msgstr "Alege dacă marcajele sunt indexate în meniu."
+msgstr "Pasirinkite, ar žymos yra indeksuojamos meniu."
 
 #. 3.2->settings-schema.json->enable-windows->description
 msgid "Enable searching of open windows"
-msgstr "Activează căutarea în ferestre deschise"
+msgstr ""
 
 #. 3.2->settings-schema.json->enable-windows->tooltip
 msgid "Choose whether or not open windows are indexed in menu searches."
-msgstr "Alege dacă ferestrele deschise sunt indexate în căutările în meniu."
+msgstr ""
 
 #. 3.2->settings-schema.json->enable-search-providers->description
 #. 4.0->settings-schema.json->enable-search-providers->description
 msgid "Enable search providers"
-msgstr "Activează furnizori de căutare"
+msgstr "Įgalinti paieškos teikėjus"
 
 #. 3.2->settings-schema.json->enable-search-providers->tooltip
 #. 4.0->settings-schema.json->enable-search-providers->tooltip
-msgid ""
-"Choose whether or not search provider results are indexed in menu searches."
-msgstr ""
-"Alege dacă rezultatele de la furnizorii de căutare sunt indexate în "
-"căutarile în menu."
+msgid "Choose whether or not search provider results are indexed in menu searches."
+msgstr "Pasirinkite, ar paieškos teikėjo rezultatai yra indeksuojami ieškant meniu."
 
 #. 3.2->settings-schema.json->get-providers->description
 #. 4.0->settings-schema.json->get-providers->description
 msgid "Example Search Providers"
-msgstr "Exemple de furnizori de căutare"
+msgstr "Paieškos teikėjų pavyzdys"
 
 #. 3.2->settings-schema.json->startup-view-mode->description
 #. 3.2->settings-schema.json->startup-view-mode->tooltip
 msgid "Startup applications view mode"
-msgstr "Modul de vizualizare al aplicațiilor de pornire"
+msgstr "Paleisties programų peržiūros režimas"
 
 #. 3.2->settings-schema.json->startup-view-mode->options
 #. 4.0->settings-schema.json->applications-view-mode->options
 msgid "List"
-msgstr "Listă"
+msgstr "Sąrašas"
 
 #. 3.2->settings-schema.json->startup-view-mode->options
 #. 4.0->settings-schema.json->applications-view-mode->options
 msgid "Grid"
-msgstr "Grilă"
+msgstr "Tinklelis"
 
 #. 3.2->settings-schema.json->apps-grid-column-count->units
 #. 4.0->settings-schema.json->apps-grid-column-count->units
 msgid "columns"
-msgstr "coloane"
+msgstr "stulpeliai"
 
 #. 3.2->settings-schema.json->apps-grid-column-count->description
 #. 3.2->settings-schema.json->apps-grid-column-count->tooltip
 #. 4.0->settings-schema.json->apps-grid-column-count->description
 #. 4.0->settings-schema.json->apps-grid-column-count->tooltip
 msgid "Number of columns in apps grid"
-msgstr "Numărul de coloane din grila de aplicații"
+msgstr "Stulpelių skaičius programų tinklelyje"
 
 #. 3.2->settings-schema.json->show-places->description
 #. 4.0->settings-schema.json->show-places->description
 msgid "Show bookmarks and places"
-msgstr "Arată marcaje și locuri"
+msgstr "Rodyti žymas ir vietas"
 
 #. 3.2->settings-schema.json->show-places->tooltip
 #. 4.0->settings-schema.json->show-places->tooltip
 msgid "Choose whether or not to show bookmarks and places in the menu."
-msgstr "Alege dacă se afișează marcaje și locuri în meniu."
+msgstr "Pasirinkite, ar nerodyti žymių ir vietų meniu."
 
 #. 3.2->settings-schema.json->show-application-icons->description
 #. 4.0->settings-schema.json->show-application-icons->description
 msgid "Show application icons"
-msgstr "Arată pictogramele aplicațiilor"
+msgstr "Rodyti programos piktogramas"
 
 #. 3.2->settings-schema.json->show-application-icons->tooltip
 #. 4.0->settings-schema.json->show-application-icons->tooltip
 msgid "Choose whether or not to show icons on applications."
-msgstr "Alege dacă se afișează pictogramele pentru aplicații."
+msgstr "Pasirinkite, ar programose rodyti piktogramas, ar ne."
 
 #. 3.2->settings-schema.json->show-category-icons->description
 #. 4.0->settings-schema.json->show-category-icons->description
 msgid "Show category icons"
-msgstr "Arată pictogramele categoriilor"
+msgstr "Rodyti kategorijos piktogramas"
 
 #. 3.2->settings-schema.json->show-category-icons->tooltip
 #. 4.0->settings-schema.json->show-category-icons->tooltip
 msgid "Choose whether or not to show icons on categories."
-msgstr "Alege dacă se afișează pictograme la categorii."
+msgstr "Pasirinkite, ar kategorijose rodyti piktogramas, ar ne."
 
 #. 3.2->settings-schema.json->show-apps-description-on-buttons->description
 msgid "Show application descriptions under titles"
-msgstr "Arată descrierea aplicațiilor sub titluri"
+msgstr "Rodyti programų aprašus su pavadinimais"
 
 #. 3.2->settings-schema.json->show-apps-description-on-buttons->tooltip
 msgid ""
-"Choose whether or not to show the application description on the application "
-"buttons."
+"Choose whether or not to show the application description on the application buttons."
 msgstr ""
-"Alege dacă se afișează descrierea aplicațiilor în butoanele aplicațiilor."
 
 #. 3.2->settings-schema.json->show-tooltips->description
 msgid "Show tooltips"
-msgstr "Arată baloane explicative"
+msgstr "Rodyti patarimus"
 
 #. 3.2->settings-schema.json->show-tooltips->tooltip
 msgid ""
-"When enabled, tooltips containing the item's name or description is shown "
-"when hovered over."
+"When enabled, tooltips containing the item's name or description is shown when hovered "
+"over."
 msgstr ""
-"Când este activat, baloanele explicative ce conțin numele sau descrierea "
-"articolului sunt afișate la punerea cursorului pe el."
 
 #. 3.2->settings-schema.json->tooltip-delay->description
 msgid "Tooltip delay"
-msgstr "Întârzierea balonului explicativ"
+msgstr "Patarimo patarimas"
 
 #. 3.2->settings-schema.json->tooltip-delay->tooltip
-msgid ""
-"The delay time in milliseconds for tooltips when hovering over a menu item."
+msgid "The delay time in milliseconds for tooltips when hovering over a menu item."
 msgstr ""
-"Timpul de întârziere în milisecunde pentru baloanele explicative ce apar "
-"când cursorul este pe un articol din meniu."
 
 #. 3.2->settings-schema.json->enable-custom-menu-height->description
 #. 3.2->settings-schema.json->enable-custom-menu-height->tooltip
 #. 4.0->settings-schema.json->enable-custom-menu-height->description
 #. 4.0->settings-schema.json->enable-custom-menu-height->tooltip
 msgid "Use a custom menu height"
-msgstr "Folosește o înălțime personalizată a meniului"
+msgstr "Naudoti pasirinktinio meniu aukštį"
 
 #. 3.2->settings-schema.json->custom-menu-height->units
 #. 4.0->settings-schema.json->custom-menu-height->units
 msgid "px"
-msgstr "px"
+msgstr ""
 
 #. 3.2->settings-schema.json->custom-menu-height->description
 #. 3.2->settings-schema.json->custom-menu-height->tooltip
 #. 4.0->settings-schema.json->custom-menu-height->description
 #. 4.0->settings-schema.json->custom-menu-height->tooltip
 msgid "Custom menu height"
-msgstr "Înălțime personalizată pentru meniu"
+msgstr "Pasirinktinio meniu aukštis"
 
 #. 4.0->settings-schema.json->applications-view-mode->description
 msgid "Applications view mode"
-msgstr "Modul vizualizare aplicații"
+msgstr "Programų peržiūros režimas"
 
 #. 4.0->settings-schema.json->applications-view-mode->tooltip
 msgid "View applications as list or grid"
-msgstr "Vizualizați aplicațiile ca listă sau grilă"
+msgstr "Žiūrėti programas kaip sąrašą arba tinklelį"
 
 #. 4.0->settings-schema.json->description-placement->description
 msgid "Application description placement"
-msgstr "Poziționarea descrierilor aplicațiilor"
+msgstr "Programos aprašymo vieta"
 
 #. 4.0->settings-schema.json->description-placement->options
 msgid "Tooltips"
-msgstr "Baloane explicative"
+msgstr "Patarimai"
 
 #. 4.0->settings-schema.json->description-placement->options
 msgid "Under titles"
-msgstr "Sub titluri"
+msgstr "Po pavadinimais"
 
 #. 4.0->settings-schema.json->description-placement->options
 msgid "None"
-msgstr "Niciuna"
+msgstr "Nėra"
 
 #. 4.0->settings-schema.json->description-placement->tooltip
 msgid "Choose where to show application descriptions."
-msgstr "Alegeți unde să afișați descrierile aplicațiilor."
+msgstr "Pasirinkite, kur norite rodyti programų aprašus."
 
 #. 4.0->settings-schema.json->powergroup-placement->description
 msgid "Session buttons location"
-msgstr "Locația butoanelor de sesiune"
+msgstr "Sesijos mygtukų vieta"
 
 #. 4.0->settings-schema.json->powergroup-placement->options
 msgid "Top"
-msgstr "În vârf"
+msgstr "viršuje"
 
 #. 4.0->settings-schema.json->powergroup-placement->options
 msgid "Bottom"
-msgstr "În partea de jos"
+msgstr "Apačia"
 
 #. 4.0->settings-schema.json->powergroup-placement->options
 msgid "Left"
-msgstr "În stânga"
+msgstr "Kairė"
 
 #. 4.0->settings-schema.json->powergroup-placement->options
 msgid "Right"
-msgstr "La dreapta"
+msgstr "Teisingai"
 
 #. 4.0->settings-schema.json->powergroup-placement->tooltip
 msgid "Choose where to show the session (quit, logout, etc.) buttons."
-msgstr ""
-"Alegeți unde să afișați butoanele sesiunii (renunțare, deconectare etc.)."
+msgstr "Pasirinkite vietą, kur norite rodyti sesijos mygtukus (išeiti, atsijungti ir tt)."
 
 #. 4.0->settings-schema.json->add-favorites->description
 msgid "Add favorites to session buttons."
-msgstr "Adăugați favorite la butoanele de sesiune."
+msgstr "Pridėti mėgstamiausius prie sesijos mygtukų."
 
 #. 4.0->settings-schema.json->add-favorites->tooltip
 msgid "Show your favorite app icons next to the session buttons."
-msgstr "Afișează pictogramele aplicației preferate lângă butoanele sesiunii."
+msgstr "Parodykite savo mėgstamos programos piktogramas šalia sesijos mygtukų"
 
 #. 4.0->settings-schema.json->privacy-settings-button->description
 msgid "Recent files settings"
-msgstr "Setări recente de fișiere"
-
-#~ msgid "Please provide your password to uninstall this application"
-#~ msgstr ""
-#~ "Sunteți rugat să furnizați parola pentru dezinstalarea acestei aplicații"
-
-#~ msgid "Enable filesystem path entry in search box"
-#~ msgstr "Activează scrierea unei căi din sistem în caseta de căutare"
-
-#~ msgid "Allows path entry in the menu search box."
-#~ msgstr "Permite scrierea unei căi din caseta de căutare a meniului."
-
-#~ msgid ""
-#~ "Choose where application descriptions will be placed, or select \"None\" "
-#~ "to disable."
-#~ msgstr ""
-#~ "Alege unde vor fi puse descrierile aplicațiilor, sau selectează ”Niciuna” "
-#~ "pentru a dezactiva."
-
-#~ msgid "Startup category"
-#~ msgstr "Categorie de pornire"
-
-#~ msgid "Category first seen when the menu is opened"
-#~ msgstr "Prima categorie văzută la deschiderea meniului"
+msgstr "Naujausių failų nustatymai"
