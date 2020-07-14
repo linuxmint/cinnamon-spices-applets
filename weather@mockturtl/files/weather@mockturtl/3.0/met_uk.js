@@ -675,7 +675,7 @@ var MetUk = (function () {
             case "30":
                 return {
                     main: _("Thunder"),
-                    description: _("UnThunderknown"),
+                    description: _("Thunder"),
                     customIcon: "thunderstorm-symbolic",
                     icon: weatherIconSafely(["weather-storm", "weather-severe-alert"], iconType)
                 };

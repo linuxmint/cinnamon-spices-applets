@@ -661,7 +661,7 @@ class MetUk implements WeatherProvider {
 			case "30": // Thunder
 				return {
 					main: _("Thunder"),
-					description: _("UnThunderknown"),
+					description: _("Thunder"),
 					customIcon: "thunderstorm-symbolic",
 					icon: weatherIconSafely(["weather-storm", "weather-severe-alert"], iconType)
 				}

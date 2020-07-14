@@ -2525,6 +2525,7 @@ type CustomIcons =
 	"night-alt-sprinkle-symbolic" |
 	"night-alt-storm-showers-symbolic" |
 	"night-alt-thunderstorm-symbolic" |
+	"night-alt-wind-symbolic" |
 	"night-clear-symbolic" |
 	"night-cloudy-gusts-symbolic" |
 	"night-cloudy-high-symbolic" |
