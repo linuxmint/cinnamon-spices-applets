@@ -403,7 +403,7 @@ class USWeather {
                 return {
                     main: _("Rain"),
                     description: _("Rain"),
-                    customIcon: "day-rain-mix-symbolic",
+                    customIcon: "rain-symbolic",
                     icon: weatherIconSafely(["weather-rain", "weather-freezing-rain", "weather-showers", "weather-showers-scattered", "weather-severe-alert"], iconType)
                 };
             case "rain_showers":

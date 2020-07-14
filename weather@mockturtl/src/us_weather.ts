@@ -455,7 +455,7 @@ class USWeather implements WeatherProvider {
 				return {
 					main: _("Rain"),
 					description: _("Rain"),
-					customIcon: "day-rain-mix-symbolic",
+					customIcon: "rain-symbolic",
 					icon: weatherIconSafely(["weather-rain", "weather-freezing-rain", "weather-showers", "weather-showers-scattered", "weather-severe-alert"], iconType)
 				}
 			case "rain_showers": // Rain showers (high cloud cover)
@@ -466,7 +466,6 @@ class USWeather implements WeatherProvider {
 					customIcon: "rain-mix-symbolic",
 					icon: weatherIconSafely(["weather-showers", "weather-showers-scattered", "weather-rain", "weather-freezing-rain", "weather-severe-alert"], iconType)
 				}
-				//TODO: Conditions
 			case "tsra": // Thunderstorm (high cloud cover)
 			case "tsra_sct": // Thunderstorm (medium cloud cover)
 			case "tsra_hi": // Thunderstorm (low cloud cover)
