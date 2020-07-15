@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-13 18:22+0100\n"
-"PO-Revision-Date: 2020-07-13 22:31+0100\n"
+"POT-Creation-Date: 2020-07-15 12:39+0100\n"
+"PO-Revision-Date: 2020-07-15 15:27+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fi\n"
@@ -106,11 +106,6 @@ msgstr "Lopeta"
 msgid "Shutdown the computer"
 msgstr "Sammuta tietokone"
 
-#: 3.2/placeDisplay.js:57 4.0/placeDisplay.js:35
-#, javascript-format
-msgid "Failed to launch \"%s\""
-msgstr "Epäonnistui ajaa \"%s\""
-
 #: 3.2/placeDisplay.js:146 4.0/placeDisplay.js:102
 msgid "Home"
 msgstr "Koti"
@@ -136,8 +131,10 @@ msgstr "Lisää paneeliin"
 msgid "Add to desktop"
 msgstr "Lisää työpöydälle"
 
-#: 3.2/buttons.js:1054
-msgid "Remove from favorites"
+#: 3.2/buttons.js:1054 4.0/buttons.js:849
+#, fuzzy
+#| msgid "Remove from favorites"
+msgid "Remove favorite"
 msgstr "Poista suosikeista"
 
 #: 3.2/buttons.js:1056 4.0/buttons.js:852
@@ -151,12 +148,6 @@ msgstr "Asennuksen poisto"
 #: 4.0/applet.js:233 4.0/applet.js:1230
 msgid "Please wait..."
 msgstr ""
-
-#: 4.0/buttons.js:849
-#, fuzzy
-#| msgid "Remove from favorites"
-msgid "Remove favorite"
-msgstr "Poista suosikeista"
 
 #. metadata.json->name
 #. 3.2->settings-schema.json->cinnamenuProvidersSection->title
@@ -224,23 +215,16 @@ msgid "Content"
 msgstr "Sisältö"
 
 #. 3.2->settings-schema.json->privacy-settings-button->description
-msgid "Toggle recent files"
-msgstr "Vaihda viimeisimmät tiedostot"
-
-#. 3.2->settings-schema.json->privacy-settings-button->tooltip
-#. 4.0->settings-schema.json->privacy-settings-button->tooltip
-msgid "Press this button to customize your privacy settings."
-msgstr "Paina tätä painiketta muokataksesi yksityisyyden asetuksia."
+#. 4.0->settings-schema.json->privacy-settings-button->description
+#, fuzzy
+#| msgid "Recent Files"
+msgid "Recent files settings"
+msgstr "Viimeisimmät tiedostot"
 
 #. 3.2->settings-schema.json->menu-editor-button->description
 #. 4.0->settings-schema.json->menu-editor-button->description
 msgid "Open the menu editor"
 msgstr "Avaa valikon muokkausikkuna"
-
-#. 3.2->settings-schema.json->menu-editor-button->tooltip
-#. 4.0->settings-schema.json->menu-editor-button->tooltip
-msgid "Press this button to customize your menu entries."
-msgstr "Paina tätä painiketta muokataksesi valikon kohteita."
 
 #. 3.2->settings-schema.json->resetCategoryOrder-button->description
 #. 4.0->settings-schema.json->resetCategoryOrder-button->description
@@ -254,25 +238,33 @@ msgstr "Käytä toista kuvaketta"
 
 #. 3.2->settings-schema.json->menu-icon-custom->tooltip
 #. 4.0->settings-schema.json->menu-icon-custom->tooltip
-msgid "Unchecking this allows the theme to set the icon"
-msgstr "Jos poistat tämän valinnan, teema asettaa kuvakkeen"
+#, fuzzy
+#| msgid "Use a custom icon"
+msgid "Use a custom icon in the panel"
+msgstr "Käytä toista kuvaketta"
 
 #. 3.2->settings-schema.json->menu-icon->description
-#. 4.0->settings-schema.json->menu-icon->description
-msgid "Icon"
-msgstr "Kuvake"
-
 #. 3.2->settings-schema.json->menu-icon->tooltip
+#. 4.0->settings-schema.json->menu-icon->description
 #. 4.0->settings-schema.json->menu-icon->tooltip
-msgid "Select an icon to show in the panel."
-msgstr "Valitse paneelissa näytettävä kuvake."
+#, fuzzy
+#| msgid "Panel"
+msgid "Panel icon"
+msgstr "Paneeli"
 
 #. 3.2->settings-schema.json->menu-label->description
-#. 3.2->settings-schema.json->menu-label->tooltip
 #. 4.0->settings-schema.json->menu-label->description
+#, fuzzy
+#| msgid "Panel"
+msgid "Panel text"
+msgstr "Paneeli"
+
+#. 3.2->settings-schema.json->menu-label->tooltip
 #. 4.0->settings-schema.json->menu-label->tooltip
-msgid "Set the custom menu button icon name"
-msgstr "Aseta valikkopainikkeen kuvakkeen nimi"
+#, fuzzy
+#| msgid "Select an icon to show in the panel."
+msgid "Text to show beside the panel icon"
+msgstr "Valitse paneelissa näytettävä kuvake."
 
 #. 3.2->settings-schema.json->category-icon-size->units
 #. 3.2->settings-schema.json->apps-list-icon-size->units
@@ -311,13 +303,17 @@ msgstr "Pikanäppäin valikon avaamiseen ja sulkemiseen"
 
 #. 3.2->settings-schema.json->activate-on-hover->description
 #. 4.0->settings-schema.json->activate-on-hover->description
-msgid "Open the menu when I move my mouse over it"
-msgstr "Avaa valikko, kun siirrän hiiren sen päälle"
+#, fuzzy
+#| msgid "Open the menu editor"
+msgid "Open menu on hover"
+msgstr "Avaa valikon muokkausikkuna"
 
 #. 3.2->settings-schema.json->activate-on-hover->tooltip
 #. 4.0->settings-schema.json->activate-on-hover->tooltip
-msgid "Enable opening the menu when the mouse enters the applet"
-msgstr "Ota valikon avaaminen käyttöön hiiren tullessa sovelmaan päälle"
+#, fuzzy
+#| msgid "Open the menu when I move my mouse over it"
+msgid "Open the menu when I move my mouse over the panel icon"
+msgstr "Avaa valikko, kun siirrän hiiren sen päälle"
 
 #. 3.2->settings-schema.json->hover-delay->units
 #. 3.2->settings-schema.json->tooltip-delay->units
@@ -327,13 +323,10 @@ msgstr "millisekuntia"
 
 #. 3.2->settings-schema.json->hover-delay->description
 #. 4.0->settings-schema.json->hover-delay->description
-msgid "Menu hover delay:"
+#, fuzzy
+#| msgid "Menu hover delay:"
+msgid "Menu hover delay"
 msgstr "Valikkokohtainen viive:"
-
-#. 3.2->settings-schema.json->hover-delay->tooltip
-#. 4.0->settings-schema.json->hover-delay->tooltip
-msgid "Delay between switching categories"
-msgstr "Viive luokkien välillä"
 
 #. 3.2->settings-schema.json->enable-animation->description
 #. 4.0->settings-schema.json->enable-animation->description
@@ -342,7 +335,9 @@ msgstr "Käytä valikon animaatioita"
 
 #. 3.2->settings-schema.json->enable-animation->tooltip
 #. 4.0->settings-schema.json->enable-animation->tooltip
-msgid "Allow the menu to animate on open and close"
+#, fuzzy
+#| msgid "Allow the menu to animate on open and close"
+msgid "Animate the menu on open and close"
 msgstr "Salli valikon animaatio avatessa ja sulkeutuessa"
 
 #. 3.2->settings-schema.json->category-click->description
@@ -352,22 +347,22 @@ msgstr "Aktivoi ryhmät napsauttamalla"
 
 #. 3.2->settings-schema.json->category-click->tooltip
 #. 4.0->settings-schema.json->category-click->tooltip
-msgid ""
-"When enabled, category views are activated on click instead of on hover."
-msgstr "Kun käytössä, ryhmän näkymät aktivoidaan napsautuksella."
+#, fuzzy
+#| msgid "Activate categories on click"
+msgid "Activate categories on click instead of on hover"
+msgstr "Aktivoi ryhmät napsauttamalla"
 
 #. 3.2->settings-schema.json->enable-autoscroll->description
 #. 4.0->settings-schema.json->enable-autoscroll->description
-msgid "Enable autoscrolling in application list"
+#, fuzzy
+#| msgid "Enable autoscrolling in application list"
+msgid "Enable autoscrolling"
 msgstr "Ota automaattinen vieritys käyttöön sovellusluettelossa"
 
 #. 3.2->settings-schema.json->enable-autoscroll->tooltip
 #. 4.0->settings-schema.json->enable-autoscroll->tooltip
-msgid ""
-"Choose whether or not to enable smooth autoscrolling in the application list."
-msgstr ""
-"Valitse, otetaanko pehmeä automaattinen vieritys käyttöön "
-"sovellusluettelossa vai ei."
+msgid "Enable autoscrolling in application list"
+msgstr "Ota automaattinen vieritys käyttöön sovellusluettelossa"
 
 #. 3.2->settings-schema.json->enable-bookmarks->description
 #. 4.0->settings-schema.json->enable-bookmarks->description
@@ -376,16 +371,12 @@ msgstr "Näytä web-kirjanmerkit"
 
 #. 3.2->settings-schema.json->enable-bookmarks->tooltip
 #. 4.0->settings-schema.json->enable-bookmarks->tooltip
-msgid "Choose whether or not bookmarks are indexed in the menu."
-msgstr "Valitse, indeksoidaanko kirjanmerkit valikossa."
+msgid "Show your browser's web bookmarks in the menu"
+msgstr ""
 
 #. 3.2->settings-schema.json->enable-windows->description
 msgid "Enable searching of open windows"
 msgstr "Ota avoimien ikkunoiden haku käyttöön"
-
-#. 3.2->settings-schema.json->enable-windows->tooltip
-msgid "Choose whether or not open windows are indexed in menu searches."
-msgstr "Valitse, indeksoidaanko avoimet ikkunat valikkohaussa."
 
 #. 3.2->settings-schema.json->enable-search-providers->description
 #. 4.0->settings-schema.json->enable-search-providers->description
@@ -394,8 +385,11 @@ msgstr "Ota hakupalvelut käyttöön"
 
 #. 3.2->settings-schema.json->enable-search-providers->tooltip
 #. 4.0->settings-schema.json->enable-search-providers->tooltip
-msgid ""
-"Choose whether or not search provider results are indexed in menu searches."
+#, fuzzy
+#| msgid ""
+#| "Choose whether or not search provider results are indexed in menu "
+#| "searches."
+msgid "Include search provider results in searches"
 msgstr "Valitse, indeksoidaanko hakupalvelun tulokset valikkohaussa."
 
 #. 3.2->settings-schema.json->get-providers->description
@@ -437,60 +431,39 @@ msgstr "Näytä kirjanmerkit ja sijainti"
 
 #. 3.2->settings-schema.json->show-places->tooltip
 #. 4.0->settings-schema.json->show-places->tooltip
-msgid "Choose whether or not to show bookmarks and places in the menu."
-msgstr "Valitse näytetäänkö kirjanmerkkejä ja sijaiteja valikossa."
+#, fuzzy
+#| msgid "Show bookmarks and places"
+msgid "Show bookmarks and places category in the menu"
+msgstr "Näytä kirjanmerkit ja sijainti"
 
 #. 3.2->settings-schema.json->show-application-icons->description
+#. 3.2->settings-schema.json->show-application-icons->tooltip
 #. 4.0->settings-schema.json->show-application-icons->description
+#. 4.0->settings-schema.json->show-application-icons->tooltip
 msgid "Show application icons"
 msgstr "Näytä sovellusten kuvakkeet"
 
-#. 3.2->settings-schema.json->show-application-icons->tooltip
-#. 4.0->settings-schema.json->show-application-icons->tooltip
-msgid "Choose whether or not to show icons on applications."
-msgstr "Valitse, näytetäänkö sovelluksissa kuvakkeita."
-
 #. 3.2->settings-schema.json->show-category-icons->description
+#. 3.2->settings-schema.json->show-category-icons->tooltip
 #. 4.0->settings-schema.json->show-category-icons->description
+#. 4.0->settings-schema.json->show-category-icons->tooltip
 msgid "Show category icons"
 msgstr "Näytä ryhmän kuvakkeet"
 
-#. 3.2->settings-schema.json->show-category-icons->tooltip
-#. 4.0->settings-schema.json->show-category-icons->tooltip
-msgid "Choose whether or not to show icons on categories."
-msgstr "Valitse, näytetäänkö ryhmän kuvakkeet vai ei."
-
 #. 3.2->settings-schema.json->show-apps-description-on-buttons->description
+#. 3.2->settings-schema.json->show-apps-description-on-buttons->tooltip
 msgid "Show application descriptions under titles"
 msgstr "Näytä sovellusten kuvaukset otsikoiden alla"
 
-#. 3.2->settings-schema.json->show-apps-description-on-buttons->tooltip
-msgid ""
-"Choose whether or not to show the application description on the application "
-"buttons."
-msgstr "Valitse, näytetäänkö sovelluksen kuvaus sovelluspainikkeissa."
-
 #. 3.2->settings-schema.json->show-tooltips->description
+#. 3.2->settings-schema.json->show-tooltips->tooltip
 msgid "Show tooltips"
 msgstr "Näytä työkaluvihjeet"
 
-#. 3.2->settings-schema.json->show-tooltips->tooltip
-msgid ""
-"When enabled, tooltips containing the item's name or description is shown "
-"when hovered over."
-msgstr ""
-"Kun käytössä, työkaluvihjeet, jotka sisältävät kohteen nimen tai kuvauksen, "
-"näkyvät, kun hiirellä osoitetaan ."
-
 #. 3.2->settings-schema.json->tooltip-delay->description
+#. 3.2->settings-schema.json->tooltip-delay->tooltip
 msgid "Tooltip delay"
 msgstr "Työkaluvinkin viive"
-
-#. 3.2->settings-schema.json->tooltip-delay->tooltip
-msgid ""
-"The delay time in milliseconds for tooltips when hovering over a menu item."
-msgstr ""
-"Työkaluvihjeiden viive millisekunnissa, kun hiiri on valikkokohteen päällä."
 
 #. 3.2->settings-schema.json->enable-custom-menu-height->description
 #. 3.2->settings-schema.json->enable-custom-menu-height->tooltip
@@ -544,7 +517,7 @@ msgstr "Ei mitään"
 #| msgid ""
 #| "Choose whether or not to show the application description on the "
 #| "application buttons."
-msgid "Choose where to show application descriptions."
+msgid "Choose where to show application descriptions"
 msgstr "Valitse, näytetäänkö sovelluksen kuvaus sovelluspainikkeissa."
 
 #. 4.0->settings-schema.json->powergroup-placement->description
@@ -570,22 +543,92 @@ msgid "Right"
 msgstr ""
 
 #. 4.0->settings-schema.json->powergroup-placement->tooltip
-msgid "Choose where to show the session (quit, logout, etc.) buttons."
+msgid "Choose where to show the session (quit, logout, etc.) buttons"
 msgstr ""
 
 #. 4.0->settings-schema.json->add-favorites->description
-msgid "Add favorites to session buttons."
+msgid "Add favorites to session buttons"
 msgstr ""
 
 #. 4.0->settings-schema.json->add-favorites->tooltip
-msgid "Show your favorite app icons next to the session buttons."
+msgid "Show your favorite app icons next to the session buttons"
 msgstr ""
 
-#. 4.0->settings-schema.json->privacy-settings-button->description
-#, fuzzy
-#| msgid "Recent Files"
-msgid "Recent files settings"
-msgstr "Viimeisimmät tiedostot"
+#, javascript-format
+#~ msgid "Failed to launch \"%s\""
+#~ msgstr "Epäonnistui ajaa \"%s\""
+
+#~ msgid "Remove from favorites"
+#~ msgstr "Poista suosikeista"
+
+#~ msgid "Toggle recent files"
+#~ msgstr "Vaihda viimeisimmät tiedostot"
+
+#~ msgid "Press this button to customize your privacy settings."
+#~ msgstr "Paina tätä painiketta muokataksesi yksityisyyden asetuksia."
+
+#~ msgid "Press this button to customize your menu entries."
+#~ msgstr "Paina tätä painiketta muokataksesi valikon kohteita."
+
+#~ msgid "Unchecking this allows the theme to set the icon"
+#~ msgstr "Jos poistat tämän valinnan, teema asettaa kuvakkeen"
+
+#~ msgid "Icon"
+#~ msgstr "Kuvake"
+
+#~ msgid "Set the custom menu button icon name"
+#~ msgstr "Aseta valikkopainikkeen kuvakkeen nimi"
+
+#~ msgid "Enable opening the menu when the mouse enters the applet"
+#~ msgstr "Ota valikon avaaminen käyttöön hiiren tullessa sovelmaan päälle"
+
+#~ msgid "Delay between switching categories"
+#~ msgstr "Viive luokkien välillä"
+
+#~ msgid ""
+#~ "When enabled, category views are activated on click instead of on hover."
+#~ msgstr "Kun käytössä, ryhmän näkymät aktivoidaan napsautuksella."
+
+#~ msgid ""
+#~ "Choose whether or not to enable smooth autoscrolling in the application "
+#~ "list."
+#~ msgstr ""
+#~ "Valitse, otetaanko pehmeä automaattinen vieritys käyttöön "
+#~ "sovellusluettelossa vai ei."
+
+#~ msgid "Choose whether or not bookmarks are indexed in the menu."
+#~ msgstr "Valitse, indeksoidaanko kirjanmerkit valikossa."
+
+#~ msgid "Choose whether or not open windows are indexed in menu searches."
+#~ msgstr "Valitse, indeksoidaanko avoimet ikkunat valikkohaussa."
+
+#~ msgid "Choose whether or not to show bookmarks and places in the menu."
+#~ msgstr "Valitse näytetäänkö kirjanmerkkejä ja sijaiteja valikossa."
+
+#~ msgid "Choose whether or not to show icons on applications."
+#~ msgstr "Valitse, näytetäänkö sovelluksissa kuvakkeita."
+
+#~ msgid "Choose whether or not to show icons on categories."
+#~ msgstr "Valitse, näytetäänkö ryhmän kuvakkeet vai ei."
+
+#~ msgid ""
+#~ "Choose whether or not to show the application description on the "
+#~ "application buttons."
+#~ msgstr "Valitse, näytetäänkö sovelluksen kuvaus sovelluspainikkeissa."
+
+#~ msgid ""
+#~ "When enabled, tooltips containing the item's name or description is shown "
+#~ "when hovered over."
+#~ msgstr ""
+#~ "Kun käytössä, työkaluvihjeet, jotka sisältävät kohteen nimen tai "
+#~ "kuvauksen, näkyvät, kun hiirellä osoitetaan ."
+
+#~ msgid ""
+#~ "The delay time in milliseconds for tooltips when hovering over a menu "
+#~ "item."
+#~ msgstr ""
+#~ "Työkaluvihjeiden viive millisekunnissa, kun hiiri on valikkokohteen "
+#~ "päällä."
 
 #~ msgid "Please provide your password to uninstall this application"
 #~ msgstr "Anna salasanasi poistaaksesi tämän sovelluksen"

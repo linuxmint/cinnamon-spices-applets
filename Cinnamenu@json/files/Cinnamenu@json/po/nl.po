@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-13 18:22+0100\n"
-"PO-Revision-Date: 2020-07-13 22:19+0100\n"
+"POT-Creation-Date: 2020-07-15 12:39+0100\n"
+"PO-Revision-Date: 2020-07-15 15:23+0100\n"
 "Last-Translator: Pjotr <pjotrvertaalt@gmail.com>\n"
 "Language-Team: nl\n"
 "Language: nl\n"
@@ -106,11 +106,6 @@ msgstr "Afsluiten"
 msgid "Shutdown the computer"
 msgstr "De computer afsluiten"
 
-#: 3.2/placeDisplay.js:57 4.0/placeDisplay.js:35
-#, javascript-format
-msgid "Failed to launch \"%s\""
-msgstr "Kon '%s' niet starten"
-
 #: 3.2/placeDisplay.js:146 4.0/placeDisplay.js:102
 msgid "Home"
 msgstr "Persoonlijke map"
@@ -136,8 +131,10 @@ msgstr "Toevoegen aan werkbalk"
 msgid "Add to desktop"
 msgstr "Toevoegen aan bureaublad"
 
-#: 3.2/buttons.js:1054
-msgid "Remove from favorites"
+#: 3.2/buttons.js:1054 4.0/buttons.js:849
+#, fuzzy
+#| msgid "Remove from favorites"
+msgid "Remove favorite"
 msgstr "Verwijderen uit favorieten"
 
 #: 3.2/buttons.js:1056 4.0/buttons.js:852
@@ -151,12 +148,6 @@ msgstr "DeÃ¯nstalleren"
 #: 4.0/applet.js:233 4.0/applet.js:1230
 msgid "Please wait..."
 msgstr ""
-
-#: 4.0/buttons.js:849
-#, fuzzy
-#| msgid "Remove from favorites"
-msgid "Remove favorite"
-msgstr "Verwijderen uit favorieten"
 
 #. metadata.json->name
 #. 3.2->settings-schema.json->cinnamenuProvidersSection->title
@@ -228,23 +219,16 @@ msgid "Content"
 msgstr "Inhoud"
 
 #. 3.2->settings-schema.json->privacy-settings-button->description
-msgid "Toggle recent files"
-msgstr "Recente bestanden omschakelen"
-
-#. 3.2->settings-schema.json->privacy-settings-button->tooltip
-#. 4.0->settings-schema.json->privacy-settings-button->tooltip
-msgid "Press this button to customize your privacy settings."
-msgstr "Klik op deze knop om uw privÃ©leven-instellingen aan te passen."
+#. 4.0->settings-schema.json->privacy-settings-button->description
+#, fuzzy
+#| msgid "Recent Files"
+msgid "Recent files settings"
+msgstr "Recente bestanden"
 
 #. 3.2->settings-schema.json->menu-editor-button->description
 #. 4.0->settings-schema.json->menu-editor-button->description
 msgid "Open the menu editor"
 msgstr "Open de menubewerker"
-
-#. 3.2->settings-schema.json->menu-editor-button->tooltip
-#. 4.0->settings-schema.json->menu-editor-button->tooltip
-msgid "Press this button to customize your menu entries."
-msgstr "Klik op deze knop om uw menu-onderdelen aan te passen."
 
 #. 3.2->settings-schema.json->resetCategoryOrder-button->description
 #. 4.0->settings-schema.json->resetCategoryOrder-button->description
@@ -258,25 +242,33 @@ msgstr "Een aangepast pictogram gebruiken"
 
 #. 3.2->settings-schema.json->menu-icon-custom->tooltip
 #. 4.0->settings-schema.json->menu-icon-custom->tooltip
-msgid "Unchecking this allows the theme to set the icon"
-msgstr "Als u dit uitvinkt zal het thema het pictogram instellen"
+#, fuzzy
+#| msgid "Use a custom icon"
+msgid "Use a custom icon in the panel"
+msgstr "Een aangepast pictogram gebruiken"
 
 #. 3.2->settings-schema.json->menu-icon->description
-#. 4.0->settings-schema.json->menu-icon->description
-msgid "Icon"
-msgstr "Pictogram"
-
 #. 3.2->settings-schema.json->menu-icon->tooltip
+#. 4.0->settings-schema.json->menu-icon->description
 #. 4.0->settings-schema.json->menu-icon->tooltip
-msgid "Select an icon to show in the panel."
-msgstr "Kies een pictogram om te tonen in de werkbalk."
+#, fuzzy
+#| msgid "Panel"
+msgid "Panel icon"
+msgstr "Werkbalk"
 
 #. 3.2->settings-schema.json->menu-label->description
-#. 3.2->settings-schema.json->menu-label->tooltip
 #. 4.0->settings-schema.json->menu-label->description
+#, fuzzy
+#| msgid "Panel"
+msgid "Panel text"
+msgstr "Werkbalk"
+
+#. 3.2->settings-schema.json->menu-label->tooltip
 #. 4.0->settings-schema.json->menu-label->tooltip
-msgid "Set the custom menu button icon name"
-msgstr "Stel de naam in van het aangepaste menuknoppictogram"
+#, fuzzy
+#| msgid "Select an icon to show in the panel."
+msgid "Text to show beside the panel icon"
+msgstr "Kies een pictogram om te tonen in de werkbalk."
 
 #. 3.2->settings-schema.json->category-icon-size->units
 #. 3.2->settings-schema.json->apps-list-icon-size->units
@@ -315,15 +307,17 @@ msgstr "Sneltoets voor openen en sluiten van het menu"
 
 #. 3.2->settings-schema.json->activate-on-hover->description
 #. 4.0->settings-schema.json->activate-on-hover->description
-msgid "Open the menu when I move my mouse over it"
-msgstr "Open het menu wanneer ik mijn muispijl er overheen beweeg"
+#, fuzzy
+#| msgid "Open the menu editor"
+msgid "Open menu on hover"
+msgstr "Open de menubewerker"
 
 #. 3.2->settings-schema.json->activate-on-hover->tooltip
 #. 4.0->settings-schema.json->activate-on-hover->tooltip
-msgid "Enable opening the menu when the mouse enters the applet"
-msgstr ""
-"Schakel openen van het menu in wanneer de muispijl de hulptoepassing "
-"binnengaat"
+#, fuzzy
+#| msgid "Open the menu when I move my mouse over it"
+msgid "Open the menu when I move my mouse over the panel icon"
+msgstr "Open het menu wanneer ik mijn muispijl er overheen beweeg"
 
 #. 3.2->settings-schema.json->hover-delay->units
 #. 3.2->settings-schema.json->tooltip-delay->units
@@ -333,13 +327,10 @@ msgstr "milliseconden"
 
 #. 3.2->settings-schema.json->hover-delay->description
 #. 4.0->settings-schema.json->hover-delay->description
-msgid "Menu hover delay:"
+#, fuzzy
+#| msgid "Menu hover delay:"
+msgid "Menu hover delay"
 msgstr "Zweefvertraging voor menu:"
-
-#. 3.2->settings-schema.json->hover-delay->tooltip
-#. 4.0->settings-schema.json->hover-delay->tooltip
-msgid "Delay between switching categories"
-msgstr "Vertraging tussen het wisselen van categorieÃ«n"
 
 #. 3.2->settings-schema.json->enable-animation->description
 #. 4.0->settings-schema.json->enable-animation->description
@@ -348,7 +339,9 @@ msgstr "Menu-animaties gebruiken"
 
 #. 3.2->settings-schema.json->enable-animation->tooltip
 #. 4.0->settings-schema.json->enable-animation->tooltip
-msgid "Allow the menu to animate on open and close"
+#, fuzzy
+#| msgid "Allow the menu to animate on open and close"
+msgid "Animate the menu on open and close"
 msgstr "Menu-animaties inschakelen voor openen en sluiten"
 
 #. 3.2->settings-schema.json->category-click->description
@@ -358,24 +351,22 @@ msgstr "CategorieÃ«n activeren bij klikken"
 
 #. 3.2->settings-schema.json->category-click->tooltip
 #. 4.0->settings-schema.json->category-click->tooltip
-msgid ""
-"When enabled, category views are activated on click instead of on hover."
-msgstr ""
-"Indien ingeschakeld worden categorieweergaven geactiveerd bij klikken in "
-"plaats van bij zweven."
+#, fuzzy
+#| msgid "Activate categories on click"
+msgid "Activate categories on click instead of on hover"
+msgstr "CategorieÃ«n activeren bij klikken"
 
 #. 3.2->settings-schema.json->enable-autoscroll->description
 #. 4.0->settings-schema.json->enable-autoscroll->description
-msgid "Enable autoscrolling in application list"
+#, fuzzy
+#| msgid "Enable autoscrolling in application list"
+msgid "Enable autoscrolling"
 msgstr "Automatisch schuiven in toepassingenlijst inschakelen"
 
 #. 3.2->settings-schema.json->enable-autoscroll->tooltip
 #. 4.0->settings-schema.json->enable-autoscroll->tooltip
-msgid ""
-"Choose whether or not to enable smooth autoscrolling in the application list."
-msgstr ""
-"Kies of soepel automatisch schuiven moet worden ingeschakeld in de "
-"toepassingenlijst."
+msgid "Enable autoscrolling in application list"
+msgstr "Automatisch schuiven in toepassingenlijst inschakelen"
 
 #. 3.2->settings-schema.json->enable-bookmarks->description
 #. 4.0->settings-schema.json->enable-bookmarks->description
@@ -384,17 +375,12 @@ msgstr "Webbladwijzers tonen"
 
 #. 3.2->settings-schema.json->enable-bookmarks->tooltip
 #. 4.0->settings-schema.json->enable-bookmarks->tooltip
-msgid "Choose whether or not bookmarks are indexed in the menu."
-msgstr "Kies of webbladwijzers al dan niet worden opgenomen in het menu."
+msgid "Show your browser's web bookmarks in the menu"
+msgstr ""
 
 #. 3.2->settings-schema.json->enable-windows->description
 msgid "Enable searching of open windows"
 msgstr "Opzoeken van open vensters inschakelen"
-
-#. 3.2->settings-schema.json->enable-windows->tooltip
-msgid "Choose whether or not open windows are indexed in menu searches."
-msgstr ""
-"Kies of open vensters al dan niet worden opgenomen in menu-zoekresultaten."
 
 #. 3.2->settings-schema.json->enable-search-providers->description
 #. 4.0->settings-schema.json->enable-search-providers->description
@@ -403,8 +389,11 @@ msgstr "Zoekdiensten inschakelen"
 
 #. 3.2->settings-schema.json->enable-search-providers->tooltip
 #. 4.0->settings-schema.json->enable-search-providers->tooltip
-msgid ""
-"Choose whether or not search provider results are indexed in menu searches."
+#, fuzzy
+#| msgid ""
+#| "Choose whether or not search provider results are indexed in menu "
+#| "searches."
+msgid "Include search provider results in searches"
 msgstr ""
 "Kies of zoekdienstresultaten al dan niet worden opgenomen in menu-"
 "zoekresultaten."
@@ -448,65 +437,39 @@ msgstr "Bladwijzers en locaties tonen"
 
 #. 3.2->settings-schema.json->show-places->tooltip
 #. 4.0->settings-schema.json->show-places->tooltip
-msgid "Choose whether or not to show bookmarks and places in the menu."
-msgstr ""
-"Kies of bladwijzers en locaties al dan niet worden weergegeven in het menu."
+#, fuzzy
+#| msgid "Show bookmarks and places"
+msgid "Show bookmarks and places category in the menu"
+msgstr "Bladwijzers en locaties tonen"
 
 #. 3.2->settings-schema.json->show-application-icons->description
+#. 3.2->settings-schema.json->show-application-icons->tooltip
 #. 4.0->settings-schema.json->show-application-icons->description
+#. 4.0->settings-schema.json->show-application-icons->tooltip
 msgid "Show application icons"
 msgstr "Toepassingspictogrammen tonen"
 
-#. 3.2->settings-schema.json->show-application-icons->tooltip
-#. 4.0->settings-schema.json->show-application-icons->tooltip
-msgid "Choose whether or not to show icons on applications."
-msgstr ""
-"Kies of toepassingspictogrammen al dan niet worden weergegeven in het menu."
-
 #. 3.2->settings-schema.json->show-category-icons->description
+#. 3.2->settings-schema.json->show-category-icons->tooltip
 #. 4.0->settings-schema.json->show-category-icons->description
+#. 4.0->settings-schema.json->show-category-icons->tooltip
 msgid "Show category icons"
 msgstr "Categoriepictogrammen tonen"
 
-#. 3.2->settings-schema.json->show-category-icons->tooltip
-#. 4.0->settings-schema.json->show-category-icons->tooltip
-msgid "Choose whether or not to show icons on categories."
-msgstr "Kies of categoriepictogrammen al dan niet worden getoond."
-
 #. 3.2->settings-schema.json->show-apps-description-on-buttons->description
+#. 3.2->settings-schema.json->show-apps-description-on-buttons->tooltip
 msgid "Show application descriptions under titles"
 msgstr "Beschrijvingen van toepassingen tonen onder titels"
 
-#. 3.2->settings-schema.json->show-apps-description-on-buttons->tooltip
-msgid ""
-"Choose whether or not to show the application description on the application "
-"buttons."
-msgstr ""
-"Kies of de beschrijving van de toepassing wordt getoond op de knop van de "
-"toepassing."
-
 #. 3.2->settings-schema.json->show-tooltips->description
+#. 3.2->settings-schema.json->show-tooltips->tooltip
 msgid "Show tooltips"
 msgstr "Zweeftips tonen"
 
-#. 3.2->settings-schema.json->show-tooltips->tooltip
-msgid ""
-"When enabled, tooltips containing the item's name or description is shown "
-"when hovered over."
-msgstr ""
-"Indien ingeschakeld zullen er zweeftips worden getoond met de naam of "
-"beschrijving van het menu-onderdeel."
-
 #. 3.2->settings-schema.json->tooltip-delay->description
+#. 3.2->settings-schema.json->tooltip-delay->tooltip
 msgid "Tooltip delay"
 msgstr "Vertraging voor zweeftip"
-
-#. 3.2->settings-schema.json->tooltip-delay->tooltip
-msgid ""
-"The delay time in milliseconds for tooltips when hovering over a menu item."
-msgstr ""
-"De vertraging in milliseconden voor het verschijnen van zweeftips bij menu-"
-"onderdelen."
 
 #. 3.2->settings-schema.json->enable-custom-menu-height->description
 #. 3.2->settings-schema.json->enable-custom-menu-height->tooltip
@@ -557,14 +520,14 @@ msgstr ""
 
 #. 4.0->settings-schema.json->description-placement->options
 msgid "None"
-msgstr ""
+msgstr "Geen"
 
 #. 4.0->settings-schema.json->description-placement->tooltip
 #, fuzzy
 #| msgid ""
 #| "Choose whether or not to show the application description on the "
 #| "application buttons."
-msgid "Choose where to show application descriptions."
+msgid "Choose where to show application descriptions"
 msgstr ""
 "Kies of de beschrijving van de toepassing wordt getoond op de knop van de "
 "toepassing."
@@ -579,33 +542,114 @@ msgstr ""
 
 #. 4.0->settings-schema.json->powergroup-placement->options
 msgid "Bottom"
-msgstr ""
+msgstr "Bodem"
 
 #. 4.0->settings-schema.json->powergroup-placement->options
 msgid "Left"
-msgstr ""
+msgstr "Links"
 
 #. 4.0->settings-schema.json->powergroup-placement->options
 msgid "Right"
-msgstr ""
+msgstr "Rechtsaf"
 
 #. 4.0->settings-schema.json->powergroup-placement->tooltip
-msgid "Choose where to show the session (quit, logout, etc.) buttons."
-msgstr ""
+msgid "Choose where to show the session (quit, logout, etc.) buttons"
+msgstr "Kies waar u de sessieknoppen (stoppen, afmelden, enz.) Wilt weergeven"
 
 #. 4.0->settings-schema.json->add-favorites->description
-msgid "Add favorites to session buttons."
+msgid "Add favorites to session buttons"
 msgstr ""
 
 #. 4.0->settings-schema.json->add-favorites->tooltip
-msgid "Show your favorite app icons next to the session buttons."
+msgid "Show your favorite app icons next to the session buttons"
 msgstr ""
 
-#. 4.0->settings-schema.json->privacy-settings-button->description
-#, fuzzy
-#| msgid "Recent Files"
-msgid "Recent files settings"
-msgstr "Recente bestanden"
+#, javascript-format
+#~ msgid "Failed to launch \"%s\""
+#~ msgstr "Kon '%s' niet starten"
+
+#~ msgid "Remove from favorites"
+#~ msgstr "Verwijderen uit favorieten"
+
+#~ msgid "Toggle recent files"
+#~ msgstr "Recente bestanden omschakelen"
+
+#~ msgid "Press this button to customize your privacy settings."
+#~ msgstr "Klik op deze knop om uw privÃ©leven-instellingen aan te passen."
+
+#~ msgid "Press this button to customize your menu entries."
+#~ msgstr "Klik op deze knop om uw menu-onderdelen aan te passen."
+
+#~ msgid "Unchecking this allows the theme to set the icon"
+#~ msgstr "Als u dit uitvinkt zal het thema het pictogram instellen"
+
+#~ msgid "Icon"
+#~ msgstr "Pictogram"
+
+#~ msgid "Set the custom menu button icon name"
+#~ msgstr "Stel de naam in van het aangepaste menuknoppictogram"
+
+#~ msgid "Enable opening the menu when the mouse enters the applet"
+#~ msgstr ""
+#~ "Schakel openen van het menu in wanneer de muispijl de hulptoepassing "
+#~ "binnengaat"
+
+#~ msgid "Delay between switching categories"
+#~ msgstr "Vertraging tussen het wisselen van categorieÃ«n"
+
+#~ msgid ""
+#~ "When enabled, category views are activated on click instead of on hover."
+#~ msgstr ""
+#~ "Indien ingeschakeld worden categorieweergaven geactiveerd bij klikken in "
+#~ "plaats van bij zweven."
+
+#~ msgid ""
+#~ "Choose whether or not to enable smooth autoscrolling in the application "
+#~ "list."
+#~ msgstr ""
+#~ "Kies of soepel automatisch schuiven moet worden ingeschakeld in de "
+#~ "toepassingenlijst."
+
+#~ msgid "Choose whether or not bookmarks are indexed in the menu."
+#~ msgstr "Kies of webbladwijzers al dan niet worden opgenomen in het menu."
+
+#~ msgid "Choose whether or not open windows are indexed in menu searches."
+#~ msgstr ""
+#~ "Kies of open vensters al dan niet worden opgenomen in menu-zoekresultaten."
+
+#~ msgid "Choose whether or not to show bookmarks and places in the menu."
+#~ msgstr ""
+#~ "Kies of bladwijzers en locaties al dan niet worden weergegeven in het "
+#~ "menu."
+
+#~ msgid "Choose whether or not to show icons on applications."
+#~ msgstr ""
+#~ "Kies of toepassingspictogrammen al dan niet worden weergegeven in het "
+#~ "menu."
+
+#~ msgid "Choose whether or not to show icons on categories."
+#~ msgstr "Kies of categoriepictogrammen al dan niet worden getoond."
+
+#~ msgid ""
+#~ "Choose whether or not to show the application description on the "
+#~ "application buttons."
+#~ msgstr ""
+#~ "Kies of de beschrijving van de toepassing wordt getoond op de knop van de "
+#~ "toepassing."
+
+#~ msgid ""
+#~ "When enabled, tooltips containing the item's name or description is shown "
+#~ "when hovered over."
+#~ msgstr ""
+#~ "Indien ingeschakeld zullen er zweeftips worden getoond met de naam of "
+#~ "beschrijving van het menu-onderdeel."
+
+#~ msgid ""
+#~ "The delay time in milliseconds for tooltips when hovering over a menu "
+#~ "item."
+#~ msgstr ""
+#~ "De vertraging in milliseconden voor het verschijnen van zweeftips bij "
+#~ "menu-onderdelen."
 
 #~ msgid "Please provide your password to uninstall this application"
 #~ msgstr "Voer a.u.b. uw wachtwoord in om deze toepassing te deÃ¯nstalleren"

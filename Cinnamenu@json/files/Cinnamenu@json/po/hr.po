@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cinnamenu@json 1.2.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-13 18:22+0100\n"
-"PO-Revision-Date: 2020-07-13 22:29+0100\n"
+"POT-Creation-Date: 2020-07-15 12:39+0100\n"
+"PO-Revision-Date: 2020-07-15 15:26+0100\n"
 "Last-Translator: gogo <trebelnik2@gmail.com>\n"
 "Language-Team: Croatian <hr@li.org>\n"
 "Language: hr\n"
@@ -107,11 +107,6 @@ msgstr "Isključi"
 msgid "Shutdown the computer"
 msgstr "Isključite računalo"
 
-#: 3.2/placeDisplay.js:57 4.0/placeDisplay.js:35
-#, fuzzy, javascript-format
-msgid "Failed to launch \"%s\""
-msgstr "Neuspjelo pokretanje '%s'"
-
 #: 3.2/placeDisplay.js:146 4.0/placeDisplay.js:102
 msgid "Home"
 msgstr "Osobna mapa"
@@ -137,8 +132,10 @@ msgstr "Dodaj na panel"
 msgid "Add to desktop"
 msgstr "Dodaj na radnu površinu"
 
-#: 3.2/buttons.js:1054
-msgid "Remove from favorites"
+#: 3.2/buttons.js:1054 4.0/buttons.js:849
+#, fuzzy
+#| msgid "Remove from favorites"
+msgid "Remove favorite"
 msgstr "Ukloni sa omiljenih"
 
 #: 3.2/buttons.js:1056 4.0/buttons.js:852
@@ -152,12 +149,6 @@ msgstr "Deinstaliraj"
 #: 4.0/applet.js:233 4.0/applet.js:1230
 msgid "Please wait..."
 msgstr ""
-
-#: 4.0/buttons.js:849
-#, fuzzy
-#| msgid "Remove from favorites"
-msgid "Remove favorite"
-msgstr "Ukloni sa omiljenih"
 
 #. metadata.json->name
 #. 3.2->settings-schema.json->cinnamenuProvidersSection->title
@@ -225,25 +216,16 @@ msgid "Content"
 msgstr ""
 
 #. 3.2->settings-schema.json->privacy-settings-button->description
+#. 4.0->settings-schema.json->privacy-settings-button->description
 #, fuzzy
-msgid "Toggle recent files"
+#| msgid "Recent Files"
+msgid "Recent files settings"
 msgstr "Nedavne datoteke"
-
-#. 3.2->settings-schema.json->privacy-settings-button->tooltip
-#. 4.0->settings-schema.json->privacy-settings-button->tooltip
-#, fuzzy
-msgid "Press this button to customize your privacy settings."
-msgstr "Pritisnite ovu tipku za prilagodbu vašeg izbornika."
 
 #. 3.2->settings-schema.json->menu-editor-button->description
 #. 4.0->settings-schema.json->menu-editor-button->description
 msgid "Open the menu editor"
 msgstr "Otvori uređivač izbornika"
-
-#. 3.2->settings-schema.json->menu-editor-button->tooltip
-#. 4.0->settings-schema.json->menu-editor-button->tooltip
-msgid "Press this button to customize your menu entries."
-msgstr "Pritisnite ovu tipku za prilagodbu vašeg izbornika."
 
 #. 3.2->settings-schema.json->resetCategoryOrder-button->description
 #. 4.0->settings-schema.json->resetCategoryOrder-button->description
@@ -257,25 +239,29 @@ msgstr "Koristi prilagođenu ikonu"
 
 #. 3.2->settings-schema.json->menu-icon-custom->tooltip
 #. 4.0->settings-schema.json->menu-icon-custom->tooltip
-msgid "Unchecking this allows the theme to set the icon"
-msgstr "Uklanjanjem ovog odabira omogućuje temi prilagodbu ikona"
+#, fuzzy
+#| msgid "Use a custom icon"
+msgid "Use a custom icon in the panel"
+msgstr "Koristi prilagođenu ikonu"
 
 #. 3.2->settings-schema.json->menu-icon->description
-#. 4.0->settings-schema.json->menu-icon->description
-msgid "Icon"
-msgstr "Ikona"
-
 #. 3.2->settings-schema.json->menu-icon->tooltip
+#. 4.0->settings-schema.json->menu-icon->description
 #. 4.0->settings-schema.json->menu-icon->tooltip
-msgid "Select an icon to show in the panel."
-msgstr "Odaberite ikonu za prikaz u panelu."
+msgid "Panel icon"
+msgstr ""
 
 #. 3.2->settings-schema.json->menu-label->description
-#. 3.2->settings-schema.json->menu-label->tooltip
 #. 4.0->settings-schema.json->menu-label->description
+msgid "Panel text"
+msgstr ""
+
+#. 3.2->settings-schema.json->menu-label->tooltip
 #. 4.0->settings-schema.json->menu-label->tooltip
-msgid "Set the custom menu button icon name"
-msgstr "Postavi prilagođeni naziv ikone tipke izbornika"
+#, fuzzy
+#| msgid "Select an icon to show in the panel."
+msgid "Text to show beside the panel icon"
+msgstr "Odaberite ikonu za prikaz u panelu."
 
 #. 3.2->settings-schema.json->category-icon-size->units
 #. 3.2->settings-schema.json->apps-list-icon-size->units
@@ -314,13 +300,17 @@ msgstr "Prečaci tipkovnice za otvaranje i zatvaranje izbornika"
 
 #. 3.2->settings-schema.json->activate-on-hover->description
 #. 4.0->settings-schema.json->activate-on-hover->description
-msgid "Open the menu when I move my mouse over it"
-msgstr "Otvori izbornik kada se pomakne miš iznad izbornika"
+#, fuzzy
+#| msgid "Open the menu editor"
+msgid "Open menu on hover"
+msgstr "Otvori uređivač izbornika"
 
 #. 3.2->settings-schema.json->activate-on-hover->tooltip
 #. 4.0->settings-schema.json->activate-on-hover->tooltip
-msgid "Enable opening the menu when the mouse enters the applet"
-msgstr "Omogućuje otvaranje izbornika kada miš dođe na aplet"
+#, fuzzy
+#| msgid "Open the menu when I move my mouse over it"
+msgid "Open the menu when I move my mouse over the panel icon"
+msgstr "Otvori izbornik kada se pomakne miš iznad izbornika"
 
 #. 3.2->settings-schema.json->hover-delay->units
 #. 3.2->settings-schema.json->tooltip-delay->units
@@ -330,13 +320,10 @@ msgstr "milisekunde"
 
 #. 3.2->settings-schema.json->hover-delay->description
 #. 4.0->settings-schema.json->hover-delay->description
-msgid "Menu hover delay:"
+#, fuzzy
+#| msgid "Menu hover delay:"
+msgid "Menu hover delay"
 msgstr "Odgoda prijelaza izbornikom:"
-
-#. 3.2->settings-schema.json->hover-delay->tooltip
-#. 4.0->settings-schema.json->hover-delay->tooltip
-msgid "Delay between switching categories"
-msgstr "Odgoda između promjena kategorija"
 
 #. 3.2->settings-schema.json->enable-animation->description
 #. 4.0->settings-schema.json->enable-animation->description
@@ -345,7 +332,9 @@ msgstr "Koristi animacije izbornika"
 
 #. 3.2->settings-schema.json->enable-animation->tooltip
 #. 4.0->settings-schema.json->enable-animation->tooltip
-msgid "Allow the menu to animate on open and close"
+#, fuzzy
+#| msgid "Allow the menu to animate on open and close"
+msgid "Animate the menu on open and close"
 msgstr "Dopusti izborniku animirano otvaranje i zatvaranje"
 
 #. 3.2->settings-schema.json->category-click->description
@@ -355,22 +344,20 @@ msgstr ""
 
 #. 3.2->settings-schema.json->category-click->tooltip
 #. 4.0->settings-schema.json->category-click->tooltip
-msgid ""
-"When enabled, category views are activated on click instead of on hover."
+msgid "Activate categories on click instead of on hover"
 msgstr ""
 
 #. 3.2->settings-schema.json->enable-autoscroll->description
 #. 4.0->settings-schema.json->enable-autoscroll->description
-msgid "Enable autoscrolling in application list"
+#, fuzzy
+#| msgid "Enable autoscrolling in application list"
+msgid "Enable autoscrolling"
 msgstr "Omogući automatsko pomicanje u popisu aplikacija"
 
 #. 3.2->settings-schema.json->enable-autoscroll->tooltip
 #. 4.0->settings-schema.json->enable-autoscroll->tooltip
-msgid ""
-"Choose whether or not to enable smooth autoscrolling in the application list."
-msgstr ""
-"Odaberite omogućavanje ili onemogućavanje glatkog automatskog pomicanja u "
-"popisu aplikacija."
+msgid "Enable autoscrolling in application list"
+msgstr "Omogući automatsko pomicanje u popisu aplikacija"
 
 #. 3.2->settings-schema.json->enable-bookmarks->description
 #. 4.0->settings-schema.json->enable-bookmarks->description
@@ -380,19 +367,12 @@ msgstr "Omogući web zabilješke"
 
 #. 3.2->settings-schema.json->enable-bookmarks->tooltip
 #. 4.0->settings-schema.json->enable-bookmarks->tooltip
-msgid "Choose whether or not bookmarks are indexed in the menu."
+msgid "Show your browser's web bookmarks in the menu"
 msgstr ""
-"Odaberite omogućavanje ili onemogućavanje sadržaja zabilješki u izborniku."
 
 #. 3.2->settings-schema.json->enable-windows->description
 msgid "Enable searching of open windows"
 msgstr ""
-
-#. 3.2->settings-schema.json->enable-windows->tooltip
-#, fuzzy
-msgid "Choose whether or not open windows are indexed in menu searches."
-msgstr ""
-"Odaberite omogućavanje ili onemogućavanje sadržaja zabilješki u izborniku."
 
 #. 3.2->settings-schema.json->enable-search-providers->description
 #. 4.0->settings-schema.json->enable-search-providers->description
@@ -402,8 +382,7 @@ msgstr ""
 #. 3.2->settings-schema.json->enable-search-providers->tooltip
 #. 4.0->settings-schema.json->enable-search-providers->tooltip
 #, fuzzy
-msgid ""
-"Choose whether or not search provider results are indexed in menu searches."
+msgid "Include search provider results in searches"
 msgstr ""
 "Odaberite omogućavanje ili onemogućavanje sadržaja zabilješki u izborniku."
 
@@ -446,59 +425,39 @@ msgstr "Prikaži zabilješke i lokacije"
 
 #. 3.2->settings-schema.json->show-places->tooltip
 #. 4.0->settings-schema.json->show-places->tooltip
-msgid "Choose whether or not to show bookmarks and places in the menu."
-msgstr ""
-"Odaberite želite li ili ne imati prikazane zabilješke i lokacije u izborniku."
+#, fuzzy
+#| msgid "Show bookmarks and places"
+msgid "Show bookmarks and places category in the menu"
+msgstr "Prikaži zabilješke i lokacije"
 
 #. 3.2->settings-schema.json->show-application-icons->description
+#. 3.2->settings-schema.json->show-application-icons->tooltip
 #. 4.0->settings-schema.json->show-application-icons->description
+#. 4.0->settings-schema.json->show-application-icons->tooltip
 msgid "Show application icons"
 msgstr "Prikaži ikone aplikacija"
 
-#. 3.2->settings-schema.json->show-application-icons->tooltip
-#. 4.0->settings-schema.json->show-application-icons->tooltip
-msgid "Choose whether or not to show icons on applications."
-msgstr "Odaberite treba li ili ne prikazati ikone na aplikacijama."
-
 #. 3.2->settings-schema.json->show-category-icons->description
+#. 3.2->settings-schema.json->show-category-icons->tooltip
 #. 4.0->settings-schema.json->show-category-icons->description
+#. 4.0->settings-schema.json->show-category-icons->tooltip
 msgid "Show category icons"
 msgstr "Prikaži ikone kategorija"
 
-#. 3.2->settings-schema.json->show-category-icons->tooltip
-#. 4.0->settings-schema.json->show-category-icons->tooltip
-msgid "Choose whether or not to show icons on categories."
-msgstr "Odaberite treba li ili ne prikazati ikone u kategorijama."
-
 #. 3.2->settings-schema.json->show-apps-description-on-buttons->description
+#. 3.2->settings-schema.json->show-apps-description-on-buttons->tooltip
 #, fuzzy
 msgid "Show application descriptions under titles"
 msgstr "Prikaži opis aplikacija ispod njihovih naziva"
 
-#. 3.2->settings-schema.json->show-apps-description-on-buttons->tooltip
-msgid ""
-"Choose whether or not to show the application description on the application "
-"buttons."
-msgstr ""
-"Odaberite treba li ili ne prikazati opis aplikacija ispod njihovih naziva."
-
 #. 3.2->settings-schema.json->show-tooltips->description
+#. 3.2->settings-schema.json->show-tooltips->tooltip
 msgid "Show tooltips"
 msgstr ""
 
-#. 3.2->settings-schema.json->show-tooltips->tooltip
-msgid ""
-"When enabled, tooltips containing the item's name or description is shown "
-"when hovered over."
-msgstr ""
-
 #. 3.2->settings-schema.json->tooltip-delay->description
-msgid "Tooltip delay"
-msgstr ""
-
 #. 3.2->settings-schema.json->tooltip-delay->tooltip
-msgid ""
-"The delay time in milliseconds for tooltips when hovering over a menu item."
+msgid "Tooltip delay"
 msgstr ""
 
 #. 3.2->settings-schema.json->enable-custom-menu-height->description
@@ -555,7 +514,7 @@ msgstr ""
 #| msgid ""
 #| "Choose whether or not to show the application description on the "
 #| "application buttons."
-msgid "Choose where to show application descriptions."
+msgid "Choose where to show application descriptions"
 msgstr ""
 "Odaberite treba li ili ne prikazati opis aplikacija ispod njihovih naziva."
 
@@ -580,22 +539,82 @@ msgid "Right"
 msgstr ""
 
 #. 4.0->settings-schema.json->powergroup-placement->tooltip
-msgid "Choose where to show the session (quit, logout, etc.) buttons."
+msgid "Choose where to show the session (quit, logout, etc.) buttons"
 msgstr ""
 
 #. 4.0->settings-schema.json->add-favorites->description
-msgid "Add favorites to session buttons."
+msgid "Add favorites to session buttons"
 msgstr ""
 
 #. 4.0->settings-schema.json->add-favorites->tooltip
-msgid "Show your favorite app icons next to the session buttons."
+msgid "Show your favorite app icons next to the session buttons"
 msgstr ""
 
-#. 4.0->settings-schema.json->privacy-settings-button->description
+#, fuzzy, javascript-format
+#~ msgid "Failed to launch \"%s\""
+#~ msgstr "Neuspjelo pokretanje '%s'"
+
+#~ msgid "Remove from favorites"
+#~ msgstr "Ukloni sa omiljenih"
+
 #, fuzzy
-#| msgid "Recent Files"
-msgid "Recent files settings"
-msgstr "Nedavne datoteke"
+#~ msgid "Toggle recent files"
+#~ msgstr "Nedavne datoteke"
+
+#, fuzzy
+#~ msgid "Press this button to customize your privacy settings."
+#~ msgstr "Pritisnite ovu tipku za prilagodbu vašeg izbornika."
+
+#~ msgid "Press this button to customize your menu entries."
+#~ msgstr "Pritisnite ovu tipku za prilagodbu vašeg izbornika."
+
+#~ msgid "Unchecking this allows the theme to set the icon"
+#~ msgstr "Uklanjanjem ovog odabira omogućuje temi prilagodbu ikona"
+
+#~ msgid "Icon"
+#~ msgstr "Ikona"
+
+#~ msgid "Set the custom menu button icon name"
+#~ msgstr "Postavi prilagođeni naziv ikone tipke izbornika"
+
+#~ msgid "Enable opening the menu when the mouse enters the applet"
+#~ msgstr "Omogućuje otvaranje izbornika kada miš dođe na aplet"
+
+#~ msgid "Delay between switching categories"
+#~ msgstr "Odgoda između promjena kategorija"
+
+#~ msgid ""
+#~ "Choose whether or not to enable smooth autoscrolling in the application "
+#~ "list."
+#~ msgstr ""
+#~ "Odaberite omogućavanje ili onemogućavanje glatkog automatskog pomicanja u "
+#~ "popisu aplikacija."
+
+#~ msgid "Choose whether or not bookmarks are indexed in the menu."
+#~ msgstr ""
+#~ "Odaberite omogućavanje ili onemogućavanje sadržaja zabilješki u izborniku."
+
+#, fuzzy
+#~ msgid "Choose whether or not open windows are indexed in menu searches."
+#~ msgstr ""
+#~ "Odaberite omogućavanje ili onemogućavanje sadržaja zabilješki u izborniku."
+
+#~ msgid "Choose whether or not to show bookmarks and places in the menu."
+#~ msgstr ""
+#~ "Odaberite želite li ili ne imati prikazane zabilješke i lokacije u "
+#~ "izborniku."
+
+#~ msgid "Choose whether or not to show icons on applications."
+#~ msgstr "Odaberite treba li ili ne prikazati ikone na aplikacijama."
+
+#~ msgid "Choose whether or not to show icons on categories."
+#~ msgstr "Odaberite treba li ili ne prikazati ikone u kategorijama."
+
+#~ msgid ""
+#~ "Choose whether or not to show the application description on the "
+#~ "application buttons."
+#~ msgstr ""
+#~ "Odaberite treba li ili ne prikazati opis aplikacija ispod njihovih naziva."
 
 #~ msgid "Please provide your password to uninstall this application"
 #~ msgstr "Upišite vašu lozinku za deinstalaciju ove aplikacije"
