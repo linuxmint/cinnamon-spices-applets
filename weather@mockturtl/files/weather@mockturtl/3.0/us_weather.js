@@ -83,6 +83,7 @@ var USWeather = (function () {
                         if (loc == null)
                             return [2, null];
                         if (!(!this.grid || !this.observationStations || this.currentLoc.text != loc.text)) return [3, 3];
+                        this.app.log.Print("Downloading new site data");
                         this.currentLoc = loc;
                         return [4, this.GetGridData(loc)];
                     case 1:
@@ -96,30 +97,33 @@ var USWeather = (function () {
                             return [2, null];
                         this.grid = grid;
                         this.observationStations = observationStations;
-                        _a.label = 3;
-                    case 3: return [4, this.GetObservationsInRange(this.MAX_STATION_DIST, loc, this.observationStations)];
-                    case 4:
+                        return [3, 4];
+                    case 3:
+                        this.app.log.Debug("Site data downloading skipped");
+                        _a.label = 4;
+                    case 4: return [4, this.GetObservationsInRange(this.MAX_STATION_DIST, loc, this.observationStations)];
+                    case 5:
                         observations = _a.sent();
                         hourly = null;
                         forecast = null;
-                        _a.label = 5;
-                    case 5:
-                        _a.trys.push([5, 8, , 9]);
+                        _a.label = 6;
+                    case 6:
+                        _a.trys.push([6, 9, , 10]);
                         hourlyForecastPromise = this.app.LoadJsonAsync(this.grid.properties.forecastHourly + "?units=si");
                         forecastPromise = this.app.LoadJsonAsync(this.grid.properties.forecast);
                         return [4, hourlyForecastPromise];
-                    case 6:
+                    case 7:
                         hourly = _a.sent();
                         return [4, forecastPromise];
-                    case 7:
-                        forecast = _a.sent();
-                        return [3, 9];
                     case 8:
+                        forecast = _a.sent();
+                        return [3, 10];
+                    case 9:
                         e_1 = _a.sent();
                         this.app.log.Error("Failed to obtain forecast Data, error: " + JSON.stringify(e_1, null, 2));
                         this.app.HandleError({ type: "soft", detail: "bad api response", message: _("Could not get forecast for your area") });
                         return [2, null];
-                    case 9:
+                    case 10:
                         weather = this.ParseCurrent(observations, hourly);
                         weather.forecasts = this.ParseForecast(forecast);
                         weather.hourlyForecasts = this.ParseHourlyForecast(hourly, this);

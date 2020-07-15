@@ -83,56 +83,33 @@ var MetUk = (function () {
     }
     MetUk.prototype.GetWeather = function (newLoc) {
         return __awaiter(this, void 0, void 0, function () {
-            var forecastSitelist, currentSitelist, e_1, index, element, forecastPromise, hourlyPayload, observations, index, element, _a, _b, _c, currentResult, forecastResult, threeHourlyForecast;
-            return __generator(this, function (_d) {
-                switch (_d.label) {
+            var forecastSite, observationSites, forecastPromise, hourlyPayload, observations, currentResult, forecastResult, threeHourlyForecast;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
                     case 0:
                         if (newLoc == null)
                             return [2, null];
-                        if (!(this.currentLoc == null || this.currentLoc.text != newLoc.text || this.forecastSite == null || this.observationSites == null || this.observationSites.length == 0)) return [3, 6];
+                        if (!(this.currentLoc == null || this.currentLoc.text != newLoc.text || this.forecastSite == null || this.observationSites == null || this.observationSites.length == 0)) return [3, 3];
+                        this.app.log.Print("Downloading new site data");
                         this.currentLoc = newLoc;
-                        forecastSitelist = null;
-                        currentSitelist = null;
-                        _d.label = 1;
+                        return [4, this.GetClosestForecastSite(newLoc)];
                     case 1:
-                        _d.trys.push([1, 4, , 5]);
-                        return [4, this.app.LoadJsonAsync(this.baseUrl + this.forecastPrefix + this.sitesUrl + "?" + this.key)];
+                        forecastSite = _a.sent();
+                        if (forecastSite == null)
+                            return [2, null];
+                        return [4, this.GetObservationSitesInRange(newLoc, this.MAX_STATION_DIST)];
                     case 2:
-                        forecastSitelist = _d.sent();
-                        return [4, this.app.LoadJsonAsync(this.baseUrl + this.currentPrefix + this.sitesUrl + "?" + this.key)];
+                        observationSites = _a.sent();
+                        if (observationSites == null)
+                            return [2, null];
+                        this.forecastSite = forecastSite;
+                        this.observationSites = observationSites;
+                        return [3, 4];
                     case 3:
-                        currentSitelist = _d.sent();
-                        return [3, 5];
-                    case 4:
-                        e_1 = _d.sent();
-                        this.app.log.Error("Failed to get sitelist, error: " + JSON.stringify(e_1, null, 2));
-                        this.app.HandleError({
-                            type: "soft",
-                            userError: true,
-                            detail: "no network response",
-                            service: "met-uk",
-                            message: _("Unexpected response from API")
-                        });
-                        return [2, null];
-                    case 5:
-                        this.forecastSite = this.GetClosestSite(forecastSitelist, newLoc);
-                        this.app.log.Debug("Forecast site found: " + JSON.stringify(this.forecastSite, null, 2));
-                        this.observationSites = [];
-                        for (index = 0; index < currentSitelist.Locations.Location.length; index++) {
-                            element = currentSitelist.Locations.Location[index];
-                            element.dist = GetDistance(parseFloat(element.latitude), parseFloat(element.longitude), newLoc.lat, newLoc.lon);
-                            if (element.dist > this.MAX_STATION_DIST)
-                                continue;
-                            this.observationSites.push(element);
-                        }
-                        this.observationSites = this.SortObservationSites(this.observationSites);
-                        this.app.log.Debug("Observation sites found: " + JSON.stringify(this.observationSites, null, 2));
-                        return [3, 7];
-                    case 6:
                         this.app.log.Debug("Site data downloading skipped");
-                        _d.label = 7;
-                    case 7:
-                        if (this.observationSites == null || this.observationSites.length == 0 || this.forecastSite.dist > 100000) {
+                        _a.label = 4;
+                    case 4:
+                        if (this.observationSites.length == 0 || this.forecastSite.dist > 100000) {
                             this.app.log.Error("User is probably not in UK, aborting");
                             this.app.HandleError({
                                 type: "hard",
@@ -145,22 +122,119 @@ var MetUk = (function () {
                         }
                         forecastPromise = this.GetData(this.baseUrl + this.forecastPrefix + this.forecastSite.id + this.dailyUrl + "&" + this.key, this.ParseForecast);
                         hourlyPayload = this.GetData(this.baseUrl + this.forecastPrefix + this.forecastSite.id + this.threeHourlyUrl + "&" + this.key, this.ParseHourlyForecast);
+                        return [4, this.GetObservationData(this.observationSites)];
+                    case 5:
+                        observations = _a.sent();
+                        currentResult = this.ParseCurrent(observations);
+                        if (!currentResult)
+                            return [2, null];
+                        return [4, forecastPromise];
+                    case 6:
+                        forecastResult = _a.sent();
+                        currentResult.forecasts = (!forecastResult) ? [] : forecastResult;
+                        return [4, hourlyPayload];
+                    case 7:
+                        threeHourlyForecast = _a.sent();
+                        currentResult.hourlyForecasts = (!threeHourlyForecast) ? [] : threeHourlyForecast;
+                        return [2, currentResult];
+                }
+            });
+        });
+    };
+    ;
+    MetUk.prototype.GetClosestForecastSite = function (loc) {
+        return __awaiter(this, void 0, void 0, function () {
+            var forecastSitelist, e_1;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        forecastSitelist = null;
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4, this.app.LoadJsonAsync(this.baseUrl + this.forecastPrefix + this.sitesUrl + "?" + this.key)];
+                    case 2:
+                        forecastSitelist = _a.sent();
+                        return [2, this.GetClosestSite(forecastSitelist, loc)];
+                    case 3:
+                        e_1 = _a.sent();
+                        this.app.log.Error("Failed to get sitelist, error: " + JSON.stringify(e_1, null, 2));
+                        this.app.HandleError({
+                            type: "soft",
+                            userError: true,
+                            detail: "no network response",
+                            service: "met-uk",
+                            message: _("Unexpected response from API")
+                        });
+                        return [2, null];
+                    case 4: return [2];
+                }
+            });
+        });
+    };
+    MetUk.prototype.GetObservationSitesInRange = function (loc, range) {
+        return __awaiter(this, void 0, void 0, function () {
+            var observationSiteList, e_2, observationSites, index, element;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        observationSiteList = null;
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4, this.app.LoadJsonAsync(this.baseUrl + this.currentPrefix + this.sitesUrl + "?" + this.key)];
+                    case 2:
+                        observationSiteList = _a.sent();
+                        return [3, 4];
+                    case 3:
+                        e_2 = _a.sent();
+                        this.app.log.Error("Failed to get sitelist, error: " + JSON.stringify(e_2, null, 2));
+                        this.app.HandleError({
+                            type: "soft",
+                            userError: true,
+                            detail: "no network response",
+                            service: "met-uk",
+                            message: _("Unexpected response from API")
+                        });
+                        return [2, null];
+                    case 4:
+                        observationSites = [];
+                        for (index = 0; index < observationSiteList.Locations.Location.length; index++) {
+                            element = observationSiteList.Locations.Location[index];
+                            element.dist = GetDistance(parseFloat(element.latitude), parseFloat(element.longitude), loc.lat, loc.lon);
+                            if (element.dist > range)
+                                continue;
+                            observationSites.push(element);
+                        }
+                        observationSites = this.SortObservationSites(observationSites);
+                        this.app.log.Debug("Observation sites found: " + JSON.stringify(observationSites, null, 2));
+                        return [2, observationSites];
+                }
+            });
+        });
+    };
+    MetUk.prototype.GetObservationData = function (observationSites) {
+        return __awaiter(this, void 0, void 0, function () {
+            var observations, index, element, _a, _b, _c;
+            return __generator(this, function (_d) {
+                switch (_d.label) {
+                    case 0:
                         observations = [];
                         index = 0;
-                        _d.label = 8;
-                    case 8:
-                        if (!(index < this.observationSites.length)) return [3, 13];
-                        element = this.observationSites[index];
-                        _d.label = 9;
-                    case 9:
-                        _d.trys.push([9, 11, , 12]);
+                        _d.label = 1;
+                    case 1:
+                        if (!(index < observationSites.length)) return [3, 6];
+                        element = observationSites[index];
+                        _d.label = 2;
+                    case 2:
+                        _d.trys.push([2, 4, , 5]);
                         this.app.log.Debug("Getting observation data from station: " + element.id);
                         _b = (_a = observations).push;
                         return [4, this.app.LoadJsonAsync(this.baseUrl + this.currentPrefix + element.id + "?res=hourly&" + this.key)];
-                    case 10:
+                    case 3:
                         _b.apply(_a, [_d.sent()]);
-                        return [3, 12];
-                    case 11:
+                        return [3, 5];
+                    case 4:
                         _c = _d.sent();
                         this.app.HandleError({
                             type: "soft",
@@ -170,32 +244,18 @@ var MetUk = (function () {
                             message: _("Unexpected response from API")
                         });
                         this.app.log.Debug("Failed to get observations from " + element.id);
-                        return [3, 12];
-                    case 12:
+                        return [3, 5];
+                    case 5:
                         index++;
-                        return [3, 8];
-                    case 13:
-                        currentResult = null;
-                        currentResult = this.ParseCurrent(observations);
-                        if (!currentResult)
-                            return [2, null];
-                        return [4, forecastPromise];
-                    case 14:
-                        forecastResult = _d.sent();
-                        currentResult.forecasts = (!forecastResult) ? [] : forecastResult;
-                        return [4, hourlyPayload];
-                    case 15:
-                        threeHourlyForecast = _d.sent();
-                        currentResult.hourlyForecasts = (!threeHourlyForecast) ? [] : threeHourlyForecast;
-                        return [2, currentResult];
+                        return [3, 1];
+                    case 6: return [2, observations];
                 }
             });
         });
     };
-    ;
     MetUk.prototype.GetData = function (query, ParseFunction) {
         return __awaiter(this, void 0, void 0, function () {
-            var json, e_2;
+            var json, e_3;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -209,8 +269,8 @@ var MetUk = (function () {
                         json = _a.sent();
                         return [3, 4];
                     case 3:
-                        e_2 = _a.sent();
-                        this.app.HandleHTTPError("met-uk", e_2, this.app, null);
+                        e_3 = _a.sent();
+                        this.app.HandleHTTPError("met-uk", e_3, this.app, null);
                         return [2, null];
                     case 4:
                         if (json == null) {
@@ -349,21 +409,24 @@ var MetUk = (function () {
         var distance = parseInt(dist);
         var unit = this.app.config._distanceUnit;
         if (distance < 1000)
-            return _("Very poor - Less than") + " " + MetretoUserUnits(1000, unit) + unit;
+            return _("Very poor - Less than") + " " + MetretoUserUnits(1000, unit) + this.DistanceUnitFor(unit);
         if (distance < 4000)
-            return _("Poor - Between") + " " + MetretoUserUnits(1000, unit) + "-" + MetretoUserUnits(4000, unit) + " " + unit;
+            return _("Poor - Between") + " " + MetretoUserUnits(1000, unit) + "-" + MetretoUserUnits(4000, unit) + " " + this.DistanceUnitFor(unit);
         if (distance < 10000)
-            return _("Moderate - Between") + " " + MetretoUserUnits(4000, unit) + "-" + MetretoUserUnits(10000, unit) + " " + unit;
+            return _("Moderate - Between") + " " + MetretoUserUnits(4000, unit) + "-" + MetretoUserUnits(10000, unit) + " " + this.DistanceUnitFor(unit);
         if (distance < 20000)
-            return _("Good - Between") + " " + MetretoUserUnits(10000, unit) + "-" + MetretoUserUnits(20000, unit) + " " + unit;
+            return _("Good - Between") + " " + MetretoUserUnits(10000, unit) + "-" + MetretoUserUnits(20000, unit) + " " + this.DistanceUnitFor(unit);
         if (distance < 40000)
-            return _("Very good - Between") + " " + MetretoUserUnits(20000, unit) + "-" + MetretoUserUnits(40000, unit) + " " + unit;
-        return _("Excellent - More than") + " " + MetretoUserUnits(40000, unit) + " " + unit;
+            return _("Very good - Between") + " " + MetretoUserUnits(20000, unit) + "-" + MetretoUserUnits(40000, unit) + " " + this.DistanceUnitFor(unit);
+        return _("Excellent - More than") + " " + MetretoUserUnits(40000, unit) + " " + this.DistanceUnitFor(unit);
+    };
+    MetUk.prototype.DistanceUnitFor = function (unit) {
+        if (unit == "imperial")
+            return _("mi");
+        return _("km");
     };
     MetUk.prototype.SortObservationSites = function (observations) {
         if (observations == null)
-            return null;
-        if (observations.length == 0)
             return null;
         observations = observations.sort(function (a, b) {
             if (a.dist < b.dist)

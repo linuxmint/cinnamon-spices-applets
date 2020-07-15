@@ -42,6 +42,7 @@ class USWeather {
         if (loc == null)
             return null;
         if (!this.grid || !this.observationStations || this.currentLoc.text != loc.text) {
+            this.app.log.Print("Downloading new site data");
             this.currentLoc = loc;
             let grid = await this.GetGridData(loc);
             if (grid == null)
@@ -51,6 +52,9 @@ class USWeather {
                 return null;
             this.grid = grid;
             this.observationStations = observationStations;
+        }
+        else {
+            this.app.log.Debug("Site data downloading skipped");
         }
         let observations = await this.GetObservationsInRange(this.MAX_STATION_DIST, loc, this.observationStations);
         let hourly = null;

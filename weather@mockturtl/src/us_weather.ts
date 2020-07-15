@@ -69,6 +69,7 @@ class USWeather implements WeatherProvider {
 
 		// getting grid and station data first time or location changed
 		if (!this.grid || !this.observationStations || this.currentLoc.text != loc.text) {
+			this.app.log.Print("Downloading new site data")
 			this.currentLoc = loc;
 
 			let grid = await this.GetGridData(loc);
@@ -80,7 +81,9 @@ class USWeather implements WeatherProvider {
 			// Caching
 			this.grid = grid;
 			this.observationStations = observationStations;
-			
+		}
+		else {
+			this.app.log.Debug("Site data downloading skipped")
 		}
 		
 		// Long wait time, can't do Promise.all because US weather will ban IP for some time on spamming
