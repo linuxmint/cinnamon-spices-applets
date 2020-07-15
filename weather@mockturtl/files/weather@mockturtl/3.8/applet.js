@@ -160,14 +160,14 @@ class WeatherApplet extends TextIconApplet {
         this.set_applet_label(_("..."));
         this.set_applet_tooltip(_("Click to open"));
     }
-    Lock() {
+    Locked() {
         return this.lock;
     }
     Unlock() {
         this.lock = false;
-        if (this.config.rebuildTriggeredWhileLocked) {
+        if (this.refreshTriggeredWhileLocked) {
             this.log.Print("Refreshing triggered by config change while refrehing, starting now...");
-            this.config.rebuildTriggeredWhileLocked = false;
+            this.refreshTriggeredWhileLocked = false;
             this.refreshAndRebuild();
         }
     }
@@ -180,7 +180,7 @@ class WeatherApplet extends TextIconApplet {
     }
     refreshAndRebuild() {
         this.loop.Resume();
-        if (this.Lock()) {
+        if (this.Locked()) {
             this.refreshTriggeredWhileLocked = true;
             return;
         }
@@ -192,10 +192,14 @@ class WeatherApplet extends TextIconApplet {
             let message = Message.new('GET', query);
             this.log.Debug("URL called: " + query);
             this._httpSession.queue_message(message, (session, message) => {
+                global.log("Message received");
                 let error = (errorCallback != null) ? errorCallback(message) : null;
+                global.log("errorcallback finished");
                 if (error != null) {
+                    global.log("there is an error, " + JSON.stringify(error, null, 2));
                     this.HandleError(error);
                     reject({ code: -1, message: "bad api response", data: null, reason_phrase: null });
+                    global.log("rejected payload");
                     return;
                 }
                 if (!message) {
@@ -401,8 +405,8 @@ class WeatherApplet extends TextIconApplet {
             this.log.Print("Refreshing in progress, refresh skipped.");
             return "locked";
         }
-        this.encounteredError = false;
         this.lock = true;
+        this.encounteredError = false;
         let locationData = null;
         try {
             locationData = await this.config.EnsureLocation();
@@ -677,7 +681,7 @@ class UI {
         let hex = this.menu.actor.get_theme_node().get_foreground_color().to_string().substring(0, 7);
         return hex;
     }
-    GetColorStyle() {
+    GetTextColorStyle() {
         let hexColor = null;
         if (this.lightTheme) {
             hexColor = shadeHexColor(this.ForegroundColor(), -0.40);
@@ -1067,8 +1071,8 @@ class UI {
                 this.app.OpenUrl(this._currentWeatherLocation);
         }));
         this._currentWeatherSummary = new Label({ text: _('Loading ...'), style_class: STYLE_SUMMARY });
-        this._currentWeatherSunrise = new Label({ text: ELLIPSIS, style: this.GetColorStyle() });
-        this._currentWeatherSunset = new Label({ text: ELLIPSIS, style: this.GetColorStyle() });
+        this._currentWeatherSunrise = new Label({ text: ELLIPSIS, style: this.GetTextColorStyle() });
+        this._currentWeatherSunset = new Label({ text: ELLIPSIS, style: this.GetTextColorStyle() });
         let sunriseBox = new BoxLayout();
         let sunsetBox = new BoxLayout();
         if (config._showSunrise) {
@@ -1076,13 +1080,13 @@ class UI {
                 icon_name: "sunset-symbolic",
                 icon_type: IconType.SYMBOLIC,
                 icon_size: 25,
-                style: this.GetColorStyle()
+                style: this.GetTextColorStyle()
             });
             let sunriseIcon = new Icon({
                 icon_name: "sunrise-symbolic",
                 icon_type: IconType.SYMBOLIC,
                 icon_size: 25,
-                style: this.GetColorStyle()
+                style: this.GetTextColorStyle()
             });
             sunriseBox.add_actor(sunriseIcon);
             sunsetBox.add_actor(sunsetIcon);
@@ -1114,13 +1118,13 @@ class UI {
         this._currentWeatherPressure = new Label(textOb);
         this._currentWeatherWind = new Label(textOb);
         this._currentWeatherApiUnique = new Label({ text: '' });
-        this._currentWeatherApiUniqueCap = new Label({ text: '', style: this.GetColorStyle() });
+        this._currentWeatherApiUniqueCap = new Label({ text: '', style: this.GetTextColorStyle() });
         let rb_captions = new BoxLayout({ vertical: true, style_class: STYLE_DATABOX_CAPTIONS });
         let rb_values = new BoxLayout({ vertical: true, style_class: STYLE_DATABOX_VALUES });
-        rb_captions.add_actor(new Label({ text: _('Temperature:'), style: this.GetColorStyle() }));
-        rb_captions.add_actor(new Label({ text: _('Humidity:'), style: this.GetColorStyle() }));
-        rb_captions.add_actor(new Label({ text: _('Pressure:'), style: this.GetColorStyle() }));
-        rb_captions.add_actor(new Label({ text: _('Wind:'), style: this.GetColorStyle() }));
+        rb_captions.add_actor(new Label({ text: _('Temperature:'), style: this.GetTextColorStyle() }));
+        rb_captions.add_actor(new Label({ text: _('Humidity:'), style: this.GetTextColorStyle() }));
+        rb_captions.add_actor(new Label({ text: _('Pressure:'), style: this.GetTextColorStyle() }));
+        rb_captions.add_actor(new Label({ text: _('Wind:'), style: this.GetTextColorStyle() }));
         rb_captions.add_actor(this._currentWeatherApiUniqueCap);
         rb_values.add_actor(this._currentWeatherTemperature);
         rb_values.add_actor(this._currentWeatherHumidity);
@@ -1176,7 +1180,7 @@ class UI {
             forecastWeather.Day = new Label({
                 style_class: STYLE_FORECAST_DAY,
                 reactive: true,
-                style: this.GetColorStyle()
+                style: this.GetTextColorStyle()
             });
             forecastWeather.Summary = new Label({
                 style_class: STYLE_FORECAST_SUMMARY,
@@ -1257,7 +1261,7 @@ class UI {
         for (let index = 0; index < hours; index++) {
             let box = new BoxLayout({ vertical: true });
             this._hourlyForecasts.push({
-                Hour: new Label({ text: "Hour", style_class: "hourly-time", style: this.GetColorStyle() }),
+                Hour: new Label({ text: "Hour", style_class: "hourly-time", style: this.GetTextColorStyle() }),
                 Icon: new Icon({
                     icon_type: config.IconType(),
                     icon_size: 24,
@@ -1316,7 +1320,6 @@ class Config {
             USE_CUSTOM_MENUICONS: "useCustomMenuIcons",
             RUSSIAN_STYLE: "tempRussianStyle",
         };
-        this.rebuildTriggeredWhileLocked = false;
         this.doneTypingLocation = null;
         this.app = app;
         this.settings = new AppletSettings(this, UUID, instanceID);

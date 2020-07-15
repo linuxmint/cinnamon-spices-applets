@@ -9,9 +9,9 @@
  */
 function importModule(path: string): any {
     if (typeof require !== 'undefined') {
-      return require('./' + path);
+      	return require('./' + path);
     } else {
-      if (!AppletDir) var AppletDir = imports.ui.appletManager.applets['weather@mockturtl'];
+      	if (!AppletDir) var AppletDir = imports.ui.appletManager.applets['weather@mockturtl'];
       return AppletDir[path];
     }
 }
@@ -222,15 +222,15 @@ class WeatherApplet extends TextIconApplet {
 		this.set_applet_tooltip(_("Click to open"));
 	}
 
-	public Lock(): boolean {
+	public Locked(): boolean {
 		return this.lock;
 	}
 
 	private Unlock(): void {
 		this.lock = false;
-		if (this.config.rebuildTriggeredWhileLocked) {
+		if (this.refreshTriggeredWhileLocked) {
 			this.log.Print("Refreshing triggered by config change while refrehing, starting now...");
-			this.config.rebuildTriggeredWhileLocked = false;
+			this.refreshTriggeredWhileLocked = false;
 			this.refreshAndRebuild();
 		}
 
@@ -250,7 +250,7 @@ class WeatherApplet extends TextIconApplet {
 	 */
 	public refreshAndRebuild(): void {
 		this.loop.Resume();
-		if (this.Lock()) {
+		if (this.Locked()) {
 			this.refreshTriggeredWhileLocked = true;
 			return;
 		}
@@ -268,10 +268,14 @@ class WeatherApplet extends TextIconApplet {
 			this.log.Debug("URL called: " + query);
 			this._httpSession.queue_message(message, (session: any, message: any) => {
 				// option for provider to inject errors before general error handling
+				global.log("Message received")
 				let error: AppletError = (errorCallback != null) ? errorCallback(message) : null;
+				global.log("errorcallback finished")
 				if (error != null) {
+					global.log("there is an error, " + JSON.stringify(error, null, 2))
 					this.HandleError(error);
 					reject({code: -1, message: "bad api response", data: null, reason_phrase: null} as HttpError);
+					global.log("rejected payload")
 					return;
 				}
 
@@ -371,7 +375,7 @@ class WeatherApplet extends TextIconApplet {
 		this.config.IconType() == IconType.SYMBOLIC ?
 			this.set_applet_icon_symbolic_name(iconname) :
 			this.set_applet_icon_name(iconname)
-			if (this.config._useCustomAppletIcons) this.SetCustomIcon(this.weather.condition.customIcon);
+		if (this.config._useCustomAppletIcons) this.SetCustomIcon(this.weather.condition.customIcon);
 	}
 
 	public SetCustomIcon(iconName: CustomIcons): void {
@@ -400,10 +404,10 @@ class WeatherApplet extends TextIconApplet {
 	/** Override function */
 	public _onKeySettingsUpdated(): void {
 		if (this.config.keybinding != null) {
-		keybindingManager.addHotKey(UUID,
-			this.config.keybinding,
-			Lang.bind(this,
-			this.on_applet_clicked))
+			keybindingManager.addHotKey(UUID,
+				this.config.keybinding,
+				Lang.bind(this, this.on_applet_clicked)
+			);
 		}
 	}
 
@@ -507,12 +511,13 @@ class WeatherApplet extends TextIconApplet {
 	 * @param locale Linux locale string
 	 */
 	private constructJsLocale(locale: string): string {
+		// TODO: fix locale stuff with unset locale (c)
 		let jsLocale = locale.split(".")[0];
 		let tmp: string[] = jsLocale.split("_");
 		jsLocale = "";
 		for (let i = 0; i < tmp.length; i++) {
-		if (i != 0) jsLocale += "-";
-		jsLocale += tmp[i].toLowerCase();
+			if (i != 0) jsLocale += "-";
+			jsLocale += tmp[i].toLowerCase();
 		}
 		return jsLocale;
 	}
@@ -526,8 +531,9 @@ class WeatherApplet extends TextIconApplet {
 			this.log.Print("Refreshing in progress, refresh skipped.");
 			return "locked";
 		}
-		this.encounteredError = false;
+
 		this.lock = true;
+		this.encounteredError = false;
 
 		let locationData: LocationData = null;
 		try {
@@ -538,6 +544,7 @@ class WeatherApplet extends TextIconApplet {
 			this.Unlock();
 			return "error";
 		}
+
 		if (locationData == null) {
 			// user facing errors are handled by EnsureLocation function
 			this.Unlock();
@@ -587,11 +594,11 @@ class WeatherApplet extends TextIconApplet {
 	/** Injects Data into Weather object to display later */
 	private ProcessWeatherData(weatherInfo: WeatherData, locationData: LocationData) {
 		if (!!locationData) { // Automatic location
-		this.weather.location.city = locationData.city;
-		this.weather.location.country = locationData.country;
-		this.weather.location.timeZone = locationData.timeZone;
-		this.weather.coord.lat = locationData.lat;
-		this.weather.coord.lon = locationData.lon;
+			this.weather.location.city = locationData.city;
+			this.weather.location.country = locationData.country;
+			this.weather.location.timeZone = locationData.timeZone;
+			this.weather.coord.lat = locationData.lat;
+			this.weather.coord.lon = locationData.lon;
 		}
 
 		this.weather.condition = weatherInfo.condition;
@@ -621,30 +628,30 @@ class WeatherApplet extends TextIconApplet {
 		this.weather = {
 			date: null,
 			location: {
-			city: null,
-			country: null,
-			tzOffset: null,
-			timeZone: null,
-			url: null
+				city: null,
+				country: null,
+				tzOffset: null,
+				timeZone: null,
+				url: null
 			},
 			coord: {
-			lat: null,
-			lon: null,
+				lat: null,
+				lon: null,
 			},
 			sunrise: null,
 			sunset: null,
 			wind: {
-			speed: null,
-			degree: null,
+				speed: null,
+				degree: null,
 			},
-			temperature: null,
-			pressure: null,
-			humidity: null, 
+				temperature: null,
+				pressure: null,
+				humidity: null, 
 			condition: {
-			main: null,
-			description: null,
-			icon: null,
-			customIcon: null
+				main: null,
+				description: null,
+				icon: null,
+				customIcon: null
 			},
 		}
 		}
@@ -732,7 +739,9 @@ class WeatherApplet extends TextIconApplet {
 		this.log.Error("Retrying in the next " + nextRefresh.toString() + " seconds..." );
 	}
 
-	/** Callback handles any service specific logic */
+	/** Callback handles any service specific logic, DEPRECATED.
+	 * Callback should be used in LoadJsonAsync function to any Provider specific error handling 
+	 */
 	public HandleHTTPError(service: ApiService, error: HttpError, ctx: WeatherApplet, override?: (error: HttpError, uiError: AppletError) => AppletError) {
 		let uiError = {
 			type: "soft",
@@ -876,14 +885,15 @@ class UI {
 		this.signals = new SignalManager();
 		this.lightTheme = this.IsLightTheme();
 		this.BuildPopupMenu();
-
 		// Subscribe to theme changes
 		this.signals.connect(themeManager, 'theme-set', this.OnThemeChanged, this);
 	}
 
 	/**
 	 * Resetting flags from Hourly scrollview when theme changed to 
-	 * prevent incorrect height requests
+	 * prevent incorrect height requests, rebuild 
+	 * when switching between light and dark themes
+	 * to recolor some of the text
 	 */
 	private OnThemeChanged(): void {
 		this.hourlyNeverOpened = true;
@@ -919,7 +929,7 @@ class UI {
 		return hex;
 	}
 
-	private GetColorStyle(): string {
+	private GetTextColorStyle(): string {
 		let hexColor = null;
 		if (this.lightTheme) {
 			// Darken default foreground color
@@ -1096,30 +1106,30 @@ class UI {
 			let descriptionCondition = "";
 			// Short Condition Name
 			if (weather.condition.main != null) {
-			mainCondition = weather.condition.main;
-			if (config._translateCondition) {
-				mainCondition = capitalizeFirstLetter(_(mainCondition));
-			}
+				mainCondition = weather.condition.main;
+				if (config._translateCondition) {
+					mainCondition = capitalizeFirstLetter(_(mainCondition));
+				}
 			}
 			// Condition Description
 			if (weather.condition.description != null) {
-			descriptionCondition = capitalizeFirstLetter(weather.condition.description);
-			if (config._translateCondition) {
-				descriptionCondition = capitalizeFirstLetter(_(weather.condition.description));
-			}
+					descriptionCondition = capitalizeFirstLetter(weather.condition.description);
+				if (config._translateCondition) {
+					descriptionCondition = capitalizeFirstLetter(_(weather.condition.description));
+				}
 			}
 
 			// Displaying Location   
 			let location = "";
 			if (weather.location.city != null && weather.location.country != null) {
-			location = weather.location.city + ", " + weather.location.country;
+				location = weather.location.city + ", " + weather.location.country;
 			} else {
-			location = Math.round(weather.coord.lat * 10000) / 10000 + ", " + Math.round(weather.coord.lon * 10000) / 10000;
+				location = Math.round(weather.coord.lat * 10000) / 10000 + ", " + Math.round(weather.coord.lon * 10000) / 10000;
 			}
 
 			// Overriding Location
 			if (nonempty(config._locationLabelOverride)) {
-			location = config._locationLabelOverride;
+				location = config._locationLabelOverride;
 			}
 
 			this.app.SetAppletTooltip(location + " - " + _("As of") + " " + AwareDateString(weather.date, this.app.currentLocale, config._show24Hours));
@@ -1130,7 +1140,7 @@ class UI {
 			// Weather icon
 			let iconname = weather.condition.icon;
 			if (iconname == null) {
-			iconname = "weather-severe-alert";
+				iconname = "weather-severe-alert";
 			}
 
 			// Popup menu icons
@@ -1149,40 +1159,42 @@ class UI {
 			// Temperature
 			let temp = "";
 			if (weather.temperature != null) {
-			temp = TempToUserConfig(weather.temperature, config._temperatureUnit, config._tempRussianStyle);
-			this._currentWeatherTemperature.text = temp + " " + this.unitToUnicode(config._temperatureUnit);
+				temp = TempToUserConfig(weather.temperature, config._temperatureUnit, config._tempRussianStyle);
+				this._currentWeatherTemperature.text = temp + " " + this.unitToUnicode(config._temperatureUnit);
 			}
 
 			// Applet panel label
 			let label = "";
+			// Horizontal panels
 			if (this.app.orientation != Side.LEFT && this.app.orientation != Side.RIGHT) {
-			if (config._showCommentInPanel) {
-				label += mainCondition;
-			}
-			if (config._showTextInPanel) {
-				if (label != "") {
-				label += " ";
+				if (config._showCommentInPanel) {
+					label += mainCondition;
 				}
-				label += (temp + ' ' + this.unitToUnicode(config._temperatureUnit));
+				if (config._showTextInPanel) {
+					if (label != "") {
+						label += " ";
+					}
+					label += (temp + ' ' + this.unitToUnicode(config._temperatureUnit));
+				}
 			}
-			}
+			// Vertical panels
 			else {
-			if (config._showTextInPanel) {
-				label = temp;
-				// Vertical panel width is more than this value then we has space
-				// to show units
-				if (this.app.GetPanelHeight() >= 35) {
-				label += this.unitToUnicode(config._temperatureUnit);
+				if (config._showTextInPanel) {
+					label = temp;
+					// Vertical panel width is more than this value then we has space
+					// to show units
+					if (this.app.GetPanelHeight() >= 35) {
+						label += this.unitToUnicode(config._temperatureUnit);
+					}
 				}
-			}
 			}
 
 			// Overriding temperature panel label
 			if (nonempty(config._tempTextOverride)) {
-			label = config._tempTextOverride
-				.replace("{t}", temp)
-				.replace("{u}", this.unitToUnicode(config._temperatureUnit))
-				.replace("{c}", mainCondition);
+				label = config._tempTextOverride
+					.replace("{t}", temp)
+					.replace("{u}", this.unitToUnicode(config._temperatureUnit))
+					.replace("{c}", mainCondition);
 			}
 
 			// Set Applet Label, even if the variables are empty
@@ -1190,14 +1202,14 @@ class UI {
 
 			// Displaying humidity
 			if (weather.humidity != null) {
-			this._currentWeatherHumidity.text = Math.round(weather.humidity) + "%";
+				this._currentWeatherHumidity.text = Math.round(weather.humidity) + "%";
 			}
 
 			// Wind
 			let wind_direction = compassDirection(weather.wind.degree);
 			this._currentWeatherWind.text =
-			(wind_direction != undefined ? _(wind_direction) + " " : "") +
-			MPStoUserUnits(weather.wind.speed, config._windSpeedUnit);
+				(wind_direction != undefined ? _(wind_direction) + " " : "") +
+				MPStoUserUnits(weather.wind.speed, config._windSpeedUnit);
 			// No need to display unit to Beaufort scale
 			if (config._windSpeedUnit != "Beaufort") this._currentWeatherWind.text += " " + _(config._windSpeedUnit);
 			
@@ -1205,26 +1217,25 @@ class UI {
 			this._currentWeatherApiUnique.text = "";
 			this._currentWeatherApiUniqueCap.text = "";
 			if (!!weather.extra_field) {
-			this._currentWeatherApiUniqueCap.text = _(weather.extra_field.name) + ":";
-			let value;
-			switch (weather.extra_field.type) {
-				case "percent":
-				value = weather.extra_field.value.toString() + "%";
-				break;
-				case "temperature":
-				value = TempToUserConfig(weather.extra_field.value, config._temperatureUnit, config._tempRussianStyle) + " " + this.unitToUnicode(config._temperatureUnit);
-				break;
-				default:
-				value = _(weather.extra_field.value);
-				break;
-			}
-			this._currentWeatherApiUnique.text = value;
-
+				this._currentWeatherApiUniqueCap.text = _(weather.extra_field.name) + ":";
+				let value;
+				switch (weather.extra_field.type) {
+					case "percent":
+						value = weather.extra_field.value.toString() + "%";
+						break;
+					case "temperature":
+						value = TempToUserConfig(weather.extra_field.value, config._temperatureUnit, config._tempRussianStyle) + " " + this.unitToUnicode(config._temperatureUnit);
+						break;
+					default:
+						value = _(weather.extra_field.value);
+					break;
+				}
+				this._currentWeatherApiUnique.text = value;
 			}
 
 			// Pressure
 			if (weather.pressure != null) {
-			this._currentWeatherPressure.text = PressToUserUnits(weather.pressure, config._pressureUnit) + ' ' + _(config._pressureUnit);
+				this._currentWeatherPressure.text = PressToUserUnits(weather.pressure, config._pressureUnit) + ' ' + _(config._pressureUnit);
 			}
 
 			// Location
@@ -1236,8 +1247,8 @@ class UI {
 			let sunriseText = "";
 			let sunsetText = "";
 			if (weather.sunrise != null && weather.sunset != null && config._showSunrise) {
-			sunriseText = (GetHoursMinutes(weather.sunrise, this.app.currentLocale, config._show24Hours, weather.location.timeZone));
-			sunsetText = (GetHoursMinutes(weather.sunset, this.app.currentLocale, config._show24Hours, weather.location.timeZone));
+				sunriseText = (GetHoursMinutes(weather.sunrise, this.app.currentLocale, config._show24Hours, weather.location.timeZone));
+				sunsetText = (GetHoursMinutes(weather.sunset, this.app.currentLocale, config._show24Hours, weather.location.timeZone));
 			}
 
 			this._currentWeatherSunrise.text = sunriseText;
@@ -1405,8 +1416,8 @@ class UI {
 	
 		// Sunset/sunrise
 		this._currentWeatherSummary = new Label({ text: _('Loading ...'), style_class: STYLE_SUMMARY })
-		this._currentWeatherSunrise = new Label({text: ELLIPSIS, style: this.GetColorStyle()})
-		this._currentWeatherSunset = new Label({text: ELLIPSIS, style: this.GetColorStyle()})
+		this._currentWeatherSunrise = new Label({text: ELLIPSIS, style: this.GetTextColorStyle()})
+		this._currentWeatherSunset = new Label({text: ELLIPSIS, style: this.GetTextColorStyle()})
 		
 		let sunriseBox = new BoxLayout();
 		let sunsetBox = new BoxLayout();
@@ -1415,14 +1426,14 @@ class UI {
 				icon_name: "sunset-symbolic",
 				icon_type: IconType.SYMBOLIC,
 				icon_size: 25,
-				style: this.GetColorStyle()
+				style: this.GetTextColorStyle()
 			});
 
 			let sunriseIcon = new Icon({
 				icon_name: "sunrise-symbolic",
 				icon_type: IconType.SYMBOLIC,
 				icon_size: 25,
-				style: this.GetColorStyle()
+				style: this.GetTextColorStyle()
 			});
 
 			sunriseBox.add_actor(sunriseIcon);
@@ -1465,14 +1476,14 @@ class UI {
 		this._currentWeatherWind = new Label(textOb)
 		this._currentWeatherApiUnique = new Label({ text: '' })
 		// APi Unique Caption
-		this._currentWeatherApiUniqueCap = new Label({ text: '', style: this.GetColorStyle()});
+		this._currentWeatherApiUniqueCap = new Label({ text: '', style: this.GetTextColorStyle()});
 	
 		let rb_captions = new BoxLayout({ vertical: true, style_class: STYLE_DATABOX_CAPTIONS })
 		let rb_values = new BoxLayout({vertical: true, style_class: STYLE_DATABOX_VALUES })
-		rb_captions.add_actor(new Label({ text: _('Temperature:'), style: this.GetColorStyle()}));
-		rb_captions.add_actor(new Label({ text: _('Humidity:'), style: this.GetColorStyle()}));
-		rb_captions.add_actor(new Label({ text: _('Pressure:'), style: this.GetColorStyle()}));
-		rb_captions.add_actor(new Label({ text: _('Wind:'), style: this.GetColorStyle()}));
+		rb_captions.add_actor(new Label({ text: _('Temperature:'), style: this.GetTextColorStyle()}));
+		rb_captions.add_actor(new Label({ text: _('Humidity:'), style: this.GetTextColorStyle()}));
+		rb_captions.add_actor(new Label({ text: _('Pressure:'), style: this.GetTextColorStyle()}));
+		rb_captions.add_actor(new Label({ text: _('Wind:'), style: this.GetTextColorStyle()}));
 		rb_captions.add_actor(this._currentWeatherApiUniqueCap);
 		rb_values.add_actor(this._currentWeatherTemperature);
 		rb_values.add_actor(this._currentWeatherHumidity);
@@ -1552,7 +1563,7 @@ class UI {
 			forecastWeather.Day = new Label({
 				style_class: STYLE_FORECAST_DAY,
 				reactive: true,
-				style: this.GetColorStyle()
+				style: this.GetTextColorStyle()
 			});
 
 			forecastWeather.Summary = new Label({
@@ -1652,7 +1663,7 @@ class UI {
 			let box = new BoxLayout({vertical: true});
 			this._hourlyForecasts.push({
 				// Override color on light theme for grey text
-				Hour: new Label({text: "Hour", style_class: "hourly-time", style: this.GetColorStyle()}),
+				Hour: new Label({text: "Hour", style_class: "hourly-time", style: this.GetTextColorStyle()}),
 				Icon: new Icon({
 					icon_type: config.IconType(),
 					icon_size: 24,
@@ -1750,7 +1761,6 @@ class Config {
 
 	public keybinding: any;
 
-	public rebuildTriggeredWhileLocked = false;
 	/** Timeout */
 	private doneTypingLocation: any = null;
 
@@ -1961,10 +1971,10 @@ class WeatherLoop {
 	private IsStray(): boolean {
 		if (this.appletRemoved == true) return true;
 		if (this.GUID != weatherAppletGUIDs[this.instanceID]) {
-		this.app.log.Debug("Applet GUID: " + this.GUID);
-		this.app.log.Debug("GUID stored globally: " +  weatherAppletGUIDs[this.instanceID]);
-		this.app.log.Print("GUID mismatch, terminating applet")
-		return true;
+			this.app.log.Debug("Applet GUID: " + this.GUID);
+			this.app.log.Debug("GUID stored globally: " +  weatherAppletGUIDs[this.instanceID]);
+			this.app.log.Print("GUID mismatch, terminating applet")
+			return true;
 		}
 		return false;
 	}

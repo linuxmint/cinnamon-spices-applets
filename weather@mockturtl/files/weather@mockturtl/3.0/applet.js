@@ -211,14 +211,14 @@ var WeatherApplet = (function (_super) {
         this.set_applet_label(_("..."));
         this.set_applet_tooltip(_("Click to open"));
     };
-    WeatherApplet.prototype.Lock = function () {
+    WeatherApplet.prototype.Locked = function () {
         return this.lock;
     };
     WeatherApplet.prototype.Unlock = function () {
         this.lock = false;
-        if (this.config.rebuildTriggeredWhileLocked) {
+        if (this.refreshTriggeredWhileLocked) {
             this.log.Print("Refreshing triggered by config change while refrehing, starting now...");
-            this.config.rebuildTriggeredWhileLocked = false;
+            this.refreshTriggeredWhileLocked = false;
             this.refreshAndRebuild();
         }
     };
@@ -231,7 +231,7 @@ var WeatherApplet = (function (_super) {
     };
     WeatherApplet.prototype.refreshAndRebuild = function () {
         this.loop.Resume();
-        if (this.Lock()) {
+        if (this.Locked()) {
             this.refreshTriggeredWhileLocked = true;
             return;
         }
@@ -248,10 +248,14 @@ var WeatherApplet = (function (_super) {
                             var message = Message.new('GET', query);
                             _this.log.Debug("URL called: " + query);
                             _this._httpSession.queue_message(message, function (session, message) {
+                                global.log("Message received");
                                 var error = (errorCallback != null) ? errorCallback(message) : null;
+                                global.log("errorcallback finished");
                                 if (error != null) {
+                                    global.log("there is an error, " + JSON.stringify(error, null, 2));
                                     _this.HandleError(error);
                                     reject({ code: -1, message: "bad api response", data: null, reason_phrase: null });
+                                    global.log("rejected payload");
                                     return;
                                 }
                                 if (!message) {
@@ -493,8 +497,8 @@ var WeatherApplet = (function (_super) {
                             this.log.Print("Refreshing in progress, refresh skipped.");
                             return [2, "locked"];
                         }
-                        this.encounteredError = false;
                         this.lock = true;
+                        this.encounteredError = false;
                         locationData = null;
                         _a.label = 1;
                     case 1:
@@ -783,7 +787,7 @@ var UI = (function () {
         var hex = this.menu.actor.get_theme_node().get_foreground_color().to_string().substring(0, 7);
         return hex;
     };
-    UI.prototype.GetColorStyle = function () {
+    UI.prototype.GetTextColorStyle = function () {
         var hexColor = null;
         if (this.lightTheme) {
             hexColor = shadeHexColor(this.ForegroundColor(), -0.40);
@@ -1186,8 +1190,8 @@ var UI = (function () {
                 this.app.OpenUrl(this._currentWeatherLocation);
         }));
         this._currentWeatherSummary = new Label({ text: _('Loading ...'), style_class: STYLE_SUMMARY });
-        this._currentWeatherSunrise = new Label({ text: ELLIPSIS, style: this.GetColorStyle() });
-        this._currentWeatherSunset = new Label({ text: ELLIPSIS, style: this.GetColorStyle() });
+        this._currentWeatherSunrise = new Label({ text: ELLIPSIS, style: this.GetTextColorStyle() });
+        this._currentWeatherSunset = new Label({ text: ELLIPSIS, style: this.GetTextColorStyle() });
         var sunriseBox = new BoxLayout();
         var sunsetBox = new BoxLayout();
         if (config._showSunrise) {
@@ -1195,13 +1199,13 @@ var UI = (function () {
                 icon_name: "sunset-symbolic",
                 icon_type: IconType.SYMBOLIC,
                 icon_size: 25,
-                style: this.GetColorStyle()
+                style: this.GetTextColorStyle()
             });
             var sunriseIcon = new Icon({
                 icon_name: "sunrise-symbolic",
                 icon_type: IconType.SYMBOLIC,
                 icon_size: 25,
-                style: this.GetColorStyle()
+                style: this.GetTextColorStyle()
             });
             sunriseBox.add_actor(sunriseIcon);
             sunsetBox.add_actor(sunsetIcon);
@@ -1233,13 +1237,13 @@ var UI = (function () {
         this._currentWeatherPressure = new Label(textOb);
         this._currentWeatherWind = new Label(textOb);
         this._currentWeatherApiUnique = new Label({ text: '' });
-        this._currentWeatherApiUniqueCap = new Label({ text: '', style: this.GetColorStyle() });
+        this._currentWeatherApiUniqueCap = new Label({ text: '', style: this.GetTextColorStyle() });
         var rb_captions = new BoxLayout({ vertical: true, style_class: STYLE_DATABOX_CAPTIONS });
         var rb_values = new BoxLayout({ vertical: true, style_class: STYLE_DATABOX_VALUES });
-        rb_captions.add_actor(new Label({ text: _('Temperature:'), style: this.GetColorStyle() }));
-        rb_captions.add_actor(new Label({ text: _('Humidity:'), style: this.GetColorStyle() }));
-        rb_captions.add_actor(new Label({ text: _('Pressure:'), style: this.GetColorStyle() }));
-        rb_captions.add_actor(new Label({ text: _('Wind:'), style: this.GetColorStyle() }));
+        rb_captions.add_actor(new Label({ text: _('Temperature:'), style: this.GetTextColorStyle() }));
+        rb_captions.add_actor(new Label({ text: _('Humidity:'), style: this.GetTextColorStyle() }));
+        rb_captions.add_actor(new Label({ text: _('Pressure:'), style: this.GetTextColorStyle() }));
+        rb_captions.add_actor(new Label({ text: _('Wind:'), style: this.GetTextColorStyle() }));
         rb_captions.add_actor(this._currentWeatherApiUniqueCap);
         rb_values.add_actor(this._currentWeatherTemperature);
         rb_values.add_actor(this._currentWeatherHumidity);
@@ -1296,7 +1300,7 @@ var UI = (function () {
             forecastWeather.Day = new Label({
                 style_class: STYLE_FORECAST_DAY,
                 reactive: true,
-                style: this.GetColorStyle()
+                style: this.GetTextColorStyle()
             });
             forecastWeather.Summary = new Label({
                 style_class: STYLE_FORECAST_SUMMARY,
@@ -1377,7 +1381,7 @@ var UI = (function () {
         for (var index = 0; index < hours; index++) {
             var box = new BoxLayout({ vertical: true });
             this._hourlyForecasts.push({
-                Hour: new Label({ text: "Hour", style_class: "hourly-time", style: this.GetColorStyle() }),
+                Hour: new Label({ text: "Hour", style_class: "hourly-time", style: this.GetTextColorStyle() }),
                 Icon: new Icon({
                     icon_type: config.IconType(),
                     icon_size: 24,
@@ -1437,7 +1441,6 @@ var Config = (function () {
             USE_CUSTOM_MENUICONS: "useCustomMenuIcons",
             RUSSIAN_STYLE: "tempRussianStyle",
         };
-        this.rebuildTriggeredWhileLocked = false;
         this.doneTypingLocation = null;
         this.app = app;
         this.settings = new AppletSettings(this, UUID, instanceID);
