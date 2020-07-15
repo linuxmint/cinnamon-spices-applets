@@ -149,8 +149,8 @@
 			"Weatherbit (key needed)": "Weatherbit",
 			"Yahoo": "Yahoo",
 			"Climacell (key needed)": "Climacell",
-			"Met Office UK": "Met Office UK",
-			"US National Weather": "US Weather"
+			"Met Office UK (UK only)": "Met Office UK",
+			"US National Weather (US only)": "US Weather"
 		}
 	},
 	"apiKey": {
