@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cinnamenu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-13 18:22+0100\n"
-"PO-Revision-Date: 2020-07-13 22:21+0100\n"
+"POT-Creation-Date: 2020-07-15 12:39+0100\n"
+"PO-Revision-Date: 2020-07-15 15:25+0100\n"
 "Last-Translator: Livedevelop Live User <mortaromarcello@gmail.com>\n"
 "Language-Team: \n"
 "Language: it\n"
@@ -105,11 +105,6 @@ msgstr "Esci"
 msgid "Shutdown the computer"
 msgstr "Spegni il computer"
 
-#: 3.2/placeDisplay.js:57 4.0/placeDisplay.js:35
-#, javascript-format
-msgid "Failed to launch \"%s\""
-msgstr "Impossibile avviare \"%s\""
-
 #: 3.2/placeDisplay.js:146 4.0/placeDisplay.js:102
 msgid "Home"
 msgstr "Home"
@@ -135,8 +130,10 @@ msgstr "Aggiungi al pannello"
 msgid "Add to desktop"
 msgstr "Aggiungi al desktop"
 
-#: 3.2/buttons.js:1054
-msgid "Remove from favorites"
+#: 3.2/buttons.js:1054 4.0/buttons.js:849
+#, fuzzy
+#| msgid "Remove from favorites"
+msgid "Remove favorite"
 msgstr "Rimuovi dai preferiti"
 
 #: 3.2/buttons.js:1056 4.0/buttons.js:852
@@ -150,12 +147,6 @@ msgstr "Disinstalla"
 #: 4.0/applet.js:233 4.0/applet.js:1230
 msgid "Please wait..."
 msgstr ""
-
-#: 4.0/buttons.js:849
-#, fuzzy
-#| msgid "Remove from favorites"
-msgid "Remove favorite"
-msgstr "Rimuovi dai preferiti"
 
 #. metadata.json->name
 #. 3.2->settings-schema.json->cinnamenuProvidersSection->title
@@ -228,24 +219,16 @@ msgid "Content"
 msgstr "Contenuto"
 
 #. 3.2->settings-schema.json->privacy-settings-button->description
-msgid "Toggle recent files"
-msgstr "Attiva/Disattiva i file recenti"
-
-#. 3.2->settings-schema.json->privacy-settings-button->tooltip
-#. 4.0->settings-schema.json->privacy-settings-button->tooltip
-msgid "Press this button to customize your privacy settings."
-msgstr ""
-"Premi questo pulsante per personalizzare le tue impostazioni sulla privacy."
+#. 4.0->settings-schema.json->privacy-settings-button->description
+#, fuzzy
+#| msgid "Recent Files"
+msgid "Recent files settings"
+msgstr "Recenti"
 
 #. 3.2->settings-schema.json->menu-editor-button->description
 #. 4.0->settings-schema.json->menu-editor-button->description
 msgid "Open the menu editor"
 msgstr "Apri l'editor del menù"
-
-#. 3.2->settings-schema.json->menu-editor-button->tooltip
-#. 4.0->settings-schema.json->menu-editor-button->tooltip
-msgid "Press this button to customize your menu entries."
-msgstr "Premere questo pulsante per personalizzare le voci del menù."
 
 #. 3.2->settings-schema.json->resetCategoryOrder-button->description
 #. 4.0->settings-schema.json->resetCategoryOrder-button->description
@@ -259,25 +242,33 @@ msgstr "Usa un'icona personalizzata"
 
 #. 3.2->settings-schema.json->menu-icon-custom->tooltip
 #. 4.0->settings-schema.json->menu-icon-custom->tooltip
-msgid "Unchecking this allows the theme to set the icon"
-msgstr "Deselezionando questa opzione si consente al tema di impostare l'icona"
+#, fuzzy
+#| msgid "Use a custom icon"
+msgid "Use a custom icon in the panel"
+msgstr "Usa un'icona personalizzata"
 
 #. 3.2->settings-schema.json->menu-icon->description
-#. 4.0->settings-schema.json->menu-icon->description
-msgid "Icon"
-msgstr "Icona"
-
 #. 3.2->settings-schema.json->menu-icon->tooltip
+#. 4.0->settings-schema.json->menu-icon->description
 #. 4.0->settings-schema.json->menu-icon->tooltip
-msgid "Select an icon to show in the panel."
-msgstr "Seleziona un'icona da mostrare nel pannello."
+#, fuzzy
+#| msgid "Panel"
+msgid "Panel icon"
+msgstr "Pannello"
 
 #. 3.2->settings-schema.json->menu-label->description
-#. 3.2->settings-schema.json->menu-label->tooltip
 #. 4.0->settings-schema.json->menu-label->description
+#, fuzzy
+#| msgid "Panel"
+msgid "Panel text"
+msgstr "Pannello"
+
+#. 3.2->settings-schema.json->menu-label->tooltip
 #. 4.0->settings-schema.json->menu-label->tooltip
-msgid "Set the custom menu button icon name"
-msgstr "Imposta il nome dell'icona sul pulsante del menù personalizzato"
+#, fuzzy
+#| msgid "Select an icon to show in the panel."
+msgid "Text to show beside the panel icon"
+msgstr "Seleziona un'icona da mostrare nel pannello."
 
 #. 3.2->settings-schema.json->category-icon-size->units
 #. 3.2->settings-schema.json->apps-list-icon-size->units
@@ -316,13 +307,17 @@ msgstr "Scorciatoia da tastiera per aprire e chiudere il menù"
 
 #. 3.2->settings-schema.json->activate-on-hover->description
 #. 4.0->settings-schema.json->activate-on-hover->description
-msgid "Open the menu when I move my mouse over it"
-msgstr "Apri il menù al passaggio del mouse"
+#, fuzzy
+#| msgid "Open the menu editor"
+msgid "Open menu on hover"
+msgstr "Apri l'editor del menù"
 
 #. 3.2->settings-schema.json->activate-on-hover->tooltip
 #. 4.0->settings-schema.json->activate-on-hover->tooltip
-msgid "Enable opening the menu when the mouse enters the applet"
-msgstr "Abilita l'apertura del menù quando il mouse entra nell'applet"
+#, fuzzy
+#| msgid "Open the menu when I move my mouse over it"
+msgid "Open the menu when I move my mouse over the panel icon"
+msgstr "Apri il menù al passaggio del mouse"
 
 #. 3.2->settings-schema.json->hover-delay->units
 #. 3.2->settings-schema.json->tooltip-delay->units
@@ -332,13 +327,10 @@ msgstr "millisecondi"
 
 #. 3.2->settings-schema.json->hover-delay->description
 #. 4.0->settings-schema.json->hover-delay->description
-msgid "Menu hover delay:"
+#, fuzzy
+#| msgid "Menu hover delay:"
+msgid "Menu hover delay"
 msgstr "Ritardo passaggio sul menù:"
-
-#. 3.2->settings-schema.json->hover-delay->tooltip
-#. 4.0->settings-schema.json->hover-delay->tooltip
-msgid "Delay between switching categories"
-msgstr "Ritardo tra il cambio di categorie"
 
 #. 3.2->settings-schema.json->enable-animation->description
 #. 4.0->settings-schema.json->enable-animation->description
@@ -347,7 +339,9 @@ msgstr "Usa animazioni del menù"
 
 #. 3.2->settings-schema.json->enable-animation->tooltip
 #. 4.0->settings-schema.json->enable-animation->tooltip
-msgid "Allow the menu to animate on open and close"
+#, fuzzy
+#| msgid "Allow the menu to animate on open and close"
+msgid "Animate the menu on open and close"
 msgstr "Consenti al menù di animarsi all'apertura e alla chiusura"
 
 #. 3.2->settings-schema.json->category-click->description
@@ -357,24 +351,22 @@ msgstr "Attiva le categorie al clic"
 
 #. 3.2->settings-schema.json->category-click->tooltip
 #. 4.0->settings-schema.json->category-click->tooltip
-msgid ""
-"When enabled, category views are activated on click instead of on hover."
-msgstr ""
-"Se abilitato, le viste delle categorie vengono attivate al clic anziché al "
-"passaggio del mouse."
+#, fuzzy
+#| msgid "Activate categories on click"
+msgid "Activate categories on click instead of on hover"
+msgstr "Attiva le categorie al clic"
 
 #. 3.2->settings-schema.json->enable-autoscroll->description
 #. 4.0->settings-schema.json->enable-autoscroll->description
-msgid "Enable autoscrolling in application list"
+#, fuzzy
+#| msgid "Enable autoscrolling in application list"
+msgid "Enable autoscrolling"
 msgstr "Abilita scorrimento automatico nell'elenco delle applicazioni"
 
 #. 3.2->settings-schema.json->enable-autoscroll->tooltip
 #. 4.0->settings-schema.json->enable-autoscroll->tooltip
-msgid ""
-"Choose whether or not to enable smooth autoscrolling in the application list."
-msgstr ""
-"Scegli se abilitare o meno lo scorrimento automatico nell'elenco delle "
-"applicazioni."
+msgid "Enable autoscrolling in application list"
+msgstr "Abilita scorrimento automatico nell'elenco delle applicazioni"
 
 #. 3.2->settings-schema.json->enable-bookmarks->description
 #. 4.0->settings-schema.json->enable-bookmarks->description
@@ -383,18 +375,12 @@ msgstr "Mostra segnalibri Web"
 
 #. 3.2->settings-schema.json->enable-bookmarks->tooltip
 #. 4.0->settings-schema.json->enable-bookmarks->tooltip
-msgid "Choose whether or not bookmarks are indexed in the menu."
-msgstr "Scegli se i segnalibri devono essere indicizzati nel menù."
+msgid "Show your browser's web bookmarks in the menu"
+msgstr ""
 
 #. 3.2->settings-schema.json->enable-windows->description
 msgid "Enable searching of open windows"
 msgstr "Abilita la ricerca di finestre aperte"
-
-#. 3.2->settings-schema.json->enable-windows->tooltip
-msgid "Choose whether or not open windows are indexed in menu searches."
-msgstr ""
-"Scegli se le finestre aperte vengono indicizzate o meno nelle ricerche nei "
-"menù."
 
 #. 3.2->settings-schema.json->enable-search-providers->description
 #. 4.0->settings-schema.json->enable-search-providers->description
@@ -403,8 +389,11 @@ msgstr "Abilita i provider di ricerca"
 
 #. 3.2->settings-schema.json->enable-search-providers->tooltip
 #. 4.0->settings-schema.json->enable-search-providers->tooltip
-msgid ""
-"Choose whether or not search provider results are indexed in menu searches."
+#, fuzzy
+#| msgid ""
+#| "Choose whether or not search provider results are indexed in menu "
+#| "searches."
+msgid "Include search provider results in searches"
 msgstr ""
 "Scegliere se indicizzare o meno i risultati del provider di ricerca nelle "
 "ricerche di menù."
@@ -448,63 +437,39 @@ msgstr "Mostra segnalibri e luoghi"
 
 #. 3.2->settings-schema.json->show-places->tooltip
 #. 4.0->settings-schema.json->show-places->tooltip
-msgid "Choose whether or not to show bookmarks and places in the menu."
-msgstr "Scegli se mostrare o meno i segnalibri e i luoghi nel menù."
+#, fuzzy
+#| msgid "Show bookmarks and places"
+msgid "Show bookmarks and places category in the menu"
+msgstr "Mostra segnalibri e luoghi"
 
 #. 3.2->settings-schema.json->show-application-icons->description
+#. 3.2->settings-schema.json->show-application-icons->tooltip
 #. 4.0->settings-schema.json->show-application-icons->description
+#. 4.0->settings-schema.json->show-application-icons->tooltip
 msgid "Show application icons"
 msgstr "Mostra le icone delle applicazioni"
 
-#. 3.2->settings-schema.json->show-application-icons->tooltip
-#. 4.0->settings-schema.json->show-application-icons->tooltip
-msgid "Choose whether or not to show icons on applications."
-msgstr "Scegli se mostrare o meno le icone sulle applicazioni."
-
 #. 3.2->settings-schema.json->show-category-icons->description
+#. 3.2->settings-schema.json->show-category-icons->tooltip
 #. 4.0->settings-schema.json->show-category-icons->description
+#. 4.0->settings-schema.json->show-category-icons->tooltip
 msgid "Show category icons"
 msgstr "Mostra le icone di categoria"
 
-#. 3.2->settings-schema.json->show-category-icons->tooltip
-#. 4.0->settings-schema.json->show-category-icons->tooltip
-msgid "Choose whether or not to show icons on categories."
-msgstr "Scegli se mostrare o meno le icone sulle categorie."
-
 #. 3.2->settings-schema.json->show-apps-description-on-buttons->description
+#. 3.2->settings-schema.json->show-apps-description-on-buttons->tooltip
 msgid "Show application descriptions under titles"
 msgstr "Mostra le descrizioni delle applicazioni sotto i titoli"
 
-#. 3.2->settings-schema.json->show-apps-description-on-buttons->tooltip
-msgid ""
-"Choose whether or not to show the application description on the application "
-"buttons."
-msgstr ""
-"Scegliere se mostrare o meno la descrizione dell'applicazione sui pulsanti "
-"dell'applicazione."
-
 #. 3.2->settings-schema.json->show-tooltips->description
+#. 3.2->settings-schema.json->show-tooltips->tooltip
 msgid "Show tooltips"
 msgstr "Mostra suggerimenti"
 
-#. 3.2->settings-schema.json->show-tooltips->tooltip
-msgid ""
-"When enabled, tooltips containing the item's name or description is shown "
-"when hovered over."
-msgstr ""
-"Se abilitato, vengono visualizzati i suggerimenti contenenti il nome o la "
-"descrizione dell'oggetto quando si passa il mouse sopra."
-
 #. 3.2->settings-schema.json->tooltip-delay->description
+#. 3.2->settings-schema.json->tooltip-delay->tooltip
 msgid "Tooltip delay"
 msgstr "Ritardo dei suggerimenti"
-
-#. 3.2->settings-schema.json->tooltip-delay->tooltip
-msgid ""
-"The delay time in milliseconds for tooltips when hovering over a menu item."
-msgstr ""
-"Il tempo di ritardo in millisecondi per i suggerimenti quando si passa con "
-"il mouse su una voce di menù."
 
 #. 3.2->settings-schema.json->enable-custom-menu-height->description
 #. 3.2->settings-schema.json->enable-custom-menu-height->tooltip
@@ -562,7 +527,7 @@ msgstr ""
 #| msgid ""
 #| "Choose whether or not to show the application description on the "
 #| "application buttons."
-msgid "Choose where to show application descriptions."
+msgid "Choose where to show application descriptions"
 msgstr ""
 "Scegliere se mostrare o meno la descrizione dell'applicazione sui pulsanti "
 "dell'applicazione."
@@ -588,22 +553,101 @@ msgid "Right"
 msgstr ""
 
 #. 4.0->settings-schema.json->powergroup-placement->tooltip
-msgid "Choose where to show the session (quit, logout, etc.) buttons."
+msgid "Choose where to show the session (quit, logout, etc.) buttons"
 msgstr ""
 
 #. 4.0->settings-schema.json->add-favorites->description
-msgid "Add favorites to session buttons."
+msgid "Add favorites to session buttons"
 msgstr ""
 
 #. 4.0->settings-schema.json->add-favorites->tooltip
-msgid "Show your favorite app icons next to the session buttons."
+msgid "Show your favorite app icons next to the session buttons"
 msgstr ""
 
-#. 4.0->settings-schema.json->privacy-settings-button->description
-#, fuzzy
-#| msgid "Recent Files"
-msgid "Recent files settings"
-msgstr "Recenti"
+#, javascript-format
+#~ msgid "Failed to launch \"%s\""
+#~ msgstr "Impossibile avviare \"%s\""
+
+#~ msgid "Remove from favorites"
+#~ msgstr "Rimuovi dai preferiti"
+
+#~ msgid "Toggle recent files"
+#~ msgstr "Attiva/Disattiva i file recenti"
+
+#~ msgid "Press this button to customize your privacy settings."
+#~ msgstr ""
+#~ "Premi questo pulsante per personalizzare le tue impostazioni sulla "
+#~ "privacy."
+
+#~ msgid "Press this button to customize your menu entries."
+#~ msgstr "Premere questo pulsante per personalizzare le voci del menù."
+
+#~ msgid "Unchecking this allows the theme to set the icon"
+#~ msgstr ""
+#~ "Deselezionando questa opzione si consente al tema di impostare l'icona"
+
+#~ msgid "Icon"
+#~ msgstr "Icona"
+
+#~ msgid "Set the custom menu button icon name"
+#~ msgstr "Imposta il nome dell'icona sul pulsante del menù personalizzato"
+
+#~ msgid "Enable opening the menu when the mouse enters the applet"
+#~ msgstr "Abilita l'apertura del menù quando il mouse entra nell'applet"
+
+#~ msgid "Delay between switching categories"
+#~ msgstr "Ritardo tra il cambio di categorie"
+
+#~ msgid ""
+#~ "When enabled, category views are activated on click instead of on hover."
+#~ msgstr ""
+#~ "Se abilitato, le viste delle categorie vengono attivate al clic anziché "
+#~ "al passaggio del mouse."
+
+#~ msgid ""
+#~ "Choose whether or not to enable smooth autoscrolling in the application "
+#~ "list."
+#~ msgstr ""
+#~ "Scegli se abilitare o meno lo scorrimento automatico nell'elenco delle "
+#~ "applicazioni."
+
+#~ msgid "Choose whether or not bookmarks are indexed in the menu."
+#~ msgstr "Scegli se i segnalibri devono essere indicizzati nel menù."
+
+#~ msgid "Choose whether or not open windows are indexed in menu searches."
+#~ msgstr ""
+#~ "Scegli se le finestre aperte vengono indicizzate o meno nelle ricerche "
+#~ "nei menù."
+
+#~ msgid "Choose whether or not to show bookmarks and places in the menu."
+#~ msgstr "Scegli se mostrare o meno i segnalibri e i luoghi nel menù."
+
+#~ msgid "Choose whether or not to show icons on applications."
+#~ msgstr "Scegli se mostrare o meno le icone sulle applicazioni."
+
+#~ msgid "Choose whether or not to show icons on categories."
+#~ msgstr "Scegli se mostrare o meno le icone sulle categorie."
+
+#~ msgid ""
+#~ "Choose whether or not to show the application description on the "
+#~ "application buttons."
+#~ msgstr ""
+#~ "Scegliere se mostrare o meno la descrizione dell'applicazione sui "
+#~ "pulsanti dell'applicazione."
+
+#~ msgid ""
+#~ "When enabled, tooltips containing the item's name or description is shown "
+#~ "when hovered over."
+#~ msgstr ""
+#~ "Se abilitato, vengono visualizzati i suggerimenti contenenti il nome o la "
+#~ "descrizione dell'oggetto quando si passa il mouse sopra."
+
+#~ msgid ""
+#~ "The delay time in milliseconds for tooltips when hovering over a menu "
+#~ "item."
+#~ msgstr ""
+#~ "Il tempo di ritardo in millisecondi per i suggerimenti quando si passa "
+#~ "con il mouse su una voce di menù."
 
 #~ msgid "Please provide your password to uninstall this application"
 #~ msgstr "Digita la password per disinstallare questa applicazione"

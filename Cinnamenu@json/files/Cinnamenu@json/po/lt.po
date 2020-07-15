@@ -1,153 +1,145 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-07-15 12:39+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
+"Language: lt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: lt\n"
 "X-Generator: Poedit 2.3.1\n"
 
-#. 3.2/applet.js:92 4.0/applet.js:40
+#: 3.2/applet.js:92 4.0/applet.js:40
 msgid "Type to search..."
 msgstr "Įveskite paiešką ..."
 
-#. 3.2/applet.js:157 4.0/applet.js:50
+#: 3.2/applet.js:157 4.0/applet.js:50
 msgid "Initializing"
 msgstr "Inicijavimas"
 
-#. 3.2/applet.js:284 4.0/buttons.js:26
+#: 3.2/applet.js:284 4.0/buttons.js:26
 msgid "No description available"
 msgstr "Aprašo nėra"
 
-#. 3.2/applet.js:977 4.0/applet.js:715
+#: 3.2/applet.js:977 4.0/applet.js:715
 msgid "All Applications"
 msgstr "Visos programos"
 
-#. 3.2/applet.js:1015 4.0/applet.js:756
+#: 3.2/applet.js:1015 4.0/applet.js:756
 msgid "Places"
 msgstr "Vietos"
 
-#. 3.2/applet.js:1016 4.0/applet.js:757
+#: 3.2/applet.js:1016 4.0/applet.js:757
 msgid "Recent Files"
 msgstr "Naujausi failai"
 
-#. 3.2/applet.js:1017 4.0/applet.js:758
+#: 3.2/applet.js:1017 4.0/applet.js:758
 msgid "Bookmarks"
 msgstr "Žymos"
 
-#. 3.2/applet.js:1018 4.0/applet.js:759
+#: 3.2/applet.js:1018 4.0/applet.js:759
 msgid "Favorite Apps"
 msgstr "Mėgstamiausios programos"
 
-#. 3.2/applet.js:1351 4.0/applet.js:1072
+#: 3.2/applet.js:1351 4.0/applet.js:1072
 msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
 msgstr "reikalingas„ gir1.2-gda-5.0 “paketas„ Firefox “ir„ Midori “žymėms."
 
-#. 3.2/applet.js:1415 4.0/applet.js:1121
+#: 3.2/applet.js:1415 4.0/applet.js:1121
 msgid "Clear List"
 msgstr "Išvalyti sąrašą"
 
-#. 3.2/applet.js:1426 4.0/applet.js:1128
+#: 3.2/applet.js:1426 4.0/applet.js:1128
 msgid "No recent documents"
 msgstr "Nėra naujausių dokumentų"
 
-#. 3.2/applet.js:2278
+#: 3.2/applet.js:2278
 msgid "Account details"
 msgstr "Sąskaitos duomenys"
 
-#. 3.2/applet.js:2285 3.2/buttons.js:1260
+#: 3.2/applet.js:2285 3.2/buttons.js:1260
 msgid "Grid View"
 msgstr "Tinklelis"
 
-#. 3.2/applet.js:2285 3.2/buttons.js:1254
+#: 3.2/applet.js:2285 3.2/buttons.js:1254
 msgid "List View"
 msgstr "Sąrašo vaizdas"
 
-#. 3.2/applet.js:2286 3.2/buttons.js:1261
+#: 3.2/applet.js:2286 3.2/buttons.js:1261
 msgid "Switch to grid view"
 msgstr "Perjungti į tinklelio rodinį"
 
-#. 3.2/applet.js:2286 3.2/buttons.js:1255
+#: 3.2/applet.js:2286 3.2/buttons.js:1255
 msgid "Switch to list view"
 msgstr ""
 
-#. 3.2/applet.js:2292 4.0/applet.js:2092
+#: 3.2/applet.js:2292 4.0/applet.js:2092
 msgid "Lock Screen"
 msgstr "Užrakinti ekraną"
 
-#. 3.2/applet.js:2293 4.0/applet.js:2093
+#: 3.2/applet.js:2293 4.0/applet.js:2093
 msgid "Lock the screen"
 msgstr "Užrakinti ekraną"
 
-#. 3.2/applet.js:2314 4.0/applet.js:2108
+#: 3.2/applet.js:2314 4.0/applet.js:2108
 msgid "Logout"
 msgstr "Atsijungti"
 
-#. 3.2/applet.js:2315 4.0/applet.js:2109
+#: 3.2/applet.js:2315 4.0/applet.js:2109
 msgid "Leave the session"
 msgstr "Palikti sesiją"
 
-#. 3.2/applet.js:2322 4.0/applet.js:2112
+#: 3.2/applet.js:2322 4.0/applet.js:2112
 msgid "Quit"
 msgstr "Baigti"
 
-#. 3.2/applet.js:2323 4.0/applet.js:2113
+#: 3.2/applet.js:2323 4.0/applet.js:2113
 msgid "Shutdown the computer"
 msgstr "Išjungti kompiuterį"
 
-#. 3.2/placeDisplay.js:57 4.0/placeDisplay.js:35
-#, javascript-format
-msgid "Failed to launch \"%s\""
-msgstr "Nepavyko paleisti \"%s\""
-
-#. 3.2/placeDisplay.js:146 4.0/placeDisplay.js:102
+#: 3.2/placeDisplay.js:146 4.0/placeDisplay.js:102
 msgid "Home"
 msgstr "Home"
 
-#. 3.2/placeDisplay.js:220 4.0/placeDisplay.js:144
+#: 3.2/placeDisplay.js:220 4.0/placeDisplay.js:144
 msgid "Computer"
 msgstr "Computer"
 
-#. 3.2/placeDisplay.js:224 4.0/placeDisplay.js:146
+#: 3.2/placeDisplay.js:224 4.0/placeDisplay.js:146
 msgid "Browse network"
 msgstr "Naršyti tinklą"
 
-#. 3.2/buttons.js:1045 3.2/buttons.js:1047 4.0/buttons.js:836
-#. 4.0/buttons.js:839
+#: 3.2/buttons.js:1045 3.2/buttons.js:1047 4.0/buttons.js:836
+#: 4.0/buttons.js:839
 msgid "Run with NVIDIA GPU"
 msgstr "Vykdyti su NVIDIA GPU"
 
-#. 3.2/buttons.js:1049 4.0/buttons.js:842
+#: 3.2/buttons.js:1049 4.0/buttons.js:842
 msgid "Add to panel"
 msgstr "Pridėti prie skydelio"
 
-#. 3.2/buttons.js:1051 4.0/buttons.js:845
+#: 3.2/buttons.js:1051 4.0/buttons.js:845
 msgid "Add to desktop"
 msgstr "Pridėti prie darbalaukio"
 
-#. 3.2/buttons.js:1054
-msgid "Remove from favorites"
-msgstr "Pašalinti iš parankinių"
+#: 3.2/buttons.js:1054 4.0/buttons.js:849
+msgid "Remove favorite"
+msgstr "Pašalinti mėgstamą"
 
-#. 3.2/buttons.js:1056 4.0/buttons.js:852
+#: 3.2/buttons.js:1056 4.0/buttons.js:852
 msgid "Add to favorites"
 msgstr "Įtraukti į adresyną"
 
-#. 3.2/buttons.js:1059 4.0/buttons.js:856
+#: 3.2/buttons.js:1059 4.0/buttons.js:856
 msgid "Uninstall"
 msgstr "Pašalinti"
 
-#. 4.0/applet.js:233 4.0/applet.js:1230
+#: 4.0/applet.js:233 4.0/applet.js:1230
 msgid "Please wait..."
 msgstr "Prašome palaukti ..."
-
-#. 4.0/buttons.js:849
-msgid "Remove favorite"
-msgstr "Pašalinti mėgstamą"
 
 #. metadata.json->name
 #. 3.2->settings-schema.json->cinnamenuProvidersSection->title
@@ -156,19 +148,19 @@ msgstr ""
 
 #. metadata.json->description
 msgid ""
-"A flexible menu providing formatting options, web bookmarks, search provider support "
-"and fuzzy searching."
+"A flexible menu providing formatting options, web bookmarks, search provider "
+"support and fuzzy searching."
 msgstr ""
-"Lankstus meniu, kuriame pateikiamos formatavimo parinktys, žiniatinklio žymės, paieškos "
-"teikėjo palaikymas ir neaiški paieška."
+"Lankstus meniu, kuriame pateikiamos formatavimo parinktys, žiniatinklio "
+"žymės, paieškos teikėjo palaikymas ir neaiški paieška."
 
 #. metadata.json->comments
 msgid ""
-"Made possible thanks to the efforts of contributors to the Cinnamon menu, Gnomenu, and "
-"the contributors to projects they derived from."
+"Made possible thanks to the efforts of contributors to the Cinnamon menu, "
+"Gnomenu, and the contributors to projects they derived from."
 msgstr ""
-"Tai įmanoma dėl Cinamono meniu „Gnomenu“ bendradarbių ir projektų, iš kurių jie kilo, "
-"pastangų."
+"Tai įmanoma dėl Cinamono meniu „Gnomenu“ bendradarbių ir projektų, iš kurių "
+"jie kilo, pastangų."
 
 #. 3.2->settings-schema.json->panel->title
 #. 4.0->settings-schema.json->behaviour->title
@@ -217,23 +209,14 @@ msgid "Content"
 msgstr "Turinys"
 
 #. 3.2->settings-schema.json->privacy-settings-button->description
-msgid "Toggle recent files"
-msgstr "Perjungti naujausius failus"
-
-#. 3.2->settings-schema.json->privacy-settings-button->tooltip
-#. 4.0->settings-schema.json->privacy-settings-button->tooltip
-msgid "Press this button to customize your privacy settings."
-msgstr "Paspauskite šį mygtuką norėdami tinkinti savo privatumo nustatymus."
+#. 4.0->settings-schema.json->privacy-settings-button->description
+msgid "Recent files settings"
+msgstr "Naujausių failų nustatymai"
 
 #. 3.2->settings-schema.json->menu-editor-button->description
 #. 4.0->settings-schema.json->menu-editor-button->description
 msgid "Open the menu editor"
 msgstr "Atidaryti meniu rengyklę"
-
-#. 3.2->settings-schema.json->menu-editor-button->tooltip
-#. 4.0->settings-schema.json->menu-editor-button->tooltip
-msgid "Press this button to customize your menu entries."
-msgstr "Paspauskite šį mygtuką norėdami tinkinti savo meniu įrašus."
 
 #. 3.2->settings-schema.json->resetCategoryOrder-button->description
 #. 4.0->settings-schema.json->resetCategoryOrder-button->description
@@ -247,25 +230,33 @@ msgstr "Naudoti pasirinktinę piktogramą"
 
 #. 3.2->settings-schema.json->menu-icon-custom->tooltip
 #. 4.0->settings-schema.json->menu-icon-custom->tooltip
-msgid "Unchecking this allows the theme to set the icon"
-msgstr "Panaikinus žymėjimą, tema gali nustatyti piktogramą"
+#, fuzzy
+#| msgid "Use a custom icon"
+msgid "Use a custom icon in the panel"
+msgstr "Naudoti pasirinktinę piktogramą"
 
 #. 3.2->settings-schema.json->menu-icon->description
-#. 4.0->settings-schema.json->menu-icon->description
-msgid "Icon"
-msgstr "Piktograma"
-
 #. 3.2->settings-schema.json->menu-icon->tooltip
+#. 4.0->settings-schema.json->menu-icon->description
 #. 4.0->settings-schema.json->menu-icon->tooltip
-msgid "Select an icon to show in the panel."
-msgstr "Pasirinkite piktogramą, kuri bus rodoma skydelyje"
+#, fuzzy
+#| msgid "Panel"
+msgid "Panel icon"
+msgstr "Skydas"
 
 #. 3.2->settings-schema.json->menu-label->description
-#. 3.2->settings-schema.json->menu-label->tooltip
 #. 4.0->settings-schema.json->menu-label->description
+#, fuzzy
+#| msgid "Panel"
+msgid "Panel text"
+msgstr "Skydas"
+
+#. 3.2->settings-schema.json->menu-label->tooltip
 #. 4.0->settings-schema.json->menu-label->tooltip
-msgid "Set the custom menu button icon name"
-msgstr "Nustatyti pasirinktinio meniu mygtuko piktogramos pavadinimą"
+#, fuzzy
+#| msgid "Select an icon to show in the panel."
+msgid "Text to show beside the panel icon"
+msgstr "Pasirinkite piktogramą, kuri bus rodoma skydelyje"
 
 #. 3.2->settings-schema.json->category-icon-size->units
 #. 3.2->settings-schema.json->apps-list-icon-size->units
@@ -304,13 +295,17 @@ msgstr "Spartusis klavišas meniu atidarymui ir uždarymui"
 
 #. 3.2->settings-schema.json->activate-on-hover->description
 #. 4.0->settings-schema.json->activate-on-hover->description
-msgid "Open the menu when I move my mouse over it"
-msgstr "Atidarykite meniu perkeldami pelę virš jo"
+#, fuzzy
+#| msgid "Open the menu editor"
+msgid "Open menu on hover"
+msgstr "Atidaryti meniu rengyklę"
 
 #. 3.2->settings-schema.json->activate-on-hover->tooltip
 #. 4.0->settings-schema.json->activate-on-hover->tooltip
-msgid "Enable opening the menu when the mouse enters the applet"
-msgstr "Įgalinti meniu atidarymą, kai pelė įveda programėlę"
+#, fuzzy
+#| msgid "Open the menu when I move my mouse over it"
+msgid "Open the menu when I move my mouse over the panel icon"
+msgstr "Atidarykite meniu perkeldami pelę virš jo"
 
 #. 3.2->settings-schema.json->hover-delay->units
 #. 3.2->settings-schema.json->tooltip-delay->units
@@ -320,13 +315,10 @@ msgstr "milisekundės"
 
 #. 3.2->settings-schema.json->hover-delay->description
 #. 4.0->settings-schema.json->hover-delay->description
-msgid "Menu hover delay:"
+#, fuzzy
+#| msgid "Menu hover delay:"
+msgid "Menu hover delay"
 msgstr "Meniu užvedimo atidėjimas:"
-
-#. 3.2->settings-schema.json->hover-delay->tooltip
-#. 4.0->settings-schema.json->hover-delay->tooltip
-msgid "Delay between switching categories"
-msgstr ""
 
 #. 3.2->settings-schema.json->enable-animation->description
 #. 4.0->settings-schema.json->enable-animation->description
@@ -335,7 +327,9 @@ msgstr "Naudoti meniu animaciją"
 
 #. 3.2->settings-schema.json->enable-animation->tooltip
 #. 4.0->settings-schema.json->enable-animation->tooltip
-msgid "Allow the menu to animate on open and close"
+#, fuzzy
+#| msgid "Allow the menu to animate on open and close"
+msgid "Animate the menu on open and close"
 msgstr "Leisti meniu animuoti atidarant ir uždarant"
 
 #. 3.2->settings-schema.json->category-click->description
@@ -345,18 +339,22 @@ msgstr "Suaktyvinkite kategorijas spustelėdami"
 
 #. 3.2->settings-schema.json->category-click->tooltip
 #. 4.0->settings-schema.json->category-click->tooltip
-msgid "When enabled, category views are activated on click instead of on hover."
-msgstr "Kai įjungta, kategorijų rodiniai suaktyvinami spustelėjus, o ne užvedus pelę"
+#, fuzzy
+#| msgid "Activate categories on click"
+msgid "Activate categories on click instead of on hover"
+msgstr "Suaktyvinkite kategorijas spustelėdami"
 
 #. 3.2->settings-schema.json->enable-autoscroll->description
 #. 4.0->settings-schema.json->enable-autoscroll->description
-msgid "Enable autoscrolling in application list"
+#, fuzzy
+#| msgid "Enable autoscrolling in application list"
+msgid "Enable autoscrolling"
 msgstr "Įgalinti automatinį slinktį programų sąraše"
 
 #. 3.2->settings-schema.json->enable-autoscroll->tooltip
 #. 4.0->settings-schema.json->enable-autoscroll->tooltip
-msgid "Choose whether or not to enable smooth autoscrolling in the application list."
-msgstr "Pasirinkite, ar programų sąraše įgalinti sklandų automatinį slinktį."
+msgid "Enable autoscrolling in application list"
+msgstr "Įgalinti automatinį slinktį programų sąraše"
 
 #. 3.2->settings-schema.json->enable-bookmarks->description
 #. 4.0->settings-schema.json->enable-bookmarks->description
@@ -365,15 +363,11 @@ msgstr "Rodyti žiniatinklio žymes"
 
 #. 3.2->settings-schema.json->enable-bookmarks->tooltip
 #. 4.0->settings-schema.json->enable-bookmarks->tooltip
-msgid "Choose whether or not bookmarks are indexed in the menu."
-msgstr "Pasirinkite, ar žymos yra indeksuojamos meniu."
+msgid "Show your browser's web bookmarks in the menu"
+msgstr ""
 
 #. 3.2->settings-schema.json->enable-windows->description
 msgid "Enable searching of open windows"
-msgstr ""
-
-#. 3.2->settings-schema.json->enable-windows->tooltip
-msgid "Choose whether or not open windows are indexed in menu searches."
 msgstr ""
 
 #. 3.2->settings-schema.json->enable-search-providers->description
@@ -383,8 +377,13 @@ msgstr "Įgalinti paieškos teikėjus"
 
 #. 3.2->settings-schema.json->enable-search-providers->tooltip
 #. 4.0->settings-schema.json->enable-search-providers->tooltip
-msgid "Choose whether or not search provider results are indexed in menu searches."
-msgstr "Pasirinkite, ar paieškos teikėjo rezultatai yra indeksuojami ieškant meniu."
+#, fuzzy
+#| msgid ""
+#| "Choose whether or not search provider results are indexed in menu "
+#| "searches."
+msgid "Include search provider results in searches"
+msgstr ""
+"Pasirinkite, ar paieškos teikėjo rezultatai yra indeksuojami ieškant meniu."
 
 #. 3.2->settings-schema.json->get-providers->description
 #. 4.0->settings-schema.json->get-providers->description
@@ -425,55 +424,39 @@ msgstr "Rodyti žymas ir vietas"
 
 #. 3.2->settings-schema.json->show-places->tooltip
 #. 4.0->settings-schema.json->show-places->tooltip
-msgid "Choose whether or not to show bookmarks and places in the menu."
-msgstr "Pasirinkite, ar nerodyti žymių ir vietų meniu."
+#, fuzzy
+#| msgid "Show bookmarks and places"
+msgid "Show bookmarks and places category in the menu"
+msgstr "Rodyti žymas ir vietas"
 
 #. 3.2->settings-schema.json->show-application-icons->description
+#. 3.2->settings-schema.json->show-application-icons->tooltip
 #. 4.0->settings-schema.json->show-application-icons->description
+#. 4.0->settings-schema.json->show-application-icons->tooltip
 msgid "Show application icons"
 msgstr "Rodyti programos piktogramas"
 
-#. 3.2->settings-schema.json->show-application-icons->tooltip
-#. 4.0->settings-schema.json->show-application-icons->tooltip
-msgid "Choose whether or not to show icons on applications."
-msgstr "Pasirinkite, ar programose rodyti piktogramas, ar ne."
-
 #. 3.2->settings-schema.json->show-category-icons->description
+#. 3.2->settings-schema.json->show-category-icons->tooltip
 #. 4.0->settings-schema.json->show-category-icons->description
+#. 4.0->settings-schema.json->show-category-icons->tooltip
 msgid "Show category icons"
 msgstr "Rodyti kategorijos piktogramas"
 
-#. 3.2->settings-schema.json->show-category-icons->tooltip
-#. 4.0->settings-schema.json->show-category-icons->tooltip
-msgid "Choose whether or not to show icons on categories."
-msgstr "Pasirinkite, ar kategorijose rodyti piktogramas, ar ne."
-
 #. 3.2->settings-schema.json->show-apps-description-on-buttons->description
+#. 3.2->settings-schema.json->show-apps-description-on-buttons->tooltip
 msgid "Show application descriptions under titles"
 msgstr "Rodyti programų aprašus su pavadinimais"
 
-#. 3.2->settings-schema.json->show-apps-description-on-buttons->tooltip
-msgid ""
-"Choose whether or not to show the application description on the application buttons."
-msgstr ""
-
 #. 3.2->settings-schema.json->show-tooltips->description
+#. 3.2->settings-schema.json->show-tooltips->tooltip
 msgid "Show tooltips"
 msgstr "Rodyti patarimus"
 
-#. 3.2->settings-schema.json->show-tooltips->tooltip
-msgid ""
-"When enabled, tooltips containing the item's name or description is shown when hovered "
-"over."
-msgstr ""
-
 #. 3.2->settings-schema.json->tooltip-delay->description
+#. 3.2->settings-schema.json->tooltip-delay->tooltip
 msgid "Tooltip delay"
 msgstr "Patarimo patarimas"
-
-#. 3.2->settings-schema.json->tooltip-delay->tooltip
-msgid "The delay time in milliseconds for tooltips when hovering over a menu item."
-msgstr ""
 
 #. 3.2->settings-schema.json->enable-custom-menu-height->description
 #. 3.2->settings-schema.json->enable-custom-menu-height->tooltip
@@ -519,7 +502,9 @@ msgid "None"
 msgstr "Nėra"
 
 #. 4.0->settings-schema.json->description-placement->tooltip
-msgid "Choose where to show application descriptions."
+#, fuzzy
+#| msgid "Choose where to show application descriptions."
+msgid "Choose where to show application descriptions"
 msgstr "Pasirinkite, kur norite rodyti programų aprašus."
 
 #. 4.0->settings-schema.json->powergroup-placement->description
@@ -543,17 +528,73 @@ msgid "Right"
 msgstr "Teisingai"
 
 #. 4.0->settings-schema.json->powergroup-placement->tooltip
-msgid "Choose where to show the session (quit, logout, etc.) buttons."
-msgstr "Pasirinkite vietą, kur norite rodyti sesijos mygtukus (išeiti, atsijungti ir tt)."
+#, fuzzy
+#| msgid "Choose where to show the session (quit, logout, etc.) buttons."
+msgid "Choose where to show the session (quit, logout, etc.) buttons"
+msgstr ""
+"Pasirinkite vietą, kur norite rodyti sesijos mygtukus (išeiti, atsijungti ir "
+"tt)."
 
 #. 4.0->settings-schema.json->add-favorites->description
-msgid "Add favorites to session buttons."
+#, fuzzy
+#| msgid "Add favorites to session buttons."
+msgid "Add favorites to session buttons"
 msgstr "Pridėti mėgstamiausius prie sesijos mygtukų."
 
 #. 4.0->settings-schema.json->add-favorites->tooltip
-msgid "Show your favorite app icons next to the session buttons."
+#, fuzzy
+#| msgid "Show your favorite app icons next to the session buttons."
+msgid "Show your favorite app icons next to the session buttons"
 msgstr "Parodykite savo mėgstamos programos piktogramas šalia sesijos mygtukų"
 
-#. 4.0->settings-schema.json->privacy-settings-button->description
-msgid "Recent files settings"
-msgstr "Naujausių failų nustatymai"
+#, javascript-format
+#~ msgid "Failed to launch \"%s\""
+#~ msgstr "Nepavyko paleisti \"%s\""
+
+#~ msgid "Remove from favorites"
+#~ msgstr "Pašalinti iš parankinių"
+
+#~ msgid "Toggle recent files"
+#~ msgstr "Perjungti naujausius failus"
+
+#~ msgid "Press this button to customize your privacy settings."
+#~ msgstr "Paspauskite šį mygtuką norėdami tinkinti savo privatumo nustatymus."
+
+#~ msgid "Press this button to customize your menu entries."
+#~ msgstr "Paspauskite šį mygtuką norėdami tinkinti savo meniu įrašus."
+
+#~ msgid "Unchecking this allows the theme to set the icon"
+#~ msgstr "Panaikinus žymėjimą, tema gali nustatyti piktogramą"
+
+#~ msgid "Icon"
+#~ msgstr "Piktograma"
+
+#~ msgid "Set the custom menu button icon name"
+#~ msgstr "Nustatyti pasirinktinio meniu mygtuko piktogramos pavadinimą"
+
+#~ msgid "Enable opening the menu when the mouse enters the applet"
+#~ msgstr "Įgalinti meniu atidarymą, kai pelė įveda programėlę"
+
+#~ msgid ""
+#~ "When enabled, category views are activated on click instead of on hover."
+#~ msgstr ""
+#~ "Kai įjungta, kategorijų rodiniai suaktyvinami spustelėjus, o ne užvedus "
+#~ "pelę"
+
+#~ msgid ""
+#~ "Choose whether or not to enable smooth autoscrolling in the application "
+#~ "list."
+#~ msgstr ""
+#~ "Pasirinkite, ar programų sąraše įgalinti sklandų automatinį slinktį."
+
+#~ msgid "Choose whether or not bookmarks are indexed in the menu."
+#~ msgstr "Pasirinkite, ar žymos yra indeksuojamos meniu."
+
+#~ msgid "Choose whether or not to show bookmarks and places in the menu."
+#~ msgstr "Pasirinkite, ar nerodyti žymių ir vietų meniu."
+
+#~ msgid "Choose whether or not to show icons on applications."
+#~ msgstr "Pasirinkite, ar programose rodyti piktogramas, ar ne."
+
+#~ msgid "Choose whether or not to show icons on categories."
+#~ msgstr "Pasirinkite, ar kategorijose rodyti piktogramas, ar ne."

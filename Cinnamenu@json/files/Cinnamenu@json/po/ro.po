@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-13 18:22+0100\n"
-"PO-Revision-Date: 2020-07-13 21:23+0100\n"
+"POT-Creation-Date: 2020-07-15 12:39+0100\n"
+"PO-Revision-Date: 2020-07-15 14:15+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ro\n"
@@ -107,11 +107,6 @@ msgstr "Închide"
 msgid "Shutdown the computer"
 msgstr "Închide calculatorul"
 
-#: 3.2/placeDisplay.js:57 4.0/placeDisplay.js:35
-#, javascript-format
-msgid "Failed to launch \"%s\""
-msgstr "Nu s-a putut lansa \"%s\""
-
 #: 3.2/placeDisplay.js:146 4.0/placeDisplay.js:102
 msgid "Home"
 msgstr "Acasă"
@@ -137,9 +132,9 @@ msgstr "Adaugă la panou"
 msgid "Add to desktop"
 msgstr "Adaugă la desktop"
 
-#: 3.2/buttons.js:1054
-msgid "Remove from favorites"
-msgstr "Scoate din favorite"
+#: 3.2/buttons.js:1054 4.0/buttons.js:849
+msgid "Remove favorite"
+msgstr "Eliminați favoritul"
 
 #: 3.2/buttons.js:1056 4.0/buttons.js:852
 msgid "Add to favorites"
@@ -152,10 +147,6 @@ msgstr "Dezinstalează"
 #: 4.0/applet.js:233 4.0/applet.js:1230
 msgid "Please wait..."
 msgstr ""
-
-#: 4.0/buttons.js:849
-msgid "Remove favorite"
-msgstr "Eliminați favoritul"
 
 #. metadata.json->name
 #. 3.2->settings-schema.json->cinnamenuProvidersSection->title
@@ -223,23 +214,14 @@ msgid "Content"
 msgstr "Conținut"
 
 #. 3.2->settings-schema.json->privacy-settings-button->description
-msgid "Toggle recent files"
-msgstr "Comută fișiere recente"
-
-#. 3.2->settings-schema.json->privacy-settings-button->tooltip
-#. 4.0->settings-schema.json->privacy-settings-button->tooltip
-msgid "Press this button to customize your privacy settings."
-msgstr "Apasă acest buton pentru a personaliza setările de intimitate."
+#. 4.0->settings-schema.json->privacy-settings-button->description
+msgid "Recent files settings"
+msgstr "Setări recente de fișiere"
 
 #. 3.2->settings-schema.json->menu-editor-button->description
 #. 4.0->settings-schema.json->menu-editor-button->description
 msgid "Open the menu editor"
 msgstr "Deschide editorul meniului"
-
-#. 3.2->settings-schema.json->menu-editor-button->tooltip
-#. 4.0->settings-schema.json->menu-editor-button->tooltip
-msgid "Press this button to customize your menu entries."
-msgstr "Apasă acest buton pentru a personaliza articolele din meniu."
 
 #. 3.2->settings-schema.json->resetCategoryOrder-button->description
 #. 4.0->settings-schema.json->resetCategoryOrder-button->description
@@ -253,25 +235,27 @@ msgstr "Folosește o pictogramă personalizată"
 
 #. 3.2->settings-schema.json->menu-icon-custom->tooltip
 #. 4.0->settings-schema.json->menu-icon-custom->tooltip
-msgid "Unchecking this allows the theme to set the icon"
-msgstr "Debifarea aici permite temei să seteze pictograma"
+#, fuzzy
+#| msgid "Use a custom icon"
+msgid "Use a custom icon in the panel"
+msgstr "Folosește o pictogramă personalizată"
 
 #. 3.2->settings-schema.json->menu-icon->description
-#. 4.0->settings-schema.json->menu-icon->description
-msgid "Icon"
-msgstr "Pictogramă"
-
 #. 3.2->settings-schema.json->menu-icon->tooltip
+#. 4.0->settings-schema.json->menu-icon->description
 #. 4.0->settings-schema.json->menu-icon->tooltip
-msgid "Select an icon to show in the panel."
-msgstr "Alege o pictogramă pentru a fi afișată în panou."
+msgid "Panel icon"
+msgstr "Pictograma panoului"
 
 #. 3.2->settings-schema.json->menu-label->description
-#. 3.2->settings-schema.json->menu-label->tooltip
 #. 4.0->settings-schema.json->menu-label->description
+msgid "Panel text"
+msgstr "Textul panoului"
+
+#. 3.2->settings-schema.json->menu-label->tooltip
 #. 4.0->settings-schema.json->menu-label->tooltip
-msgid "Set the custom menu button icon name"
-msgstr "Setează un nume personalizat pentru pictograma butonului meniului"
+msgid "Text to show beside the panel icon"
+msgstr "Text de afișat lângă pictograma panoului"
 
 #. 3.2->settings-schema.json->category-icon-size->units
 #. 3.2->settings-schema.json->apps-list-icon-size->units
@@ -310,13 +294,15 @@ msgstr "Scurtătura de pe tastatură pentru a deschide și închide meniul"
 
 #. 3.2->settings-schema.json->activate-on-hover->description
 #. 4.0->settings-schema.json->activate-on-hover->description
-msgid "Open the menu when I move my mouse over it"
-msgstr "Deschide meniul când pun cursorul pe el"
+msgid "Open menu on hover"
+msgstr "Deschideți meniul în cursură"
 
 #. 3.2->settings-schema.json->activate-on-hover->tooltip
 #. 4.0->settings-schema.json->activate-on-hover->tooltip
-msgid "Enable opening the menu when the mouse enters the applet"
-msgstr "Permite deschiderea meniului când mouse-ul intră în applet"
+#, fuzzy
+#| msgid "Open the menu when I move my mouse over it"
+msgid "Open the menu when I move my mouse over the panel icon"
+msgstr "Deschide meniul când pun cursorul pe el"
 
 #. 3.2->settings-schema.json->hover-delay->units
 #. 3.2->settings-schema.json->tooltip-delay->units
@@ -326,13 +312,10 @@ msgstr "milisecunde"
 
 #. 3.2->settings-schema.json->hover-delay->description
 #. 4.0->settings-schema.json->hover-delay->description
-msgid "Menu hover delay:"
+#, fuzzy
+#| msgid "Menu hover delay:"
+msgid "Menu hover delay"
 msgstr "Întărziere la cursor deasupra meniului:"
-
-#. 3.2->settings-schema.json->hover-delay->tooltip
-#. 4.0->settings-schema.json->hover-delay->tooltip
-msgid "Delay between switching categories"
-msgstr "Întârziere la schimbarea categoriilor"
 
 #. 3.2->settings-schema.json->enable-animation->description
 #. 4.0->settings-schema.json->enable-animation->description
@@ -341,7 +324,9 @@ msgstr "Folosește animații pentru meniu"
 
 #. 3.2->settings-schema.json->enable-animation->tooltip
 #. 4.0->settings-schema.json->enable-animation->tooltip
-msgid "Allow the menu to animate on open and close"
+#, fuzzy
+#| msgid "Allow the menu to animate on open and close"
+msgid "Animate the menu on open and close"
 msgstr "Permite animarea meniului la deschidere și închidere"
 
 #. 3.2->settings-schema.json->category-click->description
@@ -351,22 +336,22 @@ msgstr "Activează categorii când dau click"
 
 #. 3.2->settings-schema.json->category-click->tooltip
 #. 4.0->settings-schema.json->category-click->tooltip
-msgid ""
-"When enabled, category views are activated on click instead of on hover."
-msgstr ""
-"Când este activat, vederile categoriilor sunt activate la click, nu la "
-"punerea cursorului pe ele."
+#, fuzzy
+#| msgid "Activate categories on click"
+msgid "Activate categories on click instead of on hover"
+msgstr "Activează categorii când dau click"
 
 #. 3.2->settings-schema.json->enable-autoscroll->description
 #. 4.0->settings-schema.json->enable-autoscroll->description
-msgid "Enable autoscrolling in application list"
+#, fuzzy
+#| msgid "Enable autoscrolling in application list"
+msgid "Enable autoscrolling"
 msgstr "Activează derularea automată în lista de aplicații"
 
 #. 3.2->settings-schema.json->enable-autoscroll->tooltip
 #. 4.0->settings-schema.json->enable-autoscroll->tooltip
-msgid ""
-"Choose whether or not to enable smooth autoscrolling in the application list."
-msgstr "Alege dacă derularea fluentă este activată în lista de aplicații."
+msgid "Enable autoscrolling in application list"
+msgstr "Activează derularea automată în lista de aplicații"
 
 #. 3.2->settings-schema.json->enable-bookmarks->description
 #. 4.0->settings-schema.json->enable-bookmarks->description
@@ -375,16 +360,12 @@ msgstr "Arată marcaje web"
 
 #. 3.2->settings-schema.json->enable-bookmarks->tooltip
 #. 4.0->settings-schema.json->enable-bookmarks->tooltip
-msgid "Choose whether or not bookmarks are indexed in the menu."
-msgstr "Alege dacă marcajele sunt indexate în meniu."
+msgid "Show your browser's web bookmarks in the menu"
+msgstr "Afișați marcajele web ale browserului dvs. în meniu"
 
 #. 3.2->settings-schema.json->enable-windows->description
 msgid "Enable searching of open windows"
 msgstr "Activează căutarea în ferestre deschise"
-
-#. 3.2->settings-schema.json->enable-windows->tooltip
-msgid "Choose whether or not open windows are indexed in menu searches."
-msgstr "Alege dacă ferestrele deschise sunt indexate în căutările în meniu."
 
 #. 3.2->settings-schema.json->enable-search-providers->description
 #. 4.0->settings-schema.json->enable-search-providers->description
@@ -393,8 +374,11 @@ msgstr "Activează furnizori de căutare"
 
 #. 3.2->settings-schema.json->enable-search-providers->tooltip
 #. 4.0->settings-schema.json->enable-search-providers->tooltip
-msgid ""
-"Choose whether or not search provider results are indexed in menu searches."
+#, fuzzy
+#| msgid ""
+#| "Choose whether or not search provider results are indexed in menu "
+#| "searches."
+msgid "Include search provider results in searches"
 msgstr ""
 "Alege dacă rezultatele de la furnizorii de căutare sunt indexate în "
 "căutarile în menu."
@@ -438,62 +422,39 @@ msgstr "Arată marcaje și locuri"
 
 #. 3.2->settings-schema.json->show-places->tooltip
 #. 4.0->settings-schema.json->show-places->tooltip
-msgid "Choose whether or not to show bookmarks and places in the menu."
-msgstr "Alege dacă se afișează marcaje și locuri în meniu."
+#, fuzzy
+#| msgid "Show bookmarks and places"
+msgid "Show bookmarks and places category in the menu"
+msgstr "Arată marcaje și locuri"
 
 #. 3.2->settings-schema.json->show-application-icons->description
+#. 3.2->settings-schema.json->show-application-icons->tooltip
 #. 4.0->settings-schema.json->show-application-icons->description
+#. 4.0->settings-schema.json->show-application-icons->tooltip
 msgid "Show application icons"
 msgstr "Arată pictogramele aplicațiilor"
 
-#. 3.2->settings-schema.json->show-application-icons->tooltip
-#. 4.0->settings-schema.json->show-application-icons->tooltip
-msgid "Choose whether or not to show icons on applications."
-msgstr "Alege dacă se afișează pictogramele pentru aplicații."
-
 #. 3.2->settings-schema.json->show-category-icons->description
+#. 3.2->settings-schema.json->show-category-icons->tooltip
 #. 4.0->settings-schema.json->show-category-icons->description
+#. 4.0->settings-schema.json->show-category-icons->tooltip
 msgid "Show category icons"
 msgstr "Arată pictogramele categoriilor"
 
-#. 3.2->settings-schema.json->show-category-icons->tooltip
-#. 4.0->settings-schema.json->show-category-icons->tooltip
-msgid "Choose whether or not to show icons on categories."
-msgstr "Alege dacă se afișează pictograme la categorii."
-
 #. 3.2->settings-schema.json->show-apps-description-on-buttons->description
+#. 3.2->settings-schema.json->show-apps-description-on-buttons->tooltip
 msgid "Show application descriptions under titles"
 msgstr "Arată descrierea aplicațiilor sub titluri"
 
-#. 3.2->settings-schema.json->show-apps-description-on-buttons->tooltip
-msgid ""
-"Choose whether or not to show the application description on the application "
-"buttons."
-msgstr ""
-"Alege dacă se afișează descrierea aplicațiilor în butoanele aplicațiilor."
-
 #. 3.2->settings-schema.json->show-tooltips->description
+#. 3.2->settings-schema.json->show-tooltips->tooltip
 msgid "Show tooltips"
 msgstr "Arată baloane explicative"
 
-#. 3.2->settings-schema.json->show-tooltips->tooltip
-msgid ""
-"When enabled, tooltips containing the item's name or description is shown "
-"when hovered over."
-msgstr ""
-"Când este activat, baloanele explicative ce conțin numele sau descrierea "
-"articolului sunt afișate la punerea cursorului pe el."
-
 #. 3.2->settings-schema.json->tooltip-delay->description
+#. 3.2->settings-schema.json->tooltip-delay->tooltip
 msgid "Tooltip delay"
 msgstr "Întârzierea balonului explicativ"
-
-#. 3.2->settings-schema.json->tooltip-delay->tooltip
-msgid ""
-"The delay time in milliseconds for tooltips when hovering over a menu item."
-msgstr ""
-"Timpul de întârziere în milisecunde pentru baloanele explicative ce apar "
-"când cursorul este pe un articol din meniu."
 
 #. 3.2->settings-schema.json->enable-custom-menu-height->description
 #. 3.2->settings-schema.json->enable-custom-menu-height->tooltip
@@ -539,7 +500,9 @@ msgid "None"
 msgstr "Niciuna"
 
 #. 4.0->settings-schema.json->description-placement->tooltip
-msgid "Choose where to show application descriptions."
+#, fuzzy
+#| msgid "Choose where to show application descriptions."
+msgid "Choose where to show application descriptions"
 msgstr "Alegeți unde să afișați descrierile aplicațiilor."
 
 #. 4.0->settings-schema.json->powergroup-placement->description
@@ -563,21 +526,100 @@ msgid "Right"
 msgstr "La dreapta"
 
 #. 4.0->settings-schema.json->powergroup-placement->tooltip
-msgid "Choose where to show the session (quit, logout, etc.) buttons."
+#, fuzzy
+#| msgid "Choose where to show the session (quit, logout, etc.) buttons."
+msgid "Choose where to show the session (quit, logout, etc.) buttons"
 msgstr ""
 "Alegeți unde să afișați butoanele sesiunii (renunțare, deconectare etc.)."
 
 #. 4.0->settings-schema.json->add-favorites->description
-msgid "Add favorites to session buttons."
+#, fuzzy
+#| msgid "Add favorites to session buttons."
+msgid "Add favorites to session buttons"
 msgstr "Adăugați favorite la butoanele de sesiune."
 
 #. 4.0->settings-schema.json->add-favorites->tooltip
-msgid "Show your favorite app icons next to the session buttons."
+#, fuzzy
+#| msgid "Show your favorite app icons next to the session buttons."
+msgid "Show your favorite app icons next to the session buttons"
 msgstr "Afișează pictogramele aplicației preferate lângă butoanele sesiunii."
 
-#. 4.0->settings-schema.json->privacy-settings-button->description
-msgid "Recent files settings"
-msgstr "Setări recente de fișiere"
+#, javascript-format
+#~ msgid "Failed to launch \"%s\""
+#~ msgstr "Nu s-a putut lansa \"%s\""
+
+#~ msgid "Remove from favorites"
+#~ msgstr "Scoate din favorite"
+
+#~ msgid "Toggle recent files"
+#~ msgstr "Comută fișiere recente"
+
+#~ msgid "Press this button to customize your privacy settings."
+#~ msgstr "Apasă acest buton pentru a personaliza setările de intimitate."
+
+#~ msgid "Press this button to customize your menu entries."
+#~ msgstr "Apasă acest buton pentru a personaliza articolele din meniu."
+
+#~ msgid "Unchecking this allows the theme to set the icon"
+#~ msgstr "Debifarea aici permite temei să seteze pictograma"
+
+#~ msgid "Icon"
+#~ msgstr "Pictogramă"
+
+#~ msgid "Set the custom menu button icon name"
+#~ msgstr "Setează un nume personalizat pentru pictograma butonului meniului"
+
+#~ msgid "Enable opening the menu when the mouse enters the applet"
+#~ msgstr "Permite deschiderea meniului când mouse-ul intră în applet"
+
+#~ msgid "Delay between switching categories"
+#~ msgstr "Întârziere la schimbarea categoriilor"
+
+#~ msgid ""
+#~ "When enabled, category views are activated on click instead of on hover."
+#~ msgstr ""
+#~ "Când este activat, vederile categoriilor sunt activate la click, nu la "
+#~ "punerea cursorului pe ele."
+
+#~ msgid ""
+#~ "Choose whether or not to enable smooth autoscrolling in the application "
+#~ "list."
+#~ msgstr "Alege dacă derularea fluentă este activată în lista de aplicații."
+
+#~ msgid "Choose whether or not bookmarks are indexed in the menu."
+#~ msgstr "Alege dacă marcajele sunt indexate în meniu."
+
+#~ msgid "Choose whether or not open windows are indexed in menu searches."
+#~ msgstr "Alege dacă ferestrele deschise sunt indexate în căutările în meniu."
+
+#~ msgid "Choose whether or not to show bookmarks and places in the menu."
+#~ msgstr "Alege dacă se afișează marcaje și locuri în meniu."
+
+#~ msgid "Choose whether or not to show icons on applications."
+#~ msgstr "Alege dacă se afișează pictogramele pentru aplicații."
+
+#~ msgid "Choose whether or not to show icons on categories."
+#~ msgstr "Alege dacă se afișează pictograme la categorii."
+
+#~ msgid ""
+#~ "Choose whether or not to show the application description on the "
+#~ "application buttons."
+#~ msgstr ""
+#~ "Alege dacă se afișează descrierea aplicațiilor în butoanele aplicațiilor."
+
+#~ msgid ""
+#~ "When enabled, tooltips containing the item's name or description is shown "
+#~ "when hovered over."
+#~ msgstr ""
+#~ "Când este activat, baloanele explicative ce conțin numele sau descrierea "
+#~ "articolului sunt afișate la punerea cursorului pe el."
+
+#~ msgid ""
+#~ "The delay time in milliseconds for tooltips when hovering over a menu "
+#~ "item."
+#~ msgstr ""
+#~ "Timpul de întârziere în milisecunde pentru baloanele explicative ce apar "
+#~ "când cursorul este pe un articol din meniu."
 
 #~ msgid "Please provide your password to uninstall this application"
 #~ msgstr ""

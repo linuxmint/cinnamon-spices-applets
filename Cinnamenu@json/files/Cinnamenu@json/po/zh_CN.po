@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-13 18:22+0100\n"
-"PO-Revision-Date: 2020-07-13 20:22+0100\n"
+"POT-Creation-Date: 2020-07-15 12:39+0100\n"
+"PO-Revision-Date: 2020-07-15 14:09+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: zh_CN\n"
@@ -106,11 +106,6 @@ msgstr "退出"
 msgid "Shutdown the computer"
 msgstr "关闭计算机"
 
-#: 3.2/placeDisplay.js:57 4.0/placeDisplay.js:35
-#, javascript-format
-msgid "Failed to launch \"%s\""
-msgstr "无法启动\"%s\""
-
 #: 3.2/placeDisplay.js:146 4.0/placeDisplay.js:102
 msgid "Home"
 msgstr "主目录"
@@ -136,9 +131,9 @@ msgstr "添加到面板"
 msgid "Add to desktop"
 msgstr "添加到桌面"
 
-#: 3.2/buttons.js:1054
-msgid "Remove from favorites"
-msgstr "从收藏夹移除"
+#: 3.2/buttons.js:1054 4.0/buttons.js:849
+msgid "Remove favorite"
+msgstr "删除收藏夹"
 
 #: 3.2/buttons.js:1056 4.0/buttons.js:852
 msgid "Add to favorites"
@@ -152,22 +147,16 @@ msgstr "卸载"
 msgid "Please wait..."
 msgstr ""
 
-#: 4.0/buttons.js:849
-msgid "Remove favorite"
-msgstr "删除收藏夹"
-
 #. metadata.json->name
 #. 3.2->settings-schema.json->cinnamenuProvidersSection->title
 msgid "Cinnamenu"
 msgstr "Cinnamenu"
 
 #. metadata.json->description
-#, fuzzy
-#| msgid "A flexible menu providing formatting options and bookmarks."
 msgid ""
 "A flexible menu providing formatting options, web bookmarks, search provider "
 "support and fuzzy searching."
-msgstr "一个提供格式选项和书签的灵活菜单。"
+msgstr "灵活的菜单，提供格式选项，Web书签，搜索提供程序支持和模糊搜索。"
 
 #. metadata.json->comments
 msgid ""
@@ -222,24 +211,14 @@ msgid "Content"
 msgstr "内容"
 
 #. 3.2->settings-schema.json->privacy-settings-button->description
-msgid "Toggle recent files"
-msgstr "切换最近的文件"
-
-#. 3.2->settings-schema.json->privacy-settings-button->tooltip
-#. 4.0->settings-schema.json->privacy-settings-button->tooltip
-#, fuzzy
-msgid "Press this button to customize your privacy settings."
-msgstr "按此按钮自定义您的菜单条目。"
+#. 4.0->settings-schema.json->privacy-settings-button->description
+msgid "Recent files settings"
+msgstr "最近的文件设置"
 
 #. 3.2->settings-schema.json->menu-editor-button->description
 #. 4.0->settings-schema.json->menu-editor-button->description
 msgid "Open the menu editor"
 msgstr "打开菜单编辑器"
-
-#. 3.2->settings-schema.json->menu-editor-button->tooltip
-#. 4.0->settings-schema.json->menu-editor-button->tooltip
-msgid "Press this button to customize your menu entries."
-msgstr "按此按钮自定义您的菜单条目。"
 
 #. 3.2->settings-schema.json->resetCategoryOrder-button->description
 #. 4.0->settings-schema.json->resetCategoryOrder-button->description
@@ -253,25 +232,25 @@ msgstr "使用自定义图标"
 
 #. 3.2->settings-schema.json->menu-icon-custom->tooltip
 #. 4.0->settings-schema.json->menu-icon-custom->tooltip
-msgid "Unchecking this allows the theme to set the icon"
-msgstr "不选中此项允许主题设置图标"
+msgid "Use a custom icon in the panel"
+msgstr "在面板中使用自定义图标"
 
 #. 3.2->settings-schema.json->menu-icon->description
-#. 4.0->settings-schema.json->menu-icon->description
-msgid "Icon"
-msgstr "图标"
-
 #. 3.2->settings-schema.json->menu-icon->tooltip
+#. 4.0->settings-schema.json->menu-icon->description
 #. 4.0->settings-schema.json->menu-icon->tooltip
-msgid "Select an icon to show in the panel."
-msgstr "选择要显示在面板中的图标。"
+msgid "Panel icon"
+msgstr "面板图标"
 
 #. 3.2->settings-schema.json->menu-label->description
-#. 3.2->settings-schema.json->menu-label->tooltip
 #. 4.0->settings-schema.json->menu-label->description
+msgid "Panel text"
+msgstr "面板文字"
+
+#. 3.2->settings-schema.json->menu-label->tooltip
 #. 4.0->settings-schema.json->menu-label->tooltip
-msgid "Set the custom menu button icon name"
-msgstr "设置自定义菜单按钮图标名称"
+msgid "Text to show beside the panel icon"
+msgstr "在面板图标旁边显示的文本"
 
 #. 3.2->settings-schema.json->category-icon-size->units
 #. 3.2->settings-schema.json->apps-list-icon-size->units
@@ -310,13 +289,15 @@ msgstr "打开和关闭菜单的键盘快捷键"
 
 #. 3.2->settings-schema.json->activate-on-hover->description
 #. 4.0->settings-schema.json->activate-on-hover->description
-msgid "Open the menu when I move my mouse over it"
-msgstr "当我移动鼠标到菜单上时打开菜单"
+msgid "Open menu on hover"
+msgstr "悬停时打开菜单"
 
 #. 3.2->settings-schema.json->activate-on-hover->tooltip
 #. 4.0->settings-schema.json->activate-on-hover->tooltip
-msgid "Enable opening the menu when the mouse enters the applet"
-msgstr "启用当鼠标进入小程序时打开菜单"
+#, fuzzy
+#| msgid "Open the menu when I move my mouse over it"
+msgid "Open the menu when I move my mouse over the panel icon"
+msgstr "当我移动鼠标到菜单上时打开菜单"
 
 #. 3.2->settings-schema.json->hover-delay->units
 #. 3.2->settings-schema.json->tooltip-delay->units
@@ -326,13 +307,10 @@ msgstr "毫秒"
 
 #. 3.2->settings-schema.json->hover-delay->description
 #. 4.0->settings-schema.json->hover-delay->description
-msgid "Menu hover delay:"
+#, fuzzy
+#| msgid "Menu hover delay:"
+msgid "Menu hover delay"
 msgstr "菜单悬停延迟："
-
-#. 3.2->settings-schema.json->hover-delay->tooltip
-#. 4.0->settings-schema.json->hover-delay->tooltip
-msgid "Delay between switching categories"
-msgstr "切换类别间的延迟"
 
 #. 3.2->settings-schema.json->enable-animation->description
 #. 4.0->settings-schema.json->enable-animation->description
@@ -341,7 +319,9 @@ msgstr "使用菜单动画"
 
 #. 3.2->settings-schema.json->enable-animation->tooltip
 #. 4.0->settings-schema.json->enable-animation->tooltip
-msgid "Allow the menu to animate on open and close"
+#, fuzzy
+#| msgid "Allow the menu to animate on open and close"
+msgid "Animate the menu on open and close"
 msgstr "允许打开和关闭菜单的动画"
 
 #. 3.2->settings-schema.json->category-click->description
@@ -351,20 +331,20 @@ msgstr "点击激活类别"
 
 #. 3.2->settings-schema.json->category-click->tooltip
 #. 4.0->settings-schema.json->category-click->tooltip
-msgid ""
-"When enabled, category views are activated on click instead of on hover."
-msgstr "启用后，将在单击而不是将鼠标悬停时激活类别视图。"
+#, fuzzy
+#| msgid "Activate categories on click"
+msgid "Activate categories on click instead of on hover"
+msgstr "点击激活类别"
 
 #. 3.2->settings-schema.json->enable-autoscroll->description
 #. 4.0->settings-schema.json->enable-autoscroll->description
-msgid "Enable autoscrolling in application list"
-msgstr "在应用程序列表中启用自动滚动"
+msgid "Enable autoscrolling"
+msgstr "启用自动滚动"
 
 #. 3.2->settings-schema.json->enable-autoscroll->tooltip
 #. 4.0->settings-schema.json->enable-autoscroll->tooltip
-msgid ""
-"Choose whether or not to enable smooth autoscrolling in the application list."
-msgstr "选择是否在应用程序列表中启用平滑滚动。"
+msgid "Enable autoscrolling in application list"
+msgstr "在应用程序列表中启用自动滚动"
 
 #. 3.2->settings-schema.json->enable-bookmarks->description
 #. 4.0->settings-schema.json->enable-bookmarks->description
@@ -373,17 +353,12 @@ msgstr "显示网络书签"
 
 #. 3.2->settings-schema.json->enable-bookmarks->tooltip
 #. 4.0->settings-schema.json->enable-bookmarks->tooltip
-msgid "Choose whether or not bookmarks are indexed in the menu."
-msgstr "选择是否在菜单中索引书签。"
+msgid "Show your browser's web bookmarks in the menu"
+msgstr "在菜单中显示浏览器的网络书签"
 
 #. 3.2->settings-schema.json->enable-windows->description
 msgid "Enable searching of open windows"
 msgstr ""
-
-#. 3.2->settings-schema.json->enable-windows->tooltip
-#, fuzzy
-msgid "Choose whether or not open windows are indexed in menu searches."
-msgstr "选择是否在菜单中索引书签。"
 
 #. 3.2->settings-schema.json->enable-search-providers->description
 #. 4.0->settings-schema.json->enable-search-providers->description
@@ -392,8 +367,11 @@ msgstr "启用搜索提供商"
 
 #. 3.2->settings-schema.json->enable-search-providers->tooltip
 #. 4.0->settings-schema.json->enable-search-providers->tooltip
-msgid ""
-"Choose whether or not search provider results are indexed in menu searches."
+#, fuzzy
+#| msgid ""
+#| "Choose whether or not search provider results are indexed in menu "
+#| "searches."
+msgid "Include search provider results in searches"
 msgstr "选择是否在菜单搜索中为搜索提供者的结果建立索引。"
 
 #. 3.2->settings-schema.json->get-providers->description
@@ -435,58 +413,39 @@ msgstr "显示书签和位置"
 
 #. 3.2->settings-schema.json->show-places->tooltip
 #. 4.0->settings-schema.json->show-places->tooltip
-msgid "Choose whether or not to show bookmarks and places in the menu."
-msgstr "选择是否在菜单中显示书签和位置。"
+#, fuzzy
+#| msgid "Show bookmarks and places"
+msgid "Show bookmarks and places category in the menu"
+msgstr "显示书签和位置"
 
 #. 3.2->settings-schema.json->show-application-icons->description
+#. 3.2->settings-schema.json->show-application-icons->tooltip
 #. 4.0->settings-schema.json->show-application-icons->description
+#. 4.0->settings-schema.json->show-application-icons->tooltip
 msgid "Show application icons"
 msgstr "显示应用程序图标"
 
-#. 3.2->settings-schema.json->show-application-icons->tooltip
-#. 4.0->settings-schema.json->show-application-icons->tooltip
-msgid "Choose whether or not to show icons on applications."
-msgstr "选择是否显示应用程序的图标。"
-
 #. 3.2->settings-schema.json->show-category-icons->description
+#. 3.2->settings-schema.json->show-category-icons->tooltip
 #. 4.0->settings-schema.json->show-category-icons->description
+#. 4.0->settings-schema.json->show-category-icons->tooltip
 msgid "Show category icons"
 msgstr "显示类别图标"
 
-#. 3.2->settings-schema.json->show-category-icons->tooltip
-#. 4.0->settings-schema.json->show-category-icons->tooltip
-msgid "Choose whether or not to show icons on categories."
-msgstr "选择是否显示类别图标。"
-
 #. 3.2->settings-schema.json->show-apps-description-on-buttons->description
-#, fuzzy
-msgid "Show application descriptions under titles"
-msgstr "在应用程序的标题下方显示其描述"
-
 #. 3.2->settings-schema.json->show-apps-description-on-buttons->tooltip
-msgid ""
-"Choose whether or not to show the application description on the application "
-"buttons."
-msgstr "选择是否在应用程序按钮上显示应用程序说明。"
+msgid "Show application descriptions under titles"
+msgstr "在标题下显示应用程序描述"
 
 #. 3.2->settings-schema.json->show-tooltips->description
+#. 3.2->settings-schema.json->show-tooltips->tooltip
 msgid "Show tooltips"
 msgstr ""
 
-#. 3.2->settings-schema.json->show-tooltips->tooltip
-msgid ""
-"When enabled, tooltips containing the item's name or description is shown "
-"when hovered over."
-msgstr ""
-
 #. 3.2->settings-schema.json->tooltip-delay->description
-msgid "Tooltip delay"
-msgstr ""
-
 #. 3.2->settings-schema.json->tooltip-delay->tooltip
-msgid ""
-"The delay time in milliseconds for tooltips when hovering over a menu item."
-msgstr ""
+msgid "Tooltip delay"
+msgstr "工具提示延迟"
 
 #. 3.2->settings-schema.json->enable-custom-menu-height->description
 #. 3.2->settings-schema.json->enable-custom-menu-height->tooltip
@@ -532,7 +491,9 @@ msgid "None"
 msgstr "没有"
 
 #. 4.0->settings-schema.json->description-placement->tooltip
-msgid "Choose where to show application descriptions."
+#, fuzzy
+#| msgid "Choose where to show application descriptions."
+msgid "Choose where to show application descriptions"
 msgstr "选择显示应用程序描述的位置。"
 
 #. 4.0->settings-schema.json->powergroup-placement->description
@@ -556,20 +517,82 @@ msgid "Right"
 msgstr "对"
 
 #. 4.0->settings-schema.json->powergroup-placement->tooltip
-msgid "Choose where to show the session (quit, logout, etc.) buttons."
+#, fuzzy
+#| msgid "Choose where to show the session (quit, logout, etc.) buttons."
+msgid "Choose where to show the session (quit, logout, etc.) buttons"
 msgstr "选择显示会话（退出，注销等）按钮的位置。"
 
 #. 4.0->settings-schema.json->add-favorites->description
-msgid "Add favorites to session buttons."
-msgstr "将收藏夹添加到会话按钮。"
+msgid "Add favorites to session buttons"
+msgstr "将收藏夹添加到会话按钮"
 
 #. 4.0->settings-schema.json->add-favorites->tooltip
-msgid "Show your favorite app icons next to the session buttons."
+#, fuzzy
+#| msgid "Show your favorite app icons next to the session buttons."
+msgid "Show your favorite app icons next to the session buttons"
 msgstr "在会话按钮旁边显示您喜欢的应用程序图标。"
 
-#. 4.0->settings-schema.json->privacy-settings-button->description
-msgid "Recent files settings"
-msgstr "最近的文件设置"
+#, javascript-format
+#~ msgid "Failed to launch \"%s\""
+#~ msgstr "无法启动\"%s\""
+
+#~ msgid "Remove from favorites"
+#~ msgstr "从收藏夹移除"
+
+#~ msgid "Toggle recent files"
+#~ msgstr "切换最近的文件"
+
+#, fuzzy
+#~ msgid "Press this button to customize your privacy settings."
+#~ msgstr "按此按钮自定义您的菜单条目。"
+
+#~ msgid "Press this button to customize your menu entries."
+#~ msgstr "按此按钮自定义您的菜单条目。"
+
+#~ msgid "Unchecking this allows the theme to set the icon"
+#~ msgstr "不选中此项允许主题设置图标"
+
+#~ msgid "Icon"
+#~ msgstr "图标"
+
+#~ msgid "Set the custom menu button icon name"
+#~ msgstr "设置自定义菜单按钮图标名称"
+
+#~ msgid "Enable opening the menu when the mouse enters the applet"
+#~ msgstr "启用当鼠标进入小程序时打开菜单"
+
+#~ msgid "Delay between switching categories"
+#~ msgstr "切换类别间的延迟"
+
+#~ msgid ""
+#~ "When enabled, category views are activated on click instead of on hover."
+#~ msgstr "启用后，将在单击而不是将鼠标悬停时激活类别视图。"
+
+#~ msgid ""
+#~ "Choose whether or not to enable smooth autoscrolling in the application "
+#~ "list."
+#~ msgstr "选择是否在应用程序列表中启用平滑滚动。"
+
+#~ msgid "Choose whether or not bookmarks are indexed in the menu."
+#~ msgstr "选择是否在菜单中索引书签。"
+
+#, fuzzy
+#~ msgid "Choose whether or not open windows are indexed in menu searches."
+#~ msgstr "选择是否在菜单中索引书签。"
+
+#~ msgid "Choose whether or not to show bookmarks and places in the menu."
+#~ msgstr "选择是否在菜单中显示书签和位置。"
+
+#~ msgid "Choose whether or not to show icons on applications."
+#~ msgstr "选择是否显示应用程序的图标。"
+
+#~ msgid "Choose whether or not to show icons on categories."
+#~ msgstr "选择是否显示类别图标。"
+
+#~ msgid ""
+#~ "Choose whether or not to show the application description on the "
+#~ "application buttons."
+#~ msgstr "选择是否在应用程序按钮上显示应用程序说明。"
 
 #~ msgid "Please provide your password to uninstall this application"
 #~ msgstr "请提供您的密码以卸载此应用程序"
