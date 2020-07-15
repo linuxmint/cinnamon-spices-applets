@@ -96,6 +96,7 @@ type localeStringSupport = "none" | "notz" | "full";
 var GetDayName = (date: Date, locale:string, tz?: string): string => {
     let support: localeStringSupport = isLocaleStringSupported();
     // No timezone, Date passed in corrected with offset
+    if (locale == "c") locale = undefined;
     if (!tz && support == "full") support = "notz";
 
     switch(support) {
@@ -110,6 +111,7 @@ var GetDayName = (date: Date, locale:string, tz?: string): string => {
 
 var GetHoursMinutes = (date: Date, locale: string, hours24Format: boolean, tz?: string): string => {
     let support: localeStringSupport = isLocaleStringSupported();
+    if (locale == "c") locale = undefined;
     // No timezone, Date passed in corrected with offset
     if (!tz && support == "full") support = "notz";
 
@@ -125,6 +127,7 @@ var GetHoursMinutes = (date: Date, locale: string, hours24Format: boolean, tz?: 
 
 var AwareDateString = (date: Date, locale: string, hours24Format: boolean, tz?: string): string => {
     let support: localeStringSupport = isLocaleStringSupported();
+    if (locale == "c") locale = undefined; // Ignore unset locales
     let now = new Date();
     let params: any = {
       hour: "numeric",

@@ -109,6 +109,8 @@ var isLocaleStringSupported = function () {
 };
 var GetDayName = function (date, locale, tz) {
     var support = isLocaleStringSupported();
+    if (locale == "c")
+        locale = undefined;
     if (!tz && support == "full")
         support = "notz";
     switch (support) {
@@ -123,6 +125,8 @@ var GetDayName = function (date, locale, tz) {
 };
 var GetHoursMinutes = function (date, locale, hours24Format, tz) {
     var support = isLocaleStringSupported();
+    if (locale == "c")
+        locale = undefined;
     if (!tz && support == "full")
         support = "notz";
     switch (support) {
@@ -136,6 +140,8 @@ var GetHoursMinutes = function (date, locale, hours24Format, tz) {
 };
 var AwareDateString = function (date, locale, hours24Format, tz) {
     var support = isLocaleStringSupported();
+    if (locale == "c")
+        locale = undefined;
     var now = new Date();
     var params = {
         hour: "numeric",
