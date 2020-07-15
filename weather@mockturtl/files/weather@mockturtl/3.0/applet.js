@@ -74,7 +74,7 @@ var _g = imports.ui.settings, AppletSettings = _g.AppletSettings, BindingDirecti
 var _h = imports.misc.util, spawnCommandLine = _h.spawnCommandLine, spawn_async = _h.spawn_async;
 var _j = imports.ui.messageTray, SystemNotificationSource = _j.SystemNotificationSource, Notification = _j.Notification;
 var SignalManager = imports.misc.signalManager.SignalManager;
-var messageTray = imports.ui.main.messageTray;
+var _k = imports.ui.main, messageTray = _k.messageTray, themeManager = _k.themeManager;
 var utils = importModule("utils");
 var GetDayName = utils.GetDayName;
 var GetHoursMinutes = utils.GetHoursMinutes;
@@ -755,7 +755,9 @@ var UI = (function () {
         this.app.log.Debug("Popup Menu applied classes are: " + this.menu.box.get_style_class_name());
         this.menuManager.addMenu(this.menu);
         this.menuManager._signals.connect(this.menu, "open-state-changed", this.PopupMenuToggled, this);
+        this.signals = new SignalManager();
         this.BuildPopupMenu();
+        this.signals.connect(themeManager, 'theme-set', this.OnThemeChanged, this);
     }
     UI.prototype.PopupMenuToggled = function (caller, data) {
         return __awaiter(this, void 0, void 0, function () {
@@ -835,6 +837,10 @@ var UI = (function () {
     };
     UI.prototype.DisplayErrorMessage = function (msg) {
         this._timestamp.text = msg;
+    };
+    UI.prototype.OnThemeChanged = function () {
+        this.hourlyNeverOpened = true;
+        this.HideHourlyWeather();
     };
     UI.prototype.ShowHourlyWeather = function () {
         var _this = this;

@@ -25,7 +25,7 @@ const { AppletSettings, BindingDirection } = imports.ui.settings;
 const { spawnCommandLine, spawn_async } = imports.misc.util;
 const { SystemNotificationSource, Notification } = imports.ui.messageTray;
 const { SignalManager } = imports.misc.signalManager;
-const { messageTray } = imports.ui.main;
+const { messageTray, themeManager } = imports.ui.main;
 var utils = importModule("utils");
 var GetDayName = utils.GetDayName;
 var GetHoursMinutes = utils.GetHoursMinutes;
@@ -649,7 +649,9 @@ class UI {
         this.app.log.Debug("Popup Menu applied classes are: " + this.menu.box.get_style_class_name());
         this.menuManager.addMenu(this.menu);
         this.menuManager._signals.connect(this.menu, "open-state-changed", this.PopupMenuToggled, this);
+        this.signals = new SignalManager();
         this.BuildPopupMenu();
+        this.signals.connect(themeManager, 'theme-set', this.OnThemeChanged, this);
     }
     async PopupMenuToggled(caller, data) {
         if (data == false) {
@@ -718,6 +720,10 @@ class UI {
     }
     DisplayErrorMessage(msg) {
         this._timestamp.text = msg;
+    }
+    OnThemeChanged() {
+        this.hourlyNeverOpened = true;
+        this.HideHourlyWeather();
     }
     ShowHourlyWeather() {
         if (this.hourlyNeverOpened) {

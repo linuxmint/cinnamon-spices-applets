@@ -45,7 +45,7 @@ const { AppletSettings, BindingDirection } = imports.ui.settings;
 const { spawnCommandLine, spawn_async } = imports.misc.util;
 const { SystemNotificationSource, Notification } = imports.ui.messageTray;
 const { SignalManager } = imports.misc.signalManager;
-const { messageTray } = imports.ui.main;
+const { messageTray, themeManager } = imports.ui.main;
 
 var utils = importModule("utils");
 var GetDayName = utils.GetDayName as (date: Date, locale:string, tz?: string) => string;
@@ -206,9 +206,9 @@ class WeatherApplet extends TextIconApplet {
 
 		this.orientation = orientation;
 		try {
-		this.setAllowedLayout(AllowedLayout.BOTH);
+			this.setAllowedLayout(AllowedLayout.BOTH);
 		} catch (e) {
-		// vertical panel not supported
+			// vertical panel not supported
 		}
 		this.loop.Start();
 	}
@@ -854,7 +854,8 @@ class UI {
 
     /** Rolldown menu itself */
     public menu: imports.ui.applet.AppletPopupMenu;
-    private menuManager: imports.ui.popupMenu.PopupMenuManager;
+	private menuManager: imports.ui.popupMenu.PopupMenuManager;
+	private signals: imports.misc.signalManager.SignalManager;
 
 	constructor(app: WeatherApplet, orientation: imports.gi.St.Side) {
 		this.app = app;
@@ -867,7 +868,11 @@ class UI {
 		this.app.log.Debug("Popup Menu applied classes are: " + this.menu.box.get_style_class_name());
 		this.menuManager.addMenu(this.menu);
 		this.menuManager._signals.connect(this.menu, "open-state-changed", this.PopupMenuToggled, this);
+		this.signals = new SignalManager();
 		this.BuildPopupMenu();
+
+		// Subscribe to theme changes
+		this.signals.connect(themeManager, 'theme-set', this.OnThemeChanged, this);
 	}
 
 	private async PopupMenuToggled(caller: any, data: any) {
@@ -962,6 +967,15 @@ class UI {
 
 	public DisplayErrorMessage(msg: string) {
 		this._timestamp.text = msg;
+	}
+
+	/**
+	 * Resetting flags from Hourly scrollview when theme changed to 
+	 * prevent incorrect height requests
+	 */
+	private OnThemeChanged(): void {
+		this.hourlyNeverOpened = true;
+		this.HideHourlyWeather();
 	}
 
 	public ShowHourlyWeather(): void {

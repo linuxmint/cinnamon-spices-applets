@@ -16,10 +16,22 @@ declare namespace imports.cairo {
     }
 }
 
+declare namespace imports.ui.themeManager {
+    /**
+     * Wrapper on Gio.Settings, emits "theme-set" event
+     * when theme is changed
+     */
+    export class ThemeManager {
+
+    }
+}
+
 declare namespace imports.ui.main {
     export class KeybindingManager {
         addHotKey(UUID: string, keybinding: any, binding: void): void;
     }
+
+    export const themeManager: themeManager.ThemeManager;
 
     export const messageTray: any;
 
