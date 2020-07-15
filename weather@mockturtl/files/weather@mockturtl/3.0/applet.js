@@ -235,7 +235,7 @@ var WeatherApplet = (function (_super) {
         return false;
     };
     ;
-    WeatherApplet.prototype.LoadJsonAsync = function (query) {
+    WeatherApplet.prototype.LoadJsonAsync = function (query, errorCallback) {
         return __awaiter(this, void 0, void 0, function () {
             var json;
             var _this = this;
@@ -245,28 +245,26 @@ var WeatherApplet = (function (_super) {
                             var message = Message.new('GET', query);
                             _this.log.Debug("URL called: " + query);
                             _this._httpSession.queue_message(message, function (session, message) {
+                                var error = (errorCallback != null) ? errorCallback(message) : null;
+                                if (error != null) {
+                                    _this.HandleError(error);
+                                    reject({ code: -1, message: "bad api response", data: null, reason_phrase: null });
+                                    return;
+                                }
                                 if (!message) {
                                     reject({ code: 0, message: "no network response", reason_phrase: "no network response", data: get(["response_body", "data"], message) });
                                     return;
                                 }
                                 if (message.status_code >= 400 && message.status_code < 500) {
                                     reject({ code: message.status_code, message: "bad status code", reason_phrase: message.reason_phrase, data: get(["response_body", "data"], message) });
-                                    _this.HandleError({
-                                        detail: "bad api response",
-                                        type: "hard",
-                                        message: _("API returned status code between 400 and 500")
-                                    });
+                                    _this.HandleError({ detail: "bad api response", type: "hard", message: _("API returned status code between 400 and 500") });
                                     return;
                                 }
                                 if (message.status_code > 300 || message.status_code < 200) {
                                     reject({ code: message.status_code, message: "bad status code", reason_phrase: message.reason_phrase, data: get(["response_body", "data"], message) });
                                     return;
                                 }
-                                if (!message.response_body) {
-                                    reject({ code: message.status_code, message: "no reponse body", reason_phrase: message.reason_phrase, data: get(["response_body", "data"], message) });
-                                    return;
-                                }
-                                if (!message.response_body.data) {
+                                if (get(["response_body", "data"], message) == null) {
                                     reject({ code: message.status_code, message: "no respone data", reason_phrase: message.reason_phrase, data: get(["response_body", "data"], message) });
                                     return;
                                 }
@@ -649,6 +647,8 @@ var WeatherApplet = (function (_super) {
     };
     ;
     WeatherApplet.prototype.HandleError = function (error) {
+        if (error == null)
+            return;
         if (this.encounteredError == true)
             return;
         this.encounteredError = true;

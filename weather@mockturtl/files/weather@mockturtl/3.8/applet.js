@@ -184,33 +184,31 @@ class WeatherApplet extends TextIconApplet {
         return false;
     }
     ;
-    async LoadJsonAsync(query) {
+    async LoadJsonAsync(query, errorCallback) {
         let json = await new Promise((resolve, reject) => {
             let message = Message.new('GET', query);
             this.log.Debug("URL called: " + query);
             this._httpSession.queue_message(message, (session, message) => {
+                let error = (errorCallback != null) ? errorCallback(message) : null;
+                if (error != null) {
+                    this.HandleError(error);
+                    reject({ code: -1, message: "bad api response", data: null, reason_phrase: null });
+                    return;
+                }
                 if (!message) {
                     reject({ code: 0, message: "no network response", reason_phrase: "no network response", data: get(["response_body", "data"], message) });
                     return;
                 }
                 if (message.status_code >= 400 && message.status_code < 500) {
                     reject({ code: message.status_code, message: "bad status code", reason_phrase: message.reason_phrase, data: get(["response_body", "data"], message) });
-                    this.HandleError({
-                        detail: "bad api response",
-                        type: "hard",
-                        message: _("API returned status code between 400 and 500")
-                    });
+                    this.HandleError({ detail: "bad api response", type: "hard", message: _("API returned status code between 400 and 500") });
                     return;
                 }
                 if (message.status_code > 300 || message.status_code < 200) {
                     reject({ code: message.status_code, message: "bad status code", reason_phrase: message.reason_phrase, data: get(["response_body", "data"], message) });
                     return;
                 }
-                if (!message.response_body) {
-                    reject({ code: message.status_code, message: "no reponse body", reason_phrase: message.reason_phrase, data: get(["response_body", "data"], message) });
-                    return;
-                }
-                if (!message.response_body.data) {
+                if (get(["response_body", "data"], message) == null) {
                     reject({ code: message.status_code, message: "no respone data", reason_phrase: message.reason_phrase, data: get(["response_body", "data"], message) });
                     return;
                 }
@@ -545,6 +543,8 @@ class WeatherApplet extends TextIconApplet {
     }
     ;
     HandleError(error) {
+        if (error == null)
+            return;
         if (this.encounteredError == true)
             return;
         this.encounteredError = true;

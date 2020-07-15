@@ -20,6 +20,7 @@ var IsNight = utils.IsNight;
 var CelsiusToKelvin = utils.CelsiusToKelvin;
 var FahrenheitToKelvin = utils.FahrenheitToKelvin;
 var KPHtoMPS = utils.MPHtoMPS;
+var get = utils.get;
 var compassToDeg = utils.compassToDeg;
 var GetDistance = utils.GetDistance;
 class USWeather {
@@ -43,33 +44,18 @@ class USWeather {
         if (!this.grid || !this.stations || this.currentLoc.text != loc.text) {
             this.currentLoc = loc;
             try {
-                let siteData = await this.app.LoadJsonAsync(this.sitesUrl + loc.text);
+                let siteData = await this.app.LoadJsonAsync(this.sitesUrl + loc.text, this.OnObtainGridDataFailure);
                 this.grid = siteData;
                 this.app.log.Debug("Grid found: " + JSON.stringify(siteData, null, 2));
             }
             catch (e) {
-                let error = e;
-                if (error.code == 404) {
-                    let data = JSON.parse(error.data);
-                    if (data.title == "Data Unavailable For Requested Point") {
-                        this.app.HandleError({
-                            type: "hard",
-                            userError: true,
-                            detail: "location not covered",
-                            service: "us-weather",
-                            message: _("Location is outside US, please use a different provider.")
-                        });
-                    }
-                }
-                else {
-                    this.app.HandleError({
-                        type: "soft",
-                        userError: true,
-                        detail: "no network response",
-                        service: "us-weather",
-                        message: _("Unexpected response from API")
-                    });
-                }
+                this.app.HandleError({
+                    type: "soft",
+                    userError: true,
+                    detail: "no network response",
+                    service: "us-weather",
+                    message: _("Unexpected response from API")
+                });
                 this.app.log.Error("Failed to Obtain Grid data, error: " + JSON.stringify(e, null, 2));
                 return null;
             }
@@ -121,6 +107,21 @@ class USWeather {
         return weather;
     }
     ;
+    OnObtainGridDataFailure(message) {
+        if (message.status_code == 404) {
+            let data = JSON.parse(get(["response_body", "data"], message));
+            if (data.title == "Data Unavailable For Requested Point") {
+                return {
+                    type: "hard",
+                    userError: true,
+                    detail: "location not covered",
+                    service: "us-weather",
+                    message: _("Location is outside US, please use a different provider.")
+                };
+            }
+        }
+        return null;
+    }
     MeshObservationData(observations) {
         if (observations.length < 1)
             return null;

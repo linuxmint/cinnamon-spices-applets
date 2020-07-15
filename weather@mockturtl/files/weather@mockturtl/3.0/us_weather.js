@@ -56,6 +56,7 @@ var IsNight = utils.IsNight;
 var CelsiusToKelvin = utils.CelsiusToKelvin;
 var FahrenheitToKelvin = utils.FahrenheitToKelvin;
 var KPHtoMPS = utils.MPHtoMPS;
+var get = utils.get;
 var compassToDeg = utils.compassToDeg;
 var GetDistance = utils.GetDistance;
 var USWeather = (function () {
@@ -75,7 +76,7 @@ var USWeather = (function () {
     }
     USWeather.prototype.GetWeather = function (loc) {
         return __awaiter(this, void 0, void 0, function () {
-            var siteData, e_1, error, data, stations, e_2, observations, index, element, _a, _b, _c, hourly, forecast, hourlyForecastPromise, forecastPromise, e_3, error, weather;
+            var siteData, e_1, stations, e_2, observations, index, element, _a, _b, _c, hourly, forecast, hourlyForecastPromise, forecastPromise, e_3, error, weather;
             return __generator(this, function (_d) {
                 switch (_d.label) {
                     case 0:
@@ -86,7 +87,7 @@ var USWeather = (function () {
                         _d.label = 1;
                     case 1:
                         _d.trys.push([1, 3, , 4]);
-                        return [4, this.app.LoadJsonAsync(this.sitesUrl + loc.text)];
+                        return [4, this.app.LoadJsonAsync(this.sitesUrl + loc.text, this.OnObtainGridDataFailure)];
                     case 2:
                         siteData = _d.sent();
                         this.grid = siteData;
@@ -94,28 +95,13 @@ var USWeather = (function () {
                         return [3, 4];
                     case 3:
                         e_1 = _d.sent();
-                        error = e_1;
-                        if (error.code == 404) {
-                            data = JSON.parse(error.data);
-                            if (data.title == "Data Unavailable For Requested Point") {
-                                this.app.HandleError({
-                                    type: "hard",
-                                    userError: true,
-                                    detail: "location not covered",
-                                    service: "us-weather",
-                                    message: _("Location is outside US, please use a different provider.")
-                                });
-                            }
-                        }
-                        else {
-                            this.app.HandleError({
-                                type: "soft",
-                                userError: true,
-                                detail: "no network response",
-                                service: "us-weather",
-                                message: _("Unexpected response from API")
-                            });
-                        }
+                        this.app.HandleError({
+                            type: "soft",
+                            userError: true,
+                            detail: "no network response",
+                            service: "us-weather",
+                            message: _("Unexpected response from API")
+                        });
                         this.app.log.Error("Failed to Obtain Grid data, error: " + JSON.stringify(e_1, null, 2));
                         return [2, null];
                     case 4:
@@ -191,6 +177,21 @@ var USWeather = (function () {
         });
     };
     ;
+    USWeather.prototype.OnObtainGridDataFailure = function (message) {
+        if (message.status_code == 404) {
+            var data = JSON.parse(get(["response_body", "data"], message));
+            if (data.title == "Data Unavailable For Requested Point") {
+                return {
+                    type: "hard",
+                    userError: true,
+                    detail: "location not covered",
+                    service: "us-weather",
+                    message: _("Location is outside US, please use a different provider.")
+                };
+            }
+        }
+        return null;
+    };
     USWeather.prototype.MeshObservationData = function (observations) {
         if (observations.length < 1)
             return null;

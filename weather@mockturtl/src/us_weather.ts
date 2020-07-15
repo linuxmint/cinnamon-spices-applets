@@ -22,6 +22,7 @@ var IsNight = utils.IsNight as (sunTimes: SunTimes, date?: Date) => boolean;
 var CelsiusToKelvin = utils.CelsiusToKelvin as (celsius: number) => number;
 var FahrenheitToKelvin = utils.FahrenheitToKelvin as (fahr: number) => number;
 var KPHtoMPS = utils.MPHtoMPS as (speed: number) => number;
+var get = utils.get as (p: string[], o: any) => any;
 var compassToDeg = utils.compassToDeg as (compass: string) => number;
 var GetDistance = utils.GetDistance as (lat1: number, lon1: number, lat2: number, lon2: number) => number
 
@@ -70,33 +71,18 @@ class USWeather implements WeatherProvider {
 		if (!this.grid || !this.stations || this.currentLoc.text != loc.text) {
 			this.currentLoc = loc;
 			try {
-				let siteData = await this.app.LoadJsonAsync(this.sitesUrl + loc.text) as GridPayload;
+				let siteData = await this.app.LoadJsonAsync(this.sitesUrl + loc.text, this.OnObtainGridDataFailure) as GridPayload;
 				this.grid = siteData;
 				this.app.log.Debug("Grid found: " + JSON.stringify(siteData, null, 2));
 			}
 			catch (e) {
-				let error = (e as HttpError);
-				if (error.code == 404) {
-					let data = JSON.parse(error.data);
-					if (data.title == "Data Unavailable For Requested Point") {
-						this.app.HandleError({
-							type: "hard",
-							userError: true,
-							detail: "location not covered",
-							service: "us-weather",
-							message: _("Location is outside US, please use a different provider.")
-						})
-					}
-				}
-				else {
-					this.app.HandleError({
+				this.app.HandleError({
 						type: "soft",
 						userError: true,
 						detail: "no network response",
 						service: "us-weather",
 						message: _("Unexpected response from API")
-					})
-				}
+				});
 				this.app.log.Error("Failed to Obtain Grid data, error: " + JSON.stringify(e, null, 2));
 				return null;
 			}
@@ -152,6 +138,26 @@ class USWeather implements WeatherProvider {
 
 		return weather;
 	};
+
+	/**
+	 * 
+	 * @param message Soup Message object
+	 */
+	private OnObtainGridDataFailure(message: any): AppletError {
+		if (message.status_code == 404) {
+			let data = JSON.parse(get(["response_body", "data"], message));
+			if (data.title == "Data Unavailable For Requested Point") {
+				return {
+					type: "hard",
+					userError: true,
+					detail: "location not covered",
+					service: "us-weather",
+					message: _("Location is outside US, please use a different provider.")
+				};
+			}
+		}
+		return null;
+	}
 
 	/** Observation data is a bit spotty, so we mesh the nearest
 	 * stations data in 50km radius

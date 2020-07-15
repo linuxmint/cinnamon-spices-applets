@@ -258,11 +258,18 @@ class WeatherApplet extends TextIconApplet {
 	 * returns HTTPError object on fail.
 	 * @param query fully constructed url
 	 */
-	public async LoadJsonAsync(query: string): Promise <any> {
+	public async LoadJsonAsync(query: string, errorCallback?: (message: any) => AppletError): Promise <any> {
 		let json = await new Promise((resolve: any, reject: any) => {
 			let message = Message.new('GET', query);
 			this.log.Debug("URL called: " + query);
 			this._httpSession.queue_message(message, (session: any, message: any) => {
+				// option for provider to inject errors before general error handling
+				let error: AppletError = (errorCallback != null) ? errorCallback(message) : null;
+				if (error != null) {
+					this.HandleError(error);
+					reject({code: -1, message: "bad api response", data: null, reason_phrase: null} as HttpError);
+					return;
+				}
 
 				if (!message) {
 					reject({code: 0, message: "no network response", reason_phrase: "no network response", data: get(["response_body", "data"], message)} as HttpError);
@@ -271,11 +278,7 @@ class WeatherApplet extends TextIconApplet {
 
 				if (message.status_code >= 400 && message.status_code < 500) {
 					reject({code: message.status_code, message: "bad status code", reason_phrase: message.reason_phrase, data: get(["response_body", "data"], message) } as HttpError);
-					this.HandleError({
-						detail: "bad api response",
-						type: "hard",
-						message: _("API returned status code between 400 and 500")
-					})
+					this.HandleError({ detail: "bad api response", type: "hard", message: _("API returned status code between 400 and 500")});
 					return;
 				}
 					
@@ -284,12 +287,7 @@ class WeatherApplet extends TextIconApplet {
 					return;
 				}
 					
-				if (!message.response_body) {
-					reject({code: message.status_code, message: "no reponse body", reason_phrase: message.reason_phrase, data: get(["response_body", "data"], message)} as HttpError);
-					return;
-				}
-					
-				if (!message.response_body.data) {
+				if (get(["response_body", "data"], message) == null) {
 					reject({code: message.status_code, message: "no respone data", reason_phrase: message.reason_phrase, data: get(["response_body", "data"], message)} as HttpError);
 					return;
 				}
@@ -701,6 +699,7 @@ class WeatherApplet extends TextIconApplet {
 	}
 
 	public HandleError(error: AppletError): void {
+		if (error == null) return;
 		if (this.encounteredError == true) return; // Error Already called in this loop, ignore
 		this.encounteredError = true;
 		this.log.Debug("User facing Error received, error: " + JSON.stringify(error, null, 2));
