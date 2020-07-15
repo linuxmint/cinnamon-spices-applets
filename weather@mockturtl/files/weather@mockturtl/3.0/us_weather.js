@@ -69,105 +69,57 @@ var USWeather = (function () {
         this.sitesUrl = "https://api.weather.gov/points/";
         this.grid = null;
         this.MAX_STATION_DIST = 50000;
-        this.stations = null;
+        this.observationStations = null;
         this.currentLoc = null;
         this.app = _app;
         this.sunCalc = new SunCalc();
     }
     USWeather.prototype.GetWeather = function (loc) {
         return __awaiter(this, void 0, void 0, function () {
-            var siteData, e_1, stations, e_2, observations, index, element, _a, _b, _c, hourly, forecast, hourlyForecastPromise, forecastPromise, e_3, error, weather;
-            return __generator(this, function (_d) {
-                switch (_d.label) {
+            var grid, observationStations, observations, hourly, forecast, hourlyForecastPromise, forecastPromise, e_1, weather;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
                     case 0:
                         if (loc == null)
                             return [2, null];
-                        if (!(!this.grid || !this.stations || this.currentLoc.text != loc.text)) return [3, 7];
+                        if (!(!this.grid || !this.observationStations || this.currentLoc.text != loc.text)) return [3, 3];
                         this.currentLoc = loc;
-                        _d.label = 1;
+                        return [4, this.GetGridData(loc)];
                     case 1:
-                        _d.trys.push([1, 3, , 4]);
-                        return [4, this.app.LoadJsonAsync(this.sitesUrl + loc.text, this.OnObtainGridDataFailure)];
+                        grid = _a.sent();
+                        if (grid == null)
+                            return [2, null];
+                        return [4, this.GetStationData(grid.properties.observationStations)];
                     case 2:
-                        siteData = _d.sent();
-                        this.grid = siteData;
-                        this.app.log.Debug("Grid found: " + JSON.stringify(siteData, null, 2));
-                        return [3, 4];
-                    case 3:
-                        e_1 = _d.sent();
-                        this.app.HandleError({
-                            type: "soft",
-                            userError: true,
-                            detail: "no network response",
-                            service: "us-weather",
-                            message: _("Unexpected response from API")
-                        });
-                        this.app.log.Error("Failed to Obtain Grid data, error: " + JSON.stringify(e_1, null, 2));
-                        return [2, null];
+                        observationStations = _a.sent();
+                        if (observationStations == null)
+                            return [2, null];
+                        this.grid = grid;
+                        this.observationStations = observationStations;
+                        _a.label = 3;
+                    case 3: return [4, this.GetObservationsInRange(this.MAX_STATION_DIST, loc, this.observationStations)];
                     case 4:
-                        _d.trys.push([4, 6, , 7]);
-                        return [4, this.app.LoadJsonAsync(this.grid.properties.observationStations)];
-                    case 5:
-                        stations = _d.sent();
-                        this.stations = stations.features;
-                        return [3, 7];
-                    case 6:
-                        e_2 = _d.sent();
-                        this.app.log.Error("Failed to obtain station data, error: " + JSON.stringify(e_2, null, 2));
-                        this.app.HandleError({
-                            type: "soft",
-                            userError: true,
-                            detail: "no network response",
-                            service: "us-weather",
-                            message: _("Unexpected response from API")
-                        });
-                        return [2, null];
-                    case 7:
-                        observations = [];
-                        index = 0;
-                        _d.label = 8;
-                    case 8:
-                        if (!(index < this.stations.length)) return [3, 13];
-                        element = this.stations[index];
-                        element.dist = GetDistance(element.geometry.coordinates[1], element.geometry.coordinates[0], loc.lat, loc.lon);
-                        if (element.dist > this.MAX_STATION_DIST)
-                            return [3, 13];
-                        _d.label = 9;
-                    case 9:
-                        _d.trys.push([9, 11, , 12]);
-                        _b = (_a = observations).push;
-                        return [4, this.app.LoadJsonAsync(this.stations[index].id + "/observations/latest")];
-                    case 10:
-                        _b.apply(_a, [_d.sent()]);
-                        return [3, 12];
-                    case 11:
-                        _c = _d.sent();
-                        this.app.log.Debug("Failed to get observations from " + this.stations[index].id);
-                        return [3, 12];
-                    case 12:
-                        index++;
-                        return [3, 8];
-                    case 13:
+                        observations = _a.sent();
                         hourly = null;
                         forecast = null;
-                        _d.label = 14;
-                    case 14:
-                        _d.trys.push([14, 17, , 18]);
+                        _a.label = 5;
+                    case 5:
+                        _a.trys.push([5, 8, , 9]);
                         hourlyForecastPromise = this.app.LoadJsonAsync(this.grid.properties.forecastHourly + "?units=si");
                         forecastPromise = this.app.LoadJsonAsync(this.grid.properties.forecast);
                         return [4, hourlyForecastPromise];
-                    case 15:
-                        hourly = _d.sent();
+                    case 6:
+                        hourly = _a.sent();
                         return [4, forecastPromise];
-                    case 16:
-                        forecast = _d.sent();
-                        return [3, 18];
-                    case 17:
-                        e_3 = _d.sent();
-                        error = e_3;
-                        this.app.log.Error("Failed to obtain forecast Data, error: " + JSON.stringify(e_3, null, 2));
+                    case 7:
+                        forecast = _a.sent();
+                        return [3, 9];
+                    case 8:
+                        e_1 = _a.sent();
+                        this.app.log.Error("Failed to obtain forecast Data, error: " + JSON.stringify(e_1, null, 2));
+                        this.app.HandleError({ type: "soft", detail: "bad api response", message: _("Could not get forecast for your area") });
                         return [2, null];
-                    case 18:
+                    case 9:
                         weather = this.ParseCurrent(observations, hourly);
                         weather.forecasts = this.ParseForecast(forecast);
                         weather.hourlyForecasts = this.ParseHourlyForecast(hourly, this);
@@ -177,7 +129,97 @@ var USWeather = (function () {
         });
     };
     ;
-    USWeather.prototype.OnObtainGridDataFailure = function (message) {
+    USWeather.prototype.GetGridData = function (loc) {
+        return __awaiter(this, void 0, void 0, function () {
+            var siteData, e_2;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4, this.app.LoadJsonAsync(this.sitesUrl + loc.text, this.OnObtainingGridData)];
+                    case 1:
+                        siteData = _a.sent();
+                        this.app.log.Debug("Grid found: " + JSON.stringify(siteData, null, 2));
+                        return [2, siteData];
+                    case 2:
+                        e_2 = _a.sent();
+                        this.app.HandleError({
+                            type: "soft",
+                            userError: true,
+                            detail: "no network response",
+                            service: "us-weather",
+                            message: _("Unexpected response from API")
+                        });
+                        this.app.log.Error("Failed to Obtain Grid data, error: " + JSON.stringify(e_2, null, 2));
+                        return [2, null];
+                    case 3: return [2];
+                }
+            });
+        });
+    };
+    USWeather.prototype.GetStationData = function (stationListUrl) {
+        return __awaiter(this, void 0, void 0, function () {
+            var stations, e_3;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4, this.app.LoadJsonAsync(stationListUrl)];
+                    case 1:
+                        stations = _a.sent();
+                        return [2, stations.features];
+                    case 2:
+                        e_3 = _a.sent();
+                        this.app.log.Error("Failed to obtain station data, error: " + JSON.stringify(e_3, null, 2));
+                        this.app.HandleError({
+                            type: "soft",
+                            userError: true,
+                            detail: "no network response",
+                            service: "us-weather",
+                            message: _("Unexpected response from API")
+                        });
+                        return [2, null];
+                    case 3: return [2];
+                }
+            });
+        });
+    };
+    USWeather.prototype.GetObservationsInRange = function (range, loc, stations) {
+        return __awaiter(this, void 0, void 0, function () {
+            var observations, index, element, _a, _b, _c;
+            return __generator(this, function (_d) {
+                switch (_d.label) {
+                    case 0:
+                        observations = [];
+                        index = 0;
+                        _d.label = 1;
+                    case 1:
+                        if (!(index < stations.length)) return [3, 6];
+                        element = stations[index];
+                        element.dist = GetDistance(element.geometry.coordinates[1], element.geometry.coordinates[0], loc.lat, loc.lon);
+                        if (element.dist > range)
+                            return [3, 6];
+                        _d.label = 2;
+                    case 2:
+                        _d.trys.push([2, 4, , 5]);
+                        _b = (_a = observations).push;
+                        return [4, this.app.LoadJsonAsync(stations[index].id + "/observations/latest")];
+                    case 3:
+                        _b.apply(_a, [_d.sent()]);
+                        return [3, 5];
+                    case 4:
+                        _c = _d.sent();
+                        this.app.log.Debug("Failed to get observations from " + stations[index].id);
+                        return [3, 5];
+                    case 5:
+                        index++;
+                        return [3, 1];
+                    case 6: return [2, observations];
+                }
+            });
+        });
+    };
+    USWeather.prototype.OnObtainingGridData = function (message) {
         if (message.status_code == 404) {
             var data = JSON.parse(get(["response_body", "data"], message));
             if (data.title == "Data Unavailable For Requested Point") {
@@ -259,7 +301,7 @@ var USWeather = (function () {
                     city: null,
                     country: null,
                     url: "https://forecast.weather.gov/MapClick.php?lat=" + this.currentLoc.lat.toString() + "&lon=" + this.currentLoc.lon.toString(),
-                    timeZone: this.stations[0].properties.timeZone
+                    timeZone: this.observationStations[0].properties.timeZone
                 },
                 date: timestamp,
                 sunrise: times.sunrise,
@@ -310,8 +352,8 @@ var USWeather = (function () {
             return forecasts;
         }
         catch (e) {
-            this.app.log.Error("MET UK Forecast Parsing error: " + e);
-            this.app.HandleError({ type: "soft", service: "met-uk", detail: "unusal payload", message: _("Failed to Process Forecast Info") });
+            this.app.log.Error("US Weather Forecast Parsing error: " + e);
+            this.app.HandleError({ type: "soft", service: "us-weather", detail: "unusal payload", message: _("Failed to Process Forecast Info") });
             return null;
         }
     };
@@ -325,7 +367,7 @@ var USWeather = (function () {
                 var forecast = {
                     date: timestamp,
                     temp: CelsiusToKelvin(hour.temperature),
-                    condition: self.ResolveCondition(hour.icon),
+                    condition: self.ResolveCondition(hour.icon, !hour.isDaytime),
                     precipation: null
                 };
                 forecasts.push(forecast);
@@ -334,7 +376,7 @@ var USWeather = (function () {
         }
         catch (e) {
             self.app.log.Error("US Weather service Forecast Parsing error: " + e);
-            self.app.HandleError({ type: "soft", service: "met-uk", detail: "unusal payload", message: _("Failed to Process Forecast Info") });
+            self.app.HandleError({ type: "soft", service: "us-weather", detail: "unusal payload", message: _("Failed to Process Hourly Forecast Info") });
             return null;
         }
     };

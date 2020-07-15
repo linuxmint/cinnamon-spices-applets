@@ -53,7 +53,7 @@ class USWeather implements WeatherProvider {
 	private grid: GridPayload = null;
 	/** In metres */
 	private readonly MAX_STATION_DIST = 50000;
-	private stations: StationPayload[] = null;
+	private observationStations: StationPayload[] = null;
 	private currentLoc: Location = null;
 
     constructor(_app: WeatherApplet) {
@@ -67,56 +67,24 @@ class USWeather implements WeatherProvider {
     public async GetWeather(loc: Location): Promise<WeatherData> {
 		if (loc == null) return null;
 
-		// getting grid and station data
-		if (!this.grid || !this.stations || this.currentLoc.text != loc.text) {
+		// getting grid and station data first time or location changed
+		if (!this.grid || !this.observationStations || this.currentLoc.text != loc.text) {
 			this.currentLoc = loc;
-			try {
-				let siteData = await this.app.LoadJsonAsync(this.sitesUrl + loc.text, this.OnObtainGridDataFailure) as GridPayload;
-				this.grid = siteData;
-				this.app.log.Debug("Grid found: " + JSON.stringify(siteData, null, 2));
-			}
-			catch (e) {
-				this.app.HandleError({
-						type: "soft",
-						userError: true,
-						detail: "no network response",
-						service: "us-weather",
-						message: _("Unexpected response from API")
-				});
-				this.app.log.Error("Failed to Obtain Grid data, error: " + JSON.stringify(e, null, 2));
-				return null;
-			}
-			
-			try {
-				let stations = await this.app.LoadJsonAsync(this.grid.properties.observationStations) as StationsPayload;
-				this.stations = stations.features;
-			}
-			catch(e) {
-				this.app.log.Error("Failed to obtain station data, error: " + JSON.stringify(e, null, 2));
-				this.app.HandleError({
-					type: "soft",
-					userError: true,
-					detail: "no network response",
-					service: "us-weather",
-					message: _("Unexpected response from API")
-				})
-				return null;
-			}	
-		}
 
-		let observations = [];
-		for (let index = 0; index < this.stations.length; index++) {
-			const element = this.stations[index];
-			element.dist = GetDistance(element.geometry.coordinates[1], element.geometry.coordinates[0], loc.lat, loc.lon);
-			if (element.dist > this.MAX_STATION_DIST) break;
-			try {
-				//this.app.log.Debug("Observation query is: " + this.stations[index].id + "/observations/latest")
-				observations.push(await this.app.LoadJsonAsync(this.stations[index].id + "/observations/latest"))
-			}
-			catch {
-				this.app.log.Debug("Failed to get observations from " + this.stations[index].id);
-			}
+			let grid = await this.GetGridData(loc);
+			if (grid == null) return null;
+
+			let observationStations = await this.GetStationData(grid.properties.observationStations);
+			if (observationStations == null) return null;
+
+			// Caching
+			this.grid = grid;
+			this.observationStations = observationStations;
+			
 		}
+		
+		// Long wait time, can't do Promise.all because US weather will ban IP for some time on spamming
+		let observations = await this.GetObservationsInRange(this.MAX_STATION_DIST, loc, this.observationStations);
 		
 		let hourly = null;
 		let forecast = null;
@@ -127,12 +95,13 @@ class USWeather implements WeatherProvider {
 			forecast = await forecastPromise;
 		}
 		catch(e) {
-			let error = e as HttpError;
 			this.app.log.Error("Failed to obtain forecast Data, error: " + JSON.stringify(e, null, 2));
+			this.app.HandleError({type: "soft", detail: "bad api response", message: _("Could not get forecast for your area")});
 			return null;
 		}
 		
-		let weather = this.ParseCurrent(observations as any[], hourly);
+		// Parsing data
+		let weather = this.ParseCurrent(observations, hourly);
 		weather.forecasts = this.ParseForecast(forecast);
 		weather.hourlyForecasts = this.ParseHourlyForecast(hourly, this);
 
@@ -140,10 +109,78 @@ class USWeather implements WeatherProvider {
 	};
 
 	/**
+	 * Handles App errors internally
+	 * @param loc 
+	 */
+	private async GetGridData(loc: Location): Promise<GridPayload> {
+		try {
+			// Handling out of country errors in callback
+			let siteData = await this.app.LoadJsonAsync(this.sitesUrl + loc.text, this.OnObtainingGridData) as GridPayload;
+			this.app.log.Debug("Grid found: " + JSON.stringify(siteData, null, 2));
+			return siteData;
+		}
+		catch (e) {
+			this.app.HandleError({
+					type: "soft",
+					userError: true,
+					detail: "no network response",
+					service: "us-weather",
+					message: _("Unexpected response from API")
+			});
+			this.app.log.Error("Failed to Obtain Grid data, error: " + JSON.stringify(e, null, 2));
+			return null;
+		}
+	}
+
+	/**
+	 * Handles app errors internally
+	 * @param stationListUrl 
+	 */
+	private async GetStationData(stationListUrl: string): Promise<StationPayload[]> {
+		try {
+			let stations = await this.app.LoadJsonAsync(stationListUrl) as StationsPayload;
+			return stations.features;
+		}
+		catch(e) {
+			this.app.log.Error("Failed to obtain station data, error: " + JSON.stringify(e, null, 2));
+			this.app.HandleError({
+				type: "soft",
+				userError: true,
+				detail: "no network response",
+				service: "us-weather",
+				message: _("Unexpected response from API")
+			})
+			return null;
+		}	
+	}
+
+	/**
+	 * Get ALL Observation stations data in range.
+	 * Data is pretty spotty so we can fill them up from stations further away later
+	 * @param range in metres
+	 */
+	private async GetObservationsInRange(range: number, loc: Location, stations: StationPayload[]): Promise<ObservationPayload[]> {
+		let observations = [];
+		for (let index = 0; index < stations.length; index++) {
+			const element = stations[index];
+			element.dist = GetDistance(element.geometry.coordinates[1], element.geometry.coordinates[0], loc.lat, loc.lon);
+			if (element.dist > range) break;
+			try {
+				//this.app.log.Debug("Observation query is: " + this.stations[index].id + "/observations/latest")
+				observations.push(await this.app.LoadJsonAsync(stations[index].id + "/observations/latest"))
+			}
+			catch {
+				this.app.log.Debug("Failed to get observations from " + stations[index].id);
+			}
+		}
+		return observations;
+	}
+
+	/**
 	 * 
 	 * @param message Soup Message object
 	 */
-	private OnObtainGridDataFailure(message: any): AppletError {
+	private OnObtainingGridData(message: any): AppletError {
 		if (message.status_code == 404) {
 			let data = JSON.parse(get(["response_body", "data"], message));
 			if (data.title == "Data Unavailable For Requested Point") {
@@ -159,8 +196,10 @@ class USWeather implements WeatherProvider {
 		return null;
 	}
 
-	/** Observation data is a bit spotty, so we mesh the nearest
-	 * stations data in 50km radius
+	/**
+	 * Observation data is a bit spotty, so we mesh 
+	 * station data
+	 * @param observations 
 	 */
 	private MeshObservationData(observations: ObservationPayload[]): ObservationPayload {
 		if (observations.length < 1) return null;
@@ -168,6 +207,7 @@ class USWeather implements WeatherProvider {
 		if (observations.length == 1) return result;
 		for (let index = 1; index < observations.length; index++) {
 			const element = observations[index];
+			// We want to know when this happens, at least for debugging
 			let debugText = 
 				" Observation data missing, plugged in from ID " + 
 				element.id + ", index " + index +
@@ -239,7 +279,7 @@ class USWeather implements WeatherProvider {
 					city: /*this.stations[0].properties.name*/ null,
 					country: /*"USA"*/null,
 					url: "https://forecast.weather.gov/MapClick.php?lat=" + this.currentLoc.lat.toString() + "&lon=" + this.currentLoc.lon.toString(),
-					timeZone: this.stations[0].properties.timeZone
+					timeZone: this.observationStations[0].properties.timeZone
 				},
 				date: timestamp,
 				sunrise: times.sunrise,
@@ -275,26 +315,27 @@ class USWeather implements WeatherProvider {
 	};
 	
     private ParseForecast(json: ForecastsPayload): ForecastData[] {
-      let forecasts: ForecastData[] = [];
-      try {
-        for (let i = 0; i < json.properties.periods.length; i+=2) {
-		  let day = json.properties.periods[i];
-		  let night = json.properties.periods[i + 1];
-          let forecast: ForecastData = {          
-              date: new Date(day.startTime),
-              temp_min: FahrenheitToKelvin(night.temperature),
-              temp_max: FahrenheitToKelvin(day.temperature),
-              condition: this.ResolveCondition(day.icon),
-		  };
-          forecasts.push(forecast);         
-        }
-        return forecasts;
-      }
-      catch(e) {
-          this.app.log.Error("MET UK Forecast Parsing error: " + e);
-          this.app.HandleError({type: "soft", service: "met-uk", detail: "unusal payload", message: _("Failed to Process Forecast Info")})
-          return null; 
-	  }
+		let forecasts: ForecastData[] = [];
+		try {
+			for (let i = 0; i < json.properties.periods.length; i+=2) {
+				// Day and night data is separate in array, so we alternate
+				let day = json.properties.periods[i];
+				let night = json.properties.periods[i + 1];
+				let forecast: ForecastData = {          
+					date: new Date(day.startTime),
+					temp_min: FahrenheitToKelvin(night.temperature),
+					temp_max: FahrenheitToKelvin(day.temperature),
+					condition: this.ResolveCondition(day.icon),
+				};
+				forecasts.push(forecast);         
+			}
+			return forecasts;
+		}
+		catch(e) {
+			this.app.log.Error("US Weather Forecast Parsing error: " + e);
+			this.app.HandleError({type: "soft", service: "us-weather", detail: "unusal payload", message: _("Failed to Process Forecast Info")})
+			return null; 
+		}
 	};
 
 	private ParseHourlyForecast(json: ForecastsPayload, self: USWeather): HourlyForecastData[] { 
@@ -302,21 +343,21 @@ class USWeather implements WeatherProvider {
 		try {
 			for (let i = 0; i < json.properties.periods.length; i++) {
 				let hour = json.properties.periods[i];
-					let timestamp = new Date(hour.startTime);
+				let timestamp = new Date(hour.startTime);
 
-					let forecast: HourlyForecastData = {          
-						date: timestamp,
-						temp: CelsiusToKelvin(hour.temperature),
-						condition: self.ResolveCondition(hour.icon),
-						precipation: null
-					}
-					forecasts.push(forecast);      
+				let forecast: HourlyForecastData = {          
+					date: timestamp,
+					temp: CelsiusToKelvin(hour.temperature),
+					condition: self.ResolveCondition(hour.icon, !hour.isDaytime),
+					precipation: null
+				}
+				forecasts.push(forecast);      
 			}
 			return forecasts;
 		}
 		catch(e) {
 			self.app.log.Error("US Weather service Forecast Parsing error: " + e);
-			self.app.HandleError({type: "soft", service: "met-uk", detail: "unusal payload", message: _("Failed to Process Forecast Info")})
+			self.app.HandleError({type: "soft", service: "us-weather", detail: "unusal payload", message: _("Failed to Process Hourly Forecast Info")})
 			return null; 
 		}
 	}
@@ -328,7 +369,7 @@ class USWeather implements WeatherProvider {
 	 */
     private ResolveCondition(icon: string, isNight: boolean = false): Condition {
 		if (icon == null) return null;
-		let code = icon.match(/(?!\/)[a-z_]+(?=\?)/);
+		let code = icon.match(/(?!\/)[a-z_]+(?=\?)/); // Clear cruft from icon url, leave only code
 		let iconType = this.app.config.IconType();
         switch (code[0]) {
 			case "skc": // Fair/clear

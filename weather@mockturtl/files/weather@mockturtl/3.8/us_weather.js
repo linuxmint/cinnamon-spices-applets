@@ -33,7 +33,7 @@ class USWeather {
         this.sitesUrl = "https://api.weather.gov/points/";
         this.grid = null;
         this.MAX_STATION_DIST = 50000;
-        this.stations = null;
+        this.observationStations = null;
         this.currentLoc = null;
         this.app = _app;
         this.sunCalc = new SunCalc();
@@ -41,53 +41,18 @@ class USWeather {
     async GetWeather(loc) {
         if (loc == null)
             return null;
-        if (!this.grid || !this.stations || this.currentLoc.text != loc.text) {
+        if (!this.grid || !this.observationStations || this.currentLoc.text != loc.text) {
             this.currentLoc = loc;
-            try {
-                let siteData = await this.app.LoadJsonAsync(this.sitesUrl + loc.text, this.OnObtainGridDataFailure);
-                this.grid = siteData;
-                this.app.log.Debug("Grid found: " + JSON.stringify(siteData, null, 2));
-            }
-            catch (e) {
-                this.app.HandleError({
-                    type: "soft",
-                    userError: true,
-                    detail: "no network response",
-                    service: "us-weather",
-                    message: _("Unexpected response from API")
-                });
-                this.app.log.Error("Failed to Obtain Grid data, error: " + JSON.stringify(e, null, 2));
+            let grid = await this.GetGridData(loc);
+            if (grid == null)
                 return null;
-            }
-            try {
-                let stations = await this.app.LoadJsonAsync(this.grid.properties.observationStations);
-                this.stations = stations.features;
-            }
-            catch (e) {
-                this.app.log.Error("Failed to obtain station data, error: " + JSON.stringify(e, null, 2));
-                this.app.HandleError({
-                    type: "soft",
-                    userError: true,
-                    detail: "no network response",
-                    service: "us-weather",
-                    message: _("Unexpected response from API")
-                });
+            let observationStations = await this.GetStationData(grid.properties.observationStations);
+            if (observationStations == null)
                 return null;
-            }
+            this.grid = grid;
+            this.observationStations = observationStations;
         }
-        let observations = [];
-        for (let index = 0; index < this.stations.length; index++) {
-            const element = this.stations[index];
-            element.dist = GetDistance(element.geometry.coordinates[1], element.geometry.coordinates[0], loc.lat, loc.lon);
-            if (element.dist > this.MAX_STATION_DIST)
-                break;
-            try {
-                observations.push(await this.app.LoadJsonAsync(this.stations[index].id + "/observations/latest"));
-            }
-            catch (_a) {
-                this.app.log.Debug("Failed to get observations from " + this.stations[index].id);
-            }
-        }
+        let observations = await this.GetObservationsInRange(this.MAX_STATION_DIST, loc, this.observationStations);
         let hourly = null;
         let forecast = null;
         try {
@@ -97,8 +62,8 @@ class USWeather {
             forecast = await forecastPromise;
         }
         catch (e) {
-            let error = e;
             this.app.log.Error("Failed to obtain forecast Data, error: " + JSON.stringify(e, null, 2));
+            this.app.HandleError({ type: "soft", detail: "bad api response", message: _("Could not get forecast for your area") });
             return null;
         }
         let weather = this.ParseCurrent(observations, hourly);
@@ -107,7 +72,58 @@ class USWeather {
         return weather;
     }
     ;
-    OnObtainGridDataFailure(message) {
+    async GetGridData(loc) {
+        try {
+            let siteData = await this.app.LoadJsonAsync(this.sitesUrl + loc.text, this.OnObtainingGridData);
+            this.app.log.Debug("Grid found: " + JSON.stringify(siteData, null, 2));
+            return siteData;
+        }
+        catch (e) {
+            this.app.HandleError({
+                type: "soft",
+                userError: true,
+                detail: "no network response",
+                service: "us-weather",
+                message: _("Unexpected response from API")
+            });
+            this.app.log.Error("Failed to Obtain Grid data, error: " + JSON.stringify(e, null, 2));
+            return null;
+        }
+    }
+    async GetStationData(stationListUrl) {
+        try {
+            let stations = await this.app.LoadJsonAsync(stationListUrl);
+            return stations.features;
+        }
+        catch (e) {
+            this.app.log.Error("Failed to obtain station data, error: " + JSON.stringify(e, null, 2));
+            this.app.HandleError({
+                type: "soft",
+                userError: true,
+                detail: "no network response",
+                service: "us-weather",
+                message: _("Unexpected response from API")
+            });
+            return null;
+        }
+    }
+    async GetObservationsInRange(range, loc, stations) {
+        let observations = [];
+        for (let index = 0; index < stations.length; index++) {
+            const element = stations[index];
+            element.dist = GetDistance(element.geometry.coordinates[1], element.geometry.coordinates[0], loc.lat, loc.lon);
+            if (element.dist > range)
+                break;
+            try {
+                observations.push(await this.app.LoadJsonAsync(stations[index].id + "/observations/latest"));
+            }
+            catch (_a) {
+                this.app.log.Debug("Failed to get observations from " + stations[index].id);
+            }
+        }
+        return observations;
+    }
+    OnObtainingGridData(message) {
         if (message.status_code == 404) {
             let data = JSON.parse(get(["response_body", "data"], message));
             if (data.title == "Data Unavailable For Requested Point") {
@@ -189,7 +205,7 @@ class USWeather {
                     city: null,
                     country: null,
                     url: "https://forecast.weather.gov/MapClick.php?lat=" + this.currentLoc.lat.toString() + "&lon=" + this.currentLoc.lon.toString(),
-                    timeZone: this.stations[0].properties.timeZone
+                    timeZone: this.observationStations[0].properties.timeZone
                 },
                 date: timestamp,
                 sunrise: times.sunrise,
@@ -240,8 +256,8 @@ class USWeather {
             return forecasts;
         }
         catch (e) {
-            this.app.log.Error("MET UK Forecast Parsing error: " + e);
-            this.app.HandleError({ type: "soft", service: "met-uk", detail: "unusal payload", message: _("Failed to Process Forecast Info") });
+            this.app.log.Error("US Weather Forecast Parsing error: " + e);
+            this.app.HandleError({ type: "soft", service: "us-weather", detail: "unusal payload", message: _("Failed to Process Forecast Info") });
             return null;
         }
     }
@@ -255,7 +271,7 @@ class USWeather {
                 let forecast = {
                     date: timestamp,
                     temp: CelsiusToKelvin(hour.temperature),
-                    condition: self.ResolveCondition(hour.icon),
+                    condition: self.ResolveCondition(hour.icon, !hour.isDaytime),
                     precipation: null
                 };
                 forecasts.push(forecast);
@@ -264,7 +280,7 @@ class USWeather {
         }
         catch (e) {
             self.app.log.Error("US Weather service Forecast Parsing error: " + e);
-            self.app.HandleError({ type: "soft", service: "met-uk", detail: "unusal payload", message: _("Failed to Process Forecast Info") });
+            self.app.HandleError({ type: "soft", service: "us-weather", detail: "unusal payload", message: _("Failed to Process Hourly Forecast Info") });
             return null;
         }
     }
