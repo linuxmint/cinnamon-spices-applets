@@ -63,6 +63,7 @@ var isCoordinate = utils.isCoordinate as (text: any) => boolean;
 var setTimeout = utils.setTimeout as (func: any, ms: number) => any;
 const clearTimeout = utils.clearTimeout as (id: any) => void;
 var MillimeterToUserUnits = utils.MillimeterToUserUnits as (mm: number, distanceUnit: DistanceUnits) => number;
+var shadeHexColor = utils.shadeHexColor as (color: string, percent: number) => string;
 
 // This always evaluates to True because "var Promise" line exists inside 
 if (typeof Promise != "function") {
@@ -172,6 +173,7 @@ class WeatherApplet extends TextIconApplet {
 	public readonly config: Config;
 	public readonly ui: UI;
 	private lock = false;
+	private refreshTriggeredWhileLocked = false;
 
 	private provider: WeatherProvider; // API
 	public readonly locProvider = new ipApi.IpApi(this); // IP location lookup
@@ -238,7 +240,7 @@ class WeatherApplet extends TextIconApplet {
 	private AddRefreshButton(): void {
 		let itemLabel = _("Refresh")
 		let refreshMenuItem = new MenuItem(itemLabel, REFRESH_ICON, Lang.bind(this, function () {
-		this.refreshAndRebuild();
+			this.refreshAndRebuild();
 		}))
 		this._applet_context_menu.addMenuItem(refreshMenuItem);
 	}
@@ -246,11 +248,13 @@ class WeatherApplet extends TextIconApplet {
 	/**
 	 * @returns boolean true if refresh function was locked while called
 	 */
-	public refreshAndRebuild(): boolean {
+	public refreshAndRebuild(): void {
 		this.loop.Resume();
-		if (this.Lock()) return true;
+		if (this.Lock()) {
+			this.refreshTriggeredWhileLocked = true;
+			return;
+		}
 		this.refreshWeather(true);
-		return false;
 	};
 
 	/**
@@ -848,7 +852,8 @@ class UI {
 
     // State variables
     private hourlyToggled: boolean = false;
-    private hourlyNeverOpened: boolean = true;
+	private hourlyNeverOpened: boolean = true;
+	private lightTheme: boolean = false;
 
     private app: WeatherApplet;
 
@@ -869,10 +874,58 @@ class UI {
 		this.menuManager.addMenu(this.menu);
 		this.menuManager._signals.connect(this.menu, "open-state-changed", this.PopupMenuToggled, this);
 		this.signals = new SignalManager();
+		this.lightTheme = this.IsLightTheme();
 		this.BuildPopupMenu();
 
 		// Subscribe to theme changes
 		this.signals.connect(themeManager, 'theme-set', this.OnThemeChanged, this);
+	}
+
+	/**
+	 * Resetting flags from Hourly scrollview when theme changed to 
+	 * prevent incorrect height requests
+	 */
+	private OnThemeChanged(): void {
+		this.hourlyNeverOpened = true;
+		this.HideHourlyWeather();
+		let newThemeIsLight = this.IsLightTheme();
+		// Theme changed between light and dark theme
+		if (newThemeIsLight != this.lightTheme) {
+			this.lightTheme = newThemeIsLight;
+			this.app.refreshAndRebuild();
+		}
+	}
+
+	/**
+	 * 
+	 * @param color Background color
+	 */
+	private IsLightTheme(): boolean {
+		// background
+		let color = this.menu.actor.get_theme_node().get_background_color();
+		// luminance between 0 and 1
+		let luminance = (2126 * color.red + 7152 * color.green + 722 * color.blue) / 10000 / 255;
+		this.app.log.Debug("Theme is Light: " + (luminance > 0.5));
+	
+		return (luminance > 0.5);
+	}
+
+	/**
+	 * @returns color in hex styling
+	 */
+	private ForegroundColor(): string {
+		// Get hex color without alpha, because it is not supported in css
+		let hex = this.menu.actor.get_theme_node().get_foreground_color().to_string().substring(0, 7);
+		return hex;
+	}
+
+	private GetColorStyle(): string {
+		let hexColor = null;
+		if (this.lightTheme) {
+			// Darken default foreground color
+			hexColor = shadeHexColor(this.ForegroundColor(), -0.40);
+		}
+		return "color: " + hexColor;
 	}
 
 	private async PopupMenuToggled(caller: any, data: any) {
@@ -967,15 +1020,6 @@ class UI {
 
 	public DisplayErrorMessage(msg: string) {
 		this._timestamp.text = msg;
-	}
-
-	/**
-	 * Resetting flags from Hourly scrollview when theme changed to 
-	 * prevent incorrect height requests
-	 */
-	private OnThemeChanged(): void {
-		this.hourlyNeverOpened = true;
-		this.HideHourlyWeather();
 	}
 
 	public ShowHourlyWeather(): void {
@@ -1361,23 +1405,24 @@ class UI {
 	
 		// Sunset/sunrise
 		this._currentWeatherSummary = new Label({ text: _('Loading ...'), style_class: STYLE_SUMMARY })
-		this._currentWeatherSunrise = new Label(textOb)
-		this._currentWeatherSunset = new Label(textOb)
+		this._currentWeatherSunrise = new Label({text: ELLIPSIS, style: this.GetColorStyle()})
+		this._currentWeatherSunset = new Label({text: ELLIPSIS, style: this.GetColorStyle()})
 		
 		let sunriseBox = new BoxLayout();
 		let sunsetBox = new BoxLayout();
 		if (config._showSunrise) {
-
 			let sunsetIcon = new Icon({
-			icon_name: "sunset-symbolic",
-			icon_type: IconType.SYMBOLIC,
-			icon_size: 25
+				icon_name: "sunset-symbolic",
+				icon_type: IconType.SYMBOLIC,
+				icon_size: 25,
+				style: this.GetColorStyle()
 			});
 
 			let sunriseIcon = new Icon({
-			icon_name: "sunrise-symbolic",
-			icon_type: IconType.SYMBOLIC,
-			icon_size: 25
+				icon_name: "sunrise-symbolic",
+				icon_type: IconType.SYMBOLIC,
+				icon_size: 25,
+				style: this.GetColorStyle()
 			});
 
 			sunriseBox.add_actor(sunriseIcon);
@@ -1420,14 +1465,14 @@ class UI {
 		this._currentWeatherWind = new Label(textOb)
 		this._currentWeatherApiUnique = new Label({ text: '' })
 		// APi Unique Caption
-		this._currentWeatherApiUniqueCap = new Label({ text: '' });
+		this._currentWeatherApiUniqueCap = new Label({ text: '', style: this.GetColorStyle()});
 	
 		let rb_captions = new BoxLayout({ vertical: true, style_class: STYLE_DATABOX_CAPTIONS })
 		let rb_values = new BoxLayout({vertical: true, style_class: STYLE_DATABOX_VALUES })
-		rb_captions.add_actor(new Label({ text: _('Temperature:') }));
-		rb_captions.add_actor(new Label({ text: _('Humidity:') }));
-		rb_captions.add_actor(new Label({ text: _('Pressure:') }));
-		rb_captions.add_actor(new Label({ text: _('Wind:') }));
+		rb_captions.add_actor(new Label({ text: _('Temperature:'), style: this.GetColorStyle()}));
+		rb_captions.add_actor(new Label({ text: _('Humidity:'), style: this.GetColorStyle()}));
+		rb_captions.add_actor(new Label({ text: _('Pressure:'), style: this.GetColorStyle()}));
+		rb_captions.add_actor(new Label({ text: _('Wind:'), style: this.GetColorStyle()}));
 		rb_captions.add_actor(this._currentWeatherApiUniqueCap);
 		rb_values.add_actor(this._currentWeatherTemperature);
 		rb_values.add_actor(this._currentWeatherHumidity);
@@ -1506,7 +1551,8 @@ class UI {
 
 			forecastWeather.Day = new Label({
 				style_class: STYLE_FORECAST_DAY,
-				reactive: true
+				reactive: true,
+				style: this.GetColorStyle()
 			});
 
 			forecastWeather.Summary = new Label({
@@ -1605,7 +1651,8 @@ class UI {
 		for (let index = 0; index < hours; index++) {
 			let box = new BoxLayout({vertical: true});
 			this._hourlyForecasts.push({
-				Hour: new Label({text: "Hour", style_class: "hourly-time"}),
+				// Override color on light theme for grey text
+				Hour: new Label({text: "Hour", style_class: "hourly-time", style: this.GetColorStyle()}),
 				Icon: new Icon({
 					icon_type: config.IconType(),
 					icon_size: 24,
@@ -1763,13 +1810,11 @@ class Config {
 	private DoneTypingLocation() {
 		this.app.log.Debug("User has finished typing, beginning refresh");
 		this.doneTypingLocation = null;
-		let locked = this.app.refreshAndRebuild();
-		if (locked == true) this.rebuildTriggeredWhileLocked = true;
+		this.app.refreshAndRebuild();
 	}
 
 	private OnSettingChanged() {
-		let locked = this.app.refreshAndRebuild();
-		if (locked == true) this.rebuildTriggeredWhileLocked = true;
+		this.app.refreshAndRebuild();
 	}
 
 	public SetLocation(value: string) {
@@ -1896,7 +1941,7 @@ class WeatherLoop {
 					this.app.log.Debug("Refresh triggered in mainloop with these values: lastUpdated " + ((!this.lastUpdated) ? "null" : this.lastUpdated.toLocaleString())
 					+ ", errorCount " + this.errorCount.toString() + " , loopInterval " + (this.LoopInterval() / 1000).toString()
 					+ " seconds, refreshInterval " + this.app.config._refreshInterval + " minutes");
-					
+					// No need to check for lock, loop can skip 
 					let state = await this.app.refreshWeather(false);
 					if (state == "locked") this.app.log.Print("App locked, refresh skipped in main loop");
 					if (state == "success" || state == "locked") this.lastUpdated = new Date();

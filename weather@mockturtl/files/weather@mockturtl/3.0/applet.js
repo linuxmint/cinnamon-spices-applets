@@ -91,6 +91,7 @@ var isCoordinate = utils.isCoordinate;
 var setTimeout = utils.setTimeout;
 var clearTimeout = utils.clearTimeout;
 var MillimeterToUserUnits = utils.MillimeterToUserUnits;
+var shadeHexColor = utils.shadeHexColor;
 if (typeof Promise != "function") {
     var promisePoly = importModule("promise-polyfill");
     var finallyConstructor = promisePoly.finallyConstructor;
@@ -157,6 +158,7 @@ var WeatherApplet = (function (_super) {
         _this.appletDir = imports.ui.appletManager.appletMeta[UUID].path;
         _this.currentLocale = null;
         _this.lock = false;
+        _this.refreshTriggeredWhileLocked = false;
         _this.locProvider = new ipApi.IpApi(_this);
         _this.geoLocationService = new GeoLocation(_this);
         _this.encounteredError = false;
@@ -229,10 +231,11 @@ var WeatherApplet = (function (_super) {
     };
     WeatherApplet.prototype.refreshAndRebuild = function () {
         this.loop.Resume();
-        if (this.Lock())
-            return true;
+        if (this.Lock()) {
+            this.refreshTriggeredWhileLocked = true;
+            return;
+        }
         this.refreshWeather(true);
-        return false;
     };
     ;
     WeatherApplet.prototype.LoadJsonAsync = function (query, errorCallback) {
@@ -748,6 +751,7 @@ var UI = (function () {
     function UI(app, orientation) {
         this.hourlyToggled = false;
         this.hourlyNeverOpened = true;
+        this.lightTheme = false;
         this.app = app;
         this.menuManager = new PopupMenuManager(this.app);
         this.menu = new AppletPopupMenu(this.app, orientation);
@@ -756,9 +760,36 @@ var UI = (function () {
         this.menuManager.addMenu(this.menu);
         this.menuManager._signals.connect(this.menu, "open-state-changed", this.PopupMenuToggled, this);
         this.signals = new SignalManager();
+        this.lightTheme = this.IsLightTheme();
         this.BuildPopupMenu();
         this.signals.connect(themeManager, 'theme-set', this.OnThemeChanged, this);
     }
+    UI.prototype.OnThemeChanged = function () {
+        this.hourlyNeverOpened = true;
+        this.HideHourlyWeather();
+        var newThemeIsLight = this.IsLightTheme();
+        if (newThemeIsLight != this.lightTheme) {
+            this.lightTheme = newThemeIsLight;
+            this.app.refreshAndRebuild();
+        }
+    };
+    UI.prototype.IsLightTheme = function () {
+        var color = this.menu.actor.get_theme_node().get_background_color();
+        var luminance = (2126 * color.red + 7152 * color.green + 722 * color.blue) / 10000 / 255;
+        this.app.log.Debug("Theme is Light: " + (luminance > 0.5));
+        return (luminance > 0.5);
+    };
+    UI.prototype.ForegroundColor = function () {
+        var hex = this.menu.actor.get_theme_node().get_foreground_color().to_string().substring(0, 7);
+        return hex;
+    };
+    UI.prototype.GetColorStyle = function () {
+        var hexColor = null;
+        if (this.lightTheme) {
+            hexColor = shadeHexColor(this.ForegroundColor(), -0.40);
+        }
+        return "color: " + hexColor;
+    };
     UI.prototype.PopupMenuToggled = function (caller, data) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
@@ -837,10 +868,6 @@ var UI = (function () {
     };
     UI.prototype.DisplayErrorMessage = function (msg) {
         this._timestamp.text = msg;
-    };
-    UI.prototype.OnThemeChanged = function () {
-        this.hourlyNeverOpened = true;
-        this.HideHourlyWeather();
     };
     UI.prototype.ShowHourlyWeather = function () {
         var _this = this;
@@ -1159,20 +1186,22 @@ var UI = (function () {
                 this.app.OpenUrl(this._currentWeatherLocation);
         }));
         this._currentWeatherSummary = new Label({ text: _('Loading ...'), style_class: STYLE_SUMMARY });
-        this._currentWeatherSunrise = new Label(textOb);
-        this._currentWeatherSunset = new Label(textOb);
+        this._currentWeatherSunrise = new Label({ text: ELLIPSIS, style: this.GetColorStyle() });
+        this._currentWeatherSunset = new Label({ text: ELLIPSIS, style: this.GetColorStyle() });
         var sunriseBox = new BoxLayout();
         var sunsetBox = new BoxLayout();
         if (config._showSunrise) {
             var sunsetIcon = new Icon({
                 icon_name: "sunset-symbolic",
                 icon_type: IconType.SYMBOLIC,
-                icon_size: 25
+                icon_size: 25,
+                style: this.GetColorStyle()
             });
             var sunriseIcon = new Icon({
                 icon_name: "sunrise-symbolic",
                 icon_type: IconType.SYMBOLIC,
-                icon_size: 25
+                icon_size: 25,
+                style: this.GetColorStyle()
             });
             sunriseBox.add_actor(sunriseIcon);
             sunsetBox.add_actor(sunsetIcon);
@@ -1204,13 +1233,13 @@ var UI = (function () {
         this._currentWeatherPressure = new Label(textOb);
         this._currentWeatherWind = new Label(textOb);
         this._currentWeatherApiUnique = new Label({ text: '' });
-        this._currentWeatherApiUniqueCap = new Label({ text: '' });
+        this._currentWeatherApiUniqueCap = new Label({ text: '', style: this.GetColorStyle() });
         var rb_captions = new BoxLayout({ vertical: true, style_class: STYLE_DATABOX_CAPTIONS });
         var rb_values = new BoxLayout({ vertical: true, style_class: STYLE_DATABOX_VALUES });
-        rb_captions.add_actor(new Label({ text: _('Temperature:') }));
-        rb_captions.add_actor(new Label({ text: _('Humidity:') }));
-        rb_captions.add_actor(new Label({ text: _('Pressure:') }));
-        rb_captions.add_actor(new Label({ text: _('Wind:') }));
+        rb_captions.add_actor(new Label({ text: _('Temperature:'), style: this.GetColorStyle() }));
+        rb_captions.add_actor(new Label({ text: _('Humidity:'), style: this.GetColorStyle() }));
+        rb_captions.add_actor(new Label({ text: _('Pressure:'), style: this.GetColorStyle() }));
+        rb_captions.add_actor(new Label({ text: _('Wind:'), style: this.GetColorStyle() }));
         rb_captions.add_actor(this._currentWeatherApiUniqueCap);
         rb_values.add_actor(this._currentWeatherTemperature);
         rb_values.add_actor(this._currentWeatherHumidity);
@@ -1266,7 +1295,8 @@ var UI = (function () {
             });
             forecastWeather.Day = new Label({
                 style_class: STYLE_FORECAST_DAY,
-                reactive: true
+                reactive: true,
+                style: this.GetColorStyle()
             });
             forecastWeather.Summary = new Label({
                 style_class: STYLE_FORECAST_SUMMARY,
@@ -1347,7 +1377,7 @@ var UI = (function () {
         for (var index = 0; index < hours; index++) {
             var box = new BoxLayout({ vertical: true });
             this._hourlyForecasts.push({
-                Hour: new Label({ text: "Hour", style_class: "hourly-time" }),
+                Hour: new Label({ text: "Hour", style_class: "hourly-time", style: this.GetColorStyle() }),
                 Icon: new Icon({
                     icon_type: config.IconType(),
                     icon_size: 24,
@@ -1443,14 +1473,10 @@ var Config = (function () {
     Config.prototype.DoneTypingLocation = function () {
         this.app.log.Debug("User has finished typing, beginning refresh");
         this.doneTypingLocation = null;
-        var locked = this.app.refreshAndRebuild();
-        if (locked == true)
-            this.rebuildTriggeredWhileLocked = true;
+        this.app.refreshAndRebuild();
     };
     Config.prototype.OnSettingChanged = function () {
-        var locked = this.app.refreshAndRebuild();
-        if (locked == true)
-            this.rebuildTriggeredWhileLocked = true;
+        this.app.refreshAndRebuild();
     };
     Config.prototype.SetLocation = function (value) {
         this.settings.setValue(this.WEATHER_LOCATION, value);

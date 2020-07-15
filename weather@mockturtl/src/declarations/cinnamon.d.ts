@@ -441,6 +441,7 @@ declare namespace imports.gi.St {
         get_style_class_name(): string;
         remove_style_class_name(style_class: string): void;
         get_style(): string;
+        set_style(style: string): string;
         get_theme(): imports.gi.St.Theme;
         get_theme_node(): ThemeNode;
         show(): void;
@@ -606,6 +607,7 @@ declare namespace imports.gi.St {
         green: number;
         blue: number;
         alpha: number;
+        to_string(): string;
     }
 
     export interface Shadow {
