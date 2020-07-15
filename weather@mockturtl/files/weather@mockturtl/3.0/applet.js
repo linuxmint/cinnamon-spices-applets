@@ -1438,12 +1438,12 @@ var Config = (function () {
         this.app.log.Debug("User has finished typing, beginning refresh");
         this.doneTypingLocation = null;
         var locked = this.app.refreshAndRebuild();
-        if (locked)
+        if (locked == true)
             this.rebuildTriggeredWhileLocked = true;
     };
     Config.prototype.OnSettingChanged = function () {
         var locked = this.app.refreshAndRebuild();
-        if (locked)
+        if (locked == true)
             this.rebuildTriggeredWhileLocked = true;
     };
     Config.prototype.SetLocation = function (value) {

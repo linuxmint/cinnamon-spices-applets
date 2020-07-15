@@ -1750,12 +1750,12 @@ class Config {
 		this.app.log.Debug("User has finished typing, beginning refresh");
 		this.doneTypingLocation = null;
 		let locked = this.app.refreshAndRebuild();
-		if (locked) this.rebuildTriggeredWhileLocked = true;
+		if (locked == true) this.rebuildTriggeredWhileLocked = true;
 	}
 
 	private OnSettingChanged() {
 		let locked = this.app.refreshAndRebuild();
-		if (locked) this.rebuildTriggeredWhileLocked = true;
+		if (locked == true) this.rebuildTriggeredWhileLocked = true;
 	}
 
 	public SetLocation(value: string) {

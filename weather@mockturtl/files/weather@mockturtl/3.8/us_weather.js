@@ -246,9 +246,23 @@ class USWeather {
     ParseForecast(json) {
         let forecasts = [];
         try {
-            for (let i = 0; i < json.properties.periods.length; i += 2) {
+            let startIndex = 0;
+            if (json.properties.periods[0].isDaytime == false) {
+                startIndex = 1;
+                let today = json.properties.periods[0];
+                let forecast = {
+                    date: new Date(today.startTime),
+                    temp_min: FahrenheitToKelvin(today.temperature),
+                    temp_max: FahrenheitToKelvin(today.temperature),
+                    condition: this.ResolveCondition(today.icon),
+                };
+                forecasts.push(forecast);
+            }
+            for (let i = startIndex; i < json.properties.periods.length; i += 2) {
                 let day = json.properties.periods[i];
                 let night = json.properties.periods[i + 1];
+                if (!night)
+                    night = day;
                 let forecast = {
                     date: new Date(day.startTime),
                     temp_min: FahrenheitToKelvin(night.temperature),
@@ -291,7 +305,7 @@ class USWeather {
     ResolveCondition(icon, isNight = false) {
         if (icon == null)
             return null;
-        let code = icon.match(/(?!\/)[a-z_]+(?=\?)/);
+        let code = icon.match(/(?!\/)[a-z_]+(?=(\?|,))/);
         let iconType = this.app.config.IconType();
         switch (code[0]) {
             case "skc":

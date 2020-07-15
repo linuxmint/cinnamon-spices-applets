@@ -342,9 +342,23 @@ var USWeather = (function () {
     USWeather.prototype.ParseForecast = function (json) {
         var forecasts = [];
         try {
-            for (var i = 0; i < json.properties.periods.length; i += 2) {
+            var startIndex = 0;
+            if (json.properties.periods[0].isDaytime == false) {
+                startIndex = 1;
+                var today = json.properties.periods[0];
+                var forecast = {
+                    date: new Date(today.startTime),
+                    temp_min: FahrenheitToKelvin(today.temperature),
+                    temp_max: FahrenheitToKelvin(today.temperature),
+                    condition: this.ResolveCondition(today.icon),
+                };
+                forecasts.push(forecast);
+            }
+            for (var i = startIndex; i < json.properties.periods.length; i += 2) {
                 var day = json.properties.periods[i];
                 var night = json.properties.periods[i + 1];
+                if (!night)
+                    night = day;
                 var forecast = {
                     date: new Date(day.startTime),
                     temp_min: FahrenheitToKelvin(night.temperature),
@@ -388,7 +402,7 @@ var USWeather = (function () {
         if (isNight === void 0) { isNight = false; }
         if (icon == null)
             return null;
-        var code = icon.match(/(?!\/)[a-z_]+(?=\?)/);
+        var code = icon.match(/(?!\/)[a-z_]+(?=(\?|,))/);
         var iconType = this.app.config.IconType();
         switch (code[0]) {
             case "skc":

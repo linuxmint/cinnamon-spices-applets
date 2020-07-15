@@ -118,6 +118,7 @@ class USWeather implements WeatherProvider {
 	private async GetGridData(loc: Location): Promise<GridPayload> {
 		try {
 			// Handling out of country errors in callback
+			// TODO: App gets stuck on this call!
 			let siteData = await this.app.LoadJsonAsync(this.sitesUrl + loc.text, this.OnObtainingGridData) as GridPayload;
 			this.app.log.Debug("Grid found: " + JSON.stringify(siteData, null, 2));
 			return siteData;
@@ -320,10 +321,27 @@ class USWeather implements WeatherProvider {
     private ParseForecast(json: ForecastsPayload): ForecastData[] {
 		let forecasts: ForecastData[] = [];
 		try {
-			for (let i = 0; i < json.properties.periods.length; i+=2) {
+			
+			let startIndex = 0;
+			// array starts with night, handling today separately
+			if (json.properties.periods[0].isDaytime == false) {
+				startIndex = 1;
+				let today = json.properties.periods[0]
+				let forecast: ForecastData = {          
+					date: new Date(today.startTime),
+					temp_min: FahrenheitToKelvin(today.temperature),
+					temp_max: FahrenheitToKelvin(today.temperature),
+					condition: this.ResolveCondition(today.icon),
+				};
+				forecasts.push(forecast); 
+			}
+
+			for (let i = startIndex; i < json.properties.periods.length; i+=2) {
 				// Day and night data is separate in array, so we alternate
 				let day = json.properties.periods[i];
-				let night = json.properties.periods[i + 1];
+				let night = json.properties.periods[i + 1]; // this can be undefined
+				if (!night) night = day;
+				
 				let forecast: ForecastData = {          
 					date: new Date(day.startTime),
 					temp_min: FahrenheitToKelvin(night.temperature),
@@ -372,7 +390,7 @@ class USWeather implements WeatherProvider {
 	 */
     private ResolveCondition(icon: string, isNight: boolean = false): Condition {
 		if (icon == null) return null;
-		let code = icon.match(/(?!\/)[a-z_]+(?=\?)/); // Clear cruft from icon url, leave only code
+		let code = icon.match(/(?!\/)[a-z_]+(?=(\?|,))/); // Clear cruft from icon url, leave only code
 		let iconType = this.app.config.IconType();
         switch (code[0]) {
 			case "skc": // Fair/clear

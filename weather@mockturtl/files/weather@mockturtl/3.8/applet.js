@@ -1317,12 +1317,12 @@ class Config {
         this.app.log.Debug("User has finished typing, beginning refresh");
         this.doneTypingLocation = null;
         let locked = this.app.refreshAndRebuild();
-        if (locked)
+        if (locked == true)
             this.rebuildTriggeredWhileLocked = true;
     }
     OnSettingChanged() {
         let locked = this.app.refreshAndRebuild();
-        if (locked)
+        if (locked == true)
             this.rebuildTriggeredWhileLocked = true;
     }
     SetLocation(value) {
