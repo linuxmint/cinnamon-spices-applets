@@ -1,8 +1,7 @@
 //TODO: Do changelog
 //TODO: Add Add stuff to readme about US weather and MET office
 //TODO: do 3.0 settings schema as well
-//TODO: Add info back to settings-schema
-
+//TODO: Update language template
 
 /**
  * @param path Filename without extension
@@ -511,7 +510,6 @@ class WeatherApplet extends TextIconApplet {
 	 * @param locale Linux locale string
 	 */
 	private constructJsLocale(locale: string): string {
-		// TODO: fix locale stuff with unset locale (c)
 		let jsLocale = locale.split(".")[0];
 		let tmp: string[] = jsLocale.split("_");
 		jsLocale = "";
