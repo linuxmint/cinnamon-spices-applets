@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cinnamenu 3.2.4\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-13 18:22+0100\n"
+"POT-Creation-Date: 2020-07-15 12:39+0100\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Serdar Sağlam <teknomobil@yandex.com>\n"
 "Language-Team: Serdar <teknomobil@yandex.com>\n"
@@ -100,11 +100,6 @@ msgstr "Çık"
 msgid "Shutdown the computer"
 msgstr "Bilgisayarı kapat"
 
-#: 3.2/placeDisplay.js:57 4.0/placeDisplay.js:35
-#, javascript-format
-msgid "Failed to launch \"%s\""
-msgstr "Başlatılamadı \"%s\""
-
 #: 3.2/placeDisplay.js:146 4.0/placeDisplay.js:102
 msgid "Home"
 msgstr "Başlangıç"
@@ -130,8 +125,10 @@ msgstr "Panele ekle"
 msgid "Add to desktop"
 msgstr "Masaüstüne ekle"
 
-#: 3.2/buttons.js:1054
-msgid "Remove from favorites"
+#: 3.2/buttons.js:1054 4.0/buttons.js:849
+#, fuzzy
+#| msgid "Remove from favorites"
+msgid "Remove favorite"
 msgstr "Favorilerden kaldır"
 
 #: 3.2/buttons.js:1056 4.0/buttons.js:852
@@ -145,12 +142,6 @@ msgstr "Kaldır"
 #: 4.0/applet.js:233 4.0/applet.js:1230
 msgid "Please wait..."
 msgstr ""
-
-#: 4.0/buttons.js:849
-#, fuzzy
-#| msgid "Remove from favorites"
-msgid "Remove favorite"
-msgstr "Favorilerden kaldır"
 
 #. metadata.json->name
 #. 3.2->settings-schema.json->cinnamenuProvidersSection->title
@@ -218,23 +209,14 @@ msgid "Content"
 msgstr "İçerik"
 
 #. 3.2->settings-schema.json->privacy-settings-button->description
-msgid "Toggle recent files"
-msgstr "Son kullanılan dosyalar"
-
-#. 3.2->settings-schema.json->privacy-settings-button->tooltip
-#. 4.0->settings-schema.json->privacy-settings-button->tooltip
-msgid "Press this button to customize your privacy settings."
-msgstr "Gizlilik ayarlarınızı özelleştirmek için bu düğmeye basın."
+#. 4.0->settings-schema.json->privacy-settings-button->description
+msgid "Recent files settings"
+msgstr "Son dosya ayarları"
 
 #. 3.2->settings-schema.json->menu-editor-button->description
 #. 4.0->settings-schema.json->menu-editor-button->description
 msgid "Open the menu editor"
 msgstr "Menü düzenleyiciyi aç"
-
-#. 3.2->settings-schema.json->menu-editor-button->tooltip
-#. 4.0->settings-schema.json->menu-editor-button->tooltip
-msgid "Press this button to customize your menu entries."
-msgstr "Menü girişlerinizi özelleştirmek için bu düğmeye basın."
 
 #. 3.2->settings-schema.json->resetCategoryOrder-button->description
 #. 4.0->settings-schema.json->resetCategoryOrder-button->description
@@ -248,25 +230,27 @@ msgstr "Özel bir simge kullan"
 
 #. 3.2->settings-schema.json->menu-icon-custom->tooltip
 #. 4.0->settings-schema.json->menu-icon-custom->tooltip
-msgid "Unchecking this allows the theme to set the icon"
-msgstr "Seçeneğin işaretini kaldırmak, temanın simgeyi ayarlamasını sağlar"
+#, fuzzy
+#| msgid "Use a custom icon"
+msgid "Use a custom icon in the panel"
+msgstr "Özel bir simge kullan"
 
 #. 3.2->settings-schema.json->menu-icon->description
-#. 4.0->settings-schema.json->menu-icon->description
-msgid "Icon"
-msgstr "Simge"
-
 #. 3.2->settings-schema.json->menu-icon->tooltip
+#. 4.0->settings-schema.json->menu-icon->description
 #. 4.0->settings-schema.json->menu-icon->tooltip
-msgid "Select an icon to show in the panel."
-msgstr "Panelde gösterilecek bir simge seçin."
+msgid "Panel icon"
+msgstr "Panel simgesi"
 
 #. 3.2->settings-schema.json->menu-label->description
-#. 3.2->settings-schema.json->menu-label->tooltip
 #. 4.0->settings-schema.json->menu-label->description
+msgid "Panel text"
+msgstr "Panel metni"
+
+#. 3.2->settings-schema.json->menu-label->tooltip
 #. 4.0->settings-schema.json->menu-label->tooltip
-msgid "Set the custom menu button icon name"
-msgstr "Menü simge ismini ayarla"
+msgid "Text to show beside the panel icon"
+msgstr "Panel simgesinin yanında gösterilecek metin"
 
 #. 3.2->settings-schema.json->category-icon-size->units
 #. 3.2->settings-schema.json->apps-list-icon-size->units
@@ -305,14 +289,15 @@ msgstr "Menüyü açıp kapatmak için klavye kısayolu"
 
 #. 3.2->settings-schema.json->activate-on-hover->description
 #. 4.0->settings-schema.json->activate-on-hover->description
-msgid "Open the menu when I move my mouse over it"
-msgstr "Fareyi üstüne getirdiğimde menüyü aç"
+msgid "Open menu on hover"
+msgstr "Fareyle üzerine gelindiğinde menüyü aç"
 
 #. 3.2->settings-schema.json->activate-on-hover->tooltip
 #. 4.0->settings-schema.json->activate-on-hover->tooltip
-msgid "Enable opening the menu when the mouse enters the applet"
-msgstr ""
-"Fare menü uygulamacığının üstüne geldiğinde menü açılmasını etkinleştir"
+#, fuzzy
+#| msgid "Open the menu when I move my mouse over it"
+msgid "Open the menu when I move my mouse over the panel icon"
+msgstr "Fareyi üstüne getirdiğimde menüyü aç"
 
 #. 3.2->settings-schema.json->hover-delay->units
 #. 3.2->settings-schema.json->tooltip-delay->units
@@ -322,13 +307,10 @@ msgstr "milisaniye"
 
 #. 3.2->settings-schema.json->hover-delay->description
 #. 4.0->settings-schema.json->hover-delay->description
-msgid "Menu hover delay:"
+#, fuzzy
+#| msgid "Menu hover delay:"
+msgid "Menu hover delay"
 msgstr "Menü bekleme gecikmesi:"
-
-#. 3.2->settings-schema.json->hover-delay->tooltip
-#. 4.0->settings-schema.json->hover-delay->tooltip
-msgid "Delay between switching categories"
-msgstr "Kategoriler arası geçişlerdeki gecikme"
 
 #. 3.2->settings-schema.json->enable-animation->description
 #. 4.0->settings-schema.json->enable-animation->description
@@ -337,7 +319,9 @@ msgstr "Menü animasyonları kullan"
 
 #. 3.2->settings-schema.json->enable-animation->tooltip
 #. 4.0->settings-schema.json->enable-animation->tooltip
-msgid "Allow the menu to animate on open and close"
+#, fuzzy
+#| msgid "Allow the menu to animate on open and close"
+msgid "Animate the menu on open and close"
 msgstr "Açarken ve kapanırken menü animasyonuna izin ver"
 
 #. 3.2->settings-schema.json->category-click->description
@@ -347,22 +331,22 @@ msgstr "Kategorileri tıklatarak açın"
 
 #. 3.2->settings-schema.json->category-click->tooltip
 #. 4.0->settings-schema.json->category-click->tooltip
-msgid ""
-"When enabled, category views are activated on click instead of on hover."
-msgstr "Kategoriler içindeki uygulama listelerine tıklayarak ulaşırsınız."
+#, fuzzy
+#| msgid "Activate categories on click"
+msgid "Activate categories on click instead of on hover"
+msgstr "Kategorileri tıklatarak açın"
 
 #. 3.2->settings-schema.json->enable-autoscroll->description
 #. 4.0->settings-schema.json->enable-autoscroll->description
-msgid "Enable autoscrolling in application list"
+#, fuzzy
+#| msgid "Enable autoscrolling in application list"
+msgid "Enable autoscrolling"
 msgstr "Uygulama listesinde otomatik kaydırmayı etkinleştir"
 
 #. 3.2->settings-schema.json->enable-autoscroll->tooltip
 #. 4.0->settings-schema.json->enable-autoscroll->tooltip
-msgid ""
-"Choose whether or not to enable smooth autoscrolling in the application list."
-msgstr ""
-"Uygulamada sorunsuz otomatik gezinmeyi etkinleştirip etkinleştirmemesini "
-"seçin."
+msgid "Enable autoscrolling in application list"
+msgstr "Uygulama listesinde otomatik kaydırmayı etkinleştir"
 
 #. 3.2->settings-schema.json->enable-bookmarks->description
 #. 4.0->settings-schema.json->enable-bookmarks->description
@@ -371,16 +355,12 @@ msgstr "Tarayıcı yer imlerini göster"
 
 #. 3.2->settings-schema.json->enable-bookmarks->tooltip
 #. 4.0->settings-schema.json->enable-bookmarks->tooltip
-msgid "Choose whether or not bookmarks are indexed in the menu."
-msgstr "Bilgisayar menüsünde bulunan yer imlerini göster."
+msgid "Show your browser's web bookmarks in the menu"
+msgstr "Tarayıcınızın web yer işaretlerini menüde gösterin"
 
 #. 3.2->settings-schema.json->enable-windows->description
 msgid "Enable searching of open windows"
 msgstr "Açık pencerelerde aramayı etkinleştir"
-
-#. 3.2->settings-schema.json->enable-windows->tooltip
-msgid "Choose whether or not open windows are indexed in menu searches."
-msgstr "Açık pencerelerin menü aramalarına dahil edilip edilmeyeceğini seçin."
 
 #. 3.2->settings-schema.json->enable-search-providers->description
 #. 4.0->settings-schema.json->enable-search-providers->description
@@ -389,8 +369,11 @@ msgstr "Arama sağlayıcılarını etkinleştir"
 
 #. 3.2->settings-schema.json->enable-search-providers->tooltip
 #. 4.0->settings-schema.json->enable-search-providers->tooltip
-msgid ""
-"Choose whether or not search provider results are indexed in menu searches."
+#, fuzzy
+#| msgid ""
+#| "Choose whether or not search provider results are indexed in menu "
+#| "searches."
+msgid "Include search provider results in searches"
 msgstr ""
 "Arama sağlayıcısı sonuçlarının menü aramalarına dahil edilip edilmeyeceğini "
 "seçin."
@@ -434,59 +417,39 @@ msgstr "Yer imlerini ve yerleri göster"
 
 #. 3.2->settings-schema.json->show-places->tooltip
 #. 4.0->settings-schema.json->show-places->tooltip
-msgid "Choose whether or not to show bookmarks and places in the menu."
-msgstr "Menüde yer imlerinin ve yerlerin gösterilip gösterilmeyeceğini seçin."
+#, fuzzy
+#| msgid "Show bookmarks and places"
+msgid "Show bookmarks and places category in the menu"
+msgstr "Yer imlerini ve yerleri göster"
 
 #. 3.2->settings-schema.json->show-application-icons->description
+#. 3.2->settings-schema.json->show-application-icons->tooltip
 #. 4.0->settings-schema.json->show-application-icons->description
+#. 4.0->settings-schema.json->show-application-icons->tooltip
 msgid "Show application icons"
 msgstr "Uygulama simgelerini göster"
 
-#. 3.2->settings-schema.json->show-application-icons->tooltip
-#. 4.0->settings-schema.json->show-application-icons->tooltip
-msgid "Choose whether or not to show icons on applications."
-msgstr "Uygulamalardaki simgelerin gösterilip gösterilmeyeceğini seçin."
-
 #. 3.2->settings-schema.json->show-category-icons->description
+#. 3.2->settings-schema.json->show-category-icons->tooltip
 #. 4.0->settings-schema.json->show-category-icons->description
+#. 4.0->settings-schema.json->show-category-icons->tooltip
 msgid "Show category icons"
 msgstr "Kategori simgelerini göster"
 
-#. 3.2->settings-schema.json->show-category-icons->tooltip
-#. 4.0->settings-schema.json->show-category-icons->tooltip
-msgid "Choose whether or not to show icons on categories."
-msgstr "Kategorilerdeki simgelerin gösterilip gösterilmeyeceğini seçin."
-
 #. 3.2->settings-schema.json->show-apps-description-on-buttons->description
+#. 3.2->settings-schema.json->show-apps-description-on-buttons->tooltip
 msgid "Show application descriptions under titles"
 msgstr "Uygulama açıklamalarını listede göster"
 
-#. 3.2->settings-schema.json->show-apps-description-on-buttons->tooltip
-msgid ""
-"Choose whether or not to show the application description on the application "
-"buttons."
-msgstr "Listede uygulama açıklamasının gösterilip gösterilmeyeceğini seçin."
-
 #. 3.2->settings-schema.json->show-tooltips->description
+#. 3.2->settings-schema.json->show-tooltips->tooltip
 msgid "Show tooltips"
 msgstr "Araç ipuçlarını göster"
 
-#. 3.2->settings-schema.json->show-tooltips->tooltip
-msgid ""
-"When enabled, tooltips containing the item's name or description is shown "
-"when hovered over."
-msgstr ""
-"Etkinleştirildiğinde, uygulamaların açıklamasını içeren araç ipuçları "
-"gösterilir."
-
 #. 3.2->settings-schema.json->tooltip-delay->description
+#. 3.2->settings-schema.json->tooltip-delay->tooltip
 msgid "Tooltip delay"
 msgstr "Araç ipucu gecikmesi"
-
-#. 3.2->settings-schema.json->tooltip-delay->tooltip
-msgid ""
-"The delay time in milliseconds for tooltips when hovering over a menu item."
-msgstr "Araç ipuçları için milisaniye cinsinden gecikme süresi."
 
 #. 3.2->settings-schema.json->enable-custom-menu-height->description
 #. 3.2->settings-schema.json->enable-custom-menu-height->tooltip
@@ -536,7 +499,7 @@ msgstr "Yok"
 #| msgid ""
 #| "Choose whether or not to show the application description on the "
 #| "application buttons."
-msgid "Choose where to show application descriptions."
+msgid "Choose where to show application descriptions"
 msgstr "Listede uygulama açıklamasının gösterilip gösterilmeyeceğini seçin."
 
 #. 4.0->settings-schema.json->powergroup-placement->description
@@ -560,20 +523,99 @@ msgid "Right"
 msgstr "Sağa"
 
 #. 4.0->settings-schema.json->powergroup-placement->tooltip
-msgid "Choose where to show the session (quit, logout, etc.) buttons."
+#, fuzzy
+#| msgid "Choose where to show the session (quit, logout, etc.) buttons."
+msgid "Choose where to show the session (quit, logout, etc.) buttons"
 msgstr "Oturum (çık, çık, vb.) Düğmelerinin nerede gösterileceğini seçin."
 
 #. 4.0->settings-schema.json->add-favorites->description
-msgid "Add favorites to session buttons."
+#, fuzzy
+#| msgid "Add favorites to session buttons."
+msgid "Add favorites to session buttons"
 msgstr "Oturum düğmelerine sık kullanılanlar ekleyin."
 
 #. 4.0->settings-schema.json->add-favorites->tooltip
-msgid "Show your favorite app icons next to the session buttons."
+#, fuzzy
+#| msgid "Show your favorite app icons next to the session buttons."
+msgid "Show your favorite app icons next to the session buttons"
 msgstr "Oturum düğmelerinin yanında favori uygulama simgelerinizi gösterin."
 
-#. 4.0->settings-schema.json->privacy-settings-button->description
-msgid "Recent files settings"
-msgstr "Son dosya ayarları"
+#, javascript-format
+#~ msgid "Failed to launch \"%s\""
+#~ msgstr "Başlatılamadı \"%s\""
+
+#~ msgid "Remove from favorites"
+#~ msgstr "Favorilerden kaldır"
+
+#~ msgid "Toggle recent files"
+#~ msgstr "Son kullanılan dosyalar"
+
+#~ msgid "Press this button to customize your privacy settings."
+#~ msgstr "Gizlilik ayarlarınızı özelleştirmek için bu düğmeye basın."
+
+#~ msgid "Press this button to customize your menu entries."
+#~ msgstr "Menü girişlerinizi özelleştirmek için bu düğmeye basın."
+
+#~ msgid "Unchecking this allows the theme to set the icon"
+#~ msgstr "Seçeneğin işaretini kaldırmak, temanın simgeyi ayarlamasını sağlar"
+
+#~ msgid "Icon"
+#~ msgstr "Simge"
+
+#~ msgid "Set the custom menu button icon name"
+#~ msgstr "Menü simge ismini ayarla"
+
+#~ msgid "Enable opening the menu when the mouse enters the applet"
+#~ msgstr ""
+#~ "Fare menü uygulamacığının üstüne geldiğinde menü açılmasını etkinleştir"
+
+#~ msgid "Delay between switching categories"
+#~ msgstr "Kategoriler arası geçişlerdeki gecikme"
+
+#~ msgid ""
+#~ "When enabled, category views are activated on click instead of on hover."
+#~ msgstr "Kategoriler içindeki uygulama listelerine tıklayarak ulaşırsınız."
+
+#~ msgid ""
+#~ "Choose whether or not to enable smooth autoscrolling in the application "
+#~ "list."
+#~ msgstr ""
+#~ "Uygulamada sorunsuz otomatik gezinmeyi etkinleştirip etkinleştirmemesini "
+#~ "seçin."
+
+#~ msgid "Choose whether or not bookmarks are indexed in the menu."
+#~ msgstr "Bilgisayar menüsünde bulunan yer imlerini göster."
+
+#~ msgid "Choose whether or not open windows are indexed in menu searches."
+#~ msgstr ""
+#~ "Açık pencerelerin menü aramalarına dahil edilip edilmeyeceğini seçin."
+
+#~ msgid "Choose whether or not to show bookmarks and places in the menu."
+#~ msgstr ""
+#~ "Menüde yer imlerinin ve yerlerin gösterilip gösterilmeyeceğini seçin."
+
+#~ msgid "Choose whether or not to show icons on applications."
+#~ msgstr "Uygulamalardaki simgelerin gösterilip gösterilmeyeceğini seçin."
+
+#~ msgid "Choose whether or not to show icons on categories."
+#~ msgstr "Kategorilerdeki simgelerin gösterilip gösterilmeyeceğini seçin."
+
+#~ msgid ""
+#~ "Choose whether or not to show the application description on the "
+#~ "application buttons."
+#~ msgstr "Listede uygulama açıklamasının gösterilip gösterilmeyeceğini seçin."
+
+#~ msgid ""
+#~ "When enabled, tooltips containing the item's name or description is shown "
+#~ "when hovered over."
+#~ msgstr ""
+#~ "Etkinleştirildiğinde, uygulamaların açıklamasını içeren araç ipuçları "
+#~ "gösterilir."
+
+#~ msgid ""
+#~ "The delay time in milliseconds for tooltips when hovering over a menu "
+#~ "item."
+#~ msgstr "Araç ipuçları için milisaniye cinsinden gecikme süresi."
 
 #~ msgid "Please provide your password to uninstall this application"
 #~ msgstr "Bu uygulamayı kaldırmak için lütfen şifrenizi girin"

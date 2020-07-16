@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cinnamenu@json\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-13 18:22+0100\n"
-"PO-Revision-Date: 2020-07-13 21:37+0100\n"
+"POT-Creation-Date: 2020-07-15 12:39+0100\n"
+"PO-Revision-Date: 2020-07-15 14:23+0100\n"
 "Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
 "Language-Team: Svenska Språkfiler <contactform@svenskasprakfiler.se>\n"
 "Language: sv\n"
@@ -106,11 +106,6 @@ msgstr "Stäng av"
 msgid "Shutdown the computer"
 msgstr "Stäng av datorn"
 
-#: 3.2/placeDisplay.js:57 4.0/placeDisplay.js:35
-#, javascript-format
-msgid "Failed to launch \"%s\""
-msgstr "Kunde inte starta \"%s\""
-
 #: 3.2/placeDisplay.js:146 4.0/placeDisplay.js:102
 msgid "Home"
 msgstr "Hem"
@@ -136,9 +131,9 @@ msgstr "Lägg till i panelen"
 msgid "Add to desktop"
 msgstr "Lägg till på skrivbordet"
 
-#: 3.2/buttons.js:1054
-msgid "Remove from favorites"
-msgstr "Ta bort från Favoriter"
+#: 3.2/buttons.js:1054 4.0/buttons.js:849
+msgid "Remove favorite"
+msgstr "Ta bort favorit"
 
 #: 3.2/buttons.js:1056 4.0/buttons.js:852
 msgid "Add to favorites"
@@ -151,10 +146,6 @@ msgstr "Avinstallera"
 #: 4.0/applet.js:233 4.0/applet.js:1230
 msgid "Please wait..."
 msgstr ""
-
-#: 4.0/buttons.js:849
-msgid "Remove favorite"
-msgstr "Ta bort favorit"
 
 #. metadata.json->name
 #. 3.2->settings-schema.json->cinnamenuProvidersSection->title
@@ -222,23 +213,14 @@ msgid "Content"
 msgstr "Innehåll"
 
 #. 3.2->settings-schema.json->privacy-settings-button->description
-msgid "Toggle recent files"
-msgstr "Visa/Dölj nyligen använda filer"
-
-#. 3.2->settings-schema.json->privacy-settings-button->tooltip
-#. 4.0->settings-schema.json->privacy-settings-button->tooltip
-msgid "Press this button to customize your privacy settings."
-msgstr "Tryck på denna knapp för att anpassa dina sekretessinställningar."
+#. 4.0->settings-schema.json->privacy-settings-button->description
+msgid "Recent files settings"
+msgstr "Inställningar för senaste filer"
 
 #. 3.2->settings-schema.json->menu-editor-button->description
 #. 4.0->settings-schema.json->menu-editor-button->description
 msgid "Open the menu editor"
 msgstr "Öppna menyredigeraren"
-
-#. 3.2->settings-schema.json->menu-editor-button->tooltip
-#. 4.0->settings-schema.json->menu-editor-button->tooltip
-msgid "Press this button to customize your menu entries."
-msgstr "Tryck på denna knapp för att anpassa dina menyposter."
 
 #. 3.2->settings-schema.json->resetCategoryOrder-button->description
 #. 4.0->settings-schema.json->resetCategoryOrder-button->description
@@ -252,25 +234,27 @@ msgstr "Använd en anpassad ikon"
 
 #. 3.2->settings-schema.json->menu-icon-custom->tooltip
 #. 4.0->settings-schema.json->menu-icon-custom->tooltip
-msgid "Unchecking this allows the theme to set the icon"
-msgstr "Inaktivering innebär att temat anger ikon"
+#, fuzzy
+#| msgid "Use a custom icon"
+msgid "Use a custom icon in the panel"
+msgstr "Använd en anpassad ikon"
 
 #. 3.2->settings-schema.json->menu-icon->description
-#. 4.0->settings-schema.json->menu-icon->description
-msgid "Icon"
-msgstr "Ikon"
-
 #. 3.2->settings-schema.json->menu-icon->tooltip
+#. 4.0->settings-schema.json->menu-icon->description
 #. 4.0->settings-schema.json->menu-icon->tooltip
-msgid "Select an icon to show in the panel."
-msgstr "Välj en ikon att visas i panelen."
+msgid "Panel icon"
+msgstr "Panelikon"
 
 #. 3.2->settings-schema.json->menu-label->description
-#. 3.2->settings-schema.json->menu-label->tooltip
 #. 4.0->settings-schema.json->menu-label->description
+msgid "Panel text"
+msgstr "Paneltext"
+
+#. 3.2->settings-schema.json->menu-label->tooltip
 #. 4.0->settings-schema.json->menu-label->tooltip
-msgid "Set the custom menu button icon name"
-msgstr "Ange anpassat namn på menyikonen"
+msgid "Text to show beside the panel icon"
+msgstr "Text som visas bredvid panelikonen"
 
 #. 3.2->settings-schema.json->category-icon-size->units
 #. 3.2->settings-schema.json->apps-list-icon-size->units
@@ -309,13 +293,15 @@ msgstr "Tangentbordsgenväg för att öppna och stänga menyn"
 
 #. 3.2->settings-schema.json->activate-on-hover->description
 #. 4.0->settings-schema.json->activate-on-hover->description
-msgid "Open the menu when I move my mouse over it"
-msgstr "Öppna menyn när jag för muspekaren över den"
+msgid "Open menu on hover"
+msgstr "Öppna menyn på musen"
 
 #. 3.2->settings-schema.json->activate-on-hover->tooltip
 #. 4.0->settings-schema.json->activate-on-hover->tooltip
-msgid "Enable opening the menu when the mouse enters the applet"
-msgstr "Aktivera menyn när muspekaren förs över panelikonen"
+#, fuzzy
+#| msgid "Open the menu when I move my mouse over it"
+msgid "Open the menu when I move my mouse over the panel icon"
+msgstr "Öppna menyn när jag för muspekaren över den"
 
 #. 3.2->settings-schema.json->hover-delay->units
 #. 3.2->settings-schema.json->tooltip-delay->units
@@ -325,13 +311,10 @@ msgstr "millisekunder"
 
 #. 3.2->settings-schema.json->hover-delay->description
 #. 4.0->settings-schema.json->hover-delay->description
-msgid "Menu hover delay:"
+#, fuzzy
+#| msgid "Menu hover delay:"
+msgid "Menu hover delay"
 msgstr "Menyfördröjning:"
-
-#. 3.2->settings-schema.json->hover-delay->tooltip
-#. 4.0->settings-schema.json->hover-delay->tooltip
-msgid "Delay between switching categories"
-msgstr "Fördröjning vid växling mellan kategorier"
 
 #. 3.2->settings-schema.json->enable-animation->description
 #. 4.0->settings-schema.json->enable-animation->description
@@ -340,7 +323,9 @@ msgstr "Använd menyanimering"
 
 #. 3.2->settings-schema.json->enable-animation->tooltip
 #. 4.0->settings-schema.json->enable-animation->tooltip
-msgid "Allow the menu to animate on open and close"
+#, fuzzy
+#| msgid "Allow the menu to animate on open and close"
+msgid "Animate the menu on open and close"
 msgstr "Tillåt animering när menyn öppnas och stängs"
 
 #. 3.2->settings-schema.json->category-click->description
@@ -350,22 +335,22 @@ msgstr "Aktivera kategorier vid klick"
 
 #. 3.2->settings-schema.json->category-click->tooltip
 #. 4.0->settings-schema.json->category-click->tooltip
-msgid ""
-"When enabled, category views are activated on click instead of on hover."
-msgstr ""
-"När funktionen är aktiverad, aktiveras kategorivisning vid klick istället "
-"för när muspekaren svävar över ett menyobjekt."
+#, fuzzy
+#| msgid "Activate categories on click"
+msgid "Activate categories on click instead of on hover"
+msgstr "Aktivera kategorier vid klick"
 
 #. 3.2->settings-schema.json->enable-autoscroll->description
 #. 4.0->settings-schema.json->enable-autoscroll->description
-msgid "Enable autoscrolling in application list"
+#, fuzzy
+#| msgid "Enable autoscrolling in application list"
+msgid "Enable autoscrolling"
 msgstr "Aktivera automatisk skrollning i programlistan"
 
 #. 3.2->settings-schema.json->enable-autoscroll->tooltip
 #. 4.0->settings-schema.json->enable-autoscroll->tooltip
-msgid ""
-"Choose whether or not to enable smooth autoscrolling in the application list."
-msgstr "Välj om mjuk autoskrollning skall aktiveras i programlistan."
+msgid "Enable autoscrolling in application list"
+msgstr "Aktivera automatisk skrollning i programlistan"
 
 #. 3.2->settings-schema.json->enable-bookmarks->description
 #. 4.0->settings-schema.json->enable-bookmarks->description
@@ -374,16 +359,12 @@ msgstr "Visa webbokmärken"
 
 #. 3.2->settings-schema.json->enable-bookmarks->tooltip
 #. 4.0->settings-schema.json->enable-bookmarks->tooltip
-msgid "Choose whether or not bookmarks are indexed in the menu."
-msgstr "Välj om bokmärken skall indexeras eller inte, i menyn."
+msgid "Show your browser's web bookmarks in the menu"
+msgstr "Visa webbläsarens webbläsare i menyn"
 
 #. 3.2->settings-schema.json->enable-windows->description
 msgid "Enable searching of open windows"
 msgstr "Aktivera sökning i öppna fönster"
-
-#. 3.2->settings-schema.json->enable-windows->tooltip
-msgid "Choose whether or not open windows are indexed in menu searches."
-msgstr "Välj om öppna fönster skall indexeras eller inte, i menysökningar."
 
 #. 3.2->settings-schema.json->enable-search-providers->description
 #. 4.0->settings-schema.json->enable-search-providers->description
@@ -392,8 +373,11 @@ msgstr "Aktivera sökmotorer"
 
 #. 3.2->settings-schema.json->enable-search-providers->tooltip
 #. 4.0->settings-schema.json->enable-search-providers->tooltip
-msgid ""
-"Choose whether or not search provider results are indexed in menu searches."
+#, fuzzy
+#| msgid ""
+#| "Choose whether or not search provider results are indexed in menu "
+#| "searches."
+msgid "Include search provider results in searches"
 msgstr "Välj om sökmotorresultat skall indexeras eller inte, i menysökningar."
 
 #. 3.2->settings-schema.json->get-providers->description
@@ -435,62 +419,39 @@ msgstr "Visa bokmärken och platser"
 
 #. 3.2->settings-schema.json->show-places->tooltip
 #. 4.0->settings-schema.json->show-places->tooltip
-msgid "Choose whether or not to show bookmarks and places in the menu."
-msgstr "Välj om bokmärken och platser skall visas eller inte, i menyn."
+#, fuzzy
+#| msgid "Show bookmarks and places"
+msgid "Show bookmarks and places category in the menu"
+msgstr "Visa bokmärken och platser"
 
 #. 3.2->settings-schema.json->show-application-icons->description
+#. 3.2->settings-schema.json->show-application-icons->tooltip
 #. 4.0->settings-schema.json->show-application-icons->description
+#. 4.0->settings-schema.json->show-application-icons->tooltip
 msgid "Show application icons"
 msgstr "Visa programikoner"
 
-#. 3.2->settings-schema.json->show-application-icons->tooltip
-#. 4.0->settings-schema.json->show-application-icons->tooltip
-msgid "Choose whether or not to show icons on applications."
-msgstr "Välj om programikoner skall visas eller inte."
-
 #. 3.2->settings-schema.json->show-category-icons->description
+#. 3.2->settings-schema.json->show-category-icons->tooltip
 #. 4.0->settings-schema.json->show-category-icons->description
+#. 4.0->settings-schema.json->show-category-icons->tooltip
 msgid "Show category icons"
 msgstr "Visa kategoriikoner"
 
-#. 3.2->settings-schema.json->show-category-icons->tooltip
-#. 4.0->settings-schema.json->show-category-icons->tooltip
-msgid "Choose whether or not to show icons on categories."
-msgstr "Välj om kategoriikoner skall visas eller inte."
-
 #. 3.2->settings-schema.json->show-apps-description-on-buttons->description
+#. 3.2->settings-schema.json->show-apps-description-on-buttons->tooltip
 msgid "Show application descriptions under titles"
 msgstr "Visa programbeskrivningar under titlar"
 
-#. 3.2->settings-schema.json->show-apps-description-on-buttons->tooltip
-msgid ""
-"Choose whether or not to show the application description on the application "
-"buttons."
-msgstr ""
-"Välj om programbeskrivningar skall visas eller inte, på programstartknappar."
-
 #. 3.2->settings-schema.json->show-tooltips->description
+#. 3.2->settings-schema.json->show-tooltips->tooltip
 msgid "Show tooltips"
 msgstr "Visa knappbeskrivningar"
 
-#. 3.2->settings-schema.json->show-tooltips->tooltip
-msgid ""
-"When enabled, tooltips containing the item's name or description is shown "
-"when hovered over."
-msgstr ""
-"När funktionen är aktiverad, visas knappbeskrivningar som innehåller "
-"objektets namn eller beskrivning, när muspekaren svävar över ett menyobjekt."
-
 #. 3.2->settings-schema.json->tooltip-delay->description
+#. 3.2->settings-schema.json->tooltip-delay->tooltip
 msgid "Tooltip delay"
 msgstr "Fördröjning för knappbeskrivningar"
-
-#. 3.2->settings-schema.json->tooltip-delay->tooltip
-msgid ""
-"The delay time in milliseconds for tooltips when hovering over a menu item."
-msgstr ""
-"Fördröjningstid i millisekunder för knappbeskrivningar, när muspekaren "
-"svävar över ett menyobjekt."
 
 #. 3.2->settings-schema.json->enable-custom-menu-height->description
 #. 3.2->settings-schema.json->enable-custom-menu-height->tooltip
@@ -536,7 +497,9 @@ msgid "None"
 msgstr "Ingen"
 
 #. 4.0->settings-schema.json->description-placement->tooltip
-msgid "Choose where to show application descriptions."
+#, fuzzy
+#| msgid "Choose where to show application descriptions."
+msgid "Choose where to show application descriptions"
 msgstr "Välj var du vill visa applikationsbeskrivningar."
 
 #. 4.0->settings-schema.json->powergroup-placement->description
@@ -560,20 +523,101 @@ msgid "Right"
 msgstr "Höger"
 
 #. 4.0->settings-schema.json->powergroup-placement->tooltip
-msgid "Choose where to show the session (quit, logout, etc.) buttons."
+#, fuzzy
+#| msgid "Choose where to show the session (quit, logout, etc.) buttons."
+msgid "Choose where to show the session (quit, logout, etc.) buttons"
 msgstr "Välj var du vill visa sessionen (avsluta, logga ut etc.) -knapparna."
 
 #. 4.0->settings-schema.json->add-favorites->description
-msgid "Add favorites to session buttons."
+#, fuzzy
+#| msgid "Add favorites to session buttons."
+msgid "Add favorites to session buttons"
 msgstr "Lägg till favoriter till sessionsknappar."
 
 #. 4.0->settings-schema.json->add-favorites->tooltip
-msgid "Show your favorite app icons next to the session buttons."
+#, fuzzy
+#| msgid "Show your favorite app icons next to the session buttons."
+msgid "Show your favorite app icons next to the session buttons"
 msgstr "Visa dina favorit-appikoner bredvid sessionsknapparna."
 
-#. 4.0->settings-schema.json->privacy-settings-button->description
-msgid "Recent files settings"
-msgstr "Inställningar för senaste filer"
+#, javascript-format
+#~ msgid "Failed to launch \"%s\""
+#~ msgstr "Kunde inte starta \"%s\""
+
+#~ msgid "Remove from favorites"
+#~ msgstr "Ta bort från Favoriter"
+
+#~ msgid "Toggle recent files"
+#~ msgstr "Visa/Dölj nyligen använda filer"
+
+#~ msgid "Press this button to customize your privacy settings."
+#~ msgstr "Tryck på denna knapp för att anpassa dina sekretessinställningar."
+
+#~ msgid "Press this button to customize your menu entries."
+#~ msgstr "Tryck på denna knapp för att anpassa dina menyposter."
+
+#~ msgid "Unchecking this allows the theme to set the icon"
+#~ msgstr "Inaktivering innebär att temat anger ikon"
+
+#~ msgid "Icon"
+#~ msgstr "Ikon"
+
+#~ msgid "Set the custom menu button icon name"
+#~ msgstr "Ange anpassat namn på menyikonen"
+
+#~ msgid "Enable opening the menu when the mouse enters the applet"
+#~ msgstr "Aktivera menyn när muspekaren förs över panelikonen"
+
+#~ msgid "Delay between switching categories"
+#~ msgstr "Fördröjning vid växling mellan kategorier"
+
+#~ msgid ""
+#~ "When enabled, category views are activated on click instead of on hover."
+#~ msgstr ""
+#~ "När funktionen är aktiverad, aktiveras kategorivisning vid klick istället "
+#~ "för när muspekaren svävar över ett menyobjekt."
+
+#~ msgid ""
+#~ "Choose whether or not to enable smooth autoscrolling in the application "
+#~ "list."
+#~ msgstr "Välj om mjuk autoskrollning skall aktiveras i programlistan."
+
+#~ msgid "Choose whether or not bookmarks are indexed in the menu."
+#~ msgstr "Välj om bokmärken skall indexeras eller inte, i menyn."
+
+#~ msgid "Choose whether or not open windows are indexed in menu searches."
+#~ msgstr "Välj om öppna fönster skall indexeras eller inte, i menysökningar."
+
+#~ msgid "Choose whether or not to show bookmarks and places in the menu."
+#~ msgstr "Välj om bokmärken och platser skall visas eller inte, i menyn."
+
+#~ msgid "Choose whether or not to show icons on applications."
+#~ msgstr "Välj om programikoner skall visas eller inte."
+
+#~ msgid "Choose whether or not to show icons on categories."
+#~ msgstr "Välj om kategoriikoner skall visas eller inte."
+
+#~ msgid ""
+#~ "Choose whether or not to show the application description on the "
+#~ "application buttons."
+#~ msgstr ""
+#~ "Välj om programbeskrivningar skall visas eller inte, på "
+#~ "programstartknappar."
+
+#~ msgid ""
+#~ "When enabled, tooltips containing the item's name or description is shown "
+#~ "when hovered over."
+#~ msgstr ""
+#~ "När funktionen är aktiverad, visas knappbeskrivningar som innehåller "
+#~ "objektets namn eller beskrivning, när muspekaren svävar över ett "
+#~ "menyobjekt."
+
+#~ msgid ""
+#~ "The delay time in milliseconds for tooltips when hovering over a menu "
+#~ "item."
+#~ msgstr ""
+#~ "Fördröjningstid i millisekunder för knappbeskrivningar, när muspekaren "
+#~ "svävar över ett menyobjekt."
 
 #~ msgid "Please provide your password to uninstall this application"
 #~ msgstr "Ange ditt lösenord för att avinstallera det här programmet"

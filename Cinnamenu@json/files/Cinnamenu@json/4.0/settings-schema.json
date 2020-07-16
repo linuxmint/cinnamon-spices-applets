@@ -99,9 +99,7 @@
 
     "categories":{
         "type":"generic",
-        "default":[
-
-        ]
+        "default":[]
     },
 
     "applications-view-mode":{
@@ -123,7 +121,7 @@
             "Under titles":2,
             "None":3
         },
-        "tooltip":"Choose where to show application descriptions."
+        "tooltip":"Choose where to show application descriptions"
     },
     "powergroup-placement":{
         "type":"combobox",
@@ -135,13 +133,13 @@
             "Left":2,
             "Right":3
         },
-        "tooltip":"Choose where to show the session (quit, logout, etc.) buttons."
+        "tooltip":"Choose where to show the session (quit, logout, etc.) buttons"
     },
     "add-favorites":{
         "type":"switch",
         "default":true,
-        "description":"Add favorites to session buttons.",
-        "tooltip":"Show your favorite app icons next to the session buttons."
+        "description":"Add favorites to session buttons",
+        "tooltip":"Show your favorite app icons next to the session buttons"
     },
     "enable-custom-menu-height":{
         "type":"switch",
@@ -174,25 +172,23 @@
         "type":"switch",
         "default":true,
         "description":"Show bookmarks and places",
-        "tooltip":"Choose whether or not to show bookmarks and places in the menu."
+        "tooltip":"Show bookmarks and places category in the menu"
     },
     "enable-bookmarks":{
         "type":"checkbox",
         "default":false,
         "description":"Show web bookmarks",
-        "tooltip":"Choose whether or not bookmarks are indexed in the menu."
+        "tooltip":"Show your browser's web bookmarks in the menu"
     },
     "privacy-settings-button":{
         "type":"button",
         "description":"Recent files settings",
-        "callback":"launchPrivacySettings",
-        "tooltip":"Press this button to customize your privacy settings."
+        "callback":"launchPrivacySettings"
     },
     "menu-editor-button":{
         "type":"button",
         "description":"Open the menu editor",
-        "callback":"launchEditor",
-        "tooltip":"Press this button to customize your menu entries."
+        "callback":"launchEditor"
     },
     "resetCategoryOrder-button":{
         "type":"button",
@@ -208,8 +204,8 @@
     "activate-on-hover":{
         "type":"checkbox",
         "default":false,
-        "description":"Open the menu when I move my mouse over it",
-        "tooltip":"Enable opening the menu when the mouse enters the applet"
+        "description":"Open menu on hover",
+        "tooltip":"Open the menu when I move my mouse over the panel icon"
     },
     "hover-delay":{
         "indent":true,
@@ -220,33 +216,32 @@
         "max":1000,
         "step":50,
         "units":"milliseconds",
-        "description":"Menu hover delay:",
-        "tooltip":"Delay between switching categories"
+        "description":"Menu hover delay"
     },
     "enable-animation":{
         "type":"checkbox",
         "default":false,
         "description":"Use menu animations",
-        "tooltip":"Allow the menu to animate on open and close"
+        "tooltip":"Animate the menu on open and close"
     },
 
     "category-click":{
         "type":"checkbox",
         "default":false,
         "description":"Activate categories on click",
-        "tooltip":"When enabled, category views are activated on click instead of on hover."
+        "tooltip":"Activate categories on click instead of on hover"
     },
     "enable-autoscroll":{
         "type":"checkbox",
         "default":true,
-        "description":"Enable autoscrolling in application list",
-        "tooltip":"Choose whether or not to enable smooth autoscrolling in the application list."
+        "description":"Enable autoscrolling",
+        "tooltip":"Enable autoscrolling in application list"
     },
     "enable-search-providers":{
         "type":"checkbox",
         "default":false,
         "description":"Enable search providers",
-        "tooltip":"Choose whether or not search provider results are indexed in menu searches."
+        "tooltip":"Include search provider results in searches"
     },
     "get-providers":{
         "type":"button",
@@ -258,28 +253,28 @@
         "type":"checkbox",
         "default":false,
         "description":"Use a custom icon",
-        "tooltip":"Unchecking this allows the theme to set the icon"
+        "tooltip":"Use a custom icon in the panel"
     },
     "menu-icon":{
         "type":"iconfilechooser",
         "default":"/usr/share/cinnamon/theme/menu-symbolic.svg",
-        "description":"Icon",
-        "tooltip":"Select an icon to show in the panel.",
+        "description":"Panel icon",
         "dependency":"menu-icon-custom",
-        "indent":"true"
+        "indent":"true",
+        "tooltip":"Panel icon"
     },
     "menu-label":{
         "type":"entry",
-        "default":"",
-        "description":"Set the custom menu button icon name",
-        "tooltip":"Set the custom menu button icon name"
+        "default":"Menu",
+        "description":"Panel text",
+        "tooltip":"Text to show beside the panel icon"
     },
 
     "show-category-icons":{
         "type":"switch",
         "default":true,
         "description":"Show category icons",
-        "tooltip":"Choose whether or not to show icons on categories."
+        "tooltip":"Show category icons"
     },
     "category-icon-size":{
         "indent":true,
@@ -297,7 +292,7 @@
         "type":"switch",
         "default":true,
         "description":"Show application icons",
-        "tooltip":"Choose whether or not to show icons on applications."
+        "tooltip":"Show application icons"
     },
     "apps-list-icon-size":{
         "indent":true,

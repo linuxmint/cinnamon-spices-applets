@@ -1040,6 +1040,7 @@ AppListGridButton.prototype = {
       this.contextMenuButtons = [];
       this.state.set({contextMenuIsOpen: this.buttonState.appIndex});
       this.actor.set_style_class_name('menu-application-button-selected');
+
       if (this.state.gpu_offload_supported) {
         addMenuItem(this, new ApplicationContextMenuItem(this.state, this.buttonState, _('Run with NVIDIA GPU'), 'offload_launch', 'cpu'));
       } else if(this.state.isBumblebeeInstalled) {
@@ -1050,13 +1051,14 @@ AppListGridButton.prototype = {
         addMenuItem(this, new ApplicationContextMenuItem(this.state, this.buttonState, _('Add to desktop'), 'add_to_desktop', 'computer'));
       }
       if (this.state.trigger('isFavorite', this.buttonState.app.get_id())) {
-        addMenuItem(this, new ApplicationContextMenuItem(this.state, this.buttonState, _('Remove from favorites'), 'remove_from_favorites', 'starred'));
+        addMenuItem(this, new ApplicationContextMenuItem(this.state, this.buttonState, _('Remove favorite'), 'remove_from_favorites', 'starred'));
       } else {
         addMenuItem(this, new ApplicationContextMenuItem(this.state, this.buttonState, _('Add to favorites'), 'add_to_favorites', 'non-starred'));
       }
       if (canUninstall) {
         addMenuItem(this, new ApplicationContextMenuItem(this.state, this.buttonState, _('Uninstall'), 'uninstall', 'edit-delete'));
       }
+
       if (this.state.isListView) {
         this.label.hide();
       } else {

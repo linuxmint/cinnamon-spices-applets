@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-13 18:22+0100\n"
-"PO-Revision-Date: 2020-07-14 06:48+0100\n"
+"POT-Creation-Date: 2020-07-15 12:39+0100\n"
+"PO-Revision-Date: 2020-07-15 15:33+0100\n"
+"Last-Translator: \n"
 "Language-Team: \n"
+"Language: et\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Poedit 2.3.1\n"
-"Last-Translator: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: et\n"
 
 #: 3.2/applet.js:92 4.0/applet.js:40
 msgid "Type to search..."
@@ -106,11 +106,6 @@ msgstr ""
 msgid "Shutdown the computer"
 msgstr ""
 
-#: 3.2/placeDisplay.js:57 4.0/placeDisplay.js:35
-#, javascript-format
-msgid "Failed to launch \"%s\""
-msgstr ""
-
 #: 3.2/placeDisplay.js:146 4.0/placeDisplay.js:102
 msgid "Home"
 msgstr ""
@@ -136,8 +131,8 @@ msgstr ""
 msgid "Add to desktop"
 msgstr ""
 
-#: 3.2/buttons.js:1054
-msgid "Remove from favorites"
+#: 3.2/buttons.js:1054 4.0/buttons.js:849
+msgid "Remove favorite"
 msgstr ""
 
 #: 3.2/buttons.js:1056 4.0/buttons.js:852
@@ -150,10 +145,6 @@ msgstr ""
 
 #: 4.0/applet.js:233 4.0/applet.js:1230
 msgid "Please wait..."
-msgstr ""
-
-#: 4.0/buttons.js:849
-msgid "Remove favorite"
 msgstr ""
 
 #. metadata.json->name
@@ -220,22 +211,13 @@ msgid "Content"
 msgstr ""
 
 #. 3.2->settings-schema.json->privacy-settings-button->description
-msgid "Toggle recent files"
-msgstr ""
-
-#. 3.2->settings-schema.json->privacy-settings-button->tooltip
-#. 4.0->settings-schema.json->privacy-settings-button->tooltip
-msgid "Press this button to customize your privacy settings."
+#. 4.0->settings-schema.json->privacy-settings-button->description
+msgid "Recent files settings"
 msgstr ""
 
 #. 3.2->settings-schema.json->menu-editor-button->description
 #. 4.0->settings-schema.json->menu-editor-button->description
 msgid "Open the menu editor"
-msgstr ""
-
-#. 3.2->settings-schema.json->menu-editor-button->tooltip
-#. 4.0->settings-schema.json->menu-editor-button->tooltip
-msgid "Press this button to customize your menu entries."
 msgstr ""
 
 #. 3.2->settings-schema.json->resetCategoryOrder-button->description
@@ -250,24 +232,24 @@ msgstr ""
 
 #. 3.2->settings-schema.json->menu-icon-custom->tooltip
 #. 4.0->settings-schema.json->menu-icon-custom->tooltip
-msgid "Unchecking this allows the theme to set the icon"
+msgid "Use a custom icon in the panel"
 msgstr ""
 
 #. 3.2->settings-schema.json->menu-icon->description
-#. 4.0->settings-schema.json->menu-icon->description
-msgid "Icon"
-msgstr ""
-
 #. 3.2->settings-schema.json->menu-icon->tooltip
+#. 4.0->settings-schema.json->menu-icon->description
 #. 4.0->settings-schema.json->menu-icon->tooltip
-msgid "Select an icon to show in the panel."
+msgid "Panel icon"
 msgstr ""
 
 #. 3.2->settings-schema.json->menu-label->description
-#. 3.2->settings-schema.json->menu-label->tooltip
 #. 4.0->settings-schema.json->menu-label->description
+msgid "Panel text"
+msgstr ""
+
+#. 3.2->settings-schema.json->menu-label->tooltip
 #. 4.0->settings-schema.json->menu-label->tooltip
-msgid "Set the custom menu button icon name"
+msgid "Text to show beside the panel icon"
 msgstr ""
 
 #. 3.2->settings-schema.json->category-icon-size->units
@@ -307,12 +289,12 @@ msgstr ""
 
 #. 3.2->settings-schema.json->activate-on-hover->description
 #. 4.0->settings-schema.json->activate-on-hover->description
-msgid "Open the menu when I move my mouse over it"
+msgid "Open menu on hover"
 msgstr ""
 
 #. 3.2->settings-schema.json->activate-on-hover->tooltip
 #. 4.0->settings-schema.json->activate-on-hover->tooltip
-msgid "Enable opening the menu when the mouse enters the applet"
+msgid "Open the menu when I move my mouse over the panel icon"
 msgstr ""
 
 #. 3.2->settings-schema.json->hover-delay->units
@@ -323,12 +305,7 @@ msgstr ""
 
 #. 3.2->settings-schema.json->hover-delay->description
 #. 4.0->settings-schema.json->hover-delay->description
-msgid "Menu hover delay:"
-msgstr ""
-
-#. 3.2->settings-schema.json->hover-delay->tooltip
-#. 4.0->settings-schema.json->hover-delay->tooltip
-msgid "Delay between switching categories"
+msgid "Menu hover delay"
 msgstr ""
 
 #. 3.2->settings-schema.json->enable-animation->description
@@ -338,7 +315,7 @@ msgstr ""
 
 #. 3.2->settings-schema.json->enable-animation->tooltip
 #. 4.0->settings-schema.json->enable-animation->tooltip
-msgid "Allow the menu to animate on open and close"
+msgid "Animate the menu on open and close"
 msgstr ""
 
 #. 3.2->settings-schema.json->category-click->description
@@ -348,19 +325,17 @@ msgstr ""
 
 #. 3.2->settings-schema.json->category-click->tooltip
 #. 4.0->settings-schema.json->category-click->tooltip
-msgid ""
-"When enabled, category views are activated on click instead of on hover."
+msgid "Activate categories on click instead of on hover"
 msgstr ""
 
 #. 3.2->settings-schema.json->enable-autoscroll->description
 #. 4.0->settings-schema.json->enable-autoscroll->description
-msgid "Enable autoscrolling in application list"
+msgid "Enable autoscrolling"
 msgstr ""
 
 #. 3.2->settings-schema.json->enable-autoscroll->tooltip
 #. 4.0->settings-schema.json->enable-autoscroll->tooltip
-msgid ""
-"Choose whether or not to enable smooth autoscrolling in the application list."
+msgid "Enable autoscrolling in application list"
 msgstr ""
 
 #. 3.2->settings-schema.json->enable-bookmarks->description
@@ -370,15 +345,11 @@ msgstr ""
 
 #. 3.2->settings-schema.json->enable-bookmarks->tooltip
 #. 4.0->settings-schema.json->enable-bookmarks->tooltip
-msgid "Choose whether or not bookmarks are indexed in the menu."
+msgid "Show your browser's web bookmarks in the menu"
 msgstr ""
 
 #. 3.2->settings-schema.json->enable-windows->description
 msgid "Enable searching of open windows"
-msgstr ""
-
-#. 3.2->settings-schema.json->enable-windows->tooltip
-msgid "Choose whether or not open windows are indexed in menu searches."
 msgstr ""
 
 #. 3.2->settings-schema.json->enable-search-providers->description
@@ -388,8 +359,7 @@ msgstr ""
 
 #. 3.2->settings-schema.json->enable-search-providers->tooltip
 #. 4.0->settings-schema.json->enable-search-providers->tooltip
-msgid ""
-"Choose whether or not search provider results are indexed in menu searches."
+msgid "Include search provider results in searches"
 msgstr ""
 
 #. 3.2->settings-schema.json->get-providers->description
@@ -431,56 +401,36 @@ msgstr ""
 
 #. 3.2->settings-schema.json->show-places->tooltip
 #. 4.0->settings-schema.json->show-places->tooltip
-msgid "Choose whether or not to show bookmarks and places in the menu."
+msgid "Show bookmarks and places category in the menu"
 msgstr ""
 
 #. 3.2->settings-schema.json->show-application-icons->description
+#. 3.2->settings-schema.json->show-application-icons->tooltip
 #. 4.0->settings-schema.json->show-application-icons->description
+#. 4.0->settings-schema.json->show-application-icons->tooltip
 msgid "Show application icons"
 msgstr ""
 
-#. 3.2->settings-schema.json->show-application-icons->tooltip
-#. 4.0->settings-schema.json->show-application-icons->tooltip
-msgid "Choose whether or not to show icons on applications."
-msgstr ""
-
 #. 3.2->settings-schema.json->show-category-icons->description
+#. 3.2->settings-schema.json->show-category-icons->tooltip
 #. 4.0->settings-schema.json->show-category-icons->description
+#. 4.0->settings-schema.json->show-category-icons->tooltip
 msgid "Show category icons"
 msgstr ""
 
-#. 3.2->settings-schema.json->show-category-icons->tooltip
-#. 4.0->settings-schema.json->show-category-icons->tooltip
-msgid "Choose whether or not to show icons on categories."
-msgstr ""
-
 #. 3.2->settings-schema.json->show-apps-description-on-buttons->description
+#. 3.2->settings-schema.json->show-apps-description-on-buttons->tooltip
 msgid "Show application descriptions under titles"
 msgstr ""
 
-#. 3.2->settings-schema.json->show-apps-description-on-buttons->tooltip
-msgid ""
-"Choose whether or not to show the application description on the application "
-"buttons."
-msgstr ""
-
 #. 3.2->settings-schema.json->show-tooltips->description
+#. 3.2->settings-schema.json->show-tooltips->tooltip
 msgid "Show tooltips"
 msgstr ""
 
-#. 3.2->settings-schema.json->show-tooltips->tooltip
-msgid ""
-"When enabled, tooltips containing the item's name or description is shown "
-"when hovered over."
-msgstr ""
-
 #. 3.2->settings-schema.json->tooltip-delay->description
-msgid "Tooltip delay"
-msgstr ""
-
 #. 3.2->settings-schema.json->tooltip-delay->tooltip
-msgid ""
-"The delay time in milliseconds for tooltips when hovering over a menu item."
+msgid "Tooltip delay"
 msgstr ""
 
 #. 3.2->settings-schema.json->enable-custom-menu-height->description
@@ -527,7 +477,7 @@ msgid "None"
 msgstr ""
 
 #. 4.0->settings-schema.json->description-placement->tooltip
-msgid "Choose where to show application descriptions."
+msgid "Choose where to show application descriptions"
 msgstr ""
 
 #. 4.0->settings-schema.json->powergroup-placement->description
@@ -551,17 +501,13 @@ msgid "Right"
 msgstr ""
 
 #. 4.0->settings-schema.json->powergroup-placement->tooltip
-msgid "Choose where to show the session (quit, logout, etc.) buttons."
+msgid "Choose where to show the session (quit, logout, etc.) buttons"
 msgstr ""
 
 #. 4.0->settings-schema.json->add-favorites->description
-msgid "Add favorites to session buttons."
+msgid "Add favorites to session buttons"
 msgstr ""
 
 #. 4.0->settings-schema.json->add-favorites->tooltip
-msgid "Show your favorite app icons next to the session buttons."
-msgstr ""
-
-#. 4.0->settings-schema.json->privacy-settings-button->description
-msgid "Recent files settings"
+msgid "Show your favorite app icons next to the session buttons"
 msgstr ""
