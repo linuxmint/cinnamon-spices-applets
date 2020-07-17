@@ -17,14 +17,12 @@ var utils = importModule("utils");
 var isCoordinate = utils.isCoordinate;
 var CelsiusToKelvin = utils.CelsiusToKelvin;
 var KPHtoMPS = utils.MPHtoMPS;
-var icons = utils.icons;
 var weatherIconSafely = utils.weatherIconSafely;
 class Yahoo {
     constructor(_app) {
         this.prettyName = "Yahoo";
         this.name = "Yahoo";
         this.maxForecastSupport = 10;
-        this.supportsHourly = false;
         this.website = "https://www.yahoo.com/news/weather/";
         this.maxHourlyForecastSupport = 0;
         this.app = _app;
@@ -181,103 +179,103 @@ class Yahoo {
     ResolveIcon(icon, sunTimes) {
         switch (icon) {
             case 0:
-                return [icons.alert];
+                return ["weather-severe-alert"];
             case 1:
-                return [icons.alert];
+                return ["weather-severe-alert"];
             case 2:
-                return [icons.alert];
+                return ["weather-severe-alert"];
             case 3:
-                return [icons.storm];
+                return ["weather-storm"];
             case 4:
-                return [icons.storm];
+                return ["weather-storm"];
             case 5:
-                return [icons.rain, icons.showers_scattered, icons.rain_freezing];
+                return ["weather-rain", "weather-showers-scattered", "weather-freezing-rain"];
             case 6:
-                return [icons.rain_freezing, icons.rain, icons.showers_scattered];
+                return ["weather-freezing-rain", "weather-rain", "weather-showers-scattered"];
             case 7:
-                return [icons.snow];
+                return ["weather-snow"];
             case 8:
-                return [icons.rain_freezing, icons.rain, icons.showers_scattered];
+                return ["weather-freezing-rain", "weather-rain", "weather-showers-scattered"];
             case 9:
-                return [icons.rain_freezing, icons.rain, icons.showers_scattered];
+                return ["weather-freezing-rain", "weather-rain", "weather-showers-scattered"];
             case 10:
-                return [icons.rain_freezing, icons.rain, icons.showers_scattered];
+                return ["weather-freezing-rain", "weather-rain", "weather-showers-scattered"];
             case 11:
-                return [icons.showers, icons.showers_scattered];
+                return ["weather-showers", "weather-showers-scattered"];
             case 12:
-                return [icons.rain, icons.showers_scattered, icons.rain_freezing];
+                return ["weather-rain", "weather-showers-scattered", "weather-freezing-rain"];
             case 13:
-                return [icons.snow];
+                return ["weather-snow"];
             case 14:
-                return [icons.snow];
+                return ["weather-snow"];
             case 15:
-                return [icons.snow];
+                return ["weather-snow"];
             case 16:
-                return [icons.snow];
+                return ["weather-snow"];
             case 17:
-                return [icons.rain, icons.showers_scattered, icons.rain_freezing];
+                return ["weather-rain", "weather-showers-scattered", "weather-freezing-rain"];
             case 18:
-                return [icons.rain, icons.showers_scattered, icons.rain_freezing];
+                return ["weather-rain", "weather-showers-scattered", "weather-freezing-rain"];
             case 19:
-                return [icons.fog];
+                return ["weather-fog"];
             case 20:
-                return [icons.fog];
+                return ["weather-fog"];
             case 21:
-                return [icons.fog];
+                return ["weather-fog"];
             case 22:
-                return [icons.fog];
+                return ["weather-fog"];
             case 23:
-                return (sunTimes && this.IsNight(sunTimes)) ? ["weather-wind", "wind", "weather-breeze", icons.clouds, icons.few_clouds_night] : ["weather-wind", "wind", "weather-breeze", icons.clouds, icons.few_clouds_day];
+                return (sunTimes && this.IsNight(sunTimes)) ? ["weather-windy", "weather-breeze", "weather-clouds-night", "weather-few-clouds-night"] : ["weather-windy", "weather-breeze", "weather-clouds", "weather-few-clouds"];
             case 24:
-                return (sunTimes && this.IsNight(sunTimes)) ? ["weather-wind", "wind", "weather-breeze", icons.clouds, icons.few_clouds_night] : ["weather-wind", "wind", "weather-breeze", icons.clouds, icons.few_clouds_day];
+                return (sunTimes && this.IsNight(sunTimes)) ? ["weather-windy", "weather-breeze", "weather-clouds-night", "weather-few-clouds-night"] : ["weather-windy", "weather-breeze", "weather-clouds", "weather-few-clouds"];
             case 25:
-                return [icons.alert];
+                return ["weather-severe-alert"];
             case 26:
-                return (sunTimes && this.IsNight(sunTimes)) ? [icons.overcast, icons.clouds, icons.few_clouds_night] : [icons.overcast, icons.clouds, icons.few_clouds_day];
+                return (sunTimes && this.IsNight(sunTimes)) ? ["weather-overcast", "weather-clouds-night", "weather-few-clouds-night"] : ["weather-overcast", "weather-clouds", "weather-few-clouds"];
             case 27:
-                return [icons.few_clouds_night];
+                return ["weather-few-clouds-night"];
             case 28:
-                return [icons.few_clouds_day];
+                return ["weather-few-clouds"];
             case 29:
-                return [icons.few_clouds_night];
+                return ["weather-few-clouds-night"];
             case 30:
-                return [icons.few_clouds_day];
+                return ["weather-few-clouds"];
             case 31:
-                return [icons.clear_night];
+                return ["weather-clear-night"];
             case 32:
-                return [icons.clear_day];
+                return ["weather-clear"];
             case 33:
-                return [icons.clear_night];
+                return ["weather-clear-night"];
             case 34:
-                return [icons.clear_day];
+                return ["weather-clear"];
             case 35:
-                return [icons.rain, icons.showers_scattered, icons.rain_freezing];
+                return ["weather-rain", "weather-showers-scattered", "weather-freezing-rain"];
             case 36:
-                return [icons.alert];
+                return ["weather-severe-alert"];
             case 37:
-                return [icons.storm];
+                return ["weather-storm"];
             case 38:
-                return [icons.storm];
+                return ["weather-storm"];
             case 39:
-                return [icons.showers, icons.showers_scattered];
+                return ["weather-showers", "weather-showers-scattered"];
             case 40:
-                return [icons.rain, icons.showers_scattered, icons.rain_freezing];
+                return ["weather-rain", "weather-showers-scattered", "weather-freezing-rain"];
             case 41:
-                return [icons.snow];
+                return ["weather-snow"];
             case 42:
-                return [icons.snow];
+                return ["weather-snow"];
             case 43:
-                return [icons.snow];
+                return ["weather-snow"];
             case 44:
-                return [icons.alert];
+                return ["weather-severe-alert"];
             case 45:
-                return [icons.showers, icons.showers_scattered];
+                return ["weather-showers", "weather-showers-scattered"];
             case 46:
-                return [icons.showers, icons.showers_scattered];
+                return ["weather-showers", "weather-showers-scattered"];
             case 47:
-                return [icons.storm];
+                return ["weather-storm"];
             default:
-                return [icons.alert];
+                return ["weather-severe-alert"];
         }
     }
     ;

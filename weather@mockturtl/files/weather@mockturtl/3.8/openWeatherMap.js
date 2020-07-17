@@ -17,7 +17,6 @@ var utils = importModule("utils");
 var isCoordinate = utils.isCoordinate;
 var isLangSupported = utils.isLangSupported;
 var isID = utils.isID;
-var icons = utils.icons;
 var weatherIconSafely = utils.weatherIconSafely;
 var get = utils.get;
 var nonempty = utils.nonempty;
@@ -26,7 +25,6 @@ class OpenWeatherMap {
         this.prettyName = "OpenWeatherMap";
         this.name = "OpenWeatherMap";
         this.maxForecastSupport = 7;
-        this.supportsHourly = true;
         this.website = "https://openweathermap.org/";
         this.maxHourlyForecastSupport = 48;
         this.supportedLanguages = ["af", "ar", "az", "bg", "ca", "cz", "da", "de", "el", "en", "eu", "fa", "fi",
@@ -245,43 +243,43 @@ class OpenWeatherMap {
     ResolveIcon(icon) {
         switch (icon) {
             case "10d":
-                return [icons.rain, icons.showers_scattered, icons.rain_freezing];
+                return ["weather-rain", "weather-showers-scattered", "weather-freezing-rain"];
             case "10n":
-                return [icons.rain, icons.showers_scattered, icons.rain_freezing];
+                return ["weather-rain", "weather-showers-scattered", "weather-freezing-rain"];
             case "09n":
-                return [icons.showers];
+                return ["weather-showers"];
             case "09d":
-                return [icons.showers];
+                return ["weather-showers"];
             case "13d":
-                return [icons.snow];
+                return ["weather-snow"];
             case "13n":
-                return [icons.snow];
+                return ["weather-snow"];
             case "50d":
-                return [icons.fog];
+                return ["weather-fog"];
             case "50n":
-                return [icons.fog];
+                return ["weather-fog"];
             case "04d":
-                return [icons.overcast, icons.clouds, icons.few_clouds_day];
+                return ["weather-overcast", "weather-clouds", "weather-few-clouds"];
             case "04n":
-                return [icons.overcast, icons.clouds, icons.few_clouds_day];
+                return ["weather-overcast", "weather-clouds-night", "weather-few-clouds-night"];
             case "03n":
-                return ['weather-clouds-night', icons.few_clouds_night];
+                return ['weather-clouds-night', "weather-few-clouds-night"];
             case "03d":
-                return [icons.clouds, icons.overcast, icons.few_clouds_day];
+                return ["weather-clouds", "weather-few-clouds", "weather-overcast"];
             case "02n":
-                return [icons.few_clouds_night];
+                return ["weather-few-clouds-night"];
             case "02d":
-                return [icons.few_clouds_day];
+                return ["weather-few-clouds"];
             case "01n":
-                return [icons.clear_night];
+                return ["weather-clear-night"];
             case "01d":
-                return [icons.clear_day];
+                return ["weather-clear"];
             case "11d":
-                return [icons.storm];
+                return ["weather-storm"];
             case "11n":
-                return [icons.storm];
+                return ["weather-storm"];
             default:
-                return [icons.alert];
+                return ["weather-severe-alert"];
         }
     }
     ;

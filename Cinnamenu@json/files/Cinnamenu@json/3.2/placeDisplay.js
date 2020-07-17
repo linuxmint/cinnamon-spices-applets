@@ -54,7 +54,7 @@ PlaceInfo.prototype = {
         file.mount_enclosing_volume_finish(result);
         Gio.AppInfo.launch_default_for_uri(file.get_uri(), launchContext);
       });
-      Main.notifyError(_("Failed to launch \"%s\"").format(this.name), e.message);
+      Main.notifyError( "Failed to launch " + this.name, e.message);
     }
   },
 

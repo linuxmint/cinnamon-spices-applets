@@ -97,7 +97,7 @@ const APPLET_ICON = "view-refresh-symbolic"
 const REFRESH_ICON = "view-refresh";
 const CMD_SETTINGS = "cinnamon-settings applets " + UUID
 
-type Services = "OpenWeatherMap" | "DarkSky" | "MetNorway" | "Weatherbit" | "Yahoo";
+type Services = "OpenWeatherMap" | "DarkSky" | "MetNorway" | "Weatherbit" | "Yahoo" | "Climacell";
 type ServiceMap = {
   	[key: string]: Services
 }
@@ -110,7 +110,8 @@ const DATA_SERVICE: ServiceMap = {
 	DARK_SKY: "DarkSky",
 	MET_NORWAY: "MetNorway",
 	WEATHERBIT: "Weatherbit",
-	YAHOO: "Yahoo"
+	YAHOO: "Yahoo",
+	CLIMACELL: "Climacell"
 }
 
 //----------------------------------------------------------------------
@@ -233,7 +234,7 @@ class WeatherApplet extends TextIconApplet {
 				if (!message) 
 					reject({code: 0, message: "no network response", reason_phrase: "no network response"} as HttpError);
 
-				if (message.status_code != 200) 
+				if (message.status_code > 300 || message.status_code < 200 ) 
 					reject({code: message.status_code, message: "bad status code", reason_phrase: message.reason_phrase } as HttpError)
 				
 				if (!message.response_body) 
@@ -278,7 +279,7 @@ class WeatherApplet extends TextIconApplet {
 				if (!message) 
 				reject({code: 0, message: "no network response", reason_phrase: "no network response"} as HttpError);
 
-				if (message.status_code != 200) 
+				if (message.status_code > 300 || message.status_code < 200 ) 
 				reject({code: message.status_code, message: "bad status code", reason_phrase: message.reason_phrase } as HttpError)
 				
 				if (!message.response_body) 
@@ -404,33 +405,39 @@ class WeatherApplet extends TextIconApplet {
 		let currentName = get(["name"], this.provider) as Services;
 		switch (this.config._dataService) {
 			case DATA_SERVICE.DARK_SKY:           // No City Info
-				if (darkSky == null) var darkSky = importModule('darkSky');
+				if (!darkSky) var darkSky = importModule('darkSky');
 				if (currentName != "DarkSky" || force) {
 					this.provider = new darkSky.DarkSky(this);
 				}
 				break;
 			case DATA_SERVICE.OPEN_WEATHER_MAP:   // No City Info
-				if (openWeatherMap == null) var openWeatherMap = importModule("openWeatherMap");
+				if (!openWeatherMap) var openWeatherMap = importModule("openWeatherMap");
 				if (currentName != "OpenWeatherMap" || force) {
 					this.provider = new openWeatherMap.OpenWeatherMap(this);
 				}
 				break;
 			case DATA_SERVICE.MET_NORWAY:         // No TZ or city info
-				if (metNorway == null) var metNorway = importModule("met_norway");
+				if (!metNorway) var metNorway = importModule("met_norway");
 				if (currentName != "MetNorway" || force) {
 					this.provider = new metNorway.MetNorway(this);
 				} 
 				break;
 			case DATA_SERVICE.WEATHERBIT:
-				if (weatherbit == null) var weatherbit = importModule("weatherbit");
+				if (!weatherbit) var weatherbit = importModule("weatherbit");
 				if (currentName != "Weatherbit" || force) {
 					this.provider = new weatherbit.Weatherbit(this);
 				}
 				break;
 			case DATA_SERVICE.YAHOO:
-				if (yahoo == null) var yahoo = importModule("yahoo");
+				if (!yahoo) var yahoo = importModule("yahoo");
 				if (currentName != "Yahoo" || force) {
 					this.provider = new yahoo.Yahoo(this);
+				}
+				break;
+			case DATA_SERVICE.CLIMACELL:
+				if (!climacell) var climacell = importModule("climacell");
+				if (currentName != "Climacell" || force) {
+					this.provider = new climacell.Climacell(this);
 				}
 				break;
 			default:
@@ -648,27 +655,27 @@ class WeatherApplet extends TextIconApplet {
 	}
 
 	public HandleError(error: AppletError): void {
-		if (this.encounteredError) return; // Error Already called in this loop, ignore
+		if (this.encounteredError == true) return; // Error Already called in this loop, ignore
 		this.encounteredError = true;
 
 		if (error.type == "hard") {
-		this.ui.rebuild(this.config);
-		this.DisplayError(this.errMsg[error.detail], (!error.message) ? "" : error.message);
+			this.ui.rebuild(this.config);
+			this.DisplayError(this.errMsg[error.detail], (!error.message) ? "" : error.message);
 		}
 
 		if (error.type ==  "soft") {
 		// Maybe something less invasive on network related errors?
 		// Nothing yet
-		if (this.loop.IsDataTooOld()) {
-			this.set_applet_tooltip("Click to open");
-			this.set_applet_icon_name("weather-severe-alert");
-			this.ui.DisplayErrorMessage(_("Could not update weather for a while...\nare you connected to the internet?"));
-		}
+			if (this.loop.IsDataTooOld()) {
+				this.set_applet_tooltip("Click to open");
+				this.set_applet_icon_name("weather-severe-alert");
+				this.ui.DisplayErrorMessage(_("Could not update weather for a while...\nare you connected to the internet?"));
+			}
 		}
 
 		if (error.userError) {
-		this.loop.Pause();
-		return;
+			this.loop.Pause();
+			return;
 		}
 
 		let nextRefresh = this.loop.GetSecondsUntilNextRefresh();
@@ -723,10 +730,10 @@ class Log {
 		let msg = "[" + UUID + "#" + this.ID + "]: " + message.toString();
 		let debug = "";
 		if (this.debug) {
-		debug = this.GetErrorLine();
-		global.log(msg, '\n', "On Line:", debug);
+			debug = this.GetErrorLine();
+			global.log(msg, '\n', "On Line:", debug);
 		} else {
-		global.log(msg);
+			global.log(msg);
 		}
 	}
 
@@ -736,7 +743,7 @@ class Log {
 
 	Debug(message: string): void {
 		if (this.debug) {
-		this.Print(message);
+			this.Print(message);
 		}
 	}
 
@@ -1134,44 +1141,50 @@ class UI {
     public displayForecast(weather: Weather, forecasts: ForecastData[], config: Config): boolean {
 		try {
 			for (let i = 0; i < this._forecast.length; i++) {
-			let forecastData = forecasts[i];
-			let forecastUi = this._forecast[i];
+				let forecastData = forecasts[i];
+				let forecastUi = this._forecast[i];
 
-			let t_low = TempToUserConfig(forecastData.temp_min, config._temperatureUnit, config._tempRussianStyle);
-			let t_high = TempToUserConfig(forecastData.temp_max, config._temperatureUnit, config._tempRussianStyle);
+				let t_low = TempToUserConfig(forecastData.temp_min, config._temperatureUnit, config._tempRussianStyle);
+				let t_high = TempToUserConfig(forecastData.temp_max, config._temperatureUnit, config._tempRussianStyle);
 
-			let first_temperature = config._temperatureHighFirst ? t_high : t_low;
-			let second_temperature = config._temperatureHighFirst ? t_low : t_high;
+				let first_temperature = config._temperatureHighFirst ? t_high : t_low;
+				let second_temperature = config._temperatureHighFirst ? t_low : t_high;
 
-			// Weather Condition
-			let comment = "";
-			if (forecastData.condition.main != null && forecastData.condition.description != null) {
-				comment = (config._shortConditions) ? forecastData.condition.main : forecastData.condition.description;
-				comment = capitalizeFirstLetter(comment);
-				if (config._translateCondition) comment = _(comment);
-			}
+				// Weather Condition
+				let comment = "";
+				if (forecastData.condition.main != null && forecastData.condition.description != null) {
+					comment = (config._shortConditions) ? forecastData.condition.main : forecastData.condition.description;
+					comment = capitalizeFirstLetter(comment);
+					if (config._translateCondition) comment = _(comment);
+				}
 
-			// Day Names
-			if (weather.location.timeZone == null) forecastData.date.setMilliseconds(forecastData.date.getMilliseconds() + (weather.location.tzOffset * 1000));
-			let dayName: string = GetDayName(forecastData.date, this.app.currentLocale, weather.location.timeZone);
+				// Day Names
+				if (weather.location.timeZone == null) forecastData.date.setMilliseconds(forecastData.date.getMilliseconds() + (weather.location.tzOffset * 1000));
+				let dayName: string = GetDayName(forecastData.date, this.app.currentLocale, weather.location.timeZone);
 
-			if (forecastData.date) {
-				let now = new Date();
-				if (forecastData.date.getDate() == now.getDate()) dayName = _("Today");
-				if (forecastData.date.getDate() == new Date(now.setDate(now.getDate() + 1)).getDate()) dayName = _("Tomorrow");
-			}
+				if (forecastData.date) {
+					let now = new Date();
+					if (forecastData.date.getDate() == now.getDate()) dayName = _("Today");
+					if (forecastData.date.getDate() == new Date(now.setDate(now.getDate() + 1)).getDate()) dayName = _("Tomorrow");
+				}
 
-			forecastUi.Day.text = dayName;
-			forecastUi.Temperature.text = first_temperature;
-			// As Russian Tradition, -temp...+temp
-			// See https://github.com/linuxmint/cinnamon-spices-applets/issues/618
-			forecastUi.Temperature.text += ((config._tempRussianStyle) ? ELLIPSIS : " " + FORWARD_SLASH + " ");
-			forecastUi.Temperature.text += second_temperature + ' ' + this.unitToUnicode(config._temperatureUnit);
-			forecastUi.Summary.text = comment;
-			forecastUi.Icon.icon_name = (config._useCustomMenuIcons) ? forecastData.condition.customIcon : forecastData.condition.icon;
+				forecastUi.Day.text = dayName;
+				forecastUi.Temperature.text = first_temperature;
+				// As Russian Tradition, -temp...+temp
+				// See https://github.com/linuxmint/cinnamon-spices-applets/issues/618
+				forecastUi.Temperature.text += ((config._tempRussianStyle) ? ELLIPSIS : " " + FORWARD_SLASH + " ");
+				forecastUi.Temperature.text += second_temperature + ' ' + this.unitToUnicode(config._temperatureUnit);
+				forecastUi.Summary.text = comment;
+				forecastUi.Icon.icon_name = (config._useCustomMenuIcons) ? forecastData.condition.customIcon : forecastData.condition.icon;
 			}
 			return true;
 		} catch (e) {
+			this.app.HandleError({
+				type: "hard",
+				detail: "unknown",
+				message: "Forecast parsing failed: " + e.toString(),
+				userError: false
+			})
 			this.app.log.Error("DisplayForecastError " + e);
 			return false;
 		}
@@ -1197,10 +1210,16 @@ class UI {
 			hour.condition.main = capitalizeFirstLetter(hour.condition.main);
 			if (config._translateCondition) hour.condition.main = _(hour.condition.main);
 			ui.Summary.text = hour.condition.main;
-
-			if (!!hour.precipation && hour.precipation.volume > 0) {
-				ui.Precipation.text = hour.precipation.volume + " mm";
-				if (!!hour.precipation.chance) ui.Precipation.text += (", " + Math.round(hour.precipation.chance) + "%")
+			if (!!hour.precipation && hour.precipation.type != "none") {
+				let precipationText = null;
+				if (!!hour.precipation.volume && hour.precipation.volume > 0) {
+					precipationText = hour.precipation.volume + " mm";
+				}
+				if (hour.precipation.chance != null || hour.precipation.chance != undefined) {
+					precipationText = (precipationText == null) ? "" : (precipationText + ", ")
+					precipationText += (Math.round(hour.precipation.chance).toString() + "%")
+				}
+				if (precipationText != null) ui.Precipation.text = precipationText;
 			}
 		}
 
@@ -1707,36 +1726,36 @@ class WeatherLoop {
 	/** Main loop */
 	public async Start(): Promise<void> {
 		while(true) {
-		try {
-			if (this.IsStray()) return;       
-			if (this.app.encounteredError) this.IncrementErrorCount();
-			this.ValidateLastUpdate();
-		
-			if (this.pauseRefresh) {
-				this.app.log.Debug("Configuration error, updating paused")
-				await delay(this.LoopInterval());
-				continue;
-			}
-
-			if (this.errorCount > 0 || this.NextUpdate() < new Date()) {
-				this.app.log.Debug("Refresh triggered in mainloop with these values: lastUpdated " + ((!this.lastUpdated) ? "null" : this.lastUpdated.toLocaleString())
-				+ ", errorCount " + this.errorCount.toString() + " , loopInterval " + (this.LoopInterval() / 1000).toString()
-				+ " seconds, refreshInterval " + this.app.config._refreshInterval + " minutes");
-				
-				let state = await this.app.refreshWeather(false);
-				if (state == "success") {
-				this.lastUpdated = new Date();
+			try {
+				if (this.IsStray()) return;       
+				if (this.app.encounteredError == true) this.IncrementErrorCount();
+				this.ValidateLastUpdate();
+			
+				if (this.pauseRefresh) {
+					this.app.log.Debug("Configuration error, updating paused")
+					await delay(this.LoopInterval());
+					continue;
 				}
-			}
-			else {
-			this.app.log.Debug("No need to update yet, skipping")
-			}
-		} catch (e) {
-			this.app.log.Error("Error in Main loop: " + e);
-			this.app.encounteredError = true;
-		}
 
-		await delay(this.LoopInterval());
+				if (this.errorCount > 0 || this.NextUpdate() < new Date()) {
+					this.app.log.Debug("Refresh triggered in mainloop with these values: lastUpdated " + ((!this.lastUpdated) ? "null" : this.lastUpdated.toLocaleString())
+					+ ", errorCount " + this.errorCount.toString() + " , loopInterval " + (this.LoopInterval() / 1000).toString()
+					+ " seconds, refreshInterval " + this.app.config._refreshInterval + " minutes");
+					
+					let state = await this.app.refreshWeather(false);
+					if (state == "success") {
+						this.lastUpdated = new Date();
+					}
+				}
+				else {
+					this.app.log.Debug("No need to update yet, skipping")
+				}
+			} catch (e) {
+				this.app.log.Error("Error in Main loop: " + e);
+				this.app.encounteredError = true;
+			}
+
+			await delay(this.LoopInterval());
 		}
 	};
 
@@ -2003,13 +2022,13 @@ interface HourlyForecastData {
 	precipation?: {
 		type: PrecipationType,
 		/** in mm */
-		volume: number,
+		volume?: number,
 		/** % */
 		chance?: number
 	};
 }
 
-type PrecipationType = "rain" | "snow";
+type PrecipationType = "rain" | "snow" | "none" | "ice pellets" | "freezing rain";
 
 interface LocationData {
 	lat: number,
@@ -2062,7 +2081,6 @@ interface WeatherProvider {
 	name: Services;
 	maxForecastSupport: number;
 	maxHourlyForecastSupport: number;
-	supportsHourly: boolean;
 	website: string;
 }
 
@@ -2089,7 +2107,7 @@ type RefreshState = "success" | "failure" | "error";
  *  soft will show a subtle hint that the refresh failed (NOT IMPLEMENTED)
  */
 type ErrorSeverity = "hard" |  "soft";
-type ApiService = "ipapi" | "darksky" | "openweathermap" | "met-norway" | "weatherbit" | "yahoo";
+type ApiService = "ipapi" | "darksky" | "openweathermap" | "met-norway" | "weatherbit" | "yahoo" | "climacell";
 type ErrorDetail = "no key" | "bad key" | "no location" | "bad location format" |
   "location not found" | "no network response" | "no api response" | 
   "bad api response - non json" | "bad api response" | "no reponse body" | 
@@ -2104,7 +2122,7 @@ interface Condition {
 	/** Long Description */
 	description: string,
 	/** GTK icon name */
-	icon: string,
+	icon: BuiltinIcons,
 	customIcon: CustomIcons
 }
 
@@ -2116,6 +2134,41 @@ interface SunTimes {
     sunrise: Date;
     sunset: Date
 }
+
+/**
+ * names of icons what might be available
+ */
+type BuiltinIcons = 
+	"weather-clear" |
+	"weather-clear-night" |
+	"weather-few-clouds" |
+	"weather-few-clouds-night" |
+	"weather-clouds" |
+	"weather-many-clouds" |
+	"weather-overcast" |
+	"weather-showers-scattered" |
+	"weather-showers-scattered-day" |
+	"weather-showers-scattered-night" |
+	"weather-showers-day" |
+	"weather-showers-night" |
+	"weather-showers" |
+	"weather-rain" |
+	"weather-freezing-rain" |
+	"weather-snow" |
+	"weather-snow-day" |
+	"weather-snow-night" |
+	"weather-snow-rain" |
+	"weather-snow-scattered" |
+	"weather-snow-scattered-day" |
+	"weather-snow-scattered-night" |
+	"weather-storm" |
+	"weather-hail" |
+	"weather-fog" |
+	"weather-tornado" |
+	"weather-windy" |
+	"weather-breeze" |
+	"weather-clouds-night" |
+	"weather-severe-alert";
 
 /**
  * Available icons in icons folder
@@ -2143,6 +2196,7 @@ type CustomIcons =
 	"day-light-wind-symbolic" |
 	"day-lightning-symbolic" |
 	"day-rain-mix-symbolic" |
+	"day-rain-mix-storm-symbolic" |
 	"day-rain-symbolic" |
 	"day-rain-wind-symbolic" |
 	"day-showers-symbolic" |
@@ -2250,6 +2304,7 @@ type CustomIcons =
 	"night-alt-lightning-symbolic" |
 	"night-alt-partly-cloudy-symbolic" |
 	"night-alt-rain-mix-symbolic" |
+	"night-alt-rain-mix-storm-symbolic" |
 	"night-alt-rain-symbolic" |
 	"night-alt-rain-wind-symbolic" |
 	"night-alt-showers-symbolic" |
@@ -2283,6 +2338,7 @@ type CustomIcons =
 	"night-storm-showers-symbolic" |
 	"night-thunderstorm-symbolic" |
 	"rain-mix-symbolic" |
+	"rain-mix-storm-symbolic" |
 	"rain-symbolic" |
 	"rain-wind-symbolic" |
 	"raindrop-symbolic" |
@@ -2297,6 +2353,7 @@ type CustomIcons =
 	"smog-symbolic" |
 	"smoke-symbolic" |
 	"snow-symbolic" |
+	"snow-storm-symbolic" |
 	"snow-wind-symbolic" |
 	"snowflake-cold-symbolic" |
 	"solar-eclipse-symbolic" |

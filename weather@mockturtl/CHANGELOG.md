@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.6.2
+
+* Fixes [#3081](https://github.com/linuxmint/cinnamon-spices-applets/issues/3081)
+* Add Climacell as an API choice
+* Fix nighttime calculation
+* Fix some icon choices for weather conditions
+
 ## 2.6.1
 
 * Fix [#3059](https://github.com/linuxmint/cinnamon-spices-applets/issues/3059)

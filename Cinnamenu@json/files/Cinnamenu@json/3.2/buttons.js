@@ -391,6 +391,14 @@ ApplicationContextMenuItem.prototype = {
         Util.spawnCommandLine('/usr/bin/cinnamon-remove-application \'' + this.buttonState.app.get_app_info().get_filename() + '\'');
         this.state.trigger('closeMenu');
         break;
+      case "offload_launch":
+        try {
+            this.buttonState.app.launch_offloaded(0, [], -1);
+        } catch (e) {
+            logError(e, "Could not launch app with dedicated gpu: ");
+        }
+        this.state.trigger('closeMenu');
+        break;
       case 'run_with_nvidia_gpu':
         Util.spawnCommandLine('optirun gtk-launch ' + this.buttonState.app.get_id());
         this.state.trigger('closeMenu');
@@ -1033,20 +1041,22 @@ AppListGridButton.prototype = {
       this.state.set({contextMenuIsOpen: this.buttonState.appIndex});
       this.actor.set_style_class_name('menu-application-button-selected');
 
+      if (this.state.gpu_offload_supported) {
+        addMenuItem(this, new ApplicationContextMenuItem(this.state, this.buttonState, _('Run with NVIDIA GPU'), 'offload_launch', 'cpu'));
+      } else if(this.state.isBumblebeeInstalled) {
+        addMenuItem(this, new ApplicationContextMenuItem(this.state, this.buttonState, _('Run with NVIDIA GPU'), 'run_with_nvidia_gpu', 'cpu'));
+      }
       addMenuItem(this, new ApplicationContextMenuItem(this.state, this.buttonState, _('Add to panel'), 'add_to_panel', 'list-add'));
       if (USER_DESKTOP_PATH) {
         addMenuItem(this, new ApplicationContextMenuItem(this.state, this.buttonState, _('Add to desktop'), 'add_to_desktop', 'computer'));
       }
       if (this.state.trigger('isFavorite', this.buttonState.app.get_id())) {
-        addMenuItem(this, new ApplicationContextMenuItem(this.state, this.buttonState, _('Remove from favorites'), 'remove_from_favorites', 'starred'));
+        addMenuItem(this, new ApplicationContextMenuItem(this.state, this.buttonState, _('Remove favorite'), 'remove_from_favorites', 'starred'));
       } else {
         addMenuItem(this, new ApplicationContextMenuItem(this.state, this.buttonState, _('Add to favorites'), 'add_to_favorites', 'non-starred'));
       }
       if (canUninstall) {
         addMenuItem(this, new ApplicationContextMenuItem(this.state, this.buttonState, _('Uninstall'), 'uninstall', 'edit-delete'));
-      }
-      if (this.state.isBumblebeeInstalled) {
-        addMenuItem(this, new ApplicationContextMenuItem(this.state, this.buttonState, _('Run with NVIDIA GPU'), 'run_with_nvidia_gpu', 'cpu'));
       }
 
       if (this.state.isListView) {

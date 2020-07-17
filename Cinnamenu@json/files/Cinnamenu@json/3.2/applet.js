@@ -182,6 +182,7 @@ CinnamenuApplet.prototype = {
         displayed: false,
         isNewInstance: true,
         dragIndex: -1,
+        gpu_offload_supported: Main.gpu_offload_supported,
         isBumblebeeInstalled: GLib.file_test('/usr/bin/optirun', GLib.FileTest.EXISTS)
       });
       this.state.connect({

@@ -18,8 +18,7 @@ var utils = importModule("utils");
 var isCoordinate = utils.isCoordinate as (text: any) => boolean;
 var isLangSupported = utils.isLangSupported as (lang: string, languages: Array <string> ) => boolean;
 var isID = utils.isID as (text: any) => boolean;
-var icons = utils.icons;
-var weatherIconSafely = utils.weatherIconSafely as (code: string[], icon_type: imports.gi.St.IconType) => string;
+var weatherIconSafely = utils.weatherIconSafely as (code: BuiltinIcons[], icon_type: imports.gi.St.IconType) => BuiltinIcons;
 var get = utils.get as (p: string[], o: any) => any;
 var nonempty = utils.nonempty as (str: string) => boolean;
 
@@ -38,7 +37,6 @@ class OpenWeatherMap implements WeatherProvider {
 	public readonly prettyName = "OpenWeatherMap";
 	public readonly name = "OpenWeatherMap";
     public readonly maxForecastSupport = 7;
-    public readonly supportsHourly = true;
     public readonly website = "https://openweathermap.org/";
     public readonly maxHourlyForecastSupport = 48;
 
@@ -284,7 +282,7 @@ class OpenWeatherMap implements WeatherProvider {
     }
 
 
-    private ResolveIcon(icon: string): string[] {
+    private ResolveIcon(icon: string): BuiltinIcons[] {
         // https://openweathermap.org/weather-conditions
        /* fallback icons are: weather-clear-night 
        weather-clear weather-few-clouds-night weather-few-clouds 
@@ -292,43 +290,43 @@ class OpenWeatherMap implements WeatherProvider {
        weather-showers-scattered weather-snow weather-storm */
        switch (icon) {
            case "10d":/* rain day */
-             return [icons.rain, icons.showers_scattered, icons.rain_freezing]
+             return ["weather-rain", "weather-showers-scattered", "weather-freezing-rain"]
            case "10n":/* rain night */
-             return [icons.rain, icons.showers_scattered, icons.rain_freezing]
+             return ["weather-rain", "weather-showers-scattered", "weather-freezing-rain"]
            case "09n":/* showers nigh*/
-             return [icons.showers]
+             return ["weather-showers"]
            case "09d":/* showers day */
-             return [icons.showers]
+             return ["weather-showers"]
            case "13d":/* snow day*/
-             return [icons.snow]
+             return ["weather-snow"]
            case "13n":/* snow night */
-             return [icons.snow]
+             return ["weather-snow"]
            case "50d":/* mist day */
-             return [icons.fog]
+             return ["weather-fog"]
            case "50n":/* mist night */
-             return [icons.fog]
+             return ["weather-fog"]
            case "04d":/* broken clouds day */
-             return [icons.overcast, icons.clouds, icons.few_clouds_day]
+             return ["weather-overcast", "weather-clouds", "weather-few-clouds"]
            case "04n":/* broken clouds night */
-             return [icons.overcast, icons.clouds, icons.few_clouds_day]
+             return ["weather-overcast", "weather-clouds-night", "weather-few-clouds-night"]
            case "03n":/* mostly cloudy (night) */
-             return ['weather-clouds-night', icons.few_clouds_night]
+             return ['weather-clouds-night', "weather-few-clouds-night"]
            case "03d":/* mostly cloudy (day) */
-             return [icons.clouds, icons.overcast, icons.few_clouds_day]
+             return ["weather-clouds", "weather-few-clouds", "weather-overcast"]
            case "02n":/* partly cloudy (night) */
-             return [icons.few_clouds_night]
+             return ["weather-few-clouds-night"]
            case "02d":/* partly cloudy (day) */
-             return [icons.few_clouds_day]
+             return ["weather-few-clouds"]
            case "01n":/* clear (night) */
-             return [icons.clear_night]
+             return ["weather-clear-night"]
            case "01d":/* sunny */
-             return [icons.clear_day]
+             return ["weather-clear"]
            case "11d":/* storm day */
-             return [icons.storm]
+             return ["weather-storm"]
            case "11n":/* storm night */
-             return [icons.storm]
+             return ["weather-storm"]
            default:
-             return [icons.alert]
+             return ["weather-severe-alert"]
          }
    };
 

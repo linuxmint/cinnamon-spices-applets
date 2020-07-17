@@ -45,7 +45,7 @@ const CONFIG_DIR = HOME_DIR + "/.cinnamon/configs";
 const SU_CONFIG_DIR = CONFIG_DIR + "/" + UUID;
 const CACHE_DIR = HOME_DIR + "/.cinnamon/spices.cache";
 
-const TYPES = ['applets', 'desklets', 'extensions', 'themes'];
+const TYPES = ["applets", "desklets", "extensions", "themes"];
 
 const URL_MAP = {
   'applets': URL_SPICES_HOME + "/json/applets.json?",
@@ -87,7 +87,7 @@ function _(str, uuid=UUID) {
 }
 
 const capitalize = (s) => {
-  if (typeof s !== 'string') return '';
+  if (typeof s !== "string") return "";
   return s.charAt(0).toUpperCase() + s.slice(1)
 }
 

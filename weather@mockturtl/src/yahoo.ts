@@ -19,8 +19,7 @@ var utils = importModule("utils");
 var isCoordinate = utils.isCoordinate as (text: any) => boolean;
 var CelsiusToKelvin = utils.CelsiusToKelvin as (celsius: number) => number;
 var KPHtoMPS = utils.MPHtoMPS as (speed: number) => number;
-var icons = utils.icons;
-var weatherIconSafely = utils.weatherIconSafely as (code: string[], icon_type: imports.gi.St.IconType) => string;
+var weatherIconSafely = utils.weatherIconSafely as (code: BuiltinIcons[], icon_type: imports.gi.St.IconType) => BuiltinIcons;
 
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
@@ -38,7 +37,6 @@ class Yahoo implements WeatherProvider {
 	public readonly prettyName = "Yahoo";
 	public readonly name = "Yahoo";
     public readonly maxForecastSupport = 10;
-    public readonly supportsHourly = false;
     public readonly website = "https://www.yahoo.com/news/weather/";
     public readonly maxHourlyForecastSupport = 0;
 
@@ -214,106 +212,106 @@ class Yahoo implements WeatherProvider {
         return false;
     }
 
-    private ResolveIcon(icon: number, sunTimes?: SunTimes): string[] {
+    private ResolveIcon(icon: number, sunTimes?: SunTimes): BuiltinIcons[] {
         switch (icon) {
             case 0: // tornado
-                return [icons.alert];
+                return ["weather-severe-alert"];
             case 1: // tropical storm
-                return [icons.alert];
+                return ["weather-severe-alert"];
             case 2: // hurricane
-                return [icons.alert];
+                return ["weather-severe-alert"];
             case 3: // severe thunderstorms
-                return [icons.storm];
+                return ["weather-storm"];
             case 4: // thunderstorms
-                return [icons.storm];
+                return ["weather-storm"];
             case 5: // mixed rain and snow
-                return [icons.rain, icons.showers_scattered, icons.rain_freezing];
+                return ["weather-rain", "weather-showers-scattered", "weather-freezing-rain"];
             case 6: // mixed rain and sleet
-                return [icons.rain_freezing, icons.rain, icons.showers_scattered];
+                return ["weather-freezing-rain", "weather-rain", "weather-showers-scattered"];
             case 7: // mixed snow and sleet
-                return [icons.snow];
+                return ["weather-snow"];
             case 8: // freezing drizzle
-                return [icons.rain_freezing, icons.rain, icons.showers_scattered];
+                return ["weather-freezing-rain", "weather-rain", "weather-showers-scattered"];
             case 9: // drizzle
-                return [icons.rain_freezing, icons.rain, icons.showers_scattered];
+                return ["weather-freezing-rain", "weather-rain", "weather-showers-scattered"];
             case 10: // freezing rain
-                return [icons.rain_freezing, icons.rain, icons.showers_scattered];
+                return ["weather-freezing-rain", "weather-rain", "weather-showers-scattered"];
             case 11: // showers
-                return [icons.showers, icons.showers_scattered];
+                return ["weather-showers", "weather-showers-scattered"];
             case 12: // rain
-                return [icons.rain, icons.showers_scattered, icons.rain_freezing];
+                return ["weather-rain", "weather-showers-scattered", "weather-freezing-rain"];
             case 13: // snow flurries
-                return [icons.snow];
+                return ["weather-snow"];
             case 14: // light snow showers
-                return [icons.snow];
+                return ["weather-snow"];
             case 15: // blowing snow
-                return [icons.snow];
+                return ["weather-snow"];
             case 16: // snow
-                return [icons.snow];
+                return ["weather-snow"];
             case 17: // hail
-                return [icons.rain, icons.showers_scattered, icons.rain_freezing];
+                return ["weather-rain", "weather-showers-scattered", "weather-freezing-rain"];
             case 18: // sleet
-                return [icons.rain, icons.showers_scattered, icons.rain_freezing];
+                return ["weather-rain", "weather-showers-scattered", "weather-freezing-rain"];
             case 19: // dust
-                return [icons.fog];
+                return ["weather-fog"];
             case 20: // foggy
-                return [icons.fog];
+                return ["weather-fog"];
             case 21: // haze
-                return [icons.fog];
+                return ["weather-fog"];
             case 22: // smoky
-                return [icons.fog];
+                return ["weather-fog"];
             case 23: // blustery
-                return (sunTimes && this.IsNight(sunTimes)) ? ["weather-wind", "wind", "weather-breeze", icons.clouds, icons.few_clouds_night] : ["weather-wind", "wind", "weather-breeze", icons.clouds, icons.few_clouds_day];
+                return (sunTimes && this.IsNight(sunTimes)) ? ["weather-windy", "weather-breeze", "weather-clouds-night", "weather-few-clouds-night"] : ["weather-windy", "weather-breeze", "weather-clouds", "weather-few-clouds"];
             case 24: // windy
-                return (sunTimes && this.IsNight(sunTimes)) ? ["weather-wind", "wind", "weather-breeze", icons.clouds, icons.few_clouds_night] : ["weather-wind", "wind", "weather-breeze", icons.clouds, icons.few_clouds_day];
+                return (sunTimes && this.IsNight(sunTimes)) ? ["weather-windy", "weather-breeze", "weather-clouds-night", "weather-few-clouds-night"] : ["weather-windy", "weather-breeze", "weather-clouds", "weather-few-clouds"];
             case 25: // cold
-                return [icons.alert];
+                return ["weather-severe-alert"];
             case 26: // cloudy
-                return (sunTimes && this.IsNight(sunTimes)) ? [icons.overcast, icons.clouds, icons.few_clouds_night] : [icons.overcast, icons.clouds, icons.few_clouds_day];
+                return (sunTimes && this.IsNight(sunTimes)) ? ["weather-overcast", "weather-clouds-night", "weather-few-clouds-night"] : ["weather-overcast", "weather-clouds", "weather-few-clouds"];
             case 27: // mostly cloudy (night)
-                return [icons.few_clouds_night];
+                return ["weather-few-clouds-night"];
             case 28: //	mostly cloudy (day)
-                return [icons.few_clouds_day];
+                return ["weather-few-clouds"];
             case 29: // partly cloudy (night)
-                return [icons.few_clouds_night];
+                return ["weather-few-clouds-night"];
             case 30: // partly cloudy (day)
-                return [icons.few_clouds_day];
+                return ["weather-few-clouds"];
             case 31: // clear (night)
-                return [icons.clear_night];
+                return ["weather-clear-night"];
             case 32: // sunny
-                return [icons.clear_day];
+                return ["weather-clear"];
             case 33: // fair (night)
-                return [icons.clear_night];
+                return ["weather-clear-night"];
             case 34: // fair (day)
-                return [icons.clear_day];
+                return ["weather-clear"];
             case 35: // mixed rain and hail
-                return [icons.rain, icons.showers_scattered, icons.rain_freezing];
+                return ["weather-rain", "weather-showers-scattered", "weather-freezing-rain"];
             case 36: // hot
-                return [icons.alert];
+                return ["weather-severe-alert"];
             case 37: // isolated thunderstorms
-                return [icons.storm];
+                return ["weather-storm"];
             case 38: // scattered thunderstorms
-                return [icons.storm];
+                return ["weather-storm"];
             case 39: // scattered showers (day)
-                return [icons.showers, icons.showers_scattered];
+                return ["weather-showers", "weather-showers-scattered"];
             case 40: // heavy rain
-                return [icons.rain, icons.showers_scattered, icons.rain_freezing];
+                return ["weather-rain", "weather-showers-scattered", "weather-freezing-rain"];
             case 41: // scattered snow showers (day)
-                return [icons.snow];
+                return ["weather-snow"];
             case 42: // heavy snow
-                return [icons.snow];
+                return ["weather-snow"];
             case 43: // blizzard
-                return [icons.snow];
+                return ["weather-snow"];
             case 44: // not available
-                return [icons.alert];
+                return ["weather-severe-alert"];
             case 45: // scattered showers (night)
-                return [icons.showers, icons.showers_scattered];
+                return ["weather-showers", "weather-showers-scattered"];
             case 46: // scattered snow showers (night)
-                return [icons.showers, icons.showers_scattered];
+                return ["weather-showers", "weather-showers-scattered"];
             case 47: // scattered thundershowers
-                return [icons.storm];
+                return ["weather-storm"];
             default:
-                return [icons.alert];
+                return ["weather-severe-alert"];
         }
     };
 

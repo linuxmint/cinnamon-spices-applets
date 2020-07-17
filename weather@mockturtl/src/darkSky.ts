@@ -23,10 +23,8 @@ var isLangSupported = utils.isLangSupported as (lang: string, languages: Array <
 var FahrenheitToKelvin = utils.FahrenheitToKelvin as (fahr: number) => number;
 var CelsiusToKelvin = utils.CelsiusToKelvin as (celsius: number) => number;
 var MPHtoMPS = utils.MPHtoMPS as (speed: number) => number;
-var icons = utils.icons;
 var IsNight = utils.IsNight as (sunTimes: SunTimes, date?: Date) => boolean;
-var weatherIconSafely = utils.weatherIconSafely as (code: string[], icon_type: imports.gi.St.IconType) => string;
-var Sentencify = utils.Sentencify as (words: string[]) => string;
+var weatherIconSafely = utils.weatherIconSafely as (code: BuiltinIcons[], icon_type: imports.gi.St.IconType) => BuiltinIcons;
 
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
@@ -44,7 +42,6 @@ class DarkSky implements WeatherProvider {
 	public readonly prettyName = "DarkSky";
 	public readonly name = "DarkSky";
     public readonly maxForecastSupport = 8;
-    public readonly supportsHourly = false;
     public readonly website = "https://darksky.net/poweredby/";
     public readonly maxHourlyForecastSupport = 168;
 
@@ -288,7 +285,7 @@ class DarkSky implements WeatherProvider {
 			}
 			if (result.length == 2) break;
         }
-        return Sentencify(result);
+        return result.join(" ");
 	};
 
     private GetShortCurrentSummary(summary: string): string {
@@ -308,36 +305,36 @@ class DarkSky implements WeatherProvider {
         return this.DarkSkyFilterWords.indexOf(word) != -1;
     }
 
-    private ResolveIcon(icon: string, sunTimes?: SunTimes, date?: Date): string[] {
+    private ResolveIcon(icon: string, sunTimes?: SunTimes, date?: Date): BuiltinIcons[] {
         switch (icon) {
             case "rain":
-              return [icons.rain, icons.showers_scattered, icons.rain_freezing]
+              return ["weather-rain", "weather-showers-scattered", "weather-freezing-rain"]
             case "snow":
-              return [icons.snow]
+              return ["weather-snow"]
             case "sleet":
-              return [icons.rain_freezing, icons.rain, icons.showers_scattered]
+              return ["weather-freezing-rain", "weather-rain", "weather-showers-scattered"]
             case "fog":
-              return [icons.fog]
+              return ["weather-fog"]
             // There is no guarantee that there is a wind icon
             case "wind":
-                return (sunTimes && IsNight(sunTimes, date)) ? ["weather-windy", "wind", "weather-breeze", icons.clouds, icons.few_clouds_night] : ["weather-windy", "wind", "weather-breeze", icons.clouds, icons.few_clouds_day]
+                return (sunTimes && IsNight(sunTimes, date)) ? ["weather-windy", "weather-breeze", "weather-clouds", "weather-few-clouds-night"] : ["weather-windy", "weather-breeze", "weather-clouds", "weather-few-clouds"]
             case "cloudy":/* mostly cloudy (day) */
-              return (sunTimes && IsNight(sunTimes, date)) ? [icons.overcast, icons.clouds, icons.few_clouds_night] : [icons.overcast, icons.clouds, icons.few_clouds_day]
+              return (sunTimes && IsNight(sunTimes, date)) ? ["weather-overcast", "weather-clouds", "weather-few-clouds-night"] : ["weather-overcast", "weather-clouds", "weather-few-clouds"]
             case "partly-cloudy-night":
-              return [icons.few_clouds_night]
+              return ["weather-few-clouds-night"]
             case "partly-cloudy-day":
-              return [icons.few_clouds_day]
+              return ["weather-few-clouds"]
             case "clear-night":
-              return [icons.clear_night]
+              return ["weather-clear-night"]
             case "clear-day":
-              return [icons.clear_day]
+              return ["weather-clear"]
             // Have not seen Storm or Showers icons returned yet
             case "storm":
-              return [icons.storm]
+              return ["weather-storm"]
             case "showers":
-              return [icons.showers, icons.showers_scattered]
+              return ["weather-showers", "weather-showers-scattered"]
             default:
-              return [icons.alert]
+              return ["weather-severe-alert"]
           }
     };
 

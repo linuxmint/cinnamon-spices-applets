@@ -18,8 +18,7 @@ function _(str: string): string {
 var utils = importModule("utils");
 var isCoordinate = utils.isCoordinate as (text: any) => boolean;
 var isLangSupported = utils.isLangSupported as (lang: string, languages: Array <string> ) => boolean;
-var icons = utils.icons;
-var weatherIconSafely = utils.weatherIconSafely as (code: string[], icon_type: imports.gi.St.IconType) => string;
+var weatherIconSafely = utils.weatherIconSafely as (code: string[], icon_type: imports.gi.St.IconType) => BuiltinIcons;
 var GetFuncName = utils.GetFuncName as (func: Function) => string;
 
 //////////////////////////////////////////////////////////////
@@ -37,7 +36,6 @@ class Weatherbit implements WeatherProvider {
     //--------------------------------------------------------
 	public readonly prettyName = "WeatherBit";
 	public readonly name = "Weatherbit";
-    public readonly supportsHourly = true;
     public readonly maxForecastSupport = 16;
     public readonly website = "https://www.weatherbit.io/";
     public readonly maxHourlyForecastSupport = 48;
@@ -63,13 +61,16 @@ class Weatherbit implements WeatherProvider {
     //  Functions
     //--------------------------------------------------------
     public async GetWeather(): Promise<WeatherData> {
-		let forecastResult = this.GetData(this.daily_url, this.ParseForecast) as Promise<ForecastData[]>;
-		let hourlyForecastResult = null;
-		if (!!this.hourlyAccess) hourlyForecastResult = this.GetData(this.hourly_url, this.ParseHourlyForecast) as Promise<HourlyForecastData[]>;
+		let forecastPromise = this.GetData(this.daily_url, this.ParseForecast) as Promise<ForecastData[]>;
+		let hourlyPromise = null;
+		if (!!this.hourlyAccess) hourlyPromise = this.GetData(this.hourly_url, this.ParseHourlyForecast) as Promise<HourlyForecastData[]>;
 		let currentResult = await this.GetData(this.current_url, this.ParseCurrent) as WeatherData;
 		if (!currentResult) return null;
-		currentResult.forecasts = await forecastResult;
-		currentResult.hourlyForecasts = (!hourlyForecastResult) ? [] : await hourlyForecastResult;
+		
+		let forecastResult = await forecastPromise;
+		currentResult.forecasts = (!forecastResult) ? [] : forecastResult;
+		let hourlyResult = await hourlyPromise;
+		currentResult.hourlyForecasts = (!hourlyResult) ? [] : hourlyResult;
         return currentResult;
     };
 
@@ -304,7 +305,7 @@ class Weatherbit implements WeatherProvider {
         return uiError;
     }
 
-    private ResolveIcon(icon: string): string[] {
+    private ResolveIcon(icon: string): BuiltinIcons[] {
         switch (icon) {
             // Tunderstorms
             case "t01n":
@@ -317,7 +318,7 @@ class Weatherbit implements WeatherProvider {
             case "t04d":
             case "t05n":
             case "t05d":
-                return [icons.storm]
+                return ["weather-storm"]
             // Drizzle
             case "d01d":
             case "d01n":
@@ -325,7 +326,7 @@ class Weatherbit implements WeatherProvider {
             case "d02n":
             case "d03d":
             case "d03n":
-                return [icons.showers_scattered, icons.rain, icons.rain_freezing ]
+                return ["weather-showers-scattered", "weather-rain", "weather-freezing-rain" ]
             // Rain
             case "r01d":
             case "r01n":
@@ -339,7 +340,7 @@ class Weatherbit implements WeatherProvider {
             case "r05n":
             case "r06d":
             case "r06n":
-                return [icons.rain, icons.rain_freezing, icons.showers_scattered]
+                return ["weather-rain", "weather-freezing-rain", "weather-showers-scattered"]
             // Snow
             case "s01d":
             case "s01n":
@@ -351,11 +352,11 @@ class Weatherbit implements WeatherProvider {
             case "s04n":
             case "s06d":
             case "s06n":
-                return [icons.snow]
+                return ["weather-snow"]
             // Sleet
             case "s05d":
             case "s05n":
-                return [icons.rain_freezing, icons.rain, icons.showers_scattered]
+                return ["weather-freezing-rain", "weather-rain", "weather-showers-scattered"]
             // Fog, Sand, haze, smoke, mist
             case "a01d":
             case "a01n":
@@ -369,28 +370,28 @@ class Weatherbit implements WeatherProvider {
             case "a05n":
             case "a06d":
             case "a06n":
-                return [icons.fog]
+                return ["weather-fog"]
             case "c02d":
-                return [icons.few_clouds_day]
+                return ["weather-few-clouds"]
             case "c02n":
-                return [icons.few_clouds_night]
+                return ["weather-few-clouds-night"]
             case "c01n":
-                return [icons.clear_night]
+                return ["weather-clear-night"]
             case "c01d":
-                return [icons.clear_day]
+                return ["weather-clear"]
             case "c03d":
-                return [icons.clouds, icons.few_clouds_day, icons.overcast]
+                return ["weather-clouds", "weather-few-clouds", "weather-overcast"]
             case "c03n":
-                return [icons.clouds, icons.few_clouds_night, icons.overcast]
+                return ["weather-clouds-night", "weather-few-clouds-night", "weather-overcast"]
             case "c04n":
-                return [icons.overcast, icons.clouds, icons.few_clouds_night]
+                return ["weather-overcast", "weather-clouds-night", "weather-few-clouds-night"]
             case "c04d":
-                return [icons.overcast, icons.clouds, icons.few_clouds_day]
+                return ["weather-overcast", "weather-clouds", "weather-few-clouds"]
             case "u00d":
             case "u00n":
-                return [icons.alert]
+                return ["weather-severe-alert"]
             default:
-              return [icons.alert]
+              return ["weather-severe-alert"]
           }
     };
 
