@@ -153,12 +153,12 @@ class Enrico extends Provider {
             const retrieved = this.years[year][this.region];
             if (retrieved &&  Date.now() - new Date(retrieved).getTime() < UPDATE_PERIOD) {
                 callback(this.matchMonth(year, month));
+                return;
             }
-        } else {
-            this.retrieveForYear(year, () => {
-                callback(this.matchMonth(year, month));
-            });
         }
+        this.retrieveForYear(year, () => {
+            callback(this.matchMonth(year, month));
+        });
     }
 }
 Enrico.url = "https://kayaposoft.com/enrico/json/v2.0?action=getHolidaysForYear";
