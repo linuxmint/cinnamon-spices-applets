@@ -1,21 +1,21 @@
 # Swedish translation for Cinnamenu@json.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# Åke Engelbrektson <eson@svenskasprakfiler.se>, 2017-2019.
+# Åke Engelbrektson <eson@svenskasprakfiler.se>, 2017-2020.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Cinnamenu@json\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-07-15 12:39+0100\n"
-"PO-Revision-Date: 2020-07-15 14:23+0100\n"
+"PO-Revision-Date: 2020-07-21 21:14+0200\n"
 "Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
 "Language-Team: Svenska Språkfiler <contactform@svenskasprakfiler.se>\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3.1\n"
+"X-Generator: Poedit 2.0.6\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: 3.2/applet.js:92 4.0/applet.js:40
@@ -133,7 +133,7 @@ msgstr "Lägg till på skrivbordet"
 
 #: 3.2/buttons.js:1054 4.0/buttons.js:849
 msgid "Remove favorite"
-msgstr "Ta bort favorit"
+msgstr "Ta bort från Favoriter"
 
 #: 3.2/buttons.js:1056 4.0/buttons.js:852
 msgid "Add to favorites"
@@ -145,7 +145,7 @@ msgstr "Avinstallera"
 
 #: 4.0/applet.js:233 4.0/applet.js:1230
 msgid "Please wait..."
-msgstr ""
+msgstr "Vänta..."
 
 #. metadata.json->name
 #. 3.2->settings-schema.json->cinnamenuProvidersSection->title
@@ -157,14 +157,16 @@ msgid ""
 "A flexible menu providing formatting options, web bookmarks, search provider "
 "support and fuzzy searching."
 msgstr ""
-"En flexibel meny med formateringsalternativ, webbbokmärken, support för "
-"sökleverantörer och fuzzy search."
+"En flexibel meny som tillhandahåller formateringsalternativ, webbokmärken, "
+"sökmotorstöd och luddig sökning."
 
 #. metadata.json->comments
 msgid ""
 "Made possible thanks to the efforts of contributors to the Cinnamon menu, "
 "Gnomenu, and the contributors to projects they derived from."
 msgstr ""
+"Möjliggjord tack vare bidragsgivarnas insatser för Cinnamon menu, Gnomenu "
+"och de projekt som de härleds ifrån."
 
 #. 3.2->settings-schema.json->panel->title
 #. 4.0->settings-schema.json->behaviour->title
@@ -215,7 +217,7 @@ msgstr "Innehåll"
 #. 3.2->settings-schema.json->privacy-settings-button->description
 #. 4.0->settings-schema.json->privacy-settings-button->description
 msgid "Recent files settings"
-msgstr "Inställningar för senaste filer"
+msgstr "Inställningar för tidigare filer"
 
 #. 3.2->settings-schema.json->menu-editor-button->description
 #. 4.0->settings-schema.json->menu-editor-button->description
@@ -234,10 +236,8 @@ msgstr "Använd en anpassad ikon"
 
 #. 3.2->settings-schema.json->menu-icon-custom->tooltip
 #. 4.0->settings-schema.json->menu-icon-custom->tooltip
-#, fuzzy
-#| msgid "Use a custom icon"
 msgid "Use a custom icon in the panel"
-msgstr "Använd en anpassad ikon"
+msgstr "Använd en anpassad ikon i panelen"
 
 #. 3.2->settings-schema.json->menu-icon->description
 #. 3.2->settings-schema.json->menu-icon->tooltip
@@ -254,7 +254,7 @@ msgstr "Paneltext"
 #. 3.2->settings-schema.json->menu-label->tooltip
 #. 4.0->settings-schema.json->menu-label->tooltip
 msgid "Text to show beside the panel icon"
-msgstr "Text som visas bredvid panelikonen"
+msgstr "Text att visa vid panelikonen"
 
 #. 3.2->settings-schema.json->category-icon-size->units
 #. 3.2->settings-schema.json->apps-list-icon-size->units
@@ -294,14 +294,12 @@ msgstr "Tangentbordsgenväg för att öppna och stänga menyn"
 #. 3.2->settings-schema.json->activate-on-hover->description
 #. 4.0->settings-schema.json->activate-on-hover->description
 msgid "Open menu on hover"
-msgstr "Öppna menyn på musen"
+msgstr "Öppna menyn vid hovring"
 
 #. 3.2->settings-schema.json->activate-on-hover->tooltip
 #. 4.0->settings-schema.json->activate-on-hover->tooltip
-#, fuzzy
-#| msgid "Open the menu when I move my mouse over it"
 msgid "Open the menu when I move my mouse over the panel icon"
-msgstr "Öppna menyn när jag för muspekaren över den"
+msgstr "Öppna menyn när jag för muspekaren över panelikonen"
 
 #. 3.2->settings-schema.json->hover-delay->units
 #. 3.2->settings-schema.json->tooltip-delay->units
@@ -311,10 +309,8 @@ msgstr "millisekunder"
 
 #. 3.2->settings-schema.json->hover-delay->description
 #. 4.0->settings-schema.json->hover-delay->description
-#, fuzzy
-#| msgid "Menu hover delay:"
 msgid "Menu hover delay"
-msgstr "Menyfördröjning:"
+msgstr "Menyfördröjning vid hovring"
 
 #. 3.2->settings-schema.json->enable-animation->description
 #. 4.0->settings-schema.json->enable-animation->description
@@ -323,10 +319,8 @@ msgstr "Använd menyanimering"
 
 #. 3.2->settings-schema.json->enable-animation->tooltip
 #. 4.0->settings-schema.json->enable-animation->tooltip
-#, fuzzy
-#| msgid "Allow the menu to animate on open and close"
 msgid "Animate the menu on open and close"
-msgstr "Tillåt animering när menyn öppnas och stängs"
+msgstr "Animera menyn vid öppning och stängning"
 
 #. 3.2->settings-schema.json->category-click->description
 #. 4.0->settings-schema.json->category-click->description
@@ -335,17 +329,13 @@ msgstr "Aktivera kategorier vid klick"
 
 #. 3.2->settings-schema.json->category-click->tooltip
 #. 4.0->settings-schema.json->category-click->tooltip
-#, fuzzy
-#| msgid "Activate categories on click"
 msgid "Activate categories on click instead of on hover"
-msgstr "Aktivera kategorier vid klick"
+msgstr "Aktivera kategorier vid klick istället för hovring"
 
 #. 3.2->settings-schema.json->enable-autoscroll->description
 #. 4.0->settings-schema.json->enable-autoscroll->description
-#, fuzzy
-#| msgid "Enable autoscrolling in application list"
 msgid "Enable autoscrolling"
-msgstr "Aktivera automatisk skrollning i programlistan"
+msgstr "Aktivera automatisk skrollning"
 
 #. 3.2->settings-schema.json->enable-autoscroll->tooltip
 #. 4.0->settings-schema.json->enable-autoscroll->tooltip
@@ -360,7 +350,7 @@ msgstr "Visa webbokmärken"
 #. 3.2->settings-schema.json->enable-bookmarks->tooltip
 #. 4.0->settings-schema.json->enable-bookmarks->tooltip
 msgid "Show your browser's web bookmarks in the menu"
-msgstr "Visa webbläsarens webbläsare i menyn"
+msgstr "Visa webbläsarens bokmärken i menyn"
 
 #. 3.2->settings-schema.json->enable-windows->description
 msgid "Enable searching of open windows"
@@ -373,12 +363,8 @@ msgstr "Aktivera sökmotorer"
 
 #. 3.2->settings-schema.json->enable-search-providers->tooltip
 #. 4.0->settings-schema.json->enable-search-providers->tooltip
-#, fuzzy
-#| msgid ""
-#| "Choose whether or not search provider results are indexed in menu "
-#| "searches."
 msgid "Include search provider results in searches"
-msgstr "Välj om sökmotorresultat skall indexeras eller inte, i menysökningar."
+msgstr "Inkludera sökmotorresultat i sökningar"
 
 #. 3.2->settings-schema.json->get-providers->description
 #. 4.0->settings-schema.json->get-providers->description
@@ -419,10 +405,8 @@ msgstr "Visa bokmärken och platser"
 
 #. 3.2->settings-schema.json->show-places->tooltip
 #. 4.0->settings-schema.json->show-places->tooltip
-#, fuzzy
-#| msgid "Show bookmarks and places"
 msgid "Show bookmarks and places category in the menu"
-msgstr "Visa bokmärken och platser"
+msgstr "Visa kategori för bokmärken och platser i menyn"
 
 #. 3.2->settings-schema.json->show-application-icons->description
 #. 3.2->settings-schema.json->show-application-icons->tooltip
@@ -474,11 +458,11 @@ msgstr "Anpassad menyhöjd"
 
 #. 4.0->settings-schema.json->applications-view-mode->description
 msgid "Applications view mode"
-msgstr "Programvisningsläge"
+msgstr "Programmens visningsläge"
 
 #. 4.0->settings-schema.json->applications-view-mode->tooltip
 msgid "View applications as list or grid"
-msgstr "Visa applikationer som lista eller rutnät"
+msgstr "Visa programmen i list eller ikonvy"
 
 #. 4.0->settings-schema.json->description-placement->description
 msgid "Application description placement"
@@ -497,22 +481,20 @@ msgid "None"
 msgstr "Ingen"
 
 #. 4.0->settings-schema.json->description-placement->tooltip
-#, fuzzy
-#| msgid "Choose where to show application descriptions."
 msgid "Choose where to show application descriptions"
-msgstr "Välj var du vill visa applikationsbeskrivningar."
+msgstr "Välj var programbeskrivningarna skall visas"
 
 #. 4.0->settings-schema.json->powergroup-placement->description
 msgid "Session buttons location"
-msgstr "Session knappar plats"
+msgstr "Placering av sessionsknappar"
 
 #. 4.0->settings-schema.json->powergroup-placement->options
 msgid "Top"
-msgstr "Topp"
+msgstr "Överkant"
 
 #. 4.0->settings-schema.json->powergroup-placement->options
 msgid "Bottom"
-msgstr "Botten"
+msgstr "Underkant"
 
 #. 4.0->settings-schema.json->powergroup-placement->options
 msgid "Left"
@@ -523,47 +505,31 @@ msgid "Right"
 msgstr "Höger"
 
 #. 4.0->settings-schema.json->powergroup-placement->tooltip
-#, fuzzy
-#| msgid "Choose where to show the session (quit, logout, etc.) buttons."
 msgid "Choose where to show the session (quit, logout, etc.) buttons"
-msgstr "Välj var du vill visa sessionen (avsluta, logga ut etc.) -knapparna."
+msgstr "Välj var sessionsknapparna (Avsluta, Logga ut, etc.) skall visas"
 
 #. 4.0->settings-schema.json->add-favorites->description
-#, fuzzy
-#| msgid "Add favorites to session buttons."
 msgid "Add favorites to session buttons"
-msgstr "Lägg till favoriter till sessionsknappar."
+msgstr "Lägg till favoriter till sessionsknapparna"
 
 #. 4.0->settings-schema.json->add-favorites->tooltip
-#, fuzzy
-#| msgid "Show your favorite app icons next to the session buttons."
 msgid "Show your favorite app icons next to the session buttons"
-msgstr "Visa dina favorit-appikoner bredvid sessionsknapparna."
+msgstr "Visa dina favoritprogramikoner tillsammans med sessionsknapparna"
 
-#, javascript-format
 #~ msgid "Failed to launch \"%s\""
 #~ msgstr "Kunde inte starta \"%s\""
 
-#~ msgid "Remove from favorites"
-#~ msgstr "Ta bort från Favoriter"
+#~ msgid "Choose whether or not to show bookmarks and places in the menu."
+#~ msgstr "Välj om bokmärken och platser skall visas eller inte, i menyn."
 
-#~ msgid "Toggle recent files"
-#~ msgstr "Visa/Dölj nyligen använda filer"
+#~ msgid "Choose whether or not bookmarks are indexed in the menu."
+#~ msgstr "Välj om bokmärken skall indexeras eller inte, i menyn."
 
 #~ msgid "Press this button to customize your privacy settings."
 #~ msgstr "Tryck på denna knapp för att anpassa dina sekretessinställningar."
 
 #~ msgid "Press this button to customize your menu entries."
 #~ msgstr "Tryck på denna knapp för att anpassa dina menyposter."
-
-#~ msgid "Unchecking this allows the theme to set the icon"
-#~ msgstr "Inaktivering innebär att temat anger ikon"
-
-#~ msgid "Icon"
-#~ msgstr "Ikon"
-
-#~ msgid "Set the custom menu button icon name"
-#~ msgstr "Ange anpassat namn på menyikonen"
 
 #~ msgid "Enable opening the menu when the mouse enters the applet"
 #~ msgstr "Aktivera menyn när muspekaren förs över panelikonen"
@@ -582,20 +548,32 @@ msgstr "Visa dina favorit-appikoner bredvid sessionsknapparna."
 #~ "list."
 #~ msgstr "Välj om mjuk autoskrollning skall aktiveras i programlistan."
 
-#~ msgid "Choose whether or not bookmarks are indexed in the menu."
-#~ msgstr "Välj om bokmärken skall indexeras eller inte, i menyn."
+#~ msgid "Enable filesystem path entry in search box"
+#~ msgstr "Aktivera filsystemsökvägar i sökfältet"
 
-#~ msgid "Choose whether or not open windows are indexed in menu searches."
-#~ msgstr "Välj om öppna fönster skall indexeras eller inte, i menysökningar."
+#~ msgid "Allows path entry in the menu search box."
+#~ msgstr "Tillåt filsystemsökvägar i menyns sökfält."
 
-#~ msgid "Choose whether or not to show bookmarks and places in the menu."
-#~ msgstr "Välj om bokmärken och platser skall visas eller inte, i menyn."
+#~ msgid "Unchecking this allows the theme to set the icon"
+#~ msgstr "Inaktivering innebär att temat anger ikon"
+
+#~ msgid "Icon"
+#~ msgstr "Ikon"
+
+#~ msgid "Set the custom menu button icon name"
+#~ msgstr "Ange anpassat namn på menyikonen"
+
+#~ msgid "Choose whether or not to show icons on categories."
+#~ msgstr "Välj om kategoriikoner skall visas eller inte."
 
 #~ msgid "Choose whether or not to show icons on applications."
 #~ msgstr "Välj om programikoner skall visas eller inte."
 
-#~ msgid "Choose whether or not to show icons on categories."
-#~ msgstr "Välj om kategoriikoner skall visas eller inte."
+#~ msgid "Toggle recent files"
+#~ msgstr "Visa/Dölj nyligen använda filer"
+
+#~ msgid "Choose whether or not open windows are indexed in menu searches."
+#~ msgstr "Välj om öppna fönster skall indexeras eller inte, i menysökningar."
 
 #~ msgid ""
 #~ "Choose whether or not to show the application description on the "
@@ -621,12 +599,6 @@ msgstr "Visa dina favorit-appikoner bredvid sessionsknapparna."
 
 #~ msgid "Please provide your password to uninstall this application"
 #~ msgstr "Ange ditt lösenord för att avinstallera det här programmet"
-
-#~ msgid "Enable filesystem path entry in search box"
-#~ msgstr "Aktivera filsystemsökvägar i sökfältet"
-
-#~ msgid "Allows path entry in the menu search box."
-#~ msgstr "Tillåt filsystemsökvägar i menyns sökfält."
 
 #~ msgid ""
 #~ "Choose where application descriptions will be placed, or select \"None\" "
