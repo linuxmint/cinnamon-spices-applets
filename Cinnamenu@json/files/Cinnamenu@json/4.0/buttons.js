@@ -48,7 +48,6 @@ class CategoryListButton extends PopupBaseMenuItem {
         let categoryNameText = isStrDir ? altNameText : dirName ? dirName : '';
         this.disabled = false;
         this.entered = null;
-
         if (this.state.settings.showCategoryIcons) {
             let icon;
             if (!isStrDir) {
@@ -59,10 +58,11 @@ class CategoryListButton extends PopupBaseMenuItem {
                     this.icon_name = '';
                 }
                 if (this.icon_name) {
-                    this.icon = TextureCache.get_default().load_gicon(null, icon, this.state.settings.categoryIconSize);
+                    this.icon = TextureCache.get_default().load_gicon(null, icon,
+                                                                    this.state.settings.categoryIconSize);
                 } else {
                     icon = dir.get_icon() && typeof dir.get_icon().get_names === 'function' ?
-                                                                dir.get_icon().get_names().toString() : 'error';
+                                                        dir.get_icon().get_names().toString() : 'error';
                     this.icon = new Icon({
                         icon_name: icon,
                         icon_size: this.state.settings.categoryIconSize
@@ -424,30 +424,8 @@ class AppListGridButton extends PopupBaseMenuItem {
 
         this.signals = new SignalManager(null);
         this.contextMenuButtons = [];
-        //this.description = ''; //??
         this.entered = null;
 
-        // appType 0 = application, appType 1 = place, appType 2 = recent
-        // Filesystem autocompletion
-        /*if (appType === ApplicationType._completions) {
-            this.buttonState.appType = ApplicationType._places;
-            this.file = Gio.file_new_for_path(this.buttonState.app.name);
-            tryFn(
-                () => this.handler = this.file.query_default_handler(null),
-                () => this.handler = null
-            );
-        }*/
-
-        // Don't show protocol handlers
-        /*if (this.buttonState.app.description) {
-            let slice = this.buttonState.app.description.slice(0, 7);
-            if (slice === 'https://' || slice === 'http://' || slice === 'file://') {
-                this.buttonState.app.description = this.buttonState.app.description.slice(7);
-            }
-            if (this.buttonState.app.description.slice(-1) === '/') {
-                this.buttonState.app.description = this.buttonState.app.description.slice(0, -1);
-            }
-        } */
         if (!this.buttonState.app.description && this.buttonState.appType === ApplicationType._applications) {
             this.buttonState.app.description = FALL_BACK_DESCRIPTION;
         }
@@ -659,7 +637,6 @@ class AppListGridButton extends PopupBaseMenuItem {
             tooltipMarkup = tooltipMarkup.replace(/&/g, '&amp;');
 
             let [x, y] = this.actor.get_transformed_position();
-            let y_extra = 0;
             let {width, height} = this.actor;
             let center_x = false; //should tooltip x pos. be centered on x
             if (this.state.isListView) {

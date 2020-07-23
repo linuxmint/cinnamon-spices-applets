@@ -123,19 +123,13 @@ class CinnamenuApplet extends TextIconApplet {
         this.menu = new AppletPopupMenu(this, this.orientation);
         this.menuManager.addMenu(this.menu);
         this.menu.setCustomStyleClass('menu-background');
-
         this.signals = new SignalManager(null);
         this.displaySignals = new SignalManager(null);
-
         this.tracker = Cinnamon.WindowTracker.get_default();
         this.appSystem = Cinnamon.AppSystem.get_default();
 
-        this.signals.connect(this.privacy_settings, 'changed::' + REMEMBER_RECENT_KEY, () => this.onEnableRecentChange());
-
-        // FS search
-        //this.pathCompleter = new Gio.FilenameCompleter();
-        //this.pathCompleter.set_dirs_only(false);
-
+        this.signals.connect(this.privacy_settings, 'changed::' + REMEMBER_RECENT_KEY, () =>
+                                                                                this.onEnableRecentChange());
         this.signals.connect(Main.themeManager, 'theme-set', () => this.onThemeChanged());
 
         this.iconTheme = Gtk.IconTheme.get_default();
@@ -143,7 +137,7 @@ class CinnamenuApplet extends TextIconApplet {
         this.signals.connect(this.appSystem, 'installed-changed', (...args) => this.refresh(...args));
         this.signals.connect(this.appFavorites, 'changed', (...args) => this.onFavoritesChanged(...args));
         this.signals.connect(this.menu, 'open-state-changed', (...args) => this.onOpenStateToggled(...args));
-        //this.signals.connect(global, 'scale-changed', () => this.state.set({menuHeight: 0}));
+        this.signals.connect(global, 'scale-changed', () => this.refresh() );
 
         this.categoryButtons = [];
         this.knownApps = [];
@@ -504,7 +498,6 @@ class CinnamenuApplet extends TextIconApplet {
             this.switchApplicationsView(false);
             // Display startup apps
             this.resetDisplayState();
-            //this.state.trigger('menuOpened');
             this.mainBox.show();
             // Do height/constraint adjustments after actors are rendered and on the stage.
             this.updateMenuHeight();
@@ -962,6 +955,7 @@ class CinnamenuApplet extends TextIconApplet {
         if (refItemIndex > -1 && buttons[refItemIndex]) {
             if (buttons[refItemIndex].menu.isOpen) {
                 buttons[refItemIndex].closeMenu();
+                this.state.set({contextMenuIsOpen: null});
             }
             buttons[refItemIndex].handleLeave();
         }
@@ -1125,7 +1119,7 @@ class CinnamenuApplet extends TextIconApplet {
                         description: '',
                         type: ApplicationType._recent });
         } else if (!pattern) {
-            this.answerText.set_text(_('No recent documents'));
+            this.answerText.set_text(_('No recent files'));
             this.answerText.show();
         }
 
@@ -1554,7 +1548,7 @@ class CinnamenuApplet extends TextIconApplet {
             case symbol === Clutter.Escape:
                 if (enteredItemExists && buttons[refItemIndex].menu.isOpen) {
                     buttons[refItemIndex].toggleMenu();
-                    buttons[refItemIndex].handleEnter()
+                    buttons[refItemIndex].handleEnter();
                     return true;
                 }
                 this.state.trigger('closeMenu');
@@ -1563,26 +1557,6 @@ class CinnamenuApplet extends TextIconApplet {
             return false;
         }
     }
-
-    /*getCompletions(text) {
-        if (text.includes('/')) {
-            return map(this.pathCompleter.get_completions(text), function(path) {
-                                        if (path.charAt(0) === '~') {
-                                            path = path.slice(1);
-                                            path = GLib.get_home_dir() + path;
-                                        }
-
-                                        return {
-                                          name: path,
-                                          description: path,
-                                          uri: path,
-                                          icon: Gio.content_type_get_icon(Gio.content_type_guess(path, null)[0]),
-                                          type: ApplicationType._completions
-                                        };  });
-        } else {
-          return [];
-        }
-    }*/
 
     resetSearch() {
         if (this.answerText) {
@@ -1681,18 +1655,12 @@ class CinnamenuApplet extends TextIconApplet {
         }
         this.previousSearchPattern = pattern;
 
-        /*let acResults = []; // search box autocompletion results
-        if (this.state.settings.searchFilesystem) {
-            // Don't use the pattern here, as filesystem is case sensitive
-            acResults = this.getCompletions(text);
-        }*/
         let results = this.listApplications(null, pattern)
                             .concat(this.listPlaces(pattern))
                             .concat(this.listBookmarks(pattern))
                             .concat(this.listDevices(pattern))
                             .concat(this.listWebBookmarks(pattern))
                             .concat(this.listRecent(pattern));
-                            //.concat(acResults);
 
         if (this.state.settings.enableSearchProviders && this.state.enabledProviders.length > 0 &&
                                                                                   pattern.length > 2) {
@@ -1811,7 +1779,7 @@ class CinnamenuApplet extends TextIconApplet {
         let index = -1;
         for (let z = 0, len = appList.length; z < len; z++) {
             let isString = false;
-            if (appList[z].type === undefined) {
+            if (appList[z].type === undefined) {//??
 
                 // Check auto-completion
                 if (typeof appList[z] !== 'string') {
@@ -1942,7 +1910,7 @@ class CinnamenuApplet extends TextIconApplet {
 
         //=============mainBox================
         this.mainBox = new St.BoxLayout({ style_class: 'menu-applications-outer-box',
-                                        vertical: true,
+                                        vertical: true, reactive: true,//
                                         show_on_set_parent: false }); // menu
         this.mainBox.add_style_class_name('menu-applications-box'); //this is to support old themes
         // mainbox packs vertically
@@ -1969,6 +1937,14 @@ class CinnamenuApplet extends TextIconApplet {
 
         this.isNewInstance = false;
         this.state.panelLocation = this._panelLocation;
+
+        this.displaySignals.connect(this.mainBox, 'button-release-event',
+                                                        (...args) => this.mainBoxClicked(...args));
+    }
+
+    mainBoxClicked() {
+        //a blank part of the menu was clicked on. close and context menus and active items.
+        this.clearEnteredActors();
     }
 
     destroyContainer(container){
