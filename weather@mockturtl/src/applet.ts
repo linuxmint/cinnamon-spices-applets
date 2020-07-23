@@ -1033,7 +1033,7 @@ class UI {
 	public ShowHourlyWeather(): void {
 		// In some cases the preferred height is not calculated
 		// properly for the first time, so we work around by opening and closing it once
-		if (this.hourlyNeverOpened) { // TODO: do this after theme change as well https://github.com/linuxmint/cinnamon-spices-applets/issues/3102#issuecomment-650624802
+		if (this.hourlyNeverOpened) {
 			this.hourlyNeverOpened = false;
 			this._hourlyScrollView.show();
 			this._hourlyScrollView.hide();
@@ -1755,8 +1755,6 @@ class Config {
 	public readonly _tempTextOverride: string;
 	public readonly _tempRussianStyle: boolean;
 
-	//TODO: Add Option to units (default) what is based on userLocale?
-
 	public keybinding: any;
 
 	/** Timeout */
@@ -1949,7 +1947,7 @@ class WeatherLoop {
 					this.app.log.Debug("Refresh triggered in mainloop with these values: lastUpdated " + ((!this.lastUpdated) ? "null" : this.lastUpdated.toLocaleString())
 					+ ", errorCount " + this.errorCount.toString() + " , loopInterval " + (this.LoopInterval() / 1000).toString()
 					+ " seconds, refreshInterval " + this.app.config._refreshInterval + " minutes");
-					// No need to check for lock, loop can skip 
+					// loop can skip 1 cycle if needed 
 					let state = await this.app.refreshWeather(false);
 					if (state == "locked") this.app.log.Print("App locked, refresh skipped in main loop");
 					if (state == "success" || state == "locked") this.lastUpdated = new Date();

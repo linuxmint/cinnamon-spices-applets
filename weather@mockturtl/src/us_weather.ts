@@ -118,7 +118,6 @@ class USWeather implements WeatherProvider {
 	private async GetGridData(loc: Location): Promise<GridPayload> {
 		try {
 			// Handling out of country errors in callback
-			// TODO: App gets stuck on this call after a while!
 			let siteData = await this.app.LoadJsonAsync(this.sitesUrl + loc.text, this.OnObtainingGridData) as GridPayload;
 			this.app.log.Debug("Grid found: " + JSON.stringify(siteData, null, 2));
 			return siteData;
