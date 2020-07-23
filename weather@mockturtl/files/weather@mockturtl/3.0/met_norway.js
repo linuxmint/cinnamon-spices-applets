@@ -78,7 +78,7 @@ var MetNorway = (function () {
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
-                        return [4, this.app.LoadAsync(query)];
+                        return [4, this.app.LoadJsonAsync(query)];
                     case 2:
                         json = _a.sent();
                         return [3, 4];
@@ -91,14 +91,6 @@ var MetNorway = (function () {
                         if (!json) {
                             this.app.HandleError({ type: "soft", detail: "no api response", service: "met-norway" });
                             this.app.log.Error("MET Norway: Empty response from API");
-                            return [2, null];
-                        }
-                        try {
-                            json = JSON.parse(json);
-                        }
-                        catch (e) {
-                            this.app.HandleError({ type: "soft", detail: "unusal payload", service: "met-norway" });
-                            this.app.log.Error("MET Norway: Payload is not JSON, aborting.");
                             return [2, null];
                         }
                         return [4, this.ParseWeather(json)];

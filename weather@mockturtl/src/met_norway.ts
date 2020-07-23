@@ -45,7 +45,7 @@ class MetNorway implements WeatherProvider {
         let json: any;
         if (query != "" && query != null) {
             try {
-                json = await this.app.LoadAsync(query);
+                json = await this.app.LoadJsonAsync(query);
             }
             catch(e) {
                 this.app.HandleHTTPError("met-norway", e, this.app);
@@ -58,17 +58,8 @@ class MetNorway implements WeatherProvider {
                 this.app.log.Error("MET Norway: Empty response from API");
                 return null;
             }
-
-            try {
-              json = JSON.parse(json);
-            }
-            catch(e) {
-              this.app.HandleError({type: "soft", detail: "unusal payload", service: "met-norway"});
-              this.app.log.Error("MET Norway: Payload is not JSON, aborting.")
-              return null;
-            }
             
-            return await this.ParseWeather(json);
+            return this.ParseWeather(json);
         }
         return null;
 	}
