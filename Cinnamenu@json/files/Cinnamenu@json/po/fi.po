@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-15 12:39+0100\n"
-"PO-Revision-Date: 2020-07-15 15:27+0100\n"
+"POT-Creation-Date: 2020-07-17 12:34+0100\n"
+"PO-Revision-Date: 2020-07-20 08:13+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fi\n"
@@ -18,139 +18,138 @@ msgstr ""
 "X-Generator: Poedit 2.3.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: 3.2/applet.js:92 4.0/applet.js:40
+#. 3.2 4.0
 msgid "Type to search..."
 msgstr "Kirjoita haku..."
 
-#: 3.2/applet.js:157 4.0/applet.js:50
+#. 3.2 4.0
 msgid "Initializing"
 msgstr "Alustetaan"
 
-#: 3.2/applet.js:284 4.0/buttons.js:26
+#. 3.2 4.0
 msgid "No description available"
 msgstr "Ei kuvausta saatavilla"
 
-#: 3.2/applet.js:977 4.0/applet.js:715
+#. 3.2 4.0
 msgid "All Applications"
 msgstr "Kaikki sovellukset"
 
-#: 3.2/applet.js:1015 4.0/applet.js:756
+#. 3.2 4.0
 msgid "Places"
 msgstr "Sijainnit"
 
-#: 3.2/applet.js:1016 4.0/applet.js:757
+#. 3.2 4.0
 msgid "Recent Files"
 msgstr "Viimeisimmät tiedostot"
 
-#: 3.2/applet.js:1017 4.0/applet.js:758
+#. 3.2 4.0
 msgid "Bookmarks"
 msgstr "Kirjanmerkit"
 
-#: 3.2/applet.js:1018 4.0/applet.js:759
+#. 3.2 4.0
 msgid "Favorite Apps"
 msgstr "Suosikkisovellukset"
 
-#: 3.2/applet.js:1351 4.0/applet.js:1072
+#. 3.2 4.0
 msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
 msgstr "gir1.2-gda-5.0-paketti vaaditaan Firefox- ja Midori-kirjanmerkkeihin."
 
-#: 3.2/applet.js:1415 4.0/applet.js:1121
+#. 3.2 4.0
 msgid "Clear List"
 msgstr "Tyhjennä luettelo"
 
-#: 3.2/applet.js:1426 4.0/applet.js:1128
+#. 3.2 4.0
 msgid "No recent documents"
 msgstr "Ei viimeaikaisia asiakirjoja"
 
-#: 3.2/applet.js:2278
+#. 3.2
 msgid "Account details"
 msgstr "Tilin tiedot"
 
-#: 3.2/applet.js:2285 3.2/buttons.js:1260
+#. 3.2 3.2
 msgid "Grid View"
 msgstr "Kuvakenäkymä"
 
-#: 3.2/applet.js:2285 3.2/buttons.js:1254
+#. 3.2 3.2
 msgid "List View"
 msgstr "Luettelonäkymä"
 
-#: 3.2/applet.js:2286 3.2/buttons.js:1261
+#. 3.2 3.2
 msgid "Switch to grid view"
 msgstr "Vaihda kuvakenäkymään"
 
-#: 3.2/applet.js:2286 3.2/buttons.js:1255
+#. 3.2 3.2
 msgid "Switch to list view"
 msgstr "Vaihda luettelonäkymään"
 
-#: 3.2/applet.js:2292 4.0/applet.js:2092
+#. 3.2 4.0
 msgid "Lock Screen"
 msgstr "Lukitusnäyttö"
 
-#: 3.2/applet.js:2293 4.0/applet.js:2093
+#. 3.2 4.0
 msgid "Lock the screen"
 msgstr "Lukitse näyttö"
 
-#: 3.2/applet.js:2314 4.0/applet.js:2108
+#. 3.2 4.0
 msgid "Logout"
 msgstr "Kirjaudu ulos"
 
-#: 3.2/applet.js:2315 4.0/applet.js:2109
+#. 3.2 4.0
 msgid "Leave the session"
 msgstr "Poistu istunnosta"
 
-#: 3.2/applet.js:2322 4.0/applet.js:2112
+#. 3.2 4.0
 msgid "Quit"
 msgstr "Lopeta"
 
-#: 3.2/applet.js:2323 4.0/applet.js:2113
+#. 3.2 4.0
 msgid "Shutdown the computer"
 msgstr "Sammuta tietokone"
 
-#: 3.2/placeDisplay.js:146 4.0/placeDisplay.js:102
+#. 3.2 4.0
 msgid "Home"
 msgstr "Koti"
 
-#: 3.2/placeDisplay.js:220 4.0/placeDisplay.js:144
+#. 3.2 4.0
 msgid "Computer"
 msgstr "Tietokone"
 
-#: 3.2/placeDisplay.js:224 4.0/placeDisplay.js:146
+#. 3.2 4.0
 msgid "Browse network"
 msgstr "Selaa verkkoa"
 
-#: 3.2/buttons.js:1045 3.2/buttons.js:1047 4.0/buttons.js:836
-#: 4.0/buttons.js:839
+#. 3.2 4.0
 msgid "Run with NVIDIA GPU"
 msgstr "Suorita NVIDIA GPU:lla"
 
-#: 3.2/buttons.js:1049 4.0/buttons.js:842
+#. 3.2 4.0
 msgid "Add to panel"
 msgstr "Lisää paneeliin"
 
-#: 3.2/buttons.js:1051 4.0/buttons.js:845
+#. 3.2 4.0
 msgid "Add to desktop"
 msgstr "Lisää työpöydälle"
 
-#: 3.2/buttons.js:1054 4.0/buttons.js:849
+#. 3.2 4.0
 #, fuzzy
 #| msgid "Remove from favorites"
 msgid "Remove favorite"
 msgstr "Poista suosikeista"
 
-#: 3.2/buttons.js:1056 4.0/buttons.js:852
+#. 3.2 4.0
 msgid "Add to favorites"
 msgstr "Lisää suosikkeihin"
 
-#: 3.2/buttons.js:1059 4.0/buttons.js:856
+#. 3.2 4.0
 msgid "Uninstall"
 msgstr "Asennuksen poisto"
 
-#: 4.0/applet.js:233 4.0/applet.js:1230
+#. 4.0 4.0
 msgid "Please wait..."
 msgstr ""
 
 #. metadata.json->name
-#. 3.2->settings-schema.json->cinnamenuProvidersSection->title
+#. 3.2
 msgid "Cinnamenu"
 msgstr "Cinnamenu"
 
@@ -168,391 +167,284 @@ msgid ""
 "Gnomenu, and the contributors to projects they derived from."
 msgstr ""
 
-#. 3.2->settings-schema.json->panel->title
-#. 4.0->settings-schema.json->behaviour->title
+#. 3.2 4.0
 msgid "Behavior"
 msgstr "Käyttäytyminen"
 
-#. 3.2->settings-schema.json->appearance->title
-#. 4.0->settings-schema.json->appearance->title
+#. 3.2 4.0
 msgid "Appearance"
 msgstr "Ulkomuoto"
 
-#. 3.2->settings-schema.json->menu->title
-#. 4.0->settings-schema.json->layout->title
+#. 3.2 4.0
 msgid "Layout and Content"
 msgstr "Asettelu ja sisältö"
 
-#. 3.2->settings-schema.json->providers->title
+#. 3.2
 msgid "Search Providers"
 msgstr "Hakupalvelut"
 
-#. 3.2->settings-schema.json->extensionProvidersSection->title
+#. 3.2
 msgid "No search provider extensions found"
 msgstr "Hakupalvelun laajennuksia ei löytynyt"
 
-#. 3.2->settings-schema.json->panel-appear->title
-#. 3.2->settings-schema.json->panel-behave->title
-#. 4.0->settings-schema.json->panel-behave->title
-#. 4.0->settings-schema.json->panel-appear->title
+#. 3.2 4.0
 msgid "Panel"
 msgstr "Paneeli"
 
-#. 3.2->settings-schema.json->menu-behave->title
-#. 3.2->settings-schema.json->menu-icons->title
-#. 4.0->settings-schema.json->menu-icons->title
+#. 3.2 4.0
 msgid "Menu"
 msgstr "Valikko"
 
-#. 3.2->settings-schema.json->menu-layout->title
-#. 4.0->settings-schema.json->menu-layout->title
+#. 3.2 4.0
 msgid "Layout"
 msgstr "Ulkoasu"
 
-#. 3.2->settings-schema.json->menu-content->title
-#. 4.0->settings-schema.json->menu-content->title
+#. 3.2 4.0
 msgid "Content"
 msgstr "Sisältö"
 
-#. 3.2->settings-schema.json->privacy-settings-button->description
-#. 4.0->settings-schema.json->privacy-settings-button->description
+#. 3.2 4.0
 #, fuzzy
 #| msgid "Recent Files"
 msgid "Recent files settings"
 msgstr "Viimeisimmät tiedostot"
 
-#. 3.2->settings-schema.json->menu-editor-button->description
-#. 4.0->settings-schema.json->menu-editor-button->description
+#. 3.2 4.0
 msgid "Open the menu editor"
 msgstr "Avaa valikon muokkausikkuna"
 
-#. 3.2->settings-schema.json->resetCategoryOrder-button->description
-#. 4.0->settings-schema.json->resetCategoryOrder-button->description
+#. 3.2 4.0
 msgid "Reset category order"
 msgstr "Nollaa asetukset"
 
-#. 3.2->settings-schema.json->menu-icon-custom->description
-#. 4.0->settings-schema.json->menu-icon-custom->description
+#. 3.2 4.0
 msgid "Use a custom icon"
 msgstr "Käytä toista kuvaketta"
 
-#. 3.2->settings-schema.json->menu-icon-custom->tooltip
-#. 4.0->settings-schema.json->menu-icon-custom->tooltip
+#. 3.2 4.0
 #, fuzzy
 #| msgid "Use a custom icon"
 msgid "Use a custom icon in the panel"
 msgstr "Käytä toista kuvaketta"
 
-#. 3.2->settings-schema.json->menu-icon->description
-#. 3.2->settings-schema.json->menu-icon->tooltip
-#. 4.0->settings-schema.json->menu-icon->description
-#. 4.0->settings-schema.json->menu-icon->tooltip
-#, fuzzy
-#| msgid "Panel"
+#. 3.2 4.0
 msgid "Panel icon"
-msgstr "Paneeli"
+msgstr "Paneelikuvake"
 
-#. 3.2->settings-schema.json->menu-label->description
-#. 4.0->settings-schema.json->menu-label->description
-#, fuzzy
-#| msgid "Panel"
+#. 3.2 4.0
 msgid "Panel text"
-msgstr "Paneeli"
+msgstr "Paneelin teksti"
 
-#. 3.2->settings-schema.json->menu-label->tooltip
-#. 4.0->settings-schema.json->menu-label->tooltip
-#, fuzzy
-#| msgid "Select an icon to show in the panel."
+#. 3.2 4.0
 msgid "Text to show beside the panel icon"
-msgstr "Valitse paneelissa näytettävä kuvake."
+msgstr "Paneelikuvakkeen vieressä näkyvä teksti"
 
-#. 3.2->settings-schema.json->category-icon-size->units
-#. 3.2->settings-schema.json->apps-list-icon-size->units
-#. 3.2->settings-schema.json->apps-grid-icon-size->units
-#. 4.0->settings-schema.json->category-icon-size->units
-#. 4.0->settings-schema.json->apps-list-icon-size->units
-#. 4.0->settings-schema.json->apps-grid-icon-size->units
+#. 3.2 4.0
 msgid "pixels"
 msgstr "pikseliä"
 
-#. 3.2->settings-schema.json->category-icon-size->description
-#. 3.2->settings-schema.json->category-icon-size->tooltip
-#. 4.0->settings-schema.json->category-icon-size->description
-#. 4.0->settings-schema.json->category-icon-size->tooltip
+#. 3.2 4.0
 msgid "Category icon size"
 msgstr "Ryhmän kuvakkeen koko"
 
-#. 3.2->settings-schema.json->apps-list-icon-size->description
-#. 3.2->settings-schema.json->apps-list-icon-size->tooltip
-#. 4.0->settings-schema.json->apps-list-icon-size->description
-#. 4.0->settings-schema.json->apps-list-icon-size->tooltip
+#. 3.2 4.0
 msgid "Applications list icon size"
 msgstr "Sovellusluettelon kuvakkeen koko"
 
-#. 3.2->settings-schema.json->apps-grid-icon-size->description
-#. 3.2->settings-schema.json->apps-grid-icon-size->tooltip
-#. 4.0->settings-schema.json->apps-grid-icon-size->description
-#. 4.0->settings-schema.json->apps-grid-icon-size->tooltip
+#. 3.2 4.0
 msgid "Applications grid icon size"
 msgstr "Sovellusten ruudukon kuvakeen koko"
 
-#. 3.2->settings-schema.json->overlay-key->description
-#. 4.0->settings-schema.json->overlay-key->description
+#. 3.2 4.0
 msgid "Keyboard shortcut to open and close the menu"
 msgstr "Pikanäppäin valikon avaamiseen ja sulkemiseen"
 
-#. 3.2->settings-schema.json->activate-on-hover->description
-#. 4.0->settings-schema.json->activate-on-hover->description
-#, fuzzy
-#| msgid "Open the menu editor"
+#. 3.2 4.0
 msgid "Open menu on hover"
-msgstr "Avaa valikon muokkausikkuna"
+msgstr "Avaa valikko hiirellä"
 
-#. 3.2->settings-schema.json->activate-on-hover->tooltip
-#. 4.0->settings-schema.json->activate-on-hover->tooltip
-#, fuzzy
-#| msgid "Open the menu when I move my mouse over it"
+#. 3.2 4.0
 msgid "Open the menu when I move my mouse over the panel icon"
 msgstr "Avaa valikko, kun siirrän hiiren sen päälle"
 
-#. 3.2->settings-schema.json->hover-delay->units
-#. 3.2->settings-schema.json->tooltip-delay->units
-#. 4.0->settings-schema.json->hover-delay->units
+#. 3.2 4.0
 msgid "milliseconds"
 msgstr "millisekuntia"
 
-#. 3.2->settings-schema.json->hover-delay->description
-#. 4.0->settings-schema.json->hover-delay->description
-#, fuzzy
-#| msgid "Menu hover delay:"
+#. 3.2 4.0
 msgid "Menu hover delay"
-msgstr "Valikkokohtainen viive:"
+msgstr "Valikkokohtainen viive"
 
-#. 3.2->settings-schema.json->enable-animation->description
-#. 4.0->settings-schema.json->enable-animation->description
+#. 3.2 4.0
 msgid "Use menu animations"
 msgstr "Käytä valikon animaatioita"
 
-#. 3.2->settings-schema.json->enable-animation->tooltip
-#. 4.0->settings-schema.json->enable-animation->tooltip
-#, fuzzy
-#| msgid "Allow the menu to animate on open and close"
+#. 3.2 4.0
 msgid "Animate the menu on open and close"
 msgstr "Salli valikon animaatio avatessa ja sulkeutuessa"
 
-#. 3.2->settings-schema.json->category-click->description
-#. 4.0->settings-schema.json->category-click->description
+#. 3.2 4.0
 msgid "Activate categories on click"
 msgstr "Aktivoi ryhmät napsauttamalla"
 
-#. 3.2->settings-schema.json->category-click->tooltip
-#. 4.0->settings-schema.json->category-click->tooltip
-#, fuzzy
-#| msgid "Activate categories on click"
+#. 3.2 4.0
 msgid "Activate categories on click instead of on hover"
 msgstr "Aktivoi ryhmät napsauttamalla"
 
-#. 3.2->settings-schema.json->enable-autoscroll->description
-#. 4.0->settings-schema.json->enable-autoscroll->description
-#, fuzzy
-#| msgid "Enable autoscrolling in application list"
+#. 3.2 4.0
 msgid "Enable autoscrolling"
-msgstr "Ota automaattinen vieritys käyttöön sovellusluettelossa"
+msgstr "Ota automaattinen vieritys käyttöön"
 
-#. 3.2->settings-schema.json->enable-autoscroll->tooltip
-#. 4.0->settings-schema.json->enable-autoscroll->tooltip
+#. 3.2 4.0
 msgid "Enable autoscrolling in application list"
 msgstr "Ota automaattinen vieritys käyttöön sovellusluettelossa"
 
-#. 3.2->settings-schema.json->enable-bookmarks->description
-#. 4.0->settings-schema.json->enable-bookmarks->description
+#. 3.2 4.0
 msgid "Show web bookmarks"
 msgstr "Näytä web-kirjanmerkit"
 
-#. 3.2->settings-schema.json->enable-bookmarks->tooltip
-#. 4.0->settings-schema.json->enable-bookmarks->tooltip
+#. 3.2 4.0
 msgid "Show your browser's web bookmarks in the menu"
-msgstr ""
+msgstr "Näytä selaimesi Web-kirjanmerkit valikossa"
 
-#. 3.2->settings-schema.json->enable-windows->description
+#. 3.2
 msgid "Enable searching of open windows"
 msgstr "Ota avoimien ikkunoiden haku käyttöön"
 
-#. 3.2->settings-schema.json->enable-search-providers->description
-#. 4.0->settings-schema.json->enable-search-providers->description
+#. 3.2 4.0
 msgid "Enable search providers"
 msgstr "Ota hakupalvelut käyttöön"
 
-#. 3.2->settings-schema.json->enable-search-providers->tooltip
-#. 4.0->settings-schema.json->enable-search-providers->tooltip
-#, fuzzy
-#| msgid ""
-#| "Choose whether or not search provider results are indexed in menu "
-#| "searches."
+#. 3.2 4.0
 msgid "Include search provider results in searches"
-msgstr "Valitse, indeksoidaanko hakupalvelun tulokset valikkohaussa."
+msgstr "Valitse, indeksoidaanko hakupalvelun tulokset valikkohaussa"
 
-#. 3.2->settings-schema.json->get-providers->description
-#. 4.0->settings-schema.json->get-providers->description
+#. 3.2 4.0
 msgid "Example Search Providers"
 msgstr "Esimerkkejä hakupalvelujen tarjoajista"
 
-#. 3.2->settings-schema.json->startup-view-mode->description
-#. 3.2->settings-schema.json->startup-view-mode->tooltip
+#. 3.2
 msgid "Startup applications view mode"
 msgstr "Käynnistyvien sovellusten katselutila"
 
-#. 3.2->settings-schema.json->startup-view-mode->options
-#. 4.0->settings-schema.json->applications-view-mode->options
+#. 3.2 4.0
 msgid "List"
 msgstr "Luettelo"
 
-#. 3.2->settings-schema.json->startup-view-mode->options
-#. 4.0->settings-schema.json->applications-view-mode->options
+#. 3.2 4.0
 msgid "Grid"
 msgstr "Ruudukko"
 
-#. 3.2->settings-schema.json->apps-grid-column-count->units
-#. 4.0->settings-schema.json->apps-grid-column-count->units
+#. 3.2 4.0
 msgid "columns"
 msgstr "Sarakkeet"
 
-#. 3.2->settings-schema.json->apps-grid-column-count->description
-#. 3.2->settings-schema.json->apps-grid-column-count->tooltip
-#. 4.0->settings-schema.json->apps-grid-column-count->description
-#. 4.0->settings-schema.json->apps-grid-column-count->tooltip
+#. 3.2 4.0
 msgid "Number of columns in apps grid"
 msgstr "Sarakkeiden lukumäärä sovellusruudussa"
 
-#. 3.2->settings-schema.json->show-places->description
-#. 4.0->settings-schema.json->show-places->description
+#. 3.2 4.0
 msgid "Show bookmarks and places"
 msgstr "Näytä kirjanmerkit ja sijainti"
 
-#. 3.2->settings-schema.json->show-places->tooltip
-#. 4.0->settings-schema.json->show-places->tooltip
+#. 3.2 4.0
 #, fuzzy
 #| msgid "Show bookmarks and places"
 msgid "Show bookmarks and places category in the menu"
 msgstr "Näytä kirjanmerkit ja sijainti"
 
-#. 3.2->settings-schema.json->show-application-icons->description
-#. 3.2->settings-schema.json->show-application-icons->tooltip
-#. 4.0->settings-schema.json->show-application-icons->description
-#. 4.0->settings-schema.json->show-application-icons->tooltip
+#. 3.2 4.0
 msgid "Show application icons"
 msgstr "Näytä sovellusten kuvakkeet"
 
-#. 3.2->settings-schema.json->show-category-icons->description
-#. 3.2->settings-schema.json->show-category-icons->tooltip
-#. 4.0->settings-schema.json->show-category-icons->description
-#. 4.0->settings-schema.json->show-category-icons->tooltip
+#. 3.2 4.0
 msgid "Show category icons"
 msgstr "Näytä ryhmän kuvakkeet"
 
-#. 3.2->settings-schema.json->show-apps-description-on-buttons->description
-#. 3.2->settings-schema.json->show-apps-description-on-buttons->tooltip
+#. 3.2
 msgid "Show application descriptions under titles"
 msgstr "Näytä sovellusten kuvaukset otsikoiden alla"
 
-#. 3.2->settings-schema.json->show-tooltips->description
-#. 3.2->settings-schema.json->show-tooltips->tooltip
+#. 3.2
 msgid "Show tooltips"
 msgstr "Näytä työkaluvihjeet"
 
-#. 3.2->settings-schema.json->tooltip-delay->description
-#. 3.2->settings-schema.json->tooltip-delay->tooltip
+#. 3.2
 msgid "Tooltip delay"
 msgstr "Työkaluvinkin viive"
 
-#. 3.2->settings-schema.json->enable-custom-menu-height->description
-#. 3.2->settings-schema.json->enable-custom-menu-height->tooltip
-#. 4.0->settings-schema.json->enable-custom-menu-height->description
-#. 4.0->settings-schema.json->enable-custom-menu-height->tooltip
+#. 3.2 4.0
 msgid "Use a custom menu height"
 msgstr "Käytä mukautettua valikon korkeutta"
 
-#. 3.2->settings-schema.json->custom-menu-height->units
-#. 4.0->settings-schema.json->custom-menu-height->units
+#. 3.2 4.0
 msgid "px"
 msgstr "px"
 
-#. 3.2->settings-schema.json->custom-menu-height->description
-#. 3.2->settings-schema.json->custom-menu-height->tooltip
-#. 4.0->settings-schema.json->custom-menu-height->description
-#. 4.0->settings-schema.json->custom-menu-height->tooltip
+#. 3.2 4.0
 msgid "Custom menu height"
 msgstr "Muokatun valikon korkeus"
 
-#. 4.0->settings-schema.json->applications-view-mode->description
-#, fuzzy
-#| msgid "Startup applications view mode"
+#. 4.0
 msgid "Applications view mode"
-msgstr "Käynnistyvien sovellusten katselutila"
+msgstr "Sovellusten katselutila"
 
-#. 4.0->settings-schema.json->applications-view-mode->tooltip
-#, fuzzy
-#| msgid "Applications list icon size"
+#. 4.0
 msgid "View applications as list or grid"
-msgstr "Sovellusluettelon kuvakkeen koko"
+msgstr "Näytä sovellukset luettelona tai ruudukkona"
 
-#. 4.0->settings-schema.json->description-placement->description
+#. 4.0
 msgid "Application description placement"
 msgstr "Sovelluksen kuvaus"
 
-#. 4.0->settings-schema.json->description-placement->options
+#. 4.0
 msgid "Tooltips"
 msgstr "Työkaluvinkit"
 
-#. 4.0->settings-schema.json->description-placement->options
+#. 4.0
 msgid "Under titles"
 msgstr "Otsikkojen alla"
 
-#. 4.0->settings-schema.json->description-placement->options
+#. 4.0
 msgid "None"
 msgstr "Ei mitään"
 
-#. 4.0->settings-schema.json->description-placement->tooltip
-#, fuzzy
-#| msgid ""
-#| "Choose whether or not to show the application description on the "
-#| "application buttons."
+#. 4.0
 msgid "Choose where to show application descriptions"
-msgstr "Valitse, näytetäänkö sovelluksen kuvaus sovelluspainikkeissa."
+msgstr "Valitse, missä sovelluskuvaukset näytetään"
 
-#. 4.0->settings-schema.json->powergroup-placement->description
+#. 4.0
 msgid "Session buttons location"
 msgstr "Istuntopainikkeiden sijainti"
 
-#. 4.0->settings-schema.json->powergroup-placement->options
+#. 4.0
 msgid "Top"
-msgstr ""
+msgstr "ylin"
 
-#. 4.0->settings-schema.json->powergroup-placement->options
-#, fuzzy
-#| msgid "Bottom pane"
+#. 4.0
 msgid "Bottom"
-msgstr "Alapaneeli"
+msgstr "alin"
 
-#. 4.0->settings-schema.json->powergroup-placement->options
+#. 4.0
 msgid "Left"
-msgstr ""
+msgstr "Vasen"
 
-#. 4.0->settings-schema.json->powergroup-placement->options
+#. 4.0
 msgid "Right"
-msgstr ""
+msgstr "oikealle"
 
-#. 4.0->settings-schema.json->powergroup-placement->tooltip
+#. 4.0
 msgid "Choose where to show the session (quit, logout, etc.) buttons"
 msgstr ""
+"Valitse missä näytetään istunto (lopettaa, kirjautua ulos, jne.) -Painikkeet"
 
-#. 4.0->settings-schema.json->add-favorites->description
+#. 4.0
 msgid "Add favorites to session buttons"
-msgstr ""
+msgstr "Lisää suosikkeja istuntopainikkeisiin"
 
-#. 4.0->settings-schema.json->add-favorites->tooltip
+#. 4.0
 msgid "Show your favorite app icons next to the session buttons"
-msgstr ""
+msgstr "Näytä suosikkisovelluksesi kuvakkeet istuntopainikkeiden vieressä"
 
 #, javascript-format
 #~ msgid "Failed to launch \"%s\""
