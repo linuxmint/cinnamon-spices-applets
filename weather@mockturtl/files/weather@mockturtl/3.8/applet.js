@@ -527,6 +527,7 @@ class WeatherApplet extends TextIconApplet {
         this.weather.location.timeZone = null;
         this.weather.location.tzOffset = null;
         this.weather.location.url = null;
+        this.weather.location.distanceFrom = null;
         this.weather.coord.lat = null;
         this.weather.coord.lon = null;
         this.weather.sunrise = null;

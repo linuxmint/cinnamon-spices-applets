@@ -625,35 +625,35 @@ class WeatherApplet extends TextIconApplet {
 	/** Reset weather object */
 	private wipeData(): void {
 		if (this.weather == null) {
-		this.weather = {
-			date: null,
-			location: {
-				city: null,
-				country: null,
-				tzOffset: null,
-				timeZone: null,
-				url: null
-			},
-			coord: {
-				lat: null,
-				lon: null,
-			},
-			sunrise: null,
-			sunset: null,
-			wind: {
-				speed: null,
-				degree: null,
-			},
-				temperature: null,
-				pressure: null,
-				humidity: null, 
-			condition: {
-				main: null,
-				description: null,
-				icon: null,
-				customIcon: null
-			},
-		}
+			this.weather = {
+				date: null,
+				location: {
+					city: null,
+					country: null,
+					tzOffset: null,
+					timeZone: null,
+					url: null
+				},
+				coord: {
+					lat: null,
+					lon: null,
+				},
+				sunrise: null,
+				sunset: null,
+				wind: {
+					speed: null,
+					degree: null,
+				},
+					temperature: null,
+					pressure: null,
+					humidity: null, 
+				condition: {
+					main: null,
+					description: null,
+					icon: null,
+					customIcon: null
+				},
+			}
 		}
 		this.weather.date = null;
 		this.weather.location.city = null;
@@ -661,6 +661,7 @@ class WeatherApplet extends TextIconApplet {
 		this.weather.location.timeZone = null;
 		this.weather.location.tzOffset = null;
 		this.weather.location.url = null;
+		this.weather.location.distanceFrom = null;
 		this.weather.coord.lat = null;
 		this.weather.coord.lon = null;
 		this.weather.sunrise = null;
