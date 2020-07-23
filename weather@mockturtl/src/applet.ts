@@ -62,6 +62,7 @@ var setTimeout = utils.setTimeout as (func: any, ms: number) => any;
 const clearTimeout = utils.clearTimeout as (id: any) => void;
 var MillimeterToUserUnits = utils.MillimeterToUserUnits as (mm: number, distanceUnit: DistanceUnits) => number;
 var shadeHexColor = utils.shadeHexColor as (color: string, percent: number) => string;
+var MetretoUserUnits = utils.MetretoUserUnits as (m: number, distanceUnit: DistanceUnits) => number;
 
 // This always evaluates to True because "var Promise" line exists inside 
 if (typeof Promise != "function") {
@@ -612,6 +613,7 @@ class WeatherApplet extends TextIconApplet {
 		if (!!weatherInfo.location.country) this.weather.location.country = weatherInfo.location.country;
 		if (!!weatherInfo.location.timeZone) this.weather.location.timeZone = weatherInfo.location.timeZone;
 		if (!!weatherInfo.location.url) this.weather.location.url = weatherInfo.location.url;
+		if (!!weatherInfo.location.distanceFrom) this.weather.location.distanceFrom = weatherInfo.location.distanceFrom;
 		if (!!weatherInfo.extra_field) this.weather.extra_field = weatherInfo.extra_field;
 		this.forecasts = weatherInfo.forecasts;
 		this.hourlyForecasts = (!weatherInfo.hourlyForecasts) ? [] : weatherInfo.hourlyForecasts;
@@ -1316,8 +1318,13 @@ class UI {
     public displayBar(weather: Weather, provider: WeatherProvider, config: Config): boolean {
 		this._providerCredit.label = _("Powered by") + " " + provider.prettyName;
 		this._providerCredit.url = provider.website;
-		// TODO: show site data if exists? if possible - like 1km from here
 		this._timestamp.text = _("As of") + " " + AwareDateString(weather.date, this.app.currentLocale, config._show24Hours);
+		if (weather.location.distanceFrom != null) {
+			this._timestamp.text += (
+				", " + MetretoUserUnits(weather.location.distanceFrom, this.app.config._distanceUnit) 
+				+ " " + this.BigDistanceUnitFor(this.app.config._distanceUnit) + _("from you")
+			);
+		}
 		return true;
     }
 
@@ -1354,7 +1361,17 @@ class UI {
 
     private unitToUnicode(unit: WeatherUnits): string {
       	return unit == "fahrenheit" ? '\u2109' : '\u2103'
-    }
+	}
+	
+	/**
+	 * 
+	 * @param unit 
+	 * @return km or mi, based on unit
+	 */
+	private BigDistanceUnitFor(unit: DistanceUnits) {
+		if (unit == "imperial") return _("mi");
+		return _("km");
+	}
 
     /** Destroys current weather UI box */
     private destroyCurrentWeather(): void {
@@ -2185,7 +2202,9 @@ interface Weather {
 		/** url to open 
 		 * service portal set to user's location
 		 */
-		url: string
+		url: string,
+		/** in metres */
+		distanceFrom?: number
 	},
 	coord: {
 		lat: number,
@@ -2236,7 +2255,9 @@ interface WeatherData {
 		city?: string,
 		country?: string,
 		timeZone?: string,
-		url: string
+		url: string,
+		/** in metres */
+		distanceFrom?: number
 	},
 	/** preferably in UTC */
 	sunrise: Date,

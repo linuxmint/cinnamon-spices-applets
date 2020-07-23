@@ -48,7 +48,7 @@ class MetNorway {
                 this.app.log.Error("MET Norway: Empty response from API");
                 return null;
             }
-            return await this.ParseWeather(json);
+            return this.ParseWeather(json);
         }
         return null;
     }

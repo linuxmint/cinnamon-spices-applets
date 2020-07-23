@@ -43,6 +43,7 @@ var setTimeout = utils.setTimeout;
 const clearTimeout = utils.clearTimeout;
 var MillimeterToUserUnits = utils.MillimeterToUserUnits;
 var shadeHexColor = utils.shadeHexColor;
+var MetretoUserUnits = utils.MetretoUserUnits;
 if (typeof Promise != "function") {
     var promisePoly = importModule("promise-polyfill");
     var finallyConstructor = promisePoly.finallyConstructor;
@@ -481,6 +482,8 @@ class WeatherApplet extends TextIconApplet {
             this.weather.location.timeZone = weatherInfo.location.timeZone;
         if (!!weatherInfo.location.url)
             this.weather.location.url = weatherInfo.location.url;
+        if (!!weatherInfo.location.distanceFrom)
+            this.weather.location.distanceFrom = weatherInfo.location.distanceFrom;
         if (!!weatherInfo.extra_field)
             this.weather.extra_field = weatherInfo.extra_field;
         this.forecasts = weatherInfo.forecasts;
@@ -989,6 +992,10 @@ class UI {
         this._providerCredit.label = _("Powered by") + " " + provider.prettyName;
         this._providerCredit.url = provider.website;
         this._timestamp.text = _("As of") + " " + AwareDateString(weather.date, this.app.currentLocale, config._show24Hours);
+        if (weather.location.distanceFrom != null) {
+            this._timestamp.text += (", " + MetretoUserUnits(weather.location.distanceFrom, this.app.config._distanceUnit)
+                + " " + this.BigDistanceUnitFor(this.app.config._distanceUnit) + _("from you"));
+        }
         return true;
     }
     displayHourlyForecast(forecasts, config, tz) {
@@ -1022,6 +1029,11 @@ class UI {
     }
     unitToUnicode(unit) {
         return unit == "fahrenheit" ? '\u2109' : '\u2103';
+    }
+    BigDistanceUnitFor(unit) {
+        if (unit == "imperial")
+            return _("mi");
+        return _("km");
     }
     destroyCurrentWeather() {
         if (this._currentWeather.get_child() != null)

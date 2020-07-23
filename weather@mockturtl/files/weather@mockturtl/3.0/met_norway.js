@@ -74,7 +74,7 @@ var MetNorway = (function () {
                 switch (_a.label) {
                     case 0:
                         query = this.GetUrl(loc);
-                        if (!(query != "" && query != null)) return [3, 6];
+                        if (!(query != "" && query != null)) return [3, 5];
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
@@ -93,9 +93,8 @@ var MetNorway = (function () {
                             this.app.log.Error("MET Norway: Empty response from API");
                             return [2, null];
                         }
-                        return [4, this.ParseWeather(json)];
-                    case 5: return [2, _a.sent()];
-                    case 6: return [2, null];
+                        return [2, this.ParseWeather(json)];
+                    case 5: return [2, null];
                 }
             });
         });

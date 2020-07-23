@@ -300,7 +300,8 @@ var MetUk = (function () {
                     city: null,
                     country: null,
                     url: null,
-                    timeZone: null
+                    timeZone: null,
+                    distanceFrom: this.observationSites[0].dist
                 },
                 date: new Date(json[0].SiteRep.DV.dataDate),
                 sunrise: times.sunrise,

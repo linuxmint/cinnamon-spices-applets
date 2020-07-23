@@ -209,7 +209,8 @@ class USWeather {
                     city: null,
                     country: null,
                     url: "https://forecast.weather.gov/MapClick.php?lat=" + this.currentLoc.lat.toString() + "&lon=" + this.currentLoc.lon.toString(),
-                    timeZone: this.observationStations[0].properties.timeZone
+                    timeZone: this.observationStations[0].properties.timeZone,
+                    distanceFrom: this.observationStations[0].dist
                 },
                 date: timestamp,
                 sunrise: times.sunrise,
