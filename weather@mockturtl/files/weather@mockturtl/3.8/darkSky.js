@@ -45,10 +45,10 @@ class DarkSky {
         let json;
         if (query != "" && query != null) {
             try {
-                json = await this.app.LoadJsonAsync(query);
+                json = await this.app.LoadJsonAsync(query, this.OnObtainingData);
             }
             catch (e) {
-                this.app.HandleHTTPError("darksky", e, this.app, this.HandleHTTPError);
+                this.app.HandleHTTPError("darksky", e, this.app);
                 return null;
             }
             if (!json) {
@@ -168,13 +168,33 @@ class DarkSky {
             });
             return "";
         }
-        query = this.query + key + "/" + loc.text +
-            "?exclude=minutely,flags" + "&units=" + this.unit;
+        query = this.query + key + "/" + loc.text + "?exclude=minutely,flags" + "&units=" + this.unit;
         let locale = this.ConvertToAPILocale(this.app.currentLocale);
         if (isLangSupported(locale, this.supportedLanguages) && this.app.config._translateCondition) {
             query = query + "&lang=" + locale;
         }
         return query;
+    }
+    OnObtainingData(message) {
+        if (message.status_code == 403) {
+            return {
+                type: "hard",
+                userError: true,
+                detail: "bad key",
+                service: "darksky",
+                message: _("Please Make sure you\nentered the API key correctly and your account is not locked")
+            };
+        }
+        if (message.status_code == 401) {
+            return {
+                type: "hard",
+                userError: true,
+                detail: "no key",
+                service: "darksky",
+                message: _("Please Make sure you\nentered the API key what you have from DarkSky")
+            };
+        }
+        return null;
     }
     HandleResponseErrors(json) {
         let code = json.code;
@@ -191,21 +211,6 @@ class DarkSky {
         }
     }
     ;
-    HandleHTTPError(error, uiError) {
-        if (error.code == 403) {
-            uiError.detail = "bad key";
-            uiError.message = _("Please Make sure you\nentered the API key correctly and your account is not locked");
-            uiError.type = "hard";
-            uiError.userError = true;
-        }
-        if (error.code == 401) {
-            uiError.detail = "no key";
-            uiError.message = _("Please Make sure you\nentered the API key what you have from DarkSky");
-            uiError.type = "hard";
-            uiError.userError = true;
-        }
-        return uiError;
-    }
     ProcessSummary(summary) {
         let processed = summary.split(" ");
         let result = "";

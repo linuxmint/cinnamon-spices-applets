@@ -113,7 +113,7 @@ var Weatherbit = (function () {
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
-                        return [4, this.app.LoadJsonAsync(query)];
+                        return [4, this.app.LoadJsonAsync(query, this.OnObtainingData)];
                     case 2:
                         json = _a.sent();
                         return [3, 4];
@@ -124,7 +124,7 @@ var Weatherbit = (function () {
                             this.hourlyAccess = false;
                             return [2, null];
                         }
-                        this.app.HandleHTTPError("weatherbit", e_1, this.app, this.HandleHTTPError);
+                        this.app.HandleHTTPError("weatherbit", e_1, this.app);
                         return [2, null];
                     case 4:
                         if (json == null) {
@@ -294,14 +294,17 @@ var Weatherbit = (function () {
         return query;
     };
     ;
-    Weatherbit.prototype.HandleHTTPError = function (error, uiError) {
-        if (error.code == 403) {
-            uiError.detail = "bad key";
-            uiError.message = _("Please Make sure you\nentered the API key correctly and your account is not locked");
-            uiError.type = "hard";
-            uiError.userError = true;
+    Weatherbit.prototype.OnObtainingData = function (message) {
+        if (message.status_code == 403) {
+            return {
+                type: "hard",
+                userError: true,
+                detail: "bad key",
+                service: "weatherbit",
+                message: _("Please Make sure you\nentered the API key correctly and your account is not locked")
+            };
         }
-        return uiError;
+        return null;
     };
     Weatherbit.prototype.ResolveIcon = function (icon) {
         switch (icon) {

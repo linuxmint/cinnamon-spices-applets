@@ -248,14 +248,11 @@ var WeatherApplet = (function (_super) {
                             var message = Message.new('GET', query);
                             _this.log.Debug("URL called: " + query);
                             _this._httpSession.queue_message(message, function (session, message) {
-                                global.log("Message received");
                                 var error = (errorCallback != null) ? errorCallback(message) : null;
-                                global.log("errorcallback finished");
                                 if (error != null) {
-                                    global.log("there is an error, " + JSON.stringify(error, null, 2));
+                                    _this.log.Error("there is an error, " + JSON.stringify(error, null, 2));
                                     _this.HandleError(error);
                                     reject({ code: -1, message: "bad api response", data: null, reason_phrase: null });
-                                    global.log("rejected payload");
                                     return;
                                 }
                                 if (!message) {

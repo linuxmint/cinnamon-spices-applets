@@ -87,13 +87,13 @@ var DarkSky = (function () {
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
-                        return [4, this.app.LoadJsonAsync(query)];
+                        return [4, this.app.LoadJsonAsync(query, this.OnObtainingData)];
                     case 2:
                         json = _a.sent();
                         return [3, 4];
                     case 3:
                         e_1 = _a.sent();
-                        this.app.HandleHTTPError("darksky", e_1, this.app, this.HandleHTTPError);
+                        this.app.HandleHTTPError("darksky", e_1, this.app);
                         return [2, null];
                     case 4:
                         if (!json) {
@@ -216,13 +216,33 @@ var DarkSky = (function () {
             });
             return "";
         }
-        query = this.query + key + "/" + loc.text +
-            "?exclude=minutely,flags" + "&units=" + this.unit;
+        query = this.query + key + "/" + loc.text + "?exclude=minutely,flags" + "&units=" + this.unit;
         var locale = this.ConvertToAPILocale(this.app.currentLocale);
         if (isLangSupported(locale, this.supportedLanguages) && this.app.config._translateCondition) {
             query = query + "&lang=" + locale;
         }
         return query;
+    };
+    DarkSky.prototype.OnObtainingData = function (message) {
+        if (message.status_code == 403) {
+            return {
+                type: "hard",
+                userError: true,
+                detail: "bad key",
+                service: "darksky",
+                message: _("Please Make sure you\nentered the API key correctly and your account is not locked")
+            };
+        }
+        if (message.status_code == 401) {
+            return {
+                type: "hard",
+                userError: true,
+                detail: "no key",
+                service: "darksky",
+                message: _("Please Make sure you\nentered the API key what you have from DarkSky")
+            };
+        }
+        return null;
     };
     DarkSky.prototype.HandleResponseErrors = function (json) {
         var code = json.code;
@@ -239,21 +259,6 @@ var DarkSky = (function () {
         }
     };
     ;
-    DarkSky.prototype.HandleHTTPError = function (error, uiError) {
-        if (error.code == 403) {
-            uiError.detail = "bad key";
-            uiError.message = _("Please Make sure you\nentered the API key correctly and your account is not locked");
-            uiError.type = "hard";
-            uiError.userError = true;
-        }
-        if (error.code == 401) {
-            uiError.detail = "no key";
-            uiError.message = _("Please Make sure you\nentered the API key what you have from DarkSky");
-            uiError.type = "hard";
-            uiError.userError = true;
-        }
-        return uiError;
-    };
     DarkSky.prototype.ProcessSummary = function (summary) {
         var processed = summary.split(" ");
         var result = "";

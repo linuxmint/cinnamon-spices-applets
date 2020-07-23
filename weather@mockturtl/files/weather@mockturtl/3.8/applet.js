@@ -192,14 +192,11 @@ class WeatherApplet extends TextIconApplet {
             let message = Message.new('GET', query);
             this.log.Debug("URL called: " + query);
             this._httpSession.queue_message(message, (session, message) => {
-                global.log("Message received");
                 let error = (errorCallback != null) ? errorCallback(message) : null;
-                global.log("errorcallback finished");
                 if (error != null) {
-                    global.log("there is an error, " + JSON.stringify(error, null, 2));
+                    this.log.Error("there is an error, " + JSON.stringify(error, null, 2));
                     this.HandleError(error);
                     reject({ code: -1, message: "bad api response", data: null, reason_phrase: null });
-                    global.log("rejected payload");
                     return;
                 }
                 if (!message) {

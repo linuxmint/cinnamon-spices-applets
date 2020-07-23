@@ -26,7 +26,6 @@ class Climacell {
         this.maxForecastSupport = 16;
         this.website = "https://www.climacell.co/";
         this.maxHourlyForecastSupport = 96;
-        this.supportedLanguages = [];
         this.baseUrl = "https://api.climacell.co/v3/weather/";
         this.callData = {
             current: {
@@ -59,7 +58,7 @@ class Climacell {
         let json;
         if (query != null) {
             try {
-                json = await this.app.LoadJsonAsync(query);
+                json = await this.app.LoadJsonAsync(query, this.OnObtainingData);
             }
             catch (e) {
                 this.app.HandleHTTPError("climacell", e, this.app, null);
@@ -170,10 +169,30 @@ class Climacell {
             return null;
         }
         query = this.baseUrl + this.callData[subcall].url + "?apikey=" + key + "&lat=" + loc.lat + "&lon=" + loc.lon + "&unit_system=" + this.unit + "&fields=" + this.callData[subcall].required_fields.join();
-        global.log(query);
         return query;
     }
     ;
+    OnObtainingData(message) {
+        if (message.status_code == 403) {
+            return {
+                type: "hard",
+                userError: true,
+                detail: "bad key",
+                service: "darksky",
+                message: _("Please Make sure you\nentered the API key correctly and your account is not locked")
+            };
+        }
+        if (message.status_code == 401) {
+            return {
+                type: "hard",
+                userError: true,
+                detail: "no key",
+                service: "darksky",
+                message: _("Please Make sure you\nentered the API key what you have from DarkSky")
+            };
+        }
+        return null;
+    }
     ResolveCondition(condition, isNight = false) {
         switch (condition) {
             case ("rain_heavy"):

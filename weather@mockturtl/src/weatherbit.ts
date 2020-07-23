@@ -86,7 +86,7 @@ class Weatherbit implements WeatherProvider {
         let json;
         if (query != null) {
             try {
-                json = await this.app.LoadJsonAsync(query);
+                json = await this.app.LoadJsonAsync(query, this.OnObtainingData);
             }
             catch(e) {
 				// Skip Hourly forecast if it is forbidden (403)
@@ -95,7 +95,7 @@ class Weatherbit implements WeatherProvider {
 					this.hourlyAccess = false;
 					return null;
 				}
-              	this.app.HandleHTTPError("weatherbit", e, this.app, this.HandleHTTPError);
+              	this.app.HandleHTTPError("weatherbit", e, this.app);
             	return null;
             }
 
@@ -285,15 +285,22 @@ class Weatherbit implements WeatherProvider {
 		return query;
     };
 
-    /** Handles API Scpecific HTTP errors  */
-    public HandleHTTPError(error: HttpError, uiError: AppletError): AppletError {
-        if (error.code == 403) {
-            uiError.detail = "bad key"
-            uiError.message = _("Please Make sure you\nentered the API key correctly and your account is not locked");
-            uiError.type = "hard";
-            uiError.userError = true;
+     /**
+     * 
+     * @param message Soup Message object
+     * @returns null if custom error checking does not find anything
+     */
+    private OnObtainingData(message: any): AppletError {
+        if (message.status_code == 403) { // bad key
+            return {
+                type: "hard",
+                userError: true,
+                detail: "bad key",
+                service: "weatherbit",
+                message: _("Please Make sure you\nentered the API key correctly and your account is not locked")
+            };
         }
-        return uiError;
+        return null;
     }
 
     private ResolveIcon(icon: string): BuiltinIcons[] {

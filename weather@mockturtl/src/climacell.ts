@@ -43,8 +43,6 @@ class Climacell implements WeatherProvider {
     public readonly website = "https://www.climacell.co/";
     public readonly maxHourlyForecastSupport = 96;
 
-    private supportedLanguages: string[] = [];
-
     private baseUrl = "https://api.climacell.co/v3/weather/";
     private callData: CallDict = {
         current: {
@@ -93,7 +91,7 @@ class Climacell implements WeatherProvider {
         let json;
         if (query != null) {
             try {
-                json = await this.app.LoadJsonAsync(query);
+                json = await this.app.LoadJsonAsync(query, this.OnObtainingData);
             }
             catch(e) {
               	this.app.HandleHTTPError("climacell", e, this.app, null);
@@ -210,9 +208,35 @@ class Climacell implements WeatherProvider {
             return null;
         }
 		query = this.baseUrl + this.callData[subcall].url + "?apikey=" + key + "&lat=" + loc.lat + "&lon=" + loc.lon + "&unit_system=" + this.unit + "&fields=" +  this.callData[subcall].required_fields.join();
-		global.log(query)
 		return query;
     };
+
+     /**
+     * 
+     * @param message Soup Message object
+     * @returns null if custom error checking does not find anything
+     */
+    private OnObtainingData(message: any): AppletError {
+        if (message.status_code == 403) { // DarkSky returns auth error on the http level when key is wrong
+            return {
+                type: "hard",
+                userError: true,
+                detail: "bad key",
+                service: "darksky",
+                message: _("Please Make sure you\nentered the API key correctly and your account is not locked")
+            };
+        }
+        if (message.status_code == 401) { // DarkSky returns auth error on the http level when key is wrong
+            return {
+                type: "hard",
+                userError: true,
+                detail: "no key",
+                service: "darksky",
+                message: _("Please Make sure you\nentered the API key what you have from DarkSky")
+            };
+        }
+        return null;
+    }
 
     private ResolveCondition(condition: string, isNight: boolean = false): Condition {
         switch(condition) {

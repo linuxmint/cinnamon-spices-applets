@@ -1,5 +1,4 @@
 //TODO: Do changelog
-//TODO: Add Add stuff to readme about US weather and MET office
 //TODO: do 3.0 settings schema as well
 //TODO: Update language template
 
@@ -260,6 +259,7 @@ class WeatherApplet extends TextIconApplet {
 	 * Handles obtaining JSON over http. 
 	 * returns HTTPError object on fail.
 	 * @param query fully constructed url
+	 * @param errorCallback do checking before generic error checking by this function, to display API specific UI errors
 	 */
 	public async LoadJsonAsync(query: string, errorCallback?: (message: any) => AppletError): Promise <any> {
 		let json = await new Promise((resolve: any, reject: any) => {
@@ -267,14 +267,11 @@ class WeatherApplet extends TextIconApplet {
 			this.log.Debug("URL called: " + query);
 			this._httpSession.queue_message(message, (session: any, message: any) => {
 				// option for provider to inject errors before general error handling
-				global.log("Message received")
 				let error: AppletError = (errorCallback != null) ? errorCallback(message) : null;
-				global.log("errorcallback finished")
 				if (error != null) {
-					global.log("there is an error, " + JSON.stringify(error, null, 2))
+					this.log.Error("there is an error, " + JSON.stringify(error, null, 2))
 					this.HandleError(error);
 					reject({code: -1, message: "bad api response", data: null, reason_phrase: null} as HttpError);
-					global.log("rejected payload")
 					return;
 				}
 

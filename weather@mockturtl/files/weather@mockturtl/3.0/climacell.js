@@ -62,7 +62,6 @@ var Climacell = (function () {
         this.maxForecastSupport = 16;
         this.website = "https://www.climacell.co/";
         this.maxHourlyForecastSupport = 96;
-        this.supportedLanguages = [];
         this.baseUrl = "https://api.climacell.co/v3/weather/";
         this.callData = {
             current: {
@@ -117,7 +116,7 @@ var Climacell = (function () {
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
-                        return [4, this.app.LoadJsonAsync(query)];
+                        return [4, this.app.LoadJsonAsync(query, this.OnObtainingData)];
                     case 2:
                         json = _a.sent();
                         return [3, 4];
@@ -231,10 +230,30 @@ var Climacell = (function () {
             return null;
         }
         query = this.baseUrl + this.callData[subcall].url + "?apikey=" + key + "&lat=" + loc.lat + "&lon=" + loc.lon + "&unit_system=" + this.unit + "&fields=" + this.callData[subcall].required_fields.join();
-        global.log(query);
         return query;
     };
     ;
+    Climacell.prototype.OnObtainingData = function (message) {
+        if (message.status_code == 403) {
+            return {
+                type: "hard",
+                userError: true,
+                detail: "bad key",
+                service: "darksky",
+                message: _("Please Make sure you\nentered the API key correctly and your account is not locked")
+            };
+        }
+        if (message.status_code == 401) {
+            return {
+                type: "hard",
+                userError: true,
+                detail: "no key",
+                service: "darksky",
+                message: _("Please Make sure you\nentered the API key what you have from DarkSky")
+            };
+        }
+        return null;
+    };
     Climacell.prototype.ResolveCondition = function (condition, isNight) {
         if (isNight === void 0) { isNight = false; }
         switch (condition) {

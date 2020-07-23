@@ -57,7 +57,7 @@ class Weatherbit {
         let json;
         if (query != null) {
             try {
-                json = await this.app.LoadJsonAsync(query);
+                json = await this.app.LoadJsonAsync(query, this.OnObtainingData);
             }
             catch (e) {
                 if (GetFuncName(ParseFunction) == GetFuncName(this.ParseHourlyForecast) && e.code == 403) {
@@ -65,7 +65,7 @@ class Weatherbit {
                     this.hourlyAccess = false;
                     return null;
                 }
-                this.app.HandleHTTPError("weatherbit", e, this.app, this.HandleHTTPError);
+                this.app.HandleHTTPError("weatherbit", e, this.app);
                 return null;
             }
             if (json == null) {
@@ -235,14 +235,17 @@ class Weatherbit {
         return query;
     }
     ;
-    HandleHTTPError(error, uiError) {
-        if (error.code == 403) {
-            uiError.detail = "bad key";
-            uiError.message = _("Please Make sure you\nentered the API key correctly and your account is not locked");
-            uiError.type = "hard";
-            uiError.userError = true;
+    OnObtainingData(message) {
+        if (message.status_code == 403) {
+            return {
+                type: "hard",
+                userError: true,
+                detail: "bad key",
+                service: "weatherbit",
+                message: _("Please Make sure you\nentered the API key correctly and your account is not locked")
+            };
         }
-        return uiError;
+        return null;
     }
     ResolveIcon(icon) {
         switch (icon) {

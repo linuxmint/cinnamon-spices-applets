@@ -75,7 +75,7 @@ class MetNorway {
         }
         if (startIndex != -1) {
             this.app.log.Debug("Removing outdated weather information...");
-            global.log(json.properties.timeseries.splice(0, startIndex + 1));
+            json.properties.timeseries.splice(0, startIndex + 1);
         }
         return json;
     }
