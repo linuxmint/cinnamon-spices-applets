@@ -994,7 +994,7 @@ class UI {
         this._timestamp.text = _("As of") + " " + AwareDateString(weather.date, this.app.currentLocale, config._show24Hours);
         if (weather.location.distanceFrom != null) {
             this._timestamp.text += (", " + MetretoUserUnits(weather.location.distanceFrom, this.app.config._distanceUnit)
-                + " " + this.BigDistanceUnitFor(this.app.config._distanceUnit) + _("from you"));
+                + this.BigDistanceUnitFor(this.app.config._distanceUnit) + " " + _("from you"));
         }
         return true;
     }

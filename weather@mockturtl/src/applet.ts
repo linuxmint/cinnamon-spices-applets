@@ -1322,7 +1322,7 @@ class UI {
 		if (weather.location.distanceFrom != null) {
 			this._timestamp.text += (
 				", " + MetretoUserUnits(weather.location.distanceFrom, this.app.config._distanceUnit) 
-				+ " " + this.BigDistanceUnitFor(this.app.config._distanceUnit) + _("from you")
+				+ this.BigDistanceUnitFor(this.app.config._distanceUnit) + " " + _("from you")
 			);
 		}
 		return true;
