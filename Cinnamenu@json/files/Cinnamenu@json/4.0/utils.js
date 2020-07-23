@@ -14,7 +14,6 @@ const ApplicationType = {
     _places: 1,
     _recent: 2,
     _providers: 3,
-    //_completions: 4,
 };
 const AppTypes = Object.keys(ApplicationType);
 
@@ -96,7 +95,7 @@ class ShowTooltip {
         let monitor = Main.layoutManager.findMonitorForActor(this.actor);
         let tooltipLeft = this.xpos;
         if (this.center_x) {
-            tooltipLeft -= Math.floor(tooltipWidth / 2);
+            tooltipLeft -= Math.floor(tooltipWidth / 3);
         }
         tooltipLeft = Math.max(tooltipLeft, monitor.x);
         tooltipLeft = Math.min(tooltipLeft, monitor.x + monitor.width - tooltipWidth);
@@ -185,7 +184,7 @@ const searchStr = function (q, str) {
             }
             let score = Math.min(longest.length / q2.length, 1.0) * bigrams_score;
             if (SEARCH_DEBUG) {
-                markup += ':'+score+":"+bigrams_score;
+                markup += ':'+score+':'+bigrams_score;
             }
             return {score: score, result: markup};
         } else {
@@ -195,8 +194,8 @@ const searchStr = function (q, str) {
     //return result of substring match
     if (highlightMatch) {
         const foundposition = str2.indexOf(q2);
-        const markup = str.slice(0, foundposition) + "<b>" +
-                                    str.slice(foundposition, foundposition + q.length) + "</b>" +
+        const markup = str.slice(0, foundposition) + '<b>' +
+                                    str.slice(foundposition, foundposition + q.length) + '</b>' +
                                                     str.slice(foundposition + q.length, str.length);
         return {score: score, result: markup};
     } else {

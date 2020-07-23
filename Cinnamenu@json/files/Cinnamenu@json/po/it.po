@@ -3,8 +3,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cinnamenu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-15 12:39+0100\n"
-"PO-Revision-Date: 2020-07-15 15:25+0100\n"
+"POT-Creation-Date: 2020-07-17 12:34+0100\n"
+"PO-Revision-Date: 2020-07-18 23:10+0100\n"
 "Last-Translator: Livedevelop Live User <mortaromarcello@gmail.com>\n"
 "Language-Team: \n"
 "Language: it\n"
@@ -15,156 +15,148 @@ msgstr ""
 "X-Generator: Poedit 2.3.1\n"
 "X-Project-Style: gnome\n"
 
-#: 3.2/applet.js:92 4.0/applet.js:40
+#. 3.2 4.0
 msgid "Type to search..."
 msgstr "Ricerca..."
 
-#: 3.2/applet.js:157 4.0/applet.js:50
+#. 3.2 4.0
 msgid "Initializing"
 msgstr "Inizializzazione"
 
-#: 3.2/applet.js:284 4.0/buttons.js:26
+#. 3.2 4.0
 msgid "No description available"
 msgstr "Nessuna descrizione disponibile"
 
-#: 3.2/applet.js:977 4.0/applet.js:715
+#. 3.2 4.0
 msgid "All Applications"
 msgstr "Tutte le applicazioni"
 
-#: 3.2/applet.js:1015 4.0/applet.js:756
+#. 3.2 4.0
 msgid "Places"
 msgstr "Posizioni"
 
-#: 3.2/applet.js:1016 4.0/applet.js:757
+#. 3.2 4.0
 msgid "Recent Files"
 msgstr "Recenti"
 
-#: 3.2/applet.js:1017 4.0/applet.js:758
+#. 3.2 4.0
 msgid "Bookmarks"
 msgstr "Segnalibri"
 
-#: 3.2/applet.js:1018 4.0/applet.js:759
+#. 3.2 4.0
 msgid "Favorite Apps"
 msgstr "App Preferite"
 
-#: 3.2/applet.js:1351 4.0/applet.js:1072
+#. 3.2 4.0
 msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
 msgstr ""
 "Il pacchetto gir1.2-gda-5.0 è richiesto per i segnalibri di Firefox e di "
 "Midori."
 
-#: 3.2/applet.js:1415 4.0/applet.js:1121
+#. 3.2 4.0
 msgid "Clear List"
 msgstr "Svuota Elenco"
 
-#: 3.2/applet.js:1426 4.0/applet.js:1128
+#. 3.2 4.0
 msgid "No recent documents"
 msgstr "Nessun documento recente"
 
-#: 3.2/applet.js:2278
+#. 3.2
 msgid "Account details"
 msgstr "Dettagli account"
 
-#: 3.2/applet.js:2285 3.2/buttons.js:1260
+#. 3.2 3.2
 msgid "Grid View"
 msgstr "Vista griglia"
 
-#: 3.2/applet.js:2285 3.2/buttons.js:1254
+#. 3.2 3.2
 msgid "List View"
 msgstr "Vista ad elenco"
 
-#: 3.2/applet.js:2286 3.2/buttons.js:1261
+#. 3.2 3.2
 msgid "Switch to grid view"
 msgstr "Passa alla vista a griglia"
 
-#: 3.2/applet.js:2286 3.2/buttons.js:1255
+#. 3.2 3.2
 msgid "Switch to list view"
 msgstr "Passa alla vista ad elenco"
 
-#: 3.2/applet.js:2292 4.0/applet.js:2092
+#. 3.2 4.0
 msgid "Lock Screen"
 msgstr "Blocca schermo"
 
-#: 3.2/applet.js:2293 4.0/applet.js:2093
+#. 3.2 4.0
 msgid "Lock the screen"
 msgstr "Blocca lo schermo"
 
-#: 3.2/applet.js:2314 4.0/applet.js:2108
+#. 3.2 4.0
 msgid "Logout"
 msgstr "Logout"
 
-#: 3.2/applet.js:2315 4.0/applet.js:2109
+#. 3.2 4.0
 msgid "Leave the session"
 msgstr "Esce dalla sessione"
 
-#: 3.2/applet.js:2322 4.0/applet.js:2112
+#. 3.2 4.0
 msgid "Quit"
 msgstr "Esci"
 
-#: 3.2/applet.js:2323 4.0/applet.js:2113
+#. 3.2 4.0
 msgid "Shutdown the computer"
 msgstr "Spegni il computer"
 
-#: 3.2/placeDisplay.js:146 4.0/placeDisplay.js:102
+#. 3.2 4.0
 msgid "Home"
 msgstr "Home"
 
-#: 3.2/placeDisplay.js:220 4.0/placeDisplay.js:144
+#. 3.2 4.0
 msgid "Computer"
 msgstr "Computer"
 
-#: 3.2/placeDisplay.js:224 4.0/placeDisplay.js:146
+#. 3.2 4.0
 msgid "Browse network"
 msgstr "Esplora rete"
 
-#: 3.2/buttons.js:1045 3.2/buttons.js:1047 4.0/buttons.js:836
-#: 4.0/buttons.js:839
+#. 3.2 4.0
 msgid "Run with NVIDIA GPU"
 msgstr "Esegui con GPU NVIDIA"
 
-#: 3.2/buttons.js:1049 4.0/buttons.js:842
+#. 3.2 4.0
 msgid "Add to panel"
 msgstr "Aggiungi al pannello"
 
-#: 3.2/buttons.js:1051 4.0/buttons.js:845
+#. 3.2 4.0
 msgid "Add to desktop"
 msgstr "Aggiungi al desktop"
 
-#: 3.2/buttons.js:1054 4.0/buttons.js:849
-#, fuzzy
-#| msgid "Remove from favorites"
+#. 3.2 4.0
 msgid "Remove favorite"
-msgstr "Rimuovi dai preferiti"
+msgstr "Rimuovi preferito"
 
-#: 3.2/buttons.js:1056 4.0/buttons.js:852
+#. 3.2 4.0
 msgid "Add to favorites"
 msgstr "Aggiungi ai preferiti"
 
-#: 3.2/buttons.js:1059 4.0/buttons.js:856
+#. 3.2 4.0
 msgid "Uninstall"
 msgstr "Disinstalla"
 
-#: 4.0/applet.js:233 4.0/applet.js:1230
+#. 4.0 4.0
 msgid "Please wait..."
 msgstr ""
 
 #. metadata.json->name
-#. 3.2->settings-schema.json->cinnamenuProvidersSection->title
+#. 3.2
 msgid "Cinnamenu"
 msgstr "Cinnamenu"
 
 #. metadata.json->description
-#, fuzzy
-#| msgid ""
-#| "A flexible menu providing formatting options, web bookmarks, open window "
-#| "lookup, and search provider support with fuzzy searching."
 msgid ""
 "A flexible menu providing formatting options, web bookmarks, search provider "
 "support and fuzzy searching."
 msgstr ""
-"Un menù flessibile che offre opzioni di formattazione, segnalibri Web, "
-"ricerca a finestra aperta e supporto del provider di ricerca con ricerca "
-"fuzzy."
+"Un menu flessibile che offre opzioni di formattazione, segnalibri Web, "
+"supporto del provider di ricerca e ricerca confusa."
 
 #. metadata.json->comments
 msgid ""
@@ -172,223 +164,161 @@ msgid ""
 "Gnomenu, and the contributors to projects they derived from."
 msgstr ""
 
-#. 3.2->settings-schema.json->panel->title
-#. 4.0->settings-schema.json->behaviour->title
+#. 3.2 4.0
 msgid "Behavior"
 msgstr "Comportamento"
 
-#. 3.2->settings-schema.json->appearance->title
-#. 4.0->settings-schema.json->appearance->title
+#. 3.2 4.0
 msgid "Appearance"
 msgstr "Aspetto"
 
-#. 3.2->settings-schema.json->menu->title
-#. 4.0->settings-schema.json->layout->title
+#. 3.2 4.0
 msgid "Layout and Content"
 msgstr "Layout e Contenuto"
 
-#. 3.2->settings-schema.json->providers->title
+#. 3.2
 msgid "Search Providers"
 msgstr "Provider di Ricerca"
 
-#. 3.2->settings-schema.json->extensionProvidersSection->title
+#. 3.2
 msgid "No search provider extensions found"
 msgstr "Nessuna estensione del provider di ricerca trovata"
 
-#. 3.2->settings-schema.json->panel-appear->title
-#. 3.2->settings-schema.json->panel-behave->title
-#. 4.0->settings-schema.json->panel-behave->title
-#. 4.0->settings-schema.json->panel-appear->title
+#. 3.2 4.0
 msgid "Panel"
 msgstr "Pannello"
 
-#. 3.2->settings-schema.json->menu-behave->title
-#. 3.2->settings-schema.json->menu-icons->title
-#. 4.0->settings-schema.json->menu-icons->title
+#. 3.2 4.0
 msgid "Menu"
 msgstr "Menù"
 
-#. 3.2->settings-schema.json->menu-layout->title
-#. 4.0->settings-schema.json->menu-layout->title
+#. 3.2 4.0
 msgid "Layout"
 msgstr "Layout"
 
-#. 3.2->settings-schema.json->menu-content->title
-#. 4.0->settings-schema.json->menu-content->title
+#. 3.2 4.0
 msgid "Content"
 msgstr "Contenuto"
 
-#. 3.2->settings-schema.json->privacy-settings-button->description
-#. 4.0->settings-schema.json->privacy-settings-button->description
-#, fuzzy
-#| msgid "Recent Files"
+#. 3.2 4.0
 msgid "Recent files settings"
-msgstr "Recenti"
+msgstr "Impostazioni dei file recenti"
 
-#. 3.2->settings-schema.json->menu-editor-button->description
-#. 4.0->settings-schema.json->menu-editor-button->description
+#. 3.2 4.0
 msgid "Open the menu editor"
 msgstr "Apri l'editor del menù"
 
-#. 3.2->settings-schema.json->resetCategoryOrder-button->description
-#. 4.0->settings-schema.json->resetCategoryOrder-button->description
+#. 3.2 4.0
 msgid "Reset category order"
 msgstr "Ripristina l'ordine delle categorie"
 
-#. 3.2->settings-schema.json->menu-icon-custom->description
-#. 4.0->settings-schema.json->menu-icon-custom->description
+#. 3.2 4.0
 msgid "Use a custom icon"
 msgstr "Usa un'icona personalizzata"
 
-#. 3.2->settings-schema.json->menu-icon-custom->tooltip
-#. 4.0->settings-schema.json->menu-icon-custom->tooltip
+#. 3.2 4.0
 #, fuzzy
 #| msgid "Use a custom icon"
 msgid "Use a custom icon in the panel"
 msgstr "Usa un'icona personalizzata"
 
-#. 3.2->settings-schema.json->menu-icon->description
-#. 3.2->settings-schema.json->menu-icon->tooltip
-#. 4.0->settings-schema.json->menu-icon->description
-#. 4.0->settings-schema.json->menu-icon->tooltip
-#, fuzzy
-#| msgid "Panel"
+#. 3.2 4.0
 msgid "Panel icon"
-msgstr "Pannello"
+msgstr "Icona del pannello"
 
-#. 3.2->settings-schema.json->menu-label->description
-#. 4.0->settings-schema.json->menu-label->description
-#, fuzzy
-#| msgid "Panel"
+#. 3.2 4.0
 msgid "Panel text"
-msgstr "Pannello"
+msgstr "Testo del pannello"
 
-#. 3.2->settings-schema.json->menu-label->tooltip
-#. 4.0->settings-schema.json->menu-label->tooltip
-#, fuzzy
-#| msgid "Select an icon to show in the panel."
+#. 3.2 4.0
 msgid "Text to show beside the panel icon"
-msgstr "Seleziona un'icona da mostrare nel pannello."
+msgstr "Testo da mostrare accanto all'icona del pannello"
 
-#. 3.2->settings-schema.json->category-icon-size->units
-#. 3.2->settings-schema.json->apps-list-icon-size->units
-#. 3.2->settings-schema.json->apps-grid-icon-size->units
-#. 4.0->settings-schema.json->category-icon-size->units
-#. 4.0->settings-schema.json->apps-list-icon-size->units
-#. 4.0->settings-schema.json->apps-grid-icon-size->units
+#. 3.2 4.0
 msgid "pixels"
 msgstr "pixels"
 
-#. 3.2->settings-schema.json->category-icon-size->description
-#. 3.2->settings-schema.json->category-icon-size->tooltip
-#. 4.0->settings-schema.json->category-icon-size->description
-#. 4.0->settings-schema.json->category-icon-size->tooltip
+#. 3.2 4.0
 msgid "Category icon size"
 msgstr "Dimensione dell'icona della categoria"
 
-#. 3.2->settings-schema.json->apps-list-icon-size->description
-#. 3.2->settings-schema.json->apps-list-icon-size->tooltip
-#. 4.0->settings-schema.json->apps-list-icon-size->description
-#. 4.0->settings-schema.json->apps-list-icon-size->tooltip
+#. 3.2 4.0
 msgid "Applications list icon size"
 msgstr "Dimensione icona elenco applicazioni"
 
-#. 3.2->settings-schema.json->apps-grid-icon-size->description
-#. 3.2->settings-schema.json->apps-grid-icon-size->tooltip
-#. 4.0->settings-schema.json->apps-grid-icon-size->description
-#. 4.0->settings-schema.json->apps-grid-icon-size->tooltip
+#. 3.2 4.0
 msgid "Applications grid icon size"
 msgstr "Dimensione dell'icona della griglia delle applicazioni"
 
-#. 3.2->settings-schema.json->overlay-key->description
-#. 4.0->settings-schema.json->overlay-key->description
+#. 3.2 4.0
 msgid "Keyboard shortcut to open and close the menu"
 msgstr "Scorciatoia da tastiera per aprire e chiudere il menù"
 
-#. 3.2->settings-schema.json->activate-on-hover->description
-#. 4.0->settings-schema.json->activate-on-hover->description
-#, fuzzy
-#| msgid "Open the menu editor"
+#. 3.2 4.0
 msgid "Open menu on hover"
-msgstr "Apri l'editor del menù"
+msgstr "Apri il menu al passaggio del mouse"
 
-#. 3.2->settings-schema.json->activate-on-hover->tooltip
-#. 4.0->settings-schema.json->activate-on-hover->tooltip
+#. 3.2 4.0
 #, fuzzy
 #| msgid "Open the menu when I move my mouse over it"
 msgid "Open the menu when I move my mouse over the panel icon"
 msgstr "Apri il menù al passaggio del mouse"
 
-#. 3.2->settings-schema.json->hover-delay->units
-#. 3.2->settings-schema.json->tooltip-delay->units
-#. 4.0->settings-schema.json->hover-delay->units
+#. 3.2 4.0
 msgid "milliseconds"
 msgstr "millisecondi"
 
-#. 3.2->settings-schema.json->hover-delay->description
-#. 4.0->settings-schema.json->hover-delay->description
-#, fuzzy
-#| msgid "Menu hover delay:"
+#. 3.2 4.0
 msgid "Menu hover delay"
-msgstr "Ritardo passaggio sul menù:"
+msgstr "Ritardo passaggio sul menù"
 
-#. 3.2->settings-schema.json->enable-animation->description
-#. 4.0->settings-schema.json->enable-animation->description
+#. 3.2 4.0
 msgid "Use menu animations"
 msgstr "Usa animazioni del menù"
 
-#. 3.2->settings-schema.json->enable-animation->tooltip
-#. 4.0->settings-schema.json->enable-animation->tooltip
+#. 3.2 4.0
 #, fuzzy
 #| msgid "Allow the menu to animate on open and close"
 msgid "Animate the menu on open and close"
 msgstr "Consenti al menù di animarsi all'apertura e alla chiusura"
 
-#. 3.2->settings-schema.json->category-click->description
-#. 4.0->settings-schema.json->category-click->description
+#. 3.2 4.0
 msgid "Activate categories on click"
 msgstr "Attiva le categorie al clic"
 
-#. 3.2->settings-schema.json->category-click->tooltip
-#. 4.0->settings-schema.json->category-click->tooltip
+#. 3.2 4.0
 #, fuzzy
 #| msgid "Activate categories on click"
 msgid "Activate categories on click instead of on hover"
 msgstr "Attiva le categorie al clic"
 
-#. 3.2->settings-schema.json->enable-autoscroll->description
-#. 4.0->settings-schema.json->enable-autoscroll->description
+#. 3.2 4.0
 #, fuzzy
 #| msgid "Enable autoscrolling in application list"
 msgid "Enable autoscrolling"
 msgstr "Abilita scorrimento automatico nell'elenco delle applicazioni"
 
-#. 3.2->settings-schema.json->enable-autoscroll->tooltip
-#. 4.0->settings-schema.json->enable-autoscroll->tooltip
+#. 3.2 4.0
 msgid "Enable autoscrolling in application list"
 msgstr "Abilita scorrimento automatico nell'elenco delle applicazioni"
 
-#. 3.2->settings-schema.json->enable-bookmarks->description
-#. 4.0->settings-schema.json->enable-bookmarks->description
+#. 3.2 4.0
 msgid "Show web bookmarks"
 msgstr "Mostra segnalibri Web"
 
-#. 3.2->settings-schema.json->enable-bookmarks->tooltip
-#. 4.0->settings-schema.json->enable-bookmarks->tooltip
+#. 3.2 4.0
 msgid "Show your browser's web bookmarks in the menu"
 msgstr ""
 
-#. 3.2->settings-schema.json->enable-windows->description
+#. 3.2
 msgid "Enable searching of open windows"
 msgstr "Abilita la ricerca di finestre aperte"
 
-#. 3.2->settings-schema.json->enable-search-providers->description
-#. 4.0->settings-schema.json->enable-search-providers->description
+#. 3.2 4.0
 msgid "Enable search providers"
 msgstr "Abilita i provider di ricerca"
 
-#. 3.2->settings-schema.json->enable-search-providers->tooltip
-#. 4.0->settings-schema.json->enable-search-providers->tooltip
+#. 3.2 4.0
 #, fuzzy
 #| msgid ""
 #| "Choose whether or not search provider results are indexed in menu "
@@ -398,169 +328,129 @@ msgstr ""
 "Scegliere se indicizzare o meno i risultati del provider di ricerca nelle "
 "ricerche di menù."
 
-#. 3.2->settings-schema.json->get-providers->description
-#. 4.0->settings-schema.json->get-providers->description
+#. 3.2 4.0
 msgid "Example Search Providers"
 msgstr "Provider di Ricerca di Esempio"
 
-#. 3.2->settings-schema.json->startup-view-mode->description
-#. 3.2->settings-schema.json->startup-view-mode->tooltip
+#. 3.2
 msgid "Startup applications view mode"
 msgstr "Modalità di visualizzazione delle applicazioni di avvio"
 
-#. 3.2->settings-schema.json->startup-view-mode->options
-#. 4.0->settings-schema.json->applications-view-mode->options
+#. 3.2 4.0
 msgid "List"
 msgstr "Elenco"
 
-#. 3.2->settings-schema.json->startup-view-mode->options
-#. 4.0->settings-schema.json->applications-view-mode->options
+#. 3.2 4.0
 msgid "Grid"
 msgstr "Griglia"
 
-#. 3.2->settings-schema.json->apps-grid-column-count->units
-#. 4.0->settings-schema.json->apps-grid-column-count->units
+#. 3.2 4.0
 msgid "columns"
 msgstr "colonne"
 
-#. 3.2->settings-schema.json->apps-grid-column-count->description
-#. 3.2->settings-schema.json->apps-grid-column-count->tooltip
-#. 4.0->settings-schema.json->apps-grid-column-count->description
-#. 4.0->settings-schema.json->apps-grid-column-count->tooltip
+#. 3.2 4.0
 msgid "Number of columns in apps grid"
 msgstr "Numero di colonne nella griglia delle app"
 
-#. 3.2->settings-schema.json->show-places->description
-#. 4.0->settings-schema.json->show-places->description
+#. 3.2 4.0
 msgid "Show bookmarks and places"
 msgstr "Mostra segnalibri e luoghi"
 
-#. 3.2->settings-schema.json->show-places->tooltip
-#. 4.0->settings-schema.json->show-places->tooltip
+#. 3.2 4.0
 #, fuzzy
 #| msgid "Show bookmarks and places"
 msgid "Show bookmarks and places category in the menu"
 msgstr "Mostra segnalibri e luoghi"
 
-#. 3.2->settings-schema.json->show-application-icons->description
-#. 3.2->settings-schema.json->show-application-icons->tooltip
-#. 4.0->settings-schema.json->show-application-icons->description
-#. 4.0->settings-schema.json->show-application-icons->tooltip
+#. 3.2 4.0
 msgid "Show application icons"
 msgstr "Mostra le icone delle applicazioni"
 
-#. 3.2->settings-schema.json->show-category-icons->description
-#. 3.2->settings-schema.json->show-category-icons->tooltip
-#. 4.0->settings-schema.json->show-category-icons->description
-#. 4.0->settings-schema.json->show-category-icons->tooltip
+#. 3.2 4.0
 msgid "Show category icons"
 msgstr "Mostra le icone di categoria"
 
-#. 3.2->settings-schema.json->show-apps-description-on-buttons->description
-#. 3.2->settings-schema.json->show-apps-description-on-buttons->tooltip
+#. 3.2
 msgid "Show application descriptions under titles"
 msgstr "Mostra le descrizioni delle applicazioni sotto i titoli"
 
-#. 3.2->settings-schema.json->show-tooltips->description
-#. 3.2->settings-schema.json->show-tooltips->tooltip
+#. 3.2
 msgid "Show tooltips"
 msgstr "Mostra suggerimenti"
 
-#. 3.2->settings-schema.json->tooltip-delay->description
-#. 3.2->settings-schema.json->tooltip-delay->tooltip
+#. 3.2
 msgid "Tooltip delay"
 msgstr "Ritardo dei suggerimenti"
 
-#. 3.2->settings-schema.json->enable-custom-menu-height->description
-#. 3.2->settings-schema.json->enable-custom-menu-height->tooltip
-#. 4.0->settings-schema.json->enable-custom-menu-height->description
-#. 4.0->settings-schema.json->enable-custom-menu-height->tooltip
+#. 3.2 4.0
 msgid "Use a custom menu height"
 msgstr "Usa un'altezza del menù personalizzata"
 
-#. 3.2->settings-schema.json->custom-menu-height->units
-#. 4.0->settings-schema.json->custom-menu-height->units
+#. 3.2 4.0
 msgid "px"
 msgstr "px"
 
-#. 3.2->settings-schema.json->custom-menu-height->description
-#. 3.2->settings-schema.json->custom-menu-height->tooltip
-#. 4.0->settings-schema.json->custom-menu-height->description
-#. 4.0->settings-schema.json->custom-menu-height->tooltip
+#. 3.2 4.0
 msgid "Custom menu height"
 msgstr "Altezza menù personalizzata"
 
-#. 4.0->settings-schema.json->applications-view-mode->description
-#, fuzzy
-#| msgid "Startup applications view mode"
+#. 4.0
 msgid "Applications view mode"
-msgstr "Modalità di visualizzazione delle applicazioni di avvio"
+msgstr "Modalità di visualizzazione applicazioni"
 
-#. 4.0->settings-schema.json->applications-view-mode->tooltip
-#, fuzzy
-#| msgid "Applications list icon size"
+#. 4.0
 msgid "View applications as list or grid"
-msgstr "Dimensione icona elenco applicazioni"
+msgstr "Visualizza le applicazioni come elenco o griglia"
 
-#. 4.0->settings-schema.json->description-placement->description
-#, fuzzy
-#| msgid "Show application descriptions under titles"
+#. 4.0
 msgid "Application description placement"
-msgstr "Mostra le descrizioni delle applicazioni sotto i titoli"
+msgstr "Posizionamento della descrizione dell'applicazione"
 
-#. 4.0->settings-schema.json->description-placement->options
-#, fuzzy
-#| msgid "Show tooltips"
+#. 4.0
 msgid "Tooltips"
-msgstr "Mostra suggerimenti"
+msgstr "Tooltips"
 
-#. 4.0->settings-schema.json->description-placement->options
+#. 4.0
 msgid "Under titles"
 msgstr ""
 
-#. 4.0->settings-schema.json->description-placement->options
+#. 4.0
 msgid "None"
 msgstr ""
 
-#. 4.0->settings-schema.json->description-placement->tooltip
-#, fuzzy
-#| msgid ""
-#| "Choose whether or not to show the application description on the "
-#| "application buttons."
+#. 4.0
 msgid "Choose where to show application descriptions"
-msgstr ""
-"Scegliere se mostrare o meno la descrizione dell'applicazione sui pulsanti "
-"dell'applicazione."
+msgstr "Scegli dove mostrare le descrizioni delle applicazioni"
 
-#. 4.0->settings-schema.json->powergroup-placement->description
+#. 4.0
 msgid "Session buttons location"
 msgstr ""
 
-#. 4.0->settings-schema.json->powergroup-placement->options
+#. 4.0
 msgid "Top"
 msgstr ""
 
-#. 4.0->settings-schema.json->powergroup-placement->options
+#. 4.0
 msgid "Bottom"
 msgstr ""
 
-#. 4.0->settings-schema.json->powergroup-placement->options
+#. 4.0
 msgid "Left"
 msgstr ""
 
-#. 4.0->settings-schema.json->powergroup-placement->options
+#. 4.0
 msgid "Right"
 msgstr ""
 
-#. 4.0->settings-schema.json->powergroup-placement->tooltip
+#. 4.0
 msgid "Choose where to show the session (quit, logout, etc.) buttons"
 msgstr ""
 
-#. 4.0->settings-schema.json->add-favorites->description
+#. 4.0
 msgid "Add favorites to session buttons"
 msgstr ""
 
-#. 4.0->settings-schema.json->add-favorites->tooltip
+#. 4.0
 msgid "Show your favorite app icons next to the session buttons"
 msgstr ""
 

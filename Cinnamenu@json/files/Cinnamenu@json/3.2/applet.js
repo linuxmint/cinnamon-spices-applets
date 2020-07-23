@@ -1423,7 +1423,7 @@ CinnamenuApplet.prototype = {
         type: ApplicationType._recent
       });
     } else if (!pattern) {
-      this.answerText.set_text(_('No recent documents'));
+      this.answerText.set_text(_('No recent files'));
       this.answerText.show();
     }
 
