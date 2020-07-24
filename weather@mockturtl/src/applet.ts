@@ -1,6 +1,4 @@
 //TODO: Do changelog
-//TODO: do 3.0 settings schema as well
-//TODO: Update language template
 
 /**
  * @param path Filename without extension
