@@ -380,6 +380,6 @@
 	},
 	"loc-info": {
 		"type": "label",
-		"description": "You can either use coordinates as {latitude},{longitude},\n or an address, from smallest detail to biggest, like '{house num} {street} {city/town} {postcode} {country}'. All of them are optional, although at least city and country is recommended. You can use commas if you like.\n\nAfter you stop typing the field will be replaced after 3 seconds with the full address, for you to validate if it's correct."
+		"description": "You can either use coordinates as {latitude},{longitude},\n or an address, from smallest detail to biggest, like '{house num} {street} {city/town} {postcode} {country}'. All of them are optional, although at least city and country is recommended. You can use commas if you like.\n\nAdter you stop typing the field will be replaced after 3 seconds with the full address, for you to validate if it's correct."
 	}
 }
