@@ -129,6 +129,15 @@
       "Pa": "Pa"
     }
   },
+  "distanceUnit": {
+		"type": "combobox",
+		"default": "metric",
+		"description": "Distance unit",
+		"options": {
+			"Metric": "metric",
+			"Imperial": "imperial"
+		}
+	},
   "panelSettings": {
     "type": "header",
     "description": "Panel options"
