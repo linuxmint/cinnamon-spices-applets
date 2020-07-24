@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-23 19:48+0200\n"
+"POT-Creation-Date: 2020-07-24 14:49+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -45,36 +45,36 @@ msgstr ""
 msgid "Sunset"
 msgstr ""
 
-#: applet.js:708 3.0/applet.js:1176 3.8/applet.js:1057
+#: applet.js:708 3.0/applet.js:1177 3.8/applet.js:1058
 msgid "Loading current weather ..."
 msgstr ""
 
-#: applet.js:709 3.0/applet.js:1179 3.8/applet.js:1060
+#: applet.js:709 3.0/applet.js:1180 3.8/applet.js:1061
 msgid "Loading future weather ..."
 msgstr ""
 
-#: applet.js:731 3.0/applet.js:1203 3.8/applet.js:1084
+#: applet.js:731 3.0/applet.js:1204 3.8/applet.js:1085
 msgid "Loading ..."
 msgstr ""
 
-#: applet.js:737 3.0/applet.js:229 3.0/applet.js:1193 3.8/applet.js:178
-#: 3.8/applet.js:1074
+#: applet.js:737 3.0/applet.js:229 3.0/applet.js:1194 3.8/applet.js:178
+#: 3.8/applet.js:1075
 msgid "Refresh"
 msgstr ""
 
-#: applet.js:802 3.0/applet.js:1254 3.8/applet.js:1135
+#: applet.js:802 3.0/applet.js:1255 3.8/applet.js:1136
 msgid "Temperature:"
 msgstr ""
 
-#: applet.js:804 3.0/applet.js:1255 3.8/applet.js:1136
+#: applet.js:804 3.0/applet.js:1256 3.8/applet.js:1137
 msgid "Humidity:"
 msgstr ""
 
-#: applet.js:806 3.0/applet.js:1256 3.8/applet.js:1137
+#: applet.js:806 3.0/applet.js:1257 3.8/applet.js:1138
 msgid "Pressure:"
 msgstr ""
 
-#: applet.js:808 3.0/applet.js:1257 3.8/applet.js:1138
+#: applet.js:808 3.0/applet.js:1258 3.8/applet.js:1139
 msgid "Wind:"
 msgstr ""
 
@@ -736,7 +736,7 @@ msgstr ""
 msgid "until"
 msgstr ""
 
-#: 3.0/darkSky.js:75 3.0/applet.js:1135 3.8/darkSky.js:39 3.8/applet.js:1016
+#: 3.0/darkSky.js:75 3.0/applet.js:1136 3.8/darkSky.js:39 3.8/applet.js:1017
 msgid "in"
 msgstr ""
 
@@ -1012,11 +1012,11 @@ msgstr ""
 msgid "Excellent - More than"
 msgstr ""
 
-#: 3.0/met_uk.js:426 3.0/applet.js:1154 3.8/met_uk.js:318 3.8/applet.js:1035
+#: 3.0/met_uk.js:426 3.0/applet.js:1155 3.8/met_uk.js:318 3.8/applet.js:1036
 msgid "mi"
 msgstr ""
 
-#: 3.0/met_uk.js:427 3.0/applet.js:1155 3.8/met_uk.js:319 3.8/applet.js:1036
+#: 3.0/met_uk.js:427 3.0/applet.js:1156 3.8/met_uk.js:319 3.8/applet.js:1037
 msgid "km"
 msgstr ""
 
@@ -1106,49 +1106,49 @@ msgid ""
 "Unexpected Error While Refreshing Weather, please see log in Looking Glass"
 msgstr ""
 
-#: 3.0/applet.js:674 3.8/applet.js:570
+#: 3.0/applet.js:675 3.8/applet.js:571
 msgid ""
 "Could not update weather for a while...\n"
 "are you connected to the internet?"
 msgstr ""
 
-#: 3.0/applet.js:688 3.8/applet.js:584
+#: 3.0/applet.js:689 3.8/applet.js:585
 msgid "Network Error, please check logs in Looking Glass"
 msgstr ""
 
-#: 3.0/applet.js:963 3.0/applet.js:1113 3.8/applet.js:844 3.8/applet.js:994
+#: 3.0/applet.js:964 3.0/applet.js:1114 3.8/applet.js:845 3.8/applet.js:995
 msgid "As of"
 msgstr ""
 
-#: 3.0/applet.js:1085 3.8/applet.js:966
+#: 3.0/applet.js:1086 3.8/applet.js:967
 msgid "Today"
 msgstr ""
 
-#: 3.0/applet.js:1087 3.8/applet.js:968
+#: 3.0/applet.js:1088 3.8/applet.js:969
 msgid "Tomorrow"
 msgstr ""
 
-#: 3.0/applet.js:1111 3.8/applet.js:992
+#: 3.0/applet.js:1112 3.8/applet.js:993
 msgid "Powered by"
 msgstr ""
 
-#: 3.0/applet.js:1116 3.8/applet.js:997
+#: 3.0/applet.js:1117 3.8/applet.js:998
 msgid "from you"
 msgstr ""
 
-#: 3.0/applet.js:1135 3.8/applet.js:1016
+#: 3.0/applet.js:1136 3.8/applet.js:1017
 msgid "mm"
 msgstr ""
 
-#: 3.0/applet.js:1528 3.8/applet.js:1400
+#: 3.0/applet.js:1529 3.8/applet.js:1401
 msgid "Make sure you entered a location or use Automatic location instead"
 msgstr ""
 
-#: 3.0/applet.js:1733 3.8/applet.js:1572
+#: 3.0/applet.js:1734 3.8/applet.js:1573
 msgid "Could not find location based on address, please check if it's right"
 msgstr ""
 
-#: 3.0/applet.js:1755 3.8/applet.js:1594
+#: 3.0/applet.js:1756 3.8/applet.js:1595
 msgid "Failed to call Geolocation API, see Looking Glass for errors."
 msgstr ""
 
@@ -1285,6 +1285,7 @@ msgid "OpenWeatherMap"
 msgstr ""
 
 #. settings-schema.json->location->description
+#. 3.0->settings-schema.json->location->description
 #. 3.8->settings-schema.json->location->description
 msgid "Location"
 msgstr ""
@@ -1300,7 +1301,6 @@ msgid "Setup Location"
 msgstr ""
 
 #. settings-schema.json->getLocation->tooltip
-#. 3.0->settings-schema.json->moreInfo->tooltip
 #. 3.0->settings-schema.json->getLocation->tooltip
 #. 3.8->settings-schema.json->getLocation->tooltip
 msgid "Opens webpage guide"
@@ -1479,6 +1479,7 @@ msgid "Update interval"
 msgstr ""
 
 #. metadata.json->name
+#. 3.0->settings-schema.json->providers->title
 #. 3.8->settings-schema.json->providers->title
 msgid "Weather"
 msgstr ""
@@ -1487,19 +1488,32 @@ msgstr ""
 msgid "View your local weather forecast"
 msgstr ""
 
-#. 3.0->settings-schema.json->head->description
-msgid "Settings for weather@mockturtl 3.0+"
+#. 3.0->settings-schema.json->presentation-section->title
+#. 3.8->settings-schema.json->presentation-section->title
+msgid "Presentation"
 msgstr ""
 
-#. 3.0->settings-schema.json->descriptions->description
-msgid "Weather service information"
+#. 3.0->settings-schema.json->units-section->title
+#. 3.8->settings-schema.json->units-section->title
+msgid "Units and Icons"
 msgstr ""
 
-#. 3.0->settings-schema.json->moreInfo->description
-msgid "Click here for detailed description"
+#. 3.0->settings-schema.json->info-section->title
+#. 3.8->settings-schema.json->info-section->title
+msgid "Help"
 msgstr ""
 
-#. 3.0->settings-schema.json->providerSettings->description
+#. 3.0->settings-schema.json->provider-info->title
+#. 3.8->settings-schema.json->provider-info->title
+msgid "Weather provider choices and details"
+msgstr ""
+
+#. 3.0->settings-schema.json->location-info->title
+#. 3.8->settings-schema.json->location-info->title
+msgid "Entering location manually"
+msgstr ""
+
+#. 3.0->settings-schema.json->provider-options->title
 #. 3.8->settings-schema.json->provider-options->title
 msgid "Weather Provider Options"
 msgstr ""
@@ -1530,7 +1544,13 @@ msgid "Climacell (key needed)"
 msgstr ""
 
 #. 3.0->settings-schema.json->dataService->options
-msgid "Met Office UK"
+#. 3.8->settings-schema.json->dataService->options
+msgid "Met Office UK (UK only)"
+msgstr ""
+
+#. 3.0->settings-schema.json->dataService->options
+#. 3.8->settings-schema.json->dataService->options
+msgid "US National Weather (US only)"
 msgstr ""
 
 #. 3.0->settings-schema.json->apiKey->description
@@ -1554,12 +1574,11 @@ msgstr ""
 msgid "Enable this if your location is not accurate"
 msgstr ""
 
-#. 3.0->settings-schema.json->location->description
-msgid "Location - Coordinates"
-msgstr ""
-
 #. 3.0->settings-schema.json->location->tooltip
-msgid "Acceptable inputs is Latitude,Longtitude"
+#. 3.8->settings-schema.json->location->tooltip
+msgid ""
+"Acceptable inputs are Latitude,Longtitude. e.g.: 68.1932,17.1426 or an address.\n"
+"Waits for 3 seconds after you stop typing then refreshes the weather."
 msgstr ""
 
 #. 3.0->settings-schema.json->getLocation->description
@@ -1577,17 +1596,24 @@ msgstr ""
 msgid "Hourly Forecast length"
 msgstr ""
 
-#. 3.0->settings-schema.json->unitSettings->description
-msgid "Units"
-msgstr ""
-
 #. 3.0->settings-schema.json->windSpeedUnit->options
 #. 3.8->settings-schema.json->windSpeedUnit->options
 msgid "Beaufort"
 msgstr ""
 
-#. 3.0->settings-schema.json->panelSettings->description
-msgid "Panel options"
+#. 3.0->settings-schema.json->distanceUnit->description
+#. 3.8->settings-schema.json->distanceUnit->description
+msgid "Distance unit"
+msgstr ""
+
+#. 3.0->settings-schema.json->distanceUnit->options
+#. 3.8->settings-schema.json->distanceUnit->options
+msgid "Metric"
+msgstr ""
+
+#. 3.0->settings-schema.json->distanceUnit->options
+#. 3.8->settings-schema.json->distanceUnit->options
+msgid "Imperial"
 msgstr ""
 
 #. 3.0->settings-schema.json->showCommentInPanel->tooltip
@@ -1610,11 +1636,6 @@ msgstr ""
 #. 3.0->settings-schema.json->useCustomAppletIcons->description
 #. 3.8->settings-schema.json->useCustomAppletIcons->description
 msgid "Use custom icons on the panel"
-msgstr ""
-
-#. 3.0->settings-schema.json->displaySettings->description
-#. 3.8->settings-schema.json->presentation-section->title
-msgid "Presentation"
 msgstr ""
 
 #. 3.0->settings-schema.json->verticalOrientation->description
@@ -1647,10 +1668,6 @@ msgstr ""
 msgid "Show temperature Russian style"
 msgstr ""
 
-#. 3.0->settings-schema.json->conditionSettings->description
-msgid "Weather Conditions"
-msgstr ""
-
 #. 3.0->settings-schema.json->translateCondition->description
 #. 3.8->settings-schema.json->translateCondition->description
 msgid "Translate conditions"
@@ -1666,12 +1683,14 @@ msgstr ""
 msgid "Currently only used with DarkSky "
 msgstr ""
 
-#. 3.0->settings-schema.json->iconSettings->description
-msgid "Icons"
+#. 3.0->settings-schema.json->useSymbolicIcons->tooltip
+#. 3.8->settings-schema.json->useSymbolicIcons->tooltip
+msgid "Does not apply to custom iconset, it is symbolic by default"
 msgstr ""
 
 #. 3.0->settings-schema.json->useSymbolicIcons->description
-msgid "Use symbolic icons in the applet"
+#. 3.8->settings-schema.json->useSymbolicIcons->description
+msgid "Use symbolic icons throughout the applet"
 msgstr ""
 
 #. 3.0->settings-schema.json->useCustomMenuIcons->description
@@ -1679,60 +1698,80 @@ msgstr ""
 msgid "Use custom icons in the popup menu"
 msgstr ""
 
-#. 3.0->settings-schema.json->credits->description
+#. 3.0->settings-schema.json->openWM->description
 msgid ""
-"powered by: OpenWeatherMap, DarkSky, MET Norway, Weatherbit,\n"
-"Yahoo and ip-api. Big Thanks to OpenWeatherMap for their FOSS support!"
+"OpenWeatherMap:\n"
+"The default, works out of the box.\n"
+"Big Thanks to them supporting free open source projects, like this!\n"
+"Supports 7 forecast days and 48 forecast hours."
 msgstr ""
 
-#. 3.8->settings-schema.json->units-section->title
-msgid "Units and Icons"
-msgstr ""
-
-#. 3.8->settings-schema.json->info-section->title
-msgid "Help"
-msgstr ""
-
-#. 3.8->settings-schema.json->provider-info->title
-msgid "Weather provider choices and details"
-msgstr ""
-
-#. 3.8->settings-schema.json->location-info->title
-msgid "Entering location manually"
-msgstr ""
-
-#. 3.8->settings-schema.json->dataService->options
-msgid "Met Office UK (UK only)"
-msgstr ""
-
-#. 3.8->settings-schema.json->dataService->options
-msgid "US National Weather (US only)"
-msgstr ""
-
-#. 3.8->settings-schema.json->location->tooltip
+#. 3.0->settings-schema.json->darkS->description
 msgid ""
-"Acceptable inputs are Latitude,Longtitude. e.g.: 68.1932,17.1426 or an address.\n"
-"Waits for 3 seconds after you stop typing then refreshes the weather."
+"DarkSky:\n"
+"It doesn't accept new registrations and will be closed in 2021.\n"
+"Supports 8 forecast days and 168 forecast hours."
 msgstr ""
 
-#. 3.8->settings-schema.json->distanceUnit->description
-msgid "Distance unit"
+#. 3.0->settings-schema.json->METN->description
+msgid ""
+"MET Norway:\n"
+"Current weather is shown for the next hour, and the daily forecasts are\n"
+"generated from 6 hour forecasts, so it can look incorrect sometimes.\n"
+"Supports 10 forecast days and 48 forecast hours."
 msgstr ""
 
-#. 3.8->settings-schema.json->distanceUnit->options
-msgid "Metric"
+#. 3.0->settings-schema.json->WB->description
+msgid ""
+"WeatherBit:\n"
+"At least 10 minutes as refresh rate is recommended, since\n"
+"otherwise you might exceed you daily quota. Supports 16 forecast\n"
+"days and 48 forecast hours."
 msgstr ""
 
-#. 3.8->settings-schema.json->distanceUnit->options
-msgid "Imperial"
+#. 3.0->settings-schema.json->Yahoo->description
+msgid ""
+"Yahoo:\n"
+"Requires 'python3-requests-oauthlib' package installed (for Arch\n"
+"based distros 'python-requests-oauthlib'), Updates every 2 hours.\n"
+"Only supports 10 forecast days and no hours."
 msgstr ""
 
-#. 3.8->settings-schema.json->useSymbolicIcons->tooltip
-msgid "Does not apply to custom iconset, it is symbolic by default"
+#. 3.0->settings-schema.json->Climacell->description
+msgid ""
+"Climacell:\n"
+"At least 10 minutes refresh rate is recommended with a\n"
+"free plan. Supports 16 forecast days and 96 forecast hours."
 msgstr ""
 
-#. 3.8->settings-schema.json->useSymbolicIcons->description
-msgid "Use symbolic icons throughout the applet"
+#. 3.0->settings-schema.json->metuk->description
+msgid ""
+"Met Office UK:\n"
+"UK only option. If it does not find a site in 50km range around\n"
+"you it will not show weather. Please let me know if this happens\n"
+"and you live in the UK. Supports 5 days and 36 hours of forecasts.\n"
+"Sometimes it takes 5-8 seconds to load the first time, please be patient."
+msgstr ""
+
+#. 3.0->settings-schema.json->usweather->description
+msgid ""
+"US National Weather Service:\n"
+"US only option. First load can take up to 15-20 seconds,\n"
+"please be patient. Current weather is merged from a max 50km area, if\n"
+"some data is missing from the closest one. Supports 7 days and\n"
+"156 hours of forecasts."
+msgstr ""
+
+#. 3.0->settings-schema.json->loc-info->description
+msgid ""
+"You can either use coordinates as {latitude},{longitude},\n"
+" or an address, from smallest detail to biggest, like\n"
+"'{house num} {street} {city/town} {postcode} {country}'. All of them\n"
+"are optional, although at least city and\n"
+"country is recommended. You can use commas if you like.\n"
+"\n"
+"After you stop typing the field will be replaced after 3 seconds\n"
+"with the full address, for you to validate if it's correct."
 msgstr ""
 
 #. 3.8->settings-schema.json->openWM->description
@@ -1789,5 +1828,5 @@ msgid ""
 "You can either use coordinates as {latitude},{longitude},\n"
 " or an address, from smallest detail to biggest, like '{house num} {street} {city/town} {postcode} {country}'. All of them are optional, although at least city and country is recommended. You can use commas if you like.\n"
 "\n"
-"Adter you stop typing the field will be replaced after 3 seconds with the full address, for you to validate if it's correct."
+"After you stop typing the field will be replaced after 3 seconds with the full address, for you to validate if it's correct."
 msgstr ""
