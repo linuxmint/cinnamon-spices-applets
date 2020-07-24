@@ -247,9 +247,5 @@
     "default": false,
     "description": "Use custom icons in the popup menu",
     "tootlip": "Iconset is weather-icons by Erik Flowers"
-  },
-  "credits": {
-    "type": "header",
-    "description": "powered by: OpenWeatherMap, DarkSky, MET Norway, Weatherbit,\nYahoo and ip-api. Big Thanks to OpenWeatherMap for their FOSS support!"
   }
 }
