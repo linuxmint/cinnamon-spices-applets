@@ -298,6 +298,10 @@ class WeatherApplet extends TextIconApplet {
         let command = "xdg-open ";
         spawnCommandLine(command + "https://cinnamon-spices.linuxmint.com/applets/view/17");
     }
+    async submitIssue() {
+        let command = "xdg-open ";
+        spawnCommandLine(command + "https://github.com/linuxmint/cinnamon-spices-applets/issues/new");
+    }
     on_orientation_changed(orientation) {
         this.orientation = orientation;
         this.refreshWeather(true);

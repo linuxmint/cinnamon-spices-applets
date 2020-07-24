@@ -384,6 +384,16 @@ var WeatherApplet = (function (_super) {
             });
         });
     };
+    WeatherApplet.prototype.submitIssue = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var command;
+            return __generator(this, function (_a) {
+                command = "xdg-open ";
+                spawnCommandLine(command + "https://github.com/linuxmint/cinnamon-spices-applets/issues/new");
+                return [2];
+            });
+        });
+    };
     WeatherApplet.prototype.on_orientation_changed = function (orientation) {
         this.orientation = orientation;
         this.refreshWeather(true);

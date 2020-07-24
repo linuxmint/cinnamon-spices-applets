@@ -5,7 +5,8 @@
             "providers",
             "presentation-section",
 			"units-section",
-			"info-section"
+			"info-section",
+			"contact-section"
         ],
         "providers":{
             "type":"page",
@@ -38,6 +39,21 @@
             "sections":[
 				"provider-info",
 				"location-info"
+			]
+		},
+		"contact-section":{
+            "type":"page",
+            "title":"Contact",
+            "sections":[
+				"contact"
+			]
+		},
+		"contact" : {
+			"type":"section",
+			"title":"Contact",
+			"keys":[
+				"submitIssue",
+				"maintainer"
 			]
 		},
 		"provider-info" : {
@@ -345,6 +361,17 @@
 		"default": false,
 		"description": "Use custom icons in the popup menu"
 		
+	},
+	"submitIssue": {
+		"type": "button",
+		"indent": true,
+		"description": "Submit an Issue",
+		"callback": "submitIssue",
+		"tooltip": "Opens webpage where you can fill out a new issue for the applet, needs a GitHub account.\n Please make sure that the issue is not already submitted."
+	},
+	"maintainer": {
+		"type": "label",
+		"description": "Current maintainer: Gr3q"
 	},
 	"openWM": {
 		"type": "label",

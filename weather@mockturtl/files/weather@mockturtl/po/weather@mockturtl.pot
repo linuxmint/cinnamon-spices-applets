@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-24 15:05+0200\n"
+"POT-Creation-Date: 2020-07-24 15:43+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -45,36 +45,36 @@ msgstr ""
 msgid "Sunset"
 msgstr ""
 
-#: applet.js:708 3.0/applet.js:1177 3.8/applet.js:1058
+#: applet.js:708 3.0/applet.js:1187 3.8/applet.js:1062
 msgid "Loading current weather ..."
 msgstr ""
 
-#: applet.js:709 3.0/applet.js:1180 3.8/applet.js:1061
+#: applet.js:709 3.0/applet.js:1190 3.8/applet.js:1065
 msgid "Loading future weather ..."
 msgstr ""
 
-#: applet.js:731 3.0/applet.js:1204 3.8/applet.js:1085
+#: applet.js:731 3.0/applet.js:1214 3.8/applet.js:1089
 msgid "Loading ..."
 msgstr ""
 
-#: applet.js:737 3.0/applet.js:229 3.0/applet.js:1194 3.8/applet.js:178
-#: 3.8/applet.js:1075
+#: applet.js:737 3.0/applet.js:229 3.0/applet.js:1204 3.8/applet.js:178
+#: 3.8/applet.js:1079
 msgid "Refresh"
 msgstr ""
 
-#: applet.js:802 3.0/applet.js:1255 3.8/applet.js:1136
+#: applet.js:802 3.0/applet.js:1265 3.8/applet.js:1140
 msgid "Temperature:"
 msgstr ""
 
-#: applet.js:804 3.0/applet.js:1256 3.8/applet.js:1137
+#: applet.js:804 3.0/applet.js:1266 3.8/applet.js:1141
 msgid "Humidity:"
 msgstr ""
 
-#: applet.js:806 3.0/applet.js:1257 3.8/applet.js:1138
+#: applet.js:806 3.0/applet.js:1267 3.8/applet.js:1142
 msgid "Pressure:"
 msgstr ""
 
-#: applet.js:808 3.0/applet.js:1258 3.8/applet.js:1139
+#: applet.js:808 3.0/applet.js:1268 3.8/applet.js:1143
 msgid "Wind:"
 msgstr ""
 
@@ -736,7 +736,7 @@ msgstr ""
 msgid "until"
 msgstr ""
 
-#: 3.0/darkSky.js:75 3.0/applet.js:1136 3.8/darkSky.js:39 3.8/applet.js:1017
+#: 3.0/darkSky.js:75 3.0/applet.js:1146 3.8/darkSky.js:39 3.8/applet.js:1021
 msgid "in"
 msgstr ""
 
@@ -1012,11 +1012,11 @@ msgstr ""
 msgid "Excellent - More than"
 msgstr ""
 
-#: 3.0/met_uk.js:426 3.0/applet.js:1155 3.8/met_uk.js:318 3.8/applet.js:1036
+#: 3.0/met_uk.js:426 3.0/applet.js:1165 3.8/met_uk.js:318 3.8/applet.js:1040
 msgid "mi"
 msgstr ""
 
-#: 3.0/met_uk.js:427 3.0/applet.js:1156 3.8/met_uk.js:319 3.8/applet.js:1037
+#: 3.0/met_uk.js:427 3.0/applet.js:1166 3.8/met_uk.js:319 3.8/applet.js:1041
 msgid "km"
 msgstr ""
 
@@ -1097,58 +1097,58 @@ msgstr ""
 msgid "API returned status code between 400 and 500"
 msgstr ""
 
-#: 3.0/applet.js:532 3.8/applet.js:431
+#: 3.0/applet.js:542 3.8/applet.js:435
 msgid "Could not get weather information"
 msgstr ""
 
-#: 3.0/applet.js:555 3.8/applet.js:454
+#: 3.0/applet.js:565 3.8/applet.js:458
 msgid ""
 "Unexpected Error While Refreshing Weather, please see log in Looking Glass"
 msgstr ""
 
-#: 3.0/applet.js:675 3.8/applet.js:571
+#: 3.0/applet.js:685 3.8/applet.js:575
 msgid ""
 "Could not update weather for a while...\n"
 "are you connected to the internet?"
 msgstr ""
 
-#: 3.0/applet.js:689 3.8/applet.js:585
+#: 3.0/applet.js:699 3.8/applet.js:589
 msgid "Network Error, please check logs in Looking Glass"
 msgstr ""
 
-#: 3.0/applet.js:964 3.0/applet.js:1114 3.8/applet.js:845 3.8/applet.js:995
+#: 3.0/applet.js:974 3.0/applet.js:1124 3.8/applet.js:849 3.8/applet.js:999
 msgid "As of"
 msgstr ""
 
-#: 3.0/applet.js:1086 3.8/applet.js:967
+#: 3.0/applet.js:1096 3.8/applet.js:971
 msgid "Today"
 msgstr ""
 
-#: 3.0/applet.js:1088 3.8/applet.js:969
+#: 3.0/applet.js:1098 3.8/applet.js:973
 msgid "Tomorrow"
 msgstr ""
 
-#: 3.0/applet.js:1112 3.8/applet.js:993
+#: 3.0/applet.js:1122 3.8/applet.js:997
 msgid "Powered by"
 msgstr ""
 
-#: 3.0/applet.js:1117 3.8/applet.js:998
+#: 3.0/applet.js:1127 3.8/applet.js:1002
 msgid "from you"
 msgstr ""
 
-#: 3.0/applet.js:1136 3.8/applet.js:1017
+#: 3.0/applet.js:1146 3.8/applet.js:1021
 msgid "mm"
 msgstr ""
 
-#: 3.0/applet.js:1529 3.8/applet.js:1401
+#: 3.0/applet.js:1539 3.8/applet.js:1405
 msgid "Make sure you entered a location or use Automatic location instead"
 msgstr ""
 
-#: 3.0/applet.js:1734 3.8/applet.js:1573
+#: 3.0/applet.js:1744 3.8/applet.js:1577
 msgid "Could not find location based on address, please check if it's right"
 msgstr ""
 
-#: 3.0/applet.js:1756 3.8/applet.js:1595
+#: 3.0/applet.js:1766 3.8/applet.js:1599
 msgid "Failed to call Geolocation API, see Looking Glass for errors."
 msgstr ""
 
@@ -1694,18 +1694,17 @@ msgstr ""
 msgid "Use custom icons in the popup menu"
 msgstr ""
 
-#. 3.0->settings-schema.json->credits->description
-msgid ""
-"powered by: OpenWeatherMap, DarkSky, MET Norway, Weatherbit,\n"
-"Yahoo and ip-api. Big Thanks to OpenWeatherMap for their FOSS support!"
-msgstr ""
-
 #. 3.8->settings-schema.json->units-section->title
 msgid "Units and Icons"
 msgstr ""
 
 #. 3.8->settings-schema.json->info-section->title
 msgid "Help"
+msgstr ""
+
+#. 3.8->settings-schema.json->contact-section->title
+#. 3.8->settings-schema.json->contact->title
+msgid "Contact"
 msgstr ""
 
 #. 3.8->settings-schema.json->provider-info->title
@@ -1736,6 +1735,20 @@ msgstr ""
 
 #. 3.8->settings-schema.json->useSymbolicIcons->description
 msgid "Use symbolic icons throughout the applet"
+msgstr ""
+
+#. 3.8->settings-schema.json->submitIssue->description
+msgid "Submit an Issue"
+msgstr ""
+
+#. 3.8->settings-schema.json->submitIssue->tooltip
+msgid ""
+"Opens webpage where you can fill out a new issue for the applet, needs a GitHub account.\n"
+" Please make sure that the issue is not already submitted."
+msgstr ""
+
+#. 3.8->settings-schema.json->maintainer->description
+msgid "Current maintainer: Gr3q"
 msgstr ""
 
 #. 3.8->settings-schema.json->openWM->description
