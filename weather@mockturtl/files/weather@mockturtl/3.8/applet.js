@@ -675,8 +675,8 @@ class UI {
         let newThemeIsLight = this.IsLightTheme();
         if (newThemeIsLight != this.lightTheme) {
             this.lightTheme = newThemeIsLight;
-            this.app.refreshAndRebuild();
         }
+        this.app.refreshAndRebuild();
     }
     IsLightTheme() {
         let color = this.menu.actor.get_theme_node().get_background_color();

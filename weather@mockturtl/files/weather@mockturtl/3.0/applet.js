@@ -787,8 +787,8 @@ var UI = (function () {
         var newThemeIsLight = this.IsLightTheme();
         if (newThemeIsLight != this.lightTheme) {
             this.lightTheme = newThemeIsLight;
-            this.app.refreshAndRebuild();
         }
+        this.app.refreshAndRebuild();
     };
     UI.prototype.IsLightTheme = function () {
         var color = this.menu.actor.get_theme_node().get_background_color();

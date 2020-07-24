@@ -906,8 +906,8 @@ class UI {
 		// Theme changed between light and dark theme
 		if (newThemeIsLight != this.lightTheme) {
 			this.lightTheme = newThemeIsLight;
-			this.app.refreshAndRebuild();
 		}
+		this.app.refreshAndRebuild();
 	}
 
 	/**
