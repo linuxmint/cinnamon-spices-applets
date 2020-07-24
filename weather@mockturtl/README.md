@@ -8,9 +8,11 @@ cinnamon-weather uses [Semantic Versioning](http://semver.org/).  For the curren
 
 ## Setup
 
-**The applet obtains the location automatically, see below how to obtain API keys if your chosen weather provider needs one.**
+**The applet obtains the location automatically, see below what the weather providers offer and how to obtain API keys if your chosen weather provider needs one.**
 
-In **Manual Location** mode the applet **only** **accepts Coordinates** in Latitude, Longitude format (e.g. 37.77,122.41). You can use [OpenWeatherMap's finder](https://openweathermap.org/find) and paste the coordinates in from there.
+In **Manual Location** mode the applet either accepts:
+ * **Coordinates** in Latitude, Longitude format (e.g. 37.77,122.41). You can use [OpenWeatherMap's finder](https://openweathermap.org/find) and paste the coordinates in from there.
+ * or an **Address** (it can be just a city and country, it is pretty flexible). After 3 seconds, the applet will replace what you entered with the full address what it finds so you can verify if it's correct.
 
 ## Weather providers to choose from
 
