@@ -1,5 +1,27 @@
 # Changelog
 
+## 2.6.3
+
+Changes:
+
+* Add Met Office UK as a weather provider
+* Add US National Weather Service as a weather provider
+* Add support for entering manual location as an address
+* During and after entering a location, the applet waits 3 seconds until user finishes typing then refreshes (prevents spamming)
+* Applet locks itself during a refresh pass, any input during this period will trigger another refresh **after** the previous one finished
+* Some of the custom icons were resized (to be bigger) to fit in panel and applet better
+* 3.8 Settings is using tabbed layout, added help section with explanation for providers and entering manual location
+* Add button for version 3.8 settings to submit issue
+* Fixes issue where gray text is hard to read on light theme (grey text is changed to darker color in light themes)
+* Distance unit is added to the settings, metric or imperial, precipitation, visibility and site distance uses it.
+* Status bar shows observation site distance for site-based providers (Met Office UK and US National Weather Service)
+* Improve handling API specific errors what need to be shown in UI (incorrect API key and such)
+
+Fixes:
+
+* Making sure calls and idle calls time out after 10 seconds so they don't lock the applet forever (hopefully fixes [#2874](https://github.com/linuxmint/cinnamon-spices-applets/issues/2874) as well)
+* Fix issue when the applet would break if the locale is set to C
+
 ## 2.6.2
 
 * Fixes [#3081](https://github.com/linuxmint/cinnamon-spices-applets/issues/3081)

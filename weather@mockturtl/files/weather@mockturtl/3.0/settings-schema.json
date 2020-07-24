@@ -33,7 +33,8 @@
       "MET Norway": "MetNorway",
       "Weatherbit (key needed)": "Weatherbit",
 	  "Yahoo": "Yahoo",
-	  "Climacell (key needed)": "Climacell"
+	  "Climacell (key needed)": "Climacell",
+	  "Met Office UK": "Met Office UK"
     }
   },
   "apiKey": {
@@ -128,6 +129,15 @@
       "Pa": "Pa"
     }
   },
+  "distanceUnit": {
+		"type": "combobox",
+		"default": "metric",
+		"description": "Distance unit",
+		"options": {
+			"Metric": "metric",
+			"Imperial": "imperial"
+		}
+	},
   "panelSettings": {
     "type": "header",
     "description": "Panel options"
@@ -237,9 +247,5 @@
     "default": false,
     "description": "Use custom icons in the popup menu",
     "tootlip": "Iconset is weather-icons by Erik Flowers"
-  },
-  "credits": {
-    "type": "header",
-    "description": "powered by: OpenWeatherMap, DarkSky, MET Norway, Weatherbit,\nYahoo and ip-api. Big Thanks to OpenWeatherMap for their FOSS support!"
   }
 }

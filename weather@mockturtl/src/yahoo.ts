@@ -50,12 +50,11 @@ class Yahoo implements WeatherProvider {
     //--------------------------------------------------------
     //  Functions
     //--------------------------------------------------------
-    public async GetWeather(): Promise<WeatherData> {
-        let loc = this.ConstructLoc();
+    public async GetWeather(loc: Location): Promise<WeatherData> {
         let json;
         if (loc != null) {
             try {
-                json = await this.app.SpawnProcess(["python3", this.app.appletDir + "/../yahoo-bridge.py", "--params", JSON.stringify({lat: loc[0].toString(), lon: loc[1].toString()})]);
+                json = await this.app.SpawnProcess(["python3", this.app.appletDir + "/../yahoo-bridge.py", "--params", JSON.stringify({lat: loc.lat.toString(), lon: loc.lon.toString()})]);
             }
             catch(e) {
                 this.app.HandleError({type: "hard", service: "yahoo", detail: "unknown", message: _("Unknown Error happened while calling Yahoo bridge,\n see Looking Glass log for errors")})
@@ -159,19 +158,6 @@ class Yahoo implements WeatherProvider {
             return null;
         }
     };
-
-    private ConstructLoc(): string[] {
-        let location = this.app.config._location.replace(" ", "");
-        if (isCoordinate(location)) {
-            return location.split(",");
-        }
-        else {
-            this.app.log.Error("Yahoo: Location is not a coordinate");
-            this.app.HandleError({type: "hard", detail: "bad location format", service:"darksky", userError: true, message: ("Please Check the location,\nmake sure it is a coordinate") })
-            return null;
-        }
-    };
-
 
     private HandleResponseErrors(json: BridgeError): void {
         let type = json.error.type;

@@ -33,11 +33,10 @@ class OpenWeatherMap {
         this.base_url = "https://api.openweathermap.org/data/2.5/onecall?";
         this.app = _app;
     }
-    async GetWeather() {
-        let query = this.ConstructQuery(this.base_url);
+    async GetWeather(loc) {
+        let query = this.ConstructQuery(this.base_url, loc);
         let json;
         if (query != null) {
-            this.app.log.Debug("Query: " + query);
             try {
                 json = await this.app.LoadJsonAsync(query);
             }
@@ -144,35 +143,15 @@ class OpenWeatherMap {
         }
     }
     ;
-    ConstructQuery(baseUrl) {
+    ConstructQuery(baseUrl, loc) {
         let query = baseUrl;
-        let locString = this.ParseLocation();
-        if (locString != null) {
-            query = query + locString + "&appid=";
-            query += "1c73f8259a86c6fd43c7163b543c8640";
-            let locale = this.ConvertToAPILocale(this.app.currentLocale);
-            if (this.app.config._translateCondition && isLangSupported(locale, this.supportedLanguages)) {
-                query = query + "&lang=" + locale;
-            }
-            return query;
+        query = query + "lat=" + loc.lat + "&lon=" + loc.lon + "&appid=";
+        query += "1c73f8259a86c6fd43c7163b543c8640";
+        let locale = this.ConvertToAPILocale(this.app.currentLocale);
+        if (this.app.config._translateCondition && isLangSupported(locale, this.supportedLanguages)) {
+            query = query + "&lang=" + locale;
         }
-        return null;
-    }
-    ;
-    ParseLocation() {
-        let loc = this.app.config._location.replace(/ /g, "");
-        if (!nonempty(loc)) {
-            this.app.HandleError({ type: "hard", userError: true, "detail": "no location", message: _("Please enter a Location in settings") });
-            this.app.log.Error("OpenWeatherMap: No Location was provided");
-            return null;
-        }
-        if (!isCoordinate(loc)) {
-            this.app.HandleError({ type: "hard", userError: true, "detail": "bad location format", message: _("Please enter location in the correct format (coordinates)") });
-            this.app.log.Error("OpenWeatherMap: Location was provided in bad format");
-            return null;
-        }
-        let locArr = loc.split(',');
-        return "lat=" + locArr[0] + "&lon=" + locArr[1];
+        return query;
     }
     ;
     ConvertToAPILocale(systemLocale) {
