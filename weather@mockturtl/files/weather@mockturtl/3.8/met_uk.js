@@ -23,7 +23,7 @@ var MPHtoMPS = utils.MPHtoMPS;
 var compassToDeg = utils.compassToDeg;
 var GetDistance = utils.GetDistance;
 const get = utils.get;
-var MetretoUserUnits = utils.MetretoUserUnits;
+var MetreToUserUnits = utils.MetreToUserUnits;
 class MetUk {
     constructor(_app) {
         this.prettyName = "Met Office UK";
@@ -234,7 +234,7 @@ class MetUk {
         }
         catch (e) {
             this.app.log.Error("Met UK Weather Parsing error: " + e);
-            this.app.HandleError({ type: "soft", service: "met-uk", detail: "unusal payload", message: _("Failed to Process Current Weather Info") });
+            this.app.HandleError({ type: "soft", service: "met-uk", detail: "unusual payload", message: _("Failed to Process Current Weather Info") });
             return null;
         }
     }
@@ -258,7 +258,7 @@ class MetUk {
         }
         catch (e) {
             self.app.log.Error("MET UK Forecast Parsing error: " + e);
-            self.app.HandleError({ type: "soft", service: "met-uk", detail: "unusal payload", message: _("Failed to Process Forecast Info") });
+            self.app.HandleError({ type: "soft", service: "met-uk", detail: "unusual payload", message: _("Failed to Process Forecast Info") });
             return null;
         }
     }
@@ -281,7 +281,7 @@ class MetUk {
                         date: timestamp,
                         temp: CelsiusToKelvin(parseFloat(hour.T)),
                         condition: self.ResolveCondition(hour.W),
-                        precipation: {
+                        precipitation: {
                             type: "rain",
                             volume: null,
                             chance: parseFloat(hour.Pp)
@@ -294,7 +294,7 @@ class MetUk {
         }
         catch (e) {
             self.app.log.Error("MET UK Forecast Parsing error: " + e);
-            self.app.HandleError({ type: "soft", service: "met-uk", detail: "unusal payload", message: _("Failed to Process Forecast Info") });
+            self.app.HandleError({ type: "soft", service: "met-uk", detail: "unusual payload", message: _("Failed to Process Forecast Info") });
             return null;
         }
     }
@@ -302,16 +302,16 @@ class MetUk {
         let distance = parseInt(dist);
         let unit = this.app.config._distanceUnit;
         if (distance < 1000)
-            return _("Very poor - Less than") + " " + MetretoUserUnits(1000, unit) + this.DistanceUnitFor(unit);
+            return _("Very poor - Less than") + " " + MetreToUserUnits(1000, unit) + this.DistanceUnitFor(unit);
         if (distance < 4000)
-            return _("Poor - Between") + " " + MetretoUserUnits(1000, unit) + "-" + MetretoUserUnits(4000, unit) + " " + this.DistanceUnitFor(unit);
+            return _("Poor - Between") + " " + MetreToUserUnits(1000, unit) + "-" + MetreToUserUnits(4000, unit) + " " + this.DistanceUnitFor(unit);
         if (distance < 10000)
-            return _("Moderate - Between") + " " + MetretoUserUnits(4000, unit) + "-" + MetretoUserUnits(10000, unit) + " " + this.DistanceUnitFor(unit);
+            return _("Moderate - Between") + " " + MetreToUserUnits(4000, unit) + "-" + MetreToUserUnits(10000, unit) + " " + this.DistanceUnitFor(unit);
         if (distance < 20000)
-            return _("Good - Between") + " " + MetretoUserUnits(10000, unit) + "-" + MetretoUserUnits(20000, unit) + " " + this.DistanceUnitFor(unit);
+            return _("Good - Between") + " " + MetreToUserUnits(10000, unit) + "-" + MetreToUserUnits(20000, unit) + " " + this.DistanceUnitFor(unit);
         if (distance < 40000)
-            return _("Very good - Between") + " " + MetretoUserUnits(20000, unit) + "-" + MetretoUserUnits(40000, unit) + " " + this.DistanceUnitFor(unit);
-        return _("Excellent - More than") + " " + MetretoUserUnits(40000, unit) + " " + this.DistanceUnitFor(unit);
+            return _("Very good - Between") + " " + MetreToUserUnits(20000, unit) + "-" + MetreToUserUnits(40000, unit) + " " + this.DistanceUnitFor(unit);
+        return _("Excellent - More than") + " " + MetreToUserUnits(40000, unit) + " " + this.DistanceUnitFor(unit);
     }
     DistanceUnitFor(unit) {
         if (unit == "imperial")

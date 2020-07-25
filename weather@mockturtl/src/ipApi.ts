@@ -86,4 +86,4 @@ interface IpApiPayload {
 }
 
 type ipapiStatus = "success" | "fail";
-type ipapiMessage = "private ranger" | "resevered range" | "invalid query";
+type ipapiMessage = "private ranger" | "reserved range" | "invalid query";

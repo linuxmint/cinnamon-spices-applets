@@ -1,8 +1,10 @@
 # Changelog
 
-## 2.6.3
+## 2.6.4
 
-Changes:
+* Fix typos in throughout applet
+
+## 2.6.3
 
 * Add Met Office UK as a weather provider
 * Add US National Weather Service as a weather provider
@@ -57,7 +59,7 @@ Fixes:
 ## 2.4.8
 
 * Update Openweathermap to their unified API call
-* Add information on DarkSky aquisition to Readme
+* Add information on DarkSky acquisition to Readme
 * Fix translation issues in files other than applet.js
 * Add Yahoo Weather to the available services
 * Fix issue when system time is changed backwards, the applet stops updating until time gets to the time previously set
@@ -89,7 +91,7 @@ Fixes:
 ## 2.4.4
 
 * Fixes [#2782](https://github.com/linuxmint/cinnamon-spices-applets/issues/2872)
-* Add ability to override applet label with injecting values (customise and fit text on horizontal and vertical panels as well)
+* Add ability to override applet label with injecting values (customize and fit text on horizontal and vertical panels as well)
 
 ## 2.4.3
 
@@ -152,7 +154,7 @@ Fixes:
 * Fixed Issues with Debian, now Polyfilling Promises when needed
 * Reworked on how to import from other files, now in line with other applets
 * Utility functions moved to other file.
-* Typescript declarations reorganised now they make a little bit more sense *(generated declarations from gir files still don't work that well, although mostly working)*
+* Typescript declarations reorganized now they make a little bit more sense *(generated declarations from gir files still don't work that well, although mostly working)*
 * Can now build from same source down to Cinnamon Version 3.0
 * Fixed some styling issues with some themes (Adapta, etc) where the Forecast box did not have enough padding
 * Sunset/Sunrise and Day names are using the system locale *(3.4+)*
@@ -233,7 +235,7 @@ New stuff:
 ## 2.1.1
 
 * Openweathermap no longer requires key
-* Forcing mainloop to refresh when Weather update fails (it was not 
+* Forcing main loop to refresh when Weather update fails (it was not 
   updating for a whole refresh interval when we had a successful update 
   then the settings was changed right after and update failed)
 * Using Regex against Location setting

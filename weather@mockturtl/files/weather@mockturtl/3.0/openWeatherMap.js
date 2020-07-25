@@ -165,13 +165,13 @@ var OpenWeatherMap = (function () {
                     },
                 };
                 if (!!hour.rain) {
-                    forecast.precipation = {
+                    forecast.precipitation = {
                         volume: hour.rain["1h"],
                         type: "rain"
                     };
                 }
                 if (!!hour.snow) {
-                    forecast.precipation = {
+                    forecast.precipitation = {
                         volume: hour.snow["1h"],
                         type: "snow"
                     };
@@ -182,8 +182,8 @@ var OpenWeatherMap = (function () {
             return weather;
         }
         catch (e) {
-            self.app.log.Error("OpenWeathermap Weather Parsing error: " + e);
-            self.app.HandleError({ type: "soft", service: "openweathermap", detail: "unusal payload", message: _("Failed to Process Current Weather Info") });
+            self.app.log.Error("OpenWeatherMap Weather Parsing error: " + e);
+            self.app.HandleError({ type: "soft", service: "openweathermap", detail: "unusual payload", message: _("Failed to Process Current Weather Info") });
             return null;
         }
     };
@@ -222,7 +222,7 @@ var OpenWeatherMap = (function () {
         return lang;
     };
     OpenWeatherMap.prototype.HandleResponseErrors = function (json) {
-        var errorMsg = "OpenWeathermap Response: ";
+        var errorMsg = "OpenWeatherMap Response: ";
         var error = {
             service: "openweathermap",
             type: "hard",

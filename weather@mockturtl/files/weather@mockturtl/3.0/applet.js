@@ -92,7 +92,7 @@ var setTimeout = utils.setTimeout;
 var clearTimeout = utils.clearTimeout;
 var MillimeterToUserUnits = utils.MillimeterToUserUnits;
 var shadeHexColor = utils.shadeHexColor;
-var MetretoUserUnits = utils.MetretoUserUnits;
+var MetreToUserUnits = utils.MetreToUserUnits;
 if (typeof Promise != "function") {
     var promisePoly = importModule("promise-polyfill");
     var finallyConstructor = promisePoly.finallyConstructor;
@@ -176,9 +176,9 @@ var WeatherApplet = (function (_super) {
             "no key": _("No Api Key"),
             "no location": _("No Location"),
             "no network response": _("Service Error"),
-            "no reponse body": _("Service Error"),
-            "no respone data": _("Service Error"),
-            "unusal payload": _("Service Error"),
+            "no response body": _("Service Error"),
+            "no response data": _("Service Error"),
+            "unusual payload": _("Service Error"),
             "import error": _("Missing Packages"),
             "location not covered": _("Location not covered"),
         };
@@ -220,7 +220,7 @@ var WeatherApplet = (function (_super) {
     WeatherApplet.prototype.Unlock = function () {
         this.lock = false;
         if (this.refreshTriggeredWhileLocked) {
-            this.log.Print("Refreshing triggered by config change while refrehing, starting now...");
+            this.log.Print("Refreshing triggered by config change while refreshing, starting now...");
             this.refreshTriggeredWhileLocked = false;
             this.refreshAndRebuild();
         }
@@ -272,7 +272,7 @@ var WeatherApplet = (function (_super) {
                                     return;
                                 }
                                 if (get(["response_body", "data"], message) == null) {
-                                    reject({ code: message.status_code, message: "no respone data", reason_phrase: message.reason_phrase, data: get(["response_body", "data"], message) });
+                                    reject({ code: message.status_code, message: "no response data", reason_phrase: message.reason_phrase, data: get(["response_body", "data"], message) });
                                     return;
                                 }
                                 try {
@@ -329,11 +329,11 @@ var WeatherApplet = (function (_super) {
                                     return;
                                 }
                                 if (!message.response_body) {
-                                    reject({ code: message.status_code, message: "no reponse body", reason_phrase: message.reason_phrase });
+                                    reject({ code: message.status_code, message: "no response body", reason_phrase: message.reason_phrase });
                                     return;
                                 }
                                 if (!message.response_body.data) {
-                                    reject({ code: message.status_code, message: "no respone data", reason_phrase: message.reason_phrase });
+                                    reject({ code: message.status_code, message: "no response data", reason_phrase: message.reason_phrase });
                                     return;
                                 }
                                 _this.log.Debug2("API full response: " + message.response_body.data.toString());
@@ -358,10 +358,10 @@ var WeatherApplet = (function (_super) {
     WeatherApplet.prototype.SetAppletTooltip = function (msg) {
         this.set_applet_tooltip(msg);
     };
-    WeatherApplet.prototype.SetAppletIcon = function (iconname) {
+    WeatherApplet.prototype.SetAppletIcon = function (iconName) {
         this.config.IconType() == IconType.SYMBOLIC ?
-            this.set_applet_icon_symbolic_name(iconname) :
-            this.set_applet_icon_name(iconname);
+            this.set_applet_icon_symbolic_name(iconName) :
+            this.set_applet_icon_name(iconName);
         if (this.config._useCustomAppletIcons)
             this.SetCustomIcon(this.weather.condition.customIcon);
     };
@@ -1123,7 +1123,7 @@ var UI = (function () {
         this._providerCredit.url = provider.website;
         this._timestamp.text = _("As of") + " " + AwareDateString(weather.date, this.app.currentLocale, config._show24Hours);
         if (weather.location.distanceFrom != null) {
-            this._timestamp.text += (", " + MetretoUserUnits(weather.location.distanceFrom, this.app.config._distanceUnit)
+            this._timestamp.text += (", " + MetreToUserUnits(weather.location.distanceFrom, this.app.config._distanceUnit)
                 + this.BigDistanceUnitFor(this.app.config._distanceUnit) + " " + _("from you"));
         }
         return true;
@@ -1140,17 +1140,17 @@ var UI = (function () {
             if (config._translateCondition)
                 hour.condition.main = _(hour.condition.main);
             ui.Summary.text = hour.condition.main;
-            if (!!hour.precipation && hour.precipation.type != "none") {
-                var precipationText = null;
-                if (!!hour.precipation.volume && hour.precipation.volume > 0) {
-                    precipationText = MillimeterToUserUnits(hour.precipation.volume, this.app.config._distanceUnit) + " " + ((this.app.config._distanceUnit == "metric") ? _("mm") : _("in"));
+            if (!!hour.precipitation && hour.precipitation.type != "none") {
+                var precipitationText = null;
+                if (!!hour.precipitation.volume && hour.precipitation.volume > 0) {
+                    precipitationText = MillimeterToUserUnits(hour.precipitation.volume, this.app.config._distanceUnit) + " " + ((this.app.config._distanceUnit == "metric") ? _("mm") : _("in"));
                 }
-                if (!!hour.precipation.chance) {
-                    precipationText = (precipationText == null) ? "" : (precipationText + ", ");
-                    precipationText += (Math.round(hour.precipation.chance).toString() + "%");
+                if (!!hour.precipitation.chance) {
+                    precipitationText = (precipitationText == null) ? "" : (precipitationText + ", ");
+                    precipitationText += (Math.round(hour.precipitation.chance).toString() + "%");
                 }
-                if (precipationText != null)
-                    ui.Precipation.text = precipationText;
+                if (precipitationText != null)
+                    ui.Precipitation.text = precipitationText;
             }
         }
         if (max <= 0)
@@ -1410,7 +1410,7 @@ var UI = (function () {
                     icon_name: APPLET_ICON,
                     style_class: "hourly-icon"
                 }),
-                Precipation: new Label({ text: " ", style_class: "hourly-data" }),
+                Precipitation: new Label({ text: " ", style_class: "hourly-data" }),
                 Summary: new Label({ text: _(ELLIPSIS), style_class: "hourly-data" }),
                 Temperature: new Label({ text: _(ELLIPSIS), style_class: "hourly-data" })
             });
@@ -1420,7 +1420,7 @@ var UI = (function () {
             box.add_child(this._hourlyForecasts[index].Icon);
             box.add_child(this._hourlyForecasts[index].Summary);
             box.add_child(this._hourlyForecasts[index].Temperature);
-            box.add_child(this._hourlyForecasts[index].Precipation);
+            box.add_child(this._hourlyForecasts[index].Precipitation);
             this._hourlyBox.add(box, {
                 x_fill: true,
                 x_align: Align.MIDDLE,
@@ -1611,7 +1611,7 @@ var WeatherLoop = (function () {
                         return [3, 0];
                     case 3:
                         if (!(this.errorCount > 0 || this.NextUpdate() < new Date())) return [3, 5];
-                        this.app.log.Debug("Refresh triggered in mainloop with these values: lastUpdated " + ((!this.lastUpdated) ? "null" : this.lastUpdated.toLocaleString())
+                        this.app.log.Debug("Refresh triggered in main loop with these values: lastUpdated " + ((!this.lastUpdated) ? "null" : this.lastUpdated.toLocaleString())
                             + ", errorCount " + this.errorCount.toString() + " , loopInterval " + (this.LoopInterval() / 1000).toString()
                             + " seconds, refreshInterval " + this.app.config._refreshInterval + " minutes");
                         return [4, this.app.refreshWeather(false)];

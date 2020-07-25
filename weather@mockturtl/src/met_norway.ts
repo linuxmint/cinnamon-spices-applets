@@ -127,7 +127,7 @@ class MetNorway implements WeatherProvider {
 				hourlyForecasts.push({
 					date: new Date(element.time),
 					temp: CelsiusToKelvin(element.data.instant.details.air_temperature),
-					precipation: {
+					precipitation: {
 						type: "rain",
 						volume: element.data.next_1_hours.details.precipitation_amount
 					},
@@ -205,7 +205,7 @@ class MetNorway implements WeatherProvider {
 
     private SortDataByDay(data: MetNorwayData[]):  MetNorwayData[][] {
       let days: Array<any> = []
-      // Sorting and conatinerizing forecasts by date
+      // Sort and conatinerize forecasts by date
       let currentDay = new Date(this.GetEarliestDataForToday(data).time);
       let dayIndex = 0;
       days.push([]);
@@ -262,7 +262,7 @@ class MetNorway implements WeatherProvider {
         return url;
 	}
 	
-	private DeconstructCondtition(icon: string) {
+	private DeconstructCondition(icon: string) {
 		let condition = icon.split("_");
 
 		return {
@@ -272,7 +272,7 @@ class MetNorway implements WeatherProvider {
 	}
 
     private ResolveCondition(icon: string, isNight: boolean = false): Condition {
-		let weather = this.DeconstructCondtition(icon);
+		let weather = this.DeconstructCondition(icon);
 		let iconType = this.app.config.IconType();
 		switch (weather.condition) {
 			case "clearsky":
@@ -421,7 +421,7 @@ class MetNorway implements WeatherProvider {
 			case "lightrainshowersandthunder":
 				return {
 					customIcon : (isNight) ? "night-alt-rain-mix-storm-symbolic" : "day-rain-mix-storm-symbolic",
-					main: _("Ligth Rain"),
+					main: _("Light Rain"),
 					description: _("Light rain showers and thunder"),
 					icon: weatherIconSafely(["weather-showers-scattered", "weather-rain", "weather-severe-alert"], iconType)
 					

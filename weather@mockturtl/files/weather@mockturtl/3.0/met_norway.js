@@ -155,7 +155,7 @@ var MetNorway = (function () {
                 hourlyForecasts.push({
                     date: new Date(element.time),
                     temp: CelsiusToKelvin(element.data.instant.details.air_temperature),
-                    precipation: {
+                    precipitation: {
                         type: "rain",
                         volume: element.data.next_1_hours.details.precipitation_amount
                     },
@@ -267,7 +267,7 @@ var MetNorway = (function () {
         url += (loc.lat + "&lon=" + loc.lon);
         return url;
     };
-    MetNorway.prototype.DeconstructCondtition = function (icon) {
+    MetNorway.prototype.DeconstructCondition = function (icon) {
         var condition = icon.split("_");
         return {
             timeOfDay: condition[1],
@@ -276,7 +276,7 @@ var MetNorway = (function () {
     };
     MetNorway.prototype.ResolveCondition = function (icon, isNight) {
         if (isNight === void 0) { isNight = false; }
-        var weather = this.DeconstructCondtition(icon);
+        var weather = this.DeconstructCondition(icon);
         var iconType = this.app.config.IconType();
         switch (weather.condition) {
             case "clearsky":
@@ -415,7 +415,7 @@ var MetNorway = (function () {
             case "lightrainshowersandthunder":
                 return {
                     customIcon: (isNight) ? "night-alt-rain-mix-storm-symbolic" : "day-rain-mix-storm-symbolic",
-                    main: _("Ligth Rain"),
+                    main: _("Light Rain"),
                     description: _("Light rain showers and thunder"),
                     icon: weatherIconSafely(["weather-showers-scattered", "weather-rain", "weather-severe-alert"], iconType)
                 };

@@ -186,7 +186,7 @@
 		"default": "London,UK",
 		"dependency": "manualLocation",
 		"description": "Location",
-		"tooltip": "Acceptable inputs are Latitude,Longtitude. e.g.: 68.1932,17.1426 or an address.\nWaits for 3 seconds after you stop typing then refreshes the weather."
+		"tooltip": "Acceptable inputs are Latitude,Longitude. e.g.: 68.1932,17.1426 or an address.\nWaits for 3 seconds after you stop typing then refreshes the weather."
 	},
 	"getLocation": {
 		"type": "button",
@@ -286,13 +286,13 @@
 	"useCustomAppletIcons": {
 		"type": "checkbox",
 		"default": false,
-		"tootlip": "Iconset is weather-icons by Erik Flowers",
+		"tooltip": "Iconset is weather-icons by Erik Flowers",
 		"description": "Use custom icons on the panel"
 	},
 	"verticalOrientation": {
 		"type": "checkbox",
 		"default": false,
-		"tooltop": "Displaying forecasts from top to bottom instead from left to right.",
+		"tooltip": "Displaying forecasts from top to bottom instead from left to right.",
 		"description": "Show forecast vertically"
 	},
 	"forecastColumns": {
@@ -357,7 +357,7 @@
 	},
 	"useCustomMenuIcons": {
 		"type": "checkbox",
-		"tootlip": "Iconset is weather-icons by Erik Flowers",
+		"tooltip": "Iconset is weather-icons by Erik Flowers",
 		"default": false,
 		"description": "Use custom icons in the popup menu"
 		

@@ -83,7 +83,7 @@ var isLocaleStringSupported = (): localeStringSupport => {
     let date  = new Date(1565548657987); // Set Date to test support
     try {
         let output = date.toLocaleString('en-GB', {timeZone: 'Europe/London', hour: "numeric"});
-        if (output !== "19" ) return "none"; // Does not match expected ouptut with full support | mozjs < 24
+        if (output !== "19" ) return "none"; // Does not match expected output with full support | mozjs < 24
         return "full"; // | 52 < mozjs
     }
     catch(e) { // Including Europe/London tz throws error | 24 < mozjs < 52
@@ -370,7 +370,7 @@ var KmToM = (km: number): number => {
 	return km * 0.6213712;
 }
 
-var MetretoUserUnits = (m: number, distanceUnit: DistanceUnits): number => {
+var MetreToUserUnits = (m: number, distanceUnit: DistanceUnits): number => {
 	if (distanceUnit == "metric") return Math.round(m / 1000 * 10) / 10;
 	return Math.round(KmToM(m / 1000)*10) / 10;
 }

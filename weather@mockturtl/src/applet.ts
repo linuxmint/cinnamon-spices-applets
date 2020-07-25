@@ -1,5 +1,3 @@
-//TODO: Do changelog
-
 /**
  * @param path Filename without extension
  */
@@ -60,7 +58,7 @@ var setTimeout = utils.setTimeout as (func: any, ms: number) => any;
 const clearTimeout = utils.clearTimeout as (id: any) => void;
 var MillimeterToUserUnits = utils.MillimeterToUserUnits as (mm: number, distanceUnit: DistanceUnits) => number;
 var shadeHexColor = utils.shadeHexColor as (color: string, percent: number) => string;
-var MetretoUserUnits = utils.MetretoUserUnits as (m: number, distanceUnit: DistanceUnits) => number;
+var MetreToUserUnits = utils.MetreToUserUnits as (m: number, distanceUnit: DistanceUnits) => number;
 
 // This always evaluates to True because "var Promise" line exists inside 
 if (typeof Promise != "function") {
@@ -178,7 +176,7 @@ class WeatherApplet extends TextIconApplet {
 	public orientation: imports.gi.St.Side;
 
 	/** Used for error handling, first error calls flips it
-	 * to prevents diplaying other errors in the current loop.
+	 * to prevents displaying other errors in the current loop.
 	 */
 	public encounteredError: boolean = false;
 
@@ -195,7 +193,7 @@ class WeatherApplet extends TextIconApplet {
 		this.msgSource = new SystemNotificationSource(_("Weather Applet"));
 		messageTray.add(this.msgSource);
 		Session.prototype.add_feature.call(this._httpSession, new ProxyResolverDefault());
-		// Manually add the icons to the icontheme - only one icons folder
+		// Manually add the icons to the icon theme - only one icons folder
 		imports.gi.Gtk.IconTheme.get_default().append_search_path(this.appletDir + "/../icons");
 
 		this.SetAppletOnPanel(); 
@@ -229,7 +227,7 @@ class WeatherApplet extends TextIconApplet {
 	private Unlock(): void {
 		this.lock = false;
 		if (this.refreshTriggeredWhileLocked) {
-			this.log.Print("Refreshing triggered by config change while refrehing, starting now...");
+			this.log.Print("Refreshing triggered by config change while refreshing, starting now...");
 			this.refreshTriggeredWhileLocked = false;
 			this.refreshAndRebuild();
 		}
@@ -294,7 +292,7 @@ class WeatherApplet extends TextIconApplet {
 				}
 					
 				if (get(["response_body", "data"], message) == null) {
-					reject({code: message.status_code, message: "no respone data", reason_phrase: message.reason_phrase, data: get(["response_body", "data"], message)} as HttpError);
+					reject({code: message.status_code, message: "no response data", reason_phrase: message.reason_phrase, data: get(["response_body", "data"], message)} as HttpError);
 					return;
 				}
 					
@@ -342,12 +340,12 @@ class WeatherApplet extends TextIconApplet {
 				}	
 				
 				if (!message.response_body) {
-					reject({code: message.status_code, message: "no reponse body", reason_phrase: message.reason_phrase} as HttpError);
+					reject({code: message.status_code, message: "no response body", reason_phrase: message.reason_phrase} as HttpError);
 					return;
 				}
 				
 				if (!message.response_body.data) {
-					reject({code: message.status_code, message: "no respone data", reason_phrase: message.reason_phrase} as HttpError);
+					reject({code: message.status_code, message: "no response data", reason_phrase: message.reason_phrase} as HttpError);
 					return;
 				}
 				
@@ -369,10 +367,10 @@ class WeatherApplet extends TextIconApplet {
 		this.set_applet_tooltip(msg);
 	}
 
-	public SetAppletIcon(iconname: string) {
+	public SetAppletIcon(iconName: string) {
 		this.config.IconType() == IconType.SYMBOLIC ?
-			this.set_applet_icon_symbolic_name(iconname) :
-			this.set_applet_icon_name(iconname)
+			this.set_applet_icon_symbolic_name(iconName) :
+			this.set_applet_icon_name(iconName)
 		if (this.config._useCustomAppletIcons) this.SetCustomIcon(this.weather.condition.customIcon);
 	}
 
@@ -467,7 +465,7 @@ class WeatherApplet extends TextIconApplet {
 
 	/**
 	 * Lazy load provider
-	 * @param force Force provider reinitialisation
+	 * @param force Force provider reinitialization
 	 */
 	private EnsureProvider(force: boolean = false): void {
 		let currentName = get(["name"], this.provider) as Services;
@@ -706,9 +704,9 @@ class WeatherApplet extends TextIconApplet {
 		"no key": _("No Api Key"),
 		"no location": _("No Location"),
 		"no network response": _("Service Error"),
-		"no reponse body": _("Service Error"),
-		"no respone data": _("Service Error"),
-		"unusal payload": _("Service Error"),
+		"no response body": _("Service Error"),
+		"no response data": _("Service Error"),
+		"unusual payload": _("Service Error"),
 		"import error": _("Missing Packages"),
 		"location not covered": _("Location not covered"),
 	}
@@ -818,7 +816,7 @@ class Log {
 	}
 
 	private GetErrorLine(): string {
-		// Couldnt be more ugly, but it returns the file and line number
+		// Couldn't be more ugly, but it returns the file and line number
 		let arr = (new Error).stack.split("\n").slice(-2)[0].split('/').slice(-1)[0];
 		return arr;
 	}
@@ -1325,7 +1323,7 @@ class UI {
 		this._timestamp.text = _("As of") + " " + AwareDateString(weather.date, this.app.currentLocale, config._show24Hours);
 		if (weather.location.distanceFrom != null) {
 			this._timestamp.text += (
-				", " + MetretoUserUnits(weather.location.distanceFrom, this.app.config._distanceUnit) 
+				", " + MetreToUserUnits(weather.location.distanceFrom, this.app.config._distanceUnit) 
 				+ this.BigDistanceUnitFor(this.app.config._distanceUnit) + " " + _("from you")
 			);
 		}
@@ -1345,16 +1343,16 @@ class UI {
 			hour.condition.main = capitalizeFirstLetter(hour.condition.main);
 			if (config._translateCondition) hour.condition.main = _(hour.condition.main);
 			ui.Summary.text = hour.condition.main;
-			if (!!hour.precipation && hour.precipation.type != "none") {
-				let precipationText = null;
-				if (!!hour.precipation.volume && hour.precipation.volume > 0) {
-					precipationText = MillimeterToUserUnits(hour.precipation.volume, this.app.config._distanceUnit) + " " + ((this.app.config._distanceUnit == "metric") ? _("mm") : _("in"));
+			if (!!hour.precipitation && hour.precipitation.type != "none") {
+				let precipitationText = null;
+				if (!!hour.precipitation.volume && hour.precipitation.volume > 0) {
+					precipitationText = MillimeterToUserUnits(hour.precipitation.volume, this.app.config._distanceUnit) + " " + ((this.app.config._distanceUnit == "metric") ? _("mm") : _("in"));
 				}
-				if (!!hour.precipation.chance) {
-					precipationText = (precipationText == null) ? "" : (precipationText + ", ")
-					precipationText += (Math.round(hour.precipation.chance).toString() + "%")
+				if (!!hour.precipitation.chance) {
+					precipitationText = (precipitationText == null) ? "" : (precipitationText + ", ")
+					precipitationText += (Math.round(hour.precipitation.chance).toString() + "%")
 				}
-				if (precipationText != null) ui.Precipation.text = precipationText;
+				if (precipitationText != null) ui.Precipitation.text = precipitationText;
 			}
 		}
 
@@ -1553,7 +1551,7 @@ class UI {
 		let maxCol = config._forecastColumns;
 
 		// Fill vertically first by swapping max rows and max columns,
-		// calculaing correctly with the same code below
+		// calculating correctly with the same code below
 		if (config._verticalOrientation) {
 			[maxRow, maxCol] = [maxCol, maxRow];
 		}
@@ -1689,7 +1687,7 @@ class UI {
 					icon_name: APPLET_ICON,
 					style_class: "hourly-icon"
 				}),
-				Precipation: new Label({text: " ", style_class: "hourly-data"}),
+				Precipitation: new Label({text: " ", style_class: "hourly-data"}),
 				Summary: new Label({text: _(ELLIPSIS), style_class: "hourly-data"}),
 				Temperature: new Label({text: _(ELLIPSIS), style_class: "hourly-data"})
 			})
@@ -1700,7 +1698,7 @@ class UI {
 			box.add_child(this._hourlyForecasts[index].Icon);
 			box.add_child(this._hourlyForecasts[index].Summary);
 			box.add_child(this._hourlyForecasts[index].Temperature);
-			box.add_child(this._hourlyForecasts[index].Precipation);
+			box.add_child(this._hourlyForecasts[index].Precipitation);
 			this._hourlyBox.add(box, {
 				x_fill: true,
 				x_align: Align.MIDDLE,
@@ -1862,7 +1860,7 @@ class Config {
 	 * it looks up coordinates via geolocation api
 	 */
 	public async EnsureLocation(): Promise<LocationData> {
-		// Autmatic location
+		// Automatic location
 		if (!this._manualLocation) { 
 			let location = await this.app.locProvider.GetLocation();
 			// User facing errors handled by provider
@@ -1965,7 +1963,7 @@ class WeatherLoop {
 				}
 
 				if (this.errorCount > 0 || this.NextUpdate() < new Date()) {
-					this.app.log.Debug("Refresh triggered in mainloop with these values: lastUpdated " + ((!this.lastUpdated) ? "null" : this.lastUpdated.toLocaleString())
+					this.app.log.Debug("Refresh triggered in main loop with these values: lastUpdated " + ((!this.lastUpdated) ? "null" : this.lastUpdated.toLocaleString())
 					+ ", errorCount " + this.errorCount.toString() + " , loopInterval " + (this.LoopInterval() / 1000).toString()
 					+ " seconds, refreshInterval " + this.app.config._refreshInterval + " minutes");
 					// loop can skip 1 cycle if needed 
@@ -2309,7 +2307,7 @@ interface HourlyForecastData {
 	/** Kelvin */
 	temp: number,
 	condition: Condition
-	precipation?: {
+	precipitation?: {
 		type: PrecipationType,
 		/** in mm */
 		volume?: number,
@@ -2357,7 +2355,7 @@ interface HourlyForecastUI {
 	Hour: imports.gi.St.Label,
 	Summary: imports.gi.St.Label,
 	Temperature: imports.gi.St.Label,
-	Precipation: imports.gi.St.Label
+	Precipitation: imports.gi.St.Label
 }
 
 type SettingKeys = {
@@ -2408,8 +2406,8 @@ type ErrorSeverity = "hard" |  "soft";
 type ApiService = "ipapi" | "darksky" | "openweathermap" | "met-norway" | "weatherbit" | "yahoo" | "climacell" | "met-uk" | "us-weather";
 type ErrorDetail = "no key" | "bad key" | "no location" | "bad location format" |
   "location not found" | "no network response" | "no api response" | "location not covered" |
-  "bad api response - non json" | "bad api response" | "no reponse body" | 
-  "no respone data" | "unusal payload" | "key blocked" | "unknown" | "bad status code" | "import error";
+  "bad api response - non json" | "bad api response" | "no response body" | 
+  "no response data" | "unusual payload" | "key blocked" | "unknown" | "bad status code" | "import error";
 type NiceErrorDetail = {
   	[key in ErrorDetail]: string;
 }

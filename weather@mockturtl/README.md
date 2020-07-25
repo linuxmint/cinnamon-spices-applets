@@ -35,7 +35,7 @@ This is the default provider.
 
 ### DarkSky
 
-***[DarkSky has been aquired by Apple](https://blog.darksky.net/dark-sky-has-a-new-home/)** as of March 31, 2020. It does not allow new signups, and it will cease to function at the end of 2021.
+***[DarkSky has been acquired by Apple](https://blog.darksky.net/dark-sky-has-a-new-home/)** as of March 31, 2020. It does not allow new signups, and it will cease to function at the end of 2021.
 
 ### MET Norway
 
@@ -91,7 +91,7 @@ Right-click to access `cinnamon-settings` -> _Applets -> Configure_.
 
 ## Future Plans
 
-* Switch to MET Norway API v2.0 when it comes out (has a better iconnaming scheme for conditions)
+* Switch to MET Norway API v2.0 when it comes out (has a better icon naming scheme for conditions)
 
 ## Known Issues
 
