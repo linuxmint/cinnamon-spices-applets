@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-20 12:34+0100\n"
-"PO-Revision-Date: 2020-07-23 07:08+0100\n"
+"POT-Creation-Date: 2020-07-25 17:39+0100\n"
+"PO-Revision-Date: 2020-07-25 17:59+0100\n"
 "Last-Translator: claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -145,16 +145,16 @@ msgstr "Ajouter aux Favoris"
 msgid "Uninstall"
 msgstr "Désinstaller"
 
-#. 4.0 4.0
+#. 4.0 4.0 4.0
 msgid "Please wait..."
 msgstr "Veuillez patienter..."
 
-#. metadata.json
+#. metadata.json->name
 #. 3.2
 msgid "Cinnamenu"
 msgstr "Cinnamenu"
 
-#. metadata.json
+#. metadata.json->description
 msgid ""
 "A flexible menu providing formatting options, web bookmarks, search provider "
 "support and fuzzy searching."
@@ -163,7 +163,7 @@ msgstr ""
 "recherche parmi vos fichiers et applications, et un support de moteurs de "
 "recherche sur le web."
 
-#. metadata.json
+#. metadata.json->comments
 msgid ""
 "Made possible thanks to the efforts of contributors to the Cinnamon menu, "
 "Gnomenu, and the contributors to projects they derived from."
@@ -171,15 +171,18 @@ msgstr ""
 "Rendu possible grâce aux efforts des contributeurs au menu Cinnamon, "
 "Gnomenu, et des contributeurs aux projets dont ils sont issus."
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Behavior"
 msgstr "Comportement"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Appearance"
 msgstr "Apparence"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Layout and Content"
 msgstr "Mise en page et contenu"
 
@@ -191,121 +194,166 @@ msgstr "Moteurs de Recherche"
 msgid "No search provider extensions found"
 msgstr "Aucune extension pour moteur de recherche n'a été installée"
 
-#. 3.2 4.0
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
 msgid "Panel"
 msgstr "Tableau de bord"
 
-#. 3.2 4.0
+#. 3.2
+#. 3.2
+#. 4.0
 msgid "Menu"
 msgstr "Menu"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Layout"
 msgstr "Mise en page"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Content"
 msgstr "Contenu"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Recent files settings"
 msgstr "Paramètres des Documents récents"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Open the menu editor"
 msgstr "Ouvrir l'éditeur de menu"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Reset category order"
 msgstr "Restaurer l'ordre initial des catégories"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Use a custom icon"
 msgstr "Personnaliser l'icône"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Use a custom icon in the panel"
 msgstr "Personnaliser l'icône de cette applet affichée dans le panneau"
 
-#. 3.2 4.0
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
 msgid "Panel icon"
 msgstr "Icône affichée sur le tableau de bord"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Panel text"
 msgstr "Texte affiché sur le tableau de bord"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Text to show beside the panel icon"
 msgstr "Texte à afficher à côté de l'icône du panneau"
 
-#. 3.2 4.0
+#. 3.2
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+#. 4.0
 msgid "pixels"
 msgstr "pixels"
 
-#. 3.2 4.0
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
 msgid "Category icon size"
 msgstr "Taille des icônes des catégories du menu"
 
-#. 3.2 4.0
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
 msgid "Applications list icon size"
 msgstr "Taille des icônes pour la vue en liste"
 
-#. 3.2 4.0
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
 msgid "Applications grid icon size"
 msgstr "Taille des icônes pour la vue en grille"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Keyboard shortcut to open and close the menu"
 msgstr "Raccourci-clavier pour ouvrir et fermer le menu"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Open menu on hover"
 msgstr "Ouvrir le menu lors du survol"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Open the menu when I move my mouse over the panel icon"
 msgstr "Ouvrir le menu au passage de la souris sur l'icône de Cinnamenu"
 
-#. 3.2 4.0
+#. 3.2
+#. 3.2
+#. 4.0
 msgid "milliseconds"
 msgstr "millisecondes"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Menu hover delay"
 msgstr "Délai du survol avant ouverture du menu"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Use menu animations"
 msgstr "Animer l'ouverture et la fermeture du menu"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Animate the menu on open and close"
 msgstr ""
 "Autorise les effets d'animation lors de l'ouverture ou la fermeture du menu"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Activate categories on click"
 msgstr "Ouvrir les catégories avec un clic"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Activate categories on click instead of on hover"
 msgstr ""
 "Ouvre les catégories avec un clic, au lieu du simple survol par la souris"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Enable autoscrolling"
 msgstr "Activer le défilement automatique"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Enable autoscrolling in application list"
 msgstr "Active le défilement automatique dans la liste des applications"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Show web bookmarks"
 msgstr "Afficher les signets Web"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Show your browser's web bookmarks in the menu"
 msgstr "Affiche dans le menu les signets Web de votre navigateur"
 
@@ -313,17 +361,20 @@ msgstr "Affiche dans le menu les signets Web de votre navigateur"
 msgid "Enable searching of open windows"
 msgstr "Activer la recherche des fenêtres ouvertes"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Enable search providers"
 msgstr "Activer les moteurs de recherche"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Include search provider results in searches"
 msgstr ""
 "Ajoute également les résultats des moteurs de recherche à ceux de vos "
 "recherches dans le menu"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Example Search Providers"
 msgstr "Exemples de moteurs de recherche"
 
@@ -332,59 +383,79 @@ msgstr "Exemples de moteurs de recherche"
 msgid "Startup applications view mode"
 msgstr "Mode de vue par défaut des applications"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "List"
 msgstr "Liste"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Grid"
 msgstr "Grille"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "columns"
 msgstr "colonnes"
 
-#. 3.2 4.0
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
 msgid "Number of columns in apps grid"
 msgstr "Nombre de colonnes de la grille des applications"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Show bookmarks and places"
 msgstr "Inclure les signets et les emplacements"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Show bookmarks and places category in the menu"
 msgstr "Affiche également dans le menu vos signets et vos emplacements"
 
-#. 3.2 4.0
+#. 3.2
+#. 3.2
 msgid "Show application icons"
 msgstr "Montrer les icônes des applications"
 
-#. 3.2 4.0
+#. 3.2
+#. 3.2
 msgid "Show category icons"
 msgstr "Montrer les icônes des catégories"
 
+#. 3.2
 #. 3.2
 msgid "Show application descriptions under titles"
 msgstr "Afficher la description des applications sous leur titre"
 
 #. 3.2
+#. 3.2
 msgid "Show tooltips"
 msgstr "Afficher les infobulles"
 
 #. 3.2
+#. 3.2
 msgid "Tooltip delay"
 msgstr "Délai avant l'affichage de l'infobulle"
 
-#. 3.2 4.0
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
 msgid "Use a custom menu height"
 msgstr "Utiliser une hauteur de menu personnalisée"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "px"
 msgstr "px"
 
-#. 3.2 4.0
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
 msgid "Custom menu height"
 msgstr "Hauteur de menu personnalisée"
 
@@ -453,6 +524,14 @@ msgid "Show your favorite app icons next to the session buttons"
 msgstr ""
 "Affiche les icônes de vos applications favorites à côté des boutons de "
 "session"
+
+#. 4.0
+msgid "Always open menu on favorite apps"
+msgstr ""
+
+#. 4.0
+msgid "Always open the menu with favorite apps category selected"
+msgstr ""
 
 #~ msgid "No recent documents"
 #~ msgstr "Aucun document récent"

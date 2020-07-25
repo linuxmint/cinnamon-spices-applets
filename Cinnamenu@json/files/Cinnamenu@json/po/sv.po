@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cinnamenu@json\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-20 12:34+0100\n"
-"PO-Revision-Date: 2020-07-21 22:45+0100\n"
+"POT-Creation-Date: 2020-07-25 17:39+0100\n"
+"PO-Revision-Date: 2020-07-25 18:00+0100\n"
 "Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
 "Language-Team: Svenska Språkfiler <contactform@svenskasprakfiler.se>\n"
 "Language: sv\n"
@@ -143,16 +143,16 @@ msgstr "Lägg till i Favoriter"
 msgid "Uninstall"
 msgstr "Avinstallera"
 
-#. 4.0 4.0
+#. 4.0 4.0 4.0
 msgid "Please wait..."
 msgstr "Vänta..."
 
-#. metadata.json
+#. metadata.json->name
 #. 3.2
 msgid "Cinnamenu"
 msgstr "Cinnamenu"
 
-#. metadata.json
+#. metadata.json->description
 msgid ""
 "A flexible menu providing formatting options, web bookmarks, search provider "
 "support and fuzzy searching."
@@ -160,7 +160,7 @@ msgstr ""
 "En flexibel meny som tillhandahåller formateringsalternativ, webbokmärken, "
 "sökmotorstöd och luddig sökning."
 
-#. metadata.json
+#. metadata.json->comments
 msgid ""
 "Made possible thanks to the efforts of contributors to the Cinnamon menu, "
 "Gnomenu, and the contributors to projects they derived from."
@@ -168,15 +168,18 @@ msgstr ""
 "Möjliggjord tack vare bidragsgivarnas insatser för Cinnamon menu, Gnomenu "
 "och de projekt som de härleds ifrån."
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Behavior"
 msgstr "Beteende"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Appearance"
 msgstr "Utseende"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Layout and Content"
 msgstr "Layout och innehåll"
 
@@ -188,119 +191,164 @@ msgstr "Sökmotorer"
 msgid "No search provider extensions found"
 msgstr "Inga sökmotortillägg hittades"
 
-#. 3.2 4.0
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
 msgid "Panel"
 msgstr "Panel"
 
-#. 3.2 4.0
+#. 3.2
+#. 3.2
+#. 4.0
 msgid "Menu"
 msgstr "Meny"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Layout"
 msgstr "Layout"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Content"
 msgstr "Innehåll"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Recent files settings"
 msgstr "Inställningar för tidigare filer"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Open the menu editor"
 msgstr "Öppna menyredigeraren"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Reset category order"
 msgstr "Återställ kategoriordningen"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Use a custom icon"
 msgstr "Använd en anpassad ikon"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Use a custom icon in the panel"
 msgstr "Använd en anpassad ikon i panelen"
 
-#. 3.2 4.0
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
 msgid "Panel icon"
 msgstr "Panelikon"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Panel text"
 msgstr "Paneltext"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Text to show beside the panel icon"
 msgstr "Text att visa vid panelikonen"
 
-#. 3.2 4.0
+#. 3.2
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+#. 4.0
 msgid "pixels"
 msgstr "pixlar"
 
-#. 3.2 4.0
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
 msgid "Category icon size"
 msgstr "Storlek på kategoriikoner"
 
-#. 3.2 4.0
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
 msgid "Applications list icon size"
 msgstr "Listvyns ikonstorlek"
 
-#. 3.2 4.0
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
 msgid "Applications grid icon size"
 msgstr "Ikonvyns ikonstorlek"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Keyboard shortcut to open and close the menu"
 msgstr "Tangentbordsgenväg för att öppna och stänga menyn"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Open menu on hover"
 msgstr "Öppna menyn vid hovring"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Open the menu when I move my mouse over the panel icon"
 msgstr "Öppna menyn när jag för muspekaren över panelikonen"
 
-#. 3.2 4.0
+#. 3.2
+#. 3.2
+#. 4.0
 msgid "milliseconds"
 msgstr "millisekunder"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Menu hover delay"
 msgstr "Menyfördröjning vid hovring"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Use menu animations"
 msgstr "Använd menyanimering"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Animate the menu on open and close"
 msgstr "Animera menyn vid öppning och stängning"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Activate categories on click"
 msgstr "Aktivera kategorier vid klick"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Activate categories on click instead of on hover"
 msgstr "Aktivera kategorier vid klick istället för hovring"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Enable autoscrolling"
 msgstr "Aktivera automatisk skrollning"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Enable autoscrolling in application list"
 msgstr "Aktivera automatisk skrollning i programlistan"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Show web bookmarks"
 msgstr "Visa webbokmärken"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Show your browser's web bookmarks in the menu"
 msgstr "Visa webbläsarens bokmärken i menyn"
 
@@ -308,15 +356,18 @@ msgstr "Visa webbläsarens bokmärken i menyn"
 msgid "Enable searching of open windows"
 msgstr "Aktivera sökning i öppna fönster"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Enable search providers"
 msgstr "Aktivera sökmotorer"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Include search provider results in searches"
 msgstr "Inkludera sökmotorresultat i sökningar"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Example Search Providers"
 msgstr "Exempel på sökmotorer"
 
@@ -325,59 +376,79 @@ msgstr "Exempel på sökmotorer"
 msgid "Startup applications view mode"
 msgstr "Programikonernas visningsläge"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "List"
 msgstr "Listvy"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Grid"
 msgstr "Ikonvy"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "columns"
 msgstr "kolumner"
 
-#. 3.2 4.0
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
 msgid "Number of columns in apps grid"
 msgstr "Antal kolumner i programfältet"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Show bookmarks and places"
 msgstr "Visa bokmärken och platser"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Show bookmarks and places category in the menu"
 msgstr "Visa kategori för bokmärken och platser i menyn"
 
-#. 3.2 4.0
+#. 3.2
+#. 3.2
 msgid "Show application icons"
 msgstr "Visa programikoner"
 
-#. 3.2 4.0
+#. 3.2
+#. 3.2
 msgid "Show category icons"
 msgstr "Visa kategoriikoner"
 
+#. 3.2
 #. 3.2
 msgid "Show application descriptions under titles"
 msgstr "Visa programbeskrivningar under titlar"
 
 #. 3.2
+#. 3.2
 msgid "Show tooltips"
 msgstr "Visa knappbeskrivningar"
 
 #. 3.2
+#. 3.2
 msgid "Tooltip delay"
 msgstr "Fördröjning för knappbeskrivningar"
 
-#. 3.2 4.0
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
 msgid "Use a custom menu height"
 msgstr "Använd anpassad menyhöjd"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "px"
 msgstr "px"
 
-#. 3.2 4.0
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
 msgid "Custom menu height"
 msgstr "Anpassad menyhöjd"
 
@@ -440,6 +511,14 @@ msgstr "Lägg till favoriter till sessionsknapparna"
 #. 4.0
 msgid "Show your favorite app icons next to the session buttons"
 msgstr "Visa dina favoritprogramikoner tillsammans med sessionsknapparna"
+
+#. 4.0
+msgid "Always open menu on favorite apps"
+msgstr ""
+
+#. 4.0
+msgid "Always open the menu with favorite apps category selected"
+msgstr ""
 
 #~ msgid "No recent documents"
 #~ msgstr "Inga tidigare dokument"

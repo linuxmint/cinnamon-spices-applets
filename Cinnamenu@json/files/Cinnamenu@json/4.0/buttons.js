@@ -1,6 +1,7 @@
 const Gio = imports.gi.Gio;
 const Gtk = imports.gi.Gtk;
 const GLib = imports.gi.GLib;
+const St = imports.gi.St;
 const {Clone, BinLayout, ActorAlign} = imports.gi.Clutter;
 const {   TextureCache,
           Icon,
@@ -48,7 +49,7 @@ class CategoryListButton extends PopupBaseMenuItem {
         let categoryNameText = isStrDir ? altNameText : dirName ? dirName : '';
         this.disabled = false;
         this.entered = null;
-        if (this.state.settings.showCategoryIcons) {
+        if (this.state.settings.categoryIconSize > 0) {
             let icon;
             if (!isStrDir) {
                 icon = dir.get_icon();
@@ -163,7 +164,7 @@ class CategoryListButton extends PopupBaseMenuItem {
         if (event) {//?undo
             this.state.trigger('clearEnteredActors');
             if (!this.state.settings.categoryClick) {
-                setTimeout(() => this.state.trigger('makeVectorBox', this.actor), 0);
+                //setTimeout(() => this.state.trigger('makeVectorBox', this.actor), 0);
             }
         } else {
             this.state.trigger('scrollToButton', this, true);
@@ -431,7 +432,7 @@ class AppListGridButton extends PopupBaseMenuItem {
         }
 
         // Icons
-        if (this.state.settings.showApplicationIcons) {
+        if (this.state.iconSize > 0) {
             if (this.buttonState.appType === ApplicationType._applications) {
                 this.icon = this.buttonState.app.create_icon_texture(this.state.iconSize);
             } else if (this.buttonState.appType === ApplicationType._places) {
@@ -619,12 +620,13 @@ class AppListGridButton extends PopupBaseMenuItem {
 
         if (this.state.settings.descriptionPlacement === PlacementTOOLTIP) {
             const wordWrap = text => text.match( /.{1,80}(\s|$|-|=|\+)|\S+?(\s|$|-|=|\+)/g ).join('\n');
-            let tooltipMarkup = '<span>' + wordWrap(this.buttonState.app.nameWithSearchMarkup && SHOW_SEARCH_MARKUP_IN_TOOLTIP ?
-                                this.buttonState.app.nameWithSearchMarkup : this.buttonState.app.name) + '</span>';
+            let tooltipMarkup = '<span>' + wordWrap(this.buttonState.app.nameWithSearchMarkup &&
+                                        SHOW_SEARCH_MARKUP_IN_TOOLTIP ? this.buttonState.app.nameWithSearchMarkup :
+                                                                            this.buttonState.app.name) + '</span>';
             if (this.buttonState.app.description) {
                 tooltipMarkup += '\n<span size="small">' + wordWrap(this.buttonState.app.descriptionWithSearchMarkup &&
-                                            SHOW_SEARCH_MARKUP_IN_TOOLTIP ? this.buttonState.app.descriptionWithSearchMarkup :
-                                                                                this.buttonState.app.description) + '</span>';
+                                    SHOW_SEARCH_MARKUP_IN_TOOLTIP ? this.buttonState.app.descriptionWithSearchMarkup :
+                                                                        this.buttonState.app.description) + '</span>';
             }
             if (SEARCH_DEBUG) {
                 if (SHOW_SEARCH_MARKUP_IN_TOOLTIP && this.buttonState.app.keywordsWithSearchMarkup) {
@@ -645,7 +647,8 @@ class AppListGridButton extends PopupBaseMenuItem {
                 // Don't let the tooltip cover menu items when the menu
                 // is oriented next to the right side of the monitor.
                 const {style_class} = this.state.panelLocation;
-                if (style_class === 'panelRight') {//TODO: also detect when panel is vertical-right
+                if ((this.state.orientation === St.Side.BOTTOM || this.state.orientation === St.Side.TOP ) &&
+                                    style_class === 'panelRight' || this.state.orientation === St.Side.RIGHT) {
                     y += height + 8 * global.ui_scale;
                 }
             } else {//grid view
