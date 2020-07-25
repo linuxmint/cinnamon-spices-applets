@@ -1140,9 +1140,9 @@ class UI {
 			this._currentWeatherSummary.text = descriptionCondition;
 
 			// Weather icon
-			let iconname = weather.condition.icon;
-			if (iconname == null) {
-				iconname = "weather-severe-alert";
+			let iconName = weather.condition.icon;
+			if (iconName == null) {
+				iconName = "weather-severe-alert";
 			}
 
 			// Popup menu icons
@@ -1151,12 +1151,12 @@ class UI {
 				this.UpdateIconType(IconType.SYMBOLIC); // Hard set to symbolic as iconset is symbolic
 			}
 			else {
-				this._currentWeatherIcon.icon_name = iconname;
+				this._currentWeatherIcon.icon_name = iconName;
 				this.UpdateIconType(config.IconType()); // Revert to user setting
 			}
 
 			// Applet icon
-			this.app.SetAppletIcon(iconname);
+			this.app.SetAppletIcon(iconName);
 
 			// Temperature
 			let temp = "";

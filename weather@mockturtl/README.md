@@ -91,7 +91,8 @@ Right-click to access `cinnamon-settings` -> _Applets -> Configure_.
 
 ## Future Plans
 
-* Switch to MET Norway API v2.0 when it comes out (has a better icon naming scheme for conditions)
+* None at the moment, I can take requests for provider integrations or for new features
+* If I figure out a way, add support to save locations and easily switch between them
 
 ## Known Issues
 

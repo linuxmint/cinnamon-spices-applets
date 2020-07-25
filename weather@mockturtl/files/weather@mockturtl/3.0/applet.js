@@ -973,19 +973,19 @@ var UI = (function () {
             }
             this.app.SetAppletTooltip(location + " - " + _("As of") + " " + AwareDateString(weather.date, this.app.currentLocale, config._show24Hours));
             this._currentWeatherSummary.text = descriptionCondition;
-            var iconname = weather.condition.icon;
-            if (iconname == null) {
-                iconname = "weather-severe-alert";
+            var iconName = weather.condition.icon;
+            if (iconName == null) {
+                iconName = "weather-severe-alert";
             }
             if (config._useCustomMenuIcons) {
                 this._currentWeatherIcon.icon_name = weather.condition.customIcon;
                 this.UpdateIconType(IconType.SYMBOLIC);
             }
             else {
-                this._currentWeatherIcon.icon_name = iconname;
+                this._currentWeatherIcon.icon_name = iconName;
                 this.UpdateIconType(config.IconType());
             }
-            this.app.SetAppletIcon(iconname);
+            this.app.SetAppletIcon(iconName);
             var temp = "";
             if (weather.temperature != null) {
                 temp = TempToUserConfig(weather.temperature, config._temperatureUnit, config._tempRussianStyle);
