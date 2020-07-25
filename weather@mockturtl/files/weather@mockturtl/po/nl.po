@@ -10,7 +10,7 @@ msgstr ""
 "08:38:14)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-07-24 15:43+0200\n"
-"PO-Revision-Date: 2020-07-25 02:13+0200\n"
+"PO-Revision-Date: 2020-07-25 12:13+0200\n"
 "Last-Translator: Jurien (French77) <Jurien@protonmail.com>\n"
 "Language-Team: Dutch\n"
 "Language: nl\n"
@@ -1860,49 +1860,41 @@ msgstr ""
 "Ondersteunt 8 voorspellingsdagen en 168 voorspellingsuren."
 
 #. 3.8->settings-schema.json->METN->description
-#, fuzzy
-#| msgid ""
-#| "MET Norway - Current weather is shown for the next hour, and the daily "
-#| "forecasts are generated from 6 hour forecasts, so it can look incorrect "
-#| "sometimes."
 msgid ""
 "MET Norway:\n"
 "Current weather is shown for the next hour, and the daily forecasts are "
 "generated from 6 hour forecasts, so it can look incorrect sometimes. "
 "Supports 10 forecast days and 48 forecast hours."
 msgstr ""
-"MET Norway - Het huidige weer wordt getoond voor het komende uur, en de "
-"dagelijkse voorspellingen worden gegenereerd op basis van zesurige "
-"voorspellingen. Vaak beste resultaat."
+"MET Norway:\n"
+"Het huidige weer wordt getoond voor het komende uur, en de dagelijkse "
+"voorspellingen worden gegenereerd uit 6 uur voorspellingen, dus het kan er "
+"soms niet goed uitzien. Ondersteunt 10 voorspellingsdagen en 48 "
+"voorspellingsuren."
 
 #. 3.8->settings-schema.json->WB->description
-#, fuzzy
-#| msgid ""
-#| "WeatherBit - At least 10 minutes as refresh rate is recommended, since "
-#| "otherwise you might exceed you daily quota."
 msgid ""
 "WeatherBit:\n"
 "At least 10 minutes as refresh rate is recommended, since otherwise you "
 "might exceed you daily quota. Supports 16 forecast days and 48 forecast "
 "hours."
 msgstr ""
-"WeatherBit - Minstens 10 minuten als verversingssnelheid wordt aanbevolen,\n"
-"daar u anders uw dagelijkse quotum zou kunnen overschrijden."
+"WeatherBit:\n"
+"Minstens 10 minuten als verversingssnelheid wordt aanbevolen, omdat je "
+"anders de dagelijkse quota zou kunnen overschrijden. Ondersteunt 16 "
+"voorspellingsdagen en 48 voorspellingsuren."
 
 #. 3.8->settings-schema.json->Yahoo->description
-#, fuzzy
-#| msgid ""
-#| "Yahoo - Requires 'python3-requests-oauthlib' package installed (for Arch "
-#| "based distros 'python-requests-oauthlib'), Updates every 2 hours."
 msgid ""
 "Yahoo:\n"
 "Requires 'python3-requests-oauthlib' package installed (for Arch based "
 "distros 'python-requests-oauthlib'), Updates every 2 hours. Only supports 10 "
 "forecast days and no hours."
 msgstr ""
-"Yahoo - Vereist installatie van pakket 'python3-requests-oauthlib' (voor \n"
-"Arch-gebaseerd distros 'python-requests-oauthlib'), wordt elke twee uur "
-"bijgewerkt."
+"Yahoo:\n"
+"Vereist 'python3-requests-oauthlib' pakket geïnstalleerd (voor Arch "
+"gebaseerde distros 'python-requests-oauthlib'), Updates elke 2 uur. "
+"Ondersteunt slechts 10 voorspellingsdagen en geen uren."
 
 #. 3.8->settings-schema.json->Climacell->description
 msgid ""
@@ -2103,6 +2095,11 @@ msgstr ""
 #~ "zou uw dagelijkse quotum kunnen overschrijden. Heeft u een sleutel nodig, "
 #~ "klik dan op 'API-sleutel en locatie instellen' voor de te nemen stappen "
 #~ "om deze te verkrijgen."
+
+
+
+
+
 
 
 
