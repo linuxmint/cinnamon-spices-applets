@@ -10,7 +10,7 @@ msgstr ""
 "08:38:14)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-07-24 15:43+0200\n"
-"PO-Revision-Date: 2020-07-25 02:13+0200\n"
+"PO-Revision-Date: 2020-07-25 13:15+0200\n"
 "Last-Translator: Jurien (French77) <Jurien@protonmail.com>\n"
 "Language-Team: Dutch\n"
 "Language: nl\n"
@@ -947,10 +947,8 @@ msgid "Location is outside US, please use a different provider."
 msgstr "Locatie is buiten de VS, maak gebruik van een andere provider."
 
 #: 3.0/us_weather.js:398 3.8/us_weather.js:302
-#, fuzzy
-#| msgid "Failed to Process Forecast Info"
 msgid "Failed to Process Hourly Forecast Info"
-msgstr "Kon voorspellingsinformatie niet verwerken"
+msgstr "Kon voorspellingsinformatie per uur niet verwerken"
 
 #: 3.0/us_weather.js:418 3.0/us_weather.js:453 3.8/us_weather.js:321
 #: 3.8/us_weather.js:356
@@ -958,14 +956,10 @@ msgid "Few Clouds"
 msgstr "Weinig bewolking"
 
 #: 3.0/us_weather.js:426 3.8/us_weather.js:329
-#, fuzzy
-#| msgid "Partly Cloudy"
 msgid "Partly cloudy"
 msgstr "Deels bewolkt"
 
 #: 3.0/us_weather.js:433 3.8/us_weather.js:336
-#, fuzzy
-#| msgid "Mostly Cloudy"
 msgid "Mostly cloudy"
 msgstr "Overwegend bewolkt"
 
@@ -973,8 +967,6 @@ msgstr "Overwegend bewolkt"
 #: 3.0/met_uk.js:587 3.0/met_uk.js:588 3.8/us_weather.js:342
 #: 3.8/us_weather.js:343 3.8/us_weather.js:377 3.8/met_uk.js:479
 #: 3.8/met_uk.js:480
-#, fuzzy
-#| msgid "Overcast clouds"
 msgid "Overcast"
 msgstr "Laaghangende bewolking"
 
@@ -983,34 +975,24 @@ msgid "Clear and windy"
 msgstr "Helder en winderig"
 
 #: 3.0/us_weather.js:454 3.8/us_weather.js:357
-#, fuzzy
-#| msgid "Few clouds"
 msgid "Few clouds and windz"
-msgstr "Weinig bewolking"
+msgstr "Winderig met wat bewolking"
 
 #: 3.0/us_weather.js:461 3.8/us_weather.js:364
-#, fuzzy
-#| msgid "Partly Cloudy"
 msgid "Partly cloudy and windy"
-msgstr "Deels bewolkt"
+msgstr "Deels bewolkt en winderig"
 
 #: 3.0/us_weather.js:468 3.8/us_weather.js:371
-#, fuzzy
-#| msgid "Mostly Rainy"
 msgid "Mosty cloudy and windy"
-msgstr "Overwegend regenachtig"
+msgstr "Meest bewolkt en winderig"
 
 #: 3.0/us_weather.js:475 3.8/us_weather.js:378
-#, fuzzy
-#| msgid "Overcast clouds"
 msgid "Overcast and windy"
-msgstr "Laaghangende bewolking"
+msgstr "Laaghangende bewolking en winderig"
 
 #: 3.0/us_weather.js:489 3.8/us_weather.js:392
-#, fuzzy
-#| msgid "Shower rain"
 msgid "Snowy rain"
-msgstr "Regenbuien"
+msgstr "Sneeuwbuien"
 
 #: 3.0/us_weather.js:524 3.8/us_weather.js:427
 msgid "Freezing Rain and snow"
@@ -1058,53 +1040,37 @@ msgid "km"
 msgstr "km"
 
 #: 3.0/met_uk.js:595 3.0/met_uk.js:602 3.8/met_uk.js:487 3.8/met_uk.js:494
-#, fuzzy
-#| msgid "Light rain showers"
 msgid "Light rain shower"
-msgstr "Lichte regenbuien"
+msgstr "Regenbuien"
 
 #: 3.0/met_uk.js:623 3.0/met_uk.js:630 3.8/met_uk.js:515 3.8/met_uk.js:522
-#, fuzzy
-#| msgid "Heavy rain showers"
 msgid "Heavy rain shower"
 msgstr "Zware regenbuien"
 
 #: 3.0/met_uk.js:644 3.0/met_uk.js:651 3.8/met_uk.js:536 3.8/met_uk.js:543
-#, fuzzy
-#| msgid "Sleet showers"
 msgid "Sleet shower"
-msgstr "Hagelbuien"
+msgstr "Natte sneeuwbuien"
 
 #: 3.0/met_uk.js:665 3.0/met_uk.js:672 3.8/met_uk.js:557 3.8/met_uk.js:564
-#, fuzzy
-#| msgid "Rain showers"
 msgid "Hail shower"
-msgstr "Regenbuien"
+msgstr "Hagelbuien"
 
 #: 3.0/met_uk.js:686 3.0/met_uk.js:693 3.8/met_uk.js:578 3.8/met_uk.js:585
-#, fuzzy
-#| msgid "Light snow showers"
 msgid "Light snow shower"
 msgstr "Lichte sneeuwbuien"
 
 #: 3.0/met_uk.js:707 3.0/met_uk.js:714 3.8/met_uk.js:599 3.8/met_uk.js:606
-#, fuzzy
-#| msgid "Heavy snow showers"
 msgid "Heavy snow shower"
 msgstr "Zware sneeuwbuien"
 
 #: 3.0/met_uk.js:727 3.0/met_uk.js:734 3.0/met_uk.js:741 3.0/met_uk.js:742
 #: 3.8/met_uk.js:619 3.8/met_uk.js:626 3.8/met_uk.js:633 3.8/met_uk.js:634
-#, fuzzy
-#| msgid "Thunderstorm"
 msgid "Thunder"
 msgstr "Onweer"
 
 #: 3.0/met_uk.js:728 3.0/met_uk.js:735 3.8/met_uk.js:620 3.8/met_uk.js:627
-#, fuzzy
-#| msgid "Thunderstorm"
 msgid "Thunder shower"
-msgstr "Onweer"
+msgstr "Zware regenbuien"
 
 #: 3.0/applet.js:167 3.8/applet.js:117
 msgid "Error"
@@ -1151,10 +1117,8 @@ msgid "API returned status code between 400 and 500"
 msgstr "API geretourneerde statuscode tussen 400 en 500"
 
 #: 3.0/applet.js:542 3.8/applet.js:435
-#, fuzzy
-#| msgid "Could not obtain location"
 msgid "Could not get weather information"
-msgstr "Kon locatie niet verkrijgen"
+msgstr "Kon geen voorspelling krijgen voor uw gebied"
 
 #: 3.0/applet.js:565 3.8/applet.js:458
 msgid ""
@@ -1775,19 +1739,15 @@ msgstr "Hulp"
 #. 3.8->settings-schema.json->contact-section->title
 #. 3.8->settings-schema.json->contact->title
 msgid "Contact"
-msgstr "Contact opnemen met"
+msgstr "Contact"
 
 #. 3.8->settings-schema.json->provider-info->title
-#, fuzzy
-#| msgid "Weather provider information"
 msgid "Weather provider choices and details"
 msgstr "Weersverstrekkerinformatie"
 
 #. 3.8->settings-schema.json->location-info->title
-#, fuzzy
-#| msgid "Override location label"
 msgid "Entering location manually"
-msgstr "Locatie-etiket overschrijven"
+msgstr "Handmatige locatie"
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "Met Office UK (UK only)"
@@ -1814,8 +1774,6 @@ msgstr ""
 "symbolisch"
 
 #. 3.8->settings-schema.json->useSymbolicIcons->description
-#, fuzzy
-#| msgid "Use symbolic icons in the applet"
 msgid "Use symbolic icons throughout the applet"
 msgstr "Gebruik symbolische pictogrammen in dit werkbalkhulpje"
 
@@ -1860,49 +1818,41 @@ msgstr ""
 "Ondersteunt 8 voorspellingsdagen en 168 voorspellingsuren."
 
 #. 3.8->settings-schema.json->METN->description
-#, fuzzy
-#| msgid ""
-#| "MET Norway - Current weather is shown for the next hour, and the daily "
-#| "forecasts are generated from 6 hour forecasts, so it can look incorrect "
-#| "sometimes."
 msgid ""
 "MET Norway:\n"
 "Current weather is shown for the next hour, and the daily forecasts are "
 "generated from 6 hour forecasts, so it can look incorrect sometimes. "
 "Supports 10 forecast days and 48 forecast hours."
 msgstr ""
-"MET Norway - Het huidige weer wordt getoond voor het komende uur, en de "
-"dagelijkse voorspellingen worden gegenereerd op basis van zesurige "
-"voorspellingen. Vaak beste resultaat."
+"MET Norway:\n"
+"Het huidige weer wordt getoond voor het komende uur, en de dagelijkse "
+"voorspellingen worden gegenereerd uit 6 uur voorspellingen, dus het kan er "
+"soms niet goed uitzien. Ondersteunt 10 voorspellingsdagen en 48 "
+"voorspellingsuren."
 
 #. 3.8->settings-schema.json->WB->description
-#, fuzzy
-#| msgid ""
-#| "WeatherBit - At least 10 minutes as refresh rate is recommended, since "
-#| "otherwise you might exceed you daily quota."
 msgid ""
 "WeatherBit:\n"
 "At least 10 minutes as refresh rate is recommended, since otherwise you "
 "might exceed you daily quota. Supports 16 forecast days and 48 forecast "
 "hours."
 msgstr ""
-"WeatherBit - Minstens 10 minuten als verversingssnelheid wordt aanbevolen,\n"
-"daar u anders uw dagelijkse quotum zou kunnen overschrijden."
+"WeatherBit:\n"
+"Minstens 10 minuten als verversingssnelheid wordt aanbevolen, omdat je "
+"anders de dagelijkse quota zou kunnen overschrijden. Ondersteunt 16 "
+"voorspellingsdagen en 48 voorspellingsuren."
 
 #. 3.8->settings-schema.json->Yahoo->description
-#, fuzzy
-#| msgid ""
-#| "Yahoo - Requires 'python3-requests-oauthlib' package installed (for Arch "
-#| "based distros 'python-requests-oauthlib'), Updates every 2 hours."
 msgid ""
 "Yahoo:\n"
 "Requires 'python3-requests-oauthlib' package installed (for Arch based "
 "distros 'python-requests-oauthlib'), Updates every 2 hours. Only supports 10 "
 "forecast days and no hours."
 msgstr ""
-"Yahoo - Vereist installatie van pakket 'python3-requests-oauthlib' (voor \n"
-"Arch-gebaseerd distros 'python-requests-oauthlib'), wordt elke twee uur "
-"bijgewerkt."
+"Yahoo:\n"
+"Vereist 'python3-requests-oauthlib' pakket geïnstalleerd (voor Arch "
+"gebaseerde distros 'python-requests-oauthlib'), Updates elke 2 uur. "
+"Ondersteunt slechts 10 voorspellingsdagen en geen uren."
 
 #. 3.8->settings-schema.json->Climacell->description
 msgid ""
@@ -2103,7 +2053,6 @@ msgstr ""
 #~ "zou uw dagelijkse quotum kunnen overschrijden. Heeft u een sleutel nodig, "
 #~ "klik dan op 'API-sleutel en locatie instellen' voor de te nemen stappen "
 #~ "om deze te verkrijgen."
-
 
 
 
