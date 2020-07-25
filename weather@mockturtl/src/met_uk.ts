@@ -25,7 +25,7 @@ var MPHtoMPS = utils.MPHtoMPS as (speed: number) => number;
 var compassToDeg = utils.compassToDeg as (compass: string) => number;
 var GetDistance = utils.GetDistance as (lat1: number, lon1: number, lat2: number, lon2: number) => number;
 const get = utils.get as (p: string[], o: any) => any;
-var MetretoUserUnits = utils.MetretoUserUnits as (m: number, distanceUnit: DistanceUnits) => number;
+var MetreToUserUnits = utils.MetreToUserUnits as (m: number, distanceUnit: DistanceUnits) => number;
 
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
@@ -199,7 +199,7 @@ class MetUk implements WeatherProvider {
 	}
 
     // A function as a function parameter 2 levels deep does not know
-    // about the top level object information, has to pass it in as a paramater
+    // about the top level object information, has to pass it in as a parameter
     /**
      * 
      * @param baseUrl 
@@ -290,7 +290,7 @@ class MetUk implements WeatherProvider {
         }
         catch(e) { 
 			this.app.log.Error("Met UK Weather Parsing error: " + e);
-			this.app.HandleError({type: "soft", service: "met-uk", detail: "unusal payload", message: _("Failed to Process Current Weather Info")})
+			this.app.HandleError({type: "soft", service: "met-uk", detail: "unusual payload", message: _("Failed to Process Current Weather Info")})
           	return null; 
         }
 	};
@@ -314,7 +314,7 @@ class MetUk implements WeatherProvider {
       }
       catch(e) {
           self.app.log.Error("MET UK Forecast Parsing error: " + e);
-          self.app.HandleError({type: "soft", service: "met-uk", detail: "unusal payload", message: _("Failed to Process Forecast Info")})
+          self.app.HandleError({type: "soft", service: "met-uk", detail: "unusual payload", message: _("Failed to Process Forecast Info")})
           return null; 
       }
 	};
@@ -338,7 +338,7 @@ class MetUk implements WeatherProvider {
 						date: timestamp,
 						temp: CelsiusToKelvin(parseFloat(hour.T)),
 						condition: self.ResolveCondition(hour.W),
-						precipation: {
+						precipitation: {
 							type: "rain",
 							volume: null,
 							chance: parseFloat(hour.Pp)
@@ -351,7 +351,7 @@ class MetUk implements WeatherProvider {
 		}
 		catch(e) {
 			self.app.log.Error("MET UK Forecast Parsing error: " + e);
-			self.app.HandleError({type: "soft", service: "met-uk", detail: "unusal payload", message: _("Failed to Process Forecast Info")})
+			self.app.HandleError({type: "soft", service: "met-uk", detail: "unusual payload", message: _("Failed to Process Forecast Info")})
 			return null; 
 		}
 	}
@@ -360,12 +360,12 @@ class MetUk implements WeatherProvider {
 	private VisibilityToText(dist: string): string {
 		let distance = parseInt(dist);
 		let unit = this.app.config._distanceUnit;
-		if (distance < 1000) return _("Very poor - Less than") + " " + MetretoUserUnits(1000, unit) + this.DistanceUnitFor(unit);
-		if (distance < 4000) return _("Poor - Between") + " " + MetretoUserUnits(1000, unit) + "-" +  MetretoUserUnits(4000, unit) + " " + this.DistanceUnitFor(unit);
-		if (distance < 10000) return _("Moderate - Between") + " " + MetretoUserUnits(4000, unit) + "-" +  MetretoUserUnits(10000, unit) + " " + this.DistanceUnitFor(unit);
-		if (distance < 20000) return _("Good - Between") + " " + MetretoUserUnits(10000, unit) + "-" +  MetretoUserUnits(20000, unit) + " " + this.DistanceUnitFor(unit);
-		if (distance < 40000) return _("Very good - Between") + " " + MetretoUserUnits(20000, unit) + "-" +  MetretoUserUnits(40000, unit) + " " + this.DistanceUnitFor(unit);
-		return _("Excellent - More than") + " " + MetretoUserUnits(40000, unit) + " " + this.DistanceUnitFor(unit);
+		if (distance < 1000) return _("Very poor - Less than") + " " + MetreToUserUnits(1000, unit) + this.DistanceUnitFor(unit);
+		if (distance < 4000) return _("Poor - Between") + " " + MetreToUserUnits(1000, unit) + "-" +  MetreToUserUnits(4000, unit) + " " + this.DistanceUnitFor(unit);
+		if (distance < 10000) return _("Moderate - Between") + " " + MetreToUserUnits(4000, unit) + "-" +  MetreToUserUnits(10000, unit) + " " + this.DistanceUnitFor(unit);
+		if (distance < 20000) return _("Good - Between") + " " + MetreToUserUnits(10000, unit) + "-" +  MetreToUserUnits(20000, unit) + " " + this.DistanceUnitFor(unit);
+		if (distance < 40000) return _("Very good - Between") + " " + MetreToUserUnits(20000, unit) + "-" +  MetreToUserUnits(40000, unit) + " " + this.DistanceUnitFor(unit);
+		return _("Excellent - More than") + " " + MetreToUserUnits(40000, unit) + " " + this.DistanceUnitFor(unit);
 	}
 
 	private DistanceUnitFor(unit: DistanceUnits) {
@@ -441,7 +441,7 @@ class MetUk implements WeatherProvider {
 	}
 
 	/**
-	 * Obtaions the latest observation from the data of past 24-hour observation periods
+	 * Obtains the latest observation from the data of past 24-hour observation periods
 	 * @param observations 
 	 * @param day 
 	 */

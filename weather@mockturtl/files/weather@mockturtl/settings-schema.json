@@ -25,7 +25,7 @@
   { "type": "entry"
   , "default": "London,UK"
   , "description": "Location"
-  , "tooltip": "Acceptable inputs: City,CountryCode or Zipcode,CountryCode or Latitude,Longtitude"
+  , "tooltip": "Acceptable inputs: City,CountryCode or Zipcode,CountryCode or Latitude,Longitude"
 },
   "getLocation":
   {

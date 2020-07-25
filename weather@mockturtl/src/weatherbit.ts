@@ -75,7 +75,7 @@ class Weatherbit implements WeatherProvider {
     };
 
     // A function as a function parameter 2 levels deep does not know
-    // about the top level object information, has to pass it in as a paramater
+    // about the top level object information, has to pass it in as a parameter
     /**
      * 
      * @param baseUrl 
@@ -157,7 +157,7 @@ class Weatherbit implements WeatherProvider {
         }
         catch(e) { 
           self.app.log.Error("Weatherbit Weather Parsing error: " + e);
-          self.app.HandleError({type: "soft", service: "weatherbit", detail: "unusal payload", message: _("Failed to Process Current Weather Info")})
+          self.app.HandleError({type: "soft", service: "weatherbit", detail: "unusual payload", message: _("Failed to Process Current Weather Info")})
           return null; 
         }
     };
@@ -184,7 +184,7 @@ class Weatherbit implements WeatherProvider {
       }
       catch(e) {
           self.app.log.Error("Weatherbit Forecast Parsing error: " + e);
-          self.app.HandleError({type: "soft", service: "weatherbit", detail: "unusal payload", message: _("Failed to Process Forecast Info")})
+          self.app.HandleError({type: "soft", service: "weatherbit", detail: "unusual payload", message: _("Failed to Process Forecast Info")})
           return null; 
       }
 	};
@@ -203,15 +203,15 @@ class Weatherbit implements WeatherProvider {
 						icon: weatherIconSafely(self.ResolveIcon(hour.weather.icon), self.app.config.IconType()),
 						customIcon: self.ResolveCustomIcon(hour.weather.icon)
 					},
-					precipation: {
+					precipitation: {
 						type: "rain",
 						volume: hour.precip,
 						chance: hour.pop
 					}
 				};
 				if (hour.snow != 0) {
-					forecast.precipation.type = "snow";
-					forecast.precipation.volume = hour.snow;
+					forecast.precipitation.type = "snow";
+					forecast.precipitation.volume = hour.snow;
 				}
 				forecasts.push(forecast);         
 			}
@@ -219,7 +219,7 @@ class Weatherbit implements WeatherProvider {
 		}
 		catch(e) {
 			self.app.log.Error("Weatherbit Forecast Parsing error: " + e);
-			self.app.HandleError({type: "soft", service: "weatherbit", detail: "unusal payload", message: _("Failed to Process Forecast Info")})
+			self.app.HandleError({type: "soft", service: "weatherbit", detail: "unusual payload", message: _("Failed to Process Forecast Info")})
 			return null; 
 		}
 	}
@@ -239,7 +239,7 @@ class Weatherbit implements WeatherProvider {
      * in string format, but we can check if unix timestamp and date string has mismatch
      * to figure out if it's an incorrect Date.
      * 
-     * @param ts unix timestamp initialised as Date from payload
+     * @param ts unix timestamp initialized as Date from payload
      * @param last_ob_time last refresh time in string format
      * @returns the hour difference of incorrect time from correct time
      */
@@ -248,9 +248,9 @@ class Weatherbit implements WeatherProvider {
     }
 
     private ParseStringTime(last_ob_time: string): Date {
-        let splitted = last_ob_time.split(/[T\-\s:]/);
-        if (splitted.length != 5) return null;
-        return new Date(parseInt(splitted[0]), parseInt(splitted[1])-1, parseInt(splitted[2]), parseInt(splitted[3]), parseInt(splitted[4]));
+        let split = last_ob_time.split(/[T\-\s:]/);
+        if (split.length != 5) return null;
+        return new Date(parseInt(split[0]), parseInt(split[1])-1, parseInt(split[2]), parseInt(split[3]), parseInt(split[4]));
     }
 
     private ConvertToAPILocale(systemLocale: string) {
@@ -305,7 +305,7 @@ class Weatherbit implements WeatherProvider {
 
     private ResolveIcon(icon: string): BuiltinIcons[] {
         switch (icon) {
-            // Tunderstorms
+            // Thunderstorms
             case "t01n":
             case "t01d": 
             case "t02n":
@@ -395,7 +395,7 @@ class Weatherbit implements WeatherProvider {
 
     private ResolveCustomIcon(icon: string): CustomIcons {
         switch (icon) {
-            // Tunderstorms
+            // Thunderstorms
             case "t01d": 
             case "t02d":
             case "t03d":
@@ -496,7 +496,7 @@ class Weatherbit implements WeatherProvider {
 };
 
 /**
- *  M - [DEFAULT] Metric (Celcius, m/s, mm)
+ *  M - [DEFAULT] Metric (Celsius, m/s, mm)
     S - Scientific (Kelvin, m/s, mm)
     I - Fahrenheit (F, mph, in)
  */

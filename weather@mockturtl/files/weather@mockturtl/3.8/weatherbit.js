@@ -123,7 +123,7 @@ class Weatherbit {
         }
         catch (e) {
             self.app.log.Error("Weatherbit Weather Parsing error: " + e);
-            self.app.HandleError({ type: "soft", service: "weatherbit", detail: "unusal payload", message: _("Failed to Process Current Weather Info") });
+            self.app.HandleError({ type: "soft", service: "weatherbit", detail: "unusual payload", message: _("Failed to Process Current Weather Info") });
             return null;
         }
     }
@@ -150,7 +150,7 @@ class Weatherbit {
         }
         catch (e) {
             self.app.log.Error("Weatherbit Forecast Parsing error: " + e);
-            self.app.HandleError({ type: "soft", service: "weatherbit", detail: "unusal payload", message: _("Failed to Process Forecast Info") });
+            self.app.HandleError({ type: "soft", service: "weatherbit", detail: "unusual payload", message: _("Failed to Process Forecast Info") });
             return null;
         }
     }
@@ -169,15 +169,15 @@ class Weatherbit {
                         icon: weatherIconSafely(self.ResolveIcon(hour.weather.icon), self.app.config.IconType()),
                         customIcon: self.ResolveCustomIcon(hour.weather.icon)
                     },
-                    precipation: {
+                    precipitation: {
                         type: "rain",
                         volume: hour.precip,
                         chance: hour.pop
                     }
                 };
                 if (hour.snow != 0) {
-                    forecast.precipation.type = "snow";
-                    forecast.precipation.volume = hour.snow;
+                    forecast.precipitation.type = "snow";
+                    forecast.precipitation.volume = hour.snow;
                 }
                 forecasts.push(forecast);
             }
@@ -185,7 +185,7 @@ class Weatherbit {
         }
         catch (e) {
             self.app.log.Error("Weatherbit Forecast Parsing error: " + e);
-            self.app.HandleError({ type: "soft", service: "weatherbit", detail: "unusal payload", message: _("Failed to Process Forecast Info") });
+            self.app.HandleError({ type: "soft", service: "weatherbit", detail: "unusual payload", message: _("Failed to Process Forecast Info") });
             return null;
         }
     }
@@ -200,10 +200,10 @@ class Weatherbit {
         return Math.round((incorrectTime.getTime() - correctTime.getTime()) / (1000 * 60 * 60));
     }
     ParseStringTime(last_ob_time) {
-        let splitted = last_ob_time.split(/[T\-\s:]/);
-        if (splitted.length != 5)
+        let split = last_ob_time.split(/[T\-\s:]/);
+        if (split.length != 5)
             return null;
-        return new Date(parseInt(splitted[0]), parseInt(splitted[1]) - 1, parseInt(splitted[2]), parseInt(splitted[3]), parseInt(splitted[4]));
+        return new Date(parseInt(split[0]), parseInt(split[1]) - 1, parseInt(split[2]), parseInt(split[3]), parseInt(split[4]));
     }
     ConvertToAPILocale(systemLocale) {
         if (systemLocale == "zh-tw") {

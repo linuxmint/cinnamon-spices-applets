@@ -175,7 +175,7 @@ var Climacell = (function () {
         }
         catch (e) {
             ctx.app.log.Error("Climacell payload parsing error: " + e);
-            ctx.app.HandleError({ type: "soft", detail: "unusal payload", service: "climacell", message: _("Failed to Process Weather Info") });
+            ctx.app.HandleError({ type: "soft", detail: "unusual payload", service: "climacell", message: _("Failed to Process Weather Info") });
             return null;
         }
     };
@@ -191,7 +191,7 @@ var Climacell = (function () {
             var hour = {
                 temp: CelsiusToKelvin(element.temp.value),
                 date: new Date(element.observation_time.value),
-                precipation: {
+                precipitation: {
                     type: element.precipitation_type.value,
                     volume: null,
                     chance: element.precipitation_probability.value

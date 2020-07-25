@@ -120,13 +120,13 @@ class OpenWeatherMap {
                     },
                 };
                 if (!!hour.rain) {
-                    forecast.precipation = {
+                    forecast.precipitation = {
                         volume: hour.rain["1h"],
                         type: "rain"
                     };
                 }
                 if (!!hour.snow) {
-                    forecast.precipation = {
+                    forecast.precipitation = {
                         volume: hour.snow["1h"],
                         type: "snow"
                     };
@@ -137,8 +137,8 @@ class OpenWeatherMap {
             return weather;
         }
         catch (e) {
-            self.app.log.Error("OpenWeathermap Weather Parsing error: " + e);
-            self.app.HandleError({ type: "soft", service: "openweathermap", detail: "unusal payload", message: _("Failed to Process Current Weather Info") });
+            self.app.log.Error("OpenWeatherMap Weather Parsing error: " + e);
+            self.app.HandleError({ type: "soft", service: "openweathermap", detail: "unusual payload", message: _("Failed to Process Current Weather Info") });
             return null;
         }
     }
@@ -177,7 +177,7 @@ class OpenWeatherMap {
         return lang;
     }
     HandleResponseErrors(json) {
-        let errorMsg = "OpenWeathermap Response: ";
+        let errorMsg = "OpenWeatherMap Response: ";
         let error = {
             service: "openweathermap",
             type: "hard",

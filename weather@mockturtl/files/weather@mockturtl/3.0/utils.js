@@ -356,7 +356,7 @@ var KmToM = function (km) {
         return null;
     return km * 0.6213712;
 };
-var MetretoUserUnits = function (m, distanceUnit) {
+var MetreToUserUnits = function (m, distanceUnit) {
     if (distanceUnit == "metric")
         return Math.round(m / 1000 * 10) / 10;
     return Math.round(KmToM(m / 1000) * 10) / 10;

@@ -178,7 +178,7 @@ var DarkSky = (function () {
                         icon: weatherIconSafely(this.ResolveIcon(hour.icon, { sunrise: sunrise, sunset: sunset }, new Date(hour.time * 1000)), this.app.config.IconType()),
                         customIcon: this.ResolveCustomIcon(hour.icon)
                     },
-                    precipation: {
+                    precipitation: {
                         type: hour.precipType,
                         volume: hour.precipProbability,
                         chance: hour.precipProbability * 100
@@ -190,7 +190,7 @@ var DarkSky = (function () {
         }
         catch (e) {
             this.app.log.Error("DarkSky payload parsing error: " + e);
-            this.app.HandleError({ type: "soft", detail: "unusal payload", service: "darksky", message: _("Failed to Process Weather Info") });
+            this.app.HandleError({ type: "soft", detail: "unusual payload", service: "darksky", message: _("Failed to Process Weather Info") });
             return null;
         }
     };

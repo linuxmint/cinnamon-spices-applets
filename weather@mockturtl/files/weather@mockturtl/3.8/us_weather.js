@@ -239,7 +239,7 @@ class USWeather {
         }
         catch (e) {
             this.app.log.Error("US Weather Parsing error: " + e);
-            this.app.HandleError({ type: "soft", service: "us-weather", detail: "unusal payload", message: _("Failed to Process Current Weather Info") });
+            this.app.HandleError({ type: "soft", service: "us-weather", detail: "unusual payload", message: _("Failed to Process Current Weather Info") });
             return null;
         }
     }
@@ -276,7 +276,7 @@ class USWeather {
         }
         catch (e) {
             this.app.log.Error("US Weather Forecast Parsing error: " + e);
-            this.app.HandleError({ type: "soft", service: "us-weather", detail: "unusal payload", message: _("Failed to Process Forecast Info") });
+            this.app.HandleError({ type: "soft", service: "us-weather", detail: "unusual payload", message: _("Failed to Process Forecast Info") });
             return null;
         }
     }
@@ -291,7 +291,7 @@ class USWeather {
                     date: timestamp,
                     temp: CelsiusToKelvin(hour.temperature),
                     condition: self.ResolveCondition(hour.icon, !hour.isDaytime),
-                    precipation: null
+                    precipitation: null
                 };
                 forecasts.push(forecast);
             }
@@ -299,7 +299,7 @@ class USWeather {
         }
         catch (e) {
             self.app.log.Error("US Weather service Forecast Parsing error: " + e);
-            self.app.HandleError({ type: "soft", service: "us-weather", detail: "unusal payload", message: _("Failed to Process Hourly Forecast Info") });
+            self.app.HandleError({ type: "soft", service: "us-weather", detail: "unusual payload", message: _("Failed to Process Hourly Forecast Info") });
             return null;
         }
     }
@@ -354,7 +354,7 @@ class USWeather {
             case "wind_few":
                 return {
                     main: _("Few Clouds"),
-                    description: _("Few clouds and windz"),
+                    description: _("Few clouds and windy"),
                     customIcon: (IsNight) ? "night-alt-cloudy-windy-symbolic" : "day-cloudy-windy-symbolic",
                     icon: weatherIconSafely((isNight) ? ["weather-few-clouds-night"] : ["weather-few-clouds"], iconType)
                 };
@@ -368,7 +368,7 @@ class USWeather {
             case "wind_bkn":
                 return {
                     main: _("Mostly Cloudy"),
-                    description: _("Mosty cloudy and windy"),
+                    description: _("Mostly cloudy and windy"),
                     customIcon: (IsNight) ? "night-alt-cloudy-windy-symbolic" : "day-cloudy-windy-symbolic",
                     icon: weatherIconSafely((isNight) ? ["weather-clouds-night"] : ["weather-clouds"], iconType)
                 };

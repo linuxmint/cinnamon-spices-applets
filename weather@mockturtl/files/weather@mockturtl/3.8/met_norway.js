@@ -108,7 +108,7 @@ class MetNorway {
                 hourlyForecasts.push({
                     date: new Date(element.time),
                     temp: CelsiusToKelvin(element.data.instant.details.air_temperature),
-                    precipation: {
+                    precipitation: {
                         type: "rain",
                         volume: element.data.next_1_hours.details.precipitation_amount
                     },
@@ -220,7 +220,7 @@ class MetNorway {
         url += (loc.lat + "&lon=" + loc.lon);
         return url;
     }
-    DeconstructCondtition(icon) {
+    DeconstructCondition(icon) {
         let condition = icon.split("_");
         return {
             timeOfDay: condition[1],
@@ -228,7 +228,7 @@ class MetNorway {
         };
     }
     ResolveCondition(icon, isNight = false) {
-        let weather = this.DeconstructCondtition(icon);
+        let weather = this.DeconstructCondition(icon);
         let iconType = this.app.config.IconType();
         switch (weather.condition) {
             case "clearsky":
@@ -367,7 +367,7 @@ class MetNorway {
             case "lightrainshowersandthunder":
                 return {
                     customIcon: (isNight) ? "night-alt-rain-mix-storm-symbolic" : "day-rain-mix-storm-symbolic",
-                    main: _("Ligth Rain"),
+                    main: _("Light Rain"),
                     description: _("Light rain showers and thunder"),
                     icon: weatherIconSafely(["weather-showers-scattered", "weather-rain", "weather-severe-alert"], iconType)
                 };

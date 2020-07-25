@@ -168,7 +168,7 @@ class DarkSky implements WeatherProvider {
                             icon: weatherIconSafely(this.ResolveIcon(hour.icon, {sunrise: sunrise, sunset: sunset}, new Date(hour.time * 1000)), this.app.config.IconType()),    
                             customIcon: this.ResolveCustomIcon(hour.icon)           
                 },
-                precipation: {
+                precipitation: {
                   type: hour.precipType as PrecipationType,
                   volume: hour.precipProbability,
                   chance: hour.precipProbability * 100
@@ -181,7 +181,7 @@ class DarkSky implements WeatherProvider {
         }
         catch(e) {
             this.app.log.Error("DarkSky payload parsing error: " + e)
-            this.app.HandleError({type: "soft", detail: "unusal payload", service: "darksky", message: _("Failed to Process Weather Info")});
+            this.app.HandleError({type: "soft", detail: "unusual payload", service: "darksky", message: _("Failed to Process Weather Info")});
             return null;
         }
     };
@@ -402,7 +402,7 @@ class DarkSky implements WeatherProvider {
 
 /**
  * - 'si' returns meter/sec and Celsius
- * - 'us' returns miles/hour and Farhenheit
+ * - 'us' returns miles/hour and Fahrenheit
  * - 'uk2' return miles/hour and Celsius
  */
 type queryUnits = 'si' | 'us' | 'uk2';
