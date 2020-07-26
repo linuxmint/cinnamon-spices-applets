@@ -85,6 +85,8 @@
 				"apiKey",
 				"manualLocation",
 				"location",
+				"saveLocation",
+				"deleteLocation",
 				"getLocation",
 				"refreshInterval",
 				"forecastDays",
@@ -187,6 +189,22 @@
 		"dependency": "manualLocation",
 		"description": "Location",
 		"tooltip": "Acceptable inputs are Latitude,Longitude. e.g.: 68.1932,17.1426 or an address.\nWaits for 3 seconds after you stop typing then refreshes the weather."
+	},
+	"saveLocation": {
+		"type": "button",
+		"indent": true,
+		"description": "Save current location to storage",
+		"callback": "saveCurrentLocation",
+		"dependency": "manualLocation",
+		"tooltip": "Saves location information to file, so you can switch between them with buttons in the applet (what will appear if you have more than one)."
+	},
+	"deleteLocation": {
+		"type": "button",
+		"indent": true,
+		"description": "Delete current location from storage",
+		"callback": "deleteCurrentLocation",
+		"dependency": "manualLocation",
+		"tooltip": "Removes location information from storage file."
 	},
 	"getLocation": {
 		"type": "button",

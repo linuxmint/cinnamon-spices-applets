@@ -90,8 +90,6 @@ declare namespace imports.gi.GLib {
     class ByteArray {
         public data: number;
         public len: number;
-    
-    
     }
     
     
@@ -2192,11 +2190,11 @@ declare namespace imports.gi.GLib {
     
     
     enum FileTest {
-        is_regular = 1,
-        is_symlink = 2,
-        is_dir = 4,
-        is_executable = 8,
-        exists = 16
+        IS_REGULAR = 1,
+        IS_SYMLINK = 2,
+        IS_DIR = 4,
+        IS_EXECUTABLE = 8,
+        EXISTS = 16
     }
     
     
