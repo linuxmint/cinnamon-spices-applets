@@ -182,6 +182,7 @@ CinnamenuApplet.prototype = {
         displayed: false,
         isNewInstance: true,
         dragIndex: -1,
+        gpu_offload_supported: Main.gpu_offload_supported,
         isBumblebeeInstalled: GLib.file_test('/usr/bin/optirun', GLib.FileTest.EXISTS)
       });
       this.state.connect({
@@ -1422,7 +1423,7 @@ CinnamenuApplet.prototype = {
         type: ApplicationType._recent
       });
     } else if (!pattern) {
-      this.answerText.set_text(_('No recent documents'));
+      this.answerText.set_text(_('No recent files'));
       this.answerText.show();
     }
 

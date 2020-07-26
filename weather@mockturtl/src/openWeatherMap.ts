@@ -55,11 +55,10 @@ class OpenWeatherMap implements WeatherProvider {
     //  Functions
     //--------------------------------------------------------
 
-    public async GetWeather(): Promise<WeatherData> {
-      let query = this.ConstructQuery(this.base_url);
+    public async GetWeather(loc: Location): Promise<WeatherData> {
+      let query = this.ConstructQuery(this.base_url, loc);
       let json;
       if (query != null) {
-          this.app.log.Debug("Query: " + query);
           try {
               json = await this.app.LoadJsonAsync(query);
           }
@@ -153,14 +152,14 @@ class OpenWeatherMap implements WeatherProvider {
 			  }, 
             }
             if (!!hour.rain) {
-				forecast.precipation = {
+				forecast.precipitation = {
 					volume: hour.rain["1h"],
 					type: "rain"
 				}
 			}
 			// Snow takes precedence
             if (!!hour.snow) {
-				forecast.precipation = {
+				forecast.precipitation = {
 					volume: hour.snow["1h"],
 					type: "snow"
 				}
@@ -171,45 +170,23 @@ class OpenWeatherMap implements WeatherProvider {
           return weather; 
         }
         catch(e) { 
-          self.app.log.Error("OpenWeathermap Weather Parsing error: " + e);
-          self.app.HandleError({type: "soft", service: "openweathermap", detail: "unusal payload", message: _("Failed to Process Current Weather Info")})
+          self.app.log.Error("OpenWeatherMap Weather Parsing error: " + e);
+          self.app.HandleError({type: "soft", service: "openweathermap", detail: "unusual payload", message: _("Failed to Process Current Weather Info")})
           return null; 
         }
     };
 
 
-    private ConstructQuery(baseUrl: string): string {
+    private ConstructQuery(baseUrl: string, loc: Location): string {
         let query = baseUrl;
-        let locString = this.ParseLocation();
-        if (locString != null) {
-            query = query + locString + "&appid=";
-             // Append Language if supported and enabled
-            query += "1c73f8259a86c6fd43c7163b543c8640";
-            let locale: string = this.ConvertToAPILocale(this.app.currentLocale);
-            if (this.app.config._translateCondition && isLangSupported(locale, this.supportedLanguages)) {
-                query = query + "&lang=" + locale;
-            }
-            return query;
-        }
-        return null;
-    };
-
-    private ParseLocation(): string {
-        let loc = this.app.config._location.replace(/ /g, "");
-        if (!nonempty(loc)) {
-          this.app.HandleError({type: "hard", userError: true, "detail": "no location", message: _("Please enter a Location in settings")});
-          this.app.log.Error("OpenWeatherMap: No Location was provided");
-          return null;
-        }
-
-        if (!isCoordinate(loc)) {
-          this.app.HandleError({type: "hard", userError: true, "detail": "bad location format", message: _("Please enter location in the correct format (coordinates)")});
-          this.app.log.Error("OpenWeatherMap: Location was provided in bad format");
-          return null;
-        }
-
-        let locArr = loc.split(',');
-        return "lat=" + locArr[0] + "&lon=" + locArr[1];
+		query = query + "lat=" + loc.lat + "&lon=" + loc.lon + "&appid=";
+		query += "1c73f8259a86c6fd43c7163b543c8640";
+		// Append Language if supported and enabled
+		let locale: string = this.ConvertToAPILocale(this.app.currentLocale);
+		if (this.app.config._translateCondition && isLangSupported(locale, this.supportedLanguages)) {
+			query = query + "&lang=" + locale;
+		}
+		return query;
     };
 
     private ConvertToAPILocale(systemLocale: string) {
@@ -238,7 +215,7 @@ class OpenWeatherMap implements WeatherProvider {
     }
 
     private HandleResponseErrors(json: any): void {
-        let errorMsg = "OpenWeathermap Response: ";
+        let errorMsg = "OpenWeatherMap Response: ";
         let error = {
           service: "openweathermap",
           type: "hard",

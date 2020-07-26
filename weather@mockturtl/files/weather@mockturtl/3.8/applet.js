@@ -25,7 +25,7 @@ const { AppletSettings, BindingDirection } = imports.ui.settings;
 const { spawnCommandLine, spawn_async } = imports.misc.util;
 const { SystemNotificationSource, Notification } = imports.ui.messageTray;
 const { SignalManager } = imports.misc.signalManager;
-const { messageTray } = imports.ui.main;
+const { messageTray, themeManager } = imports.ui.main;
 var utils = importModule("utils");
 var GetDayName = utils.GetDayName;
 var GetHoursMinutes = utils.GetHoursMinutes;
@@ -38,6 +38,12 @@ var nonempty = utils.nonempty;
 var AwareDateString = utils.AwareDateString;
 var get = utils.get;
 const delay = utils.delay;
+var isCoordinate = utils.isCoordinate;
+var setTimeout = utils.setTimeout;
+const clearTimeout = utils.clearTimeout;
+var MillimeterToUserUnits = utils.MillimeterToUserUnits;
+var shadeHexColor = utils.shadeHexColor;
+var MetreToUserUnits = utils.MetreToUserUnits;
 if (typeof Promise != "function") {
     var promisePoly = importModule("promise-polyfill");
     var finallyConstructor = promisePoly.finallyConstructor;
@@ -78,7 +84,9 @@ const DATA_SERVICE = {
     MET_NORWAY: "MetNorway",
     WEATHERBIT: "Weatherbit",
     YAHOO: "Yahoo",
-    CLIMACELL: "Climacell"
+    CLIMACELL: "Climacell",
+    MET_UK: "Met Office UK",
+    US_WEATHER: "US Weather"
 };
 imports.gettext.bindtextdomain(UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
 function _(str) {
@@ -100,7 +108,10 @@ class WeatherApplet extends TextIconApplet {
         this._httpSession = new SessionAsync();
         this.appletDir = imports.ui.appletManager.appletMeta[UUID].path;
         this.currentLocale = null;
+        this.lock = false;
+        this.refreshTriggeredWhileLocked = false;
         this.locProvider = new ipApi.IpApi(this);
+        this.geoLocationService = new GeoLocation(this);
         this.encounteredError = false;
         this.errMsg = {
             unknown: _("Error"),
@@ -115,16 +126,19 @@ class WeatherApplet extends TextIconApplet {
             "no key": _("No Api Key"),
             "no location": _("No Location"),
             "no network response": _("Service Error"),
-            "no reponse body": _("Service Error"),
-            "no respone data": _("Service Error"),
-            "unusal payload": _("Service Error"),
-            "import error": _("Missing Packages")
+            "no response body": _("Service Error"),
+            "no response data": _("Service Error"),
+            "unusual payload": _("Service Error"),
+            "import error": _("Missing Packages"),
+            "location not covered": _("Location not covered"),
         };
         this.log = new Log(instanceId);
         this.currentLocale = this.constructJsLocale(get_language_names()[0]);
         this.log.Debug("System locale is " + this.currentLocale);
         this.log.Debug("Appletdir is: " + this.appletDir);
         this._httpSession.user_agent = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:37.0) Gecko/20100101 Firefox/37.0";
+        this._httpSession.timeout = 10;
+        this._httpSession.idle_timeout = 10;
         this.msgSource = new SystemNotificationSource(_("Weather Applet"));
         messageTray.add(this.msgSource);
         Session.prototype.add_feature.call(this._httpSession, new ProxyResolverDefault());
@@ -149,6 +163,17 @@ class WeatherApplet extends TextIconApplet {
         this.set_applet_label(_("..."));
         this.set_applet_tooltip(_("Click to open"));
     }
+    Locked() {
+        return this.lock;
+    }
+    Unlock() {
+        this.lock = false;
+        if (this.refreshTriggeredWhileLocked) {
+            this.log.Print("Refreshing triggered by config change while refreshing, starting now...");
+            this.refreshTriggeredWhileLocked = false;
+            this.refreshAndRebuild();
+        }
+    }
     AddRefreshButton() {
         let itemLabel = _("Refresh");
         let refreshMenuItem = new MenuItem(itemLabel, REFRESH_ICON, Lang.bind(this, function () {
@@ -158,23 +183,44 @@ class WeatherApplet extends TextIconApplet {
     }
     refreshAndRebuild() {
         this.loop.Resume();
+        if (this.Locked()) {
+            this.refreshTriggeredWhileLocked = true;
+            return;
+        }
         this.refreshWeather(true);
     }
     ;
-    async LoadJsonAsync(query) {
+    async LoadJsonAsync(query, errorCallback) {
         let json = await new Promise((resolve, reject) => {
             let message = Message.new('GET', query);
+            this.log.Debug("URL called: " + query);
             this._httpSession.queue_message(message, (session, message) => {
-                if (!message)
-                    reject({ code: 0, message: "no network response", reason_phrase: "no network response" });
-                if (message.status_code > 300 || message.status_code < 200)
-                    reject({ code: message.status_code, message: "bad status code", reason_phrase: message.reason_phrase });
-                if (!message.response_body)
-                    reject({ code: message.status_code, message: "no reponse body", reason_phrase: message.reason_phrase });
-                if (!message.response_body.data)
-                    reject({ code: message.status_code, message: "no respone data", reason_phrase: message.reason_phrase });
+                let error = (errorCallback != null) ? errorCallback(message) : null;
+                if (error != null) {
+                    this.log.Error("there is an error, " + JSON.stringify(error, null, 2));
+                    this.HandleError(error);
+                    reject({ code: -1, message: "bad api response", data: null, reason_phrase: null });
+                    return;
+                }
+                if (!message) {
+                    reject({ code: 0, message: "no network response", reason_phrase: "no network response", data: get(["response_body", "data"], message) });
+                    return;
+                }
+                if (message.status_code >= 400 && message.status_code < 500) {
+                    reject({ code: message.status_code, message: "bad status code", reason_phrase: message.reason_phrase, data: get(["response_body", "data"], message) });
+                    this.HandleError({ detail: "bad api response", type: "hard", message: _("API returned status code between 400 and 500") });
+                    return;
+                }
+                if (message.status_code > 300 || message.status_code < 200) {
+                    reject({ code: message.status_code, message: "bad status code", reason_phrase: message.reason_phrase, data: get(["response_body", "data"], message) });
+                    return;
+                }
+                if (get(["response_body", "data"], message) == null) {
+                    reject({ code: message.status_code, message: "no response data", reason_phrase: message.reason_phrase, data: get(["response_body", "data"], message) });
+                    return;
+                }
                 try {
-                    this.log.Debug("API full response: " + message.response_body.data.toString());
+                    this.log.Debug2("API full response: " + message.response_body.data.toString());
                     let payload = JSON.parse(message.response_body.data);
                     resolve(payload);
                 }
@@ -199,15 +245,23 @@ class WeatherApplet extends TextIconApplet {
         let data = await new Promise((resolve, reject) => {
             let message = Message.new('GET', query);
             this._httpSession.queue_message(message, (session, message) => {
-                if (!message)
+                if (!message) {
                     reject({ code: 0, message: "no network response", reason_phrase: "no network response" });
-                if (message.status_code > 300 || message.status_code < 200)
+                    return;
+                }
+                if (message.status_code > 300 || message.status_code < 200) {
                     reject({ code: message.status_code, message: "bad status code", reason_phrase: message.reason_phrase });
-                if (!message.response_body)
-                    reject({ code: message.status_code, message: "no reponse body", reason_phrase: message.reason_phrase });
-                if (!message.response_body.data)
-                    reject({ code: message.status_code, message: "no respone data", reason_phrase: message.reason_phrase });
-                this.log.Debug("API full response: " + message.response_body.data.toString());
+                    return;
+                }
+                if (!message.response_body) {
+                    reject({ code: message.status_code, message: "no response body", reason_phrase: message.reason_phrase });
+                    return;
+                }
+                if (!message.response_body.data) {
+                    reject({ code: message.status_code, message: "no response data", reason_phrase: message.reason_phrase });
+                    return;
+                }
+                this.log.Debug2("API full response: " + message.response_body.data.toString());
                 let payload = message.response_body.data;
                 resolve(payload);
             });
@@ -224,10 +278,10 @@ class WeatherApplet extends TextIconApplet {
     SetAppletTooltip(msg) {
         this.set_applet_tooltip(msg);
     }
-    SetAppletIcon(iconname) {
+    SetAppletIcon(iconName) {
         this.config.IconType() == IconType.SYMBOLIC ?
-            this.set_applet_icon_symbolic_name(iconname) :
-            this.set_applet_icon_name(iconname);
+            this.set_applet_icon_symbolic_name(iconName) :
+            this.set_applet_icon_name(iconName);
         if (this.config._useCustomAppletIcons)
             this.SetCustomIcon(this.weather.condition.customIcon);
     }
@@ -243,6 +297,10 @@ class WeatherApplet extends TextIconApplet {
     async locationLookup() {
         let command = "xdg-open ";
         spawnCommandLine(command + "https://cinnamon-spices.linuxmint.com/applets/view/17");
+    }
+    async submitIssue() {
+        let command = "xdg-open ";
+        spawnCommandLine(command + "https://github.com/linuxmint/cinnamon-spices-applets/issues/new");
     }
     on_orientation_changed(orientation) {
         this.orientation = orientation;
@@ -286,44 +344,50 @@ class WeatherApplet extends TextIconApplet {
             case DATA_SERVICE.DARK_SKY:
                 if (!darkSky)
                     var darkSky = importModule('darkSky');
-                if (currentName != "DarkSky" || force) {
+                if (currentName != "DarkSky" || force)
                     this.provider = new darkSky.DarkSky(this);
-                }
                 break;
             case DATA_SERVICE.OPEN_WEATHER_MAP:
                 if (!openWeatherMap)
                     var openWeatherMap = importModule("openWeatherMap");
-                if (currentName != "OpenWeatherMap" || force) {
+                if (currentName != "OpenWeatherMap" || force)
                     this.provider = new openWeatherMap.OpenWeatherMap(this);
-                }
                 break;
             case DATA_SERVICE.MET_NORWAY:
                 if (!metNorway)
                     var metNorway = importModule("met_norway");
-                if (currentName != "MetNorway" || force) {
+                if (currentName != "MetNorway" || force)
                     this.provider = new metNorway.MetNorway(this);
-                }
                 break;
             case DATA_SERVICE.WEATHERBIT:
                 if (!weatherbit)
                     var weatherbit = importModule("weatherbit");
-                if (currentName != "Weatherbit" || force) {
+                if (currentName != "Weatherbit" || force)
                     this.provider = new weatherbit.Weatherbit(this);
-                }
                 break;
             case DATA_SERVICE.YAHOO:
                 if (!yahoo)
                     var yahoo = importModule("yahoo");
-                if (currentName != "Yahoo" || force) {
+                if (currentName != "Yahoo" || force)
                     this.provider = new yahoo.Yahoo(this);
-                }
                 break;
             case DATA_SERVICE.CLIMACELL:
                 if (!climacell)
                     var climacell = importModule("climacell");
-                if (currentName != "Climacell" || force) {
+                if (currentName != "Climacell" || force)
                     this.provider = new climacell.Climacell(this);
-                }
+                break;
+            case DATA_SERVICE.MET_UK:
+                if (!met_uk)
+                    var met_uk = importModule("met_uk");
+                if (currentName != "Met Office UK" || force)
+                    this.provider = new met_uk.MetUk(this);
+                break;
+            case DATA_SERVICE.US_WEATHER:
+                if (!us_weather)
+                    var us_weather = importModule("us_weather");
+                if (currentName != "US Weather" || force)
+                    this.provider = new us_weather.USWeather(this);
                 break;
             default:
                 return null;
@@ -341,20 +405,36 @@ class WeatherApplet extends TextIconApplet {
         return jsLocale;
     }
     async refreshWeather(rebuild) {
+        if (this.lock) {
+            this.log.Print("Refreshing in progress, refresh skipped.");
+            return "locked";
+        }
+        this.lock = true;
         this.encounteredError = false;
         let locationData = null;
         try {
-            locationData = await this.ValidateLocation();
+            locationData = await this.config.EnsureLocation();
         }
         catch (e) {
             this.log.Error(e);
+            this.Unlock();
             return "error";
         }
+        if (locationData == null) {
+            this.Unlock();
+            return "failure";
+        }
         try {
-            this.EnsureProvider(rebuild);
-            let weatherInfo = await this.provider.GetWeather();
-            if (!weatherInfo) {
+            this.EnsureProvider();
+            let weatherInfo = await this.provider.GetWeather({ lat: locationData.lat, lon: locationData.lon, text: locationData.lat.toString() + "," + locationData.lon.toString() });
+            if (weatherInfo == null) {
                 this.log.Error("Unable to obtain Weather Information");
+                this.HandleError({
+                    type: "hard",
+                    detail: "unknown",
+                    message: _("Could not get weather information"),
+                });
+                this.Unlock();
                 return "failure";
             }
             this.wipeData();
@@ -363,44 +443,24 @@ class WeatherApplet extends TextIconApplet {
                 this.ui.rebuild(this.config);
             if (!this.ui.displayWeather(this.weather, this.config)
                 || !this.ui.displayForecast(this.weather, this.forecasts, this.config)
-                || !this.ui.displayHourlyForecast(this.hourlyForecasts, this.config)
-                || !this.ui.displayBar(this.weather, this.provider, this.config))
+                || !this.ui.displayHourlyForecast(this.hourlyForecasts, this.config, this.weather.location.timeZone)
+                || !this.ui.displayBar(this.weather, this.provider, this.config)) {
+                this.Unlock();
                 return "failure";
+            }
             this.log.Print("Weather Information refreshed");
             this.loop.ResetErrorCount();
+            this.Unlock();
             return "success";
         }
         catch (e) {
             this.log.Error("Generic Error while refreshing Weather info: " + e);
             this.HandleError({ type: "hard", detail: "unknown", message: _("Unexpected Error While Refreshing Weather, please see log in Looking Glass") });
+            this.Unlock();
             return "failure";
         }
     }
     ;
-    async ValidateLocation() {
-        let location = null;
-        if (!this.config._manualLocation) {
-            location = await this.locProvider.GetLocation();
-            if (!location)
-                throw new Error(null);
-            let loc = location.lat + "," + location.lon;
-            this.config.SetLocation(loc);
-            return location;
-        }
-        else {
-            let loc = this.config._location.replace(" ", "");
-            if (loc == undefined || loc == "") {
-                this.HandleError({
-                    type: "hard",
-                    detail: "no location",
-                    userError: true,
-                    message: _("Make sure you entered a location or use Automatic location instead")
-                });
-                throw new Error("No location given when setting is on Manual Location");
-            }
-        }
-        return null;
-    }
     ProcessWeatherData(weatherInfo, locationData) {
         if (!!locationData) {
             this.weather.location.city = locationData.city;
@@ -426,6 +486,8 @@ class WeatherApplet extends TextIconApplet {
             this.weather.location.timeZone = weatherInfo.location.timeZone;
         if (!!weatherInfo.location.url)
             this.weather.location.url = weatherInfo.location.url;
+        if (!!weatherInfo.location.distanceFrom)
+            this.weather.location.distanceFrom = weatherInfo.location.distanceFrom;
         if (!!weatherInfo.extra_field)
             this.weather.extra_field = weatherInfo.extra_field;
         this.forecasts = weatherInfo.forecasts;
@@ -469,6 +531,7 @@ class WeatherApplet extends TextIconApplet {
         this.weather.location.timeZone = null;
         this.weather.location.tzOffset = null;
         this.weather.location.url = null;
+        this.weather.location.distanceFrom = null;
         this.weather.coord.lat = null;
         this.weather.coord.lon = null;
         this.weather.sunrise = null;
@@ -494,10 +557,14 @@ class WeatherApplet extends TextIconApplet {
     }
     ;
     HandleError(error) {
+        if (error == null)
+            return;
         if (this.encounteredError == true)
             return;
         this.encounteredError = true;
+        this.log.Debug("User facing Error received, error: " + JSON.stringify(error, null, 2));
         if (error.type == "hard") {
+            this.log.Debug("Displaying hard error");
             this.ui.rebuild(this.config);
             this.DisplayError(this.errMsg[error.detail], (!error.message) ? "" : error.message);
         }
@@ -515,7 +582,7 @@ class WeatherApplet extends TextIconApplet {
         let nextRefresh = this.loop.GetSecondsUntilNextRefresh();
         this.log.Error("Retrying in the next " + nextRefresh.toString() + " seconds...");
     }
-    HandleHTTPError(service, error, ctx, callback) {
+    HandleHTTPError(service, error, ctx, override) {
         let uiError = {
             type: "soft",
             detail: "unknown",
@@ -531,8 +598,8 @@ class WeatherApplet extends TextIconApplet {
             uiError.code = error.code;
             if (error.message == "bad api response - non json")
                 uiError.type = "hard";
-            if (!!callback && callback instanceof Function) {
-                uiError = callback(error, uiError);
+            if (!!override && override instanceof Function) {
+                uiError = override(error, uiError);
             }
         }
         ctx.HandleError(uiError);
@@ -541,6 +608,7 @@ class WeatherApplet extends TextIconApplet {
 class Log {
     constructor(_instanceId) {
         this.debug = false;
+        this.level = 1;
         this.ID = _instanceId;
         this.appletDir = imports.ui.appletManager.appletMeta[UUID].path;
         this.debug = this.DEBUG();
@@ -574,6 +642,11 @@ class Log {
             this.Print(message);
         }
     }
+    Debug2(message) {
+        if (this.debug && this.level > 1) {
+            this.Print(message);
+        }
+    }
     GetErrorLine() {
         let arr = (new Error).stack.split("\n").slice(-2)[0].split('/').slice(-1)[0];
         return arr;
@@ -583,6 +656,7 @@ class UI {
     constructor(app, orientation) {
         this.hourlyToggled = false;
         this.hourlyNeverOpened = true;
+        this.lightTheme = false;
         this.app = app;
         this.menuManager = new PopupMenuManager(this.app);
         this.menu = new AppletPopupMenu(this.app, orientation);
@@ -590,7 +664,36 @@ class UI {
         this.app.log.Debug("Popup Menu applied classes are: " + this.menu.box.get_style_class_name());
         this.menuManager.addMenu(this.menu);
         this.menuManager._signals.connect(this.menu, "open-state-changed", this.PopupMenuToggled, this);
+        this.signals = new SignalManager();
+        this.lightTheme = this.IsLightTheme();
         this.BuildPopupMenu();
+        this.signals.connect(themeManager, 'theme-set', this.OnThemeChanged, this);
+    }
+    OnThemeChanged() {
+        this.hourlyNeverOpened = true;
+        this.HideHourlyWeather();
+        let newThemeIsLight = this.IsLightTheme();
+        if (newThemeIsLight != this.lightTheme) {
+            this.lightTheme = newThemeIsLight;
+        }
+        this.app.refreshAndRebuild();
+    }
+    IsLightTheme() {
+        let color = this.menu.actor.get_theme_node().get_background_color();
+        let luminance = (2126 * color.red + 7152 * color.green + 722 * color.blue) / 10000 / 255;
+        this.app.log.Debug("Theme is Light: " + (luminance > 0.5));
+        return (luminance > 0.5);
+    }
+    ForegroundColor() {
+        let hex = this.menu.actor.get_theme_node().get_foreground_color().to_string().substring(0, 7);
+        return hex;
+    }
+    GetTextColorStyle() {
+        let hexColor = null;
+        if (this.lightTheme) {
+            hexColor = shadeHexColor(this.ForegroundColor(), -0.40);
+        }
+        return "color: " + hexColor;
     }
     async PopupMenuToggled(caller, data) {
         if (data == false) {
@@ -647,6 +750,8 @@ class UI {
         this.hourlyNeverOpened = true;
     }
     UpdateIconType(iconType) {
+        if (iconType == IconType.FULLCOLOR && this.app.config._useCustomMenuIcons)
+            return;
         this._currentWeatherIcon.icon_type = iconType;
         for (let i = 0; i < this._forecast.length; i++) {
             this._forecast[i].Icon.icon_type = iconType;
@@ -743,19 +848,19 @@ class UI {
             }
             this.app.SetAppletTooltip(location + " - " + _("As of") + " " + AwareDateString(weather.date, this.app.currentLocale, config._show24Hours));
             this._currentWeatherSummary.text = descriptionCondition;
-            let iconname = weather.condition.icon;
-            if (iconname == null) {
-                iconname = "weather-severe-alert";
+            let iconName = weather.condition.icon;
+            if (iconName == null) {
+                iconName = "weather-severe-alert";
             }
             if (config._useCustomMenuIcons) {
                 this._currentWeatherIcon.icon_name = weather.condition.customIcon;
                 this.UpdateIconType(IconType.SYMBOLIC);
             }
             else {
-                this._currentWeatherIcon.icon_name = iconname;
+                this._currentWeatherIcon.icon_name = iconName;
                 this.UpdateIconType(config.IconType());
             }
-            this.app.SetAppletIcon(iconname);
+            this.app.SetAppletIcon(iconName);
             let temp = "";
             if (weather.temperature != null) {
                 temp = TempToUserConfig(weather.temperature, config._temperatureUnit, config._tempRussianStyle);
@@ -840,7 +945,10 @@ class UI {
     ;
     displayForecast(weather, forecasts, config) {
         try {
-            for (let i = 0; i < this._forecast.length; i++) {
+            if (!forecasts)
+                return false;
+            let len = Math.min(this._forecast.length, forecasts.length);
+            for (let i = 0; i < len; i++) {
                 let forecastData = forecasts[i];
                 let forecastUi = this._forecast[i];
                 let t_low = TempToUserConfig(forecastData.temp_min, config._temperatureUnit, config._tempRussianStyle);
@@ -889,31 +997,35 @@ class UI {
         this._providerCredit.label = _("Powered by") + " " + provider.prettyName;
         this._providerCredit.url = provider.website;
         this._timestamp.text = _("As of") + " " + AwareDateString(weather.date, this.app.currentLocale, config._show24Hours);
+        if (weather.location.distanceFrom != null) {
+            this._timestamp.text += (", " + MetreToUserUnits(weather.location.distanceFrom, this.app.config._distanceUnit)
+                + this.BigDistanceUnitFor(this.app.config._distanceUnit) + " " + _("from you"));
+        }
         return true;
     }
-    displayHourlyForecast(forecasts, config) {
+    displayHourlyForecast(forecasts, config, tz) {
         let max = Math.min(forecasts.length, this._hourlyForecasts.length);
         for (let index = 0; index < max; index++) {
             const hour = forecasts[index];
             const ui = this._hourlyForecasts[index];
-            ui.Hour.text = AwareDateString(hour.date, this.app.currentLocale, config._show24Hours);
+            ui.Hour.text = AwareDateString(hour.date, this.app.currentLocale, config._show24Hours, tz);
             ui.Temperature.text = TempToUserConfig(hour.temp, config._temperatureUnit, config._tempRussianStyle) + " " + this.unitToUnicode(config._temperatureUnit);
             ui.Icon.icon_name = (config._useCustomMenuIcons) ? hour.condition.customIcon : hour.condition.icon;
             hour.condition.main = capitalizeFirstLetter(hour.condition.main);
             if (config._translateCondition)
                 hour.condition.main = _(hour.condition.main);
             ui.Summary.text = hour.condition.main;
-            if (!!hour.precipation && hour.precipation.type != "none") {
-                let precipationText = null;
-                if (!!hour.precipation.volume && hour.precipation.volume > 0) {
-                    precipationText = hour.precipation.volume + " mm";
+            if (!!hour.precipitation && hour.precipitation.type != "none") {
+                let precipitationText = null;
+                if (!!hour.precipitation.volume && hour.precipitation.volume > 0) {
+                    precipitationText = MillimeterToUserUnits(hour.precipitation.volume, this.app.config._distanceUnit) + " " + ((this.app.config._distanceUnit == "metric") ? _("mm") : _("in"));
                 }
-                if (hour.precipation.chance != null || hour.precipation.chance != undefined) {
-                    precipationText = (precipationText == null) ? "" : (precipationText + ", ");
-                    precipationText += (Math.round(hour.precipation.chance).toString() + "%");
+                if (!!hour.precipitation.chance) {
+                    precipitationText = (precipitationText == null) ? "" : (precipitationText + ", ");
+                    precipitationText += (Math.round(hour.precipitation.chance).toString() + "%");
                 }
-                if (precipationText != null)
-                    ui.Precipation.text = precipationText;
+                if (precipitationText != null)
+                    ui.Precipitation.text = precipitationText;
             }
         }
         if (max <= 0)
@@ -922,6 +1034,11 @@ class UI {
     }
     unitToUnicode(unit) {
         return unit == "fahrenheit" ? '\u2109' : '\u2103';
+    }
+    BigDistanceUnitFor(unit) {
+        if (unit == "imperial")
+            return _("mi");
+        return _("km");
     }
     destroyCurrentWeather() {
         if (this._currentWeather.get_child() != null)
@@ -970,20 +1087,22 @@ class UI {
                 this.app.OpenUrl(this._currentWeatherLocation);
         }));
         this._currentWeatherSummary = new Label({ text: _('Loading ...'), style_class: STYLE_SUMMARY });
-        this._currentWeatherSunrise = new Label(textOb);
-        this._currentWeatherSunset = new Label(textOb);
+        this._currentWeatherSunrise = new Label({ text: ELLIPSIS, style: this.GetTextColorStyle() });
+        this._currentWeatherSunset = new Label({ text: ELLIPSIS, style: this.GetTextColorStyle() });
         let sunriseBox = new BoxLayout();
         let sunsetBox = new BoxLayout();
         if (config._showSunrise) {
             let sunsetIcon = new Icon({
                 icon_name: "sunset-symbolic",
                 icon_type: IconType.SYMBOLIC,
-                icon_size: 25
+                icon_size: 25,
+                style: this.GetTextColorStyle()
             });
             let sunriseIcon = new Icon({
                 icon_name: "sunrise-symbolic",
                 icon_type: IconType.SYMBOLIC,
-                icon_size: 25
+                icon_size: 25,
+                style: this.GetTextColorStyle()
             });
             sunriseBox.add_actor(sunriseIcon);
             sunsetBox.add_actor(sunsetIcon);
@@ -1015,13 +1134,13 @@ class UI {
         this._currentWeatherPressure = new Label(textOb);
         this._currentWeatherWind = new Label(textOb);
         this._currentWeatherApiUnique = new Label({ text: '' });
-        this._currentWeatherApiUniqueCap = new Label({ text: '' });
+        this._currentWeatherApiUniqueCap = new Label({ text: '', style: this.GetTextColorStyle() });
         let rb_captions = new BoxLayout({ vertical: true, style_class: STYLE_DATABOX_CAPTIONS });
         let rb_values = new BoxLayout({ vertical: true, style_class: STYLE_DATABOX_VALUES });
-        rb_captions.add_actor(new Label({ text: _('Temperature:') }));
-        rb_captions.add_actor(new Label({ text: _('Humidity:') }));
-        rb_captions.add_actor(new Label({ text: _('Pressure:') }));
-        rb_captions.add_actor(new Label({ text: _('Wind:') }));
+        rb_captions.add_actor(new Label({ text: _('Temperature:'), style: this.GetTextColorStyle() }));
+        rb_captions.add_actor(new Label({ text: _('Humidity:'), style: this.GetTextColorStyle() }));
+        rb_captions.add_actor(new Label({ text: _('Pressure:'), style: this.GetTextColorStyle() }));
+        rb_captions.add_actor(new Label({ text: _('Wind:'), style: this.GetTextColorStyle() }));
         rb_captions.add_actor(this._currentWeatherApiUniqueCap);
         rb_values.add_actor(this._currentWeatherTemperature);
         rb_values.add_actor(this._currentWeatherHumidity);
@@ -1076,7 +1195,8 @@ class UI {
             });
             forecastWeather.Day = new Label({
                 style_class: STYLE_FORECAST_DAY,
-                reactive: true
+                reactive: true,
+                style: this.GetTextColorStyle()
             });
             forecastWeather.Summary = new Label({
                 style_class: STYLE_FORECAST_SUMMARY,
@@ -1157,14 +1277,14 @@ class UI {
         for (let index = 0; index < hours; index++) {
             let box = new BoxLayout({ vertical: true });
             this._hourlyForecasts.push({
-                Hour: new Label({ text: "Hour", style_class: "hourly-time" }),
+                Hour: new Label({ text: "Hour", style_class: "hourly-time", style: this.GetTextColorStyle() }),
                 Icon: new Icon({
                     icon_type: config.IconType(),
                     icon_size: 24,
                     icon_name: APPLET_ICON,
                     style_class: "hourly-icon"
                 }),
-                Precipation: new Label({ text: " ", style_class: "hourly-data" }),
+                Precipitation: new Label({ text: " ", style_class: "hourly-data" }),
                 Summary: new Label({ text: _(ELLIPSIS), style_class: "hourly-data" }),
                 Temperature: new Label({ text: _(ELLIPSIS), style_class: "hourly-data" })
             });
@@ -1174,7 +1294,7 @@ class UI {
             box.add_child(this._hourlyForecasts[index].Icon);
             box.add_child(this._hourlyForecasts[index].Summary);
             box.add_child(this._hourlyForecasts[index].Temperature);
-            box.add_child(this._hourlyForecasts[index].Precipation);
+            box.add_child(this._hourlyForecasts[index].Precipitation);
             this._hourlyBox.add(box, {
                 x_fill: true,
                 x_align: Align.MIDDLE,
@@ -1195,6 +1315,7 @@ class Config {
             TEMPERATURE_UNIT_KEY: "temperatureUnit",
             TEMPERATURE_HIGH_FIRST: "temperatureHighFirst",
             WIND_SPEED_UNIT: "windSpeedUnit",
+            DISTANCE_UNIT: "distanceUnit",
             CITY: "locationLabelOverride",
             TRANSLATE_CONDITION: "translateCondition",
             VERTICAL_ORIENTATION: "verticalOrientation",
@@ -1215,6 +1336,7 @@ class Config {
             USE_CUSTOM_MENUICONS: "useCustomMenuIcons",
             RUSSIAN_STYLE: "tempRussianStyle",
         };
+        this.doneTypingLocation = null;
         this.app = app;
         this.settings = new AppletSettings(this, UUID, instanceID);
         this.BindSettings();
@@ -1223,16 +1345,15 @@ class Config {
         for (let k in this.KEYS) {
             let key = this.KEYS[k];
             let keyProp = "_" + key;
-            this.settings.bindProperty(BindingDirection.IN, key, keyProp, Lang.bind(this.app, this.app.refreshAndRebuild), null);
+            this.settings.bindProperty(BindingDirection.IN, key, keyProp, Lang.bind(this, this.OnSettingChanged), null);
         }
-        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, this.WEATHER_LOCATION, ("_" + this.WEATHER_LOCATION), Lang.bind(this.app, this.app.refreshAndRebuild), null);
+        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, this.WEATHER_LOCATION, ("_" + this.WEATHER_LOCATION), Lang.bind(this, this.OnLocationChanged), null);
         this.settings.bindProperty(BindingDirection.IN, "keybinding", "keybinding", Lang.bind(this.app, this.app._onKeySettingsUpdated), null);
         keybindingManager.addHotKey(UUID, this.keybinding, Lang.bind(this.app, this.app.on_applet_clicked));
         this.settings.connect(SIGNAL_CHANGED + this.WEATHER_USE_SYMBOLIC_ICONS_KEY, Lang.bind(this, this.IconTypeChanged));
     }
     IconTypeChanged() {
         this.app.ui.UpdateIconType(this.IconType());
-        this.app.refreshWeather(false);
         this.app.log.Debug("Symbolic icon setting changed");
     }
     IconType() {
@@ -1241,6 +1362,20 @@ class Config {
             IconType.FULLCOLOR;
     }
     ;
+    OnLocationChanged() {
+        this.app.log.Debug("User changed location, waiting 3 seconds...");
+        if (this.doneTypingLocation != null)
+            clearTimeout(this.doneTypingLocation);
+        this.doneTypingLocation = setTimeout(Lang.bind(this, this.DoneTypingLocation), 3000);
+    }
+    DoneTypingLocation() {
+        this.app.log.Debug("User has finished typing, beginning refresh");
+        this.doneTypingLocation = null;
+        this.app.refreshAndRebuild();
+    }
+    OnSettingChanged() {
+        this.app.refreshAndRebuild();
+    }
     SetLocation(value) {
         this.settings.setValue(this.WEATHER_LOCATION, value);
     }
@@ -1251,6 +1386,48 @@ class Config {
         return false;
     }
     ;
+    async EnsureLocation() {
+        if (!this._manualLocation) {
+            let location = await this.app.locProvider.GetLocation();
+            if (!location)
+                return null;
+            let loc = location.lat + "," + location.lon;
+            this.app.log.Debug("Location setting is now: " + loc);
+            this.SetLocation(loc);
+            return location;
+        }
+        let loc = this._location;
+        if (loc == undefined || loc.trim() == "") {
+            this.app.HandleError({
+                type: "hard",
+                detail: "no location",
+                userError: true,
+                message: _("Make sure you entered a location or use Automatic location instead")
+            });
+            return null;
+        }
+        if (isCoordinate(loc)) {
+            loc = loc.replace(" ", "");
+            let latlong = loc.split(",");
+            return {
+                lat: parseFloat(latlong[0]),
+                lon: parseFloat(latlong[1]),
+                city: null,
+                country: null,
+                mobile: null,
+                timeZone: null
+            };
+        }
+        this.app.log.Debug("Location is text, geolocating...");
+        let locationData = await this.app.geoLocationService.GetLocation(loc);
+        if (locationData == null)
+            return null;
+        if (!!locationData.address_string) {
+            this.app.log.Debug("Address found via address search, placing found full address '" + locationData.address_string + "' back to location entry");
+            this.SetLocation(locationData.address_string);
+        }
+        return locationData;
+    }
 }
 class WeatherLoop {
     constructor(app, instanceID) {
@@ -1285,13 +1462,14 @@ class WeatherLoop {
                     continue;
                 }
                 if (this.errorCount > 0 || this.NextUpdate() < new Date()) {
-                    this.app.log.Debug("Refresh triggered in mainloop with these values: lastUpdated " + ((!this.lastUpdated) ? "null" : this.lastUpdated.toLocaleString())
+                    this.app.log.Debug("Refresh triggered in main loop with these values: lastUpdated " + ((!this.lastUpdated) ? "null" : this.lastUpdated.toLocaleString())
                         + ", errorCount " + this.errorCount.toString() + " , loopInterval " + (this.LoopInterval() / 1000).toString()
                         + " seconds, refreshInterval " + this.app.config._refreshInterval + " minutes");
                     let state = await this.app.refreshWeather(false);
-                    if (state == "success") {
+                    if (state == "locked")
+                        this.app.log.Print("App locked, refresh skipped in main loop");
+                    if (state == "success" || state == "locked")
                         this.lastUpdated = new Date();
-                    }
                 }
                 else {
                     this.app.log.Debug("No need to update yet, skipping");
@@ -1373,6 +1551,55 @@ class WeatherButton {
     enable() {
         this.disabled = false;
         this.actor.reactive = true;
+    }
+}
+class GeoLocation {
+    constructor(app) {
+        this.url = "https://nominatim.openstreetmap.org/search/";
+        this.params = "?format=json&addressdetails=1";
+        this.app = null;
+        this.cache = {};
+        this.app = app;
+    }
+    async GetLocation(searchText) {
+        try {
+            searchText = searchText.trim();
+            let cached = get([searchText], this.cache);
+            if (cached != null) {
+                this.app.log.Debug("Returning cached geolocation info for '" + searchText + "'.");
+                return cached;
+            }
+            let locationData = await this.app.LoadJsonAsync(this.url + encodeURIComponent(searchText) + this.params);
+            if (locationData.length == 0) {
+                this.app.HandleError({
+                    type: "hard",
+                    detail: "bad location format",
+                    message: _("Could not find location based on address, please check if it's right")
+                });
+                return null;
+            }
+            this.app.log.Debug("Location is found, payload: " + JSON.stringify(locationData, null, 2));
+            let result = {
+                lat: parseFloat(locationData[0].lat),
+                lon: parseFloat(locationData[0].lon),
+                city: locationData[0].address.city || locationData[0].address.town,
+                country: locationData[0].address.country,
+                timeZone: null,
+                mobile: null,
+                address_string: locationData[0].display_name
+            };
+            this.cache[searchText] = result;
+            return result;
+        }
+        catch (e) {
+            this.app.log.Error("Could not geolocate, error: " + JSON.stringify(e, null, 2));
+            this.app.HandleError({
+                type: "soft",
+                detail: "bad api response",
+                message: _("Failed to call Geolocation API, see Looking Glass for errors.")
+            });
+            return null;
+        }
     }
 }
 const SIGNAL_CHANGED = 'changed::';

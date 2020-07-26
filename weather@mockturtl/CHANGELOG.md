@@ -1,5 +1,29 @@
 # Changelog
 
+## 2.6.4
+
+* Fix typos in throughout applet
+
+## 2.6.3
+
+* Add Met Office UK as a weather provider
+* Add US National Weather Service as a weather provider
+* Add support for entering manual location as an address
+* During and after entering a location, the applet waits 3 seconds until user finishes typing then refreshes (prevents spamming)
+* Applet locks itself during a refresh pass, any input during this period will trigger another refresh **after** the previous one finished
+* Some of the custom icons were resized (to be bigger) to fit in panel and applet better
+* 3.8 Settings is using tabbed layout, added help section with explanation for providers and entering manual location
+* Add button for version 3.8 settings to submit issue
+* Fixes issue where gray text is hard to read on light theme (grey text is changed to darker color in light themes)
+* Distance unit is added to the settings, metric or imperial, precipitation, visibility and site distance uses it.
+* Status bar shows observation site distance for site-based providers (Met Office UK and US National Weather Service)
+* Improve handling API specific errors what need to be shown in UI (incorrect API key and such)
+
+Fixes:
+
+* Making sure calls and idle calls time out after 10 seconds so they don't lock the applet forever (hopefully fixes [#2874](https://github.com/linuxmint/cinnamon-spices-applets/issues/2874) as well)
+* Fix issue when the applet would break if the locale is set to C
+
 ## 2.6.2
 
 * Fixes [#3081](https://github.com/linuxmint/cinnamon-spices-applets/issues/3081)
@@ -35,7 +59,7 @@
 ## 2.4.8
 
 * Update Openweathermap to their unified API call
-* Add information on DarkSky aquisition to Readme
+* Add information on DarkSky acquisition to Readme
 * Fix translation issues in files other than applet.js
 * Add Yahoo Weather to the available services
 * Fix issue when system time is changed backwards, the applet stops updating until time gets to the time previously set
@@ -67,7 +91,7 @@
 ## 2.4.4
 
 * Fixes [#2782](https://github.com/linuxmint/cinnamon-spices-applets/issues/2872)
-* Add ability to override applet label with injecting values (customise and fit text on horizontal and vertical panels as well)
+* Add ability to override applet label with injecting values (customize and fit text on horizontal and vertical panels as well)
 
 ## 2.4.3
 
@@ -130,7 +154,7 @@ Fixes:
 * Fixed Issues with Debian, now Polyfilling Promises when needed
 * Reworked on how to import from other files, now in line with other applets
 * Utility functions moved to other file.
-* Typescript declarations reorganised now they make a little bit more sense *(generated declarations from gir files still don't work that well, although mostly working)*
+* Typescript declarations reorganized now they make a little bit more sense *(generated declarations from gir files still don't work that well, although mostly working)*
 * Can now build from same source down to Cinnamon Version 3.0
 * Fixed some styling issues with some themes (Adapta, etc) where the Forecast box did not have enough padding
 * Sunset/Sunrise and Day names are using the system locale *(3.4+)*
@@ -211,7 +235,7 @@ New stuff:
 ## 2.1.1
 
 * Openweathermap no longer requires key
-* Forcing mainloop to refresh when Weather update fails (it was not 
+* Forcing main loop to refresh when Weather update fails (it was not 
   updating for a whole refresh interval when we had a successful update 
   then the settings was changed right after and update failed)
 * Using Regex against Location setting

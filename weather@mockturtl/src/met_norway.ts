@@ -40,13 +40,12 @@ class MetNorway implements WeatherProvider {
         this.sunCalc = new SunCalc();
     }
 
-    public async GetWeather(): Promise<WeatherData> {
-        let query = this.GetUrl();
+    public async GetWeather(loc: Location): Promise<WeatherData> {
+        let query = this.GetUrl(loc);
         let json: any;
         if (query != "" && query != null) {
-            this.app.log.Debug("MET Norway API query: " + query);
             try {
-                json = await this.app.LoadAsync(query);
+                json = await this.app.LoadJsonAsync(query);
             }
             catch(e) {
                 this.app.HandleHTTPError("met-norway", e, this.app);
@@ -59,17 +58,8 @@ class MetNorway implements WeatherProvider {
                 this.app.log.Error("MET Norway: Empty response from API");
                 return null;
             }
-
-            try {
-              json = JSON.parse(json);
-            }
-            catch(e) {
-              this.app.HandleError({type: "soft", detail: "unusal payload", service: "met-norway"});
-              this.app.log.Error("MET Norway: Payload is not JSON, aborting.")
-              return null;
-            }
             
-            return await this.ParseWeather(json);
+            return this.ParseWeather(json);
         }
         return null;
 	}
@@ -90,7 +80,7 @@ class MetNorway implements WeatherProvider {
 
 		if (startIndex != -1) {
 			this.app.log.Debug("Removing outdated weather information...")
-			global.log(json.properties.timeseries.splice(0, startIndex+1));
+			json.properties.timeseries.splice(0, startIndex+1);
 		}
 
 		return json;
@@ -137,7 +127,7 @@ class MetNorway implements WeatherProvider {
 				hourlyForecasts.push({
 					date: new Date(element.time),
 					temp: CelsiusToKelvin(element.data.instant.details.air_temperature),
-					precipation: {
+					precipitation: {
 						type: "rain",
 						volume: element.data.next_1_hours.details.precipitation_amount
 					},
@@ -215,7 +205,7 @@ class MetNorway implements WeatherProvider {
 
     private SortDataByDay(data: MetNorwayData[]):  MetNorwayData[][] {
       let days: Array<any> = []
-      // Sorting and conatinerizing forecasts by date
+      // Sort and conatinerize forecasts by date
       let currentDay = new Date(this.GetEarliestDataForToday(data).time);
       let dayIndex = 0;
       days.push([]);
@@ -266,17 +256,13 @@ class MetNorway implements WeatherProvider {
       return conditions[result].name;
     }
 
-    private GetUrl(): string {
-        let location = this.app.config._location.replace(" ", "");
+    private GetUrl(loc: Location): string {
         let url = this.baseUrl + "lat=";
-        if (!isCoordinate(location)) return "";
-
-        let latLon = location.split(",");
-        url += (latLon[0] + "&lon=" + latLon[1]);
+        url += (loc.lat + "&lon=" + loc.lon);
         return url;
 	}
 	
-	private DeconstructCondtition(icon: string) {
+	private DeconstructCondition(icon: string) {
 		let condition = icon.split("_");
 
 		return {
@@ -286,7 +272,7 @@ class MetNorway implements WeatherProvider {
 	}
 
     private ResolveCondition(icon: string, isNight: boolean = false): Condition {
-		let weather = this.DeconstructCondtition(icon);
+		let weather = this.DeconstructCondition(icon);
 		let iconType = this.app.config.IconType();
 		switch (weather.condition) {
 			case "clearsky":
@@ -435,7 +421,7 @@ class MetNorway implements WeatherProvider {
 			case "lightrainshowersandthunder":
 				return {
 					customIcon : (isNight) ? "night-alt-rain-mix-storm-symbolic" : "day-rain-mix-storm-symbolic",
-					main: _("Ligth Rain"),
+					main: _("Light Rain"),
 					description: _("Light rain showers and thunder"),
 					icon: weatherIconSafely(["weather-showers-scattered", "weather-rain", "weather-severe-alert"], iconType)
 					

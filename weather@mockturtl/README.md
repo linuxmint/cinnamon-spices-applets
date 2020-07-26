@@ -8,28 +8,34 @@ cinnamon-weather uses [Semantic Versioning](http://semver.org/).  For the curren
 
 ## Setup
 
-**The applet obtains the location automatically, see below how to obtain API keys if your chosen weather provider needs one.**
+**The applet obtains the location automatically, see below what the weather providers offer and how to obtain API keys if your chosen weather provider needs one.**
 
-In **Manual Location** mode the applet **only** **accepts Coordinates** in Latitude, Longitude format (e.g. 37.77,122.41). You can use [OpenWeatherMap's finder](https://openweathermap.org/find) and paste the coordinates in from there.
+In **Manual Location** mode the applet either accepts:
+ * **Coordinates** in Latitude, Longitude format (e.g. 37.77,122.41). You can use [OpenWeatherMap's finder](https://openweathermap.org/find) and paste the coordinates in from there.
+ * or an **Address** (it can be just a city and country, it is pretty flexible). After 3 seconds, the applet will replace what you entered with the full address what it finds so you can verify if it's correct.
 
 ## Weather providers to choose from
 
-| Weather Providers  | Needs API key | **Maximum Forecast Days** | **Maximum Forecast Hours** | Required Packages         |
-| ------------------ | ------------- | ------------------------- | -------------------------- | ------------------------- |
-| **OpenWeatherMap** | No            | 7                         | 48                         | --                        |
-| **DarkSky**        | Yes*          | 8                         | 168                        | --                        |
-| **MET Norway**     | No            | 10                        | 48                         | --                        |
-| **WeatherBit**     | Yes           | 16                        | 0**                        | --                        |
-| **Yahoo**          | No            | 10                        | 0                          | --                        |
-| **Climacell**      | Yes           | 16                        | 96                         | python3-requests-oauthlib |
+| Weather Providers       | Needs API key | **Maximum Forecast Days** | **Maximum Forecast Hours** | Required Packages         |
+| ----------------------- | ------------- | ------------------------- | -------------------------- | ------------------------- |
+| **OpenWeatherMap**      | No            | 7                         | 48                         | --                        |
+| **DarkSky**             | Yes*          | 8                         | 168                        | --                        |
+| **MET Norway**          | No            | 10                        | 48                         | --                        |
+| **WeatherBit**          | Yes           | 16                        | 0**                        | --                        |
+| **Yahoo**               | No            | 10                        | 0                          | python3-requests-oauthlib |
+| **Climacell**           | Yes           | 16                        | 96                         | --                        |
+| **Met Office UK**       | No            | 5                         | 36***                      | --                        |
+| **US National Weather** | No            | 7                         | 156                        | --                        |
 
 ### OpenWeatherMap
 
-OpenWeatherMap does not require API key anymore! Big Thanks to them for supporting this applet!
+OpenWeatherMap does not require an API key. Big Thanks to them for supporting this applet!
+
+This is the default provider.
 
 ### DarkSky
 
-***[DarkSky has been aquired by Apple](https://blog.darksky.net/dark-sky-has-a-new-home/)** as of March 31, 2020. It does not allow new signups, and it will cease to function at the end of 2021.
+***[DarkSky has been acquired by Apple](https://blog.darksky.net/dark-sky-has-a-new-home/)** as of March 31, 2020. It does not allow new signups, and it will cease to function at the end of 2021.
 
 ### MET Norway
 
@@ -53,7 +59,23 @@ OpenWeatherMap does not require API key anymore! Big Thanks to them for supporti
 
 * API key can be obtained [here](https://developer.climacell.co/sign-up). Register and the API key will be shown in the Overview section.
 
+### Met Office UK
 
+Sometimes it takes like 5-10 seconds to obtain weather, please be patient when it loads up the first time.
+
+* Only covers the UK! 
+
+* It uses the nearest forecast site and observation sites in an 50km area, it displays an error if it does not find any. There are less observation sites than forecast sites.
+
+* ***Hourly Weather is 3-hourly weather
+
+### US National Weather
+
+Sometimes it takes like 5-10 seconds to obtain weather, please be patient when it loads up the first time.
+
+* Only cover the area of US!
+
+* Observations are quite spotty so it combines multiple observations stations if needed in a 50km area.
 
 ## Requirements
 
@@ -69,7 +91,8 @@ Right-click to access `cinnamon-settings` -> _Applets -> Configure_.
 
 ## Future Plans
 
-* Switch to MET Norway API v2.0 when it comes out (has a better iconnaming scheme for conditions)
+* None at the moment, I can take requests for provider integrations or for new features
+* If I figure out a way, add support to save locations and easily switch between them
 
 ## Known Issues
 

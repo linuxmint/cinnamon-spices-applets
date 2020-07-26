@@ -7,461 +7,530 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-31 01:03-0500\n"
-"PO-Revision-Date: 2019-03-23 07:53+0100\n"
+"POT-Creation-Date: 2020-07-17 12:34+0100\n"
+"PO-Revision-Date: 2020-07-18 22:53+0100\n"
+"Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
+"Language-Team: \n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
-"Language-Team: \n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Poedit 2.3.1\n"
 
-#: buttons.js:382
-msgid "Please provide your password to uninstall this application"
-msgstr "Adja meg a jelszavát az alkalmazás eltávolításához"
-
-#: buttons.js:1020
-msgid "Add to panel"
-msgstr "Hozzáadás a panelhez"
-
-#: buttons.js:1022
-msgid "Add to desktop"
-msgstr "Hozzáadás az asztalhoz"
-
-#: buttons.js:1025
-msgid "Remove from favorites"
-msgstr "Eltávolítás a kedvencek közül"
-
-#: buttons.js:1027
-msgid "Add to favorites"
-msgstr "Hozzáadás a kedvencekhez"
-
-#: buttons.js:1029
-msgid "Uninstall"
-msgstr "Eltávolítás"
-
-#: buttons.js:1031
-msgid "Run with NVIDIA GPU"
-msgstr "NVIDIA GPU használatával"
-
-#: buttons.js:1228 applet.js:2253
-msgid "List View"
-msgstr "Listanézet"
-
-#: buttons.js:1229 applet.js:2254
-msgid "Switch to list view"
-msgstr "Váltás listanézetre"
-
-#: buttons.js:1234 applet.js:2253
-msgid "Grid View"
-msgstr "Rács nézet"
-
-#: buttons.js:1235 applet.js:2254
-msgid "Switch to grid view"
-msgstr "Váltás a rácsnézetre"
-
-#: placeDisplay.js:57
-#, javascript-format
-msgid "Failed to launch \"%s\""
-msgstr "„%s” indítása meghiúsult"
-
-#: placeDisplay.js:146
-msgid "Home"
-msgstr "Otthoni"
-
-#: placeDisplay.js:220
-msgid "Computer"
-msgstr "Számítógép"
-
-#: placeDisplay.js:224
-msgid "Browse network"
-msgstr "Hálózat tallózása"
-
-#: applet.js:84
+#. 3.2 4.0
 msgid "Type to search..."
 msgstr "Gépeljen a kereséshez…"
 
-#: applet.js:149
+#. 3.2 4.0
 msgid "Initializing"
 msgstr "Előkészítés"
 
-#: applet.js:275
+#. 3.2 4.0
 msgid "No description available"
 msgstr "Nem áll rendelkezésre leírás"
 
-#: applet.js:956
+#. 3.2 4.0
 msgid "All Applications"
 msgstr "Minden alkalmazás"
 
-#: applet.js:994
+#. 3.2 4.0
 msgid "Places"
 msgstr "Helyek"
 
-#: applet.js:995
+#. 3.2 4.0
 msgid "Recent Files"
 msgstr "Legutóbbi fájlok"
 
-#: applet.js:996
+#. 3.2 4.0
 msgid "Bookmarks"
 msgstr "Könyvjelzők"
 
-#: applet.js:997
+#. 3.2 4.0
 msgid "Favorite Apps"
 msgstr "Kedvenc alkalmazások"
 
-#: applet.js:1282
+#. 3.2 4.0
 msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
 msgstr ""
-"A „gir1.2-gda-5.0” csomag szükséges a Firefox és Midori könyvjelzők megjelenítéséhez."
+"A „gir1.2-gda-5.0” csomag szükséges a Firefox és Midori könyvjelzők "
+"megjelenítéséhez."
 
-#: applet.js:1362
+#. 3.2 4.0
 msgid "Clear List"
 msgstr "Lista törlése"
 
-#: applet.js:1373
+#. 3.2 4.0
 msgid "No recent documents"
 msgstr "Nincsenek nemrég használt fájlok"
 
-#: applet.js:2246
+#. 3.2
 msgid "Account details"
 msgstr "Fiók részletek"
 
-#: applet.js:2260
+#. 3.2 3.2
+msgid "Grid View"
+msgstr "Rács nézet"
+
+#. 3.2 3.2
+msgid "List View"
+msgstr "Listanézet"
+
+#. 3.2 3.2
+msgid "Switch to grid view"
+msgstr "Váltás a rácsnézetre"
+
+#. 3.2 3.2
+msgid "Switch to list view"
+msgstr "Váltás listanézetre"
+
+#. 3.2 4.0
 msgid "Lock Screen"
 msgstr "Zárolási képernyő"
 
-#: applet.js:2261
+#. 3.2 4.0
 msgid "Lock the screen"
 msgstr "A képernyő zárolása"
 
-#: applet.js:2282
+#. 3.2 4.0
 msgid "Logout"
 msgstr "Kijelentkezés"
 
-#: applet.js:2283
+#. 3.2 4.0
 msgid "Leave the session"
 msgstr "Kilépés a munkamenetből"
 
-#: applet.js:2290
+#. 3.2 4.0
 msgid "Quit"
 msgstr "Kilépés"
 
-#: applet.js:2291
+#. 3.2 4.0
 msgid "Shutdown the computer"
 msgstr "Számítógép kikapcsolása"
 
+#. 3.2 4.0
+msgid "Home"
+msgstr "Otthoni"
+
+#. 3.2 4.0
+msgid "Computer"
+msgstr "Számítógép"
+
+#. 3.2 4.0
+msgid "Browse network"
+msgstr "Hálózat tallózása"
+
+#. 3.2 4.0
+msgid "Run with NVIDIA GPU"
+msgstr "NVIDIA GPU használatával"
+
+#. 3.2 4.0
+msgid "Add to panel"
+msgstr "Hozzáadás a panelhez"
+
+#. 3.2 4.0
+msgid "Add to desktop"
+msgstr "Hozzáadás az asztalhoz"
+
+#. 3.2 4.0
+msgid "Remove favorite"
+msgstr "Távolítsa el a kedvencet"
+
+#. 3.2 4.0
+msgid "Add to favorites"
+msgstr "Hozzáadás a kedvencekhez"
+
+#. 3.2 4.0
+msgid "Uninstall"
+msgstr "Eltávolítás"
+
+#. 4.0 4.0
+msgid "Please wait..."
+msgstr ""
+
 #. metadata.json->name
-#. settings-schema.json->cinnamenuProvidersSection->title
+#. 3.2
 msgid "Cinnamenu"
 msgstr "Cinnamenu"
 
 #. metadata.json->description
 msgid ""
-"A flexible menu providing formatting options, web bookmarks, open window lookup, and "
-"search provider support with fuzzy searching."
+"A flexible menu providing formatting options, web bookmarks, search provider "
+"support and fuzzy searching."
+msgstr ""
+"Rugalmas menü, amely formázási lehetőségeket, internetes könyvjelzőket, "
+"keresőszolgáltatói támogatást és homályos keresést biztosít."
+
+#. metadata.json->comments
+msgid ""
+"Made possible thanks to the efforts of contributors to the Cinnamon menu, "
+"Gnomenu, and the contributors to projects they derived from."
 msgstr ""
 
-#. settings-schema.json->panel->title
+#. 3.2 4.0
 msgid "Behavior"
 msgstr "Viselkedés"
 
-#. settings-schema.json->appearance->title
+#. 3.2 4.0
 msgid "Appearance"
 msgstr "Megjelenés"
 
-#. settings-schema.json->menu->title
+#. 3.2 4.0
 msgid "Layout and Content"
 msgstr "Elrendezés és tartalom"
 
-#. settings-schema.json->providers->title
+#. 3.2
 msgid "Search Providers"
 msgstr "Keresőszolgáltatók"
 
-#. settings-schema.json->extensionProvidersSection->title
+#. 3.2
 msgid "No search provider extensions found"
 msgstr "Nem található egyetlen keresőszolgáltatás-kiterjesztés"
 
-#. settings-schema.json->panel-appear->title
-#. settings-schema.json->panel-behave->title
+#. 3.2 4.0
 msgid "Panel"
 msgstr "Panel"
 
-#. settings-schema.json->menu-behave->title
-#. settings-schema.json->menu-icons->title
+#. 3.2 4.0
 msgid "Menu"
 msgstr "Menü"
 
-#. settings-schema.json->menu-layout->title
+#. 3.2 4.0
 msgid "Layout"
 msgstr "Elrendezés"
 
-#. settings-schema.json->menu-content->title
+#. 3.2 4.0
 msgid "Content"
 msgstr "Tartalom"
 
-#. settings-schema.json->privacy-settings-button->description
-msgid "Toggle recent files"
-msgstr "Legutóbbi fájlok váltása"
+#. 3.2 4.0
+msgid "Recent files settings"
+msgstr "A legutóbbi fájlok beállításai"
 
-#. settings-schema.json->privacy-settings-button->tooltip
-msgid "Press this button to customize your privacy settings."
-msgstr "Nyomja meg ezt a gombot az adatvédelem testreszabásához."
-
-#. settings-schema.json->menu-editor-button->description
+#. 3.2 4.0
 msgid "Open the menu editor"
 msgstr "Menüszerkesztő megnyitása"
 
-#. settings-schema.json->menu-editor-button->tooltip
-msgid "Press this button to customize your menu entries."
-msgstr "Nyomja meg ezt a gombot a menüelemek testreszabásához."
-
-#. settings-schema.json->resetCategoryOrder-button->description
+#. 3.2 4.0
 msgid "Reset category order"
 msgstr "Kategória sorrend visszaállítása"
 
-#. settings-schema.json->menu-icon-custom->description
+#. 3.2 4.0
 msgid "Use a custom icon"
 msgstr "Saját ikon használata"
 
-#. settings-schema.json->menu-icon-custom->tooltip
-msgid "Unchecking this allows the theme to set the icon"
-msgstr "A kijelölés megszüntetésével a téma állíthat be ikont"
+#. 3.2 4.0
+#, fuzzy
+#| msgid "Use a custom icon"
+msgid "Use a custom icon in the panel"
+msgstr "Saját ikon használata"
 
-#. settings-schema.json->menu-icon->description
-msgid "Icon"
-msgstr "Ikon"
+#. 3.2 4.0
+msgid "Panel icon"
+msgstr "Panel ikonra"
 
-#. settings-schema.json->menu-icon->tooltip
-msgid "Select an icon to show in the panel."
-msgstr "Panelen megjelenítendő ikon kiválasztása."
+#. 3.2 4.0
+msgid "Panel text"
+msgstr "Panel szövege"
 
-#. settings-schema.json->menu-label->description
-#. settings-schema.json->menu-label->tooltip
-msgid "Set the custom menu button icon name"
-msgstr "Egyedi menü gomb ikonjának beállítása"
+#. 3.2 4.0
+msgid "Text to show beside the panel icon"
+msgstr "A panel ikon mellett megjelenítendő szöveg"
 
-#. settings-schema.json->category-icon-size->units
-#. settings-schema.json->apps-list-icon-size->units
-#. settings-schema.json->apps-grid-icon-size->units
+#. 3.2 4.0
 msgid "pixels"
 msgstr "képpont"
 
-#. settings-schema.json->category-icon-size->description
-#. settings-schema.json->category-icon-size->tooltip
+#. 3.2 4.0
 msgid "Category icon size"
 msgstr "Kategória ikonméret"
 
-#. settings-schema.json->apps-list-icon-size->description
-#. settings-schema.json->apps-list-icon-size->tooltip
+#. 3.2 4.0
 msgid "Applications list icon size"
 msgstr "Alkalmazás lista ikonméret"
 
-#. settings-schema.json->apps-grid-icon-size->description
-#. settings-schema.json->apps-grid-icon-size->tooltip
+#. 3.2 4.0
 msgid "Applications grid icon size"
 msgstr "Alkalmazás rács ikonméret"
 
-#. settings-schema.json->overlay-key->description
+#. 3.2 4.0
 msgid "Keyboard shortcut to open and close the menu"
 msgstr "Gyorsbillentyű a menü megnyitásához és bezárásához"
 
-#. settings-schema.json->activate-on-hover->description
-msgid "Open the menu when I move my mouse over it"
+#. 3.2 4.0
+msgid "Open menu on hover"
+msgstr "Nyissa meg a menüt lebegve"
+
+#. 3.2 4.0
+#, fuzzy
+#| msgid "Open the menu when I move my mouse over it"
+msgid "Open the menu when I move my mouse over the panel icon"
 msgstr "Menü megnyitása, ha az egérmutató felette van"
 
-#. settings-schema.json->activate-on-hover->tooltip
-msgid "Enable opening the menu when the mouse enters the applet"
-msgstr "Menü megnyitása, ha az egérmutató a kisalkalmazás felett van"
-
-#. settings-schema.json->hover-delay->units
-#. settings-schema.json->tooltip-delay->units
+#. 3.2 4.0
 msgid "milliseconds"
 msgstr "ezredmásodperc"
 
-#. settings-schema.json->hover-delay->description
-msgid "Menu hover delay:"
-msgstr "Menükövetés késleltetése:"
+#. 3.2 4.0
+msgid "Menu hover delay"
+msgstr "Menükövetés késleltetése"
 
-#. settings-schema.json->hover-delay->tooltip
-msgid "Delay between switching categories"
-msgstr "Késleltetés a kategóriák közötti váltásnál"
-
-#. settings-schema.json->enable-animation->description
+#. 3.2 4.0
 msgid "Use menu animations"
 msgstr "Menü animáció használata"
 
-#. settings-schema.json->enable-animation->tooltip
-msgid "Allow the menu to animate on open and close"
+#. 3.2 4.0
+#, fuzzy
+#| msgid "Allow the menu to animate on open and close"
+msgid "Animate the menu on open and close"
 msgstr "Megnyitás és bezárás animáció megjelenítése a menüben"
 
-#. settings-schema.json->category-click->description
+#. 3.2 4.0
 msgid "Activate categories on click"
 msgstr "Kategória aktiválása egy kattintással"
 
-#. settings-schema.json->category-click->tooltip
-msgid "When enabled, category views are activated on click instead of on hover."
-msgstr ""
+#. 3.2 4.0
+#, fuzzy
+#| msgid "Activate categories on click"
+msgid "Activate categories on click instead of on hover"
+msgstr "Kategória aktiválása egy kattintással"
 
-#. settings-schema.json->enable-autoscroll->description
+#. 3.2 4.0
+#, fuzzy
+#| msgid "Enable autoscrolling in application list"
+msgid "Enable autoscrolling"
+msgstr "Automatikus görgetés az alkalmazás listában"
+
+#. 3.2 4.0
 msgid "Enable autoscrolling in application list"
 msgstr "Automatikus görgetés az alkalmazás listában"
 
-#. settings-schema.json->enable-autoscroll->tooltip
-msgid "Choose whether or not to enable smooth autoscrolling in the application list."
-msgstr "Válassza ki, hogy bekapcsolja-e az automatikus görgetést az alkalmazás listában."
-
-#. settings-schema.json->enable-bookmarks->description
+#. 3.2 4.0
 msgid "Show web bookmarks"
 msgstr "Webhely könyvjelzők megjelenítése"
 
-#. settings-schema.json->enable-bookmarks->tooltip
-msgid "Choose whether or not bookmarks are indexed in the menu."
-msgstr "Válassza ki, hogy a könyvjelzők legyenek-e kereshetőek a menüben."
+#. 3.2 4.0
+msgid "Show your browser's web bookmarks in the menu"
+msgstr "Mutassa meg a böngésző webes könyvjelzőit a menüben"
 
-#. settings-schema.json->enable-windows->description
+#. 3.2
 msgid "Enable searching of open windows"
 msgstr "Megnyitott ablakok keresésének engedélyezése"
 
-#. settings-schema.json->enable-windows->tooltip
-msgid "Choose whether or not open windows are indexed in menu searches."
-msgstr ""
-
-#. settings-schema.json->enable-search-providers->description
+#. 3.2 4.0
 msgid "Enable search providers"
 msgstr "Keresőszolgáltatók engedélyezése"
 
-#. settings-schema.json->enable-search-providers->tooltip
-msgid "Choose whether or not search provider results are indexed in menu searches."
-msgstr ""
+#. 3.2 4.0
+#, fuzzy
+#| msgid "Enable search providers"
+msgid "Include search provider results in searches"
+msgstr "Keresőszolgáltatók engedélyezése"
 
-#. settings-schema.json->get-providers->description
+#. 3.2 4.0
 msgid "Example Search Providers"
 msgstr "Keresőszolgáltató példa"
 
-#. settings-schema.json->startup-view-mode->description
-#. settings-schema.json->startup-view-mode->tooltip
+#. 3.2
 msgid "Startup applications view mode"
 msgstr "Indítópult alkalmazások megjelenítési módja"
 
-#. settings-schema.json->startup-view-mode->options
+#. 3.2 4.0
 msgid "List"
 msgstr "Lista"
 
-#. settings-schema.json->startup-view-mode->options
+#. 3.2 4.0
 msgid "Grid"
 msgstr "Rács"
 
-#. settings-schema.json->apps-grid-column-count->units
+#. 3.2 4.0
 msgid "columns"
 msgstr "oszlop"
 
-#. settings-schema.json->apps-grid-column-count->description
-#. settings-schema.json->apps-grid-column-count->tooltip
+#. 3.2 4.0
 msgid "Number of columns in apps grid"
 msgstr "Alkalmazás rács oszlopainak száma"
 
-#. settings-schema.json->show-places->description
+#. 3.2 4.0
 msgid "Show bookmarks and places"
 msgstr "Könyvjelzők és helyek megjelenítése"
 
-#. settings-schema.json->show-places->tooltip
-msgid "Choose whether or not to show bookmarks and places in the menu."
-msgstr "Válassza ki, hogy mutassa-e a könyvjelzőket és a helyeket a menüben."
+#. 3.2 4.0
+#, fuzzy
+#| msgid "Show bookmarks and places"
+msgid "Show bookmarks and places category in the menu"
+msgstr "Könyvjelzők és helyek megjelenítése"
 
-#. settings-schema.json->show-application-icons->description
+#. 3.2 4.0
 msgid "Show application icons"
 msgstr "Alkalmazásikonok megjelenítése"
 
-#. settings-schema.json->show-application-icons->tooltip
-msgid "Choose whether or not to show icons on applications."
-msgstr "Válassza ki, hogy bekapcsolja-e az ikonok megjelenítését az alkalmazásokban."
-
-#. settings-schema.json->show-category-icons->description
+#. 3.2 4.0
 msgid "Show category icons"
 msgstr "Kategóriaikonok megjelenítése"
 
-#. settings-schema.json->show-category-icons->tooltip
-msgid "Choose whether or not to show icons on categories."
-msgstr "Válassza ki, hogy bekapcsolja-e az ikonok megjelenítését a kategóriáknál."
-
-#. settings-schema.json->search-filesystem->description
-msgid "Enable filesystem path entry in search box"
-msgstr "Fájlrendszer elérési út használatának engedélyezése a keresőmezőben"
-
-#. settings-schema.json->search-filesystem->tooltip
-msgid "Allows path entry in the menu search box."
-msgstr "Elérési út írható a menü keresőmezőjébe."
-
-#. settings-schema.json->show-apps-description-on-buttons->description
+#. 3.2
 msgid "Show application descriptions under titles"
 msgstr "Alkalmazás leírások megjelenítése a cím alatt"
 
-#. settings-schema.json->show-apps-description-on-buttons->tooltip
-msgid ""
-"Choose whether or not to show the application description on the application buttons."
-msgstr "Válassza ki, hogy bekapcsolja-e az alkalmazás leírások megjelenítését a gombokon."
-
-#. settings-schema.json->show-tooltips->description
+#. 3.2
 msgid "Show tooltips"
 msgstr "Eszköztippek megjelenítése"
 
-#. settings-schema.json->show-tooltips->tooltip
-msgid ""
-"When enabled, tooltips containing the item's name or description is shown when hovered "
-"over."
-msgstr ""
-
-#. settings-schema.json->tooltip-delay->description
+#. 3.2
 msgid "Tooltip delay"
 msgstr "Eszköztippek késleltetése"
 
-#. settings-schema.json->tooltip-delay->tooltip
-msgid "The delay time in milliseconds for tooltips when hovering over a menu item."
-msgstr ""
-
-#. settings-schema.json->enable-custom-menu-height->description
-#. settings-schema.json->enable-custom-menu-height->tooltip
+#. 3.2 4.0
 msgid "Use a custom menu height"
 msgstr "Egyedi menü magasság használata"
 
-#. settings-schema.json->custom-menu-height->units
+#. 3.2 4.0
 msgid "px"
 msgstr "px"
 
-#. settings-schema.json->custom-menu-height->description
-#. settings-schema.json->custom-menu-height->tooltip
+#. 3.2 4.0
 msgid "Custom menu height"
 msgstr "Egyéni menü magasság"
 
-#. settings-schema.json->description-placement->description
+#. 4.0
+msgid "Applications view mode"
+msgstr "Alkalmazások nézet mód"
+
+#. 4.0
+msgid "View applications as list or grid"
+msgstr "Az alkalmazások megtekintése listaként vagy rácsként"
+
+#. 4.0
 msgid "Application description placement"
 msgstr "Alkalmazás leírások elhelyezkedése"
 
-#. settings-schema.json->description-placement->options
+#. 4.0
 msgid "Tooltips"
 msgstr "Eszköztippek"
 
-#. settings-schema.json->description-placement->options
+#. 4.0
 msgid "Under titles"
 msgstr "Cím alatt"
 
-#. settings-schema.json->description-placement->options
-msgid "Bottom pane"
-msgstr "Alsó panel"
-
-#. settings-schema.json->description-placement->options
+#. 4.0
 msgid "None"
 msgstr "Nincs"
 
-#. settings-schema.json->description-placement->tooltip
-msgid "Choose where application descriptions will be placed, or select \"None\" to disable."
+#. 4.0
+msgid "Choose where to show application descriptions"
+msgstr "Válassza ki, hogy hol jelenjen meg az alkalmazás leírása"
+
+#. 4.0
+msgid "Session buttons location"
+msgstr "Munkamenet gombok elhelyezkedése"
+
+#. 4.0
+msgid "Top"
+msgstr "A csúcson"
+
+#. 4.0
+msgid "Bottom"
+msgstr "Alsó"
+
+#. 4.0
+msgid "Left"
+msgstr "Balra"
+
+#. 4.0
+msgid "Right"
+msgstr "Jobbra"
+
+#. 4.0
+msgid "Choose where to show the session (quit, logout, etc.) buttons"
 msgstr ""
+"Válassza ki, hogy hol jelenjen meg a munkamenet (kilépés, kijelentkezés stb.)"
 
-#. settings-schema.json->startupCategory->description
-msgid "Startup category"
-msgstr "Indítási kategória"
+#. 4.0
+msgid "Add favorites to session buttons"
+msgstr "Kedvencek hozzáadása a munkamenet gombjaihoz"
 
-#. settings-schema.json->startupCategory->tooltip
-msgid "Category first seen when the menu is opened"
-msgstr "Menü megnyitásakor megjelenítendő kategória"
+#. 4.0
+msgid "Show your favorite app icons next to the session buttons"
+msgstr "Mutassa meg kedvenc alkalmazásikonjait a munkamenet gombjai mellett"
+
+#, javascript-format
+#~ msgid "Failed to launch \"%s\""
+#~ msgstr "„%s” indítása meghiúsult"
+
+#~ msgid "Remove from favorites"
+#~ msgstr "Eltávolítás a kedvencek közül"
+
+#~ msgid "Toggle recent files"
+#~ msgstr "Legutóbbi fájlok váltása"
+
+#~ msgid "Press this button to customize your privacy settings."
+#~ msgstr "Nyomja meg ezt a gombot az adatvédelem testreszabásához."
+
+#~ msgid "Press this button to customize your menu entries."
+#~ msgstr "Nyomja meg ezt a gombot a menüelemek testreszabásához."
+
+#~ msgid "Unchecking this allows the theme to set the icon"
+#~ msgstr "A kijelölés megszüntetésével a téma állíthat be ikont"
+
+#~ msgid "Icon"
+#~ msgstr "Ikon"
+
+#~ msgid "Set the custom menu button icon name"
+#~ msgstr "Egyedi menü gomb ikonjának beállítása"
+
+#~ msgid "Enable opening the menu when the mouse enters the applet"
+#~ msgstr "Menü megnyitása, ha az egérmutató a kisalkalmazás felett van"
+
+#~ msgid "Delay between switching categories"
+#~ msgstr "Késleltetés a kategóriák közötti váltásnál"
+
+#~ msgid ""
+#~ "When enabled, category views are activated on click instead of on hover."
+#~ msgstr ""
+#~ "Ha engedélyezve van, a kategória nézeteket kattintással aktiválják, nem "
+#~ "pedig a lebegtetést."
+
+#~ msgid ""
+#~ "Choose whether or not to enable smooth autoscrolling in the application "
+#~ "list."
+#~ msgstr ""
+#~ "Válassza ki, hogy bekapcsolja-e az automatikus görgetést az alkalmazás "
+#~ "listában."
+
+#~ msgid "Choose whether or not bookmarks are indexed in the menu."
+#~ msgstr "Válassza ki, hogy a könyvjelzők legyenek-e kereshetőek a menüben."
+
+#~ msgid "Choose whether or not to show bookmarks and places in the menu."
+#~ msgstr ""
+#~ "Válassza ki, hogy mutassa-e a könyvjelzőket és a helyeket a menüben."
+
+#~ msgid "Choose whether or not to show icons on applications."
+#~ msgstr ""
+#~ "Válassza ki, hogy bekapcsolja-e az ikonok megjelenítését az "
+#~ "alkalmazásokban."
+
+#~ msgid "Choose whether or not to show icons on categories."
+#~ msgstr ""
+#~ "Válassza ki, hogy bekapcsolja-e az ikonok megjelenítését a kategóriáknál."
+
+#~ msgid ""
+#~ "Choose whether or not to show the application description on the "
+#~ "application buttons."
+#~ msgstr ""
+#~ "Válassza ki, hogy bekapcsolja-e az alkalmazás leírások megjelenítését a "
+#~ "gombokon."
+
+#~ msgid "Please provide your password to uninstall this application"
+#~ msgstr "Adja meg a jelszavát az alkalmazás eltávolításához"
+
+#~ msgid "Enable filesystem path entry in search box"
+#~ msgstr "Fájlrendszer elérési út használatának engedélyezése a keresőmezőben"
+
+#~ msgid "Allows path entry in the menu search box."
+#~ msgstr "Elérési út írható a menü keresőmezőjébe."
+
+#~ msgid "Startup category"
+#~ msgstr "Indítási kategória"
+
+#~ msgid "Category first seen when the menu is opened"
+#~ msgstr "Menü megnyitásakor megjelenítendő kategória"

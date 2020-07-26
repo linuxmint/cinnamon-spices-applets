@@ -43,8 +43,6 @@ class Climacell implements WeatherProvider {
     public readonly website = "https://www.climacell.co/";
     public readonly maxHourlyForecastSupport = 96;
 
-    private supportedLanguages: string[] = [];
-
     private baseUrl = "https://api.climacell.co/v3/weather/";
     private callData: CallDict = {
         current: {
@@ -71,10 +69,10 @@ class Climacell implements WeatherProvider {
     //--------------------------------------------------------
     //  Functions
     //--------------------------------------------------------
-    public async GetWeather(): Promise<WeatherData> {
-        let hourly = this.GetData("hourly", this.ParseHourly) as Promise<HourlyForecastData[]>;
-        let daily = this.GetData("daily", this.ParseDaily) as Promise<ForecastData[]>;
-        let current = await this.GetData("current", this.ParseWeather) as WeatherData;
+    public async GetWeather(loc: Location): Promise<WeatherData> {
+        let hourly = this.GetData("hourly", loc, this.ParseHourly) as Promise<HourlyForecastData[]>;
+        let daily = this.GetData("daily", loc, this.ParseDaily) as Promise<ForecastData[]>;
+        let current = await this.GetData("current", loc, this.ParseWeather) as WeatherData;
         current.forecasts = await daily;
         current.hourlyForecasts = await hourly;
 
@@ -88,13 +86,12 @@ class Climacell implements WeatherProvider {
      * @param baseUrl 
      * @param ParseFunction returns WeatherData or ForecastData Object
      */
-    private async GetData(baseUrl: CallType, ParseFunction: (json: any, context: any) => WeatherData | ForecastData[] | HourlyForecastData[]) {
-        let query = this.ConstructQuery(baseUrl);
+    private async GetData(baseUrl: CallType, loc: Location, ParseFunction: (json: any, context: any) => WeatherData | ForecastData[] | HourlyForecastData[]) {
+        let query = this.ConstructQuery(baseUrl, loc);
         let json;
         if (query != null) {
-            this.app.log.Debug("Query: " + query);
             try {
-                json = await this.app.LoadJsonAsync(query);
+                json = await this.app.LoadJsonAsync(query, this.OnObtainingData);
             }
             catch(e) {
               	this.app.HandleHTTPError("climacell", e, this.app, null);
@@ -155,7 +152,7 @@ class Climacell implements WeatherProvider {
         }
         catch(e) {
             ctx.app.log.Error("Climacell payload parsing error: " + e)
-            ctx.app.HandleError({type: "soft", detail: "unusal payload", service: "climacell", message: _("Failed to Process Weather Info")});
+            ctx.app.HandleError({type: "soft", detail: "unusual payload", service: "climacell", message: _("Failed to Process Weather Info")});
             return null;
         }
     };
@@ -171,7 +168,7 @@ class Climacell implements WeatherProvider {
 			let hour: HourlyForecastData = {
 				temp: CelsiusToKelvin(element.temp.value),
 				date: new Date(element.observation_time.value),
-				precipation: {
+				precipitation: {
 					type: element.precipitation_type.value,
 					volume: null,
 					chance: element.precipitation_probability.value
@@ -198,10 +195,9 @@ class Climacell implements WeatherProvider {
         return results;
     }
 
-    private ConstructQuery(subcall: CallType): string {
+    private ConstructQuery(subcall: CallType, loc: Location): string {
         let query;
         let key = this.app.config._apiKey.replace(" ", "");
-        let location = this.app.config._location.replace(" ", "");
         if (this.app.config.noApiKey()) {
             this.app.log.Error("Climacell: No API Key given");
             this.app.HandleError({
@@ -211,18 +207,36 @@ class Climacell implements WeatherProvider {
                 message: _("Please enter API key in settings,\nor get one first on " + "https://developer.climacell.co/sign-up")});
             return null;
         }
-        if (isCoordinate(location)) {
-			let loc = location.split(",")
-			query = this.baseUrl + this.callData[subcall].url + "?apikey=" + key + "&lat=" + loc[0] + "&lon=" + loc[1] + "&unit_system=" + this.unit + "&fields=" +  this.callData[subcall].required_fields.join();
-			global.log(query)
-            return query;
-        }
-        else {
-            this.app.log.Error("Climacell: Location is not a coordinate");
-            this.app.HandleError({type: "hard", detail: "bad location format", service:"darksky", userError: true, message: ("Please Check the location,\nmake sure it is a coordinate") })
-            return null;
-        }
+		query = this.baseUrl + this.callData[subcall].url + "?apikey=" + key + "&lat=" + loc.lat + "&lon=" + loc.lon + "&unit_system=" + this.unit + "&fields=" +  this.callData[subcall].required_fields.join();
+		return query;
     };
+
+     /**
+     * 
+     * @param message Soup Message object
+     * @returns null if custom error checking does not find anything
+     */
+    private OnObtainingData(message: any): AppletError {
+        if (message.status_code == 403) { // DarkSky returns auth error on the http level when key is wrong
+            return {
+                type: "hard",
+                userError: true,
+                detail: "bad key",
+                service: "darksky",
+                message: _("Please Make sure you\nentered the API key correctly and your account is not locked")
+            };
+        }
+        if (message.status_code == 401) { // DarkSky returns auth error on the http level when key is wrong
+            return {
+                type: "hard",
+                userError: true,
+                detail: "no key",
+                service: "darksky",
+                message: _("Please Make sure you\nentered the API key what you have from DarkSky")
+            };
+        }
+        return null;
+    }
 
     private ResolveCondition(condition: string, isNight: boolean = false): Condition {
         switch(condition) {

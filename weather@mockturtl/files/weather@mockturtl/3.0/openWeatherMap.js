@@ -69,15 +69,14 @@ var OpenWeatherMap = (function () {
         this.base_url = "https://api.openweathermap.org/data/2.5/onecall?";
         this.app = _app;
     }
-    OpenWeatherMap.prototype.GetWeather = function () {
+    OpenWeatherMap.prototype.GetWeather = function (loc) {
         return __awaiter(this, void 0, void 0, function () {
             var query, json, e_1;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        query = this.ConstructQuery(this.base_url);
+                        query = this.ConstructQuery(this.base_url, loc);
                         if (!(query != null)) return [3, 5];
-                        this.app.log.Debug("Query: " + query);
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
@@ -166,13 +165,13 @@ var OpenWeatherMap = (function () {
                     },
                 };
                 if (!!hour.rain) {
-                    forecast.precipation = {
+                    forecast.precipitation = {
                         volume: hour.rain["1h"],
                         type: "rain"
                     };
                 }
                 if (!!hour.snow) {
-                    forecast.precipation = {
+                    forecast.precipitation = {
                         volume: hour.snow["1h"],
                         type: "snow"
                     };
@@ -183,41 +182,21 @@ var OpenWeatherMap = (function () {
             return weather;
         }
         catch (e) {
-            self.app.log.Error("OpenWeathermap Weather Parsing error: " + e);
-            self.app.HandleError({ type: "soft", service: "openweathermap", detail: "unusal payload", message: _("Failed to Process Current Weather Info") });
+            self.app.log.Error("OpenWeatherMap Weather Parsing error: " + e);
+            self.app.HandleError({ type: "soft", service: "openweathermap", detail: "unusual payload", message: _("Failed to Process Current Weather Info") });
             return null;
         }
     };
     ;
-    OpenWeatherMap.prototype.ConstructQuery = function (baseUrl) {
+    OpenWeatherMap.prototype.ConstructQuery = function (baseUrl, loc) {
         var query = baseUrl;
-        var locString = this.ParseLocation();
-        if (locString != null) {
-            query = query + locString + "&appid=";
-            query += "1c73f8259a86c6fd43c7163b543c8640";
-            var locale = this.ConvertToAPILocale(this.app.currentLocale);
-            if (this.app.config._translateCondition && isLangSupported(locale, this.supportedLanguages)) {
-                query = query + "&lang=" + locale;
-            }
-            return query;
+        query = query + "lat=" + loc.lat + "&lon=" + loc.lon + "&appid=";
+        query += "1c73f8259a86c6fd43c7163b543c8640";
+        var locale = this.ConvertToAPILocale(this.app.currentLocale);
+        if (this.app.config._translateCondition && isLangSupported(locale, this.supportedLanguages)) {
+            query = query + "&lang=" + locale;
         }
-        return null;
-    };
-    ;
-    OpenWeatherMap.prototype.ParseLocation = function () {
-        var loc = this.app.config._location.replace(/ /g, "");
-        if (!nonempty(loc)) {
-            this.app.HandleError({ type: "hard", userError: true, "detail": "no location", message: _("Please enter a Location in settings") });
-            this.app.log.Error("OpenWeatherMap: No Location was provided");
-            return null;
-        }
-        if (!isCoordinate(loc)) {
-            this.app.HandleError({ type: "hard", userError: true, "detail": "bad location format", message: _("Please enter location in the correct format (coordinates)") });
-            this.app.log.Error("OpenWeatherMap: Location was provided in bad format");
-            return null;
-        }
-        var locArr = loc.split(',');
-        return "lat=" + locArr[0] + "&lon=" + locArr[1];
+        return query;
     };
     ;
     OpenWeatherMap.prototype.ConvertToAPILocale = function (systemLocale) {
@@ -243,7 +222,7 @@ var OpenWeatherMap = (function () {
         return lang;
     };
     OpenWeatherMap.prototype.HandleResponseErrors = function (json) {
-        var errorMsg = "OpenWeathermap Response: ";
+        var errorMsg = "OpenWeatherMap Response: ";
         var error = {
             service: "openweathermap",
             type: "hard",

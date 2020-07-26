@@ -62,7 +62,6 @@ var Climacell = (function () {
         this.maxForecastSupport = 16;
         this.website = "https://www.climacell.co/";
         this.maxHourlyForecastSupport = 96;
-        this.supportedLanguages = [];
         this.baseUrl = "https://api.climacell.co/v3/weather/";
         this.callData = {
             current: {
@@ -81,15 +80,15 @@ var Climacell = (function () {
         this.unit = "si";
         this.app = _app;
     }
-    Climacell.prototype.GetWeather = function () {
+    Climacell.prototype.GetWeather = function (loc) {
         return __awaiter(this, void 0, void 0, function () {
             var hourly, daily, current, _a, _b;
             return __generator(this, function (_c) {
                 switch (_c.label) {
                     case 0:
-                        hourly = this.GetData("hourly", this.ParseHourly);
-                        daily = this.GetData("daily", this.ParseDaily);
-                        return [4, this.GetData("current", this.ParseWeather)];
+                        hourly = this.GetData("hourly", loc, this.ParseHourly);
+                        daily = this.GetData("daily", loc, this.ParseDaily);
+                        return [4, this.GetData("current", loc, this.ParseWeather)];
                     case 1:
                         current = _c.sent();
                         _a = current;
@@ -106,19 +105,18 @@ var Climacell = (function () {
         });
     };
     ;
-    Climacell.prototype.GetData = function (baseUrl, ParseFunction) {
+    Climacell.prototype.GetData = function (baseUrl, loc, ParseFunction) {
         return __awaiter(this, void 0, void 0, function () {
             var query, json, e_1;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        query = this.ConstructQuery(baseUrl);
+                        query = this.ConstructQuery(baseUrl, loc);
                         if (!(query != null)) return [3, 5];
-                        this.app.log.Debug("Query: " + query);
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
-                        return [4, this.app.LoadJsonAsync(query)];
+                        return [4, this.app.LoadJsonAsync(query, this.OnObtainingData)];
                     case 2:
                         json = _a.sent();
                         return [3, 4];
@@ -177,7 +175,7 @@ var Climacell = (function () {
         }
         catch (e) {
             ctx.app.log.Error("Climacell payload parsing error: " + e);
-            ctx.app.HandleError({ type: "soft", detail: "unusal payload", service: "climacell", message: _("Failed to Process Weather Info") });
+            ctx.app.HandleError({ type: "soft", detail: "unusual payload", service: "climacell", message: _("Failed to Process Weather Info") });
             return null;
         }
     };
@@ -193,7 +191,7 @@ var Climacell = (function () {
             var hour = {
                 temp: CelsiusToKelvin(element.temp.value),
                 date: new Date(element.observation_time.value),
-                precipation: {
+                precipitation: {
                     type: element.precipitation_type.value,
                     volume: null,
                     chance: element.precipitation_probability.value
@@ -218,10 +216,9 @@ var Climacell = (function () {
         }
         return results;
     };
-    Climacell.prototype.ConstructQuery = function (subcall) {
+    Climacell.prototype.ConstructQuery = function (subcall, loc) {
         var query;
         var key = this.app.config._apiKey.replace(" ", "");
-        var location = this.app.config._location.replace(" ", "");
         if (this.app.config.noApiKey()) {
             this.app.log.Error("Climacell: No API Key given");
             this.app.HandleError({
@@ -232,19 +229,31 @@ var Climacell = (function () {
             });
             return null;
         }
-        if (isCoordinate(location)) {
-            var loc = location.split(",");
-            query = this.baseUrl + this.callData[subcall].url + "?apikey=" + key + "&lat=" + loc[0] + "&lon=" + loc[1] + "&unit_system=" + this.unit + "&fields=" + this.callData[subcall].required_fields.join();
-            global.log(query);
-            return query;
-        }
-        else {
-            this.app.log.Error("Climacell: Location is not a coordinate");
-            this.app.HandleError({ type: "hard", detail: "bad location format", service: "darksky", userError: true, message: ("Please Check the location,\nmake sure it is a coordinate") });
-            return null;
-        }
+        query = this.baseUrl + this.callData[subcall].url + "?apikey=" + key + "&lat=" + loc.lat + "&lon=" + loc.lon + "&unit_system=" + this.unit + "&fields=" + this.callData[subcall].required_fields.join();
+        return query;
     };
     ;
+    Climacell.prototype.OnObtainingData = function (message) {
+        if (message.status_code == 403) {
+            return {
+                type: "hard",
+                userError: true,
+                detail: "bad key",
+                service: "darksky",
+                message: _("Please Make sure you\nentered the API key correctly and your account is not locked")
+            };
+        }
+        if (message.status_code == 401) {
+            return {
+                type: "hard",
+                userError: true,
+                detail: "no key",
+                service: "darksky",
+                message: _("Please Make sure you\nentered the API key what you have from DarkSky")
+            };
+        }
+        return null;
+    };
     Climacell.prototype.ResolveCondition = function (condition, isNight) {
         if (isNight === void 0) { isNight = false; }
         switch (condition) {

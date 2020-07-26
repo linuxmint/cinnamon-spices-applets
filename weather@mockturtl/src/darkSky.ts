@@ -68,16 +68,15 @@ class DarkSky implements WeatherProvider {
     //--------------------------------------------------------
     //  Functions
     //--------------------------------------------------------
-    public async GetWeather(): Promise<WeatherData> {
-        let query = this.ConstructQuery();
+    public async GetWeather(loc: Location): Promise<WeatherData> {
+        let query = this.ConstructQuery(loc);
         let json;
         if (query != "" && query != null) {
-            this.app.log.Debug("DarkSky API query: " + query);
             try {
-                json = await this.app.LoadJsonAsync(query);
+                json = await this.app.LoadJsonAsync(query, this.OnObtainingData);
             }
             catch(e) {
-                this.app.HandleHTTPError("darksky", e, this.app, this.HandleHTTPError);
+                this.app.HandleHTTPError("darksky", e, this.app);
                 return null;
             }        
             
@@ -132,8 +131,8 @@ class DarkSky implements WeatherProvider {
                     value: this.ToKelvin(json.currently.apparentTemperature),
                     type: "temperature"
                 },
-				forecasts: [],
-				hourlyForecasts: []
+            forecasts: [],
+            hourlyForecasts: []
             }
             // Forecast
             for (let i = 0; i < json.daily.data.length; i++) {
@@ -156,35 +155,33 @@ class DarkSky implements WeatherProvider {
                   forecast.date.setHours(forecast.date.getHours() + 12);
 
                   result.forecasts.push(forecast);
-			}
+            }
 
-			for (let i = 0; i < json.hourly.data.length; i++) {
-                let hour = json.hourly.data[i];
-                let forecast: HourlyForecastData = {          
-                    date: new Date(hour.time * 1000),         
-					temp: this.ToKelvin(hour.temperature),                  
-                    condition: {
-                      main: this.GetShortSummary(hour.summary),               
-                      description: this.ProcessSummary(hour.summary),        
-                      icon: weatherIconSafely(this.ResolveIcon(hour.icon, {sunrise: sunrise, sunset: sunset}, new Date(hour.time * 1000)), this.app.config.IconType()),    
-                      customIcon: this.ResolveCustomIcon(hour.icon)           
-					},
-					precipation: {
-						type: hour.precipType as PrecipationType,
-						volume: hour.precipProbability,
-						chance: hour.precipProbability * 100
-					}
-				};
+            for (let i = 0; i < json.hourly.data.length; i++) {
+                      let hour = json.hourly.data[i];
+                      let forecast: HourlyForecastData = {          
+                          date: new Date(hour.time * 1000),         
+                temp: this.ToKelvin(hour.temperature),                  
+                          condition: {
+                            main: this.GetShortSummary(hour.summary),               
+                            description: this.ProcessSummary(hour.summary),        
+                            icon: weatherIconSafely(this.ResolveIcon(hour.icon, {sunrise: sunrise, sunset: sunset}, new Date(hour.time * 1000)), this.app.config.IconType()),    
+                            customIcon: this.ResolveCustomIcon(hour.icon)           
+                },
+                precipitation: {
+                  type: hour.precipType as PrecipationType,
+                  volume: hour.precipProbability,
+                  chance: hour.precipProbability * 100
+                }
+              };
 
-				result.hourlyForecasts.push(forecast);
-			}
-			
-
+              result.hourlyForecasts.push(forecast);
+            }
             return result;
         }
         catch(e) {
             this.app.log.Error("DarkSky payload parsing error: " + e)
-            this.app.HandleError({type: "soft", detail: "unusal payload", service: "darksky", message: _("Failed to Process Weather Info")});
+            this.app.HandleError({type: "soft", detail: "unusual payload", service: "darksky", message: _("Failed to Process Weather Info")});
             return null;
         }
     };
@@ -197,11 +194,10 @@ class DarkSky implements WeatherProvider {
         return lang;
     }
 
-    private ConstructQuery(): string {
+    private ConstructQuery(loc: Location): string {
         this.SetQueryUnit();
         let query;
         let key = this.app.config._apiKey.replace(" ", "");
-        let location = this.app.config._location.replace(" ", "");
         if (this.app.config.noApiKey()) {
             this.app.log.Error("DarkSky: No API Key given");
             this.app.HandleError({
@@ -211,22 +207,40 @@ class DarkSky implements WeatherProvider {
                    message: _("Please enter API key in settings,\nor get one first on https://darksky.net/dev/register")});
             return "";
         }
-        if (isCoordinate(location)) {
-            query = this.query + key + "/" + location + 
-            "?exclude=minutely,flags" + "&units=" + this.unit;
-            let locale = this.ConvertToAPILocale(this.app.currentLocale);
-            if (isLangSupported(locale, this.supportedLanguages) && this.app.config._translateCondition) {
-                query = query + "&lang=" + locale;
-            }
-            return query;
+        query = this.query + key + "/" + loc.text + "?exclude=minutely,flags" + "&units=" + this.unit;
+        let locale = this.ConvertToAPILocale(this.app.currentLocale);
+        if (isLangSupported(locale, this.supportedLanguages) && this.app.config._translateCondition) {
+            query = query + "&lang=" + locale;
         }
-        else {
-            this.app.log.Error("DarkSky: Location is not a coordinate");
-            this.app.HandleError({type: "hard", detail: "bad location format", service:"darksky", userError: true, message: ("Please Check the location,\nmake sure it is a coordinate") })
-            return "";
-        }
-    };
+        return query;
+    }
 
+      /**
+     * 
+     * @param message Soup Message object
+     * @returns null if custom error checking does not find anything
+     */
+    private OnObtainingData(message: any): AppletError {
+        if (message.status_code == 403) { // DarkSky returns auth error on the http level when key is wrong
+            return {
+                type: "hard",
+                userError: true,
+                detail: "bad key",
+                service: "darksky",
+                message: _("Please Make sure you\nentered the API key correctly and your account is not locked")
+            };
+        }
+        if (message.status_code == 401) { // DarkSky returns auth error on the http level when key is wrong
+            return {
+                type: "hard",
+                userError: true,
+                detail: "no key",
+                service: "darksky",
+                message: _("Please Make sure you\nentered the API key what you have from DarkSky")
+            };
+        }
+        return null;
+    }
 
     private HandleResponseErrors(json: any): void {
         let code = json.code;
@@ -242,23 +256,6 @@ class DarkSky implements WeatherProvider {
                 break
         }
     };
-
-    /** Handles API Scpecific HTTP errors  */
-    public HandleHTTPError(error: HttpError, uiError: AppletError): AppletError {
-        if (error.code == 403) { // DarkSky returns auth error on the http level when key is wrong
-            uiError.detail = "bad key"
-            uiError.message = _("Please Make sure you\nentered the API key correctly and your account is not locked");
-            uiError.type = "hard";
-            uiError.userError = true;
-        }
-        if (error.code == 401) { // DarkSky returns auth error on the http level when key is wrong
-            uiError.detail = "no key"
-            uiError.message = _("Please Make sure you\nentered the API key what you have from DarkSky");
-            uiError.type = "hard";
-            uiError.userError = true;
-        }
-        return uiError;
-    }
 
     private ProcessSummary(summary: string): string {
         let processed = summary.split(" ");
@@ -405,7 +402,7 @@ class DarkSky implements WeatherProvider {
 
 /**
  * - 'si' returns meter/sec and Celsius
- * - 'us' returns miles/hour and Farhenheit
+ * - 'us' returns miles/hour and Fahrenheit
  * - 'uk2' return miles/hour and Celsius
  */
 type queryUnits = 'si' | 'us' | 'uk2';

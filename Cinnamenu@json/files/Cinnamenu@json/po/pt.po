@@ -1,0 +1,534 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# Caldas Lopes <joao.caldas.lopes@gmail.com>, 2018.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-07-20 12:34+0100\n"
+"PO-Revision-Date: 2020-07-23 07:34+0100\n"
+"Last-Translator: Caldas Lopes <joao.caldas.lopes@gmail.com>\n"
+"Language-Team: \n"
+"Language: pt\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3.1\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. 3.2 4.0
+msgid "Type to search..."
+msgstr "Digite para pesquisar..."
+
+#. 3.2 4.0
+msgid "Initializing"
+msgstr "A inicializar"
+
+#. 3.2 4.0
+msgid "No description available"
+msgstr "Nenhuma descrição disponível"
+
+#. 3.2 4.0
+msgid "All Applications"
+msgstr "Todos as aplicações"
+
+#. 3.2 4.0
+msgid "Places"
+msgstr "Locais"
+
+#. 3.2 4.0
+msgid "Recent Files"
+msgstr "Ficheiros recentes"
+
+#. 3.2 4.0
+msgid "Bookmarks"
+msgstr "Marcadores"
+
+#. 3.2 4.0
+msgid "Favorite Apps"
+msgstr "Aplicações favoritas"
+
+#. 3.2 4.0
+msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
+msgstr ""
+"Pacote gir1.2-gda-5.0 necessário para os marcadores do Firefox e Midori."
+
+#. 3.2 4.0
+msgid "Clear List"
+msgstr "Limpar lista"
+
+#. 3.2 4.0
+#, fuzzy
+msgid "No recent files"
+msgstr "Alterna ficheiros recentes"
+
+#. 3.2
+msgid "Account details"
+msgstr "Detalhes da conta"
+
+#. 3.2 3.2
+msgid "Grid View"
+msgstr "Vista de ícones"
+
+#. 3.2 3.2
+msgid "List View"
+msgstr "Vista de lista"
+
+#. 3.2 3.2
+msgid "Switch to grid view"
+msgstr "Mudar para vista de ícones"
+
+#. 3.2 3.2
+msgid "Switch to list view"
+msgstr "Mudar para vista de lista"
+
+#. 3.2 4.0
+msgid "Lock Screen"
+msgstr "Bloquear ecrã"
+
+#. 3.2 4.0
+msgid "Lock the screen"
+msgstr "Bloquear o ecrã"
+
+#. 3.2 4.0
+msgid "Logout"
+msgstr "Terminar sessão"
+
+#. 3.2 4.0
+msgid "Leave the session"
+msgstr "Abandonar a sessão"
+
+#. 3.2 4.0
+msgid "Quit"
+msgstr "Sair"
+
+#. 3.2 4.0
+msgid "Shutdown the computer"
+msgstr "Desligar o computador"
+
+#. 3.2 4.0
+msgid "Home"
+msgstr "Início"
+
+#. 3.2 4.0
+msgid "Computer"
+msgstr "Computador"
+
+#. 3.2 4.0
+msgid "Browse network"
+msgstr "Navegar na rede"
+
+#. 3.2 3.2 4.0
+#. 4.0
+msgid "Run with NVIDIA GPU"
+msgstr "Executar com GPU NVIDIA"
+
+#. 3.2 4.0
+msgid "Add to panel"
+msgstr "Adicionar ao painel"
+
+#. 3.2 4.0
+msgid "Add to desktop"
+msgstr "Adicionar ao ambiente de trabalho"
+
+#. 3.2 4.0
+msgid "Remove favorite"
+msgstr "Remover dos favoritos"
+
+#. 3.2 4.0
+msgid "Add to favorites"
+msgstr "Adicionar aos favoritos"
+
+#. 3.2 4.0
+msgid "Uninstall"
+msgstr "Desinstalar"
+
+#. 4.0 4.0
+msgid "Please wait..."
+msgstr ""
+
+#. metadata.json
+#. 3.2
+msgid "Cinnamenu"
+msgstr "Cinnamenu"
+
+#. metadata.json
+msgid ""
+"A flexible menu providing formatting options, web bookmarks, search provider "
+"support and fuzzy searching."
+msgstr ""
+"Um menu flexível que oferece opções de formatação, favoritos da web, suporte "
+"ao provedor de pesquisa e pesquisa difusa."
+
+#. metadata.json
+msgid ""
+"Made possible thanks to the efforts of contributors to the Cinnamon menu, "
+"Gnomenu, and the contributors to projects they derived from."
+msgstr ""
+
+#. 3.2 4.0
+msgid "Behavior"
+msgstr "Comportamento"
+
+#. 3.2 4.0
+msgid "Appearance"
+msgstr "Aparência"
+
+#. 3.2 4.0
+msgid "Layout and Content"
+msgstr "Disposição e conteúdo"
+
+#. 3.2
+msgid "Search Providers"
+msgstr "Fornecedores de pesquisa"
+
+#. 3.2
+msgid "No search provider extensions found"
+msgstr "Não foram encontradas extensões de fornecedores de pesquisa"
+
+#. 3.2 4.0
+msgid "Panel"
+msgstr "Painel"
+
+#. 3.2 4.0
+msgid "Menu"
+msgstr "Menu"
+
+#. 3.2 4.0
+msgid "Layout"
+msgstr "Disposição"
+
+#. 3.2 4.0
+msgid "Content"
+msgstr "Conteúdo"
+
+#. 3.2 4.0
+msgid "Recent files settings"
+msgstr "Ficheiros recentes"
+
+#. 3.2 4.0
+msgid "Open the menu editor"
+msgstr "Abrir o editor de menu"
+
+#. 3.2 4.0
+msgid "Reset category order"
+msgstr ""
+
+#. 3.2 4.0
+msgid "Use a custom icon"
+msgstr "Usar o ícone personalizado"
+
+#. 3.2 4.0
+msgid "Use a custom icon in the panel"
+msgstr "Usar o ícone personalizado"
+
+#. 3.2 4.0
+msgid "Panel icon"
+msgstr "Ícone do painel"
+
+#. 3.2 4.0
+msgid "Panel text"
+msgstr "Texto do painel"
+
+#. 3.2 4.0
+msgid "Text to show beside the panel icon"
+msgstr "Texto a ser exibido ao lado do ícone do painel"
+
+#. 3.2 4.0
+msgid "pixels"
+msgstr "pixeis"
+
+#. 3.2 4.0
+msgid "Category icon size"
+msgstr "Tamanho do ícone de categorias"
+
+#. 3.2 4.0
+msgid "Applications list icon size"
+msgstr "Tamanho do ícone na vista de lista"
+
+#. 3.2 4.0
+msgid "Applications grid icon size"
+msgstr "Tamanho do ícone na vista de ícones"
+
+#. 3.2 4.0
+msgid "Keyboard shortcut to open and close the menu"
+msgstr "Atalho de teclado para abrir e fechar o menu"
+
+#. 3.2 4.0
+msgid "Open menu on hover"
+msgstr "Abrir menu ao passar o mouse"
+
+#. 3.2 4.0
+msgid "Open the menu when I move my mouse over the panel icon"
+msgstr "Abrir o menu quando o rato se move sobre ele"
+
+#. 3.2 4.0
+msgid "milliseconds"
+msgstr "milisegundos"
+
+#. 3.2 4.0
+msgid "Menu hover delay"
+msgstr "Atraso do menu"
+
+#. 3.2 4.0
+msgid "Use menu animations"
+msgstr "Usar animações do menu"
+
+#. 3.2 4.0
+msgid "Animate the menu on open and close"
+msgstr "Permite animações do menu ao abrir e fechar"
+
+#. 3.2 4.0
+msgid "Activate categories on click"
+msgstr "Ativar categorias ao clicar"
+
+#. 3.2 4.0
+msgid "Activate categories on click instead of on hover"
+msgstr "Ativar categorias ao clicar"
+
+#. 3.2 4.0
+msgid "Enable autoscrolling"
+msgstr "Ativar deslocamento automático na lista de aplicações"
+
+#. 3.2 4.0
+msgid "Enable autoscrolling in application list"
+msgstr "Ativar deslocamento automático na lista de aplicações"
+
+#. 3.2 4.0
+msgid "Show web bookmarks"
+msgstr "Mostrar os marcadores web"
+
+#. 3.2 4.0
+msgid "Show your browser's web bookmarks in the menu"
+msgstr ""
+
+#. 3.2
+msgid "Enable searching of open windows"
+msgstr "Permitir pesquisa de janelas abertas"
+
+#. 3.2 4.0
+msgid "Enable search providers"
+msgstr "Ativar fornecedores de pesquisa"
+
+#. 3.2 4.0
+msgid "Include search provider results in searches"
+msgstr ""
+"Escolher se os resultados dos fornecedores de pesquisa são ou não indexados "
+"à pesquisa"
+
+#. 3.2 4.0
+msgid "Example Search Providers"
+msgstr "Exemplo de fornecedores de pesquisa"
+
+#. 3.2
+#. 3.2
+msgid "Startup applications view mode"
+msgstr "Modo de vista das aplicações de arranque"
+
+#. 3.2 4.0
+msgid "List"
+msgstr "Lista"
+
+#. 3.2 4.0
+msgid "Grid"
+msgstr "Ícones"
+
+#. 3.2 4.0
+msgid "columns"
+msgstr "colunas"
+
+#. 3.2 4.0
+msgid "Number of columns in apps grid"
+msgstr "Número de colunas na vista de ícones"
+
+#. 3.2 4.0
+msgid "Show bookmarks and places"
+msgstr "Mostrar marcadores e locais"
+
+#. 3.2 4.0
+msgid "Show bookmarks and places category in the menu"
+msgstr "Mostrar marcadores e locais"
+
+#. 3.2 4.0
+msgid "Show application icons"
+msgstr "Mostrar ícones de aplicações"
+
+#. 3.2 4.0
+msgid "Show category icons"
+msgstr "Mostrar ícones de categorias"
+
+#. 3.2
+msgid "Show application descriptions under titles"
+msgstr "Mostrar descrição das aplicações sob os títulos"
+
+#. 3.2
+msgid "Show tooltips"
+msgstr "Mostrar tooltips"
+
+#. 3.2
+msgid "Tooltip delay"
+msgstr "Atraso da tooltip"
+
+#. 3.2 4.0
+msgid "Use a custom menu height"
+msgstr "Escolher uma altura de menu personalizada"
+
+#. 3.2 4.0
+msgid "px"
+msgstr "px"
+
+#. 3.2 4.0
+msgid "Custom menu height"
+msgstr "Altura de menu personalizada"
+
+#. 4.0
+msgid "Applications view mode"
+msgstr "Modo de visualização de aplicativos"
+
+#. 4.0
+msgid "View applications as list or grid"
+msgstr "Exibir aplicativos como lista ou grade"
+
+#. 4.0
+msgid "Application description placement"
+msgstr "Posicionamento da descrição do aplicativo"
+
+#. 4.0
+msgid "Tooltips"
+msgstr "Dicas de ferramentas"
+
+#. 4.0
+msgid "Under titles"
+msgstr ""
+
+#. 4.0
+msgid "None"
+msgstr ""
+
+#. 4.0
+msgid "Choose where to show application descriptions"
+msgstr "Escolha onde mostrar descrições de aplicativos"
+
+#. 4.0
+msgid "Session buttons location"
+msgstr "Localização dos botões de sessão"
+
+#. 4.0
+msgid "Top"
+msgstr ""
+
+#. 4.0
+msgid "Bottom"
+msgstr ""
+
+#. 4.0
+msgid "Left"
+msgstr ""
+
+#. 4.0
+msgid "Right"
+msgstr ""
+
+#. 4.0
+msgid "Choose where to show the session (quit, logout, etc.) buttons"
+msgstr ""
+
+#. 4.0
+msgid "Add favorites to session buttons"
+msgstr "Adicione favoritos aos botões da sessão"
+
+#. 4.0
+msgid "Show your favorite app icons next to the session buttons"
+msgstr ""
+"Mostre seus ícones de aplicativos favoritos ao lado dos botões da sessão"
+
+#~ msgid "No recent documents"
+#~ msgstr "Sem documentos recentes"
+
+#, javascript-format
+#~ msgid "Failed to launch \"%s\""
+#~ msgstr "Falha ao arrancar \"%s\""
+
+#~ msgid "Remove from favorites"
+#~ msgstr "Remover dos favoritos"
+
+#~ msgid "Press this button to customize your privacy settings."
+#~ msgstr ""
+#~ "Pressione este botão para personalizar as definições de privacidade."
+
+#~ msgid "Press this button to customize your menu entries."
+#~ msgstr "Pressione este botão para personalizar as entradas do menu."
+
+#~ msgid "Unchecking this allows the theme to set the icon"
+#~ msgstr "Ao desmarcar permite que o ícone seja definido pelo tema"
+
+#~ msgid "Icon"
+#~ msgstr "Ícone"
+
+#~ msgid "Set the custom menu button icon name"
+#~ msgstr "Definir o nome do ícone do botão de menu personalizado"
+
+#~ msgid "Enable opening the menu when the mouse enters the applet"
+#~ msgstr "Permite abrir o menu quando o rato passa sobre o applet"
+
+#~ msgid "Delay between switching categories"
+#~ msgstr "Atraso na mudança ao mover o rato sobre categorias"
+
+#~ msgid ""
+#~ "When enabled, category views are activated on click instead of on hover."
+#~ msgstr ""
+#~ "QUando ativo, vista de categorias é ativada ao clicar em vês de ao mover "
+#~ "sobre ele."
+
+#~ msgid ""
+#~ "Choose whether or not to enable smooth autoscrolling in the application "
+#~ "list."
+#~ msgstr ""
+#~ "Escolher ativar ou não o deslocamento automático na lista de aplicações."
+
+#~ msgid "Choose whether or not bookmarks are indexed in the menu."
+#~ msgstr "Escolher se os marcadores são ou não indexados no menu."
+
+#~ msgid "Choose whether or not open windows are indexed in menu searches."
+#~ msgstr "Escolher se janelas abertas são indexadas ou não nas pesquisas"
+
+#~ msgid "Choose whether or not to show bookmarks and places in the menu."
+#~ msgstr "Mostrar ou não marcadores e locais no menu."
+
+#~ msgid "Choose whether or not to show icons on applications."
+#~ msgstr "Escolher mostrar ícones das aplicações ou não."
+
+#~ msgid "Choose whether or not to show icons on categories."
+#~ msgstr "Escolher mostrar ou não ícones em categorias."
+
+#~ msgid ""
+#~ "Choose whether or not to show the application description on the "
+#~ "application buttons."
+#~ msgstr ""
+#~ "Escolher mostrar ou não a descrição das aplicações nos botões das "
+#~ "aplicações."
+
+#~ msgid ""
+#~ "When enabled, tooltips containing the item's name or description is shown "
+#~ "when hovered over."
+#~ msgstr ""
+#~ "Quando ativo, tooltips com o nome ou descrição do ítem são mostradas "
+#~ "quando o rato se move sobre ele."
+
+#~ msgid ""
+#~ "The delay time in milliseconds for tooltips when hovering over a menu "
+#~ "item."
+#~ msgstr ""
+#~ "O atraso em milisegundos para tooltips quando o rato se move sobre um "
+#~ "ítem."
+
+#~ msgid "Please provide your password to uninstall this application"
+#~ msgstr "Forneça a sua senha para desinstalar esta aplicação"
+
+#~ msgid "Enable filesystem path entry in search box"
+#~ msgstr "Ativar entrada de caminho na caixa de pesquisa"
+
+#~ msgid "Allows path entry in the menu search box."
+#~ msgstr "Permite a entrada de caminho de ficheiro na caixa de pesquisa"

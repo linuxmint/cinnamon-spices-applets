@@ -3,8 +3,7 @@ const Gio = imports.gi.Gio;
 const Lang = imports.lang;
 const Main = imports.ui.main;
 
-const {_} = require('./constants');
-const {readFileAsync, tryFn} = require('./utils');
+const {_, readFileAsync, tryFn} = require('./utils');
 
 class PlaceInfo {
     constructor(kind, file, name, icon) {
@@ -33,7 +32,7 @@ class PlaceInfo {
                 this.file.mount_enclosing_volume(0, null, null, function(file, result) {
                     file.mount_enclosing_volume_finish(result);
                     Gio.AppInfo.launch_default_for_uri(file.get_uri(), launchContext); });
-                Main.notifyError(_('Failed to launch "%s"').format(this.name), e.message);
+                Main.notifyError('Failed to launch ' + this.name, e.message);
             }
         );
     }
