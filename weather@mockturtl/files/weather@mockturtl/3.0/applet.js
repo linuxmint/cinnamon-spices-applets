@@ -1202,7 +1202,7 @@ var UI = (function () {
             child: new Icon({
                 icon_type: IconType.SYMBOLIC,
                 icon_size: 12,
-                icon_name: "custom-down-arrow-symbolic"
+                icon_name: "custom-right-arrow-symbolic"
             }),
         });
         this._nextLocationButton.actor.connect(SIGNAL_CLICKED, Lang.bind(this.app, this.app.NextLocationClicked));
@@ -1212,7 +1212,7 @@ var UI = (function () {
             child: new Icon({
                 icon_type: IconType.SYMBOLIC,
                 icon_size: 12,
-                icon_name: "custom-down-arrow-symbolic"
+                icon_name: "custom-left-arrow-symbolic"
             }),
         });
         this._previousLocationButton.actor.connect(SIGNAL_CLICKED, Lang.bind(this.app, this.app.PreviousLocationClicked));
@@ -1813,22 +1813,22 @@ var LocationStore = (function () {
         this.Start();
     }
     LocationStore.prototype.NextLocation = function (currentLoc) {
-        global.log(currentLoc);
+        this.app.log.Debug("Current location: " + JSON.stringify(currentLoc, null, 2));
         if (this.locations.length == 0)
             return currentLoc;
         var nextIndex = null;
         if (this.InStorage(currentLoc)) {
             nextIndex = this.FindIndex(currentLoc) + 1;
-            global.log("Current location found in storage at index " + (nextIndex - 1).toString() + ", moving to the next index");
+            this.app.log.Debug("Current location found in storage at index " + (nextIndex - 1).toString() + ", moving to the next index");
         }
         else {
             nextIndex = this.currentIndex++;
         }
         if (nextIndex > this.locations.length - 1) {
             nextIndex = 0;
-            global.log("Reached end of storage, move to the beginning");
+            this.app.log.Debug("Reached end of storage, move to the beginning");
         }
-        global.log("index is: " + nextIndex.toString());
+        this.app.log.Debug("Switching to index " + nextIndex.toString() + "...");
         this.currentIndex = nextIndex;
         return {
             address_string: this.locations[nextIndex].address_string,
@@ -1850,16 +1850,16 @@ var LocationStore = (function () {
         var previousIndex = null;
         if (this.InStorage(currentLoc)) {
             previousIndex = this.FindIndex(currentLoc) - 1;
-            global.log("Current location found in storage at index " + (previousIndex + 1).toString() + ", moving to the next index");
+            this.app.log.Debug("Current location found in storage at index " + (previousIndex + 1).toString() + ", moving to the next index");
         }
         else {
             previousIndex = this.currentIndex--;
         }
         if (previousIndex < 0) {
             previousIndex = this.locations.length - 1;
-            global.log("Reached start of storage, move to the end");
+            this.app.log.Debug("Reached start of storage, move to the end");
         }
-        global.log("index is: " + previousIndex.toString());
+        this.app.log.Debug("Switching to index " + previousIndex.toString() + "...");
         this.currentIndex = previousIndex;
         return {
             address_string: this.locations[previousIndex].address_string,
@@ -2047,7 +2047,7 @@ var LocationStore = (function () {
                         return [2, true];
                     case 2:
                         e_5 = _a.sent();
-                        global.log("Cannot get file info");
+                        this.app.log.Error("Cannot get file info for '" + file.get_path() + "', error: ");
                         global.log(e_5);
                         return [2, false];
                     case 3: return [2];
@@ -2075,6 +2075,7 @@ var LocationStore = (function () {
     LocationStore.prototype.DeleteFile = function (file) {
         return __awaiter(this, void 0, void 0, function () {
             var result;
+            var _this = this;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4, new Promise(function (resolve, reject) {
@@ -2084,7 +2085,8 @@ var LocationStore = (function () {
                                     result = file.delete_finish(res);
                                 }
                                 catch (e) {
-                                    global.log("Can't delete file, " + JSON.stringify(e, null, 2));
+                                    _this.app.log.Error("Can't delete file, reason: ");
+                                    global.log(e);
                                     resolve(false);
                                     return false;
                                 }
@@ -2119,7 +2121,6 @@ var LocationStore = (function () {
             var text, result;
             return __generator(this, function (_a) {
                 text = buffer;
-                global.log(text);
                 result = outputStream.write(text, null);
                 return [2, true];
             });

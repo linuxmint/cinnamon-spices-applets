@@ -1067,7 +1067,7 @@ class UI {
             child: new Icon({
                 icon_type: IconType.SYMBOLIC,
                 icon_size: 12,
-                icon_name: "custom-down-arrow-symbolic"
+                icon_name: "custom-right-arrow-symbolic"
             }),
         });
         this._nextLocationButton.actor.connect(SIGNAL_CLICKED, Lang.bind(this.app, this.app.NextLocationClicked));
@@ -1077,7 +1077,7 @@ class UI {
             child: new Icon({
                 icon_type: IconType.SYMBOLIC,
                 icon_size: 12,
-                icon_name: "custom-down-arrow-symbolic"
+                icon_name: "custom-left-arrow-symbolic"
             }),
         });
         this._previousLocationButton.actor.connect(SIGNAL_CLICKED, Lang.bind(this.app, this.app.PreviousLocationClicked));
@@ -1631,22 +1631,22 @@ class LocationStore {
         this.Start();
     }
     NextLocation(currentLoc) {
-        global.log(currentLoc);
+        this.app.log.Debug("Current location: " + JSON.stringify(currentLoc, null, 2));
         if (this.locations.length == 0)
             return currentLoc;
         let nextIndex = null;
         if (this.InStorage(currentLoc)) {
             nextIndex = this.FindIndex(currentLoc) + 1;
-            global.log("Current location found in storage at index " + (nextIndex - 1).toString() + ", moving to the next index");
+            this.app.log.Debug("Current location found in storage at index " + (nextIndex - 1).toString() + ", moving to the next index");
         }
         else {
             nextIndex = this.currentIndex++;
         }
         if (nextIndex > this.locations.length - 1) {
             nextIndex = 0;
-            global.log("Reached end of storage, move to the beginning");
+            this.app.log.Debug("Reached end of storage, move to the beginning");
         }
-        global.log("index is: " + nextIndex.toString());
+        this.app.log.Debug("Switching to index " + nextIndex.toString() + "...");
         this.currentIndex = nextIndex;
         return {
             address_string: this.locations[nextIndex].address_string,
@@ -1668,16 +1668,16 @@ class LocationStore {
         let previousIndex = null;
         if (this.InStorage(currentLoc)) {
             previousIndex = this.FindIndex(currentLoc) - 1;
-            global.log("Current location found in storage at index " + (previousIndex + 1).toString() + ", moving to the next index");
+            this.app.log.Debug("Current location found in storage at index " + (previousIndex + 1).toString() + ", moving to the next index");
         }
         else {
             previousIndex = this.currentIndex--;
         }
         if (previousIndex < 0) {
             previousIndex = this.locations.length - 1;
-            global.log("Reached start of storage, move to the end");
+            this.app.log.Debug("Reached start of storage, move to the end");
         }
-        global.log("index is: " + previousIndex.toString());
+        this.app.log.Debug("Switching to index " + previousIndex.toString() + "...");
         this.currentIndex = previousIndex;
         return {
             address_string: this.locations[previousIndex].address_string,
@@ -1803,7 +1803,7 @@ class LocationStore {
             return true;
         }
         catch (e) {
-            global.log("Cannot get file info");
+            this.app.log.Error("Cannot get file info for '" + file.get_path() + "', error: ");
             global.log(e);
             return false;
         }
@@ -1829,7 +1829,8 @@ class LocationStore {
                     result = file.delete_finish(res);
                 }
                 catch (e) {
-                    global.log("Can't delete file, " + JSON.stringify(e, null, 2));
+                    this.app.log.Error("Can't delete file, reason: ");
+                    global.log(e);
                     resolve(false);
                     return false;
                 }
@@ -1852,7 +1853,6 @@ class LocationStore {
     }
     async WriteAsync(outputStream, buffer) {
         let text = buffer;
-        global.log(text);
         let result = outputStream.write(text, null);
         return true;
     }
