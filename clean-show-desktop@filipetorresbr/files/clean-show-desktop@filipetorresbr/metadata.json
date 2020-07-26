@@ -1,7 +1,6 @@
 {
- "uuid": "clean-show-desktop@filipetorresbr",
- "name": "Clean Show Desktop",
- "description": "Applet to show desktop, similarly to Windows 10",
- "icon": "user-desktop",
- "max-instances": -1
+    "uuid": "clean-show-desktop@filipetorresbr",
+    "name": "Clean Show Desktop",
+    "description": "An Applet to show the Desktop in the style of Windows 10 completely customizable",
+    "max-instances": 10,
 }
