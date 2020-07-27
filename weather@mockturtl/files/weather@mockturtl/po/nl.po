@@ -9,15 +9,15 @@ msgstr ""
 "Project-Id-Version: Weather (weather@mockturtl) Version 2.4.5 (2020-03-05 "
 "08:38:14)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-24 15:43+0200\n"
-"PO-Revision-Date: 2020-07-25 13:15+0200\n"
-"Last-Translator: Jurien (French77) <Jurien@protonmail.com>\n"
+"POT-Creation-Date: 2020-07-25 09:36+0200\n"
+"PO-Revision-Date: 2020-07-27 17:59+0200\n"
+"Last-Translator: Pjotr <pjotrvertaalt@gmail.com>\n"
 "Language-Team: Dutch\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
+"X-Generator: Poedit 2.0.6\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: applet.js:337 3.0/applet.js:214 3.8/applet.js:163
@@ -587,9 +587,10 @@ msgid "Heavy snow showers and thunder"
 msgstr "Zware sneeuwbuien en onweer"
 
 #: 3.0/met_norway.js:397 3.0/met_norway.js:398 3.0/met_norway.js:404
-#: 3.0/met_norway.js:411 3.0/met_uk.js:594 3.0/met_uk.js:601 3.0/met_uk.js:615
-#: 3.0/climacell.js:277 3.0/climacell.js:278 3.8/met_norway.js:349
-#: 3.8/met_norway.js:350 3.8/met_norway.js:356 3.8/met_norway.js:363
+#: 3.0/met_norway.js:411 3.0/met_norway.js:418 3.0/met_uk.js:594
+#: 3.0/met_uk.js:601 3.0/met_uk.js:615 3.0/climacell.js:277
+#: 3.0/climacell.js:278 3.8/met_norway.js:349 3.8/met_norway.js:350
+#: 3.8/met_norway.js:356 3.8/met_norway.js:363 3.8/met_norway.js:370
 #: 3.8/met_uk.js:486 3.8/met_uk.js:493 3.8/met_uk.js:507 3.8/climacell.js:215
 #: 3.8/climacell.js:216
 msgid "Light Rain"
@@ -602,10 +603,6 @@ msgstr "Lichte regen en onweer"
 #: 3.0/met_norway.js:412 3.8/met_norway.js:364
 msgid "Light rain showers"
 msgstr "Lichte regenbuien"
-
-#: 3.0/met_norway.js:418 3.8/met_norway.js:370
-msgid "Ligth Rain"
-msgstr "Lichte regen"
 
 #: 3.0/met_norway.js:419 3.8/met_norway.js:371
 msgid "Light rain showers and thunder"
@@ -975,7 +972,7 @@ msgid "Clear and windy"
 msgstr "Helder en winderig"
 
 #: 3.0/us_weather.js:454 3.8/us_weather.js:357
-msgid "Few clouds and windz"
+msgid "Few clouds and windy"
 msgstr "Winderig met enkele wolken"
 
 #: 3.0/us_weather.js:461 3.8/us_weather.js:364
@@ -983,7 +980,7 @@ msgid "Partly cloudy and windy"
 msgstr "Deels bewolkt en winderig"
 
 #: 3.0/us_weather.js:468 3.8/us_weather.js:371
-msgid "Mosty cloudy and windy"
+msgid "Mostly cloudy and windy"
 msgstr "Overwegend bewolkt en winderig"
 
 #: 3.0/us_weather.js:475 3.8/us_weather.js:378
@@ -1170,7 +1167,8 @@ msgstr ""
 
 #: 3.0/applet.js:1744 3.8/applet.js:1577
 msgid "Could not find location based on address, please check if it's right"
-msgstr "Kon geen locatie vinden op basis van adres, controleer a.u.b. of het juist is"
+msgstr ""
+"Kon geen locatie vinden op basis van adres, controleer a.u.b. of het juist is"
 
 #: 3.0/applet.js:1766 3.8/applet.js:1599
 msgid "Failed to call Geolocation API, see Looking Glass for errors."
@@ -1318,7 +1316,7 @@ msgstr "Locatie"
 #. settings-schema.json->location->tooltip
 msgid ""
 "Acceptable inputs: City,CountryCode or Zipcode,CountryCode or Latitude,"
-"Longtitude"
+"Longitude"
 msgstr ""
 "Toegestane invoer: Stad,Landcode (bv. Oss,NL) of Postcode,Landcode of "
 "Breedtegraad,Lengtegraad"
@@ -1589,7 +1587,7 @@ msgid "Location - Coordinates"
 msgstr "Locatie - Coördinaten"
 
 #. 3.0->settings-schema.json->location->tooltip
-msgid "Acceptable inputs is Latitude,Longtitude"
+msgid "Acceptable inputs is Latitude,Longitude"
 msgstr "Toegestane invoer is Breedtegraad,Lengtegraad"
 
 #. 3.0->settings-schema.json->getLocation->description
@@ -1656,6 +1654,13 @@ msgstr ""
 "eenheid.\n"
 "Kan o.a. gebruikt worden als het etiket niet op de verticale werkbalk past."
 
+#. 3.0->settings-schema.json->useCustomAppletIcons->tooltip
+#. 3.0->settings-schema.json->useCustomMenuIcons->tooltip
+#. 3.8->settings-schema.json->useCustomAppletIcons->tooltip
+#. 3.8->settings-schema.json->useCustomMenuIcons->tooltip
+msgid "Iconset is weather-icons by Erik Flowers"
+msgstr "Pictogrammenverzameling: weather-icons door Erik Flowers"
+
 #. 3.0->settings-schema.json->useCustomAppletIcons->description
 #. 3.8->settings-schema.json->useCustomAppletIcons->description
 msgid "Use custom icons on the panel"
@@ -1670,6 +1675,11 @@ msgstr "Presentatie"
 #. 3.8->settings-schema.json->verticalOrientation->description
 msgid "Show forecast vertically"
 msgstr "Laat de voorspelling verticaal zien"
+
+#. 3.0->settings-schema.json->verticalOrientation->tooltip
+msgid "Displaying forecasts from top to bottom instead from left to right"
+msgstr ""
+"Voorspellingen tonen van boven naar beneden en niet van links naar rechts\t"
 
 #. 3.0->settings-schema.json->forecastColumns->units
 #. 3.8->settings-schema.json->forecastColumns->units
@@ -1759,13 +1769,18 @@ msgstr "US National Weather (alleen voor de VS)"
 
 #. 3.8->settings-schema.json->location->tooltip
 msgid ""
-"Acceptable inputs are Latitude,Longtitude. e.g.: 68.1932,17.1426 or an "
+"Acceptable inputs are Latitude,Longitude. e.g.: 68.1932,17.1426 or an "
 "address.\n"
 "Waits for 3 seconds after you stop typing then refreshes the weather."
 msgstr ""
-"Aanvaardbare invoer is Breedtegraad,Lengtegraad. Bijv: 68.1932,17.1426 "
-"of een adres.\n"
-"Wacht 3 seconden nadat u bent gestopt met typen en ververst dan het weer."
+"Aanvaardbare invoer is Breedtegraad,Lengtegraad. Bijv.: 68.1932,17.1426 of "
+"een adres.\n"
+"Drie seconden nadat u bent opgehouden met typen wordt het weer ververst."
+
+#. 3.8->settings-schema.json->verticalOrientation->tooltip
+msgid "Displaying forecasts from top to bottom instead from left to right."
+msgstr ""
+"Voorspellingen tonen van boven naar beneden en niet van links naar rechts."
 
 #. 3.8->settings-schema.json->useSymbolicIcons->tooltip
 msgid "Does not apply to custom iconset, it is symbolic by default"
@@ -1826,9 +1841,9 @@ msgid ""
 msgstr ""
 "MET Norway:\n"
 "Het huidige weer wordt getoond voor het komende uur, en de dagelijkse "
-"voorspellingen worden gegenereerd uit zesuurlijkse voorspellingen, dus "
-"het kan er soms niet goed uitzien. Ondersteunt 10 voorspellingsdagen en "
-"48 voorspellingsuren."
+"voorspellingen worden gegenereerd uit zesuurlijkse voorspellingen, dus het "
+"kan er soms niet goed uitzien. Ondersteunt 10 voorspellingsdagen en 48 "
+"voorspellingsuren."
 
 #. 3.8->settings-schema.json->WB->description
 msgid ""
@@ -1838,9 +1853,9 @@ msgid ""
 "hours."
 msgstr ""
 "WeatherBit:\n"
-"Vaker verversen dan elke 10 minuten wordt niet aanbevolen, omdat u "
-"dan de dagelijkse quota zou kunnen overschrijden. Ondersteunt 16 "
-"voorspellingsdagen en 48 voorspellingsuren."
+"Vaker verversen dan elke 10 minuten wordt niet aanbevolen, omdat u dan de "
+"dagelijkse quota zou kunnen overschrijden. Ondersteunt 16 voorspellingsdagen "
+"en 48 voorspellingsuren."
 
 #. 3.8->settings-schema.json->Yahoo->description
 msgid ""
@@ -1850,9 +1865,9 @@ msgid ""
 "forecast days and no hours."
 msgstr ""
 "Yahoo:\n"
-"Vereist de installatie van het pakket 'python3-requests-oauthlib' (voor "
-"Arch-gebaseerde distros 'python-requests-oauthlib'), Actualiseert elke "
-"2 uur. Ondersteunt slechts 10 voorspellingsdagen en geen uren."
+"Vereist de installatie van het pakket 'python3-requests-oauthlib' (voor Arch-"
+"gebaseerde distros 'python-requests-oauthlib'), Actualiseert elke 2 uur. "
+"Ondersteunt slechts 10 voorspellingsdagen en geen uren."
 
 #. 3.8->settings-schema.json->Climacell->description
 msgid ""
@@ -1861,8 +1876,8 @@ msgid ""
 "16 forecast days and 96 forecast hours."
 msgstr ""
 "Climacell:\n"
-"Hooguit eens per 10 minuten verversen wordt aanbevolen met een gratis "
-"plan. Ondersteunt 16 voorspellingsdagen en 96 voorspellingsuren."
+"Hooguit eens per 10 minuten verversen wordt aanbevolen met een gratis plan. "
+"Ondersteunt 16 voorspellingsdagen en 96 voorspellingsuren."
 
 #. 3.8->settings-schema.json->metuk->description
 msgid ""
@@ -1873,10 +1888,11 @@ msgid ""
 "load the first time, please be patient."
 msgstr ""
 "Met Office UK:\n"
-"Alleen voor het VK. Als het geen meetplek vindt binnen een bereik van 50km om "
-"u heen, zal het geen weer laten zien. Laat het me a.u.b. weten als dit gebeurt "
-"wanneer u in het VK woont. Ondersteunt 5 dagen en 36 uur voorspellingen. Soms "
-"duurt het eerste laden 5-8 seconden, dus wacht a.u.b. geduldig af."
+"Alleen voor het VK. Als het geen meetplek vindt binnen een bereik van 50km "
+"om u heen, zal het geen weer laten zien. Laat het me a.u.b. weten als dit "
+"gebeurt wanneer u in het VK woont. Ondersteunt 5 dagen en 36 uur "
+"voorspellingen. Soms duurt het eerste laden 5-8 seconden, dus wacht a.u.b. "
+"geduldig af."
 
 #. 3.8->settings-schema.json->usweather->description
 msgid ""
@@ -1886,9 +1902,9 @@ msgid ""
 "the closest one. Supports 7 days and 156 hours of forecasts."
 msgstr ""
 "US National Weather Service:\n"
-"Alleen voor de VS. Het eerste laden kan 15-20 seconden duren, wacht dus "
-"a.u.b. geduldig af. Het huidige weer wordt samengevoegd van een max. 50 km "
-"groot gebied, als er wat gegevens ontbreken van het dichtstbijzijnde gebied. "
+"Alleen voor de VS. Het eerste laden kan 15-20 seconden duren, wacht dus a.u."
+"b. geduldig af. Het huidige weer wordt samengevoegd van een max. 50 km groot "
+"gebied, als er wat gegevens ontbreken van het dichtstbijzijnde gebied. "
 "Ondersteunt 7 dagen en 156 uur aan voorspellingen."
 
 #. 3.8->settings-schema.json->loc-info->description
@@ -1902,13 +1918,16 @@ msgid ""
 "full address, for you to validate if it's correct."
 msgstr ""
 "U kunt coördinaten gebruiken als {breedtegraad},{lengtegraad},\n"
-" of een adres, van het kleinste detail tot het grootste, zoals "
-"'{huisnummer} {straat} {stad/plaats} {postcode} {land}'. Ze zijn allemaal "
-"facultatief, hoewel tenminste stad en land worden aanbevolen. U kunt "
-"komma's gebruiken als u dat wilt.\n"
+" of een adres, van het kleinste detail tot het grootste, zoals '{huisnummer} "
+"{straat} {stad/plaats} {postcode} {land}'. Ze zijn allemaal facultatief, "
+"hoewel tenminste stad en land worden aanbevolen. U kunt komma's gebruiken "
+"als u dat wilt.\n"
 "\n"
 "Nadat u bent gestopt met typen wordt het veld na 3 seconden vervangen door "
 "het volledige adres, zodat u kunt controleren of het correct is."
+
+#~ msgid "Ligth Rain"
+#~ msgstr "Lichte regen"
 
 #~ msgid "Please enter a Location in settings"
 #~ msgstr "Voer a.u.b. een locatie in bij de instellingen"
@@ -1925,9 +1944,6 @@ msgstr ""
 
 #~ msgid "Settings for weather@mockturtl 3.8+"
 #~ msgstr "Instellingen voor weather@mockturtl 3.8+"
-
-#~ msgid "Iconset is weather-icons by Erik Flowers"
-#~ msgstr "Pictogrammenverzameling: weather-icons door Erik Flowers"
 
 #~ msgid ""
 #~ "powered by: OpenWeatherMap, DarkSky, MET Norway, Weatherbit, Yahoo and ip-"
@@ -2053,9 +2069,3 @@ msgstr ""
 #~ "zou uw dagelijkse quotum kunnen overschrijden. Heeft u een sleutel nodig, "
 #~ "klik dan op 'API-sleutel en locatie instellen' voor de te nemen stappen "
 #~ "om deze te verkrijgen."
-
-
-
-
-
-
