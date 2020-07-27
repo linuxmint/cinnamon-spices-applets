@@ -944,11 +944,11 @@ msgstr "Onverwachte respons van de API"
 
 #: 3.0/us_weather.js:235 3.8/us_weather.js:139
 msgid "Location is outside US, please use a different provider."
-msgstr "Locatie is buiten de VS, maak gebruik van een andere provider."
+msgstr "Locatie is buiten de VS, maak a.u.b. gebruik van een andere aanbieder."
 
 #: 3.0/us_weather.js:398 3.8/us_weather.js:302
 msgid "Failed to Process Hourly Forecast Info"
-msgstr "Kon voorspellingsinformatie per uur niet verwerken"
+msgstr "Kon uurlijkse voorspellingsinformatie niet verwerken"
 
 #: 3.0/us_weather.js:418 3.0/us_weather.js:453 3.8/us_weather.js:321
 #: 3.8/us_weather.js:356
@@ -968,7 +968,7 @@ msgstr "Overwegend bewolkt"
 #: 3.8/us_weather.js:343 3.8/us_weather.js:377 3.8/met_uk.js:479
 #: 3.8/met_uk.js:480
 msgid "Overcast"
-msgstr "Laaghangende bewolking"
+msgstr "Zwaar bewolkt"
 
 #: 3.0/us_weather.js:447 3.8/us_weather.js:350
 msgid "Clear and windy"
@@ -976,7 +976,7 @@ msgstr "Helder en winderig"
 
 #: 3.0/us_weather.js:454 3.8/us_weather.js:357
 msgid "Few clouds and windz"
-msgstr "Winderig met wat bewolking"
+msgstr "Winderig met enkele wolken"
 
 #: 3.0/us_weather.js:461 3.8/us_weather.js:364
 msgid "Partly cloudy and windy"
@@ -984,11 +984,11 @@ msgstr "Deels bewolkt en winderig"
 
 #: 3.0/us_weather.js:468 3.8/us_weather.js:371
 msgid "Mosty cloudy and windy"
-msgstr "Meest bewolkt en winderig"
+msgstr "Overwegend bewolkt en winderig"
 
 #: 3.0/us_weather.js:475 3.8/us_weather.js:378
 msgid "Overcast and windy"
-msgstr "Laaghangende bewolking en winderig"
+msgstr "Zwaar bewolkt en winderig"
 
 #: 3.0/us_weather.js:489 3.8/us_weather.js:392
 msgid "Snowy rain"
@@ -1041,27 +1041,27 @@ msgstr "km"
 
 #: 3.0/met_uk.js:595 3.0/met_uk.js:602 3.8/met_uk.js:487 3.8/met_uk.js:494
 msgid "Light rain shower"
-msgstr "Regenbuien"
+msgstr "Lichte regenbui"
 
 #: 3.0/met_uk.js:623 3.0/met_uk.js:630 3.8/met_uk.js:515 3.8/met_uk.js:522
 msgid "Heavy rain shower"
-msgstr "Zware regenbuien"
+msgstr "Zware regenbui"
 
 #: 3.0/met_uk.js:644 3.0/met_uk.js:651 3.8/met_uk.js:536 3.8/met_uk.js:543
 msgid "Sleet shower"
-msgstr "Natte sneeuwbuien"
+msgstr "Natte-sneeuwbui"
 
 #: 3.0/met_uk.js:665 3.0/met_uk.js:672 3.8/met_uk.js:557 3.8/met_uk.js:564
 msgid "Hail shower"
-msgstr "Hagelbuien"
+msgstr "Hagelbui"
 
 #: 3.0/met_uk.js:686 3.0/met_uk.js:693 3.8/met_uk.js:578 3.8/met_uk.js:585
 msgid "Light snow shower"
-msgstr "Lichte sneeuwbuien"
+msgstr "Lichte sneeuwbui"
 
 #: 3.0/met_uk.js:707 3.0/met_uk.js:714 3.8/met_uk.js:599 3.8/met_uk.js:606
 msgid "Heavy snow shower"
-msgstr "Zware sneeuwbuien"
+msgstr "Zware sneeuwbui"
 
 #: 3.0/met_uk.js:727 3.0/met_uk.js:734 3.0/met_uk.js:741 3.0/met_uk.js:742
 #: 3.8/met_uk.js:619 3.8/met_uk.js:626 3.8/met_uk.js:633 3.8/met_uk.js:634
@@ -1070,7 +1070,7 @@ msgstr "Onweer"
 
 #: 3.0/met_uk.js:728 3.0/met_uk.js:735 3.8/met_uk.js:620 3.8/met_uk.js:627
 msgid "Thunder shower"
-msgstr "Zware regenbuien"
+msgstr "Regenbui met onweer"
 
 #: 3.0/applet.js:167 3.8/applet.js:117
 msgid "Error"
@@ -1114,11 +1114,11 @@ msgstr "Werkbalkhulpje voor weer"
 
 #: 3.0/applet.js:267 3.8/applet.js:211
 msgid "API returned status code between 400 and 500"
-msgstr "API geretourneerde statuscode tussen 400 en 500"
+msgstr "API retourneerde statuscode tussen 400 en 500"
 
 #: 3.0/applet.js:542 3.8/applet.js:435
 msgid "Could not get weather information"
-msgstr "Kon geen voorspelling krijgen voor uw gebied"
+msgstr "Kon geen weersinformatie verkrijgen voor uw gebied"
 
 #: 3.0/applet.js:565 3.8/applet.js:458
 msgid ""
@@ -1156,7 +1156,7 @@ msgstr "Mogelijk gemaakt door"
 
 #: 3.0/applet.js:1127 3.8/applet.js:1002
 msgid "from you"
-msgstr "van jou"
+msgstr "van u"
 
 #: 3.0/applet.js:1146 3.8/applet.js:1021
 msgid "mm"
@@ -1170,11 +1170,11 @@ msgstr ""
 
 #: 3.0/applet.js:1744 3.8/applet.js:1577
 msgid "Could not find location based on address, please check if it's right"
-msgstr "Kon geen locatie vinden op basis van adres, controleer of het juist is"
+msgstr "Kon geen locatie vinden op basis van adres, controleer a.u.b. of het juist is"
 
 #: 3.0/applet.js:1766 3.8/applet.js:1599
 msgid "Failed to call Geolocation API, see Looking Glass for errors."
-msgstr "Geolocatie API aanroepen is mislukt, zie Looking Glass voor fouten."
+msgstr "Geolocatie-API aanroepen is mislukt, zie Looking Glass voor fouten."
 
 #: 3.0/climacell.js:228 3.8/climacell.js:167
 msgid ""
@@ -1199,7 +1199,7 @@ msgstr "Lichte ijzel"
 
 #: 3.0/climacell.js:305 3.8/climacell.js:243
 msgid "Light freezing drizzle"
-msgstr "Licht bevriezende motregen"
+msgstr "Lichte motregenijzel"
 
 #: 3.0/climacell.js:312 3.0/climacell.js:313 3.8/climacell.js:250
 #: 3.8/climacell.js:251
@@ -1208,17 +1208,17 @@ msgstr "Lichte motregen"
 
 #: 3.0/climacell.js:319 3.8/climacell.js:257
 msgid "Substantial Ice Pellets"
-msgstr "Veel hagel"
+msgstr "Grote hagelstenen"
 
 #: 3.0/climacell.js:320 3.0/climacell.js:326 3.0/climacell.js:327
 #: 3.0/climacell.js:334 3.8/climacell.js:258 3.8/climacell.js:264
 #: 3.8/climacell.js:265 3.8/climacell.js:272
 msgid "Ice Pellets"
-msgstr "Hagel"
+msgstr "Hagelstenen"
 
 #: 3.0/climacell.js:333 3.8/climacell.js:271
 msgid "Light Ice Pellets"
-msgstr "Lichte hagel"
+msgstr "Lichte hagelstenen"
 
 #: 3.0/climacell.js:340 3.0/climacell.js:341 3.8/climacell.js:278
 #: 3.8/climacell.js:279
@@ -1560,7 +1560,7 @@ msgstr "Climacell (sleutel nodig)"
 
 #. 3.0->settings-schema.json->dataService->options
 msgid "Met Office UK"
-msgstr "Met Office United Kingdom"
+msgstr "Met Office UK"
 
 #. 3.0->settings-schema.json->apiKey->description
 #. 3.8->settings-schema.json->apiKey->description
@@ -1743,19 +1743,19 @@ msgstr "Contact"
 
 #. 3.8->settings-schema.json->provider-info->title
 msgid "Weather provider choices and details"
-msgstr "Weersverstrekkerinformatie"
+msgstr "Weersaanbiederkeuzes en bijzonderheden"
 
 #. 3.8->settings-schema.json->location-info->title
 msgid "Entering location manually"
-msgstr "Handmatige locatie"
+msgstr "Handmatige locatie ingeven"
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "Met Office UK (UK only)"
-msgstr "Met Office UK (alleen UK)"
+msgstr "Met Office UK (alleen voor het VK)"
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "US National Weather (US only)"
-msgstr "Amerikaans nationaal weer (alleen in de VS)"
+msgstr "US National Weather (alleen voor de VS)"
 
 #. 3.8->settings-schema.json->location->tooltip
 msgid ""
@@ -1763,7 +1763,7 @@ msgid ""
 "address.\n"
 "Waits for 3 seconds after you stop typing then refreshes the weather."
 msgstr ""
-"Aanvaardbare ingangen zijn breedtegraad, lengtegraad, bijv: 68.1932,17.1426 "
+"Aanvaardbare invoer is Breedtegraad,Lengtegraad. Bijv: 68.1932,17.1426 "
 "of een adres.\n"
 "Wacht 3 seconden nadat u bent gestopt met typen en ververst dan het weer."
 
@@ -1779,7 +1779,7 @@ msgstr "Gebruik symbolische pictogrammen in dit werkbalkhulpje"
 
 #. 3.8->settings-schema.json->submitIssue->description
 msgid "Submit an Issue"
-msgstr "Een probleem voorleggen"
+msgstr "Een foutmelding doen"
 
 #. 3.8->settings-schema.json->submitIssue->tooltip
 msgid ""
@@ -1787,9 +1787,9 @@ msgid ""
 "GitHub account.\n"
 " Please make sure that the issue is not already submitted."
 msgstr ""
-"Opent webpagina waar u een nieuw probleem voor dit applet kunt indienen, een "
-"GitHub-account is daarvoor wel nodig.\n"
-" Zorg ervoor dat het probleem niet al is ingediend."
+"Opent webpagina waar u een nieuwe foutmelding voor dit werkbalkhulpje kunt "
+"indienen (u moet hiervoor een GitHub-account hebben).\n"
+" Kijk a.u.b. eerst na of het probleem niet al eerder is ingediend."
 
 #. 3.8->settings-schema.json->maintainer->description
 msgid "Current maintainer: Gr3q"
@@ -1803,8 +1803,8 @@ msgid ""
 "7 forecast days and 48 forecast hours."
 msgstr ""
 "OpenWeatherMap:\n"
-"De standaard, werkt out of the box.\n"
-"Grote dank aan henze ondersteunen gratis open source projecten, zoals deze! "
+"De standaard, werkt direct.\n"
+"Veel dank aan hen die gratis open-bronprojecten zoals deze steunen! "
 "Ondersteunt 7 voorspellingsdagen en 48 voorspellingsuren."
 
 #. 3.8->settings-schema.json->darkS->description
@@ -1826,9 +1826,9 @@ msgid ""
 msgstr ""
 "MET Norway:\n"
 "Het huidige weer wordt getoond voor het komende uur, en de dagelijkse "
-"voorspellingen worden gegenereerd uit 6 uur voorspellingen, dus het kan er "
-"soms niet goed uitzien. Ondersteunt 10 voorspellingsdagen en 48 "
-"voorspellingsuren."
+"voorspellingen worden gegenereerd uit zesuurlijkse voorspellingen, dus "
+"het kan er soms niet goed uitzien. Ondersteunt 10 voorspellingsdagen en "
+"48 voorspellingsuren."
 
 #. 3.8->settings-schema.json->WB->description
 msgid ""
@@ -1838,8 +1838,8 @@ msgid ""
 "hours."
 msgstr ""
 "WeatherBit:\n"
-"Minstens 10 minuten als verversingssnelheid wordt aanbevolen, omdat je "
-"anders de dagelijkse quota zou kunnen overschrijden. Ondersteunt 16 "
+"Vaker verversen dan elke 10 minuten wordt niet aanbevolen, omdat u "
+"dan de dagelijkse quota zou kunnen overschrijden. Ondersteunt 16 "
 "voorspellingsdagen en 48 voorspellingsuren."
 
 #. 3.8->settings-schema.json->Yahoo->description
@@ -1850,9 +1850,9 @@ msgid ""
 "forecast days and no hours."
 msgstr ""
 "Yahoo:\n"
-"Vereist 'python3-requests-oauthlib' pakket geïnstalleerd (voor Arch "
-"gebaseerde distros 'python-requests-oauthlib'), Updates elke 2 uur. "
-"Ondersteunt slechts 10 voorspellingsdagen en geen uren."
+"Vereist de installatie van het pakket 'python3-requests-oauthlib' (voor "
+"Arch-gebaseerde distros 'python-requests-oauthlib'), Actualiseert elke "
+"2 uur. Ondersteunt slechts 10 voorspellingsdagen en geen uren."
 
 #. 3.8->settings-schema.json->Climacell->description
 msgid ""
@@ -1861,7 +1861,7 @@ msgid ""
 "16 forecast days and 96 forecast hours."
 msgstr ""
 "Climacell:\n"
-"Minstens 10 minuten verversingssnelheid wordt aanbevolen met een gratis "
+"Hooguit eens per 10 minuten verversen wordt aanbevolen met een gratis "
 "plan. Ondersteunt 16 voorspellingsdagen en 96 voorspellingsuren."
 
 #. 3.8->settings-schema.json->metuk->description
@@ -1873,10 +1873,10 @@ msgid ""
 "load the first time, please be patient."
 msgstr ""
 "Met Office UK:\n"
-"UK enige optie. Als het geen site binnen een bereik van 50km om u heen "
-"vindt, zal het geen weer laten zien. Laat het me weten als dit gebeurt en u "
-"woont in de UK. Ondersteunt 5 dagen en 36 uur voorspellingen. Soms duurt het "
-"5-8 seconden om de eerste keer te laden, wees alstublieft geduldig."
+"Alleen voor het VK. Als het geen meetplek vindt binnen een bereik van 50km om "
+"u heen, zal het geen weer laten zien. Laat het me a.u.b. weten als dit gebeurt "
+"wanneer u in het VK woont. Ondersteunt 5 dagen en 36 uur voorspellingen. Soms "
+"duurt het eerste laden 5-8 seconden, dus wacht a.u.b. geduldig af."
 
 #. 3.8->settings-schema.json->usweather->description
 msgid ""
@@ -1886,9 +1886,9 @@ msgid ""
 "the closest one. Supports 7 days and 156 hours of forecasts."
 msgstr ""
 "US National Weather Service:\n"
-"VS enige optie. De eerste lading kan tot 15-20 seconden duren, wees "
-"alstublieft geduldig. Het huidige weer wordt samengevoegd van een max. 50 km "
-"gebied, als er wat gegevens ontbreken van het dichtstbijzijnde gebied. "
+"Alleen voor de VS. Het eerste laden kan 15-20 seconden duren, wacht dus "
+"a.u.b. geduldig af. Het huidige weer wordt samengevoegd van een max. 50 km "
+"groot gebied, als er wat gegevens ontbreken van het dichtstbijzijnde gebied. "
 "Ondersteunt 7 dagen en 156 uur aan voorspellingen."
 
 #. 3.8->settings-schema.json->loc-info->description
@@ -1901,11 +1901,11 @@ msgid ""
 "After you stop typing the field will be replaced after 3 seconds with the "
 "full address, for you to validate if it's correct."
 msgstr ""
-"Je kunt coördinaten gebruiken als {latitude},{longitude},\n"
+"U kunt coördinaten gebruiken als {breedtegraad},{lengtegraad},\n"
 " of een adres, van het kleinste detail tot het grootste, zoals "
-"\"{huisnummer} {straat}\". {stad/stad} {postcode} {land}'. Ze zijn allemaal "
-"facultatief, hoewel ten minste stad en land wordt aanbevolen. U kunt komma's "
-"gebruiken als u dat wilt.\n"
+"'{huisnummer} {straat} {stad/plaats} {postcode} {land}'. Ze zijn allemaal "
+"facultatief, hoewel tenminste stad en land worden aanbevolen. U kunt "
+"komma's gebruiken als u dat wilt.\n"
 "\n"
 "Nadat u bent gestopt met typen wordt het veld na 3 seconden vervangen door "
 "het volledige adres, zodat u kunt controleren of het correct is."
