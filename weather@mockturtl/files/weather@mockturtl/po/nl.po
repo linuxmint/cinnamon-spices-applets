@@ -10,14 +10,14 @@ msgstr ""
 "08:38:14)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-07-25 09:36+0200\n"
-"PO-Revision-Date: 2020-07-27 17:59+0200\n"
-"Last-Translator: Pjotr <pjotrvertaalt@gmail.com>\n"
+"PO-Revision-Date: 2020-07-28 19:22+0200\n"
+"Last-Translator: Jurien (French77) <Jurien@protonmail.com>\n"
 "Language-Team: Dutch\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: applet.js:337 3.0/applet.js:214 3.8/applet.js:163
@@ -1679,7 +1679,7 @@ msgstr "Laat de voorspelling verticaal zien"
 #. 3.0->settings-schema.json->verticalOrientation->tooltip
 msgid "Displaying forecasts from top to bottom instead from left to right"
 msgstr ""
-"Voorspellingen tonen van boven naar beneden en niet van links naar rechts\t"
+"Voorspellingen tonen van boven naar beneden en niet van links naar rechts"
 
 #. 3.0->settings-schema.json->forecastColumns->units
 #. 3.8->settings-schema.json->forecastColumns->units
@@ -2069,3 +2069,5 @@ msgstr ""
 #~ "zou uw dagelijkse quotum kunnen overschrijden. Heeft u een sleutel nodig, "
 #~ "klik dan op 'API-sleutel en locatie instellen' voor de te nemen stappen "
 #~ "om deze te verkrijgen."
+
+
