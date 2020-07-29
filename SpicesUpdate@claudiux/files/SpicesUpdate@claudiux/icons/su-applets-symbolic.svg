@@ -1,21 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Created with Inkscape (http://www.inkscape.org/) -->
-
 <svg
    xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:cc="http://creativecommons.org/ns#"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="16"
-   height="16"
-   enable-background="new"
-   version="1.0"
    id="svg10"
-   sodipodi:docname="applets-symbolic.svg"
-   inkscape:version="0.92.3 (2405546, 2018-03-11)">
+   version="1.0"
+   height="16"
+   width="16">
   <metadata
      id="metadata16">
     <rdf:RDF>
@@ -24,54 +17,34 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
   <defs
      id="defs14" />
-  <sodipodi:namedview
-     pagecolor="#ffffff"
-     bordercolor="#666666"
-     borderopacity="1"
-     objecttolerance="10"
-     gridtolerance="10"
-     guidetolerance="10"
-     inkscape:pageopacity="0"
-     inkscape:pageshadow="2"
-     inkscape:window-width="1886"
-     inkscape:window-height="979"
-     id="namedview12"
-     showgrid="false"
-     inkscape:zoom="14.75"
-     inkscape:cx="-13.661017"
-     inkscape:cy="8"
-     inkscape:window-x="0"
-     inkscape:window-y="36"
-     inkscape:window-maximized="1"
-     inkscape:current-layer="svg10" />
   <rect
-     x="2"
-     y="6.6779661"
-     width="11.983051"
-     height="0.32203388"
-     rx="2.3966103"
+     style="enable-background:new;fill:#bebebe;fill-rule:evenodd;stroke-width:0.39288414"
      id="rect2"
-     style="fill:#bebebe;stroke-width:0.39288414" />
+     rx="2.3966103"
+     height="0.32203388"
+     width="11.983051"
+     y="6.6779661"
+     x="2" />
   <rect
-     x="2"
-     y="9"
-     width="5"
-     height="5"
-     rx="1"
+     style="fill:#bebebe"
      id="rect6"
-     style="fill:#bebebe" />
-  <rect
-     x="9"
-     y="9"
-     width="5"
-     height="5"
      rx="1"
+     height="5"
+     width="5"
+     y="9"
+     x="2" />
+  <rect
+     style="fill:#bebebe"
      id="rect8"
-     style="fill:#bebebe" />
+     rx="1"
+     height="5"
+     width="5"
+     y="9"
+     x="9" />
 </svg>
