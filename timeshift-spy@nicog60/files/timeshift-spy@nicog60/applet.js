@@ -71,9 +71,6 @@ class TimeshiftSpy extends Applet.IconApplet {
         this.update_icon         = this.update_icon.bind(this)
         this.make_snapshot       = this.make_snapshot.bind(this)
 
-        Gio.VolumeMonitor.get().connect('mount-added',   this.check_backup_device)
-        Gio.VolumeMonitor.get().connect('mount-removed', this.check_backup_device)
-
         this.menu        = null
         this.menuManager = null
 
@@ -85,23 +82,32 @@ class TimeshiftSpy extends Applet.IconApplet {
         this.config_monitor   = this.config_file.monitor_file(this.monitor_flags, null)
         this.config_monitor.connect('changed', this.reload_config)
 
+        Gio.VolumeMonitor.get().connect('mount-added',   this.check_backup_device)
+        Gio.VolumeMonitor.get().connect('mount-removed', this.check_backup_device)
+
         this.backup_device_uuid = null
         this.snapshot_directory = null
-        this.current_snapshot = null
+        this.current_snapshot   = null
 
-        this.wait_timer = null
-        this.snap_timer = null
-        this.icon_timer = null
+        this.snapshot_directory_monitor = null
+        this.snapshot_directory_handler = null
+
+        this.info_file_monitor          = null
+        this.info_file_handler          = null
+
+        this.rsync_file_monitor         = null
+        this.rsync_file_handler         = null
     }
 
     /**
      * Create the popup menu
      */
     create_menu(orientation) {
-        this.menu = new Applet.AppletPopupMenu(this, orientation)
-        let menuItem = new PopupMenu.PopupMenuItem(_('Make a new snapshot'))
-        menuItem.connect('activate', () => this.make_snapshot())
-        this.menu.addMenuItem(menuItem)
+        this.menu    = new Applet.AppletPopupMenu(this, orientation);
+        let menuItem = new PopupMenu.PopupMenuItem(_('Make a new snapshot'));
+        
+        menuItem.connect('activate', this.make_snapshot);
+        this.menu.addMenuItem(menuItem);
 
         this.menuManager = new PopupMenu.PopupMenuManager(this);
         this.menuManager.addMenu(this.menu);
@@ -161,16 +167,19 @@ class TimeshiftSpy extends Applet.IconApplet {
             let result_str = result.toString()
             let [uuid, mount] = result_str.split(" ")
 
-            mount = mount.trim()
-            let mount_point = Gio.File.new_for_path(mount)
+            if(mount)
+            {
+                mount = mount.trim()
+                let mount_point = Gio.File.new_for_path(mount)
 
-            if(mount.length !== 0 && mount_point.query_exists(null)) {
-                this.debug('mount point found')
+                if(mount.length !== 0 && mount_point.query_exists(null)) {
+                    this.debug('mount point found')
 
-                this.snapshot_directory = mount_point.get_child('timeshift')
-                                                     .get_child('snapshots')
-                this.set_state(WAIT_FOR_SNAP)
-                return
+                    this.snapshot_directory = mount_point.get_child('timeshift')
+                                                         .get_child('snapshots')
+                    this.set_state(WAIT_FOR_SNAP)
+                    return
+                }
             }
         }
 
@@ -320,15 +329,24 @@ class TimeshiftSpy extends Applet.IconApplet {
             case WAIT_FOR_SNAP:
             this.set_applet_icon_name('timeshift-wait')
             this.set_applet_tooltip(_('Wait for snapshot to begin'))
-            this.wait_timer = setInterval(this.check_if_snapping, 1000)
+            
+            this.snapshot_directory_monitor = this.snapshot_directory.monitor_directory(this.monitor_flags, null)
+            this.snapshot_directory_handler = this.snapshot_directory_monitor.connect('changed', this.check_if_snapping)
+
             this.check_if_snapping()
             break
 
             case SNAPPING:
             this.set_applet_tooltip(_('Making snapshot...'))
-            this.snap_timer = setInterval(this.check_if_ended, 500)
-            this.check_if_ended()
+            
+            this.info_file_monitor = this.current_snapshot.get_child('info.json').monitor_file(this.monitor_flags, null)
+            this.info_file_handler = this.info_file_monitor.connect('changed', this.check_if_ended)
+
+            this.rsync_file_monitor = this.current_snapshot.get_child('rsync-log-changes').monitor_file(this.monitor_flags, null)
+            this.rsync_file_handler = this.rsync_file_monitor.connect('changed', this.check_if_ended)
+
             this.icon_timer = setInterval(this.update_icon, 50)
+            this.check_if_ended()
             break
 
             default:
@@ -346,16 +364,23 @@ class TimeshiftSpy extends Applet.IconApplet {
             
 
             case WAIT_FOR_SNAP:
-            if(this.wait_timer) {
-                clearInterval(this.wait_timer)
-                delete this.wait_timer
+            if(this.snapshot_directory_monitor) {
+                this.snapshot_directory_monitor.disconnect(this.snapshot_directory_handler)
+                delete this.snapshot_directory_monitor
+                delete this.snapshot_directory_handler
             }
             break
 
             case SNAPPING:
-            if(this.snap_timer) {
-                clearInterval(this.snap_timer)
-                delete this.snap_timer
+            if(this.info_file_monitor) {
+                this.info_file_monitor.disconnect(this.info_file_handler)
+                delete this.info_file_monitor
+                delete this.info_file_handler
+            }
+            if(this.rsync_file_monitor) {
+                this.rsync_file_monitor.disconnect(this.rsync_file_handler)
+                delete this.rsync_file_monitor
+                delete this.rsync_file_handler
             }
             if(this.icon_timer) {
                 clearInterval(this.icon_timer)
@@ -373,7 +398,9 @@ class TimeshiftSpy extends Applet.IconApplet {
      * snapshot.
      */
     make_snapshot() {
-    	GLib.spawn_command_line_async('bash -c "pkexec timeshift --create"')
+        let start = GLib.spawn_command_line_async('bash -c "pkexec timeshift --create"')
+        if(!start)
+            this.debug('Unable to start snapshot')
     }
 
     /**
@@ -410,7 +437,7 @@ class TimeshiftSpy extends Applet.IconApplet {
     }
 
     debug(msg) {
-        //global.log(msg)
+        //global.log('--> ' + msg)
     }
 }
 
