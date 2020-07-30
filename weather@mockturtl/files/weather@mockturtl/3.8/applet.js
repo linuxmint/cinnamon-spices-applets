@@ -192,7 +192,7 @@ class WeatherApplet extends TextIconApplet {
         this.refreshWeather(true, loc);
     }
     ;
-    async LoadJsonAsync(query, errorCallback) {
+    async LoadJsonAsync(query, errorCallback, triggerUIError = true) {
         let json = await new Promise((resolve, reject) => {
             let message = Message.new('GET', query);
             this.log.Debug("URL called: " + query);
@@ -201,7 +201,7 @@ class WeatherApplet extends TextIconApplet {
                 if (error != null) {
                     this.log.Error("there is an error, " + JSON.stringify(error, null, 2));
                     this.HandleError(error);
-                    reject({ code: -1, message: "bad api response", data: null, reason_phrase: null });
+                    reject({ code: -1, message: "bad api response", data: null, reason_phrase: "" });
                     return;
                 }
                 if (!message) {
@@ -210,7 +210,8 @@ class WeatherApplet extends TextIconApplet {
                 }
                 if (message.status_code >= 400 && message.status_code < 500) {
                     reject({ code: message.status_code, message: "bad status code", reason_phrase: message.reason_phrase, data: get(["response_body", "data"], message) });
-                    this.HandleError({ detail: "bad api response", type: "hard", message: _("API returned status code between 400 and 500") });
+                    if (triggerUIError == true)
+                        this.HandleError({ detail: "bad api response", type: "hard", message: _("API returned status code between 400 and 500") });
                     return;
                 }
                 if (message.status_code > 300 || message.status_code < 200) {

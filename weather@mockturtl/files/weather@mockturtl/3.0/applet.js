@@ -243,7 +243,8 @@ var WeatherApplet = (function (_super) {
         this.refreshWeather(true, loc);
     };
     ;
-    WeatherApplet.prototype.LoadJsonAsync = function (query, errorCallback) {
+    WeatherApplet.prototype.LoadJsonAsync = function (query, errorCallback, triggerUIError) {
+        if (triggerUIError === void 0) { triggerUIError = true; }
         return __awaiter(this, void 0, void 0, function () {
             var json;
             var _this = this;
@@ -257,7 +258,7 @@ var WeatherApplet = (function (_super) {
                                 if (error != null) {
                                     _this.log.Error("there is an error, " + JSON.stringify(error, null, 2));
                                     _this.HandleError(error);
-                                    reject({ code: -1, message: "bad api response", data: null, reason_phrase: null });
+                                    reject({ code: -1, message: "bad api response", data: null, reason_phrase: "" });
                                     return;
                                 }
                                 if (!message) {
@@ -266,7 +267,8 @@ var WeatherApplet = (function (_super) {
                                 }
                                 if (message.status_code >= 400 && message.status_code < 500) {
                                     reject({ code: message.status_code, message: "bad status code", reason_phrase: message.reason_phrase, data: get(["response_body", "data"], message) });
-                                    _this.HandleError({ detail: "bad api response", type: "hard", message: _("API returned status code between 400 and 500") });
+                                    if (triggerUIError == true)
+                                        _this.HandleError({ detail: "bad api response", type: "hard", message: _("API returned status code between 400 and 500") });
                                     return;
                                 }
                                 if (message.status_code > 300 || message.status_code < 200) {

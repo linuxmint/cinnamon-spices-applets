@@ -82,7 +82,7 @@ var Weatherbit = (function () {
                         forecastPromise = this.GetData(this.daily_url, loc, this.ParseForecast);
                         hourlyPromise = null;
                         if (!!this.hourlyAccess)
-                            hourlyPromise = this.GetData(this.hourly_url, loc, this.ParseHourlyForecast);
+                            hourlyPromise = this.GetHourlyData(this.hourly_url, loc);
                         return [4, this.GetData(this.current_url, loc, this.ParseCurrent)];
                     case 1:
                         currentResult = _a.sent();
@@ -119,11 +119,6 @@ var Weatherbit = (function () {
                         return [3, 4];
                     case 3:
                         e_1 = _a.sent();
-                        if (GetFuncName(ParseFunction) == GetFuncName(this.ParseHourlyForecast) && e_1.code == 403) {
-                            this.app.log.Print("Hourly forecast is inaccessible, skipping");
-                            this.hourlyAccess = false;
-                            return [2, null];
-                        }
                         this.app.HandleHTTPError("weatherbit", e_1, this.app);
                         return [2, null];
                     case 4:
@@ -132,6 +127,42 @@ var Weatherbit = (function () {
                             return [2, null];
                         }
                         return [2, ParseFunction(json, this)];
+                    case 5: return [2, null];
+                }
+            });
+        });
+    };
+    ;
+    Weatherbit.prototype.GetHourlyData = function (baseUrl, loc) {
+        return __awaiter(this, void 0, void 0, function () {
+            var query, json, e_2;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        query = this.ConstructQuery(baseUrl, loc);
+                        if (!(query != null)) return [3, 5];
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4, this.app.LoadJsonAsync(query, null, false)];
+                    case 2:
+                        json = _a.sent();
+                        return [3, 4];
+                    case 3:
+                        e_2 = _a.sent();
+                        if (e_2.code == 403) {
+                            this.app.log.Print("Hourly forecast is inaccessible, skipping");
+                            this.hourlyAccess = false;
+                            return [2, null];
+                        }
+                        this.app.HandleHTTPError("weatherbit", e_2, this.app);
+                        return [2, null];
+                    case 4:
+                        if (json == null) {
+                            this.app.HandleError({ type: "soft", detail: "no api response", service: "weatherbit" });
+                            return [2, null];
+                        }
+                        return [2, this.ParseHourlyForecast(json, this)];
                     case 5: return [2, null];
                 }
             });

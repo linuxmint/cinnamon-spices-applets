@@ -262,7 +262,7 @@ class WeatherApplet extends TextIconApplet {
 	 * @param query fully constructed url
 	 * @param errorCallback do checking before generic error checking by this function, to display API specific UI errors
 	 */
-	public async LoadJsonAsync(query: string, errorCallback?: (message: any) => AppletError): Promise <any> {
+	public async LoadJsonAsync(query: string, errorCallback?: (message: any) => AppletError, triggerUIError: boolean = true): Promise <any> {
 		let json = await new Promise((resolve: any, reject: any) => {
 			let message = Message.new('GET', query);
 			this.log.Debug("URL called: " + query);
@@ -272,7 +272,7 @@ class WeatherApplet extends TextIconApplet {
 				if (error != null) {
 					this.log.Error("there is an error, " + JSON.stringify(error, null, 2))
 					this.HandleError(error);
-					reject({code: -1, message: "bad api response", data: null, reason_phrase: null} as HttpError);
+					reject({code: -1, message: "bad api response", data: null, reason_phrase: ""} as HttpError);
 					return;
 				}
 
@@ -283,7 +283,7 @@ class WeatherApplet extends TextIconApplet {
 
 				if (message.status_code >= 400 && message.status_code < 500) {
 					reject({code: message.status_code, message: "bad status code", reason_phrase: message.reason_phrase, data: get(["response_body", "data"], message) } as HttpError);
-					this.HandleError({ detail: "bad api response", type: "hard", message: _("API returned status code between 400 and 500")});
+					if (triggerUIError == true) this.HandleError({ detail: "bad api response", type: "hard", message: _("API returned status code between 400 and 500")});
 					return;
 				}
 					

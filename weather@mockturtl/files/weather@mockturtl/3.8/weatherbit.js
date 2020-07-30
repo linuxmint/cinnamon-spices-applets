@@ -41,7 +41,7 @@ class Weatherbit {
         let forecastPromise = this.GetData(this.daily_url, loc, this.ParseForecast);
         let hourlyPromise = null;
         if (!!this.hourlyAccess)
-            hourlyPromise = this.GetData(this.hourly_url, loc, this.ParseHourlyForecast);
+            hourlyPromise = this.GetHourlyData(this.hourly_url, loc);
         let currentResult = await this.GetData(this.current_url, loc, this.ParseCurrent);
         if (!currentResult)
             return null;
@@ -60,7 +60,29 @@ class Weatherbit {
                 json = await this.app.LoadJsonAsync(query, this.OnObtainingData);
             }
             catch (e) {
-                if (GetFuncName(ParseFunction) == GetFuncName(this.ParseHourlyForecast) && e.code == 403) {
+                this.app.HandleHTTPError("weatherbit", e, this.app);
+                return null;
+            }
+            if (json == null) {
+                this.app.HandleError({ type: "soft", detail: "no api response", service: "weatherbit" });
+                return null;
+            }
+            return ParseFunction(json, this);
+        }
+        else {
+            return null;
+        }
+    }
+    ;
+    async GetHourlyData(baseUrl, loc) {
+        let query = this.ConstructQuery(baseUrl, loc);
+        let json;
+        if (query != null) {
+            try {
+                json = await this.app.LoadJsonAsync(query, null, false);
+            }
+            catch (e) {
+                if (e.code == 403) {
                     this.app.log.Print("Hourly forecast is inaccessible, skipping");
                     this.hourlyAccess = false;
                     return null;
@@ -72,7 +94,7 @@ class Weatherbit {
                 this.app.HandleError({ type: "soft", detail: "no api response", service: "weatherbit" });
                 return null;
             }
-            return ParseFunction(json, this);
+            return this.ParseHourlyForecast(json, this);
         }
         else {
             return null;
