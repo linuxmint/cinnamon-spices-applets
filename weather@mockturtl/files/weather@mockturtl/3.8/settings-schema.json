@@ -365,7 +365,7 @@
 	"useSymbolicIcons": {
 		"type": "checkbox",
 		"default": false,
-		"tooltip": "Does not apply to custom iconset, it is symbolic by default",
+		"tooltip": "Does not apply to custom iconset, that is symbolic by default",
 		"description": "Use symbolic icons throughout the applet"
 	},
 	"useCustomMenuIcons": {

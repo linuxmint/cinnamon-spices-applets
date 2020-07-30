@@ -151,7 +151,8 @@ class WeatherApplet extends TextIconApplet {
         this.ui = new UI(this, orientation);
         this.ui.rebuild(this.config);
         this.loop = new WeatherLoop(this, instanceId);
-        this.locationStore = new LocationStore("~/.config/weather-mockturtl/locations.json", this, Lang.bind(this, this.onLocationStorageChanged));
+        GLib.getenv('XDG_CONFIG_HOME');
+        this.locationStore = new LocationStore(this, Lang.bind(this, this.onLocationStorageChanged));
         this.orientation = orientation;
         try {
             this.setAllowedLayout(AllowedLayout.BOTH);
@@ -1617,7 +1618,7 @@ class GeoLocation {
     }
 }
 class LocationStore {
-    constructor(path, app, onStoreChanged) {
+    constructor(app, onStoreChanged) {
         this.path = null;
         this.file = null;
         this.locations = [];
@@ -1625,11 +1626,18 @@ class LocationStore {
         this.currentIndex = 0;
         this.StoreChanged = null;
         this.app = app;
-        this.path = path.replace(/~/g, GLib.get_home_dir());
+        this.path = this.GetConfigPath() + "/weather-mockturtl/locations.json";
+        this.app.log.Debug("location store path is: " + this.path);
         this.file = Gio.File.new_for_path(this.path);
         if (onStoreChanged != null)
             this.StoreChanged = onStoreChanged;
         this.Start();
+    }
+    GetConfigPath() {
+        let configPath = GLib.getenv('XDG_CONFIG_HOME');
+        if (configPath == null)
+            configPath = GLib.get_home_dir() + "/.config";
+        return configPath;
     }
     NextLocation(currentLoc) {
         this.app.log.Debug("Current location: " + JSON.stringify(currentLoc, null, 2));

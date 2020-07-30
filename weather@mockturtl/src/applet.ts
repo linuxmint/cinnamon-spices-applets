@@ -203,7 +203,8 @@ class WeatherApplet extends TextIconApplet {
 		this.ui = new UI(this, orientation);
 		this.ui.rebuild(this.config);
 		this.loop = new WeatherLoop(this, instanceId);
-		this.locationStore = new LocationStore("~/.config/weather-mockturtl/locations.json", this, Lang.bind(this, this.onLocationStorageChanged));
+		GLib.getenv('XDG_CONFIG_HOME')
+		this.locationStore = new LocationStore(this, Lang.bind(this, this.onLocationStorageChanged));
 
 		this.orientation = orientation;
 		try {
@@ -2185,12 +2186,20 @@ class LocationStore {
 	 * @param app 
 	 * @param onStoreChanged called when locations are loaded from file, added or deleted
 	 */
-	constructor(path: string, app: WeatherApplet, onStoreChanged?: (itemCount: number) => void) {
+	constructor(app: WeatherApplet, onStoreChanged?: (itemCount: number) => void) {
 		this.app = app;
-		this.path = path.replace(/~/g, GLib.get_home_dir());
+		
+		this.path = this.GetConfigPath() + "/weather-mockturtl/locations.json"
+		this.app.log.Debug("location store path is: " + this.path);
 		this.file = Gio.File.new_for_path(this.path);
 		if (onStoreChanged != null)	this.StoreChanged = onStoreChanged;
 		this.Start();
+	}
+
+	private GetConfigPath(): string {
+		let configPath = GLib.getenv('XDG_CONFIG_HOME')
+		if (configPath == null) configPath = GLib.get_home_dir() + "/.config"
+		return configPath;
 	}
 
 	public NextLocation(currentLoc: LocationData): LocationData {
@@ -2446,7 +2455,7 @@ class LocationStore {
 		let text = buffer;
 		let result = outputStream.write(text as any, null);
 		return true;
-		//TODO: Figure out why async is not working
+		//TODO: Figure out why async version is not working
 		/*
 		return new Promise((resolve: any, reject: any) => {
 			outputStream.write_async(text as any, null, null, (obj, res) => {
@@ -2529,7 +2538,7 @@ type WeatherWindSpeedUnits = 'kph' | 'mph' | 'm/s' | 'Knots' | 'Beaufort';
 /** Units used in Options. Change Options list if You change this! */
 type WeatherPressureUnits = 'hPa'|'mm Hg'|'in Hg'|'Pa'|'psi'|'atm'|'at';
 
-/** Change settings-schem if you change this! */
+/** Change settings-scheme if you change this! */
 type DistanceUnits = 'metric' | 'imperial';
 
 interface WeatherData {
@@ -2594,7 +2603,7 @@ interface HourlyForecastData {
 	temp: number,
 	condition: Condition
 	precipitation?: {
-		type: PrecipationType,
+		type: PrecipitationType,
 		/** in mm */
 		volume?: number,
 		/** % */
@@ -2602,7 +2611,7 @@ interface HourlyForecastData {
 	};
 }
 
-type PrecipationType = "rain" | "snow" | "none" | "ice pellets" | "freezing rain";
+type PrecipitationType = "rain" | "snow" | "none" | "ice pellets" | "freezing rain";
 
 interface LocationData {
 	lat: number,
