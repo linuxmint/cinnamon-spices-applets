@@ -1,5 +1,12 @@
 Changelog
 
+2.8
+==
+- Remove some leftover development output
+- Improve urgent/attention handling
+- Make app buttons squared in all themes
+- Improve number placement
+
 2.7
 ==
 - Add support for launching desktop file actions

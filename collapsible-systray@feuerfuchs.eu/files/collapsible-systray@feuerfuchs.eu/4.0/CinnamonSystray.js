@@ -72,6 +72,7 @@ class CinnamonSystrayApplet extends Applet.Applet {
 
     _addIndicatorSupport() {
         let manager = Main.indicatorManager;
+		if (!manager) return;
 
         // Blacklist some of the icons
         // quassel: The proper icon in Quassel is "QuasselIRC",

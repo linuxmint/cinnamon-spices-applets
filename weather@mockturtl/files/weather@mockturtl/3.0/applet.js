@@ -62,14 +62,19 @@ var Lang = imports.lang;
 var keybindingManager = imports.ui.main.keybindingManager;
 var timeout_add_seconds = imports.mainloop.timeout_add_seconds;
 var _a = imports.gi.Soup, Message = _a.Message, Session = _a.Session, ProxyResolverDefault = _a.ProxyResolverDefault, SessionAsync = _a.SessionAsync;
-var _b = imports.gi.St, Bin = _b.Bin, DrawingArea = _b.DrawingArea, BoxLayout = _b.BoxLayout, Side = _b.Side, IconType = _b.IconType, Label = _b.Label, Icon = _b.Icon, Button = _b.Button;
+var _b = imports.gi.St, Bin = _b.Bin, DrawingArea = _b.DrawingArea, BoxLayout = _b.BoxLayout, Side = _b.Side, IconType = _b.IconType, Label = _b.Label, ScrollView = _b.ScrollView, Icon = _b.Icon, Button = _b.Button, Align = _b.Align, Widget = _b.Widget;
+var _c = imports.gi.Clutter, GridLayout = _c.GridLayout, Actor = _c.Actor, Orientation = _c.Orientation;
+var _d = imports.gi.Pango, EllipsizeMode = _d.EllipsizeMode, WrapMode = _d.WrapMode;
 var get_language_names = imports.gi.GLib.get_language_names;
-var _c = imports.ui.applet, TextIconApplet = _c.TextIconApplet, AllowedLayout = _c.AllowedLayout, AppletPopupMenu = _c.AppletPopupMenu, MenuItem = _c.MenuItem;
-var PopupMenuManager = imports.ui.popupMenu.PopupMenuManager;
-var _d = imports.ui.settings, AppletSettings = _d.AppletSettings, BindingDirection = _d.BindingDirection;
-var _e = imports.misc.util, spawnCommandLine = _e.spawnCommandLine, spawn_async = _e.spawn_async;
-var _f = imports.ui.messageTray, SystemNotificationSource = _f.SystemNotificationSource, Notification = _f.Notification;
-var messageTray = imports.ui.main.messageTray;
+var PolicyType = imports.gi.Gtk.PolicyType;
+var addTween = imports.ui.tweener.addTween;
+var _e = imports.ui.applet, TextIconApplet = _e.TextIconApplet, AllowedLayout = _e.AllowedLayout, AppletPopupMenu = _e.AppletPopupMenu, MenuItem = _e.MenuItem;
+var _f = imports.ui.popupMenu, PopupMenuManager = _f.PopupMenuManager, PopupSeparatorMenuItem = _f.PopupSeparatorMenuItem;
+var _g = imports.ui.settings, AppletSettings = _g.AppletSettings, BindingDirection = _g.BindingDirection;
+var _h = imports.misc.util, spawnCommandLine = _h.spawnCommandLine, spawn_async = _h.spawn_async;
+var _j = imports.ui.messageTray, SystemNotificationSource = _j.SystemNotificationSource, Notification = _j.Notification;
+var SignalManager = imports.misc.signalManager.SignalManager;
+var _k = imports.ui.main, messageTray = _k.messageTray, themeManager = _k.themeManager;
 var utils = importModule("utils");
 var GetDayName = utils.GetDayName;
 var GetHoursMinutes = utils.GetHoursMinutes;
@@ -80,7 +85,14 @@ var compassDirection = utils.compassDirection;
 var MPStoUserUnits = utils.MPStoUserUnits;
 var nonempty = utils.nonempty;
 var AwareDateString = utils.AwareDateString;
+var get = utils.get;
 var delay = utils.delay;
+var isCoordinate = utils.isCoordinate;
+var setTimeout = utils.setTimeout;
+var clearTimeout = utils.clearTimeout;
+var MillimeterToUserUnits = utils.MillimeterToUserUnits;
+var shadeHexColor = utils.shadeHexColor;
+var MetreToUserUnits = utils.MetreToUserUnits;
 if (typeof Promise != "function") {
     var promisePoly = importModule("promise-polyfill");
     var finallyConstructor = promisePoly.finallyConstructor;
@@ -120,7 +132,10 @@ var DATA_SERVICE = {
     DARK_SKY: "DarkSky",
     MET_NORWAY: "MetNorway",
     WEATHERBIT: "Weatherbit",
-    YAHOO: "Yahoo"
+    YAHOO: "Yahoo",
+    CLIMACELL: "Climacell",
+    MET_UK: "Met Office UK",
+    US_WEATHER: "US Weather"
 };
 imports.gettext.bindtextdomain(UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
 function _(str) {
@@ -139,10 +154,14 @@ var WeatherApplet = (function (_super) {
         var _this = _super.call(this, orientation, panelHeight, instanceId) || this;
         _this.weather = null;
         _this.forecasts = [];
-        _this.currentLocale = null;
+        _this.hourlyForecasts = [];
         _this._httpSession = new SessionAsync();
         _this.appletDir = imports.ui.appletManager.appletMeta[UUID].path;
+        _this.currentLocale = null;
+        _this.lock = false;
+        _this.refreshTriggeredWhileLocked = false;
         _this.locProvider = new ipApi.IpApi(_this);
+        _this.geoLocationService = new GeoLocation(_this);
         _this.encounteredError = false;
         _this.errMsg = {
             unknown: _("Error"),
@@ -157,16 +176,19 @@ var WeatherApplet = (function (_super) {
             "no key": _("No Api Key"),
             "no location": _("No Location"),
             "no network response": _("Service Error"),
-            "no reponse body": _("Service Error"),
-            "no respone data": _("Service Error"),
-            "unusal payload": _("Service Error"),
-            "import error": _("Missing Packages")
+            "no response body": _("Service Error"),
+            "no response data": _("Service Error"),
+            "unusual payload": _("Service Error"),
+            "import error": _("Missing Packages"),
+            "location not covered": _("Location not covered"),
         };
         _this.log = new Log(instanceId);
         _this.currentLocale = _this.constructJsLocale(get_language_names()[0]);
         _this.log.Debug("System locale is " + _this.currentLocale);
         _this.log.Debug("Appletdir is: " + _this.appletDir);
         _this._httpSession.user_agent = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:37.0) Gecko/20100101 Firefox/37.0";
+        _this._httpSession.timeout = 10;
+        _this._httpSession.idle_timeout = 10;
         _this.msgSource = new SystemNotificationSource(_("Weather Applet"));
         messageTray.add(_this.msgSource);
         Session.prototype.add_feature.call(_this._httpSession, new ProxyResolverDefault());
@@ -174,6 +196,7 @@ var WeatherApplet = (function (_super) {
         _this.SetAppletOnPanel();
         _this.config = new Config(_this, instanceId);
         _this.AddRefreshButton();
+        _this.EnsureProvider();
         _this.ui = new UI(_this, orientation);
         _this.ui.rebuild(_this.config);
         _this.loop = new WeatherLoop(_this, instanceId);
@@ -191,6 +214,17 @@ var WeatherApplet = (function (_super) {
         this.set_applet_label(_("..."));
         this.set_applet_tooltip(_("Click to open"));
     };
+    WeatherApplet.prototype.Locked = function () {
+        return this.lock;
+    };
+    WeatherApplet.prototype.Unlock = function () {
+        this.lock = false;
+        if (this.refreshTriggeredWhileLocked) {
+            this.log.Print("Refreshing triggered by config change while refreshing, starting now...");
+            this.refreshTriggeredWhileLocked = false;
+            this.refreshAndRebuild();
+        }
+    };
     WeatherApplet.prototype.AddRefreshButton = function () {
         var itemLabel = _("Refresh");
         var refreshMenuItem = new MenuItem(itemLabel, REFRESH_ICON, Lang.bind(this, function () {
@@ -200,10 +234,14 @@ var WeatherApplet = (function (_super) {
     };
     WeatherApplet.prototype.refreshAndRebuild = function () {
         this.loop.Resume();
+        if (this.Locked()) {
+            this.refreshTriggeredWhileLocked = true;
+            return;
+        }
         this.refreshWeather(true);
     };
     ;
-    WeatherApplet.prototype.LoadJsonAsync = function (query) {
+    WeatherApplet.prototype.LoadJsonAsync = function (query, errorCallback) {
         return __awaiter(this, void 0, void 0, function () {
             var json;
             var _this = this;
@@ -211,17 +249,34 @@ var WeatherApplet = (function (_super) {
                 switch (_a.label) {
                     case 0: return [4, new Promise(function (resolve, reject) {
                             var message = Message.new('GET', query);
+                            _this.log.Debug("URL called: " + query);
                             _this._httpSession.queue_message(message, function (session, message) {
-                                if (!message)
-                                    reject({ code: 0, message: "no network response", reason_phrase: "no network response" });
-                                if (message.status_code != 200)
-                                    reject({ code: message.status_code, message: "bad status code", reason_phrase: message.reason_phrase });
-                                if (!message.response_body)
-                                    reject({ code: message.status_code, message: "no reponse body", reason_phrase: message.reason_phrase });
-                                if (!message.response_body.data)
-                                    reject({ code: message.status_code, message: "no respone data", reason_phrase: message.reason_phrase });
+                                var error = (errorCallback != null) ? errorCallback(message) : null;
+                                if (error != null) {
+                                    _this.log.Error("there is an error, " + JSON.stringify(error, null, 2));
+                                    _this.HandleError(error);
+                                    reject({ code: -1, message: "bad api response", data: null, reason_phrase: null });
+                                    return;
+                                }
+                                if (!message) {
+                                    reject({ code: 0, message: "no network response", reason_phrase: "no network response", data: get(["response_body", "data"], message) });
+                                    return;
+                                }
+                                if (message.status_code >= 400 && message.status_code < 500) {
+                                    reject({ code: message.status_code, message: "bad status code", reason_phrase: message.reason_phrase, data: get(["response_body", "data"], message) });
+                                    _this.HandleError({ detail: "bad api response", type: "hard", message: _("API returned status code between 400 and 500") });
+                                    return;
+                                }
+                                if (message.status_code > 300 || message.status_code < 200) {
+                                    reject({ code: message.status_code, message: "bad status code", reason_phrase: message.reason_phrase, data: get(["response_body", "data"], message) });
+                                    return;
+                                }
+                                if (get(["response_body", "data"], message) == null) {
+                                    reject({ code: message.status_code, message: "no response data", reason_phrase: message.reason_phrase, data: get(["response_body", "data"], message) });
+                                    return;
+                                }
                                 try {
-                                    _this.log.Debug("API full response: " + message.response_body.data.toString());
+                                    _this.log.Debug2("API full response: " + message.response_body.data.toString());
                                     var payload = JSON.parse(message.response_body.data);
                                     resolve(payload);
                                 }
@@ -265,15 +320,23 @@ var WeatherApplet = (function (_super) {
                     case 0: return [4, new Promise(function (resolve, reject) {
                             var message = Message.new('GET', query);
                             _this._httpSession.queue_message(message, function (session, message) {
-                                if (!message)
+                                if (!message) {
                                     reject({ code: 0, message: "no network response", reason_phrase: "no network response" });
-                                if (message.status_code != 200)
+                                    return;
+                                }
+                                if (message.status_code > 300 || message.status_code < 200) {
                                     reject({ code: message.status_code, message: "bad status code", reason_phrase: message.reason_phrase });
-                                if (!message.response_body)
-                                    reject({ code: message.status_code, message: "no reponse body", reason_phrase: message.reason_phrase });
-                                if (!message.response_body.data)
-                                    reject({ code: message.status_code, message: "no respone data", reason_phrase: message.reason_phrase });
-                                _this.log.Debug("API full response: " + message.response_body.data.toString());
+                                    return;
+                                }
+                                if (!message.response_body) {
+                                    reject({ code: message.status_code, message: "no response body", reason_phrase: message.reason_phrase });
+                                    return;
+                                }
+                                if (!message.response_body.data) {
+                                    reject({ code: message.status_code, message: "no response data", reason_phrase: message.reason_phrase });
+                                    return;
+                                }
+                                _this.log.Debug2("API full response: " + message.response_body.data.toString());
                                 var payload = message.response_body.data;
                                 resolve(payload);
                             });
@@ -295,10 +358,10 @@ var WeatherApplet = (function (_super) {
     WeatherApplet.prototype.SetAppletTooltip = function (msg) {
         this.set_applet_tooltip(msg);
     };
-    WeatherApplet.prototype.SetAppletIcon = function (iconname) {
+    WeatherApplet.prototype.SetAppletIcon = function (iconName) {
         this.config.IconType() == IconType.SYMBOLIC ?
-            this.set_applet_icon_symbolic_name(iconname) :
-            this.set_applet_icon_name(iconname);
+            this.set_applet_icon_symbolic_name(iconName) :
+            this.set_applet_icon_name(iconName);
         if (this.config._useCustomAppletIcons)
             this.SetCustomIcon(this.weather.condition.customIcon);
     };
@@ -317,6 +380,16 @@ var WeatherApplet = (function (_super) {
             return __generator(this, function (_a) {
                 command = "xdg-open ";
                 spawnCommandLine(command + "https://cinnamon-spices.linuxmint.com/applets/view/17");
+                return [2];
+            });
+        });
+    };
+    WeatherApplet.prototype.submitIssue = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var command;
+            return __generator(this, function (_a) {
+                command = "xdg-open ";
+                spawnCommandLine(command + "https://github.com/linuxmint/cinnamon-spices-applets/issues/new");
                 return [2];
             });
         });
@@ -342,6 +415,77 @@ var WeatherApplet = (function (_super) {
     };
     WeatherApplet.prototype.on_panel_height_changed = function () {
     };
+    WeatherApplet.prototype.OpenUrl = function (element) {
+        if (!element.url)
+            return;
+        imports.gi.Gio.app_info_launch_default_for_uri(element.url, global.create_app_launch_context());
+    };
+    WeatherApplet.prototype.GetMaxForecastDays = function () {
+        if (!this.provider)
+            return this.config._forecastDays;
+        return Math.min(this.config._forecastDays, this.provider.maxForecastSupport);
+    };
+    WeatherApplet.prototype.GetMaxHourlyForecasts = function () {
+        if (!this.provider)
+            return this.config._forecastHours;
+        return Math.min(this.config._forecastHours, this.provider.maxHourlyForecastSupport);
+    };
+    WeatherApplet.prototype.EnsureProvider = function (force) {
+        if (force === void 0) { force = false; }
+        var currentName = get(["name"], this.provider);
+        switch (this.config._dataService) {
+            case DATA_SERVICE.DARK_SKY:
+                if (!darkSky)
+                    var darkSky = importModule('darkSky');
+                if (currentName != "DarkSky" || force)
+                    this.provider = new darkSky.DarkSky(this);
+                break;
+            case DATA_SERVICE.OPEN_WEATHER_MAP:
+                if (!openWeatherMap)
+                    var openWeatherMap = importModule("openWeatherMap");
+                if (currentName != "OpenWeatherMap" || force)
+                    this.provider = new openWeatherMap.OpenWeatherMap(this);
+                break;
+            case DATA_SERVICE.MET_NORWAY:
+                if (!metNorway)
+                    var metNorway = importModule("met_norway");
+                if (currentName != "MetNorway" || force)
+                    this.provider = new metNorway.MetNorway(this);
+                break;
+            case DATA_SERVICE.WEATHERBIT:
+                if (!weatherbit)
+                    var weatherbit = importModule("weatherbit");
+                if (currentName != "Weatherbit" || force)
+                    this.provider = new weatherbit.Weatherbit(this);
+                break;
+            case DATA_SERVICE.YAHOO:
+                if (!yahoo)
+                    var yahoo = importModule("yahoo");
+                if (currentName != "Yahoo" || force)
+                    this.provider = new yahoo.Yahoo(this);
+                break;
+            case DATA_SERVICE.CLIMACELL:
+                if (!climacell)
+                    var climacell = importModule("climacell");
+                if (currentName != "Climacell" || force)
+                    this.provider = new climacell.Climacell(this);
+                break;
+            case DATA_SERVICE.MET_UK:
+                if (!met_uk)
+                    var met_uk = importModule("met_uk");
+                if (currentName != "Met Office UK" || force)
+                    this.provider = new met_uk.MetUk(this);
+                break;
+            case DATA_SERVICE.US_WEATHER:
+                if (!us_weather)
+                    var us_weather = importModule("us_weather");
+                if (currentName != "US Weather" || force)
+                    this.provider = new us_weather.USWeather(this);
+                break;
+            default:
+                return null;
+        }
+    };
     WeatherApplet.prototype.constructJsLocale = function (locale) {
         var jsLocale = locale.split(".")[0];
         var tmp = jsLocale.split("_");
@@ -355,123 +499,78 @@ var WeatherApplet = (function (_super) {
     };
     WeatherApplet.prototype.refreshWeather = function (rebuild) {
         return __awaiter(this, void 0, void 0, function () {
-            var locationData, e_1, darkSky, openWeatherMap, metNorway, weatherbit, yahoo, weatherInfo, _a, e_2;
-            return __generator(this, function (_b) {
-                switch (_b.label) {
+            var locationData, e_1, weatherInfo, e_2;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
                     case 0:
+                        if (this.lock) {
+                            this.log.Print("Refreshing in progress, refresh skipped.");
+                            return [2, "locked"];
+                        }
+                        this.lock = true;
                         this.encounteredError = false;
                         locationData = null;
-                        _b.label = 1;
+                        _a.label = 1;
                     case 1:
-                        _b.trys.push([1, 3, , 4]);
-                        return [4, this.ValidateLocation()];
+                        _a.trys.push([1, 3, , 4]);
+                        return [4, this.config.EnsureLocation()];
                     case 2:
-                        locationData = _b.sent();
+                        locationData = _a.sent();
                         return [3, 4];
                     case 3:
-                        e_1 = _b.sent();
+                        e_1 = _a.sent();
                         this.log.Error(e_1);
+                        this.Unlock();
                         return [2, "error"];
                     case 4:
-                        _b.trys.push([4, 9, , 10]);
-                        switch (this.config._dataService) {
-                            case DATA_SERVICE.DARK_SKY:
-                                if (darkSky == null)
-                                    darkSky = importModule('darkSky');
-                                this.provider = new darkSky.DarkSky(this);
-                                break;
-                            case DATA_SERVICE.OPEN_WEATHER_MAP:
-                                if (openWeatherMap == null)
-                                    openWeatherMap = importModule("openWeatherMap");
-                                this.provider = new openWeatherMap.OpenWeatherMap(this);
-                                break;
-                            case DATA_SERVICE.MET_NORWAY:
-                                if (metNorway == null)
-                                    metNorway = importModule("met_norway");
-                                this.provider = new metNorway.MetNorway(this);
-                                break;
-                            case DATA_SERVICE.WEATHERBIT:
-                                if (weatherbit == null)
-                                    weatherbit = importModule("weatherbit");
-                                this.provider = new weatherbit.Weatherbit(this);
-                                break;
-                            case DATA_SERVICE.YAHOO:
-                                if (yahoo == null)
-                                    yahoo = importModule("yahoo");
-                                this.provider = new yahoo.Yahoo(this);
-                                break;
-                            default:
-                                return [2, "error"];
+                        if (locationData == null) {
+                            this.Unlock();
+                            return [2, "failure"];
                         }
-                        return [4, this.provider.GetWeather()];
+                        _a.label = 5;
                     case 5:
-                        weatherInfo = _b.sent();
-                        if (!weatherInfo) {
+                        _a.trys.push([5, 7, , 8]);
+                        this.EnsureProvider();
+                        return [4, this.provider.GetWeather({ lat: locationData.lat, lon: locationData.lon, text: locationData.lat.toString() + "," + locationData.lon.toString() })];
+                    case 6:
+                        weatherInfo = _a.sent();
+                        if (weatherInfo == null) {
                             this.log.Error("Unable to obtain Weather Information");
+                            this.HandleError({
+                                type: "hard",
+                                detail: "unknown",
+                                message: _("Could not get weather information"),
+                            });
+                            this.Unlock();
                             return [2, "failure"];
                         }
                         this.wipeData();
                         this.ProcessWeatherData(weatherInfo, locationData);
                         if (rebuild)
                             this.ui.rebuild(this.config);
-                        return [4, this.ui.displayWeather(this.weather, this.config)];
-                    case 6:
-                        _a = !(_b.sent());
-                        if (_a) return [3, 8];
-                        return [4, this.ui.displayForecast(this.weather, this.forecasts, this.config)];
-                    case 7:
-                        _a = !(_b.sent());
-                        _b.label = 8;
-                    case 8:
-                        if (_a)
-                            return [2];
+                        if (!this.ui.displayWeather(this.weather, this.config)
+                            || !this.ui.displayForecast(this.weather, this.forecasts, this.config)
+                            || !this.ui.displayHourlyForecast(this.hourlyForecasts, this.config, this.weather.location.timeZone)
+                            || !this.ui.displayBar(this.weather, this.provider, this.config)) {
+                            this.Unlock();
+                            return [2, "failure"];
+                        }
                         this.log.Print("Weather Information refreshed");
                         this.loop.ResetErrorCount();
+                        this.Unlock();
                         return [2, "success"];
-                    case 9:
-                        e_2 = _b.sent();
+                    case 7:
+                        e_2 = _a.sent();
                         this.log.Error("Generic Error while refreshing Weather info: " + e_2);
                         this.HandleError({ type: "hard", detail: "unknown", message: _("Unexpected Error While Refreshing Weather, please see log in Looking Glass") });
+                        this.Unlock();
                         return [2, "failure"];
-                    case 10: return [2];
+                    case 8: return [2];
                 }
             });
         });
     };
     ;
-    WeatherApplet.prototype.ValidateLocation = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            var location, loc, loc;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        location = null;
-                        if (!!this.config._manualLocation) return [3, 2];
-                        return [4, this.locProvider.GetLocation()];
-                    case 1:
-                        location = _a.sent();
-                        if (!location)
-                            throw new Error(null);
-                        loc = location.lat + "," + location.lon;
-                        this.config.SetLocation(loc);
-                        return [2, location];
-                    case 2:
-                        loc = this.config._location.replace(" ", "");
-                        if (loc == undefined || loc == "") {
-                            this.HandleError({
-                                type: "hard",
-                                detail: "no location",
-                                userError: true,
-                                message: _("Make sure you entered a location or use Automatic location instead")
-                            });
-                            throw new Error("No location given when setting is on Manual Location");
-                        }
-                        _a.label = 3;
-                    case 3: return [2, null];
-                }
-            });
-        });
-    };
     WeatherApplet.prototype.ProcessWeatherData = function (weatherInfo, locationData) {
         if (!!locationData) {
             this.weather.location.city = locationData.city;
@@ -497,9 +596,12 @@ var WeatherApplet = (function (_super) {
             this.weather.location.timeZone = weatherInfo.location.timeZone;
         if (!!weatherInfo.location.url)
             this.weather.location.url = weatherInfo.location.url;
+        if (!!weatherInfo.location.distanceFrom)
+            this.weather.location.distanceFrom = weatherInfo.location.distanceFrom;
         if (!!weatherInfo.extra_field)
             this.weather.extra_field = weatherInfo.extra_field;
         this.forecasts = weatherInfo.forecasts;
+        this.hourlyForecasts = (!weatherInfo.hourlyForecasts) ? [] : weatherInfo.hourlyForecasts;
     };
     WeatherApplet.prototype.wipeData = function () {
         if (this.weather == null) {
@@ -539,6 +641,7 @@ var WeatherApplet = (function (_super) {
         this.weather.location.timeZone = null;
         this.weather.location.tzOffset = null;
         this.weather.location.url = null;
+        this.weather.location.distanceFrom = null;
         this.weather.coord.lat = null;
         this.weather.coord.lon = null;
         this.weather.sunrise = null;
@@ -553,6 +656,7 @@ var WeatherApplet = (function (_super) {
         this.weather.condition.icon = null;
         this.weather.extra_field = null;
         this.forecasts = [];
+        this.hourlyForecasts = [];
     };
     ;
     WeatherApplet.prototype.DisplayError = function (title, msg) {
@@ -563,10 +667,14 @@ var WeatherApplet = (function (_super) {
     };
     ;
     WeatherApplet.prototype.HandleError = function (error) {
-        if (this.encounteredError)
+        if (error == null)
+            return;
+        if (this.encounteredError == true)
             return;
         this.encounteredError = true;
+        this.log.Debug("User facing Error received, error: " + JSON.stringify(error, null, 2));
         if (error.type == "hard") {
+            this.log.Debug("Displaying hard error");
             this.ui.rebuild(this.config);
             this.DisplayError(this.errMsg[error.detail], (!error.message) ? "" : error.message);
         }
@@ -584,7 +692,7 @@ var WeatherApplet = (function (_super) {
         var nextRefresh = this.loop.GetSecondsUntilNextRefresh();
         this.log.Error("Retrying in the next " + nextRefresh.toString() + " seconds...");
     };
-    WeatherApplet.prototype.HandleHTTPError = function (service, error, ctx, callback) {
+    WeatherApplet.prototype.HandleHTTPError = function (service, error, ctx, override) {
         var uiError = {
             type: "soft",
             detail: "unknown",
@@ -600,8 +708,9 @@ var WeatherApplet = (function (_super) {
             uiError.code = error.code;
             if (error.message == "bad api response - non json")
                 uiError.type = "hard";
-            if (!!callback && callback instanceof Function)
-                uiError = callback(error, uiError);
+            if (!!override && override instanceof Function) {
+                uiError = override(error, uiError);
+            }
         }
         ctx.HandleError(uiError);
     };
@@ -610,6 +719,7 @@ var WeatherApplet = (function (_super) {
 var Log = (function () {
     function Log(_instanceId) {
         this.debug = false;
+        this.level = 1;
         this.ID = _instanceId;
         this.appletDir = imports.ui.appletManager.appletMeta[UUID].path;
         this.debug = this.DEBUG();
@@ -643,6 +753,11 @@ var Log = (function () {
             this.Print(message);
         }
     };
+    Log.prototype.Debug2 = function (message) {
+        if (this.debug && this.level > 1) {
+            this.Print(message);
+        }
+    };
     Log.prototype.GetErrorLine = function () {
         var arr = (new Error).stack.split("\n").slice(-2)[0].split('/').slice(-1)[0];
         return arr;
@@ -651,38 +766,184 @@ var Log = (function () {
 }());
 var UI = (function () {
     function UI(app, orientation) {
+        this.hourlyToggled = false;
+        this.hourlyNeverOpened = true;
+        this.lightTheme = false;
         this.app = app;
         this.menuManager = new PopupMenuManager(this.app);
         this.menu = new AppletPopupMenu(this.app, orientation);
         this.menu.box.add_style_class_name(STYLE_WEATHER_MENU);
         this.app.log.Debug("Popup Menu applied classes are: " + this.menu.box.get_style_class_name());
         this.menuManager.addMenu(this.menu);
+        this.menuManager._signals.connect(this.menu, "open-state-changed", this.PopupMenuToggled, this);
+        this.signals = new SignalManager();
+        this.lightTheme = this.IsLightTheme();
         this.BuildPopupMenu();
+        this.signals.connect(themeManager, 'theme-set', this.OnThemeChanged, this);
     }
+    UI.prototype.OnThemeChanged = function () {
+        this.hourlyNeverOpened = true;
+        this.HideHourlyWeather();
+        var newThemeIsLight = this.IsLightTheme();
+        if (newThemeIsLight != this.lightTheme) {
+            this.lightTheme = newThemeIsLight;
+        }
+        this.app.refreshAndRebuild();
+    };
+    UI.prototype.IsLightTheme = function () {
+        var color = this.menu.actor.get_theme_node().get_background_color();
+        var luminance = (2126 * color.red + 7152 * color.green + 722 * color.blue) / 10000 / 255;
+        this.app.log.Debug("Theme is Light: " + (luminance > 0.5));
+        return (luminance > 0.5);
+    };
+    UI.prototype.ForegroundColor = function () {
+        var hex = this.menu.actor.get_theme_node().get_foreground_color().to_string().substring(0, 7);
+        return hex;
+    };
+    UI.prototype.GetTextColorStyle = function () {
+        var hexColor = null;
+        if (this.lightTheme) {
+            hexColor = shadeHexColor(this.ForegroundColor(), -0.40);
+        }
+        return "color: " + hexColor;
+    };
+    UI.prototype.PopupMenuToggled = function (caller, data) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        if (!(data == false)) return [3, 2];
+                        return [4, delay(100)];
+                    case 1:
+                        _a.sent();
+                        this.HideHourlyWeather();
+                        _a.label = 2;
+                    case 2: return [2];
+                }
+            });
+        });
+    };
     UI.prototype.BuildPopupMenu = function () {
+        var _this = this;
         this._currentWeather = new Bin({ style_class: STYLE_CURRENT });
         this._futureWeather = new Bin({ style_class: STYLE_FORECAST });
-        this._separatorArea = new DrawingArea({ style_class: STYLE_POPUP_SEPARATOR_MENU_ITEM });
-        this._separatorArea.connect(SIGNAL_REPAINT, Lang.bind(this, this._onSeparatorAreaRepaint));
+        this._separatorArea = new PopupSeparatorMenuItem();
+        this._separatorAreaHourly = new PopupSeparatorMenuItem();
+        this._separatorArea2 = new PopupSeparatorMenuItem();
+        this._separatorArea.actor.remove_style_class_name("popup-menu-item");
+        this._separatorAreaHourly.actor.remove_style_class_name("popup-menu-item");
+        this._separatorArea2.actor.remove_style_class_name("popup-menu-item");
+        this._hourlyScrollView = new ScrollView({
+            hscrollbar_policy: PolicyType.AUTOMATIC,
+            vscrollbar_policy: PolicyType.NEVER,
+            x_fill: true,
+            y_fill: true,
+            y_align: Align.MIDDLE,
+            x_align: Align.MIDDLE
+        });
+        this._hourlyScrollView.overlay_scrollbars = true;
+        var vscroll = this._hourlyScrollView.get_vscroll_bar();
+        vscroll.connect("scroll-start", function () { _this.menu.passEvents = true; });
+        vscroll.connect("scroll-stop", function () { _this.menu.passEvents = false; });
+        var hscroll = this._hourlyScrollView.get_hscroll_bar();
+        hscroll.connect("scroll-start", function () { _this.menu.passEvents = true; });
+        hscroll.connect("scroll-stop", function () { _this.menu.passEvents = false; });
+        this._separatorAreaHourly.actor.hide();
+        this._hourlyScrollView.hide();
+        this._hourlyScrollView.set_clip_to_allocation(true);
+        this._hourlyBox = new BoxLayout({ style_class: "hourly-box" });
+        this._hourlyScrollView.add_actor(this._hourlyBox);
+        this._bar = new BoxLayout({ vertical: false, style_class: STYLE_BAR });
         var mainBox = new BoxLayout({ vertical: true });
         mainBox.add_actor(this._currentWeather);
-        mainBox.add_actor(this._separatorArea);
+        mainBox.add_actor(this._separatorAreaHourly.actor);
+        mainBox.add_actor(this._hourlyScrollView);
+        mainBox.add_actor(this._separatorArea.actor);
         mainBox.add_actor(this._futureWeather);
+        mainBox.add_actor(this._separatorArea2.actor);
+        mainBox.add_actor(this._bar);
         this.menu.addActor(mainBox);
     };
     UI.prototype.rebuild = function (config) {
         this.showLoadingUi();
         this.rebuildCurrentWeatherUi(config);
+        this.rebuildHourlyWeatherUi(config);
         this.rebuildFutureWeatherUi(config);
+        this.rebuildBar(config);
+        this.hourlyNeverOpened = true;
     };
     UI.prototype.UpdateIconType = function (iconType) {
+        if (iconType == IconType.FULLCOLOR && this.app.config._useCustomMenuIcons)
+            return;
         this._currentWeatherIcon.icon_type = iconType;
         for (var i = 0; i < this._forecast.length; i++) {
             this._forecast[i].Icon.icon_type = iconType;
         }
+        for (var i = 0; i < this._hourlyForecasts.length; i++) {
+            this._hourlyForecasts[i].Icon.icon_type = iconType;
+        }
     };
     UI.prototype.DisplayErrorMessage = function (msg) {
-        this._currentWeatherSunset.text = msg;
+        this._timestamp.text = msg;
+    };
+    UI.prototype.ShowHourlyWeather = function () {
+        var _this = this;
+        if (this.hourlyNeverOpened) {
+            this.hourlyNeverOpened = false;
+            this._hourlyScrollView.show();
+            this._hourlyScrollView.hide();
+        }
+        var _a = this._hourlyScrollView.get_preferred_height(-1), minHeight = _a[0], naturalHeight = _a[1];
+        var _b = this._hourlyScrollView.get_preferred_width(-1), minWidth = _b[0], naturalWidth = _b[1];
+        this._hourlyScrollView.set_width(minWidth);
+        this._separatorAreaHourly.actor.show();
+        if (!!this._hourlyButton.child)
+            this._hourlyButton.child.icon_name = "custom-up-arrow-symbolic";
+        this._hourlyScrollView.show();
+        if (global.settings.get_boolean("desktop-effects-on-menus")) {
+            this._hourlyScrollView.height = 0;
+            addTween(this._hourlyScrollView, {
+                height: naturalHeight,
+                time: 0.25,
+                onUpdate: function () { },
+                onComplete: function () {
+                    _this._hourlyScrollView.set_height(naturalHeight);
+                }
+            });
+        }
+        this.hourlyToggled = true;
+    };
+    UI.prototype.HideHourlyWeather = function () {
+        var _this = this;
+        this._separatorAreaHourly.actor.hide();
+        var hscroll = this._hourlyScrollView.get_hscroll_bar();
+        if (!!this._hourlyButton.child)
+            this._hourlyButton.child.icon_name = "custom-down-arrow-symbolic";
+        if (global.settings.get_boolean("desktop-effects-on-menus")) {
+            addTween(this._hourlyScrollView, {
+                height: 0,
+                time: 0.25,
+                onUpdate: function () { },
+                onComplete: function () {
+                    _this._hourlyScrollView.set_height(-1);
+                    _this._hourlyScrollView.hide();
+                    hscroll.get_adjustment().set_value(0);
+                }
+            });
+        }
+        else {
+            this._hourlyScrollView.set_height(-1);
+            this._hourlyScrollView.hide();
+        }
+        this.hourlyToggled = false;
+    };
+    UI.prototype.ToggleHourlyWeather = function () {
+        if (this.hourlyToggled) {
+            this.HideHourlyWeather();
+        }
+        else {
+            this.ShowHourlyWeather();
+        }
     };
     UI.prototype.displayWeather = function (weather, config) {
         try {
@@ -712,19 +973,19 @@ var UI = (function () {
             }
             this.app.SetAppletTooltip(location + " - " + _("As of") + " " + AwareDateString(weather.date, this.app.currentLocale, config._show24Hours));
             this._currentWeatherSummary.text = descriptionCondition;
-            var iconname = weather.condition.icon;
-            if (iconname == null) {
-                iconname = "weather-severe-alert";
+            var iconName = weather.condition.icon;
+            if (iconName == null) {
+                iconName = "weather-severe-alert";
             }
             if (config._useCustomMenuIcons) {
                 this._currentWeatherIcon.icon_name = weather.condition.customIcon;
                 this.UpdateIconType(IconType.SYMBOLIC);
             }
             else {
-                this._currentWeatherIcon.icon_name = iconname;
+                this._currentWeatherIcon.icon_name = iconName;
                 this.UpdateIconType(config.IconType());
             }
-            this.app.SetAppletIcon(iconname);
+            this.app.SetAppletIcon(iconName);
             var temp = "";
             if (weather.temperature != null) {
                 temp = TempToUserConfig(weather.temperature, config._temperatureUnit, config._tempRussianStyle);
@@ -789,6 +1050,8 @@ var UI = (function () {
             }
             this._currentWeatherLocation.label = location;
             this._currentWeatherLocation.url = weather.location.url;
+            if (!weather.location.url)
+                this._locationButton.disable();
             var sunriseText = "";
             var sunsetText = "";
             if (weather.sunrise != null && weather.sunset != null && config._showSunrise) {
@@ -807,7 +1070,10 @@ var UI = (function () {
     ;
     UI.prototype.displayForecast = function (weather, forecasts, config) {
         try {
-            for (var i = 0; i < this._forecast.length; i++) {
+            if (!forecasts)
+                return false;
+            var len = Math.min(this._forecast.length, forecasts.length);
+            for (var i = 0; i < len; i++) {
                 var forecastData = forecasts[i];
                 var forecastUi = this._forecast[i];
                 var t_low = TempToUserConfig(forecastData.temp_min, config._temperatureUnit, config._tempRussianStyle);
@@ -841,33 +1107,64 @@ var UI = (function () {
             return true;
         }
         catch (e) {
+            this.app.HandleError({
+                type: "hard",
+                detail: "unknown",
+                message: "Forecast parsing failed: " + e.toString(),
+                userError: false
+            });
             this.app.log.Error("DisplayForecastError " + e);
             return false;
         }
     };
     ;
+    UI.prototype.displayBar = function (weather, provider, config) {
+        this._providerCredit.label = _("Powered by") + " " + provider.prettyName;
+        this._providerCredit.url = provider.website;
+        this._timestamp.text = _("As of") + " " + AwareDateString(weather.date, this.app.currentLocale, config._show24Hours);
+        if (weather.location.distanceFrom != null) {
+            this._timestamp.text += (", " + MetreToUserUnits(weather.location.distanceFrom, this.app.config._distanceUnit)
+                + this.BigDistanceUnitFor(this.app.config._distanceUnit) + " " + _("from you"));
+        }
+        return true;
+    };
+    UI.prototype.displayHourlyForecast = function (forecasts, config, tz) {
+        var max = Math.min(forecasts.length, this._hourlyForecasts.length);
+        for (var index = 0; index < max; index++) {
+            var hour = forecasts[index];
+            var ui = this._hourlyForecasts[index];
+            ui.Hour.text = AwareDateString(hour.date, this.app.currentLocale, config._show24Hours, tz);
+            ui.Temperature.text = TempToUserConfig(hour.temp, config._temperatureUnit, config._tempRussianStyle) + " " + this.unitToUnicode(config._temperatureUnit);
+            ui.Icon.icon_name = (config._useCustomMenuIcons) ? hour.condition.customIcon : hour.condition.icon;
+            hour.condition.main = capitalizeFirstLetter(hour.condition.main);
+            if (config._translateCondition)
+                hour.condition.main = _(hour.condition.main);
+            ui.Summary.text = hour.condition.main;
+            if (!!hour.precipitation && hour.precipitation.type != "none") {
+                var precipitationText = null;
+                if (!!hour.precipitation.volume && hour.precipitation.volume > 0) {
+                    precipitationText = MillimeterToUserUnits(hour.precipitation.volume, this.app.config._distanceUnit) + " " + ((this.app.config._distanceUnit == "metric") ? _("mm") : _("in"));
+                }
+                if (!!hour.precipitation.chance) {
+                    precipitationText = (precipitationText == null) ? "" : (precipitationText + ", ");
+                    precipitationText += (Math.round(hour.precipitation.chance).toString() + "%");
+                }
+                if (precipitationText != null)
+                    ui.Precipitation.text = precipitationText;
+            }
+        }
+        if (max <= 0)
+            this.HideHourlyToggle();
+        return true;
+    };
     UI.prototype.unitToUnicode = function (unit) {
         return unit == "fahrenheit" ? '\u2109' : '\u2103';
     };
-    UI.prototype._onSeparatorAreaRepaint = function (area) {
-        var cr = area.get_context();
-        var themeNode = area.get_theme_node();
-        var _a = area.get_surface_size(), width = _a[0], height = _a[1];
-        var margin = themeNode.get_length('-margin-horizontal');
-        var gradientHeight = themeNode.get_length('-gradient-height');
-        var startColor = themeNode.get_color('-gradient-start');
-        var endColor = themeNode.get_color('-gradient-end');
-        var gradientWidth = (width - margin * 2);
-        var gradientOffset = (height - gradientHeight) / 2;
-        var pattern = new LinearGradient(margin, gradientOffset, width - margin, gradientOffset + gradientHeight);
-        pattern.addColorStopRGBA(0, startColor.red / 255, startColor.green / 255, startColor.blue / 255, startColor.alpha / 255);
-        pattern.addColorStopRGBA(0.5, endColor.red / 255, endColor.green / 255, endColor.blue / 255, endColor.alpha / 255);
-        pattern.addColorStopRGBA(1, startColor.red / 255, startColor.green / 255, startColor.blue / 255, startColor.alpha / 255);
-        cr.setSource(pattern);
-        cr.rectangle(margin, gradientOffset, gradientWidth, gradientHeight);
-        cr.fill();
+    UI.prototype.BigDistanceUnitFor = function (unit) {
+        if (unit == "imperial")
+            return _("mi");
+        return _("km");
     };
-    ;
     UI.prototype.destroyCurrentWeather = function () {
         if (this._currentWeather.get_child() != null)
             this._currentWeather.get_child().destroy();
@@ -876,9 +1173,16 @@ var UI = (function () {
         if (this._futureWeather.get_child() != null)
             this._futureWeather.get_child().destroy();
     };
+    UI.prototype.destroyBar = function () {
+        this._bar.destroy_all_children();
+    };
+    UI.prototype.destroyHourlyWeather = function () {
+        this._hourlyBox.destroy_all_children();
+    };
     UI.prototype.showLoadingUi = function () {
         this.destroyCurrentWeather();
         this.destroyFutureWeather();
+        this.destroyBar();
         this._currentWeather.set_child(new Label({
             text: _('Loading current weather ...')
         }));
@@ -897,41 +1201,46 @@ var UI = (function () {
             icon_name: APPLET_ICON,
             style_class: STYLE_ICON
         });
-        this._currentWeatherLocation = new Button({ reactive: true, label: _('Refresh'), });
-        this._currentWeatherLocation.style_class = STYLE_LOCATION_LINK;
+        this._locationButton = new WeatherButton({ reactive: true, label: _('Refresh'), });
+        this._currentWeatherLocation = this._locationButton.actor;
         this._currentWeatherLocation.connect(SIGNAL_CLICKED, Lang.bind(this, function () {
-            if (this._currentWeatherLocation.url == null) {
-                this.refreshWeather();
-            }
-            else {
-                imports.gi.Gio.app_info_launch_default_for_uri(this._currentWeatherLocation.url, global.create_app_launch_context());
-            }
+            if (this.app.encounteredError)
+                this.app.refreshWeather(true);
+            else if (this._currentWeatherLocation.url == null)
+                return;
+            else
+                this.app.OpenUrl(this._currentWeatherLocation);
         }));
         this._currentWeatherSummary = new Label({ text: _('Loading ...'), style_class: STYLE_SUMMARY });
-        this._currentWeatherSunrise = new Label(textOb);
-        this._currentWeatherSunset = new Label(textOb);
+        this._currentWeatherSunrise = new Label({ text: ELLIPSIS, style: this.GetTextColorStyle() });
+        this._currentWeatherSunset = new Label({ text: ELLIPSIS, style: this.GetTextColorStyle() });
         var sunriseBox = new BoxLayout();
-        var sunriseTextBin = new Bin();
-        sunriseTextBin.set_child(this._currentWeatherSunrise);
-        var sunriseIcon = new Icon({
-            icon_name: "sunrise-symbolic",
-            icon_type: IconType.SYMBOLIC,
-            icon_size: 25
-        });
-        if (config._showSunrise)
-            sunriseBox.add_actor(sunriseIcon);
-        sunriseBox.add_actor(sunriseTextBin);
         var sunsetBox = new BoxLayout();
-        var sunsetTextBin = new Bin();
-        sunsetTextBin.set_child(this._currentWeatherSunset);
-        var sunsetIcon = new Icon({
-            icon_name: "sunset-symbolic",
-            icon_type: IconType.SYMBOLIC,
-            icon_size: 25
-        });
-        if (config._showSunrise)
+        if (config._showSunrise) {
+            var sunsetIcon = new Icon({
+                icon_name: "sunset-symbolic",
+                icon_type: IconType.SYMBOLIC,
+                icon_size: 25,
+                style: this.GetTextColorStyle()
+            });
+            var sunriseIcon = new Icon({
+                icon_name: "sunrise-symbolic",
+                icon_type: IconType.SYMBOLIC,
+                icon_size: 25,
+                style: this.GetTextColorStyle()
+            });
+            sunriseBox.add_actor(sunriseIcon);
             sunsetBox.add_actor(sunsetIcon);
-        sunsetBox.add_actor(sunsetTextBin);
+        }
+        var textOptions = {
+            x_fill: false,
+            x_align: Align.START,
+            y_align: Align.MIDDLE,
+            y_fill: false,
+            expand: true
+        };
+        sunriseBox.add(this._currentWeatherSunrise, textOptions);
+        sunsetBox.add(this._currentWeatherSunset, textOptions);
         var ab_spacerlabel = new Label({ text: BLANK });
         var bb_spacerlabel = new Label({ text: BLANK });
         var sunBox = new BoxLayout({ style_class: STYLE_ASTRONOMY });
@@ -950,13 +1259,13 @@ var UI = (function () {
         this._currentWeatherPressure = new Label(textOb);
         this._currentWeatherWind = new Label(textOb);
         this._currentWeatherApiUnique = new Label({ text: '' });
-        this._currentWeatherApiUniqueCap = new Label({ text: '' });
+        this._currentWeatherApiUniqueCap = new Label({ text: '', style: this.GetTextColorStyle() });
         var rb_captions = new BoxLayout({ vertical: true, style_class: STYLE_DATABOX_CAPTIONS });
         var rb_values = new BoxLayout({ vertical: true, style_class: STYLE_DATABOX_VALUES });
-        rb_captions.add_actor(new Label({ text: _('Temperature:') }));
-        rb_captions.add_actor(new Label({ text: _('Humidity:') }));
-        rb_captions.add_actor(new Label({ text: _('Pressure:') }));
-        rb_captions.add_actor(new Label({ text: _('Wind:') }));
+        rb_captions.add_actor(new Label({ text: _('Temperature:'), style: this.GetTextColorStyle() }));
+        rb_captions.add_actor(new Label({ text: _('Humidity:'), style: this.GetTextColorStyle() }));
+        rb_captions.add_actor(new Label({ text: _('Pressure:'), style: this.GetTextColorStyle() }));
+        rb_captions.add_actor(new Label({ text: _('Wind:'), style: this.GetTextColorStyle() }));
         rb_captions.add_actor(this._currentWeatherApiUniqueCap);
         rb_values.add_actor(this._currentWeatherTemperature);
         rb_values.add_actor(this._currentWeatherHumidity);
@@ -976,42 +1285,149 @@ var UI = (function () {
     };
     ;
     UI.prototype.rebuildFutureWeatherUi = function (config) {
+        var _a;
         this.destroyFutureWeather();
         this._forecast = [];
-        this._forecastBox = new BoxLayout({
-            vertical: config._verticalOrientation,
+        this._forecastBox = new GridLayout({
+            orientation: config._verticalOrientation
+        });
+        this._forecastBox.set_column_homogeneous(true);
+        var table = new Widget({
+            layout_manager: this._forecastBox,
             style_class: STYLE_FORECAST_CONTAINER
         });
-        this._futureWeather.set_child(this._forecastBox);
-        for (var i = 0; i < config._forecastDays; i++) {
-            var forecastWeather = {
-                Icon: new Icon,
-                Day: new Label,
-                Summary: new Label,
-                Temperature: new Label,
-            };
+        this._futureWeather.set_child(table);
+        var maxDays = this.app.GetMaxForecastDays();
+        var maxRow = config._forecastRows;
+        var maxCol = config._forecastColumns;
+        if (config._verticalOrientation) {
+            _a = [maxCol, maxRow], maxRow = _a[0], maxCol = _a[1];
+        }
+        var curRow = 0;
+        var curCol = 0;
+        for (var i = 0; i < maxDays; i++) {
+            var forecastWeather = {};
+            if (curCol >= maxCol) {
+                curRow++;
+                curCol = 0;
+            }
+            if (curRow >= maxRow)
+                break;
             forecastWeather.Icon = new Icon({
                 icon_type: config.IconType(),
                 icon_size: 48,
                 icon_name: APPLET_ICON,
                 style_class: STYLE_FORECAST_ICON
             });
-            forecastWeather.Day = new Label({ style_class: STYLE_FORECAST_DAY });
-            forecastWeather.Summary = new Label({ style_class: STYLE_FORECAST_SUMMARY });
-            forecastWeather.Temperature = new Label({ style_class: STYLE_FORECAST_TEMPERATURE });
-            var dataBin = new Bin();
-            var dataBox = new BoxLayout({ vertical: true, style_class: STYLE_FORECAST_DATABOX });
-            dataBox.add_actor(forecastWeather.Day);
-            dataBox.add_actor(forecastWeather.Summary);
-            dataBox.add_actor(forecastWeather.Temperature);
-            dataBin.set_child(dataBox);
-            var forecastBox = new BoxLayout({
+            forecastWeather.Day = new Label({
+                style_class: STYLE_FORECAST_DAY,
+                reactive: true,
+                style: this.GetTextColorStyle()
+            });
+            forecastWeather.Summary = new Label({
+                style_class: STYLE_FORECAST_SUMMARY,
+                reactive: true
+            });
+            forecastWeather.Temperature = new Label({
+                style_class: STYLE_FORECAST_TEMPERATURE
+            });
+            var by = new BoxLayout({
+                vertical: true,
+                style_class: STYLE_FORECAST_DATABOX
+            });
+            by.add_actor(forecastWeather.Day);
+            by.add_actor(forecastWeather.Summary);
+            by.add_actor(forecastWeather.Temperature);
+            var bb = new BoxLayout({
                 style_class: STYLE_FORECAST_BOX
             });
-            forecastBox.add_actor(forecastWeather.Icon);
-            forecastBox.add_actor(dataBin);
+            bb.add_actor(forecastWeather.Icon);
+            bb.add_actor(by);
             this._forecast[i] = forecastWeather;
-            this._forecastBox.add_actor(forecastBox);
+            if (!config._verticalOrientation) {
+                this._forecastBox.attach(bb, curCol, curRow, 1, 1);
+            }
+            else {
+                this._forecastBox.attach(bb, curRow, curCol, 1, 1);
+            }
+            curCol++;
+        }
+    };
+    UI.prototype.rebuildBar = function (config) {
+        this.destroyBar();
+        this._timestamp = new Label({ text: "Placeholder" });
+        this._bar.add(this._timestamp, {
+            x_fill: false,
+            x_align: Align.START,
+            y_align: Align.MIDDLE,
+            y_fill: false,
+            expand: true
+        });
+        this._hourlyButton = new WeatherButton({
+            reactive: true,
+            can_focus: true,
+            child: new Icon({
+                icon_type: IconType.SYMBOLIC,
+                icon_size: 12,
+                icon_name: "custom-down-arrow-symbolic"
+            }),
+        }).actor;
+        this._hourlyButton.connect(SIGNAL_CLICKED, Lang.bind(this, this.ToggleHourlyWeather));
+        this._bar.add(this._hourlyButton, {
+            x_fill: false,
+            x_align: Align.MIDDLE,
+            y_align: Align.MIDDLE,
+            y_fill: false,
+            expand: true
+        });
+        if (this.app.GetMaxHourlyForecasts() <= 0) {
+            this.HideHourlyToggle();
+        }
+        this._providerCredit = new WeatherButton({ label: _(ELLIPSIS), reactive: true }).actor;
+        this._providerCredit.connect(SIGNAL_CLICKED, Lang.bind(this, this.app.OpenUrl));
+        this._bar.add(this._providerCredit, {
+            x_fill: false,
+            x_align: Align.END,
+            y_align: Align.MIDDLE,
+            y_fill: false,
+            expand: true
+        });
+    };
+    UI.prototype.HideHourlyToggle = function () {
+        this._hourlyButton.child = null;
+    };
+    UI.prototype.rebuildHourlyWeatherUi = function (config) {
+        this.destroyHourlyWeather();
+        var hours = this.app.GetMaxHourlyForecasts();
+        this._hourlyForecasts = [];
+        for (var index = 0; index < hours; index++) {
+            var box = new BoxLayout({ vertical: true });
+            this._hourlyForecasts.push({
+                Hour: new Label({ text: "Hour", style_class: "hourly-time", style: this.GetTextColorStyle() }),
+                Icon: new Icon({
+                    icon_type: config.IconType(),
+                    icon_size: 24,
+                    icon_name: APPLET_ICON,
+                    style_class: "hourly-icon"
+                }),
+                Precipitation: new Label({ text: " ", style_class: "hourly-data" }),
+                Summary: new Label({ text: _(ELLIPSIS), style_class: "hourly-data" }),
+                Temperature: new Label({ text: _(ELLIPSIS), style_class: "hourly-data" })
+            });
+            this._hourlyForecasts[index].Summary.clutter_text.set_line_wrap(true);
+            this._hourlyForecasts[index].Summary.set_width(85);
+            box.add_child(this._hourlyForecasts[index].Hour);
+            box.add_child(this._hourlyForecasts[index].Icon);
+            box.add_child(this._hourlyForecasts[index].Summary);
+            box.add_child(this._hourlyForecasts[index].Temperature);
+            box.add_child(this._hourlyForecasts[index].Precipitation);
+            this._hourlyBox.add(box, {
+                x_fill: true,
+                x_align: Align.MIDDLE,
+                y_align: Align.MIDDLE,
+                y_fill: true,
+                expand: true
+            });
         }
     };
     return UI;
@@ -1021,28 +1437,33 @@ var Config = (function () {
         this.WEATHER_LOCATION = "location";
         this.WEATHER_USE_SYMBOLIC_ICONS_KEY = 'useSymbolicIcons';
         this.KEYS = {
-            WEATHER_DATA_SERVICE: "dataService",
-            WEATHER_API_KEY: "apiKey",
-            WEATHER_TEMPERATURE_UNIT_KEY: "temperatureUnit",
-            WEATHER_TEMPERATURE_HIGH_FIRST_KEY: "temperatureHighFirst",
-            WEATHER_WIND_SPEED_UNIT_KEY: "windSpeedUnit",
-            WEATHER_CITY_KEY: "locationLabelOverride",
-            WEATHER_TRANSLATE_CONDITION_KEY: "translateCondition",
-            WEATHER_VERTICAL_ORIENTATION_KEY: "verticalOrientation",
-            WEATHER_SHOW_TEXT_IN_PANEL_KEY: "showTextInPanel",
-            WEATHER_TEMP_TEXT_OVERRIDE: "tempTextOverride",
-            WEATHER_SHOW_COMMENT_IN_PANEL_KEY: "showCommentInPanel",
-            WEATHER_SHOW_SUNRISE_KEY: "showSunrise",
-            WEATHER_SHOW_24HOURS_KEY: "show24Hours",
-            WEATHER_FORECAST_DAYS: "forecastDays",
-            WEATHER_REFRESH_INTERVAL: "refreshInterval",
-            WEATHER_PRESSURE_UNIT_KEY: "pressureUnit",
-            WEATHER_SHORT_CONDITIONS_KEY: "shortConditions",
-            WEATHER_MANUAL_LOCATION: "manualLocation",
-            WEATHER_USE_CUSTOM_APPLETICONS_KEY: 'useCustomAppletIcons',
-            WEATHER_USE_CUSTOM_MENUICONS_KEY: "useCustomMenuIcons",
-            WEATHER_RUSSIAN_STYLE: "tempRussianStyle"
+            DATA_SERVICE: "dataService",
+            API_KEY: "apiKey",
+            TEMPERATURE_UNIT_KEY: "temperatureUnit",
+            TEMPERATURE_HIGH_FIRST: "temperatureHighFirst",
+            WIND_SPEED_UNIT: "windSpeedUnit",
+            DISTANCE_UNIT: "distanceUnit",
+            CITY: "locationLabelOverride",
+            TRANSLATE_CONDITION: "translateCondition",
+            VERTICAL_ORIENTATION: "verticalOrientation",
+            SHOW_TEXT_IN_PANEL: "showTextInPanel",
+            TEMP_TEXT_OVERRIDE: "tempTextOverride",
+            SHOW_COMMENT_IN_PANEL: "showCommentInPanel",
+            SHOW_SUNRISE: "showSunrise",
+            SHOW_24HOURS: "show24Hours",
+            FORECAST_DAYS: "forecastDays",
+            FORECAST_HOURS: "forecastHours",
+            FORECAST_COLS: "forecastColumns",
+            FORECAST_ROWS: "forecastRows",
+            REFRESH_INTERVAL: "refreshInterval",
+            PRESSURE_UNIT: "pressureUnit",
+            SHORT_CONDITIONS: "shortConditions",
+            MANUAL_LOCATION: "manualLocation",
+            USE_CUSTOM_APPLETICONS: 'useCustomAppletIcons',
+            USE_CUSTOM_MENUICONS: "useCustomMenuIcons",
+            RUSSIAN_STYLE: "tempRussianStyle",
         };
+        this.doneTypingLocation = null;
         this.app = app;
         this.settings = new AppletSettings(this, UUID, instanceID);
         this.BindSettings();
@@ -1051,16 +1472,16 @@ var Config = (function () {
         for (var k in this.KEYS) {
             var key = this.KEYS[k];
             var keyProp = "_" + key;
-            this.settings.bindProperty(BindingDirection.IN, key, keyProp, Lang.bind(this.app, this.app.refreshAndRebuild), null);
+            this.settings.bindProperty(BindingDirection.IN, key, keyProp, Lang.bind(this, this.OnSettingChanged), null);
         }
-        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, this.WEATHER_LOCATION, ("_" + this.WEATHER_LOCATION), Lang.bind(this.app, this.app.refreshAndRebuild), null);
+        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, this.WEATHER_LOCATION, ("_" + this.WEATHER_LOCATION), Lang.bind(this, this.OnLocationChanged), null);
         this.settings.bindProperty(BindingDirection.IN, "keybinding", "keybinding", Lang.bind(this.app, this.app._onKeySettingsUpdated), null);
         keybindingManager.addHotKey(UUID, this.keybinding, Lang.bind(this.app, this.app.on_applet_clicked));
-        this.settings.connect(SIGNAL_CHANGED + this.WEATHER_USE_SYMBOLIC_ICONS_KEY, Lang.bind(this, function () {
-            this.app.ui.UpdateIconType(this.IconType());
-            this.app.refreshWeather();
-            this.app.log.Debug("Symbolic icon setting changed");
-        }));
+        this.settings.connect(SIGNAL_CHANGED + this.WEATHER_USE_SYMBOLIC_ICONS_KEY, Lang.bind(this, this.IconTypeChanged));
+    };
+    Config.prototype.IconTypeChanged = function () {
+        this.app.ui.UpdateIconType(this.IconType());
+        this.app.log.Debug("Symbolic icon setting changed");
     };
     Config.prototype.IconType = function () {
         return this.settings.getValue(this.WEATHER_USE_SYMBOLIC_ICONS_KEY) ?
@@ -1068,6 +1489,20 @@ var Config = (function () {
             IconType.FULLCOLOR;
     };
     ;
+    Config.prototype.OnLocationChanged = function () {
+        this.app.log.Debug("User changed location, waiting 3 seconds...");
+        if (this.doneTypingLocation != null)
+            clearTimeout(this.doneTypingLocation);
+        this.doneTypingLocation = setTimeout(Lang.bind(this, this.DoneTypingLocation), 3000);
+    };
+    Config.prototype.DoneTypingLocation = function () {
+        this.app.log.Debug("User has finished typing, beginning refresh");
+        this.doneTypingLocation = null;
+        this.app.refreshAndRebuild();
+    };
+    Config.prototype.OnSettingChanged = function () {
+        this.app.refreshAndRebuild();
+    };
     Config.prototype.SetLocation = function (value) {
         this.settings.setValue(this.WEATHER_LOCATION, value);
     };
@@ -1078,6 +1513,60 @@ var Config = (function () {
         return false;
     };
     ;
+    Config.prototype.EnsureLocation = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var location, loc_1, loc, latlong, locationData;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        if (!!this._manualLocation) return [3, 2];
+                        return [4, this.app.locProvider.GetLocation()];
+                    case 1:
+                        location = _a.sent();
+                        if (!location)
+                            return [2, null];
+                        loc_1 = location.lat + "," + location.lon;
+                        this.app.log.Debug("Location setting is now: " + loc_1);
+                        this.SetLocation(loc_1);
+                        return [2, location];
+                    case 2:
+                        loc = this._location;
+                        if (loc == undefined || loc.trim() == "") {
+                            this.app.HandleError({
+                                type: "hard",
+                                detail: "no location",
+                                userError: true,
+                                message: _("Make sure you entered a location or use Automatic location instead")
+                            });
+                            return [2, null];
+                        }
+                        if (isCoordinate(loc)) {
+                            loc = loc.replace(" ", "");
+                            latlong = loc.split(",");
+                            return [2, {
+                                    lat: parseFloat(latlong[0]),
+                                    lon: parseFloat(latlong[1]),
+                                    city: null,
+                                    country: null,
+                                    mobile: null,
+                                    timeZone: null
+                                }];
+                        }
+                        this.app.log.Debug("Location is text, geolocating...");
+                        return [4, this.app.geoLocationService.GetLocation(loc)];
+                    case 3:
+                        locationData = _a.sent();
+                        if (locationData == null)
+                            return [2, null];
+                        if (!!locationData.address_string) {
+                            this.app.log.Debug("Address found via address search, placing found full address '" + locationData.address_string + "' back to location entry");
+                            this.SetLocation(locationData.address_string);
+                        }
+                        return [2, locationData];
+                }
+            });
+        });
+    };
     return Config;
 }());
 var WeatherLoop = (function () {
@@ -1111,7 +1600,7 @@ var WeatherLoop = (function () {
                         _a.trys.push([1, 7, , 8]);
                         if (this.IsStray())
                             return [2];
-                        if (this.app.encounteredError)
+                        if (this.app.encounteredError == true)
                             this.IncrementErrorCount();
                         this.ValidateLastUpdate();
                         if (!this.pauseRefresh) return [3, 3];
@@ -1122,15 +1611,16 @@ var WeatherLoop = (function () {
                         return [3, 0];
                     case 3:
                         if (!(this.errorCount > 0 || this.NextUpdate() < new Date())) return [3, 5];
-                        this.app.log.Debug("Refresh triggered in mainloop with these values: lastUpdated " + ((!this.lastUpdated) ? "null" : this.lastUpdated.toLocaleString())
+                        this.app.log.Debug("Refresh triggered in main loop with these values: lastUpdated " + ((!this.lastUpdated) ? "null" : this.lastUpdated.toLocaleString())
                             + ", errorCount " + this.errorCount.toString() + " , loopInterval " + (this.LoopInterval() / 1000).toString()
                             + " seconds, refreshInterval " + this.app.config._refreshInterval + " minutes");
                         return [4, this.app.refreshWeather(false)];
                     case 4:
                         state = _a.sent();
-                        if (state == "success") {
+                        if (state == "locked")
+                            this.app.log.Print("App locked, refresh skipped in main loop");
+                        if (state == "success" || state == "locked")
                             this.lastUpdated = new Date();
-                        }
                         return [3, 6];
                     case 5:
                         this.app.log.Debug("No need to update yet, skipping");
@@ -1196,6 +1686,93 @@ var WeatherLoop = (function () {
     };
     return WeatherLoop;
 }());
+var WeatherButton = (function () {
+    function WeatherButton(options) {
+        this.signals = new SignalManager();
+        this.disabled = false;
+        this.actor = new Button(options);
+        this.actor.add_style_class_name("popup-menu-item");
+        this.actor.style = 'padding-top: 0px;padding-bottom: 0px; padding-right: 2px; padding-left: 2px; border-radius: 2px;';
+        this.signals.connect(this.actor, 'enter-event', this.handleEnter, this);
+        this.signals.connect(this.actor, 'leave-event', this.handleLeave, this);
+    }
+    WeatherButton.prototype.handleEnter = function (actor) {
+        if (!this.disabled)
+            this.actor.add_style_pseudo_class('active');
+    };
+    WeatherButton.prototype.handleLeave = function () {
+        this.actor.remove_style_pseudo_class('active');
+    };
+    WeatherButton.prototype.disable = function () {
+        this.disabled = true;
+        this.actor.reactive = false;
+    };
+    WeatherButton.prototype.enable = function () {
+        this.disabled = false;
+        this.actor.reactive = true;
+    };
+    return WeatherButton;
+}());
+var GeoLocation = (function () {
+    function GeoLocation(app) {
+        this.url = "https://nominatim.openstreetmap.org/search/";
+        this.params = "?format=json&addressdetails=1";
+        this.app = null;
+        this.cache = {};
+        this.app = app;
+    }
+    GeoLocation.prototype.GetLocation = function (searchText) {
+        return __awaiter(this, void 0, void 0, function () {
+            var cached, locationData, result, e_4;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        searchText = searchText.trim();
+                        cached = get([searchText], this.cache);
+                        if (cached != null) {
+                            this.app.log.Debug("Returning cached geolocation info for '" + searchText + "'.");
+                            return [2, cached];
+                        }
+                        return [4, this.app.LoadJsonAsync(this.url + encodeURIComponent(searchText) + this.params)];
+                    case 1:
+                        locationData = _a.sent();
+                        if (locationData.length == 0) {
+                            this.app.HandleError({
+                                type: "hard",
+                                detail: "bad location format",
+                                message: _("Could not find location based on address, please check if it's right")
+                            });
+                            return [2, null];
+                        }
+                        this.app.log.Debug("Location is found, payload: " + JSON.stringify(locationData, null, 2));
+                        result = {
+                            lat: parseFloat(locationData[0].lat),
+                            lon: parseFloat(locationData[0].lon),
+                            city: locationData[0].address.city || locationData[0].address.town,
+                            country: locationData[0].address.country,
+                            timeZone: null,
+                            mobile: null,
+                            address_string: locationData[0].display_name
+                        };
+                        this.cache[searchText] = result;
+                        return [2, result];
+                    case 2:
+                        e_4 = _a.sent();
+                        this.app.log.Error("Could not geolocate, error: " + JSON.stringify(e_4, null, 2));
+                        this.app.HandleError({
+                            type: "soft",
+                            detail: "bad api response",
+                            message: _("Failed to call Geolocation API, see Looking Glass for errors.")
+                        });
+                        return [2, null];
+                    case 3: return [2];
+                }
+            });
+        });
+    };
+    return GeoLocation;
+}());
 var SIGNAL_CHANGED = 'changed::';
 var SIGNAL_CLICKED = 'clicked';
 var SIGNAL_REPAINT = 'repaint';
@@ -1221,6 +1798,7 @@ var STYLE_POPUP_SEPARATOR_MENU_ITEM = 'popup-separator-menu-item';
 var STYLE_CURRENT = 'current';
 var STYLE_FORECAST = 'forecast';
 var STYLE_WEATHER_MENU = 'weather-menu';
+var STYLE_BAR = 'bottombar';
 var BLANK = '   ';
 var ELLIPSIS = '...';
 var EN_DASH = '\u2013';

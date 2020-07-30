@@ -4,24 +4,24 @@ const GLib = imports.gi.GLib;
 const Gettext = imports.gettext;
 const UUID = "force-quit@cinnamon.org";
 
-Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "./local/share/locale");
+Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
 
 function _(str) {
-    return Gettext.dgettext(UUID, str)
+    return Gettext.dgettext(UUID, str);
 }
 
-function MyApplet(orientation) {
-    this._init(orientation);
+function MyApplet(metadata, orientation, panelHeight, instanceId) {
+    this._init(metadata, orientation, panelHeight, instanceId);
 }
 
 MyApplet.prototype = {
     __proto__: Applet.IconApplet.prototype,
 
-    _init: function(orientation) {
-        Applet.IconApplet.prototype._init.call(this, orientation);
+    _init: function(metadata, orientation, panelHeight, instanceId) {
+        Applet.IconApplet.prototype._init.call(this, orientation, panelHeight, instanceId);
 
         try {
-            this.set_applet_icon_name("window-close");
+            this.set_applet_icon_symbolic_name("window-close");
             this.set_applet_tooltip(_("Click here to kill a window"));
             this.actor.connect('button-release-event', Lang.bind(this, this._onButtonReleaseEvent));
         }
@@ -45,7 +45,7 @@ MyApplet.prototype = {
 
 };
 
-function main(metadata, orientation) {
-    let myApplet = new MyApplet(orientation);
+function main(metadata, orientation, panelHeight, instanceId) {
+    let myApplet = new MyApplet(metadata, orientation, panelHeight, instanceId);
     return myApplet;
 }

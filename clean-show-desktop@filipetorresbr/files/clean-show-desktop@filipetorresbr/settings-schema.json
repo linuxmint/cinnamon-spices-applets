@@ -1,0 +1,87 @@
+{
+ "head" : {
+    "type" : "header",
+    "description" : "Settings"
+ },
+ "peek-at-desktop" : {
+    "type" : "switch",
+    "default" : false,
+    "description": "Peek at the desktop on hover",
+    "tooltip": "Peek at the desktop when hovering the applet"
+ },
+  "peek-blur" : {
+    "type" : "switch",
+    "default" : false,
+    "dependency" : "peek-at-desktop",
+    "indent" : true,
+    "description" : "Blur effect",
+    "tooltip" : "Blur windows when peeking at the desktop"
+ },
+ "peek-delay" : {
+    "type": "spinbutton",
+    "default" : 400,
+    "min" : 0,
+    "max" : 1000,
+    "step" : 50,
+    "units" : "milliseconds",
+    "dependency" : "peek-at-desktop",
+    "indent" : true,
+    "description": "Hover delay",
+    "tooltip": "Delay before Peek shows desktop"
+ },
+ "peek-opacity": {
+    "type": "scale",
+    "default" : 10,
+    "min" : 0,
+    "max" : 255,
+    "step" : 10,
+    "dependency" : "peek-at-desktop",
+    "indent" : true,
+    "description" : "Window opacity",
+    "tooltip" : "Change the opacity of windows when peeking at the desktop"
+ },
+ "width": {
+    "type": "scale",
+    "default" : 1,
+    "min" : 1,
+    "max" : 100,
+    "step" : 1,
+    "units" : "pixels",
+    "description" : "Applet size",
+    "tooltip" : "Adjust this to increase or decrease the width of this applet"
+ },
+ "background": {
+    "type": "colorchooser",
+    "default" : "rgba(000,000,000,0)",
+    "description" : "Fill color",
+    "tooltip" : "Select a fill color"
+ },
+ "border": {
+    "type": "colorchooser",
+    "default" : "rgb(255,255,255)",
+    "description" : "Border color",
+    "tooltip" : "Select a border color"
+ },
+ "on-hover-background": {
+    "type": "colorchooser",
+    "default" : "rgb(255,255,255)",
+    "description" : "Fill color on mouse hover",
+    "tooltip" : "Change the fill color when mouse hover"
+ },
+ "on-hover-border": {
+    "type": "colorchooser",
+    "default" : "rgb(255,255,255)",
+    "description" : "Border color on mouse hover",
+    "tooltip" : "Change the Border color when mouse hover"
+ },
+  "border-width": {
+    "type": "scale",
+    "default" : 1,
+    "min" : 0,
+    "max" : 30,
+    "step" : 1,
+    "units" : "pixels",
+    "description" : "Border width",
+    "tooltip" : "Select the border width"
+ }
+}

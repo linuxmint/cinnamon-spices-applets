@@ -1,44 +1,37 @@
-const Gio = imports.gi.Gio;
-const ByteArray = imports.byteArray;
-const {listDirAsync} = imports.misc.fileUtils;
-const {each} = imports.misc.util;
+const SEARCH_DEBUG = false;
+const Gettext = imports.gettext;
+
+function _(str) {
+    let cinnamonTranslation = Gettext.gettext(str);
+    if (cinnamonTranslation !== str) {
+        return cinnamonTranslation;
+    }
+    return Gettext.dgettext('Cinnamenu@json', str);
+}
+
+const ApplicationType = {
+    _applications: 0,
+    _places: 1,
+    _recent: 2,
+    _providers: 3,
+};
+const AppTypes = Object.keys(ApplicationType);
 
 // Work around Cinnamon#8201
 const tryFn = function(callback, errCallback) {
-  try {
-      return callback();
-  } catch (e) {
-      if (typeof errCallback === 'function') {
-          return errCallback(e);
-      }
-  }
+    try {
+        return callback();
+    } catch (e) {
+        if (typeof errCallback === 'function') {
+            return errCallback(e);
+        }
+    }
 };
 
-// Recursive each wrapper, for asynchronous iteration
-const rEach = (array, cb, finishCb, i = -1) => {
-  i++;
-  if (array[i] === undefined) {
-    if (typeof finishCb === 'function') finishCb();
-    return;
-  }
-  let next = () => rEach(array, cb, finishCb, i);
-  cb(array[i], i, next);
-}
+//=========================================
 
-const sortBy = function(array = [], property = '', direction = 'asc') {
-  let arg;
-  array.sort(function(a, b) {
-    if (!a || !b || !a[property] || !b[property]) {
-      return -1;
-    }
-    if (typeof (a[property] || b[property]) === 'number') {
-      arg = direction === 'asc' ? a[property] - b[property] : b[property] - a[property];
-    } else {
-      arg = direction ===  'asc' ? a[property] > b[property] : a[property] < b[property];
-    }
-    return a[property] === b[property] ? 0 : +(arg) || -1;
-  });
-}
+const Gio = imports.gi.Gio;
+const ByteArray = imports.byteArray;
 
 const readFileAsync = function(file, opts = {utf8: true}) {
   const {utf8} = opts;
@@ -61,151 +54,154 @@ const readFileAsync = function(file, opts = {utf8: true}) {
   });
 };
 
-const writeFileAsync = function(file, data) {
-  return new Promise(function(resolve,  reject) {
-    if (typeof file === 'string' || file instanceof String) {
-      file = Gio.File.new_for_path(file);
-    }
-
-    let write = (stream) => {
-      stream.truncate(0, null);
-      stream.output_stream.write_bytes_async(ByteArray.fromString(String(data)), 0, null, (source, result) => {
-        source.write_bytes_finish(result);
-        source.flush_async(0, null, (source, result) => {
-          source.flush_finish(result);
-          source.close_async(0, null, (source, result) => {
-            resolve(!source.close_finish(result));
-          });
-        });
-      });
-    };
-
-    file.create_readwrite_async(Gio.FileCreateFlags.REPLACE_DESTINATION, 0, null, (source, result) => {
-      tryFn(function() {
-          write(source.create_readwrite_finish(result));
-      }, function(e) {
-        tryFn(function() {
-          file.open_readwrite_async(0, null, (source, result) => {
-            write(source.open_readwrite_finish(result));
-          });
-        }, function(e) {
-          reject(e);
-        });
-      });
-    });
-  });
-}
-
 const readJSONAsync = function(file) {
   return readFileAsync(file).then(function(json) {
     return JSON.parse(json);
-  })
+  });
 };
 
-const copyFileAsync = function(file, destinationFile, userData) {
-  return new Promise(function(resolve, reject) {
-    file.copy_async(
-      destinationFile, // destination
-      Gio.FileCopyFlags.OVERWRITE, // set of Gio.FileCopyFlags
-      0, // IO priority
-      null, // Gio.Cancellable
-      null, // progress callback
-      function(localFile, taskJob) {
-        tryFn(function() {
-          if (!file.copy_finish(taskJob)) return reject(new Error('File cannot be copied.'));
-          resolve(userData);
-        }, (e) => reject(e));
-      }
-    );
-  });
-}
+//===========================================================
 
-const buildSettings = function(fds, knownProviders, schema, schemaFile, backupSchemaFile, next) {
-  // Build the schema file with the available search provider UUIDs.
-  schema.layout.extensionProvidersSection.keys = [];
-  let changed = false;
+const Mainloop = imports.mainloop;
+const Lang = imports.lang;
+const St = imports.gi.St;
+const Main = imports.ui.main;
 
-  let finish = function() {
-    // Write to file if there is a change in providers
-    if (!changed || knownProviders.length === 0) {
-      return next();
+class ShowTooltip {
+    constructor(actor, xpos, ypos, center_x, text) {
+        this.actor = actor;
+        this.xpos = xpos;
+        this.ypos = ypos;
+        this.center_x = center_x;
+        this.text = text;
+        if (this.text && this.text !== '') {
+            this.showTimer = Mainloop.timeout_add(250, Lang.bind(this, this.show));
+        }
     }
 
-    // The default title for the extensions section tells the user no extensions are found.
-    schema.layout.extensionProvidersSection.title = 'Extensions';
-    let json = JSON.stringify(schema);
-    writeFileAsync(schemaFile, json).then(next).catch(function() {
-      // Restore from the backup schema if it exists
-      copyFileAsync(backupSchemaFile, schemaFile).then(next);
-    });
-  }
+    show() {
+        this.showTimer = null;
 
-  rEach(fds, function(fd, i, nextIter) {
-    let [dir, files] = fd;
-    rEach(files, function(file, f, nextIter2) {
-      let name = file.get_name();
-      if (name.indexOf('@') === -1) return nextIter2();
-      readJSONAsync(`${dir.get_path()}/${name}/metadata.json`).then(function(json) {
-        changed = true;
-        knownProviders.push(name);
-        schema.layout.extensionProvidersSection.keys.push(json.uuid);
-        schema[json.uuid] = {
-          type: 'checkbox',
-          default: false,
-          description: json.name,
-          tooltip: json.description,
-          dependency: 'enable-search-providers'
+        this.tooltip = new St.Label({
+            name: 'Tooltip'
+        });
+        this.tooltip.show_on_set_parent = false;
+        Main.uiGroup.add_actor(this.tooltip);
+        this.tooltip.set_text(this.text);
+        this.tooltip.get_clutter_text().set_use_markup(true);
+        this.tooltip.set_style('text-align: left;');
+
+        let tooltipWidth = this.tooltip.get_allocation_box().x2 - this.tooltip.get_allocation_box().x1;
+        let monitor = Main.layoutManager.findMonitorForActor(this.actor);
+        let tooltipLeft = this.xpos;
+        if (this.center_x) {
+            tooltipLeft -= Math.floor(tooltipWidth / 3);
         }
-        nextIter2();
-      }).catch(nextIter2);
-    }, nextIter)
-  }, finish);
-};
+        tooltipLeft = Math.max(tooltipLeft, monitor.x);
+        tooltipLeft = Math.min(tooltipLeft, monitor.x + monitor.width - tooltipWidth);
 
-const setSchema = function(path, categoryButtons, startupCategory, cb) {
-    let schemaFile = Gio.File.new_for_path(path + '/settings-schema.json');
-    let backupSchemaFile = Gio.File.new_for_path(path + '/settings-schema-backup.json');
-    let startupCategoryValid = false;
-    let knownProviders = [];
-    let next = () => cb(knownProviders, startupCategoryValid);
+        this.tooltip.set_position(tooltipLeft, this.ypos);
+        this.tooltip.raise_top();
+        this.tooltip.show();
+    }
 
-    readJSONAsync(schemaFile)
-        .then(function(schema) {
-            each(categoryButtons, function(category) {
-                          schema.startupCategory.options[category.categoryNameText] = category.id;
-                          if (category.id === startupCategory) startupCategoryValid = true; });
-            // Back up the schema file if it doesn't exist.
-            if (!backupSchemaFile.query_exists(null)) {
-                return copyFileAsync(schemaFile, backupSchemaFile, schema);
-            }
-            return Promise.resolve(schema); })
-        .then(function(schema) {
-            let providerFiles = [];
-            let dataDir = Gio.File.new_for_path(global.datadir + '/search_providers');
-            let userDataDir = Gio.File.new_for_path(global.userdatadir + '/search_providers');
-            if (dataDir.query_exists(null)) {
-              listDirAsync(dataDir, (files) => {
-                providerFiles = providerFiles.concat([[dataDir, files]]);
-                if (userDataDir.query_exists(null)) {
-                  listDirAsync(userDataDir, (files) => {
-                    providerFiles = providerFiles.concat([[userDataDir, files]]);
-                    buildSettings(providerFiles, knownProviders, schema, schemaFile, backupSchemaFile, next);
-                  });
-                } else {
-                  buildSettings(providerFiles, knownProviders, schema, schemaFile, backupSchemaFile, next);
+    destroy() {
+        if (this.showTimer) {
+            Mainloop.source_remove(this.showTimer);
+            this.showTimer = null;
+        }
+        if (this.tooltip) {
+            this.tooltip.destroy();
+            this.tooltip = null;
+        }
+    }
+}
+
+//===================================================
+
+const {latinise} = imports.misc.util;
+
+const searchStr = function (q, str) {
+    const highlightMatch = true;
+    if ( !(typeof q === 'string' && q && typeof str === 'string' && str) ) {
+        return { score: 0, result: str };
+    }
+
+    const str2 = latinise(str.toLowerCase());
+    const q2 = q; //latinise(q.toLowerCase()); //already done in doSearch()
+    let score = 0;
+    if ((new RegExp('\\b'+q2)).test(str2)) { //match substring from beginning of words
+        score = 1.2;
+    } else if (str2.indexOf(q2) !== -1) { //else match substring
+        score = 1.1;
+    } else { //else fuzzy match and return
+        const qletters = q2.replace(/\W/g, ''); //remove anything that isn't a letter from query
+        //make regexp. eg. if qletters='abc' then regex='/(a|b|c)+/g'
+        let partregexp = '';
+        for (let i=0; i<qletters.length-1; i++) {
+            partregexp += qletters[i]+'|';
+        }
+        partregexp += qletters[qletters.length-1];
+        const regex = new RegExp('('+partregexp+')+', 'g');
+
+        //find longest substring of str2 made up of letters from qletters
+        const found = str2.match(regex);
+        let length = 0;
+        let longest;
+        if (found) {
+            for(let i=0; i < found.length; i++){
+                if(found[i].length > length){
+                    length = found[i].length;
+                    longest = found[i];
                 }
-              });
-            } else if (userDataDir.query_exists(null)) {
-              listDirAsync(userDataDir, (files) => {
-                buildSettings([[userDataDir, files]], knownProviders, schema, schemaFile, backupSchemaFile, next);
-              });
-            } else {
-              next();
             }
-  }).catch(function(e) {
-    global.log(e);
-    copyFileAsync(backupSchemaFile, schemaFile).then(next);
-  });
+        }
+
+        if (longest) {
+            //get a score for similarity by counting 2 letter pairs (bigrams) that match
+            let bigrams_score;
+            if (qletters.length >= 2) {
+                const max_bigrams = qletters.length -1;
+                let found_bigrams = 0;
+                for (let qi = 0; qi < max_bigrams; qi++ ) {
+                    if (longest.indexOf(qletters[qi] + qletters[qi+1]) >= 0) {
+                        found_bigrams++;
+                    }
+                }
+                bigrams_score = found_bigrams / max_bigrams;
+            } else {
+                bigrams_score = 1;
+            }
+
+            let markup = '';
+            if (highlightMatch) { //highlight match
+                const foundposition = str2.indexOf(longest);
+                markup = str.slice(0, foundposition) + '<b>' +
+                            str.slice(foundposition, foundposition + longest.length) + '</b>' +
+                                                str.slice(foundposition + longest.length, str.length);
+            } else {
+                markup = str;
+            }
+            let score = Math.min(longest.length / q2.length, 1.0) * bigrams_score;
+            if (SEARCH_DEBUG) {
+                markup += ':'+score+':'+bigrams_score;
+            }
+            return {score: score, result: markup};
+        } else {
+            return {score: 0, result: ''};
+        }
+    }
+    //return result of substring match
+    if (highlightMatch) {
+        const foundposition = str2.indexOf(q2);
+        const markup = str.slice(0, foundposition) + '<b>' +
+                                    str.slice(foundposition, foundposition + q.length) + '</b>' +
+                                                    str.slice(foundposition + q.length, str.length);
+        return {score: score, result: markup};
+    } else {
+        return {score: score, result: str};
+    }
 };
 
-module.exports = {tryFn, sortBy, readFileAsync, readJSONAsync, setSchema};
+module.exports = {SEARCH_DEBUG, _, ApplicationType, AppTypes, tryFn, readFileAsync, readJSONAsync,
+                                                                            ShowTooltip, searchStr};

@@ -4,7 +4,9 @@ A Cinnamon applet that sets brightness, gamma levels and color temperature with 
 
 Original Repository: [https://github.com/raphaelquintao/QRedshift](https://github.com/raphaelquintao/QRedshift)
 
-
+## Donate
+ - [PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ZLHQD3GQ5YNR6&source=url)
+ - Bitcoin: 1NaiaFcVGrrMs9amjyb4aVV1dJoLfdKe3Q
 
 ## Features
 * Powerfull Interface.
@@ -25,6 +27,14 @@ Original Repository: [https://github.com/raphaelquintao/QRedshift](https://githu
 5. Make sure you remove redshift-gtk `sudo apt-get remove redshift-gtk`
 
 ## Changelog
+* 1.5.1
+  - Update night brightness on scrolling.
+  - Added support to version 4.6.
+  - Added translations:
+    - Bulgarian by [@spacy01](https://github.com/spacy01 "@spacy01 on Github")
+    - German by [@OzzieIsaacs](https://github.com/OzzieIsaacs "@OzzieIsaacs on Github")
+    - Romanian by [@AndreiMiculita](https://github.com/AndreiMiculita "@AndreiMiculita on Github")
+    
 * 1.5
   - Added keyboard shortcut to toggle On/Off `<Control>End`
   - Added localization support.

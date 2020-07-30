@@ -18,8 +18,8 @@ function _(str: string): string {
 var utils = importModule("utils");
 var isCoordinate = utils.isCoordinate as (text: any) => boolean;
 var isLangSupported = utils.isLangSupported as (lang: string, languages: Array <string> ) => boolean;
-var icons = utils.icons;
-var weatherIconSafely = utils.weatherIconSafely as (code: string[], icon_type: imports.gi.St.IconType) => string;
+var weatherIconSafely = utils.weatherIconSafely as (code: string[], icon_type: imports.gi.St.IconType) => BuiltinIcons;
+var GetFuncName = utils.GetFuncName as (func: Function) => string;
 
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
@@ -34,7 +34,12 @@ class Weatherbit implements WeatherProvider {
     //--------------------------------------------------------
     //  Properties
     //--------------------------------------------------------
-    private descriptionLinelength = 25;
+	public readonly prettyName = "WeatherBit";
+	public readonly name = "Weatherbit";
+    public readonly maxForecastSupport = 16;
+    public readonly website = "https://www.weatherbit.io/";
+    public readonly maxHourlyForecastSupport = 48;
+
     private supportedLanguages = [
         'ar', 'az', 'be', 'bg', 'bs', 'ca', 'cz', 'da', 'de', 'el', 'en',
         'et', 'fi', 'fr', 'hr', 'hu', 'id', 'is', 'it',
@@ -42,11 +47,11 @@ class Weatherbit implements WeatherProvider {
         'sv', 'tr', 'uk', 'zh', 'zh-tw'];
 
     private current_url = "https://api.weatherbit.io/v2.0/current?";
-    private daily_url = "https://api.weatherbit.io/v2.0/forecast/daily?";
-    
-    private unit: queryUnits = null;
+	private daily_url = "https://api.weatherbit.io/v2.0/forecast/daily?";
+	private hourly_url = "https://api.weatherbit.io/v2.0/forecast/hourly?";
 
-    private app: WeatherApplet
+	private app: WeatherApplet;
+	private hourlyAccess = true;
 
     constructor(_app: WeatherApplet) {
         this.app = _app;
@@ -55,45 +60,57 @@ class Weatherbit implements WeatherProvider {
     //--------------------------------------------------------
     //  Functions
     //--------------------------------------------------------
-    public async GetWeather(): Promise<WeatherData> {
-        let currentResult = await this.GetData(this.current_url, this.ParseCurrent) as WeatherData;
-        if (!currentResult) return null;
-        let forecastResult = await this.GetData(this.daily_url, this.ParseForecast) as ForecastData[];
-        currentResult.forecasts = forecastResult;
+    public async GetWeather(loc: Location): Promise<WeatherData> {
+		let forecastPromise = this.GetData(this.daily_url, loc, this.ParseForecast) as Promise<ForecastData[]>;
+		let hourlyPromise = null;
+		if (!!this.hourlyAccess) hourlyPromise = this.GetData(this.hourly_url, loc, this.ParseHourlyForecast) as Promise<HourlyForecastData[]>;
+		let currentResult = await this.GetData(this.current_url, loc, this.ParseCurrent) as WeatherData;
+		if (!currentResult) return null;
+		
+		let forecastResult = await forecastPromise;
+		currentResult.forecasts = (!forecastResult) ? [] : forecastResult;
+		let hourlyResult = await hourlyPromise;
+		currentResult.hourlyForecasts = (!hourlyResult) ? [] : hourlyResult;
         return currentResult;
     };
 
     // A function as a function parameter 2 levels deep does not know
-    // about the top level object information, has to pass it in as a paramater
+    // about the top level object information, has to pass it in as a parameter
     /**
      * 
      * @param baseUrl 
      * @param ParseFunction returns WeatherData or ForecastData Object
      */
-    private async GetData(baseUrl: string, ParseFunction: (json: any, context: any) => WeatherData | ForecastData[]): Promise<WeatherData | ForecastData[]> {
-        let query = this.ConstructQuery(baseUrl);
+    private async GetData(baseUrl: string, loc: Location,  ParseFunction: (json: any, context: any) => WeatherData | ForecastData[] | HourlyForecastData[]) {
+        let query = this.ConstructQuery(baseUrl, loc);
         let json;
         if (query != null) {
-            this.app.log.Debug("Query: " + query);
             try {
-                json = await this.app.LoadJsonAsync(query);
+                json = await this.app.LoadJsonAsync(query, this.OnObtainingData);
             }
             catch(e) {
-              this.app.HandleHTTPError("weatherbit", e, this.app, this.HandleHTTPError);
-                return null;
+				// Skip Hourly forecast if it is forbidden (403)
+				if (GetFuncName(ParseFunction) == GetFuncName(this.ParseHourlyForecast) && e.code == 403) {
+					this.app.log.Print("Hourly forecast is inaccessible, skipping")
+					this.hourlyAccess = false;
+					return null;
+				}
+              	this.app.HandleHTTPError("weatherbit", e, this.app);
+            	return null;
             }
 
             if (json == null) {
-              this.app.HandleError({type: "soft", detail: "no api response", service: "weatherbit"});
-              return null;                 
+				this.app.HandleError({type: "soft", detail: "no api response", service: "weatherbit"});
+				return null;                 
             }
 
             return ParseFunction(json, this);
         }
         else {
-          return null;
+          	return null;
         }       
-    };
+	};
+
 
 
     private ParseCurrent(json: any, self: Weatherbit): WeatherData {
@@ -140,7 +157,7 @@ class Weatherbit implements WeatherProvider {
         }
         catch(e) { 
           self.app.log.Error("Weatherbit Weather Parsing error: " + e);
-          self.app.HandleError({type: "soft", service: "weatherbit", detail: "unusal payload", message: _("Failed to Process Current Weather Info")})
+          self.app.HandleError({type: "soft", service: "weatherbit", detail: "unusual payload", message: _("Failed to Process Current Weather Info")})
           return null; 
         }
     };
@@ -148,7 +165,7 @@ class Weatherbit implements WeatherProvider {
     private ParseForecast(json: any, self: Weatherbit): ForecastData[] {
       let forecasts: ForecastData[] = [];
       try {
-        for (let i = 0; i < self.app.config._forecastDays; i++) {
+        for (let i = 0; i < json.data.length; i++) {
           let day = json.data[i];
           let forecast: ForecastData = {          
               date: new Date(day.ts * 1000),
@@ -167,10 +184,46 @@ class Weatherbit implements WeatherProvider {
       }
       catch(e) {
           self.app.log.Error("Weatherbit Forecast Parsing error: " + e);
-          self.app.HandleError({type: "soft", service: "weatherbit", detail: "unusal payload", message: _("Failed to Process Forecast Info")})
+          self.app.HandleError({type: "soft", service: "weatherbit", detail: "unusual payload", message: _("Failed to Process Forecast Info")})
           return null; 
       }
-    };
+	};
+
+	private ParseHourlyForecast(json: any, self: Weatherbit): HourlyForecastData[] { 
+		let forecasts: HourlyForecastData[] = [];
+		try {
+			for (let i = 0; i < json.data.length; i++) {
+				let hour = json.data[i];
+				let forecast: HourlyForecastData = {          
+					date: new Date(hour.ts * 1000),
+					temp: hour.temp,
+					condition: {
+						main: hour.weather.description,
+						description: hour.weather.description,
+						icon: weatherIconSafely(self.ResolveIcon(hour.weather.icon), self.app.config.IconType()),
+						customIcon: self.ResolveCustomIcon(hour.weather.icon)
+					},
+					precipitation: {
+						type: "rain",
+						volume: hour.precip,
+						chance: hour.pop
+					}
+				};
+				if (hour.snow != 0) {
+					forecast.precipitation.type = "snow";
+					forecast.precipitation.volume = hour.snow;
+				}
+				forecasts.push(forecast);         
+			}
+			return forecasts;
+		}
+		catch(e) {
+			self.app.log.Error("Weatherbit Forecast Parsing error: " + e);
+			self.app.HandleError({type: "soft", service: "weatherbit", detail: "unusual payload", message: _("Failed to Process Forecast Info")})
+			return null; 
+		}
+	}
+
 
     private TimeToDate(time: string, hourDiff: number): Date {
         let hoursMinutes = time.split(":");
@@ -186,7 +239,7 @@ class Weatherbit implements WeatherProvider {
      * in string format, but we can check if unix timestamp and date string has mismatch
      * to figure out if it's an incorrect Date.
      * 
-     * @param ts unix timestamp initialised as Date from payload
+     * @param ts unix timestamp initialized as Date from payload
      * @param last_ob_time last refresh time in string format
      * @returns the hour difference of incorrect time from correct time
      */
@@ -195,9 +248,9 @@ class Weatherbit implements WeatherProvider {
     }
 
     private ParseStringTime(last_ob_time: string): Date {
-        let splitted = last_ob_time.split(/[T\-\s:]/);
-        if (splitted.length != 5) return null;
-        return new Date(parseInt(splitted[0]), parseInt(splitted[1])-1, parseInt(splitted[2]), parseInt(splitted[3]), parseInt(splitted[4]));
+        let split = last_ob_time.split(/[T\-\s:]/);
+        if (split.length != 5) return null;
+        return new Date(parseInt(split[0]), parseInt(split[1])-1, parseInt(split[2]), parseInt(split[3]), parseInt(split[4]));
     }
 
     private ConvertToAPILocale(systemLocale: string) {
@@ -212,9 +265,8 @@ class Weatherbit implements WeatherProvider {
         return lang;
     }
 
-    private ConstructQuery(query: string): string {
+    private ConstructQuery(query: string, loc: Location): string {
         let key = this.app.config._apiKey.replace(" ", "");
-        let location = this.app.config._location.replace(" ", "");
         if (this.app.config.noApiKey()) {
             this.app.log.Error("DarkSky: No API Key given");
             this.app.HandleError({
@@ -223,37 +275,37 @@ class Weatherbit implements WeatherProvider {
                   "detail": "no key",
                    message: _("Please enter API key in settings,\nor get one first on https://www.weatherbit.io/account/create")});
             return "";
-        }
-        if (isCoordinate(location)) {
-            let latLong = location.split(",");
-            query = query + "key="+ key + "&lat=" + latLong[0] + "&lon=" + latLong[1] + "&units=S"
-            let lang = this.ConvertToAPILocale(this.app.currentLocale);
-            if (isLangSupported(lang, this.supportedLanguages) && this.app.config._translateCondition) {
-                query = query + "&lang=" + lang;
-            }
-            return query;
-        }
-        else {
-            this.app.log.Error("Weatherbit: Location is not a coordinate");
-            this.app.HandleError({type: "hard", detail: "bad location format", service:"weatherbit", userError: true, message: ("Please Check the location,\nmake sure it is a coordinate") })
-            return "";
-        }
+		}
+		
+		query = query + "key="+ key + "&lat=" + loc.lat + "&lon=" + loc.lon + "&units=S"
+		let lang = this.ConvertToAPILocale(this.app.currentLocale);
+		if (isLangSupported(lang, this.supportedLanguages) && this.app.config._translateCondition) {
+			query = query + "&lang=" + lang;
+		}
+		return query;
     };
 
-    /** Handles API Scpecific HTTP errors  */
-    public HandleHTTPError(error: HttpError, uiError: AppletError): AppletError {
-        if (error.code == 403) { // DarkSky returns auth error on the http level when key is wrong
-            uiError.detail = "bad key"
-            uiError.message = _("Please Make sure you\nentered the API key correctly and your account is not locked");
-            uiError.type = "hard";
-            uiError.userError = true;
+     /**
+     * 
+     * @param message Soup Message object
+     * @returns null if custom error checking does not find anything
+     */
+    private OnObtainingData(message: any): AppletError {
+        if (message.status_code == 403) { // bad key
+            return {
+                type: "hard",
+                userError: true,
+                detail: "bad key",
+                service: "weatherbit",
+                message: _("Please Make sure you\nentered the API key correctly and your account is not locked")
+            };
         }
-        return uiError;
+        return null;
     }
 
-    private ResolveIcon(icon: string): string[] {
+    private ResolveIcon(icon: string): BuiltinIcons[] {
         switch (icon) {
-            // Tunderstorms
+            // Thunderstorms
             case "t01n":
             case "t01d": 
             case "t02n":
@@ -264,7 +316,7 @@ class Weatherbit implements WeatherProvider {
             case "t04d":
             case "t05n":
             case "t05d":
-                return [icons.storm]
+                return ["weather-storm"]
             // Drizzle
             case "d01d":
             case "d01n":
@@ -272,7 +324,7 @@ class Weatherbit implements WeatherProvider {
             case "d02n":
             case "d03d":
             case "d03n":
-                return [icons.showers_scattered, icons.rain, icons.rain_freezing ]
+                return ["weather-showers-scattered", "weather-rain", "weather-freezing-rain" ]
             // Rain
             case "r01d":
             case "r01n":
@@ -286,7 +338,7 @@ class Weatherbit implements WeatherProvider {
             case "r05n":
             case "r06d":
             case "r06n":
-                return [icons.rain, icons.rain_freezing, icons.showers_scattered]
+                return ["weather-rain", "weather-freezing-rain", "weather-showers-scattered"]
             // Snow
             case "s01d":
             case "s01n":
@@ -298,11 +350,11 @@ class Weatherbit implements WeatherProvider {
             case "s04n":
             case "s06d":
             case "s06n":
-                return [icons.snow]
+                return ["weather-snow"]
             // Sleet
             case "s05d":
             case "s05n":
-                return [icons.rain_freezing, icons.rain, icons.showers_scattered]
+                return ["weather-freezing-rain", "weather-rain", "weather-showers-scattered"]
             // Fog, Sand, haze, smoke, mist
             case "a01d":
             case "a01n":
@@ -316,34 +368,34 @@ class Weatherbit implements WeatherProvider {
             case "a05n":
             case "a06d":
             case "a06n":
-                return [icons.fog]
+                return ["weather-fog"]
             case "c02d":
-                return [icons.few_clouds_day]
+                return ["weather-few-clouds"]
             case "c02n":
-                return [icons.few_clouds_night]
+                return ["weather-few-clouds-night"]
             case "c01n":
-                return [icons.clear_night]
+                return ["weather-clear-night"]
             case "c01d":
-                return [icons.clear_day]
+                return ["weather-clear"]
             case "c03d":
-                return [icons.clouds, icons.few_clouds_day, icons.overcast]
+                return ["weather-clouds", "weather-few-clouds", "weather-overcast"]
             case "c03n":
-                return [icons.clouds, icons.few_clouds_night, icons.overcast]
+                return ["weather-clouds-night", "weather-few-clouds-night", "weather-overcast"]
             case "c04n":
-                return [icons.overcast, icons.clouds, icons.few_clouds_night]
+                return ["weather-overcast", "weather-clouds-night", "weather-few-clouds-night"]
             case "c04d":
-                return [icons.overcast, icons.clouds, icons.few_clouds_day]
+                return ["weather-overcast", "weather-clouds", "weather-few-clouds"]
             case "u00d":
             case "u00n":
-                return [icons.alert]
+                return ["weather-severe-alert"]
             default:
-              return [icons.alert]
+              return ["weather-severe-alert"]
           }
     };
 
     private ResolveCustomIcon(icon: string): CustomIcons {
         switch (icon) {
-            // Tunderstorms
+            // Thunderstorms
             case "t01d": 
             case "t02d":
             case "t03d":
@@ -444,7 +496,7 @@ class Weatherbit implements WeatherProvider {
 };
 
 /**
- *  M - [DEFAULT] Metric (Celcius, m/s, mm)
+ *  M - [DEFAULT] Metric (Celsius, m/s, mm)
     S - Scientific (Kelvin, m/s, mm)
     I - Fahrenheit (F, mph, in)
  */

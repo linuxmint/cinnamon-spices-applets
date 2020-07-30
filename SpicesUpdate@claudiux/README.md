@@ -2,7 +2,7 @@
 
 ## Important!
 In order to be sure to download the latest version of Spices Update, use
-**[this link](https://cinnamon-spices.linuxmint.com/files/applets/SpicesUpdate@claudiux.zip?e242365b-2a2d-4cbb-b503-40a8be77aad4)** rather than the Download button at the top of this page, **or use Spices Update v4.1.0 or greater**.
+**[this link](https://cinnamon-spices.linuxmint.com/files/applets/SpicesUpdate@claudiux.zip?f2ad9840-4942-46eb-9b70-5eb3649f7a20)** rather than the Download button at the top of this page, **or use Spices Update v4.1.0 or greater**.
 
 ## Summary
 
@@ -24,14 +24,14 @@ The **Spices Update** applet, highly configurable, plays these roles:
 
 ## Status
 
-Usable from Cinnamon 2.8 to Cinnamon 4.4. Compatible with Python 3.8.
+Usable from Cinnamon 2.8 to Cinnamon 4.6. Compatible with Python 3.8.
 
 Fully supported by the author, under continuing development and in continuous use on several machines, running with **Linux Mint**, **Fedora**,  **Archlinux** or **Debian 10**.
 
 From version v3.0.0 ~ 20190808:
 
-  * Spices Update is compatible with Cinnamon 2.8 -> 4.4 (Mint 17.3 -> 19.3).
-  * From Cinnamon 3.8 to 4.4 (Mint 19 -> 19.3): **Perfectly functional, as usual.**
+  * Spices Update is compatible with Cinnamon 2.8 -> 4.6 (Mint 17.3 -> 20).
+  * From Cinnamon 3.8 to 4.6 (Mint 19 -> 20): **Perfectly functional, as usual.**
   * From Cinnamon 2.8 to 3.6 (Mint 17.3 -> 18.3): Some features are reduced:
     * The Spices configuration window does not open on the second tab, but on the first one. You will need to click on the second tab and select the sort by date yourself.
     * The Settings window of this applet does not contain any tabs.
@@ -134,13 +134,16 @@ Any translation is welcome. Thank you for contributing to translate the applet's
 ### Available translations and their authors
 
   * Croatian (hr): muzena
+  * Danish (da): Alan Mortensen
   * Dutch (nl): Jurien (French77)
   * Finnish (fi): MahtiAnkka
   * French (fr): claudiux
-  * German (de): Mintulix
+  * German (de): Mintulix, Tobias Bannert
   * Italian (it): Dragone2
+  * Romanian (ro): Andrei Miculita
   * Spanish (es): claudiux
   * Swedish (sv): Åke Engelbrektson (eson57)
+  * Turkish (tr): Serkan Önder
 
 Many thanks to them!
 
@@ -165,7 +168,7 @@ Use the _Applets_ menu in Cinnamon Settings, or _Add Applets to Panel_ in the co
 ### Manual Installation:
 
    * Install the additional programs required.
-   * Download the **[latest version of Spices Update](https://cinnamon-spices.linuxmint.com/files/applets/SpicesUpdate@claudiux.zip?e242365b-2a2d-4cbb-b503-40a8be77aad4)** from the Spices Web Site.
+   * Download the **[latest version of Spices Update](https://cinnamon-spices.linuxmint.com/files/applets/SpicesUpdate@claudiux.zip?f2ad9840-4942-46eb-9b70-5eb3649f7a20)** from the Spices Web Site.
    * Unzip and extract the folder ```SpicesUpdate@claudiux``` into ```~/.local/share/cinnamon/applets/```
    * Enable this applet in System Settings -> Applets.
    * You can also access the Settings Screen from System Settings -> Applets, or from the context menu of this applet (right-clicking on its icon).

@@ -1,3 +1,14 @@
+### v5.4.2~20200615
+  * Bug fixes
+
+### v5.4.1~20200613
+  * Code cleanup
+  * Now displays the badge showing the number of updates only after all checks have been completed.
+
+### v5.4.0~20200608
+  * Now compatible with Cinnamon 4.6.
+  * Fixes #2927, #2972, #3020.
+
 ### v5.3.0~20200209
   * Cinnamon 4.2 & 4.4: Direct access from the Spices Update menu to each tab of settings (General, Applets, Desklets, Extensions, Themes) via the Configure sub menu.
 

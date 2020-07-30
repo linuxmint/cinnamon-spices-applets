@@ -15,12 +15,12 @@
         "pageSource": {
             "type": "page",
             "title": "Source",
-            "sections": ["imagesource", "imageurl", "imagetags", "imageapply"]
+            "sections": ["imagesource", "imagetags", "imageapply"]
         },
         "pageResolution": {
             "type": "page",
             "title": "Resolution",
-            "sections": ["imageresbing", "imageresplacecutycapt", "imageresplacekitten", "imagerespicsum", "imageresunsplash", "imageapply"]
+            "sections": ["imageresbing", "imageresplacecutycapt", "imagereshimawari", "imageresplacekitten", "imagerespicsum", "imageresunsplash", "imageapply"]
         },
         "applet": {
             "type": "section",
@@ -40,7 +40,7 @@
         "imagesource": {
             "type": "section",
             "title": "Source",
-            "keys": ["image-source", "install-warn-cutycapt"]
+            "keys": ["image-source", "source-supports-info", "install-warn-imagemagick", "install-warn-cutycapt", "image-uri"]
         },
         "imageresbing": {
             "type": "section",
@@ -72,11 +72,11 @@
             "dependency": "image-source=picsum",
             "keys": ["image-res-manual", "image-res-info", "image-res-width", "image-res-height"]
         },
-        "imageurl": {
+        "imagereshimawari": {
             "type": "section",
-            "title": "URI",
-            "dependency": "image-source=cutycapt",
-            "keys": ["image-uri"]
+            "title": "Resolution",
+            "dependency": "image-source=himawari",
+            "keys": ["image-res-himawari"]
         },
         "imagetags": {
             "type": "section",
@@ -114,13 +114,13 @@
     },
     "change-onclick" : {
         "type" : "switch",
-        "default" : true,
+        "default" : false,
         "description": "Clicking on the applet",
         "tooltip": "Just click onto the icon in your panel"
     },
     "change-onclick-nomenu" : {
         "type" : "label",
-        "description" : "Note that this will disable the menu to store the image - because this will change the background before you've got any chance to click the corresponding button!",
+        "description" : "Note that this will disable the menu on clicking the applet - because clicking will change the background before you've got any chance to press the corresponding button to e.g. save the image!",
         "dependency" : "change-onclick"
     },
     "change-ontime" : {
@@ -160,15 +160,26 @@
         "options" : {
             "Bing" : "bing",
             "Cutycapt" : "cutycapt",
+            "Himawari 8" : "himawari",
             "Placekitten" : "placekitten",
             "Picsum Photos" : "picsum",
             "Unsplash" : "unsplash"
         }
     },
+    "source-supports-info" : {
+        "type" : "label",
+        "description" : "This source supports displaying additional image autor information. It will be shown inside the applets tooltip.",
+        "dependency" : "image-source=bing"
+    },
     "install-warn-cutycapt" : {
         "type" : "label",
         "description" : "Please make sure to install the 'cutycapt' package from the package manager of your choice!",
         "dependency" : "image-source=cutycapt"
+    },
+    "install-warn-imagemagick" : {
+        "type" : "label",
+        "description" : "Please make sure to install the 'imagemagick' package from the package manager of your choice!",
+        "dependency" : "image-source=himawari"
     },
     "image-res-manual" : {
         "type" : "switch",
@@ -207,9 +218,21 @@
         "description": "Use own search tags",
         "tooltip": "Specify own tags to look for..."
     },
+    "image-res-himawari" : {
+        "type" : "combobox",
+        "description" : "Image zoom factor - this factor times the tile size (550 pixels) equals the image resolution. So e.g. the factor '4x' would result in a 2200x2200 pixels image. Please note that factor² much tiles will be temporarly downloaded.",
+        "default" : 4,
+        "options" : {
+            "1x" : 1,
+            "4x" : 4,
+            "8x" : 8,
+            "16x" : 16,
+            "20x" : 20
+        }
+    },
     "image-res-unsupported" : {
         "type" : "label",
-        "description" : "Sorry, the selected option does not support resulution modifiers."
+        "description" : "Sorry, the selected source does not support resolution modifiers."
     },
     "image-tag-info" : {
         "type" : "label",
@@ -233,7 +256,8 @@
         "default" : "https://distrowatch.com/",
         "description" : "Website URI to render",
         "indent": true,
-        "tooltip" : "Enter the website URI which sould be rendered as your background"
+        "tooltip" : "Enter the website URI which sould be rendered as your background",
+        "dependency": "image-source=cutycapt"
     },
     "image-update-button" : {
         "type" : "button",
