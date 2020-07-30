@@ -1204,7 +1204,7 @@ var UI = (function () {
             can_focus: true,
             child: new Icon({
                 icon_type: IconType.SYMBOLIC,
-                icon_size: 12,
+                icon_size: 10,
                 icon_name: "custom-right-arrow-symbolic",
                 style_class: STYLE_LOCATION_SELECTOR
             }),
@@ -1215,7 +1215,7 @@ var UI = (function () {
             can_focus: true,
             child: new Icon({
                 icon_type: IconType.SYMBOLIC,
-                icon_size: 12,
+                icon_size: 10,
                 icon_name: "custom-left-arrow-symbolic",
                 style_class: STYLE_LOCATION_SELECTOR
             }),
@@ -1256,15 +1256,13 @@ var UI = (function () {
         sunriseBox.add(this._currentWeatherSunrise, textOptions);
         sunsetBox.add(this._currentWeatherSunset, textOptions);
         var ab_spacerlabel = new Label({ text: BLANK });
-        var bb_spacerlabel = new Label({ text: BLANK });
         var sunBox = new BoxLayout({ style_class: STYLE_ASTRONOMY });
         sunBox.add_actor(sunriseBox);
         sunBox.add_actor(ab_spacerlabel);
         sunBox.add_actor(sunsetBox);
         var middleColumn = new BoxLayout({ vertical: true, style_class: STYLE_SUMMARYBOX });
         middleColumn.add_actor(this._locationBox);
-        middleColumn.add_actor(this._currentWeatherSummary);
-        middleColumn.add_actor(bb_spacerlabel);
+        middleColumn.add(this._currentWeatherSummary, { expand: true, x_align: Align.START, y_align: Align.MIDDLE, x_fill: false, y_fill: false });
         var sunBin = new Bin();
         sunBin.set_child(sunBox);
         middleColumn.add_actor(sunBin);

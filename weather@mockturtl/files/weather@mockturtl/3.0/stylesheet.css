@@ -14,6 +14,8 @@
 
 .weather-current-summary {
     font-size: 35px;
+    padding-top: 10px;
+    padding-bottom: 15px;
 }
 
 .weather-current-databox {
@@ -90,4 +92,9 @@
 
 .hourly-icon {
     padding: 5px 10px 5px 10px;
+}
+
+.location-selector {
+    margin-right: 5px;
+    margin-left: 5px;
 }
