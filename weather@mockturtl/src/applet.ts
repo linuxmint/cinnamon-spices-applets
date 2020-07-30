@@ -263,11 +263,11 @@ class WeatherApplet extends TextIconApplet {
 	 * @param query fully constructed url
 	 * @param errorCallback do checking before generic error checking by this function, to display API specific UI errors
 	 */
-	public async LoadJsonAsync(query: string, errorCallback?: (message: any) => AppletError, triggerUIError: boolean = true): Promise <any> {
-		let json = await new Promise((resolve: any, reject: any) => {
+	public async LoadJsonAsync(query: string, errorCallback?: (message: imports.gi.Soup.Message) => AppletError, triggerUIError: boolean = true): Promise <any> {
+		let json: any = await new Promise((resolve, reject) => {
 			let message = Message.new('GET', query);
 			this.log.Debug("URL called: " + query);
-			this._httpSession.queue_message(message, (session: any, message: any) => {
+			this._httpSession.queue_message(message, (session, message) => {
 				// option for provider to inject errors before general error handling
 				let error: AppletError = (errorCallback != null) ? errorCallback(message) : null;
 				if (error != null) {
@@ -313,7 +313,7 @@ class WeatherApplet extends TextIconApplet {
 
 	/** Spawn a command and await for the output it gives */
 	public async SpawnProcess(command: string[]): Promise<any> {
-		let json = await new Promise((resolve: any, reject: any) => {
+		let json = await new Promise((resolve, reject) => {
 			spawn_async(command, (aStdout: any) => {
 				resolve(aStdout);
 			});
@@ -327,9 +327,9 @@ class WeatherApplet extends TextIconApplet {
 	 * @param query fully constructed url
 	 */
 	public async LoadAsync(query: string): Promise <any> {
-		let data = await new Promise((resolve: any, reject: any) => {
+		let data = await new Promise((resolve, reject) => {
 			let message = Message.new('GET', query);
-			this._httpSession.queue_message(message, (session: any, message: any) => {
+			this._httpSession.queue_message(message, (session, message) => {
 
 				if (!message) {
 					reject({code: 0, message: "no network response", reason_phrase: "no network response"} as HttpError);
@@ -339,7 +339,7 @@ class WeatherApplet extends TextIconApplet {
 				if (message.status_code > 300 || message.status_code < 200 ) {
 					reject({code: message.status_code, message: "bad status code", reason_phrase: message.reason_phrase } as HttpError);
 					return;
-				}	
+				}
 				
 				if (!message.response_body) {
 					reject({code: message.status_code, message: "no response body", reason_phrase: message.reason_phrase} as HttpError);
@@ -360,7 +360,7 @@ class WeatherApplet extends TextIconApplet {
 	};
 
 	public sendNotification(title: string, message: string, transient?: boolean) {
-		let notification = new Notification(this.msgSource, "WeatherApplet: " + title, message);
+		let notification = new Notification(this.msgSource, _("Weather Applet") + ": " + title, message);
 		if (transient) notification.setTransient((!transient) ? false : true);
 		this.msgSource.notify(notification);
 	}
@@ -400,7 +400,7 @@ class WeatherApplet extends TextIconApplet {
 
 	private async saveCurrentLocation(): Promise<void> {
 		if (this.config.currentLocation.locationSource == "ip-api") {
-			this.sendNotification("Error", "You can't save a location obtained automatically, sorry");
+			this.sendNotification(_("Error") + " - " + _("Location Store"), _("You can't save a location obtained automatically, sorry"));
 		}
 		this.locationStore.SaveCurrentLocation(this.config.currentLocation);
 	}
@@ -1425,7 +1425,8 @@ class UI {
 			child: new Icon({
 				icon_type: IconType.SYMBOLIC,
 				icon_size: 12,
-				icon_name: "custom-right-arrow-symbolic"
+				icon_name: "custom-right-arrow-symbolic",
+				style_class: STYLE_LOCATION_SELECTOR
 			}),
 		});
 		this._nextLocationButton.actor.connect(SIGNAL_CLICKED, Lang.bind(this.app, this.app.NextLocationClicked));
@@ -1436,7 +1437,8 @@ class UI {
 			child: new Icon({
 				icon_type: IconType.SYMBOLIC,
 				icon_size: 12,
-				icon_name: "custom-left-arrow-symbolic"
+				icon_name: "custom-left-arrow-symbolic",
+				style_class: STYLE_LOCATION_SELECTOR
 			}),
 		});
 		this._previousLocationButton.actor.connect(SIGNAL_CLICKED, Lang.bind(this.app, this.app.PreviousLocationClicked));
@@ -1706,7 +1708,7 @@ class UI {
 				Summary: new Label({text: _(ELLIPSIS), style_class: "hourly-data"}),
 				Temperature: new Label({text: _(ELLIPSIS), style_class: "hourly-data"})
 			})
-			// TODO: Fix issue where text is Ellided instead of wrapped when its too long
+			// TODO: Fix issue where text is Elided instead of wrapped when its too long
 			this._hourlyForecasts[index].Summary.clutter_text.set_line_wrap(true);
 			this._hourlyForecasts[index].Summary.set_width(85);
 			box.add_child(this._hourlyForecasts[index].Hour);
@@ -1957,7 +1959,7 @@ class WeatherLoop {
 	private GUID: string;
 	private instanceID: number;
 	/** Slows main loop down on consecutive errors.
-	 * loop seconds are multpilied by this value on errors.
+	 * loop seconds are multiplied by this value on errors.
 	 */
 	private errorCount: number = 0;
 
@@ -1996,7 +1998,7 @@ class WeatherLoop {
 					+ " seconds, refreshInterval " + this.app.config._refreshInterval + " minutes");
 					// loop can skip 1 cycle if needed 
 					let state = await this.app.refreshWeather(false);
-					if (state == "locked") this.app.log.Print("App locked, refresh skipped in main loop");
+					if (state == "locked") this.app.log.Print("App is currently refreshing, refresh skipped in main loop");
 					if (state == "success" || state == "locked") this.lastUpdated = new Date();
 				}
 				else {
@@ -2193,7 +2195,7 @@ class LocationStore {
 		this.app.log.Debug("location store path is: " + this.path);
 		this.file = Gio.File.new_for_path(this.path);
 		if (onStoreChanged != null)	this.StoreChanged = onStoreChanged;
-		this.Start();
+		this.LoadSavedLocations();
 	}
 
 	private GetConfigPath(): string {
@@ -2286,37 +2288,37 @@ class LocationStore {
 
 	public async SaveCurrentLocation(loc: LocationData) {
 		if (this.app.Locked()) {
-			this.app.sendNotification("Warning", "You can only save correct locations when the applet is not refreshing", true);
+			this.app.sendNotification(_("Warning") + " - " + _("Location Store"), _("You can only save correct locations when the applet is not refreshing"), true);
 			return;
 		}
 		if (loc == null) {
-			this.app.sendNotification("Warning", "You can't save an incorrect location", true);
+			this.app.sendNotification(_("Warning") + " - " + _("Location Store"), _("You can't save an incorrect location"), true);
 			return;
 		}
 		if (this.InStorage(loc)) {
-			this.app.sendNotification("Error", "Location is already saved", true);
+			this.app.sendNotification(_("Info") + " - " + _("Location Store"), _("Location is already saved"), true);
 			return;
 		}
 		this.locations.push(loc);
 		this.currentIndex = this.locations.length - 1; // head to saved location
 		this.InvokeStorageChanged();
 		await this.SaveToFile();
-		this.app.sendNotification("Success", "Location is saved to library", true);
+		this.app.sendNotification(_("Success") + " - " + _("Location Store"), _("Location is saved to library"), true);
 
 	}
 
 	public async DeleteCurrentLocation(loc: LocationData) {
 		if (this.app.Locked()) {
-			this.app.sendNotification("Warning", "You can't remove a location while the applet is refreshing", true);
+			this.app.sendNotification(_("Info") + " - " + _("Location Store"), _("You can't remove a location while the applet is refreshing"), true);
 			return;
 		}
 		if (loc == null) {
-			this.app.sendNotification("Warning", "You can't remove an incorrect location", true);
+			this.app.sendNotification(_("Info") + " - " + _("Location Store"), _("You can't remove an incorrect location"), true);
 			return;
 		}
 
 		if (!this.InStorage(loc)) {
-			this.app.sendNotification("Can't delete", "Location is not in storage", true);
+			this.app.sendNotification(_("Info") + " - " + _("Location Store"), _("Location is not in storage, can't delete"), true);
 			return;
 		}
 		// Find location
@@ -2326,17 +2328,13 @@ class LocationStore {
 		this.currentIndex = this.currentIndex--;
 		if (this.currentIndex < 0) this.currentIndex = this.locations.length - 1; // reached start of array
 		if (this.currentIndex < 0) this.currentIndex = 0; // no items in array
-		this.app.sendNotification("Success", "Location is deleted from library", true);
+		this.app.sendNotification(_("Success") + " - " + _("Location Store"), _("Location is deleted from library"), true);
 		this.InvokeStorageChanged();
 	}
 
 	private InvokeStorageChanged() {
 		if (this.StoreChanged == null) return;
 		this.StoreChanged(this.locations.length);
-	}
-
-	private async Start() {
-		await this.LoadSavedLocations();
 	}
 
 	private async LoadSavedLocations(): Promise<boolean> {
@@ -2357,6 +2355,8 @@ class LocationStore {
 			return true;
 		}
 		catch(e) {
+			this.app.log.Error("Error loading locations from store: " + (e as Error).message);
+			this.app.sendNotification(_("Error") + " - " + _("Location Store"), _("Failed to load in data from location storage, please see the logs for more information"))
 			return false;
 		}
 		
@@ -2383,7 +2383,7 @@ class LocationStore {
 	// --------------------------
 
 	private async GetFileInfo(file: imports.gi.Gio.File): Promise<imports.gi.Gio.FileInfo> {
-		return new Promise((resolve: any, reject: any) => {
+		return new Promise((resolve, reject) => {
 			file.query_info_async("", Gio.FileQueryInfoFlags.NONE, null, null, (obj, res) => {
 				let result = file.query_info_finish(res);
 				resolve(result);
@@ -2405,7 +2405,7 @@ class LocationStore {
 	}
 
 	private async LoadContents(file: imports.gi.Gio.File): Promise<string> {
-		return new Promise((resolve: any, reject: any) => {
+		return new Promise((resolve, reject) => {
 			file.load_contents_async(null, (obj, res) => {
 				let [result, contents] = file.load_contents_finish(res);
 				if (result != true) {
@@ -2422,7 +2422,7 @@ class LocationStore {
 	}
 
 	private async DeleteFile(file: imports.gi.Gio.File): Promise<boolean> {
-		let result: boolean = await new Promise((resolve: any, reject: any) => {
+		let result: boolean = await new Promise((resolve, reject) => {
 			file.delete_async(null, null, (obj, res) => {
 				let result = null;
 				try {
@@ -2446,8 +2446,8 @@ class LocationStore {
 	private async OverwriteAndGetIOStream(file: imports.gi.Gio.File): Promise<imports.gi.Gio.IOStream> {
 		if (!file.get_parent().query_exists(null)) file.get_parent().make_directory_with_parents(null);
 		
-		return new Promise((resolve: any, reject: any) => {
-			file.replace_readwrite_async(null, false, Gio.FileCreateFlags.NONE, null, null, (source_object: imports.gi.GObject.Object, result: any) => {
+		return new Promise((resolve, reject) => {
+			file.replace_readwrite_async(null, false, Gio.FileCreateFlags.NONE, null, null, (source_object, result) => {
 				let ioStream = file.replace_readwrite_finish(result);
 				resolve(ioStream);
 				return ioStream;
@@ -2472,7 +2472,7 @@ class LocationStore {
 	}
 
 	private async CloseStream(stream: imports.gi.Gio.OutputStream | imports.gi.Gio.InputStream | imports.gi.Gio.FileIOStream): Promise<boolean> {
-		return new Promise((resolve: any, reject: any) => {
+		return new Promise((resolve, reject) => {
 			stream.close_async(null, null, (obj, res) => {
 				let result = stream.close_finish(res);
 				resolve(result);
@@ -2511,6 +2511,7 @@ const STYLE_CURRENT = 'current'
 const STYLE_FORECAST = 'forecast'
 const STYLE_WEATHER_MENU = 'weather-menu'
 const STYLE_BAR = 'bottombar'
+const STYLE_LOCATION_SELECTOR = 'location-selector'
 
 // Magic strings
 const BLANK = '   ';

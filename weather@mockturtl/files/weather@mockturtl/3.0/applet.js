@@ -355,7 +355,7 @@ var WeatherApplet = (function (_super) {
     };
     ;
     WeatherApplet.prototype.sendNotification = function (title, message, transient) {
-        var notification = new Notification(this.msgSource, "WeatherApplet: " + title, message);
+        var notification = new Notification(this.msgSource, _("Weather Applet") + ": " + title, message);
         if (transient)
             notification.setTransient((!transient) ? false : true);
         this.msgSource.notify(notification);
@@ -403,7 +403,7 @@ var WeatherApplet = (function (_super) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
                 if (this.config.currentLocation.locationSource == "ip-api") {
-                    this.sendNotification("Error", "You can't save a location obtained automatically, sorry");
+                    this.sendNotification(_("Error") + " - " + _("Location Store"), _("You can't save a location obtained automatically, sorry"));
                 }
                 this.locationStore.SaveCurrentLocation(this.config.currentLocation);
                 return [2];
@@ -1205,7 +1205,8 @@ var UI = (function () {
             child: new Icon({
                 icon_type: IconType.SYMBOLIC,
                 icon_size: 12,
-                icon_name: "custom-right-arrow-symbolic"
+                icon_name: "custom-right-arrow-symbolic",
+                style_class: STYLE_LOCATION_SELECTOR
             }),
         });
         this._nextLocationButton.actor.connect(SIGNAL_CLICKED, Lang.bind(this.app, this.app.NextLocationClicked));
@@ -1215,7 +1216,8 @@ var UI = (function () {
             child: new Icon({
                 icon_type: IconType.SYMBOLIC,
                 icon_size: 12,
-                icon_name: "custom-left-arrow-symbolic"
+                icon_name: "custom-left-arrow-symbolic",
+                style_class: STYLE_LOCATION_SELECTOR
             }),
         });
         this._previousLocationButton.actor.connect(SIGNAL_CLICKED, Lang.bind(this.app, this.app.PreviousLocationClicked));
@@ -1643,7 +1645,7 @@ var WeatherLoop = (function () {
                     case 4:
                         state = _a.sent();
                         if (state == "locked")
-                            this.app.log.Print("App locked, refresh skipped in main loop");
+                            this.app.log.Print("App is currently refreshing, refresh skipped in main loop");
                         if (state == "success" || state == "locked")
                             this.lastUpdated = new Date();
                         return [3, 6];
@@ -1814,7 +1816,7 @@ var LocationStore = (function () {
         this.file = Gio.File.new_for_path(this.path);
         if (onStoreChanged != null)
             this.StoreChanged = onStoreChanged;
-        this.Start();
+        this.LoadSavedLocations();
     }
     LocationStore.prototype.GetConfigPath = function () {
         var configPath = GLib.getenv('XDG_CONFIG_HOME');
@@ -1906,15 +1908,15 @@ var LocationStore = (function () {
                 switch (_a.label) {
                     case 0:
                         if (this.app.Locked()) {
-                            this.app.sendNotification("Warning", "You can only save correct locations when the applet is not refreshing", true);
+                            this.app.sendNotification(_("Warning") + " - " + _("Location Store"), _("You can only save correct locations when the applet is not refreshing"), true);
                             return [2];
                         }
                         if (loc == null) {
-                            this.app.sendNotification("Warning", "You can't save an incorrect location", true);
+                            this.app.sendNotification(_("Warning") + " - " + _("Location Store"), _("You can't save an incorrect location"), true);
                             return [2];
                         }
                         if (this.InStorage(loc)) {
-                            this.app.sendNotification("Error", "Location is already saved", true);
+                            this.app.sendNotification(_("Info") + " - " + _("Location Store"), _("Location is already saved"), true);
                             return [2];
                         }
                         this.locations.push(loc);
@@ -1923,7 +1925,7 @@ var LocationStore = (function () {
                         return [4, this.SaveToFile()];
                     case 1:
                         _a.sent();
-                        this.app.sendNotification("Success", "Location is saved to library", true);
+                        this.app.sendNotification(_("Success") + " - " + _("Location Store"), _("Location is saved to library"), true);
                         return [2];
                 }
             });
@@ -1934,15 +1936,15 @@ var LocationStore = (function () {
             var index;
             return __generator(this, function (_a) {
                 if (this.app.Locked()) {
-                    this.app.sendNotification("Warning", "You can't remove a location while the applet is refreshing", true);
+                    this.app.sendNotification(_("Info") + " - " + _("Location Store"), _("You can't remove a location while the applet is refreshing"), true);
                     return [2];
                 }
                 if (loc == null) {
-                    this.app.sendNotification("Warning", "You can't remove an incorrect location", true);
+                    this.app.sendNotification(_("Info") + " - " + _("Location Store"), _("You can't remove an incorrect location"), true);
                     return [2];
                 }
                 if (!this.InStorage(loc)) {
-                    this.app.sendNotification("Can't delete", "Location is not in storage", true);
+                    this.app.sendNotification(_("Info") + " - " + _("Location Store"), _("Location is not in storage, can't delete"), true);
                     return [2];
                 }
                 index = this.FindIndex(loc);
@@ -1952,7 +1954,7 @@ var LocationStore = (function () {
                     this.currentIndex = this.locations.length - 1;
                 if (this.currentIndex < 0)
                     this.currentIndex = 0;
-                this.app.sendNotification("Success", "Location is deleted from library", true);
+                this.app.sendNotification(_("Success") + " - " + _("Location Store"), _("Location is deleted from library"), true);
                 this.InvokeStorageChanged();
                 return [2];
             });
@@ -1962,18 +1964,6 @@ var LocationStore = (function () {
         if (this.StoreChanged == null)
             return;
         this.StoreChanged(this.locations.length);
-    };
-    LocationStore.prototype.Start = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4, this.LoadSavedLocations()];
-                    case 1:
-                        _a.sent();
-                        return [2];
-                }
-            });
-        });
     };
     LocationStore.prototype.LoadSavedLocations = function () {
         return __awaiter(this, void 0, void 0, function () {
@@ -2000,6 +1990,8 @@ var LocationStore = (function () {
                             return [2, true];
                         }
                         catch (e) {
+                            this.app.log.Error("Error loading locations from store: " + e.message);
+                            this.app.sendNotification(_("Error") + " - " + _("Location Store"), _("Failed to load in data from location storage, please see the logs for more information"));
                             return [2, false];
                         }
                         return [2];
@@ -2182,6 +2174,7 @@ var STYLE_CURRENT = 'current';
 var STYLE_FORECAST = 'forecast';
 var STYLE_WEATHER_MENU = 'weather-menu';
 var STYLE_BAR = 'bottombar';
+var STYLE_LOCATION_SELECTOR = 'location-selector';
 var BLANK = '   ';
 var ELLIPSIS = '...';
 var EN_DASH = '\u2013';

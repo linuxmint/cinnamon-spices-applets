@@ -274,7 +274,7 @@ class WeatherApplet extends TextIconApplet {
     }
     ;
     sendNotification(title, message, transient) {
-        let notification = new Notification(this.msgSource, "WeatherApplet: " + title, message);
+        let notification = new Notification(this.msgSource, _("Weather Applet") + ": " + title, message);
         if (transient)
             notification.setTransient((!transient) ? false : true);
         this.msgSource.notify(notification);
@@ -308,7 +308,7 @@ class WeatherApplet extends TextIconApplet {
     }
     async saveCurrentLocation() {
         if (this.config.currentLocation.locationSource == "ip-api") {
-            this.sendNotification("Error", "You can't save a location obtained automatically, sorry");
+            this.sendNotification(_("Error") + " - " + _("Location Store"), _("You can't save a location obtained automatically, sorry"));
         }
         this.locationStore.SaveCurrentLocation(this.config.currentLocation);
     }
@@ -1069,7 +1069,8 @@ class UI {
             child: new Icon({
                 icon_type: IconType.SYMBOLIC,
                 icon_size: 12,
-                icon_name: "custom-right-arrow-symbolic"
+                icon_name: "custom-right-arrow-symbolic",
+                style_class: STYLE_LOCATION_SELECTOR
             }),
         });
         this._nextLocationButton.actor.connect(SIGNAL_CLICKED, Lang.bind(this.app, this.app.NextLocationClicked));
@@ -1079,7 +1080,8 @@ class UI {
             child: new Icon({
                 icon_type: IconType.SYMBOLIC,
                 icon_size: 12,
-                icon_name: "custom-left-arrow-symbolic"
+                icon_name: "custom-left-arrow-symbolic",
+                style_class: STYLE_LOCATION_SELECTOR
             }),
         });
         this._previousLocationButton.actor.connect(SIGNAL_CLICKED, Lang.bind(this.app, this.app.PreviousLocationClicked));
@@ -1480,7 +1482,7 @@ class WeatherLoop {
                         + " seconds, refreshInterval " + this.app.config._refreshInterval + " minutes");
                     let state = await this.app.refreshWeather(false);
                     if (state == "locked")
-                        this.app.log.Print("App locked, refresh skipped in main loop");
+                        this.app.log.Print("App is currently refreshing, refresh skipped in main loop");
                     if (state == "success" || state == "locked")
                         this.lastUpdated = new Date();
                 }
@@ -1631,7 +1633,7 @@ class LocationStore {
         this.file = Gio.File.new_for_path(this.path);
         if (onStoreChanged != null)
             this.StoreChanged = onStoreChanged;
-        this.Start();
+        this.LoadSavedLocations();
     }
     GetConfigPath() {
         let configPath = GLib.getenv('XDG_CONFIG_HOME');
@@ -1719,34 +1721,34 @@ class LocationStore {
     }
     async SaveCurrentLocation(loc) {
         if (this.app.Locked()) {
-            this.app.sendNotification("Warning", "You can only save correct locations when the applet is not refreshing", true);
+            this.app.sendNotification(_("Warning") + " - " + _("Location Store"), _("You can only save correct locations when the applet is not refreshing"), true);
             return;
         }
         if (loc == null) {
-            this.app.sendNotification("Warning", "You can't save an incorrect location", true);
+            this.app.sendNotification(_("Warning") + " - " + _("Location Store"), _("You can't save an incorrect location"), true);
             return;
         }
         if (this.InStorage(loc)) {
-            this.app.sendNotification("Error", "Location is already saved", true);
+            this.app.sendNotification(_("Info") + " - " + _("Location Store"), _("Location is already saved"), true);
             return;
         }
         this.locations.push(loc);
         this.currentIndex = this.locations.length - 1;
         this.InvokeStorageChanged();
         await this.SaveToFile();
-        this.app.sendNotification("Success", "Location is saved to library", true);
+        this.app.sendNotification(_("Success") + " - " + _("Location Store"), _("Location is saved to library"), true);
     }
     async DeleteCurrentLocation(loc) {
         if (this.app.Locked()) {
-            this.app.sendNotification("Warning", "You can't remove a location while the applet is refreshing", true);
+            this.app.sendNotification(_("Info") + " - " + _("Location Store"), _("You can't remove a location while the applet is refreshing"), true);
             return;
         }
         if (loc == null) {
-            this.app.sendNotification("Warning", "You can't remove an incorrect location", true);
+            this.app.sendNotification(_("Info") + " - " + _("Location Store"), _("You can't remove an incorrect location"), true);
             return;
         }
         if (!this.InStorage(loc)) {
-            this.app.sendNotification("Can't delete", "Location is not in storage", true);
+            this.app.sendNotification(_("Info") + " - " + _("Location Store"), _("Location is not in storage, can't delete"), true);
             return;
         }
         let index = this.FindIndex(loc);
@@ -1756,16 +1758,13 @@ class LocationStore {
             this.currentIndex = this.locations.length - 1;
         if (this.currentIndex < 0)
             this.currentIndex = 0;
-        this.app.sendNotification("Success", "Location is deleted from library", true);
+        this.app.sendNotification(_("Success") + " - " + _("Location Store"), _("Location is deleted from library"), true);
         this.InvokeStorageChanged();
     }
     InvokeStorageChanged() {
         if (this.StoreChanged == null)
             return;
         this.StoreChanged(this.locations.length);
-    }
-    async Start() {
-        await this.LoadSavedLocations();
     }
     async LoadSavedLocations() {
         if (!await this.FileExists(this.file)) {
@@ -1784,6 +1783,8 @@ class LocationStore {
             return true;
         }
         catch (e) {
+            this.app.log.Error("Error loading locations from store: " + e.message);
+            this.app.sendNotification(_("Error") + " - " + _("Location Store"), _("Failed to load in data from location storage, please see the logs for more information"));
             return false;
         }
     }
@@ -1906,6 +1907,7 @@ const STYLE_CURRENT = 'current';
 const STYLE_FORECAST = 'forecast';
 const STYLE_WEATHER_MENU = 'weather-menu';
 const STYLE_BAR = 'bottombar';
+const STYLE_LOCATION_SELECTOR = 'location-selector';
 const BLANK = '   ';
 const ELLIPSIS = '...';
 const EN_DASH = '\u2013';
