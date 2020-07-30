@@ -5,8 +5,7 @@
             "providers",
             "presentation-section",
 			"units-section",
-			"info-section",
-			"contact-section"
+			"info-section"
         ],
         "providers":{
             "type":"page",
@@ -20,17 +19,17 @@
             "type":"page",
             "title":"Presentation",
             "sections":[
-                "keybindings",
 				"panel-options",
 				"presentation"
             ]
         },
         "units-section":{
             "type":"page",
-            "title":"Units and Icons",
+            "title":"Units, Icons and Keys",
             "sections":[
 				"units",
-				"icons"
+				"icons",
+				"keybindings"
             ]
 		},
 		"info-section":{
@@ -38,44 +37,41 @@
             "title":"Help",
             "sections":[
 				"provider-info",
-				"location-info"
+				"location-info",
+				"more-info",
+				"submit-issue"
 			]
 		},
-		"contact-section":{
-            "type":"page",
-            "title":"Contact",
-            "sections":[
-				"contact"
-			]
-		},
-		"contact" : {
+		"submit-issue" : {
 			"type":"section",
-			"title":"Contact",
+			"title":"Report an issue",
 			"keys":[
+				"issue-reporting-explanation",
 				"submitIssue",
 				"maintainer"
 			]
 		},
 		"provider-info" : {
 			"type":"section",
-			"title":"Weather provider choices and details",
+			"title":"How to choose a weather provider",
 			"keys":[
-				"openWM",
-				"darkS",
-				"METN",
-				"WB",
-				"Yahoo",
-				"Climacell",
-				"metuk",
-				"usweather"
+				"provider-explanation"
 			]
 		},
 		"location-info": {
 			"type":"section",
-			"title":"Entering location manually",
+			"title":"Allowed location formats",
 			"keys":[
 				"loc-info"
 			]
+		},
+		"more-info": {
+			"type":"section",
+			"title": "View additional information",
+			"keys":[
+				"more-info-label",
+				"getLocation"
+			]	
 		},
 		"provider-options" : {
 			"type":"section",
@@ -87,7 +83,6 @@
 				"location",
 				"saveLocation",
 				"deleteLocation",
-				"getLocation",
 				"refreshInterval",
 				"forecastDays",
 				"forecastHours"
@@ -209,7 +204,7 @@
 	"getLocation": {
 		"type": "button",
 		"indent": true,
-		"description": "Setup API Key and Location",
+		"description": "Weather Applet at Cinnamon Spices Website",
 		"callback": "locationLookup",
 		"tooltip": "Opens webpage guide"
 	},
@@ -380,6 +375,10 @@
 		"description": "Use custom icons in the popup menu"
 		
 	},
+	"more-info-label": {
+		"type": "label",
+		"description": "For more information go to the Spices Website by clicking the button below. You can also comment and ask a questions to the community at this page by logging in with your Github account."
+	},
 	"submitIssue": {
 		"type": "button",
 		"indent": true,
@@ -391,40 +390,16 @@
 		"type": "label",
 		"description": "Current maintainer: Gr3q"
 	},
-	"openWM": {
+	"issue-reporting-explanation": {
 		"type": "label",
-		"description": "OpenWeatherMap:\nThe default, works out of the box.\nBig Thanks to them supporting free open source projects, like this! Supports 7 forecast days and 48 forecast hours."
+		"description": "If you find an issue with this applet please make a report by clicking on the button below and login in with your Github account. Don't forget to write weather@mockturtl in the top Title field to make it easier for everyone to know that the issue is about the weather applet (the form is for all Cinnamon applets)."
 	},
-	"darkS": {
+	"provider-explanation": {
 		"type": "label",
-		"description": "DarkSky:\nIt doesn't accept new registrations and will be closed in 2021. Supports 8 forecast days and 168 forecast hours."
-	},
-	"METN": {
-		"type": "label",
-		"description": "MET Norway:\nCurrent weather is shown for the next hour, and the daily forecasts are generated from 6 hour forecasts, so it can look incorrect sometimes. Supports 10 forecast days and 48 forecast hours."
-	},
-	"WB": {
-		"type": "label",
-		"description": "WeatherBit:\nAt least 10 minutes as refresh rate is recommended, since otherwise you might exceed you daily quota. Supports 16 forecast days and 48 forecast hours."
-	},
-	"Yahoo": {
-		"type": "label",
-		"description": "Yahoo:\nRequires 'python3-requests-oauthlib' package installed (for Arch based distros 'python-requests-oauthlib'), Updates every 2 hours. Only supports 10 forecast days and no hours."
-	},
-	"Climacell": {
-		"type": "label",
-		"description": "Climacell:\nAt least 10 minutes refresh rate is recommended with a free plan. Supports 16 forecast days and 96 forecast hours."
-	},
-	"metuk": {
-		"type": "label",
-		"description": "Met Office UK:\nUK only option. If it does not find a site in 50km range around you it will not show weather. Please let me know if this happens and you live in the UK. Supports 5 days and 36 hours of forecasts. Sometimes it takes 5-8 seconds to load the first time, please be patient."
-	},
-	"usweather": {
-		"type": "label",
-		"description": "US National Weather Service:\nUS only option. First load can take up to 15-20 seconds, please be patient. Current weather is merged from a max 50km area, if some data is missing from the closest one. Supports 7 days and 156 hours of forecasts."
+		"description": "You can use several different weather forecast providers that you choose under the first Weather Tab in this Configuration panel. Some providers require a API key to work, some have regional limits, differ in forecast length, and they all need a functional internet connection to the chosen service. The options are described in detail on the Cinnamon Spices Website, what you can access with the button further down."
 	},
 	"loc-info": {
 		"type": "label",
-		"description": "You can either use coordinates as {latitude},{longitude},\n or an address, from smallest detail to biggest, like '{house num} {street} {city/town} {postcode} {country}'. All of them are optional, although at least city and country is recommended. You can use commas if you like.\n\nAfter you stop typing the field will be replaced after 3 seconds with the full address, for you to validate if it's correct."
+		"description": "Your location in most cases work automatic but you can enter it manually by coordinates 'Latitude,Longitude' (e.g. 51.5085,-0.1257) or use 'City,Country-code' (e.g. London,UK) or try to enter {House number} {Street} {City/Town} {Postcode} {Country}, but the search algorithm is very permissive on the format. After 3 seconds without typing the address you enter will be replaced automatically for validating you choice."
 	}
 }
