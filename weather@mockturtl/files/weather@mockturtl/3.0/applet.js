@@ -1947,6 +1947,11 @@ var LocationStore = (function () {
                 }
                 index = this.FindIndex(loc);
                 this.locations.splice(index, 1);
+                this.currentIndex = this.currentIndex--;
+                if (this.currentIndex < 0)
+                    this.currentIndex = this.locations.length - 1;
+                if (this.currentIndex < 0)
+                    this.currentIndex = 0;
                 this.app.sendNotification("Success", "Location is deleted from library", true);
                 this.InvokeStorageChanged();
                 return [2];
