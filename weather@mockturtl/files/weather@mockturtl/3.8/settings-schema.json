@@ -400,6 +400,6 @@
 	},
 	"loc-info": {
 		"type": "label",
-		"description": "Your location in most cases work automatic but you can enter it manually by coordinates 'Latitude,Longitude' (e.g. 51.5085,-0.1257) or use 'City,Country-code' (e.g. London,UK) or try to enter {House number} {Street} {City/Town} {Postcode} {Country}, but the search algorithm is very permissive on the format. After 3 seconds without typing the address you enter will be replaced automatically for validating you choice."
+		"description": "Your location in most cases work automatically but you can enter it manually by coordinates 'Latitude,Longitude' (e.g. 51.5085,-0.1257) or use 'City,Country-code' (e.g. London,UK) or try to enter {House number} {Street} {City/Town} {Postcode} {Country}. The search algorithm is very flexible with the format. After 3 seconds without typing the address you entered is replaced automatically for validating your choice."
 	}
 }
