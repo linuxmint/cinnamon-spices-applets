@@ -1,3 +1,7 @@
+### 1.4
+
+- Switch from timer approach to async file monitor approach
+
 ### 1.3
 
 - Fix some stability issues - Thanks to [Steve M](https://github.com/smurphos) for his contribution
