@@ -45,6 +45,7 @@ const {
     _,
     EXP1, EXP2, EXP3,
     DEBUG,
+    QUICK,
     capitalize,
     log,
     logError
@@ -133,22 +134,6 @@ function criticalNotify(msg, details, icon, button=[]) {
 }
 
 /**
- * To prevent this issue: https://github.com/linuxmint/cinnamon/issues/9499
- */
-if (versionCompare( GLib.getenv('CINNAMON_VERSION') ,"4.6.0" ) >= 0 ) {
-    // Problem: this code is still used, but it's the code from /4.6 that should be used !
-    criticalNotify(_("You are advised to restart Cinnamon"),
-        _("To be sure to use the right code, you are advised to restart Cinnamon."),
-        new St.Icon({
-            icon_name: "spices-update",
-            icon_type: St.IconType.SYMBOLIC,
-            icon_size: 32 }
-        ),
-        [_("Restart Cinnamon"), "restart", "cinnamon --replace"]
-    );
-}
-
-/**
  * Class SpicesUpdate
  */
 class SpicesUpdate extends Applet.TextIconApplet {
@@ -176,7 +161,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
         this.notification = null;
 
         this.force_notifications = false; // Set to true for tests.
-        if (!DEBUG()) this.force_notifications = false;
+        if (!QUICK()) this.force_notifications = false;
 
         this.notifications_about_updates = {};
         this.notifications_about_news = {};
@@ -306,60 +291,60 @@ class SpicesUpdate extends Applet.TextIconApplet {
         this.settings.bind(
             "check_applets", // The setting key
             "check_applets", // The property to manage (this.check_applets)
-            this.on_settings_changed.bind(this), // Callback when value changes
-            null); // Optional callback data
+            this.on_settings_changed.bind(this) // Callback when value changes
+        );
 
         this.settings.bind(
             "check_new_applets",
             "check_new_applets",
-            this.on_settings_changed.bind(this),
-            null);
+            this.on_settings_changed.bind(this)
+        );
 
         this.settings.bind(
             "exp_applets",
             "exp_applets",
-            null,
-            null);
+            null
+        );
         this.exp_applets = "%s\n%s\n%s".format(EXP1["applets"], EXP2["applets"], EXP3);
 
         this.settings.bind(
             "unprotected_applets",
             "unprotected_applets",
-            this.populateSettingsUnprotectedApplets.bind(this),
-            null);
+            this.populateSettingsUnprotectedApplets.bind(this)
+        );
 
         // Desklets
         this.settings.bind(
             "check_desklets",
             "check_desklets",
-            this.on_settings_changed.bind(this),
-            null);
+            this.on_settings_changed.bind(this)
+        );
 
         this.settings.bind(
             "check_new_desklets",
             "check_new_desklets",
-            this.on_settings_changed.bind(this),
-            null);
+            this.on_settings_changed.bind(this)
+        );
 
         this.settings.bind(
             "exp_desklets",
             "exp_desklets",
-            null,
-            null);
+            null
+        );
         this.exp_desklets = "%s\n%s\n%s".format(EXP1["desklets"], EXP2["desklets"], EXP3);
 
         this.settings.bind(
             "unprotected_desklets",
             "unprotected_desklets",
-            this.populateSettingsUnprotectedDesklets.bind(this),
-            null);
+            this.populateSettingsUnprotectedDesklets.bind(this)
+        );
 
         // Extensions
         this.settings.bind(
             "check_extensions",
             "check_extensions",
-            this.on_settings_changed.bind(this),
-            null);
+            this.on_settings_changed.bind(this)
+        );
 
         this.settings.bind(
             "check_new_extensions",
@@ -370,62 +355,62 @@ class SpicesUpdate extends Applet.TextIconApplet {
         this.settings.bind(
             "exp_extensions",
             "exp_extensions",
-            null,
-            null);
+            null
+        );
         this.exp_extensions = "%s\n%s\n%s".format(EXP1["extensions"], EXP2["extensions"], EXP3);
 
         this.settings.bind(
             "unprotected_extensions",
             "unprotected_extensions",
-            this.populateSettingsUnprotectedExtensions.bind(this),
-            null);
+            this.populateSettingsUnprotectedExtensions.bind(this)
+        );
 
         // Themes
         this.settings.bind(
             "check_themes",
             "check_themes",
-            this.on_settings_changed.bind(this),
-            null);
+            this.on_settings_changed.bind(this)
+        );
 
         this.settings.bind(
             "check_new_themes",
             "check_new_themes",
-            this.on_settings_changed.bind(this),
-            null);
+            this.on_settings_changed.bind(this)
+        );
 
         this.settings.bind(
             "exp_themes",
             "exp_themes",
-            null,
-            null);
+            null
+        );
         this.exp_themes = "%s\n%s\n%s".format(EXP1["themes"], EXP2["themes"], EXP3);
 
         this.settings.bind(
             "unprotected_themes",
             "unprotected_themes",
-            this.populateSettingsUnprotectedThemes.bind(this),
-            null);
+            this.populateSettingsUnprotectedThemes.bind(this)
+        );
 
         // General settings
         this.settings.bind(
             "general_frequency",
             "general_frequency",
-            this.on_frequency_changed.bind(this),
-            null);
-        this.refreshInterval = DEBUG() ? 120 * this.general_frequency : 3600 * this.general_frequency;
+            this.on_frequency_changed.bind(this)
+        );
+        this.refreshInterval = QUICK() ? 120 * this.general_frequency : 3600 * this.general_frequency;
 
         this.settings.bind(
             "general_first_check",
             "general_first_check",
-            null,
-            null);
+            null
+        );
         this.first_loop = this.general_first_check;
 
         this.settings.bind(
             "general_next_check_date",
             "general_next_check_date",
-            null,
-            null);
+            null
+        );
         let now = Math.ceil(Date.now()/1000);
         if (this.general_next_check_date === 0) {
             this.general_next_check_date = now + this.refreshInterval;
@@ -438,50 +423,50 @@ class SpicesUpdate extends Applet.TextIconApplet {
         this.settings.bind(
             "general_warning",
             "general_warning",
-            this.updateUI.bind(this),
-            null);
+            this.updateUI.bind(this)
+        );
 
         this.settings.bind(
             "events_color",
             "events_color",
-            this.updateUI.bind(this),
-            null);
+            this.updateUI.bind(this)
+        );
 
         this.settings.bind(
             "general_notifications",
             "general_notifications",
-            this.on_settings_changed.bind(this),
-            null);
+            this.on_settings_changed.bind(this)
+        );
 
         this.settings.bind(
             "general_details_requested",
             "details_requested",
-            null,
-            null);
+            null
+        );
 
         this.settings.bind(
             "general_show_updateall_button",
             "general_show_updateall_button",
-            null,
-            null);
+            null
+        );
 
         this.settings.bind(
             "general_type_notif",
             "general_type_notif",
-            null,
-            null);
+            null
+        );
 
         this.settings.bind(
             "displayType",
             "displayType",
-            this.on_display_type_changed.bind(this),
-            null);
+            this.on_display_type_changed.bind(this)
+        );
 
         this.settings.bind(
             "general_hide",
             "general_hide",
-            this.on_display_type_changed.bind(this),
-            null);
+            this.on_display_type_changed.bind(this)
+        );
         // End of get_SU_settings
     }
 
@@ -734,7 +719,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
         let ret = (now >= this.general_next_check_date - 5);
 
         this.refreshInterval = 3600 * this.general_frequency;
-        if (DEBUG()) this.refreshInterval = 120 * this.general_frequency;
+        if (QUICK()) this.refreshInterval = 120 * this.general_frequency;
         if (ret === true) {
             this.general_next_check_date = now + this.refreshInterval;
         }
@@ -756,7 +741,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
             Mainloop.source_remove(this.loopId);
         }
         this.loopId = 0;
-        let coeff = DEBUG() ? 120 : 3600;
+        let coeff = QUICK() ? 120 : 3600;
         this.refreshInterval = coeff * this.general_frequency;
         this.loopId = Mainloop.timeout_add_seconds(this.refreshInterval, () => this.updateLoop());
         // End of on_frequency_changed
@@ -775,7 +760,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
 
         // Refresh intervall:
         this.refreshInterval = 3600 * this.general_frequency;
-        if (DEBUG()) this.refreshInterval = 120 * this.general_frequency;
+        if (QUICK()) this.refreshInterval = 120 * this.general_frequency;
 
         // Types to check
         this.types_to_check = [];
@@ -1421,7 +1406,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
                 let result = subject_regexp.exec(data.toString());
                 this.details_by_uuid[uuid] = result[1].toString();
                 this.do_rotation = true;
-                //this.updateUI();
+                this.updateUI(); // Is it necessary?
             } else {
                 this.details_by_uuid[uuid] = "";
             }
@@ -1456,7 +1441,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
                     }
                 }
                 this._rewrite_metadataFile(fileName, nearest_commit_time);
-                //this.updateUI();
+                this.updateUI(); // Is it necessary?
             }
         }));
         // End of get_date_of_nearest_commit
@@ -1739,7 +1724,6 @@ class SpicesUpdate extends Applet.TextIconApplet {
 
 
         // Help
-
         this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
         // button Help...
@@ -1927,8 +1911,11 @@ class SpicesUpdate extends Applet.TextIconApplet {
 
     // This is the loop run at general_frequency rate to call updateUI() to update the display in the applet and tooltip
     updateLoop() {
-        if (this.isLooping) return;
-        //log("ONE MORE LOOP!", true);
+        if (this.isLooping) {
+            log("ONE MORE LOOP requested, but already looping");
+            return;
+        }
+        log("ONE MORE LOOP!");
         this.isLooping = true;
         if (this.loopId > 0) {
             Mainloop.source_remove(this.loopId);
@@ -1955,7 +1942,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
                     this._whether_empty_or_not(t);
                 }
                 if (!this.first_loop) {
-                    this.refreshInterval = DEBUG() ? 120 * this.general_frequency : 3600 * this.general_frequency;
+                    this.refreshInterval = QUICK() ? 120 * this.general_frequency : 3600 * this.general_frequency;
                     var monitor, Id;
                     for (let tuple of this.monitors) {
                         [monitor, Id] = tuple;
@@ -2049,13 +2036,14 @@ class SpicesUpdate extends Applet.TextIconApplet {
             this.updateUI(); // update icon and tooltip
             this._set_main_label();
         }
-        if (this.new_loop_requested === true) {
-            this.new_loop_requested = false;
-            this.refreshInterval = 60; // 60 seconds
-        }
+
         this.isLooping = false;
-        if (this.applet_running === true && this.loopId === 0) {
+        if (this.applet_running === true && (this.loopId === 0 || this.new_loop_requested === true)) {
             this.do_rotation = false;
+            if (this.new_loop_requested === true) {
+                this.new_loop_requested = false;
+                this.refreshInterval = 12; // 12 seconds
+            }
             // One more loop !
             this.loopId = Mainloop.timeout_add_seconds(this.refreshInterval, () => this.updateLoop());
         }

@@ -21,6 +21,11 @@ function DEBUG() {
   return _debug.query_exists(null);
 };
 
+function QUICK() {
+  let _quick = Gio.file_new_for_path(HOME_DIR + "/.local/share/cinnamon/applets/" + UUID + "/QUICK");
+  return _quick.query_exists(null);
+};
+
 const DOWNLOAD_TIME = 10;
 
 let sort = "date";
@@ -83,8 +88,6 @@ Gettext.bindtextdomain("cinnamon-control-center", "/usr/share/locale");
 // ++ Always needed if you want localisation/translation support
 function _(str, uuid=UUID) {
   var customTrans = Gettext.dgettext(uuid, str);
-  if (customTrans !== str && customTrans !== "") return customTrans;
-  customTrans = Gettext.dgettext("cinnamon", str);
   if (customTrans !== str && customTrans !== "") return customTrans;
   return Gettext.gettext(str);
 }
@@ -175,6 +178,7 @@ module.exports = {
   _,
   EXP1, EXP2, EXP3,
   DEBUG,
+  QUICK,
   capitalize,
   log,
   logError
