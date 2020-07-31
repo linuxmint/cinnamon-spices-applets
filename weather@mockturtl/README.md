@@ -15,9 +15,9 @@ In **Manual Location** mode the applet either accepts:
 * **Coordinates** in Latitude, Longitude format (e.g. 37.77,122.41). You can use [OpenWeatherMap's finder](https://openweathermap.org/find) and paste the coordinates in from there.
 * or an **Address** (it can be just a city and country, it is pretty flexible). After 3 seconds, the applet will replace what you entered with the full address what it finds so you can verify if it's correct. You can also get your exact address to enter from [OpenStreetMap's Nominatim search](https://nominatim.openstreetmap.org/), that's what the applet uses as well.
 
-You can also save locations what were entered manually and switch between them in the applet (arrows will appear on both sides of the location in the applet if you have more than two saved). 
+You can also save locations what you entered manually and switch between them in the applet *(arrows will appear on both sides of the location in the applet if you have more than two saved)*. 
 
-They are stored in a file at ```$XDG_CONFIG_HOME/weather-mockturtl/locations.json``` or if the variable is not set, ```~/.config/weather-mockturtl/locations.json```.
+They are stored in a file at ```$XDG_CONFIG_HOME/weather-mockturtl/locations.json``` or if the variable is not set, ```~/.config/weather-mockturtl/locations.json```. *Only the text what goes into the settings entry is used at the moment, the rest of the data is just there without purpose.*
 
 ## Weather providers to choose from
 
@@ -93,6 +93,7 @@ http://groups.google.com/group/cinnamon-weather
 ## Future Plans
 
 * None at the moment, I can take requests for provider integrations or for new features
+* After Linux Mint 18 EOL switch to settings-schema based location storage, not file storage.
 
 ## Known Issues
 
