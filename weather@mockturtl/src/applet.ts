@@ -2160,6 +2160,23 @@ class GeoLocation {
 	}
 }
 
+// TODO: Switch to setting-schema based LocationStore as soon as 3.0 id Deprecated
+// Example schema entry:
+/*"location-list": {
+		"type" : "list",
+		"description" : "Your saved locations",
+		"columns" : [
+			{"id": "lat", "title": "Latitude", "type": "string"},
+			{"id": "lon", "title": "Longitude", "type": "string"},
+			{"id": "city", "title": "City", "type": "string"},
+			{"id": "country", "title": "Country", "type": "string"},
+			{"id": "address_string", "title": "Full Address", "type": "string", "default": ""},
+			{"id": "entryText", "title": "Text in location entry", "type": "string", "default": ""},
+			{"id": "timeZone", "title": "Timezone", "type": "string", "default": ""}
+		],
+		"default" : []
+	},
+	*/
 class LocationStore {
 
 	path: string = null; // ~/.config/weather-mockturtl/locations.json
