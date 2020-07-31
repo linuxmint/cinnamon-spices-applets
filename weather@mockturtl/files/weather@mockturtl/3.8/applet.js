@@ -939,8 +939,6 @@ class UI {
                     if (config._translateCondition)
                         comment = _(comment);
                 }
-                if (weather.location.timeZone == null)
-                    forecastData.date.setMilliseconds(forecastData.date.getMilliseconds() + (weather.location.tzOffset * 1000));
                 let dayName = GetDayName(forecastData.date, this.app.currentLocale, weather.location.timeZone);
                 if (forecastData.date) {
                     let now = new Date();

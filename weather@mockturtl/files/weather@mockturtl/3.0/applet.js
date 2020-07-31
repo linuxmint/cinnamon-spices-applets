@@ -1075,8 +1075,6 @@ var UI = (function () {
                     if (config._translateCondition)
                         comment = _(comment);
                 }
-                if (weather.location.timeZone == null)
-                    forecastData.date.setMilliseconds(forecastData.date.getMilliseconds() + (weather.location.tzOffset * 1000));
                 var dayName = GetDayName(forecastData.date, this.app.currentLocale, weather.location.timeZone);
                 if (forecastData.date) {
                     var now = new Date();

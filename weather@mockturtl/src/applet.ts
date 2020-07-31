@@ -644,7 +644,7 @@ class WeatherApplet extends TextIconApplet {
 		weatherInfo.hourlyForecasts = (!weatherInfo.hourlyForecasts) ? [] : weatherInfo.hourlyForecasts;
 
 		// Estimation
-		//this.weather.location.tzOffset = Math.round(this.weather.coord.lon/15) * 3600;
+		//weatherInfo.location.tzOffset = Math.round(weatherInfo.coord.lon/15) * 3600;
 		return weatherInfo;
 	}
 
@@ -1274,7 +1274,6 @@ class UI {
 				}
 
 				// Day Names
-				if (weather.location.timeZone == null) forecastData.date.setMilliseconds(forecastData.date.getMilliseconds() + (weather.location.tzOffset * 1000));
 				let dayName: string = GetDayName(forecastData.date, this.app.currentLocale, weather.location.timeZone);
 
 				if (forecastData.date) {
