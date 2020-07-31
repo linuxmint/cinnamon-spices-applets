@@ -1142,6 +1142,8 @@ class SpicesUpdate extends Applet.TextIconApplet {
                 }
             } else {
                 // the cache doesn't exist
+                let jsonDirName = CACHE_DIR + "/" + this._get_singular_type(type);
+                GLib.mkdir_with_parents(jsonDirName, 0o755);
                 is_to_download = true
             }
         }
