@@ -1,21 +1,22 @@
 {
-    "multiversion": true,
-    "uuid": "sound150@claudiux",
-    "name": "Sound 150%",
-    "max-instances": "1",
-    "description": "An applet, based on the Cinnamon one, to control sound (up to 150% of nominal volume) and music",
-    "hide-configuration": false,
-    "version": "1.5.4",
-    "cinnamon-version": [
-        "2.8",
-        "3.0",
-        "3.2",
-        "3.4",
-        "3.6",
-        "3.8",
-        "4.0",
-        "4.2",
-        "4.4",
-        "4.6"
-    ]
+  "multiversion": true,
+  "uuid": "sound150@claudiux",
+  "name": "Sound 150%",
+  "icon": "audio-volume-high-symbolic",
+  "max-instances": "1",
+  "description": "An applet, based on the Cinnamon one, to control sound (up to 150% of nominal volume) and music",
+  "hide-configuration": false,
+  "version": "2.0.0",
+  "cinnamon-version": [
+    "2.8",
+    "3.0",
+    "3.2",
+    "3.4",
+    "3.6",
+    "3.8",
+    "4.0",
+    "4.2",
+    "4.4",
+    "4.6"
+  ]
 }

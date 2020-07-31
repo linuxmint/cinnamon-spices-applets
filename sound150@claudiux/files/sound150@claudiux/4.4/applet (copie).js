@@ -9,7 +9,7 @@ const Clutter = imports.gi.Clutter;
 const St = imports.gi.St;
 const PopupMenu = imports.ui.popupMenu;
 const GLib = imports.gi.GLib;
-const Gvc = imports.gi.Gvc;
+const Cvc = imports.gi.Cvc;
 const Tooltips = imports.ui.tooltips;
 const Gettext = imports.gettext; // ++ Needed for translations
 const Main = imports.ui.main;
@@ -27,16 +27,16 @@ const DEBUG = false;
 
 var UUID="sound150@claudiux";
 
-let execInstallLanguages;
-if (typeof require !== 'undefined') {
-    // For Cinnamon >= 3.8:
-    const InstallLanguages = require('./InstallLanguages');
-    execInstallLanguages = InstallLanguages.execInstallLanguages;
-} else {
-    // For Cinnamon < 3.8:
-    const AppletDirectory = imports.ui.appletManager.applets[UUID];
-    execInstallLanguages = AppletDirectory.InstallLanguages.execInstallLanguages;
-}
+//let execInstallLanguages;
+//if (typeof require !== 'undefined') {
+    //// For Cinnamon >= 3.8:
+    //const InstallLanguages = require('./InstallLanguages');
+    //execInstallLanguages = InstallLanguages.execInstallLanguages;
+//} else {
+    //// For Cinnamon < 3.8:
+    //const AppletDirectory = imports.ui.appletManager.applets[UUID];
+    //execInstallLanguages = AppletDirectory.InstallLanguages.execInstallLanguages;
+//}
 
 function _(str) {
     let customTrans = Gettext.dgettext(UUID, str);
@@ -46,8 +46,8 @@ function _(str) {
 }
 
 // Logging
-function log(message) {
-    if (DEBUG)
+function log(message, always=false) {
+    if (DEBUG || always)
         global.log("[" + UUID + "]: " + message);
 }
 
@@ -71,6 +71,16 @@ var VOLUME_ADJUSTMENT_STEP = 0.02; /* Volume adjustment step in % */
 //var APPLET_BOX_STYLE_CLASS = 'applet-box';
 
 const ICON_SIZE = 28;
+
+
+const CINNAMON_DESKTOP_SOUNDS = "org.cinnamon.desktop.sound";
+const MAXIMUM_VOLUME_KEY = "maximum-volume";
+
+function _get_maximum_volume() {
+    let _interface_settings = new Gio.Settings({ schema_id: CINNAMON_DESKTOP_SOUNDS });
+    let ret = _interface_settings.get_int(MAXIMUM_VOLUME_KEY);
+    return ret
+} // End of _get_maximum_volume
 
 function ControlButton() {
     this._init.apply(this, arguments);
@@ -241,7 +251,7 @@ VolumeSlider.prototype = {
         } else {
             this.actor.show();
             this.stream = stream;
-            this.isMic = stream instanceof Gvc.MixerSource || stream instanceof Gvc.MixerSourceOutput;
+            this.isMic = stream instanceof Cvc.MixerSource || stream instanceof Cvc.MixerSourceOutput;
 
             let mutedId = stream.connect("notify::is-muted", Lang.bind(this, this._update));
             let volumeId = stream.connect("notify::volume", Lang.bind(this, this._update));
@@ -264,8 +274,11 @@ VolumeSlider.prototype = {
             muted = true;
         } else {
             muted = false;
-            if (volume != this.applet._volumeNominal && volume > this.applet._volumeNominal*(1-VOLUME_ADJUSTMENT_STEP/2) && volume < this.applet._volumeNominal*(1+VOLUME_ADJUSTMENT_STEP/2)) {
-                volume = this.applet._volumeNominal;
+
+            let magneticOn = (this.applet.magneticOn!==null && this.applet.magneticOn===true);
+
+            if (this.applet.stepVolume > 1 && magneticOn===true && volume != this.applet._volumeNominal && volume > this.applet._volumeNominal*(1-VOLUME_ADJUSTMENT_STEP/2) && volume < this.applet._volumeNominal*(1+VOLUME_ADJUSTMENT_STEP/2)) {
+                volume = this.applet._volumeNominal; // 100% is magnetic
             }
         }
         this.stream.volume = volume;
@@ -281,7 +294,9 @@ VolumeSlider.prototype = {
     _update: function(){
         let value = (!this.stream || this.stream.is_muted)? 0 : this.stream.volume / this.applet._volumeNominal;
 
-        if (value != 1 && value>1-VOLUME_ADJUSTMENT_STEP/2 && value<1+VOLUME_ADJUSTMENT_STEP/2) {
+        let magneticOn = (this.applet.magneticOn!==null && this.applet.magneticOn===true);
+
+        if (magneticOn===true && value != 1 && value>1-VOLUME_ADJUSTMENT_STEP/2 && value<1+VOLUME_ADJUSTMENT_STEP/2) {
             value = 1; // 100% is magnetic
             this.applet._output.volume = this.applet._volumeNominal;
             this.applet._output.push_volume()
@@ -332,8 +347,12 @@ VolumeSlider.prototype = {
 
     _onKeyPressEvent: function (actor, event) {
         let key = event.get_key_symbol();
-        if (key == Clutter.KEY_Right || key == Clutter.KEY_Left) {
-            let delta = key == Clutter.KEY_Right ? VOLUME_ADJUSTMENT_STEP : -VOLUME_ADJUSTMENT_STEP;
+        if (key == Clutter.KEY_Right ||
+            key == Clutter.KEY_Left ||
+            key == Clutter.AudioRaiseVolume ||
+            key == Clutter.AudioLowerVolume)
+        {
+            let delta = (key == Clutter.KEY_Right || key == Clutter.AudioRaiseVolume) ? VOLUME_ADJUSTMENT_STEP : -VOLUME_ADJUSTMENT_STEP;
             this._value = Math.max(0, Math.min(this._value + delta/this.applet.pcMaxVolume, 1));
             this._slider.queue_repaint();
             this.emit('value-changed', this._value);
@@ -787,8 +806,6 @@ Player.prototype = {
             if ( this._name === "spotify" ) {
                 artUrl = artUrl.replace("/thumb/", "/300/"); // Spotify 0.9.x
                 artUrl = artUrl.replace("/image/", "/300/"); // Spotify 0.27.x
-            } else if (this._name == "Spotify") {
-                artUrl = artUrl.replace("open.spotify.com","i.scdn.co"); // Fix missing cover art
             }
             if (this._trackCoverFile != artUrl) {
                 this._trackCoverFile = artUrl;
@@ -1019,96 +1036,6 @@ MediaPlayerLauncher.prototype = {
     }
 };
 
-function PopupSwitchIconMenuItem() {
-    this._init.apply(this, arguments);
-}
-
-PopupSwitchIconMenuItem.prototype = {
-    __proto__: PopupMenu.PopupBaseMenuItem.prototype,
-
-    /**
-     * _init:
-     * @text (string): text to display in the label
-     * @active: boolean to set switch on or off
-     * @iconName (string): name of the icon used
-     * @iconType (St.IconType): the type of icon (usually #St.IconType.SYMBOLIC
-     * or #St.IconType.FULLCOLOR)
-     * @params (JSON): parameters to pass to %PopupMenu.PopupBaseMenuItem._init
-     */
-    _init: function(text, active, iconName, iconType, params) {
-        PopupMenu.PopupBaseMenuItem.prototype._init.call(this, params);
-
-        this.label = new St.Label({ text: text });
-        this._statusLabel = new St.Label({ text: '', style_class: 'popup-inactive-menu-item' });
-
-        this._icon = new St.Icon({ style_class: 'popup-menu-icon',
-            icon_name: iconName,
-            icon_type: iconType});
-
-        this._switch = new PopupMenu.Switch(active);
-
-        this.addActor(this._icon, {span: 0});
-        this.addActor(this.label);
-        this.addActor(this._statusLabel);
-
-        this._statusBin = new St.Bin({ x_align: St.Align.END });
-        this.addActor(this._statusBin, { expand: true, span: -1, align: St.Align.END });
-        this._statusBin.child = this._switch.actor;
-    },
-
-    /**
-     * setIconSymbolicName:
-     * @iconName (string): name of the icon
-     *
-     * Changes the icon to a symbolic icon with name @iconName.
-     */
-    setIconSymbolicName: function (iconName) {
-        this._icon.set_icon_name(iconName);
-        this._icon.set_icon_type(St.IconType.SYMBOLIC);
-    },
-
-    /**
-     * setIconName:
-     * @iconName (string): name of the icon
-     *
-     * Changes the icon to a full color icon with name @iconName.
-     */
-    setIconName: function (iconName) {
-        this._icon.set_icon_name(iconName);
-        this._icon.set_icon_type(St.IconType.FULLCOLOR);
-    },
-
-    setStatus: function(text) {
-        if (text != null) {
-            this._statusLabel.set_text(text);
-        } else {
-            this._statusLabel.set_text('');
-        }
-    },
-
-    activate: function(event) {
-        if (this._switch.actor.mapped) {
-            this.toggle();
-        }
-
-        PopupBaseMenuItem.prototype.activate.call(this, event, true);
-    },
-
-    toggle: function() {
-        this._switch.toggle();
-        this.emit('toggled', this._switch.state);
-    },
-
-    get state() {
-        return this._switch.state;
-    },
-
-    setToggleState: function(state) {
-        this._switch.setToggleState(state);
-    }
-};
-
-
 function MyApplet(metadata, orientation, panel_height, instanceId) {
     this._init(metadata, orientation, panel_height, instanceId);
 }
@@ -1119,7 +1046,10 @@ MyApplet.prototype = {
     _init: function(metadata, orientation, panel_height, instanceId) {
         Applet.TextIconApplet.prototype._init.call(this, orientation, panel_height, instanceId);
 
-        //this.setAllowedLayout(Applet.AllowedLayout.BOTH);
+        this.setAllowedLayout(Applet.AllowedLayout.BOTH);
+
+        // Fixes an issue in Cinnamon 3.6.x, setting right permissions to script files
+        GLib.spawn_command_line_async("bash -c 'cd "+ metadata.path + "/../scripts && chmod 755 *.sh'");
 
         try {
             //APPLET_BOX_STYLE_CLASS = this.actor.style_class;
@@ -1134,31 +1064,37 @@ MyApplet.prototype = {
             UUID = metadata.uuid;
             Gettext.bindtextdomain(metadata.uuid, GLib.get_home_dir() + "/.local/share/locale");
 
-            this.settings.bindProperty(Settings.BindingDirection.IN, "showtrack", "showtrack", this.on_settings_changed, null);
-            this.settings.bindProperty(Settings.BindingDirection.IN, "middleClickAction", "middleClickAction");
-            this.settings.bindProperty(Settings.BindingDirection.IN, "showalbum", "showalbum", this.on_settings_changed, null);
-            this.settings.bindProperty(Settings.BindingDirection.IN, "truncatetext", "truncatetext", this.on_settings_changed, null);
+            this.settings.bind("showtrack", "showtrack", this.on_settings_changed);
+            this.settings.bind("middleClickAction", "middleClickAction");
+            this.settings.bind("showalbum", "showalbum", this.on_settings_changed);
+            this.settings.bind("truncatetext", "truncatetext", this.on_settings_changed);
 
-            this.settings.bindProperty(Settings.BindingDirection.IN, "percentMaxVol", "percentMaxVol", this.on_settings_changed, null);
+            this.settings.bind("magneticOn", "magneticOn", this.on_settings_changed);
+
+            this.settings.bind("percentMaxVol", "percentMaxVol", this.on_settings_changed);
             log('_init: percentMaxVol=' + this.percentMaxVol);
-            this.settings.bindProperty(Settings.BindingDirection.IN, "stepVolume", "stepVolume", this.on_settings_changed, null);
+            this.settings.bind("stepVolume", "stepVolume", this.on_settings_changed);
             log('_init: stepVolume=' + this.stepVolume);
-            VOLUME_ADJUSTMENT_STEP = 1*this.stepVolume/100;
+            //VOLUME_ADJUSTMENT_STEP = 1*this.stepVolume/100;
+            //VOLUME_ADJUSTMENT_STEP = 1*this.settings.getValue("stepVolume")/100;
 
-            this.settings.bindProperty(Settings.BindingDirection.IN, "adaptColor", "adaptColor", this.on_settings_changed, null);
 
-            this.settings.bindProperty(Settings.BindingDirection.IN, "hideSystray", "hideSystray", function() {
+
+            this.settings.bind("adaptColor", "adaptColor", this.on_settings_changed);
+
+            this.settings.bind("hideSystray", "hideSystray", function() {
                 if (this.hideSystray) this.registerSystrayIcons();
                 else this.unregisterSystrayIcons();
             });
 
-            this.settings.bindProperty(Settings.BindingDirection.IN, "playerControl", "playerControl", this.on_settings_changed, null);
-            this.settings.bindProperty(Settings.BindingDirection.IN, "extendedPlayerControl", "extendedPlayerControl", function(){
+            this.settings.bind("playerControl", "playerControl", this.on_settings_changed);
+            this.settings.bind("extendedPlayerControl", "extendedPlayerControl", function(){
                 for(let i in this._players)
                     this._players[i].onSettingsChanged();
             });
 
-            this.settings.bindProperty(Settings.BindingDirection.IN, "_knownPlayers", "_knownPlayers");
+            this.settings.bind("_knownPlayers", "_knownPlayers");
+
             if (this.hideSystray) this.registerSystrayIcons();
 
             this.menuManager = new PopupMenu.PopupMenuManager(this);
@@ -1208,7 +1144,7 @@ MyApplet.prototype = {
                 ));
             }));
 
-            this._control = new Gvc.MixerControl({ name: 'Cinnamon Volume Control' });
+            this._control = new Cvc.MixerControl({ name: 'Cinnamon Volume Control' });
             this._control.connect('state-changed', Lang.bind(this, this._onControlStateChanged));
 
             this._control.connect('output-added', Lang.bind(this, this._onDeviceAdded, "output"));
@@ -1259,8 +1195,8 @@ MyApplet.prototype = {
 
             this.actor.connect('scroll-event', Lang.bind(this, this._onScrollEvent));
 
-            this.mute_out_switch = new PopupSwitchIconMenuItem(_("Mute output"), false, "audio-volume-muted", St.IconType.SYMBOLIC);
-            this.mute_in_switch = new PopupSwitchIconMenuItem(_("Mute input"), false, "microphone-sensitivity-none", St.IconType.SYMBOLIC);
+            this.mute_out_switch = new PopupMenu.PopupSwitchIconMenuItem(_("Mute output"), false, "audio-volume-muted", St.IconType.SYMBOLIC);
+            this.mute_in_switch = new PopupMenu.PopupSwitchIconMenuItem(_("Mute input"), false, "microphone-sensitivity-none", St.IconType.SYMBOLIC);
             this._applet_context_menu.addMenuItem(this.mute_out_switch);
             this._applet_context_menu.addMenuItem(this.mute_in_switch);
 
@@ -1295,7 +1231,7 @@ MyApplet.prototype = {
             this._volumeControlShown = false;
 
             this._showFixedElements();
-            //this.set_show_label_in_vertical_panels(false);
+            this.set_show_label_in_vertical_panels(false);
             this.set_applet_label(this._applet_label.get_text());
 
             let appsys = Cinnamon.AppSystem.get_default();
@@ -1304,17 +1240,19 @@ MyApplet.prototype = {
             this.connect('style-changed', Lang.bind(this, this._onStyleChanged));
             this.connect('icon-theme-changed', Lang.bind(this, this._onIconThemeChanged));
 
-            if (execInstallLanguages(UUID)) {
-                // New .mo files have been installed.
-                // Reloads this applet later (to make sure it's initialized properly) for changes
-                // to .mo files take effect:
-                this._languagesTimeoutId = Mainloop.timeout_add(5000, Lang.bind(this, function() {
-                    this._languagesTimeoutId = null; //execute it only one time
-                    log('New .mo files installed!');
-                    this.applet_running = false;
-                    Extension.reloadExtension(UUID, Extension.Type.APPLET)
-                }));
-            }
+            this.on_settings_changed();
+
+            //~ if (execInstallLanguages(UUID)) {
+                //~ // New .mo files have been installed.
+                //~ // Reloads this applet later (to make sure it's initialized properly) for changes
+                //~ // to .mo files take effect:
+                //~ this._languagesTimeoutId = Mainloop.timeout_add(5000, Lang.bind(this, function() {
+                    //~ this._languagesTimeoutId = null; //execute it only one time
+                    //~ log('New .mo files installed!');
+                    //~ this.applet_running = false;
+                    //~ Extension.reloadExtension(UUID, Extension.Type.APPLET)
+                //~ }));
+            //~ }
         }
         catch (e) {
             global.logError(e);
@@ -1345,7 +1283,9 @@ MyApplet.prototype = {
 
         this._changeActivePlayer(this._activePlayer);
 
-        VOLUME_ADJUSTMENT_STEP = 1*this.stepVolume/100;
+        //VOLUME_ADJUSTMENT_STEP = 1*this.stepVolume/100;
+        VOLUME_ADJUSTMENT_STEP = 1*this.settings.getValue("stepVolume")/100;
+
         if (Math.round(this.percentMaxVol) <= MAX_RECOMMENDED) {
             this.percentMaxVolume = Math.round(1*this.percentMaxVol)
         } else {
@@ -1414,7 +1354,7 @@ MyApplet.prototype = {
                     this._output.change_is_muted(true);
             } else {
                 let quotient = this._output.volume/this._volumeNominal;
-                if (quotient>1-VOLUME_ADJUSTMENT_STEP/2 && quotient<1+VOLUME_ADJUSTMENT_STEP/2)
+                if (this.stepVolume > 1 && this.magneticOn===true && quotient != 1 && quotient>1-VOLUME_ADJUSTMENT_STEP/2 && quotient<1+VOLUME_ADJUSTMENT_STEP/2)
                     this._output.volume = this._volumeNominal; // 100% is magnetic
             }
             this._output.push_volume();
@@ -1422,7 +1362,7 @@ MyApplet.prototype = {
         else if (direction == Clutter.ScrollDirection.UP) {
             this._output.volume = Math.min(this._volumeMax, currentVolume + this._volumeNominal * VOLUME_ADJUSTMENT_STEP);
             let quotient = this._output.volume/this._volumeNominal;
-            if (quotient>1-VOLUME_ADJUSTMENT_STEP/2 && quotient<1+VOLUME_ADJUSTMENT_STEP/2)
+            if (this.stepVolume > 1 && this.magneticOn===true && quotient != 1 && quotient>1-VOLUME_ADJUSTMENT_STEP/2 && quotient<1+VOLUME_ADJUSTMENT_STEP/2)
                 this._output.volume = this._volumeNominal; // 100% is magnetic
             this._output.push_volume();
             this._output.change_is_muted(false);
@@ -1740,7 +1680,7 @@ MyApplet.prototype = {
     },
 
     _onControlStateChanged: function() {
-        if (this._control.get_state() == Gvc.MixerControlState.READY) {
+        if (this._control.get_state() == Cvc.MixerControlState.READY) {
             this._readOutput();
             this._readInput();
             this.actor.show();
@@ -1837,13 +1777,13 @@ MyApplet.prototype = {
             return;
         }
 
-        if (stream instanceof Gvc.MixerSinkInput) {
+        if (stream instanceof Cvc.MixerSinkInput) {
             //for sink inputs, add a menuitem to the application submenu
             let item = new StreamMenuSection(this, stream);
             this._outputApplicationsMenu.menu.addMenuItem(item);
             this._outputApplicationsMenu.actor.show();
             this._streams.push({id: id, type: "SinkInput", item: item});
-        } else if (stream instanceof Gvc.MixerSourceOutput) {
+        } else if (stream instanceof Cvc.MixerSourceOutput) {
             //for source outputs, only show the input section
             this._streams.push({id: id, type: "SourceOutput"});
             if (this._recordingAppsNum++ === 0)
