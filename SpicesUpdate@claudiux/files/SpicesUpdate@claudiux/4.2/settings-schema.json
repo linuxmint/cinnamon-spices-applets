@@ -446,6 +446,11 @@
     "description": "Display the description of each update or new Spice",
     "tooltip": "By checking this box, you'll know why an update is available, and get a description of any new Spice.\nThis information will be displayed in English."
   },
+  "general_force_notifications": {
+    "type": "generic",
+    "value": false,
+    "default": false
+  },
   "general_type_notif": {
     "type": "combobox",
     "default": "minimal",

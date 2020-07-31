@@ -133,6 +133,22 @@ function criticalNotify(msg, details, icon, button=[]) {
 }
 
 /**
+ * To prevent this issue: https://github.com/linuxmint/cinnamon/issues/9499
+ */
+if (versionCompare( GLib.getenv('CINNAMON_VERSION') ,"4.6.0" ) >= 0 ) {
+    // Problem: this code is still used, but it's the code from /4.6 that should be used !
+    criticalNotify(_("You are advised to restart Cinnamon"),
+        _("To be sure to use the right code, you are advised to restart Cinnamon."),
+        new St.Icon({
+            icon_name: "spices-update",
+            icon_type: St.IconType.SYMBOLIC,
+            icon_size: 32 }
+        ),
+        [_("Restart Cinnamon"), "restart", "cinnamon --replace"]
+    );
+}
+
+/**
  * Class SpicesUpdate
  */
 class SpicesUpdate extends Applet.TextIconApplet {
@@ -1141,6 +1157,8 @@ class SpicesUpdate extends Applet.TextIconApplet {
                 }
             } else {
                 // the cache doesn't exist
+                let jsonDirName = CACHE_DIR + "/" + this._get_singular_type(type);
+                GLib.mkdir_with_parents(jsonDirName, 0o755);
                 is_to_download = true
             }
         }

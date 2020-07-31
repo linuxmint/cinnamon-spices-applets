@@ -84,6 +84,8 @@ Gettext.bindtextdomain("cinnamon-control-center", "/usr/share/locale");
 function _(str, uuid=UUID) {
   var customTrans = Gettext.dgettext(uuid, str);
   if (customTrans !== str && customTrans !== "") return customTrans;
+  customTrans = Gettext.dgettext("cinnamon", str);
+  if (customTrans !== str && customTrans !== "") return customTrans;
   return Gettext.gettext(str);
 }
 
