@@ -2161,6 +2161,7 @@ class GeoLocation {
 }
 
 // TODO: Switch to setting-schema based LocationStore as soon as 3.0 id Deprecated
+// TODO: Make internal persistent setting when switching to location store entries and back
 // Example schema entry:
 /*"location-list": {
 		"type" : "list",
@@ -2176,7 +2177,7 @@ class GeoLocation {
 		],
 		"default" : []
 	},
-	*/
+*/
 class LocationStore {
 
 	path: string = null; // ~/.config/weather-mockturtl/locations.json
