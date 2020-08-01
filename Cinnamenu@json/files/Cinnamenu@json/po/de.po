@@ -3,14 +3,14 @@ msgstr ""
 "Project-Id-Version: Cinnamenu\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-07-25 17:39+0100\n"
-"PO-Revision-Date: 2020-07-25 17:59+0100\n"
+"PO-Revision-Date: 2020-07-29 10:57+0200\n"
 "Last-Translator: Kim <kipuka@eclipso.eu>\n"
 "Language-Team: \n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3.1\n"
+"X-Generator: Poedit 2.0.6\n"
 
 #. 3.2 4.0
 msgid "Type to search..."
@@ -152,8 +152,8 @@ msgid ""
 "A flexible menu providing formatting options, web bookmarks, search provider "
 "support and fuzzy searching."
 msgstr ""
-"Ein flexibles Menü mit Formatierungsoptionen sowie leistungsfähigerer Suche "
-"dank Mustererkennung, Zugriff auf Web-Lesezeichen und Suchdienste."
+"Ein flexibles Menü mit Formatierungsoptionen, Web-Lesezeichen, Unterstützung "
+"von Suchdienste-Anbietern und Suchfunktion."
 
 #. metadata.json->comments
 msgid ""
@@ -202,7 +202,7 @@ msgstr "Menü"
 #. 3.2
 #. 4.0
 msgid "Layout"
-msgstr "Layout"
+msgstr "Layout "
 
 #. 3.2
 #. 4.0
@@ -249,7 +249,7 @@ msgstr "Text für den Menü-Button"
 #. 3.2
 #. 4.0
 msgid "Text to show beside the panel icon"
-msgstr "Text, der neben dem Menü-Button angezeigt wird"
+msgstr "Text, der neben dem Menü-Button angezeigt werden soll"
 
 #. 3.2
 #. 3.2
@@ -315,7 +315,7 @@ msgstr "Menüanimationen verwenden"
 #. 3.2
 #. 4.0
 msgid "Animate the menu on open and close"
-msgstr "Menüanimation beim Öffnen und Schließen"
+msgstr "Das Menü beim Öffnen und Schließen animieren"
 
 #. 3.2
 #. 4.0
@@ -330,7 +330,7 @@ msgstr "Kategorien durch Klicken statt durch Mausbewegung aktivieren"
 #. 3.2
 #. 4.0
 msgid "Enable autoscrolling"
-msgstr "Automatisches Blättern durch Listen aktivieren"
+msgstr "Automatischer Bildlauf"
 
 #. 3.2
 #. 4.0
@@ -354,12 +354,12 @@ msgstr "Suche auf offene Fenstern ausdehnen"
 #. 3.2
 #. 4.0
 msgid "Enable search providers"
-msgstr "Anbieter von Suchdiensten berücksichtigen"
+msgstr "Anbieter von Suchdiensten anzeigen"
 
 #. 3.2
 #. 4.0
 msgid "Include search provider results in searches"
-msgstr "Ergebnisse der Internetsuche in Suchergebnisse integrieren"
+msgstr "Ergebnisse der Internetsuche in Suchergebnisse einfügen"
 
 #. 3.2
 #. 4.0
@@ -401,7 +401,7 @@ msgstr "Lesezeichen und Orte anzeigen"
 #. 3.2
 #. 4.0
 msgid "Show bookmarks and places category in the menu"
-msgstr "Lesezeichen und Orte als Kategorien anzeigen"
+msgstr "Lesezeichen und Orte als Kategorie anzeigen"
 
 #. 3.2
 #. 3.2
@@ -513,11 +513,11 @@ msgstr ""
 
 #. 4.0
 msgid "Always open menu on favorite apps"
-msgstr ""
+msgstr "Beim Öffnen des Menüs immer die Favoriten anzeigen"
 
 #. 4.0
 msgid "Always open the menu with favorite apps category selected"
-msgstr ""
+msgstr "Beim Öffnen des Menüs immer die Kategorie »Favoriten« markieren"
 
 #~ msgid "Failed to launch \"%s\""
 #~ msgstr "\"%s\" konnte nicht gestartet werden"

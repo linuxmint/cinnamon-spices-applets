@@ -49,35 +49,37 @@ class CategoryListButton extends PopupBaseMenuItem {
         let categoryNameText = isStrDir ? altNameText : dirName ? dirName : '';
         this.disabled = false;
         this.entered = null;
-        if (this.state.settings.categoryIconSize > 0) {
-            let icon;
-            if (!isStrDir) {
-                icon = dir.get_icon();
-                if (icon && icon.get_names) {
-                    this.icon_name = icon.get_names().toString();
-                } else {
-                    this.icon_name = '';
-                }
-                if (this.icon_name) {
-                    this.icon = TextureCache.get_default().load_gicon(null, icon,
-                                                                    this.state.settings.categoryIconSize);
-                } else {
-                    icon = dir.get_icon() && typeof dir.get_icon().get_names === 'function' ?
-                                                        dir.get_icon().get_names().toString() : 'error';
-                    this.icon = new Icon({
-                        icon_name: icon,
-                        icon_size: this.state.settings.categoryIconSize
-                    });
-                }
+
+        let icon;
+        if (!isStrDir) {
+            icon = dir.get_icon();
+            if (icon && icon.get_names) {
+                this.icon_name = icon.get_names().toString();
             } else {
-                this.icon_name = altIconName;
-                icon = altIconName;
-                this.icon = new Icon({ icon_name: icon,
-                                       icon_size: this.state.settings.categoryIconSize,
-                                       icon_type: IconType.FULLCOLOR });
+                this.icon_name = '';
             }
+            if (this.icon_name) {
+                this.icon = TextureCache.get_default().load_gicon(null, icon,
+                                                                this.state.settings.categoryIconSize);
+            } else {
+                icon = dir.get_icon() && typeof dir.get_icon().get_names === 'function' ?
+                                                    dir.get_icon().get_names().toString() : 'error';
+                this.icon = new Icon({
+                    icon_name: icon,
+                    icon_size: this.state.settings.categoryIconSize
+                });
+            }
+        } else {
+            this.icon_name = altIconName;
+            icon = altIconName;
+            this.icon = new Icon({ icon_name: icon,
+                                   icon_size: this.state.settings.categoryIconSize,
+                                   icon_type: IconType.FULLCOLOR });
+        }
+        if (this.state.settings.categoryIconSize > 0) {
             this.addActor(this.icon);
         }
+
 
         this.categoryNameText = categoryNameText;
         this.label = new Label({ text: this.categoryNameText,
@@ -140,12 +142,12 @@ class CategoryListButton extends PopupBaseMenuItem {
         setTimeout(() => this.state.set({categoryDragged: false}), 0);
     }
 
-    _clearDragPlaceholder() {
+    /*_clearDragPlaceholder() {
         if (this.state.dragPlaceholder) {
             this.state.dragPlaceholder.destroy();
             this.state.dragPlaceholder = null;
         }
-    }
+    }*/
 
     selectCategory() {
         if (this.disabled) {
@@ -431,42 +433,41 @@ class AppListGridButton extends PopupBaseMenuItem {
             this.buttonState.app.description = FALL_BACK_DESCRIPTION;
         }
 
-        // Icons
-        if (this.state.iconSize > 0) {
-            if (this.buttonState.appType === ApplicationType._applications) {
-                this.icon = this.buttonState.app.create_icon_texture(this.state.iconSize);
-            } else if (this.buttonState.appType === ApplicationType._places) {
-                let iconObj = {
-                    icon_size: this.state.iconSize
-                };
-                if (this.file) {
-                    iconObj.icon_name = this.buttonState.app.icon === undefined ? 'unknown' : 'folder';
-                    iconObj.icon_type = IconType.FULLCOLOR;
-                } else {
-                    iconObj.gicon = this.buttonState.app.icon;
-                }
-                this.icon = new Icon(iconObj);
-            } else if (this.buttonState.appType === ApplicationType._recent) {
-                if (this.buttonState.app.clearList) {
-                    this.icon = this.buttonState.app.icon;
-                    this.icon.set_icon_size(this.state.iconSize);
-                } else {
-                    this.icon = new Icon({
-                        gicon: this.buttonState.app.icon,
-                        icon_size: this.state.iconSize
-                    });
-                }
-            } else if (this.buttonState.appType === ApplicationType._providers) {
-                this.icon = this.buttonState.app.icon;
+        // Icons //create icon even if iconSize is 0 so dnd has something to drag
+        if (this.buttonState.appType === ApplicationType._applications) {
+            this.icon = this.buttonState.app.create_icon_texture(this.state.iconSize);
+        } else if (this.buttonState.appType === ApplicationType._places) {
+            let iconObj = {
+                icon_size: this.state.iconSize
+            };
+            if (this.file) {
+                iconObj.icon_name = this.buttonState.app.icon === undefined ? 'unknown' : 'folder';
+                iconObj.icon_type = IconType.FULLCOLOR;
+            } else {
+                iconObj.gicon = this.buttonState.app.icon;
             }
-            if (!this.icon) {
+            this.icon = new Icon(iconObj);
+        } else if (this.buttonState.appType === ApplicationType._recent) {
+            if (this.buttonState.app.clearList) {
+                this.icon = this.buttonState.app.icon;
+                this.icon.set_icon_size(this.state.iconSize);
+            } else {
                 this.icon = new Icon({
-                    icon_name: 'error',
-                    icon_size: this.state.iconSize,
-                    icon_type: IconType.FULLCOLOR
+                    gicon: this.buttonState.app.icon,
+                    icon_size: this.state.iconSize
                 });
             }
+        } else if (this.buttonState.appType === ApplicationType._providers) {
+            this.icon = this.buttonState.app.icon;
         }
+        if (!this.icon) {
+            this.icon = new Icon({
+                icon_name: 'error',
+                icon_size: this.state.iconSize,
+                icon_type: IconType.FULLCOLOR
+            });
+        }
+
         this.label = new Label({
             style_class: 'menu-application-button-label',
             style: 'padding-right: 2px; padding-left: 2px'
@@ -486,7 +487,7 @@ class AppListGridButton extends PopupBaseMenuItem {
             y_expand: false,
         });
         this.iconContainer = new BoxLayout();
-        if (this.icon) {
+        if (this.icon && this.state.iconSize > 0) {
             this.iconContainer.add(this.icon, {
                 x_fill: false,
                 y_fill: false,

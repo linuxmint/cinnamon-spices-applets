@@ -1,18 +1,15 @@
 Cinnamenu
 ========
 
-Cinnamenu is a full featured menu extension for Cinnamon. It is a fork and port of the GNOME Shell extension [Gnomenu](https://github.com/The-Panacea-Projects/gnomenu) by The Panacea Projects.
+Cinnamenu is a full featured alternative for the standard Cinnamon menu with grid layout and customisation options.
 
 ### Features
 
- * View apps in a list or grid.
- * Integrated web bookmarks from Chrome, Chromium, Firefox, and Opera.
- * Search through apps, files, and web bookmarks, simultaneously with fast fuzzy searching.
+ * Fast and accurate fuzzy searching.
  * Indicators for running apps.
- * Option to show descriptions on buttons.
- * Mostly complete feature parity with the default Cinnamon menu.
-   * Key navigation.
-   * Filesystem autocompletion.
-   * Ability to clear the recent files lists.
-   * Toggle category/app icons.
-   * Hide the Places category.
+ * Key navigation.
+ * Customisation options:
+   * View apps in a list or grid.
+   * Options on where to show session and favorite app buttons
+   * Change icon sizes.
+
