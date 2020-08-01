@@ -1935,7 +1935,6 @@ class CinnamenuApplet extends TextIconApplet {
         this.activeContainer.destroy();
         this.destroyDisplayed();
         this.menu.destroy();
-        this.resizeContainer.destroy();
     }
 }
 /*
@@ -2031,7 +2030,7 @@ class ResizeButton extends PopupBaseMenuItem {
     }
 
     destroy() {
-        
+
         this.signals.disconnectAllSignals();
         this.label.destroy();
         if (this.icon) {
