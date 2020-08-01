@@ -527,11 +527,11 @@ msgstr ""
 
 #. 4.0
 msgid "Always open menu on favorite apps"
-msgstr ""
+msgstr "Toujours ouvrir le menu sur les Applis favorites"
 
 #. 4.0
 msgid "Always open the menu with favorite apps category selected"
-msgstr ""
+msgstr "Ouvre toujours le menu avec la catégorie Applis favorites sélectionnée"
 
 #~ msgid "No recent documents"
 #~ msgstr "Aucun document récent"
