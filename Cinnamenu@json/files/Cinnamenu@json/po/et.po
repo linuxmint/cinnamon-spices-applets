@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-07-17 12:34+0100\n"
-"PO-Revision-Date: 2020-07-18 12:06+0100\n"
+"PO-Revision-Date: 2020-07-31 07:55+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: et\n"
@@ -156,6 +156,8 @@ msgid ""
 "A flexible menu providing formatting options, web bookmarks, search provider "
 "support and fuzzy searching."
 msgstr ""
+"Paindlik menüü, mis pakub vorminguvõimalusi, veebi järjehoidjaid, "
+"otsinguteenuse pakkuja tuge ja häguseid otsinguid."
 
 #. metadata.json->comments
 msgid ""
@@ -277,7 +279,7 @@ msgstr ""
 
 #. 3.2 4.0
 msgid "Activate categories on click"
-msgstr ""
+msgstr "Aktiveerige kategooriad klikkimisel"
 
 #. 3.2 4.0
 msgid "Activate categories on click instead of on hover"

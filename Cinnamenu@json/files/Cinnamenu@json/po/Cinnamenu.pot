@@ -142,7 +142,7 @@ msgstr ""
 msgid "Uninstall"
 msgstr ""
 
-#. 4.0 4.0 4.0
+#. 4.0
 msgid "Please wait..."
 msgstr ""
 
@@ -187,13 +187,10 @@ msgid "No search provider extensions found"
 msgstr ""
 
 #. 3.2
-#. 3.2
-#. 4.0
 #. 4.0
 msgid "Panel"
 msgstr ""
 
-#. 3.2
 #. 3.2
 #. 4.0
 msgid "Menu"
@@ -235,8 +232,6 @@ msgid "Use a custom icon in the panel"
 msgstr ""
 
 #. 3.2
-#. 3.2
-#. 4.0
 #. 4.0
 msgid "Panel icon"
 msgstr ""
@@ -252,31 +247,21 @@ msgid "Text to show beside the panel icon"
 msgstr ""
 
 #. 3.2
-#. 3.2
-#. 3.2
-#. 4.0
-#. 4.0
 #. 4.0
 msgid "pixels"
 msgstr ""
 
 #. 3.2
-#. 3.2
-#. 4.0
 #. 4.0
 msgid "Category icon size"
 msgstr ""
 
 #. 3.2
-#. 3.2
-#. 4.0
 #. 4.0
 msgid "Applications list icon size"
 msgstr ""
 
 #. 3.2
-#. 3.2
-#. 4.0
 #. 4.0
 msgid "Applications grid icon size"
 msgstr ""
@@ -296,7 +281,6 @@ msgstr ""
 msgid "Open the menu when I move my mouse over the panel icon"
 msgstr ""
 
-#. 3.2
 #. 3.2
 #. 4.0
 msgid "milliseconds"
@@ -387,8 +371,6 @@ msgid "columns"
 msgstr ""
 
 #. 3.2
-#. 3.2
-#. 4.0
 #. 4.0
 msgid "Number of columns in apps grid"
 msgstr ""
@@ -429,8 +411,6 @@ msgid "Tooltip delay"
 msgstr ""
 
 #. 3.2
-#. 3.2
-#. 4.0
 #. 4.0
 msgid "Use a custom menu height"
 msgstr ""
@@ -441,8 +421,6 @@ msgid "px"
 msgstr ""
 
 #. 3.2
-#. 3.2
-#. 4.0
 #. 4.0
 msgid "Custom menu height"
 msgstr ""
