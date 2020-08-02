@@ -22,10 +22,10 @@ class BackgroundRoll extends Applet.IconApplet {
 
         this.user=run("id -un");
         this.user=this.user.trim();
-        this.command="/home/"+this.user+"/.local/share/cinnamon/applets/backgroundroll@Sokawaii/background.sh";
+        this.command="/home/"+this.user+"/.local/share/cinnamon/applets/backgroundroll@Sokawaii25/background.sh";
 
         try {
-            this.set_applet_icon_path("/home/"+this.user+"/.local/share/cinnamon/applets/backgroundroll@Sokawaii/icons/icon.svg");
+            this.set_applet_icon_path("/home/"+this.user+"/.local/share/cinnamon/applets/backgroundroll@Sokawaii25/icons/icon.svg");
 
             this.set_applet_tooltip("Click to change the background");
             // définit le label pour les applets de type TextApplet et TextIconApplet
