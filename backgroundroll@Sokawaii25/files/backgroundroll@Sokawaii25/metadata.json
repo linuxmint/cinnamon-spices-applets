@@ -1,0 +1,5 @@
+{
+    "uuid": "backgroundroll@Sokawaii25",
+    "name": "Background Roll",
+    "description": "Changes the background randomly using the images in ~/Images/backgrounds"
+}
