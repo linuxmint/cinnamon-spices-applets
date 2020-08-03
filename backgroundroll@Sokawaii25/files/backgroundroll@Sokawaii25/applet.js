@@ -20,21 +20,21 @@ class BackgroundRoll extends Applet.IconApplet {
     constructor(metadata, orientation, panel_height, instanceId) {
         super(orientation, panel_height, instanceId);
 
+        //VARIABLES
         this.user=run("id -un");
         this.user=this.user.trim();
         this.command="/home/"+this.user+"/.local/share/cinnamon/applets/backgroundroll@Sokawaii25/background.sh";
 
+        //Applet Decoration
         try {
             this.set_applet_icon_path("/home/"+this.user+"/.local/share/cinnamon/applets/backgroundroll@Sokawaii25/icons/icon.svg");
-
             this.set_applet_tooltip("Click to change the background");
-            // définit le label pour les applets de type TextApplet et TextIconApplet
-            this.set_applet_label("Background Roll");
         }
         catch (e) {
             global.logError(e);
         };
 
+        //Applet Settings
         this.settings = new Settings.AppletSettings(this, "backgroundroll@Sokawaii25", instanceId);
         this.settings.bind("Notifications", "notifs", this.on_notifs_changed);
     }
