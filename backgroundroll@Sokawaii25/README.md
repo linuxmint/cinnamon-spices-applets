@@ -9,3 +9,7 @@ This simple applet changes your background when you click it (using the images i
 # Applet Needs
 
 * A `~/Images/backgrounds` folder with images in it (else it will set a default background depending on your Linux version)
+
+# Applet Version
+
+Version 1.0.2
