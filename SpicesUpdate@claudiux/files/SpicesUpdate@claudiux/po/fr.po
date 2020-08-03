@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SpicesUpdate@claudiux v2.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-16 18:40+0100\n"
-"PO-Revision-Date: 2019-12-30 09:46+0100\n"
+"POT-Creation-Date: 2020-07-31 03:53+0200\n"
+"PO-Revision-Date: 2020-07-31 03:58+0200\n"
 "Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -18,19 +18,75 @@ msgstr ""
 "X-Generator: Poedit 2.0.6\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
+#: 4.2/applet.js:140
+msgid "You are advised to restart Cinnamon"
+msgstr "Il est conseillé de redémarrer Cinnamon"
+
+#: 4.2/applet.js:141
+msgid "To be sure to use the right code, you are advised to restart Cinnamon."
+msgstr ""
+"Pour être sûr d'utiliser le bon code, il est conseillé de redémarrer "
+"Cinnamon."
+
+#: 4.2/applet.js:147
+msgid "Restart Cinnamon"
+msgstr "Redémarrer Cinnamon"
+
 #. metadata.json->name
-#: 4.2/applet.js:91 4.2/applet.js:119 4.2/applet.js:558 4.2/applet.js:639
-#: 4.2/applet.js:1034 4.2/applet.js:1584 3.8/applet.js:212 3.8/applet.js:242
-#: 3.8/applet.js:664 3.8/applet.js:743 3.8/applet.js:1173 3.8/applet.js:1738
-#: 2.8/applet.js:171 2.8/applet.js:192 2.8/applet.js:555 2.8/applet.js:1003
-#: 2.8/applet.js:1581
+#: 4.2/applet.js:161 4.2/applet.js:579 4.2/applet.js:598 4.2/applet.js:724
+#: 4.2/applet.js:1078 3.8/applet.js:212 3.8/applet.js:242 3.8/applet.js:664
+#: 3.8/applet.js:743 3.8/applet.js:1173 3.8/applet.js:1738 2.8/applet.js:171
+#: 2.8/applet.js:192 2.8/applet.js:555 2.8/applet.js:1003 2.8/applet.js:1581
+#: 4.6/applet.js:146 4.6/applet.js:564 4.6/applet.js:583 4.6/applet.js:709
+#: 4.6/applet.js:1063
 msgid "Spices Update"
 msgstr "Spices Update"
 
-#: 4.2/applet.js:120 4.2/applet.js:1755 4.2/applet.js:1761 3.8/applet.js:243
+#: 4.2/applet.js:162 4.2/applet.js:1898 4.2/applet.js:1904 3.8/applet.js:243
 #: 3.8/applet.js:1912 3.8/applet.js:1918 2.8/applet.js:1708 2.8/applet.js:1714
+#: 4.6/applet.js:147 4.6/applet.js:1882 4.6/applet.js:1888
 msgid "Middle-Click to Refresh"
 msgstr "Clic-Molette pour Actualiser"
+
+#: 4.2/applet.js:296 4.6/applet.js:281
+msgid "Spices Update has just been installed or upgraded"
+msgstr "Spices Update vient juste d'être installé ou mis à niveau"
+
+#: 4.2/applet.js:297 4.6/applet.js:282
+msgid ""
+"Certain parameters require your vigilance: some may have been modified; "
+"others are new."
+msgstr ""
+"Certains paramètres nécessitent votre vigilance : certains peuvent avoir été "
+"modifiés ; d'autres sont nouveaux."
+
+#: 4.2/applet.js:298 4.6/applet.js:283
+msgid ""
+"Please check your settings using the menu of the SpicesUpdate applet or the "
+"button below."
+msgstr ""
+"Veuillez vérifier vos paramètres en utilisant le menu de l'applet "
+"SpicesUpdate ou le bouton ci-dessous."
+
+#: 4.2/applet.js:300 4.6/applet.js:285
+msgid "Spices Update Settings"
+msgstr "Paramètres de Spices Update"
+
+#: 4.2/applet.js:624 4.6/applet.js:609
+msgid "Update It Now!"
+msgstr "Mettre à jour !"
+
+#: 4.2/applet.js:624 4.6/applet.js:609
+msgid "Update Them All Now!"
+msgstr "Tout mettre à jour !"
+
+#: 4.2/applet.js:630 4.6/applet.js:615
+msgid "Forget It"
+msgstr "Oublier cela"
+
+#: 4.2/applet.js:630 4.6/applet.js:615
+msgid "Forget Them All"
+msgstr "Oublier tout ça !"
 
 #. 4.2->settings-schema.json->btn_refresh_applets->description
 #. 4.2->settings-schema.json->btn_refresh_desklets->description
@@ -40,35 +96,39 @@ msgstr "Clic-Molette pour Actualiser"
 #. 3.8->settings-schema.json->btn_refresh_desklets->description
 #. 3.8->settings-schema.json->btn_refresh_extensions->description
 #. 3.8->settings-schema.json->btn_refresh_themes->description
-#: 4.2/applet.js:576 4.2/applet.js:1592 3.8/applet.js:682 3.8/applet.js:1746
-#: 2.8/applet.js:574 2.8/applet.js:1589 cs/4.2/bin/SUExtensionCore.py:795
-#: cs/4.4/bin/SUExtensionCore.py:795
+#. 4.6->settings-schema.json->btn_refresh_applets->description
+#. 4.6->settings-schema.json->btn_refresh_desklets->description
+#. 4.6->settings-schema.json->btn_refresh_extensions->description
+#. 4.6->settings-schema.json->btn_refresh_themes->description
+#: 4.2/applet.js:634 4.2/applet.js:1680 3.8/applet.js:682 3.8/applet.js:1746
+#: 2.8/applet.js:574 2.8/applet.js:1589 4.6/applet.js:619 4.6/applet.js:1665
+#: cs/4.2/bin/SUExtensionCore.py:795
 msgid "Refresh"
 msgstr "Actualiser"
 
-#: 4.2/applet.js:708 3.8/applet.js:847 2.8/applet.js:729
+#: 4.2/applet.js:806 3.8/applet.js:847 2.8/applet.js:729 4.6/applet.js:791
 msgid "With details here, when available."
 msgstr "Avec les détails ici, quand ils sont disponibles."
 
-#: 4.2/applet.js:709 4.2/constants.js:119 3.8/applet.js:146 3.8/applet.js:848
-#: 2.8/applet.js:105 2.8/applet.js:730
+#: 4.2/applet.js:807 4.2/constants.js:122 3.8/applet.js:146 3.8/applet.js:848
+#: 2.8/applet.js:105 2.8/applet.js:730 4.6/applet.js:792 4.6/constants.js:125
 msgid "One applet needs update:"
 msgstr "Une applet dispose d'une mise à jour :"
 
-#: 4.2/applet.js:709 3.8/applet.js:848 2.8/applet.js:730
+#: 4.2/applet.js:808 3.8/applet.js:848 2.8/applet.js:730 4.6/applet.js:793
 msgid "Do not matter. This is a FAKE notification, just for the test."
 msgstr ""
 "Ne vous en préoccupez pas, c'est une fausse notification, juste pour tester."
 
-#: 4.2/applet.js:1034 3.8/applet.js:1173 2.8/applet.js:1003
+#: 4.2/applet.js:1078 3.8/applet.js:1173 2.8/applet.js:1003 4.6/applet.js:1063
 msgid "is fully functional."
 msgstr "est pleinement fonctionnel."
 
-#: 4.2/applet.js:1035 3.8/applet.js:1174 2.8/applet.js:1004
+#: 4.2/applet.js:1079 3.8/applet.js:1174 2.8/applet.js:1004 4.6/applet.js:1064
 msgid "All dependencies are installed"
 msgstr "Toutes les dépendances sont installées"
 
-#: 4.2/applet.js:1057 3.8/applet.js:1198 2.8/applet.js:1028
+#: 4.2/applet.js:1102 3.8/applet.js:1198 2.8/applet.js:1028 4.6/applet.js:1087
 msgid ""
 "You appear to be missing some of the programs required for this applet to "
 "have all its features."
@@ -76,207 +136,239 @@ msgstr ""
 "Vous semblez ne pas disposer des programmes requis pour bénéficier de toutes "
 "les fonctionnalités de cette applet."
 
-#: 4.2/applet.js:1058 3.8/applet.js:1199 2.8/applet.js:1029
+#: 4.2/applet.js:1103 3.8/applet.js:1199 2.8/applet.js:1029 4.6/applet.js:1088
 msgid "Please execute, in the just opened terminal, the commands:"
 msgstr "Veuillez exécuter, dans le terminal qui s'est ouvert, les commandes :"
 
-#: 4.2/applet.js:1059 3.8/applet.js:1200 2.8/applet.js:1030
+#: 4.2/applet.js:1104 3.8/applet.js:1200 2.8/applet.js:1030 4.6/applet.js:1089
 msgid "Some dependencies are not installed!"
 msgstr "Certaines dépendances ne sont pas installées !"
 
-#: 4.2/applet.js:1431 3.8/applet.js:1581 2.8/applet.js:1422
+#: 4.2/applet.js:1502 3.8/applet.js:1581 2.8/applet.js:1422 4.6/applet.js:1487
 msgid "(Description unavailable)"
 msgstr "(Description indisponible)"
 
-#: 4.2/applet.js:1614 3.8/applet.js:1769 2.8/applet.js:1613
+#: 4.2/applet.js:1704 3.8/applet.js:1769 2.8/applet.js:1613 4.6/applet.js:1689
 msgid "Forget new Spices"
 msgstr "Oublier les nouveautés"
 
-#: 4.2/applet.js:1620 3.8/applet.js:1775 2.8/applet.js:1619
+#: 4.2/applet.js:1710 3.8/applet.js:1775 2.8/applet.js:1619 4.6/applet.js:1695
 msgid "Open useful Cinnamon Settings"
 msgstr "Ouvrir les Paramètres système utiles"
 
-#: 4.2/applet.js:1627 3.8/applet.js:1782 2.8/applet.js:1626
-#: cs/4.2/bin/SUExtensionCore.py:240 cs/4.4/bin/SUExtensionCore.py:240
+#: 4.2/applet.js:1717 3.8/applet.js:1782 2.8/applet.js:1626 4.6/applet.js:1702
+#: cs/4.2/bin/SUExtensionCore.py:240
 msgid "Configure"
 msgstr "Configurer"
 
-#: 4.2/applet.js:1642 3.8/applet.js:1797 2.8/applet.js:1641
-msgid "Help"
-msgstr "Aide"
-
-#: 4.2/applet.js:1746 3.8/applet.js:1903 2.8/applet.js:1699
-msgid "Middle-Click to open useful Cinnamon Settings"
-msgstr "Clic-Molette : Ouvre les Paramètres système utiles"
-
-#: 4.2/constants.js:110 3.8/applet.js:137 2.8/applet.js:96
-msgid "Applet"
-msgstr "Applet"
-
-#: 4.2/constants.js:111 3.8/applet.js:138 2.8/applet.js:97
-msgid "Desklet"
-msgstr "Desklet"
-
-#: 4.2/constants.js:112 3.8/applet.js:139 2.8/applet.js:98
-msgid "Extension"
-msgstr "Extension"
-
-#: 4.2/constants.js:113 3.8/applet.js:140 2.8/applet.js:99
-msgid "Theme"
-msgstr "Thème"
+#. 4.2->settings-schema.json->General->title
+#. 3.8->settings-schema.json->General->title
+#. 2.8->settings-schema.json->head5->description
+#. 4.6->settings-schema.json->General->title
+#: 4.2/applet.js:1720 4.6/applet.js:1705
+msgid "General"
+msgstr "Général"
 
 #. 4.2->settings-schema.json->Applets->title
 #. 3.8->settings-schema.json->Applets->title
 #. 2.8->settings-schema.json->head1->description
-#: 4.2/constants.js:114 3.8/applet.js:141 2.8/applet.js:100
-#: cs/4.2/modules/cs_applets.py:34 cs/3.8/modules/cs_applets.py:34
-#: cs/4.0/modules/cs_applets.py:34 cs/4.4/modules/cs_applets.py:34
+#. 4.6->settings-schema.json->Applets->title
+#: 4.2/applet.js:1720 4.2/constants.js:117 3.8/applet.js:141 2.8/applet.js:100
+#: 4.6/applet.js:1705 4.6/constants.js:120 cs/4.2/modules/cs_applets.py:34
+#: cs/3.8/modules/cs_applets.py:34 cs/4.0/modules/cs_applets.py:34
+#: cs/4.4/modules/cs_applets.py:35 cs/4.6/modules/cs_applets.py:35
 msgid "Applets"
 msgstr "Applets"
 
 #. 4.2->settings-schema.json->Desklets->title
 #. 3.8->settings-schema.json->Desklets->title
 #. 2.8->settings-schema.json->head2->description
-#: 4.2/constants.js:115 3.8/applet.js:142 2.8/applet.js:101
-#: cs/4.2/modules/cs_desklets.py:32 cs/3.8/modules/cs_desklets.py:32
-#: cs/4.0/modules/cs_desklets.py:32 cs/4.4/modules/cs_desklets.py:32
+#. 4.6->settings-schema.json->Desklets->title
+#: 4.2/applet.js:1720 4.2/constants.js:118 3.8/applet.js:142 2.8/applet.js:101
+#: 4.6/applet.js:1705 4.6/constants.js:121 cs/4.2/modules/cs_desklets.py:32
+#: cs/3.8/modules/cs_desklets.py:32 cs/4.0/modules/cs_desklets.py:32
+#: cs/4.4/modules/cs_desklets.py:33 cs/4.6/modules/cs_desklets.py:33
 msgid "Desklets"
 msgstr "Desklets"
 
 #. 4.2->settings-schema.json->Extensions->title
 #. 3.8->settings-schema.json->Extensions->title
 #. 2.8->settings-schema.json->head3->description
-#: 4.2/constants.js:116 3.8/applet.js:143 2.8/applet.js:102
-#: cs/4.2/modules/cs_extensions.py:32 cs/3.8/modules/cs_extensions.py:32
-#: cs/4.0/modules/cs_extensions.py:32 cs/4.4/modules/cs_extensions.py:32
+#. 4.6->settings-schema.json->Extensions->title
+#: 4.2/applet.js:1720 4.2/constants.js:119 3.8/applet.js:143 2.8/applet.js:102
+#: 4.6/applet.js:1705 4.6/constants.js:122 cs/4.2/modules/cs_extensions.py:32
+#: cs/3.8/modules/cs_extensions.py:32 cs/4.0/modules/cs_extensions.py:32
+#: cs/4.4/modules/cs_extensions.py:33 cs/4.6/modules/cs_extensions.py:33
 msgid "Extensions"
 msgstr "Extensions"
 
 #. 4.2->settings-schema.json->Themes->title
 #. 3.8->settings-schema.json->Themes->title
 #. 2.8->settings-schema.json->head4->description
-#: 4.2/constants.js:117 3.8/applet.js:144 2.8/applet.js:103
-#: cs/4.2/modules/cs_themes.py:38 cs/4.2/modules/cs_themes.py:61
-#: cs/4.2/modules/cs_themes.py:63 cs/3.8/modules/cs_themes.py:23
-#: cs/3.8/modules/cs_themes.py:46 cs/3.8/modules/cs_themes.py:48
-#: cs/4.0/modules/cs_themes.py:36 cs/4.0/modules/cs_themes.py:59
-#: cs/4.0/modules/cs_themes.py:61 cs/4.4/modules/cs_themes.py:38
-#: cs/4.4/modules/cs_themes.py:61 cs/4.4/modules/cs_themes.py:63
+#. 4.6->settings-schema.json->Themes->title
+#: 4.2/applet.js:1720 4.2/constants.js:120 3.8/applet.js:144 2.8/applet.js:103
+#: 4.6/applet.js:1705 4.6/constants.js:123 cs/4.2/modules/cs_themes.py:38
+#: cs/4.2/modules/cs_themes.py:61 cs/4.2/modules/cs_themes.py:63
+#: cs/3.8/modules/cs_themes.py:23 cs/3.8/modules/cs_themes.py:46
+#: cs/3.8/modules/cs_themes.py:48 cs/4.0/modules/cs_themes.py:36
+#: cs/4.0/modules/cs_themes.py:59 cs/4.0/modules/cs_themes.py:61
+#: cs/4.4/modules/cs_themes.py:42 cs/4.4/modules/cs_themes.py:72
+#: cs/4.4/modules/cs_themes.py:74 cs/4.6/modules/cs_themes.py:44
+#: cs/4.6/modules/cs_themes.py:75 cs/4.6/modules/cs_themes.py:77
 msgid "Themes"
 msgstr "Thèmes"
 
-#: 4.2/constants.js:118 3.8/applet.js:145 2.8/applet.js:104
+#: 4.2/applet.js:1746 3.8/applet.js:1797 2.8/applet.js:1641 4.6/applet.js:1730
+msgid "Help"
+msgstr "Aide"
+
+#: 4.2/applet.js:1889 3.8/applet.js:1903 2.8/applet.js:1699 4.6/applet.js:1873
+msgid "Middle-Click to open useful Cinnamon Settings"
+msgstr "Clic-Molette : Ouvre les Paramètres système utiles"
+
+#: 4.2/constants.js:113 3.8/applet.js:137 2.8/applet.js:96 4.6/constants.js:116
+msgid "Applet"
+msgstr "Applet"
+
+#: 4.2/constants.js:114 3.8/applet.js:138 2.8/applet.js:97 4.6/constants.js:117
+msgid "Desklet"
+msgstr "Desklet"
+
+#: 4.2/constants.js:115 3.8/applet.js:139 2.8/applet.js:98 4.6/constants.js:118
+msgid "Extension"
+msgstr "Extension"
+
+#: 4.2/constants.js:116 3.8/applet.js:140 2.8/applet.js:99 4.6/constants.js:119
+msgid "Theme"
+msgstr "Thème"
+
+#: 4.2/constants.js:121 3.8/applet.js:145 2.8/applet.js:104
+#: 4.6/constants.js:124
 msgid "One desklet needs update:"
 msgstr "Une desklet dispose d'une mise à jour :"
 
-#: 4.2/constants.js:120 3.8/applet.js:147 2.8/applet.js:106
+#: 4.2/constants.js:123 3.8/applet.js:147 2.8/applet.js:106
+#: 4.6/constants.js:126
 msgid "One extension needs update:"
 msgstr "Une extension dispose d'une mise à jour :"
 
-#: 4.2/constants.js:121 3.8/applet.js:148 2.8/applet.js:107
+#: 4.2/constants.js:124 3.8/applet.js:148 2.8/applet.js:107
+#: 4.6/constants.js:127
 msgid "One theme needs update:"
 msgstr "Un thème dispose d'une mise à jour :"
 
-#: 4.2/constants.js:122 3.8/applet.js:149 2.8/applet.js:108
+#: 4.2/constants.js:125 3.8/applet.js:149 2.8/applet.js:108
+#: 4.6/constants.js:128
 msgid "Some desklets need update:"
 msgstr "Certaines desklets disposent d'une mise à jour :"
 
-#: 4.2/constants.js:123 3.8/applet.js:150 2.8/applet.js:109
+#: 4.2/constants.js:126 3.8/applet.js:150 2.8/applet.js:109
+#: 4.6/constants.js:129
 msgid "Some applets need update:"
 msgstr "Certaines applets disposent d'une mise à jour :"
 
-#: 4.2/constants.js:124 3.8/applet.js:151 2.8/applet.js:110
+#: 4.2/constants.js:127 3.8/applet.js:151 2.8/applet.js:110
+#: 4.6/constants.js:130
 msgid "Some extensions need update:"
 msgstr "Certaines extensions disposent d'une mise à jour :"
 
-#: 4.2/constants.js:125 3.8/applet.js:152 2.8/applet.js:111
+#: 4.2/constants.js:128 3.8/applet.js:152 2.8/applet.js:111
+#: 4.6/constants.js:131
 msgid "Some themes need update:"
 msgstr "Certains thèmes disposent d'une mise à jour :"
 
-#: 4.2/constants.js:126 3.8/applet.js:153 2.8/applet.js:112
+#: 4.2/constants.js:129 3.8/applet.js:153 2.8/applet.js:112
+#: 4.6/constants.js:132
 msgid "New desklet available:"
 msgstr "Nouvelle desklet disponible :"
 
-#: 4.2/constants.js:127 3.8/applet.js:154 2.8/applet.js:113
+#: 4.2/constants.js:130 3.8/applet.js:154 2.8/applet.js:113
+#: 4.6/constants.js:133
 msgid "New applet available:"
 msgstr "Nouvelle applet disponible :"
 
-#: 4.2/constants.js:128 3.8/applet.js:155 2.8/applet.js:114
+#: 4.2/constants.js:131 3.8/applet.js:155 2.8/applet.js:114
+#: 4.6/constants.js:134
 msgid "New extension available:"
 msgstr "Nouvelle extension disponible :"
 
-#: 4.2/constants.js:129 3.8/applet.js:156 2.8/applet.js:115
+#: 4.2/constants.js:132 3.8/applet.js:156 2.8/applet.js:115
+#: 4.6/constants.js:135
 msgid "New theme available:"
 msgstr "Nouveau thème disponible :"
 
-#: 4.2/constants.js:130 3.8/applet.js:157 2.8/applet.js:116
+#: 4.2/constants.js:133 3.8/applet.js:157 2.8/applet.js:116
+#: 4.6/constants.js:136
 msgid "New desklets available:"
 msgstr "Nouvelles desklets disponibles :"
 
-#: 4.2/constants.js:131 3.8/applet.js:158 2.8/applet.js:117
+#: 4.2/constants.js:134 3.8/applet.js:158 2.8/applet.js:117
+#: 4.6/constants.js:137
 msgid "New applets available:"
 msgstr "Nouvelles applets disponibles :"
 
-#: 4.2/constants.js:132 3.8/applet.js:159 2.8/applet.js:118
+#: 4.2/constants.js:135 3.8/applet.js:159 2.8/applet.js:118
+#: 4.6/constants.js:138
 msgid "New extensions available:"
 msgstr "Nouvelles extensions disponibles :"
 
-#: 4.2/constants.js:133 3.8/applet.js:160 2.8/applet.js:119
+#: 4.2/constants.js:136 3.8/applet.js:160 2.8/applet.js:119
+#: 4.6/constants.js:139
 msgid "New themes available:"
 msgstr "Nouveaux thèmes disponibles :"
 
-#: 4.2/constants.js:137
+#: 4.2/constants.js:140 4.6/constants.js:143
 msgid "If you do not want an applet to be checked, uncheck its first box."
 msgstr ""
 "Pour ignorer la disponibilité de la mise à jour d'une applet, décochez sa "
 "première case."
 
-#: 4.2/constants.js:138
+#: 4.2/constants.js:141 4.6/constants.js:144
 msgid "If you do not want a desklet to be checked, uncheck its first box."
 msgstr ""
 "Pour ignorer la disponibilité de la mise à jour d'une desklet, décochez sa "
 "première case."
 
-#: 4.2/constants.js:139
+#: 4.2/constants.js:142 4.6/constants.js:145
 msgid "If you do not want an extension to be checked, uncheck its first box."
 msgstr ""
 "Pour ignorerla disponibilité de la mise à jour d'une extension, décochez sa "
 "première case."
 
-#: 4.2/constants.js:140
+#: 4.2/constants.js:143 4.6/constants.js:146
 msgid "If you do not want a theme to be checked, uncheck its first box."
 msgstr ""
 "Pour ignorer la disponibilité de la mise à jour d'un thème, décochez sa "
 "première case."
 
-#: 4.2/constants.js:144
+#: 4.2/constants.js:147 4.6/constants.js:150
 msgid ""
 "If you want to get the latest version of an applet now, check both boxes."
 msgstr ""
 "Pour (ré-)installer maintenant la toute dernière version d'une applet, "
 "cochez ses deux cases."
 
-#: 4.2/constants.js:145
+#: 4.2/constants.js:148 4.6/constants.js:151
 msgid ""
 "If you want to get the latest version of a desklet now, check both boxes."
 msgstr ""
 "Pour (ré-)installer maintenant la toute dernière version d'une desklet, "
 "cochez ses deux cases."
 
-#: 4.2/constants.js:146
+#: 4.2/constants.js:149 4.6/constants.js:152
 msgid ""
 "If you want to get the latest version of an extension now, check both boxes."
 msgstr ""
 "Pour (ré-)installer maintenant la toute dernière version d'une extension, "
 "cochez ses deux cases."
 
-#: 4.2/constants.js:147
+#: 4.2/constants.js:150 4.6/constants.js:153
 msgid "If you want to get the latest version of a theme now, check both boxes."
 msgstr ""
 "Pour (ré-)installer maintenant la toute dernière version d'un thème, cochez "
 "ses deux cases."
 
-#: 4.2/constants.js:150 3.8/applet.js:93
+#: 4.2/constants.js:153 3.8/applet.js:93 4.6/constants.js:156
 msgid "When all your choices are made, click the Refresh button."
 msgstr "Quand tous vos choix sont faits, cliquez sur Actualiser."
 
@@ -340,7 +432,7 @@ msgstr ""
 "Pour (ré-)installer maintenant la toute dernière version d'un thème : ses "
 "deux commutateurs à TRUE."
 
-#: cs/4.2/bin/SUExtensionCore.py:723 cs/4.4/bin/SUExtensionCore.py:723
+#: cs/4.2/bin/SUExtensionCore.py:723
 msgid "Upgradable"
 msgstr "Actualisable"
 
@@ -353,12 +445,6 @@ msgstr ""
 "vous avez installées nécessitent une mise à jour, ou quand de nouvelles "
 "Spices sont disponibles."
 
-#. 4.2->settings-schema.json->General->title
-#. 3.8->settings-schema.json->General->title
-#. 2.8->settings-schema.json->head5->description
-msgid "General"
-msgstr "Général"
-
 #. 4.2->settings-schema.json->section_applets1->title
 #. 4.2->settings-schema.json->section_desklets1->title
 #. 4.2->settings-schema.json->section_extensions1->title
@@ -367,6 +453,10 @@ msgstr "Général"
 #. 3.8->settings-schema.json->section_desklets1->title
 #. 3.8->settings-schema.json->section_extensions1->title
 #. 3.8->settings-schema.json->section_themes1->title
+#. 4.6->settings-schema.json->section_applets1->title
+#. 4.6->settings-schema.json->section_desklets1->title
+#. 4.6->settings-schema.json->section_extensions1->title
+#. 4.6->settings-schema.json->section_themes1->title
 msgid "Checking"
 msgstr "Vérification"
 
@@ -378,33 +468,47 @@ msgstr "Vérification"
 #. 3.8->settings-schema.json->section_desklets2->title
 #. 3.8->settings-schema.json->section_extensions2->title
 #. 3.8->settings-schema.json->section_themes2->title
+#. 4.6->settings-schema.json->section_applets2->title
+#. 4.6->settings-schema.json->section_desklets2->title
+#. 4.6->settings-schema.json->section_extensions2->title
+#. 4.6->settings-schema.json->section_themes2->title
 msgid "Monitoring"
 msgstr "Surveillance"
 
 #. 4.2->settings-schema.json->section_general1->title
 #. 3.8->settings-schema.json->section_general1->title
+#. 4.6->settings-schema.json->section_general1->title
 msgid "Frequency"
 msgstr "Fréquence"
 
 #. 4.2->settings-schema.json->section_general2->title
 #. 3.8->settings-schema.json->section_general2->title
+#. 4.6->settings-schema.json->section_general2->title
 msgid "Notifications"
 msgstr "Notifications"
 
 #. 4.2->settings-schema.json->section_general3->title
+#. 4.6->settings-schema.json->section_general3->title
+msgid "Notification contents"
+msgstr "Contenu des notifications"
+
+#. 4.2->settings-schema.json->section_general4->title
 #. 3.8->settings-schema.json->section_general3->title
+#. 4.6->settings-schema.json->section_general4->title
 msgid "Display type"
 msgstr "Type d'affichage"
 
 #. 4.2->settings-schema.json->check_applets->description
 #. 3.8->settings-schema.json->check_applets->description
 #. 2.8->settings-schema.json->check_applets->description
+#. 4.6->settings-schema.json->check_applets->description
 msgid "Check regularly whether your applets are up to date"
 msgstr "Vérifier régulièrement que vos applets sont bien à jour"
 
 #. 4.2->settings-schema.json->check_applets->tooltip
 #. 3.8->settings-schema.json->check_applets->tooltip
 #. 2.8->settings-schema.json->check_applets->tooltip
+#. 4.6->settings-schema.json->check_applets->tooltip
 msgid "If applets updates do not concern you, uncheck this box."
 msgstr ""
 "Si les mises à jour d'applets ne vous intéressent pas, décocher cette case."
@@ -412,23 +516,27 @@ msgstr ""
 #. 4.2->settings-schema.json->check_new_applets->description
 #. 3.8->settings-schema.json->check_new_applets->description
 #. 2.8->settings-schema.json->check_new_applets->description
+#. 4.6->settings-schema.json->check_new_applets->description
 msgid "Check regularly whether new applets are available"
 msgstr "Vérifier régulièrement l'existence de nouvelles applets"
 
 #. 4.2->settings-schema.json->check_new_applets->tooltip
 #. 3.8->settings-schema.json->check_new_applets->tooltip
 #. 2.8->settings-schema.json->check_new_applets->tooltip
+#. 4.6->settings-schema.json->check_new_applets->tooltip
 msgid "If new applets do not concern you, uncheck this box."
 msgstr ""
 "Si l'arrivée de nouvelles applets ne vous intéresse pas, décochez cette case."
 
 #. 4.2->settings-schema.json->unprotected_applets->description
 #. 3.8->settings-schema.json->unprotected_applets->description
+#. 4.6->settings-schema.json->unprotected_applets->description
 msgid "Update these applets:"
 msgstr "Mettre à jour ces applets :"
 
 #. 4.2->settings-schema.json->unprotected_applets->columns->title
 #. 3.8->settings-schema.json->unprotected_applets->columns->title
+#. 4.6->settings-schema.json->unprotected_applets->columns->title
 msgid "Your Applets"
 msgstr "Vos Applets"
 
@@ -440,6 +548,10 @@ msgstr "Vos Applets"
 #. 3.8->settings-schema.json->unprotected_desklets->columns->title
 #. 3.8->settings-schema.json->unprotected_extensions->columns->title
 #. 3.8->settings-schema.json->unprotected_themes->columns->title
+#. 4.6->settings-schema.json->unprotected_applets->columns->title
+#. 4.6->settings-schema.json->unprotected_desklets->columns->title
+#. 4.6->settings-schema.json->unprotected_extensions->columns->title
+#. 4.6->settings-schema.json->unprotected_themes->columns->title
 msgid "Check for updates?"
 msgstr "Vérifier les mises à jour ?"
 
@@ -451,24 +563,31 @@ msgstr "Vérifier les mises à jour ?"
 #. 3.8->settings-schema.json->unprotected_desklets->columns->title
 #. 3.8->settings-schema.json->unprotected_extensions->columns->title
 #. 3.8->settings-schema.json->unprotected_themes->columns->title
+#. 4.6->settings-schema.json->unprotected_applets->columns->title
+#. 4.6->settings-schema.json->unprotected_desklets->columns->title
+#. 4.6->settings-schema.json->unprotected_extensions->columns->title
+#. 4.6->settings-schema.json->unprotected_themes->columns->title
 msgid "Get the latest version now"
 msgstr "Installer dès à présent la toute dernière version"
 
 #. 4.2->settings-schema.json->btn_cs_applets->description
 #. 3.8->settings-schema.json->btn_cs_applets->description
 #. 2.8->settings-schema.json->btn_cs_applets->description
+#. 4.6->settings-schema.json->btn_cs_applets->description
 msgid "Open Cinnamon Settings to manage all the Applets"
 msgstr "Ouvrir les Préférences de Cinnamon pour gérer toutes les Applets"
 
 #. 4.2->settings-schema.json->check_desklets->description
 #. 3.8->settings-schema.json->check_desklets->description
 #. 2.8->settings-schema.json->check_desklets->description
+#. 4.6->settings-schema.json->check_desklets->description
 msgid "Check regularly whether your desklets are up to date"
 msgstr "Vérifier régulièrement que vos desklets sont bien à jour"
 
 #. 4.2->settings-schema.json->check_desklets->tooltip
 #. 3.8->settings-schema.json->check_desklets->tooltip
 #. 2.8->settings-schema.json->check_desklets->tooltip
+#. 4.6->settings-schema.json->check_desklets->tooltip
 msgid "If desklets updates do not concern you, uncheck this box."
 msgstr ""
 "Si les mises à jour de desklets ne vous intéressent pas, décocher cette case."
@@ -476,12 +595,14 @@ msgstr ""
 #. 4.2->settings-schema.json->check_new_desklets->description
 #. 3.8->settings-schema.json->check_new_desklets->description
 #. 2.8->settings-schema.json->check_new_desklets->description
+#. 4.6->settings-schema.json->check_new_desklets->description
 msgid "Check regularly whether new desklets are available"
 msgstr "Vérifier régulièrement l'existence de nouvelles desklets"
 
 #. 4.2->settings-schema.json->check_new_desklets->tooltip
 #. 3.8->settings-schema.json->check_new_desklets->tooltip
 #. 2.8->settings-schema.json->check_new_desklets->tooltip
+#. 4.6->settings-schema.json->check_new_desklets->tooltip
 msgid "If new desklets do not concern you, uncheck this box."
 msgstr ""
 "Si l'arrivée de nouvelles desklets ne vous intéresse pas, décochez cette "
@@ -489,29 +610,34 @@ msgstr ""
 
 #. 4.2->settings-schema.json->unprotected_desklets->description
 #. 3.8->settings-schema.json->unprotected_desklets->description
+#. 4.6->settings-schema.json->unprotected_desklets->description
 msgid "Update these desklets:"
 msgstr "Mettre à jour ces desklets :"
 
 #. 4.2->settings-schema.json->unprotected_desklets->columns->title
 #. 3.8->settings-schema.json->unprotected_desklets->columns->title
+#. 4.6->settings-schema.json->unprotected_desklets->columns->title
 msgid "Your Desklets"
 msgstr "Vos Desklets"
 
 #. 4.2->settings-schema.json->btn_cs_desklets->description
 #. 3.8->settings-schema.json->btn_cs_desklets->description
 #. 2.8->settings-schema.json->btn_cs_desklets->description
+#. 4.6->settings-schema.json->btn_cs_desklets->description
 msgid "Open Cinnamon Settings to manage all the Desklets"
 msgstr "Ouvrir les Préférences de Cinnamon pour gérer toutes les Desklets"
 
 #. 4.2->settings-schema.json->check_extensions->description
 #. 3.8->settings-schema.json->check_extensions->description
 #. 2.8->settings-schema.json->check_extensions->description
+#. 4.6->settings-schema.json->check_extensions->description
 msgid "Check regularly whether your extensions are up to date"
 msgstr "Vérifier régulièrement que vos extensions sont bien à jour"
 
 #. 4.2->settings-schema.json->check_extensions->tooltip
 #. 3.8->settings-schema.json->check_extensions->tooltip
 #. 2.8->settings-schema.json->check_extensions->tooltip
+#. 4.6->settings-schema.json->check_extensions->tooltip
 msgid "If extensions updates do not concern you, uncheck this box."
 msgstr ""
 "Si les mises à jour d'extensions ne vous intéressent pas, décocher cette "
@@ -520,12 +646,14 @@ msgstr ""
 #. 4.2->settings-schema.json->check_new_extensions->description
 #. 3.8->settings-schema.json->check_new_extensions->description
 #. 2.8->settings-schema.json->check_new_extensions->description
+#. 4.6->settings-schema.json->check_new_extensions->description
 msgid "Check regularly whether new extensions are available"
 msgstr "Vérifier régulièrement l'existence de nouvelles extensions"
 
 #. 4.2->settings-schema.json->check_new_extensions->tooltip
 #. 3.8->settings-schema.json->check_new_extensions->tooltip
 #. 2.8->settings-schema.json->check_new_extensions->tooltip
+#. 4.6->settings-schema.json->check_new_extensions->tooltip
 msgid "If new extensions do not concern you, uncheck this box."
 msgstr ""
 "Si l'arrivée de nouvelles extensions ne vous intéresse pas, décochez cette "
@@ -533,29 +661,34 @@ msgstr ""
 
 #. 4.2->settings-schema.json->unprotected_extensions->description
 #. 3.8->settings-schema.json->unprotected_extensions->description
+#. 4.6->settings-schema.json->unprotected_extensions->description
 msgid "Update these extensions:"
 msgstr "Mettre à jour ces extensions :"
 
 #. 4.2->settings-schema.json->unprotected_extensions->columns->title
 #. 3.8->settings-schema.json->unprotected_extensions->columns->title
+#. 4.6->settings-schema.json->unprotected_extensions->columns->title
 msgid "Your Extensions"
 msgstr "Vos Extensions"
 
 #. 4.2->settings-schema.json->btn_cs_extensions->description
 #. 3.8->settings-schema.json->btn_cs_extensions->description
 #. 2.8->settings-schema.json->btn_cs_extensions->description
+#. 4.6->settings-schema.json->btn_cs_extensions->description
 msgid "Open Cinnamon Settings to manage all the Extensions"
 msgstr "Ouvrir les Préférences de Cinnamon pour gérer toutes les Extensions"
 
 #. 4.2->settings-schema.json->check_themes->description
 #. 3.8->settings-schema.json->check_themes->description
 #. 2.8->settings-schema.json->check_themes->description
+#. 4.6->settings-schema.json->check_themes->description
 msgid "Check regularly whether your themes are up to date"
 msgstr "Vérifier régulièrement que vos thèmes sont bien à jour"
 
 #. 4.2->settings-schema.json->check_themes->tooltip
 #. 3.8->settings-schema.json->check_themes->tooltip
 #. 2.8->settings-schema.json->check_themes->tooltip
+#. 4.6->settings-schema.json->check_themes->tooltip
 msgid "If themes updates do not concern you, uncheck this box."
 msgstr ""
 "Si les mises à jour de thèmes ne vous intéressent pas, décocher cette case."
@@ -563,56 +696,59 @@ msgstr ""
 #. 4.2->settings-schema.json->check_new_themes->description
 #. 3.8->settings-schema.json->check_new_themes->description
 #. 2.8->settings-schema.json->check_new_themes->description
+#. 4.6->settings-schema.json->check_new_themes->description
 msgid "Check regularly whether new themes are available"
 msgstr "Vérifier régulièrement l'existence de nouveaux thèmes"
 
 #. 4.2->settings-schema.json->check_new_themes->tooltip
 #. 3.8->settings-schema.json->check_new_themes->tooltip
 #. 2.8->settings-schema.json->check_new_themes->tooltip
+#. 4.6->settings-schema.json->check_new_themes->tooltip
 msgid "If new themes do not concern you, uncheck this box."
 msgstr ""
 "Si l'arrivée de nouveaux thèmes ne vous intéresse pas, décochez cette case."
 
 #. 4.2->settings-schema.json->unprotected_themes->description
 #. 3.8->settings-schema.json->unprotected_themes->description
+#. 4.6->settings-schema.json->unprotected_themes->description
 msgid "Update these themes:"
 msgstr "Mettre à jour ces thèmes :"
 
 #. 4.2->settings-schema.json->unprotected_themes->columns->title
 #. 3.8->settings-schema.json->unprotected_themes->columns->title
+#. 4.6->settings-schema.json->unprotected_themes->columns->title
 msgid "Your Themes"
 msgstr "Vos Thèmes"
 
 #. 4.2->settings-schema.json->btn_cs_themes->description
 #. 3.8->settings-schema.json->btn_cs_themes->description
 #. 2.8->settings-schema.json->btn_cs_themes->description
+#. 4.6->settings-schema.json->btn_cs_themes->description
 msgid "Open Cinnamon Settings to manage all the Themes"
 msgstr "Ouvrir les Préférences de Cinnamon pour gérer tous les Thèmes"
 
 #. 4.2->settings-schema.json->general_frequency->units
-#. 3.8->settings-schema.json->general_frequency->units
-#. 2.8->settings-schema.json->general_frequency->units
+#. 4.6->settings-schema.json->general_frequency->units
 msgid "hours"
 msgstr "heures"
 
 #. 4.2->settings-schema.json->general_frequency->description
+#. 4.6->settings-schema.json->general_frequency->description
 msgid "Time interval between two checks"
 msgstr "Intervalle de temps entre deux vérifications"
 
-#. 3.8->settings-schema.json->general_frequency->description
-#. 2.8->settings-schema.json->general_frequency->description
-msgid "Time interval between two checks (hours)"
-msgstr "Intervalle de temps entre deux vérifications (en heures)"
-
 #. 4.2->settings-schema.json->general_frequency->tooltip
+#. 4.6->settings-schema.json->general_frequency->tooltip
 msgid "Min value: 1 hour. Max value: 720 hours (30 days)."
 msgstr "Minimum : 1 heure. Maximum : 720 heures (30 jours)."
 
 #. 4.2->settings-schema.json->general_first_check->description
+#. 4.6->settings-schema.json->general_first_check->description
 msgid "Make a first check one minute after starting"
 msgstr "Lancer une première vérification une minute après le démarrage"
 
 #. 4.2->settings-schema.json->general_first_check->tooltip
+#. 4.6->settings-schema.json->general_first_check->tooltip
 msgid ""
 "By checking this box, the first check will take place one minute after "
 "starting this applet."
@@ -623,6 +759,7 @@ msgstr ""
 #. 4.2->settings-schema.json->general_warning->description
 #. 3.8->settings-schema.json->general_warning->description
 #. 2.8->settings-schema.json->general_warning->description
+#. 4.6->settings-schema.json->general_warning->description
 msgid "Notify me by changing the icon when Spices need an update"
 msgstr ""
 "M'avertir par un changement d'icône que des Spices ont besoin d'une mise à "
@@ -631,6 +768,7 @@ msgstr ""
 #. 4.2->settings-schema.json->general_warning->tooltip
 #. 3.8->settings-schema.json->general_warning->tooltip
 #. 2.8->settings-schema.json->general_warning->tooltip
+#. 4.6->settings-schema.json->general_warning->tooltip
 msgid ""
 "By checking this box, you allow this applet to modify its icon to warn you "
 "when at least one of the Spices requires an update."
@@ -641,18 +779,21 @@ msgstr ""
 #. 4.2->settings-schema.json->events_color->description
 #. 3.8->settings-schema.json->events_color->description
 #. 2.8->settings-schema.json->events_color->description
+#. 4.6->settings-schema.json->events_color->description
 msgid "The icon color when Spices need an update"
 msgstr "Couleur de l'icône quand des Spices ont besoin d'une mise à jour"
 
 #. 4.2->settings-schema.json->events_color->tooltip
 #. 3.8->settings-schema.json->events_color->tooltip
 #. 2.8->settings-schema.json->events_color->tooltip
+#. 4.6->settings-schema.json->events_color->tooltip
 msgid "Click the button to select another color."
 msgstr "Cliquer sur le bouton pour choisir une autre couleur."
 
 #. 4.2->settings-schema.json->general_notifications->description
 #. 3.8->settings-schema.json->general_notifications->description
 #. 2.8->settings-schema.json->general_notifications->description
+#. 4.6->settings-schema.json->general_notifications->description
 msgid "Show notification messages about Spices updates"
 msgstr ""
 "Afficher les messages de notification concernant les mises à jour des Spices"
@@ -660,6 +801,7 @@ msgstr ""
 #. 4.2->settings-schema.json->general_notifications->tooltip
 #. 3.8->settings-schema.json->general_notifications->tooltip
 #. 2.8->settings-schema.json->general_notifications->tooltip
+#. 4.6->settings-schema.json->general_notifications->tooltip
 msgid ""
 "By checking this box, you allow this applet to display messages about Spices "
 "updates in notifications viewer."
@@ -670,12 +812,14 @@ msgstr ""
 #. 4.2->settings-schema.json->general_details_requested->description
 #. 3.8->settings-schema.json->general_details_requested->description
 #. 2.8->settings-schema.json->general_details_requested->description
+#. 4.6->settings-schema.json->general_details_requested->description
 msgid "Display the description of each update or new Spice"
 msgstr "Afficher la description de chaque mise à jour ou nouvelle Spice"
 
 #. 4.2->settings-schema.json->general_details_requested->tooltip
 #. 3.8->settings-schema.json->general_details_requested->tooltip
 #. 2.8->settings-schema.json->general_details_requested->tooltip
+#. 4.6->settings-schema.json->general_details_requested->tooltip
 msgid ""
 "By checking this box, you'll know why an update is available, and get a "
 "description of any new Spice.\n"
@@ -685,7 +829,156 @@ msgstr ""
 "et obtiendrez une description de toute nouvelle Spice.\n"
 "Cette information sera affichée en anglais."
 
-#. 4.2->settings-schema.json->general_force_notifications->description
+#. 4.2->settings-schema.json->general_type_notif->options
+#. 3.8->settings-schema.json->general_type_notif->options
+#. 2.8->settings-schema.json->general_type_notif->options
+#. 4.6->settings-schema.json->general_type_notif->options
+msgid "Minimal (text only)"
+msgstr "Minimal (texte seulement)"
+
+#. 4.2->settings-schema.json->general_type_notif->options
+#. 4.6->settings-schema.json->general_type_notif->options
+msgid "With action buttons"
+msgstr "Avec des boutons (textes) pour les actions"
+
+#. 4.2->settings-schema.json->general_type_notif->options
+#. 4.6->settings-schema.json->general_type_notif->options
+msgid "With action buttons as icons"
+msgstr "Avec des boutons (icônes) pour les actions"
+
+#. 4.2->settings-schema.json->general_type_notif->description
+#. 3.8->settings-schema.json->general_type_notif->description
+#. 2.8->settings-schema.json->general_type_notif->description
+#. 4.6->settings-schema.json->general_type_notif->description
+msgid "Notification style"
+msgstr "Style de notification"
+
+#. 4.2->settings-schema.json->general_type_notif->tooltip
+#. 4.6->settings-schema.json->general_type_notif->tooltip
+msgid ""
+"Minimal:\n"
+"\tDisplays simple and short notifications.\n"
+"With action buttons:\n"
+"\tNotifications also contain some buttons which have these roles:\n"
+"\t\tThe leftmost button opens the Download tab in System Settings for the "
+"concerned Spices, which are sorted by date (most recent first). So you can "
+"update the Spices you want.\n"
+"\t\tThe rightmost button refreshes the cache and notifications, if "
+"necessary.\n"
+"\t\tOptionally, a central button allows you to forget new spices or update "
+"the installed ones, depending on the case."
+msgstr ""
+"Minimal :\n"
+"\tAffiche des notifications simples et courtes.\n"
+"Avec des boutons d'action :\n"
+"\tLes notifications contiennent également des boutons qui jouent ces "
+"rôles :\n"
+"\t\tLe bouton le plus à gauche ouvre l'onglet Télécharger dans les "
+"paramètres système pour les épices concernées, qui sont triées par date (la "
+"plus récente en premier). Vous pouvez donc mettre à jour les épices de votre "
+"choix.\n"
+"\t\tLe bouton le plus à droite actualise le cache et les notifications, si "
+"nécessaire.\n"
+"\t\tEn option, un bouton central permet d'oublier les nouvelles épices ou de "
+"mettre à jour celles installées, selon les cas."
+
+#. 4.2->settings-schema.json->general_show_updateall_button->description
+#. 4.6->settings-schema.json->general_show_updateall_button->description
+msgid "Show the 'Update Now' button in notifications"
+msgstr "Afficher le bouton « Mettre à jour ! » dans les notifications"
+
+#. 4.2->settings-schema.json->general_show_updateall_button->tooltip
+#. 4.6->settings-schema.json->general_show_updateall_button->tooltip
+msgid ""
+"By checking this box, a button 'Update All' appears in notifications.\n"
+"By pressing this button:\n"
+" 1. The Download tab of the System Settings concerning this type of Spices "
+"appears.\n"
+" 2. The cache is updated.\n"
+" 3. Your Spices are updated.\n"
+" 4. When all updates are made, just close the window."
+msgstr ""
+"En cochant cette case, un bouton « Tout mettre à jour » apparaît dans les "
+"notifications.\n"
+"En appuyant sur ce bouton :\n"
+" 1. L'onglet Téléchargement des paramètres système concernant ce type "
+"d'épices apparaît.\n"
+" 2. Le cache est mis à jour.\n"
+" 3. Vos épices sont mises à jour.\n"
+" 4. Une fois toutes les mises à jour effectuées, fermez simplement la "
+"fenêtre."
+
+#. 4.2->settings-schema.json->general_test_notif->description
+#. 3.8->settings-schema.json->general_test_notif->description
+#. 2.8->settings-schema.json->general_test_notif->description
+#. 4.6->settings-schema.json->general_test_notif->description
+msgid "Send a fake notification to test the style"
+msgstr "Envoyer une notification factice, pour tester le style"
+
+#. 4.2->settings-schema.json->displayType->options
+#. 3.8->settings-schema.json->displayType->options
+#. 2.8->settings-schema.json->displayType->options
+#. 4.6->settings-schema.json->displayType->options
+msgid "Classic - Icon and Text"
+msgstr "Classique - Icône et texte"
+
+#. 4.2->settings-schema.json->displayType->options
+#. 3.8->settings-schema.json->displayType->options
+#. 2.8->settings-schema.json->displayType->options
+#. 4.6->settings-schema.json->displayType->options
+msgid "Compact - Icon Only"
+msgstr "Compact - Icône seule"
+
+#. 4.2->settings-schema.json->displayType->description
+#. 3.8->settings-schema.json->displayType->description
+#. 2.8->settings-schema.json->displayType->description
+#. 4.6->settings-schema.json->displayType->description
+msgid "Type of Display"
+msgstr "Type d'affichage"
+
+#. 4.2->settings-schema.json->displayType->tooltip
+#. 3.8->settings-schema.json->displayType->tooltip
+#. 2.8->settings-schema.json->displayType->tooltip
+#. 4.6->settings-schema.json->displayType->tooltip
+msgid ""
+"This feature offers the Classic (default) display with icon and text, and "
+"compact display (Icon Only)."
+msgstr ""
+"Vous avez le choix entre un affichage classique (par défaut) avec icône et "
+"texte, et un affichage compact où seule l'icône s'affiche."
+
+#. 4.2->settings-schema.json->general_hide->description
+#. 3.8->settings-schema.json->general_hide->description
+#. 2.8->settings-schema.json->general_hide->description
+#. 4.6->settings-schema.json->general_hide->description
+msgid "Hide the icon as long as nothing is to report"
+msgstr "Cacher l'icône tant qu'il n'y a rien à signaler"
+
+#. 4.2->settings-schema.json->general_hide->tooltip
+#. 3.8->settings-schema.json->general_hide->tooltip
+#. 2.8->settings-schema.json->general_hide->tooltip
+#. 4.6->settings-schema.json->general_hide->tooltip
+msgid ""
+"By checking this box, as long as nothing is to report the icon of Spices "
+"Update does not appear on the panel."
+msgstr ""
+"En cochant cette case, tant qu'il n'y aura rien à signaler l'icône de Spices "
+"Update n'apparaîtra pas sur le panneau."
+
+#. 3.8->settings-schema.json->general_frequency->description
+#. 2.8->settings-schema.json->general_frequency->description
+msgid "Time interval between two checks (hours)"
+msgstr "Intervalle de temps entre deux vérifications (en heures)"
+
+#. 3.8->settings-schema.json->general_frequency->tooltip
+#. 2.8->settings-schema.json->general_frequency->tooltip
+msgid ""
+"Please note that the first check will take place one minute after starting "
+"this applet."
+msgstr ""
+"Veuillez noter que la première vérification aura lieu une minute après le "
+"démarrage de cette applet."
+
 #. 3.8->settings-schema.json->general_force_notifications->description
 #. 2.8->settings-schema.json->general_force_notifications->description
 msgid "Show notification messages even if they are unchanged"
@@ -693,7 +986,6 @@ msgstr ""
 "Afficher tous les messages de notification, même s'ils sont identiques aux "
 "précédents"
 
-#. 4.2->settings-schema.json->general_force_notifications->tooltip
 #. 3.8->settings-schema.json->general_force_notifications->tooltip
 #. 2.8->settings-schema.json->general_force_notifications->tooltip
 msgid ""
@@ -704,25 +996,11 @@ msgstr ""
 "identiques aux précédents. Sinon, un message identique au précédent ne sera "
 "pas affiché dans la zone de notification."
 
-#. 4.2->settings-schema.json->general_type_notif->options
-#. 3.8->settings-schema.json->general_type_notif->options
-#. 2.8->settings-schema.json->general_type_notif->options
-msgid "Minimal (text only)"
-msgstr "Minimal (texte seulement)"
-
-#. 4.2->settings-schema.json->general_type_notif->options
 #. 3.8->settings-schema.json->general_type_notif->options
 #. 2.8->settings-schema.json->general_type_notif->options
 msgid "With button opening the System Settings"
 msgstr "Avec bouton d'ouverture des Paramètres Système"
 
-#. 4.2->settings-schema.json->general_type_notif->description
-#. 3.8->settings-schema.json->general_type_notif->description
-#. 2.8->settings-schema.json->general_type_notif->description
-msgid "Notification style"
-msgstr "Style de notification"
-
-#. 4.2->settings-schema.json->general_type_notif->tooltip
 #. 3.8->settings-schema.json->general_type_notif->tooltip
 #. 2.8->settings-schema.json->general_type_notif->tooltip
 msgid ""
@@ -741,65 +1019,6 @@ msgstr ""
 "celui du menu :\n"
 "\tOuvrir l'onglet Télécharger dans les Paramètres systèmes concernant ce "
 "type de Spices, avec les Spices triées par date."
-
-#. 4.2->settings-schema.json->general_test_notif->description
-#. 3.8->settings-schema.json->general_test_notif->description
-#. 2.8->settings-schema.json->general_test_notif->description
-msgid "Send a fake notification to test the style"
-msgstr "Envoyer une notification factice, pour tester le style"
-
-#. 4.2->settings-schema.json->displayType->options
-#. 3.8->settings-schema.json->displayType->options
-#. 2.8->settings-schema.json->displayType->options
-msgid "Classic - Icon and Text"
-msgstr "Classique - Icône et texte"
-
-#. 4.2->settings-schema.json->displayType->options
-#. 3.8->settings-schema.json->displayType->options
-#. 2.8->settings-schema.json->displayType->options
-msgid "Compact - Icon Only"
-msgstr "Compact - Icône seule"
-
-#. 4.2->settings-schema.json->displayType->description
-#. 3.8->settings-schema.json->displayType->description
-#. 2.8->settings-schema.json->displayType->description
-msgid "Type of Display"
-msgstr "Type d'affichage"
-
-#. 4.2->settings-schema.json->displayType->tooltip
-#. 3.8->settings-schema.json->displayType->tooltip
-#. 2.8->settings-schema.json->displayType->tooltip
-msgid ""
-"This feature offers the Classic (default) display with icon and text, and "
-"compact display (Icon Only)."
-msgstr ""
-"Vous avez le choix entre un affichage classique (par défaut) avec icône et "
-"texte, et un affichage compact où seule l'icône s'affiche."
-
-#. 4.2->settings-schema.json->general_hide->description
-#. 3.8->settings-schema.json->general_hide->description
-#. 2.8->settings-schema.json->general_hide->description
-msgid "Hide the icon as long as nothing is to report"
-msgstr "Cacher l'icône tant qu'il n'y a rien à signaler"
-
-#. 4.2->settings-schema.json->general_hide->tooltip
-#. 3.8->settings-schema.json->general_hide->tooltip
-#. 2.8->settings-schema.json->general_hide->tooltip
-msgid ""
-"By checking this box, as long as nothing is to report the icon of Spices "
-"Update does not appear on the panel."
-msgstr ""
-"En cochant cette case, tant qu'il n'y aura rien à signaler l'icône de Spices "
-"Update n'apparaîtra pas sur le panneau."
-
-#. 3.8->settings-schema.json->general_frequency->tooltip
-#. 2.8->settings-schema.json->general_frequency->tooltip
-msgid ""
-"Please note that the first check will take place one minute after starting "
-"this applet."
-msgstr ""
-"Veuillez noter que la première vérification aura lieu une minute après le "
-"démarrage de cette applet."
 
 #~ msgid "(Refresh to see the description)"
 #~ msgstr "(Rafraîchir pour voir la description)"

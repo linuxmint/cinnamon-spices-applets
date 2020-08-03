@@ -1,3 +1,22 @@
+### v6.0.0~20200729
+Many improvements, only for Cinnamon 4.2 and following.
+
+  * Spices Update automatically adapts the verification or not of each type of Spices (for example: it does not check the themes if no theme is installed; it checks them as soon as at least one theme is installed). However, the user is always free to decide, in settings, what should be done.
+
+  * Checking for new Spices is now disabled by default.
+
+  * New option in General Settings: "Show the 'Update All' button in notifications" (with buttons). For example, clicking on this button in a notification for available Themes updates:
+    1. opens the Download tab of System Settings about Themes,
+    2. refreshes the cache about Themes,
+    3. downloads and install all latest updates for your Themes.
+    4. When all updates are made, just close yourself this System Settings window.
+
+  * New button 'Forget' in notifications about new Spices.
+  * The applet icon now rotates during the entire refresh process.
+  * Displays a notification asking the user to check the applet settings, if this is the first installation of this version of Spices Updates. This notification only appears once.
+  * Better management of notifications. Spices Update does not use notify-send anymore.
+  * Help button (in menu) shows in the browser by default an approximate translation of the web page: https://cinnamon-spices.linuxmint.com/applets/view/309
+
 ### v5.4.2~20200615
   * Bug fixes
 

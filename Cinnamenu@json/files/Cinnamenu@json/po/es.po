@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-17 12:34+0100\n"
-"PO-Revision-Date: 2020-07-18 12:05+0100\n"
+"POT-Creation-Date: 2020-07-25 17:39+0100\n"
+"PO-Revision-Date: 2020-07-31 07:51+0100\n"
 "Last-Translator: Germán Franco\n"
 "Language-Team: \n"
 "Language: es\n"
@@ -58,8 +58,8 @@ msgid "Clear List"
 msgstr "Vaciar lista"
 
 #. 3.2 4.0
-msgid "No recent documents"
-msgstr "No hay documentos recientes"
+msgid "No recent files"
+msgstr "No hay archivos recientes."
 
 #. 3.2
 msgid "Account details"
@@ -117,7 +117,8 @@ msgstr "PC"
 msgid "Browse network"
 msgstr "Buscar en la red"
 
-#. 3.2 4.0
+#. 3.2 3.2 4.0
+#. 4.0
 msgid "Run with NVIDIA GPU"
 msgstr "Ejecutar con la GPU NVIDIA"
 
@@ -141,7 +142,7 @@ msgstr "Añadir a favoritos"
 msgid "Uninstall"
 msgstr "Desinstalar"
 
-#. 4.0 4.0
+#. 4.0 4.0 4.0
 msgid "Please wait..."
 msgstr "Por favor espera..."
 
@@ -163,16 +164,21 @@ msgid ""
 "Made possible thanks to the efforts of contributors to the Cinnamon menu, "
 "Gnomenu, and the contributors to projects they derived from."
 msgstr ""
+"Hecho posible gracias a los esfuerzos de los contribuyentes al menú "
+"Cinnamon, Gnomenu, y los contribuyentes a los proyectos de los que derivaron."
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Behavior"
 msgstr "Comportamiento"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Appearance"
 msgstr "Apariencia"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Layout and Content"
 msgstr "Disposición y contenido"
 
@@ -184,120 +190,165 @@ msgstr "Proveedores de búsqueda"
 msgid "No search provider extensions found"
 msgstr "No se encontró ninguna extensión de proveedores de búsqueda"
 
-#. 3.2 4.0
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
 msgid "Panel"
 msgstr "Panel"
 
-#. 3.2 4.0
+#. 3.2
+#. 3.2
+#. 4.0
 msgid "Menu"
 msgstr "Menú"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Layout"
 msgstr "Disposición"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Content"
 msgstr "Contenido"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Recent files settings"
 msgstr "Configuraciones de archivos recientes"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Open the menu editor"
 msgstr "Abrir el editor del menú"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Reset category order"
 msgstr "Restablecer orden de categoría"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Use a custom icon"
 msgstr "Usar icono personalizado"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Use a custom icon in the panel"
 msgstr "Use un icono personalizado en el panel"
 
-#. 3.2 4.0
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
 msgid "Panel icon"
 msgstr "Icono del panel"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Panel text"
 msgstr "Texto del panel"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Text to show beside the panel icon"
 msgstr "Texto para mostrar al lado del icono del panel"
 
-#. 3.2 4.0
+#. 3.2
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
+#. 4.0
 msgid "pixels"
 msgstr "pixels"
 
-#. 3.2 4.0
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
 msgid "Category icon size"
 msgstr "Tamaño de los iconos de las categorías"
 
-#. 3.2 4.0
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
 msgid "Applications list icon size"
 msgstr "Tamaño de icono de las aplicaciones de la lista"
 
-#. 3.2 4.0
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
 msgid "Applications grid icon size"
 msgstr "Tamaño de icono de las aplicaciones de la cuadrícula"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Keyboard shortcut to open and close the menu"
 msgstr "Atajo de teclado para abrir y cerrar el menú"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Open menu on hover"
 msgstr "Abrir menú al pasar el mouse"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Open the menu when I move my mouse over the panel icon"
 msgstr "Abra el menú cuando muevo el mouse sobre el ícono del panel"
 
-#. 3.2 4.0
+#. 3.2
+#. 3.2
+#. 4.0
 msgid "milliseconds"
 msgstr "milisegundos"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Menu hover delay"
 msgstr "Tiempo de espera"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Use menu animations"
 msgstr "Usar animaciones en el menú"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Animate the menu on open and close"
 msgstr "Animar el menú al abrir y cerrar"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Activate categories on click"
 msgstr "Activar categorías con un click"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Activate categories on click instead of on hover"
 msgstr ""
 "Active las categorías al hacer clic en lugar de al pasar el ratón por encima"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Enable autoscrolling"
 msgstr "Habilitar desplazamiento automático"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Enable autoscrolling in application list"
 msgstr "Activar desplazamiento automático en la lista de aplicaciones"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Show web bookmarks"
 msgstr "Mostrar marcadores web"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Show your browser's web bookmarks in the menu"
 msgstr "Muestra los marcadores web de tu navegador en el menú"
 
@@ -305,77 +356,101 @@ msgstr "Muestra los marcadores web de tu navegador en el menú"
 msgid "Enable searching of open windows"
 msgstr "Activar la búsqueda de ventanas abiertas"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Enable search providers"
 msgstr "Activar proveedores de búsqueda"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Include search provider results in searches"
 msgstr ""
 "Elige si los resultados de los proveedores de búsqueda aparecerán listados "
 "en las búsquedas"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Example Search Providers"
 msgstr "Proveedores de búsqueda de ejemplo"
 
 #. 3.2
+#. 3.2
 msgid "Startup applications view mode"
 msgstr "Modo de vista de las aplicaciones al iniciar"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "List"
 msgstr "Lista"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Grid"
 msgstr "Cuadrícula"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "columns"
 msgstr "columnas"
 
-#. 3.2 4.0
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
 msgid "Number of columns in apps grid"
 msgstr "Número de columnas en la cuadrícula de aplicaciones"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Show bookmarks and places"
 msgstr "Mostrar lugares y marcadores"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "Show bookmarks and places category in the menu"
 msgstr "Mostrar marcadores y categoría de lugares en el menú"
 
-#. 3.2 4.0
+#. 3.2
+#. 3.2
 msgid "Show application icons"
 msgstr "Mostrar los iconos de las aplicaciones"
 
-#. 3.2 4.0
+#. 3.2
+#. 3.2
 msgid "Show category icons"
 msgstr "Mostrar iconos de las categorías"
 
+#. 3.2
 #. 3.2
 msgid "Show application descriptions under titles"
 msgstr "Mostrar descripción de las aplicaciones debajo del título"
 
 #. 3.2
+#. 3.2
 msgid "Show tooltips"
 msgstr "Mostrar consejos"
 
 #. 3.2
+#. 3.2
 msgid "Tooltip delay"
 msgstr "Retraso del cosejo"
 
-#. 3.2 4.0
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
 msgid "Use a custom menu height"
 msgstr "Usar altura del menú personalizada"
 
-#. 3.2 4.0
+#. 3.2
+#. 4.0
 msgid "px"
 msgstr "px"
 
-#. 3.2 4.0
+#. 3.2
+#. 3.2
+#. 4.0
+#. 4.0
 msgid "Custom menu height"
 msgstr "Altura del menú personalizada"
 
@@ -440,3 +515,15 @@ msgid "Show your favorite app icons next to the session buttons"
 msgstr ""
 "Muestra los íconos de tus aplicaciones favoritas junto a los botones de "
 "sesión"
+
+#. 4.0
+msgid "Always open menu on favorite apps"
+msgstr "Siempre abra el menú en aplicaciones favoritas"
+
+#. 4.0
+msgid "Always open the menu with favorite apps category selected"
+msgstr ""
+"Siempre abra el menú con la categoría de aplicaciones favoritas seleccionada"
+
+#~ msgid "No recent documents"
+#~ msgstr "No hay documentos recientes"

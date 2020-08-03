@@ -27,7 +27,6 @@ const {addTween} = imports.ui.tweener;
 const {Tooltip} = imports.ui.tooltips;
 const {SignalManager} = imports.misc.signalManager;
 const {launch_all} = imports.ui.searchProviderManager;
-const {makeDraggable} = imports.ui.dnd;
 const {spawnCommandLine, latinise, each, find, findIndex, map} = imports.misc.util;
 const {createStore} = imports.misc.state;
 const {_, ApplicationType, AppTypes, tryFn, searchStr} = require('./utils');
@@ -1794,7 +1793,6 @@ class CinnamenuApplet extends TextIconApplet {
         this.categoriesOverlayBox.add_actor(this.categoriesBox);
         // Build categories
         this.buildCategories();
-
         // Place boxes in proper containers. The order added determines position
         // groupCategoriesWorkspacesWrapper bin wraps categories and workspaces
         this.groupCategoriesWorkspacesWrapper = new St.BoxLayout({
@@ -1848,21 +1846,27 @@ class CinnamenuApplet extends TextIconApplet {
 
         // add all to section
         let section = new PopupMenuSection();
+        /*
+        this.resizeContainer = new St.BoxLayout({ reactive: true });
+        this.resizeContainer.add(resizeIcon, { x_fill: false, y_fill: false, expand: false,
+                                                    x_align: St.Align.MIDDLE, y_align: St.Align.MIDDLE });*/
+        /*this.resizeButton = new ResizeButton(this.state);
+        this.wide = new St.BoxLayout({ reactive: true });
+        this.resizePane = new St.BoxLayout({ reactive: true });
+        this.resizePane.add(this.wide,{ expand: true, x_fill: true, y_fill: false,
+                                                x_align: St.Align.START, y_align: St.Align.MIDDLE });
+        this.resizePane.add(this.resizeButton.actor);
+        section.actor.add_actor(this.resizePane);*/
+
         section.actor.add_actor(this.mainBox);
         // add section as menu item
         this.menu.addMenuItem(section);
 
-        // Set height constraints on scrollboxes
-    /*    this.applicationsScrollBox.add_constraint(new Clutter.BindConstraint({
-                                            name: 'appScrollBoxConstraint',
-                                            source: this.groupCategoriesWorkspacesScrollBox,
-                                            coordinate: Clutter.BindCoordinate.HEIGHT,
-                                            offset: 0 }));
-*/
         this.isNewInstance = false;
         this.state.panelLocation = this._panelLocation;
         //if a blank part of the menu was clicked on, close context menu
-        this.displaySignals.connect(this.mainBox, 'button-release-event',
+        this.menu.actor.set_reactive(true);
+        this.displaySignals.connect(this.menu.actor, 'button-release-event',
                                                         (...args) => {this.clearEnteredActors();});
     }
 
@@ -1933,6 +1937,110 @@ class CinnamenuApplet extends TextIconApplet {
         this.menu.destroy();
     }
 }
+/*
+const {DragMotionResult, makeDraggable} = imports.ui.dnd;
+const {PopupBaseMenuItem, PopupSubMenu} = imports.ui.popupMenu;
+const {Clone, BinLayout, ActorAlign} = imports.gi.Clutter;
+
+class ResizeButton extends PopupBaseMenuItem {
+    constructor(state) {
+        super({ hover: false, activate: false });
+        this.state = state;
+        this.signals = new SignalManager(null);
+
+        this.index = -1;
+
+        this.disabled = false;
+        this.entered = null;
+        this.icon = new St.Icon({ gicon: new Gio.FileIcon({file: Gio.file_new_for_path(__meta.path + '/tr.png')}),
+                            icon_size: 12 });
+        this.addActor(this.icon);
+        this.actor._delegate = {
+            handleDragOver: (source, actor, x, y, time) => {
+                //return DragMotionResult.NO_DROP;
+                //global.log("drag over", x, y, time);
+                return DragMotionResult.NO_DROP;
+            },
+            handleMotion: (x, y) => {
+                global.log("motion", x, y);
+
+            },
+            acceptDrop: (source, actor, x, y, time) => {
+                //return DragMotionResult.NO_DROP;
+                //global.log("drop", x, y, time);
+                return DragMotionResult.MOVE_DROP;
+                //return false;
+            },
+            getDragActorSource: () => this.actor,
+            _getDragActor: () => new Clone({source: this.actor}),
+            getDragActor: () => new Clone({source: this.icon}),
+            isDraggableApp: false,
+            index: this.index,
+            id: this.id
+        };
+
+        this.draggable = makeDraggable(this.actor);
+
+        // Connect signals
+        this.signals.connect(this.draggable, 'drag-begin', (...args) => this.onDragBegin(...args));
+        this.signals.connect(this.draggable, 'drag-cancelled', (...args) => this.onDragCancelled(...args));
+        this.signals.connect(this.draggable, 'drag-end', (...args) => this.onDragEnd(...args));
+        //?undo
+
+        this.signals.connect(this.actor, 'motion-event', (...args) => this.handleEnter(...args));
+        this.signals.connect(this.actor, 'leave-event', (...args) => this.handleLeave(...args));
+        this.signals.connect(this.actor, 'button-release-event', (...args) =>
+                                                                        this.handleButtonRelease(...args));
+        this.signals.connect(this.actor, 'button-press-event', (...args) => this.handleButtonPress(...args));
+    }
+
+    onDragBegin() {
+        //this.actor.set_opacity(51);
+        //this.state.set({categoryDragged: true});
+    }
+
+    onDragCancelled() {
+        //this.actor.set_opacity(255);
+        //this.state.set({categoryDragged: false});
+    }
+
+    onDragEnd() {
+        //this.actor.set_opacity(255);
+        //setTimeout(() => this.state.set({categoryDragged: false}), 0);
+    }
+
+    handleEnter(actor, event) {
+        global.log("moving");
+        if (event) {//?undo
+
+        }
+
+    }
+
+    handleLeave(actor, event) {
+
+    }
+
+    handleButtonRelease(actor, event) {
+
+    }
+    handleButtonPress(actor, event) {
+        global.log("pressed");
+        return true;
+    }
+
+    destroy() {
+
+        this.signals.disconnectAllSignals();
+        this.label.destroy();
+        if (this.icon) {
+            this.icon.destroy();
+        }
+        PopupBaseMenuItem.prototype.destroy.call(this);
+        unref(this);
+    }
+}
+*/
 
 class Search {
     constructor(state) {

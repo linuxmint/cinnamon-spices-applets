@@ -29,6 +29,10 @@ class BackgroundRoll extends Applet.IconApplet {
         try {
             this.set_applet_icon_path("/home/"+this.user+"/.local/share/cinnamon/applets/backgroundroll@Sokawaii25/icons/icon.svg");
             this.set_applet_tooltip("Click to change the background");
+
+        try {
+            this.set_applet_icon_path("/home/"+this.user+"/.local/share/cinnamon/applets/backgroundroll@Sokawaii25/icons/icon.svg");
+            this.set_applet_tooltip("Click to change the background");
         }
         catch (e) {
             global.logError(e);

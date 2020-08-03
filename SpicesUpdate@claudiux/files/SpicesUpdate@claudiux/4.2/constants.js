@@ -28,6 +28,7 @@ if (versionCompare( GLib.getenv('CINNAMON_VERSION') ,"4.2.4" ) >= 0 ) {
   sort = "update";
 }
 
+const TAB = "1";
 const SORT = sort;
 
 const APPLET_DIR = HOME_DIR + "/.local/share/cinnamon/applets/" + UUID;
@@ -83,6 +84,8 @@ Gettext.bindtextdomain("cinnamon-control-center", "/usr/share/locale");
 function _(str, uuid=UUID) {
   var customTrans = Gettext.dgettext(uuid, str);
   if (customTrans !== str && customTrans !== "") return customTrans;
+  customTrans = Gettext.dgettext("cinnamon", str);
+  if (customTrans !== str && customTrans !== "") return customTrans;
   return Gettext.gettext(str);
 }
 
@@ -99,7 +102,7 @@ const capitalize = (s) => {
  * logError("Any error message") log the error message regardless of the DEBUG() return.
  */
 function log(message, alwaysLog=false) {
-  if (DEBUG() || alwaysLog) global.log("\n[" + UUID + "]: " + message + "\n");
+  if (DEBUG() || alwaysLog) global.log("\n[" + UUID + "] " + GLib.DateTime.new_now_local().format("%X") + ": " + message + "\n");
 }
 
 function logError(error) {
@@ -167,6 +170,7 @@ module.exports = {
   DIR_MAP,
   DCONFCACHEUPDATED,
   DOWNLOAD_TIME,
+  TAB,
   SORT,
   _,
   EXP1, EXP2, EXP3,
