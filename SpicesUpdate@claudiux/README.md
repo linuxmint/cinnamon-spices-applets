@@ -40,7 +40,7 @@ Additional details:
     * The Settings window of this applet does not contain any tabs.
     * In the settings of this applet, you can not access Spices lists to disable their monitoring. Therefore, all installed Spices are monitored.
     * The script `generate_mo.sh` (in the `scripts` folder) allows you to install all available translations. Restart Cinnamon after execution.
-    * If the `Symbola_Hinted` font can not be automatically installed, then open with Nemo the `~/.local/share/cinnamon/applets/SpicesUpdate@claudiux/fonts/Symbola` folder and double-click on the `Symbola_Hinted.ttf` file. Install it with the just opened `gnome-font-viewer`.
+    * If the `Symbola_Hinted` font can not be automatically installed, then execute the script `~/.local/share/cinnamon/applets/SpicesUpdate@claudiux/scripts/install_symbola_on_Arch.sh`; after that, eventually, open with Nemo the `~/.local/share/cinnamon/applets/SpicesUpdate@claudiux/fonts/Symbola` folder and double-click on the `Symbola.otf` file and install it with the just opened `gnome-font-viewer`.
 
 ## Requirements
 

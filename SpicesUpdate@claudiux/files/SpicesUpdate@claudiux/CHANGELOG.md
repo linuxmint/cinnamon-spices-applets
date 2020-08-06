@@ -1,4 +1,9 @@
+### v6.0.1~20200806
+
+"Weight" reduction of this applet: the `Symbola` font is no longer included in its package; it was only used for Arch and the `install_symbola_on_Arch.sh` script was modified to download it if needed.
+
 ### v6.0.0~20200729
+
 Many improvements, only for Cinnamon 4.2 and following.
 
   * Spices Update automatically adapts the verification or not of each type of Spices (for example: it does not check the themes if no theme is installed; it checks them as soon as at least one theme is installed). However, the user is always free to decide, in settings, what should be done.
