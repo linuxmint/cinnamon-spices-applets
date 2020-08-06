@@ -1,7 +1,7 @@
 #!/bin/sh
 USRFONTSDIR="$HOME/.local/share/fonts"
 APPLETFONTSDIR="$HOME/.local/share/cinnamon/applets/SpicesUpdate@claudiux/fonts/Symbola"
-URLDOWNLOAD="curl -s -o Symbola.tar.gz https://raw.githubusercontent.com/claudiux/fonts/master/Symbola/Symbola.tar.gz"
+URLDOWNLOAD="https://raw.githubusercontent.com/claudiux/fonts/master/Symbola/Symbola.tar.gz"
 
 INSTALLED=$(fc-list Symbola --format="%{family[0]}\n" | sort | uniq)
 
