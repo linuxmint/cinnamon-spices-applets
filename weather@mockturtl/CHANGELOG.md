@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.6.5
+
+* Add basic Location store, now it's easier to switch between manual locations
+* Fix WeatherBit Provider as it was completely broken before
+* Some styling improvement for observation summary section in the applet
+* Help Tab is reorganized and refilled with different info
+
 ## 2.6.4
 
 * Fix typos in throughout applet
