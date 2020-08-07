@@ -17,6 +17,7 @@ record_screen() {
     -s "$size"
     -r 30
     -qscale 1
+    -vf mpdecimate
   )
 }
 
@@ -33,6 +34,7 @@ record_window() {
     -s "${width}x${height}"
     -r 30
     -qscale 1
+    -vf mpdecimate
   )
 }
 
