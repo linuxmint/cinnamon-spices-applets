@@ -7,10 +7,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: weather@mockturtl 2.6.3\n"
+"Project-Id-Version: weather@mockturtl 2.6.5\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-25 09:36+0200\n"
-"PO-Revision-Date: 2020-07-25 12:15+0200\n"
+"POT-Creation-Date: 2020-07-31 20:39+0200\n"
+"PO-Revision-Date: 2020-08-07 14:26+0200\n"
 "Last-Translator: FabRCT <fab.rct@gmail.com>\n"
 "Language-Team: Français <ecyrbe@gmail.com>\n"
 "Language: fr\n"
@@ -20,11 +20,11 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 2.3\n"
 
-#: applet.js:337 3.0/applet.js:214 3.8/applet.js:163
+#: applet.js:337 3.0/applet.js:217 3.8/applet.js:166
 msgid "..."
 msgstr "..."
 
-#: applet.js:338 3.0/applet.js:215 3.8/applet.js:164
+#: applet.js:338 3.0/applet.js:218 3.8/applet.js:167
 msgid "Click to open"
 msgstr "Cliquez pour ouvrir"
 
@@ -34,7 +34,7 @@ msgstr "Paramètres"
 
 #: applet.js:511
 msgid "No location provided"
-msgstr "Aucun lieu indiqué"
+msgstr "Aucun emplacement indiqué"
 
 #: applet.js:610
 msgid "Cloudiness:"
@@ -48,36 +48,36 @@ msgstr "Lever du soleil"
 msgid "Sunset"
 msgstr "Coucher du soleil"
 
-#: applet.js:708 3.0/applet.js:1187 3.8/applet.js:1062
+#: applet.js:708 3.0/applet.js:1175 3.8/applet.js:1039
 msgid "Loading current weather ..."
 msgstr "Chargement de la météo..."
 
-#: applet.js:709 3.0/applet.js:1190 3.8/applet.js:1065
+#: applet.js:709 3.0/applet.js:1178 3.8/applet.js:1042
 msgid "Loading future weather ..."
 msgstr "Chargement des prévisions..."
 
-#: applet.js:731 3.0/applet.js:1214 3.8/applet.js:1089
+#: applet.js:731 3.0/applet.js:1228 3.8/applet.js:1092
 msgid "Loading ..."
 msgstr "Chargement..."
 
-#: applet.js:737 3.0/applet.js:229 3.0/applet.js:1204 3.8/applet.js:178
-#: 3.8/applet.js:1079
+#: applet.js:737 3.0/applet.js:232 3.0/applet.js:1192 3.8/applet.js:181
+#: 3.8/applet.js:1056
 msgid "Refresh"
 msgstr "Actualiser"
 
-#: applet.js:802 3.0/applet.js:1265 3.8/applet.js:1140
+#: applet.js:802 3.0/applet.js:1277 3.8/applet.js:1141
 msgid "Temperature:"
 msgstr "Température :"
 
-#: applet.js:804 3.0/applet.js:1266 3.8/applet.js:1141
+#: applet.js:804 3.0/applet.js:1278 3.8/applet.js:1142
 msgid "Humidity:"
 msgstr "Humidité :"
 
-#: applet.js:806 3.0/applet.js:1267 3.8/applet.js:1142
+#: applet.js:806 3.0/applet.js:1279 3.8/applet.js:1143
 msgid "Pressure:"
 msgstr "Pression :"
 
-#: applet.js:808 3.0/applet.js:1268 3.8/applet.js:1143
+#: applet.js:808 3.0/applet.js:1280 3.8/applet.js:1144
 msgid "Wind:"
 msgstr "Vent :"
 
@@ -145,11 +145,11 @@ msgstr "NO"
 msgid "Service Unavailable"
 msgstr "Service indisponible"
 
-#: applet.js:1084 3.0/applet.js:168 3.0/applet.js:170 3.0/applet.js:172
-#: 3.0/applet.js:175 3.0/applet.js:178 3.0/applet.js:179 3.0/applet.js:180
-#: 3.0/applet.js:181 3.8/applet.js:118 3.8/applet.js:120 3.8/applet.js:122
-#: 3.8/applet.js:125 3.8/applet.js:128 3.8/applet.js:129 3.8/applet.js:130
-#: 3.8/applet.js:131
+#: applet.js:1084 3.0/applet.js:169 3.0/applet.js:171 3.0/applet.js:173
+#: 3.0/applet.js:176 3.0/applet.js:179 3.0/applet.js:180 3.0/applet.js:181
+#: 3.0/applet.js:182 3.8/applet.js:119 3.8/applet.js:121 3.8/applet.js:123
+#: 3.8/applet.js:126 3.8/applet.js:129 3.8/applet.js:130 3.8/applet.js:131
+#: 3.8/applet.js:132
 msgid "Service Error"
 msgstr "Erreur du service"
 
@@ -170,8 +170,8 @@ msgstr "Clé temporairement bloquée"
 msgid "Cloudiness"
 msgstr "Nébulosité"
 
-#: 3.0/openWeatherMap.js:186 3.0/weatherbit.js:185 3.0/us_weather.js:338
-#: 3.0/met_uk.js:345 3.8/openWeatherMap.js:141 3.8/weatherbit.js:126
+#: 3.0/openWeatherMap.js:186 3.0/weatherbit.js:216 3.0/us_weather.js:338
+#: 3.0/met_uk.js:345 3.8/openWeatherMap.js:141 3.8/weatherbit.js:148
 #: 3.8/us_weather.js:242 3.8/met_uk.js:237
 msgid "Failed to Process Current Weather Info"
 msgstr "Échec du traitement des informations météorologiques actuelles"
@@ -472,20 +472,20 @@ msgstr "Nuages fragmentés"
 msgid "Overcast clouds"
 msgstr "Ciel couvert"
 
-#: 3.0/weatherbit.js:175 3.0/darkSky.js:147 3.0/yahoo.js:145
-#: 3.0/us_weather.js:326 3.0/climacell.js:167 3.8/weatherbit.js:116
+#: 3.0/weatherbit.js:206 3.0/darkSky.js:147 3.0/yahoo.js:145
+#: 3.0/us_weather.js:326 3.0/climacell.js:167 3.8/weatherbit.js:138
 #: 3.8/darkSky.js:99 3.8/yahoo.js:97 3.8/us_weather.js:230 3.8/climacell.js:106
 msgid "Feels Like"
 msgstr "Semble être"
 
-#: 3.0/weatherbit.js:212 3.0/weatherbit.js:247 3.0/us_weather.js:375
-#: 3.0/met_uk.js:369 3.0/met_uk.js:405 3.8/weatherbit.js:153
-#: 3.8/weatherbit.js:188 3.8/us_weather.js:279 3.8/met_uk.js:261
+#: 3.0/weatherbit.js:243 3.0/weatherbit.js:278 3.0/us_weather.js:375
+#: 3.0/met_uk.js:369 3.0/met_uk.js:405 3.8/weatherbit.js:175
+#: 3.8/weatherbit.js:210 3.8/us_weather.js:279 3.8/met_uk.js:261
 #: 3.8/met_uk.js:297
 msgid "Failed to Process Forecast Info"
 msgstr "Échec du traitement des prévisions météorologiques"
 
-#: 3.0/weatherbit.js:285 3.8/weatherbit.js:226
+#: 3.0/weatherbit.js:316 3.8/weatherbit.js:248
 msgid ""
 "Please enter API key in settings,\n"
 "or get one first on https://www.weatherbit.io/account/create"
@@ -493,8 +493,8 @@ msgstr ""
 "Veuillez saisir la clé API dans les paramètres,\n"
 "ou en obtenir une sur https://www.weatherbit.io/account/create"
 
-#: 3.0/weatherbit.js:304 3.0/darkSky.js:233 3.0/climacell.js:243
-#: 3.8/weatherbit.js:245 3.8/darkSky.js:185 3.8/climacell.js:182
+#: 3.0/weatherbit.js:335 3.0/darkSky.js:233 3.0/climacell.js:243
+#: 3.8/weatherbit.js:267 3.8/darkSky.js:185 3.8/climacell.js:182
 msgid ""
 "Please Make sure you\n"
 "entered the API key correctly and your account is not locked"
@@ -725,11 +725,11 @@ msgstr "Averses de neige et orage"
 msgid "Unknown"
 msgstr "Inconnue"
 
-#: 3.0/ipApi.js:87 3.8/ipApi.js:41
+#: 3.0/ipApi.js:89 3.8/ipApi.js:43
 msgid "Could not obtain location"
 msgstr "Impossible d'obtenir l'emplacement"
 
-#: 3.0/ipApi.js:93 3.8/ipApi.js:47
+#: 3.0/ipApi.js:95 3.8/ipApi.js:49
 msgid ""
 "Location Service responded with errors, please see the logs in Looking Glass"
 msgstr ""
@@ -744,7 +744,7 @@ msgstr "et"
 msgid "until"
 msgstr "jusqu'à"
 
-#: 3.0/darkSky.js:75 3.0/applet.js:1146 3.8/darkSky.js:39 3.8/applet.js:1021
+#: 3.0/darkSky.js:75 3.0/applet.js:1134 3.8/darkSky.js:39 3.8/applet.js:998
 msgid "in"
 msgstr "à"
 
@@ -790,6 +790,30 @@ msgid ""
 msgstr ""
 "La passerelle avec Yahoo a répondu dans un mauvais format,\n"
 " consultez le journal de Looking Glass pour visualiser les erreurs"
+
+#: 3.0/yahoo.js:181 3.8/yahoo.js:133
+msgid "Missing package"
+msgstr "Paquet manquant"
+
+#: 3.0/yahoo.js:181 3.0/yahoo.js:183 3.8/yahoo.js:133 3.8/yahoo.js:135
+msgid "Please install '"
+msgstr "Veuillez installer '"
+
+#: 3.0/yahoo.js:181 3.0/yahoo.js:183 3.8/yahoo.js:133 3.8/yahoo.js:135
+msgid "', then refresh manually."
+msgstr "', puis actualisez manuellement."
+
+#: 3.0/yahoo.js:186 3.8/yahoo.js:138
+msgid "Could not connect to Yahoo API."
+msgstr "Impossible de se connecter à l'API Yahoo."
+
+#: 3.0/yahoo.js:190 3.8/yahoo.js:142
+msgid ""
+"Unknown error happened while obtaining weather, see Looking Glass logs for "
+"more information"
+msgstr ""
+"Une erreur inconnue s'est produite lors de l'obtention de la météo, "
+"consultez les journaux Looking Glass pour plus d'informations"
 
 #: 3.0/yahoo.js:441 3.0/us_weather.js:576 3.8/yahoo.js:392
 #: 3.8/us_weather.js:479
@@ -943,7 +967,8 @@ msgstr "Réponse inattendue de l'API"
 #: 3.0/us_weather.js:235 3.8/us_weather.js:139
 msgid "Location is outside US, please use a different provider."
 msgstr ""
-"Le lieu est en dehors des États-Unis, veuillez utiliser un autre fournisseur."
+"L'emplacement est en dehors des États-Unis, veuillez utiliser un autre "
+"fournisseur."
 
 #: 3.0/us_weather.js:398 3.8/us_weather.js:302
 msgid "Failed to Process Hourly Forecast Info"
@@ -1030,11 +1055,11 @@ msgstr "Très bonne - Entre"
 msgid "Excellent - More than"
 msgstr "Excellente - Plus de"
 
-#: 3.0/met_uk.js:426 3.0/applet.js:1165 3.8/met_uk.js:318 3.8/applet.js:1040
+#: 3.0/met_uk.js:426 3.0/applet.js:1153 3.8/met_uk.js:318 3.8/applet.js:1017
 msgid "mi"
 msgstr "mi"
 
-#: 3.0/met_uk.js:427 3.0/applet.js:1166 3.8/met_uk.js:319 3.8/applet.js:1041
+#: 3.0/met_uk.js:427 3.0/applet.js:1154 3.8/met_uk.js:319 3.8/applet.js:1018
 msgid "km"
 msgstr "km"
 
@@ -1071,62 +1096,76 @@ msgstr "Orage"
 msgid "Thunder shower"
 msgstr "Averses et orage"
 
-#: 3.0/applet.js:167 3.8/applet.js:117
+#: 3.0/applet.js:168 3.0/applet.js:406 3.0/applet.js:1992 3.8/applet.js:118
+#: 3.8/applet.js:311 3.8/applet.js:1785
 msgid "Error"
 msgstr "Erreur"
 
-#: 3.0/applet.js:169 3.8/applet.js:119
+#: 3.0/applet.js:170 3.8/applet.js:120
 msgid "Incorrect API Key"
 msgstr "Clé d'API incorrecte"
 
-#: 3.0/applet.js:171 3.8/applet.js:121
+#: 3.0/applet.js:172 3.8/applet.js:122
 msgid "Incorrect Location Format"
 msgstr "Format d'emplacement incorrect"
 
-#: 3.0/applet.js:173 3.8/applet.js:123
+#: 3.0/applet.js:174 3.8/applet.js:124
 msgid "Key Blocked"
 msgstr "Clé bloquée"
 
-#: 3.0/applet.js:174 3.8/applet.js:124
+#: 3.0/applet.js:175 3.8/applet.js:125
 msgid "Can't find location"
 msgstr "Impossible de trouver l'emplacement"
 
-#: 3.0/applet.js:176 3.8/applet.js:126
+#: 3.0/applet.js:177 3.8/applet.js:127
 msgid "No Api Key"
 msgstr "Aucune clé d'API"
 
-#: 3.0/applet.js:177 3.8/applet.js:127
+#: 3.0/applet.js:178 3.8/applet.js:128
 msgid "No Location"
 msgstr "Aucun emplacement"
 
-#: 3.0/applet.js:182 3.8/applet.js:132
+#: 3.0/applet.js:183 3.8/applet.js:133
 msgid "Missing Packages"
 msgstr "Paquets manquants"
 
-#: 3.0/applet.js:183 3.8/applet.js:133
+#: 3.0/applet.js:184 3.8/applet.js:134
 msgid "Location not covered"
 msgstr "Emplacement non couvert"
 
-#: 3.0/applet.js:192 3.8/applet.js:142
+#: 3.0/applet.js:193 3.0/applet.js:358 3.8/applet.js:143 3.8/applet.js:277
 msgid "Weather Applet"
 msgstr "Applet météo"
 
-#: 3.0/applet.js:267 3.8/applet.js:211
+#: 3.0/applet.js:272 3.8/applet.js:215
 msgid "API returned status code between 400 and 500"
 msgstr "L'API a renvoyé un code d'état compris entre 400 et 500"
 
-#: 3.0/applet.js:542 3.8/applet.js:435
+#: 3.0/applet.js:406 3.0/applet.js:1909 3.0/applet.js:1913 3.0/applet.js:1917
+#: 3.0/applet.js:1926 3.0/applet.js:1937 3.0/applet.js:1941 3.0/applet.js:1945
+#: 3.0/applet.js:1955 3.0/applet.js:1992 3.8/applet.js:311 3.8/applet.js:1722
+#: 3.8/applet.js:1726 3.8/applet.js:1730 3.8/applet.js:1737 3.8/applet.js:1741
+#: 3.8/applet.js:1745 3.8/applet.js:1749 3.8/applet.js:1759 3.8/applet.js:1785
+msgid "Location Store"
+msgstr "Dépôt de localisation"
+
+#: 3.0/applet.js:406 3.8/applet.js:311
+msgid "You can't save a location obtained automatically, sorry"
+msgstr ""
+"Vous ne pouvez pas enregistrer un emplacement obtenu automatiquement, désolé"
+
+#: 3.0/applet.js:592 3.8/applet.js:474
 msgid "Could not get weather information"
 msgstr "Impossible d'obtenir les informations météorologiques"
 
-#: 3.0/applet.js:565 3.8/applet.js:458
+#: 3.0/applet.js:615 3.8/applet.js:497
 msgid ""
 "Unexpected Error While Refreshing Weather, please see log in Looking Glass"
 msgstr ""
 "Erreur inattendue lors d'une mise à jour des données météo, veuillez "
 "consulter les journaux dans Looking Glass"
 
-#: 3.0/applet.js:685 3.8/applet.js:575
+#: 3.0/applet.js:661 3.8/applet.js:540
 msgid ""
 "Could not update weather for a while...\n"
 "are you connected to the internet?"
@@ -1134,50 +1173,107 @@ msgstr ""
 "Impossible de mettre à jour la météo depuis un certain temps...\n"
 "êtes-vous connecté à internet ?"
 
-#: 3.0/applet.js:699 3.8/applet.js:589
+#: 3.0/applet.js:675 3.8/applet.js:554
 msgid "Network Error, please check logs in Looking Glass"
 msgstr "Erreur réseau, veuillez consulter les journaux dans Looking Glass"
 
-#: 3.0/applet.js:974 3.0/applet.js:1124 3.8/applet.js:849 3.8/applet.js:999
+#: 3.0/applet.js:962 3.0/applet.js:1112 3.8/applet.js:826 3.8/applet.js:976
 msgid "As of"
 msgstr "À"
 
-#: 3.0/applet.js:1096 3.8/applet.js:971
+#: 3.0/applet.js:1084 3.8/applet.js:948
 msgid "Today"
 msgstr "Aujourd'hui"
 
-#: 3.0/applet.js:1098 3.8/applet.js:973
+#: 3.0/applet.js:1086 3.8/applet.js:950
 msgid "Tomorrow"
 msgstr "Demain"
 
-#: 3.0/applet.js:1122 3.8/applet.js:997
+#: 3.0/applet.js:1110 3.8/applet.js:974
 msgid "Powered by"
 msgstr "Propulsé par"
 
-#: 3.0/applet.js:1127 3.8/applet.js:1002
+#: 3.0/applet.js:1115 3.8/applet.js:979
 msgid "from you"
 msgstr "de vous"
 
-#: 3.0/applet.js:1146 3.8/applet.js:1021
+#: 3.0/applet.js:1134 3.8/applet.js:998
 msgid "mm"
 msgstr "mm"
 
-#: 3.0/applet.js:1539 3.8/applet.js:1405
+#: 3.0/applet.js:1560 3.8/applet.js:1414
 msgid "Make sure you entered a location or use Automatic location instead"
 msgstr ""
 "Assurez-vous d'avoir entré un emplacement ou utilisez la localisation "
 "automatique"
 
-#: 3.0/applet.js:1744 3.8/applet.js:1577
+#: 3.0/applet.js:1769 3.8/applet.js:1590
 msgid "Could not find location based on address, please check if it's right"
 msgstr ""
-"Impossible de trouver le lieu en fonction de l'adresse, veuillez vérifier si "
-"elle est correcte"
+"Impossible de trouver l'emplecement en fonction de l'adresse, veuillez "
+"vérifier si elle est correcte"
 
-#: 3.0/applet.js:1766 3.8/applet.js:1599
+#: 3.0/applet.js:1793 3.8/applet.js:1614
 msgid "Failed to call Geolocation API, see Looking Glass for errors."
 msgstr ""
 "Échec de l'API de géolocalisation, consultez Looking Glass pour les erreurs."
+
+#: 3.0/applet.js:1909 3.0/applet.js:1913 3.8/applet.js:1722 3.8/applet.js:1726
+msgid "Warning"
+msgstr "Avertissement"
+
+#: 3.0/applet.js:1909 3.8/applet.js:1722
+msgid "You can only save correct locations when the applet is not refreshing"
+msgstr ""
+"Vous ne pouvez enregistrer les emplacements corrects que lorsque l'applet ne "
+"s'actualise pas"
+
+#: 3.0/applet.js:1913 3.8/applet.js:1726
+msgid "You can't save an incorrect location"
+msgstr "Vous ne pouvez pas enregistrer un emplacement incorrect"
+
+#: 3.0/applet.js:1917 3.0/applet.js:1937 3.0/applet.js:1941 3.0/applet.js:1945
+#: 3.8/applet.js:1730 3.8/applet.js:1741 3.8/applet.js:1745 3.8/applet.js:1749
+msgid "Info"
+msgstr "Info"
+
+#: 3.0/applet.js:1917 3.8/applet.js:1730
+msgid "Location is already saved"
+msgstr "L'emplacement est déjà enregistré"
+
+#: 3.0/applet.js:1926 3.0/applet.js:1955 3.8/applet.js:1737 3.8/applet.js:1759
+msgid "Success"
+msgstr "Succès"
+
+#: 3.0/applet.js:1926 3.8/applet.js:1737
+msgid "Location is saved to library"
+msgstr "L'emplacement est enregistré dans la bibliothèque"
+
+#: 3.0/applet.js:1937 3.8/applet.js:1741
+msgid "You can't remove a location while the applet is refreshing"
+msgstr ""
+"Vous ne pouvez pas supprimer un emplacement pendant que l'applet est en "
+"cours d'actualisation"
+
+#: 3.0/applet.js:1941 3.8/applet.js:1745
+msgid "You can't remove an incorrect location"
+msgstr "Vous ne pouvez pas supprimer un emplacement incorrect"
+
+#: 3.0/applet.js:1945 3.8/applet.js:1749
+msgid "Location is not in storage, can't delete"
+msgstr "L'emplacement n'est pas enregistré, impossible de supprimer"
+
+#: 3.0/applet.js:1955 3.8/applet.js:1759
+msgid "Location is deleted from library"
+msgstr "L'emplacement est supprimé de la bibliothèque"
+
+#: 3.0/applet.js:1992 3.8/applet.js:1785
+msgid ""
+"Failed to load in data from location storage, please see the logs for more "
+"information"
+msgstr ""
+"Échec du chargement des données à partir de l'enregistrement de "
+"l'emplacement, veuillez consulter les journaux pour plus d'informations"
 
 #: 3.0/climacell.js:228 3.8/climacell.js:167
 msgid ""
@@ -1316,7 +1412,7 @@ msgstr "OpenWeatherMap"
 #. settings-schema.json->location->description
 #. 3.8->settings-schema.json->location->description
 msgid "Location"
-msgstr "Lieu"
+msgstr "Emplacement"
 
 #. settings-schema.json->location->tooltip
 msgid ""
@@ -1328,7 +1424,7 @@ msgstr ""
 
 #. settings-schema.json->getLocation->description
 msgid "Setup Location"
-msgstr "Valider le lieu"
+msgstr "Valider l'emplacement"
 
 #. settings-schema.json->getLocation->tooltip
 #. 3.0->settings-schema.json->moreInfo->tooltip
@@ -1581,12 +1677,12 @@ msgstr ""
 #. 3.0->settings-schema.json->manualLocation->description
 #. 3.8->settings-schema.json->manualLocation->description
 msgid "Manual Location"
-msgstr "Choisir le lieu"
+msgstr "Choisir l'emplacement"
 
 #. 3.0->settings-schema.json->manualLocation->tooltip
 #. 3.8->settings-schema.json->manualLocation->tooltip
 msgid "Enable this if your location is not accurate"
-msgstr "Activer ceci si vous voulez indiquer vous-même le lieu"
+msgstr "À activer si vous voulez indiquer vous-même l'emplacement"
 
 #. 3.0->settings-schema.json->location->description
 msgid "Location - Coordinates"
@@ -1597,7 +1693,6 @@ msgid "Acceptable inputs is Latitude,Longitude"
 msgstr "Entrées acceptables : Latitude, Longitude"
 
 #. 3.0->settings-schema.json->getLocation->description
-#. 3.8->settings-schema.json->getLocation->description
 msgid "Setup API Key and Location"
 msgstr "Configurer la clé d'API et l'emplacement"
 
@@ -1744,25 +1839,28 @@ msgid "Use custom icons in the popup menu"
 msgstr "Utiliser des icônes personnalisées dans le menu contextuel"
 
 #. 3.8->settings-schema.json->units-section->title
-msgid "Units and Icons"
-msgstr "Unités et icônes"
+msgid "Units, Icons and Keys"
+msgstr "Unités, icônes et clés"
 
 #. 3.8->settings-schema.json->info-section->title
 msgid "Help"
 msgstr "Aide"
 
-#. 3.8->settings-schema.json->contact-section->title
-#. 3.8->settings-schema.json->contact->title
-msgid "Contact"
-msgstr "Contact"
+#. 3.8->settings-schema.json->submit-issue->title
+msgid "Report an issue"
+msgstr "Soumettre un problème"
 
 #. 3.8->settings-schema.json->provider-info->title
-msgid "Weather provider choices and details"
-msgstr "Informations sur les services météo"
+msgid "How to choose a weather provider"
+msgstr "Comment choisir un fournisseur météo"
 
 #. 3.8->settings-schema.json->location-info->title
-msgid "Entering location manually"
-msgstr "Saisie manuelle de l'emplacement"
+msgid "Allowed location formats"
+msgstr "Formats de localisation autorisés"
+
+#. 3.8->settings-schema.json->more-info->title
+msgid "View additional information"
+msgstr "Afficher des informations supplémentaires"
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "Met Office UK (UK only)"
@@ -1782,19 +1880,55 @@ msgstr ""
 "ou une adresse.\n"
 "Attendez 3 secondes après avoir arrêté de taper, puis actualisez la météo."
 
+#. 3.8->settings-schema.json->saveLocation->description
+msgid "Save current location to storage"
+msgstr "Enregistrer l'emplacement actuel"
+
+#. 3.8->settings-schema.json->saveLocation->tooltip
+msgid ""
+"Saves location information to file, so you can switch between them with "
+"buttons in the applet (what will appear if you have more than one)."
+msgstr ""
+"Enregistre les informations de localisation dans un fichier, afin que vous "
+"puissiez basculer entre elles avec des boutons dans l'applet (qui apparaîtra "
+"si vous en avez plus d'un)."
+
+#. 3.8->settings-schema.json->deleteLocation->description
+msgid "Delete current location from storage"
+msgstr "Supprimer l'enregistrement de l'emplacement actuel"
+
+#. 3.8->settings-schema.json->deleteLocation->tooltip
+msgid "Removes location information from storage file."
+msgstr "Supprime les informations de localisation du fichier d'enristrement."
+
+#. 3.8->settings-schema.json->getLocation->description
+msgid "Weather Applet at Cinnamon Spices Website"
+msgstr "Weather Applet sur le site Web de Cinnamon Spices"
+
 #. 3.8->settings-schema.json->verticalOrientation->tooltip
 msgid "Displaying forecasts from top to bottom instead from left to right."
 msgstr "Afficher les prévisions de haut en bas plutôt que de gauche à droite."
 
 #. 3.8->settings-schema.json->useSymbolicIcons->tooltip
-msgid "Does not apply to custom iconset, it is symbolic by default"
+msgid "Does not apply to custom iconset, that is symbolic by default"
 msgstr ""
-"Ne s'applique pas à l'ensemble d'icônes personnalisé, il est symbolique par "
+"Ne s'applique pas à l'ensemble d'icônes personnalisé, qui est symbolique par "
 "défaut"
 
 #. 3.8->settings-schema.json->useSymbolicIcons->description
 msgid "Use symbolic icons throughout the applet"
 msgstr "Utiliser des icônes symboliques dans l'applet"
+
+#. 3.8->settings-schema.json->more-info-label->description
+msgid ""
+"For more information go to the Spices Website by clicking the button below. "
+"You can also comment and ask a questions to the community at this page by "
+"logging in with your Github account."
+msgstr ""
+"Pour plus d'informations, rendez-vous sur le site Web de Spice en cliquant "
+"sur le bouton ci-dessous. Vous pouvez également commenter et poser des "
+"questions à la communauté sur cette page en vous connectant avec votre "
+"compte Github."
 
 #. 3.8->settings-schema.json->submitIssue->description
 msgid "Submit an Issue"
@@ -1814,123 +1948,174 @@ msgstr ""
 msgid "Current maintainer: Gr3q"
 msgstr "Mainteneur actuel: Gr3q"
 
-#. 3.8->settings-schema.json->openWM->description
+#. 3.8->settings-schema.json->issue-reporting-explanation->description
 msgid ""
-"OpenWeatherMap:\n"
-"The default, works out of the box.\n"
-"Big Thanks to them supporting free open source projects, like this! Supports "
-"7 forecast days and 48 forecast hours."
+"If you find an issue with this applet please make a report by clicking on "
+"the button below and login in with your Github account. Don't forget to "
+"write weather@mockturtl in the top Title field to make it easier for "
+"everyone to know that the issue is about the weather applet (the form is for "
+"all Cinnamon applets)."
 msgstr ""
-"OpenWeatherMap:\n"
-"La valeur par défaut, fonctionne immédiatement.\n"
-"Un grand merci à eux pour leur soutien à des projets libres, comme celui-"
-"ci ! Prend en charge 7 jours de prévision et 48 heures de prévision."
+"Si vous trouvez un problème avec cette applet, veuillez faire un rapport en "
+"cliquant sur le bouton ci-dessous et connectez-vous avec votre compte "
+"Github. N'oubliez pas d'écrire weather@mockturtl dans le champ Titre du haut "
+"pour que tout le monde sache plus facilement que le problème concerne "
+"l'applet météo (le formulaire est pour toutes les applets Cinnamon)."
 
-#. 3.8->settings-schema.json->darkS->description
+#. 3.8->settings-schema.json->provider-explanation->description
 msgid ""
-"DarkSky:\n"
-"It doesn't accept new registrations and will be closed in 2021. Supports 8 "
-"forecast days and 168 forecast hours."
+"You can use several different weather forecast providers that you choose "
+"under the first Weather Tab in this Configuration panel. Some providers "
+"require a API key to work, some have regional limits, differ in forecast "
+"length, and they all need a functional internet connection to the chosen "
+"service. The options are described in detail on the Cinnamon Spices Website, "
+"what you can access with the button further down."
 msgstr ""
-"DarkSky :\n"
-"Il n'accepte pas les nouvelles inscriptions et sera fermé en 2021. Prend en "
-"charge 8 jours de prévision et 168 heures de prévision."
-
-#. 3.8->settings-schema.json->METN->description
-msgid ""
-"MET Norway:\n"
-"Current weather is shown for the next hour, and the daily forecasts are "
-"generated from 6 hour forecasts, so it can look incorrect sometimes. "
-"Supports 10 forecast days and 48 forecast hours."
-msgstr ""
-"MET Norway :\n"
-"La météo actuelle est affichée pour l'heure suivante et les prévisions "
-"quotidiennes sont générées à partir de prévisions sur 6 heures, de sorte "
-"qu'elles peuvent parfois sembler incorrectes. Prend en charge les prévisions "
-"journalières sur 10 jours et horaires sur 48 heures."
-
-#. 3.8->settings-schema.json->WB->description
-msgid ""
-"WeatherBit:\n"
-"At least 10 minutes as refresh rate is recommended, since otherwise you "
-"might exceed you daily quota. Supports 16 forecast days and 48 forecast "
-"hours."
-msgstr ""
-"WeatherBit :\n"
-"Un taux de rafraîchissement d'au moins 10 minutes est recommandé, sinon vous "
-"pourriez dépasser votre quota quotidien. Prend en charge 16 jours de "
-"prévisions journalières et 48 heures de prévisions horaires."
-
-#. 3.8->settings-schema.json->Yahoo->description
-msgid ""
-"Yahoo:\n"
-"Requires 'python3-requests-oauthlib' package installed (for Arch based "
-"distros 'python-requests-oauthlib'), Updates every 2 hours. Only supports 10 "
-"forecast days and no hours."
-msgstr ""
-"Yahoo :\n"
-"Nécessite l'installation du package 'python3-requests-oauthlib' (pour les "
-"distributions basées sur Arch 'python-requests-oauthlib'), Mises à jour "
-"toutes les 2 heures. Prend uniquement en charge 10 jours de prévisions "
-"journalière et aucune prévision horaire."
-
-#. 3.8->settings-schema.json->Climacell->description
-msgid ""
-"Climacell:\n"
-"At least 10 minutes refresh rate is recommended with a free plan. Supports "
-"16 forecast days and 96 forecast hours."
-msgstr ""
-"Climacell:\n"
-"Un taux de rafraîchissement d'au moins 10 minutes est recommandé avec "
-"l'offre gratuite. Prend en charge 16 jours de prévision et 96 heures de "
-"prévision."
-
-#. 3.8->settings-schema.json->metuk->description
-msgid ""
-"Met Office UK:\n"
-"UK only option. If it does not find a site in 50km range around you it will "
-"not show weather. Please let me know if this happens and you live in the UK. "
-"Supports 5 days and 36 hours of forecasts. Sometimes it takes 5-8 seconds to "
-"load the first time, please be patient."
-msgstr ""
-"Met Office UK:\n"
-"Option Royaume-Uni uniquement. S'il ne trouve pas de site à 50 km autour de "
-"vous, il ne montrera pas la météo. S'il vous plaît, avertissez-moi si cela "
-"se produit et que vous vivez au Royaume-Uni. Prend en charge 5 jours et 36 "
-"heures de prévisions. Parfois, cela prend 5-8 secondes pour charger la "
-"première fois, soyez patient."
-
-#. 3.8->settings-schema.json->usweather->description
-msgid ""
-"US National Weather Service:\n"
-"US only option. First load can take up to 15-20 seconds, please be patient. "
-"Current weather is merged from a max 50km area, if some data is missing from "
-"the closest one. Supports 7 days and 156 hours of forecasts."
-msgstr ""
-"US National Weather Service:\n"
-"Option US uniquement. Le premier chargement peut prendre jusqu'à 15-20 "
-"secondes, veuillez être patient. La météo actuelle est fusionnée à partir "
-"d'une zone maximale de 50 km, si certaines données sont manquantes dans la "
-"zone la plus proche. Prend en charge 7 jours et 156 heures de prévisions."
+"Vous pouvez utiliser plusieurs fournisseurs de prévisions météorologiques "
+"que vous choisissez sous le premier onglet Météo de ce panneau de "
+"configuration. Certains fournisseurs ont besoin d'une clé API pour "
+"fonctionner, certains ont des limites régionales, diffèrent par "
+"l'échelonnage des prévisions et ils ont tous besoin d'une connexion Internet "
+"fonctionnelle au service choisi. Les options sont décrites en détail sur le "
+"site Web Cinnamon Spices, auquel vous pouvez accéder avec le bouton plus bas."
 
 #. 3.8->settings-schema.json->loc-info->description
 msgid ""
-"You can either use coordinates as {latitude},{longitude},\n"
-" or an address, from smallest detail to biggest, like '{house num} {street} "
-"{city/town} {postcode} {country}'. All of them are optional, although at "
-"least city and country is recommended. You can use commas if you like.\n"
-"\n"
-"After you stop typing the field will be replaced after 3 seconds with the "
-"full address, for you to validate if it's correct."
+"Your location in most cases work automatically but you can enter it manually "
+"by coordinates 'Latitude,Longitude' (e.g. 51.5085,-0.1257) or use 'City,"
+"Country-code' (e.g. London,UK) or try to enter {House number} {Street} {City/"
+"Town} {Postcode} {Country}. The search algorithm is very flexible with the "
+"format. After 3 seconds without typing the address you entered is replaced "
+"automatically for validating your choice."
 msgstr ""
-"Vous pouvez utiliser des coordonnées telles que {latitude}, {longitude},\n"
-"  ou une adresse, du plus précis au plus global, comme \"{numéro} {rue} "
-"{ville} {code postale} {pays}\". Tous sont facultatifs, mais la ville et le "
-"pays sont recommandés. Vous pouvez utiliser des virgules si vous le "
-"souhaitez.\n"
-"\n"
-"Une fois que vous arrêtez de taper, le champ sera remplacé après 3 secondes "
-"par l'adresse complète, pour que vous puissiez valider si elle est correcte."
+"Dans la plupart des cas, votre emplacement fonctionne automatiquement, mais "
+"vous pouvez l'entrer manuellement par les coordonnées «Latitude, "
+"Longitude» (par exemple 51,5085, -0,1257) ou utiliser «Ville, code de "
+"pays» (par exemple Paris, FR) ou essayer d'entrer {Numéro de maison} {Rue} "
+"{Ville} {Code postal} {Pays}. L'algorithme de recherche est très flexible "
+"avec le format. Au bout de 3 secondes sans saisie, l'adresse que vous avez "
+"saisie est automatiquement remplacée pour valider votre choix."
+
+#~ msgid "Contact"
+#~ msgstr "Contact"
+
+#~ msgid "Weather provider choices and details"
+#~ msgstr "Informations sur les services météo"
+
+#~ msgid "Entering location manually"
+#~ msgstr "Saisie manuelle de l'emplacement"
+
+#~ msgid ""
+#~ "OpenWeatherMap:\n"
+#~ "The default, works out of the box.\n"
+#~ "Big Thanks to them supporting free open source projects, like this! "
+#~ "Supports 7 forecast days and 48 forecast hours."
+#~ msgstr ""
+#~ "OpenWeatherMap:\n"
+#~ "La valeur par défaut, fonctionne immédiatement.\n"
+#~ "Un grand merci à eux pour leur soutien à des projets libres, comme celui-"
+#~ "ci ! Prend en charge 7 jours de prévision et 48 heures de prévision."
+
+#~ msgid ""
+#~ "DarkSky:\n"
+#~ "It doesn't accept new registrations and will be closed in 2021. Supports "
+#~ "8 forecast days and 168 forecast hours."
+#~ msgstr ""
+#~ "DarkSky :\n"
+#~ "Il n'accepte pas les nouvelles inscriptions et sera fermé en 2021. Prend "
+#~ "en charge 8 jours de prévision et 168 heures de prévision."
+
+#~ msgid ""
+#~ "MET Norway:\n"
+#~ "Current weather is shown for the next hour, and the daily forecasts are "
+#~ "generated from 6 hour forecasts, so it can look incorrect sometimes. "
+#~ "Supports 10 forecast days and 48 forecast hours."
+#~ msgstr ""
+#~ "MET Norway :\n"
+#~ "La météo actuelle est affichée pour l'heure suivante et les prévisions "
+#~ "quotidiennes sont générées à partir de prévisions sur 6 heures, de sorte "
+#~ "qu'elles peuvent parfois sembler incorrectes. Prend en charge les "
+#~ "prévisions journalières sur 10 jours et horaires sur 48 heures."
+
+#~ msgid ""
+#~ "WeatherBit:\n"
+#~ "At least 10 minutes as refresh rate is recommended, since otherwise you "
+#~ "might exceed you daily quota. Supports 16 forecast days and 48 forecast "
+#~ "hours."
+#~ msgstr ""
+#~ "WeatherBit :\n"
+#~ "Un taux de rafraîchissement d'au moins 10 minutes est recommandé, sinon "
+#~ "vous pourriez dépasser votre quota quotidien. Prend en charge 16 jours de "
+#~ "prévisions journalières et 48 heures de prévisions horaires."
+
+#~ msgid ""
+#~ "Yahoo:\n"
+#~ "Requires 'python3-requests-oauthlib' package installed (for Arch based "
+#~ "distros 'python-requests-oauthlib'), Updates every 2 hours. Only supports "
+#~ "10 forecast days and no hours."
+#~ msgstr ""
+#~ "Yahoo :\n"
+#~ "Nécessite l'installation du package 'python3-requests-oauthlib' (pour les "
+#~ "distributions basées sur Arch 'python-requests-oauthlib'), Mises à jour "
+#~ "toutes les 2 heures. Prend uniquement en charge 10 jours de prévisions "
+#~ "journalière et aucune prévision horaire."
+
+#~ msgid ""
+#~ "Climacell:\n"
+#~ "At least 10 minutes refresh rate is recommended with a free plan. "
+#~ "Supports 16 forecast days and 96 forecast hours."
+#~ msgstr ""
+#~ "Climacell:\n"
+#~ "Un taux de rafraîchissement d'au moins 10 minutes est recommandé avec "
+#~ "l'offre gratuite. Prend en charge 16 jours de prévision et 96 heures de "
+#~ "prévision."
+
+#~ msgid ""
+#~ "Met Office UK:\n"
+#~ "UK only option. If it does not find a site in 50km range around you it "
+#~ "will not show weather. Please let me know if this happens and you live in "
+#~ "the UK. Supports 5 days and 36 hours of forecasts. Sometimes it takes 5-8 "
+#~ "seconds to load the first time, please be patient."
+#~ msgstr ""
+#~ "Met Office UK:\n"
+#~ "Option Royaume-Uni uniquement. S'il ne trouve pas de site à 50 km autour "
+#~ "de vous, il ne montrera pas la météo. S'il vous plaît, avertissez-moi si "
+#~ "cela se produit et que vous vivez au Royaume-Uni. Prend en charge 5 jours "
+#~ "et 36 heures de prévisions. Parfois, cela prend 5-8 secondes pour charger "
+#~ "la première fois, soyez patient."
+
+#~ msgid ""
+#~ "US National Weather Service:\n"
+#~ "US only option. First load can take up to 15-20 seconds, please be "
+#~ "patient. Current weather is merged from a max 50km area, if some data is "
+#~ "missing from the closest one. Supports 7 days and 156 hours of forecasts."
+#~ msgstr ""
+#~ "US National Weather Service:\n"
+#~ "Option US uniquement. Le premier chargement peut prendre jusqu'à 15-20 "
+#~ "secondes, veuillez être patient. La météo actuelle est fusionnée à partir "
+#~ "d'une zone maximale de 50 km, si certaines données sont manquantes dans "
+#~ "la zone la plus proche. Prend en charge 7 jours et 156 heures de "
+#~ "prévisions."
+
+#~ msgid ""
+#~ "You can either use coordinates as {latitude},{longitude},\n"
+#~ " or an address, from smallest detail to biggest, like '{house num} "
+#~ "{street} {city/town} {postcode} {country}'. All of them are optional, "
+#~ "although at least city and country is recommended. You can use commas if "
+#~ "you like.\n"
+#~ "\n"
+#~ "After you stop typing the field will be replaced after 3 seconds with the "
+#~ "full address, for you to validate if it's correct."
+#~ msgstr ""
+#~ "Vous pouvez utiliser des coordonnées telles que {latitude}, {longitude},\n"
+#~ "  ou une adresse, du plus précis au plus global, comme \"{numéro} {rue} "
+#~ "{ville} {code postale} {pays}\". Tous sont facultatifs, mais la ville et "
+#~ "le pays sont recommandés. Vous pouvez utiliser des virgules si vous le "
+#~ "souhaitez.\n"
+#~ "\n"
+#~ "Une fois que vous arrêtez de taper, le champ sera remplacé après 3 "
+#~ "secondes par l'adresse complète, pour que vous puissiez valider si elle "
+#~ "est correcte."
 
 #~ msgid "Ligth Rain"
 #~ msgstr "Pluie légère"
