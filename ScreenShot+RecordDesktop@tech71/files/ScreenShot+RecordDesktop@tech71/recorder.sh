@@ -17,6 +17,7 @@ record_screen() {
     -r 30
     -i "$DISPLAY"
     -qscale 1
+    -vf mpdecimate
   )
 }
 
@@ -33,6 +34,7 @@ record_window() {
     -r 30
     -i "$DISPLAY+$x_offset,$y_offset"
     -qscale 1
+    -vf mpdecimate
   )
 }
 
