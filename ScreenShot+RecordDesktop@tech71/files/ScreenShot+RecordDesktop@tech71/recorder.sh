@@ -15,7 +15,7 @@ record_screen() {
     -f x11grab
     -s "$size"
     -r 30
-    -i ':0'
+    -i "$DISPLAY"
     -qscale 1
   )
 }
@@ -31,7 +31,7 @@ record_window() {
     -f x11grab
     -s "${width}x${height}"
     -r 30
-    -i ":0+$x_offset,$y_offset"
+    -i "$DISPLAY+$x_offset,$y_offset"
     -qscale 1
   )
 }
