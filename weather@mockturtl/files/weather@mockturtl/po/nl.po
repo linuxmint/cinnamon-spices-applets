@@ -6,11 +6,11 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Weather (weather@mockturtl) Version 2.4.5 (2020-03-05 "
+"Project-Id-Version: Weather (weather@mockturtl) Version 2.6.5 (2020-03-05 "
 "08:38:14)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-25 09:36+0200\n"
-"PO-Revision-Date: 2020-07-28 19:22+0200\n"
+"POT-Creation-Date: 2020-07-31 20:39+0200\n"
+"PO-Revision-Date: 2020-08-08 10:19+0200\n"
 "Last-Translator: Jurien (French77) <Jurien@protonmail.com>\n"
 "Language-Team: Dutch\n"
 "Language: nl\n"
@@ -20,11 +20,11 @@ msgstr ""
 "X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: applet.js:337 3.0/applet.js:214 3.8/applet.js:163
+#: applet.js:337 3.0/applet.js:217 3.8/applet.js:166
 msgid "..."
 msgstr "..."
 
-#: applet.js:338 3.0/applet.js:215 3.8/applet.js:164
+#: applet.js:338 3.0/applet.js:218 3.8/applet.js:167
 msgid "Click to open"
 msgstr "Klik om te openen"
 
@@ -48,36 +48,36 @@ msgstr "Zonsopgang"
 msgid "Sunset"
 msgstr "Zonsondergang"
 
-#: applet.js:708 3.0/applet.js:1187 3.8/applet.js:1062
+#: applet.js:708 3.0/applet.js:1175 3.8/applet.js:1039
 msgid "Loading current weather ..."
 msgstr "Huidig weer aan het laden..."
 
-#: applet.js:709 3.0/applet.js:1190 3.8/applet.js:1065
+#: applet.js:709 3.0/applet.js:1178 3.8/applet.js:1042
 msgid "Loading future weather ..."
 msgstr "Weersverwachting aan het laden..."
 
-#: applet.js:731 3.0/applet.js:1214 3.8/applet.js:1089
+#: applet.js:731 3.0/applet.js:1228 3.8/applet.js:1092
 msgid "Loading ..."
 msgstr "Bezig met laden..."
 
-#: applet.js:737 3.0/applet.js:229 3.0/applet.js:1204 3.8/applet.js:178
-#: 3.8/applet.js:1079
+#: applet.js:737 3.0/applet.js:232 3.0/applet.js:1192 3.8/applet.js:181
+#: 3.8/applet.js:1056
 msgid "Refresh"
 msgstr "Verversen"
 
-#: applet.js:802 3.0/applet.js:1265 3.8/applet.js:1140
+#: applet.js:802 3.0/applet.js:1277 3.8/applet.js:1141
 msgid "Temperature:"
 msgstr "Temperatuur:"
 
-#: applet.js:804 3.0/applet.js:1266 3.8/applet.js:1141
+#: applet.js:804 3.0/applet.js:1278 3.8/applet.js:1142
 msgid "Humidity:"
 msgstr "Luchtvochtigheid:"
 
-#: applet.js:806 3.0/applet.js:1267 3.8/applet.js:1142
+#: applet.js:806 3.0/applet.js:1279 3.8/applet.js:1143
 msgid "Pressure:"
 msgstr "Luchtdruk:"
 
-#: applet.js:808 3.0/applet.js:1268 3.8/applet.js:1143
+#: applet.js:808 3.0/applet.js:1280 3.8/applet.js:1144
 msgid "Wind:"
 msgstr "Wind:"
 
@@ -145,11 +145,11 @@ msgstr "NW"
 msgid "Service Unavailable"
 msgstr "Dienst niet beschikbaar"
 
-#: applet.js:1084 3.0/applet.js:168 3.0/applet.js:170 3.0/applet.js:172
-#: 3.0/applet.js:175 3.0/applet.js:178 3.0/applet.js:179 3.0/applet.js:180
-#: 3.0/applet.js:181 3.8/applet.js:118 3.8/applet.js:120 3.8/applet.js:122
-#: 3.8/applet.js:125 3.8/applet.js:128 3.8/applet.js:129 3.8/applet.js:130
-#: 3.8/applet.js:131
+#: applet.js:1084 3.0/applet.js:169 3.0/applet.js:171 3.0/applet.js:173
+#: 3.0/applet.js:176 3.0/applet.js:179 3.0/applet.js:180 3.0/applet.js:181
+#: 3.0/applet.js:182 3.8/applet.js:119 3.8/applet.js:121 3.8/applet.js:123
+#: 3.8/applet.js:126 3.8/applet.js:129 3.8/applet.js:130 3.8/applet.js:131
+#: 3.8/applet.js:132
 msgid "Service Error"
 msgstr "Dienstfout"
 
@@ -170,8 +170,8 @@ msgstr "Sleutel tijd. geblokkeerd"
 msgid "Cloudiness"
 msgstr "Bewolking"
 
-#: 3.0/openWeatherMap.js:186 3.0/weatherbit.js:185 3.0/us_weather.js:338
-#: 3.0/met_uk.js:345 3.8/openWeatherMap.js:141 3.8/weatherbit.js:126
+#: 3.0/openWeatherMap.js:186 3.0/weatherbit.js:216 3.0/us_weather.js:338
+#: 3.0/met_uk.js:345 3.8/openWeatherMap.js:141 3.8/weatherbit.js:148
 #: 3.8/us_weather.js:242 3.8/met_uk.js:237
 msgid "Failed to Process Current Weather Info"
 msgstr "Kon de huidige weersinformatie niet verwerken"
@@ -473,20 +473,20 @@ msgstr "Wisselend bewolkt"
 msgid "Overcast clouds"
 msgstr "Laaghangende bewolking"
 
-#: 3.0/weatherbit.js:175 3.0/darkSky.js:147 3.0/yahoo.js:145
-#: 3.0/us_weather.js:326 3.0/climacell.js:167 3.8/weatherbit.js:116
+#: 3.0/weatherbit.js:206 3.0/darkSky.js:147 3.0/yahoo.js:145
+#: 3.0/us_weather.js:326 3.0/climacell.js:167 3.8/weatherbit.js:138
 #: 3.8/darkSky.js:99 3.8/yahoo.js:97 3.8/us_weather.js:230 3.8/climacell.js:106
 msgid "Feels Like"
 msgstr "Voelt aan als"
 
-#: 3.0/weatherbit.js:212 3.0/weatherbit.js:247 3.0/us_weather.js:375
-#: 3.0/met_uk.js:369 3.0/met_uk.js:405 3.8/weatherbit.js:153
-#: 3.8/weatherbit.js:188 3.8/us_weather.js:279 3.8/met_uk.js:261
+#: 3.0/weatherbit.js:243 3.0/weatherbit.js:278 3.0/us_weather.js:375
+#: 3.0/met_uk.js:369 3.0/met_uk.js:405 3.8/weatherbit.js:175
+#: 3.8/weatherbit.js:210 3.8/us_weather.js:279 3.8/met_uk.js:261
 #: 3.8/met_uk.js:297
 msgid "Failed to Process Forecast Info"
 msgstr "Kon voorspellingsinformatie niet verwerken"
 
-#: 3.0/weatherbit.js:285 3.8/weatherbit.js:226
+#: 3.0/weatherbit.js:316 3.8/weatherbit.js:248
 msgid ""
 "Please enter API key in settings,\n"
 "or get one first on https://www.weatherbit.io/account/create"
@@ -494,8 +494,8 @@ msgstr ""
 "Voer a.u.b. de API-sleutel in bij de instellingen,\n"
 "of verkrijg er eerst een op https://www.weatherbit.io/account/create"
 
-#: 3.0/weatherbit.js:304 3.0/darkSky.js:233 3.0/climacell.js:243
-#: 3.8/weatherbit.js:245 3.8/darkSky.js:185 3.8/climacell.js:182
+#: 3.0/weatherbit.js:335 3.0/darkSky.js:233 3.0/climacell.js:243
+#: 3.8/weatherbit.js:267 3.8/darkSky.js:185 3.8/climacell.js:182
 msgid ""
 "Please Make sure you\n"
 "entered the API key correctly and your account is not locked"
@@ -726,11 +726,11 @@ msgstr "Sneeuwbuien en onweer"
 msgid "Unknown"
 msgstr "Onbekend"
 
-#: 3.0/ipApi.js:87 3.8/ipApi.js:41
+#: 3.0/ipApi.js:89 3.8/ipApi.js:43
 msgid "Could not obtain location"
 msgstr "Kon locatie niet verkrijgen"
 
-#: 3.0/ipApi.js:93 3.8/ipApi.js:47
+#: 3.0/ipApi.js:95 3.8/ipApi.js:49
 msgid ""
 "Location Service responded with errors, please see the logs in Looking Glass"
 msgstr ""
@@ -744,7 +744,7 @@ msgstr "en"
 msgid "until"
 msgstr "tot"
 
-#: 3.0/darkSky.js:75 3.0/applet.js:1146 3.8/darkSky.js:39 3.8/applet.js:1021
+#: 3.0/darkSky.js:75 3.0/applet.js:1134 3.8/darkSky.js:39 3.8/applet.js:998
 msgid "in"
 msgstr "in"
 
@@ -789,6 +789,30 @@ msgid ""
 msgstr ""
 "Yahoo bridge reageerde in slechte opmaak,\n"
 " zie logboek Looking Glass voor fouten"
+
+#: 3.0/yahoo.js:181 3.8/yahoo.js:133
+msgid "Missing package"
+msgstr "Ontbrekende pakketten"
+
+#: 3.0/yahoo.js:181 3.0/yahoo.js:183 3.8/yahoo.js:133 3.8/yahoo.js:135
+msgid "Please install '"
+msgstr "Installeer a.u.b. '"
+
+#: 3.0/yahoo.js:181 3.0/yahoo.js:183 3.8/yahoo.js:133 3.8/yahoo.js:135
+msgid "', then refresh manually."
+msgstr "', dan handmatig verversen."
+
+#: 3.0/yahoo.js:186 3.8/yahoo.js:138
+msgid "Could not connect to Yahoo API."
+msgstr "Kon geen verbinding maken met Yahoo API."
+
+#: 3.0/yahoo.js:190 3.8/yahoo.js:142
+msgid ""
+"Unknown error happened while obtaining weather, see Looking Glass logs for "
+"more information"
+msgstr ""
+"Onbekende fout gebeurde tijdens het verkrijgen van het weer, zie Looking "
+"Glass logs voor meer informatie."
 
 #: 3.0/yahoo.js:441 3.0/us_weather.js:576 3.8/yahoo.js:392
 #: 3.8/us_weather.js:479
@@ -1028,11 +1052,11 @@ msgstr "Zeer goed - Tussen"
 msgid "Excellent - More than"
 msgstr "Uitstekend - Meer dan"
 
-#: 3.0/met_uk.js:426 3.0/applet.js:1165 3.8/met_uk.js:318 3.8/applet.js:1040
+#: 3.0/met_uk.js:426 3.0/applet.js:1153 3.8/met_uk.js:318 3.8/applet.js:1017
 msgid "mi"
 msgstr "mi"
 
-#: 3.0/met_uk.js:427 3.0/applet.js:1166 3.8/met_uk.js:319 3.8/applet.js:1041
+#: 3.0/met_uk.js:427 3.0/applet.js:1154 3.8/met_uk.js:319 3.8/applet.js:1018
 msgid "km"
 msgstr "km"
 
@@ -1069,61 +1093,74 @@ msgstr "Onweer"
 msgid "Thunder shower"
 msgstr "Regenbui met onweer"
 
-#: 3.0/applet.js:167 3.8/applet.js:117
+#: 3.0/applet.js:168 3.0/applet.js:406 3.0/applet.js:1992 3.8/applet.js:118
+#: 3.8/applet.js:311 3.8/applet.js:1785
 msgid "Error"
 msgstr "Fout"
 
-#: 3.0/applet.js:169 3.8/applet.js:119
+#: 3.0/applet.js:170 3.8/applet.js:120
 msgid "Incorrect API Key"
 msgstr "Verkeerde API-sleutel"
 
-#: 3.0/applet.js:171 3.8/applet.js:121
+#: 3.0/applet.js:172 3.8/applet.js:122
 msgid "Incorrect Location Format"
 msgstr "Onjuiste locatie-opmaak"
 
-#: 3.0/applet.js:173 3.8/applet.js:123
+#: 3.0/applet.js:174 3.8/applet.js:124
 msgid "Key Blocked"
 msgstr "Sleutel geblokkeerd"
 
-#: 3.0/applet.js:174 3.8/applet.js:124
+#: 3.0/applet.js:175 3.8/applet.js:125
 msgid "Can't find location"
 msgstr "Kan locatie niet vinden"
 
-#: 3.0/applet.js:176 3.8/applet.js:126
+#: 3.0/applet.js:177 3.8/applet.js:127
 msgid "No Api Key"
 msgstr "Geen API-sleutel"
 
-#: 3.0/applet.js:177 3.8/applet.js:127
+#: 3.0/applet.js:178 3.8/applet.js:128
 msgid "No Location"
 msgstr "Geen locatie"
 
-#: 3.0/applet.js:182 3.8/applet.js:132
+#: 3.0/applet.js:183 3.8/applet.js:133
 msgid "Missing Packages"
 msgstr "Ontbrekende pakketten"
 
-#: 3.0/applet.js:183 3.8/applet.js:133
+#: 3.0/applet.js:184 3.8/applet.js:134
 msgid "Location not covered"
 msgstr "Locatie niet gedekt"
 
-#: 3.0/applet.js:192 3.8/applet.js:142
+#: 3.0/applet.js:193 3.0/applet.js:358 3.8/applet.js:143 3.8/applet.js:277
 msgid "Weather Applet"
 msgstr "Werkbalkhulpje voor weer"
 
-#: 3.0/applet.js:267 3.8/applet.js:211
+#: 3.0/applet.js:272 3.8/applet.js:215
 msgid "API returned status code between 400 and 500"
 msgstr "API retourneerde statuscode tussen 400 en 500"
 
-#: 3.0/applet.js:542 3.8/applet.js:435
+#: 3.0/applet.js:406 3.0/applet.js:1909 3.0/applet.js:1913 3.0/applet.js:1917
+#: 3.0/applet.js:1926 3.0/applet.js:1937 3.0/applet.js:1941 3.0/applet.js:1945
+#: 3.0/applet.js:1955 3.0/applet.js:1992 3.8/applet.js:311 3.8/applet.js:1722
+#: 3.8/applet.js:1726 3.8/applet.js:1730 3.8/applet.js:1737 3.8/applet.js:1741
+#: 3.8/applet.js:1745 3.8/applet.js:1749 3.8/applet.js:1759 3.8/applet.js:1785
+msgid "Location Store"
+msgstr "Locatie Opslag"
+
+#: 3.0/applet.js:406 3.8/applet.js:311
+msgid "You can't save a location obtained automatically, sorry"
+msgstr "U kunt een automatisch verkregen locatie niet opslaan, sorry."
+
+#: 3.0/applet.js:592 3.8/applet.js:474
 msgid "Could not get weather information"
 msgstr "Kon geen weersinformatie verkrijgen voor uw gebied"
 
-#: 3.0/applet.js:565 3.8/applet.js:458
+#: 3.0/applet.js:615 3.8/applet.js:497
 msgid ""
 "Unexpected Error While Refreshing Weather, please see log in Looking Glass"
 msgstr ""
 "Onverwachte fout tijdens verversen, zie a.u.b. logboek in Looking Glass"
 
-#: 3.0/applet.js:685 3.8/applet.js:575
+#: 3.0/applet.js:661 3.8/applet.js:540
 msgid ""
 "Could not update weather for a while...\n"
 "are you connected to the internet?"
@@ -1131,48 +1168,104 @@ msgstr ""
 "Kan het weer al een tijd niet bijwerken...\n"
 "Bent u wel verbonden met het internet?"
 
-#: 3.0/applet.js:699 3.8/applet.js:589
+#: 3.0/applet.js:675 3.8/applet.js:554
 msgid "Network Error, please check logs in Looking Glass"
 msgstr "Netwerkfout, controleer a.u.b. de logboeken in Looking Glass"
 
-#: 3.0/applet.js:974 3.0/applet.js:1124 3.8/applet.js:849 3.8/applet.js:999
+#: 3.0/applet.js:962 3.0/applet.js:1112 3.8/applet.js:826 3.8/applet.js:976
 msgid "As of"
 msgstr "Met ingang van"
 
-#: 3.0/applet.js:1096 3.8/applet.js:971
+#: 3.0/applet.js:1084 3.8/applet.js:948
 msgid "Today"
 msgstr "Vandaag"
 
-#: 3.0/applet.js:1098 3.8/applet.js:973
+#: 3.0/applet.js:1086 3.8/applet.js:950
 msgid "Tomorrow"
 msgstr "Morgen"
 
-#: 3.0/applet.js:1122 3.8/applet.js:997
+#: 3.0/applet.js:1110 3.8/applet.js:974
 msgid "Powered by"
 msgstr "Mogelijk gemaakt door"
 
-#: 3.0/applet.js:1127 3.8/applet.js:1002
+#: 3.0/applet.js:1115 3.8/applet.js:979
 msgid "from you"
 msgstr "van u"
 
-#: 3.0/applet.js:1146 3.8/applet.js:1021
+#: 3.0/applet.js:1134 3.8/applet.js:998
 msgid "mm"
 msgstr "mm"
 
-#: 3.0/applet.js:1539 3.8/applet.js:1405
+#: 3.0/applet.js:1560 3.8/applet.js:1414
 msgid "Make sure you entered a location or use Automatic location instead"
 msgstr ""
 "Zorg ervoor dat u een locatie hebt ingevoerd of gebruik in plaats daarvan "
 "Automatische locatie"
 
-#: 3.0/applet.js:1744 3.8/applet.js:1577
+#: 3.0/applet.js:1769 3.8/applet.js:1590
 msgid "Could not find location based on address, please check if it's right"
 msgstr ""
 "Kon geen locatie vinden op basis van adres, controleer a.u.b. of het juist is"
 
-#: 3.0/applet.js:1766 3.8/applet.js:1599
+#: 3.0/applet.js:1793 3.8/applet.js:1614
 msgid "Failed to call Geolocation API, see Looking Glass for errors."
 msgstr "Geolocatie-API aanroepen is mislukt, zie Looking Glass voor fouten."
+
+#: 3.0/applet.js:1909 3.0/applet.js:1913 3.8/applet.js:1722 3.8/applet.js:1726
+msgid "Warning"
+msgstr "Waarschuwing"
+
+#: 3.0/applet.js:1909 3.8/applet.js:1722
+msgid "You can only save correct locations when the applet is not refreshing"
+msgstr ""
+"U kunt alleen correcte locaties opslaan wanneer de hulptoepassing niet word "
+"ververst "
+
+#: 3.0/applet.js:1913 3.8/applet.js:1726
+msgid "You can't save an incorrect location"
+msgstr "U kunt een foutieve locatie niet opslaan"
+
+#: 3.0/applet.js:1917 3.0/applet.js:1937 3.0/applet.js:1941 3.0/applet.js:1945
+#: 3.8/applet.js:1730 3.8/applet.js:1741 3.8/applet.js:1745 3.8/applet.js:1749
+msgid "Info"
+msgstr "Informatie"
+
+#: 3.0/applet.js:1917 3.8/applet.js:1730
+msgid "Location is already saved"
+msgstr "Locatie is reeds opgeslagen"
+
+#: 3.0/applet.js:1926 3.0/applet.js:1955 3.8/applet.js:1737 3.8/applet.js:1759
+msgid "Success"
+msgstr "Geslaagd"
+
+#: 3.0/applet.js:1926 3.8/applet.js:1737
+msgid "Location is saved to library"
+msgstr "Locatie opgeslagen in de bibliotheek"
+
+#: 3.0/applet.js:1937 3.8/applet.js:1741
+msgid "You can't remove a location while the applet is refreshing"
+msgstr ""
+"U kunt geen locatie verwijderen terwijl de hulptoepassing zich ververst"
+
+#: 3.0/applet.js:1941 3.8/applet.js:1745
+msgid "You can't remove an incorrect location"
+msgstr "U kunt een onjuiste locatie niet verwijderen"
+
+#: 3.0/applet.js:1945 3.8/applet.js:1749
+msgid "Location is not in storage, can't delete"
+msgstr "Locatie is niet in opslag, kan het niet verwijderen."
+
+#: 3.0/applet.js:1955 3.8/applet.js:1759
+msgid "Location is deleted from library"
+msgstr "Locatie is verwijderd uit de bibliotheek"
+
+#: 3.0/applet.js:1992 3.8/applet.js:1785
+msgid ""
+"Failed to load in data from location storage, please see the logs for more "
+"information"
+msgstr ""
+"Opslaggegevens van de locatie niet kunnen laden, a.u.b raadpleeg de "
+"logboeken voor meer informatie"
 
 #: 3.0/climacell.js:228 3.8/climacell.js:167
 msgid ""
@@ -1591,7 +1684,6 @@ msgid "Acceptable inputs is Latitude,Longitude"
 msgstr "Toegestane invoer is Breedtegraad,Lengtegraad"
 
 #. 3.0->settings-schema.json->getLocation->description
-#. 3.8->settings-schema.json->getLocation->description
 msgid "Setup API Key and Location"
 msgstr "API-sleutel en locatie instellen"
 
@@ -1739,25 +1831,28 @@ msgid "Use custom icons in the popup menu"
 msgstr "Gebruik aangepaste pictogrammen in het opduikmenu"
 
 #. 3.8->settings-schema.json->units-section->title
-msgid "Units and Icons"
-msgstr "Eenheden en pictogrammen"
+msgid "Units, Icons and Keys"
+msgstr "Eenheden, Pictogrammen en Sleutels"
 
 #. 3.8->settings-schema.json->info-section->title
 msgid "Help"
 msgstr "Hulp"
 
-#. 3.8->settings-schema.json->contact-section->title
-#. 3.8->settings-schema.json->contact->title
-msgid "Contact"
-msgstr "Contact"
+#. 3.8->settings-schema.json->submit-issue->title
+msgid "Report an issue"
+msgstr "Een issue melden"
 
 #. 3.8->settings-schema.json->provider-info->title
-msgid "Weather provider choices and details"
-msgstr "Weersaanbiederkeuzes en bijzonderheden"
+msgid "How to choose a weather provider"
+msgstr "Hoe kiest u een weeraanbieder"
 
 #. 3.8->settings-schema.json->location-info->title
-msgid "Entering location manually"
-msgstr "Handmatige locatie ingeven"
+msgid "Allowed location formats"
+msgstr "Toegestane locatieformaten"
+
+#. 3.8->settings-schema.json->more-info->title
+msgid "View additional information"
+msgstr "Bekijk aanvullende informatie"
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "Met Office UK (UK only)"
@@ -1777,13 +1872,37 @@ msgstr ""
 "een adres.\n"
 "Drie seconden nadat u bent opgehouden met typen wordt het weer ververst."
 
+#. 3.8->settings-schema.json->saveLocation->description
+msgid "Save current location to storage"
+msgstr "Huidige locatie opslaan naar opslag"
+
+#. 3.8->settings-schema.json->saveLocation->tooltip
+msgid ""
+"Saves location information to file, so you can switch between them with "
+"buttons in the applet (what will appear if you have more than one)."
+msgstr ""
+"Slaat de locatie-informatie op in het bestand, zodat u kunt wisselen tussen "
+"deze gegevens met knoppen in de hulptoepassing (wat verschijnt er als u er "
+"meer dan één hebt)."
+
+#. 3.8->settings-schema.json->deleteLocation->description
+msgid "Delete current location from storage"
+msgstr "Huidige locatie uit de opslag verwijderen"
+
+#. 3.8->settings-schema.json->deleteLocation->tooltip
+msgid "Removes location information from storage file."
+msgstr "Verwijdert locatie-informatie uit het opslagbestand."
+
+#. 3.8->settings-schema.json->getLocation->description
+msgid "Weather Applet at Cinnamon Spices Website"
+msgstr "Weer hulptoepassing op de website van Cinnamon Spices"
+
 #. 3.8->settings-schema.json->verticalOrientation->tooltip
 msgid "Displaying forecasts from top to bottom instead from left to right."
-msgstr ""
-"Voorspellingen tonen van boven naar beneden en niet van links naar rechts."
+msgstr "Voorspellingen tonen van boven naar beneden i.p.v links naar rechts."
 
 #. 3.8->settings-schema.json->useSymbolicIcons->tooltip
-msgid "Does not apply to custom iconset, it is symbolic by default"
+msgid "Does not apply to custom iconset, that is symbolic by default"
 msgstr ""
 "Is niet van toepassing op aangepaste pictogrammen, het is standaard "
 "symbolisch"
@@ -1791,6 +1910,16 @@ msgstr ""
 #. 3.8->settings-schema.json->useSymbolicIcons->description
 msgid "Use symbolic icons throughout the applet"
 msgstr "Gebruik symbolische pictogrammen in dit werkbalkhulpje"
+
+#. 3.8->settings-schema.json->more-info-label->description
+msgid ""
+"For more information go to the Spices Website by clicking the button below. "
+"You can also comment and ask a questions to the community at this page by "
+"logging in with your Github account."
+msgstr ""
+"Ga voor meer informatie naar de website van Spices door op de onderstaande "
+"knop te klikken. U kunt ook commentaar geven en vragen stellen aan de "
+"community op deze pagina door in te loggen met uw Github account."
 
 #. 3.8->settings-schema.json->submitIssue->description
 msgid "Submit an Issue"
@@ -1810,121 +1939,170 @@ msgstr ""
 msgid "Current maintainer: Gr3q"
 msgstr "Huidige onderhouder: Gr3q"
 
-#. 3.8->settings-schema.json->openWM->description
+#. 3.8->settings-schema.json->issue-reporting-explanation->description
 msgid ""
-"OpenWeatherMap:\n"
-"The default, works out of the box.\n"
-"Big Thanks to them supporting free open source projects, like this! Supports "
-"7 forecast days and 48 forecast hours."
+"If you find an issue with this applet please make a report by clicking on "
+"the button below and login in with your Github account. Don't forget to "
+"write weather@mockturtl in the top Title field to make it easier for "
+"everyone to know that the issue is about the weather applet (the form is for "
+"all Cinnamon applets)."
 msgstr ""
-"OpenWeatherMap:\n"
-"De standaard, werkt direct.\n"
-"Veel dank aan hen die gratis open-bronprojecten zoals deze steunen! "
-"Ondersteunt 7 voorspellingsdagen en 48 voorspellingsuren."
+"Als u een probleem met deze hulptoepassing vindt, maak dan een melding door "
+"op de onderstaande knop te klikken en log in met uw Github-account. Vergeet "
+"niet om weather@mockturtl te schrijven in het bovenste titelveld om het voor "
+"iedereen makkelijker te maken om te weten dat het probleem over de weer-"
+"applet gaat (het formulier is voor alle Cinnamon-applets)."
 
-#. 3.8->settings-schema.json->darkS->description
+#. 3.8->settings-schema.json->provider-explanation->description
 msgid ""
-"DarkSky:\n"
-"It doesn't accept new registrations and will be closed in 2021. Supports 8 "
-"forecast days and 168 forecast hours."
+"You can use several different weather forecast providers that you choose "
+"under the first Weather Tab in this Configuration panel. Some providers "
+"require a API key to work, some have regional limits, differ in forecast "
+"length, and they all need a functional internet connection to the chosen "
+"service. The options are described in detail on the Cinnamon Spices Website, "
+"what you can access with the button further down."
 msgstr ""
-"DarkSky:\n"
-"Accepteert geen nieuwe registraties en zal worden gesloten in 2021. "
-"Ondersteunt 8 voorspellingsdagen en 168 voorspellingsuren."
-
-#. 3.8->settings-schema.json->METN->description
-msgid ""
-"MET Norway:\n"
-"Current weather is shown for the next hour, and the daily forecasts are "
-"generated from 6 hour forecasts, so it can look incorrect sometimes. "
-"Supports 10 forecast days and 48 forecast hours."
-msgstr ""
-"MET Norway:\n"
-"Het huidige weer wordt getoond voor het komende uur, en de dagelijkse "
-"voorspellingen worden gegenereerd uit zesuurlijkse voorspellingen, dus het "
-"kan er soms niet goed uitzien. Ondersteunt 10 voorspellingsdagen en 48 "
-"voorspellingsuren."
-
-#. 3.8->settings-schema.json->WB->description
-msgid ""
-"WeatherBit:\n"
-"At least 10 minutes as refresh rate is recommended, since otherwise you "
-"might exceed you daily quota. Supports 16 forecast days and 48 forecast "
-"hours."
-msgstr ""
-"WeatherBit:\n"
-"Vaker verversen dan elke 10 minuten wordt niet aanbevolen, omdat u dan de "
-"dagelijkse quota zou kunnen overschrijden. Ondersteunt 16 voorspellingsdagen "
-"en 48 voorspellingsuren."
-
-#. 3.8->settings-schema.json->Yahoo->description
-msgid ""
-"Yahoo:\n"
-"Requires 'python3-requests-oauthlib' package installed (for Arch based "
-"distros 'python-requests-oauthlib'), Updates every 2 hours. Only supports 10 "
-"forecast days and no hours."
-msgstr ""
-"Yahoo:\n"
-"Vereist de installatie van het pakket 'python3-requests-oauthlib' (voor Arch-"
-"gebaseerde distros 'python-requests-oauthlib'), Actualiseert elke 2 uur. "
-"Ondersteunt slechts 10 voorspellingsdagen en geen uren."
-
-#. 3.8->settings-schema.json->Climacell->description
-msgid ""
-"Climacell:\n"
-"At least 10 minutes refresh rate is recommended with a free plan. Supports "
-"16 forecast days and 96 forecast hours."
-msgstr ""
-"Climacell:\n"
-"Hooguit eens per 10 minuten verversen wordt aanbevolen met een gratis plan. "
-"Ondersteunt 16 voorspellingsdagen en 96 voorspellingsuren."
-
-#. 3.8->settings-schema.json->metuk->description
-msgid ""
-"Met Office UK:\n"
-"UK only option. If it does not find a site in 50km range around you it will "
-"not show weather. Please let me know if this happens and you live in the UK. "
-"Supports 5 days and 36 hours of forecasts. Sometimes it takes 5-8 seconds to "
-"load the first time, please be patient."
-msgstr ""
-"Met Office UK:\n"
-"Alleen voor het VK. Als het geen meetplek vindt binnen een bereik van 50km "
-"om u heen, zal het geen weer laten zien. Laat het me a.u.b. weten als dit "
-"gebeurt wanneer u in het VK woont. Ondersteunt 5 dagen en 36 uur "
-"voorspellingen. Soms duurt het eerste laden 5-8 seconden, dus wacht a.u.b. "
-"geduldig af."
-
-#. 3.8->settings-schema.json->usweather->description
-msgid ""
-"US National Weather Service:\n"
-"US only option. First load can take up to 15-20 seconds, please be patient. "
-"Current weather is merged from a max 50km area, if some data is missing from "
-"the closest one. Supports 7 days and 156 hours of forecasts."
-msgstr ""
-"US National Weather Service:\n"
-"Alleen voor de VS. Het eerste laden kan 15-20 seconden duren, wacht dus a.u."
-"b. geduldig af. Het huidige weer wordt samengevoegd van een max. 50 km groot "
-"gebied, als er wat gegevens ontbreken van het dichtstbijzijnde gebied. "
-"Ondersteunt 7 dagen en 156 uur aan voorspellingen."
+"U kunt gebruik maken van verschillende weersverwachtingsaanbieders die u "
+"kiest onder het eerste Weer tabblad in dit Configuratiepaneel. Sommige "
+"providers hebben een API-sleutel nodig om te kunnen werken, sommige hebben "
+"regionale limieten, verschillen in voorspellingslengte en ze hebben allemaal "
+"een functionele internetverbinding met de gekozen dienst nodig. De opties "
+"worden in detail beschreven op de Cinnamon Spices Website, waartoe u toegang "
+"heeft met de knop verderop."
 
 #. 3.8->settings-schema.json->loc-info->description
 msgid ""
-"You can either use coordinates as {latitude},{longitude},\n"
-" or an address, from smallest detail to biggest, like '{house num} {street} "
-"{city/town} {postcode} {country}'. All of them are optional, although at "
-"least city and country is recommended. You can use commas if you like.\n"
-"\n"
-"After you stop typing the field will be replaced after 3 seconds with the "
-"full address, for you to validate if it's correct."
+"Your location in most cases work automatically but you can enter it manually "
+"by coordinates 'Latitude,Longitude' (e.g. 51.5085,-0.1257) or use 'City,"
+"Country-code' (e.g. London,UK) or try to enter {House number} {Street} {City/"
+"Town} {Postcode} {Country}. The search algorithm is very flexible with the "
+"format. After 3 seconds without typing the address you entered is replaced "
+"automatically for validating your choice."
 msgstr ""
-"U kunt coördinaten gebruiken als {breedtegraad},{lengtegraad},\n"
-" of een adres, van het kleinste detail tot het grootste, zoals '{huisnummer} "
-"{straat} {stad/plaats} {postcode} {land}'. Ze zijn allemaal facultatief, "
-"hoewel tenminste stad en land worden aanbevolen. U kunt komma's gebruiken "
-"als u dat wilt.\n"
-"\n"
-"Nadat u bent gestopt met typen wordt het veld na 3 seconden vervangen door "
-"het volledige adres, zodat u kunt controleren of het correct is."
+"Uw locatie werkt in de meeste gevallen automatisch, maar u kunt deze "
+"handmatig invoeren met de coördinaten 'Breedtegraad,Lengtegraad' (bijv. "
+"51,5085,-0,1257) of gebruik maken van 'Stad,Landcode' (bijv. Londen,UK) of "
+"proberen {Huisnummer} {Street} in te voeren. {Stad/Stad} {Postcode} {Land}. "
+"Het zoekalgoritme is zeer flexibel met het formaat. Na 3 seconden zonder het "
+"adres in te typen wordt het automatisch vervangen voor het valideren van uw "
+"keuze."
+
+#~ msgid "Contact"
+#~ msgstr "Contact"
+
+#~ msgid "Weather provider choices and details"
+#~ msgstr "Weersaanbiederkeuzes en bijzonderheden"
+
+#~ msgid "Entering location manually"
+#~ msgstr "Handmatige locatie ingeven"
+
+#~ msgid ""
+#~ "OpenWeatherMap:\n"
+#~ "The default, works out of the box.\n"
+#~ "Big Thanks to them supporting free open source projects, like this! "
+#~ "Supports 7 forecast days and 48 forecast hours."
+#~ msgstr ""
+#~ "OpenWeatherMap:\n"
+#~ "De standaard, werkt direct.\n"
+#~ "Veel dank aan hen die gratis open-bronprojecten zoals deze steunen! "
+#~ "Ondersteunt 7 voorspellingsdagen en 48 voorspellingsuren."
+
+#~ msgid ""
+#~ "DarkSky:\n"
+#~ "It doesn't accept new registrations and will be closed in 2021. Supports "
+#~ "8 forecast days and 168 forecast hours."
+#~ msgstr ""
+#~ "DarkSky:\n"
+#~ "Accepteert geen nieuwe registraties en zal worden gesloten in 2021. "
+#~ "Ondersteunt 8 voorspellingsdagen en 168 voorspellingsuren."
+
+#~ msgid ""
+#~ "MET Norway:\n"
+#~ "Current weather is shown for the next hour, and the daily forecasts are "
+#~ "generated from 6 hour forecasts, so it can look incorrect sometimes. "
+#~ "Supports 10 forecast days and 48 forecast hours."
+#~ msgstr ""
+#~ "MET Norway:\n"
+#~ "Het huidige weer wordt getoond voor het komende uur, en de dagelijkse "
+#~ "voorspellingen worden gegenereerd uit zesuurlijkse voorspellingen, dus "
+#~ "het kan er soms niet goed uitzien. Ondersteunt 10 voorspellingsdagen en "
+#~ "48 voorspellingsuren."
+
+#~ msgid ""
+#~ "WeatherBit:\n"
+#~ "At least 10 minutes as refresh rate is recommended, since otherwise you "
+#~ "might exceed you daily quota. Supports 16 forecast days and 48 forecast "
+#~ "hours."
+#~ msgstr ""
+#~ "WeatherBit:\n"
+#~ "Vaker verversen dan elke 10 minuten wordt niet aanbevolen, omdat u dan de "
+#~ "dagelijkse quota zou kunnen overschrijden. Ondersteunt 16 "
+#~ "voorspellingsdagen en 48 voorspellingsuren."
+
+#~ msgid ""
+#~ "Yahoo:\n"
+#~ "Requires 'python3-requests-oauthlib' package installed (for Arch based "
+#~ "distros 'python-requests-oauthlib'), Updates every 2 hours. Only supports "
+#~ "10 forecast days and no hours."
+#~ msgstr ""
+#~ "Yahoo:\n"
+#~ "Vereist de installatie van het pakket 'python3-requests-oauthlib' (voor "
+#~ "Arch-gebaseerde distros 'python-requests-oauthlib'), Actualiseert elke 2 "
+#~ "uur. Ondersteunt slechts 10 voorspellingsdagen en geen uren."
+
+#~ msgid ""
+#~ "Climacell:\n"
+#~ "At least 10 minutes refresh rate is recommended with a free plan. "
+#~ "Supports 16 forecast days and 96 forecast hours."
+#~ msgstr ""
+#~ "Climacell:\n"
+#~ "Hooguit eens per 10 minuten verversen wordt aanbevolen met een gratis "
+#~ "plan. Ondersteunt 16 voorspellingsdagen en 96 voorspellingsuren."
+
+#~ msgid ""
+#~ "Met Office UK:\n"
+#~ "UK only option. If it does not find a site in 50km range around you it "
+#~ "will not show weather. Please let me know if this happens and you live in "
+#~ "the UK. Supports 5 days and 36 hours of forecasts. Sometimes it takes 5-8 "
+#~ "seconds to load the first time, please be patient."
+#~ msgstr ""
+#~ "Met Office UK:\n"
+#~ "Alleen voor het VK. Als het geen meetplek vindt binnen een bereik van "
+#~ "50km om u heen, zal het geen weer laten zien. Laat het me a.u.b. weten "
+#~ "als dit gebeurt wanneer u in het VK woont. Ondersteunt 5 dagen en 36 uur "
+#~ "voorspellingen. Soms duurt het eerste laden 5-8 seconden, dus wacht a.u."
+#~ "b. geduldig af."
+
+#~ msgid ""
+#~ "US National Weather Service:\n"
+#~ "US only option. First load can take up to 15-20 seconds, please be "
+#~ "patient. Current weather is merged from a max 50km area, if some data is "
+#~ "missing from the closest one. Supports 7 days and 156 hours of forecasts."
+#~ msgstr ""
+#~ "US National Weather Service:\n"
+#~ "Alleen voor de VS. Het eerste laden kan 15-20 seconden duren, wacht dus a."
+#~ "u.b. geduldig af. Het huidige weer wordt samengevoegd van een max. 50 km "
+#~ "groot gebied, als er wat gegevens ontbreken van het dichtstbijzijnde "
+#~ "gebied. Ondersteunt 7 dagen en 156 uur aan voorspellingen."
+
+#~ msgid ""
+#~ "You can either use coordinates as {latitude},{longitude},\n"
+#~ " or an address, from smallest detail to biggest, like '{house num} "
+#~ "{street} {city/town} {postcode} {country}'. All of them are optional, "
+#~ "although at least city and country is recommended. You can use commas if "
+#~ "you like.\n"
+#~ "\n"
+#~ "After you stop typing the field will be replaced after 3 seconds with the "
+#~ "full address, for you to validate if it's correct."
+#~ msgstr ""
+#~ "U kunt coördinaten gebruiken als {breedtegraad},{lengtegraad},\n"
+#~ " of een adres, van het kleinste detail tot het grootste, zoals "
+#~ "'{huisnummer} {straat} {stad/plaats} {postcode} {land}'. Ze zijn allemaal "
+#~ "facultatief, hoewel tenminste stad en land worden aanbevolen. U kunt "
+#~ "komma's gebruiken als u dat wilt.\n"
+#~ "\n"
+#~ "Nadat u bent gestopt met typen wordt het veld na 3 seconden vervangen "
+#~ "door het volledige adres, zodat u kunt controleren of het correct is."
 
 #~ msgid "Ligth Rain"
 #~ msgstr "Lichte regen"
