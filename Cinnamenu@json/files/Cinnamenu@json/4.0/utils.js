@@ -135,17 +135,9 @@ const searchStr = function (q, str) {
     } else if (str2.indexOf(q2) !== -1) { //else match substring
         score = 1.1;
     } else { //else fuzzy match and return
-        const qletters = q2.replace(/\W/g, ''); //remove anything that isn't a letter from query
-        //make regexp. eg. if qletters='abc' then regex='/(a|b|c)+/g'
-        let partregexp = '';
-        for (let i=0; i<qletters.length-1; i++) {
-            partregexp += qletters[i]+'|';
-        }
-        partregexp += qletters[qletters.length-1];
-        const regex = new RegExp('('+partregexp+')+', 'g');
-
+        const qletters = q2; //q2.replace(/\W/g, ''); //remove anything that isn't a letter from query
         //find longest substring of str2 made up of letters from qletters
-        const found = str2.match(regex);
+        const found = str2.match(new RegExp('[' + q2 + ']+','g'));
         let length = 0;
         let longest;
         if (found) {
@@ -168,7 +160,8 @@ const searchStr = function (q, str) {
                         found_bigrams++;
                     }
                 }
-                bigrams_score = found_bigrams / max_bigrams;
+                found_bigrams++; //free boost.
+                bigrams_score = Math.min(found_bigrams / max_bigrams, 1);
             } else {
                 bigrams_score = 1;
             }

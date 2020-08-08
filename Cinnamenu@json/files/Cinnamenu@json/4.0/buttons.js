@@ -244,11 +244,11 @@ class ApplicationContextMenuItem extends PopupBaseMenuItem {
         this.action = action;
         this.label = new Label({
             text: label,
-            style: 'font-size: 13px;'
+            //style: 'font-size: 13px;'
         });
         if (iconName !== null) {
             this.icon = new Icon({ icon_name: iconName,
-                                   icon_size: 12,
+                                   icon_size: 14,
                                    icon_type: IconType.SYMBOLIC });
             if (this.icon) {
                 this.addActor(this.icon);
@@ -261,7 +261,7 @@ class ApplicationContextMenuItem extends PopupBaseMenuItem {
         // Override padding to help prevent label truncation, the menu container width is restricted to the column width,
         // so unless we turn the context menu into a modal somehow (not likely since it will fight for input with the
         // parent), this is the most practical solution for the grid.
-        this.actor.set_style('padding-left: 6px !important; padding-right: 0px !important;');//' width: 215px !important;');
+        //this.actor.set_style('padding-left: 6px !important; padding-right: 0px !important;');//' width: 215px !important;');
         //this.setColumnWidths([8, 132]);//??
     }
 
@@ -357,9 +357,10 @@ class ApplicationContextMenuItem extends PopupBaseMenuItem {
 }
 
 class AppListGridButton extends PopupBaseMenuItem {
-    constructor(state, app, appType, appIndex, appListLength) {
+    constructor(appThis, state, app, appType, appIndex, appListLength) {
         super({ hover: false, activate: false });
         this.state = state;
+        this.appThis = appThis;
         this.connectId = this.state.connect({
             dragIndex: () => {
                 if (this.state.dragIndex !== this.buttonState.appIndex && this.actor.opacity === 50) {
@@ -524,15 +525,16 @@ class AppListGridButton extends PopupBaseMenuItem {
         if (this.buttonState.appType === ApplicationType._applications) {
             this.menu = new PopupSubMenu(this.actor);
             this.menu.actor.set_style_class_name('menu menu-context-menu menu-background starkmenu-background');
-            this.menu.actor.set_style('width: 225px !important;');
-            this.menu.actor.set_opacity(245);
+            this.contextMenuBox = new St.BoxLayout({ style_class: '', vertical: true, reactive: true });
+            this.contextMenuBox.add_actor(this.menu.actor);
+            this.contextMenuBox.height = 0;
             this.menu.isOpen = false;
-            this.buttonBox.add_actor(this.menu.actor);
+            this.appThis.mainBox.add(this.contextMenuBox, {expand: false, x_fill: false,
+                                                    x_align: St.Align.START, y_align: St.Align.MIDDLE});
         } else {
-            this.menu = {
-                isOpen: false
-            };
+            this.menu = { isOpen: false };
         }
+
         this.addActor(this.buttonBox);
 
         if (this.icon) {
@@ -683,19 +685,6 @@ class AppListGridButton extends PopupBaseMenuItem {
     }
 
     handleButtonRelease(actor, e) {
-        const prepareGridContextMenu = () => {
-            this.buttonBox.height = this.buttonBox.get_preferred_size()[1];
-            let x = -20, y = 20;
-            if (this.buttonState.column === this.state.settings.appsGridColumnCount - 1) {
-                x = 20;
-            }
-            if (this.state.trigger('isNotInScrollView', this)) {
-                y = Math.round(this.actor.height * 1.9);
-            }
-            this.menu.actor.anchor_x = x;
-            this.menu.actor.anchor_y = y;
-        };
-
         const closeOtherContextMenus = () => {
             const buttons = this.state.trigger('getActiveButtons');
             for (let i = 0, len = buttons.length; i < len; i++) {
@@ -721,16 +710,13 @@ class AppListGridButton extends PopupBaseMenuItem {
             }
             this.activate(e);
         } else if (button === 3) {//right click
-            if (!this.state.isListView && this.buttonState.appType === ApplicationType._applications) {
-                prepareGridContextMenu();
-            }
             if (!this.menu.isOpen) {
                 closeOtherContextMenus();
             }
             if (this.tooltip) {
                 this.tooltip.destroy();
             }
-            this.toggleMenu();
+            this.toggleMenu(e);
         }
         return true;
     }
@@ -746,6 +732,7 @@ class AppListGridButton extends PopupBaseMenuItem {
                 );
             }
         } else if (this.buttonState.appType === ApplicationType._applications) {
+            //this.state.autofavs.incrementApp(this.buttonState.app.get_id());
             this.buttonState.app.open_new_window(-1);
         } else if (this.buttonState.appType === ApplicationType._places) {
             if (this.buttonState.app.uri) {
@@ -757,7 +744,7 @@ class AppListGridButton extends PopupBaseMenuItem {
             if (this.buttonState.app.clearList) {
                 Gtk.RecentManager.get_default().purge_items();
                 this.state.set({currentCategory: 'all'});
-                return;
+                return;//don't closeMenu
             } else {
                 Gio.app_info_launch_default_for_uri(this.buttonState.app.uri, global.create_app_launch_context());
             }
@@ -785,11 +772,12 @@ class AppListGridButton extends PopupBaseMenuItem {
         if (this.buttonState.appType !== ApplicationType._applications) {
             return;
         }
-        this.menu.close();
-        if (this.state.isListView) this.label.show();
+        if (this.menu.isOpen){
+            this.menu.close();
+        }
     }
 
-    toggleMenu() {
+    toggleMenu(e) {
         if (this.buttonState.appType !== ApplicationType._applications || !this.menu) {
             return false;
         }
@@ -797,7 +785,6 @@ class AppListGridButton extends PopupBaseMenuItem {
         if (this.menu.isOpen) {
             // Allow other buttons hover functions to take effect.
             this.state.set({contextMenuIsOpen: null});
-            if (this.state.isListView) this.label.show();
         } else {
             for (let i = 0; i < this.contextMenuButtons.length; i++) {
                 this.contextMenuButtons[i].destroy();
@@ -808,8 +795,8 @@ class AppListGridButton extends PopupBaseMenuItem {
             this.actor.set_style_class_name('menu-application-button-selected');
 
             const addMenuItem = function(t, instance) {
+                t.menu.addMenuItem(instance);
                 t.contextMenuButtons.push(instance);
-                t.menu.addMenuItem(t.contextMenuButtons[t.contextMenuButtons.length - 1]);
             };
 
             if (this.state.gpu_offload_supported) {
@@ -827,7 +814,7 @@ class AppListGridButton extends PopupBaseMenuItem {
             }
             if (this.state.trigger('isFavorite', this.buttonState.app.get_id())) {
                 addMenuItem(this, new ApplicationContextMenuItem(this.state, this.buttonState,
-                                                _('Remove favorite'), 'remove_from_favorites', 'starred'));
+                                                _('Remove from favorites'), 'remove_from_favorites', 'starred'));
             } else {
                 addMenuItem(this, new ApplicationContextMenuItem(this.state, this.buttonState,
                                                 _('Add to favorites'), 'add_to_favorites', 'non-starred'));
@@ -837,15 +824,27 @@ class AppListGridButton extends PopupBaseMenuItem {
                                                         _('Uninstall'), 'uninstall', 'edit-delete'));
             }
 
-            if (this.state.isListView) {
-                this.label.hide();
-            } else {
-                // In grid mode we will ensure our menu isn't overlapped by any other actors.
-                let parent = this.actor.get_parent();
-                if (!parent) return true; // Favorite change
-                this.actor.get_parent().set_child_above_sibling(this.actor, null);
-                //this.actor.show_on_set_parent = false;
+            let parent = this.actor.get_parent();
+            if (!parent) return true; // Favorite change
+
+            const contextMenuWidth = this.menu.actor.width;
+            const contextMenuHeight = this.menu.actor.height;
+
+            const monitor = Main.layoutManager.findMonitorForActor(this.menu.actor);
+            let [mx, my] = e.get_coords(); //get mouse position
+            if (mx > monitor.x + monitor.width - this.menu.actor.width) {
+                mx -= this.menu.actor.width;
             }
+            if (my > monitor.y + monitor.height - this.menu.actor.height - 40/*allow for panel*/) {
+                my -= this.menu.actor.height;
+            }
+            //setting anchor_x & anchor_y sets it relative to it's current position but negative???
+            let [cx, cy] = this.contextMenuBox.get_transformed_position();
+            cx = Math.round(mx - cx);
+            cy = Math.round(my - cy);
+            global.log(contextMenuWidth,contextMenuHeight,monitor.x + monitor.width,cx);
+            this.menu.actor.anchor_x = -cx;
+            this.menu.actor.anchor_y = -cy;
         }
         this.menu.toggle_with_options(this.state.settings.enableAnimation);
         return true;

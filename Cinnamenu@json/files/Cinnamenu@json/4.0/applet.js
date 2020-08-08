@@ -4,6 +4,7 @@ const GLib = imports.gi.GLib;
 const CMenu = imports.gi.CMenu;
 const Clutter = imports.gi.Clutter;
 const Cinnamon = imports.gi.Cinnamon;
+const Util = imports.misc.util;
 const St = imports.gi.St;
 const {   TextureCache,
           Icon,
@@ -463,7 +464,8 @@ class CinnamenuApplet extends TextIconApplet {
             { key: 'category-icon-size',        value: 'categoryIconSize',      cb: this.refresh },
             { key: 'apps-list-icon-size',       value: 'appsListIconSize',      cb: this.refresh },
             { key: 'apps-grid-icon-size',       value: 'appsGridIconSize',      cb: this.refresh },
-
+            { key: 'session-icon-size',         value: 'sessionIconSize',       cb: this.refresh },
+            { key: 'use-box-style',             value: 'useBoxStyle',           cb: this.refresh }
         ];
 
         for (let i = 0; i < this.knownProviders.length; i++) {
@@ -1582,6 +1584,21 @@ class CinnamenuApplet extends TextIconApplet {
                             .concat(this.listDevices(pattern))
                             .concat(this.listWebBookmarks(pattern))
                             .concat(this.listRecent(pattern));
+        results.sort( (a, b) =>  a.score < b.score );
+        if (results.length > 16) {
+            results.length = 16;
+        }
+        //-----search providers-------
+        results.push(   {   type: ApplicationType._providers,
+                            name: _('Search google for') + ' "' + text + '"',
+                            description: '',
+                            score: 0.1,
+                            icon: new St.Icon({ gicon: new Gio.FileIcon({
+                                        file: Gio.file_new_for_path(__meta.path + '/google_icon.png')}),
+                                        icon_size: this.state.iconSize }),
+                            activate: () => {Util.spawnCommandLineAsync(
+                                "/usr/bin/xdg-open https://google.com/search?q="+encodeURIComponent(text));}
+                        } );
 
         if (this.state.settings.enableSearchProviders && this.state.enabledProviders.length > 0 &&
                                                                                   pattern.length > 2) {
@@ -1616,9 +1633,7 @@ class CinnamenuApplet extends TextIconApplet {
                     results = results.concat(providerResults);
                     });
         }
-
-        results.sort( (a, b) =>  a.score < b.score );
-
+        //----------------------------------
         this.clearApplicationsBox();
         this.displayApplications(results);
 
@@ -1665,7 +1680,7 @@ class CinnamenuApplet extends TextIconApplet {
                                             appListLength: len,
                                             appIndex: appIndex });
             } else {
-                appButton = new AppListGridButton(this.state, app, appType, appIndex, len);
+                appButton = new AppListGridButton(this, this.state, app, appType, appIndex, len);
                 this.allItems.push(appButton);
             }
 
@@ -1843,20 +1858,9 @@ class CinnamenuApplet extends TextIconApplet {
         if (powergroupPlacement !== 0) {//bottom, left or right
             this.mainBox.add(this.bottomPane);
         }
-
+        
         // add all to section
         let section = new PopupMenuSection();
-        /*
-        this.resizeContainer = new St.BoxLayout({ reactive: true });
-        this.resizeContainer.add(resizeIcon, { x_fill: false, y_fill: false, expand: false,
-                                                    x_align: St.Align.MIDDLE, y_align: St.Align.MIDDLE });*/
-        /*this.resizeButton = new ResizeButton(this.state);
-        this.wide = new St.BoxLayout({ reactive: true });
-        this.resizePane = new St.BoxLayout({ reactive: true });
-        this.resizePane.add(this.wide,{ expand: true, x_fill: true, y_fill: false,
-                                                x_align: St.Align.START, y_align: St.Align.MIDDLE });
-        this.resizePane.add(this.resizeButton.actor);
-        section.actor.add_actor(this.resizePane);*/
 
         section.actor.add_actor(this.mainBox);
         // add section as menu item
@@ -1868,6 +1872,7 @@ class CinnamenuApplet extends TextIconApplet {
         this.menu.actor.set_reactive(true);
         this.displaySignals.connect(this.menu.actor, 'button-release-event',
                                                         (...args) => {this.clearEnteredActors();});
+        //this.state.autofavs = new Autofavs();
     }
 
     destroyContainer(container){
@@ -1926,10 +1931,12 @@ class CinnamenuApplet extends TextIconApplet {
     }
 
     destroy() {
+        //this.state.autofavs.destroy();
+        //this.state.autofavs = null;
         this.signals.disconnectAllSignals();
         if (this.placesManager) this.placesManager.destroy();
         this.destroyAppButtons();
-        if (!this.activeContainer) {
+        if (!this.activeContainer) {//??
             return;
         }
         this.activeContainer.destroy();
@@ -1937,110 +1944,16 @@ class CinnamenuApplet extends TextIconApplet {
         this.menu.destroy();
     }
 }
-/*
-const {DragMotionResult, makeDraggable} = imports.ui.dnd;
-const {PopupBaseMenuItem, PopupSubMenu} = imports.ui.popupMenu;
-const {Clone, BinLayout, ActorAlign} = imports.gi.Clutter;
 
-class ResizeButton extends PopupBaseMenuItem {
-    constructor(state) {
-        super({ hover: false, activate: false });
-        this.state = state;
-        this.signals = new SignalManager(null);
-
-        this.index = -1;
-
-        this.disabled = false;
-        this.entered = null;
-        this.icon = new St.Icon({ gicon: new Gio.FileIcon({file: Gio.file_new_for_path(__meta.path + '/tr.png')}),
-                            icon_size: 12 });
-        this.addActor(this.icon);
-        this.actor._delegate = {
-            handleDragOver: (source, actor, x, y, time) => {
-                //return DragMotionResult.NO_DROP;
-                //global.log("drag over", x, y, time);
-                return DragMotionResult.NO_DROP;
-            },
-            handleMotion: (x, y) => {
-                global.log("motion", x, y);
-
-            },
-            acceptDrop: (source, actor, x, y, time) => {
-                //return DragMotionResult.NO_DROP;
-                //global.log("drop", x, y, time);
-                return DragMotionResult.MOVE_DROP;
-                //return false;
-            },
-            getDragActorSource: () => this.actor,
-            _getDragActor: () => new Clone({source: this.actor}),
-            getDragActor: () => new Clone({source: this.icon}),
-            isDraggableApp: false,
-            index: this.index,
-            id: this.id
-        };
-
-        this.draggable = makeDraggable(this.actor);
-
-        // Connect signals
-        this.signals.connect(this.draggable, 'drag-begin', (...args) => this.onDragBegin(...args));
-        this.signals.connect(this.draggable, 'drag-cancelled', (...args) => this.onDragCancelled(...args));
-        this.signals.connect(this.draggable, 'drag-end', (...args) => this.onDragEnd(...args));
-        //?undo
-
-        this.signals.connect(this.actor, 'motion-event', (...args) => this.handleEnter(...args));
-        this.signals.connect(this.actor, 'leave-event', (...args) => this.handleLeave(...args));
-        this.signals.connect(this.actor, 'button-release-event', (...args) =>
-                                                                        this.handleButtonRelease(...args));
-        this.signals.connect(this.actor, 'button-press-event', (...args) => this.handleButtonPress(...args));
-    }
-
-    onDragBegin() {
-        //this.actor.set_opacity(51);
-        //this.state.set({categoryDragged: true});
-    }
-
-    onDragCancelled() {
-        //this.actor.set_opacity(255);
-        //this.state.set({categoryDragged: false});
-    }
-
-    onDragEnd() {
-        //this.actor.set_opacity(255);
-        //setTimeout(() => this.state.set({categoryDragged: false}), 0);
-    }
-
-    handleEnter(actor, event) {
-        global.log("moving");
-        if (event) {//?undo
-
-        }
+class Autofavs {
+    constructor() {
 
     }
 
-    handleLeave(actor, event) {
+    incrementApp(app_id) {
 
-    }
-
-    handleButtonRelease(actor, event) {
-
-    }
-    handleButtonPress(actor, event) {
-        global.log("pressed");
-        return true;
-    }
-
-    destroy() {
-
-        this.signals.disconnectAllSignals();
-        this.label.destroy();
-        if (this.icon) {
-            this.icon.destroy();
-        }
-        PopupBaseMenuItem.prototype.destroy.call(this);
-        unref(this);
     }
 }
-*/
 
 class Search {
     constructor(state) {
@@ -2070,12 +1983,9 @@ class Search {
 class PowerGroupBox {
     constructor (state, powergroupPlacement) {
         this.state = state;
-        if (powergroupPlacement === 0 || powergroupPlacement === 1) {//top or bottom
-            this.box = new St.BoxLayout({ style_class: '' /*, style: 'padding-left: 13px;'*/  });
-        } else {
-            this.box = new St.BoxLayout({// style_class: 'menu-favorites-box',
-                                                        /*style: 'padding-left: 13px;',*/ vertical: true });
-        }
+        const style_class = this.state.settings.useBoxStyle ? 'menu-favorites-box' : '';
+        this.box = new St.BoxLayout({ style_class: style_class,
+                                    vertical: (powergroupPlacement === 2 || powergroupPlacement === 3) });
     }
 
     populate (favs) {
@@ -2084,12 +1994,13 @@ class PowerGroupBox {
         this.items = [];
         if (this.state.settings.addFavorites) {
             for (let i=0; i<favs.length; i++) {
-                this.items.push(new GroupButton( this.state, favs[i].create_icon_texture(28),
-                                favs[i].name, favs[i].description, () => {  favs[i].open_new_window(-1);
+                this.items.push(new GroupButton( this.state,
+                                    favs[i].create_icon_texture(this.state.settings.sessionIconSize),
+                                    favs[i].name, favs[i].description, () => {  favs[i].open_new_window(-1);
                                                                             this.state.trigger('closeMenu'); } ));
             }
         }
-        const iconObj = { icon_size: 28,
+        const iconObj = { icon_size: this.state.settings.sessionIconSize,
                           icon_type: IconType.FULLCOLOR };
         iconObj.icon_name = 'system-lock-screen';
         this.items.push(new GroupButton( this.state, new Icon(iconObj), _('Lock Screen'),
