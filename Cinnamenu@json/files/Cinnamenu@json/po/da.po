@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-07-25 17:39+0100\n"
-"PO-Revision-Date: 2020-07-30 18:55+0200\n"
+"PO-Revision-Date: 2020-08-03 14:56+0200\n"
 "Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Language-Team: Dansk-gruppen <dansk@dansk-gruppen.dk>\n"
 "Language: da\n"
@@ -186,11 +186,11 @@ msgstr "Layout og indhold"
 
 #. 3.2
 msgid "Search Providers"
-msgstr "Søgemaskineudbydere"
+msgstr "Søgemaskine udbydere"
 
 #. 3.2
 msgid "No search provider extensions found"
-msgstr "Fandt ingen udvidelser til søgemaskineudbydere"
+msgstr "Fandt ingen udvidelser til søgemaskine udbydere"
 
 #. 3.2
 #. 3.2
@@ -255,7 +255,7 @@ msgstr "Paneltekst"
 #. 3.2
 #. 4.0
 msgid "Text to show beside the panel icon"
-msgstr "Tekst, der skal vises ved siden af panelikonet"
+msgstr "Tekst der skal vises ved siden af panelikonet"
 
 #. 3.2
 #. 3.2
@@ -326,22 +326,22 @@ msgstr "Tillad animation af menuen, når den åbnes og lukkes"
 #. 3.2
 #. 4.0
 msgid "Activate categories on click"
-msgstr "Aktivér kategorier ved klik"
+msgstr "Aktiver kategorier ved klik"
 
 #. 3.2
 #. 4.0
 msgid "Activate categories on click instead of on hover"
-msgstr "Aktivér kategorier ved klik i stedet for på hover"
+msgstr "Aktiver kategorier ved klik i stedet for på hover"
 
 #. 3.2
 #. 4.0
 msgid "Enable autoscrolling"
-msgstr "Aktivér automatisk rulning"
+msgstr "Aktiver automatisk rulning"
 
 #. 3.2
 #. 4.0
 msgid "Enable autoscrolling in application list"
-msgstr "Aktivér automatisk rulning i programlisten"
+msgstr "Aktiver automatisk rulning i programlisten"
 
 #. 3.2
 #. 4.0
@@ -355,22 +355,22 @@ msgstr "Vis din browsers webbogmærker i menuen"
 
 #. 3.2
 msgid "Enable searching of open windows"
-msgstr "Aktivér søgning i åbne vinduer"
+msgstr "Aktiver søgning i åbne vinduer"
 
 #. 3.2
 #. 4.0
 msgid "Enable search providers"
-msgstr "Aktivér søgemaskineudbydere"
+msgstr "Aktiver søgemaskine udbydere"
 
 #. 3.2
 #. 4.0
 msgid "Include search provider results in searches"
-msgstr "Inkluder søgeudbyderresultater i søgninger"
+msgstr "Inkluder søgeudbyder resultater i søgninger"
 
 #. 3.2
 #. 4.0
 msgid "Example Search Providers"
-msgstr "Eksempel på søgemaskineudbydere"
+msgstr "Eksempel på søgemaskine udbydere"
 
 #. 3.2
 #. 3.2
@@ -515,11 +515,11 @@ msgstr "Vis dine foretrukne appikoner ved siden af sessionsknapperne"
 
 #. 4.0
 msgid "Always open menu on favorite apps"
-msgstr "Altid åbne menu med Favoritter"
+msgstr "Altid åbne menu med favoritter"
 
 #. 4.0
 msgid "Always open the menu with favorite apps category selected"
-msgstr "Menuen åbner altid med Favorit katagorien"
+msgstr "Menuen åbner altid med favorit kategorien"
 
 #~ msgid "No recent documents"
 #~ msgstr "Ingen seneste dokumenter"
