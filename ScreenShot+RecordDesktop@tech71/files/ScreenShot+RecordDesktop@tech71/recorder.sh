@@ -13,10 +13,10 @@ record_screen() {
   local size=$( /usr/bin/xdpyinfo | grep 'dimensions:' | awk '{print $2}' )
   parameters+=(
     -f x11grab
-    -i "$DISPLAY"
     -s "$size"
     -r 30
     -qscale 1
+    -i "$DISPLAY"
     -vf mpdecimate
   )
 }
@@ -30,10 +30,10 @@ record_window() {
 
   parameters+=(
     -f x11grab
-    -i "$DISPLAY+$x_offset,$y_offset"
     -s "${width}x${height}"
     -r 30
     -qscale 1
+    -i "$DISPLAY+$x_offset,$y_offset"
     -vf mpdecimate
   )
 }
