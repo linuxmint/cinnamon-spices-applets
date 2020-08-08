@@ -6,7 +6,7 @@ generate_filename() {
   . "$HOME/.config/user-dirs.dirs"
   ###   Date and time format   ###
   # 24-Hour time should not add pm/am, but is kept for compatibility for now
-  echo "Cinnamon-$( date +'%b-%d-%Y_%H:%M:%S%#p' )"   ## 24-Hour time
+  echo "Cinnamon-$( date +'%b-%d-%Y_%H:%M:%S%#p' ).mkv"   ## 24-Hour time
 }
 
 record_screen() {
