@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-25 17:39+0100\n"
+"POT-Creation-Date: 2020-08-08 14:03+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -131,7 +131,7 @@ msgid "Add to desktop"
 msgstr ""
 
 #. 3.2 4.0
-msgid "Remove favorite"
+msgid "Remove from favorites"
 msgstr ""
 
 #. 3.2 4.0
@@ -142,22 +142,26 @@ msgstr ""
 msgid "Uninstall"
 msgstr ""
 
-#. 4.0
+#. 4.0 4.0 4.0
 msgid "Please wait..."
 msgstr ""
 
-#. metadata.json->name
+#. 4.0
+msgid "Search google for"
+msgstr ""
+
+#. metadata.json
 #. 3.2
 msgid "Cinnamenu"
 msgstr ""
 
-#. metadata.json->description
+#. metadata.json
 msgid ""
 "A flexible menu providing formatting options, web bookmarks, search provider"
 " support and fuzzy searching."
 msgstr ""
 
-#. metadata.json->comments
+#. metadata.json
 msgid ""
 "Made possible thanks to the efforts of contributors to the Cinnamon menu, "
 "Gnomenu, and the contributors to projects they derived from."
@@ -491,4 +495,14 @@ msgstr ""
 
 #. 4.0
 msgid "Always open the menu with favorite apps category selected"
+msgstr ""
+
+#. 4.0
+#. 4.0
+msgid "Session buttons icon size"
+msgstr ""
+
+#. 4.0
+#. 4.0
+msgid "Use session buttons box style"
 msgstr ""
