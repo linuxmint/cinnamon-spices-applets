@@ -11,7 +11,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-07-31 20:39+0200\n"
 "PO-Revision-Date: 2020-08-08 10:19+0200\n"
-"Last-Translator: Jurien (French77) <Jurien@protonmail.com>\n"
+"Last-Translator: Pjotr <pjotrvertaalt@gmail.com>\n"
 "Language-Team: Dutch\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
@@ -792,7 +792,7 @@ msgstr ""
 
 #: 3.0/yahoo.js:181 3.8/yahoo.js:133
 msgid "Missing package"
-msgstr "Ontbrekende pakketten"
+msgstr "Ontbrekend pakket"
 
 #: 3.0/yahoo.js:181 3.0/yahoo.js:183 3.8/yahoo.js:133 3.8/yahoo.js:135
 msgid "Please install '"
@@ -800,7 +800,7 @@ msgstr "Installeer a.u.b. '"
 
 #: 3.0/yahoo.js:181 3.0/yahoo.js:183 3.8/yahoo.js:133 3.8/yahoo.js:135
 msgid "', then refresh manually."
-msgstr "', dan handmatig verversen."
+msgstr "', ververs daarna handmatig."
 
 #: 3.0/yahoo.js:186 3.8/yahoo.js:138
 msgid "Could not connect to Yahoo API."
@@ -811,8 +811,8 @@ msgid ""
 "Unknown error happened while obtaining weather, see Looking Glass logs for "
 "more information"
 msgstr ""
-"Onbekende fout gebeurde tijdens het verkrijgen van het weer, zie Looking "
-"Glass logs voor meer informatie."
+"Onbekende fout trad op tijdens het verkrijgen van het weer, zie Looking "
+"Glass-logboeken voor meer informatie."
 
 #: 3.0/yahoo.js:441 3.0/us_weather.js:576 3.8/yahoo.js:392
 #: 3.8/us_weather.js:479
@@ -1144,7 +1144,7 @@ msgstr "API retourneerde statuscode tussen 400 en 500"
 #: 3.8/applet.js:1726 3.8/applet.js:1730 3.8/applet.js:1737 3.8/applet.js:1741
 #: 3.8/applet.js:1745 3.8/applet.js:1749 3.8/applet.js:1759 3.8/applet.js:1785
 msgid "Location Store"
-msgstr "Locatie Opslag"
+msgstr "Locatie-opslag"
 
 #: 3.0/applet.js:406 3.8/applet.js:311
 msgid "You can't save a location obtained automatically, sorry"
@@ -1218,7 +1218,7 @@ msgstr "Waarschuwing"
 #: 3.0/applet.js:1909 3.8/applet.js:1722
 msgid "You can only save correct locations when the applet is not refreshing"
 msgstr ""
-"U kunt alleen correcte locaties opslaan wanneer de hulptoepassing niet word "
+"U kunt alleen correcte locaties opslaan wanneer het werkbalkhulpje niet wordt "
 "ververst "
 
 #: 3.0/applet.js:1913 3.8/applet.js:1726
@@ -1244,8 +1244,7 @@ msgstr "Locatie opgeslagen in de bibliotheek"
 
 #: 3.0/applet.js:1937 3.8/applet.js:1741
 msgid "You can't remove a location while the applet is refreshing"
-msgstr ""
-"U kunt geen locatie verwijderen terwijl de hulptoepassing zich ververst"
+msgstr "U kunt geen locatie verwijderen terwijl het werkbalkhulpje wordt ververst"
 
 #: 3.0/applet.js:1941 3.8/applet.js:1745
 msgid "You can't remove an incorrect location"
@@ -1253,7 +1252,7 @@ msgstr "U kunt een onjuiste locatie niet verwijderen"
 
 #: 3.0/applet.js:1945 3.8/applet.js:1749
 msgid "Location is not in storage, can't delete"
-msgstr "Locatie is niet in opslag, kan het niet verwijderen."
+msgstr "Locatie is niet in opslag, kan haar niet verwijderen."
 
 #: 3.0/applet.js:1955 3.8/applet.js:1759
 msgid "Location is deleted from library"
@@ -1264,8 +1263,8 @@ msgid ""
 "Failed to load in data from location storage, please see the logs for more "
 "information"
 msgstr ""
-"Opslaggegevens van de locatie niet kunnen laden, a.u.b raadpleeg de "
-"logboeken voor meer informatie"
+"Kon gegevens van locatie-opslag niet laden, raadpleeg a.u.b. de logboeken "
+"voor meer informatie"
 
 #: 3.0/climacell.js:228 3.8/climacell.js:167
 msgid ""
@@ -1411,8 +1410,8 @@ msgid ""
 "Acceptable inputs: City,CountryCode or Zipcode,CountryCode or Latitude,"
 "Longitude"
 msgstr ""
-"Toegestane invoer: Stad,Landcode (bv. Oss,NL) of Postcode,Landcode of "
-"Breedtegraad,Lengtegraad"
+"Toegestane invoer: Stad,Landcode (bijv. Oss,NL) of Postcode,Landcode "
+"of Breedtegraad,Lengtegraad"
 
 #. settings-schema.json->getLocation->description
 msgid "Setup Location"
@@ -1832,7 +1831,7 @@ msgstr "Gebruik aangepaste pictogrammen in het opduikmenu"
 
 #. 3.8->settings-schema.json->units-section->title
 msgid "Units, Icons and Keys"
-msgstr "Eenheden, Pictogrammen en Sleutels"
+msgstr "Eenheden, pictogrammen en sleutels"
 
 #. 3.8->settings-schema.json->info-section->title
 msgid "Help"
@@ -1840,15 +1839,15 @@ msgstr "Hulp"
 
 #. 3.8->settings-schema.json->submit-issue->title
 msgid "Report an issue"
-msgstr "Een issue melden"
+msgstr "Een fout melden"
 
 #. 3.8->settings-schema.json->provider-info->title
 msgid "How to choose a weather provider"
-msgstr "Hoe kiest u een weeraanbieder"
+msgstr "Zo kiest u een weeraanbieder"
 
 #. 3.8->settings-schema.json->location-info->title
 msgid "Allowed location formats"
-msgstr "Toegestane locatieformaten"
+msgstr "Toegestane opmaaksoorten voor locatie"
 
 #. 3.8->settings-schema.json->more-info->title
 msgid "View additional information"
@@ -1874,16 +1873,16 @@ msgstr ""
 
 #. 3.8->settings-schema.json->saveLocation->description
 msgid "Save current location to storage"
-msgstr "Huidige locatie opslaan naar opslag"
+msgstr "Huidige locatie opslaan in opslag"
 
 #. 3.8->settings-schema.json->saveLocation->tooltip
 msgid ""
 "Saves location information to file, so you can switch between them with "
 "buttons in the applet (what will appear if you have more than one)."
 msgstr ""
-"Slaat de locatie-informatie op in het bestand, zodat u kunt wisselen tussen "
-"deze gegevens met knoppen in de hulptoepassing (wat verschijnt er als u er "
-"meer dan één hebt)."
+"Slaat de locatie-informatie op in een bestand, zodat u kunt schakelen "
+"tussen deze locaties met knoppen in het werkbalkhulpje (die verschijnen "
+"als u er meer dan één hebt)."
 
 #. 3.8->settings-schema.json->deleteLocation->description
 msgid "Delete current location from storage"
@@ -1895,17 +1894,17 @@ msgstr "Verwijdert locatie-informatie uit het opslagbestand."
 
 #. 3.8->settings-schema.json->getLocation->description
 msgid "Weather Applet at Cinnamon Spices Website"
-msgstr "Weer hulptoepassing op de website van Cinnamon Spices"
+msgstr "Weer-werkbalkhulpje op de website van Cinnamon Spices"
 
 #. 3.8->settings-schema.json->verticalOrientation->tooltip
 msgid "Displaying forecasts from top to bottom instead from left to right."
-msgstr "Voorspellingen tonen van boven naar beneden i.p.v links naar rechts."
+msgstr "Voorspellingen tonen van boven naar beneden en niet van links naar rechts."
 
 #. 3.8->settings-schema.json->useSymbolicIcons->tooltip
 msgid "Does not apply to custom iconset, that is symbolic by default"
 msgstr ""
-"Is niet van toepassing op aangepaste pictogrammen, het is standaard "
-"symbolisch"
+"Is niet van toepassing op aangepaste pictogrammen, die zijn "
+"standaard symbolisch"
 
 #. 3.8->settings-schema.json->useSymbolicIcons->description
 msgid "Use symbolic icons throughout the applet"
@@ -1919,7 +1918,7 @@ msgid ""
 msgstr ""
 "Ga voor meer informatie naar de website van Spices door op de onderstaande "
 "knop te klikken. U kunt ook commentaar geven en vragen stellen aan de "
-"community op deze pagina door in te loggen met uw Github account."
+"gemeenschap op deze pagina, door in te loggen met uw Github-account."
 
 #. 3.8->settings-schema.json->submitIssue->description
 msgid "Submit an Issue"
@@ -1947,11 +1946,11 @@ msgid ""
 "everyone to know that the issue is about the weather applet (the form is for "
 "all Cinnamon applets)."
 msgstr ""
-"Als u een probleem met deze hulptoepassing vindt, maak dan een melding door "
+"Als u een fout in dit werkbalkhulpje vindt, doe dan een melding door "
 "op de onderstaande knop te klikken en log in met uw Github-account. Vergeet "
-"niet om weather@mockturtl te schrijven in het bovenste titelveld om het voor "
-"iedereen makkelijker te maken om te weten dat het probleem over de weer-"
-"applet gaat (het formulier is voor alle Cinnamon-applets)."
+"niet om weather@mockturtl te schrijven in het bovenste titelveld, zodat 
+"duidelijk is dat de fout het weer-werkbalkhulpje betreft (het formulier is "
+"voor alle Cinnamon-werkbalkhulpjes)."
 
 #. 3.8->settings-schema.json->provider-explanation->description
 msgid ""
@@ -1962,12 +1961,12 @@ msgid ""
 "service. The options are described in detail on the Cinnamon Spices Website, "
 "what you can access with the button further down."
 msgstr ""
-"U kunt gebruik maken van verschillende weersverwachtingsaanbieders die u "
-"kiest onder het eerste Weer tabblad in dit Configuratiepaneel. Sommige "
-"providers hebben een API-sleutel nodig om te kunnen werken, sommige hebben "
-"regionale limieten, verschillen in voorspellingslengte en ze hebben allemaal "
-"een functionele internetverbinding met de gekozen dienst nodig. De opties "
-"worden in detail beschreven op de Cinnamon Spices Website, waartoe u toegang "
+"U kunt gebruik maken van verschillende weersverwachtingaanbieders die u "
+"kiest onder het eerste Weer-tabblad in dit configuratiepaneel. Sommige "
+"aanbieders hebben een API-sleutel nodig om te kunnen werken, sommige hebben "
+"regionale limieten, ze verschillen in voorspellingslengte en ze hebben alle "
+"een werkende internetverbinding met de gekozen dienst nodig. De opties "
+"worden in detail beschreven op de Cinnamon Spices-website, waartoe u toegang "
 "heeft met de knop verderop."
 
 #. 3.8->settings-schema.json->loc-info->description
@@ -1979,13 +1978,13 @@ msgid ""
 "format. After 3 seconds without typing the address you entered is replaced "
 "automatically for validating your choice."
 msgstr ""
-"Uw locatie werkt in de meeste gevallen automatisch, maar u kunt deze "
+"Uw locatie werkt in de meeste gevallen automatisch, maar u kunt deze ook "
 "handmatig invoeren met de coördinaten 'Breedtegraad,Lengtegraad' (bijv. "
-"51,5085,-0,1257) of gebruik maken van 'Stad,Landcode' (bijv. Londen,UK) of "
-"proberen {Huisnummer} {Street} in te voeren. {Stad/Stad} {Postcode} {Land}. "
-"Het zoekalgoritme is zeer flexibel met het formaat. Na 3 seconden zonder het "
-"adres in te typen wordt het automatisch vervangen voor het valideren van uw "
-"keuze."
+"51,5085,-0,1257) of gebruik 'Stad,Landcode' (bijv. Oss,NL) of probeer "
+"{Huisnummer} {Straat} {Stad/Plaats} {Postcode} {Land} in te voeren. "
+"Het zoekalgoritme is zeer flexibel met de opmaak. Nadat u 3 seconden niets " 
+"heeft ingetikt zal het door u ingegeven adres automatisch worden vervangen "
+"om uw keuze te valideren."
 
 #~ msgid "Contact"
 #~ msgstr "Contact"
