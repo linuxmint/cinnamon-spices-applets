@@ -1,3 +1,4 @@
+
 # SpicesUpdate@claudiux Applet POT File.
 # Copyright (C) 2019 Claudiux <claude.clerc@gmail.com>
 # This file is distributed under the same license as the Cinnamon package.
@@ -8,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Spices update 6.0.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-07-31 03:53+0200\n"
-"PO-Revision-Date: 2020-08-08 11:15+0200\n"
+"PO-Revision-Date: 2020-08-09 07:35+0200\n"
 "Last-Translator: Jurien (French77) <Jurien@protonmail.com>\n"
 "Language-Team: Jurien\n"
 "Language: nl_NL\n"
@@ -82,7 +83,7 @@ msgstr "Werk ze nu allemaal bij!"
 
 #: 4.2/applet.js:630 4.6/applet.js:615
 msgid "Forget It"
-msgstr "Vergeet het."
+msgstr "Vergeet het"
 
 #: 4.2/applet.js:630 4.6/applet.js:615
 msgid "Forget Them All"
@@ -538,7 +539,7 @@ msgstr "Werk deze hulptoepassingen bij:"
 #. 3.8->settings-schema.json->unprotected_applets->columns->title
 #. 4.6->settings-schema.json->unprotected_applets->columns->title
 msgid "Your Applets"
-msgstr "Jouw Hulptoepassingen"
+msgstr "U Hulptoepassingen"
 
 #. 4.2->settings-schema.json->unprotected_applets->columns->title
 #. 4.2->settings-schema.json->unprotected_desklets->columns->title
@@ -618,7 +619,7 @@ msgstr "Werk deze minitoepassingen bij:"
 #. 3.8->settings-schema.json->unprotected_desklets->columns->title
 #. 4.6->settings-schema.json->unprotected_desklets->columns->title
 msgid "Your Desklets"
-msgstr "Jouw Minitoepassingen"
+msgstr "U Minitoepassingen"
 
 #. 4.2->settings-schema.json->btn_cs_desklets->description
 #. 3.8->settings-schema.json->btn_cs_desklets->description
@@ -665,7 +666,7 @@ msgstr "Werk deze extensies bij:"
 #. 3.8->settings-schema.json->unprotected_extensions->columns->title
 #. 4.6->settings-schema.json->unprotected_extensions->columns->title
 msgid "Your Extensions"
-msgstr "Jouw Extensies"
+msgstr "U Extensies"
 
 #. 4.2->settings-schema.json->btn_cs_extensions->description
 #. 3.8->settings-schema.json->btn_cs_extensions->description
@@ -679,7 +680,7 @@ msgstr "Open Cinnamon-instellingen om alle extensies te beheren"
 #. 2.8->settings-schema.json->check_themes->description
 #. 4.6->settings-schema.json->check_themes->description
 msgid "Check regularly whether your themes are up to date"
-msgstr "Laat regelmatig controleren of thema's up-to-date zijn"
+msgstr "Laat regelmatig controleren of thema's bijgewerkt zijn"
 
 #. 4.2->settings-schema.json->check_themes->tooltip
 #. 3.8->settings-schema.json->check_themes->tooltip
@@ -713,7 +714,7 @@ msgstr "Werk deze thema's bij:"
 #. 3.8->settings-schema.json->unprotected_themes->columns->title
 #. 4.6->settings-schema.json->unprotected_themes->columns->title
 msgid "Your Themes"
-msgstr "Jouw Thema's"
+msgstr "U Thema's"
 
 #. 4.2->settings-schema.json->btn_cs_themes->description
 #. 3.8->settings-schema.json->btn_cs_themes->description
@@ -821,7 +822,7 @@ msgid ""
 "This information will be displayed in English."
 msgstr ""
 "Door dit selectievakje aan te vinken, weet u wanneer een update beschikbaar "
-"is en krijgt u een beschrijving van nieuwe Spice.\n"
+"is en krijgt u een beschrijving van iedere nieuwe Spice.\n"
 "Deze informatie wordt in het Engels weergegeven."
 
 #. 4.2->settings-schema.json->general_type_notif->options
@@ -871,7 +872,7 @@ msgstr ""
 "systeeminstellingen voor de betreffende Spices, die zijn gesorteerd op datum "
 "(meest recente eerst). U kunt dus de gewenste Spices updaten.\n"
 "\t\tDe meest rechtse knop ververst de cache en meldingen, indien nodig.\n"
-"\t\tOptioneel kunt u met een centrale knop nieuwe specerijen vergeten of de "
+"\t\tOptioneel kunt u met een centrale knop nieuwe spices vergeten of de "
 "geïnstalleerde spices bijwerken, afhankelijk van het geval."
 
 #. 4.2->settings-schema.json->general_show_updateall_button->description
@@ -894,9 +895,9 @@ msgstr ""
 "meldingen.\n"
 "Door op deze knop te drukken:\n"
 " 1. Het tabblad 'Downloads' van de systeeminstellingen met betrekking tot "
-"dit type kruiden verschijnt.\n"
-" 2. 2. De cache wordt bijgewerkt.\n"
-" 3. 3. Uw Kruiden worden bijgewerkt.\n"
+"dit type spices verschijnt.\n"
+" 2. 2. De cache is bijgewerkt.\n"
+" 3. 3. Uw spices zijn bijgewerkt.\n"
 " 4. 4. Wanneer alle updates zijn gemaakt, sluit u het venster."
 
 #. 4.2->settings-schema.json->general_test_notif->description
@@ -1007,7 +1008,6 @@ msgstr ""
 "menu:\n"
 "\tOpen het tabblad Downloaden in Systeeminstellingen voor de betreffende "
 "soort Spices, met de Spices gesorteerd op datum."
-
 
 
 
