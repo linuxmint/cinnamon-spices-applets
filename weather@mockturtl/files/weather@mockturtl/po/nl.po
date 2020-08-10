@@ -195,9 +195,7 @@ msgstr ""
 
 #: 3.0/openWeatherMap.js:245 3.8/openWeatherMap.js:200
 msgid "If this problem persists, please contact the Author of this applet"
-msgstr ""
-"Als dit probleem aanhoudt, neem dan a.u.b. contact op met de maker van dit "
-"werkbalkhulpje"
+msgstr "Als dit probleem aanhoudt, neem dan a.u.b. contact op met de maker van dit werkbalkhulpje"
 
 #: 3.0/openWeatherMap.js:249 3.8/openWeatherMap.js:204
 msgid "Unknown Error, please see the logs in Looking Glass"
@@ -1198,14 +1196,11 @@ msgstr "mm"
 
 #: 3.0/applet.js:1560 3.8/applet.js:1414
 msgid "Make sure you entered a location or use Automatic location instead"
-msgstr ""
-"Zorg ervoor dat u een locatie hebt ingevoerd of gebruik in plaats daarvan "
-"Automatische locatie"
+msgstr "Zorg ervoor dat u een locatie hebt ingevoerd of gebruik in plaats daarvan Automatische locatie"
 
 #: 3.0/applet.js:1769 3.8/applet.js:1590
 msgid "Could not find location based on address, please check if it's right"
-msgstr ""
-"Kon geen locatie vinden op basis van adres, controleer a.u.b. of het juist is"
+msgstr "Kon geen locatie vinden op basis van adres, controleer a.u.b. of het juist is"
 
 #: 3.0/applet.js:1793 3.8/applet.js:1614
 msgid "Failed to call Geolocation API, see Looking Glass for errors."
@@ -1217,9 +1212,7 @@ msgstr "Waarschuwing"
 
 #: 3.0/applet.js:1909 3.8/applet.js:1722
 msgid "You can only save correct locations when the applet is not refreshing"
-msgstr ""
-"U kunt alleen correcte locaties opslaan wanneer het werkbalkhulpje niet wordt "
-"ververst "
+msgstr "U kunt alleen correcte locaties opslaan wanneer het werkbalkhulpje niet wordt ververst"
 
 #: 3.0/applet.js:1913 3.8/applet.js:1726
 msgid "You can't save an incorrect location"
@@ -1576,8 +1569,7 @@ msgstr "Toon huidige temperatuur in werkbalk"
 #. 3.0->settings-schema.json->showCommentInPanel->description
 #. 3.8->settings-schema.json->showCommentInPanel->description
 msgid "Show the weather condition (e.g., \"Windy\", \"Clear\") in the panel"
-msgstr ""
-"Toon de weersomstandigheden (bijv. 'Winderig', 'Helder') in de werkbalk"
+msgstr "Toon de weersomstandigheden (bijv. 'Winderig', 'Helder') in de werkbalk"
 
 #. settings-schema.json->locationLabelOverride->description
 #. 3.0->settings-schema.json->locationLabelOverride->description
@@ -1660,9 +1652,7 @@ msgstr "API-sleutel"
 #. 3.0->settings-schema.json->apiKey->tooltip
 #. 3.8->settings-schema.json->apiKey->tooltip
 msgid "Copy this from your account of the used Data service and paste it here."
-msgstr ""
-"Kopieer deze vanuit uw account bij de gebruikte gegevensdienst en plak hem "
-"hier."
+msgstr "Kopieer deze vanuit uw account bij de gebruikte gegevensdienst en plak hem hier."
 
 #. 3.0->settings-schema.json->manualLocation->description
 #. 3.8->settings-schema.json->manualLocation->description
@@ -1741,9 +1731,9 @@ msgid ""
 "Can be used if label does not fit on vertical panel, among other smart "
 "things."
 msgstr ""
-"Beschikbare waarden zijn: {c} is voorwaarde, {t} is temperatuur en {u} is "
-"eenheid.\n"
-"Kan o.a. gebruikt worden als het etiket niet op de verticale werkbalk past."
+"Beschikbare waarden zijn: {c} is voorwaarde, {t} is temperatuur en {u} is\n"
+"eenheid. Kan o.a. gebruikt worden als het etiket niet op de verticale "
+"werkbalk past."
 
 #. 3.0->settings-schema.json->useCustomAppletIcons->tooltip
 #. 3.0->settings-schema.json->useCustomMenuIcons->tooltip
@@ -1769,8 +1759,7 @@ msgstr "Laat de voorspelling verticaal zien"
 
 #. 3.0->settings-schema.json->verticalOrientation->tooltip
 msgid "Displaying forecasts from top to bottom instead from left to right"
-msgstr ""
-"Voorspellingen tonen van boven naar beneden en niet van links naar rechts"
+msgstr "Voorspellingen tonen van boven naar beneden en niet van links naar rechts"
 
 #. 3.0->settings-schema.json->forecastColumns->units
 #. 3.8->settings-schema.json->forecastColumns->units
@@ -1867,8 +1856,8 @@ msgid ""
 "address.\n"
 "Waits for 3 seconds after you stop typing then refreshes the weather."
 msgstr ""
-"Aanvaardbare invoer is Breedtegraad,Lengtegraad. Bijv.: 68.1932,17.1426 of "
-"een adres.\n"
+"Aanvaardbare invoer is Breedtegraad,Lengtegraad. Bijv.: 68.1932,17.1426 "
+"of een adres.\n"
 "Drie seconden nadat u bent opgehouden met typen wordt het weer ververst."
 
 #. 3.8->settings-schema.json->saveLocation->description
@@ -1880,9 +1869,8 @@ msgid ""
 "Saves location information to file, so you can switch between them with "
 "buttons in the applet (what will appear if you have more than one)."
 msgstr ""
-"Slaat de locatie-informatie op in een bestand, zodat u kunt schakelen "
-"tussen deze locaties met knoppen in het werkbalkhulpje (die verschijnen "
-"als u er meer dan één hebt)."
+"Slaat de locatie-informatie op, zodat u kunt schakelen tussen deze "
+"locaties met knoppen (die verschijnen als u er meer dan één hebt)."
 
 #. 3.8->settings-schema.json->deleteLocation->description
 msgid "Delete current location from storage"
@@ -1894,7 +1882,7 @@ msgstr "Verwijdert locatie-informatie uit het opslagbestand."
 
 #. 3.8->settings-schema.json->getLocation->description
 msgid "Weather Applet at Cinnamon Spices Website"
-msgstr "Weer-werkbalkhulpje op de website van Cinnamon Spices"
+msgstr "Weer-werkbalkhulpje op Cinnamon Spices Website"
 
 #. 3.8->settings-schema.json->verticalOrientation->tooltip
 msgid "Displaying forecasts from top to bottom instead from left to right."
@@ -1902,9 +1890,7 @@ msgstr "Voorspellingen tonen van boven naar beneden en niet van links naar recht
 
 #. 3.8->settings-schema.json->useSymbolicIcons->tooltip
 msgid "Does not apply to custom iconset, that is symbolic by default"
-msgstr ""
-"Is niet van toepassing op aangepaste pictogrammen, die zijn "
-"standaard symbolisch"
+msgstr "Is niet van toepassing op aangepaste pictogrammen, die zijn standaard symbolisch"
 
 #. 3.8->settings-schema.json->useSymbolicIcons->description
 msgid "Use symbolic icons throughout the applet"
@@ -1930,9 +1916,9 @@ msgid ""
 "GitHub account.\n"
 " Please make sure that the issue is not already submitted."
 msgstr ""
-"Opent webpagina waar u een nieuwe foutmelding voor dit werkbalkhulpje kunt "
-"indienen (u moet hiervoor een GitHub-account hebben).\n"
-" Kijk a.u.b. eerst na of het probleem niet al eerder is ingediend."
+"Opent webpagina waar u een nieuwe foutmelding voor dit werkbalkhulpje "
+"kunt indienen (u moet hiervoor een GitHub-account hebben).\n"
+"Kijk a.u.b. eerst na of het probleem niet al eerder is ingediend."
 
 #. 3.8->settings-schema.json->maintainer->description
 msgid "Current maintainer: Gr3q"
@@ -1946,9 +1932,9 @@ msgid ""
 "everyone to know that the issue is about the weather applet (the form is for "
 "all Cinnamon applets)."
 msgstr ""
-"Als u een fout in dit werkbalkhulpje vindt, doe dan een melding door "
+"Als u een fout in dit werkbalkhulpje vindt, doe dan a.u.b. een melding door "
 "op de onderstaande knop te klikken en log in met uw Github-account. Vergeet "
-"niet om weather@mockturtl te schrijven in het bovenste titelveld, zodat 
+"niet om weather@mockturtl te schrijven in het bovenste titelveld, zodat "
 "duidelijk is dat de fout het weer-werkbalkhulpje betreft (het formulier is "
 "voor alle Cinnamon-werkbalkhulpjes)."
 
@@ -2246,5 +2232,3 @@ msgstr ""
 #~ "zou uw dagelijkse quotum kunnen overschrijden. Heeft u een sleutel nodig, "
 #~ "klik dan op 'API-sleutel en locatie instellen' voor de te nemen stappen "
 #~ "om deze te verkrijgen."
-
-
