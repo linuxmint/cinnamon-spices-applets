@@ -45,6 +45,7 @@ const {
     _,
     EXP1, EXP2, EXP3,
     DEBUG,
+    RELOAD,
     capitalize,
     log,
     logError
@@ -1730,7 +1731,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
         }
 
         // button Reload this applet
-        if (DEBUG()) {
+        if (DEBUG() || RELOAD()) {
             let _reload_button = new PopupMenu.PopupIconMenuItem("Reload this applet", "edit-redo", St.IconType.SYMBOLIC);
             _reload_button.connect("activate", (event) => this._on_reload_this_applet_pressed())
             this.menu.addMenuItem(_reload_button);
@@ -2145,6 +2146,11 @@ class SpicesUpdate extends Applet.TextIconApplet {
             }
         }
         // End of on_applet_removed_from_panel
+    }
+
+    on_applet_reloaded(deleteConfig) {
+        this.destroy_all_notifications();
+        // End of on_applet_reloaded
     }
 
     _set_SU_checks() {
