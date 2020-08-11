@@ -27,7 +27,7 @@ const {ApplicationType, readJSONAsync, tryFn} = require('./utils');
 
 let Gda = null;
 tryFn(function() {
-  Gda = imports.gi.Gda;
+    Gda = imports.gi.Gda;
 });
 
 const readFirefoxBookmarks = function(appInfo, profileDir) {

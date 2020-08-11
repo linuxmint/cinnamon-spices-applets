@@ -55,9 +55,9 @@ const readFileAsync = function(file, opts = {utf8: true}) {
 };
 
 const readJSONAsync = function(file) {
-  return readFileAsync(file).then(function(json) {
-    return JSON.parse(json);
-  });
+    return readFileAsync(file).then(function(json) {
+        return JSON.parse(json);
+    });
 };
 
 //===========================================================
@@ -122,22 +122,26 @@ class ShowTooltip {
 const {latinise} = imports.misc.util;
 
 const searchStr = function (q, str) {
-    const highlightMatch = true;
+    const HIGHTLIGHT_MATCH = true;
     if ( !(typeof q === 'string' && q && typeof str === 'string' && str) ) {
         return { score: 0, result: str };
     }
-
+    let debug_markup ='';
+    let foundPosition,foundLength;
     const str2 = latinise(str.toLowerCase());
-    const q2 = q; //latinise(q.toLowerCase()); //already done in doSearch()
+    const qletters = q.replace(/[^a-zA-Z0-9_ ]/g, ''); //latinise(q.toLowerCase()); //already done in doSearch()
     let score = 0;
-    if ((new RegExp('\\b'+q2)).test(str2)) { //match substring from beginning of words
+    if (new RegExp('\\b'+qletters).test(str2)) { //match substring from beginning of words
         score = 1.2;
-    } else if (str2.indexOf(q2) !== -1) { //else match substring
+        foundPosition = str2.indexOf(qletters);
+        foundLength = qletters.length;
+    } else if (str2.indexOf(q) !== -1) { //else match substring
         score = 1.1;
-    } else { //else fuzzy match and return
-        const qletters = q2; //q2.replace(/\W/g, ''); //remove anything that isn't a letter from query
+        foundPosition = str2.indexOf(q);
+        foundLength = q.length;
+    } else { //else fuzzy match
         //find longest substring of str2 made up of letters from qletters
-        const found = str2.match(new RegExp('[' + q2 + ']+','g'));
+        const found = str2.match(new RegExp('[' + qletters + ']+','g'));
         let length = 0;
         let longest;
         if (found) {
@@ -148,7 +152,6 @@ const searchStr = function (q, str) {
                 }
             }
         }
-
         if (longest) {
             //get a score for similarity by counting 2 letter pairs (bigrams) that match
             let bigrams_score;
@@ -156,41 +159,32 @@ const searchStr = function (q, str) {
                 const max_bigrams = qletters.length -1;
                 let found_bigrams = 0;
                 for (let qi = 0; qi < max_bigrams; qi++ ) {
-                    if (longest.indexOf(qletters[qi] + qletters[qi+1]) >= 0) {
+                    if (longest.indexOf(qletters[qi] + qletters[qi + 1]) >= 0) {
                         found_bigrams++;
                     }
                 }
-                found_bigrams++; //free boost.
                 bigrams_score = Math.min(found_bigrams / max_bigrams, 1);
             } else {
                 bigrams_score = 1;
             }
 
-            let markup = '';
-            if (highlightMatch) { //highlight match
-                const foundposition = str2.indexOf(longest);
-                markup = str.slice(0, foundposition) + '<b>' +
-                            str.slice(foundposition, foundposition + longest.length) + '</b>' +
-                                                str.slice(foundposition + longest.length, str.length);
-            } else {
-                markup = str;
-            }
-            let score = Math.min(longest.length / q2.length, 1.0) * bigrams_score;
+            foundPosition = str2.indexOf(longest);
+            foundLength = longest.length;
+            score = Math.min(longest.length / qletters.length, 1.0) * bigrams_score;
+            /*if (score>=0.4){
+                global.log(qletters+">"+longest+" "+score+":"+bigrams_score);
+            }*/
             if (SEARCH_DEBUG) {
-                markup += ':'+score+':'+bigrams_score;
+                debug_markup = ':'+score+':'+bigrams_score;
             }
-            return {score: score, result: markup};
-        } else {
-            return {score: 0, result: ''};
         }
     }
-    //return result of substring match
-    if (highlightMatch) {
-        const foundposition = str2.indexOf(q2);
-        const markup = str.slice(0, foundposition) + '<b>' +
-                                    str.slice(foundposition, foundposition + q.length) + '</b>' +
-                                                    str.slice(foundposition + q.length, str.length);
-        return {score: score, result: markup};
+    //return result of match
+    if (HIGHTLIGHT_MATCH && score > 0) {
+        const markup = str.slice(0, foundPosition) + '<b>' +
+                                    str.slice(foundPosition, foundPosition + foundLength) + '</b>' +
+                                                    str.slice(foundPosition + foundLength, str.length);
+        return {score: score, result: markup + debug_markup};
     } else {
         return {score: score, result: str};
     }
