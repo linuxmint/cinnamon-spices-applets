@@ -1,3 +1,7 @@
+### v6.0.2~20200811
+  * Remove all notifications when reloading this applet.
+  * Menu shows the "reload this applet" option when a RELOAD file exists at the root of this applet.
+
 ### v6.0.1~20200806
 
 "Weight" reduction of this applet: the `Symbola` font is no longer included in its package; it was only used for Arch and the `install_symbola_on_Arch.sh` script was modified to download it if needed.
