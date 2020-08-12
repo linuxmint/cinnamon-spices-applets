@@ -10,7 +10,7 @@ msgstr ""
 "08:38:14)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-07-31 20:39+0200\n"
-"PO-Revision-Date: 2020-08-08 10:19+0200\n"
+"PO-Revision-Date: 2020-08-11 22:11+0200\n"
 "Last-Translator: Pjotr <pjotrvertaalt@gmail.com>\n"
 "Language-Team: Dutch\n"
 "Language: nl\n"
@@ -195,7 +195,9 @@ msgstr ""
 
 #: 3.0/openWeatherMap.js:245 3.8/openWeatherMap.js:200
 msgid "If this problem persists, please contact the Author of this applet"
-msgstr "Als dit probleem aanhoudt, neem dan a.u.b. contact op met de maker van dit werkbalkhulpje"
+msgstr ""
+"Als dit probleem aanhoudt, neem dan a.u.b. contact op met de maker van dit "
+"werkbalkhulpje"
 
 #: 3.0/openWeatherMap.js:249 3.8/openWeatherMap.js:204
 msgid "Unknown Error, please see the logs in Looking Glass"
@@ -1196,11 +1198,14 @@ msgstr "mm"
 
 #: 3.0/applet.js:1560 3.8/applet.js:1414
 msgid "Make sure you entered a location or use Automatic location instead"
-msgstr "Zorg ervoor dat u een locatie hebt ingevoerd of gebruik in plaats daarvan Automatische locatie"
+msgstr ""
+"Zorg ervoor dat u een locatie hebt ingevoerd of gebruik in plaats daarvan "
+"Automatische locatie"
 
 #: 3.0/applet.js:1769 3.8/applet.js:1590
 msgid "Could not find location based on address, please check if it's right"
-msgstr "Kon geen locatie vinden op basis van adres, controleer a.u.b. of het juist is"
+msgstr ""
+"Kon geen locatie vinden op basis van adres, controleer a.u.b. of het juist is"
 
 #: 3.0/applet.js:1793 3.8/applet.js:1614
 msgid "Failed to call Geolocation API, see Looking Glass for errors."
@@ -1212,7 +1217,9 @@ msgstr "Waarschuwing"
 
 #: 3.0/applet.js:1909 3.8/applet.js:1722
 msgid "You can only save correct locations when the applet is not refreshing"
-msgstr "U kunt alleen correcte locaties opslaan wanneer het werkbalkhulpje niet wordt ververst"
+msgstr ""
+"U kunt alleen correcte locaties opslaan wanneer het werkbalkhulpje niet "
+"wordt ververst"
 
 #: 3.0/applet.js:1913 3.8/applet.js:1726
 msgid "You can't save an incorrect location"
@@ -1237,7 +1244,8 @@ msgstr "Locatie opgeslagen in de bibliotheek"
 
 #: 3.0/applet.js:1937 3.8/applet.js:1741
 msgid "You can't remove a location while the applet is refreshing"
-msgstr "U kunt geen locatie verwijderen terwijl het werkbalkhulpje wordt ververst"
+msgstr ""
+"U kunt geen locatie verwijderen terwijl het werkbalkhulpje wordt ververst"
 
 #: 3.0/applet.js:1941 3.8/applet.js:1745
 msgid "You can't remove an incorrect location"
@@ -1403,8 +1411,8 @@ msgid ""
 "Acceptable inputs: City,CountryCode or Zipcode,CountryCode or Latitude,"
 "Longitude"
 msgstr ""
-"Toegestane invoer: Stad,Landcode (bijv. Oss,NL) of Postcode,Landcode "
-"of Breedtegraad,Lengtegraad"
+"Toegestane invoer: Stad,Landcode (bijv. Oss,NL) of Postcode,Landcode of "
+"Breedtegraad,Lengtegraad"
 
 #. settings-schema.json->getLocation->description
 msgid "Setup Location"
@@ -1569,7 +1577,8 @@ msgstr "Toon huidige temperatuur in werkbalk"
 #. 3.0->settings-schema.json->showCommentInPanel->description
 #. 3.8->settings-schema.json->showCommentInPanel->description
 msgid "Show the weather condition (e.g., \"Windy\", \"Clear\") in the panel"
-msgstr "Toon de weersomstandigheden (bijv. 'Winderig', 'Helder') in de werkbalk"
+msgstr ""
+"Toon de weersomstandigheden (bijv. 'Winderig', 'Helder') in de werkbalk"
 
 #. settings-schema.json->locationLabelOverride->description
 #. 3.0->settings-schema.json->locationLabelOverride->description
@@ -1652,7 +1661,9 @@ msgstr "API-sleutel"
 #. 3.0->settings-schema.json->apiKey->tooltip
 #. 3.8->settings-schema.json->apiKey->tooltip
 msgid "Copy this from your account of the used Data service and paste it here."
-msgstr "Kopieer deze vanuit uw account bij de gebruikte gegevensdienst en plak hem hier."
+msgstr ""
+"Kopieer deze vanuit uw account bij de gebruikte gegevensdienst en plak hem "
+"hier."
 
 #. 3.0->settings-schema.json->manualLocation->description
 #. 3.8->settings-schema.json->manualLocation->description
@@ -1759,7 +1770,8 @@ msgstr "Laat de voorspelling verticaal zien"
 
 #. 3.0->settings-schema.json->verticalOrientation->tooltip
 msgid "Displaying forecasts from top to bottom instead from left to right"
-msgstr "Voorspellingen tonen van boven naar beneden en niet van links naar rechts"
+msgstr ""
+"Voorspellingen tonen van boven naar beneden en niet van links naar rechts"
 
 #. 3.0->settings-schema.json->forecastColumns->units
 #. 3.8->settings-schema.json->forecastColumns->units
@@ -1856,8 +1868,8 @@ msgid ""
 "address.\n"
 "Waits for 3 seconds after you stop typing then refreshes the weather."
 msgstr ""
-"Aanvaardbare invoer is Breedtegraad,Lengtegraad. Bijv.: 68.1932,17.1426 "
-"of een adres.\n"
+"Aanvaardbare invoer is Breedtegraad,Lengtegraad. Bijv.: 68.1932,17.1426 of "
+"een adres.\n"
 "Drie seconden nadat u bent opgehouden met typen wordt het weer ververst."
 
 #. 3.8->settings-schema.json->saveLocation->description
@@ -1869,8 +1881,8 @@ msgid ""
 "Saves location information to file, so you can switch between them with "
 "buttons in the applet (what will appear if you have more than one)."
 msgstr ""
-"Slaat de locatie-informatie op, zodat u kunt schakelen tussen deze "
-"locaties met knoppen (die verschijnen als u er meer dan één hebt)."
+"Slaat de locatie-informatie op, zodat u kunt schakelen tussen deze locaties "
+"met knoppen (die verschijnen als u er meer dan één hebt)."
 
 #. 3.8->settings-schema.json->deleteLocation->description
 msgid "Delete current location from storage"
@@ -1886,11 +1898,14 @@ msgstr "Weer-werkbalkhulpje op Cinnamon Spices Website"
 
 #. 3.8->settings-schema.json->verticalOrientation->tooltip
 msgid "Displaying forecasts from top to bottom instead from left to right."
-msgstr "Voorspellingen tonen van boven naar beneden en niet van links naar rechts."
+msgstr ""
+"Voorspellingen tonen van boven naar beneden en niet van links naar rechts."
 
 #. 3.8->settings-schema.json->useSymbolicIcons->tooltip
 msgid "Does not apply to custom iconset, that is symbolic by default"
-msgstr "Is niet van toepassing op aangepaste pictogrammen, die zijn standaard symbolisch"
+msgstr ""
+"Is niet van toepassing op aangepaste pictogrammen, die zijn standaard "
+"symbolisch"
 
 #. 3.8->settings-schema.json->useSymbolicIcons->description
 msgid "Use symbolic icons throughout the applet"
@@ -1916,8 +1931,8 @@ msgid ""
 "GitHub account.\n"
 " Please make sure that the issue is not already submitted."
 msgstr ""
-"Opent webpagina waar u een nieuwe foutmelding voor dit werkbalkhulpje "
-"kunt indienen (u moet hiervoor een GitHub-account hebben).\n"
+"Opent webpagina waar u een nieuwe foutmelding voor dit werkbalkhulpje kunt "
+"indienen (u moet hiervoor een GitHub-account hebben).\n"
 "Kijk a.u.b. eerst na of het probleem niet al eerder is ingediend."
 
 #. 3.8->settings-schema.json->maintainer->description
@@ -1967,10 +1982,10 @@ msgstr ""
 "Uw locatie werkt in de meeste gevallen automatisch, maar u kunt deze ook "
 "handmatig invoeren met de coördinaten 'Breedtegraad,Lengtegraad' (bijv. "
 "51,5085,-0,1257) of gebruik 'Stad,Landcode' (bijv. Oss,NL) of probeer "
-"{Huisnummer} {Straat} {Stad/Plaats} {Postcode} {Land} in te voeren. "
-"Het zoekalgoritme is zeer flexibel met de opmaak. Nadat u 3 seconden niets " 
-"heeft ingetikt zal het door u ingegeven adres automatisch worden vervangen "
-"om uw keuze te valideren."
+"{Huisnummer} {Straat} {Stad/Plaats} {Postcode} {Land} in te voeren. Het "
+"zoekalgoritme is zeer flexibel met de opmaak. Nadat u 3 seconden niets heeft "
+"ingetikt zal het door u ingegeven adres automatisch worden vervangen om uw "
+"keuze te valideren."
 
 #~ msgid "Contact"
 #~ msgstr "Contact"
