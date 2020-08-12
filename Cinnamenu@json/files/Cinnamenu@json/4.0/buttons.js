@@ -258,11 +258,6 @@ class ApplicationContextMenuItem extends PopupBaseMenuItem {
         this.addActor(this.label);
         this.signals.connect(this.actor, 'enter-event', (...args) => this.handleEnter(...args));
         this.signals.connect(this.actor, 'leave-event', (...args) => this.handleLeave(...args));
-        // Override padding to help prevent label truncation, the menu container width is restricted to the column width,
-        // so unless we turn the context menu into a modal somehow (not likely since it will fight for input with the
-        // parent), this is the most practical solution for the grid.
-        //this.actor.set_style('padding-left: 6px !important; padding-right: 0px !important;');//' width: 215px !important;');
-        //this.setColumnWidths([8, 132]);//??
     }
 
     handleEnter() {
@@ -499,9 +494,11 @@ class AppListGridButton extends PopupBaseMenuItem {
 
         this.buttonBox = new BoxLayout({
             vertical: !this.state.isListView,
-            width: 290 * global.ui_scale,//240
             y_expand: false
         });
+        if (!this.state.isListView) {
+            this.buttonBox.width = 600;//ensure it centers in it's grid space
+        }
         this.buttonBox.add(this.iconContainer, {
             x_fill: false,
             y_fill: false,
@@ -587,15 +584,15 @@ class AppListGridButton extends PopupBaseMenuItem {
 
     formatLabel() {
         let name = this.buttonState.app.name.replace(/&/g, '&amp;');
-        let description = this.buttonState.app.description ? this.buttonState.app.description.replace(/&/g, '&amp;') : '';
+        let description = this.buttonState.app.description ?
+                                        this.buttonState.app.description.replace(/&/g, '&amp;') : '';
 
+        if (this.buttonState.app.newAppShouldHighlight) {
+            name = '<b>' + name + '</b>';
+        }
         let markup = '<span>' + name + '</span>';
         if (this.state.settings.descriptionPlacement === PlacementUNDER) {
             markup += '\n<span size="small">' + description + '</span>';
-        }
-
-        if (this.buttonState.app.shouldHighlight) {
-            markup = '<b>' + markup + '</b>';
         }
 
         const clutterText = this.label.get_clutter_text();
@@ -623,20 +620,22 @@ class AppListGridButton extends PopupBaseMenuItem {
 
         if (this.state.settings.descriptionPlacement === PlacementTOOLTIP) {
             const wordWrap = text => text.match( /.{1,80}(\s|$|-|=|\+)|\S+?(\s|$|-|=|\+)/g ).join('\n');
-            let tooltipMarkup = '<span>' + wordWrap(this.buttonState.app.nameWithSearchMarkup &&
-                                        SHOW_SEARCH_MARKUP_IN_TOOLTIP ? this.buttonState.app.nameWithSearchMarkup :
+            let tooltipMarkup = '<span>' + wordWrap((this.buttonState.app.nameWithSearchMarkup &&
+                                        SHOW_SEARCH_MARKUP_IN_TOOLTIP) ? this.buttonState.app.nameWithSearchMarkup :
                                                                             this.buttonState.app.name) + '</span>';
             if (this.buttonState.app.description) {
-                tooltipMarkup += '\n<span size="small">' + wordWrap(this.buttonState.app.descriptionWithSearchMarkup &&
-                                    SHOW_SEARCH_MARKUP_IN_TOOLTIP ? this.buttonState.app.descriptionWithSearchMarkup :
+                tooltipMarkup += '\n<span size="small">' + wordWrap((this.buttonState.app.descriptionWithSearchMarkup &&
+                                    SHOW_SEARCH_MARKUP_IN_TOOLTIP) ? this.buttonState.app.descriptionWithSearchMarkup :
                                                                         this.buttonState.app.description) + '</span>';
             }
             if (SEARCH_DEBUG) {
                 if (SHOW_SEARCH_MARKUP_IN_TOOLTIP && this.buttonState.app.keywordsWithSearchMarkup) {
-                    tooltipMarkup += '\n<span size="small">' + wordWrap(this.buttonState.app.keywordsWithSearchMarkup) + '</span>';
+                    tooltipMarkup += '\n<span size="small">' +
+                                                wordWrap(this.buttonState.app.keywordsWithSearchMarkup) + '</span>';
                 }
                 if (SHOW_SEARCH_MARKUP_IN_TOOLTIP && this.buttonState.app.idWithSearchMarkup) {
-                    tooltipMarkup += '\n<span size="small">' + wordWrap(this.buttonState.app.idWithSearchMarkup) + '</span>';
+                    tooltipMarkup += '\n<span size="small">' + wordWrap(this.buttonState.app.idWithSearchMarkup) +
+                                                                                                            '</span>';
                 }
             }
             tooltipMarkup = tooltipMarkup.replace(/&/g, '&amp;');
@@ -645,15 +644,8 @@ class AppListGridButton extends PopupBaseMenuItem {
             let {width, height} = this.actor;
             let center_x = false; //should tooltip x pos. be centered on x
             if (this.state.isListView) {
-                x += width + 20 * global.ui_scale;
-                //y = y;
-                // Don't let the tooltip cover menu items when the menu
-                // is oriented next to the right side of the monitor.
-                const {style_class} = this.state.panelLocation;
-                if ((this.state.orientation === St.Side.BOTTOM || this.state.orientation === St.Side.TOP ) &&
-                                    style_class === 'panelRight' || this.state.orientation === St.Side.RIGHT) {
-                    y += height + 8 * global.ui_scale;
-                }
+                x += 175 * global.ui_scale;
+                y += height + 8 * global.ui_scale;
             } else {//grid view
                 x += Math.floor(width / 2);
                 y += height + 8 * global.ui_scale;
@@ -842,7 +834,6 @@ class AppListGridButton extends PopupBaseMenuItem {
             let [cx, cy] = this.contextMenuBox.get_transformed_position();
             cx = Math.round(mx - cx);
             cy = Math.round(my - cy);
-            global.log(contextMenuWidth,contextMenuHeight,monitor.x + monitor.width,cx);
             this.menu.actor.anchor_x = -cx;
             this.menu.actor.anchor_y = -cy;
         }
