@@ -249,6 +249,7 @@ KDEConnectApplet.prototype = {
         this.metadata = metadata;
 
         this.set_applet_icon_name("kdeconnect");
+	this.setAllowedLayout(Applet.AllowedLayout.BOTH);
 
         this.menuManager = new PopupMenu.PopupMenuManager(this);
         this.menu = new Applet.AppletPopupMenu(this, orientation);
