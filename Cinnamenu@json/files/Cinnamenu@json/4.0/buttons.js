@@ -594,7 +594,6 @@ class AppListGridButton extends PopupBaseMenuItem {
         if (this.state.settings.descriptionPlacement === PlacementUNDER) {
             markup += '\n<span size="small">' + description + '</span>';
         }
-        global.log(markup);
         const clutterText = this.label.get_clutter_text();
         clutterText.set_markup(markup);
         clutterText.ellipsize = EllipsizeMode.END;
