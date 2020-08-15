@@ -72,6 +72,7 @@
                 "category-click",
                 "open-on-favorites",
                 "enable-autoscroll",
+                "web-search-option",
                 "enable-search-providers",
                 "get-providers"
             ]
@@ -134,7 +135,7 @@
             "Left":2,
             "Right":3
         },
-        "tooltip":"Choose where to show the session (quit, logout, etc.) buttons"
+        "tooltip":"Choose where to show the session buttons (quit, logout, etc.)"
     },
     "add-favorites":{
         "type":"switch",
@@ -243,6 +244,19 @@
         "default":true,
         "description":"Enable autoscrolling",
         "tooltip":"Enable autoscrolling in application list"
+    },
+    "web-search-option":{
+        "type":"combobox",
+        "default":0,
+        "description":"Web search option",
+        "options":{
+            "Google":0,
+            "Bing":1,
+            "Yahoo":2,
+            "DuckDuckGo":3,
+            "None":4
+        },
+        "tooltip":"Show an internet search option in search results"
     },
     "enable-search-providers":{
         "type":"checkbox",

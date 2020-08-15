@@ -583,9 +583,9 @@ class AppListGridButton extends PopupBaseMenuItem {
     }
 
     formatLabel() {
-        let name = this.buttonState.app.name.replace(/&/g, '&amp;');
+        let name = this.buttonState.app.name.replace(/&/g, '&amp;').replace(/</g, '&lt;');
         let description = this.buttonState.app.description ?
-                                        this.buttonState.app.description.replace(/&/g, '&amp;') : '';
+                            this.buttonState.app.description.replace(/&/g, '&amp;').replace(/</g, '&lt;') : '';
 
         if (this.buttonState.app.newAppShouldHighlight) {
             name = '<b>' + name + '</b>';
@@ -594,7 +594,6 @@ class AppListGridButton extends PopupBaseMenuItem {
         if (this.state.settings.descriptionPlacement === PlacementUNDER) {
             markup += '\n<span size="small">' + description + '</span>';
         }
-
         const clutterText = this.label.get_clutter_text();
         clutterText.set_markup(markup);
         clutterText.ellipsize = EllipsizeMode.END;
@@ -622,11 +621,11 @@ class AppListGridButton extends PopupBaseMenuItem {
             const wordWrap = text => text.match( /.{1,80}(\s|$|-|=|\+)|\S+?(\s|$|-|=|\+)/g ).join('\n');
             let tooltipMarkup = '<span>' + wordWrap((this.buttonState.app.nameWithSearchMarkup &&
                                         SHOW_SEARCH_MARKUP_IN_TOOLTIP) ? this.buttonState.app.nameWithSearchMarkup :
-                                                                            this.buttonState.app.name) + '</span>';
+                                        this.buttonState.app.name) + '</span>';
             if (this.buttonState.app.description) {
                 tooltipMarkup += '\n<span size="small">' + wordWrap((this.buttonState.app.descriptionWithSearchMarkup &&
-                                    SHOW_SEARCH_MARKUP_IN_TOOLTIP) ? this.buttonState.app.descriptionWithSearchMarkup :
-                                                                        this.buttonState.app.description) + '</span>';
+                                SHOW_SEARCH_MARKUP_IN_TOOLTIP) ? this.buttonState.app.descriptionWithSearchMarkup :
+                                this.buttonState.app.description) + '</span>';
             }
             if (SEARCH_DEBUG) {
                 if (SHOW_SEARCH_MARKUP_IN_TOOLTIP && this.buttonState.app.keywordsWithSearchMarkup) {
