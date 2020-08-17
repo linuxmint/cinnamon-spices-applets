@@ -9,6 +9,13 @@ declare class global {
 	static unset_cursor(): void;
 }
 
+declare namespace imports {
+   export const byteArray: ByteArray;
+   class ByteArray {
+       toString(array: any): string;
+   }
+}
+
 declare namespace imports.cairo {
     export class LinearGradient {
         constructor(margin: number, gradientOffset: number, width: number, height: number);
@@ -671,6 +678,7 @@ declare namespace imports.misc.config {
 declare namespace imports.misc.util {
     export function spawnCommandLine(CMDSettings: string): void;
     export function spawn_async(cmd: string[], callback: Function): any;
+    export function trySpawnCommandLine(CMDSettings: string): void;
 }
 
 declare namespace imports.gettext {

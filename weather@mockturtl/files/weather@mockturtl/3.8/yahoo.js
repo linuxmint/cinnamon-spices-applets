@@ -130,16 +130,16 @@ class Yahoo {
         this.app.log.Debug("yahoo API error payload: " + json);
         switch (type) {
             case "import":
-                this.app.sendNotification("Missing package", "Please install '" + this.GetMissingPackage(json) + "', then refresh manually.");
+                this.app.sendNotification(_("Missing package"), _("Please install '") + this.GetMissingPackage(json) + _("', then refresh manually."));
                 this.app.log.Error(errorMsg + json.error.message);
-                this.app.HandleError({ detail: "import error", type: "hard", userError: true, service: "yahoo", message: "Failed to import " + this.GetMissingPackage(json) + ", please install it first." });
+                this.app.HandleError({ detail: "import error", type: "hard", userError: true, service: "yahoo", message: _("Please install '") + this.GetMissingPackage(json) + _("', then refresh manually.") });
                 break;
             case "network":
-                this.app.HandleError({ detail: "no api response", type: "soft", service: "yahoo", message: "Could not connect to Yahoo API." });
+                this.app.HandleError({ detail: "no api response", type: "soft", service: "yahoo", message: _("Could not connect to Yahoo API.") });
                 this.app.log.Error(errorMsg + "Could not connect to API, error - " + json.error.data);
                 break;
             case "unknown":
-                this.app.HandleError({ detail: "no api response", type: "hard", service: "yahoo", message: "Unknown error happened while obtaining weather, see Looking Glass logs for more information" });
+                this.app.HandleError({ detail: "no api response", type: "hard", service: "yahoo", message: _("Unknown error happened while obtaining weather, see Looking Glass logs for more information") });
                 this.app.log.Error(errorMsg + "Unknown Error happened in yahoo bridge, error - " + json.error.data);
                 break;
             default:

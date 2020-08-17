@@ -36,10 +36,12 @@ const { addTween } = imports.ui.tweener;
 const { TextIconApplet, AllowedLayout, AppletPopupMenu, MenuItem} = imports.ui.applet;
 const { PopupMenuManager, PopupSeparatorMenuItem } = imports.ui.popupMenu;
 const { AppletSettings, BindingDirection } = imports.ui.settings;
-const { spawnCommandLine, spawn_async } = imports.misc.util;
+const { spawnCommandLine, spawn_async, trySpawnCommandLine } = imports.misc.util;
 const { SystemNotificationSource, Notification } = imports.ui.messageTray;
 const { SignalManager } = imports.misc.signalManager;
 const { messageTray, themeManager } = imports.ui.main;
+const Gio = imports.gi.Gio;
+const GLib = imports.gi.GLib;
 
 var utils = importModule("utils");
 var GetDayName = utils.GetDayName as (date: Date, locale:string, tz?: string) => string;
@@ -148,10 +150,7 @@ var weatherAppletGUIDs: GUIDStore = {};
 
 class WeatherApplet extends TextIconApplet {
 	/** Stores all weather information */
-	private weather: Weather = null;
-	/** Stores all forecast information */
-	private forecasts: Array < ForecastData > = [];
-	private hourlyForecasts: HourlyForecastData[] = [];
+	private weather: WeatherData = null;
 
 	///////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////  
@@ -174,6 +173,7 @@ class WeatherApplet extends TextIconApplet {
 	public readonly locProvider = new ipApi.IpApi(this); // IP location lookup
 	public readonly geoLocationService = new GeoLocation(this);
 	public orientation: imports.gi.St.Side;
+	public locationStore: LocationStore = null;
 
 	/** Used for error handling, first error calls flips it
 	 * to prevents displaying other errors in the current loop.
@@ -203,6 +203,8 @@ class WeatherApplet extends TextIconApplet {
 		this.ui = new UI(this, orientation);
 		this.ui.rebuild(this.config);
 		this.loop = new WeatherLoop(this, instanceId);
+		GLib.getenv('XDG_CONFIG_HOME')
+		this.locationStore = new LocationStore(this, Lang.bind(this, this.onLocationStorageChanged));
 
 		this.orientation = orientation;
 		try {
@@ -246,13 +248,13 @@ class WeatherApplet extends TextIconApplet {
 	/**
 	 * @returns boolean true if refresh function was locked while called
 	 */
-	public refreshAndRebuild(): void {
+	public refreshAndRebuild(loc?: LocationData): void {
 		this.loop.Resume();
 		if (this.Locked()) {
 			this.refreshTriggeredWhileLocked = true;
 			return;
 		}
-		this.refreshWeather(true);
+		this.refreshWeather(true, loc);
 	};
 
 	/**
@@ -261,17 +263,17 @@ class WeatherApplet extends TextIconApplet {
 	 * @param query fully constructed url
 	 * @param errorCallback do checking before generic error checking by this function, to display API specific UI errors
 	 */
-	public async LoadJsonAsync(query: string, errorCallback?: (message: any) => AppletError): Promise <any> {
-		let json = await new Promise((resolve: any, reject: any) => {
+	public async LoadJsonAsync(query: string, errorCallback?: (message: imports.gi.Soup.Message) => AppletError, triggerUIError: boolean = true): Promise <any> {
+		let json: any = await new Promise((resolve, reject) => {
 			let message = Message.new('GET', query);
 			this.log.Debug("URL called: " + query);
-			this._httpSession.queue_message(message, (session: any, message: any) => {
+			this._httpSession.queue_message(message, (session, message) => {
 				// option for provider to inject errors before general error handling
 				let error: AppletError = (errorCallback != null) ? errorCallback(message) : null;
 				if (error != null) {
 					this.log.Error("there is an error, " + JSON.stringify(error, null, 2))
 					this.HandleError(error);
-					reject({code: -1, message: "bad api response", data: null, reason_phrase: null} as HttpError);
+					reject({code: -1, message: "bad api response", data: null, reason_phrase: ""} as HttpError);
 					return;
 				}
 
@@ -282,7 +284,7 @@ class WeatherApplet extends TextIconApplet {
 
 				if (message.status_code >= 400 && message.status_code < 500) {
 					reject({code: message.status_code, message: "bad status code", reason_phrase: message.reason_phrase, data: get(["response_body", "data"], message) } as HttpError);
-					this.HandleError({ detail: "bad api response", type: "hard", message: _("API returned status code between 400 and 500")});
+					if (triggerUIError == true) this.HandleError({ detail: "bad api response", type: "hard", message: _("API returned status code between 400 and 500")});
 					return;
 				}
 					
@@ -311,7 +313,7 @@ class WeatherApplet extends TextIconApplet {
 
 	/** Spawn a command and await for the output it gives */
 	public async SpawnProcess(command: string[]): Promise<any> {
-		let json = await new Promise((resolve: any, reject: any) => {
+		let json = await new Promise((resolve, reject) => {
 			spawn_async(command, (aStdout: any) => {
 				resolve(aStdout);
 			});
@@ -325,9 +327,9 @@ class WeatherApplet extends TextIconApplet {
 	 * @param query fully constructed url
 	 */
 	public async LoadAsync(query: string): Promise <any> {
-		let data = await new Promise((resolve: any, reject: any) => {
+		let data = await new Promise((resolve, reject) => {
 			let message = Message.new('GET', query);
-			this._httpSession.queue_message(message, (session: any, message: any) => {
+			this._httpSession.queue_message(message, (session, message) => {
 
 				if (!message) {
 					reject({code: 0, message: "no network response", reason_phrase: "no network response"} as HttpError);
@@ -337,7 +339,7 @@ class WeatherApplet extends TextIconApplet {
 				if (message.status_code > 300 || message.status_code < 200 ) {
 					reject({code: message.status_code, message: "bad status code", reason_phrase: message.reason_phrase } as HttpError);
 					return;
-				}	
+				}
 				
 				if (!message.response_body) {
 					reject({code: message.status_code, message: "no response body", reason_phrase: message.reason_phrase} as HttpError);
@@ -358,7 +360,7 @@ class WeatherApplet extends TextIconApplet {
 	};
 
 	public sendNotification(title: string, message: string, transient?: boolean) {
-		let notification = new Notification(this.msgSource, "WeatherApplet: " + title, message);
+		let notification = new Notification(this.msgSource, _("Weather Applet") + ": " + title, message);
 		if (transient) notification.setTransient((!transient) ? false : true);
 		this.msgSource.notify(notification);
 	}
@@ -367,11 +369,11 @@ class WeatherApplet extends TextIconApplet {
 		this.set_applet_tooltip(msg);
 	}
 
-	public SetAppletIcon(iconName: string) {
+	public SetAppletIcon(iconName: string, customIcon: CustomIcons) {
 		this.config.IconType() == IconType.SYMBOLIC ?
 			this.set_applet_icon_symbolic_name(iconName) :
 			this.set_applet_icon_name(iconName)
-		if (this.config._useCustomAppletIcons) this.SetCustomIcon(this.weather.condition.customIcon);
+		if (this.config._useCustomAppletIcons) this.SetCustomIcon(customIcon);
 	}
 
 	public SetCustomIcon(iconName: CustomIcons): void {
@@ -394,6 +396,36 @@ class WeatherApplet extends TextIconApplet {
 	private async submitIssue(): Promise < void > {
 		let command = "xdg-open ";
 		spawnCommandLine(command + "https://github.com/linuxmint/cinnamon-spices-applets/issues/new");
+	}
+
+	private async saveCurrentLocation(): Promise<void> {
+		if (this.config.currentLocation.locationSource == "ip-api") {
+			this.sendNotification(_("Error") + " - " + _("Location Store"), _("You can't save a location obtained automatically, sorry"));
+		}
+		this.locationStore.SaveCurrentLocation(this.config.currentLocation);
+	}
+
+	private async deleteCurrentLocation(): Promise<void> {
+		this.locationStore.DeleteCurrentLocation(this.config.currentLocation);
+	}
+
+	private onLocationStorageChanged(itemCount: number) {
+		this.log.Debug("On location storage callback called, number of locations now " + itemCount.toString());
+		// Hide/show location selectors based on how many items are in storage
+		if (this.locationStore.ShouldShowLocationSelectors(this.config.currentLocation)) this.ui.ShowLocationSelectors();
+		else this.ui.HideLocationSelectors();
+	}
+
+	public NextLocationClicked() {
+		let nextLoc = this.locationStore.NextLocation(this.config.currentLocation);
+		if (nextLoc == null) return;
+		this.refreshAndRebuild(nextLoc);
+	}
+
+	public PreviousLocationClicked() {
+		let previousLoc = this.locationStore.PreviousLocation(this.config.currentLocation);
+		if (previousLoc == null) return;
+		this.refreshAndRebuild(previousLoc);
 	}
 
 	/** override function */
@@ -526,7 +558,7 @@ class WeatherApplet extends TextIconApplet {
 	 * Main function pulling data
 	 * @param rebuild 
 	 */
-	public async refreshWeather(rebuild: boolean): Promise <RefreshState> {
+	public async refreshWeather(rebuild: boolean, location?: LocationData): Promise <RefreshState> {
 		if (this.lock) {
 			this.log.Print("Refreshing in progress, refresh skipped.");
 			return "locked";
@@ -536,13 +568,22 @@ class WeatherApplet extends TextIconApplet {
 		this.encounteredError = false;
 
 		let locationData: LocationData = null;
-		try {
-			locationData = await this.config.EnsureLocation();
+		// General call
+		if (location == null) { 
+			try {
+				locationData = await this.config.EnsureLocation();
+			}
+			catch(e) {
+				this.log.Error(e);
+				this.Unlock();
+				return "error";
+			}
 		}
-		catch(e) {
-			this.log.Error(e);
-			this.Unlock();
-			return "error";
+		// when user uses the location selectors
+		else {
+			locationData = location;
+			// switching manual location switch to true in this case
+			this.config.InjectLocationToConfig(location, true);
 		}
 
 		if (locationData == null) {
@@ -553,6 +594,7 @@ class WeatherApplet extends TextIconApplet {
 
 		try {
 			this.EnsureProvider();
+			this.weather = null;
 			let weatherInfo = await this.provider.GetWeather({lat: locationData.lat, lon: locationData.lon, text: locationData.lat.toString() + "," + locationData.lon.toString()});
 			if (weatherInfo == null) {
 				this.log.Error("Unable to obtain Weather Information");
@@ -565,15 +607,15 @@ class WeatherApplet extends TextIconApplet {
 				return "failure";
 			}
 
-			this.wipeData();
-			this.ProcessWeatherData(weatherInfo, locationData);
+			weatherInfo = this.FillInWeatherData(weatherInfo, locationData);
+			this.weather = weatherInfo;
 
 			if (rebuild) this.ui.rebuild(this.config);
 			if (
-				!this.ui.displayWeather(this.weather, this.config) 
-				|| !this.ui.displayForecast(this.weather, this.forecasts, this.config)
-				|| !this.ui.displayHourlyForecast(this.hourlyForecasts, this.config, this.weather.location.timeZone)
-				|| !this.ui.displayBar(this.weather, this.provider, this.config)) {
+				!this.ui.displayWeather(weatherInfo, this.config) 
+				|| !this.ui.displayForecast(weatherInfo, this.config)
+				|| !this.ui.displayHourlyForecast(weatherInfo.hourlyForecasts, this.config, weatherInfo.location.timeZone)
+				|| !this.ui.displayBar(weatherInfo, this.provider, this.config)) {
 					this.Unlock();
 					return "failure";
 				}
@@ -591,94 +633,20 @@ class WeatherApplet extends TextIconApplet {
 		}
 	};
 
-	/** Injects Data into Weather object to display later */
-	private ProcessWeatherData(weatherInfo: WeatherData, locationData: LocationData) {
-		if (!!locationData) { // Automatic location
-			this.weather.location.city = locationData.city;
-			this.weather.location.country = locationData.country;
-			this.weather.location.timeZone = locationData.timeZone;
-			this.weather.coord.lat = locationData.lat;
-			this.weather.coord.lon = locationData.lon;
-		}
+	/** Fills in missing weather info from location Datas  */
+	private FillInWeatherData(weatherInfo: WeatherData, locationData: LocationData) {
+		if (!weatherInfo.location.city) weatherInfo.location.city = locationData.city;
+		if (!weatherInfo.location.country) weatherInfo.location.country = locationData.country;
+		if (!weatherInfo.location.timeZone) weatherInfo.location.timeZone = locationData.timeZone;
+		if (weatherInfo.coord.lat == null) weatherInfo.coord.lat = locationData.lat;
+		if (weatherInfo.coord.lon == null) weatherInfo.coord.lon = locationData.lon;
 
-		this.weather.condition = weatherInfo.condition;
-		this.weather.wind = weatherInfo.wind;
-		this.weather.temperature = weatherInfo.temperature,
-		this.weather.date = weatherInfo.date;
-		this.weather.sunrise = weatherInfo.sunrise;
-		this.weather.sunset = weatherInfo.sunset;
-		this.weather.coord = weatherInfo.coord;
-		this.weather.humidity = weatherInfo.humidity;
-		this.weather.pressure = weatherInfo.pressure;
-		if (!!weatherInfo.location.city) this.weather.location.city = weatherInfo.location.city;
-		if (!!weatherInfo.location.country) this.weather.location.country = weatherInfo.location.country;
-		if (!!weatherInfo.location.timeZone) this.weather.location.timeZone = weatherInfo.location.timeZone;
-		if (!!weatherInfo.location.url) this.weather.location.url = weatherInfo.location.url;
-		if (!!weatherInfo.location.distanceFrom) this.weather.location.distanceFrom = weatherInfo.location.distanceFrom;
-		if (!!weatherInfo.extra_field) this.weather.extra_field = weatherInfo.extra_field;
-		this.forecasts = weatherInfo.forecasts;
-		this.hourlyForecasts = (!weatherInfo.hourlyForecasts) ? [] : weatherInfo.hourlyForecasts;
+		weatherInfo.hourlyForecasts = (!weatherInfo.hourlyForecasts) ? [] : weatherInfo.hourlyForecasts;
 
 		// Estimation
-		//this.weather.location.tzOffset = Math.round(this.weather.coord.lon/15) * 3600;
+		//weatherInfo.location.tzOffset = Math.round(weatherInfo.coord.lon/15) * 3600;
+		return weatherInfo;
 	}
-
-	/** Reset weather object */
-	private wipeData(): void {
-		if (this.weather == null) {
-			this.weather = {
-				date: null,
-				location: {
-					city: null,
-					country: null,
-					tzOffset: null,
-					timeZone: null,
-					url: null
-				},
-				coord: {
-					lat: null,
-					lon: null,
-				},
-				sunrise: null,
-				sunset: null,
-				wind: {
-					speed: null,
-					degree: null,
-				},
-					temperature: null,
-					pressure: null,
-					humidity: null, 
-				condition: {
-					main: null,
-					description: null,
-					icon: null,
-					customIcon: null
-				},
-			}
-		}
-		this.weather.date = null;
-		this.weather.location.city = null;
-		this.weather.location.country = null;
-		this.weather.location.timeZone = null;
-		this.weather.location.tzOffset = null;
-		this.weather.location.url = null;
-		this.weather.location.distanceFrom = null;
-		this.weather.coord.lat = null;
-		this.weather.coord.lon = null;
-		this.weather.sunrise = null;
-		this.weather.sunset = null;
-		this.weather.wind.degree = null;
-		this.weather.wind.speed = null;
-		this.weather.temperature = null;
-		this.weather.pressure = null;
-		this.weather.humidity = null;
-		this.weather.condition.main = null;
-		this.weather.condition.description = null;
-		this.weather.condition.icon = null;
-		this.weather.extra_field = null;
-		this.forecasts = [];
-		this.hourlyForecasts = [];
-	};
 
 	///
 	///  Error Handling in UI
@@ -834,8 +802,14 @@ class UI {
     private _currentWeatherIcon: imports.gi.St.Icon;
 	private _currentWeatherSummary: imports.gi.St.Label;
 	
+	private _locationBox: imports.gi.St.BoxLayout;
+
 	private _locationButton: WeatherButton;
-    private _currentWeatherLocation: imports.gi.St.Button;
+	private _currentWeatherLocation: imports.gi.St.Button;
+
+	private _previousLocationButton: WeatherButton;
+	private _nextLocationButton: WeatherButton;
+	
     private _currentWeatherSunrise: imports.gi.St.Label;
     private _currentWeatherSunset: imports.gi.St.Label;
     private _currentWeatherTemperature: imports.gi.St.Label;
@@ -1101,9 +1075,23 @@ class UI {
 		} 
 	}
 
+	public ShowLocationSelectors() {
+		this._nextLocationButton.actor.show();
+		this._previousLocationButton.actor.show();
+	}
+
+	public HideLocationSelectors() {
+		this._nextLocationButton.actor.hide();
+		this._previousLocationButton.actor.hide();
+	}
+
     /** Injects data from weather object into the popupMenu */
-    public displayWeather(weather: Weather, config: Config): boolean {
+    public displayWeather(weather: WeatherData, config: Config): boolean {
 		try {
+			// Hide/show location selectors based on how many items are in storage
+			if (this.app.locationStore.ShouldShowLocationSelectors(config.currentLocation)) this.ShowLocationSelectors();
+			else this.HideLocationSelectors();
+
 			let mainCondition = "";
 			let descriptionCondition = "";
 			// Short Condition Name
@@ -1156,7 +1144,7 @@ class UI {
 			}
 
 			// Applet icon
-			this.app.SetAppletIcon(iconName);
+			this.app.SetAppletIcon(iconName, weather.condition.customIcon);
 
 			// Temperature
 			let temp = "";
@@ -1263,12 +1251,12 @@ class UI {
     };
 
     /** Injects data from forecasts array into popupMenu */
-    public displayForecast(weather: Weather, forecasts: ForecastData[], config: Config): boolean {
+    public displayForecast(weather: WeatherData, config: Config): boolean {
 		try {
-			if (!forecasts) return false;
-			let len = Math.min(this._forecast.length, forecasts.length);
+			if (!weather.forecasts) return false;
+			let len = Math.min(this._forecast.length, weather.forecasts.length);
 			for (let i = 0; i < len; i++) {
-				let forecastData = forecasts[i];
+				let forecastData = weather.forecasts[i];
 				let forecastUi = this._forecast[i];
 
 				let t_low = TempToUserConfig(forecastData.temp_min, config._temperatureUnit, config._tempRussianStyle);
@@ -1286,7 +1274,6 @@ class UI {
 				}
 
 				// Day Names
-				if (weather.location.timeZone == null) forecastData.date.setMilliseconds(forecastData.date.getMilliseconds() + (weather.location.tzOffset * 1000));
 				let dayName: string = GetDayName(forecastData.date, this.app.currentLocale, weather.location.timeZone);
 
 				if (forecastData.date) {
@@ -1317,7 +1304,7 @@ class UI {
 		}
     };
 
-    public displayBar(weather: Weather, provider: WeatherProvider, config: Config): boolean {
+    public displayBar(weather: WeatherData, provider: WeatherProvider, config: Config): boolean {
 		this._providerCredit.label = _("Powered by") + " " + provider.prettyName;
 		this._providerCredit.url = provider.website;
 		this._timestamp.text = _("As of") + " " + AwareDateString(weather.date, this.app.currentLocale, config._show24Hours);
@@ -1430,6 +1417,35 @@ class UI {
 			else if (this._currentWeatherLocation.url == null) return;
 			else this.app.OpenUrl(this._currentWeatherLocation);
 		}));
+
+		this._nextLocationButton = new WeatherButton({ 
+			reactive: true,
+			can_focus: true,
+			child: new Icon({
+				icon_type: IconType.SYMBOLIC,
+				icon_size: 10,
+				icon_name: "custom-right-arrow-symbolic",
+				style_class: STYLE_LOCATION_SELECTOR
+			}),
+		});
+		this._nextLocationButton.actor.connect(SIGNAL_CLICKED, Lang.bind(this.app, this.app.NextLocationClicked));
+
+		this._previousLocationButton = new WeatherButton({ 
+			reactive: true,
+			can_focus: true,
+			child: new Icon({
+				icon_type: IconType.SYMBOLIC,
+				icon_size: 10,
+				icon_name: "custom-left-arrow-symbolic",
+				style_class: STYLE_LOCATION_SELECTOR
+			}),
+		});
+		this._previousLocationButton.actor.connect(SIGNAL_CLICKED, Lang.bind(this.app, this.app.PreviousLocationClicked));
+
+		this._locationBox = new BoxLayout();
+		this._locationBox.add(this._previousLocationButton.actor, { x_fill: false, x_align: Align.START, y_align: Align.MIDDLE, expand: false});
+		this._locationBox.add(this._currentWeatherLocation, { x_fill: true, x_align: Align.MIDDLE, y_align: Align.MIDDLE, expand: true});
+		this._locationBox.add(this._nextLocationButton.actor, { x_fill: false, x_align: Align.END, y_align: Align.MIDDLE, expand: false});
 	
 		// Sunset/sunrise
 		this._currentWeatherSummary = new Label({ text: _('Loading ...'), style_class: STYLE_SUMMARY })
@@ -1469,7 +1485,6 @@ class UI {
 		sunsetBox.add(this._currentWeatherSunset, textOptions);
 	
 		let ab_spacerlabel = new Label({ text: BLANK })
-		let bb_spacerlabel = new Label({ text: BLANK })
 	
 		let sunBox = new BoxLayout({ style_class: STYLE_ASTRONOMY })
 		sunBox.add_actor(sunriseBox)
@@ -1477,11 +1492,10 @@ class UI {
 		sunBox.add_actor(sunsetBox);
 	
 		let middleColumn = new BoxLayout({ vertical: true, style_class: STYLE_SUMMARYBOX })
-		middleColumn.add_actor(this._currentWeatherLocation)
-		middleColumn.add_actor(this._currentWeatherSummary)
-		middleColumn.add_actor(bb_spacerlabel)
+		middleColumn.add_actor(this._locationBox)
+		middleColumn.add(this._currentWeatherSummary, {expand: true, x_align: Align.START, y_align: Align.MIDDLE, x_fill: false, y_fill: false})
 	
-		// Bin is used here for horizontally center BoxLayout
+		// Bin is used here to horizontally center BoxLayout inside BoxLayout, normal add() function does not work here 
 		let sunBin = new Bin();
 		sunBin.set_child(sunBox);
 		middleColumn.add_actor(sunBin);
@@ -1691,7 +1705,7 @@ class UI {
 				Summary: new Label({text: _(ELLIPSIS), style_class: "hourly-data"}),
 				Temperature: new Label({text: _(ELLIPSIS), style_class: "hourly-data"})
 			})
-			// TODO: Fix issue where text is Ellided instead of wrapped when its too long
+			// TODO: Fix issue where text is Elided instead of wrapped when its too long
 			this._hourlyForecasts[index].Summary.clutter_text.set_line_wrap(true);
 			this._hourlyForecasts[index].Summary.set_width(85);
 			box.add_child(this._hourlyForecasts[index].Hour);
@@ -1778,6 +1792,7 @@ class Config {
 
 	/** Timeout */
 	private doneTypingLocation: any = null;
+	public currentLocation: LocationData = null;
 
 	private settings: imports.ui.settings.AppletSettings;
 	private app: WeatherApplet;
@@ -1848,10 +1863,18 @@ class Config {
 
 	public noApiKey(): boolean {
 		if (this._apiKey == undefined || this._apiKey == "") {
-		return true;
+			return true;
 		}
 		return false;
 	};
+
+	public InjectLocationToConfig(loc: LocationData, switchToManual: boolean = false) {
+		this.app.log.Debug("Location setting is now: " + loc.entryText);
+		let text = loc.entryText + ""; // Only values can be injected into settings and not references, so we add empty string to it.
+		this.SetLocation(text);
+		this.currentLocation = loc;
+		if (switchToManual == true) this.settings.setValue(this.KEYS.MANUAL_LOCATION, true);
+	}
 
 	/** 
 	 * @returns LocationData null if failed to obtain
@@ -1860,15 +1883,14 @@ class Config {
 	 * it looks up coordinates via geolocation api
 	 */
 	public async EnsureLocation(): Promise<LocationData> {
+		this.currentLocation = null;
 		// Automatic location
 		if (!this._manualLocation) { 
 			let location = await this.app.locProvider.GetLocation();
 			// User facing errors handled by provider
 			if (!location) return null;
 
-			let loc = location.lat + "," + location.lon;
-			this.app.log.Debug("Location setting is now: " + loc);
-			this.SetLocation(loc);
+			this.InjectLocationToConfig(location);
 			return location;
 		}
 
@@ -1889,14 +1911,18 @@ class Config {
 			// Get Location
 			loc = loc.replace(" ", "");
 			let latlong = loc.split(",");
-			return {
+			let location: LocationData = {
 				lat: parseFloat(latlong[0]),
 				lon: parseFloat(latlong[1]),
 				city: null,
 				country: null,
 				mobile: null,
-				timeZone: null
+				timeZone: null,
+				entryText: loc,
+				locationSource: "manual"
 			}
+			this.InjectLocationToConfig(location);
+			return location;
 		}
 
 		this.app.log.Debug("Location is text, geolocating...")
@@ -1905,8 +1931,9 @@ class Config {
 		if (locationData == null) return null;
 		if (!!locationData.address_string) {
 			this.app.log.Debug("Address found via address search, placing found full address '" + locationData.address_string + "' back to location entry");
-			this.SetLocation(locationData.address_string);
 		}
+
+		this.InjectLocationToConfig(locationData);
 		return locationData;
 	}
 
@@ -1929,7 +1956,7 @@ class WeatherLoop {
 	private GUID: string;
 	private instanceID: number;
 	/** Slows main loop down on consecutive errors.
-	 * loop seconds are multpilied by this value on errors.
+	 * loop seconds are multiplied by this value on errors.
 	 */
 	private errorCount: number = 0;
 
@@ -1968,7 +1995,7 @@ class WeatherLoop {
 					+ " seconds, refreshInterval " + this.app.config._refreshInterval + " minutes");
 					// loop can skip 1 cycle if needed 
 					let state = await this.app.refreshWeather(false);
-					if (state == "locked") this.app.log.Print("App locked, refresh skipped in main loop");
+					if (state == "locked") this.app.log.Print("App is currently refreshing, refresh skipped in main loop");
 					if (state == "success" || state == "locked") this.lastUpdated = new Date();
 				}
 				else {
@@ -2113,7 +2140,9 @@ class GeoLocation {
 				country: locationData[0].address.country,
 				timeZone: null,
 				mobile: null,
-				address_string: locationData[0].display_name
+				address_string: locationData[0].display_name,
+				entryText: locationData[0].display_name,
+				locationSource: "address-search"
 			}
 			this.cache[searchText] = result;
 			return result;
@@ -2127,6 +2156,344 @@ class GeoLocation {
 			})
 			return null;
 		}
+	}
+}
+
+// TODO: Switch to setting-schema based LocationStore as soon as 3.0 id Deprecated
+// TODO: Make internal persistent setting when switching to location store entries and back
+// Example schema entry:
+/*"location-list": {
+		"type" : "list",
+		"description" : "Your saved locations",
+		"columns" : [
+			{"id": "lat", "title": "Latitude", "type": "string"},
+			{"id": "lon", "title": "Longitude", "type": "string"},
+			{"id": "city", "title": "City", "type": "string"},
+			{"id": "country", "title": "Country", "type": "string"},
+			{"id": "address_string", "title": "Full Address", "type": "string", "default": ""},
+			{"id": "entryText", "title": "Text in location entry", "type": "string", "default": ""},
+			{"id": "timeZone", "title": "Timezone", "type": "string", "default": ""}
+		],
+		"default" : []
+	},
+*/
+class LocationStore {
+
+	path: string = null; // ~/.config/weather-mockturtl/locations.json
+	private file: imports.gi.Gio.File = null;
+	private locations: LocationData[] = [];
+	private app: WeatherApplet = null;
+
+	/**
+	 * Current head on locationstore array.
+	 * Retains position even if user changes to location
+	 * not in the store. It gets moved to the end of array if user
+	 * saves a new location. On deletion it moves to the next index
+	 */
+	private currentIndex = 0;
+
+	/**
+	 * event callback for applet when location storage is modified
+	 */
+	private StoreChanged: (storeItemCount: number) => void = null;
+
+	/**
+	 * 
+	 * @param path to storage file
+	 * @param app 
+	 * @param onStoreChanged called when locations are loaded from file, added or deleted
+	 */
+	constructor(app: WeatherApplet, onStoreChanged?: (itemCount: number) => void) {
+		this.app = app;
+		
+		this.path = this.GetConfigPath() + "/weather-mockturtl/locations.json"
+		this.app.log.Debug("location store path is: " + this.path);
+		this.file = Gio.File.new_for_path(this.path);
+		if (onStoreChanged != null)	this.StoreChanged = onStoreChanged;
+		this.LoadSavedLocations();
+	}
+
+	private GetConfigPath(): string {
+		let configPath = GLib.getenv('XDG_CONFIG_HOME')
+		if (configPath == null) configPath = GLib.get_home_dir() + "/.config"
+		return configPath;
+	}
+
+	public NextLocation(currentLoc: LocationData): LocationData {
+		this.app.log.Debug("Current location: " + JSON.stringify(currentLoc, null, 2));
+		if (this.locations.length == 0) return currentLoc; // this should not happen, as buttons are useless in this case
+		let nextIndex = null;
+		if (this.InStorage(currentLoc)) { // if location is stored move to the one next to it
+			nextIndex = this.FindIndex(currentLoc) + 1;
+			this.app.log.Debug("Current location found in storage at index " + (nextIndex - 1).toString() + ", moving to the next index")
+		}
+		else { // move to the location next to the last used location
+			nextIndex = this.currentIndex++;
+		}
+
+		// Rotate if reached end of array
+		if (nextIndex > this.locations.length - 1) {
+			nextIndex = 0;
+			this.app.log.Debug("Reached end of storage, move to the beginning")
+		}
+
+		this.app.log.Debug("Switching to index " + nextIndex.toString() + "...");
+		this.currentIndex = nextIndex;
+		// Return copy, not original so nothing interferes with filestore
+		return {
+			address_string: this.locations[nextIndex].address_string,
+			country: this.locations[nextIndex].country,
+			city: this.locations[nextIndex].city,
+			entryText: this.locations[nextIndex].entryText,
+			lat: this.locations[nextIndex].lat,
+			lon: this.locations[nextIndex].lon,
+			mobile: this.locations[nextIndex].mobile,
+			timeZone: this.locations[nextIndex].timeZone,
+			locationSource: this.locations[nextIndex].locationSource,
+		}
+	}
+
+	public PreviousLocation(currentLoc: LocationData): LocationData {
+		if (this.locations.length == 0) return currentLoc; // this should not happen, as buttons are useless in this case
+		if (this.locations.length == 0) return currentLoc; // this should not happen, as buttons are useless in this case
+		let previousIndex = null;
+		if (this.InStorage(currentLoc)) { // if location is stored move to the previous one
+			previousIndex = this.FindIndex(currentLoc) - 1;
+			this.app.log.Debug("Current location found in storage at index " + (previousIndex + 1).toString() + ", moving to the next index")
+		}
+		else { // move to the location previous to the last used location
+			previousIndex = this.currentIndex--;
+		}
+
+		// Rotate if reached end of array
+		if (previousIndex < 0) {
+			previousIndex = this.locations.length - 1;
+			this.app.log.Debug("Reached start of storage, move to the end")
+		}
+
+		this.app.log.Debug("Switching to index " + previousIndex.toString() + "...");
+		this.currentIndex = previousIndex;
+		return {
+			address_string: this.locations[previousIndex].address_string,
+			country: this.locations[previousIndex].country,
+			city: this.locations[previousIndex].city,
+			entryText: this.locations[previousIndex].entryText,
+			lat: this.locations[previousIndex].lat,
+			lon: this.locations[previousIndex].lon,
+			mobile: this.locations[previousIndex].mobile,
+			timeZone: this.locations[previousIndex].timeZone,
+			locationSource: this.locations[previousIndex].locationSource,
+		};
+	}
+
+	public InStorage(loc: LocationData): boolean {
+		if (loc == null) return false;
+		for (let index = 0; index < this.locations.length; index++) {
+			const element = this.locations[index];
+			if (element.lat.toString() == loc.lat.toString() && element.lon.toString() == loc.lon.toString()) return true;
+		}
+		return false;
+	}
+
+	public ShouldShowLocationSelectors(currentLoc: LocationData): boolean {
+		let threshold = this.InStorage(currentLoc) ? 2 : 1;
+		if (this.locations.length >= threshold) return true;
+		else return false;
+	}
+
+	public async SaveCurrentLocation(loc: LocationData) {
+		if (this.app.Locked()) {
+			this.app.sendNotification(_("Warning") + " - " + _("Location Store"), _("You can only save correct locations when the applet is not refreshing"), true);
+			return;
+		}
+		if (loc == null) {
+			this.app.sendNotification(_("Warning") + " - " + _("Location Store"), _("You can't save an incorrect location"), true);
+			return;
+		}
+		if (this.InStorage(loc)) {
+			this.app.sendNotification(_("Info") + " - " + _("Location Store"), _("Location is already saved"), true);
+			return;
+		}
+		this.locations.push(loc);
+		this.currentIndex = this.locations.length - 1; // head to saved location
+		this.InvokeStorageChanged();
+		await this.SaveToFile();
+		this.app.sendNotification(_("Success") + " - " + _("Location Store"), _("Location is saved to library"), true);
+
+	}
+
+	public async DeleteCurrentLocation(loc: LocationData) {
+		if (this.app.Locked()) {
+			this.app.sendNotification(_("Info") + " - " + _("Location Store"), _("You can't remove a location while the applet is refreshing"), true);
+			return;
+		}
+		if (loc == null) {
+			this.app.sendNotification(_("Info") + " - " + _("Location Store"), _("You can't remove an incorrect location"), true);
+			return;
+		}
+
+		if (!this.InStorage(loc)) {
+			this.app.sendNotification(_("Info") + " - " + _("Location Store"), _("Location is not in storage, can't delete"), true);
+			return;
+		}
+		// Find location
+		let index = this.FindIndex(loc);
+		this.locations.splice(index, 1);
+		// Go to to previous saved location
+		this.currentIndex = this.currentIndex--;
+		if (this.currentIndex < 0) this.currentIndex = this.locations.length - 1; // reached start of array
+		if (this.currentIndex < 0) this.currentIndex = 0; // no items in array
+		this.app.sendNotification(_("Success") + " - " + _("Location Store"), _("Location is deleted from library"), true);
+		this.InvokeStorageChanged();
+	}
+
+	private InvokeStorageChanged() {
+		if (this.StoreChanged == null) return;
+		this.StoreChanged(this.locations.length);
+	}
+
+	private async LoadSavedLocations(): Promise<boolean> {
+		if (!await this.FileExists(this.file)) {
+			this.app.log.Print("Location store does not exist, skipping loading...")
+			return true;
+		}
+		
+		let content = await this.LoadContents(this.file);		
+		if (content == null) return false;
+
+		try {
+			let locations = JSON.parse(content) as LocationData[];
+			this.locations = locations;
+			this.app.log.Print("Saved locations are loaded in from location store at: '" + this.path + "'");
+			this.app.log.Debug("Locations loaded: " + JSON.stringify(this.locations, null, 2));
+			this.InvokeStorageChanged();
+			return true;
+		}
+		catch(e) {
+			this.app.log.Error("Error loading locations from store: " + (e as Error).message);
+			this.app.sendNotification(_("Error") + " - " + _("Location Store"), _("Failed to load in data from location storage, please see the logs for more information"))
+			return false;
+		}
+		
+	}
+
+	private async SaveToFile() {
+		let writeFile = (await this.OverwriteAndGetIOStream(this.file)).get_output_stream();
+		await this.WriteAsync(writeFile, JSON.stringify(this.locations, null, 2));
+		await this.CloseStream(writeFile);
+	}
+
+	private FindIndex(loc: LocationData): number {
+		if (loc == null) return -1;
+		for (let index = 0; index < this.locations.length; index++) {
+			const element = this.locations[index];
+			if (element.lat.toString() == loc.lat.toString() && element.lon.toString() == loc.lon.toString()) return index;
+		}
+		return -1;
+	}
+
+
+	// --------------------------
+	// IO
+	// --------------------------
+
+	private async GetFileInfo(file: imports.gi.Gio.File): Promise<imports.gi.Gio.FileInfo> {
+		return new Promise((resolve, reject) => {
+			file.query_info_async("", Gio.FileQueryInfoFlags.NONE, null, null, (obj, res) => {
+				let result = file.query_info_finish(res);
+				resolve(result);
+				return result;
+			});
+		});
+	}
+
+	private async FileExists(file: imports.gi.Gio.File): Promise<boolean> {
+		try {
+			let info = await this.GetFileInfo(file);
+			return true;
+		}
+		catch(e) {
+			this.app.log.Error("Cannot get file info for '" + file.get_path() + "', error: ");
+			global.log(e)
+			return false;
+		}
+	}
+
+	private async LoadContents(file: imports.gi.Gio.File): Promise<string> {
+		return new Promise((resolve, reject) => {
+			file.load_contents_async(null, (obj, res) => {
+				let [result, contents] = file.load_contents_finish(res);
+				if (result != true) {
+					resolve(null);
+					return null;
+				}
+				/*if (content instanceof Uint8Array) { // mozjs60 future-proofing
+							content = ByteArray.toString(content); // const ByteArray = imports.byteArray;
+						} else {*/
+				resolve(contents.toString());
+				return contents.toString();
+			});
+		});
+	}
+
+	private async DeleteFile(file: imports.gi.Gio.File): Promise<boolean> {
+		let result: boolean = await new Promise((resolve, reject) => {
+			file.delete_async(null, null, (obj, res) => {
+				let result = null;
+				try {
+					result = file.delete_finish(res);
+				}
+				catch(e) {
+					this.app.log.Error("Can't delete file, reason: ");
+					global.log(e);
+					resolve(false);
+					return false;
+				}
+				
+				resolve(result);
+				return result;
+			});
+		});
+		return result;
+
+	}
+
+	private async OverwriteAndGetIOStream(file: imports.gi.Gio.File): Promise<imports.gi.Gio.IOStream> {
+		if (!file.get_parent().query_exists(null)) file.get_parent().make_directory_with_parents(null);
+		
+		return new Promise((resolve, reject) => {
+			file.replace_readwrite_async(null, false, Gio.FileCreateFlags.NONE, null, null, (source_object, result) => {
+				let ioStream = file.replace_readwrite_finish(result);
+				resolve(ioStream);
+				return ioStream;
+			});
+		});
+	}
+
+	private async WriteAsync(outputStream: imports.gi.Gio.OutputStream, buffer: string): Promise<boolean> {
+		let text = buffer;
+		let result = outputStream.write(text as any, null);
+		return true;
+		//TODO: Figure out why async version is not working
+		/*
+		return new Promise((resolve: any, reject: any) => {
+			outputStream.write_async(text as any, null, null, (obj, res) => {
+				// TODO: Not working, bad buffer
+				let ioStream = outputStream.write_finish(res);
+				resolve(true);
+				return true;
+			});
+		});*/
+	}
+
+	private async CloseStream(stream: imports.gi.Gio.OutputStream | imports.gi.Gio.InputStream | imports.gi.Gio.FileIOStream): Promise<boolean> {
+		return new Promise((resolve, reject) => {
+			stream.close_async(null, null, (obj, res) => {
+				let result = stream.close_finish(res);
+				resolve(result);
+				return result;
+			});
+		});
 	}
 }
 
@@ -2159,6 +2526,7 @@ const STYLE_CURRENT = 'current'
 const STYLE_FORECAST = 'forecast'
 const STYLE_WEATHER_MENU = 'weather-menu'
 const STYLE_BAR = 'bottombar'
+const STYLE_LOCATION_SELECTOR = 'location-selector'
 
 // Magic strings
 const BLANK = '   ';
@@ -2190,62 +2558,8 @@ type WeatherWindSpeedUnits = 'kph' | 'mph' | 'm/s' | 'Knots' | 'Beaufort';
 /** Units used in Options. Change Options list if You change this! */
 type WeatherPressureUnits = 'hPa'|'mm Hg'|'in Hg'|'Pa'|'psi'|'atm'|'at';
 
-/** Change settings-schem if you change this! */
+/** Change settings-scheme if you change this! */
 type DistanceUnits = 'metric' | 'imperial';
-
-interface Weather {
-	date: Date,
-	location: {
-		city?: string,
-		country?: string,
-		/** In seconds */
-		tzOffset: number,
-		timeZone?: string,
-		/** url to open 
-		 * service portal set to user's location
-		 */
-		url: string,
-		/** in metres */
-		distanceFrom?: number
-	},
-	coord: {
-		lat: number,
-		lon: number,
-	},
-	/** preferably UTC */
-	sunrise: Date,
-	/** preferably UTC */
-	sunset: Date, 
-	wind: {
-		/** Meter/sec */
-		speed: number,
-		/** Meteorological degrees */
-		degree: number,
-	},
-	/** Kelvin */
-	temperature: number,
-	/** hPa */
-	pressure: number,
-	/** Percent, 0-100 integer (or more) */
-	humidity: number,
-	condition: {
-		/** Short description */
-		main: string, // What API returns
-		/** Longer description, if not available same as main */
-		description: string, // Longer description, if not available put the same whats in main
-		/** GTK icon name */
-		icon: string,
-		customIcon: CustomIcons
-	},
-	extra_field?: {
-		name: string,
-		/**
-		 * Refer to the type 
-		 */
-		value: any,
-		type: ExtraField
-	};
-}
 
 interface WeatherData {
 	date: Date;
@@ -2259,7 +2573,8 @@ interface WeatherData {
 		timeZone?: string,
 		url: string,
 		/** in metres */
-		distanceFrom?: number
+		distanceFrom?: number,
+		tzOffset?: number
 	},
 	/** preferably in UTC */
 	sunrise: Date,
@@ -2308,7 +2623,7 @@ interface HourlyForecastData {
 	temp: number,
 	condition: Condition
 	precipitation?: {
-		type: PrecipationType,
+		type: PrecipitationType,
 		/** in mm */
 		volume?: number,
 		/** % */
@@ -2316,7 +2631,7 @@ interface HourlyForecastData {
 	};
 }
 
-type PrecipationType = "rain" | "snow" | "none" | "ice pellets" | "freezing rain";
+type PrecipitationType = "rain" | "snow" | "none" | "ice pellets" | "freezing rain";
 
 interface LocationData {
 	lat: number,
@@ -2326,7 +2641,11 @@ interface LocationData {
 	timeZone: string,
 	mobile: boolean,
 	address_string?: string;
+	entryText: string;
+	locationSource: LocationSource;
 }
+
+type LocationSource = "ip-api" | "address-search" | "manual";
 
 interface Location {
 	lat: number;
@@ -2472,6 +2791,8 @@ type BuiltinIcons =
 type CustomIcons = 
 	"custom-down-arrow-symbolic" |
 	"custom-up-arrow-symbolic" |
+	"custom-left-arrow-symbolic" |
+	"custom-right-arrow-symbolic" |
 	"alien-symbolic" |
 	"barometer-symbolic" |
 	"celsius-symbolic" |

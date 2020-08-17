@@ -67,11 +67,12 @@
         },
         "menu-behave":{
             "type":"section",
-            "title":"",
+            "title":"Menu",
             "keys":[
                 "category-click",
                 "open-on-favorites",
                 "enable-autoscroll",
+                "web-search-option",
                 "enable-search-providers",
                 "get-providers"
             ]
@@ -91,7 +92,9 @@
             "keys":[
                 "category-icon-size",
                 "apps-list-icon-size",
-                "apps-grid-icon-size"
+                "apps-grid-icon-size",
+                "session-icon-size",
+                "use-box-style"
             ]
         }
     },
@@ -132,7 +135,7 @@
             "Left":2,
             "Right":3
         },
-        "tooltip":"Choose where to show the session (quit, logout, etc.) buttons"
+        "tooltip":"Choose where to show the session buttons (quit, logout, etc.)"
     },
     "add-favorites":{
         "type":"switch",
@@ -242,6 +245,19 @@
         "description":"Enable autoscrolling",
         "tooltip":"Enable autoscrolling in application list"
     },
+    "web-search-option":{
+        "type":"combobox",
+        "default":0,
+        "description":"Web search option",
+        "options":{
+            "Google":0,
+            "Bing":1,
+            "Yahoo":2,
+            "DuckDuckGo":3,
+            "None":4
+        },
+        "tooltip":"Show an internet search option in search results"
+    },
     "enable-search-providers":{
         "type":"checkbox",
         "default":false,
@@ -307,5 +323,22 @@
         "units":"pixels",
         "description":"Applications grid icon size",
         "tooltip":"Applications grid icon size"
+    },
+    "session-icon-size":{
+        "indent":true,
+        "type":"spinbutton",
+        "default":28,
+        "min":6,
+        "max":64,
+        "step":1,
+        "units":"pixels",
+        "description":"Session buttons icon size",
+        "tooltip":"Session buttons icon size"
+    },
+    "use-box-style":{
+        "type":"checkbox",
+        "default":false,
+        "description":"Use session buttons box style",
+        "tooltip":"Use session buttons box style"
     }
 }

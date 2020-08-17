@@ -21,6 +21,17 @@ function DEBUG() {
   return _debug.query_exists(null);
 };
 
+/**
+ * RELOAD:
+ * Returns whether or not the RELOAD file is present in this applet directory ($ touch RELOAD)
+ * Used to show the 'Reload this applet' button in menu.
+ */
+
+function RELOAD() {
+  let _reload = Gio.file_new_for_path("%s/RELOAD".format(APPLET_DIR));
+  return _reload.query_exists(null);
+};
+
 const DOWNLOAD_TIME = 10;
 
 let sort = "date";
@@ -175,6 +186,7 @@ module.exports = {
   _,
   EXP1, EXP2, EXP3,
   DEBUG,
+  RELOAD,
   capitalize,
   log,
   logError
