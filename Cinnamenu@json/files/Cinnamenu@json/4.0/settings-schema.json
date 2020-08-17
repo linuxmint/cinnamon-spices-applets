@@ -239,7 +239,7 @@
         "options":{
             "Last opened category":0,
             "Favorites":1,
-            "Recently used files":2,
+            "Recent files":2,
             "Places":3,
             "Web bookmarks (when enabled)":4
         },
