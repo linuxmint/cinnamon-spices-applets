@@ -70,9 +70,8 @@
             "title":"Menu",
             "keys":[
                 "category-click",
-                "open-on-favorites",
+                "open-on-category",
                 "enable-autoscroll",
-                "web-search-option",
                 "enable-search-providers",
                 "get-providers"
             ]
@@ -135,7 +134,7 @@
             "Left":2,
             "Right":3
         },
-        "tooltip":"Choose where to show the session buttons (quit, logout, etc.)"
+        "tooltip":"Choose where to show the session (quit, logout, etc.) buttons"
     },
     "add-favorites":{
         "type":"switch",
@@ -233,30 +232,24 @@
         "description":"Activate categories on click",
         "tooltip":"Activate categories on click instead of on hover"
     },
-    "open-on-favorites":{
-        "type":"checkbox",
-        "default":false,
-        "description":"Always open menu on favorite apps",
-        "tooltip":"Always open the menu with favorite apps category selected"
+    "open-on-category":{
+        "type":"combobox",
+        "default":1,
+        "description":"Always open menu on selected category",
+        "options":{
+            "Last opened category":0,
+            "Favorites":1,
+            "Recently used files":2,
+            "Places":3,
+            "Web bookmarks (when enabled)":4
+        },
+        "tooltip":"Always open the menu with the category selected"
     },
     "enable-autoscroll":{
         "type":"checkbox",
         "default":true,
         "description":"Enable autoscrolling",
         "tooltip":"Enable autoscrolling in application list"
-    },
-    "web-search-option":{
-        "type":"combobox",
-        "default":0,
-        "description":"Web search option",
-        "options":{
-            "Google":0,
-            "Bing":1,
-            "Yahoo":2,
-            "DuckDuckGo":3,
-            "None":4
-        },
-        "tooltip":"Show an internet search option in search results"
     },
     "enable-search-providers":{
         "type":"checkbox",
