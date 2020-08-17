@@ -419,8 +419,9 @@ class CinnamenuApplet extends TextIconApplet {
         this.groupCategoriesWorkspacesScrollBox.height = appsHeight;
         //this.applicationsScrollBox.style = `max-height: ${appsHeight}px;`;
         if (this.state.isListView) {
-            this.applicationsScrollBox.width = Math.max(350, this.bottomPane.width -
+            this.appBoxWidth = Math.max(350, this.bottomPane.width -
                                                     this.groupCategoriesWorkspacesScrollBox.width);
+            this.applicationsListBox.width = this.appBoxWidth;
         }
         //this.actor.style += `max-width: ${this.mainBox.width}px;`;//` max-height: ${this.mainBox.height}px;`;
     }
@@ -555,7 +556,7 @@ class CinnamenuApplet extends TextIconApplet {
         if ((now - this.lastRenderTime) <= 250) return;
         this.lastRenderTime = now;
 
-        this.clearAll();
+        this.menu.removeAll();
         this.destroyDisplayed();
         this.displayed = false;
         this.categoryButtons = [];
@@ -563,10 +564,6 @@ class CinnamenuApplet extends TextIconApplet {
         this.display();
         this.clearEnteredActors();
         this.destroyAppButtons();
-    }
-
-    clearAll() {
-        this.menu.removeAll();
     }
 
     getActiveButtons() {
@@ -709,30 +706,27 @@ class CinnamenuApplet extends TextIconApplet {
             return;
         }
         this.clearApplicationsBox();
+        this.activeContainer = this.state.isListView ? this.applicationsListBox : this.applicationsGridBox;
+        this.state.contextMenuIsOpen = null;
         switch (categoryId) {
             case 'places':
-                this.selectAllPlaces();
+                const places = this.listPlaces();
+                this.populateAppsBox(this.activeContainer, this.state.isListView, places);
                 break;
             case 'recent':
-                this.displayApplications(this.listRecent());
+                this.populateAppsBox(this.activeContainer, this.state.isListView, this.listRecent());
                 break;
             case 'bookmarks':
-                this.displayApplications(this.listWebBookmarks());
+                this.populateAppsBox(this.activeContainer, this.state.isListView, this.listWebBookmarks());
+                this.answerText.hide();
                 break;
             case 'favorites':
-                this.displayApplications(this.listFavorites());
+                this.populateAppsBox(this.activeContainer, this.state.isListView, this.listFavorites());
                 break;
             default:
-                this.displayApplications(this.listApplications(categoryId));
+                this.populateAppsBox(this.activeContainer, this.state.isListView,
+                                                                        this.listApplications(categoryId));
         }
-    }
-
-    selectAllPlaces() {
-        this.clearApplicationsBox();
-        const places = this.listPlaces()
-                                .concat(this.listBookmarks())
-                                .concat(this.listDevices());
-        this.displayApplications(places);
     }
 
     switchApplicationsView() {
@@ -877,70 +871,27 @@ class CinnamenuApplet extends TextIconApplet {
         if (!this.placesManager || !this.state.settings.showPlaces) {
             return [];
         }
-        let places = this.placesManager.places.special;
+        const places = this.placesManager.places.special
+                                    .concat(this.placesManager.places.bookmarks)
+                                    .concat(this.placesManager.places.devices);
         let res = [];
-        for (let i = 0, len = places.length; i < len; i++) {
-            let match;
-            if (pattern) {
-                match = searchStr(pattern, places[i].name);
-            }
-            if (!pattern || match.score > SEARCH_THRESHOLD) {
-                places[i].type = ApplicationType._places;
-                places[i].description = places[i].file.get_path();
-                if (pattern) {
+        for (let i = 0; i < places.length; i++) {
+            places[i].type = ApplicationType._places;
+            places[i].description = places[i].file.get_path();
+            res.push(places[i]);
+        }
+
+        if (pattern) {
+            const _res = [];
+            for (let i = 0, len = res.length; i < len; i++) {
+                const match = searchStr(pattern, res[i].name);
+                if (match.score > SEARCH_THRESHOLD) {
                     places[i].nameWithSearchMarkup = match.result;
                     places[i].score = match.score;
+                    _res.push(places[i]);
                 }
-                res.push(places[i]);
             }
-        }
-        return res;
-    }
-
-    listBookmarks(pattern) {
-        if (!this.placesManager || !this.state.settings.showPlaces) {
-            return [];
-        }
-        let bookmarks = this.placesManager.places.bookmarks;
-        let res = [];
-        for (let i = 0, len = bookmarks.length; i < len; i++) {
-            let match;
-            if (pattern) {
-                match = searchStr(pattern, bookmarks[i].name);
-            }
-            if (!pattern || match.score > SEARCH_THRESHOLD) {
-                bookmarks[i].type = ApplicationType._places;
-                bookmarks[i].description = bookmarks[i].file.get_path();
-                if (pattern) {
-                    bookmarks[i].nameWithSearchMarkup = match.result;
-                    bookmarks[i].score = match.score;
-                }
-                res.push(bookmarks[i]);
-            }
-        }
-        return res;
-    }
-
-    listDevices(pattern) {
-        if (!this.placesManager) {
-            return [];
-        }
-        let devices = this.placesManager.places.devices;
-        let res = [];
-        for (let i = 0, len = devices.length; i < len; i++) {
-            let match;
-            if (pattern) {
-                match = searchStr(pattern, devices[i].name);
-            }
-            if (!pattern || match.score > SEARCH_THRESHOLD) {
-                devices[i].type = ApplicationType._places;
-                devices[i].description = devices[i].file.get_path();
-                if (pattern) {
-                    devices[i].nameWithSearchMarkup = match.result;
-                    devices[i].score = match.score;
-                }
-                res.push(devices[i]);
-            }
+            res = _res;
         }
         return res;
     }
@@ -955,29 +906,23 @@ class CinnamenuApplet extends TextIconApplet {
         } else if (this.answerText.is_visible()) {
             this.answerText.hide();
         }
-
         this.searchWebErrorsShown = true;
 
-        let res = [];
-        let arr = this.bookmarksManager.state;
-        let arrKeys = this.bookmarksManager.arrKeys;
-
-        for (let i = 0, len = arrKeys.length; i < len; i++ ) {
-            let bookmark = arr[arrKeys[i]];
-            if (!bookmark) {
-                continue;
-            }
-            if (pattern && bookmark.name) {
-                let match = searchStr(pattern, bookmark.name);
-                if (match.score > SEARCH_THRESHOLD) {
-                    bookmark.score = match.score;
-                    bookmark.nameWithSearchMarkup = match.result;
-                    res.push(bookmark);
+        let res = this.bookmarksManager.state;
+        const _res = [];
+        if (pattern) {
+            for (let i = 0, len = res.length; i < len; i++ ) {
+                const bookmark = res[i];
+                if (bookmark.name) {
+                    let match = searchStr(pattern, bookmark.name);
+                    if (match.score > SEARCH_THRESHOLD) {
+                        bookmark.score = match.score;
+                        bookmark.nameWithSearchMarkup = match.result;
+                        _res.push(bookmark);
+                    }
                 }
             }
-            if (!pattern) {
-                res.push(bookmark);
-            }
+            res = _res;
         }
         return res;
     }
@@ -986,35 +931,51 @@ class CinnamenuApplet extends TextIconApplet {
         if (!this.recentEnabled) {
             return [];
         }
-        let {_infosByTimestamp} = this.recentManager;
+        //_infosByTimestamp seems to contain new objects even if the files are the same so store and
+        // reuse objects if they have the same name and uriDecoded.
+        if (!this.knownRecents) this.knownRecents = [];
+        const {_infosByTimestamp} = this.recentManager;
         let res = [];
-
         for (let i = 0, len = _infosByTimestamp.length; i < len; i++) {
-            let recentInfo = _infosByTimestamp[i];
-            res.push({  name: recentInfo.name,
-                        icon: recentInfo.gicon,
-                        uri: recentInfo.uri,
-                        description: recentInfo.uriDecoded,
-                        type: ApplicationType._recent });
+            const recentInfo = _infosByTimestamp[i];
+            let found = false;
+            for (let r = 0; r < this.knownRecents.length; r++) {
+                if (recentInfo.name === this.knownRecents[r].name &&
+                                    recentInfo.uriDecoded === this.knownRecents[r].description) {
+                    res.push(this.knownRecents[r]);
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                const newRecent = {     name: recentInfo.name,
+                                        icon: recentInfo.gicon,
+                                        uri: recentInfo.uri,
+                                        description: recentInfo.uriDecoded,
+                                        type: ApplicationType._recent };
+                res.push(newRecent);
+                this.knownRecents.push(newRecent);
+            }
         }
-
+        // create "Clear list" icon
         if (res.length > 0  && !pattern) {
-            res.push({  name: _('Clear List'),
-                        clearList: true,
-                        icon: new St.Icon({ icon_name: 'edit-clear', icon_type: St.IconType.SYMBOLIC }),
-                        uri: '',
-                        description: '',
-                        type: ApplicationType._recent });
+            if (!this.clearlistItem) {
+                this.clearlistItem = {  name: _('Clear List'),
+                                        clearList: true,
+                                        description: '',
+                                        type: ApplicationType._recent };
+            }
+            res.push(this.clearlistItem);
         } else if (!pattern) {
             this.answerText.set_text(_('No recent files'));
             this.answerText.show();
         }
 
         if (pattern) {
-            let _res = [];
+            const _res = [];
             for (let i = 0, len = res.length; i < len; i++) {
-                let recentItem = res[i];
-                let match = searchStr(pattern, recentItem.name);
+                const recentItem = res[i];
+                const match = searchStr(pattern, recentItem.name);
                 if (recentItem.name && match.score > SEARCH_THRESHOLD) {
                     recentItem.score = match.score;
                     recentItem.nameWithSearchMarkup = match.result;
@@ -1458,8 +1419,7 @@ class CinnamenuApplet extends TextIconApplet {
             if (!this.allItems[i]) {
               continue;
             }
-            if (this.state.settings.enableSearchProviders &&
-                                        this.allItems[i].buttonState.appType === ApplicationType._providers) {
+            if (this.allItems[i].buttonState.appType === ApplicationType._providers) {
                 this.allItems[i].destroy(true);
                 this.allItems[i] = undefined;
             } else {
@@ -1532,8 +1492,6 @@ class CinnamenuApplet extends TextIconApplet {
         this.previousSearchPattern = pattern;
         let results = this.listApplications('all', pattern)
                             .concat(this.listPlaces(pattern))
-                            .concat(this.listBookmarks(pattern))
-                            .concat(this.listDevices(pattern))
                             .concat(this.listWebBookmarks(pattern))
                             .concat(this.listRecent(pattern));
         results.sort( (a, b) =>  a.score < b.score );
@@ -1576,8 +1534,9 @@ class CinnamenuApplet extends TextIconApplet {
         //---search providers---
         const finish = () => {
             this.clearApplicationsBox();
-            this.displayApplications(results);
-
+            this.activeContainer = this.state.isListView ? this.applicationsListBox : this.applicationsGridBox;
+            this.state.contextMenuIsOpen = null;
+            this.populateAppsBox(this.activeContainer, this.state.isListView, results);
             let buttons = this.getActiveButtons();
             if (buttons.length === 0) return;
             buttons[0].handleEnter();
@@ -1619,13 +1578,13 @@ class CinnamenuApplet extends TextIconApplet {
         return false;
     }
 
-    displayApplications(appList) {
+    populateAppsBox(appsBox, isListView, appList) {
         if (!appList) {
             return false;
         }
         /*if (this.mainBox && !this.state.theme) {
 			this.introspectTheme();
-            this.displayApplications(appList);
+            this.populateAppsBox(appList);
             return false;
         }*/
 
@@ -1633,16 +1592,11 @@ class CinnamenuApplet extends TextIconApplet {
         let rownum = 0;
         let lastApp = appList[appList.length - 1];
 
-        this.activeContainer = this.state.isListView ? this.applicationsListBox : this.applicationsGridBox;
-        this.state.contextMenuIsOpen = null;
-
-        const createAppButton = (app, appType, len, appIndex) => {
+        const createAppButton = (app, appType, appIndex) => {
             let appButton;
             let refAppButton = -1;
-            for (let i = 0, _len = this.allItems.length; i < _len; i++) {
-                if (this.allItems[i] && (this.allItems[i].buttonState.appType === ApplicationType._places &&
-                                                            this.allItems[i].buttonState.app.name === app ||
-                                                                    this.allItems[i].buttonState.app === app)) {
+            for (let i = 0, len = this.allItems.length; i < len; i++) {
+                if (this.allItems[i] && (this.allItems[i].buttonState.app === app)){
                     refAppButton = i;
                     break;
                 }
@@ -1651,17 +1605,17 @@ class CinnamenuApplet extends TextIconApplet {
                 appButton = this.allItems[refAppButton];
                 appButton.buttonState.set({ app: app,
                                             appType: appType,
-                                            appListLength: len,
                                             appIndex: appIndex });
             } else {
-                appButton = new AppListGridButton(this, this.state, app, appType, appIndex, len);
+                //global.log("new:", appType, this.allItems.length);
+                appButton = new AppListGridButton(this, this.state, app, appType, appIndex);
                 this.allItems.push(appButton);
             }
 
-            if (this.state.isListView) {
-                this.applicationsListBox.add_actor(appButton.actor);
+            if (isListView) {
+                appsBox.add_actor(appButton.actor);
             } else {
-                let gridLayout = this.applicationsGridBox.layout_manager;
+                const gridLayout = appsBox.layout_manager;
                 if (!gridLayout) {
                     return false;
                 }
@@ -1676,19 +1630,12 @@ class CinnamenuApplet extends TextIconApplet {
             }
         };
 
-        if (!this.state.searchActive && lastApp && !lastApp.clearList && this.state.currentCategory &&
-                                                               this.state.currentCategory !== 'favorites') {
-            appList.sort( (a, b) => {
-                            if (!a.name || !b.name) {
-                                return -1;
-                            }
-                            return (a.name.toLowerCase() > b.name.toLowerCase()) ?
-                                            1 : (a.name.toLowerCase() < b.name.toLowerCase()) ? -1 : 0;  });
-        }
         let index = -1;
+
         for (let z = 0, len = appList.length; z < len; z++) {
             let isString = false;
             if (appList[z].type === undefined) {//??
+                //global.log('undefined type');
                 // Check auto-completion
                 if (typeof appList[z] !== 'string') {
                     appList[z].type = ApplicationType._applications;
@@ -1696,16 +1643,14 @@ class CinnamenuApplet extends TextIconApplet {
                     isString = true;
                 }
             }
-            for (let y = 0, len = AppTypes.length; y < len; y++) {
+            for (let y = 0; y < AppTypes.length; y++) {
                 if (!isString && ApplicationType[AppTypes[y]] !== appList[z].type) {
                     continue;
                 }
                 index += 1;
-                createAppButton(appList[z], appList[z].type, len, index);
+                createAppButton(appList[z], appList[z].type, index);
             }
         }
-
-        if (this.state.currentCategory === 'bookmarks') this.answerText.hide();
     }
 
     display() {
@@ -1902,7 +1847,7 @@ class CinnamenuApplet extends TextIconApplet {
             if (this.allItems[i]) {
                 this.allItems[i].destroy();
             }
-            this.allItems.splice(i, 1);
+            //this.allItems.splice(i, 1);
         }
         this.allItems = [];
     }
