@@ -136,7 +136,8 @@ function readFirefoxProfiles(appSystem) {
     return [];
 }
 
-const readChromiumBookmarks = function(bookmarks, path = ['chromium', 'Default', 'Bookmarks'], wmClass = 'chromium-browser', appSystem) {
+const readChromiumBookmarks = function(bookmarks, path = ['chromium', 'Default', 'Bookmarks'],
+                                                                wmClass = 'chromium-browser', appSystem) {
     let appInfo, bookmarksFile;
 
     let foundApps = appSystem.lookup_desktop_wmclass(path[0]);
@@ -193,8 +194,6 @@ const readChromiumBookmarks = function(bookmarks, path = ['chromium', 'Default',
 class BookmarksManager {
     constructor(appSystem) {
         let bookmarks = [];
-        this.arrKeys = [];
-        this.state = {};
         Promise.all([
             readChromiumBookmarks(bookmarks, ['chromium', 'Default', 'Bookmarks'], 'chromium-browser', appSystem),
             readChromiumBookmarks(bookmarks, ['google-chrome', 'Default', 'Bookmarks'], 'google-chrome', appSystem),
@@ -208,11 +207,21 @@ class BookmarksManager {
                 bookmarks[i].description = bookmarks[i].uri;
                 bookmarks[i].type = ApplicationType._places;
             }
+
             // Create a unique list of bookmarks across all browsers.
+            const bm = {};
             for (let i = 0, len = bookmarks.length; i < len; i++ ) {
-                this.state[bookmarks[i].uri] = bookmarks[i];
+                bm[bookmarks[i].uri] = bookmarks[i];
             }
-            this.arrKeys = Object.keys(this.state);
+            const bmKeys = Object.keys(bm);
+            this.state = [];
+            for (let i = 0; i < bmKeys.length; i++ ) {
+                if (bm[bmKeys[i]]) {
+                    this.state.push(bm[bmKeys[i]]);
+                }
+            }
+            this.state.sort( (a, b) => { return (a.name.toLowerCase() > b.name.toLowerCase()) ?
+                                            1 : (a.name.toLowerCase() < b.name.toLowerCase()) ? -1 : 0;  });
         }).catch((e) => global.log(e.message, e.stack));
     }
 }

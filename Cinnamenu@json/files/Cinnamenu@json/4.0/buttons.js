@@ -352,7 +352,7 @@ class ApplicationContextMenuItem extends PopupBaseMenuItem {
 }
 
 class AppListGridButton extends PopupBaseMenuItem {
-    constructor(appThis, state, app, appType, appIndex, appListLength) {
+    constructor(appThis, state, app, appType, appIndex) {
         super({ hover: false, activate: false });
         this.state = state;
         this.appThis = appThis;
@@ -376,7 +376,6 @@ class AppListGridButton extends PopupBaseMenuItem {
         this.buttonState = createStore({  app: app,
                                           appType: appType,
                                           appIndex: appIndex,
-                                          appListLength: appListLength,
                                           column: -1 });
         this.buttonState.connect({
                     toggleMenu: () => this.toggleMenu() });
@@ -445,13 +444,9 @@ class AppListGridButton extends PopupBaseMenuItem {
             this.icon = new Icon(iconObj);
         } else if (this.buttonState.appType === ApplicationType._recent) {
             if (this.buttonState.app.clearList) {
-                this.icon = this.buttonState.app.icon;
-                this.icon.set_icon_size(this.state.iconSize);
+                this.icon = new Icon({ icon_name: 'edit-clear', icon_type: St.IconType.SYMBOLIC, icon_size: this.state.iconSize});
             } else {
-                this.icon = new Icon({
-                    gicon: this.buttonState.app.icon,
-                    icon_size: this.state.iconSize
-                });
+                this.icon = new Icon({ gicon: this.buttonState.app.icon, icon_size: this.state.iconSize});
             }
         } else if (this.buttonState.appType === ApplicationType._providers) {
             this.icon = this.buttonState.app.icon;
@@ -497,7 +492,9 @@ class AppListGridButton extends PopupBaseMenuItem {
             y_expand: false
         });
         if (!this.state.isListView) {
-            this.buttonBox.width = 600;//ensure it centers in it's grid space
+            this.buttonBox.width = 600;//bigger than needed to ensure it centers in it's grid space
+        } else {
+            this.buttonBox.width = this.appThis.appBoxWidth - 30;//omitting this causes list scrolling to slow down
         }
         this.buttonBox.add(this.iconContainer, {
             x_fill: false,
