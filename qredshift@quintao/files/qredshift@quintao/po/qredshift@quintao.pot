@@ -192,6 +192,22 @@ msgstr ""
 msgid "On/Off"
 msgstr ""
 
+#. settings-schema.json->keyBrightnessUp->description
+msgid "Increase brightness level"
+msgstr ""
+
+#. settings-schema.json->keyBrightnessDown->description
+msgid "Decrease brightness level"
+msgstr ""
+
+#. settings-schema.json->keyTempUp->description
+msgid "Increase temperature level"
+msgstr ""
+
+#. settings-schema.json->keyTempDown->description
+msgid "Decrease temperature level"
+msgstr ""
+
 #. settings-schema.json->labelScrollAction->options
 msgid "Bright"
 msgstr ""

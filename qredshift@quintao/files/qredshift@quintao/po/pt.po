@@ -184,7 +184,7 @@ msgstr "Método usado para ajustar a temperatura"
 
 #. settings-schema.json->labelScrollAction->description
 msgid "Icon Scroll Action"
-msgstr "Acão do scroll no ícone"
+msgstr "Acão do scroll no ícone do applet"
 
 #. settings-schema.json->labelScrollAction->options
 msgid "Disabled"
@@ -194,6 +194,22 @@ msgstr "Desabilitado"
 #. settings-schema.json->keyToggle->description
 msgid "On/Off"
 msgstr "Ligado/Desligado"
+
+#. settings-schema.json->keyBrightnessUp->description
+msgid "Increase brightness level"
+msgstr "Aumentar brilho"
+
+#. settings-schema.json->keyBrightnessDown->description
+msgid "Decrease brightness level"
+msgstr "Diminuir brilho"
+
+#. settings-schema.json->keyTempUp->description
+msgid "Increase temperature level"
+msgstr "Aumentar temperatura"
+
+#. settings-schema.json->keyTempDown->description
+msgid "Decrease temperature level"
+msgstr "Diminuir temperatura"
 
 #. settings-schema.json->labelScrollAction->options
 msgid "Bright"
@@ -206,7 +222,7 @@ msgstr "Gama"
 
 #. settings-schema.json->labelScrollAction->tooltip
 msgid "Action when scroll on applet icon."
-msgstr "Ação ao rolar o scroll do mouse no ícone."
+msgstr "Ação ao rolar o scroll do mouse no ícone do applet."
 
 #. settings-schema.json->dayTemp->units
 #. settings-schema.json->nightTemp->units
@@ -225,7 +241,7 @@ msgstr "Localização remota"
 #. settings-schema.json->locationRemote->tooltip
 #. settings-schema.json->locationUpdate->tooltip
 msgid "Native geoclue on redshift can make the experience slow."
-msgstr "Geoclue nativo do redshift pode tornar sua experiencia lenta."
+msgstr "Geoclue nativo do redshift pode tornar sua experiência lenta."
 
 #. settings-schema.json->locationUpdate->description
 msgid "Update Location"
@@ -244,7 +260,7 @@ msgid ""
 "Native geoclue on redshift can make the experience slow.\n"
 "Using: https://geolocation-db.com/"
 msgstr ""
-"Geoclue nativo do redshift pode tornar sua experiencia lenta.\n"
+"Geoclue nativo do redshift pode tornar sua experiência lenta.\n"
 "Usando: https://geolocation-db.com/"
 
 #. settings-schema.json->textTips->description
@@ -259,7 +275,7 @@ msgid ""
 "Spices and give it a star. You only need a github account to do this."
 msgstr ""
 "Se você gosta e usa este applet, visite a página do Cinnamon Spices e dê uma "
-"estrela. Você só precisa de uma conta no github para fazer isso."
+"estrela. Você só precisa de uma conta no GitHub para fazer isso."
 
 #~ msgid "Sec"
 #~ msgstr "Seg."
