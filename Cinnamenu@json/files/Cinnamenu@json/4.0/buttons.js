@@ -20,11 +20,11 @@ const {getUserDesktopDir, changeModeGFile} = imports.misc.fileUtils;
 const {SignalManager} = imports.misc.signalManager;
 const {spawnCommandLine, spawn, unref} = imports.misc.util;
 const {createStore} = imports.misc.state;
+const MessageTray = imports.ui.messageTray;
 
 const {SEARCH_DEBUG, _, ApplicationType, tryFn, ShowTooltip} = require('./utils');
 const PlacementTOOLTIP = 1, PlacementUNDER = 2, PlacementNONE = 3;
 const SHOW_SEARCH_MARKUP_IN_TOOLTIP = true;
-const FALL_BACK_DESCRIPTION = _('No description available');
 const USER_DESKTOP_PATH = getUserDesktopDir();
 const CAN_UNINSTALL = GLib.file_test('/usr/bin/cinnamon-remove-application', GLib.FileTest.EXISTS);
 
@@ -282,13 +282,12 @@ class ApplicationContextMenuItem extends PopupBaseMenuItem {
             this.buttonState.trigger('toggleMenu');
             return false;
         }
-        let destFile;
         switch (this.action) {
             case 'add_to_panel':
                 if (!Main.AppletManager.get_role_provider_exists(Main.AppletManager.Roles.PANEL_LAUNCHER)) {
-                    let new_applet_id = global.settings.get_int('next-applet-id');
+                    const new_applet_id = global.settings.get_int('next-applet-id');
                     global.settings.set_int('next-applet-id', (new_applet_id + 1));
-                    let enabled_applets = global.settings.get_strv('enabled-applets');
+                    const enabled_applets = global.settings.get_strv('enabled-applets');
                     enabled_applets.push('panel1:right:0:panel-launchers@cinnamon.org:' + new_applet_id);
                     global.settings.set_strv('enabled-applets', enabled_applets);
                 }
@@ -302,7 +301,7 @@ class ApplicationContextMenuItem extends PopupBaseMenuItem {
                 }
                 break;
             case 'add_to_desktop':
-                destFile = Gio.file_new_for_path(USER_DESKTOP_PATH + '/' + this.buttonState.app.get_id());
+                const destFile = Gio.file_new_for_path(USER_DESKTOP_PATH + '/' + this.buttonState.app.get_id());
                 tryFn(() => {
                     Gio.file_new_for_path(this.buttonState.app.get_app_info().get_filename())
                                 .copy(
@@ -424,10 +423,6 @@ class AppListGridButton extends PopupBaseMenuItem {
         this.contextMenuButtons = [];
         this.entered = null;
 
-        if (!this.buttonState.app.description && this.buttonState.appType === ApplicationType._applications) {
-            this.buttonState.app.description = FALL_BACK_DESCRIPTION;
-        }
-
         // Icons //create icon even if iconSize is 0 so dnd has something to drag
         if (this.buttonState.appType === ApplicationType._applications) {
             this.icon = this.buttonState.app.create_icon_texture(this.state.iconSize);
@@ -461,7 +456,7 @@ class AppListGridButton extends PopupBaseMenuItem {
 
         this.label = new Label({
             style_class: 'menu-application-button-label',
-            style: 'padding-right: 2px; padding-left: 2px'
+            style: 'padding-right: 2px; padding-left: 2px;'
         });
         if (!this.state.isListView && this.state.settings.descriptionPlacement === PlacementUNDER) {
             this.label.set_style('text-align: center;');
@@ -573,10 +568,6 @@ class AppListGridButton extends PopupBaseMenuItem {
 
     handleParentChange() {
         this.formatLabel();
-
-        if (!this.buttonState.app.description && this.buttonState.appType === ApplicationType._applications) {
-            this.buttonState.app.description = FALL_BACK_DESCRIPTION;
-        }
     }
 
     formatLabel() {
@@ -585,7 +576,7 @@ class AppListGridButton extends PopupBaseMenuItem {
                             this.buttonState.app.description.replace(/&/g, '&amp;').replace(/</g, '&lt;') : '';
 
         if (this.buttonState.app.newAppShouldHighlight) {
-            name = '<b>' + name + '</b>';
+            this.label.style = this.label.style + 'font-weight: bold;';
         }
         let markup = '<span>' + name + '</span>';
         if (this.state.settings.descriptionPlacement === PlacementUNDER) {
@@ -734,7 +725,18 @@ class AppListGridButton extends PopupBaseMenuItem {
                 this.state.set({currentCategory: 'all'});
                 return;//don't closeMenu
             } else {
-                Gio.app_info_launch_default_for_uri(this.buttonState.app.uri, global.create_app_launch_context());
+                try {
+                    Gio.app_info_launch_default_for_uri(this.buttonState.app.uri, global.create_app_launch_context());
+                } catch (e) {
+                    const source = new MessageTray.SystemNotificationSource();
+                    Main.messageTray.add(source);
+                    const notification = new MessageTray.Notification(source,
+                                                                _("This file is no longer available"),e.message);
+                    notification.setTransient(true);
+                    notification.setUrgency(MessageTray.Urgency.NORMAL);
+                    source.notify(notification);
+                    return;//don't closeMenu
+                }
             }
         } else if (this.buttonState.appType === ApplicationType._providers) {
             this.buttonState.app.activate(this.buttonState.app);

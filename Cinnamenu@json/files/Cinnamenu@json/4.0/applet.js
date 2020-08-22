@@ -70,7 +70,7 @@ class CinnamenuApplet extends TextIconApplet {
         this.favorites = this.appFavorites.getFavorites();
         this.knownProviders = [];
         this.appletReady = false;
-        this.searchWebErrorsShown = false;
+        //this.searchWebErrorsShown = false;
         this.displayed = false;
         this.isNewInstance = true;
 
@@ -143,12 +143,10 @@ class CinnamenuApplet extends TextIconApplet {
         this.apps = new Apps(this);
         this.allItems = [];
         this.activeContainer = null;
-        this.placesManager = null;
         this.lastRenderTime = 0;
 
         //this.session = new SessionManager();
         this.screenSaverProxy = new ScreenSaverProxy();
-        this.recentManager = getDocManager();
 
         this.init = true;
         this.initCalcIcon();
@@ -338,7 +336,7 @@ class CinnamenuApplet extends TextIconApplet {
             this.resetDisplayState();
             this.applyConstraints();
         }
-        this.powerGroupBox.populate(this.listFavorites());
+        this.powerGroupBox.populate(this.apps.listFavorites());
 
         Mainloop.idle_add_full(150, () => {
                 if (this.state.dragIndex > -1) {
@@ -424,11 +422,6 @@ class CinnamenuApplet extends TextIconApplet {
             this.applicationsListBox.width = this.appBoxWidth;
         }
         //this.actor.style += `max-width: ${this.mainBox.width}px;`;//` max-height: ${this.mainBox.height}px;`;
-    }
-
-    getExampleSearchProviders() {
-        Util.spawnCommandLine(
-                'xdg-open https://github.com/linuxmint/Cinnamon/tree/master/docs/search-providers-examples');
     }
 
     // =======================================================================
@@ -710,22 +703,26 @@ class CinnamenuApplet extends TextIconApplet {
         this.state.contextMenuIsOpen = null;
         switch (categoryId) {
             case 'places':
-                const places = this.listPlaces();
-                this.populateAppsBox(this.activeContainer, this.state.isListView, places);
+                this.populateAppsBox(this.activeContainer, this.state.isListView, this.apps.listPlaces());
                 break;
             case 'recent':
-                this.populateAppsBox(this.activeContainer, this.state.isListView, this.listRecent());
+                const recents = this.apps.listRecent();
+                this.populateAppsBox(this.activeContainer, this.state.isListView, recents);
+                if (recents.length === 0) {
+                    this.answerText.set_text(_('No recent files'));
+                    this.answerText.show();
+                }
                 break;
             case 'bookmarks':
-                this.populateAppsBox(this.activeContainer, this.state.isListView, this.listWebBookmarks());
-                this.answerText.hide();
+                this.populateAppsBox(this.activeContainer, this.state.isListView, this.apps.listWebBookmarks());
+                //this.answerText.hide();
                 break;
             case 'favorites':
-                this.populateAppsBox(this.activeContainer, this.state.isListView, this.listFavorites());
+                this.populateAppsBox(this.activeContainer, this.state.isListView, this.apps.listFavorites());
                 break;
             default:
                 this.populateAppsBox(this.activeContainer, this.state.isListView,
-                                                                        this.listApplications(categoryId));
+                                                                    this.apps.listApplications(categoryId));
         }
     }
 
@@ -849,201 +846,12 @@ class CinnamenuApplet extends TextIconApplet {
             this.answerText.hide();
         }
         if (this.applicationsListBox) {
-            let listActors = this.applicationsListBox.get_children();
-            if (listActors) {
-                for (let i = 0, len = listActors.length; i < len; i++) {
-                    this.applicationsListBox.remove_child(listActors[i]);
-                }
-            }
+            this.applicationsListBox.remove_all_children();
         }
 
         if (this.applicationsGridBox && !this.applicationsGridBox.is_finalized()) {
-            let gridActors = this.applicationsGridBox.get_children();
-            if (gridActors) {
-                for (let i = 0, len = gridActors.length; i < len; i++) {
-                    this.applicationsGridBox.remove_child(gridActors[i]);
-                }
-            }
+            this.applicationsGridBox.remove_all_children();
         }
-    }
-
-    listPlaces(pattern) {
-        if (!this.placesManager || !this.state.settings.showPlaces) {
-            return [];
-        }
-        const places = this.placesManager.places.special
-                                    .concat(this.placesManager.places.bookmarks)
-                                    .concat(this.placesManager.places.devices);
-        let res = [];
-        for (let i = 0; i < places.length; i++) {
-            places[i].type = ApplicationType._places;
-            places[i].description = places[i].file.get_path();
-            res.push(places[i]);
-        }
-
-        if (pattern) {
-            const _res = [];
-            for (let i = 0, len = res.length; i < len; i++) {
-                const match = searchStr(pattern, res[i].name);
-                if (match.score > SEARCH_THRESHOLD) {
-                    places[i].nameWithSearchMarkup = match.result;
-                    places[i].score = match.score;
-                    _res.push(places[i]);
-                }
-            }
-            res = _res;
-        }
-        return res;
-    }
-
-    listWebBookmarks(pattern) {
-        if (!this.state.settings.enableBookmarks) {
-            return [];
-        }
-        if (!this.searchWebErrorsShown && !Gda) {
-            //this.answerText.set_text(_('gir1.2-gda-5.0 package required for Firefox and Midori bookmarks.'));
-            //this.answerText.show();
-        } else if (this.answerText.is_visible()) {
-            this.answerText.hide();
-        }
-        this.searchWebErrorsShown = true;
-
-        let res = this.bookmarksManager.state;
-        const _res = [];
-        if (pattern) {
-            for (let i = 0, len = res.length; i < len; i++ ) {
-                const bookmark = res[i];
-                if (bookmark.name) {
-                    let match = searchStr(pattern, bookmark.name);
-                    if (match.score > SEARCH_THRESHOLD) {
-                        bookmark.score = match.score;
-                        bookmark.nameWithSearchMarkup = match.result;
-                        _res.push(bookmark);
-                    }
-                }
-            }
-            res = _res;
-        }
-        return res;
-    }
-
-    listRecent(pattern) {
-        if (!this.recentEnabled) {
-            return [];
-        }
-        //_infosByTimestamp seems to contain new objects even if the files are the same so store and
-        // reuse objects if they have the same name and uriDecoded.
-        if (!this.knownRecents) this.knownRecents = [];
-        const {_infosByTimestamp} = this.recentManager;
-        let res = [];
-        for (let i = 0, len = _infosByTimestamp.length; i < len; i++) {
-            const recentInfo = _infosByTimestamp[i];
-            let found = false;
-            for (let r = 0; r < this.knownRecents.length; r++) {
-                if (recentInfo.name === this.knownRecents[r].name &&
-                                    recentInfo.uriDecoded === this.knownRecents[r].description) {
-                    res.push(this.knownRecents[r]);
-                    found = true;
-                    break;
-                }
-            }
-            if (!found) {
-                const newRecent = {     name: recentInfo.name,
-                                        icon: recentInfo.gicon,
-                                        uri: recentInfo.uri,
-                                        description: recentInfo.uriDecoded,
-                                        type: ApplicationType._recent };
-                res.push(newRecent);
-                this.knownRecents.push(newRecent);
-            }
-        }
-        // create "Clear list" icon
-        if (res.length > 0  && !pattern) {
-            if (!this.clearlistItem) {
-                this.clearlistItem = {  name: _('Clear List'),
-                                        clearList: true,
-                                        description: '',
-                                        type: ApplicationType._recent };
-            }
-            res.push(this.clearlistItem);
-        } else if (!pattern) {
-            this.answerText.set_text(_('No recent files'));
-            this.answerText.show();
-        }
-
-        if (pattern) {
-            const _res = [];
-            for (let i = 0, len = res.length; i < len; i++) {
-                const recentItem = res[i];
-                const match = searchStr(pattern, recentItem.name);
-                if (recentItem.name && match.score > SEARCH_THRESHOLD) {
-                    recentItem.score = match.score;
-                    recentItem.nameWithSearchMarkup = match.result;
-                    _res.push(recentItem);
-                }
-            }
-            res = _res;
-        }
-        return res;
-    }
-
-    listApplications(categoryMenuId, pattern) {
-        let res = this.apps.getAppsByCategory(categoryMenuId);
-
-        if (pattern) {
-            let _res = [];
-            for (let i = 0, len = res.length; i < len; i++) {
-                let name = res[i].get_name();
-                let keywords = res[i].get_keywords();
-                Object.assign(res[i], {   name: name,
-                                          keywords: keywords || name,
-                                          description: res[i].get_description(),
-                                          id: res[i].get_id().replace(/\.desktop$/, ''),
-                                          type: ApplicationType._applications });
-                const match1 = searchStr(pattern, res[i].name);
-                const match2 = searchStr(pattern, res[i].description);
-                match2.score *= 0.95; //slightly lower priority for description match
-                const match3 = searchStr(pattern, res[i].keywords);
-                match3.score *= 0.6; //low priority for keyword match
-                const match4 = searchStr(pattern, res[i].id);
-                match4.score *= 0.6; //low priority for id match
-                const bestMatchScore = Math.max(match1.score,match2.score,match3.score,match4.score);
-                if (bestMatchScore > SEARCH_THRESHOLD) {
-                    res[i].score = bestMatchScore;
-                    res[i].nameWithSearchMarkup = match1.result;
-                    res[i].descriptionWithSearchMarkup = match2.result;
-                    res[i].keywordsWithSearchMarkup = match3.result;
-                    res[i].idWithSearchMarkup = match4.result;
-                    _res.push(res[i]);
-                }
-            }
-            res = _res;
-            _res = null;
-        }
-
-        // Ignore favorites when sorting
-        if (res === undefined) {
-            res = [];
-        }
-
-        return res;
-    }
-
-    listFavorites() {
-        let res = this.favorites;
-
-        for (let i = 0, len = res.length; i < len; i++) {
-
-            let obj = res[i].hasOwnProperty('item') ? res[i].item : res[i];
-            if (!obj.hasOwnProperty('name')) {
-                obj.name = obj.get_name();
-            }
-            if (!obj.hasOwnProperty('description')) {
-                obj.description = obj.get_description();
-            }
-        }
-
-        return res;
     }
 
     resetDisplayState() {
@@ -1490,31 +1298,16 @@ class CinnamenuApplet extends TextIconApplet {
             return false;
         }
         this.previousSearchPattern = pattern;
-        let results = this.listApplications('all', pattern)
-                            .concat(this.listPlaces(pattern))
-                            .concat(this.listWebBookmarks(pattern))
-                            .concat(this.listRecent(pattern));
+        let results = this.apps.listApplications('all', pattern)
+                            .concat(this.state.settings.showPlaces ? this.apps.listPlaces(pattern) : [])
+                            .concat(this.state.settings.enableBookmarks ? this.apps.listWebBookmarks(pattern) : [])
+                            .concat(this.recentEnabled ? this.apps.listRecent(pattern) : []);
+
         results.sort( (a, b) =>  a.score < b.score );
         if (results.length > 14) {
             results.length = 14;
         }
         //-----search providers-------
-        //---search google---
-        if (this.state.settings.webSearchOption != 4) {//4=none
-            const iconName = ['google_icon.png',"bing_icon.png",'yahoo_icon.png',
-                                                'duckgo_icon.png'][this.state.settings.webSearchOption];
-            const url = ['google.com/search?q=','www.bing.com/search?q=','search.yahoo.com/search?p=',
-                                                    'duckduckgo.com/?q='][this.state.settings.webSearchOption];
-            results.push(   {   type: ApplicationType._providers,
-                                name: _('Search web for') + ' "' + text + '"',
-                                description: '',
-                                icon: new St.Icon({ gicon: new Gio.FileIcon({
-                                            file: Gio.file_new_for_path(__meta.path + '/' + iconName)}),
-                                            icon_size: this.state.iconSize }),
-                                activate: () => {Util.spawnCommandLineAsync(
-                                        '/usr/bin/xdg-open https://' + url + encodeURIComponent(text));}
-                            } );
-        }
         //---calculator---
         const exp = text.replace(/([a-zA-Z]+)/g,"Math.$&");
         const ans = tryFn(()=>{ return eval(exp); }, null);
@@ -1530,6 +1323,22 @@ class CinnamenuApplet extends TextIconApplet {
                             activate: () => {   const clipboard = St.Clipboard.get_default();
                                                 clipboard.set_text(St.ClipboardType.CLIPBOARD, ans.toString());}
                          });
+        }
+        //---web search option---
+        if (this.state.settings.webSearchOption != 4) {//4=none
+            const iconName = ['google_icon.png',"bing_icon.png",'yahoo_icon.png',
+                                                'duckgo_icon.png'][this.state.settings.webSearchOption];
+            const url = ['google.com/search?q=','www.bing.com/search?q=','search.yahoo.com/search?p=',
+                                                    'duckduckgo.com/?q='][this.state.settings.webSearchOption];
+            results.push(   {   type: ApplicationType._providers,
+                                name: _('Search web for') + ' "' + text + '"',
+                                description: '',
+                                icon: new St.Icon({ gicon: new Gio.FileIcon({
+                                            file: Gio.file_new_for_path(__meta.path + '/' + iconName)}),
+                                            icon_size: this.state.iconSize }),
+                                activate: () => {Util.spawnCommandLineAsync(
+                                        '/usr/bin/xdg-open https://' + url + encodeURIComponent(text));}
+                            } );
         }
         //---search providers---
         const finish = () => {
@@ -1662,7 +1471,7 @@ class CinnamenuApplet extends TextIconApplet {
 
         const powergroupPlacement = this.state.settings.powergroupPlacement;
         this.powerGroupBox = new PowerGroupBox(this.state, powergroupPlacement);
-        this.powerGroupBox.populate(this.listFavorites());
+        this.powerGroupBox.populate(this.apps.listFavorites());
         //searchBox
         this.search = new Search(this.state);
 
@@ -1681,14 +1490,7 @@ class CinnamenuApplet extends TextIconApplet {
         this.bottomPane.add(this.search.searchBox, { expand: true, x_fill: true, y_fill: false,
                                         x_align: St.Align.END, y_align: St.Align.MIDDLE, align_end: true });
 
-        //=================middlePane===============
-        // Load Places
-        if (PlaceDisplay && this.state.settings.showPlaces) {
-            this.placesManager = new PlaceDisplay.PlacesManager(false);
-        } else if (this.placesManager) {
-            this.placesManager.destroy();
-            this.placesManager = null;
-        }
+        //=================middlePane======================
         //-------------applicationsScrollBox---------------
         // ApplicationsBox (ListView / GridView)
         this.applicationsListBox = new St.BoxLayout({ style_class: 'cinnamenu-applications-list-box',
@@ -1856,7 +1658,7 @@ class CinnamenuApplet extends TextIconApplet {
         //this.state.autofavs.destroy();
         //this.state.autofavs = null;
         this.signals.disconnectAllSignals();
-        if (this.placesManager) this.placesManager.destroy();
+        this.apps.destroy();
         this.destroyAppButtons();
         if (!this.activeContainer) {//??
             return;
@@ -1870,6 +1672,8 @@ class CinnamenuApplet extends TextIconApplet {
 class Apps {
     constructor(appThis) {
         this.appThis = appThis;
+        this.recentManager = getDocManager();
+        this.placesManager = new PlaceDisplay.PlacesManager(false);
         this.appsByCategory = {};
         this.knownApps = [];
         this.appsNeedRefresh = true;
@@ -1897,6 +1701,10 @@ class Apps {
                 const dirId = dir.get_menu_id();
                 this.appsByCategory[dirId] = [];
                 this.loadAppCategories(dir, null, dirId);
+                this.appsByCategory[dirId].sort( (a, b) => {
+                                            if (!a.name || !b.name) return -1;
+                                            return (a.name.toLowerCase() > b.name.toLowerCase()) ?
+                                                    1 : (a.name.toLowerCase() < b.name.toLowerCase()) ? -1 : 0;  });
             }
         }
         let keys = Object.keys(this.appsByCategory);
@@ -1933,28 +1741,29 @@ class Apps {
                 if (!entry.get_app_info().get_nodisplay()) {
                     const id = entry.get_desktop_file_id();
                     const app = this.appThis.appSystem.lookup_app(id);
+                    let found = false;
                     if (rootDir && typeof rootDir.get_menu_id === 'function') {
                         const rootDirId = rootDir.get_menu_id();
                         if (rootDirId) {
                             this.appsByCategory[rootDirId].push(app);
-                            let obj = app.hasOwnProperty('item') ? app.item : app;
-                            if (!obj.hasOwnProperty('name')) {
-                                obj.name = obj.get_name();
-                            }
-                            if (!obj.hasOwnProperty('description')) {
-                                obj.description = obj.get_description();
-                            }
+                            found = true;
                         }
                     } else {
                         if (dirId) {
                             this.appsByCategory[dirId].push(app);
-                            let obj = app.hasOwnProperty('item') ? app.item : app;
-                            if (!obj.hasOwnProperty('name')) {
-                                obj.name = obj.get_name();
-                            }
-                            if (!obj.hasOwnProperty('description')) {
-                                obj.description = obj.get_description();
-                            }
+                            found = true;
+                        }
+                    }
+                    if (found) {
+                        let obj = app.hasOwnProperty('item') ? app.item : app;
+                        if (!obj.hasOwnProperty('name')) {
+                            obj.name = obj.get_name();
+                        }
+                        if (!obj.hasOwnProperty('description')) {
+                            obj.description = obj.get_description();
+                        }
+                        if (!app.description || (app.description && app.description == '')) {
+                            app.description = _('No description available');
                         }
                     }
                     if (this.knownApps.indexOf(id) < 0) {//unknown app
@@ -1980,6 +1789,172 @@ class Apps {
             this.initAppCategories();
         }
         return this.appsByCategory[dirId];
+    }
+
+    listApplications(categoryMenuId, pattern) {
+        let res = this.getAppsByCategory(categoryMenuId);
+
+        if (pattern) {
+            let _res = [];
+            for (let i = 0, len = res.length; i < len; i++) {
+                let name = res[i].get_name();
+                let keywords = res[i].get_keywords();
+                Object.assign(res[i], {   name: name,
+                                          keywords: keywords || name,
+                                          description: res[i].get_description(),
+                                          id: res[i].get_id().replace(/\.desktop$/, ''),
+                                          type: ApplicationType._applications });
+                const match1 = searchStr(pattern, res[i].name);
+                const match2 = searchStr(pattern, res[i].description);
+                match2.score *= 0.95; //slightly lower priority for description match
+                const match3 = searchStr(pattern, res[i].keywords);
+                match3.score *= 0.6; //low priority for keyword match
+                const match4 = searchStr(pattern, res[i].id);
+                match4.score *= 0.6; //low priority for id match
+                const bestMatchScore = Math.max(match1.score,match2.score,match3.score,match4.score);
+                if (bestMatchScore > SEARCH_THRESHOLD) {
+                    res[i].score = bestMatchScore;
+                    res[i].nameWithSearchMarkup = match1.result;
+                    res[i].descriptionWithSearchMarkup = match2.result;
+                    res[i].keywordsWithSearchMarkup = match3.result;
+                    res[i].idWithSearchMarkup = match4.result;
+                    _res.push(res[i]);
+                }
+            }
+            res = _res;
+            _res = null;
+        }
+        return res;
+    }
+
+    listFavorites() {
+        let res = this.appThis.favorites;
+
+        for (let i = 0, len = res.length; i < len; i++) {
+
+            let obj = res[i].hasOwnProperty('item') ? res[i].item : res[i];
+            if (!obj.hasOwnProperty('name')) {
+                obj.name = obj.get_name();
+            }
+            if (!obj.hasOwnProperty('description')) {
+                obj.description = obj.get_description();
+            }
+        }
+        return res;
+    }
+
+    listRecent(pattern) {
+        //_infosByTimestamp seems to contain new objects even if the files are the same so store and
+        // reuse objects if they have the same name and uriDecoded.
+        if (!this.knownRecents) this.knownRecents = [];
+        const {_infosByTimestamp} = this.recentManager;
+        let res = [];
+        for (let i = 0, len = _infosByTimestamp.length; i < len; i++) {
+            const recentInfo = _infosByTimestamp[i];
+            let found = false;
+            for (let r = 0; r < this.knownRecents.length; r++) {
+                if (recentInfo.name === this.knownRecents[r].name &&
+                                    recentInfo.uriDecoded === this.knownRecents[r].description) {
+                    res.push(this.knownRecents[r]);
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                const newRecent = {     name: recentInfo.name,
+                                        icon: recentInfo.gicon,
+                                        uri: recentInfo.uri,
+                                        description: recentInfo.uriDecoded,
+                                        type: ApplicationType._recent };
+                res.push(newRecent);
+                this.knownRecents.push(newRecent);
+            }
+        }
+        // create "Clear list" icon
+        if (res.length > 0  && !pattern) {
+            if (!this.clearlistItem) {
+                this.clearlistItem = {  name: _('Clear List'),
+                                        clearList: true,
+                                        description: '',
+                                        type: ApplicationType._recent };
+            }
+            res.push(this.clearlistItem);
+        }
+
+        if (pattern) {
+            const _res = [];
+            for (let i = 0, len = res.length; i < len; i++) {
+                const recentItem = res[i];
+                const match = searchStr(pattern, recentItem.name);
+                if (recentItem.name && match.score > SEARCH_THRESHOLD) {
+                    recentItem.score = match.score;
+                    recentItem.nameWithSearchMarkup = match.result;
+                    _res.push(recentItem);
+                }
+            }
+            res = _res;
+        }
+        return res;
+    }
+
+    listPlaces(pattern) {
+        const places = this.placesManager.places.special
+                                    .concat(this.placesManager.places.bookmarks)
+                                    .concat(this.placesManager.places.devices);
+        let res = [];
+        for (let i = 0; i < places.length; i++) {
+            places[i].type = ApplicationType._places;
+            places[i].description = places[i].file.get_path();
+            res.push(places[i]);
+        }
+
+        if (pattern) {
+            const _res = [];
+            for (let i = 0, len = res.length; i < len; i++) {
+                const match = searchStr(pattern, res[i].name);
+                if (match.score > SEARCH_THRESHOLD) {
+                    places[i].nameWithSearchMarkup = match.result;
+                    places[i].score = match.score;
+                    _res.push(places[i]);
+                }
+            }
+            res = _res;
+        }
+        return res;
+    }
+
+    listWebBookmarks(pattern) {
+        /*if (!this.searchWebErrorsShown && !Gda) {
+            //this.answerText.set_text(_('gir1.2-gda-5.0 package required for Firefox and Midori bookmarks.'));
+            //this.answerText.show();
+        } else if (this.answerText.is_visible()) {
+            this.answerText.hide();
+        }
+        this.searchWebErrorsShown = true;*/
+        let res = this.appThis.bookmarksManager.state;
+
+        if (pattern) {
+            const _res = [];
+            for (let i = 0, len = res.length; i < len; i++ ) {
+                const bookmark = res[i];
+                if (bookmark.name) {
+                    let match = searchStr(pattern, bookmark.name);
+                    if (match.score > SEARCH_THRESHOLD) {
+                        bookmark.score = match.score;
+                        bookmark.nameWithSearchMarkup = match.result;
+                        _res.push(bookmark);
+                    }
+                }
+            }
+            res = _res;
+        }
+        return res;
+    }
+
+    destroy() {
+        if (this.placesManager) {
+            this.placesManager.destroy();
+        }
     }
 }
 
@@ -2039,7 +2014,8 @@ class PowerGroupBox {
             }
         }
         const iconObj = { icon_size: this.state.settings.sessionIconSize,
-                          icon_type: IconType.FULLCOLOR };
+                          icon_type: this.state.settings.sessionIconSize <= 24 ? IconType.SYMBOLIC :
+                                                                                            IconType.FULLCOLOR };
         iconObj.icon_name = 'system-lock-screen';
         this.items.push(new GroupButton( this.state, new Icon(iconObj), _('Lock Screen'),
                     _('Lock the screen'), () => {
