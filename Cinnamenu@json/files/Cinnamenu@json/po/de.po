@@ -2,528 +2,385 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cinnamenu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-25 17:39+0100\n"
-"PO-Revision-Date: 2020-08-03 18:28+0100\n"
+"POT-Creation-Date: 2020-08-14 13:11+0100\n"
+"PO-Revision-Date: 2020-08-22 11:28+0200\n"
 "Last-Translator: Kim <kipuka@eclipso.eu>\n"
 "Language-Team: \n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3.1\n"
+"X-Generator: Poedit 2.0.6\n"
 
-#. 3.2 4.0
 msgid "Type to search..."
 msgstr "Suchbegriff eingeben …"
 
-#. 3.2 4.0
 msgid "Initializing"
 msgstr "Initialisiere"
 
-#. 3.2 4.0
 msgid "No description available"
 msgstr "Keine Beschreibung verfügbar"
 
-#. 3.2 4.0
 msgid "All Applications"
 msgstr "Alle Anwendungen"
 
-#. 3.2 4.0
 msgid "Places"
 msgstr "Orte"
 
-#. 3.2 4.0
 msgid "Recent Files"
 msgstr "Kürzlich verwendete Dateien"
 
-#. 3.2 4.0
 msgid "Bookmarks"
 msgstr "Lesezeichen"
 
-#. 3.2 4.0
 msgid "Favorite Apps"
 msgstr "Favoriten"
 
-#. 3.2 4.0
 msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
-msgstr ""
-"Paket \"gir1.2-gda-5.0\" für Firefox- und Midori-Lesezeichen erforderlich"
+msgstr "Paket gir1.2-gda-5.0 für Firefox- und Midori-Lesezeichen erforderlich."
 
-#. 3.2 4.0
 msgid "Clear List"
 msgstr "Liste leeren"
 
-#. 3.2 4.0
 msgid "No recent files"
 msgstr "Keine kürzlich verwendeten Dateien"
 
-#. 3.2
 msgid "Account details"
-msgstr "Konto-Informationen"
+msgstr "Kontodetails"
 
-#. 3.2 3.2
 msgid "Grid View"
 msgstr "Rasteransicht"
 
-#. 3.2 3.2
 msgid "List View"
 msgstr "Listenansicht"
 
-#. 3.2 3.2
 msgid "Switch to grid view"
 msgstr "Zur Rasteransicht wechseln"
 
-#. 3.2 3.2
 msgid "Switch to list view"
 msgstr "Zur Listenansicht wechseln"
 
-#. 3.2 4.0
 msgid "Lock Screen"
 msgstr "Sperrbildschirm"
 
-#. 3.2 4.0
 msgid "Lock the screen"
 msgstr "Bildschirm sperren"
 
-#. 3.2 4.0
 msgid "Logout"
 msgstr "Abmelden"
 
-#. 3.2 4.0
 msgid "Leave the session"
 msgstr "Sitzung verlassen"
 
-#. 3.2 4.0
 msgid "Quit"
 msgstr "Beenden"
 
-#. 3.2 4.0
 msgid "Shutdown the computer"
 msgstr "Den PC herunterfahren"
 
-#. 3.2 4.0
 msgid "Home"
 msgstr "Persönlicher Ordner"
 
-#. 3.2 4.0
 msgid "Computer"
 msgstr "PC"
 
-#. 3.2 4.0
 msgid "Browse network"
 msgstr "Netzwerk durchsuchen"
 
-#. 3.2 3.2 4.0
-#. 4.0
 msgid "Run with NVIDIA GPU"
 msgstr "Mit NVIDIA-GPU ausführen"
 
-#. 3.2 4.0
 msgid "Add to panel"
 msgstr "Zur Leiste hinzufügen"
 
-#. 3.2 4.0
 msgid "Add to desktop"
 msgstr "Zum Schreibtisch hinzufügen"
 
-#. 3.2 4.0
-msgid "Remove favorite"
-msgstr "Favorit entfernen"
+msgid "Remove from favorites"
+msgstr "Aus den Favoriten entfernen"
 
-#. 3.2 4.0
 msgid "Add to favorites"
 msgstr "Zu den Favoriten hinzufügen"
 
-#. 3.2 4.0
 msgid "Uninstall"
 msgstr "Deinstallieren"
 
-#. 4.0 4.0 4.0
 msgid "Please wait..."
 msgstr "Bitte warten ..."
 
-#. metadata.json->name
-#. 3.2
+msgid "Search web for"
+msgstr "Online suchen: "
+
+msgid "Solution:"
+msgstr "Ergenis:"
+
+msgid "Click to copy"
+msgstr "Linksklick zum Kopieren"
+
 msgid "Cinnamenu"
 msgstr "Cinnamenu"
 
-#. metadata.json->description
 msgid ""
 "A flexible menu providing formatting options, web bookmarks, search provider "
 "support and fuzzy searching."
 msgstr ""
-"Ein flexibles Menü mit Formatierungsoptionen, Web-Lesezeichen, Unterstützung "
-"von Suchdienste-Anbietern und Suchfunktion."
+"Ein flexibles Menü mit Formatierungsoptionen, Web-Lesezeichen, direktem "
+"Zugang zu Suchmaschinen sowie unscharfer Suche."
 
-#. metadata.json->comments
 msgid ""
 "Made possible thanks to the efforts of contributors to the Cinnamon menu, "
 "Gnomenu, and the contributors to projects they derived from."
 msgstr ""
-"Ermöglicht dank der Unterstützung der Mitwirkenden am Cinnamon-Menü, Gnome-"
-"Menü und den daraus abgeleiteten Projekten."
+"Ermöglicht durch die Arbeit derjenigen, die zum Cinnamon Menu und zum "
+"Gnomenu sowie zu Projekten, aus denen diese Menüs hervorgegangen sind, "
+"beigetragen haben."
 
-#. 3.2
-#. 4.0
 msgid "Behavior"
 msgstr "Verhalten"
 
-#. 3.2
-#. 4.0
 msgid "Appearance"
 msgstr "Erscheinungsbild"
 
-#. 3.2
-#. 4.0
 msgid "Layout and Content"
-msgstr "Layout und Inhalt"
+msgstr "Layout und Inhalte"
 
-#. 3.2
 msgid "Search Providers"
-msgstr "Anbieter von Suchdiensten"
+msgstr "Suchmaschinen"
 
-#. 3.2
 msgid "No search provider extensions found"
-msgstr "Keine Erweiterungen für Anbieter von Suchdiensten gefunden"
+msgstr "Keine Erweiterungen für Suchmaschine gefunden"
 
-#. 3.2
-#. 3.2
-#. 4.0
-#. 4.0
 msgid "Panel"
 msgstr "Leiste"
 
-#. 3.2
-#. 3.2
-#. 4.0
 msgid "Menu"
 msgstr "Menü"
 
-#. 3.2
-#. 4.0
 msgid "Layout"
 msgstr "Layout "
 
-#. 3.2
-#. 4.0
 msgid "Content"
-msgstr "Inhalt"
+msgstr "Inhalte"
 
-#. 3.2
-#. 4.0
 msgid "Recent files settings"
 msgstr "Einstellungen für kürzlich verwendete Dateien"
 
-#. 3.2
-#. 4.0
 msgid "Open the menu editor"
 msgstr "Menüeditor öffnen"
 
-#. 3.2
-#. 4.0
 msgid "Reset category order"
 msgstr "Kategorie-Reihenfolge zurücksetzen"
 
-#. 3.2
-#. 4.0
 msgid "Use a custom icon"
 msgstr "Ein benutzerdefiniertes Symbol verwenden"
 
-#. 3.2
-#. 4.0
 msgid "Use a custom icon in the panel"
 msgstr "Ein benutzerdefiniertes Symbol für den Menü-Button verwenden"
 
-#. 3.2
-#. 3.2
-#. 4.0
-#. 4.0
 msgid "Panel icon"
 msgstr "Symbol für den Menü-Button"
 
-#. 3.2
-#. 4.0
 msgid "Panel text"
 msgstr "Text für den Menü-Button"
 
-#. 3.2
-#. 4.0
 msgid "Text to show beside the panel icon"
 msgstr "Text, der neben dem Menü-Button angezeigt werden soll"
 
-#. 3.2
-#. 3.2
-#. 3.2
-#. 4.0
-#. 4.0
-#. 4.0
 msgid "pixels"
 msgstr "Pixel"
 
-#. 3.2
-#. 3.2
-#. 4.0
-#. 4.0
 msgid "Category icon size"
-msgstr "Größe der Kategoriesymbole"
+msgstr "Symbolgröße für die Kategorien"
 
-#. 3.2
-#. 3.2
-#. 4.0
-#. 4.0
 msgid "Applications list icon size"
-msgstr "Symbolgröße der Anwendungen bei Anzeige als Liste"
+msgstr "Symbolgröße bei Anzeige der Anwendungen als Liste"
 
-#. 3.2
-#. 3.2
-#. 4.0
-#. 4.0
 msgid "Applications grid icon size"
-msgstr "Symbolgröße der Anwendungen bei Anzeige als Raster"
+msgstr "Symbolgröße bei Anzeige der Anwendungen in einem Raster"
 
-#. 3.2
-#. 4.0
 msgid "Keyboard shortcut to open and close the menu"
 msgstr "Tastenkombination zum Öffnen und Schließen des Menüs"
 
-#. 3.2
-#. 4.0
 msgid "Open menu on hover"
-msgstr "Menü durch Berühren mit dem Mauszeiger öffnen"
+msgstr "Menü durch Mausbewegung öffnen"
 
-#. 3.2
-#. 4.0
 msgid "Open the menu when I move my mouse over the panel icon"
-msgstr "Menü öffnen, wenn der Mauszeiger das Symbol von Cinnamenu berührt"
+msgstr "Das Menü öffnen, wenn der Mauszeiger das Symbol von Cinnamenu berührt"
 
-#. 3.2
-#. 3.2
-#. 4.0
 msgid "milliseconds"
 msgstr "Millisekunden"
 
-#. 3.2
-#. 4.0
 msgid "Menu hover delay"
-msgstr "Verzögerung bei Mausbewegung auf das Menü"
+msgstr "Verzögerung bis zum Öffnen des Menüs"
 
-#. 3.2
-#. 4.0
 msgid "Use menu animations"
 msgstr "Menüanimationen verwenden"
 
-#. 3.2
-#. 4.0
 msgid "Animate the menu on open and close"
 msgstr "Das Menü beim Öffnen und Schließen animieren"
 
-#. 3.2
-#. 4.0
 msgid "Activate categories on click"
-msgstr "Kategorien durch Maus-Klick aktivieren"
+msgstr "Kategorien durch Linksklick aktivieren"
 
-#. 3.2
-#. 4.0
 msgid "Activate categories on click instead of on hover"
-msgstr "Kategorien durch Klicken statt durch Mausbewegung aktivieren"
+msgstr ""
+"Kategorien durch Linksklick statt durch Berührung mit dem Mauszeiger "
+"aktivieren"
 
-#. 3.2
-#. 4.0
 msgid "Enable autoscrolling"
 msgstr "Automatischer Bildlauf"
 
-#. 3.2
-#. 4.0
 msgid "Enable autoscrolling in application list"
-msgstr "Automatischen Bildlauf in der Anwendungsliste aktivieren"
+msgstr "Automatischen Bildlauf in der Liste bzw. im Raster aktivieren"
 
-#. 3.2
-#. 4.0
 msgid "Show web bookmarks"
 msgstr "Web-Lesezeichen als Kategorie anzeigen"
 
-#. 3.2
-#. 4.0
 msgid "Show your browser's web bookmarks in the menu"
-msgstr "Web-Lesezeichen Ihres Browsers als Kategorie anzeigen"
+msgstr "Lesezeichen aus dem Browser als Kategorie anzeigen"
 
-#. 3.2
 msgid "Enable searching of open windows"
-msgstr "Suche auf offene Fenstern ausdehnen"
+msgstr "Suche in offenen Fenstern ermöglichen"
 
-#. 3.2
-#. 4.0
 msgid "Enable search providers"
-msgstr "Anbieter von Suchdiensten anzeigen"
+msgstr "Suchmaschinen anzeigen"
 
-#. 3.2
-#. 4.0
 msgid "Include search provider results in searches"
-msgstr "Ergebnisse der Internetsuche in Suchergebnisse einfügen"
+msgstr "Ergebnisse der Internetsuche zu den Suchergebnissen hinzufügen"
 
-#. 3.2
-#. 4.0
 msgid "Example Search Providers"
-msgstr "Beispiel für einen Anbieter von Suchdiensten"
+msgstr "Beispiel für eine Suchmaschine"
 
-#. 3.2
-#. 3.2
 msgid "Startup applications view mode"
 msgstr "Ansichtsmodus der Anwendungen beim Start"
 
-#. 3.2
-#. 4.0
 msgid "List"
 msgstr "Liste"
 
-#. 3.2
-#. 4.0
 msgid "Grid"
 msgstr "Raster"
 
-#. 3.2
-#. 4.0
 msgid "columns"
 msgstr "Spalten"
 
-#. 3.2
-#. 3.2
-#. 4.0
-#. 4.0
 msgid "Number of columns in apps grid"
 msgstr "Anzahl Spalten bei Anzeige der Anwendungen in einem Raster"
 
-#. 3.2
-#. 4.0
 msgid "Show bookmarks and places"
 msgstr "Lesezeichen und Orte anzeigen"
 
-#. 3.2
-#. 4.0
 msgid "Show bookmarks and places category in the menu"
 msgstr "Lesezeichen und Orte als Kategorie anzeigen"
 
-#. 3.2
-#. 3.2
 msgid "Show application icons"
 msgstr "Anwendungssymbole anzeigen"
 
-#. 3.2
-#. 3.2
 msgid "Show category icons"
 msgstr "Kategoriesymbole anzeigen"
 
-#. 3.2
-#. 3.2
 msgid "Show application descriptions under titles"
 msgstr "Anwendungsbeschreibungen unter Anwendungsnamen anzeigen"
 
-#. 3.2
-#. 3.2
 msgid "Show tooltips"
 msgstr "Tipps zu Funktionalitäten anzeigen"
 
-#. 3.2
-#. 3.2
 msgid "Tooltip delay"
 msgstr "Verzögerung der Anzeige eines Tipps"
 
-#. 3.2
-#. 3.2
-#. 4.0
-#. 4.0
 msgid "Use a custom menu height"
 msgstr "Benutzerdefinierte Menü-Höhe einstellen"
 
-#. 3.2
-#. 4.0
 msgid "px"
-msgstr "px"
+msgstr "Pixel"
 
-#. 3.2
-#. 3.2
-#. 4.0
-#. 4.0
 msgid "Custom menu height"
 msgstr "Benutzerdefinierte Menü-Höhe"
 
-#. 4.0
 msgid "Applications view mode"
-msgstr "Anzeigemodus für die Anwendungen"
+msgstr "Art der Anzeige für die Anwendungen"
 
-#. 4.0
 msgid "View applications as list or grid"
-msgstr "Anwendungen als Liste oder als Raster anzeigen"
+msgstr "Anwendungen als Liste oder in einem Raster anzeigen"
 
-#. 4.0
 msgid "Application description placement"
-msgstr "Platzierung der Anwendungsbeschreibung"
+msgstr "Anzeige der Anwendungsbeschreibungen"
 
-#. 4.0
 msgid "Tooltips"
-msgstr "Tool-Tipps"
+msgstr "als Tool-Tipp"
 
-#. 4.0
 msgid "Under titles"
-msgstr "Untertitel"
+msgstr "unter den Namen"
 
-#. 4.0
 msgid "None"
-msgstr "keine"
+msgstr "keine Anzeige"
 
-#. 4.0
 msgid "Choose where to show application descriptions"
-msgstr "Position, an der Anwendungsbeschreibungen angezeigt werden"
+msgstr ""
+"Festlegen, ob und wie die Beschreibungen der Anwendungen angezeigt werden"
 
-#. 4.0
 msgid "Session buttons location"
 msgstr "Position der Sitzungsschaltflächen"
 
-#. 4.0
 msgid "Top"
 msgstr "oben"
 
-#. 4.0
 msgid "Bottom"
 msgstr "unten"
 
-#. 4.0
 msgid "Left"
 msgstr "links"
 
-#. 4.0
 msgid "Right"
 msgstr "rechts"
 
-#. 4.0
-msgid "Choose where to show the session (quit, logout, etc.) buttons"
+msgid "Choose where to show the session buttons (quit, logout, etc.)"
 msgstr ""
-"Position, an der die Schaltflächen für die Sitzung (Bildschirm sperren; "
-"Abmelden; Beenden) angezeigt werden"
+"Position, an der die Sitzungsschaltflächen (Bildschirm sperren; Abmelden; "
+"Beenden) angezeigt werden"
 
-#. 4.0
 msgid "Add favorites to session buttons"
 msgstr "Favoriten zu Sitzungsschaltflächen hinzufügen"
 
-#. 4.0
 msgid "Show your favorite app icons next to the session buttons"
 msgstr ""
 "Zusätzlich zu den Sitzungsschaltflächen auch die Symbole der Favoriten "
 "anzeigen"
 
-#. 4.0
 msgid "Always open menu on favorite apps"
 msgstr "Beim Öffnen des Menüs immer die Favoriten anzeigen"
 
-#. 4.0
 msgid "Always open the menu with favorite apps category selected"
 msgstr "Beim Öffnen des Menüs immer die Kategorie »Favoriten« markieren"
 
+msgid "Web search option"
+msgstr "Suchmaschinen"
+
+msgid "Google"
+msgstr "Google"
+
+msgid "Bing"
+msgstr "Bing"
+
+msgid "Yahoo"
+msgstr "Yahoo"
+
+msgid "DuckDuckGo"
+msgstr "DuckDuckGo"
+
+msgid "Show an internet search option in search results"
+msgstr "Die Option »Online suchen« zu Suchergebnissen hinzufügen"
+
+msgid "Session buttons icon size"
+msgstr "Symbolgröße für die Sitzungsschaltflächen"
+
+msgid "Use session buttons box style"
+msgstr "Sitzungsschaltflächen in eine Box einbetten"
+
+#~ msgid "Remove favorite"
+#~ msgstr "Favorit entfernen"
+
 #~ msgid "Failed to launch \"%s\""
 #~ msgstr "\"%s\" konnte nicht gestartet werden"
-
-#~ msgid "Remove from favorites"
-#~ msgstr "Aus den Favoriten entfernen"
 
 #~ msgid "Toggle recent files"
 #~ msgstr "Letzte Dateien umschalten"

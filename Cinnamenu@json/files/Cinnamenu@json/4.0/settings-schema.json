@@ -73,8 +73,7 @@
                 "open-on-favorites",
                 "enable-autoscroll",
                 "web-search-option",
-                "enable-search-providers",
-                "get-providers"
+                "enable-search-providers"
             ]
         },
         "panel-appear":{
@@ -155,7 +154,7 @@
         "min":360,
         "max":9999,
         "step":1,
-        "units":"px",
+        "units":"pixels",
         "description":"Custom menu height",
         "tooltip":"Custom menu height",
         "dependency":"enable-custom-menu-height"
@@ -263,11 +262,6 @@
         "default":false,
         "description":"Enable search providers",
         "tooltip":"Include search provider results in searches"
-    },
-    "get-providers":{
-        "type":"button",
-        "description":"Example Search Providers",
-        "callback":"getExampleSearchProviders"
     },
 
     "menu-icon-custom":{
