@@ -20,6 +20,15 @@ const FreedesktopDBusInterface = '\
 </node>';
 const FreedesktopDBusProxy = Gio.DBusProxy.makeProxyWrapper(FreedesktopDBusInterface);
 
+const Qt5CoreApplicationInterface = '\
+<node> \
+    <interface name="org.qtproject.Qt.QCoreApplication"> \
+        <property name="applicationVersion" type="s" access="read"/> \
+        <property name="applicationName" type="s" access="read"/> \
+    </interface> \
+</node>';
+const Qt5CoreApplicationProxy = Gio.DBusProxy.makeProxyWrapper(Qt5CoreApplicationInterface);
+
 const KDEConnectInterface = '\
 <node> \
     <interface name="org.kde.kdeconnect.daemon"> \
@@ -249,13 +258,15 @@ KDEConnectApplet.prototype = {
         this.metadata = metadata;
 
         this.set_applet_icon_name("kdeconnect");
-	this.setAllowedLayout(Applet.AllowedLayout.BOTH);
+	    this.setAllowedLayout(Applet.AllowedLayout.BOTH);
 
         this.menuManager = new PopupMenu.PopupMenuManager(this);
         this.menu = new Applet.AppletPopupMenu(this, orientation);
         this.menuManager.addMenu(this.menu);
         
         let dbusNameList = [];
+
+        this.KDEConnectVersion = [];
 
         //List of Objects that contain a d-bus proxy, the signal object and the menu item, that has to be updated
         this.batterySignalProxyList = [];
@@ -271,6 +282,18 @@ KDEConnectApplet.prototype = {
         try {
             let dbproxy = new FreedesktopDBusProxy(Gio.DBus.session, "org.freedesktop.DBus", "/org/freedesktop/DBus");
             dbusNameList = dbproxy.ListNamesSync()[0];
+
+            let qtCoreAppProxy = new Qt5CoreApplicationProxy(Gio.DBus.session, "org.kde.kdeconnect", "/MainApplication");
+            let versionStringArray = qtCoreAppProxy.applicationVersion.split(".");
+
+            for (let i = 0; i<versionStringArray.length; i++) {
+                this.KDEConnectVersion.push(Number(versionStringArray));
+            }
+
+            let vstr = "";
+            for (let i = 0; i<this.KDEConnectVersion.length; i++) {
+                vstr+this.KDEConnectVersion[i]+".";
+            }
         }
         catch (error) {
             global.logError(error);
