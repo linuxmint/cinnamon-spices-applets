@@ -154,6 +154,9 @@ const KDEConnectDeviceSFTPInterface = '\
         <method name="mountPoint"> \
             <arg type="s" direction="out"/> \
         </method> \
+        <method name="getMountError"> \
+            <arg type="s" direction="out"/> \
+        </method> \
         <method name="unmount"> \
         </method> \
         <signal name="mounted"> \
@@ -323,7 +326,8 @@ KDEConnectApplet.prototype = {
             }
             
             let kdecVersionMenuItem = new PopupMenu.PopupMenuItem(_("KDE Connect Version")+": "+this.KDEConnectVersion.join("."), {reactive: false});
-            kdecVersionMenuItem.setSensitive(false);
+            //kdecVersionMenuItem.setSensitive(false);
+            kdecVersionMenuItem.actor.add_style_pseudo_class('insensitive');
             this._applet_context_menu.addMenuItem(kdecVersionMenuItem);
             this._applet_context_menu.addCommandlineAction(_("Configure KDEConnect"), "kcmshell5 kcm_kdeconnect");
             this._applet_context_menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
@@ -597,15 +601,28 @@ KDEConnectApplet.prototype = {
                         let mountMenuItem = deviceMenuItem.menu.addAction(_("Mount and Browse"), function() {
 
                             let isMounted = kdecDevSFTPProxy.isMountedSync()[0];
+                            let mountSuccessful;
 
-                            if (isMounted == false) {
-                                kdecDevSFTPProxy.mountAndWaitSync();
+                            if (isMounted == true) {
+                                let mountPoint = kdecDevSFTPProxy.mountPointSync()[0];
+                                if (mountPoint !== "") {
+                                    imports.misc.util.spawnCommandLine("xdg-open "+mountPoint);
+                                }
                             }
-
-                            let mountPoint = kdecDevSFTPProxy.mountPointSync()[0];
-                            if (mountPoint !== "") {
-                                imports.misc.util.spawnCommandLine("xdg-open "+mountPoint);
+                            else {
+                                mountSuccessful = kdecDevSFTPProxy.mountAndWaitSync()[0];
+                                if (mountSuccessful == true) {
+                                    let mountPoint = kdecDevSFTPProxy.mountPointSync()[0];
+                                    if (mountPoint !== "") {
+                                        imports.misc.util.spawnCommandLine("xdg-open "+mountPoint);
+                                    }
+                                }
+                                else {
+                                    let mountError = kdecDevSFTPProxy.getMountErrorSync()[0];
+                                    Main.notify(_("The Device couldn't be mounted!"), mountError);
+                                }
                             }
+                            
                         });
     
                         let unmountMenuItem = deviceMenuItem.menu.addAction(_("Unmount"), function() {
@@ -647,6 +664,10 @@ KDEConnectApplet.prototype = {
                         }
                     });
                 }
+
+                //TODO: Photo
+                //TODO: (MAYBE) FINDTHISDEVICE
+                //TODO: (MAYBE) REMOTECONTROL
             }
         }
     },
