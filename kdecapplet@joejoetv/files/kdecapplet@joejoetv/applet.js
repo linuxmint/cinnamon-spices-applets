@@ -104,7 +104,7 @@ const KDEConnectDevicePingInterface = '\
 </node>';
 const KDEConnectDevicePingProxy = Gio.DBusProxy.makeProxyWrapper(KDEConnectDevicePingInterface);
 
-const KDEConnectDeviceTelephonyInterface = '\
+const KDEConnectDeviceOldTelephonyInterface = '\
 <node> \
     <interface name="org.kde.kdeconnect.device.telephony"> \
         <method name="sendSms"> \
@@ -113,7 +113,22 @@ const KDEConnectDeviceTelephonyInterface = '\
         </method> \
     </interface> \
 </node>';
-const KDEConnectDeviceTelephonyProxy = Gio.DBusProxy.makeProxyWrapper(KDEConnectDeviceTelephonyInterface);
+const KDEConnectDeviceOldTelephonyProxy = Gio.DBusProxy.makeProxyWrapper(KDEConnectDeviceOldTelephonyInterface);
+
+const KDEConnectDeviceSMSInterface = '\
+<node> \
+    <interface name="org.kde.kdeconnect.device.sms"> \
+        <method name="launchApp"> \
+        </method> \
+        <method name="requestAllConversations"> \
+        </method> \
+        <method name="sendSms"> \
+            <arg name="phoneNumber" type="s" direction="in"/> \
+            <arg name="messageBody" type="s" direction="in"/> \
+        </method> \
+    </interface> \
+</node>';
+const KDEConnectDeviceSMSProxy = Gio.DBusProxy.makeProxyWrapper(KDEConnectDeviceSMSInterface);
 
 const KDEConnectDeviceShareInterface = '\
 <node> \
@@ -282,36 +297,37 @@ KDEConnectApplet.prototype = {
         try {
             let dbproxy = new FreedesktopDBusProxy(Gio.DBus.session, "org.freedesktop.DBus", "/org/freedesktop/DBus");
             dbusNameList = dbproxy.ListNamesSync()[0];
-
-            let qtCoreAppProxy = new Qt5CoreApplicationProxy(Gio.DBus.session, "org.kde.kdeconnect", "/MainApplication");
-            let versionStringArray = qtCoreAppProxy.applicationVersion.split(".");
-
-            for (let i = 0; i<versionStringArray.length; i++) {
-                this.KDEConnectVersion.push(Number(versionStringArray));
-            }
-
-            let vstr = "";
-            for (let i = 0; i<this.KDEConnectVersion.length; i++) {
-                vstr+this.KDEConnectVersion[i]+".";
-            }
         }
         catch (error) {
             global.logError(error);
         }
-
+        
         if (dbusNameList.includes("org.kde.kdeconnect")) {
-            this._applet_context_menu.addCommandlineAction(_("Configure KDEConnect"), "kcmshell5 kcm_kdeconnect");
-            this._applet_context_menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
-
             try {
-                let bus = Gio.bus_get_sync(Gio.BusType.SESSION, null);
-                this.kdecProxy = new KDEConnectProxy(bus, "org.kde.kdeconnect", "/modules/kdeconnect");
+                //Get KDE Connect Version
+                let qtCoreAppProxy = new Qt5CoreApplicationProxy(Gio.DBus.session, "org.kde.kdeconnect", "/MainApplication");
+                let versionStringArray = qtCoreAppProxy.applicationVersion.split(".");
+                
+                for (let i = 0; i<versionStringArray.length; i++) {
+                    this.KDEConnectVersion.push(Number(versionStringArray[i]));
+                }
+
+                //this.KDEConnectVersion = [1,3,3];
+                
+                //Connect DBus Signal
+                this.kdecProxy = new KDEConnectProxy(Gio.DBus.session, "org.kde.kdeconnect", "/modules/kdeconnect");
                 this._onDeviceListChanged = this.kdecProxy.connectSignal("deviceListChanged", Lang.bind(this, this.onDeviceListChanged));
             }
             catch (error) {
                 global.logError(error);
             }
-    
+            
+            let kdecVersionMenuItem = new PopupMenu.PopupMenuItem(_("KDE Connect Version")+": "+this.KDEConnectVersion.join("."), {reactive: false});
+            kdecVersionMenuItem.setSensitive(false);
+            this._applet_context_menu.addMenuItem(kdecVersionMenuItem);
+            this._applet_context_menu.addCommandlineAction(_("Configure KDEConnect"), "kcmshell5 kcm_kdeconnect");
+            this._applet_context_menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+            
             this.updateMenu();
         }
         else {
@@ -457,33 +473,75 @@ KDEConnectApplet.prototype = {
                     });
                 }
 
-                if (loadedPlugins.includes("kdeconnect_telephony")) {
-                    if (this.zenitySupported == true) {
-                        deviceMenuItem.menu.addAction(_("Send SMS"), function() {
+                if (this.KDEConnectVersion[0] == 1 && this.KDEConnectVersion[1] == 3) {
+                    if (loadedPlugins.includes("kdeconnect_telephony")) {
+                        if (this.zenitySupported == true) {
+                            deviceMenuItem.menu.addAction(_("Send SMS"), function() {
+                                try {
+                                    Util.spawnCommandLineAsyncIO("zenity", function(stdout, stderr, exitCode) {
+                                        if (exitCode == 0) {
+                                            let regex = /^(.*)\|(.*)\n/m;
+                                            let regexresult = regex.exec(stdout);
+                                            let phonenumber = regexresult[1];
+                                            let message = regexresult[2];
+        
+                                            try {
+                                                let kdecDevTeleProxy = new KDEConnectDeviceOldTelephonyProxy(Gio.DBus.session, "org.kde.kdeconnect", "/modules/kdeconnect/devices/"+id+"/telephony");
+                                                kdecDevTeleProxy.sendSmsSync(phonenumber, message);
+                                                Main.notify(_("Sent SMS to ${phonenumber}").replace("${phonenumber}",phonenumber));
+                                            }
+                                            catch (error) {
+                                                global.logError(error);
+                                            }
+                                        }
+                                    }, 
+                                    {argv: KDEConnectTelephonyZenityArgV});
+                                }
+                                catch (error) {
+                                    global.logError(error);
+                                }
+                            });
+                        }
+                    }
+                }
+                else {
+                    if (loadedPlugins.includes("kdeconnect_sms")) {
+                        deviceMenuItem.menu.addAction(_("Launch SMS App"), function() {
                             try {
-                                Util.spawnCommandLineAsyncIO("zenity", function(stdout, stderr, exitCode) {
-                                    if (exitCode == 0) {
-                                        let regex = /^(.*)\|(.*)\n/m;
-                                        let regexresult = regex.exec(stdout);
-                                        let phonenumber = regexresult[1];
-                                        let message = regexresult[2];
-    
-                                        try {
-                                            let kdecDevTeleProxy = new KDEConnectDeviceTelephonyProxy(Gio.DBus.session, "org.kde.kdeconnect", "/modules/kdeconnect/devices/"+id+"/telephony");
-                                            kdecDevTeleProxy.sendSmsSync(phonenumber, message);
-                                            Main.notify(_("Sent SMS to ${phonenumber}").replace("${phonenumber}",phonenumber));
-                                        }
-                                        catch (error) {
-                                            global.logError(error);
-                                        }
-                                    }
-                                }, 
-                                {argv: KDEConnectTelephonyZenityArgV});
+                                let kdecDevSMSProxy = new KDEConnectDeviceSMSProxy(Gio.DBus.session, "org.kde.kdeconnect", "/modules/kdeconnect/devices/"+id+"/sms");
+                                kdecDevSMSProxy.launchAppSync();
                             }
                             catch (error) {
                                 global.logError(error);
                             }
                         });
+                        if (this.zenitySupported == true) {
+                            deviceMenuItem.menu.addAction(_("Send SMS"), function() {
+                                try {
+                                    Util.spawnCommandLineAsyncIO("zenity", function(stdout, stderr, exitCode) {
+                                        if (exitCode == 0) {
+                                            let regex = /^(.*)\|(.*)\n/m;
+                                            let regexresult = regex.exec(stdout);
+                                            let phonenumber = regexresult[1];
+                                            let message = regexresult[2];
+        
+                                            try {
+                                                let kdecDevSMSProxy = new KDEConnectDeviceSMSProxy(Gio.DBus.session, "org.kde.kdeconnect", "/modules/kdeconnect/devices/"+id+"/sms");
+                                                kdecDevSMSProxy.sendSmsSync(phonenumber, message);
+                                                Main.notify(_("Sent SMS to ${phonenumber}").replace("${phonenumber}",phonenumber));
+                                            }
+                                            catch (error) {
+                                                global.logError(error);
+                                            }
+                                        }
+                                    }, 
+                                    {argv: KDEConnectTelephonyZenityArgV});
+                                }
+                                catch (error) {
+                                    global.logError(error);
+                                }
+                            });
+                        }
                     }
                 }
 
