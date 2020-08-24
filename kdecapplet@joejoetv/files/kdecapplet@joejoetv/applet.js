@@ -10,6 +10,8 @@ const GLib = imports.gi.GLib;
 const Gettext = imports.gettext;
 const Extension = imports.ui.extension;
 
+// DBus Interfaces and Proxies
+
 const FreedesktopDBusInterface = '\
 <node> \
     <interface name="org.freedesktop.DBus"> \
@@ -176,6 +178,21 @@ const KDEConnectDeviceFMPInterface = '\
 </node>';
 const KDEConnectDeviceFMPProxy = Gio.DBusProxy.makeProxyWrapper(KDEConnectDeviceFMPInterface);
 
+const KDEConnectDevicePhotoInterface = '\
+<node> \
+    <interface name="org.kde.kdeconnect.device.photo"> \
+        <method name="requestPhoto"> \
+            <arg name="fileName" type="s" direction="in"/> \
+        </method> \
+        <signal name="photoReceived"> \
+            <arg name="fileName" type="s" direction="out"/> \
+        </signal> \
+    </interface> \
+</node>';
+const KDEConnectDevicePhotoProxy = Gio.DBusProxy.makeProxyWrapper(KDEConnectDevicePhotoInterface);
+
+//Misc functions
+
 function getBatteryIcon(charge, isCharging) {
     let iconName = "battery-symbolic";
     
@@ -223,11 +240,11 @@ function getBatteryIcon(charge, isCharging) {
                 break;
         }
     }
-    return iconName
+    return iconName;
 }
 
 function getDeviceIcon(type) {
-    let iconName
+    let iconName;
 
     switch(type) {
         case "desktop":
@@ -249,7 +266,7 @@ function getDeviceIcon(type) {
             iconName = "dialog-question-symbolic";
     }
 
-    return iconName
+    return iconName;
 }
 
 // l10n/translation support
@@ -260,9 +277,11 @@ function _(str) {
     return Gettext.dgettext(UUID, str);
 }
 
+// Zenity Commands with translation
 const KDEConnectTelephonyZenityArgV = ['zenity','--forms','--title='+_("Send SMS"),'--ok-label='+_("Send"),'--window-icon=kdeconnect','--text='+_("Enter Phone Number and Message to Send."),'--add-entry='+_("Phone Number"),'--add-entry='+_("Message"),'2> /dev/null'];
 const KDEConnectShareURLArgV = ['zenity','--forms','--title='+_("Share URL"),'--ok-label='+_("Share"),'--window-icon=kdeconnect','--text='+_("Enter URL to Share."),'--add-entry='+_("URL"),'2> /dev/null'];
 
+// Main Applet class
 function KDEConnectApplet(metadata, orientation, panel_height, instance_id) {
     this._init(metadata, orientation, panel_height, instance_id);
 }
@@ -286,17 +305,19 @@ KDEConnectApplet.prototype = {
 
         this.KDEConnectVersion = [];
 
-        //List of Objects that contain a d-bus proxy, the signal object and the menu item, that has to be updated
-        this.batterySignalProxyList = [];
-        //List of objects that contain two menu items for mounting and unmounting, a d-bus proxy and two signal objects for mounting and unmounting signals
-        this.sftpSignalProxyList = [];
+        this.SignalCallbackObjects = {};
+        this.SignalCallbackObjects["battery"] = []; //List of Objects that contain a d-bus proxy, the signal object and the menu item, that has to be updated
+        this.SignalCallbackObjects["sftp"] = []; //List of objects that contain two menu items for mounting and unmounting, a d-bus proxy and two signal objects for mounting and unmounting signals
+        this.SignalCallbackObjects["photo"] = [];
 
+        //Check if zenity is installed and print warning to log if not
         this.zenitySupported = this.checkZenity();
 
         if (this.zenitySupported == false) {
             global.logWarning("["+this.metadata.uuid+"] Zenity is not installed! Install it to use the 'Send SMS' and 'Send URL' features.");
         }
 
+        //Check if KDE Connect is available on the DBus
         try {
             let dbproxy = new FreedesktopDBusProxy(Gio.DBus.session, "org.freedesktop.DBus", "/org/freedesktop/DBus");
             dbusNameList = dbproxy.ListNamesSync()[0];
@@ -315,8 +336,6 @@ KDEConnectApplet.prototype = {
                     this.KDEConnectVersion.push(Number(versionStringArray[i]));
                 }
 
-                //this.KDEConnectVersion = [1,3,3];
-                
                 //Connect DBus Signal
                 this.kdecProxy = new KDEConnectProxy(Gio.DBus.session, "org.kde.kdeconnect", "/modules/kdeconnect");
                 this._onDeviceListChanged = this.kdecProxy.connectSignal("deviceListChanged", Lang.bind(this, this.onDeviceListChanged));
@@ -326,7 +345,6 @@ KDEConnectApplet.prototype = {
             }
             
             let kdecVersionMenuItem = new PopupMenu.PopupMenuItem(_("KDE Connect Version")+": "+this.KDEConnectVersion.join("."), {reactive: false});
-            //kdecVersionMenuItem.setSensitive(false);
             kdecVersionMenuItem.actor.add_style_pseudo_class('insensitive');
             this._applet_context_menu.addMenuItem(kdecVersionMenuItem);
             this._applet_context_menu.addCommandlineAction(_("Configure KDEConnect"), "kcmshell5 kcm_kdeconnect");
@@ -335,55 +353,37 @@ KDEConnectApplet.prototype = {
             this.updateMenu();
         }
         else {
+            //KDE Connect not available
             try{
                 let noKDEConnectMenuItem = new PopupMenu.PopupMenuItem(_("KDEConnect is not running!"), {});
                 this.menu.addMenuItem(noKDEConnectMenuItem);
                 noKDEConnectMenuItem.setSensitive(false);
                 this.set_applet_tooltip(_("KDEConnect is not running!"));
                 this.set_applet_label("");
-                this._applet_context_menu.addAction(_("Reload Applet"), Lang.bind(this, this.reloadApplet))
+                this._applet_context_menu.addAction(_("Reload Applet"), Lang.bind(this, this.reloadApplet));
 
             }
             catch (error) {
                 global.logError(error);
             }
         }
-
     },
 
-    on_applet_clicked: function() {
-		this.menu.toggle();
-    },
-
-    on_applet_removed_from_panel: function() {
-		if (typeof this._onDeviceListChanged !== "undefined")
-		{
-			this.kdecProxy.disconnectSignal(this._onDeviceListChanged);
-			delete this._onDeviceListChanged;
-		}
-		if (typeof this._onPairingRequestsChanged !== "undefined")
-		{
-			this.kdecProxy.disconnectSignal(this._onPairingRequestsChanged);
-			delete this._onPairingRequestsChanged;
-		}
-        this.disconnectBatterySignals();
-    },
-
-    onDeviceListChanged: function() {
-        this.updateMenu();
-        global.log("["+this.metadata.uuid+"] Device list updated!");
-    },
-
+    //Main update method
     updateMenu: function() {
+        //Reset Menu
         this.menu.close();
         this.menu.removeAll();
-        this.disconnectBatterySignals();
-        this.batterySignalProxyList.length = 0;
-        this.sftpSignalProxyList.length = 0;
+        //Reset Signals
+        this.disconnectSignals();
+        this.SignalCallbackObjects["battery"].length = 0;
+        this.SignalCallbackObjects["sftp"].length = 0;
+        this.SignalCallbackObjects["photo"].length = 0;
 
         let deviceIDs = [];
-        let deviceNames = new Object();
+        let deviceNames = {};
 
+        //Get Device ID's
         try {
             deviceIDs = this.kdecProxy.devicesSync(true, true)[0];
             deviceNames = this.kdecProxy.deviceNamesSync(true, true)[0];
@@ -427,7 +427,7 @@ KDEConnectApplet.prototype = {
                     global.logError(error);
                 }
 
-                let deviceTypeIDMenuItem = new PopupMenu.PopupIconMenuItem(_("ID")+": "+id, getDeviceIcon(type), St.IconType.SYMBOLIC, {})
+                let deviceTypeIDMenuItem = new PopupMenu.PopupIconMenuItem(_("ID")+": "+id, getDeviceIcon(type), St.IconType.SYMBOLIC, {});
                 deviceTypeIDMenuItem._signals.connect(deviceTypeIDMenuItem, 'activate', function() {
                     let clipboard = St.Clipboard.get_default();
                     clipboard.set_text(St.ClipboardType.CLIPBOARD, id);
@@ -445,14 +445,14 @@ KDEConnectApplet.prototype = {
                     try {
                         let batteryProxySignal = {};
 
-                        batteryProxySignal.kdecDeviceBatProxy = new KDEConnectDeviceBatteryProxy(Gio.bus_get_sync(Gio.BusType.SESSION, null), "org.kde.kdeconnect","/modules/kdeconnect/devices/"+id);
-                        batteryProxySignal._onStateChanged = batteryProxySignal.kdecDeviceBatProxy.connectSignal("stateChanged", Lang.bind(batteryProxySignal, this.onStateChanged));
+                        batteryProxySignal.Proxy = new KDEConnectDeviceBatteryProxy(Gio.bus_get_sync(Gio.BusType.SESSION, null), "org.kde.kdeconnect","/modules/kdeconnect/devices/"+id);
+                        batteryProxySignal._onStateChanged = batteryProxySignal.Proxy.connectSignal("stateChanged", Lang.bind(batteryProxySignal, this.onStateChanged));
                         batteryProxySignal.MenuItem = deviceBatteryMenuItem;
             
-                        charge = batteryProxySignal.kdecDeviceBatProxy.chargeSync();
-                        isCharging = batteryProxySignal.kdecDeviceBatProxy.isChargingSync();
+                        charge = batteryProxySignal.Proxy.chargeSync();
+                        isCharging = batteryProxySignal.Proxy.isChargingSync();
 
-                        this.batterySignalProxyList.push(batteryProxySignal);
+                        this.SignalCallbackObjects["battery"].push(batteryProxySignal);
                     }
                     catch (error) {
                         global.logError(error);
@@ -563,7 +563,7 @@ KDEConnectApplet.prototype = {
                                     global.logError(error);
                                 }
                             }
-                        }, {})
+                        }, {});
                     });
                     if (this.zenitySupported == true) {
                         deviceMenuItem.menu.addAction(_("Share URL"), function() {
@@ -640,13 +640,13 @@ KDEConnectApplet.prototype = {
                             unmountMenuItem.setSensitive(false);
                         }
     
-                        sftpProxySignal.sftpProxy = kdecDevSFTPProxy;
+                        sftpProxySignal.Proxy = kdecDevSFTPProxy;
                         sftpProxySignal.MountMenuItem =  mountMenuItem;
                         sftpProxySignal.UnmountMenuItem = unmountMenuItem;
-                        sftpProxySignal._onMounted = sftpProxySignal.sftpProxy.connectSignal("mounted", Lang.bind(sftpProxySignal, this.onMounted));
-                        sftpProxySignal._onUnmounted = sftpProxySignal.sftpProxy.connectSignal("unmounted", Lang.bind(sftpProxySignal, this.onUnmounted));
+                        sftpProxySignal._onMounted = sftpProxySignal.Proxy.connectSignal("mounted", Lang.bind(sftpProxySignal, this.onMounted));
+                        sftpProxySignal._onUnmounted = sftpProxySignal.Proxy.connectSignal("unmounted", Lang.bind(sftpProxySignal, this.onUnmounted));
 
-                        this.sftpSignalProxyList.push(sftpProxySignal);
+                        this.SignalCallbackObjects["sftp"].push(sftpProxySignal);
                     }
                     catch (error) {
                         global.logError(error);
@@ -665,34 +665,62 @@ KDEConnectApplet.prototype = {
                     });
                 }
 
-                //TODO: Photo
+                if (loadedPlugins.includes("kdeconnect_photo")) {
+                    let imageFilter = new FileDialog.Filter("jpeg");
+                    imageFilter.addMimeType("image/jpeg");
+
+                    deviceMenuItem.menu.addAction(_("Request Photo"), function() {
+                        FileDialog.save(function(selection) {
+                            let filePath = selection.replace(/\n$/, "");
+                            if (filePath !== "") {
+                                try {
+                                    let kdecDevPhotoProxy = new KDEConnectDevicePhotoProxy(Gio.DBus.session, "org.kde.kdeconnect", "/modules/kdeconnect/devices/"+id+"/photo");
+                                    kdecDevPhotoProxy.requestPhotoSync(filePath);
+                                    Main.notify(_("Requested photo from ${name}").replace("${name}",name), filePath);
+                                }
+                                catch (error) {
+                                    global.logError(error);
+                                }
+                            }
+                        }, {name: "image.jpg", filters: [imageFilter]});
+                    });
+
+                    try {
+                        let signalObject = {};
+                        signalObject.Proxy = new KDEConnectDevicePhotoProxy(Gio.DBus.session, "org.kde.kdeconnect", "/modules/kdeconnect/devices/"+id+"/photo");
+                        signalObject._onPhotoReceived = signalObject.Proxy.connectSignal("photoReceived", Lang.bind(signalObject, this.onPhotoReceived));
+
+                        this.SignalCallbackObjects["photo"].push(signalObject);
+                    }
+                    catch (error) {
+                        global.logError(error);
+                    }
+                }
+
                 //TODO: (MAYBE) FINDTHISDEVICE
                 //TODO: (MAYBE) REMOTECONTROL
             }
         }
     },
 
-    disconnectBatterySignals: function() {
-        for (let i = 0; i < this.batterySignalProxyList.length; i++) {
-            if (typeof this.batterySignalProxyList[i]._onStateChanged !== "undefined")
-            {
-                this.batterySignalProxyList[i].kdecDeviceBatProxy.disconnectSignal(this.batterySignalProxyList[i]._onStateChanged);
-                delete this.batterySignalProxyList[i]._onStateChanged;
-            }
-        }
+    //Applet Callbacks
+    on_applet_clicked: function() {
+		this.menu.toggle();
+    },
 
-        for (let i = 0; i < this.sftpSignalProxyList.length; i++) {
-            if (typeof this.sftpSignalProxyList[i]._onMounted !== "undefined")
-            {
-                this.sftpSignalProxyList[i].sftpProxy.disconnectSignal(this.sftpSignalProxyList[i]._onMounted);
-                delete this.sftpSignalProxyList[i]._onMounted;
-            }
-            if (typeof this.sftpSignalProxyList[i]._onUnmounted !== "undefined")
-            {
-                this.sftpSignalProxyList[i].sftpProxy.disconnectSignal(this.sftpSignalProxyList[i]._onUnmounted);
-                delete this.sftpSignalProxyList[i]._onUnmounted;
-            }
-        }
+    on_applet_removed_from_panel: function() {
+		if (typeof this._onDeviceListChanged !== "undefined")
+		{
+			this.kdecProxy.disconnectSignal(this._onDeviceListChanged);
+			delete this._onDeviceListChanged;
+		}
+        this.disconnectSignals();
+    },
+
+    //DBus Signal callbacks
+    onDeviceListChanged: function() {
+        this.updateMenu();
+        global.log("["+this.metadata.uuid+"] Device list updated!");
     },
 
     onStateChanged: function(proxy, sender, [charging]) {
@@ -718,6 +746,39 @@ KDEConnectApplet.prototype = {
         this.UnmountMenuItem.setSensitive(false);
     },
 
+    onPhotoReceived: function(proxy, sender, [fileName]) {
+        Main.notify(_("Photo received"), fileName);
+    },
+
+    //Reset Signals
+    disconnectSignals: function() {
+        for (let i = 0; i < this.SignalCallbackObjects["battery"].length; i++) {
+            if (typeof this.SignalCallbackObjects["battery"][i]._onStateChanged !== "undefined") {
+                this.SignalCallbackObjects["battery"][i].Proxy.disconnectSignal(this.SignalCallbackObjects["battery"][i]._onStateChanged);
+                delete this.SignalCallbackObjects["battery"][i]._onStateChanged;
+            }
+        }
+
+        for (let i = 0; i < this.SignalCallbackObjects["sftp"].length; i++) {
+            if (typeof this.SignalCallbackObjects["sftp"][i]._onMounted !== "undefined") {
+                this.SignalCallbackObjects["sftp"][i].Proxy.disconnectSignal(this.SignalCallbackObjects["sftp"][i]._onMounted);
+                delete this.SignalCallbackObjects["sftp"][i]._onMounted;
+            }
+            if (typeof this.SignalCallbackObjects["sftp"][i]._onUnmounted !== "undefined") {
+                this.SignalCallbackObjects["sftp"][i].Proxy.disconnectSignal(this.SignalCallbackObjects["sftp"][i]._onUnmounted);
+                delete this.SignalCallbackObjects["sftp"][i]._onUnmounted;
+            }
+        }
+
+        for (let i = 0; i < this.SignalCallbackObjects["photo"].length; i++) {
+            if (typeof this.SignalCallbackObjects["photo"][i]._onPhotoReceived !== "undefined") {
+                this.SignalCallbackObjects["photo"][i].Proxy.disconnectSignal(this.SignalCallbackObjects["photo"][i]._onPhotoReceived);
+                delete this.SignalCallbackObjects["photo"][i]._onPhotoReceived;
+            }
+        }
+    },
+
+    //Misc methods
     reloadApplet: function() {
         Extension.reloadExtension(this.metadata["uuid"], Extension.Type.APPLET);
     },
@@ -728,15 +789,15 @@ KDEConnectApplet.prototype = {
             let [success, stdout] = GLib.spawn_command_line_sync("zenity --version");
 
             if (success && stdout) {
-                return true
+                return true;
             }
             else {
-                return false
+                return false;
             }
         }
         catch (error) {
             global.logError(error);
-            return false
+            return false;
         }
     }
 };
