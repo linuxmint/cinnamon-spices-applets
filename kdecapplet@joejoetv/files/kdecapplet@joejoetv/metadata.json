@@ -4,5 +4,5 @@
   "description": "Applet for interacting with Devices connected via KDE COnnect.",
   "comments": "Requires 'zenity' for some features.",
   "icon": "kdeconnect",
-  "version": "1.0"
+  "version": "1.1"
 }
