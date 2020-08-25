@@ -7,125 +7,155 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-07 17:12+0200\n"
-"PO-Revision-Date: 2020-08-07 17:14+0200\n"
+"POT-Creation-Date: 2020-08-24 23:05+0200\n"
+"PO-Revision-Date: 2020-08-24 23:06+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: applet.js:209 applet.js:431
+#: applet.js:282 applet.js:485 applet.js:525
 msgid "Send SMS"
 msgstr "SMS senden"
 
-#: applet.js:209
+#: applet.js:282
 msgid "Send"
 msgstr "Senden"
 
-#: applet.js:209
+#: applet.js:282
 msgid "Enter Phone Number and Message to Send."
 msgstr "Telefonnummer und Nachricht zum Senden eingeben."
 
-#: applet.js:209
+#: applet.js:282
 msgid "Phone Number"
 msgstr "Telefonnummer"
 
-#: applet.js:209
+#: applet.js:282
 msgid "Message"
 msgstr "Nachricht"
 
-#: applet.js:210 applet.js:476
+#: applet.js:283 applet.js:571
 msgid "Share URL"
 msgstr "URL teilen"
 
-#: applet.js:210
+#: applet.js:283
 msgid "Share"
 msgstr "Teilen"
 
-#: applet.js:210
+#: applet.js:283
 msgid "Enter URL to Share."
 msgstr "URL zum Teilen eingeben."
 
-#: applet.js:210
+#: applet.js:283
 msgid "URL"
 msgstr "URL"
 
-#: applet.js:252
+#: applet.js:349
+msgid "KDE Connect Version"
+msgstr "KDEConnect Version"
+
+#: applet.js:352
 msgid "Configure KDEConnect"
 msgstr "KDEConnect Konfigurieren"
 
-#: applet.js:268 applet.js:271
+#: applet.js:360 applet.js:363
 msgid "KDEConnect is not running!"
 msgstr "KDEConnect läuft nicht!"
 
-#: applet.js:273
+#: applet.js:365
 msgid "Reload Applet"
 msgstr "Applet Neuladen"
 
-#: applet.js:325 applet.js:328
+#: applet.js:398 applet.js:401
 msgid "No reachable paired devices!"
 msgstr "Keine erreichbaren gekoppelten Geräte gefunden!"
 
-#: applet.js:333
+#: applet.js:406
 msgid "Devices"
 msgstr "Geräte"
 
-#: applet.js:336
+#: applet.js:409
 msgid "Device"
 msgstr "Gerät"
 
-#: applet.js:379
+#: applet.js:432
 msgid "ID"
 msgstr "ID"
 
-#: applet.js:383
+#: applet.js:436
 msgid "Copied Device ID to the clipboard"
 msgstr "Geräte-ID in die Zwischenablage kpoiert"
 
-#: applet.js:418
+#: applet.js:471
 msgid "Send Ping"
 msgstr "Ping senden"
 
-#: applet.js:443
+#: applet.js:497 applet.js:537
 msgid "Sent SMS to ${phonenumber}"
 msgstr "SMS an ${phonenumber} gesendet"
 
-#: applet.js:460
+#: applet.js:515
+msgid "Launch SMS App"
+msgstr "SMS App starten"
+
+#: applet.js:555
 msgid "Share File"
 msgstr "Datei senden"
 
-#: applet.js:467
+#: applet.js:562
 msgid "Shared file with ${name}"
 msgstr "Datei an ${name} gesendet"
 
-#: applet.js:486
+#: applet.js:581
 msgid "Shared URL with ${name}"
 msgstr "URL mit ${name} geteilt"
 
-#: applet.js:508 applet.js:607
+#: applet.js:603 applet.js:747
 msgid "Mount and Browse"
 msgstr "Einhängen und Durchsuchen"
 
-#: applet.js:522
+#: applet.js:624
+msgid "The Device couldn't be mounted!"
+msgstr "Das Gerät konnte nicht eingehängt werden!"
+
+#: applet.js:630
 msgid "Unmount"
 msgstr "Aushängen"
 
-#: applet.js:531 applet.js:602
+#: applet.js:639 applet.js:742
 msgid "Browse"
 msgstr "Durchsuchen"
 
-#: applet.js:551
+#: applet.js:659
 msgid "Find My Device"
 msgstr "Finde mein Gerät"
+
+#: applet.js:674
+msgid "Request Photo"
+msgstr "Foto anfordern"
+
+#: applet.js:681
+msgid "Requested photo from ${name}"
+msgstr "Foto von ${name} angefordert"
+
+#: applet.js:752
+msgid "Photo received"
+msgstr "Foto empfangen"
 
 #. metadata.json->name
 msgid "KDEConnect Applet"
 msgstr "KDEConnect Applet"
 
 #. metadata.json->description
-msgid "Applet for interacting with KDEConnect. Requires 'zenity' for some features."
-msgstr "Ein Applet um mit KDEConnect zu interagieren. Benötigt 'zenity' für manche Funktionen."
+msgid "Applet for interacting with Devices connected via KDE COnnect."
+msgstr ""
+"Ein Applet um mit Geräten zu interagieren, welche per KDE Connect verbunden "
+"sind."
+
+#. metadata.json->comments
+msgid "Requires 'zenity' for some features."
+msgstr "Benötigt 'zenity' für manche Funktionen."
