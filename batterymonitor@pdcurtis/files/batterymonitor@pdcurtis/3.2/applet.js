@@ -663,5 +663,7 @@ Bug Fix for use with early versions of Cinnamon
   * Increases maximum refresh interval to 5 min (300 s).
   * Simplification of the logic to select the icon to display.
   * Removes (outdated) changelog.txt.
+### 1.4.1
+  * Updates README.md to stress audio file must be .oga mime type audio/x-vorbis+ogg - the mime type is crucial to it being recognised by the soundfilechoser widget
+  * Cinnamon versions up to 5.2
 */
-
