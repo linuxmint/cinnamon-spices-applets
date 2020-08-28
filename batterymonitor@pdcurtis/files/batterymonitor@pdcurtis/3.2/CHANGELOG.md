@@ -1,5 +1,9 @@
 ## Changelog
 
+### 1.4.1
+  * Updates README.md to stress audio file must be .oga mime type audio/x-vorbis+ogg - the mime type is crucial to it being recognised by the soundfilechoser widget
+  * Cinnamon versions up to 5.2
+
 ### 1.4.0
   * Removes dependency on 'batteryscript.sh'. This script writes two files on
     every update, maybe wearing out the harddisk. Now it uses asyncronous calls
@@ -9,7 +13,7 @@
   * Simplification of the logic to select the icon to display.
   * Removes (outdated) 3.2/changelog.txt.
   * Added a button to the configuration box to delete the old temporary files.
-  * Updated cinnamon version to 4.4.   
+  * Updated cinnamon version to 4.4.
 
 ### 1.3.9
   * Adds events-sounds property to soundfilechoser widget to allow any sound file to be selected under Cinnamon 4.2
@@ -106,4 +110,3 @@ Major update - now includes support for Vertical Panels, Battery icons and 5 Dis
  * Developed using code from NUMA, Bumblebee and Timer Applets
  * Includes changes to work with Mint 18 and Cinnamon 3.0 (gedit -> xed)
  * Tested with Cinnamon 3.0 in Mint 18 and Cinnamon 2.4 in Mint 17.1
-
