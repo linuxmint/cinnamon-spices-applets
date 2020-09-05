@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: weather@mockturtl 2.6.5\n"
 "POT-Creation-Date: 2020-07-31 20:39+0200\n"
-"PO-Revision-Date: 2020-08-24 22:26+0100\n"
+"PO-Revision-Date: 2020-08-24 22:26-0400\n"
 "Last-Translator: Jorge B. Adad\n"
 "Language-Team: Português <jorgebadad@gmail.com>\n"
 "MIME-Version: 1.0\n"
@@ -413,11 +413,11 @@ msgstr "Limpo"
 
 #: 3.0/openWeatherMap.js:407 3.8/openWeatherMap.js:361
 msgid "Clear sky"
-msgstr "Ceu limpo"
+msgstr "Céu limpo"
 
 #: 3.0/openWeatherMap.js:408 3.8/openWeatherMap.js:362
 msgid "Sky is clear"
-msgstr "O ceu está limpo"
+msgstr "O céu está limpo"
 
 #: 3.0/openWeatherMap.js:409 3.8/openWeatherMap.js:363
 msgid "Clouds"
@@ -470,7 +470,7 @@ msgstr ""
 
 #: 3.0/met_norway.js:285 3.0/met_norway.js:286 3.8/met_norway.js:237 3.8/met_norway.js:238
 msgid "Clear Sky"
-msgstr "Ceu Limpo"
+msgstr "Céu Limpo"
 
 #: 3.0/met_norway.js:292 3.0/met_norway.js:293 3.0/yahoo.js:466 3.0/met_uk.js:580 3.0/met_uk.js:581
 #: 3.0/climacell.js:389 3.0/climacell.js:390 3.8/met_norway.js:244 3.8/met_norway.js:245
@@ -1283,8 +1283,8 @@ msgid "Violent storm"
 msgstr "Tempestade violenta"
 
 #. settings-schema.json->head->description
-msgid "Settings for weather@mockturtl 3.8+"
-msgstr "Configurações para weather@mockturtl 3.8+"
+msgid "Keybindings"
+msgstr "Atalhos"
 
 #. settings-schema.json->keybinding->description
 #. 3.0->settings-schema.json->keybinding->description
@@ -1468,9 +1468,9 @@ msgstr "Duração da previsão"
 msgid "Translate condition"
 msgstr "Traduzir condição"
 
-#. settings-schema.json->useSymbolicIcons->description
-msgid "Symbolic icons"
-msgstr "Ícones simbólicos"
+#. settings-schema.json->usepanel(taskbar)->description
+msgid "Panel (Taskbar)"
+msgstr "Painel (Barra de tarefas)"
 
 #. settings-schema.json->showTextInPanel->description
 #. 3.0->settings-schema.json->showTextInPanel->description
@@ -1658,6 +1658,11 @@ msgstr "Conjunto de ícones é de ícones do clima de Erik Flowers"
 msgid "Use custom icons on the panel"
 msgstr "Usar ícones personalizados no painel"
 
+#. 3.0->settings-schema.json->popupmenu->description
+#. 3.8->settings-schema.json->popupmenu->title
+msgid "Popup menu"
+msgstr "Menu popup"
+
 #. 3.0->settings-schema.json->displaySettings->description
 #. 3.8->settings-schema.json->presentation-section->title
 msgid "Presentation"
@@ -1698,7 +1703,7 @@ msgid "Show temperature Russian style"
 msgstr "Mostrar temperatura no estilo russo"
 
 #. 3.0->settings-schema.json->conditionSettings->description
-msgid "Weather Conditions"
+msgid "Weather conditions"
 msgstr "Condições Meteorológicas"
 
 #. 3.0->settings-schema.json->translateCondition->description
@@ -1731,7 +1736,7 @@ msgstr "Usar ícones personalizados no menu popup"
 
 #. 3.8->settings-schema.json->units-section->title
 msgid "Units, Icons and Keys"
-msgstr "Unidades, Ícones e Chaves"
+msgstr "Unidades, Ícones e Teclas"
 
 #. 3.8->settings-schema.json->info-section->title
 msgid "Help"
