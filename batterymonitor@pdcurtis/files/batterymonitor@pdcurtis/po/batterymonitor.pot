@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-30 14:39+0100\n"
+"POT-Creation-Date: 2020-08-28 04:35+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -38,6 +38,10 @@ msgid ""
 "\n"
 "Please ensure the volume is set sensibly in public places\n"
 "especially if a long loud file is specifed\n"
+msgstr ""
+
+#: applet.js:163
+msgid " "
 msgstr ""
 
 #: applet.js:164 3.2/applet.js:137

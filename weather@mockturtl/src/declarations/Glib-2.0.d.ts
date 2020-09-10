@@ -90,8 +90,6 @@ declare namespace imports.gi.GLib {
     class ByteArray {
         public data: number;
         public len: number;
-    
-    
     }
     
     
@@ -1449,936 +1447,936 @@ declare namespace imports.gi.GLib {
     
     
     enum BookmarkFileError {
-        invalid_uri = 0,
-        invalid_value = 1,
-        app_not_registered = 2,
-        uri_not_found = 3,
-        read = 4,
-        unknown_encoding = 5,
-        write = 6,
-        file_not_found = 7
+        INVALID_URI = 0,
+        INVALID_VALUE = 1,
+        APP_NOT_REGISTERED = 2,
+        URI_NOT_FOUND = 3,
+        READ = 4,
+        UNKNOWN_ENCODING = 5,
+        WRITE = 6,
+        FILE_NOT_FOUND = 7
     }
     
     
     
     enum ChecksumType {
-        md5 = 0,
-        sha1 = 1,
-        sha256 = 2,
-        sha512 = 3,
-        sha384 = 4
+        MD5 = 0,
+        SHA1 = 1,
+        SHA256 = 2,
+        SHA512 = 3,
+        SHA384 = 4
     }
     
     
     
     enum ConvertError {
-        no_conversion = 0,
-        illegal_sequence = 1,
-        failed = 2,
-        partial_input = 3,
-        bad_uri = 4,
-        not_absolute_path = 5,
-        no_memory = 6,
-        embedded_nul = 7
+        NO_CONVERSION = 0,
+        ILLEGAL_SEQUENCE = 1,
+        FAILED = 2,
+        PARTIAL_INPUT = 3,
+        BAD_URI = 4,
+        NOT_ABSOLUTE_PATH = 5,
+        NO_MEMORY = 6,
+        EMBEDDED_NUL = 7
     }
     
     
     
     enum DateDMY {
-        day = 0,
-        month = 1,
-        year = 2
+        DAY = 0,
+        MONTH = 1,
+        YEAR = 2
     }
     
     
     
     enum DateMonth {
-        bad_month = 0,
-        january = 1,
-        february = 2,
-        march = 3,
-        april = 4,
-        may = 5,
-        june = 6,
-        july = 7,
-        august = 8,
-        september = 9,
-        october = 10,
-        november = 11,
-        december = 12
+        BAD_MONTH = 0,
+        JANUARY = 1,
+        FEBRUARY = 2,
+        MARCH = 3,
+        APRIL = 4,
+        MAY = 5,
+        JUNE = 6,
+        JULY = 7,
+        AUGUST = 8,
+        SEPTEMBER = 9,
+        OCTOBER = 10,
+        NOVEMBER = 11,
+        DECEMBER = 12
     }
     
     
     
     enum DateWeekday {
-        bad_weekday = 0,
-        monday = 1,
-        tuesday = 2,
-        wednesday = 3,
-        thursday = 4,
-        friday = 5,
-        saturday = 6,
-        sunday = 7
+        BAD_WEEKDAY = 0,
+        MONDAY = 1,
+        TUESDAY = 2,
+        WEDNESDAY = 3,
+        THURSDAY = 4,
+        FRIDAY = 5,
+        SATURDAY = 6,
+        SUNDAY = 7
     }
     
     
     
     enum ErrorType {
-        unknown = 0,
-        unexp_eof = 1,
-        unexp_eof_in_string = 2,
-        unexp_eof_in_comment = 3,
-        non_digit_in_const = 4,
-        digit_radix = 5,
-        float_radix = 6,
-        float_malformed = 7
+        UNKNOWN = 0,
+        UNEXP_EOF = 1,
+        UNEXP_EOF_IN_STRING = 2,
+        UNEXP_EOF_IN_COMMENT = 3,
+        NON_DIGIT_IN_CONST = 4,
+        DIGIT_RADIX = 5,
+        FLOAT_RADIX = 6,
+        FLOAT_MALFORMED = 7
     }
     
     
     
     enum FileError {
-        exist = 0,
-        isdir = 1,
-        acces = 2,
-        nametoolong = 3,
-        noent = 4,
-        notdir = 5,
-        nxio = 6,
-        nodev = 7,
-        rofs = 8,
-        txtbsy = 9,
-        fault = 10,
-        loop = 11,
-        nospc = 12,
-        nomem = 13,
-        mfile = 14,
-        nfile = 15,
-        badf = 16,
-        inval = 17,
-        pipe = 18,
-        again = 19,
-        intr = 20,
-        io = 21,
-        perm = 22,
-        nosys = 23,
-        failed = 24
+        EXIST = 0,
+        ISDIR = 1,
+        ACCES = 2,
+        NAMETOOLONG = 3,
+        NOENT = 4,
+        NOTDIR = 5,
+        NXIO = 6,
+        NODEV = 7,
+        ROFS = 8,
+        TXTBSY = 9,
+        FAULT = 10,
+        LOOP = 11,
+        NOSPC = 12,
+        NOMEM = 13,
+        MFILE = 14,
+        NFILE = 15,
+        BADF = 16,
+        INVAL = 17,
+        PIPE = 18,
+        AGAIN = 19,
+        INTR = 20,
+        IO = 21,
+        PERM = 22,
+        NOSYS = 23,
+        FAILED = 24
     }
     
     
     
     enum IOChannelError {
-        fbig = 0,
-        inval = 1,
-        io = 2,
-        isdir = 3,
-        nospc = 4,
-        nxio = 5,
-        overflow = 6,
-        pipe = 7,
-        failed = 8
+        FBIG = 0,
+        INVAL = 1,
+        IO = 2,
+        ISDIR = 3,
+        NOSPC = 4,
+        NXIO = 5,
+        OVERFLOW = 6,
+        PIPE = 7,
+        FAILED = 8
     }
     
     
     
     enum IOError {
-        none = 0,
-        again = 1,
-        inval = 2,
-        unknown = 3
+        NONE = 0,
+        AGAIN = 1,
+        INVAL = 2,
+        UNKNOWN = 3
     }
     
     
     
     enum IOStatus {
-        error = 0,
-        normal = 1,
-        eof = 2,
-        again = 3
+        ERROR = 0,
+        NORMAL = 1,
+        EOF = 2,
+        AGAIN = 3
     }
     
     
     
     enum KeyFileError {
-        unknown_encoding = 0,
-        parse = 1,
-        not_found = 2,
-        key_not_found = 3,
-        group_not_found = 4,
-        invalid_value = 5
+        UNKNOWN_ENCODING = 0,
+        PARSE = 1,
+        NOT_FOUND = 2,
+        KEY_NOT_FOUND = 3,
+        GROUP_NOT_FOUND = 4,
+        INVALID_VALUE = 5
     }
     
     
     
     enum LogWriterOutput {
-        handled = 1,
-        unhandled = 0
+        HANDLED = 1,
+        UNHANDLED = 0
     }
     
     
     
     enum MarkupError {
-        bad_utf8 = 0,
-        empty = 1,
-        parse = 2,
-        unknown_element = 3,
-        unknown_attribute = 4,
-        invalid_content = 5,
-        missing_attribute = 6
+        BAD_UTF8 = 0,
+        EMPTY = 1,
+        PARSE = 2,
+        UNKNOWN_ELEMENT = 3,
+        UNKNOWN_ATTRIBUTE = 4,
+        INVALID_CONTENT = 5,
+        MISSING_ATTRIBUTE = 6
     }
     
     
     
     enum NormalizeMode {
-        default = 0,
-        nfd = 0,
-        default_compose = 1,
-        nfc = 1,
-        all = 2,
-        nfkd = 2,
-        all_compose = 3,
-        nfkc = 3
+        DEFAULT = 0,
+        NFD = 0,
+        DEFAULT_COMPOSE = 1,
+        NFC = 1,
+        ALL = 2,
+        NFKD = 2,
+        ALL_COMPOSE = 3,
+        NFKC = 3
     }
     
     
     
     enum NumberParserError {
-        invalid = 0,
-        out_of_bounds = 1
+        INVALID = 0,
+        OUT_OF_BOUNDS = 1
     }
     
     
     
     enum OnceStatus {
-        notcalled = 0,
-        progress = 1,
-        ready = 2
+        NOTCALLED = 0,
+        PROGRESS = 1,
+        READY = 2
     }
     
     
     
     enum OptionArg {
-        none = 0,
-        string = 1,
-        int = 2,
-        callback = 3,
-        filename = 4,
-        string_array = 5,
-        filename_array = 6,
-        double = 7,
-        int64 = 8
+        NONE = 0,
+        STRING = 1,
+        INT = 2,
+        CALLBACK = 3,
+        FILENAME = 4,
+        STRING_ARRAY = 5,
+        FILENAME_ARRAY = 6,
+        DOUBLE = 7,
+        INT64 = 8
     }
     
     
     
     enum OptionError {
-        unknown_option = 0,
-        bad_value = 1,
-        failed = 2
+        UNKNOWN_OPTION = 0,
+        BAD_VALUE = 1,
+        FAILED = 2
     }
     
     
     
     enum RegexError {
-        compile = 0,
-        optimize = 1,
-        replace = 2,
-        match = 3,
-        internal = 4,
-        stray_backslash = 101,
-        missing_control_char = 102,
-        unrecognized_escape = 103,
-        quantifiers_out_of_order = 104,
-        quantifier_too_big = 105,
-        unterminated_character_class = 106,
-        invalid_escape_in_character_class = 107,
-        range_out_of_order = 108,
-        nothing_to_repeat = 109,
-        unrecognized_character = 112,
-        posix_named_class_outside_class = 113,
-        unmatched_parenthesis = 114,
-        inexistent_subpattern_reference = 115,
-        unterminated_comment = 118,
-        expression_too_large = 120,
-        memory_error = 121,
-        variable_length_lookbehind = 125,
-        malformed_condition = 126,
-        too_many_conditional_branches = 127,
-        assertion_expected = 128,
-        unknown_posix_class_name = 130,
-        posix_collating_elements_not_supported = 131,
-        hex_code_too_large = 134,
-        invalid_condition = 135,
-        single_byte_match_in_lookbehind = 136,
-        infinite_loop = 140,
-        missing_subpattern_name_terminator = 142,
-        duplicate_subpattern_name = 143,
-        malformed_property = 146,
-        unknown_property = 147,
-        subpattern_name_too_long = 148,
-        too_many_subpatterns = 149,
-        invalid_octal_value = 151,
-        too_many_branches_in_define = 154,
-        define_repetion = 155,
-        inconsistent_newline_options = 156,
-        missing_back_reference = 157,
-        invalid_relative_reference = 158,
-        backtracking_control_verb_argument_forbidden = 159,
-        unknown_backtracking_control_verb = 160,
-        number_too_big = 161,
-        missing_subpattern_name = 162,
-        missing_digit = 163,
-        invalid_data_character = 164,
-        extra_subpattern_name = 165,
-        backtracking_control_verb_argument_required = 166,
-        invalid_control_char = 168,
-        missing_name = 169,
-        not_supported_in_class = 171,
-        too_many_forward_references = 172,
-        name_too_long = 175,
-        character_value_too_large = 176
+        COMPILE = 0,
+        OPTIMIZE = 1,
+        REPLACE = 2,
+        MATCH = 3,
+        INTERNAL = 4,
+        STRAY_BACKSLASH = 101,
+        MISSING_CONTROL_CHAR = 102,
+        UNRECOGNIZED_ESCAPE = 103,
+        QUANTIFIERS_OUT_OF_ORDER = 104,
+        QUANTIFIER_TOO_BIG = 105,
+        UNTERMINATED_CHARACTER_CLASS = 106,
+        INVALID_ESCAPE_IN_CHARACTER_CLASS = 107,
+        RANGE_OUT_OF_ORDER = 108,
+        NOTHING_TO_REPEAT = 109,
+        UNRECOGNIZED_CHARACTER = 112,
+        POSIX_NAMED_CLASS_OUTSIDE_CLASS = 113,
+        UNMATCHED_PARENTHESIS = 114,
+        INEXISTENT_SUBPATTERN_REFERENCE = 115,
+        UNTERMINATED_COMMENT = 118,
+        EXPRESSION_TOO_LARGE = 120,
+        MEMORY_ERROR = 121,
+        VARIABLE_LENGTH_LOOKBEHIND = 125,
+        MALFORMED_CONDITION = 126,
+        TOO_MANY_CONDITIONAL_BRANCHES = 127,
+        ASSERTION_EXPECTED = 128,
+        UNKNOWN_POSIX_CLASS_NAME = 130,
+        POSIX_COLLATING_ELEMENTS_NOT_SUPPORTED = 131,
+        HEX_CODE_TOO_LARGE = 134,
+        INVALID_CONDITION = 135,
+        SINGLE_BYTE_MATCH_IN_LOOKBEHIND = 136,
+        INFINITE_LOOP = 140,
+        MISSING_SUBPATTERN_NAME_TERMINATOR = 142,
+        DUPLICATE_SUBPATTERN_NAME = 143,
+        MALFORMED_PROPERTY = 146,
+        UNKNOWN_PROPERTY = 147,
+        SUBPATTERN_NAME_TOO_LONG = 148,
+        TOO_MANY_SUBPATTERNS = 149,
+        INVALID_OCTAL_VALUE = 151,
+        TOO_MANY_BRANCHES_IN_DEFINE = 154,
+        DEFINE_REPETION = 155,
+        INCONSISTENT_NEWLINE_OPTIONS = 156,
+        MISSING_BACK_REFERENCE = 157,
+        INVALID_RELATIVE_REFERENCE = 158,
+        BACKTRACKING_CONTROL_VERB_ARGUMENT_FORBIDDEN = 159,
+        UNKNOWN_BACKTRACKING_CONTROL_VERB = 160,
+        NUMBER_TOO_BIG = 161,
+        MISSING_SUBPATTERN_NAME = 162,
+        MISSING_DIGIT = 163,
+        INVALID_DATA_CHARACTER = 164,
+        EXTRA_SUBPATTERN_NAME = 165,
+        BACKTRACKING_CONTROL_VERB_ARGUMENT_REQUIRED = 166,
+        INVALID_CONTROL_CHAR = 168,
+        MISSING_NAME = 169,
+        NOT_SUPPORTED_IN_CLASS = 171,
+        TOO_MANY_FORWARD_REFERENCES = 172,
+        NAME_TOO_LONG = 175,
+        CHARACTER_VALUE_TOO_LARGE = 176
     }
     
     
     
     enum SeekType {
-        cur = 0,
-        set = 1,
-        end = 2
+        CUR = 0,
+        SET = 1,
+        END = 2
     }
     
     
     
     enum ShellError {
-        bad_quoting = 0,
-        empty_string = 1,
-        failed = 2
+        BAD_QUOTING = 0,
+        EMPTY_STRING = 1,
+        FAILED = 2
     }
     
     
     
     enum SliceConfig {
-        always_malloc = 1,
-        bypass_magazines = 2,
-        working_set_msecs = 3,
-        color_increment = 4,
-        chunk_sizes = 5,
-        contention_counter = 6
+        ALWAYS_MALLOC = 1,
+        BYPASS_MAGAZINES = 2,
+        WORKING_SET_MSECS = 3,
+        COLOR_INCREMENT = 4,
+        CHUNK_SIZES = 5,
+        CONTENTION_COUNTER = 6
     }
     
     
     
     enum SpawnError {
-        fork = 0,
-        read = 1,
-        chdir = 2,
-        acces = 3,
-        perm = 4,
-        too_big = 5,
-        _2big = 5,
-        noexec = 6,
-        nametoolong = 7,
-        noent = 8,
-        nomem = 9,
-        notdir = 10,
-        loop = 11,
-        txtbusy = 12,
-        io = 13,
-        nfile = 14,
-        mfile = 15,
-        inval = 16,
-        isdir = 17,
-        libbad = 18,
-        failed = 19
+        FORK = 0,
+        READ = 1,
+        CHDIR = 2,
+        ACCES = 3,
+        PERM = 4,
+        TOO_BIG = 5,
+        _2BIG = 5,
+        NOEXEC = 6,
+        NAMETOOLONG = 7,
+        NOENT = 8,
+        NOMEM = 9,
+        NOTDIR = 10,
+        LOOP = 11,
+        TXTBUSY = 12,
+        IO = 13,
+        NFILE = 14,
+        MFILE = 15,
+        INVAL = 16,
+        ISDIR = 17,
+        LIBBAD = 18,
+        FAILED = 19
     }
     
     
     
     enum TestFileType {
-        dist = 0,
-        built = 1
+        DIST = 0,
+        BUILT = 1
     }
     
     
     
     enum TestLogType {
-        none = 0,
-        error = 1,
-        start_binary = 2,
-        list_case = 3,
-        skip_case = 4,
-        start_case = 5,
-        stop_case = 6,
-        min_result = 7,
-        max_result = 8,
-        message = 9,
-        start_suite = 10,
-        stop_suite = 11
+        NONE = 0,
+        ERROR = 1,
+        START_BINARY = 2,
+        LIST_CASE = 3,
+        SKIP_CASE = 4,
+        START_CASE = 5,
+        STOP_CASE = 6,
+        MIN_RESULT = 7,
+        MAX_RESULT = 8,
+        MESSAGE = 9,
+        START_SUITE = 10,
+        STOP_SUITE = 11
     }
     
     
     
     enum TestResult {
-        success = 0,
-        skipped = 1,
-        failure = 2,
-        incomplete = 3
+        SUCCESS = 0,
+        SKIPPED = 1,
+        FAILURE = 2,
+        INCOMPLETE = 3
     }
     
     
     
     enum ThreadError {
-        thread_error_again = 0
+        THREAD_ERROR_AGAIN = 0
     }
     
     
     
     enum TimeType {
-        standard = 0,
-        daylight = 1,
-        universal = 2
+        STANDARD = 0,
+        DAYLIGHT = 1,
+        UNIVERSAL = 2
     }
     
     
     
     enum TokenType {
-        eof = 0,
-        left_paren = 40,
-        right_paren = 41,
-        left_curly = 123,
-        right_curly = 125,
-        left_brace = 91,
-        right_brace = 93,
-        equal_sign = 61,
-        comma = 44,
-        none = 256,
-        error = 257,
-        char = 258,
-        binary = 259,
-        octal = 260,
-        int = 261,
-        hex = 262,
-        float = 263,
-        string = 264,
-        symbol = 265,
-        identifier = 266,
-        identifier_null = 267,
-        comment_single = 268,
-        comment_multi = 269
+        EOF = 0,
+        LEFT_PAREN = 40,
+        RIGHT_PAREN = 41,
+        LEFT_CURLY = 123,
+        RIGHT_CURLY = 125,
+        LEFT_BRACE = 91,
+        RIGHT_BRACE = 93,
+        EQUAL_SIGN = 61,
+        COMMA = 44,
+        NONE = 256,
+        ERROR = 257,
+        CHAR = 258,
+        BINARY = 259,
+        OCTAL = 260,
+        INT = 261,
+        HEX = 262,
+        FLOAT = 263,
+        STRING = 264,
+        SYMBOL = 265,
+        IDENTIFIER = 266,
+        IDENTIFIER_NULL = 267,
+        COMMENT_SINGLE = 268,
+        COMMENT_MULTI = 269
     }
     
     
     
     enum TraverseType {
-        in_order = 0,
-        pre_order = 1,
-        post_order = 2,
-        level_order = 3
+        IN_ORDER = 0,
+        PRE_ORDER = 1,
+        POST_ORDER = 2,
+        LEVEL_ORDER = 3
     }
     
     
     
     enum UnicodeBreakType {
-        mandatory = 0,
-        carriage_return = 1,
-        line_feed = 2,
-        combining_mark = 3,
-        surrogate = 4,
-        zero_width_space = 5,
-        inseparable = 6,
-        non_breaking_glue = 7,
-        contingent = 8,
-        space = 9,
-        after = 10,
-        before = 11,
-        before_and_after = 12,
-        hyphen = 13,
-        non_starter = 14,
-        open_punctuation = 15,
-        close_punctuation = 16,
-        quotation = 17,
-        exclamation = 18,
-        ideographic = 19,
-        numeric = 20,
-        infix_separator = 21,
-        symbol = 22,
-        alphabetic = 23,
-        prefix = 24,
-        postfix = 25,
-        complex_context = 26,
-        ambiguous = 27,
-        unknown = 28,
-        next_line = 29,
-        word_joiner = 30,
-        hangul_l_jamo = 31,
-        hangul_v_jamo = 32,
-        hangul_t_jamo = 33,
-        hangul_lv_syllable = 34,
-        hangul_lvt_syllable = 35,
-        close_paranthesis = 36,
-        conditional_japanese_starter = 37,
-        hebrew_letter = 38,
-        regional_indicator = 39,
-        emoji_base = 40,
-        emoji_modifier = 41,
-        zero_width_joiner = 42
+        MANDATORY = 0,
+        CARRIAGE_RETURN = 1,
+        LINE_FEED = 2,
+        COMBINING_MARK = 3,
+        SURROGATE = 4,
+        ZERO_WIDTH_SPACE = 5,
+        INSEPARABLE = 6,
+        NON_BREAKING_GLUE = 7,
+        CONTINGENT = 8,
+        SPACE = 9,
+        AFTER = 10,
+        BEFORE = 11,
+        BEFORE_AND_AFTER = 12,
+        HYPHEN = 13,
+        NON_STARTER = 14,
+        OPEN_PUNCTUATION = 15,
+        CLOSE_PUNCTUATION = 16,
+        QUOTATION = 17,
+        EXCLAMATION = 18,
+        IDEOGRAPHIC = 19,
+        NUMERIC = 20,
+        INFIX_SEPARATOR = 21,
+        SYMBOL = 22,
+        ALPHABETIC = 23,
+        PREFIX = 24,
+        POSTFIX = 25,
+        COMPLEX_CONTEXT = 26,
+        AMBIGUOUS = 27,
+        UNKNOWN = 28,
+        NEXT_LINE = 29,
+        WORD_JOINER = 30,
+        HANGUL_L_JAMO = 31,
+        HANGUL_V_JAMO = 32,
+        HANGUL_T_JAMO = 33,
+        HANGUL_LV_SYLLABLE = 34,
+        HANGUL_LVT_SYLLABLE = 35,
+        CLOSE_PARANTHESIS = 36,
+        CONDITIONAL_JAPANESE_STARTER = 37,
+        HEBREW_LETTER = 38,
+        REGIONAL_INDICATOR = 39,
+        EMOJI_BASE = 40,
+        EMOJI_MODIFIER = 41,
+        ZERO_WIDTH_JOINER = 42
     }
     
     
     
     enum UnicodeScript {
-        invalid_code = -1,
-        common = 0,
-        inherited = 1,
-        arabic = 2,
-        armenian = 3,
-        bengali = 4,
-        bopomofo = 5,
-        cherokee = 6,
-        coptic = 7,
-        cyrillic = 8,
-        deseret = 9,
-        devanagari = 10,
-        ethiopic = 11,
-        georgian = 12,
-        gothic = 13,
-        greek = 14,
-        gujarati = 15,
-        gurmukhi = 16,
-        han = 17,
-        hangul = 18,
-        hebrew = 19,
-        hiragana = 20,
-        kannada = 21,
-        katakana = 22,
-        khmer = 23,
-        lao = 24,
-        latin = 25,
-        malayalam = 26,
-        mongolian = 27,
-        myanmar = 28,
-        ogham = 29,
-        old_italic = 30,
-        oriya = 31,
-        runic = 32,
-        sinhala = 33,
-        syriac = 34,
-        tamil = 35,
-        telugu = 36,
-        thaana = 37,
-        thai = 38,
-        tibetan = 39,
-        canadian_aboriginal = 40,
-        yi = 41,
-        tagalog = 42,
-        hanunoo = 43,
-        buhid = 44,
-        tagbanwa = 45,
-        braille = 46,
-        cypriot = 47,
-        limbu = 48,
-        osmanya = 49,
-        shavian = 50,
-        linear_b = 51,
-        tai_le = 52,
-        ugaritic = 53,
-        new_tai_lue = 54,
-        buginese = 55,
-        glagolitic = 56,
-        tifinagh = 57,
-        syloti_nagri = 58,
-        old_persian = 59,
-        kharoshthi = 60,
-        unknown = 61,
-        balinese = 62,
-        cuneiform = 63,
-        phoenician = 64,
-        phags_pa = 65,
-        nko = 66,
-        kayah_li = 67,
-        lepcha = 68,
-        rejang = 69,
-        sundanese = 70,
-        saurashtra = 71,
-        cham = 72,
-        ol_chiki = 73,
-        vai = 74,
-        carian = 75,
-        lycian = 76,
-        lydian = 77,
-        avestan = 78,
-        bamum = 79,
-        egyptian_hieroglyphs = 80,
-        imperial_aramaic = 81,
-        inscriptional_pahlavi = 82,
-        inscriptional_parthian = 83,
-        javanese = 84,
-        kaithi = 85,
-        lisu = 86,
-        meetei_mayek = 87,
-        old_south_arabian = 88,
-        old_turkic = 89,
-        samaritan = 90,
-        tai_tham = 91,
-        tai_viet = 92,
-        batak = 93,
-        brahmi = 94,
-        mandaic = 95,
-        chakma = 96,
-        meroitic_cursive = 97,
-        meroitic_hieroglyphs = 98,
-        miao = 99,
-        sharada = 100,
-        sora_sompeng = 101,
-        takri = 102,
-        bassa_vah = 103,
-        caucasian_albanian = 104,
-        duployan = 105,
-        elbasan = 106,
-        grantha = 107,
-        khojki = 108,
-        khudawadi = 109,
-        linear_a = 110,
-        mahajani = 111,
-        manichaean = 112,
-        mende_kikakui = 113,
-        modi = 114,
-        mro = 115,
-        nabataean = 116,
-        old_north_arabian = 117,
-        old_permic = 118,
-        pahawh_hmong = 119,
-        palmyrene = 120,
-        pau_cin_hau = 121,
-        psalter_pahlavi = 122,
-        siddham = 123,
-        tirhuta = 124,
-        warang_citi = 125,
-        ahom = 126,
-        anatolian_hieroglyphs = 127,
-        hatran = 128,
-        multani = 129,
-        old_hungarian = 130,
-        signwriting = 131,
-        adlam = 132,
-        bhaiksuki = 133,
-        marchen = 134,
-        newa = 135,
-        osage = 136,
-        tangut = 137,
-        masaram_gondi = 138,
-        nushu = 139,
-        soyombo = 140,
-        zanabazar_square = 141,
-        dogra = 142,
-        gunjala_gondi = 143,
-        hanifi_rohingya = 144,
-        makasar = 145,
-        medefaidrin = 146,
-        old_sogdian = 147,
-        sogdian = 148
+        INVALID_CODE = -1,
+        COMMON = 0,
+        INHERITED = 1,
+        ARABIC = 2,
+        ARMENIAN = 3,
+        BENGALI = 4,
+        BOPOMOFO = 5,
+        CHEROKEE = 6,
+        COPTIC = 7,
+        CYRILLIC = 8,
+        DESERET = 9,
+        DEVANAGARI = 10,
+        ETHIOPIC = 11,
+        GEORGIAN = 12,
+        GOTHIC = 13,
+        GREEK = 14,
+        GUJARATI = 15,
+        GURMUKHI = 16,
+        HAN = 17,
+        HANGUL = 18,
+        HEBREW = 19,
+        HIRAGANA = 20,
+        KANNADA = 21,
+        KATAKANA = 22,
+        KHMER = 23,
+        LAO = 24,
+        LATIN = 25,
+        MALAYALAM = 26,
+        MONGOLIAN = 27,
+        MYANMAR = 28,
+        OGHAM = 29,
+        OLD_ITALIC = 30,
+        ORIYA = 31,
+        RUNIC = 32,
+        SINHALA = 33,
+        SYRIAC = 34,
+        TAMIL = 35,
+        TELUGU = 36,
+        THAANA = 37,
+        THAI = 38,
+        TIBETAN = 39,
+        CANADIAN_ABORIGINAL = 40,
+        YI = 41,
+        TAGALOG = 42,
+        HANUNOO = 43,
+        BUHID = 44,
+        TAGBANWA = 45,
+        BRAILLE = 46,
+        CYPRIOT = 47,
+        LIMBU = 48,
+        OSMANYA = 49,
+        SHAVIAN = 50,
+        LINEAR_B = 51,
+        TAI_LE = 52,
+        UGARITIC = 53,
+        NEW_TAI_LUE = 54,
+        BUGINESE = 55,
+        GLAGOLITIC = 56,
+        TIFINAGH = 57,
+        SYLOTI_NAGRI = 58,
+        OLD_PERSIAN = 59,
+        KHAROSHTHI = 60,
+        UNKNOWN = 61,
+        BALINESE = 62,
+        CUNEIFORM = 63,
+        PHOENICIAN = 64,
+        PHAGS_PA = 65,
+        NKO = 66,
+        KAYAH_LI = 67,
+        LEPCHA = 68,
+        REJANG = 69,
+        SUNDANESE = 70,
+        SAURASHTRA = 71,
+        CHAM = 72,
+        OL_CHIKI = 73,
+        VAI = 74,
+        CARIAN = 75,
+        LYCIAN = 76,
+        LYDIAN = 77,
+        AVESTAN = 78,
+        BAMUM = 79,
+        EGYPTIAN_HIEROGLYPHS = 80,
+        IMPERIAL_ARAMAIC = 81,
+        INSCRIPTIONAL_PAHLAVI = 82,
+        INSCRIPTIONAL_PARTHIAN = 83,
+        JAVANESE = 84,
+        KAITHI = 85,
+        LISU = 86,
+        MEETEI_MAYEK = 87,
+        OLD_SOUTH_ARABIAN = 88,
+        OLD_TURKIC = 89,
+        SAMARITAN = 90,
+        TAI_THAM = 91,
+        TAI_VIET = 92,
+        BATAK = 93,
+        BRAHMI = 94,
+        MANDAIC = 95,
+        CHAKMA = 96,
+        MEROITIC_CURSIVE = 97,
+        MEROITIC_HIEROGLYPHS = 98,
+        MIAO = 99,
+        SHARADA = 100,
+        SORA_SOMPENG = 101,
+        TAKRI = 102,
+        BASSA_VAH = 103,
+        CAUCASIAN_ALBANIAN = 104,
+        DUPLOYAN = 105,
+        ELBASAN = 106,
+        GRANTHA = 107,
+        KHOJKI = 108,
+        KHUDAWADI = 109,
+        LINEAR_A = 110,
+        MAHAJANI = 111,
+        MANICHAEAN = 112,
+        MENDE_KIKAKUI = 113,
+        MODI = 114,
+        MRO = 115,
+        NABATAEAN = 116,
+        OLD_NORTH_ARABIAN = 117,
+        OLD_PERMIC = 118,
+        PAHAWH_HMONG = 119,
+        PALMYRENE = 120,
+        PAU_CIN_HAU = 121,
+        PSALTER_PAHLAVI = 122,
+        SIDDHAM = 123,
+        TIRHUTA = 124,
+        WARANG_CITI = 125,
+        AHOM = 126,
+        ANATOLIAN_HIEROGLYPHS = 127,
+        HATRAN = 128,
+        MULTANI = 129,
+        OLD_HUNGARIAN = 130,
+        SIGNWRITING = 131,
+        ADLAM = 132,
+        BHAIKSUKI = 133,
+        MARCHEN = 134,
+        NEWA = 135,
+        OSAGE = 136,
+        TANGUT = 137,
+        MASARAM_GONDI = 138,
+        NUSHU = 139,
+        SOYOMBO = 140,
+        ZANABAZAR_SQUARE = 141,
+        DOGRA = 142,
+        GUNJALA_GONDI = 143,
+        HANIFI_ROHINGYA = 144,
+        MAKASAR = 145,
+        MEDEFAIDRIN = 146,
+        OLD_SOGDIAN = 147,
+        SOGDIAN = 148
     }
     
     
     
     enum UnicodeType {
-        control = 0,
-        format = 1,
-        unassigned = 2,
-        private_use = 3,
-        surrogate = 4,
-        lowercase_letter = 5,
-        modifier_letter = 6,
-        other_letter = 7,
-        titlecase_letter = 8,
-        uppercase_letter = 9,
-        spacing_mark = 10,
-        enclosing_mark = 11,
-        non_spacing_mark = 12,
-        decimal_number = 13,
-        letter_number = 14,
-        other_number = 15,
-        connect_punctuation = 16,
-        dash_punctuation = 17,
-        close_punctuation = 18,
-        final_punctuation = 19,
-        initial_punctuation = 20,
-        other_punctuation = 21,
-        open_punctuation = 22,
-        currency_symbol = 23,
-        modifier_symbol = 24,
-        math_symbol = 25,
-        other_symbol = 26,
-        line_separator = 27,
-        paragraph_separator = 28,
-        space_separator = 29
+        CONTROL = 0,
+        FORMAT = 1,
+        UNASSIGNED = 2,
+        PRIVATE_USE = 3,
+        SURROGATE = 4,
+        LOWERCASE_LETTER = 5,
+        MODIFIER_LETTER = 6,
+        OTHER_LETTER = 7,
+        TITLECASE_LETTER = 8,
+        UPPERCASE_LETTER = 9,
+        SPACING_MARK = 10,
+        ENCLOSING_MARK = 11,
+        NON_SPACING_MARK = 12,
+        DECIMAL_NUMBER = 13,
+        LETTER_NUMBER = 14,
+        OTHER_NUMBER = 15,
+        CONNECT_PUNCTUATION = 16,
+        DASH_PUNCTUATION = 17,
+        CLOSE_PUNCTUATION = 18,
+        FINAL_PUNCTUATION = 19,
+        INITIAL_PUNCTUATION = 20,
+        OTHER_PUNCTUATION = 21,
+        OPEN_PUNCTUATION = 22,
+        CURRENCY_SYMBOL = 23,
+        MODIFIER_SYMBOL = 24,
+        MATH_SYMBOL = 25,
+        OTHER_SYMBOL = 26,
+        LINE_SEPARATOR = 27,
+        PARAGRAPH_SEPARATOR = 28,
+        SPACE_SEPARATOR = 29
     }
     
     
     
     enum UserDirectory {
-        directory_desktop = 0,
-        directory_documents = 1,
-        directory_download = 2,
-        directory_music = 3,
-        directory_pictures = 4,
-        directory_public_share = 5,
-        directory_templates = 6,
-        directory_videos = 7,
-        n_directories = 8
+        DIRECTORY_DESKTOP = 0,
+        DIRECTORY_DOCUMENTS = 1,
+        DIRECTORY_DOWNLOAD = 2,
+        DIRECTORY_MUSIC = 3,
+        DIRECTORY_PICTURES = 4,
+        DIRECTORY_PUBLIC_SHARE = 5,
+        DIRECTORY_TEMPLATES = 6,
+        DIRECTORY_VIDEOS = 7,
+        N_DIRECTORIES = 8
     }
     
     
     
     enum VariantClass {
-        boolean = 98,
-        byte = 121,
-        int16 = 110,
-        uint16 = 113,
-        int32 = 105,
-        uint32 = 117,
-        int64 = 120,
-        uint64 = 116,
-        handle = 104,
-        double = 100,
-        string = 115,
-        object_path = 111,
-        signature = 103,
-        variant = 118,
-        maybe = 109,
-        array = 97,
-        tuple = 40,
-        dict_entry = 123
+        BOOLEAN = 98,
+        BYTE = 121,
+        INT16 = 110,
+        UINT16 = 113,
+        INT32 = 105,
+        UINT32 = 117,
+        INT64 = 120,
+        UINT64 = 116,
+        HANDLE = 104,
+        DOUBLE = 100,
+        STRING = 115,
+        OBJECT_PATH = 111,
+        SIGNATURE = 103,
+        VARIANT = 118,
+        MAYBE = 109,
+        ARRAY = 97,
+        TUPLE = 40,
+        DICT_ENTRY = 123
     }
     
     
     
     enum VariantParseError {
-        failed = 0,
-        basic_type_expected = 1,
-        cannot_infer_type = 2,
-        definite_type_expected = 3,
-        input_not_at_end = 4,
-        invalid_character = 5,
-        invalid_format_string = 6,
-        invalid_object_path = 7,
-        invalid_signature = 8,
-        invalid_type_string = 9,
-        no_common_type = 10,
-        number_out_of_range = 11,
-        number_too_big = 12,
-        type_error = 13,
-        unexpected_token = 14,
-        unknown_keyword = 15,
-        unterminated_string_constant = 16,
-        value_expected = 17
+        FAILED = 0,
+        BASIC_TYPE_EXPECTED = 1,
+        CANNOT_INFER_TYPE = 2,
+        DEFINITE_TYPE_EXPECTED = 3,
+        INPUT_NOT_AT_END = 4,
+        INVALID_CHARACTER = 5,
+        INVALID_FORMAT_STRING = 6,
+        INVALID_OBJECT_PATH = 7,
+        INVALID_SIGNATURE = 8,
+        INVALID_TYPE_STRING = 9,
+        NO_COMMON_TYPE = 10,
+        NUMBER_OUT_OF_RANGE = 11,
+        NUMBER_TOO_BIG = 12,
+        TYPE_ERROR = 13,
+        UNEXPECTED_TOKEN = 14,
+        UNKNOWN_KEYWORD = 15,
+        UNTERMINATED_STRING_CONSTANT = 16,
+        VALUE_EXPECTED = 17
     }
     
     
     
     enum AsciiType {
-        alnum = 1,
-        alpha = 2,
-        cntrl = 4,
-        digit = 8,
-        graph = 16,
-        lower = 32,
-        print = 64,
-        punct = 128,
-        space = 256,
-        upper = 512,
-        xdigit = 1024
+        ALNUM = 1,
+        ALPHA = 2,
+        CNTRL = 4,
+        DIGIT = 8,
+        GRAPH = 16,
+        LOWER = 32,
+        PRINT = 64,
+        PUNCT = 128,
+        SPACE = 256,
+        UPPER = 512,
+        XDIGIT = 1024
     }
     
     
     
     enum FileTest {
-        is_regular = 1,
-        is_symlink = 2,
-        is_dir = 4,
-        is_executable = 8,
-        exists = 16
+        IS_REGULAR = 1,
+        IS_SYMLINK = 2,
+        IS_DIR = 4,
+        IS_EXECUTABLE = 8,
+        EXISTS = 16
     }
     
     
     
     enum FormatSizeFlags {
-        default = 0,
-        long_format = 1,
-        iec_units = 2,
-        bits = 4
+        DEFAULT = 0,
+        LONG_FORMAT = 1,
+        IEC_UNITS = 2,
+        BITS = 4
     }
     
     
     
     enum HookFlagMask {
-        active = 1,
-        in_call = 2,
-        mask = 15
+        ACTIVE = 1,
+        IN_CALL = 2,
+        MASK = 15
     }
     
     
     
     enum IOCondition {
-        in = 1,
-        out = 4,
-        pri = 2,
-        err = 8,
-        hup = 16,
-        nval = 32
+        IN = 1,
+        OUT = 4,
+        PRI = 2,
+        ERR = 8,
+        HUP = 16,
+        NVAL = 32
     }
     
     
     
     enum IOFlags {
-        append = 1,
-        nonblock = 2,
-        is_readable = 4,
-        is_writable = 8,
-        is_writeable = 8,
-        is_seekable = 16,
-        mask = 31,
-        get_mask = 31,
-        set_mask = 3
+        APPEND = 1,
+        NONBLOCK = 2,
+        IS_READABLE = 4,
+        IS_WRITABLE = 8,
+        IS_WRITEABLE = 8,
+        IS_SEEKABLE = 16,
+        MASK = 31,
+        GET_MASK = 31,
+        SET_MASK = 3
     }
     
     
     
     enum KeyFileFlags {
-        none = 0,
-        keep_comments = 1,
-        keep_translations = 2
+        NONE = 0,
+        KEEP_COMMENTS = 1,
+        KEEP_TRANSLATIONS = 2
     }
     
     
     
     enum LogLevelFlags {
-        flag_recursion = 1,
-        flag_fatal = 2,
-        level_error = 4,
-        level_critical = 8,
-        level_warning = 16,
-        level_message = 32,
-        level_info = 64,
-        level_debug = 128,
-        level_mask = -4
+        FLAG_RECURSION = 1,
+        FLAG_FATAL = 2,
+        LEVEL_ERROR = 4,
+        LEVEL_CRITICAL = 8,
+        LEVEL_WARNING = 16,
+        LEVEL_MESSAGE = 32,
+        LEVEL_INFO = 64,
+        LEVEL_DEBUG = 128,
+        LEVEL_MASK = -4
     }
     
     
     
     enum MarkupCollectType {
-        invalid = 0,
-        string = 1,
-        strdup = 2,
-        boolean = 3,
-        tristate = 4,
-        optional = 65536
+        INVALID = 0,
+        STRING = 1,
+        STRDUP = 2,
+        BOOLEAN = 3,
+        TRISTATE = 4,
+        OPTIONAL = 65536
     }
     
     
     
     enum MarkupParseFlags {
-        do_not_use_this_unsupported_flag = 1,
-        treat_cdata_as_text = 2,
-        prefix_error_position = 4,
-        ignore_qualified = 8
+        DO_NOT_USE_THIS_UNSUPPORTED_FLAG = 1,
+        TREAT_CDATA_AS_TEXT = 2,
+        PREFIX_ERROR_POSITION = 4,
+        IGNORE_QUALIFIED = 8
     }
     
     
     
     enum OptionFlags {
-        none = 0,
-        hidden = 1,
-        in_main = 2,
-        reverse = 4,
-        no_arg = 8,
-        filename = 16,
-        optional_arg = 32,
-        noalias = 64
+        NONE = 0,
+        HIDDEN = 1,
+        IN_MAIN = 2,
+        REVERSE = 4,
+        NO_ARG = 8,
+        FILENAME = 16,
+        OPTIONAL_ARG = 32,
+        NOALIAS = 64
     }
     
     
     
     enum RegexCompileFlags {
-        caseless = 1,
-        multiline = 2,
-        dotall = 4,
-        extended = 8,
-        anchored = 16,
-        dollar_endonly = 32,
-        ungreedy = 512,
-        raw = 2048,
-        no_auto_capture = 4096,
-        optimize = 8192,
-        firstline = 262144,
-        dupnames = 524288,
-        newline_cr = 1048576,
-        newline_lf = 2097152,
-        newline_crlf = 3145728,
-        newline_anycrlf = 5242880,
-        bsr_anycrlf = 8388608,
-        javascript_compat = 33554432
+        CASELESS = 1,
+        MULTILINE = 2,
+        DOTALL = 4,
+        EXTENDED = 8,
+        ANCHORED = 16,
+        DOLLAR_ENDONLY = 32,
+        UNGREEDY = 512,
+        RAW = 2048,
+        NO_AUTO_CAPTURE = 4096,
+        OPTIMIZE = 8192,
+        FIRSTLINE = 262144,
+        DUPNAMES = 524288,
+        NEWLINE_CR = 1048576,
+        NEWLINE_LF = 2097152,
+        NEWLINE_CRLF = 3145728,
+        NEWLINE_ANYCRLF = 5242880,
+        BSR_ANYCRLF = 8388608,
+        JAVASCRIPT_COMPAT = 33554432
     }
     
     
     
     enum RegexMatchFlags {
-        anchored = 16,
-        notbol = 128,
-        noteol = 256,
-        notempty = 1024,
-        partial = 32768,
-        newline_cr = 1048576,
-        newline_lf = 2097152,
-        newline_crlf = 3145728,
-        newline_any = 4194304,
-        newline_anycrlf = 5242880,
-        bsr_anycrlf = 8388608,
-        bsr_any = 16777216,
-        partial_soft = 32768,
-        partial_hard = 134217728,
-        notempty_atstart = 268435456
+        ANCHORED = 16,
+        NOTBOL = 128,
+        NOTEOL = 256,
+        NOTEMPTY = 1024,
+        PARTIAL = 32768,
+        NEWLINE_CR = 1048576,
+        NEWLINE_LF = 2097152,
+        NEWLINE_CRLF = 3145728,
+        NEWLINE_ANY = 4194304,
+        NEWLINE_ANYCRLF = 5242880,
+        BSR_ANYCRLF = 8388608,
+        BSR_ANY = 16777216,
+        PARTIAL_SOFT = 32768,
+        PARTIAL_HARD = 134217728,
+        NOTEMPTY_ATSTART = 268435456
     }
     
     
     
     enum SpawnFlags {
-        default = 0,
-        leave_descriptors_open = 1,
-        do_not_reap_child = 2,
-        search_path = 4,
-        stdout_to_dev_null = 8,
-        stderr_to_dev_null = 16,
-        child_inherits_stdin = 32,
-        file_and_argv_zero = 64,
-        search_path_from_envp = 128,
-        cloexec_pipes = 256
+        DEFAULT = 0,
+        LEAVE_DESCRIPTORS_OPEN = 1,
+        DO_NOT_REAP_CHILD = 2,
+        SEARCH_PATH = 4,
+        STDOUT_TO_DEV_NULL = 8,
+        STDERR_TO_DEV_NULL = 16,
+        CHILD_INHERITS_STDIN = 32,
+        FILE_AND_ARGV_ZERO = 64,
+        SEARCH_PATH_FROM_ENVP = 128,
+        CLOEXEC_PIPES = 256
     }
     
     
     
     enum TestSubprocessFlags {
-        stdin = 1,
-        stdout = 2,
-        stderr = 4
+        STDIN = 1,
+        STDOUT = 2,
+        STDERR = 4
     }
     
     
     
     enum TestTrapFlags {
-        silence_stdout = 128,
-        silence_stderr = 256,
-        inherit_stdin = 512
+        SILENCE_STDOUT = 128,
+        SILENCE_STDERR = 256,
+        INHERIT_STDIN = 512
     }
     
     
     
     enum TraverseFlags {
-        leaves = 1,
-        non_leaves = 2,
-        all = 3,
-        mask = 3,
-        leafs = 1,
-        non_leafs = 2
+        LEAVES = 1,
+        NON_LEAVES = 2,
+        ALL = 3,
+        MASK = 3,
+        LEAFS = 1,
+        NON_LEAFS = 2
     }
     
     
@@ -2718,7 +2716,25 @@ declare namespace imports.gi.GLib {
     type Type = number;
     
     
-    
+    /**
+     * A wrapper for the POSIX access() function. This function is used to
+        test a pathname for one or several of read, write or execute
+        permissions, or just existence.
+
+        On Windows, the file protection mechanism is not at all POSIX-like,
+        and the underlying function in the C library only checks the
+        FAT-style READONLY attribute, and does not look at the ACL of a
+        file at all. This function is this in practise almost useless on
+        Windows. Software that needs to handle file permissions on Windows
+        more exactly should use the Win32 API.
+
+        See your C library manual for more details about access().
+     * @param filename a pathname in the GLib file name encoding (UTF-8 on Windows)
+     * @param mode as in access()
+     * @returns zero if the pathname refers to an existing file system
+object that has all the tested permissions, or -1 otherwise
+or on error.
+     */
     function access (filename: string, mode: number): number;
     
     

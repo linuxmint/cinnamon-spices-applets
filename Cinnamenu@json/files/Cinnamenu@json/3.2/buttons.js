@@ -1051,7 +1051,7 @@ AppListGridButton.prototype = {
         addMenuItem(this, new ApplicationContextMenuItem(this.state, this.buttonState, _('Add to desktop'), 'add_to_desktop', 'computer'));
       }
       if (this.state.trigger('isFavorite', this.buttonState.app.get_id())) {
-        addMenuItem(this, new ApplicationContextMenuItem(this.state, this.buttonState, _('Remove favorite'), 'remove_from_favorites', 'starred'));
+        addMenuItem(this, new ApplicationContextMenuItem(this.state, this.buttonState, _('Remove from favorites'), 'remove_from_favorites', 'starred'));
       } else {
         addMenuItem(this, new ApplicationContextMenuItem(this.state, this.buttonState, _('Add to favorites'), 'add_to_favorites', 'non-starred'));
       }

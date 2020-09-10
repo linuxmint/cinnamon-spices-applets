@@ -169,7 +169,7 @@ class DarkSky implements WeatherProvider {
                             customIcon: this.ResolveCustomIcon(hour.icon)           
                 },
                 precipitation: {
-                  type: hour.precipType as PrecipationType,
+                  type: hour.precipType as PrecipitationType,
                   volume: hour.precipProbability,
                   chance: hour.precipProbability * 100
                 }

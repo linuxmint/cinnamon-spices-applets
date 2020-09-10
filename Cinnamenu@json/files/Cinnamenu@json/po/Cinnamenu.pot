@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-25 17:39+0100\n"
+"POT-Creation-Date: 2020-08-14 13:11+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,478 +17,419 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#. 3.2 4.0
 msgid "Type to search..."
 msgstr ""
 
-#. 3.2 4.0
 msgid "Initializing"
 msgstr ""
 
-#. 3.2 4.0
 msgid "No description available"
 msgstr ""
 
-#. 3.2 4.0
 msgid "All Applications"
 msgstr ""
 
-#. 3.2 4.0
 msgid "Places"
 msgstr ""
 
-#. 3.2 4.0
 msgid "Recent Files"
 msgstr ""
 
-#. 3.2 4.0
 msgid "Bookmarks"
 msgstr ""
 
-#. 3.2 4.0
 msgid "Favorite Apps"
 msgstr ""
 
-#. 3.2 4.0
 msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
 msgstr ""
 
-#. 3.2 4.0
 msgid "Clear List"
 msgstr ""
 
-#. 3.2 4.0
 msgid "No recent files"
 msgstr ""
 
-#. 3.2
 msgid "Account details"
 msgstr ""
 
-#. 3.2 3.2
 msgid "Grid View"
 msgstr ""
 
-#. 3.2 3.2
 msgid "List View"
 msgstr ""
 
-#. 3.2 3.2
 msgid "Switch to grid view"
 msgstr ""
 
-#. 3.2 3.2
 msgid "Switch to list view"
 msgstr ""
 
-#. 3.2 4.0
 msgid "Lock Screen"
 msgstr ""
 
-#. 3.2 4.0
 msgid "Lock the screen"
 msgstr ""
 
-#. 3.2 4.0
 msgid "Logout"
 msgstr ""
 
-#. 3.2 4.0
 msgid "Leave the session"
 msgstr ""
 
-#. 3.2 4.0
 msgid "Quit"
 msgstr ""
 
-#. 3.2 4.0
 msgid "Shutdown the computer"
 msgstr ""
 
-#. 3.2 4.0
 msgid "Home"
 msgstr ""
 
-#. 3.2 4.0
 msgid "Computer"
 msgstr ""
 
-#. 3.2 4.0
 msgid "Browse network"
 msgstr ""
 
-#. 3.2 3.2 4.0
-#. 4.0
+
 msgid "Run with NVIDIA GPU"
 msgstr ""
 
-#. 3.2 4.0
 msgid "Add to panel"
 msgstr ""
 
-#. 3.2 4.0
 msgid "Add to desktop"
 msgstr ""
 
-#. 3.2 4.0
-msgid "Remove favorite"
+msgid "Remove from favorites"
 msgstr ""
 
-#. 3.2 4.0
 msgid "Add to favorites"
 msgstr ""
 
-#. 3.2 4.0
 msgid "Uninstall"
 msgstr ""
 
-#. 4.0
+
 msgid "Please wait..."
 msgstr ""
 
-#. metadata.json->name
-#. 3.2
+msgid "Search web for"
+msgstr ""
+
+msgid "Solution:"
+msgstr ""
+
+msgid "Click to copy"
+msgstr ""
+
+
 msgid "Cinnamenu"
 msgstr ""
 
-#. metadata.json->description
 msgid ""
 "A flexible menu providing formatting options, web bookmarks, search provider"
 " support and fuzzy searching."
 msgstr ""
 
-#. metadata.json->comments
 msgid ""
 "Made possible thanks to the efforts of contributors to the Cinnamon menu, "
 "Gnomenu, and the contributors to projects they derived from."
 msgstr ""
 
-#. 3.2
-#. 4.0
+
 msgid "Behavior"
 msgstr ""
 
-#. 3.2
-#. 4.0
+
 msgid "Appearance"
 msgstr ""
 
-#. 3.2
-#. 4.0
+
 msgid "Layout and Content"
 msgstr ""
 
-#. 3.2
 msgid "Search Providers"
 msgstr ""
 
-#. 3.2
 msgid "No search provider extensions found"
 msgstr ""
 
-#. 3.2
-#. 4.0
+
+
 msgid "Panel"
 msgstr ""
 
-#. 3.2
-#. 4.0
+
+
 msgid "Menu"
 msgstr ""
 
-#. 3.2
-#. 4.0
+
 msgid "Layout"
 msgstr ""
 
-#. 3.2
-#. 4.0
+
 msgid "Content"
 msgstr ""
 
-#. 3.2
-#. 4.0
+
 msgid "Recent files settings"
 msgstr ""
 
-#. 3.2
-#. 4.0
+
 msgid "Open the menu editor"
 msgstr ""
 
-#. 3.2
-#. 4.0
+
 msgid "Reset category order"
 msgstr ""
 
-#. 3.2
-#. 4.0
+
 msgid "Use a custom icon"
 msgstr ""
 
-#. 3.2
-#. 4.0
+
 msgid "Use a custom icon in the panel"
 msgstr ""
 
-#. 3.2
-#. 4.0
+
+
 msgid "Panel icon"
 msgstr ""
 
-#. 3.2
-#. 4.0
+
 msgid "Panel text"
 msgstr ""
 
-#. 3.2
-#. 4.0
+
 msgid "Text to show beside the panel icon"
 msgstr ""
 
-#. 3.2
-#. 4.0
 msgid "pixels"
 msgstr ""
 
-#. 3.2
-#. 4.0
+
+
 msgid "Category icon size"
 msgstr ""
 
-#. 3.2
-#. 4.0
+
+
 msgid "Applications list icon size"
 msgstr ""
 
-#. 3.2
-#. 4.0
+
+
 msgid "Applications grid icon size"
 msgstr ""
 
-#. 3.2
-#. 4.0
+
 msgid "Keyboard shortcut to open and close the menu"
 msgstr ""
 
-#. 3.2
-#. 4.0
+
 msgid "Open menu on hover"
 msgstr ""
 
-#. 3.2
-#. 4.0
+
 msgid "Open the menu when I move my mouse over the panel icon"
 msgstr ""
 
-#. 3.2
-#. 4.0
+
+
 msgid "milliseconds"
 msgstr ""
 
-#. 3.2
-#. 4.0
+
 msgid "Menu hover delay"
 msgstr ""
 
-#. 3.2
-#. 4.0
+
 msgid "Use menu animations"
 msgstr ""
 
-#. 3.2
-#. 4.0
+
 msgid "Animate the menu on open and close"
 msgstr ""
 
-#. 3.2
-#. 4.0
+
 msgid "Activate categories on click"
 msgstr ""
 
-#. 3.2
-#. 4.0
+
 msgid "Activate categories on click instead of on hover"
 msgstr ""
 
-#. 3.2
-#. 4.0
+
 msgid "Enable autoscrolling"
 msgstr ""
 
-#. 3.2
-#. 4.0
+
 msgid "Enable autoscrolling in application list"
 msgstr ""
 
-#. 3.2
-#. 4.0
+
 msgid "Show web bookmarks"
 msgstr ""
 
-#. 3.2
-#. 4.0
+
 msgid "Show your browser's web bookmarks in the menu"
 msgstr ""
 
-#. 3.2
 msgid "Enable searching of open windows"
 msgstr ""
 
-#. 3.2
-#. 4.0
+
 msgid "Enable search providers"
 msgstr ""
 
-#. 3.2
-#. 4.0
+
 msgid "Include search provider results in searches"
 msgstr ""
 
-#. 3.2
-#. 4.0
+
 msgid "Example Search Providers"
 msgstr ""
 
-#. 3.2
-#. 3.2
+
 msgid "Startup applications view mode"
 msgstr ""
 
-#. 3.2
-#. 4.0
+
 msgid "List"
 msgstr ""
 
-#. 3.2
-#. 4.0
+
 msgid "Grid"
 msgstr ""
 
-#. 3.2
-#. 4.0
+
 msgid "columns"
 msgstr ""
 
-#. 3.2
-#. 4.0
+
+
 msgid "Number of columns in apps grid"
 msgstr ""
 
-#. 3.2
-#. 4.0
+
 msgid "Show bookmarks and places"
 msgstr ""
 
-#. 3.2
-#. 4.0
+
 msgid "Show bookmarks and places category in the menu"
 msgstr ""
 
-#. 3.2
-#. 3.2
+
 msgid "Show application icons"
 msgstr ""
 
-#. 3.2
-#. 3.2
+
 msgid "Show category icons"
 msgstr ""
 
-#. 3.2
-#. 3.2
+
 msgid "Show application descriptions under titles"
 msgstr ""
 
-#. 3.2
-#. 3.2
+
 msgid "Show tooltips"
 msgstr ""
 
-#. 3.2
-#. 3.2
+
 msgid "Tooltip delay"
 msgstr ""
 
-#. 3.2
-#. 4.0
+
+
 msgid "Use a custom menu height"
 msgstr ""
 
-#. 3.2
-#. 4.0
+
 msgid "px"
 msgstr ""
 
-#. 3.2
-#. 4.0
+
+
 msgid "Custom menu height"
 msgstr ""
 
-#. 4.0
 msgid "Applications view mode"
 msgstr ""
 
-#. 4.0
 msgid "View applications as list or grid"
 msgstr ""
 
-#. 4.0
 msgid "Application description placement"
 msgstr ""
 
-#. 4.0
 msgid "Tooltips"
 msgstr ""
 
-#. 4.0
 msgid "Under titles"
 msgstr ""
 
-#. 4.0
+
 msgid "None"
 msgstr ""
 
-#. 4.0
 msgid "Choose where to show application descriptions"
 msgstr ""
 
-#. 4.0
 msgid "Session buttons location"
 msgstr ""
 
-#. 4.0
 msgid "Top"
 msgstr ""
 
-#. 4.0
 msgid "Bottom"
 msgstr ""
 
-#. 4.0
 msgid "Left"
 msgstr ""
 
-#. 4.0
 msgid "Right"
 msgstr ""
 
-#. 4.0
-msgid "Choose where to show the session (quit, logout, etc.) buttons"
+msgid "Choose where to show the session buttons (quit, logout, etc.)"
 msgstr ""
 
-#. 4.0
 msgid "Add favorites to session buttons"
 msgstr ""
 
-#. 4.0
 msgid "Show your favorite app icons next to the session buttons"
 msgstr ""
 
-#. 4.0
 msgid "Always open menu on favorite apps"
 msgstr ""
 
-#. 4.0
 msgid "Always open the menu with favorite apps category selected"
+msgstr ""
+
+msgid "Web search option"
+msgstr ""
+
+msgid "Google"
+msgstr ""
+
+msgid "Bing"
+msgstr ""
+
+msgid "Yahoo"
+msgstr ""
+
+msgid "DuckDuckGo"
+msgstr ""
+
+msgid "Show an internet search option in search results"
+msgstr ""
+
+
+msgid "Session buttons icon size"
+msgstr ""
+
+
+msgid "Use session buttons box style"
 msgstr ""

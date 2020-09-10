@@ -2,7 +2,7 @@
 
 ## Important!
 In order to be sure to download the latest version of Spices Update, use
-**[this link](https://cinnamon-spices.linuxmint.com/files/applets/SpicesUpdate@claudiux.zip?33062f0f-a474-41ce-9511-0c55776275a3)** rather than the Download button at the top of this page, **or use Spices Update v4.1.0 or greater**.
+**[this link](https://cinnamon-spices.linuxmint.com/files/applets/SpicesUpdate@claudiux.zip?3b1c8f64-8f8b-40a0-85b0-109f7891f3e3)** rather than the Download button at the top of this page, **or use Spices Update v4.1.0 or greater**.
 
 ## Status
 
@@ -40,7 +40,7 @@ Additional details:
     * The Settings window of this applet does not contain any tabs.
     * In the settings of this applet, you can not access Spices lists to disable their monitoring. Therefore, all installed Spices are monitored.
     * The script `generate_mo.sh` (in the `scripts` folder) allows you to install all available translations. Restart Cinnamon after execution.
-    * If the `Symbola_Hinted` font can not be automatically installed, then open with Nemo the `~/.local/share/cinnamon/applets/SpicesUpdate@claudiux/fonts/Symbola` folder and double-click on the `Symbola_Hinted.ttf` file. Install it with the just opened `gnome-font-viewer`.
+    * If the `Symbola_Hinted` font can not be automatically installed, then execute the script `~/.local/share/cinnamon/applets/SpicesUpdate@claudiux/scripts/install_symbola_on_Arch.sh`; after that, eventually, open with Nemo the `~/.local/share/cinnamon/applets/SpicesUpdate@claudiux/fonts/Symbola` folder and double-click on the `Symbola.otf` file and install it with the just opened `gnome-font-viewer`.
 
 ## Requirements
 
@@ -50,10 +50,10 @@ So you should not have to run any of the commands listed below.
 
 | Distro | Symbola font | notify-send (*) |
 |:---:|:---:|:---:|
-|Fedora|```sudo dnf install gdouros-symbola-fonts```|```sudo dnf install libnotify```|
-| Arch |```yay -S ttf-symbola``` _or_ ```pamac build ttf-symbola```| ```sudo pacman -Syu libnotify```|
-|Linux Mint, Ubuntu|```sudo apt install fonts-symbola```|```sudo apt install libnotify-bin```|
-|Debian (with root rights)|```apt install fonts-symbola```|```apt install libnotify-bin```|
+|Fedora|`sudo dnf install gdouros-symbola-fonts`|`sudo dnf install libnotify`|
+| Arch |`yay -S ttf-symbola` _or_ `pamac build ttf-symbola`| `sudo pacman -Syu libnotify`|
+|Linux Mint, Ubuntu|`sudo apt install fonts-symbola`|`sudo apt install libnotify-bin`|
+|Debian (with root rights)|`apt install fonts-symbola`|`apt install libnotify-bin`|
 
 **(*) Useless for Spices Update version 6.0.0 and more.**
 
@@ -197,8 +197,8 @@ _Thank you very much to all of these authors!_
 ### Manual Installation:
 
    1. Install the additional programs required.
-   * Download the **[latest version of Spices Update](https://cinnamon-spices.linuxmint.com/files/applets/SpicesUpdate@claudiux.zip?33062f0f-a474-41ce-9511-0c55776275a3)** from the Spices Web Site.
-   * Unzip and extract the folder ```SpicesUpdate@claudiux``` into ```~/.local/share/cinnamon/applets/```
+   * Download the **[latest version of Spices Update](https://cinnamon-spices.linuxmint.com/files/applets/SpicesUpdate@claudiux.zip?3b1c8f64-8f8b-40a0-85b0-109f7891f3e3)** from the Spices Web Site.
+   * Unzip and extract the folder `SpicesUpdate@claudiux` into `~/.local/share/cinnamon/applets/`
    * Enable this applet in System Settings -> Applets.
    * You can also access the Settings Screen from System Settings -> Applets, or from the context menu of this applet (right-clicking on its icon).
 

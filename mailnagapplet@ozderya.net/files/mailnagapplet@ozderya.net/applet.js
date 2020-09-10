@@ -154,46 +154,50 @@ MailItem.prototype = {
 	formatDatetime: function(datetime)
 	{
 		let now = new Date();
-		const sec_24h = 24 * 60 * 60; // 24h * 60 min * 60 sec
+		const sec_1min = 60; // 60 sec
+		const sec_1h = 60 * 60; // 60 min * 60 sec
+		const sec_24h = 24 * 60 * 60; // 24 hours * 60 min * 60 sec
+		const days_1w = 7 // 7 days
+		const days_1m = 30 // 30 days
 		let time_diff = (now.getTime() - datetime.getTime()) / 1e3;
 		let days_diff = Math.floor(time_diff / sec_24h);
 
 		if (days_diff == 0) // today
 		{
-			if (time_diff < 60) // <1 minute
+			if (time_diff < sec_1min) // <1 minute
 			{
 				return _("just now");
 			}
-			else if (time_diff < 120) // <2 minute
+			else if (time_diff < 2 * sec_1min) // <2 minute
 			{
 				return "1 minute ago";
 			}
-			else if (time_diff < 60 * 60) // <1 hour
+			else if (time_diff < sec_1h) // <1 hour
 			{
-				return Math.floor(time_diff / 60) + _(" minutes ago");
+				return Math.floor(time_diff / sec_1min) + _(" minutes ago");
 			}
-			else if (time_diff < 2 * 60 * 60) // <2 hours
+			else if (time_diff < 2 * sec_1h) // <2 hours
 			{
 				return "1 hour ago";
 			}
 			else
 			{
-				return Math.floor(time_diff / 60*60) + _(" hours ago");
+				return Math.floor(time_diff / sec_1h) + _(" hours ago");
 			}
 		}
 		else // before today
 		{
-			if (days_diff == 1)
+			if (days_diff == 1) // <1 day
 			{
 				return _("yesterday");
 			}
-			else if (days_diff < 7)
+			else if (days_diff < days_1w) // <1 week
 			{
 				return days_diff + _(" days ago");
 			}
-			else if (days_diff < 30)
+			else if (days_diff < days_1m) // <1 month
 			{
-				return Math.ceil(days_diff / 7) + _(" weeks ago");
+				return Math.ceil(days_diff / days_1w) + _(" weeks ago");
 			}
 			else
 			{

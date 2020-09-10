@@ -959,7 +959,8 @@ SpicesUpdate.prototype = {
       Gio.file_new_for_path("/usr/share/fonts/TTF/Symbola.ttf").query_exists(null) ||
       Gio.file_new_for_path("/usr/share/fonts/gdouros-symbola/Symbola.ttf").query_exists(null) ||
       Gio.file_new_for_path("%s/.local/share/fonts/Symbola_Hinted.ttf".format(HOME_DIR)).query_exists(null) ||
-      Gio.file_new_for_path("%s/.local/share/fonts/Symbola.ttf".format(HOME_DIR)).query_exists(null)
+      Gio.file_new_for_path("%s/.local/share/fonts/Symbola.ttf".format(HOME_DIR)).query_exists(null) ||
+      Gio.file_new_for_path("%s/.local/share/fonts/Symbola.otf".format(HOME_DIR)).query_exists(null)
     )
     if (!_fonts_installed) {
       let _ArchlinuxWitnessFile = Gio.file_new_for_path("/etc/arch-release");
@@ -1843,31 +1844,31 @@ SpicesUpdate.prototype = {
 
   _onButtonPressEvent:function(actor, event) {
     if (this._applet_enabled) {
-			if (event.get_button() == 1) {
-				if (!this._draggable.inhibit) {
-					return false;
-				} else {
-					if (this._applet_context_menu.isOpen) {
-						this._applet_context_menu.toggle();
-					}
-					this.on_applet_clicked(event);
-				}
-			}
-			if (event.get_button() == 2) {
-	      if ((this.nb_to_update + this.nb_to_watch) === 0) {
-	        this._on_refresh_pressed();
-	      } else {
-	        this.open_each_download_tab();
-	      }
-	    }
-    
-			if (event.get_button() == 3) {
-				if (this._applet_context_menu._getMenuItems().length > 0) {
-					this._applet_context_menu.toggle();
-				}
-			}
-		}
-		return true;
+      if (event.get_button() == 1) {
+        if (!this._draggable.inhibit) {
+          return false;
+        } else {
+          if (this._applet_context_menu.isOpen) {
+            this._applet_context_menu.toggle();
+          }
+          this.on_applet_clicked(event);
+        }
+      }
+      if (event.get_button() == 2) {
+        if ((this.nb_to_update + this.nb_to_watch) === 0) {
+          this._on_refresh_pressed();
+        } else {
+          this.open_each_download_tab();
+        }
+      }
+
+      if (event.get_button() == 3) {
+        if (this._applet_context_menu._getMenuItems().length > 0) {
+          this._applet_context_menu.toggle();
+        }
+      }
+    }
+    return true;
   }, // End of _onButtonPressEvent
 
   //++ Handler for when the applet is clicked.

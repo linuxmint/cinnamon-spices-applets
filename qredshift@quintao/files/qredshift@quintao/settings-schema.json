@@ -35,6 +35,7 @@
       "title": "Tips",
       "keys": [
         "textTips",
+        "textHelp",
         "textInfo"
       ]
     },
@@ -48,7 +49,8 @@
         "autoUpdateInterval",
         "adjustmentMethod",
         "labelScrollAction",
-        "iconLabel"
+        "iconLabel",
+        "symbolicIcon"
       ]
     },
     
@@ -74,7 +76,11 @@
       "type": "section",
       "title": "Key Bindings",
       "keys": [
-        "keyToggle"
+        "keyToggle",
+        "keyBrightnessUp",
+        "keyBrightnessDown",
+        "keyTempUp",
+        "keyTempDown"
       ]
     },
     
@@ -94,7 +100,7 @@
   },
   "autoUpdate": {
     "type": "checkbox",
-    "default": false,
+    "default": true,
     "description": "Auto Update",
     "tooltip": "Continuously adjust color temperature"
   },
@@ -134,16 +140,43 @@
   },
   "iconLabel": {
     "type": "checkbox",
-    "default": false,
+    "default": true,
     "description": "Show Label"
   },
-  
-  "keyToggle" : {
-    "type" : "keybinding",
-    "description" : "On/Off",
-    "default" : "<Control>End"
+  "symbolicIcon": {
+    "type": "checkbox",
+    "default": false,
+    "description": "Use symbolic icon"
   },
   
+  "keyToggle": {
+    "type": "keybinding",
+    "description": "On/Off",
+    "default": "<Control>End"
+  },
+  
+  "keyBrightnessUp": {
+    "type": "keybinding",
+    "description": "Increase brightness level",
+    "default": "<Control>Page_Up"
+  },
+  
+  "keyBrightnessDown": {
+    "type": "keybinding",
+    "description": "Decrease brightness level",
+    "default": "<Control>Page_Down"
+  },
+  "keyTempUp": {
+    "type": "keybinding",
+    "description": "Increase temperature level",
+    "default": "<Control><Shift>Page_Up"
+  },
+  
+  "keyTempDown": {
+    "type": "keybinding",
+    "description": "Decrease temperature level",
+    "default": "<Control><Shift>Page_Down"
+  },
   "dayTemp": {
     "type": "spinbutton",
     "default": 5900,
@@ -165,7 +198,7 @@
   "gammaMix": {
     "type": "spinbutton",
     "default": 1,
-    "min": 1,
+    "min": 0.5,
     "max": 5,
     "units": "",
     "step": 0.01,
@@ -229,9 +262,12 @@
     "type": "label",
     "description": "* Right-click the sliders to reset the default (neutral) value."
   },
+  "textHelp": {
+    "type": "label",
+    "description": "When update to a new version make sure you reset the configs to default by deleting the ~/.cinnamon/configs/qredshift@quintao/qredshift@quintao.json.\n You will lost all your configs."
+  },
   "textInfo": {
     "type": "label",
     "description": "If you like and use this applet take the time to visit it's page on Cinnamon Spices and give it a star. You only need a github account to do this."
   }
-  
 }
