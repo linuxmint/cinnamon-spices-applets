@@ -1,6 +1,6 @@
 {
     "uuid": "backgroundroll@Sokawaii25",
     "name": "Background Roll",
-    "description": "Changes the background randomly using the images in ~/Images/backgrounds",
-    "version": "1.0.2"
+    "description": "Changes the background randomly using the images in ~/Images/backgrounds\nMiddle-click lets you roll back to previous background",
+    "version": "2.0"
 }
