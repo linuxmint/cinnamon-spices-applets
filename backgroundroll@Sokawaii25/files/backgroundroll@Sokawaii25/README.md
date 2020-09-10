@@ -2,6 +2,8 @@
 
 This simple applet changes your background when you click it (using the images in ~/Images/backgrounds)
 
+Update 2.0 adds a menu when middle-clicked on the applet, it lets you roll your background or roll back your previous one
+
 # Applet Options
 
 * Toggle desktop notifications when changing the background
@@ -12,4 +14,4 @@ This simple applet changes your background when you click it (using the images i
 
 # Applet Version
 
-Version 1.0.2
+Version 2.0
