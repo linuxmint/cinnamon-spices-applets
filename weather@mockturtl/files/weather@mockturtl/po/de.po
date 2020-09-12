@@ -3,23 +3,26 @@
 # This file is distributed under the same license as weather@mockturtl.
 # Evilandi666 <Evilandi.AUR@googlemail.com>, 2011.
 # Kghbln <kgh@kgh.info>, 2015, 2017, 2019.
+# michi <michi.schweitzer@gmail.com>, 2020.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: 3.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-01-23 22:40+0000\n"
-"PO-Revision-Date: 2019-01-24 10:00+0100\n"
-"Last-Translator: Kghbln <kgh@kgh.info>\n"
-"Language-Team: \n"
-"Language: de\n"
+"PO-Revision-Date: 2020-09-12 22:40+0200\n"
+"Last-Translator: michi <michi.schweitzer@gmail.com>\n"
+"Language-Team: German - Germany <michi.schweitzer@gmail.com>\n"
+"Language: de_DE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"X-Generator: Gtranslator 3.36.0\n"
 
 #: applet.js:344
 msgid "..."
-msgstr ""
+msgstr "..."
 
 #: applet.js:345
 msgid "Click to open"
@@ -143,23 +146,23 @@ msgstr "NW"
 
 #: applet.js:1102
 msgid "Service Unavailable"
-msgstr "Der Vorhersagedienst ist nicht verfügbar."
+msgstr "Dienst nicht verfügbar"
 
 #: applet.js:1106
 msgid "Service Error"
-msgstr "Der Vorhersagedienst hat Probleme."
+msgstr "Dienst hat Probleme"
 
 #: applet.js:1108
 msgid "Wrong API Key"
-msgstr "Der API-Schlüssel ist nicht korrekt."
+msgstr "Der API-Schlüssel ist falsch"
 
 #: applet.js:1111
 msgid "City Not found"
-msgstr "Der Ort wurde nicht gefunden."
+msgstr "Der Ort wurde nicht gefunden"
 
 #: applet.js:1114
 msgid "Key Temp. Blocked"
-msgstr "Der API-Schlüssel wurde gesperrt."
+msgstr "Der API-Schlüssel wurde gesperrt"
 
 #: applet.js:1340
 msgid "Clouds"
@@ -233,6 +236,10 @@ msgstr "Asche"
 msgid "Clear Sky"
 msgstr "Wolkenlos"
 
+#: applet.js:1341
+msgid "Clear"
+msgstr "Klar"
+
 #. settings-schema.json->head->description
 msgid "Settings for weather@mockturtl"
 msgstr "Einstellungen für „Wetter“"
@@ -257,6 +264,30 @@ msgstr "OpenWeatherMap"
 msgid "API Key"
 msgstr "API-Schlüssel"
 
+#. settings-schema.json->manualLocation->description
+msgid "Manual Location"
+msgstr "Manuelle Ortsangabe"
+
+#. settings-schema.json->provider-options->title
+msgid "Weather Provider Options"
+msgstr "Wetter Dienst Einstellungen"
+
+#. settings-schema.json->translateCondition->description
+msgid "Translate conditions"
+msgstr "Wetterbedingungen übersetzen"
+
+#. 3.8->settings-schema.json->forecastHours->description
+msgid "Hourly Forecast length"
+msgstr "Stündliche Prognoselänge"
+
+#. 3.8->settings-schema.json->saveLocation->description
+msgid "Save current location to storage"
+msgstr "Aktuellen Ort speichern"
+
+#. 3.8->settings-schema.json->deleteLocation->description
+msgid "Delete current location from storage"
+msgstr "Aktuellen Ort löschen"
+
 #. settings-schema.json->apiKey->tooltip
 msgid "Copy this from your account on OpenWeatherMap and paste it here."
 msgstr "Kopiere ihn von Deinem Konto bei OpenWeatherMap und füge ihn hier ein."
@@ -267,8 +298,8 @@ msgstr "Vorhersageort"
 
 #. settings-schema.json->location->tooltip
 msgid ""
-"Acceptable inputs: City,CountryCode or Zipcode,CountryCode or "
-"Latitude,Longtitude"
+"Acceptable inputs: City,CountryCode or Zipcode,CountryCode or Latitude,"
+"Longtitude"
 msgstr ""
 "Zulässige Angaben: Ort,Ländercode oder Postleitzahl,Ländercode oder "
 "Breitengrad,Längengrad"
@@ -297,13 +328,17 @@ msgstr "Celsius"
 msgid "fahrenheit"
 msgstr "Fahrenheit"
 
+#. settings-schema.json->distanceUnit->options
+msgid "Metric"
+msgstr "Metrisch"
+
 #. settings-schema.json->temperatureHighFirst->description
 msgid "Show high temperature first in forecast"
 msgstr "Vorhersagehöchsttemperatur zuerst anzeigen"
 
 #. settings-schema.json->windSpeedUnit->description
 msgid "Wind speed unit"
-msgstr "Einheit für die Windgeschwindigkeit:"
+msgstr "Einheit Windgeschwindigkeit"
 
 #. settings-schema.json->windSpeedUnit->options
 msgid "kph"
@@ -371,7 +406,7 @@ msgstr "Tage"
 
 #. settings-schema.json->forecastDays->description
 msgid "Forecast length"
-msgstr "Vorhersagezeitraum:"
+msgstr "Vorhersagezeitraum"
 
 #. settings-schema.json->translateCondition->description
 msgid "Translate condition"
@@ -385,13 +420,58 @@ msgstr "Wettersymbole anzeigen"
 msgid "Display current temperature in panel"
 msgstr "Aktuelle Temperatur in der Leiste anzeigen"
 
+#. settings-schema.json->presentation-section->title
+msgid "Presentation"
+msgstr "Darstellung"
+
+#. settings-schema.json->verticalOrientation->description
+msgid "Show forecast vertically"
+msgstr "Vorhersage vertikal anzeigen"
+
+#. settings-schema.json->verticalOrientation->tooltip
+msgid "Displaying forecasts from top to bottom instead from left to right"
+msgstr "Vorhersage vertikal anstatt horizontal anzeigen"
+
+#. settings-schema.json->forecastColumns->units
+msgid "columns"
+msgstr "Spalten"
+
+#. settings-schema.json->forecastColumns->description
+msgid "Maximum number of columns for forecast"
+msgstr "Max. Anzahl der Spalten für die Vorhersage"
+
+#. settings-schema.json->forecastRows->units
+msgid "rows"
+msgstr "Reihen"
+
+#. settings-schema.json->forecastRows->description
+msgid "Maximum number of rows for forecast"
+msgstr "Max. Anzahl der Reihen für die Vorhersage"
+
+#. settings-schema.json->tempRussianStyle->description
+msgid "Show temperature Russian style"
+msgstr "Temperaturen „Russian Style“"
+
+#. settings-schema.json->units-section->title
+msgid "Units, Icons and Keys"
+msgstr "Einheiten, Icons & Schlüssel"
+
+#. settings-schema.json->info-section->title
+msgid "Help"
+msgstr "Hilfe"
+
+#. settings-schema.json->tempTextOverride->description
+msgid "Override label on panel"
+msgstr "Alternatives Label für die Leiste"
+
 #. settings-schema.json->showCommentInPanel->description
 msgid "Show the weather condition (e.g., \"Windy\", \"Clear\") in the panel"
-msgstr "Wetterbedingungen wie bspw. „Windig“ oder „Heiter“ in der Leiste anzeigen"
+msgstr ""
+"Wetterbedingungen wie bspw. „Windig“ oder „Heiter“ in der Leiste anzeigen"
 
 #. settings-schema.json->locationLabelOverride->description
 msgid "Override location label"
-msgstr "Vorhersageort überschreiben mit:"
+msgstr "Vorhersageort überschreiben mit"
 
 #. settings-schema.json->refreshInterval->units
 msgid "minutes"
@@ -399,7 +479,7 @@ msgstr "Minuten"
 
 #. settings-schema.json->refreshInterval->description
 msgid "Update interval"
-msgstr "Aktualisierungsintervall:"
+msgstr "Aktualisierungsintervall"
 
 #. metadata.json->name
 msgid "Weather"
