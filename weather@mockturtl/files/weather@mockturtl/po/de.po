@@ -466,8 +466,7 @@ msgstr "Alternatives Label für die Leiste"
 
 #. settings-schema.json->showCommentInPanel->description
 msgid "Show the weather condition (e.g., \"Windy\", \"Clear\") in the panel"
-msgstr ""
-"Wetterbedingungen wie bspw. „Windig“ oder „Heiter“ in der Leiste anzeigen"
+msgstr "Wetterbedingungen wie bspw. „Windig“ oder „Heiter“ in der Leiste anzeigen"
 
 #. settings-schema.json->locationLabelOverride->description
 msgid "Override location label"
