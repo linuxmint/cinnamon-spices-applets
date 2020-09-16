@@ -4,6 +4,8 @@ This applet displays and monitors the values ​​of many computer sensors conc
 
 It notifies you with color changes when a value reaches or exceeds its limit.
 
+It uses values from the `sensors` command. (See [lm-sensors][lmsensors].)
+
 Any suggestion to improve Sensors@claudiux is welcome.
 
 ## Benefits
@@ -22,7 +24,7 @@ Any suggestion to improve Sensors@claudiux is welcome.
 
 This applet needs three packages:
 
-  * _sensors_ to get the sensor values.
+  * [_lm-sensors_][lmsensors] to get the sensor values.
   * _xsensors_ to display these values in an independent graphical interface.
   * _fonts-symbola_ that contains some symbols used by this applet.
 
@@ -87,6 +89,10 @@ There are different reasons:
 
 Your `/etc/sensors3.conf` file must be configured for your chip. Search on the Net if a configuration already exists.
 
+### My computer seems to have very few sensors
+
+Try the `sensors-detect` command with root rights (`sudo sensors-detect`). See `man sensors-detect` for more information.
+
 ### How to report an issue or make a feature request?
 
   1. Click on the "Issues" button at the top of this page and open a "New issue".
@@ -114,3 +120,4 @@ Claudiux ([@claudiux][claudiux])
 
 [sanitize]: https://cinnamon-spices.linuxmint.com/extensions/view/87
 [claudiux]: https://github.com/claudiux
+[lmsensors]: https://github.com/lm-sensors/lm-sensors
