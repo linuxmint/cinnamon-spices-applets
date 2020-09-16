@@ -12,11 +12,11 @@ function NightscoutApplet(metadata, orientation, panelHeight, instance_id) {
 
 const logging = false;
 
-function log(message) {
+const log = function(message) {
   if (logging) global.log(`[nightscout@ranneft]: ${message}`);
 }
 
-function makeHttpRequest(method, uri, cb) {
+const makeHttpRequest = function(method, uri, cb) {
   return new Promise((resolve, reject) => {
     const request = Soup.Message.new(method, uri);
     request.request_headers.append('accept', 'application/json');
@@ -31,7 +31,7 @@ function makeHttpRequest(method, uri, cb) {
   });
 }
 
-roundUsing = function(func, prec, value){
+const roundUsing = function(func, prec, value){
   var temp = value * Math.pow(10, prec)
   temp = func(temp);
   return temp / Math.pow(10, prec)
