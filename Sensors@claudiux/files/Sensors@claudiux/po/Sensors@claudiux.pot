@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0.0\n"
 "Report-Msgid-Bugs-To: claudiux <claude.clerc@gmail.com>\n"
-"POT-Creation-Date: 2020-09-12 04:31+0200\n"
+"POT-Creation-Date: 2020-09-17 16:02+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -40,81 +40,81 @@ msgstr ""
 msgid "Some dependencies are not installed!"
 msgstr ""
 
-#: applet.js:88
+#: applet.js:86
 msgid "Sensors"
 msgstr ""
 
-#: applet.js:442
+#: applet.js:459
 msgid "high:"
 msgstr ""
 
-#: applet.js:442 applet.js:444 applet.js:469
+#: applet.js:459 applet.js:461 applet.js:486
 msgid "n/a"
 msgstr ""
 
-#: applet.js:444
+#: applet.js:461
 msgid "crit:"
 msgstr ""
 
-#: applet.js:469
+#: applet.js:486
 msgid "min:"
 msgstr ""
 
-#: applet.js:493
+#: applet.js:510
 msgid "max:"
 msgstr ""
 
-#: applet.js:515
+#: applet.js:532
 msgid "No intrusion detected"
 msgstr ""
 
-#: applet.js:515
+#: applet.js:532
 msgid "INTRUSION DETECTED!"
 msgstr ""
 
-#: applet.js:665
+#: applet.js:544
+msgid "Must be configured!"
+msgstr ""
+
+#: applet.js:722
 msgid "Settings"
 msgstr ""
 
-#: applet.js:665
+#: applet.js:722
 msgid ":"
 msgstr ""
 
 #. settings-schema.json->page_General->title
-#: applet.js:672
+#: applet.js:729
 msgid "⚙ General"
 msgstr ""
 
-#. settings-schema.json->page_Temperatures->title
-#: applet.js:682
+#: applet.js:739
 msgid "🌡 Temperature sensors"
 msgstr ""
 
-#. settings-schema.json->page_Fans->title
-#: applet.js:692
+#: applet.js:749
 msgid "🤂 Fan sensors"
 msgstr ""
 
-#. settings-schema.json->page_Voltages->title
-#: applet.js:702
+#: applet.js:759
 msgid "🗲 Voltage sensors"
 msgstr ""
 
-#. settings-schema.json->page_Intrusion->title
-#: applet.js:712
+#: applet.js:769
 msgid "⮿ Intrusion sensors"
 msgstr ""
 
 #. settings-schema.json->xsensors->description
-#: applet.js:722
+#: applet.js:779
 msgid "Run xsensors"
 msgstr ""
 
-#: applet.js:730
+#: applet.js:787
 msgid "Reload this applet"
 msgstr ""
 
-#: applet.js:978
+#: applet.js:1064
 #, javascript-format
 msgid "Are you sure you want to remove '%s'?"
 msgstr ""
@@ -128,6 +128,22 @@ msgid ""
 "Displays and monitors the values ​​of many computer sensors concerning "
 "temperatures (CPU - GPU - power supply), fan speed, voltages, intrusions. "
 "Notifies you with color changes when a value reaches or exceeds its limit."
+msgstr ""
+
+#. settings-schema.json->page_Temperatures->title
+msgid "🌡 Temperature"
+msgstr ""
+
+#. settings-schema.json->page_Fans->title
+msgid "🤂 Fan"
+msgstr ""
+
+#. settings-schema.json->page_Voltages->title
+msgid "🗲 Voltage"
+msgstr ""
+
+#. settings-schema.json->page_Intrusion->title
+msgid "⮿ Intrusion"
 msgstr ""
 
 #. settings-schema.json->section_Display->title
@@ -243,6 +259,10 @@ msgid ""
 "Unchecked: The size of this applet is optimized, but it may change."
 msgstr ""
 
+#. settings-schema.json->char_size->description
+msgid "Character size (% of standard size)"
+msgstr ""
+
 #. settings-schema.json->bold_values->description
 msgid "Show values in bold in the tooltip"
 msgstr ""
@@ -334,21 +354,27 @@ msgstr ""
 #. settings-schema.json->fan_sensors->columns->title
 #. settings-schema.json->volt_sensors->columns->title
 #. settings-schema.json->intrusion_sensors->columns->title
-msgid "Sensor (Do not change this!)"
+msgid ""
+"Sensor\n"
+"(Do not change this!)"
 msgstr ""
 
 #. settings-schema.json->temp_sensors->columns->title
 #. settings-schema.json->fan_sensors->columns->title
 #. settings-schema.json->volt_sensors->columns->title
 #. settings-schema.json->intrusion_sensors->columns->title
-msgid "Show in panel"
+msgid ""
+"Show\n"
+"in panel"
 msgstr ""
 
 #. settings-schema.json->temp_sensors->columns->title
 #. settings-schema.json->fan_sensors->columns->title
 #. settings-schema.json->volt_sensors->columns->title
 #. settings-schema.json->intrusion_sensors->columns->title
-msgid "Show in tooltip"
+msgid ""
+"Show\n"
+"in tooltip"
 msgstr ""
 
 #. settings-schema.json->temp_sensors->columns->title
