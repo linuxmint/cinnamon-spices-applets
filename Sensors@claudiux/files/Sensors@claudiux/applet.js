@@ -10,8 +10,6 @@ const {AppletSettings} = imports.ui.settings;
 const Gettext = imports.gettext;
 const Extension = imports.ui.extension; // Needed to reload applet
 const ModalDialog = imports.ui.modalDialog;
-//const Cinnamon = imports.gi.Cinnamon; // Needed to read/write into a file
-//const Signals = imports.signals;
 
 const {Dependencies} = require("./checkDependencies");
 
@@ -106,24 +104,6 @@ class SensorsApplet extends Applet.TextApplet {
     this.reaper = new SensorsReaper(this.interval);
     this.reaper.reap_sensors(1*this.strictly_positive_temp, 1*this.strictly_positive_fan, 1*this.strictly_positive_volt);
     this._connectId = this.reaper.connect("sensors-data-available", () => this.updateUI());
-
-    /*
-    // Log handler:
-    this.log_handler_ids = [];
-    this.log_handler_ids.push(
-      GLib.log_set_handler ("GLib", GLib.LogLevelFlags.LEVEL_DEBUG, this.glib_debug_log_handler)
-    );
-
-
-    // Direct all but debug to the normal handler
-    this.log_handler_ids.push(
-      GLib.log_set_handler( "GLib",
-                          ( GLib.LogLevelFlags.LEVEL_MASK | GLib.LogLevelFlags.FLAG_FATAL |
-                            GLib.LogLevelFlags.FLAG_RECURSION ) & ~GLib.LogLevelFlags.LEVEL_DEBUG,
-                          GLib.log_default_handler
-      )
-    );
-    */
 
     // Check about dependencies:
     this.checkDepInterval = undefined;
@@ -989,9 +969,6 @@ class SensorsApplet extends Applet.TextApplet {
     }
 
     this.kill_all_pids();
-
-    for (let handler_id of this.log_handler_ids)
-      GLib.log_remove_handler("GLib", handler_id);
   }
 
   on_applet_removed_from_panel() {
@@ -1015,9 +992,6 @@ class SensorsApplet extends Applet.TextApplet {
     }
 
     this.kill_all_pids();
-
-    for (let handler_id of this.log_handler_ids)
-      GLib.log_remove_handler("GLib", handler_id);
 
     this.s.finalize();
   }
@@ -1079,24 +1053,6 @@ class SensorsApplet extends Applet.TextApplet {
       }
     );
     dialog.open();
-  }
-
-  /**
-   * Log handler and C°
-   */
-
-  glib_debug_log_handler(log_domain, log_level, message, user_data) {
-    let forbidden = ["posix_spawn"];
-
-    for (let i = 0; i < forbidden.length; i++) {
-      if (message.startsWith(forbidden[i])) return;
-    }
-
-    GLib.log_default_handler (log_domain,
-                 log_level,
-                 message,
-                 user_data
-    );
   }
 }
 
