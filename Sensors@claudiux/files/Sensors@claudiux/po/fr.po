@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0.0\n"
 "Report-Msgid-Bugs-To: claudiux <claude.clerc@gmail.com>\n"
-"POT-Creation-Date: 2020-09-12 04:31+0200\n"
-"PO-Revision-Date: 2020-09-12 05:34+0200\n"
+"POT-Creation-Date: 2020-09-17 16:02+0200\n"
+"PO-Revision-Date: 2020-09-17 16:17+0200\n"
 "Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -43,81 +43,81 @@ msgstr "Veuillez exécuter, dans le terminal qui s'est ouvert, les commandes :"
 msgid "Some dependencies are not installed!"
 msgstr "Certaines dépendances ne sont pas installées !"
 
-#: applet.js:88
+#: applet.js:86
 msgid "Sensors"
 msgstr "Capteurs"
 
-#: applet.js:442
+#: applet.js:459
 msgid "high:"
 msgstr "élevée :"
 
-#: applet.js:442 applet.js:444 applet.js:469
+#: applet.js:459 applet.js:461 applet.js:486
 msgid "n/a"
-msgstr ""
+msgstr "n/a"
 
-#: applet.js:444
+#: applet.js:461
 msgid "crit:"
 msgstr "critique :"
 
-#: applet.js:469
+#: applet.js:486
 msgid "min:"
 msgstr "min :"
 
-#: applet.js:493
+#: applet.js:510
 msgid "max:"
 msgstr "max :"
 
-#: applet.js:515
+#: applet.js:532
 msgid "No intrusion detected"
 msgstr "Aucune intrusion détectée"
 
-#: applet.js:515
+#: applet.js:532
 msgid "INTRUSION DETECTED!"
 msgstr "INTRUSION DÉTECTÉE !"
 
-#: applet.js:665
+#: applet.js:544
+msgid "Must be configured!"
+msgstr "Doit être configuré !"
+
+#: applet.js:722
 msgid "Settings"
 msgstr "Paramètres"
 
-#: applet.js:665
+#: applet.js:722
 msgid ":"
-msgstr ": "
+msgstr " :"
 
 #. settings-schema.json->page_General->title
-#: applet.js:672
+#: applet.js:729
 msgid "⚙ General"
 msgstr "⚙ Général"
 
-#. settings-schema.json->page_Temperatures->title
-#: applet.js:682
+#: applet.js:739
 msgid "🌡 Temperature sensors"
 msgstr "🌡 Capteurs de température"
 
-#. settings-schema.json->page_Fans->title
-#: applet.js:692
+#: applet.js:749
 msgid "🤂 Fan sensors"
 msgstr "🤂 Capteurs de ventilateur"
 
-#. settings-schema.json->page_Voltages->title
-#: applet.js:702
+#: applet.js:759
 msgid "🗲 Voltage sensors"
 msgstr "🗲 Capteurs de tension"
 
-#. settings-schema.json->page_Intrusion->title
-#: applet.js:712
+#: applet.js:769
 msgid "⮿ Intrusion sensors"
 msgstr "⮿ Capteurs d'intrusion"
 
 #. settings-schema.json->xsensors->description
-#: applet.js:722
+#: applet.js:779
 msgid "Run xsensors"
 msgstr "Lancer xsensors"
 
-#: applet.js:730
+#: applet.js:787
 msgid "Reload this applet"
 msgstr "Recharger cette applet"
 
-#: applet.js:978
+#: applet.js:1064
 #, javascript-format
 msgid "Are you sure you want to remove '%s'?"
 msgstr "Êtes-vous sûr de vouloir enlever \"%s\" ?"
@@ -136,6 +136,22 @@ msgstr ""
 "concernant les températures (CPU - GPU - alimentation), la vitesse des "
 "ventilateurs, les tensions, les intrusions. Vous avertit par des changements "
 "de couleur lorsqu'une valeur atteint ou dépasse sa limite."
+
+#. settings-schema.json->page_Temperatures->title
+msgid "🌡 Temperature"
+msgstr "🌡 Température"
+
+#. settings-schema.json->page_Fans->title
+msgid "🤂 Fan"
+msgstr "🤂 Ventilateur"
+
+#. settings-schema.json->page_Voltages->title
+msgid "🗲 Voltage"
+msgstr "🗲 Tension"
+
+#. settings-schema.json->page_Intrusion->title
+msgid "⮿ Intrusion"
+msgstr "⮿ Intrusion"
 
 #. settings-schema.json->section_Display->title
 #. settings-schema.json->section_tempOptions->title
@@ -179,63 +195,63 @@ msgstr "Capteurs d'intrusion"
 
 #. settings-schema.json->interval->options
 msgid "1"
-msgstr ""
+msgstr "1"
 
 #. settings-schema.json->interval->options
 msgid "2"
-msgstr ""
+msgstr "2"
 
 #. settings-schema.json->interval->options
 msgid "3"
-msgstr ""
+msgstr "3"
 
 #. settings-schema.json->interval->options
 msgid "4"
-msgstr ""
+msgstr "4"
 
 #. settings-schema.json->interval->options
 msgid "5"
-msgstr ""
+msgstr "5"
 
 #. settings-schema.json->interval->options
 msgid "6"
-msgstr ""
+msgstr "6"
 
 #. settings-schema.json->interval->options
 msgid "7"
-msgstr ""
+msgstr "7"
 
 #. settings-schema.json->interval->options
 msgid "8"
-msgstr ""
+msgstr "8"
 
 #. settings-schema.json->interval->options
 msgid "9"
-msgstr ""
+msgstr "9"
 
 #. settings-schema.json->interval->options
 msgid "10"
-msgstr ""
+msgstr "10"
 
 #. settings-schema.json->interval->options
 msgid "12"
-msgstr ""
+msgstr "12"
 
 #. settings-schema.json->interval->options
 msgid "15"
-msgstr ""
+msgstr "15"
 
 #. settings-schema.json->interval->options
 msgid "20"
-msgstr ""
+msgstr "30"
 
 #. settings-schema.json->interval->options
 msgid "30"
-msgstr ""
+msgstr "30"
 
 #. settings-schema.json->interval->options
 msgid "60"
-msgstr ""
+msgstr "60"
 
 #. settings-schema.json->interval->description
 msgid "Refresh interval (seconds)"
@@ -254,6 +270,10 @@ msgstr ""
 "Coché: la taille de cette applet reste constante, une fois que toutes vos "
 "préférences ont été définies.\n"
 "Non coché: la taille de cette applet est optimisée, mais elle peut changer."
+
+#. settings-schema.json->char_size->description
+msgid "Character size (% of standard size)"
+msgstr "Taille des caractères (% de la taille standard)"
 
 #. settings-schema.json->bold_values->description
 msgid "Show values in bold in the tooltip"
@@ -351,22 +371,34 @@ msgstr "Renouveler la liste des capteurs"
 #. settings-schema.json->fan_sensors->columns->title
 #. settings-schema.json->volt_sensors->columns->title
 #. settings-schema.json->intrusion_sensors->columns->title
-msgid "Sensor (Do not change this!)"
-msgstr "Capteur (ne changez pas cela !)"
+msgid ""
+"Sensor\n"
+"(Do not change this!)"
+msgstr ""
+"Capteur \n"
+"(Ne rien modifier !)"
 
 #. settings-schema.json->temp_sensors->columns->title
 #. settings-schema.json->fan_sensors->columns->title
 #. settings-schema.json->volt_sensors->columns->title
 #. settings-schema.json->intrusion_sensors->columns->title
-msgid "Show in panel"
-msgstr "Afficher dans le panneau"
+msgid ""
+"Show\n"
+"in panel"
+msgstr ""
+"Afficher dans \n"
+"le panneau"
 
 #. settings-schema.json->temp_sensors->columns->title
 #. settings-schema.json->fan_sensors->columns->title
 #. settings-schema.json->volt_sensors->columns->title
 #. settings-schema.json->intrusion_sensors->columns->title
-msgid "Show in tooltip"
-msgstr "Afficher dans l'info-bulle"
+msgid ""
+"Show\n"
+"in tooltip"
+msgstr ""
+"Afficher dans \n"
+"l'info-bulle"
 
 #. settings-schema.json->temp_sensors->columns->title
 #. settings-schema.json->fan_sensors->columns->title
