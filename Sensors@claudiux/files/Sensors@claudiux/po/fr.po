@@ -6,9 +6,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: 1.0.0\n"
-"Report-Msgid-Bugs-To: claudiux <claude.clerc@gmail.com>\n"
-"POT-Creation-Date: 2020-09-17 16:02+0200\n"
-"PO-Revision-Date: 2020-09-17 16:17+0200\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-09-20 18:36+0200\n"
+"PO-Revision-Date: 2020-09-20 18:39+0200\n"
 "Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -43,81 +43,81 @@ msgstr "Veuillez exécuter, dans le terminal qui s'est ouvert, les commandes :"
 msgid "Some dependencies are not installed!"
 msgstr "Certaines dépendances ne sont pas installées !"
 
-#: applet.js:86
+#: applet.js:84
 msgid "Sensors"
 msgstr "Capteurs"
 
-#: applet.js:459
+#: applet.js:387
 msgid "high:"
 msgstr "élevée :"
 
-#: applet.js:459 applet.js:461 applet.js:486
+#: applet.js:387 applet.js:389 applet.js:414
 msgid "n/a"
 msgstr "n/a"
 
-#: applet.js:461
+#: applet.js:389
 msgid "crit:"
 msgstr "critique :"
 
-#: applet.js:486
+#: applet.js:414
 msgid "min:"
 msgstr "min :"
 
-#: applet.js:510
+#: applet.js:438
 msgid "max:"
 msgstr "max :"
 
-#: applet.js:532
+#: applet.js:460
 msgid "No intrusion detected"
 msgstr "Aucune intrusion détectée"
 
-#: applet.js:532
+#: applet.js:460
 msgid "INTRUSION DETECTED!"
 msgstr "INTRUSION DÉTECTÉE !"
 
-#: applet.js:544
+#: applet.js:472
 msgid "Must be configured!"
 msgstr "Doit être configuré !"
 
-#: applet.js:722
+#: applet.js:650
 msgid "Settings"
 msgstr "Paramètres"
 
-#: applet.js:722
+#: applet.js:650
 msgid ":"
 msgstr " :"
 
 #. settings-schema.json->page_General->title
-#: applet.js:729
+#: applet.js:657
 msgid "⚙ General"
 msgstr "⚙ Général"
 
-#: applet.js:739
+#: applet.js:667
 msgid "🌡 Temperature sensors"
 msgstr "🌡 Capteurs de température"
 
-#: applet.js:749
+#: applet.js:677
 msgid "🤂 Fan sensors"
 msgstr "🤂 Capteurs de ventilateur"
 
-#: applet.js:759
+#: applet.js:687
 msgid "🗲 Voltage sensors"
 msgstr "🗲 Capteurs de tension"
 
-#: applet.js:769
+#: applet.js:697
 msgid "⮿ Intrusion sensors"
 msgstr "⮿ Capteurs d'intrusion"
 
 #. settings-schema.json->xsensors->description
-#: applet.js:779
+#: applet.js:707
 msgid "Run xsensors"
 msgstr "Lancer xsensors"
 
-#: applet.js:787
+#: applet.js:715
 msgid "Reload this applet"
 msgstr "Recharger cette applet"
 
-#: applet.js:1064
+#: applet.js:986
 #, javascript-format
 msgid "Are you sure you want to remove '%s'?"
 msgstr "Êtes-vous sûr de vouloir enlever \"%s\" ?"
@@ -360,6 +360,18 @@ msgstr "Afficher la lettre de l'unité"
 msgid "Whether or not to show the unit character (C or F)."
 msgstr "Indiquer ou non la lettre de l'unité (C ou F)."
 
+#. settings-schema.json->always_show_unit_in_line->description
+msgid "Vertical panel: Temperature value and °C / °F on one line"
+msgstr "Panneau vertical: Valeur et °C / °F sur une seule ligne"
+
+#. settings-schema.json->always_show_unit_in_line->tooltip
+msgid ""
+"Whether or not to show, in a vertical panel, °C or °F on the same line as "
+"the temperature value."
+msgstr ""
+"Afficher ou non sur une même ligne, dans un panneau vertical, la valeur de "
+"la température son unité °C ou °F."
+
 #. settings-schema.json->btn_renew_temp_sensors_list->description
 #. settings-schema.json->btn_renew_fan_sensors_list->description
 #. settings-schema.json->btn_renew_volt_sensors_list->description
@@ -372,10 +384,10 @@ msgstr "Renouveler la liste des capteurs"
 #. settings-schema.json->volt_sensors->columns->title
 #. settings-schema.json->intrusion_sensors->columns->title
 msgid ""
-"Sensor\n"
+"Sensor name\n"
 "(Do not change this!)"
 msgstr ""
-"Capteur \n"
+"Nom du capteur \n"
 "(Ne rien modifier !)"
 
 #. settings-schema.json->temp_sensors->columns->title
@@ -387,7 +399,7 @@ msgid ""
 "in panel"
 msgstr ""
 "Afficher dans \n"
-"le panneau"
+"  le panneau"
 
 #. settings-schema.json->temp_sensors->columns->title
 #. settings-schema.json->fan_sensors->columns->title
@@ -398,7 +410,7 @@ msgid ""
 "in tooltip"
 msgstr ""
 "Afficher dans \n"
-"l'info-bulle"
+"  l'info-bulle"
 
 #. settings-schema.json->temp_sensors->columns->title
 #. settings-schema.json->fan_sensors->columns->title
@@ -406,6 +418,17 @@ msgstr ""
 #. settings-schema.json->intrusion_sensors->columns->title
 msgid "Shown name"
 msgstr "Nom affiché"
+
+#. settings-schema.json->temp_sensors->tooltip
+#. settings-schema.json->fan_sensors->tooltip
+#. settings-schema.json->volt_sensors->tooltip
+#. settings-schema.json->intrusion_sensors->tooltip
+msgid ""
+"Double-click on a line to change Shown name.\n"
+"To reset a Shown name, copy/paste the Sensor value."
+msgstr ""
+"Double-clic sur une ligne pour modifier le Nom affiché.\n"
+"Pour annuler le Nom affiché, y copier/coller le Nom du capteur."
 
 #. settings-schema.json->fan_unit->description
 msgid "Abbreviation of \"Rotations per minute\""
