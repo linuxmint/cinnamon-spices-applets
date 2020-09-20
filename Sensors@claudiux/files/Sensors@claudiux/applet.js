@@ -96,6 +96,7 @@ class SensorsApplet extends Applet.TextApplet {
 
     // get settings defined in settings-schema.json:
     this.get_user_settings();
+    this._variables();
 
     // Initialize some properties:
     this.isRunning = false;
@@ -140,6 +141,8 @@ class SensorsApplet extends Applet.TextApplet {
       this.has_set_markup = true;
     }
 
+    // Custom names (generic)
+    this.s.bind("custom_names", "custom_names", null, null);
 
     // Temperature tab
     this.s.bind("show_temp", "show_temp", this.updateUI, null);
@@ -148,6 +151,7 @@ class SensorsApplet extends Applet.TextApplet {
     this.s.bind("only_integer_part", "only_integer_part", this.updateUI, null);
     this.s.bind("show_unit", "show_unit", this.updateUI, null);
     this.s.bind("show_unit_letter", "show_unit_letter", this.updateUI, null);
+    this.s.bind("always_show_unit_in_line", "always_show_unit_in_line", this.updateUI, null);
     this.s.bind("temp_sensors", "temp_sensors", null, null);
     this.s.bind("numberOfTempSensors", "numberOfTempSensors", null, null);
 
@@ -207,48 +211,119 @@ class SensorsApplet extends Applet.TextApplet {
   /**
    * populate_xxx_sensors_in_settings
    */
-  populate_temp_sensors_in_settings(force = true) {
-    if (this.data === undefined) return;
 
-    let _tempSensors = Object.keys(this.data["temps"]);
+  _variables() {
+    this.sensors_list = {
+      "temps": {
+        get_value:  () => {return this.temp_sensors;},
+        set_value: (v) => {this.temp_sensors = v}
+      },
+      "fans": {
+        get_value:  () => {return this.fan_sensors;},
+        set_value: (v) => {this.fan_sensors = v}
+      },
+      "voltages": {
+        get_value:  () => {return this.volt_sensors;},
+        set_value: (v) => {this.volt_sensors = v}
+      },
+      "intrusions": {
+        get_value:  () => {return this.intrusion_sensors;},
+        set_value: (v) => {this.intrusion_sensors = v}
+      }
+    };
 
-    if (_tempSensors.length === 0 && this.temp_sensors.length != 0) {
-      this.temp_sensors = [];
+    this.number_of_sensors = {
+      "temps": {
+        get_value:  () => {return this.numberOfTempSensors;},
+        set_value: (v) => {this.numberOfTempSensors = v}
+      },
+      "fans": {
+        get_value:  () => {return this.numberOfFanSensors;},
+        set_value: (v) => {this.numberOfFanSensors = v}
+      },
+      "voltages": {
+        get_value:  () => {return this.numberOfVoltageSensors;},
+        set_value: (v) => {this.numberOfVoltageSensors = v}
+      },
+      "intrusions": {
+        get_value:  () => {return this.numberOfIntrusionSensors;},
+        set_value: (v) => {this.numberOfIntrusionSensors = v}
+      }
+    }
+  }
+
+  populate_sensors_in_settings(type, force) {
+    let _sensors = Object.keys(this.data[type]);
+
+    if (_sensors.length === 0 && this.sensors_list[type].get_value().length != 0) {
+      settings_part = [];
       return
     }
 
     var ret = [];
     var _known_keys = [];
 
-    for (let k of this.temp_sensors)
-      _known_keys.push(k["sensor"]);
+    for (let k of this.sensors_list[type].get_value()) {
+      let _sensor = k["sensor"];
+
+      _known_keys.push(_sensor);
+
+      if (k["shown_name"].length > 0) {
+        //if (this.custom_names[_sensor]) log("custom_names: \"" + this.custom_names[_sensor] + "\"", true);
+
+        if (this.custom_names[_sensor] && (_sensor.toString() === k["shown_name"].toString())) {
+          delete this.custom_names[_sensor];
+          k["shown_name"] = ""
+        } else {
+          this.custom_names[_sensor] = k["shown_name"];
+        }
+      }
+    }
 
     var name, toPush, index;
-    var modified = (force || this.numberOfTempSensors === 0 || this.numberOfTempSensors !== _tempSensors.length || this.temp_sensors.length === 0);
-    this.numberOfTempSensors = _tempSensors.length;
+    var modified = (force ||
+                    this.number_of_sensors[type].get_value() === 0 ||
+                    this.number_of_sensors[type].get_value() !== _sensors.length ||
+                    this.sensors_list[type].get_value().length === 0
+    );
+    this.number_of_sensors[type].set_value(_sensors.length);
 
-    for (let sensor of _tempSensors) {
+    for (let sensor of _sensors) {
       name = sensor.toString().trim();
-
       toPush = {};
       index = _known_keys.indexOf(name);
-      this.minimumIntegerDigitsTemp = 2;
+      if (type === "temps") this.minimumIntegerDigitsTemp = 2;
+
+      toPush["sensor"] = name;
+
       if (index < 0) {
-        toPush["sensor"] = name;
         toPush["show_in_panel"] = false;
         toPush["show_in_tooltip"] = false;
+
         modified = true;
-        this.minimumIntegerDigitsTemp = Math.max(this.minimumIntegerDigitsTemp, (Math.ceil(this._get_crit_temp(this.data["temps"][name]))).toString().length);
+        if (type === "temps") {
+          this.minimumIntegerDigitsTemp = Math.max(this.minimumIntegerDigitsTemp,
+                                          (Math.ceil(this._get_crit_temp(this.data["temps"][name]))).toString().length);
+        }
       } else {
-        toPush["sensor"] = name;
-        toPush["show_in_panel"] = this.temp_sensors[index]["show_in_panel"];
-        toPush["show_in_tooltip"] = this.temp_sensors[index]["show_in_tooltip"];
+        toPush["show_in_panel"] = this.sensors_list[type].get_value()[index]["show_in_panel"];
+        toPush["show_in_tooltip"] = this.sensors_list[type].get_value()[index]["show_in_tooltip"];
       }
-      ret.push(toPush);
+
+      if (this.custom_names[name]) {
+        toPush["shown_name"] = this.custom_names[name]
+      } else if (index > -1) {
+        toPush["shown_name"] = (this.sensors_list[type].get_value())[index]["shown_name"]
+      } else {
+        toPush["shown_name"] = ""
+      }
+
+      if (Object.keys(toPush).length != 0)
+        ret.push(toPush);
     }
 
     if (modified) {
-      this.temp_sensors = ret;
+      this.sensors_list[type].set_value(ret);
       this.updateUI();
     }
     ret = null;
@@ -256,161 +331,30 @@ class SensorsApplet extends Applet.TextApplet {
     toPush = null;
     name = null;
     modified = null;
+  }
+
+  populate_temp_sensors_in_settings(force = true) {
+    if (this.data === undefined) return;
+
+    this.populate_sensors_in_settings("temps", force);
   }
 
   populate_fan_sensors_in_settings(force = true) {
     if (this.data === undefined) return;
 
-    let _fanSensors = Object.keys(this.data["fans"]);
-
-    if (_fanSensors.length === 0 && this.fan_sensors.length != 0) {
-      this.fan_sensors = [];
-      return
-    }
-
-    var ret = [];
-    var _known_keys = [];
-
-    for (let k of this.fan_sensors)
-      _known_keys.push(k["sensor"]);
-
-    var name, toPush, index;
-    var modified = (this.numberOfFanSensors == 0 || this.numberOfFanSensors != _fanSensors.length || force);
-    if (modified) {
-      this.numberOfFanSensors = _fanSensors.length;
-    }
-
-
-    for (let sensor of _fanSensors) {
-      name = sensor.toString().trim();
-
-      toPush = {};
-      index = _known_keys.indexOf(name);
-      if (index < 0) {
-        toPush["sensor"] = name;
-        toPush["show_in_panel"] = false;
-        toPush["show_in_tooltip"] = false;
-        modified = true;
-      } else {
-        toPush["sensor"] = name;
-        toPush["show_in_panel"] = this.fan_sensors[index]["show_in_panel"];
-        toPush["show_in_tooltip"] = this.fan_sensors[index]["show_in_tooltip"];
-      }
-      if (Object.keys(toPush).length != 0)
-        ret.push(toPush);
-    }
-
-    if (modified) {
-      this.fan_sensors = ret;
-      this.updateUI();
-    }
-    ret = null;
-    _known_keys = null;
-    toPush = null;
-    name = null;
-    modified = null;
+    this.populate_sensors_in_settings("fans", force);
   }
 
   populate_volt_sensors_in_settings(force = true) {
     if (this.data === undefined) return;
 
-    let _voltSensors = Object.keys(this.data["voltages"]);
-
-    if (_voltSensors.length === 0 && this.volt_sensors.length != 0) {
-      this.volt_sensors = [];
-      return
-    }
-
-    var ret = [];
-    var _known_keys = [];
-
-    for (let k of this.volt_sensors)
-      _known_keys.push(k["sensor"]);
-
-    var name, toPush, index;
-    var modified = (this.numberOfVoltageSensors == 0 || this.numberOfVoltageSensors != _voltSensors.length || force);
-    if (modified)
-      this.numberOfVoltageSensors = _voltSensors.length;
-
-    for (let sensor of _voltSensors) {
-      name = sensor.toString().trim();
-
-      toPush = {};
-      index = _known_keys.indexOf(name);
-      if (index < 0) {
-        toPush["sensor"] = name;
-        toPush["show_in_panel"] = false;
-        toPush["show_in_tooltip"] = false;
-        modified = true;
-      } else {
-        toPush["sensor"] = name;
-        toPush["show_in_panel"] = this.volt_sensors[index]["show_in_panel"];
-        toPush["show_in_tooltip"] = this.volt_sensors[index]["show_in_tooltip"];
-      }
-      if (Object.keys(toPush).length != 0)
-        ret.push(toPush);
-    }
-
-    if (modified) {
-      this.volt_sensors = ret;
-      this.updateUI();
-    }
-    ret = null;
-    _known_keys = null;
-    toPush = null;
-    name = null;
-    modified = null;
+    this.populate_sensors_in_settings("voltages", force);
   }
 
   populate_intrusion_sensors_in_settings(force = true) {
     if (this.data === undefined) return;
 
-    let _intrusionSensors = Object.keys(this.data["intrusions"]);
-
-    if (_intrusionSensors.length === 0 && this.intrusion_sensors.length != 0) {
-      this.intrusion_sensors = [];
-      return
-    }
-
-    var ret = [];
-    var _known_keys = [];
-
-    for (let k of this.intrusion_sensors)
-      _known_keys.push(k["sensor"]);
-
-    var name, toPush, index;
-    var modified = (this.numberOfIntrusionSensors == 0 || this.numberOfIntrusionSensors != _intrusionSensors.length || force);
-    if (modified)
-      this.numberOfIntrusionSensors = _intrusionSensors.length;
-
-    for (let sensor of _intrusionSensors) {
-      name = sensor.toString().trim();
-
-      toPush = {};
-      index = _known_keys.indexOf(name);
-      if (index < 0) {
-        toPush["sensor"] = name;
-        toPush["show_in_panel"] = false;
-        toPush["show_in_tooltip"] = false;
-        modified = true;
-      } else {
-        toPush["sensor"] = name;
-        toPush["show_in_panel"] = this.intrusion_sensors[index]["show_in_panel"];
-        toPush["show_in_tooltip"] = this.intrusion_sensors[index]["show_in_tooltip"];
-      }
-      if (Object.keys(toPush).length != 0)
-        ret.push(toPush);
-    }
-
-    if (modified) {
-      this.intrusion_sensors = ret;
-      this.updateUI();
-    }
-    ret = null;
-    _known_keys = null;
-    toPush = null;
-    name = null;
-    modified = null;
+    this.populate_sensors_in_settings("intrusions", force);
   }
 
   /**
@@ -427,6 +371,10 @@ class SensorsApplet extends Applet.TextApplet {
         for (let t of this.temp_sensors) {
           if (this.data["temps"][t["sensor"]] !== undefined) {
             if (t["show_in_tooltip"]) {
+              if (t["shown_name"] && t["sensor"].toString() === t["shown_name"].toString()) {
+                if (this.custom_names[t["sensor"]]) delete this.custom_names[t["sensor"]];
+                t["shown_name"] = ""
+              }
               let name = (!t["shown_name"]) ?  t["sensor"] : t["shown_name"];
               _tooltip +=  (t["show_in_panel"] && this.bold_italics_main_sensors) ?
                 " <i><b>" + name + "</b></i>\n" :
@@ -801,7 +749,7 @@ class SensorsApplet extends Applet.TextApplet {
 
 
     if (this.show_unit) {
-      ret += (vertical && this.show_unit_letter) ? "\n°" : "°";
+      ret += (vertical && !this.always_show_unit_in_line && this.show_unit_letter) ? "\n°" : "°";
       if (this.show_unit_letter) ret += this.use_fahrenheit ? "F" : "C";
     }
 

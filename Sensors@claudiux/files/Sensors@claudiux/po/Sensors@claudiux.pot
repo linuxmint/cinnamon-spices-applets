@@ -6,9 +6,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: 1.0.0\n"
-"Report-Msgid-Bugs-To: claudiux <claude.clerc@gmail.com>\n"
-"POT-Creation-Date: 2020-09-17 16:02+0200\n"
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-09-20 18:36+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -40,81 +40,81 @@ msgstr ""
 msgid "Some dependencies are not installed!"
 msgstr ""
 
-#: applet.js:86
+#: applet.js:84
 msgid "Sensors"
 msgstr ""
 
-#: applet.js:459
+#: applet.js:387
 msgid "high:"
 msgstr ""
 
-#: applet.js:459 applet.js:461 applet.js:486
+#: applet.js:387 applet.js:389 applet.js:414
 msgid "n/a"
 msgstr ""
 
-#: applet.js:461
+#: applet.js:389
 msgid "crit:"
 msgstr ""
 
-#: applet.js:486
+#: applet.js:414
 msgid "min:"
 msgstr ""
 
-#: applet.js:510
+#: applet.js:438
 msgid "max:"
 msgstr ""
 
-#: applet.js:532
+#: applet.js:460
 msgid "No intrusion detected"
 msgstr ""
 
-#: applet.js:532
+#: applet.js:460
 msgid "INTRUSION DETECTED!"
 msgstr ""
 
-#: applet.js:544
+#: applet.js:472
 msgid "Must be configured!"
 msgstr ""
 
-#: applet.js:722
+#: applet.js:650
 msgid "Settings"
 msgstr ""
 
-#: applet.js:722
+#: applet.js:650
 msgid ":"
 msgstr ""
 
 #. settings-schema.json->page_General->title
-#: applet.js:729
+#: applet.js:657
 msgid "⚙ General"
 msgstr ""
 
-#: applet.js:739
+#: applet.js:667
 msgid "🌡 Temperature sensors"
 msgstr ""
 
-#: applet.js:749
+#: applet.js:677
 msgid "🤂 Fan sensors"
 msgstr ""
 
-#: applet.js:759
+#: applet.js:687
 msgid "🗲 Voltage sensors"
 msgstr ""
 
-#: applet.js:769
+#: applet.js:697
 msgid "⮿ Intrusion sensors"
 msgstr ""
 
 #. settings-schema.json->xsensors->description
-#: applet.js:779
+#: applet.js:707
 msgid "Run xsensors"
 msgstr ""
 
-#: applet.js:787
+#: applet.js:715
 msgid "Reload this applet"
 msgstr ""
 
-#: applet.js:1064
+#: applet.js:986
 #, javascript-format
 msgid "Are you sure you want to remove '%s'?"
 msgstr ""
@@ -343,6 +343,16 @@ msgstr ""
 msgid "Whether or not to show the unit character (C or F)."
 msgstr ""
 
+#. settings-schema.json->always_show_unit_in_line->description
+msgid "Vertical panel: Temperature value and °C / °F on one line"
+msgstr ""
+
+#. settings-schema.json->always_show_unit_in_line->tooltip
+msgid ""
+"Whether or not to show, in a vertical panel, °C or °F on the same line as "
+"the temperature value."
+msgstr ""
+
 #. settings-schema.json->btn_renew_temp_sensors_list->description
 #. settings-schema.json->btn_renew_fan_sensors_list->description
 #. settings-schema.json->btn_renew_volt_sensors_list->description
@@ -355,7 +365,7 @@ msgstr ""
 #. settings-schema.json->volt_sensors->columns->title
 #. settings-schema.json->intrusion_sensors->columns->title
 msgid ""
-"Sensor\n"
+"Sensor name\n"
 "(Do not change this!)"
 msgstr ""
 
@@ -382,6 +392,15 @@ msgstr ""
 #. settings-schema.json->volt_sensors->columns->title
 #. settings-schema.json->intrusion_sensors->columns->title
 msgid "Shown name"
+msgstr ""
+
+#. settings-schema.json->temp_sensors->tooltip
+#. settings-schema.json->fan_sensors->tooltip
+#. settings-schema.json->volt_sensors->tooltip
+#. settings-schema.json->intrusion_sensors->tooltip
+msgid ""
+"Double-click on a line to change Shown name.\n"
+"To reset a Shown name, copy/paste the Sensor value."
 msgstr ""
 
 #. settings-schema.json->fan_unit->description

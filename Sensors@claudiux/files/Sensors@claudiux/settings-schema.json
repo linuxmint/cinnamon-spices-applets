@@ -55,7 +55,8 @@
     "section_tempOptions": {
       "type": "section",
       "title": "Options",
-      "keys": ["strictly_positive_temp", "use_fahrenheit", "only_integer_part", "show_unit", "show_unit_letter"]
+      "keys": [ "strictly_positive_temp", "use_fahrenheit", "only_integer_part",
+                "show_unit", "show_unit_letter", "always_show_unit_in_line"]
     },
     "section_tempSensors": {
       "type": "section",
@@ -196,6 +197,14 @@
     "tooltip": "Whether or not to show the unit character (C or F).",
     "dependency": "show_unit"
   },
+  "always_show_unit_in_line": {
+    "type": "switch",
+    "default": false,
+    "description": "Vertical panel: Temperature value and °C / °F on one line",
+    "tooltip": "Whether or not to show, in a vertical panel, °C or °F on the same line as the temperature value.",
+    "dependency": "show_unit_letter"
+
+  },
   "btn_renew_temp_sensors_list": {
     "type": "button",
     "description": "Renew the list of sensors",
@@ -206,7 +215,7 @@
     "columns": [
       {
         "id": "sensor",
-        "title": "Sensor\n(Do not change this!)",
+        "title": "Sensor name\n(Do not change this!)",
         "type": "string"
       },
       {
@@ -228,6 +237,7 @@
       }
     ],
     "default": [],
+    "tooltip": "Double-click on a line to change Shown name.\nTo reset a Shown name, copy/paste the Sensor value.",
     "show-buttons": false
   },
   "numberOfTempSensors": {
@@ -267,7 +277,7 @@
     "columns": [
       {
         "id": "sensor",
-        "title": "Sensor\n(Do not change this!)",
+        "title": "Sensor name\n(Do not change this!)",
         "type": "string"
       },
       {
@@ -289,6 +299,7 @@
       }
     ],
     "default": [],
+    "tooltip": "Double-click on a line to change Shown name.\nTo reset a Shown name, copy/paste the Sensor value.",
     "show-buttons": false
   },
   "numberOfFanSensors": {
@@ -329,7 +340,7 @@
     "columns": [
       {
         "id": "sensor",
-        "title": "Sensor\n(Do not change this!)",
+        "title": "Sensor name\n(Do not change this!)",
         "type": "string"
       },
       {
@@ -351,6 +362,7 @@
       }
     ],
     "default": [],
+    "tooltip": "Double-click on a line to change Shown name.\nTo reset a Shown name, copy/paste the Sensor value.",
     "show-buttons": false
   },
   "numberOfVoltageSensors": {
@@ -379,7 +391,7 @@
     "columns": [
       {
         "id": "sensor",
-        "title": "Sensor\n(Do not change this!)",
+        "title": "Sensor name\n(Do not change this!)",
         "type": "string"
       },
       {
@@ -401,6 +413,7 @@
       }
     ],
     "default": [],
+    "tooltip": "Double-click on a line to change Shown name.\nTo reset a Shown name, copy/paste the Sensor value.",
     "show-buttons": false
   },
   "numberOfIntrusionSensors": {
@@ -425,6 +438,10 @@
     "callback": "updateUI"
   },
 
+  "custom_names": {
+    "type": "generic",
+    "default": {}
+  },
   "temperatureATfevimu_is_loaded": {
     "type": "generic",
     "default": false
