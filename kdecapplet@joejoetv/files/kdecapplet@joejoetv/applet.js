@@ -399,6 +399,8 @@ KDEConnectApplet.prototype = {
             this.set_applet_tooltip(_("No reachable paired devices!"));
             this.set_applet_label("");
         } else {
+            this.onlyOneDevice = deviceIDs.length == 1;
+
             this.set_applet_label(deviceIDs.length.toString());
             if (deviceIDs.length > 1) {
                 this.set_applet_tooltip(deviceIDs.length+" "+_("Devices"));
@@ -705,6 +707,9 @@ KDEConnectApplet.prototype = {
 
     //Applet Callbacks
     on_applet_clicked: function() {
+        if (this.onlyOneDevice) {
+            this.menu.firstMenuItem.menu.open(false);
+        }
 		this.menu.toggle();
     },
 
