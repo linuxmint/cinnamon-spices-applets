@@ -2042,10 +2042,9 @@ class PowerGroupBox {
         this.items.push(new GroupButton( this.state, new Icon(iconObj), _('Quit'),
                     _('Shutdown the computer'), () => { Util.spawnCommandLine('cinnamon-session-quit --power-off');
                                                                 this.state.trigger('closeMenu'); } ));
-        if(!this.reverse_order) {
-          global.log('regular order');
-          for (let i = 0; i < this.items.length; i++) {
-              if (i == this.items.length - 3 && this.items.length > 3){
+        if(this.reverse_order) {
+          for (let i = this.items.length-1; i >=0; i--) {
+              if (i == this.items.length - 4 && this.items.length > 4){
                   const dot = new Widget({ style: 'width: 4px; height: 4px; background-color: ' +
                               this.state.theme.foregroundColor + '; margin: 7px; border: 3px; border-radius: 10px;',
                                           layout_manager: new Clutter.BinLayout(), x_expand: false, y_expand: false, });
@@ -2056,9 +2055,8 @@ class PowerGroupBox {
                                                           x_align: St.Align.MIDDLE, y_align: St.Align.MIDDLE });
           }
         } else {
-          global.log('reverse order');
-          for (let i = this.items.length-1; i >=0; i--) {
-              if (i == this.items.length - 4 && this.items.length > 4){
+          for (let i = 0; i < this.items.length; i++) {
+              if (i == this.items.length - 3 && this.items.length > 3){
                   const dot = new Widget({ style: 'width: 4px; height: 4px; background-color: ' +
                               this.state.theme.foregroundColor + '; margin: 7px; border: 3px; border-radius: 10px;',
                                           layout_manager: new Clutter.BinLayout(), x_expand: false, y_expand: false, });
