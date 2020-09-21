@@ -1,129 +1,211 @@
 {
   "layout": {
     "type": "layout",
-
-    "pages": ["page_General", "page_Temperatures", "page_Fans", "page_Voltages", "page_Intrusion"],
-
+    "pages": [
+      "page_General",
+      "page_Temperatures",
+      "page_Fans",
+      "page_Voltages",
+      "page_Intrusion"
+    ],
     "page_General": {
       "type": "page",
       "title": "⚙ General",
-      "sections": ["section_Display", "section_Report", "section_remove_incompatible_xlets"]
+      "sections": [
+        "section_Display",
+        "section_Report",
+        "section_remove_incompatible_xlets"
+      ]
     },
     "page_Temperatures": {
       "type": "page",
       "title": "🌡 Temperature",
-      "sections": ["section_tempDisplay", "section_tempOptions", "section_tempSensors"]
+      "sections": [
+        "section_tempDisplay",
+        "section_tempOptions",
+        "section_tempSensors"
+      ]
     },
     "page_Fans": {
       "type": "page",
       "title": "🤂 Fan",
-      "sections": ["section_fanDisplay", "section_fanOptions", "section_fanSensors"]
+      "sections": [
+        "section_fanDisplay",
+        "section_fanOptions",
+        "section_fanSensors"
+      ]
     },
     "page_Voltages": {
       "type": "page",
       "title": "🗲 Voltage",
-      "sections": ["section_voltDisplay", "section_voltOptions", "section_voltSensors"]
+      "sections": [
+        "section_voltDisplay",
+        "section_voltOptions",
+        "section_voltSensors"
+      ]
     },
     "page_Intrusion": {
       "type": "page",
       "title": "⮿ Intrusion",
-      "sections": ["section_intrusionDisplay", "section_intrusionOptions", "section_intrusionSensors"]
+      "sections": [
+        "section_intrusionDisplay",
+        "section_intrusionOptions",
+        "section_intrusionSensors"
+      ]
     },
-
     "section_Display": {
       "type": "section",
       "title": "Options",
-      "keys": ["interval", "keep_size", "char_size", "bold_values", "bold_italics_main_sensors", "restart_in_menu"]
+      "keys": [
+        "interval",
+        "keep_size",
+        "char_size",
+        "bold_values",
+        "bold_italics_main_sensors",
+        "restart_in_menu"
+      ]
     },
     "section_Report": {
       "type": "section",
       "title": "Sensors values",
-      "keys": ["report", "xsensors"]
+      "keys": [
+        "report",
+        "xsensors"
+      ]
     },
     "section_remove_incompatible_xlets": {
       "type": "section",
       "dependency": "temperatureATfevimu_is_loaded",
       "title": "Remove from panels certain applets that also use sensors",
-      "keys": ["remove_temperatureATfevimu"]
+      "keys": [
+        "remove_temperatureATfevimu"
+      ]
     },
-
     "section_tempDisplay": {
       "type": "section",
       "title": "Display",
-      "keys": ["show_temp"]
+      "keys": [
+        "show_temp"
+      ]
     },
     "section_tempOptions": {
       "type": "section",
       "title": "Options",
-      "keys": [ "strictly_positive_temp", "use_fahrenheit", "only_integer_part",
-                "show_unit", "show_unit_letter", "always_show_unit_in_line"]
+      "keys": [
+        "strictly_positive_temp",
+        "use_fahrenheit",
+        "only_integer_part",
+        "show_unit",
+        "show_unit_letter",
+        "always_show_unit_in_line"
+      ]
     },
     "section_tempSensors": {
       "type": "section",
       "title": "Temperature sensors",
-      "keys": ["btn_renew_temp_sensors_list", "temp_sensors", "update_display"]
+      "keys": [
+        "btn_renew_temp_sensors_list",
+        "temp_sensors",
+        "update_display"
+      ]
     },
-
     "section_fanDisplay": {
       "type": "section",
       "title": "Display",
-      "keys": ["show_fan"]
+      "keys": [
+        "show_fan"
+      ]
     },
     "section_fanOptions": {
       "type": "section",
       "title": "Options",
-      "keys": ["strictly_positive_fan", "show_fan_unit", "fan_unit"]
+      "keys": [
+        "strictly_positive_fan",
+        "show_fan_unit",
+        "fan_unit"
+      ]
     },
     "section_fanSensors": {
       "type": "section",
       "title": "Fan sensors",
-      "keys": ["btn_renew_fan_sensors_list", "fan_sensors", "update_display"]
+      "keys": [
+        "btn_renew_fan_sensors_list",
+        "fan_sensors",
+        "update_display"
+      ]
     },
-
     "section_voltDisplay": {
       "type": "section",
       "title": "Display",
-      "keys": ["show_volt"]
+      "keys": [
+        "show_volt"
+      ]
     },
     "section_voltOptions": {
       "type": "section",
       "title": "Options",
-      "keys": ["strictly_positive_volt", "show_volt_unit", "volt_unit"]
+      "keys": [
+        "strictly_positive_volt",
+        "show_volt_unit",
+        "volt_unit"
+      ]
     },
     "section_voltSensors": {
       "type": "section",
       "title": "Voltage sensors",
-      "keys": ["btn_renew_volt_sensors_list", "volt_sensors", "update_display"]
+      "keys": [
+        "btn_renew_volt_sensors_list",
+        "volt_sensors",
+        "update_display"
+      ]
     },
-
     "section_intrusionDisplay": {
       "type": "section",
       "title": "Display",
-      "keys": ["show_intrusion"]
+      "keys": [
+        "show_intrusion"
+      ]
     },
     "section_intrusionOptions": {
       "type": "section",
       "title": "Options",
-      "keys": ["strictly_positive_intrusion"]
+      "keys": [
+        "strictly_positive_intrusion"
+      ]
     },
     "section_intrusionSensors": {
       "type": "section",
       "title": "Intrusion sensors",
-      "keys": ["btn_renew_intrusion_sensors_list", "intrusion_sensors", "update_display"]
+      "keys": [
+        "btn_renew_intrusion_sensors_list",
+        "intrusion_sensors",
+        "update_display"
+      ]
     }
   },
-
   "has_set_markup": {
     "type": "generic",
     "default": false
   },
-
   "interval": {
     "type": "combobox",
     "default": 5,
     "options": {
-      "1": 1, "2": 2, "3": 3, "4": 4, "5": 5, "6": 6, "7": 7, "8": 8, "9": 9, "10": 10,
-      "12": 12, "15": 15, "20":20, "30": 30, "60": 60
+      "1": 1,
+      "2": 2,
+      "3": 3,
+      "4": 4,
+      "5": 5,
+      "6": 6,
+      "7": 7,
+      "8": 8,
+      "9": 9,
+      "10": 10,
+      "12": 12,
+      "15": 15,
+      "20": 20,
+      "30": 30,
+      "60": 60
     },
     "description": "Refresh interval (seconds)"
   },
@@ -161,7 +243,6 @@
     "description": "Show in menu the action: Restart this applet",
     "tooltip": "Whether or not to display in menu the action: Restart this applet."
   },
-
   "show_temp": {
     "type": "switch",
     "default": false,
@@ -203,7 +284,6 @@
     "description": "Vertical panel: Temperature value and °C / °F on one line",
     "tooltip": "Whether or not to show, in a vertical panel, °C or °F on the same line as the temperature value.",
     "dependency": "show_unit_letter"
-
   },
   "btn_renew_temp_sensors_list": {
     "type": "button",
@@ -236,7 +316,9 @@
         "type": "string"
       }
     ],
-    "default": [],
+    "default": [
+
+    ],
     "tooltip": "Double-click on a line to change Shown name.\nTo reset a Shown name, copy/paste the Sensor value.",
     "show-buttons": false
   },
@@ -244,7 +326,6 @@
     "type": "generic",
     "default": 0
   },
-
   "show_fan": {
     "type": "switch",
     "default": false,
@@ -298,7 +379,9 @@
         "type": "string"
       }
     ],
-    "default": [],
+    "default": [
+
+    ],
     "tooltip": "Double-click on a line to change Shown name.\nTo reset a Shown name, copy/paste the Sensor value.",
     "show-buttons": false
   },
@@ -306,7 +389,6 @@
     "type": "generic",
     "default": 0
   },
-
   "show_volt": {
     "type": "switch",
     "default": false,
@@ -328,7 +410,11 @@
     "type": "combobox",
     "default": "V",
     "description": "Voltage unit",
-    "options": {"Most appropriate (V or mV)": "both", "V only": "V", "mV only": "mV"}
+    "options": {
+      "Most appropriate (V or mV)": "both",
+      "V only": "V",
+      "mV only": "mV"
+    }
   },
   "btn_renew_volt_sensors_list": {
     "type": "button",
@@ -361,7 +447,9 @@
         "type": "string"
       }
     ],
-    "default": [],
+    "default": [
+
+    ],
     "tooltip": "Double-click on a line to change Shown name.\nTo reset a Shown name, copy/paste the Sensor value.",
     "show-buttons": false
   },
@@ -369,7 +457,6 @@
     "type": "generic",
     "default": 0
   },
-
   "show_intrusion": {
     "type": "switch",
     "default": false,
@@ -412,7 +499,9 @@
         "type": "string"
       }
     ],
-    "default": [],
+    "default": [
+
+    ],
     "tooltip": "Double-click on a line to change Shown name.\nTo reset a Shown name, copy/paste the Sensor value.",
     "show-buttons": false
   },
@@ -420,7 +509,6 @@
     "type": "generic",
     "default": 0
   },
-
   "report": {
     "type": "button",
     "description": "Example of sensor values from this computer",
@@ -437,10 +525,11 @@
     "description": "Update display",
     "callback": "updateUI"
   },
-
   "custom_names": {
     "type": "generic",
-    "default": {}
+    "default": {
+
+    }
   },
   "temperatureATfevimu_is_loaded": {
     "type": "generic",

@@ -50,9 +50,9 @@ All these tabs are directly accessible from the menu of this applet.
 
 Example:
 
-CPUTIN = CPU Temperature Index
-AUXTIN = Auxiliary Temperature Index
-SYSTIN = System Temperature Index
+  * CPUTIN = CPU Temperature Index
+  * AUXTIN = Auxiliary Temperature Index
+  * SYSTIN = System Temperature Index
 
 AUXTIN is the power supply temp sensor (if there is one) while SYSTIN relates to Motherboard.
 
@@ -72,6 +72,7 @@ Core 3:        +40.0°C  (high = +69.0°C, crit = +75.0°C)
 CPUTIN:         +49.0°C  (high = +80.0°C, hyst = +75.0°C)
                          (crit low = +127.0°C, crit = +127.0°C)
 ```
+
 The CPUTIN value can be "polluted" by the temperature of the motherboard (SYSTIN).
 
 So, in this case, choose the _Package id 0_ value to display the temperature of the CPU.
