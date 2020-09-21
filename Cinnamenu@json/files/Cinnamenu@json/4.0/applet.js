@@ -460,7 +460,8 @@ class CinnamenuApplet extends TextIconApplet {
             { key: 'apps-list-icon-size',       value: 'appsListIconSize',      cb: this.refresh },
             { key: 'apps-grid-icon-size',       value: 'appsGridIconSize',      cb: this.refresh },
             { key: 'session-icon-size',         value: 'sessionIconSize',       cb: this.refresh },
-            { key: 'use-box-style',             value: 'useBoxStyle',           cb: this.refresh }
+            { key: 'use-box-style',             value: 'useBoxStyle',           cb: this.refresh },
+            { key: 'favorite-box-is-reverse',   value: 'favoriteBoxIsReverse',  cb: this.refresh }
         ];
 
         for (let i = 0; i < this.knownProviders.length; i++) {
@@ -1997,6 +1998,7 @@ class PowerGroupBox {
     constructor (state, powergroupPlacement) {
         this.state = state;
         const style_class = this.state.settings.useBoxStyle ? 'menu-favorites-box' : '';
+        this.reverse_order = !!this.state.settings.favoriteBoxIsReverse;
         this.box = new St.BoxLayout({ style_class: style_class,
                                     vertical: (powergroupPlacement === 2 || powergroupPlacement === 3) });
     }
@@ -2040,16 +2042,32 @@ class PowerGroupBox {
         this.items.push(new GroupButton( this.state, new Icon(iconObj), _('Quit'),
                     _('Shutdown the computer'), () => { Util.spawnCommandLine('cinnamon-session-quit --power-off');
                                                                 this.state.trigger('closeMenu'); } ));
-        for (let i = 0; i < this.items.length; i++) {
-            if (i == this.items.length - 3 && this.items.length > 3){
-                const dot = new Widget({ style: 'width: 4px; height: 4px; background-color: ' +
-                            this.state.theme.foregroundColor + '; margin: 7px; border: 3px; border-radius: 10px;',
-                                        layout_manager: new Clutter.BinLayout(), x_expand: false, y_expand: false, });
-                this.box.add(dot, { x_fill: false, y_fill: false,
-                                x_align: Align.MIDDLE, y_align: Align.MIDDLE });
-            }
-            this.box.add(this.items[i].actor, { x_fill: false, y_fill: false,
-                                                        x_align: St.Align.MIDDLE, y_align: St.Align.MIDDLE });
+        if(!this.reverse_order) {
+          global.log('regular order');
+          for (let i = 0; i < this.items.length; i++) {
+              if (i == this.items.length - 3 && this.items.length > 3){
+                  const dot = new Widget({ style: 'width: 4px; height: 4px; background-color: ' +
+                              this.state.theme.foregroundColor + '; margin: 7px; border: 3px; border-radius: 10px;',
+                                          layout_manager: new Clutter.BinLayout(), x_expand: false, y_expand: false, });
+                  this.box.add(dot, { x_fill: false, y_fill: false,
+                                  x_align: Align.MIDDLE, y_align: Align.MIDDLE });
+              }
+              this.box.add(this.items[i].actor, { x_fill: false, y_fill: false,
+                                                          x_align: St.Align.MIDDLE, y_align: St.Align.MIDDLE });
+          }
+        } else {
+          global.log('reverse order');
+          for (let i = this.items.length-1; i >=0; i--) {
+              if (i == this.items.length - 4 && this.items.length > 4){
+                  const dot = new Widget({ style: 'width: 4px; height: 4px; background-color: ' +
+                              this.state.theme.foregroundColor + '; margin: 7px; border: 3px; border-radius: 10px;',
+                                          layout_manager: new Clutter.BinLayout(), x_expand: false, y_expand: false, });
+                  this.box.add(dot, { x_fill: false, y_fill: false,
+                                  x_align: Align.MIDDLE, y_align: Align.MIDDLE });
+              }
+              this.box.add(this.items[i].actor, { x_fill: false, y_fill: false,
+                                                          x_align: St.Align.MIDDLE, y_align: St.Align.MIDDLE });
+          }
         }
         return;
     }

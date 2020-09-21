@@ -93,7 +93,8 @@
                 "apps-list-icon-size",
                 "apps-grid-icon-size",
                 "session-icon-size",
-                "use-box-style"
+                "use-box-style",
+                "favorite-box-is-reverse"
             ]
         }
     },
@@ -334,5 +335,11 @@
         "default":false,
         "description":"Use session buttons box style",
         "tooltip":"Use session buttons box style"
+    },
+    "favorite-box-is-reverse":{
+      "type":"checkbox",
+      "default":false,
+      "description":"Reverse elements order for favorite box",
+      "tooltip":"Reverse elements order for favorite box"
     }
 }
