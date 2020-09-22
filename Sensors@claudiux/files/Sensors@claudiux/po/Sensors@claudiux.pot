@@ -1,14 +1,14 @@
-# Sensors@claudiux
-# Copyright (C) 2020 claudiux aka Claude Clerc
-# This file is distributed under the same license as the Sensors@claudiux package.
-# claudiux <claude.clerc@gmail.com>, 2020.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-20 18:36+0200\n"
+"POT-Creation-Date: 2020-09-22 20:13+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -40,110 +40,125 @@ msgstr ""
 msgid "Some dependencies are not installed!"
 msgstr ""
 
-#: applet.js:84
+#. metadata.json->name
+#: applet.js:93
 msgid "Sensors"
 msgstr ""
 
-#: applet.js:387
+#: applet.js:352
 msgid "high:"
 msgstr ""
 
-#: applet.js:387 applet.js:389 applet.js:414
+#: applet.js:352 applet.js:354 applet.js:379
 msgid "n/a"
 msgstr ""
 
-#: applet.js:389
+#: applet.js:354
 msgid "crit:"
 msgstr ""
 
-#: applet.js:414
+#: applet.js:379
 msgid "min:"
 msgstr ""
 
-#: applet.js:438
+#: applet.js:403
 msgid "max:"
 msgstr ""
 
-#: applet.js:460
+#: applet.js:425
 msgid "No intrusion detected"
 msgstr ""
 
-#: applet.js:460
+#: applet.js:425
 msgid "INTRUSION DETECTED!"
 msgstr ""
 
-#: applet.js:472
+#: applet.js:437
 msgid "Must be configured!"
 msgstr ""
 
-#: applet.js:650
+#: applet.js:615
 msgid "Settings"
 msgstr ""
 
-#: applet.js:650
+#: applet.js:615
 msgid ":"
 msgstr ""
 
-#. settings-schema.json->page_General->title
-#: applet.js:657
+#: applet.js:622 constants.js:55
 msgid "⚙ General"
 msgstr ""
 
-#: applet.js:667
+#: applet.js:632
 msgid "🌡 Temperature sensors"
 msgstr ""
 
-#: applet.js:677
+#: applet.js:642
 msgid "🤂 Fan sensors"
 msgstr ""
 
-#: applet.js:687
+#: applet.js:652
 msgid "🗲 Voltage sensors"
 msgstr ""
 
-#: applet.js:697
+#: applet.js:662
 msgid "⮿ Intrusion sensors"
 msgstr ""
 
 #. settings-schema.json->xsensors->description
-#: applet.js:707
+#: applet.js:673
 msgid "Run xsensors"
 msgstr ""
 
-#: applet.js:715
+#: applet.js:681
 msgid "Reload this applet"
 msgstr ""
 
-#: applet.js:986
+#: applet.js:938
 #, javascript-format
 msgid "Are you sure you want to remove '%s'?"
 msgstr ""
 
-#. metadata.json->name
-msgid "Sensors Monitor"
+#: constants.js:56
+msgid "🌡 Temperature"
+msgstr ""
+
+#: constants.js:57
+msgid "🤂 Fan"
+msgstr ""
+
+#: constants.js:58
+msgid "🗲 Voltage"
+msgstr ""
+
+#: constants.js:59
+msgid "⮿ Intrusion"
 msgstr ""
 
 #. metadata.json->description
 msgid ""
-"Displays and monitors the values ​​of many computer sensors concerning "
-"temperatures (CPU - GPU - power supply), fan speed, voltages, intrusions. "
-"Notifies you with color changes when a value reaches or exceeds its limit."
+"Displays the desired sensor values, when available: Temperature, Fan Speed, "
+"Voltage, Intrusion. Its color changes when a value exceeds its limit."
+msgstr ""
+
+#. settings-schema.json->page_General->title
+msgid "General"
 msgstr ""
 
 #. settings-schema.json->page_Temperatures->title
-msgid "🌡 Temperature"
+msgid "Temperature"
 msgstr ""
 
 #. settings-schema.json->page_Fans->title
-msgid "🤂 Fan"
+msgid "Fan"
 msgstr ""
 
 #. settings-schema.json->page_Voltages->title
-msgid "🗲 Voltage"
+msgid "Voltage"
 msgstr ""
 
 #. settings-schema.json->page_Intrusion->title
-msgid "⮿ Intrusion"
+msgid "Intrusion"
 msgstr ""
 
 #. settings-schema.json->section_Display->title

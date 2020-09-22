@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-20 18:36+0200\n"
-"PO-Revision-Date: 2020-09-20 18:39+0200\n"
+"POT-Creation-Date: 2020-09-22 20:13+0200\n"
+"PO-Revision-Date: 2020-09-22 20:16+0200\n"
 "Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -43,115 +43,129 @@ msgstr "Veuillez exécuter, dans le terminal qui s'est ouvert, les commandes :"
 msgid "Some dependencies are not installed!"
 msgstr "Certaines dépendances ne sont pas installées !"
 
-#: applet.js:84
+#. metadata.json->name
+#: applet.js:93
 msgid "Sensors"
 msgstr "Capteurs"
 
-#: applet.js:387
+#: applet.js:352
 msgid "high:"
 msgstr "élevée :"
 
-#: applet.js:387 applet.js:389 applet.js:414
+#: applet.js:352 applet.js:354 applet.js:379
 msgid "n/a"
 msgstr "n/a"
 
-#: applet.js:389
+#: applet.js:354
 msgid "crit:"
 msgstr "critique :"
 
-#: applet.js:414
+#: applet.js:379
 msgid "min:"
 msgstr "min :"
 
-#: applet.js:438
+#: applet.js:403
 msgid "max:"
 msgstr "max :"
 
-#: applet.js:460
+#: applet.js:425
 msgid "No intrusion detected"
 msgstr "Aucune intrusion détectée"
 
-#: applet.js:460
+#: applet.js:425
 msgid "INTRUSION DETECTED!"
 msgstr "INTRUSION DÉTECTÉE !"
 
-#: applet.js:472
+#: applet.js:437
 msgid "Must be configured!"
 msgstr "Doit être configuré !"
 
-#: applet.js:650
+#: applet.js:615
 msgid "Settings"
 msgstr "Paramètres"
 
-#: applet.js:650
+#: applet.js:615
 msgid ":"
 msgstr " :"
 
-#. settings-schema.json->page_General->title
-#: applet.js:657
+#: applet.js:622 constants.js:55
 msgid "⚙ General"
 msgstr "⚙ Général"
 
-#: applet.js:667
+#: applet.js:632
 msgid "🌡 Temperature sensors"
 msgstr "🌡 Capteurs de température"
 
-#: applet.js:677
+#: applet.js:642
 msgid "🤂 Fan sensors"
 msgstr "🤂 Capteurs de ventilateur"
 
-#: applet.js:687
+#: applet.js:652
 msgid "🗲 Voltage sensors"
 msgstr "🗲 Capteurs de tension"
 
-#: applet.js:697
+#: applet.js:662
 msgid "⮿ Intrusion sensors"
 msgstr "⮿ Capteurs d'intrusion"
 
 #. settings-schema.json->xsensors->description
-#: applet.js:707
+#: applet.js:673
 msgid "Run xsensors"
 msgstr "Lancer xsensors"
 
-#: applet.js:715
+#: applet.js:681
 msgid "Reload this applet"
 msgstr "Recharger cette applet"
 
-#: applet.js:986
+#: applet.js:938
 #, javascript-format
 msgid "Are you sure you want to remove '%s'?"
 msgstr "Êtes-vous sûr de vouloir enlever \"%s\" ?"
 
-#. metadata.json->name
-msgid "Sensors Monitor"
-msgstr "Moniteur de Capteurs"
-
-#. metadata.json->description
-msgid ""
-"Displays and monitors the values ​​of many computer sensors concerning "
-"temperatures (CPU - GPU - power supply), fan speed, voltages, intrusions. "
-"Notifies you with color changes when a value reaches or exceeds its limit."
-msgstr ""
-"Affiche et surveille les valeurs de nombreux capteurs informatiques "
-"concernant les températures (CPU - GPU - alimentation), la vitesse des "
-"ventilateurs, les tensions, les intrusions. Vous avertit par des changements "
-"de couleur lorsqu'une valeur atteint ou dépasse sa limite."
-
-#. settings-schema.json->page_Temperatures->title
+#: constants.js:56
 msgid "🌡 Temperature"
 msgstr "🌡 Température"
 
-#. settings-schema.json->page_Fans->title
+#: constants.js:57
 msgid "🤂 Fan"
 msgstr "🤂 Ventilateur"
 
-#. settings-schema.json->page_Voltages->title
+#: constants.js:58
 msgid "🗲 Voltage"
 msgstr "🗲 Tension"
 
-#. settings-schema.json->page_Intrusion->title
+#: constants.js:59
 msgid "⮿ Intrusion"
 msgstr "⮿ Intrusion"
+
+#. metadata.json->description
+msgid ""
+"Displays the desired sensor values, when available: Temperature, Fan Speed, "
+"Voltage, Intrusion. Its color changes when a value exceeds its limit."
+msgstr ""
+"Affiche les valeurs de capteur souhaitées, lorsqu'elles sont disponibles : "
+"température, vitesse du ventilateur, tension, intrusion. Sa couleur change "
+"lorsqu'une valeur dépasse sa limite."
+
+#. settings-schema.json->page_General->title
+msgid "General"
+msgstr "Général"
+
+#. settings-schema.json->page_Temperatures->title
+msgid "Temperature"
+msgstr "Température"
+
+#. settings-schema.json->page_Fans->title
+msgid "Fan"
+msgstr "Capteurs de ventilateur"
+
+#. settings-schema.json->page_Voltages->title
+msgid "Voltage"
+msgstr "Tension"
+
+#. settings-schema.json->page_Intrusion->title
+msgid "Intrusion"
+msgstr "Intrusion"
 
 #. settings-schema.json->section_Display->title
 #. settings-schema.json->section_tempOptions->title
@@ -470,3 +484,6 @@ msgstr "Mettre à jour l'affichage"
 #. settings-schema.json->remove_temperatureATfevimu->description
 msgid "Remove from panel the temperature@fevimu applet"
 msgstr "Retirer du panneau l'applet temperature@fevimu"
+
+#~ msgid "Sensors Monitor"
+#~ msgstr "Moniteur de Capteurs"
