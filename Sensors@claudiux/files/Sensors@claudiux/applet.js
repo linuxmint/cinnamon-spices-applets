@@ -10,6 +10,7 @@ const {AppletSettings} = imports.ui.settings;
 const Gettext = imports.gettext;
 const Extension = imports.ui.extension; // Needed to reload applet
 const ModalDialog = imports.ui.modalDialog;
+const Cinnamon = imports.gi.Cinnamon;
 
 const {Dependencies} = require("./checkDependencies");
 
@@ -69,8 +70,16 @@ class SensorsApplet extends Applet.TextApplet {
     this.setAllowedLayout(Applet.AllowedLayout.BOTH);
 
     // To be sure that the scripts will be executable:
-    Util.spawnCommandLineAsync("/bin/bash -c 'cd %s && chmod 755 *.py *.sh'".format(SCRIPTS_DIR), null, null);
+    Util.spawnCommandLineAsync("/bin/bash -c 'cd %s && chmod 755 *.sh'".format(SCRIPTS_DIR), null, null);
 
+    // get settings defined in settings-schema.json:
+    this.get_user_settings();
+    this._variables();
+
+    this.rewrite_settings_schema();
+  }
+
+  launch_this_applet() {
     // To check dependencies:
     this.dependencies = new Dependencies();
     this.depCount = 0;
@@ -91,12 +100,8 @@ class SensorsApplet extends Applet.TextApplet {
     // Applet menu:
     this.pids = []; // pids of all opened windows, about settings, from the menu.
     this.menuManager = new PopupMenu.PopupMenuManager(this);
-    this.menu = new Applet.AppletPopupMenu(this, orientation);
+    this.menu = new Applet.AppletPopupMenu(this, this.orientation);
     this.menuManager.addMenu(this.menu);
-
-    // get settings defined in settings-schema.json:
-    this.get_user_settings();
-    this._variables();
 
     // Initialize some properties:
     this.isRunning = false;
@@ -211,46 +216,6 @@ class SensorsApplet extends Applet.TextApplet {
   /**
    * populate_xxx_sensors_in_settings
    */
-
-  _variables() {
-    this.sensors_list = {
-      "temps": {
-        get_value:  () => {return this.temp_sensors;},
-        set_value: (v) => {this.temp_sensors = v}
-      },
-      "fans": {
-        get_value:  () => {return this.fan_sensors;},
-        set_value: (v) => {this.fan_sensors = v}
-      },
-      "voltages": {
-        get_value:  () => {return this.volt_sensors;},
-        set_value: (v) => {this.volt_sensors = v}
-      },
-      "intrusions": {
-        get_value:  () => {return this.intrusion_sensors;},
-        set_value: (v) => {this.intrusion_sensors = v}
-      }
-    };
-
-    this.number_of_sensors = {
-      "temps": {
-        get_value:  () => {return this.numberOfTempSensors;},
-        set_value: (v) => {this.numberOfTempSensors = v}
-      },
-      "fans": {
-        get_value:  () => {return this.numberOfFanSensors;},
-        set_value: (v) => {this.numberOfFanSensors = v}
-      },
-      "voltages": {
-        get_value:  () => {return this.numberOfVoltageSensors;},
-        set_value: (v) => {this.numberOfVoltageSensors = v}
-      },
-      "intrusions": {
-        get_value:  () => {return this.numberOfIntrusionSensors;},
-        set_value: (v) => {this.numberOfIntrusionSensors = v}
-      }
-    }
-  }
 
   populate_sensors_in_settings(type, force) {
     let _sensors = Object.keys(this.data[type]);
@@ -704,7 +669,8 @@ class SensorsApplet extends Applet.TextApplet {
     this.menu.addMenuItem(_intrusion_button);
     this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
-    let _values_in_real_time_button = new PopupMenu.PopupMenuItem(_("Run xsensors"));
+    // Button xsensors
+    let _values_in_real_time_button = new PopupMenu.PopupIconMenuItem(_("Run xsensors"), "application-x-executable", St.IconType.SYMBOLIC);
     _values_in_real_time_button.connect("activate", this._on_xsensors_pressed);
     this.menu.addMenuItem(_values_in_real_time_button);
     this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
@@ -899,52 +865,38 @@ class SensorsApplet extends Applet.TextApplet {
 
   on_applet_reloaded() {
     this.isLooping = false;
+
     if (this.loopId != undefined && this.loopId > 0) {
       Mainloop.source_remove(this.loopId);
       this.loopId = 0;
     }
 
-    if (this.checkDepInterval != 0) {
+    if (this.checkDepInterval && (this.checkDepInterval != 0)) {
       clearInterval(this.checkDepInterval);
       this.checkDepInterval = 0;
     }
 
-    try {
-      this.reaper.disconnect(this._connectId);
-    } catch(e) {
-      log("on_applet_reloaded: Unable to disconnect signal %s.".format(this._connectId));
-      // Nothing to do.
+    if (this.reaper && this._connectId) {
+      try {
+        this.reaper.disconnect(this._connectId);
+      } catch(e) {
+        log("on_applet_removed_from_panel: Unable to disconnect signal %s.".format(this._connectId));
+        // Nothing to do.
+      }
     }
 
     this.kill_all_pids();
   }
 
   on_applet_removed_from_panel() {
-    this.isLooping = false;
-
-    if (this.loopId != undefined && this.loopId > 0) {
-      Mainloop.source_remove(this.loopId);
-      this.loopId = 0;
-    }
-
-    if (this.checkDepInterval != 0) {
-      clearInterval(this.checkDepInterval);
-      this.checkDepInterval = 0;
-    }
-
-    try {
-      this.reaper.disconnect(this._connectId);
-    } catch(e) {
-      log("on_applet_removed_from_panel: Unable to disconnect signal %s.".format(this._connectId));
-      // Nothing to do.
-    }
-
-    this.kill_all_pids();
+    this.on_applet_reloaded();
 
     this.s.finalize();
   }
 
   kill_all_pids() {
+    if (!this.pids) return;
+
     while (this.pids.length != 0) {
       let pid = this.pids.pop();
       Util.spawnCommandLineAsync("kill -9 %s".format(pid.toString()));
@@ -1001,6 +953,66 @@ class SensorsApplet extends Applet.TextApplet {
       }
     );
     dialog.open();
+  }
+
+  rewrite_settings_schema() {
+    let settings_schema_file = APPLET_DIR + "/settings-schema.json";
+    let settings_schema = Cinnamon.get_file_contents_utf8(settings_schema_file, (contents) => {
+      let _json = JSON.parse(contents);
+      if (_json.layout.page_General.title === "General") {
+        _json.layout.page_General.title = "⚙ General";
+        _json.layout.page_Temperatures.title = "🌡 Temperature";
+        _json.layout.page_Fans.title = "🤂 Fan";
+        _json.layout.page_Voltages.title = "🗲 Voltage";
+        _json.layout.page_Intrusion.title = "⮿ Intrusion";
+        let message = JSON.stringify(_json, null, "  ");
+        GLib.file_set_contents(settings_schema_file, message);
+        this._on_reload_this_applet_pressed();
+      } else {
+        this.launch_this_applet()
+      }
+    });
+  }
+
+
+  _variables() {
+    this.sensors_list = {
+      "temps": {
+        get_value:  () => {return this.temp_sensors;},
+        set_value: (v) => {this.temp_sensors = v}
+      },
+      "fans": {
+        get_value:  () => {return this.fan_sensors;},
+        set_value: (v) => {this.fan_sensors = v}
+      },
+      "voltages": {
+        get_value:  () => {return this.volt_sensors;},
+        set_value: (v) => {this.volt_sensors = v}
+      },
+      "intrusions": {
+        get_value:  () => {return this.intrusion_sensors;},
+        set_value: (v) => {this.intrusion_sensors = v}
+      }
+    };
+
+    this.number_of_sensors = {
+      "temps": {
+        get_value:  () => {return this.numberOfTempSensors;},
+        set_value: (v) => {this.numberOfTempSensors = v}
+      },
+      "fans": {
+        get_value:  () => {return this.numberOfFanSensors;},
+        set_value: (v) => {this.numberOfFanSensors = v}
+      },
+      "voltages": {
+        get_value:  () => {return this.numberOfVoltageSensors;},
+        set_value: (v) => {this.numberOfVoltageSensors = v}
+      },
+      "intrusions": {
+        get_value:  () => {return this.numberOfIntrusionSensors;},
+        set_value: (v) => {this.numberOfIntrusionSensors = v}
+      }
+    }
   }
 }
 

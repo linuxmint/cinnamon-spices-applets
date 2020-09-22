@@ -48,6 +48,17 @@ function _(str, uuid=UUID) {
   return Gettext.gettext(str);
 }
 
+/**
+ * dummy variable for translation
+ */
+
+let dummy = _("⚙ General");
+dummy = _("🌡 Temperature");
+dummy = _("🤂 Fan");
+dummy = _("🗲 Voltage");
+dummy = _("⮿ Intrusion");
+
+
 // ++ Useful for logging in .xsession_errors
 /**
  * Usage of log and logError:

@@ -10,7 +10,7 @@
     ],
     "page_General": {
       "type": "page",
-      "title": "⚙ General",
+      "title": "General",
       "sections": [
         "section_Display",
         "section_Report",
@@ -19,7 +19,7 @@
     },
     "page_Temperatures": {
       "type": "page",
-      "title": "🌡 Temperature",
+      "title": "Temperature",
       "sections": [
         "section_tempDisplay",
         "section_tempOptions",
@@ -28,7 +28,7 @@
     },
     "page_Fans": {
       "type": "page",
-      "title": "🤂 Fan",
+      "title": "Fan",
       "sections": [
         "section_fanDisplay",
         "section_fanOptions",
@@ -37,7 +37,7 @@
     },
     "page_Voltages": {
       "type": "page",
-      "title": "🗲 Voltage",
+      "title": "Voltage",
       "sections": [
         "section_voltDisplay",
         "section_voltOptions",
@@ -46,7 +46,7 @@
     },
     "page_Intrusion": {
       "type": "page",
-      "title": "⮿ Intrusion",
+      "title": "Intrusion",
       "sections": [
         "section_intrusionDisplay",
         "section_intrusionOptions",
@@ -316,9 +316,7 @@
         "type": "string"
       }
     ],
-    "default": [
-
-    ],
+    "default": [],
     "tooltip": "Double-click on a line to change Shown name.\nTo reset a Shown name, copy/paste the Sensor value.",
     "show-buttons": false
   },
@@ -379,9 +377,7 @@
         "type": "string"
       }
     ],
-    "default": [
-
-    ],
+    "default": [],
     "tooltip": "Double-click on a line to change Shown name.\nTo reset a Shown name, copy/paste the Sensor value.",
     "show-buttons": false
   },
@@ -447,9 +443,7 @@
         "type": "string"
       }
     ],
-    "default": [
-
-    ],
+    "default": [],
     "tooltip": "Double-click on a line to change Shown name.\nTo reset a Shown name, copy/paste the Sensor value.",
     "show-buttons": false
   },
@@ -499,9 +493,7 @@
         "type": "string"
       }
     ],
-    "default": [
-
-    ],
+    "default": [],
     "tooltip": "Double-click on a line to change Shown name.\nTo reset a Shown name, copy/paste the Sensor value.",
     "show-buttons": false
   },
@@ -527,9 +519,7 @@
   },
   "custom_names": {
     "type": "generic",
-    "default": {
-
-    }
+    "default": {}
   },
   "temperatureATfevimu_is_loaded": {
     "type": "generic",
