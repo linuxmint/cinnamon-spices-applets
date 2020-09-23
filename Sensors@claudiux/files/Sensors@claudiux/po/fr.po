@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 1.0.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-20 18:36+0200\n"
-"PO-Revision-Date: 2020-09-20 18:39+0200\n"
+"POT-Creation-Date: 2020-09-23 17:56+0200\n"
+"PO-Revision-Date: 2020-09-23 18:05+0200\n"
 "Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -43,97 +43,94 @@ msgstr "Veuillez exécuter, dans le terminal qui s'est ouvert, les commandes :"
 msgid "Some dependencies are not installed!"
 msgstr "Certaines dépendances ne sont pas installées !"
 
-#: applet.js:84
-msgid "Sensors"
-msgstr "Capteurs"
+#. metadata.json->name
+#: applet.js:83
+msgid "Sensors Monitor"
+msgstr "Moniteur de Capteurs"
 
-#: applet.js:387
+#: applet.js:352
 msgid "high:"
 msgstr "élevée :"
 
-#: applet.js:387 applet.js:389 applet.js:414
+#: applet.js:352 applet.js:354 applet.js:379
 msgid "n/a"
 msgstr "n/a"
 
-#: applet.js:389
+#: applet.js:354
 msgid "crit:"
 msgstr "critique :"
 
-#: applet.js:414
+#: applet.js:379
 msgid "min:"
 msgstr "min :"
 
-#: applet.js:438
+#: applet.js:403
 msgid "max:"
 msgstr "max :"
 
-#: applet.js:460
+#: applet.js:425
 msgid "No intrusion detected"
 msgstr "Aucune intrusion détectée"
 
-#: applet.js:460
+#: applet.js:425
 msgid "INTRUSION DETECTED!"
 msgstr "INTRUSION DÉTECTÉE !"
 
-#: applet.js:472
+#: applet.js:437
 msgid "Must be configured!"
 msgstr "Doit être configuré !"
 
-#: applet.js:650
+#: applet.js:589
 msgid "Settings"
 msgstr "Paramètres"
 
-#: applet.js:650
+#: applet.js:589
 msgid ":"
 msgstr " :"
 
 #. settings-schema.json->page_General->title
-#: applet.js:657
+#: applet.js:596
 msgid "⚙ General"
 msgstr "⚙ Général"
 
-#: applet.js:667
+#: applet.js:606
 msgid "🌡 Temperature sensors"
 msgstr "🌡 Capteurs de température"
 
-#: applet.js:677
+#: applet.js:616
 msgid "🤂 Fan sensors"
 msgstr "🤂 Capteurs de ventilateur"
 
-#: applet.js:687
+#: applet.js:626
 msgid "🗲 Voltage sensors"
 msgstr "🗲 Capteurs de tension"
 
-#: applet.js:697
+#: applet.js:636
 msgid "⮿ Intrusion sensors"
 msgstr "⮿ Capteurs d'intrusion"
 
 #. settings-schema.json->xsensors->description
-#: applet.js:707
+#: applet.js:647
 msgid "Run xsensors"
 msgstr "Lancer xsensors"
 
-#: applet.js:715
+#: applet.js:658
 msgid "Reload this applet"
 msgstr "Recharger cette applet"
 
-#: applet.js:986
+#: applet.js:914
 #, javascript-format
 msgid "Are you sure you want to remove '%s'?"
 msgstr "Êtes-vous sûr de vouloir enlever \"%s\" ?"
 
-#. metadata.json->name
-msgid "Sensors Monitor"
-msgstr "Moniteur de Capteurs"
-
 #. metadata.json->description
 msgid ""
-"Displays and monitors the values ​​of many computer sensors concerning "
-"temperatures (CPU - GPU - power supply), fan speed, voltages, intrusions. "
-"Notifies you with color changes when a value reaches or exceeds its limit."
+"Displays the values of many computer sensors concerning Temperatures (CPU - "
+"GPU - Power Supply), Fan Speed, Voltages, Intrusions. Notifies you with "
+"color changes when a value reaches or exceeds its limit."
 msgstr ""
 "Affiche et surveille les valeurs de nombreux capteurs informatiques "
-"concernant les températures (CPU - GPU - alimentation), la vitesse des "
+"concernant les températures (CPU - GPU - Alimentation), la vitesse des "
 "ventilateurs, les tensions, les intrusions. Vous avertit par des changements "
 "de couleur lorsqu'une valeur atteint ou dépasse sa limite."
 
@@ -274,6 +271,22 @@ msgstr ""
 #. settings-schema.json->char_size->description
 msgid "Character size (% of standard size)"
 msgstr "Taille des caractères (% de la taille standard)"
+
+#. settings-schema.json->remove_border->description
+msgid "Remove border line"
+msgstr "Supprimer la bordure"
+
+#. settings-schema.json->remove_border->tooltip
+msgid "Whether or not to remove the border line around this applet."
+msgstr "Supprimer ou non la ligne bordant cette applet."
+
+#. settings-schema.json->remove_icons->description
+msgid "Remove icons"
+msgstr "Supprimer les icônes"
+
+#. settings-schema.json->remove_icons->tooltip
+msgid "Whether or not to remove icons in panel."
+msgstr "Supprimer ou non les icônes dans le panneau."
 
 #. settings-schema.json->bold_values->description
 msgid "Show values in bold in the tooltip"
@@ -470,3 +483,6 @@ msgstr "Mettre à jour l'affichage"
 #. settings-schema.json->remove_temperatureATfevimu->description
 msgid "Remove from panel the temperature@fevimu applet"
 msgstr "Retirer du panneau l'applet temperature@fevimu"
+
+#~ msgid "Sensors"
+#~ msgstr "Capteurs"
