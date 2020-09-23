@@ -333,7 +333,7 @@
     "default": [
 
     ],
-    "tooltip": "Double-click on a line to change Shown name.\nTo reset a Shown name, copy/paste the Sensor value.",
+    "tooltip": "Double-click on a line to change Shown name.\nTo reset a Shown name, copy/paste the Sensor name.",
     "show-buttons": false
   },
   "numberOfTempSensors": {
@@ -396,7 +396,7 @@
     "default": [
 
     ],
-    "tooltip": "Double-click on a line to change Shown name.\nTo reset a Shown name, copy/paste the Sensor value.",
+    "tooltip": "Double-click on a line to change Shown name.\nTo reset a Shown name, copy/paste the Sensor name.",
     "show-buttons": false
   },
   "numberOfFanSensors": {
@@ -464,7 +464,7 @@
     "default": [
 
     ],
-    "tooltip": "Double-click on a line to change Shown name.\nTo reset a Shown name, copy/paste the Sensor value.",
+    "tooltip": "Double-click on a line to change Shown name.\nTo reset a Shown name, copy/paste the Sensor name.",
     "show-buttons": false
   },
   "numberOfVoltageSensors": {
@@ -516,7 +516,7 @@
     "default": [
 
     ],
-    "tooltip": "Double-click on a line to change Shown name.\nTo reset a Shown name, copy/paste the Sensor value.",
+    "tooltip": "Double-click on a line to change Shown name.\nTo reset a Shown name, copy/paste the Sensor name.",
     "show-buttons": false
   },
   "numberOfIntrusionSensors": {
