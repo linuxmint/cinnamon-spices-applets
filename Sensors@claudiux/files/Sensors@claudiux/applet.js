@@ -90,7 +90,7 @@ class SensorsApplet extends Applet.TextApplet {
     // Applet menu:
     this.pids = []; // pids of all opened windows, about settings, from the menu.
     this.menuManager = new PopupMenu.PopupMenuManager(this);
-    this.menu = new Applet.AppletPopupMenu(this, orientation);
+    this.menu = new Applet.AppletPopupMenu(this, this.orientation);
     this.menuManager.addMenu(this.menu);
 
     // get settings defined in settings-schema.json:
@@ -643,7 +643,11 @@ class SensorsApplet extends Applet.TextApplet {
     this.menu.addMenuItem(_intrusion_button);
     this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
-    let _values_in_real_time_button = new PopupMenu.PopupMenuItem(_("Run xsensors"));
+    // Button xsensors
+    let _values_in_real_time_button = new PopupMenu.PopupIconMenuItem(_("Run xsensors"),
+                                                                      "application-x-executable",
+                                                                      St.IconType.SYMBOLIC
+    );
     _values_in_real_time_button.connect("activate", this._on_xsensors_pressed);
     this.menu.addMenuItem(_values_in_real_time_button);
     this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
@@ -838,12 +842,13 @@ class SensorsApplet extends Applet.TextApplet {
 
   on_applet_reloaded() {
     this.isLooping = false;
-    if (this.loopId != undefined && this.loopId > 0) {
+
+    if ((this.loopId != undefined) && (this.loopId > 0)) {
       Mainloop.source_remove(this.loopId);
       this.loopId = 0;
     }
 
-    if (this.checkDepInterval && this.checkDepInterval != 0) {
+    if (this.checkDepInterval && (this.checkDepInterval != 0)) {
       clearInterval(this.checkDepInterval);
       this.checkDepInterval = 0;
     }
@@ -866,6 +871,8 @@ class SensorsApplet extends Applet.TextApplet {
   }
 
   kill_all_pids() {
+    if (!this.pids) return;
+
     while (this.pids.length != 0) {
       let pid = this.pids.pop();
       Util.spawnCommandLineAsync("kill -9 %s".format(pid.toString()));
