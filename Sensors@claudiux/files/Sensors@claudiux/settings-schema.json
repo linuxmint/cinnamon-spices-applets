@@ -60,6 +60,8 @@
         "interval",
         "keep_size",
         "char_size",
+        "remove_border",
+        "remove_icons",
         "bold_values",
         "bold_italics_main_sensors",
         "restart_in_menu"
@@ -222,6 +224,18 @@
     "max": 120,
     "step": 1,
     "description": "Character size (% of standard size)"
+  },
+  "remove_border": {
+    "type": "switch",
+    "default": false,
+    "description": "Remove border line",
+    "tooltip": "Whether or not to remove the border line around this applet."
+  },
+  "remove_icons": {
+    "type": "switch",
+    "default": false,
+    "description": "Remove icons",
+    "tooltip": "Whether or not to remove icons in panel."
   },
   "bold_values": {
     "type": "switch",
