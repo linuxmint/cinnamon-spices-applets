@@ -584,7 +584,7 @@ class CinnamenuApplet extends TextIconApplet {
         if (isReRender) {
             buttons.push(Util.find(this.categoryButtons, button => button.id === 'all'));
         } else {
-            buttons = [new CategoryListButton(this.state, 'all', _('All Applications'), 'computer')];
+            buttons = [new CategoryListButton(this.state, 'all', _('All Applications'), ['computer'])];
         }
 
         const dirs = [];
@@ -624,10 +624,10 @@ class CinnamenuApplet extends TextIconApplet {
             }
         }
         const params = [
-            [this.state.settings.showPlaces, 'places', _('Places'), 'folder'],
-            [this.recentEnabled, 'recent', _('Recent Files'), 'folder-recent'],
-            [this.state.settings.enableBookmarks, 'bookmarks', _('Bookmarks'), 'user-bookmarks'],
-            [true, 'favorites', _('Favorite Apps'), 'emblem-favorite'] ];
+            [this.state.settings.showPlaces, 'places', _('Places'), ['folder']],
+            [this.recentEnabled, 'recent', _('Recent Files'), ['folder-recent', 'folder-documents-recent']],
+            [this.state.settings.enableBookmarks, 'bookmarks', _('Bookmarks'), ['user-bookmarks']],
+            [true, 'favorites', _('Favorite Apps'), ['emblem-favorite', 'folder-favorites']] ];
         for (let i = 0; i < params.length; i++) {
             if (!params[i][0]) {
                 continue;
@@ -639,7 +639,8 @@ class CinnamenuApplet extends TextIconApplet {
                 }
                 buttons.push(button);
             } else { // TODO: Use spread operator after versioning for 3.8
-                buttons.push(new CategoryListButton( this.state, params[i][1], params[i][2], params[i][3] ));
+                buttons.push(new CategoryListButton( this.state, params[i][1], params[i][2], params[i][3],
+                                                                                                params[i][4]));
             }
         }
         //?undo
@@ -961,8 +962,8 @@ class CinnamenuApplet extends TextIconApplet {
             if (enteredContextMenuItemExists) {
                 contextMenuChildren[refContextMenuItemIndex].handleEnter();//Ignore
             } else if (enteredPowerGroupItemExists) {
-                if (this.state.settings.powergroupPlacement === 2 ||  //left or right
-                                                        this.state.settings.powergroupPlacement === 3) {
+                if (this.state.settings.powergroupPlacement === 2 ||
+                                                this.state.settings.powergroupPlacement === 3) {//left or right
                     this.categoryButtons[startingCategoryIndex].handleEnter();
                 } else {
                     previousPowerGroupItem();
@@ -1112,12 +1113,12 @@ class CinnamenuApplet extends TextIconApplet {
                 } else {
                     buttons[refItemIndex].activate();
                 }
-            } else if (enteredCategoryExists) {
-                this.categoryButtons[refCategoryIndex].handleButtonRelease();
             } else if (enteredPowerGroupItemExists) {
                 powerGroupButtons[refPowerGroupItemIndex].handleButtonRelease();
-            } else if (this.state.searchActive && buttons.length > 0) {
-                buttons[0].activate();
+            } else if (enteredCategoryExists) {
+                this.categoryButtons[refCategoryIndex].handleButtonRelease();
+            /*} else if (this.state.searchActive && buttons.length > 0) {
+                buttons[0].activate();*/
             }
         };
 
@@ -1589,7 +1590,6 @@ class CinnamenuApplet extends TextIconApplet {
         this.menu.actor.set_reactive(true);
         this.displaySignals.connect(this.menu.actor, 'button-release-event',
                                                         (...args) => {this.clearEnteredActors();});
-        //this.state.autofavs = new Autofavs();
     }
 
     initCalcIcon() {
@@ -1958,16 +1958,6 @@ class Apps {
     }
 }
 
-class Autofavs {
-    constructor() {
-
-    }
-
-    incrementApp(app_id) {
-
-    }
-}
-
 class Search {
     constructor(state) {
         this.state = state;
@@ -2003,7 +1993,9 @@ class PowerGroupBox {
 
     populate (favs) {
         this.destroyChildren();
-
+        const reverseOrder = this.state.settings.powergroupPlacement === 0 ||
+                                                                this.state.settings.powergroupPlacement === 1;
+        //add favorites
         this.items = [];
         if (this.state.settings.addFavorites) {
             for (let i=0; i<favs.length; i++) {
@@ -2013,6 +2005,10 @@ class PowerGroupBox {
                                                                             this.state.trigger('closeMenu'); } ));
             }
         }
+        if (reverseOrder) {
+            this.items.reverse(); //change order of favs if buttons placement is top or bottom
+        }
+        //add session buttons
         const iconObj = { icon_size: this.state.settings.sessionIconSize,
                           icon_type: this.state.settings.sessionIconSize <= 24 ? IconType.SYMBOLIC :
                                                                                             IconType.FULLCOLOR };
@@ -2040,8 +2036,14 @@ class PowerGroupBox {
         this.items.push(new GroupButton( this.state, new Icon(iconObj), _('Quit'),
                     _('Shutdown the computer'), () => { Util.spawnCommandLine('cinnamon-session-quit --power-off');
                                                                 this.state.trigger('closeMenu'); } ));
+        //change order of all items depending on buttons placement
+        if (reverseOrder) {
+            this.items.reverse();
+        }
+        //populate box with items[]
         for (let i = 0; i < this.items.length; i++) {
-            if (i == this.items.length - 3 && this.items.length > 3){
+            if ((!reverseOrder && i == this.items.length - 3 && this.items.length > 3) ||
+                        (reverseOrder && i == 3 && this.items.length > 3)){// add seperator dot to box
                 const dot = new Widget({ style: 'width: 4px; height: 4px; background-color: ' +
                             this.state.theme.foregroundColor + '; margin: 7px; border: 3px; border-radius: 10px;',
                                         layout_manager: new Clutter.BinLayout(), x_expand: false, y_expand: false, });
