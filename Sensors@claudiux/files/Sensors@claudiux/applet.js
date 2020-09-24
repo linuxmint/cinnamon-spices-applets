@@ -78,10 +78,9 @@ class SensorsApplet extends Applet.TextApplet {
 
     // Applet label:
     this.set_applet_label(this._get_default_applet_label());
-    this.actor.set_style_class_name('sensors-label');
 
     // Applet tooltip:
-    this.set_applet_tooltip(_('Sensors'));
+    this.set_applet_tooltip(_('Sensors Monitor'));
     if (St.Widget.get_default_direction() === St.TextDirection.RTL) {
       this._applet_tooltip._tooltip.set_style('text-align: right; font-family: monospace;');
     } else {
@@ -91,12 +90,16 @@ class SensorsApplet extends Applet.TextApplet {
     // Applet menu:
     this.pids = []; // pids of all opened windows, about settings, from the menu.
     this.menuManager = new PopupMenu.PopupMenuManager(this);
-    this.menu = new Applet.AppletPopupMenu(this, orientation);
+    this.menu = new Applet.AppletPopupMenu(this, this.orientation);
     this.menuManager.addMenu(this.menu);
 
     // get settings defined in settings-schema.json:
     this.get_user_settings();
     this._variables();
+
+    // Style class name:
+    let _border_type = (this.remove_border) ? "-noborder" : "";
+    this.actor.set_style_class_name("sensors-label%s".format(_border_type));
 
     // Initialize some properties:
     this.isRunning = false;
@@ -128,6 +131,8 @@ class SensorsApplet extends Applet.TextApplet {
     this.s.bind("interval", "interval", this.on_settings_changed, null);
     this.s.bind("keep_size", "keep_size", this.updateUI, null);
     this.s.bind("char_size", "char_size", this.updateUI, null);
+    this.s.bind("remove_border", "remove_border", this.updateUI, null);
+    this.s.bind("remove_icons", "remove_icons", this.updateUI, null);
     this.s.bind("bold_values", "bold_values", this.updateUI, null);
     this.s.bind("bold_italics_main_sensors", "bold_italics_main_sensors", this.updateUI, null);
     this.s.bind("restart_in_menu", "restart_in_menu", null, null);
@@ -212,51 +217,11 @@ class SensorsApplet extends Applet.TextApplet {
    * populate_xxx_sensors_in_settings
    */
 
-  _variables() {
-    this.sensors_list = {
-      "temps": {
-        get_value:  () => {return this.temp_sensors;},
-        set_value: (v) => {this.temp_sensors = v}
-      },
-      "fans": {
-        get_value:  () => {return this.fan_sensors;},
-        set_value: (v) => {this.fan_sensors = v}
-      },
-      "voltages": {
-        get_value:  () => {return this.volt_sensors;},
-        set_value: (v) => {this.volt_sensors = v}
-      },
-      "intrusions": {
-        get_value:  () => {return this.intrusion_sensors;},
-        set_value: (v) => {this.intrusion_sensors = v}
-      }
-    };
-
-    this.number_of_sensors = {
-      "temps": {
-        get_value:  () => {return this.numberOfTempSensors;},
-        set_value: (v) => {this.numberOfTempSensors = v}
-      },
-      "fans": {
-        get_value:  () => {return this.numberOfFanSensors;},
-        set_value: (v) => {this.numberOfFanSensors = v}
-      },
-      "voltages": {
-        get_value:  () => {return this.numberOfVoltageSensors;},
-        set_value: (v) => {this.numberOfVoltageSensors = v}
-      },
-      "intrusions": {
-        get_value:  () => {return this.numberOfIntrusionSensors;},
-        set_value: (v) => {this.numberOfIntrusionSensors = v}
-      }
-    }
-  }
-
   populate_sensors_in_settings(type, force) {
     let _sensors = Object.keys(this.data[type]);
 
     if (_sensors.length === 0 && this.sensors_list[type].get_value().length != 0) {
-      settings_part = [];
+      this.sensors_list[type].set_value([]);
       return
     }
 
@@ -487,7 +452,8 @@ class SensorsApplet extends Applet.TextApplet {
 
     this.isUpdatingUI = true;
     var _appletLabel = "";
-    var _actor_style = "sensors-label sensors-size%s".format(this.char_size);
+    let _border_type = (this.remove_border) ? "-noborder" : "";
+    var _actor_style = "sensors-label%s sensors-size%s".format(_border_type, this.char_size);
 
     let vertical = (this._orientation == St.Side.LEFT || this._orientation == St.Side.RIGHT);
     let sep = (vertical) ? "\n" : " ";
@@ -504,23 +470,17 @@ class SensorsApplet extends Applet.TextApplet {
           if (t["show_in_panel"]) {
             let _temp = this.data["temps"][t["sensor"]]["input"];
 
-            //let _prefix = (vertical && nbr_already_shown === 0) ? "\n" : "";
-            //_prefix += (nbr_already_shown === 0) ? "🌡" : "";
-            //_prefix += (vertical) ? "" : " ";
-
-            //_appletLabel += _prefix + this._formatted_temp(_temp, vertical);
-
-            if (nbr_already_shown === 0) this.label_parts.push("🌡");
+            if (nbr_already_shown === 0 && !this.remove_icons) this.label_parts.push("🌡");
             this.label_parts.push(this._formatted_temp(_temp, vertical));
 
             let _temp_max = this._get_max_temp(this.data["temps"][t["sensor"]]);
             let _temp_crit = this._get_crit_temp(this.data["temps"][t["sensor"]]);
 
             if (!isNaN(_temp_crit) && _temp_crit > 0 && _temp >= _temp_crit)
-              _actor_style = "sensors-critical sensors-size%s".format(this.char_size);
+              _actor_style = "sensors-critical%s sensors-size%s".format(_border_type, this.char_size);
             else if (!isNaN(_temp_max) && _temp_max > 0 && _temp >= _temp_max)
-              _actor_style = "sensors-high sensors-size%s".format(this.char_size);
-            //break;
+              _actor_style = "sensors-high%s sensors-size%s".format(_border_type, this.char_size);
+
             nbr_already_shown += 1;
           }
         }
@@ -536,20 +496,14 @@ class SensorsApplet extends Applet.TextApplet {
         if (f["show_in_panel"]) {
           let _fan = this.data["fans"][f["sensor"]]["input"];
 
-          //if (_appletLabel != "") _appletLabel += " ";
-          //let _prefix = (vertical && nbr_already_shown === 0) ? "\n" : "";
-          //_prefix += (nbr_already_shown === 0) ? "🤂" : "";
-          //_prefix += (vertical) ? "" : " ";
-          //_appletLabel += _prefix + this._formatted_fan(_fan, vertical);
-
-          if (nbr_already_shown === 0) this.label_parts.push("🤂");
+          if (nbr_already_shown === 0 && !this.remove_icons) this.label_parts.push("🤂");
           this.label_parts.push(this._formatted_fan(_fan, vertical));
 
           let _fan_min = this._get_min_fan(this.data["fans"][f["sensor"]]);
 
           if (_fan < _fan_min)
-            _actor_style = "sensors-critical sensors-size%s".format(this.char_size);
-          //break;
+            _actor_style = "sensors-critical%s sensors-size%s".format(_border_type, this.char_size);
+
           nbr_already_shown += 1;
         }
       }
@@ -565,23 +519,14 @@ class SensorsApplet extends Applet.TextApplet {
         if (v["show_in_panel"]) {
           let _voltage = this.data["voltages"][v["sensor"]]["input"];
 
-          //if (_appletLabel != "") _appletLabel += " ";
-          //let _UI_value = this._formatted_voltage(_voltage, vertical);
-          ////if (_UI_value.startsWith("  "))
-            ////_UI_value = _UI_value.substr(1);
-          //let _prefix = (vertical) ? "\n" : "";
-          //_prefix += (nbr_already_shown === 0) ? "🗲" : "";
-          //_prefix += (vertical) ? "\n" : " ";
-          //_appletLabel += _prefix + _UI_value;
-
-          if (nbr_already_shown === 0) this.label_parts.push("🗲");
+          if (nbr_already_shown === 0 && !this.remove_icons) this.label_parts.push("🗲");
           this.label_parts.push(this._formatted_voltage(_voltage, vertical));
 
           let _voltage_max = this._get_max_voltage(this.data["voltages"][v["sensor"]]);
 
           if (_voltage >= _voltage_max)
-            _actor_style = "sensors-critical sensors-size%s".format(this.char_size);
-          //break;
+            _actor_style = "sensors-critical%s sensors-size%s".format(_border_type, this.char_size);
+
           nbr_already_shown += 1;
         }
       }
@@ -597,20 +542,14 @@ class SensorsApplet extends Applet.TextApplet {
         if (i["show_in_panel"]) {
           let _intrusion = this.data["intrusions"][i["sensor"]]["alarm"];
 
-          //if (_appletLabel != "") _appletLabel += " ";
-          //let _prefix = (vertical) ? "\n" : "";
-          //_prefix += (nbr_already_shown === 0) ? "⮿" : "";
-          //_prefix += (vertical) ? "\n" : " ";
-          //_appletLabel += _prefix + this._formatted_intrusion(_intrusion, vertical);
-
-          if (nbr_already_shown === 0) this.label_parts.push("⮿");
+          if (nbr_already_shown === 0 && !this.remove_icons) this.label_parts.push("⮿");
           this.label_parts.push(this._formatted_intrusion(_intrusion, vertical));
 
           let _intrusion_alarm = this._get_alarm_intrusion(this.data["intrusions"][i["sensor"]]);
 
           if (_intrusion_alarm)
-            _actor_style = "sensors-critical sensors-size%s".format(this.char_size);
-          //break;
+            _actor_style = "sensors-critical%s sensors-size%s".format(_border_type, this.char_size);
+
           nbr_already_shown += 1;
         }
       }
@@ -704,7 +643,11 @@ class SensorsApplet extends Applet.TextApplet {
     this.menu.addMenuItem(_intrusion_button);
     this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
-    let _values_in_real_time_button = new PopupMenu.PopupMenuItem(_("Run xsensors"));
+    // Button xsensors
+    let _values_in_real_time_button = new PopupMenu.PopupIconMenuItem(_("Run xsensors"),
+                                                                      "application-x-executable",
+                                                                      St.IconType.SYMBOLIC
+    );
     _values_in_real_time_button.connect("activate", this._on_xsensors_pressed);
     this.menu.addMenuItem(_values_in_real_time_button);
     this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
@@ -899,52 +842,37 @@ class SensorsApplet extends Applet.TextApplet {
 
   on_applet_reloaded() {
     this.isLooping = false;
-    if (this.loopId != undefined && this.loopId > 0) {
+
+    if ((this.loopId != undefined) && (this.loopId > 0)) {
       Mainloop.source_remove(this.loopId);
       this.loopId = 0;
     }
 
-    if (this.checkDepInterval != 0) {
+    if (this.checkDepInterval && (this.checkDepInterval != 0)) {
       clearInterval(this.checkDepInterval);
       this.checkDepInterval = 0;
     }
 
-    try {
-      this.reaper.disconnect(this._connectId);
-    } catch(e) {
-      log("on_applet_reloaded: Unable to disconnect signal %s.".format(this._connectId));
-      // Nothing to do.
+    if (this.reaper && this._connectId) {
+      try {
+        this.reaper.disconnect(this._connectId);
+      } catch(e) {
+        log("on_applet_reloaded: Unable to disconnect signal %s.".format(this._connectId));
+      }
     }
 
     this.kill_all_pids();
   }
 
   on_applet_removed_from_panel() {
-    this.isLooping = false;
-
-    if (this.loopId != undefined && this.loopId > 0) {
-      Mainloop.source_remove(this.loopId);
-      this.loopId = 0;
-    }
-
-    if (this.checkDepInterval != 0) {
-      clearInterval(this.checkDepInterval);
-      this.checkDepInterval = 0;
-    }
-
-    try {
-      this.reaper.disconnect(this._connectId);
-    } catch(e) {
-      log("on_applet_removed_from_panel: Unable to disconnect signal %s.".format(this._connectId));
-      // Nothing to do.
-    }
-
-    this.kill_all_pids();
+    this.on_applet_reloaded();
 
     this.s.finalize();
   }
 
   kill_all_pids() {
+    if (!this.pids) return;
+
     while (this.pids.length != 0) {
       let pid = this.pids.pop();
       Util.spawnCommandLineAsync("kill -9 %s".format(pid.toString()));
@@ -1001,6 +929,50 @@ class SensorsApplet extends Applet.TextApplet {
       }
     );
     dialog.open();
+  }
+
+  /**
+   * _variables
+   */
+
+  _variables() {
+    this.sensors_list = {
+      "temps": {
+        get_value:  () => {return this.temp_sensors;},
+        set_value: (v) => {this.temp_sensors = v}
+      },
+      "fans": {
+        get_value:  () => {return this.fan_sensors;},
+        set_value: (v) => {this.fan_sensors = v}
+      },
+      "voltages": {
+        get_value:  () => {return this.volt_sensors;},
+        set_value: (v) => {this.volt_sensors = v}
+      },
+      "intrusions": {
+        get_value:  () => {return this.intrusion_sensors;},
+        set_value: (v) => {this.intrusion_sensors = v}
+      }
+    };
+
+    this.number_of_sensors = {
+      "temps": {
+        get_value:  () => {return this.numberOfTempSensors;},
+        set_value: (v) => {this.numberOfTempSensors = v}
+      },
+      "fans": {
+        get_value:  () => {return this.numberOfFanSensors;},
+        set_value: (v) => {this.numberOfFanSensors = v}
+      },
+      "voltages": {
+        get_value:  () => {return this.numberOfVoltageSensors;},
+        set_value: (v) => {this.numberOfVoltageSensors = v}
+      },
+      "intrusions": {
+        get_value:  () => {return this.numberOfIntrusionSensors;},
+        set_value: (v) => {this.numberOfIntrusionSensors = v}
+      }
+    }
   }
 }
 

@@ -1,6 +1,6 @@
 .sensors-label {
     background: transparent;
-    margin: 2px, 1px, 1px, 1px;
+    margin: 1px, 1px, 1px, 1px;
     padding: 0 2px;
     border: 1px;
     border-radius: 5px, 5px, 5px, 5px;
@@ -12,7 +12,7 @@
 
 .sensors-high {
     background: DarkOrange;
-    margin: 2px, 1px, 1px, 1px;
+    margin: 1px, 1px, 1px, 1px;
     padding: 0 2px;
     border: 1px;
     border-radius: 5px, 5px, 5px, 5px;
@@ -24,11 +24,41 @@
 
 .sensors-critical {
     background: FireBrick;
-    margin: 2px, 1px, 1px, 1px;
+    margin: 1px, 1px, 1px, 1px;
     padding: 0 2px;
     border: 1px;
     border-radius: 5px, 5px, 5px, 5px;
     border-color: rgba(194,34,34,0.5);
+    text-align: center;
+    vertical-align: middle;
+    font-family: monospace;
+}
+
+.sensors-label-noborder {
+    background: transparent;
+    margin: 1px, 1px, 1px, 1px;
+    padding: 0 2px;
+    border: 0;
+    text-align: center;
+    vertical-align: middle;
+    font-family: monospace;
+}
+
+.sensors-high-noborder {
+    background: DarkOrange;
+    margin: 1px, 1px, 1px, 1px;
+    padding: 0 2px;
+    border: 0;
+    text-align: center;
+    vertical-align: middle;
+    font-family: monospace;
+}
+
+.sensors-critical-noborder {
+    background: FireBrick;
+    margin: 1px, 1px, 1px, 1px;
+    padding: 0 2px;
+    border: 0;
     text-align: center;
     vertical-align: middle;
     font-family: monospace;
