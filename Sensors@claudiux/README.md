@@ -82,7 +82,8 @@ Coretemp gives the real temperature of each processor core (Core 0, Core 1, ...)
 
 There is a part of the `sensors` command output:
 
-```Package id 0:  +44.0°C  (high = +69.0°C, crit = +75.0°C)
+```
+Package id 0:  +44.0°C  (high = +69.0°C, crit = +75.0°C)
 Core 0:        +43.0°C  (high = +69.0°C, crit = +75.0°C)
 Core 1:        +42.0°C  (high = +69.0°C, crit = +75.0°C)
 Core 2:        +40.0°C  (high = +69.0°C, crit = +75.0°C)
