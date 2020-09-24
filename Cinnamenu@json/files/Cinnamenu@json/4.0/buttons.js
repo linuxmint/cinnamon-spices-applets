@@ -29,7 +29,7 @@ const USER_DESKTOP_PATH = getUserDesktopDir();
 const CAN_UNINSTALL = GLib.file_test('/usr/bin/cinnamon-remove-application', GLib.FileTest.EXISTS);
 
 class CategoryListButton extends PopupBaseMenuItem {
-    constructor(state, dir, altNameText, altIconName) {
+    constructor(state, dir, altNameText, altIconNames/*array of names*/) {
         super({ hover: false, activate: false });
         this.state = state;
         this.connectIds = [
@@ -50,15 +50,15 @@ class CategoryListButton extends PopupBaseMenuItem {
         this.disabled = false;
         this.entered = null;
 
-        let icon;
         if (!isStrDir) {
-            icon = dir.get_icon();
+            let icon = dir.get_icon();
+            let iconName;
             if (icon && icon.get_names) {
-                this.icon_name = icon.get_names().toString();
+                iconName = icon.get_names().toString();
             } else {
-                this.icon_name = '';
+                iconName = '';
             }
-            if (this.icon_name) {
+            if (iconName) {
                 this.icon = TextureCache.get_default().load_gicon(null, icon,
                                                                 this.state.settings.categoryIconSize);
             } else {
@@ -70,11 +70,9 @@ class CategoryListButton extends PopupBaseMenuItem {
                 });
             }
         } else {
-            this.icon_name = altIconName;
-            icon = altIconName;
-            this.icon = new Icon({ icon_name: icon,
-                                   icon_size: this.state.settings.categoryIconSize,
-                                   icon_type: IconType.FULLCOLOR });
+            this.icon = new Icon({  gicon: Gio.ThemedIcon.new_from_names(altIconNames),
+                                    icon_size: this.state.settings.categoryIconSize,
+                                    icon_type: IconType.FULLCOLOR });
         }
         if (this.state.settings.categoryIconSize > 0) {
             this.addActor(this.icon);
@@ -512,6 +510,7 @@ class AppListGridButton extends PopupBaseMenuItem {
 
         // Context menu
         if (this.buttonState.appType === ApplicationType._applications) {
+                                                //    || this.buttonState.appType === ApplicationType._recent) {
             this.menu = new PopupSubMenu(this.actor);
             this.menu.actor.set_style_class_name('menu menu-context-menu menu-background starkmenu-background');
             this.contextMenuBox = new St.BoxLayout({ style_class: '', vertical: true, reactive: true });
@@ -768,7 +767,8 @@ class AppListGridButton extends PopupBaseMenuItem {
     }
 
     toggleMenu(e) {
-        if (this.buttonState.appType !== ApplicationType._applications || !this.menu) {
+        if ((this.buttonState.appType !== ApplicationType._applications /*&&
+                                this.buttonState.appType !== ApplicationType._recent*/) || !this.menu) {
             return false;
         }
 
@@ -788,32 +788,51 @@ class AppListGridButton extends PopupBaseMenuItem {
                 t.menu.addMenuItem(instance);
                 t.contextMenuButtons.push(instance);
             };
+            if (this.buttonState.appType == ApplicationType._applications) {
+                if (this.state.gpu_offload_supported) {
+                    addMenuItem(this, new ApplicationContextMenuItem(this.state, this.buttonState,
+                                                            _('Run with NVIDIA GPU'), 'offload_launch', 'cpu'));
+                } else if (this.state.isBumblebeeInstalled) {
+                    addMenuItem(this, new ApplicationContextMenuItem(this.state, this.buttonState,
+                                                            _('Run with NVIDIA GPU'), 'run_with_nvidia_gpu', 'cpu'));
+                }
+                addMenuItem(this, new ApplicationContextMenuItem(this.state, this.buttonState,
+                                                            _('Add to panel'), 'add_to_panel', 'list-add'));
+                if (USER_DESKTOP_PATH) {
+                    addMenuItem(this, new ApplicationContextMenuItem(this.state, this.buttonState,
+                                                            _('Add to desktop'), 'add_to_desktop', 'computer'));
+                }
+                if (this.state.trigger('isFavorite', this.buttonState.app.get_id())) {
+                    addMenuItem(this, new ApplicationContextMenuItem(this.state, this.buttonState,
+                                                    _('Remove from favorites'), 'remove_from_favorites', 'starred'));
+                } else {
+                    addMenuItem(this, new ApplicationContextMenuItem(this.state, this.buttonState,
+                                                    _('Add to favorites'), 'add_to_favorites', 'non-starred'));
+                }
+                if (CAN_UNINSTALL) {
+                    addMenuItem(this, new ApplicationContextMenuItem(this.state, this.buttonState,
+                                                            _('Uninstall'), 'uninstall', 'edit-delete'));
+                }
+            } else if (this.buttonState.appType == ApplicationType._recent) {
+                /*let infos = Gio.AppInfo.get_all_for_type(this.mimeType);
+                global.log('>>',this.mimeType);
+                for (let i = 0; i < infos.length; i++) {
+                    let info = infos[i];
 
-            if (this.state.gpu_offload_supported) {
-                addMenuItem(this, new ApplicationContextMenuItem(this.state, this.buttonState,
-                                                        _('Run with NVIDIA GPU'), 'offload_launch', 'cpu'));
-            } else if (this.state.isBumblebeeInstalled) {
-                addMenuItem(this, new ApplicationContextMenuItem(this.state, this.buttonState,
-                                                        _('Run with NVIDIA GPU'), 'run_with_nvidia_gpu', 'cpu'));
-            }
-            addMenuItem(this, new ApplicationContextMenuItem(this.state, this.buttonState,
-                                                        _('Add to panel'), 'add_to_panel', 'list-add'));
-            if (USER_DESKTOP_PATH) {
-                addMenuItem(this, new ApplicationContextMenuItem(this.state, this.buttonState,
-                                                        _('Add to desktop'), 'add_to_desktop', 'computer'));
-            }
-            if (this.state.trigger('isFavorite', this.buttonState.app.get_id())) {
-                addMenuItem(this, new ApplicationContextMenuItem(this.state, this.buttonState,
-                                                _('Remove from favorites'), 'remove_from_favorites', 'starred'));
-            } else {
-                addMenuItem(this, new ApplicationContextMenuItem(this.state, this.buttonState,
-                                                _('Add to favorites'), 'add_to_favorites', 'non-starred'));
-            }
-            if (CAN_UNINSTALL) {
-                addMenuItem(this, new ApplicationContextMenuItem(this.state, this.buttonState,
-                                                        _('Uninstall'), 'uninstall', 'edit-delete'));
-            }
+                    file = Gio.File.new_for_uri(this.uri);
+                    /*
+                    if (!this.hasLocalPath(file) && !info.supports_uris()) continue;
 
+                    if (info.equal(default_info)) continue;
+
+                    menuItem = new RecentContextMenuItem(this,
+                                                 info.get_display_name(),
+                                                 false,
+                                                 [info, file],
+                                                 infoLaunchFunc);
+                    menu.addMenuItem(menuItem);
+                }*/
+            }
             let parent = this.actor.get_parent();
             if (!parent) return true; // Favorite change
 
