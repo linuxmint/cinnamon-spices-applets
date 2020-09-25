@@ -679,7 +679,7 @@ class SensorsApplet extends Applet.TextApplet {
       //_minimumIntegerDigits = 3;
     }
 
-    let _lang = GLib.getenv("LANGUAGE").replace("_", "-");
+    let _lang = (GLib.getenv("LANGUAGE") + "").replace("_", "-");
     if (this.only_integer_part) {
       _t = Math.round(_t);
       ret = (new Intl.NumberFormat(_lang, { minimumIntegerDigits: this.minimumIntegerDigitsTemp }).format(_t)).toString();
@@ -758,7 +758,7 @@ class SensorsApplet extends Applet.TextApplet {
     let _unit = "V";
     let _sep = (vertical) ? "\n" : " ";
     let ret;
-    let _lang = GLib.getenv("LANGUAGE").replace("_", "-");
+    let _lang = (GLib.getenv("LANGUAGE") + "").replace("_", "-");
     let _padstart = 8;
 
     switch(this.volt_unit) {
