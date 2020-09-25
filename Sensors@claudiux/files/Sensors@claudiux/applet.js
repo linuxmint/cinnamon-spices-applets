@@ -2,7 +2,7 @@ const St = imports.gi.St;
 const PopupMenu = imports.ui.popupMenu;
 const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio; // Needed for file infos
-const Util = imports.misc.util;
+//const Util = imports.misc.util;
 const Lang = imports.lang;
 const Mainloop = imports.mainloop;
 const Applet = imports.ui.applet;
@@ -11,6 +11,7 @@ const Gettext = imports.gettext;
 const Extension = imports.ui.extension; // Needed to reload applet
 const ModalDialog = imports.ui.modalDialog;
 
+const Util = require("./util");
 const {Dependencies} = require("./checkDependencies");
 
 const {
@@ -150,7 +151,7 @@ class SensorsApplet extends Applet.TextApplet {
     this.s.bind("custom_names", "custom_names", null, null);
 
     // Temperature tab
-    this.s.bind("show_temp", "show_temp", this.updateUI, null);
+    this.s.bind("show_temp", "show_temp", this.populate_temp_sensors_in_settings, null);
     this.s.bind("strictly_positive_temp", "strictly_positive_temp", this.populate_temp_sensors_in_settings, null);
     this.s.bind("use_fahrenheit", "use_fahrenheit", this.updateUI, null);
     this.s.bind("only_integer_part", "only_integer_part", this.updateUI, null);
@@ -161,7 +162,7 @@ class SensorsApplet extends Applet.TextApplet {
     this.s.bind("numberOfTempSensors", "numberOfTempSensors", null, null);
 
     // Fan tab
-    this.s.bind("show_fan", "show_fan", this.updateUI, null);
+    this.s.bind("show_fan", "show_fan", this.populate_fan_sensors_in_settings, null);
     this.s.bind("strictly_positive_fan", "strictly_positive_fan", this.populate_fan_sensors_in_settings, null);
     this.s.bind("show_fan_unit", "show_fan_unit", this.updateUI, null);
     this.s.bind("fan_unit", "fan_unit", this.updateUI, null);
@@ -169,7 +170,7 @@ class SensorsApplet extends Applet.TextApplet {
     this.s.bind("numberOfFanSensors", "numberOfFanSensors", null, null);
 
     // Voltage tab
-    this.s.bind("show_volt", "show_volt", this.updateUI, null);
+    this.s.bind("show_volt", "show_volt", this.populate_volt_sensors_in_settings, null);
     this.s.bind("strictly_positive_volt", "strictly_positive_volt", this.populate_volt_sensors_in_settings, null);
     this.s.bind("show_volt_unit", "show_volt_unit", this.updateUI, null);
     this.s.bind("volt_unit", "volt_unit", this.updateUI, null);
@@ -177,7 +178,7 @@ class SensorsApplet extends Applet.TextApplet {
     this.s.bind("numberOfVoltageSensors", "numberOfVoltageSensors", null, null);
 
     // Intrusion tab
-    this.s.bind("show_intrusion", "show_intrusion", this.updateUI, null);
+    this.s.bind("show_intrusion", "show_intrusion", this.populate_intrusion_sensors_in_settings, null);
     this.s.bind("strictly_positive_intrusion", "strictly_positive_intrusion", this.updateUI, null);
     this.s.bind("intrusion_sensors", "intrusion_sensors", null, null);
     this.s.bind("numberOfIntrusionSensors", "numberOfIntrusionSensors", null, null);
@@ -218,6 +219,8 @@ class SensorsApplet extends Applet.TextApplet {
    */
 
   populate_sensors_in_settings(type, force) {
+    if (this.data === undefined) return;
+
     let _sensors = Object.keys(this.data[type]);
 
     if (_sensors.length === 0 && this.sensors_list[type].get_value().length != 0) {
@@ -299,27 +302,23 @@ class SensorsApplet extends Applet.TextApplet {
   }
 
   populate_temp_sensors_in_settings(force = true) {
-    if (this.data === undefined) return;
-
-    this.populate_sensors_in_settings("temps", force);
+    if (this.show_temp)
+      this.populate_sensors_in_settings("temps", force);
   }
 
   populate_fan_sensors_in_settings(force = true) {
-    if (this.data === undefined) return;
-
-    this.populate_sensors_in_settings("fans", force);
+    if (this.show_fan)
+      this.populate_sensors_in_settings("fans", force);
   }
 
   populate_volt_sensors_in_settings(force = true) {
-    if (this.data === undefined) return;
-
-    this.populate_sensors_in_settings("voltages", force);
+    if (this.show_volt)
+      this.populate_sensors_in_settings("voltages", force);
   }
 
   populate_intrusion_sensors_in_settings(force = true) {
-    if (this.data === undefined) return;
-
-    this.populate_sensors_in_settings("intrusions", force);
+    if (this.show_intrusion)
+      this.populate_sensors_in_settings("intrusions", force);
   }
 
   /**
@@ -327,12 +326,13 @@ class SensorsApplet extends Applet.TextApplet {
    */
   updateTooltip() {
     var _tooltip = "";
+    var _tooltips = [];
 
     // Temperatures:
     if (this.show_temp && this.temp_sensors.length !== 0
         && this.data !== undefined && Object.keys(this.data["temps"]).length != 0) {
       if (this.temp_sensors.length > 0) {
-        _tooltip += "🌡" + "\n";
+        //_tooltip += "🌡" + "\n";
         for (let t of this.temp_sensors) {
           if (this.data["temps"][t["sensor"]] !== undefined) {
             if (t["show_in_tooltip"]) {
@@ -357,13 +357,18 @@ class SensorsApplet extends Applet.TextApplet {
           }
         }
       }
+      if (_tooltip !== "") {
+        _tooltip = "🌡" + "\n" + _tooltip;
+        _tooltips.push(_tooltip.trim());
+      }
     }
 
     // Fans:
+    _tooltip = "";
     if (this.show_fan && this.fan_sensors.length !== 0
         && this.data !== undefined && Object.keys(this.data["fans"]).length != 0) {
       if (this.fan_sensors.length > 0) {
-        _tooltip += "🤂" + "\n";
+        //_tooltip += "🤂" + "\n";
         for (let f of this.fan_sensors) {
           if (this.data["fans"][f["sensor"]] !== undefined) {
             if (f["show_in_tooltip"]) {
@@ -382,13 +387,18 @@ class SensorsApplet extends Applet.TextApplet {
           }
         }
       }
+      if (_tooltip !== "") {
+        _tooltip = "🤂" + "\n" + _tooltip;
+        _tooltips.push(_tooltip.trim());
+      }
     }
 
     // Voltages:
+    _tooltip = "";
     if (this.show_volt && this.volt_sensors.length !== 0
         && this.data !== undefined && Object.keys(this.data["voltages"]).length != 0) {
       if (this.volt_sensors.length > 0) {
-        _tooltip += "🗲" + "\n";
+        //_tooltip += "🗲" + "\n";
         for (let v of this.volt_sensors) {
           if (this.data["voltages"][v["sensor"]] !== undefined) {
             if (v["show_in_tooltip"]) {
@@ -406,14 +416,19 @@ class SensorsApplet extends Applet.TextApplet {
           }
         }
       }
+      if (_tooltip !== "") {
+        _tooltip = "🗲" + "\n" + _tooltip;
+        _tooltips.push(_tooltip.trim());
+      }
     }
 
 
     //Intrusion:
+    _tooltip = "";
     if (this.show_intrusion && this.intrusion_sensors.length !== 0
         && this.data !== undefined && Object.keys(this.data["intrusions"]).length != 0) {
       if (this.intrusion_sensors.length > 0) {
-        _tooltip += "⮿" + "\n";
+        //_tooltip += "⮿" + "\n";
         for (let i of this.intrusion_sensors) {
           if (this.data["intrusions"][i["sensor"]] !== undefined) {
             if (i["show_in_tooltip"]) {
@@ -431,10 +446,17 @@ class SensorsApplet extends Applet.TextApplet {
           }
         }
       }
+      if (_tooltip !== "") {
+        _tooltip = "⮿" + "\n" + _tooltip;
+        _tooltips.push(_tooltip.trim());
+      }
     }
 
-    if (_tooltip.length === 0)
+    _tooltip = "";
+    if (_tooltips.length === 0)
       _tooltip = _("Must be configured!");
+    else
+      _tooltip = _tooltips.join("\n");
 
     if (this._applet_tooltip.set_markup === undefined)
       this.set_applet_tooltip(_tooltip);
@@ -442,6 +464,7 @@ class SensorsApplet extends Applet.TextApplet {
       this._applet_tooltip.set_markup(_tooltip);
 
     _tooltip = null;
+    _tooltips = null;
   }
 
   /**
@@ -679,7 +702,8 @@ class SensorsApplet extends Applet.TextApplet {
       //_minimumIntegerDigits = 3;
     }
 
-    let _lang = GLib.getenv("LANGUAGE").replace("_", "-");
+    //let _lang = GLib.getenv("LANGUAGE").replace("_", "-");
+    let _lang = this._get_lang();
     if (this.only_integer_part) {
       _t = Math.round(_t);
       ret = (new Intl.NumberFormat(_lang, { minimumIntegerDigits: this.minimumIntegerDigitsTemp }).format(_t)).toString();
@@ -701,10 +725,21 @@ class SensorsApplet extends Applet.TextApplet {
     return ret
   }
 
+  _get_lang() {
+    if (GLib.getenv("LC_NUMERIC")) {
+      return GLib.getenv("LC_NUMERIC").split(".")[0].replace("_", "-")
+    } else if (GLib.getenv("LANG")) {
+      return GLib.getenv("LANG").split(".")[0].replace("_", "-")
+    } else if (GLib.getenv("LANGUAGE")) {
+      return GLib.getenv("LANGUAGE").replace("_", "-")
+    }
+    return "en-US"
+  }
+
   _get_max_temp(dico) {
-    if (dico["max"] !== undefined) {
+    if (dico["max"] !== undefined && !isNaN(dico["max"])) {
       return 1.0 * dico["max"]
-    } else if (dico["crit"] !== undefined) {
+    } else if (dico["crit"] !== undefined && !isNaN(dico["crit"])) {
       return 1.0 * Math.round(0.9 * dico["crit"])
     } else {
       return 0
@@ -712,9 +747,9 @@ class SensorsApplet extends Applet.TextApplet {
   }
 
   _get_crit_temp(dico) {
-    if (dico["crit"] !== undefined) {
+    if (dico["crit"] !== undefined && !isNaN(dico["crit"])) {
       return 1.0 * dico["crit"]
-    } else if (dico["max"] !== undefined) {
+    } else if (dico["max"] !== undefined && !isNaN(dico["max"])) {
       return 1.0 * Math.round(1.1 * dico["max"])
     } else {
       return 0
@@ -741,7 +776,7 @@ class SensorsApplet extends Applet.TextApplet {
   }
 
   _get_min_fan(dico) {
-    if (dico["min"] !== undefined) {
+    if (dico["min"] !== undefined && !isNaN(dico["min"])) {
       return 1.0 * dico["min"]
     } else {
       return 0
@@ -792,7 +827,7 @@ class SensorsApplet extends Applet.TextApplet {
   }
 
   _get_max_voltage(dico) {
-    if (dico["max"] !== undefined) {
+    if (dico["max"] !== undefined && !isNaN(dico["max"])) {
       return 1.0 * dico["max"]
     } else {
       return 10
@@ -805,12 +840,11 @@ class SensorsApplet extends Applet.TextApplet {
    */
   _formatted_intrusion(i, vertical = false) {
     let ret = Math.ceil(i) != 0 ? "😧" : "😊";
-    //if (vertical) ret = "\n" + ret;
     return ret;
   }
 
   _get_alarm_intrusion(dico) {
-    if (dico["alarm"] !== undefined)
+    if (dico["alarm"] !== undefined && !isNaN(dico["alarm"]))
       return Math.ceil(dico["alarm"]) != 0;
     else
       return false;

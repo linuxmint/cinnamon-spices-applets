@@ -3,9 +3,12 @@ const GLib = imports.gi.GLib; // ++ Needed for starting programs and translation
 const Gio = imports.gi.Gio; // Needed for file infos
 const Extension = imports.ui.extension; // Needed to reload applets
 const MessageTray = imports.ui.messageTray; // ++ Needed for the criticalNotify() function in this script
-const Util = imports.misc.util; // Needed for spawnCommandLine()
+//const Util = imports.misc.util; // Needed for spawnCommandLine()
 const Main = imports.ui.main; // ++ Needed for notify()
 const Gettext = imports.gettext;
+
+const Util = require("./util");
+
 
 // --- To adapt to the applet --- //
 /**
@@ -163,9 +166,6 @@ function get_default_terminal() {
   return [ret1, ret2]
 } // End of get_default_terminal
 
-//let term = get_default_terminal();
-//global.log("Terminal: exec=" + term[0] + "; exec-arg="+term[1]);
-
 function isFedora() {
   return GLib.find_program_in_path("dnf")
 } // End of isFedora
@@ -235,7 +235,6 @@ Dependencies.prototype = {
 
   are_dependencies_installed: function() {
     let pkgs = get_pkg_to_install();
-    //global.log("are_dependencies_installed: pkgs='"+pkgs.toString()+"'");
 
     if (!NEEDS_FONTS_SYMBOLA)
       return (pkgs.length == 0);
@@ -249,23 +248,16 @@ Dependencies.prototype = {
       Gio.file_new_for_path("%s/.local/share/fonts/Symbola.otf".format(HOME_DIR)).query_exists(null)
     )
     if (!_fonts_installed && isArchLinux()) {
-      //let _ArchlinuxWitnessFile = Gio.file_new_for_path("/etc/arch-release");
-      //let _isArchlinux = _ArchlinuxWitnessFile.query_exists(null);
-      //if (_isArchlinux) {
-        Util.spawnCommandLineAsync("/bin/sh -c \"%s/install_symbola_on_Arch.sh\"".format(SCRIPTS_DIR), null, null);
-        _fonts_installed = true
-      //}
+      Util.spawnCommandLineAsync("/bin/sh -c \"%s/install_symbola_on_Arch.sh\"".format(SCRIPTS_DIR), null, null);
+      _fonts_installed = true
     }
 
     return (pkgs.length == 0 && _fonts_installed);
   }, // End of are_dependencies_installed
 
   check_dependencies: function() {
-    //global.log("!!!!! CHECK DEPENDENCIES !!!!!");
-    //let dependenciesMet = this.depAreMet;
     if (!this.depAreMet && this.are_dependencies_installed()) {
       // At this time, the user just finished to install all dependencies.
-      //global.log("!!!!!!!!!!!!!!!!! Fully functional");
       this.depAreMet=true;
       try {
         if (this.alertNotif != null) {
@@ -317,12 +309,6 @@ Dependencies.prototype = {
         }
       } else {
         Util.spawnCommandLine("apturl apt://%s".format(_pkg_to_install.join(",")));
-        //if (!this.fonts_installed && !this.notifysend_installed)
-          //Util.spawnCommandLine("apturl apt://fonts-symbola,libnotify-bin")
-        //else if (!this.fonts_installed)
-          //Util.spawnCommandLine("apturl apt://fonts-symbola")
-        //else if (!this.notifysend_installed)
-          //Util.spawnCommandLine("apturl apt://libnotify-bin");
       }
       this.depAreMet = false;
     }

@@ -1,8 +1,9 @@
 const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio; // Needed for file infos
-const Util = imports.misc.util;
+//const Util = imports.misc.util;
 const Lang = imports.lang;
 const Signals = imports.signals;
+const Util = require("./util");
 
 const {
   UUID,
@@ -64,8 +65,6 @@ class SensorsReaper {
     let sensors_version = "0.0.0";
     if (this.sensors_program) {
       let [res, output, err, status ] = GLib.spawn_command_line_sync("%s -v".format(this.sensors_program));
-      //log("output: " + output, true);
-      //log("version: " + output.toString().split(" ")[2], true);
       sensors_version = output.toString().split(" ")[2];
     }
 
@@ -86,10 +85,8 @@ class SensorsReaper {
     this.hide_zero_fan = hide_zero_fan;
     this.hide_zero_voltage = hide_zero_voltage;
     let command = this.get_sensors_command();
-    log("command: " + command);
     //if (this.in_fahrenheit)
       //command += "f"; // The -f option of sensors is full of bugs !!!
-    //log("command: " + command, true);
     if (command != undefined) {
       Util.spawnCommandLineAsyncIO(command, Lang.bind (this, function(stdout, stderr, exitCode) {
         if (exitCode == 0) {
@@ -103,7 +100,6 @@ class SensorsReaper {
   }
 
   _sensors_reaped(output) {
-    //log("output: " + output, true);
     this.raw_data = JSON.parse(output);
     var data = {
       "temps": {},
@@ -114,8 +110,6 @@ class SensorsReaper {
     let chips = Object.keys(this.raw_data);
     var adapter = "";
     for (let chip of chips) {
-      //log("chip: " + chip, true);
-
       let features = Object.keys(this.raw_data[chip]);
 
       var complete_name = "";
@@ -124,58 +118,44 @@ class SensorsReaper {
         var feature_dico = {};
         var type_of_feature = "";
 
-        //log("  feature: " + feature, true);
-
         if (feature == "Adapter") {
           adapter = this.raw_data[chip]["Adapter"];
           complete_name = adapter + " " + chip;
-          //log("complete_name: %s".format(complete_name), true);
           continue;
         }
 
         let subfeatures =  Object.keys(this.raw_data[chip][feature]);
         var subfeature_name = "";
         for (let subfeature of subfeatures) {
-          //log("    subfeature: " + subfeature, true);
-
           subfeature_name = subfeature.substring(subfeature.indexOf("_")+1);
-          //log("    subfeature_name: " + subfeature_name, true);
 
           if (subfeature.startsWith("fan")) {
-            //log("this.hide_zero_fan: " + this.hide_zero_fan);
             if  (type_of_feature === "" &&
                 (!this.hide_zero_fan ||
                   (subfeature.endsWith("input") && this.raw_data[chip][feature][subfeature] > 0)
                 )
             ) {
               type_of_feature = "fans";
-              //log("type_of_feature: " + type_of_feature, true);
             }
           } else if (subfeature.startsWith("temp")) {
-            //log("this.hide_zero_fan: " + this.hide_zero_fan);
             if  (type_of_feature === "" &&
                 (!this.hide_zero_temp ||
                   (subfeature.endsWith("input") && this.raw_data[chip][feature][subfeature] > 0)
                 )
             ) {
               type_of_feature = "temps";
-              //log("type_of_feature: " + type_of_feature, true);
             }
           } else if (subfeature.startsWith("intrusion")) {
-            //log("this.hide_zero_fan: " + this.hide_zero_fan);
             if  (type_of_feature === "") {
               type_of_feature = "intrusions";
-              //log("type_of_feature: " + type_of_feature, true);
             }
           } else if (subfeature.startsWith("in")) {
-            //log("this.hide_zero_fan: " + this.hide_zero_fan);
             if  (type_of_feature === "" &&
                 (!this.hide_zero_voltage ||
                   (subfeature.endsWith("input") && this.raw_data[chip][feature][subfeature] > 0)
                 )
             ) {
               type_of_feature = "voltages";
-              //log("type_of_feature: " + type_of_feature, true);
             }
           }
           feature_dico[subfeature_name] = this.raw_data[chip][feature][subfeature];
@@ -187,7 +167,7 @@ class SensorsReaper {
         }
       }
     }
-    log("data: " + JSON.stringify(data, null, "\t"));
+    //log("data: " + JSON.stringify(data, null, "\t"));
     this.data = data;
     this.isRunning = false;
     this.emit("sensors-data-available");

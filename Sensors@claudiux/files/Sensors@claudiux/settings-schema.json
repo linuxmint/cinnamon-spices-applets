@@ -191,7 +191,7 @@
   },
   "interval": {
     "type": "combobox",
-    "default": 5,
+    "default": 1,
     "options": {
       "1": 1,
       "2": 2,
@@ -302,6 +302,7 @@
   "btn_renew_temp_sensors_list": {
     "type": "button",
     "description": "Renew the list of sensors",
+    "dependency": "show_temp",
     "callback": "populate_temp_sensors_in_settings"
   },
   "temp_sensors": {
@@ -365,6 +366,7 @@
   "btn_renew_fan_sensors_list": {
     "type": "button",
     "description": "Renew the list of sensors",
+    "dependency": "show_fan",
     "callback": "populate_fan_sensors_in_settings"
   },
   "fan_sensors": {
@@ -433,6 +435,7 @@
   "btn_renew_volt_sensors_list": {
     "type": "button",
     "description": "Renew the list of sensors",
+    "dependency": "show_volt",
     "callback": "populate_volt_sensors_in_settings"
   },
   "volt_sensors": {
@@ -485,6 +488,7 @@
   "btn_renew_intrusion_sensors_list": {
     "type": "button",
     "description": "Renew the list of sensors",
+    "dependency": "show_intrusion",
     "callback": "populate_intrusion_sensors_in_settings"
   },
   "intrusion_sensors": {
