@@ -1,10 +1,14 @@
-const Gettext = imports.gettext; // ++ Needed for translations
-const GLib = imports.gi.GLib; // ++ Needed for starting programs and translations
+const Gettext = imports.gettext; // Needed for translations
+const GLib = imports.gi.GLib; // Needed for starting programs and translations
 const Gio = imports.gi.Gio; // Needed for file infos
 
 const UUID="Sensors@claudiux";
 
 const HOME_DIR = GLib.get_home_dir();
+const APPLET_DIR = HOME_DIR + "/.local/share/cinnamon/applets/" + UUID;
+const SCRIPTS_DIR = APPLET_DIR + "/scripts";
+const ICONS_DIR = APPLET_DIR + "/icons";
+
 
 /**
  * DEBUG:
@@ -28,27 +32,51 @@ function RELOAD() {
   return _reload.query_exists(null);
 };
 
+/**
+ * QUICK:
+ * Returns whether or not the QUICK file is present in this applet directory ($ touch QUICK)
+ * Used to refresh every 2 minutes.
+ */
 function QUICK() {
   let _quick = Gio.file_new_for_path(HOME_DIR + "/.local/share/cinnamon/applets/" + UUID + "/QUICK");
   return _quick.query_exists(null);
 };
 
-const APPLET_DIR = HOME_DIR + "/.local/share/cinnamon/applets/" + UUID;
-const SCRIPTS_DIR = APPLET_DIR + "/scripts";
-const ICONS_DIR = APPLET_DIR + "/icons";
+/**
+ * ENGLISH:
+ * Returns whether or not the ENGLISH file is present in this applet directory ($ touch ENGLISH)
+ * Used to by-pass translation (only used by the author of this applet).
+ */
+function ENGLISH() {
+  let _english = Gio.file_new_for_path(HOME_DIR + "/.local/share/cinnamon/applets/" + UUID + "/ENGLISH");
+  let _english_exists = _english.query_exists(null);
+  let _locale_saved_mo = Gio.file_new_for_path(HOME_DIR + "/.local/share/locale/fr/" + UUID + ".mo");
+  let _locale_fr_mo =  Gio.file_new_for_path(HOME_DIR + "/.local/share/locale/fr/LC_MESSAGES/" + UUID + ".mo");
+  if (_english_exists) {
+    if (_locale_fr_mo.query_exists(null)) {
+      _locale_fr_mo.move(_locale_saved_mo, Gio.FileCopyFlags.OVERWRITE, null, null)
+    }
+  } else {
+    if (_locale_saved_mo.query_exists(null) && !_locale_fr_mo.query_exists(null)) {
+      _locale_saved_mo.move(_locale_fr_mo, Gio.FileCopyFlags.OVERWRITE, null, null);
+    }
+  }
+  return _english_exists;
+};
 
-// ++ l10n support
+// l10n support
 Gettext.bindtextdomain(UUID, HOME_DIR + "/.local/share/locale");
 Gettext.bindtextdomain("cinnamon-control-center", "/usr/share/locale");
 
-// ++ Always needed if you want localisation/translation support
+// Always needed if you want localisation/translation support
 function _(str, uuid=UUID) {
+  if (ENGLISH()) return str;
   var customTrans = Gettext.dgettext(uuid, str);
   if (customTrans !== str && customTrans !== "") return customTrans;
   return Gettext.gettext(str);
 }
 
-// ++ Useful for logging in .xsession_errors
+// Useful for logging in .xsession_errors
 /**
  * Usage of log and logError:
  * log("Any message here") to log the message only if DEBUG() returns true.
