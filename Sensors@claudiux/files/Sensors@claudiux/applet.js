@@ -72,6 +72,9 @@ class SensorsApplet extends Applet.TextApplet {
     // To be sure that the scripts will be executable:
     Util.spawnCommandLineAsync("/bin/bash -c 'cd %s && chmod 755 *.py *.sh'".format(SCRIPTS_DIR), null, null);
 
+    // Detect language for numeric format:
+    this.num_lang = this._get_lang();
+
     // To check dependencies:
     this.dependencies = new Dependencies();
     this.depCount = 0;
@@ -703,7 +706,7 @@ class SensorsApplet extends Applet.TextApplet {
     }
 
     //let _lang = GLib.getenv("LANGUAGE").replace("_", "-");
-    let _lang = this._get_lang();
+    let _lang = this.num_lang;
     if (this.only_integer_part) {
       _t = Math.round(_t);
       ret = (new Intl.NumberFormat(_lang, { minimumIntegerDigits: this.minimumIntegerDigitsTemp }).format(_t)).toString();
@@ -793,7 +796,9 @@ class SensorsApplet extends Applet.TextApplet {
     let _unit = "V";
     let _sep = (vertical) ? "\n" : " ";
     let ret;
-    let _lang = GLib.getenv("LANGUAGE").replace("_", "-");
+    //let _lang = GLib.getenv("LANGUAGE").replace("_", "-");
+    let _lang = this.num_lang;
+
     let _padstart = 8;
 
     switch(this.volt_unit) {

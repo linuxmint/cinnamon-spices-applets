@@ -1,3 +1,6 @@
+### v1.2.1~20200926
+  * Fixes a bug on distros that have not LANGUAGE in env.
+
 ### v1.2.0~20200925
   * Try to make it compatible for Cinnamon 3.8 -> 4.6.
   * More methods to detect the user's language.
