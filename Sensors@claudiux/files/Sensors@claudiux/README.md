@@ -148,4 +148,4 @@ Claudiux ([@claudiux][claudiux])
 [lmsensors]: https://github.com/lm-sensors/lm-sensors
 [lmsensorsconfigs]: https://github.com/lm-sensors/lm-sensors/tree/master/configs
 [spicesupdate]: https://cinnamon-spices.linuxmint.com/applets/view/309
-[download]: https://cinnamon-spices.linuxmint.com/files/applets/Sensors@claudiux.zip?203a0837-1286-48b8-a44d-90d0b724efdc
+[download]: https://cinnamon-spices.linuxmint.com/files/applets/Sensors@claudiux.zip?f31e6b59-33ff-4ee4-9f7b-2708fa86bc76
