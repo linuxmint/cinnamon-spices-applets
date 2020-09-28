@@ -804,7 +804,7 @@ class UI {
             if (weather.condition.main != null) {
                 mainCondition = weather.condition.main;
                 if (config._translateCondition) {
-                    mainCondition = capitalizeFirstLetter(_(mainCondition));
+                    mainCondition = " " + capitalizeFirstLetter(_(mainCondition));
                 }
             }
             if (weather.condition.description != null) {
