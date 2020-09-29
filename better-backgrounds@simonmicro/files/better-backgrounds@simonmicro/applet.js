@@ -47,6 +47,7 @@ class UnsplashBackgroundApplet extends Applet.TextIconApplet {
         this.settings.bind("image-tag-data", "image_tag_data", this.on_settings_changed);
 
         this.set_applet_icon_name("applet");
+        this._applet_icon.set_pivot_point(0.5, 0.5);
         this.httpAsyncSession = new Soup.SessionAsync();
         Soup.Session.prototype.add_feature.call(this.httpAsyncSession, new Soup.ProxyResolverDefault());
         this.swapChainSwapped = false;
@@ -75,25 +76,28 @@ class UnsplashBackgroundApplet extends Applet.TextIconApplet {
         this._timeout = imports.mainloop.timeout_add_seconds(this.change_time * 60, imports.lang.bind(this, this._auto_change_background));
     }
 
-    _set_icon_opacity(newValue) {
+    _set_icon_rotation(newValue, seconds) {
         if(this.applet_icon_animation)
             Tweener.addTween(this._applet_icon, {
-                opacity: newValue,
-                time: 0.8
+                'rotation-angle-z': newValue,
+//                skipUpdates: 4, //Only render every 4th frame - this does sadly not impact the cpu usage...
+                time: seconds,
+                transition: 'easeInOutQuad'
             });
     }
 
     _icon_animate() {
-        this._icon_opacity = this._icon_opacity == 0 ? 255 : 0;
-        this._set_icon_opacity(this._icon_opacity);
+        this._set_icon_rotation(0, 0);
+        this._set_icon_rotation(360, 2);
+
         //And queue next step...
-        this._animator = imports.mainloop.timeout_add_seconds(1, imports.lang.bind(this, this._icon_animate));
+        this._animator = imports.mainloop.timeout_add_seconds(2.5, imports.lang.bind(this, this._icon_animate));
     }
 
     _icon_start() {
         //Start animation and ensure no other is running (anymore)...
         this._icon_stop();
-        this._animator = imports.mainloop.timeout_add_seconds(1, imports.lang.bind(this, this._icon_animate));
+        this._icon_animate();
     }
 
     _icon_stop() {
@@ -101,8 +105,6 @@ class UnsplashBackgroundApplet extends Applet.TextIconApplet {
         if(this._animator)
             imports.mainloop.source_remove(this._animator);
         this._animator = null;
-        //And fade back to normal
-        this._set_icon_opacity(255);
     }
 
     _auto_change_background() {
