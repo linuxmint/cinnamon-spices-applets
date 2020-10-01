@@ -2284,11 +2284,6 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
 
             this.lastSelectedCategory = null;
 
-            if(visiblePane == "apps") {
-                this._allAppsCategoryButton.actor.style_class = "menu-category-button-selected";
-                this._select_category(null);
-            }
-
             if(this.menuLayout == "stark-menu" || this.quicklinksupdated) {
                 if (visiblePane == "apps")
                     this.switchPanes("favs");
@@ -2319,8 +2314,11 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
             this._previousTreeSelectedActor = null;
             this._previousSelectedActor = null;
             this.closeContextMenu(false);
+	    this._previousVisibleIndex = null;
 
             this._clearAllSelections(false);
+            this._scrollToButton(null, this.applicationsScrollBox);
+	    this._scrollToButton(null, this.categoriesScrollBox);
             this.destroyVectorBox();
         }
     }
