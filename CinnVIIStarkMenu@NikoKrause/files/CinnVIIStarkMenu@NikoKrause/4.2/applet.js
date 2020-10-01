@@ -3735,8 +3735,6 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
     }
 
     _onSearchTextChanged (se, prop) {
-        if (this.leftPane.get_child() == this.favsBox)
-            this.switchPanes("apps");
         let searchString = this.searchEntry.get_text().trim();
         let searchActive = !(searchString == '' || searchString == this.searchEntry.hint_text);
         if (!this.searchActive && !searchActive)
@@ -3751,6 +3749,9 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
         this._clearAllSelections();
 
         if (searchActive) {
+            if (this.leftPane.get_child() == this.favsBox)
+                this.switchPanes("apps");
+
             this.searchEntry.set_secondary_icon(this._searchActiveIcon);
             if (!this._searchIconClickedId) {
                 this._searchIconClickedId =
@@ -3787,7 +3788,7 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
         let regexpPattern = new RegExp(Util.escapeRegExp(pattern));
 
         for (let i = 0; i < buttons.length; i++) {
-            if (buttons[i].type == "recent-clear") {
+            if (buttons[i].type == "recent-clear" || buttons[i].type == "no-recent") {
                 continue;
             }
             let res = buttons[i].searchStrings[0].match(regexpPattern);
