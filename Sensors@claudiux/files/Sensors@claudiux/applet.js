@@ -2,13 +2,11 @@ const St = imports.gi.St;
 const PopupMenu = imports.ui.popupMenu;
 const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio; // Needed for file infos
-//const Util = imports.misc.util;
-const Lang = imports.lang;
 const Mainloop = imports.mainloop;
 const Applet = imports.ui.applet;
 const {AppletSettings} = imports.ui.settings;
-const Gettext = imports.gettext;
-const Extension = imports.ui.extension; // Needed to reload applet
+//const Gettext = imports.gettext;
+const Extension = imports.ui.extension; // Needed to reload this applet
 const ModalDialog = imports.ui.modalDialog;
 
 const Util = require("./util");
@@ -44,6 +42,7 @@ const DEFAULT_APPLET_LABEL = ['🌡', '🤂', '🗲', '⮿'];
  * @returns {number} process id
  *
  * N.B Code from the pomodoro@gregfreeman.org applet. Thanks to its author.
+ * FOR FUTURE DEVELOPMENT
  */
 function spawnCommandAsyncAndGetPid(command, callback = null) {
   let flags = GLib.SpawnFlags.SEARCH_PATH | GLib.SpawnFlags.STDERR_TO_DEV_NULL;
@@ -55,8 +54,9 @@ function spawnCommandAsyncAndGetPid(command, callback = null) {
   return pid;
 }
 
-
-
+/**
+ * Class SensorsApplet
+ */
 class SensorsApplet extends Applet.TextApplet {
 
   constructor(metadata, orientation, panelHeight, instance_id) {
@@ -111,20 +111,12 @@ class SensorsApplet extends Applet.TextApplet {
     // Sensors Reaper:
     this.reaper = new SensorsReaper(this.interval);
     this.reaper.reap_sensors(1*this.strictly_positive_temp, 1*this.strictly_positive_fan, 1*this.strictly_positive_volt);
-    this._connectId = this.reaper.connect("sensors-data-available", () => this.updateUI());
 
-    // Check about dependencies:
-    this.checkDepInterval = undefined;
-    if (this.dependencies.areDepMet()) {
-      // All dependencies are installed. Now, run the loop!:
-      this.isLooping = true;
-      this.loopId = 0;
-      this.reap_sensors();
-    } else {
-      // Some dependencies are missing. Suggest to the user to install them.
-      this.isLooping = false;
-      this.checkDepInterval = setInterval(() => this.dependencies.check_dependencies(), 10000);
-    }
+    // Events:
+    this._connectIds = [];
+    this._connectReaperId = this.reaper.connect("sensors-data-available", () => this.updateUI());
+    this._connectIds.push(this.actor.connect("enter-event", (actor, event) => this.on_enter_event(actor, event)));
+    this._connectIds.push(this.actor.connect("leave-event", (actor, event) => this.on_leave_event(actor, event)));
   }
 
   get_user_settings() {
@@ -214,7 +206,7 @@ class SensorsApplet extends Applet.TextApplet {
       1*this.strictly_positive_volt
     );
 
-    this.loopId = Mainloop.timeout_add_seconds(this.interval, () => this.reap_sensors());
+    this.loopId = Mainloop.timeout_add(this.interval * 1000, () => this.reap_sensors());
   }
 
   /**
@@ -297,9 +289,9 @@ class SensorsApplet extends Applet.TextApplet {
       this.sensors_list[type].set_value(ret);
       this.updateUI();
     }
-    ret = null;
+    Util.unref(ret);
     _known_keys = null;
-    toPush = null;
+    Util.unref(toPush);
     name = null;
     modified = null;
   }
@@ -335,7 +327,6 @@ class SensorsApplet extends Applet.TextApplet {
     if (this.show_temp && this.temp_sensors.length !== 0
         && this.data !== undefined && Object.keys(this.data["temps"]).length != 0) {
       if (this.temp_sensors.length > 0) {
-        //_tooltip += "🌡" + "\n";
         for (let t of this.temp_sensors) {
           if (this.data["temps"][t["sensor"]] !== undefined) {
             if (t["show_in_tooltip"]) {
@@ -356,6 +347,10 @@ class SensorsApplet extends Applet.TextApplet {
               let _crit_temp = this._get_crit_temp(this.data["temps"][t["sensor"]]);
               _tooltip += "  "+ _("crit:") + " " + ((_crit_temp === 0) ? _("n/a") : this._formatted_temp(_crit_temp));
               _tooltip += "\n";
+              _crit_temp = null;
+              _max_temp = null;
+              str_value = null;
+              name = null
             }
           }
         }
@@ -371,7 +366,6 @@ class SensorsApplet extends Applet.TextApplet {
     if (this.show_fan && this.fan_sensors.length !== 0
         && this.data !== undefined && Object.keys(this.data["fans"]).length != 0) {
       if (this.fan_sensors.length > 0) {
-        //_tooltip += "🤂" + "\n";
         for (let f of this.fan_sensors) {
           if (this.data["fans"][f["sensor"]] !== undefined) {
             if (f["show_in_tooltip"]) {
@@ -386,6 +380,9 @@ class SensorsApplet extends Applet.TextApplet {
               let _min_fan = this._get_min_fan(this.data["fans"][f["sensor"]]);
               _tooltip += "  "+ _("min:") + " " + ((_min_fan === 0) ? _("n/a") : this._formatted_fan(_min_fan));
               _tooltip += "\n";
+              _min_fan = null;
+              str_value = null;
+              name = null
             }
           }
         }
@@ -401,7 +398,6 @@ class SensorsApplet extends Applet.TextApplet {
     if (this.show_volt && this.volt_sensors.length !== 0
         && this.data !== undefined && Object.keys(this.data["voltages"]).length != 0) {
       if (this.volt_sensors.length > 0) {
-        //_tooltip += "🗲" + "\n";
         for (let v of this.volt_sensors) {
           if (this.data["voltages"][v["sensor"]] !== undefined) {
             if (v["show_in_tooltip"]) {
@@ -415,6 +411,8 @@ class SensorsApplet extends Applet.TextApplet {
                 "  " + str_value;
               _tooltip += "  "+ _("max:") + " " + this._formatted_voltage(this._get_max_voltage(this.data["voltages"][v["sensor"]]));
               _tooltip += "\n";
+              str_value = null;
+              name = null
             }
           }
         }
@@ -431,7 +429,6 @@ class SensorsApplet extends Applet.TextApplet {
     if (this.show_intrusion && this.intrusion_sensors.length !== 0
         && this.data !== undefined && Object.keys(this.data["intrusions"]).length != 0) {
       if (this.intrusion_sensors.length > 0) {
-        //_tooltip += "⮿" + "\n";
         for (let i of this.intrusion_sensors) {
           if (this.data["intrusions"][i["sensor"]] !== undefined) {
             if (i["show_in_tooltip"]) {
@@ -445,6 +442,9 @@ class SensorsApplet extends Applet.TextApplet {
                 "  <b>" + message + "</b>" :
                 "  " + message;
               _tooltip += "\n";
+              message = null;
+              value = null;
+              name = null
             }
           }
         }
@@ -467,7 +467,7 @@ class SensorsApplet extends Applet.TextApplet {
       this._applet_tooltip.set_markup(_tooltip);
 
     _tooltip = null;
-    _tooltips = null;
+    _tooltips = null
   }
 
   /**
@@ -595,7 +595,8 @@ class SensorsApplet extends Applet.TextApplet {
     this.set_applet_label(_appletLabel);
     this.actor.set_style_class_name(_actor_style);
     _appletLabel = null;
-    this.updateTooltip();
+    if (this.tooltip_must_be_updated)
+      this.updateTooltip();
     this.isUpdatingUI = false;
   }
 
@@ -892,12 +893,16 @@ class SensorsApplet extends Applet.TextApplet {
       this.checkDepInterval = 0;
     }
 
-    if (this.reaper && this._connectId) {
+    if (this.reaper && this._connectReaperId) {
       try {
-        this.reaper.disconnect(this._connectId);
+        this.reaper.disconnect(this._connectReaperId);
       } catch(e) {
-        log("on_applet_reloaded: Unable to disconnect signal %s.".format(this._connectId));
+        log("on_applet_reloaded: Unable to disconnect signal %s.".format(this._connectReaperId));
       }
+    }
+
+    while (this._connectIds.length > 0) {
+      this.actor.disconnect(this._connectIds.pop());
     }
 
     this.kill_all_pids();
@@ -907,6 +912,21 @@ class SensorsApplet extends Applet.TextApplet {
     this.on_applet_reloaded();
 
     this.s.finalize();
+  }
+
+  on_applet_added_to_panel(userEnabled) {
+    // Check about dependencies:
+    this.checkDepInterval = undefined;
+    if (this.dependencies.areDepMet()) {
+      // All dependencies are installed. Now, run the loop!:
+      this.isLooping = true;
+      this.loopId = 0;
+      this.reap_sensors();
+    } else {
+      // Some dependencies are missing. Suggest to the user to install them.
+      this.isLooping = false;
+      this.checkDepInterval = setInterval(() => this.dependencies.check_dependencies(), 10000);
+    }
   }
 
   kill_all_pids() {
@@ -968,6 +988,17 @@ class SensorsApplet extends Applet.TextApplet {
       }
     );
     dialog.open();
+  }
+
+  /**
+   * Events
+   */
+  on_enter_event(actor, event) {
+    this.tooltip_must_be_updated = true;
+  }
+
+  on_leave_event(actor, event) {
+    this.tooltip_must_be_updated = false;
   }
 
   /**

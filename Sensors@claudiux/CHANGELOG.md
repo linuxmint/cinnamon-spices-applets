@@ -1,3 +1,6 @@
+### v1.3.0~20201002
+  * Avoid wasted processor time and memory leaks.
+
 ### v1.2.1~20200926
   * Fixes a bug on distros that have not LANGUAGE in env.
 
