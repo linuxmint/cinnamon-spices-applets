@@ -64,15 +64,20 @@ class SensorsReaper {
 
     let sensors_version = "0.0.0";
     if (this.sensors_program) {
-      let [res, output, err, status ] = GLib.spawn_command_line_sync("%s -v".format(this.sensors_program));
+      //let [res, output, err, status ] = GLib.spawn_command_line_sync("%s -v".format(this.sensors_program));
+      let output = GLib.spawn_command_line_sync("%s -v".format(this.sensors_program))[1];
       sensors_version = output.toString().split(" ")[2];
+      output = null
     }
 
     if (sensors_version != "0.0.0") {
-      if (versionCompare(sensors_version, "3.6.0") >= 0)
+      if (versionCompare(sensors_version, "3.6.0") >= 0) {
         this.sensors_command = this.sensors_program + " -j";
-      else
+        this.sensors_is_json_compatible = true
+      } else {
         this.sensors_command = this.sensors_program + " -u";
+        this.sensors_is_json_compatible = false
+      }
     } else {
       return undefined
     }
@@ -84,17 +89,17 @@ class SensorsReaper {
     this.hide_zero_temp = hide_zero_temp;
     this.hide_zero_fan = hide_zero_fan;
     this.hide_zero_voltage = hide_zero_voltage;
-    let command = this.get_sensors_command();
     //if (this.in_fahrenheit)
       //command += "f"; // The -f option of sensors is full of bugs !!!
-    if (command != undefined) {
-      Util.spawnCommandLineAsyncIO(command, Lang.bind (this, function(stdout, stderr, exitCode) {
+    if (this.sensors_command != undefined) {
+      let subProcess = Util.spawnCommandLineAsyncIO(this.sensors_command, Lang.bind (this, function(stdout, stderr, exitCode) {
         if (exitCode == 0) {
-          if (command.endsWith("j"))
+          if (this.sensors_is_json_compatible)
             this._sensors_reaped(stdout);
           else
-            this._sensors_reaped(this.convert_to_json(stdout));
+            this._sensors_reaped(convert_to_json(stdout));
         }
+        Util.unref(subProcess);
       }));
     }
   }
@@ -161,51 +166,24 @@ class SensorsReaper {
           feature_dico[subfeature_name] = this.raw_data[chip][feature][subfeature];
         }
 
+        Util.unref(subfeatures);
+
         if (type_of_feature !== "") {
           data[type_of_feature][complete_name + ": " + feature] = feature_dico;
-          type_of_feature = "";
+          type_of_feature = null;
+          feature_dico = null;
         }
       }
+      complete_name = null;
+      Util.unref(features)
     }
     //log("data: " + JSON.stringify(data, null, "\t"));
     this.data = data;
+    data = null;
+    Util.unref(chips);
+    adapter = null;
     this.isRunning = false;
     this.emit("sensors-data-available");
-  }
-
-  convert_to_json(raw) {
-    let ret = {};
-    let lines = raw.split("\n");
-
-    var new_chip = true;
-    var chip = "";
-    var feature = "";
-    for (let line of lines) {
-      if (line.trim() == "") {
-        new_chip = true;
-        continue;
-      }
-      if (new_chip) {
-        chip = line.trim();
-        ret[chip] = {};
-        new_chip = false;
-        continue;
-      }
-      if (line.startsWith("Adapter:")) {
-        ret[chip]["Adapter"] = line.split(": ")[1];
-        continue;
-      }
-      if (line.startsWith("  ")) {
-        let [subfeature, value] = line.trim().split(": ");
-        ret[chip][feature][subfeature] = (value*1000/1000).toFixed(3);
-        continue;
-      }
-      feature = line.split(":")[0];
-      ret[chip][feature] = {};
-    }
-    lines = null;
-    log(JSON.stringify(ret, null, "\t"));
-    return JSON.stringify(ret, null, "\t");
   }
 
   get_sensors_data() {
@@ -235,6 +213,42 @@ class SensorsReaper {
   get_refresh_interval_ms() {
     return 1000 * this.refresh_interval
   }
+}
+
+function convert_to_json(raw) {
+  let ret = {};
+  let lines = raw.split("\n");
+
+  var new_chip = true;
+  var chip = "";
+  var feature = "";
+  for (let line of lines) {
+    if (line.trim() == "") {
+      new_chip = true;
+      continue;
+    }
+    if (new_chip) {
+      chip = line.trim();
+      ret[chip] = {};
+      new_chip = false;
+      continue;
+    }
+    if (line.startsWith("Adapter:")) {
+      ret[chip]["Adapter"] = line.split(": ")[1];
+      continue;
+    }
+    if (line.startsWith("  ")) {
+      let [subfeature, value] = line.trim().split(": ");
+      ret[chip][feature][subfeature] = (value*1000/1000).toFixed(3);
+      continue;
+    }
+    feature = line.split(":")[0];
+    ret[chip][feature] = {};
+  }
+  lines = null;
+  ret = JSON.stringify(ret, null, "\t");
+  log(ret);
+  return ret;
 }
 
 Signals.addSignalMethods(SensorsReaper.prototype);

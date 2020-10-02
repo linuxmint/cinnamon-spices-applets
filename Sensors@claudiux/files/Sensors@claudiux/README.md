@@ -22,6 +22,8 @@ Any suggestion to improve this _Sensors@claudiux_ applet is welcome.
 
   * The menu of this applet gives you direct access to the different kinds of settings, and contains useful shortcuts.
 
+  * Avoid wasted processor time and memory leaks.
+
 ## Dependencies
 
 This applet needs three packages:
@@ -136,6 +138,17 @@ To avoid this file flooding, please install the [Sanitize ~/.xsession-errors][sa
 
 Any contribution or translation is welcome!
 
+### Available translations and their authors
+
+| Translation | Code | Author (Github account) |
+| ---:|:---:|  --- |
+| Dutch | nl | Jurien ([@French77](https://github.com/French77)) |
+| French | fr | claudiux ([@claudiux][claudiux]) |
+| Spanish | es | claudiux ([@claudiux][claudiux]) |
+
+_Thank you very much to all of these translators!_
+
+
 ## Thank the author
 
 If you think this Cinnamon applet is useful, then please take the time to log in with your Github account and click on the star at the top of this page. It really encourages me!
@@ -148,4 +161,4 @@ Claudiux ([@claudiux][claudiux])
 [lmsensors]: https://github.com/lm-sensors/lm-sensors
 [lmsensorsconfigs]: https://github.com/lm-sensors/lm-sensors/tree/master/configs
 [spicesupdate]: https://cinnamon-spices.linuxmint.com/applets/view/309
-[download]: https://cinnamon-spices.linuxmint.com/files/applets/Sensors@claudiux.zip?f31e6b59-33ff-4ee4-9f7b-2708fa86bc76
+[download]: https://cinnamon-spices.linuxmint.com/files/applets/Sensors@claudiux.zip?084ff45b-1f17-4e68-8ffb-b47fb54008f9
