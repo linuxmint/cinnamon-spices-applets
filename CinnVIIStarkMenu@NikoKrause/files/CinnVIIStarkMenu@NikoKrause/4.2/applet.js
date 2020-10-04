@@ -1847,7 +1847,7 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
         this.settings.bind("show-category-icons", "showCategoryIcons", () => this._updateShowIcons(this.categoriesBox, this.showCategoryIcons));
         this.settings.bind("show-application-icons", "showApplicationIcons", () => this._updateShowIcons(this.applicationsBox, this.showApplicationIcons));
         this.settings.bind("show-favorite-icons", "showFavoriteIcons", () => this._updateShowIcons(this.favoritesBox, this.showFavoriteIcons));
-        this.settings.bind("show-apps-description-on-buttons", "showAppsDescriptionOnButtons", this._doRefresh);
+        this.settings.bind("show-apps-description-on-buttons", "showAppsDescriptionOnButtons", () => this.queueRefresh(REFRESH_ALL_MASK));
 
         this.settings.bind("enable-animation", "enableAnimation", null);
 
