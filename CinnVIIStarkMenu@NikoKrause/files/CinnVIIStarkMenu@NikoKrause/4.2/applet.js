@@ -1388,8 +1388,8 @@ class ShutdownMenu extends AppPopupSubMenuMenuItem {
         this.label.destroy();
         this.icon = new St.Icon({
             style_class: 'popup-menu-icon',
-            icon_type: St.IconType.FULLCOLOR,
-            icon_name: 'forward',
+            icon_type: St.IconType.SYMBOLIC,
+            icon_name: 'pan-end',
             icon_size: ICON_SIZE
         });
         this.addActor(this.icon);
