@@ -678,7 +678,7 @@ class PlaceButton extends SimpleMenuItem {
             selectedAppId = selectedAppId.substr(fileIndex + 7);
 
         if (selectedAppId === "home" || selectedAppId === "desktop" || selectedAppId === "connect") {
-        	selectedAppId = place.name
+            selectedAppId = place.name
         }
 
         super(applet, { name: place.name,
@@ -2314,11 +2314,11 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
             this._previousTreeSelectedActor = null;
             this._previousSelectedActor = null;
             this.closeContextMenu(false);
-	    this._previousVisibleIndex = null;
+            this._previousVisibleIndex = null;
 
             this._clearAllSelections(false);
             this._scrollToButton(null, this.applicationsScrollBox);
-	    this._scrollToButton(null, this.categoriesScrollBox);
+            this._scrollToButton(null, this.categoriesScrollBox);
             this.destroyVectorBox();
         }
     }
@@ -3162,7 +3162,7 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
                 break;
             }
         }
-        
+
         if (!this.showPlaces) {
             return;
         }
@@ -3192,7 +3192,7 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
         }
 
         this._recentButtons = [];
-        
+
         for (let i = 0; i < this._categoryButtons.length; i++) {
             if (this._categoryButtons[i].categoryId === 'recent') {
                 this._categoryButtons[i].destroy();
@@ -3201,7 +3201,7 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
                 break;
             }
         }
-            
+
         if (!this.privacy_settings.get_boolean(REMEMBER_RECENT_KEY)) {
             return;
         }
@@ -3853,7 +3853,7 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
         }
 
         this._displayButtons(null, buttons, acResults);
-	
+
         let numberResults = buttons.length + acResults.length;
         if (numberResults == 0)
             this.resultsFoundButton.label.set_text(_("No results found"));
