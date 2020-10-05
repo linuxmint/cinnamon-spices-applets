@@ -9,6 +9,33 @@ const APPLET_DIR = HOME_DIR + "/.local/share/cinnamon/applets/" + UUID;
 const SCRIPTS_DIR = APPLET_DIR + "/scripts";
 const ICONS_DIR = APPLET_DIR + "/icons";
 
+const versionCompare = (left, right) => {
+  if (typeof left + typeof right != "stringstring")
+    return false;
+
+  let a = left.split(".");
+  let b = right.split(".");
+  let len = Math.min(a.length, b.length);
+  for (let i = 0; i < len; i++) {
+    let l = parseInt(a[i], 10);
+    let r = parseInt(b[i], 10);
+    if (isNaN(l) || isNaN(r))
+      return false;
+    if (l > r) {
+      return 1;
+    } else if (l < r) {
+      return -1;
+    }
+  }
+  return 0;
+};
+
+var xs_path = "/usr/bin/xlet-settings";
+
+if (versionCompare(GLib.getenv('CINNAMON_VERSION').toString(), "4.2") < 0)
+  xs_path = SCRIPTS_DIR + "/xs.py";
+
+const XS_PATH = xs_path;
 
 /**
  * DEBUG:
@@ -97,10 +124,12 @@ module.exports = {
   APPLET_DIR,
   SCRIPTS_DIR,
   ICONS_DIR,
+  XS_PATH,
   _,
   DEBUG,
   RELOAD,
   QUICK,
   log,
-  logError
+  logError,
+  versionCompare
 };

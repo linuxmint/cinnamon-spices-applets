@@ -1,3 +1,7 @@
+### v1.4.0~20201006
+  * Add script `xs.py` for compatibility with Cinnamon 3.8 and 4.0.
+  * Rewritten function `versionCompare` (in `constants.js`).
+
 ### v1.3.0~20201002
   * Avoid wasted processor time and memory leaks.
 

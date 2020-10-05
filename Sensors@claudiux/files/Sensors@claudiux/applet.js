@@ -18,6 +18,7 @@ const {
   APPLET_DIR,
   SCRIPTS_DIR,
   ICONS_DIR,
+  XS_PATH,
   _,
   DEBUG,
   RELOAD,
@@ -320,6 +321,8 @@ class SensorsApplet extends Applet.TextApplet {
    * updateTooltip: updates the tooltil of this applet.
    */
   updateTooltip() {
+    if (!this.isUpdatingUI) return;
+
     var _tooltip = "";
     var _tooltips = [];
 
@@ -517,7 +520,10 @@ class SensorsApplet extends Applet.TextApplet {
     nbr_already_shown = 0;
     if (this.show_fan && this.fan_sensors.length !== 0
         && this.data !== undefined && Object.keys(this.data["fans"]).length != 0) {
+
+      // This pushed "" is useless when there is no sensor to display:
       if (this.label_parts.length > 0) this.label_parts.push("");
+
       for (let f of this.fan_sensors) {
         if (f["show_in_panel"]) {
           let _fan = this.data["fans"][f["sensor"]]["input"];
@@ -533,14 +539,18 @@ class SensorsApplet extends Applet.TextApplet {
           nbr_already_shown += 1;
         }
       }
-      if (nbr_already_shown === 0) this.label_parts.pop();
+
+      if (nbr_already_shown === 0) this.label_parts.pop(); // Deletes the useless "" pushed in this.label_parts.
     }
 
     // Voltages:
     nbr_already_shown = 0;
     if (this.show_volt && this.volt_sensors.length !== 0
         && this.data !== undefined && Object.keys(this.data["voltages"]).length != 0) {
+
+      // This pushed "" is useless when there is no sensor to display:
       if (this.label_parts.length > 0) this.label_parts.push("");
+
       for (let v of this.volt_sensors) {
         if (v["show_in_panel"]) {
           let _voltage = this.data["voltages"][v["sensor"]]["input"];
@@ -556,14 +566,18 @@ class SensorsApplet extends Applet.TextApplet {
           nbr_already_shown += 1;
         }
       }
-      if (nbr_already_shown === 0) this.label_parts.pop();
+
+      if (nbr_already_shown === 0) this.label_parts.pop(); // Deletes the useless "" pushed in this.label_parts.
     }
 
     // Intrusion:
     nbr_already_shown = 0;
     if (this.show_intrusion && !this.strictly_positive_intrusion && this.intrusion_sensors.length !== 0
         && this.data !== undefined && Object.keys(this.data["intrusions"]).length != 0) {
+
+      // This pushed "" is useless when there is no sensor to display:
       if (this.label_parts.length > 0) this.label_parts.push("");
+
       for (let i of this.intrusion_sensors) {
         if (i["show_in_panel"]) {
           let _intrusion = this.data["intrusions"][i["sensor"]]["alarm"];
@@ -579,7 +593,8 @@ class SensorsApplet extends Applet.TextApplet {
           nbr_already_shown += 1;
         }
       }
-      if (nbr_already_shown === 0) this.label_parts.pop();
+
+      if (nbr_already_shown === 0) this.label_parts.pop(); // Deletes the useless "" pushed in this.label_parts.
     }
 
     if (this.label_parts.length === 0) {
@@ -592,9 +607,11 @@ class SensorsApplet extends Applet.TextApplet {
         }
       }
     }
+
     this.set_applet_label(_appletLabel);
     this.actor.set_style_class_name(_actor_style);
     _appletLabel = null;
+
     if (this.tooltip_must_be_updated)
       this.updateTooltip();
     this.isUpdatingUI = false;
@@ -634,7 +651,7 @@ class SensorsApplet extends Applet.TextApplet {
     _temp_button.connect("activate",
       (event) => {
         this.kill_all_pids();
-        Util.spawnCommandLineAsync("/usr/bin/xlet-settings applet %s -t 1 &".format(UUID))
+        Util.spawnCommandLineAsync("%s applet %s -t 1 &".format(XS_PATH, UUID))
       }
     );
     this.menu.addMenuItem(_temp_button);
@@ -644,7 +661,7 @@ class SensorsApplet extends Applet.TextApplet {
     _fan_button.connect("activate",
       (event) => {
         this.kill_all_pids();
-        this.pids.push(Util.spawnCommandLine("/usr/bin/xlet-settings applet %s -t 2 &".format(UUID)))
+        this.pids.push(Util.spawnCommandLine("%s applet %s -t 2 &".format(XS_PATH, UUID)))
       }
     );
     this.menu.addMenuItem(_fan_button);
@@ -654,7 +671,7 @@ class SensorsApplet extends Applet.TextApplet {
     _voltage_button.connect("activate",
       (event) => {
         this.kill_all_pids();
-        this.pids.push(Util.spawnCommandLine("/usr/bin/xlet-settings applet %s -t 3 &".format(UUID)))
+        this.pids.push(Util.spawnCommandLine("%s applet %s -t 3 &".format(XS_PATH, UUID)))
       }
     );
     this.menu.addMenuItem(_voltage_button);
@@ -664,7 +681,7 @@ class SensorsApplet extends Applet.TextApplet {
     _intrusion_button.connect("activate",
       (event) => {
         this.kill_all_pids();
-        this.pids.push(Util.spawnCommandLine("/usr/bin/xlet-settings applet %s -t 4 &".format(UUID)))
+        this.pids.push(Util.spawnCommandLine("%s applet %s -t 4 &".format(XS_PATH, UUID)))
       }
     );
     this.menu.addMenuItem(_intrusion_button);
