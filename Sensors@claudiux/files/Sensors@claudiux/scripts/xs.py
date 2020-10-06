@@ -298,9 +298,8 @@ class MainWindow(object):
             if multi_instance:
                 try:
                     int(instance_id)
-                except Exception as e:
-                    traceback.print_exc(e)
-                    print("multi-instance should have file names of the form [instance-id].json")
+                except Exception:
+                    traceback.print_exc()
                     continue # multi-instance should have file names of the form [instance-id].json
 
                 instance_exists = False
@@ -332,8 +331,8 @@ class MainWindow(object):
                         if key in ("description", "tooltip", "units"):
                             try:
                                 settings_map[setting][key] = translate(self.uuid, settings_map[setting][key])
-                            except Exception as e:
-                                traceback.print_exc(e)
+                            except Exception:
+                                traceback.print_exc()
                         elif key in "options":
                             new_opt_data = collections.OrderedDict()
                             opt_data = settings_map[setting][key]
@@ -472,8 +471,8 @@ class MainWindow(object):
                 spec.loader.exec_module(module)
                 self.custom_modules[file_name] = module
 
-        except Exception as e:
-            traceback.print_exc(e)
+        except Exception:
+            traceback.print_exc()
             print('problem loading custom widget')
             return None
 
