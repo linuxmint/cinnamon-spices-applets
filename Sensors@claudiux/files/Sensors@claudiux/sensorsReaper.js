@@ -16,24 +16,9 @@ const {
   RELOAD,
   QUICK,
   log,
-  logError
+  logError,
+  versionCompare
 } = require("./constants");
-
-const versionCompare = (left, right) => {
-  if (typeof left + typeof right != 'stringstring')
-    return false;
-  var a = left.split('.'),
-      b = right.split('.'),
-      len = Math.max(a.length, b.length);
-  for (let i = 0; i < len; i++) {
-    if ((a[i] && !b[i] && parseInt(a[i]) > 0) || (parseInt(a[i]) > parseInt(b[i]))) {
-      return 1;
-    } else if ((b[i] && !a[i] && parseInt(b[i]) > 0) || (parseInt(a[i]) < parseInt(b[i]))) {
-      return -1;
-    }
-  }
-  return 0;
-};
 
 /**
  * Class SensorsReaper
@@ -99,7 +84,8 @@ class SensorsReaper {
           else
             this._sensors_reaped(convert_to_json(stdout));
         }
-        Util.unref(subProcess);
+        //Util.unref(subProcess);
+        subProcess.send_signal(9);
       }));
     }
   }
