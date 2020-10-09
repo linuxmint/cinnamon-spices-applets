@@ -163,9 +163,14 @@ class OpenWeatherMap implements WeatherProvider {
 					volume: hour.snow["1h"],
 					type: "snow"
 				}
-            }
+			}
+			
+			if (!!hour.pop && forecast.precipitation)
+				forecast.precipitation.chance = hour.pop * 100;
+
             hourly.push(forecast);
-          }
+		  }
+		  
           weather.hourlyForecasts = hourly;
           return weather; 
         }

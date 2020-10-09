@@ -178,6 +178,8 @@ var OpenWeatherMap = (function () {
                         type: "snow"
                     };
                 }
+                if (!!hour.pop && forecast.precipitation)
+                    forecast.precipitation.chance = hour.pop * 100;
                 hourly.push(forecast);
             }
             weather.hourlyForecasts = hourly;
