@@ -1,3 +1,5 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 function importModule(path) {
     if (typeof require !== 'undefined') {
         return require('./' + path);

@@ -1,3 +1,5 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 function importModule(path) {
     if (typeof require !== 'undefined') {
         return require('./' + path);
@@ -28,7 +30,7 @@ class USWeather {
         this.prettyName = "US Weather";
         this.name = "US Weather";
         this.maxForecastSupport = 7;
-        this.website = "https://www.metoffice.gov.uk/";
+        this.website = "https://www.weather.gov/";
         this.maxHourlyForecastSupport = 156;
         this.sitesUrl = "https://api.weather.gov/points/";
         this.grid = null;

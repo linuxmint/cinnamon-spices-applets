@@ -1,3 +1,4 @@
+"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -34,6 +35,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+Object.defineProperty(exports, "__esModule", { value: true });
 function importModule(path) {
     if (typeof require !== 'undefined') {
         return require('./' + path);
@@ -64,7 +66,7 @@ var USWeather = (function () {
         this.prettyName = "US Weather";
         this.name = "US Weather";
         this.maxForecastSupport = 7;
-        this.website = "https://www.metoffice.gov.uk/";
+        this.website = "https://www.weather.gov/";
         this.maxHourlyForecastSupport = 156;
         this.sitesUrl = "https://api.weather.gov/points/";
         this.grid = null;
