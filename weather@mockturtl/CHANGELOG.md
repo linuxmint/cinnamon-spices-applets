@@ -1,5 +1,10 @@
 # Changelog
 
+## 2.6.6
+
+* Fixes [#3238](https://github.com/linuxmint/cinnamon-spices-applets/issues/3238)
+* Adds precipitation chance for OpenWeatherMap hourly weather
+
 ## 2.6.5
 
 * Add basic Location store, now it's easier to switch between manual locations
