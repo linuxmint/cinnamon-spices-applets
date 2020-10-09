@@ -1,7 +1,7 @@
 {
     "compilerOptions": {
         "lib": ["es2017"],
-        "module": "None",
+        "module": "CommonJS",
         "target": "es5",
         "noImplicitAny": true,
         "removeComments": true,
