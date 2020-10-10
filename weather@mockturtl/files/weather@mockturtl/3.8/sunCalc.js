@@ -1,5 +1,3 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 var PI = Math.PI, sin = Math.sin, cos = Math.cos, tan = Math.tan, asin = Math.asin, atan = Math.atan2, acos = Math.acos, rad = PI / 180;
 var dayMs = 1000 * 60 * 60 * 24, J1970 = 2440588, J2000 = 2451545;
 function toJulian(date) { return date.valueOf() / dayMs - 0.5 + J1970; }
