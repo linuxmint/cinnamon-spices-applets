@@ -137,11 +137,11 @@ function criticalNotify(msg, details, icon, button=[]) {
 /**
  * Class SpicesUpdate
  */
-class SpicesUpdate extends Applet.TextIconApplet {
+class SpicesUpdate extends Applet.IconApplet {
 
     constructor (metadata, orientation, panelHeight, instance_id) {
         super(orientation, panelHeight, instance_id);
-        this.instanceId = instance_id;
+        this.instanceId = instance_id.toString();
         this.setAllowedLayout(Applet.AllowedLayout.BOTH); // Can be used on horizontal or vertical panels.
         this.set_applet_icon_symbolic_name("spices-update");
         this.default_tooltip = "%s %s".format(_("Spices Update"), metadata.version);
@@ -155,6 +155,8 @@ class SpicesUpdate extends Applet.TextIconApplet {
         this.interval = 0;
         this.ui_scale = global.ui_scale;
 
+        // To alert user when the Cinnamon web-server is down:
+        this.cinnamon_server_is_down = false;
 
         // To be sure that the scripts will be executable:
         Util.spawnCommandLineAsync("/bin/bash -c 'cd %s && chmod 755 *.py *.sh'".format(SCRIPTS_DIR), null, null);
@@ -216,6 +218,13 @@ class SpicesUpdate extends Applet.TextIconApplet {
 
         this.testblink = [];
 
+        this.details_by_uuid = {};
+        this.forceRefresh = false;
+        this.refresh_requested = false;
+        this.applet_running = true;
+        this.loopId = 0;
+        this.first_loop = true; // To do nothing for 1 minute.
+
         // ++ Settings
         this.get_SU_settings();
 
@@ -244,24 +253,19 @@ class SpicesUpdate extends Applet.TextIconApplet {
         this.define_badge();
         this.signals = new SignalManager(null);
         this.signals.connect(global, "scale-changed", () => this.updateUI());
-
-        this.details_by_uuid = {};
-        this.forceRefresh = false;
-        this.refresh_requested = false;
-        this.applet_running = true;
-        this.loopId = 0;
-        this.first_loop = true; // To do nothing for 1 minute.
-        this.on_settings_changed();
-        // Run the loop !
-        this.iteration = 0;
-        this.isLooping = false;
-        this.new_loop_requested = false;
-        this.updateLoop();
         // End of constructor
     }
 
     get_SU_settings() {
         this.settings = new Settings.AppletSettings(this, UUID, this.instance_id);
+
+        // Setting the this.refreshInterval value:
+        this.settings.bind(
+            "general_frequency",
+            "general_frequency",
+            this.on_frequency_changed.bind(this)
+        );
+        this.refreshInterval = QUICK() ? 120 * this.general_frequency : 3600 * this.general_frequency;
 
         if (this.settings.getValue("first_time")) {
             // This part of the code will only be executed the very first time SpicesUpdate 6+ is used.
@@ -283,10 +287,79 @@ class SpicesUpdate extends Applet.TextIconApplet {
                 _("Certain parameters require your vigilance: some may have been modified; others are new.") +
                 "\n\n" + _("Please check your settings using the menu of the SpicesUpdate applet or the button below."),
                 icon,
-                [_("Spices Update Settings"), "open-settings", "xlet-settings applet SpicesUpdate@claudiux %s".format(this.instanceId.toString())]
+                [_("Spices Update Settings"), "open-settings", "xlet-settings applet SpicesUpdate@claudiux -i %s".format(this.instanceId)]
                 );
-
         }
+
+        // General settings
+        this.settings.bind(
+            "general_first_check",
+            "general_first_check",
+            null
+        );
+        this.first_loop = this.general_first_check;
+
+        this.settings.bind(
+            "general_next_check_date",
+            "general_next_check_date",
+            null
+        );
+        let now = Math.ceil(Date.now()/1000);
+        if (this.general_next_check_date === 0) {
+            this.general_next_check_date = now + this.refreshInterval;
+            //logError("now=%s ; this.general_next_check_date=%s".format(
+            //  now.toString(),
+            //  this.general_next_check_date.toString())
+            //);
+        }
+
+        this.settings.bind(
+            "general_warning",
+            "general_warning",
+            this.updateUI.bind(this)
+        );
+
+        this.settings.bind(
+            "events_color",
+            "events_color",
+            this.updateUI.bind(this)
+        );
+
+        this.settings.bind(
+            "general_notifications",
+            "general_notifications",
+            this.on_settings_changed.bind(this)
+        );
+
+        this.settings.bind(
+            "general_details_requested",
+            "details_requested",
+            null
+        );
+
+        this.settings.bind(
+            "general_show_updateall_button",
+            "general_show_updateall_button",
+            null
+        );
+
+        this.settings.bind(
+            "general_type_notif",
+            "general_type_notif",
+            null
+        );
+
+        this.settings.bind(
+            "displayType",
+            "displayType",
+            this.on_display_type_changed.bind(this)
+        );
+
+        this.settings.bind(
+            "general_hide",
+            "general_hide",
+            this.on_display_type_changed.bind(this)
+        );
 
         // Applets
         this.settings.bind(
@@ -392,82 +465,6 @@ class SpicesUpdate extends Applet.TextIconApplet {
             this.populateSettingsUnprotectedThemes.bind(this)
         );
 
-        // General settings
-        this.settings.bind(
-            "general_frequency",
-            "general_frequency",
-            this.on_frequency_changed.bind(this)
-        );
-        this.refreshInterval = QUICK() ? 120 * this.general_frequency : 3600 * this.general_frequency;
-
-        this.settings.bind(
-            "general_first_check",
-            "general_first_check",
-            null
-        );
-        this.first_loop = this.general_first_check;
-
-        this.settings.bind(
-            "general_next_check_date",
-            "general_next_check_date",
-            null
-        );
-        let now = Math.ceil(Date.now()/1000);
-        if (this.general_next_check_date === 0) {
-            this.general_next_check_date = now + this.refreshInterval;
-            //logError("now=%s ; this.general_next_check_date=%s".format(
-            //  now.toString(),
-            //  this.general_next_check_date.toString())
-            //);
-        }
-
-        this.settings.bind(
-            "general_warning",
-            "general_warning",
-            this.updateUI.bind(this)
-        );
-
-        this.settings.bind(
-            "events_color",
-            "events_color",
-            this.updateUI.bind(this)
-        );
-
-        this.settings.bind(
-            "general_notifications",
-            "general_notifications",
-            this.on_settings_changed.bind(this)
-        );
-
-        this.settings.bind(
-            "general_details_requested",
-            "details_requested",
-            null
-        );
-
-        this.settings.bind(
-            "general_show_updateall_button",
-            "general_show_updateall_button",
-            null
-        );
-
-        this.settings.bind(
-            "general_type_notif",
-            "general_type_notif",
-            null
-        );
-
-        this.settings.bind(
-            "displayType",
-            "displayType",
-            this.on_display_type_changed.bind(this)
-        );
-
-        this.settings.bind(
-            "general_hide",
-            "general_hide",
-            this.on_display_type_changed.bind(this)
-        );
         // End of get_SU_settings
     }
 
@@ -692,7 +689,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
     on_orientation_changed (orientation) {
         this.orientation = orientation;
         this.isHorizontal = !(this.orientation == St.Side.LEFT || this.orientation == St.Side.RIGHT);
-        this._set_main_label();
+        //this._set_main_label();
         // End of on_orientation_changed
     }
 
@@ -750,14 +747,14 @@ class SpicesUpdate extends Applet.TextIconApplet {
 
     on_display_type_changed() {
         // Label
-        this._set_main_label();
+        //this._set_main_label();
         // End of on_display_type_changed
     }
 
     // ++ Function called when settings are changed
     on_settings_changed() {
         // Label
-        this._set_main_label();
+        //this._set_main_label();
 
         // Refresh intervall:
         this.refreshInterval = 3600 * this.general_frequency;
@@ -1132,25 +1129,22 @@ class SpicesUpdate extends Applet.TextIconApplet {
 
         //Should we renew the cache?
         let is_to_download = false;
-        if (this.forceRefresh === true || force === true) {
-            is_to_download = true;
-        } else {
-            if (jsonFile.query_exists(null)) {
-                let jsonModifTime = jsonFile.query_info("time::modified", Gio.FileQueryInfoFlags.NONE, null).get_modification_time().tv_sec;
-                let currentTime = Math.round(new Date().getTime()/1000.0); // GLib.date_time_new_local();
-                if (currentTime - jsonModifTime > Math.round(this.refreshInterval/2)) {
-                    // the cache is too old
-                    is_to_download = true
-                }
-            } else {
-                // the cache doesn't exist
-                let jsonDirName = CACHE_DIR + "/" + this._get_singular_type(type);
-                GLib.mkdir_with_parents(jsonDirName, 0o755);
+
+        if (jsonFile.query_exists(null)) {
+            let jsonModifTime = jsonFile.query_info("time::modified", Gio.FileQueryInfoFlags.NONE, null).get_modification_time().tv_sec;
+            let currentTime = Math.round(new Date().getTime()/1000.0); // GLib.date_time_new_local();
+            if (currentTime - jsonModifTime > Math.round(this.refreshInterval/2)) {
+                // the cache is too old
                 is_to_download = true
             }
+        } else {
+            // the cache doesn't exist
+            let jsonDirName = CACHE_DIR + "/" + this._get_singular_type(type);
+            GLib.mkdir_with_parents(jsonDirName, 0o755);
+            is_to_download = true
         }
 
-        if (is_to_download === true) {
+        if (is_to_download === true || this.forceRefresh === true || force === true) {
             // replace local json cache file by the remote one
             let message = Soup.Message.new("GET", URL_MAP[type] + GLib.uuid_string_random());
             _httpSession.queue_message(message, Lang.bind(this, this._on_response_download_cache, type, force));
@@ -1160,7 +1154,8 @@ class SpicesUpdate extends Applet.TextIconApplet {
     }
 
     _on_response_download_cache(session, message, type, force) {
-        if (message.status_code === Soup.KnownStatusCode.OK) {
+        this.cinnamon_server_is_down = message.status_code !== Soup.KnownStatusCode.OK;
+        if (!this.cinnamon_server_is_down) {
             let data = message.response_body.data.toString();
             GLib.file_set_contents(CACHE_MAP[type], data); // Records the new cache in the right place.
             this._load_cache(type);
@@ -1403,7 +1398,9 @@ class SpicesUpdate extends Applet.TextIconApplet {
         let iteration = this.iteration;
         // Queue of the http request
         _httpSession.queue_message(msg, Lang.bind(this, function(_httpSession, message) {
-            if (message.status_code === Soup.KnownStatusCode.OK && iteration === this.iteration) {
+            this.cinnamon_server_is_down = message.status_code !== Soup.KnownStatusCode.OK;
+
+            if (!this.cinnamon_server_is_down && iteration === this.iteration) {
                 let data = message.response_body.data;
                 let result = subject_regexp.exec(data.toString());
                 this.details_by_uuid[uuid] = result[1].toString();
@@ -1663,7 +1660,6 @@ class SpicesUpdate extends Applet.TextIconApplet {
 
         if (this.dependenciesMet) {
             // Refresh button
-            //this.refreshButton = new PopupMenu.PopupIconMenuItem(_("Refresh"), "view-refresh-symbolic", St.IconType.SYMBOLIC);
             this.refreshButton = new PopupMenu.PopupIconMenuItem(_("Refresh"), "emblem-synchronizing-symbolic", St.IconType.SYMBOLIC);
             this.refreshButton.connect("activate", (event) => this._on_refresh_pressed("makeMenu"));
             this.menu.addMenuItem(this.refreshButton);
@@ -1711,7 +1707,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
             let _optionTitle = _configureOptions[i];
             let _icon = _iconNames[i];
             _options[i] = new PopupMenu.PopupIconMenuItem(_optionTitle, _icon, St.IconType.SYMBOLIC);
-            _options[i].connect("activate", (event) => Util.spawnCommandLine("/usr/bin/xlet-settings applet %s -t %s".format(UUID, i.toString())));
+            _options[i].connect("activate", (event) => Util.spawnCommandLine("/usr/bin/xlet-settings applet %s -i %s -t %s".format(UUID, this.instanceId, i.toString())));
             _configure.menu.addMenuItem(_options[i])
         }
 
@@ -1816,7 +1812,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
     }
 
     set_icon_color() {
-        if (this.refresh_requested) {
+        if (this.refresh_requested || this.cinnamon_server_is_down) {
             //this._applet_icon.style = "color: %s;".format("lightgray");
             this._applet_icon.style = "color: %s;".format(this.darken_color(this.defaultColor));
             this.refreshInterval = DOWNLOAD_TIME;
@@ -1856,16 +1852,33 @@ class SpicesUpdate extends Applet.TextIconApplet {
     updateUI() {
         if (this.isUpdatingUI) return;
         this.isUpdatingUI = true;
+
         if (this.ui_scale !== global.ui_scale) {
             this.define_badge();
             this.ui_scale = global.ui_scale;
         }
+
+        //if (DEBUG()) this.cinnamon_server_is_down = true;
+
+        if (this.cinnamon_server_is_down) {
+            this.do_rotation = false;
+            this.nb_to_update = 0;
+            this.nb_to_watch = 0;
+            //this.numberLabel.text = "!";
+            //this.badge.show();
+            this.refresh_requested = false;
+            for (let t of TYPES) {
+                this.menuDots[t] === false
+            }
+        }
+
         if (this.do_rotation) {
             if (this.interval === 0)
                 this.interval = setInterval(() => this.icon_rotate(), 10);
         }
 
         this.set_icon_color();
+
         if (this.nb_to_update > 0 || this.nb_to_watch > 0) {
             var _tooltip = this.default_tooltip;
             var tooltip_was_modified = false;
@@ -1886,11 +1899,15 @@ class SpicesUpdate extends Applet.TextIconApplet {
             this.set_applet_tooltip(_tooltip);
             this.numberLabel.text = (this.nb_to_update + this.nb_to_watch).toString();
             //this.badge.show();
+        } else if (this.cinnamon_server_is_down) {
+            this.set_applet_tooltip(this.default_tooltip + "\n%s\n%s".format(_("The Cinnamon Server seems DOWN!"), _("Middle-Click to Retry")));
+            this.numberLabel.text = "!";
         } else {
             this.set_applet_tooltip(this.default_tooltip + "\n%s".format(_("Middle-Click to Refresh")));
             this.numberLabel.text = "";
             //this.badge.hide();
         }
+
         if (St.Widget.get_default_direction() === St.TextDirection.RTL) {
             this._applet_tooltip._tooltip.set_style("text-align: right;");
         } else {
@@ -2036,7 +2053,7 @@ class SpicesUpdate extends Applet.TextIconApplet {
                 }
             }
             this.updateUI(); // update icon and tooltip
-            this._set_main_label();
+            //this._set_main_label();
         }
 
         this.isLooping = false;
@@ -2104,6 +2121,15 @@ class SpicesUpdate extends Applet.TextIconApplet {
     on_generic_changed() {
         // Nothing to do.
         // End of on_generic_changed
+    }
+
+    on_applet_added_to_panel() {
+        this.on_settings_changed();
+        // Run the loop !
+        this.iteration = 0;
+        this.isLooping = false;
+        this.new_loop_requested = false;
+        this.updateLoop();
     }
 
     on_applet_removed_from_panel() {

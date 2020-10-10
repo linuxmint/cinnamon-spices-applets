@@ -1,19 +1,25 @@
 const versionCompare = (left, right) => {
-  if (typeof left + typeof right != 'stringstring')
+  if (typeof left + typeof right != "stringstring")
     return false;
-  var a = left.split('.'),
-      b = right.split('.'),
-      len = Math.max(a.length, b.length);
+
+  let a = left.split(".");
+  let b = right.split(".");
+  let len = Math.min(a.length, b.length);
+
   for (let i = 0; i < len; i++) {
-    if ((a[i] && !b[i] && parseInt(a[i]) > 0) || (parseInt(a[i]) > parseInt(b[i]))) {
+    let l = parseInt(a[i], 10);
+    let r = parseInt(b[i], 10);
+    if (isNaN(l) || isNaN(r))
+      return false;
+    if (l > r) {
       return 1;
-    } else if ((b[i] && !a[i] && parseInt(b[i]) > 0) || (parseInt(a[i]) < parseInt(b[i]))) {
+    } else if (l < r) {
       return -1;
     }
   }
-  return 0;
-}; // End of versionCompare
 
+  return 0;
+};
 
 module.exports = {
   versionCompare
