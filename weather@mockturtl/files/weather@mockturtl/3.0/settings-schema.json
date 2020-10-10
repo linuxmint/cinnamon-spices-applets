@@ -239,7 +239,7 @@
   },
   "useSymbolicIcons": {
     "type": "checkbox",
-    "default": false,
+    "default": true,
     "description": "Use symbolic icons in the applet"
   },
   "useCustomMenuIcons": {
