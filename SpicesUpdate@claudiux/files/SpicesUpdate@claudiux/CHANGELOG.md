@@ -1,3 +1,9 @@
+### v6.1.0~20201010
+  * For Cinnamon 4.6 only:
+    * Now detects when the Cinnamon server is down.
+    * Bug fixes.
+    * No longer displays "Spices Update" or "SpU" next to or below the icon.
+
 ### v6.0.2~20200811
   * Remove all notifications when reloading this applet.
   * Menu shows the "reload this applet" option when a RELOAD file exists at the root of this applet.

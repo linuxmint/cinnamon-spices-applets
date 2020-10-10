@@ -153,9 +153,8 @@
     },
     "section_general4": {
       "type": "section",
-      "title": "Display type",
+      "title": "Display",
       "keys": [
-        "displayType",
         "general_hide"
       ]
     }
@@ -476,14 +475,9 @@
     "callback": "on_btn_test_notif_pressed"
   },
   "displayType": {
-    "type": "combobox",
-    "default": "classic",
-    "options": {
-      "Classic - Icon and Text": "classic",
-      "Compact - Icon Only": "compact"
-    },
-    "description": "Type of Display",
-    "tooltip": "This feature offers the Classic (default) display with icon and text, and compact display (Icon Only)."
+    "type": "generic",
+    "default": "compact",
+    "value": "compact"
   },
   "general_hide": {
     "type": "switch",
