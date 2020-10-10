@@ -28,7 +28,7 @@ class USWeather {
         this.prettyName = "US Weather";
         this.name = "US Weather";
         this.maxForecastSupport = 7;
-        this.website = "https://www.metoffice.gov.uk/";
+        this.website = "https://www.weather.gov/";
         this.maxHourlyForecastSupport = 156;
         this.sitesUrl = "https://api.weather.gov/points/";
         this.grid = null;

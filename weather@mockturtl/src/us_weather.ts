@@ -42,7 +42,7 @@ class USWeather implements WeatherProvider {
 	public readonly prettyName = "US Weather";
 	public readonly name = "US Weather";
     public readonly maxForecastSupport = 7;
-    public readonly website = "https://www.metoffice.gov.uk/";
+    public readonly website = "https://www.weather.gov/";
 	public readonly maxHourlyForecastSupport = 156;
 	
 	private sunCalc: any;
