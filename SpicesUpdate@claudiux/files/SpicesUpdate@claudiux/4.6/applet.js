@@ -689,26 +689,26 @@ class SpicesUpdate extends Applet.IconApplet {
     on_orientation_changed (orientation) {
         this.orientation = orientation;
         this.isHorizontal = !(this.orientation == St.Side.LEFT || this.orientation == St.Side.RIGHT);
-        //this._set_main_label();
+        this._set_main_label();
         // End of on_orientation_changed
     }
 
     _set_main_label() {
         if (this.general_hide === true && this.nb_to_update === 0 && this.nb_to_watch === 0) {
-            this.set_applet_label("");
+            //this.set_applet_label("");
             this.actor.hide();
             return
         }
         this.actor.show();
-        if (this.displayType === "compact") {
-            this.set_applet_label("");
-        } else {
-            if (this.isHorizontal === true) {
-                this.set_applet_label(_("Spices Update"));
-            } else {
-                this.set_applet_label("SpU");
-            }
-        }
+        //if (this.displayType === "compact") {
+            //this.set_applet_label("");
+        //} else {
+            //if (this.isHorizontal === true) {
+                //this.set_applet_label(_("Spices Update"));
+            //} else {
+                //this.set_applet_label("SpU");
+            //}
+        //}
         // End of _set_main_label
     }
 
@@ -747,14 +747,14 @@ class SpicesUpdate extends Applet.IconApplet {
 
     on_display_type_changed() {
         // Label
-        //this._set_main_label();
+        this._set_main_label();
         // End of on_display_type_changed
     }
 
     // ++ Function called when settings are changed
     on_settings_changed() {
         // Label
-        //this._set_main_label();
+        this._set_main_label();
 
         // Refresh intervall:
         this.refreshInterval = 3600 * this.general_frequency;
@@ -2053,7 +2053,7 @@ class SpicesUpdate extends Applet.IconApplet {
                 }
             }
             this.updateUI(); // update icon and tooltip
-            //this._set_main_label();
+            this._set_main_label();
         }
 
         this.isLooping = false;

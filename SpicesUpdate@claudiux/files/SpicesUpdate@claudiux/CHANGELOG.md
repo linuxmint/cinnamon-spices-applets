@@ -1,3 +1,6 @@
+### v6.1.0~20201011
+  * Fix issue #3253
+
 ### v6.1.0~20201010
   * For Cinnamon 4.6 only:
     * Now detects when the Cinnamon server is down.
