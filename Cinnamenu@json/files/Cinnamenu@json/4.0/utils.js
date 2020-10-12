@@ -9,13 +9,13 @@ function _(str) {
     return Gettext.dgettext('Cinnamenu@json', str);
 }
 
-const ApplicationType = {
+const APPTYPE = {
     _applications: 0,
     _places: 1,
     _recent: 2,
     _providers: 3,
 };
-const AppTypes = Object.keys(ApplicationType);
+const AppTypes = Object.keys(APPTYPE);
 
 // Work around Cinnamon#8201
 const tryFn = function(callback, errCallback) {
@@ -190,5 +190,5 @@ const searchStr = function (q, str) {
     }
 };
 
-module.exports = {SEARCH_DEBUG, _, ApplicationType, AppTypes, tryFn, readFileAsync, readJSONAsync,
+module.exports = {SEARCH_DEBUG, _, APPTYPE, AppTypes, tryFn, readFileAsync, readJSONAsync,
                                                                             ShowTooltip, searchStr};

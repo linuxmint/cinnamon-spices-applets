@@ -2,17 +2,10 @@ const Gio = imports.gi.Gio;
 const Gtk = imports.gi.Gtk;
 const GLib = imports.gi.GLib;
 const St = imports.gi.St;
-const {Clone, BinLayout, ActorAlign} = imports.gi.Clutter;
-const {   TextureCache,
-          Icon,
-          IconType,
-          Label,
-          Align,
-          BoxLayout,
-          Widget } = imports.gi.St;
+const Clutter = imports.gi.Clutter;
+const {Clone, BinLayout} = imports.gi.Clutter;
 const {AppState} = imports.gi.Cinnamon;
 const {EllipsizeMode} = imports.gi.Pango;
-const {UserManager} = imports.gi.AccountsService;
 const Main = imports.ui.main;
 const {PopupBaseMenuItem, PopupSubMenu} = imports.ui.popupMenu;
 const {DragMotionResult, makeDraggable} = imports.ui.dnd;
@@ -22,24 +15,29 @@ const {spawnCommandLine, spawn, unref} = imports.misc.util;
 const {createStore} = imports.misc.state;
 const MessageTray = imports.ui.messageTray;
 
-const {SEARCH_DEBUG, _, ApplicationType, tryFn, ShowTooltip} = require('./utils');
+const {SEARCH_DEBUG, _, APPTYPE, tryFn, ShowTooltip} = require('./utils');
 const PlacementTOOLTIP = 1, PlacementUNDER = 2, PlacementNONE = 3;
 const SHOW_SEARCH_MARKUP_IN_TOOLTIP = true;
 const USER_DESKTOP_PATH = getUserDesktopDir();
 const CAN_UNINSTALL = GLib.file_test('/usr/bin/cinnamon-remove-application', GLib.FileTest.EXISTS);
 
+const postNotification = (message, message2) => {
+    const source = new MessageTray.SystemNotificationSource();
+    Main.messageTray.add(source);
+    const notification = new MessageTray.Notification(source, message, message2);
+    notification.setTransient(true);
+    notification.setUrgency(MessageTray.Urgency.NORMAL);
+    source.notify(notification);
+};
+
 class CategoryListButton extends PopupBaseMenuItem {
     constructor(state, dir, altNameText, altIconNames/*array of names*/) {
         super({ hover: false, activate: false });
         this.state = state;
-        this.connectIds = [
-                    this.state.connect({
-                                dragIndex: () => {
-                                        if (this.state.dragIndex !== this.index && this.actor.opacity === 50) {
-                                            this.actor.set_opacity(255);
-                                        }        }
-                                       })
-                          ];
+        this.connectIds = [ this.state.connect({ dragIndex: () => {
+                                if (this.state.dragIndex !== this.index && this.actor.opacity === 50) {
+                                    this.actor.set_opacity(255);
+                                } } }) ];
         this.signals = new SignalManager(null);
 
         this.index = -1;
@@ -59,20 +57,18 @@ class CategoryListButton extends PopupBaseMenuItem {
                 iconName = '';
             }
             if (iconName) {
-                this.icon = TextureCache.get_default().load_gicon(null, icon,
+                this.icon = St.TextureCache.get_default().load_gicon(null, icon,
                                                                 this.state.settings.categoryIconSize);
             } else {
                 icon = dir.get_icon() && typeof dir.get_icon().get_names === 'function' ?
                                                     dir.get_icon().get_names().toString() : 'error';
-                this.icon = new Icon({
-                    icon_name: icon,
-                    icon_size: this.state.settings.categoryIconSize
-                });
+                this.icon = new St.Icon({   icon_name: icon,
+                                            icon_size: this.state.settings.categoryIconSize});
             }
         } else {
-            this.icon = new Icon({  gicon: Gio.ThemedIcon.new_from_names(altIconNames),
-                                    icon_size: this.state.settings.categoryIconSize,
-                                    icon_type: IconType.FULLCOLOR });
+            this.icon = new St.Icon({   gicon: Gio.ThemedIcon.new_from_names(altIconNames),
+                                        icon_size: this.state.settings.categoryIconSize,
+                                        icon_type: St.IconType.FULLCOLOR });
         }
         if (this.state.settings.categoryIconSize > 0) {
             this.addActor(this.icon);
@@ -80,37 +76,33 @@ class CategoryListButton extends PopupBaseMenuItem {
 
 
         this.categoryNameText = categoryNameText;
-        this.label = new Label({ text: this.categoryNameText,
-                                 style_class: 'menu-category-button-label'
-                              });
+        this.label = new St.Label({ text: this.categoryNameText,
+                                    style_class: 'menu-category-button-label' });
         this.addActor(this.label);
         this.label.realize();
 
         //?undo
         this.actor._delegate = {
-            handleDragOver: (source /*, actor, x, y, time */) => {
-                if (!source.index || source.index === this.index) {
-                        return DragMotionResult.NO_DROP;
-                }
-                this.state.set({dragIndex: this.index});
-                this.actor.set_opacity(50);
-                return DragMotionResult.MOVE_DROP;
-            },
-            acceptDrop: (source /*, actor, x, y, time */) => {
-                if (!source.index || source.index === this.index) {
-                    this.state.set({dragIndex: -1});
-                    return DragMotionResult.NO_DROP;
-                }
-                this.state.trigger('moveCategoryToPos', source.id, this.id);
-                return true;
-            },
-            getDragActorSource: () => this.actor,
-            _getDragActor: () => new Clone({source: this.actor}),
-            getDragActor: () => new Clone({source: this.icon}),
-            isDraggableApp: false,
-            index: this.index,
-            id: this.id
-        };
+                handleDragOver: (source /*, actor, x, y, time */) => {
+                        if (!source.index || source.index === this.index) {
+                                return DragMotionResult.NO_DROP;
+                        }
+                        this.state.set({dragIndex: this.index});
+                        this.actor.set_opacity(50);
+                        return DragMotionResult.MOVE_DROP; },
+                acceptDrop: (source /*, actor, x, y, time */) => {
+                        if (!source.index || source.index === this.index) {
+                            this.state.set({dragIndex: -1});
+                            return DragMotionResult.NO_DROP;
+                        }
+                        this.state.trigger('moveCategoryToPos', source.id, this.id);
+                        return true; },
+                getDragActorSource: () => this.actor,
+                _getDragActor: () => new Clone({source: this.actor}),
+                getDragActor: () => new Clone({source: this.icon}),
+                isDraggableApp: false,
+                index: this.index,
+                id: this.id };
 
         this.draggable = makeDraggable(this.actor);
 
@@ -215,7 +207,7 @@ class CategoryListButton extends PopupBaseMenuItem {
     }
 
     _onKeyFocusIn() {
-        this.state.trigger('setKeyFocus');
+        this.state.trigger('setKeyFocus');//set key focus on search entry.
     }
 
     destroy() {
@@ -232,35 +224,41 @@ class CategoryListButton extends PopupBaseMenuItem {
     }
 }
 
-class ApplicationContextMenuItem extends PopupBaseMenuItem {
-    constructor(state, buttonState, label, action, iconName) {
+class ContextMenuItem extends PopupBaseMenuItem {
+    constructor(state, label, iconName, action) {
         super({focusOnHover: false});
 
         this.state = state;
-        this.buttonState = buttonState;
         this.signals = new SignalManager(null);
         this.action = action;
-        this.label = new Label({
+        this.label = new St.Label({
             text: label,
             //style: 'font-size: 13px;'
         });
         if (iconName !== null) {
-            this.icon = new Icon({ icon_name: iconName,
+            this.icon = new St.Icon({ icon_name: iconName,
                                    icon_size: 14,
-                                   icon_type: IconType.SYMBOLIC });
+                                   icon_type: St.IconType.SYMBOLIC });
             if (this.icon) {
                 this.addActor(this.icon);
                 this.icon.realize();
             }
         }
         this.addActor(this.label);
+        if (this.action == null) {
+            this.actor.style = "font-weight: bold";
+        }
         this.signals.connect(this.actor, 'enter-event', (...args) => this.handleEnter(...args));
         this.signals.connect(this.actor, 'leave-event', (...args) => this.handleLeave(...args));
     }
 
     handleEnter() {
+        if (this.action === null) {
+            return true;
+        }
         this.entered = true;
         this.actor.add_style_pseudo_class('active');
+        return true;
     }
 
     handleLeave() {
@@ -273,71 +271,15 @@ class ApplicationContextMenuItem extends PopupBaseMenuItem {
     }
 
     activate(event) {
-        if (!this.state || !this.buttonState) {
+        if (!this.state || !this.action) {
             return false;
         }
         if (event && event.get_button() === 3) {
-            this.buttonState.trigger('toggleMenu');
-            return false;
+            global.log("activatecontextmenuitem with event?");
+            /*this.buttonState.trigger('toggleMenu');
+            return false;*/
         }
-        switch (this.action) {
-            case 'add_to_panel':
-                if (!Main.AppletManager.get_role_provider_exists(Main.AppletManager.Roles.PANEL_LAUNCHER)) {
-                    const new_applet_id = global.settings.get_int('next-applet-id');
-                    global.settings.set_int('next-applet-id', (new_applet_id + 1));
-                    const enabled_applets = global.settings.get_strv('enabled-applets');
-                    enabled_applets.push('panel1:right:0:panel-launchers@cinnamon.org:' + new_applet_id);
-                    global.settings.set_strv('enabled-applets', enabled_applets);
-                }
-
-                Main.AppletManager.get_role_provider(Main.AppletManager.Roles.PANEL_LAUNCHER)
-                                                    .acceptNewLauncher(this.buttonState.app.get_id());
-
-                this.buttonState.trigger('toggleMenu');
-                if (this.state) {
-                    this.state.trigger('openMenu');
-                }
-                break;
-            case 'add_to_desktop':
-                const destFile = Gio.file_new_for_path(USER_DESKTOP_PATH + '/' + this.buttonState.app.get_id());
-                tryFn(() => {
-                    Gio.file_new_for_path(this.buttonState.app.get_app_info().get_filename())
-                                .copy(
-                                    Gio.file_new_for_path(USER_DESKTOP_PATH + '/' + this.buttonState.app.get_id()),
-                                    0,
-                                    null,
-                                    null
-                                );
-                    changeModeGFile(destFile, 755);
-                }, function(e) {
-                    global.log(e);
-                });
-                this.buttonState.trigger('toggleMenu');
-                break;
-            case 'add_to_favorites':
-                this.state.trigger('addFavorite', this.buttonState.app.get_id());
-                break;
-            case 'remove_from_favorites':
-                this.state.trigger('removeFavorite', this.buttonState.app.get_id());
-                break;
-            case 'uninstall':
-                spawnCommandLine('/usr/bin/cinnamon-remove-application \'' +
-                                                    this.buttonState.app.get_app_info().get_filename() + '\'');
-                this.state.trigger('closeMenu');
-                break;
-            case 'offload_launch':
-                try {
-                    this.buttonState.app.launch_offloaded(0, [], -1);
-                } catch (e) {
-                    logError(e, 'Could not launch app with dedicated gpu: ');
-                }
-                this.state.trigger('closeMenu');
-                break;
-            case 'run_with_nvidia_gpu':
-                spawnCommandLine('optirun gtk-launch ' + this.buttonState.app.get_id());
-                this.state.trigger('closeMenu');
-                break;
-        }
+        this.action();
         return false;
     }
 
@@ -348,41 +290,194 @@ class ApplicationContextMenuItem extends PopupBaseMenuItem {
     }
 }
 
-class AppListGridButton extends PopupBaseMenuItem {
-    constructor(appThis, state, app, appType, appIndex) {
-        super({ hover: false, activate: false });
+class ContextMenu {
+    constructor(state, mainBox) {
         this.state = state;
+        this.menu = new PopupSubMenu(this.actor);
+        this.menu.actor.set_style_class_name('menu menu-context-menu menu-background starkmenu-background');
+        this.contextMenuBox = new St.BoxLayout({ style_class: '', vertical: true, reactive: true });
+        this.contextMenuBox.add_actor(this.menu.actor);
+        this.contextMenuBox.height = 0;
+        mainBox.add(this.contextMenuBox, {expand: false, x_fill: false,
+                                                x_align: St.Align.START, y_align: St.Align.MIDDLE});
+        this.contextMenuButtons = [];
+        this.isOpen = false;
+    }
+
+    open(app, e) {
+        for (let i = 0; i < this.contextMenuButtons.length; i++) {
+            this.contextMenuButtons[i].destroy();
+            this.contextMenuButtons[i] = null;
+        }
+        this.contextMenuButtons = [];
+
+
+        if (app.type == APPTYPE._applications) {
+            this.addAppItems(app);
+        } else if (app.type == APPTYPE._recent) {
+            if (!GLib.file_test(Gio.File.new_for_uri(app.uri).get_path(), GLib.FileTest.EXISTS)) {
+                postNotification(_("This file is no longer available"));
+                return;
+            }
+            const addMenuItem = (item) => {
+                this.menu.addMenuItem(item);
+                this.contextMenuButtons.push(item);
+            };
+            const hasLocalPath = (file) => (file.is_native() && file.get_path() != null);
+            //
+            addMenuItem( new ContextMenuItem(this.state, _("Open with"), null, null ));
+            const file = Gio.File.new_for_uri(app.uri);
+            const defaultInfo = Gio.AppInfo.get_default_for_type(app.mimeType, !hasLocalPath(file));
+            if (defaultInfo) {
+                addMenuItem( new ContextMenuItem(   this.state, defaultInfo.get_display_name(), null,
+                                                    () => { defaultInfo.launch([file], null);
+                                                            this.state.trigger('closeMenu'); } ));
+            }
+            //
+            const infos = Gio.AppInfo.get_all_for_type(app.mimeType);
+            for (let i = 0; i < infos.length; i++) {
+                const info = infos[i];
+                //const file = Gio.File.new_for_uri(app.uri);
+                if (!hasLocalPath(file) || !info.supports_uris() || info.equal(defaultInfo)) {
+                    continue;
+                }
+                addMenuItem( new ContextMenuItem(   this.state, info.get_display_name(), null,
+                                                    () => { info.launch([file], null);
+                                                            this.state.trigger('closeMenu'); } ));
+            }
+            //
+            addMenuItem( new ContextMenuItem(   this.state, _('Other application...'), null,
+                                                () => { spawnCommandLine("nemo-open-with " + app.uri);
+                                                        this.state.trigger('closeMenu'); } ));
+        }
+
+        this.isOpen = true;
+
+        const contextMenuWidth = this.menu.actor.width;
+        const contextMenuHeight = this.menu.actor.height;
+
+        const monitor = Main.layoutManager.findMonitorForActor(this.menu.actor);
+        let [mx, my] = e.get_coords(); //get mouse position
+        if (mx > monitor.x + monitor.width - this.menu.actor.width) {
+            mx -= this.menu.actor.width;
+        }
+        if (my > monitor.y + monitor.height - this.menu.actor.height - 40/*allow for panel*/) {
+            my -= this.menu.actor.height;
+        }
+        //setting anchor_x & anchor_y sets it relative to it's current position but negative???
+        let [cx, cy] = this.contextMenuBox.get_transformed_position();
+        cx = Math.round(mx - cx);
+        cy = Math.round(my - cy);
+        this.menu.actor.anchor_x = -cx;
+        this.menu.actor.anchor_y = -cy;
+
+        this.menu.toggle_with_options(this.state.settings.enableAnimation);
+        return;
+    }
+
+    addAppItems(app) { //add items to context menu of type: application
+        const addMenuItem = (item) => {
+            this.menu.addMenuItem(item);
+            this.contextMenuButtons.push(item);
+        };
+        if (this.state.gpu_offload_supported) {
+            addMenuItem( new ContextMenuItem(this.state, _('Run with NVIDIA GPU'), 'cpu',
+                                () => { try {
+                                            app.launch_offloaded(0, [], -1);
+                                        } catch (e) {
+                                            logError(e, 'Could not launch app with dedicated gpu: ');
+                                        }
+                                        this.state.trigger('closeMenu'); } ));
+        } else if (this.state.isBumblebeeInstalled) {
+            addMenuItem( new ContextMenuItem(this.state, _('Run with NVIDIA GPU'), 'cpu',
+                                () => { spawnCommandLine('optirun gtk-launch ' + app.get_id());
+                                        this.state.trigger('closeMenu'); } ));
+        }
+        addMenuItem( new ContextMenuItem(this.state, _('Add to panel'), 'list-add',
+            () => {
+                if (!Main.AppletManager.get_role_provider_exists(Main.AppletManager.Roles.PANEL_LAUNCHER)) {
+                    const new_applet_id = global.settings.get_int('next-applet-id');
+                    global.settings.set_int('next-applet-id', (new_applet_id + 1));
+                    const enabled_applets = global.settings.get_strv('enabled-applets');
+                    enabled_applets.push('panel1:right:0:panel-launchers@cinnamon.org:' + new_applet_id);
+                    global.settings.set_strv('enabled-applets', enabled_applets);
+                }
+                Main.AppletManager.get_role_provider(Main.AppletManager.Roles.PANEL_LAUNCHER)
+                                                                            .acceptNewLauncher(app.get_id());
+                this.close();
+                /*if (this.state) {
+                    this.state.trigger('openMenu');
+                } */ } ));
+        if (USER_DESKTOP_PATH) {
+            addMenuItem( new ContextMenuItem(this.state, _('Add to desktop'), 'computer',
+                () => { const destFile = Gio.file_new_for_path(USER_DESKTOP_PATH + '/' + app.get_id());
+                        tryFn(() => {
+                            Gio.file_new_for_path(app.get_app_info().get_filename())
+                                .copy(  Gio.file_new_for_path(USER_DESKTOP_PATH + '/' + app.get_id()), 0, null, null);
+                            changeModeGFile(destFile, 755);
+                        }, function(e) {
+                            global.log(e);
+                        });
+                        this.close(); } ));
+        }
+        if (this.state.trigger('isFavorite', app.get_id())) {
+            addMenuItem( new ContextMenuItem(this.state, _('Remove from favorites'), 'starred',
+                                            () => { this.state.trigger('removeFavorite', app.get_id()); } ));
+        } else {
+            addMenuItem( new ContextMenuItem(this.state, _('Add to favorites'), 'non-starred',
+                                            () => { this.state.trigger('addFavorite', app.get_id()); } ));
+        }
+        if (CAN_UNINSTALL) {
+            addMenuItem( new ContextMenuItem(this.state, _('Uninstall'), 'edit-delete',
+                        () => { spawnCommandLine('/usr/bin/cinnamon-remove-application \'' +
+                                                                app.get_app_info().get_filename() + '\'');
+                                this.state.trigger('closeMenu');} ));
+        }
+    }
+
+    close() {
+        /*if (this.isOpen) {
+            this.menu.toggle_with_options(this.state.settings.enableAnimation);
+        }*/
+        this.menu.close();
+        this.isOpen = false;
+    }
+
+    destroy() {
+        return true;
+    }
+}
+
+class AppListGridButton extends PopupBaseMenuItem {
+    constructor(appThis, app, appIndex) {
+        super({ hover: false, activate: false });
+        this.state = appThis.state;
         this.appThis = appThis;
         this.connectId = this.state.connect({
-            dragIndex: () => {
-                if (this.state.dragIndex !== this.buttonState.appIndex && this.actor.opacity === 50) {
-                    this.actor.set_opacity(255);
-                }
-            },
-            searchActive: () => {
-                if (!this.state) return;
-                // Ensure the reset view is markup-free
-                if (this.state.searchActive) {
-                    this.nameUnformatted = this.buttonState.app.name;
-                } else if (this.nameUnformatted) {
-                    this.buttonState.app.name = this.nameUnformatted;
-                    this.nameUnformatted = undefined;
-                }
-            }
-        });
+                dragIndex: () => {
+                        if (this.state.dragIndex !== this.buttonState.appIndex && this.actor.opacity === 50) {
+                            this.actor.set_opacity(255);
+                        } },
+                searchActive: () => {
+                        if (!this.state) return;
+                        // Ensure the reset view is markup-free
+                        if (this.state.searchActive) {
+                            this.nameUnformatted = this.buttonState.app.name;
+                        } else if (this.nameUnformatted) {
+                            this.buttonState.app.name = this.nameUnformatted;
+                            this.nameUnformatted = undefined;
+                        } } });
         this.buttonState = createStore({  app: app,
-                                          appType: appType,
+                                          appType: app.type,
                                           appIndex: appIndex,
                                           column: -1 });
-        this.buttonState.connect({
-                    toggleMenu: () => this.toggleMenu() });
 
         this.actor.set_style_class_name('menu-application-button');
         if (!this.state.isListView) {
             this.actor.set_style('padding-left: 0px; padding-right: 0px;');
         }
-        this.actor.x_align = this.state.isListView ? Align.START : Align.MIDDLE;
-        this.actor.y_align = Align.MIDDLE;
+        this.actor.x_align = this.state.isListView ? St.Align.START : St.Align.MIDDLE;
+        this.actor.y_align = St.Align.MIDDLE;
 
         if (!this.state.isListView) {
             this.actor.width = this.state.trigger('getAppsGridBoxWidth') / this.state.settings.appsGridColumnCount;
@@ -390,138 +485,99 @@ class AppListGridButton extends PopupBaseMenuItem {
 
         // DND
         this.actor._delegate = {
-            handleDragOver: (source /*, actor, x, y, time */) => {
-                if (!source.appIndex || source.appIndex === this.buttonState.appIndex ||
-                                                this.state.currentCategory !== 'favorites') {
-                    return DragMotionResult.NO_DROP;
-                }
-                this.state.set({dragIndex: this.buttonState.appIndex});
-                // TODO: We need to set a real placeholder, but to do so, the actor must be attached
-                // to applicationsGridBox, or inserted into applicationsListBox.
-                this.actor.set_opacity(50);
-                return DragMotionResult.MOVE_DROP;
-            },
-            acceptDrop: (source /*, actor, x, y, time */) => {
-                if (!source.appIndex || source.appIndex === this.buttonState.appIndex ||
-                                                this.state.currentCategory !== 'favorites') {
-                    this.state.set({dragIndex: -1});
-                    return DragMotionResult.NO_DROP;
-                }
-                this.state.trigger('moveFavoriteToPos', source.get_app_id(), this.buttonState.appIndex);
-                return true;
-            },
-            getDragActorSource: () => this.actor,
-            _getDragActor: () => new Clone({source: this.actor}),
-            getDragActor: () => new Clone({source: this.icon}),
-            get_app_id: () => this.buttonState.app.get_id(),
-            appIndex: this.buttonState.appIndex
+                handleDragOver: (source /*, actor, x, y, time */) => {
+                        if (!source.appIndex || source.appIndex === this.buttonState.appIndex ||
+                                                        this.state.currentCategory !== 'favorites') {
+                            return DragMotionResult.NO_DROP;
+                        }
+                        this.state.set({dragIndex: this.buttonState.appIndex});
+                        // TODO: We need to set a real placeholder, but to do so, the actor must be attached
+                        // to applicationsGridBox, or inserted into applicationsListBox.
+                        this.actor.set_opacity(50);
+                        return DragMotionResult.MOVE_DROP; },
+                acceptDrop: (source /*, actor, x, y, time */) => {
+                        if (!source.appIndex || source.appIndex === this.buttonState.appIndex ||
+                                                        this.state.currentCategory !== 'favorites') {
+                            this.state.set({dragIndex: -1});
+                            return DragMotionResult.NO_DROP;
+                        }
+                        this.state.trigger('moveFavoriteToPos', source.get_app_id(), this.buttonState.appIndex);
+                        return true; },
+                getDragActorSource: () => this.actor,
+                _getDragActor: () => new Clone({source: this.actor}),
+                getDragActor: () => new Clone({source: this.icon}),
+                get_app_id: () => this.buttonState.app.get_id(),
+                appIndex: this.buttonState.appIndex
         };
 
         this.signals = new SignalManager(null);
-        this.contextMenuButtons = [];
         this.entered = null;
 
         // Icons //create icon even if iconSize is 0 so dnd has something to drag
-        if (this.buttonState.appType === ApplicationType._applications) {
+        if (this.buttonState.appType === APPTYPE._applications) {
             this.icon = this.buttonState.app.create_icon_texture(this.state.iconSize);
-        } else if (this.buttonState.appType === ApplicationType._places) {
-            let iconObj = {
-                icon_size: this.state.iconSize
-            };
+        } else if (this.buttonState.appType === APPTYPE._places) {
+            let iconObj = { icon_size: this.state.iconSize };
             if (this.file) {
                 iconObj.icon_name = this.buttonState.app.icon === undefined ? 'unknown' : 'folder';
-                iconObj.icon_type = IconType.FULLCOLOR;
+                iconObj.icon_type = St.IconType.FULLCOLOR;
             } else {
                 iconObj.gicon = this.buttonState.app.icon;
             }
-            this.icon = new Icon(iconObj);
-        } else if (this.buttonState.appType === ApplicationType._recent) {
+            this.icon = new St.Icon(iconObj);
+        } else if (this.buttonState.appType === APPTYPE._recent) {
             if (this.buttonState.app.clearList) {
-                this.icon = new Icon({ icon_name: 'edit-clear', icon_type: St.IconType.SYMBOLIC, icon_size: this.state.iconSize});
+                this.icon = new St.Icon({   icon_name: 'edit-clear', icon_type: St.IconType.SYMBOLIC,
+                                            icon_size: this.state.iconSize});
             } else {
-                this.icon = new Icon({ gicon: this.buttonState.app.icon, icon_size: this.state.iconSize});
+                this.icon = new St.Icon({ gicon: this.buttonState.app.icon, icon_size: this.state.iconSize});
             }
-        } else if (this.buttonState.appType === ApplicationType._providers) {
+        } else if (this.buttonState.appType === APPTYPE._providers) {
             this.icon = this.buttonState.app.icon;
         }
         if (!this.icon) {
-            this.icon = new Icon({
-                icon_name: 'error',
-                icon_size: this.state.iconSize,
-                icon_type: IconType.FULLCOLOR
-            });
+            this.icon = new St.Icon({   icon_name: 'error',
+                                        icon_size: this.state.iconSize,
+                                        icon_type: St.IconType.FULLCOLOR});
         }
 
-        this.label = new Label({
-            style_class: 'menu-application-button-label',
-            style: 'padding-right: 2px; padding-left: 2px;'
-        });
+        this.label = new St.Label({ style_class: 'menu-application-button-label',
+                                    style: 'padding-right: 2px; padding-left: 2px;'});
         if (!this.state.isListView && this.state.settings.descriptionPlacement === PlacementUNDER) {
             this.label.set_style('text-align: center;');
         }
         this.formatLabel();
-        this.dot = new Widget({
-            style: this.state.isListView ?
-            'width: 2px; height: 12px; background-color: ' + this.state.theme.foregroundColor +
-                                                '; margin: 0px; border: 1px; border-radius: 10px;' :
-            'width: 32px; height: 2px; background-color: ' + this.state.theme.foregroundColor +
-                                                '; margin: 0px; border: 1px; border-radius: 10px;',
-            layout_manager: new BinLayout(),
-            x_expand: false,
-            y_expand: false,
-        });
-        this.iconContainer = new BoxLayout();
+        this.dot = new St.Widget({
+                style: this.state.isListView ?
+                'width: 2px; height: 12px; background-color: ' + this.state.theme.foregroundColor +
+                                                    '; margin: 0px; border: 1px; border-radius: 10px;' :
+                'width: 32px; height: 2px; background-color: ' + this.state.theme.foregroundColor +
+                                                    '; margin: 0px; border: 1px; border-radius: 10px;',
+                layout_manager: new BinLayout(),
+                x_expand: false,
+                y_expand: false});
+        this.iconContainer = new St.BoxLayout();
         if (this.icon && this.state.iconSize > 0) {
-            this.iconContainer.add(this.icon, {
-                x_fill: false,
-                y_fill: false,
-                x_align: Align.MIDDLE,
-                y_align: Align.MIDDLE
-            });
+            this.iconContainer.add(this.icon, { x_fill: false, y_fill: false,
+                                                x_align: St.Align.MIDDLE, y_align: St.Align.MIDDLE});
         }
 
-        this.buttonBox = new BoxLayout({
-            vertical: !this.state.isListView,
-            y_expand: false
-        });
+        this.buttonBox = new St.BoxLayout({ vertical: !this.state.isListView, y_expand: false });
         if (!this.state.isListView) {
             this.buttonBox.width = 600;//bigger than needed to ensure it centers in it's grid space
         } else {
             this.buttonBox.width = this.appThis.appBoxWidth - 30;//omitting this causes list scrolling to slow down
         }
         this.buttonBox.add(this.iconContainer, {
-            x_fill: false,
-            y_fill: false,
-            x_align: this.state.isListView ? Align.START : Align.MIDDLE,
-            y_align: Align.MIDDLE
-        });
-        this.buttonBox.add(this.dot, {
-            x_fill: false,
-            y_fill: false,
-            x_align: Align.MIDDLE,
-            y_align: Align.MIDDLE
-        });
+                                x_fill: false, y_fill: false,
+                                x_align: this.state.isListView ? St.Align.START : St.Align.MIDDLE,
+                                y_align: St.Align.MIDDLE});
+        this.buttonBox.add(this.dot, {  x_fill: false, y_fill: false,
+                                        x_align: St.Align.MIDDLE, y_align: St.Align.MIDDLE });
         this.buttonBox.add(this.label, {
-            x_fill: false,
-            y_fill: false,
-            x_align: this.state.isListView ? Align.START : Align.MIDDLE,
-            y_align: Align.MIDDLE
-        });
-
-        // Context menu
-        if (this.buttonState.appType === ApplicationType._applications) {
-                                                //    || this.buttonState.appType === ApplicationType._recent) {
-            this.menu = new PopupSubMenu(this.actor);
-            this.menu.actor.set_style_class_name('menu menu-context-menu menu-background starkmenu-background');
-            this.contextMenuBox = new St.BoxLayout({ style_class: '', vertical: true, reactive: true });
-            this.contextMenuBox.add_actor(this.menu.actor);
-            this.contextMenuBox.height = 0;
-            this.menu.isOpen = false;
-            this.appThis.mainBox.add(this.contextMenuBox, {expand: false, x_fill: false,
-                                                    x_align: St.Align.START, y_align: St.Align.MIDDLE});
-        } else {
-            this.menu = { isOpen: false };
-        }
+                                x_fill: false, y_fill: false,
+                                x_align: this.state.isListView ? St.Align.START : St.Align.MIDDLE,
+                                y_align: St.Align.MIDDLE});
 
         this.addActor(this.buttonBox);
 
@@ -530,7 +586,7 @@ class AppListGridButton extends PopupBaseMenuItem {
         }
 
         // Connect signals
-        if (this.buttonState.appType === ApplicationType._applications) {
+        if (this.buttonState.appType === APPTYPE._applications) {
             this.actor._delegate.isDraggableApp = true;
             this.draggable = makeDraggable(this.actor);
             this.signals.connect(this.buttonState.app, 'notify::state', (...args) => this.onStateChanged(...args));
@@ -591,7 +647,7 @@ class AppListGridButton extends PopupBaseMenuItem {
     }
 
     handleEnter(actor, event) {
-        if (this.state.contextMenuIsOpen != null || this.menu.isOpen || this.state.dragIndex > -1) {
+        if (this.state.contextMenu.isOpen || this.state.dragIndex > -1) {
             return false;
         }
 
@@ -646,7 +702,7 @@ class AppListGridButton extends PopupBaseMenuItem {
     }
 
     handleLeave(actor, event) {
-        if (this.state.contextMenuIsOpen === this.buttonState.appIndex && this.menu.isOpen || this.state.dragIndex > -1) {
+        if (this.state.contextMenu.isOpen || this.state.dragIndex > -1) {
             return false;
         }
 
@@ -663,40 +719,46 @@ class AppListGridButton extends PopupBaseMenuItem {
     }
 
     handleButtonRelease(actor, e) {
-        const closeOtherContextMenus = () => {
+        /*const closeOtherContextMenus = () => {
             const buttons = this.state.trigger('getActiveButtons');
             for (let i = 0, len = buttons.length; i < len; i++) {
                 if (buttons[i].buttonState.appIndex !== this.buttonState.appIndex) {
-                    buttons[i].closeMenu();
+                    buttons[i].closeContextMenu();
                     buttons[i].handleLeave(true);
                 }
             }
-        };
+        };*/
 
-        let button = !e ? 3 : e.get_button();
+        const button = e.get_button();
         if (button === 1) {//left click
-            if (this.state.contextMenuIsOpen != null) {
-                if (this.menu.isOpen && this.menu._activeMenuItem) {
-                    this.menu._activeMenuItem.activate();
-                } else {
-                    if (!this.menu.isOpen) {
-                        closeOtherContextMenus();
-                    }
-                    this.state.set({contextMenuIsOpen: null});
-                }
-                return false;
+            if (this.state.contextMenu.isOpen) {
+                //if (this.menuIsOpen && this.menu._activeMenuItem) {
+                //    this.menu._activeMenuItem.activate();
+                this.state.contextMenu.close();
+                this.state.trigger('clearEnteredActors');
+                this.handleEnter();
+            } else {
+                this.activate(e);
             }
-            this.activate(e);
+            return Clutter.EVENT_STOP;
         } else if (button === 3) {//right click
-            if (!this.menu.isOpen) {
-                closeOtherContextMenus();
+            if (this.state.contextMenu.isOpen) {
+                this.state.contextMenu.close();
+                this.state.trigger('clearEnteredActors');
+                this.handleEnter();
+                return Clutter.EVENT_STOP;
+            } else {
+                if (this.buttonState.appType == APPTYPE._applications ||
+                        this.buttonState.appType == APPTYPE._recent && !this.buttonState.app.clearList) {
+                    if (this.tooltip) {
+                        this.tooltip.destroy();
+                    }
+                    this.openContextMenu(e);
+                }
+                return Clutter.EVENT_STOP;
             }
-            if (this.tooltip) {
-                this.tooltip.destroy();
-            }
-            this.toggleMenu(e);
         }
-        return true;
+        return Clutter.EVENT_PROPAGATE;
     }
 
     activate() {
@@ -709,16 +771,16 @@ class AppListGridButton extends PopupBaseMenuItem {
                     () => global.logError('No handler available to open ' + this.buttonState.app.uri)
                 );
             }
-        } else if (this.buttonState.appType === ApplicationType._applications) {
+        } else if (this.buttonState.appType === APPTYPE._applications) {
             //this.state.autofavs.incrementApp(this.buttonState.app.get_id());
             this.buttonState.app.open_new_window(-1);
-        } else if (this.buttonState.appType === ApplicationType._places) {
+        } else if (this.buttonState.appType === APPTYPE._places) {
             if (this.buttonState.app.uri) {
                 this.buttonState.app.app.launch_uris([this.buttonState.app.uri], null);
             } else {
                 this.buttonState.app.launch();
             }
-        } else if (this.buttonState.appType === ApplicationType._recent) {
+        } else if (this.buttonState.appType === APPTYPE._recent) {
             if (this.buttonState.app.clearList) {
                 Gtk.RecentManager.get_default().purge_items();
                 this.state.set({currentCategory: 'all'});
@@ -727,17 +789,11 @@ class AppListGridButton extends PopupBaseMenuItem {
                 try {
                     Gio.app_info_launch_default_for_uri(this.buttonState.app.uri, global.create_app_launch_context());
                 } catch (e) {
-                    const source = new MessageTray.SystemNotificationSource();
-                    Main.messageTray.add(source);
-                    const notification = new MessageTray.Notification(source,
-                                                                _("This file is no longer available"),e.message);
-                    notification.setTransient(true);
-                    notification.setUrgency(MessageTray.Urgency.NORMAL);
-                    source.notify(notification);
+                    postNotification(_("This file is no longer available"),e.message);
                     return;//don't closeMenu
                 }
             }
-        } else if (this.buttonState.appType === ApplicationType._providers) {
+        } else if (this.buttonState.appType === APPTYPE._providers) {
             this.buttonState.app.activate(this.buttonState.app);
         }
         this.state.trigger('closeMenu');
@@ -747,7 +803,7 @@ class AppListGridButton extends PopupBaseMenuItem {
         if (!this.buttonState.app || this.dot.is_finalized()) {
             return false;
         }
-        if (this.buttonState.appType === ApplicationType._applications) {
+        if (this.buttonState.appType === APPTYPE._applications) {
             if (this.buttonState.app.state !== AppState.STOPPED) {
                 this.dot.opacity = 255;
             } else {
@@ -757,105 +813,12 @@ class AppListGridButton extends PopupBaseMenuItem {
         return true;
     }
 
-    closeMenu() {
-        if (this.buttonState.appType !== ApplicationType._applications) {
-            return;
+    openContextMenu(e) {
+        this.actor.set_style_class_name('menu-application-button-selected');
+        if (!this.actor.get_parent()) {
+            return; // Favorite change ??
         }
-        if (this.menu.isOpen){
-            this.menu.close();
-        }
-    }
-
-    toggleMenu(e) {
-        if ((this.buttonState.appType !== ApplicationType._applications /*&&
-                                this.buttonState.appType !== ApplicationType._recent*/) || !this.menu) {
-            return false;
-        }
-
-        if (this.menu.isOpen) {
-            // Allow other buttons hover functions to take effect.
-            this.state.set({contextMenuIsOpen: null});
-        } else {
-            for (let i = 0; i < this.contextMenuButtons.length; i++) {
-                this.contextMenuButtons[i].destroy();
-                this.contextMenuButtons[i] = null;
-            }
-            this.contextMenuButtons = [];
-            this.state.set({contextMenuIsOpen: this.buttonState.appIndex});
-            this.actor.set_style_class_name('menu-application-button-selected');
-
-            const addMenuItem = function(t, instance) {
-                t.menu.addMenuItem(instance);
-                t.contextMenuButtons.push(instance);
-            };
-            if (this.buttonState.appType == ApplicationType._applications) {
-                if (this.state.gpu_offload_supported) {
-                    addMenuItem(this, new ApplicationContextMenuItem(this.state, this.buttonState,
-                                                            _('Run with NVIDIA GPU'), 'offload_launch', 'cpu'));
-                } else if (this.state.isBumblebeeInstalled) {
-                    addMenuItem(this, new ApplicationContextMenuItem(this.state, this.buttonState,
-                                                            _('Run with NVIDIA GPU'), 'run_with_nvidia_gpu', 'cpu'));
-                }
-                addMenuItem(this, new ApplicationContextMenuItem(this.state, this.buttonState,
-                                                            _('Add to panel'), 'add_to_panel', 'list-add'));
-                if (USER_DESKTOP_PATH) {
-                    addMenuItem(this, new ApplicationContextMenuItem(this.state, this.buttonState,
-                                                            _('Add to desktop'), 'add_to_desktop', 'computer'));
-                }
-                if (this.state.trigger('isFavorite', this.buttonState.app.get_id())) {
-                    addMenuItem(this, new ApplicationContextMenuItem(this.state, this.buttonState,
-                                                    _('Remove from favorites'), 'remove_from_favorites', 'starred'));
-                } else {
-                    addMenuItem(this, new ApplicationContextMenuItem(this.state, this.buttonState,
-                                                    _('Add to favorites'), 'add_to_favorites', 'non-starred'));
-                }
-                if (CAN_UNINSTALL) {
-                    addMenuItem(this, new ApplicationContextMenuItem(this.state, this.buttonState,
-                                                            _('Uninstall'), 'uninstall', 'edit-delete'));
-                }
-            } else if (this.buttonState.appType == ApplicationType._recent) {
-                /*let infos = Gio.AppInfo.get_all_for_type(this.mimeType);
-                global.log('>>',this.mimeType);
-                for (let i = 0; i < infos.length; i++) {
-                    let info = infos[i];
-
-                    file = Gio.File.new_for_uri(this.uri);
-                    /*
-                    if (!this.hasLocalPath(file) && !info.supports_uris()) continue;
-
-                    if (info.equal(default_info)) continue;
-
-                    menuItem = new RecentContextMenuItem(this,
-                                                 info.get_display_name(),
-                                                 false,
-                                                 [info, file],
-                                                 infoLaunchFunc);
-                    menu.addMenuItem(menuItem);
-                }*/
-            }
-            let parent = this.actor.get_parent();
-            if (!parent) return true; // Favorite change
-
-            const contextMenuWidth = this.menu.actor.width;
-            const contextMenuHeight = this.menu.actor.height;
-
-            const monitor = Main.layoutManager.findMonitorForActor(this.menu.actor);
-            let [mx, my] = e.get_coords(); //get mouse position
-            if (mx > monitor.x + monitor.width - this.menu.actor.width) {
-                mx -= this.menu.actor.width;
-            }
-            if (my > monitor.y + monitor.height - this.menu.actor.height - 40/*allow for panel*/) {
-                my -= this.menu.actor.height;
-            }
-            //setting anchor_x & anchor_y sets it relative to it's current position but negative???
-            let [cx, cy] = this.contextMenuBox.get_transformed_position();
-            cx = Math.round(mx - cx);
-            cy = Math.round(my - cy);
-            this.menu.actor.anchor_x = -cx;
-            this.menu.actor.anchor_y = -cy;
-        }
-        this.menu.toggle_with_options(this.state.settings.enableAnimation);
-        return true;
+        this.state.contextMenu.open(this.buttonState.app, e);
     }
 
     destroy(skipDestroy) {
@@ -882,11 +845,11 @@ class AppListGridButton extends PopupBaseMenuItem {
 }
 
 class GroupButton extends PopupBaseMenuItem {
-    constructor(state, icon, name, description, callback) {
-        super({ hover: false,
-                activate: false });
+    constructor(state, icon, app, name, description, callback) {
+        super({ hover: false, activate: false });
         this.state = state;
         this.signals = new SignalManager(null);
+        this.app = app;
         this.name = name;
         this.description = description;
         this.callback = callback;
@@ -906,17 +869,45 @@ class GroupButton extends PopupBaseMenuItem {
         this.signals.connect(this.actor, 'button-release-event', (...args) => this.handleButtonRelease(...args));
     }
 
-    handleButtonRelease(actor, event) {
-        if (event && event.get_button() > 1) {
-            return;
+    handleButtonRelease(actor, e) {
+        const button = e.get_button();
+        if (button === 1) {//left click
+            if (this.state.contextMenu.isOpen) {
+                //if (this.menuIsOpen && this.menu._activeMenuItem) {
+                //    this.menu._activeMenuItem.activate();
+                this.state.contextMenu.close();
+                this.state.trigger('clearEnteredActors');
+                this.handleEnter();
+            } else {
+                if (this.callback) {
+                    this.callback();
+                }
+            }
+            return Clutter.EVENT_STOP;
+        } else if (button === 3) {//right click
+            if (this.state.contextMenu.isOpen) {
+                this.state.contextMenu.close();
+                this.state.trigger('clearEnteredActors');
+                this.handleEnter();
+                return Clutter.EVENT_STOP;
+            } else {
+                if (this.app != null) {
+                    if (this.tooltip) {
+                        this.tooltip.destroy();
+                    }
+                    //this.actor.set_style_class_name('menu-application-button-selected');
+                    this.state.contextMenu.open(this.app, e);
+                    return Clutter.EVENT_STOP;
+                }
+            }
         }
-        if (this.callback) {
-            this.callback();
-        }
-        return true;
+        return Clutter.EVENT_PROPAGATE;
     }
 
     handleEnter(actor) {
+        if (this.state.contextMenu.isOpen || this.state.dragIndex > -1) {
+            return true;
+        }
         if (actor) {
             this.state.trigger('clearEnteredActors');
         }
@@ -933,21 +924,28 @@ class GroupButton extends PopupBaseMenuItem {
             text += '\n<span size="small">' + this.description + '</span>';
         }
         this.tooltip = new ShowTooltip(this.actor, x, y, false /*don't center x*/, text);
+        return true;
     }
 
     handleLeave() {
+        if (this.state.contextMenu.isOpen || this.state.dragIndex > -1) {
+            return true;
+        }
         this.entered = null;
         this.actor.remove_style_pseudo_class('hover');
-        this.tooltip.destroy();
+        if (this.tooltip) {
+            this.tooltip.destroy();
+        }
+        return true;
     }
 
     /*setIcon(iconName) {
         this.removeActor(this.icon);
         this.icon.destroy();
-        this.icon = this.icon = new Icon({
+        this.icon = this.icon = new St.Icon({
             icon_name: iconName,
             icon_size: this.iconSize,
-            icon_type: IconType.FULLCOLOR
+            icon_type: St.IconType.FULLCOLOR
         });
         this.addActor(this.icon);
         this.icon.realize();
@@ -965,4 +963,4 @@ class GroupButton extends PopupBaseMenuItem {
     }
 }
 
-module.exports = {CategoryListButton, AppListGridButton, GroupButton};
+module.exports = {CategoryListButton, AppListGridButton, ContextMenu, GroupButton};
