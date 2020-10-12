@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-14 13:11+0100\n"
+"POT-Creation-Date: 2020-10-12 12:20+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -92,7 +92,6 @@ msgstr ""
 msgid "Browse network"
 msgstr ""
 
-
 msgid "Run with NVIDIA GPU"
 msgstr ""
 
@@ -111,11 +110,7 @@ msgstr ""
 msgid "Uninstall"
 msgstr ""
 
-
 msgid "Please wait..."
-msgstr ""
-
-msgid "Search web for"
 msgstr ""
 
 msgid "Solution:"
@@ -124,6 +119,17 @@ msgstr ""
 msgid "Click to copy"
 msgstr ""
 
+msgid "Search web for"
+msgstr ""
+
+msgid "This file is no longer available"
+msgstr ""
+
+msgid "Open with"
+msgstr ""
+
+msgid "Other application..."
+msgstr ""
 
 msgid "Cinnamenu"
 msgstr ""
@@ -138,14 +144,11 @@ msgid ""
 "Gnomenu, and the contributors to projects they derived from."
 msgstr ""
 
-
 msgid "Behavior"
 msgstr ""
 
-
 msgid "Appearance"
 msgstr ""
-
 
 msgid "Layout and Content"
 msgstr ""
@@ -156,53 +159,38 @@ msgstr ""
 msgid "No search provider extensions found"
 msgstr ""
 
-
-
 msgid "Panel"
 msgstr ""
-
-
 
 msgid "Menu"
 msgstr ""
 
-
 msgid "Layout"
 msgstr ""
-
 
 msgid "Content"
 msgstr ""
 
-
 msgid "Recent files settings"
 msgstr ""
-
 
 msgid "Open the menu editor"
 msgstr ""
 
-
 msgid "Reset category order"
 msgstr ""
-
 
 msgid "Use a custom icon"
 msgstr ""
 
-
 msgid "Use a custom icon in the panel"
 msgstr ""
-
-
 
 msgid "Panel icon"
 msgstr ""
 
-
 msgid "Panel text"
 msgstr ""
-
 
 msgid "Text to show beside the panel icon"
 msgstr ""
@@ -210,70 +198,50 @@ msgstr ""
 msgid "pixels"
 msgstr ""
 
-
-
 msgid "Category icon size"
 msgstr ""
-
-
 
 msgid "Applications list icon size"
 msgstr ""
 
-
-
 msgid "Applications grid icon size"
 msgstr ""
-
 
 msgid "Keyboard shortcut to open and close the menu"
 msgstr ""
 
-
 msgid "Open menu on hover"
 msgstr ""
-
 
 msgid "Open the menu when I move my mouse over the panel icon"
 msgstr ""
 
-
-
 msgid "milliseconds"
 msgstr ""
-
 
 msgid "Menu hover delay"
 msgstr ""
 
-
 msgid "Use menu animations"
 msgstr ""
-
 
 msgid "Animate the menu on open and close"
 msgstr ""
 
-
 msgid "Activate categories on click"
 msgstr ""
-
 
 msgid "Activate categories on click instead of on hover"
 msgstr ""
 
-
 msgid "Enable autoscrolling"
 msgstr ""
-
 
 msgid "Enable autoscrolling in application list"
 msgstr ""
 
-
 msgid "Show web bookmarks"
 msgstr ""
-
 
 msgid "Show your browser's web bookmarks in the menu"
 msgstr ""
@@ -281,77 +249,56 @@ msgstr ""
 msgid "Enable searching of open windows"
 msgstr ""
 
-
 msgid "Enable search providers"
 msgstr ""
-
 
 msgid "Include search provider results in searches"
 msgstr ""
 
-
 msgid "Example Search Providers"
 msgstr ""
-
 
 msgid "Startup applications view mode"
 msgstr ""
 
-
 msgid "List"
 msgstr ""
-
 
 msgid "Grid"
 msgstr ""
 
-
 msgid "columns"
 msgstr ""
-
-
 
 msgid "Number of columns in apps grid"
 msgstr ""
 
-
 msgid "Show bookmarks and places"
 msgstr ""
-
 
 msgid "Show bookmarks and places category in the menu"
 msgstr ""
 
-
 msgid "Show application icons"
 msgstr ""
-
 
 msgid "Show category icons"
 msgstr ""
 
-
 msgid "Show application descriptions under titles"
 msgstr ""
-
 
 msgid "Show tooltips"
 msgstr ""
 
-
 msgid "Tooltip delay"
 msgstr ""
-
-
 
 msgid "Use a custom menu height"
 msgstr ""
 
-
 msgid "px"
 msgstr ""
-
-
 
 msgid "Custom menu height"
 msgstr ""
@@ -370,7 +317,6 @@ msgstr ""
 
 msgid "Under titles"
 msgstr ""
-
 
 msgid "None"
 msgstr ""
@@ -426,10 +372,8 @@ msgstr ""
 msgid "Show an internet search option in search results"
 msgstr ""
 
-
 msgid "Session buttons icon size"
 msgstr ""
-
 
 msgid "Use session buttons box style"
 msgstr ""
