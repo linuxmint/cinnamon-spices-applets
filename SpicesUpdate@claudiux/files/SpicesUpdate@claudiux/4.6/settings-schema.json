@@ -55,8 +55,7 @@
       "title": "Checking",
       "keys": [
         "check_applets",
-        "check_new_applets",
-        "btn_refresh_applets"
+        "check_new_applets"
       ]
     },
     "section_applets2": {
@@ -65,6 +64,7 @@
       "keys": [
         "exp_applets",
         "unprotected_applets",
+        "btn_refresh_applets",
         "btn_cs_applets"
       ]
     },
@@ -73,8 +73,7 @@
       "title": "Checking",
       "keys": [
         "check_desklets",
-        "check_new_desklets",
-        "btn_refresh_desklets"
+        "check_new_desklets"
       ]
     },
     "section_desklets2": {
@@ -83,6 +82,7 @@
       "keys": [
         "exp_desklets",
         "unprotected_desklets",
+        "btn_refresh_desklets",
         "btn_cs_desklets"
       ]
     },
@@ -91,8 +91,7 @@
       "title": "Checking",
       "keys": [
         "check_extensions",
-        "check_new_extensions",
-        "btn_refresh_extensions"
+        "check_new_extensions"
       ]
     },
     "section_extensions2": {
@@ -101,6 +100,7 @@
       "keys": [
         "exp_extensions",
         "unprotected_extensions",
+        "btn_refresh_extensions",
         "btn_cs_extensions"
       ]
     },
@@ -109,8 +109,7 @@
       "title": "Checking",
       "keys": [
         "check_themes",
-        "check_new_themes",
-        "btn_refresh_themes"
+        "check_new_themes"
       ]
     },
     "section_themes2": {
@@ -119,6 +118,7 @@
       "keys": [
         "exp_themes",
         "unprotected_themes",
+        "btn_refresh_themes",
         "btn_cs_themes"
       ]
     },
@@ -207,7 +207,8 @@
     ],
     "default": [
 
-    ]
+    ],
+    "show-buttons": false
   },
   "btn_cs_applets": {
     "type": "button",
@@ -267,7 +268,8 @@
     ],
     "default": [
 
-    ]
+    ],
+    "show-buttons": false
   },
   "btn_cs_desklets": {
     "type": "button",
@@ -327,7 +329,8 @@
     ],
     "default": [
 
-    ]
+    ],
+    "show-buttons": false
   },
   "btn_cs_extensions": {
     "type": "button",
@@ -387,7 +390,8 @@
     ],
     "default": [
 
-    ]
+    ],
+    "show-buttons": false
   },
   "btn_cs_themes": {
     "type": "button",
