@@ -23,7 +23,7 @@
  */
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
-const {ApplicationType, readJSONAsync, tryFn} = require('./utils');
+const {APPTYPE, readJSONAsync, tryFn} = require('./utils');
 
 let Gda = null;
 tryFn(function() {
@@ -205,7 +205,7 @@ class BookmarksManager {
                 bookmarks[i].icon = bookmarks[i].app.get_icon();
                 bookmarks[i].mime = null;
                 bookmarks[i].description = bookmarks[i].uri;
-                bookmarks[i].type = ApplicationType._places;
+                bookmarks[i].type = APPTYPE._places;
             }
 
             // Create a unique list of bookmarks across all browsers.
