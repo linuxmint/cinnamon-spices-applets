@@ -639,8 +639,7 @@ class CinnamenuApplet extends TextIconApplet {
                 }
                 buttons.push(button);
             } else { // TODO: Use spread operator after versioning for 3.8
-                buttons.push(new CategoryListButton( this.state, params[i][1], params[i][2], params[i][3],
-                                                                                                params[i][4]));
+                buttons.push(new CategoryListButton( this.state, params[i][1], params[i][2], params[i][3]));
             }
         }
         //?undo
