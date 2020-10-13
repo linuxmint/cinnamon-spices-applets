@@ -1,3 +1,10 @@
+### v6.2.0~20201012
+  * Improvements (for Cinnamon 4.6 only):
+    * Settings: Changing the position of the Refresh button. Remove the buttons below the lists (for future Cinnamon).
+    * Tooltip: Some information is displayed in bold.
+    * Notifications: Some information is displayed in bold.
+    * Animation: Adding linear effect.
+
 ### v6.1.0~20201011
   * Fix issue #3253
 

@@ -16,6 +16,7 @@ const MessageTray = imports.ui.messageTray;
 const Util = imports.misc.util;
 const Extension = imports.ui.extension;
 const Tooltips = imports.ui.tooltips;
+const Tweener = imports.ui.tweener;
 const Json = imports.gi.Json;
 const Soup = imports.gi.Soup;
 const {SignalManager} = imports.misc.signalManager;
@@ -118,7 +119,7 @@ var messageTray = new MessageTray.MessageTray();
 function criticalNotify(msg, details, icon, button=[]) {
     let source = new MessageTray.SystemNotificationSource();
     messageTray.add(source);
-    let notification = new SU_Notification(source, msg, details, { icon: icon });
+    let notification = new SU_Notification(source, msg, details, { icon: icon, bodyMarkup: true });
     notification.setTransient(false);
     notification.setUrgency(MessageTray.Urgency.CRITICAL);
     if (button!="" && button != []) {
@@ -145,7 +146,8 @@ class SpicesUpdate extends Applet.IconApplet {
         this.setAllowedLayout(Applet.AllowedLayout.BOTH); // Can be used on horizontal or vertical panels.
         this.set_applet_icon_symbolic_name("spices-update");
         this.default_tooltip = "%s %s".format(_("Spices Update"), metadata.version);
-        this.set_applet_tooltip(this.default_tooltip + "\n%s".format(_("Middle-Click to Refresh")));
+        this.tooltip_contents = "<b>" + this.default_tooltip + "</b>" + "\n%s".format(_("Middle-Click to Refresh"));
+        //this.set_applet_tooltip(this.tooltip_contents, true);
 
         this.img_path = ICONS_DIR + "/spices-update-symbolic.svg";
         //this.general_frequency = 10; //(seconds between two loops)
@@ -578,7 +580,7 @@ class SpicesUpdate extends Applet.IconApplet {
             Main.messageTray.add(source);
             let gicon = Gio.icon_new_for_string(APPLET_DIR + "/icon.png");
             let icon = new St.Icon({ gicon: gicon, "icon-size": 32});
-            let notification = new SU_Notification(source, _("Spices Update"), message, {icon: icon});
+            let notification = new SU_Notification(source, _("Spices Update"), message, {icon: icon, bodyMarkup: true});
             notification.setTransient(false);
             notification.setResident(true);
             notification.setUseActionIcons(true);
@@ -1481,15 +1483,15 @@ class SpicesUpdate extends Applet.IconApplet {
                         if (this.details_requested) {
                             if (this.get_last_commit_subject(type, uuid)) {
                                 if (this.details_by_uuid[uuid].trim() !== "") {
-                                    ret.push("★ %s (%s)\n\t\t« %s »".format(_(this.get_spice_name(type, uuid)), uuid, this.details_by_uuid[uuid].trim()));
+                                    ret.push("★ <b>%s</b> (%s)\n\t\t« %s »".format(_(this.get_spice_name(type, uuid)), uuid, this.details_by_uuid[uuid].trim()));
                                 } else {
-                                    ret.push("★ %s (%s)\n\t\t%s".format(_(this.get_spice_name(type, uuid)), uuid, _("(Description unavailable)")));
+                                    ret.push("★ <b>%s</b> (%s)\n\t\t%s".format(_(this.get_spice_name(type, uuid)), uuid, _("(Description unavailable)")));
                                 }
                             } else {
                                 this.refreshInterval = DOWNLOAD_TIME; // Wait DOWNLOAD_TIME more seconds to avoid the message "(Refresh to see the description)".
                             }
                         } else {
-                            ret.push("★ %s (%s)".format(_(this.get_spice_name(type, uuid)), uuid));
+                            ret.push("★ <b>%s</b> (%s)".format(_(this.get_spice_name(type, uuid)), uuid));
                         }
                         this.monitor_metadatajson(type, uuid);
                     }
@@ -1504,11 +1506,11 @@ class SpicesUpdate extends Applet.IconApplet {
         var ret = new Array();
         for (let uuid of this.new_Spices[type]) {
             if (this.details_requested === true)
-                ret.push("★ %s (%s)\n\t\t« %s »".format(_(this.get_spice_name(type, uuid)),
+                ret.push("★ <b>%s</b> (%s)\n\t\t« %s »".format(_(this.get_spice_name(type, uuid)),
                                                                                         uuid,
                                                                                         _(this.get_spice_description(type, uuid))))
             else
-                ret.push("★ %s (%s)".format(_(this.get_spice_name(type, uuid)), uuid))
+                ret.push("★ <b>%s</b> (%s)".format(_(this.get_spice_name(type, uuid)), uuid))
         }
         return ret;
         // End of get_are_new
@@ -1830,6 +1832,14 @@ class SpicesUpdate extends Applet.IconApplet {
                 }
             }
         }
+        Tweener.addTween(this.actor, {
+            opacity: 255,
+            transition: "linear",
+            time: 0.5,
+            onComplete: null
+        });
+
+        //this.actor.set_opacity(255);
         // End of set_icon_color
     }
 
@@ -1864,8 +1874,6 @@ class SpicesUpdate extends Applet.IconApplet {
             this.do_rotation = false;
             this.nb_to_update = 0;
             this.nb_to_watch = 0;
-            //this.numberLabel.text = "!";
-            //this.badge.show();
             this.refresh_requested = false;
             for (let t of TYPES) {
                 this.menuDots[t] === false
@@ -1880,45 +1888,56 @@ class SpicesUpdate extends Applet.IconApplet {
         this.set_icon_color();
 
         if (this.nb_to_update > 0 || this.nb_to_watch > 0) {
-            var _tooltip = this.default_tooltip;
+            this.tooltip_contents = "<b>" + this.default_tooltip + "</b>";
             var tooltip_was_modified = false;
             for (let type of TYPES) {
                 if (this.old_message[type] != "" || this.old_watch_message[type] != "") {
                     if (!tooltip_was_modified) {
-                        _tooltip += "\n%s".format(_("Middle-Click to open useful Cinnamon Settings"));
+                        this.tooltip_contents += "\n%s".format(_("Middle-Click to open useful Cinnamon Settings"));
                         tooltip_was_modified = true;
                     }
-                    _tooltip += "\n\n\t\t\t%s".format(_(type).toLocaleUpperCase());
-                    if (this.old_message[type] != "") _tooltip += "\n\u21BB %s".format(this._clean_str(this.old_message[type].replace(/, /gi, "\n\t")));
-                    if (this.old_watch_message[type] != "") _tooltip += "\n\u2604 %s".format(this._clean_str(this.old_watch_message[type].replace(/, /gi, "\n\t")));
+                    this.tooltip_contents += "\n\n\t\t\t<b>%s</b>".format(_(type).toLocaleUpperCase());
+                    if (this.old_message[type] != "") this.tooltip_contents += "\n\u21BB %s".format(this._clean_str(this.old_message[type].replace(/, /gi, "\n\t")));
+                    if (this.old_watch_message[type] != "") this.tooltip_contents += "\n\u2604 %s".format(this._clean_str(this.old_watch_message[type].replace(/, /gi, "\n\t")));
                 }
             }
             if (!tooltip_was_modified) {
-                _tooltip += "\n%s".format(_("Middle-Click to Refresh"));
+                this.tooltip_contents += "\n%s".format(_("Middle-Click to Refresh"));
             }
-            this.set_applet_tooltip(_tooltip);
+            //this.set_applet_tooltip(this.tooltip_contents, true);
             this.numberLabel.text = (this.nb_to_update + this.nb_to_watch).toString();
             //this.badge.show();
         } else if (this.cinnamon_server_is_down) {
-            this.set_applet_tooltip(this.default_tooltip + "\n%s\n%s".format(_("The Cinnamon Server seems DOWN!"), _("Middle-Click to Retry")));
+            this.tooltip_contents = "<b>" + this.default_tooltip + "</b>" + "\n<b>%s</b>\n%s".format(_("The Cinnamon Server seems DOWN!"), _("Middle-Click to Retry"));
+            //this.set_applet_tooltip(this.tooltip_contents, true);
             this.numberLabel.text = "!";
         } else {
-            this.set_applet_tooltip(this.default_tooltip + "\n%s".format(_("Middle-Click to Refresh")));
+            this.tooltip_contents = "<b>" + this.default_tooltip + "</b>" + "\n%s".format(_("Middle-Click to Refresh"));
+            //this.set_applet_tooltip(this.tooltip_contents, true);
             this.numberLabel.text = "";
             //this.badge.hide();
         }
 
-        if (St.Widget.get_default_direction() === St.TextDirection.RTL) {
-            this._applet_tooltip._tooltip.set_style("text-align: right;");
-        } else {
-            this._applet_tooltip._tooltip.set_style("text-align: left;");
-        }
-
         if (!this.do_rotation && this.interval != 0) {
-            clearInterval(this.interval);
-            this.interval = 0;
-            this.angle = 0;
-            this.set_applet_icon_symbolic_name("spices-update");
+            Tweener.addTween(this.actor, {
+                opacity: 0,
+                transition: "linear",
+                time: 0.5,
+                onComplete: Lang.bind(this, function() {
+                    clearInterval(this.interval);
+                    this.interval = 0;
+                    this.angle = 0;
+                    this.set_applet_icon_symbolic_name("spices-update");
+                    this.set_icon_color();
+                })
+            });
+
+            //clearInterval(this.interval);
+            //this.interval = 0;
+            //this.angle = 0;
+            //this.set_applet_icon_symbolic_name("spices-update");
+
+
         }
 
         if (this.numberLabel.text === "") this.badge.hide();
@@ -2124,16 +2143,43 @@ class SpicesUpdate extends Applet.IconApplet {
     }
 
     on_applet_added_to_panel() {
+        // Events:
+        this._connectIds = [];
+        this._connectIds.push(this.actor.connect("enter-event", (actor, event) => this.on_enter_event(actor, event)));
+        this._connectIds.push(this.actor.connect("leave-event", (actor, event) => this.on_leave_event(actor, event)));
+
         this.on_settings_changed();
         // Run the loop !
         this.iteration = 0;
         this.isLooping = false;
         this.new_loop_requested = false;
+
+        if (St.Widget.get_default_direction() === St.TextDirection.RTL) {
+            this._applet_tooltip._tooltip.set_style("text-align: right;");
+        } else {
+            this._applet_tooltip._tooltip.set_style("text-align: left;");
+        }
+
         this.updateLoop();
     }
 
     on_applet_removed_from_panel() {
-        // When applet is removed from panel: stop the loop, inhibit the update timer,
+        this.on_applet_reloaded();
+
+        for (let type of TYPES) this.monitorsPngId[type] = 0;
+
+        if (this.settings) {
+            try {
+                this.settings.finalize();
+            } catch(e) {
+                logError(e)
+            }
+        }
+        // End of on_applet_removed_from_panel
+    }
+
+    on_applet_reloaded() {
+        // When applet is reloaded or removed from panel: stop the loop, inhibit the update timer,
         // remove all bindings and disconnect all signals (if any) to avoid errors.
         this.applet_running = false;
         if (this.loopId > 0) {
@@ -2145,26 +2191,30 @@ class SpicesUpdate extends Applet.IconApplet {
             clearInterval(this.interval);
         }
 
+        this.destroy_all_notifications();
+
         var monitor, Id;
         for (let tuple of this.monitors) {
             [monitor, Id] = tuple;
             monitor.disconnect(Id)
         }
         this.monitors = [];
-        for (let type of TYPES) this.monitorsPngId[type] = 0;
-        if (this.settings) {
-            try {
-                this.settings.finalize();
-            } catch(e) {
-                logError(e)
-            }
+
+        while (this._connectIds.length > 0) {
+            this.actor.disconnect(this._connectIds.pop());
         }
-        // End of on_applet_removed_from_panel
+        // End of on_applet_reloaded
     }
 
-    on_applet_reloaded(deleteConfig) {
-        this.destroy_all_notifications();
-        // End of on_applet_reloaded
+    /**
+    * Events
+    */
+    on_enter_event(actor, event) {
+        this.set_applet_tooltip(this.tooltip_contents, true);
+    }
+
+    on_leave_event(actor, event) {
+        this.set_applet_tooltip("", true);
     }
 
     _set_SU_checks() {
