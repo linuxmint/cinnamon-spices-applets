@@ -23,11 +23,11 @@
 				"presentation"
             ]
         },
-        "units-section":{
+        "units-page":{
             "type":"page",
             "title":"Units, Icons and Keys",
             "sections":[
-				"units",
+				"units-section",
 				"icons",
 				"keybindings"
             ]
@@ -41,37 +41,6 @@
 				"more-info",
 				"submit-issue"
 			]
-		},
-		"submit-issue" : {
-			"type":"section",
-			"title":"Report an issue",
-			"keys":[
-				"issue-reporting-explanation",
-				"submitIssue",
-				"maintainer"
-			]
-		},
-		"provider-info" : {
-			"type":"section",
-			"title":"How to choose a weather provider",
-			"keys":[
-				"provider-explanation"
-			]
-		},
-		"location-info": {
-			"type":"section",
-			"title":"Allowed location formats",
-			"keys":[
-				"loc-info"
-			]
-		},
-		"more-info": {
-			"type":"section",
-			"title": "View additional information",
-			"keys":[
-				"more-info-label",
-				"getLocation"
-			]	
 		},
 		"provider-options" : {
 			"type":"section",
@@ -88,21 +57,12 @@
 				"forecastHours"
 			]
 		},
-		"units" : {
+		"weather-conditions" : {
 			"type":"section",
-			"title":"Units",
+			"title":"Weather conditions",
 			"keys":[
-				"temperatureUnit",
-				"windSpeedUnit",
-				"pressureUnit",
-				"distanceUnit"
-			]
-		},
-		"keybindings" : {
-			"type":"section",
-			"title":"Keybindings",
-			"keys":[
-				"keybinding"
+				"translateCondition",
+				"shortConditions"
 			]
 		},
 		"panel-options" : {
@@ -128,12 +88,14 @@
 				"locationLabelOverride"
 			]
 		},
-		"weather-conditions" : {
+		"units-section" : {
 			"type":"section",
-			"title":"Weather conditions",
+			"title":"Units",
 			"keys":[
-				"translateCondition",
-				"shortConditions"
+				"temperatureUnit",
+				"windSpeedUnit",
+				"pressureUnit",
+				"distanceUnit"
 			]
 		},
 		"icons" : {
@@ -143,6 +105,44 @@
 				"useSymbolicIcons",
 				"useCustomMenuIcons",
 				"useCustomAppletIcons"
+			]
+		},
+		"keybindings" : {
+			"type":"section",
+			"title":"Keybindings",
+			"keys":[
+				"keybinding"
+			]
+		},
+		"provider-info" : {
+			"type":"section",
+			"title":"How to choose a weather provider",
+			"keys":[
+				"provider-explanation"
+			]
+		},
+		"location-info": {
+			"type":"section",
+			"title":"Allowed location formats",
+			"keys":[
+				"loc-info"
+			]
+		},
+		"more-info": {
+			"type":"section",
+			"title": "View additional information",
+			"keys":[
+				"more-info-label",
+				"getLocation"
+			]
+		},
+		"submit-issue" : {
+			"type":"section",
+			"title":"Report an issue",
+			"keys":[
+				"issue-reporting-explanation",
+				"submitIssue",
+				"maintainer"
 			]
 		}
 	},
