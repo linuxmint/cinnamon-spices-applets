@@ -195,11 +195,7 @@
             "Save and quit": {
 				"description": "Save and quit",
 				"code": "ZZ"
-			},
-			"": {
-				"description": "",
-				"code": "dw"
-            },
+			}
 		}
 	}
 }
