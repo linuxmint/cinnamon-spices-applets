@@ -4,7 +4,7 @@
         "pages":[
             "providers",
             "presentation-section",
-			"units-section",
+			"units-page",
 			"info-section"
         ],
         "providers":{
