@@ -1275,6 +1275,7 @@ class UI {
         this._hourlyForecasts = [];
         for (let index = 0; index < hours; index++) {
             let box = new BoxLayout({ vertical: true });
+            box.set_width(config._hourlyForecastBoxWidth);
             this._hourlyForecasts.push({
                 Hour: new Label({ text: "Hour", style_class: "hourly-time", style: this.GetTextColorStyle() }),
                 Icon: new Icon({
@@ -1288,7 +1289,6 @@ class UI {
                 Temperature: new Label({ text: _(ELLIPSIS), style_class: "hourly-data" })
             });
             this._hourlyForecasts[index].Summary.clutter_text.set_line_wrap(true);
-            this._hourlyForecasts[index].Summary.set_width(85);
             box.add_child(this._hourlyForecasts[index].Hour);
             box.add_child(this._hourlyForecasts[index].Icon);
             box.add_child(this._hourlyForecasts[index].Summary);
@@ -1334,6 +1334,7 @@ class Config {
             USE_CUSTOM_APPLETICONS: 'useCustomAppletIcons',
             USE_CUSTOM_MENUICONS: "useCustomMenuIcons",
             RUSSIAN_STYLE: "tempRussianStyle",
+            HOURLY_BOX_WIDTH: "hourlyForecastBoxWidth"
         };
         this.doneTypingLocation = null;
         this.currentLocation = null;

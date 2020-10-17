@@ -85,7 +85,8 @@
 				"show24Hours",
 				"temperatureHighFirst",
 				"tempRussianStyle",
-				"locationLabelOverride"
+				"locationLabelOverride",
+				"hourlyForecastBoxWidth"
 			]
 		},
 		"units-section" : {
@@ -307,6 +308,16 @@
 		"default": false,
 		"tooltip": "Displaying forecasts from top to bottom instead from left to right.",
 		"description": "Show forecast vertically"
+	},
+	"hourlyForecastBoxWidth": {
+		"type": "spinbutton",
+		"default": 85,
+		"min": 20,
+		"max": 500,
+		"units": "pixels",
+		"step": 5,
+		"description": "Hourly Forecast box width",
+		"tooltip": "I'm unable to set this dynamically based on text width, so I expose it to set it yourself."
 	},
 	"forecastColumns": {
 		"type": "spinbutton",

@@ -1692,6 +1692,7 @@ class UI {
         this._hourlyForecasts = []
         for (let index = 0; index < hours; index++) {
             let box = new BoxLayout({ vertical: true });
+            box.set_width(config._hourlyForecastBoxWidth);
             this._hourlyForecasts.push({
                 // Override color on light theme for grey text
                 Hour: new Label({ text: "Hour", style_class: "hourly-time", style: this.GetTextColorStyle() }),
@@ -1707,7 +1708,6 @@ class UI {
             })
             // TODO: Fix issue where text is Elided instead of wrapped when its too long
             this._hourlyForecasts[index].Summary.clutter_text.set_line_wrap(true);
-            this._hourlyForecasts[index].Summary.set_width(85);
             box.add_child(this._hourlyForecasts[index].Hour);
             box.add_child(this._hourlyForecasts[index].Icon);
             box.add_child(this._hourlyForecasts[index].Summary);
@@ -1758,6 +1758,7 @@ class Config {
         USE_CUSTOM_APPLETICONS: 'useCustomAppletIcons',
         USE_CUSTOM_MENUICONS: "useCustomMenuIcons",
         RUSSIAN_STYLE: "tempRussianStyle",
+        HOURLY_BOX_WIDTH: "hourlyForecastBoxWidth"
     }
 
     // Settings variables to bind to
@@ -1787,6 +1788,7 @@ class Config {
     public readonly _useCustomMenuIcons: boolean;
     public readonly _tempTextOverride: string;
     public readonly _tempRussianStyle: boolean;
+    public readonly _hourlyForecastBoxWidth: number;
 
     public keybinding: any;
 

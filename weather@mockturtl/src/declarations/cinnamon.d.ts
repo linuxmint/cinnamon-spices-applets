@@ -439,7 +439,9 @@ declare namespace imports.gi.Clutter {
         hide(): void;
         show(): void;
         get_preferred_height(for_width: number): number[];
-		get_preferred_width(for_height: number): number[]; 
+        get_preferred_width(for_height: number): number[]; 
+        get_width(): number;
+        get_height(): number;
 		set_clip_to_allocation(clip_set: boolean): void; 
         destroy_all_children(): void;
         remove_all_children(): void;
@@ -450,12 +452,22 @@ declare namespace imports.gi.Clutter {
         remove_clip(): void;
         set_size(width: number, height: number): void;
         opacity: number;
+        allocation: Clutter.ActorBox;
 		//clip_to_allocation: boolean;
 		set_x_align(x_align: ActorAlign): void;
 		set_y_align(y_align: ActorAlign): void;
 		set_x_expand(expand: boolean): void;
 		set_y_expand(expand: boolean): void;
-	}
+    }
+    
+    export class ActorBox {
+        get_width(): number;
+        get_height(): number;
+        /** In pixels */
+        get_area(): number;
+        /** x and y */
+        get_origin(): number[];
+    }
 
 	export class Text extends Actor {
 		set_line_wrap(line_wrap: boolean): void; 
@@ -497,6 +509,7 @@ declare namespace imports.gi.St {
 		hide(): void;
 		style: string;
     }
+
     export class BoxLayout extends Widget {
         constructor(options ? : any)
         /** Deprecated, use add_child instead */
