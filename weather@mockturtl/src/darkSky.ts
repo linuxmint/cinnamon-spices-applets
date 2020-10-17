@@ -1,25 +1,25 @@
-export {}; // Declaring as a Module
+export { }; // Declaring as a Module
 
 function importModule(path: string): any {
     if (typeof require !== 'undefined') {
-      return require('./' + path);
+        return require('./' + path);
     } else {
-      if (!AppletDir) var AppletDir = imports.ui.appletManager.applets['weather@mockturtl'];
-      return AppletDir[path];
+        if (!AppletDir) var AppletDir = imports.ui.appletManager.applets['weather@mockturtl'];
+        return AppletDir[path];
     }
 }
 
 const UUID = "weather@mockturtl"
 imports.gettext.bindtextdomain(UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
 function _(str: string): string {
-  return imports.gettext.dgettext(UUID, str)
+    return imports.gettext.dgettext(UUID, str)
 }
 
 // Unable to use type declarations with imports like this, so
 // typing it manually again.
 var utils = importModule("utils");
 var isCoordinate = utils.isCoordinate as (text: any) => boolean;
-var isLangSupported = utils.isLangSupported as (lang: string, languages: Array <string> ) => boolean;
+var isLangSupported = utils.isLangSupported as (lang: string, languages: Array<string>) => boolean;
 var FahrenheitToKelvin = utils.FahrenheitToKelvin as (fahr: number) => number;
 var CelsiusToKelvin = utils.CelsiusToKelvin as (celsius: number) => number;
 var MPHtoMPS = utils.MPHtoMPS as (speed: number) => number;
@@ -39,8 +39,8 @@ class DarkSky implements WeatherProvider {
     //--------------------------------------------------------
     //  Properties
     //--------------------------------------------------------
-	public readonly prettyName = "DarkSky";
-	public readonly name = "DarkSky";
+    public readonly prettyName = "DarkSky";
+    public readonly name = "DarkSky";
     public readonly maxForecastSupport = 8;
     public readonly website = "https://darksky.net/poweredby/";
     public readonly maxHourlyForecastSupport = 168;
@@ -54,9 +54,9 @@ class DarkSky implements WeatherProvider {
 
     private query = "https://api.darksky.net/forecast/";
 
-      // DarkSky Filter words for short conditions, won't work on every language
+    // DarkSky Filter words for short conditions, won't work on every language
     private DarkSkyFilterWords = [_("and"), _("until"), _("in"), _("Possible")];
-    
+
     private unit: queryUnits = null;
 
     private app: WeatherApplet
@@ -75,16 +75,16 @@ class DarkSky implements WeatherProvider {
             try {
                 json = await this.app.LoadJsonAsync(query, this.OnObtainingData);
             }
-            catch(e) {
+            catch (e) {
                 this.app.HandleHTTPError("darksky", e, this.app);
                 return null;
-            }        
-            
+            }
+
             if (!json) {
-                this.app.HandleError({type: "soft", detail: "no api response", service: "darksky"});
+                this.app.HandleError({ type: "soft", detail: "no api response", service: "darksky" });
                 return null;
             }
-         
+
             if (!json.code) {                   // No code, Request Success
                 return this.ParseWeather(json);
             }
@@ -123,7 +123,7 @@ class DarkSky implements WeatherProvider {
                 condition: {
                     main: this.GetShortCurrentSummary(json.currently.summary),
                     description: json.currently.summary,
-                    icon: weatherIconSafely(this.ResolveIcon(json.currently.icon, {sunrise: sunrise, sunset: sunset}), this.app.config.IconType()),
+                    icon: weatherIconSafely(this.ResolveIcon(json.currently.icon, { sunrise: sunrise, sunset: sunset }), this.app.config.IconType()),
                     customIcon: this.ResolveCustomIcon(json.currently.icon)
                 },
                 extra_field: {
@@ -131,64 +131,64 @@ class DarkSky implements WeatherProvider {
                     value: this.ToKelvin(json.currently.apparentTemperature),
                     type: "temperature"
                 },
-            forecasts: [],
-            hourlyForecasts: []
+                forecasts: [],
+                hourlyForecasts: []
             }
             // Forecast
             for (let i = 0; i < json.daily.data.length; i++) {
                 let day = json.daily.data[i];
-                let forecast: ForecastData = {          
-                    date: new Date(day.time * 1000),         
-                      temp_min: this.ToKelvin(day.temperatureLow),           
-                      temp_max: this.ToKelvin(day.temperatureHigh),           
+                let forecast: ForecastData = {
+                    date: new Date(day.time * 1000),
+                    temp_min: this.ToKelvin(day.temperatureLow),
+                    temp_max: this.ToKelvin(day.temperatureHigh),
                     condition: {
-                      main: this.GetShortSummary(day.summary),               
-                      description: this.ProcessSummary(day.summary),        
-                      icon: weatherIconSafely(this.ResolveIcon(day.icon), this.app.config.IconType()),    
-                      customIcon: this.ResolveCustomIcon(day.icon)           
+                        main: this.GetShortSummary(day.summary),
+                        description: this.ProcessSummary(day.summary),
+                        icon: weatherIconSafely(this.ResolveIcon(day.icon), this.app.config.IconType()),
+                        customIcon: this.ResolveCustomIcon(day.icon)
                     },
-                  };
+                };
 
-                  // JS assumes time is local, so it applies the correct offset creating the Date (including Daylight Saving)
-                  // but when using the date when daylight saving is active, it DOES NOT apply the DST back,
-                  // So we offset the date to make it Noon
-                  forecast.date.setHours(forecast.date.getHours() + 12);
+                // JS assumes time is local, so it applies the correct offset creating the Date (including Daylight Saving)
+                // but when using the date when daylight saving is active, it DOES NOT apply the DST back,
+                // So we offset the date to make it Noon
+                forecast.date.setHours(forecast.date.getHours() + 12);
 
-                  result.forecasts.push(forecast);
+                result.forecasts.push(forecast);
             }
 
             for (let i = 0; i < json.hourly.data.length; i++) {
-                      let hour = json.hourly.data[i];
-                      let forecast: HourlyForecastData = {          
-                          date: new Date(hour.time * 1000),         
-                temp: this.ToKelvin(hour.temperature),                  
-                          condition: {
-                            main: this.GetShortSummary(hour.summary),               
-                            description: this.ProcessSummary(hour.summary),        
-                            icon: weatherIconSafely(this.ResolveIcon(hour.icon, {sunrise: sunrise, sunset: sunset}, new Date(hour.time * 1000)), this.app.config.IconType()),    
-                            customIcon: this.ResolveCustomIcon(hour.icon)           
-                },
-                precipitation: {
-                  type: hour.precipType as PrecipitationType,
-                  volume: hour.precipProbability,
-                  chance: hour.precipProbability * 100
-                }
-              };
+                let hour = json.hourly.data[i];
+                let forecast: HourlyForecastData = {
+                    date: new Date(hour.time * 1000),
+                    temp: this.ToKelvin(hour.temperature),
+                    condition: {
+                        main: this.GetShortSummary(hour.summary),
+                        description: this.ProcessSummary(hour.summary),
+                        icon: weatherIconSafely(this.ResolveIcon(hour.icon, { sunrise: sunrise, sunset: sunset }, new Date(hour.time * 1000)), this.app.config.IconType()),
+                        customIcon: this.ResolveCustomIcon(hour.icon)
+                    },
+                    precipitation: {
+                        type: hour.precipType as PrecipitationType,
+                        volume: hour.precipProbability,
+                        chance: hour.precipProbability * 100
+                    }
+                };
 
-              result.hourlyForecasts.push(forecast);
+                result.hourlyForecasts.push(forecast);
             }
             return result;
         }
-        catch(e) {
+        catch (e) {
             this.app.log.Error("DarkSky payload parsing error: " + e)
-            this.app.HandleError({type: "soft", detail: "unusual payload", service: "darksky", message: _("Failed to Process Weather Info")});
+            this.app.HandleError({ type: "soft", detail: "unusual payload", service: "darksky", message: _("Failed to Process Weather Info") });
             return null;
         }
     };
 
     private ConvertToAPILocale(systemLocale: string) {
         if (systemLocale == "zh-tw") {
-          return systemLocale;
+            return systemLocale;
         }
         let lang = systemLocale.split("-")[0];
         return lang;
@@ -202,9 +202,10 @@ class DarkSky implements WeatherProvider {
             this.app.log.Error("DarkSky: No API Key given");
             this.app.HandleError({
                 type: "hard",
-                 userError: true,
-                  "detail": "no key",
-                   message: _("Please enter API key in settings,\nor get one first on https://darksky.net/dev/register")});
+                userError: true,
+                "detail": "no key",
+                message: _("Please enter API key in settings,\nor get one first on https://darksky.net/dev/register")
+            });
             return "";
         }
         query = this.query + key + "/" + loc.text + "?exclude=minutely,flags" + "&units=" + this.unit;
@@ -215,7 +216,7 @@ class DarkSky implements WeatherProvider {
         return query;
     }
 
-      /**
+    /**
      * 
      * @param message Soup Message object
      * @returns null if custom error checking does not find anything
@@ -247,7 +248,7 @@ class DarkSky implements WeatherProvider {
         let error = json.error;
         let errorMsg = "DarkSky API: "
         this.app.log.Debug("DarksSky API error payload: " + json);
-        switch(code) {
+        switch (code) {
             case "400":
                 this.app.log.Error(errorMsg + error);
                 break;
@@ -273,17 +274,17 @@ class DarkSky implements WeatherProvider {
     };
 
     private GetShortSummary(summary: string): string {
-		let processed = summary.split(" ");
-		if (processed.length == 1) return processed[0];
+        let processed = summary.split(" ");
+        if (processed.length == 1) return processed[0];
         let result: string[] = [];
         for (let i = 0; i < processed.length; i++) {
             if (!/[\(\)]/.test(processed[i]) && !this.WordBanned(processed[i])) {
                 result.push(processed[i]) + " ";
-			}
-			if (result.length == 2) break;
+            }
+            if (result.length == 2) break;
         }
         return result.join(" ");
-	};
+    };
 
     private GetShortCurrentSummary(summary: string): string {
         let processed = summary.split(" ");
@@ -305,69 +306,69 @@ class DarkSky implements WeatherProvider {
     private ResolveIcon(icon: string, sunTimes?: SunTimes, date?: Date): BuiltinIcons[] {
         switch (icon) {
             case "rain":
-              return ["weather-rain", "weather-showers-scattered", "weather-freezing-rain"]
+                return ["weather-rain", "weather-showers-scattered", "weather-freezing-rain"]
             case "snow":
-              return ["weather-snow"]
+                return ["weather-snow"]
             case "sleet":
-              return ["weather-freezing-rain", "weather-rain", "weather-showers-scattered"]
+                return ["weather-freezing-rain", "weather-rain", "weather-showers-scattered"]
             case "fog":
-              return ["weather-fog"]
+                return ["weather-fog"]
             // There is no guarantee that there is a wind icon
             case "wind":
                 return (sunTimes && IsNight(sunTimes, date)) ? ["weather-windy", "weather-breeze", "weather-clouds", "weather-few-clouds-night"] : ["weather-windy", "weather-breeze", "weather-clouds", "weather-few-clouds"]
             case "cloudy":/* mostly cloudy (day) */
-              return (sunTimes && IsNight(sunTimes, date)) ? ["weather-overcast", "weather-clouds", "weather-few-clouds-night"] : ["weather-overcast", "weather-clouds", "weather-few-clouds"]
+                return (sunTimes && IsNight(sunTimes, date)) ? ["weather-overcast", "weather-clouds", "weather-few-clouds-night"] : ["weather-overcast", "weather-clouds", "weather-few-clouds"]
             case "partly-cloudy-night":
-              return ["weather-few-clouds-night"]
+                return ["weather-few-clouds-night"]
             case "partly-cloudy-day":
-              return ["weather-few-clouds"]
+                return ["weather-few-clouds"]
             case "clear-night":
-              return ["weather-clear-night"]
+                return ["weather-clear-night"]
             case "clear-day":
-              return ["weather-clear"]
+                return ["weather-clear"]
             // Have not seen Storm or Showers icons returned yet
             case "storm":
-              return ["weather-storm"]
+                return ["weather-storm"]
             case "showers":
-              return ["weather-showers", "weather-showers-scattered"]
+                return ["weather-showers", "weather-showers-scattered"]
             default:
-              return ["weather-severe-alert"]
-          }
+                return ["weather-severe-alert"]
+        }
     };
 
     private ResolveCustomIcon(icon: string): CustomIcons {
         switch (icon) {
             case "rain":
-              return "rain-symbolic";
+                return "rain-symbolic";
             case "snow":
-              return "snow-symbolic";
+                return "snow-symbolic";
             case "fog":
-              return "fog-symbolic";
+                return "fog-symbolic";
             case "cloudy":
-              return "cloudy-symbolic";
+                return "cloudy-symbolic";
             case "partly-cloudy-night":
-              return "night-alt-cloudy-symbolic";
+                return "night-alt-cloudy-symbolic";
             case "partly-cloudy-day":
-              return "day-cloudy-symbolic";
+                return "day-cloudy-symbolic";
             case "clear-night":
-              return "night-clear-symbolic";
+                return "night-clear-symbolic";
             case "clear-day":
-              return "day-sunny-symbolic";
+                return "day-sunny-symbolic";
             // Have not seen Storm or Showers icons returned yet
             case "storm":
-              return "thunderstorm-symbolic";
+                return "thunderstorm-symbolic";
             case "showers":
-              return "showers-symbolic";
+                return "showers-symbolic";
             // There is no guarantee that there is a wind icon
             case "wind":
                 return "strong-wind-symbolic";
             default:
-              return "cloud-refresh-symbolic";
-          }
+                return "cloud-refresh-symbolic";
+        }
     }
 
     private SetQueryUnit(): void {
-        if (this.app.config._temperatureUnit == "celsius"){
+        if (this.app.config._temperatureUnit == "celsius") {
             if (this.app.config._windSpeedUnit == "kph" || this.app.config._windSpeedUnit == "m/s") {
                 this.unit = 'si';
             }
@@ -408,77 +409,77 @@ class DarkSky implements WeatherProvider {
 type queryUnits = 'si' | 'us' | 'uk2';
 
 interface DarkSkyHourlyPayload {
-	time: number;
-	summary: string;
-	icon: string;
-	precipIntensity: number;
-	precipProbability: number;
-	precipType: string;
-	temperature: number;
-	apparentTemperature: number;
-	dewPoint: number;
-	humidity: number;
-	pressure: number;
-	windSpeed: number;
-	windGust: number;
-	windBearing: number;
-	cloudCover: number;
-	uvIndex: number;
-	visibility: number;
-	ozone: number;
+    time: number;
+    summary: string;
+    icon: string;
+    precipIntensity: number;
+    precipProbability: number;
+    precipType: string;
+    temperature: number;
+    apparentTemperature: number;
+    dewPoint: number;
+    humidity: number;
+    pressure: number;
+    windSpeed: number;
+    windGust: number;
+    windBearing: number;
+    cloudCover: number;
+    uvIndex: number;
+    visibility: number;
+    ozone: number;
 }
 
 interface DarkSkyDailyPayload {
-	time: number;
-	summary: string;
-	icon: string;
-	sunriseTime: number;
-	sunsetTime: number;
-	moonPhase: number;
-	precipIntensity: number;
-	precipIntensityMax: number;
-	precipIntensityMaxTime: number;
-	precipProbability: number;
-	precipType: string;
-	temperatureHigh: number;
-	temperatureHighTime: number;
-	temperatureLow: number;
-	temperatureLowTime: number;
-	apparentTemperatureHigh: number;
-	apparentTemperatureHighTime: number;
-	apparentTemperatureLow: number;
-	apparentTemperatureLowTime: number;
-	dewPoint: number;
-	humidity: number;
-	pressure: number;
-	windSpeed: number;
-	windGust: number;
-	windGustTime: number;
-	windBearing: number;
-	cloudCover: number;
-	uvIndex: number;
-	uvIndexTime: number;
-	visibility: number;
-	ozone: number;
-	temperatureMin: number;
-	temperatureMinTime: number;
-	temperatureMax: number;
-	temperatureMaxTime: number;
-	apparentTemperatureMin: number;
-	apparentTemperatureMinTime: number;
-	apparentTemperatureMax: number;
-	apparentTemperatureMaxTime: number;
+    time: number;
+    summary: string;
+    icon: string;
+    sunriseTime: number;
+    sunsetTime: number;
+    moonPhase: number;
+    precipIntensity: number;
+    precipIntensityMax: number;
+    precipIntensityMaxTime: number;
+    precipProbability: number;
+    precipType: string;
+    temperatureHigh: number;
+    temperatureHighTime: number;
+    temperatureLow: number;
+    temperatureLowTime: number;
+    apparentTemperatureHigh: number;
+    apparentTemperatureHighTime: number;
+    apparentTemperatureLow: number;
+    apparentTemperatureLowTime: number;
+    dewPoint: number;
+    humidity: number;
+    pressure: number;
+    windSpeed: number;
+    windGust: number;
+    windGustTime: number;
+    windBearing: number;
+    cloudCover: number;
+    uvIndex: number;
+    uvIndexTime: number;
+    visibility: number;
+    ozone: number;
+    temperatureMin: number;
+    temperatureMinTime: number;
+    temperatureMax: number;
+    temperatureMaxTime: number;
+    apparentTemperatureMin: number;
+    apparentTemperatureMinTime: number;
+    apparentTemperatureMax: number;
+    apparentTemperatureMaxTime: number;
 }
 interface DarkSkyPayload {
-	latitude: number;
-	longitude: number;
-	timezone: string;
-	currently: {
-		/** Unix timestamp in seconds */
-		time: number;
-		summary: string;
-		icon: string;
-		nearestStormDistance: number;
+    latitude: number;
+    longitude: number;
+    timezone: string;
+    currently: {
+        /** Unix timestamp in seconds */
+        time: number;
+        summary: string;
+        icon: string;
+        nearestStormDistance: number;
         nearestStormBearing: number;
         precipIntensity: number;
         precipProbability: number;
@@ -499,11 +500,11 @@ interface DarkSkyPayload {
         summary: string;
         icon: string;
         data: DarkSkyHourlyPayload[];
-	}
-	daily: {
+    }
+    daily: {
         summary: string;
         icon: string;
-		data: DarkSkyDailyPayload[]
-	}
+        data: DarkSkyDailyPayload[]
+    }
 }
 
