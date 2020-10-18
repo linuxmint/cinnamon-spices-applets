@@ -1362,6 +1362,9 @@ class UI {
             let summaryWidth = ui.Summary.get_preferred_width(-1)[1];
             let temperatureWidth = ui.Temperature.get_preferred_width(-1)[1];
 			let precipitationWidth = ui.Precipitation.get_preferred_width(-1)[1];
+
+			// If text is bigger than icon we add some artificial padding
+			// so text doesn't look too close
 			if (precipitationWidth > iconWidth || summaryWidth > iconWidth) {
 				if (precipitationWidth > summaryWidth) 
 					precipitationWidth += 10;
