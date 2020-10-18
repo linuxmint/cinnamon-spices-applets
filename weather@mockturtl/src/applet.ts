@@ -174,6 +174,7 @@ class WeatherApplet extends TextIconApplet {
     public readonly geoLocationService = new GeoLocation(this);
     public orientation: imports.gi.St.Side;
     public locationStore: LocationStore = null;
+    public displayedHourlyForecasts: number;
 
 	/** Used for error handling, first error calls flips it
 	 * to prevents displaying other errors in the current loop.
@@ -834,10 +835,10 @@ class UI {
     private _hourlyScrollView: imports.gi.St.ScrollView;
     private _hourlyBox: imports.gi.St.BoxLayout;
     private _hourlyForecasts: HourlyForecastUI[];
+    private _hourlyForecastBoxes: imports.gi.St.BoxLayout[];
 
     // State variables
     private hourlyToggled: boolean = false;
-    private hourlyNeverOpened: boolean = true;
     private lightTheme: boolean = false;
 
     private app: WeatherApplet;
@@ -872,7 +873,6 @@ class UI {
 	 * to recolor some of the text
 	 */
     private OnThemeChanged(): void {
-        this.hourlyNeverOpened = true;
         this.HideHourlyWeather();
         let newThemeIsLight = this.IsLightTheme();
         // Theme changed between light and dark theme
@@ -987,7 +987,6 @@ class UI {
         this.rebuildHourlyWeatherUi(config);
         this.rebuildFutureWeatherUi(config);
         this.rebuildBar(config);
-        this.hourlyNeverOpened = true;
     }
 
 	/** Changes all icon's type what are affected by
@@ -1011,14 +1010,15 @@ class UI {
     public ShowHourlyWeather(): void {
         // In some cases the preferred height is not calculated
         // properly for the first time, so we work around by opening and closing it once
-        if (this.hourlyNeverOpened) {
-            this.hourlyNeverOpened = false;
-            this._hourlyScrollView.show();
-            this._hourlyScrollView.hide();
-        }
+        this._hourlyScrollView.show();
+        this._hourlyScrollView.hide();
 
-        let [minHeight, naturalHeight] = this._hourlyScrollView.get_preferred_height(-1);
+        this.AdjustHourlyBoxItemWidth();
+        this.app.log.Debug("Calculated hourly scroll view height is " + this.GetScrollViewHeight());
+
         let [minWidth, naturalWidth] = this._hourlyScrollView.get_preferred_width(-1);
+        let [minHeight, naturalHeight] = this._hourlyScrollView.get_preferred_height(minWidth);
+        this.app.log.Debug("hourlyScrollView requested height and is set to: " + naturalHeight);
         this._hourlyScrollView.set_width(minWidth);
         this._separatorAreaHourly.actor.show();
         if (!!this._hourlyButton.child) this._hourlyButton.child.icon_name = "custom-up-arrow-symbolic";
@@ -1343,9 +1343,67 @@ class UI {
             }
         }
 
+        this.AdjustHourlyBoxItemWidth();
+
         if (max <= 0) this.HideHourlyToggle();
 
         return true;
+    }
+
+	/** Calculates incorrect width the first time, make sure to call this
+	 * after a show/hide iteration as well when the Hourly box is shown
+	 */
+    private AdjustHourlyBoxItemWidth(): void {
+        let requiredWidth = 0;
+        for (let index = 0; index < this._hourlyForecastBoxes.length; index++) {
+            const ui = this._hourlyForecasts[index];
+            let hourWidth = ui.Hour.get_preferred_width(-1)[1];
+            let iconWidth = ui.Icon.get_preferred_width(-1)[1];
+            let summaryWidth = ui.Summary.get_preferred_width(-1)[1];
+            let temperatureWidth = ui.Temperature.get_preferred_width(-1)[1];
+			let precipitationWidth = ui.Precipitation.get_preferred_width(-1)[1];
+			if (precipitationWidth > iconWidth || summaryWidth > iconWidth) {
+				if (precipitationWidth > summaryWidth) 
+					precipitationWidth += 10;
+				else
+					summaryWidth += 10;
+			}
+            if (requiredWidth < hourWidth) requiredWidth = hourWidth;
+            if (requiredWidth < iconWidth) requiredWidth = iconWidth;
+            if (requiredWidth < summaryWidth) requiredWidth = summaryWidth;
+            if (requiredWidth < temperatureWidth) requiredWidth = temperatureWidth;
+            if (requiredWidth < precipitationWidth) requiredWidth = precipitationWidth;
+        }
+
+        for (let index = 0; index < this._hourlyForecastBoxes.length; index++) {
+            const element = this._hourlyForecastBoxes[index];
+            element.set_width(requiredWidth);
+        }
+    }
+
+    private GetScrollViewHeight(): number {
+        let boxItemHeight = 0;
+        for (let index = 0; index < this._hourlyForecastBoxes.length; index++) {
+            const ui = this._hourlyForecasts[index];
+
+            this.app.log.Debug("Height requests of Hourly box Items: " + index);
+            let hourHeight = ui.Hour.get_preferred_height(-1)[1];
+            let iconHeight = ui.Icon.get_preferred_height(-1)[1];
+            let summaryHeight = ui.Summary.get_preferred_height(-1)[1];
+            let temperatureHeight = ui.Temperature.get_preferred_height(-1)[1];
+            let precipitationHeight = ui.Precipitation.get_preferred_height(-1)[1];
+            let itemheight = hourHeight + iconHeight + summaryHeight + temperatureHeight + precipitationHeight;
+            if (boxItemHeight < itemheight) boxItemHeight = itemheight;
+            this.app.log.Debug([hourHeight, iconHeight, summaryHeight, temperatureHeight, precipitationHeight].join(", ") + "with a total of " + itemheight);
+        }
+        this.app.log.Debug("Final Hourly box item height is: " + boxItemHeight)
+        let scrollBarHeight = this._hourlyScrollView.get_hscroll_bar().get_preferred_width(-1)[1];
+        this.app.log.Debug("Scrollbar height is " + scrollBarHeight);
+        let theme = this._hourlyBox.get_theme_node();
+        let styling = theme.get_margin(Side.TOP) + theme.get_margin(Side.BOTTOM) + theme.get_padding(Side.TOP) + theme.get_padding(Side.BOTTOM);
+        this.app.log.Debug("ScollbarBox vertical padding and margin is: " + styling);
+
+        return (boxItemHeight + scrollBarHeight + styling);
     }
 
     private unitToUnicode(unit: WeatherUnits): string {
@@ -1689,10 +1747,13 @@ class UI {
     private rebuildHourlyWeatherUi(config: Config) {
         this.destroyHourlyWeather();
         let hours = this.app.GetMaxHourlyForecasts();
-        this._hourlyForecasts = []
+        this._hourlyForecasts = [];
+        this._hourlyForecastBoxes = [];
+
         for (let index = 0; index < hours; index++) {
-            let box = new BoxLayout({ vertical: true });
-            box.set_width(config._hourlyForecastBoxWidth);
+            let box = new BoxLayout({ vertical: true, style_class: "hourly-box-item" });
+            this._hourlyForecastBoxes.push(box);
+
             this._hourlyForecasts.push({
                 // Override color on light theme for grey text
                 Hour: new Label({ text: "Hour", style_class: "hourly-time", style: this.GetTextColorStyle() }),
@@ -1706,13 +1767,14 @@ class UI {
                 Summary: new Label({ text: _(ELLIPSIS), style_class: "hourly-data" }),
                 Temperature: new Label({ text: _(ELLIPSIS), style_class: "hourly-data" })
             })
-            // TODO: Fix issue where text is Elided instead of wrapped when its too long
+
             this._hourlyForecasts[index].Summary.clutter_text.set_line_wrap(true);
             box.add_child(this._hourlyForecasts[index].Hour);
             box.add_child(this._hourlyForecasts[index].Icon);
             box.add_child(this._hourlyForecasts[index].Summary);
             box.add_child(this._hourlyForecasts[index].Temperature);
             box.add_child(this._hourlyForecasts[index].Precipitation);
+
             this._hourlyBox.add(box, {
                 x_fill: true,
                 x_align: Align.MIDDLE,
@@ -1758,7 +1820,6 @@ class Config {
         USE_CUSTOM_APPLETICONS: 'useCustomAppletIcons',
         USE_CUSTOM_MENUICONS: "useCustomMenuIcons",
         RUSSIAN_STYLE: "tempRussianStyle",
-        HOURLY_BOX_WIDTH: "hourlyForecastBoxWidth"
     }
 
     // Settings variables to bind to
@@ -1788,7 +1849,6 @@ class Config {
     public readonly _useCustomMenuIcons: boolean;
     public readonly _tempTextOverride: string;
     public readonly _tempRussianStyle: boolean;
-    public readonly _hourlyForecastBoxWidth: number;
 
     public keybinding: any;
 

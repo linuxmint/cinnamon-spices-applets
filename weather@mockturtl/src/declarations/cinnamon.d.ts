@@ -553,7 +553,8 @@ declare namespace imports.gi.St {
     }
 
     export class ScrollView  extends Widget {
-        set_row_size(row_size:number): void;
+		set_row_size(row_size:number): void;
+		get_row_size(): number;
         set_policy(hscroll: any, vscroll: any): void;
         get_vscroll_bar(): ScrollBar;
         get_hscroll_bar(): ScrollBar;
@@ -605,16 +606,16 @@ declare namespace imports.gi.St {
         get_icon_colors()
         get_icon_style()
         get_length(property_name)
-        get_letter_spacing()
-        get_margin(side)
-        get_max_height()
+        get_letter_spacing()*/
+        get_margin(side: Side): number;
+        /*get_max_height()
         get_max_width()
         get_min_height()
         get_min_width()
         get_outline_color()
-        get_outline_width()
-        get_padding(side)
-        get_paint_box(allocation)
+        get_outline_width()*/
+        get_padding(side: Side): number;
+        /*get_paint_box(allocation)
         get_parent()
         get_pseudo_classes()
         get_shadow(property_name)
@@ -640,9 +641,12 @@ declare namespace imports.gi.St {
     }
 
     export enum Side {
-        LEFT,
-        RIGHT
-    }
+		TOP,
+		RIGHT,
+		BOTTOM,
+		LEFT
+	}
+	
     export enum IconType {
         SYMBOLIC,
         FULLCOLOR

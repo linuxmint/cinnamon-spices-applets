@@ -620,7 +620,6 @@ class Log {
 class UI {
     constructor(app, orientation) {
         this.hourlyToggled = false;
-        this.hourlyNeverOpened = true;
         this.lightTheme = false;
         this.app = app;
         this.menuManager = new PopupMenuManager(this.app);
@@ -635,7 +634,6 @@ class UI {
         this.signals.connect(themeManager, 'theme-set', this.OnThemeChanged, this);
     }
     OnThemeChanged() {
-        this.hourlyNeverOpened = true;
         this.HideHourlyWeather();
         let newThemeIsLight = this.IsLightTheme();
         if (newThemeIsLight != this.lightTheme) {
@@ -712,7 +710,6 @@ class UI {
         this.rebuildHourlyWeatherUi(config);
         this.rebuildFutureWeatherUi(config);
         this.rebuildBar(config);
-        this.hourlyNeverOpened = true;
     }
     UpdateIconType(iconType) {
         if (iconType == IconType.FULLCOLOR && this.app.config._useCustomMenuIcons)
@@ -729,13 +726,13 @@ class UI {
         this._timestamp.text = msg;
     }
     ShowHourlyWeather() {
-        if (this.hourlyNeverOpened) {
-            this.hourlyNeverOpened = false;
-            this._hourlyScrollView.show();
-            this._hourlyScrollView.hide();
-        }
-        let [minHeight, naturalHeight] = this._hourlyScrollView.get_preferred_height(-1);
+        this._hourlyScrollView.show();
+        this._hourlyScrollView.hide();
+        this.AdjustHourlyBoxItemWidth();
+        this.app.log.Debug("Calculated hourly scroll view height is " + this.GetScrollViewHeight());
         let [minWidth, naturalWidth] = this._hourlyScrollView.get_preferred_width(-1);
+        let [minHeight, naturalHeight] = this._hourlyScrollView.get_preferred_height(minWidth);
+        this.app.log.Debug("hourlyScrollView requested height and is set to: " + naturalHeight);
         this._hourlyScrollView.set_width(minWidth);
         this._separatorAreaHourly.actor.show();
         if (!!this._hourlyButton.child)
@@ -1003,9 +1000,64 @@ class UI {
                     ui.Precipitation.text = precipitationText;
             }
         }
+        this.AdjustHourlyBoxItemWidth();
         if (max <= 0)
             this.HideHourlyToggle();
         return true;
+    }
+    AdjustHourlyBoxItemWidth() {
+        let requiredWidth = 0;
+        for (let index = 0; index < this._hourlyForecastBoxes.length; index++) {
+            const ui = this._hourlyForecasts[index];
+            let hourWidth = ui.Hour.get_preferred_width(-1)[1];
+            let iconWidth = ui.Icon.get_preferred_width(-1)[1];
+            let summaryWidth = ui.Summary.get_preferred_width(-1)[1];
+            let temperatureWidth = ui.Temperature.get_preferred_width(-1)[1];
+            let precipitationWidth = ui.Precipitation.get_preferred_width(-1)[1];
+            if (precipitationWidth > iconWidth || summaryWidth > iconWidth) {
+                if (precipitationWidth > summaryWidth)
+                    precipitationWidth += 10;
+                else
+                    summaryWidth += 10;
+            }
+            if (requiredWidth < hourWidth)
+                requiredWidth = hourWidth;
+            if (requiredWidth < iconWidth)
+                requiredWidth = iconWidth;
+            if (requiredWidth < summaryWidth)
+                requiredWidth = summaryWidth;
+            if (requiredWidth < temperatureWidth)
+                requiredWidth = temperatureWidth;
+            if (requiredWidth < precipitationWidth)
+                requiredWidth = precipitationWidth;
+        }
+        for (let index = 0; index < this._hourlyForecastBoxes.length; index++) {
+            const element = this._hourlyForecastBoxes[index];
+            element.set_width(requiredWidth);
+        }
+    }
+    GetScrollViewHeight() {
+        let boxItemHeight = 0;
+        for (let index = 0; index < this._hourlyForecastBoxes.length; index++) {
+            const ui = this._hourlyForecasts[index];
+            this.app.log.Debug("Height requests of Hourly box Items: " + index);
+            let hourHeight = ui.Hour.get_preferred_height(-1)[1];
+            let iconHeight = ui.Icon.get_preferred_height(-1)[1];
+            let summaryHeight = ui.Summary.get_preferred_height(-1)[1];
+            let temperatureHeight = ui.Temperature.get_preferred_height(-1)[1];
+            let precipitationHeight = ui.Precipitation.get_preferred_height(-1)[1];
+            let itemheight = hourHeight + iconHeight + summaryHeight + temperatureHeight + precipitationHeight;
+            if (boxItemHeight < itemheight)
+                boxItemHeight = itemheight;
+            this.app.log.Debug([hourHeight, iconHeight, summaryHeight, temperatureHeight, precipitationHeight].join(", ") + "with a total of " + itemheight);
+        }
+        this.app.log.Debug("Final Hourly box item height is: " + boxItemHeight);
+        let scrollBarHeight = this._hourlyScrollView.get_hscroll_bar().get_preferred_width(-1)[1];
+        this.app.log.Debug("Scrollbar height is " + scrollBarHeight);
+        let theme = this._hourlyBox.get_theme_node();
+        let styling = theme.get_margin(Side.TOP) + theme.get_margin(Side.BOTTOM) + theme.get_padding(Side.TOP) + theme.get_padding(Side.BOTTOM);
+        this.app.log.Debug("ScollbarBox vertical padding and margin is: " + styling);
+        return (boxItemHeight + scrollBarHeight + styling);
     }
     unitToUnicode(unit) {
         return unit == "fahrenheit" ? '\u2109' : '\u2103';
@@ -1273,9 +1325,10 @@ class UI {
         this.destroyHourlyWeather();
         let hours = this.app.GetMaxHourlyForecasts();
         this._hourlyForecasts = [];
+        this._hourlyForecastBoxes = [];
         for (let index = 0; index < hours; index++) {
-            let box = new BoxLayout({ vertical: true });
-            box.set_width(config._hourlyForecastBoxWidth);
+            let box = new BoxLayout({ vertical: true, style_class: "hourly-box-item" });
+            this._hourlyForecastBoxes.push(box);
             this._hourlyForecasts.push({
                 Hour: new Label({ text: "Hour", style_class: "hourly-time", style: this.GetTextColorStyle() }),
                 Icon: new Icon({
@@ -1334,7 +1387,6 @@ class Config {
             USE_CUSTOM_APPLETICONS: 'useCustomAppletIcons',
             USE_CUSTOM_MENUICONS: "useCustomMenuIcons",
             RUSSIAN_STYLE: "tempRussianStyle",
-            HOURLY_BOX_WIDTH: "hourlyForecastBoxWidth"
         };
         this.doneTypingLocation = null;
         this.currentLocation = null;
