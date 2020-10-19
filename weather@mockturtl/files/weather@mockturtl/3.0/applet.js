@@ -873,6 +873,7 @@ var UI = (function () {
         if (!!this._hourlyButton.child)
             this._hourlyButton.child.icon_name = "custom-up-arrow-symbolic";
         this._hourlyScrollView.show();
+        this._hourlyScrollView.style = "min-height: " + naturalHeight.toString() + "px;";
         if (global.settings.get_boolean("desktop-effects-on-menus")) {
             this._hourlyScrollView.height = 0;
             addTween(this._hourlyScrollView, {
@@ -1185,7 +1186,6 @@ var UI = (function () {
             var itemheight = hourHeight + iconHeight + summaryHeight + temperatureHeight + precipitationHeight;
             if (boxItemHeight < itemheight)
                 boxItemHeight = itemheight;
-            this.app.log.Debug([hourHeight, iconHeight, summaryHeight, temperatureHeight, precipitationHeight].join(", ") + "with a total of " + itemheight);
         }
         this.app.log.Debug("Final Hourly box item height is: " + boxItemHeight);
         var scrollBarHeight = this._hourlyScrollView.get_hscroll_bar().get_preferred_width(-1)[1];

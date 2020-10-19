@@ -1022,7 +1022,14 @@ class UI {
         this._hourlyScrollView.set_width(minWidth);
         this._separatorAreaHourly.actor.show();
         if (!!this._hourlyButton.child) this._hourlyButton.child.icon_name = "custom-up-arrow-symbolic";
-        this._hourlyScrollView.show();
+		this._hourlyScrollView.show();
+		// When the srcollView is shown without animation and there is not enough vertical space
+		// (or cinnamon does not think there is enough), the text gets superimposed on top of
+		// each other.
+		// setting the min-height forces to draw with the view's requested height without
+		// interfering animations.
+		this._hourlyScrollView.style = "min-height: " + naturalHeight.toString() + "px;";
+
         if (global.settings.get_boolean("desktop-effects-on-menus")) {
             this._hourlyScrollView.height = 0;
             addTween(this._hourlyScrollView,
@@ -1397,7 +1404,6 @@ class UI {
             let precipitationHeight = ui.Precipitation.get_preferred_height(-1)[1];
             let itemheight = hourHeight + iconHeight + summaryHeight + temperatureHeight + precipitationHeight;
             if (boxItemHeight < itemheight) boxItemHeight = itemheight;
-            this.app.log.Debug([hourHeight, iconHeight, summaryHeight, temperatureHeight, precipitationHeight].join(", ") + "with a total of " + itemheight);
         }
         this.app.log.Debug("Final Hourly box item height is: " + boxItemHeight)
         let scrollBarHeight = this._hourlyScrollView.get_hscroll_bar().get_preferred_width(-1)[1];
