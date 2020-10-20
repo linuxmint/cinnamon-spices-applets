@@ -196,10 +196,12 @@ class BookmarksManager {
         let bookmarks = [];
         Promise.all([
             readChromiumBookmarks(bookmarks, ['chromium', 'Default', 'Bookmarks'], 'chromium-browser', appSystem),
-            readChromiumBookmarks(bookmarks, ['google-chrome', 'Default', 'Bookmarks'], 'google-chrome', appSystem),
-            readChromiumBookmarks(bookmarks, ['.config', 'opera', 'Bookmarks'], 'opera', appSystem)
+            readChromiumBookmarks(bookmarks, ['google-chrome', 'Default', 'Bookmarks'], 'google-chrome', appSystem)
+            //reading opera bookmarks seems to no longer work
+            //readChromiumBookmarks(bookmarks, ['.config', 'opera', 'Bookmarks'], 'opera', appSystem)
         ]).then(() => {
-            bookmarks = bookmarks.concat(readFirefoxProfiles(appSystem));
+            //reading firefox bookmarks no longer works.
+            //bookmarks = bookmarks.concat(readFirefoxProfiles(appSystem));
 
             for (let i = 0, len = bookmarks.length; i < len; i++) {
                 bookmarks[i].icon = bookmarks[i].app.get_icon();
