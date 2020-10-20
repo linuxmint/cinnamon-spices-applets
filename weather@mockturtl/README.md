@@ -80,7 +80,7 @@ Sometimes it takes 10-15 seconds to obtain weather, please be patient when it lo
 
 ## Requirements
 
-* [Cinnamon](https://github.com/linuxmint/Cinnamon) 1.8+, 
+* [Cinnamon](https://github.com/linuxmint/Cinnamon) 3.0+, 
 
 ## Configuration
 

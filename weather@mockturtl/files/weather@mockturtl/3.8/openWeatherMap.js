@@ -29,7 +29,8 @@ class OpenWeatherMap {
         this.maxHourlyForecastSupport = 48;
         this.supportedLanguages = ["af", "ar", "az", "bg", "ca", "cz", "da", "de", "el", "en", "eu", "fa", "fi",
             "fr", "gl", "he", "hi", "hr", "hu", "id", "it", "ja", "kr", "la", "lt", "mk", "no", "nl", "pl",
-            "pt", "pt_br", "ro", "ru", "se", "sk", "sl", "sp", "es", "sr", "th", "tr", "ua", "uk", "vi", "zh_cn", "zh_tw", "zu"];
+            "pt", "pt_br", "ro", "ru", "se", "sk", "sl", "sp", "es", "sr", "th", "tr", "ua", "uk", "vi", "zh_cn", "zh_tw", "zu"
+        ];
         this.base_url = "https://api.openweathermap.org/data/2.5/onecall?";
         this.app = _app;
     }
@@ -45,7 +46,11 @@ class OpenWeatherMap {
                 return null;
             }
             if (json == null) {
-                this.app.HandleError({ type: "soft", detail: "no api response", service: "openweathermap" });
+                this.app.HandleError({
+                    type: "soft",
+                    detail: "no api response",
+                    service: "openweathermap"
+                });
                 return null;
             }
             return this.ParseWeather(json, this);
@@ -140,7 +145,12 @@ class OpenWeatherMap {
         }
         catch (e) {
             self.app.log.Error("OpenWeatherMap Weather Parsing error: " + e);
-            self.app.HandleError({ type: "soft", service: "openweathermap", detail: "unusual payload", message: _("Failed to Process Current Weather Info") });
+            self.app.HandleError({
+                type: "soft",
+                service: "openweathermap",
+                detail: "unusual payload",
+                message: _("Failed to Process Current Weather Info")
+            });
             return null;
         }
     }

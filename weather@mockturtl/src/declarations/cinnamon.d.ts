@@ -439,7 +439,9 @@ declare namespace imports.gi.Clutter {
         hide(): void;
         show(): void;
         get_preferred_height(for_width: number): number[];
-		get_preferred_width(for_height: number): number[]; 
+        get_preferred_width(for_height: number): number[]; 
+        get_width(): number;
+        get_height(): number;
 		set_clip_to_allocation(clip_set: boolean): void; 
         destroy_all_children(): void;
         remove_all_children(): void;
@@ -450,12 +452,22 @@ declare namespace imports.gi.Clutter {
         remove_clip(): void;
         set_size(width: number, height: number): void;
         opacity: number;
+        allocation: Clutter.ActorBox;
 		//clip_to_allocation: boolean;
 		set_x_align(x_align: ActorAlign): void;
 		set_y_align(y_align: ActorAlign): void;
 		set_x_expand(expand: boolean): void;
 		set_y_expand(expand: boolean): void;
-	}
+    }
+    
+    export class ActorBox {
+        get_width(): number;
+        get_height(): number;
+        /** In pixels */
+        get_area(): number;
+        /** x and y */
+        get_origin(): number[];
+    }
 
 	export class Text extends Actor {
 		set_line_wrap(line_wrap: boolean): void; 
@@ -497,6 +509,7 @@ declare namespace imports.gi.St {
 		hide(): void;
 		style: string;
     }
+
     export class BoxLayout extends Widget {
         constructor(options ? : any)
         /** Deprecated, use add_child instead */
@@ -540,11 +553,16 @@ declare namespace imports.gi.St {
     }
 
     export class ScrollView  extends Widget {
-        set_row_size(row_size:number): void;
+		set_row_size(row_size:number): void;
+		get_row_size(): number;
         set_policy(hscroll: any, vscroll: any): void;
         get_vscroll_bar(): ScrollBar;
         get_hscroll_bar(): ScrollBar;
-        overlay_scrollbars: boolean; 
+		overlay_scrollbars: boolean; 
+		"hscrollbar-policy": Gtk.PolicyType;
+		"vscrollbar-policy": Gtk.PolicyType;
+		"hscrollbar-visible": boolean;
+		"vscrollbar-visible": boolean;
         clip_to_allocation: boolean;
         constructor(options ? : any);
 	}
@@ -592,16 +610,16 @@ declare namespace imports.gi.St {
         get_icon_colors()
         get_icon_style()
         get_length(property_name)
-        get_letter_spacing()
-        get_margin(side)
-        get_max_height()
+        get_letter_spacing()*/
+        get_margin(side: Side): number;
+        /*get_max_height()
         get_max_width()
         get_min_height()
         get_min_width()
         get_outline_color()
-        get_outline_width()
-        get_padding(side)
-        get_paint_box(allocation)
+        get_outline_width()*/
+        get_padding(side: Side): number;
+        /*get_paint_box(allocation)
         get_parent()
         get_pseudo_classes()
         get_shadow(property_name)
@@ -627,9 +645,12 @@ declare namespace imports.gi.St {
     }
 
     export enum Side {
-        LEFT,
-        RIGHT
-    }
+		TOP,
+		RIGHT,
+		BOTTOM,
+		LEFT
+	}
+	
     export enum IconType {
         SYMBOLIC,
         FULLCOLOR

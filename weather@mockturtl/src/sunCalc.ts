@@ -1,4 +1,4 @@
-export {}
+export { }
 
 /*
  (c) 2011-2015, Vladimir Agafonkin
@@ -10,14 +10,14 @@ export {}
 
 // shortcuts for easier to read formulas
 
-var PI   = Math.PI,
-    sin  = Math.sin,
-    cos  = Math.cos,
-    tan  = Math.tan,
+var PI = Math.PI,
+    sin = Math.sin,
+    cos = Math.cos,
+    tan = Math.tan,
     asin = Math.asin,
     atan = Math.atan2,
     acos = Math.acos,
-    rad  = PI / 180;
+    rad = PI / 180;
 
 // sun calculations are based on http://aa.quae.nl/en/reken/zonpositie.html formulas
 
@@ -29,8 +29,8 @@ var dayMs = 1000 * 60 * 60 * 24,
     J2000 = 2451545;
 
 function toJulian(date: Date) { return date.valueOf() / dayMs - 0.5 + J1970; }
-function fromJulian(j: number)  { return new Date((j + 0.5 - J1970) * dayMs); }
-function toDays(date: Date)   { return toJulian(date) - J2000; }
+function fromJulian(j: number) { return new Date((j + 0.5 - J1970) * dayMs); }
+function toDays(date: Date) { return toJulian(date) - J2000; }
 
 
 // general calculations for position
@@ -38,9 +38,9 @@ function toDays(date: Date)   { return toJulian(date) - J2000; }
 var e = rad * 23.4397; // obliquity of the Earth
 
 function rightAscension(l: number, b: number) { return atan(sin(l) * cos(e) - tan(b) * sin(e), cos(l)); }
-function declination(l: number, b: number)    { return asin(sin(b) * cos(e) + cos(b) * sin(e) * sin(l)); }
+function declination(l: number, b: number) { return asin(sin(b) * cos(e) + cos(b) * sin(e) * sin(l)); }
 
-function azimuth(H: number, phi: number, dec: number)  { return atan(sin(H), cos(H) * sin(phi) - tan(dec) * cos(phi)); }
+function azimuth(H: number, phi: number, dec: number) { return atan(sin(H), cos(H) * sin(phi) - tan(dec) * cos(phi)); }
 function altitude(H: number, phi: number, dec: number) { return asin(sin(phi) * sin(dec) + cos(phi) * cos(dec) * cos(H)); }
 
 function siderealTime(d: number, lw: number) { return rad * (280.16 + 360.9856235 * d) - lw; }
@@ -86,7 +86,7 @@ var J0 = 0.0009;
 function julianCycle(d: number, lw: number) { return Math.round(d - J0 - lw / (2 * PI)); }
 
 function approxTransit(Ht: number, lw: number, n: number) { return J0 + (Ht + lw) / (2 * PI) + n; }
-function solarTransitJ(ds: number, M: number, L: number)  { return J2000 + ds + 0.0053 * sin(M) - 0.0069 * sin(2 * L); }
+function solarTransitJ(ds: number, M: number, L: number) { return J2000 + ds + 0.0053 * sin(M) - 0.0069 * sin(2 * L); }
 
 function hourAngle(h: number, phi: number, d: number) { return acos((sin(h) - sin(phi) * sin(d)) / (cos(phi) * cos(d))); }
 function observerAngle(height: number) { return -2.076 * Math.sqrt(height) / 60; }
@@ -107,8 +107,8 @@ function moonCoords(d: number) { // geocentric ecliptic coordinates of the moon
         M = rad * (134.963 + 13.064993 * d), // mean anomaly
         F = rad * (93.272 + 13.229350 * d),  // mean distance
 
-        l  = L + rad * 6.289 * sin(M), // longitude
-        b  = rad * 5.128 * sin(F),     // latitude
+        l = L + rad * 6.289 * sin(M), // longitude
+        b = rad * 5.128 * sin(F),     // latitude
         dt = 385001 - 20905 * cos(M);  // distance to the moon in km
 
     return {
@@ -125,23 +125,23 @@ function hoursLater(date: Date, h: number) {
 
 class SunCalc {
     times: any[][] = [
-        [-0.833, 'sunrise',       'sunset'      ],
-        [  -0.3, 'sunriseEnd',    'sunsetStart' ],
-        [    -6, 'dawn',          'dusk'        ],
-        [   -12, 'nauticalDawn',  'nauticalDusk'],
-        [   -18, 'nightEnd',      'night'       ],
-        [     6, 'goldenHourEnd', 'goldenHour'  ]
+        [-0.833, 'sunrise', 'sunset'],
+        [-0.3, 'sunriseEnd', 'sunsetStart'],
+        [-6, 'dawn', 'dusk'],
+        [-12, 'nauticalDawn', 'nauticalDusk'],
+        [-18, 'nightEnd', 'night'],
+        [6, 'goldenHourEnd', 'goldenHour']
     ];
 
-// calculates sun position for a given date and latitude/longitude
+    // calculates sun position for a given date and latitude/longitude
 
     getPosition(date: Date, lat: number, lng: number) {
-        var lw  = rad * -lng,
+        var lw = rad * -lng,
             phi = rad * lat,
-            d   = toDays(date),
+            d = toDays(date),
 
-            c  = sunCoords(d),
-            H  = siderealTime(d, lw) - c.ra;
+            c = sunCoords(d),
+            H = siderealTime(d, lw) - c.ra;
 
         return {
             azimuth: azimuth(H, phi, c.dec),
@@ -149,7 +149,7 @@ class SunCalc {
         };
     }
 
-    addTime = function (angle: number, riseName: number, setName: number) {
+    addTime = function(angle: number, riseName: number, setName: number) {
         this.times.push([angle, riseName, setName]);
     };
 
@@ -199,18 +199,18 @@ class SunCalc {
 
     getMoonPosition(date: Date, lat: number, lng: number): MoonPosition {
 
-        var lw  = rad * -lng,
+        var lw = rad * -lng,
             phi = rad * lat,
-            d   = toDays(date),
-    
+            d = toDays(date),
+
             c = moonCoords(d),
             H = siderealTime(d, lw) - c.ra,
             h = altitude(H, phi, c.dec),
             // formula 14.1 of "Astronomical Algorithms" 2nd edition by Jean Meeus (Willmann-Bell, Richmond) 1998.
             pa = atan(sin(H), tan(phi) * cos(c.dec) - sin(c.dec) * cos(H));
-    
+
         h = h + astroRefraction(h); // altitude correction for refraction
-    
+
         return {
             azimuth: azimuth(H, phi, c.dec),
             altitude: h,
@@ -234,7 +234,7 @@ class SunCalc {
             phi = acos(sin(s.dec) * sin(m.dec) + cos(s.dec) * cos(m.dec) * cos(s.ra - m.ra)),
             inc = atan(sdist * sin(phi), m.dist - sdist * cos(phi)),
             angle = atan(cos(s.dec) * sin(s.ra - m.ra), sin(s.dec) * cos(m.dec) -
-                    cos(s.dec) * sin(m.dec) * cos(s.ra - m.ra));
+                cos(s.dec) * sin(m.dec) * cos(s.ra - m.ra));
 
         return {
             fraction: (1 + cos(inc)) / 2,
@@ -311,5 +311,5 @@ type SunTimes = {
     [key in SunTimeProperty]: Date
 }
 
-type SunTimeProperty = 'sunrise' | 'sunset' | 'sunriseEnd'| 'sunsetStart' | 'dawn' |  'dusk' | 'nauticalDawn'
-    | 'nauticalDusk' |'nightEnd' |  'night' | 'goldenHourEnd' | 'goldenHour' | 'solarNoon' | 'Nadir';
+type SunTimeProperty = 'sunrise' | 'sunset' | 'sunriseEnd' | 'sunsetStart' | 'dawn' | 'dusk' | 'nauticalDawn'
+    | 'nauticalDusk' | 'nightEnd' | 'night' | 'goldenHourEnd' | 'goldenHour' | 'solarNoon' | 'Nadir';
