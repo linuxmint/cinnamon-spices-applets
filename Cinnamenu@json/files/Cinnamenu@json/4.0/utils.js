@@ -67,7 +67,26 @@ const Lang = imports.lang;
 const St = imports.gi.St;
 const Main = imports.ui.main;
 
-class ShowTooltip {
+let onlyOneTooltip = null;
+var showTooltip = function (actor, xpos, ypos, center_x, text) {
+    if (onlyOneTooltip) {
+        global.log("Cinaamenu: Previous tooltip still exists...removing...");
+        onlyOneTooltip.destroy();
+        onlyOneTooltip = null;
+    }
+    onlyOneTooltip = new NewTooltip (actor, xpos, ypos, center_x, text);
+};
+
+var hideTooltip = function () {
+    if (onlyOneTooltip) {
+        onlyOneTooltip.destroy();
+        onlyOneTooltip = null;
+    } else {
+        global.log("Cinnamenu: Tooltip already removed.");
+    }
+};
+
+class NewTooltip {
     constructor(actor, xpos, ypos, center_x, text) {
         this.actor = actor;
         this.xpos = xpos;
@@ -191,4 +210,4 @@ const searchStr = function (q, str) {
 };
 
 module.exports = {SEARCH_DEBUG, _, APPTYPE, AppTypes, tryFn, readFileAsync, readJSONAsync,
-                                                                            ShowTooltip, searchStr};
+                                                            showTooltip, hideTooltip, searchStr};

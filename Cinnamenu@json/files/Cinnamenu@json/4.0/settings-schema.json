@@ -178,7 +178,7 @@
     "enable-bookmarks":{
         "type":"checkbox",
         "default":false,
-        "description":"Show web bookmarks",
+        "description":"Show Chrome/Chromium bookmarks",
         "tooltip":"Show your browser's web bookmarks in the menu"
     },
     "privacy-settings-button":{
