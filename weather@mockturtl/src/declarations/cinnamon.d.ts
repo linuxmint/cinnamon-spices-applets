@@ -558,7 +558,11 @@ declare namespace imports.gi.St {
         set_policy(hscroll: any, vscroll: any): void;
         get_vscroll_bar(): ScrollBar;
         get_hscroll_bar(): ScrollBar;
-        overlay_scrollbars: boolean; 
+		overlay_scrollbars: boolean; 
+		"hscrollbar-policy": Gtk.PolicyType;
+		"vscrollbar-policy": Gtk.PolicyType;
+		"hscrollbar-visible": boolean;
+		"vscrollbar-visible": boolean;
         clip_to_allocation: boolean;
         constructor(options ? : any);
 	}
