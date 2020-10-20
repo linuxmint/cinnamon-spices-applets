@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.6.8
+
+* 1.8+ Applet version removed
+
+* Fixes [#3102](https://github.com/linuxmint/cinnamon-spices-applets/issues/3102)
+
+* Hourly Weather items are stretched to make sure summary and precipitation displays properly
+
 ## 2.6.7
 
 * Fixes [#3257](https://github.com/linuxmint/cinnamon-spices-applets/issues/3257)
