@@ -864,7 +864,6 @@ var UI = (function () {
         this._hourlyScrollView.show();
         this._hourlyScrollView.hide();
         this.AdjustHourlyBoxItemWidth();
-        this.app.log.Debug("Calculated hourly scroll view height is " + this.GetScrollViewHeight());
         var _a = this._hourlyScrollView.get_preferred_width(-1), minWidth = _a[0], naturalWidth = _a[1];
         var _b = this._hourlyScrollView.get_preferred_height(minWidth), minHeight = _b[0], naturalHeight = _b[1];
         this.app.log.Debug("hourlyScrollView requested height and is set to: " + naturalHeight);
