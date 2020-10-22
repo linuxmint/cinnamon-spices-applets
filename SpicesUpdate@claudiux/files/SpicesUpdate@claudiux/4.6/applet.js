@@ -10,6 +10,7 @@ const Lang = imports.lang;
 const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
 const Gtk = imports.gi.Gtk;
+const Gdk = imports.gi.Gdk;
 const Mainloop = imports.mainloop;
 const Main = imports.ui.main;
 const MessageTray = imports.ui.messageTray;
@@ -21,6 +22,7 @@ const Json = imports.gi.Json;
 const Soup = imports.gi.Soup;
 const {SignalManager} = imports.misc.signalManager;
 const Cinnamon = imports.gi.Cinnamon;
+const Pango = imports.gi.Pango;
 
 
 const {
@@ -62,11 +64,6 @@ ICONTHEME.prepend_search_path(ICONS_DIR);
 
 Util.spawnCommandLine("/bin/sh -c '%s/witness-debian.sh'".format(SCRIPTS_DIR));
 
-
-
-const _httpSession = new Soup.Session();
-_httpSession.timeout=60;
-Soup.Session.prototype.add_feature.call(_httpSession, new Soup.ProxyResolverDefault());
 
 
 function getImageAtScale(imageFileName, width, height) {
@@ -163,6 +160,10 @@ class SpicesUpdate extends Applet.IconApplet {
         // To be sure that the scripts will be executable:
         Util.spawnCommandLineAsync("/bin/bash -c 'cd %s && chmod 755 *.py *.sh'".format(SCRIPTS_DIR), null, null);
 
+        //http session:
+        this.define_http_session();
+
+        // Messages, notifications and menu contents:
         this.notification = null;
 
         this.force_notifications = false; // Set to true for tests.
@@ -204,9 +205,12 @@ class SpicesUpdate extends Applet.IconApplet {
         // Default icon color
         this.defaultColor = "#000000FF";
 
-        // Monitoring metadata.json files and png directories
-        this.monitors = []; // new Array();
+        // Monitoring metadata.json files, png directories and network
+        this.monitors = [];
         this.alreadyMonitored = []; // Contains the UUIDs of xlets already monitored, to avoid multiple monitoring.
+
+        // Monitoring network:
+        this.monitor_interfaces();
 
         // Count of Spices to update
         this.nb_to_update = 0;
@@ -253,8 +257,10 @@ class SpicesUpdate extends Applet.IconApplet {
         // Badge
         this.badge = null;
         this.define_badge();
+
+        // SignalManager
         this.signals = new SignalManager(null);
-        this.signals.connect(global, "scale-changed", () => this.updateUI());
+        this._signalsConnectId = this.signals.connect(global, "scale-changed", () => this.updateUI());
         // End of constructor
     }
 
@@ -361,6 +367,12 @@ class SpicesUpdate extends Applet.IconApplet {
             "general_hide",
             "general_hide",
             this.on_display_type_changed.bind(this)
+        );
+
+        this.settings.bind(
+            "tooltip_max_width_screen_percentage",
+            "tooltip_max_width_screen_percentage",
+            this.on_tooltip_max_width_screen_percentage_changed.bind(this)
         );
 
         // Applets
@@ -470,32 +482,103 @@ class SpicesUpdate extends Applet.IconApplet {
         // End of get_SU_settings
     }
 
+    /**
+     * Network session and monitoring
+     */
+    define_http_session() {
+        if (this._httpSession) Util.unref(this._httpSession);
+
+        this._httpSession = new Soup.Session(); // SessionAsync is deprecated. Use Session instead.
+        this._httpSession.timeout=60;
+        Soup.Session.prototype.add_feature.call(this._httpSession, new Soup.ProxyResolverDefault());
+    }
+
+    monitor_interfaces() {
+        if (this.netMonitor) return;
+
+        this.netMonitors = [];
+        try {
+            this.netMonitor = Gio.network_monitor_get_default();
+            let netMonitorId = this.netMonitor.connect(
+                'network-changed',
+                (monitor, network_available) => this._on_network_changed()
+            );
+            this.netMonitors.push([this.netMonitor, netMonitorId]);
+        } catch(e) {
+            logError("Unable to monitor the network interfaces! - " + e)
+        }
+    }
+
+    _on_network_changed() {
+        this.define_http_session();
+        this._on_refresh_pressed()
+    }
+
+    /**
+     * Badge
+     */
+    badge_font_size() {
+        return Math.max(11, Math.round(this.getPanelIconSize(St.IconType.SYMBOLIC) / 3))
+    }
+
+    horizontal_anchor_x() {
+        return this.getPanelIconSize(St.IconType.SYMBOLIC) + 8
+    }
+
+    horizontal_anchor_y() {
+        let iconSize = this.getPanelIconSize(St.IconType.SYMBOLIC);
+        let fontSize = this.badge_font_size();
+
+        return fontSize - (iconSize + Math.round((this.panel.height - iconSize) /2))
+    }
+
+    vertical_anchor_x() {
+        return -Math.round((this.panel.height - this.getPanelIconSize(St.IconType.SYMBOLIC)) /2)
+    }
+
+    vertical_anchor_y() {
+        return this.badge_font_size();
+    }
+
     define_badge() {
-        if (this.badge !== null) this.actor.remove_child(this.badge);
+        let fontSize = this.badge_font_size();
+        let badgeSize = (fontSize + 1) * global.ui_scale;
+        let iconSize = this.getPanelIconSize(St.IconType.SYMBOLIC);
+
+        if (this.badge) this.actor.remove_child(this.badge);
         this.badge = new St.BoxLayout({
             style_class: "SU-badge",
             important: true,
-            width: 12 * global.ui_scale,
-            height: 12 * global.ui_scale,
+            width: badgeSize,
+            height: badgeSize,
             x_align: St.Align.MIDDLE,
             y_align: St.Align.MIDDLE,
             show_on_set_parent: false,
             style: "margin: 0;",
         });
         this.numberLabel = new St.Label({
-            style: "font-size: 10px;padding: 0px;",
-            style_class: "SU-number-label",
+            style: "font-size: %spx; padding: 0px; color: %s; text-shadow: black 1px 1px 3px;".format(fontSize.toString(), this.defaultColor),
             important: true,
             text: "",
-            anchor_x: -3 * global.ui_scale,
-            anchor_y: 1 + (global.ui_scale > 1 ? 2 : 0)
+            anchor_x: (this.isHorizontal) ? this.horizontal_anchor_x() : this.vertical_anchor_x(), // 1,
+            anchor_y: (this.isHorizontal) ? this.horizontal_anchor_y() : this.vertical_anchor_y(), //1, // -1,
         });
         this.numberLabel.clutter_text.ellipsize = false;
         this.badge.add(this.numberLabel, {
-            x_align: St.Align.START,
-            y_align: St.Align.START,
+            x_align: St.Align.MIDDLE,
+            y_align: St.Align.MIDDLE,
+            anchor_x: -1,
+            anchor_y: -1 + (global.ui_scale > 1 ? 3 : 0),
         });
         this.actor.add_child(this.badge);
+
+        if (this.isHorizontal) {
+            this.actor.width = (iconSize +10) * global.ui_scale;
+            this.actor.height = this.panel.height;
+        } else {
+            this.actor.width = this.panel.height;
+            this.actor.height = (iconSize +10) * global.ui_scale;
+        }
         // End of define_badge
     }
 
@@ -561,7 +644,7 @@ class SpicesUpdate extends Applet.IconApplet {
             Main.messageTray.add(source);
             let gicon = Gio.icon_new_for_string(APPLET_DIR + "/icon.png");
             let icon = new St.Icon({ gicon: gicon, "icon-size": 32});
-            let notification = new MessageTray.Notification(source, _("Spices Update"), message, {icon: icon});
+            let notification = new MessageTray.Notification(source, _("Spices Update"), message, {icon: icon, bodyMarkup: true});
             notification.setTransient(false);
             notification.setResident(true);
             notification.setUseActionIcons(false);
@@ -788,9 +871,9 @@ class SpicesUpdate extends Applet.IconApplet {
     // Buttons in settings:
     on_btn_test_notif_pressed() {
         let details = "";
-        if (this.details_requested === true) details = _("With details here, when available.")+"\n\t";
+        if (this.details_requested === true) details = "<i>" + _("With details here, when available.") + "</i>\n\t";
         let message = _("One applet needs update:")
-            + "\n%s\n\t".format(UUID) + details + _("Do not matter. This is a FAKE notification, just for the test.");
+            + "\n<b>%s</b>\n\t".format(UUID) + details + _("Do not matter. This is a FAKE notification, just for the test.");
         if (this.general_type_notif === "minimal") {
             this.notify_without_button(message, TYPES[0]);
         } else {
@@ -837,6 +920,16 @@ class SpicesUpdate extends Applet.IconApplet {
     on_btn_cs_themes_pressed() {
         Util.spawnCommandLine("%s themes -t %s -s %s".format(CS_PATH, TAB, SORT));
         // End of on_btn_cs_themes_pressed
+    }
+
+    on_tooltip_max_width_screen_percentage_changed() {
+        let _screen;
+        if (Gdk.Display.get_default().get_default_screen)
+            _screen = Gdk.Display.get_default().get_default_screen(); // Glib >= 3.20
+        else
+            _screen = Gdk.Display.get_default().get_screen(0); // 2.2 <= Glib < 3.20
+
+        this.tooltip_max_width = Math.round(_screen.get_width() * this.tooltip_max_width_screen_percentage / 100);
     }
 
     _is_empty_local_dir(type) {
@@ -914,7 +1007,8 @@ class SpicesUpdate extends Applet.IconApplet {
             }
 
             // populate this.unprotected_<type> with the this.unprotected_<type> elements, removing uninstalled <type>:
-            for (var i=0; i < unprotectedSpices.length; i++) {
+            let unprotectedSpices_length = unprotectedSpices.length;
+            for (var i=0; i < unprotectedSpices_length; i++) {
                 let a = unprotectedSpices[i];
                 let d = Gio.file_new_for_path("%s/%s".format(DIR_MAP[type], a["name"]));
                 if (d.query_exists(null)) {
@@ -1038,7 +1132,8 @@ class SpicesUpdate extends Applet.IconApplet {
         var term_found = "";
         var _terminals = ["gnome-terminal", "tilix", "konsole", "guake", "qterminal", "terminator", "uxterm", "xterm"];
         var t;
-        for (t=0; t < _terminals.length ; t++) {
+        let _terminals_length = _terminals.length;
+        for (t=0; t < _terminals_length ; t++) {
             if (GLib.find_program_in_path(_terminals[t])) {
                 term_found = GLib.find_program_in_path(_terminals[t]);
                 break
@@ -1149,7 +1244,7 @@ class SpicesUpdate extends Applet.IconApplet {
         if (is_to_download === true || this.forceRefresh === true || force === true) {
             // replace local json cache file by the remote one
             let message = Soup.Message.new("GET", URL_MAP[type] + GLib.uuid_string_random());
-            _httpSession.queue_message(message, Lang.bind(this, this._on_response_download_cache, type, force));
+            this._httpSession.queue_message(message, Lang.bind(this, this._on_response_download_cache, type, force));
             this.testblink[type]=null;
         }
         // End of download_cache
@@ -1382,7 +1477,7 @@ class SpicesUpdate extends Applet.IconApplet {
         }));
 
         // Queue of the http request
-        _httpSession.queue_message(request, Lang.bind(this, function(_httpSession, message) {
+        this._httpSession.queue_message(request, Lang.bind(this, function(_httpSession, message) {
             // Download is done; close the file:
             fstream.close(null);
         }));
@@ -1399,7 +1494,7 @@ class SpicesUpdate extends Applet.IconApplet {
 
         let iteration = this.iteration;
         // Queue of the http request
-        _httpSession.queue_message(msg, Lang.bind(this, function(_httpSession, message) {
+        this._httpSession.queue_message(msg, Lang.bind(this, function(_httpSession, message) {
             this.cinnamon_server_is_down = message.status_code !== Soup.KnownStatusCode.OK;
 
             if (!this.cinnamon_server_is_down && iteration === this.iteration) {
@@ -1425,7 +1520,7 @@ class SpicesUpdate extends Applet.IconApplet {
 
         let iteration = this.iteration;
         // Queue of the http request
-        _httpSession.queue_message(msg, Lang.bind(this, function(_httpSession, message) {
+        this._httpSession.queue_message(msg, Lang.bind(this, function(_httpSession, message) {
             if (message.status_code === Soup.KnownStatusCode.OK && iteration === this.iteration) {
                 let data = message.response_body.data;
                 let result;
@@ -1483,7 +1578,7 @@ class SpicesUpdate extends Applet.IconApplet {
                         if (this.details_requested) {
                             if (this.get_last_commit_subject(type, uuid)) {
                                 if (this.details_by_uuid[uuid].trim() !== "") {
-                                    ret.push("★ <b>%s</b> (%s)\n\t\t« %s »".format(_(this.get_spice_name(type, uuid)), uuid, this.details_by_uuid[uuid].trim()));
+                                    ret.push("★ <b>%s</b> (%s)\n\t\t<i>%s</i>".format(_(this.get_spice_name(type, uuid)), uuid, this.details_by_uuid[uuid].trim()));
                                 } else {
                                     ret.push("★ <b>%s</b> (%s)\n\t\t%s".format(_(this.get_spice_name(type, uuid)), uuid, _("(Description unavailable)")));
                                 }
@@ -1506,9 +1601,11 @@ class SpicesUpdate extends Applet.IconApplet {
         var ret = new Array();
         for (let uuid of this.new_Spices[type]) {
             if (this.details_requested === true)
-                ret.push("★ <b>%s</b> (%s)\n\t\t« %s »".format(_(this.get_spice_name(type, uuid)),
-                                                                                        uuid,
-                                                                                        _(this.get_spice_description(type, uuid))))
+                ret.push("★ <b>%s</b> (%s)\n\t\t<i>%s</i>".format(
+                    _(this.get_spice_name(type, uuid)),
+                    uuid,
+                    _(this.get_spice_description(type, uuid)))
+                )
             else
                 ret.push("★ <b>%s</b> (%s)".format(_(this.get_spice_name(type, uuid)), uuid))
         }
@@ -1705,7 +1802,8 @@ class SpicesUpdate extends Applet.IconApplet {
         let _configureOptions = [_("General"), _("Applets"), _("Desklets"), _("Extensions"), _("Themes")];
         let _iconNames = ["su-general", "su-applets", "su-desklets", "su-extensions", "su-themes"];
         let _options = [];
-        for (let i=0; i<_configureOptions.length ; i++) {
+        let _configureOptions_length = _configureOptions.length;
+        for (let i=0; i < _configureOptions_length ; i++) {
             let _optionTitle = _configureOptions[i];
             let _icon = _iconNames[i];
             _options[i] = new PopupMenu.PopupIconMenuItem(_optionTitle, _icon, St.IconType.SYMBOLIC);
@@ -1773,6 +1871,11 @@ class SpicesUpdate extends Applet.IconApplet {
         this.refresh_requested = true;
 
         if (!this.isLooping) {
+            if (this.loopId > 0) {
+                Mainloop.source_remove(this.loopId);
+            }
+            this.loopId = 0;
+            this.refreshInterval = QUICK() ? 120 * this.general_frequency : 3600 * this.general_frequency;
             this.do_rotation = true;
             this.updateLoop();
         }
@@ -1802,7 +1905,22 @@ class SpicesUpdate extends Applet.IconApplet {
     _clean_str(str) {
         let ret = str.replace(/\\'/gi, "'");
         ret = ret.replace(/\\"/gi, '"');
-        return ret;
+
+        // Support &amp;, &quot;, &apos;, &lt; and &gt;, escape all other
+        // occurrences of '&'.
+        ret = ret.replace(/&(?!amp;|quot;|apos;|lt;|gt;)/g, '&amp;');
+
+        // Support <b>, <i>, and <u>, escape anything else
+        // so it displays as raw markup.
+        ret = ret.replace(/<(?!\/?[biu]>)/g, '&lt;');
+
+        try {
+            Pango.parse_markup(ret, -1, "");
+            return ret;
+        } catch (e) {
+            logError(e);
+            return GLib.markup_escape_text(text, -1);
+        }
         // End of _clean_str
     }
 
@@ -1845,7 +1963,7 @@ class SpicesUpdate extends Applet.IconApplet {
 
     icon_rotate() {
         this.angle = Math.round(this.angle + 3) % 360;
-        let size = Math.round(this.getPanelIconSize(St.IconType.SYMBOLIC) * global.ui_scale);
+        let size = Math.round(this.getPanelIconSize(St.IconType.SYMBOLIC)); // * global.ui_scale);
         this.img_icon = getImageAtScale(this.img_path, size, size);
         this.img_icon.set_pivot_point(0.5, 0.5);
         this.img_icon.set_rotation_angle(Clutter.RotateAxis.Z_AXIS, this.angle);
@@ -1896,7 +2014,7 @@ class SpicesUpdate extends Applet.IconApplet {
                         this.tooltip_contents += "\n%s".format(_("Middle-Click to open useful Cinnamon Settings"));
                         tooltip_was_modified = true;
                     }
-                    this.tooltip_contents += "\n\n\t\t\t<b>%s</b>".format(_(type).toLocaleUpperCase());
+                    this.tooltip_contents += "\n\n<b>%s</b>".format(_(type).toLocaleUpperCase());
                     if (this.old_message[type] != "") this.tooltip_contents += "\n\u21BB %s".format(this._clean_str(this.old_message[type].replace(/, /gi, "\n\t")));
                     if (this.old_watch_message[type] != "") this.tooltip_contents += "\n\u2604 %s".format(this._clean_str(this.old_watch_message[type].replace(/, /gi, "\n\t")));
                 }
@@ -1904,19 +2022,25 @@ class SpicesUpdate extends Applet.IconApplet {
             if (!tooltip_was_modified) {
                 this.tooltip_contents += "\n%s".format(_("Middle-Click to Refresh"));
             }
-            //this.set_applet_tooltip(this.tooltip_contents, true);
             this.numberLabel.text = (this.nb_to_update + this.nb_to_watch).toString();
-            //this.badge.show();
+            //this.numberLabel.text = "888"; // For test only!
         } else if (this.cinnamon_server_is_down) {
-            this.tooltip_contents = "<b>" + this.default_tooltip + "</b>" + "\n<b>%s</b>\n%s".format(_("The Cinnamon Server seems DOWN!"), _("Middle-Click to Retry"));
-            //this.set_applet_tooltip(this.tooltip_contents, true);
-            this.numberLabel.text = "!";
+            this.tooltip_contents = "<b>" + this.default_tooltip + "</b>" + "\n<b>%s</b>\n%s".format(_("The Cinnamon Server seems to be DOWN!"), _("Middle-Click to Retry"));
+            this.numberLabel.text = "⚠";
         } else {
             this.tooltip_contents = "<b>" + this.default_tooltip + "</b>" + "\n%s".format(_("Middle-Click to Refresh"));
-            //this.set_applet_tooltip(this.tooltip_contents, true);
             this.numberLabel.text = "";
-            //this.badge.hide();
         }
+
+        let fontSize = this.badge_font_size();
+        if (this.isHorizontal) {
+            this.numberLabel.anchor_x = this.horizontal_anchor_x();
+            this.numberLabel.anchor_y = this.horizontal_anchor_y()
+        } else {
+            this.numberLabel.anchor_x = this.vertical_anchor_x();
+            this.numberLabel.anchor_y = this.vertical_anchor_y()
+        }
+        this.numberLabel.style = "font-size: %spx; padding: 0px; color: %s;".format(fontSize.toString(), this.defaultColor);
 
         if (!this.do_rotation && this.interval != 0) {
             Tweener.addTween(this.actor, {
@@ -1931,13 +2055,6 @@ class SpicesUpdate extends Applet.IconApplet {
                     this.set_icon_color();
                 })
             });
-
-            //clearInterval(this.interval);
-            //this.interval = 0;
-            //this.angle = 0;
-            //this.set_applet_icon_symbolic_name("spices-update");
-
-
         }
 
         if (this.numberLabel.text === "") this.badge.hide();
@@ -1989,10 +2106,6 @@ class SpicesUpdate extends Applet.IconApplet {
                     this.monitors = [];
                     this.alreadyMonitored = [];
                     for (let type of TYPES) this.monitorsPngId[type] = 0;
-
-                    //if (!this.new_loop_requested) {
-                        //this.destroy_all_notifications();
-                    //}
 
                     var must_be_updated;
                     this.nb_to_update = 0;
@@ -2085,6 +2198,7 @@ class SpicesUpdate extends Applet.IconApplet {
             // One more loop !
             this.loopId = Mainloop.timeout_add_seconds(this.refreshInterval, () => this.updateLoop());
         }
+        return true
         // End of updateLoop
     }
 
@@ -2160,6 +2274,18 @@ class SpicesUpdate extends Applet.IconApplet {
             this._applet_tooltip._tooltip.set_style("text-align: left;");
         }
 
+        let _screen;
+        if (Gdk.Display.get_default().get_default_screen)
+            _screen = Gdk.Display.get_default().get_default_screen(); // Glib >= 3.20
+        else
+            _screen = Gdk.Display.get_default().get_screen(0); // 2.2 <= Glib < 3.20
+
+        this.tooltip_max_width = Math.round(_screen.get_width() * this.tooltip_max_width_screen_percentage / 100);
+
+        this._applet_tooltip._tooltip.clutter_text.line_wrap = true;
+        this._applet_tooltip._tooltip.clutter_text.line_wrap_mode = Pango.WrapMode.WORD_CHAR;
+        this._applet_tooltip._tooltip.clutter_text.ellipsize = Pango.EllipsizeMode.NONE;
+
         this.updateLoop();
     }
 
@@ -2187,9 +2313,10 @@ class SpicesUpdate extends Applet.IconApplet {
         }
         this.loopId = 0;
 
-        if (this.interval != 0){
+        if (this.interval > 0){
             clearInterval(this.interval);
         }
+        this.interval = 0;
 
         this.destroy_all_notifications();
 
@@ -2200,17 +2327,55 @@ class SpicesUpdate extends Applet.IconApplet {
         }
         this.monitors = [];
 
+        if (this.netMonitors) {
+            for (let tuple of this.netMonitors) {
+                [monitor, Id] = tuple;
+                monitor.disconnect(Id)
+            }
+            this.netMonitors = [];
+        }
+
         while (this._connectIds.length > 0) {
             this.actor.disconnect(this._connectIds.pop());
         }
+
+        if (this._signalsConnectId) {
+            this.signals.disconnect(this._signalsConnectId);
+        }
         // End of on_applet_reloaded
+    }
+
+    on_panel_height_changed() {
+        this.define_badge();
+        this.updateUI()
+    }
+
+    on_panel_icon_size_changed() {
+        this.on_panel_height_changed()
     }
 
     /**
     * Events
     */
     on_enter_event(actor, event) {
+        let width = Math.min(this.get_pango_pixels_size(this.tooltip_contents)[0], this.tooltip_max_width);
+        this._applet_tooltip._tooltip.clutter_text.width = width;
+
         this.set_applet_tooltip(this.tooltip_contents, true);
+    }
+
+    get_pango_pixels_size(str) {
+        let label = Gtk.Label.new("");
+        let pango_layout = label.get_layout();
+        pango_layout.set_markup(str, -1);
+        let font_name = this._applet_tooltip._tooltip.clutter_text.get_font_name();
+        let pango_font_desc = Pango.FontDescription.from_string(font_name);
+        pango_layout.set_font_description(pango_font_desc);
+        let ret = pango_layout.get_pixel_size();
+        //Util.unref(pango_layout);
+        //Util.unref(label);
+        //Util.unref(pango_font_desc);
+        return ret
     }
 
     on_leave_event(actor, event) {
