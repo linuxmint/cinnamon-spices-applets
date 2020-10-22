@@ -1,3 +1,10 @@
+### v6.3.0~20201022
+  * Tooltip content: Now filtered and formatted. Some information is displayed in bold, others in italics.
+  * Settings (General tab): Possibility to define a maximum width for the content of the tooltip (in % of the screen width).
+  * Badge: Size and location changed. Now the size of this applet remains constant, with or without its badge.
+  * Network monitoring: Now continue to check for updates even if network has changed (VPN).
+  * Some optimizations.
+
 ### v6.2.0~20201012
   * Improvements (for Cinnamon 4.6 only):
     * Settings: Changing the position of the Refresh button. Remove the buttons below the lists (for future Cinnamon).
