@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-04-23 22:07+0200\n"
-"PO-Revision-Date: 2020-10-21 22:04+0200\n"
-"Language-Team: \n"
+"PO-Revision-Date: 2020-10-22 15:27+0200\n"
+"Language-Team: krzysztof.blachowicz@gmail.com\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -442,7 +442,7 @@ msgstr "Włącz otwieranie menu w momencie najechania kursorem myszy na aplet"
 #. 3.4->settings-schema.json->hover-delay->units
 #. 4.2->settings-schema.json->hover-delay->units
 msgid "milliseconds"
-msgstr "milisekund"
+msgstr "milisekundy"
 
 #. 3.2->settings-schema.json->hover-delay->description
 #. 3.4->settings-schema.json->hover-delay->description
@@ -545,7 +545,7 @@ msgstr "Określ czy wyświetlać ikony ulubionych."
 #. 3.4->settings-schema.json->favorite-button-size->units
 #. 4.2->settings-schema.json->favorite-button-size->units
 msgid "pixels"
-msgstr "pikseli"
+msgstr "piksele"
 
 #. 3.2->settings-schema.json->favorite-button-size->description
 #. 2.6->settings-schema.json->favorite-button-size->description
@@ -580,14 +580,14 @@ msgstr "Określ czy wyświetlać pasek boczny."
 #. 3.4->settings-schema.json->user-box-layout->options
 #. 4.2->settings-schema.json->user-box-layout->options
 msgid "User picture and user name"
-msgstr "Zdjęcie i nazwa użytkownika"
+msgstr "Obraz konta i nazwa użytkownika"
 
 #. 3.2->settings-schema.json->user-box-layout->options
 #. 2.6->settings-schema.json->user-box-layout->options
 #. 3.4->settings-schema.json->user-box-layout->options
 #. 4.2->settings-schema.json->user-box-layout->options
 msgid "User picture only"
-msgstr "Tylko awatar użytkownika"
+msgstr "Tylko obraz konta użytkownika"
 
 #. 3.2->settings-schema.json->user-box-layout->options
 #. 2.6->settings-schema.json->user-box-layout->options
