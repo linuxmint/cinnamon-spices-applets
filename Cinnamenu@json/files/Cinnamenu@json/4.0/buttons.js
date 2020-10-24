@@ -104,18 +104,18 @@ class CategoryListButton extends PopupBaseMenuItem {
 
     onDragBegin() {
         this.actor.set_opacity(51);
-        this.appThis.categoryDragged = true;
+        //this.appThis.categoryDragged = true;
     }
 
     onDragCancelled() {
         this.actor.set_opacity(255);
-        this.appThis.categoryDragged = false;
+        //this.appThis.categoryDragged = false;
     }
 
     onDragEnd() {
         this.appThis.resetCategoryOpacity();
         //this.actor.set_opacity(255);
-        setTimeout(() => { this.appThis.categoryDragged = false; }, 0);
+        //setTimeout(() => { this.appThis.categoryDragged = false; }, 0);
     }
 
     selectCategory() {
@@ -142,9 +142,9 @@ class CategoryListButton extends PopupBaseMenuItem {
 
         this.entered = true;
         if (this.appThis.settings.categoryClick) {
-            //this.actor.add_style_pseudo_class('hover');
-            //this.actor.add_style_pseudo_class('active');
-            this.actor.set_style_class_name('menu-category-button-selected');
+            if (this.id != this.appThis.currentCategory) {
+                this.actor.set_style_class_name('menu-category-button-selected menu-category-button-hover');
+            }
             return Clutter.EVENT_STOP;
         } else {
             this.selectCategory();
@@ -158,9 +158,11 @@ class CategoryListButton extends PopupBaseMenuItem {
         }
         this.entered = null;
         if ((!event || this.appThis.settings.categoryClick) && this.appThis.currentCategory !== this.id) {
-            //this.actor.remove_style_pseudo_class('hover');
-            //this.actor.remove_style_pseudo_class('active');
-            this.actor.set_style_class_name('menu-category-button');
+            if (this.id != this.appThis.currentCategory) {
+                this.actor.set_style_class_name('menu-category-button');
+            } else {
+                this.actor.set_style_class_name('menu-category-button-selected');
+            }
         }
     }
 
@@ -587,7 +589,13 @@ class AppListGridButton extends PopupBaseMenuItem {
                             this.buttonState.app.description.replace(/&/g, '&amp;').replace(/</g, '&lt;') : '';
 
         if (this.buttonState.app.newAppShouldHighlight) {
-            this.label.style = this.label.style + 'font-weight: bold;';
+            if (!this.actor.has_style_pseudo_class('highlighted')) {
+                this.actor.add_style_pseudo_class('highlighted'); //'font-weight: bold;';
+            }
+        } else {
+            if (this.actor.has_style_pseudo_class('highlighted')) {
+                this.actor.remove_style_pseudo_class('highlighted');
+            }
         }
         let markup = '<span>' + name + '</span>';
         if (this.appThis.settings.descriptionPlacement === PlacementUNDER) {
@@ -672,7 +680,7 @@ class AppListGridButton extends PopupBaseMenuItem {
     }
 
     handleButtonPress() {
-        this.appThis.categoryDragged = true;
+        //this.appThis.categoryDragged = true;
     }
 
     handleButtonRelease(actor, e) {
@@ -721,6 +729,7 @@ class AppListGridButton extends PopupBaseMenuItem {
             }
         } else if (this.buttonState.appType === APPTYPE._applications) {
             //this.appThis.state.autofavs.incrementApp(this.buttonState.app.get_id());
+            this.buttonState.app.newAppShouldHighlight = false;
             this.buttonState.app.open_new_window(-1);
         } else if (this.buttonState.appType === APPTYPE._places) {
             if (this.buttonState.app.uri) {
