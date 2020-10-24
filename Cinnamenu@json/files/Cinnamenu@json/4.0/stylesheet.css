@@ -1,0 +1,36 @@
+/*css nodes used by Cinnamenu
+-----------------------------
+---session buttons box----------------------------
+.menu-favorites-box (or none dependant on user options)
+.menu-favorites-button
+.menu-favorites-button:hover
+---search box-------------------------------------
+.menu-search-entry-icon
+.menu-search-box
+.menu-search-entry
+---categories box-------------------------
+.menu-categories-box
+.menu-categories-scrollbox or .vfade
+.menu-category-button
+.menu-category-button-label {}
+.menu-category-button-selected {}
+.menu-category-button-greyed {}
+.menu-category-button-hover {} (or .menu-category-button-selected
+   if .menu-category-button-hover is not defined or defined earlier
+   in the css file. .menu-category-button-hover is used when "activate
+   categories on click" option is set.)
+---applications box-----------------------
+.menu-applications-scrollbox or .vfade
+.menu-applications-inner-box or .menu-applications-box for compatability with old themes
+.menu-application-button
+.menu-application-button-label
+.menu-application-button-selected
+.menu-application-button:highlighted (used to highlight newly installed apps in list or grid view)
+---whole menu-----------------------------
+.menu-background or .cinnamenu-background
+.menu-applications-outer-box or .menu-applications-box for compatability with old themes
+*/
+
+.menu-application-button:highlighted {
+    font-weight: bold;
+}

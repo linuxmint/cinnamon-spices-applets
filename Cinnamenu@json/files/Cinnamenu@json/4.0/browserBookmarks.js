@@ -119,7 +119,7 @@ function readFirefoxProfiles(appSystem) {
             continue;
         }
 
-        if (profileName === 'default') {
+        if (profileName === 'default' || profileName === 'default-release') {
             if (relative) {
                 profileDir = GLib.build_filenamev([firefoxDir, path]);
             } else {
@@ -200,8 +200,7 @@ class BookmarksManager {
             //reading opera bookmarks seems to no longer work
             //readChromiumBookmarks(bookmarks, ['.config', 'opera', 'Bookmarks'], 'opera', appSystem)
         ]).then(() => {
-            //reading firefox bookmarks no longer works.
-            //bookmarks = bookmarks.concat(readFirefoxProfiles(appSystem));
+            bookmarks = bookmarks.concat(readFirefoxProfiles(appSystem));
 
             for (let i = 0, len = bookmarks.length; i < len; i++) {
                 bookmarks[i].icon = bookmarks[i].app.get_icon();
@@ -229,4 +228,4 @@ class BookmarksManager {
 }
 
 
-module.exports = {Gda, BookmarksManager};
+module.exports = {BookmarksManager};
