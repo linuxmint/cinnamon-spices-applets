@@ -1,5 +1,5 @@
 ### v6.3.1~20201026
-  * According SpicesUpdate@claudiux with [cinnamon/9664](https://github.com/linuxmint/cinnamon/pull/9664#event-3912970920).
+  * Adapting SpicesUpdate@claudiux to [cinnamon/9664](https://github.com/linuxmint/cinnamon/pull/9664#event-3912970920).
 
 ### v6.3.0~20201022
   * Tooltip content: Now filtered and formatted. Some information is displayed in bold, others in italics.
