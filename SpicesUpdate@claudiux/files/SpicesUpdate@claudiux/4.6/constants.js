@@ -55,7 +55,11 @@ const HELP_DIR = APPLET_DIR + "/help";
 
 const CINNAMON_VERSION_ARRAY = GLib.getenv('CINNAMON_VERSION').split(".").slice(0,2);
 const CINNAMON_VERSION = CINNAMON_VERSION_ARRAY.join(".");
-const CS_PATH = "%s/cs/%s/cinnamon-settings.py".format(APPLET_DIR, CINNAMON_VERSION, );
+
+let cs_path = "%s/cs/%s/cinnamon-settings.py".format(APPLET_DIR, CINNAMON_VERSION, );
+if (!GLib.file_test(cs_path, GLib.FileTest.EXISTS))
+  cs_path = "%s/cs/latest/cinnamon-settings.py".format(APPLET_DIR, );
+const CS_PATH = cs_path;
 
 const URL_SPICES_HOME = "https://cinnamon-spices.linuxmint.com";
 const CONFIG_DIR = HOME_DIR + "/.cinnamon/configs";
