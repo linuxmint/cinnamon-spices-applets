@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-10-22 19:32+0200\n"
-"PO-Revision-Date: 2020-10-24 23:38+0200\n"
+"PO-Revision-Date: 2020-10-29 20:48+0100\n"
 "Last-Translator: Lars Mueller <cobinja@gmail.com>\n"
 "Language-Team: krzysztof.blachowicz@gmail.com\n"
 "Language: pl\n"
@@ -67,7 +67,7 @@ msgstr "Przywróć"
 
 #: 3.2/applet.js:1409 4.0/applet.js:1559
 msgid "Minimize"
-msgstr "Maksymalizuj"
+msgstr "Minimalizuj"
 
 #: 3.2/applet.js:1415 4.0/applet.js:1565
 msgid "Unmaximize"
