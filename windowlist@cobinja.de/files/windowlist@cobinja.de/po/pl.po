@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: 1.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-10-22 19:32+0200\n"
-"PO-Revision-Date: 2020-10-22 20:31+0200\n"
+"PO-Revision-Date: 2020-10-29 20:48+0100\n"
 "Last-Translator: Lars Mueller <cobinja@gmail.com>\n"
 "Language-Team: krzysztof.blachowicz@gmail.com\n"
 "Language: pl\n"
@@ -43,7 +43,7 @@ msgstr "Przypnij do innych obszarów roboczych"
 
 #: 3.2/applet.js:1359 4.0/applet.js:1507
 msgid "Only on this workspace"
-msgstr "Tylko na tym obszarze roboczym"
+msgstr "Widoczne tylko na tym obszarze roboczym"
 
 #: 3.2/applet.js:1362 4.0/applet.js:1510
 msgid "Visible on all workspaces"
@@ -67,7 +67,7 @@ msgstr "Przywróć"
 
 #: 3.2/applet.js:1409 4.0/applet.js:1559
 msgid "Minimize"
-msgstr "Maksymalizuj"
+msgstr "Minimalizuj"
 
 #: 3.2/applet.js:1415 4.0/applet.js:1565
 msgid "Unmaximize"
@@ -306,7 +306,7 @@ msgstr "Ilość miniatur"
 #. 3.2->settings-schema.json->preview-timeout-show->description
 #. 4.0->settings-schema.json->preview-timeout-show->description
 msgid "Timeout Show"
-msgstr "Opóźnienie podglądu"
+msgstr "Opóźnienie wyświetlenia podglądu"
 
 #. 3.2->settings-schema.json->preview-timeout-show->tooltip
 #. 4.0->settings-schema.json->preview-timeout-show->tooltip
