@@ -144,6 +144,16 @@ class CategoryListButton extends PopupBaseMenuItem {
         if (this.appThis.settings.categoryClick) {
             if (this.id != this.appThis.currentCategory) {
                 this.actor.set_style_class_name('menu-category-button-selected menu-category-button-hover');
+                //fix menu-category-button-hover for Mint-Y themes
+                const bgColor = this.actor.get_theme_node().get_background_color().to_string();
+                if (bgColor === '#ff0000ff') {
+                    const menubgColor = this.appThis.menu.actor.get_theme_node().get_background_color();
+                    if (menubgColor.red > 128) {
+                        this.actor.set_style('background-color: #e4e4e4; color: black;');
+                    } else {
+                        this.actor.set_style('background-color: #404040;');
+                    }
+                }
             }
             return Clutter.EVENT_STOP;
         } else {
@@ -163,6 +173,7 @@ class CategoryListButton extends PopupBaseMenuItem {
             } else {
                 this.actor.set_style_class_name('menu-category-button-selected');
             }
+            this.actor.set_style('');//undo fixes applied in handleEnter();
         }
     }
 
@@ -170,6 +181,7 @@ class CategoryListButton extends PopupBaseMenuItem {
         if (this.disabled || (event && event.get_button() > 1) || !this.appThis.settings.categoryClick) {
             return;
         }
+        this.actor.set_style('');//undo fixes applied in handleEnter();
         this.selectCategory();
     }
 
@@ -264,7 +276,8 @@ class ContextMenu {
         this.appThis = appThis;
         this.menu = new PopupSubMenu(this.appThis.actor);
         this.menu.actor.set_style_class_name('menu menu-context-menu menu-background starkmenu-background');
-        this.contextMenuBox = new St.BoxLayout({ style_class: '', vertical: true, reactive: true });
+        this.contextMenuBox = new St.BoxLayout({ style_class: '',// style: 'border: 0px;',
+                                            vertical: true, reactive: true });
         this.contextMenuBox.add_actor(this.menu.actor);
         this.contextMenuBox.height = 0;
         appThis.mainBox.add(this.contextMenuBox, {expand: false, x_fill: false,
@@ -273,7 +286,9 @@ class ContextMenu {
         this.isOpen = false;
     }
 
-    open(app, e) {
+    open(app, e, button) {
+        //e is used to position context menu at mouse coords. If keypress opens menu then
+        // e is undefined and button position is used instead,
         for (let i = 0; i < this.contextMenuButtons.length; i++) {
             this.contextMenuButtons[i].destroy();
             this.contextMenuButtons[i] = null;
@@ -326,7 +341,14 @@ class ContextMenu {
         const contextMenuHeight = this.menu.actor.height;
 
         const monitor = Main.layoutManager.findMonitorForActor(this.menu.actor);
-        let [mx, my] = e.get_coords(); //get mouse position
+        let mx, my;
+        if (e) {
+            [mx, my] = e.get_coords(); //get mouse position
+        } else {//activated by keypress, no e supplied
+            [mx, my] = button.actor.get_transformed_position();
+            mx += 20;
+            my += 20;
+        }
         if (mx > monitor.x + monitor.width - this.menu.actor.width) {
             mx -= this.menu.actor.width;
         }
@@ -504,9 +526,9 @@ class AppListGridButton extends PopupBaseMenuItem {
         this.formatLabel();
         this.dot = new St.Widget({
                 style: this.appThis.isListView ?
-                'width: 2px; height: 12px; background-color: ' + this.appThis.theme.foregroundColor +
+                'width: 2px; height: 12px; background-color: ' + this.appThis.getThemeForegroundColor() +
                                                     '; margin: 0px; border: 1px; border-radius: 10px;' :
-                'width: 32px; height: 2px; background-color: ' + this.appThis.theme.foregroundColor +
+                'width: 32px; height: 2px; background-color: ' + this.appThis.getThemeForegroundColor() +
                                                     '; margin: 0px; border: 1px; border-radius: 10px;',
                 layout_manager: new Clutter.BinLayout(),
                 x_expand: false,
@@ -705,10 +727,6 @@ class AppListGridButton extends PopupBaseMenuItem {
             } else {
                 if (this.buttonState.appType == APPTYPE._applications ||
                         this.buttonState.appType == APPTYPE._recent && !this.buttonState.app.clearList) {
-                    if (this.tooltip) {
-                        hideTooltip();
-                        this.tooltip = false;
-                    }
                     this.openContextMenu(e);
                 }
                 return Clutter.EVENT_STOP;
@@ -768,10 +786,14 @@ class AppListGridButton extends PopupBaseMenuItem {
 
     openContextMenu(e) {
         this.actor.set_style_class_name('menu-application-button-selected');
+        if (this.tooltip) {
+            hideTooltip();
+            this.tooltip = false;
+        }
         if (!this.actor.get_parent()) {
             return; // Favorite change ??
         }
-        this.appThis.contextMenu.open(this.buttonState.app, e);
+        this.appThis.contextMenu.open(this.buttonState.app, e, this);
     }
 
     destroy(skipDestroy) {
@@ -832,9 +854,7 @@ class GroupButton extends PopupBaseMenuItem {
                 this.appThis.clearEnteredActors();
                 this.handleEnter();
             } else {
-                if (this.callback) {
-                    this.callback();
-                }
+                this.activate();
             }
             return Clutter.EVENT_STOP;
         } else if (button === 3) {//right click
@@ -844,17 +864,26 @@ class GroupButton extends PopupBaseMenuItem {
                 this.handleEnter();
             } else {
                 if (this.app != null) {
-                    if (this.tooltip) {
-                        hideTooltip();
-                        this.tooltip = false;
-                    }
-                    //this.actor.set_style_class_name('menu-application-button-selected');
-                    this.appThis.contextMenu.open(this.app, e);
+                    this.openContextMenu(e);
                 }
             }
             return Clutter.EVENT_STOP;
         }
         return Clutter.EVENT_PROPAGATE;
+    }
+
+    activate() {
+        if (this.callback) {
+            this.callback();
+        }
+    }
+
+    openContextMenu(e) {
+        if (this.tooltip) {
+            hideTooltip();
+            this.tooltip = false;
+        }
+        this.appThis.contextMenu.open(this.app, e, this);
     }
 
     handleEnter(actor) {

@@ -77,7 +77,7 @@ class CinnamenuApplet extends TextIconApplet {
         this.signals.connect(this.appFavorites, 'changed', (...args) => this.onFavoritesChanged(...args));
         this.signals.connect(this.menu, 'open-state-changed', (...args) => this.onOpenStateToggled(...args));
         //this.signals.connect(global, 'scale-changed', () => this.refresh() );
-        this.categoryButtons = [];
+        this.categories = new Categories(this);
         this.apps = new Apps(this);
         this.allItems = [];
         this.lastRenderTime = 0;
@@ -342,7 +342,6 @@ class CinnamenuApplet extends TextIconApplet {
 
     onThemeChanged() {
         this.updateIconAndLabel();
-        this.introspectTheme();
         setTimeout(() => this.refresh(), 0);
     }
 
@@ -387,10 +386,9 @@ class CinnamenuApplet extends TextIconApplet {
 
     // =======================================================================
 
-    introspectTheme() {
+    getThemeForegroundColor() {
         const appletMenuThemeNode = this.menu.actor.get_theme_node();
-        this.theme = { // TODO: Find a proper class for button app state dots
-                    foregroundColor: appletMenuThemeNode.get_foreground_color().to_string().substring(0, 7)};
+        return appletMenuThemeNode.get_foreground_color().to_string().substring(0, 7);
     }
 
     onOpenStateToggled(menu, open) {
@@ -485,7 +483,7 @@ class CinnamenuApplet extends TextIconApplet {
         categories = categories1.concat([id1]).concat(categories2);
         this.settings.categories = categories;
         this.resetCategoryOpacity();
-        this.buildCategories();
+        this.categories.buildCategories();
         for (let i = 0, len = this.categoryButtons.length; i < len; i++) {
             if (this.categoryButtons[i].id === id2) {
                 this.categoryButtons[i].handleEnter();
@@ -514,98 +512,7 @@ class CinnamenuApplet extends TextIconApplet {
             return;
         }
         this.settings.categories = [];
-        this.buildCategories();
-    }
-
-    buildCategories() {
-        let buttons = [];
-        let button = Util.find(this.categoryButtons, button => button.id === 'all');
-        if (!button) {
-            button = new CategoryListButton(this, 'all', _('All Applications'), ['computer']);
-        }
-        buttons.push(button);
-        const dirs = [];
-        const iter = this.appSystem.get_tree().get_root_directory().iter();
-        let nextType;
-        while ((nextType = iter.next()) !== CMenu.TreeItemType.INVALID) {
-            if (nextType === CMenu.TreeItemType.DIRECTORY) {
-                dirs.push(iter.get_directory());
-            }
-        }
-        dirs.sort(function(a, b) {
-                        const prefCats = ['administration', 'preferences'];
-                        const prefIdA = prefCats.indexOf(a.get_menu_id().toLowerCase());
-                        const prefIdB = prefCats.indexOf(b.get_menu_id().toLowerCase());
-                        if (prefIdA < 0 && prefIdB >= 0) return -1;
-                        if (prefIdA >= 0 && prefIdB < 0) return 1;
-                        const nameA = a.get_name().toLowerCase();
-                        const nameB = b.get_name().toLowerCase();
-                        return (nameA > nameB) ? 1 : ( (nameA < nameB) ? -1 : 0 );  });
-
-        for (let z = 0; z < dirs.length; z++) {
-            const dir = dirs[z];
-            if (dir.get_is_nodisplay()) {
-                continue;
-            }
-            const dirId = dir.get_menu_id();
-            if (this.apps.getAppsByCategory(dirId).length > 0) {
-                let button = Util.find(this.categoryButtons, button => button.id === dirId);
-                if (!button) {
-                    button = new CategoryListButton(this, dir, dirId);
-                }
-                buttons.push(button);
-            }
-        }
-        const params = [
-            [this.settings.showPlaces, 'places', _('Places'), ['folder']],
-            [this.recentEnabled, 'recent', _('Recent Files'), ['folder-recent', 'folder-documents-recent']],
-            [this.settings.enableBookmarks, 'bookmarks', _('Bookmarks'), ['user-bookmarks']],
-            [true, 'favorites', _('Favorite Apps'), ['emblem-favorite', 'folder-favorites']] ];
-        for (let i = 0; i < params.length; i++) {
-            if (!params[i][0]) {
-                continue;
-            }
-            let button = Util.find(this.categoryButtons, button => button.id === params[i][1]);
-            if (!button) {// TODO: Use spread operator after versioning for 3.8
-                button = new CategoryListButton(this, params[i][1], params[i][2], params[i][3]);
-            }
-            buttons.push(button);
-        }
-        //?undo
-        if (this.settings.categories.length === 0) {
-            this.settings.categories = Util.map(buttons, (button) => button.id);
-        }
-        this.categoryButtons = [];
-        // If a category option is enabled after the settings are set, or an application is installed
-        // using a new category, we need to update the category order settings so it will render.
-        if (buttons.length !== this.settings.categories.length - 1) {
-            for (let i = 0; i < buttons.length; i++) {
-                if (this.settings.categories.indexOf(buttons[i].id) === -1) {
-                    this.settings.categories.push(buttons[i].id);
-                }
-            }
-        }
-        for (let i = 0; i < this.settings.categories.length; i++) {
-            let button = Util.find(buttons, (button) => button.id === this.settings.categories[i]);
-            if (!button) {
-                continue;
-            }
-            button.index = i;
-            this.categoryButtons.push(button);
-        }//?undo
-        /*
-        this.categoryButtons = [];
-        for (let i = 0; i < buttons.length; i++) {
-            buttons[i].index = i;
-            this.categoryButtons.push(buttons[i]);
-        }
-        */
-        buttons = undefined;
-
-        if (this.categoryButtons.length > 0) {
-            this.categoriesView.categoriesBox.remove_all_children();
-        }
-        Util.each(this.categoryButtons, (button) => this.categoriesView.categoriesBox.add_actor(button.actor));
+        this.categories.buildCategories();
     }
 
     setActiveCategory(category) {
@@ -769,6 +676,7 @@ class CinnamenuApplet extends TextIconApplet {
         const shiftKey = modifierState === 1;
         const altKey = modifierState === 8;
         const altgrKey = modifierState === 128;
+        const noModifiers = modifierState === 0;
 
 
         let buttons = this.getActiveButtons();
@@ -982,9 +890,21 @@ class CinnamenuApplet extends TextIconApplet {
             } else if (enteredItemExists) {
                 buttons[refItemIndex].activate();
             } else if (enteredPowerGroupItemExists) {
-                powerGroupButtons[refPowerGroupItemIndex].handleButtonRelease();
+                powerGroupButtons[refPowerGroupItemIndex].activate();
             } else if (enteredCategoryExists) {
                 this.categoryButtons[refCategoryIndex].handleButtonRelease();
+            }
+        };
+
+        const activateContextMenu = () => {
+            if (enteredContextMenuItemExists) {
+                //Ignore
+            } else if (enteredItemExists) {
+                buttons[refItemIndex].openContextMenu();
+            } else if (enteredPowerGroupItemExists) {
+                powerGroupButtons[refPowerGroupItemIndex].openContextMenu();
+            } else if (enteredCategoryExists) {
+                //Ignore
             }
         };
 
@@ -1003,30 +923,32 @@ class CinnamenuApplet extends TextIconApplet {
             }
         };*/
 
-        if (modifierState != 0 && !(altKey && (symbol === Clutter.ISO_Left_Tab || symbol === Clutter.Tab)) ) {
-            //ignore all modified keys except alt Tab
-            return Clutter.EVENT_PROPAGATE;
-        }
-        leaveCurrentlyEnteredItem();
-        //global.log(modifierState, symbol);
+        global.log(modifierState, symbol);
         switch (true) {
             case symbol === Clutter.KP_Enter:
             case symbol === Clutter.KEY_Return:
-                activateItem();
+                if (ctrlKey) {
+                    activateContextMenu();
+                } else if (noModifiers) {
+                    activateItem();
+                }
                 return Clutter.EVENT_STOP;
             case (symbol === Clutter.KEY_Up):
+                leaveCurrentlyEnteredItem();
                 upNavigation();
                 return Clutter.EVENT_STOP;
             /*case (symbol === Clutter.KEY_Up && modifierState === 4)://ctrl up
                 moveCategory("up");
                 return true;*/
             case (symbol === Clutter.KEY_Down):
+                leaveCurrentlyEnteredItem();
                 downNavigation();
                 return Clutter.EVENT_STOP;
             /*case (symbol === Clutter.KEY_Down && modifierState === 4)://ctrl down
                 moveCategory("down");
                 return true;*/
             case symbol === Clutter.KEY_Page_Up:
+                leaveCurrentlyEnteredItem();
                 if (enteredItemExists) {
                     buttons[0].handleEnter();
                 } else if (enteredPowerGroupItemExists) {
@@ -1036,6 +958,7 @@ class CinnamenuApplet extends TextIconApplet {
                 }
                 return Clutter.EVENT_STOP;
             case symbol === Clutter.KEY_Page_Down:
+                leaveCurrentlyEnteredItem();
                 if (enteredItemExists) {
                     buttons[buttons.length - 1].handleEnter();
                 } else if (enteredPowerGroupItemExists) {
@@ -1045,9 +968,11 @@ class CinnamenuApplet extends TextIconApplet {
                 }
                 return Clutter.EVENT_STOP;
             case (symbol === Clutter.KEY_Right):
+                leaveCurrentlyEnteredItem();
                 rightNavigation();
-                return Clutter.EVENT_PROPAGATE;
+                return Clutter.EVENT_PROPAGATE; //so that left/right can also be used to navigate search entry
             case (symbol === Clutter.KEY_Left):
+                leaveCurrentlyEnteredItem();
                 leftNavigation();
                 return Clutter.EVENT_PROPAGATE;
             case symbol === Clutter.ISO_Left_Tab:
@@ -1055,12 +980,15 @@ class CinnamenuApplet extends TextIconApplet {
                 if (modifierState === 8) {  //Alt-Tab was pressed. Close menu as alt-tab is
                                             //used for app-switcher in cinnamon
                     this.closeMenu();
-                    return false;
+                    return Clutter.EVENT_STOP;
+                } if (noModifiers) {
+                    leaveCurrentlyEnteredItem();
+                    tabNavigation();
+                    return Clutter.EVENT_STOP;
                 }
-                tabNavigation();
                 return Clutter.EVENT_PROPAGATE;
-            case symbol === Clutter.KEY_Escape:
-            case symbol === Clutter.Escape:
+            case (symbol === Clutter.KEY_Escape && noModifiers):
+            case (symbol === Clutter.Escape && noModifiers):
                 if (this.contextMenu.isOpen) {
                     this.contextMenu.close();
                     //    buttons[refItemIndex].handleEnter();
@@ -1302,8 +1230,7 @@ class CinnamenuApplet extends TextIconApplet {
     }
 
     display() {
-		this.introspectTheme();
-        this.isListView = this.settings.applicationsViewMode === ApplicationsViewModeLIST;
+		this.isListView = this.settings.applicationsViewMode === ApplicationsViewModeLIST;
         this.displayed = true;
         //==================bottomPane================
         const powergroupPlacement = this.settings.powergroupPlacement;
@@ -1325,7 +1252,7 @@ class CinnamenuApplet extends TextIconApplet {
         //=================middlePane======================
         this.appsView = new AppsView(this);
         this.categoriesView = new CategoriesView(this);
-        this.buildCategories();
+        this.categories.buildCategories();
         this.middlePane = new St.BoxLayout({ style_class: '' });
         if (powergroupPlacement === 2) {//left side
             this.middlePane.add(this.powerGroupBox.box, { expand: false, x_fill: false, y_fill: false,
@@ -1416,6 +1343,105 @@ class CinnamenuApplet extends TextIconApplet {
             //this.allItems.splice(i, 1);
         }
         this.allItems = [];
+    }
+}
+
+class Categories {
+    constructor(appThis) {
+        this.appThis = appThis;
+        this.appThis.categoryButtons = [];
+    }
+
+    buildCategories() {
+        let buttons = [];
+        let button = Util.find(this.appThis.categoryButtons, button => button.id === 'all');
+        if (!button) {
+            button = new CategoryListButton(this.appThis, 'all', _('All Applications'), ['computer']);
+        }
+        buttons.push(button);
+        const dirs = [];
+        const iter = this.appThis.appSystem.get_tree().get_root_directory().iter();
+        let nextType;
+        while ((nextType = iter.next()) !== CMenu.TreeItemType.INVALID) {
+            if (nextType === CMenu.TreeItemType.DIRECTORY) {
+                dirs.push(iter.get_directory());
+            }
+        }
+        dirs.sort(function(a, b) {
+                        const prefCats = ['administration', 'preferences'];
+                        const prefIdA = prefCats.indexOf(a.get_menu_id().toLowerCase());
+                        const prefIdB = prefCats.indexOf(b.get_menu_id().toLowerCase());
+                        if (prefIdA < 0 && prefIdB >= 0) return -1;
+                        if (prefIdA >= 0 && prefIdB < 0) return 1;
+                        const nameA = a.get_name().toLowerCase();
+                        const nameB = b.get_name().toLowerCase();
+                        return (nameA > nameB) ? 1 : ( (nameA < nameB) ? -1 : 0 );  });
+
+        for (let z = 0; z < dirs.length; z++) {
+            const dir = dirs[z];
+            if (dir.get_is_nodisplay()) {
+                continue;
+            }
+            const dirId = dir.get_menu_id();
+            if (this.appThis.apps.getAppsByCategory(dirId).length > 0) {
+                let button = Util.find(this.appThis.categoryButtons, button => button.id === dirId);
+                if (!button) {
+                    button = new CategoryListButton(this.appThis, dir, dirId);
+                }
+                buttons.push(button);
+            }
+        }
+        const params = [
+            [this.appThis.settings.showPlaces, 'places', _('Places'), ['folder']],
+            [this.appThis.recentEnabled, 'recent', _('Recent Files'), ['folder-recent', 'folder-documents-recent']],
+            [this.appThis.settings.enableBookmarks, 'bookmarks', _('Bookmarks'), ['user-bookmarks']],
+            [true, 'favorites', _('Favorite Apps'), ['emblem-favorite', 'folder-favorites']] ];
+        for (let i = 0; i < params.length; i++) {
+            if (!params[i][0]) {
+                continue;
+            }
+            let button = Util.find(this.appThis.categoryButtons, button => button.id === params[i][1]);
+            if (!button) {// TODO: Use spread operator after versioning for 3.8
+                button = new CategoryListButton(this.appThis, params[i][1], params[i][2], params[i][3]);
+            }
+            buttons.push(button);
+        }
+        //?undo
+        if (this.appThis.settings.categories.length === 0) {
+            this.appThis.settings.categories = Util.map(buttons, (button) => button.id);
+        }
+        this.appThis.categoryButtons = [];
+        // If a category option is enabled after the settings are set, or an application is installed
+        // using a new category, we need to update the category order settings so it will render.
+        if (buttons.length !== this.appThis.settings.categories.length - 1) {
+            for (let i = 0; i < buttons.length; i++) {
+                if (this.appThis.settings.categories.indexOf(buttons[i].id) === -1) {
+                    this.appThis.settings.categories.push(buttons[i].id);
+                }
+            }
+        }
+        for (let i = 0; i < this.appThis.settings.categories.length; i++) {
+            let button = Util.find(buttons, (button) => button.id === this.appThis.settings.categories[i]);
+            if (!button) {
+                continue;
+            }
+            button.index = i;
+            this.appThis.categoryButtons.push(button);
+        }//?undo
+        /*
+        this.categoryButtons = [];
+        for (let i = 0; i < buttons.length; i++) {
+            buttons[i].index = i;
+            this.categoryButtons.push(buttons[i]);
+        }
+        */
+        buttons = undefined;
+
+        if (this.appThis.categoryButtons.length > 0) {
+            this.appThis.categoriesView.categoriesBox.remove_all_children();
+        }
+        Util.each(this.appThis.categoryButtons, (button) =>
+                                        this.appThis.categoriesView.categoriesBox.add_actor(button.actor));
     }
 }
 
@@ -1905,7 +1931,7 @@ class PowerGroupBox {
             if ((!reverseOrder && i == this.items.length - 3 && this.items.length > 3) ||
                         (reverseOrder && i == 3 && this.items.length > 3)){// add seperator dot to box
                 const dot = new St.Widget({ style: 'width: 4px; height: 4px; background-color: ' +
-                        this.appThis.theme.foregroundColor + '; margin: 7px; border: 3px; border-radius: 10px;',
+                        this.appThis.getThemeForegroundColor() + '; margin: 7px; border: 3px; border-radius: 10px;',
                                 layout_manager: new Clutter.BinLayout(), x_expand: false, y_expand: false, });
                 this.box.add(dot, { x_fill: false, y_fill: false,
                                 x_align: St.Align.MIDDLE, y_align: St.Align.MIDDLE });
