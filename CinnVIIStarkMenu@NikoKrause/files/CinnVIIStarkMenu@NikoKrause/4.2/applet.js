@@ -629,6 +629,49 @@ class ApplicationButton extends GenericApplicationButton {
     }
 }
 
+class InternetSearchButton extends SimpleMenuItem {
+    constructor(applet, pattern) {
+        super(applet, { name: pattern,
+                        description: _("Web search with %s"),
+                        type: 'internet-search-provider',
+                        styleClass: 'menu-application-button' });
+
+        if (applet.showApplicationIcons) {
+            this.icon = new St.Icon({
+                icon_type: St.IconType.FULLCOLOR,
+                icon_name: 'web-browser',
+                icon_size: APPLICATION_ICON_SIZE
+            });
+
+            if (this.icon)
+                this.addActor(this.icon);
+        }
+
+        this.addLabel(this.name, 'menu-application-button-label');
+
+        this.searchStrings = [
+            Util.latinise(this.name.toLowerCase())
+        ];
+
+        if (applet.showAppsDescriptionOnButtons) {
+            this.addDescription(this.name, this.description);
+        }
+
+        this.tooltip = new TooltipCustom(this.actor, this.description, true);
+    }
+
+    changeLabel(pattern) {
+        this.name = pattern;
+        this.label.text = _("Search for '%s'").format(pattern);
+    }
+
+    activate() {
+        let prov_url = 'https://duckduckgo.com/?q=';
+        Main.Util.spawnCommandLine("xdg-open " + prov_url + "'" + this.name.replace(/'/g,"%27") + "'");
+        this.applet.menu.close();
+    }
+}
+
 class SearchProviderResultButton extends SimpleMenuItem {
     constructor(applet, provider, result) {
         super(applet, { name:result.label,
@@ -1876,6 +1919,7 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
         this._recentButtons = [];
         this._categoryButtons = [];
         this._searchProviderButtons = [];
+        this._internetSearchButtons = [];
         this._selectedItemIndex = null;
         this._previousSelectedActor = null;
         this._previousVisibleIndex = null;
@@ -1934,6 +1978,8 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
         // In that particular case we get no signal at all.
         this.refreshId = 0;
         this.refreshMask = REFRESH_ALL_MASK;
+        this._internetSearchButton = null;
+        this._addSearchProviderButton();
         this._doRefresh();
 
         this.set_show_label_in_vertical_panels(false);
@@ -3730,6 +3776,14 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
         }
     }
 
+    _addSearchProviderButton() {
+        this._internetSearchButton = new InternetSearchButton(this, '');
+
+        this._internetSearchButtons.push(this._internetSearchButton);
+        this.applicationsBox.add_actor(this._internetSearchButton.actor);
+        this._internetSearchButton.actor.visible = this.menu.isOpen;
+    }
+
     resetSearch(){
         this.searchEntry.set_text("");
     }
@@ -3762,6 +3816,8 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
             }
             this._setCategoriesButtonActive(false);
             this.lastSelectedCategory = "search"
+
+            this._internetSearchButton.changeLabel(searchString);
 
             this._doSearch(searchString);
             this.appsButton.actor.hide();
@@ -3845,6 +3901,8 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
 
         result = this._matchNames(this._recentButtons, pattern);
         buttons = buttons.concat(result);
+
+        buttons = buttons.concat(this._internetSearchButtons);
 
         var acResults = []; // search box autocompletion results
         if (this.searchFilesystem) {
