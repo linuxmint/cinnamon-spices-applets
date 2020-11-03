@@ -636,16 +636,14 @@ class InternetSearchButton extends SimpleMenuItem {
                         type: 'internet-search-provider',
                         styleClass: 'menu-application-button' });
 
-        if (applet.showApplicationIcons) {
-            this.icon = new St.Icon({
-                icon_type: St.IconType.FULLCOLOR,
-                icon_name: 'web-browser',
-                icon_size: APPLICATION_ICON_SIZE
-            });
-
-            if (this.icon)
-                this.addActor(this.icon);
-        }
+        this.icon = new St.Icon({
+            icon_type: St.IconType.FULLCOLOR,
+            icon_name: 'web-browser',
+            icon_size: APPLICATION_ICON_SIZE
+        });
+        this.addActor(this.icon);
+        if (!applet.showApplicationIcons)
+            this.icon.visible = false;
 
         this.addLabel(this.name, 'menu-application-button-label');
 
@@ -653,16 +651,15 @@ class InternetSearchButton extends SimpleMenuItem {
             Util.latinise(this.name.toLowerCase())
         ];
 
-        if (applet.showAppsDescriptionOnButtons) {
-            this.addDescription(this.name, this.description);
-        }
-
         this.tooltip = new TooltipCustom(this.actor, this.description, true);
     }
 
     changeLabel(pattern) {
         this.name = pattern;
         this.label.text = _("Search for '%s'").format(pattern);
+        if (this.applet.showAppsDescriptionOnButtons) {
+            this.addDescription(this.label.text, this.description);
+        }
     }
 
     activate() {
