@@ -28,9 +28,10 @@ const REMEMBER_RECENT_KEY = 'remember-recent-files';
 const {CategoryListButton, AppListGridButton, ContextMenu, GroupButton} = require('./buttons');
 const PlaceDisplay = require('./placeDisplay');
 const {BookmarksManager} = require('./browserBookmarks');
+const {EMOJI, Modable} = require('./emoji');
+//const EMOJI = emojiJS.EMOJI;
 //const HINT_TEXT = _('Type to search...');
 const SEARCH_THRESHOLD = 0.45;
-
 class CinnamenuApplet extends TextIconApplet {
     constructor(metadata, orientation, panel_height, instance_id) {
         super(orientation, panel_height, instance_id);
@@ -62,7 +63,7 @@ class CinnamenuApplet extends TextIconApplet {
         this.menu = new AppletPopupMenu(this, this.orientation);
         this.menuManager.addMenu(this.menu);
         this.menu.setCustomStyleClass('menu-background');
-        this.menu.setCustomStyleClass('cinnamenu-background');
+        this.menu.setCustomStyleClass('cinnamenu');
         this.signals = new SignalManager(null);
         this.displaySignals = new SignalManager(null);
         this.tracker = Cinnamon.WindowTracker.get_default();
@@ -81,6 +82,7 @@ class CinnamenuApplet extends TextIconApplet {
         this.apps = new Apps(this);
         this.allItems = [];
         this.lastRenderTime = 0;
+        this.lastKeyEventTime = 0;
         //this.session = new SessionManager();
         this.screenSaverProxy = new ScreenSaverProxy();
         this.init = true;
@@ -119,6 +121,7 @@ class CinnamenuApplet extends TextIconApplet {
             { key: 'category-click',            value: 'categoryClick',         cb: null },
             { key: 'enable-autoscroll',         value: 'enableAutoScroll',      cb: this.refresh },
             { key: 'web-search-option',         value: 'webSearchOption',       cb: null },
+            { key: 'emoji-search',              value: 'enableEmojiSearch',     cb: null },
             { key: 'enable-search-providers',   value: 'enableSearchProviders', cb: null },
 
             { key: 'menu-icon-custom',          value: 'menuIconCustom',        cb: this.updateIconAndLabel },
@@ -137,10 +140,6 @@ class CinnamenuApplet extends TextIconApplet {
                       settingsProps[i].value,
                       settingsProps[i].cb ? (...args) => settingsProps[i].cb.call(this, ...args) : null );
         }
-    }
-
-    setKeyFocus() {
-        global.stage.set_key_focus(this.search.searchEntry);
     }
 
     getGridWidth() {
@@ -317,14 +316,15 @@ class CinnamenuApplet extends TextIconApplet {
             this.switchApplicationsView();
             this.destroyAppButtons();
             this.resetSearch();
+            this.powerGroupBox.populate(this.apps.listFavorites());
             this.setActiveCategory(this.currentCategory);
             this.applyConstraints();
         }
-        this.powerGroupBox.populate(this.apps.listFavorites());
+
 
         Mainloop.idle_add_full(150, () => {
                 if (this.dragIndex > -1) {
-                    const button = Util.find(this.allItems, (item) => item.buttonState.appIndex === this.dragIndex);
+                    const button = Util.find(this.allItems, (item) => item.app.appIndex === this.dragIndex);
                     if (button) {
                         this.scrollToButton(button);
                     }
@@ -462,16 +462,6 @@ class CinnamenuApplet extends TextIconApplet {
         this.clearEnteredActors();
         this.destroyAppButtons();
     }
-
-    getActiveButtons() {
-        const buttons = [];
-        const children = this.appsView.getActiveContainer().get_children();
-        for (let i = 0; i < children.length; i++) {
-            buttons.push( Util.find( this.allItems, function(button) {
-                                                        return button && button.actor === children[i]; } ) );
-        }
-        return buttons;
-    }
 //-----------------------------------------------------------------------
     moveCategoryToPos(id1, id2) { //?undo
         let categories = this.settings.categories.slice();
@@ -495,11 +485,9 @@ class CinnamenuApplet extends TextIconApplet {
     }
 
     resetOpacity() {
-        const buttons = this.getActiveButtons();
-        for (let i = 0; i<buttons.length; i++) {
-            if (true) {
-                buttons[i].actor.set_opacity(255);
-            }
+        const children = this.appsView.getActiveContainer().get_children();
+        for (let i = 0; i < children.length; i++) {
+                children[i].set_opacity(255);
         }
     }
 
@@ -646,17 +634,12 @@ class CinnamenuApplet extends TextIconApplet {
         if (this.contextMenu.isOpen) {
             this.contextMenu.close();
         }
-        const buttons = this.getActiveButtons();
-        for (let i = 0; i<buttons.length; i++) {
-            if (buttons[i].actor.has_style_class_name('menu-application-button-selected') ||
-                                                                            buttons[i].entered != null ) {
-                buttons[i].handleLeave();
-            }
-        }
+        this.appsView.clearEnteredActors();
         this.powerGroupBox.clearEnteredActors();
     }
 //////////////////////////////////////////////////////////////////////////////
     onMenuKeyPress(actor, event) {
+        //global.log('>'+event);
         let symbol = event.get_key_symbol();
 
         let keyCode = event.get_key_code();
@@ -670,16 +653,23 @@ class CinnamenuApplet extends TextIconApplet {
             return Clutter.EVENT_PROPAGATE;
         }
 
-        const powerGroupButtons = this.powerGroupBox.getButtons();
-
         const ctrlKey = modifierState & Clutter.ModifierType.CONTROL_MASK || symbol === 65507 || symbol === 65508;
         const shiftKey = modifierState === 1;
         const altKey = modifierState === 8;
         const altgrKey = modifierState === 128;
         const noModifiers = modifierState === 0;
 
+        //Ignore duplicate event emitted by ibus.
+        const now = Date.now();
+        if ((symbol === Clutter.KEY_Left || symbol === Clutter.KEY_Right) && noModifiers
+                                                                && (now - this.lastKeyEventTime) <= 100) {
+            return Clutter.EVENT_PROPAGATE;
+        }
+        this.lastKeyEventTime = now;
 
-        let buttons = this.getActiveButtons();
+        const powerGroupButtons = this.powerGroupBox.getButtons();
+
+        let buttons = this.appsView.getActiveButtons();
         let refItemIndex = Util.findIndex(buttons, (button) => {
             return (button.actor.has_style_class_name('menu-application-button-selected') ||
                                                                     button.entered != null );  });
@@ -923,7 +913,7 @@ class CinnamenuApplet extends TextIconApplet {
             }
         };*/
 
-        global.log(modifierState, symbol);
+        //global.log(modifierState, symbol);
         switch (true) {
             case symbol === Clutter.KP_Enter:
             case symbol === Clutter.KEY_Return:
@@ -931,7 +921,12 @@ class CinnamenuApplet extends TextIconApplet {
                     activateContextMenu();
                 } else if (noModifiers) {
                     activateItem();
+                } else {
+                    return Clutter.EVENT_PROPAGATE;
                 }
+            return Clutter.EVENT_STOP;
+            case (symbol === Clutter.KEY_Menu && noModifiers):
+                activateContextMenu();
                 return Clutter.EVENT_STOP;
             case (symbol === Clutter.KEY_Up):
                 leaveCurrentlyEnteredItem();
@@ -947,26 +942,6 @@ class CinnamenuApplet extends TextIconApplet {
             /*case (symbol === Clutter.KEY_Down && modifierState === 4)://ctrl down
                 moveCategory("down");
                 return true;*/
-            case symbol === Clutter.KEY_Page_Up:
-                leaveCurrentlyEnteredItem();
-                if (enteredItemExists) {
-                    buttons[0].handleEnter();
-                } else if (enteredPowerGroupItemExists) {
-                    powerGroupButtons[0].handleEnter();
-                } else {
-                    this.categoryButtons[0].handleEnter();
-                }
-                return Clutter.EVENT_STOP;
-            case symbol === Clutter.KEY_Page_Down:
-                leaveCurrentlyEnteredItem();
-                if (enteredItemExists) {
-                    buttons[buttons.length - 1].handleEnter();
-                } else if (enteredPowerGroupItemExists) {
-                    powerGroupButtons[powerGroupButtons.length - 1].handleEnter();
-                } else {
-                    this.categoryButtons[this.categoryButtons.length - 1].handleEnter();
-                }
-                return Clutter.EVENT_STOP;
             case (symbol === Clutter.KEY_Right):
                 leaveCurrentlyEnteredItem();
                 rightNavigation();
@@ -996,6 +971,26 @@ class CinnamenuApplet extends TextIconApplet {
                     this.closeMenu();
                 }
                 return Clutter.EVENT_STOP;
+            case symbol === Clutter.KEY_Page_Up:
+                leaveCurrentlyEnteredItem();
+                if (enteredItemExists) {
+                    buttons[0].handleEnter();
+                } else if (enteredPowerGroupItemExists) {
+                    powerGroupButtons[0].handleEnter();
+                } else {
+                    this.categoryButtons[0].handleEnter();
+                }
+                return Clutter.EVENT_STOP;
+            case symbol === Clutter.KEY_Page_Down:
+                leaveCurrentlyEnteredItem();
+                if (enteredItemExists) {
+                    buttons[buttons.length - 1].handleEnter();
+                } else if (enteredPowerGroupItemExists) {
+                    powerGroupButtons[powerGroupButtons.length - 1].handleEnter();
+                } else {
+                    this.categoryButtons[this.categoryButtons.length - 1].handleEnter();
+                }
+                return Clutter.EVENT_STOP;
             default:
             return Clutter.EVENT_PROPAGATE;
         }
@@ -1010,27 +1005,25 @@ class CinnamenuApplet extends TextIconApplet {
         if (this.appsView.getActiveContainer()) {
             this.appsView.getActiveContainer().show(); //??
         }
-
-
         //clean up any search provider results, if enabled.
         let allItems = [];
         for (let i = 0; i < this.allItems.length; i++) {
             if (!this.allItems[i]) {
               continue;
             }
-            if (this.allItems[i].buttonState.appType === APPTYPE._providers) {
+            if (this.allItems[i].app.type === APPTYPE.provider) {
                 this.allItems[i].destroy(true);
                 this.allItems[i] = undefined;
             } else {
-                this.allItems[i].buttonState.app.nameWithSearchMarkup = null;
-                this.allItems[i].buttonState.app.descriptionWithSearchMarkup = null;
-                this.allItems[i].buttonState.app.keywordsWithSearchMarkup = null;
-                this.allItems[i].buttonState.app.idWithSearchMarkup = null;
+                this.allItems[i].app.nameWithSearchMarkup = null;
+                this.allItems[i].app.descriptionWithSearchMarkup = null;
+                this.allItems[i].app.keywordsWithSearchMarkup = null;
+                this.allItems[i].app.idWithSearchMarkup = null;
                 allItems.push(this.allItems[i]);
             }
         }
         this.allItems = allItems;
-        this.setKeyFocus();
+        global.stage.set_key_focus(this.search.searchEntry);
     }
 
     onSearchTextChanged() {
@@ -1044,36 +1037,30 @@ class CinnamenuApplet extends TextIconApplet {
             }
         }
 
-        if (this.searchActive && searchText.length === 0) {
+        if (searchText.length === 0) {
             this.resetSearch();
             this.setActiveCategory(this.currentCategory);
-            return;
-        }
-
-        this.searchActive = searchText.length > 0;
-        this.currentSearchStr = searchText;
-        if (this.searchActive) {
-            this.appsView.setAnswerText(null);
-            this.clearEnteredActors();
-            this.search.showSecondaryIcon(true);
-
-            if (!this.signals.isConnected('secondary-icon-clicked', this.search.searchEntry)) {
-                this.signals.connect(this.search.searchEntry, 'secondary-icon-clicked', () => {
-                                                            this.clearEnteredActors();
-                                                            this.search.searchEntryText.set_text('');
-                                                            this.onSearchTextChanged();
-                                                            //this.resetDisplayState
-                                                            }, this);
-            }
-            setTimeout(() => this.doSearch(searchText), 0);
-
-        } else {
             if (this.signals.isConnected('secondary-icon-clicked', this.search.searchEntry)) {
                 this.signals.disconnect('secondary-icon-clicked', this.search.searchEntry, this);
             }
             this.search.showSecondaryIcon(false);
             this.previousSearchPattern = '';
+            return;
         }
+
+        this.searchActive = true;
+        this.currentSearchStr = searchText;
+        this.appsView.setAnswerText(null);
+        this.clearEnteredActors();
+        this.search.showSecondaryIcon(true);
+        if (!this.signals.isConnected('secondary-icon-clicked', this.search.searchEntry)) {
+            this.signals.connect(this.search.searchEntry, 'secondary-icon-clicked', () => {
+                                                        this.clearEnteredActors();
+                                                        this.search.searchEntryText.set_text('');
+                                                        this.onSearchTextChanged();
+                                                        }, this);
+        }
+        setTimeout(() => this.doSearch(searchText), 0);
     }
 
     doSearch(text) {
@@ -1094,8 +1081,8 @@ class CinnamenuApplet extends TextIconApplet {
                             .concat(this.recentEnabled ? this.apps.listRecent(pattern) : []);
 
         results.sort( (a, b) =>  a.score < b.score );
-        if (results.length > 14) {
-            results.length = 14;
+        if (results.length > 10) {
+            results.length = 10;
         }
         //-----search providers-------
         //---calculator---
@@ -1103,7 +1090,7 @@ class CinnamenuApplet extends TextIconApplet {
         const ans = tryFn(()=>{ return eval(exp); }, null);
         if ((typeof ans == 'number' || typeof ans == 'boolean') && ans != text ) {
             const calcIcon = Gio.file_new_for_path(__meta.path + '/calc.png');
-            results.push({  type: APPTYPE._providers,
+            results.push({  type: APPTYPE.provider,
                             name: _('Solution:') + ' ' + ans,
                             description: _('Click to copy'),
                             icon: new St.Icon({ gicon: new Gio.FileIcon({ file: calcIcon }),
@@ -1118,7 +1105,7 @@ class CinnamenuApplet extends TextIconApplet {
                                                 'duckgo_icon.png'][this.settings.webSearchOption];
             const url = ['google.com/search?q=','www.bing.com/search?q=','search.yahoo.com/search?p=',
                                                     'duckduckgo.com/?q='][this.settings.webSearchOption];
-            results.push(   {   type: APPTYPE._providers,
+            results.push(   {   type: APPTYPE.provider,
                                 name: _('Search web for') + ' "' + text + '"',
                                 description: '',
                                 icon: new St.Icon({ gicon: new Gio.FileIcon({
@@ -1128,13 +1115,35 @@ class CinnamenuApplet extends TextIconApplet {
                                         '/usr/bin/xdg-open https://' + url + encodeURIComponent(text));}
                             } );
         }
+        //---emoji search------
+        if (pattern.length > 2 && this.settings.enableEmojiSearch) {
+            for (let i = 0; i < EMOJI.length; i++) {
+                const match1 = searchStr(pattern, EMOJI[i].name, true);
+                const match2 = searchStr(pattern, EMOJI[i].keywords, true);
+                match2.score *= 0.95; //slightly lower priority for keyword match
+                const bestMatchScore = Math.max(match1.score, match2.score);
+                if (bestMatchScore > SEARCH_THRESHOLD) {
+                    results.push({
+                            name: EMOJI[i].name,
+                            description: _('Click to copy'),
+                            nameWithSearchMarkup: match1.result,
+                            //descriptionWithSearchMarkup: match2.result,
+                            type: APPTYPE.provider,
+                            icon: EMOJI[i].code,
+                            activate: () => { const clipboard = St.Clipboard.get_default();
+                                clipboard.set_text(St.ClipboardType.CLIPBOARD, EMOJI[i].code);}
+                                });
+                }
+            }
+        }
         //---search providers---
         const finish = () => {
             this.appsView.clear();
             this.populateAppsBox(results);
-            let buttons = this.getActiveButtons();
-            if (buttons.length === 0) return;
-            buttons[0].handleEnter();
+            let buttons = this.appsView.getActiveButtons();
+            if (buttons.length > 0) {
+                buttons[0].handleEnter();
+            }
         };
         if (this.settings.enableSearchProviders && pattern.length > 2) {
             launch_all(pattern, (provider, providerResults) => {
@@ -1142,7 +1151,7 @@ class CinnamenuApplet extends TextIconApplet {
                             if (!providerResults[i]) {
                                 continue;
                             }
-                            providerResults[i].type = APPTYPE._providers;
+                            providerResults[i].type = APPTYPE.provider;
                             providerResults[i].name = providerResults[i].label.replace(/ : /g, ': ');
                             providerResults[i].activate = provider.on_result_selected;
                             providerResults[i].score = 0.1;
@@ -1180,23 +1189,23 @@ class CinnamenuApplet extends TextIconApplet {
         let column = 0;
         let rownum = 0;
 
-        const createAppButton = (app, appIndex) => {
+        const addAppButton = (app, appIndex) => {
             let appButton;
             let refAppButton = -1;
             for (let i = 0, len = this.allItems.length; i < len; i++) {
-                if (this.allItems[i] && (this.allItems[i].buttonState.app === app)){
+                if (this.allItems[i] && (this.allItems[i].app === app)){
                     refAppButton = i;
                     break;
                 }
             }
             if (refAppButton > -1 && this.allItems[refAppButton]) {
                 appButton = this.allItems[refAppButton];
-                appButton.buttonState.app = app;
-                appButton.buttonState.appType = app.type;
-                appButton.buttonState.appIndex = appIndex;
+                appButton.app = app;
+                appButton.app.appIndex = appIndex;
             } else {
                 //global.log("new:", appType, this.allItems.length);
-                appButton = new AppListGridButton(this, app, appIndex);
+                app.appIndex = appIndex;
+                appButton = new AppListGridButton(this, app);
                 this.allItems.push(appButton);
             }
 
@@ -1207,7 +1216,6 @@ class CinnamenuApplet extends TextIconApplet {
                 if (!gridLayout) {
                     return false;
                 }
-                appButton.buttonState.column = column;
                 gridLayout.attach(appButton.actor, column, rownum, 1, 1);
                 column++;
 
@@ -1220,7 +1228,7 @@ class CinnamenuApplet extends TextIconApplet {
         this.appsView.applicationsListBox.hide();//hide while populating for performance.
         this.appsView.applicationsGridBox.hide();//
         for (let z = 0, len = appList.length; z < len; z++) {
-            createAppButton(appList[z], z);
+            addAppButton(appList[z], z);
         }
         if (isListView) {
             this.appsView.applicationsListBox.show();
@@ -1253,6 +1261,7 @@ class CinnamenuApplet extends TextIconApplet {
         this.appsView = new AppsView(this);
         this.categoriesView = new CategoriesView(this);
         this.categories.buildCategories();
+        this.contextMenu = new ContextMenu(this);
         this.middlePane = new St.BoxLayout({ style_class: '' });
         if (powergroupPlacement === 2) {//left side
             this.middlePane.add(this.powerGroupBox.box, { expand: false, x_fill: false, y_fill: false,
@@ -1279,6 +1288,8 @@ class CinnamenuApplet extends TextIconApplet {
         if (powergroupPlacement !== 0) {//bottom, left or right
             this.mainBox.add(this.bottomPane);
         }
+        this.mainBox.add(this.contextMenu.contextMenuBox, {expand: false, x_fill: false, //y_fill: false,
+                                                    x_align: St.Align.START, y_align: St.Align.MIDDLE});
         // add all to section
         const section = new PopupMenuSection();
         section.actor.add_actor(this.mainBox);
@@ -1288,7 +1299,10 @@ class CinnamenuApplet extends TextIconApplet {
         this.menu.actor.set_reactive(true);
         this.displaySignals.connect(this.menu.actor, 'button-release-event',
                                                         (...args) => {this.clearEnteredActors();});
-        this.contextMenu = new ContextMenu(this);
+        const Lpadding = this.categoriesView.categoriesBox.get_theme_node().get_length('padding-left');
+        if (Lpadding > 20) {
+            this.categoriesView.categoriesBox.style = 'padding-left: 20px;';
+        }
     }
 
     destroyDisplayed() {
@@ -1340,7 +1354,6 @@ class CinnamenuApplet extends TextIconApplet {
             if (this.allItems[i]) {
                 this.allItems[i].destroy();
             }
-            //this.allItems.splice(i, 1);
         }
         this.allItems = [];
     }
@@ -1450,8 +1463,6 @@ class CategoriesView {
         this.appThis = appThis;
 
         this.categoriesBox = new St.BoxLayout({ style_class: 'menu-categories-box', vertical: true });
-        // Place boxes in proper containers. The order added determines position
-        // groupCategoriesWorkspacesWrapper bin wraps categories and workspaces
         this.groupCategoriesWorkspacesWrapper = new St.BoxLayout({/*style: 'max-width: 185px;',*/
                                                                                     vertical: true });
         this.groupCategoriesWorkspacesWrapper.add(this.categoriesBox, {
@@ -1517,14 +1528,36 @@ class AppsView {
 
     }
 
+    getActiveButtons() {
+        const buttons = [];
+        const children = this.getActiveContainer().get_children();
+        for (let i = 0; i < children.length; i++) {
+            buttons.push( Util.find( this.appThis.allItems, function(button) {
+                                                        return button && button.actor === children[i]; } ) );
+        }
+        return buttons;
+    }
+
     clear() {
         this.setAnswerText(null);
+        this.clearEnteredActors();
         if (this.applicationsListBox) {
             this.applicationsListBox.remove_all_children();
         }
 
         if (this.applicationsGridBox && !this.applicationsGridBox.is_finalized()) {
             this.applicationsGridBox.remove_all_children();
+        }
+    }
+
+    clearEnteredActors() {
+        const buttons = this.getActiveButtons();
+        for (let i = 0; i<buttons.length; i++) {
+            if (buttons[i].actor.has_style_class_name('menu-application-button-selected') ||
+                                                                            buttons[i].entered != null ) {
+                buttons[i].handleLeave();
+                buttons[i].entered = null;
+            }
         }
     }
 
@@ -1647,7 +1680,7 @@ class Apps {
                         if (!app.description || app.description == '') {
                             app.description = _('No description available');
                         }
-                        app.type = APPTYPE._applications;
+                        app.type = APPTYPE.application;
                     }
                     if (this.knownApps.indexOf(id) < 0) {//unknown app
                         if (!this.appThis.isNewInstance) {
@@ -1679,21 +1712,16 @@ class Apps {
         if (pattern) {
             let _res = [];
             for (let i = 0, len = res.length; i < len; i++) {
-                let name = res[i].get_name();
-                let keywords = res[i].get_keywords();
-                Object.assign(res[i], {   name: name,
-                                          keywords: keywords || name,
-                                          description: res[i].get_description(),
-                                          id: res[i].get_id().replace(/\.desktop$/, ''),
-                                          type: APPTYPE._applications });
+                const keywords = res[i].get_keywords() || '';
+                const id = res[i].get_id().replace(/\.desktop$/, '');
                 const match1 = searchStr(pattern, res[i].name);
                 const match2 = searchStr(pattern, res[i].description);
                 match2.score *= 0.95; //slightly lower priority for description match
-                const match3 = searchStr(pattern, res[i].keywords);
+                const match3 = searchStr(pattern, keywords);
                 match3.score *= 0.6; //low priority for keyword match
-                const match4 = searchStr(pattern, res[i].id);
+                const match4 = searchStr(pattern, id);
                 match4.score *= 0.6; //low priority for id match
-                const bestMatchScore = Math.max(match1.score,match2.score,match3.score,match4.score);
+                const bestMatchScore = Math.max(match1.score, match2.score, match3.score, match4.score);
                 if (bestMatchScore > SEARCH_THRESHOLD) {
                     res[i].score = bestMatchScore;
                     res[i].nameWithSearchMarkup = match1.result;
@@ -1721,7 +1749,7 @@ class Apps {
             if (!obj.hasOwnProperty('description')) {
                 obj.description = obj.get_description();
             }
-            res[i].type = APPTYPE._applications;
+            res[i].type = APPTYPE.application;
         }
         return res;
     }
@@ -1752,7 +1780,7 @@ class Apps {
                                     uri: recentInfo.uri,
                                     mimeType: recentInfo.mimeType,
                                     description: recentInfo.uriDecoded,
-                                    type: APPTYPE._recent };
+                                    type: APPTYPE.recent };
                 res.push(newRecent);
                 this.knownRecents.push(newRecent);
             }
@@ -1763,7 +1791,7 @@ class Apps {
                 this.clearlistItem = {  name: _('Clear List'),
                                         clearList: true,
                                         description: '',
-                                        type: APPTYPE._recent };
+                                        type: APPTYPE.recent };
             }
             res.push(this.clearlistItem);
         }
@@ -1786,11 +1814,12 @@ class Apps {
 
     listPlaces(pattern) {
         const places = this.placesManager.places.special
-                                    .concat(this.placesManager.places.bookmarks)
-                                    .concat(this.placesManager.places.devices);
+                    .concat(this.placesManager.places.bookmarks)
+                    .concat(this.placesManager.places.devices);
+                    //.concat(this.placesManager.places.network);
         let res = [];
         for (let i = 0; i < places.length; i++) {
-            places[i].type = APPTYPE._places;
+            places[i].type = APPTYPE.place;
             places[i].description = places[i].file.get_path();
             res.push(places[i]);
         }

@@ -1,7 +1,7 @@
 Cinnamenu
 ========
 
-Cinnamenu is a full featured alternative for the standard Cinnamon menu with grid layout and customisation options.
+Cinnamenu is a full featured alternative to the standard Cinnamon menu with grid layout and customisation options.
 
 ### Features
 
@@ -14,3 +14,4 @@ Cinnamenu is a full featured alternative for the standard Cinnamon menu with gri
    * Change icon sizes.
  * Built in calculator: evaluate standard javascript math and boolean expressions/constants, for example: "5+sqrt(4)", "2*PI", "tan(4)>=0"
 (See https://www.w3schools.com/jsref/jsref_obj_math.asp for a list of functions and constants)
+ * ***NEW:*** Emoji search
