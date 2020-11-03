@@ -28,8 +28,8 @@ const REMEMBER_RECENT_KEY = 'remember-recent-files';
 const {CategoryListButton, AppListGridButton, ContextMenu, GroupButton} = require('./buttons');
 const PlaceDisplay = require('./placeDisplay');
 const {BookmarksManager} = require('./browserBookmarks');
-const emojiJS = require('./emoji');
-const EMOJI = emojiJS.EMOJI;
+const {EMOJI, Modable} = require('./emoji');
+//const EMOJI = emojiJS.EMOJI;
 //const HINT_TEXT = _('Type to search...');
 const SEARCH_THRESHOLD = 0.45;
 class CinnamenuApplet extends TextIconApplet {
@@ -1118,7 +1118,6 @@ class CinnamenuApplet extends TextIconApplet {
         //---emoji search------
         if (pattern.length > 2 && this.settings.enableEmojiSearch) {
             for (let i = 0; i < EMOJI.length; i++) {
-                const calcIcon = Gio.file_new_for_path(__meta.path + '/calc.png');
                 const match1 = searchStr(pattern, EMOJI[i].name, true);
                 const match2 = searchStr(pattern, EMOJI[i].keywords, true);
                 match2.score *= 0.95; //slightly lower priority for keyword match

@@ -14,6 +14,7 @@ const {spawnCommandLine, spawn, unref} = imports.misc.util;
 const MessageTray = imports.ui.messageTray;
 
 const {SEARCH_DEBUG, _, APPTYPE, tryFn, showTooltip, hideTooltip} = require('./utils');
+const {EMOJI, Modable} = require('./emoji');
 const PlacementTOOLTIP = 1, PlacementUNDER = 2, PlacementNONE = 3;
 const SHOW_SEARCH_MARKUP_IN_TOOLTIP = true;
 const USER_DESKTOP_PATH = getUserDesktopDir();
@@ -325,6 +326,23 @@ class ContextMenu {
             addMenuItem( new ContextMenuItem(   this.appThis, _('Other application...'), null,
                                                 () => { spawnCommandLine("nemo-open-with " + app.uri);
                                                         this.appThis.closeMenu(); } ));
+        } else if (app.type == APPTYPE.provider) {
+            if (!Modable.includes(app.icon)) {
+                return;
+            }
+            const addMenuItem = (char, text) => {
+                const item = new ContextMenuItem(this.appThis, app.icon + char + ' ' + text, null,
+                                        () => { const clipboard = St.Clipboard.get_default();
+                                                clipboard.set_text(St.ClipboardType.CLIPBOARD, app.icon + char);
+                                                this.appThis.closeMenu(); } );
+                this.menu.addMenuItem(item);
+                this.contextMenuButtons.push(item);
+            };
+            addMenuItem('\u{1F3FB}', 'light skin tone');
+            addMenuItem('\u{1F3FC}', 'medium-light skin tone');
+            addMenuItem('\u{1F3FD}', 'medium skin tone');
+            addMenuItem('\u{1F3FE}', 'medium-dark skin tone');
+            addMenuItem('\u{1F3FF}', 'dark skin tone');
         }
 
         this.isOpen = true;
@@ -713,7 +731,8 @@ class AppListGridButton extends PopupBaseMenuItem {
                 return Clutter.EVENT_STOP;
             } else {
                 if (this.app.type == APPTYPE.application ||
-                        this.app.type == APPTYPE.recent && !this.app.clearList) {
+                            this.app.type == APPTYPE.recent && !this.app.clearList ||
+                            this.app.type == APPTYPE.provider && typeof this.app.icon === 'string' ){
                     this.openContextMenu(e);
                 }
                 return Clutter.EVENT_STOP;

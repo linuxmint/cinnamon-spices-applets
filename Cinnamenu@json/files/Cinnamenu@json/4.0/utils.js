@@ -151,6 +151,9 @@ const searchStr = function (q, str, quick = false) {
     let foundLength = 0;
     const str2 = latinise(str.toLowerCase());
     const qletters = q.replace(/[^a-zA-Z0-9_ ]/g, ''); //latinise(q.toLowerCase()); //already done in doSearch()
+    if(qletters.length == 0){
+        return { score: 0, result: str };
+    }
     let score = 0;
     if (new RegExp('\\b'+qletters).test(str2)) { //match substring from beginning of words
         score = 1.2;
