@@ -73,6 +73,7 @@
                 "open-on-favorites",
                 "enable-autoscroll",
                 "web-search-option",
+                "emoji-search",
                 "enable-search-providers"
             ]
         },
@@ -256,6 +257,12 @@
             "None":4
         },
         "tooltip":"Show an internet search option in search results"
+    },
+    "emoji-search":{
+        "type":"checkbox",
+        "default":true,
+        "description":"Enable emoji search",
+        "tooltip":"Show emojis in search results"
     },
     "enable-search-providers":{
         "type":"checkbox",
