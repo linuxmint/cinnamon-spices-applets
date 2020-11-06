@@ -1,7 +1,7 @@
 {
     "layout" : {
         "type" : "layout",
-        "pages" : ["menu", "panel", "sidebar", "quicklauncher"],
+        "pages" : ["menu", "panel", "sidebar", "quicklauncher", "websearch"],
 
         "panel" : {
             "type" : "page",
@@ -22,6 +22,11 @@
             "type" : "page",
             "title" : "Quicklauncher",
             "sections" : ["custom-quicklauncher-places", "custom-quicklauncher-apps"]
+        },
+        "websearch" : {
+            "type" : "page",
+            "title" : "Web Search",
+            "sections" : ["web-search-provider"]
         },
         "panel-appear" : {
             "type" : "section",
@@ -72,6 +77,11 @@
             "type" : "section",
             "title" : "Quicklauncher Applications",
             "keys" : ["quicklauncher-apps"]
+        },
+        "web-search-provider" : {
+            "type" : "section",
+            "title" : "Web Search Provider",
+            "keys" : ["use-web-search", "selected-provider", "custom-provider-url"]
         }
     },
  "menu-layout" : {
@@ -323,5 +333,32 @@
     "default" : true,
     "description" : "Separator above quit buttons",
     "tooltip" : "Choose whether or not to show this separator."
+ },
+ "use-web-search" : {
+    "type" : "switch",
+    "default" : true,
+    "description" : "Use web search",
+    "tooltip" : "Choose wheter or not you want to see web results."
+ },
+ "selected-provider" : {
+    "type" : "combobox",
+    "default" : "http://google.com/search?q=",
+    "description" : "Select provider",
+    "options" : {
+        "Google" : "http://google.com/search?q=",
+        "LetMeGoogleThatForYou" : "http://letmegooglethat.com/?q=",
+        "DuckDuckGo" : "https://duckduckgo.com/?q=",
+        "Ecosia" : "https://www.ecosia.org/search?q=",
+        "Custom" : "customprovider"
+    },
+    "tooltip" : "Select a web search provider.",
+    "dependency" : "use-web-search"
+ },
+ "custom-provider-url" : {
+    "type" : "entry",
+    "default" : "https://duckduckgo.com/?q=",
+    "description" : "URL of custom provider",
+    "tooltip" : "Enter the URL of the custom web search provider.",
+    "dependency" : "selected-provider=customprovider"
  }
 }

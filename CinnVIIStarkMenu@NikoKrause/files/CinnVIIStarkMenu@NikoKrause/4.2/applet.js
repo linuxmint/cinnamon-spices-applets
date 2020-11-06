@@ -629,11 +629,11 @@ class ApplicationButton extends GenericApplicationButton {
     }
 }
 
-class InternetSearchButton extends SimpleMenuItem {
+class WebSearchButton extends SimpleMenuItem {
     constructor(applet, pattern) {
         super(applet, { name: pattern,
                         description: _("Web search with %s"),
-                        type: 'internet-search-provider',
+                        type: 'web-search-provider',
                         styleClass: 'menu-application-button' });
 
         this.icon = new St.Icon({
@@ -656,15 +656,21 @@ class InternetSearchButton extends SimpleMenuItem {
 
     changeLabel(pattern) {
         this.name = pattern;
-        this.label.text = _("Search for '%s'").format(pattern);
+//        this.label.text = _("Search for '%s'").format(pattern);
+        this.label.clutter_text.set_markup(pattern + ' - ' + '<span size="small">' + _("See web results") + '</span>');
         if (this.applet.showAppsDescriptionOnButtons) {
             this.addDescription(this.label.text, this.description);
         }
     }
 
     activate() {
-        let prov_url = 'https://duckduckgo.com/?q=';
-        Main.Util.spawnCommandLine("xdg-open " + prov_url + "'" + this.name.replace(/'/g,"%27") + "'");
+        let selectedProvider = null;
+        if (this.applet.selectedProvider == "customprovider") {
+            selectedProvider = this.applet.customProviderURL;
+        } else {
+            selectedProvider = this.applet.selectedProvider;
+        }
+        Main.Util.spawnCommandLine("xdg-open " + selectedProvider + "'" + this.name.replace(/'/g,"%27") + "'");
         this.applet.menu.close();
     }
 }
@@ -1916,7 +1922,7 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
         this._recentButtons = [];
         this._categoryButtons = [];
         this._searchProviderButtons = [];
-        this._internetSearchButtons = [];
+        this._webSearchButtons = [];
         this._selectedItemIndex = null;
         this._previousSelectedActor = null;
         this._previousVisibleIndex = null;
@@ -1970,12 +1976,16 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
         this._updateQuickLinksShutdownView();
         this._updateQuickLinks();
 
+        this.settings.bind("use-web-search", "useWebSearch", null);
+        this.settings.bind("selected-provider", "selectedProvider", null);
+        this.settings.bind("custom-provider-url", "customProviderURL", null);
+
         // We shouldn't need to call refreshAll() here... since we get a "icon-theme-changed" signal when CSD starts.
         // The reason we do is in case the Cinnamon icon theme is the same as the one specificed in GTK itself (in .config)
         // In that particular case we get no signal at all.
         this.refreshId = 0;
         this.refreshMask = REFRESH_ALL_MASK;
-        this._internetSearchButton = null;
+        this._webSearchButton = null;
         this._addSearchProviderButton();
         this._doRefresh();
 
@@ -3774,11 +3784,11 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
     }
 
     _addSearchProviderButton() {
-        this._internetSearchButton = new InternetSearchButton(this, '');
+        this._webSearchButton = new WebSearchButton(this, '');
 
-        this._internetSearchButtons.push(this._internetSearchButton);
-        this.applicationsBox.add_actor(this._internetSearchButton.actor);
-        this._internetSearchButton.actor.visible = this.menu.isOpen;
+        this._webSearchButtons.push(this._webSearchButton);
+        this.applicationsBox.add_actor(this._webSearchButton.actor);
+        this._webSearchButton.actor.visible = this.menu.isOpen;
     }
 
     resetSearch(){
@@ -3814,7 +3824,7 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
             this._setCategoriesButtonActive(false);
             this.lastSelectedCategory = "search"
 
-            this._internetSearchButton.changeLabel(searchString);
+            this._webSearchButton.changeLabel(searchString);
 
             this._doSearch(searchString);
             this.appsButton.actor.hide();
@@ -3899,7 +3909,9 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
         result = this._matchNames(this._recentButtons, pattern);
         buttons = buttons.concat(result);
 
-        buttons = buttons.concat(this._internetSearchButtons);
+        if (this.useWebSearch) {
+            buttons = buttons.concat(this._webSearchButtons);
+        }
 
         var acResults = []; // search box autocompletion results
         if (this.searchFilesystem) {
