@@ -14,7 +14,7 @@ const {spawnCommandLine, spawn, unref} = imports.misc.util;
 const MessageTray = imports.ui.messageTray;
 
 const {SEARCH_DEBUG, _, APPTYPE, tryFn, showTooltip, hideTooltip} = require('./utils');
-const {EMOJI, Modable} = require('./emoji');
+const {MODABLE, MODED} = require('./emoji');
 const PlacementTOOLTIP = 1, PlacementUNDER = 2, PlacementNONE = 3;
 const SHOW_SEARCH_MARKUP_IN_TOOLTIP = true;
 const USER_DESKTOP_PATH = getUserDesktopDir();
@@ -27,12 +27,20 @@ class CategoryListButton extends PopupBaseMenuItem {
         this.signals = new SignalManager(null);
 
         this.index = -1;
-        let isStrDir = typeof dir === 'string';
-        let dirName = !isStrDir ? dir.get_name() : null;
-        this.id = typeof dir === 'string' || dir instanceof String ? dir : altNameText;
-        let categoryNameText = isStrDir ? altNameText : dirName ? dirName : '';
+        //let dirName = !isStrDir ? dir.get_name() : null;
+        //this.id = typeof dir === 'string' || dir instanceof String ? dir : altNameText;
+        //let categoryNameText = isStrDir ? altNameText : dirName ? dirName : '';
         this.disabled = false;
         this.entered = null;
+        let isStrDir = typeof dir === 'string';
+        if (isStrDir) {
+            this.id = dir;
+            this.categoryNameText = altNameText;
+        } else {
+            this.id = altNameText;
+            const dirName = dir.get_name();
+            this.categoryNameText = dirName ? dirName : '';
+        }
 
         if (!isStrDir) {
             let icon = dir.get_icon();
@@ -61,7 +69,7 @@ class CategoryListButton extends PopupBaseMenuItem {
         }
 
 
-        this.categoryNameText = categoryNameText;
+        //this.categoryNameText = categoryNameText;
         this.label = new St.Label({ text: this.categoryNameText,
                                     style_class: 'menu-category-button-label' });
         this.addActor(this.label);
@@ -326,14 +334,17 @@ class ContextMenu {
             addMenuItem( new ContextMenuItem(   this.appThis, _('Other application...'), null,
                                                 () => { spawnCommandLine("nemo-open-with " + app.uri);
                                                         this.appThis.closeMenu(); } ));
-        } else if (app.type == APPTYPE.provider) {
-            if (!Modable.includes(app.icon)) {
+        } else if (app.type == APPTYPE.provider) {//Emoji
+            if (!MODABLE.includes(app.icon)) {
                 return;
             }
             const addMenuItem = (char, text) => {
-                const item = new ContextMenuItem(this.appThis, app.icon + char + ' ' + text, null,
+                const i = MODABLE.indexOf(app.icon);
+                let newEmoji = MODED[i].replace('\u{1F3FB}', char);
+                newEmoji = newEmoji.replace('\u{1F3FB}', char);
+                const item = new ContextMenuItem(this.appThis, newEmoji + ' ' + text, null,
                                         () => { const clipboard = St.Clipboard.get_default();
-                                                clipboard.set_text(St.ClipboardType.CLIPBOARD, app.icon + char);
+                                                clipboard.set_text(St.ClipboardType.CLIPBOARD, newEmoji);
                                                 this.appThis.closeMenu(); } );
                 this.menu.addMenuItem(item);
                 this.contextMenuButtons.push(item);
@@ -742,42 +753,35 @@ class AppListGridButton extends PopupBaseMenuItem {
     }
 
     activate() {
-        if (this.file) {
-            if (this.handler) {
-                this.handler.launch([this.file], null);
-            } else {
-                tryFn(
-                    () => spawn(['gvfs-open', this.app.uri]),
-                    () => global.logError('No handler available to open ' + this.app.uri)
-                );
-            }
-        } else if (this.app.type === APPTYPE.application) {
-            //this.appThis.state.autofavs.incrementApp(this.app.get_id());
+        if (this.app.type === APPTYPE.application) {
             this.app.newAppShouldHighlight = false;
             this.app.open_new_window(-1);
+            this.appThis.closeMenu();
         } else if (this.app.type === APPTYPE.place) {
             if (this.app.uri) {
                 this.app.app.launch_uris([this.app.uri], null);
             } else {
                 this.app.launch();
             }
+            this.appThis.closeMenu();
         } else if (this.app.type === APPTYPE.recent) {
             if (this.app.clearList) {
                 Gtk.RecentManager.get_default().purge_items();
                 this.appThis.setActiveCategory('all');
-                return;//don't closeMenu
+                //don't closeMenu
             } else {
                 try {
                     Gio.app_info_launch_default_for_uri(this.app.uri, global.create_app_launch_context());
+                    this.appThis.closeMenu();
                 } catch (e) {
                     Main.notify(_("This file is no longer available"),e.message);
-                    return;//don't closeMenu
+                    //don't closeMenu
                 }
             }
         } else if (this.app.type === APPTYPE.provider) {
             this.app.activate(this.app);
+            this.appThis.closeMenu();
         }
-        this.appThis.closeMenu();
     }
 
     onStateChanged() {
@@ -881,6 +885,10 @@ class GroupButton extends PopupBaseMenuItem {
     activate() {
         if (this.callback) {
             this.callback();
+        } else if (this.app.type === APPTYPE.application) {
+            this.app.newAppShouldHighlight = false;
+            this.app.open_new_window(-1);
+            this.appThis.closeMenu();
         }
     }
 

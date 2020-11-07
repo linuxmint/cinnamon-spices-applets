@@ -28,7 +28,7 @@ const REMEMBER_RECENT_KEY = 'remember-recent-files';
 const {CategoryListButton, AppListGridButton, ContextMenu, GroupButton} = require('./buttons');
 const PlaceDisplay = require('./placeDisplay');
 const {BookmarksManager} = require('./browserBookmarks');
-const {EMOJI, Modable} = require('./emoji');
+const {EMOJI} = require('./emoji');
 //const EMOJI = emojiJS.EMOJI;
 //const HINT_TEXT = _('Type to search...');
 const SEARCH_THRESHOLD = 0.45;
@@ -526,6 +526,9 @@ class CinnamenuApplet extends TextIconApplet {
                     break;
                 case 'favorites':
                     this.populateAppsBox(this.apps.listFavorites());
+                    break;
+                case 'My Docs':
+                    this.populateAppsBox(this.apps.listMyDocs());
                     break;
                 default:
                     this.populateAppsBox(this.apps.listApplications(categoryId));
@@ -1086,8 +1089,23 @@ class CinnamenuApplet extends TextIconApplet {
         }
         //-----search providers-------
         //---calculator---
-        const exp = text.replace(/([a-zA-Z]+)/g,"Math.$&");
-        const ans = tryFn(()=>{ return eval(exp); }, null);
+        //const exp = text.replace(/([a-zA-Z]+)/g,"Math.$&");
+        const replacefn = (match) => {
+            if (['E','PI','abs','acos','acosh','asin','asinh','atan','atanh','cbrt','ceil','cos',
+            'cosh','exp','floor','fround','log','max','min','pow','random','round','sign','sin',
+            'sinh','sqrt','tan','tanh','trunc'].includes(match)) {
+                return "Math." + match;
+            } else {
+                validExp = false;
+                return match;
+            }
+        };
+        let validExp = true;
+        let ans = null;
+        const exp = text.replace(/([a-zA-Z]+)/g, replacefn);
+        if (validExp) {
+            ans = tryFn(()=>{ return eval(exp); }, null);
+        }
         if ((typeof ans == 'number' || typeof ans == 'boolean') && ans != text ) {
             const calcIcon = Gio.file_new_for_path(__meta.path + '/calc.png');
             results.push({  type: APPTYPE.provider,
@@ -1408,7 +1426,8 @@ class Categories {
             [this.appThis.settings.showPlaces, 'places', _('Places'), ['folder']],
             [this.appThis.recentEnabled, 'recent', _('Recent Files'), ['folder-recent', 'folder-documents-recent']],
             [this.appThis.settings.enableBookmarks, 'bookmarks', _('Bookmarks'), ['user-bookmarks']],
-            [true, 'favorites', _('Favorite Apps'), ['emblem-favorite', 'folder-favorites']] ];
+            [true, 'favorites', _('Favorite Apps'), ['emblem-favorite', 'folder-favorites']]/*,
+            [true, 'Docs','Documents',['folder']]*/ ];
         for (let i = 0; i < params.length; i++) {
             if (!params[i][0]) {
                 continue;
@@ -1860,6 +1879,33 @@ class Apps {
         return res;
     }
 
+    listMyDocs(pattern) {
+        const res = [];
+        let dir= Gio.file_new_for_path('/home/fred');
+        let enumerator = dir.enumerate_children("standard::*",0,null);
+        let next = enumerator.next_file(null);
+        while (next) {
+            let filename = next.get_name();
+            let file = Gio.file_new_for_path('/home/fred/' + next.get_name())
+            global.log(JSON.stringify(file,null,1));
+
+            const newRecent = { name: next.get_name(),
+                                icon: next.get_icon(),
+                                uri: file.get_uri(),
+                                mimeType: next.get_content_type(),
+                                description: file.get_uri(),
+                                type: APPTYPE.recent };
+            res.push(newRecent);
+
+
+            next = enumerator.next_file(null);
+        }
+        //global.log(JSON.stringify(dir,null,1));
+
+
+        return res;
+    }
+
     destroy() {
         if (this.placesManager) {
             this.placesManager.destroy();
@@ -1916,8 +1962,7 @@ class PowerGroupBox {
             for (let i=0; i<favs.length; i++) {
                 this.items.push(new GroupButton( this.appThis,
                                 favs[i].create_icon_texture(this.appThis.settings.sessionIconSize), favs[i],
-                                    favs[i].name, favs[i].description, () => {  favs[i].open_new_window(-1);
-                                                                        this.appThis.closeMenu(); } ));
+                                    favs[i].name, favs[i].description, null));
             }
         }
         if (reverseOrder) {
