@@ -81,15 +81,15 @@
         "web-search-provider" : {
             "type" : "section",
             "title" : "Web Search Provider",
-            "keys" : ["use-web-search", "selected-provider", "custom-provider-url"]
+            "keys" : ["web-search"]
         }
     },
  "menu-layout" : {
     "type": "combobox",
     "default": "stark-menu",
     "options": {
-	    "Stark-Menu": "stark-menu",
-	    "MATE-Menu": "mate-menu"
+        "Stark-Menu": "stark-menu",
+        "MATE-Menu": "mate-menu"
      },
     "description" : "Menu layout",
     "tooltip" : "Choose between Stark-Menu and MATE-Menu layout"
@@ -264,8 +264,8 @@
     "type": "combobox",
     "default": "vertical",
     "options": {
-	    "DropDown": "dropdown",
-	    "Vertical": "vertical",
+        "DropDown": "dropdown",
+        "Vertical": "vertical",
         "Horizontal": "horizontal"
      },
     "description": "Quit buttons layout",
@@ -334,31 +334,27 @@
     "description" : "Separator above quit buttons",
     "tooltip" : "Choose whether or not to show this separator."
  },
- "use-web-search" : {
-    "type" : "switch",
-    "default" : true,
-    "description" : "Use web search",
-    "tooltip" : "Choose wheter or not you want to see web results."
- },
- "selected-provider" : {
-    "type" : "combobox",
-    "default" : "http://google.com/search?q=",
-    "description" : "Select provider",
-    "options" : {
-        "Google" : "http://google.com/search?q=",
-        "LetMeGoogleThatForYou" : "http://letmegooglethat.com/?q=",
-        "DuckDuckGo" : "https://duckduckgo.com/?q=",
-        "Ecosia" : "https://www.ecosia.org/search?q=",
-        "Custom" : "customprovider"
-    },
-    "tooltip" : "Select a web search provider.",
-    "dependency" : "use-web-search"
- },
- "custom-provider-url" : {
-    "type" : "entry",
-    "default" : "https://duckduckgo.com/?q=",
-    "description" : "URL of custom provider",
-    "tooltip" : "Enter the URL of the custom web search provider.",
-    "dependency" : "selected-provider=customprovider"
+ "web-search" : {
+    "type" : "list",
+    "description" : "Web Search Provider",
+    "columns" : [
+        {"id": "checkbox", "title": "Use",  "type": "boolean", "default": true},
+        {"id": "icon",     "title": "Icon", "type": "icon", "default": "web-browser"},
+        {"id": "provider", "title": "Name", "type": "string"},
+        {"id": "url",      "title": "URL",  "type": "string"}
+    ],
+    "default" : [
+        {"checkbox": false, "icon": "web-browser", "provider": "Ask",        "url": "http://www.ask.com/web?q="},
+        {"checkbox": false, "icon": "web-browser", "provider": "Bing",       "url": "http://www.bing.com/search?q="},
+        {"checkbox": false, "icon": "web-browser", "provider": "DuckDuckGo", "url": "https://duckduckgo.com/?q="},
+        {"checkbox": false, "icon": "web-browser", "provider": "Ecosia",     "url": "https://www.ecosia.org/search?q="},
+        {"checkbox": false, "icon": "web-browser", "provider": "Google",     "url": "http://google.com/search?q="},
+        {"checkbox": false, "icon": "web-browser", "provider": "LMGTFY",     "url": "http://letmegooglethat.com/?q="},
+        {"checkbox": true,  "icon": "web-browser", "provider": "Startpage",  "url": "https://www.startpage.com/search?q="},
+        {"checkbox": false, "icon": "web-browser", "provider": "Wikipedia",  "url": "https://wikipedia.org/wiki/?search="},
+        {"checkbox": false, "icon": "web-browser", "provider": "Yahoo!",     "url": "https://search.yahoo.com/search?p="},
+        {"checkbox": false, "icon": "web-browser", "provider": "YouTube",    "url": "https://www.youtube.com/results?search_query="},
+        {"checkbox": false, "icon": "web-browser", "provider": "zbMATH",     "url": "https://zbmath.org/?q="}
+    ]
  }
 }

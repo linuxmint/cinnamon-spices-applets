@@ -630,17 +630,25 @@ class ApplicationButton extends GenericApplicationButton {
 }
 
 class WebSearchButton extends SimpleMenuItem {
-    constructor(applet, pattern) {
+    constructor(applet, pattern, icon, provider, url) {
         super(applet, { name: pattern,
-                        description: _("Web search with %s"),
+                        description: _("Search at '%s' for results").format(provider),
                         type: 'web-search-provider',
-                        styleClass: 'menu-application-button' });
+                        styleClass: 'menu-application-button',
+                        iconName : icon,
+                        providerName : provider,
+                        providerURL : url });
 
         this.icon = new St.Icon({
             icon_type: St.IconType.FULLCOLOR,
             icon_name: 'web-browser',
             icon_size: APPLICATION_ICON_SIZE
         });
+
+        if (Gtk.IconTheme.get_default().has_icon(this.iconName)) {
+            this.icon.icon_name = this.iconName;
+        }
+
         this.addActor(this.icon);
         if (!applet.showApplicationIcons)
             this.icon.visible = false;
@@ -657,20 +665,14 @@ class WebSearchButton extends SimpleMenuItem {
     changeLabel(pattern) {
         this.name = pattern;
 //        this.label.text = _("Search for '%s'").format(pattern);
-        this.label.clutter_text.set_markup(pattern + ' - ' + '<span size="small">' + _("See web results") + '</span>');
+        this.label.clutter_text.set_markup(pattern + ' - ' + '<span size="small">' + this.providerName + '</span>');
         if (this.applet.showAppsDescriptionOnButtons) {
             this.addDescription(this.label.text, this.description);
         }
     }
 
     activate() {
-        let selectedProvider = null;
-        if (this.applet.selectedProvider == "customprovider") {
-            selectedProvider = this.applet.customProviderURL;
-        } else {
-            selectedProvider = this.applet.selectedProvider;
-        }
-        Main.Util.spawnCommandLine("xdg-open " + selectedProvider + "'" + this.name.replace(/'/g,"%27") + "'");
+        Main.Util.spawnCommandLine("xdg-open " + this.providerURL + "'" + this.name.replace(/'/g,"%27") + "'");
         this.applet.menu.close();
     }
 }
@@ -1976,17 +1978,14 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
         this._updateQuickLinksShutdownView();
         this._updateQuickLinks();
 
-        this.settings.bind("use-web-search", "useWebSearch", null);
-        this.settings.bind("selected-provider", "selectedProvider", null);
-        this.settings.bind("custom-provider-url", "customProviderURL", null);
+        this.settings.bind("web-search", "webSearch", this._updateSearchProviderButtons);
+        this._updateSearchProviderButtons();
 
         // We shouldn't need to call refreshAll() here... since we get a "icon-theme-changed" signal when CSD starts.
         // The reason we do is in case the Cinnamon icon theme is the same as the one specificed in GTK itself (in .config)
         // In that particular case we get no signal at all.
         this.refreshId = 0;
         this.refreshMask = REFRESH_ALL_MASK;
-        this._webSearchButton = null;
-        this._addSearchProviderButton();
         this._doRefresh();
 
         this.set_show_label_in_vertical_panels(false);
@@ -3783,12 +3782,21 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
         }
     }
 
-    _addSearchProviderButton() {
-        this._webSearchButton = new WebSearchButton(this, '');
+    _updateSearchProviderButtons() {
+        for (let i = 0; i < this._webSearchButtons.length; i++) {
+            this._webSearchButtons[i].destroy();
+        }
 
-        this._webSearchButtons.push(this._webSearchButton);
-        this.applicationsBox.add_actor(this._webSearchButton.actor);
-        this._webSearchButton.actor.visible = this.menu.isOpen;
+        this._webSearchButtons = [];
+
+        for (let i = this.webSearch.length-1; i >= 0; i--) {
+            if (this.webSearch[i].checkbox) {
+                let webSearchButton = new WebSearchButton(this, '', this.webSearch[i].icon, this.webSearch[i].provider, this.webSearch[i].url);
+                this._webSearchButtons.push(webSearchButton);
+                this.applicationsBox.add_actor(webSearchButton.actor);
+                webSearchButton.actor.visible = this.menu.isOpen;
+            }
+        }
     }
 
     resetSearch(){
@@ -3824,7 +3832,9 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
             this._setCategoriesButtonActive(false);
             this.lastSelectedCategory = "search"
 
-            this._webSearchButton.changeLabel(searchString);
+            for (let i = 0; i < this._webSearchButtons.length; i++) {
+                this._webSearchButtons[i].changeLabel(searchString);
+            }
 
             this._doSearch(searchString);
             this.appsButton.actor.hide();
@@ -3909,9 +3919,7 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
         result = this._matchNames(this._recentButtons, pattern);
         buttons = buttons.concat(result);
 
-        if (this.useWebSearch) {
-            buttons = buttons.concat(this._webSearchButtons);
-        }
+        buttons = buttons.concat(this._webSearchButtons);
 
         var acResults = []; // search box autocompletion results
         if (this.searchFilesystem) {
