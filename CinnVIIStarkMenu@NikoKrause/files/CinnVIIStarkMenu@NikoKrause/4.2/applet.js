@@ -630,14 +630,14 @@ class ApplicationButton extends GenericApplicationButton {
 }
 
 class WebSearchButton extends SimpleMenuItem {
-    constructor(applet, pattern, icon, provider, url) {
+    constructor(applet, pattern, icon, searchEngine, url) {
         super(applet, { name: pattern,
-                        description: _("Search at '%s' for results").format(provider),
-                        type: 'web-search-provider',
+                        description: _("Search for results on the web"),
+                        type: 'web-search-engine',
                         styleClass: 'menu-application-button',
                         iconName : icon,
-                        providerName : provider,
-                        providerURL : url });
+                        searchEngineName : searchEngine,
+                        searchEngineURL : url });
 
         this.icon = new St.Icon({
             icon_type: St.IconType.FULLCOLOR,
@@ -664,15 +664,17 @@ class WebSearchButton extends SimpleMenuItem {
 
     changeLabel(pattern) {
         this.name = pattern;
-//        this.label.text = _("Search for '%s'").format(pattern);
-        this.label.clutter_text.set_markup(pattern + ' - ' + '<span size="small">' + this.providerName + '</span>');
+        let searchLabel = pattern;
+        if (this.searchEngineName != '')
+            searchLabel += ' - ' + '<span size="small">' + this.searchEngineName + '</span>';
+        this.label.clutter_text.set_markup(searchLabel);
         if (this.applet.showAppsDescriptionOnButtons) {
             this.addDescription(this.label.text, this.description);
         }
     }
 
     activate() {
-        Main.Util.spawnCommandLine("xdg-open " + this.providerURL + "'" + this.name.replace(/'/g,"%27") + "'");
+        Main.Util.spawnCommandLine("xdg-open " + this.searchEngineURL + "'" + this.name.replace(/'/g,"%27") + "'");
         this.applet.menu.close();
     }
 }
@@ -1978,8 +1980,8 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
         this._updateQuickLinksShutdownView();
         this._updateQuickLinks();
 
-        this.settings.bind("web-search", "webSearch", this._updateSearchProviderButtons);
-        this._updateSearchProviderButtons();
+        this.settings.bind("web-search", "webSearch", this._updateSearchEngineButtons);
+        this._updateSearchEngineButtons();
 
         // We shouldn't need to call refreshAll() here... since we get a "icon-theme-changed" signal when CSD starts.
         // The reason we do is in case the Cinnamon icon theme is the same as the one specificed in GTK itself (in .config)
@@ -3782,7 +3784,7 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
         }
     }
 
-    _updateSearchProviderButtons() {
+    _updateSearchEngineButtons() {
         for (let i = 0; i < this._webSearchButtons.length; i++) {
             this._webSearchButtons[i].destroy();
         }
@@ -3791,7 +3793,7 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
 
         for (let i = this.webSearch.length-1; i >= 0; i--) {
             if (this.webSearch[i].checkbox) {
-                let webSearchButton = new WebSearchButton(this, '', this.webSearch[i].icon, this.webSearch[i].provider, this.webSearch[i].url);
+                let webSearchButton = new WebSearchButton(this, '', this.webSearch[i].icon, this.webSearch[i].engine, this.webSearch[i].url);
                 this._webSearchButtons.push(webSearchButton);
                 this.applicationsBox.add_actor(webSearchButton.actor);
                 webSearchButton.actor.visible = this.menu.isOpen;

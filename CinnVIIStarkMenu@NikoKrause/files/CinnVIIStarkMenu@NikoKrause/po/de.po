@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cinnviistarkmenu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-23 22:07+0200\n"
-"PO-Revision-Date: 2020-10-04 14:42+0200\n"
+"POT-Creation-Date: 2020-11-08 23:23+0100\n"
+"PO-Revision-Date: 2020-11-08 23:24+0100\n"
 "Last-Translator: Niko Krause <nikokrause@gmx.de>\n"
 "Language-Team: German <de@li.org>\n"
 "Language: de\n"
@@ -23,91 +23,92 @@ msgstr ""
 msgid "Please enter your password to uninstall this application"
 msgstr "Bitte Ihr Passwort eingeben, um diese Anwendung zu deinstallieren"
 
-#: 3.2/applet.js:258 2.6/applet.js:259 3.4/applet.js:258 4.2/applet.js:358
+#: 3.2/applet.js:258 2.6/applet.js:259 3.4/applet.js:258 4.2/applet.js:460
 msgid "Add to panel"
 msgstr "Zur Leiste hinzufügen"
 
-#: 3.2/applet.js:261 2.6/applet.js:262 3.4/applet.js:261 4.2/applet.js:362
+#: 3.2/applet.js:261 2.6/applet.js:262 3.4/applet.js:261 4.2/applet.js:464
 msgid "Add to desktop"
 msgstr "Zum Schreibtisch hinzufügen"
 
-#: 3.2/applet.js:265 2.6/applet.js:266 3.4/applet.js:265 4.2/applet.js:367
+#: 3.2/applet.js:265 2.6/applet.js:266 3.4/applet.js:265 4.2/applet.js:469
 msgid "Remove from favorites"
 msgstr "Aus den Favoriten entfernen"
 
-#: 3.2/applet.js:268 2.6/applet.js:269 3.4/applet.js:268 4.2/applet.js:370
+#: 3.2/applet.js:268 2.6/applet.js:269 3.4/applet.js:268 4.2/applet.js:472
 msgid "Add to favorites"
 msgstr "Zu den Favoriten hinzufügen"
 
-#: 3.2/applet.js:272 2.6/applet.js:273 3.4/applet.js:272 4.2/applet.js:375
+#: 3.2/applet.js:272 2.6/applet.js:273 3.4/applet.js:272 4.2/applet.js:477
 msgid "Uninstall"
 msgstr "Deinstallieren"
 
-#: 3.2/applet.js:276 2.6/applet.js:277 3.4/applet.js:276 4.2/applet.js:380
+#: 3.2/applet.js:276 2.6/applet.js:277 3.4/applet.js:276 4.2/applet.js:453
+#: 4.2/applet.js:456
 msgid "Run with NVIDIA GPU"
 msgstr "Mit NVIDIA-GPU ausführen"
 
 #: 3.2/applet.js:439 3.2/applet.js:473 2.6/applet.js:426 2.6/applet.js:460
-#: 3.4/applet.js:436 3.4/applet.js:470 4.2/applet.js:223 4.2/applet.js:468
+#: 3.4/applet.js:436 3.4/applet.js:470 4.2/applet.js:289 4.2/applet.js:569
 msgid "No description available"
 msgstr "Keine Beschreibung vorhanden"
 
-#: 3.2/applet.js:740 2.6/applet.js:3327 3.4/applet.js:737 4.2/applet.js:648
+#: 3.2/applet.js:740 2.6/applet.js:3327 3.4/applet.js:737 4.2/applet.js:827
 msgid "This file is no longer available"
 msgstr "Diese Datei ist nicht mehr verfügbar"
 
-#: 3.2/applet.js:790 2.6/applet.js:761 3.4/applet.js:787 4.2/applet.js:662
+#: 3.2/applet.js:790 2.6/applet.js:761 3.4/applet.js:787 4.2/applet.js:841
 msgid "Open with"
 msgstr "Öffnen mit"
 
-#: 3.2/applet.js:836 2.6/applet.js:807 3.4/applet.js:833 4.2/applet.js:708
+#: 3.2/applet.js:836 2.6/applet.js:807 3.4/applet.js:833 4.2/applet.js:887
 msgid "Other application..."
 msgstr "Andere Anwendung …"
 
-#: 3.2/applet.js:911 2.6/applet.js:884 3.4/applet.js:908 4.2/applet.js:3088
+#: 3.2/applet.js:911 2.6/applet.js:884 3.4/applet.js:908 4.2/applet.js:3279
 msgid "Clear list"
 msgstr "Liste leeren"
 
-#: 3.2/applet.js:957 2.6/applet.js:932 3.4/applet.js:954 4.2/applet.js:723
+#: 3.2/applet.js:957 2.6/applet.js:932 3.4/applet.js:954 4.2/applet.js:902
 msgid "All Applications"
 msgstr "Alle Anwendungen"
 
-#: 3.2/applet.js:986 2.6/applet.js:960 3.4/applet.js:983 4.2/applet.js:3034
+#: 3.2/applet.js:986 2.6/applet.js:960 3.4/applet.js:983 4.2/applet.js:3226
 msgid "Places"
 msgstr "Orte"
 
-#: 3.2/applet.js:1010 2.6/applet.js:984 3.4/applet.js:1007 4.2/applet.js:3071
+#: 3.2/applet.js:1010 2.6/applet.js:984 3.4/applet.js:1007 4.2/applet.js:3264
 msgid "Recent Files"
 msgstr "Zuletzt verwendete Dateien"
 
 #: 3.2/applet.js:1637 3.2/applet.js:1831 2.6/applet.js:1611 2.6/applet.js:1798
-#: 3.4/applet.js:1580 3.4/applet.js:1765 4.2/applet.js:1270 4.2/applet.js:1450
+#: 3.4/applet.js:1580 3.4/applet.js:1765 4.2/applet.js:1453 4.2/applet.js:1633
 msgid "Logout"
 msgstr "Abmelden"
 
-#: 3.2/applet.js:1639 2.6/applet.js:1613 3.4/applet.js:1582 4.2/applet.js:1272
+#: 3.2/applet.js:1639 2.6/applet.js:1613 3.4/applet.js:1582 4.2/applet.js:1455
 msgid "Lock Screen"
 msgstr "Bildschirm sperren"
 
-#: 3.2/applet.js:1824 2.6/applet.js:1791 3.4/applet.js:1758 4.2/applet.js:1443
+#: 3.2/applet.js:1824 2.6/applet.js:1791 3.4/applet.js:1758 4.2/applet.js:1626
 msgid "Shutdown the computer"
 msgstr "Den Rechner herunterfahren"
 
-#: 3.2/applet.js:1825 2.6/applet.js:1792 3.4/applet.js:1759 4.2/applet.js:1444
+#: 3.2/applet.js:1825 2.6/applet.js:1792 3.4/applet.js:1759 4.2/applet.js:1627
 msgid "Leave the session"
 msgstr "Sitzung verlassen"
 
-#: 3.2/applet.js:1826 2.6/applet.js:1793 3.4/applet.js:1760 4.2/applet.js:1445
+#: 3.2/applet.js:1826 2.6/applet.js:1793 3.4/applet.js:1760 4.2/applet.js:1628
 msgid "Lock the screen"
 msgstr "Diesen Bildschirm sperren"
 
 #: 3.2/applet.js:1828 3.2/applet.js:1829 2.6/applet.js:1795 2.6/applet.js:1796
-#: 3.4/applet.js:1762 3.4/applet.js:1763 4.2/applet.js:1447 4.2/applet.js:1448
+#: 3.4/applet.js:1762 3.4/applet.js:1763 4.2/applet.js:1630 4.2/applet.js:1631
 msgid "Quit"
 msgstr "Beenden"
 
 #: 3.2/applet.js:1840 3.2/applet.js:1844 2.6/applet.js:1807 2.6/applet.js:1811
-#: 3.4/applet.js:1774 3.4/applet.js:1778 4.2/applet.js:1459 4.2/applet.js:1463
+#: 3.4/applet.js:1774 3.4/applet.js:1778 4.2/applet.js:1642 4.2/applet.js:1646
 msgid "Lock screen"
 msgstr "Bildschirm sperren"
 
@@ -162,28 +163,36 @@ msgstr "nemo Downloads"
 #. 3.2->settings-schema.json->menu->title
 #. 3.4->settings-schema.json->menu->title
 #. 4.2->settings-schema.json->menu->title
-#: 3.2/applet.js:2072 2.6/applet.js:2022 3.4/applet.js:1998 4.2/applet.js:1673
+#: 3.2/applet.js:2072 2.6/applet.js:2022 3.4/applet.js:1998 4.2/applet.js:1871
 msgid "Menu"
 msgstr "Menü"
 
-#: 3.2/applet.js:3513 2.6/applet.js:3359 3.4/applet.js:3469 4.2/applet.js:3101
+#: 3.2/applet.js:3513 2.6/applet.js:3359 3.4/applet.js:3469
 msgid "No recent documents"
 msgstr "Keine kürzlich verwendeten Dokumente"
 
-#: 3.2/applet.js:3899 2.6/applet.js:3670 3.4/applet.js:3849 4.2/applet.js:3324
+#: 3.2/applet.js:3899 2.6/applet.js:3670 3.4/applet.js:3849
 msgid "Type to search..."
 msgstr "Suchbegriff eingeben …"
 
-#: 3.2/applet.js:4427 2.6/applet.js:4172 3.4/applet.js:4376 4.2/applet.js:3795
+#: 3.2/applet.js:4427 2.6/applet.js:4172 3.4/applet.js:4376
 msgid "No results found"
 msgstr "Keine Ergebnisse gefunden"
 
-#: 3.2/applet.js:4429 2.6/applet.js:4174 3.4/applet.js:4378 4.2/applet.js:3797
+#: 3.2/applet.js:4429 2.6/applet.js:4174 3.4/applet.js:4378
 #, javascript-format
 msgid "%d result found"
 msgid_plural "%d results found"
 msgstr[0] "%d Ergebnis gefunden"
 msgstr[1] "%d Ergebnisse gefunden"
+
+#: 4.2/applet.js:635
+msgid "Search for results on the web"
+msgstr "Im Web nach Ergebnissen suchen"
+
+#: 4.2/applet.js:3280
+msgid "Clear all recent documents"
+msgstr "Alle zuletzt verwendeten Dateien löschen"
 
 #. metadata.json->name
 msgid "CinnVIIStarkMenu"
@@ -313,6 +322,7 @@ msgstr "Durch Abwählen wird es dem Thema erlaubt, das Symbol einzustellen"
 #. 2.6->settings-schema.json->menu-icon->description
 #. 3.4->settings-schema.json->menu-icon->description
 #. 4.2->settings-schema.json->menu-icon->description
+#. 4.2->settings-schema.json->web-search->columns->title
 msgid "Icon"
 msgstr "Symbol"
 
@@ -517,14 +527,12 @@ msgstr "Legt fest, ob Symbole an Anwendungen angezeigt werden."
 #. 3.2->settings-schema.json->show-context-menu-icons->description
 #. 2.6->settings-schema.json->show-context-menu-icons->description
 #. 3.4->settings-schema.json->show-context-menu-icons->description
-#. 4.2->settings-schema.json->show-context-menu-icons->description
 msgid "Show context menu icons"
 msgstr "Kontextmenüsymbole anzeigen"
 
 #. 3.2->settings-schema.json->show-context-menu-icons->tooltip
 #. 2.6->settings-schema.json->show-context-menu-icons->tooltip
 #. 3.4->settings-schema.json->show-context-menu-icons->tooltip
-#. 4.2->settings-schema.json->show-context-menu-icons->tooltip
 msgid "Choose whether or not to show icons on context menus."
 msgstr "Legt fest, ob Symbole in Kontextmenüs angezeigt werden."
 
@@ -1159,6 +1167,15 @@ msgstr "Befehl"
 msgid "Separator above quit buttons"
 msgstr "Trennsymbol über Beenden-Knopf"
 
+#. 4.2->settings-schema.json->websearch->title
+msgid "Web Search"
+msgstr "Websuche"
+
+#. 4.2->settings-schema.json->web-search-engine->title
+#. 4.2->settings-schema.json->web-search->description
+msgid "Web Search Engine"
+msgstr "Web-Suchmaschine"
+
 #. 4.2->settings-schema.json->menu-custom->description
 msgid "Use a custom icon and label"
 msgstr "Ein benutzerdefiniertes Symbol und eine eigene Bezeichnung verwenden."
@@ -1184,3 +1201,15 @@ msgid ""
 msgstr ""
 "Legt fest, ob der »Beenden«-Knopf zuerst oder zuletzt angezeigt wird. (Hat "
 "keine Auswirkung auf das »Dropdown«-Layout.)"
+
+#. 4.2->settings-schema.json->web-search->columns->title
+msgid "Use"
+msgstr "Verwenden"
+
+#. 4.2->settings-schema.json->web-search->columns->title
+msgid "Name"
+msgstr "Name"
+
+#. 4.2->settings-schema.json->web-search->columns->title
+msgid "URL"
+msgstr "URL"
