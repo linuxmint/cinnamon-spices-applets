@@ -12,9 +12,10 @@ function _(str) {
 const APPTYPE = {
     application: 0,
     place: 1,
-    recent: 2,
+    file: 2,
     provider: 3,
-    session:4
+    session:4,
+    clearlist: 5
 };
 const AppTypes = Object.keys(APPTYPE);
 
