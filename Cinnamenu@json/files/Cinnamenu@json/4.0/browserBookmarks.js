@@ -206,7 +206,7 @@ class BookmarksManager {
                 bookmarks[i].icon = bookmarks[i].app.get_icon();
                 bookmarks[i].mime = null;
                 bookmarks[i].description = bookmarks[i].uri;
-                bookmarks[i].type = APPTYPE._places;
+                bookmarks[i].type = APPTYPE.place;
             }
 
             // Create a unique list of bookmarks across all browsers.

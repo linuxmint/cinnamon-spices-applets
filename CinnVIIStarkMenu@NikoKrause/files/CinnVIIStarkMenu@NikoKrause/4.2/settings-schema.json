@@ -1,7 +1,7 @@
 {
     "layout" : {
         "type" : "layout",
-        "pages" : ["menu", "panel", "sidebar", "quicklauncher"],
+        "pages" : ["menu", "panel", "sidebar", "quicklauncher", "websearch"],
 
         "panel" : {
             "type" : "page",
@@ -22,6 +22,11 @@
             "type" : "page",
             "title" : "Quicklauncher",
             "sections" : ["custom-quicklauncher-places", "custom-quicklauncher-apps"]
+        },
+        "websearch" : {
+            "type" : "page",
+            "title" : "Web Search",
+            "sections" : ["web-search-engine"]
         },
         "panel-appear" : {
             "type" : "section",
@@ -72,14 +77,19 @@
             "type" : "section",
             "title" : "Quicklauncher Applications",
             "keys" : ["quicklauncher-apps"]
+        },
+        "web-search-engine" : {
+            "type" : "section",
+            "title" : "Web Search Engine",
+            "keys" : ["web-search"]
         }
     },
  "menu-layout" : {
     "type": "combobox",
     "default": "stark-menu",
     "options": {
-	    "Stark-Menu": "stark-menu",
-	    "MATE-Menu": "mate-menu"
+        "Stark-Menu": "stark-menu",
+        "MATE-Menu": "mate-menu"
      },
     "description" : "Menu layout",
     "tooltip" : "Choose between Stark-Menu and MATE-Menu layout"
@@ -254,8 +264,8 @@
     "type": "combobox",
     "default": "vertical",
     "options": {
-	    "DropDown": "dropdown",
-	    "Vertical": "vertical",
+        "DropDown": "dropdown",
+        "Vertical": "vertical",
         "Horizontal": "horizontal"
      },
     "description": "Quit buttons layout",
@@ -323,5 +333,28 @@
     "default" : true,
     "description" : "Separator above quit buttons",
     "tooltip" : "Choose whether or not to show this separator."
+ },
+ "web-search" : {
+    "type" : "list",
+    "description" : "Web Search Engine",
+    "columns" : [
+        {"id": "checkbox", "title": "Use",  "type": "boolean", "default": true},
+        {"id": "icon",     "title": "Icon", "type": "icon", "default": "web-browser"},
+        {"id": "engine",   "title": "Name", "type": "string"},
+        {"id": "url",      "title": "URL",  "type": "string"}
+    ],
+    "default" : [
+        {"checkbox": false, "icon": "web-browser", "engine": "Ask",        "url": "http://www.ask.com/web?q="},
+        {"checkbox": false, "icon": "web-browser", "engine": "Bing",       "url": "http://www.bing.com/search?q="},
+        {"checkbox": false, "icon": "web-browser", "engine": "DuckDuckGo", "url": "https://duckduckgo.com/?q="},
+        {"checkbox": false, "icon": "web-browser", "engine": "Ecosia",     "url": "https://www.ecosia.org/search?q="},
+        {"checkbox": false, "icon": "web-browser", "engine": "Google",     "url": "http://google.com/search?q="},
+        {"checkbox": false, "icon": "web-browser", "engine": "LMGTFY",     "url": "http://letmegooglethat.com/?q="},
+        {"checkbox": true,  "icon": "web-browser", "engine": "Startpage",  "url": "https://www.startpage.com/search?q="},
+        {"checkbox": false, "icon": "web-browser", "engine": "Wikipedia",  "url": "https://wikipedia.org/wiki/?search="},
+        {"checkbox": false, "icon": "web-browser", "engine": "Yahoo!",     "url": "https://search.yahoo.com/search?p="},
+        {"checkbox": false, "icon": "web-browser", "engine": "YouTube",    "url": "https://www.youtube.com/results?search_query="},
+        {"checkbox": false, "icon": "web-browser", "engine": "zbMATH",     "url": "https://zbmath.org/?q="}
+    ]
  }
 }

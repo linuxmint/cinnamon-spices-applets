@@ -1,3 +1,6 @@
+### v6.3.1~20201026
+  * Adapting SpicesUpdate@claudiux to [cinnamon/9664](https://github.com/linuxmint/cinnamon/pull/9664#event-3912970920).
+
 ### v6.3.0~20201022
   * Tooltip content: Now filtered and formatted. Some information is displayed in bold, others in italics.
   * Settings (General tab): Possibility to define a maximum width for the content of the tooltip (in % of the screen width).
