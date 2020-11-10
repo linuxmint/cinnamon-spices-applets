@@ -404,10 +404,12 @@ class ContextMenu {
         }
         if (this.appThis.appFavorites.isFavorite(app.get_id())) {
             addMenuItem( new ContextMenuItem(this.appThis, _('Remove from favorites'), 'starred',
-                                            () => { this.appThis.appFavorites.removeFavorite(app.get_id()); } ));
+                                            () => { this.appThis.appFavorites.removeFavorite(app.get_id());
+                                            this.close(); } ));
         } else {
             addMenuItem( new ContextMenuItem(this.appThis, _('Add to favorites'), 'non-starred',
-                                        () => { this.appThis.appFavorites.addFavorite(app.get_id()); } ));
+                                        () => { this.appThis.appFavorites.addFavorite(app.get_id());
+                                        this.close(); } ));
         }
         if (CAN_UNINSTALL) {
             addMenuItem( new ContextMenuItem(this.appThis, _('Uninstall'), 'edit-delete',
@@ -552,14 +554,16 @@ class AppListGridButton extends PopupBaseMenuItem {
                     handleDragOver: (source /*, actor, x, y, time */) => {
                             if (source.isDraggableApp === true && source.get_app_id() !== this.app.get_id() &&
                                                                     this.appThis.currentCategory === 'favorites') {
+                                this.appThis.resetOpacity();
                                 this.actor.set_opacity(40);
                                 return DragMotionResult.MOVE_DROP;
                             }
                             return DragMotionResult.NO_DROP; },
-                    handleDragOut: () => { this.actor.set_opacity(255); },
+                    handleDragOut: () => {  this.actor.set_opacity(255); },
                     acceptDrop: (source /*, actor, x, y, time */) => {
                             if (source.isDraggableApp === true && source.get_app_id() !== this.app.get_id() &&
                                                                 this.appThis.currentCategory === 'favorites') {
+                                this.actor.set_opacity(255);
                                 this.appThis.addFavoriteToPos(source.get_app_id(), this.app.get_id());
                                 return true;
                             } else {
@@ -603,6 +607,7 @@ class AppListGridButton extends PopupBaseMenuItem {
     }
 
     onDragEnd() {
+        this.appThis.resetOpacity();
     }
 
     formatLabel() {
@@ -834,6 +839,7 @@ class GroupButton extends PopupBaseMenuItem {
                     handleDragOut: () => { this.actor.set_opacity(255); },
                     acceptDrop: (source) => {
                             if (source.isDraggableApp === true && source.get_app_id() !== this.app.get_id()) {
+                                this.actor.set_opacity(255);
                                 this.appThis.addFavoriteToPos(source.get_app_id(), this.app.get_id());
                                 return true;
                             } else {

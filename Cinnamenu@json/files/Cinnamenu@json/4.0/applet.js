@@ -309,9 +309,11 @@ class CinnamenuApplet extends TextIconApplet {
         this.favorites = this.appFavorites.getFavorites();
         // Check if the menu has been rendered at least once
         if (this.appsView) {
-            this.switchApplicationsView();
-            this.destroyAppButtons();
-            this.resetSearch();
+            //this.switchApplicationsView();
+            //this.clearEnteredActors();
+            //this.appsView.clear();
+            //this.destroyAppButtons();
+            //this.resetSearch();
             this.powerGroupBox.populate(this.apps.listFavorites());
             this.setActiveCategory(this.currentCategory);
             this.applyConstraints();
@@ -399,8 +401,11 @@ class CinnamenuApplet extends TextIconApplet {
                 this.display();
             }
             this.switchApplicationsView();
+            //this.clearEnteredActors();
+            //this.appsView.clear();
+            global.stage.set_key_focus(this.search.searchEntry);
             this.mainBox.show();
-            this.resetSearch();
+            //this.resetSearch();
             let currentCategory = this.settings.openOnFavorites ? 'favorites' : this.currentCategory;
             if (currentCategory === 'bookmarks') {
                 this.appsView.setAnswerText(_('Please wait...'));
@@ -495,6 +500,13 @@ class CinnamenuApplet extends TextIconApplet {
         this.setActiveCategory(this.currentCategory);
     }
 
+    resetOpacity() {
+        const children = this.appsView.getActiveContainer().get_children();
+        for (let i = 0; i < children.length; i++) {
+                children[i].set_opacity(255);
+        }
+    }
+
     resetCategoryOpacity() {
         Util.each(this.categoryButtons, (button) => { button.actor.set_opacity(255); });
     }
@@ -570,8 +582,6 @@ class CinnamenuApplet extends TextIconApplet {
             const newScrollValue = this.applicationsScrollBox.get_allocation_box().y1;
             vscroll.get_adjustment().set_value(newScrollValue);
         }*/
-        this.clearEnteredActors();
-        this.appsView.clear();
     }
 
     /*isNotInScrollView(button) {
