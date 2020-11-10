@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-22 19:42+0200\n"
-"PO-Revision-Date: 2020-10-22 19:43+0200\n"
+"POT-Creation-Date: 2020-11-09 13:14+0100\n"
+"PO-Revision-Date: 2020-11-09 13:18+0100\n"
 "Last-Translator: \n"
 "Language-Team: krzysztof.blachowicz@gmail.com\n"
 "Language: pl\n"
@@ -49,61 +49,61 @@ msgstr "Uruchom za pomocą GPU NVIDIA"
 msgid "No description available"
 msgstr "Brak opisu"
 
-#: 3.4/applet.js:737 4.2/applet.js:777 2.6/applet.js:3327 3.2/applet.js:740
+#: 3.4/applet.js:737 4.2/applet.js:827 2.6/applet.js:3327 3.2/applet.js:740
 msgid "This file is no longer available"
 msgstr "Ten plik nie jest już dostępny"
 
-#: 3.4/applet.js:787 4.2/applet.js:791 2.6/applet.js:761 3.2/applet.js:790
+#: 3.4/applet.js:787 4.2/applet.js:841 2.6/applet.js:761 3.2/applet.js:790
 msgid "Open with"
 msgstr "Otwórz z"
 
-#: 3.4/applet.js:833 4.2/applet.js:837 2.6/applet.js:807 3.2/applet.js:836
+#: 3.4/applet.js:833 4.2/applet.js:887 2.6/applet.js:807 3.2/applet.js:836
 msgid "Other application..."
 msgstr "Inna aplikacja..."
 
-#: 3.4/applet.js:908 4.2/applet.js:3225 2.6/applet.js:884 3.2/applet.js:911
+#: 3.4/applet.js:908 4.2/applet.js:3279 2.6/applet.js:884 3.2/applet.js:911
 msgid "Clear list"
 msgstr "Wyczyść listę"
 
-#: 3.4/applet.js:954 4.2/applet.js:852 2.6/applet.js:932 3.2/applet.js:957
+#: 3.4/applet.js:954 4.2/applet.js:902 2.6/applet.js:932 3.2/applet.js:957
 msgid "All Applications"
 msgstr "Wszystkie aplikacje"
 
-#: 3.4/applet.js:983 4.2/applet.js:3172 2.6/applet.js:960 3.2/applet.js:986
+#: 3.4/applet.js:983 4.2/applet.js:3226 2.6/applet.js:960 3.2/applet.js:986
 msgid "Places"
 msgstr "Miejsca"
 
-#: 3.4/applet.js:1007 4.2/applet.js:3210 2.6/applet.js:984 3.2/applet.js:1010
+#: 3.4/applet.js:1007 4.2/applet.js:3264 2.6/applet.js:984 3.2/applet.js:1010
 msgid "Recent Files"
 msgstr "Ostatnio używane pliki"
 
-#: 3.4/applet.js:1580 3.4/applet.js:1765 4.2/applet.js:1403 4.2/applet.js:1583
+#: 3.4/applet.js:1580 3.4/applet.js:1765 4.2/applet.js:1453 4.2/applet.js:1633
 #: 2.6/applet.js:1611 2.6/applet.js:1798 3.2/applet.js:1637 3.2/applet.js:1831
 msgid "Logout"
 msgstr "Wyloguj"
 
-#: 3.4/applet.js:1582 4.2/applet.js:1405 2.6/applet.js:1613 3.2/applet.js:1639
+#: 3.4/applet.js:1582 4.2/applet.js:1455 2.6/applet.js:1613 3.2/applet.js:1639
 msgid "Lock Screen"
 msgstr "Zablokuj ekran"
 
-#: 3.4/applet.js:1758 4.2/applet.js:1576 2.6/applet.js:1791 3.2/applet.js:1824
+#: 3.4/applet.js:1758 4.2/applet.js:1626 2.6/applet.js:1791 3.2/applet.js:1824
 msgid "Shutdown the computer"
 msgstr "Wyłącz komputer"
 
-#: 3.4/applet.js:1759 4.2/applet.js:1577 2.6/applet.js:1792 3.2/applet.js:1825
+#: 3.4/applet.js:1759 4.2/applet.js:1627 2.6/applet.js:1792 3.2/applet.js:1825
 msgid "Leave the session"
 msgstr "Opuść sesję"
 
-#: 3.4/applet.js:1760 4.2/applet.js:1578 2.6/applet.js:1793 3.2/applet.js:1826
+#: 3.4/applet.js:1760 4.2/applet.js:1628 2.6/applet.js:1793 3.2/applet.js:1826
 msgid "Lock the screen"
 msgstr "Zablokuj ekran"
 
-#: 3.4/applet.js:1762 3.4/applet.js:1763 4.2/applet.js:1580 4.2/applet.js:1581
+#: 3.4/applet.js:1762 3.4/applet.js:1763 4.2/applet.js:1630 4.2/applet.js:1631
 #: 2.6/applet.js:1795 2.6/applet.js:1796 3.2/applet.js:1828 3.2/applet.js:1829
 msgid "Quit"
 msgstr "Wyjdź"
 
-#: 3.4/applet.js:1774 3.4/applet.js:1778 4.2/applet.js:1592 4.2/applet.js:1596
+#: 3.4/applet.js:1774 3.4/applet.js:1778 4.2/applet.js:1642 4.2/applet.js:1646
 #: 2.6/applet.js:1807 2.6/applet.js:1811 3.2/applet.js:1840 3.2/applet.js:1844
 msgid "Lock screen"
 msgstr "Zablokuj ekran"
@@ -111,7 +111,7 @@ msgstr "Zablokuj ekran"
 #. 3.4->settings-schema.json->menu->title
 #. 4.2->settings-schema.json->menu->title
 #. 3.2->settings-schema.json->menu->title
-#: 3.4/applet.js:1998 4.2/applet.js:1821 2.6/applet.js:2022 3.2/applet.js:2072
+#: 3.4/applet.js:1998 4.2/applet.js:1871 2.6/applet.js:2022 3.2/applet.js:2072
 msgid "Menu"
 msgstr "Menu"
 
@@ -135,7 +135,11 @@ msgstr[0] "%d wynik wyszukiwania"
 msgstr[1] "%d wyniki wyszukiwania"
 msgstr[2] "%d wyników wyszukiwania"
 
-#: 4.2/applet.js:3226
+#: 4.2/applet.js:635
+msgid "Search for results on the web"
+msgstr "Wyszukuj w sieci"
+
+#: 4.2/applet.js:3280
 msgid "Clear all recent documents"
 msgstr "Wyczyść listę niedawno używanych plików"
 
@@ -247,7 +251,7 @@ msgstr "Układ i zawartość"
 #. 3.2->settings-schema.json->menu-icons->title
 #. 3.2->settings-schema.json->quicklauncher-layout->options
 msgid "Icons and Labels"
-msgstr "Ikony i etykiery"
+msgstr "Ikony i etykiety"
 
 #. 3.4->settings-schema.json->sidebar-layout->title
 #. 4.2->settings-schema.json->sidebar-layout->title
@@ -326,6 +330,7 @@ msgstr "Odznacz aby zezwolić motywom na zmianę ikony"
 
 #. 3.4->settings-schema.json->menu-icon->description
 #. 4.2->settings-schema.json->menu-icon->description
+#. 4.2->settings-schema.json->web-search->columns->title
 #. 2.6->settings-schema.json->menu-icon->description
 #. 3.2->settings-schema.json->menu-icon->description
 msgid "Icon"
@@ -781,6 +786,15 @@ msgstr "Polecenie"
 msgid "Separator above quit buttons"
 msgstr "Separator ponad przyciskami wyłączania"
 
+#. 4.2->settings-schema.json->websearch->title
+msgid "Web Search"
+msgstr "Wyszukiwanie w sieci"
+
+#. 4.2->settings-schema.json->web-search-engine->title
+#. 4.2->settings-schema.json->web-search->description
+msgid "Web Search Engine"
+msgstr "Wyszukiwarka"
+
 #. 4.2->settings-schema.json->menu-custom->description
 msgid "Use a custom icon and label"
 msgstr "Użyj własnej ikony i etykiety"
@@ -804,6 +818,18 @@ msgid ""
 msgstr ""
 "Określ czy wyświetlać przycisk 'Wyjdź' na początku czy na końcu. (Nie ma "
 "zastosowania w układzie 'DropDown'.)"
+
+#. 4.2->settings-schema.json->web-search->columns->title
+msgid "Use"
+msgstr "Używaj"
+
+#. 4.2->settings-schema.json->web-search->columns->title
+msgid "Name"
+msgstr "Nazwa"
+
+#. 4.2->settings-schema.json->web-search->columns->title
+msgid "URL"
+msgstr "URL"
 
 #. 2.6->settings-schema.json->head-menu-layout->description
 msgid "Stark-Menu/MATE-Menu"
