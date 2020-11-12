@@ -2,6 +2,7 @@
 -----------------------------
 ---session/favorites box--------------------
 .menu-favorites-box (or none dependant on user options)
+.menu-favorites-scrollbox and vfade
 .menu-favorites-button
 .menu-favorites-button:hover
 ---search box-----------------------------
@@ -26,13 +27,17 @@
 .menu-application-button-label
 .menu-application-button-selected
 .menu-application-button:highlighted (used to highlight newly installed apps in list or grid view)
+.menu-application-button-selected:highlighted
 ---context menu---------------------------
-.menu-context-menu (or .menu if .menu-context-menu is not defined)
+.menu-context-menu (or .menu)
 ---whole menu-----------------------------
 .cinnamenu (or menu-background)
 .menu-applications-outer-box (or .menu-applications-box for compatability with old themes)
 */
 
 .menu-application-button:highlighted {
+    font-weight: bold;
+}
+.menu-application-button-selected:highlighted {
     font-weight: bold;
 }

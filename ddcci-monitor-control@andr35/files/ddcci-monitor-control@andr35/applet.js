@@ -32,7 +32,7 @@ MyApplet.prototype = {
 
     currBrightnessValue: undefined,
     currContrastValue: undefined,
- 
+
 
     _init: function (orientation, panel_height, instance_id) {
         Applet.IconApplet.prototype._init.call(this, orientation, panel_height, instance_id);
@@ -117,7 +117,14 @@ MyApplet.prototype = {
                 }));
 
             this._update();
+        } else { // Menu has been closed
+
+            // Reset values
+            this.currBrightnessValue = undefined;
+            this.currContrastValue = undefined;
+
         }
+
     },
 
     _on_settings_changed() {
