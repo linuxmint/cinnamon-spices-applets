@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-03 02:41+0000\n"
+"POT-Creation-Date: 2020-11-14 13:40+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -122,6 +122,15 @@ msgstr ""
 msgid "Search web for"
 msgstr ""
 
+msgid "Too many entries - showing first 1000 entries only"
+msgstr ""
+
+msgid "Home folder"
+msgstr ""
+
+msgid "Reset category order"
+msgstr ""
+
 msgid "This file is no longer available"
 msgstr ""
 
@@ -175,9 +184,6 @@ msgid "Recent files settings"
 msgstr ""
 
 msgid "Open the menu editor"
-msgstr ""
-
-msgid "Reset category order"
 msgstr ""
 
 msgid "Use a custom icon"
@@ -351,6 +357,18 @@ msgstr ""
 msgid ""
 "Show your browser's web bookmarks in the menu.\n"
 "Note: Install package gir1.2-gda-5.0 to read firefox bookmarks."
+msgstr ""
+
+msgid "Show favorites category"
+msgstr ""
+
+msgid "Show your favorite apps category in the menu"
+msgstr ""
+
+msgid "Show home folder"
+msgstr ""
+
+msgid "Show home folder category in the menu"
 msgstr ""
 
 msgid "Always open menu on favorite apps"
