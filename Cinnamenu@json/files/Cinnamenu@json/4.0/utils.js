@@ -72,7 +72,7 @@ const Main = imports.ui.main;
 let onlyOneTooltip = null;
 var showTooltip = function (actor, xpos, ypos, center_x, text) {
     if (onlyOneTooltip) {
-        global.log("Cinaamenu: Previous tooltip still exists...removing...");
+        global.log("Cinnamenu: Previous tooltip still exists...removing...");
         onlyOneTooltip.destroy();
         onlyOneTooltip = null;
     }
