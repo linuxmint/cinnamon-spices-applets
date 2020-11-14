@@ -2,5 +2,6 @@
     "description": "Show the state of Timeshift, if it is currently making snapshots in the background",
     "uuid": "timeshift-spy@nicog60",
     "name": "Timeshift Spy",
-    "icon": "timeshift"
+    "icon": "timeshift",
+    "last-edited": 1596129044
 }

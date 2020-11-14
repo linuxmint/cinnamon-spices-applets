@@ -1,18 +1,18 @@
-export {}; // Declaring as a Module
+export { }; // Declaring as a Module
 
 function importModule(path: string): any {
     if (typeof require !== 'undefined') {
-      return require('./' + path);
+        return require('./' + path);
     } else {
-      if (!AppletDir) var AppletDir = imports.ui.appletManager.applets['weather@mockturtl'];
-      return AppletDir[path];
+        if (!AppletDir) var AppletDir = imports.ui.appletManager.applets['weather@mockturtl'];
+        return AppletDir[path];
     }
 }
 
 const UUID = "weather@mockturtl"
 imports.gettext.bindtextdomain(UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
 function _(str: string): string {
-  return imports.gettext.dgettext(UUID, str)
+    return imports.gettext.dgettext(UUID, str)
 }
 
 var utils = importModule("utils");
@@ -34,8 +34,8 @@ class Yahoo implements WeatherProvider {
     //--------------------------------------------------------
     //  Properties
     //--------------------------------------------------------
-	public readonly prettyName = "Yahoo";
-	public readonly name = "Yahoo";
+    public readonly prettyName = "Yahoo";
+    public readonly name = "Yahoo";
     public readonly maxForecastSupport = 10;
     public readonly website = "https://www.yahoo.com/news/weather/";
     public readonly maxHourlyForecastSupport = 0;
@@ -50,35 +50,34 @@ class Yahoo implements WeatherProvider {
     //--------------------------------------------------------
     //  Functions
     //--------------------------------------------------------
-    public async GetWeather(): Promise<WeatherData> {
-        let loc = this.ConstructLoc();
+    public async GetWeather(loc: Location): Promise<WeatherData> {
         let json;
         if (loc != null) {
             try {
-                json = await this.app.SpawnProcess(["python3", this.app.appletDir + "/../yahoo-bridge.py", "--params", JSON.stringify({lat: loc[0].toString(), lon: loc[1].toString()})]);
+                json = await this.app.SpawnProcess(["python3", this.app.appletDir + "/../yahoo-bridge.py", "--params", JSON.stringify({ lat: loc.lat.toString(), lon: loc.lon.toString() })]);
             }
-            catch(e) {
-                this.app.HandleError({type: "hard", service: "yahoo", detail: "unknown", message: _("Unknown Error happened while calling Yahoo bridge,\n see Looking Glass log for errors")})
+            catch (e) {
+                this.app.HandleError({ type: "hard", service: "yahoo", detail: "unknown", message: _("Unknown Error happened while calling Yahoo bridge,\n see Looking Glass log for errors") })
                 this.app.log.Error("Yahoo API bridge call failed, error: " + e);
                 return null;
             }
 
             if (!json) {
-                this.app.HandleError({type: "soft", detail: "no api response", service: "yahoo"});
+                this.app.HandleError({ type: "soft", detail: "no api response", service: "yahoo" });
                 return null;
             }
 
             this.app.log.Debug("Yahoo API response: " + json);
-            
+
             try {
                 json = JSON.parse(json)
             }
-            catch(e) {
-                this.app.HandleError({type: "hard", service: "yahoo", detail: "bad api response - non json", message: _("Yahoo bridge responded in bad format,\n see Looking Glass log for errors")})
+            catch (e) {
+                this.app.HandleError({ type: "hard", service: "yahoo", detail: "bad api response - non json", message: _("Yahoo bridge responded in bad format,\n see Looking Glass log for errors") })
                 this.app.log.Error("Yahoo service failed to parse payload to JSON, error: " + e);
                 return null;
             }
-         
+
             if (!json.error) {                   // No error object, Request Success
                 return this.ParseWeather(json);
             }
@@ -119,7 +118,7 @@ class Yahoo implements WeatherProvider {
                 condition: {
                     main: (json.current_observation.condition.text),
                     description: json.current_observation.condition.text,
-                    icon: weatherIconSafely(this.ResolveIcon(json.current_observation.condition.code, {sunrise: sunrise, sunset: sunset}), this.app.config.IconType()),
+                    icon: weatherIconSafely(this.ResolveIcon(json.current_observation.condition.code, { sunrise: sunrise, sunset: sunset }), this.app.config.IconType()),
                     customIcon: this.ResolveCustomIcon(json.current_observation.condition.code)
                 },
                 extra_field: {
@@ -132,63 +131,50 @@ class Yahoo implements WeatherProvider {
             // Forecast
             for (let i = 0; i < json.forecasts.length; i++) {
                 let day = json.forecasts[i];
-                let forecast: ForecastData = {          
-                    date: new Date(day.date * 1000),         
-                      temp_min: this.ToKelvin(day.low),           
-                      temp_max: this.ToKelvin(day.high),           
+                let forecast: ForecastData = {
+                    date: new Date(day.date * 1000),
+                    temp_min: this.ToKelvin(day.low),
+                    temp_max: this.ToKelvin(day.high),
                     condition: {
-                      main: (day.text),               
-                      description: (day.text),        
-                      icon: weatherIconSafely(this.ResolveIcon(day.code), this.app.config.IconType()),    
-                      customIcon: this.ResolveCustomIcon(day.code)           
+                        main: (day.text),
+                        description: (day.text),
+                        icon: weatherIconSafely(this.ResolveIcon(day.code), this.app.config.IconType()),
+                        customIcon: this.ResolveCustomIcon(day.code)
                     },
-                  };
+                };
 
-                  // JS assumes time is local, so it applies the correct offset creating the Date (including Daylight Saving)
-                  // but when using the date when daylight saving is active, it DOES NOT apply the DST back,
-                  // So we offset the date to make it Noon
-                  //forecast.date.setHours(forecast.date.getHours() + 12);
+                // JS assumes time is local, so it applies the correct offset creating the Date (including Daylight Saving)
+                // but when using the date when daylight saving is active, it DOES NOT apply the DST back,
+                // So we offset the date to make it Noon
+                //forecast.date.setHours(forecast.date.getHours() + 12);
 
-                  result.forecasts.push(forecast);
+                result.forecasts.push(forecast);
             }
             return result;
         }
-        catch(e) {
+        catch (e) {
             this.app.log.Error("DarkSky payload parsing error: " + e)
-            this.app.HandleError({type: "soft", detail: "unusal payload", service: "darksky", message: _("Failed to Process Weather Info")});
+            this.app.HandleError({ type: "soft", detail: "unusual payload", service: "darksky", message: _("Failed to Process Weather Info") });
             return null;
         }
     };
-
-    private ConstructLoc(): string[] {
-        let location = this.app.config._location.replace(" ", "");
-        if (isCoordinate(location)) {
-            return location.split(",");
-        }
-        else {
-            this.app.log.Error("Yahoo: Location is not a coordinate");
-            this.app.HandleError({type: "hard", detail: "bad location format", service:"darksky", userError: true, message: ("Please Check the location,\nmake sure it is a coordinate") })
-            return null;
-        }
-    };
-
 
     private HandleResponseErrors(json: BridgeError): void {
         let type = json.error.type;
         let errorMsg = "Yahoo bridge: "
         this.app.log.Debug("yahoo API error payload: " + json);
-        switch(type) {
+        switch (type) {
             case "import":
-                this.app.sendNotification("Missing package", "Please install '" + this.GetMissingPackage(json) + "', then refresh manually.")
+                this.app.sendNotification(_("Missing package"), _("Please install '") + this.GetMissingPackage(json) + _("', then refresh manually."))
                 this.app.log.Error(errorMsg + json.error.message);
-                this.app.HandleError({detail: "import error", type: "hard", userError: true, service: "yahoo", message: "Failed to import " + this.GetMissingPackage(json) + ", please install it first."})
+                this.app.HandleError({ detail: "import error", type: "hard", userError: true, service: "yahoo", message: _("Please install '") + this.GetMissingPackage(json) + _("', then refresh manually.") })
                 break;
             case "network":
-                this.app.HandleError({detail: "no api response", type: "soft", service: "yahoo", message: "Could not connect to Yahoo API."})
+                this.app.HandleError({ detail: "no api response", type: "soft", service: "yahoo", message: _("Could not connect to Yahoo API.") })
                 this.app.log.Error(errorMsg + "Could not connect to API, error - " + json.error.data);
                 break;
             case "unknown":
-                this.app.HandleError({detail: "no api response", type: "hard", service: "yahoo", message: "Unknown error happened while obtaining weather, see Looking Glass logs for more information"})
+                this.app.HandleError({ detail: "no api response", type: "hard", service: "yahoo", message: _("Unknown error happened while obtaining weather, see Looking Glass logs for more information") })
                 this.app.log.Error(errorMsg + "Unknown Error happened in yahoo bridge, error - " + json.error.data);
                 break
             default:
@@ -197,6 +183,10 @@ class Yahoo implements WeatherProvider {
         }
     };
 
+    /**
+     * Data returned from python containing Exception info
+     * @param error 
+     */
     private GetMissingPackage(error: BridgeError): string {
         let pythonModule = error.error.data.split("'")[1];
         if (pythonModule == "requests_oauthlib") {
@@ -415,7 +405,7 @@ class Yahoo implements WeatherProvider {
                 return "thunderstorm-symbolic";
             default:
                 return "cloud-refresh-symbolic";
-          }
+        }
     }
 
     private ToKelvin(temp: number): number {
@@ -496,5 +486,4 @@ const YahooConditionLibrary = [
     _("Blizzard"),
     _("Not Available"),
     _("Scattered Thundershowers")
-  ];
-
+];

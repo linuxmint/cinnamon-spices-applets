@@ -1,12 +1,12 @@
 {
     "compilerOptions": {
         "lib": ["es2017"],
-        "module": "es6",
+        "module": "ES6",
         "target": "es2017",
         "noImplicitAny": true,
         "removeComments": true,
         "preserveConstEnums": true,
-        "sourceMap": false,
+		"sourceMap": false,
         "outDir": "files/weather@mockturtl/3.8/"
     },
     "include": [

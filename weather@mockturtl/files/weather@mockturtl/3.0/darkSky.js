@@ -76,25 +76,24 @@ var DarkSky = (function () {
         this.unit = null;
         this.app = _app;
     }
-    DarkSky.prototype.GetWeather = function () {
+    DarkSky.prototype.GetWeather = function (loc) {
         return __awaiter(this, void 0, void 0, function () {
             var query, json, e_1;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        query = this.ConstructQuery();
+                        query = this.ConstructQuery(loc);
                         if (!(query != "" && query != null)) return [3, 5];
-                        this.app.log.Debug("DarkSky API query: " + query);
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
-                        return [4, this.app.LoadJsonAsync(query)];
+                        return [4, this.app.LoadJsonAsync(query, this.OnObtainingData)];
                     case 2:
                         json = _a.sent();
                         return [3, 4];
                     case 3:
                         e_1 = _a.sent();
-                        this.app.HandleHTTPError("darksky", e_1, this.app, this.HandleHTTPError);
+                        this.app.HandleHTTPError("darksky", e_1, this.app);
                         return [2, null];
                     case 4:
                         if (!json) {
@@ -179,7 +178,7 @@ var DarkSky = (function () {
                         icon: weatherIconSafely(this.ResolveIcon(hour.icon, { sunrise: sunrise, sunset: sunset }, new Date(hour.time * 1000)), this.app.config.IconType()),
                         customIcon: this.ResolveCustomIcon(hour.icon)
                     },
-                    precipation: {
+                    precipitation: {
                         type: hour.precipType,
                         volume: hour.precipProbability,
                         chance: hour.precipProbability * 100
@@ -191,7 +190,7 @@ var DarkSky = (function () {
         }
         catch (e) {
             this.app.log.Error("DarkSky payload parsing error: " + e);
-            this.app.HandleError({ type: "soft", detail: "unusal payload", service: "darksky", message: _("Failed to Process Weather Info") });
+            this.app.HandleError({ type: "soft", detail: "unusual payload", service: "darksky", message: _("Failed to Process Weather Info") });
             return null;
         }
     };
@@ -203,11 +202,10 @@ var DarkSky = (function () {
         var lang = systemLocale.split("-")[0];
         return lang;
     };
-    DarkSky.prototype.ConstructQuery = function () {
+    DarkSky.prototype.ConstructQuery = function (loc) {
         this.SetQueryUnit();
         var query;
         var key = this.app.config._apiKey.replace(" ", "");
-        var location = this.app.config._location.replace(" ", "");
         if (this.app.config.noApiKey()) {
             this.app.log.Error("DarkSky: No API Key given");
             this.app.HandleError({
@@ -218,22 +216,34 @@ var DarkSky = (function () {
             });
             return "";
         }
-        if (isCoordinate(location)) {
-            query = this.query + key + "/" + location +
-                "?exclude=minutely,flags" + "&units=" + this.unit;
-            var locale = this.ConvertToAPILocale(this.app.currentLocale);
-            if (isLangSupported(locale, this.supportedLanguages) && this.app.config._translateCondition) {
-                query = query + "&lang=" + locale;
-            }
-            return query;
+        query = this.query + key + "/" + loc.text + "?exclude=minutely,flags" + "&units=" + this.unit;
+        var locale = this.ConvertToAPILocale(this.app.currentLocale);
+        if (isLangSupported(locale, this.supportedLanguages) && this.app.config._translateCondition) {
+            query = query + "&lang=" + locale;
         }
-        else {
-            this.app.log.Error("DarkSky: Location is not a coordinate");
-            this.app.HandleError({ type: "hard", detail: "bad location format", service: "darksky", userError: true, message: ("Please Check the location,\nmake sure it is a coordinate") });
-            return "";
-        }
+        return query;
     };
-    ;
+    DarkSky.prototype.OnObtainingData = function (message) {
+        if (message.status_code == 403) {
+            return {
+                type: "hard",
+                userError: true,
+                detail: "bad key",
+                service: "darksky",
+                message: _("Please Make sure you\nentered the API key correctly and your account is not locked")
+            };
+        }
+        if (message.status_code == 401) {
+            return {
+                type: "hard",
+                userError: true,
+                detail: "no key",
+                service: "darksky",
+                message: _("Please Make sure you\nentered the API key what you have from DarkSky")
+            };
+        }
+        return null;
+    };
     DarkSky.prototype.HandleResponseErrors = function (json) {
         var code = json.code;
         var error = json.error;
@@ -249,21 +259,6 @@ var DarkSky = (function () {
         }
     };
     ;
-    DarkSky.prototype.HandleHTTPError = function (error, uiError) {
-        if (error.code == 403) {
-            uiError.detail = "bad key";
-            uiError.message = _("Please Make sure you\nentered the API key correctly and your account is not locked");
-            uiError.type = "hard";
-            uiError.userError = true;
-        }
-        if (error.code == 401) {
-            uiError.detail = "no key";
-            uiError.message = _("Please Make sure you\nentered the API key what you have from DarkSky");
-            uiError.type = "hard";
-            uiError.userError = true;
-        }
-        return uiError;
-    };
     DarkSky.prototype.ProcessSummary = function (summary) {
         var processed = summary.split(" ");
         var result = "";

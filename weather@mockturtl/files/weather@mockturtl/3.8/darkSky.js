@@ -40,16 +40,15 @@ class DarkSky {
         this.unit = null;
         this.app = _app;
     }
-    async GetWeather() {
-        let query = this.ConstructQuery();
+    async GetWeather(loc) {
+        let query = this.ConstructQuery(loc);
         let json;
         if (query != "" && query != null) {
-            this.app.log.Debug("DarkSky API query: " + query);
             try {
-                json = await this.app.LoadJsonAsync(query);
+                json = await this.app.LoadJsonAsync(query, this.OnObtainingData);
             }
             catch (e) {
-                this.app.HandleHTTPError("darksky", e, this.app, this.HandleHTTPError);
+                this.app.HandleHTTPError("darksky", e, this.app);
                 return null;
             }
             if (!json) {
@@ -131,7 +130,7 @@ class DarkSky {
                         icon: weatherIconSafely(this.ResolveIcon(hour.icon, { sunrise: sunrise, sunset: sunset }, new Date(hour.time * 1000)), this.app.config.IconType()),
                         customIcon: this.ResolveCustomIcon(hour.icon)
                     },
-                    precipation: {
+                    precipitation: {
                         type: hour.precipType,
                         volume: hour.precipProbability,
                         chance: hour.precipProbability * 100
@@ -143,7 +142,7 @@ class DarkSky {
         }
         catch (e) {
             this.app.log.Error("DarkSky payload parsing error: " + e);
-            this.app.HandleError({ type: "soft", detail: "unusal payload", service: "darksky", message: _("Failed to Process Weather Info") });
+            this.app.HandleError({ type: "soft", detail: "unusual payload", service: "darksky", message: _("Failed to Process Weather Info") });
             return null;
         }
     }
@@ -155,11 +154,10 @@ class DarkSky {
         let lang = systemLocale.split("-")[0];
         return lang;
     }
-    ConstructQuery() {
+    ConstructQuery(loc) {
         this.SetQueryUnit();
         let query;
         let key = this.app.config._apiKey.replace(" ", "");
-        let location = this.app.config._location.replace(" ", "");
         if (this.app.config.noApiKey()) {
             this.app.log.Error("DarkSky: No API Key given");
             this.app.HandleError({
@@ -170,22 +168,34 @@ class DarkSky {
             });
             return "";
         }
-        if (isCoordinate(location)) {
-            query = this.query + key + "/" + location +
-                "?exclude=minutely,flags" + "&units=" + this.unit;
-            let locale = this.ConvertToAPILocale(this.app.currentLocale);
-            if (isLangSupported(locale, this.supportedLanguages) && this.app.config._translateCondition) {
-                query = query + "&lang=" + locale;
-            }
-            return query;
+        query = this.query + key + "/" + loc.text + "?exclude=minutely,flags" + "&units=" + this.unit;
+        let locale = this.ConvertToAPILocale(this.app.currentLocale);
+        if (isLangSupported(locale, this.supportedLanguages) && this.app.config._translateCondition) {
+            query = query + "&lang=" + locale;
         }
-        else {
-            this.app.log.Error("DarkSky: Location is not a coordinate");
-            this.app.HandleError({ type: "hard", detail: "bad location format", service: "darksky", userError: true, message: ("Please Check the location,\nmake sure it is a coordinate") });
-            return "";
-        }
+        return query;
     }
-    ;
+    OnObtainingData(message) {
+        if (message.status_code == 403) {
+            return {
+                type: "hard",
+                userError: true,
+                detail: "bad key",
+                service: "darksky",
+                message: _("Please Make sure you\nentered the API key correctly and your account is not locked")
+            };
+        }
+        if (message.status_code == 401) {
+            return {
+                type: "hard",
+                userError: true,
+                detail: "no key",
+                service: "darksky",
+                message: _("Please Make sure you\nentered the API key what you have from DarkSky")
+            };
+        }
+        return null;
+    }
     HandleResponseErrors(json) {
         let code = json.code;
         let error = json.error;
@@ -201,21 +211,6 @@ class DarkSky {
         }
     }
     ;
-    HandleHTTPError(error, uiError) {
-        if (error.code == 403) {
-            uiError.detail = "bad key";
-            uiError.message = _("Please Make sure you\nentered the API key correctly and your account is not locked");
-            uiError.type = "hard";
-            uiError.userError = true;
-        }
-        if (error.code == 401) {
-            uiError.detail = "no key";
-            uiError.message = _("Please Make sure you\nentered the API key what you have from DarkSky");
-            uiError.type = "hard";
-            uiError.userError = true;
-        }
-        return uiError;
-    }
     ProcessSummary(summary) {
         let processed = summary.split(" ");
         let result = "";

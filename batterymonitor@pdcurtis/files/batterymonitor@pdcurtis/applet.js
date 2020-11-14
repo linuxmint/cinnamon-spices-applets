@@ -160,7 +160,7 @@ MyApplet.prototype = {
 
             // Finally setup to start the update loop for the applet display running
 
-            this.set_applet_label(_(""));
+            this.set_applet_label(_(" "));
             this.set_applet_tooltip(_("Waiting"));
             this.on_settings_changed()   // This starts the MainLoop timer loop
 
@@ -575,4 +575,3 @@ Bug Fix for use with early versions of Cinnamon
   * Change location of temporary files to home folder to avoid permissions problem when switching users
   * Fixes #2502
 */
-

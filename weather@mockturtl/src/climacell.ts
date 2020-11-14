@@ -1,25 +1,25 @@
-export {}; // Declaring as a Module
+export { }; // Declaring as a Module
 
 function importModule(path: string): any {
     if (typeof require !== 'undefined') {
-      return require('./' + path);
+        return require('./' + path);
     } else {
-      if (!AppletDir) var AppletDir = imports.ui.appletManager.applets['weather@mockturtl'];
-      return AppletDir[path];
+        if (!AppletDir) var AppletDir = imports.ui.appletManager.applets['weather@mockturtl'];
+        return AppletDir[path];
     }
 }
 
 const UUID = "weather@mockturtl"
 imports.gettext.bindtextdomain(UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
 function _(str: string): string {
-  return imports.gettext.dgettext(UUID, str)
+    return imports.gettext.dgettext(UUID, str)
 }
 
 // Unable to use type declarations with imports like this, so
 // typing it manually again.
 var utils = importModule("utils");
 var isCoordinate = utils.isCoordinate as (text: any) => boolean;
-var isLangSupported = utils.isLangSupported as (lang: string, languages: Array <string> ) => boolean;
+var isLangSupported = utils.isLangSupported as (lang: string, languages: Array<string>) => boolean;
 var CelsiusToKelvin = utils.CelsiusToKelvin as (celsius: number) => number;
 var IsNight = utils.IsNight as (sunTimes: SunTimes, date?: Date) => boolean;
 var weatherIconSafely = utils.weatherIconSafely as (code: BuiltinIcons[], icon_type: imports.gi.St.IconType) => BuiltinIcons;
@@ -37,30 +37,28 @@ class Climacell implements WeatherProvider {
     //--------------------------------------------------------
     //  Properties
     //--------------------------------------------------------
-	public readonly prettyName = "Climacell";
-	public readonly name = "Climacell";
+    public readonly prettyName = "Climacell";
+    public readonly name = "Climacell";
     public readonly maxForecastSupport = 16;
     public readonly website = "https://www.climacell.co/";
     public readonly maxHourlyForecastSupport = 96;
-
-    private supportedLanguages: string[] = [];
 
     private baseUrl = "https://api.climacell.co/v3/weather/";
     private callData: CallDict = {
         current: {
             url: "realtime/",
-            required_fields: ["temp","feels_like","humidity","wind_speed","wind_direction","baro_pressure","sunrise","sunset","weather_code"]
+            required_fields: ["temp", "feels_like", "humidity", "wind_speed", "wind_direction", "baro_pressure", "sunrise", "sunset", "weather_code"]
         },
         hourly: {
             url: "forecast/hourly/",
-            required_fields: ["temp","weather_code","sunset","sunrise","precipitation_type","precipitation_probability"]
+            required_fields: ["temp", "weather_code", "sunset", "sunrise", "precipitation_type", "precipitation_probability"]
         },
         daily: {
             url: "forecast/daily/",
-			required_fields: ["temp","weather_code","sunset","sunrise"],
+            required_fields: ["temp", "weather_code", "sunset", "sunrise"],
         }
     }
-    
+
     private unit: queryUnits = "si";
     private app: WeatherApplet
 
@@ -71,10 +69,10 @@ class Climacell implements WeatherProvider {
     //--------------------------------------------------------
     //  Functions
     //--------------------------------------------------------
-    public async GetWeather(): Promise<WeatherData> {
-        let hourly = this.GetData("hourly", this.ParseHourly) as Promise<HourlyForecastData[]>;
-        let daily = this.GetData("daily", this.ParseDaily) as Promise<ForecastData[]>;
-        let current = await this.GetData("current", this.ParseWeather) as WeatherData;
+    public async GetWeather(loc: Location): Promise<WeatherData> {
+        let hourly = this.GetData("hourly", loc, this.ParseHourly) as Promise<HourlyForecastData[]>;
+        let daily = this.GetData("daily", loc, this.ParseDaily) as Promise<ForecastData[]>;
+        let current = await this.GetData("current", loc, this.ParseWeather) as WeatherData;
         current.forecasts = await daily;
         current.hourlyForecasts = await hourly;
 
@@ -88,38 +86,37 @@ class Climacell implements WeatherProvider {
      * @param baseUrl 
      * @param ParseFunction returns WeatherData or ForecastData Object
      */
-    private async GetData(baseUrl: CallType, ParseFunction: (json: any, context: any) => WeatherData | ForecastData[] | HourlyForecastData[]) {
-        let query = this.ConstructQuery(baseUrl);
+    private async GetData(baseUrl: CallType, loc: Location, ParseFunction: (json: any, context: any) => WeatherData | ForecastData[] | HourlyForecastData[]) {
+        let query = this.ConstructQuery(baseUrl, loc);
         let json;
         if (query != null) {
-            this.app.log.Debug("Query: " + query);
             try {
-                json = await this.app.LoadJsonAsync(query);
+                json = await this.app.LoadJsonAsync(query, this.OnObtainingData);
             }
-            catch(e) {
-              	this.app.HandleHTTPError("climacell", e, this.app, null);
-            	return null;
+            catch (e) {
+                this.app.HandleHTTPError("climacell", e, this.app, null);
+                return null;
             }
 
             if (json == null) {
-				this.app.HandleError({type: "soft", detail: "no api response", service: "climacell"});
-				return null;                 
+                this.app.HandleError({ type: "soft", detail: "no api response", service: "climacell" });
+                return null;
             }
 
             return ParseFunction(json, this);
         }
         else {
-          	return null;
-        }       
-	};
+            return null;
+        }
+    };
 
 
     private ParseWeather(json: any, ctx: Climacell): WeatherData {
         try {
-			let suntimes: SunTimes = {
-				sunrise: new Date(json.sunrise.value),
-				sunset: new Date(json.sunset.value)
-			}
+            let suntimes: SunTimes = {
+                sunrise: new Date(json.sunrise.value),
+                sunset: new Date(json.sunset.value)
+            }
             let result: WeatherData = {
                 coord: {
                     lat: json.lat,
@@ -149,83 +146,101 @@ class Climacell implements WeatherProvider {
                 condition: ctx.ResolveCondition(json.weather_code.value, IsNight(suntimes)),
                 forecasts: []
             };
-			
+
 
             return result;
         }
-        catch(e) {
+        catch (e) {
             ctx.app.log.Error("Climacell payload parsing error: " + e)
-            ctx.app.HandleError({type: "soft", detail: "unusal payload", service: "climacell", message: _("Failed to Process Weather Info")});
+            ctx.app.HandleError({ type: "soft", detail: "unusual payload", service: "climacell", message: _("Failed to Process Weather Info") });
             return null;
         }
     };
 
     private ParseHourly(json: any, ctx: Climacell): HourlyForecastData[] {
-		let results: HourlyForecastData[] = [];
-		for (let index = 0; index < json.length; index++) {
-			const element = json[index];
-			let suntimes: SunTimes = {
-				sunrise: new Date(element.sunrise.value),
-				sunset: new Date(element.sunset.value)
-			}
-			let hour: HourlyForecastData = {
-				temp: CelsiusToKelvin(element.temp.value),
-				date: new Date(element.observation_time.value),
-				precipation: {
-					type: element.precipitation_type.value,
-					volume: null,
-					chance: element.precipitation_probability.value
-				},
-				condition: ctx.ResolveCondition(element.weather_code.value, IsNight(suntimes, new Date(element.observation_time.value)))
-			}
-			results.push(hour);
-		}
+        let results: HourlyForecastData[] = [];
+        for (let index = 0; index < json.length; index++) {
+            const element = json[index];
+            let suntimes: SunTimes = {
+                sunrise: new Date(element.sunrise.value),
+                sunset: new Date(element.sunset.value)
+            }
+            let hour: HourlyForecastData = {
+                temp: CelsiusToKelvin(element.temp.value),
+                date: new Date(element.observation_time.value),
+                precipitation: {
+                    type: element.precipitation_type.value,
+                    volume: null,
+                    chance: element.precipitation_probability.value
+                },
+                condition: ctx.ResolveCondition(element.weather_code.value, IsNight(suntimes, new Date(element.observation_time.value)))
+            }
+            results.push(hour);
+        }
         return results;
     }
 
     private ParseDaily(json: any, ctx: Climacell): ForecastData[] {
-		let results: ForecastData[] = [];
-		for (let index = 0; index < json.length; index++) {
-			const element = json[index];
-			let day: ForecastData = {
-				date: new Date(element.observation_time.value),
-				temp_max: CelsiusToKelvin(element.temp[1].max.value),
-				temp_min: CelsiusToKelvin(element.temp[0].min.value),
-				condition: ctx.ResolveCondition(element.weather_code.value)
-			}
-			results.push(day);
-		}
+        let results: ForecastData[] = [];
+        for (let index = 0; index < json.length; index++) {
+            const element = json[index];
+            let day: ForecastData = {
+                date: new Date(element.observation_time.value),
+                temp_max: CelsiusToKelvin(element.temp[1].max.value),
+                temp_min: CelsiusToKelvin(element.temp[0].min.value),
+                condition: ctx.ResolveCondition(element.weather_code.value)
+            }
+            results.push(day);
+        }
         return results;
     }
 
-    private ConstructQuery(subcall: CallType): string {
+    private ConstructQuery(subcall: CallType, loc: Location): string {
         let query;
         let key = this.app.config._apiKey.replace(" ", "");
-        let location = this.app.config._location.replace(" ", "");
         if (this.app.config.noApiKey()) {
             this.app.log.Error("Climacell: No API Key given");
             this.app.HandleError({
                 type: "hard",
                 userError: true,
                 "detail": "no key",
-                message: _("Please enter API key in settings,\nor get one first on " + "https://developer.climacell.co/sign-up")});
+                message: _("Please enter API key in settings,\nor get one first on " + "https://developer.climacell.co/sign-up")
+            });
             return null;
         }
-        if (isCoordinate(location)) {
-			let loc = location.split(",")
-			query = this.baseUrl + this.callData[subcall].url + "?apikey=" + key + "&lat=" + loc[0] + "&lon=" + loc[1] + "&unit_system=" + this.unit + "&fields=" +  this.callData[subcall].required_fields.join();
-			global.log(query)
-            return query;
-        }
-        else {
-            this.app.log.Error("Climacell: Location is not a coordinate");
-            this.app.HandleError({type: "hard", detail: "bad location format", service:"darksky", userError: true, message: ("Please Check the location,\nmake sure it is a coordinate") })
-            return null;
-        }
+        query = this.baseUrl + this.callData[subcall].url + "?apikey=" + key + "&lat=" + loc.lat + "&lon=" + loc.lon + "&unit_system=" + this.unit + "&fields=" + this.callData[subcall].required_fields.join();
+        return query;
     };
 
+    /**
+    * 
+    * @param message Soup Message object
+    * @returns null if custom error checking does not find anything
+    */
+    private OnObtainingData(message: any): AppletError {
+        if (message.status_code == 403) { // DarkSky returns auth error on the http level when key is wrong
+            return {
+                type: "hard",
+                userError: true,
+                detail: "bad key",
+                service: "darksky",
+                message: _("Please Make sure you\nentered the API key correctly and your account is not locked")
+            };
+        }
+        if (message.status_code == 401) { // DarkSky returns auth error on the http level when key is wrong
+            return {
+                type: "hard",
+                userError: true,
+                detail: "no key",
+                service: "darksky",
+                message: _("Please Make sure you\nentered the API key what you have from DarkSky")
+            };
+        }
+        return null;
+    }
+
     private ResolveCondition(condition: string, isNight: boolean = false): Condition {
-        switch(condition) {
+        switch (condition) {
             case ("rain_heavy"):
                 return {
                     customIcon: "rain-symbolic",
@@ -357,7 +372,7 @@ class Climacell implements WeatherProvider {
                     customIcon: "cloudy-symbolic",
                     description: _("Cloudy"),
                     main: _("Cloudy"),
-                    icon: (isNight) ? weatherIconSafely(["weather-overcast", "weather-clouds-night", "weather-few-clouds-night"], this.app.config.IconType()) : weatherIconSafely(["weather-overcast", "weather-clouds",  "weather-few-clouds"], this.app.config.IconType())
+                    icon: (isNight) ? weatherIconSafely(["weather-overcast", "weather-clouds-night", "weather-few-clouds-night"], this.app.config.IconType()) : weatherIconSafely(["weather-overcast", "weather-clouds", "weather-few-clouds"], this.app.config.IconType())
                 }
             case ("mostly_cloudy"):
                 return {
@@ -378,7 +393,7 @@ class Climacell implements WeatherProvider {
                     customIcon: (isNight) ? "night-alt-partly-cloudy-symbolic" : "day-cloudy-symbolic",
                     description: _("Mostly Clear"),
                     main: _("Mostly Clear"),
-                    icon: weatherIconSafely((isNight) ? ["weather-few-clouds-night","weather-clouds-night", "weather-overcast"] : ["weather-few-clouds", "weather-clouds",  "weather-overcast"], this.app.config.IconType())
+                    icon: weatherIconSafely((isNight) ? ["weather-few-clouds-night", "weather-clouds-night", "weather-overcast"] : ["weather-few-clouds", "weather-clouds", "weather-overcast"], this.app.config.IconType())
                 }
             case ("clear"):
                 return {
@@ -388,7 +403,7 @@ class Climacell implements WeatherProvider {
                     icon: weatherIconSafely((isNight) ? ["weather-clear-night"] : ["weather-clear"], this.app.config.IconType())
                 }
             default:
-				this.app.log.Error("condition code not found: " + condition);
+                this.app.log.Error("condition code not found: " + condition);
                 return {
                     customIcon: "refresh-symbolic",
                     description: _("Unknown"),
@@ -414,5 +429,3 @@ interface CallData {
     url: string;
     required_fields: string[];
 }
-
-

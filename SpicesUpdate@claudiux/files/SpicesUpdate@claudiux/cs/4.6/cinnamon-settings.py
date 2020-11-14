@@ -199,6 +199,11 @@ class MainWindow:
                         and self.sort in range(5):
                             visible_child.sort_combo.set_active(self.sort)
                             visible_child.sort_changed()
+                            if self.update_all:
+                                visible_child.refresh_button.emit('clicked')
+                                visible_child.update_all_button.emit('clicked')
+                                #self.window.emit('destroy')
+                                #self.window.close()
                     else:
                         sidePage.stack.set_visible_child(l[0])
                     if sidePage.stack.get_visible():
@@ -379,6 +384,7 @@ class MainWindow:
 
         self.tab = 0 # open 'manage' tab by default
         self.sort = 1 # sorted by 'score' by default
+        self.update_all = False # "update all" is not requested
 
         # Select the first sidePage
         if len(sys.argv) > 1:
@@ -404,7 +410,7 @@ class MainWindow:
 
             try:
                 if len(sys.argv) > 2:
-                    opts = getopt.getopt(sys.argv[2:], "t:s:", ["tab=", "sort="])[0]
+                    opts = getopt.getopt(sys.argv[2:], "t:s:u", ["tab=", "sort=","update-all"])[0]
             except getopt.GetoptError:
                 pass
 
@@ -419,6 +425,8 @@ class MainWindow:
                         self.sort = int(arg)
                     elif arg in sorts_literal.keys():
                         self.sort = sorts_literal[arg]
+                if opt in ("-u", "--update-all"):
+                    self.update_all = True
 
             # If we're launching a module directly, set the WM class so GWL
             # can consider it as a standalone app and give it its own

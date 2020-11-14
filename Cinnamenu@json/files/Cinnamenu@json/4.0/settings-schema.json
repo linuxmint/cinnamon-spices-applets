@@ -67,12 +67,14 @@
         },
         "menu-behave":{
             "type":"section",
-            "title":"",
+            "title":"Menu",
             "keys":[
                 "category-click",
+                "open-on-favorites",
                 "enable-autoscroll",
-                "enable-search-providers",
-                "get-providers"
+                "web-search-option",
+                "emoji-search",
+                "enable-search-providers"
             ]
         },
         "panel-appear":{
@@ -88,11 +90,11 @@
             "type":"section",
             "title":"Menu",
             "keys":[
-                "show-category-icons",
                 "category-icon-size",
-                "show-application-icons",
                 "apps-list-icon-size",
-                "apps-grid-icon-size"
+                "apps-grid-icon-size",
+                "session-icon-size",
+                "use-box-style"
             ]
         }
     },
@@ -133,7 +135,7 @@
             "Left":2,
             "Right":3
         },
-        "tooltip":"Choose where to show the session (quit, logout, etc.) buttons"
+        "tooltip":"Choose where to show the session buttons (quit, logout, etc.)"
     },
     "add-favorites":{
         "type":"switch",
@@ -153,7 +155,7 @@
         "min":360,
         "max":9999,
         "step":1,
-        "units":"px",
+        "units":"pixels",
         "description":"Custom menu height",
         "tooltip":"Custom menu height",
         "dependency":"enable-custom-menu-height"
@@ -178,7 +180,7 @@
         "type":"checkbox",
         "default":false,
         "description":"Show web bookmarks",
-        "tooltip":"Show your browser's web bookmarks in the menu"
+        "tooltip":"Show your browser's web bookmarks in the menu.\nNote: Install package gir1.2-gda-5.0 to read firefox bookmarks."
     },
     "privacy-settings-button":{
         "type":"button",
@@ -231,22 +233,42 @@
         "description":"Activate categories on click",
         "tooltip":"Activate categories on click instead of on hover"
     },
+    "open-on-favorites":{
+        "type":"checkbox",
+        "default":false,
+        "description":"Always open menu on favorite apps",
+        "tooltip":"Always open the menu with favorite apps category selected"
+    },
     "enable-autoscroll":{
         "type":"checkbox",
         "default":true,
         "description":"Enable autoscrolling",
         "tooltip":"Enable autoscrolling in application list"
     },
+    "web-search-option":{
+        "type":"combobox",
+        "default":0,
+        "description":"Web search option",
+        "options":{
+            "Google":0,
+            "Bing":1,
+            "Yahoo":2,
+            "DuckDuckGo":3,
+            "None":4
+        },
+        "tooltip":"Show an internet search option in search results"
+    },
+    "emoji-search":{
+        "type":"checkbox",
+        "default":true,
+        "description":"Enable emoji search",
+        "tooltip":"Show emojis in search results"
+    },
     "enable-search-providers":{
         "type":"checkbox",
         "default":false,
         "description":"Enable search providers",
         "tooltip":"Include search provider results in searches"
-    },
-    "get-providers":{
-        "type":"button",
-        "description":"Example Search Providers",
-        "callback":"getExampleSearchProviders"
     },
 
     "menu-icon-custom":{
@@ -270,36 +292,22 @@
         "tooltip":"Text to show beside the panel icon"
     },
 
-    "show-category-icons":{
-        "type":"switch",
-        "default":true,
-        "description":"Show category icons",
-        "tooltip":"Show category icons"
-    },
     "category-icon-size":{
         "indent":true,
-        "dependency":"show-category-icons",
         "type":"spinbutton",
         "default":24,
-        "min":16,
+        "min":0,
         "max":256,
         "step":1,
         "units":"pixels",
         "description":"Category icon size",
         "tooltip":"Category icon size"
     },
-    "show-application-icons":{
-        "type":"switch",
-        "default":true,
-        "description":"Show application icons",
-        "tooltip":"Show application icons"
-    },
     "apps-list-icon-size":{
         "indent":true,
-        "dependency":"show-application-icons",
         "type":"spinbutton",
         "default":24,
-        "min":16,
+        "min":0,
         "max":256,
         "step":1,
         "units":"pixels",
@@ -308,14 +316,30 @@
     },
     "apps-grid-icon-size":{
         "indent":true,
-        "dependency":"show-application-icons",
         "type":"spinbutton",
         "default":64,
-        "min":16,
+        "min":0,
         "max":256,
         "step":1,
         "units":"pixels",
         "description":"Applications grid icon size",
         "tooltip":"Applications grid icon size"
+    },
+    "session-icon-size":{
+        "indent":true,
+        "type":"spinbutton",
+        "default":28,
+        "min":6,
+        "max":64,
+        "step":1,
+        "units":"pixels",
+        "description":"Session buttons icon size",
+        "tooltip":"Session buttons icon size"
+    },
+    "use-box-style":{
+        "type":"checkbox",
+        "default":false,
+        "description":"Use session buttons box style",
+        "tooltip":"Use session buttons box style"
     }
 }

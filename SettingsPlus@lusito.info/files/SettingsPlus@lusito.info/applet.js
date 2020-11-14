@@ -179,7 +179,7 @@ SettingsPlus.prototype = {
             _('Edit Menu'),
             Gtk.STOCK_EDIT,
             Lang.bind(this, function(event) {
-                Util.spawnCommandLine('gnome-open ' + ConfigFile);
+                Util.spawnCommandLine('xdg-open ' + ConfigFile);
             })
         );
 

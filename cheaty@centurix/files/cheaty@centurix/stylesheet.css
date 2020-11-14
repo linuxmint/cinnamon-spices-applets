@@ -10,21 +10,14 @@
 
 .sheet-item-code {
 	font-size: 1em;
-	font-family: courier;
-	font-weight: bold;
-	display: block;
-}
-
-.sheet-item-code {
-	font-size: 1em;
-	font-family: courier;
+	font-family: sans-serif;
 	font-weight: bold;
 	display: block;
 }
 
 .sheet-item-code-alternative {
 	font-size: 1em;
-	font-family: courier;
+	font-family: sans-serif;
 	font-weight: bold;
 	font-style: italic;
 	display: block;

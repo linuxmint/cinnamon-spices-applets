@@ -67,19 +67,18 @@ var MetNorway = (function () {
         this.app = app;
         this.sunCalc = new SunCalc();
     }
-    MetNorway.prototype.GetWeather = function () {
+    MetNorway.prototype.GetWeather = function (loc) {
         return __awaiter(this, void 0, void 0, function () {
             var query, json, e_1;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        query = this.GetUrl();
-                        if (!(query != "" && query != null)) return [3, 6];
-                        this.app.log.Debug("MET Norway API query: " + query);
+                        query = this.GetUrl(loc);
+                        if (!(query != "" && query != null)) return [3, 5];
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
-                        return [4, this.app.LoadAsync(query)];
+                        return [4, this.app.LoadJsonAsync(query)];
                     case 2:
                         json = _a.sent();
                         return [3, 4];
@@ -94,17 +93,8 @@ var MetNorway = (function () {
                             this.app.log.Error("MET Norway: Empty response from API");
                             return [2, null];
                         }
-                        try {
-                            json = JSON.parse(json);
-                        }
-                        catch (e) {
-                            this.app.HandleError({ type: "soft", detail: "unusal payload", service: "met-norway" });
-                            this.app.log.Error("MET Norway: Payload is not JSON, aborting.");
-                            return [2, null];
-                        }
-                        return [4, this.ParseWeather(json)];
-                    case 5: return [2, _a.sent()];
-                    case 6: return [2, null];
+                        return [2, this.ParseWeather(json)];
+                    case 5: return [2, null];
                 }
             });
         });
@@ -124,7 +114,7 @@ var MetNorway = (function () {
         }
         if (startIndex != -1) {
             this.app.log.Debug("Removing outdated weather information...");
-            global.log(json.properties.timeseries.splice(0, startIndex + 1));
+            json.properties.timeseries.splice(0, startIndex + 1);
         }
         return json;
     };
@@ -165,7 +155,7 @@ var MetNorway = (function () {
                 hourlyForecasts.push({
                     date: new Date(element.time),
                     temp: CelsiusToKelvin(element.data.instant.details.air_temperature),
-                    precipation: {
+                    precipitation: {
                         type: "rain",
                         volume: element.data.next_1_hours.details.precipitation_amount
                     },
@@ -272,16 +262,12 @@ var MetNorway = (function () {
         }
         return conditions[result].name;
     };
-    MetNorway.prototype.GetUrl = function () {
-        var location = this.app.config._location.replace(" ", "");
+    MetNorway.prototype.GetUrl = function (loc) {
         var url = this.baseUrl + "lat=";
-        if (!isCoordinate(location))
-            return "";
-        var latLon = location.split(",");
-        url += (latLon[0] + "&lon=" + latLon[1]);
+        url += (loc.lat + "&lon=" + loc.lon);
         return url;
     };
-    MetNorway.prototype.DeconstructCondtition = function (icon) {
+    MetNorway.prototype.DeconstructCondition = function (icon) {
         var condition = icon.split("_");
         return {
             timeOfDay: condition[1],
@@ -290,7 +276,7 @@ var MetNorway = (function () {
     };
     MetNorway.prototype.ResolveCondition = function (icon, isNight) {
         if (isNight === void 0) { isNight = false; }
-        var weather = this.DeconstructCondtition(icon);
+        var weather = this.DeconstructCondition(icon);
         var iconType = this.app.config.IconType();
         switch (weather.condition) {
             case "clearsky":
@@ -429,7 +415,7 @@ var MetNorway = (function () {
             case "lightrainshowersandthunder":
                 return {
                     customIcon: (isNight) ? "night-alt-rain-mix-storm-symbolic" : "day-rain-mix-storm-symbolic",
-                    main: _("Ligth Rain"),
+                    main: _("Light Rain"),
                     description: _("Light rain showers and thunder"),
                     icon: weatherIconSafely(["weather-showers-scattered", "weather-rain", "weather-severe-alert"], iconType)
                 };

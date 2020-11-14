@@ -9,6 +9,13 @@ declare class global {
 	static unset_cursor(): void;
 }
 
+declare namespace imports {
+   export const byteArray: ByteArray;
+   class ByteArray {
+       toString(array: any): string;
+   }
+}
+
 declare namespace imports.cairo {
     export class LinearGradient {
         constructor(margin: number, gradientOffset: number, width: number, height: number);
@@ -16,10 +23,22 @@ declare namespace imports.cairo {
     }
 }
 
+declare namespace imports.ui.themeManager {
+    /**
+     * Wrapper on Gio.Settings, emits "theme-set" event
+     * when theme is changed
+     */
+    export class ThemeManager {
+
+    }
+}
+
 declare namespace imports.ui.main {
     export class KeybindingManager {
         addHotKey(UUID: string, keybinding: any, binding: void): void;
     }
+
+    export const themeManager: themeManager.ThemeManager;
 
     export const messageTray: any;
 
@@ -337,6 +356,48 @@ declare namespace imports.gi.Soup {
         send_async(msg: Message, cancellable: any, callback: Gio.AsyncReadyCallback): any;
         send_finish(result: Gio.AsyncResult, user_data ? : Object): any;
         request(uri_string: string): SoupRequest;
+        /**
+         * Cancels all pending requests in this and closes all idle
+         *   persistent connections.
+         */
+        abort(): void;
+        /**
+         * The timeout (in seconds) for socket I/O operations
+            (including connecting to a server, and waiting for a reply
+            to an HTTP request).
+
+            Although you can change this property at any time, it will
+            only affect newly-created connections, not currently-open
+            ones. You can call Soup.Session.abort after setting this
+            if you want to ensure that all future connections will have
+            this timeout value.
+
+            Note that the default value of 60 seconds only applies to
+            plain Soup.Sessions. If you are using Soup.SessionAsync or
+            Soup.SessionSync, the default value is 0 (meaning socket I/O
+            will not time out).
+
+            Not to be confused with Soup.Session.idle-timeout (which is
+            the length of time that idle persistent connections will be
+            kept open).
+        */
+        timeout: number;
+        /**
+         * Connection lifetime (in seconds) when idle. Any connection
+            left idle longer than this will be closed.
+
+            Although you can change this property at any time, it will
+            only affect newly-created connections, not currently-open
+            ones. You can call Soup.Session.abort after setting this
+            if you want to ensure that all future connections will have
+            this timeout value.
+
+            Note that the default value of 60 seconds only applies to
+            plain Soup.Sessions. If you are using Soup.SessionAsync or
+            Soup.SessionSync, the default value is 0 (meaning idle
+            connections will never time out).
+        */
+        idle_timeout: number;
     }
     export class Session {
         add_feature(session: SessionAsync, proxyResolver: ProxyResolverDefault): void;
@@ -378,7 +439,9 @@ declare namespace imports.gi.Clutter {
         hide(): void;
         show(): void;
         get_preferred_height(for_width: number): number[];
-		get_preferred_width(for_height: number): number[]; 
+        get_preferred_width(for_height: number): number[]; 
+        get_width(): number;
+        get_height(): number;
 		set_clip_to_allocation(clip_set: boolean): void; 
         destroy_all_children(): void;
         remove_all_children(): void;
@@ -389,12 +452,22 @@ declare namespace imports.gi.Clutter {
         remove_clip(): void;
         set_size(width: number, height: number): void;
         opacity: number;
+        allocation: Clutter.ActorBox;
 		//clip_to_allocation: boolean;
 		set_x_align(x_align: ActorAlign): void;
 		set_y_align(y_align: ActorAlign): void;
 		set_x_expand(expand: boolean): void;
 		set_y_expand(expand: boolean): void;
-	}
+    }
+    
+    export class ActorBox {
+        get_width(): number;
+        get_height(): number;
+        /** In pixels */
+        get_area(): number;
+        /** x and y */
+        get_origin(): number[];
+    }
 
 	export class Text extends Actor {
 		set_line_wrap(line_wrap: boolean): void; 
@@ -429,12 +502,14 @@ declare namespace imports.gi.St {
         get_style_class_name(): string;
         remove_style_class_name(style_class: string): void;
         get_style(): string;
+        set_style(style: string): string;
         get_theme(): imports.gi.St.Theme;
         get_theme_node(): ThemeNode;
         show(): void;
 		hide(): void;
 		style: string;
     }
+
     export class BoxLayout extends Widget {
         constructor(options ? : any)
         /** Deprecated, use add_child instead */
@@ -478,11 +553,16 @@ declare namespace imports.gi.St {
     }
 
     export class ScrollView  extends Widget {
-        set_row_size(row_size:number): void;
+		set_row_size(row_size:number): void;
+		get_row_size(): number;
         set_policy(hscroll: any, vscroll: any): void;
         get_vscroll_bar(): ScrollBar;
         get_hscroll_bar(): ScrollBar;
-        overlay_scrollbars: boolean; 
+		overlay_scrollbars: boolean; 
+		"hscrollbar-policy": Gtk.PolicyType;
+		"vscrollbar-policy": Gtk.PolicyType;
+		"hscrollbar-visible": boolean;
+		"vscrollbar-visible": boolean;
         clip_to_allocation: boolean;
         constructor(options ? : any);
 	}
@@ -530,16 +610,16 @@ declare namespace imports.gi.St {
         get_icon_colors()
         get_icon_style()
         get_length(property_name)
-        get_letter_spacing()
-        get_margin(side)
-        get_max_height()
+        get_letter_spacing()*/
+        get_margin(side: Side): number;
+        /*get_max_height()
         get_max_width()
         get_min_height()
         get_min_width()
         get_outline_color()
-        get_outline_width()
-        get_padding(side)
-        get_paint_box(allocation)
+        get_outline_width()*/
+        get_padding(side: Side): number;
+        /*get_paint_box(allocation)
         get_parent()
         get_pseudo_classes()
         get_shadow(property_name)
@@ -565,9 +645,12 @@ declare namespace imports.gi.St {
     }
 
     export enum Side {
-        LEFT,
-        RIGHT
-    }
+		TOP,
+		RIGHT,
+		BOTTOM,
+		LEFT
+	}
+	
     export enum IconType {
         SYMBOLIC,
         FULLCOLOR
@@ -594,6 +677,7 @@ declare namespace imports.gi.St {
         green: number;
         blue: number;
         alpha: number;
+        to_string(): string;
     }
 
     export interface Shadow {
@@ -615,6 +699,7 @@ declare namespace imports.misc.config {
 declare namespace imports.misc.util {
     export function spawnCommandLine(CMDSettings: string): void;
     export function spawn_async(cmd: string[], callback: Function): any;
+    export function trySpawnCommandLine(CMDSettings: string): void;
 }
 
 declare namespace imports.gettext {

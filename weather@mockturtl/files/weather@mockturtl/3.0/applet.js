@@ -2,7 +2,7 @@ var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
             ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
         return extendStatics(d, b);
     };
     return function (d, b) {
@@ -71,10 +71,12 @@ var addTween = imports.ui.tweener.addTween;
 var _e = imports.ui.applet, TextIconApplet = _e.TextIconApplet, AllowedLayout = _e.AllowedLayout, AppletPopupMenu = _e.AppletPopupMenu, MenuItem = _e.MenuItem;
 var _f = imports.ui.popupMenu, PopupMenuManager = _f.PopupMenuManager, PopupSeparatorMenuItem = _f.PopupSeparatorMenuItem;
 var _g = imports.ui.settings, AppletSettings = _g.AppletSettings, BindingDirection = _g.BindingDirection;
-var _h = imports.misc.util, spawnCommandLine = _h.spawnCommandLine, spawn_async = _h.spawn_async;
+var _h = imports.misc.util, spawnCommandLine = _h.spawnCommandLine, spawn_async = _h.spawn_async, trySpawnCommandLine = _h.trySpawnCommandLine;
 var _j = imports.ui.messageTray, SystemNotificationSource = _j.SystemNotificationSource, Notification = _j.Notification;
 var SignalManager = imports.misc.signalManager.SignalManager;
-var messageTray = imports.ui.main.messageTray;
+var _k = imports.ui.main, messageTray = _k.messageTray, themeManager = _k.themeManager;
+var Gio = imports.gi.Gio;
+var GLib = imports.gi.GLib;
 var utils = importModule("utils");
 var GetDayName = utils.GetDayName;
 var GetHoursMinutes = utils.GetHoursMinutes;
@@ -87,6 +89,12 @@ var nonempty = utils.nonempty;
 var AwareDateString = utils.AwareDateString;
 var get = utils.get;
 var delay = utils.delay;
+var isCoordinate = utils.isCoordinate;
+var setTimeout = utils.setTimeout;
+var clearTimeout = utils.clearTimeout;
+var MillimeterToUserUnits = utils.MillimeterToUserUnits;
+var shadeHexColor = utils.shadeHexColor;
+var MetreToUserUnits = utils.MetreToUserUnits;
 if (typeof Promise != "function") {
     var promisePoly = importModule("promise-polyfill");
     var finallyConstructor = promisePoly.finallyConstructor;
@@ -127,7 +135,9 @@ var DATA_SERVICE = {
     MET_NORWAY: "MetNorway",
     WEATHERBIT: "Weatherbit",
     YAHOO: "Yahoo",
-    CLIMACELL: "Climacell"
+    CLIMACELL: "Climacell",
+    MET_UK: "Met Office UK",
+    US_WEATHER: "US Weather"
 };
 imports.gettext.bindtextdomain(UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
 function _(str) {
@@ -145,12 +155,14 @@ var WeatherApplet = (function (_super) {
     function WeatherApplet(metadata, orientation, panelHeight, instanceId) {
         var _this = _super.call(this, orientation, panelHeight, instanceId) || this;
         _this.weather = null;
-        _this.forecasts = [];
-        _this.hourlyForecasts = [];
         _this._httpSession = new SessionAsync();
         _this.appletDir = imports.ui.appletManager.appletMeta[UUID].path;
         _this.currentLocale = null;
+        _this.lock = false;
+        _this.refreshTriggeredWhileLocked = false;
         _this.locProvider = new ipApi.IpApi(_this);
+        _this.geoLocationService = new GeoLocation(_this);
+        _this.locationStore = null;
         _this.encounteredError = false;
         _this.errMsg = {
             unknown: _("Error"),
@@ -165,16 +177,19 @@ var WeatherApplet = (function (_super) {
             "no key": _("No Api Key"),
             "no location": _("No Location"),
             "no network response": _("Service Error"),
-            "no reponse body": _("Service Error"),
-            "no respone data": _("Service Error"),
-            "unusal payload": _("Service Error"),
-            "import error": _("Missing Packages")
+            "no response body": _("Service Error"),
+            "no response data": _("Service Error"),
+            "unusual payload": _("Service Error"),
+            "import error": _("Missing Packages"),
+            "location not covered": _("Location not covered"),
         };
         _this.log = new Log(instanceId);
         _this.currentLocale = _this.constructJsLocale(get_language_names()[0]);
         _this.log.Debug("System locale is " + _this.currentLocale);
         _this.log.Debug("Appletdir is: " + _this.appletDir);
         _this._httpSession.user_agent = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:37.0) Gecko/20100101 Firefox/37.0";
+        _this._httpSession.timeout = 10;
+        _this._httpSession.idle_timeout = 10;
         _this.msgSource = new SystemNotificationSource(_("Weather Applet"));
         messageTray.add(_this.msgSource);
         Session.prototype.add_feature.call(_this._httpSession, new ProxyResolverDefault());
@@ -186,6 +201,8 @@ var WeatherApplet = (function (_super) {
         _this.ui = new UI(_this, orientation);
         _this.ui.rebuild(_this.config);
         _this.loop = new WeatherLoop(_this, instanceId);
+        GLib.getenv('XDG_CONFIG_HOME');
+        _this.locationStore = new LocationStore(_this, Lang.bind(_this, _this.onLocationStorageChanged));
         _this.orientation = orientation;
         try {
             _this.setAllowedLayout(AllowedLayout.BOTH);
@@ -200,6 +217,17 @@ var WeatherApplet = (function (_super) {
         this.set_applet_label(_("..."));
         this.set_applet_tooltip(_("Click to open"));
     };
+    WeatherApplet.prototype.Locked = function () {
+        return this.lock;
+    };
+    WeatherApplet.prototype.Unlock = function () {
+        this.lock = false;
+        if (this.refreshTriggeredWhileLocked) {
+            this.log.Print("Refreshing triggered by config change while refreshing, starting now...");
+            this.refreshTriggeredWhileLocked = false;
+            this.refreshAndRebuild();
+        }
+    };
     WeatherApplet.prototype.AddRefreshButton = function () {
         var itemLabel = _("Refresh");
         var refreshMenuItem = new MenuItem(itemLabel, REFRESH_ICON, Lang.bind(this, function () {
@@ -207,12 +235,17 @@ var WeatherApplet = (function (_super) {
         }));
         this._applet_context_menu.addMenuItem(refreshMenuItem);
     };
-    WeatherApplet.prototype.refreshAndRebuild = function () {
+    WeatherApplet.prototype.refreshAndRebuild = function (loc) {
         this.loop.Resume();
-        this.refreshWeather(true);
+        if (this.Locked()) {
+            this.refreshTriggeredWhileLocked = true;
+            return;
+        }
+        this.refreshWeather(true, loc);
     };
     ;
-    WeatherApplet.prototype.LoadJsonAsync = function (query) {
+    WeatherApplet.prototype.LoadJsonAsync = function (query, errorCallback, triggerUIError) {
+        if (triggerUIError === void 0) { triggerUIError = true; }
         return __awaiter(this, void 0, void 0, function () {
             var json;
             var _this = this;
@@ -220,17 +253,35 @@ var WeatherApplet = (function (_super) {
                 switch (_a.label) {
                     case 0: return [4, new Promise(function (resolve, reject) {
                             var message = Message.new('GET', query);
+                            _this.log.Debug("URL called: " + query);
                             _this._httpSession.queue_message(message, function (session, message) {
-                                if (!message)
-                                    reject({ code: 0, message: "no network response", reason_phrase: "no network response" });
-                                if (message.status_code > 300 || message.status_code < 200)
-                                    reject({ code: message.status_code, message: "bad status code", reason_phrase: message.reason_phrase });
-                                if (!message.response_body)
-                                    reject({ code: message.status_code, message: "no reponse body", reason_phrase: message.reason_phrase });
-                                if (!message.response_body.data)
-                                    reject({ code: message.status_code, message: "no respone data", reason_phrase: message.reason_phrase });
+                                var error = (errorCallback != null) ? errorCallback(message) : null;
+                                if (error != null) {
+                                    _this.log.Error("there is an error, " + JSON.stringify(error, null, 2));
+                                    _this.HandleError(error);
+                                    reject({ code: -1, message: "bad api response", data: null, reason_phrase: "" });
+                                    return;
+                                }
+                                if (!message) {
+                                    reject({ code: 0, message: "no network response", reason_phrase: "no network response", data: get(["response_body", "data"], message) });
+                                    return;
+                                }
+                                if (message.status_code >= 400 && message.status_code < 500) {
+                                    reject({ code: message.status_code, message: "bad status code", reason_phrase: message.reason_phrase, data: get(["response_body", "data"], message) });
+                                    if (triggerUIError == true)
+                                        _this.HandleError({ detail: "bad api response", type: "hard", message: _("API returned status code between 400 and 500") });
+                                    return;
+                                }
+                                if (message.status_code > 300 || message.status_code < 200) {
+                                    reject({ code: message.status_code, message: "bad status code", reason_phrase: message.reason_phrase, data: get(["response_body", "data"], message) });
+                                    return;
+                                }
+                                if (get(["response_body", "data"], message) == null) {
+                                    reject({ code: message.status_code, message: "no response data", reason_phrase: message.reason_phrase, data: get(["response_body", "data"], message) });
+                                    return;
+                                }
                                 try {
-                                    _this.log.Debug("API full response: " + message.response_body.data.toString());
+                                    _this.log.Debug2("API full response: " + message.response_body.data.toString());
                                     var payload = JSON.parse(message.response_body.data);
                                     resolve(payload);
                                 }
@@ -274,15 +325,23 @@ var WeatherApplet = (function (_super) {
                     case 0: return [4, new Promise(function (resolve, reject) {
                             var message = Message.new('GET', query);
                             _this._httpSession.queue_message(message, function (session, message) {
-                                if (!message)
+                                if (!message) {
                                     reject({ code: 0, message: "no network response", reason_phrase: "no network response" });
-                                if (message.status_code > 300 || message.status_code < 200)
+                                    return;
+                                }
+                                if (message.status_code > 300 || message.status_code < 200) {
                                     reject({ code: message.status_code, message: "bad status code", reason_phrase: message.reason_phrase });
-                                if (!message.response_body)
-                                    reject({ code: message.status_code, message: "no reponse body", reason_phrase: message.reason_phrase });
-                                if (!message.response_body.data)
-                                    reject({ code: message.status_code, message: "no respone data", reason_phrase: message.reason_phrase });
-                                _this.log.Debug("API full response: " + message.response_body.data.toString());
+                                    return;
+                                }
+                                if (!message.response_body) {
+                                    reject({ code: message.status_code, message: "no response body", reason_phrase: message.reason_phrase });
+                                    return;
+                                }
+                                if (!message.response_body.data) {
+                                    reject({ code: message.status_code, message: "no response data", reason_phrase: message.reason_phrase });
+                                    return;
+                                }
+                                _this.log.Debug2("API full response: " + message.response_body.data.toString());
                                 var payload = message.response_body.data;
                                 resolve(payload);
                             });
@@ -296,7 +355,7 @@ var WeatherApplet = (function (_super) {
     };
     ;
     WeatherApplet.prototype.sendNotification = function (title, message, transient) {
-        var notification = new Notification(this.msgSource, "WeatherApplet: " + title, message);
+        var notification = new Notification(this.msgSource, _("Weather Applet") + ": " + title, message);
         if (transient)
             notification.setTransient((!transient) ? false : true);
         this.msgSource.notify(notification);
@@ -304,12 +363,12 @@ var WeatherApplet = (function (_super) {
     WeatherApplet.prototype.SetAppletTooltip = function (msg) {
         this.set_applet_tooltip(msg);
     };
-    WeatherApplet.prototype.SetAppletIcon = function (iconname) {
+    WeatherApplet.prototype.SetAppletIcon = function (iconName, customIcon) {
         this.config.IconType() == IconType.SYMBOLIC ?
-            this.set_applet_icon_symbolic_name(iconname) :
-            this.set_applet_icon_name(iconname);
+            this.set_applet_icon_symbolic_name(iconName) :
+            this.set_applet_icon_name(iconName);
         if (this.config._useCustomAppletIcons)
-            this.SetCustomIcon(this.weather.condition.customIcon);
+            this.SetCustomIcon(customIcon);
     };
     WeatherApplet.prototype.SetCustomIcon = function (iconName) {
         this.set_applet_icon_symbolic_name(iconName);
@@ -329,6 +388,54 @@ var WeatherApplet = (function (_super) {
                 return [2];
             });
         });
+    };
+    WeatherApplet.prototype.submitIssue = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var command;
+            return __generator(this, function (_a) {
+                command = "xdg-open ";
+                spawnCommandLine(command + "https://github.com/linuxmint/cinnamon-spices-applets/issues/new");
+                return [2];
+            });
+        });
+    };
+    WeatherApplet.prototype.saveCurrentLocation = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                if (this.config.currentLocation.locationSource == "ip-api") {
+                    this.sendNotification(_("Error") + " - " + _("Location Store"), _("You can't save a location obtained automatically, sorry"));
+                }
+                this.locationStore.SaveCurrentLocation(this.config.currentLocation);
+                return [2];
+            });
+        });
+    };
+    WeatherApplet.prototype.deleteCurrentLocation = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                this.locationStore.DeleteCurrentLocation(this.config.currentLocation);
+                return [2];
+            });
+        });
+    };
+    WeatherApplet.prototype.onLocationStorageChanged = function (itemCount) {
+        this.log.Debug("On location storage callback called, number of locations now " + itemCount.toString());
+        if (this.locationStore.ShouldShowLocationSelectors(this.config.currentLocation))
+            this.ui.ShowLocationSelectors();
+        else
+            this.ui.HideLocationSelectors();
+    };
+    WeatherApplet.prototype.NextLocationClicked = function () {
+        var nextLoc = this.locationStore.NextLocation(this.config.currentLocation);
+        if (nextLoc == null)
+            return;
+        this.refreshAndRebuild(nextLoc);
+    };
+    WeatherApplet.prototype.PreviousLocationClicked = function () {
+        var previousLoc = this.locationStore.PreviousLocation(this.config.currentLocation);
+        if (previousLoc == null)
+            return;
+        this.refreshAndRebuild(previousLoc);
     };
     WeatherApplet.prototype.on_orientation_changed = function (orientation) {
         this.orientation = orientation;
@@ -373,44 +480,50 @@ var WeatherApplet = (function (_super) {
             case DATA_SERVICE.DARK_SKY:
                 if (!darkSky)
                     var darkSky = importModule('darkSky');
-                if (currentName != "DarkSky" || force) {
+                if (currentName != "DarkSky" || force)
                     this.provider = new darkSky.DarkSky(this);
-                }
                 break;
             case DATA_SERVICE.OPEN_WEATHER_MAP:
                 if (!openWeatherMap)
                     var openWeatherMap = importModule("openWeatherMap");
-                if (currentName != "OpenWeatherMap" || force) {
+                if (currentName != "OpenWeatherMap" || force)
                     this.provider = new openWeatherMap.OpenWeatherMap(this);
-                }
                 break;
             case DATA_SERVICE.MET_NORWAY:
                 if (!metNorway)
                     var metNorway = importModule("met_norway");
-                if (currentName != "MetNorway" || force) {
+                if (currentName != "MetNorway" || force)
                     this.provider = new metNorway.MetNorway(this);
-                }
                 break;
             case DATA_SERVICE.WEATHERBIT:
                 if (!weatherbit)
                     var weatherbit = importModule("weatherbit");
-                if (currentName != "Weatherbit" || force) {
+                if (currentName != "Weatherbit" || force)
                     this.provider = new weatherbit.Weatherbit(this);
-                }
                 break;
             case DATA_SERVICE.YAHOO:
                 if (!yahoo)
                     var yahoo = importModule("yahoo");
-                if (currentName != "Yahoo" || force) {
+                if (currentName != "Yahoo" || force)
                     this.provider = new yahoo.Yahoo(this);
-                }
                 break;
             case DATA_SERVICE.CLIMACELL:
                 if (!climacell)
                     var climacell = importModule("climacell");
-                if (currentName != "Climacell" || force) {
+                if (currentName != "Climacell" || force)
                     this.provider = new climacell.Climacell(this);
-                }
+                break;
+            case DATA_SERVICE.MET_UK:
+                if (!met_uk)
+                    var met_uk = importModule("met_uk");
+                if (currentName != "Met Office UK" || force)
+                    this.provider = new met_uk.MetUk(this);
+                break;
+            case DATA_SERVICE.US_WEATHER:
+                if (!us_weather)
+                    var us_weather = importModule("us_weather");
+                if (currentName != "US Weather" || force)
+                    this.provider = new us_weather.USWeather(this);
                 break;
             default:
                 return null;
@@ -427,176 +540,101 @@ var WeatherApplet = (function (_super) {
         }
         return jsLocale;
     };
-    WeatherApplet.prototype.refreshWeather = function (rebuild) {
+    WeatherApplet.prototype.refreshWeather = function (rebuild, location) {
         return __awaiter(this, void 0, void 0, function () {
             var locationData, e_1, weatherInfo, e_2;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
+                        if (this.lock) {
+                            this.log.Print("Refreshing in progress, refresh skipped.");
+                            return [2, "locked"];
+                        }
+                        this.lock = true;
                         this.encounteredError = false;
                         locationData = null;
+                        if (!(location == null)) return [3, 5];
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
-                        return [4, this.ValidateLocation()];
+                        return [4, this.config.EnsureLocation()];
                     case 2:
                         locationData = _a.sent();
                         return [3, 4];
                     case 3:
                         e_1 = _a.sent();
                         this.log.Error(e_1);
+                        this.Unlock();
                         return [2, "error"];
-                    case 4:
-                        _a.trys.push([4, 6, , 7]);
-                        this.EnsureProvider(rebuild);
-                        return [4, this.provider.GetWeather()];
+                    case 4: return [3, 6];
                     case 5:
-                        weatherInfo = _a.sent();
-                        if (!weatherInfo) {
-                            this.log.Error("Unable to obtain Weather Information");
+                        locationData = location;
+                        this.config.InjectLocationToConfig(location, true);
+                        _a.label = 6;
+                    case 6:
+                        if (locationData == null) {
+                            this.Unlock();
                             return [2, "failure"];
                         }
-                        this.wipeData();
-                        this.ProcessWeatherData(weatherInfo, locationData);
+                        _a.label = 7;
+                    case 7:
+                        _a.trys.push([7, 9, , 10]);
+                        this.EnsureProvider();
+                        this.weather = null;
+                        return [4, this.provider.GetWeather({ lat: locationData.lat, lon: locationData.lon, text: locationData.lat.toString() + "," + locationData.lon.toString() })];
+                    case 8:
+                        weatherInfo = _a.sent();
+                        if (weatherInfo == null) {
+                            this.log.Error("Unable to obtain Weather Information");
+                            this.HandleError({
+                                type: "hard",
+                                detail: "unknown",
+                                message: _("Could not get weather information"),
+                            });
+                            this.Unlock();
+                            return [2, "failure"];
+                        }
+                        weatherInfo = this.FillInWeatherData(weatherInfo, locationData);
+                        this.weather = weatherInfo;
                         if (rebuild)
                             this.ui.rebuild(this.config);
-                        if (!this.ui.displayWeather(this.weather, this.config)
-                            || !this.ui.displayForecast(this.weather, this.forecasts, this.config)
-                            || !this.ui.displayHourlyForecast(this.hourlyForecasts, this.config)
-                            || !this.ui.displayBar(this.weather, this.provider, this.config))
+                        if (!this.ui.displayWeather(weatherInfo, this.config)
+                            || !this.ui.displayForecast(weatherInfo, this.config)
+                            || !this.ui.displayHourlyForecast(weatherInfo.hourlyForecasts, this.config, weatherInfo.location.timeZone)
+                            || !this.ui.displayBar(weatherInfo, this.provider, this.config)) {
+                            this.Unlock();
                             return [2, "failure"];
+                        }
                         this.log.Print("Weather Information refreshed");
                         this.loop.ResetErrorCount();
+                        this.Unlock();
                         return [2, "success"];
-                    case 6:
+                    case 9:
                         e_2 = _a.sent();
                         this.log.Error("Generic Error while refreshing Weather info: " + e_2);
                         this.HandleError({ type: "hard", detail: "unknown", message: _("Unexpected Error While Refreshing Weather, please see log in Looking Glass") });
+                        this.Unlock();
                         return [2, "failure"];
-                    case 7: return [2];
+                    case 10: return [2];
                 }
             });
         });
     };
     ;
-    WeatherApplet.prototype.ValidateLocation = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            var location, loc, loc;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        location = null;
-                        if (!!this.config._manualLocation) return [3, 2];
-                        return [4, this.locProvider.GetLocation()];
-                    case 1:
-                        location = _a.sent();
-                        if (!location)
-                            throw new Error(null);
-                        loc = location.lat + "," + location.lon;
-                        this.config.SetLocation(loc);
-                        return [2, location];
-                    case 2:
-                        loc = this.config._location.replace(" ", "");
-                        if (loc == undefined || loc == "") {
-                            this.HandleError({
-                                type: "hard",
-                                detail: "no location",
-                                userError: true,
-                                message: _("Make sure you entered a location or use Automatic location instead")
-                            });
-                            throw new Error("No location given when setting is on Manual Location");
-                        }
-                        _a.label = 3;
-                    case 3: return [2, null];
-                }
-            });
-        });
+    WeatherApplet.prototype.FillInWeatherData = function (weatherInfo, locationData) {
+        if (!weatherInfo.location.city)
+            weatherInfo.location.city = locationData.city;
+        if (!weatherInfo.location.country)
+            weatherInfo.location.country = locationData.country;
+        if (!weatherInfo.location.timeZone)
+            weatherInfo.location.timeZone = locationData.timeZone;
+        if (weatherInfo.coord.lat == null)
+            weatherInfo.coord.lat = locationData.lat;
+        if (weatherInfo.coord.lon == null)
+            weatherInfo.coord.lon = locationData.lon;
+        weatherInfo.hourlyForecasts = (!weatherInfo.hourlyForecasts) ? [] : weatherInfo.hourlyForecasts;
+        return weatherInfo;
     };
-    WeatherApplet.prototype.ProcessWeatherData = function (weatherInfo, locationData) {
-        if (!!locationData) {
-            this.weather.location.city = locationData.city;
-            this.weather.location.country = locationData.country;
-            this.weather.location.timeZone = locationData.timeZone;
-            this.weather.coord.lat = locationData.lat;
-            this.weather.coord.lon = locationData.lon;
-        }
-        this.weather.condition = weatherInfo.condition;
-        this.weather.wind = weatherInfo.wind;
-        this.weather.temperature = weatherInfo.temperature,
-            this.weather.date = weatherInfo.date;
-        this.weather.sunrise = weatherInfo.sunrise;
-        this.weather.sunset = weatherInfo.sunset;
-        this.weather.coord = weatherInfo.coord;
-        this.weather.humidity = weatherInfo.humidity;
-        this.weather.pressure = weatherInfo.pressure;
-        if (!!weatherInfo.location.city)
-            this.weather.location.city = weatherInfo.location.city;
-        if (!!weatherInfo.location.country)
-            this.weather.location.country = weatherInfo.location.country;
-        if (!!weatherInfo.location.timeZone)
-            this.weather.location.timeZone = weatherInfo.location.timeZone;
-        if (!!weatherInfo.location.url)
-            this.weather.location.url = weatherInfo.location.url;
-        if (!!weatherInfo.extra_field)
-            this.weather.extra_field = weatherInfo.extra_field;
-        this.forecasts = weatherInfo.forecasts;
-        this.hourlyForecasts = (!weatherInfo.hourlyForecasts) ? [] : weatherInfo.hourlyForecasts;
-    };
-    WeatherApplet.prototype.wipeData = function () {
-        if (this.weather == null) {
-            this.weather = {
-                date: null,
-                location: {
-                    city: null,
-                    country: null,
-                    tzOffset: null,
-                    timeZone: null,
-                    url: null
-                },
-                coord: {
-                    lat: null,
-                    lon: null,
-                },
-                sunrise: null,
-                sunset: null,
-                wind: {
-                    speed: null,
-                    degree: null,
-                },
-                temperature: null,
-                pressure: null,
-                humidity: null,
-                condition: {
-                    main: null,
-                    description: null,
-                    icon: null,
-                    customIcon: null
-                },
-            };
-        }
-        this.weather.date = null;
-        this.weather.location.city = null;
-        this.weather.location.country = null;
-        this.weather.location.timeZone = null;
-        this.weather.location.tzOffset = null;
-        this.weather.location.url = null;
-        this.weather.coord.lat = null;
-        this.weather.coord.lon = null;
-        this.weather.sunrise = null;
-        this.weather.sunset = null;
-        this.weather.wind.degree = null;
-        this.weather.wind.speed = null;
-        this.weather.temperature = null;
-        this.weather.pressure = null;
-        this.weather.humidity = null;
-        this.weather.condition.main = null;
-        this.weather.condition.description = null;
-        this.weather.condition.icon = null;
-        this.weather.extra_field = null;
-        this.forecasts = [];
-        this.hourlyForecasts = [];
-    };
-    ;
     WeatherApplet.prototype.DisplayError = function (title, msg) {
         this.set_applet_label(title);
         this.set_applet_tooltip("Click to open");
@@ -605,10 +643,14 @@ var WeatherApplet = (function (_super) {
     };
     ;
     WeatherApplet.prototype.HandleError = function (error) {
+        if (error == null)
+            return;
         if (this.encounteredError == true)
             return;
         this.encounteredError = true;
+        this.log.Debug("User facing Error received, error: " + JSON.stringify(error, null, 2));
         if (error.type == "hard") {
+            this.log.Debug("Displaying hard error");
             this.ui.rebuild(this.config);
             this.DisplayError(this.errMsg[error.detail], (!error.message) ? "" : error.message);
         }
@@ -626,7 +668,7 @@ var WeatherApplet = (function (_super) {
         var nextRefresh = this.loop.GetSecondsUntilNextRefresh();
         this.log.Error("Retrying in the next " + nextRefresh.toString() + " seconds...");
     };
-    WeatherApplet.prototype.HandleHTTPError = function (service, error, ctx, callback) {
+    WeatherApplet.prototype.HandleHTTPError = function (service, error, ctx, override) {
         var uiError = {
             type: "soft",
             detail: "unknown",
@@ -642,8 +684,8 @@ var WeatherApplet = (function (_super) {
             uiError.code = error.code;
             if (error.message == "bad api response - non json")
                 uiError.type = "hard";
-            if (!!callback && callback instanceof Function) {
-                uiError = callback(error, uiError);
+            if (!!override && override instanceof Function) {
+                uiError = override(error, uiError);
             }
         }
         ctx.HandleError(uiError);
@@ -653,6 +695,7 @@ var WeatherApplet = (function (_super) {
 var Log = (function () {
     function Log(_instanceId) {
         this.debug = false;
+        this.level = 1;
         this.ID = _instanceId;
         this.appletDir = imports.ui.appletManager.appletMeta[UUID].path;
         this.debug = this.DEBUG();
@@ -686,6 +729,11 @@ var Log = (function () {
             this.Print(message);
         }
     };
+    Log.prototype.Debug2 = function (message) {
+        if (this.debug && this.level > 1) {
+            this.Print(message);
+        }
+    };
     Log.prototype.GetErrorLine = function () {
         var arr = (new Error).stack.split("\n").slice(-2)[0].split('/').slice(-1)[0];
         return arr;
@@ -695,7 +743,7 @@ var Log = (function () {
 var UI = (function () {
     function UI(app, orientation) {
         this.hourlyToggled = false;
-        this.hourlyNeverOpened = true;
+        this.lightTheme = false;
         this.app = app;
         this.menuManager = new PopupMenuManager(this.app);
         this.menu = new AppletPopupMenu(this.app, orientation);
@@ -703,8 +751,36 @@ var UI = (function () {
         this.app.log.Debug("Popup Menu applied classes are: " + this.menu.box.get_style_class_name());
         this.menuManager.addMenu(this.menu);
         this.menuManager._signals.connect(this.menu, "open-state-changed", this.PopupMenuToggled, this);
+        this.signals = new SignalManager();
+        this.lightTheme = this.IsLightTheme();
         this.BuildPopupMenu();
+        this.signals.connect(themeManager, 'theme-set', this.OnThemeChanged, this);
     }
+    UI.prototype.OnThemeChanged = function () {
+        this.HideHourlyWeather();
+        var newThemeIsLight = this.IsLightTheme();
+        if (newThemeIsLight != this.lightTheme) {
+            this.lightTheme = newThemeIsLight;
+        }
+        this.app.refreshAndRebuild();
+    };
+    UI.prototype.IsLightTheme = function () {
+        var color = this.menu.actor.get_theme_node().get_background_color();
+        var luminance = (2126 * color.red + 7152 * color.green + 722 * color.blue) / 10000 / 255;
+        this.app.log.Debug("Theme is Light: " + (luminance > 0.5));
+        return (luminance > 0.5);
+    };
+    UI.prototype.ForegroundColor = function () {
+        var hex = this.menu.actor.get_theme_node().get_foreground_color().to_string().substring(0, 7);
+        return hex;
+    };
+    UI.prototype.GetTextColorStyle = function () {
+        var hexColor = null;
+        if (this.lightTheme) {
+            hexColor = shadeHexColor(this.ForegroundColor(), -0.40);
+        }
+        return "color: " + hexColor;
+    };
     UI.prototype.PopupMenuToggled = function (caller, data) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
@@ -768,9 +844,10 @@ var UI = (function () {
         this.rebuildHourlyWeatherUi(config);
         this.rebuildFutureWeatherUi(config);
         this.rebuildBar(config);
-        this.hourlyNeverOpened = true;
     };
     UI.prototype.UpdateIconType = function (iconType) {
+        if (iconType == IconType.FULLCOLOR && this.app.config._useCustomMenuIcons)
+            return;
         this._currentWeatherIcon.icon_type = iconType;
         for (var i = 0; i < this._forecast.length; i++) {
             this._forecast[i].Icon.icon_type = iconType;
@@ -784,18 +861,18 @@ var UI = (function () {
     };
     UI.prototype.ShowHourlyWeather = function () {
         var _this = this;
-        if (this.hourlyNeverOpened) {
-            this.hourlyNeverOpened = false;
-            this._hourlyScrollView.show();
-            this._hourlyScrollView.hide();
-        }
-        var _a = this._hourlyScrollView.get_preferred_height(-1), minHeight = _a[0], naturalHeight = _a[1];
-        var _b = this._hourlyScrollView.get_preferred_width(-1), minWidth = _b[0], naturalWidth = _b[1];
+        this._hourlyScrollView.show();
+        this._hourlyScrollView.hide();
+        this.AdjustHourlyBoxItemWidth();
+        var _a = this._hourlyScrollView.get_preferred_width(-1), minWidth = _a[0], naturalWidth = _a[1];
+        var _b = this._hourlyScrollView.get_preferred_height(minWidth), minHeight = _b[0], naturalHeight = _b[1];
+        this.app.log.Debug("hourlyScrollView requested height and is set to: " + naturalHeight);
         this._hourlyScrollView.set_width(minWidth);
         this._separatorAreaHourly.actor.show();
         if (!!this._hourlyButton.child)
             this._hourlyButton.child.icon_name = "custom-up-arrow-symbolic";
         this._hourlyScrollView.show();
+        this._hourlyScrollView.style = "min-height: " + naturalHeight.toString() + "px;";
         if (global.settings.get_boolean("desktop-effects-on-menus")) {
             this._hourlyScrollView.height = 0;
             addTween(this._hourlyScrollView, {
@@ -841,8 +918,20 @@ var UI = (function () {
             this.ShowHourlyWeather();
         }
     };
+    UI.prototype.ShowLocationSelectors = function () {
+        this._nextLocationButton.actor.show();
+        this._previousLocationButton.actor.show();
+    };
+    UI.prototype.HideLocationSelectors = function () {
+        this._nextLocationButton.actor.hide();
+        this._previousLocationButton.actor.hide();
+    };
     UI.prototype.displayWeather = function (weather, config) {
         try {
+            if (this.app.locationStore.ShouldShowLocationSelectors(config.currentLocation))
+                this.ShowLocationSelectors();
+            else
+                this.HideLocationSelectors();
             var mainCondition = "";
             var descriptionCondition = "";
             if (weather.condition.main != null) {
@@ -869,19 +958,19 @@ var UI = (function () {
             }
             this.app.SetAppletTooltip(location + " - " + _("As of") + " " + AwareDateString(weather.date, this.app.currentLocale, config._show24Hours));
             this._currentWeatherSummary.text = descriptionCondition;
-            var iconname = weather.condition.icon;
-            if (iconname == null) {
-                iconname = "weather-severe-alert";
+            var iconName = weather.condition.icon;
+            if (iconName == null) {
+                iconName = "weather-severe-alert";
             }
             if (config._useCustomMenuIcons) {
                 this._currentWeatherIcon.icon_name = weather.condition.customIcon;
                 this.UpdateIconType(IconType.SYMBOLIC);
             }
             else {
-                this._currentWeatherIcon.icon_name = iconname;
+                this._currentWeatherIcon.icon_name = iconName;
                 this.UpdateIconType(config.IconType());
             }
-            this.app.SetAppletIcon(iconname);
+            this.app.SetAppletIcon(iconName, weather.condition.customIcon);
             var temp = "";
             if (weather.temperature != null) {
                 temp = TempToUserConfig(weather.temperature, config._temperatureUnit, config._tempRussianStyle);
@@ -964,10 +1053,13 @@ var UI = (function () {
         }
     };
     ;
-    UI.prototype.displayForecast = function (weather, forecasts, config) {
+    UI.prototype.displayForecast = function (weather, config) {
         try {
-            for (var i = 0; i < this._forecast.length; i++) {
-                var forecastData = forecasts[i];
+            if (!weather.forecasts)
+                return false;
+            var len = Math.min(this._forecast.length, weather.forecasts.length);
+            for (var i = 0; i < len; i++) {
+                var forecastData = weather.forecasts[i];
                 var forecastUi = this._forecast[i];
                 var t_low = TempToUserConfig(forecastData.temp_min, config._temperatureUnit, config._tempRussianStyle);
                 var t_high = TempToUserConfig(forecastData.temp_max, config._temperatureUnit, config._tempRussianStyle);
@@ -980,8 +1072,6 @@ var UI = (function () {
                     if (config._translateCondition)
                         comment = _(comment);
                 }
-                if (weather.location.timeZone == null)
-                    forecastData.date.setMilliseconds(forecastData.date.getMilliseconds() + (weather.location.tzOffset * 1000));
                 var dayName = GetDayName(forecastData.date, this.app.currentLocale, weather.location.timeZone);
                 if (forecastData.date) {
                     var now = new Date();
@@ -1015,39 +1105,102 @@ var UI = (function () {
         this._providerCredit.label = _("Powered by") + " " + provider.prettyName;
         this._providerCredit.url = provider.website;
         this._timestamp.text = _("As of") + " " + AwareDateString(weather.date, this.app.currentLocale, config._show24Hours);
+        if (weather.location.distanceFrom != null) {
+            this._timestamp.text += (", " + MetreToUserUnits(weather.location.distanceFrom, this.app.config._distanceUnit)
+                + this.BigDistanceUnitFor(this.app.config._distanceUnit) + " " + _("from you"));
+        }
         return true;
     };
-    UI.prototype.displayHourlyForecast = function (forecasts, config) {
+    UI.prototype.displayHourlyForecast = function (forecasts, config, tz) {
         var max = Math.min(forecasts.length, this._hourlyForecasts.length);
         for (var index = 0; index < max; index++) {
             var hour = forecasts[index];
             var ui = this._hourlyForecasts[index];
-            ui.Hour.text = AwareDateString(hour.date, this.app.currentLocale, config._show24Hours);
+            ui.Hour.text = AwareDateString(hour.date, this.app.currentLocale, config._show24Hours, tz);
             ui.Temperature.text = TempToUserConfig(hour.temp, config._temperatureUnit, config._tempRussianStyle) + " " + this.unitToUnicode(config._temperatureUnit);
             ui.Icon.icon_name = (config._useCustomMenuIcons) ? hour.condition.customIcon : hour.condition.icon;
             hour.condition.main = capitalizeFirstLetter(hour.condition.main);
             if (config._translateCondition)
                 hour.condition.main = _(hour.condition.main);
             ui.Summary.text = hour.condition.main;
-            if (!!hour.precipation && hour.precipation.type != "none") {
-                var precipationText = null;
-                if (!!hour.precipation.volume && hour.precipation.volume > 0) {
-                    precipationText = hour.precipation.volume + " mm";
+            if (!!hour.precipitation && hour.precipitation.type != "none") {
+                var precipitationText = null;
+                if (!!hour.precipitation.volume && hour.precipitation.volume > 0) {
+                    precipitationText = MillimeterToUserUnits(hour.precipitation.volume, this.app.config._distanceUnit) + " " + ((this.app.config._distanceUnit == "metric") ? _("mm") : _("in"));
                 }
-                if (hour.precipation.chance != null || hour.precipation.chance != undefined) {
-                    precipationText = (precipationText == null) ? "" : (precipationText + ", ");
-                    precipationText += (Math.round(hour.precipation.chance).toString() + "%");
+                if (!!hour.precipitation.chance) {
+                    precipitationText = (precipitationText == null) ? "" : (precipitationText + ", ");
+                    precipitationText += (Math.round(hour.precipitation.chance).toString() + "%");
                 }
-                if (precipationText != null)
-                    ui.Precipation.text = precipationText;
+                if (precipitationText != null)
+                    ui.Precipitation.text = precipitationText;
             }
         }
+        this.AdjustHourlyBoxItemWidth();
         if (max <= 0)
             this.HideHourlyToggle();
         return true;
     };
+    UI.prototype.AdjustHourlyBoxItemWidth = function () {
+        var requiredWidth = 0;
+        for (var index = 0; index < this._hourlyForecastBoxes.length; index++) {
+            var ui = this._hourlyForecasts[index];
+            var hourWidth = ui.Hour.get_preferred_width(-1)[1];
+            var iconWidth = ui.Icon.get_preferred_width(-1)[1];
+            var summaryWidth = ui.Summary.get_preferred_width(-1)[1];
+            var temperatureWidth = ui.Temperature.get_preferred_width(-1)[1];
+            var precipitationWidth = ui.Precipitation.get_preferred_width(-1)[1];
+            if (precipitationWidth > iconWidth || summaryWidth > iconWidth) {
+                if (precipitationWidth > summaryWidth)
+                    precipitationWidth += 10;
+                else
+                    summaryWidth += 10;
+            }
+            if (requiredWidth < hourWidth)
+                requiredWidth = hourWidth;
+            if (requiredWidth < iconWidth)
+                requiredWidth = iconWidth;
+            if (requiredWidth < summaryWidth)
+                requiredWidth = summaryWidth;
+            if (requiredWidth < temperatureWidth)
+                requiredWidth = temperatureWidth;
+            if (requiredWidth < precipitationWidth)
+                requiredWidth = precipitationWidth;
+        }
+        for (var index = 0; index < this._hourlyForecastBoxes.length; index++) {
+            var element = this._hourlyForecastBoxes[index];
+            element.set_width(requiredWidth);
+        }
+    };
+    UI.prototype.GetScrollViewHeight = function () {
+        var boxItemHeight = 0;
+        for (var index = 0; index < this._hourlyForecastBoxes.length; index++) {
+            var ui = this._hourlyForecasts[index];
+            this.app.log.Debug("Height requests of Hourly box Items: " + index);
+            var hourHeight = ui.Hour.get_preferred_height(-1)[1];
+            var iconHeight = ui.Icon.get_preferred_height(-1)[1];
+            var summaryHeight = ui.Summary.get_preferred_height(-1)[1];
+            var temperatureHeight = ui.Temperature.get_preferred_height(-1)[1];
+            var precipitationHeight = ui.Precipitation.get_preferred_height(-1)[1];
+            var itemheight = hourHeight + iconHeight + summaryHeight + temperatureHeight + precipitationHeight;
+            if (boxItemHeight < itemheight)
+                boxItemHeight = itemheight;
+        }
+        this.app.log.Debug("Final Hourly box item height is: " + boxItemHeight);
+        var scrollBarHeight = this._hourlyScrollView.get_hscroll_bar().get_preferred_width(-1)[1];
+        this.app.log.Debug("Scrollbar height is " + scrollBarHeight);
+        var theme = this._hourlyBox.get_theme_node();
+        var styling = theme.get_margin(Side.TOP) + theme.get_margin(Side.BOTTOM) + theme.get_padding(Side.TOP) + theme.get_padding(Side.BOTTOM);
+        this.app.log.Debug("ScollbarBox vertical padding and margin is: " + styling);
+        return (boxItemHeight + scrollBarHeight + styling);
+    };
     UI.prototype.unitToUnicode = function (unit) {
         return unit == "fahrenheit" ? '\u2109' : '\u2103';
+    };
+    UI.prototype.BigDistanceUnitFor = function (unit) {
+        if (unit == "imperial")
+            return _("mi");
+        return _("km");
     };
     UI.prototype.destroyCurrentWeather = function () {
         if (this._currentWeather.get_child() != null)
@@ -1095,21 +1248,49 @@ var UI = (function () {
             else
                 this.app.OpenUrl(this._currentWeatherLocation);
         }));
+        this._nextLocationButton = new WeatherButton({
+            reactive: true,
+            can_focus: true,
+            child: new Icon({
+                icon_type: IconType.SYMBOLIC,
+                icon_size: 10,
+                icon_name: "custom-right-arrow-symbolic",
+                style_class: STYLE_LOCATION_SELECTOR
+            }),
+        });
+        this._nextLocationButton.actor.connect(SIGNAL_CLICKED, Lang.bind(this.app, this.app.NextLocationClicked));
+        this._previousLocationButton = new WeatherButton({
+            reactive: true,
+            can_focus: true,
+            child: new Icon({
+                icon_type: IconType.SYMBOLIC,
+                icon_size: 10,
+                icon_name: "custom-left-arrow-symbolic",
+                style_class: STYLE_LOCATION_SELECTOR
+            }),
+        });
+        this._previousLocationButton.actor.connect(SIGNAL_CLICKED, Lang.bind(this.app, this.app.PreviousLocationClicked));
+        this._locationBox = new BoxLayout();
+        this._locationBox.add(this._previousLocationButton.actor, { x_fill: false, x_align: Align.START, y_align: Align.MIDDLE, expand: false });
+        this._locationBox.add(this._currentWeatherLocation, { x_fill: true, x_align: Align.MIDDLE, y_align: Align.MIDDLE, expand: true });
+        this._locationBox.add(this._nextLocationButton.actor, { x_fill: false, x_align: Align.END, y_align: Align.MIDDLE, expand: false });
         this._currentWeatherSummary = new Label({ text: _('Loading ...'), style_class: STYLE_SUMMARY });
-        this._currentWeatherSunrise = new Label(textOb);
-        this._currentWeatherSunset = new Label(textOb);
+        this._currentWeatherSunrise = new Label({ text: ELLIPSIS, style: this.GetTextColorStyle() });
+        this._currentWeatherSunset = new Label({ text: ELLIPSIS, style: this.GetTextColorStyle() });
         var sunriseBox = new BoxLayout();
         var sunsetBox = new BoxLayout();
         if (config._showSunrise) {
             var sunsetIcon = new Icon({
                 icon_name: "sunset-symbolic",
                 icon_type: IconType.SYMBOLIC,
-                icon_size: 25
+                icon_size: 25,
+                style: this.GetTextColorStyle()
             });
             var sunriseIcon = new Icon({
                 icon_name: "sunrise-symbolic",
                 icon_type: IconType.SYMBOLIC,
-                icon_size: 25
+                icon_size: 25,
+                style: this.GetTextColorStyle()
             });
             sunriseBox.add_actor(sunriseIcon);
             sunsetBox.add_actor(sunsetIcon);
@@ -1124,15 +1305,13 @@ var UI = (function () {
         sunriseBox.add(this._currentWeatherSunrise, textOptions);
         sunsetBox.add(this._currentWeatherSunset, textOptions);
         var ab_spacerlabel = new Label({ text: BLANK });
-        var bb_spacerlabel = new Label({ text: BLANK });
         var sunBox = new BoxLayout({ style_class: STYLE_ASTRONOMY });
         sunBox.add_actor(sunriseBox);
         sunBox.add_actor(ab_spacerlabel);
         sunBox.add_actor(sunsetBox);
         var middleColumn = new BoxLayout({ vertical: true, style_class: STYLE_SUMMARYBOX });
-        middleColumn.add_actor(this._currentWeatherLocation);
-        middleColumn.add_actor(this._currentWeatherSummary);
-        middleColumn.add_actor(bb_spacerlabel);
+        middleColumn.add_actor(this._locationBox);
+        middleColumn.add(this._currentWeatherSummary, { expand: true, x_align: Align.START, y_align: Align.MIDDLE, x_fill: false, y_fill: false });
         var sunBin = new Bin();
         sunBin.set_child(sunBox);
         middleColumn.add_actor(sunBin);
@@ -1141,13 +1320,13 @@ var UI = (function () {
         this._currentWeatherPressure = new Label(textOb);
         this._currentWeatherWind = new Label(textOb);
         this._currentWeatherApiUnique = new Label({ text: '' });
-        this._currentWeatherApiUniqueCap = new Label({ text: '' });
+        this._currentWeatherApiUniqueCap = new Label({ text: '', style: this.GetTextColorStyle() });
         var rb_captions = new BoxLayout({ vertical: true, style_class: STYLE_DATABOX_CAPTIONS });
         var rb_values = new BoxLayout({ vertical: true, style_class: STYLE_DATABOX_VALUES });
-        rb_captions.add_actor(new Label({ text: _('Temperature:') }));
-        rb_captions.add_actor(new Label({ text: _('Humidity:') }));
-        rb_captions.add_actor(new Label({ text: _('Pressure:') }));
-        rb_captions.add_actor(new Label({ text: _('Wind:') }));
+        rb_captions.add_actor(new Label({ text: _('Temperature:'), style: this.GetTextColorStyle() }));
+        rb_captions.add_actor(new Label({ text: _('Humidity:'), style: this.GetTextColorStyle() }));
+        rb_captions.add_actor(new Label({ text: _('Pressure:'), style: this.GetTextColorStyle() }));
+        rb_captions.add_actor(new Label({ text: _('Wind:'), style: this.GetTextColorStyle() }));
         rb_captions.add_actor(this._currentWeatherApiUniqueCap);
         rb_values.add_actor(this._currentWeatherTemperature);
         rb_values.add_actor(this._currentWeatherHumidity);
@@ -1203,7 +1382,8 @@ var UI = (function () {
             });
             forecastWeather.Day = new Label({
                 style_class: STYLE_FORECAST_DAY,
-                reactive: true
+                reactive: true,
+                style: this.GetTextColorStyle()
             });
             forecastWeather.Summary = new Label({
                 style_class: STYLE_FORECAST_SUMMARY,
@@ -1281,27 +1461,28 @@ var UI = (function () {
         this.destroyHourlyWeather();
         var hours = this.app.GetMaxHourlyForecasts();
         this._hourlyForecasts = [];
+        this._hourlyForecastBoxes = [];
         for (var index = 0; index < hours; index++) {
-            var box = new BoxLayout({ vertical: true });
+            var box = new BoxLayout({ vertical: true, style_class: "hourly-box-item" });
+            this._hourlyForecastBoxes.push(box);
             this._hourlyForecasts.push({
-                Hour: new Label({ text: "Hour", style_class: "hourly-time" }),
+                Hour: new Label({ text: "Hour", style_class: "hourly-time", style: this.GetTextColorStyle() }),
                 Icon: new Icon({
                     icon_type: config.IconType(),
                     icon_size: 24,
                     icon_name: APPLET_ICON,
                     style_class: "hourly-icon"
                 }),
-                Precipation: new Label({ text: " ", style_class: "hourly-data" }),
+                Precipitation: new Label({ text: " ", style_class: "hourly-data" }),
                 Summary: new Label({ text: _(ELLIPSIS), style_class: "hourly-data" }),
                 Temperature: new Label({ text: _(ELLIPSIS), style_class: "hourly-data" })
             });
             this._hourlyForecasts[index].Summary.clutter_text.set_line_wrap(true);
-            this._hourlyForecasts[index].Summary.set_width(85);
             box.add_child(this._hourlyForecasts[index].Hour);
             box.add_child(this._hourlyForecasts[index].Icon);
             box.add_child(this._hourlyForecasts[index].Summary);
             box.add_child(this._hourlyForecasts[index].Temperature);
-            box.add_child(this._hourlyForecasts[index].Precipation);
+            box.add_child(this._hourlyForecasts[index].Precipitation);
             this._hourlyBox.add(box, {
                 x_fill: true,
                 x_align: Align.MIDDLE,
@@ -1323,6 +1504,7 @@ var Config = (function () {
             TEMPERATURE_UNIT_KEY: "temperatureUnit",
             TEMPERATURE_HIGH_FIRST: "temperatureHighFirst",
             WIND_SPEED_UNIT: "windSpeedUnit",
+            DISTANCE_UNIT: "distanceUnit",
             CITY: "locationLabelOverride",
             TRANSLATE_CONDITION: "translateCondition",
             VERTICAL_ORIENTATION: "verticalOrientation",
@@ -1343,6 +1525,8 @@ var Config = (function () {
             USE_CUSTOM_MENUICONS: "useCustomMenuIcons",
             RUSSIAN_STYLE: "tempRussianStyle",
         };
+        this.doneTypingLocation = null;
+        this.currentLocation = null;
         this.app = app;
         this.settings = new AppletSettings(this, UUID, instanceID);
         this.BindSettings();
@@ -1351,16 +1535,15 @@ var Config = (function () {
         for (var k in this.KEYS) {
             var key = this.KEYS[k];
             var keyProp = "_" + key;
-            this.settings.bindProperty(BindingDirection.IN, key, keyProp, Lang.bind(this.app, this.app.refreshAndRebuild), null);
+            this.settings.bindProperty(BindingDirection.IN, key, keyProp, Lang.bind(this, this.OnSettingChanged), null);
         }
-        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, this.WEATHER_LOCATION, ("_" + this.WEATHER_LOCATION), Lang.bind(this.app, this.app.refreshAndRebuild), null);
+        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, this.WEATHER_LOCATION, ("_" + this.WEATHER_LOCATION), Lang.bind(this, this.OnLocationChanged), null);
         this.settings.bindProperty(BindingDirection.IN, "keybinding", "keybinding", Lang.bind(this.app, this.app._onKeySettingsUpdated), null);
         keybindingManager.addHotKey(UUID, this.keybinding, Lang.bind(this.app, this.app.on_applet_clicked));
         this.settings.connect(SIGNAL_CHANGED + this.WEATHER_USE_SYMBOLIC_ICONS_KEY, Lang.bind(this, this.IconTypeChanged));
     };
     Config.prototype.IconTypeChanged = function () {
         this.app.ui.UpdateIconType(this.IconType());
-        this.app.refreshWeather(false);
         this.app.log.Debug("Symbolic icon setting changed");
     };
     Config.prototype.IconType = function () {
@@ -1369,6 +1552,20 @@ var Config = (function () {
             IconType.FULLCOLOR;
     };
     ;
+    Config.prototype.OnLocationChanged = function () {
+        this.app.log.Debug("User changed location, waiting 3 seconds...");
+        if (this.doneTypingLocation != null)
+            clearTimeout(this.doneTypingLocation);
+        this.doneTypingLocation = setTimeout(Lang.bind(this, this.DoneTypingLocation), 3000);
+    };
+    Config.prototype.DoneTypingLocation = function () {
+        this.app.log.Debug("User has finished typing, beginning refresh");
+        this.doneTypingLocation = null;
+        this.app.refreshAndRebuild();
+    };
+    Config.prototype.OnSettingChanged = function () {
+        this.app.refreshAndRebuild();
+    };
     Config.prototype.SetLocation = function (value) {
         this.settings.setValue(this.WEATHER_LOCATION, value);
     };
@@ -1379,6 +1576,72 @@ var Config = (function () {
         return false;
     };
     ;
+    Config.prototype.InjectLocationToConfig = function (loc, switchToManual) {
+        if (switchToManual === void 0) { switchToManual = false; }
+        this.app.log.Debug("Location setting is now: " + loc.entryText);
+        var text = loc.entryText + "";
+        this.SetLocation(text);
+        this.currentLocation = loc;
+        if (switchToManual == true)
+            this.settings.setValue(this.KEYS.MANUAL_LOCATION, true);
+    };
+    Config.prototype.EnsureLocation = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var location, loc, latlong, location, locationData;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        this.currentLocation = null;
+                        if (!!this._manualLocation) return [3, 2];
+                        return [4, this.app.locProvider.GetLocation()];
+                    case 1:
+                        location = _a.sent();
+                        if (!location)
+                            return [2, null];
+                        this.InjectLocationToConfig(location);
+                        return [2, location];
+                    case 2:
+                        loc = this._location;
+                        if (loc == undefined || loc.trim() == "") {
+                            this.app.HandleError({
+                                type: "hard",
+                                detail: "no location",
+                                userError: true,
+                                message: _("Make sure you entered a location or use Automatic location instead")
+                            });
+                            return [2, null];
+                        }
+                        if (isCoordinate(loc)) {
+                            loc = loc.replace(" ", "");
+                            latlong = loc.split(",");
+                            location = {
+                                lat: parseFloat(latlong[0]),
+                                lon: parseFloat(latlong[1]),
+                                city: null,
+                                country: null,
+                                mobile: null,
+                                timeZone: null,
+                                entryText: loc,
+                                locationSource: "manual"
+                            };
+                            this.InjectLocationToConfig(location);
+                            return [2, location];
+                        }
+                        this.app.log.Debug("Location is text, geolocating...");
+                        return [4, this.app.geoLocationService.GetLocation(loc)];
+                    case 3:
+                        locationData = _a.sent();
+                        if (locationData == null)
+                            return [2, null];
+                        if (!!locationData.address_string) {
+                            this.app.log.Debug("Address found via address search, placing found full address '" + locationData.address_string + "' back to location entry");
+                        }
+                        this.InjectLocationToConfig(locationData);
+                        return [2, locationData];
+                }
+            });
+        });
+    };
     return Config;
 }());
 var WeatherLoop = (function () {
@@ -1423,15 +1686,16 @@ var WeatherLoop = (function () {
                         return [3, 0];
                     case 3:
                         if (!(this.errorCount > 0 || this.NextUpdate() < new Date())) return [3, 5];
-                        this.app.log.Debug("Refresh triggered in mainloop with these values: lastUpdated " + ((!this.lastUpdated) ? "null" : this.lastUpdated.toLocaleString())
+                        this.app.log.Debug("Refresh triggered in main loop with these values: lastUpdated " + ((!this.lastUpdated) ? "null" : this.lastUpdated.toLocaleString())
                             + ", errorCount " + this.errorCount.toString() + " , loopInterval " + (this.LoopInterval() / 1000).toString()
                             + " seconds, refreshInterval " + this.app.config._refreshInterval + " minutes");
                         return [4, this.app.refreshWeather(false)];
                     case 4:
                         state = _a.sent();
-                        if (state == "success") {
+                        if (state == "locked")
+                            this.app.log.Print("App is currently refreshing, refresh skipped in main loop");
+                        if (state == "success" || state == "locked")
                             this.lastUpdated = new Date();
-                        }
                         return [3, 6];
                     case 5:
                         this.app.log.Debug("No need to update yet, skipping");
@@ -1524,6 +1788,414 @@ var WeatherButton = (function () {
     };
     return WeatherButton;
 }());
+var GeoLocation = (function () {
+    function GeoLocation(app) {
+        this.url = "https://nominatim.openstreetmap.org/search/";
+        this.params = "?format=json&addressdetails=1";
+        this.app = null;
+        this.cache = {};
+        this.app = app;
+    }
+    GeoLocation.prototype.GetLocation = function (searchText) {
+        return __awaiter(this, void 0, void 0, function () {
+            var cached, locationData, result, e_4;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        searchText = searchText.trim();
+                        cached = get([searchText], this.cache);
+                        if (cached != null) {
+                            this.app.log.Debug("Returning cached geolocation info for '" + searchText + "'.");
+                            return [2, cached];
+                        }
+                        return [4, this.app.LoadJsonAsync(this.url + encodeURIComponent(searchText) + this.params)];
+                    case 1:
+                        locationData = _a.sent();
+                        if (locationData.length == 0) {
+                            this.app.HandleError({
+                                type: "hard",
+                                detail: "bad location format",
+                                message: _("Could not find location based on address, please check if it's right")
+                            });
+                            return [2, null];
+                        }
+                        this.app.log.Debug("Location is found, payload: " + JSON.stringify(locationData, null, 2));
+                        result = {
+                            lat: parseFloat(locationData[0].lat),
+                            lon: parseFloat(locationData[0].lon),
+                            city: locationData[0].address.city || locationData[0].address.town,
+                            country: locationData[0].address.country,
+                            timeZone: null,
+                            mobile: null,
+                            address_string: locationData[0].display_name,
+                            entryText: locationData[0].display_name,
+                            locationSource: "address-search"
+                        };
+                        this.cache[searchText] = result;
+                        return [2, result];
+                    case 2:
+                        e_4 = _a.sent();
+                        this.app.log.Error("Could not geolocate, error: " + JSON.stringify(e_4, null, 2));
+                        this.app.HandleError({
+                            type: "soft",
+                            detail: "bad api response",
+                            message: _("Failed to call Geolocation API, see Looking Glass for errors.")
+                        });
+                        return [2, null];
+                    case 3: return [2];
+                }
+            });
+        });
+    };
+    return GeoLocation;
+}());
+var LocationStore = (function () {
+    function LocationStore(app, onStoreChanged) {
+        this.path = null;
+        this.file = null;
+        this.locations = [];
+        this.app = null;
+        this.currentIndex = 0;
+        this.StoreChanged = null;
+        this.app = app;
+        this.path = this.GetConfigPath() + "/weather-mockturtl/locations.json";
+        this.app.log.Debug("location store path is: " + this.path);
+        this.file = Gio.File.new_for_path(this.path);
+        if (onStoreChanged != null)
+            this.StoreChanged = onStoreChanged;
+        this.LoadSavedLocations();
+    }
+    LocationStore.prototype.GetConfigPath = function () {
+        var configPath = GLib.getenv('XDG_CONFIG_HOME');
+        if (configPath == null)
+            configPath = GLib.get_home_dir() + "/.config";
+        return configPath;
+    };
+    LocationStore.prototype.NextLocation = function (currentLoc) {
+        this.app.log.Debug("Current location: " + JSON.stringify(currentLoc, null, 2));
+        if (this.locations.length == 0)
+            return currentLoc;
+        var nextIndex = null;
+        if (this.InStorage(currentLoc)) {
+            nextIndex = this.FindIndex(currentLoc) + 1;
+            this.app.log.Debug("Current location found in storage at index " + (nextIndex - 1).toString() + ", moving to the next index");
+        }
+        else {
+            nextIndex = this.currentIndex++;
+        }
+        if (nextIndex > this.locations.length - 1) {
+            nextIndex = 0;
+            this.app.log.Debug("Reached end of storage, move to the beginning");
+        }
+        this.app.log.Debug("Switching to index " + nextIndex.toString() + "...");
+        this.currentIndex = nextIndex;
+        return {
+            address_string: this.locations[nextIndex].address_string,
+            country: this.locations[nextIndex].country,
+            city: this.locations[nextIndex].city,
+            entryText: this.locations[nextIndex].entryText,
+            lat: this.locations[nextIndex].lat,
+            lon: this.locations[nextIndex].lon,
+            mobile: this.locations[nextIndex].mobile,
+            timeZone: this.locations[nextIndex].timeZone,
+            locationSource: this.locations[nextIndex].locationSource,
+        };
+    };
+    LocationStore.prototype.PreviousLocation = function (currentLoc) {
+        if (this.locations.length == 0)
+            return currentLoc;
+        if (this.locations.length == 0)
+            return currentLoc;
+        var previousIndex = null;
+        if (this.InStorage(currentLoc)) {
+            previousIndex = this.FindIndex(currentLoc) - 1;
+            this.app.log.Debug("Current location found in storage at index " + (previousIndex + 1).toString() + ", moving to the next index");
+        }
+        else {
+            previousIndex = this.currentIndex--;
+        }
+        if (previousIndex < 0) {
+            previousIndex = this.locations.length - 1;
+            this.app.log.Debug("Reached start of storage, move to the end");
+        }
+        this.app.log.Debug("Switching to index " + previousIndex.toString() + "...");
+        this.currentIndex = previousIndex;
+        return {
+            address_string: this.locations[previousIndex].address_string,
+            country: this.locations[previousIndex].country,
+            city: this.locations[previousIndex].city,
+            entryText: this.locations[previousIndex].entryText,
+            lat: this.locations[previousIndex].lat,
+            lon: this.locations[previousIndex].lon,
+            mobile: this.locations[previousIndex].mobile,
+            timeZone: this.locations[previousIndex].timeZone,
+            locationSource: this.locations[previousIndex].locationSource,
+        };
+    };
+    LocationStore.prototype.InStorage = function (loc) {
+        if (loc == null)
+            return false;
+        for (var index = 0; index < this.locations.length; index++) {
+            var element = this.locations[index];
+            if (element.lat.toString() == loc.lat.toString() && element.lon.toString() == loc.lon.toString())
+                return true;
+        }
+        return false;
+    };
+    LocationStore.prototype.ShouldShowLocationSelectors = function (currentLoc) {
+        var threshold = this.InStorage(currentLoc) ? 2 : 1;
+        if (this.locations.length >= threshold)
+            return true;
+        else
+            return false;
+    };
+    LocationStore.prototype.SaveCurrentLocation = function (loc) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        if (this.app.Locked()) {
+                            this.app.sendNotification(_("Warning") + " - " + _("Location Store"), _("You can only save correct locations when the applet is not refreshing"), true);
+                            return [2];
+                        }
+                        if (loc == null) {
+                            this.app.sendNotification(_("Warning") + " - " + _("Location Store"), _("You can't save an incorrect location"), true);
+                            return [2];
+                        }
+                        if (this.InStorage(loc)) {
+                            this.app.sendNotification(_("Info") + " - " + _("Location Store"), _("Location is already saved"), true);
+                            return [2];
+                        }
+                        this.locations.push(loc);
+                        this.currentIndex = this.locations.length - 1;
+                        this.InvokeStorageChanged();
+                        return [4, this.SaveToFile()];
+                    case 1:
+                        _a.sent();
+                        this.app.sendNotification(_("Success") + " - " + _("Location Store"), _("Location is saved to library"), true);
+                        return [2];
+                }
+            });
+        });
+    };
+    LocationStore.prototype.DeleteCurrentLocation = function (loc) {
+        return __awaiter(this, void 0, void 0, function () {
+            var index;
+            return __generator(this, function (_a) {
+                if (this.app.Locked()) {
+                    this.app.sendNotification(_("Info") + " - " + _("Location Store"), _("You can't remove a location while the applet is refreshing"), true);
+                    return [2];
+                }
+                if (loc == null) {
+                    this.app.sendNotification(_("Info") + " - " + _("Location Store"), _("You can't remove an incorrect location"), true);
+                    return [2];
+                }
+                if (!this.InStorage(loc)) {
+                    this.app.sendNotification(_("Info") + " - " + _("Location Store"), _("Location is not in storage, can't delete"), true);
+                    return [2];
+                }
+                index = this.FindIndex(loc);
+                this.locations.splice(index, 1);
+                this.currentIndex = this.currentIndex--;
+                if (this.currentIndex < 0)
+                    this.currentIndex = this.locations.length - 1;
+                if (this.currentIndex < 0)
+                    this.currentIndex = 0;
+                this.app.sendNotification(_("Success") + " - " + _("Location Store"), _("Location is deleted from library"), true);
+                this.InvokeStorageChanged();
+                return [2];
+            });
+        });
+    };
+    LocationStore.prototype.InvokeStorageChanged = function () {
+        if (this.StoreChanged == null)
+            return;
+        this.StoreChanged(this.locations.length);
+    };
+    LocationStore.prototype.LoadSavedLocations = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var content, locations;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4, this.FileExists(this.file)];
+                    case 1:
+                        if (!(_a.sent())) {
+                            this.app.log.Print("Location store does not exist, skipping loading...");
+                            return [2, true];
+                        }
+                        return [4, this.LoadContents(this.file)];
+                    case 2:
+                        content = _a.sent();
+                        if (content == null)
+                            return [2, false];
+                        try {
+                            locations = JSON.parse(content);
+                            this.locations = locations;
+                            this.app.log.Print("Saved locations are loaded in from location store at: '" + this.path + "'");
+                            this.app.log.Debug("Locations loaded: " + JSON.stringify(this.locations, null, 2));
+                            this.InvokeStorageChanged();
+                            return [2, true];
+                        }
+                        catch (e) {
+                            this.app.log.Error("Error loading locations from store: " + e.message);
+                            this.app.sendNotification(_("Error") + " - " + _("Location Store"), _("Failed to load in data from location storage, please see the logs for more information"));
+                            return [2, false];
+                        }
+                        return [2];
+                }
+            });
+        });
+    };
+    LocationStore.prototype.SaveToFile = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var writeFile;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4, this.OverwriteAndGetIOStream(this.file)];
+                    case 1:
+                        writeFile = (_a.sent()).get_output_stream();
+                        return [4, this.WriteAsync(writeFile, JSON.stringify(this.locations, null, 2))];
+                    case 2:
+                        _a.sent();
+                        return [4, this.CloseStream(writeFile)];
+                    case 3:
+                        _a.sent();
+                        return [2];
+                }
+            });
+        });
+    };
+    LocationStore.prototype.FindIndex = function (loc) {
+        if (loc == null)
+            return -1;
+        for (var index = 0; index < this.locations.length; index++) {
+            var element = this.locations[index];
+            if (element.lat.toString() == loc.lat.toString() && element.lon.toString() == loc.lon.toString())
+                return index;
+        }
+        return -1;
+    };
+    LocationStore.prototype.GetFileInfo = function (file) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                return [2, new Promise(function (resolve, reject) {
+                        file.query_info_async("", Gio.FileQueryInfoFlags.NONE, null, null, function (obj, res) {
+                            var result = file.query_info_finish(res);
+                            resolve(result);
+                            return result;
+                        });
+                    })];
+            });
+        });
+    };
+    LocationStore.prototype.FileExists = function (file) {
+        return __awaiter(this, void 0, void 0, function () {
+            var info, e_5;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4, this.GetFileInfo(file)];
+                    case 1:
+                        info = _a.sent();
+                        return [2, true];
+                    case 2:
+                        e_5 = _a.sent();
+                        this.app.log.Error("Cannot get file info for '" + file.get_path() + "', error: ");
+                        global.log(e_5);
+                        return [2, false];
+                    case 3: return [2];
+                }
+            });
+        });
+    };
+    LocationStore.prototype.LoadContents = function (file) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                return [2, new Promise(function (resolve, reject) {
+                        file.load_contents_async(null, function (obj, res) {
+                            var _a = file.load_contents_finish(res), result = _a[0], contents = _a[1];
+                            if (result != true) {
+                                resolve(null);
+                                return null;
+                            }
+                            resolve(contents.toString());
+                            return contents.toString();
+                        });
+                    })];
+            });
+        });
+    };
+    LocationStore.prototype.DeleteFile = function (file) {
+        return __awaiter(this, void 0, void 0, function () {
+            var result;
+            var _this = this;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4, new Promise(function (resolve, reject) {
+                            file.delete_async(null, null, function (obj, res) {
+                                var result = null;
+                                try {
+                                    result = file.delete_finish(res);
+                                }
+                                catch (e) {
+                                    _this.app.log.Error("Can't delete file, reason: ");
+                                    global.log(e);
+                                    resolve(false);
+                                    return false;
+                                }
+                                resolve(result);
+                                return result;
+                            });
+                        })];
+                    case 1:
+                        result = _a.sent();
+                        return [2, result];
+                }
+            });
+        });
+    };
+    LocationStore.prototype.OverwriteAndGetIOStream = function (file) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                if (!file.get_parent().query_exists(null))
+                    file.get_parent().make_directory_with_parents(null);
+                return [2, new Promise(function (resolve, reject) {
+                        file.replace_readwrite_async(null, false, Gio.FileCreateFlags.NONE, null, null, function (source_object, result) {
+                            var ioStream = file.replace_readwrite_finish(result);
+                            resolve(ioStream);
+                            return ioStream;
+                        });
+                    })];
+            });
+        });
+    };
+    LocationStore.prototype.WriteAsync = function (outputStream, buffer) {
+        return __awaiter(this, void 0, void 0, function () {
+            var text, result;
+            return __generator(this, function (_a) {
+                text = buffer;
+                result = outputStream.write(text, null);
+                return [2, true];
+            });
+        });
+    };
+    LocationStore.prototype.CloseStream = function (stream) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                return [2, new Promise(function (resolve, reject) {
+                        stream.close_async(null, null, function (obj, res) {
+                            var result = stream.close_finish(res);
+                            resolve(result);
+                            return result;
+                        });
+                    })];
+            });
+        });
+    };
+    return LocationStore;
+}());
 var SIGNAL_CHANGED = 'changed::';
 var SIGNAL_CLICKED = 'clicked';
 var SIGNAL_REPAINT = 'repaint';
@@ -1550,6 +2222,7 @@ var STYLE_CURRENT = 'current';
 var STYLE_FORECAST = 'forecast';
 var STYLE_WEATHER_MENU = 'weather-menu';
 var STYLE_BAR = 'bottombar';
+var STYLE_LOCATION_SELECTOR = 'location-selector';
 var BLANK = '   ';
 var ELLIPSIS = '...';
 var EN_DASH = '\u2013';

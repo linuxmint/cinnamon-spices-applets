@@ -56,11 +56,13 @@ MyApplet.prototype = {
 			global.logError(e);
 		}
 		this.pDeviceId = [];
+		this.openDeviceMenu = {};
 		this.updateMenu();
 	},
 	
 	on_applet_clicked: function(event) {
 		this.menu.toggle();
+		if (this.openDeviceMenu) this.openDeviceMenu.open();
 	},
 	
 	on_applet_removed_from_panel: function() {
@@ -76,30 +78,32 @@ MyApplet.prototype = {
 	},
 	
 	updateMenu: function() {
+		this.openDeviceMenu = {};
 		this.menu.close();
 		this.menu.removeAll();
 		let deviceId = [];
 		this.pDeviceId = [];
-		let deviceName = [];
+		let deviceName = new Object();
 		try {
-			deviceId = this.kdec.devicesSync(true, true);
-			deviceName = this.kdec.deviceNamesSync(true, true);
+			deviceId = this.kdec.devicesSync(true, true)[0];
+			deviceName = this.kdec.deviceNamesSync(true, true)[0];
 		}
 		catch (e) {
 			global.logError(e);
 		}
 		let q = deviceId.length;
-		if (q == 0 || deviceId[0] == "") {
-			this.menu.addMenuItem(new PopupMenu.PopupMenuItem("No paired devices", {reactive: false}));
+		if (q == 0) {
+			this.menu.addMenuItem(new PopupMenu.PopupMenuItem("No reachable paired devices", {reactive: false}));
 			this.set_applet_label("");
-			this.set_applet_tooltip("No paired devices");
+			this.set_applet_tooltip("No reachable paired devices");
 		}
 		else {
 			for (let i = 0; i < q; i++) {
-				let id = String(deviceId[i]);
+				let id = deviceId[i];
 				this.pDeviceId[i] = {id: id};
-				let deviceMenuItem = new PopupMenu.PopupSubMenuMenuItem(deviceName[i][id]);
+				let deviceMenuItem = new PopupMenu.PopupSubMenuMenuItem(deviceName[id]);
 				this.menu.addMenuItem(deviceMenuItem);
+				if (q == 1) this.openDeviceMenu = deviceMenuItem.menu;
 				deviceMenuItem.menu.addMenuItem(new PopupMenu.PopupMenuItem("Id:  " + id, {reactive: false}));
 				deviceMenuItem.menu.addCommandlineAction("    Send Ping to", "kdeconnect-cli --ping -d " + id);
 				deviceMenuItem.menu.addCommandlineAction("    Force to Ring", "kdeconnect-cli --ring -d " + id);
@@ -121,7 +125,7 @@ MyApplet.prototype = {
 					dlg.setInitialKeyFocus(phnEntry);
 					dlg.setButtons([
 						{
-							label: _("No"),
+							label: _("Cancel"),
 							action: imports.lang.bind(this, function() {
 								dlg.destroy();
 							})
@@ -153,7 +157,7 @@ MyApplet.prototype = {
 						let bus = Gio.bus_get_sync(Gio.BusType.SESSION, null);
 						let kdecDev = new kdecDevProxy(bus, "org.kde.kdeconnect", "/modules/kdeconnect/devices/" + id + "/sftp");
 						kdecDev.mountSync();
-						mountPoint = String(kdecDev.mountPointSync());
+						mountPoint = kdecDev.mountPointSync()[0];
 					}
 					catch (e) {
 						global.logError(e);
@@ -180,7 +184,7 @@ MyApplet.prototype = {
 				}.bind(this.pDeviceId[i]));
 			}
 			this.set_applet_label(String(q));
-			this.set_applet_tooltip("Paired devices: " + q);
+			this.set_applet_tooltip("Reachable paired devices: " + q);
 		}
 	}
 } // End MyApplet
@@ -188,4 +192,3 @@ MyApplet.prototype = {
 function main(metadata, orientation, panel_height, instance_id) {  
 	return new MyApplet(orientation, panel_height, instance_id);
 }
-

@@ -13,7 +13,7 @@
    xml:space="preserve"
    id="svg1434"
    sodipodi:docname="applet.svg"
-   inkscape:version="0.92.3 (2405546, 2018-03-11)"
+   inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)"
    width="1096"
    height="1096"
    inkscape:export-filename="/home/simon/Git/better-backgrounds@simonmicro/icons/applet.svg.png"
@@ -21,7 +21,7 @@
    inkscape:export-ydpi="96"><metadata
    id="metadata1440"><rdf:RDF><cc:Work
        rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
-         rdf:resource="http://purl.org/dc/dcmitype/StillImage" /><dc:title /></cc:Work></rdf:RDF></metadata><defs
+         rdf:resource="http://purl.org/dc/dcmitype/StillImage" /><dc:title></dc:title></cc:Work></rdf:RDF></metadata><defs
    id="defs1438"><clipPath
      clipPathUnits="userSpaceOnUse"
      id="clipPath5151"><rect
@@ -54,16 +54,16 @@
    guidetolerance="10"
    inkscape:pageopacity="0"
    inkscape:pageshadow="2"
-   inkscape:window-width="1499"
-   inkscape:window-height="962"
+   inkscape:window-width="3840"
+   inkscape:window-height="1052"
    id="namedview1436"
    showgrid="false"
    inkscape:zoom="0.40953268"
-   inkscape:cx="327.67992"
+   inkscape:cx="-237.59853"
    inkscape:cy="681.55024"
-   inkscape:window-x="1199"
-   inkscape:window-y="38"
-   inkscape:window-maximized="0"
+   inkscape:window-x="0"
+   inkscape:window-y="0"
+   inkscape:window-maximized="1"
    inkscape:current-layer="layer2" />
 <g
    inkscape:groupmode="layer"
@@ -99,7 +99,7 @@
 				</linearGradient>
 				<polygon
    id="polygon2322"
-   points="1369,1068.5 1320.9,1080 1374.9,1080 "
+   points="1320.9,1080 1374.9,1080 1369,1068.5 "
    style="fill:url(#lz)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -120,7 +120,7 @@
 				</linearGradient>
 				<polygon
    id="polygon2329"
-   points="1193.3,693.48 1058.4,912.09 1215.1,908.47 "
+   points="1058.4,912.09 1215.1,908.47 1193.3,693.48 "
    style="fill:url(#mq)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -141,7 +141,7 @@
 				</linearGradient>
 				<polygon
    id="polygon2336"
-   points="1414.7,825.23 1215.1,908.47 1369,1068.5 "
+   points="1215.1,908.47 1369,1068.5 1414.7,825.23 "
    style="fill:url(#nb)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -162,7 +162,7 @@
 				</linearGradient>
 				<polygon
    id="polygon2343"
-   points="254.32,898.34 240.5,1080 300.02,1080 "
+   points="240.5,1080 300.02,1080 254.32,898.34 "
    style="fill:url(#nm)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -204,7 +204,7 @@
 				</linearGradient>
 				<polygon
    id="polygon2357"
-   points="1058.4,912.09 931.97,1080 1092.6,1080 "
+   points="931.97,1080 1092.6,1080 1058.4,912.09 "
    style="fill:url(#oj)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -225,7 +225,7 @@
 				</linearGradient>
 				<polygon
    id="polygon2364"
-   points="686.1,570.42 660.7,467.63 547.49,457.49 "
+   points="660.7,467.63 547.49,457.49 686.1,570.42 "
    style="fill:url(#gz)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -246,7 +246,7 @@
 				</linearGradient>
 				<polygon
    id="polygon2371"
-   points="686.1,570.42 547.49,457.49 666.5,603.72 "
+   points="547.49,457.49 666.5,603.72 686.1,570.42 "
    style="fill:url(#hk)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -267,7 +267,7 @@
 				</linearGradient>
 				<polygon
    id="polygon2378"
-   points="547.49,457.49 361.72,432.88 363.9,535.67 "
+   points="361.72,432.88 363.9,535.67 547.49,457.49 "
    style="fill:url(#or)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -288,7 +288,7 @@
 				</linearGradient>
 				<polygon
    id="polygon2385"
-   points="927.74,489.34 935,680.45 1045.3,577.66 "
+   points="935,680.45 1045.3,577.66 927.74,489.34 "
    style="fill:url(#hz)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -309,7 +309,7 @@
 				</linearGradient>
 				<polygon
    id="polygon2392"
-   points="69.271,47.777 74.044,0 28.029,0 "
+   points="74.044,0 28.029,0 69.271,47.777 "
    style="fill:url(#ik)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -351,7 +351,7 @@
 				</linearGradient>
 				<polygon
    id="polygon2406"
-   points="343.58,1039.5 309.54,1080 347.47,1080 "
+   points="309.54,1080 347.47,1080 343.58,1039.5 "
    style="fill:url(#jh)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -372,7 +372,7 @@
 				</linearGradient>
 				<polygon
    id="polygon2413"
-   points="343.58,1039.5 347.47,1080 405.03,1080 "
+   points="347.47,1080 405.03,1080 343.58,1039.5 "
    style="fill:url(#jt)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -414,7 +414,7 @@
 				</linearGradient>
 				<polygon
    id="polygon2427"
-   points="328.34,331.54 335.59,291.73 210.78,295.34 "
+   points="335.59,291.73 210.78,295.34 328.34,331.54 "
    style="fill:url(#kq)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -435,7 +435,7 @@
 				</linearGradient>
 				<polygon
    id="polygon2434"
-   points="1268.1,160.7 1317.4,83.247 1226.7,85.418 "
+   points="1317.4,83.247 1226.7,85.418 1268.1,160.7 "
    style="fill:url(#lb)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -456,7 +456,7 @@
 				</linearGradient>
 				<polygon
    id="polygon2441"
-   points="1268.1,160.7 1460.4,207.76 1317.4,83.247 "
+   points="1460.4,207.76 1317.4,83.247 1268.1,160.7 "
    style="fill:url(#lm)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -477,7 +477,7 @@
 				</linearGradient>
 				<polygon
    id="polygon2448"
-   points="1460.4,207.76 1407.4,8.687 1317.4,83.247 "
+   points="1407.4,8.687 1317.4,83.247 1460.4,207.76 "
    style="fill:url(#ly)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -498,7 +498,7 @@
 				</linearGradient>
 				<polygon
    id="polygon2455"
-   points="1808.7,771.66 1921.9,846.29 1921.9,725.27 "
+   points="1921.9,846.29 1921.9,725.27 1808.7,771.66 "
    style="fill:url(#mf)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -519,7 +519,7 @@
 				</linearGradient>
 				<polygon
    id="polygon2462"
-   points="167.96,563.18 66.369,581.28 101.93,716.64 "
+   points="66.369,581.28 101.93,716.64 167.96,563.18 "
    style="fill:url(#mg)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -540,7 +540,7 @@
 				</linearGradient>
 				<polygon
    id="polygon2469"
-   points="167.96,563.18 144.02,432.88 66.369,581.28 "
+   points="144.02,432.88 66.369,581.28 167.96,563.18 "
    style="fill:url(#mh)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -582,7 +582,7 @@
 				</linearGradient>
 				<polygon
    id="polygon2483"
-   points="203.52,752.11 167.96,563.18 101.93,716.64 "
+   points="167.96,563.18 101.93,716.64 203.52,752.11 "
    style="fill:url(#mj)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -603,7 +603,7 @@
 				</linearGradient>
 				<polygon
    id="polygon2490"
-   points="203.52,752.11 101.93,716.64 254.32,898.34 "
+   points="101.93,716.64 254.32,898.34 203.52,752.11 "
    style="fill:url(#mk)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -624,7 +624,7 @@
 				</linearGradient>
 				<polygon
    id="polygon2497"
-   points="167.96,563.18 203.52,752.11 363.9,535.67 "
+   points="203.52,752.11 363.9,535.67 167.96,563.18 "
    style="fill:url(#ml)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -645,7 +645,7 @@
 				</linearGradient>
 				<polygon
    id="polygon2504"
-   points="363.9,535.67 203.52,752.11 476.38,717.37 "
+   points="203.52,752.11 476.38,717.37 363.9,535.67 "
    style="fill:url(#mm)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -666,7 +666,7 @@
 				</linearGradient>
 				<polygon
    id="polygon2511"
-   points="1352.3,314.16 1460.4,207.76 1268.1,160.7 "
+   points="1460.4,207.76 1268.1,160.7 1352.3,314.16 "
    style="fill:url(#mn)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -687,7 +687,7 @@
 				</linearGradient>
 				<polygon
    id="polygon2518"
-   points="736.17,21.717 719.17,0 656.11,0 "
+   points="719.17,0 656.11,0 736.17,21.717 "
    style="fill:url(#mo)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -708,7 +708,7 @@
 				</linearGradient>
 				<polygon
    id="polygon2525"
-   points="736.17,21.717 742.03,0 719.17,0 "
+   points="742.03,0 719.17,0 736.17,21.717 "
    style="fill:url(#mr)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -729,7 +729,7 @@
 				</linearGradient>
 				<polygon
    id="polygon2532"
-   points="736.17,21.717 868.46,0 742.03,0 "
+   points="868.46,0 742.03,0 736.17,21.717 "
    style="fill:url(#ms)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -750,7 +750,7 @@
 				</linearGradient>
 				<polygon
    id="polygon2539"
-   points="681.02,371.35 626.59,271.46 547.49,457.49 "
+   points="626.59,271.46 547.49,457.49 681.02,371.35 "
    style="fill:url(#mt)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -771,7 +771,7 @@
 				</linearGradient>
 				<polygon
    id="polygon2546"
-   points="660.7,467.63 681.02,371.35 547.49,457.49 "
+   points="681.02,371.35 547.49,457.49 660.7,467.63 "
    style="fill:url(#mu)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -792,7 +792,7 @@
 				</linearGradient>
 				<polygon
    id="polygon2553"
-   points="681.02,371.35 800.75,305.48 626.59,271.46 "
+   points="800.75,305.48 626.59,271.46 681.02,371.35 "
    style="fill:url(#mv)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -813,7 +813,7 @@
 				</linearGradient>
 				<polygon
    id="polygon2560"
-   points="778.26,429.99 681.02,371.35 660.7,467.63 "
+   points="681.02,371.35 660.7,467.63 778.26,429.99 "
    style="fill:url(#mw)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -855,7 +855,7 @@
 				</linearGradient>
 				<polygon
    id="polygon2574"
-   points="1075.8,247.57 1226.7,85.418 1165,17.374 "
+   points="1226.7,85.418 1165,17.374 1075.8,247.57 "
    style="fill:url(#my)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -876,7 +876,7 @@
 				</linearGradient>
 				<polygon
    id="polygon2581"
-   points="1075.8,247.57 1268.1,160.7 1226.7,85.418 "
+   points="1268.1,160.7 1226.7,85.418 1075.8,247.57 "
    style="fill:url(#mz)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -897,7 +897,7 @@
 				</linearGradient>
 				<polygon
    id="polygon2588"
-   points="210.78,295.34 69.271,47.777 30.811,346.02 "
+   points="69.271,47.777 30.811,346.02 210.78,295.34 "
    style="fill:url(#na)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -918,7 +918,7 @@
 				</linearGradient>
 				<polygon
    id="polygon2595"
-   points="210.78,295.34 30.811,346.02 144.02,432.88 "
+   points="30.811,346.02 144.02,432.88 210.78,295.34 "
    style="fill:url(#nc)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -1023,7 +1023,7 @@
 				</linearGradient>
 				<polygon
    id="polygon2630"
-   points="167.96,563.18 268.83,483.55 144.02,432.88 "
+   points="268.83,483.55 144.02,432.88 167.96,563.18 "
    style="fill:url(#nh)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -1044,7 +1044,7 @@
 				</linearGradient>
 				<polygon
    id="polygon2637"
-   points="268.83,483.55 210.78,295.34 144.02,432.88 "
+   points="210.78,295.34 144.02,432.88 268.83,483.55 "
    style="fill:url(#ni)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -1065,7 +1065,7 @@
 				</linearGradient>
 				<polygon
    id="polygon2644"
-   points="268.83,483.55 167.96,563.18 363.9,535.67 "
+   points="167.96,563.18 363.9,535.67 268.83,483.55 "
    style="fill:url(#nj)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -1086,7 +1086,7 @@
 				</linearGradient>
 				<polygon
    id="polygon2651"
-   points="361.72,432.88 268.83,483.55 363.9,535.67 "
+   points="268.83,483.55 363.9,535.67 361.72,432.88 "
    style="fill:url(#nk)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -1107,7 +1107,7 @@
 				</linearGradient>
 				<polygon
    id="polygon2658"
-   points="660.7,467.63 686.1,570.42 804.38,545.81 "
+   points="686.1,570.42 804.38,545.81 660.7,467.63 "
    style="fill:url(#nl)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -1128,7 +1128,7 @@
 				</linearGradient>
 				<polygon
    id="polygon2665"
-   points="778.26,429.99 660.7,467.63 804.38,545.81 "
+   points="660.7,467.63 804.38,545.81 778.26,429.99 "
    style="fill:url(#nn)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -1149,7 +1149,7 @@
 				</linearGradient>
 				<polygon
    id="polygon2672"
-   points="778.26,429.99 804.38,545.81 927.74,489.34 "
+   points="804.38,545.81 927.74,489.34 778.26,429.99 "
    style="fill:url(#no)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -1191,7 +1191,7 @@
 				</linearGradient>
 				<polygon
    id="polygon2686"
-   points="1414.7,825.23 1369,1068.5 1586.7,878.8 "
+   points="1369,1068.5 1586.7,878.8 1414.7,825.23 "
    style="fill:url(#nr)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -1212,7 +1212,7 @@
 				</linearGradient>
 				<polygon
    id="polygon2693"
-   points="1808.7,771.66 1586.7,878.8 1782.6,917.88 "
+   points="1586.7,878.8 1782.6,917.88 1808.7,771.66 "
    style="fill:url(#ns)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -1254,7 +1254,7 @@
 				</linearGradient>
 				<polygon
    id="polygon2707"
-   points="1782.6,917.88 1921.9,1045.9 1921.9,860.3 "
+   points="1921.9,1045.9 1921.9,860.3 1782.6,917.88 "
    style="fill:url(#nu)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -1275,7 +1275,7 @@
 				</linearGradient>
 				<polygon
    id="polygon2714"
-   points="1829.8,441.57 1921.9,492.06 1921.9,412.54 "
+   points="1921.9,492.06 1921.9,412.54 1829.8,441.57 "
    style="fill:url(#nv)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -1296,7 +1296,7 @@
 				</linearGradient>
 				<polygon
    id="polygon2721"
-   points="30.811,346.02 -0.03,347.06 -0.03,383.47 "
+   points="-0.03,347.06 -0.03,383.47 30.811,346.02 "
    style="fill:url(#nw)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -1317,7 +1317,7 @@
 				</linearGradient>
 				<polygon
    id="polygon2728"
-   points="547.49,457.49 554.02,630.5 666.5,603.72 "
+   points="554.02,630.5 666.5,603.72 547.49,457.49 "
    style="fill:url(#nx)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -1338,7 +1338,7 @@
 				</linearGradient>
 				<polygon
    id="polygon2735"
-   points="554.02,630.5 363.9,535.67 476.38,717.37 "
+   points="363.9,535.67 476.38,717.37 554.02,630.5 "
    style="fill:url(#nz)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -1359,7 +1359,7 @@
 				</linearGradient>
 				<polygon
    id="polygon2742"
-   points="547.49,457.49 363.9,535.67 554.02,630.5 "
+   points="363.9,535.67 554.02,630.5 547.49,457.49 "
    style="fill:url(#oa)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -1380,7 +1380,7 @@
 				</linearGradient>
 				<polygon
    id="polygon2749"
-   points="-0.03,1055.2 -0.03,1080 111.38,1080 "
+   points="-0.03,1080 111.38,1080 -0.03,1055.2 "
    style="fill:url(#ob)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -1401,7 +1401,7 @@
 				</linearGradient>
 				<polygon
    id="polygon2756"
-   points="30.811,346.02 -0.03,328.59 -0.03,347.06 "
+   points="-0.03,328.59 -0.03,347.06 30.811,346.02 "
    style="fill:url(#oc)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -1422,7 +1422,7 @@
 				</linearGradient>
 				<polygon
    id="polygon2763"
-   points="30.811,346.02 -0.03,275.02 -0.03,328.59 "
+   points="-0.03,275.02 -0.03,328.59 30.811,346.02 "
    style="fill:url(#od)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -1443,7 +1443,7 @@
 				</linearGradient>
 				<polygon
    id="polygon2770"
-   points="1197.7,392.34 1268.1,160.7 1075.8,247.57 "
+   points="1268.1,160.7 1075.8,247.57 1197.7,392.34 "
    style="fill:url(#oe)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -1464,7 +1464,7 @@
 				</linearGradient>
 				<polygon
    id="polygon2777"
-   points="1197.7,392.34 1352.3,314.16 1268.1,160.7 "
+   points="1352.3,314.16 1268.1,160.7 1197.7,392.34 "
    style="fill:url(#of)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -1485,7 +1485,7 @@
 				</linearGradient>
 				<polygon
    id="polygon2784"
-   points="1586.7,878.8 1697.7,953.35 1782.6,917.88 "
+   points="1697.7,953.35 1782.6,917.88 1586.7,878.8 "
    style="fill:url(#og)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -1506,7 +1506,7 @@
 				</linearGradient>
 				<polygon
    id="polygon2791"
-   points="331.24,62.254 465.61,0 362.82,0 "
+   points="465.61,0 362.82,0 331.24,62.254 "
    style="fill:url(#oh)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -1569,7 +1569,7 @@
 				</linearGradient>
 				<polygon
    id="polygon2812"
-   points="1075.8,247.57 1165,17.374 964.03,166.49 "
+   points="1165,17.374 964.03,166.49 1075.8,247.57 "
    style="fill:url(#ol)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -1590,7 +1590,7 @@
 				</linearGradient>
 				<polygon
    id="polygon2819"
-   points="1352.3,314.16 1319.6,571.87 1530.1,554.49 "
+   points="1319.6,571.87 1530.1,554.49 1352.3,314.16 "
    style="fill:url(#om)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -1611,7 +1611,7 @@
 				</linearGradient>
 				<polygon
    id="polygon2826"
-   points="1697.7,953.35 1697,1080 1820.4,1080 "
+   points="1697,1080 1820.4,1080 1697.7,953.35 "
    style="fill:url(#on)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -1674,7 +1674,7 @@
 				</linearGradient>
 				<polygon
    id="polygon2847"
-   points="1808.7,771.66 1713.7,671.76 1586.7,878.8 "
+   points="1713.7,671.76 1586.7,878.8 1808.7,771.66 "
    style="fill:url(#oq)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -1695,7 +1695,7 @@
 				</linearGradient>
 				<polygon
    id="polygon2854"
-   points="561.28,207.03 569.76,0 487.46,0 "
+   points="569.76,0 487.46,0 561.28,207.03 "
    style="fill:url(#gw)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -1716,7 +1716,7 @@
 				</linearGradient>
 				<polygon
    id="polygon2861"
-   points="547.49,457.49 626.59,271.46 561.28,207.03 "
+   points="626.59,271.46 561.28,207.03 547.49,457.49 "
    style="fill:url(#gx)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -1779,7 +1779,7 @@
 				</linearGradient>
 				<polygon
    id="polygon2882"
-   points="1058.4,912.09 1092.6,1080 1159.1,1080 "
+   points="1092.6,1080 1159.1,1080 1058.4,912.09 "
    style="fill:url(#hb)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -1821,7 +1821,7 @@
 				</linearGradient>
 				<polygon
    id="polygon2896"
-   points="1369,1068.5 1295.5,1080 1320.9,1080 "
+   points="1295.5,1080 1320.9,1080 1369,1068.5 "
    style="fill:url(#hd)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -1863,7 +1863,7 @@
 				</linearGradient>
 				<polygon
    id="polygon2910"
-   points="1586.7,878.8 1461,1080 1590.1,1080 "
+   points="1461,1080 1590.1,1080 1586.7,878.8 "
    style="fill:url(#hf)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -1905,7 +1905,7 @@
 				</linearGradient>
 				<polygon
    id="polygon2924"
-   points="1697.7,953.35 1646.7,1080 1697,1080 "
+   points="1646.7,1080 1697,1080 1697.7,953.35 "
    style="fill:url(#hh)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -1926,7 +1926,7 @@
 				</linearGradient>
 				<polygon
    id="polygon2931"
-   points="778.26,429.99 790.59,377.87 681.02,371.35 "
+   points="790.59,377.87 681.02,371.35 778.26,429.99 "
    style="fill:url(#hi)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -1947,7 +1947,7 @@
 				</linearGradient>
 				<polygon
    id="polygon2938"
-   points="681.02,371.35 790.59,377.87 800.75,305.48 "
+   points="790.59,377.87 800.75,305.48 681.02,371.35 "
    style="fill:url(#hj)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -1968,7 +1968,7 @@
 				</linearGradient>
 				<polygon
    id="polygon2945"
-   points="790.59,377.87 778.26,429.99 927.74,489.34 "
+   points="778.26,429.99 927.74,489.34 790.59,377.87 "
    style="fill:url(#hl)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -1989,7 +1989,7 @@
 				</linearGradient>
 				<polygon
    id="polygon2952"
-   points="66.369,581.28 -0.03,525.67 -0.03,596.96 "
+   points="-0.03,525.67 -0.03,596.96 66.369,581.28 "
    style="fill:url(#hm)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -2010,7 +2010,7 @@
 				</linearGradient>
 				<polygon
    id="polygon2959"
-   points="66.369,581.28 -0.03,596.96 -0.03,692.55 "
+   points="-0.03,596.96 -0.03,692.55 66.369,581.28 "
    style="fill:url(#hn)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -2031,7 +2031,7 @@
 				</linearGradient>
 				<polygon
    id="polygon2966"
-   points="1460.4,207.76 1626.6,65.15 1407.4,8.687 "
+   points="1626.6,65.15 1407.4,8.687 1460.4,207.76 "
    style="fill:url(#ho)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -2052,7 +2052,7 @@
 				</linearGradient>
 				<polygon
    id="polygon2973"
-   points="1460.4,207.76 1622.9,182.42 1626.6,65.15 "
+   points="1622.9,182.42 1626.6,65.15 1460.4,207.76 "
    style="fill:url(#il)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -2073,7 +2073,7 @@
 				</linearGradient>
 				<polygon
    id="polygon2980"
-   points="1622.9,182.42 1708.6,79.627 1626.6,65.15 "
+   points="1708.6,79.627 1626.6,65.15 1622.9,182.42 "
    style="fill:url(#jm)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -2094,7 +2094,7 @@
 				</linearGradient>
 				<polygon
    id="polygon2987"
-   points="69.271,47.777 157.17,0 74.044,0 "
+   points="157.17,0 74.044,0 69.271,47.777 "
    style="fill:url(#kn)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -2115,7 +2115,7 @@
 				</linearGradient>
 				<polygon
    id="polygon2994"
-   points="331.24,62.254 362.82,0 209.4,0 "
+   points="362.82,0 209.4,0 331.24,62.254 "
    style="fill:url(#lo)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -2136,7 +2136,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3001"
-   points="337.77,353.98 547.49,457.49 561.28,207.03 "
+   points="547.49,457.49 561.28,207.03 337.77,353.98 "
    style="fill:url(#mp)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -2157,7 +2157,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3008"
-   points="337.77,353.98 210.78,295.34 268.83,483.55 "
+   points="210.78,295.34 268.83,483.55 337.77,353.98 "
    style="fill:url(#nq)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -2178,7 +2178,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3015"
-   points="337.77,353.98 328.34,331.54 210.78,295.34 "
+   points="328.34,331.54 210.78,295.34 337.77,353.98 "
    style="fill:url(#hp)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -2199,7 +2199,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3022"
-   points="361.72,432.88 337.77,353.98 268.83,483.55 "
+   points="337.77,353.98 268.83,483.55 361.72,432.88 "
    style="fill:url(#hq)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -2220,7 +2220,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3029"
-   points="328.34,331.54 337.77,353.98 335.59,291.73 "
+   points="337.77,353.98 335.59,291.73 328.34,331.54 "
    style="fill:url(#hr)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -2241,7 +2241,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3036"
-   points="335.59,291.73 337.77,353.98 561.28,207.03 "
+   points="337.77,353.98 561.28,207.03 335.59,291.73 "
    style="fill:url(#hs)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -2262,7 +2262,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3043"
-   points="361.72,432.88 547.49,457.49 337.77,353.98 "
+   points="547.49,457.49 337.77,353.98 361.72,432.88 "
    style="fill:url(#ht)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -2304,7 +2304,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3057"
-   points="101.93,716.64 -0.03,730.09 -0.03,999.31 "
+   points="-0.03,730.09 -0.03,999.31 101.93,716.64 "
    style="fill:url(#hv)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -2346,7 +2346,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3071"
-   points="240.5,1080 254.32,898.34 -0.03,1021.7 -0.03,1029.7 152.6,1080 "
+   points="152.6,1080 240.5,1080 254.32,898.34 -0.03,1021.7 -0.03,1029.7 "
    style="fill:url(#hx)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -2367,7 +2367,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3078"
-   points="813.09,1074.2 798.88,1080 809,1080 "
+   points="798.88,1080 809,1080 813.09,1074.2 "
    style="fill:url(#hy)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -2388,7 +2388,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3085"
-   points="813.09,1074.2 809,1080 830.53,1080 "
+   points="809,1080 830.53,1080 813.09,1074.2 "
    style="fill:url(#ia)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -2409,7 +2409,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3092"
-   points="203.52,752.11 273.91,870.11 476.38,717.37 "
+   points="273.91,870.11 476.38,717.37 203.52,752.11 "
    style="fill:url(#ib)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -2430,7 +2430,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3099"
-   points="273.91,870.11 203.52,752.11 254.32,898.34 "
+   points="203.52,752.11 254.32,898.34 273.91,870.11 "
    style="fill:url(#ic)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -2451,7 +2451,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3106"
-   points="273.91,870.11 254.32,898.34 343.58,1039.5 "
+   points="254.32,898.34 343.58,1039.5 273.91,870.11 "
    style="fill:url(#id)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -2472,7 +2472,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3113"
-   points="273.91,870.11 343.58,1039.5 476.38,717.37 "
+   points="343.58,1039.5 476.38,717.37 273.91,870.11 "
    style="fill:url(#ie)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -2493,7 +2493,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3120"
-   points="1694.1,586.35 1713.7,671.76 1798.6,545.81 "
+   points="1713.7,671.76 1798.6,545.81 1694.1,586.35 "
    style="fill:url(#if)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -2514,7 +2514,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3127"
-   points="1694.1,586.35 1798.6,545.81 1829.8,441.57 "
+   points="1798.6,545.81 1829.8,441.57 1694.1,586.35 "
    style="fill:url(#ig)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -2535,7 +2535,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3134"
-   points="1713.7,671.76 1808.7,771.66 1798.6,545.81 "
+   points="1808.7,771.66 1798.6,545.81 1713.7,671.76 "
    style="fill:url(#ih)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -2598,7 +2598,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3155"
-   points="1798.6,545.81 1921.9,691.75 1921.9,525.99 "
+   points="1921.9,691.75 1921.9,525.99 1798.6,545.81 "
    style="fill:url(#im)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -2661,7 +2661,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3176"
-   points="210.78,295.34 318.18,207.03 69.271,47.777 "
+   points="318.18,207.03 69.271,47.777 210.78,295.34 "
    style="fill:url(#ip)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -2703,7 +2703,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3190"
-   points="210.78,295.34 335.59,291.73 318.18,207.03 "
+   points="335.59,291.73 318.18,207.03 210.78,295.34 "
    style="fill:url(#ir)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -2724,7 +2724,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3197"
-   points="561.28,207.03 331.24,62.254 318.18,207.03 "
+   points="331.24,62.254 318.18,207.03 561.28,207.03 "
    style="fill:url(#is)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -2745,7 +2745,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3204"
-   points="335.59,291.73 561.28,207.03 318.18,207.03 "
+   points="561.28,207.03 318.18,207.03 335.59,291.73 "
    style="fill:url(#it)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -2766,7 +2766,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3211"
-   points="1906,224.4 1921.9,203.33 1921.9,151.8 "
+   points="1921.9,203.33 1921.9,151.8 1906,224.4 "
    style="fill:url(#iu)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -2808,7 +2808,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3225"
-   points="1708.6,79.627 1782.6,26.06 1626.6,65.15 "
+   points="1782.6,26.06 1626.6,65.15 1708.6,79.627 "
    style="fill:url(#ix)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -2829,7 +2829,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3232"
-   points="1782.6,26.06 1781.6,0 1757.9,0 "
+   points="1781.6,0 1757.9,0 1782.6,26.06 "
    style="fill:url(#iy)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -2850,7 +2850,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3239"
-   points="1708.6,79.627 1906,224.4 1782.6,26.06 "
+   points="1906,224.4 1782.6,26.06 1708.6,79.627 "
    style="fill:url(#iz)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -2871,7 +2871,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3246"
-   points="1782.6,26.06 1819.7,0 1781.6,0 "
+   points="1819.7,0 1781.6,0 1782.6,26.06 "
    style="fill:url(#ja)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -2934,7 +2934,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3267"
-   points="1626.6,65.15 1563.9,0 1529.1,0 "
+   points="1563.9,0 1529.1,0 1626.6,65.15 "
    style="fill:url(#jd)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -2955,7 +2955,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3274"
-   points="1626.6,65.15 1629.2,0 1563.9,0 "
+   points="1629.2,0 1563.9,0 1626.6,65.15 "
    style="fill:url(#je)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -2976,7 +2976,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3281"
-   points="1407.4,8.687 1422.3,0 1405.7,0 "
+   points="1422.3,0 1405.7,0 1407.4,8.687 "
    style="fill:url(#jf)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -3060,7 +3060,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3309"
-   points="1407.4,8.687 1405.7,0 1397.5,0 "
+   points="1405.7,0 1397.5,0 1407.4,8.687 "
    style="fill:url(#jk)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -3081,7 +3081,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3316"
-   points="1165,17.374 1156.6,0 1060.9,0 "
+   points="1156.6,0 1060.9,0 1165,17.374 "
    style="fill:url(#jl)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -3102,7 +3102,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3323"
-   points="1165,17.374 1183.4,0 1156.6,0 "
+   points="1183.4,0 1156.6,0 1165,17.374 "
    style="fill:url(#jn)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -3123,7 +3123,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3330"
-   points="1352.3,314.16 1582.3,337.33 1460.4,207.76 "
+   points="1582.3,337.33 1460.4,207.76 1352.3,314.16 "
    style="fill:url(#jo)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -3144,7 +3144,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3337"
-   points="1352.3,314.16 1530.1,554.49 1582.3,337.33 "
+   points="1530.1,554.49 1582.3,337.33 1352.3,314.16 "
    style="fill:url(#jp)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -3165,7 +3165,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3344"
-   points="1582.3,337.33 1622.9,182.42 1460.4,207.76 "
+   points="1622.9,182.42 1460.4,207.76 1582.3,337.33 "
    style="fill:url(#jq)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -3186,7 +3186,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3351"
-   points="1530.1,554.49 1694.1,586.35 1582.3,337.33 "
+   points="1694.1,586.35 1582.3,337.33 1530.1,554.49 "
    style="fill:url(#jr)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -3207,7 +3207,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3358"
-   points="1582.3,337.33 1694.1,586.35 1829.8,441.57 "
+   points="1694.1,586.35 1829.8,441.57 1582.3,337.33 "
    style="fill:url(#js)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -3228,7 +3228,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3365"
-   points="1582.3,337.33 1755,289.55 1622.9,182.42 "
+   points="1755,289.55 1622.9,182.42 1582.3,337.33 "
    style="fill:url(#ju)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -3249,7 +3249,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3372"
-   points="1755,289.55 1582.3,337.33 1829.8,441.57 "
+   points="1582.3,337.33 1829.8,441.57 1755,289.55 "
    style="fill:url(#jv)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -3270,7 +3270,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3379"
-   points="1755,289.55 1708.6,79.627 1622.9,182.42 "
+   points="1708.6,79.627 1622.9,182.42 1755,289.55 "
    style="fill:url(#jw)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -3291,7 +3291,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3386"
-   points="1708.6,79.627 1755,289.55 1906,224.4 "
+   points="1755,289.55 1906,224.4 1708.6,79.627 "
    style="fill:url(#jx)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -3312,7 +3312,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3393"
-   points="1755,289.55 1829.8,441.57 1906,224.4 "
+   points="1829.8,441.57 1906,224.4 1755,289.55 "
    style="fill:url(#jy)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -3333,7 +3333,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3400"
-   points="1358.8,686.24 1193.3,693.48 1215.1,908.47 "
+   points="1193.3,693.48 1215.1,908.47 1358.8,686.24 "
    style="fill:url(#jz)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -3354,7 +3354,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3407"
-   points="1319.6,571.87 1193.3,693.48 1358.8,686.24 "
+   points="1193.3,693.48 1358.8,686.24 1319.6,571.87 "
    style="fill:url(#ka)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -3375,7 +3375,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3414"
-   points="1414.7,825.23 1358.8,686.24 1215.1,908.47 "
+   points="1358.8,686.24 1215.1,908.47 1414.7,825.23 "
    style="fill:url(#kb)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -3396,7 +3396,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3421"
-   points="1530.1,554.49 1319.6,571.87 1358.8,686.24 "
+   points="1319.6,571.87 1358.8,686.24 1530.1,554.49 "
    style="fill:url(#kc)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -3417,7 +3417,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3428"
-   points="1254.3,483.55 1045.3,577.66 1193.3,693.48 "
+   points="1045.3,577.66 1193.3,693.48 1254.3,483.55 "
    style="fill:url(#kd)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -3438,7 +3438,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3435"
-   points="1197.7,392.34 1045.3,577.66 1254.3,483.55 "
+   points="1045.3,577.66 1254.3,483.55 1197.7,392.34 "
    style="fill:url(#kf)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -3459,7 +3459,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3442"
-   points="1319.6,571.87 1254.3,483.55 1193.3,693.48 "
+   points="1254.3,483.55 1193.3,693.48 1319.6,571.87 "
    style="fill:url(#kg)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -3480,7 +3480,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3449"
-   points="1352.3,314.16 1197.7,392.34 1254.3,483.55 "
+   points="1197.7,392.34 1254.3,483.55 1352.3,314.16 "
    style="fill:url(#kh)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -3501,7 +3501,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3456"
-   points="1352.3,314.16 1254.3,483.55 1319.6,571.87 "
+   points="1254.3,483.55 1319.6,571.87 1352.3,314.16 "
    style="fill:url(#ki)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -3522,7 +3522,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3463"
-   points="790.59,377.87 998.86,369.18 800.75,305.48 "
+   points="998.86,369.18 800.75,305.48 790.59,377.87 "
    style="fill:url(#kj)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -3543,7 +3543,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3470"
-   points="790.59,377.87 927.74,489.34 998.86,369.18 "
+   points="927.74,489.34 998.86,369.18 790.59,377.87 "
    style="fill:url(#kk)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -3564,7 +3564,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3477"
-   points="800.75,305.48 998.86,369.18 964.03,166.49 "
+   points="998.86,369.18 964.03,166.49 800.75,305.48 "
    style="fill:url(#kl)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -3585,7 +3585,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3484"
-   points="927.74,489.34 1045.3,577.66 998.86,369.18 "
+   points="1045.3,577.66 998.86,369.18 927.74,489.34 "
    style="fill:url(#km)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -3606,7 +3606,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3491"
-   points="998.86,369.18 1075.8,247.57 964.03,166.49 "
+   points="1075.8,247.57 964.03,166.49 998.86,369.18 "
    style="fill:url(#ko)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -3627,7 +3627,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3498"
-   points="1045.3,577.66 1197.7,392.34 998.86,369.18 "
+   points="1197.7,392.34 998.86,369.18 1045.3,577.66 "
    style="fill:url(#kp)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -3648,7 +3648,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3505"
-   points="1197.7,392.34 1075.8,247.57 998.86,369.18 "
+   points="1075.8,247.57 998.86,369.18 1197.7,392.34 "
    style="fill:url(#kr)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -3669,7 +3669,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3512"
-   points="626.59,271.46 762.29,178.08 561.28,207.03 "
+   points="762.29,178.08 561.28,207.03 626.59,271.46 "
    style="fill:url(#ks)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -3690,7 +3690,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3519"
-   points="762.29,178.08 736.17,21.717 561.28,207.03 "
+   points="736.17,21.717 561.28,207.03 762.29,178.08 "
    style="fill:url(#kt)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -3711,7 +3711,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3526"
-   points="800.75,305.48 762.29,178.08 626.59,271.46 "
+   points="762.29,178.08 626.59,271.46 800.75,305.48 "
    style="fill:url(#ku)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -3732,7 +3732,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3533"
-   points="762.29,178.08 964.03,166.49 736.17,21.717 "
+   points="964.03,166.49 736.17,21.717 762.29,178.08 "
    style="fill:url(#kv)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -3753,7 +3753,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3540"
-   points="762.29,178.08 800.75,305.48 964.03,166.49 "
+   points="800.75,305.48 964.03,166.49 762.29,178.08 "
    style="fill:url(#kw)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -3774,7 +3774,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3547"
-   points="686.1,570.42 666.5,603.72 830.5,650.05 "
+   points="666.5,603.72 830.5,650.05 686.1,570.42 "
    style="fill:url(#kx)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -3795,7 +3795,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3554"
-   points="804.38,545.81 686.1,570.42 830.5,650.05 "
+   points="686.1,570.42 830.5,650.05 804.38,545.81 "
    style="fill:url(#ky)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -3816,7 +3816,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3561"
-   points="927.74,489.34 804.38,545.81 830.5,650.05 "
+   points="804.38,545.81 830.5,650.05 927.74,489.34 "
    style="fill:url(#kz)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -3837,7 +3837,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3568"
-   points="935,680.45 927.74,489.34 830.5,650.05 "
+   points="927.74,489.34 830.5,650.05 935,680.45 "
    style="fill:url(#la)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -3858,7 +3858,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3575"
-   points="935,680.45 830.5,650.05 860.98,810.75 "
+   points="830.5,650.05 860.98,810.75 935,680.45 "
    style="fill:url(#lc)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -3879,7 +3879,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3582"
-   points="554.02,630.5 476.38,717.37 678.11,770.21 "
+   points="476.38,717.37 678.11,770.21 554.02,630.5 "
    style="fill:url(#ld)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -3921,7 +3921,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3596"
-   points="666.5,603.72 554.02,630.5 678.11,770.21 "
+   points="554.02,630.5 678.11,770.21 666.5,603.72 "
    style="fill:url(#lf)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -3942,7 +3942,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3603"
-   points="830.5,650.05 666.5,603.72 678.11,770.21 "
+   points="666.5,603.72 678.11,770.21 830.5,650.05 "
    style="fill:url(#lg)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -3963,7 +3963,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3610"
-   points="678.11,770.21 813.09,1074.2 886.38,985.93 "
+   points="813.09,1074.2 886.38,985.93 678.11,770.21 "
    style="fill:url(#lh)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -3984,7 +3984,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3617"
-   points="860.98,810.75 830.5,650.05 678.11,770.21 "
+   points="830.5,650.05 678.11,770.21 860.98,810.75 "
    style="fill:url(#li)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -4005,7 +4005,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3624"
-   points="860.98,810.75 678.11,770.21 886.38,985.93 "
+   points="678.11,770.21 886.38,985.93 860.98,810.75 "
    style="fill:url(#lj)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -4047,7 +4047,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3638"
-   points="678.11,770.21 435.1,1080 573.69,1080 "
+   points="435.1,1080 573.69,1080 678.11,770.21 "
    style="fill:url(#ll)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -4068,7 +4068,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3645"
-   points="1358.8,686.24 1414.7,825.23 1560.5,734.02 "
+   points="1414.7,825.23 1560.5,734.02 1358.8,686.24 "
    style="fill:url(#ln)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -4089,7 +4089,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3652"
-   points="1530.1,554.49 1358.8,686.24 1560.5,734.02 "
+   points="1358.8,686.24 1560.5,734.02 1530.1,554.49 "
    style="fill:url(#lp)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -4110,7 +4110,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3659"
-   points="1560.5,734.02 1414.7,825.23 1586.7,878.8 "
+   points="1414.7,825.23 1586.7,878.8 1560.5,734.02 "
    style="fill:url(#lq)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -4131,7 +4131,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3666"
-   points="1694.1,586.35 1530.1,554.49 1560.5,734.02 "
+   points="1530.1,554.49 1560.5,734.02 1694.1,586.35 "
    style="fill:url(#lr)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -4152,7 +4152,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3673"
-   points="1713.7,671.76 1560.5,734.02 1586.7,878.8 "
+   points="1560.5,734.02 1586.7,878.8 1713.7,671.76 "
    style="fill:url(#ls)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -4173,7 +4173,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3680"
-   points="1694.1,586.35 1560.5,734.02 1713.7,671.76 "
+   points="1560.5,734.02 1713.7,671.76 1694.1,586.35 "
    style="fill:url(#lt)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -4215,7 +4215,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3694"
-   points="1829.8,441.57 1921.9,412.54 1921.9,347.79 "
+   points="1921.9,412.54 1921.9,347.79 1829.8,441.57 "
    style="fill:url(#lv)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -4236,7 +4236,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3701"
-   points="1906,224.4 1921.9,229.49 1921.9,203.33 "
+   points="1921.9,229.49 1921.9,203.33 1906,224.4 "
    style="fill:url(#lw)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -4257,7 +4257,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3708"
-   points="1001.8,797.72 860.98,810.75 886.38,985.93 "
+   points="860.98,810.75 886.38,985.93 1001.8,797.72 "
    style="fill:url(#lx)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -4278,7 +4278,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3715"
-   points="935,680.45 860.98,810.75 1001.8,797.72 "
+   points="860.98,810.75 1001.8,797.72 935,680.45 "
    style="fill:url(#ma)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -4299,7 +4299,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3722"
-   points="1001.8,797.72 886.38,985.93 1058.4,912.09 "
+   points="886.38,985.93 1058.4,912.09 1001.8,797.72 "
    style="fill:url(#mb)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -4320,7 +4320,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3729"
-   points="1045.3,577.66 935,680.45 1001.8,797.72 "
+   points="935,680.45 1001.8,797.72 1045.3,577.66 "
    style="fill:url(#mc)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -4341,7 +4341,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3736"
-   points="1045.3,577.66 1001.8,797.72 1193.3,693.48 "
+   points="1001.8,797.72 1193.3,693.48 1045.3,577.66 "
    style="fill:url(#md)" />
 					<linearGradient
    gradientUnits="userSpaceOnUse"
@@ -4362,7 +4362,7 @@
 				</linearGradient>
 				<polygon
    id="polygon3743"
-   points="1193.3,693.48 1001.8,797.72 1058.4,912.09 "
+   points="1001.8,797.72 1058.4,912.09 1193.3,693.48 "
    style="fill:url(#me)" />
 	</g>
 </switch></g><g

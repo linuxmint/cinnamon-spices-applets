@@ -54,20 +54,18 @@ var setTimeout = function (func, ms) {
     }, null);
     return id;
 };
-var delay = function (ms) {
-    return __awaiter(this, void 0, void 0, function () {
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0: return [4, new Promise(function (resolve, reject) {
-                        setTimeout(function () {
-                            resolve();
-                        }, ms);
-                    })];
-                case 1: return [2, _a.sent()];
-            }
-        });
+var delay = function (ms) { return __awaiter(void 0, void 0, void 0, function () {
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4, new Promise(function (resolve, reject) {
+                    setTimeout(function () {
+                        resolve();
+                    }, ms);
+                })];
+            case 1: return [2, _a.sent()];
+        }
     });
-};
+}); };
 var clearTimeout = function (id) {
     source_remove(id);
 };
@@ -81,6 +79,18 @@ var setInterval = function (func, ms) {
         return true;
     }, null);
     return id;
+};
+var GetDistance = function (lat1, lon1, lat2, lon2) {
+    var R = 6371e3;
+    var φ1 = lat1 * Math.PI / 180;
+    var φ2 = lat2 * Math.PI / 180;
+    var Δφ = (lat2 - lat1) * Math.PI / 180;
+    var Δλ = (lon2 - lon1) * Math.PI / 180;
+    var a = Math.sin(Δφ / 2) * Math.sin(Δφ / 2) +
+        Math.cos(φ1) * Math.cos(φ2) *
+            Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return R * c;
 };
 var clearInterval = function (id) {
     source_remove(id);
@@ -99,6 +109,8 @@ var isLocaleStringSupported = function () {
 };
 var GetDayName = function (date, locale, tz) {
     var support = isLocaleStringSupported();
+    if (locale == "c" || locale == null)
+        locale = undefined;
     if (!tz && support == "full")
         support = "notz";
     switch (support) {
@@ -113,6 +125,8 @@ var GetDayName = function (date, locale, tz) {
 };
 var GetHoursMinutes = function (date, locale, hours24Format, tz) {
     var support = isLocaleStringSupported();
+    if (locale == "c" || locale == null)
+        locale = undefined;
     if (!tz && support == "full")
         support = "notz";
     switch (support) {
@@ -124,8 +138,10 @@ var GetHoursMinutes = function (date, locale, hours24Format, tz) {
             return timeToUserUnits(date, hours24Format);
     }
 };
-var AwareDateString = function (date, locale, hours24Format) {
+var AwareDateString = function (date, locale, hours24Format, tz) {
     var support = isLocaleStringSupported();
+    if (locale == "c" || locale == null)
+        locale = undefined;
     var now = new Date();
     var params = {
         hour: "numeric",
@@ -141,6 +157,9 @@ var AwareDateString = function (date, locale, hours24Format) {
     }
     switch (support) {
         case "full":
+            if (tz == null || tz == "")
+                tz = undefined;
+            return date.toLocaleString(locale, { timeZone: tz, hour: "numeric", minute: "numeric", hour12: !hours24Format });
         case "notz":
             return date.toLocaleString(locale, { hour: "numeric", minute: "numeric", hour12: !hours24Format });
         case "none":
@@ -163,6 +182,30 @@ var IsNight = function (sunTimes, date) {
     if (time >= sunrise && time < sunset)
         return false;
     return true;
+};
+var compassToDeg = function (compass) {
+    if (!compass)
+        return null;
+    compass = compass.toUpperCase();
+    switch (compass) {
+        case "N": return 0;
+        case "NNE": return 22.5;
+        case "NE": return 45;
+        case "ENE": return 67.5;
+        case "E": return 90;
+        case "ESE": return 112.5;
+        case "SE": return 135;
+        case "SSE": return 157.5;
+        case "S": return 180;
+        case "SSW": return 202.5;
+        case "SW": return 225;
+        case "WSW": return 247.5;
+        case "W": return 270;
+        case "WNW": return 292.5;
+        case "NW": return 315;
+        case "NNW": return 337.5;
+        default: return null;
+    }
 };
 var timeToUserUnits = function (date, show24Hours) {
     var timeStr = util_format_date('%H:%M', date.getTime());
@@ -192,6 +235,8 @@ var capitalizeFirstLetter = function (description) {
     return description.charAt(0).toUpperCase() + description.slice(1);
 };
 var KPHtoMPS = function (speed) {
+    if (speed == null)
+        return null;
     return speed / WEATHER_CONV_KPH_IN_MPS;
 };
 var get = function (p, o) {
@@ -274,12 +319,18 @@ var TempToUserConfig = function (kelvin, units, russianStyle) {
     return temp.toString();
 };
 var CelsiusToKelvin = function (celsius) {
+    if (celsius == null)
+        return null;
     return (celsius + 273.15);
 };
 var FahrenheitToKelvin = function (fahr) {
+    if (fahr == null)
+        return null;
     return ((fahr - 32) / 1.8 + 273.15);
 };
 var MPHtoMPS = function (speed) {
+    if (speed == null || speed == undefined)
+        return null;
     return speed * 0.44704;
 };
 var PressToUserUnits = function (hpa, units) {
@@ -300,6 +351,21 @@ var PressToUserUnits = function (hpa, units) {
             return Math.round((hpa * 0.01450377) * 100) / 100;
     }
 };
+var KmToM = function (km) {
+    if (km == null)
+        return null;
+    return km * 0.6213712;
+};
+var MetreToUserUnits = function (m, distanceUnit) {
+    if (distanceUnit == "metric")
+        return Math.round(m / 1000 * 10) / 10;
+    return Math.round(KmToM(m / 1000) * 10) / 10;
+};
+var MillimeterToUserUnits = function (mm, distanceUnit) {
+    if (distanceUnit == "metric")
+        return Math.round(mm * 100) / 100;
+    return Math.round(mm * 0.03937 * 100) / 100;
+};
 var isNumeric = function (n) {
     return !isNaN(parseFloat(n)) && isFinite(n);
 };
@@ -316,7 +382,8 @@ var isID = function (text) {
     return false;
 };
 var isCoordinate = function (text) {
-    if (/^-?\d{1,3}(?:\.\d*)?,-?\d{1,3}(?:\.\d*)?/.test(text)) {
+    text = text.trim();
+    if (/^-?\d{1,3}(?:\.\d*)?,(\s)*-?\d{1,3}(?:\.\d*)?/.test(text)) {
         return true;
     }
     return false;
@@ -353,4 +420,8 @@ var weatherIconSafely = function (code, icon_type) {
 };
 var hasIcon = function (icon, icon_type) {
     return IconTheme.get_default().has_icon(icon + (icon_type == IconType.SYMBOLIC ? '-symbolic' : ''));
+};
+var shadeHexColor = function (color, percent) {
+    var f = parseInt(color.slice(1), 16), t = percent < 0 ? 0 : 255, p = percent < 0 ? percent * -1 : percent, R = f >> 16, G = f >> 8 & 0x00FF, B = f & 0x0000FF;
+    return "#" + (0x1000000 + (Math.round((t - R) * p) + R) * 0x10000 + (Math.round((t - G) * p) + G) * 0x100 + (Math.round((t - B) * p) + B)).toString(16).slice(1);
 };

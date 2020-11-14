@@ -63,18 +63,17 @@ var Yahoo = (function () {
         this.maxHourlyForecastSupport = 0;
         this.app = _app;
     }
-    Yahoo.prototype.GetWeather = function () {
+    Yahoo.prototype.GetWeather = function (loc) {
         return __awaiter(this, void 0, void 0, function () {
-            var loc, json, e_1;
+            var json, e_1;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        loc = this.ConstructLoc();
                         if (!(loc != null)) return [3, 5];
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 3, , 4]);
-                        return [4, this.app.SpawnProcess(["python3", this.app.appletDir + "/../yahoo-bridge.py", "--params", JSON.stringify({ lat: loc[0].toString(), lon: loc[1].toString() })])];
+                        return [4, this.app.SpawnProcess(["python3", this.app.appletDir + "/../yahoo-bridge.py", "--params", JSON.stringify({ lat: loc.lat.toString(), lon: loc.lon.toString() })])];
                     case 2:
                         json = _a.sent();
                         return [3, 4];
@@ -168,19 +167,7 @@ var Yahoo = (function () {
         }
         catch (e) {
             this.app.log.Error("DarkSky payload parsing error: " + e);
-            this.app.HandleError({ type: "soft", detail: "unusal payload", service: "darksky", message: _("Failed to Process Weather Info") });
-            return null;
-        }
-    };
-    ;
-    Yahoo.prototype.ConstructLoc = function () {
-        var location = this.app.config._location.replace(" ", "");
-        if (isCoordinate(location)) {
-            return location.split(",");
-        }
-        else {
-            this.app.log.Error("Yahoo: Location is not a coordinate");
-            this.app.HandleError({ type: "hard", detail: "bad location format", service: "darksky", userError: true, message: ("Please Check the location,\nmake sure it is a coordinate") });
+            this.app.HandleError({ type: "soft", detail: "unusual payload", service: "darksky", message: _("Failed to Process Weather Info") });
             return null;
         }
     };
@@ -191,16 +178,16 @@ var Yahoo = (function () {
         this.app.log.Debug("yahoo API error payload: " + json);
         switch (type) {
             case "import":
-                this.app.sendNotification("Missing package", "Please install '" + this.GetMissingPackage(json) + "', then refresh manually.");
+                this.app.sendNotification(_("Missing package"), _("Please install '") + this.GetMissingPackage(json) + _("', then refresh manually."));
                 this.app.log.Error(errorMsg + json.error.message);
-                this.app.HandleError({ detail: "import error", type: "hard", userError: true, service: "yahoo", message: "Failed to import " + this.GetMissingPackage(json) + ", please install it first." });
+                this.app.HandleError({ detail: "import error", type: "hard", userError: true, service: "yahoo", message: _("Please install '") + this.GetMissingPackage(json) + _("', then refresh manually.") });
                 break;
             case "network":
-                this.app.HandleError({ detail: "no api response", type: "soft", service: "yahoo", message: "Could not connect to Yahoo API." });
+                this.app.HandleError({ detail: "no api response", type: "soft", service: "yahoo", message: _("Could not connect to Yahoo API.") });
                 this.app.log.Error(errorMsg + "Could not connect to API, error - " + json.error.data);
                 break;
             case "unknown":
-                this.app.HandleError({ detail: "no api response", type: "hard", service: "yahoo", message: "Unknown error happened while obtaining weather, see Looking Glass logs for more information" });
+                this.app.HandleError({ detail: "no api response", type: "hard", service: "yahoo", message: _("Unknown error happened while obtaining weather, see Looking Glass logs for more information") });
                 this.app.log.Error(errorMsg + "Unknown Error happened in yahoo bridge, error - " + json.error.data);
                 break;
             default:
