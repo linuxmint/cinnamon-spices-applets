@@ -3858,9 +3858,15 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
         }
     }
 
+    // This is included in util.js since Mint 19.3, but we need it also in Mint 19.2 for improved search.
+    _escapeRegExp(str) {
+        // from: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
+        return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
+    }
+
     _matchNames(buttons, pattern){
         let ret = [];
-        let regexpPattern = new RegExp(Util.escapeRegExp(pattern));
+        let regexpPattern = new RegExp(this._escapeRegExp(pattern));
 
         for (let i = 0; i < buttons.length; i++) {
             if (buttons[i].type == "recent-clear" || buttons[i].type == "no-recent") {
@@ -3883,7 +3889,7 @@ class CinnamonMenuApplet extends Applet.TextIconApplet {
             return [];
 
         let apps = [];
-        let regexpPattern = new RegExp(Util.escapeRegExp(pattern));
+        let regexpPattern = new RegExp(this._escapeRegExp(pattern));
 
         for (let i in this._applicationsButtons) {
             let button = this._applicationsButtons[i];
