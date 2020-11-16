@@ -25,11 +25,7 @@ class CategoryListButton extends PopupBaseMenuItem {
         super({ hover: false, activate: false });
         this.appThis = appThis;
         this.signals = new SignalManager(null);
-
         this.index = -1;
-        //let dirName = !isStrDir ? dir.get_name() : null;
-        //this.id = typeof dir === 'string' || dir instanceof String ? dir : altNameText;
-        //let categoryNameText = isStrDir ? altNameText : dirName ? dirName : '';
         this.disabled = false;
         this.entered = null;
         let isStrDir = typeof dir === 'string';
@@ -44,21 +40,15 @@ class CategoryListButton extends PopupBaseMenuItem {
 
         if (!isStrDir) {
             let icon = dir.get_icon();
-            let iconName;
-            if (icon && icon.get_names) {
-                iconName = icon.get_names().toString();
-            } else {
-                iconName = '';
+            let iconName = '';
+            if (icon) {
+                iconName = icon.names[0];
+                if (!iconName) {
+                    iconName = icon.get_names().toString();
+                }
             }
-            if (iconName) {
-                this.icon = St.TextureCache.get_default().load_gicon(null, icon,
-                                                                this.appThis.settings.categoryIconSize);
-            } else {
-                icon = dir.get_icon() && typeof dir.get_icon().get_names === 'function' ?
-                                                    dir.get_icon().get_names().toString() : 'error';
-                this.icon = new St.Icon({   icon_name: icon,
-                                            icon_size: this.appThis.settings.categoryIconSize});
-            }
+            this.icon = new St.Icon({   icon_name: iconName, icon_type: St.IconType.FULLCOLOR,
+                                        icon_size: this.appThis.settings.categoryIconSize});
         } else {
             this.icon = new St.Icon({   gicon: Gio.ThemedIcon.new_from_names(altIconNames),
                                         icon_size: this.appThis.settings.categoryIconSize,
@@ -135,7 +125,7 @@ class CategoryListButton extends PopupBaseMenuItem {
     }
 
     handleEnter(actor, event) {
-        if (this.disabled) {
+        if (this.disabled || this.appThis.contextMenu.isOpen) {
             return Clutter.EVENT_STOP;
         }
 
@@ -170,7 +160,7 @@ class CategoryListButton extends PopupBaseMenuItem {
     }
 
     handleLeave(actor, event) {
-        if (this.disabled) {
+        if (this.disabled || this.appThis.contextMenu.isOpen) {
             return false;
         }
         this.entered = null;
@@ -188,11 +178,17 @@ class CategoryListButton extends PopupBaseMenuItem {
         if (this.disabled) {
             return;
         }
+        if (this.appThis.contextMenu.isOpen) {
+            this.appThis.contextMenu.close();
+            return Clutter.EVENT_STOP;
+        }
         const button = event.get_button();
         if (button === 1 && this.appThis.settings.categoryClick) {
             this.selectCategory();
+            return Clutter.EVENT_STOP;
         } else if (button === 3) {
             this.appThis.contextMenu.open(this.id, event, this, true);
+            return Clutter.EVENT_STOP;
         }
     }
 
@@ -274,7 +270,7 @@ class ContextMenu {
         this.menu = new PopupSubMenu(this.appThis.actor);//popup-sub-menu menu menu-context-menu starkmenu-background
         this.menu.actor.set_style_class_name('menu menu-context-menu starkmenu-background'); //menu-background
         this.contextMenuBox = new St.BoxLayout({ style_class: '',// style: 'border: 0px;',
-                                            vertical: true, reactive: true });
+                                                    vertical: true, reactive: true });
         this.contextMenuBox.add_actor(this.menu.actor);
         this.contextMenuBox.height = 0;
         //appThis.mainBox.add(this.contextMenuBox, {expand: false, x_fill: false, //y_fill: false,
@@ -297,8 +293,9 @@ class ContextMenu {
                 this.menu.addMenuItem(item);
                 this.contextMenuButtons.push(item);
             };
-            addMenuItem( new ContextMenuItem(this.appThis, 'Add folder...', null,
-                                () => { this.appThis.addCategoryFolder(); } ));
+            addMenuItem( new ContextMenuItem(this.appThis, _('Reset category order'), null,
+                                () => { this.appThis.resetCategoryOrder();
+                                        this.close(); } ));
         } else if (app.type === APPTYPE.application) {
             this.populateContextMenu_apps(app);
         } else if (app.type === APPTYPE.file) {
@@ -486,8 +483,18 @@ class AppListGridButton extends PopupBaseMenuItem {
         //create icon even if iconSize is 0 so dnd has something to drag
         if (this.app.type === APPTYPE.application) {
             this.icon = this.app.create_icon_texture(this.appThis.getIconSize());
-        } else if (this.app.type === APPTYPE.file || this.app.type === APPTYPE.place) {
-            this.icon = new St.Icon({ gicon: this.app.icon, icon_size: this.appThis.getIconSize()});
+        } else if (this.app.type === APPTYPE.place) {
+            if (this.app.icon instanceof St.Icon) {
+                this.icon = this.app.icon;
+            } else {
+                this.icon = new St.Icon({ gicon: this.app.icon, icon_size: this.appThis.getIconSize()});
+            }
+        } else if (this.app.type === APPTYPE.file) {
+            if (this.app.icon) {
+                this.icon = new St.Icon({ gicon: this.app.icon, icon_size: this.appThis.getIconSize()});
+            } else {//back button
+                this.icon = new St.Icon({ icon_name: 'edit-undo-symbolic', icon_size: this.appThis.getIconSize()});
+            }
         } else if (this.app.type === APPTYPE.clearlist) {
             this.icon = new St.Icon({   icon_name: 'edit-clear', icon_type: St.IconType.SYMBOLIC,
                                         icon_size: this.appThis.getIconSize()});
@@ -551,7 +558,7 @@ class AppListGridButton extends PopupBaseMenuItem {
 
         if (this.app.type === APPTYPE.application) { //----------dnd--------------
             this.actor._delegate = {
-                    handleDragOver: (source /*, actor, x, y, time */) => {
+                    handleDragOver: (source) => {
                             if (source.isDraggableApp === true && source.get_app_id() !== this.app.get_id() &&
                                                                     this.appThis.currentCategory === 'favorites') {
                                 this.appThis.resetOpacity();
@@ -560,7 +567,7 @@ class AppListGridButton extends PopupBaseMenuItem {
                             }
                             return DragMotionResult.NO_DROP; },
                     handleDragOut: () => {  this.actor.set_opacity(255); },
-                    acceptDrop: (source /*, actor, x, y, time */) => {
+                    acceptDrop: (source) => {
                             if (source.isDraggableApp === true && source.get_app_id() !== this.app.get_id() &&
                                                                 this.appThis.currentCategory === 'favorites') {
                                 this.actor.set_opacity(255);
@@ -574,7 +581,7 @@ class AppListGridButton extends PopupBaseMenuItem {
                     _getDragActor: () => new Clutter.Clone({source: this.actor}),
                     getDragActor: () => new Clutter.Clone({source: this.icon}),
                     get_app_id: () => this.app.get_id(),
-                    isDraggableApp: true
+                    isDraggableApp: this.app.type === APPTYPE.application
             };
 
             this.draggable = makeDraggable(this.actor);
@@ -749,6 +756,10 @@ class AppListGridButton extends PopupBaseMenuItem {
             }
             this.appThis.closeMenu();
         } else if (this.app.type === APPTYPE.file) {
+            if (this.app.directory) {
+                this.appThis.setActiveCategory(Gio.File.new_for_uri(this.app.uri).get_path());
+                return;
+            }
             try {
                 Gio.app_info_launch_default_for_uri(this.app.uri, global.create_app_launch_context());
                 this.appThis.closeMenu();
@@ -807,7 +818,7 @@ class AppListGridButton extends PopupBaseMenuItem {
             this.buttonBox.destroy();
         }
         PopupBaseMenuItem.prototype.destroy.call(this);
-        unref(this);
+        //unref(this);
     }
 }
 
