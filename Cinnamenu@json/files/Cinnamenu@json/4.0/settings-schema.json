@@ -35,7 +35,7 @@
             "title":"Layout",
             "keys":[
                 "applications-view-mode",
-                "powergroup-placement",
+                "sidebar-placement",
                 "add-favorites",
                 "description-placement",
                 "enable-custom-menu-height",
@@ -126,7 +126,7 @@
         },
         "tooltip":"Choose where to show application descriptions"
     },
-    "powergroup-placement":{
+    "sidebar-placement":{
         "type":"combobox",
         "default":1,
         "description":"Session buttons location",
