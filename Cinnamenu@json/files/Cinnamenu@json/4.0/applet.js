@@ -509,7 +509,7 @@ class CinnamenuApplet extends TextIconApplet {
             if (!this.displayed) {
                 this.display();
             }
-
+            this.categories.buildCategories();//in case menu editor updates
             global.stage.set_key_focus(this.search.searchEntry);
             this.mainBox.show();
             let currentCategory = this.settings.openOnFavorites && this.settings.showFavsCategory ?
@@ -1919,7 +1919,7 @@ class Apps {
                             uri: parent.get_uri(),
                             mimeType: 'inode/directory',
                             directory: true,
-                            description: parent.get_path(),
+                            description: '',//parent.get_path(),
                             type: APPTYPE.file };
             return [backButton].concat(res);
         } else {
