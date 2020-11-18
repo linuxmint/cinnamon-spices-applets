@@ -42,9 +42,11 @@ class CategoryListButton extends PopupBaseMenuItem {
             let icon = dir.get_icon();
             let iconName = '';
             if (icon) {
-                iconName = icon.names[0];
-                if (!iconName) {
-                    iconName = icon.get_names().toString();
+                if (icon.names) {
+                    iconName = icon.names[0];
+                }
+                if (!iconName && icon.get_names) {
+                    iconName = icon.get_names()[0];
                 }
             }
             this.icon = new St.Icon({   icon_name: iconName, icon_type: St.IconType.FULLCOLOR,
@@ -632,7 +634,7 @@ class AppListGridButton extends PopupBaseMenuItem {
             }
         }
         let markup = '<span>' + name + '</span>';
-        if (this.appThis.settings.descriptionPlacement === PlacementUNDER) {
+        if (this.appThis.settings.descriptionPlacement === PlacementUNDER && description) {
             markup += '\n<span size="small">' + description + '</span>';
         }
         const clutterText = this.label.get_clutter_text();
