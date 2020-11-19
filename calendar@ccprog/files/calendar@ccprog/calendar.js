@@ -16,7 +16,7 @@ const WEEKDATE_HEADER_WIDTH_DIGITS = 3;
 const SHOW_WEEKDATE_KEY = "show-week-numbers";
 const WEEKEND_LENGHTE_KEY = "weekend-length";
 const FIRST_WEEKDAY_KEY = "first-day-of-week";
-const PART_DAY_HOLIDAY = "PART_DAY_HOLIDAY"
+const PART_DAY_HOLIDAY = "PART_DAY_HOLIDAY";
 const DESKTOP_SCHEMA = "org.cinnamon.desktop.interface";
 
 const timeinfo = Utils.getInfo("LC_TIME");
