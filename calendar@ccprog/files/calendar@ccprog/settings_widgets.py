@@ -5,6 +5,8 @@ from xapp.SettingsWidgets import ComboBox, Entry
 import pytz
 from gi.repository import Gtk
 
+TZ_NO_CATEGORY = 'Miscellaneous'
+
 def list_edit_factory(params):
     is_combo = 'options' in params
 
@@ -56,7 +58,8 @@ class ClocksList(JSONSettingsList):
             try:
                 region, city = tz.split('/', maxsplit=1)
             except ValueError:
-                continue
+                region = TZ_NO_CATEGORY
+                city = tz
 
             if region not in self.region_map:
                 self.region_map[region] = []
@@ -143,7 +146,10 @@ class ClocksList(JSONSettingsList):
             self.last_region = widgets['region'].get_widget_value()
             self.last_city = widgets['city'].get_widget_value()
 
-            timezone = '/'.join([self.last_region, self.last_city])
+            if self.last_region == TZ_NO_CATEGORY:
+                timezone = self.last_city
+            else:
+                timezone = '/'.join([self.last_region, self.last_city])
 
             dialog.destroy()
             return [label, timezone]
