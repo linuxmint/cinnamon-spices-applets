@@ -66,7 +66,7 @@ class CinnamonCalendarApplet extends Applet.TextApplet {
             let item = new PopupMenu.PopupMenuItem(_("Date and Time Settings"));
             item.connect("activate", this._onLaunchSettings.bind(this));
 
-            this.menu.addMenuItem(item);
+            this._applet_context_menu.addMenuItem(item);
 
             this._dateFormatFull = CinnamonDesktop.WallClock.lctime_format("cinnamon", "%A, %B %-e, %Y");
 
