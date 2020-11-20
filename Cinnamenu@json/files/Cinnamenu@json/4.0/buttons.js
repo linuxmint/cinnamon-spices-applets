@@ -6,7 +6,7 @@ const Clutter = imports.gi.Clutter;
 const {AppState} = imports.gi.Cinnamon;
 const {EllipsizeMode} = imports.gi.Pango;
 const Main = imports.ui.main;
-const {PopupBaseMenuItem, PopupSubMenu, PopupIconMenuItem} = imports.ui.popupMenu;
+const {PopupBaseMenuItem, PopupSubMenu, PopupIconMenuItem, PopupSeparatorMenuItem} = imports.ui.popupMenu;
 const {DragMotionResult, makeDraggable} = imports.ui.dnd;
 const {getUserDesktopDir, changeModeGFile} = imports.misc.fileUtils;
 const {SignalManager} = imports.misc.signalManager;
@@ -48,6 +48,9 @@ class CategoryListButton extends PopupBaseMenuItem {
                 if (!iconName && icon.get_names) {
                     iconName = icon.get_names()[0];
                 }
+            }
+            if (iconName === '') {
+                iconName = 'folder';
             }
             this.icon = new St.Icon({   icon_name: iconName, icon_type: St.IconType.FULLCOLOR,
                                         icon_size: this.appThis.settings.categoryIconSize});
@@ -449,6 +452,14 @@ class ContextMenu {
         addMenuItem( new ContextMenuItem(   this.appThis, _('Other application...'), null,
                                             () => { spawnCommandLine("nemo-open-with " + app.uri);
                                                     this.appThis.closeMenu(); } ));
+        const folder = file.get_parent();
+        if (app.description) { //if recent item (not a browser folder/file)
+            this.menu.addMenuItem(new PopupSeparatorMenuItem(this.appThis));
+            addMenuItem( new ContextMenuItem(   this.appThis, _('Open containing folder'), null,
+                        () => { const fileBrowser = Gio.AppInfo.get_default_for_type('inode/directory', true);
+                                fileBrowser.launch([folder], null);
+                                this.appThis.closeMenu(); } ));
+        }
     }
 
     close() {
@@ -639,7 +650,14 @@ class AppListGridButton extends PopupBaseMenuItem {
         }
         const clutterText = this.label.get_clutter_text();
         clutterText.set_markup(markup);
-        clutterText.ellipsize = EllipsizeMode.END;
+        /*if (this.app.type === APPTYPE.file && !description) {
+            clutterText.set_line_wrap(true);
+            clutterText.set_line_wrap_mode(2);//WORD_CHAR
+            const lines = clutterText.get_layout().get_lines();
+            global.log(clutterText.get_text());
+        } else {*/
+            clutterText.ellipsize = EllipsizeMode.END;
+        //}
     }
 
     handleEnter(actor, event) {
