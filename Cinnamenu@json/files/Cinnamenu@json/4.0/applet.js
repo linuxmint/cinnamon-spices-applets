@@ -1,6 +1,7 @@
 const Gio = imports.gi.Gio;
 const Gtk = imports.gi.Gtk;
 const GLib = imports.gi.GLib;
+const Cairo = imports.cairo;
 const CMenu = imports.gi.CMenu;
 const Clutter = imports.gi.Clutter;
 const Cinnamon = imports.gi.Cinnamon;
@@ -121,7 +122,7 @@ class CinnamenuApplet extends TextIconApplet {
             { key: 'enable-autoscroll',         value: 'enableAutoScroll',      cb: this.refresh },
             { key: 'web-search-option',         value: 'webSearchOption',       cb: null },
             { key: 'emoji-search',              value: 'enableEmojiSearch',     cb: null },
-            { key: 'enable-search-providers',   value: 'enableSearchProviders', cb: null },
+            //{ key: 'enable-search-providers',   value: 'enableSearchProviders', cb: null },
 
             { key: 'menu-icon-custom',          value: 'menuIconCustom',        cb: this.updateIconAndLabel },
             { key: 'menu-icon',                 value: 'menuIcon',              cb: this.updateIconAndLabel },
@@ -1158,7 +1159,7 @@ class CinnamenuApplet extends TextIconApplet {
                 buttons[0].handleEnter();
             }
         };
-        if (this.settings.enableSearchProviders && pattern.length > 2) {
+        if (pattern.length > 2) {//} && this.settings.enableSearchProviders) {
             launch_all(pattern, (provider, providerResults) => {
                         for (let i = 0; i < providerResults.length; i++) {
                             if (!providerResults[i]) {
@@ -1186,7 +1187,9 @@ class CinnamenuApplet extends TextIconApplet {
                         if (providerResults && providerResults.length > 0) {
                             results = results.concat(providerResults);
                         }
-                        finish(); } );
+                        finish();
+                    } );
+            finish();
         } else {
             finish();
         }
@@ -1255,7 +1258,6 @@ class CinnamenuApplet extends TextIconApplet {
         //==================bottomPane================
         const sidebarPlacement = this.settings.sidebarPlacement;
         this.sessionBox = new PowerGroupBox(this, sidebarPlacement);
-        this.sessionBox.populate(this.apps.listFavorites());
         this.search = new Search(this);
         this.displaySignals.connect(this.search.searchEntryText, 'text-changed',
                                                         (...args) => this.onSearchTextChanged(...args));
@@ -1321,6 +1323,7 @@ class CinnamenuApplet extends TextIconApplet {
         if (Lpadding > 20) {
             this.categoriesView.categoriesBox.style = 'padding-left: 20px;';
         }
+        this.sessionBox.populate(this.apps.listFavorites());
         this.switchApplicationsView();
     }
 
@@ -2035,16 +2038,27 @@ class PowerGroupBox {
         for (let i = 0; i < this.items.length; i++) {
             if ((!reverseOrder && i == this.items.length - 3 && this.items.length > 3) ||
                         (reverseOrder && i == 3 && this.items.length > 3)){// add seperator dot to box
-                const dot = new St.Widget({ style: 'width: 4px; height: 4px; background-color: ' +
-                        this.appThis.getThemeForegroundColor() + '; margin: 7px; border: 3px; border-radius: 10px;',
-                                layout_manager: new Clutter.BinLayout(), x_expand: false, y_expand: false, });
-                this.box.add(dot, { x_fill: false, y_fill: false,
-                                x_align: St.Align.MIDDLE, y_align: St.Align.MIDDLE });
+                this.addSeparator();
             }
             this.box.add(this.items[i].actor, { x_fill: false, y_fill: false,
                                                         x_align: St.Align.MIDDLE, y_align: St.Align.MIDDLE });
         }
         return;
+    }
+
+    addSeparator() {
+        const dot = new St.BoxLayout({ style_class: 'popup-separator-menu-item', x_expand: false, y_expand: false});
+        this.box.add(dot, { x_fill: false, y_fill: false,
+                        x_align: St.Align.MIDDLE, y_align: St.Align.MIDDLE });
+        let width = this.appThis.settings.sessionIconSize + 8;
+        let height = 2;
+        if (this.appThis.settings.sidebarPlacement === PlacementTOP ||
+                                        this.appThis.settings.sidebarPlacement === PlacementBOTTOM) {
+            [width, height] = [height, width];
+        }
+        dot.style = `width: ${width}px; height: ${height}px; background-color: ${
+                this.appThis.getThemeForegroundColor()}; margin: 1px; border: 0px; border-radius: 10px; `;
+        dot.set_opacity(25);
     }
 
     getButtons() {

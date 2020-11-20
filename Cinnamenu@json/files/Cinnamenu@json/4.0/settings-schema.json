@@ -74,8 +74,7 @@
                 "open-on-favorites",
                 "enable-autoscroll",
                 "web-search-option",
-                "emoji-search",
-                "enable-search-providers"
+                "emoji-search"
             ]
         },
         "panel-appear":{
@@ -251,7 +250,7 @@
         "type":"checkbox",
         "default":true,
         "description":"Enable autoscrolling",
-        "tooltip":"Enable autoscrolling in application list"
+        "tooltip":"Autoscroll the application list on mouse hover"
     },
     "web-search-option":{
         "type":"combobox",
@@ -271,12 +270,6 @@
         "default":true,
         "description":"Enable emoji search",
         "tooltip":"Show emojis in search results"
-    },
-    "enable-search-providers":{
-        "type":"checkbox",
-        "default":false,
-        "description":"Enable search providers",
-        "tooltip":"Include search provider results in searches"
     },
 
     "menu-icon-custom":{
