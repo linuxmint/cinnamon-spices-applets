@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-11-21 19:10+0100\n"
-"PO-Revision-Date: 2020-11-21 21:08+0100\n"
+"PO-Revision-Date: 2020-11-21 21:16+0100\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -77,7 +77,7 @@ msgstr "Oznacz "
 
 #: applet.js:782
 msgid " Posts Read"
-msgstr "  jako przeczytane"
+msgstr " jako przeczytane"
 
 #: applet.js:788
 msgid "Update feed URL"
@@ -89,7 +89,7 @@ msgstr "Opublikowane: "
 
 #: applet.js:926
 msgid "Mark Post Read"
-msgstr "Oznacz wpis jako przeczytany"
+msgstr "Oznacz jako przeczytany"
 
 #: applet.js:958
 msgid "d) "
