@@ -630,7 +630,7 @@ PomodoroApplet.prototype = {
         }));
 
         menu.connect('what-is-this', Lang.bind(this, function() {
-            let command = "xdg-open '%s'".format("http://en.wikipedia.org/wiki/Pomodoro_Technique");
+            let command = "xdg-open '%s'".format(_("http://en.wikipedia.org/wiki/Pomodoro_Technique"));
             Util.trySpawnCommandLine(command);
         }));
 
@@ -961,7 +961,7 @@ PomodoroSetFinishedDialog.prototype = {
             return;
         }
 
-        this._setTimeLabelText(_("A new pomodoro begins in ") + this._getTimeString(tickCount)) + "\n"
+        this._setTimeLabelText(_("A new pomodoro begins in %s.").format(this._getTimeString(tickCount))) + "\n"
     },
 
     _setTimeLabelText: function(label) {
@@ -972,7 +972,10 @@ PomodoroSetFinishedDialog.prototype = {
         let minutes = parseInt(totalSeconds / 60);
         let seconds = parseInt(totalSeconds % 60);
 
-        return _("%d minutes and %d seconds").format(minutes, seconds);
+        let min = Gettext.dngettext(UUID, "%d minute", "%d minutes", minutes).format(minutes);
+        let sec = Gettext.dngettext(UUID, "%d second", "%d seconds", seconds).format(seconds);
+
+        return _("%s and %s").format(min, sec);
     }
 };
 
