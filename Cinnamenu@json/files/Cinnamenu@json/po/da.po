@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-14 13:11+0100\n"
-"PO-Revision-Date: 2020-08-15 16:55+0200\n"
+"POT-Creation-Date: 2020-11-14 13:40+0000\n"
+"PO-Revision-Date: 2020-11-18 15:28+0100\n"
 "Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Language-Team: Dansk-gruppen <dansk@dansk-gruppen.dk>\n"
 "Language: da\n"
@@ -114,14 +114,32 @@ msgstr "Fjern"
 msgid "Please wait..."
 msgstr "Vent venligst..."
 
-msgid "Search web for"
-msgstr "Søgemaskine udbydere"
-
 msgid "Solution:"
 msgstr "Løsning:"
 
 msgid "Click to copy"
 msgstr "Klik for at kopiere"
+
+msgid "Search web for"
+msgstr "Søg på nettet efter"
+
+msgid "Too many entries - showing first 1000 entries only"
+msgstr "For mange poster - viser kun de første 1000 poster"
+
+msgid "Home folder"
+msgstr "Hjemme mappe"
+
+msgid "Reset category order"
+msgstr "Nulstil rækkefølgen af kategorier"
+
+msgid "This file is no longer available"
+msgstr "Filen er ikke længere tilgængelig"
+
+msgid "Open with"
+msgstr "Åben med"
+
+msgid "Other application..."
+msgstr "Andet program..."
 
 msgid "Cinnamenu"
 msgstr "Cinnamenu"
@@ -173,9 +191,6 @@ msgstr "Indstillinger for seneste filer"
 
 msgid "Open the menu editor"
 msgstr "Åbn redigering af menuen"
-
-msgid "Reset category order"
-msgstr "Nulstil rækkefølgen af kategorier"
 
 msgid "Use a custom icon"
 msgstr "Anvend et selvvalgt ikon"
@@ -345,6 +360,25 @@ msgstr "Føj favoritter til sessionsknapper"
 msgid "Show your favorite app icons next to the session buttons"
 msgstr "Vis dine foretrukne appikoner ved siden af sessionsknapperne"
 
+msgid ""
+"Show your browser's web bookmarks in the menu.\n"
+"Note: Install package gir1.2-gda-5.0 to read firefox bookmarks."
+msgstr ""
+"Vis browserens web bogmærker i menuen\n"
+"Bemærk: Installer pakken gir1.2-gda-5.0 for at læse firefox bogmærker."
+
+msgid "Show favorites category"
+msgstr "Vis favorit kategorien"
+
+msgid "Show your favorite apps category in the menu"
+msgstr "Vis din favorit apps kategori i menuen"
+
+msgid "Show home folder"
+msgstr "Vis hjemme mappen"
+
+msgid "Show home folder category in the menu"
+msgstr "Vis hjemme mappe kategori i menuen"
+
 msgid "Always open menu on favorite apps"
 msgstr "Altid åbne menu med favoritter"
 
@@ -367,7 +401,13 @@ msgid "DuckDuckGo"
 msgstr ""
 
 msgid "Show an internet search option in search results"
-msgstr "Vis valg af internet søgning i søge resultater "
+msgstr "Vis valg af internet søgning i søge resultater"
+
+msgid "Enable emoji search"
+msgstr "Aktiver emoji søgning"
+
+msgid "Show emojis in search results"
+msgstr "Vis emojis i søge resultater"
 
 msgid "Session buttons icon size"
 msgstr "Ikonstørrelse for sessionsknapper"
