@@ -199,12 +199,12 @@ PomodoroApplet.prototype = {
             "_opt_displayIconInPanel",
             this._onAppletIconChanged
         );
-        
+
         this._settingsProvider.bindProperty(
-        	Settings.BindingDirection.IN,
-        	"show_timer",
-        	"_opt_showTimerInPanel",
-        	this._onShowTimerChanged
+            Settings.BindingDirection.IN,
+            "show_timer",
+            "_opt_showTimerInPanel",
+            this._onShowTimerChanged
         );
 
         this._settingsProvider.bindProperty(
@@ -333,10 +333,10 @@ PomodoroApplet.prototype = {
         let timerText = "%d".format(this._numPomodoroSetFinished);
 
         if (this._opt_showTimerInPanel) {
-        	timerText += " \u00B7 "; // Separator
-        	timerText += "%02d:%02d".format(Math.abs(minutes), Math.abs(seconds));
+            timerText += " \u00B7 "; // Separator
+            timerText += "%02d:%02d".format(Math.abs(minutes), Math.abs(seconds));
         }
-        
+
         this.set_applet_label(timerText);
     },
 
@@ -414,7 +414,7 @@ PomodoroApplet.prototype = {
 
         timerQueue.connect('timer-queue-before-next-timer', Lang.bind(this, function() {
 
-            let timer = timerQueue.getCurrentTimer()
+            let timer = timerQueue.getCurrentTimer();
 
             if (!this._opt_autoContinueAfterShortBreak && timer === pomodoroTimer) {
                 timerQueue.preventStart(true);
@@ -444,7 +444,7 @@ PomodoroApplet.prototype = {
             this._setCurrentState('pomodoro');
 
             this._playStartSound();
-            Main.notify(_("Let's go to work !"));
+            Main.notify(_("Let's go to work!"));
         }));
 
         pomodoroTimer.connect('timer-stopped', Lang.bind(this, function() {
@@ -629,13 +629,8 @@ PomodoroApplet.prototype = {
             this.set_applet_tooltip("");
         }));
 
-        menu.connect('show-settings', Lang.bind(this, function() {
-            let command = "cinnamon-settings applets %s".format(this._metadata.uuid);
-            Util.trySpawnCommandLine(command);
-        }));
-
         menu.connect('what-is-this', Lang.bind(this, function() {
-            let command = "gnome-open '%s'".format("http://en.wikipedia.org/wiki/Pomodoro_Technique");
+            let command = "xdg-open '%s'".format("http://en.wikipedia.org/wiki/Pomodoro_Technique");
             Util.trySpawnCommandLine(command);
         }));
 
@@ -719,6 +714,7 @@ PomodoroApplet.prototype = {
 
     _onAppletIconChanged: function() {
         if (this._opt_displayIconInPanel) {
+            this._applet_icon_box.show();
             switch (this._currentState) {
             case 'short-break':
             case 'long-break':
@@ -731,12 +727,12 @@ PomodoroApplet.prototype = {
             }
         }
         else if (this._applet_icon_box.child) {
-            this._applet_icon_box.child.destroy();
+            this._applet_icon_box.hide();
         }
     },
-    
-    _onShowTimerChanged: function() {  
-    	this._setTimerLabel(this._timerQueue.getCurrentTimer().getTicksRemaining());
+
+    _onShowTimerChanged: function() {
+        this._setTimerLabel(this._timerQueue.getCurrentTimer().getTicksRemaining());
     },
 
     /**
@@ -838,16 +834,6 @@ PomodoroMenu.prototype = {
         }));
 
         this.addMenuItem(resetAll);
-
-        // "Settings"
-
-        let settings = new PopupMenu.PopupMenuItem(_("Settings"));
-
-        settings.connect("activate", Lang.bind(this, function() {
-            this.emit('show-settings');
-        }));
-
-        this.addMenuItem(settings);
 
         // "What is this?"
 
