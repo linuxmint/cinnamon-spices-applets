@@ -372,16 +372,16 @@ class Calendar {
         beginDate.setTime(beginDate.getTime() - daysToWeekStart * MSECS_IN_DAY);
 
         const buttons = new Map();
+        const months = new Set();
 
         let iter = new Date(beginDate);
         let row = 2;
         do {
             let button = new St.Button({ label: iter.getDate().toString() });
 
-            //only same month dates are eligable for holiday
-            if (iter.getMonth() === this._selectedDate.getMonth()) {
-                buttons.set(iter.getDate(), button);
-            }
+            const month = `${iter.getFullYear()}/${iter.getMonth() + 1}`;
+            buttons.set(`${iter.getMonth() + 1}/${iter.getDate()}`, button);
+            months.add(month);
 
             //button.reactive = false;
 
@@ -434,21 +434,25 @@ class Calendar {
         // to prevent issues with jumping controls, see #226
         } while (row <= 7 );
 
-        this.holiday.getHolidays(this._selectedDate.getFullYear(), this._selectedDate.getMonth() + 1, (dates) => {
-            for (const [day, [name, flags]] of dates.entries()) {
-                const button = buttons.get(day);
+        for (let month of months) {
+            const [y, m] = month.split('/');
+            this.holiday.getHolidays(y, m, (dates) => {
+                for (const [date, [name, flags]] of dates.entries()) {
+                    const button = buttons.get(date);
+                    if (!button) continue;
 
-                const tooltip = new Tooltips.Tooltip(button);
-                tooltip.set_text(name);
+                    const tooltip = new Tooltips.Tooltip(button);
+                    tooltip.set_text(name);
 
-                const partDay = flags && flags.indexOf(PART_DAY_HOLIDAY) >= 0;
-                if (this.weekend_length === 1 && partDay) continue;
+                    const partDay = flags && flags.indexOf(PART_DAY_HOLIDAY) >= 0;
+                    if (this.weekend_length === 1 && partDay) continue;
 
-                button.remove_style_class_name("calendar-work-day");
-                button.add_style_class_name("calendar-nonwork-day");
-                //button.queue_redraw();
-            }
-        });
+                    button.remove_style_class_name("calendar-work-day");
+                    button.add_style_class_name("calendar-nonwork-day");
+                    //button.queue_redraw();
+                }
+            });
+        }
     }
 }
 
