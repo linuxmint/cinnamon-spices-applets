@@ -16,6 +16,7 @@ const WEEKDATE_HEADER_WIDTH_DIGITS = 3;
 const SHOW_WEEKDATE_KEY = "show-week-numbers";
 const WEEKEND_LENGHTE_KEY = "weekend-length";
 const FIRST_WEEKDAY_KEY = "first-day-of-week";
+const PART_DAY_HOLIDAY = "PART_DAY_HOLIDAY"
 const DESKTOP_SCHEMA = "org.cinnamon.desktop.interface";
 
 const timeinfo = Utils.getInfo("LC_TIME");
@@ -434,11 +435,14 @@ class Calendar {
         } while (row <= 7 );
 
         this.holiday.getHolidays(this._selectedDate.getFullYear(), this._selectedDate.getMonth() + 1, (dates) => {
-            for (const [day, name] of dates.entries()) {
+            for (const [day, [name, flags]] of dates.entries()) {
                 const button = buttons.get(day);
 
                 const tooltip = new Tooltips.Tooltip(button);
                 tooltip.set_text(name);
+
+                const partDay = flags && flags.indexOf(PART_DAY_HOLIDAY) >= 0;
+                if (this.weekend_length === 1 && partDay) continue;
 
                 button.remove_style_class_name("calendar-work-day");
                 button.add_style_class_name("calendar-nonwork-day");
