@@ -171,8 +171,8 @@ class Enrico extends Provider {
     }
 
     matchMonth (year, month) {
-        const holidays = this.data.filter((d) => d.year === year && d.month === month && d.region === this.region);
-        return new Map(holidays.map((d) => [d.day, [d.name, d.flags]]));
+        const holidays = this.data.filter((d) => d.year == year && d.month == month && d.region == this.region);
+        return new Map(holidays.map((d) => [`${d.month}/${d.day}`, [d.name, d.flags]]));
     }
 
     getHolidays (year, month, callback) {

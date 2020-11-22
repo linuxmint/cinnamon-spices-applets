@@ -1,3 +1,8 @@
+### 1.1.4
+- Display holidays/weekends in bold even outside of the selected month
+- Move "Date and Time Settings" to context menu
+- Put uncategorized timezones into the list of World Clocks (thanks to **@sphh**)
+
 ### 1.1.3
 
 - Support for Turkish holidays
