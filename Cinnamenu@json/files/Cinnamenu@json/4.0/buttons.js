@@ -12,7 +12,7 @@ const {getUserDesktopDir, changeModeGFile} = imports.misc.fileUtils;
 const {SignalManager} = imports.misc.signalManager;
 const {spawnCommandLine, spawn, unref} = imports.misc.util;
 const MessageTray = imports.ui.messageTray;
-
+const ApplicationsViewModeLIST = 0, ApplicationsViewModeGRID = 1;
 const {SEARCH_DEBUG, _, APPTYPE, tryFn, showTooltip, hideTooltip} = require('./utils');
 const {MODABLE, MODED} = require('./emoji');
 const PlacementTOOLTIP = 1, PlacementUNDER = 2, PlacementNONE = 3;
@@ -192,9 +192,13 @@ class CategoryListButton extends PopupBaseMenuItem {
             this.selectCategory();
             return Clutter.EVENT_STOP;
         } else if (button === 3) {
-            this.appThis.contextMenu.open(this.id, event, this, true);
+            this.openContextMenu(event);
             return Clutter.EVENT_STOP;
         }
+    }
+
+    openContextMenu(e) {
+        this.appThis.contextMenu.open(this.id, e, this, true);
     }
 
     disable() {
@@ -399,7 +403,7 @@ class ContextMenu {
                             Gio.file_new_for_path(app.get_app_info().get_filename())
                                 .copy(  Gio.file_new_for_path(USER_DESKTOP_PATH + '/' + app.get_id()), 0, null, null);
                             changeModeGFile(destFile, 755);
-                        }, function(e) {
+                        }, (e) => {
                             global.log(e);
                         });
                         this.close(); } ));
@@ -407,11 +411,11 @@ class ContextMenu {
         if (this.appThis.appFavorites.isFavorite(app.get_id())) {
             addMenuItem( new ContextMenuItem(this.appThis, _('Remove from favorites'), 'starred',
                                             () => { this.appThis.appFavorites.removeFavorite(app.get_id());
-                                            this.close(); } ));
+                                                    this.close(); } ));
         } else {
             addMenuItem( new ContextMenuItem(this.appThis, _('Add to favorites'), 'non-starred',
                                         () => { this.appThis.appFavorites.addFavorite(app.get_id());
-                                        this.close(); } ));
+                                                this.close(); } ));
         }
         if (CAN_UNINSTALL) {
             addMenuItem( new ContextMenuItem(this.appThis, _('Uninstall'), 'edit-delete',
@@ -480,13 +484,14 @@ class AppListGridButton extends PopupBaseMenuItem {
         super({ hover: false, activate: false });
         this.appThis = appThis;
         this.app = app;
+        const isListView = this.appThis.settings.applicationsViewMode === ApplicationsViewModeLIST;
         this.actor.set_style_class_name('menu-application-button');
-        if (!this.appThis.isListView) {
+        if (!isListView) {
             this.actor.set_style('padding-left: 0px; padding-right: 0px;');
         }
-        this.actor.x_align = this.appThis.isListView ? St.Align.START : St.Align.MIDDLE;
+        this.actor.x_align = isListView ? St.Align.START : St.Align.MIDDLE;
         this.actor.y_align = St.Align.MIDDLE;
-        if (!this.appThis.isListView) {
+        if (!isListView) {
             this.actor.width = this.appThis.appsView.applicationsGridBox.width /
                                                                 this.appThis.settings.appsGridColumnCount;
         }
@@ -529,7 +534,7 @@ class AppListGridButton extends PopupBaseMenuItem {
         //--------Label------------------------------------
         this.label = new St.Label({ style_class: 'menu-application-button-label',
                                     style: 'padding-right: 2px; padding-left: 2px;'});
-        if (!this.appThis.isListView && this.appThis.settings.descriptionPlacement === PlacementUNDER) {
+        if (!isListView && this.appThis.settings.descriptionPlacement === PlacementUNDER) {
             this.label.set_style('text-align: center;');
         }
         this.formatLabel();
@@ -539,7 +544,7 @@ class AppListGridButton extends PopupBaseMenuItem {
                                                 x_align: St.Align.MIDDLE, y_align: St.Align.MIDDLE});
         }
         this.dot = new St.Widget({
-                style: this.appThis.isListView ?
+                style: isListView ?
                 'width: 2px; height: 12px; background-color: ' + this.appThis.getThemeForegroundColor() +
                                                     '; margin: 0px; border: 1px; border-radius: 10px;' :
                 'width: 32px; height: 2px; background-color: ' + this.appThis.getThemeForegroundColor() +
@@ -548,21 +553,21 @@ class AppListGridButton extends PopupBaseMenuItem {
                 x_expand: false,
                 y_expand: false});
         //-------------------buttonBox-------------------------
-        this.buttonBox = new St.BoxLayout({ vertical: !this.appThis.isListView, y_expand: false });
-        if (!this.appThis.isListView) {
+        this.buttonBox = new St.BoxLayout({ vertical: !isListView, y_expand: false });
+        if (!isListView) {
             this.buttonBox.width = 600;//bigger than needed to ensure it centers in it's grid space
         } else {
             this.buttonBox.width = this.appThis.appBoxWidth - 30;//omitting this causes list scrolling to slow down
         }
         this.buttonBox.add(this.iconContainer, {
                                 x_fill: false, y_fill: false,
-                                x_align: this.appThis.isListView ? St.Align.START : St.Align.MIDDLE,
+                                x_align: isListView ? St.Align.START : St.Align.MIDDLE,
                                 y_align: St.Align.MIDDLE});
         this.buttonBox.add(this.dot, {  x_fill: false, y_fill: false,
                                         x_align: St.Align.MIDDLE, y_align: St.Align.MIDDLE });
         this.buttonBox.add(this.label, {
                                 x_fill: false, y_fill: false,
-                                x_align: this.appThis.isListView ? St.Align.START : St.Align.MIDDLE,
+                                x_align: isListView ? St.Align.START : St.Align.MIDDLE,
                                 y_align: St.Align.MIDDLE});
         this.addActor(this.buttonBox);
         if (this.icon) {
@@ -699,7 +704,7 @@ class AppListGridButton extends PopupBaseMenuItem {
             let [x, y] = this.actor.get_transformed_position();
             let {width, height} = this.actor;
             let center_x = false; //should tooltip x pos. be centered on x
-            if (this.appThis.isListView) {
+            if (this.appThis.settings.applicationsViewMode === ApplicationsViewModeLIST) {
                 x += 175 * global.ui_scale;
                 y += height + 8 * global.ui_scale;
             } else {//grid view
