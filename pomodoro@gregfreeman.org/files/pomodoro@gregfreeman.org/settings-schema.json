@@ -68,7 +68,13 @@
         "description" : "Display the pomodoro icon in the applet panel",
         "default" : true
     },
-    
+
+    "use_symbolic_icon" : {
+        "type" : "checkbox",
+        "description" : "Use a symbolic icon in the applet panel",
+        "default" : false
+    },
+
     "show_timer" : {
         "type" : "checkbox",
         "description" : "Show the pomodoro timer in the applet panel",
@@ -78,6 +84,17 @@
     "head_sounds": {
         "type": "header",
         "description": "Sounds"
+    },
+
+    "sox-info": {
+        "type": "label",
+        "description": "Please install 'sox' and restart Cinnamon to use the sound feature!",
+        "dependency": "show_sox_info"
+    },
+
+    "show_sox_info" : {
+        "type" : "generic",
+        "default" : false
     },
 
     "timer_sound" : {

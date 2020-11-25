@@ -8,6 +8,7 @@ const PopupMenu = imports.ui.popupMenu;
 const Settings = imports.ui.settings;
 const Util = imports.misc.util;
 const GLib = imports.gi.GLib;
+const Gio = imports.gi.Gio;
 
 const UUID = "pomodoro@gregfreeman.org";
 
@@ -57,8 +58,8 @@ PomodoroApplet.prototype = {
 
         this._metadata = metadata;
 
-        // 'pomodoro', 'short-break', 'long-break'
-        this._currentState = 'pomodoro';
+        // 'pomodoro', 'pomodoro-stop', 'short-break', 'long-break'
+        this._currentState = 'pomodoro-stop';
 
         // Number of finished pomodori in the current set.
         this._numPomodoriFinished = 0;
@@ -99,7 +100,7 @@ PomodoroApplet.prototype = {
         this._loadSoundEffects();
 
         // If cinnamon crashes or restarts, we want to make sure no zombie sounds are still looping
-        let killLoopingSoundCommand = 'python %s %s'.format(metadata.path + '/bin/kill-looping-sound.py', this._sounds.tick.getSoundPath());
+        let killLoopingSoundCommand = 'python3 %s %s'.format(metadata.path + '/bin/kill-looping-sound.py', this._sounds.tick.getSoundPath());
         Util.trySpawnCommandLine(killLoopingSoundCommand);
 
         this._timers = {
@@ -197,6 +198,13 @@ PomodoroApplet.prototype = {
             Settings.BindingDirection.IN,
             "display_icon",
             "_opt_displayIconInPanel",
+            this._onAppletIconChanged
+        );
+
+        this._settingsProvider.bindProperty(
+            Settings.BindingDirection.IN,
+            "use_symbolic_icon",
+            "_opt_useSymbolicIconInPanel",
             this._onAppletIconChanged
         );
 
@@ -317,6 +325,12 @@ PomodoroApplet.prototype = {
                 this._playStartSound(true);
             }
         );
+
+        let showSoxInfo = true;
+        if (Gio.file_new_for_path("/usr/bin/sox").query_exists(null)) {
+            showSoxInfo = false;
+        }
+        this._settingsProvider.setValue('show_sox_info', showSoxInfo);
     },
 
     _setTimerLabel: function(ticks) {
@@ -436,6 +450,7 @@ PomodoroApplet.prototype = {
         longBreakTimer.connect('timer-tick', Lang.bind(this._longBreakdialog, this._longBreakdialog.setTimeRemaining));
 
         pomodoroTimer.connect('timer-running', Lang.bind(this, function() {
+            this._setCurrentState('pomodoro');
             this._playTickerSound();
             this.set_applet_tooltip(_("Pomodori %d, set %d running").format(this._numPomodoriFinished + 1, this._numPomodoroSetFinished + 1));
         }));
@@ -448,6 +463,7 @@ PomodoroApplet.prototype = {
         }));
 
         pomodoroTimer.connect('timer-stopped', Lang.bind(this, function() {
+            this._setCurrentState('pomodoro-stop');
             this._stopTickerSound();
         }));
 
@@ -462,6 +478,14 @@ PomodoroApplet.prototype = {
             this.set_applet_tooltip(_("Short break running"));
         }));
 
+        shortBreakTimer.connect('timer-stopped', Lang.bind(this, function() {
+            this._setCurrentState('pomodoro-stop');
+        }));
+
+        shortBreakTimer.connect('timer-running', Lang.bind(this, function() {
+            this._setCurrentState('short-break');
+        }));
+
         longBreakTimer.connect('timer-started', Lang.bind(this, function() {
             this._setCurrentState('long-break');
 
@@ -473,6 +497,14 @@ PomodoroApplet.prototype = {
                 Main.notify(_("Take a long break"));
             }
             this.set_applet_tooltip(_("Long break running"));
+        }));
+
+        longBreakTimer.connect('timer-stopped', Lang.bind(this, function() {
+            this._setCurrentState('pomodoro-stop');
+        }));
+
+        longBreakTimer.connect('timer-running', Lang.bind(this, function() {
+            this._setCurrentState('long-break');
         }));
     },
 
@@ -715,15 +747,29 @@ PomodoroApplet.prototype = {
     _onAppletIconChanged: function() {
         if (this._opt_displayIconInPanel) {
             this._applet_icon_box.show();
+            let appletIconPath = '';
+            let appletIconStatus = '';
             switch (this._currentState) {
+            case 'pomodoro-stop':
+                appletIconPath = this._metadata.path + "/pomodoro-stop";
+                appletIconStatus = 'system-status-icon';
+                break;
             case 'short-break':
             case 'long-break':
-                this.set_applet_icon_path(this._metadata.path + "/icon-break.png");
+                appletIconPath = this._metadata.path + "/pomodoro-break";
+                appletIconStatus = 'system-status-icon success';
                 break;
             case 'pomodoro':
             default:
-                this.set_applet_icon_path(this._metadata.path + "/icon.png");
+                appletIconPath = this._metadata.path + "/pomodoro";
+                appletIconStatus = 'system-status-icon error';
                 break;
+            }
+            if (this._opt_useSymbolicIconInPanel) {
+                this.set_applet_icon_symbolic_path(appletIconPath + "-symbolic.svg");
+                this._applet_icon.set_style_class_name(appletIconStatus);
+            } else {
+                this.set_applet_icon_path(appletIconPath + ".png");
             }
         }
         else if (this._applet_icon_box.child) {
