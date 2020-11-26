@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-20 19:00+0100\n"
+"POT-Creation-Date: 2020-11-26 09:07+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -464,11 +464,11 @@ msgstr ""
 msgid "Excellent - More than"
 msgstr ""
 
-#: 3.0/met_uk.js:426 3.0/applet.js:1202 3.8/met_uk.js:318 3.8/applet.js:1066
+#: 3.0/met_uk.js:426 3.0/applet.js:1203 3.8/met_uk.js:318 3.8/applet.js:1067
 msgid "mi"
 msgstr ""
 
-#: 3.0/met_uk.js:427 3.0/applet.js:1203 3.8/met_uk.js:319 3.8/applet.js:1067
+#: 3.0/met_uk.js:427 3.0/applet.js:1204 3.8/met_uk.js:319 3.8/applet.js:1068
 msgid "km"
 msgstr ""
 
@@ -804,7 +804,7 @@ msgstr ""
 msgid "until"
 msgstr ""
 
-#: 3.0/darkSky.js:75 3.0/applet.js:1129 3.8/darkSky.js:39 3.8/applet.js:993
+#: 3.0/darkSky.js:75 3.0/applet.js:1130 3.8/darkSky.js:39 3.8/applet.js:994
 msgid "in"
 msgstr ""
 
@@ -1091,8 +1091,8 @@ msgid ""
 "or get one first on https://www.weatherbit.io/account/create"
 msgstr ""
 
-#: 3.0/applet.js:168 3.0/applet.js:406 3.0/applet.js:2042 3.8/applet.js:118
-#: 3.8/applet.js:311 3.8/applet.js:1835
+#: 3.0/applet.js:168 3.0/applet.js:407 3.0/applet.js:2058 3.8/applet.js:118
+#: 3.8/applet.js:312 3.8/applet.js:1851
 msgid "Error"
 msgstr ""
 
@@ -1135,167 +1135,167 @@ msgstr ""
 msgid "Location not covered"
 msgstr ""
 
-#: 3.0/applet.js:193 3.0/applet.js:358 3.8/applet.js:143 3.8/applet.js:277
+#: 3.0/applet.js:194 3.0/applet.js:359 3.8/applet.js:144 3.8/applet.js:278
 msgid "Weather Applet"
 msgstr ""
 
-#: 3.0/applet.js:217 3.8/applet.js:166
+#: 3.0/applet.js:218 3.8/applet.js:167
 msgid "..."
 msgstr ""
 
-#: 3.0/applet.js:218 3.8/applet.js:167
+#: 3.0/applet.js:219 3.8/applet.js:168
 msgid "Click to open"
 msgstr ""
 
-#: 3.0/applet.js:232 3.0/applet.js:1241 3.8/applet.js:181 3.8/applet.js:1105
+#: 3.0/applet.js:233 3.0/applet.js:1242 3.8/applet.js:182 3.8/applet.js:1106
 msgid "Refresh"
 msgstr ""
 
-#: 3.0/applet.js:272 3.8/applet.js:215
+#: 3.0/applet.js:273 3.8/applet.js:216
 msgid "API returned status code between 400 and 500"
 msgstr ""
 
-#: 3.0/applet.js:406 3.0/applet.js:1959 3.0/applet.js:1963 3.0/applet.js:1967
-#: 3.0/applet.js:1976 3.0/applet.js:1987 3.0/applet.js:1991 3.0/applet.js:1995
-#: 3.0/applet.js:2005 3.0/applet.js:2042 3.8/applet.js:311 3.8/applet.js:1772
-#: 3.8/applet.js:1776 3.8/applet.js:1780 3.8/applet.js:1787 3.8/applet.js:1791
-#: 3.8/applet.js:1795 3.8/applet.js:1799 3.8/applet.js:1809 3.8/applet.js:1835
+#: 3.0/applet.js:407 3.0/applet.js:1975 3.0/applet.js:1979 3.0/applet.js:1983
+#: 3.0/applet.js:1992 3.0/applet.js:2003 3.0/applet.js:2007 3.0/applet.js:2011
+#: 3.0/applet.js:2021 3.0/applet.js:2058 3.8/applet.js:312 3.8/applet.js:1788
+#: 3.8/applet.js:1792 3.8/applet.js:1796 3.8/applet.js:1803 3.8/applet.js:1807
+#: 3.8/applet.js:1811 3.8/applet.js:1815 3.8/applet.js:1825 3.8/applet.js:1851
 msgid "Location Store"
 msgstr ""
 
-#: 3.0/applet.js:406 3.8/applet.js:311
+#: 3.0/applet.js:407 3.8/applet.js:312
 msgid "You can't save a location obtained automatically, sorry"
 msgstr ""
 
-#: 3.0/applet.js:592 3.8/applet.js:474
+#: 3.0/applet.js:593 3.8/applet.js:475
 msgid "Could not get weather information"
 msgstr ""
 
-#: 3.0/applet.js:615 3.8/applet.js:497
+#: 3.0/applet.js:616 3.8/applet.js:498
 msgid ""
 "Unexpected Error While Refreshing Weather, please see log in Looking Glass"
 msgstr ""
 
-#: 3.0/applet.js:661 3.8/applet.js:540
+#: 3.0/applet.js:662 3.8/applet.js:541
 msgid ""
 "Could not update weather for a while...\n"
 "are you connected to the internet?"
 msgstr ""
 
-#: 3.0/applet.js:675 3.8/applet.js:554
+#: 3.0/applet.js:676 3.8/applet.js:555
 msgid "Network Error, please check logs in Looking Glass"
 msgstr ""
 
-#: 3.0/applet.js:959 3.0/applet.js:1107 3.8/applet.js:823 3.8/applet.js:971
+#: 3.0/applet.js:960 3.0/applet.js:1108 3.8/applet.js:824 3.8/applet.js:972
 msgid "As of"
 msgstr ""
 
-#: 3.0/applet.js:1079 3.8/applet.js:943
+#: 3.0/applet.js:1080 3.8/applet.js:944
 msgid "Today"
 msgstr ""
 
-#: 3.0/applet.js:1081 3.8/applet.js:945
+#: 3.0/applet.js:1082 3.8/applet.js:946
 msgid "Tomorrow"
 msgstr ""
 
-#: 3.0/applet.js:1105 3.8/applet.js:969
+#: 3.0/applet.js:1106 3.8/applet.js:970
 msgid "Powered by"
 msgstr ""
 
-#: 3.0/applet.js:1110 3.8/applet.js:974
+#: 3.0/applet.js:1111 3.8/applet.js:975
 msgid "from you"
 msgstr ""
 
-#: 3.0/applet.js:1129 3.8/applet.js:993
+#: 3.0/applet.js:1130 3.8/applet.js:994
 msgid "mm"
 msgstr ""
 
-#: 3.0/applet.js:1224 3.8/applet.js:1088
+#: 3.0/applet.js:1225 3.8/applet.js:1089
 msgid "Loading current weather ..."
 msgstr ""
 
-#: 3.0/applet.js:1227 3.8/applet.js:1091
+#: 3.0/applet.js:1228 3.8/applet.js:1092
 msgid "Loading future weather ..."
 msgstr ""
 
-#: 3.0/applet.js:1277 3.8/applet.js:1141
+#: 3.0/applet.js:1278 3.8/applet.js:1142
 msgid "Loading ..."
 msgstr ""
 
-#: 3.0/applet.js:1326 3.8/applet.js:1190
+#: 3.0/applet.js:1327 3.8/applet.js:1191
 msgid "Temperature:"
 msgstr ""
 
-#: 3.0/applet.js:1327 3.8/applet.js:1191
+#: 3.0/applet.js:1328 3.8/applet.js:1192
 msgid "Humidity:"
 msgstr ""
 
-#: 3.0/applet.js:1328 3.8/applet.js:1192
+#: 3.0/applet.js:1329 3.8/applet.js:1193
 msgid "Pressure:"
 msgstr ""
 
-#: 3.0/applet.js:1329 3.8/applet.js:1193
+#: 3.0/applet.js:1330 3.8/applet.js:1194
 msgid "Wind:"
 msgstr ""
 
-#: 3.0/applet.js:1610 3.8/applet.js:1464
+#: 3.0/applet.js:1611 3.8/applet.js:1465
 msgid "Make sure you entered a location or use Automatic location instead"
 msgstr ""
 
-#: 3.0/applet.js:1819 3.8/applet.js:1640
+#: 3.0/applet.js:1820 3.8/applet.js:1641
 msgid "Could not find location based on address, please check if it's right"
 msgstr ""
 
-#: 3.0/applet.js:1843 3.8/applet.js:1664
+#: 3.0/applet.js:1844 3.8/applet.js:1665
 msgid "Failed to call Geolocation API, see Looking Glass for errors."
 msgstr ""
 
-#: 3.0/applet.js:1959 3.0/applet.js:1963 3.8/applet.js:1772 3.8/applet.js:1776
+#: 3.0/applet.js:1975 3.0/applet.js:1979 3.8/applet.js:1788 3.8/applet.js:1792
 msgid "Warning"
 msgstr ""
 
-#: 3.0/applet.js:1959 3.8/applet.js:1772
+#: 3.0/applet.js:1975 3.8/applet.js:1788
 msgid "You can only save correct locations when the applet is not refreshing"
 msgstr ""
 
-#: 3.0/applet.js:1963 3.8/applet.js:1776
+#: 3.0/applet.js:1979 3.8/applet.js:1792
 msgid "You can't save an incorrect location"
 msgstr ""
 
-#: 3.0/applet.js:1967 3.0/applet.js:1987 3.0/applet.js:1991 3.0/applet.js:1995
-#: 3.8/applet.js:1780 3.8/applet.js:1791 3.8/applet.js:1795 3.8/applet.js:1799
+#: 3.0/applet.js:1983 3.0/applet.js:2003 3.0/applet.js:2007 3.0/applet.js:2011
+#: 3.8/applet.js:1796 3.8/applet.js:1807 3.8/applet.js:1811 3.8/applet.js:1815
 msgid "Info"
 msgstr ""
 
-#: 3.0/applet.js:1967 3.8/applet.js:1780
+#: 3.0/applet.js:1983 3.8/applet.js:1796
 msgid "Location is already saved"
 msgstr ""
 
-#: 3.0/applet.js:1976 3.0/applet.js:2005 3.8/applet.js:1787 3.8/applet.js:1809
+#: 3.0/applet.js:1992 3.0/applet.js:2021 3.8/applet.js:1803 3.8/applet.js:1825
 msgid "Success"
 msgstr ""
 
-#: 3.0/applet.js:1976 3.8/applet.js:1787
+#: 3.0/applet.js:1992 3.8/applet.js:1803
 msgid "Location is saved to library"
 msgstr ""
 
-#: 3.0/applet.js:1987 3.8/applet.js:1791
+#: 3.0/applet.js:2003 3.8/applet.js:1807
 msgid "You can't remove a location while the applet is refreshing"
 msgstr ""
 
-#: 3.0/applet.js:1991 3.8/applet.js:1795
+#: 3.0/applet.js:2007 3.8/applet.js:1811
 msgid "You can't remove an incorrect location"
 msgstr ""
 
-#: 3.0/applet.js:1995 3.8/applet.js:1799
+#: 3.0/applet.js:2011 3.8/applet.js:1815
 msgid "Location is not in storage, can't delete"
 msgstr ""
 
-#: 3.0/applet.js:2005 3.8/applet.js:1809
+#: 3.0/applet.js:2021 3.8/applet.js:1825
 msgid "Location is deleted from library"
 msgstr ""
 
-#: 3.0/applet.js:2042 3.8/applet.js:1835
+#: 3.0/applet.js:2058 3.8/applet.js:1851
 msgid ""
 "Failed to load in data from location storage, please see the logs for more "
 "information"
