@@ -185,6 +185,7 @@ var WeatherApplet = (function (_super) {
         };
         _this.log = new Log(instanceId);
         _this.currentLocale = _this.constructJsLocale(get_language_names()[0]);
+        _this.log.Debug("Applet created with instanceID " + instanceId);
         _this.log.Debug("System locale is " + _this.currentLocale);
         _this.log.Debug("Appletdir is: " + _this.appletDir);
         _this._httpSession.user_agent = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:37.0) Gecko/20100101 Firefox/37.0";
