@@ -1620,7 +1620,7 @@ class WeatherButton {
 class GeoLocation {
     constructor(app) {
         this.url = "https://nominatim.openstreetmap.org/search/";
-        this.params = "?format=json&addressdetails=1";
+        this.params = "?format=json&addressdetails=1&limit=1";
         this.app = null;
         this.cache = {};
         this.app = app;
@@ -1651,7 +1651,7 @@ class GeoLocation {
                 timeZone: null,
                 mobile: null,
                 address_string: locationData[0].display_name,
-                entryText: locationData[0].display_name,
+                entryText: this.BuildEntryText(locationData[0]),
                 locationSource: "address-search"
             };
             this.cache[searchText] = result;
@@ -1666,6 +1666,21 @@ class GeoLocation {
             });
             return null;
         }
+    }
+    BuildEntryText(locationData) {
+        if (locationData.address == null)
+            return locationData.display_name;
+        let entryText = [];
+        for (let key in locationData.address) {
+            if (key == "state_district")
+                continue;
+            if (key == "county")
+                continue;
+            if (key == "country_code")
+                continue;
+            entryText.push(locationData.address[key]);
+        }
+        return entryText.join(", ");
     }
 }
 class LocationStore {
