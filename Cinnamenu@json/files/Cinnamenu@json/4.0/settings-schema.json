@@ -51,7 +51,6 @@
                 "enable-bookmarks",
                 "show-favs-category",
                 "enable-home-folder",
-                "privacy-settings-button",
                 "menu-editor-button",
                 "categories"
             ]
@@ -184,7 +183,7 @@
     },
     "show-favs-category":{
         "type":"switch",
-        "default":true,
+        "default":false,
         "description":"Show favorites category",
         "tooltip":"Show your favorite apps category in the menu"
     },
@@ -193,11 +192,6 @@
         "default":true,
         "description":"Show home folder",
         "tooltip":"Show home folder category in the menu"
-    },
-    "privacy-settings-button":{
-        "type":"button",
-        "description":"Recent files settings",
-        "callback":"launchPrivacySettings"
     },
     "menu-editor-button":{
         "type":"button",
