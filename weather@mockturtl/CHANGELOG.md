@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.6.9
+
+* Fix issue where Nominatim OpenStreetMap search broke on the next refresh cycle after it was entered. (Nominatim can't find the correct address based on their display name what they provide anymore...)
+* Change Main Applet icon, for the worst or the better
+* Add some extra debug output
+
 ## 2.6.8
 
 * 1.8+ Applet version removed

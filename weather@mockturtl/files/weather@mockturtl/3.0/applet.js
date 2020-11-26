@@ -185,6 +185,7 @@ var WeatherApplet = (function (_super) {
         };
         _this.log = new Log(instanceId);
         _this.currentLocale = _this.constructJsLocale(get_language_names()[0]);
+        _this.log.Debug("Applet created with instanceID " + instanceId);
         _this.log.Debug("System locale is " + _this.currentLocale);
         _this.log.Debug("Appletdir is: " + _this.appletDir);
         _this._httpSession.user_agent = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:37.0) Gecko/20100101 Firefox/37.0";
@@ -1791,7 +1792,7 @@ var WeatherButton = (function () {
 var GeoLocation = (function () {
     function GeoLocation(app) {
         this.url = "https://nominatim.openstreetmap.org/search/";
-        this.params = "?format=json&addressdetails=1";
+        this.params = "?format=json&addressdetails=1&limit=1";
         this.app = null;
         this.cache = {};
         this.app = app;
@@ -1829,7 +1830,7 @@ var GeoLocation = (function () {
                             timeZone: null,
                             mobile: null,
                             address_string: locationData[0].display_name,
-                            entryText: locationData[0].display_name,
+                            entryText: this.BuildEntryText(locationData[0]),
                             locationSource: "address-search"
                         };
                         this.cache[searchText] = result;
@@ -1847,6 +1848,21 @@ var GeoLocation = (function () {
                 }
             });
         });
+    };
+    GeoLocation.prototype.BuildEntryText = function (locationData) {
+        if (locationData.address == null)
+            return locationData.display_name;
+        var entryText = [];
+        for (var key in locationData.address) {
+            if (key == "state_district")
+                continue;
+            if (key == "county")
+                continue;
+            if (key == "country_code")
+                continue;
+            entryText.push(locationData.address[key]);
+        }
+        return entryText.join(", ");
     };
     return GeoLocation;
 }());

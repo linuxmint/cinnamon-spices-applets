@@ -135,6 +135,7 @@ class WeatherApplet extends TextIconApplet {
         };
         this.log = new Log(instanceId);
         this.currentLocale = this.constructJsLocale(get_language_names()[0]);
+        this.log.Debug("Applet created with instanceID " + instanceId);
         this.log.Debug("System locale is " + this.currentLocale);
         this.log.Debug("Appletdir is: " + this.appletDir);
         this._httpSession.user_agent = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:37.0) Gecko/20100101 Firefox/37.0";
@@ -1619,7 +1620,7 @@ class WeatherButton {
 class GeoLocation {
     constructor(app) {
         this.url = "https://nominatim.openstreetmap.org/search/";
-        this.params = "?format=json&addressdetails=1";
+        this.params = "?format=json&addressdetails=1&limit=1";
         this.app = null;
         this.cache = {};
         this.app = app;
@@ -1650,7 +1651,7 @@ class GeoLocation {
                 timeZone: null,
                 mobile: null,
                 address_string: locationData[0].display_name,
-                entryText: locationData[0].display_name,
+                entryText: this.BuildEntryText(locationData[0]),
                 locationSource: "address-search"
             };
             this.cache[searchText] = result;
@@ -1665,6 +1666,21 @@ class GeoLocation {
             });
             return null;
         }
+    }
+    BuildEntryText(locationData) {
+        if (locationData.address == null)
+            return locationData.display_name;
+        let entryText = [];
+        for (let key in locationData.address) {
+            if (key == "state_district")
+                continue;
+            if (key == "county")
+                continue;
+            if (key == "country_code")
+                continue;
+            entryText.push(locationData.address[key]);
+        }
+        return entryText.join(", ");
     }
 }
 class LocationStore {

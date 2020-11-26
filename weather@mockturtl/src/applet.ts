@@ -184,7 +184,8 @@ class WeatherApplet extends TextIconApplet {
     public constructor(metadata: any, orientation: imports.gi.St.Side, panelHeight: number, instanceId: number) {
         super(orientation, panelHeight, instanceId);
         this.log = new Log(instanceId);
-        this.currentLocale = this.constructJsLocale(get_language_names()[0]);
+		this.currentLocale = this.constructJsLocale(get_language_names()[0]);
+		this.log.Debug("Applet created with instanceID " + instanceId);
         this.log.Debug("System locale is " + this.currentLocale);
         this.log.Debug("Appletdir is: " + this.appletDir);
         this._httpSession.user_agent = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:37.0) Gecko/20100101 Firefox/37.0"; // ipapi blocks non-browsers agents, imitating browser
@@ -2176,7 +2177,7 @@ class WeatherButton {
  */
 class GeoLocation {
     private url = "https://nominatim.openstreetmap.org/search/";
-    private params = "?format=json&addressdetails=1";
+    private params = "?format=json&addressdetails=1&limit=1";
     private app: WeatherApplet = null;
     private cache: LocationCache = {};
 
@@ -2211,7 +2212,7 @@ class GeoLocation {
                 timeZone: null,
                 mobile: null,
                 address_string: locationData[0].display_name,
-                entryText: locationData[0].display_name,
+                entryText: this.BuildEntryText(locationData[0]),
                 locationSource: "address-search"
             }
             this.cache[searchText] = result;
@@ -2226,7 +2227,25 @@ class GeoLocation {
             })
             return null;
         }
-    }
+	}
+	
+	/**
+	 * Nominatim doesn't return any result if the State district is included in the search 
+	 * in specific case, we have to build it from the address details omitting specific
+	 * keys
+	 * @param locationData 
+	 */
+	private BuildEntryText(locationData: any): string {
+		if (locationData.address == null) return locationData.display_name;
+		let entryText: string[] = [];
+		for (let key in locationData.address) {
+			if (key == "state_district") continue;
+			if (key == "county") continue;
+			if (key == "country_code") continue;
+			entryText.push(locationData.address[key]);
+		}
+		return entryText.join(", ");
+	}
 }
 
 // TODO: Switch to setting-schema based LocationStore as soon as 3.0 id Deprecated
