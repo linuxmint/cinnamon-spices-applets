@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-20 05:01+0000\n"
+"POT-Creation-Date: 2020-11-27 12:27+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -123,6 +123,9 @@ msgid "Search web for"
 msgstr ""
 
 msgid "Too many entries - showing first 1000 entries only"
+msgstr ""
+
+msgid "favorites"
 msgstr ""
 
 msgid "Home folder"
@@ -351,10 +354,16 @@ msgstr ""
 msgid "Choose where to show the session buttons (quit, logout, etc.)"
 msgstr ""
 
-msgid "Add favorites to session buttons"
+msgid "Add favorite apps to session buttons"
 msgstr ""
 
 msgid "Show your favorite app icons next to the session buttons"
+msgstr ""
+
+msgid "Show recent files"
+msgstr ""
+
+msgid "Show recent files category in the menu"
 msgstr ""
 
 msgid ""
@@ -362,7 +371,7 @@ msgid ""
 "Note: Install package gir1.2-gda-5.0 to read firefox bookmarks."
 msgstr ""
 
-msgid "Show favorites category"
+msgid "Show favorite apps category"
 msgstr ""
 
 msgid "Show your favorite apps category in the menu"
