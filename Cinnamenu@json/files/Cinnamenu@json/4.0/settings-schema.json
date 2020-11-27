@@ -47,10 +47,11 @@
             "type":"section",
             "title":"Content",
             "keys":[
-                "show-places",
-                "enable-bookmarks",
-                "show-favs-category",
-                "enable-home-folder",
+                "show-places-category",
+                "show-recents-category",
+                "show-web-bookmarks-category",
+                "show-favorite-apps-category",
+                "show-home-folder-category",
                 "menu-editor-button",
                 "categories"
             ]
@@ -139,7 +140,7 @@
     "add-favorites":{
         "type":"switch",
         "default":true,
-        "description":"Add favorites to session buttons",
+        "description":"Add favorite apps to session buttons",
         "tooltip":"Show your favorite app icons next to the session buttons"
     },
     "enable-custom-menu-height":{
@@ -169,25 +170,31 @@
         "description":"Number of columns in apps grid",
         "tooltip":"Number of columns in apps grid"
     },
-    "show-places":{
+    "show-places-category":{
         "type":"switch",
         "default":true,
         "description":"Show bookmarks and places",
         "tooltip":"Show bookmarks and places category in the menu"
     },
-    "enable-bookmarks":{
+    "show-recents-category":{
+        "type":"switch",
+        "default":true,
+        "description":"Show recent files",
+        "tooltip":"Show recent files category in the menu"
+    },
+    "show-web-bookmarks-category":{
         "type":"checkbox",
         "default":false,
         "description":"Show web bookmarks",
         "tooltip":"Show your browser's web bookmarks in the menu.\nNote: Install package gir1.2-gda-5.0 to read firefox bookmarks."
     },
-    "show-favs-category":{
+    "show-favorite-apps-category":{
         "type":"switch",
         "default":false,
-        "description":"Show favorites category",
+        "description":"Show favorite apps category",
         "tooltip":"Show your favorite apps category in the menu"
     },
-    "enable-home-folder":{
+    "show-home-folder-category":{
         "type":"checkbox",
         "default":true,
         "description":"Show home folder",
