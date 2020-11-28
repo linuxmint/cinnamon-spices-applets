@@ -21,26 +21,25 @@ const USER_DESKTOP_PATH = getUserDesktopDir();
 const CAN_UNINSTALL = GLib.file_test('/usr/bin/cinnamon-remove-application', GLib.FileTest.EXISTS);
 
 class CategoryListButton extends PopupBaseMenuItem {
-    constructor(appThis, dir, altNameText, altIconNames/*array of names*/) {
+    constructor(appThis, dir, altNameText, altIconName) {
         super({ hover: false, activate: false });
         this.appThis = appThis;
         this.signals = new SignalManager(null);
         this.index = -1;
         this.disabled = false;
         this.entered = null;
+        let iconName;
         let isStrDir = typeof dir === 'string';
         if (isStrDir) {
             this.id = dir;
             this.categoryNameText = altNameText;
+            iconName = altIconName;
         } else {
             this.id = altNameText;
             const dirName = dir.get_name();
             this.categoryNameText = dirName ? dirName : '';
-        }
-
-        if (!isStrDir) {
+            //
             let icon = dir.get_icon();
-            let iconName = '';
             if (icon) {
                 if (icon.names) {
                     iconName = icon.names[0];
@@ -49,16 +48,12 @@ class CategoryListButton extends PopupBaseMenuItem {
                     iconName = icon.get_names()[0];
                 }
             }
-            if (iconName === '') {
+            if (!iconName) {
                 iconName = 'folder';
             }
-            this.icon = new St.Icon({   icon_name: iconName, icon_type: St.IconType.FULLCOLOR,
-                                        icon_size: this.appThis.settings.categoryIconSize});
-        } else {
-            this.icon = new St.Icon({   gicon: Gio.ThemedIcon.new_from_names(altIconNames),
-                                        icon_size: this.appThis.settings.categoryIconSize,
-                                        icon_type: St.IconType.FULLCOLOR });
         }
+        this.icon = new St.Icon({   icon_name: iconName, icon_type: St.IconType.FULLCOLOR,
+                                    icon_size: this.appThis.settings.categoryIconSize});
         if (this.appThis.settings.categoryIconSize > 0) {
             this.addActor(this.icon);
         }
@@ -398,10 +393,10 @@ class ContextMenu {
                 this.close(); } ));
         if (USER_DESKTOP_PATH) {
             addMenuItem( new ContextMenuItem(this.appThis, _('Add to desktop'), 'computer',
-                () => { const destFile = Gio.file_new_for_path(USER_DESKTOP_PATH + '/' + app.get_id());
+                () => { const file = Gio.file_new_for_path(app.get_app_info().get_filename())
+                        const destFile = Gio.file_new_for_path(USER_DESKTOP_PATH + '/' + file.get_basename());
                         tryFn(() => {
-                            Gio.file_new_for_path(app.get_app_info().get_filename())
-                                .copy(  Gio.file_new_for_path(USER_DESKTOP_PATH + '/' + app.get_id()), 0, null, null);
+                            file.copy( destFile, 0, null, null);
                             changeModeGFile(destFile, 755);
                         }, (e) => {
                             global.log(e);
@@ -578,7 +573,7 @@ class AppListGridButton extends PopupBaseMenuItem {
             this.actor._delegate = {
                     handleDragOver: (source) => {
                             if (source.isDraggableApp === true && source.get_app_id() !== this.app.get_id() &&
-                                                                    this.appThis.currentCategory === 'favorites') {
+                                                            this.appThis.currentCategory === 'favorite_apps') {
                                 this.appThis.resetOpacity();
                                 this.actor.set_opacity(40);
                                 return DragMotionResult.MOVE_DROP;
@@ -587,7 +582,7 @@ class AppListGridButton extends PopupBaseMenuItem {
                     handleDragOut: () => {  this.actor.set_opacity(255); },
                     acceptDrop: (source) => {
                             if (source.isDraggableApp === true && source.get_app_id() !== this.app.get_id() &&
-                                                                this.appThis.currentCategory === 'favorites') {
+                                                            this.appThis.currentCategory === 'favorite_apps') {
                                 this.actor.set_opacity(255);
                                 this.appThis.addFavoriteToPos(source.get_app_id(), this.app.get_id());
                                 return true;
@@ -781,7 +776,7 @@ class AppListGridButton extends PopupBaseMenuItem {
             }
             this.appThis.closeMenu();
         } else if (this.app.type === APPTYPE.file) {
-            if (this.app.directory) {
+            if (this.app.isDirectory) {
                 this.appThis.setActiveCategory(Gio.File.new_for_uri(this.app.uri).get_path());
                 return;
             }
