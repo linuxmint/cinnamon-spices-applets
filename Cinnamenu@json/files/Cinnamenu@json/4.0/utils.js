@@ -14,10 +14,8 @@ const APPTYPE = {
     place: 1,
     file: 2,
     provider: 3,
-    session:4,
-    clearlist: 5
+    clearlist: 4
 };
-const AppTypes = Object.keys(APPTYPE);
 
 // Work around Cinnamon#8201
 const tryFn = function(callback, errCallback) {
@@ -215,5 +213,5 @@ const searchStr = (q, str, quick = false) => {
     }
 };
 
-module.exports = {SEARCH_DEBUG, _, APPTYPE, AppTypes, tryFn, readFileAsync, readJSONAsync,
+module.exports = {SEARCH_DEBUG, _, APPTYPE, tryFn, readFileAsync, readJSONAsync,
                                                             showTooltip, hideTooltip, searchStr};
