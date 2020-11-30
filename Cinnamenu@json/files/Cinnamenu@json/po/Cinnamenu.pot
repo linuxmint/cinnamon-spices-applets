@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-27 12:27+0000\n"
+"POT-Creation-Date: 2020-11-30 05:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -141,6 +141,12 @@ msgid "Open with"
 msgstr ""
 
 msgid "Other application..."
+msgstr ""
+
+msgid "Move to trash"
+msgstr ""
+
+msgid "Error while moving file to trash:"
 msgstr ""
 
 msgid "Open containing folder"
@@ -354,7 +360,7 @@ msgstr ""
 msgid "Choose where to show the session buttons (quit, logout, etc.)"
 msgstr ""
 
-msgid "Add favorite apps to session buttons"
+msgid "Add favorites to session buttons"
 msgstr ""
 
 msgid "Show your favorite app icons next to the session buttons"
