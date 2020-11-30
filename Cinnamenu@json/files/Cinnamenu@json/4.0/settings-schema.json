@@ -74,7 +74,7 @@
                 "open-on-favorites",
                 "enable-autoscroll",
                 "web-search-option",
-                "emoji-search"
+                "enable-emoji-search"
             ]
         },
         "panel-appear":{
@@ -93,7 +93,7 @@
                 "category-icon-size",
                 "apps-list-icon-size",
                 "apps-grid-icon-size",
-                "session-icon-size",
+                "sidebar-icon-size",
                 "use-box-style"
             ]
         }
@@ -140,7 +140,7 @@
     "add-favorites":{
         "type":"switch",
         "default":true,
-        "description":"Add favorite apps to session buttons",
+        "description":"Add favorites to session buttons",
         "tooltip":"Show your favorite app icons next to the session buttons"
     },
     "enable-custom-menu-height":{
@@ -266,7 +266,7 @@
         },
         "tooltip":"Show an internet search option in search results"
     },
-    "emoji-search":{
+    "enable-emoji-search":{
         "type":"checkbox",
         "default":true,
         "description":"Enable emoji search",
@@ -327,7 +327,7 @@
         "description":"Applications grid icon size",
         "tooltip":"Applications grid icon size"
     },
-    "session-icon-size":{
+    "sidebar-icon-size":{
         "indent":true,
         "type":"spinbutton",
         "default":32,

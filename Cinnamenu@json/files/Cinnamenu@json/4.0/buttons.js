@@ -5,6 +5,7 @@ const St = imports.gi.St;
 const Clutter = imports.gi.Clutter;
 const {AppState} = imports.gi.Cinnamon;
 const {EllipsizeMode} = imports.gi.Pango;
+const XApp = imports.gi.XApp;
 const Main = imports.ui.main;
 const {PopupBaseMenuItem, PopupSubMenu, PopupIconMenuItem, PopupSeparatorMenuItem} = imports.ui.popupMenu;
 const {DragMotionResult, makeDraggable} = imports.ui.dnd;
@@ -20,7 +21,7 @@ const SHOW_SEARCH_MARKUP_IN_TOOLTIP = true;
 const USER_DESKTOP_PATH = getUserDesktopDir();
 const CAN_UNINSTALL = GLib.file_test('/usr/bin/cinnamon-remove-application', GLib.FileTest.EXISTS);
 
-class CategoryListButton extends PopupBaseMenuItem {
+class CategoryButton extends PopupBaseMenuItem {
     constructor(appThis, dir, altNameText, altIconName) {
         super({ hover: false, activate: false });
         this.appThis = appThis;
@@ -451,10 +452,41 @@ class ContextMenu {
         addMenuItem( new ContextMenuItem(   this.appThis, _('Other application...'), null,
                                             () => { spawnCommandLine("nemo-open-with " + app.uri);
                                                     this.appThis.closeMenu(); } ));
-        const folder = file.get_parent();
-        if (app.description) { //if recent item (not a browser folder/file)
+
+        const favs = XApp.Favorites ? XApp.Favorites.get_default() : null;
+        if (favs) {
             this.menu.addMenuItem(new PopupSeparatorMenuItem(this.appThis));
-            addMenuItem( new ContextMenuItem(   this.appThis, _('Open containing folder'), null,
+            if (favs.find_by_uri(app.uri)) { //favorite
+                addMenuItem( new ContextMenuItem(this.appThis, _('Remove from favorites'), 'starred',
+                                                        () => { favs.remove(app.uri);
+                                                                this.appThis.updateAfterFavFileChange();
+                                                                this.close(); } ));
+            } else {
+                addMenuItem( new ContextMenuItem(this.appThis, _('Add to favorites'), 'non-starred',
+                                                        () => { favs.add(app.uri);
+                                                                this.appThis.updateAfterFavFileChange();
+                                                                this.close(); } ));
+            }
+        }
+        if (!app.isBackButton) {
+            this.menu.addMenuItem(new PopupSeparatorMenuItem(this.appThis));
+            addMenuItem( new ContextMenuItem(   this.appThis, _('Move to trash'), 'user-trash',
+                        () => { const file = Gio.File.new_for_uri(app.uri);
+                                try {
+                                    file.trash(null);
+                                } catch (e) {
+                                    Main.notify(_("Error while moving file to trash:"),e.message);
+                                }
+                                this.appThis.sidebar.populate();
+                                this.appThis.updateMenuWidth();
+                                this.appThis.updateMenuHeight();
+                                this.appThis.setActiveCategory(this.appThis.currentCategory);
+                                this.close(); } ));
+        }
+        const folder = file.get_parent();
+        if (app.description) { //if recent or fav item (not a browser folder/file)
+            this.menu.addMenuItem(new PopupSeparatorMenuItem(this.appThis));
+            addMenuItem( new ContextMenuItem(   this.appThis, _('Open containing folder'), 'go-jump',
                         () => { const fileBrowser = Gio.AppInfo.get_default_for_type('inode/directory', true);
                                 fileBrowser.launch([folder], null);
                                 this.appThis.closeMenu(); } ));
@@ -481,12 +513,10 @@ class AppListGridButton extends PopupBaseMenuItem {
         this.app = app;
         const isListView = this.appThis.settings.applicationsViewMode === ApplicationsViewModeLIST;
         this.actor.set_style_class_name('menu-application-button');
-        if (!isListView) {
-            this.actor.set_style('padding-left: 0px; padding-right: 0px;');
-        }
         this.actor.x_align = isListView ? St.Align.START : St.Align.MIDDLE;
         this.actor.y_align = St.Align.MIDDLE;
         if (!isListView) {
+            this.actor.set_style('padding-left: 0px; padding-right: 0px;');
             this.actor.width = this.appThis.appsView.applicationsGridBox.width /
                                                                 this.appThis.settings.appsGridColumnCount;
         }
@@ -538,7 +568,7 @@ class AppListGridButton extends PopupBaseMenuItem {
             this.iconContainer.add(this.icon, { x_fill: false, y_fill: false,
                                                 x_align: St.Align.MIDDLE, y_align: St.Align.MIDDLE});
         }
-        this.dot = new St.Widget({
+        this.dot = new St.Widget({ //app running indicator
                 style: isListView ?
                 'width: 2px; height: 12px; background-color: ' + this.appThis.getThemeForegroundColor() +
                                                     '; margin: 0px; border: 1px; border-radius: 10px;' :
@@ -568,8 +598,8 @@ class AppListGridButton extends PopupBaseMenuItem {
         if (this.icon) {
             this.icon.realize();
         }
-
-        if (this.app.type === APPTYPE.application) { //----------dnd--------------
+        //----------dnd--------------
+        if (this.app.type === APPTYPE.application) {
             this.actor._delegate = {
                     handleDragOver: (source) => {
                             if (source.isDraggableApp === true && source.get_app_id() !== this.app.get_id() &&
@@ -695,7 +725,6 @@ class AppListGridButton extends PopupBaseMenuItem {
                 }
             }
             tooltipMarkup = tooltipMarkup.replace(/&/g, '&amp;');
-
             let [x, y] = this.actor.get_transformed_position();
             let {width, height} = this.actor;
             let center_x = false; //should tooltip x pos. be centered on x
@@ -776,16 +805,16 @@ class AppListGridButton extends PopupBaseMenuItem {
             }
             this.appThis.closeMenu();
         } else if (this.app.type === APPTYPE.file) {
-            if (this.app.isDirectory) {
+            if (this.app.isDirectory) {//broswer view
                 this.appThis.setActiveCategory(Gio.File.new_for_uri(this.app.uri).get_path());
-                return;
-            }
-            try {
-                Gio.app_info_launch_default_for_uri(this.app.uri, global.create_app_launch_context());
-                this.appThis.closeMenu();
-            } catch (e) {
-                Main.notify(_("This file is no longer available"),e.message);
-                //don't closeMenu
+            } else {
+                try {
+                    Gio.app_info_launch_default_for_uri(this.app.uri, global.create_app_launch_context());
+                    this.appThis.closeMenu();
+                } catch (e) {
+                    Main.notify(_("This file is no longer available"),e.message);
+                    //don't closeMenu
+                }
             }
         } else if (this.app.type === APPTYPE.clearlist) {
             Gtk.RecentManager.get_default().purge_items();
@@ -842,7 +871,7 @@ class AppListGridButton extends PopupBaseMenuItem {
     }
 }
 
-class GroupButton extends PopupBaseMenuItem {
+class SidebarButton extends PopupBaseMenuItem {
     constructor(appThis, icon, app, name, description, callback) {
         super({ hover: false, activate: false });
         this.appThis = appThis;
@@ -859,7 +888,7 @@ class GroupButton extends PopupBaseMenuItem {
             this.icon.realize();
         }
 
-        if (this.app) { //----------dnd--------------
+        if (this.app && this.app.type === APPTYPE.application) { //----------dnd--------------
             this.actor._delegate = {
                     handleDragOver: (source) => {
                             if (source.isDraggableApp === true && source.get_app_id() !== this.app.get_id()) {
@@ -937,6 +966,13 @@ class GroupButton extends PopupBaseMenuItem {
             this.app.newAppShouldHighlight = false;
             this.app.open_new_window(-1);
             this.appThis.closeMenu();
+        } else if (this.app.type === APPTYPE.file) {
+            try {
+                Gio.app_info_launch_default_for_uri(this.app.uri, global.create_app_launch_context());
+                this.appThis.closeMenu();
+            } catch (e) {
+                Main.notify(_("This file is no longer available"),e.message);
+            }
         }
     }
 
@@ -971,6 +1007,7 @@ class GroupButton extends PopupBaseMenuItem {
         if (this.description) {
             text += '\n<span size="small">' + this.description + '</span>';
         }
+        text = text.replace(/&/g, '&amp;');
         showTooltip(this.actor, x, y, false /*don't center x*/, text);
         this.tooltip = true;
         return true;
@@ -1013,4 +1050,4 @@ class GroupButton extends PopupBaseMenuItem {
     }
 }
 
-module.exports = {CategoryListButton, AppListGridButton, ContextMenu, GroupButton};
+module.exports = {CategoryButton, AppListGridButton, ContextMenu, SidebarButton};
