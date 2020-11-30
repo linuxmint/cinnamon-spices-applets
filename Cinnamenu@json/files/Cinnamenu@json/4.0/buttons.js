@@ -468,7 +468,15 @@ class ContextMenu {
                                                                 this.close(); } ));
             }
         }
-        if (!app.isBackButton) {
+        const folder = file.get_parent();
+        if (app.description) { //if recent or fav item (not a browser folder/file)
+            this.menu.addMenuItem(new PopupSeparatorMenuItem(this.appThis));
+            addMenuItem( new ContextMenuItem(   this.appThis, _('Open containing folder'), 'go-jump',
+                        () => { const fileBrowser = Gio.AppInfo.get_default_for_type('inode/directory', true);
+                                fileBrowser.launch([folder], null);
+                                this.appThis.closeMenu(); } ));
+        }
+        if (!app.isBackButton) {//} && !app.isFavoriteFile) {
             this.menu.addMenuItem(new PopupSeparatorMenuItem(this.appThis));
             addMenuItem( new ContextMenuItem(   this.appThis, _('Move to trash'), 'user-trash',
                         () => { const file = Gio.File.new_for_uri(app.uri);
@@ -482,14 +490,6 @@ class ContextMenu {
                                 this.appThis.updateMenuHeight();
                                 this.appThis.setActiveCategory(this.appThis.currentCategory);
                                 this.close(); } ));
-        }
-        const folder = file.get_parent();
-        if (app.description) { //if recent or fav item (not a browser folder/file)
-            this.menu.addMenuItem(new PopupSeparatorMenuItem(this.appThis));
-            addMenuItem( new ContextMenuItem(   this.appThis, _('Open containing folder'), 'go-jump',
-                        () => { const fileBrowser = Gio.AppInfo.get_default_for_type('inode/directory', true);
-                                fileBrowser.launch([folder], null);
-                                this.appThis.closeMenu(); } ));
         }
     }
 
