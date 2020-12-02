@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-14 13:40+0000\n"
-"PO-Revision-Date: 2020-11-18 15:28+0100\n"
+"POT-Creation-Date: 2020-11-30 05:11+0000\n"
+"PO-Revision-Date: 2020-12-01 12:55+0100\n"
 "Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Language-Team: Dansk-gruppen <dansk@dansk-gruppen.dk>\n"
 "Language: da\n"
@@ -126,6 +126,9 @@ msgstr "Søg på nettet efter"
 msgid "Too many entries - showing first 1000 entries only"
 msgstr "For mange poster - viser kun de første 1000 poster"
 
+msgid "favorites"
+msgstr "favorit programmer"
+
 msgid "Home folder"
 msgstr "Hjemme mappe"
 
@@ -140,6 +143,15 @@ msgstr "Åben med"
 
 msgid "Other application..."
 msgstr "Andet program..."
+
+msgid "Move to trash"
+msgstr "Flyt til papirkurv"
+
+msgid "Error while moving file to trash:"
+msgstr "Fejl ved flytning til papirkurv:"
+
+msgid "Open containing folder"
+msgstr "Åben indeholdende mappe"
 
 msgid "Cinnamenu"
 msgstr "Cinnamenu"
@@ -360,6 +372,12 @@ msgstr "Føj favoritter til sessionsknapper"
 msgid "Show your favorite app icons next to the session buttons"
 msgstr "Vis dine foretrukne appikoner ved siden af sessionsknapperne"
 
+msgid "Show recent files"
+msgstr "Vis seneste filer"
+
+msgid "Show recent files category in the menu"
+msgstr "Vis seneste filer kategori i menuen"
+
 msgid ""
 "Show your browser's web bookmarks in the menu.\n"
 "Note: Install package gir1.2-gda-5.0 to read firefox bookmarks."
@@ -367,7 +385,7 @@ msgstr ""
 "Vis browserens web bogmærker i menuen\n"
 "Bemærk: Installer pakken gir1.2-gda-5.0 for at læse firefox bogmærker."
 
-msgid "Show favorites category"
+msgid "Show favorite apps category"
 msgstr "Vis favorit kategorien"
 
 msgid "Show your favorite apps category in the menu"
@@ -384,6 +402,9 @@ msgstr "Altid åbne menu med favoritter"
 
 msgid "Always open the menu with favorite apps category selected"
 msgstr "Menuen åbner altid med favorit kategorien"
+
+msgid "Autoscroll the application list on mouse hover"
+msgstr "Aktiver automatisk rulning i programlisten"
 
 msgid "Web search option"
 msgstr "Valg af søgemaskine"
