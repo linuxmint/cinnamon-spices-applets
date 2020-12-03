@@ -389,7 +389,7 @@ MyApplet.prototype = {
 					this.showMarkAllRead();
 				}
 
-				for each (var mail in mails)
+				for (var mail in mails)
                 {
                     let mi = this.makeMenuItem(mail);
 					this.addMailMenuItem(mi);
@@ -428,7 +428,7 @@ MyApplet.prototype = {
 		let mails = dbusList[0];
 		let r = [];
 
-		for each (var mail in mails)
+		for (var mail in mails)
 		{
 			let [sender, size1] = mail['sender_name'].get_string();
 			let [sender_address, size2] = mail['sender_addr'].get_string();
@@ -477,7 +477,7 @@ MyApplet.prototype = {
 				this.showMarkAllRead();
 			}
 
-			for each (var mail in newMails)
+			for (var mail in newMails)
             {
                 let mi = this.makeMenuItem(mail);
 				this.addMailMenuItem(mi);
@@ -504,13 +504,13 @@ MyApplet.prototype = {
 
 			// make a list of remaining ids
 			let ids = [];
-			for each (let mail in remainingMails)
+			for (let mail in remainingMails)
 			{
 				ids.push(mail.id);
 			}
 
 			// remove menu item if its id isn't in the list
-			for each (let mi in this.menuItems)
+			for (let mi in this.menuItems)
 			{
 				if (ids.indexOf(mi.id) < 0)
 				{
@@ -596,7 +596,7 @@ MyApplet.prototype = {
 			{
 				ntfTitle = _("You have %d new mails!").format(mails.length);
 				markButtonLabel = _("Mark All Read");
-				for each (var mail in mails)
+				for (var mail in mails)
 				{
 					ntfBody += mail.subject + "\n";
 				}
@@ -737,7 +737,7 @@ MyApplet.prototype = {
                 if (num == 1)
                 {
                     let s = "";
-                    for each (var m in this.menuItems) // actually there is only 1 item
+                    for (var m in this.menuItems) // actually there is only 1 item
                     {
                         s = _("You have a mail from %s!").format(m.sender);
                     }
@@ -828,7 +828,7 @@ MyApplet.prototype = {
 	{
 		try
 		{
-			for each (var mail in mails)
+			for (var mail in mails)
 			{
 				this.markMailRead(mail.id)
 			}
@@ -842,7 +842,7 @@ MyApplet.prototype = {
 	// mark all currently displayed mail as read
 	markAllRead: function()
 	{
-		for each (var m in this.menuItems)
+		for (var m in this.menuItems)
 		{
 			this.markMailRead(m.id);
 		}
@@ -866,12 +866,12 @@ MyApplet.prototype = {
     on_applet_clicked: function(event) {
         if (!this.menu.isOpen)
         {
-            for each (let accmenu in this.accountMenus)
+            for (let accmenu in this.accountMenus)
             {
                 accmenu.menu.open();
             }
 
-			for each (let mi in this.menuItems)
+			for (let mi in this.menuItems)
 			{
 				mi.updateTimeDisplay();
 			}
