@@ -1,6 +1,7 @@
 {
-  "description": "This simple radio for Cinnamon. Require moc player. In setting you may add, edit and remove stations.",
-  "max-instances": 1,
-  "uuid": "radio@driglu4it",
-  "name": "Radio++"
+    "description": "A simple radio for Cinnamon. Requires mpv and playerctl apt package. In setting you may add, edit and remove stations.",
+    "max-instances": 1,
+    "uuid": "radio@driglu4it",
+    "name": "Radio++",
+    "last-edited": 1582010997
 }
