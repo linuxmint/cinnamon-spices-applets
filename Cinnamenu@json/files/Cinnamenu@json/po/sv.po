@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cinnamenu@json\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-14 13:11+0100\n"
-"PO-Revision-Date: 2020-09-21 06:39+0200\n"
+"POT-Creation-Date: 2020-11-30 05:11+0000\n"
+"PO-Revision-Date: 2020-12-05 14:13+0100\n"
 "Last-Translator: Åke Engelbrektson <eson@svenskasprakfiler.se>\n"
 "Language-Team: Svenska Språkfiler <contactform@svenskasprakfiler.se>\n"
 "Language: sv\n"
@@ -114,14 +114,44 @@ msgstr "Avinstallera"
 msgid "Please wait..."
 msgstr "Vänta..."
 
-msgid "Search web for"
-msgstr "SökmotorerSök på nätet efter"
-
 msgid "Solution:"
 msgstr "Lösning:"
 
 msgid "Click to copy"
 msgstr "Klicka för att kopiera"
+
+msgid "Search web for"
+msgstr "SökmotorerSök på nätet efter"
+
+msgid "Too many entries - showing first 1000 entries only"
+msgstr "För många poster - Visar endast de 1000 första posterna"
+
+msgid "favorites"
+msgstr "Favoriter"
+
+msgid "Home folder"
+msgstr "Hemmapp"
+
+msgid "Reset category order"
+msgstr "Återställ kategoriordningen"
+
+msgid "This file is no longer available"
+msgstr "Filen är inte längre tillgänglig"
+
+msgid "Open with"
+msgstr "Öppna med"
+
+msgid "Other application..."
+msgstr "Annat program..."
+
+msgid "Move to trash"
+msgstr "Flytta till papperskorgen"
+
+msgid "Error while moving file to trash:"
+msgstr "Kunde inte flytta filen till papperskorgen:"
+
+msgid "Open containing folder"
+msgstr "Öppna innehållande mapp"
 
 msgid "Cinnamenu"
 msgstr "Cinnamenu"
@@ -172,9 +202,6 @@ msgstr "Inställningar för tidigare filer"
 
 msgid "Open the menu editor"
 msgstr "Öppna menyredigeraren"
-
-msgid "Reset category order"
-msgstr "Återställ kategoriordningen"
 
 msgid "Use a custom icon"
 msgstr "Använd en anpassad ikon"
@@ -344,11 +371,39 @@ msgstr "Lägg till favoriter till sessionsknapparna"
 msgid "Show your favorite app icons next to the session buttons"
 msgstr "Visa dina favoritprogramikoner tillsammans med sessionsknapparna"
 
+msgid "Show recent files"
+msgstr "Visa tidigare filer"
+
+msgid "Show recent files category in the menu"
+msgstr "Visa kategori för tidigare filer i menyn"
+
+msgid ""
+"Show your browser's web bookmarks in the menu.\n"
+"Note: Install package gir1.2-gda-5.0 to read firefox bookmarks."
+msgstr ""
+"Visa webbläsarens bokmärken i menyn.\n"
+"Notis: Installera paketet gir1.2-gda-5.0 för att läsa Firefox bokmärken."
+
+msgid "Show favorite apps category"
+msgstr "Visa favoritkategori"
+
+msgid "Show your favorite apps category in the menu"
+msgstr "Visa kategori för favoritprogram i menyn"
+
+msgid "Show home folder"
+msgstr "Visa hemmappen"
+
+msgid "Show home folder category in the menu"
+msgstr "Visa kategori för hemmappen i menyn"
+
 msgid "Always open menu on favorite apps"
 msgstr "Öppna alltid menyn med Favoritprogram"
 
 msgid "Always open the menu with favorite apps category selected"
 msgstr "Öppna alltid menyn med kategorien Favoritprogram"
+
+msgid "Autoscroll the application list on mouse hover"
+msgstr "Skrolla programlistan automatiskt vid mus över"
 
 msgid "Web search option"
 msgstr "Webbsökalternativ"
@@ -367,6 +422,12 @@ msgstr "DuckDuckGo"
 
 msgid "Show an internet search option in search results"
 msgstr "Visa ett internetsökalternativ i sökresultat"
+
+msgid "Enable emoji search"
+msgstr "Aktivera emoji-sök"
+
+msgid "Show emojis in search results"
+msgstr "Visa emojis i sökresultat"
 
 msgid "Session buttons icon size"
 msgstr "Sessionsknappars ikonstorlek"
@@ -464,9 +525,6 @@ msgstr "Använd boxstil för sessionsknappar"
 #~ msgstr ""
 #~ "Välj var programbeskrivningen skall placeras, eller välj \"Ingen\" för "
 #~ "att inaktivera."
-
-#~ msgid "Startup category"
-#~ msgstr "Uppstartskategori"
 
 #~ msgid "Category first seen when the menu is opened"
 #~ msgstr "Kategorin som visas först, när menyn öppnas."
