@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-30 05:11+0000\n"
+"POT-Creation-Date: 2020-12-07 12:44+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -125,10 +125,19 @@ msgstr ""
 msgid "Too many entries - showing first 1000 entries only"
 msgstr ""
 
-msgid "favorites"
+msgid "Favorites"
 msgstr ""
 
 msgid "Home folder"
+msgstr ""
+
+msgid "All applications"
+msgstr ""
+
+msgid "Recent files"
+msgstr ""
+
+msgid "Favorite apps"
 msgstr ""
 
 msgid "Reset category order"
@@ -143,13 +152,13 @@ msgstr ""
 msgid "Other application..."
 msgstr ""
 
+msgid "Open containing folder"
+msgstr ""
+
 msgid "Move to trash"
 msgstr ""
 
 msgid "Error while moving file to trash:"
-msgstr ""
-
-msgid "Open containing folder"
 msgstr ""
 
 msgid "Cinnamenu"

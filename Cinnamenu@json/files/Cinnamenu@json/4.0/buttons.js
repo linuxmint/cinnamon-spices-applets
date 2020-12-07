@@ -26,7 +26,7 @@ class CategoryButton extends PopupBaseMenuItem {
         super({ hover: false, activate: false });
         this.appThis = appThis;
         this.signals = new SignalManager(null);
-        this.index = -1;
+        this.actor.set_style_class_name('menu-category-button');
         this.disabled = false;
         this.entered = null;
         let iconName;
@@ -69,14 +69,14 @@ class CategoryButton extends PopupBaseMenuItem {
         //?undo
         this.actor._delegate = {
                 handleDragOver: (source /*, actor, x, y, time */) => {
-                        if (!source.index || source.index === this.index) {
-                                return DragMotionResult.NO_DROP;
+                        if (!source.categoryNameText || source.categoryNameText === this.categoryNameText) {
+                            return DragMotionResult.NO_DROP;
                         }
                         this.appThis.resetCategoryOpacity();
                         this.actor.set_opacity(50);
                         return DragMotionResult.MOVE_DROP; },
                 acceptDrop: (source /*, actor, x, y, time */) => {
-                        if (!source.index || source.index === this.index) {
+                        if (!source.categoryNameText || source.categoryNameText === this.categoryNameText) {
                             this.appThis.resetCategoryOpacity();
                             return DragMotionResult.NO_DROP;
                         }
@@ -86,7 +86,7 @@ class CategoryButton extends PopupBaseMenuItem {
                 _getDragActor: () => new Clutter.Clone({source: this.actor}),
                 getDragActor: () => new Clutter.Clone({source: this.icon}),
                 isDraggableApp: false,
-                index: this.index,
+                categoryNameText: this.categoryNameText,
                 id: this.id };
 
         this.draggable = makeDraggable(this.actor);
@@ -287,10 +287,7 @@ class ContextMenu {
     open(app, e, button, category = false) {
         //e is used to position context menu at mouse coords. If keypress opens menu then
         // e is undefined and button position is used instead,
-        for (let i = 0; i < this.contextMenuButtons.length; i++) {
-            this.contextMenuButtons[i].destroy();
-            this.contextMenuButtons[i] = null;
-        }
+        this.contextMenuButtons.forEach(button => button.destroy());
         this.contextMenuButtons = [];
 
         if (category) {
@@ -437,17 +434,15 @@ class ContextMenu {
                                                         this.appThis.closeMenu(); } ));
         }
         //
-        const infos = Gio.AppInfo.get_all_for_type(app.mimeType);
-        for (let i = 0; i < infos.length; i++) {
-            const info = infos[i];
+        Gio.AppInfo.get_all_for_type(app.mimeType).forEach(info => {
             //const file = Gio.File.new_for_uri(app.uri);
             if (!hasLocalPath(file) || !info.supports_uris() || info.equal(defaultInfo)) {
-                continue;
+                return;
             }
             addMenuItem( new ContextMenuItem(   this.appThis, info.get_display_name(), null,
                                                 () => { info.launch([file], null);
                                                         this.appThis.closeMenu(); } ));
-        }
+        });
         //
         addMenuItem( new ContextMenuItem(   this.appThis, _('Other application...'), null,
                                             () => { spawnCommandLine("nemo-open-with " + app.uri);
@@ -602,7 +597,7 @@ class AppListGridButton extends PopupBaseMenuItem {
         if (this.app.type === APPTYPE.application) {
             this.actor._delegate = {
                     handleDragOver: (source) => {
-                            if (source.isDraggableApp === true && source.get_app_id() !== this.app.get_id() &&
+                            if (source.isDraggableApp && source.get_app_id() !== this.app.get_id() &&
                                                             this.appThis.currentCategory === 'favorite_apps') {
                                 this.appThis.resetOpacity();
                                 this.actor.set_opacity(40);
@@ -611,7 +606,7 @@ class AppListGridButton extends PopupBaseMenuItem {
                             return DragMotionResult.NO_DROP; },
                     handleDragOut: () => {  this.actor.set_opacity(255); },
                     acceptDrop: (source) => {
-                            if (source.isDraggableApp === true && source.get_app_id() !== this.app.get_id() &&
+                            if (source.isDraggableApp && source.get_app_id() !== this.app.get_id() &&
                                                             this.appThis.currentCategory === 'favorite_apps') {
                                 this.actor.set_opacity(255);
                                 this.appThis.addFavoriteToPos(source.get_app_id(), this.app.get_id());

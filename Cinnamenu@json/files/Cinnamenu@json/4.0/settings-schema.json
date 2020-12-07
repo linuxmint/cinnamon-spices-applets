@@ -52,8 +52,7 @@
                 "show-web-bookmarks-category",
                 "show-favorite-apps-category",
                 "show-home-folder-category",
-                "menu-editor-button",
-                "categories"
+                "menu-editor-button"
             ]
         },
         "panel-behave":{
