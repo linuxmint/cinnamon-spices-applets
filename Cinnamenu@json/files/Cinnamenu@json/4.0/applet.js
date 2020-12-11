@@ -1401,7 +1401,7 @@ class Categories {
             } });
         const enableFavFiles = XApp.Favorites && XApp.Favorites.get_default().get_favorites(null).length > 0;
         const home = GLib.get_home_dir();
-        [   [enableFavFiles, 'favorite_files', _('Favorites'), 'xapp-favorites'],
+        [   [enableFavFiles, 'favorite_files', _('Favorites'), 'xapp-user-favorites'],
             [this.appThis.settings.showPlaces, 'places', _('Places'), 'folder'],
             [this.appThis.recentEnabled && this.appThis.settings.showRecents, 'recents', _('Recent files'),
                                             'document-open-recent'], //'folder-recent folder-documents-recent'
@@ -1825,7 +1825,7 @@ class Apps {
                         description: Gio.File.new_for_uri(info.uri).get_path(),
                         icon: Gio.content_type_get_icon(info.cached_mimetype),
                         type: APPTYPE.file,
-                        //isFavoriteFile: true,
+                        isFavoriteFile: true,
                         mimeType: info.cached_mimetype,
                         uri: info.uri });
         });
