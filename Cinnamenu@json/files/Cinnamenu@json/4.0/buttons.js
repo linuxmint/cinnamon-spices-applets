@@ -471,7 +471,7 @@ class ContextMenu {
                                 fileBrowser.launch([folder], null);
                                 this.appThis.closeMenu(); } ));
         }
-        if (!app.isBackButton) {//} && !app.isFavoriteFile) {
+        if (!app.isBackButton && !app.isFavoriteFile) {
             this.menu.addMenuItem(new PopupSeparatorMenuItem(this.appThis));
             addMenuItem( new ContextMenuItem(   this.appThis, _('Move to trash'), 'user-trash',
                         () => { const file = Gio.File.new_for_uri(app.uri);
