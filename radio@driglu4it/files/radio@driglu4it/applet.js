@@ -9,6 +9,7 @@ const Gettext = imports.gettext; // l10n support
 const GLib = imports.gi.GLib;
 const Gtk = imports.gi.Gtk;
 const St = imports.gi.St;
+const Gio = imports.gi.Gio;
 
 const UUID = "radio@driglu4it";
 
@@ -49,12 +50,9 @@ MyApplet.prototype = {
     this.on_icon_changed();
     this.on_tree_changed(true);
     this.oldNames = JSON.stringify(this.names);
-    this.mpvMprisPluginPath = `${GLib.get_home_dir()}/.local/share/cinnamon/applets/${UUID}/.mpris.so`;
+    this.appletPath = `${GLib.get_home_dir()}/.local/share/cinnamon/applets/${UUID}`;
+    this.mpvMprisPluginPath = this.appletPath + '/.mpris.so';
     this.volume = 50; // for mpv the volume is between 0 and 100 and for playerctl between 0 and 1
-
-    // download of mpris plug for mpv if not already exist
-    Util.spawnCommandLineAsyncIO(` [ ! -f ${this.mpvMprisPluginPath} ] && 
-      wget https://github.com/hoyon/mpv-mpris/releases/download/0.5/mpris.so -O ${this.mpvMprisPluginPath}`)
 
     // Keep radio running when it is alreay playing when starting the applet (e.g. when restarting cinnamon)
     this.get_playing_radio_channel(radioUrl => {
@@ -71,6 +69,10 @@ MyApplet.prototype = {
         this.radioStatus = "STOP";
       }
     })
+  },
+
+  on_streamurl_button_pressed() {
+    Main.Util.spawnCommandLine("xdg-open https://streamurl.link");
   },
 
   get_default_icon_color() {
@@ -200,9 +202,40 @@ MyApplet.prototype = {
     })
   },
 
+  notify_send: function(notification) {
+    var iconPath = this.appletPath + '/icon.png';
+    Util.spawnCommandLine('notify-send --hint=int:transient:1 "' + notification + '" -i ' + iconPath);
+  },
+
+  notify_installation: function(packageName) {
+    this.notify_send(_("Please install the '%s' package.").format(packageName));
+  },
+
+  check_dependencies: function() {
+    if(!Gio.file_new_for_path(this.mpvMprisPluginPath).query_exists(null)) {
+        Util.spawn_async(['python3', this.appletPath + '/download-dialog.py'], Lang.bind(this, function(out) {
+            if(out.trim() == 'Continue') {
+                Util.spawnCommandLineAsyncIO(`wget https://github.com/hoyon/mpv-mpris/releases/download/0.5/mpris.so -O ${this.mpvMprisPluginPath}`);
+            }
+        }));
+        return false;
+    } else if(!Gio.file_new_for_path("/usr/bin/mpv").query_exists(null)) {
+        this.notify_installation('mpv');
+        Util.spawnCommandLine("apturl apt://mpv");
+        return false;
+    } else if(!Gio.file_new_for_path("/usr/bin/playerctl").query_exists(null)) {   
+        this.notify_installation('playerctl');
+        Util.spawnCommandLine("apturl apt://playerctl");
+        return false;
+    }
+    return true;
+  },
+
   on_applet_clicked: function(event) {
-    this.on_tree_changed(true);
-    this.menu.toggle();
+    if(this.check_dependencies()) {
+        this.on_tree_changed(true);
+        this.menu.toggle();
+    }
   },
 
   on_applet_removed_from_panel: function() {

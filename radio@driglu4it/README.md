@@ -7,3 +7,16 @@ sudo apt-get install playerctl mpv
 ```
 
 The plugin for mpv mentioned above is automatically downloaded at the first start of the applet and is located in the applet folder. 
+
+## Known Issues
+- The volume of the radio can be changed either by using the mouse wheel when the cursor is above the applet icon or by changing the volume of the MPV Player in the sound applet. However the two sound settings are independent of each other and not synchronized as it should be. This is most likely a Bug of the sound applet and is reported on (Github)[https://github.com/linuxmint/cinnamon/issues/9770]
+- Special characters (e.g German Umlaute) are not shown correctly on the sound applet (when the option "Show song information on the panel" is activated). This is a limitation of the used MPRIS Plugin. 
+- After restarting cinnamon, the radio channel is not indicated by a dot and not shown in the tooltip. This will be fixed in future. 
+- There is currently no maximum volume limit which can leads to scratching noises. Therefore there should be a limit (not sure which value though). This will be fixed in future. 
+
+## Ideas for improvements
+- Automatically stop playing when another MPRIS meida player starts
+- Adding an option to show the application volume in the tooltip 
+- Adding an option to show the title of the radio channel in the panel 
+- Adding an option to show the last played radio channel italic
+- Better Error Handling (e.g. show a notification when radio url is invalid)
