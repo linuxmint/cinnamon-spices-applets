@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-14 23:43+0100\n"
+"POT-Creation-Date: 2020-12-12 18:20+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,27 +18,57 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #. metadata.json->name
-#: applet.js:97 applet.js:125
+#: applet.js:109 applet.js:141 applet.js:148
 msgid "Radio++"
 msgstr ""
 
-#: applet.js:109
+#: applet.js:122
 #, javascript-format
 msgid "Playing %s"
 msgstr ""
 
-#: applet.js:122
+#: applet.js:132
 msgid "Stop"
 msgstr ""
 
-#: applet.js:135
+#: applet.js:154
 msgid "Stop Radio++"
 msgstr ""
 
-#. metadata.json->description
+#: applet.js:211
+#, javascript-format
+msgid "Please install the '%s' package."
+msgstr ""
+
+#: download-dialog.py:35
+msgid "Download Confirmation Dialog"
+msgstr ""
+
+#: download-dialog.py:38
+#, python-format
 msgid ""
-"This simple radio for Cinnamon. Require moc player. In setting you may add, "
-"edit and remove stations."
+"The radio applet depends on the '%s' plugin. It's a 3rd party plugin for "
+"mpv, which allows controlling the radio player with the sound applet."
+msgstr ""
+
+#: download-dialog.py:38
+msgid "Do you want to proceed the download at your own risk?"
+msgstr ""
+
+#: download-dialog.py:39
+msgid "Cancel download"
+msgstr ""
+
+#: download-dialog.py:40
+msgid "More info"
+msgstr ""
+
+#: download-dialog.py:41
+msgid "Download plugin at my own risk"
+msgstr ""
+
+#. metadata.json->description
+msgid "A simple radio applet for Cinnamon"
 msgstr ""
 
 #. settings-schema.json->page1->title
@@ -68,7 +98,15 @@ msgid "URL"
 msgstr ""
 
 #. settings-schema.json->tree->columns->title
-msgid "Include of list"
+msgid "Show in list"
+msgstr ""
+
+#. settings-schema.json->streamurl-button->description
+msgid "Open radio stream URL search engine"
+msgstr ""
+
+#. settings-schema.json->streamurl-button->tooltip
+msgid "Opens a website, which helps you to determine radio stream URLs."
 msgstr ""
 
 #. settings-schema.json->icon-type->description

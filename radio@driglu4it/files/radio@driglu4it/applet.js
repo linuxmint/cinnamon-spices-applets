@@ -9,6 +9,7 @@ const Gettext = imports.gettext; // l10n support
 const GLib = imports.gi.GLib;
 const Gtk = imports.gi.Gtk;
 const St = imports.gi.St;
+const Gio = imports.gi.Gio;
 
 const UUID = "radio@driglu4it";
 
@@ -29,7 +30,6 @@ function MyApplet(orientation, panel_height, instance_id) {
 MyApplet.prototype = {
   __proto__: Applet.IconApplet.prototype,
   _init: function(orientation, panel_height, instance_id) {
-    Util.spawnCommandLine("mocp");
     Applet.IconApplet.prototype._init.call(this, orientation, panel_height, instance_id);
 
     if(this.setAllowedLayout) this.setAllowedLayout(Applet.AllowedLayout.BOTH);
@@ -41,17 +41,38 @@ MyApplet.prototype = {
     this.menuManager.addMenu(this.menu);
     this.settings = new Settings.AppletSettings(this, UUID, instance_id);
     this.settings.bindProperty(Settings.BindingDirection.IN, "icon-type", "icon_type", this.on_icon_changed, null);
-    this.settings.bindProperty(Settings.BindingDirection.IN, "color-on", "color_on", this.get_moc_status, null);
+    this.settings.bindProperty(Settings.BindingDirection.IN, "color-on", "color_on", this.set_color(), null);
     this.settings.bindProperty(Settings.BindingDirection.IN, "tree", "names", this.on_tree_changed, null);
     this.oldNames = "{}";
     this.currentMenuItem = null;
     this._connect_signals();
-    this.mocStatus = "STOP";
     this.radioId = "";
-    this.get_moc_status();
     this.on_icon_changed();
     this.on_tree_changed(true);
     this.oldNames = JSON.stringify(this.names);
+    this.appletPath = `${GLib.get_home_dir()}/.local/share/cinnamon/applets/${UUID}`;
+    this.mpvMprisPluginPath = this.appletPath + '/.mpris.so';
+    this.volume = 50; // for mpv the volume is between 0 and 100 and for playerctl between 0 and 1
+
+    // Keep radio running when it is alreay playing when starting the applet (e.g. when restarting cinnamon)
+    this.get_playing_radio_channel(radioUrl => {
+      if (radioUrl) {
+        this.radioStatus = "PLAY";
+        // We start the radio again because othwerilse we couldn't refresh the applet (icon color etc.) 
+        // when stream is stopped from other app via mpris. 
+        Util.spawnCommandLineAsyncIO(`playerctl --player=mpv volume`, (volume) => {
+          this.volume = Number(volume) * 100
+          this.startCM(radioUrl)
+          this.set_color()
+        })
+      } else {
+        this.radioStatus = "STOP";
+      }
+    })
+  },
+
+  on_streamurl_button_pressed() {
+    Main.Util.spawnCommandLine("xdg-open https://streamurl.link");
   },
 
   get_default_icon_color() {
@@ -65,7 +86,7 @@ MyApplet.prototype = {
   },
 
   set_color: function() {
-    if (this.mocStatus == "STOP") {
+    if (this.radioStatus == "STOP") {
       this.get_default_icon_color();
       this.actor.style = "color: %s".format(this.defaultColor);
       return
@@ -73,27 +94,7 @@ MyApplet.prototype = {
     this.actor.style = "color: %s;".format(this.color_on);
   },
 
-  get_moc_status: function() {
-    Util.spawn_async(['/usr/bin/mocp', '-Q %state,%r,%file,%title'], Lang.bind(this, function(out) {
-      let [state, rate, file, title] = out.trim().split(",");
-      this.mocStatus = state;
-      this.radioId = file;
-      if (state === "PLAY") {
-        for (let i = 0; i < this.names.length; i++) {
-          let id = this.names[i].url;
-          if (this.radioId === id) {
-            this.set_applet_tooltip(this.names[i].name);
-            break;
-          }
-        }
-      } else {
-        this.set_applet_tooltip(_("Radio++"));
-      }
-      this.set_color();
-    }));
-  },
-
-  on_icon_changed: function() {
+  on_icon_changed: function () {
     if (this.icon_type === "SYMBOLIC") {
       this.set_applet_icon_symbolic_name('radioapplet');
     } else if (this.icon_type === "FULLCOLOR") {
@@ -112,8 +113,6 @@ MyApplet.prototype = {
         let title = this.names[i].name;
         let id = this.names[i].url;
         if (this.names[i].inc === true) {
-          //let title = this.names[i].name;
-          //let id = this.names[i].url;
           let menuitem = new PopupMenu.PopupMenuItem(title, false);
           this.menu.addMenuItem(menuitem);
           menuitem.connect('activate', Lang.bind(this, function() {
@@ -130,46 +129,113 @@ MyApplet.prototype = {
         if (this.radioId === id) this.set_applet_tooltip(title);
       }
       this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
-      let stopitem = new PopupMenu.PopupMenuItem(_("Stop"), false);
-      this.menu.addMenuItem(stopitem);
-      stopitem.connect('activate', Lang.bind(this, function() {
-        this.set_applet_tooltip(_("Radio++"));
-        this.activeMenuItemChanged(stopitem);
-        Util.spawnCommandLine("mocp -s");
-        this.mocStatus = "STOP";
-        this.radioId = "";
-        this.set_color();
-        Main.notify(_("Stop Radio++"));
-      }));
-      if (force && this.mocStatus == "STOP") {
-        stopitem.setShowDot(true);
+      this.stopitem = new PopupMenu.PopupMenuItem(_("Stop"), false);
+      this.menu.addMenuItem(this.stopitem);
+
+      this.stopitem.connect('activate', () => {
+        this.stopRadio();
+      });
+
+      if (force && this.radioStatus == "STOP") {
+        this.stopitem.setShowDot(true);
         this.set_applet_tooltip(_("Radio++"));
       }
       this.oldNames = JSON.stringify(this.names);
     }
   },
 
-  activeMenuItemChanged: function(activatedMenuItem) {
-    if(this.currentMenuItem == null) {
-        this.currentMenuItem = activatedMenuItem;
-    } else {
-        this.currentMenuItem.setShowDot(false);
-        this.currentMenuItem = activatedMenuItem;
-    }
-    this.currentMenuItem.setShowDot(true);
+  stopRadio: function () {
+    this.set_applet_tooltip(_("Radio++"));
+    this.changeCurrentMenuItem(this.stopitem);
+    Util.spawnCommandLine("playerctl --player=mpv stop");
+    this.radioStatus = "STOP";
+    this.radioId = "";
+    this.set_color();
+    Main.notify(_("Stop Radio++"));
   },
 
-  startCM: function(id) {
-    //Make sure that the MOC-Server is running before playing a stream
-    Util.spawnCommandLine("mocp -S");
-    Util.spawnCommandLine('mocp -c -a -p ' + id);
-    this.mocStatus = "PLAY";
+  changeCurrentMenuItem: function (activatedMenuItem) {
+    activatedMenuItem.setShowDot(true);
+    if (this.currentMenuItem) currentMenuItem.setShowDot(false)
+    this.currentMenuItem = activatedMenuItem;
+  },
+
+  startCM: async function (id) {
+    Util.spawnCommandLineAsyncIO(`playerctl -a stop & mpv --script=${this.mpvMprisPluginPath} \
+      ${id} --volume=${this.volume} & wait; echo 'stop'`, () => {
+      // this callback function is either called when the stream has been closed or the radio channel has changed
+      setTimeout(() => {
+        this.get_playing_radio_channel(radioPlaying => {
+          if (!radioPlaying) {
+            this.stopRadio();
+          }
+        })
+      }, 100);
+    })
+    this.get_default_icon_color();
+    this.radioStatus = "PLAY";
     this.set_color();
   },
 
+
+  /**
+   * 
+   * @param {*} callback (function): always called. Has one argument: the name of the radio channel
+   * if a radio channel listed in the applet settings is running with mpv and false if not
+   * 
+   * Be aware that when the radio channel has changed, there is a short period during 
+   * which the radio is actually playing but the playerctl request returns no radio 
+   * anyway.  
+   * 
+   */
+  get_playing_radio_channel: function (callback) {
+    Util.spawnCommandLineAsyncIO("playerctl --player=mpv metadata --format '{{ xesam:url }}'", (stdout, stderr) => {
+      if (stderr.trim() == "No players found") {
+        callback(false)
+      } else {
+        // This is important when somebody is doing the follwoing
+        // 1. starting the radio, 2. open something else in mpv (using the mpris script) 3. turn off radio with mpris control 
+        // In this case the first condition is not met but still it should be returned "false"
+        const CHANNEL_LIST = this.names
+        CHANNEL_LIST.some(channel => channel.url === stdout.trim()) ? callback(stdout.trim()) : callback(false)
+      }
+    })
+  },
+
+  notify_send: function(notification) {
+    var iconPath = this.appletPath + '/icon.png';
+    Util.spawnCommandLine('notify-send --hint=int:transient:1 "' + notification + '" -i ' + iconPath);
+  },
+
+  notify_installation: function(packageName) {
+    this.notify_send(_("Please install the '%s' package.").format(packageName));
+  },
+
+  check_dependencies: function() {
+    if(!Gio.file_new_for_path(this.mpvMprisPluginPath).query_exists(null)) {
+        Util.spawn_async(['python3', this.appletPath + '/download-dialog.py'], Lang.bind(this, function(out) {
+            if(out.trim() == 'Continue') {
+                Util.spawnCommandLineAsyncIO(`wget https://github.com/hoyon/mpv-mpris/releases/download/0.5/mpris.so -O ${this.mpvMprisPluginPath}`);
+            }
+        }));
+        return false;
+    } else if(!Gio.file_new_for_path("/usr/bin/mpv").query_exists(null)) {
+        this.notify_installation('mpv');
+        Util.spawnCommandLine("apturl apt://mpv");
+        return false;
+    } else if(!Gio.file_new_for_path("/usr/bin/playerctl").query_exists(null)) {   
+        this.notify_installation('playerctl');
+        Util.spawnCommandLine("apturl apt://playerctl");
+        return false;
+    }
+    return true;
+  },
+
   on_applet_clicked: function(event) {
-    this.on_tree_changed(true);
-    this.menu.toggle();
+    if(this.check_dependencies()) {
+        this.on_tree_changed(true);
+        this.menu.toggle();
+    }
   },
 
   on_applet_removed_from_panel: function() {
@@ -186,14 +252,9 @@ MyApplet.prototype = {
   },
   on_mouse_scroll: function(actor, event) {
     let direction = event.get_scroll_direction();
-    if (direction == Clutter.ScrollDirection.UP) {
-      Util.spawnCommandLine("mocp -v +5");
-    }
-    else {
-      Util.spawnCommandLine("mocp -v -5");
-    }
+    direction === Clutter.ScrollDirection.UP ? this.volume += 5 : this.volume -= 5
+    Util.spawnCommandLine(`playerctl --player=mpv volume ${this.volume / 100}`)
   }
-
 };
 
 function main(metadata, orientation, panel_height, instance_id) { // Make sure you collect and pass on instanceId
