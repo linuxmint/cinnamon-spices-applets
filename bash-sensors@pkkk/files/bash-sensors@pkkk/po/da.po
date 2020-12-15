@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-04-15 12:28+0200\n"
-"PO-Revision-Date: 2019-11-30 13:40+0100\n"
+"PO-Revision-Date: 2020-12-15 15:54+0100\n"
 "Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Language-Team: \n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: applet.js:71
@@ -111,8 +111,10 @@ msgstr "tillader visning af en masse information i pop op-menu"
 msgid "Display output of menu command"
 msgstr "Vis menukommandoens output"
 
-#~ msgid "script error"
-#~ msgstr "fejl i skript"
+#. settings-schema.json->head5->description
+msgid "Command on start-up"
+msgstr "Kommando ved opstart"
 
-#~ msgid "Bash Sensors!"
-#~ msgstr "Bash-sensorer!"
+#. settings-schema.json->startupScript->description
+msgid "Command run at start-up"
+msgstr "Kommando kørt ved opstart"
