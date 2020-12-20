@@ -17,6 +17,7 @@ const {ScreenSaverProxy} = imports.misc.screenSaver;
 const {PopupMenuManager, PopupMenuSection} = imports.ui.popupMenu;
 const {getAppFavorites} = imports.ui.appFavorites;
 const {TextIconApplet, AllowedLayout, AppletPopupMenu} = imports.ui.applet;
+const {PopupResizeHandler} = require('./resizer');
 const {AppletSettings} = imports.ui.settings;
 const {addTween} = imports.ui.tweener;
 const {SignalManager} = imports.misc.signalManager;
@@ -56,8 +57,16 @@ class CinnamenuApplet extends TextIconApplet {
         this.menu.setCustomStyleClass('starkmenu-background');
         this.signals = new SignalManager(null);
         this.displaySignals = new SignalManager(null);
-        this.tracker = Cinnamon.WindowTracker.get_default();//?
+        //this.tracker = Cinnamon.WindowTracker.get_default();//?
         this.appSystem = Cinnamon.AppSystem.get_default();
+        global.log('hhh',this.getScreenWorkArea().height);
+        this.resizer = new PopupResizeHandler(  this,
+                                                this.menu.actor,
+                                                400, this.getScreenWorkArea().width,
+                                                300, this.getScreenWorkArea().height,
+                                                (w,h) => this.onBoxResized(w,h),
+                                                () => this.settings.customMenuWidth,
+                                                () => this.settings.customMenuHeight);
         this.signals.connect(this.privacy_settings, 'changed::' + REMEMBER_RECENT_KEY, () =>
                                                                                 this.onEnableRecentChange());
         this.signals.connect(Main.themeManager, 'theme-set', () => this.onThemeChanged());
@@ -87,13 +96,13 @@ class CinnamenuApplet extends TextIconApplet {
 
         [
             { key: 'categories',                value: 'categories',            cb: null },//?undo
+            { key: 'custom-menu-height',        value: 'customMenuHeight',      cb: null },
+            { key: 'custom-menu-width',         value: 'customMenuWidth',       cb: null },
+
             { key: 'applications-view-mode',    value: 'applicationsViewMode',  cb: this.refresh },
             { key: 'description-placement',     value: 'descriptionPlacement',  cb: this.refresh },
             { key: 'sidebar-placement',         value: 'sidebarPlacement',      cb: this.refresh },
             { key: 'add-favorites',             value: 'addFavorites',          cb: this.refresh },
-            { key: 'enable-custom-menu-height', value: 'enableCustomMenuHeight',cb: this.updateMenuHeight },
-            { key: 'custom-menu-height',        value: 'customMenuHeight',      cb: this.updateMenuHeight },
-            { key: 'apps-grid-column-count',    value: 'appsGridColumnCount',   cb: this.refresh },
 
             { key: 'show-places-category',      value: 'showPlaces',            cb: this.onEnablePlacesChange },
             { key: 'show-recents-category',     value: 'showRecents',           cb: this.onEnableRecentChange },
@@ -130,15 +139,13 @@ class CinnamenuApplet extends TextIconApplet {
                           setting.cb ? (...args) => setting.cb.call(this, ...args) : null ) );
     }
 
-    getGridWidth() {
-        //if (!this.state) return 0;
-        //size grid so that column widths are slightly wider when there are fewer columns
-        let width = (this.settings.appsGridColumnCount * 130 + 80) * global.ui_scale;
+    getGridValues() {
+        let gridWidth = this.appsView.applicationsGridBox.width;
+        let columns = Math.floor(gridWidth / (130 * global.ui_scale));
+        let columnWidth = Math.floor(gridWidth / columns)
         //bigger if large icons
-        width = Math.max(width, this.getIconSize() * this.settings.appsGridColumnCount * 1.5);
-        //ensure column width is a integer.
-        width = Math.round(width / this.settings.appsGridColumnCount) * this.settings.appsGridColumnCount;
-        return width;
+        //width = Math.max(width, this.getIconSize() * this.settings.appsGridColumnCount * 1.5);
+        return {columnWidth: columnWidth, columns: columns};
     }
 
     getIconSize() {
@@ -152,6 +159,12 @@ class CinnamenuApplet extends TextIconApplet {
     getThemeForegroundColor() {
         const appletMenuThemeNode = this.menu.actor.get_theme_node();
         return appletMenuThemeNode.get_foreground_color().to_string().substring(0, 7);
+    }
+
+    getScreenWorkArea() {
+        const monitor = Main.layoutManager.currentMonitor;
+        const ws = global.screen.get_active_workspace();
+        return ws.get_work_area_for_monitor(monitor.index);
     }
 //----------------callbacks---------
     on_applet_reloaded() {
@@ -502,9 +515,9 @@ class CinnamenuApplet extends TextIconApplet {
                                                                 'favorite_apps' : this.currentCategory;
             this.updateMenuWidth();
             //this.setActiveCategory(currentCategory);
-            //this.updateMenuHeight();
+            this.updateMenuHeight();
             Mainloop.idle_add_full(Mainloop.PRIORITY_DEFAULT, () => this.setActiveCategory(currentCategory));
-            Mainloop.idle_add_full(Mainloop.PRIORITY_DEFAULT, () => this.updateMenuHeight());
+            //Mainloop.idle_add_full(Mainloop.PRIORITY_DEFAULT, () => this.updateMenuHeight());
         } else {
             if (this.searchActive) {
                 this.allItemsCleanup();
@@ -518,41 +531,53 @@ class CinnamenuApplet extends TextIconApplet {
         return true;
     }
 
-    updateMenuHeight() {
-        let menuHeight;
-        const monitorHeight = Main.layoutManager.monitors[this.panel.monitorIndex].height;
-        const [toppanelHeight,bottompanelHeight] = heightsUsedMonitor(this.panel.monitorIndex,
-                                                                                    Main.panelManager.panels);
-        const customHeightLimit = monitorHeight - toppanelHeight - bottompanelHeight;
-        //let customHeightLimit = monitorHeight - 120;
-        if (this.settings.enableCustomMenuHeight) {
-            menuHeight = Math.min(this.settings.customMenuHeight * global.ui_scale, customHeightLimit);
-        } else {
-            menuHeight = this.categoriesView.categoriesBox.height + this.bottomPane.height;
-            menuHeight = Math.min(menuHeight, customHeightLimit);
+    onBoxResized(userWidth, userHeight){
+        if (!userWidth || !userHeight) {
+            global.log("userWidth invalid",userWidth,userHeight);
+            return;
         }
-        const appsHeight = /*Math.max(this.sidebar.innerBox.height,*/ menuHeight - this.bottomPane.height;
+
+        this.updateMenuHeight(userHeight);
+        this.updateMenuWidth(userWidth);
+        if (this.settings.applicationsViewMode === ApplicationsViewModeGRID) {
+            //this.allItemsDelete();
+            this.setActiveCategory(this.currentCategory);
+        }
+    }
+
+    updateMenuHeight(newHeight) {
+        if (!newHeight) {
+            newHeight = this.settings.customMenuHeight;
+        }
+        const menuHeight = Math.min(newHeight, this.getScreenWorkArea().height);
+        const appsHeight = menuHeight - this.bottomPane.height;
         this.appsView.applicationsScrollBox.height = appsHeight;
         this.categoriesView.groupCategoriesWorkspacesScrollBox.height = appsHeight;
         this.sidebar.sidebarScrollBox.set_height(-1);
-        this.sidebar.sidebarScrollBox.set_height(
-                                        Math.min(appsHeight, this.sidebar.sidebarScrollBox.height));
-        //this.applicationsScrollBox.style = `max-height: ${appsHeight}px;`;
+        this.sidebar.sidebarScrollBox.set_height(Math.min(appsHeight, this.sidebar.sidebarScrollBox.height));
+        this.settings.customMenuHeight = menuHeight;
     }
 
-    updateMenuWidth() {
-        this.search.searchEntry.width = 5;  //no idea why but this stops the list view getting too
-                                            //wide when you add/remove favs
-        if (this.settings.applicationsViewMode === ApplicationsViewModeLIST) {
-            this.appBoxWidth = this.bottomPane.width -
-                                            this.categoriesView.groupCategoriesWorkspacesScrollBox.width;
-            if (this.settings.sidebarPlacement === PlacementLEFT ||
-                                                    this.settings.sidebarPlacement === PlacementRIGHT) {
-                this.appBoxWidth -= this.sidebar.sidebarScrollBox.width;
-            }
-            this.appBoxWidth = Math.max(320, this.appBoxWidth);
-            this.appsView.applicationsListBox.width = this.appBoxWidth;
+    updateMenuWidth(newWidth) {
+        if (!newWidth) {
+            newWidth = this.settings.customMenuWidth;
         }
+        this.search.searchEntry.width = 5;
+        let leftSideWidth = this.categoriesView.groupCategoriesWorkspacesScrollBox.width;
+        if (this.settings.sidebarPlacement === PlacementLEFT ||
+                                                this.settings.sidebarPlacement === PlacementRIGHT) {
+            leftSideWidth += this.sidebar.sidebarScrollBox.width;
+        }
+        let bottomPaneMinWidth = 0;
+        if (this.settings.sidebarPlacement === PlacementTOP ||
+                                                this.settings.sidebarPlacement === PlacementBOTTOM) {
+            bottomPaneMinWidth = this.bottomPane.width;
+        }
+        let minMenuWidth = Math.max(leftSideWidth + 200, bottomPaneMinWidth);
+        let menuWidth = Math.max(minMenuWidth, newWidth);
+        this.settings.customMenuWidth = menuWidth;
+        this.appsView.applicationsListBox.width = menuWidth - leftSideWidth;
+        this.appsView.applicationsGridBox.width = menuWidth - leftSideWidth;
     }
 
     refresh() {
@@ -788,8 +813,8 @@ class CinnamenuApplet extends TextIconApplet {
                         appButtons[0].handleEnter();
                     }
                 } else {//grid view
-                    if (appButtons[refItemIndex + this.settings.appsGridColumnCount]) {
-                        appButtons[refItemIndex + this.settings.appsGridColumnCount].handleEnter();
+                    if (appButtons[refItemIndex + this.getGridValues().columns]) {
+                        appButtons[refItemIndex + this.getGridValues().columns].handleEnter();
                     } else {
                         appButtons[appButtons.length - 1].handleEnter();
                     }
@@ -825,8 +850,8 @@ class CinnamenuApplet extends TextIconApplet {
                         appButtons[appButtons.length - 1].handleEnter();
                     }
                 } else {
-                    if (appButtons[refItemIndex - this.settings.appsGridColumnCount]) {
-                        appButtons[refItemIndex - this.settings.appsGridColumnCount].handleEnter();
+                    if (appButtons[refItemIndex - this.getGridValues().columns]) {
+                        appButtons[refItemIndex - this.getGridValues().columns].handleEnter();
                     } else {
                         appButtons[0].handleEnter();
                     }
@@ -1201,10 +1226,11 @@ class CinnamenuApplet extends TextIconApplet {
                 if (!gridLayout) {
                     return false;
                 }
+                appButton.setWidth();
                 gridLayout.attach(appButton.actor, column, rownum, 1, 1);
                 column++;
 
-                if (column > this.settings.appsGridColumnCount - 1) {
+                if (column > this.getGridValues().columns - 1) {
                     column = 0;
                     rownum++;
                 }
@@ -1299,11 +1325,11 @@ class CinnamenuApplet extends TextIconApplet {
         this.sidebar.populate();
 
         if (this.settings.applicationsViewMode === ApplicationsViewModeLIST) {
-            this.appsView.applicationsGridBox.width = this.appsView.applicationsListBox.width;
+            //this.appsView.applicationsGridBox.width = this.appsView.applicationsListBox.width;
             this.appsView.applicationsGridBox.hide();
             this.appsView.applicationsListBox.show();
         } else {
-            this.appsView.applicationsGridBox.width = this.getGridWidth();
+            //this.appsView.applicationsGridBox.width = this.getGridWidth();
             this.appsView.applicationsListBox.hide();
             this.appsView.applicationsGridBox.show();
         }
@@ -1484,7 +1510,7 @@ class AppsView {
 
         this.applicationsListBox = new St.BoxLayout({ /*style: 'min-width: 300px;',*/ vertical: true });
         this.applicationsGridBox = new Clutter.Actor({ layout_manager: new Clutter.GridLayout(),
-                                                       reactive: true, width: this.appThis.getGridWidth() });
+                                                       reactive: true });
         this.answerText = new St.Label({ style_class: 'menu-selected-app-title',
                                          style: 'padding-top: 14px; min-width: 240px; text-align; center;',
                                          text: '', show_on_set_parent: false });
@@ -1921,7 +1947,8 @@ class Search {
         this.searchInactiveIcon = new St.Icon({ style_class: 'menu-search-entry-icon', icon_name: 'edit-find' });
         this.searchActiveIcon = new St.Icon({ style_class: 'menu-search-entry-icon', icon_name: 'edit-clear' });
         this.searchEntry = new St.Entry({ name: 'menu-search-entry', //hint_text: HINT_TEXT,
-                                          track_hover: true, can_focus: true, });
+                                          track_hover: true, can_focus: true,
+                                            style: 'min-width: 100px;'});
         this.searchEntryText = this.searchEntry.clutter_text;
 
         this.searchEntry.set_primary_icon(this.searchInactiveIcon);

@@ -386,8 +386,10 @@ class ContextMenu {
                     enabled_applets.push('panel1:right:0:panel-launchers@cinnamon.org:' + new_applet_id);
                     global.settings.set_strv('enabled-applets', enabled_applets);
                 }
-                Main.AppletManager.get_role_provider(Main.AppletManager.Roles.PANEL_LAUNCHER)
-                                                                            .acceptNewLauncher(app.get_id());
+                const launcherApplet = Main.AppletManager.get_role_provider(Main.AppletManager.Roles.PANEL_LAUNCHER);
+                if (launcherApplet) {
+                    launcherApplet.acceptNewLauncher(app.get_id());
+                }
                 this.close(); } ));
         if (USER_DESKTOP_PATH) {
             addMenuItem( new ContextMenuItem(this.appThis, _('Add to desktop'), 'computer',
@@ -512,8 +514,7 @@ class AppListGridButton extends PopupBaseMenuItem {
         this.actor.y_align = St.Align.MIDDLE;
         if (!isListView) {
             this.actor.set_style('padding-left: 0px; padding-right: 0px;');
-            this.actor.width = this.appThis.appsView.applicationsGridBox.width /
-                                                                this.appThis.settings.appsGridColumnCount;
+            this.setWidth();
         }
         this.signals = new SignalManager(null);
         this.entered = null;
@@ -576,8 +577,8 @@ class AppListGridButton extends PopupBaseMenuItem {
         this.buttonBox = new St.BoxLayout({ vertical: !isListView, y_expand: false });
         if (!isListView) {
             this.buttonBox.width = 600;//bigger than needed to ensure it centers in it's grid space
-        } else {
-            this.buttonBox.width = this.appThis.appBoxWidth - 30;//omitting this causes list scrolling to slow down
+        //} else {
+            //this.buttonBox.width = this.appThis.appBoxWidth - 30;
         }
         this.buttonBox.add(this.iconContainer, {
                                 x_fill: false, y_fill: false,
@@ -683,6 +684,11 @@ class AppListGridButton extends PopupBaseMenuItem {
         } else {*/
             clutterText.ellipsize = EllipsizeMode.END;
         //}
+    }
+
+    setWidth() {
+        //set width of grid button
+        this.actor.width = this.appThis.getGridValues().columnWidth;
     }
 
     handleEnter(actor, event) {
