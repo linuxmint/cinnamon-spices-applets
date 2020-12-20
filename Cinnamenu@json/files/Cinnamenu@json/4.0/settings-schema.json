@@ -37,10 +37,7 @@
                 "applications-view-mode",
                 "sidebar-placement",
                 "add-favorites",
-                "description-placement",
-                "enable-custom-menu-height",
-                "custom-menu-height",
-                "apps-grid-column-count"
+                "description-placement"
             ]
         },
         "menu-content":{
@@ -102,7 +99,15 @@
         "type":"generic",
         "default":[]
     },
-
+    "custom-menu-width":{
+        "type":"generic",
+        "default":530
+    },
+    "custom-menu-height":{
+        "type":"generic",
+        "default":530
+    },
+    
     "applications-view-mode":{
         "type":"combobox",
         "default":1,
@@ -141,33 +146,6 @@
         "default":true,
         "description":"Add favorites to session buttons",
         "tooltip":"Show your favorite app icons next to the session buttons"
-    },
-    "enable-custom-menu-height":{
-        "type":"switch",
-        "default":false,
-        "description":"Use a custom menu height",
-        "tooltip":"Use a custom menu height"
-    },
-    "custom-menu-height":{
-        "type":"spinbutton",
-        "default":530,
-        "min":360,
-        "max":9999,
-        "step":1,
-        "units":"pixels",
-        "description":"Custom menu height",
-        "tooltip":"Custom menu height",
-        "dependency":"enable-custom-menu-height"
-    },
-    "apps-grid-column-count":{
-        "type":"spinbutton",
-        "default":4,
-        "min":3,
-        "max":16,
-        "step":1,
-        "units":"columns",
-        "description":"Number of columns in apps grid",
-        "tooltip":"Number of columns in apps grid"
     },
     "show-places-category":{
         "type":"switch",
