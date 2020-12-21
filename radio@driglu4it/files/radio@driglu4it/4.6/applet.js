@@ -75,6 +75,10 @@ MyApplet.prototype = {
     Main.Util.spawnCommandLine("xdg-open https://streamurl.link");
   },
 
+  on_radiolist_button_pressed() {
+    Main.Util.spawnCommandLine("xdg-open https://wiki.ubuntuusers.de/Internetradio/Stationen");
+  },
+
   get_default_icon_color() {
     try {
       let themeNode = this.actor.get_theme_node(); // get_theme_node() fails in constructor! (cause: widget not on stage)

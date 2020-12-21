@@ -26,7 +26,7 @@
       "type": "section",
       "title": "Radio",
       "keys": [
-        "tree", "streamurl-button"
+        "tree", "streamurl-button", "radiolist-button"
       ]
     },
     "section2": {
@@ -72,6 +72,11 @@
         "name": "Chillout",
         "url": "http://ic7.101.ru:8000/c15_3",
         "inc": true
+      },
+      {
+        "name": "Mint",
+        "url": "http://audiostream.rtl.be/mint",
+        "inc": true
       }
     ]
   },
@@ -80,6 +85,12 @@
     "description" : "Open radio stream URL search engine",
     "callback" : "on_streamurl_button_pressed",
     "tooltip" : "Opens a website, which helps you to determine radio stream URLs."
+  },
+  "radiolist-button" : {
+    "type" : "button",
+    "description" : "Show URL-list of radio stations",
+    "callback" : "on_radiolist_button_pressed",
+    "tooltip" : "Opens a website, which lists URLs of radio stations."
   },
   "icon-type": {
     "type": "combobox",

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-12 18:20+0100\n"
-"PO-Revision-Date: 2020-12-12 18:21+0100\n"
+"POT-Creation-Date: 2020-12-21 22:43+0100\n"
+"PO-Revision-Date: 2020-12-21 22:45+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de\n"
@@ -19,33 +19,34 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. metadata.json->name
-#: applet.js:109 applet.js:141 applet.js:148
+#: 3.0/applet.js:99 3.0/applet.js:117 3.0/applet.js:143 3.0/applet.js:153
+#: 4.6/applet.js:113 4.6/applet.js:145 4.6/applet.js:152
 msgid "Radio++"
 msgstr "Radio++"
 
-#: applet.js:122
+#: 3.0/applet.js:130 4.6/applet.js:126
 #, javascript-format
 msgid "Playing %s"
 msgstr "Sie hören %s"
 
-#: applet.js:132
+#: 3.0/applet.js:140 4.6/applet.js:136
 msgid "Stop"
 msgstr "Anhalten"
 
-#: applet.js:154
+#: 3.0/applet.js:149 4.6/applet.js:158
 msgid "Stop Radio++"
 msgstr "Radio++ anhalten"
 
-#: applet.js:211
+#: 3.0/applet.js:183 4.6/applet.js:215
 #, javascript-format
 msgid "Please install the '%s' package."
 msgstr "Bitte das Paket »%s« installieren."
 
-#: download-dialog.py:35
+#: download-dialog.py:36
 msgid "Download Confirmation Dialog"
 msgstr "Download-Bestätigungsdialog"
 
-#: download-dialog.py:38
+#: download-dialog.py:39
 #, python-format
 msgid ""
 "The radio applet depends on the '%s' plugin. It's a 3rd party plugin for "
@@ -54,19 +55,19 @@ msgstr ""
 "Das Radio-Applet hängt von dem Plugin »%s« ab. Das ist ein Plugin von einem "
 "Drittanbieter, das die Steuerung des Radios mit dem Klang-Applet ermöglicht."
 
-#: download-dialog.py:38
+#: download-dialog.py:39
 msgid "Do you want to proceed the download at your own risk?"
 msgstr "Den Download auf eigene Gefahr fortsetzen?"
 
-#: download-dialog.py:39
+#: download-dialog.py:40
 msgid "Cancel download"
 msgstr "Download abbrechen"
 
-#: download-dialog.py:40
+#: download-dialog.py:41
 msgid "More info"
 msgstr "Weitere Informationen"
 
-#: download-dialog.py:41
+#: download-dialog.py:42
 msgid "Download plugin at my own risk"
 msgstr "Plugin auf eigenes Risiko herunterladen"
 
@@ -74,61 +75,87 @@ msgstr "Plugin auf eigenes Risiko herunterladen"
 msgid "A simple radio applet for Cinnamon"
 msgstr "Ein einfaches Radio-Applet für Cinnamon"
 
-#. settings-schema.json->page1->title
-#. settings-schema.json->tree->description
+#. 3.0->settings-schema.json->page1->title
+#. 3.0->settings-schema.json->tree->description
+#. 4.6->settings-schema.json->page1->title
+#. 4.6->settings-schema.json->tree->description
 msgid "List of stations"
 msgstr "Liste der Radiostationen"
 
-#. settings-schema.json->page2->title
-#. settings-schema.json->section2->title
+#. 3.0->settings-schema.json->page2->title
+#. 3.0->settings-schema.json->section2->title
+#. 4.6->settings-schema.json->page2->title
+#. 4.6->settings-schema.json->section2->title
 msgid "Icon"
 msgstr "Icon"
 
-#. settings-schema.json->section1->title
+#. 3.0->settings-schema.json->section1->title
+#. 4.6->settings-schema.json->section1->title
 msgid "Radio"
 msgstr "Radio"
 
-#. settings-schema.json->section3->title
+#. 3.0->settings-schema.json->section3->title
+#. 4.6->settings-schema.json->section3->title
 msgid "Symbolic Icon Color"
 msgstr "Farbe des symbolischen Icons"
 
-#. settings-schema.json->tree->columns->title
-msgid "Title"
-msgstr "Titel"
-
-#. settings-schema.json->tree->columns->title
-msgid "URL"
-msgstr "URL"
-
-#. settings-schema.json->tree->columns->title
+#. 3.0->settings-schema.json->tree->columns->title
+#. 4.6->settings-schema.json->tree->columns->title
 msgid "Show in list"
 msgstr "In Liste anzeigen"
 
-#. settings-schema.json->streamurl-button->description
+#. 3.0->settings-schema.json->tree->columns->title
+#. 4.6->settings-schema.json->tree->columns->title
+msgid "Title"
+msgstr "Titel"
+
+#. 3.0->settings-schema.json->tree->columns->title
+#. 4.6->settings-schema.json->tree->columns->title
+msgid "URL"
+msgstr "URL"
+
+#. 3.0->settings-schema.json->streamurl-button->description
+#. 4.6->settings-schema.json->streamurl-button->description
 msgid "Open radio stream URL search engine"
 msgstr "URL-Suchmaschine für Radiostreams öffnen"
 
-#. settings-schema.json->streamurl-button->tooltip
+#. 3.0->settings-schema.json->streamurl-button->tooltip
+#. 4.6->settings-schema.json->streamurl-button->tooltip
 msgid "Opens a website, which helps you to determine radio stream URLs."
 msgstr "Öffnet eine Webseite, die beim Ermitteln von Radiostream-URLs hilft."
 
-#. settings-schema.json->icon-type->description
+#. 3.0->settings-schema.json->radiolist-button->description
+#. 4.6->settings-schema.json->radiolist-button->description
+msgid "Show URL-list of radio stations"
+msgstr "URL-Liste von Radiostationen anzeigen"
+
+#. 3.0->settings-schema.json->radiolist-button->tooltip
+#. 4.6->settings-schema.json->radiolist-button->tooltip
+msgid "Opens a website, which lists URLs of radio stations."
+msgstr "Öffnet eine Website, die URLs von Radiosendern auflistet."
+
+#. 3.0->settings-schema.json->icon-type->description
+#. 4.6->settings-schema.json->icon-type->description
 msgid "Type"
 msgstr "Typ"
 
-#. settings-schema.json->icon-type->options
+#. 3.0->settings-schema.json->icon-type->options
+#. 4.6->settings-schema.json->icon-type->options
 msgid "Symbolic Icon"
 msgstr "Symbolisches Icon"
 
-#. settings-schema.json->icon-type->options
+#. 3.0->settings-schema.json->icon-type->options
+#. 4.6->settings-schema.json->icon-type->options
 msgid "Full Color Icon"
 msgstr "Farbiges Icon"
 
-#. settings-schema.json->icon-type->options
+#. 3.0->settings-schema.json->icon-type->options
+#. 4.6->settings-schema.json->icon-type->options
 msgid "Bicolor Icon"
 msgstr "Zweifarbiges Icon"
 
-#. settings-schema.json->color-on->description
+#. 3.0->settings-schema.json->color-on->description
+#. 4.6->settings-schema.json->color-on->description
 msgid "Color of Symbolic Icon when playing a radio"
 msgstr "Farbe des symbolischen Icons, wenn das Radio läuft"
 
