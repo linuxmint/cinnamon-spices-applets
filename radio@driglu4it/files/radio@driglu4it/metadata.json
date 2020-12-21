@@ -1,6 +1,7 @@
 {
+    "uuid": "radio@driglu4it",
+    "name": "Radio++",
     "description": "A simple radio applet for Cinnamon",
     "max-instances": 1,
-    "uuid": "radio@driglu4it",
-    "name": "Radio++"
+    "multiversion": true
 }
