@@ -101,13 +101,13 @@
     },
     "custom-menu-width":{
         "type":"generic",
-        "default":530
+        "default":800
     },
     "custom-menu-height":{
         "type":"generic",
         "default":530
     },
-    
+
     "applications-view-mode":{
         "type":"combobox",
         "default":1,

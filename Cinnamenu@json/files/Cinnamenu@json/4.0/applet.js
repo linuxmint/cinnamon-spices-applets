@@ -59,7 +59,6 @@ class CinnamenuApplet extends TextIconApplet {
         this.displaySignals = new SignalManager(null);
         //this.tracker = Cinnamon.WindowTracker.get_default();//?
         this.appSystem = Cinnamon.AppSystem.get_default();
-        global.log('hhh',this.getScreenWorkArea().height);
         this.resizer = new PopupResizeHandler(  this,
                                                 this.menu.actor,
                                                 400, this.getScreenWorkArea().width,
@@ -540,7 +539,6 @@ class CinnamenuApplet extends TextIconApplet {
         this.updateMenuHeight(userHeight);
         this.updateMenuWidth(userWidth);
         if (this.settings.applicationsViewMode === ApplicationsViewModeGRID) {
-            //this.allItemsDelete();
             this.setActiveCategory(this.currentCategory);
         }
     }
@@ -562,12 +560,13 @@ class CinnamenuApplet extends TextIconApplet {
         if (!newWidth) {
             newWidth = this.settings.customMenuWidth;
         }
-        this.search.searchEntry.width = 5;
         let leftSideWidth = this.categoriesView.groupCategoriesWorkspacesScrollBox.width;
         if (this.settings.sidebarPlacement === PlacementLEFT ||
                                                 this.settings.sidebarPlacement === PlacementRIGHT) {
             leftSideWidth += this.sidebar.sidebarScrollBox.width;
         }
+        this.search.searchEntry.width = 5;//effectively sets it to it's minimum width for the purpose
+                                          //of calculating bottomPaneMinWidth
         let bottomPaneMinWidth = 0;
         if (this.settings.sidebarPlacement === PlacementTOP ||
                                                 this.settings.sidebarPlacement === PlacementBOTTOM) {
@@ -1208,13 +1207,9 @@ class CinnamenuApplet extends TextIconApplet {
         let rownum = 0;
 
         const addAppButton = (app) => {
-            let appButton;
-            const refAppButton = this.allItems.findIndex(item => item && item.app === app);
+            let appButton = this.allItems.find(item => item && item.app === app);
 
-            if (refAppButton > -1) {
-                appButton = this.allItems[refAppButton];
-                appButton.app = app;
-            } else {
+            if (!appButton) {
                 appButton = new AppListGridButton(this, app);
                 this.allItems.push(appButton);
             }
@@ -1226,7 +1221,7 @@ class CinnamenuApplet extends TextIconApplet {
                 if (!gridLayout) {
                     return false;
                 }
-                appButton.setWidth();
+                appButton.setWidth();// In case menu is being resized.
                 gridLayout.attach(appButton.actor, column, rownum, 1, 1);
                 column++;
 
