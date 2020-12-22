@@ -104,18 +104,14 @@ class CategoryButton extends PopupBaseMenuItem {
 
     onDragBegin() {
         this.actor.set_opacity(51);
-        //this.appThis.categoryDragged = true;
     }
 
     onDragCancelled() {
         this.actor.set_opacity(255);
-        //this.appThis.categoryDragged = false;
     }
 
     onDragEnd() {
         this.appThis.resetCategoryOpacity();
-        //this.actor.set_opacity(255);
-        //setTimeout(() => { this.appThis.categoryDragged = false; }, 0);
     }
 
     selectCategory() {
@@ -286,7 +282,8 @@ class ContextMenu {
 
     open(app, e, button, category = false) {
         //e is used to position context menu at mouse coords. If keypress opens menu then
-        // e is undefined and button position is used instead,
+        // e is undefined and button position is used instead.
+        this.appThis.resizer.inhibit_resizing = true;
         this.contextMenuButtons.forEach(button => button.destroy());
         this.contextMenuButtons = [];
 
@@ -352,6 +349,7 @@ class ContextMenu {
         let [cx, cy] = this.contextMenuBox.get_transformed_position();
         cx = Math.round(mx - cx);
         cy = Math.round(my - cy);
+
         this.menu.actor.anchor_x = -cx;
         this.menu.actor.anchor_y = -cy;
 
@@ -496,6 +494,7 @@ class ContextMenu {
         }*/
         this.menu.close();
         this.isOpen = false;
+        this.appThis.resizer.inhibit_resizing = false;
     }
 
     destroy() {

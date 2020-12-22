@@ -17,11 +17,6 @@ const RIGHT_EDGE_DRAGGABLE = 1 << 1;
 const TOP_EDGE_DRAGGABLE = 1 << 2;
 const BOTTOM_EDGE_DRAGGABLE = 1 << 3;
 
-const X = 0;
-const Y = 1;
-const W = 0;
-const H = 1;
-
 var PopupResizeHandler = class PopupResizeHandler {
     constructor() {
         return this._init.apply(this, arguments);
@@ -43,10 +38,11 @@ var PopupResizeHandler = class PopupResizeHandler {
 
         this._draggable = DND.makeDraggable(this.actor);
 
-        this._grab_actor = new Clutter.Rectangle({ width: 1, height: 1, opacity: 0 });
-        global.stage.add_actor(this._grab_actor);
-        this._grab_actor.hide();
+        //this._grab_actor = new Clutter.Rectangle({ width: 1, height: 1, opacity: 0 });
+        //global.stage.add_actor(this._grab_actor);
+        //this._grab_actor.hide();
         this._draggable.inhibit = true;
+        this.inhibit_resizing = false;
 
         this._signals = new SignalManager.SignalManager(null);
 
@@ -76,7 +72,7 @@ var PopupResizeHandler = class PopupResizeHandler {
         this.scaled_zone_size = ZONE_SIZE * global.ui_scale;
         this._collect_work_area_edges();
 
-        this.start_drag()
+        this.start_drag();
     }
 
     _drag_cancel(time) {
@@ -98,12 +94,18 @@ var PopupResizeHandler = class PopupResizeHandler {
         this.edges.left = area.x;
         this.edges.right = area.x + area.width;
 
+        this.workAreaHeight = area.height;
+        this.workAreaWidth = area.width;
+
         // log(`top: ${this.edges.top}, bottom: ${this.edges.bottom} left: ${this.edges.left} right: ${this.edges.right}`);
     }
 
     _motion_event(box, event) {
         if (this.poll_timer_id > 0) {
             return Clutter.EVENT_STOP;
+        }
+        if (this.inhibit_resizing) {
+            return Clutter.EVENT_PROPAGATE;
         }
 
         if (this.edges.left == this.edges.right) {
@@ -119,27 +121,25 @@ var PopupResizeHandler = class PopupResizeHandler {
         [x, y] = event.get_coords();
         // log(`motion! ${x}, ${y} ---- actor: ${this.actor.x}, ${this.actor.y}, ${this.actor.width}x${this.actor.height}`);
 
-        const oversized_height = this.actor.height >= this.applet.getScreenWorkArea().height;
-        const oversized_width = this.actor.width >= this.applet.getScreenWorkArea().width;
+        const oversized_height = this.actor.height >= this.workAreaHeight;
+        const oversized_width = this.actor.width >= this.workAreaWidth;
 
-        if (this.in_top_resize_zone (x, y) && (this.actor.y > this.edges.top || oversized_height)) {
+        if (this.in_top_resize_zone (x, y, oversized_height)) {
             t = true;
             cursor = Cinnamon.Cursor.RESIZE_TOP;
             this._current_resize_direction |= TOP_EDGE_DRAGGABLE;
         } else
-        if (this.in_bottom_resize_zone (x, y) &&
-                            (this.actor.y + this.actor.height < this.edges.bottom || oversized_height)) {
+        if (this.in_bottom_resize_zone (x, y, oversized_height)) {
             b = true;
             cursor = Cinnamon.Cursor.RESIZE_BOTTOM;
             this._current_resize_direction |= BOTTOM_EDGE_DRAGGABLE;
         }
-        if (this.in_left_resize_zone (x, y) && (this.actor.x > this.edges.left || oversized_width)) {
+        if (this.in_left_resize_zone (x, y, oversized_width)) {
             l = true;
             cursor = Cinnamon.Cursor.RESIZE_LEFT;
             this._current_resize_direction |= LEFT_EDGE_DRAGGABLE;
         } else
-        if (this.in_right_resize_zone (x, y) &&
-                            (this.actor.x + this.actor.width < this.edges.right || oversized_width)) {
+        if (this.in_right_resize_zone (x, y, oversized_width)) {
             r = true;
             cursor = Cinnamon.Cursor.RESIZE_RIGHT;
             this._current_resize_direction |= RIGHT_EDGE_DRAGGABLE;
@@ -183,8 +183,8 @@ var PopupResizeHandler = class PopupResizeHandler {
 
         // this.hmin = this.actor.get_preferred_height(-1)[0];
         if (this._current_resize_direction & LEFT_EDGE_DRAGGABLE) {
-            let start_x = this.drag_start_position[X];
-            let start_w = this.drag_start_size[W];
+            let start_x = this.drag_start_position.x;
+            let start_w = this.drag_start_size.width;
 
             let diff = start_x - x;
             const new_width = (start_w + diff).clamp(this.wmin, this.wmax);
@@ -192,8 +192,8 @@ var PopupResizeHandler = class PopupResizeHandler {
         }
         else
         if (this._current_resize_direction & RIGHT_EDGE_DRAGGABLE) {
-            let start_x = this.drag_start_position[X];
-            let start_w = this.drag_start_size[W];
+            let start_x = this.drag_start_position.x;
+            let start_w = this.drag_start_size.width;
 
             let diff = x - start_x;
             const new_width = (start_w + diff).clamp(this.wmin, this.wmax);
@@ -201,8 +201,8 @@ var PopupResizeHandler = class PopupResizeHandler {
         }
 
         if (this._current_resize_direction & TOP_EDGE_DRAGGABLE) {
-            let start_y = this.drag_start_position[Y];
-            let start_h = this.drag_start_size[H];
+            let start_y = this.drag_start_position.y;
+            let start_h = this.drag_start_size.height;
 
             let diff = start_y - y;
             const new_height = (start_h + diff).clamp(this.hmin, this.hmax);
@@ -210,8 +210,8 @@ var PopupResizeHandler = class PopupResizeHandler {
         }
         else
         if (this._current_resize_direction & BOTTOM_EDGE_DRAGGABLE) {
-            let start_y = this.drag_start_position[Y];
-            let start_h= this.drag_start_size[H];
+            let start_y = this.drag_start_position.y;
+            let start_h= this.drag_start_size.height;
 
             let diff = y - start_y;
             const new_height = (start_h + diff).clamp(this.hmin, this.hmax);
@@ -228,7 +228,7 @@ var PopupResizeHandler = class PopupResizeHandler {
 
     _leave_event(box, event) {
         if (this.poll_timer_id == 0) {
-            global.unset_cursor()
+            global.unset_cursor();
         }
         return Clutter.EVENT_PROPAGATE;
     }
@@ -239,8 +239,8 @@ var PopupResizeHandler = class PopupResizeHandler {
         let mouse = Clutter.DeviceManager.get_default().get_core_device(Clutter.InputDeviceType.POINTER_DEVICE);
         let [s, p] = mouse.get_coords(null);
 
-        this.drag_start_position = [p.x, p.y];
-        this.drag_start_size = [this.actor.width, this.actor.height];
+        this.drag_start_position = {x: p.x, y: p.y};
+        this.drag_start_size = {width: this.actor.width, height: this.actor.height};
         this.init_user_width = this.get_user_width();
         this.init_user_height = this.get_user_height();
 
@@ -256,51 +256,58 @@ var PopupResizeHandler = class PopupResizeHandler {
             return;
         }
         //this.callback(this.actor.width, this.actor.height, new_user_width, new_user_height);
-        this.actor.queue_relayout()
+        this.actor.queue_relayout();
 
         this.drag_start_position = null;
         this.drag_start_size = null;
         this.active = false;
     }
 
-    // These are generic, they don't care if the edge they're checking is actually *valid*.
-    in_top_resize_zone(x, y) {
+    in_top_resize_zone(x, y, oversized_height) {
         if (x < this.actor.x || x > this.actor.x + this.actor.width) {
             return false;
         }
 
-        return y <= this.actor.y + this.scaled_zone_size &&
-               y >= this.actor.y;
+        return y <= this.actor.y + this.scaled_zone_size && y >= this.actor.y &&
+               this.actor.y > this.edges.top ||
+               oversized_height &&
+               y <= this.edges.top + this.scaled_zone_size && y >= this.edges.top;
     }
 
-    in_bottom_resize_zone(x, y) {
+    in_bottom_resize_zone(x, y, oversized_height) {
         if (x < this.actor.x || x > this.actor.x + this.actor.width) {
             return false;
         }
 
         return y >= this.actor.y + this.actor.height - this.scaled_zone_size &&
-               y <= this.actor.y + this.actor.height;
+               y <= this.actor.y + this.actor.height && this.actor.y + this.actor.height < this.edges.bottom ||
+               oversized_height &&
+               y >= this.edges.bottom - this.scaled_zone_size && y <= this.edges.bottom;
     }
 
-    in_left_resize_zone(x, y) {
+    in_left_resize_zone(x, y, oversized_width) {
         if (y < this.actor.y || y > this.actor.y + this.actor.height) {
             return false;
         }
 
         return x <= this.actor.x + this.scaled_zone_size &&
-               x >= this.actor.x;
+               x >= this.actor.x && this.actor.x > this.edges.left ||
+               oversized_width &&
+               x <= this.edges.left + this.scaled_zone_size && x >= this.edges.left;
     }
 
-    in_right_resize_zone(x, y) {
+    in_right_resize_zone(x, y, oversized_width) {
         if (y < this.actor.y || y > this.actor.y + this.actor.height) {
             return false;
         }
 
         return x >= this.actor.x + this.actor.width - this.scaled_zone_size &&
-               x <= this.actor.x + this.actor.width;
+               x <= this.actor.x + this.actor.width && this.actor.x + this.actor.width < this.edges.right ||
+               oversized_width &&
+               x >= this.edges.right - this.scaled_zone_size && x <= this.edges.right;
     }
 
     //destroy() {
     //    this._signals.disconnectAllSignals();
     //}
-}
+};
