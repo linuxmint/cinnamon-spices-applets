@@ -47,7 +47,6 @@ MyApplet.prototype = {
         Applet.TextApplet.prototype._init.call(this, orientation, panel_height, instance_id);
 
         try {
-
             this.settings = new Settings.AppletSettings(this, EXTENSION_UUID, this.instance_id);
 
             this.menuManager = new PopupMenu.PopupMenuManager(this);
@@ -58,23 +57,14 @@ MyApplet.prototype = {
 
             // Track changes to clock settings
             this._dateFormat = DEFAULT_FORMAT;
-            this._dateFormatFull = _("%A %B %e, %Y %Z");
-
-            // connect to system clock settings
-            this.desktop_settings = new Gio.Settings({ schema_id: "org.cinnamon.desktop.interface" });
-            this.desktop_settings.connect("changed::clock-use-24h", Lang.bind(this, function(key) {
-                this.on_settings_changed();
-            }));
-            this.desktop_settings.connect("changed::clock-show-seconds", Lang.bind(this, function(key) {
-                this.on_settings_changed();
-            }));
-
 
             this.settings.bindProperty(Settings.BindingDirection.IN, "displayed-timezone", "displayed_timezone", this.on_settings_changed, null);
+            this.settings.bindProperty(Settings.BindingDirection.IN, "clock-use-24h", "clock_use_24h", this.on_settings_changed, null);
             this.settings.bindProperty(Settings.BindingDirection.IN, "clock-show-date", "clock_show_date", this.on_settings_changed, null);
+            this.settings.bindProperty(Settings.BindingDirection.IN, "clock-show-seconds", "clock_show_seconds", this.on_settings_changed, null);
             this.settings.bindProperty(Settings.BindingDirection.IN, "use-custom-format", "use_custom_format", this.on_settings_changed, null);
             this.settings.bindProperty(Settings.BindingDirection.IN, "custom-format", "custom_format", this.on_settings_changed, null);
-            this.settings.bindProperty(Settings.BindingDirection.IN, "keybinding", "keybinding", this._onKeySettingsUpdated, null);
+            // this.settings.bindProperty(Settings.BindingDirection.IN, "keybinding", "keybinding", this._onKeySettingsUpdated, null);
 
             // https://bugzilla.gnome.org/show_bug.cgi?id=655129
             this._upClient = new UPowerGlib.Client();
@@ -101,7 +91,7 @@ MyApplet.prototype = {
     },
 
     on_applet_clicked: function() {
-        this.menu.toggle();
+        // this.menu.toggle();
     },
 
     on_settings_changed: function() {
@@ -110,19 +100,19 @@ MyApplet.prototype = {
     },
 
     // reads system clock setting to apply "24h" and "seconds" setting to this applet
-    _updateFormatString() {
+    _updateFormatString: function() {
         if (this.use_custom_format) {
             this._dateFormat = this.custom_format;
         } else {
-            let use_24h = this.desktop_settings.get_boolean("clock-use-24h");
+            let use_24h = this.clock_use_24h;
             let show_date = this.clock_show_date;
-            let show_seconds = this.desktop_settings.get_boolean("clock-show-seconds");
+            let show_seconds = this.clock_show_seconds;
 
             if (use_24h) {
                 if (show_seconds) {
                     this._dateFormat = "%H:%M:%S %Z";
                 } else {
-                    this._dateFormat = "%H:%M% %Z";
+                    this._dateFormat = "%H:%M %Z";
                 }
             } else {
                 if (show_seconds) {
@@ -133,7 +123,7 @@ MyApplet.prototype = {
             }
 
             if (show_date) {
-                this._dateFormat = "%Y.%m.%d " + this._dateFormat
+                this._dateFormat = `%Y.%m.%d ${this._dateFormat}`
             }
         }
     },
@@ -152,23 +142,27 @@ MyApplet.prototype = {
     },
 
     _updateClockAndDate: function() {
-        let timezone = GLib.TimeZone.new(this.displayed_timezone);
-        let displayDate = this._get_world_time(GLib.DateTime.new_now_local(), timezone);
-        let dateFormattedFull = displayDate.format(this._dateFormatFull);
-        let label_string = displayDate.format(this._dateFormat);
+        try {
+            let timezone = GLib.TimeZone.new(this.displayed_timezone);
+            let displayDate = this._get_world_time(GLib.DateTime.new_now_local(), timezone);
+            let label_string = displayDate;
 
-        if (!label_string) {
-            global.logError("Calendar applet: bad time format string - check your string.");
-            label_string = "~CLOCK FORMAT ERROR~ " + displayDate.toLocaleFormat(DEFAULT_FORMAT);
+            if (!displayDate) {
+                global.logError(`[${EXTENSION_UUID}] bad time format string - check your string: '${this._dateFormat}'`);
+                label_string = "~CLOCK FORMAT ERROR~ " + displayDate.toLocaleFormat(DEFAULT_FORMAT);
+            }
+            this.set_applet_label(label_string);
+
+            let tooltip = [];
+            tooltip.push(displayDate);
+            this.set_applet_tooltip(tooltip.join("\n"));
+
+            if (displayDate !== this._lastDisplayDate) {
+                this._lastDisplayDate = displayDate;
+            }
         }
-        this.set_applet_label(label_string);
-
-        let tooltip = [];
-        tooltip.push(dateFormattedFull);
-        this.set_applet_tooltip(tooltip.join("\n"));
-
-        if (dateFormattedFull !== this._lastDateFormattedFull) {
-            this._lastDateFormattedFull = dateFormattedFull;
+        catch (e) {
+            global.logError(e);
         }
     },
 

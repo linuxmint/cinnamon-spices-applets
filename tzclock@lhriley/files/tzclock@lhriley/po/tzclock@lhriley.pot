@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-23 15:19-0800\n"
+"POT-Creation-Date: 2020-12-26 15:34-0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,19 +21,15 @@ msgstr ""
 msgid "%l:%M %p %Z"
 msgstr ""
 
-#: applet.js:61
-msgid "%A %B %e, %Y %Z"
-msgstr ""
-
-#: tzclocks_settings.py:66
+#: tzclock_settings.py:66
 msgid "Timezone"
 msgstr ""
 
-#: tzclocks_settings.py:207
+#: tzclock_settings.py:207
 msgid "Region"
 msgstr ""
 
-#: tzclocks_settings.py:210
+#: tzclock_settings.py:210
 msgid "City"
 msgstr ""
 
@@ -69,6 +65,25 @@ msgstr ""
 msgid "Clock Display Format"
 msgstr ""
 
+#. settings-schema.json->clock-use-24h->description
+msgid "Display the time using a 24 hour clock"
+msgstr ""
+
+#. settings-schema.json->clock-use-24h->tooltip
+msgid ""
+"Check this to display the time using a 24 hour clock in the timezone clock "
+"applet."
+msgstr ""
+
+#. settings-schema.json->clock-show-seconds->description
+msgid "Display the time with seconds"
+msgstr ""
+
+#. settings-schema.json->clock-show-seconds->tooltip
+msgid ""
+"Check this to display the time with seconds in the timezone clock applet."
+msgstr ""
+
 #. settings-schema.json->clock-show-date->description
 msgid "Display the date"
 msgstr ""
@@ -101,14 +116,6 @@ msgstr ""
 
 #. settings-schema.json->format-button->tooltip
 msgid "Click this button to know more about the syntax for date formats."
-msgstr ""
-
-#. settings-schema.json->keybindings->description
-msgid "Keybindings"
-msgstr ""
-
-#. settings-schema.json->keybinding->description
-msgid "Set the keybinding to call the menu"
 msgstr ""
 
 #. metadata.json->name
