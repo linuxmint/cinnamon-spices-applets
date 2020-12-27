@@ -1,0 +1,77 @@
+{
+ "tzclock-settings-header": {
+    "type":        "header",
+    "description": "Timezone Clock Settings"
+ },
+ "displayed-timezone" : {
+    "type" : "entry",
+    "default" : "Etc/UTC",
+    "description": "Timezone to display",
+    "tooltip": "Enter a valid timezone name to display."
+ },
+   "tzclocks-settings-button" : {
+    "type" : "button",
+    "description" : "Select timezone on map",
+    "indent": true,
+    "callback" : "_launch_tzclocks_config",
+    "tooltip" : "Click this button to select timezone on map."
+ },
+  "browse-timezones-button" : {
+    "type" : "button",
+    "description" : "Browse valid timezone values by country",
+    "indent": true,
+    "dependency" : "displayed-timezone",
+    "callback" : "on_browse_timezones_button_pressed",
+    "tooltip" : "Click this button to browse valid timezone values by country."
+ },
+ "clock-display": {
+    "type":        "header",
+    "description": "Clock Display Format"
+ },
+ "separator0" : {
+    "type" : "separator"
+ },
+  "clock-use-24h" : {
+    "type" : "checkbox",
+    "default" : false,
+    "description": "Display the time using a 24 hour clock",
+    "tooltip": "Check this to display the time using a 24 hour clock in the timezone clock applet."
+ },
+  "clock-show-seconds" : {
+    "type" : "checkbox",
+    "default" : false,
+    "description": "Display the time with seconds",
+    "tooltip": "Check this to display the time with seconds in the timezone clock applet."
+ },
+ "clock-show-date" : {
+    "type" : "checkbox",
+    "default" : false,
+    "description": "Display the date",
+    "tooltip": "Check this to display the date in the timezone clock applet."
+ },
+ "separator1" : {
+    "type" : "separator"
+ },
+ "use-custom-format" : {
+    "type" : "checkbox",
+    "default" : false,
+    "description": "Use a custom date format",
+    "tooltip": "Check this to define a custom format for the date in the timezone clock applet."
+ },
+ "custom-format" : {
+    "type" : "entry",
+    "default" : "%A %B %e, %H:%M:%S %Z",
+    "description" : "Date format:",
+    "indent": true,
+    "dependency" : "use-custom-format",
+    "tooltip" : "Set your custom format here."
+ },
+ "format-button" : {
+    "type" : "button",
+    "description" : "Show information on date format syntax",
+    "indent": true,
+    "dependency" : "use-custom-format",
+    "callback" : "on_custom_format_button_pressed",
+    "tooltip" : "Click this button to know more about the syntax for date formats."
+ }
+}

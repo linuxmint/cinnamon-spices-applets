@@ -1,0 +1,7 @@
+{
+ "uuid": "tzclock@lhriley",
+ "name": "Timezone Clock",
+ "description": "A simple clock for displaying the current time in a timezone",
+ "icon": "stock_globe",
+ "max-instances": -1
+}
