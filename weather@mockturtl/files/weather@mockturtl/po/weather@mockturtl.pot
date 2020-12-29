@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-26 09:07+0000\n"
+"POT-Creation-Date: 2020-12-02 14:34+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -587,8 +587,8 @@ msgstr ""
 msgid "Few Clouds"
 msgstr ""
 
-#: 3.0/us_weather.js:419 3.0/openWeatherMap.js:422 3.8/us_weather.js:322
-#: 3.8/openWeatherMap.js:376
+#: 3.0/us_weather.js:419 3.0/openWeatherMap.js:423 3.8/us_weather.js:322
+#: 3.8/openWeatherMap.js:377
 msgid "Few clouds"
 msgstr ""
 
@@ -1070,18 +1070,22 @@ msgid "Sky is clear"
 msgstr ""
 
 #: 3.0/openWeatherMap.js:421 3.8/openWeatherMap.js:375
+msgid "Mostly Sunny"
+msgstr ""
+
+#: 3.0/openWeatherMap.js:422 3.8/openWeatherMap.js:376
 msgid "Clouds"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:423 3.8/openWeatherMap.js:377
+#: 3.0/openWeatherMap.js:424 3.8/openWeatherMap.js:378
 msgid "Scattered clouds"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:424 3.8/openWeatherMap.js:378
+#: 3.0/openWeatherMap.js:425 3.8/openWeatherMap.js:379
 msgid "Broken clouds"
 msgstr ""
 
-#: 3.0/openWeatherMap.js:425 3.8/openWeatherMap.js:379
+#: 3.0/openWeatherMap.js:426 3.8/openWeatherMap.js:380
 msgid "Overcast clouds"
 msgstr ""
 

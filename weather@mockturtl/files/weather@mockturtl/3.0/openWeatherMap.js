@@ -50,12 +50,9 @@ function _(str) {
     return imports.gettext.dgettext(UUID, str);
 }
 var utils = importModule("utils");
-var isCoordinate = utils.isCoordinate;
 var isLangSupported = utils.isLangSupported;
-var isID = utils.isID;
 var weatherIconSafely = utils.weatherIconSafely;
 var get = utils.get;
-var nonempty = utils.nonempty;
 var OpenWeatherMap = (function () {
     function OpenWeatherMap(_app) {
         this.prettyName = "OpenWeatherMap";
@@ -133,9 +130,9 @@ var OpenWeatherMap = (function () {
                     customIcon: self.ResolveCustomIcon(get(["current", "weather", "0", "icon"], json))
                 },
                 extra_field: {
-                    name: _("Cloudiness"),
-                    value: json.current.clouds,
-                    type: "percent"
+                    name: _("Feels Like"),
+                    value: json.current.feels_like,
+                    type: "temperature"
                 },
                 forecasts: []
             };

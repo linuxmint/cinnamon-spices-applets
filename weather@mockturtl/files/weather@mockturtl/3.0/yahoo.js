@@ -468,6 +468,7 @@ var YahooConditionLibrary = [
     _("Partly Cloudy"),
     _("Clear"),
     _("Sunny"),
+    _("Mostly Sunny"),
     _("Fair"),
     _("Mixed Rain and Hail"),
     _("Hot"),
