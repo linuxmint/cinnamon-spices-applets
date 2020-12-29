@@ -633,8 +633,9 @@ class UI {
         this.app.refreshAndRebuild();
     }
     IsLightTheme() {
-        let color = this.menu.actor.get_theme_node().get_background_color();
+        let color = this.menu.actor.get_theme_node().get_color("color");
         let luminance = (2126 * color.red + 7152 * color.green + 722 * color.blue) / 10000 / 255;
+        luminance = Math.abs(1 - luminance);
         this.app.log.Debug("Theme is Light: " + (luminance > 0.5));
         return (luminance > 0.5);
     }

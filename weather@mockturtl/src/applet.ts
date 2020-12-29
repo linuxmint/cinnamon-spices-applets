@@ -874,12 +874,13 @@ class UI {
 	 * @param color Background color
 	 */
     private IsLightTheme(): boolean {
-        // background
-        let color = this.menu.actor.get_theme_node().get_background_color();
+        // using foreground color, more reliable than background color (more themes has it)
+		let color = this.menu.actor.get_theme_node().get_color("color");
         // luminance between 0 and 1
-        let luminance = (2126 * color.red + 7152 * color.green + 722 * color.blue) / 10000 / 255;
+		let luminance = (2126 * color.red + 7152 * color.green + 722 * color.blue) / 10000 / 255;
+		// Inverse, we assume the bacground color here
+		luminance = Math.abs(1 - luminance);
         this.app.log.Debug("Theme is Light: " + (luminance > 0.5));
-
         return (luminance > 0.5);
     }
 
@@ -1013,7 +1014,7 @@ class UI {
 		// (or cinnamon does not think there is enough), the text gets superimposed on top of
 		// each other.
 		// setting the min-height forces to draw with the view's requested height without
-		// interfering animations.
+		// interfering with animations.
 		this._hourlyScrollView.style = "min-height: " + naturalHeight.toString() + "px;";
 
         if (global.settings.get_boolean("desktop-effects-on-menus")) {
