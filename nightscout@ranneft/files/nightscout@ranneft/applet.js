@@ -17,6 +17,7 @@ const log = function(message) {
 }
 
 const makeHttpRequest = function(method, uri, cb) {
+  uri = uri.replace(/([^:])\/{2,}/, '$1/');
   return new Promise((resolve, reject) => {
     log(`Making a ${method} request to ${uri}`);
     const request = Soup.Message.new(method, uri);
