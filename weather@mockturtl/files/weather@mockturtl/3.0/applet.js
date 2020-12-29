@@ -95,6 +95,7 @@ var clearTimeout = utils.clearTimeout;
 var MillimeterToUserUnits = utils.MillimeterToUserUnits;
 var shadeHexColor = utils.shadeHexColor;
 var MetreToUserUnits = utils.MetreToUserUnits;
+var constructJsLocale = utils.constructJsLocale;
 if (typeof Promise != "function") {
     var promisePoly = importModule("promise-polyfill");
     var finallyConstructor = promisePoly.finallyConstructor;
@@ -184,7 +185,7 @@ var WeatherApplet = (function (_super) {
             "location not covered": _("Location not covered"),
         };
         _this.log = new Log(instanceId);
-        _this.currentLocale = _this.constructJsLocale(get_language_names()[0]);
+        _this.currentLocale = constructJsLocale(get_language_names()[0]);
         _this.log.Debug("Applet created with instanceID " + instanceId);
         _this.log.Debug("System locale is " + _this.currentLocale);
         _this.log.Debug("Appletdir is: " + _this.appletDir);
@@ -196,7 +197,7 @@ var WeatherApplet = (function (_super) {
         Session.prototype.add_feature.call(_this._httpSession, new ProxyResolverDefault());
         imports.gi.Gtk.IconTheme.get_default().append_search_path(_this.appletDir + "/../icons");
         _this.SetAppletOnPanel();
-        _this.config = new Config(_this, instanceId);
+        _this.config = new Config(_this, instanceId, _this.currentLocale);
         _this.AddRefreshButton();
         _this.EnsureProvider();
         _this.ui = new UI(_this, orientation);
@@ -529,17 +530,6 @@ var WeatherApplet = (function (_super) {
             default:
                 return null;
         }
-    };
-    WeatherApplet.prototype.constructJsLocale = function (locale) {
-        var jsLocale = locale.split(".")[0];
-        var tmp = jsLocale.split("_");
-        jsLocale = "";
-        for (var i = 0; i < tmp.length; i++) {
-            if (i != 0)
-                jsLocale += "-";
-            jsLocale += tmp[i].toLowerCase();
-        }
-        return jsLocale;
     };
     WeatherApplet.prototype.refreshWeather = function (rebuild, location) {
         return __awaiter(this, void 0, void 0, function () {
@@ -974,8 +964,8 @@ var UI = (function () {
             this.app.SetAppletIcon(iconName, weather.condition.customIcon);
             var temp = "";
             if (weather.temperature != null) {
-                temp = TempToUserConfig(weather.temperature, config._temperatureUnit, config._tempRussianStyle);
-                this._currentWeatherTemperature.text = temp + " " + this.unitToUnicode(config._temperatureUnit);
+                temp = TempToUserConfig(weather.temperature, config.TemperatureUnit(), config._tempRussianStyle);
+                this._currentWeatherTemperature.text = temp + " " + this.unitToUnicode(config.TemperatureUnit());
             }
             var label = "";
             if (this.app.orientation != Side.LEFT && this.app.orientation != Side.RIGHT) {
@@ -986,21 +976,21 @@ var UI = (function () {
                     if (label != "") {
                         label += " ";
                     }
-                    label += (temp + ' ' + this.unitToUnicode(config._temperatureUnit));
+                    label += (temp + ' ' + this.unitToUnicode(config.TemperatureUnit()));
                 }
             }
             else {
                 if (config._showTextInPanel) {
                     label = temp;
                     if (this.app.GetPanelHeight() >= 35) {
-                        label += this.unitToUnicode(config._temperatureUnit);
+                        label += this.unitToUnicode(config.TemperatureUnit());
                     }
                 }
             }
             if (nonempty(config._tempTextOverride)) {
                 label = config._tempTextOverride
                     .replace("{t}", temp)
-                    .replace("{u}", this.unitToUnicode(config._temperatureUnit))
+                    .replace("{u}", this.unitToUnicode(config.TemperatureUnit()))
                     .replace("{c}", mainCondition);
             }
             this.app.SetAppletLabel(label);
@@ -1010,9 +1000,9 @@ var UI = (function () {
             var wind_direction = compassDirection(weather.wind.degree);
             this._currentWeatherWind.text =
                 (wind_direction != undefined ? _(wind_direction) + " " : "") +
-                    MPStoUserUnits(weather.wind.speed, config._windSpeedUnit);
-            if (config._windSpeedUnit != "Beaufort")
-                this._currentWeatherWind.text += " " + _(config._windSpeedUnit);
+                    MPStoUserUnits(weather.wind.speed, config.WindSpeedUnit());
+            if (config.WindSpeedUnit() != "Beaufort")
+                this._currentWeatherWind.text += " " + _(config.WindSpeedUnit());
             this._currentWeatherApiUnique.text = "";
             this._currentWeatherApiUniqueCap.text = "";
             if (!!weather.extra_field) {
@@ -1023,7 +1013,7 @@ var UI = (function () {
                         value = weather.extra_field.value.toString() + "%";
                         break;
                     case "temperature":
-                        value = TempToUserConfig(weather.extra_field.value, config._temperatureUnit, config._tempRussianStyle) + " " + this.unitToUnicode(config._temperatureUnit);
+                        value = TempToUserConfig(weather.extra_field.value, config.TemperatureUnit(), config._tempRussianStyle) + " " + this.unitToUnicode(config.TemperatureUnit());
                         break;
                     default:
                         value = _(weather.extra_field.value);
@@ -1062,8 +1052,8 @@ var UI = (function () {
             for (var i = 0; i < len; i++) {
                 var forecastData = weather.forecasts[i];
                 var forecastUi = this._forecast[i];
-                var t_low = TempToUserConfig(forecastData.temp_min, config._temperatureUnit, config._tempRussianStyle);
-                var t_high = TempToUserConfig(forecastData.temp_max, config._temperatureUnit, config._tempRussianStyle);
+                var t_low = TempToUserConfig(forecastData.temp_min, config.TemperatureUnit(), config._tempRussianStyle);
+                var t_high = TempToUserConfig(forecastData.temp_max, config.TemperatureUnit(), config._tempRussianStyle);
                 var first_temperature = config._temperatureHighFirst ? t_high : t_low;
                 var second_temperature = config._temperatureHighFirst ? t_low : t_high;
                 var comment = "";
@@ -1084,7 +1074,7 @@ var UI = (function () {
                 forecastUi.Day.text = dayName;
                 forecastUi.Temperature.text = first_temperature;
                 forecastUi.Temperature.text += ((config._tempRussianStyle) ? ELLIPSIS : " " + FORWARD_SLASH + " ");
-                forecastUi.Temperature.text += second_temperature + ' ' + this.unitToUnicode(config._temperatureUnit);
+                forecastUi.Temperature.text += second_temperature + ' ' + this.unitToUnicode(config.TemperatureUnit());
                 forecastUi.Summary.text = comment;
                 forecastUi.Icon.icon_name = (config._useCustomMenuIcons) ? forecastData.condition.customIcon : forecastData.condition.icon;
             }
@@ -1107,8 +1097,8 @@ var UI = (function () {
         this._providerCredit.url = provider.website;
         this._timestamp.text = _("As of") + " " + AwareDateString(weather.date, this.app.currentLocale, config._show24Hours);
         if (weather.location.distanceFrom != null) {
-            this._timestamp.text += (", " + MetreToUserUnits(weather.location.distanceFrom, this.app.config._distanceUnit)
-                + this.BigDistanceUnitFor(this.app.config._distanceUnit) + " " + _("from you"));
+            this._timestamp.text += (", " + MetreToUserUnits(weather.location.distanceFrom, this.app.config.DistanceUnit())
+                + this.BigDistanceUnitFor(this.app.config.DistanceUnit()) + " " + _("from you"));
         }
         return true;
     };
@@ -1118,7 +1108,7 @@ var UI = (function () {
             var hour = forecasts[index];
             var ui = this._hourlyForecasts[index];
             ui.Hour.text = AwareDateString(hour.date, this.app.currentLocale, config._show24Hours, tz);
-            ui.Temperature.text = TempToUserConfig(hour.temp, config._temperatureUnit, config._tempRussianStyle) + " " + this.unitToUnicode(config._temperatureUnit);
+            ui.Temperature.text = TempToUserConfig(hour.temp, config.TemperatureUnit(), config._tempRussianStyle) + " " + this.unitToUnicode(config.TemperatureUnit());
             ui.Icon.icon_name = (config._useCustomMenuIcons) ? hour.condition.customIcon : hour.condition.icon;
             hour.condition.main = capitalizeFirstLetter(hour.condition.main);
             if (config._translateCondition)
@@ -1127,7 +1117,7 @@ var UI = (function () {
             if (!!hour.precipitation && hour.precipitation.type != "none") {
                 var precipitationText = null;
                 if (!!hour.precipitation.volume && hour.precipitation.volume > 0) {
-                    precipitationText = MillimeterToUserUnits(hour.precipitation.volume, this.app.config._distanceUnit) + " " + ((this.app.config._distanceUnit == "metric") ? _("mm") : _("in"));
+                    precipitationText = MillimeterToUserUnits(hour.precipitation.volume, this.app.config.DistanceUnit()) + " " + ((this.app.config.DistanceUnit() == "metric") ? _("mm") : _("in"));
                 }
                 if (!!hour.precipitation.chance) {
                     precipitationText = (precipitationText == null) ? "" : (precipitationText + ", ");
@@ -1496,7 +1486,15 @@ var UI = (function () {
     return UI;
 }());
 var Config = (function () {
-    function Config(app, instanceID) {
+    function Config(app, instanceID, locale) {
+        this.fahrenheitCountries = ["bs", "bz", "ky", "pr", "pw", "us"];
+        this.windSpeedUnitLocales = {
+            "fi kr no pl ru se": "m/s",
+            "us gb": "mph"
+        };
+        this.distanceUnitLocales = {
+            "us gb": "imperial"
+        };
         this.WEATHER_LOCATION = "location";
         this.WEATHER_USE_SYMBOLIC_ICONS_KEY = 'useSymbolicIcons';
         this.KEYS = {
@@ -1529,6 +1527,7 @@ var Config = (function () {
         this.doneTypingLocation = null;
         this.currentLocation = null;
         this.app = app;
+        this.countryCode = this.GetCountryCode(locale);
         this.settings = new AppletSettings(this, UUID, instanceID);
         this.BindSettings();
     }
@@ -1546,6 +1545,21 @@ var Config = (function () {
     Config.prototype.IconTypeChanged = function () {
         this.app.ui.UpdateIconType(this.IconType());
         this.app.log.Debug("Symbolic icon setting changed");
+    };
+    Config.prototype.TemperatureUnit = function () {
+        if (this._temperatureUnit == "automatic")
+            return this.GetLocaleTemperateUnit(this.countryCode);
+        return this._temperatureUnit;
+    };
+    Config.prototype.WindSpeedUnit = function () {
+        if (this._windSpeedUnit == "automatic")
+            return this.GetLocaleWindSpeedUnit(this.countryCode);
+        return this._windSpeedUnit;
+    };
+    Config.prototype.DistanceUnit = function () {
+        if (this._distanceUnit == "automatic")
+            return this.GetLocaleDistanceUnit(this.countryCode);
+        return this._distanceUnit;
     };
     Config.prototype.IconType = function () {
         return this.settings.getValue(this.WEATHER_USE_SYMBOLIC_ICONS_KEY) ?
@@ -1642,6 +1656,35 @@ var Config = (function () {
                 }
             });
         });
+    };
+    Config.prototype.GetLocaleTemperateUnit = function (code) {
+        if (code == null || this.fahrenheitCountries.indexOf(code) == -1)
+            return "celsius";
+        return "fahrenheit";
+    };
+    Config.prototype.GetLocaleWindSpeedUnit = function (code) {
+        if (code == null)
+            return "kph";
+        for (var key in this.windSpeedUnitLocales) {
+            if (key.includes(code))
+                return this.windSpeedUnitLocales[key];
+        }
+        return "kph";
+    };
+    Config.prototype.GetLocaleDistanceUnit = function (code) {
+        if (code == null)
+            return "metric";
+        for (var key in this.distanceUnitLocales) {
+            if (key.includes(code))
+                return this.distanceUnitLocales[key];
+        }
+        return "metric";
+    };
+    Config.prototype.GetCountryCode = function (locale) {
+        var splitted = locale.split("-");
+        if (splitted.length < 2)
+            return null;
+        return splitted[1];
     };
     return Config;
 }());

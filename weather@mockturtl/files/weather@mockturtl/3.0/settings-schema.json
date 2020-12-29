@@ -96,18 +96,20 @@
   },
   "temperatureUnit": {
     "type": "radiogroup",
-    "default": "celsius",
+    "default": "automatic",
     "description": "Temperature unit",
     "options": {
+	  "Automatic": "automatic",
       "celsius": "celsius",
       "fahrenheit": "fahrenheit"
     }
   },
   "windSpeedUnit": {
     "type": "combobox",
-    "default": "kph",
+    "default": "automatic",
     "description": "Wind speed unit",
     "options": {
+	  "Automatic": "automatic",
       "kph": "kph",
       "mph": "mph",
       "m/s": "m/s",
@@ -131,9 +133,10 @@
   },
   "distanceUnit": {
 		"type": "combobox",
-		"default": "metric",
+		"default": "automatic",
 		"description": "Distance unit",
 		"options": {
+			"Automatic": "automatic",
 			"Metric": "metric",
 			"Imperial": "imperial"
 		}

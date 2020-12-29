@@ -29,7 +29,7 @@ They are stored in a file at ```$XDG_CONFIG_HOME/weather-mockturtl/locations.jso
 | **WeatherBit**          | Yes           | 16                        | 0**                        | --                        |
 | **Yahoo**               | No            | 10                        | 0                          | python3-requests-oauthlib |
 | **Climacell**           | Yes           | 16                        | 96                         | --                        |
-| **Met Office UK**       | No            | 5                         | 36***                      | --                        |
+| **Met Office UK**       | No            | 5                         | 36                         | --                        |
 | **US National Weather** | No            | 7                         | 156                        | --                        |
 
 ### OpenWeatherMap
@@ -66,9 +66,7 @@ Sometimes it takes like 5-10 seconds to obtain weather, please be patient when i
 
 * Only covers the UK
 
-* It uses the nearest forecast site and observation sites in an 50km area, it displays an error if it does not find any. Please open a new issue if this happens and you live in the UK! (There are much less observation sites than forecast sites.) 
-
-* ***Hourly Weather is 3-hourly weather
+* It uses the nearest forecast site and observation sites in an 50km area, it displays an error if it does not find any. Please open a new issue if this happens and you live in the UK! (There are much less observation sites than forecast sites.)
 
 ### US National Weather
 
@@ -107,7 +105,7 @@ http://groups.google.com/group/cinnamon-weather
 
 #### Enabling debug mode
 
-You can enable debug mode for more logging by creating a file named ```DEBUG``` in the folder of the applet here: ```~/.local/share/cinnamon/applets/weather@mockturtl/```
+You can enable debug mode for more logging by creating a file named ```DEBUG``` in the folder of the applet here: ```~/.local/share/cinnamon/applets/weather@mockturtl/```, then restart Cinnamon.
 
 #### See the logs producing by applets
 

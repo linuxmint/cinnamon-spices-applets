@@ -61,6 +61,7 @@ const clearTimeout = utils.clearTimeout as (id: any) => void;
 var MillimeterToUserUnits = utils.MillimeterToUserUnits as (mm: number, distanceUnit: DistanceUnits) => number;
 var shadeHexColor = utils.shadeHexColor as (color: string, percent: number) => string;
 var MetreToUserUnits = utils.MetreToUserUnits as (m: number, distanceUnit: DistanceUnits) => number;
+var constructJsLocale = utils.constructJsLocale as (locale: string) => string;
 
 // This always evaluates to True because "var Promise" line exists inside 
 if (typeof Promise != "function") {
@@ -184,7 +185,7 @@ class WeatherApplet extends TextIconApplet {
     public constructor(metadata: any, orientation: imports.gi.St.Side, panelHeight: number, instanceId: number) {
         super(orientation, panelHeight, instanceId);
         this.log = new Log(instanceId);
-		this.currentLocale = this.constructJsLocale(get_language_names()[0]);
+		this.currentLocale = constructJsLocale(get_language_names()[0]);
 		this.log.Debug("Applet created with instanceID " + instanceId);
         this.log.Debug("System locale is " + this.currentLocale);
         this.log.Debug("Appletdir is: " + this.appletDir);
@@ -199,7 +200,7 @@ class WeatherApplet extends TextIconApplet {
         imports.gi.Gtk.IconTheme.get_default().append_search_path(this.appletDir + "/../icons");
 
         this.SetAppletOnPanel();
-        this.config = new Config(this, instanceId);
+        this.config = new Config(this, instanceId, this.currentLocale);
         this.AddRefreshButton();
         this.EnsureProvider();
         this.ui = new UI(this, orientation);
@@ -539,21 +540,6 @@ class WeatherApplet extends TextIconApplet {
             default:
                 return null;
         }
-    }
-
-	/**
-	 * Convert Linux locale to JS locale format
-	 * @param locale Linux locale string
-	 */
-    private constructJsLocale(locale: string): string {
-        let jsLocale = locale.split(".")[0];
-        let tmp: string[] = jsLocale.split("_");
-        jsLocale = "";
-        for (let i = 0; i < tmp.length; i++) {
-            if (i != 0) jsLocale += "-";
-            jsLocale += tmp[i].toLowerCase();
-        }
-        return jsLocale;
     }
 
 	/**
@@ -1156,8 +1142,8 @@ class UI {
             // Temperature
             let temp = "";
             if (weather.temperature != null) {
-                temp = TempToUserConfig(weather.temperature, config._temperatureUnit, config._tempRussianStyle);
-                this._currentWeatherTemperature.text = temp + " " + this.unitToUnicode(config._temperatureUnit);
+                temp = TempToUserConfig(weather.temperature, config.TemperatureUnit(), config._tempRussianStyle);
+                this._currentWeatherTemperature.text = temp + " " + this.unitToUnicode(config.TemperatureUnit());
             }
 
             // Applet panel label
@@ -1171,7 +1157,7 @@ class UI {
                     if (label != "") {
                         label += " ";
                     }
-                    label += (temp + ' ' + this.unitToUnicode(config._temperatureUnit));
+                    label += (temp + ' ' + this.unitToUnicode(config.TemperatureUnit()));
                 }
             }
             // Vertical panels
@@ -1181,7 +1167,7 @@ class UI {
                     // Vertical panel width is more than this value then we has space
                     // to show units
                     if (this.app.GetPanelHeight() >= 35) {
-                        label += this.unitToUnicode(config._temperatureUnit);
+                        label += this.unitToUnicode(config.TemperatureUnit());
                     }
                 }
             }
@@ -1190,7 +1176,7 @@ class UI {
             if (nonempty(config._tempTextOverride)) {
                 label = config._tempTextOverride
                     .replace("{t}", temp)
-                    .replace("{u}", this.unitToUnicode(config._temperatureUnit))
+                    .replace("{u}", this.unitToUnicode(config.TemperatureUnit()))
                     .replace("{c}", mainCondition);
             }
 
@@ -1206,9 +1192,9 @@ class UI {
             let wind_direction = compassDirection(weather.wind.degree);
             this._currentWeatherWind.text =
                 (wind_direction != undefined ? _(wind_direction) + " " : "") +
-                MPStoUserUnits(weather.wind.speed, config._windSpeedUnit);
+                MPStoUserUnits(weather.wind.speed, config.WindSpeedUnit());
             // No need to display unit to Beaufort scale
-            if (config._windSpeedUnit != "Beaufort") this._currentWeatherWind.text += " " + _(config._windSpeedUnit);
+            if (config.WindSpeedUnit() != "Beaufort") this._currentWeatherWind.text += " " + _(config.WindSpeedUnit());
 
             // API Unique display
             this._currentWeatherApiUnique.text = "";
@@ -1221,7 +1207,7 @@ class UI {
                         value = weather.extra_field.value.toString() + "%";
                         break;
                     case "temperature":
-                        value = TempToUserConfig(weather.extra_field.value, config._temperatureUnit, config._tempRussianStyle) + " " + this.unitToUnicode(config._temperatureUnit);
+                        value = TempToUserConfig(weather.extra_field.value, config.TemperatureUnit(), config._tempRussianStyle) + " " + this.unitToUnicode(config.TemperatureUnit());
                         break;
                     default:
                         value = _(weather.extra_field.value);
@@ -1266,8 +1252,8 @@ class UI {
                 let forecastData = weather.forecasts[i];
                 let forecastUi = this._forecast[i];
 
-                let t_low = TempToUserConfig(forecastData.temp_min, config._temperatureUnit, config._tempRussianStyle);
-                let t_high = TempToUserConfig(forecastData.temp_max, config._temperatureUnit, config._tempRussianStyle);
+                let t_low = TempToUserConfig(forecastData.temp_min, config.TemperatureUnit(), config._tempRussianStyle);
+                let t_high = TempToUserConfig(forecastData.temp_max, config.TemperatureUnit(), config._tempRussianStyle);
 
                 let first_temperature = config._temperatureHighFirst ? t_high : t_low;
                 let second_temperature = config._temperatureHighFirst ? t_low : t_high;
@@ -1294,7 +1280,7 @@ class UI {
                 // As Russian Tradition, -temp...+temp
                 // See https://github.com/linuxmint/cinnamon-spices-applets/issues/618
                 forecastUi.Temperature.text += ((config._tempRussianStyle) ? ELLIPSIS : " " + FORWARD_SLASH + " ");
-                forecastUi.Temperature.text += second_temperature + ' ' + this.unitToUnicode(config._temperatureUnit);
+                forecastUi.Temperature.text += second_temperature + ' ' + this.unitToUnicode(config.TemperatureUnit());
                 forecastUi.Summary.text = comment;
                 forecastUi.Icon.icon_name = (config._useCustomMenuIcons) ? forecastData.condition.customIcon : forecastData.condition.icon;
             }
@@ -1317,8 +1303,8 @@ class UI {
         this._timestamp.text = _("As of") + " " + AwareDateString(weather.date, this.app.currentLocale, config._show24Hours);
         if (weather.location.distanceFrom != null) {
             this._timestamp.text += (
-                ", " + MetreToUserUnits(weather.location.distanceFrom, this.app.config._distanceUnit)
-                + this.BigDistanceUnitFor(this.app.config._distanceUnit) + " " + _("from you")
+                ", " + MetreToUserUnits(weather.location.distanceFrom, this.app.config.DistanceUnit())
+                + this.BigDistanceUnitFor(this.app.config.DistanceUnit()) + " " + _("from you")
             );
         }
         return true;
@@ -1331,7 +1317,7 @@ class UI {
             const ui = this._hourlyForecasts[index];
 
             ui.Hour.text = AwareDateString(hour.date, this.app.currentLocale, config._show24Hours, tz);
-            ui.Temperature.text = TempToUserConfig(hour.temp, config._temperatureUnit, config._tempRussianStyle) + " " + this.unitToUnicode(config._temperatureUnit);
+            ui.Temperature.text = TempToUserConfig(hour.temp, config.TemperatureUnit(), config._tempRussianStyle) + " " + this.unitToUnicode(config.TemperatureUnit());
             ui.Icon.icon_name = (config._useCustomMenuIcons) ? hour.condition.customIcon : hour.condition.icon;
 
             hour.condition.main = capitalizeFirstLetter(hour.condition.main);
@@ -1340,7 +1326,7 @@ class UI {
             if (!!hour.precipitation && hour.precipitation.type != "none") {
                 let precipitationText = null;
                 if (!!hour.precipitation.volume && hour.precipitation.volume > 0) {
-                    precipitationText = MillimeterToUserUnits(hour.precipitation.volume, this.app.config._distanceUnit) + " " + ((this.app.config._distanceUnit == "metric") ? _("mm") : _("in"));
+                    precipitationText = MillimeterToUserUnits(hour.precipitation.volume, this.app.config.DistanceUnit()) + " " + ((this.app.config.DistanceUnit() == "metric") ? _("mm") : _("in"));
                 }
                 if (!!hour.precipitation.chance) {
                     precipitationText = (precipitationText == null) ? "" : (precipitationText + ", ")
@@ -1795,8 +1781,34 @@ class UI {
 
     }
 }
-
+interface WindSpeedLocalePrefs {
+	[key: string]: WeatherWindSpeedUnits;
+}
+interface DistanceUnitLocalePrefs {
+	[key: string]: DistanceUnits;
+}
 class Config {
+	// Info partially from https://github.com/unicode-org/cldr/blob/release-38-1/common/supplemental/units.xml
+	/**
+	 * Default is celsius
+	 */
+	fahrenheitCountries = ["bs", "bz", "ky", "pr", "pw", "us"];
+
+	/**
+	 * Default kph, gb added to mph keys
+	 */
+	windSpeedUnitLocales: WindSpeedLocalePrefs = {
+		"fi kr no pl ru se": "m/s",
+		"us gb": "mph"
+	}
+	
+	/**
+	 * Default metric
+	 */
+	distanceUnitLocales: DistanceUnitLocalePrefs = {
+		"us gb": "imperial"
+	}
+
     WEATHER_LOCATION = "location"
     WEATHER_USE_SYMBOLIC_ICONS_KEY = 'useSymbolicIcons'
 
@@ -1837,10 +1849,10 @@ class Config {
     public readonly _dataService: Services;
     private readonly _location: string;
     public readonly _translateCondition: boolean;
-    public readonly _temperatureUnit: WeatherUnits;
+    private readonly _temperatureUnit: WeatherUnits;
     public readonly _pressureUnit: WeatherPressureUnits;
-    public readonly _windSpeedUnit: WeatherWindSpeedUnits;
-    public readonly _distanceUnit: DistanceUnits;
+    private readonly _windSpeedUnit: WeatherWindSpeedUnits;
+    private readonly _distanceUnit: DistanceUnits;
     public readonly _show24Hours: boolean;
     public readonly _apiKey: string;
     public readonly _forecastDays: number;
@@ -1866,10 +1878,12 @@ class Config {
     public currentLocation: LocationData = null;
 
     private settings: imports.ui.settings.AppletSettings;
-    private app: WeatherApplet;
+	private app: WeatherApplet;
+	private countryCode: string;
 
-    constructor(app: WeatherApplet, instanceID: number) {
-        this.app = app;
+    constructor(app: WeatherApplet, instanceID: number, locale: string) {
+		this.app = app;
+		this.countryCode = this.GetCountryCode(locale);
         this.settings = new AppletSettings(this, UUID, instanceID);
         this.BindSettings();
     }
@@ -1899,7 +1913,33 @@ class Config {
     private IconTypeChanged() {
         this.app.ui.UpdateIconType(this.IconType());
         this.app.log.Debug("Symbolic icon setting changed");
-    }
+	}
+	
+	/**
+	 * @returns Units, automatic is already resolved here
+	 */
+	public TemperatureUnit(): WeatherUnits {
+		if (this._temperatureUnit == "automatic") 
+			return this.GetLocaleTemperateUnit(this.countryCode);
+		return this._temperatureUnit;
+	}
+
+	/**
+	 * @returns Units, automatic is already resolved here
+	 */
+	public WindSpeedUnit(): WeatherWindSpeedUnits {
+		if (this._windSpeedUnit == "automatic") 
+			return this.GetLocaleWindSpeedUnit(this.countryCode);
+		return this._windSpeedUnit;
+	}
+
+	/**
+	 * @returns Units, automatic is already resolved here
+	 */
+	public DistanceUnit(): DistanceUnits {
+		if (this._distanceUnit == "automatic") return this.GetLocaleDistanceUnit(this.countryCode);
+		return this._distanceUnit;
+	}
 
 	/**
 	 * Gets Icon type based on user config
@@ -2006,8 +2046,40 @@ class Config {
 
         this.InjectLocationToConfig(locationData);
         return locationData;
-    }
+	}
+	
+	// UTILS
 
+	private GetLocaleTemperateUnit(code: string): WeatherUnits {
+		if (code == null || this.fahrenheitCountries.indexOf(code) == -1) return "celsius";
+		return "fahrenheit";
+	}
+
+	private GetLocaleWindSpeedUnit(code: string): WeatherWindSpeedUnits {
+		if (code == null) return "kph";
+
+		for (const key in this.windSpeedUnitLocales) {
+			if (key.includes(code)) return this.windSpeedUnitLocales[key];
+		}
+		return "kph";
+	}
+
+	private GetLocaleDistanceUnit(code: string): DistanceUnits {
+		if (code == null) return "metric";
+
+		for (const key in this.distanceUnitLocales) {
+			if (key.includes(code)) return this.distanceUnitLocales[key];
+		}
+		return "metric";
+	}
+
+	private GetCountryCode(locale: string) {
+		let splitted = locale.split("-");
+		// There is no country code
+		if (splitted.length < 2) return null;
+	
+		return splitted[1];
+	}
 }
 
 class WeatherLoop {
@@ -2639,16 +2711,16 @@ type LocationCache = {
 }
 
 /** Units Used in Options. Change Options list if You change this! */
-type WeatherUnits = 'celsius' | 'fahrenheit';
+type WeatherUnits = 'automatic' | 'celsius' | 'fahrenheit';
 
 /** Units Used in Options. Change Options list if You change this! */
-type WeatherWindSpeedUnits = 'kph' | 'mph' | 'm/s' | 'Knots' | 'Beaufort';
+type WeatherWindSpeedUnits = 'automatic' | 'kph' | 'mph' | 'm/s' | 'Knots' | 'Beaufort';
 
 /** Units used in Options. Change Options list if You change this! */
 type WeatherPressureUnits = 'hPa' | 'mm Hg' | 'in Hg' | 'Pa' | 'psi' | 'atm' | 'at';
 
 /** Change settings-scheme if you change this! */
-type DistanceUnits = 'metric' | 'imperial';
+type DistanceUnits = 'automatic' | 'metric' | 'imperial';
 
 interface WeatherData {
     date: Date;

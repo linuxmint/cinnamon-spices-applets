@@ -364,8 +364,8 @@ var DarkSky = (function () {
         }
     };
     DarkSky.prototype.SetQueryUnit = function () {
-        if (this.app.config._temperatureUnit == "celsius") {
-            if (this.app.config._windSpeedUnit == "kph" || this.app.config._windSpeedUnit == "m/s") {
+        if (this.app.config.TemperatureUnit() == "celsius") {
+            if (this.app.config.WindSpeedUnit() == "kph" || this.app.config.WindSpeedUnit() == "m/s") {
                 this.unit = 'si';
             }
             else {

@@ -408,7 +408,7 @@ var MetUk = (function () {
     };
     MetUk.prototype.VisibilityToText = function (dist) {
         var distance = parseInt(dist);
-        var unit = this.app.config._distanceUnit;
+        var unit = this.app.config.DistanceUnit();
         if (distance < 1000)
             return _("Very poor - Less than") + " " + MetreToUserUnits(1000, unit) + this.DistanceUnitFor(unit);
         if (distance < 4000)

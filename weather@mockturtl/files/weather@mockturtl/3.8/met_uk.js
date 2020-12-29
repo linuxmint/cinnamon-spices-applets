@@ -300,7 +300,7 @@ class MetUk {
     }
     VisibilityToText(dist) {
         let distance = parseInt(dist);
-        let unit = this.app.config._distanceUnit;
+        let unit = this.app.config.DistanceUnit();
         if (distance < 1000)
             return _("Very poor - Less than") + " " + MetreToUserUnits(1000, unit) + this.DistanceUnitFor(unit);
         if (distance < 4000)
