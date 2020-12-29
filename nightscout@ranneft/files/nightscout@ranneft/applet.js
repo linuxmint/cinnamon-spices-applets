@@ -121,6 +121,12 @@ NightscoutApplet.prototype = {
       case 'Flat':
         bgString += ' →';
         break;
+      case 'FortyFiveUp':
+        bgString += ' ⬈';
+        break;
+      case 'FortyFiveDown':
+        bgString += ' ⬊';
+          break;
       case 'SingleDown':
         bgString += ' ↓';
         break;
