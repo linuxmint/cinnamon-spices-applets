@@ -17,7 +17,9 @@ const log = function(message) {
 }
 
 const makeHttpRequest = function(method, uri, cb) {
+  uri = uri.replace(/([^:])\/{2,}/, '$1/');
   return new Promise((resolve, reject) => {
+    log(`Making a ${method} request to ${uri}`);
     const request = Soup.Message.new(method, uri);
     request.request_headers.append('accept', 'application/json');
     _httpSession.queue_message(request, (_httpSession, message) => {
@@ -142,7 +144,11 @@ NightscoutApplet.prototype = {
         break;
     }
     if(this.showiob) {
-      bgString += "  (IoB: " + status.pump.iob.bolusiob + "U)";
+      try {
+        bgString += "  (IoB: " + status.pump.iob.bolusiob + "U)";
+      } catch (e) {
+        bgString += "  (IoB: ?U)";
+      }
     }
     if(this.showMissing && this.last) {
       const lastDate = this.last.date;
