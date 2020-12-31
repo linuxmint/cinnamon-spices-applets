@@ -72,12 +72,12 @@ class CategoryButton extends PopupBaseMenuItem {
                         if (!source.categoryNameText || source.categoryNameText === this.categoryNameText) {
                             return DragMotionResult.NO_DROP;
                         }
-                        this.appThis.resetCategoryOpacity();
+                        this.appThis.resetAllCategoriesOpacity();
                         this.actor.set_opacity(50);
                         return DragMotionResult.MOVE_DROP; },
                 acceptDrop: (source /*, actor, x, y, time */) => {
                         if (!source.categoryNameText || source.categoryNameText === this.categoryNameText) {
-                            this.appThis.resetCategoryOpacity();
+                            this.appThis.resetAllCategoriesOpacity();
                             return DragMotionResult.NO_DROP;
                         }
                         this.appThis.moveCategoryToPos(source.id, this.id);
@@ -111,7 +111,7 @@ class CategoryButton extends PopupBaseMenuItem {
     }
 
     onDragEnd() {
-        this.appThis.resetCategoryOpacity();
+        this.appThis.resetAllCategoriesOpacity();
     }
 
     selectCategory() {
@@ -520,35 +520,35 @@ class AppListGridButton extends PopupBaseMenuItem {
         //----------ICON---------------------------------------------
         //create icon even if iconSize is 0 so dnd has something to drag
         if (this.app.type === APPTYPE.application) {
-            this.icon = this.app.create_icon_texture(this.appThis.getIconSize());
+            this.icon = this.app.create_icon_texture(this.appThis.getAppIconSize());
         } else if (this.app.type === APPTYPE.place) {
             if (this.app.icon instanceof St.Icon) {
                 this.icon = this.app.icon;
             } else {
-                this.icon = new St.Icon({ gicon: this.app.icon, icon_size: this.appThis.getIconSize()});
+                this.icon = new St.Icon({ gicon: this.app.icon, icon_size: this.appThis.getAppIconSize()});
             }
         } else if (this.app.type === APPTYPE.file) {
             if (this.app.icon) {
-                this.icon = new St.Icon({ gicon: this.app.icon, icon_size: this.appThis.getIconSize()});
+                this.icon = new St.Icon({ gicon: this.app.icon, icon_size: this.appThis.getAppIconSize()});
             } else {//back button
-                this.icon = new St.Icon({ icon_name: 'edit-undo-symbolic', icon_size: this.appThis.getIconSize()});
+                this.icon = new St.Icon({ icon_name: 'edit-undo-symbolic', icon_size: this.appThis.getAppIconSize()});
             }
         } else if (this.app.type === APPTYPE.clearlist) {
             this.icon = new St.Icon({   icon_name: 'edit-clear', icon_type: St.IconType.SYMBOLIC,
-                                        icon_size: this.appThis.getIconSize()});
+                                        icon_size: this.appThis.getAppIconSize()});
         } else if (this.app.type === APPTYPE.provider) {
             if (typeof this.app.icon !== 'string') {
                 this.icon = this.app.icon;
             } else { //emoji
                 const iconLabel = new St.Label({ style_class: '', style: 'color: white; font-size: ' +
-                                                (Math.round(this.appThis.getIconSize() * 0.85)) + 'px;'});
+                                                (Math.round(this.appThis.getAppIconSize() * 0.85)) + 'px;'});
                 iconLabel.get_clutter_text().set_markup(this.app.icon);
                 this.icon = iconLabel;
             }
         }
         if (!this.icon) {
             this.icon = new St.Icon({   icon_name: 'error',
-                                        icon_size: this.appThis.getIconSize(),
+                                        icon_size: this.appThis.getAppIconSize(),
                                         icon_type: St.IconType.FULLCOLOR});
         }
         //--------Label------------------------------------
@@ -559,7 +559,7 @@ class AppListGridButton extends PopupBaseMenuItem {
         }
         this.formatLabel();
         this.iconContainer = new St.BoxLayout();
-        if (this.icon && this.appThis.getIconSize() > 0) {
+        if (this.icon && this.appThis.getAppIconSize() > 0) {
             this.iconContainer.add(this.icon, { x_fill: false, y_fill: false,
                                                 x_align: St.Align.MIDDLE, y_align: St.Align.MIDDLE});
         }
@@ -599,7 +599,7 @@ class AppListGridButton extends PopupBaseMenuItem {
                     handleDragOver: (source) => {
                             if (source.isDraggableApp && source.get_app_id() !== this.app.get_id() &&
                                                             this.appThis.currentCategory === 'favorite_apps') {
-                                this.appThis.resetOpacity();
+                                this.appThis.resetAllAppsOpacity();
                                 this.actor.set_opacity(40);
                                 return DragMotionResult.MOVE_DROP;
                             }
@@ -652,7 +652,7 @@ class AppListGridButton extends PopupBaseMenuItem {
     }
 
     onDragEnd() {
-        this.appThis.resetOpacity();
+        this.appThis.resetAllAppsOpacity();
     }
 
     formatLabel() {
