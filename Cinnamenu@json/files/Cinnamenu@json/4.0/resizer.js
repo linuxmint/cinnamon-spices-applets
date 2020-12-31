@@ -8,7 +8,6 @@ const Cinnamon = imports.gi.Cinnamon;
 const SignalManager = imports.misc.signalManager;
 const System = imports.system;
 
-
 const ZONE_SIZE = 10;
 
 const NOT_DRAGGABLE = 0;
@@ -107,18 +106,12 @@ var PopupResizeHandler = class PopupResizeHandler {
         if (this.inhibit_resizing) {
             return Clutter.EVENT_PROPAGATE;
         }
-
-        if (this.edges.left == this.edges.right) {
-            // This can't be done in init because the workarea hasn't been calculated by muffin yet.
-            // Any further updates will be done at _drag_begin.
-            this._collect_work_area_edges();
-        }
+        this._collect_work_area_edges();
 
         let l, r, t, b = false;
         let cursor = 0;
 
-        let x, y;
-        [x, y] = event.get_coords();
+        let [x, y] = event.get_coords();
         // log(`motion! ${x}, ${y} ---- actor: ${this.actor.x}, ${this.actor.y}, ${this.actor.width}x${this.actor.height}`);
 
         const oversized_height = this.actor.height >= this.workAreaHeight;
@@ -126,26 +119,22 @@ var PopupResizeHandler = class PopupResizeHandler {
 
         if (this.in_top_resize_zone (x, y, oversized_height)) {
             t = true;
-            cursor = Cinnamon.Cursor.RESIZE_TOP;
             this._current_resize_direction |= TOP_EDGE_DRAGGABLE;
         } else
         if (this.in_bottom_resize_zone (x, y, oversized_height)) {
             b = true;
-            cursor = Cinnamon.Cursor.RESIZE_BOTTOM;
             this._current_resize_direction |= BOTTOM_EDGE_DRAGGABLE;
         }
         if (this.in_left_resize_zone (x, y, oversized_width)) {
             l = true;
-            cursor = Cinnamon.Cursor.RESIZE_LEFT;
             this._current_resize_direction |= LEFT_EDGE_DRAGGABLE;
         } else
         if (this.in_right_resize_zone (x, y, oversized_width)) {
             r = true;
-            cursor = Cinnamon.Cursor.RESIZE_RIGHT;
             this._current_resize_direction |= RIGHT_EDGE_DRAGGABLE;
         }
 
-        if (![l, r, t, b].includes(true)) {
+        if (!(t || b || l || r)) {
             this._current_resize_direction = NOT_DRAGGABLE;
             this._draggable.inhibit = true;
             global.unset_cursor();
@@ -156,15 +145,20 @@ var PopupResizeHandler = class PopupResizeHandler {
 
         if (t && l) {
             cursor = Cinnamon.Cursor.RESIZE_TOP_LEFT;
-        } else
-        if (t && r) {
+        } else if (t && r) {
             cursor = Cinnamon.Cursor.RESIZE_TOP_RIGHT;
-        } else
-        if (b && l) {
+        } else if (b && l) {
             cursor = Cinnamon.Cursor.RESIZE_BOTTOM_LEFT;
-        } else
-        if (b && r) {
+        } else if (b && r) {
             cursor = Cinnamon.Cursor.RESIZE_BOTTOM_RIGHT;
+        } else if (t) {
+            cursor = Cinnamon.Cursor.RESIZE_TOP;
+        } else if (b) {
+            cursor = Cinnamon.Cursor.RESIZE_BOTTOM;
+        } else if (l) {
+            cursor = Cinnamon.Cursor.RESIZE_LEFT;
+        } else if (r) {
+            cursor = Cinnamon.Cursor.RESIZE_RIGHT;
         }
 
         global.set_cursor (cursor);
@@ -222,7 +216,16 @@ var PopupResizeHandler = class PopupResizeHandler {
         const new_user_height = this.init_user_height + delta_height;
         this.callback(new_user_width, new_user_height);
 
-        this.poll_timer_id = Mainloop.timeout_add(15, Lang.bind(this, this._poll_timeout));
+        //cinnamon sometimes crashes when the time_out occurs while cjs is in garbage collection.
+        //To reduce the chance of this, 1ms is used so that gc occurs while
+        //cinnamenu's code is being run. And a maximum drag time of 20seconds is because the
+        //crashes almost always happens 25+ seconds after drag start.
+        if (Date.now() < this.dragStartTime + 20000) {
+            this.poll_timer_id = Mainloop.timeout_add(1, Lang.bind(this, this._poll_timeout));
+        } else {
+            this.poll_timer_id = 0;
+            this.stop_drag();
+        }
         return GLib.SOURCE_REMOVE;
     }
 
@@ -243,8 +246,9 @@ var PopupResizeHandler = class PopupResizeHandler {
         this.drag_start_size = {width: this.actor.width, height: this.actor.height};
         this.init_user_width = this.get_user_width();
         this.init_user_height = this.get_user_height();
+        this.dragStartTime = Date.now();
 
-        this.poll_timer_id = Mainloop.timeout_add(15, Lang.bind(this, this._poll_timeout));
+        this.poll_timer_id = Mainloop.timeout_add(5, Lang.bind(this, this._poll_timeout));
     }
 
     stop_drag() {

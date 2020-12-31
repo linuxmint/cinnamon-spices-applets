@@ -43,7 +43,6 @@ class CinnamenuApplet extends TextIconApplet {
         this.privacy_settings = new Gio.Settings({schema_id: 'org.cinnamon.desktop.privacy'});
         this.appFavorites = getAppFavorites();
         this.recentEnabled = this.privacy_settings.get_boolean(REMEMBER_RECENT_KEY);
-        this.favoriteApps = this.appFavorites.getFavorites();
         this.currentCategory = 'all';
         this.gpu_offload_supported = Main.gpu_offload_supported;
         this.isBumblebeeInstalled = GLib.file_test('/usr/bin/optirun', GLib.FileTest.EXISTS);
@@ -143,11 +142,11 @@ class CinnamenuApplet extends TextIconApplet {
         let columns = Math.floor(gridWidth / (130 * global.ui_scale));
         let columnWidth = Math.floor(gridWidth / columns)
         //bigger if large icons
-        //width = Math.max(width, this.getIconSize() * this.settings.appsGridColumnCount * 1.5);
+        //width = Math.max(width, this.getAppIconSize() * this.settings.appsGridColumnCount * 1.5);
         return {columnWidth: columnWidth, columns: columns};
     }
 
-    getIconSize() {
+    getAppIconSize() {
         if (this.settings.applicationsViewMode === ApplicationsViewModeLIST) {
             return this.settings.appsListIconSize;
         } else {
@@ -349,7 +348,6 @@ class CinnamenuApplet extends TextIconApplet {
     }
 
     onFavoritesChanged() {
-        this.favoriteApps = this.appFavorites.getFavorites();
         // Check if the menu has been rendered at least once
         if (this.appsView) {
             this.sidebar.populate();
@@ -365,7 +363,7 @@ class CinnamenuApplet extends TextIconApplet {
                     if (button) {
                         this.scrollToButton(button);
                     }
-                    //this.resetOpacity();
+                    //this.resetAllAppsOpacity();
                     this.dragging = false;
                 } });*/
     }
@@ -417,7 +415,7 @@ class CinnamenuApplet extends TextIconApplet {
         const newIndex = categories.indexOf(id2);
         categories.splice(oldIndex, 1);
         this.settings.categories = categories.slice(0, newIndex).concat([id1]).concat(categories.slice(newIndex));
-        this.resetCategoryOpacity();
+        this.resetAllCategoriesOpacity();
         this.categories.update();
         this.categoriesView.populate();
         /*this.categories.buttons.forEach( categoryButton => {
@@ -429,11 +427,11 @@ class CinnamenuApplet extends TextIconApplet {
         this.setActiveCategory(this.currentCategory);
     }
 
-    resetOpacity() {
+    resetAllAppsOpacity() {
         this.appsView.getActiveContainer().get_children().forEach( child => child.set_opacity(255) );
     }
 
-    resetCategoryOpacity() {
+    resetAllCategoriesOpacity() {
         this.categories.buttons.forEach( (button) => button.actor.set_opacity(255) );
     }
 
@@ -531,15 +529,15 @@ class CinnamenuApplet extends TextIconApplet {
     }
 
     onBoxResized(userWidth, userHeight){
-        if (!userWidth || !userHeight) {
-            global.log("userWidth invalid",userWidth,userHeight);
-            return;
-        }
-
         this.updateMenuHeight(userHeight);
         this.updateMenuWidth(userWidth);
         if (this.settings.applicationsViewMode === ApplicationsViewModeGRID) {
-            this.setActiveCategory(this.currentCategory);
+            if (this.previousColumns === this.getGridValues().columns) {
+                this.appsView.applicationsGridBox.get_children().forEach(actor =>
+                                                        actor.width = this.getGridValues().columnWidth );
+            } else {
+                this.setActiveCategory(this.currentCategory);
+            }
         }
     }
 
@@ -1112,7 +1110,7 @@ class CinnamenuApplet extends TextIconApplet {
                             name: _('Solution:') + ' ' + ans,
                             description: _('Click to copy'),
                             icon: new St.Icon({ gicon: new Gio.FileIcon({ file: calcIcon }),
-                                                                        icon_size: this.getIconSize() }),
+                                                                        icon_size: this.getAppIconSize() }),
                             activate: () => {   const clipboard = St.Clipboard.get_default();
                                                 clipboard.set_text(St.ClipboardType.CLIPBOARD, ans.toString());}
                          });
@@ -1128,7 +1126,7 @@ class CinnamenuApplet extends TextIconApplet {
                                 description: '',
                                 icon: new St.Icon({ gicon: new Gio.FileIcon({
                                             file: Gio.file_new_for_path(__meta.path + '/' + iconName)}),
-                                            icon_size: this.getIconSize() }),
+                                            icon_size: this.getAppIconSize() }),
                                 activate: () => {Util.spawnCommandLineAsync(
                                         '/usr/bin/xdg-open https://' + url + encodeURIComponent(text));}
                             } );
@@ -1173,15 +1171,15 @@ class CinnamenuApplet extends TextIconApplet {
                             providerResult.activate = provider.on_result_selected;
                             providerResult.score = 0.1;
                             if (providerResult.icon) {
-                                providerResult.icon.icon_size = this.getIconSize();
+                                providerResult.icon.icon_size = this.getAppIconSize();
                             } else if (providerResult.icon_app){
                                 providerResult.icon = providerResult.icon_app.create_icon_texture(
-                                                                                            this.getIconSize());
+                                                                                            this.getAppIconSize());
                             } else if (providerResult.icon_filename){
                                 providerResult.icon = new St.Icon({
                                       gicon: new Gio.FileIcon({
                                                 file: Gio.file_new_for_path(providerResults[i].icon_filename)}),
-                                                icon_size: this.getIconSize() });
+                                                icon_size: this.getAppIconSize() });
                             }
                         });
                         if (!this.searchActive) {
@@ -1246,6 +1244,8 @@ class CinnamenuApplet extends TextIconApplet {
         } else {
             this.appsView.applicationsGridBox.show();
         }
+
+        this.previousColumns = this.getGridValues().columns;
     }
 //--------------------
     initDisplay() {
@@ -1621,11 +1621,12 @@ class Apps {
                                             1 : (a.name.toLowerCase() < b.name.toLowerCase()) ? -1 : 0;  });
             }
         });
-        const keys = Object.keys(this.appsByCategory);
+
         let all = [];
-        keys.forEach(key => {   if (key !== 'all') {
-                                    all = all.concat(this.appsByCategory[key]);
-                                } });
+        Object.keys(this.appsByCategory).forEach(key => {
+                                            if (key !== 'all') {
+                                                all = all.concat(this.appsByCategory[key]);
+                                            } });
 
         const uniqueSet = new Set();
         this.appsByCategory.all = [];
@@ -1735,7 +1736,7 @@ class Apps {
     }
 
     listFavoriteApps() {
-        let res = this.appThis.favoriteApps;
+        let res = this.appThis.appFavorites.getFavorites();
 
         res.forEach(favApp => {
             const obj = favApp.hasOwnProperty('item') ? favApp.item : favApp;
@@ -1810,9 +1811,9 @@ class Apps {
             if (selectedAppId === "home" || selectedAppId === "desktop" || selectedAppId === "connect") {
                 selectedAppId = place.name;
             }
-            let icon = place.iconFactory(this.appThis.getIconSize());
+            let icon = place.iconFactory(this.appThis.getAppIconSize());
             if (!icon) {
-                icon = new St.Icon({ icon_name: 'folder', icon_size: this.appThis.getIconSize()});
+                icon = new St.Icon({ icon_name: 'folder', icon_size: this.appThis.getAppIconSize()});
             }
             place.icon = icon;
             place.type = APPTYPE.place;
