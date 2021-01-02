@@ -5,7 +5,8 @@
     "width": 800,
     "pages": [
       "page1",
-      "page2"
+      "page2",
+      "page3"
     ],
     "page1": {
       "type": "page",
@@ -16,9 +17,15 @@
     },
     "page2": {
       "type": "page",
-      "title": "Icon",
+      "title": "Appearance",
       "sections": [
-        "section2",
+        "section2"
+      ]
+    },
+    "page3": {
+      "type": "page",
+      "title": "Audio Player",
+      "sections": [
         "section3"
       ]
     },
@@ -26,22 +33,25 @@
       "type": "section",
       "title": "Radio",
       "keys": [
-        "tree", "streamurl-button", "radiolist-button"
+        "tree",
+        "streamurl-button",
+        "radiolist-button"
       ]
     },
     "section2": {
       "type": "section",
       "title": "Icon",
       "keys": [
-        "icon-type"
+        "icon-type",
+        "color-on"
       ]
     },
     "section3": {
       "type": "section",
-      "title": "Symbolic Icon Color",
-      "dependency": "icon-type=SYMBOLIC",
+      "title": "Volume",
       "keys": [
-        "color-on"
+        "max-volume",
+        "initial-volume"
       ]
     }
   },
@@ -80,17 +90,17 @@
       }
     ]
   },
-  "streamurl-button" : {
-    "type" : "button",
-    "description" : "Open radio stream URL search engine",
-    "callback" : "on_streamurl_button_pressed",
-    "tooltip" : "Opens a website, which helps you to determine radio stream URLs."
+  "streamurl-button": {
+    "type": "button",
+    "description": "Open radio stream URL search engine",
+    "callback": "on_streamurl_button_pressed",
+    "tooltip": "Opens a website, which helps you to determine radio stream URLs."
   },
-  "radiolist-button" : {
-    "type" : "button",
-    "description" : "Show URL-list of radio stations",
-    "callback" : "on_radiolist_button_pressed",
-    "tooltip" : "Opens a website, which lists URLs of radio stations."
+  "radiolist-button": {
+    "type": "button",
+    "description": "Show URL-list of radio stations",
+    "callback": "on_radiolist_button_pressed",
+    "tooltip": "Opens a website, which lists URLs of radio stations."
   },
   "icon-type": {
     "type": "combobox",
@@ -105,6 +115,24 @@
   "color-on": {
     "type": "colorchooser",
     "default": "#73d216",
+    "dependency": "icon-type=SYMBOLIC",
     "description": "Color of Symbolic Icon when playing a radio"
+  },
+  "max-volume": {
+    "type": "spinbutton",
+    "default": 130,
+    "min": 50,
+    "max": 200,
+    "step": 5,
+    "description": "Maximum Volume"
+  },
+  "initial-volume": {
+    "type": "spinbutton",
+    "default": 50,
+    "min": 5,
+    "max": 200,
+    "step": 5,
+    "description": "Initial Volume",
+    "tooltip": "The initial volume is applied when clicking on a radio stream and no other radio stream is already running"
   }
 }

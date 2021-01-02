@@ -11,6 +11,9 @@ const Gtk = imports.gi.Gtk;
 const St = imports.gi.St;
 const Gio = imports.gi.Gio;
 
+const { MpvPlayerHandler } = require('./mpvPlayerHandler')
+
+
 const UUID = "radio@driglu4it";
 
 Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
@@ -39,24 +42,37 @@ MyApplet.prototype = {
     this.settings = new Settings.AppletSettings(this, UUID, instance_id);
 
     // bind properties 
-    this.settings.bindProperty(Settings.BindingDirection.IN, "icon-type", "icon_type", this.set_icon, null);
-    this.settings.bindProperty(Settings.BindingDirection.IN, "color-on", "color_on", this.on_color_changed, null);
-    this.settings.bindProperty(Settings.BindingDirection.IN, "tree", "channel_list", this.on_channel_list_update, null);
+    // Be aware that when one setting is changed, all binded methods are called (e.g. if a channel is added in the settings, also the method for setting the symbolic icon color is called)
+    this.settings.bind("icon-type", "icon_type", this.set_icon);
+    this.settings.bind("color-on", "color_on", this.on_color_changed);
+    this.settings.bind("tree", "channel_list", this.on_channel_list_update);
+    this.settings.bind("max-volume", "max_volume", this.on_max_volume_changed);
+    this.settings.bind("initial-volume", "initial_volume", this.on_initial_volume_changed);
 
     this.appletPath = `${GLib.get_home_dir()}/.local/share/cinnamon/applets/${UUID}`;
-    this.mpvMprisPluginPath = this.appletPath + '/.mpris.so';
+    const configPath = `${GLib.get_home_dir()}/.cinnamon/configs/${UUID}`;
 
     // getting the channel which is running at start of applet (e.g. when restarting cinnamon)
-    const channel = await this.getRunningChannel()
-    this.createUpdateMenu({ currentChannel: channel })
+    const runningChannelUrl = await MpvPlayerHandler.getRunningRadioUrl()
+    const initialChannel = this.getChannel({ channelUrl: runningChannelUrl })
 
+    // create Gui
+    this.set_icon();
+    this.setIconColor({ radioPlaying: initialChannel })
+    this.setTooltip({ channel: initialChannel })
+    this.createMenu({ currentChannel: initialChannel })
     this.actor.connect('scroll-event', Lang.bind(this, this.on_mouse_scroll));
-    this.volume = (channel) ? await this.getVolume() : 50
 
-    // The radio needs to be restarted so that we can change the color and tooltip
-    // when radio gets stopped from outside the applet via MPRIS 
-    if (channel) this.startChangeRadioChannel(channel)
+    this.mpvPlayer = new MpvPlayerHandler({
+      mprisPluginPath: configPath + '/.mpris.so',
+      initialChannelUrl: initialChannel.url,
+      onRadioStopped: () => { this.changeSetCurrentMenuItem({ activatedMenuItem: this.stopitem }) },
+      initialVolume: this.initial_volume,
+      maxVolume: this.max_volume
+    })
 
+    // The radio needs to be restarted so that we can change the color and tooltip when the radio gets stopped from outside the applet via MPRIS 
+    if (initialChannel) await this.mpvPlayer.startChangeRadioChannel(initialChannel.url)
   },
 
   on_streamurl_button_pressed() {
@@ -68,36 +84,30 @@ MyApplet.prototype = {
   },
 
   on_color_changed: async function () {
-    const channel = await this.getRunningChannel()
-    this.setIconColor({ radioPlaying: channel })
+    this.setIconColor({ radioPlaying: this.mpvPlayer.channelUrl })
   },
 
   on_channel_list_update: async function () {
-    const channel = await this.getRunningChannel()
-    this.createUpdateMenu({ currentChannel: channel })
-  },
-
-  /**
-   * default icon color is the color of the icon when no stream is running
-   * TODO: when is it not white?
-   */
-  get_default_icon_color: function () {
-    let defaultColor;
-
-    try {
-      let themeNode = this.actor.get_theme_node(); // get_theme_node() fails in constructor! (cause: widget not on stage)
-      let icon_color = themeNode.get_icon_colors();
-      defaultColor = icon_color.foreground.to_string();
-    } catch (e) {
-      defaultColor = "white";
-    }
-
-    return defaultColor;
-
+    this.menu.removeAll();
+    const currentChannel = this.getChannel({ channelUrl: this.mpvPlayer.channelUrl })
+    this.createMenu({ currentChannel: currentChannel })
   },
 
   setIconColor: function ({ radioPlaying }) {
-    const color = (radioPlaying) ? this.color_on : this.get_default_icon_color();
+    // default icon color is the color of the icon when no stream is running
+    let color;
+    if (radioPlaying) {
+      color = this.color_on
+    } else {
+      try {
+        let themeNode = this.actor.get_theme_node(); // get_theme_node() fails in constructor! (cause: widget not on stage)
+        let icon_color = themeNode.get_icon_colors();
+        clor = icon_color.foreground.to_string();
+      } catch (e) {
+        color = "white";
+      }
+    }
+
     this.actor.style = "color: %s;".format(color)
   },
 
@@ -111,134 +121,79 @@ MyApplet.prototype = {
     }
   },
 
+  getChannel({ channelUrl }) {
+    let channel = this.channel_list.find(cnl => cnl.url === channelUrl)
+    if (!channel || channel.inc === false) channel = false
+    return channel
+  },
 
-  on_radio_channel_clicked: function (e, channel) {
-    if (this.currentMenuItem != e) {
+  on_radio_channel_clicked: async function (e, channel) {
+    if (!this.currentMenuItem || this.currentMenuItem != e) {
       this.changeSetCurrentMenuItem({ activatedMenuItem: e, channel: channel })
-      this.startChangeRadioChannel(channel)
+      try {
+        await this.mpvPlayer.startChangeRadioChannel(channel.url)
+      } catch (error) {
+        this.notify_send(_("Can't play  %s") + channel.name + "." + _("Make sure that the URL is valid and you have a stable internet connection. Don't hestitate to open an Issue on Github if the problem persists."))
+        global.log(error)
+        return
+      }
     }
   },
 
-  // create the full popup menu including the icon
-  createUpdateMenu: function ({ currentChannel }) {
-
-    this.menu.removeAll();
-    this.set_icon();
-
+  createMenu: function ({ currentChannel }) {
     this.channel_list.forEach(channel => {
       if (channel.inc === true) {
-        const menuitem = new PopupMenu.PopupMenuItem(channel.name, false);
-        this.menu.addMenuItem(menuitem);
-        menuitem.connect('activate', (e) => {
-          this.on_radio_channel_clicked(e, channel)
-        });
-        if (channel === currentChannel) this.changeSetCurrentMenuItem(
-          { activatedMenuItem: menuitem, channel: channel })
+        const channelItem = new PopupMenu.PopupMenuItem(channel.name, false);
+        this.menu.addMenuItem(channelItem);
+        channelItem.connect('activate', (e) => { this.on_radio_channel_clicked(e, channel) });
+        if (channel === currentChannel) this.setDotToMenuItem({ menuItemWithDot: channelItem })
       }
     });
-
     this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+
+    // stop Item
     this.stopitem = new PopupMenu.PopupMenuItem(_("Stop"), false);
     this.menu.addMenuItem(this.stopitem);
-
-    this.stopitem.connect('activate', () => {
-      this.on_stop_item_clicked();
-    });
+    if (!currentChannel) { this.setDotToMenuItem({ menuItemWithDot: this.stopitem }) }
+    this.stopitem.connect('activate', () => { this.on_stop_item_clicked(); });
   },
 
-  // TODO: actually it should only be stopped the instance of mpv playing the current channel
   on_stop_item_clicked: function () {
-    Util.spawnCommandLine("playerctl --player=mpv stop");
+    this.mpvPlayer.stopRadio()
+  },
+
+  setDotToMenuItem: function ({ menuItemWithDot }) {
+    menuItemWithDot.setShowDot(true);
+    if (this.currentMenuItem) this.currentMenuItem.setShowDot(false)
+    this.currentMenuItem = menuItemWithDot;
+  },
+
+  setTooltip: function ({ channel }) {
+    const tooltipText = channel ? channel.name : "Radio++";
+    this.set_applet_tooltip(_(tooltipText));
   },
 
   // The function is responsible for: 
   // - indicating the current Menu Item with a dot 
   // - setting the text in the tooltip to the current running channel name or "Radio++" if no radio is running.
   // - setting the color of the icon 
-  // - Send notification 
   changeSetCurrentMenuItem: function ({ activatedMenuItem, channel }) {
-    activatedMenuItem.setShowDot(true);
-    if (this.currentMenuItem) this.currentMenuItem.setShowDot(false)
-    this.currentMenuItem = activatedMenuItem;
+    this.setDotToMenuItem({ menuItemWithDot: activatedMenuItem })
+    this.setTooltip({ channel: channel })
 
-    let tooltipText;
-    let radioPlaying;
-    let notificationText;
-
-    if (activatedMenuItem === this.stopitem) {
-      tooltipText = "Radio++";
-      radioPlaying = false;
-      notificationText = "Stop Radio++"
-    } else {
-      tooltipText = channel.name;
-      radioPlaying = true
-      notificationText = `Playing ${channel.name}`
-    }
-
-    this.set_applet_tooltip(_(tooltipText));
+    const radioPlaying = activatedMenuItem === this.stopitem ? false : true
     this.setIconColor({ radioPlaying: radioPlaying });
-    Main.notify(_(notificationText));
-
   },
 
-  // Stops all running media outputs (which can be controlled via MPRIS) - not only potentially running radio streams
-  startChangeRadioChannel: async function (channel) {
-
-    // TODO: error handling
-    Util.spawnCommandLineAsyncIO(`playerctl -a stop & mpv --script=${this.mpvMprisPluginPath} \
-      ${channel.url} --volume=${this.volume} & wait; echo 'stop'`, () => {
-      // this callback function is either called when the stream has been closed or the radio channel has changed
-      // When the radio stream has been closed, it shall be indicated in the applet. It is not sufficient to just
-      // call a function when the stop button is clicked as the radio stream can also be closed with MPRIS control
-      setTimeout(async () => {
-        const newChannel = await this.getRunningChannel();
-        if (!newChannel) { this.changeSetCurrentMenuItem({ activatedMenuItem: this.stopitem }) }
-      }, 100);
-    })
+  on_max_volume_changed: async function () {
+    this.mpvPlayer.maxVolume = this.max_volume
+    await this.mpvPlayer.increaseDecreaseVolume(0)
   },
 
-
-  /**
-   * returns an channel object when: 
-   *  - a stream with url is running with MPV(using the MPRIS plugin) 
-   *  - the stream url is included in the channel list
-   *  - the "show in list" checkbox in the setting is activated for the running channel
-   * 
-   * If one of the above options is not fullyfilled, the function returns false 
-   * 
-   *  Be aware that when the radio channel has changed, there is a short period during 
-   *  which the radio is actually playing but the playerctl request returns no radio 
-   *  anyway.  
-   *
-   * TODO: Error Handling
-   */
-  getRunningChannel: function () {
-    return new Promise((resolve, reject) => {
-
-      Util.spawnCommandLineAsyncIO("playerctl --player=mpv metadata --format '{{ xesam:url }}'", (stdout, stderr) => {
-        if (stderr.trim() == "No players found") {
-          resolve(false)
-        } else {
-          // This is important when somebody is doing the follwoing
-          // 1. starting the radio, 2. open something else in mpv (using the mpris script) 3. turn off radio with mpris control 
-          // In this case the first condition is not met but still it should be returned "false"
-          const channel = this.channel_list.find(channel => channel.url === stdout.trim())
-          if (channel && channel.inc === false) channel = false
-          resolve(channel)
-        }
-      })
-    })
-  },
-
-  // TODO: only get the volume for the mpv instance playing the radio
-  // TODO: error Handling
-  getVolume: function () {
-    return new Promise((resolve, reject) => {
-      Util.spawnCommandLineAsyncIO(`playerctl --player=mpv volume`, (volume) => {
-        // for mpv the volume is between 0 and 100 and for playerctl between 0 and 1
-        resolve(Number(volume) * 100)
-      })
-    })
+  on_initial_volume_changed: function () {
+    if (this.initial_volume > this.max_volume) {
+      this.initial_volume = this.max_volume
+    }
   },
 
   notify_send: function (notification) {
@@ -251,10 +206,10 @@ MyApplet.prototype = {
   },
 
   check_dependencies: function () {
-    if (!Gio.file_new_for_path(this.mpvMprisPluginPath).query_exists(null)) {
+    if (!Gio.file_new_for_path(this.mpvPlayer.mprisPluginPath).query_exists(null)) {
       Util.spawn_async(['python3', this.appletPath + '/download-dialog.py'], Lang.bind(this, function (out) {
         if (out.trim() == 'Continue') {
-          Util.spawnCommandLineAsyncIO(`wget https://github.com/hoyon/mpv-mpris/releases/download/0.5/mpris.so -O ${this.mpvMprisPluginPath}`);
+          Util.spawnCommandLineAsyncIO(`wget https://github.com/hoyon/mpv-mpris/releases/download/0.5/mpris.so -O ${this.mpvPlayer.mprisPluginPath}`);
         }
       }));
       return false;
@@ -280,12 +235,13 @@ MyApplet.prototype = {
     this.settings.finalize();
   },
 
-
-  on_mouse_scroll: function (actor, event) {
+  on_mouse_scroll: async function (actor, event) {
     let direction = event.get_scroll_direction();
-    direction === Clutter.ScrollDirection.UP ? this.volume += 5 : this.volume -= 5
-    Util.spawnCommandLine(`playerctl --player=mpv volume ${this.volume / 100}`)
-  }
+    const volumeChange = direction === Clutter.ScrollDirection.UP ? 5 : -5
+    const volumeChangeable = await this.mpvPlayer.increaseDecreaseVolume(volumeChange)
+
+    if (!volumeChangeable) this.notify_send(_("Can't increase Volume. Volume already at maximum. Change the Maximum Volume in the Settings to further increase the Volume."))
+  },
 };
 
 function main(metadata, orientation, panel_height, instance_id) { // Make sure you collect and pass on instanceId
