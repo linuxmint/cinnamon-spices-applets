@@ -52,7 +52,7 @@ var PressToUserUnits = utils.PressToUserUnits as (hpa: number, units: WeatherPre
 var compassDirection = utils.compassDirection as (deg: number) => string;
 var MPStoUserUnits = utils.MPStoUserUnits as (mps: number, units: WeatherWindSpeedUnits) => string;
 var nonempty = utils.nonempty as (str: string) => boolean;
-var AwareDateString = utils.AwareDateString as (date: Date, locale: string, hours24Format: boolean, tz?: string) => string;
+var AwareDateString = utils.AwareDateString as (date: Date, locale: string, hours24Format: boolean, tz?: string, ignoreMinutes?: boolean) => string;
 var get = utils.get as (p: string[], o: any) => any;
 const delay = utils.delay as (ms: number) => Promise<void>;
 var isCoordinate = utils.isCoordinate as (text: any) => boolean;
@@ -1317,7 +1317,7 @@ class UI {
             const hour = forecasts[index];
             const ui = this._hourlyForecasts[index];
 
-            ui.Hour.text = AwareDateString(hour.date, this.app.currentLocale, config._show24Hours, tz);
+            ui.Hour.text = AwareDateString(hour.date, this.app.currentLocale, config._show24Hours, tz, true);
             ui.Temperature.text = TempToUserConfig(hour.temp, config.TemperatureUnit(), config._tempRussianStyle) + " " + this.unitToUnicode(config.TemperatureUnit());
             ui.Icon.icon_name = (config._useCustomMenuIcons) ? hour.condition.customIcon : hour.condition.icon;
 

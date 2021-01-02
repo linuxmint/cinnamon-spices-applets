@@ -79,6 +79,9 @@ const clearInterval = (id: any) => {
     source_remove(id);
 };
 
+/**
+ * Checks what kind of ToLocaleString is actually supported in JS for Dates
+ */
 var isLocaleStringSupported = (): localeStringSupport => {
     let date = new Date(1565548657987); // Set Date to test support
     try {
@@ -94,23 +97,23 @@ var isLocaleStringSupported = (): localeStringSupport => {
 type localeStringSupport = "none" | "notz" | "full";
 
 var GetDayName = (date: Date, locale: string, tz?: string): string => {
-    let support: localeStringSupport = isLocaleStringSupported();
+    let support = isLocaleStringSupported();
     // No timezone, Date passed in corrected with offset
     if (locale == "c" || locale == null) locale = undefined;
     if (!tz && support == "full") support = "notz";
 
     switch (support) {
         case "full":
-            return date.toLocaleString(locale, { timeZone: tz, weekday: "long" });
+            return date.toLocaleString(locale, { timeZone: tz, weekday: "long", day: 'numeric' });
         case "notz":
             return date.toLocaleString(locale, { timeZone: "UTC", weekday: "long" });
         case "none":
-            return getDayName(date.getUTCDay());;
+            return getDayName(date.getUTCDay());
     }
 }
 
 var GetHoursMinutes = (date: Date, locale: string, hours24Format: boolean, tz?: string): string => {
-    let support: localeStringSupport = isLocaleStringSupported();
+    let support = isLocaleStringSupported();
     if (locale == "c" || locale == null) locale = undefined;
     // No timezone, Date passed in corrected with offset
     if (!tz && support == "full") support = "notz";
@@ -125,15 +128,17 @@ var GetHoursMinutes = (date: Date, locale: string, hours24Format: boolean, tz?: 
     }
 }
 
-var AwareDateString = (date: Date, locale: string, hours24Format: boolean, tz?: string): string => {
-    let support: localeStringSupport = isLocaleStringSupported();
+var AwareDateString = (date: Date, locale: string, hours24Format: boolean, tz?: string, ignoreMinutes?: boolean): string => {
+    let support = isLocaleStringSupported();
     if (locale == "c" || locale == null) locale = undefined; // Ignore unset locales
     let now = new Date();
     let params: any = {
         hour: "numeric",
-        minute: "numeric",
         hour12: !hours24Format
-    };
+	};
+	
+	if (!ignoreMinutes)
+		params.minute = "numeric";
 
     if (date.toDateString() != now.toDateString()) {
         params.month = "short";
@@ -147,10 +152,11 @@ var AwareDateString = (date: Date, locale: string, hours24Format: boolean, tz?: 
     switch (support) {
         case "full":
             // function only accepts undefined if tz is not known
-            if (tz == null || tz == "") tz = undefined;
-            return date.toLocaleString(locale, { timeZone: tz, hour: "numeric", minute: "numeric", hour12: !hours24Format });
+			if (tz == null || tz == "") tz = undefined;
+			params.timeZone = tz;
+            return date.toLocaleString(locale, params);
         case "notz":
-            return date.toLocaleString(locale, { hour: "numeric", minute: "numeric", hour12: !hours24Format });
+            return date.toLocaleString(locale, params);
         case "none":
             return timeToUserUnits(date, hours24Format);  // Displaying only time
     }

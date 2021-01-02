@@ -972,7 +972,7 @@ class UI {
         for (let index = 0; index < max; index++) {
             const hour = forecasts[index];
             const ui = this._hourlyForecasts[index];
-            ui.Hour.text = AwareDateString(hour.date, this.app.currentLocale, config._show24Hours, tz);
+            ui.Hour.text = AwareDateString(hour.date, this.app.currentLocale, config._show24Hours, tz, true);
             ui.Temperature.text = TempToUserConfig(hour.temp, config.TemperatureUnit(), config._tempRussianStyle) + " " + this.unitToUnicode(config.TemperatureUnit());
             ui.Icon.icon_name = (config._useCustomMenuIcons) ? hour.condition.customIcon : hour.condition.icon;
             hour.condition.main = capitalizeFirstLetter(hour.condition.main);

@@ -115,12 +115,11 @@ var GetDayName = function (date, locale, tz) {
         support = "notz";
     switch (support) {
         case "full":
-            return date.toLocaleString(locale, { timeZone: tz, weekday: "long" });
+            return date.toLocaleString(locale, { timeZone: tz, weekday: "long", day: 'numeric' });
         case "notz":
             return date.toLocaleString(locale, { timeZone: "UTC", weekday: "long" });
         case "none":
             return getDayName(date.getUTCDay());
-            ;
     }
 };
 var GetHoursMinutes = function (date, locale, hours24Format, tz) {
@@ -138,16 +137,17 @@ var GetHoursMinutes = function (date, locale, hours24Format, tz) {
             return timeToUserUnits(date, hours24Format);
     }
 };
-var AwareDateString = function (date, locale, hours24Format, tz) {
+var AwareDateString = function (date, locale, hours24Format, tz, ignoreMinutes) {
     var support = isLocaleStringSupported();
     if (locale == "c" || locale == null)
         locale = undefined;
     var now = new Date();
     var params = {
         hour: "numeric",
-        minute: "numeric",
         hour12: !hours24Format
     };
+    if (!ignoreMinutes)
+        params.minute = "numeric";
     if (date.toDateString() != now.toDateString()) {
         params.month = "short";
         params.day = "numeric";
@@ -159,9 +159,10 @@ var AwareDateString = function (date, locale, hours24Format, tz) {
         case "full":
             if (tz == null || tz == "")
                 tz = undefined;
-            return date.toLocaleString(locale, { timeZone: tz, hour: "numeric", minute: "numeric", hour12: !hours24Format });
+            params.timeZone = tz;
+            return date.toLocaleString(locale, params);
         case "notz":
-            return date.toLocaleString(locale, { hour: "numeric", minute: "numeric", hour12: !hours24Format });
+            return date.toLocaleString(locale, params);
         case "none":
             return timeToUserUnits(date, hours24Format);
     }
