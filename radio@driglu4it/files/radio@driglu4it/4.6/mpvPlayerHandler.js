@@ -31,7 +31,7 @@ class MpvPlayerHandler {
     // Stops all running media outputs (which can be controlled via MPRIS) - not only potentially running radio streams
     async startChangeRadioChannel(channelUrl) {
         this.channelUrl = channelUrl
-        const volume = await this.getVolume()
+        const volume = Math.min(await this.getVolume(), this.maxVolume)
         let mpvStdout = null
 
         Util.spawnCommandLineAsyncIO(`playerctl -a stop`, () => {
@@ -66,6 +66,8 @@ class MpvPlayerHandler {
 
         if (newVolume > this.maxVolume) {
             volumeChangeable = false
+            // the volume can be above the max volume when the max volume has changed in the settings
+            Util.spawnCommandLine(`playerctl --player=mpv volume ${this.maxVolume} `)
         } else {
             Util.spawnCommandLine(`playerctl --player=mpv volume ${newVolume / 100} `)
             volumeChangeable = true
