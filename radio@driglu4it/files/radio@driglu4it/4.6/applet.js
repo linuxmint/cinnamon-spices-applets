@@ -133,7 +133,7 @@ MyApplet.prototype = {
       try {
         await this.mpvPlayer.startChangeRadioChannel(channel.url)
       } catch (error) {
-        this.notify_send(_("Can't play  %s") + channel.name + "." + _("Make sure that the URL is valid and you have a stable internet connection. Don't hestitate to open an Issue on Github if the problem persists."))
+        this.notify_send(_("Can't play  %s").format(channel.name) + ". " + _("Make sure that the URL is valid and you have a stable internet connection. Don't hestitate to open an Issue on Github if the problem persists."))
         global.log(error)
         return
       }

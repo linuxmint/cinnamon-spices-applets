@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-02 14:39+0100\n"
-"PO-Revision-Date: 2021-01-02 15:00+0100\n"
+"POT-Creation-Date: 2021-01-02 14:59+0100\n"
+"PO-Revision-Date: 2021-01-02 15:11+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de\n"
@@ -202,16 +202,6 @@ msgid ""
 msgstr ""
 "Die anfängliche Lautstärke wird verwendet, wenn beim Klicken auf eine "
 "Radiostation noch keine andere Radiostation abgespielt wird. "
-
-#. 4.6->settings-schema.json->initial-volume1->description
-msgid "Inital volume of radio"
-msgstr ""
-
-#. 4.6->settings-schema.json->initial-volume1->tooltip
-msgid ""
-"The inital volume is applied when clicking on a radio stream and no other "
-"radio stream is already running"
-msgstr ""
 
 #. 3.0->settings-schema.json->section3->title
 msgid "Symbolic Icon Color"
