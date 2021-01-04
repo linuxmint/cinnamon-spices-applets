@@ -34,6 +34,4 @@ to get this feature.
 - Adding an option to show the application volume in the tooltip 
 - Adding an option to show the title of the radio channel in the panel 
 - Adding an option to show the last played radio channel italic
-- Better Error Handling (e.g. show a notification when radio url is 
-invalid)
 - Add a option "copy title" in the right click menu

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-21 22:43+0100\n"
+"POT-Creation-Date: 2021-01-02 14:59+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,28 +17,44 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
+#: 4.6/applet.js:136
+#, javascript-format
+msgid "Can't play  %s"
+msgstr ""
+
+#: 4.6/applet.js:136
+msgid ""
+"Make sure that the URL is valid and you have a stable internet connection. "
+"Don't hestitate to open an Issue on Github if the problem persists."
+msgstr ""
+
+#: 4.6/applet.js:155 3.0/applet.js:140
+msgid "Stop"
+msgstr ""
+
+#: 4.6/applet.js:205 3.0/applet.js:183
+#, javascript-format
+msgid "Please install the '%s' package."
+msgstr ""
+
+#: 4.6/applet.js:243
+msgid ""
+"Can't increase Volume. Volume already at maximum. Change the Maximum Volume "
+"in the Settings to further increase the Volume."
+msgstr ""
+
 #. metadata.json->name
 #: 3.0/applet.js:99 3.0/applet.js:117 3.0/applet.js:143 3.0/applet.js:153
-#: 4.6/applet.js:113 4.6/applet.js:145 4.6/applet.js:152
 msgid "Radio++"
 msgstr ""
 
-#: 3.0/applet.js:130 4.6/applet.js:126
+#: 3.0/applet.js:130
 #, javascript-format
 msgid "Playing %s"
 msgstr ""
 
-#: 3.0/applet.js:140 4.6/applet.js:136
-msgid "Stop"
-msgstr ""
-
-#: 3.0/applet.js:149 4.6/applet.js:158
+#: 3.0/applet.js:149
 msgid "Stop Radio++"
-msgstr ""
-
-#: 3.0/applet.js:183 4.6/applet.js:215
-#, javascript-format
-msgid "Please install the '%s' package."
 msgstr ""
 
 #: download-dialog.py:36
@@ -72,86 +88,110 @@ msgstr ""
 msgid "A simple radio applet for Cinnamon"
 msgstr ""
 
-#. 3.0->settings-schema.json->page1->title
-#. 3.0->settings-schema.json->tree->description
 #. 4.6->settings-schema.json->page1->title
 #. 4.6->settings-schema.json->tree->description
+#. 3.0->settings-schema.json->page1->title
+#. 3.0->settings-schema.json->tree->description
 msgid "List of stations"
 msgstr ""
 
-#. 3.0->settings-schema.json->page2->title
-#. 3.0->settings-schema.json->section2->title
 #. 4.6->settings-schema.json->page2->title
-#. 4.6->settings-schema.json->section2->title
-msgid "Icon"
+msgid "Appearance"
 msgstr ""
 
-#. 3.0->settings-schema.json->section1->title
+#. 4.6->settings-schema.json->page3->title
+msgid "Audio Player"
+msgstr ""
+
 #. 4.6->settings-schema.json->section1->title
+#. 3.0->settings-schema.json->section1->title
 msgid "Radio"
 msgstr ""
 
-#. 3.0->settings-schema.json->section3->title
-#. 4.6->settings-schema.json->section3->title
-msgid "Symbolic Icon Color"
+#. 4.6->settings-schema.json->section2->title
+#. 3.0->settings-schema.json->page2->title
+#. 3.0->settings-schema.json->section2->title
+msgid "Icon"
 msgstr ""
 
-#. 3.0->settings-schema.json->tree->columns->title
+#. 4.6->settings-schema.json->section3->title
+msgid "Volume"
+msgstr ""
+
 #. 4.6->settings-schema.json->tree->columns->title
+#. 3.0->settings-schema.json->tree->columns->title
 msgid "Show in list"
 msgstr ""
 
-#. 3.0->settings-schema.json->tree->columns->title
 #. 4.6->settings-schema.json->tree->columns->title
+#. 3.0->settings-schema.json->tree->columns->title
 msgid "Title"
 msgstr ""
 
-#. 3.0->settings-schema.json->tree->columns->title
 #. 4.6->settings-schema.json->tree->columns->title
+#. 3.0->settings-schema.json->tree->columns->title
 msgid "URL"
 msgstr ""
 
-#. 3.0->settings-schema.json->streamurl-button->description
 #. 4.6->settings-schema.json->streamurl-button->description
+#. 3.0->settings-schema.json->streamurl-button->description
 msgid "Open radio stream URL search engine"
 msgstr ""
 
-#. 3.0->settings-schema.json->streamurl-button->tooltip
 #. 4.6->settings-schema.json->streamurl-button->tooltip
+#. 3.0->settings-schema.json->streamurl-button->tooltip
 msgid "Opens a website, which helps you to determine radio stream URLs."
 msgstr ""
 
-#. 3.0->settings-schema.json->radiolist-button->description
 #. 4.6->settings-schema.json->radiolist-button->description
+#. 3.0->settings-schema.json->radiolist-button->description
 msgid "Show URL-list of radio stations"
 msgstr ""
 
-#. 3.0->settings-schema.json->radiolist-button->tooltip
 #. 4.6->settings-schema.json->radiolist-button->tooltip
+#. 3.0->settings-schema.json->radiolist-button->tooltip
 msgid "Opens a website, which lists URLs of radio stations."
 msgstr ""
 
-#. 3.0->settings-schema.json->icon-type->description
 #. 4.6->settings-schema.json->icon-type->description
+#. 3.0->settings-schema.json->icon-type->description
 msgid "Type"
 msgstr ""
 
-#. 3.0->settings-schema.json->icon-type->options
 #. 4.6->settings-schema.json->icon-type->options
+#. 3.0->settings-schema.json->icon-type->options
 msgid "Symbolic Icon"
 msgstr ""
 
-#. 3.0->settings-schema.json->icon-type->options
 #. 4.6->settings-schema.json->icon-type->options
+#. 3.0->settings-schema.json->icon-type->options
 msgid "Full Color Icon"
 msgstr ""
 
-#. 3.0->settings-schema.json->icon-type->options
 #. 4.6->settings-schema.json->icon-type->options
+#. 3.0->settings-schema.json->icon-type->options
 msgid "Bicolor Icon"
 msgstr ""
 
-#. 3.0->settings-schema.json->color-on->description
 #. 4.6->settings-schema.json->color-on->description
+#. 3.0->settings-schema.json->color-on->description
 msgid "Color of Symbolic Icon when playing a radio"
+msgstr ""
+
+#. 4.6->settings-schema.json->max-volume->description
+msgid "Maximum Volume"
+msgstr ""
+
+#. 4.6->settings-schema.json->initial-volume->description
+msgid "Initial Volume"
+msgstr ""
+
+#. 4.6->settings-schema.json->initial-volume->tooltip
+msgid ""
+"The initial volume is applied when clicking on a radio stream and no other "
+"radio stream is already running"
+msgstr ""
+
+#. 3.0->settings-schema.json->section3->title
+msgid "Symbolic Icon Color"
 msgstr ""
