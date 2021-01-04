@@ -89,6 +89,7 @@ MyApplet.prototype = {
 
   on_channel_list_update: async function () {
     this.menu.removeAll();
+    this.currentMenuItem = null;
     const currentChannel = this.getChannel({ channelUrl: this.mpvPlayer.channelUrl })
     this.createMenu({ currentChannel: currentChannel })
   },
