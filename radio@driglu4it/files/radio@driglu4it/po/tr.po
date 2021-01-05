@@ -7,52 +7,211 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-08 12:03+0300\n"
-"PO-Revision-Date: 2017-11-08 12:05+0300\n"
-"Language-Team: Linux Mint Türkiye\n"
+"POT-Creation-Date: 2021-01-02 14:59+0100\n"
+"PO-Revision-Date: 2021-01-05 11:34+0300\n"
+"Last-Translator: Serkan ÖNDER <serkanonder@outlook.com>\n"
+"Language-Team: \n"
+"Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.7.1\n"
-"Last-Translator: \n"
+"X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: tr\n"
 
-#. radio@driglu4it->metadata.json->name
-#: applet.js:25 applet.js:48
+#: 4.6/applet.js:136
+#, javascript-format
+msgid "Can't play  %s"
+msgstr "Oynatılamıyor  %s"
+
+#: 4.6/applet.js:136
+msgid ""
+"Make sure that the URL is valid and you have a stable internet connection. "
+"Don't hestitate to open an Issue on Github if the problem persists."
+msgstr ""
+"URL'nin geçerli olduğundan ve sabit bir internet bağlantınız olduğundan "
+"emin olun. Sorun devam ederse Github'da bir Sorun açmaktan çekinmeyin."
+
+#: 4.6/applet.js:155 3.0/applet.js:140
+msgid "Stop"
+msgstr "Durdur"
+
+#: 4.6/applet.js:205 3.0/applet.js:183
+#, javascript-format
+msgid "Please install the '%s' package."
+msgstr "Lütfen '%s' paketini kurun."
+
+#: 4.6/applet.js:243
+msgid ""
+"Can't increase Volume. Volume already at maximum. Change the Maximum Volume "
+"in the Settings to further increase the Volume."
+msgstr ""
+"Sesi artıramıyorum. Hacim zaten maksimumda. Sesi daha da artırmak için "
+"Ayarlar'dan Maksimum Sesi değiştirin."
+
+#. metadata.json->name
+#: 3.0/applet.js:99 3.0/applet.js:117 3.0/applet.js:143 3.0/applet.js:153
 msgid "Radio++"
 msgstr "Radyo++"
 
-#: applet.js:39
+#: 3.0/applet.js:130
 #, javascript-format
 msgid "Playing %s"
-msgstr "%s çalıyor"
+msgstr "Çalıyor %s"
 
-#: applet.js:46 applet.js:51
-msgid "Stop"
-msgstr "Dur"
+#: 3.0/applet.js:149
+msgid "Stop Radio++"
+msgstr "Radyo++ Durduruldu"
 
-#. radio@driglu4it->settings-schema.json->section1->title
-msgid "Radio"
-msgstr "Radyo"
+#: download-dialog.py:36
+msgid "Download Confirmation Dialog"
+msgstr "İndirme İşlemi Onayı"
 
-#. radio@driglu4it->settings-schema.json->page1->title
-#. radio@driglu4it->settings-schema.json->tree->description
+#: download-dialog.py:39
+#, python-format
+msgid ""
+"The radio applet depends on the '%s' plugin. It's a 3rd party plugin for "
+"mpv, which allows controlling the radio player with the sound applet."
+msgstr ""
+"Radyo uygulaması '%s' eklentisine bağlıdır. Radyo oynatıcıyı ses "
+"uygulamasıyla kontrol etmeye izin veren mpv için 3. taraf bir eklentidir."
+
+#: download-dialog.py:39
+msgid "Do you want to proceed the download at your own risk?"
+msgstr "İndirme işlemine kendi sorumluluğunuzda devam etmek ister misiniz?"
+
+#: download-dialog.py:40
+msgid "Cancel download"
+msgstr "İndirmeyi iptal et"
+
+#: download-dialog.py:41
+msgid "More info"
+msgstr "Daha fazla bilgi"
+
+#: download-dialog.py:42
+msgid "Download plugin at my own risk"
+msgstr "Eklentiyi indir"
+
+#. metadata.json->description
+msgid "A simple radio applet for Cinnamon"
+msgstr "Cinnamon için basit bir radyo uygulaması"
+
+#. 4.6->settings-schema.json->page1->title
+#. 4.6->settings-schema.json->tree->description
+#. 3.0->settings-schema.json->page1->title
+#. 3.0->settings-schema.json->tree->description
 msgid "List of stations"
 msgstr "İstasyonların listesi"
 
-#. radio@driglu4it->settings-schema.json->tree->columns->title
+#. 4.6->settings-schema.json->page2->title
+msgid "Appearance"
+msgstr "Görünüm"
+
+#. 4.6->settings-schema.json->page3->title
+msgid "Audio Player"
+msgstr "Ses oynatıcı"
+
+#. 4.6->settings-schema.json->section1->title
+#. 3.0->settings-schema.json->section1->title
+msgid "Radio"
+msgstr "Radyo"
+
+#. 4.6->settings-schema.json->section2->title
+#. 3.0->settings-schema.json->page2->title
+#. 3.0->settings-schema.json->section2->title
+msgid "Icon"
+msgstr "Simge"
+
+#. 4.6->settings-schema.json->section3->title
+msgid "Volume"
+msgstr "Ses Düzeyi"
+
+#. 4.6->settings-schema.json->tree->columns->title
+#. 3.0->settings-schema.json->tree->columns->title
+msgid "Show in list"
+msgstr "Listede göster"
+
+#. 4.6->settings-schema.json->tree->columns->title
+#. 3.0->settings-schema.json->tree->columns->title
 msgid "Title"
 msgstr "Başlık"
 
-#. radio@driglu4it->settings-schema.json->tree->columns->title
+#. 4.6->settings-schema.json->tree->columns->title
+#. 3.0->settings-schema.json->tree->columns->title
 msgid "URL"
 msgstr "Adres"
 
-#. radio@driglu4it->metadata.json->description
-msgid ""
-"This simple radio for Cinnamon. Require moc player. In setting you may add, "
-"edit and remove stations."
+#. 4.6->settings-schema.json->streamurl-button->description
+#. 3.0->settings-schema.json->streamurl-button->description
+msgid "Open radio stream URL search engine"
+msgstr "Radyo akışı URL arama motorunu aç"
+
+#. 4.6->settings-schema.json->streamurl-button->tooltip
+#. 3.0->settings-schema.json->streamurl-button->tooltip
+msgid "Opens a website, which helps you to determine radio stream URLs."
 msgstr ""
-"Bu Cinnamon için basit bir radyo uygulamacığıdır. Moc player gerektirir. "
-"Ayarlardan radyo istasyonu ekleme, silme ve düzenlemesi yapılabilir."
+"Radyo akışı URL'lerini belirlemenize yardımcı olan bir web sitesi açar."
+
+#. 4.6->settings-schema.json->radiolist-button->description
+#. 3.0->settings-schema.json->radiolist-button->description
+msgid "Show URL-list of radio stations"
+msgstr "Radyo istasyonlarının URL listesini göster"
+
+#. 4.6->settings-schema.json->radiolist-button->tooltip
+#. 3.0->settings-schema.json->radiolist-button->tooltip
+msgid "Opens a website, which lists URLs of radio stations."
+msgstr "Radyo istasyonlarının URL'lerini listeleyen bir web sitesi açar."
+
+#. 4.6->settings-schema.json->icon-type->description
+#. 3.0->settings-schema.json->icon-type->description
+msgid "Type"
+msgstr "Tip"
+
+#. 4.6->settings-schema.json->icon-type->options
+#. 3.0->settings-schema.json->icon-type->options
+msgid "Symbolic Icon"
+msgstr "Sembolik Simge"
+
+#. 4.6->settings-schema.json->icon-type->options
+#. 3.0->settings-schema.json->icon-type->options
+msgid "Full Color Icon"
+msgstr "Tam Renkli Simge"
+
+#. 4.6->settings-schema.json->icon-type->options
+#. 3.0->settings-schema.json->icon-type->options
+msgid "Bicolor Icon"
+msgstr "Çift renkli Simge"
+
+#. 4.6->settings-schema.json->color-on->description
+#. 3.0->settings-schema.json->color-on->description
+msgid "Color of Symbolic Icon when playing a radio"
+msgstr "Radyo çalarken Sembolik Simgenin Rengi"
+
+#. 4.6->settings-schema.json->max-volume->description
+msgid "Maximum Volume"
+msgstr "En yüksek Ses seviyesi"
+
+#. 4.6->settings-schema.json->initial-volume->description
+msgid "Initial Volume"
+msgstr "İlk Ses seviyesi"
+
+#. 4.6->settings-schema.json->initial-volume->tooltip
+msgid ""
+"The initial volume is applied when clicking on a radio stream and no other "
+"radio stream is already running"
+msgstr ""
+"Bir radyo akışına tıklandığında ve halihazırda başka hiçbir radyo akışı "
+"çalışmadığında ilk ses seviyesi uygulanır"
+
+#. 3.0->settings-schema.json->section3->title
+msgid "Symbolic Icon Color"
+msgstr "Sembolik Simge Rengi"
+
+#~ msgid ""
+#~ "This simple radio for Cinnamon. Require moc player. In setting you may "
+#~ "add, edit and remove stations."
+#~ msgstr ""
+#~ "Bu Cinnamon için basit bir radyo uygulamacığıdır. Moc player gerektirir. "
+#~ "Ayarlardan radyo istasyonu ekleme, silme ve düzenlemesi yapılabilir."
+
+#~ msgid "Include of list"
+#~ msgstr "Listenin dahil edilmesi"
