@@ -138,9 +138,9 @@ class CinnamenuApplet extends TextIconApplet {
     }
 
     getGridValues() {
-        let gridWidth = this.appsView.applicationsGridBox.width;
-        let columns = Math.floor(gridWidth / (130 * global.ui_scale));
-        let columnWidth = Math.floor(gridWidth / columns)
+        const gridWidth = this.appsView.applicationsGridBox.width;
+        const columns = Math.floor(gridWidth / (140 * global.ui_scale));
+        const columnWidth = Math.floor(gridWidth / columns);
         //bigger if large icons
         //width = Math.max(width, this.getAppIconSize() * this.settings.appsGridColumnCount * 1.5);
         return {columnWidth: columnWidth, columns: columns};
@@ -551,7 +551,10 @@ class CinnamenuApplet extends TextIconApplet {
         this.categoriesView.groupCategoriesWorkspacesScrollBox.height = appsHeight;
         this.sidebar.sidebarScrollBox.set_height(-1);
         this.sidebar.sidebarScrollBox.set_height(Math.min(appsHeight, this.sidebar.sidebarScrollBox.height));
-        this.settings.customMenuHeight = menuHeight;
+        if (!this.resizer.resizingInProgress) {
+            //due to a intermittent bug, don't update settings while resizing
+            this.settings.customMenuHeight = menuHeight;
+        }
     }
 
     updateMenuWidth(newWidth) {
@@ -572,7 +575,10 @@ class CinnamenuApplet extends TextIconApplet {
         }
         let minMenuWidth = Math.max(leftSideWidth + 200, bottomPaneMinWidth);
         let menuWidth = Math.max(minMenuWidth, newWidth);
-        this.settings.customMenuWidth = menuWidth;
+        if (!this.resizer.resizingInProgress) {
+            //due to a intermittent bug, don't update settings while resizing
+            this.settings.customMenuWidth = menuWidth;
+        }
         this.appsView.applicationsListBox.width = menuWidth - leftSideWidth;
         this.appsView.applicationsGridBox.width = menuWidth - leftSideWidth;
     }
