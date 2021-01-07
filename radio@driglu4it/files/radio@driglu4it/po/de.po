@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-02 14:59+0100\n"
-"PO-Revision-Date: 2021-01-02 15:11+0100\n"
+"POT-Creation-Date: 2021-01-07 10:13+0100\n"
+"PO-Revision-Date: 2021-01-07 10:21+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de\n"
@@ -18,37 +18,46 @@ msgstr ""
 "X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: 4.6/applet.js:136
+#: 4.6/applet.js:132
 #, javascript-format
 msgid "Can't play  %s"
-msgstr "%s kann nicht abgespielt werden."
+msgstr "%s kann nicht abgespielt werden"
 
-#: 4.6/applet.js:136
+#: 4.6/applet.js:132
 msgid ""
 "Make sure that the URL is valid and you have a stable internet connection. "
 "Don't hestitate to open an Issue on Github if the problem persists."
 msgstr ""
 "Stellen Sie sicher, dass die verwendete URL gültig  ist und Sie über eine "
 "stabile Internetverbindung verfügen. Zögern Sie nicht das Problem auf Github "
-"zu melden, sollte es bestehen bleiben.  "
+"zu melden, sollte es bestehen bleiben"
 
-#: 4.6/applet.js:155 3.0/applet.js:140
+#: 4.6/applet.js:151 3.0/applet.js:140
 msgid "Stop"
 msgstr "Anhalten"
 
-#: 4.6/applet.js:205 3.0/applet.js:183
+#: 4.6/applet.js:158
+msgid "Copy current song title"
+msgstr "Aktuellen Liedtitel kopieren"
+
+#: 4.6/applet.js:169
+msgid "Can't copy current Song. Is the Radio playing?"
+msgstr ""
+"Aktueller Liedtitel konnte nicht kopiert werden. Ist das Radio eingeschaltet?"
+
+#: 4.6/applet.js:241 3.0/applet.js:183
 #, javascript-format
 msgid "Please install the '%s' package."
 msgstr "Bitte das Paket »%s« installieren."
 
-#: 4.6/applet.js:243
+#: 4.6/applet.js:265
 msgid ""
 "Can't increase Volume. Volume already at maximum. Change the Maximum Volume "
 "in the Settings to further increase the Volume."
 msgstr ""
 "Die Lautstärke kann nicht weiter erhöht werden, da bereits die maximale "
 "Lautstärke erreicht ist. Ändern Sie die maximale Lautstärke in den "
-"Einstellungen um sie weiter zu erhöhen. "
+"Einstellungen um sie weiter zu erhöhen."
 
 #. metadata.json->name
 #: 3.0/applet.js:99 3.0/applet.js:117 3.0/applet.js:143 3.0/applet.js:153
@@ -118,10 +127,8 @@ msgid "Radio"
 msgstr "Radio"
 
 #. 4.6->settings-schema.json->section2->title
-#. 3.0->settings-schema.json->page2->title
-#. 3.0->settings-schema.json->section2->title
-msgid "Icon"
-msgstr "Icon"
+msgid "Panel"
+msgstr "Leiste"
 
 #. 4.6->settings-schema.json->section3->title
 msgid "Volume"
@@ -163,29 +170,29 @@ msgid "Opens a website, which lists URLs of radio stations."
 msgstr "Öffnet eine Website, die URLs von Radiosendern auflistet."
 
 #. 4.6->settings-schema.json->icon-type->description
-#. 3.0->settings-schema.json->icon-type->description
-msgid "Type"
-msgstr "Typ"
+msgid "Icon Type"
+msgstr "Icon Typ"
 
 #. 4.6->settings-schema.json->icon-type->options
-#. 3.0->settings-schema.json->icon-type->options
-msgid "Symbolic Icon"
-msgstr "Symbolisches Icon"
+msgid "Symbolic"
+msgstr "Symbolisch"
 
 #. 4.6->settings-schema.json->icon-type->options
-#. 3.0->settings-schema.json->icon-type->options
-msgid "Full Color Icon"
-msgstr "Farbiges Icon"
+msgid "Full Color"
+msgstr "Mehrfarbig"
 
 #. 4.6->settings-schema.json->icon-type->options
-#. 3.0->settings-schema.json->icon-type->options
-msgid "Bicolor Icon"
-msgstr "Zweifarbiges Icon"
+msgid "Bicolor"
+msgstr "Zweifarbig"
 
 #. 4.6->settings-schema.json->color-on->description
 #. 3.0->settings-schema.json->color-on->description
 msgid "Color of Symbolic Icon when playing a radio"
 msgstr "Farbe des symbolischen Icons, wenn das Radio läuft"
+
+#. 4.6->settings-schema.json->channel-on-panel->description
+msgid "Show Radio Channel on the panel"
+msgstr "Radiostation in der Leiste anzeigen"
 
 #. 4.6->settings-schema.json->max-volume->description
 msgid "Maximum Volume"
@@ -201,11 +208,32 @@ msgid ""
 "radio stream is already running"
 msgstr ""
 "Die anfängliche Lautstärke wird verwendet, wenn beim Klicken auf eine "
-"Radiostation noch keine andere Radiostation abgespielt wird. "
+"Radiostation noch keine andere Radiostation abgespielt wird"
+
+#. 3.0->settings-schema.json->page2->title
+#. 3.0->settings-schema.json->section2->title
+msgid "Icon"
+msgstr "Icon"
 
 #. 3.0->settings-schema.json->section3->title
 msgid "Symbolic Icon Color"
 msgstr "Farbe des symbolischen Icons"
+
+#. 3.0->settings-schema.json->icon-type->description
+msgid "Type"
+msgstr "Typ"
+
+#. 3.0->settings-schema.json->icon-type->options
+msgid "Symbolic Icon"
+msgstr "Symbolisches Icon"
+
+#. 3.0->settings-schema.json->icon-type->options
+msgid "Full Color Icon"
+msgstr "Farbiges Icon"
+
+#. 3.0->settings-schema.json->icon-type->options
+msgid "Bicolor Icon"
+msgstr "Zweifarbiges Icon"
 
 #~ msgid ""
 #~ "This simple radio for Cinnamon. Require moc player. In setting you may "

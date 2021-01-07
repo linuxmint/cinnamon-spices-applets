@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-02 14:59+0100\n"
+"POT-Creation-Date: 2021-01-07 10:13+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,27 +17,35 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: 4.6/applet.js:136
+#: 4.6/applet.js:132
 #, javascript-format
 msgid "Can't play  %s"
 msgstr ""
 
-#: 4.6/applet.js:136
+#: 4.6/applet.js:132
 msgid ""
 "Make sure that the URL is valid and you have a stable internet connection. "
 "Don't hestitate to open an Issue on Github if the problem persists."
 msgstr ""
 
-#: 4.6/applet.js:155 3.0/applet.js:140
+#: 4.6/applet.js:151 3.0/applet.js:140
 msgid "Stop"
 msgstr ""
 
-#: 4.6/applet.js:205 3.0/applet.js:183
+#: 4.6/applet.js:158
+msgid "Copy current song title"
+msgstr ""
+
+#: 4.6/applet.js:169
+msgid "Can't copy current Song. Is the Radio playing?"
+msgstr ""
+
+#: 4.6/applet.js:241 3.0/applet.js:183
 #, javascript-format
 msgid "Please install the '%s' package."
 msgstr ""
 
-#: 4.6/applet.js:243
+#: 4.6/applet.js:265
 msgid ""
 "Can't increase Volume. Volume already at maximum. Change the Maximum Volume "
 "in the Settings to further increase the Volume."
@@ -109,9 +117,7 @@ msgid "Radio"
 msgstr ""
 
 #. 4.6->settings-schema.json->section2->title
-#. 3.0->settings-schema.json->page2->title
-#. 3.0->settings-schema.json->section2->title
-msgid "Icon"
+msgid "Panel"
 msgstr ""
 
 #. 4.6->settings-schema.json->section3->title
@@ -154,28 +160,28 @@ msgid "Opens a website, which lists URLs of radio stations."
 msgstr ""
 
 #. 4.6->settings-schema.json->icon-type->description
-#. 3.0->settings-schema.json->icon-type->description
-msgid "Type"
+msgid "Icon Type"
 msgstr ""
 
 #. 4.6->settings-schema.json->icon-type->options
-#. 3.0->settings-schema.json->icon-type->options
-msgid "Symbolic Icon"
+msgid "Symbolic"
 msgstr ""
 
 #. 4.6->settings-schema.json->icon-type->options
-#. 3.0->settings-schema.json->icon-type->options
-msgid "Full Color Icon"
+msgid "Full Color"
 msgstr ""
 
 #. 4.6->settings-schema.json->icon-type->options
-#. 3.0->settings-schema.json->icon-type->options
-msgid "Bicolor Icon"
+msgid "Bicolor"
 msgstr ""
 
 #. 4.6->settings-schema.json->color-on->description
 #. 3.0->settings-schema.json->color-on->description
 msgid "Color of Symbolic Icon when playing a radio"
+msgstr ""
+
+#. 4.6->settings-schema.json->channel-on-panel->description
+msgid "Show Radio Channel on the panel"
 msgstr ""
 
 #. 4.6->settings-schema.json->max-volume->description
@@ -192,6 +198,27 @@ msgid ""
 "radio stream is already running"
 msgstr ""
 
+#. 3.0->settings-schema.json->page2->title
+#. 3.0->settings-schema.json->section2->title
+msgid "Icon"
+msgstr ""
+
 #. 3.0->settings-schema.json->section3->title
 msgid "Symbolic Icon Color"
+msgstr ""
+
+#. 3.0->settings-schema.json->icon-type->description
+msgid "Type"
+msgstr ""
+
+#. 3.0->settings-schema.json->icon-type->options
+msgid "Symbolic Icon"
+msgstr ""
+
+#. 3.0->settings-schema.json->icon-type->options
+msgid "Full Color Icon"
+msgstr ""
+
+#. 3.0->settings-schema.json->icon-type->options
+msgid "Bicolor Icon"
 msgstr ""
