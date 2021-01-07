@@ -40,10 +40,11 @@
     },
     "section2": {
       "type": "section",
-      "title": "Icon",
+      "title": "Panel",
       "keys": [
         "icon-type",
-        "color-on"
+        "color-on",
+        "channel-on-panel"
       ]
     },
     "section3": {
@@ -104,12 +105,12 @@
   },
   "icon-type": {
     "type": "combobox",
-    "description": "Type",
+    "description": "Icon Type",
     "default": "SYMBOLIC",
     "options": {
-      "Symbolic Icon": "SYMBOLIC",
-      "Full Color Icon": "FULLCOLOR",
-      "Bicolor Icon": "BICOLOR"
+      "Symbolic": "SYMBOLIC",
+      "Full Color": "FULLCOLOR",
+      "Bicolor": "BICOLOR"
     }
   },
   "color-on": {
@@ -117,6 +118,11 @@
     "default": "#73d216",
     "dependency": "icon-type=SYMBOLIC",
     "description": "Color of Symbolic Icon when playing a radio"
+  },
+  "channel-on-panel": {
+    "type": "checkbox",
+    "description": "Show Radio Channel on the panel",
+    "default": false
   },
   "max-volume": {
     "type": "spinbutton",
