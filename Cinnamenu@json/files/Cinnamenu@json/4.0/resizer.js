@@ -1,4 +1,3 @@
-const Lang = imports.lang;
 const Main = imports.ui.main;
 const Clutter = imports.gi.Clutter;
 const Cinnamon = imports.gi.Cinnamon;
@@ -21,16 +20,15 @@ class PopupResizeHandler {
 
         this._signals = new SignalManager.SignalManager(null);
 
-        this._signals.connect(this.actor, "motion-event", Lang.bind(this, this._motion_event));
-        this._signals.connect(this.actor, "leave-event", Lang.bind(this, this._leave_event));
-        this._signals.connect(this.actor, "button-press-event", Lang.bind(this, this._onButtonPress));
+        this._signals.connect(this.actor, "motion-event", (...args) => this._motion_event(...args));
+        this._signals.connect(this.actor, "leave-event", (...args) => this._leave_event(...args));
+        this._signals.connect(this.actor, "button-press-event", (...args) => this._onButtonPress(...args));
 
         this.no_edges_draggable = true;
         this.inhibit_resizing = false;
 
         this.drag_start_pos = null;
         this.drag_start_size = null;
-        const ZONE_SIZE = 10;
         this.scaled_zone_size = ZONE_SIZE * global.ui_scale;
 
         this.edges = { top:    0,
@@ -47,9 +45,8 @@ class PopupResizeHandler {
 
         if (event.get_button() != 1)
             return false;
+
         //---Start drag---
-        this.scaled_zone_size = ZONE_SIZE * global.ui_scale;
-        this._collect_work_area_edges();
         this._grabEvents();
         this.resizingInProgress = true;
 
@@ -67,8 +64,7 @@ class PopupResizeHandler {
         this._eventsGrabbed = true;
 
         Clutter.grab_pointer(this.actor);
-        this._onEventId = this.actor.connect('event',
-                                             Lang.bind(this, this._onEvent));
+        this._onEventId = this.actor.connect('event', (...args) => this._onEvent(...args));
     }
 
     _ungrabEvents() {
@@ -138,6 +134,7 @@ class PopupResizeHandler {
             return Clutter.EVENT_PROPAGATE;
         }
         this._collect_work_area_edges();
+        this.scaled_zone_size = ZONE_SIZE * global.ui_scale;
 
         let cursor = 0;
 
