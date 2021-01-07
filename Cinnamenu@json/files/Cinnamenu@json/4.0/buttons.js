@@ -96,7 +96,7 @@ class CategoryButton extends PopupBaseMenuItem {
         this.signals.connect(this.draggable, 'drag-cancelled', (...args) => this.onDragCancelled(...args));
         this.signals.connect(this.draggable, 'drag-end', (...args) => this.onDragEnd(...args));
         //?undo
-
+        this.signals.connect(this.actor, 'motion-event', (...args) => this.handleEnter(...args));
         this.signals.connect(this.actor, 'enter-event', (...args) => this.handleEnter(...args));
         this.signals.connect(this.actor, 'leave-event', (...args) => this.handleLeave(...args));
         this.signals.connect(this.actor, 'button-release-event', (...args) => this.handleButtonRelease(...args));
@@ -122,17 +122,17 @@ class CategoryButton extends PopupBaseMenuItem {
     }
 
     handleEnter(actor, event) {
-        if (this.disabled || this.appThis.contextMenu.isOpen) {
-            return Clutter.EVENT_STOP;
+        //this method handles enter-event, motion-event and keypress
+        if (this.entered || this.disabled || this.appThis.contextMenu.isOpen ||
+                            this.appThis.badAngle && !this.appThis.settings.categoryClick) {
+            return Clutter.EVENT_PROPAGATE;
         }
 
-        if (event) {//?undo
+        if (event) {//mouse
             this.appThis.clearEnteredActors();
-        } else {
+        } else {//keypress
             this.appThis.scrollToButton(this, true);
         }
-
-        //this.appThis.scrollToButton(this, true);
 
         this.entered = true;
         if (this.appThis.settings.categoryClick) {
