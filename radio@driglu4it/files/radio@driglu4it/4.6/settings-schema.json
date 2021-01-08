@@ -5,8 +5,7 @@
     "width": 800,
     "pages": [
       "page1",
-      "page2",
-      "page3"
+      "page2"
     ],
     "page1": {
       "type": "page",
@@ -17,15 +16,9 @@
     },
     "page2": {
       "type": "page",
-      "title": "Appearance",
+      "title": "Preferences",
       "sections": [
-        "section2"
-      ]
-    },
-    "page3": {
-      "type": "page",
-      "title": "Audio Player",
-      "sections": [
+        "section2",
         "section3"
       ]
     },
@@ -40,7 +33,7 @@
     },
     "section2": {
       "type": "section",
-      "title": "Panel",
+      "title": "Appearance",
       "keys": [
         "icon-type",
         "color-on",
@@ -51,7 +44,6 @@
       "type": "section",
       "title": "Volume",
       "keys": [
-        "max-volume",
         "initial-volume"
       ]
     }
@@ -123,14 +115,6 @@
     "type": "checkbox",
     "description": "Show Radio Channel on the panel",
     "default": false
-  },
-  "max-volume": {
-    "type": "spinbutton",
-    "default": 130,
-    "min": 50,
-    "max": 200,
-    "step": 5,
-    "description": "Maximum Volume"
   },
   "initial-volume": {
     "type": "spinbutton",

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-07 10:13+0100\n"
-"PO-Revision-Date: 2021-01-07 10:21+0100\n"
+"POT-Creation-Date: 2021-01-08 10:12+0100\n"
+"PO-Revision-Date: 2021-01-08 10:14+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de\n"
@@ -30,7 +30,7 @@ msgid ""
 msgstr ""
 "Stellen Sie sicher, dass die verwendete URL gültig  ist und Sie über eine "
 "stabile Internetverbindung verfügen. Zögern Sie nicht das Problem auf Github "
-"zu melden, sollte es bestehen bleiben"
+"zu melden, sollte es bestehen bleiben."
 
 #: 4.6/applet.js:151 3.0/applet.js:140
 msgid "Stop"
@@ -45,19 +45,16 @@ msgid "Can't copy current Song. Is the Radio playing?"
 msgstr ""
 "Aktueller Liedtitel konnte nicht kopiert werden. Ist das Radio eingeschaltet?"
 
-#: 4.6/applet.js:241 3.0/applet.js:183
+#: 4.6/applet.js:233 3.0/applet.js:183
 #, javascript-format
 msgid "Please install the '%s' package."
 msgstr "Bitte das Paket »%s« installieren."
 
-#: 4.6/applet.js:265
-msgid ""
-"Can't increase Volume. Volume already at maximum. Change the Maximum Volume "
-"in the Settings to further increase the Volume."
+#: 4.6/applet.js:257
+msgid "Can't increase Volume. Volume already at maximum."
 msgstr ""
 "Die Lautstärke kann nicht weiter erhöht werden, da bereits die maximale "
-"Lautstärke erreicht ist. Ändern Sie die maximale Lautstärke in den "
-"Einstellungen um sie weiter zu erhöhen."
+"Lautstärke erreicht ist. "
 
 #. metadata.json->name
 #: 3.0/applet.js:99 3.0/applet.js:117 3.0/applet.js:143 3.0/applet.js:153
@@ -114,12 +111,8 @@ msgid "List of stations"
 msgstr "Liste der Radiostationen"
 
 #. 4.6->settings-schema.json->page2->title
-msgid "Appearance"
-msgstr "Erscheinungsbild"
-
-#. 4.6->settings-schema.json->page3->title
-msgid "Audio Player"
-msgstr "Audio-Player"
+msgid "Preferences"
+msgstr ""
 
 #. 4.6->settings-schema.json->section1->title
 #. 3.0->settings-schema.json->section1->title
@@ -127,8 +120,8 @@ msgid "Radio"
 msgstr "Radio"
 
 #. 4.6->settings-schema.json->section2->title
-msgid "Panel"
-msgstr "Leiste"
+msgid "Appearance"
+msgstr "Erscheinungsbild"
 
 #. 4.6->settings-schema.json->section3->title
 msgid "Volume"
@@ -194,10 +187,6 @@ msgstr "Farbe des symbolischen Icons, wenn das Radio läuft"
 msgid "Show Radio Channel on the panel"
 msgstr "Radiostation in der Leiste anzeigen"
 
-#. 4.6->settings-schema.json->max-volume->description
-msgid "Maximum Volume"
-msgstr "Höchste Lautstärke"
-
 #. 4.6->settings-schema.json->initial-volume->description
 msgid "Initial Volume"
 msgstr "Anfängliche Lautstärke"
@@ -234,6 +223,23 @@ msgstr "Farbiges Icon"
 #. 3.0->settings-schema.json->icon-type->options
 msgid "Bicolor Icon"
 msgstr "Zweifarbiges Icon"
+
+#~ msgid ""
+#~ "Can't increase Volume. Volume already at maximum. Change the Maximum "
+#~ "Volume in the Settings to further increase the Volume."
+#~ msgstr ""
+#~ "Die Lautstärke kann nicht weiter erhöht werden, da bereits die maximale "
+#~ "Lautstärke erreicht ist. Ändern Sie die maximale Lautstärke in den "
+#~ "Einstellungen um sie weiter zu erhöhen."
+
+#~ msgid "Audio Player"
+#~ msgstr "Audio-Player"
+
+#~ msgid "Panel"
+#~ msgstr "Leiste"
+
+#~ msgid "Maximum Volume"
+#~ msgstr "Höchste Lautstärke"
 
 #~ msgid ""
 #~ "This simple radio for Cinnamon. Require moc player. In setting you may "

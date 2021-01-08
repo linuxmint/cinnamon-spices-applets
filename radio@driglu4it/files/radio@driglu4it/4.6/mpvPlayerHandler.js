@@ -2,7 +2,8 @@ const Util = imports.misc.util;
 
 class MpvPlayerHandler {
 
-    constructor({ mprisPluginPath, initialChannelUrl, handleRadioStopped, initialVolume, maxVolume }) {
+    constructor({ mprisPluginPath, initialChannelUrl, handleRadioStopped, initialVolume }) {
+        this.maxVolume = 100 // see https://github.com/linuxmint/cinnamon-spices-applets/issues/3402#issuecomment-756430754 for an explanation of this value
         Object.assign(this, arguments[0])
     }
 

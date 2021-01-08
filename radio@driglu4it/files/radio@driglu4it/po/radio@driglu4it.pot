@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-07 10:13+0100\n"
+"POT-Creation-Date: 2021-01-08 10:12+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -40,15 +40,13 @@ msgstr ""
 msgid "Can't copy current Song. Is the Radio playing?"
 msgstr ""
 
-#: 4.6/applet.js:241 3.0/applet.js:183
+#: 4.6/applet.js:233 3.0/applet.js:183
 #, javascript-format
 msgid "Please install the '%s' package."
 msgstr ""
 
-#: 4.6/applet.js:265
-msgid ""
-"Can't increase Volume. Volume already at maximum. Change the Maximum Volume "
-"in the Settings to further increase the Volume."
+#: 4.6/applet.js:257
+msgid "Can't increase Volume. Volume already at maximum."
 msgstr ""
 
 #. metadata.json->name
@@ -104,11 +102,7 @@ msgid "List of stations"
 msgstr ""
 
 #. 4.6->settings-schema.json->page2->title
-msgid "Appearance"
-msgstr ""
-
-#. 4.6->settings-schema.json->page3->title
-msgid "Audio Player"
+msgid "Preferences"
 msgstr ""
 
 #. 4.6->settings-schema.json->section1->title
@@ -117,7 +111,7 @@ msgid "Radio"
 msgstr ""
 
 #. 4.6->settings-schema.json->section2->title
-msgid "Panel"
+msgid "Appearance"
 msgstr ""
 
 #. 4.6->settings-schema.json->section3->title
@@ -182,10 +176,6 @@ msgstr ""
 
 #. 4.6->settings-schema.json->channel-on-panel->description
 msgid "Show Radio Channel on the panel"
-msgstr ""
-
-#. 4.6->settings-schema.json->max-volume->description
-msgid "Maximum Volume"
 msgstr ""
 
 #. 4.6->settings-schema.json->initial-volume->description

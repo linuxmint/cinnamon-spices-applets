@@ -37,9 +37,10 @@ class CinnamonRadioApplet extends TextIconApplet {
     this.settings.bind("icon-type", "icon_type", this.set_icon);
     this.settings.bind("color-on", "color_on", this.on_color_changed);
     this.settings.bind("tree", "channel_list", this.on_channel_list_update);
-    this.settings.bind("max-volume", "max_volume", this.on_max_volume_changed);
     this.settings.bind("initial-volume", "initial_volume", this.on_initial_volume_changed);
     this.settings.bind("channel-on-panel", "channel_on_panel", this.on_channel_on_panel_changed)
+
+    this.channel_list.forEach(channel => channel.url = channel.url.trim())
 
     this.init(orientation)
 
@@ -55,8 +56,7 @@ class CinnamonRadioApplet extends TextIconApplet {
       mprisPluginPath: configPath + '/.mpris.so',
       initialChannelUrl: initialChannel.url,
       handleRadioStopped: () => { this.changeSetCurrentMenuItem({ activatedMenuItem: this.stopitem }) },
-      initialVolume: this.initial_volume,
-      maxVolume: this.max_volume
+      initialVolume: this.initial_volume
     })
 
     this.initGui(orientation, initialChannel)
@@ -194,16 +194,8 @@ class CinnamonRadioApplet extends TextIconApplet {
     this.setIconColor({ radioPlaying: radioPlaying });
   }
 
-  async on_max_volume_changed() {
-    this.mpvPlayer.maxVolume = this.max_volume
-    await this.mpvPlayer.increaseDecreaseVolume(0)
-    this.on_initial_volume_changed()
-  }
-
   on_initial_volume_changed() {
-    if (this.initial_volume > this.max_volume) {
-      this.initial_volume = this.max_volume
-    }
+    this.mpvPlayer.initialVolume = this.initial_volume
   }
 
   // sends a notification but only if there hasn't been already the same notification in the last 10 seks
@@ -262,7 +254,7 @@ class CinnamonRadioApplet extends TextIconApplet {
     const volumeChange = direction === Clutter.ScrollDirection.UP ? 5 : -5
     const volumeChangeable = await this.mpvPlayer.increaseDecreaseVolume(volumeChange)
 
-    if (!volumeChangeable) this.notify_send(_("Can't increase Volume. Volume already at maximum. Change the Maximum Volume in the Settings to further increase the Volume."))
+    if (!volumeChangeable) this.notify_send(_("Can't increase Volume. Volume already at maximum."))
   }
 };
 
