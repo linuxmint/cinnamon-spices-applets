@@ -120,7 +120,7 @@
     "type": "spinbutton",
     "default": 50,
     "min": 5,
-    "max": 200,
+    "max": 100,
     "step": 5,
     "description": "Initial Volume",
     "tooltip": "The initial volume is applied when clicking on a radio stream and no other radio stream is already running"
