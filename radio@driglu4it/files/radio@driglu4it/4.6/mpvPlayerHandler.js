@@ -2,13 +2,9 @@ const Util = imports.misc.util;
 
 class MpvPlayerHandler {
 
-    constructor({ mprisPluginPath, initialChannelUrl, onRadioStopped, initialVolume, maxVolume }) {
-        this.mprisPluginPath = mprisPluginPath
-        this.channelUrl = initialChannelUrl
-        this.onRadioStopped = onRadioStopped
-        // the inital volume is applied when no radio stream is running
-        this.initialVolume = initialVolume
-        this.maxVolume = maxVolume
+    constructor({ mprisPluginPath, initialChannelUrl, handleRadioStopped, initialVolume }) {
+        this.maxVolume = 100 // see https://github.com/linuxmint/cinnamon-spices-applets/issues/3402#issuecomment-756430754 for an explanation of this value
+        Object.assign(this, arguments[0])
     }
 
     // returns the initial volume when no radio stream is running and else the volume of the current running radio stream 
@@ -42,7 +38,7 @@ class MpvPlayerHandler {
                 setTimeout(async () => {
                     const newChannelUrl = await MpvPlayerHandler.getRunningRadioUrl()
                     if (!newChannelUrl) {
-                        this.onRadioStopped()
+                        this.handleRadioStopped()
                         this.channelUrl = null
                     }
                 }, 100);
@@ -67,7 +63,7 @@ class MpvPlayerHandler {
         if (newVolume > this.maxVolume) {
             volumeChangeable = false
             // the volume can be above the max volume when the max volume has changed in the settings
-            Util.spawnCommandLine(`playerctl --player=mpv volume ${this.maxVolume} `)
+            Util.spawnCommandLine(`playerctl --player=mpv volume ${this.maxVolume / 100} `)
         } else {
             Util.spawnCommandLine(`playerctl --player=mpv volume ${newVolume / 100} `)
             volumeChangeable = true
@@ -79,7 +75,6 @@ class MpvPlayerHandler {
     stopRadio() {
         Util.spawnCommandLine("playerctl --player=mpv stop");
     }
-
 
     /** 
       *  
@@ -101,5 +96,14 @@ class MpvPlayerHandler {
         })
     }
 
-}
+    static getCurrentSong() {
+        return new Promise((resolve, reject) => {
 
+            Util.spawnCommandLineAsyncIO("playerctl --player=mpv metadata --format '{{ xesam:title }}'", (stdout, stderr) => {
+                if (stderr) reject(stderr)
+                else resolve(stdout.trim())
+            })
+        })
+
+    }
+}

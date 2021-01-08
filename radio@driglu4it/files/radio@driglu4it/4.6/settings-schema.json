@@ -5,8 +5,7 @@
     "width": 800,
     "pages": [
       "page1",
-      "page2",
-      "page3"
+      "page2"
     ],
     "page1": {
       "type": "page",
@@ -17,15 +16,9 @@
     },
     "page2": {
       "type": "page",
-      "title": "Appearance",
+      "title": "Preferences",
       "sections": [
-        "section2"
-      ]
-    },
-    "page3": {
-      "type": "page",
-      "title": "Audio Player",
-      "sections": [
+        "section2",
         "section3"
       ]
     },
@@ -40,17 +33,17 @@
     },
     "section2": {
       "type": "section",
-      "title": "Icon",
+      "title": "Appearance",
       "keys": [
         "icon-type",
-        "color-on"
+        "color-on",
+        "channel-on-panel"
       ]
     },
     "section3": {
       "type": "section",
       "title": "Volume",
       "keys": [
-        "max-volume",
         "initial-volume"
       ]
     }
@@ -104,12 +97,12 @@
   },
   "icon-type": {
     "type": "combobox",
-    "description": "Type",
+    "description": "Icon Type",
     "default": "SYMBOLIC",
     "options": {
-      "Symbolic Icon": "SYMBOLIC",
-      "Full Color Icon": "FULLCOLOR",
-      "Bicolor Icon": "BICOLOR"
+      "Symbolic": "SYMBOLIC",
+      "Full Color": "FULLCOLOR",
+      "Bicolor": "BICOLOR"
     }
   },
   "color-on": {
@@ -118,19 +111,16 @@
     "dependency": "icon-type=SYMBOLIC",
     "description": "Color of Symbolic Icon when playing a radio"
   },
-  "max-volume": {
-    "type": "spinbutton",
-    "default": 130,
-    "min": 50,
-    "max": 200,
-    "step": 5,
-    "description": "Maximum Volume"
+  "channel-on-panel": {
+    "type": "checkbox",
+    "description": "Show Radio Channel on the panel",
+    "default": false
   },
   "initial-volume": {
     "type": "spinbutton",
     "default": 50,
     "min": 5,
-    "max": 200,
+    "max": 100,
     "step": 5,
     "description": "Initial Volume",
     "tooltip": "The initial volume is applied when clicking on a radio stream and no other radio stream is already running"

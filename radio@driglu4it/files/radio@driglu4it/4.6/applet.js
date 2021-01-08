@@ -1,22 +1,18 @@
-const Applet = imports.ui.applet;
-const Lang = imports.lang;
-const PopupMenu = imports.ui.popupMenu;
-const Settings = imports.ui.settings;
+const { TextIconApplet, AllowedLayout, AppletPopupMenu } = imports.ui.applet;
+const { PopupMenuManager, PopupSeparatorMenuItem, PopupMenuItem } = imports.ui.popupMenu;
+const { AppletSettings } = imports.ui.settings;
 const Main = imports.ui.main;
 const Util = imports.misc.util;
 const Clutter = imports.gi.Clutter;
 const Gettext = imports.gettext; // l10n support
 const GLib = imports.gi.GLib;
-const Gtk = imports.gi.Gtk;
-const St = imports.gi.St;
+const { Clipboard, ClipboardType } = imports.gi.St;
 const Gio = imports.gi.Gio;
 
 const { MpvPlayerHandler } = require('./mpvPlayerHandler')
 
-
-const UUID = "radio@driglu4it";
-
-Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale")
+// for i18n
+let UUID;
 function _(str) {
   let customTranslation = Gettext.dgettext(UUID, str);
   if (customTranslation != str) {
@@ -25,227 +21,243 @@ function _(str) {
   return Gettext.gettext(str);
 }
 
-function MyApplet(orientation, panel_height, instance_id) {
-  this._init(orientation, panel_height, instance_id);
-}
-MyApplet.prototype = {
-  __proto__: Applet.IconApplet.prototype,
+class CinnamonRadioApplet extends TextIconApplet {
+  constructor(orientation, panel_height, instance_id) {
+    super(orientation, panel_height, instance_id);
 
-  _init: async function (orientation, panel_height, instance_id) {
-    Applet.IconApplet.prototype._init.call(this, orientation, panel_height, instance_id);
+    // TODO: what is this for?
+    if (this.setAllowedLayout) this.setAllowedLayout(AllowedLayout.BOTH);
 
-    if (this.setAllowedLayout) this.setAllowedLayout(Applet.AllowedLayout.BOTH);
-
-    this.menuManager = new PopupMenu.PopupMenuManager(this);
-    this.menu = new Applet.AppletPopupMenu(this, orientation);
-    this.menuManager.addMenu(this.menu);
-    this.settings = new Settings.AppletSettings(this, UUID, instance_id);
-
+    // for i18n
+    UUID = __meta.uuid;
+    Gettext.bindtextdomain(UUID, GLib.get_home_dir() + "/.local/share/locale");
+    // Settings
+    this.settings = new AppletSettings(this, __meta.uuid, instance_id);
     // bind properties 
-    // Be aware that when one setting is changed, all binded methods are called (e.g. if a channel is added in the settings, also the method for setting the symbolic icon color is called)
     this.settings.bind("icon-type", "icon_type", this.set_icon);
     this.settings.bind("color-on", "color_on", this.on_color_changed);
     this.settings.bind("tree", "channel_list", this.on_channel_list_update);
-    this.settings.bind("max-volume", "max_volume", this.on_max_volume_changed);
     this.settings.bind("initial-volume", "initial_volume", this.on_initial_volume_changed);
+    this.settings.bind("channel-on-panel", "channel_on_panel", this.on_channel_on_panel_changed)
 
-    this.appletPath = `${GLib.get_home_dir()}/.local/share/cinnamon/applets/${UUID}`;
-    const configPath = `${GLib.get_home_dir()}/.cinnamon/configs/${UUID}`;
+    this.channel_list.forEach(channel => channel.url = channel.url.trim())
 
-    // getting the channel which is running at start of applet (e.g. when restarting cinnamon)
-    const runningChannelUrl = await MpvPlayerHandler.getRunningRadioUrl()
-    const initialChannel = this.getChannel({ channelUrl: runningChannelUrl })
+    this.init(orientation)
 
-    // create Gui
-    this.set_icon();
-    this.setIconColor({ radioPlaying: initialChannel })
-    this.setTooltip({ channel: initialChannel })
-    this.createMenu({ currentChannel: initialChannel })
-    this.actor.connect('scroll-event', Lang.bind(this, this.on_mouse_scroll));
+  }
+
+  // this function is used as await is not allowed in constructor
+  async init(orientation) {
+
+    const initialChannel = this.getChannel({ channelUrl: await MpvPlayerHandler.getRunningRadioUrl() })
+    const configPath = `${GLib.get_home_dir()}/.cinnamon/configs/${__meta.uuid}`;
 
     this.mpvPlayer = new MpvPlayerHandler({
       mprisPluginPath: configPath + '/.mpris.so',
       initialChannelUrl: initialChannel.url,
-      onRadioStopped: () => { this.changeSetCurrentMenuItem({ activatedMenuItem: this.stopitem }) },
-      initialVolume: this.initial_volume,
-      maxVolume: this.max_volume
+      handleRadioStopped: () => { this.changeSetCurrentMenuItem({ activatedMenuItem: this.stopitem }) },
+      initialVolume: this.initial_volume
     })
 
+    this.initGui(orientation, initialChannel)
     // The radio needs to be restarted so that we can change the color and tooltip when the radio gets stopped from outside the applet via MPRIS 
     if (initialChannel) await this.mpvPlayer.startChangeRadioChannel(initialChannel.url)
-  },
+  }
+
+  initGui(orientation, initialChannel) {
+    const menuManager = new PopupMenuManager(this);
+    this.menu = new AppletPopupMenu(this, orientation);
+    menuManager.addMenu(this.menu);
+
+    this.createContextMenu()
+    this.set_icon();
+    this.set_label({ currentChannel: initialChannel })
+    this.setIconColor({ radioPlaying: initialChannel })
+    this.setTooltip({ channel: initialChannel })
+    this.createMenu({ currentChannel: initialChannel })
+    this.actor.connect('scroll-event', (actor, event) => this.on_mouse_scroll(event));
+  }
 
   on_streamurl_button_pressed() {
     Main.Util.spawnCommandLine("xdg-open https://streamurl.link");
-  },
+  }
 
   on_radiolist_button_pressed() {
     Main.Util.spawnCommandLine("xdg-open https://wiki.ubuntuusers.de/Internetradio/Stationen");
-  },
+  }
 
-  on_color_changed: async function () {
+  on_color_changed() {
     this.setIconColor({ radioPlaying: this.mpvPlayer.channelUrl })
-  },
+  }
 
-  on_channel_list_update: async function () {
+  on_channel_list_update() {
     this.menu.removeAll();
     this.currentMenuItem = null;
     const currentChannel = this.getChannel({ channelUrl: this.mpvPlayer.channelUrl })
     this.createMenu({ currentChannel: currentChannel })
-  },
+  }
 
-  setIconColor: function ({ radioPlaying }) {
-    // default icon color is the color of the icon when no stream is running
-    let color;
-    if (radioPlaying) {
-      color = this.color_on
-    } else {
-      try {
-        let themeNode = this.actor.get_theme_node(); // get_theme_node() fails in constructor! (cause: widget not on stage)
-        let icon_color = themeNode.get_icon_colors();
-        clor = icon_color.foreground.to_string();
-      } catch (e) {
-        color = "white";
-      }
-    }
+  setIconColor({ radioPlaying }) {
+    const color = radioPlaying ? this.color_on : "white"
+    this.actor.style = `color: ${color}`
+  }
 
-    this.actor.style = "color: %s;".format(color)
-  },
+  set_icon() {
+    if (this.icon_type === "SYMBOLIC") this.set_applet_icon_symbolic_name('radioapplet')
+    else this.set_applet_icon_name(`radioapplet-${this.icon_type.toLowerCase()}`)
+  }
 
-  set_icon: function () {
-    if (this.icon_type === "SYMBOLIC") {
-      this.set_applet_icon_symbolic_name('radioapplet');
-    } else if (this.icon_type === "FULLCOLOR") {
-      this.set_applet_icon_name('radioapplet-fullcolor');
-    } else { // BICOLOR
-      this.set_applet_icon_name('radioapplet-bicolor');
-    }
-  },
+  set_label({ currentChannel }) {
+    if (currentChannel && this.channel_on_panel) this.set_applet_label(" " + currentChannel.name)
+    else this.hide_applet_label(true)
+  }
+
+  on_channel_on_panel_changed() {
+    const currentChannel = this.getChannel({ channelUrl: this.mpvPlayer.channelUrl })
+    this.set_label({ currentChannel: currentChannel })
+  }
 
   getChannel({ channelUrl }) {
     let channel = this.channel_list.find(cnl => cnl.url === channelUrl)
     if (!channel || channel.inc === false) channel = false
     return channel
-  },
+  }
 
-  on_radio_channel_clicked: async function (e, channel) {
+  async on_radio_channel_clicked(e, channel) {
     if (!this.currentMenuItem || this.currentMenuItem != e) {
       this.changeSetCurrentMenuItem({ activatedMenuItem: e, channel: channel })
       try {
         await this.mpvPlayer.startChangeRadioChannel(channel.url)
       } catch (error) {
         this.notify_send(_("Can't play  %s").format(channel.name) + ". " + _("Make sure that the URL is valid and you have a stable internet connection. Don't hestitate to open an Issue on Github if the problem persists."))
-        global.log(error)
+        global.logError(error)
         return
       }
     }
-  },
+  }
 
-  createMenu: function ({ currentChannel }) {
+  createMenu({ currentChannel }) {
     this.channel_list.forEach(channel => {
       if (channel.inc === true) {
-        const channelItem = new PopupMenu.PopupMenuItem(channel.name, false);
+        const channelItem = new PopupMenuItem(channel.name, false);
         this.menu.addMenuItem(channelItem);
         channelItem.connect('activate', (e) => { this.on_radio_channel_clicked(e, channel) });
         if (channel === currentChannel) this.setDotToMenuItem({ menuItemWithDot: channelItem })
       }
     });
-    this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+    this.menu.addMenuItem(new PopupSeparatorMenuItem());
 
     // stop Item
-    this.stopitem = new PopupMenu.PopupMenuItem(_("Stop"), false);
+    this.stopitem = new PopupMenuItem(_("Stop"), false);
     this.menu.addMenuItem(this.stopitem);
     if (!currentChannel) { this.setDotToMenuItem({ menuItemWithDot: this.stopitem }) }
     this.stopitem.connect('activate', () => { this.on_stop_item_clicked(); });
-  },
+  }
 
-  on_stop_item_clicked: function () {
+  createContextMenu() {
+    const copyTitleItem = new PopupMenuItem(_("Copy current song title"));
+    copyTitleItem.connect('activate', () => { this.on_copy_song(); });
+    this._applet_context_menu.addMenuItem(copyTitleItem, 0)
+    this._applet_context_menu.addMenuItem(new PopupSeparatorMenuItem());
+  }
+
+  async on_copy_song() {
+    try {
+      const currentSong = await MpvPlayerHandler.getCurrentSong()
+      Clipboard.get_default().set_text(ClipboardType.CLIPBOARD, currentSong);
+    } catch (e) {
+      this.notify_send(_("Can't copy current Song. Is the Radio playing?"))
+    }
+  }
+
+  on_stop_item_clicked() {
     this.mpvPlayer.stopRadio()
-  },
+  }
 
-  setDotToMenuItem: function ({ menuItemWithDot }) {
+  setDotToMenuItem({ menuItemWithDot }) {
     menuItemWithDot.setShowDot(true);
     if (this.currentMenuItem) this.currentMenuItem.setShowDot(false)
     this.currentMenuItem = menuItemWithDot;
-  },
+  }
 
-  setTooltip: function ({ channel }) {
+  setTooltip({ channel }) {
     const tooltipText = channel ? channel.name : "Radio++";
-    this.set_applet_tooltip(_(tooltipText));
-  },
+    this.set_applet_tooltip(tooltipText);
+  }
 
-  // The function is responsible for: 
-  // - indicating the current Menu Item with a dot 
-  // - setting the text in the tooltip to the current running channel name or "Radio++" if no radio is running.
-  // - setting the color of the icon 
-  changeSetCurrentMenuItem: function ({ activatedMenuItem, channel }) {
+  changeSetCurrentMenuItem({ activatedMenuItem, channel }) {
     this.setDotToMenuItem({ menuItemWithDot: activatedMenuItem })
     this.setTooltip({ channel: channel })
+    this.set_label({ currentChannel: channel })
 
     const radioPlaying = activatedMenuItem === this.stopitem ? false : true
     this.setIconColor({ radioPlaying: radioPlaying });
-  },
+  }
 
-  on_max_volume_changed: async function () {
-    this.mpvPlayer.maxVolume = this.max_volume
-    await this.mpvPlayer.increaseDecreaseVolume(0)
-  },
+  on_initial_volume_changed() {
+    this.mpvPlayer.initialVolume = this.initial_volume
+  }
 
-  on_initial_volume_changed: function () {
-    if (this.initial_volume > this.max_volume) {
-      this.initial_volume = this.max_volume
-    }
-  },
+  // sends a notification but only if there hasn't been already the same notification in the last 10 seks
+  notify_send(notificationMsg) {
+    const currentTime = Date.now()
 
-  notify_send: function (notification) {
-    var iconPath = this.appletPath + '/icon.png';
-    Util.spawnCommandLine('notify-send --hint=int:transient:1 "' + notification + '" -i ' + iconPath);
-  },
+    // preventing "reference to ... is undefined" in log
+    if (!this.timeLastNotification) this.timeLastNotification = 0
+    if (!this.lastNotificationMsg) this.lastNotificationMsg = null
 
-  notify_installation: function (packageName) {
-    this.notify_send(_("Please install the '%s' package.").format(packageName));
-  },
+    const timeDiff = currentTime - this.timeLastNotification
+    if (timeDiff < 10000 && this.lastNotificationMsg === notificationMsg) return
 
-  check_dependencies: function () {
+    const iconPath = `${__meta.path}/icon.png`;
+    Util.spawnCommandLine('notify-send --hint=int:transient:1 --expire-time=10000 "' + notificationMsg + '" -i ' + iconPath);
+
+    this.timeLastNotification = currentTime
+    this.lastNotificationMsg = notificationMsg
+  }
+
+  check_dependencies() {
     if (!Gio.file_new_for_path(this.mpvPlayer.mprisPluginPath).query_exists(null)) {
-      Util.spawn_async(['python3', this.appletPath + '/download-dialog.py'], Lang.bind(this, function (out) {
-        if (out.trim() == 'Continue') {
+      const parentDir = __meta.path.split('/').slice(0, -1).join('/')
+      Util.spawn_async(['python3', parentDir + '/download-dialog.py'], (stdout) => {
+        if (stdout.trim() == 'Continue') {
           Util.spawnCommandLineAsyncIO(`wget https://github.com/hoyon/mpv-mpris/releases/download/0.5/mpris.so -O ${this.mpvPlayer.mprisPluginPath}`);
         }
-      }));
-      return false;
-    } else if (!Gio.file_new_for_path("/usr/bin/mpv").query_exists(null)) {
-      this.notify_installation('mpv');
-      Util.spawnCommandLine("apturl apt://mpv");
-      return false;
-    } else if (!Gio.file_new_for_path("/usr/bin/playerctl").query_exists(null)) {
-      this.notify_installation('playerctl');
-      Util.spawnCommandLine("apturl apt://playerctl");
+      })
       return false;
     }
-    return true;
-  },
 
-  on_applet_clicked: function (event) {
+    else {
+      ["playerctl", "mpv"].forEach(packageName => {
+        if (!Gio.file_new_for_path(`/usr/bin/${packageName}`).query_exists(null)) {
+          this.notify_send(_("Please install the '%s' package.").format(packageName));
+          Util.spawnCommandLine(`apturl apt://${packageName}`);
+          return false;
+        }
+      })
+    }
+    return true;
+  }
+
+  on_applet_clicked() {
     if (this.check_dependencies()) {
       this.menu.toggle();
     }
-  },
+  }
 
-  on_applet_removed_from_panel: function () {
+  on_applet_removed_from_panel() {
     this.settings.finalize();
-  },
+  }
 
-  on_mouse_scroll: async function (actor, event) {
-    let direction = event.get_scroll_direction();
+  async on_mouse_scroll(event) {
+    const direction = event.get_scroll_direction();
     const volumeChange = direction === Clutter.ScrollDirection.UP ? 5 : -5
     const volumeChangeable = await this.mpvPlayer.increaseDecreaseVolume(volumeChange)
 
-    if (!volumeChangeable) this.notify_send(_("Can't increase Volume. Volume already at maximum. Change the Maximum Volume in the Settings to further increase the Volume."))
-  },
+    if (!volumeChangeable) this.notify_send(_("Can't increase Volume. Volume already at maximum."))
+  }
 };
 
-function main(metadata, orientation, panel_height, instance_id) { // Make sure you collect and pass on instanceId
-  let myApplet = new MyApplet(orientation, panel_height, instance_id);
-  return myApplet;
+function main(metadata, orientation, panel_height, instance_id) {
+  return new CinnamonRadioApplet(orientation, panel_height, instance_id);
 }
