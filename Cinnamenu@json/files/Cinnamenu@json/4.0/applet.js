@@ -65,12 +65,13 @@ class CinnamenuApplet extends TextIconApplet {
                                                 (w,h) => this.onBoxResized(w,h),
                                                 () => this.settings.customMenuWidth,
                                                 () => this.settings.customMenuHeight);
-        this.signals.connect(this.privacy_settings, 'changed::' + REMEMBER_RECENT_KEY, () =>
-                                                                                this.onEnableRecentChange());
-        this.signals.connect(Main.themeManager, 'theme-set', () => this.onThemeChanged());
+        this.signals.connect(this.privacy_settings, 'changed::' + REMEMBER_RECENT_KEY,
+                                                            (...args) => this.onEnableRecentChange(...args));
+        this.signals.connect(Main.themeManager, 'theme-set', (...args) => this.onThemeChanged(...args));
         this.iconTheme = Gtk.IconTheme.get_default();
         this.signals.connect(this.iconTheme, 'changed', (...args) => this.onIconsChanged(...args));
-        this.signals.connect(this.appSystem, 'installed-changed', (...args) => this.apps.installedChanged() );
+        this.signals.connect(this.appSystem, 'installed-changed',
+                                                        (...args) => this.apps.installedChanged(...args));
         this.signals.connect(this.appFavorites, 'changed', (...args) => this.onFavoritesChanged(...args));
         this.signals.connect(this.menu, 'open-state-changed', (...args) => this.onOpenStateToggled(...args));
         //this.signals.connect(global, 'scale-changed', () => this.refresh() );
@@ -138,9 +139,9 @@ class CinnamenuApplet extends TextIconApplet {
     }
 
     getGridValues() {
-        let gridWidth = this.appsView.applicationsGridBox.width;
-        let columns = Math.floor(gridWidth / (130 * global.ui_scale));
-        let columnWidth = Math.floor(gridWidth / columns)
+        const gridWidth = this.appsView.applicationsGridBox.width;
+        const columns = Math.floor(gridWidth / (140 * global.ui_scale));
+        const columnWidth = Math.floor(gridWidth / columns);
         //bigger if large icons
         //width = Math.max(width, this.getAppIconSize() * this.settings.appsGridColumnCount * 1.5);
         return {columnWidth: columnWidth, columns: columns};
@@ -506,7 +507,7 @@ class CinnamenuApplet extends TextIconApplet {
         if (open) {
             this.categories.update();//in case menu editor updates
             this.categoriesView.populate();
-            this.sidebar.populate()//in case fav files changed
+            this.sidebar.populate();//in case fav files changed
             global.stage.set_key_focus(this.search.searchEntry);
             const currentCategory = this.settings.openOnFavorites && this.settings.showFavAppsCategory ?
                                                                 'favorite_apps' : this.currentCategory;
@@ -551,7 +552,10 @@ class CinnamenuApplet extends TextIconApplet {
         this.categoriesView.groupCategoriesWorkspacesScrollBox.height = appsHeight;
         this.sidebar.sidebarScrollBox.set_height(-1);
         this.sidebar.sidebarScrollBox.set_height(Math.min(appsHeight, this.sidebar.sidebarScrollBox.height));
-        this.settings.customMenuHeight = menuHeight;
+        if (!this.resizer.resizingInProgress) {
+            //due to a intermittent bug, don't update settings while resizing
+            this.settings.customMenuHeight = menuHeight;
+        }
     }
 
     updateMenuWidth(newWidth) {
@@ -572,7 +576,10 @@ class CinnamenuApplet extends TextIconApplet {
         }
         let minMenuWidth = Math.max(leftSideWidth + 200, bottomPaneMinWidth);
         let menuWidth = Math.max(minMenuWidth, newWidth);
-        this.settings.customMenuWidth = menuWidth;
+        if (!this.resizer.resizingInProgress) {
+            //due to a intermittent bug, don't update settings while resizing
+            this.settings.customMenuWidth = menuWidth;
+        }
         this.appsView.applicationsListBox.width = menuWidth - leftSideWidth;
         this.appsView.applicationsGridBox.width = menuWidth - leftSideWidth;
     }
@@ -651,6 +658,9 @@ class CinnamenuApplet extends TextIconApplet {
     }*/
 
     onMenuKeyPress(actor, event) {
+        if (this.resizer.resizingInProgress) {
+            return Clutter.EVENT_STOP;
+        }
         const symbol = event.get_key_symbol();
         const keyCode = event.get_key_code();
         const modifierState = Cinnamon.get_event_state(event);
@@ -1312,7 +1322,8 @@ class CinnamenuApplet extends TextIconApplet {
         this.menu.actor.set_reactive(true);
         this.displaySignals.connect(this.menu.actor, 'button-release-event',
                                                         (...args) => {this.clearEnteredActors();});
-        //
+        this.displaySignals.connect(this.menu.actor, "motion-event", (...args) => this.onMouseMotion(...args));
+        //Limit excessive left padding on categoriesBox
         const Lpadding = this.categoriesView.categoriesBox.get_theme_node().get_length('padding-left');
         if (Lpadding > 20) {
             this.categoriesView.categoriesBox.style = 'padding-left: 20px;';
@@ -1337,6 +1348,27 @@ class CinnamenuApplet extends TextIconApplet {
         }*/
         this.mainBox.show();
         this.updateMenuHeight();
+    }
+
+    onMouseMotion(actor, event) {
+        //keep track of mouse motion to prevent misselection of another category button when moving mouse
+        //pointer from selected category button to app button by calculating angle of pointer movement
+        let [x, y] = event.get_coords();
+        if (!this.mTrack) {
+            this.mTrack = [];
+        }
+        this.mTrack.push({time: Date.now(), x: x, y: y});
+        while (this.mTrack[0].time + 100 < Date.now()) {
+            this.mTrack.shift();
+        }
+        const dx = x - this.mTrack[0].x;
+        const dy = Math.abs(y - this.mTrack[0].y);
+        if (dy > 0) {
+            const tan = dx / dy;
+            this.badAngle = tan > 0.3;
+        } else {//infinity or NaN
+            this.badAngle = false;
+        }
     }
 
     destroyDisplayed() {

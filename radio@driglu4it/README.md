@@ -2,12 +2,19 @@
 A simple radio applet for Cinnamon.
 
 ## Features
-- For Cinnamon 4.6 and above: The radio applet can be controlled (paused, sound increased/decreased) with programms with MPRIS control (e.g.the sound applet, kdeconnect or playerctl). Such programs also receive the title of the current playing song (e.g you can show the current playing song in the sound applet by activating the option "Show song information on the panel" in the sound applet). However be aware that there are some minor Bugs in this feature due to upstream issues (see section **known Issues**)
-- For Cinnamon 4.6 and above: All other running programs with sound output which have implemented the MPRIS interface (e.g. most Browsers, Spotify, ...) are stopped when starting a radio channel 
+
 - The volume can be controlled with the mouse wheel. 
 - Three options for the icon: Symbolic, Full Color or Bicolor Icon. For the Symbolic Icon the color of the Icon is changed to a user-defined color when playing a radio stream
 - In the settings are two buttons which help you to find the radio stream url of your favorite radio station. The first one open this [URL Search engine](https://streamurl.link) and the second one open this [Radio List Collection](https://wiki.ubuntuusers.de/Internetradio/Stationen/) in your default Browser when clicking on it
 - A download dialog is opened when clicking on the applet for the missing dependencies
+
+### For Cinnamon 4.6 and above only
+
+- The radio applet can be controlled (paused, sound increased/decreased) with programms with MPRIS control (e.g.the sound applet, kdeconnect or playerctl). Such programs also receive the title of the current playing song (e.g you can show the current playing song in the sound applet by activating the option "Show song information on the panel" in the sound applet). However be aware that there are some minor Bugs in this feature due to upstream issues (see section **known Issues**)
+- All other running programs with sound output which have implemented the MPRIS interface (e.g. most Browsers, Spotify, ...) are stopped when starting a radio channel 
+- The current playing song title can be copied to the clipboard from the right-click menu
+- The title of the radio channel can be shown in the panel 
+
 
 
 ## Dependencies
@@ -31,9 +38,8 @@ to get this feature.
 
 ## Ideas for improvements
 - Automatically stop playing when another MPRIS media player starts
+- Add moc player as option again as the player needs less RAM (not everyone wants MPRIS)
+- Indicate when radio stream is paused
+- Add option to rewind and fast forward (easier to implement as it sounds as radio streams as it seems that radio streams are 30 seconds behind by default. This is implemented in kdeconnect)
 - Adding an option to show the application volume in the tooltip 
-- Adding an option to show the title of the radio channel in the panel 
 - Adding an option to show the last played radio channel italic
-- Better Error Handling (e.g. show a notification when radio url is 
-invalid)
-- Add a option "copy title" in the right click menu

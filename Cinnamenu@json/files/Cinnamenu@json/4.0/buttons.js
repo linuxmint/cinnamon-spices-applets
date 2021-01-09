@@ -96,7 +96,7 @@ class CategoryButton extends PopupBaseMenuItem {
         this.signals.connect(this.draggable, 'drag-cancelled', (...args) => this.onDragCancelled(...args));
         this.signals.connect(this.draggable, 'drag-end', (...args) => this.onDragEnd(...args));
         //?undo
-
+        this.signals.connect(this.actor, 'motion-event', (...args) => this.handleEnter(...args));
         this.signals.connect(this.actor, 'enter-event', (...args) => this.handleEnter(...args));
         this.signals.connect(this.actor, 'leave-event', (...args) => this.handleLeave(...args));
         this.signals.connect(this.actor, 'button-release-event', (...args) => this.handleButtonRelease(...args));
@@ -122,17 +122,17 @@ class CategoryButton extends PopupBaseMenuItem {
     }
 
     handleEnter(actor, event) {
-        if (this.disabled || this.appThis.contextMenu.isOpen) {
-            return Clutter.EVENT_STOP;
+        //this method handles enter-event, motion-event and keypress
+        if (this.entered || this.disabled || this.appThis.contextMenu.isOpen ||
+                            this.appThis.badAngle && !this.appThis.settings.categoryClick) {
+            return Clutter.EVENT_PROPAGATE;
         }
 
-        if (event) {//?undo
+        if (event) {//mouse
             this.appThis.clearEnteredActors();
-        } else {
+        } else {//keypress
             this.appThis.scrollToButton(this, true);
         }
-
-        //this.appThis.scrollToButton(this, true);
 
         this.entered = true;
         if (this.appThis.settings.categoryClick) {
@@ -283,7 +283,6 @@ class ContextMenu {
     open(app, e, button, category = false) {
         //e is used to position context menu at mouse coords. If keypress opens menu then
         // e is undefined and button position is used instead.
-        this.appThis.resizer.inhibit_resizing = true;
         this.contextMenuButtons.forEach(button => button.destroy());
         this.contextMenuButtons = [];
 
@@ -298,11 +297,9 @@ class ContextMenu {
         } else if (app.type === APPTYPE.application) {
             this.populateContextMenu_apps(app);
         } else if (app.type === APPTYPE.file) {
-            if (!GLib.file_test(Gio.File.new_for_uri(app.uri).get_path(), GLib.FileTest.EXISTS)) {
-                Main.notify(_("This file is no longer available"),'');
+            if (!this.populateContextMenu_files(app)) {
                 return;
             }
-            this.populateContextMenu_files(app);
         } else if (app.type == APPTYPE.provider) {//Emoji
             if (!MODABLE.includes(app.icon)) {
                 return;
@@ -324,8 +321,8 @@ class ContextMenu {
             addMenuItem('\u{1F3FE}', 'medium-dark skin tone');
             addMenuItem('\u{1F3FF}', 'dark skin tone');
         }
-
         this.isOpen = true;
+        this.appThis.resizer.inhibit_resizing = true;
 
         const contextMenuWidth = this.menu.actor.width;
         const contextMenuHeight = this.menu.actor.height;
@@ -424,32 +421,39 @@ class ContextMenu {
             this.contextMenuButtons.push(item);
         };
         const hasLocalPath = (file) => (file.is_native() && file.get_path() != null);
-        //
-        addMenuItem( new ContextMenuItem(this.appThis, _("Open with"), null, null ));
         const file = Gio.File.new_for_uri(app.uri);
-        const defaultInfo = Gio.AppInfo.get_default_for_type(app.mimeType, !hasLocalPath(file));
-        if (defaultInfo) {
-            addMenuItem( new ContextMenuItem(   this.appThis, defaultInfo.get_display_name(), null,
-                                                () => { defaultInfo.launch([file], null);
-                                                        this.appThis.closeMenu(); } ));
+        const fileExists = GLib.file_test(file.get_path(), GLib.FileTest.EXISTS);
+        if (!fileExists && !app.isFavoriteFile) {
+            Main.notify(_("This file is no longer available"),'');
+            return false; //no context menu
+        }
+        if (app.isBackButton) {
+            return false; //no context menu
         }
         //
-        Gio.AppInfo.get_all_for_type(app.mimeType).forEach(info => {
-            //const file = Gio.File.new_for_uri(app.uri);
-            if (!hasLocalPath(file) || !info.supports_uris() || info.equal(defaultInfo)) {
-                return;
+        if (fileExists) {
+            addMenuItem( new ContextMenuItem(this.appThis, _("Open with"), null, null ));
+            const defaultInfo = Gio.AppInfo.get_default_for_type(app.mimeType, !hasLocalPath(file));
+            if (defaultInfo) {
+                addMenuItem( new ContextMenuItem(   this.appThis, defaultInfo.get_display_name(), null,
+                                                    () => { defaultInfo.launch([file], null);
+                                                            this.appThis.closeMenu(); } ));
             }
-            addMenuItem( new ContextMenuItem(   this.appThis, info.get_display_name(), null,
-                                                () => { info.launch([file], null);
+            Gio.AppInfo.get_all_for_type(app.mimeType).forEach(info => {
+                if (!hasLocalPath(file) || !info.supports_uris() || info.equal(defaultInfo)) {
+                    return;
+                }
+                addMenuItem( new ContextMenuItem(   this.appThis, info.get_display_name(), null,
+                                                    () => { info.launch([file], null);
+                                                            this.appThis.closeMenu(); } ));
+            });
+            addMenuItem( new ContextMenuItem(   this.appThis, _('Other application...'), null,
+                                                () => { spawnCommandLine("nemo-open-with " + app.uri);
                                                         this.appThis.closeMenu(); } ));
-        });
-        //
-        addMenuItem( new ContextMenuItem(   this.appThis, _('Other application...'), null,
-                                            () => { spawnCommandLine("nemo-open-with " + app.uri);
-                                                    this.appThis.closeMenu(); } ));
+        }
 
         const favs = XApp.Favorites ? XApp.Favorites.get_default() : null;
-        if (favs) {
+        if (favs) {//prior to cinnamon 4.8, XApp favorites are not available
             this.menu.addMenuItem(new PopupSeparatorMenuItem(this.appThis));
             if (favs.find_by_uri(app.uri)) { //favorite
                 addMenuItem( new ContextMenuItem(this.appThis, _('Remove from favorites'), 'starred',
@@ -464,14 +468,14 @@ class ContextMenu {
             }
         }
         const folder = file.get_parent();
-        if (app.description) { //if recent or fav item (not a browser folder/file)
+        if (app.isRecentFile || app.isFavoriteFile) { //not a browser folder/file
             this.menu.addMenuItem(new PopupSeparatorMenuItem(this.appThis));
             addMenuItem( new ContextMenuItem(   this.appThis, _('Open containing folder'), 'go-jump',
                         () => { const fileBrowser = Gio.AppInfo.get_default_for_type('inode/directory', true);
                                 fileBrowser.launch([folder], null);
                                 this.appThis.closeMenu(); } ));
         }
-        if (!app.isBackButton && !app.isFavoriteFile) {
+        if (!app.isFavoriteFile) {
             this.menu.addMenuItem(new PopupSeparatorMenuItem(this.appThis));
             addMenuItem( new ContextMenuItem(   this.appThis, _('Move to trash'), 'user-trash',
                         () => { const file = Gio.File.new_for_uri(app.uri);
@@ -486,6 +490,7 @@ class ContextMenu {
                                 this.appThis.setActiveCategory(this.appThis.currentCategory);
                                 this.close(); } ));
         }
+        return true; //success.
     }
 
     close() {
