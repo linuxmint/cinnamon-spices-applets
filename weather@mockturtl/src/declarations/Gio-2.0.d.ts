@@ -1252,7 +1252,7 @@ declare namespace imports.gi.Gio {
         close_async (io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback) : void;
         close_finish (result: AsyncResult) : boolean;
         flush (cancellable: Cancellable) : boolean;
-        flush_async (io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;
+        flush_async (io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback) : void;
         flush_finish (result: AsyncResult) : boolean;
         has_pending () : boolean;
         is_closed () : boolean;
@@ -1260,23 +1260,23 @@ declare namespace imports.gi.Gio {
         printf (bytes_written: number, cancellable: Cancellable, error: GLib.Error, format: string) : boolean;
         set_pending () : boolean;
         splice (source: InputStream, flags: OutputStreamSpliceFlags, cancellable: Cancellable) : number;
-        splice_async (source: InputStream, flags: OutputStreamSpliceFlags, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;
+        splice_async (source: InputStream, flags: OutputStreamSpliceFlags, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback) : void;
         splice_finish (result: AsyncResult) : number;
         vprintf (bytes_written: number, cancellable: Cancellable, error: GLib.Error, format: string, args: any[]) : boolean;
         write (buffer: number[], cancellable: Cancellable) : number;
         write_all (buffer: number[], count: number, bytes_written: number, cancellable: Cancellable) : boolean;
-        write_all_async (buffer: number[], count: number, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;
+        write_all_async (buffer: number[], count: number, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback) : void;
         write_all_finish (result: AsyncResult, bytes_written: number) : boolean;
         write_async (buffer: number[], io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback) : void;
         write_bytes (bytes: GLib.Bytes, cancellable: Cancellable) : number;
-        write_bytes_async (bytes: GLib.Bytes, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;
+        write_bytes_async (bytes: GLib.Bytes, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback) : void;
         write_bytes_finish (result: AsyncResult) : number;
         write_finish (result: AsyncResult) : number;
         writev (vectors: OutputVector[], n_vectors: number, bytes_written: number, cancellable: Cancellable) : boolean;
         writev_all (vectors: OutputVector[], n_vectors: number, bytes_written: number, cancellable: Cancellable) : boolean;
-        writev_all_async (vectors: OutputVector[], n_vectors: number, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;
+        writev_all_async (vectors: OutputVector[], n_vectors: number, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback) : void;
         writev_all_finish (result: AsyncResult, bytes_written: number) : boolean;
-        writev_async (vectors: OutputVector[], n_vectors: number, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;
+        writev_async (vectors: OutputVector[], n_vectors: number, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback) : void;
         writev_finish (result: AsyncResult, bytes_written: number) : boolean;
     }
     
@@ -5830,13 +5830,13 @@ declare namespace imports.gi.Gio {
     
     
     enum FileType {
-        unknown = 0,
-        regular = 1,
-        directory = 2,
-        symbolic_link = 3,
-        special = 4,
-        shortcut = 5,
-        mountable = 6
+        UNKNOWN = 0,
+        REGULAR = 1,
+        DIRECTORY = 2,
+        SYMBOLIC_LINK = 3,
+        SPECIAL = 4,
+        SHORTCUT = 5,
+        MOUNTABLE = 6
     }
     
     

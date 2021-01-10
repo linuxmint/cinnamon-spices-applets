@@ -77,6 +77,7 @@ var SignalManager = imports.misc.signalManager.SignalManager;
 var _k = imports.ui.main, messageTray = _k.messageTray, themeManager = _k.themeManager;
 var Gio = imports.gi.Gio;
 var GLib = imports.gi.GLib;
+var ByteArray = imports.byteArray;
 var utils = importModule("utils");
 var GetDayName = utils.GetDayName;
 var GetHoursMinutes = utils.GetHoursMinutes;
@@ -2149,9 +2150,10 @@ var LocationStore = (function () {
             });
         });
     };
-    LocationStore.prototype.FileExists = function (file) {
+    LocationStore.prototype.FileExists = function (file, dictionary) {
+        if (dictionary === void 0) { dictionary = false; }
         return __awaiter(this, void 0, void 0, function () {
-            var info, e_5;
+            var info, type, e_5;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -2159,7 +2161,12 @@ var LocationStore = (function () {
                         return [4, this.GetFileInfo(file)];
                     case 1:
                         info = _a.sent();
-                        return [2, true];
+                        type = info.get_file_type();
+                        if (!dictionary)
+                            return [2, (type == Gio.FileType.REGULAR || type == Gio.FileType.SYMBOLIC_LINK)];
+                        else
+                            return [2, (type == Gio.FileType.DIRECTORY)];
+                        return [3, 3];
                     case 2:
                         e_5 = _a.sent();
                         this.app.log.Error("Cannot get file info for '" + file.get_path() + "', error: ");
@@ -2219,7 +2226,7 @@ var LocationStore = (function () {
     LocationStore.prototype.OverwriteAndGetIOStream = function (file) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                if (!file.get_parent().query_exists(null))
+                if (!this.FileExists(file.get_parent()))
                     file.get_parent().make_directory_with_parents(null);
                 return [2, new Promise(function (resolve, reject) {
                         file.replace_readwrite_async(null, false, Gio.FileCreateFlags.NONE, null, null, function (source_object, result) {
@@ -2233,11 +2240,18 @@ var LocationStore = (function () {
     };
     LocationStore.prototype.WriteAsync = function (outputStream, buffer) {
         return __awaiter(this, void 0, void 0, function () {
-            var text, result;
+            var text;
             return __generator(this, function (_a) {
-                text = buffer;
-                result = outputStream.write(text, null);
-                return [2, true];
+                text = ByteArray.fromString(buffer);
+                if (outputStream.is_closed())
+                    return [2, false];
+                return [2, new Promise(function (resolve, reject) {
+                        outputStream.write_bytes_async(text, null, null, function (obj, res) {
+                            var ioStream = outputStream.write_bytes_finish(res);
+                            resolve(true);
+                            return true;
+                        });
+                    })];
             });
         });
     };

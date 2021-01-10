@@ -42,6 +42,7 @@ const { SignalManager } = imports.misc.signalManager;
 const { messageTray, themeManager } = imports.ui.main;
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
+const ByteArray = imports.byteArray;
 
 var utils = importModule("utils");
 var GetDayName = utils.GetDayName as (date: Date, locale: string, tz?: string) => string;
@@ -2569,10 +2570,14 @@ class LocationStore {
         });
     }
 
-    private async FileExists(file: imports.gi.Gio.File): Promise<boolean> {
+    private async FileExists(file: imports.gi.Gio.File, dictionary: boolean = false): Promise<boolean> {
         try {
             let info = await this.GetFileInfo(file);
-            return true;
+            let type = info.get_file_type();
+            if (!dictionary)
+                return (type == Gio.FileType.REGULAR || type == Gio.FileType.SYMBOLIC_LINK);
+            else 
+                return (type == Gio.FileType.DIRECTORY);
         }
         catch (e) {
             this.app.log.Error("Cannot get file info for '" + file.get_path() + "', error: ");
@@ -2621,7 +2626,8 @@ class LocationStore {
     }
 
     private async OverwriteAndGetIOStream(file: imports.gi.Gio.File): Promise<imports.gi.Gio.IOStream> {
-        if (!file.get_parent().query_exists(null)) file.get_parent().make_directory_with_parents(null);
+        if (!this.FileExists(file.get_parent())) 
+            file.get_parent().make_directory_with_parents(null); //don't know if this is a blocking call or not
 
         return new Promise((resolve, reject) => {
             file.replace_readwrite_async(null, false, Gio.FileCreateFlags.NONE, null, null, (source_object, result) => {
@@ -2633,19 +2639,18 @@ class LocationStore {
     }
 
     private async WriteAsync(outputStream: imports.gi.Gio.OutputStream, buffer: string): Promise<boolean> {
-        let text = buffer;
-        let result = outputStream.write(text as any, null);
-        return true;
-        //TODO: Figure out why async version is not working
-		/*
+        // normal write_async can't use normal string or ByteArray.fromString
+        // so we save using write_bytes_async, seem to work well.
+        let text = ByteArray.fromString(buffer);
+        if (outputStream.is_closed()) return false;
+		
 		return new Promise((resolve: any, reject: any) => {
-			outputStream.write_async(text as any, null, null, (obj, res) => {
-				// TODO: Not working, bad buffer
-				let ioStream = outputStream.write_finish(res);
+			outputStream.write_bytes_async(text as any, null, null, (obj, res) => {
+				let ioStream = outputStream.write_bytes_finish(res);
 				resolve(true);
 				return true;
 			});
-		});*/
+        });
     }
 
     private async CloseStream(stream: imports.gi.Gio.OutputStream | imports.gi.Gio.InputStream | imports.gi.Gio.FileIOStream): Promise<boolean> {

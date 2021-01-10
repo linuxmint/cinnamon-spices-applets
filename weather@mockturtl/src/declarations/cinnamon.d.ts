@@ -12,7 +12,14 @@ declare class global {
 declare namespace imports {
    export const byteArray: ByteArray;
    class ByteArray {
-       toString(array: any): string;
+       toString(array: Uint8Array): string;
+       /**
+        * Unknown what it does
+        * @param text 
+        */
+       fromGBytes(text: any): any;
+       fromString(text: string): gi.GLib.Bytes;
+       fromArray(array: Uint8Array): any;
    }
 }
 
