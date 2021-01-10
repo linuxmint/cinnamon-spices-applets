@@ -71,7 +71,7 @@ var addTween = imports.ui.tweener.addTween;
 var _e = imports.ui.applet, TextIconApplet = _e.TextIconApplet, AllowedLayout = _e.AllowedLayout, AppletPopupMenu = _e.AppletPopupMenu, MenuItem = _e.MenuItem;
 var _f = imports.ui.popupMenu, PopupMenuManager = _f.PopupMenuManager, PopupSeparatorMenuItem = _f.PopupSeparatorMenuItem;
 var _g = imports.ui.settings, AppletSettings = _g.AppletSettings, BindingDirection = _g.BindingDirection;
-var _h = imports.misc.util, spawnCommandLine = _h.spawnCommandLine, spawn_async = _h.spawn_async, trySpawnCommandLine = _h.trySpawnCommandLine;
+var _h = imports.misc.util, spawnCommandLine = _h.spawnCommandLine, spawn_async = _h.spawn_async, spawnCommandLineAsyncIO = _h.spawnCommandLineAsyncIO;
 var _j = imports.ui.messageTray, SystemNotificationSource = _j.SystemNotificationSource, Notification = _j.Notification;
 var SignalManager = imports.misc.signalManager.SignalManager;
 var _k = imports.ui.main, messageTray = _k.messageTray, themeManager = _k.themeManager;
@@ -2158,15 +2158,11 @@ var LocationStore = (function () {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        return [4, this.GetFileInfo(file)];
+                        return [2, file.query_exists(null)];
                     case 1:
                         info = _a.sent();
-                        type = info.get_file_type();
-                        if (!dictionary)
-                            return [2, (type == Gio.FileType.REGULAR || type == Gio.FileType.SYMBOLIC_LINK)];
-                        else
-                            return [2, (type == Gio.FileType.DIRECTORY)];
-                        return [3, 3];
+                        type = info.get_size();
+                        return [2, true];
                     case 2:
                         e_5 = _a.sent();
                         this.app.log.Error("Cannot get file info for '" + file.get_path() + "', error: ");
@@ -2187,6 +2183,8 @@ var LocationStore = (function () {
                                 resolve(null);
                                 return null;
                             }
+                            if (contents instanceof Uint8Array)
+                                contents = ByteArray.toString(contents);
                             resolve(contents.toString());
                             return contents.toString();
                         });

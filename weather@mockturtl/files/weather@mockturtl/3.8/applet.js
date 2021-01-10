@@ -22,7 +22,7 @@ const { addTween } = imports.ui.tweener;
 const { TextIconApplet, AllowedLayout, AppletPopupMenu, MenuItem } = imports.ui.applet;
 const { PopupMenuManager, PopupSeparatorMenuItem } = imports.ui.popupMenu;
 const { AppletSettings, BindingDirection } = imports.ui.settings;
-const { spawnCommandLine, spawn_async, trySpawnCommandLine } = imports.misc.util;
+const { spawnCommandLine, spawn_async, spawnCommandLineAsyncIO } = imports.misc.util;
 const { SystemNotificationSource, Notification } = imports.ui.messageTray;
 const { SignalManager } = imports.misc.signalManager;
 const { messageTray, themeManager } = imports.ui.main;
@@ -1923,12 +1923,10 @@ class LocationStore {
     }
     async FileExists(file, dictionary = false) {
         try {
+            return file.query_exists(null);
             let info = await this.GetFileInfo(file);
-            let type = info.get_file_type();
-            if (!dictionary)
-                return (type == Gio.FileType.REGULAR || type == Gio.FileType.SYMBOLIC_LINK);
-            else
-                return (type == Gio.FileType.DIRECTORY);
+            let type = info.get_size();
+            return true;
         }
         catch (e) {
             this.app.log.Error("Cannot get file info for '" + file.get_path() + "', error: ");
@@ -1944,6 +1942,8 @@ class LocationStore {
                     resolve(null);
                     return null;
                 }
+                if (contents instanceof Uint8Array)
+                    contents = ByteArray.toString(contents);
                 resolve(contents.toString());
                 return contents.toString();
             });

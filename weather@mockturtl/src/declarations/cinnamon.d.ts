@@ -707,6 +707,13 @@ declare namespace imports.misc.util {
     export function spawnCommandLine(CMDSettings: string): void;
     export function spawn_async(cmd: string[], callback: Function): any;
     export function trySpawnCommandLine(CMDSettings: string): void;
+    /**
+     * 
+     * @param command 
+     * @param callback called on success or failure
+     * @param opts args, flags, input
+     */
+    export function spawnCommandLineAsyncIO(command: string[], callback: (stdout: string, stderr: string, exitCode: number) => void, opts?: any): gi.Gio.Subprocess;
 }
 
 declare namespace imports.gettext {

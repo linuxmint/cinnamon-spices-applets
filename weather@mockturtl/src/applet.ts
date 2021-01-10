@@ -36,7 +36,7 @@ const { addTween } = imports.ui.tweener;
 const { TextIconApplet, AllowedLayout, AppletPopupMenu, MenuItem } = imports.ui.applet;
 const { PopupMenuManager, PopupSeparatorMenuItem } = imports.ui.popupMenu;
 const { AppletSettings, BindingDirection } = imports.ui.settings;
-const { spawnCommandLine, spawn_async, trySpawnCommandLine } = imports.misc.util;
+const { spawnCommandLine, spawn_async, spawnCommandLineAsyncIO } = imports.misc.util;
 const { SystemNotificationSource, Notification } = imports.ui.messageTray;
 const { SignalManager } = imports.misc.signalManager;
 const { messageTray, themeManager } = imports.ui.main;
@@ -323,6 +323,25 @@ class WeatherApplet extends TextIconApplet {
             });
         });
         return json;
+
+        // new command to handle errors as well
+        /*try {
+            let json = await new Promise((resolve, reject) => {
+                spawnCommandLineAsyncIO(command, (aStdout: string, err: string, exitCode: number) => {
+                    if (exitCode != 0) {
+                        reject(err);
+                    }
+                    else {
+                        resolve(aStdout);
+                    }
+                });
+            });
+            global.log(json)
+            return json;
+        }
+        catch(e) {
+            return e;
+        }*/
     }
 
 	/**
@@ -2560,6 +2579,10 @@ class LocationStore {
     // IO
     // --------------------------
 
+    /**
+     * NOT WORKING, does not return any info atm
+     * @param file 
+     */
     private async GetFileInfo(file: imports.gi.Gio.File): Promise<imports.gi.Gio.FileInfo> {
         return new Promise((resolve, reject) => {
             file.query_info_async("", Gio.FileQueryInfoFlags.NONE, null, null, (obj, res) => {
@@ -2572,12 +2595,11 @@ class LocationStore {
 
     private async FileExists(file: imports.gi.Gio.File, dictionary: boolean = false): Promise<boolean> {
         try {
+            return file.query_exists(null);
+            // fileInfo doesn't work, don't use for now
             let info = await this.GetFileInfo(file);
-            let type = info.get_file_type();
-            if (!dictionary)
-                return (type == Gio.FileType.REGULAR || type == Gio.FileType.SYMBOLIC_LINK);
-            else 
-                return (type == Gio.FileType.DIRECTORY);
+            let type = info.get_size(); // type always 0
+            return true;
         }
         catch (e) {
             this.app.log.Error("Cannot get file info for '" + file.get_path() + "', error: ");
@@ -2594,9 +2616,9 @@ class LocationStore {
                     resolve(null);
                     return null;
                 }
-				/*if (content instanceof Uint8Array) { // mozjs60 future-proofing
-							content = ByteArray.toString(content); // const ByteArray = imports.byteArray;
-						} else {*/
+				if (contents instanceof Uint8Array) // mozjs60 future-proofing
+                    contents = ByteArray.toString(contents);
+
                 resolve(contents.toString());
                 return contents.toString();
             });
@@ -2708,7 +2730,6 @@ const FORWARD_SLASH = '\u002F';
 //----------------------------------------------------------------------
 
 function main(metadata: any, orientation: imports.gi.St.Side, panelHeight: number, instanceId: number) {
-    //log("v" + metadata.version + ", cinnamon " + Config.PACKAGE_VERSION)
     return new WeatherApplet(metadata, orientation, panelHeight, instanceId);
 }
 
