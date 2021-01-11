@@ -2076,18 +2076,28 @@ var LocationStore = (function () {
     };
     LocationStore.prototype.LoadSavedLocations = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var content, locations;
+            var content, e_5, error, locations;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4, this.FileExists(this.file)];
+                    case 0:
+                        content = null;
+                        _a.label = 1;
                     case 1:
-                        if (!(_a.sent())) {
-                            this.app.log.Print("Location store does not exist, skipping loading...");
-                            return [2, true];
-                        }
+                        _a.trys.push([1, 3, , 4]);
                         return [4, this.LoadContents(this.file)];
                     case 2:
                         content = _a.sent();
+                        return [3, 4];
+                    case 3:
+                        e_5 = _a.sent();
+                        error = e_5;
+                        if (error.matches(error.domain, Gio.IOErrorEnum.NOT_FOUND)) {
+                            this.app.log.Print("Location store does not exist, skipping loading...");
+                            return [2, true];
+                        }
+                        this.app.log.Error("Can't load locations.json, error: " + error.message);
+                        return [2, false];
+                    case 4:
                         if (content == null)
                             return [2, false];
                         try {
@@ -2153,7 +2163,7 @@ var LocationStore = (function () {
     LocationStore.prototype.FileExists = function (file, dictionary) {
         if (dictionary === void 0) { dictionary = false; }
         return __awaiter(this, void 0, void 0, function () {
-            var info, type, e_5;
+            var info, type, e_6;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -2164,9 +2174,9 @@ var LocationStore = (function () {
                         type = info.get_size();
                         return [2, true];
                     case 2:
-                        e_5 = _a.sent();
+                        e_6 = _a.sent();
                         this.app.log.Error("Cannot get file info for '" + file.get_path() + "', error: ");
-                        global.log(e_5);
+                        global.log(e_6);
                         return [2, false];
                     case 3: return [2];
                 }
@@ -2178,7 +2188,15 @@ var LocationStore = (function () {
             return __generator(this, function (_a) {
                 return [2, new Promise(function (resolve, reject) {
                         file.load_contents_async(null, function (obj, res) {
-                            var _a = file.load_contents_finish(res), result = _a[0], contents = _a[1];
+                            var _a;
+                            var result, contents = null;
+                            try {
+                                _a = file.load_contents_finish(res), result = _a[0], contents = _a[1];
+                            }
+                            catch (e) {
+                                reject(e);
+                                return e;
+                            }
                             if (result != true) {
                                 resolve(null);
                                 return null;

@@ -9,6 +9,20 @@ declare class global {
 	static unset_cursor(): void;
 }
 
+declare class GJSError {
+    stack: any;
+    fileName: string;
+    lineNumber: number;
+    columnNumber: number;
+    domain: number;
+    code: number;
+    message: string;
+    toString(): string;
+    copy(): Error;
+    free(): void;
+    matches(domain: number, code: imports.gi.Gio.IOErrorEnum): boolean;
+}
+
 declare namespace imports {
    export const byteArray: ByteArray;
    class ByteArray {

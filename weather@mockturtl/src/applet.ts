@@ -2535,12 +2535,21 @@ class LocationStore {
     }
 
     private async LoadSavedLocations(): Promise<boolean> {
-        if (!await this.FileExists(this.file)) {
-            this.app.log.Print("Location store does not exist, skipping loading...")
-            return true;
+        let content = null;
+        try {
+            content = await this.LoadContents(this.file);
+        }
+        catch(e) {
+            let error: GJSError = e;
+            if (error.matches(error.domain, Gio.IOErrorEnum.NOT_FOUND)) {
+                this.app.log.Print("Location store does not exist, skipping loading...")
+                return true;
+            }
+
+            this.app.log.Error("Can't load locations.json, error: " + error.message);
+            return false;
         }
 
-        let content = await this.LoadContents(this.file);
         if (content == null) return false;
 
         try {
@@ -2608,10 +2617,21 @@ class LocationStore {
         }
     }
 
+    /**
+     * Loads contents of a file. Can throw Gio.IOErroEnum exception. (e.g file does not exist)
+     * @param file 
+     */
     private async LoadContents(file: imports.gi.Gio.File): Promise<string> {
         return new Promise((resolve, reject) => {
             file.load_contents_async(null, (obj, res) => {
-                let [result, contents] = file.load_contents_finish(res);
+                let result, contents = null;
+                try {
+                    [result, contents] = file.load_contents_finish(res);
+                }
+                catch(e) {
+                    reject(e);
+                    return e;
+                }
                 if (result != true) {
                     resolve(null);
                     return null;
@@ -2633,6 +2653,12 @@ class LocationStore {
                     result = file.delete_finish(res);
                 }
                 catch (e) {
+                    let error: GJSError = e;
+                    if (error.matches(error.domain, Gio.IOErrorEnum.NOT_FOUND)) {
+                        resolve(true);
+                        return true;
+                    }
+
                     this.app.log.Error("Can't delete file, reason: ");
                     global.log(e);
                     resolve(false);
