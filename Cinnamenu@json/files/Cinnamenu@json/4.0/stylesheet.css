@@ -41,3 +41,10 @@
 .menu-application-button-selected:highlighted {
     font-weight: bold;
 }
+
+.menu-category-button:highlighted {
+    font-weight: bold;
+}
+.menu-category-button-selected:highlighted {
+    font-weight: bold;
+}

@@ -14,7 +14,7 @@ const APPTYPE = {
     place: 1,
     file: 2,
     provider: 3,
-    clearlist: 4
+    clearlist_button: 4
 };
 
 // Work around Cinnamon#8201
