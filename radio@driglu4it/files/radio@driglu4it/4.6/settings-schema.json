@@ -1,0 +1,128 @@
+{
+  "layout1": {
+    "type": "layout",
+    "height": 600,
+    "width": 800,
+    "pages": [
+      "page1",
+      "page2"
+    ],
+    "page1": {
+      "type": "page",
+      "title": "List of stations",
+      "sections": [
+        "section1"
+      ]
+    },
+    "page2": {
+      "type": "page",
+      "title": "Preferences",
+      "sections": [
+        "section2",
+        "section3"
+      ]
+    },
+    "section1": {
+      "type": "section",
+      "title": "Radio",
+      "keys": [
+        "tree",
+        "streamurl-button",
+        "radiolist-button"
+      ]
+    },
+    "section2": {
+      "type": "section",
+      "title": "Appearance",
+      "keys": [
+        "icon-type",
+        "color-on",
+        "channel-on-panel"
+      ]
+    },
+    "section3": {
+      "type": "section",
+      "title": "Volume",
+      "keys": [
+        "initial-volume"
+      ]
+    }
+  },
+  "tree": {
+    "type": "list",
+    "description": "List of stations",
+    "height": 400,
+    "columns": [
+      {
+        "id": "inc",
+        "title": "Show in list",
+        "type": "boolean",
+        "default": true
+      },
+      {
+        "id": "name",
+        "title": "Title",
+        "type": "string"
+      },
+      {
+        "id": "url",
+        "title": "URL",
+        "type": "string"
+      }
+    ],
+    "default": [
+      {
+        "name": "Chillout",
+        "url": "http://ic7.101.ru:8000/c15_3",
+        "inc": true
+      },
+      {
+        "name": "Mint",
+        "url": "http://audiostream.rtl.be/mint",
+        "inc": true
+      }
+    ]
+  },
+  "streamurl-button": {
+    "type": "button",
+    "description": "Open radio stream URL search engine",
+    "callback": "on_streamurl_button_pressed",
+    "tooltip": "Opens a website, which helps you to determine radio stream URLs."
+  },
+  "radiolist-button": {
+    "type": "button",
+    "description": "Show URL-list of radio stations",
+    "callback": "on_radiolist_button_pressed",
+    "tooltip": "Opens a website, which lists URLs of radio stations."
+  },
+  "icon-type": {
+    "type": "combobox",
+    "description": "Icon Type",
+    "default": "SYMBOLIC",
+    "options": {
+      "Symbolic": "SYMBOLIC",
+      "Full Color": "FULLCOLOR",
+      "Bicolor": "BICOLOR"
+    }
+  },
+  "color-on": {
+    "type": "colorchooser",
+    "default": "#73d216",
+    "dependency": "icon-type=SYMBOLIC",
+    "description": "Color of Symbolic Icon when playing a radio"
+  },
+  "channel-on-panel": {
+    "type": "checkbox",
+    "description": "Show Radio Channel on the panel",
+    "default": false
+  },
+  "initial-volume": {
+    "type": "spinbutton",
+    "default": 50,
+    "min": 5,
+    "max": 100,
+    "step": 5,
+    "description": "Initial Volume",
+    "tooltip": "The initial volume is applied when clicking on a radio stream and no other radio stream is already running"
+  }
+}

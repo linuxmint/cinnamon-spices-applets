@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-20 05:01+0000\n"
+"POT-Creation-Date: 2020-12-07 12:44+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -125,7 +125,19 @@ msgstr ""
 msgid "Too many entries - showing first 1000 entries only"
 msgstr ""
 
+msgid "Favorites"
+msgstr ""
+
 msgid "Home folder"
+msgstr ""
+
+msgid "All applications"
+msgstr ""
+
+msgid "Recent files"
+msgstr ""
+
+msgid "Favorite apps"
 msgstr ""
 
 msgid "Reset category order"
@@ -141,6 +153,12 @@ msgid "Other application..."
 msgstr ""
 
 msgid "Open containing folder"
+msgstr ""
+
+msgid "Move to trash"
+msgstr ""
+
+msgid "Error while moving file to trash:"
 msgstr ""
 
 msgid "Cinnamenu"
@@ -357,12 +375,18 @@ msgstr ""
 msgid "Show your favorite app icons next to the session buttons"
 msgstr ""
 
+msgid "Show recent files"
+msgstr ""
+
+msgid "Show recent files category in the menu"
+msgstr ""
+
 msgid ""
 "Show your browser's web bookmarks in the menu.\n"
 "Note: Install package gir1.2-gda-5.0 to read firefox bookmarks."
 msgstr ""
 
-msgid "Show favorites category"
+msgid "Show favorite apps category"
 msgstr ""
 
 msgid "Show your favorite apps category in the menu"

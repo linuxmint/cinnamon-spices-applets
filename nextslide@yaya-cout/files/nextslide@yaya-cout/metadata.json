@@ -1,0 +1,6 @@
+{
+    "uuid": "nextslide@yaya-cout",
+    "name": "Next slide",
+    "description": "Simple button to change background for the Cinnamon slideshow",
+    "icon": "preferences-desktop-wallpaper"
+}

@@ -17,7 +17,9 @@ const log = function(message) {
 }
 
 const makeHttpRequest = function(method, uri, cb) {
+  uri = uri.replace(/([^:])\/{2,}/, '$1/');
   return new Promise((resolve, reject) => {
+    log(`Making a ${method} request to ${uri}`);
     const request = Soup.Message.new(method, uri);
     request.request_headers.append('accept', 'application/json');
     _httpSession.queue_message(request, (_httpSession, message) => {
@@ -120,6 +122,12 @@ NightscoutApplet.prototype = {
       case 'Flat':
         bgString += ' →';
         break;
+      case 'FortyFiveUp':
+        bgString += ' ⬈';
+        break;
+      case 'FortyFiveDown':
+        bgString += ' ⬊';
+          break;
       case 'SingleDown':
         bgString += ' ↓';
         break;
@@ -142,7 +150,14 @@ NightscoutApplet.prototype = {
         break;
     }
     if(this.showiob) {
-      bgString += "  (IoB: " + status.pump.iob.bolusiob + "U)";
+      try {
+        if (status.pump.iob.bolusiob === undefined) {
+          status.pump.iob.bolusiob = "?";
+        }
+        bgString += "  (IoB: " + status.pump.iob.bolusiob + "U)";
+      } catch (e) {
+        bgString += "  (IoB: ?U)";
+      }
     }
     if(this.showMissing && this.last) {
       const lastDate = this.last.date;
@@ -181,17 +196,55 @@ NightscoutApplet.prototype = {
 
   makeTooltip(status) {
     let tooltip = "";
+
+    // time
     if(this.last) {
       const date = new Date();
       date.setTime(this.last.date);
       tooltip += "Last update: " + date.toUTCString() + "\n";
     }
-    this.set_applet_tooltip(tooltip +
-      "IOB: " + status.pump.iob.bolusiob + "U\n" +
-      "Bat: " + status.pump.battery.percent + "%\n" +
-      "UpBat: " + status.uploaderBattery + "%\n" +
-      "Reservoir: " + status.pump.reservoir + "U"
-    );
+
+    // iob
+    try {
+      if (status.pump.iob.bolusiob === undefined) {
+        status.pump.iob.bolusiob = "?";
+      }
+      tooltip += "IOB: " + status.pump.iob.bolusiob + "U\n";
+    } catch (e) {
+      tooltip += "IOB: ?U\n";
+    }
+
+    // pump battery
+    try {
+      if (status.pump.battery.percent === undefined) {
+        status.pump.battery.percent = "?";
+      }
+      tooltip += "Bat: " + status.pump.battery.percent + "%\n";
+    } catch (e) {
+      tooltip += "Bat: ?%\n";
+    }
+
+    // uploader battery
+    try {
+      if (status.uploaderBattery === undefined) {
+        status.uploaderBattery = "?";
+      }
+      tooltip += "UpBat: " + status.uploaderBattery + "%\n";
+    } catch (e) {
+      tooltip += "UpBat: ?%\n";
+    }
+
+    // pump reservoir
+    try {
+      if (status.pump.reservoir === undefined) {
+        status.pump.reservoir = "?";
+      }
+      tooltip += "Reservoir: " + status.pump.reservoir + "U";
+    } catch (e) {
+      tooltip += "Reservoir: ?U";
+    }
+
+    this.set_applet_tooltip(tooltip);
   },
 
   // This updates the numerical display in the applet and in the tooltip

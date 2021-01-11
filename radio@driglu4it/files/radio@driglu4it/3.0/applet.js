@@ -9,6 +9,7 @@ const Gettext = imports.gettext; // l10n support
 const GLib = imports.gi.GLib;
 const Gtk = imports.gi.Gtk;
 const St = imports.gi.St;
+const Gio = imports.gi.Gio;
 
 const UUID = "radio@driglu4it";
 
@@ -29,7 +30,7 @@ function MyApplet(orientation, panel_height, instance_id) {
 MyApplet.prototype = {
   __proto__: Applet.IconApplet.prototype,
   _init: function(orientation, panel_height, instance_id) {
-    Util.spawnCommandLine("mocp");
+//    Util.spawnCommandLine("mocp");
     Applet.IconApplet.prototype._init.call(this, orientation, panel_height, instance_id);
 
     if(this.setAllowedLayout) this.setAllowedLayout(Applet.AllowedLayout.BOTH);
@@ -52,6 +53,14 @@ MyApplet.prototype = {
     this.on_icon_changed();
     this.on_tree_changed(true);
     this.oldNames = JSON.stringify(this.names);
+  },
+
+  on_streamurl_button_pressed() {
+    Main.Util.spawnCommandLine("xdg-open https://streamurl.link");
+  },
+
+  on_radiolist_button_pressed() {
+    Main.Util.spawnCommandLine("xdg-open https://wiki.ubuntuusers.de/Internetradio/Stationen");
   },
 
   get_default_icon_color() {
@@ -112,8 +121,6 @@ MyApplet.prototype = {
         let title = this.names[i].name;
         let id = this.names[i].url;
         if (this.names[i].inc === true) {
-          //let title = this.names[i].name;
-          //let id = this.names[i].url;
           let menuitem = new PopupMenu.PopupMenuItem(title, false);
           this.menu.addMenuItem(menuitem);
           menuitem.connect('activate', Lang.bind(this, function() {
@@ -167,9 +174,29 @@ MyApplet.prototype = {
     this.set_color();
   },
 
+  notify_send: function(notification) {
+    var iconPath = this.appletPath + '/icon.png';
+    Util.spawnCommandLine('notify-send --hint=int:transient:1 "' + notification + '" -i ' + iconPath);
+  },
+
+  notify_installation: function(packageName) {
+    this.notify_send(_("Please install the '%s' package.").format(packageName));
+  },
+
+  check_dependencies: function() {
+    if(!Gio.file_new_for_path("/usr/bin/mocp").query_exists(null)) {
+        this.notify_installation('moc');
+        Util.spawnCommandLine("apturl apt://moc");
+        return false;
+    }
+    return true;
+  },
+
   on_applet_clicked: function(event) {
-    this.on_tree_changed(true);
-    this.menu.toggle();
+    if(this.check_dependencies()) {
+        this.on_tree_changed(true);
+        this.menu.toggle();
+    }
   },
 
   on_applet_removed_from_panel: function() {
@@ -193,7 +220,6 @@ MyApplet.prototype = {
       Util.spawnCommandLine("mocp -v -5");
     }
   }
-
 };
 
 function main(metadata, orientation, panel_height, instance_id) { // Make sure you collect and pass on instanceId

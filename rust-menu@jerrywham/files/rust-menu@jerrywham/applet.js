@@ -87,7 +87,7 @@ MyApplet.prototype = {
           this.on_keybinding_doc_changed,
           null);
 
-      this.set_applet_icon_path(AppletDir + '/icon2.svg');
+      this.set_applet_icon_path(AppletDir + '/icon.svg');
       this.set_applet_tooltip("Rust Menu");
 
       this.on_keybinding_doc_changed();

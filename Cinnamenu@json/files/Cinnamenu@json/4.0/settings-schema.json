@@ -37,23 +37,19 @@
                 "applications-view-mode",
                 "sidebar-placement",
                 "add-favorites",
-                "description-placement",
-                "enable-custom-menu-height",
-                "custom-menu-height",
-                "apps-grid-column-count"
+                "description-placement"
             ]
         },
         "menu-content":{
             "type":"section",
             "title":"Content",
             "keys":[
-                "show-places",
-                "enable-bookmarks",
-                "show-favs-category",
-                "enable-home-folder",
-                "privacy-settings-button",
-                "menu-editor-button",
-                "categories"
+                "show-places-category",
+                "show-recents-category",
+                "show-web-bookmarks-category",
+                "show-favorite-apps-category",
+                "show-home-folder-category",
+                "menu-editor-button"
             ]
         },
         "panel-behave":{
@@ -74,7 +70,7 @@
                 "open-on-favorites",
                 "enable-autoscroll",
                 "web-search-option",
-                "emoji-search"
+                "enable-emoji-search"
             ]
         },
         "panel-appear":{
@@ -93,7 +89,7 @@
                 "category-icon-size",
                 "apps-list-icon-size",
                 "apps-grid-icon-size",
-                "session-icon-size",
+                "sidebar-icon-size",
                 "use-box-style"
             ]
         }
@@ -102,6 +98,14 @@
     "categories":{
         "type":"generic",
         "default":[]
+    },
+    "custom-menu-width":{
+        "type":"generic",
+        "default":800
+    },
+    "custom-menu-height":{
+        "type":"generic",
+        "default":530
     },
 
     "applications-view-mode":{
@@ -143,61 +147,35 @@
         "description":"Add favorites to session buttons",
         "tooltip":"Show your favorite app icons next to the session buttons"
     },
-    "enable-custom-menu-height":{
-        "type":"switch",
-        "default":false,
-        "description":"Use a custom menu height",
-        "tooltip":"Use a custom menu height"
-    },
-    "custom-menu-height":{
-        "type":"spinbutton",
-        "default":530,
-        "min":360,
-        "max":9999,
-        "step":1,
-        "units":"pixels",
-        "description":"Custom menu height",
-        "tooltip":"Custom menu height",
-        "dependency":"enable-custom-menu-height"
-    },
-    "apps-grid-column-count":{
-        "type":"spinbutton",
-        "default":4,
-        "min":3,
-        "max":16,
-        "step":1,
-        "units":"columns",
-        "description":"Number of columns in apps grid",
-        "tooltip":"Number of columns in apps grid"
-    },
-    "show-places":{
+    "show-places-category":{
         "type":"switch",
         "default":true,
         "description":"Show bookmarks and places",
         "tooltip":"Show bookmarks and places category in the menu"
     },
-    "enable-bookmarks":{
+    "show-recents-category":{
+        "type":"switch",
+        "default":true,
+        "description":"Show recent files",
+        "tooltip":"Show recent files category in the menu"
+    },
+    "show-web-bookmarks-category":{
         "type":"checkbox",
         "default":false,
         "description":"Show web bookmarks",
         "tooltip":"Show your browser's web bookmarks in the menu.\nNote: Install package gir1.2-gda-5.0 to read firefox bookmarks."
     },
-    "show-favs-category":{
+    "show-favorite-apps-category":{
         "type":"switch",
-        "default":true,
-        "description":"Show favorites category",
+        "default":false,
+        "description":"Show favorite apps category",
         "tooltip":"Show your favorite apps category in the menu"
     },
-    "enable-home-folder":{
+    "show-home-folder-category":{
         "type":"checkbox",
         "default":true,
         "description":"Show home folder",
         "tooltip":"Show home folder category in the menu"
-    },
-    "privacy-settings-button":{
-        "type":"button",
-        "description":"Recent files settings",
-        "callback":"launchPrivacySettings"
     },
     "menu-editor-button":{
         "type":"button",
@@ -265,7 +243,7 @@
         },
         "tooltip":"Show an internet search option in search results"
     },
-    "emoji-search":{
+    "enable-emoji-search":{
         "type":"checkbox",
         "default":true,
         "description":"Enable emoji search",
@@ -326,7 +304,7 @@
         "description":"Applications grid icon size",
         "tooltip":"Applications grid icon size"
     },
-    "session-icon-size":{
+    "sidebar-icon-size":{
         "indent":true,
         "type":"spinbutton",
         "default":32,

@@ -14,10 +14,8 @@ const APPTYPE = {
     place: 1,
     file: 2,
     provider: 3,
-    session:4,
-    clearlist: 5
+    clearlist_button: 4
 };
-const AppTypes = Object.keys(APPTYPE);
 
 // Work around Cinnamon#8201
 const tryFn = function(callback, errCallback) {
@@ -70,7 +68,7 @@ const St = imports.gi.St;
 const Main = imports.ui.main;
 
 let onlyOneTooltip = null;
-var showTooltip = function (actor, xpos, ypos, center_x, text) {
+var showTooltip = (actor, xpos, ypos, center_x, text) => {
     if (onlyOneTooltip) {
         global.log("Cinnamenu: Previous tooltip still exists...removing...");
         onlyOneTooltip.destroy();
@@ -79,7 +77,7 @@ var showTooltip = function (actor, xpos, ypos, center_x, text) {
     onlyOneTooltip = new NewTooltip (actor, xpos, ypos, center_x, text);
 };
 
-var hideTooltip = function () {
+var hideTooltip = () => {
     if (onlyOneTooltip) {
         onlyOneTooltip.destroy();
         onlyOneTooltip = null;
@@ -142,7 +140,7 @@ class NewTooltip {
 
 const {latinise} = imports.misc.util;
 
-const searchStr = function (q, str, quick = false) {
+const searchStr = (q, str, quick = false) => {
     const HIGHTLIGHT_MATCH = true;
     if ( !(typeof q === 'string' && q && typeof str === 'string' && str) ) {
         return { score: 0, result: str };
@@ -215,5 +213,5 @@ const searchStr = function (q, str, quick = false) {
     }
 };
 
-module.exports = {SEARCH_DEBUG, _, APPTYPE, AppTypes, tryFn, readFileAsync, readJSONAsync,
+module.exports = {SEARCH_DEBUG, _, APPTYPE, tryFn, readFileAsync, readJSONAsync,
                                                             showTooltip, hideTooltip, searchStr};

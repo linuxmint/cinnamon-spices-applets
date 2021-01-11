@@ -10,7 +10,7 @@
         "min": 1,
         "max": 60,
         "step": 1,
-        "description": "Pomodoro Duration:  "
+        "description": "Pomodoro Duration:"
     },
 
     "short_break_duration": {
@@ -19,7 +19,7 @@
         "min": 1,
         "max": 15,
         "step": 1,
-        "description": "Short Break Duration:  "
+        "description": "Short Break Duration:"
     },
 
     "long_break_duration": {
@@ -28,7 +28,7 @@
         "min": 1,
         "max": 60,
         "step": 1,
-        "description": "Long Break Duration:  "
+        "description": "Long Break Duration:"
     },
 
     "pomodori_number": {
@@ -37,7 +37,7 @@
         "min": 1,
         "max": 10,
         "step": 1,
-        "description": "Number of pomodori before long break:  "
+        "description": "Number of pomodori before long break:"
     },
 
     "head_options": {
@@ -68,7 +68,13 @@
         "description" : "Display the pomodoro icon in the applet panel",
         "default" : true
     },
-    
+
+    "use_symbolic_icon" : {
+        "type" : "checkbox",
+        "description" : "Use a symbolic icon in the applet panel",
+        "default" : false
+    },
+
     "show_timer" : {
         "type" : "checkbox",
         "description" : "Show the pomodoro timer in the applet panel",
@@ -80,6 +86,17 @@
         "description": "Sounds"
     },
 
+    "sox-info": {
+        "type": "label",
+        "description": "Please install 'sox' and restart Cinnamon to use the sound feature!",
+        "dependency": "show_sox_info"
+    },
+
+    "show_sox_info" : {
+        "type" : "generic",
+        "default" : false
+    },
+
     "timer_sound" : {
         "type" : "checkbox",
         "description" : "Play Timer Sound",
@@ -88,7 +105,7 @@
 
     "timer_sound_file" : {
         "type" : "filechooser",
-        "description" : "Timer Sound File ",
+        "description" : "Timer Sound File",
         "default" : "tick.ogg",
         "select-dir" : false,
         "dependency" : "timer_sound"
@@ -100,7 +117,7 @@
         "min": 1,
         "max": 100,
         "step": 1,
-        "description": "Sound volume:  ",
+        "description": "Sound volume:",
         "dependency" : "timer_sound"
     },
 
@@ -112,7 +129,7 @@
 
     "break_sound_file" : {
         "type" : "filechooser",
-        "description" : "Break Sound File ",
+        "description" : "Break Sound File",
         "default" : "deskbell.wav",
         "select-dir" : false,
         "dependency" : "break_sound"
@@ -124,7 +141,7 @@
         "min": 1,
         "max": 100,
         "step": 1,
-        "description": "Sound volume:  ",
+        "description": "Sound volume:",
         "dependency" : "break_sound"
     },
 
@@ -140,13 +157,13 @@
         "min": 5,
         "max": 600,
         "step": 5,
-        "description": "Warn Delay (in secs):  ",
+        "description": "Warn Delay (in secs):",
         "dependency" : "warn_sound"
     },
 
     "warn_sound_file" : {
         "type" : "filechooser",
-        "description" : "Warn Sound File ",
+        "description" : "Warn Sound File",
         "default" : "warn.wav",
         "select-dir" : false,
         "dependency" : "warn_sound"
@@ -158,7 +175,7 @@
         "min": 1,
         "max": 100,
         "step": 1,
-        "description": "Sound volume:  ",
+        "description": "Sound volume:",
         "dependency" : "warn_sound"
     },
 
@@ -171,7 +188,7 @@
 
     "start_sound_file" : {
         "type" : "filechooser",
-        "description" : "Start Sound File ",
+        "description" : "Start Sound File",
         "default" : "deskbell.wav",
         "select-dir" : false,
         "dependency" : "start_sound"
@@ -183,7 +200,7 @@
         "min": 1,
         "max": 100,
         "step": 1,
-        "description": "Sound volume:  ",
+        "description": "Sound volume:",
         "dependency" : "start_sound"
     }
 }

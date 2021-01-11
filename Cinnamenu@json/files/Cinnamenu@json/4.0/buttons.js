@@ -5,6 +5,7 @@ const St = imports.gi.St;
 const Clutter = imports.gi.Clutter;
 const {AppState} = imports.gi.Cinnamon;
 const {EllipsizeMode} = imports.gi.Pango;
+const XApp = imports.gi.XApp;
 const Main = imports.ui.main;
 const {PopupBaseMenuItem, PopupSubMenu, PopupIconMenuItem, PopupSeparatorMenuItem} = imports.ui.popupMenu;
 const {DragMotionResult, makeDraggable} = imports.ui.dnd;
@@ -12,7 +13,7 @@ const {getUserDesktopDir, changeModeGFile} = imports.misc.fileUtils;
 const {SignalManager} = imports.misc.signalManager;
 const {spawnCommandLine, spawn, unref} = imports.misc.util;
 const MessageTray = imports.ui.messageTray;
-
+const ApplicationsViewModeLIST = 0, ApplicationsViewModeGRID = 1;
 const {SEARCH_DEBUG, _, APPTYPE, tryFn, showTooltip, hideTooltip} = require('./utils');
 const {MODABLE, MODED} = require('./emoji');
 const PlacementTOOLTIP = 1, PlacementUNDER = 2, PlacementNONE = 3;
@@ -20,27 +21,26 @@ const SHOW_SEARCH_MARKUP_IN_TOOLTIP = true;
 const USER_DESKTOP_PATH = getUserDesktopDir();
 const CAN_UNINSTALL = GLib.file_test('/usr/bin/cinnamon-remove-application', GLib.FileTest.EXISTS);
 
-class CategoryListButton extends PopupBaseMenuItem {
-    constructor(appThis, dir, altNameText, altIconNames/*array of names*/) {
+class CategoryButton extends PopupBaseMenuItem {
+    constructor(appThis, dir, altNameText, altIconName) {
         super({ hover: false, activate: false });
         this.appThis = appThis;
         this.signals = new SignalManager(null);
-        this.index = -1;
+        this.actor.set_style_class_name('menu-category-button');
         this.disabled = false;
         this.entered = null;
+        let iconName;
         let isStrDir = typeof dir === 'string';
         if (isStrDir) {
             this.id = dir;
             this.categoryNameText = altNameText;
+            iconName = altIconName;
         } else {
             this.id = altNameText;
             const dirName = dir.get_name();
             this.categoryNameText = dirName ? dirName : '';
-        }
-
-        if (!isStrDir) {
+            //
             let icon = dir.get_icon();
-            let iconName = '';
             if (icon) {
                 if (icon.names) {
                     iconName = icon.names[0];
@@ -49,16 +49,12 @@ class CategoryListButton extends PopupBaseMenuItem {
                     iconName = icon.get_names()[0];
                 }
             }
-            if (iconName === '') {
+            if (!iconName) {
                 iconName = 'folder';
             }
-            this.icon = new St.Icon({   icon_name: iconName, icon_type: St.IconType.FULLCOLOR,
-                                        icon_size: this.appThis.settings.categoryIconSize});
-        } else {
-            this.icon = new St.Icon({   gicon: Gio.ThemedIcon.new_from_names(altIconNames),
-                                        icon_size: this.appThis.settings.categoryIconSize,
-                                        icon_type: St.IconType.FULLCOLOR });
         }
+        this.icon = new St.Icon({   icon_name: iconName, icon_type: St.IconType.FULLCOLOR,
+                                    icon_size: this.appThis.settings.categoryIconSize});
         if (this.appThis.settings.categoryIconSize > 0) {
             this.addActor(this.icon);
         }
@@ -73,15 +69,15 @@ class CategoryListButton extends PopupBaseMenuItem {
         //?undo
         this.actor._delegate = {
                 handleDragOver: (source /*, actor, x, y, time */) => {
-                        if (!source.index || source.index === this.index) {
-                                return DragMotionResult.NO_DROP;
+                        if (!source.categoryNameText || source.categoryNameText === this.categoryNameText) {
+                            return DragMotionResult.NO_DROP;
                         }
-                        this.appThis.resetCategoryOpacity();
+                        this.appThis.resetAllCategoriesOpacity();
                         this.actor.set_opacity(50);
                         return DragMotionResult.MOVE_DROP; },
                 acceptDrop: (source /*, actor, x, y, time */) => {
-                        if (!source.index || source.index === this.index) {
-                            this.appThis.resetCategoryOpacity();
+                        if (!source.categoryNameText || source.categoryNameText === this.categoryNameText) {
+                            this.appThis.resetAllCategoriesOpacity();
                             return DragMotionResult.NO_DROP;
                         }
                         this.appThis.moveCategoryToPos(source.id, this.id);
@@ -90,7 +86,7 @@ class CategoryListButton extends PopupBaseMenuItem {
                 _getDragActor: () => new Clutter.Clone({source: this.actor}),
                 getDragActor: () => new Clutter.Clone({source: this.icon}),
                 isDraggableApp: false,
-                index: this.index,
+                categoryNameText: this.categoryNameText,
                 id: this.id };
 
         this.draggable = makeDraggable(this.actor);
@@ -100,26 +96,34 @@ class CategoryListButton extends PopupBaseMenuItem {
         this.signals.connect(this.draggable, 'drag-cancelled', (...args) => this.onDragCancelled(...args));
         this.signals.connect(this.draggable, 'drag-end', (...args) => this.onDragEnd(...args));
         //?undo
-
+        this.signals.connect(this.actor, 'motion-event', (...args) => this.handleEnter(...args));
         this.signals.connect(this.actor, 'enter-event', (...args) => this.handleEnter(...args));
         this.signals.connect(this.actor, 'leave-event', (...args) => this.handleLeave(...args));
         this.signals.connect(this.actor, 'button-release-event', (...args) => this.handleButtonRelease(...args));
     }
 
+    setHighlight(on) {
+        if (on) {
+            if (!this.actor.has_style_pseudo_class('highlighted')) {
+                this.actor.add_style_pseudo_class('highlighted'); //'font-weight: bold;';
+            }
+        } else {
+            if (this.actor.has_style_pseudo_class('highlighted')) {
+                this.actor.remove_style_pseudo_class('highlighted');
+            }
+        }
+    }
+
     onDragBegin() {
         this.actor.set_opacity(51);
-        //this.appThis.categoryDragged = true;
     }
 
     onDragCancelled() {
         this.actor.set_opacity(255);
-        //this.appThis.categoryDragged = false;
     }
 
     onDragEnd() {
-        this.appThis.resetCategoryOpacity();
-        //this.actor.set_opacity(255);
-        //setTimeout(() => { this.appThis.categoryDragged = false; }, 0);
+        this.appThis.resetAllCategoriesOpacity();
     }
 
     selectCategory() {
@@ -130,17 +134,17 @@ class CategoryListButton extends PopupBaseMenuItem {
     }
 
     handleEnter(actor, event) {
-        if (this.disabled || this.appThis.contextMenu.isOpen) {
-            return Clutter.EVENT_STOP;
+        //this method handles enter-event, motion-event and keypress
+        if (this.entered || this.disabled || this.appThis.contextMenu.isOpen ||
+                            this.appThis.badAngle && !this.appThis.settings.categoryClick) {
+            return Clutter.EVENT_PROPAGATE;
         }
 
-        if (event) {//?undo
+        if (event) {//mouse
             this.appThis.clearEnteredActors();
-        } else {
+        } else {//keypress
             this.appThis.scrollToButton(this, true);
         }
-
-        //this.appThis.scrollToButton(this, true);
 
         this.entered = true;
         if (this.appThis.settings.categoryClick) {
@@ -192,9 +196,13 @@ class CategoryListButton extends PopupBaseMenuItem {
             this.selectCategory();
             return Clutter.EVENT_STOP;
         } else if (button === 3) {
-            this.appThis.contextMenu.open(this.id, event, this, true);
+            this.openContextMenu(event);
             return Clutter.EVENT_STOP;
         }
+    }
+
+    openContextMenu(e) {
+        this.appThis.contextMenu.open(this.id, e, this, true);
     }
 
     disable() {
@@ -286,11 +294,8 @@ class ContextMenu {
 
     open(app, e, button, category = false) {
         //e is used to position context menu at mouse coords. If keypress opens menu then
-        // e is undefined and button position is used instead,
-        for (let i = 0; i < this.contextMenuButtons.length; i++) {
-            this.contextMenuButtons[i].destroy();
-            this.contextMenuButtons[i] = null;
-        }
+        // e is undefined and button position is used instead.
+        this.contextMenuButtons.forEach(button => button.destroy());
         this.contextMenuButtons = [];
 
         if (category) {
@@ -303,18 +308,16 @@ class ContextMenu {
                                         this.close(); } ));
         } else if (app.type === APPTYPE.application) {
             this.populateContextMenu_apps(app);
-        } else if (app.type === APPTYPE.file) {
-            if (!GLib.file_test(Gio.File.new_for_uri(app.uri).get_path(), GLib.FileTest.EXISTS)) {
-                Main.notify(_("This file is no longer available"),'');
+        } else if (app.type === APPTYPE.file && !app.isBackButton) {
+            if (!this.populateContextMenu_files(app)) {
                 return;
             }
-            this.populateContextMenu_files(app);
-        } else if (app.type == APPTYPE.provider) {//Emoji
-            if (!MODABLE.includes(app.icon)) {
+        } else if (app.type == APPTYPE.provider && app.emoji) {
+            if (!MODABLE.includes(app.emoji)) {
                 return;
             }
             const addMenuItem = (char, text) => {
-                const i = MODABLE.indexOf(app.icon);
+                const i = MODABLE.indexOf(app.emoji);
                 let newEmoji = MODED[i].replace('\u{1F3FB}', char);
                 newEmoji = newEmoji.replace('\u{1F3FB}', char);
                 const item = new ContextMenuItem(this.appThis, newEmoji + ' ' + text, null,
@@ -329,9 +332,12 @@ class ContextMenu {
             addMenuItem('\u{1F3FD}', 'medium skin tone');
             addMenuItem('\u{1F3FE}', 'medium-dark skin tone');
             addMenuItem('\u{1F3FF}', 'dark skin tone');
+        } else {
+            return;
         }
 
         this.isOpen = true;
+        this.appThis.resizer.inhibit_resizing = true;
 
         const contextMenuWidth = this.menu.actor.width;
         const contextMenuHeight = this.menu.actor.height;
@@ -355,6 +361,7 @@ class ContextMenu {
         let [cx, cy] = this.contextMenuBox.get_transformed_position();
         cx = Math.round(mx - cx);
         cy = Math.round(my - cy);
+
         this.menu.actor.anchor_x = -cx;
         this.menu.actor.anchor_y = -cy;
 
@@ -389,17 +396,19 @@ class ContextMenu {
                     enabled_applets.push('panel1:right:0:panel-launchers@cinnamon.org:' + new_applet_id);
                     global.settings.set_strv('enabled-applets', enabled_applets);
                 }
-                Main.AppletManager.get_role_provider(Main.AppletManager.Roles.PANEL_LAUNCHER)
-                                                                            .acceptNewLauncher(app.get_id());
+                const launcherApplet = Main.AppletManager.get_role_provider(Main.AppletManager.Roles.PANEL_LAUNCHER);
+                if (launcherApplet) {
+                    launcherApplet.acceptNewLauncher(app.get_id());
+                }
                 this.close(); } ));
         if (USER_DESKTOP_PATH) {
             addMenuItem( new ContextMenuItem(this.appThis, _('Add to desktop'), 'computer',
-                () => { const destFile = Gio.file_new_for_path(USER_DESKTOP_PATH + '/' + app.get_id());
+                () => { const file = Gio.file_new_for_path(app.get_app_info().get_filename());
+                        const destFile = Gio.file_new_for_path(USER_DESKTOP_PATH + '/' + file.get_basename());
                         tryFn(() => {
-                            Gio.file_new_for_path(app.get_app_info().get_filename())
-                                .copy(  Gio.file_new_for_path(USER_DESKTOP_PATH + '/' + app.get_id()), 0, null, null);
+                            file.copy( destFile, 0, null, null);
                             changeModeGFile(destFile, 755);
-                        }, function(e) {
+                        }, (e) => {
                             global.log(e);
                         });
                         this.close(); } ));
@@ -407,11 +416,11 @@ class ContextMenu {
         if (this.appThis.appFavorites.isFavorite(app.get_id())) {
             addMenuItem( new ContextMenuItem(this.appThis, _('Remove from favorites'), 'starred',
                                             () => { this.appThis.appFavorites.removeFavorite(app.get_id());
-                                            this.close(); } ));
+                                                    this.close(); } ));
         } else {
             addMenuItem( new ContextMenuItem(this.appThis, _('Add to favorites'), 'non-starred',
                                         () => { this.appThis.appFavorites.addFavorite(app.get_id());
-                                        this.close(); } ));
+                                                this.close(); } ));
         }
         if (CAN_UNINSTALL) {
             addMenuItem( new ContextMenuItem(this.appThis, _('Uninstall'), 'edit-delete',
@@ -427,39 +436,80 @@ class ContextMenu {
             this.contextMenuButtons.push(item);
         };
         const hasLocalPath = (file) => (file.is_native() && file.get_path() != null);
-        //
-        addMenuItem( new ContextMenuItem(this.appThis, _("Open with"), null, null ));
         const file = Gio.File.new_for_uri(app.uri);
-        const defaultInfo = Gio.AppInfo.get_default_for_type(app.mimeType, !hasLocalPath(file));
-        if (defaultInfo) {
-            addMenuItem( new ContextMenuItem(   this.appThis, defaultInfo.get_display_name(), null,
-                                                () => { defaultInfo.launch([file], null);
-                                                        this.appThis.closeMenu(); } ));
+        const fileExists = GLib.file_test(file.get_path(), GLib.FileTest.EXISTS);
+        if (!fileExists && !app.isFavoriteFile) {
+            Main.notify(_("This file is no longer available"),'');
+            return false; //no context menu
         }
         //
-        const infos = Gio.AppInfo.get_all_for_type(app.mimeType);
-        for (let i = 0; i < infos.length; i++) {
-            const info = infos[i];
-            //const file = Gio.File.new_for_uri(app.uri);
-            if (!hasLocalPath(file) || !info.supports_uris() || info.equal(defaultInfo)) {
-                continue;
+        if (fileExists) {
+            addMenuItem( new ContextMenuItem(this.appThis, _("Open with"), null, null ));
+            const defaultInfo = Gio.AppInfo.get_default_for_type(app.mimeType, !hasLocalPath(file));
+            if (defaultInfo) {
+                addMenuItem( new ContextMenuItem(   this.appThis, defaultInfo.get_display_name(), null,
+                                                    () => { defaultInfo.launch([file], null);
+                                                            this.appThis.closeMenu(); } ));
             }
-            addMenuItem( new ContextMenuItem(   this.appThis, info.get_display_name(), null,
-                                                () => { info.launch([file], null);
+            Gio.AppInfo.get_all_for_type(app.mimeType).forEach(info => {
+                if (!hasLocalPath(file) || !info.supports_uris() || info.equal(defaultInfo)) {
+                    return;
+                }
+                addMenuItem( new ContextMenuItem(   this.appThis, info.get_display_name(), null,
+                                                    () => { info.launch([file], null);
+                                                            this.appThis.closeMenu(); } ));
+            });
+            addMenuItem( new ContextMenuItem(   this.appThis, _('Other application...'), null,
+                                                () => { spawnCommandLine("nemo-open-with " + app.uri);
                                                         this.appThis.closeMenu(); } ));
         }
-        //
-        addMenuItem( new ContextMenuItem(   this.appThis, _('Other application...'), null,
-                                            () => { spawnCommandLine("nemo-open-with " + app.uri);
-                                                    this.appThis.closeMenu(); } ));
-        const folder = file.get_parent();
-        if (app.description) { //if recent item (not a browser folder/file)
+
+        const favs = XApp.Favorites ? XApp.Favorites.get_default() : null;
+        if (favs) {//prior to cinnamon 4.8, XApp favorites are not available
             this.menu.addMenuItem(new PopupSeparatorMenuItem(this.appThis));
-            addMenuItem( new ContextMenuItem(   this.appThis, _('Open containing folder'), null,
+            if (favs.find_by_uri(app.uri)) { //favorite
+                addMenuItem( new ContextMenuItem(this.appThis, _('Remove from favorites'), 'starred',
+                                                        () => { favs.remove(app.uri);
+                                                                this.appThis.updateAfterFavFileChange();
+                                                                this.close(); } ));
+            } else {
+                addMenuItem( new ContextMenuItem(this.appThis, _('Add to favorites'), 'non-starred',
+                              () => {   favs.add(app.uri);
+                                        this.appThis.updateAfterFavFileChange();
+                                        if (XApp.Favorites.get_default().get_favorites(null).length == 0) {
+                                            //favs list doesn't update straight away so if adding first fav
+                                            //then close menu so favs category can appear after reopening menu.
+                                            this.appThis.closeMenu();
+                                        } else {
+                                            this.close();
+                                        }
+                                    } ));
+            }
+        }
+        const folder = file.get_parent();
+        if (app.isRecentFile || app.isFavoriteFile) { //not a browser folder/file
+            this.menu.addMenuItem(new PopupSeparatorMenuItem(this.appThis));
+            addMenuItem( new ContextMenuItem(   this.appThis, _('Open containing folder'), 'go-jump',
                         () => { const fileBrowser = Gio.AppInfo.get_default_for_type('inode/directory', true);
                                 fileBrowser.launch([folder], null);
                                 this.appThis.closeMenu(); } ));
         }
+        if (!app.isFavoriteFile) {
+            this.menu.addMenuItem(new PopupSeparatorMenuItem(this.appThis));
+            addMenuItem( new ContextMenuItem(   this.appThis, _('Move to trash'), 'user-trash',
+                        () => { const file = Gio.File.new_for_uri(app.uri);
+                                try {
+                                    file.trash(null);
+                                } catch (e) {
+                                    Main.notify(_("Error while moving file to trash:"),e.message);
+                                }
+                                this.appThis.sidebar.populate();
+                                this.appThis.updateMenuWidth();
+                                this.appThis.updateMenuHeight();
+                                this.appThis.setActiveCategory(this.appThis.currentCategory);
+                                this.close(); } ));
+        }
+        return true; //success.
     }
 
     close() {
@@ -468,6 +518,7 @@ class ContextMenu {
         }*/
         this.menu.close();
         this.isOpen = false;
+        this.appThis.resizer.inhibit_resizing = false;
     }
 
     destroy() {
@@ -475,71 +526,57 @@ class ContextMenu {
     }
 }
 
-class AppListGridButton extends PopupBaseMenuItem {
+class AppButton extends PopupBaseMenuItem {
     constructor(appThis, app) {
         super({ hover: false, activate: false });
         this.appThis = appThis;
         this.app = app;
+        const isListView = this.appThis.settings.applicationsViewMode === ApplicationsViewModeLIST;
         this.actor.set_style_class_name('menu-application-button');
-        if (!this.appThis.isListView) {
-            this.actor.set_style('padding-left: 0px; padding-right: 0px;');
-        }
-        this.actor.x_align = this.appThis.isListView ? St.Align.START : St.Align.MIDDLE;
+        this.actor.x_align = isListView ? St.Align.START : St.Align.MIDDLE;
         this.actor.y_align = St.Align.MIDDLE;
-        if (!this.appThis.isListView) {
-            this.actor.width = this.appThis.appsView.applicationsGridBox.width /
-                                                                this.appThis.settings.appsGridColumnCount;
+        if (!isListView) {
+            this.actor.set_style('padding-left: 0px; padding-right: 0px;');
+            this.setWidth();
         }
         this.signals = new SignalManager(null);
         this.entered = null;
         //----------ICON---------------------------------------------
         //create icon even if iconSize is 0 so dnd has something to drag
-        if (this.app.type === APPTYPE.application) {
-            this.icon = this.app.create_icon_texture(this.appThis.getIconSize());
-        } else if (this.app.type === APPTYPE.place) {
-            if (this.app.icon instanceof St.Icon) {
-                this.icon = this.app.icon;
-            } else {
-                this.icon = new St.Icon({ gicon: this.app.icon, icon_size: this.appThis.getIconSize()});
-            }
-        } else if (this.app.type === APPTYPE.file) {
-            if (this.app.icon) {
-                this.icon = new St.Icon({ gicon: this.app.icon, icon_size: this.appThis.getIconSize()});
-            } else {//back button
-                this.icon = new St.Icon({ icon_name: 'edit-undo-symbolic', icon_size: this.appThis.getIconSize()});
-            }
-        } else if (this.app.type === APPTYPE.clearlist) {
+        if (this.app.icon) { //APPTYPE.place or APPTYPE.provider //instanceof St.Icon
+            this.icon = this.app.icon;
+        } else if (this.app.gicon) { //APPTYPE.file or APPTYPE.place
+            this.icon = new St.Icon({ gicon: this.app.gicon, icon_size: this.appThis.getAppIconSize()});
+        } else if (this.app.emoji) {
+            const iconLabel = new St.Label({ style_class: '', style: 'color: white; font-size: ' +
+                                            (Math.round(this.appThis.getAppIconSize() * 0.85)) + 'px;'});
+            iconLabel.get_clutter_text().set_markup(this.app.emoji);
+            this.icon = iconLabel;
+        } else if (this.app.type === APPTYPE.application) {
+            this.icon = this.app.create_icon_texture(this.appThis.getAppIconSize());
+        } else if (this.app.isBackButton) {
+            this.icon = new St.Icon({ icon_name: 'edit-undo-symbolic', icon_size: this.appThis.getAppIconSize()});
+        } else if (this.app.type === APPTYPE.clearlist_button) {
             this.icon = new St.Icon({   icon_name: 'edit-clear', icon_type: St.IconType.SYMBOLIC,
-                                        icon_size: this.appThis.getIconSize()});
-        } else if (this.app.type === APPTYPE.provider) {
-            if (typeof this.app.icon !== 'string') {
-                this.icon = this.app.icon;
-            } else { //emoji
-                const iconLabel = new St.Label({ style_class: '', style: 'color: white; font-size: ' +
-                                                (Math.round(this.appThis.getIconSize() * 0.85)) + 'px;'});
-                iconLabel.get_clutter_text().set_markup(this.app.icon);
-                this.icon = iconLabel;
-            }
+                                        icon_size: this.appThis.getAppIconSize()});
         }
         if (!this.icon) {
-            this.icon = new St.Icon({   icon_name: 'error',
-                                        icon_size: this.appThis.getIconSize(),
-                                        icon_type: St.IconType.FULLCOLOR});
+            this.icon = new St.Icon({icon_name: 'error', icon_size: this.appThis.getAppIconSize()});
         }
         //--------Label------------------------------------
         this.label = new St.Label({ style_class: 'menu-application-button-label',
                                     style: 'padding-right: 2px; padding-left: 2px;'});
-        if (!this.appThis.isListView && this.appThis.settings.descriptionPlacement === PlacementUNDER) {
+        if (!isListView && this.appThis.settings.descriptionPlacement === PlacementUNDER) {
             this.label.set_style('text-align: center;');
         }
         this.formatLabel();
         this.iconContainer = new St.BoxLayout();
-        if (this.icon && this.appThis.getIconSize() > 0) {
+        if (this.icon && this.appThis.getAppIconSize() > 0) {
             this.iconContainer.add(this.icon, { x_fill: false, y_fill: false,
                                                 x_align: St.Align.MIDDLE, y_align: St.Align.MIDDLE});
         }
-        this.dot = new St.Widget({
-                style: this.appThis.isListView ?
+        this.dot = new St.Widget({ //app running indicator
+                style: isListView ?
                 'width: 2px; height: 12px; background-color: ' + this.appThis.getThemeForegroundColor() +
                                                     '; margin: 0px; border: 1px; border-radius: 10px;' :
                 'width: 32px; height: 2px; background-color: ' + this.appThis.getThemeForegroundColor() +
@@ -548,41 +585,41 @@ class AppListGridButton extends PopupBaseMenuItem {
                 x_expand: false,
                 y_expand: false});
         //-------------------buttonBox-------------------------
-        this.buttonBox = new St.BoxLayout({ vertical: !this.appThis.isListView, y_expand: false });
-        if (!this.appThis.isListView) {
+        this.buttonBox = new St.BoxLayout({ vertical: !isListView, y_expand: false });
+        if (!isListView) {
             this.buttonBox.width = 600;//bigger than needed to ensure it centers in it's grid space
-        } else {
-            this.buttonBox.width = this.appThis.appBoxWidth - 30;//omitting this causes list scrolling to slow down
+        //} else {
+            //this.buttonBox.width = this.appThis.appBoxWidth - 30;
         }
         this.buttonBox.add(this.iconContainer, {
                                 x_fill: false, y_fill: false,
-                                x_align: this.appThis.isListView ? St.Align.START : St.Align.MIDDLE,
+                                x_align: isListView ? St.Align.START : St.Align.MIDDLE,
                                 y_align: St.Align.MIDDLE});
         this.buttonBox.add(this.dot, {  x_fill: false, y_fill: false,
                                         x_align: St.Align.MIDDLE, y_align: St.Align.MIDDLE });
         this.buttonBox.add(this.label, {
                                 x_fill: false, y_fill: false,
-                                x_align: this.appThis.isListView ? St.Align.START : St.Align.MIDDLE,
+                                x_align: isListView ? St.Align.START : St.Align.MIDDLE,
                                 y_align: St.Align.MIDDLE});
         this.addActor(this.buttonBox);
         if (this.icon) {
             this.icon.realize();
         }
-
-        if (this.app.type === APPTYPE.application) { //----------dnd--------------
+        //----------dnd--------------
+        if (this.app.type === APPTYPE.application) {
             this.actor._delegate = {
                     handleDragOver: (source) => {
-                            if (source.isDraggableApp === true && source.get_app_id() !== this.app.get_id() &&
-                                                                    this.appThis.currentCategory === 'favorites') {
-                                this.appThis.resetOpacity();
+                            if (source.isDraggableApp && source.get_app_id() !== this.app.get_id() &&
+                                                            this.appThis.currentCategory === 'favorite_apps') {
+                                this.appThis.resetAllAppsOpacity();
                                 this.actor.set_opacity(40);
                                 return DragMotionResult.MOVE_DROP;
                             }
                             return DragMotionResult.NO_DROP; },
                     handleDragOut: () => {  this.actor.set_opacity(255); },
                     acceptDrop: (source) => {
-                            if (source.isDraggableApp === true && source.get_app_id() !== this.app.get_id() &&
-                                                                this.appThis.currentCategory === 'favorites') {
+                            if (source.isDraggableApp && source.get_app_id() !== this.app.get_id() &&
+                                                            this.appThis.currentCategory === 'favorite_apps') {
                                 this.actor.set_opacity(255);
                                 this.appThis.addFavoriteToPos(source.get_app_id(), this.app.get_id());
                                 return true;
@@ -627,7 +664,7 @@ class AppListGridButton extends PopupBaseMenuItem {
     }
 
     onDragEnd() {
-        this.appThis.resetOpacity();
+        this.appThis.resetAllAppsOpacity();
     }
 
     formatLabel() {
@@ -658,6 +695,11 @@ class AppListGridButton extends PopupBaseMenuItem {
         } else {*/
             clutterText.ellipsize = EllipsizeMode.END;
         //}
+    }
+
+    setWidth() {
+        //set width of grid button
+        this.actor.width = this.appThis.getGridValues().columnWidth;
     }
 
     handleEnter(actor, event) {
@@ -695,11 +737,10 @@ class AppListGridButton extends PopupBaseMenuItem {
                 }
             }
             tooltipMarkup = tooltipMarkup.replace(/&/g, '&amp;');
-
             let [x, y] = this.actor.get_transformed_position();
             let {width, height} = this.actor;
             let center_x = false; //should tooltip x pos. be centered on x
-            if (this.appThis.isListView) {
+            if (this.appThis.settings.applicationsViewMode === ApplicationsViewModeLIST) {
                 x += 175 * global.ui_scale;
                 y += height + 8 * global.ui_scale;
             } else {//grid view
@@ -753,8 +794,7 @@ class AppListGridButton extends PopupBaseMenuItem {
                 this.handleEnter();
                 return Clutter.EVENT_STOP;
             } else {
-                if (this.app.type == APPTYPE.application || this.app.type == APPTYPE.file ||
-                            this.app.type == APPTYPE.provider && typeof this.app.icon === 'string' ){//emoji
+                if (this.app.type == APPTYPE.application || this.app.type == APPTYPE.file || this.app.emoji ){
                     this.openContextMenu(e);
                 }
                 return Clutter.EVENT_STOP;
@@ -765,7 +805,10 @@ class AppListGridButton extends PopupBaseMenuItem {
 
     activate() {
         if (this.app.type === APPTYPE.application) {
-            this.app.newAppShouldHighlight = false;
+            if (this.app.newAppShouldHighlight) {
+                this.app.newAppShouldHighlight = false;
+                this.formatLabel();
+            }
             this.app.open_new_window(-1);
             this.appThis.closeMenu();
         } else if (this.app.type === APPTYPE.place) {
@@ -776,18 +819,18 @@ class AppListGridButton extends PopupBaseMenuItem {
             }
             this.appThis.closeMenu();
         } else if (this.app.type === APPTYPE.file) {
-            if (this.app.directory) {
+            if (this.app.isDirectory) {//broswer view
                 this.appThis.setActiveCategory(Gio.File.new_for_uri(this.app.uri).get_path());
-                return;
+            } else {
+                try {
+                    Gio.app_info_launch_default_for_uri(this.app.uri, global.create_app_launch_context());
+                    this.appThis.closeMenu();
+                } catch (e) {
+                    Main.notify(_("This file is no longer available"),e.message);
+                    //don't closeMenu
+                }
             }
-            try {
-                Gio.app_info_launch_default_for_uri(this.app.uri, global.create_app_launch_context());
-                this.appThis.closeMenu();
-            } catch (e) {
-                Main.notify(_("This file is no longer available"),e.message);
-                //don't closeMenu
-            }
-        } else if (this.app.type === APPTYPE.clearlist) {
+        } else if (this.app.type === APPTYPE.clearlist_button) {
             Gtk.RecentManager.get_default().purge_items();
             this.appThis.setActiveCategory('all');
             //don't closeMenu
@@ -842,7 +885,7 @@ class AppListGridButton extends PopupBaseMenuItem {
     }
 }
 
-class GroupButton extends PopupBaseMenuItem {
+class SidebarButton extends PopupBaseMenuItem {
     constructor(appThis, icon, app, name, description, callback) {
         super({ hover: false, activate: false });
         this.appThis = appThis;
@@ -859,7 +902,7 @@ class GroupButton extends PopupBaseMenuItem {
             this.icon.realize();
         }
 
-        if (this.app) { //----------dnd--------------
+        if (this.app && this.app.type === APPTYPE.application) { //----------dnd--------------
             this.actor._delegate = {
                     handleDragOver: (source) => {
                             if (source.isDraggableApp === true && source.get_app_id() !== this.app.get_id()) {
@@ -937,6 +980,13 @@ class GroupButton extends PopupBaseMenuItem {
             this.app.newAppShouldHighlight = false;
             this.app.open_new_window(-1);
             this.appThis.closeMenu();
+        } else if (this.app.type === APPTYPE.file) {
+            try {
+                Gio.app_info_launch_default_for_uri(this.app.uri, global.create_app_launch_context());
+                this.appThis.closeMenu();
+            } catch (e) {
+                Main.notify(_("This file is no longer available"),e.message);
+            }
         }
     }
 
@@ -971,6 +1021,7 @@ class GroupButton extends PopupBaseMenuItem {
         if (this.description) {
             text += '\n<span size="small">' + this.description + '</span>';
         }
+        text = text.replace(/&/g, '&amp;');
         showTooltip(this.actor, x, y, false /*don't center x*/, text);
         this.tooltip = true;
         return true;
@@ -1013,4 +1064,4 @@ class GroupButton extends PopupBaseMenuItem {
     }
 }
 
-module.exports = {CategoryListButton, AppListGridButton, ContextMenu, GroupButton};
+module.exports = {CategoryButton, AppButton, ContextMenu, SidebarButton};
