@@ -317,17 +317,15 @@ class WeatherApplet extends TextIconApplet {
 
     /** Spawn a command and await for the output it gives */
     public async SpawnProcess(command: string[]): Promise<any> {
-        let json = await new Promise((resolve, reject) => {
-            spawn_async(command, (aStdout: any) => {
-                resolve(aStdout);
-            });
-        });
-        return json;
-
-        // new command to handle errors as well
-        /*try {
+        // prepare command
+        let cmd = "";
+        for (let index = 0; index < command.length; index++) {
+            const element = command[index];
+            cmd += "'" + element + "' ";
+        }
+        try {
             let json = await new Promise((resolve, reject) => {
-                spawnCommandLineAsyncIO(command, (aStdout: string, err: string, exitCode: number) => {
+                spawnCommandLineAsyncIO(cmd, (aStdout: string, err: string, exitCode: number) => {
                     if (exitCode != 0) {
                         reject(err);
                     }
@@ -336,12 +334,13 @@ class WeatherApplet extends TextIconApplet {
                     }
                 });
             });
-            global.log(json)
             return json;
         }
         catch(e) {
-            return e;
-        }*/
+            this.log.Error("Error calling command " + cmd + ", error: ");
+            global.log(e);
+            return null;
+        }
     }
 
 	/**
@@ -2589,7 +2588,7 @@ class LocationStore {
     // --------------------------
 
     /**
-     * NOT WORKING, does not return any info atm
+     * NOT WORKING, fileInfo completely empty atm
      * @param file 
      */
     private async GetFileInfo(file: imports.gi.Gio.File): Promise<imports.gi.Gio.FileInfo> {
@@ -2605,10 +2604,10 @@ class LocationStore {
     private async FileExists(file: imports.gi.Gio.File, dictionary: boolean = false): Promise<boolean> {
         try {
             return file.query_exists(null);
-            // fileInfo doesn't work, don't use for now
+            /*// fileInfo doesn't work, don't use for now
             let info = await this.GetFileInfo(file);
             let type = info.get_size(); // type always 0
-            return true;
+            return true;*/
         }
         catch (e) {
             this.app.log.Error("Cannot get file info for '" + file.get_path() + "', error: ");

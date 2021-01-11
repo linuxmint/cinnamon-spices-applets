@@ -241,12 +241,29 @@ class WeatherApplet extends TextIconApplet {
     }
     ;
     async SpawnProcess(command) {
-        let json = await new Promise((resolve, reject) => {
-            spawn_async(command, (aStdout) => {
-                resolve(aStdout);
+        let cmd = "";
+        for (let index = 0; index < command.length; index++) {
+            const element = command[index];
+            cmd += "'" + element + "' ";
+        }
+        try {
+            let json = await new Promise((resolve, reject) => {
+                spawnCommandLineAsyncIO(cmd, (aStdout, err, exitCode) => {
+                    if (exitCode != 0) {
+                        reject(err);
+                    }
+                    else {
+                        resolve(aStdout);
+                    }
+                });
             });
-        });
-        return json;
+            return json;
+        }
+        catch (e) {
+            this.log.Error("Error calling command " + cmd + ", error: ");
+            global.log(e);
+            return null;
+        }
     }
     async LoadAsync(query) {
         let data = await new Promise((resolve, reject) => {
@@ -1932,9 +1949,6 @@ class LocationStore {
     async FileExists(file, dictionary = false) {
         try {
             return file.query_exists(null);
-            let info = await this.GetFileInfo(file);
-            let type = info.get_size();
-            return true;
         }
         catch (e) {
             this.app.log.Error("Cannot get file info for '" + file.get_path() + "', error: ");
@@ -1972,6 +1986,11 @@ class LocationStore {
                     result = file.delete_finish(res);
                 }
                 catch (e) {
+                    let error = e;
+                    if (error.matches(error.domain, Gio.IOErrorEnum.NOT_FOUND)) {
+                        resolve(true);
+                        return true;
+                    }
                     this.app.log.Error("Can't delete file, reason: ");
                     global.log(e);
                     resolve(false);

@@ -304,17 +304,37 @@ var WeatherApplet = (function (_super) {
     ;
     WeatherApplet.prototype.SpawnProcess = function (command) {
         return __awaiter(this, void 0, void 0, function () {
-            var json;
+            var cmd, index, element, json, e_1;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4, new Promise(function (resolve, reject) {
-                            spawn_async(command, function (aStdout) {
-                                resolve(aStdout);
-                            });
-                        })];
+                    case 0:
+                        cmd = "";
+                        for (index = 0; index < command.length; index++) {
+                            element = command[index];
+                            cmd += "'" + element + "' ";
+                        }
+                        _a.label = 1;
                     case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4, new Promise(function (resolve, reject) {
+                                spawnCommandLineAsyncIO(cmd, function (aStdout, err, exitCode) {
+                                    if (exitCode != 0) {
+                                        reject(err);
+                                    }
+                                    else {
+                                        resolve(aStdout);
+                                    }
+                                });
+                            })];
+                    case 2:
                         json = _a.sent();
                         return [2, json];
+                    case 3:
+                        e_1 = _a.sent();
+                        this.log.Error("Error calling command " + cmd + ", error: ");
+                        global.log(e_1);
+                        return [2, null];
+                    case 4: return [2];
                 }
             });
         });
@@ -534,7 +554,7 @@ var WeatherApplet = (function (_super) {
     };
     WeatherApplet.prototype.refreshWeather = function (rebuild, location) {
         return __awaiter(this, void 0, void 0, function () {
-            var locationData, e_1, weatherInfo, e_2;
+            var locationData, e_2, weatherInfo, e_3;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -554,8 +574,8 @@ var WeatherApplet = (function (_super) {
                         locationData = _a.sent();
                         return [3, 4];
                     case 3:
-                        e_1 = _a.sent();
-                        this.log.Error(e_1);
+                        e_2 = _a.sent();
+                        this.log.Error(e_2);
                         this.Unlock();
                         return [2, "error"];
                     case 4: return [3, 6];
@@ -602,8 +622,8 @@ var WeatherApplet = (function (_super) {
                         this.Unlock();
                         return [2, "success"];
                     case 9:
-                        e_2 = _a.sent();
-                        this.log.Error("Generic Error while refreshing Weather info: " + e_2);
+                        e_3 = _a.sent();
+                        this.log.Error("Generic Error while refreshing Weather info: " + e_3);
                         this.HandleError({ type: "hard", detail: "unknown", message: _("Unexpected Error While Refreshing Weather, please see log in Looking Glass") });
                         this.Unlock();
                         return [2, "failure"];
@@ -1711,7 +1731,7 @@ var WeatherLoop = (function () {
     };
     WeatherLoop.prototype.Start = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var state, e_3;
+            var state, e_4;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -1748,8 +1768,8 @@ var WeatherLoop = (function () {
                         _a.label = 6;
                     case 6: return [3, 8];
                     case 7:
-                        e_3 = _a.sent();
-                        this.app.log.Error("Error in Main loop: " + e_3);
+                        e_4 = _a.sent();
+                        this.app.log.Error("Error in Main loop: " + e_4);
                         this.app.encounteredError = true;
                         return [3, 8];
                     case 8: return [4, delay(this.LoopInterval())];
@@ -1844,7 +1864,7 @@ var GeoLocation = (function () {
     }
     GeoLocation.prototype.GetLocation = function (searchText) {
         return __awaiter(this, void 0, void 0, function () {
-            var cached, locationData, result, e_4;
+            var cached, locationData, result, e_5;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -1881,8 +1901,8 @@ var GeoLocation = (function () {
                         this.cache[searchText] = result;
                         return [2, result];
                     case 2:
-                        e_4 = _a.sent();
-                        this.app.log.Error("Could not geolocate, error: " + JSON.stringify(e_4, null, 2));
+                        e_5 = _a.sent();
+                        this.app.log.Error("Could not geolocate, error: " + JSON.stringify(e_5, null, 2));
                         this.app.HandleError({
                             type: "soft",
                             detail: "bad api response",
@@ -2076,7 +2096,7 @@ var LocationStore = (function () {
     };
     LocationStore.prototype.LoadSavedLocations = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var content, e_5, error, locations;
+            var content, e_6, error, locations;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -2089,8 +2109,8 @@ var LocationStore = (function () {
                         content = _a.sent();
                         return [3, 4];
                     case 3:
-                        e_5 = _a.sent();
-                        error = e_5;
+                        e_6 = _a.sent();
+                        error = e_6;
                         if (error.matches(error.domain, Gio.IOErrorEnum.NOT_FOUND)) {
                             this.app.log.Print("Location store does not exist, skipping loading...");
                             return [2, true];
@@ -2163,23 +2183,16 @@ var LocationStore = (function () {
     LocationStore.prototype.FileExists = function (file, dictionary) {
         if (dictionary === void 0) { dictionary = false; }
         return __awaiter(this, void 0, void 0, function () {
-            var info, type, e_6;
             return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        _a.trys.push([0, 2, , 3]);
-                        return [2, file.query_exists(null)];
-                    case 1:
-                        info = _a.sent();
-                        type = info.get_size();
-                        return [2, true];
-                    case 2:
-                        e_6 = _a.sent();
-                        this.app.log.Error("Cannot get file info for '" + file.get_path() + "', error: ");
-                        global.log(e_6);
-                        return [2, false];
-                    case 3: return [2];
+                try {
+                    return [2, file.query_exists(null)];
                 }
+                catch (e) {
+                    this.app.log.Error("Cannot get file info for '" + file.get_path() + "', error: ");
+                    global.log(e);
+                    return [2, false];
+                }
+                return [2];
             });
         });
     };
@@ -2223,6 +2236,11 @@ var LocationStore = (function () {
                                     result = file.delete_finish(res);
                                 }
                                 catch (e) {
+                                    var error = e;
+                                    if (error.matches(error.domain, Gio.IOErrorEnum.NOT_FOUND)) {
+                                        resolve(true);
+                                        return true;
+                                    }
                                     _this.app.log.Error("Can't delete file, reason: ");
                                     global.log(e);
                                     resolve(false);

@@ -727,7 +727,7 @@ declare namespace imports.misc.util {
      * @param callback called on success or failure
      * @param opts args, flags, input
      */
-    export function spawnCommandLineAsyncIO(command: string[], callback: (stdout: string, stderr: string, exitCode: number) => void, opts?: any): gi.Gio.Subprocess;
+    export function spawnCommandLineAsyncIO(command: string, callback: (stdout: string, stderr: string, exitCode: number) => void, opts?: any): gi.Gio.Subprocess;
 }
 
 declare namespace imports.gettext {
