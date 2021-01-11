@@ -1,3 +1,7 @@
+### 1.1.5
+- Thanks to Alan01 for the danish translation, and to eson57 for the swedish translation.
+- Bugfix: align world clock times correctly
+
 ### 1.1.4
 - Display holidays/weekends in bold even outside of the selected month
 - Move "Date and Time Settings" to context menu
