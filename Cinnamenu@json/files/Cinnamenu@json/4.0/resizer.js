@@ -7,7 +7,6 @@ const ZONE_SIZE = 10;
 
 class PopupResizeHandler {
     constructor(applet, actor, wmin, wmax, hmin, hmax, resized_callback, get_user_width, get_user_height) {
-
         this.applet = applet;
         this.actor = actor;
         this.wmin = wmin * global.ui_scale;
@@ -47,12 +46,15 @@ class PopupResizeHandler {
             return false;
 
         //---Start drag---
+        //intermittent bug causing cinnamon to crash so ensure no settings callbacks during resizing
+        this.applet.settingsObj.finalize();
+        this.applet.initSettings();
+
         this._grabEvents();
         this.resizingInProgress = true;
 
         let [stageX, stageY] = event.get_coords();
         this.drag_start_position = {x: stageX, y: stageY};
-
         this.drag_start_size = {width: this.actor.width, height: this.actor.height};
         this.init_user_width = this.get_user_width();
         this.init_user_height = this.get_user_height();

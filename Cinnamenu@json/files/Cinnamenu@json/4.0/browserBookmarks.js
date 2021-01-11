@@ -203,7 +203,7 @@ class BookmarksManager {
             bookmarks = bookmarks.concat(readFirefoxProfiles(appSystem));
 
             for (let i = 0, len = bookmarks.length; i < len; i++) {
-                bookmarks[i].icon = bookmarks[i].app.get_icon();
+                bookmarks[i].gicon = bookmarks[i].app.get_icon();
                 bookmarks[i].mime = null;
                 bookmarks[i].description = bookmarks[i].uri;
                 bookmarks[i].type = APPTYPE.place;

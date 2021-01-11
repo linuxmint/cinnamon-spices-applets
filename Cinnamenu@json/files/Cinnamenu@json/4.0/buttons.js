@@ -102,6 +102,18 @@ class CategoryButton extends PopupBaseMenuItem {
         this.signals.connect(this.actor, 'button-release-event', (...args) => this.handleButtonRelease(...args));
     }
 
+    setHighlight(on) {
+        if (on) {
+            if (!this.actor.has_style_pseudo_class('highlighted')) {
+                this.actor.add_style_pseudo_class('highlighted'); //'font-weight: bold;';
+            }
+        } else {
+            if (this.actor.has_style_pseudo_class('highlighted')) {
+                this.actor.remove_style_pseudo_class('highlighted');
+            }
+        }
+    }
+
     onDragBegin() {
         this.actor.set_opacity(51);
     }
@@ -296,16 +308,16 @@ class ContextMenu {
                                         this.close(); } ));
         } else if (app.type === APPTYPE.application) {
             this.populateContextMenu_apps(app);
-        } else if (app.type === APPTYPE.file) {
+        } else if (app.type === APPTYPE.file && !app.isBackButton) {
             if (!this.populateContextMenu_files(app)) {
                 return;
             }
-        } else if (app.type == APPTYPE.provider) {//Emoji
-            if (!MODABLE.includes(app.icon)) {
+        } else if (app.type == APPTYPE.provider && app.emoji) {
+            if (!MODABLE.includes(app.emoji)) {
                 return;
             }
             const addMenuItem = (char, text) => {
-                const i = MODABLE.indexOf(app.icon);
+                const i = MODABLE.indexOf(app.emoji);
                 let newEmoji = MODED[i].replace('\u{1F3FB}', char);
                 newEmoji = newEmoji.replace('\u{1F3FB}', char);
                 const item = new ContextMenuItem(this.appThis, newEmoji + ' ' + text, null,
@@ -320,7 +332,10 @@ class ContextMenu {
             addMenuItem('\u{1F3FD}', 'medium skin tone');
             addMenuItem('\u{1F3FE}', 'medium-dark skin tone');
             addMenuItem('\u{1F3FF}', 'dark skin tone');
+        } else {
+            return;
         }
+
         this.isOpen = true;
         this.appThis.resizer.inhibit_resizing = true;
 
@@ -388,7 +403,7 @@ class ContextMenu {
                 this.close(); } ));
         if (USER_DESKTOP_PATH) {
             addMenuItem( new ContextMenuItem(this.appThis, _('Add to desktop'), 'computer',
-                () => { const file = Gio.file_new_for_path(app.get_app_info().get_filename())
+                () => { const file = Gio.file_new_for_path(app.get_app_info().get_filename());
                         const destFile = Gio.file_new_for_path(USER_DESKTOP_PATH + '/' + file.get_basename());
                         tryFn(() => {
                             file.copy( destFile, 0, null, null);
@@ -427,9 +442,6 @@ class ContextMenu {
             Main.notify(_("This file is no longer available"),'');
             return false; //no context menu
         }
-        if (app.isBackButton) {
-            return false; //no context menu
-        }
         //
         if (fileExists) {
             addMenuItem( new ContextMenuItem(this.appThis, _("Open with"), null, null ));
@@ -462,9 +474,16 @@ class ContextMenu {
                                                                 this.close(); } ));
             } else {
                 addMenuItem( new ContextMenuItem(this.appThis, _('Add to favorites'), 'non-starred',
-                                                        () => { favs.add(app.uri);
-                                                                this.appThis.updateAfterFavFileChange();
-                                                                this.close(); } ));
+                              () => {   favs.add(app.uri);
+                                        this.appThis.updateAfterFavFileChange();
+                                        if (XApp.Favorites.get_default().get_favorites(null).length == 0) {
+                                            //favs list doesn't update straight away so if adding first fav
+                                            //then close menu so favs category can appear after reopening menu.
+                                            this.appThis.closeMenu();
+                                        } else {
+                                            this.close();
+                                        }
+                                    } ));
             }
         }
         const folder = file.get_parent();
@@ -507,7 +526,7 @@ class ContextMenu {
     }
 }
 
-class AppListGridButton extends PopupBaseMenuItem {
+class AppButton extends PopupBaseMenuItem {
     constructor(appThis, app) {
         super({ hover: false, activate: false });
         this.appThis = appThis;
@@ -524,37 +543,25 @@ class AppListGridButton extends PopupBaseMenuItem {
         this.entered = null;
         //----------ICON---------------------------------------------
         //create icon even if iconSize is 0 so dnd has something to drag
-        if (this.app.type === APPTYPE.application) {
+        if (this.app.icon) { //APPTYPE.place or APPTYPE.provider //instanceof St.Icon
+            this.icon = this.app.icon;
+        } else if (this.app.gicon) { //APPTYPE.file or APPTYPE.place
+            this.icon = new St.Icon({ gicon: this.app.gicon, icon_size: this.appThis.getAppIconSize()});
+        } else if (this.app.emoji) {
+            const iconLabel = new St.Label({ style_class: '', style: 'color: white; font-size: ' +
+                                            (Math.round(this.appThis.getAppIconSize() * 0.85)) + 'px;'});
+            iconLabel.get_clutter_text().set_markup(this.app.emoji);
+            this.icon = iconLabel;
+        } else if (this.app.type === APPTYPE.application) {
             this.icon = this.app.create_icon_texture(this.appThis.getAppIconSize());
-        } else if (this.app.type === APPTYPE.place) {
-            if (this.app.icon instanceof St.Icon) {
-                this.icon = this.app.icon;
-            } else {
-                this.icon = new St.Icon({ gicon: this.app.icon, icon_size: this.appThis.getAppIconSize()});
-            }
-        } else if (this.app.type === APPTYPE.file) {
-            if (this.app.icon) {
-                this.icon = new St.Icon({ gicon: this.app.icon, icon_size: this.appThis.getAppIconSize()});
-            } else {//back button
-                this.icon = new St.Icon({ icon_name: 'edit-undo-symbolic', icon_size: this.appThis.getAppIconSize()});
-            }
-        } else if (this.app.type === APPTYPE.clearlist) {
+        } else if (this.app.isBackButton) {
+            this.icon = new St.Icon({ icon_name: 'edit-undo-symbolic', icon_size: this.appThis.getAppIconSize()});
+        } else if (this.app.type === APPTYPE.clearlist_button) {
             this.icon = new St.Icon({   icon_name: 'edit-clear', icon_type: St.IconType.SYMBOLIC,
                                         icon_size: this.appThis.getAppIconSize()});
-        } else if (this.app.type === APPTYPE.provider) {
-            if (typeof this.app.icon !== 'string') {
-                this.icon = this.app.icon;
-            } else { //emoji
-                const iconLabel = new St.Label({ style_class: '', style: 'color: white; font-size: ' +
-                                                (Math.round(this.appThis.getAppIconSize() * 0.85)) + 'px;'});
-                iconLabel.get_clutter_text().set_markup(this.app.icon);
-                this.icon = iconLabel;
-            }
         }
         if (!this.icon) {
-            this.icon = new St.Icon({   icon_name: 'error',
-                                        icon_size: this.appThis.getAppIconSize(),
-                                        icon_type: St.IconType.FULLCOLOR});
+            this.icon = new St.Icon({icon_name: 'error', icon_size: this.appThis.getAppIconSize()});
         }
         //--------Label------------------------------------
         this.label = new St.Label({ style_class: 'menu-application-button-label',
@@ -787,8 +794,7 @@ class AppListGridButton extends PopupBaseMenuItem {
                 this.handleEnter();
                 return Clutter.EVENT_STOP;
             } else {
-                if (this.app.type == APPTYPE.application || this.app.type == APPTYPE.file ||
-                            this.app.type == APPTYPE.provider && typeof this.app.icon === 'string' ){//emoji
+                if (this.app.type == APPTYPE.application || this.app.type == APPTYPE.file || this.app.emoji ){
                     this.openContextMenu(e);
                 }
                 return Clutter.EVENT_STOP;
@@ -799,7 +805,10 @@ class AppListGridButton extends PopupBaseMenuItem {
 
     activate() {
         if (this.app.type === APPTYPE.application) {
-            this.app.newAppShouldHighlight = false;
+            if (this.app.newAppShouldHighlight) {
+                this.app.newAppShouldHighlight = false;
+                this.formatLabel();
+            }
             this.app.open_new_window(-1);
             this.appThis.closeMenu();
         } else if (this.app.type === APPTYPE.place) {
@@ -821,7 +830,7 @@ class AppListGridButton extends PopupBaseMenuItem {
                     //don't closeMenu
                 }
             }
-        } else if (this.app.type === APPTYPE.clearlist) {
+        } else if (this.app.type === APPTYPE.clearlist_button) {
             Gtk.RecentManager.get_default().purge_items();
             this.appThis.setActiveCategory('all');
             //don't closeMenu
@@ -1055,4 +1064,4 @@ class SidebarButton extends PopupBaseMenuItem {
     }
 }
 
-module.exports = {CategoryButton, AppListGridButton, ContextMenu, SidebarButton};
+module.exports = {CategoryButton, AppButton, ContextMenu, SidebarButton};

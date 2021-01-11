@@ -25,7 +25,7 @@ const {launch_all} = imports.ui.searchProviderManager;
 const {_, APPTYPE, tryFn, searchStr} = require('./utils');
 const ApplicationsViewModeLIST = 0, ApplicationsViewModeGRID = 1;
 const REMEMBER_RECENT_KEY = 'remember-recent-files';
-const {CategoryButton, AppListGridButton, ContextMenu, SidebarButton} = require('./buttons');
+const {CategoryButton, AppButton, ContextMenu, SidebarButton} = require('./buttons');
 const {BookmarksManager} = require('./browserBookmarks');
 const {EMOJI} = require('./emoji');
 //const HINT_TEXT = _('Type to search...');
@@ -508,18 +508,16 @@ class CinnamenuApplet extends TextIconApplet {
             this.categories.update();//in case menu editor updates
             this.categoriesView.populate();
             this.sidebar.populate();//in case fav files changed
-            global.stage.set_key_focus(this.search.searchEntry);
+            global.stage.set_key_focus(this.searchView.searchEntry);
             const currentCategory = this.settings.openOnFavorites && this.settings.showFavAppsCategory ?
                                                                 'favorite_apps' : this.currentCategory;
             this.updateMenuWidth();
-            //this.setActiveCategory(currentCategory);
             this.updateMenuHeight();
             Mainloop.idle_add_full(Mainloop.PRIORITY_DEFAULT, () => this.setActiveCategory(currentCategory));
-            //Mainloop.idle_add_full(Mainloop.PRIORITY_DEFAULT, () => this.updateMenuHeight());
         } else {
             if (this.searchActive) {
                 this.allItemsCleanup();
-                this.search.searchEntry.set_text('');
+                this.searchView.searchEntry.set_text('');
                 this.searchActive = false;
             }
             this.clearEnteredActors();
@@ -567,8 +565,8 @@ class CinnamenuApplet extends TextIconApplet {
                                                 this.settings.sidebarPlacement === PlacementRIGHT) {
             leftSideWidth += this.sidebar.sidebarScrollBox.width;
         }
-        this.search.searchEntry.width = 5;//effectively sets it to it's minimum width for the purpose
-                                          //of calculating bottomPaneMinWidth
+        this.searchView.searchEntry.width = 5;//a small number to effectively set it to it's minimum width
+                                              //for the purpose of calculating bottomPaneMinWidth
         let bottomPaneMinWidth = 0;
         if (this.settings.sidebarPlacement === PlacementTOP ||
                                                 this.settings.sidebarPlacement === PlacementBOTTOM) {
@@ -578,6 +576,7 @@ class CinnamenuApplet extends TextIconApplet {
         let menuWidth = Math.max(minMenuWidth, newWidth);
         if (!this.resizer.resizingInProgress) {
             //due to a intermittent bug, don't update settings while resizing
+            //https://github.com/linuxmint/cinnamon/pull/9771#issuecomment-755081805
             this.settings.customMenuWidth = menuWidth;
         }
         this.appsView.applicationsListBox.width = menuWidth - leftSideWidth;
@@ -950,25 +949,25 @@ class CinnamenuApplet extends TextIconApplet {
             case (symbol === Clutter.KEY_Menu && noModifiers):
                 activateContextMenu();
                 return Clutter.EVENT_STOP;
-            case (symbol === Clutter.KEY_Up):
+            case (symbol === Clutter.KEY_Up && noModifiers):
                 leaveCurrentlyEnteredItem();
                 upNavigation();
                 return Clutter.EVENT_STOP;
             /*case (symbol === Clutter.KEY_Up && modifierState === 4)://ctrl up
                 moveCategory("up");
                 return true;*/
-            case (symbol === Clutter.KEY_Down):
+            case (symbol === Clutter.KEY_Down && noModifiers):
                 leaveCurrentlyEnteredItem();
                 downNavigation();
                 return Clutter.EVENT_STOP;
             /*case (symbol === Clutter.KEY_Down && modifierState === 4)://ctrl down
                 moveCategory("down");
                 return true;*/
-            case (symbol === Clutter.KEY_Right):
+            case (symbol === Clutter.KEY_Right && noModifiers):
                 leaveCurrentlyEnteredItem();
                 rightNavigation();
                 return Clutter.EVENT_PROPAGATE; //so that left/right can also be used to navigate search entry
-            case (symbol === Clutter.KEY_Left):
+            case (symbol === Clutter.KEY_Left && noModifiers):
                 leaveCurrentlyEnteredItem();
                 leftNavigation();
                 return Clutter.EVENT_PROPAGATE; //so that left/right can also be used to navigate search entry
@@ -1016,7 +1015,7 @@ class CinnamenuApplet extends TextIconApplet {
                 }
                 return Clutter.EVENT_STOP;
             default:
-            return Clutter.EVENT_PROPAGATE;
+                return Clutter.EVENT_PROPAGATE;
         }
     }
 
@@ -1043,17 +1042,17 @@ class CinnamenuApplet extends TextIconApplet {
     }
 
     onSearchTextChanged() {
-        const searchText = this.search.searchEntryText.get_text();
+        const searchText = this.searchView.searchEntryText.get_text();
 
         if (searchText.length === 0) {
             this.allItemsCleanup();
             this.searchActive = false;
             this.categories.buttons.forEach(button => button.enable());
             this.setActiveCategory(this.currentCategory);
-            if (this.signals.isConnected('secondary-icon-clicked', this.search.searchEntry)) {
-                this.signals.disconnect('secondary-icon-clicked', this.search.searchEntry, this);
+            if (this.signals.isConnected('secondary-icon-clicked', this.searchView.searchEntry)) {
+                this.signals.disconnect('secondary-icon-clicked', this.searchView.searchEntry, this);
             }
-            this.search.showSecondaryIcon(false);
+            this.searchView.showSecondaryIcon(false);
             this.previousSearchPattern = '';
             return;
         }
@@ -1063,11 +1062,11 @@ class CinnamenuApplet extends TextIconApplet {
         this.currentSearchStr = searchText;
         this.appsView.setAnswerText(null);
         this.clearEnteredActors();
-        this.search.showSecondaryIcon(true);
-        if (!this.signals.isConnected('secondary-icon-clicked', this.search.searchEntry)) {
-            this.signals.connect(this.search.searchEntry, 'secondary-icon-clicked', () => {
+        this.searchView.showSecondaryIcon(true);
+        if (!this.signals.isConnected('secondary-icon-clicked', this.searchView.searchEntry)) {
+            this.signals.connect(this.searchView.searchEntry, 'secondary-icon-clicked', () => {
                                                         this.clearEnteredActors();
-                                                        this.search.searchEntryText.set_text('');
+                                                        this.searchView.searchEntryText.set_text('');
                                                         this.onSearchTextChanged();
                                                         }, this);
         }
@@ -1155,7 +1154,7 @@ class CinnamenuApplet extends TextIconApplet {
                                     nameWithSearchMarkup: match1.result,
                                     //descriptionWithSearchMarkup: match2.result,
                                     type: APPTYPE.provider,
-                                    icon: emoji.code,
+                                    emoji: emoji.code,
                                     activate: () => { const clipboard = St.Clipboard.get_default();
                                         clipboard.set_text(St.ClipboardType.CLIPBOARD, emoji.code);}
                                         });
@@ -1218,7 +1217,7 @@ class CinnamenuApplet extends TextIconApplet {
             let appButton = this.allItems.find(item => item && item.app === app);
 
             if (!appButton) {
-                appButton = new AppListGridButton(this, app);
+                appButton = new AppButton(this, app);
                 this.allItems.push(appButton);
             }
 
@@ -1262,10 +1261,10 @@ class CinnamenuApplet extends TextIconApplet {
         //==================bottomPane================
         const sidebarPlacement = this.settings.sidebarPlacement;
         this.sidebar = new Sidebar(this, sidebarPlacement);
-        this.search = new Search(this);
-        this.displaySignals.connect(this.search.searchEntryText, 'text-changed',
+        this.searchView = new SearchView(this);
+        this.displaySignals.connect(this.searchView.searchEntryText, 'text-changed',
                                                         (...args) => this.onSearchTextChanged(...args));
-        this.displaySignals.connect(this.search.searchEntryText, 'key-press-event',
+        this.displaySignals.connect(this.searchView.searchEntryText, 'key-press-event',
                                                             (...args) => this.onMenuKeyPress(...args));
         //this.previousSearchPattern = '';
         this.bottomPane = new St.BoxLayout({ /*style: 'padding-top: 12px;'*/ });
@@ -1273,7 +1272,7 @@ class CinnamenuApplet extends TextIconApplet {
             this.bottomPane.add(this.sidebar.sidebarScrollBox, { expand: false, x_fill: false, y_fill: false,
                                                   x_align: St.Align.START, y_align: St.Align.MIDDLE });
         }
-        this.bottomPane.add(this.search.searchBox, { expand: true, x_fill: true, y_fill: false,
+        this.bottomPane.add(this.searchView.searchBox, { expand: true, x_fill: true, y_fill: false,
                                         x_align: St.Align.END, y_align: St.Align.MIDDLE, align_end: true });
         //=================middlePane======================
         this.contextMenu = new ContextMenu(this);
@@ -1322,7 +1321,10 @@ class CinnamenuApplet extends TextIconApplet {
         this.menu.actor.set_reactive(true);
         this.displaySignals.connect(this.menu.actor, 'button-release-event',
                                                         (...args) => {this.clearEnteredActors();});
-        this.displaySignals.connect(this.menu.actor, "motion-event", (...args) => this.onMouseMotion(...args));
+        //monitor mouse motion to prevent category mis-selection
+        this.categoriesView.categoriesBox.set_reactive(true);
+        this.displaySignals.connect(this.categoriesView.categoriesBox, "motion-event",
+                                                        (...args) => this.onMouseMotion(...args));
         //Limit excessive left padding on categoriesBox
         const Lpadding = this.categoriesView.categoriesBox.get_theme_node().get_length('padding-left');
         if (Lpadding > 20) {
@@ -1357,18 +1359,17 @@ class CinnamenuApplet extends TextIconApplet {
         if (!this.mTrack) {
             this.mTrack = [];
         }
+        //compare current position with oldest position in last 0.1 seconds.
         this.mTrack.push({time: Date.now(), x: x, y: y});
         while (this.mTrack[0].time + 100 < Date.now()) {
             this.mTrack.shift();
         }
         const dx = x - this.mTrack[0].x;
         const dy = Math.abs(y - this.mTrack[0].y);
-        if (dy > 0) {
-            const tan = dx / dy;
-            this.badAngle = tan > 0.3;
-        } else {//infinity or NaN
-            this.badAngle = false;
-        }
+
+        const tan = dx / dy;
+        this.badAngle = tan > 0.3;//if tan = +infinity, badAngle is true.
+                                  //if tan = -infinity or NaN, badAngle is false.
     }
 
     destroyDisplayed() {
@@ -1383,9 +1384,9 @@ class CinnamenuApplet extends TextIconApplet {
         this.categories.buttons.forEach(categoryButton => {categoryButton.destroy();
                                                         categoryButton = null;});
         this.categories.buttons = [];
-        if (this.search) {
-            this.search.destroy();
-            this.search = null;
+        if (this.searchView) {
+            this.searchView.destroy();
+            this.searchView = null;
         }
         if (this.appsView) {
             this.appsView.destroy();
@@ -1419,11 +1420,13 @@ class Categories {
         //Put all enabled categories into newButtons[] in default order by reusing the
         //buttons in this.buttons or creating new button.
         const newButtons = [];
+
         let button = this.buttons.find( button => button.id === 'all');
         if (!button) {
             button = new CategoryButton(this.appThis, 'all', _('All applications'), 'computer');
         }
         newButtons.push(button);
+
         const dirs = [];
         const iter = this.appThis.appSystem.get_tree().get_root_directory().iter();
         let nextType;
@@ -1442,16 +1445,21 @@ class Categories {
                         const nameB = b.get_name().toLowerCase();
                         return (nameA > nameB) ? 1 : ( (nameA < nameB) ? -1 : 0 );  });
         dirs.forEach(dir => {
-            if (!dir.get_is_nodisplay()) {
-                const dirId = dir.get_menu_id();
-                if (this.appThis.apps.getAppsByCategory(dirId).length > 0) {
-                    let button = this.buttons.find(button => button.id === dirId);
-                    if (!button) {
-                        button = new CategoryButton(this.appThis, dir, dirId);
-                    }
-                    newButtons.push(button);
-                }
-            } });
+                    if (!dir.get_is_nodisplay()) {
+                        const dirId = dir.get_menu_id();
+                        const categoryApps = this.appThis.apps.getAppsByCategory(dirId);
+                        if (categoryApps.length > 0) {
+                            let button = this.buttons.find(button => button.id === dirId);
+                            if (!button) {
+                                button = new CategoryButton(this.appThis, dir, dirId);
+                            }
+                            //global.log(dirId);
+                            const newAppIndex = categoryApps.findIndex(app => app.newAppShouldHighlight);
+                            button.setHighlight(newAppIndex >= 0);//highlight category if it contains a new app
+                            newButtons.push(button);
+                        }
+                    } });
+
         const enableFavFiles = XApp.Favorites && XApp.Favorites.get_default().get_favorites(null).length > 0;
         const home = GLib.get_home_dir();
         [   [enableFavFiles, 'favorite_files', _('Favorites'), 'xapp-user-favorites'],
@@ -1479,7 +1487,7 @@ class Categories {
                 this.appThis.settings.categories.push(newButton.id);
             }
         });
-        //add all newButtons to this.buttons in user prefered order
+        //add all newButtons[] to this.buttons in user prefered order
         this.buttons = [];
         this.appThis.settings.categories.forEach(buttonId => {
             const foundButton = newButtons.find(newButton => newButton.id === buttonId);
@@ -1633,6 +1641,11 @@ class Apps {
 
     initAppCategories() {
         if (!this.appsNeedRefresh) return;
+
+        const apps_sort = arr => arr.sort( (a, b) => {
+                        if (!a.name || !b.name) return -1;
+                        return (a.name.toLowerCase() > b.name.toLowerCase()) ?
+                                1 : (a.name.toLowerCase() < b.name.toLowerCase()) ? -1 : 0;  });
         const dirs = [];
         const iter = this.appThis.appSystem.get_tree().get_root_directory().iter();
         let nextType;
@@ -1647,33 +1660,18 @@ class Apps {
                 const dirId = dir.get_menu_id();
                 this.appsByCategory[dirId] = [];
                 this.loadAppCategories(dir, null, dirId);
-                this.appsByCategory[dirId].sort( (a, b) => {
-                                    if (!a.name || !b.name) return -1;
-                                    return (a.name.toLowerCase() > b.name.toLowerCase()) ?
-                                            1 : (a.name.toLowerCase() < b.name.toLowerCase()) ? -1 : 0;  });
+                apps_sort(this.appsByCategory[dirId]);
             }
         });
-
+        //create "All applications" category
         let all = [];
         Object.keys(this.appsByCategory).forEach(key => {
                                             if (key !== 'all') {
                                                 all = all.concat(this.appsByCategory[key]);
                                             } });
-
-        const uniqueSet = new Set();
-        this.appsByCategory.all = [];
-        for (let i = 0; i < all.length; i++) {
-            if (uniqueSet.has(all[i]) === false) {
-                this.appsByCategory.all.push(all[i]);
-                uniqueSet.add(all[i]);
-            }
-        }
-
-        this.appsByCategory.all.sort( (a, b) => {
-                                    if (!a.name || !b.name) return -1;
-                                    return (a.name.toLowerCase() > b.name.toLowerCase()) ?
-                                            1 : (a.name.toLowerCase() < b.name.toLowerCase()) ? -1 : 0;  });
-
+        this.appsByCategory.all = Array.from(new Set(all));//remove duplicates
+        apps_sort(this.appsByCategory.all);
+        
         this.appsNeedRefresh = false;
         this.newInstance = false;
     }
@@ -1798,7 +1796,7 @@ class Apps {
                 res.push(found.app);
             } else {
                 res.push({  name: recentInfo.name,
-                            icon: recentInfo.gicon,
+                            gicon: recentInfo.gicon,
                             uri: recentInfo.uri,
                             mimeType: recentInfo.mimeType,
                             description: Gio.File.new_for_uri(recentInfo.uri).get_path(),
@@ -1812,7 +1810,7 @@ class Apps {
                 this.clearlistItem = {  name: _('Clear List'),
                                         clearList: true,
                                         description: '',
-                                        type: APPTYPE.clearlist };
+                                        type: APPTYPE.clearlist_button };
             }
             res.push(this.clearlistItem);
         }
@@ -1877,7 +1875,7 @@ class Apps {
         favorite_infos.forEach(info => {
             res.push({  name: info.display_name,
                         description: Gio.File.new_for_uri(info.uri).get_path(),
-                        icon: Gio.content_type_get_icon(info.cached_mimetype),
+                        gicon: Gio.content_type_get_icon(info.cached_mimetype),
                         type: APPTYPE.file,
                         isFavoriteFile: true,
                         mimeType: info.cached_mimetype,
@@ -1933,7 +1931,8 @@ class Apps {
             if (!filename.startsWith('.')) {
                 const file = Gio.file_new_for_path(folder + (folder === '/' ? '' : '/') + filename);
                 const newRecent = { name: next.get_name(),
-                                    icon: next.get_icon(),
+                                    icon: null,
+                                    gicon: next.get_icon(),
                                     uri: file.get_uri(),
                                     mimeType: next.get_content_type(),
                                     isDirectory: file.query_file_type(0, null) === 2,
@@ -1970,7 +1969,7 @@ class Apps {
     }
 }
 
-class Search {
+class SearchView {
     constructor(appThis) {
         this.searchInactiveIcon = new St.Icon({ style_class: 'menu-search-entry-icon', icon_name: 'edit-find' });
         this.searchActiveIcon = new St.Icon({ style_class: 'menu-search-entry-icon', icon_name: 'edit-clear' });
@@ -2063,7 +2062,7 @@ class Sidebar {
             });
             this.appThis.apps.listFavoriteFiles().forEach(fav => {
                 this.items.push(new SidebarButton( this.appThis,
-                                new St.Icon({ gicon: fav.icon, icon_size: this.appThis.settings.sidebarIconSize}),
+                                new St.Icon({ gicon: fav.gicon, icon_size: this.appThis.settings.sidebarIconSize}),
                                 fav, fav.name, fav.description, null));
             });
         }
