@@ -21,6 +21,7 @@ const PopupMenu = imports.ui.popupMenu;
 const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
 const GUdev = imports.gi.GUdev;
+const ByteArray = imports.byteArray;
 
 const AppletDir = imports.ui.appletManager.appletMeta['clipboard-qr@wrouesnel'].path;
 imports.ui.searchPath.unshift(AppletDir);
@@ -127,8 +128,10 @@ MyApplet.prototype = {
                     cinn_ver = cinn_ver.substring(0, cinn_ver.lastIndexOf("."))
                     if (parseFloat(cinn_ver) <= 3.4) {
                         clipboard.set_text(data.get_data().toString());
-                    } else {
+                    } else if (parseFloat(cinn_ver) <= 4.6) {
                         clipboard.set_text(St.ClipboardType.CLIPBOARD, data.get_data().toString());
+                    } else {
+                        clipboard.set_text(St.ClipboardType.CLIPBOARD, ByteArray.toString(data.get_data()));
                     }
                 }));
 
