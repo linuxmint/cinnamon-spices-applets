@@ -115,7 +115,7 @@ MyApplet.prototype = {
             if (this._qrprocess == null) {
                 // Spawn the python helper
                 this._qrprocess = Gio.Subprocess.new(
-                    ["/usr/bin/python", GLib.build_filenamev([AppletDir,QRReaderHelper]), camera_path],
+                    ["/usr/bin/python3", GLib.build_filenamev([AppletDir,QRReaderHelper]), camera_path],
                     Gio.SubprocessFlags.STDOUT_PIPE);
                 // Read from stdout
                 let streamOut = this._qrprocess.get_stdout_pipe();
