@@ -41,7 +41,7 @@ class Worldclocks {
 
             let tz = GLib.TimeZone.new(item.timezone);
             let display = new St.Label({ x_align: St.Align.END, style_class: "calendar-world-time" });
-            this.clocks.push({ display, tz });
+            this.clocks.push({ display, tz, label: item.label });
             this.actor.add(display, { row: i,  col: 1, x_align: St.Align.END });
         });
     }
