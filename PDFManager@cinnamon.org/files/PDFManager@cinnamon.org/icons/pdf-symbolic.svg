@@ -12,7 +12,7 @@
    height="16"
    width="16"
    version="1.1"
-   sodipodi:docname="pdf-symbolic.svg"
+   sodipodi:docname="pdfs-symbolic.svg"
    inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)">
   <sodipodi:namedview
      pagecolor="#ffffff"
@@ -28,7 +28,7 @@
      id="namedview26"
      showgrid="true"
      inkscape:zoom="41.7193"
-     inkscape:cx="3.2112628"
+     inkscape:cx="2.7558381"
      inkscape:cy="8.1108192"
      inkscape:window-x="0"
      inkscape:window-y="0"
@@ -134,8 +134,9 @@
      id="path2"
      style="color:#bebebe;overflow:visible;fill:#bebebe;marker:none"
      overflow="visible"
-     d="M 3,0 C 2.446,0 2,0.446 2,1 v 14 c 0,0.554 0.446,1 1,1 h 10 c 0.554,0 1,-0.446 1,-1 V 5 C 14,4.446 9.554,0 9,0 Z M 3.5,1 H 9 v 4 h 4 v 9.5 c 0,0.277 -0.223,0.5 -0.5,0.5 h -9 A 0.499,0.499 0 0 1 3,14.5 V 1.5 C 3,1.223 3.223,1 3.5,1 Z"
-     inkscape:connector-curvature="0" />
+     d="M 3,0 C 2.446,0 2,0.446 2,1 v 14 c 0,0.554 0.446,1 1,1 h 10 c 0.554,0 1,-0.446 1,-1 V 5 C 14,4.446 9.554,0 9,0 Z M 4.5,2 H 9 v 3 h 3 v 8.5 c 0,0.277 -0.223,0.5 -0.5,0.5 h -7 C 4.2236283,14.000554 3.9994456,13.776372 4,13.5 V 2.5 C 4,2.223 4.223,2 4.5,2 Z"
+     inkscape:connector-curvature="0"
+     sodipodi:nodetypes="sssssssssscccssccss" />
   <path
      id="path4"
      style="color:#000000;font-weight:400;line-height:normal;font-family:sans-serif;font-variant-ligatures:normal;font-variant-position:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-alternates:normal;font-feature-settings:normal;text-indent:0;text-align:start;text-decoration:none;text-decoration-line:none;text-decoration-style:solid;text-decoration-color:#000000;text-transform:none;text-orientation:mixed;white-space:normal;shape-padding:0;overflow:visible;isolation:auto;mix-blend-mode:normal;fill:#bebebe;marker:none"
