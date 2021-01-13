@@ -59,7 +59,8 @@
             "type": "section",
             "title": "Show World Times",
             "keys": [
-                "worldclocks"
+                "worldclocks",
+                "show-worldclocks-in-tooltip"
             ]
         }
     },
@@ -404,5 +405,11 @@
             }
         ],
         "default": []
+    },
+    "show-worldclocks-in-tooltip": {
+        "type": "switch",
+        "default": false,
+        "description": "Show world clocks in the tooltip",
+        "tooltip": "Check this to show the world clocks in the tooltip."
     }
 }
