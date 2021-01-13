@@ -72,6 +72,7 @@ class CinnamonCalendarApplet extends Applet.TextApplet {
             this.settings.bind("use-custom-format", "use_custom_format", this._onSettingsChanged);
             this.settings.bind("custom-format", "custom_format", this._onSettingsChanged);
             this.settings.bind("keyOpen", "keyOpen", this._setKeybinding);
+            this.settings.bind("show-worldclocks-in-tooltip", "show_worldclocks_in_tooltip", this._onSettingsChanged)
             this._setKeybinding();
 
             /* FIXME: Add gobject properties to the WallClock class to allow easier access from
@@ -172,6 +173,8 @@ class CinnamonCalendarApplet extends Applet.TextApplet {
 
     _updateClockAndDate() {
         let label_string = this.clock.get_clock();
+        
+        this._worldclocks.updateClocks();
 
         if (!this.use_custom_format) {
             label_string = label_string.capitalize();
@@ -184,9 +187,17 @@ class CinnamonCalendarApplet extends Applet.TextApplet {
         let dateFormattedFull = this.clock.get_clock_for_format(this._dateFormatFull).capitalize();
 
         this._date.set_text(dateFormattedFull);
-        this.set_applet_tooltip(dateFormattedFull);
-
-        this._worldclocks.updateClocks();
+        
+        if (this.show_worldclocks_in_tooltip) {
+            let tooltip = [];
+            tooltip.push(dateFormattedFull);
+            for (let clock of this._worldclocks.clocks) {
+                tooltip.push(clock.label + "   " + clock.display.get_text());
+            }
+            this.set_applet_tooltip(tooltip.join("\n"));
+        } else {
+            this.set_applet_tooltip(dateFormattedFull);
+        }
     }
 
     on_applet_added_to_panel() {
