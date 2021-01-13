@@ -5,6 +5,8 @@ const Lang = imports.lang;
 const Signals = imports.signals;
 const Util = require("./util");
 
+const {to_string} = require("./lib/to-string");
+
 const {
   UUID,
   HOME_DIR,
@@ -28,7 +30,7 @@ class SensorsReaper {
     this.refresh_interval = refresh_interval; // seconds
     this.last_attempt_DateTime= undefined;  // the last time we checked sensors
     this.sensors_json_data = {};
-    this.sensors_program = GLib.find_program_in_path("sensors").toString();
+    this.sensors_program = ""+GLib.find_program_in_path("sensors");
     this.get_sensors_command();
     this.in_fahrenheit = false;
     this.raw_data = {};
@@ -45,13 +47,13 @@ class SensorsReaper {
     if (this.sensors_command != undefined)
       return this.sensors_command;
 
-    this.sensors_program = GLib.find_program_in_path("sensors").toString();
+    this.sensors_program = ""+GLib.find_program_in_path("sensors");
 
     let sensors_version = "0.0.0";
     if (this.sensors_program) {
       //let [res, output, err, status ] = GLib.spawn_command_line_sync("%s -v".format(this.sensors_program));
-      let output = GLib.spawn_command_line_sync("%s -v".format(this.sensors_program))[1];
-      sensors_version = output.toString().split(" ")[2];
+      let output = to_string(GLib.spawn_command_line_sync("%s -v".format(this.sensors_program))[1]);
+      sensors_version = output.split(" ")[2];
       output = null
     }
 

@@ -208,6 +208,7 @@ class SensorsApplet extends Applet.TextApplet {
     );
 
     this.loopId = Mainloop.timeout_add(this.interval * 1000, () => this.reap_sensors());
+    return false
   }
 
   /**

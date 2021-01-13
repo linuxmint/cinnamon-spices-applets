@@ -9,6 +9,8 @@ const Gettext = imports.gettext;
 
 const Util = require("./util");
 
+const {to_string} = require("./lib/to-string");
+
 
 // --- To adapt to the applet --- //
 /**
@@ -108,7 +110,7 @@ const INSTALL = {
 const HOME_DIR = GLib.get_home_dir();
 
 const DISTRO = function() {
-  let osRelease = GLib.file_get_contents("/usr/lib/os-release")[1].toString();
+  let osRelease = to_string(GLib.file_get_contents("/usr/lib/os-release")[1]);
   let lines = osRelease.split("\n");
   var distro = "";
   for (let line of lines) {

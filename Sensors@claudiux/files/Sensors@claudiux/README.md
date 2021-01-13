@@ -142,9 +142,13 @@ Any contribution or translation is welcome!
 
 | Translation | Code | Author (Github account) |
 | ---:|:---:|  --- |
+| Czech | cs | Bohuslav Kotál ([@Fotobob1](https://github.com/Fotobob1)) |
+| Danish | da | Alan Mortensen ([@Alan01](https://github.com/Alan01)) |
 | Dutch | nl | Jurien ([@French77](https://github.com/French77)) |
 | French | fr | claudiux ([@claudiux][claudiux]) |
 | Spanish | es | claudiux ([@claudiux][claudiux]) |
+| Turkish | tr | Serkan Önder ([@serkan-maker](https://github.com/serkan-maker))
+
 
 _Thank you very much to all of these translators!_
 
