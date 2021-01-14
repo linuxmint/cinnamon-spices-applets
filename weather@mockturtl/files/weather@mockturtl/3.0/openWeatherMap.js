@@ -44,14 +44,10 @@ function importModule(path) {
         return AppletDir[path];
     }
 }
-var UUID = "weather@mockturtl";
-imports.gettext.bindtextdomain(UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
-function _(str) {
-    return imports.gettext.dgettext(UUID, str);
-}
 var utils = importModule("utils");
 var isLangSupported = utils.isLangSupported;
 var weatherIconSafely = utils.weatherIconSafely;
+var _ = utils._;
 var get = utils.get;
 var OpenWeatherMap = (function () {
     function OpenWeatherMap(_app) {

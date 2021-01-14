@@ -734,6 +734,7 @@ declare namespace imports.gettext {
     function bindtextdomain(UUID: string, homeDir: string): void;
 
     function dgettext(UUID: string, text: string): string;
+    function gettext(text: string): string;
 }
 
 declare namespace imports {

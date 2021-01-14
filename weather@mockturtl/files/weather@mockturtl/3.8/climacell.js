@@ -8,17 +8,13 @@ function importModule(path) {
         return AppletDir[path];
     }
 }
-const UUID = "weather@mockturtl";
-imports.gettext.bindtextdomain(UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
-function _(str) {
-    return imports.gettext.dgettext(UUID, str);
-}
 var utils = importModule("utils");
 var isCoordinate = utils.isCoordinate;
 var isLangSupported = utils.isLangSupported;
 var CelsiusToKelvin = utils.CelsiusToKelvin;
 var IsNight = utils.IsNight;
 var weatherIconSafely = utils.weatherIconSafely;
+var _ = utils._;
 class Climacell {
     constructor(_app) {
         this.prettyName = "Climacell";

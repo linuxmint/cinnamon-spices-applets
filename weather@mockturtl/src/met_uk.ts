@@ -9,14 +9,7 @@ function importModule(path: string): any {
     }
 }
 
-const UUID = "weather@mockturtl"
-imports.gettext.bindtextdomain(UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
-function _(str: string): string {
-    return imports.gettext.dgettext(UUID, str)
-}
-
 var utils = importModule("utils");
-var isCoordinate = utils.isCoordinate as (text: any) => boolean;
 var weatherIconSafely = utils.weatherIconSafely as (code: BuiltinIcons[], icon_type: imports.gi.St.IconType) => BuiltinIcons;
 var SunCalc = importModule("sunCalc").SunCalc;
 var IsNight = utils.IsNight as (sunTimes: SunTimes, date?: Date) => boolean;
@@ -26,6 +19,7 @@ var compassToDeg = utils.compassToDeg as (compass: string) => number;
 var GetDistance = utils.GetDistance as (lat1: number, lon1: number, lat2: number, lon2: number) => number;
 const get = utils.get as (p: string[], o: any) => any;
 var MetreToUserUnits = utils.MetreToUserUnits as (m: number, distanceUnit: DistanceUnits) => number;
+var _ = utils._ as (str: string) => string;
 
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////

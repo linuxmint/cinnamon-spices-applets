@@ -48,6 +48,7 @@ var MillimeterToUserUnits = utils.MillimeterToUserUnits;
 var shadeHexColor = utils.shadeHexColor;
 var MetreToUserUnits = utils.MetreToUserUnits;
 var constructJsLocale = utils.constructJsLocale;
+var _ = utils._;
 if (typeof Promise != "function") {
     var promisePoly = importModule("promise-polyfill");
     var finallyConstructor = promisePoly.finallyConstructor;
@@ -92,10 +93,6 @@ const DATA_SERVICE = {
     MET_UK: "Met Office UK",
     US_WEATHER: "US Weather"
 };
-imports.gettext.bindtextdomain(UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
-function _(str) {
-    return imports.gettext.dgettext(UUID, str);
-}
 function uuidv4() {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
         var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
@@ -143,6 +140,7 @@ class WeatherApplet extends TextIconApplet {
         this._httpSession.user_agent = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:37.0) Gecko/20100101 Firefox/37.0";
         this._httpSession.timeout = 10;
         this._httpSession.idle_timeout = 10;
+        imports.gettext.bindtextdomain(UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
         this.msgSource = new SystemNotificationSource(_("Weather Applet"));
         messageTray.add(this.msgSource);
         Session.prototype.add_feature.call(this._httpSession, new ProxyResolverDefault());
@@ -946,14 +944,7 @@ class UI {
                     if (config._translateCondition)
                         comment = _(comment);
                 }
-                let dayName = GetDayName(forecastData.date, this.app.currentLocale, weather.location.timeZone);
-                if (forecastData.date) {
-                    let now = new Date();
-                    if (forecastData.date.getDate() == now.getDate())
-                        dayName = _("Today");
-                    if (forecastData.date.getDate() == new Date(now.setDate(now.getDate() + 1)).getDate())
-                        dayName = _("Tomorrow");
-                }
+                let dayName = GetDayName(forecastData.date, this.app.currentLocale, true, weather.location.timeZone);
                 forecastUi.Day.text = dayName;
                 forecastUi.Temperature.text = first_temperature;
                 forecastUi.Temperature.text += ((config._tempRussianStyle) ? ELLIPSIS : " " + FORWARD_SLASH + " ");
@@ -990,7 +981,7 @@ class UI {
         for (let index = 0; index < max; index++) {
             const hour = forecasts[index];
             const ui = this._hourlyForecasts[index];
-            ui.Hour.text = AwareDateString(hour.date, this.app.currentLocale, config._show24Hours, tz);
+            ui.Hour.text = GetHoursMinutes(hour.date, this.app.currentLocale, config._show24Hours, tz, true);
             ui.Temperature.text = TempToUserConfig(hour.temp, config.TemperatureUnit(), config._tempRussianStyle) + " " + this.unitToUnicode(config.TemperatureUnit());
             ui.Icon.icon_name = (config._useCustomMenuIcons) ? hour.condition.customIcon : hour.condition.icon;
             hour.condition.main = capitalizeFirstLetter(hour.condition.main);
@@ -1197,10 +1188,10 @@ class UI {
         this._currentWeatherApiUniqueCap = new Label({ text: '', style: this.GetTextColorStyle() });
         let rb_captions = new BoxLayout({ vertical: true, style_class: STYLE_DATABOX_CAPTIONS });
         let rb_values = new BoxLayout({ vertical: true, style_class: STYLE_DATABOX_VALUES });
-        rb_captions.add_actor(new Label({ text: _('Temperature:'), style: this.GetTextColorStyle() }));
-        rb_captions.add_actor(new Label({ text: _('Humidity:'), style: this.GetTextColorStyle() }));
-        rb_captions.add_actor(new Label({ text: _('Pressure:'), style: this.GetTextColorStyle() }));
-        rb_captions.add_actor(new Label({ text: _('Wind:'), style: this.GetTextColorStyle() }));
+        rb_captions.add_actor(new Label({ text: _('Temperature') + ":", style: this.GetTextColorStyle() }));
+        rb_captions.add_actor(new Label({ text: _('Humidity') + ":", style: this.GetTextColorStyle() }));
+        rb_captions.add_actor(new Label({ text: _('Pressure') + ":", style: this.GetTextColorStyle() }));
+        rb_captions.add_actor(new Label({ text: _('Wind') + ":", style: this.GetTextColorStyle() }));
         rb_captions.add_actor(this._currentWeatherApiUniqueCap);
         rb_values.add_actor(this._currentWeatherTemperature);
         rb_values.add_actor(this._currentWeatherHumidity);

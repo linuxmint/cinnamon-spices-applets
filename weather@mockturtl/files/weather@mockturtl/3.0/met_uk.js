@@ -44,13 +44,7 @@ function importModule(path) {
         return AppletDir[path];
     }
 }
-var UUID = "weather@mockturtl";
-imports.gettext.bindtextdomain(UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
-function _(str) {
-    return imports.gettext.dgettext(UUID, str);
-}
 var utils = importModule("utils");
-var isCoordinate = utils.isCoordinate;
 var weatherIconSafely = utils.weatherIconSafely;
 var SunCalc = importModule("sunCalc").SunCalc;
 var IsNight = utils.IsNight;
@@ -60,6 +54,7 @@ var compassToDeg = utils.compassToDeg;
 var GetDistance = utils.GetDistance;
 var get = utils.get;
 var MetreToUserUnits = utils.MetreToUserUnits;
+var _ = utils._;
 var MetUk = (function () {
     function MetUk(_app) {
         this.prettyName = "Met Office UK";

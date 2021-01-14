@@ -34,15 +34,18 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-var UUID = "weather@mockturtl";
-imports.gettext.bindtextdomain(UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
-function _(str) {
-    return imports.gettext.dgettext(UUID, str);
-}
 var _a = imports.mainloop, timeout_add = _a.timeout_add, source_remove = _a.source_remove;
 var util_format_date = imports.gi.Cinnamon.util_format_date;
 var IconType = imports.gi.St.IconType;
 var IconTheme = imports.gi.Gtk.IconTheme;
+var UUID = "weather@mockturtl";
+imports.gettext.bindtextdomain(UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
+var _ = function (str) {
+    var customTrans = imports.gettext.dgettext(UUID, str);
+    if (customTrans !== str && customTrans !== "")
+        return customTrans;
+    return imports.gettext.gettext(str);
+};
 var setTimeout = function (func, ms) {
     var args = [];
     if (arguments.length > 2) {
@@ -107,33 +110,63 @@ var isLocaleStringSupported = function () {
         return "notz";
     }
 };
-var GetDayName = function (date, locale, tz) {
+var GetDayName = function (date, locale, showDate, tz) {
+    if (showDate === void 0) { showDate = false; }
     var support = isLocaleStringSupported();
     if (locale == "c" || locale == null)
         locale = undefined;
     if (!tz && support == "full")
         support = "notz";
-    switch (support) {
-        case "full":
-            return date.toLocaleString(locale, { timeZone: tz, weekday: "long" });
-        case "notz":
-            return date.toLocaleString(locale, { timeZone: "UTC", weekday: "long" });
-        case "none":
-            return getDayName(date.getUTCDay());
-            ;
+    var params = {
+        weekday: "long"
+    };
+    if (showDate) {
+        params["day"] = 'numeric';
     }
+    var now = new Date();
+    var tomorrow = new Date();
+    tomorrow.setDate(now.getDate() + 1);
+    if (date.getDate() == now.getDate() || date.getDate() == tomorrow.getDate())
+        delete params.weekday;
+    var dateString = "";
+    switch (support) {
+        case "full":
+            params.timeZone = tz;
+            dateString = date.toLocaleString(locale, params);
+            break;
+        case "notz":
+            params.timeZone = "UTC";
+            dateString = date.toLocaleString(locale, params);
+            break;
+        case "none":
+            dateString = getDayName(date.getUTCDay());
+            break;
+    }
+    if (date.getDate() == now.getDate())
+        dateString = _("Today");
+    if (date.getDate() == tomorrow.getDate())
+        dateString = _("Tomorrow");
+    return dateString;
 };
-var GetHoursMinutes = function (date, locale, hours24Format, tz) {
+var GetHoursMinutes = function (date, locale, hours24Format, tz, onlyHours) {
+    if (onlyHours === void 0) { onlyHours = false; }
     var support = isLocaleStringSupported();
     if (locale == "c" || locale == null)
         locale = undefined;
     if (!tz && support == "full")
         support = "notz";
+    var params = {
+        hour: "numeric",
+        hour12: !hours24Format
+    };
+    if (!onlyHours)
+        params.minute = "numeric";
     switch (support) {
         case "full":
-            return date.toLocaleString(locale, { timeZone: tz, hour: "numeric", minute: "numeric", hour12: !hours24Format });
+            params.timeZone = tz;
+            return date.toLocaleString(locale, params);
         case "notz":
-            return date.toLocaleString(locale, { hour: "numeric", minute: "numeric", hour12: !hours24Format });
+            return date.toLocaleString(locale, params);
         case "none":
             return timeToUserUnits(date, hours24Format);
     }
@@ -159,9 +192,10 @@ var AwareDateString = function (date, locale, hours24Format, tz) {
         case "full":
             if (tz == null || tz == "")
                 tz = undefined;
-            return date.toLocaleString(locale, { timeZone: tz, hour: "numeric", minute: "numeric", hour12: !hours24Format });
+            params.timeZone = tz;
+            return date.toLocaleString(locale, params);
         case "notz":
-            return date.toLocaleString(locale, { hour: "numeric", minute: "numeric", hour12: !hours24Format });
+            return date.toLocaleString(locale, params);
         case "none":
             return timeToUserUnits(date, hours24Format);
     }

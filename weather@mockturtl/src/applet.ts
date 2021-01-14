@@ -45,15 +45,15 @@ const GLib = imports.gi.GLib;
 const ByteArray = imports.byteArray;
 
 var utils = importModule("utils");
-var GetDayName = utils.GetDayName as (date: Date, locale: string, tz?: string) => string;
-var GetHoursMinutes = utils.GetHoursMinutes as (date: Date, locale: string, hours24Format: boolean, tz?: string) => string;
+var GetDayName = utils.GetDayName as (date: Date, locale: string, showDate: boolean, tz?: string) => string;
+var GetHoursMinutes = utils.GetHoursMinutes as (date: Date, locale: string, hours24Format: boolean, tz?: string, onlyHours?: boolean) => string;
 var capitalizeFirstLetter = utils.capitalizeFirstLetter as (description: string) => string;
 var TempToUserConfig = utils.TempToUserConfig as (kelvin: number, units: WeatherUnits, russianStyle: boolean) => string;
 var PressToUserUnits = utils.PressToUserUnits as (hpa: number, units: WeatherPressureUnits) => number;
 var compassDirection = utils.compassDirection as (deg: number) => string;
 var MPStoUserUnits = utils.MPStoUserUnits as (mps: number, units: WeatherWindSpeedUnits) => string;
 var nonempty = utils.nonempty as (str: string) => boolean;
-var AwareDateString = utils.AwareDateString as (date: Date, locale: string, hours24Format: boolean, tz?: string) => string;
+var AwareDateString = utils.AwareDateString as (date: Date, locale: string, hours24Format: boolean, tz?: string, ignoreMinutes?: boolean) => string;
 var get = utils.get as (p: string[], o: any) => any;
 const delay = utils.delay as (ms: number) => Promise<void>;
 var isCoordinate = utils.isCoordinate as (text: any) => boolean;
@@ -63,6 +63,7 @@ var MillimeterToUserUnits = utils.MillimeterToUserUnits as (mm: number, distance
 var shadeHexColor = utils.shadeHexColor as (color: string, percent: number) => string;
 var MetreToUserUnits = utils.MetreToUserUnits as (m: number, distanceUnit: DistanceUnits) => number;
 var constructJsLocale = utils.constructJsLocale as (locale: string) => string;
+var _ = utils._ as (str: string) => string;
 
 // This always evaluates to True because "var Promise" line exists inside 
 if (typeof Promise != "function") {
@@ -132,11 +133,6 @@ const DATA_SERVICE: ServiceMap = {
 //
 //----------------------------------------------------------------------
 
-imports.gettext.bindtextdomain(UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
-function _(str: string): string {
-    return imports.gettext.dgettext(UUID, str)
-}
-
 function uuidv4() {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
         var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
@@ -193,6 +189,9 @@ class WeatherApplet extends TextIconApplet {
         this._httpSession.user_agent = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:37.0) Gecko/20100101 Firefox/37.0"; // ipapi blocks non-browsers agents, imitating browser
         this._httpSession.timeout = 10;
         this._httpSession.idle_timeout = 10;
+
+        // importing custom translations
+        imports.gettext.bindtextdomain(UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
 
         this.msgSource = new SystemNotificationSource(_("Weather Applet"));
         messageTray.add(this.msgSource);
@@ -1287,13 +1286,7 @@ class UI {
                 }
 
                 // Day Names
-                let dayName: string = GetDayName(forecastData.date, this.app.currentLocale, weather.location.timeZone);
-
-                if (forecastData.date) {
-                    let now = new Date();
-                    if (forecastData.date.getDate() == now.getDate()) dayName = _("Today");
-                    if (forecastData.date.getDate() == new Date(now.setDate(now.getDate() + 1)).getDate()) dayName = _("Tomorrow");
-                }
+                let dayName: string = GetDayName(forecastData.date, this.app.currentLocale, true, weather.location.timeZone);
 
                 forecastUi.Day.text = dayName;
                 forecastUi.Temperature.text = first_temperature;
@@ -1336,7 +1329,7 @@ class UI {
             const hour = forecasts[index];
             const ui = this._hourlyForecasts[index];
 
-            ui.Hour.text = AwareDateString(hour.date, this.app.currentLocale, config._show24Hours, tz);
+            ui.Hour.text = GetHoursMinutes(hour.date, this.app.currentLocale, config._show24Hours, tz, true);
             ui.Temperature.text = TempToUserConfig(hour.temp, config.TemperatureUnit(), config._tempRussianStyle) + " " + this.unitToUnicode(config.TemperatureUnit());
             ui.Icon.icon_name = (config._useCustomMenuIcons) ? hour.condition.customIcon : hour.condition.icon;
 
@@ -1584,10 +1577,10 @@ class UI {
 
         let rb_captions = new BoxLayout({ vertical: true, style_class: STYLE_DATABOX_CAPTIONS })
         let rb_values = new BoxLayout({ vertical: true, style_class: STYLE_DATABOX_VALUES })
-        rb_captions.add_actor(new Label({ text: _('Temperature:'), style: this.GetTextColorStyle() }));
-        rb_captions.add_actor(new Label({ text: _('Humidity:'), style: this.GetTextColorStyle() }));
-        rb_captions.add_actor(new Label({ text: _('Pressure:'), style: this.GetTextColorStyle() }));
-        rb_captions.add_actor(new Label({ text: _('Wind:'), style: this.GetTextColorStyle() }));
+        rb_captions.add_actor(new Label({ text: _('Temperature') + ":", style: this.GetTextColorStyle() }));
+        rb_captions.add_actor(new Label({ text: _('Humidity') + ":", style: this.GetTextColorStyle() }));
+        rb_captions.add_actor(new Label({ text: _('Pressure') + ":", style: this.GetTextColorStyle() }));
+        rb_captions.add_actor(new Label({ text: _('Wind') + ":", style: this.GetTextColorStyle() }));
         rb_captions.add_actor(this._currentWeatherApiUniqueCap);
         rb_values.add_actor(this._currentWeatherTemperature);
         rb_values.add_actor(this._currentWeatherHumidity);
