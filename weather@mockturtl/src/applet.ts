@@ -1286,7 +1286,7 @@ class UI {
                 }
 
                 // Day Names
-                let dayName: string = GetDayName(forecastData.date, this.app.currentLocale, true, weather.location.timeZone);
+                let dayName: string = GetDayName(forecastData.date, this.app.currentLocale, this.app.config._showForecastDates, weather.location.timeZone);
 
                 forecastUi.Day.text = dayName;
                 forecastUi.Temperature.text = first_temperature;
@@ -1329,7 +1329,7 @@ class UI {
             const hour = forecasts[index];
             const ui = this._hourlyForecasts[index];
 
-            ui.Hour.text = GetHoursMinutes(hour.date, this.app.currentLocale, config._show24Hours, tz, true);
+            ui.Hour.text = GetHoursMinutes(hour.date, this.app.currentLocale, config._show24Hours, tz, this.app.config._shortHourlyTime);
             ui.Temperature.text = TempToUserConfig(hour.temp, config.TemperatureUnit(), config._tempRussianStyle) + " " + this.unitToUnicode(config.TemperatureUnit());
             ui.Icon.icon_name = (config._useCustomMenuIcons) ? hour.condition.customIcon : hour.condition.icon;
 
@@ -1854,6 +1854,8 @@ class Config {
         USE_CUSTOM_APPLETICONS: 'useCustomAppletIcons',
         USE_CUSTOM_MENUICONS: "useCustomMenuIcons",
         RUSSIAN_STYLE: "tempRussianStyle",
+        SHORT_HOURLY_TIME: "shortHourlyTime",
+        SHOW_FORECAST_DATES: "showForecastDates"
     }
 
     // Settings variables to bind to
@@ -1883,6 +1885,8 @@ class Config {
     public readonly _useCustomMenuIcons: boolean;
     public readonly _tempTextOverride: string;
     public readonly _tempRussianStyle: boolean;
+    public readonly _shortHourlyTime: boolean;
+    public readonly _showForecastDates: boolean;
 
     public keybinding: any;
 

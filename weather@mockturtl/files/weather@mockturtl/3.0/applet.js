@@ -1083,7 +1083,7 @@ var UI = (function () {
                     if (config._translateCondition)
                         comment = _(comment);
                 }
-                var dayName = GetDayName(forecastData.date, this.app.currentLocale, true, weather.location.timeZone);
+                var dayName = GetDayName(forecastData.date, this.app.currentLocale, this.app.config._showForecastDates, weather.location.timeZone);
                 forecastUi.Day.text = dayName;
                 forecastUi.Temperature.text = first_temperature;
                 forecastUi.Temperature.text += ((config._tempRussianStyle) ? ELLIPSIS : " " + FORWARD_SLASH + " ");
@@ -1120,7 +1120,7 @@ var UI = (function () {
         for (var index = 0; index < max; index++) {
             var hour = forecasts[index];
             var ui = this._hourlyForecasts[index];
-            ui.Hour.text = GetHoursMinutes(hour.date, this.app.currentLocale, config._show24Hours, tz, true);
+            ui.Hour.text = GetHoursMinutes(hour.date, this.app.currentLocale, config._show24Hours, tz, this.app.config._shortHourlyTime);
             ui.Temperature.text = TempToUserConfig(hour.temp, config.TemperatureUnit(), config._tempRussianStyle) + " " + this.unitToUnicode(config.TemperatureUnit());
             ui.Icon.icon_name = (config._useCustomMenuIcons) ? hour.condition.customIcon : hour.condition.icon;
             hour.condition.main = capitalizeFirstLetter(hour.condition.main);
@@ -1536,6 +1536,8 @@ var Config = (function () {
             USE_CUSTOM_APPLETICONS: 'useCustomAppletIcons',
             USE_CUSTOM_MENUICONS: "useCustomMenuIcons",
             RUSSIAN_STYLE: "tempRussianStyle",
+            SHORT_HOURLY_TIME: "shortHourlyTime",
+            SHOW_FORECAST_DATES: "showForecastDates"
         };
         this.doneTypingLocation = null;
         this.currentLocation = null;

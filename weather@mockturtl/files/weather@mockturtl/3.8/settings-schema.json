@@ -83,6 +83,8 @@
 				"forecastRows",
 				"showSunrise",
 				"show24Hours",
+				"showForecastDates",
+				"shortHourlyTime",
 				"temperatureHighFirst",
 				"tempRussianStyle",
 				"locationLabelOverride"
@@ -343,6 +345,18 @@
 		"type": "checkbox",
 		"default": false,
 		"description": "Show high temperature first in forecast"
+	},
+	"shortHourlyTime": {
+		"type": "checkbox",
+		"default": false,
+		"description": "Only display hours for hourly forecast time",
+		"tooltip": "Instead of 15:00 or 3 pm it will show up as 15 or 3pm"
+	},
+	"showForecastDates": {
+		"type": "checkbox",
+		"default": false,
+		"description": "Display date for daily forecasts",
+		"tooltip": "Like \"Friday 15\""
 	},
 	"tempRussianStyle": {
 		"type": "checkbox",
