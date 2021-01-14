@@ -934,10 +934,8 @@ class CinnamenuApplet extends TextIconApplet {
             }
         };*/
 
-        //global.log(modifierState, symbol);
         switch (true) {
-            case symbol === Clutter.KP_Enter:
-            case symbol === Clutter.KEY_Return:
+            case symbol === Clutter.KP_Enter || symbol === Clutter.KEY_Return:
                 if (ctrlKey) {
                     activateContextMenu();
                 } else if (noModifiers) {
@@ -971,8 +969,7 @@ class CinnamenuApplet extends TextIconApplet {
                 leaveCurrentlyEnteredItem();
                 leftNavigation();
                 return Clutter.EVENT_PROPAGATE; //so that left/right can also be used to navigate search entry
-            case symbol === Clutter.ISO_Left_Tab:
-            case symbol === Clutter.Tab:
+            case symbol === Clutter.ISO_Left_Tab || symbol === Clutter.Tab:
                 if (altKey) {  //Close menu as alt-tab is used for app-switcher in cinnamon
                     this.closeMenu();
                     return Clutter.EVENT_STOP;
@@ -986,15 +983,14 @@ class CinnamenuApplet extends TextIconApplet {
                     return Clutter.EVENT_STOP;
                 }
                 return Clutter.EVENT_PROPAGATE;
-            case (symbol === Clutter.KEY_Escape && noModifiers):
-            case (symbol === Clutter.Escape && noModifiers):
+            case (symbol === Clutter.Escape || symbol === Clutter.KEY_Escape) && noModifiers:
                 if (this.contextMenu.isOpen) {
                     this.contextMenu.close();
                 } else {
                     this.closeMenu();
                 }
                 return Clutter.EVENT_STOP;
-            case symbol === Clutter.KEY_Page_Up:
+            case (symbol === Clutter.KEY_Page_Up && noModifiers):
                 leaveCurrentlyEnteredItem();
                 if (enteredItemExists) {
                     appButtons[0].handleEnter();
@@ -1004,7 +1000,7 @@ class CinnamenuApplet extends TextIconApplet {
                     categoryButtons[0].handleEnter();
                 }
                 return Clutter.EVENT_STOP;
-            case symbol === Clutter.KEY_Page_Down:
+            case (symbol === Clutter.KEY_Page_Down && noModifiers):
                 leaveCurrentlyEnteredItem();
                 if (enteredItemExists) {
                     appButtons[appButtons.length - 1].handleEnter();
@@ -1142,23 +1138,28 @@ class CinnamenuApplet extends TextIconApplet {
         }
         //---emoji search------
         if (pattern.length > 2 && this.settings.enableEmojiSearch) {
+            let emojiResults = [];
             EMOJI.forEach(emoji => {
                         const match1 = searchStr(pattern, emoji.name, true);
                         const match2 = searchStr(pattern, emoji.keywords, true);
                         match2.score *= 0.95; //slightly lower priority for keyword match
                         const bestMatchScore = Math.max(match1.score, match2.score);
                         if (bestMatchScore > SEARCH_THRESHOLD) {
-                            results.push({
+                            emojiResults.push({
                                     name: emoji.name,
+                                    score: bestMatchScore,
                                     description: _('Click to copy'),
                                     nameWithSearchMarkup: match1.result,
-                                    //descriptionWithSearchMarkup: match2.result,
+                                    keywordsWithSearchMarkup: match2.result,
                                     type: APPTYPE.provider,
                                     emoji: emoji.code,
                                     activate: () => { const clipboard = St.Clipboard.get_default();
                                         clipboard.set_text(St.ClipboardType.CLIPBOARD, emoji.code);}
                                         });
-                        }});
+                        } });
+            //
+            emojiResults.sort( (a, b) =>  a.score < b.score );
+            results = results.concat(emojiResults);
         }
         //---search providers---
         const finish = () => {
@@ -1453,7 +1454,6 @@ class Categories {
                             if (!button) {
                                 button = new CategoryButton(this.appThis, dir, dirId);
                             }
-                            //global.log(dirId);
                             const newAppIndex = categoryApps.findIndex(app => app.newAppShouldHighlight);
                             button.setHighlight(newAppIndex >= 0);//highlight category if it contains a new app
                             newButtons.push(button);
@@ -1671,7 +1671,7 @@ class Apps {
                                             } });
         this.appsByCategory.all = Array.from(new Set(all));//remove duplicates
         apps_sort(this.appsByCategory.all);
-        
+
         this.appsNeedRefresh = false;
         this.newInstance = false;
     }
@@ -1699,7 +1699,7 @@ class Apps {
                         }
                     }
                     if (found) {
-                        const obj = app.hasOwnProperty('item') ? app.item : app;
+                        const obj = /*app.hasOwnProperty('item') ? app.item :*/ app;
                         if (!obj.hasOwnProperty('name')) {
                             obj.name = obj.get_name();
                         }
@@ -1769,13 +1769,11 @@ class Apps {
         let res = this.appThis.appFavorites.getFavorites();
 
         res.forEach(favApp => {
-            const obj = favApp.hasOwnProperty('item') ? favApp.item : favApp;
+            const obj = /*favApp.hasOwnProperty('item') ? favApp.item :*/ favApp;
             if (!obj.hasOwnProperty('name')) {
-                global.log('name');
                 obj.name = obj.get_name();
             }
             if (!obj.hasOwnProperty('description')) {
-                global.log('description');
                 obj.description = obj.get_description();
             }
             favApp.type = APPTYPE.application;
@@ -2075,7 +2073,7 @@ class Sidebar {
         //populate box with items[]
         for (let i = 0; i < this.items.length; i++) {
             if ((reverseOrder && i == this.items.length - 3 && this.items.length > 3) ||
-                        (!reverseOrder && i == 3 && this.items.length > 3)){// add seperator dot to box
+                        (!reverseOrder && i == 3 && this.items.length > 3)){// add seperator line to box
                 this.addSeparator();
             }
             this.innerBox.add(this.items[i].actor, { x_fill: false, y_fill: false,
