@@ -1527,7 +1527,7 @@ class Config {
         if (code == null)
             return "kph";
         for (const key in this.windSpeedUnitLocales) {
-            if (key.includes(code))
+            if (key.indexOf(code) != -1)
                 return this.windSpeedUnitLocales[key];
         }
         return "kph";
@@ -1536,7 +1536,7 @@ class Config {
         if (code == null)
             return "metric";
         for (const key in this.distanceUnitLocales) {
-            if (key.includes(code))
+            if (key.indexOf(code) != -1)
                 return this.distanceUnitLocales[key];
         }
         return "metric";

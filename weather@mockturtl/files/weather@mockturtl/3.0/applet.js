@@ -1681,7 +1681,7 @@ var Config = (function () {
         if (code == null)
             return "kph";
         for (var key in this.windSpeedUnitLocales) {
-            if (key.includes(code))
+            if (key.indexOf(code) != -1)
                 return this.windSpeedUnitLocales[key];
         }
         return "kph";
@@ -1690,7 +1690,7 @@ var Config = (function () {
         if (code == null)
             return "metric";
         for (var key in this.distanceUnitLocales) {
-            if (key.includes(code))
+            if (key.indexOf(code) != -1)
                 return this.distanceUnitLocales[key];
         }
         return "metric";
