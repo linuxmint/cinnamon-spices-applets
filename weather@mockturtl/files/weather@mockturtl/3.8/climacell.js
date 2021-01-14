@@ -174,7 +174,7 @@ class Climacell {
                 type: "hard",
                 userError: true,
                 detail: "bad key",
-                service: "darksky",
+                service: "climacell",
                 message: _("Please Make sure you\nentered the API key correctly and your account is not locked")
             };
         }
@@ -183,8 +183,8 @@ class Climacell {
                 type: "hard",
                 userError: true,
                 detail: "no key",
-                service: "darksky",
-                message: _("Please Make sure you\nentered the API key what you have from DarkSky")
+                service: "climacell",
+                message: _("Please Make sure you\nentered the API key what you have from Climacell")
             };
         }
         return null;

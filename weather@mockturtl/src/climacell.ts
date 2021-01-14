@@ -213,22 +213,22 @@ class Climacell implements WeatherProvider {
     * @returns null if custom error checking does not find anything
     */
     private OnObtainingData(message: any): AppletError {
-        if (message.status_code == 403) { // DarkSky returns auth error on the http level when key is wrong
+        if (message.status_code == 403) {
             return {
                 type: "hard",
                 userError: true,
                 detail: "bad key",
-                service: "darksky",
+                service: "climacell",
                 message: _("Please Make sure you\nentered the API key correctly and your account is not locked")
             };
         }
-        if (message.status_code == 401) { // DarkSky returns auth error on the http level when key is wrong
+        if (message.status_code == 401) {
             return {
                 type: "hard",
                 userError: true,
                 detail: "no key",
-                service: "darksky",
-                message: _("Please Make sure you\nentered the API key what you have from DarkSky")
+                service: "climacell",
+                message: _("Please Make sure you\nentered the API key what you have from Climacell")
             };
         }
         return null;

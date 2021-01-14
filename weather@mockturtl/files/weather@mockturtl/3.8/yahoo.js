@@ -114,8 +114,8 @@ class Yahoo {
             return result;
         }
         catch (e) {
-            this.app.log.Error("DarkSky payload parsing error: " + e);
-            this.app.HandleError({ type: "soft", detail: "unusual payload", service: "darksky", message: _("Failed to Process Weather Info") });
+            this.app.log.Error("Yahoo payload parsing error: " + e);
+            this.app.HandleError({ type: "soft", detail: "unusual payload", service: "yahoo", message: _("Failed to Process Weather Info") });
             return null;
         }
     }
