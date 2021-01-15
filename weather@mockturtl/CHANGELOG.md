@@ -11,6 +11,7 @@
 * Add option to short display Hourly weather times
 * Minor refactor
 * Fix typos
+* OpenWeatherMap now shows Feels Like temerature instead of Cloudiness
 
 ## 2.6.9
 
