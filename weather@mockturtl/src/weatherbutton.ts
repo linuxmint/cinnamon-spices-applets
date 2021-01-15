@@ -2,7 +2,7 @@
 const { Button } = imports.gi.St;
 const { SignalManager } = imports.misc.signalManager;
 
-class WeatherButton {
+export class WeatherButton {
     public actor: imports.gi.St.Button;
     private signals = new SignalManager();
     private disabled = false;

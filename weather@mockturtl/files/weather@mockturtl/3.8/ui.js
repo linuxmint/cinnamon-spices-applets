@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UI = void 0;
 const utils_1 = require("./utils");
+const weatherbutton_1 = require("./weatherbutton");
 const { PopupMenuManager, PopupSeparatorMenuItem } = imports.ui.popupMenu;
 const { Bin, DrawingArea, BoxLayout, Side, IconType, Label, ScrollView, Icon, Button, Align, Widget } = imports.gi.St;
 const { PolicyType } = imports.gi.Gtk;
@@ -10,6 +11,7 @@ const Lang = imports.lang;
 const { GridLayout, Actor, Orientation } = imports.gi.Clutter;
 const { TextIconApplet, AllowedLayout, AppletPopupMenu, MenuItem } = imports.ui.applet;
 const { messageTray, themeManager } = imports.ui.main;
+const { SignalManager } = imports.misc.signalManager;
 const UUID = "weather@mockturtl";
 const APPLET_ICON = "view-refresh-symbolic";
 const REFRESH_ICON = "view-refresh";
@@ -524,7 +526,7 @@ class UI {
             icon_name: APPLET_ICON,
             style_class: STYLE_ICON
         });
-        this._locationButton = new WeatherButton({ reactive: true, label: utils_1._('Refresh'), });
+        this._locationButton = new weatherbutton_1.WeatherButton({ reactive: true, label: utils_1._('Refresh'), });
         this._currentWeatherLocation = this._locationButton.actor;
         this._currentWeatherLocation.connect(SIGNAL_CLICKED, Lang.bind(this, function () {
             if (this.app.encounteredError)
@@ -534,7 +536,7 @@ class UI {
             else
                 this.app.OpenUrl(this._currentWeatherLocation);
         }));
-        this._nextLocationButton = new WeatherButton({
+        this._nextLocationButton = new weatherbutton_1.WeatherButton({
             reactive: true,
             can_focus: true,
             child: new Icon({
@@ -545,7 +547,7 @@ class UI {
             }),
         });
         this._nextLocationButton.actor.connect(SIGNAL_CLICKED, Lang.bind(this.app, this.app.NextLocationClicked));
-        this._previousLocationButton = new WeatherButton({
+        this._previousLocationButton = new weatherbutton_1.WeatherButton({
             reactive: true,
             can_focus: true,
             child: new Icon({
@@ -709,7 +711,7 @@ class UI {
             y_fill: false,
             expand: true
         });
-        this._hourlyButton = new WeatherButton({
+        this._hourlyButton = new weatherbutton_1.WeatherButton({
             reactive: true,
             can_focus: true,
             child: new Icon({
@@ -729,7 +731,7 @@ class UI {
         if (this.app.GetMaxHourlyForecasts() <= 0) {
             this.HideHourlyToggle();
         }
-        this._providerCredit = new WeatherButton({ label: utils_1._(ELLIPSIS), reactive: true }).actor;
+        this._providerCredit = new weatherbutton_1.WeatherButton({ label: utils_1._(ELLIPSIS), reactive: true }).actor;
         this._providerCredit.connect(SIGNAL_CLICKED, Lang.bind(this, this.app.OpenUrl));
         this._bar.add(this._providerCredit, {
             x_fill: false,

@@ -2,6 +2,7 @@ import { Config } from "./config";
 import { WeatherApplet } from "./main";
 import { ForecastUI, HourlyForecastUI, WeatherData, WeatherProvider, HourlyForecastData, WeatherUnits, DistanceUnits } from "./types";
 import { shadeHexColor, delay, capitalizeFirstLetter, _, nonempty, AwareDateString, TempToUserConfig, compassDirection, MPStoUserUnits, PressToUserUnits, GetHoursMinutes, GetDayName, MetreToUserUnits, MillimeterToUserUnits } from "./utils";
+import { WeatherButton } from "./weatherbutton";
 
 const { PopupMenuManager, PopupSeparatorMenuItem } = imports.ui.popupMenu;
 const { Bin, DrawingArea, BoxLayout, Side, IconType, Label, ScrollView, Icon, Button, Align, Widget } = imports.gi.St;
@@ -11,6 +12,7 @@ const Lang: typeof imports.lang = imports.lang;
 const { GridLayout, Actor, Orientation } = imports.gi.Clutter;
 const { TextIconApplet, AllowedLayout, AppletPopupMenu, MenuItem } = imports.ui.applet;
 const { messageTray, themeManager } = imports.ui.main;
+const { SignalManager } = imports.misc.signalManager;
 
 const UUID = "weather@mockturtl"
 const APPLET_ICON = "view-refresh-symbolic"

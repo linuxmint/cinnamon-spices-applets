@@ -26,12 +26,12 @@ import { Yahoo } from "./yahoo";
 const { TextIconApplet, AllowedLayout, AppletPopupMenu, MenuItem } = imports.ui.applet;
 const { Message, Session, ProxyResolverDefault, SessionAsync } = imports.gi.Soup;
 const { get_language_names } = imports.gi.GLib;
-const { messageTray } = imports.ui.main;
+const { messageTray, themeManager } = imports.ui.main;
 const { SystemNotificationSource, Notification } = imports.ui.messageTray;
 const Lang: typeof imports.lang = imports.lang;
 const GLib = imports.gi.GLib;
-const { spawnCommandLine, spawnCommandLineAsyncIO } = imports.misc.util;
-const { IconType } = imports.gi.St;
+const { spawnCommandLine, spawn_async, spawnCommandLineAsyncIO } = imports.misc.util;
+const { Bin, DrawingArea, BoxLayout, Side, IconType, Label, ScrollView, Icon, Button, Align, Widget } = imports.gi.St;
 const keybindingManager = imports.ui.main.keybindingManager;
 
 const UUID = "weather@mockturtl"
@@ -57,6 +57,9 @@ export class WeatherApplet extends TextIconApplet {
 
     ///////////////////////////////////////////////////////////////////////
     ///////////////////////////////////////////////////////////////////////  
+
+    /** Soup session (see https://bugzilla.gnome.org/show_bug.cgi?id=661323#c64) */
+    private readonly _httpSession = new SessionAsync();
     /** Running applet's path*/
     public readonly appletDir: string = imports.ui.appletManager.appletMeta[UUID].path;
     private readonly msgSource: imports.ui.messageTray.SystemNotificationSource;
@@ -88,13 +91,16 @@ export class WeatherApplet extends TextIconApplet {
 		this.log.Debug("Applet created with instanceID " + instanceId);
         this.log.Debug("System locale is " + this.currentLocale);
         this.log.Debug("Appletdir is: " + this.appletDir);
+        this._httpSession.user_agent = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:37.0) Gecko/20100101 Firefox/37.0"; // ipapi blocks non-browsers agents, imitating browser
+        this._httpSession.timeout = 10;
+        this._httpSession.idle_timeout = 10;
 
         // importing custom translations
         imports.gettext.bindtextdomain(UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
 
         this.msgSource = new SystemNotificationSource(_("Weather Applet"));
         messageTray.add(this.msgSource);
-        
+        Session.prototype.add_feature.call(this._httpSession, new ProxyResolverDefault());
         // Manually add the icons to the icon theme - only one icons folder
         imports.gi.Gtk.IconTheme.get_default().append_search_path(this.appletDir + "/../icons");
 
@@ -159,7 +165,59 @@ export class WeatherApplet extends TextIconApplet {
         this.refreshWeather(true, loc);
     };
 
-	
+	/**
+	 * Handles obtaining JSON over http. 
+	 * returns HTTPError object on fail.
+	 * @param query fully constructed url
+	 * @param errorCallback do checking before generic error checking by this function, to display API specific UI errors
+	 */
+    public async LoadJsonAsync(query: string, errorCallback?: (message: imports.gi.Soup.Message) => AppletError, triggerUIError: boolean = true): Promise<any> {
+        let json: any = await new Promise((resolve, reject) => {
+            let message = Message.new('GET', query);
+            this.log.Debug("URL called: " + query);
+            this._httpSession.queue_message(message, (session, message) => {
+                // option for provider to inject errors before general error handling
+                let error: AppletError = (errorCallback != null) ? errorCallback(message) : null;
+                if (error != null) {
+                    this.log.Error("there is an error, " + JSON.stringify(error, null, 2))
+                    this.HandleError(error);
+                    reject({ code: -1, message: "bad api response", data: null, reason_phrase: "" } as HttpError);
+                    return;
+                }
+
+                if (!message) {
+                    reject({ code: 0, message: "no network response", reason_phrase: "no network response", data: get(["response_body", "data"], message) } as HttpError);
+                    return;
+                }
+
+                if (message.status_code >= 400 && message.status_code < 500) {
+                    reject({ code: message.status_code, message: "bad status code", reason_phrase: message.reason_phrase, data: get(["response_body", "data"], message) } as HttpError);
+                    if (triggerUIError == true) this.HandleError({ detail: "bad api response", type: "hard", message: _("API returned status code between 400 and 500") });
+                    return;
+                }
+
+                if (message.status_code > 300 || message.status_code < 200) {
+                    reject({ code: message.status_code, message: "bad status code", reason_phrase: message.reason_phrase, data: get(["response_body", "data"], message) } as HttpError)
+                    return;
+                }
+
+                if (get(["response_body", "data"], message) == null) {
+                    reject({ code: message.status_code, message: "no response data", reason_phrase: message.reason_phrase, data: get(["response_body", "data"], message) } as HttpError);
+                    return;
+                }
+
+                try {
+                    this.log.Debug2("API full response: " + message.response_body.data.toString());
+                    let payload = JSON.parse(message.response_body.data);
+                    resolve(payload);
+                } catch (e) { // Payload is not JSON
+                    this.log.Error("Error: API response is not JSON. The response: " + message.response_body.data);
+                    reject({ code: message.status_code, message: "bad api response - non json", reason_phrase: e } as HttpError);
+                }
+            });
+        });
+        return json;
+    };
 
     /** Spawn a command and await for the output it gives */
     public async SpawnProcess(command: string[]): Promise<any> {
@@ -189,7 +247,43 @@ export class WeatherApplet extends TextIconApplet {
         }
     }
 
+	/**
+	 * Handles obtaining data over http. 
+	 * @returns HTTPError object on fail.
+	 * @param query fully constructed url
+	 */
+    public async LoadAsync(query: string): Promise<any> {
+        let data = await new Promise((resolve, reject) => {
+            let message = Message.new('GET', query);
+            this._httpSession.queue_message(message, (session, message) => {
 
+                if (!message) {
+                    reject({ code: 0, message: "no network response", reason_phrase: "no network response" } as HttpError);
+                    return;
+                }
+
+                if (message.status_code > 300 || message.status_code < 200) {
+                    reject({ code: message.status_code, message: "bad status code", reason_phrase: message.reason_phrase } as HttpError);
+                    return;
+                }
+
+                if (!message.response_body) {
+                    reject({ code: message.status_code, message: "no response body", reason_phrase: message.reason_phrase } as HttpError);
+                    return;
+                }
+
+                if (!message.response_body.data) {
+                    reject({ code: message.status_code, message: "no response data", reason_phrase: message.reason_phrase } as HttpError);
+                    return;
+                }
+
+                this.log.Debug2("API full response: " + message.response_body.data.toString());
+                let payload = message.response_body.data;
+                resolve(payload);
+            });
+        });
+        return data;
+    };
 
     public sendNotification(title: string, message: string, transient?: boolean) {
         let notification = new Notification(this.msgSource, _("Weather Applet") + ": " + title, message);

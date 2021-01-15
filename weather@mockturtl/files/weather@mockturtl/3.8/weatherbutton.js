@@ -1,3 +1,6 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.WeatherButton = void 0;
 const { Button } = imports.gi.St;
 const { SignalManager } = imports.misc.signalManager;
 class WeatherButton {
@@ -26,3 +29,4 @@ class WeatherButton {
         this.actor.reactive = true;
     }
 }
+exports.WeatherButton = WeatherButton;
