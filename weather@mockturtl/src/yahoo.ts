@@ -7,8 +7,8 @@
 //////////////////////////////////////////////////////////////
 
 import { WeatherApplet } from "./main";
-import { BuiltinIcons, CustomIcons, ForecastData, Location, WeatherData, WeatherProvider } from "./types";
-import { weatherIconSafely, CelsiusToKelvin, KPHtoMPS, _ } from "./utils";
+import { WeatherProvider, Location, WeatherData, ForecastData, BuiltinIcons, CustomIcons } from "./types";
+import { _, weatherIconSafely, CelsiusToKelvin, KPHtoMPS } from "./utils";
 
 export class Yahoo implements WeatherProvider {
 

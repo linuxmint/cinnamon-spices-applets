@@ -7,21 +7,20 @@
 
 import { Climacell } from "./climacell";
 import { Config } from "./config";
-import { DarkSky } from "./darkSky";
-import { IpApi } from "./ipApi";
 import { LocationStore } from "./locationstore";
 import { Log } from "./logger";
 import { WeatherLoop } from "./loop";
-import { MetNorway } from "./met_norway";
 import { MetUk } from "./met_uk";
-import { GeoLocation } from "./nominatim";
-import { OpenWeatherMap } from "./openWeatherMap";
 import { ServiceMap, WeatherData, WeatherProvider, LocationData, AppletError, HttpError, CustomIcons, Services, RefreshState, NiceErrorDetail, ApiService } from "./types";
 import { UI } from "./ui";
-import { USWeather } from "./us_weather";
 import { constructJsLocale, _, get } from "./utils";
+import { DarkSky } from "./darkSky";
+import { GeoLocation } from "./nominatim";
+import { OpenWeatherMap } from "./openWeatherMap";
+import { USWeather } from "./us_weather";
 import { Weatherbit } from "./weatherbit";
 import { Yahoo } from "./yahoo";
+import { MetNorway } from "./met_norway";
 
 const { TextIconApplet, AllowedLayout, AppletPopupMenu, MenuItem } = imports.ui.applet;
 const { Message, Session, ProxyResolverDefault, SessionAsync } = imports.gi.Soup;
@@ -51,6 +50,8 @@ const DATA_SERVICE: ServiceMap = {
     US_WEATHER: "US Weather"
 }
 
+export const Logger = new Log()
+
 export class WeatherApplet extends TextIconApplet {
     /** Stores all weather information */
     private weather: WeatherData = null;
@@ -73,7 +74,6 @@ export class WeatherApplet extends TextIconApplet {
     private refreshTriggeredWhileLocked = false;
 
     private provider: WeatherProvider; // API
-    public readonly locProvider = new IpApi(this); // IP location lookup
     public readonly geoLocationService = new GeoLocation(this);
     public orientation: imports.gi.St.Side;
     public locationStore: LocationStore = null;

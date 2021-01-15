@@ -6,7 +6,7 @@ export class Log {
     private level = 1;
     private appletDir: string;
 
-    constructor(_instanceId: number) {
+    constructor(_instanceId?: number) {
         this.ID = _instanceId;
         this.appletDir = imports.ui.appletManager.appletMeta[UUID].path;
         this.debug = this.DEBUG();

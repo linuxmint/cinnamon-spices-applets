@@ -1,12 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Config = void 0;
+const ipApi_1 = require("./ipApi");
 const utils_1 = require("./utils");
 const { AppletSettings, BindingDirection } = imports.ui.settings;
 const Lang = imports.lang;
 const keybindingManager = imports.ui.main.keybindingManager;
 const UUID = "weather@mockturtl";
-const { Bin, DrawingArea, BoxLayout, Side, IconType, Label, ScrollView, Icon, Button, Align, Widget } = imports.gi.St;
+const { IconType } = imports.gi.St;
 const SIGNAL_CHANGED = 'changed::';
 class Config {
     constructor(app, instanceID, locale) {
@@ -52,6 +53,7 @@ class Config {
         this.doneTypingLocation = null;
         this.currentLocation = null;
         this.app = app;
+        this.autoLocProvider = new ipApi_1.IpApi(app);
         this.countryCode = this.GetCountryCode(locale);
         this.settings = new AppletSettings(this, UUID, instanceID);
         this.BindSettings();
@@ -127,7 +129,7 @@ class Config {
     async EnsureLocation() {
         this.currentLocation = null;
         if (!this._manualLocation) {
-            let location = await this.app.locProvider.GetLocation();
+            let location = await this.autoLocProvider.GetLocation();
             if (!location)
                 return null;
             this.InjectLocationToConfig(location);

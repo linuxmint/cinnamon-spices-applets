@@ -7,7 +7,7 @@
 //////////////////////////////////////////////////////////////
 
 import { WeatherApplet } from "./main";
-import { AppletError, BuiltinIcons, CustomIcons, ForecastData, HourlyForecastData, Location, WeatherData, WeatherProvider } from "./types";
+import { WeatherProvider, Location, WeatherData, ForecastData, HourlyForecastData, AppletError, BuiltinIcons, CustomIcons } from "./types";
 import { weatherIconSafely, _, isLangSupported } from "./utils";
 
 export class Weatherbit implements WeatherProvider {

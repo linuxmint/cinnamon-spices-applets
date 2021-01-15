@@ -1,22 +1,21 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.WeatherApplet = void 0;
+exports.WeatherApplet = exports.Logger = void 0;
 const climacell_1 = require("./climacell");
 const config_1 = require("./config");
-const darkSky_1 = require("./darkSky");
-const ipApi_1 = require("./ipApi");
 const locationstore_1 = require("./locationstore");
 const logger_1 = require("./logger");
 const loop_1 = require("./loop");
-const met_norway_1 = require("./met_norway");
 const met_uk_1 = require("./met_uk");
+const ui_1 = require("./ui");
+const utils_1 = require("./utils");
+const darkSky_1 = require("./darkSky");
 const nominatim_1 = require("./nominatim");
 const openWeatherMap_1 = require("./openWeatherMap");
-const ui_1 = require("./ui");
 const us_weather_1 = require("./us_weather");
-const utils_1 = require("./utils");
 const weatherbit_1 = require("./weatherbit");
 const yahoo_1 = require("./yahoo");
+const met_norway_1 = require("./met_norway");
 const { TextIconApplet, AllowedLayout, AppletPopupMenu, MenuItem } = imports.ui.applet;
 const { Message, Session, ProxyResolverDefault, SessionAsync } = imports.gi.Soup;
 const { get_language_names } = imports.gi.GLib;
@@ -41,6 +40,7 @@ const DATA_SERVICE = {
     MET_UK: "Met Office UK",
     US_WEATHER: "US Weather"
 };
+exports.Logger = new logger_1.Log();
 class WeatherApplet extends TextIconApplet {
     constructor(metadata, orientation, panelHeight, instanceId) {
         super(orientation, panelHeight, instanceId);
@@ -50,7 +50,6 @@ class WeatherApplet extends TextIconApplet {
         this.currentLocale = null;
         this.lock = false;
         this.refreshTriggeredWhileLocked = false;
-        this.locProvider = new ipApi_1.IpApi(this);
         this.geoLocationService = new nominatim_1.GeoLocation(this);
         this.locationStore = null;
         this.encounteredError = false;

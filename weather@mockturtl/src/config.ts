@@ -1,4 +1,5 @@
 import { WeatherApplet } from "./main";
+import { IpApi } from "./ipApi";
 import { WeatherWindSpeedUnits, DistanceUnits, SettingKeys, Services, WeatherUnits, WeatherPressureUnits, LocationData } from "./types";
 import { clearTimeout, setTimeout, _, isCoordinate } from "./utils";
 
@@ -6,7 +7,7 @@ const { AppletSettings, BindingDirection } = imports.ui.settings;
 const Lang: typeof imports.lang = imports.lang;
 const keybindingManager = imports.ui.main.keybindingManager;
 const UUID = "weather@mockturtl"
-const { Bin, DrawingArea, BoxLayout, Side, IconType, Label, ScrollView, Icon, Button, Align, Widget } = imports.gi.St;
+const { IconType } = imports.gi.St;
 const SIGNAL_CHANGED = 'changed::'
 
 interface WindSpeedLocalePrefs {
@@ -111,10 +112,13 @@ export class Config {
 
     private settings: imports.ui.settings.AppletSettings;
 	private app: WeatherApplet;
-	private countryCode: string;
+    private countryCode: string;
+    
+    public readonly autoLocProvider: IpApi
 
     constructor(app: WeatherApplet, instanceID: number, locale: string) {
-		this.app = app;
+        this.app = app;
+        this.autoLocProvider = new IpApi(app); // IP location lookup
 		this.countryCode = this.GetCountryCode(locale);
         this.settings = new AppletSettings(this, UUID, instanceID);
         this.BindSettings();
@@ -229,7 +233,7 @@ export class Config {
         this.currentLocation = null;
         // Automatic location
         if (!this._manualLocation) {
-            let location = await this.app.locProvider.GetLocation();
+            let location = await this.autoLocProvider.GetLocation();
             // User facing errors handled by provider
             if (!location) return null;
 
