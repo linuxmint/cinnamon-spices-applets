@@ -1,26 +1,3 @@
-export { }; // Declaring as a Module
-
-function importModule(path: string): any {
-    if (typeof require !== 'undefined') {
-        return require('./' + path);
-    } else {
-        if (!AppletDir) var AppletDir = imports.ui.appletManager.applets['weather@mockturtl'];
-        return AppletDir[path];
-    }
-}
-
-var utils = importModule("utils");
-var weatherIconSafely = utils.weatherIconSafely as (code: BuiltinIcons[], icon_type: imports.gi.St.IconType) => BuiltinIcons;
-var SunCalc = importModule("sunCalc").SunCalc;
-var IsNight = utils.IsNight as (sunTimes: SunTimes, date?: Date) => boolean;
-var CelsiusToKelvin = utils.CelsiusToKelvin as (celsius: number) => number;
-var FahrenheitToKelvin = utils.FahrenheitToKelvin as (fahr: number) => number;
-var KPHtoMPS = utils.MPHtoMPS as (speed: number) => number;
-var get = utils.get as (p: string[], o: any) => any;
-var compassToDeg = utils.compassToDeg as (compass: string) => number;
-var GetDistance = utils.GetDistance as (lat1: number, lon1: number, lat2: number, lon2: number) => number
-var _ = utils._ as (str: string) => string;
-
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
 ///////////                                       ////////////
@@ -29,7 +6,12 @@ var _ = utils._ as (str: string) => string;
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
 
-class USWeather implements WeatherProvider {
+import { WeatherApplet } from "./main";
+import { SunCalc } from "./sunCalc";
+import { WeatherProvider, Location, WeatherData, AppletError, ForecastData, HourlyForecastData, Condition } from "./types";
+import { _, GetDistance, get, KPHtoMPS, CelsiusToKelvin, IsNight, FahrenheitToKelvin, weatherIconSafely } from "./utils";
+
+export class USWeather implements WeatherProvider {
 
     //--------------------------------------------------------
     //  Properties

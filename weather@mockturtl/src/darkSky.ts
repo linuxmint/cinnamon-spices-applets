@@ -1,26 +1,3 @@
-export { }; // Declaring as a Module
-
-function importModule(path: string): any {
-    if (typeof require !== 'undefined') {
-        return require('./' + path);
-    } else {
-        if (!AppletDir) var AppletDir = imports.ui.appletManager.applets['weather@mockturtl'];
-        return AppletDir[path];
-    }
-}
-
-// Unable to use type declarations with imports like this, so
-// typing it manually again.
-var utils = importModule("utils");
-var isCoordinate = utils.isCoordinate as (text: any) => boolean;
-var isLangSupported = utils.isLangSupported as (lang: string, languages: Array<string>) => boolean;
-var FahrenheitToKelvin = utils.FahrenheitToKelvin as (fahr: number) => number;
-var CelsiusToKelvin = utils.CelsiusToKelvin as (celsius: number) => number;
-var MPHtoMPS = utils.MPHtoMPS as (speed: number) => number;
-var IsNight = utils.IsNight as (sunTimes: SunTimes, date?: Date) => boolean;
-var weatherIconSafely = utils.weatherIconSafely as (code: BuiltinIcons[], icon_type: imports.gi.St.IconType) => BuiltinIcons;
-var _ = utils._ as (str: string) => string;
-
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
 ///////////                                       ////////////
@@ -29,7 +6,11 @@ var _ = utils._ as (str: string) => string;
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
 
-class DarkSky implements WeatherProvider {
+import { WeatherApplet } from "./main";
+import { WeatherProvider, Location, WeatherData, ForecastData, HourlyForecastData, PrecipitationType, AppletError, SunTimes, BuiltinIcons, CustomIcons } from "./types";
+import { _, weatherIconSafely, isLangSupported, IsNight, FahrenheitToKelvin, CelsiusToKelvin, MPHtoMPS } from "./utils";
+
+export class DarkSky implements WeatherProvider {
 
     //--------------------------------------------------------
     //  Properties

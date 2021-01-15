@@ -1,22 +1,7 @@
-function importModule(path) {
-    if (typeof require !== 'undefined') {
-        return require('./' + path);
-    }
-    else {
-        if (!AppletDir)
-            var AppletDir = imports.ui.appletManager.applets['weather@mockturtl'];
-        return AppletDir[path];
-    }
-}
-var utils = importModule("utils");
-var isCoordinate = utils.isCoordinate;
-var isLangSupported = utils.isLangSupported;
-var FahrenheitToKelvin = utils.FahrenheitToKelvin;
-var CelsiusToKelvin = utils.CelsiusToKelvin;
-var MPHtoMPS = utils.MPHtoMPS;
-var IsNight = utils.IsNight;
-var weatherIconSafely = utils.weatherIconSafely;
-var _ = utils._;
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.DarkSky = void 0;
+const utils_1 = require("./utils");
 class DarkSky {
     constructor(_app) {
         this.prettyName = "DarkSky";
@@ -32,7 +17,7 @@ class DarkSky {
             'sv', 'tet', 'tr', 'uk', 'x-pig-latin', 'zh', 'zh-tw'
         ];
         this.query = "https://api.darksky.net/forecast/";
-        this.DarkSkyFilterWords = [_("and"), _("until"), _("in"), _("Possible")];
+        this.DarkSkyFilterWords = [utils_1._("and"), utils_1._("until"), utils_1._("in"), utils_1._("Possible")];
         this.unit = null;
         this.app = _app;
     }
@@ -88,11 +73,11 @@ class DarkSky {
                 condition: {
                     main: this.GetShortCurrentSummary(json.currently.summary),
                     description: json.currently.summary,
-                    icon: weatherIconSafely(this.ResolveIcon(json.currently.icon, { sunrise: sunrise, sunset: sunset }), this.app.config.IconType()),
+                    icon: utils_1.weatherIconSafely(this.ResolveIcon(json.currently.icon, { sunrise: sunrise, sunset: sunset }), this.app.config.IconType()),
                     customIcon: this.ResolveCustomIcon(json.currently.icon)
                 },
                 extra_field: {
-                    name: _("Feels Like"),
+                    name: utils_1._("Feels Like"),
                     value: this.ToKelvin(json.currently.apparentTemperature),
                     type: "temperature"
                 },
@@ -108,7 +93,7 @@ class DarkSky {
                     condition: {
                         main: this.GetShortSummary(day.summary),
                         description: this.ProcessSummary(day.summary),
-                        icon: weatherIconSafely(this.ResolveIcon(day.icon), this.app.config.IconType()),
+                        icon: utils_1.weatherIconSafely(this.ResolveIcon(day.icon), this.app.config.IconType()),
                         customIcon: this.ResolveCustomIcon(day.icon)
                     },
                 };
@@ -123,7 +108,7 @@ class DarkSky {
                     condition: {
                         main: this.GetShortSummary(hour.summary),
                         description: this.ProcessSummary(hour.summary),
-                        icon: weatherIconSafely(this.ResolveIcon(hour.icon, { sunrise: sunrise, sunset: sunset }, new Date(hour.time * 1000)), this.app.config.IconType()),
+                        icon: utils_1.weatherIconSafely(this.ResolveIcon(hour.icon, { sunrise: sunrise, sunset: sunset }, new Date(hour.time * 1000)), this.app.config.IconType()),
                         customIcon: this.ResolveCustomIcon(hour.icon)
                     },
                     precipitation: {
@@ -138,7 +123,7 @@ class DarkSky {
         }
         catch (e) {
             this.app.log.Error("DarkSky payload parsing error: " + e);
-            this.app.HandleError({ type: "soft", detail: "unusual payload", service: "darksky", message: _("Failed to Process Weather Info") });
+            this.app.HandleError({ type: "soft", detail: "unusual payload", service: "darksky", message: utils_1._("Failed to Process Weather Info") });
             return null;
         }
     }
@@ -160,13 +145,13 @@ class DarkSky {
                 type: "hard",
                 userError: true,
                 "detail": "no key",
-                message: _("Please enter API key in settings,\nor get one first on https://darksky.net/dev/register")
+                message: utils_1._("Please enter API key in settings,\nor get one first on https://darksky.net/dev/register")
             });
             return "";
         }
         query = this.query + key + "/" + loc.text + "?exclude=minutely,flags" + "&units=" + this.unit;
         let locale = this.ConvertToAPILocale(this.app.currentLocale);
-        if (isLangSupported(locale, this.supportedLanguages) && this.app.config._translateCondition) {
+        if (utils_1.isLangSupported(locale, this.supportedLanguages) && this.app.config._translateCondition) {
             query = query + "&lang=" + locale;
         }
         return query;
@@ -178,7 +163,7 @@ class DarkSky {
                 userError: true,
                 detail: "bad key",
                 service: "darksky",
-                message: _("Please Make sure you\nentered the API key correctly and your account is not locked")
+                message: utils_1._("Please Make sure you\nentered the API key correctly and your account is not locked")
             };
         }
         if (message.status_code == 401) {
@@ -187,7 +172,7 @@ class DarkSky {
                 userError: true,
                 detail: "no key",
                 service: "darksky",
-                message: _("Please Make sure you\nentered the API key what you have from DarkSky")
+                message: utils_1._("Please Make sure you\nentered the API key what you have from DarkSky")
             };
         }
         return null;
@@ -263,9 +248,9 @@ class DarkSky {
             case "fog":
                 return ["weather-fog"];
             case "wind":
-                return (sunTimes && IsNight(sunTimes, date)) ? ["weather-windy", "weather-breeze", "weather-clouds", "weather-few-clouds-night"] : ["weather-windy", "weather-breeze", "weather-clouds", "weather-few-clouds"];
+                return (sunTimes && utils_1.IsNight(sunTimes, date)) ? ["weather-windy", "weather-breeze", "weather-clouds", "weather-few-clouds-night"] : ["weather-windy", "weather-breeze", "weather-clouds", "weather-few-clouds"];
             case "cloudy":
-                return (sunTimes && IsNight(sunTimes, date)) ? ["weather-overcast", "weather-clouds", "weather-few-clouds-night"] : ["weather-overcast", "weather-clouds", "weather-few-clouds"];
+                return (sunTimes && utils_1.IsNight(sunTimes, date)) ? ["weather-overcast", "weather-clouds", "weather-few-clouds-night"] : ["weather-overcast", "weather-clouds", "weather-few-clouds"];
             case "partly-cloudy-night":
                 return ["weather-few-clouds-night"];
             case "partly-cloudy-day":
@@ -327,10 +312,10 @@ class DarkSky {
     ;
     ToKelvin(temp) {
         if (this.unit == 'us') {
-            return FahrenheitToKelvin(temp);
+            return utils_1.FahrenheitToKelvin(temp);
         }
         else {
-            return CelsiusToKelvin(temp);
+            return utils_1.CelsiusToKelvin(temp);
         }
     }
     ;
@@ -339,9 +324,10 @@ class DarkSky {
             return speed;
         }
         else {
-            return MPHtoMPS(speed);
+            return utils_1.MPHtoMPS(speed);
         }
     }
     ;
 }
+exports.DarkSky = DarkSky;
 ;

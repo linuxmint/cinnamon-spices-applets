@@ -1,24 +1,8 @@
-function importModule(path) {
-    if (typeof require !== 'undefined') {
-        return require('./' + path);
-    }
-    else {
-        if (!AppletDir)
-            var AppletDir = imports.ui.appletManager.applets['weather@mockturtl'];
-        return AppletDir[path];
-    }
-}
-var utils = importModule("utils");
-var weatherIconSafely = utils.weatherIconSafely;
-var SunCalc = importModule("sunCalc").SunCalc;
-var IsNight = utils.IsNight;
-var CelsiusToKelvin = utils.CelsiusToKelvin;
-var MPHtoMPS = utils.MPHtoMPS;
-var compassToDeg = utils.compassToDeg;
-var GetDistance = utils.GetDistance;
-const get = utils.get;
-var MetreToUserUnits = utils.MetreToUserUnits;
-var _ = utils._;
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.MetUk = void 0;
+const sunCalc_1 = require("./sunCalc");
+const utils_1 = require("./utils");
 class MetUk {
     constructor(_app) {
         this.prettyName = "Met Office UK";
@@ -38,7 +22,7 @@ class MetUk {
         this.currentLoc = null;
         this.MAX_STATION_DIST = 50000;
         this.app = _app;
-        this.sunCalc = new SunCalc();
+        this.sunCalc = new sunCalc_1.SunCalc();
     }
     async GetWeather(newLoc) {
         if (newLoc == null)
@@ -95,7 +79,7 @@ class MetUk {
                 userError: true,
                 detail: "no network response",
                 service: "met-uk",
-                message: _("Unexpected response from API")
+                message: utils_1._("Unexpected response from API")
             });
             return null;
         }
@@ -112,14 +96,14 @@ class MetUk {
                 userError: true,
                 detail: "no network response",
                 service: "met-uk",
-                message: _("Unexpected response from API")
+                message: utils_1._("Unexpected response from API")
             });
             return null;
         }
         let observationSites = [];
         for (let index = 0; index < observationSiteList.Locations.Location.length; index++) {
             const element = observationSiteList.Locations.Location[index];
-            element.dist = GetDistance(parseFloat(element.latitude), parseFloat(element.longitude), loc.lat, loc.lon);
+            element.dist = utils_1.GetDistance(parseFloat(element.latitude), parseFloat(element.longitude), loc.lat, loc.lon);
             if (element.dist > range)
                 continue;
             observationSites.push(element);
@@ -142,7 +126,7 @@ class MetUk {
                     userError: true,
                     detail: "no network response",
                     service: "us-weather",
-                    message: _("Unexpected response from API")
+                    message: utils_1._("Unexpected response from API")
                 });
                 this.app.log.Debug("Failed to get observations from " + element.id);
             }
@@ -200,36 +184,36 @@ class MetUk {
                 temperature: null,
                 pressure: null,
                 humidity: null,
-                condition: this.ResolveCondition(get(["W"], observation)),
+                condition: this.ResolveCondition(utils_1.get(["W"], observation)),
                 forecasts: []
             };
-            if (get(["V"], observation) != null) {
+            if (utils_1.get(["V"], observation) != null) {
                 weather.extra_field = {
-                    name: _("Visibility"),
+                    name: utils_1._("Visibility"),
                     value: this.VisibilityToText(observation.V),
                     type: "string"
                 };
             }
-            if (get(["S"], observation) != null) {
-                weather.wind.speed = MPHtoMPS(parseFloat(observation.S));
+            if (utils_1.get(["S"], observation) != null) {
+                weather.wind.speed = utils_1.MPHtoMPS(parseFloat(observation.S));
             }
-            if (get(["D"], observation) != null) {
-                weather.wind.degree = compassToDeg(observation.D);
+            if (utils_1.get(["D"], observation) != null) {
+                weather.wind.degree = utils_1.compassToDeg(observation.D);
             }
-            if (get(["T"], observation) != null) {
-                weather.temperature = CelsiusToKelvin(parseFloat(observation.T));
+            if (utils_1.get(["T"], observation) != null) {
+                weather.temperature = utils_1.CelsiusToKelvin(parseFloat(observation.T));
             }
-            if (get(["P"], observation) != null) {
+            if (utils_1.get(["P"], observation) != null) {
                 weather.pressure = parseFloat(observation.P);
             }
-            if (get(["H"], observation) != null) {
+            if (utils_1.get(["H"], observation) != null) {
                 weather.humidity = parseFloat(observation.H);
             }
             return weather;
         }
         catch (e) {
             this.app.log.Error("Met UK Weather Parsing error: " + e);
-            this.app.HandleError({ type: "soft", service: "met-uk", detail: "unusual payload", message: _("Failed to Process Current Weather Info") });
+            this.app.HandleError({ type: "soft", service: "met-uk", detail: "unusual payload", message: utils_1._("Failed to Process Current Weather Info") });
             return null;
         }
     }
@@ -243,8 +227,8 @@ class MetUk {
                 let night = element.Rep[1];
                 let forecast = {
                     date: new Date(self.PartialToISOString(element.value)),
-                    temp_min: CelsiusToKelvin(parseFloat(night.Nm)),
-                    temp_max: CelsiusToKelvin(parseFloat(day.Dm)),
+                    temp_min: utils_1.CelsiusToKelvin(parseFloat(night.Nm)),
+                    temp_max: utils_1.CelsiusToKelvin(parseFloat(day.Dm)),
                     condition: self.ResolveCondition(day.W),
                 };
                 forecasts.push(forecast);
@@ -253,7 +237,7 @@ class MetUk {
         }
         catch (e) {
             self.app.log.Error("MET UK Forecast Parsing error: " + e);
-            self.app.HandleError({ type: "soft", service: "met-uk", detail: "unusual payload", message: _("Failed to Process Forecast Info") });
+            self.app.HandleError({ type: "soft", service: "met-uk", detail: "unusual payload", message: utils_1._("Failed to Process Forecast Info") });
             return null;
         }
     }
@@ -274,7 +258,7 @@ class MetUk {
                         continue;
                     let forecast = {
                         date: timestamp,
-                        temp: CelsiusToKelvin(parseFloat(hour.T)),
+                        temp: utils_1.CelsiusToKelvin(parseFloat(hour.T)),
                         condition: self.ResolveCondition(hour.W),
                         precipitation: {
                             type: "rain",
@@ -289,7 +273,7 @@ class MetUk {
         }
         catch (e) {
             self.app.log.Error("MET UK Forecast Parsing error: " + e);
-            self.app.HandleError({ type: "soft", service: "met-uk", detail: "unusual payload", message: _("Failed to Process Forecast Info") });
+            self.app.HandleError({ type: "soft", service: "met-uk", detail: "unusual payload", message: utils_1._("Failed to Process Forecast Info") });
             return null;
         }
     }
@@ -297,21 +281,21 @@ class MetUk {
         let distance = parseInt(dist);
         let unit = this.app.config.DistanceUnit();
         if (distance < 1000)
-            return _("Very poor - Less than") + " " + MetreToUserUnits(1000, unit) + this.DistanceUnitFor(unit);
+            return utils_1._("Very poor - Less than") + " " + utils_1.MetreToUserUnits(1000, unit) + this.DistanceUnitFor(unit);
         if (distance < 4000)
-            return _("Poor - Between") + " " + MetreToUserUnits(1000, unit) + "-" + MetreToUserUnits(4000, unit) + " " + this.DistanceUnitFor(unit);
+            return utils_1._("Poor - Between") + " " + utils_1.MetreToUserUnits(1000, unit) + "-" + utils_1.MetreToUserUnits(4000, unit) + " " + this.DistanceUnitFor(unit);
         if (distance < 10000)
-            return _("Moderate - Between") + " " + MetreToUserUnits(4000, unit) + "-" + MetreToUserUnits(10000, unit) + " " + this.DistanceUnitFor(unit);
+            return utils_1._("Moderate - Between") + " " + utils_1.MetreToUserUnits(4000, unit) + "-" + utils_1.MetreToUserUnits(10000, unit) + " " + this.DistanceUnitFor(unit);
         if (distance < 20000)
-            return _("Good - Between") + " " + MetreToUserUnits(10000, unit) + "-" + MetreToUserUnits(20000, unit) + " " + this.DistanceUnitFor(unit);
+            return utils_1._("Good - Between") + " " + utils_1.MetreToUserUnits(10000, unit) + "-" + utils_1.MetreToUserUnits(20000, unit) + " " + this.DistanceUnitFor(unit);
         if (distance < 40000)
-            return _("Very good - Between") + " " + MetreToUserUnits(20000, unit) + "-" + MetreToUserUnits(40000, unit) + " " + this.DistanceUnitFor(unit);
-        return _("Excellent - More than") + " " + MetreToUserUnits(40000, unit) + " " + this.DistanceUnitFor(unit);
+            return utils_1._("Very good - Between") + " " + utils_1.MetreToUserUnits(20000, unit) + "-" + utils_1.MetreToUserUnits(40000, unit) + " " + this.DistanceUnitFor(unit);
+        return utils_1._("Excellent - More than") + " " + utils_1.MetreToUserUnits(40000, unit) + " " + this.DistanceUnitFor(unit);
     }
     DistanceUnitFor(unit) {
         if (unit == "imperial")
-            return _("mi");
-        return _("km");
+            return utils_1._("mi");
+        return utils_1._("km");
     }
     SortObservationSites(observations) {
         if (observations == null)
@@ -330,11 +314,11 @@ class MetUk {
             return null;
         if (observations.length == 0)
             return null;
-        let result = this.GetLatestObservation(get(["SiteRep", "DV", "Location", "Period"], observations[0]), new Date());
+        let result = this.GetLatestObservation(utils_1.get(["SiteRep", "DV", "Location", "Period"], observations[0]), new Date());
         if (observations.length == 1)
             return result;
         for (let index = 0; index < observations.length; index++) {
-            if (get(["SiteRep", "DV", "Location", "Period"], observations[index]) == null)
+            if (utils_1.get(["SiteRep", "DV", "Location", "Period"], observations[index]) == null)
                 continue;
             let nextObservation = this.GetLatestObservation(observations[index].SiteRep.DV.Location.Period, new Date());
             if (result == null)
@@ -342,34 +326,34 @@ class MetUk {
             let debugText = " Observation data missing, plugged in from ID " +
                 observations[index].SiteRep.DV.Location.i + ", index " + index +
                 ", distance "
-                + Math.round(GetDistance(parseFloat(observations[index].SiteRep.DV.Location.lat), parseFloat(observations[index].SiteRep.DV.Location.lon), this.currentLoc.lat, this.currentLoc.lon))
+                + Math.round(utils_1.GetDistance(parseFloat(observations[index].SiteRep.DV.Location.lat), parseFloat(observations[index].SiteRep.DV.Location.lon), this.currentLoc.lat, this.currentLoc.lon))
                 + " metres";
-            if (get(["V"], result) == null) {
-                result.V = get(["V"], nextObservation);
+            if (utils_1.get(["V"], result) == null) {
+                result.V = utils_1.get(["V"], nextObservation);
                 this.app.log.Debug("Visibility" + debugText);
             }
-            if (get(["W"], result) == null) {
-                result.W = get(["W"], nextObservation);
+            if (utils_1.get(["W"], result) == null) {
+                result.W = utils_1.get(["W"], nextObservation);
                 this.app.log.Debug("Weather condition" + debugText);
             }
-            if (get(["S"], result) == null) {
-                result.S = get(["S"], nextObservation);
+            if (utils_1.get(["S"], result) == null) {
+                result.S = utils_1.get(["S"], nextObservation);
                 this.app.log.Debug("Wind Speed" + debugText);
             }
-            if (get(["D"], result) == null) {
-                result.D = get(["D"], nextObservation);
+            if (utils_1.get(["D"], result) == null) {
+                result.D = utils_1.get(["D"], nextObservation);
                 this.app.log.Debug("Wind degree" + debugText);
             }
-            if (get(["T"], result) == null) {
-                result.T = get(["T"], nextObservation);
+            if (utils_1.get(["T"], result) == null) {
+                result.T = utils_1.get(["T"], nextObservation);
                 this.app.log.Debug("Temperature" + debugText);
             }
-            if (get(["P"], result) == null) {
-                result.P = get(["P"], nextObservation);
+            if (utils_1.get(["P"], result) == null) {
+                result.P = utils_1.get(["P"], nextObservation);
                 this.app.log.Debug("Pressure" + debugText);
             }
-            if (get(["H"], result) == null) {
-                result.H = get(["H"], nextObservation);
+            if (utils_1.get(["H"], result) == null) {
+                result.H = utils_1.get(["H"], nextObservation);
                 this.app.log.Debug("Humidity" + debugText);
             }
         }
@@ -393,10 +377,10 @@ class MetUk {
     GetClosestSite(siteList, loc) {
         let sites = siteList.Locations.Location;
         let closest = sites[0];
-        closest.dist = GetDistance(parseFloat(closest.latitude), parseFloat(closest.longitude), loc.lat, loc.lon);
+        closest.dist = utils_1.GetDistance(parseFloat(closest.latitude), parseFloat(closest.longitude), loc.lat, loc.lon);
         for (let index = 0; index < sites.length; index++) {
             const element = sites[index];
-            element.dist = GetDistance(parseFloat(element.latitude), parseFloat(element.longitude), loc.lat, loc.lon);
+            element.dist = utils_1.GetDistance(parseFloat(element.latitude), parseFloat(element.longitude), loc.lat, loc.lon);
             if (element.dist < closest.dist) {
                 closest = element;
             }
@@ -408,237 +392,238 @@ class MetUk {
         switch (icon) {
             case "NA":
                 return {
-                    main: _("Unknown"),
-                    description: _("Unknown"),
+                    main: utils_1._("Unknown"),
+                    description: utils_1._("Unknown"),
                     customIcon: "cloud-refresh-symbolic",
-                    icon: weatherIconSafely(["weather-severe-alert"], iconType)
+                    icon: utils_1.weatherIconSafely(["weather-severe-alert"], iconType)
                 };
             case "0":
                 return {
-                    main: _("Clear"),
-                    description: _("Clear"),
+                    main: utils_1._("Clear"),
+                    description: utils_1._("Clear"),
                     customIcon: "night-clear-symbolic",
-                    icon: weatherIconSafely(["weather-clear-night", "weather-severe-alert"], iconType)
+                    icon: utils_1.weatherIconSafely(["weather-clear-night", "weather-severe-alert"], iconType)
                 };
             case "1":
                 return {
-                    main: _("Sunny"),
-                    description: _("Sunny"),
+                    main: utils_1._("Sunny"),
+                    description: utils_1._("Sunny"),
                     customIcon: "day-sunny-symbolic",
-                    icon: weatherIconSafely(["weather-clear", "weather-severe-alert"], iconType)
+                    icon: utils_1.weatherIconSafely(["weather-clear", "weather-severe-alert"], iconType)
                 };
             case "2":
                 return {
-                    main: _("Partly Cloudy"),
-                    description: _("Partly Cloudy"),
+                    main: utils_1._("Partly Cloudy"),
+                    description: utils_1._("Partly Cloudy"),
                     customIcon: "night-alt-cloudy-symbolic",
-                    icon: weatherIconSafely(["weather-clouds-night", "weather-overcast", "weather-severe-alert"], iconType)
+                    icon: utils_1.weatherIconSafely(["weather-clouds-night", "weather-overcast", "weather-severe-alert"], iconType)
                 };
             case "3":
                 return {
-                    main: _("Partly Cloudy"),
-                    description: _("Partly Cloudy"),
+                    main: utils_1._("Partly Cloudy"),
+                    description: utils_1._("Partly Cloudy"),
                     customIcon: "day-cloudy-symbolic",
-                    icon: weatherIconSafely(["weather-clouds", "weather-overcast", "weather-severe-alert"], iconType)
+                    icon: utils_1.weatherIconSafely(["weather-clouds", "weather-overcast", "weather-severe-alert"], iconType)
                 };
             case "4":
                 return {
-                    main: _("Unknown"),
-                    description: _("Unknown"),
+                    main: utils_1._("Unknown"),
+                    description: utils_1._("Unknown"),
                     customIcon: "cloud-refresh-symbolic",
-                    icon: weatherIconSafely(["weather-severe-alert"], iconType)
+                    icon: utils_1.weatherIconSafely(["weather-severe-alert"], iconType)
                 };
             case "5":
                 return {
-                    main: _("Mist"),
-                    description: _("Mist"),
+                    main: utils_1._("Mist"),
+                    description: utils_1._("Mist"),
                     customIcon: "fog-symbolic",
-                    icon: weatherIconSafely(["weather-fog", "weather-severe-alert"], iconType)
+                    icon: utils_1.weatherIconSafely(["weather-fog", "weather-severe-alert"], iconType)
                 };
             case "6":
                 return {
-                    main: _("Fog"),
-                    description: _("Fog"),
+                    main: utils_1._("Fog"),
+                    description: utils_1._("Fog"),
                     customIcon: "fog-symbolic",
-                    icon: weatherIconSafely(["weather-fog", "weather-severe-alert"], iconType)
+                    icon: utils_1.weatherIconSafely(["weather-fog", "weather-severe-alert"], iconType)
                 };
             case "7":
                 return {
-                    main: _("Cloudy"),
-                    description: _("Cloudy"),
+                    main: utils_1._("Cloudy"),
+                    description: utils_1._("Cloudy"),
                     customIcon: "cloud-symbolic",
-                    icon: weatherIconSafely(["weather-overcast", "weather-many-clouds", "weather-severe-alert"], iconType)
+                    icon: utils_1.weatherIconSafely(["weather-overcast", "weather-many-clouds", "weather-severe-alert"], iconType)
                 };
             case "8":
                 return {
-                    main: _("Overcast"),
-                    description: _("Overcast"),
+                    main: utils_1._("Overcast"),
+                    description: utils_1._("Overcast"),
                     customIcon: "cloudy-symbolic",
-                    icon: weatherIconSafely(["weather-overcast", "weather-many-clouds", "weather-severe-alert"], iconType)
+                    icon: utils_1.weatherIconSafely(["weather-overcast", "weather-many-clouds", "weather-severe-alert"], iconType)
                 };
             case "9":
                 return {
-                    main: _("Light Rain"),
-                    description: _("Light rain shower"),
+                    main: utils_1._("Light Rain"),
+                    description: utils_1._("Light rain shower"),
                     customIcon: "night-alt-showers-symbolic",
-                    icon: weatherIconSafely(["weather-showers-scattered-night", "weather-showers-night", "weather-showers-scattered", "weather-showers", "weather-freezing-rain", "weather-severe-alert"], iconType)
+                    icon: utils_1.weatherIconSafely(["weather-showers-scattered-night", "weather-showers-night", "weather-showers-scattered", "weather-showers", "weather-freezing-rain", "weather-severe-alert"], iconType)
                 };
             case "10":
                 return {
-                    main: _("Light Rain"),
-                    description: _("Light rain shower"),
+                    main: utils_1._("Light Rain"),
+                    description: utils_1._("Light rain shower"),
                     customIcon: "day-showers-symbolic",
-                    icon: weatherIconSafely(["weather-showers-scattered-day", "weather-showers-day", "weather-showers-scattered", "weather-showers", "weather-freezing-rain", "weather-severe-alert"], iconType)
+                    icon: utils_1.weatherIconSafely(["weather-showers-scattered-day", "weather-showers-day", "weather-showers-scattered", "weather-showers", "weather-freezing-rain", "weather-severe-alert"], iconType)
                 };
             case "11":
                 return {
-                    main: _("Drizzle"),
-                    description: _("Drizzle"),
+                    main: utils_1._("Drizzle"),
+                    description: utils_1._("Drizzle"),
                     customIcon: "showers-symbolic",
-                    icon: weatherIconSafely(["weather-showers-scattered", "weather-showers", "weather-rain", "weather-freezing-rain", "weather-severe-alert"], iconType)
+                    icon: utils_1.weatherIconSafely(["weather-showers-scattered", "weather-showers", "weather-rain", "weather-freezing-rain", "weather-severe-alert"], iconType)
                 };
             case "12":
                 return {
-                    main: _("Light Rain"),
-                    description: _("Light rain"),
+                    main: utils_1._("Light Rain"),
+                    description: utils_1._("Light rain"),
                     customIcon: "showers-symbolic",
-                    icon: weatherIconSafely(["weather-showers-scattered", "weather-showers", "weather-rain", "weather-freezing-rain", "weather-severe-alert"], iconType)
+                    icon: utils_1.weatherIconSafely(["weather-showers-scattered", "weather-showers", "weather-rain", "weather-freezing-rain", "weather-severe-alert"], iconType)
                 };
             case "13":
                 return {
-                    main: _("Heavy Rain"),
-                    description: _("Heavy rain shower"),
+                    main: utils_1._("Heavy Rain"),
+                    description: utils_1._("Heavy rain shower"),
                     customIcon: "night-alt-rain-symbolic",
-                    icon: weatherIconSafely(["weather-showers-night", "weather-showers", "weather-showers-scattered", "weather-severe-alert"], iconType)
+                    icon: utils_1.weatherIconSafely(["weather-showers-night", "weather-showers", "weather-showers-scattered", "weather-severe-alert"], iconType)
                 };
             case "14":
                 return {
-                    main: _("Heavy Rain"),
-                    description: _("Heavy rain shower"),
+                    main: utils_1._("Heavy Rain"),
+                    description: utils_1._("Heavy rain shower"),
                     customIcon: "day-rain-symbolic",
-                    icon: weatherIconSafely(["weather-showers-day", "weather-showers", "weather-showers-scattered", "weather-severe-alert"], iconType)
+                    icon: utils_1.weatherIconSafely(["weather-showers-day", "weather-showers", "weather-showers-scattered", "weather-severe-alert"], iconType)
                 };
             case "15":
                 return {
-                    main: _("Heavy Rain"),
-                    description: _("Heavy Rain"),
+                    main: utils_1._("Heavy Rain"),
+                    description: utils_1._("Heavy Rain"),
                     customIcon: "rain-symbolic",
-                    icon: weatherIconSafely(["weather-showers", "weather-showers-scattered", "weather-severe-alert"], iconType)
+                    icon: utils_1.weatherIconSafely(["weather-showers", "weather-showers-scattered", "weather-severe-alert"], iconType)
                 };
             case "16":
                 return {
-                    main: _("Sleet"),
-                    description: _("Sleet shower"),
+                    main: utils_1._("Sleet"),
+                    description: utils_1._("Sleet shower"),
                     customIcon: "night-alt-rain-mix-symbolic",
-                    icon: weatherIconSafely(["weather-showers-night", "weather-showers", "weather-showers-scattered", "weather-severe-alert"], iconType)
+                    icon: utils_1.weatherIconSafely(["weather-showers-night", "weather-showers", "weather-showers-scattered", "weather-severe-alert"], iconType)
                 };
             case "17":
                 return {
-                    main: _("Sleet"),
-                    description: _("Sleet shower"),
+                    main: utils_1._("Sleet"),
+                    description: utils_1._("Sleet shower"),
                     customIcon: "day-rain-mix-symbolic",
-                    icon: weatherIconSafely(["weather-showers-day", "weather-showers", "weather-showers-scattered", "weather-severe-alert"], iconType)
+                    icon: utils_1.weatherIconSafely(["weather-showers-day", "weather-showers", "weather-showers-scattered", "weather-severe-alert"], iconType)
                 };
             case "18":
                 return {
-                    main: _("Sleet"),
-                    description: _("Sleet"),
+                    main: utils_1._("Sleet"),
+                    description: utils_1._("Sleet"),
                     customIcon: "rain-mix-symbolic",
-                    icon: weatherIconSafely(["weather-showers", "weather-showers-scattered", "weather-severe-alert"], iconType)
+                    icon: utils_1.weatherIconSafely(["weather-showers", "weather-showers-scattered", "weather-severe-alert"], iconType)
                 };
             case "19":
                 return {
-                    main: _("Hail"),
-                    description: _("Hail shower"),
+                    main: utils_1._("Hail"),
+                    description: utils_1._("Hail shower"),
                     customIcon: "night-alt-hail-symbolic",
-                    icon: weatherIconSafely(["weather-showers-night", "weather-showers", "weather-showers-scattered", "weather-severe-alert"], iconType)
+                    icon: utils_1.weatherIconSafely(["weather-showers-night", "weather-showers", "weather-showers-scattered", "weather-severe-alert"], iconType)
                 };
             case "20":
                 return {
-                    main: _("Hail"),
-                    description: _("Hail shower"),
+                    main: utils_1._("Hail"),
+                    description: utils_1._("Hail shower"),
                     customIcon: "day-hail-symbolic",
-                    icon: weatherIconSafely(["weather-showers-day", "weather-showers", "weather-showers-scattered", "weather-severe-alert"], iconType)
+                    icon: utils_1.weatherIconSafely(["weather-showers-day", "weather-showers", "weather-showers-scattered", "weather-severe-alert"], iconType)
                 };
             case "21":
                 return {
-                    main: _("Hail"),
-                    description: _("Hail"),
+                    main: utils_1._("Hail"),
+                    description: utils_1._("Hail"),
                     customIcon: "hail-symbolic",
-                    icon: weatherIconSafely(["weather-showers", "weather-showers-scattered", "weather-severe-alert"], iconType)
+                    icon: utils_1.weatherIconSafely(["weather-showers", "weather-showers-scattered", "weather-severe-alert"], iconType)
                 };
             case "22":
                 return {
-                    main: _("Light Snow"),
-                    description: _("Light snow shower"),
+                    main: utils_1._("Light Snow"),
+                    description: utils_1._("Light snow shower"),
                     customIcon: "night-alt-snow-symbolic",
-                    icon: weatherIconSafely(["weather-snow-scattered", "weather-snow", "weather-severe-alert"], iconType)
+                    icon: utils_1.weatherIconSafely(["weather-snow-scattered", "weather-snow", "weather-severe-alert"], iconType)
                 };
             case "23":
                 return {
-                    main: _("Light Snow"),
-                    description: _("Light snow shower"),
+                    main: utils_1._("Light Snow"),
+                    description: utils_1._("Light snow shower"),
                     customIcon: "day-snow-symbolic",
-                    icon: weatherIconSafely(["weather-snow-scattered", "weather-snow", "weather-severe-alert"], iconType)
+                    icon: utils_1.weatherIconSafely(["weather-snow-scattered", "weather-snow", "weather-severe-alert"], iconType)
                 };
             case "24":
                 return {
-                    main: _("Light Snow"),
-                    description: _("Light snow"),
+                    main: utils_1._("Light Snow"),
+                    description: utils_1._("Light snow"),
                     customIcon: "snow-symbolic",
-                    icon: weatherIconSafely(["weather-snow-scattered", "weather-snow", "weather-severe-alert"], iconType)
+                    icon: utils_1.weatherIconSafely(["weather-snow-scattered", "weather-snow", "weather-severe-alert"], iconType)
                 };
             case "25":
                 return {
-                    main: _("Heavy Snow"),
-                    description: _("Heavy snow shower"),
+                    main: utils_1._("Heavy Snow"),
+                    description: utils_1._("Heavy snow shower"),
                     customIcon: "night-alt-snow-symbolic",
-                    icon: weatherIconSafely(["weather-snow", "weather-snow-scattered", "weather-severe-alert"], iconType)
+                    icon: utils_1.weatherIconSafely(["weather-snow", "weather-snow-scattered", "weather-severe-alert"], iconType)
                 };
             case "26":
                 return {
-                    main: _("Heavy Snow"),
-                    description: _("Heavy snow shower"),
+                    main: utils_1._("Heavy Snow"),
+                    description: utils_1._("Heavy snow shower"),
                     customIcon: "day-snow-symbolic",
-                    icon: weatherIconSafely(["weather-snow", "weather-snow-scattered", "weather-severe-alert"], iconType)
+                    icon: utils_1.weatherIconSafely(["weather-snow", "weather-snow-scattered", "weather-severe-alert"], iconType)
                 };
             case "27":
                 return {
-                    main: _("Heavy Snow"),
-                    description: _("Heavy snow"),
+                    main: utils_1._("Heavy Snow"),
+                    description: utils_1._("Heavy snow"),
                     customIcon: "snow-symbolic",
-                    icon: weatherIconSafely(["weather-snow", "weather-snow-scattered", "weather-severe-alert"], iconType)
+                    icon: utils_1.weatherIconSafely(["weather-snow", "weather-snow-scattered", "weather-severe-alert"], iconType)
                 };
             case "28":
                 return {
-                    main: _("Thunder"),
-                    description: _("Thunder shower"),
+                    main: utils_1._("Thunder"),
+                    description: utils_1._("Thunder shower"),
                     customIcon: "day-storm-showers-symbolic",
-                    icon: weatherIconSafely(["weather-storm", "weather-severe-alert"], iconType)
+                    icon: utils_1.weatherIconSafely(["weather-storm", "weather-severe-alert"], iconType)
                 };
             case "29":
                 return {
-                    main: _("Thunder"),
-                    description: _("Thunder shower"),
+                    main: utils_1._("Thunder"),
+                    description: utils_1._("Thunder shower"),
                     customIcon: "night-alt-storm-showers-symbolic",
-                    icon: weatherIconSafely(["weather-storm", "weather-severe-alert"], iconType)
+                    icon: utils_1.weatherIconSafely(["weather-storm", "weather-severe-alert"], iconType)
                 };
             case "30":
                 return {
-                    main: _("Thunder"),
-                    description: _("Thunder"),
+                    main: utils_1._("Thunder"),
+                    description: utils_1._("Thunder"),
                     customIcon: "thunderstorm-symbolic",
-                    icon: weatherIconSafely(["weather-storm", "weather-severe-alert"], iconType)
+                    icon: utils_1.weatherIconSafely(["weather-storm", "weather-severe-alert"], iconType)
                 };
             default:
                 return {
-                    main: _("Unknown"),
-                    description: _("Unknown"),
+                    main: utils_1._("Unknown"),
+                    description: utils_1._("Unknown"),
                     customIcon: "cloud-refresh-symbolic",
-                    icon: weatherIconSafely(["weather-severe-alert"], iconType)
+                    icon: utils_1.weatherIconSafely(["weather-severe-alert"], iconType)
                 };
         }
     }
     ;
 }
+exports.MetUk = MetUk;
 ;

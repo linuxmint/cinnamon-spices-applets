@@ -1,19 +1,3 @@
-export { }; // Declaring as a Module
-function importModule(path: string): any {
-    if (typeof require !== 'undefined') {
-        return require('./' + path);
-    } else {
-        if (!AppletDir) var AppletDir = imports.ui.appletManager.applets['weather@mockturtl'];
-        return AppletDir[path];
-    }
-}
-
-var utils = importModule("utils");
-var isLangSupported = utils.isLangSupported as (lang: string, languages: Array<string>) => boolean;
-var weatherIconSafely = utils.weatherIconSafely as (code: BuiltinIcons[], icon_type: imports.gi.St.IconType) => BuiltinIcons;
-var _ = utils._ as (str: string) => string;
-var get = utils.get as (p: string[], o: any) => any;
-
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
 ///////////                                       ////////////
@@ -22,7 +6,11 @@ var get = utils.get as (p: string[], o: any) => any;
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
 
-class OpenWeatherMap implements WeatherProvider {
+import { WeatherApplet } from "./main";
+import { WeatherProvider, Location, WeatherData, ForecastData, HourlyForecastData, AppletError, HttpError, BuiltinIcons, CustomIcons } from "./types";
+import { get, weatherIconSafely, _, isLangSupported } from "./utils";
+
+export class OpenWeatherMap implements WeatherProvider {
     //--------------------------------------------------------
     //  Properties
     //--------------------------------------------------------

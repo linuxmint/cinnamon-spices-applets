@@ -1,19 +1,7 @@
-function importModule(path) {
-    if (typeof require !== 'undefined') {
-        return require('./' + path);
-    }
-    else {
-        if (!AppletDir)
-            var AppletDir = imports.ui.appletManager.applets['weather@mockturtl'];
-        return AppletDir[path];
-    }
-}
-var utils = importModule("utils");
-var isCoordinate = utils.isCoordinate;
-var CelsiusToKelvin = utils.CelsiusToKelvin;
-var KPHtoMPS = utils.MPHtoMPS;
-var weatherIconSafely = utils.weatherIconSafely;
-var _ = utils._;
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Yahoo = void 0;
+const utils_1 = require("./utils");
 class Yahoo {
     constructor(_app) {
         this.prettyName = "Yahoo";
@@ -30,7 +18,7 @@ class Yahoo {
                 json = await this.app.SpawnProcess(["python3", this.app.appletDir + "/../yahoo-bridge.py", "--params", JSON.stringify({ lat: loc.lat.toString(), lon: loc.lon.toString() })]);
             }
             catch (e) {
-                this.app.HandleError({ type: "hard", service: "yahoo", detail: "unknown", message: _("Unknown Error happened while calling Yahoo bridge,\n see Looking Glass log for errors") });
+                this.app.HandleError({ type: "hard", service: "yahoo", detail: "unknown", message: utils_1._("Unknown Error happened while calling Yahoo bridge,\n see Looking Glass log for errors") });
                 this.app.log.Error("Yahoo API bridge call failed, error: " + e);
                 return null;
             }
@@ -43,7 +31,7 @@ class Yahoo {
                 json = JSON.parse(json);
             }
             catch (e) {
-                this.app.HandleError({ type: "hard", service: "yahoo", detail: "bad api response - non json", message: _("Yahoo bridge responded in bad format,\n see Looking Glass log for errors") });
+                this.app.HandleError({ type: "hard", service: "yahoo", detail: "bad api response - non json", message: utils_1._("Yahoo bridge responded in bad format,\n see Looking Glass log for errors") });
                 this.app.log.Error("Yahoo service failed to parse payload to JSON, error: " + e);
                 return null;
             }
@@ -86,11 +74,11 @@ class Yahoo {
                 condition: {
                     main: (json.current_observation.condition.text),
                     description: json.current_observation.condition.text,
-                    icon: weatherIconSafely(this.ResolveIcon(json.current_observation.condition.code, { sunrise: sunrise, sunset: sunset }), this.app.config.IconType()),
+                    icon: utils_1.weatherIconSafely(this.ResolveIcon(json.current_observation.condition.code, { sunrise: sunrise, sunset: sunset }), this.app.config.IconType()),
                     customIcon: this.ResolveCustomIcon(json.current_observation.condition.code)
                 },
                 extra_field: {
-                    name: _("Feels Like"),
+                    name: utils_1._("Feels Like"),
                     value: this.ToKelvin(json.current_observation.wind.chill),
                     type: "temperature"
                 },
@@ -105,7 +93,7 @@ class Yahoo {
                     condition: {
                         main: (day.text),
                         description: (day.text),
-                        icon: weatherIconSafely(this.ResolveIcon(day.code), this.app.config.IconType()),
+                        icon: utils_1.weatherIconSafely(this.ResolveIcon(day.code), this.app.config.IconType()),
                         customIcon: this.ResolveCustomIcon(day.code)
                     },
                 };
@@ -115,7 +103,7 @@ class Yahoo {
         }
         catch (e) {
             this.app.log.Error("Yahoo payload parsing error: " + e);
-            this.app.HandleError({ type: "soft", detail: "unusual payload", service: "yahoo", message: _("Failed to Process Weather Info") });
+            this.app.HandleError({ type: "soft", detail: "unusual payload", service: "yahoo", message: utils_1._("Failed to Process Weather Info") });
             return null;
         }
     }
@@ -126,16 +114,16 @@ class Yahoo {
         this.app.log.Debug("yahoo API error payload: " + json);
         switch (type) {
             case "import":
-                this.app.sendNotification(_("Missing package"), _("Please install '") + this.GetMissingPackage(json) + _("', then refresh manually."));
+                this.app.sendNotification(utils_1._("Missing package"), utils_1._("Please install '") + this.GetMissingPackage(json) + utils_1._("', then refresh manually."));
                 this.app.log.Error(errorMsg + json.error.message);
-                this.app.HandleError({ detail: "import error", type: "hard", userError: true, service: "yahoo", message: _("Please install '") + this.GetMissingPackage(json) + _("', then refresh manually.") });
+                this.app.HandleError({ detail: "import error", type: "hard", userError: true, service: "yahoo", message: utils_1._("Please install '") + this.GetMissingPackage(json) + utils_1._("', then refresh manually.") });
                 break;
             case "network":
-                this.app.HandleError({ detail: "no api response", type: "soft", service: "yahoo", message: _("Could not connect to Yahoo API.") });
+                this.app.HandleError({ detail: "no api response", type: "soft", service: "yahoo", message: utils_1._("Could not connect to Yahoo API.") });
                 this.app.log.Error(errorMsg + "Could not connect to API, error - " + json.error.data);
                 break;
             case "unknown":
-                this.app.HandleError({ detail: "no api response", type: "hard", service: "yahoo", message: _("Unknown error happened while obtaining weather, see Looking Glass logs for more information") });
+                this.app.HandleError({ detail: "no api response", type: "hard", service: "yahoo", message: utils_1._("Unknown error happened while obtaining weather, see Looking Glass logs for more information") });
                 this.app.log.Error(errorMsg + "Unknown Error happened in yahoo bridge, error - " + json.error.data);
                 break;
             default:
@@ -365,11 +353,11 @@ class Yahoo {
         }
     }
     ToKelvin(temp) {
-        return CelsiusToKelvin(temp);
+        return utils_1.CelsiusToKelvin(temp);
     }
     ;
     ToMPS(speed) {
-        return KPHtoMPS(speed);
+        return utils_1.KPHtoMPS(speed);
     }
     ;
     TimeToDateObj(time) {
@@ -382,50 +370,51 @@ class Yahoo {
         return today;
     }
 }
+exports.Yahoo = Yahoo;
 ;
 const YahooConditionLibrary = [
-    _("Tornado"),
-    _("Tropical Storm"),
-    _("Hurricane"),
-    _("Severe Thunderstorms"),
-    _("Thunderstorms"),
-    _("Mixed Rain and Snow"),
-    _("Mixed Rain and Sleet"),
-    _("Mixed Snow and Sleet"),
-    _("Freezing Drizzle"),
-    _("Drizzle"),
-    _("Freezing Rain"),
-    _("Showers"),
-    _("Rain"),
-    _("Snow Flurries"),
-    _("Light Snow Showers"),
-    _("Blowing Snow"),
-    _("Snow"),
-    _("Hail"),
-    _("Sleet"),
-    _("Dust"),
-    _("Foggy"),
-    _("Haze"),
-    _("Smoky"),
-    _("Blustery"),
-    _("Windy"),
-    _("Cold"),
-    _("Cloudy"),
-    _("Mostly Cloudy"),
-    _("Partly Cloudy"),
-    _("Clear"),
-    _("Sunny"),
-    _("Mostly Sunny"),
-    _("Fair"),
-    _("Mixed Rain and Hail"),
-    _("Hot"),
-    _("Isolated Thunderstorms"),
-    _("Scattered Thunderstorms"),
-    _("Scattered Showers"),
-    _("Heavy Rain"),
-    _("Scattered Snow Showers"),
-    _("Heavy Snow"),
-    _("Blizzard"),
-    _("Not Available"),
-    _("Scattered Thundershowers")
+    utils_1._("Tornado"),
+    utils_1._("Tropical Storm"),
+    utils_1._("Hurricane"),
+    utils_1._("Severe Thunderstorms"),
+    utils_1._("Thunderstorms"),
+    utils_1._("Mixed Rain and Snow"),
+    utils_1._("Mixed Rain and Sleet"),
+    utils_1._("Mixed Snow and Sleet"),
+    utils_1._("Freezing Drizzle"),
+    utils_1._("Drizzle"),
+    utils_1._("Freezing Rain"),
+    utils_1._("Showers"),
+    utils_1._("Rain"),
+    utils_1._("Snow Flurries"),
+    utils_1._("Light Snow Showers"),
+    utils_1._("Blowing Snow"),
+    utils_1._("Snow"),
+    utils_1._("Hail"),
+    utils_1._("Sleet"),
+    utils_1._("Dust"),
+    utils_1._("Foggy"),
+    utils_1._("Haze"),
+    utils_1._("Smoky"),
+    utils_1._("Blustery"),
+    utils_1._("Windy"),
+    utils_1._("Cold"),
+    utils_1._("Cloudy"),
+    utils_1._("Mostly Cloudy"),
+    utils_1._("Partly Cloudy"),
+    utils_1._("Clear"),
+    utils_1._("Sunny"),
+    utils_1._("Mostly Sunny"),
+    utils_1._("Fair"),
+    utils_1._("Mixed Rain and Hail"),
+    utils_1._("Hot"),
+    utils_1._("Isolated Thunderstorms"),
+    utils_1._("Scattered Thunderstorms"),
+    utils_1._("Scattered Showers"),
+    utils_1._("Heavy Rain"),
+    utils_1._("Scattered Snow Showers"),
+    utils_1._("Heavy Snow"),
+    utils_1._("Blizzard"),
+    utils_1._("Not Available"),
+    utils_1._("Scattered Thundershowers")
 ];

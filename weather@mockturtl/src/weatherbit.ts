@@ -1,21 +1,3 @@
-export { }; // Declaring as a Module
-
-function importModule(path: string): any {
-    if (typeof require !== 'undefined') {
-        return require('./' + path);
-    } else {
-        if (!AppletDir) var AppletDir = imports.ui.appletManager.applets['weather@mockturtl'];
-        return AppletDir[path];
-    }
-}
-
-var utils = importModule("utils");
-var isCoordinate = utils.isCoordinate as (text: any) => boolean;
-var isLangSupported = utils.isLangSupported as (lang: string, languages: Array<string>) => boolean;
-var weatherIconSafely = utils.weatherIconSafely as (code: string[], icon_type: imports.gi.St.IconType) => BuiltinIcons;
-var GetFuncName = utils.GetFuncName as (func: Function) => string;
-var _ = utils._ as (str: string) => string;
-
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
 ///////////                                       ////////////
@@ -24,7 +6,11 @@ var _ = utils._ as (str: string) => string;
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
 
-class Weatherbit implements WeatherProvider {
+import { WeatherApplet } from "./main";
+import { AppletError, BuiltinIcons, CustomIcons, ForecastData, HourlyForecastData, Location, WeatherData, WeatherProvider } from "./types";
+import { weatherIconSafely, _, isLangSupported } from "./utils";
+
+export class Weatherbit implements WeatherProvider {
 
     //--------------------------------------------------------
     //  Properties

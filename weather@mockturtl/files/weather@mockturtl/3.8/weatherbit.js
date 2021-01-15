@@ -1,19 +1,7 @@
-function importModule(path) {
-    if (typeof require !== 'undefined') {
-        return require('./' + path);
-    }
-    else {
-        if (!AppletDir)
-            var AppletDir = imports.ui.appletManager.applets['weather@mockturtl'];
-        return AppletDir[path];
-    }
-}
-var utils = importModule("utils");
-var isCoordinate = utils.isCoordinate;
-var isLangSupported = utils.isLangSupported;
-var weatherIconSafely = utils.weatherIconSafely;
-var GetFuncName = utils.GetFuncName;
-var _ = utils._;
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Weatherbit = void 0;
+const utils_1 = require("./utils");
 class Weatherbit {
     constructor(_app) {
         this.prettyName = "WeatherBit";
@@ -127,11 +115,11 @@ class Weatherbit {
                 condition: {
                     main: json.weather.description,
                     description: json.weather.description,
-                    icon: weatherIconSafely(self.ResolveIcon(json.weather.icon), self.app.config.IconType()),
+                    icon: utils_1.weatherIconSafely(self.ResolveIcon(json.weather.icon), self.app.config.IconType()),
                     customIcon: self.ResolveCustomIcon(json.weather.icon)
                 },
                 extra_field: {
-                    name: _("Feels Like"),
+                    name: utils_1._("Feels Like"),
                     value: json.app_temp,
                     type: "temperature"
                 },
@@ -141,7 +129,7 @@ class Weatherbit {
         }
         catch (e) {
             self.app.log.Error("Weatherbit Weather Parsing error: " + e);
-            self.app.HandleError({ type: "soft", service: "weatherbit", detail: "unusual payload", message: _("Failed to Process Current Weather Info") });
+            self.app.HandleError({ type: "soft", service: "weatherbit", detail: "unusual payload", message: utils_1._("Failed to Process Current Weather Info") });
             return null;
         }
     }
@@ -158,7 +146,7 @@ class Weatherbit {
                     condition: {
                         main: day.weather.description,
                         description: day.weather.description,
-                        icon: weatherIconSafely(self.ResolveIcon(day.weather.icon), self.app.config.IconType()),
+                        icon: utils_1.weatherIconSafely(self.ResolveIcon(day.weather.icon), self.app.config.IconType()),
                         customIcon: self.ResolveCustomIcon(day.weather.icon)
                     },
                 };
@@ -168,7 +156,7 @@ class Weatherbit {
         }
         catch (e) {
             self.app.log.Error("Weatherbit Forecast Parsing error: " + e);
-            self.app.HandleError({ type: "soft", service: "weatherbit", detail: "unusual payload", message: _("Failed to Process Forecast Info") });
+            self.app.HandleError({ type: "soft", service: "weatherbit", detail: "unusual payload", message: utils_1._("Failed to Process Forecast Info") });
             return null;
         }
     }
@@ -184,7 +172,7 @@ class Weatherbit {
                     condition: {
                         main: hour.weather.description,
                         description: hour.weather.description,
-                        icon: weatherIconSafely(self.ResolveIcon(hour.weather.icon), self.app.config.IconType()),
+                        icon: utils_1.weatherIconSafely(self.ResolveIcon(hour.weather.icon), self.app.config.IconType()),
                         customIcon: self.ResolveCustomIcon(hour.weather.icon)
                     },
                     precipitation: {
@@ -203,7 +191,7 @@ class Weatherbit {
         }
         catch (e) {
             self.app.log.Error("Weatherbit Forecast Parsing error: " + e);
-            self.app.HandleError({ type: "soft", service: "weatherbit", detail: "unusual payload", message: _("Failed to Process Forecast Info") });
+            self.app.HandleError({ type: "soft", service: "weatherbit", detail: "unusual payload", message: utils_1._("Failed to Process Forecast Info") });
             return null;
         }
     }
@@ -241,13 +229,13 @@ class Weatherbit {
                 type: "hard",
                 userError: true,
                 "detail": "no key",
-                message: _("Please enter API key in settings,\nor get one first on https://www.weatherbit.io/account/create")
+                message: utils_1._("Please enter API key in settings,\nor get one first on https://www.weatherbit.io/account/create")
             });
             return "";
         }
         query = query + "key=" + key + "&lat=" + loc.lat + "&lon=" + loc.lon + "&units=S";
         let lang = this.ConvertToAPILocale(this.app.currentLocale);
-        if (isLangSupported(lang, this.supportedLanguages) && this.app.config._translateCondition) {
+        if (utils_1.isLangSupported(lang, this.supportedLanguages) && this.app.config._translateCondition) {
             query = query + "&lang=" + lang;
         }
         return query;
@@ -260,7 +248,7 @@ class Weatherbit {
                 userError: true,
                 detail: "bad key",
                 service: "weatherbit",
-                message: _("Please Make sure you\nentered the API key correctly and your account is not locked")
+                message: utils_1._("Please Make sure you\nentered the API key correctly and your account is not locked")
             };
         }
         return null;
@@ -444,4 +432,5 @@ class Weatherbit {
         }
     }
 }
+exports.Weatherbit = Weatherbit;
 ;

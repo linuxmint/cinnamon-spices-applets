@@ -1,21 +1,3 @@
-export { }; // Declaring as a Module
-
-function importModule(path: string): any {
-    if (typeof require !== 'undefined') {
-        return require('./' + path);
-    } else {
-        if (!AppletDir) var AppletDir = imports.ui.appletManager.applets['weather@mockturtl'];
-        return AppletDir[path];
-    }
-}
-
-var utils = importModule("utils");
-var isCoordinate = utils.isCoordinate as (text: any) => boolean;
-var CelsiusToKelvin = utils.CelsiusToKelvin as (celsius: number) => number;
-var KPHtoMPS = utils.MPHtoMPS as (speed: number) => number;
-var weatherIconSafely = utils.weatherIconSafely as (code: BuiltinIcons[], icon_type: imports.gi.St.IconType) => BuiltinIcons;
-var _ = utils._ as (str: string) => string;
-
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
 ///////////                                       ////////////
@@ -24,7 +6,11 @@ var _ = utils._ as (str: string) => string;
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
 
-class Yahoo implements WeatherProvider {
+import { WeatherApplet } from "./main";
+import { BuiltinIcons, CustomIcons, ForecastData, Location, WeatherData, WeatherProvider } from "./types";
+import { weatherIconSafely, CelsiusToKelvin, KPHtoMPS, _ } from "./utils";
+
+export class Yahoo implements WeatherProvider {
 
     //--------------------------------------------------------
     //  Properties

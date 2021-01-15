@@ -6,7 +6,11 @@
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
 
-class IpApi {
+import { WeatherApplet } from "./main";
+import { LocationData } from "./types";
+import { _ } from "./utils";
+
+export class IpApi {
     query = "http://ip-api.com/json/?fields=status,message,country,countryCode,city,lat,lon,timezone,mobile,query";
     app: WeatherApplet;
 

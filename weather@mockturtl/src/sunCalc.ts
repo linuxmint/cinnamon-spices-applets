@@ -123,7 +123,7 @@ function hoursLater(date: Date, h: number) {
 }
 
 
-class SunCalc {
+export class SunCalc {
     times: any[][] = [
         [-0.833, 'sunrise', 'sunset'],
         [-0.3, 'sunriseEnd', 'sunsetStart'],

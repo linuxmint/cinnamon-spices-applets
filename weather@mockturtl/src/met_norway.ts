@@ -1,23 +1,9 @@
+import { WeatherApplet } from "./main";
+import { SunCalc } from "./sunCalc";
+import { WeatherProvider, Location, WeatherData, HourlyForecastData, ForecastData, Condition } from "./types";
+import { CelsiusToKelvin, IsNight, _, weatherIconSafely } from "./utils";
 
-export { };
-
-function importModule(path: string): any {
-    if (typeof require !== 'undefined') {
-        return require('./' + path);
-    } else {
-        if (!AppletDir) var AppletDir = imports.ui.appletManager.applets['weather@mockturtl'];
-        return AppletDir[path];
-    }
-}
-
-var utils = importModule("utils");
-var weatherIconSafely = utils.weatherIconSafely as (code: BuiltinIcons[], icon_type: imports.gi.St.IconType) => BuiltinIcons;
-var CelsiusToKelvin = utils.CelsiusToKelvin as (celsius: number) => number;
-var SunCalc = importModule("sunCalc").SunCalc;
-var IsNight = utils.IsNight as (sunTimes: SunTimes, date?: Date) => boolean;
-var _ = utils._ as (str: string) => string;
-
-class MetNorway implements WeatherProvider {
+export class MetNorway implements WeatherProvider {
     public readonly prettyName = "MET Norway";
     public readonly name = "MetNorway";
     public readonly maxForecastSupport = 10;
@@ -27,7 +13,7 @@ class MetNorway implements WeatherProvider {
     private ctx: MetNorway
     private app: WeatherApplet
     private baseUrl = "https://api.met.no/weatherapi/locationforecast/2.0/complete?"
-    private sunCalc: any;
+    private sunCalc: SunCalc;
 
     constructor(app: WeatherApplet) {
         this.ctx = this;

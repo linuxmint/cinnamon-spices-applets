@@ -1,18 +1,7 @@
-function importModule(path) {
-    if (typeof require !== 'undefined') {
-        return require('./' + path);
-    }
-    else {
-        if (!AppletDir)
-            var AppletDir = imports.ui.appletManager.applets['weather@mockturtl'];
-        return AppletDir[path];
-    }
-}
-var utils = importModule("utils");
-var isLangSupported = utils.isLangSupported;
-var weatherIconSafely = utils.weatherIconSafely;
-var _ = utils._;
-var get = utils.get;
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.OpenWeatherMap = void 0;
+const utils_1 = require("./utils");
 class OpenWeatherMap {
     constructor(_app) {
         this.prettyName = "OpenWeatherMap";
@@ -75,13 +64,13 @@ class OpenWeatherMap {
                 pressure: json.current.pressure,
                 humidity: json.current.humidity,
                 condition: {
-                    main: get(["current", "weather", "0", "main"], json),
-                    description: get(["current", "weather", "0", "description"], json),
-                    icon: weatherIconSafely(self.ResolveIcon(get(["current", "weather", "0", "icon"], json)), self.app.config.IconType()),
-                    customIcon: self.ResolveCustomIcon(get(["current", "weather", "0", "icon"], json))
+                    main: utils_1.get(["current", "weather", "0", "main"], json),
+                    description: utils_1.get(["current", "weather", "0", "description"], json),
+                    icon: utils_1.weatherIconSafely(self.ResolveIcon(utils_1.get(["current", "weather", "0", "icon"], json)), self.app.config.IconType()),
+                    customIcon: self.ResolveCustomIcon(utils_1.get(["current", "weather", "0", "icon"], json))
                 },
                 extra_field: {
-                    name: _("Feels Like"),
+                    name: utils_1._("Feels Like"),
                     value: json.current.feels_like,
                     type: "temperature"
                 },
@@ -97,7 +86,7 @@ class OpenWeatherMap {
                     condition: {
                         main: day.weather[0].main,
                         description: day.weather[0].description,
-                        icon: weatherIconSafely(self.ResolveIcon(day.weather[0].icon), self.app.config.IconType()),
+                        icon: utils_1.weatherIconSafely(self.ResolveIcon(day.weather[0].icon), self.app.config.IconType()),
                         customIcon: self.ResolveCustomIcon(day.weather[0].icon)
                     },
                 };
@@ -113,7 +102,7 @@ class OpenWeatherMap {
                     condition: {
                         main: hour.weather[0].main,
                         description: hour.weather[0].description,
-                        icon: weatherIconSafely(self.ResolveIcon(hour.weather[0].icon), self.app.config.IconType()),
+                        icon: utils_1.weatherIconSafely(self.ResolveIcon(hour.weather[0].icon), self.app.config.IconType()),
                         customIcon: self.ResolveCustomIcon(hour.weather[0].icon)
                     },
                 };
@@ -142,7 +131,7 @@ class OpenWeatherMap {
                 type: "soft",
                 service: "openweathermap",
                 detail: "unusual payload",
-                message: _("Failed to Process Current Weather Info")
+                message: utils_1._("Failed to Process Current Weather Info")
             });
             return null;
         }
@@ -153,7 +142,7 @@ class OpenWeatherMap {
         query = query + "lat=" + loc.lat + "&lon=" + loc.lon + "&appid=";
         query += "1c73f8259a86c6fd43c7163b543c8640";
         let locale = this.ConvertToAPILocale(this.app.currentLocale);
-        if (this.app.config._translateCondition && isLangSupported(locale, this.supportedLanguages)) {
+        if (this.app.config._translateCondition && utils_1.isLangSupported(locale, this.supportedLanguages)) {
             query = query + "&lang=" + locale;
         }
         return query;
@@ -190,23 +179,23 @@ class OpenWeatherMap {
         switch (json.cod) {
             case ("400"):
                 error.detail = "bad location format";
-                error.message = _("Please make sure Location is in the correct format in the Settings");
+                error.message = utils_1._("Please make sure Location is in the correct format in the Settings");
                 break;
             case ("401"):
                 error.detail = "bad key";
-                error.message = _("Make sure you entered the correct key in settings");
+                error.message = utils_1._("Make sure you entered the correct key in settings");
                 break;
             case ("404"):
                 error.detail = "location not found";
-                error.message = _("Location not found, make sure location is available or it is in the correct format");
+                error.message = utils_1._("Location not found, make sure location is available or it is in the correct format");
                 break;
             case ("429"):
                 error.detail = "key blocked";
-                error.message = _("If this problem persists, please contact the Author of this applet");
+                error.message = utils_1._("If this problem persists, please contact the Author of this applet");
                 break;
             default:
                 error.detail = "unknown";
-                error.message = _("Unknown Error, please see the logs in Looking Glass");
+                error.message = utils_1._("Unknown Error, please see the logs in Looking Glass");
                 break;
         }
         ;
@@ -218,7 +207,7 @@ class OpenWeatherMap {
     HandleHTTPError(error, uiError) {
         if (error.code == 404) {
             uiError.detail = "location not found";
-            uiError.message = _("Location not found, make sure location is available or it is in the correct format");
+            uiError.message = utils_1._("Location not found, make sure location is available or it is in the correct format");
             uiError.userError = true;
             uiError.type = "hard";
         }
@@ -311,63 +300,64 @@ class OpenWeatherMap {
     }
     ;
 }
+exports.OpenWeatherMap = OpenWeatherMap;
 ;
 const openWeatherMapConditionLibrary = [
-    _("Thunderstorm with light rain"),
-    _("Thunderstorm with rain"),
-    _("Thunderstorm with heavy rain"),
-    _("Light thunderstorm"),
-    _("Thunderstorm"),
-    _("Heavy thunderstorm"),
-    _("Ragged thunderstorm"),
-    _("Thunderstorm with light drizzle"),
-    _("Thunderstorm with drizzle"),
-    _("Thunderstorm with heavy drizzle"),
-    _("Light intensity drizzle"),
-    _("Drizzle"),
-    _("Heavy intensity drizzle"),
-    _("Light intensity drizzle rain"),
-    _("Drizzle rain"),
-    _("Heavy intensity drizzle rain"),
-    _("Shower rain and drizzle"),
-    _("Heavy shower rain and drizzle"),
-    _("Shower drizzle"),
-    _("Light rain"),
-    _("Moderate rain"),
-    _("Heavy intensity rain"),
-    _("Very heavy rain"),
-    _("Extreme rain"),
-    _("Freezing rain"),
-    _("Light intensity shower rain"),
-    _("Shower rain"),
-    _("Heavy intensity shower rain"),
-    _("Ragged shower rain"),
-    _("Light snow"),
-    _("Snow"),
-    _("Heavy snow"),
-    _("Sleet"),
-    _("Shower sleet"),
-    _("Light rain and snow"),
-    _("Rain and snow"),
-    _("Light shower snow"),
-    _("Shower snow"),
-    _("Heavy shower snow"),
-    _("Mist"),
-    _("Smoke"),
-    _("Haze"),
-    _("Sand, dust whirls"),
-    _("Fog"),
-    _("Sand"),
-    _("Dust"),
-    _("Volcanic ash"),
-    _("Squalls"),
-    _("Tornado"),
-    _("Clear"),
-    _("Clear sky"),
-    _("Sky is clear"),
-    _("Clouds"),
-    _("Few clouds"),
-    _("Scattered clouds"),
-    _("Broken clouds"),
-    _("Overcast clouds")
+    utils_1._("Thunderstorm with light rain"),
+    utils_1._("Thunderstorm with rain"),
+    utils_1._("Thunderstorm with heavy rain"),
+    utils_1._("Light thunderstorm"),
+    utils_1._("Thunderstorm"),
+    utils_1._("Heavy thunderstorm"),
+    utils_1._("Ragged thunderstorm"),
+    utils_1._("Thunderstorm with light drizzle"),
+    utils_1._("Thunderstorm with drizzle"),
+    utils_1._("Thunderstorm with heavy drizzle"),
+    utils_1._("Light intensity drizzle"),
+    utils_1._("Drizzle"),
+    utils_1._("Heavy intensity drizzle"),
+    utils_1._("Light intensity drizzle rain"),
+    utils_1._("Drizzle rain"),
+    utils_1._("Heavy intensity drizzle rain"),
+    utils_1._("Shower rain and drizzle"),
+    utils_1._("Heavy shower rain and drizzle"),
+    utils_1._("Shower drizzle"),
+    utils_1._("Light rain"),
+    utils_1._("Moderate rain"),
+    utils_1._("Heavy intensity rain"),
+    utils_1._("Very heavy rain"),
+    utils_1._("Extreme rain"),
+    utils_1._("Freezing rain"),
+    utils_1._("Light intensity shower rain"),
+    utils_1._("Shower rain"),
+    utils_1._("Heavy intensity shower rain"),
+    utils_1._("Ragged shower rain"),
+    utils_1._("Light snow"),
+    utils_1._("Snow"),
+    utils_1._("Heavy snow"),
+    utils_1._("Sleet"),
+    utils_1._("Shower sleet"),
+    utils_1._("Light rain and snow"),
+    utils_1._("Rain and snow"),
+    utils_1._("Light shower snow"),
+    utils_1._("Shower snow"),
+    utils_1._("Heavy shower snow"),
+    utils_1._("Mist"),
+    utils_1._("Smoke"),
+    utils_1._("Haze"),
+    utils_1._("Sand, dust whirls"),
+    utils_1._("Fog"),
+    utils_1._("Sand"),
+    utils_1._("Dust"),
+    utils_1._("Volcanic ash"),
+    utils_1._("Squalls"),
+    utils_1._("Tornado"),
+    utils_1._("Clear"),
+    utils_1._("Clear sky"),
+    utils_1._("Sky is clear"),
+    utils_1._("Clouds"),
+    utils_1._("Few clouds"),
+    utils_1._("Scattered clouds"),
+    utils_1._("Broken clouds"),
+    utils_1._("Overcast clouds")
 ];
