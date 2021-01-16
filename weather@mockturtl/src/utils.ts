@@ -5,15 +5,16 @@ const { IconType } = imports.gi.St;
 const { IconTheme } = imports.gi.Gtk;
 
 const UUID = "weather@mockturtl";
+
 imports.gettext.bindtextdomain(UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
-export var _ = (str: string): string => {
+export function _(str: string): string {
     let customTrans = imports.gettext.dgettext(UUID, str);
      if (customTrans !== str && customTrans !== "")
         return customTrans;
     return imports.gettext.gettext(str);
 }
 
-export var setTimeout = function(func: any, ms: number) {
+export function setTimeout(func: any, ms: number) {
     let args: any[] = [];
     if (arguments.length > 2) {
         args = args.slice.call(arguments, 2);
@@ -27,7 +28,7 @@ export var setTimeout = function(func: any, ms: number) {
     return id;
 };
 
-export var delay = async (ms: number): Promise<void> => {
+export async function delay(ms: number): Promise<void> {
     return await new Promise((resolve, reject) => {
         setTimeout(() => {
             resolve();
@@ -35,11 +36,11 @@ export var delay = async (ms: number): Promise<void> => {
     });
 }
 
-export const clearTimeout = (id: any) => {
+export function clearTimeout(id: any) {
     source_remove(id);
 };
 
-export const setInterval = function(func: any, ms: number) {
+export function setInterval(func: any, ms: number) {
     let args: any[] = [];
     if (arguments.length > 2) {
         args = args.slice.call(arguments, 2);
@@ -61,7 +62,7 @@ export const setInterval = function(func: any, ms: number) {
  * @param lon2 
  * @returns distance in metres
  */
-export var GetDistance = (lat1: number, lon1: number, lat2: number, lon2: number): number => {
+export function GetDistance(lat1: number, lon1: number, lat2: number, lon2: number): number {
     const R = 6371e3; // metres
     const φ1 = lat1 * Math.PI / 180; // φ, λ in radians
     const φ2 = lat2 * Math.PI / 180;
@@ -76,36 +77,21 @@ export var GetDistance = (lat1: number, lon1: number, lat2: number, lon2: number
     return R * c; // in metres
 }
 
-export const clearInterval = (id: any) => {
+export function clearInterval(id: any) {
     source_remove(id);
 };
 
-/**
- * Checks what kind of ToLocaleString is actually supported in JS for Dates
- */
-export var isLocaleStringSupported = (): localeStringSupport => {
-    let date = new Date(1565548657987); // Set Date to test support
-    try {
-        let output = date.toLocaleString('en-GB', { timeZone: 'Europe/London', hour: "numeric" });
-        if (output !== "19") return "none"; // Does not match expected output with full support | mozjs < 24
-        return "full"; // | 52 < mozjs
-    }
-    catch (e) { // Including Europe/London tz throws error | 24 < mozjs < 52
-        return "notz";
-    }
-}
-
-type localeStringSupport = "none" | "notz" | "full";
-
-export var GetDayName = (date: Date, locale: string, showDate: boolean = false, tz?: string): string => {
-    let support = isLocaleStringSupported();
+export function GetDayName(date: Date, locale: string, showDate: boolean = false, tz?: string): string {
     // No timezone, Date passed in corrected with offset
     if (locale == "c" || locale == null) locale = undefined;
-    if (!tz && support == "full") support = "notz";
 
     let params: Intl.DateTimeFormatOptions = {
-        weekday: "long"
+        weekday: "long",
+        timeZone: tz
     }
+
+    if (!tz || tz == "")
+        params.timeZone = undefined;
 
     if (showDate) {
         params["day"] = 'numeric';
@@ -119,21 +105,7 @@ export var GetDayName = (date: Date, locale: string, showDate: boolean = false, 
     if (date.getDate() == now.getDate() || date.getDate() == tomorrow.getDate())
         delete params.weekday;
 
-    let dateString = "";
-
-    switch (support) {
-        case "full":
-            params.timeZone = tz;
-            dateString = date.toLocaleString(locale, params);
-            break;
-        case "notz":
-            params.timeZone = "UTC";
-            dateString = date.toLocaleString(locale, params);
-            break;
-        case "none":
-            dateString = getDayName(date.getUTCDay());
-            break;
-    }
+    let dateString = date.toLocaleString(locale, params);
 
     if (date.getDate() == now.getDate()) dateString = _("Today");
     if (date.getDate() == tomorrow.getDate()) dateString = _("Tomorrow");
@@ -141,39 +113,33 @@ export var GetDayName = (date: Date, locale: string, showDate: boolean = false, 
     return dateString;
 }
 
-export var GetHoursMinutes = (date: Date, locale: string, hours24Format: boolean, tz?: string, onlyHours: boolean = false): string => {
-    let support = isLocaleStringSupported();
+export function GetHoursMinutes(date: Date, locale: string, hours24Format: boolean, tz?: string, onlyHours: boolean = false): string {
     if (locale == "c" || locale == null) locale = undefined;
     // No timezone, Date passed in corrected with offset
-    if (!tz && support == "full") support = "notz";
 
     let params: Intl.DateTimeFormatOptions = {
         hour: "numeric",
-        hour12: !hours24Format
+        hour12: !hours24Format,
+        timeZone: tz
     }
+
+    if (!tz || tz == "")
+        params.timeZone = undefined;
 
     if (!onlyHours)
         params.minute = "numeric";
 
-    switch (support) {
-        case "full":
-            params.timeZone = tz;
-            return date.toLocaleString(locale, params);
-        case "notz":
-            return date.toLocaleString(locale, params);
-        case "none":
-            return timeToUserUnits(date, hours24Format);
-    }
+    return date.toLocaleString(locale, params);
 }
 
-export var AwareDateString = (date: Date, locale: string, hours24Format: boolean, tz?: string): string => {
-    let support = isLocaleStringSupported();
+export function AwareDateString(date: Date, locale: string, hours24Format: boolean, tz?: string): string {
     if (locale == "c" || locale == null) locale = undefined; // Ignore unset locales
     let now = new Date();
     let params: Intl.DateTimeFormatOptions = {
         hour: "numeric",
         minute: "numeric",
-        hour12: !hours24Format
+        hour12: !hours24Format,
+        timeZone: tz
 	};
 	
     if (date.toDateString() != now.toDateString()) {
@@ -185,34 +151,21 @@ export var AwareDateString = (date: Date, locale: string, hours24Format: boolean
         params.year = "numeric";
     }
 
-    switch (support) {
-        case "full":
-            // function only accepts undefined if tz is not known
-			if (tz == null || tz == "") tz = undefined;
-			params.timeZone = tz;
-            return date.toLocaleString(locale, params);
-        case "notz":
-            return date.toLocaleString(locale, params);
-        case "none":
-            return timeToUserUnits(date, hours24Format);  // Displaying only time
-    }
-}
+    if (!tz || tz == "")
+        params.timeZone = tz;
 
-export var getDayName = (dayNum: number): string => {
-    let days = [_('Sunday'), _('Monday'), _('Tuesday'), _('Wednesday'), _('Thursday'), _('Friday'), _('Saturday')]
-    return days[dayNum];
+    return date.toLocaleString(locale, params);
 }
-
 /**
  * 
  * @param date 
  * @returns number in format HHMM, can be compared directly
  */
-export var MilitaryTime = (date: Date): number => {
+export function MilitaryTime(date: Date): number {
     return date.getHours() * 100 + date.getMinutes();
 }
 
-export var IsNight = (sunTimes: SunTimes, date?: Date): boolean => {
+export function IsNight(sunTimes: SunTimes, date?: Date): boolean {
     if (!sunTimes) return false;
     let time = (!!date) ? MilitaryTime(date) : MilitaryTime(new Date());
     let sunrise = MilitaryTime(sunTimes.sunrise);
@@ -221,7 +174,7 @@ export var IsNight = (sunTimes: SunTimes, date?: Date): boolean => {
     return true;
 }
 
-export var compassToDeg = (compass: string): number => {
+export function compassToDeg(compass: string): number {
     if (!compass) return null;
     compass = compass.toUpperCase();
     switch (compass) {
@@ -244,51 +197,29 @@ export var compassToDeg = (compass: string): number => {
         default: return null;
     }
 }
-
-// Takes Time in %H:%M string format
-export var timeToUserUnits = (date: Date, show24Hours: boolean) => {
-    let timeStr = util_format_date('%H:%M', date.getTime());
-    let time = timeStr.split(':');
-    //Remove Leading 0
-    if (time[0].charAt(0) == "0") {
-        time[0] = time[0].substr(1);
-    }
-    //Return Time based on user preference
-    if (show24Hours) {
-        return time[0] + ":" + time[1];
-    }
-    else {
-        if (parseInt(time[0]) > 12) { // PM
-            return (parseInt(time[0]) - 12) + ":" + time[1] + " pm";
-        }
-        else { //AM
-            return time[0] + ":" + time[1] + " am";
-        }
-    }
-}
-
 // Conversion Factors
 const WEATHER_CONV_MPH_IN_MPS = 2.23693629
 const WEATHER_CONV_KPH_IN_MPS = 3.6
 const WEATHER_CONV_KNOTS_IN_MPS = 1.94384449
 
-export var capitalizeFirstLetter = (description: string): string => {
+export function capitalizeFirstLetter(description: string): string {
     if ((description == undefined || description == null)) {
         return "";
     }
     return description.charAt(0).toUpperCase() + description.slice(1);
 };
 
-export var KPHtoMPS = (speed: number): number => {
+export function KPHtoMPS(speed: number): number {
     if (speed == null) return null;
     return speed / WEATHER_CONV_KPH_IN_MPS;
 };
 
-export const get = (p: string[], o: any): any =>
-    p.reduce((xs, x) =>
+export function get(p: string[], o: any): any {
+    return p.reduce((xs, x) =>
         (xs && xs[x]) ? xs[x] : null, o);
+}
 
-export var GetFuncName = (func: Function): string => {
+export function GetFuncName(func: Function): string {
     // ES6
     if (!!func.name) return func.name;
     // ES5
@@ -297,7 +228,7 @@ export var GetFuncName = (func: Function): string => {
     return result ? result[1] : '' // for an anonymous function there won't be a match
 }
 
-export var MPStoUserUnits = (mps: number, units: WeatherWindSpeedUnits): string => {
+export function MPStoUserUnits(mps: number, units: WeatherWindSpeedUnits): string {
     if (mps == null) return null;
     // Override wind units with our preference, takes Meter/Second wind speed
     switch (units) {
@@ -356,7 +287,7 @@ export var MPStoUserUnits = (mps: number, units: WeatherWindSpeedUnits): string 
 }
 
 // Conversion from Kelvin
-export var TempToUserConfig = (kelvin: number, units: WeatherUnits, russianStyle: boolean): string => {
+export function TempToUserConfig(kelvin: number, units: WeatherUnits, russianStyle: boolean): string {
     let temp;
     if (units == "celsius") {
         temp = Math.round((kelvin - 273.15));
@@ -372,23 +303,27 @@ export var TempToUserConfig = (kelvin: number, units: WeatherUnits, russianStyle
     return temp.toString();
 }
 
-export var CelsiusToKelvin = (celsius: number): number => {
+export function CelsiusToKelvin(celsius: number): number {
     if (celsius == null) return null;
     return (celsius + 273.15);
 }
 
-export var FahrenheitToKelvin = (fahr: number): number => {
+export function FahrenheitToKelvin(fahr: number): number {
     if (fahr == null) return null;
     return ((fahr - 32) / 1.8 + 273.15);
 };
 
-export var MPHtoMPS = (speed: number): number => {
+export function MPHtoMPS(speed: number): number {
     if (speed == null || speed == undefined) return null;
     return speed * 0.44704;
 }
 
-// Conversion from hPa
-export var PressToUserUnits = (hpa: number, units: WeatherPressureUnits): number => {
+/**
+ * Converts from hpa to use's chose unit
+ * @param hpa 
+ * @param units 
+ */
+export function PressToUserUnits(hpa: number, units: WeatherPressureUnits): number {
     switch (units) {
         case "hPa":
             return hpa;
@@ -407,40 +342,40 @@ export var PressToUserUnits = (hpa: number, units: WeatherPressureUnits): number
     }
 };
 
-export var KmToM = (km: number): number => {
+export function KmToM(km: number): number {
     if (km == null) return null;
     return km * 0.6213712;
 }
 
-export var MetreToUserUnits = (m: number, distanceUnit: DistanceUnits): number => {
+export function MetreToUserUnits(m: number, distanceUnit: DistanceUnits): number {
     if (distanceUnit == "metric") return Math.round(m / 1000 * 10) / 10;
     return Math.round(KmToM(m / 1000) * 10) / 10;
 }
 
-export var MillimeterToUserUnits = (mm: number, distanceUnit: DistanceUnits): number => {
+export function MillimeterToUserUnits (mm: number, distanceUnit: DistanceUnits): number {
     if (distanceUnit == "metric") return Math.round(mm * 100) / 100;
     return Math.round(mm * 0.03937 * 100) / 100;
 }
 
-export var isNumeric = (n: any): boolean => {
+export function isNumeric(n: any): boolean {
     return !isNaN(parseFloat(n)) && isFinite(n);
 }
 
-export var isString = (text: any): boolean => {
+export function isString(text: any): boolean {
     if (typeof text == 'string' || text instanceof String) {
         return true;
     }
     return false;
 }
 
-export var isID = (text: any): boolean => {
+export function isID(text: any): boolean {
     if (text.length == 7 && isNumeric(text)) {
         return true;
     }
     return false;
 };
 
-export var isCoordinate = (text: string): boolean => {
+export function isCoordinate(text: string): boolean {
     text = text.trim();
     if (/^-?\d{1,3}(?:\.\d*)?,(\s)*-?\d{1,3}(?:\.\d*)?/.test(text)) {
         return true;
@@ -448,24 +383,24 @@ export var isCoordinate = (text: string): boolean => {
     return false;
 }
 
-export var nonempty = (str: string): boolean => {
+export function nonempty(str: string): boolean {
     return (str != null && str.length > 0 && str != undefined)
 }
 
-export var compassDirection = (deg: number): string => {
+export function compassDirection(deg: number): string {
     let directions = [_('N'), _('NE'), _('E'), _('SE'), _('S'), _('SW'), _('W'), _('NW')]
     //let directions = [_('⬇'), _('⬋'), _('⬅'), _('⬉'), _('⬆'), _('⬈'), _('➞'), _('⬊')]
     return directions[Math.round(deg / 45) % directions.length]
 }
 
-export var isLangSupported = (lang: string, languages: Array<string>): boolean => {
+export function isLangSupported(lang: string, languages: Array<string>): boolean {
     if (languages.indexOf(lang) != -1) {
         return true;
     }
     return false;
 };
 
-export var Sentencify = (words: string[]): string => {
+export function Sentencify(words: string[]): string {
     let result = "";
     for (let index = 0; index < words.length; index++) {
         const element = words[index];
@@ -476,7 +411,7 @@ export var Sentencify = (words: string[]): string => {
 }
 
 // Passing appropriate resolver function for the API, and the code
-export var weatherIconSafely = (code: BuiltinIcons[], icon_type: imports.gi.St.IconType): BuiltinIcons => {
+export function weatherIconSafely(code: BuiltinIcons[], icon_type: imports.gi.St.IconType): BuiltinIcons {
     for (let i = 0; i < code.length; i++) {
         if (hasIcon(code[i], icon_type))
             return code[i]
@@ -484,7 +419,7 @@ export var weatherIconSafely = (code: BuiltinIcons[], icon_type: imports.gi.St.I
     return 'weather-severe-alert'
 }
 
-export var hasIcon = (icon: string, icon_type: imports.gi.St.IconType): boolean => {
+export function hasIcon(icon: string, icon_type: imports.gi.St.IconType): boolean {
     return IconTheme.get_default().has_icon(icon + (icon_type == IconType.SYMBOLIC ? '-symbolic' : ''))
 }
 
@@ -493,7 +428,7 @@ export var hasIcon = (icon: string, icon_type: imports.gi.St.IconType): boolean 
  * @param color like "#ffffff"
  * @param percent between -1.0 and 1.0
  */
-export var shadeHexColor = (color: string, percent: number): string => {
+export function shadeHexColor(color: string, percent: number): string {
     var f = parseInt(color.slice(1), 16), t = percent < 0 ? 0 : 255, p = percent < 0 ? percent * -1 : percent, R = f >> 16, G = f >> 8 & 0x00FF, B = f & 0x0000FF;
     return "#" + (0x1000000 + (Math.round((t - R) * p) + R) * 0x10000 + (Math.round((t - G) * p) + G) * 0x100 + (Math.round((t - B) * p) + B)).toString(16).slice(1);
 }
@@ -502,7 +437,7 @@ export var shadeHexColor = (color: string, percent: number): string => {
  * Convert Linux locale to JS locale format
  * @param locale Linux locale string
  */
-export var constructJsLocale = (locale: string): string => {
+export function constructJsLocale(locale: string): string {
 	let jsLocale = locale.split(".")[0];
 	let tmp: string[] = jsLocale.split("_");
 	jsLocale = "";
