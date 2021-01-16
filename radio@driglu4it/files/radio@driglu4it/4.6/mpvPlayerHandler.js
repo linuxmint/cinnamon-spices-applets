@@ -1,109 +1,136 @@
-const Util = imports.misc.util;
+const { spawnCommandLine } = imports.misc.util;
+const { getDBusProxyWithOwner, getDBusProperties, getDBus, ListNamesRemote } = imports.misc.interfaces;
+
+const MAX_VOLUME = 100 // see https://github.com/linuxmint/cinnamon-spices-applets/issues/3402#issuecomment-756430754 for an explanation of this value
+
+// See: https://specifications.freedesktop.org/mpris-spec/2.2/Player_Interface.html
+const MEDIA_PLAYER_2_NAME = "org.mpris.MediaPlayer2";
+const MEDIA_PLAYER_2_PLAYER_NAME = "org.mpris.MediaPlayer2.Player";
+const MEDIA_PLAYER_2_PATH = "/org/mpris/MediaPlayer2";
+const MPV_MPRIS_BUS_NAME = `${MEDIA_PLAYER_2_NAME}.mpv`
+
 
 class MpvPlayerHandler {
 
-    constructor({ mprisPluginPath, initialChannelUrl, handleRadioStopped, initialVolume }) {
-        this.maxVolume = 100 // see https://github.com/linuxmint/cinnamon-spices-applets/issues/3402#issuecomment-756430754 for an explanation of this value
+    constructor({ mprisPluginPath, handleRadioStopped, initialVolume }) {
         Object.assign(this, arguments[0])
+
+        this._mediaServerPlayer = getDBusProxyWithOwner(MEDIA_PLAYER_2_PLAYER_NAME, MPV_MPRIS_BUS_NAME)
+        this._metadata = () => { return this._mediaServerPlayer.Metadata }
+        this._dbus = getDBus()
+        this._listenToRadioStopped()
+
+        // This allows us to listen to play/pause or volume changes. 
+        // Will Be used in future!
+        // this._mediaProps = getDBusProperties(MPV_MPRIS_BUS_NAME, MEDIA_PLAYER_2_PATH)
+        // this._listenToMediaPropsChanges()
     }
 
-    // returns the initial volume when no radio stream is running and else the volume of the current running radio stream 
-    // The volume currently isn't saved as an attribut as the volume can be changed by MPRIS controller and we currently don't get informed when this happens. This will be implemented in future.  
-    getVolume() {
-        return new Promise((resolve, reject) => {
-            Util.spawnCommandLineAsyncIO(`playerctl --player=mpv volume`, (volume, stderr) => {
-                // for mpv the volume is between 0 and 100 and for playerctl between 0 and 1
-                if (stderr.trim() == "No players found") {
-                    resolve(this.initialVolume)
+    // theoretically it should also be possible to listen to props.PlaybackStatus but this doesn't work. 
+    // Probably because the mpv process is immediately killed when stopped as it is started headless  
+    _listenToRadioStopped() {
+        this._dbus.connectSignal('NameOwnerChanged',
+            (proxy, sender, [name, old_owner, new_owner]) => {
+                if (name === MPV_MPRIS_BUS_NAME && !new_owner) {
+                    this.handleRadioStopped()
                 }
-                else {
-                    resolve(Number(volume) * 100)
-                }
-            })
-        })
+            }
+        );
     }
+
+    async _checkMpvRunning() {
+        const mpvRunning = (await this._getAllMrisPlayerBusNames()).includes(MPV_MPRIS_BUS_NAME)
+        return mpvRunning
+    }
+
+    // Will Be used in future!
+    // _listenToMediaPropsChanges() {
+    //     // this._mediaProps.connectSignal('PropertiesChanged', (proxy, sender, [iface, props]) => {
+
+    //     //     if (props.Volume) {
+    //     //         const volume = props.Volume.unpack()
+    //     //         // TODO ... 
+    //     //     }
+
+
+    //     //     if (props.PlaybackStatus) {
+    //     //         // when paused
+    //     //         const playPause = props.PlaybackStatus.unpack()
+
+    //     //     }
+    //     // })
+    // }
 
 
     // Stops all running media outputs (which can be controlled via MPRIS) - not only potentially running radio streams
-    async startChangeRadioChannel(channelUrl) {
-        this.channelUrl = channelUrl
-        const volume = Math.min(await this.getVolume(), this.maxVolume)
-        let mpvStdout = null
 
-        Util.spawnCommandLineAsyncIO(`playerctl -a stop`, () => {
-            Util.spawnCommandLineAsyncIO(`mpv --script=${this.mprisPluginPath} \
-            ${channelUrl} --volume=${volume} & wait; echo 'stop'`, (stdout, stderr) => {
-                mpvStdout = stdout
-                // this callback function is either called when the stream has been closed or the radio channel has changed. It is not sufficient to just call a function when the stop button is clicked as the radio stream can also be closed with MPRIS control
-                setTimeout(async () => {
-                    const newChannelUrl = await MpvPlayerHandler.getRunningRadioUrl()
-                    if (!newChannelUrl) {
-                        this.handleRadioStopped()
-                        this.channelUrl = null
-                    }
-                }, 100);
+    async _stopAllOtherMediaPlayer() {
+        const allMprisPlayerBusNames = await this._getAllMrisPlayerBusNames()
+
+        allMprisPlayerBusNames.forEach(busName => {
+            if (busName != MPV_MPRIS_BUS_NAME) {
+                const mediaServerPlayer = getDBusProxyWithOwner(MEDIA_PLAYER_2_PLAYER_NAME, busName)
+                mediaServerPlayer.StopRemote()
+            }
+        })
+    }
+
+    _getAllMrisPlayerBusNames() {
+        const name_regex = /^org\.mpris\.MediaPlayer2\./;
+
+        return new Promise((resolve, reject) => {
+            this._dbus.ListNamesRemote(names => {
+                const busNames = names[0].filter(busName => name_regex.test(busName))
+                const busNamesArr = Object.values(busNames)
+                resolve(busNamesArr)
             })
         })
+    }
 
-        // stdout is only not null after 2 second when an error occured 
+    async startChangeRadioChannel(channelUrl) {
+
+        this._stopAllOtherMediaPlayer()
+
+        if (!await this._checkMpvRunning()) {
+            spawnCommandLine(`mpv --script=${this.mprisPluginPath} ${channelUrl} --volume=${this.initialVolume}`)
+        } else {
+            // this actually should also work when no radio is playing but it doesn't (probably due to --script)
+            this._mediaServerPlayer.OpenUriRemote(channelUrl)
+        }
+
+        // only in case of an error the mpv player doesn't play after 2 secs
         return new Promise((resolve, reject) => {
-            setTimeout(() => {
-                mpvStdout ? reject(mpvStdout) : resolve()
+            setTimeout(async () => {
+                (await this._checkMpvRunning()) ? resolve() : reject()
             }, 2000)
         })
 
     }
 
-    // returns true when volume could be changed and false if not. This is the case when the increased volume would be higher than 
-    async increaseDecreaseVolume(amount) {
-        const currentVolume = await this.getVolume()
-        let volumeChangeable
-        let newVolume = currentVolume + amount
+    // returns true when volume changed and false if not. This is the case when the increased volume would be higher than the max volume
+    increaseDecreaseVolume(amount) {
+        let volumeChanged = false
+        const newVolume = this._mediaServerPlayer.Volume * 100 + amount
 
-        if (newVolume > this.maxVolume) {
-            volumeChangeable = false
-            // the volume can be above the max volume when the max volume has changed in the settings
-            Util.spawnCommandLine(`playerctl --player=mpv volume ${this.maxVolume / 100} `)
-        } else {
-            Util.spawnCommandLine(`playerctl --player=mpv volume ${newVolume / 100} `)
-            volumeChangeable = true
+        if (newVolume <= MAX_VOLUME) {
+            volumeChanged = true
+            this._mediaServerPlayer.Volume = newVolume / 100
         }
 
-        return volumeChangeable
+        return volumeChanged
     }
 
     stopRadio() {
-        Util.spawnCommandLine("playerctl --player=mpv stop");
+        this._mediaServerPlayer.StopRemote()
+
     }
 
-    /** 
-      *  
-      *  Be aware that when the radio channel has changed, there is a short period during 
-      *  which the radio is actually playing but the playerctl request returns no radio 
-      *  anyway.  
-      *
-      */
-    static getRunningRadioUrl() {
-        return new Promise((resolve, reject) => {
-
-            Util.spawnCommandLineAsyncIO("playerctl --player=mpv metadata --format '{{ xesam:url }}'", (stdout, stderr) => {
-                if (stderr.trim() == "No players found") {
-                    resolve(false)
-                } else {
-                    resolve(stdout.trim())
-                }
-            })
-        })
+    getRunningRadioUrl() {
+        const radioUrl = this._metadata() ? this._metadata()["xesam:url"].unpack() : false
+        return radioUrl
     }
 
-    static getCurrentSong() {
-        return new Promise((resolve, reject) => {
-
-            Util.spawnCommandLineAsyncIO("playerctl --player=mpv metadata --format '{{ xesam:title }}'", (stdout, stderr) => {
-                if (stderr) reject(stderr)
-                else resolve(stdout.trim())
-            })
-        })
-
+    getCurrentSong() {
+        return (this._metadata()["xesam:title"].unpack())
     }
 }
