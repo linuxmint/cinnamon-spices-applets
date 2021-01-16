@@ -1,6 +1,7 @@
-import { BuiltinIcons, DistanceUnits, SunTimes, WeatherPressureUnits, WeatherUnits, WeatherWindSpeedUnits } from "./types";
+import { WeatherWindSpeedUnits, WeatherUnits, WeatherPressureUnits, DistanceUnits } from "./config";
+import { SunTimes } from "./sunCalc";
+import { BuiltinIcons } from "./types";
 const { timeout_add, source_remove } = imports.mainloop;
-const { util_format_date } = imports.gi.Cinnamon;
 const { IconType } = imports.gi.St;
 const { IconTheme } = imports.gi.Gtk;
 

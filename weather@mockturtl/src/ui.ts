@@ -1,23 +1,21 @@
-import { Config } from "./config";
+import { Config, DistanceUnits, WeatherUnits } from "./config";
 import { WeatherApplet } from "./main";
-import { ForecastUI, HourlyForecastUI, WeatherData, WeatherProvider, HourlyForecastData, WeatherUnits, DistanceUnits } from "./types";
+import { ForecastUI, HourlyForecastUI, WeatherData, WeatherProvider, HourlyForecastData } from "./types";
 import { shadeHexColor, delay, capitalizeFirstLetter, _, nonempty, AwareDateString, TempToUserConfig, compassDirection, MPStoUserUnits, PressToUserUnits, GetHoursMinutes, GetDayName, MetreToUserUnits, MillimeterToUserUnits } from "./utils";
 import { WeatherButton } from "./weatherbutton";
 
 const { PopupMenuManager, PopupSeparatorMenuItem } = imports.ui.popupMenu;
-const { Bin, DrawingArea, BoxLayout, Side, IconType, Label, ScrollView, Icon, Button, Align, Widget } = imports.gi.St;
+const { Bin, BoxLayout, Side, IconType, Label, ScrollView, Icon, Align, Widget } = imports.gi.St;
 const { PolicyType } = imports.gi.Gtk;
 const { addTween } = imports.ui.tweener;
 const Lang: typeof imports.lang = imports.lang;
-const { GridLayout, Actor, Orientation } = imports.gi.Clutter;
-const { TextIconApplet, AllowedLayout, AppletPopupMenu, MenuItem } = imports.ui.applet;
-const { messageTray, themeManager } = imports.ui.main;
+const { GridLayout } = imports.gi.Clutter;
+const { AppletPopupMenu } = imports.ui.applet;
+const { themeManager } = imports.ui.main;
 const { SignalManager } = imports.misc.signalManager;
 
 const UUID = "weather@mockturtl"
 const APPLET_ICON = "view-refresh-symbolic"
-const REFRESH_ICON = "view-refresh";
-const CMD_SETTINGS = "cinnamon-settings applets " + UUID
 
 // Signals
 const SIGNAL_CHANGED = 'changed::'
@@ -25,7 +23,6 @@ const SIGNAL_CLICKED = 'clicked'
 const SIGNAL_REPAINT = 'repaint'
 
 // stylesheet.css
-const STYLE_LOCATION_LINK = 'weather-current-location-link'
 const STYLE_SUMMARYBOX = 'weather-current-summarybox'
 const STYLE_SUMMARY = 'weather-current-summary'
 const STYLE_DATABOX = 'weather-current-databox'
@@ -36,14 +33,11 @@ const STYLE_ASTRONOMY = 'weather-current-astronomy'
 const STYLE_FORECAST_ICON = 'weather-forecast-icon'
 const STYLE_FORECAST_DATABOX = 'weather-forecast-databox'
 const STYLE_FORECAST_DAY = 'weather-forecast-day'
-const STYLE_CONFIG = 'weather-config'
 const STYLE_DATABOX_VALUES = 'weather-current-databox-values'
 const STYLE_FORECAST_SUMMARY = 'weather-forecast-summary'
 const STYLE_FORECAST_TEMPERATURE = 'weather-forecast-temperature'
 const STYLE_FORECAST_BOX = 'weather-forecast-box'
 const STYLE_FORECAST_CONTAINER = 'weather-forecast-container'
-const STYLE_PANEL_BUTTON = 'panel-button'
-const STYLE_POPUP_SEPARATOR_MENU_ITEM = 'popup-separator-menu-item'
 const STYLE_CURRENT = 'current'
 const STYLE_FORECAST = 'forecast'
 const STYLE_WEATHER_MENU = 'weather-menu'

@@ -1,27 +1,30 @@
-export type Services = "OpenWeatherMap" | "DarkSky" | "MetNorway" | "Weatherbit" | "Yahoo" | "Climacell" | "Met Office UK" | "US Weather";
-export type ServiceMap = {
-    [key: string]: Services
+import { Services, WeatherWindSpeedUnits, DistanceUnits } from "./config";
+
+/**
+ * A WeatherProvider must implement this interface.
+ */
+export interface WeatherProvider {
+    GetWeather(loc: Location): Promise<WeatherData>;
+	/** Used as to extend the same named function in the Applet Class.
+	 * 
+	 * "this" (context) is not accessible here
+	 */
+    HandleHTTPError?: (error: HttpError, uiError: AppletError) => AppletError;
+    prettyName: string;
+    name: Services;
+    maxForecastSupport: number;
+    maxHourlyForecastSupport: number;
+    website: string;
 }
-export type ServiceDescriptions = {
-    [key in Services]: string
-}
 
-export type LocationCache = {
-    [key: string]: LocationData
-}
-
-/** Units Used in Options. Change Options list if You change this! */
-export type WeatherUnits = 'automatic' | 'celsius' | 'fahrenheit';
-
-/** Units Used in Options. Change Options list if You change this! */
-export type WeatherWindSpeedUnits = 'automatic' | 'kph' | 'mph' | 'm/s' | 'Knots' | 'Beaufort';
-
-/** Units used in Options. Change Options list if You change this! */
-export type WeatherPressureUnits = 'hPa' | 'mm Hg' | 'in Hg' | 'Pa' | 'psi' | 'atm' | 'at';
-
-/** Change settings-scheme if you change this! */
-export type DistanceUnits = 'automatic' | 'metric' | 'imperial';
-
+/** 
+ * percent: value is a number from 0-100 (or more)
+ * 
+ * temperature: value is number in Kelvin
+ * 
+ * string:  is a string
+*/
+type ExtraField = "percent" | "temperature" | "string";
 export interface WeatherData {
     date: Date;
     coord: {
@@ -76,7 +79,6 @@ export interface ForecastData {
     condition: Condition
 }
 
-
 export interface HourlyForecastData {
     /** Set to 12:00 if possible */
     date: Date,
@@ -94,6 +96,7 @@ export interface HourlyForecastData {
 
 export type PrecipitationType = "rain" | "snow" | "none" | "ice pellets" | "freezing rain";
 
+type LocationSource = "ip-api" | "address-search" | "manual";
 export interface LocationData {
     lat: number,
     lon: number,
@@ -106,22 +109,11 @@ export interface LocationData {
     locationSource: LocationSource;
 }
 
-export type LocationSource = "ip-api" | "address-search" | "manual";
-
 export interface Location {
     lat: number;
     lon: number;
     text: string;
 }
-
-/** 
- * percent: value is a number from 0-100 (or more)
- * 
- * temperature: value is number in Kelvin
- * 
- * string:  is a string
-*/
-export type ExtraField = "percent" | "temperature" | "string";
 
 export interface ForecastUI {
     Icon: imports.gi.St.Icon,
@@ -141,24 +133,6 @@ export interface HourlyForecastUI {
 export type SettingKeys = {
     [key: string]: string;
 }
-
-/**
- * A WeatherProvider must implement this interface.
- */
-export interface WeatherProvider {
-    GetWeather(loc: Location): Promise<WeatherData>;
-	/** Used as to extend the same named function in the Applet Class.
-	 * 
-	 * "this" (context) is not accessible here
-	 */
-    HandleHTTPError?: (error: HttpError, uiError: AppletError) => AppletError;
-    prettyName: string;
-    name: Services;
-    maxForecastSupport: number;
-    maxHourlyForecastSupport: number;
-    website: string;
-}
-
 export interface AppletError {
     type: ErrorSeverity;
     /** Stops Refresh completely until settings have changed */
@@ -206,9 +180,21 @@ export type GUIDStore = {
     [key: number]: string
 }
 
-export interface SunTimes {
-    sunrise: Date;
-    sunset: Date
+export type ServiceMap = {
+    [key: string]: Services
+}
+export type ServiceDescriptions = {
+    [key in Services]: string
+}
+
+export type LocationCache = {
+    [key: string]: LocationData
+}
+export interface WindSpeedLocalePrefs {
+	[key: string]: WeatherWindSpeedUnits;
+}
+export interface DistanceUnitLocalePrefs {
+	[key: string]: DistanceUnits;
 }
 
 /**

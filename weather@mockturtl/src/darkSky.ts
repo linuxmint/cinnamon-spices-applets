@@ -7,7 +7,8 @@
 //////////////////////////////////////////////////////////////
 
 import { WeatherApplet } from "./main";
-import { WeatherProvider, Location, WeatherData, ForecastData, HourlyForecastData, PrecipitationType, AppletError, SunTimes, BuiltinIcons, CustomIcons } from "./types";
+import { SunTimes } from "./sunCalc";
+import { WeatherProvider, Location, WeatherData, ForecastData, HourlyForecastData, PrecipitationType, AppletError, BuiltinIcons, CustomIcons } from "./types";
 import { _, weatherIconSafely, isLangSupported, IsNight, FahrenheitToKelvin, CelsiusToKelvin, MPHtoMPS } from "./utils";
 
 export class DarkSky implements WeatherProvider {

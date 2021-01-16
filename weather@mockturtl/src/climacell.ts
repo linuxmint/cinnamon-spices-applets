@@ -7,7 +7,8 @@
 //////////////////////////////////////////////////////////////
 
 import { WeatherApplet } from "./main";
-import { WeatherProvider, Location, WeatherData, HourlyForecastData, ForecastData, SunTimes, AppletError, Condition } from "./types";
+import { SunTimes } from "./sunCalc";
+import { WeatherProvider, Location, WeatherData, HourlyForecastData, ForecastData, AppletError, Condition } from "./types";
 import { CelsiusToKelvin, _, IsNight, weatherIconSafely } from "./utils";
 
 export class Climacell implements WeatherProvider {

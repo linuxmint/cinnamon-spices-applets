@@ -6,12 +6,12 @@
 //----------------------------------------------------------------------
 
 import { Climacell } from "./climacell";
-import { Config } from "./config";
+import { Config, Services } from "./config";
 import { LocationStore } from "./locationstore";
 import { Log } from "./logger";
 import { WeatherLoop } from "./loop";
 import { MetUk } from "./met_uk";
-import { ServiceMap, WeatherData, WeatherProvider, LocationData, AppletError, HttpError, CustomIcons, Services, RefreshState, NiceErrorDetail, ApiService } from "./types";
+import { ServiceMap, WeatherData, WeatherProvider, LocationData, AppletError, HttpError, CustomIcons, RefreshState, NiceErrorDetail, ApiService } from "./types";
 import { UI } from "./ui";
 import { constructJsLocale, _, get } from "./utils";
 import { DarkSky } from "./darkSky";
@@ -25,18 +25,17 @@ import { MetNorway } from "./met_norway";
 const { TextIconApplet, AllowedLayout, AppletPopupMenu, MenuItem } = imports.ui.applet;
 const { Message, Session, ProxyResolverDefault, SessionAsync } = imports.gi.Soup;
 const { get_language_names } = imports.gi.GLib;
-const { messageTray, themeManager } = imports.ui.main;
+const { messageTray } = imports.ui.main;
 const { SystemNotificationSource, Notification } = imports.ui.messageTray;
 const Lang: typeof imports.lang = imports.lang;
 const GLib = imports.gi.GLib;
-const { spawnCommandLine, spawn_async, spawnCommandLineAsyncIO } = imports.misc.util;
-const { Bin, DrawingArea, BoxLayout, Side, IconType, Label, ScrollView, Icon, Button, Align, Widget } = imports.gi.St;
+const { spawnCommandLine, spawnCommandLineAsyncIO } = imports.misc.util;
+const { IconType } = imports.gi.St;
 const keybindingManager = imports.ui.main.keybindingManager;
 
 const UUID = "weather@mockturtl"
 const APPLET_ICON = "view-refresh-symbolic"
 const REFRESH_ICON = "view-refresh";
-const CMD_SETTINGS = "cinnamon-settings applets " + UUID
 
 // Settings keys
 const DATA_SERVICE: ServiceMap = {

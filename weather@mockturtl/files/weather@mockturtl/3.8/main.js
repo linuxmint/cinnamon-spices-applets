@@ -19,17 +19,16 @@ const met_norway_1 = require("./met_norway");
 const { TextIconApplet, AllowedLayout, AppletPopupMenu, MenuItem } = imports.ui.applet;
 const { Message, Session, ProxyResolverDefault, SessionAsync } = imports.gi.Soup;
 const { get_language_names } = imports.gi.GLib;
-const { messageTray, themeManager } = imports.ui.main;
+const { messageTray } = imports.ui.main;
 const { SystemNotificationSource, Notification } = imports.ui.messageTray;
 const Lang = imports.lang;
 const GLib = imports.gi.GLib;
-const { spawnCommandLine, spawn_async, spawnCommandLineAsyncIO } = imports.misc.util;
-const { Bin, DrawingArea, BoxLayout, Side, IconType, Label, ScrollView, Icon, Button, Align, Widget } = imports.gi.St;
+const { spawnCommandLine, spawnCommandLineAsyncIO } = imports.misc.util;
+const { IconType } = imports.gi.St;
 const keybindingManager = imports.ui.main.keybindingManager;
 const UUID = "weather@mockturtl";
 const APPLET_ICON = "view-refresh-symbolic";
 const REFRESH_ICON = "view-refresh";
-const CMD_SETTINGS = "cinnamon-settings applets " + UUID;
 const DATA_SERVICE = {
     OPEN_WEATHER_MAP: "OpenWeatherMap",
     DARK_SKY: "DarkSky",

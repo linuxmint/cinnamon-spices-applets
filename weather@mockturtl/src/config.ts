@@ -1,6 +1,6 @@
 import { WeatherApplet } from "./main";
 import { IpApi } from "./ipApi";
-import { WeatherWindSpeedUnits, DistanceUnits, SettingKeys, Services, WeatherUnits, WeatherPressureUnits, LocationData } from "./types";
+import { SettingKeys, LocationData, DistanceUnitLocalePrefs, WindSpeedLocalePrefs } from "./types";
 import { clearTimeout, setTimeout, _, isCoordinate } from "./utils";
 
 const { AppletSettings, BindingDirection } = imports.ui.settings;
@@ -10,12 +10,19 @@ const UUID = "weather@mockturtl"
 const { IconType } = imports.gi.St;
 const SIGNAL_CHANGED = 'changed::'
 
-interface WindSpeedLocalePrefs {
-	[key: string]: WeatherWindSpeedUnits;
-}
-interface DistanceUnitLocalePrefs {
-	[key: string]: DistanceUnits;
-}
+/** Units Used in Options. Change Options list if You change this! */
+export type WeatherUnits = 'automatic' | 'celsius' | 'fahrenheit';
+
+/** Units Used in Options. Change Options list if You change this! */
+export type WeatherWindSpeedUnits = 'automatic' | 'kph' | 'mph' | 'm/s' | 'Knots' | 'Beaufort';
+
+/** Units used in Options. Change Options list if You change this! */
+export type WeatherPressureUnits = 'hPa' | 'mm Hg' | 'in Hg' | 'Pa' | 'psi' | 'atm' | 'at';
+
+/** Change settings-scheme if you change this! */
+export type DistanceUnits = 'automatic' | 'metric' | 'imperial';
+
+export type Services = "OpenWeatherMap" | "DarkSky" | "MetNorway" | "Weatherbit" | "Yahoo" | "Climacell" | "Met Office UK" | "US Weather";
 export class Config {
 	// Info partially from https://github.com/unicode-org/cldr/blob/release-38-1/common/supplemental/units.xml
 	/**

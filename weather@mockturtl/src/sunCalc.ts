@@ -307,8 +307,8 @@ interface MoonPosition {
     parallacticAngle: number;
 }
 
-type SunTimes = {
-    [key in SunTimeProperty]: Date
+export type SunTimes = {
+    [key in SunTimeProperty]?: Date
 }
 
 type SunTimeProperty = 'sunrise' | 'sunset' | 'sunriseEnd' | 'sunsetStart' | 'dawn' | 'dusk' | 'nauticalDawn'

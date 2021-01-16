@@ -6,9 +6,10 @@
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
 
+import { DistanceUnits } from "./config";
 import { WeatherApplet } from "./main";
 import { SunCalc } from "./sunCalc";
-import { WeatherProvider, Location, WeatherData, ForecastData, HourlyForecastData, DistanceUnits, Condition } from "./types";
+import { WeatherProvider, Location, WeatherData, ForecastData, HourlyForecastData, Condition } from "./types";
 import { _, GetDistance, get, MPHtoMPS, compassToDeg, CelsiusToKelvin, MetreToUserUnits, weatherIconSafely } from "./utils";
 
 export class MetUk implements WeatherProvider {
