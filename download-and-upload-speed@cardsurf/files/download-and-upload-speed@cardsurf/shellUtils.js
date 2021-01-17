@@ -2,7 +2,7 @@
 const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
 const Lang = imports.lang;
-
+const ByteArray = imports.byteArray;
 
 
 const SignalType = {
@@ -71,8 +71,19 @@ ShellOutputProcess.prototype = {
         this.standard_error_content = standard_error_content;
     },
 
+    byte_array_to_string: function(byte_array) {
+        // Check Cinnamon version
+        let cinn_ver = GLib.getenv('CINNAMON_VERSION');
+        cinn_ver = cinn_ver.substring(0, cinn_ver.lastIndexOf("."))
+        if(parseFloat(cinn_ver) <= 4.6) {
+            return byte_array.toString();
+        } else {
+            return ByteArray.toString(byte_array);
+        }
+    },
+
     get_standard_output_content: function() {
-        return this.standard_output_content.toString();
+        return this.byte_array_to_string(this.standard_output_content);
     },
 
     spawn_sync_and_get_error: function() {
@@ -82,7 +93,7 @@ ShellOutputProcess.prototype = {
     },
 
     get_standard_error_content: function() {
-        return this.standard_error_content.toString();
+        return this.byte_array_to_string(this.standard_error_content);
     },
 
     spawn_async: function() {

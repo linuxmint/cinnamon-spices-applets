@@ -1,5 +1,6 @@
 
 const GLib = imports.gi.GLib;
+const ByteArray = imports.byteArray;
 
 const uuid = 'download-and-upload-speed@cardsurf';
 let AppletConstants, Files, FilesCsv, Dates;
@@ -119,10 +120,21 @@ NetworkInterfaceInfo.prototype = {
         this.bytes_received_total += this.bytes_received_iteration;
     },
 
+    byte_array_to_string: function(byte_array) {
+        // Check Cinnamon version
+        let cinn_ver = GLib.getenv('CINNAMON_VERSION');
+        cinn_ver = cinn_ver.substring(0, cinn_ver.lastIndexOf("."))
+        if(parseFloat(cinn_ver) <= 4.6) {
+            return byte_array.toString();
+        } else {
+            return ByteArray.toString(byte_array);
+        }
+    },
+
     read_number: function (file, default_number) {
         try {
             let array_bytes = file.read_chars();
-            let string = array_bytes.length > 0 ? array_bytes.toString() : default_number.toString();
+            let string = array_bytes.length > 0 ? this.byte_array_to_string(array_bytes) : default_number.toString();
             let number = parseInt(string);
             return number;
         }
