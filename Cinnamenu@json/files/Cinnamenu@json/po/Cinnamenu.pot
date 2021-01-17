@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-07 12:44+0000\n"
+"POT-Creation-Date: 2021-01-17 22:42+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -110,6 +110,36 @@ msgstr ""
 msgid "Uninstall"
 msgstr ""
 
+msgid "This file is no longer available"
+msgstr ""
+
+msgid "Open with"
+msgstr ""
+
+msgid "Other application..."
+msgstr ""
+
+msgid "Menu"
+msgstr ""
+
+msgid "Clear list"
+msgstr ""
+
+msgid "Clear all recent documents"
+msgstr ""
+
+msgid "No recent documents"
+msgstr ""
+
+msgid "Favorites"
+msgstr ""
+
+msgid "Lock screen"
+msgstr ""
+
+msgid "Shut down the computer"
+msgstr ""
+
 msgid "Please wait..."
 msgstr ""
 
@@ -125,12 +155,6 @@ msgstr ""
 msgid "Too many entries - showing first 1000 entries only"
 msgstr ""
 
-msgid "Favorites"
-msgstr ""
-
-msgid "Home folder"
-msgstr ""
-
 msgid "All applications"
 msgstr ""
 
@@ -140,16 +164,13 @@ msgstr ""
 msgid "Favorite apps"
 msgstr ""
 
+msgid "Home folder"
+msgstr ""
+
+msgid "Find files..."
+msgstr ""
+
 msgid "Reset category order"
-msgstr ""
-
-msgid "This file is no longer available"
-msgstr ""
-
-msgid "Open with"
-msgstr ""
-
-msgid "Other application..."
 msgstr ""
 
 msgid "Open containing folder"
@@ -159,6 +180,60 @@ msgid "Move to trash"
 msgstr ""
 
 msgid "Error while moving file to trash:"
+msgstr ""
+
+msgid "Open..."
+msgstr ""
+
+msgid "Open Containing Folder..."
+msgstr ""
+
+msgid "Search"
+msgstr ""
+
+msgid "Start in"
+msgstr ""
+
+msgid "Select a folder"
+msgstr ""
+
+msgid "Follow symlinks"
+msgstr ""
+
+msgid "Search hidden"
+msgstr ""
+
+msgid "Use regular expressions"
+msgstr ""
+
+msgid "Stop"
+msgstr ""
+
+msgid "File"
+msgstr ""
+
+msgid "Path"
+msgstr ""
+
+msgid "Searching..."
+msgstr ""
+
+msgid "Search Stopped"
+msgstr ""
+
+msgid "Searching: "
+msgstr ""
+
+msgid "Error: insufficient permissions to read folder "
+msgstr ""
+
+msgid "Search Completed"
+msgstr ""
+
+msgid "Skipping"
+msgstr ""
+
+msgid " - direcotry already searched"
 msgstr ""
 
 msgid "Cinnamenu"
@@ -190,9 +265,6 @@ msgid "No search provider extensions found"
 msgstr ""
 
 msgid "Panel"
-msgstr ""
-
-msgid "Menu"
 msgstr ""
 
 msgid "Layout"
