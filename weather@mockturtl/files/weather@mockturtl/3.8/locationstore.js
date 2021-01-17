@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.LocationStore = void 0;
+const services_1 = require("./services");
 const utils_1 = require("./utils");
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
@@ -15,7 +16,7 @@ class LocationStore {
         this.StoreChanged = null;
         this.app = app;
         this.path = this.GetConfigPath() + "/weather-mockturtl/locations.json";
-        this.app.log.Debug("location store path is: " + this.path);
+        services_1.Logger.Debug("location store path is: " + this.path);
         this.file = Gio.File.new_for_path(this.path);
         if (onStoreChanged != null)
             this.StoreChanged = onStoreChanged;
@@ -28,22 +29,22 @@ class LocationStore {
         return configPath;
     }
     NextLocation(currentLoc) {
-        this.app.log.Debug("Current location: " + JSON.stringify(currentLoc, null, 2));
+        services_1.Logger.Debug("Current location: " + JSON.stringify(currentLoc, null, 2));
         if (this.locations.length == 0)
             return currentLoc;
         let nextIndex = null;
         if (this.InStorage(currentLoc)) {
             nextIndex = this.FindIndex(currentLoc) + 1;
-            this.app.log.Debug("Current location found in storage at index " + (nextIndex - 1).toString() + ", moving to the next index");
+            services_1.Logger.Debug("Current location found in storage at index " + (nextIndex - 1).toString() + ", moving to the next index");
         }
         else {
             nextIndex = this.currentIndex++;
         }
         if (nextIndex > this.locations.length - 1) {
             nextIndex = 0;
-            this.app.log.Debug("Reached end of storage, move to the beginning");
+            services_1.Logger.Debug("Reached end of storage, move to the beginning");
         }
-        this.app.log.Debug("Switching to index " + nextIndex.toString() + "...");
+        services_1.Logger.Debug("Switching to index " + nextIndex.toString() + "...");
         this.currentIndex = nextIndex;
         return {
             address_string: this.locations[nextIndex].address_string,
@@ -65,16 +66,16 @@ class LocationStore {
         let previousIndex = null;
         if (this.InStorage(currentLoc)) {
             previousIndex = this.FindIndex(currentLoc) - 1;
-            this.app.log.Debug("Current location found in storage at index " + (previousIndex + 1).toString() + ", moving to the next index");
+            services_1.Logger.Debug("Current location found in storage at index " + (previousIndex + 1).toString() + ", moving to the next index");
         }
         else {
             previousIndex = this.currentIndex--;
         }
         if (previousIndex < 0) {
             previousIndex = this.locations.length - 1;
-            this.app.log.Debug("Reached start of storage, move to the end");
+            services_1.Logger.Debug("Reached start of storage, move to the end");
         }
-        this.app.log.Debug("Switching to index " + previousIndex.toString() + "...");
+        services_1.Logger.Debug("Switching to index " + previousIndex.toString() + "...");
         this.currentIndex = previousIndex;
         return {
             address_string: this.locations[previousIndex].address_string,
@@ -160,10 +161,10 @@ class LocationStore {
         catch (e) {
             let error = e;
             if (error.matches(error.domain, Gio.IOErrorEnum.NOT_FOUND)) {
-                this.app.log.Print("Location store does not exist, skipping loading...");
+                services_1.Logger.Print("Location store does not exist, skipping loading...");
                 return true;
             }
-            this.app.log.Error("Can't load locations.json, error: " + error.message);
+            services_1.Logger.Error("Can't load locations.json, error: " + error.message);
             return false;
         }
         if (content == null)
@@ -171,13 +172,13 @@ class LocationStore {
         try {
             let locations = JSON.parse(content);
             this.locations = locations;
-            this.app.log.Print("Saved locations are loaded in from location store at: '" + this.path + "'");
-            this.app.log.Debug("Locations loaded: " + JSON.stringify(this.locations, null, 2));
+            services_1.Logger.Print("Saved locations are loaded in from location store at: '" + this.path + "'");
+            services_1.Logger.Debug("Locations loaded: " + JSON.stringify(this.locations, null, 2));
             this.InvokeStorageChanged();
             return true;
         }
         catch (e) {
-            this.app.log.Error("Error loading locations from store: " + e.message);
+            services_1.Logger.Error("Error loading locations from store: " + e.message);
             this.app.sendNotification(utils_1._("Error") + " - " + utils_1._("Location Store"), utils_1._("Failed to load in data from location storage, please see the logs for more information"));
             return false;
         }
@@ -211,7 +212,7 @@ class LocationStore {
             return file.query_exists(null);
         }
         catch (e) {
-            this.app.log.Error("Cannot get file info for '" + file.get_path() + "', error: ");
+            services_1.Logger.Error("Cannot get file info for '" + file.get_path() + "', error: ");
             global.log(e);
             return false;
         }
@@ -251,7 +252,7 @@ class LocationStore {
                         resolve(true);
                         return true;
                     }
-                    this.app.log.Error("Can't delete file, reason: ");
+                    services_1.Logger.Error("Can't delete file, reason: ");
                     global.log(e);
                     resolve(false);
                     return false;

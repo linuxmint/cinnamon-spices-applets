@@ -1,5 +1,3 @@
-export { }
-
 /*
  (c) 2011-2015, Vladimir Agafonkin
  SunCalc is a JavaScript library for calculating sun/moon position and light phases.
@@ -10,7 +8,7 @@ export { }
 
 // shortcuts for easier to read formulas
 
-var PI = Math.PI,
+const PI = Math.PI,
     sin = Math.sin,
     cos = Math.cos,
     tan = Math.tan,
@@ -24,7 +22,7 @@ var PI = Math.PI,
 
 // date/time constants and conversions
 
-var dayMs = 1000 * 60 * 60 * 24,
+const dayMs = 1000 * 60 * 60 * 24,
     J1970 = 2440588,
     J2000 = 2451545;
 
@@ -149,7 +147,7 @@ export class SunCalc {
         };
     }
 
-    addTime = function(angle: number, riseName: number, setName: number) {
+    addTime = function (angle: number, riseName: number, setName: number) {
         this.times.push([angle, riseName, setName]);
     };
 

@@ -7,6 +7,7 @@
 //////////////////////////////////////////////////////////////
 
 import { WeatherApplet } from "./main";
+import { Logger } from "./services";
 import { WeatherProvider, Location, WeatherData, ForecastData, HourlyForecastData, AppletError, BuiltinIcons, CustomIcons } from "./types";
 import { weatherIconSafely, _, isLangSupported } from "./utils";
 
@@ -96,7 +97,7 @@ export class Weatherbit implements WeatherProvider {
             catch (e) {
                 // Skip Hourly forecast if it is forbidden (403)
                 if (e.code == 403) {
-                    this.app.log.Print("Hourly forecast is inaccessible, skipping")
+                    Logger.Print("Hourly forecast is inaccessible, skipping")
                     this.hourlyAccess = false;
                     return null;
                 }
@@ -121,7 +122,7 @@ export class Weatherbit implements WeatherProvider {
     private ParseCurrent(json: any, self: Weatherbit): WeatherData {
         json = json.data[0];
         let hourDiff = self.HourDifference(new Date(json.ts * 1000), self.ParseStringTime(json.ob_time));
-        if (hourDiff != 0) self.app.log.Debug("Weatherbit reporting incorrect time, correcting with " + (0 - hourDiff).toString() + " hours");
+        if (hourDiff != 0) Logger.Debug("Weatherbit reporting incorrect time, correcting with " + (0 - hourDiff).toString() + " hours");
         try {
             let weather: WeatherData = {
                 coord: {
@@ -161,7 +162,7 @@ export class Weatherbit implements WeatherProvider {
             return weather;
         }
         catch (e) {
-            self.app.log.Error("Weatherbit Weather Parsing error: " + e);
+            Logger.Error("Weatherbit Weather Parsing error: " + e);
             self.app.HandleError({ type: "soft", service: "weatherbit", detail: "unusual payload", message: _("Failed to Process Current Weather Info") })
             return null;
         }
@@ -188,7 +189,7 @@ export class Weatherbit implements WeatherProvider {
             return forecasts;
         }
         catch (e) {
-            self.app.log.Error("Weatherbit Forecast Parsing error: " + e);
+            Logger.Error("Weatherbit Forecast Parsing error: " + e);
             self.app.HandleError({ type: "soft", service: "weatherbit", detail: "unusual payload", message: _("Failed to Process Forecast Info") })
             return null;
         }
@@ -223,7 +224,7 @@ export class Weatherbit implements WeatherProvider {
             return forecasts;
         }
         catch (e) {
-            self.app.log.Error("Weatherbit Forecast Parsing error: " + e);
+            Logger.Error("Weatherbit Forecast Parsing error: " + e);
             self.app.HandleError({ type: "soft", service: "weatherbit", detail: "unusual payload", message: _("Failed to Process Forecast Info") })
             return null;
         }
@@ -273,7 +274,7 @@ export class Weatherbit implements WeatherProvider {
     private ConstructQuery(query: string, loc: Location): string {
         let key = this.app.config._apiKey.replace(" ", "");
         if (this.app.config.noApiKey()) {
-            this.app.log.Error("DarkSky: No API Key given");
+            Logger.Error("DarkSky: No API Key given");
             this.app.HandleError({
                 type: "hard",
                 userError: true,

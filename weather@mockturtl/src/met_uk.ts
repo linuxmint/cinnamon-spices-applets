@@ -8,6 +8,7 @@
 
 import { DistanceUnits } from "./config";
 import { WeatherApplet } from "./main";
+import { Logger } from "./services";
 import { SunCalc } from "./sunCalc";
 import { WeatherProvider, Location, WeatherData, ForecastData, HourlyForecastData, Condition } from "./types";
 import { _, GetDistance, get, MPHtoMPS, compassToDeg, CelsiusToKelvin, MetreToUserUnits, weatherIconSafely } from "./utils";
@@ -55,7 +56,7 @@ export class MetUk implements WeatherProvider {
 
         // Get closest sites
         if (this.currentLoc == null || this.currentLoc.text != newLoc.text || this.forecastSite == null || this.observationSites == null || this.observationSites.length == 0) {
-            this.app.log.Print("Downloading new site data");
+            Logger.Print("Downloading new site data");
             this.currentLoc = newLoc;
 
             let forecastSite = await this.GetClosestForecastSite(newLoc);
@@ -68,13 +69,13 @@ export class MetUk implements WeatherProvider {
             this.observationSites = observationSites;
         }
         else {
-            this.app.log.Debug("Site data downloading skipped");
+            Logger.Debug("Site data downloading skipped");
         }
 
         // Check if in country
         if (this.observationSites.length == 0 || this.forecastSite.dist > 100000) {
             // TODO: Validate that this does not happen with uk locations
-            this.app.log.Error("User is probably not in UK, aborting");
+            Logger.Error("User is probably not in UK, aborting");
             this.app.HandleError({
                 type: "hard",
                 userError: true,
@@ -109,7 +110,7 @@ export class MetUk implements WeatherProvider {
             return this.GetClosestSite(forecastSitelist, loc);
         }
         catch (e) {
-            this.app.log.Error("Failed to get sitelist, error: " + JSON.stringify(e, null, 2));
+            Logger.Error("Failed to get sitelist, error: " + JSON.stringify(e, null, 2));
             this.app.HandleError({
                 type: "soft",
                 userError: true,
@@ -127,7 +128,7 @@ export class MetUk implements WeatherProvider {
             observationSiteList = await this.app.LoadJsonAsync(this.baseUrl + this.currentPrefix + this.sitesUrl + "?" + this.key);
         }
         catch (e) {
-            this.app.log.Error("Failed to get sitelist, error: " + JSON.stringify(e, null, 2));
+            Logger.Error("Failed to get sitelist, error: " + JSON.stringify(e, null, 2));
             this.app.HandleError({
                 type: "soft",
                 userError: true,
@@ -149,7 +150,7 @@ export class MetUk implements WeatherProvider {
 
         // ascending by distance
         observationSites = this.SortObservationSites(observationSites);
-        this.app.log.Debug("Observation sites found: " + JSON.stringify(observationSites, null, 2));
+        Logger.Debug("Observation sites found: " + JSON.stringify(observationSites, null, 2));
         return observationSites;
     }
 
@@ -158,7 +159,7 @@ export class MetUk implements WeatherProvider {
         for (let index = 0; index < observationSites.length; index++) {
             const element = observationSites[index];
             try {
-                this.app.log.Debug("Getting observation data from station: " + element.id);
+                Logger.Debug("Getting observation data from station: " + element.id);
                 observations.push(await this.app.LoadJsonAsync(this.baseUrl + this.currentPrefix + element.id + "?res=hourly&" + this.key));
             }
             catch {
@@ -169,7 +170,7 @@ export class MetUk implements WeatherProvider {
                     service: "us-weather",
                     message: _("Unexpected response from API")
                 })
-                this.app.log.Debug("Failed to get observations from " + element.id);
+                Logger.Debug("Failed to get observations from " + element.id);
             }
         }
         return observations;
@@ -185,7 +186,7 @@ export class MetUk implements WeatherProvider {
     private async GetData(query: string, ParseFunction: (json: any, context: any) => WeatherData | ForecastData[] | HourlyForecastData[]) {
         let json;
         if (query != null) {
-            this.app.log.Debug("Query: " + query);
+            Logger.Debug("Query: " + query);
             try {
                 json = await this.app.LoadJsonAsync(query);
             }
@@ -266,7 +267,7 @@ export class MetUk implements WeatherProvider {
             return weather;
         }
         catch (e) {
-            this.app.log.Error("Met UK Weather Parsing error: " + e);
+            Logger.Error("Met UK Weather Parsing error: " + e);
             this.app.HandleError({ type: "soft", service: "met-uk", detail: "unusual payload", message: _("Failed to Process Current Weather Info") })
             return null;
         }
@@ -290,7 +291,7 @@ export class MetUk implements WeatherProvider {
             return forecasts;
         }
         catch (e) {
-            self.app.log.Error("MET UK Forecast Parsing error: " + e);
+            Logger.Error("MET UK Forecast Parsing error: " + e);
             self.app.HandleError({ type: "soft", service: "met-uk", detail: "unusual payload", message: _("Failed to Process Forecast Info") })
             return null;
         }
@@ -327,7 +328,7 @@ export class MetUk implements WeatherProvider {
             return forecasts;
         }
         catch (e) {
-            self.app.log.Error("MET UK Forecast Parsing error: " + e);
+            Logger.Error("MET UK Forecast Parsing error: " + e);
             self.app.HandleError({ type: "soft", service: "met-uk", detail: "unusual payload", message: _("Failed to Process Forecast Info") })
             return null;
         }
@@ -387,31 +388,31 @@ export class MetUk implements WeatherProvider {
                 + " metres";
             if (get(["V"], result) == null) {
                 result.V = get(["V"], nextObservation);
-                this.app.log.Debug("Visibility" + debugText);
+                Logger.Debug("Visibility" + debugText);
             }
             if (get(["W"], result) == null) {
                 result.W = get(["W"], nextObservation);
-                this.app.log.Debug("Weather condition" + debugText);
+                Logger.Debug("Weather condition" + debugText);
             }
             if (get(["S"], result) == null) {
                 result.S = get(["S"], nextObservation);
-                this.app.log.Debug("Wind Speed" + debugText);
+                Logger.Debug("Wind Speed" + debugText);
             }
             if (get(["D"], result) == null) {
                 result.D = get(["D"], nextObservation);
-                this.app.log.Debug("Wind degree" + debugText);
+                Logger.Debug("Wind degree" + debugText);
             }
             if (get(["T"], result) == null) {
                 result.T = get(["T"], nextObservation);
-                this.app.log.Debug("Temperature" + debugText);
+                Logger.Debug("Temperature" + debugText);
             }
             if (get(["P"], result) == null) {
                 result.P = get(["P"], nextObservation);
-                this.app.log.Debug("Pressure" + debugText);
+                Logger.Debug("Pressure" + debugText);
             }
             if (get(["H"], result) == null) {
                 result.H = get(["H"], nextObservation);
-                this.app.log.Debug("Humidity" + debugText);
+                Logger.Debug("Humidity" + debugText);
             }
         }
         return result;

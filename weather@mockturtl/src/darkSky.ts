@@ -7,6 +7,7 @@
 //////////////////////////////////////////////////////////////
 
 import { WeatherApplet } from "./main";
+import { Logger } from "./services";
 import { SunTimes } from "./sunCalc";
 import { WeatherProvider, Location, WeatherData, ForecastData, HourlyForecastData, PrecipitationType, AppletError, BuiltinIcons, CustomIcons } from "./types";
 import { _, weatherIconSafely, isLangSupported, IsNight, FahrenheitToKelvin, CelsiusToKelvin, MPHtoMPS } from "./utils";
@@ -157,7 +158,7 @@ export class DarkSky implements WeatherProvider {
             return result;
         }
         catch (e) {
-            this.app.log.Error("DarkSky payload parsing error: " + e)
+            Logger.Error("DarkSky payload parsing error: " + e)
             this.app.HandleError({ type: "soft", detail: "unusual payload", service: "darksky", message: _("Failed to Process Weather Info") });
             return null;
         }
@@ -176,7 +177,7 @@ export class DarkSky implements WeatherProvider {
         let query;
         let key = this.app.config._apiKey.replace(" ", "");
         if (this.app.config.noApiKey()) {
-            this.app.log.Error("DarkSky: No API Key given");
+            Logger.Error("DarkSky: No API Key given");
             this.app.HandleError({
                 type: "hard",
                 userError: true,
@@ -224,13 +225,13 @@ export class DarkSky implements WeatherProvider {
         let code = json.code;
         let error = json.error;
         let errorMsg = "DarkSky API: "
-        this.app.log.Debug("DarksSky API error payload: " + json);
+        Logger.Debug("DarksSky API error payload: " + json);
         switch (code) {
             case "400":
-                this.app.log.Error(errorMsg + error);
+                Logger.Error(errorMsg + error);
                 break;
             default:
-                this.app.log.Error(errorMsg + error);
+                Logger.Error(errorMsg + error);
                 break
         }
     };

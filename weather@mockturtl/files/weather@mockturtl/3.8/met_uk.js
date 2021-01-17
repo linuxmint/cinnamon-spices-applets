@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.MetUk = void 0;
+const services_1 = require("./services");
 const sunCalc_1 = require("./sunCalc");
 const utils_1 = require("./utils");
 class MetUk {
@@ -28,7 +29,7 @@ class MetUk {
         if (newLoc == null)
             return null;
         if (this.currentLoc == null || this.currentLoc.text != newLoc.text || this.forecastSite == null || this.observationSites == null || this.observationSites.length == 0) {
-            this.app.log.Print("Downloading new site data");
+            services_1.Logger.Print("Downloading new site data");
             this.currentLoc = newLoc;
             let forecastSite = await this.GetClosestForecastSite(newLoc);
             if (forecastSite == null)
@@ -40,10 +41,10 @@ class MetUk {
             this.observationSites = observationSites;
         }
         else {
-            this.app.log.Debug("Site data downloading skipped");
+            services_1.Logger.Debug("Site data downloading skipped");
         }
         if (this.observationSites.length == 0 || this.forecastSite.dist > 100000) {
-            this.app.log.Error("User is probably not in UK, aborting");
+            services_1.Logger.Error("User is probably not in UK, aborting");
             this.app.HandleError({
                 type: "hard",
                 userError: true,
@@ -73,7 +74,7 @@ class MetUk {
             return this.GetClosestSite(forecastSitelist, loc);
         }
         catch (e) {
-            this.app.log.Error("Failed to get sitelist, error: " + JSON.stringify(e, null, 2));
+            services_1.Logger.Error("Failed to get sitelist, error: " + JSON.stringify(e, null, 2));
             this.app.HandleError({
                 type: "soft",
                 userError: true,
@@ -90,7 +91,7 @@ class MetUk {
             observationSiteList = await this.app.LoadJsonAsync(this.baseUrl + this.currentPrefix + this.sitesUrl + "?" + this.key);
         }
         catch (e) {
-            this.app.log.Error("Failed to get sitelist, error: " + JSON.stringify(e, null, 2));
+            services_1.Logger.Error("Failed to get sitelist, error: " + JSON.stringify(e, null, 2));
             this.app.HandleError({
                 type: "soft",
                 userError: true,
@@ -109,7 +110,7 @@ class MetUk {
             observationSites.push(element);
         }
         observationSites = this.SortObservationSites(observationSites);
-        this.app.log.Debug("Observation sites found: " + JSON.stringify(observationSites, null, 2));
+        services_1.Logger.Debug("Observation sites found: " + JSON.stringify(observationSites, null, 2));
         return observationSites;
     }
     async GetObservationData(observationSites) {
@@ -117,7 +118,7 @@ class MetUk {
         for (let index = 0; index < observationSites.length; index++) {
             const element = observationSites[index];
             try {
-                this.app.log.Debug("Getting observation data from station: " + element.id);
+                services_1.Logger.Debug("Getting observation data from station: " + element.id);
                 observations.push(await this.app.LoadJsonAsync(this.baseUrl + this.currentPrefix + element.id + "?res=hourly&" + this.key));
             }
             catch (_a) {
@@ -128,7 +129,7 @@ class MetUk {
                     service: "us-weather",
                     message: utils_1._("Unexpected response from API")
                 });
-                this.app.log.Debug("Failed to get observations from " + element.id);
+                services_1.Logger.Debug("Failed to get observations from " + element.id);
             }
         }
         return observations;
@@ -136,7 +137,7 @@ class MetUk {
     async GetData(query, ParseFunction) {
         let json;
         if (query != null) {
-            this.app.log.Debug("Query: " + query);
+            services_1.Logger.Debug("Query: " + query);
             try {
                 json = await this.app.LoadJsonAsync(query);
             }
@@ -212,7 +213,7 @@ class MetUk {
             return weather;
         }
         catch (e) {
-            this.app.log.Error("Met UK Weather Parsing error: " + e);
+            services_1.Logger.Error("Met UK Weather Parsing error: " + e);
             this.app.HandleError({ type: "soft", service: "met-uk", detail: "unusual payload", message: utils_1._("Failed to Process Current Weather Info") });
             return null;
         }
@@ -236,7 +237,7 @@ class MetUk {
             return forecasts;
         }
         catch (e) {
-            self.app.log.Error("MET UK Forecast Parsing error: " + e);
+            services_1.Logger.Error("MET UK Forecast Parsing error: " + e);
             self.app.HandleError({ type: "soft", service: "met-uk", detail: "unusual payload", message: utils_1._("Failed to Process Forecast Info") });
             return null;
         }
@@ -272,7 +273,7 @@ class MetUk {
             return forecasts;
         }
         catch (e) {
-            self.app.log.Error("MET UK Forecast Parsing error: " + e);
+            services_1.Logger.Error("MET UK Forecast Parsing error: " + e);
             self.app.HandleError({ type: "soft", service: "met-uk", detail: "unusual payload", message: utils_1._("Failed to Process Forecast Info") });
             return null;
         }
@@ -330,31 +331,31 @@ class MetUk {
                 + " metres";
             if (utils_1.get(["V"], result) == null) {
                 result.V = utils_1.get(["V"], nextObservation);
-                this.app.log.Debug("Visibility" + debugText);
+                services_1.Logger.Debug("Visibility" + debugText);
             }
             if (utils_1.get(["W"], result) == null) {
                 result.W = utils_1.get(["W"], nextObservation);
-                this.app.log.Debug("Weather condition" + debugText);
+                services_1.Logger.Debug("Weather condition" + debugText);
             }
             if (utils_1.get(["S"], result) == null) {
                 result.S = utils_1.get(["S"], nextObservation);
-                this.app.log.Debug("Wind Speed" + debugText);
+                services_1.Logger.Debug("Wind Speed" + debugText);
             }
             if (utils_1.get(["D"], result) == null) {
                 result.D = utils_1.get(["D"], nextObservation);
-                this.app.log.Debug("Wind degree" + debugText);
+                services_1.Logger.Debug("Wind degree" + debugText);
             }
             if (utils_1.get(["T"], result) == null) {
                 result.T = utils_1.get(["T"], nextObservation);
-                this.app.log.Debug("Temperature" + debugText);
+                services_1.Logger.Debug("Temperature" + debugText);
             }
             if (utils_1.get(["P"], result) == null) {
                 result.P = utils_1.get(["P"], nextObservation);
-                this.app.log.Debug("Pressure" + debugText);
+                services_1.Logger.Debug("Pressure" + debugText);
             }
             if (utils_1.get(["H"], result) == null) {
                 result.H = utils_1.get(["H"], nextObservation);
-                this.app.log.Debug("Humidity" + debugText);
+                services_1.Logger.Debug("Humidity" + debugText);
             }
         }
         return result;

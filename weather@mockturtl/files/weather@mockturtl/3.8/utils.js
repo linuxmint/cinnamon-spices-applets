@@ -80,7 +80,7 @@ function GetDayName(date, locale, showDate = false, tz) {
     if (!tz || tz == "")
         params.timeZone = undefined;
     if (showDate) {
-        params["day"] = 'numeric';
+        params.day = 'numeric';
     }
     let now = new Date();
     let tomorrow = new Date();
@@ -106,7 +106,7 @@ function GetHoursMinutes(date, locale, hours24Format, tz, onlyHours = false) {
     if (!tz || tz == "")
         params.timeZone = undefined;
     if (!onlyHours)
-        params.minute = "numeric";
+        params.minute = "2-digit";
     return date.toLocaleString(locale, params);
 }
 exports.GetHoursMinutes = GetHoursMinutes;
@@ -116,7 +116,7 @@ function AwareDateString(date, locale, hours24Format, tz) {
     let now = new Date();
     let params = {
         hour: "numeric",
-        minute: "numeric",
+        minute: "2-digit",
         hour12: !hours24Format,
         timeZone: tz
     };

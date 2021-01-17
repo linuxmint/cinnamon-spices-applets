@@ -7,6 +7,7 @@
 //////////////////////////////////////////////////////////////
 
 import { WeatherApplet } from "./main";
+import { Logger } from "./services";
 import { WeatherProvider, Location, WeatherData, ForecastData, BuiltinIcons, CustomIcons } from "./types";
 import { _, weatherIconSafely, CelsiusToKelvin, KPHtoMPS } from "./utils";
 
@@ -39,7 +40,7 @@ export class Yahoo implements WeatherProvider {
             }
             catch (e) {
                 this.app.HandleError({ type: "hard", service: "yahoo", detail: "unknown", message: _("Unknown Error happened while calling Yahoo bridge,\n see Looking Glass log for errors") })
-                this.app.log.Error("Yahoo API bridge call failed, error: " + e);
+                Logger.Error("Yahoo API bridge call failed, error: " + e);
                 return null;
             }
 
@@ -48,14 +49,14 @@ export class Yahoo implements WeatherProvider {
                 return null;
             }
 
-            this.app.log.Debug("Yahoo API response: " + json);
+            Logger.Debug("Yahoo API response: " + json);
 
             try {
                 json = JSON.parse(json)
             }
             catch (e) {
                 this.app.HandleError({ type: "hard", service: "yahoo", detail: "bad api response - non json", message: _("Yahoo bridge responded in bad format,\n see Looking Glass log for errors") })
-                this.app.log.Error("Yahoo service failed to parse payload to JSON, error: " + e);
+                Logger.Error("Yahoo service failed to parse payload to JSON, error: " + e);
                 return null;
             }
 
@@ -134,7 +135,7 @@ export class Yahoo implements WeatherProvider {
             return result;
         }
         catch (e) {
-            this.app.log.Error("Yahoo payload parsing error: " + e)
+            Logger.Error("Yahoo payload parsing error: " + e)
             this.app.HandleError({ type: "soft", detail: "unusual payload", service: "yahoo", message: _("Failed to Process Weather Info") });
             return null;
         }
@@ -143,23 +144,23 @@ export class Yahoo implements WeatherProvider {
     private HandleResponseErrors(json: BridgeError): void {
         let type = json.error.type;
         let errorMsg = "Yahoo bridge: "
-        this.app.log.Debug("yahoo API error payload: " + json);
+        Logger.Debug("yahoo API error payload: " + json);
         switch (type) {
             case "import":
                 this.app.sendNotification(_("Missing package"), _("Please install '") + this.GetMissingPackage(json) + _("', then refresh manually."))
-                this.app.log.Error(errorMsg + json.error.message);
+                Logger.Error(errorMsg + json.error.message);
                 this.app.HandleError({ detail: "import error", type: "hard", userError: true, service: "yahoo", message: _("Please install '") + this.GetMissingPackage(json) + _("', then refresh manually.") })
                 break;
             case "network":
                 this.app.HandleError({ detail: "no api response", type: "soft", service: "yahoo", message: _("Could not connect to Yahoo API.") })
-                this.app.log.Error(errorMsg + "Could not connect to API, error - " + json.error.data);
+                Logger.Error(errorMsg + "Could not connect to API, error - " + json.error.data);
                 break;
             case "unknown":
                 this.app.HandleError({ detail: "no api response", type: "hard", service: "yahoo", message: _("Unknown error happened while obtaining weather, see Looking Glass logs for more information") })
-                this.app.log.Error(errorMsg + "Unknown Error happened in yahoo bridge, error - " + json.error.data);
+                Logger.Error(errorMsg + "Unknown Error happened in yahoo bridge, error - " + json.error.data);
                 break
             default:
-                this.app.log.Error(errorMsg + json.error.message);
+                Logger.Error(errorMsg + json.error.message);
                 break
         }
     };

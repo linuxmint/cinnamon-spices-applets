@@ -1,4 +1,5 @@
 import { WeatherApplet } from "./main";
+import { Logger } from "./services";
 import { SunCalc } from "./sunCalc";
 import { WeatherProvider, Location, WeatherData, HourlyForecastData, ForecastData, Condition } from "./types";
 import { CelsiusToKelvin, IsNight, _, weatherIconSafely } from "./utils";
@@ -30,13 +31,13 @@ export class MetNorway implements WeatherProvider {
             }
             catch (e) {
                 this.app.HandleHTTPError("met-norway", e, this.app);
-                this.app.log.Error("MET Norway: Network error - " + e);
+                Logger.Error("MET Norway: Network error - " + e);
                 return null;
             }
 
             if (!json) {
                 this.app.HandleError({ type: "soft", detail: "no api response", service: "met-norway" });
-                this.app.log.Error("MET Norway: Empty response from API");
+                Logger.Error("MET Norway: Empty response from API");
                 return null;
             }
 
@@ -60,7 +61,7 @@ export class MetNorway implements WeatherProvider {
         }
 
         if (startIndex != -1) {
-            this.app.log.Debug("Removing outdated weather information...")
+            Logger.Debug("Removing outdated weather information...")
             json.properties.timeseries.splice(0, startIndex + 1);
         }
 
@@ -564,7 +565,7 @@ export class MetNorway implements WeatherProvider {
                     icon: weatherIconSafely(["weather-snow-scattered", "weather-snow"], iconType)
                 }
             default:
-                this.app.log.Error("condition code not found: " + weather.condition);
+                Logger.Error("condition code not found: " + weather.condition);
                 return {
                     customIcon: "cloud-refresh-symbolic",
                     main: _("Unknown"),

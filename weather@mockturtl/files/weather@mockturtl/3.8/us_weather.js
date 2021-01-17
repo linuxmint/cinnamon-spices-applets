@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.USWeather = void 0;
+const services_1 = require("./services");
 const sunCalc_1 = require("./sunCalc");
 const utils_1 = require("./utils");
 class USWeather {
@@ -22,7 +23,7 @@ class USWeather {
         if (loc == null)
             return null;
         if (!this.grid || !this.observationStations || this.currentLoc.text != loc.text) {
-            this.app.log.Print("Downloading new site data");
+            services_1.Logger.Print("Downloading new site data");
             this.currentLoc = loc;
             let grid = await this.GetGridData(loc);
             if (grid == null)
@@ -34,7 +35,7 @@ class USWeather {
             this.observationStations = observationStations;
         }
         else {
-            this.app.log.Debug("Site data downloading skipped");
+            services_1.Logger.Debug("Site data downloading skipped");
         }
         let observations = await this.GetObservationsInRange(this.MAX_STATION_DIST, loc, this.observationStations);
         let hourly = null;
@@ -46,7 +47,7 @@ class USWeather {
             forecast = await forecastPromise;
         }
         catch (e) {
-            this.app.log.Error("Failed to obtain forecast Data, error: " + JSON.stringify(e, null, 2));
+            services_1.Logger.Error("Failed to obtain forecast Data, error: " + JSON.stringify(e, null, 2));
             this.app.HandleError({ type: "soft", detail: "bad api response", message: utils_1._("Could not get forecast for your area") });
             return null;
         }
@@ -59,7 +60,7 @@ class USWeather {
     async GetGridData(loc) {
         try {
             let siteData = await this.app.LoadJsonAsync(this.sitesUrl + loc.text, this.OnObtainingGridData);
-            this.app.log.Debug("Grid found: " + JSON.stringify(siteData, null, 2));
+            services_1.Logger.Debug("Grid found: " + JSON.stringify(siteData, null, 2));
             return siteData;
         }
         catch (e) {
@@ -70,7 +71,7 @@ class USWeather {
                 service: "us-weather",
                 message: utils_1._("Unexpected response from API")
             });
-            this.app.log.Error("Failed to Obtain Grid data, error: " + JSON.stringify(e, null, 2));
+            services_1.Logger.Error("Failed to Obtain Grid data, error: " + JSON.stringify(e, null, 2));
             return null;
         }
     }
@@ -80,7 +81,7 @@ class USWeather {
             return stations.features;
         }
         catch (e) {
-            this.app.log.Error("Failed to obtain station data, error: " + JSON.stringify(e, null, 2));
+            services_1.Logger.Error("Failed to obtain station data, error: " + JSON.stringify(e, null, 2));
             this.app.HandleError({
                 type: "soft",
                 userError: true,
@@ -102,7 +103,7 @@ class USWeather {
                 observations.push(await this.app.LoadJsonAsync(stations[index].id + "/observations/latest"));
             }
             catch (_a) {
-                this.app.log.Debug("Failed to get observations from " + stations[index].id);
+                services_1.Logger.Debug("Failed to get observations from " + stations[index].id);
             }
         }
         return observations;
@@ -138,42 +139,42 @@ class USWeather {
             if (result.properties.icon == null) {
                 result.properties.icon = element.properties.icon;
                 result.properties.textDescription = element.properties.textDescription;
-                this.app.log.Debug("Weather condition" + debugText);
+                services_1.Logger.Debug("Weather condition" + debugText);
             }
             if (result.properties.temperature.value == null) {
                 result.properties.temperature.value = element.properties.temperature.value;
-                this.app.log.Debug("Temperature" + debugText);
+                services_1.Logger.Debug("Temperature" + debugText);
             }
             if (result.properties.windSpeed.value == null) {
                 result.properties.windSpeed.value = element.properties.windSpeed.value;
-                this.app.log.Debug("Wind Speed" + debugText);
+                services_1.Logger.Debug("Wind Speed" + debugText);
             }
             if (result.properties.windDirection.value == null) {
                 result.properties.windDirection.value = element.properties.windDirection.value;
-                this.app.log.Debug("Wind degree" + debugText);
+                services_1.Logger.Debug("Wind degree" + debugText);
             }
             if (result.properties.barometricPressure.value == null) {
                 result.properties.barometricPressure.value = element.properties.barometricPressure.value;
-                this.app.log.Debug("Pressure" + debugText);
+                services_1.Logger.Debug("Pressure" + debugText);
             }
             if (result.properties.relativeHumidity.value == null) {
                 result.properties.relativeHumidity.value = element.properties.relativeHumidity.value;
-                this.app.log.Debug("Humidity" + debugText);
+                services_1.Logger.Debug("Humidity" + debugText);
             }
             if (result.properties.windChill.value == null) {
                 result.properties.windChill.value = element.properties.windChill.value;
-                this.app.log.Debug("WindChill" + debugText);
+                services_1.Logger.Debug("WindChill" + debugText);
             }
             if (result.properties.visibility.value == null) {
                 result.properties.visibility.value = element.properties.visibility.value;
-                this.app.log.Debug("Visibility" + debugText);
+                services_1.Logger.Debug("Visibility" + debugText);
             }
         }
         return result;
     }
     ParseCurrent(json, hourly) {
         if (json.length == 0) {
-            this.app.log.Error("No observation stations/data are available");
+            services_1.Logger.Error("No observation stations/data are available");
             return null;
         }
         let observation = this.MeshObservationData(json);
@@ -218,7 +219,7 @@ class USWeather {
             return weather;
         }
         catch (e) {
-            this.app.log.Error("US Weather Parsing error: " + e);
+            services_1.Logger.Error("US Weather Parsing error: " + e);
             this.app.HandleError({ type: "soft", service: "us-weather", detail: "unusual payload", message: utils_1._("Failed to Process Current Weather Info") });
             return null;
         }
@@ -255,7 +256,7 @@ class USWeather {
             return forecasts;
         }
         catch (e) {
-            this.app.log.Error("US Weather Forecast Parsing error: " + e);
+            services_1.Logger.Error("US Weather Forecast Parsing error: " + e);
             this.app.HandleError({ type: "soft", service: "us-weather", detail: "unusual payload", message: utils_1._("Failed to Process Forecast Info") });
             return null;
         }
@@ -278,7 +279,7 @@ class USWeather {
             return forecasts;
         }
         catch (e) {
-            self.app.log.Error("US Weather service Forecast Parsing error: " + e);
+            services_1.Logger.Error("US Weather service Forecast Parsing error: " + e);
             self.app.HandleError({ type: "soft", service: "us-weather", detail: "unusual payload", message: utils_1._("Failed to Process Hourly Forecast Info") });
             return null;
         }

@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Climacell = void 0;
+const services_1 = require("./services");
 const utils_1 = require("./utils");
 class Climacell {
     constructor(_app) {
@@ -96,7 +97,7 @@ class Climacell {
             return result;
         }
         catch (e) {
-            ctx.app.log.Error("Climacell payload parsing error: " + e);
+            services_1.Logger.Error("Climacell payload parsing error: " + e);
             ctx.app.HandleError({ type: "soft", detail: "unusual payload", service: "climacell", message: utils_1._("Failed to Process Weather Info") });
             return null;
         }
@@ -142,7 +143,7 @@ class Climacell {
         let query;
         let key = this.app.config._apiKey.replace(" ", "");
         if (this.app.config.noApiKey()) {
-            this.app.log.Error("Climacell: No API Key given");
+            services_1.Logger.Error("Climacell: No API Key given");
             this.app.HandleError({
                 type: "hard",
                 userError: true,
@@ -340,7 +341,7 @@ class Climacell {
                     icon: utils_1.weatherIconSafely((isNight) ? ["weather-clear-night"] : ["weather-clear"], this.app.config.IconType())
                 };
             default:
-                this.app.log.Error("condition code not found: " + condition);
+                services_1.Logger.Error("condition code not found: " + condition);
                 return {
                     customIcon: "refresh-symbolic",
                     description: utils_1._("Unknown"),

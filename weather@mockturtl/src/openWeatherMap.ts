@@ -7,6 +7,7 @@
 //////////////////////////////////////////////////////////////
 
 import { WeatherApplet } from "./main";
+import { Logger } from "./services";
 import { WeatherProvider, Location, WeatherData, ForecastData, HourlyForecastData, AppletError, HttpError, BuiltinIcons, CustomIcons } from "./types";
 import { get, weatherIconSafely, _, isLangSupported } from "./utils";
 
@@ -157,7 +158,7 @@ export class OpenWeatherMap implements WeatherProvider {
             weather.hourlyForecasts = hourly;
             return weather;
         } catch (e) {
-            self.app.log.Error("OpenWeatherMap Weather Parsing error: " + e);
+            Logger.Error("OpenWeatherMap Weather Parsing error: " + e);
             self.app.HandleError({
                 type: "soft",
                 service: "openweathermap",
@@ -231,8 +232,8 @@ export class OpenWeatherMap implements WeatherProvider {
                 break;
         };
         this.app.HandleError(error);
-        this.app.log.Debug("OpenWeatherMap Error Code: " + json.cod)
-        this.app.log.Error(errorMsg + json.message);
+        Logger.Debug("OpenWeatherMap Error Code: " + json.cod)
+        Logger.Error(errorMsg + json.message);
     };
 
     public HandleHTTPError(error: HttpError, uiError: AppletError): AppletError {

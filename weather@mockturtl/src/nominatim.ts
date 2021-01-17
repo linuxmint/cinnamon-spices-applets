@@ -1,4 +1,5 @@
 import { WeatherApplet } from "./main";
+import { Logger } from "./services";
 import { LocationCache, LocationData } from "./types";
 import { get, _ } from "./utils";
 
@@ -20,7 +21,7 @@ export class GeoLocation {
             searchText = searchText.trim();
             let cached = get([searchText], this.cache);
             if (cached != null) {
-                this.app.log.Debug("Returning cached geolocation info for '" + searchText + "'.");
+                Logger.Debug("Returning cached geolocation info for '" + searchText + "'.");
                 return cached;
             }
 
@@ -33,7 +34,7 @@ export class GeoLocation {
                 })
                 return null;
             }
-            this.app.log.Debug("Location is found, payload: " + JSON.stringify(locationData, null, 2));
+            Logger.Debug("Location is found, payload: " + JSON.stringify(locationData, null, 2));
             let result: LocationData = {
                 lat: parseFloat(locationData[0].lat),
                 lon: parseFloat(locationData[0].lon),
@@ -49,7 +50,7 @@ export class GeoLocation {
             return result;
         }
         catch (e) {
-            this.app.log.Error("Could not geolocate, error: " + JSON.stringify(e, null, 2));
+            Logger.Error("Could not geolocate, error: " + JSON.stringify(e, null, 2));
             this.app.HandleError({
                 type: "soft",
                 detail: "bad api response",

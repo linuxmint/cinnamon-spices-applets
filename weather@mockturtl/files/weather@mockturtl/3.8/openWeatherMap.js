@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.OpenWeatherMap = void 0;
+const services_1 = require("./services");
 const utils_1 = require("./utils");
 class OpenWeatherMap {
     constructor(_app) {
@@ -126,7 +127,7 @@ class OpenWeatherMap {
             return weather;
         }
         catch (e) {
-            self.app.log.Error("OpenWeatherMap Weather Parsing error: " + e);
+            services_1.Logger.Error("OpenWeatherMap Weather Parsing error: " + e);
             self.app.HandleError({
                 type: "soft",
                 service: "openweathermap",
@@ -200,8 +201,8 @@ class OpenWeatherMap {
         }
         ;
         this.app.HandleError(error);
-        this.app.log.Debug("OpenWeatherMap Error Code: " + json.cod);
-        this.app.log.Error(errorMsg + json.message);
+        services_1.Logger.Debug("OpenWeatherMap Error Code: " + json.cod);
+        services_1.Logger.Error(errorMsg + json.message);
     }
     ;
     HandleHTTPError(error, uiError) {

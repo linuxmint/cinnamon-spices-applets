@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.MetNorway = void 0;
+const services_1 = require("./services");
 const sunCalc_1 = require("./sunCalc");
 const utils_1 = require("./utils");
 class MetNorway {
@@ -24,12 +25,12 @@ class MetNorway {
             }
             catch (e) {
                 this.app.HandleHTTPError("met-norway", e, this.app);
-                this.app.log.Error("MET Norway: Network error - " + e);
+                services_1.Logger.Error("MET Norway: Network error - " + e);
                 return null;
             }
             if (!json) {
                 this.app.HandleError({ type: "soft", detail: "no api response", service: "met-norway" });
-                this.app.log.Error("MET Norway: Empty response from API");
+                services_1.Logger.Error("MET Norway: Empty response from API");
                 return null;
             }
             return this.ParseWeather(json);
@@ -50,7 +51,7 @@ class MetNorway {
             }
         }
         if (startIndex != -1) {
-            this.app.log.Debug("Removing outdated weather information...");
+            services_1.Logger.Debug("Removing outdated weather information...");
             json.properties.timeseries.splice(0, startIndex + 1);
         }
         return json;
@@ -503,7 +504,7 @@ class MetNorway {
                     icon: utils_1.weatherIconSafely(["weather-snow-scattered", "weather-snow"], iconType)
                 };
             default:
-                this.app.log.Error("condition code not found: " + weather.condition);
+                services_1.Logger.Error("condition code not found: " + weather.condition);
                 return {
                     customIcon: "cloud-refresh-symbolic",
                     main: utils_1._("Unknown"),

@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.IpApi = void 0;
+const services_1 = require("./services");
 const utils_1 = require("./utils");
 class IpApi {
     constructor(_app) {
@@ -39,11 +40,11 @@ class IpApi {
                 entryText: json.lat + "," + json.lon,
                 locationSource: "ip-api"
             };
-            this.app.log.Debug("Location obtained:" + json.lat + "," + json.lon);
+            services_1.Logger.Debug("Location obtained:" + json.lat + "," + json.lon);
             return result;
         }
         catch (e) {
-            this.app.log.Error("ip-api parsing error: " + e);
+            services_1.Logger.Error("ip-api parsing error: " + e);
             this.app.HandleError({ type: "hard", detail: "no location", service: "ipapi", message: utils_1._("Could not obtain location") });
             return null;
         }
@@ -51,7 +52,7 @@ class IpApi {
     ;
     HandleErrorResponse(json) {
         this.app.HandleError({ type: "hard", detail: "bad api response", message: utils_1._("Location Service responded with errors, please see the logs in Looking Glass"), service: "ipapi" });
-        this.app.log.Error("ip-api responds with Error: " + json.reason);
+        services_1.Logger.Error("ip-api responds with Error: " + json.reason);
     }
     ;
 }

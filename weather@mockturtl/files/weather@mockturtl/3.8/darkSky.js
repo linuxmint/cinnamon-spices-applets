@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DarkSky = void 0;
+const services_1 = require("./services");
 const utils_1 = require("./utils");
 class DarkSky {
     constructor(_app) {
@@ -122,7 +123,7 @@ class DarkSky {
             return result;
         }
         catch (e) {
-            this.app.log.Error("DarkSky payload parsing error: " + e);
+            services_1.Logger.Error("DarkSky payload parsing error: " + e);
             this.app.HandleError({ type: "soft", detail: "unusual payload", service: "darksky", message: utils_1._("Failed to Process Weather Info") });
             return null;
         }
@@ -140,7 +141,7 @@ class DarkSky {
         let query;
         let key = this.app.config._apiKey.replace(" ", "");
         if (this.app.config.noApiKey()) {
-            this.app.log.Error("DarkSky: No API Key given");
+            services_1.Logger.Error("DarkSky: No API Key given");
             this.app.HandleError({
                 type: "hard",
                 userError: true,
@@ -181,13 +182,13 @@ class DarkSky {
         let code = json.code;
         let error = json.error;
         let errorMsg = "DarkSky API: ";
-        this.app.log.Debug("DarksSky API error payload: " + json);
+        services_1.Logger.Debug("DarksSky API error payload: " + json);
         switch (code) {
             case "400":
-                this.app.log.Error(errorMsg + error);
+                services_1.Logger.Error(errorMsg + error);
                 break;
             default:
-                this.app.log.Error(errorMsg + error);
+                services_1.Logger.Error(errorMsg + error);
                 break;
         }
     }

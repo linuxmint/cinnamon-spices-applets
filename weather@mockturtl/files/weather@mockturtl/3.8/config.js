@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Config = void 0;
 const ipApi_1 = require("./ipApi");
 const utils_1 = require("./utils");
+const services_1 = require("./services");
 const { AppletSettings, BindingDirection } = imports.ui.settings;
 const Lang = imports.lang;
 const keybindingManager = imports.ui.main.keybindingManager;
@@ -71,7 +72,7 @@ class Config {
     }
     IconTypeChanged() {
         this.app.ui.UpdateIconType(this.IconType());
-        this.app.log.Debug("Symbolic icon setting changed");
+        services_1.Logger.Debug("Symbolic icon setting changed");
     }
     TemperatureUnit() {
         if (this._temperatureUnit == "automatic")
@@ -95,13 +96,13 @@ class Config {
     }
     ;
     OnLocationChanged() {
-        this.app.log.Debug("User changed location, waiting 3 seconds...");
+        services_1.Logger.Debug("User changed location, waiting 3 seconds...");
         if (this.doneTypingLocation != null)
             utils_1.clearTimeout(this.doneTypingLocation);
         this.doneTypingLocation = utils_1.setTimeout(Lang.bind(this, this.DoneTypingLocation), 3000);
     }
     DoneTypingLocation() {
-        this.app.log.Debug("User has finished typing, beginning refresh");
+        services_1.Logger.Debug("User has finished typing, beginning refresh");
         this.doneTypingLocation = null;
         this.app.refreshAndRebuild();
     }
@@ -119,7 +120,7 @@ class Config {
     }
     ;
     InjectLocationToConfig(loc, switchToManual = false) {
-        this.app.log.Debug("Location setting is now: " + loc.entryText);
+        services_1.Logger.Debug("Location setting is now: " + loc.entryText);
         let text = loc.entryText + "";
         this.SetLocation(text);
         this.currentLocation = loc;
@@ -161,12 +162,12 @@ class Config {
             this.InjectLocationToConfig(location);
             return location;
         }
-        this.app.log.Debug("Location is text, geolocating...");
+        services_1.Logger.Debug("Location is text, geolocating...");
         let locationData = await this.app.geoLocationService.GetLocation(loc);
         if (locationData == null)
             return null;
         if (!!locationData.address_string) {
-            this.app.log.Debug("Address found via address search, placing found full address '" + locationData.address_string + "' back to location entry");
+            services_1.Logger.Debug("Address found via address search, placing found full address '" + locationData.address_string + "' back to location entry");
         }
         this.InjectLocationToConfig(locationData);
         return locationData;

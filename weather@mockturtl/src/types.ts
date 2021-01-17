@@ -198,7 +198,7 @@ export interface DistanceUnitLocalePrefs {
 }
 
 /**
- * names of icons what might be available
+ * Names of icons what might be available
  */
 export type BuiltinIcons =
     "weather-clear" |

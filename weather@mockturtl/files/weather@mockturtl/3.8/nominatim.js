@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.GeoLocation = void 0;
+const services_1 = require("./services");
 const utils_1 = require("./utils");
 class GeoLocation {
     constructor(app) {
@@ -15,7 +16,7 @@ class GeoLocation {
             searchText = searchText.trim();
             let cached = utils_1.get([searchText], this.cache);
             if (cached != null) {
-                this.app.log.Debug("Returning cached geolocation info for '" + searchText + "'.");
+                services_1.Logger.Debug("Returning cached geolocation info for '" + searchText + "'.");
                 return cached;
             }
             let locationData = await this.app.LoadJsonAsync(this.url + encodeURIComponent(searchText) + this.params);
@@ -27,7 +28,7 @@ class GeoLocation {
                 });
                 return null;
             }
-            this.app.log.Debug("Location is found, payload: " + JSON.stringify(locationData, null, 2));
+            services_1.Logger.Debug("Location is found, payload: " + JSON.stringify(locationData, null, 2));
             let result = {
                 lat: parseFloat(locationData[0].lat),
                 lon: parseFloat(locationData[0].lon),
@@ -43,7 +44,7 @@ class GeoLocation {
             return result;
         }
         catch (e) {
-            this.app.log.Error("Could not geolocate, error: " + JSON.stringify(e, null, 2));
+            services_1.Logger.Error("Could not geolocate, error: " + JSON.stringify(e, null, 2));
             this.app.HandleError({
                 type: "soft",
                 detail: "bad api response",

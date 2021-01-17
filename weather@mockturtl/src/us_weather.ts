@@ -7,6 +7,7 @@
 //////////////////////////////////////////////////////////////
 
 import { WeatherApplet } from "./main";
+import { Logger } from "./services";
 import { SunCalc } from "./sunCalc";
 import { WeatherProvider, Location, WeatherData, AppletError, ForecastData, HourlyForecastData, Condition } from "./types";
 import { _, GetDistance, get, KPHtoMPS, CelsiusToKelvin, IsNight, FahrenheitToKelvin, weatherIconSafely } from "./utils";
@@ -46,7 +47,7 @@ export class USWeather implements WeatherProvider {
 
         // getting grid and station data first time or location changed
         if (!this.grid || !this.observationStations || this.currentLoc.text != loc.text) {
-            this.app.log.Print("Downloading new site data")
+            Logger.Print("Downloading new site data")
             this.currentLoc = loc;
 
             let grid = await this.GetGridData(loc);
@@ -60,7 +61,7 @@ export class USWeather implements WeatherProvider {
             this.observationStations = observationStations;
         }
         else {
-            this.app.log.Debug("Site data downloading skipped")
+            Logger.Debug("Site data downloading skipped")
         }
 
         // Long wait time, can't do Promise.all because US weather will ban IP for some time on spamming
@@ -75,7 +76,7 @@ export class USWeather implements WeatherProvider {
             forecast = await forecastPromise;
         }
         catch (e) {
-            this.app.log.Error("Failed to obtain forecast Data, error: " + JSON.stringify(e, null, 2));
+            Logger.Error("Failed to obtain forecast Data, error: " + JSON.stringify(e, null, 2));
             this.app.HandleError({ type: "soft", detail: "bad api response", message: _("Could not get forecast for your area") });
             return null;
         }
@@ -96,7 +97,7 @@ export class USWeather implements WeatherProvider {
         try {
             // Handling out of country errors in callback
             let siteData = await this.app.LoadJsonAsync(this.sitesUrl + loc.text, this.OnObtainingGridData) as GridPayload;
-            this.app.log.Debug("Grid found: " + JSON.stringify(siteData, null, 2));
+            Logger.Debug("Grid found: " + JSON.stringify(siteData, null, 2));
             return siteData;
         }
         catch (e) {
@@ -107,7 +108,7 @@ export class USWeather implements WeatherProvider {
                 service: "us-weather",
                 message: _("Unexpected response from API")
             });
-            this.app.log.Error("Failed to Obtain Grid data, error: " + JSON.stringify(e, null, 2));
+            Logger.Error("Failed to Obtain Grid data, error: " + JSON.stringify(e, null, 2));
             return null;
         }
     }
@@ -122,7 +123,7 @@ export class USWeather implements WeatherProvider {
             return stations.features;
         }
         catch (e) {
-            this.app.log.Error("Failed to obtain station data, error: " + JSON.stringify(e, null, 2));
+            Logger.Error("Failed to obtain station data, error: " + JSON.stringify(e, null, 2));
             this.app.HandleError({
                 type: "soft",
                 userError: true,
@@ -146,11 +147,11 @@ export class USWeather implements WeatherProvider {
             element.dist = GetDistance(element.geometry.coordinates[1], element.geometry.coordinates[0], loc.lat, loc.lon);
             if (element.dist > range) break;
             try {
-                //this.app.log.Debug("Observation query is: " + this.stations[index].id + "/observations/latest")
+                //Logger.Debug("Observation query is: " + this.stations[index].id + "/observations/latest")
                 observations.push(await this.app.LoadJsonAsync(stations[index].id + "/observations/latest"))
             }
             catch {
-                this.app.log.Debug("Failed to get observations from " + stations[index].id);
+                Logger.Debug("Failed to get observations from " + stations[index].id);
             }
         }
         return observations;
@@ -202,35 +203,35 @@ export class USWeather implements WeatherProvider {
             if (result.properties.icon == null) {
                 result.properties.icon = element.properties.icon;
                 result.properties.textDescription = element.properties.textDescription;
-                this.app.log.Debug("Weather condition" + debugText);
+                Logger.Debug("Weather condition" + debugText);
             }
             if (result.properties.temperature.value == null) {
                 result.properties.temperature.value = element.properties.temperature.value;
-                this.app.log.Debug("Temperature" + debugText);
+                Logger.Debug("Temperature" + debugText);
             }
             if (result.properties.windSpeed.value == null) {
                 result.properties.windSpeed.value = element.properties.windSpeed.value;
-                this.app.log.Debug("Wind Speed" + debugText);
+                Logger.Debug("Wind Speed" + debugText);
             }
             if (result.properties.windDirection.value == null) {
                 result.properties.windDirection.value = element.properties.windDirection.value;
-                this.app.log.Debug("Wind degree" + debugText);
+                Logger.Debug("Wind degree" + debugText);
             }
             if (result.properties.barometricPressure.value == null) {
                 result.properties.barometricPressure.value = element.properties.barometricPressure.value;
-                this.app.log.Debug("Pressure" + debugText);
+                Logger.Debug("Pressure" + debugText);
             }
             if (result.properties.relativeHumidity.value == null) {
                 result.properties.relativeHumidity.value = element.properties.relativeHumidity.value;
-                this.app.log.Debug("Humidity" + debugText);
+                Logger.Debug("Humidity" + debugText);
             }
             if (result.properties.windChill.value == null) {
                 result.properties.windChill.value = element.properties.windChill.value;
-                this.app.log.Debug("WindChill" + debugText);
+                Logger.Debug("WindChill" + debugText);
             }
             if (result.properties.visibility.value == null) {
                 result.properties.visibility.value = element.properties.visibility.value;
-                this.app.log.Debug("Visibility" + debugText);
+                Logger.Debug("Visibility" + debugText);
             }
         }
         return result;
@@ -243,7 +244,7 @@ export class USWeather implements WeatherProvider {
 	 */
     private ParseCurrent(json: ObservationPayload[], hourly: ForecastsPayload): WeatherData {
         if (json.length == 0) {
-            this.app.log.Error("No observation stations/data are available");
+            Logger.Error("No observation stations/data are available");
             return null;
         }
         let observation = this.MeshObservationData(json);
@@ -289,7 +290,7 @@ export class USWeather implements WeatherProvider {
             return weather;
         }
         catch (e) {
-            this.app.log.Error("US Weather Parsing error: " + e);
+            Logger.Error("US Weather Parsing error: " + e);
             this.app.HandleError({ type: "soft", service: "us-weather", detail: "unusual payload", message: _("Failed to Process Current Weather Info") })
             return null;
         }
@@ -330,7 +331,7 @@ export class USWeather implements WeatherProvider {
             return forecasts;
         }
         catch (e) {
-            this.app.log.Error("US Weather Forecast Parsing error: " + e);
+            Logger.Error("US Weather Forecast Parsing error: " + e);
             this.app.HandleError({ type: "soft", service: "us-weather", detail: "unusual payload", message: _("Failed to Process Forecast Info") })
             return null;
         }
@@ -354,7 +355,7 @@ export class USWeather implements WeatherProvider {
             return forecasts;
         }
         catch (e) {
-            self.app.log.Error("US Weather service Forecast Parsing error: " + e);
+            Logger.Error("US Weather service Forecast Parsing error: " + e);
             self.app.HandleError({ type: "soft", service: "us-weather", detail: "unusual payload", message: _("Failed to Process Hourly Forecast Info") })
             return null;
         }

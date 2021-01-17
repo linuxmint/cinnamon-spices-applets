@@ -95,7 +95,7 @@ export function GetDayName(date: Date, locale: string, showDate: boolean = false
         params.timeZone = undefined;
 
     if (showDate) {
-        params["day"] = 'numeric';
+        params.day = 'numeric';
     }
 
 
@@ -128,7 +128,7 @@ export function GetHoursMinutes(date: Date, locale: string, hours24Format: boole
         params.timeZone = undefined;
 
     if (!onlyHours)
-        params.minute = "numeric";
+        params.minute = "2-digit";
 
     return date.toLocaleString(locale, params);
 }
@@ -138,7 +138,7 @@ export function AwareDateString(date: Date, locale: string, hours24Format: boole
     let now = new Date();
     let params: Intl.DateTimeFormatOptions = {
         hour: "numeric",
-        minute: "numeric",
+        minute: "2-digit",
         hour12: !hours24Format,
         timeZone: tz
 	};

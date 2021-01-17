@@ -1,10 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.WeatherApplet = exports.Logger = void 0;
+exports.WeatherApplet = void 0;
 const climacell_1 = require("./climacell");
 const config_1 = require("./config");
 const locationstore_1 = require("./locationstore");
-const logger_1 = require("./logger");
 const loop_1 = require("./loop");
 const met_uk_1 = require("./met_uk");
 const ui_1 = require("./ui");
@@ -16,7 +15,8 @@ const us_weather_1 = require("./us_weather");
 const weatherbit_1 = require("./weatherbit");
 const yahoo_1 = require("./yahoo");
 const met_norway_1 = require("./met_norway");
-const { TextIconApplet, AllowedLayout, AppletPopupMenu, MenuItem } = imports.ui.applet;
+const services_1 = require("./services");
+const { TextIconApplet, AllowedLayout, MenuItem } = imports.ui.applet;
 const { Message, Session, ProxyResolverDefault, SessionAsync } = imports.gi.Soup;
 const { get_language_names } = imports.gi.GLib;
 const { messageTray } = imports.ui.main;
@@ -39,7 +39,6 @@ const DATA_SERVICE = {
     MET_UK: "Met Office UK",
     US_WEATHER: "US Weather"
 };
-exports.Logger = new logger_1.Log();
 class WeatherApplet extends TextIconApplet {
     constructor(metadata, orientation, panelHeight, instanceId) {
         super(orientation, panelHeight, instanceId);
@@ -71,11 +70,10 @@ class WeatherApplet extends TextIconApplet {
             "import error": utils_1._("Missing Packages"),
             "location not covered": utils_1._("Location not covered"),
         };
-        this.log = new logger_1.Log(instanceId);
         this.currentLocale = utils_1.constructJsLocale(get_language_names()[0]);
-        this.log.Debug("Applet created with instanceID " + instanceId);
-        this.log.Debug("System locale is " + this.currentLocale);
-        this.log.Debug("Appletdir is: " + this.appletDir);
+        services_1.Logger.Debug("Applet created with instanceID " + instanceId);
+        services_1.Logger.Debug("System locale is " + this.currentLocale);
+        services_1.Logger.Debug("Appletdir is: " + this.appletDir);
         this._httpSession.user_agent = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:37.0) Gecko/20100101 Firefox/37.0";
         this._httpSession.timeout = 10;
         this._httpSession.idle_timeout = 10;
@@ -112,7 +110,7 @@ class WeatherApplet extends TextIconApplet {
     Unlock() {
         this.lock = false;
         if (this.refreshTriggeredWhileLocked) {
-            this.log.Print("Refreshing triggered by config change while refreshing, starting now...");
+            services_1.Logger.Print("Refreshing triggered by config change while refreshing, starting now...");
             this.refreshTriggeredWhileLocked = false;
             this.refreshAndRebuild();
         }
@@ -136,11 +134,11 @@ class WeatherApplet extends TextIconApplet {
     async LoadJsonAsync(query, errorCallback, triggerUIError = true) {
         let json = await new Promise((resolve, reject) => {
             let message = Message.new('GET', query);
-            this.log.Debug("URL called: " + query);
+            services_1.Logger.Debug("URL called: " + query);
             this._httpSession.queue_message(message, (session, message) => {
                 let error = (errorCallback != null) ? errorCallback(message) : null;
                 if (error != null) {
-                    this.log.Error("there is an error, " + JSON.stringify(error, null, 2));
+                    services_1.Logger.Error("there is an error, " + JSON.stringify(error, null, 2));
                     this.HandleError(error);
                     reject({ code: -1, message: "bad api response", data: null, reason_phrase: "" });
                     return;
@@ -164,12 +162,12 @@ class WeatherApplet extends TextIconApplet {
                     return;
                 }
                 try {
-                    this.log.Debug2("API full response: " + message.response_body.data.toString());
+                    services_1.Logger.Debug2("API full response: " + message.response_body.data.toString());
                     let payload = JSON.parse(message.response_body.data);
                     resolve(payload);
                 }
                 catch (e) {
-                    this.log.Error("Error: API response is not JSON. The response: " + message.response_body.data);
+                    services_1.Logger.Error("Error: API response is not JSON. The response: " + message.response_body.data);
                     reject({ code: message.status_code, message: "bad api response - non json", reason_phrase: e });
                 }
             });
@@ -197,7 +195,7 @@ class WeatherApplet extends TextIconApplet {
             return json;
         }
         catch (e) {
-            this.log.Error("Error calling command " + cmd + ", error: ");
+            services_1.Logger.Error("Error calling command " + cmd + ", error: ");
             global.log(e);
             return null;
         }
@@ -222,7 +220,7 @@ class WeatherApplet extends TextIconApplet {
                     reject({ code: message.status_code, message: "no response data", reason_phrase: message.reason_phrase });
                     return;
                 }
-                this.log.Debug2("API full response: " + message.response_body.data.toString());
+                services_1.Logger.Debug2("API full response: " + message.response_body.data.toString());
                 let payload = message.response_body.data;
                 resolve(payload);
             });
@@ -273,7 +271,7 @@ class WeatherApplet extends TextIconApplet {
         this.locationStore.DeleteCurrentLocation(this.config.currentLocation);
     }
     onLocationStorageChanged(itemCount) {
-        this.log.Debug("On location storage callback called, number of locations now " + itemCount.toString());
+        services_1.Logger.Debug("On location storage callback called, number of locations now " + itemCount.toString());
         if (this.locationStore.ShouldShowLocationSelectors(this.config.currentLocation))
             this.ui.ShowLocationSelectors();
         else
@@ -302,7 +300,7 @@ class WeatherApplet extends TextIconApplet {
         }
     }
     on_applet_removed_from_panel(deleteConfig) {
-        this.log.Print("Removing applet instance...");
+        services_1.Logger.Print("Removing applet instance...");
         this.loop.Stop();
     }
     on_applet_clicked(event) {
@@ -368,7 +366,7 @@ class WeatherApplet extends TextIconApplet {
     }
     async refreshWeather(rebuild, location) {
         if (this.lock) {
-            this.log.Print("Refreshing in progress, refresh skipped.");
+            services_1.Logger.Print("Refreshing in progress, refresh skipped.");
             return "locked";
         }
         this.lock = true;
@@ -379,7 +377,7 @@ class WeatherApplet extends TextIconApplet {
                 locationData = await this.config.EnsureLocation();
             }
             catch (e) {
-                this.log.Error(e);
+                services_1.Logger.Error(e);
                 this.Unlock();
                 return "error";
             }
@@ -397,7 +395,7 @@ class WeatherApplet extends TextIconApplet {
             this.weather = null;
             let weatherInfo = await this.provider.GetWeather({ lat: locationData.lat, lon: locationData.lon, text: locationData.lat.toString() + "," + locationData.lon.toString() });
             if (weatherInfo == null) {
-                this.log.Error("Unable to obtain Weather Information");
+                services_1.Logger.Error("Unable to obtain Weather Information");
                 this.HandleError({
                     type: "hard",
                     detail: "unknown",
@@ -417,13 +415,13 @@ class WeatherApplet extends TextIconApplet {
                 this.Unlock();
                 return "failure";
             }
-            this.log.Print("Weather Information refreshed");
+            services_1.Logger.Print("Weather Information refreshed");
             this.loop.ResetErrorCount();
             this.Unlock();
             return "success";
         }
         catch (e) {
-            this.log.Error("Generic Error while refreshing Weather info: " + e);
+            services_1.Logger.Error("Generic Error while refreshing Weather info: " + e);
             this.HandleError({ type: "hard", detail: "unknown", message: utils_1._("Unexpected Error While Refreshing Weather, please see log in Looking Glass") });
             this.Unlock();
             return "failure";
@@ -457,9 +455,9 @@ class WeatherApplet extends TextIconApplet {
         if (this.encounteredError == true)
             return;
         this.encounteredError = true;
-        this.log.Debug("User facing Error received, error: " + JSON.stringify(error, null, 2));
+        services_1.Logger.Debug("User facing Error received, error: " + JSON.stringify(error, null, 2));
         if (error.type == "hard") {
-            this.log.Debug("Displaying hard error");
+            services_1.Logger.Debug("Displaying hard error");
             this.ui.rebuild(this.config);
             this.DisplayError(this.errMsg[error.detail], (!error.message) ? "" : error.message);
         }
@@ -475,7 +473,7 @@ class WeatherApplet extends TextIconApplet {
             return;
         }
         let nextRefresh = this.loop.GetSecondsUntilNextRefresh();
-        this.log.Error("Retrying in the next " + nextRefresh.toString() + " seconds...");
+        services_1.Logger.Error("Retrying in the next " + nextRefresh.toString() + " seconds...");
     }
     HandleHTTPError(service, error, ctx, override) {
         let uiError = {
@@ -485,10 +483,10 @@ class WeatherApplet extends TextIconApplet {
             service: service
         };
         if (typeof error === 'string' || error instanceof String) {
-            ctx.log.Error("Error calling " + service + ": " + error.toString());
+            services_1.Logger.Error("Error calling " + service + ": " + error.toString());
         }
         else {
-            ctx.log.Error("Error calling " + service + " '" + error.message.toString() + "' Reason: " + error.reason_phrase.toString());
+            services_1.Logger.Error("Error calling " + service + " '" + error.message.toString() + "' Reason: " + error.reason_phrase.toString());
             uiError.detail = error.message;
             uiError.code = error.code;
             if (error.message == "bad api response - non json")

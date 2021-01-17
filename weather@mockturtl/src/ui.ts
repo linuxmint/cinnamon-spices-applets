@@ -1,5 +1,6 @@
 import { Config, DistanceUnits, WeatherUnits } from "./config";
 import { WeatherApplet } from "./main";
+import { Logger } from "./services";
 import { ForecastUI, HourlyForecastUI, WeatherData, WeatherProvider, HourlyForecastData } from "./types";
 import { shadeHexColor, delay, capitalizeFirstLetter, _, nonempty, AwareDateString, TempToUserConfig, compassDirection, MPStoUserUnits, PressToUserUnits, GetHoursMinutes, GetDayName, MetreToUserUnits, MillimeterToUserUnits } from "./utils";
 import { WeatherButton } from "./weatherbutton";
@@ -115,7 +116,7 @@ export class UI {
         //this.menu.actor.add_style_class_name(STYLE_WEATHER_MENU);
         // Doesn't do shit, setting class on the box instead.
         this.menu.box.add_style_class_name(STYLE_WEATHER_MENU);
-        this.app.log.Debug("Popup Menu applied classes are: " + this.menu.box.get_style_class_name());
+        Logger.Debug("Popup Menu applied classes are: " + this.menu.box.get_style_class_name());
         this.menuManager.addMenu(this.menu);
         this.menuManager._signals.connect(this.menu, "open-state-changed", this.PopupMenuToggled, this);
         this.signals = new SignalManager();
@@ -152,7 +153,7 @@ export class UI {
 		let luminance = (2126 * color.red + 7152 * color.green + 722 * color.blue) / 10000 / 255;
 		// Inverse, we assume the bacground color here
 		luminance = Math.abs(1 - luminance);
-        this.app.log.Debug("Theme is Light: " + (luminance > 0.5));
+        Logger.Debug("Theme is Light: " + (luminance > 0.5));
         return (luminance > 0.5);
     }
 
@@ -277,7 +278,7 @@ export class UI {
 
         let [minWidth, naturalWidth] = this._hourlyScrollView.get_preferred_width(-1);
         let [minHeight, naturalHeight] = this._hourlyScrollView.get_preferred_height(minWidth);
-        this.app.log.Debug("hourlyScrollView requested height and is set to: " + naturalHeight);
+        Logger.Debug("hourlyScrollView requested height and is set to: " + naturalHeight);
         this._hourlyScrollView.set_width(minWidth);
         this._separatorAreaHourly.actor.show();
         if (!!this._hourlyButton.child) this._hourlyButton.child.icon_name = "custom-up-arrow-symbolic";
@@ -511,7 +512,7 @@ export class UI {
             this._currentWeatherSunset.text = sunsetText;
             return true;
         } catch (e) {
-            this.app.log.Error("DisplayWeatherError: " + e);
+            Logger.Error("DisplayWeatherError: " + e);
             return false;
         }
     };
@@ -559,7 +560,7 @@ export class UI {
                 message: "Forecast parsing failed: " + e.toString(),
                 userError: false
             })
-            this.app.log.Error("DisplayForecastError " + e);
+            Logger.Error("DisplayForecastError " + e);
             return false;
         }
     };
@@ -649,7 +650,7 @@ export class UI {
         for (let index = 0; index < this._hourlyForecastBoxes.length; index++) {
             const ui = this._hourlyForecasts[index];
 
-            this.app.log.Debug("Height requests of Hourly box Items: " + index);
+            Logger.Debug("Height requests of Hourly box Items: " + index);
             let hourHeight = ui.Hour.get_preferred_height(-1)[1];
             let iconHeight = ui.Icon.get_preferred_height(-1)[1];
             let summaryHeight = ui.Summary.get_preferred_height(-1)[1];
@@ -658,12 +659,12 @@ export class UI {
             let itemheight = hourHeight + iconHeight + summaryHeight + temperatureHeight + precipitationHeight;
             if (boxItemHeight < itemheight) boxItemHeight = itemheight;
         }
-        this.app.log.Debug("Final Hourly box item height is: " + boxItemHeight)
+        Logger.Debug("Final Hourly box item height is: " + boxItemHeight)
         let scrollBarHeight = this._hourlyScrollView.get_hscroll_bar().get_preferred_width(-1)[1];
-        this.app.log.Debug("Scrollbar height is " + scrollBarHeight);
+        Logger.Debug("Scrollbar height is " + scrollBarHeight);
         let theme = this._hourlyBox.get_theme_node();
         let styling = theme.get_margin(Side.TOP) + theme.get_margin(Side.BOTTOM) + theme.get_padding(Side.TOP) + theme.get_padding(Side.BOTTOM);
-        this.app.log.Debug("ScollbarBox vertical padding and margin is: " + styling);
+        Logger.Debug("ScollbarBox vertical padding and margin is: " + styling);
 
         return (boxItemHeight + scrollBarHeight + styling);
     }

@@ -2,6 +2,7 @@ import { WeatherApplet } from "./main";
 import { IpApi } from "./ipApi";
 import { SettingKeys, LocationData, DistanceUnitLocalePrefs, WindSpeedLocalePrefs } from "./types";
 import { clearTimeout, setTimeout, _, isCoordinate } from "./utils";
+import { Logger } from "./services";
 
 const { AppletSettings, BindingDirection } = imports.ui.settings;
 const Lang: typeof imports.lang = imports.lang;
@@ -155,7 +156,7 @@ export class Config {
 
     private IconTypeChanged() {
         this.app.ui.UpdateIconType(this.IconType());
-        this.app.log.Debug("Symbolic icon setting changed");
+        Logger.Debug("Symbolic icon setting changed");
 	}
 	
 	/**
@@ -195,14 +196,14 @@ export class Config {
 
     /** It was spamming refresh before, changed to wait until user stopped typing fro 3 seconds */
     private OnLocationChanged() {
-        this.app.log.Debug("User changed location, waiting 3 seconds...");
+        Logger.Debug("User changed location, waiting 3 seconds...");
         if (this.doneTypingLocation != null) clearTimeout(this.doneTypingLocation);
         this.doneTypingLocation = setTimeout(Lang.bind(this, this.DoneTypingLocation), 3000);
     }
 
     /** Called when 3 seconds is up with no change in location */
     private DoneTypingLocation() {
-        this.app.log.Debug("User has finished typing, beginning refresh");
+        Logger.Debug("User has finished typing, beginning refresh");
         this.doneTypingLocation = null;
         this.app.refreshAndRebuild();
     }
@@ -223,7 +224,7 @@ export class Config {
     };
 
     public InjectLocationToConfig(loc: LocationData, switchToManual: boolean = false) {
-        this.app.log.Debug("Location setting is now: " + loc.entryText);
+        Logger.Debug("Location setting is now: " + loc.entryText);
         let text = loc.entryText + ""; // Only values can be injected into settings and not references, so we add empty string to it.
         this.SetLocation(text);
         this.currentLocation = loc;
@@ -279,12 +280,12 @@ export class Config {
             return location;
         }
 
-        this.app.log.Debug("Location is text, geolocating...")
+        Logger.Debug("Location is text, geolocating...")
         let locationData = await this.app.geoLocationService.GetLocation(loc);
         // User facing errors are handled by service
         if (locationData == null) return null;
         if (!!locationData.address_string) {
-            this.app.log.Debug("Address found via address search, placing found full address '" + locationData.address_string + "' back to location entry");
+            Logger.Debug("Address found via address search, placing found full address '" + locationData.address_string + "' back to location entry");
         }
 
         this.InjectLocationToConfig(locationData);
