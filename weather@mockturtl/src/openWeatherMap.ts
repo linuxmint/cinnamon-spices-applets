@@ -8,20 +8,11 @@ function importModule(path: string): any {
     }
 }
 
-const UUID = "weather@mockturtl"
-imports.gettext.bindtextdomain(UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
-
-function _(str: string): string {
-    return imports.gettext.dgettext(UUID, str)
-}
-
 var utils = importModule("utils");
-var isCoordinate = utils.isCoordinate as (text: any) => boolean;
 var isLangSupported = utils.isLangSupported as (lang: string, languages: Array<string>) => boolean;
-var isID = utils.isID as (text: any) => boolean;
 var weatherIconSafely = utils.weatherIconSafely as (code: BuiltinIcons[], icon_type: imports.gi.St.IconType) => BuiltinIcons;
+var _ = utils._ as (str: string) => string;
 var get = utils.get as (p: string[], o: any) => any;
-var nonempty = utils.nonempty as (str: string) => boolean;
 
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
@@ -117,9 +108,9 @@ class OpenWeatherMap implements WeatherProvider {
                     customIcon: self.ResolveCustomIcon(get(["current", "weather", "0", "icon"], json))
                 },
                 extra_field: {
-                    name: _("Cloudiness"),
-                    value: json.current.clouds,
-                    type: "percent"
+                    name: _("Feels Like"),
+                    value: json.current.feels_like,
+                    type: "temperature"
                 },
                 forecasts: []
             };

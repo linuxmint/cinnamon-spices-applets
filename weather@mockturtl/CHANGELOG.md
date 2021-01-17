@@ -1,9 +1,22 @@
 # Changelog
 
+## 2.7.0
+
+* Fix [#3334](https://github.com/linuxmint/cinnamon-spices-applets/issues/3334), Add missing Weather conditions localization for Yahoo
+* Add Automatic options for units (based on locale)
+* Improve logic to guess if a theme is light or dark
+* Fix [#3421](https://github.com/linuxmint/cinnamon-spices-applets/issues/3421) IO related exceptions and improve IO code to be more async.
+* Add option to show dates next to forecast days [#3364](https://github.com/linuxmint/cinnamon-spices-applets/issues/3364)
+* Switch to a different function to be able to handle errors calling commands
+* Add option to short display Hourly weather times
+* Minor refactor
+* Fix typos
+* OpenWeatherMap now shows Feels Like temerature instead of Cloudiness
+
 ## 2.6.9
 
 * Fix issue where Nominatim OpenStreetMap search broke on the next refresh cycle after it was entered. (Nominatim can't find the correct address based on their display name what they provide anymore...)
-* Change Main Applet icon, for the worst or the better
+* Change Main Applet icon, for worse or better
 * Add some extra debug output
 
 ## 2.6.8

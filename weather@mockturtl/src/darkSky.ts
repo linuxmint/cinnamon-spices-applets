@@ -9,12 +9,6 @@ function importModule(path: string): any {
     }
 }
 
-const UUID = "weather@mockturtl"
-imports.gettext.bindtextdomain(UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
-function _(str: string): string {
-    return imports.gettext.dgettext(UUID, str)
-}
-
 // Unable to use type declarations with imports like this, so
 // typing it manually again.
 var utils = importModule("utils");
@@ -25,6 +19,7 @@ var CelsiusToKelvin = utils.CelsiusToKelvin as (celsius: number) => number;
 var MPHtoMPS = utils.MPHtoMPS as (speed: number) => number;
 var IsNight = utils.IsNight as (sunTimes: SunTimes, date?: Date) => boolean;
 var weatherIconSafely = utils.weatherIconSafely as (code: BuiltinIcons[], icon_type: imports.gi.St.IconType) => BuiltinIcons;
+var _ = utils._ as (str: string) => string;
 
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
@@ -368,8 +363,8 @@ class DarkSky implements WeatherProvider {
     }
 
     private SetQueryUnit(): void {
-        if (this.app.config._temperatureUnit == "celsius") {
-            if (this.app.config._windSpeedUnit == "kph" || this.app.config._windSpeedUnit == "m/s") {
+        if (this.app.config.TemperatureUnit() == "celsius") {
+            if (this.app.config.WindSpeedUnit() == "kph" || this.app.config.WindSpeedUnit() == "m/s") {
                 this.unit = 'si';
             }
             else {

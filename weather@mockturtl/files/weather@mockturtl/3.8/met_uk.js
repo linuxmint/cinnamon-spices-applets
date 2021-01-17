@@ -8,13 +8,7 @@ function importModule(path) {
         return AppletDir[path];
     }
 }
-const UUID = "weather@mockturtl";
-imports.gettext.bindtextdomain(UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
-function _(str) {
-    return imports.gettext.dgettext(UUID, str);
-}
 var utils = importModule("utils");
-var isCoordinate = utils.isCoordinate;
 var weatherIconSafely = utils.weatherIconSafely;
 var SunCalc = importModule("sunCalc").SunCalc;
 var IsNight = utils.IsNight;
@@ -24,6 +18,7 @@ var compassToDeg = utils.compassToDeg;
 var GetDistance = utils.GetDistance;
 const get = utils.get;
 var MetreToUserUnits = utils.MetreToUserUnits;
+var _ = utils._;
 class MetUk {
     constructor(_app) {
         this.prettyName = "Met Office UK";
@@ -300,7 +295,7 @@ class MetUk {
     }
     VisibilityToText(dist) {
         let distance = parseInt(dist);
-        let unit = this.app.config._distanceUnit;
+        let unit = this.app.config.DistanceUnit();
         if (distance < 1000)
             return _("Very poor - Less than") + " " + MetreToUserUnits(1000, unit) + this.DistanceUnitFor(unit);
         if (distance < 4000)

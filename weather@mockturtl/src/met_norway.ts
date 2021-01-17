@@ -9,18 +9,13 @@ function importModule(path: string): any {
         return AppletDir[path];
     }
 }
-const UUID = "weather@mockturtl"
-imports.gettext.bindtextdomain(UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
-function _(str: string): string {
-    return imports.gettext.dgettext(UUID, str)
-}
 
 var utils = importModule("utils");
-var isCoordinate = utils.isCoordinate as (text: any) => boolean;
 var weatherIconSafely = utils.weatherIconSafely as (code: BuiltinIcons[], icon_type: imports.gi.St.IconType) => BuiltinIcons;
 var CelsiusToKelvin = utils.CelsiusToKelvin as (celsius: number) => number;
 var SunCalc = importModule("sunCalc").SunCalc;
 var IsNight = utils.IsNight as (sunTimes: SunTimes, date?: Date) => boolean;
+var _ = utils._ as (str: string) => string;
 
 class MetNorway implements WeatherProvider {
     public readonly prettyName = "MET Norway";

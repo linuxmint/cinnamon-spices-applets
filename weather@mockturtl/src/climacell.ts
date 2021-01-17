@@ -9,12 +9,6 @@ function importModule(path: string): any {
     }
 }
 
-const UUID = "weather@mockturtl"
-imports.gettext.bindtextdomain(UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
-function _(str: string): string {
-    return imports.gettext.dgettext(UUID, str)
-}
-
 // Unable to use type declarations with imports like this, so
 // typing it manually again.
 var utils = importModule("utils");
@@ -23,6 +17,7 @@ var isLangSupported = utils.isLangSupported as (lang: string, languages: Array<s
 var CelsiusToKelvin = utils.CelsiusToKelvin as (celsius: number) => number;
 var IsNight = utils.IsNight as (sunTimes: SunTimes, date?: Date) => boolean;
 var weatherIconSafely = utils.weatherIconSafely as (code: BuiltinIcons[], icon_type: imports.gi.St.IconType) => BuiltinIcons;
+var _ = utils._ as (str: string) => string;
 
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
@@ -218,22 +213,22 @@ class Climacell implements WeatherProvider {
     * @returns null if custom error checking does not find anything
     */
     private OnObtainingData(message: any): AppletError {
-        if (message.status_code == 403) { // DarkSky returns auth error on the http level when key is wrong
+        if (message.status_code == 403) {
             return {
                 type: "hard",
                 userError: true,
                 detail: "bad key",
-                service: "darksky",
+                service: "climacell",
                 message: _("Please Make sure you\nentered the API key correctly and your account is not locked")
             };
         }
-        if (message.status_code == 401) { // DarkSky returns auth error on the http level when key is wrong
+        if (message.status_code == 401) {
             return {
                 type: "hard",
                 userError: true,
                 detail: "no key",
-                service: "darksky",
-                message: _("Please Make sure you\nentered the API key what you have from DarkSky")
+                service: "climacell",
+                message: _("Please Make sure you\nentered the API key what you have from Climacell")
             };
         }
         return null;

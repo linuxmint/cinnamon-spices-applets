@@ -44,11 +44,6 @@ function importModule(path) {
         return AppletDir[path];
     }
 }
-var UUID = "weather@mockturtl";
-imports.gettext.bindtextdomain(UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
-function _(str) {
-    return imports.gettext.dgettext(UUID, str);
-}
 var utils = importModule("utils");
 var weatherIconSafely = utils.weatherIconSafely;
 var SunCalc = importModule("sunCalc").SunCalc;
@@ -59,6 +54,7 @@ var KPHtoMPS = utils.MPHtoMPS;
 var get = utils.get;
 var compassToDeg = utils.compassToDeg;
 var GetDistance = utils.GetDistance;
+var _ = utils._;
 var USWeather = (function () {
     function USWeather(_app) {
         this.prettyName = "US Weather";

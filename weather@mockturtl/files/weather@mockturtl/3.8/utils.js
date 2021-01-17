@@ -1,12 +1,15 @@
-const UUID = "weather@mockturtl";
-imports.gettext.bindtextdomain(UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
-function _(str) {
-    return imports.gettext.dgettext(UUID, str);
-}
 var { timeout_add, source_remove } = imports.mainloop;
 const { util_format_date } = imports.gi.Cinnamon;
 const { IconType } = imports.gi.St;
 const { IconTheme } = imports.gi.Gtk;
+const UUID = "weather@mockturtl";
+imports.gettext.bindtextdomain(UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
+var _ = (str) => {
+    let customTrans = imports.gettext.dgettext(UUID, str);
+    if (customTrans !== str && customTrans !== "")
+        return customTrans;
+    return imports.gettext.gettext(str);
+};
 var setTimeout = function (func, ms) {
     let args = [];
     if (arguments.length > 2) {
@@ -66,33 +69,61 @@ var isLocaleStringSupported = () => {
         return "notz";
     }
 };
-var GetDayName = (date, locale, tz) => {
+var GetDayName = (date, locale, showDate = false, tz) => {
     let support = isLocaleStringSupported();
     if (locale == "c" || locale == null)
         locale = undefined;
     if (!tz && support == "full")
         support = "notz";
-    switch (support) {
-        case "full":
-            return date.toLocaleString(locale, { timeZone: tz, weekday: "long" });
-        case "notz":
-            return date.toLocaleString(locale, { timeZone: "UTC", weekday: "long" });
-        case "none":
-            return getDayName(date.getUTCDay());
-            ;
+    let params = {
+        weekday: "long"
+    };
+    if (showDate) {
+        params["day"] = 'numeric';
     }
+    let now = new Date();
+    let tomorrow = new Date();
+    tomorrow.setDate(now.getDate() + 1);
+    if (date.getDate() == now.getDate() || date.getDate() == tomorrow.getDate())
+        delete params.weekday;
+    let dateString = "";
+    switch (support) {
+        case "full":
+            params.timeZone = tz;
+            dateString = date.toLocaleString(locale, params);
+            break;
+        case "notz":
+            params.timeZone = "UTC";
+            dateString = date.toLocaleString(locale, params);
+            break;
+        case "none":
+            dateString = getDayName(date.getUTCDay());
+            break;
+    }
+    if (date.getDate() == now.getDate())
+        dateString = _("Today");
+    if (date.getDate() == tomorrow.getDate())
+        dateString = _("Tomorrow");
+    return dateString;
 };
-var GetHoursMinutes = (date, locale, hours24Format, tz) => {
+var GetHoursMinutes = (date, locale, hours24Format, tz, onlyHours = false) => {
     let support = isLocaleStringSupported();
     if (locale == "c" || locale == null)
         locale = undefined;
     if (!tz && support == "full")
         support = "notz";
+    let params = {
+        hour: "numeric",
+        hour12: !hours24Format
+    };
+    if (!onlyHours)
+        params.minute = "numeric";
     switch (support) {
         case "full":
-            return date.toLocaleString(locale, { timeZone: tz, hour: "numeric", minute: "numeric", hour12: !hours24Format });
+            params.timeZone = tz;
+            return date.toLocaleString(locale, params);
         case "notz":
-            return date.toLocaleString(locale, { hour: "numeric", minute: "numeric", hour12: !hours24Format });
+            return date.toLocaleString(locale, params);
         case "none":
             return timeToUserUnits(date, hours24Format);
     }
@@ -118,9 +149,10 @@ var AwareDateString = (date, locale, hours24Format, tz) => {
         case "full":
             if (tz == null || tz == "")
                 tz = undefined;
-            return date.toLocaleString(locale, { timeZone: tz, hour: "numeric", minute: "numeric", hour12: !hours24Format });
+            params.timeZone = tz;
+            return date.toLocaleString(locale, params);
         case "notz":
-            return date.toLocaleString(locale, { hour: "numeric", minute: "numeric", hour12: !hours24Format });
+            return date.toLocaleString(locale, params);
         case "none":
             return timeToUserUnits(date, hours24Format);
     }
@@ -379,4 +411,15 @@ var hasIcon = (icon, icon_type) => {
 var shadeHexColor = (color, percent) => {
     var f = parseInt(color.slice(1), 16), t = percent < 0 ? 0 : 255, p = percent < 0 ? percent * -1 : percent, R = f >> 16, G = f >> 8 & 0x00FF, B = f & 0x0000FF;
     return "#" + (0x1000000 + (Math.round((t - R) * p) + R) * 0x10000 + (Math.round((t - G) * p) + G) * 0x100 + (Math.round((t - B) * p) + B)).toString(16).slice(1);
+};
+var constructJsLocale = (locale) => {
+    let jsLocale = locale.split(".")[0];
+    let tmp = jsLocale.split("_");
+    jsLocale = "";
+    for (let i = 0; i < tmp.length; i++) {
+        if (i != 0)
+            jsLocale += "-";
+        jsLocale += tmp[i].toLowerCase();
+    }
+    return jsLocale;
 };

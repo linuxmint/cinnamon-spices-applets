@@ -1,16 +1,20 @@
 export { }; // Declaring as a Module
 
-// Add this so translation works in utils as well
-const UUID = "weather@mockturtl";
-imports.gettext.bindtextdomain(UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
-function _(str: string): string {
-    return imports.gettext.dgettext(UUID, str)
-}
+
 
 var { timeout_add, source_remove } = imports.mainloop;
 const { util_format_date } = imports.gi.Cinnamon;
 const { IconType } = imports.gi.St;
 const { IconTheme } = imports.gi.Gtk;
+
+const UUID = "weather@mockturtl";
+imports.gettext.bindtextdomain(UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
+var _ = (str: string): string => {
+    let customTrans = imports.gettext.dgettext(UUID, str);
+     if (customTrans !== str && customTrans !== "")
+        return customTrans;
+    return imports.gettext.gettext(str);
+}
 
 var setTimeout = function(func: any, ms: number) {
     let args: any[] = [];
@@ -79,6 +83,9 @@ const clearInterval = (id: any) => {
     source_remove(id);
 };
 
+/**
+ * Checks what kind of ToLocaleString is actually supported in JS for Dates
+ */
 var isLocaleStringSupported = (): localeStringSupport => {
     let date = new Date(1565548657987); // Set Date to test support
     try {
@@ -93,48 +100,85 @@ var isLocaleStringSupported = (): localeStringSupport => {
 
 type localeStringSupport = "none" | "notz" | "full";
 
-var GetDayName = (date: Date, locale: string, tz?: string): string => {
-    let support: localeStringSupport = isLocaleStringSupported();
+var GetDayName = (date: Date, locale: string, showDate: boolean = false, tz?: string): string => {
+    let support = isLocaleStringSupported();
     // No timezone, Date passed in corrected with offset
     if (locale == "c" || locale == null) locale = undefined;
     if (!tz && support == "full") support = "notz";
 
+    let params: Intl.DateTimeFormatOptions = {
+        weekday: "long"
+    }
+
+    if (showDate) {
+        params["day"] = 'numeric';
+    }
+
+
+    let now = new Date();
+    let tomorrow = new Date();
+    tomorrow.setDate(now.getDate() + 1);
+    // today or tomorrow, no need to include date
+    if (date.getDate() == now.getDate() || date.getDate() == tomorrow.getDate())
+        delete params.weekday;
+
+    let dateString = "";
+
     switch (support) {
         case "full":
-            return date.toLocaleString(locale, { timeZone: tz, weekday: "long" });
+            params.timeZone = tz;
+            dateString = date.toLocaleString(locale, params);
+            break;
         case "notz":
-            return date.toLocaleString(locale, { timeZone: "UTC", weekday: "long" });
+            params.timeZone = "UTC";
+            dateString = date.toLocaleString(locale, params);
+            break;
         case "none":
-            return getDayName(date.getUTCDay());;
+            dateString = getDayName(date.getUTCDay());
+            break;
     }
+
+    if (date.getDate() == now.getDate()) dateString = _("Today");
+    if (date.getDate() == tomorrow.getDate()) dateString = _("Tomorrow");
+
+    return dateString;
 }
 
-var GetHoursMinutes = (date: Date, locale: string, hours24Format: boolean, tz?: string): string => {
-    let support: localeStringSupport = isLocaleStringSupported();
+var GetHoursMinutes = (date: Date, locale: string, hours24Format: boolean, tz?: string, onlyHours: boolean = false): string => {
+    let support = isLocaleStringSupported();
     if (locale == "c" || locale == null) locale = undefined;
     // No timezone, Date passed in corrected with offset
     if (!tz && support == "full") support = "notz";
 
+    let params: Intl.DateTimeFormatOptions = {
+        hour: "numeric",
+        hour12: !hours24Format
+    }
+
+    if (!onlyHours)
+        params.minute = "numeric";
+
     switch (support) {
         case "full":
-            return date.toLocaleString(locale, { timeZone: tz, hour: "numeric", minute: "numeric", hour12: !hours24Format });
+            params.timeZone = tz;
+            return date.toLocaleString(locale, params);
         case "notz":
-            return date.toLocaleString(locale, { hour: "numeric", minute: "numeric", hour12: !hours24Format });
+            return date.toLocaleString(locale, params);
         case "none":
             return timeToUserUnits(date, hours24Format);
     }
 }
 
 var AwareDateString = (date: Date, locale: string, hours24Format: boolean, tz?: string): string => {
-    let support: localeStringSupport = isLocaleStringSupported();
+    let support = isLocaleStringSupported();
     if (locale == "c" || locale == null) locale = undefined; // Ignore unset locales
     let now = new Date();
-    let params: any = {
+    let params: Intl.DateTimeFormatOptions = {
         hour: "numeric",
         minute: "numeric",
         hour12: !hours24Format
-    };
-
+	};
+	
     if (date.toDateString() != now.toDateString()) {
         params.month = "short";
         params.day = "numeric";
@@ -147,10 +191,11 @@ var AwareDateString = (date: Date, locale: string, hours24Format: boolean, tz?: 
     switch (support) {
         case "full":
             // function only accepts undefined if tz is not known
-            if (tz == null || tz == "") tz = undefined;
-            return date.toLocaleString(locale, { timeZone: tz, hour: "numeric", minute: "numeric", hour12: !hours24Format });
+			if (tz == null || tz == "") tz = undefined;
+			params.timeZone = tz;
+            return date.toLocaleString(locale, params);
         case "notz":
-            return date.toLocaleString(locale, { hour: "numeric", minute: "numeric", hour12: !hours24Format });
+            return date.toLocaleString(locale, params);
         case "none":
             return timeToUserUnits(date, hours24Format);  // Displaying only time
     }
@@ -454,4 +499,19 @@ var hasIcon = (icon: string, icon_type: imports.gi.St.IconType): boolean => {
 var shadeHexColor = (color: string, percent: number): string => {
     var f = parseInt(color.slice(1), 16), t = percent < 0 ? 0 : 255, p = percent < 0 ? percent * -1 : percent, R = f >> 16, G = f >> 8 & 0x00FF, B = f & 0x0000FF;
     return "#" + (0x1000000 + (Math.round((t - R) * p) + R) * 0x10000 + (Math.round((t - G) * p) + G) * 0x100 + (Math.round((t - B) * p) + B)).toString(16).slice(1);
+}
+
+/**
+ * Convert Linux locale to JS locale format
+ * @param locale Linux locale string
+ */
+var constructJsLocale = (locale: string): string => {
+	let jsLocale = locale.split(".")[0];
+	let tmp: string[] = jsLocale.split("_");
+	jsLocale = "";
+	for (let i = 0; i < tmp.length; i++) {
+		if (i != 0) jsLocale += "-";
+		jsLocale += tmp[i].toLowerCase();
+	}
+	return jsLocale;
 }

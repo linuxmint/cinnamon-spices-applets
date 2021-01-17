@@ -22,12 +22,13 @@ const { addTween } = imports.ui.tweener;
 const { TextIconApplet, AllowedLayout, AppletPopupMenu, MenuItem } = imports.ui.applet;
 const { PopupMenuManager, PopupSeparatorMenuItem } = imports.ui.popupMenu;
 const { AppletSettings, BindingDirection } = imports.ui.settings;
-const { spawnCommandLine, spawn_async, trySpawnCommandLine } = imports.misc.util;
+const { spawnCommandLine, spawn_async, spawnCommandLineAsyncIO } = imports.misc.util;
 const { SystemNotificationSource, Notification } = imports.ui.messageTray;
 const { SignalManager } = imports.misc.signalManager;
 const { messageTray, themeManager } = imports.ui.main;
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
+const ByteArray = imports.byteArray;
 var utils = importModule("utils");
 var GetDayName = utils.GetDayName;
 var GetHoursMinutes = utils.GetHoursMinutes;
@@ -46,6 +47,8 @@ const clearTimeout = utils.clearTimeout;
 var MillimeterToUserUnits = utils.MillimeterToUserUnits;
 var shadeHexColor = utils.shadeHexColor;
 var MetreToUserUnits = utils.MetreToUserUnits;
+var constructJsLocale = utils.constructJsLocale;
+var _ = utils._;
 if (typeof Promise != "function") {
     var promisePoly = importModule("promise-polyfill");
     var finallyConstructor = promisePoly.finallyConstructor;
@@ -90,10 +93,6 @@ const DATA_SERVICE = {
     MET_UK: "Met Office UK",
     US_WEATHER: "US Weather"
 };
-imports.gettext.bindtextdomain(UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
-function _(str) {
-    return imports.gettext.dgettext(UUID, str);
-}
 function uuidv4() {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
         var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
@@ -134,19 +133,20 @@ class WeatherApplet extends TextIconApplet {
             "location not covered": _("Location not covered"),
         };
         this.log = new Log(instanceId);
-        this.currentLocale = this.constructJsLocale(get_language_names()[0]);
+        this.currentLocale = constructJsLocale(get_language_names()[0]);
         this.log.Debug("Applet created with instanceID " + instanceId);
         this.log.Debug("System locale is " + this.currentLocale);
         this.log.Debug("Appletdir is: " + this.appletDir);
         this._httpSession.user_agent = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:37.0) Gecko/20100101 Firefox/37.0";
         this._httpSession.timeout = 10;
         this._httpSession.idle_timeout = 10;
+        imports.gettext.bindtextdomain(UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
         this.msgSource = new SystemNotificationSource(_("Weather Applet"));
         messageTray.add(this.msgSource);
         Session.prototype.add_feature.call(this._httpSession, new ProxyResolverDefault());
         imports.gi.Gtk.IconTheme.get_default().append_search_path(this.appletDir + "/../icons");
         this.SetAppletOnPanel();
-        this.config = new Config(this, instanceId);
+        this.config = new Config(this, instanceId, this.currentLocale);
         this.AddRefreshButton();
         this.EnsureProvider();
         this.ui = new UI(this, orientation);
@@ -239,12 +239,29 @@ class WeatherApplet extends TextIconApplet {
     }
     ;
     async SpawnProcess(command) {
-        let json = await new Promise((resolve, reject) => {
-            spawn_async(command, (aStdout) => {
-                resolve(aStdout);
+        let cmd = "";
+        for (let index = 0; index < command.length; index++) {
+            const element = command[index];
+            cmd += "'" + element + "' ";
+        }
+        try {
+            let json = await new Promise((resolve, reject) => {
+                spawnCommandLineAsyncIO(cmd, (aStdout, err, exitCode) => {
+                    if (exitCode != 0) {
+                        reject(err);
+                    }
+                    else {
+                        resolve(aStdout);
+                    }
+                });
             });
-        });
-        return json;
+            return json;
+        }
+        catch (e) {
+            this.log.Error("Error calling command " + cmd + ", error: ");
+            global.log(e);
+            return null;
+        }
     }
     async LoadAsync(query) {
         let data = await new Promise((resolve, reject) => {
@@ -425,17 +442,6 @@ class WeatherApplet extends TextIconApplet {
             default:
                 return null;
         }
-    }
-    constructJsLocale(locale) {
-        let jsLocale = locale.split(".")[0];
-        let tmp = jsLocale.split("_");
-        jsLocale = "";
-        for (let i = 0; i < tmp.length; i++) {
-            if (i != 0)
-                jsLocale += "-";
-            jsLocale += tmp[i].toLowerCase();
-        }
-        return jsLocale;
     }
     async refreshWeather(rebuild, location) {
         if (this.lock) {
@@ -643,8 +649,9 @@ class UI {
         this.app.refreshAndRebuild();
     }
     IsLightTheme() {
-        let color = this.menu.actor.get_theme_node().get_background_color();
+        let color = this.menu.actor.get_theme_node().get_color("color");
         let luminance = (2126 * color.red + 7152 * color.green + 722 * color.blue) / 10000 / 255;
+        luminance = Math.abs(1 - luminance);
         this.app.log.Debug("Theme is Light: " + (luminance > 0.5));
         return (luminance > 0.5);
     }
@@ -838,8 +845,8 @@ class UI {
             this.app.SetAppletIcon(iconName, weather.condition.customIcon);
             let temp = "";
             if (weather.temperature != null) {
-                temp = TempToUserConfig(weather.temperature, config._temperatureUnit, config._tempRussianStyle);
-                this._currentWeatherTemperature.text = temp + " " + this.unitToUnicode(config._temperatureUnit);
+                temp = TempToUserConfig(weather.temperature, config.TemperatureUnit(), config._tempRussianStyle);
+                this._currentWeatherTemperature.text = temp + " " + this.unitToUnicode(config.TemperatureUnit());
             }
             let label = "";
             if (this.app.orientation != Side.LEFT && this.app.orientation != Side.RIGHT) {
@@ -850,21 +857,21 @@ class UI {
                     if (label != "") {
                         label += " ";
                     }
-                    label += (temp + ' ' + this.unitToUnicode(config._temperatureUnit));
+                    label += (temp + ' ' + this.unitToUnicode(config.TemperatureUnit()));
                 }
             }
             else {
                 if (config._showTextInPanel) {
                     label = temp;
                     if (this.app.GetPanelHeight() >= 35) {
-                        label += this.unitToUnicode(config._temperatureUnit);
+                        label += this.unitToUnicode(config.TemperatureUnit());
                     }
                 }
             }
             if (nonempty(config._tempTextOverride)) {
                 label = config._tempTextOverride
                     .replace("{t}", temp)
-                    .replace("{u}", this.unitToUnicode(config._temperatureUnit))
+                    .replace("{u}", this.unitToUnicode(config.TemperatureUnit()))
                     .replace("{c}", mainCondition);
             }
             this.app.SetAppletLabel(label);
@@ -874,9 +881,9 @@ class UI {
             let wind_direction = compassDirection(weather.wind.degree);
             this._currentWeatherWind.text =
                 (wind_direction != undefined ? _(wind_direction) + " " : "") +
-                    MPStoUserUnits(weather.wind.speed, config._windSpeedUnit);
-            if (config._windSpeedUnit != "Beaufort")
-                this._currentWeatherWind.text += " " + _(config._windSpeedUnit);
+                    MPStoUserUnits(weather.wind.speed, config.WindSpeedUnit());
+            if (config.WindSpeedUnit() != "Beaufort")
+                this._currentWeatherWind.text += " " + _(config.WindSpeedUnit());
             this._currentWeatherApiUnique.text = "";
             this._currentWeatherApiUniqueCap.text = "";
             if (!!weather.extra_field) {
@@ -887,7 +894,7 @@ class UI {
                         value = weather.extra_field.value.toString() + "%";
                         break;
                     case "temperature":
-                        value = TempToUserConfig(weather.extra_field.value, config._temperatureUnit, config._tempRussianStyle) + " " + this.unitToUnicode(config._temperatureUnit);
+                        value = TempToUserConfig(weather.extra_field.value, config.TemperatureUnit(), config._tempRussianStyle) + " " + this.unitToUnicode(config.TemperatureUnit());
                         break;
                     default:
                         value = _(weather.extra_field.value);
@@ -926,8 +933,8 @@ class UI {
             for (let i = 0; i < len; i++) {
                 let forecastData = weather.forecasts[i];
                 let forecastUi = this._forecast[i];
-                let t_low = TempToUserConfig(forecastData.temp_min, config._temperatureUnit, config._tempRussianStyle);
-                let t_high = TempToUserConfig(forecastData.temp_max, config._temperatureUnit, config._tempRussianStyle);
+                let t_low = TempToUserConfig(forecastData.temp_min, config.TemperatureUnit(), config._tempRussianStyle);
+                let t_high = TempToUserConfig(forecastData.temp_max, config.TemperatureUnit(), config._tempRussianStyle);
                 let first_temperature = config._temperatureHighFirst ? t_high : t_low;
                 let second_temperature = config._temperatureHighFirst ? t_low : t_high;
                 let comment = "";
@@ -937,18 +944,11 @@ class UI {
                     if (config._translateCondition)
                         comment = _(comment);
                 }
-                let dayName = GetDayName(forecastData.date, this.app.currentLocale, weather.location.timeZone);
-                if (forecastData.date) {
-                    let now = new Date();
-                    if (forecastData.date.getDate() == now.getDate())
-                        dayName = _("Today");
-                    if (forecastData.date.getDate() == new Date(now.setDate(now.getDate() + 1)).getDate())
-                        dayName = _("Tomorrow");
-                }
+                let dayName = GetDayName(forecastData.date, this.app.currentLocale, this.app.config._showForecastDates, weather.location.timeZone);
                 forecastUi.Day.text = dayName;
                 forecastUi.Temperature.text = first_temperature;
                 forecastUi.Temperature.text += ((config._tempRussianStyle) ? ELLIPSIS : " " + FORWARD_SLASH + " ");
-                forecastUi.Temperature.text += second_temperature + ' ' + this.unitToUnicode(config._temperatureUnit);
+                forecastUi.Temperature.text += second_temperature + ' ' + this.unitToUnicode(config.TemperatureUnit());
                 forecastUi.Summary.text = comment;
                 forecastUi.Icon.icon_name = (config._useCustomMenuIcons) ? forecastData.condition.customIcon : forecastData.condition.icon;
             }
@@ -971,8 +971,8 @@ class UI {
         this._providerCredit.url = provider.website;
         this._timestamp.text = _("As of") + " " + AwareDateString(weather.date, this.app.currentLocale, config._show24Hours);
         if (weather.location.distanceFrom != null) {
-            this._timestamp.text += (", " + MetreToUserUnits(weather.location.distanceFrom, this.app.config._distanceUnit)
-                + this.BigDistanceUnitFor(this.app.config._distanceUnit) + " " + _("from you"));
+            this._timestamp.text += (", " + MetreToUserUnits(weather.location.distanceFrom, this.app.config.DistanceUnit())
+                + this.BigDistanceUnitFor(this.app.config.DistanceUnit()) + " " + _("from you"));
         }
         return true;
     }
@@ -981,8 +981,8 @@ class UI {
         for (let index = 0; index < max; index++) {
             const hour = forecasts[index];
             const ui = this._hourlyForecasts[index];
-            ui.Hour.text = AwareDateString(hour.date, this.app.currentLocale, config._show24Hours, tz);
-            ui.Temperature.text = TempToUserConfig(hour.temp, config._temperatureUnit, config._tempRussianStyle) + " " + this.unitToUnicode(config._temperatureUnit);
+            ui.Hour.text = GetHoursMinutes(hour.date, this.app.currentLocale, config._show24Hours, tz, this.app.config._shortHourlyTime);
+            ui.Temperature.text = TempToUserConfig(hour.temp, config.TemperatureUnit(), config._tempRussianStyle) + " " + this.unitToUnicode(config.TemperatureUnit());
             ui.Icon.icon_name = (config._useCustomMenuIcons) ? hour.condition.customIcon : hour.condition.icon;
             hour.condition.main = capitalizeFirstLetter(hour.condition.main);
             if (config._translateCondition)
@@ -991,7 +991,7 @@ class UI {
             if (!!hour.precipitation && hour.precipitation.type != "none") {
                 let precipitationText = null;
                 if (!!hour.precipitation.volume && hour.precipitation.volume > 0) {
-                    precipitationText = MillimeterToUserUnits(hour.precipitation.volume, this.app.config._distanceUnit) + " " + ((this.app.config._distanceUnit == "metric") ? _("mm") : _("in"));
+                    precipitationText = MillimeterToUserUnits(hour.precipitation.volume, this.app.config.DistanceUnit()) + " " + ((this.app.config.DistanceUnit() == "metric") ? _("mm") : _("in"));
                 }
                 if (!!hour.precipitation.chance) {
                     precipitationText = (precipitationText == null) ? "" : (precipitationText + ", ");
@@ -1188,10 +1188,10 @@ class UI {
         this._currentWeatherApiUniqueCap = new Label({ text: '', style: this.GetTextColorStyle() });
         let rb_captions = new BoxLayout({ vertical: true, style_class: STYLE_DATABOX_CAPTIONS });
         let rb_values = new BoxLayout({ vertical: true, style_class: STYLE_DATABOX_VALUES });
-        rb_captions.add_actor(new Label({ text: _('Temperature:'), style: this.GetTextColorStyle() }));
-        rb_captions.add_actor(new Label({ text: _('Humidity:'), style: this.GetTextColorStyle() }));
-        rb_captions.add_actor(new Label({ text: _('Pressure:'), style: this.GetTextColorStyle() }));
-        rb_captions.add_actor(new Label({ text: _('Wind:'), style: this.GetTextColorStyle() }));
+        rb_captions.add_actor(new Label({ text: _('Temperature') + ":", style: this.GetTextColorStyle() }));
+        rb_captions.add_actor(new Label({ text: _('Humidity') + ":", style: this.GetTextColorStyle() }));
+        rb_captions.add_actor(new Label({ text: _('Pressure') + ":", style: this.GetTextColorStyle() }));
+        rb_captions.add_actor(new Label({ text: _('Wind') + ":", style: this.GetTextColorStyle() }));
         rb_captions.add_actor(this._currentWeatherApiUniqueCap);
         rb_values.add_actor(this._currentWeatherTemperature);
         rb_values.add_actor(this._currentWeatherHumidity);
@@ -1358,7 +1358,15 @@ class UI {
     }
 }
 class Config {
-    constructor(app, instanceID) {
+    constructor(app, instanceID, locale) {
+        this.fahrenheitCountries = ["bs", "bz", "ky", "pr", "pw", "us"];
+        this.windSpeedUnitLocales = {
+            "fi kr no pl ru se": "m/s",
+            "us gb": "mph"
+        };
+        this.distanceUnitLocales = {
+            "us gb": "imperial"
+        };
         this.WEATHER_LOCATION = "location";
         this.WEATHER_USE_SYMBOLIC_ICONS_KEY = 'useSymbolicIcons';
         this.KEYS = {
@@ -1387,10 +1395,13 @@ class Config {
             USE_CUSTOM_APPLETICONS: 'useCustomAppletIcons',
             USE_CUSTOM_MENUICONS: "useCustomMenuIcons",
             RUSSIAN_STYLE: "tempRussianStyle",
+            SHORT_HOURLY_TIME: "shortHourlyTime",
+            SHOW_FORECAST_DATES: "showForecastDates"
         };
         this.doneTypingLocation = null;
         this.currentLocation = null;
         this.app = app;
+        this.countryCode = this.GetCountryCode(locale);
         this.settings = new AppletSettings(this, UUID, instanceID);
         this.BindSettings();
     }
@@ -1408,6 +1419,21 @@ class Config {
     IconTypeChanged() {
         this.app.ui.UpdateIconType(this.IconType());
         this.app.log.Debug("Symbolic icon setting changed");
+    }
+    TemperatureUnit() {
+        if (this._temperatureUnit == "automatic")
+            return this.GetLocaleTemperateUnit(this.countryCode);
+        return this._temperatureUnit;
+    }
+    WindSpeedUnit() {
+        if (this._windSpeedUnit == "automatic")
+            return this.GetLocaleWindSpeedUnit(this.countryCode);
+        return this._windSpeedUnit;
+    }
+    DistanceUnit() {
+        if (this._distanceUnit == "automatic")
+            return this.GetLocaleDistanceUnit(this.countryCode);
+        return this._distanceUnit;
     }
     IconType() {
         return this.settings.getValue(this.WEATHER_USE_SYMBOLIC_ICONS_KEY) ?
@@ -1491,6 +1517,35 @@ class Config {
         }
         this.InjectLocationToConfig(locationData);
         return locationData;
+    }
+    GetLocaleTemperateUnit(code) {
+        if (code == null || this.fahrenheitCountries.indexOf(code) == -1)
+            return "celsius";
+        return "fahrenheit";
+    }
+    GetLocaleWindSpeedUnit(code) {
+        if (code == null)
+            return "kph";
+        for (const key in this.windSpeedUnitLocales) {
+            if (key.indexOf(code) != -1)
+                return this.windSpeedUnitLocales[key];
+        }
+        return "kph";
+    }
+    GetLocaleDistanceUnit(code) {
+        if (code == null)
+            return "metric";
+        for (const key in this.distanceUnitLocales) {
+            if (key.indexOf(code) != -1)
+                return this.distanceUnitLocales[key];
+        }
+        return "metric";
+    }
+    GetCountryCode(locale) {
+        let splitted = locale.split("-");
+        if (splitted.length < 2)
+            return null;
+        return splitted[1];
     }
 }
 class WeatherLoop {
@@ -1831,11 +1886,19 @@ class LocationStore {
         this.StoreChanged(this.locations.length);
     }
     async LoadSavedLocations() {
-        if (!await this.FileExists(this.file)) {
-            this.app.log.Print("Location store does not exist, skipping loading...");
-            return true;
+        let content = null;
+        try {
+            content = await this.LoadContents(this.file);
         }
-        let content = await this.LoadContents(this.file);
+        catch (e) {
+            let error = e;
+            if (error.matches(error.domain, Gio.IOErrorEnum.NOT_FOUND)) {
+                this.app.log.Print("Location store does not exist, skipping loading...");
+                return true;
+            }
+            this.app.log.Error("Can't load locations.json, error: " + error.message);
+            return false;
+        }
         if (content == null)
             return false;
         try {
@@ -1876,10 +1939,9 @@ class LocationStore {
             });
         });
     }
-    async FileExists(file) {
+    async FileExists(file, dictionary = false) {
         try {
-            let info = await this.GetFileInfo(file);
-            return true;
+            return file.query_exists(null);
         }
         catch (e) {
             this.app.log.Error("Cannot get file info for '" + file.get_path() + "', error: ");
@@ -1890,11 +1952,20 @@ class LocationStore {
     async LoadContents(file) {
         return new Promise((resolve, reject) => {
             file.load_contents_async(null, (obj, res) => {
-                let [result, contents] = file.load_contents_finish(res);
+                let result, contents = null;
+                try {
+                    [result, contents] = file.load_contents_finish(res);
+                }
+                catch (e) {
+                    reject(e);
+                    return e;
+                }
                 if (result != true) {
                     resolve(null);
                     return null;
                 }
+                if (contents instanceof Uint8Array)
+                    contents = ByteArray.toString(contents);
                 resolve(contents.toString());
                 return contents.toString();
             });
@@ -1908,6 +1979,11 @@ class LocationStore {
                     result = file.delete_finish(res);
                 }
                 catch (e) {
+                    let error = e;
+                    if (error.matches(error.domain, Gio.IOErrorEnum.NOT_FOUND)) {
+                        resolve(true);
+                        return true;
+                    }
                     this.app.log.Error("Can't delete file, reason: ");
                     global.log(e);
                     resolve(false);
@@ -1920,7 +1996,7 @@ class LocationStore {
         return result;
     }
     async OverwriteAndGetIOStream(file) {
-        if (!file.get_parent().query_exists(null))
+        if (!this.FileExists(file.get_parent()))
             file.get_parent().make_directory_with_parents(null);
         return new Promise((resolve, reject) => {
             file.replace_readwrite_async(null, false, Gio.FileCreateFlags.NONE, null, null, (source_object, result) => {
@@ -1931,9 +2007,16 @@ class LocationStore {
         });
     }
     async WriteAsync(outputStream, buffer) {
-        let text = buffer;
-        let result = outputStream.write(text, null);
-        return true;
+        let text = ByteArray.fromString(buffer);
+        if (outputStream.is_closed())
+            return false;
+        return new Promise((resolve, reject) => {
+            outputStream.write_bytes_async(text, null, null, (obj, res) => {
+                let ioStream = outputStream.write_bytes_finish(res);
+                resolve(true);
+                return true;
+            });
+        });
     }
     async CloseStream(stream) {
         return new Promise((resolve, reject) => {

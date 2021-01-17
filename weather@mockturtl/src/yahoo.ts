@@ -9,17 +9,12 @@ function importModule(path: string): any {
     }
 }
 
-const UUID = "weather@mockturtl"
-imports.gettext.bindtextdomain(UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
-function _(str: string): string {
-    return imports.gettext.dgettext(UUID, str)
-}
-
 var utils = importModule("utils");
 var isCoordinate = utils.isCoordinate as (text: any) => boolean;
 var CelsiusToKelvin = utils.CelsiusToKelvin as (celsius: number) => number;
 var KPHtoMPS = utils.MPHtoMPS as (speed: number) => number;
 var weatherIconSafely = utils.weatherIconSafely as (code: BuiltinIcons[], icon_type: imports.gi.St.IconType) => BuiltinIcons;
+var _ = utils._ as (str: string) => string;
 
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
@@ -153,8 +148,8 @@ class Yahoo implements WeatherProvider {
             return result;
         }
         catch (e) {
-            this.app.log.Error("DarkSky payload parsing error: " + e)
-            this.app.HandleError({ type: "soft", detail: "unusual payload", service: "darksky", message: _("Failed to Process Weather Info") });
+            this.app.log.Error("Yahoo payload parsing error: " + e)
+            this.app.HandleError({ type: "soft", detail: "unusual payload", service: "yahoo", message: _("Failed to Process Weather Info") });
             return null;
         }
     };
@@ -473,7 +468,8 @@ const YahooConditionLibrary = [
     _("Mostly Cloudy"),
     _("Partly Cloudy"),
     _("Clear"),
-    _("Sunny"),
+	_("Sunny"),
+	_("Mostly Sunny"),
     _("Fair"),
     _("Mixed Rain and Hail"),
     _("Hot"),

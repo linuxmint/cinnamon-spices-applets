@@ -44,17 +44,13 @@ function importModule(path) {
         return AppletDir[path];
     }
 }
-var UUID = "weather@mockturtl";
-imports.gettext.bindtextdomain(UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
-function _(str) {
-    return imports.gettext.dgettext(UUID, str);
-}
 var utils = importModule("utils");
 var isCoordinate = utils.isCoordinate;
 var isLangSupported = utils.isLangSupported;
 var CelsiusToKelvin = utils.CelsiusToKelvin;
 var IsNight = utils.IsNight;
 var weatherIconSafely = utils.weatherIconSafely;
+var _ = utils._;
 var Climacell = (function () {
     function Climacell(_app) {
         this.prettyName = "Climacell";
@@ -239,7 +235,7 @@ var Climacell = (function () {
                 type: "hard",
                 userError: true,
                 detail: "bad key",
-                service: "darksky",
+                service: "climacell",
                 message: _("Please Make sure you\nentered the API key correctly and your account is not locked")
             };
         }
@@ -248,8 +244,8 @@ var Climacell = (function () {
                 type: "hard",
                 userError: true,
                 detail: "no key",
-                service: "darksky",
-                message: _("Please Make sure you\nentered the API key what you have from DarkSky")
+                service: "climacell",
+                message: _("Please Make sure you\nentered the API key what you have from Climacell")
             };
         }
         return null;

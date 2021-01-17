@@ -36,23 +36,24 @@ const { addTween } = imports.ui.tweener;
 const { TextIconApplet, AllowedLayout, AppletPopupMenu, MenuItem } = imports.ui.applet;
 const { PopupMenuManager, PopupSeparatorMenuItem } = imports.ui.popupMenu;
 const { AppletSettings, BindingDirection } = imports.ui.settings;
-const { spawnCommandLine, spawn_async, trySpawnCommandLine } = imports.misc.util;
+const { spawnCommandLine, spawn_async, spawnCommandLineAsyncIO } = imports.misc.util;
 const { SystemNotificationSource, Notification } = imports.ui.messageTray;
 const { SignalManager } = imports.misc.signalManager;
 const { messageTray, themeManager } = imports.ui.main;
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
+const ByteArray = imports.byteArray;
 
 var utils = importModule("utils");
-var GetDayName = utils.GetDayName as (date: Date, locale: string, tz?: string) => string;
-var GetHoursMinutes = utils.GetHoursMinutes as (date: Date, locale: string, hours24Format: boolean, tz?: string) => string;
+var GetDayName = utils.GetDayName as (date: Date, locale: string, showDate: boolean, tz?: string) => string;
+var GetHoursMinutes = utils.GetHoursMinutes as (date: Date, locale: string, hours24Format: boolean, tz?: string, onlyHours?: boolean) => string;
 var capitalizeFirstLetter = utils.capitalizeFirstLetter as (description: string) => string;
 var TempToUserConfig = utils.TempToUserConfig as (kelvin: number, units: WeatherUnits, russianStyle: boolean) => string;
 var PressToUserUnits = utils.PressToUserUnits as (hpa: number, units: WeatherPressureUnits) => number;
 var compassDirection = utils.compassDirection as (deg: number) => string;
 var MPStoUserUnits = utils.MPStoUserUnits as (mps: number, units: WeatherWindSpeedUnits) => string;
 var nonempty = utils.nonempty as (str: string) => boolean;
-var AwareDateString = utils.AwareDateString as (date: Date, locale: string, hours24Format: boolean, tz?: string) => string;
+var AwareDateString = utils.AwareDateString as (date: Date, locale: string, hours24Format: boolean, tz?: string, ignoreMinutes?: boolean) => string;
 var get = utils.get as (p: string[], o: any) => any;
 const delay = utils.delay as (ms: number) => Promise<void>;
 var isCoordinate = utils.isCoordinate as (text: any) => boolean;
@@ -61,6 +62,8 @@ const clearTimeout = utils.clearTimeout as (id: any) => void;
 var MillimeterToUserUnits = utils.MillimeterToUserUnits as (mm: number, distanceUnit: DistanceUnits) => number;
 var shadeHexColor = utils.shadeHexColor as (color: string, percent: number) => string;
 var MetreToUserUnits = utils.MetreToUserUnits as (m: number, distanceUnit: DistanceUnits) => number;
+var constructJsLocale = utils.constructJsLocale as (locale: string) => string;
+var _ = utils._ as (str: string) => string;
 
 // This always evaluates to True because "var Promise" line exists inside 
 if (typeof Promise != "function") {
@@ -130,11 +133,6 @@ const DATA_SERVICE: ServiceMap = {
 //
 //----------------------------------------------------------------------
 
-imports.gettext.bindtextdomain(UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
-function _(str: string): string {
-    return imports.gettext.dgettext(UUID, str)
-}
-
 function uuidv4() {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
         var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
@@ -184,13 +182,16 @@ class WeatherApplet extends TextIconApplet {
     public constructor(metadata: any, orientation: imports.gi.St.Side, panelHeight: number, instanceId: number) {
         super(orientation, panelHeight, instanceId);
         this.log = new Log(instanceId);
-		this.currentLocale = this.constructJsLocale(get_language_names()[0]);
+		this.currentLocale = constructJsLocale(get_language_names()[0]);
 		this.log.Debug("Applet created with instanceID " + instanceId);
         this.log.Debug("System locale is " + this.currentLocale);
         this.log.Debug("Appletdir is: " + this.appletDir);
         this._httpSession.user_agent = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:37.0) Gecko/20100101 Firefox/37.0"; // ipapi blocks non-browsers agents, imitating browser
         this._httpSession.timeout = 10;
         this._httpSession.idle_timeout = 10;
+
+        // importing custom translations
+        imports.gettext.bindtextdomain(UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
 
         this.msgSource = new SystemNotificationSource(_("Weather Applet"));
         messageTray.add(this.msgSource);
@@ -199,7 +200,7 @@ class WeatherApplet extends TextIconApplet {
         imports.gi.Gtk.IconTheme.get_default().append_search_path(this.appletDir + "/../icons");
 
         this.SetAppletOnPanel();
-        this.config = new Config(this, instanceId);
+        this.config = new Config(this, instanceId, this.currentLocale);
         this.AddRefreshButton();
         this.EnsureProvider();
         this.ui = new UI(this, orientation);
@@ -315,12 +316,30 @@ class WeatherApplet extends TextIconApplet {
 
     /** Spawn a command and await for the output it gives */
     public async SpawnProcess(command: string[]): Promise<any> {
-        let json = await new Promise((resolve, reject) => {
-            spawn_async(command, (aStdout: any) => {
-                resolve(aStdout);
+        // prepare command
+        let cmd = "";
+        for (let index = 0; index < command.length; index++) {
+            const element = command[index];
+            cmd += "'" + element + "' ";
+        }
+        try {
+            let json = await new Promise((resolve, reject) => {
+                spawnCommandLineAsyncIO(cmd, (aStdout: string, err: string, exitCode: number) => {
+                    if (exitCode != 0) {
+                        reject(err);
+                    }
+                    else {
+                        resolve(aStdout);
+                    }
+                });
             });
-        });
-        return json;
+            return json;
+        }
+        catch(e) {
+            this.log.Error("Error calling command " + cmd + ", error: ");
+            global.log(e);
+            return null;
+        }
     }
 
 	/**
@@ -539,21 +558,6 @@ class WeatherApplet extends TextIconApplet {
             default:
                 return null;
         }
-    }
-
-	/**
-	 * Convert Linux locale to JS locale format
-	 * @param locale Linux locale string
-	 */
-    private constructJsLocale(locale: string): string {
-        let jsLocale = locale.split(".")[0];
-        let tmp: string[] = jsLocale.split("_");
-        jsLocale = "";
-        for (let i = 0; i < tmp.length; i++) {
-            if (i != 0) jsLocale += "-";
-            jsLocale += tmp[i].toLowerCase();
-        }
-        return jsLocale;
     }
 
 	/**
@@ -888,12 +892,13 @@ class UI {
 	 * @param color Background color
 	 */
     private IsLightTheme(): boolean {
-        // background
-        let color = this.menu.actor.get_theme_node().get_background_color();
+        // using foreground color, more reliable than background color (more themes has it)
+		let color = this.menu.actor.get_theme_node().get_color("color");
         // luminance between 0 and 1
-        let luminance = (2126 * color.red + 7152 * color.green + 722 * color.blue) / 10000 / 255;
+		let luminance = (2126 * color.red + 7152 * color.green + 722 * color.blue) / 10000 / 255;
+		// Inverse, we assume the bacground color here
+		luminance = Math.abs(1 - luminance);
         this.app.log.Debug("Theme is Light: " + (luminance > 0.5));
-
         return (luminance > 0.5);
     }
 
@@ -1027,7 +1032,7 @@ class UI {
 		// (or cinnamon does not think there is enough), the text gets superimposed on top of
 		// each other.
 		// setting the min-height forces to draw with the view's requested height without
-		// interfering animations.
+		// interfering with animations.
 		this._hourlyScrollView.style = "min-height: " + naturalHeight.toString() + "px;";
 
         if (global.settings.get_boolean("desktop-effects-on-menus")) {
@@ -1156,8 +1161,8 @@ class UI {
             // Temperature
             let temp = "";
             if (weather.temperature != null) {
-                temp = TempToUserConfig(weather.temperature, config._temperatureUnit, config._tempRussianStyle);
-                this._currentWeatherTemperature.text = temp + " " + this.unitToUnicode(config._temperatureUnit);
+                temp = TempToUserConfig(weather.temperature, config.TemperatureUnit(), config._tempRussianStyle);
+                this._currentWeatherTemperature.text = temp + " " + this.unitToUnicode(config.TemperatureUnit());
             }
 
             // Applet panel label
@@ -1171,7 +1176,7 @@ class UI {
                     if (label != "") {
                         label += " ";
                     }
-                    label += (temp + ' ' + this.unitToUnicode(config._temperatureUnit));
+                    label += (temp + ' ' + this.unitToUnicode(config.TemperatureUnit()));
                 }
             }
             // Vertical panels
@@ -1181,7 +1186,7 @@ class UI {
                     // Vertical panel width is more than this value then we has space
                     // to show units
                     if (this.app.GetPanelHeight() >= 35) {
-                        label += this.unitToUnicode(config._temperatureUnit);
+                        label += this.unitToUnicode(config.TemperatureUnit());
                     }
                 }
             }
@@ -1190,7 +1195,7 @@ class UI {
             if (nonempty(config._tempTextOverride)) {
                 label = config._tempTextOverride
                     .replace("{t}", temp)
-                    .replace("{u}", this.unitToUnicode(config._temperatureUnit))
+                    .replace("{u}", this.unitToUnicode(config.TemperatureUnit()))
                     .replace("{c}", mainCondition);
             }
 
@@ -1206,9 +1211,9 @@ class UI {
             let wind_direction = compassDirection(weather.wind.degree);
             this._currentWeatherWind.text =
                 (wind_direction != undefined ? _(wind_direction) + " " : "") +
-                MPStoUserUnits(weather.wind.speed, config._windSpeedUnit);
+                MPStoUserUnits(weather.wind.speed, config.WindSpeedUnit());
             // No need to display unit to Beaufort scale
-            if (config._windSpeedUnit != "Beaufort") this._currentWeatherWind.text += " " + _(config._windSpeedUnit);
+            if (config.WindSpeedUnit() != "Beaufort") this._currentWeatherWind.text += " " + _(config.WindSpeedUnit());
 
             // API Unique display
             this._currentWeatherApiUnique.text = "";
@@ -1221,7 +1226,7 @@ class UI {
                         value = weather.extra_field.value.toString() + "%";
                         break;
                     case "temperature":
-                        value = TempToUserConfig(weather.extra_field.value, config._temperatureUnit, config._tempRussianStyle) + " " + this.unitToUnicode(config._temperatureUnit);
+                        value = TempToUserConfig(weather.extra_field.value, config.TemperatureUnit(), config._tempRussianStyle) + " " + this.unitToUnicode(config.TemperatureUnit());
                         break;
                     default:
                         value = _(weather.extra_field.value);
@@ -1266,8 +1271,8 @@ class UI {
                 let forecastData = weather.forecasts[i];
                 let forecastUi = this._forecast[i];
 
-                let t_low = TempToUserConfig(forecastData.temp_min, config._temperatureUnit, config._tempRussianStyle);
-                let t_high = TempToUserConfig(forecastData.temp_max, config._temperatureUnit, config._tempRussianStyle);
+                let t_low = TempToUserConfig(forecastData.temp_min, config.TemperatureUnit(), config._tempRussianStyle);
+                let t_high = TempToUserConfig(forecastData.temp_max, config.TemperatureUnit(), config._tempRussianStyle);
 
                 let first_temperature = config._temperatureHighFirst ? t_high : t_low;
                 let second_temperature = config._temperatureHighFirst ? t_low : t_high;
@@ -1281,20 +1286,14 @@ class UI {
                 }
 
                 // Day Names
-                let dayName: string = GetDayName(forecastData.date, this.app.currentLocale, weather.location.timeZone);
-
-                if (forecastData.date) {
-                    let now = new Date();
-                    if (forecastData.date.getDate() == now.getDate()) dayName = _("Today");
-                    if (forecastData.date.getDate() == new Date(now.setDate(now.getDate() + 1)).getDate()) dayName = _("Tomorrow");
-                }
+                let dayName: string = GetDayName(forecastData.date, this.app.currentLocale, this.app.config._showForecastDates, weather.location.timeZone);
 
                 forecastUi.Day.text = dayName;
                 forecastUi.Temperature.text = first_temperature;
                 // As Russian Tradition, -temp...+temp
                 // See https://github.com/linuxmint/cinnamon-spices-applets/issues/618
                 forecastUi.Temperature.text += ((config._tempRussianStyle) ? ELLIPSIS : " " + FORWARD_SLASH + " ");
-                forecastUi.Temperature.text += second_temperature + ' ' + this.unitToUnicode(config._temperatureUnit);
+                forecastUi.Temperature.text += second_temperature + ' ' + this.unitToUnicode(config.TemperatureUnit());
                 forecastUi.Summary.text = comment;
                 forecastUi.Icon.icon_name = (config._useCustomMenuIcons) ? forecastData.condition.customIcon : forecastData.condition.icon;
             }
@@ -1317,8 +1316,8 @@ class UI {
         this._timestamp.text = _("As of") + " " + AwareDateString(weather.date, this.app.currentLocale, config._show24Hours);
         if (weather.location.distanceFrom != null) {
             this._timestamp.text += (
-                ", " + MetreToUserUnits(weather.location.distanceFrom, this.app.config._distanceUnit)
-                + this.BigDistanceUnitFor(this.app.config._distanceUnit) + " " + _("from you")
+                ", " + MetreToUserUnits(weather.location.distanceFrom, this.app.config.DistanceUnit())
+                + this.BigDistanceUnitFor(this.app.config.DistanceUnit()) + " " + _("from you")
             );
         }
         return true;
@@ -1330,8 +1329,8 @@ class UI {
             const hour = forecasts[index];
             const ui = this._hourlyForecasts[index];
 
-            ui.Hour.text = AwareDateString(hour.date, this.app.currentLocale, config._show24Hours, tz);
-            ui.Temperature.text = TempToUserConfig(hour.temp, config._temperatureUnit, config._tempRussianStyle) + " " + this.unitToUnicode(config._temperatureUnit);
+            ui.Hour.text = GetHoursMinutes(hour.date, this.app.currentLocale, config._show24Hours, tz, this.app.config._shortHourlyTime);
+            ui.Temperature.text = TempToUserConfig(hour.temp, config.TemperatureUnit(), config._tempRussianStyle) + " " + this.unitToUnicode(config.TemperatureUnit());
             ui.Icon.icon_name = (config._useCustomMenuIcons) ? hour.condition.customIcon : hour.condition.icon;
 
             hour.condition.main = capitalizeFirstLetter(hour.condition.main);
@@ -1340,7 +1339,7 @@ class UI {
             if (!!hour.precipitation && hour.precipitation.type != "none") {
                 let precipitationText = null;
                 if (!!hour.precipitation.volume && hour.precipitation.volume > 0) {
-                    precipitationText = MillimeterToUserUnits(hour.precipitation.volume, this.app.config._distanceUnit) + " " + ((this.app.config._distanceUnit == "metric") ? _("mm") : _("in"));
+                    precipitationText = MillimeterToUserUnits(hour.precipitation.volume, this.app.config.DistanceUnit()) + " " + ((this.app.config.DistanceUnit() == "metric") ? _("mm") : _("in"));
                 }
                 if (!!hour.precipitation.chance) {
                     precipitationText = (precipitationText == null) ? "" : (precipitationText + ", ")
@@ -1578,10 +1577,10 @@ class UI {
 
         let rb_captions = new BoxLayout({ vertical: true, style_class: STYLE_DATABOX_CAPTIONS })
         let rb_values = new BoxLayout({ vertical: true, style_class: STYLE_DATABOX_VALUES })
-        rb_captions.add_actor(new Label({ text: _('Temperature:'), style: this.GetTextColorStyle() }));
-        rb_captions.add_actor(new Label({ text: _('Humidity:'), style: this.GetTextColorStyle() }));
-        rb_captions.add_actor(new Label({ text: _('Pressure:'), style: this.GetTextColorStyle() }));
-        rb_captions.add_actor(new Label({ text: _('Wind:'), style: this.GetTextColorStyle() }));
+        rb_captions.add_actor(new Label({ text: _('Temperature') + ":", style: this.GetTextColorStyle() }));
+        rb_captions.add_actor(new Label({ text: _('Humidity') + ":", style: this.GetTextColorStyle() }));
+        rb_captions.add_actor(new Label({ text: _('Pressure') + ":", style: this.GetTextColorStyle() }));
+        rb_captions.add_actor(new Label({ text: _('Wind') + ":", style: this.GetTextColorStyle() }));
         rb_captions.add_actor(this._currentWeatherApiUniqueCap);
         rb_values.add_actor(this._currentWeatherTemperature);
         rb_values.add_actor(this._currentWeatherHumidity);
@@ -1795,8 +1794,34 @@ class UI {
 
     }
 }
-
+interface WindSpeedLocalePrefs {
+	[key: string]: WeatherWindSpeedUnits;
+}
+interface DistanceUnitLocalePrefs {
+	[key: string]: DistanceUnits;
+}
 class Config {
+	// Info partially from https://github.com/unicode-org/cldr/blob/release-38-1/common/supplemental/units.xml
+	/**
+	 * Default is celsius
+	 */
+	fahrenheitCountries = ["bs", "bz", "ky", "pr", "pw", "us"];
+
+	/**
+	 * Default kph, gb added to mph keys
+	 */
+	windSpeedUnitLocales: WindSpeedLocalePrefs = {
+		"fi kr no pl ru se": "m/s",
+		"us gb": "mph"
+	}
+	
+	/**
+	 * Default metric
+	 */
+	distanceUnitLocales: DistanceUnitLocalePrefs = {
+		"us gb": "imperial"
+	}
+
     WEATHER_LOCATION = "location"
     WEATHER_USE_SYMBOLIC_ICONS_KEY = 'useSymbolicIcons'
 
@@ -1829,6 +1854,8 @@ class Config {
         USE_CUSTOM_APPLETICONS: 'useCustomAppletIcons',
         USE_CUSTOM_MENUICONS: "useCustomMenuIcons",
         RUSSIAN_STYLE: "tempRussianStyle",
+        SHORT_HOURLY_TIME: "shortHourlyTime",
+        SHOW_FORECAST_DATES: "showForecastDates"
     }
 
     // Settings variables to bind to
@@ -1837,10 +1864,10 @@ class Config {
     public readonly _dataService: Services;
     private readonly _location: string;
     public readonly _translateCondition: boolean;
-    public readonly _temperatureUnit: WeatherUnits;
+    private readonly _temperatureUnit: WeatherUnits;
     public readonly _pressureUnit: WeatherPressureUnits;
-    public readonly _windSpeedUnit: WeatherWindSpeedUnits;
-    public readonly _distanceUnit: DistanceUnits;
+    private readonly _windSpeedUnit: WeatherWindSpeedUnits;
+    private readonly _distanceUnit: DistanceUnits;
     public readonly _show24Hours: boolean;
     public readonly _apiKey: string;
     public readonly _forecastDays: number;
@@ -1858,6 +1885,8 @@ class Config {
     public readonly _useCustomMenuIcons: boolean;
     public readonly _tempTextOverride: string;
     public readonly _tempRussianStyle: boolean;
+    public readonly _shortHourlyTime: boolean;
+    public readonly _showForecastDates: boolean;
 
     public keybinding: any;
 
@@ -1866,10 +1895,12 @@ class Config {
     public currentLocation: LocationData = null;
 
     private settings: imports.ui.settings.AppletSettings;
-    private app: WeatherApplet;
+	private app: WeatherApplet;
+	private countryCode: string;
 
-    constructor(app: WeatherApplet, instanceID: number) {
-        this.app = app;
+    constructor(app: WeatherApplet, instanceID: number, locale: string) {
+		this.app = app;
+		this.countryCode = this.GetCountryCode(locale);
         this.settings = new AppletSettings(this, UUID, instanceID);
         this.BindSettings();
     }
@@ -1899,7 +1930,33 @@ class Config {
     private IconTypeChanged() {
         this.app.ui.UpdateIconType(this.IconType());
         this.app.log.Debug("Symbolic icon setting changed");
-    }
+	}
+	
+	/**
+	 * @returns Units, automatic is already resolved here
+	 */
+	public TemperatureUnit(): WeatherUnits {
+		if (this._temperatureUnit == "automatic") 
+			return this.GetLocaleTemperateUnit(this.countryCode);
+		return this._temperatureUnit;
+	}
+
+	/**
+	 * @returns Units, automatic is already resolved here
+	 */
+	public WindSpeedUnit(): WeatherWindSpeedUnits {
+		if (this._windSpeedUnit == "automatic") 
+			return this.GetLocaleWindSpeedUnit(this.countryCode);
+		return this._windSpeedUnit;
+	}
+
+	/**
+	 * @returns Units, automatic is already resolved here
+	 */
+	public DistanceUnit(): DistanceUnits {
+		if (this._distanceUnit == "automatic") return this.GetLocaleDistanceUnit(this.countryCode);
+		return this._distanceUnit;
+	}
 
 	/**
 	 * Gets Icon type based on user config
@@ -2006,8 +2063,40 @@ class Config {
 
         this.InjectLocationToConfig(locationData);
         return locationData;
-    }
+	}
+	
+	// UTILS
 
+	private GetLocaleTemperateUnit(code: string): WeatherUnits {
+		if (code == null || this.fahrenheitCountries.indexOf(code) == -1) return "celsius";
+		return "fahrenheit";
+	}
+
+	private GetLocaleWindSpeedUnit(code: string): WeatherWindSpeedUnits {
+		if (code == null) return "kph";
+
+		for (const key in this.windSpeedUnitLocales) {
+			if (key.indexOf(code) != -1) return this.windSpeedUnitLocales[key];
+		}
+		return "kph";
+	}
+
+	private GetLocaleDistanceUnit(code: string): DistanceUnits {
+		if (code == null) return "metric";
+
+		for (const key in this.distanceUnitLocales) {
+			if (key.indexOf(code) != -1) return this.distanceUnitLocales[key];
+		}
+		return "metric";
+	}
+
+	private GetCountryCode(locale: string) {
+		let splitted = locale.split("-");
+		// There is no country code
+		if (splitted.length < 2) return null;
+	
+		return splitted[1];
+	}
 }
 
 class WeatherLoop {
@@ -2442,12 +2531,21 @@ class LocationStore {
     }
 
     private async LoadSavedLocations(): Promise<boolean> {
-        if (!await this.FileExists(this.file)) {
-            this.app.log.Print("Location store does not exist, skipping loading...")
-            return true;
+        let content = null;
+        try {
+            content = await this.LoadContents(this.file);
+        }
+        catch(e) {
+            let error: GJSError = e;
+            if (error.matches(error.domain, Gio.IOErrorEnum.NOT_FOUND)) {
+                this.app.log.Print("Location store does not exist, skipping loading...")
+                return true;
+            }
+
+            this.app.log.Error("Can't load locations.json, error: " + error.message);
+            return false;
         }
 
-        let content = await this.LoadContents(this.file);
         if (content == null) return false;
 
         try {
@@ -2486,6 +2584,10 @@ class LocationStore {
     // IO
     // --------------------------
 
+    /**
+     * NOT WORKING, fileInfo completely empty atm
+     * @param file 
+     */
     private async GetFileInfo(file: imports.gi.Gio.File): Promise<imports.gi.Gio.FileInfo> {
         return new Promise((resolve, reject) => {
             file.query_info_async("", Gio.FileQueryInfoFlags.NONE, null, null, (obj, res) => {
@@ -2496,10 +2598,13 @@ class LocationStore {
         });
     }
 
-    private async FileExists(file: imports.gi.Gio.File): Promise<boolean> {
+    private async FileExists(file: imports.gi.Gio.File, dictionary: boolean = false): Promise<boolean> {
         try {
+            return file.query_exists(null);
+            /*// fileInfo doesn't work, don't use for now
             let info = await this.GetFileInfo(file);
-            return true;
+            let type = info.get_size(); // type always 0
+            return true;*/
         }
         catch (e) {
             this.app.log.Error("Cannot get file info for '" + file.get_path() + "', error: ");
@@ -2508,17 +2613,28 @@ class LocationStore {
         }
     }
 
+    /**
+     * Loads contents of a file. Can throw Gio.IOErroEnum exception. (e.g file does not exist)
+     * @param file 
+     */
     private async LoadContents(file: imports.gi.Gio.File): Promise<string> {
         return new Promise((resolve, reject) => {
             file.load_contents_async(null, (obj, res) => {
-                let [result, contents] = file.load_contents_finish(res);
+                let result, contents = null;
+                try {
+                    [result, contents] = file.load_contents_finish(res);
+                }
+                catch(e) {
+                    reject(e);
+                    return e;
+                }
                 if (result != true) {
                     resolve(null);
                     return null;
                 }
-				/*if (content instanceof Uint8Array) { // mozjs60 future-proofing
-							content = ByteArray.toString(content); // const ByteArray = imports.byteArray;
-						} else {*/
+				if (contents instanceof Uint8Array) // mozjs60 future-proofing
+                    contents = ByteArray.toString(contents);
+
                 resolve(contents.toString());
                 return contents.toString();
             });
@@ -2533,6 +2649,12 @@ class LocationStore {
                     result = file.delete_finish(res);
                 }
                 catch (e) {
+                    let error: GJSError = e;
+                    if (error.matches(error.domain, Gio.IOErrorEnum.NOT_FOUND)) {
+                        resolve(true);
+                        return true;
+                    }
+
                     this.app.log.Error("Can't delete file, reason: ");
                     global.log(e);
                     resolve(false);
@@ -2548,7 +2670,8 @@ class LocationStore {
     }
 
     private async OverwriteAndGetIOStream(file: imports.gi.Gio.File): Promise<imports.gi.Gio.IOStream> {
-        if (!file.get_parent().query_exists(null)) file.get_parent().make_directory_with_parents(null);
+        if (!this.FileExists(file.get_parent())) 
+            file.get_parent().make_directory_with_parents(null); //don't know if this is a blocking call or not
 
         return new Promise((resolve, reject) => {
             file.replace_readwrite_async(null, false, Gio.FileCreateFlags.NONE, null, null, (source_object, result) => {
@@ -2560,19 +2683,18 @@ class LocationStore {
     }
 
     private async WriteAsync(outputStream: imports.gi.Gio.OutputStream, buffer: string): Promise<boolean> {
-        let text = buffer;
-        let result = outputStream.write(text as any, null);
-        return true;
-        //TODO: Figure out why async version is not working
-		/*
+        // normal write_async can't use normal string or ByteArray.fromString
+        // so we save using write_bytes_async, seem to work well.
+        let text = ByteArray.fromString(buffer);
+        if (outputStream.is_closed()) return false;
+		
 		return new Promise((resolve: any, reject: any) => {
-			outputStream.write_async(text as any, null, null, (obj, res) => {
-				// TODO: Not working, bad buffer
-				let ioStream = outputStream.write_finish(res);
+			outputStream.write_bytes_async(text as any, null, null, (obj, res) => {
+				let ioStream = outputStream.write_bytes_finish(res);
 				resolve(true);
 				return true;
 			});
-		});*/
+        });
     }
 
     private async CloseStream(stream: imports.gi.Gio.OutputStream | imports.gi.Gio.InputStream | imports.gi.Gio.FileIOStream): Promise<boolean> {
@@ -2630,7 +2752,6 @@ const FORWARD_SLASH = '\u002F';
 //----------------------------------------------------------------------
 
 function main(metadata: any, orientation: imports.gi.St.Side, panelHeight: number, instanceId: number) {
-    //log("v" + metadata.version + ", cinnamon " + Config.PACKAGE_VERSION)
     return new WeatherApplet(metadata, orientation, panelHeight, instanceId);
 }
 
@@ -2639,16 +2760,16 @@ type LocationCache = {
 }
 
 /** Units Used in Options. Change Options list if You change this! */
-type WeatherUnits = 'celsius' | 'fahrenheit';
+type WeatherUnits = 'automatic' | 'celsius' | 'fahrenheit';
 
 /** Units Used in Options. Change Options list if You change this! */
-type WeatherWindSpeedUnits = 'kph' | 'mph' | 'm/s' | 'Knots' | 'Beaufort';
+type WeatherWindSpeedUnits = 'automatic' | 'kph' | 'mph' | 'm/s' | 'Knots' | 'Beaufort';
 
 /** Units used in Options. Change Options list if You change this! */
 type WeatherPressureUnits = 'hPa' | 'mm Hg' | 'in Hg' | 'Pa' | 'psi' | 'atm' | 'at';
 
 /** Change settings-scheme if you change this! */
-type DistanceUnits = 'metric' | 'imperial';
+type DistanceUnits = 'automatic' | 'metric' | 'imperial';
 
 interface WeatherData {
     date: Date;

@@ -83,6 +83,8 @@
 				"forecastRows",
 				"showSunrise",
 				"show24Hours",
+				"showForecastDates",
+				"shortHourlyTime",
 				"temperatureHighFirst",
 				"tempRussianStyle",
 				"locationLabelOverride"
@@ -183,7 +185,7 @@
 		"default": "London,UK",
 		"dependency": "manualLocation",
 		"description": "Location",
-		"tooltip": "Acceptable inputs are Latitude,Longitude. e.g.: 68.1932,17.1426 or an address.\nWaits for 3 seconds after you stop typing then refreshes the weather."
+		"tooltip": "Acceptable inputs are Latitude,Longitude. e.g.: 68.1932,17.1426 or an address.\nWaits for 3 seconds after you stop typing before refreshes the weather."
 	},
 	"saveLocation": {
 		"type": "button",
@@ -237,18 +239,21 @@
 	},
 	"temperatureUnit": {
 		"type": "radiogroup",
-		"default": "celsius",
+		"default": "automatic",
 		"description": "Temperature unit",
 		"options": {
-		"celsius": "celsius",
-		"fahrenheit": "fahrenheit"
-		}
+			"Automatic": "automatic",
+			"celsius": "celsius",
+			"fahrenheit": "fahrenheit"
+		},
+		"tooltip": "Automatic will try to guess your preference based your current display language."
 	},
 	"windSpeedUnit": {
 		"type": "combobox",
-		"default": "kph",
+		"default": "automatic",
 		"description": "Wind speed unit",
 		"options": {
+			"Automatic": "automatic",
 			"kph": "kph",
 			"mph": "mph",
 			"m/s": "m/s",
@@ -272,12 +277,14 @@
 	},
 	"distanceUnit": {
 		"type": "combobox",
-		"default": "metric",
+		"default": "automatic",
 		"description": "Distance unit",
 		"options": {
+			"Automatic": "automatic",
 			"Metric": "metric",
 			"Imperial": "imperial"
-		}
+		},
+		"tooltip": "Automatic will try to guess your preference based your current display language."
 	},
 	"showTextInPanel": {
 		"type": "checkbox",
@@ -341,6 +348,18 @@
 		"default": false,
 		"description": "Show high temperature first in forecast"
 	},
+	"shortHourlyTime": {
+		"type": "checkbox",
+		"default": false,
+		"description": "Only display hours for hourly forecast time",
+		"tooltip": "Instead of 15:00 or 3 pm it will show up as 15 or 3 pm"
+	},
+	"showForecastDates": {
+		"type": "checkbox",
+		"default": false,
+		"description": "Display date for daily forecasts",
+		"tooltip": "Like \"Friday 15\""
+	},
 	"tempRussianStyle": {
 		"type": "checkbox",
 		"default": false,
@@ -360,7 +379,7 @@
 		"type": "checkbox",
 		"default": false,
 		"description": "Less verbose conditions",
-		"tooltip": "Currently only used with DarkSky "
+		"tooltip": "Currently only used with DarkSky."
 	},
 	"useSymbolicIcons": {
 		"type": "checkbox",
@@ -396,7 +415,7 @@
 	},
 	"provider-explanation": {
 		"type": "label",
-		"description": "You can use several different weather forecast providers that you choose under the first Weather Tab in this Configuration panel. Some providers require a API key to work, some have regional limits, differ in forecast length, and they all need a functional internet connection to the chosen service. The options are described in detail on the Cinnamon Spices Website, what you can access with the button further down."
+		"description": "You can use several different weather forecast providers that you choose under the first Weather Tab in this Configuration panel. Some providers require a API key to work, some have regional limits, differ in forecast length, and they all need a functional internet connection to work. The options are described in detail on the Cinnamon Spices Website, what you can access with the button further down."
 	},
 	"loc-info": {
 		"type": "label",

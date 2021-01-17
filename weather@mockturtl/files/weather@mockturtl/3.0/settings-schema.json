@@ -54,7 +54,7 @@
     "default": "London,UK",
     "dependency": "manualLocation",
     "description": "Location - Coordinates",
-    "tooltip": "Acceptable inputs is Latitude,Longitude"
+    "tooltip": "Acceptable inputs are Latitude,Longitude. e.g.: 68.1932,17.1426 or an address.\nWaits for 3 seconds after you stop typing before refreshes the weather."
   },
   "getLocation": {
     "type": "button",
@@ -96,18 +96,21 @@
   },
   "temperatureUnit": {
     "type": "radiogroup",
-    "default": "celsius",
+    "default": "automatic",
     "description": "Temperature unit",
     "options": {
+	    "Automatic": "automatic",
       "celsius": "celsius",
       "fahrenheit": "fahrenheit"
-    }
+    },
+    "tooltip": "Automatic will try to guess your preference based your current display language."
   },
   "windSpeedUnit": {
     "type": "combobox",
-    "default": "kph",
+    "default": "automatic",
     "description": "Wind speed unit",
     "options": {
+	    "Automatic": "automatic",
       "kph": "kph",
       "mph": "mph",
       "m/s": "m/s",
@@ -131,12 +134,14 @@
   },
   "distanceUnit": {
 		"type": "combobox",
-		"default": "metric",
+		"default": "automatic",
 		"description": "Distance unit",
 		"options": {
+			"Automatic": "automatic",
 			"Metric": "metric",
 			"Imperial": "imperial"
-		}
+    },
+    "tooltip": "Automatic will try to guess your preference based your current display language."
 	},
   "panelSettings": {
     "type": "header",
@@ -203,6 +208,18 @@
     "default": false,
     "description": "Display time in 24 hour format"
   },
+  "shortHourlyTime": {
+		"type": "checkbox",
+		"default": false,
+		"description": "Only display hours for hourly forecast time",
+		"tooltip": "Instead of 15:00 or 3 pm it will show up as 15 or 3 pm"
+	},
+	"showForecastDates": {
+		"type": "checkbox",
+		"default": false,
+		"description": "Display date for daily forecasts",
+		"tooltip": "Like \"Friday 15\""
+	},
   "temperatureHighFirst": {
     "type": "checkbox",
     "default": false,
@@ -231,7 +248,7 @@
     "type": "checkbox",
     "default": false,
     "description": "Less verbose conditions",
-    "tooltip": "Currently only used with DarkSky "
+    "tooltip": "Currently only used with DarkSky."
   },
   "iconSettings": {
     "type": "header",
