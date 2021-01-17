@@ -8,7 +8,6 @@
 import { Climacell } from "./climacell";
 import { Config, Services } from "./config";
 import { LocationStore } from "./locationstore";
-import { Log } from "./logger";
 import { WeatherLoop } from "./loop";
 import { MetUk } from "./met_uk";
 import { ServiceMap, WeatherData, WeatherProvider, LocationData, AppletError, HttpError, CustomIcons, RefreshState, NiceErrorDetail, ApiService } from "./types";
@@ -51,11 +50,6 @@ const DATA_SERVICE: ServiceMap = {
 }
 
 export class WeatherApplet extends TextIconApplet {
-    /** Stores all weather information */
-    private weather: WeatherData = null;
-
-    ///////////////////////////////////////////////////////////////////////
-    ///////////////////////////////////////////////////////////////////////  
 
     /** Soup session (see https://bugzilla.gnome.org/show_bug.cgi?id=661323#c64) */
     private readonly _httpSession = new SessionAsync();
@@ -64,7 +58,6 @@ export class WeatherApplet extends TextIconApplet {
     private readonly msgSource: imports.ui.messageTray.SystemNotificationSource;
 
     public readonly currentLocale: string = null;
-    //public readonly log: Log;
     private readonly loop: WeatherLoop;
     public readonly config: Config;
     public readonly ui: UI;
@@ -494,7 +487,6 @@ export class WeatherApplet extends TextIconApplet {
 
         try {
             this.EnsureProvider();
-            this.weather = null;
             let weatherInfo = await this.provider.GetWeather({ lat: locationData.lat, lon: locationData.lon, text: locationData.lat.toString() + "," + locationData.lon.toString() });
             if (weatherInfo == null) {
                 Logger.Error("Unable to obtain Weather Information");
@@ -508,7 +500,6 @@ export class WeatherApplet extends TextIconApplet {
             }
 
             weatherInfo = this.FillInWeatherData(weatherInfo, locationData);
-            this.weather = weatherInfo;
 
             if (rebuild) this.ui.rebuild(this.config);
             if (

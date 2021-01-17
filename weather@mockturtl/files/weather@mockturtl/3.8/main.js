@@ -42,7 +42,6 @@ const DATA_SERVICE = {
 class WeatherApplet extends TextIconApplet {
     constructor(metadata, orientation, panelHeight, instanceId) {
         super(orientation, panelHeight, instanceId);
-        this.weather = null;
         this._httpSession = new SessionAsync();
         this.appletDir = imports.ui.appletManager.appletMeta[UUID].path;
         this.currentLocale = null;
@@ -392,7 +391,6 @@ class WeatherApplet extends TextIconApplet {
         }
         try {
             this.EnsureProvider();
-            this.weather = null;
             let weatherInfo = await this.provider.GetWeather({ lat: locationData.lat, lon: locationData.lon, text: locationData.lat.toString() + "," + locationData.lon.toString() });
             if (weatherInfo == null) {
                 services_1.Logger.Error("Unable to obtain Weather Information");
@@ -405,7 +403,6 @@ class WeatherApplet extends TextIconApplet {
                 return "failure";
             }
             weatherInfo = this.FillInWeatherData(weatherInfo, locationData);
-            this.weather = weatherInfo;
             if (rebuild)
                 this.ui.rebuild(this.config);
             if (!this.ui.displayWeather(weatherInfo, this.config)
