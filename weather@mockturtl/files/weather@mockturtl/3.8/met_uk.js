@@ -166,29 +166,29 @@ class MetUk {
                 temperature: null,
                 pressure: null,
                 humidity: null,
-                condition: this.ResolveCondition(utils_1.get(["W"], observation)),
+                condition: this.ResolveCondition(observation === null || observation === void 0 ? void 0 : observation.W),
                 forecasts: []
             };
-            if (utils_1.get(["V"], observation) != null) {
+            if ((observation === null || observation === void 0 ? void 0 : observation.V) != null) {
                 weather.extra_field = {
                     name: utils_1._("Visibility"),
                     value: this.VisibilityToText(observation.V),
                     type: "string"
                 };
             }
-            if (utils_1.get(["S"], observation) != null) {
+            if ((observation === null || observation === void 0 ? void 0 : observation.S) != null) {
                 weather.wind.speed = utils_1.MPHtoMPS(parseFloat(observation.S));
             }
-            if (utils_1.get(["D"], observation) != null) {
+            if ((observation === null || observation === void 0 ? void 0 : observation.D) != null) {
                 weather.wind.degree = utils_1.compassToDeg(observation.D);
             }
-            if (utils_1.get(["T"], observation) != null) {
+            if ((observation === null || observation === void 0 ? void 0 : observation.T) != null) {
                 weather.temperature = utils_1.CelsiusToKelvin(parseFloat(observation.T));
             }
-            if (utils_1.get(["P"], observation) != null) {
+            if ((observation === null || observation === void 0 ? void 0 : observation.P) != null) {
                 weather.pressure = parseFloat(observation.P);
             }
-            if (utils_1.get(["H"], observation) != null) {
+            if ((observation === null || observation === void 0 ? void 0 : observation.H) != null) {
                 weather.humidity = parseFloat(observation.H);
             }
             return weather;
@@ -292,15 +292,16 @@ class MetUk {
         return observations;
     }
     MeshObservations(observations) {
+        var _a, _b, _c, _d, _e, _f, _g, _h;
         if (!observations)
             return null;
         if (observations.length == 0)
             return null;
-        let result = this.GetLatestObservation(utils_1.get(["SiteRep", "DV", "Location", "Period"], observations[0]), new Date());
+        let result = this.GetLatestObservation((_d = (_c = (_b = (_a = observations[0]) === null || _a === void 0 ? void 0 : _a.SiteRep) === null || _b === void 0 ? void 0 : _b.DV) === null || _c === void 0 ? void 0 : _c.Location) === null || _d === void 0 ? void 0 : _d.Period, new Date());
         if (observations.length == 1)
             return result;
         for (let index = 0; index < observations.length; index++) {
-            if (utils_1.get(["SiteRep", "DV", "Location", "Period"], observations[index]) == null)
+            if (((_h = (_g = (_f = (_e = observations[index]) === null || _e === void 0 ? void 0 : _e.SiteRep) === null || _f === void 0 ? void 0 : _f.DV) === null || _g === void 0 ? void 0 : _g.Location) === null || _h === void 0 ? void 0 : _h.Period) == null)
                 continue;
             let nextObservation = this.GetLatestObservation(observations[index].SiteRep.DV.Location.Period, new Date());
             if (result == null)
@@ -310,32 +311,32 @@ class MetUk {
                 ", distance "
                 + Math.round(utils_1.GetDistance(parseFloat(observations[index].SiteRep.DV.Location.lat), parseFloat(observations[index].SiteRep.DV.Location.lon), this.currentLoc.lat, this.currentLoc.lon))
                 + " metres";
-            if (utils_1.get(["V"], result) == null) {
-                result.V = utils_1.get(["V"], nextObservation);
+            if ((result === null || result === void 0 ? void 0 : result.V) == null) {
+                result.V = nextObservation === null || nextObservation === void 0 ? void 0 : nextObservation.V;
                 logger_1.Logger.Debug("Visibility" + debugText);
             }
-            if (utils_1.get(["W"], result) == null) {
-                result.W = utils_1.get(["W"], nextObservation);
+            if ((result === null || result === void 0 ? void 0 : result.W) == null) {
+                result.W = nextObservation === null || nextObservation === void 0 ? void 0 : nextObservation.W;
                 logger_1.Logger.Debug("Weather condition" + debugText);
             }
-            if (utils_1.get(["S"], result) == null) {
-                result.S = utils_1.get(["S"], nextObservation);
+            if ((result === null || result === void 0 ? void 0 : result.S) == null) {
+                result.S = nextObservation === null || nextObservation === void 0 ? void 0 : nextObservation.S;
                 logger_1.Logger.Debug("Wind Speed" + debugText);
             }
-            if (utils_1.get(["D"], result) == null) {
-                result.D = utils_1.get(["D"], nextObservation);
+            if ((result === null || result === void 0 ? void 0 : result.D) == null) {
+                result.D = nextObservation === null || nextObservation === void 0 ? void 0 : nextObservation.D;
                 logger_1.Logger.Debug("Wind degree" + debugText);
             }
-            if (utils_1.get(["T"], result) == null) {
-                result.T = utils_1.get(["T"], nextObservation);
+            if ((result === null || result === void 0 ? void 0 : result.T) == null) {
+                result.T = nextObservation === null || nextObservation === void 0 ? void 0 : nextObservation.T;
                 logger_1.Logger.Debug("Temperature" + debugText);
             }
-            if (utils_1.get(["P"], result) == null) {
-                result.P = utils_1.get(["P"], nextObservation);
+            if ((result === null || result === void 0 ? void 0 : result.P) == null) {
+                result.P = nextObservation === null || nextObservation === void 0 ? void 0 : nextObservation.P;
                 logger_1.Logger.Debug("Pressure" + debugText);
             }
-            if (utils_1.get(["H"], result) == null) {
-                result.H = utils_1.get(["H"], nextObservation);
+            if ((result === null || result === void 0 ? void 0 : result.H) == null) {
+                result.H = nextObservation === null || nextObservation === void 0 ? void 0 : nextObservation.H;
                 logger_1.Logger.Debug("Humidity" + debugText);
             }
         }

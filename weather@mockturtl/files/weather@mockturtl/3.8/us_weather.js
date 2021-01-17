@@ -91,8 +91,9 @@ class USWeather {
         return observations;
     }
     OnObtainingGridData(message) {
+        var _a;
         if (message.status_code == 404) {
-            let data = JSON.parse(utils_1.get(["response_body", "data"], message));
+            let data = JSON.parse((_a = message === null || message === void 0 ? void 0 : message.response_body) === null || _a === void 0 ? void 0 : _a.data);
             if (data.title == "Data Unavailable For Requested Point") {
                 return {
                     type: "hard",

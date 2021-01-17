@@ -30,6 +30,7 @@ class OpenWeatherMap {
     }
     ;
     ParseWeather(json, self) {
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m;
         try {
             let weather = {
                 coord: {
@@ -51,10 +52,10 @@ class OpenWeatherMap {
                 pressure: json.current.pressure,
                 humidity: json.current.humidity,
                 condition: {
-                    main: utils_1.get(["current", "weather", "0", "main"], json),
-                    description: utils_1.get(["current", "weather", "0", "description"], json),
-                    icon: utils_1.weatherIconSafely(self.ResolveIcon(utils_1.get(["current", "weather", "0", "icon"], json)), self.app.config.IconType()),
-                    customIcon: self.ResolveCustomIcon(utils_1.get(["current", "weather", "0", "icon"], json))
+                    main: (_c = (_b = (_a = json === null || json === void 0 ? void 0 : json.current) === null || _a === void 0 ? void 0 : _a.weather) === null || _b === void 0 ? void 0 : _b[0]) === null || _c === void 0 ? void 0 : _c.main,
+                    description: (_f = (_e = (_d = json === null || json === void 0 ? void 0 : json.current) === null || _d === void 0 ? void 0 : _d.weather) === null || _e === void 0 ? void 0 : _e[0]) === null || _f === void 0 ? void 0 : _f.description,
+                    icon: utils_1.weatherIconSafely(self.ResolveIcon((_j = (_h = (_g = json === null || json === void 0 ? void 0 : json.current) === null || _g === void 0 ? void 0 : _g.weather) === null || _h === void 0 ? void 0 : _h[0]) === null || _j === void 0 ? void 0 : _j.icon), self.app.config.IconType()),
+                    customIcon: self.ResolveCustomIcon((_m = (_l = (_k = json === null || json === void 0 ? void 0 : json.current) === null || _k === void 0 ? void 0 : _k.weather) === null || _l === void 0 ? void 0 : _l[0]) === null || _m === void 0 ? void 0 : _m.icon)
                 },
                 extra_field: {
                     name: utils_1._("Feels Like"),

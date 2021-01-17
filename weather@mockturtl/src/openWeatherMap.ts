@@ -10,7 +10,7 @@ import { HttpError } from "./httpLib";
 import { Logger } from "./logger";
 import { WeatherApplet } from "./main";
 import { WeatherProvider, Location, WeatherData, ForecastData, HourlyForecastData, AppletError, BuiltinIcons, CustomIcons } from "./types";
-import { get, weatherIconSafely, _, isLangSupported } from "./utils";
+import { weatherIconSafely, _, isLangSupported } from "./utils";
 
 export class OpenWeatherMap implements WeatherProvider {
     //--------------------------------------------------------
@@ -76,10 +76,10 @@ export class OpenWeatherMap implements WeatherProvider {
                 pressure: json.current.pressure,
                 humidity: json.current.humidity,
                 condition: {
-                    main: get(["current", "weather", "0", "main"], json),
-                    description: get(["current", "weather", "0", "description"], json),
-                    icon: weatherIconSafely(self.ResolveIcon(get(["current", "weather", "0", "icon"], json)), self.app.config.IconType()),
-                    customIcon: self.ResolveCustomIcon(get(["current", "weather", "0", "icon"], json))
+                    main: json?.current?.weather?.[0]?.main,
+                    description: json?.current?.weather?.[0]?.description,
+                    icon: weatherIconSafely(self.ResolveIcon(json?.current?.weather?.[0]?.icon), self.app.config.IconType()),
+                    customIcon: self.ResolveCustomIcon(json?.current?.weather?.[0]?.icon)
                 },
                 extra_field: {
                     name: _("Feels Like"),

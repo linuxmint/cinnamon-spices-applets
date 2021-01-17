@@ -12,7 +12,7 @@ import { WeatherLoop } from "./loop";
 import { MetUk } from "./met_uk";
 import { ServiceMap, WeatherData, WeatherProvider, LocationData, AppletError, CustomIcons, RefreshState, NiceErrorDetail } from "./types";
 import { UI } from "./ui";
-import { constructJsLocale, _, get } from "./utils";
+import { constructJsLocale, _ } from "./utils";
 import { DarkSky } from "./darkSky";
 import { GeoLocation } from "./nominatim";
 import { OpenWeatherMap } from "./openWeatherMap";
@@ -340,7 +340,7 @@ export class WeatherApplet extends TextIconApplet {
 	 * @param force Force provider reinitialization
 	 */
     private EnsureProvider(force: boolean = false): void {
-        let currentName = get(["name"], this.provider) as Services;
+        let currentName = this.provider?.name;
         switch (this.config._dataService) {
             case DATA_SERVICE.DARK_SKY:           // No City Info
                 if (currentName != "DarkSky" || force) this.provider = new DarkSky(this);

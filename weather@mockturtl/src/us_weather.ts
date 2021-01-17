@@ -10,7 +10,7 @@ import { Logger } from "./logger";
 import { WeatherApplet } from "./main";
 import { SunCalc } from "./sunCalc";
 import { WeatherProvider, Location, WeatherData, AppletError, ForecastData, HourlyForecastData, Condition } from "./types";
-import { _, GetDistance, get, KPHtoMPS, CelsiusToKelvin, IsNight, FahrenheitToKelvin, weatherIconSafely } from "./utils";
+import { _, GetDistance, KPHtoMPS, CelsiusToKelvin, IsNight, FahrenheitToKelvin, weatherIconSafely } from "./utils";
 
 export class USWeather implements WeatherProvider {
 
@@ -144,9 +144,9 @@ export class USWeather implements WeatherProvider {
 	 * 
 	 * @param message Soup Message object
 	 */
-    private OnObtainingGridData(message: any): AppletError {
+    private OnObtainingGridData(message: imports.gi.Soup.Message): AppletError {
         if (message.status_code == 404) {
-            let data = JSON.parse(get(["response_body", "data"], message));
+            let data = JSON.parse(message?.response_body?.data);
             if (data.title == "Data Unavailable For Requested Point") {
                 return {
                     type: "hard",

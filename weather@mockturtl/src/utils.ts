@@ -214,11 +214,6 @@ export function KPHtoMPS(speed: number): number {
     return speed / WEATHER_CONV_KPH_IN_MPS;
 };
 
-export function get(p: string[], o: any): any {
-    return p.reduce((xs, x) =>
-        (xs && xs[x]) ? xs[x] : null, o);
-}
-
 export function GetFuncName(func: Function): string {
     // ES6
     if (!!func.name) return func.name;

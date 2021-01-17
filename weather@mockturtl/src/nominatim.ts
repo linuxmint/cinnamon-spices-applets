@@ -1,7 +1,7 @@
 import { Logger } from "./logger";
 import { WeatherApplet } from "./main";
 import { LocationCache, LocationData } from "./types";
-import { get, _ } from "./utils";
+import { _ } from "./utils";
 
 /**
  * Nominatim communication interface
@@ -19,7 +19,7 @@ export class GeoLocation {
     public async GetLocation(searchText: string): Promise<LocationData> {
         try {
             searchText = searchText.trim();
-            let cached = get([searchText], this.cache);
+            let cached = this.cache?.searchText;
             if (cached != null) {
                 Logger.Debug("Returning cached geolocation info for '" + searchText + "'.");
                 return cached;

@@ -252,7 +252,8 @@ class WeatherApplet extends TextIconApplet {
     on_panel_height_changed() {
     }
     EnsureProvider(force = false) {
-        let currentName = utils_1.get(["name"], this.provider);
+        var _a;
+        let currentName = (_a = this.provider) === null || _a === void 0 ? void 0 : _a.name;
         switch (this.config._dataService) {
             case DATA_SERVICE.DARK_SKY:
                 if (currentName != "DarkSky" || force)

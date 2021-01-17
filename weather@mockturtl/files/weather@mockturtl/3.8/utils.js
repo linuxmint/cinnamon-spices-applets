@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.constructJsLocale = exports.shadeHexColor = exports.hasIcon = exports.weatherIconSafely = exports.Sentencify = exports.isLangSupported = exports.compassDirection = exports.nonempty = exports.isCoordinate = exports.isID = exports.isString = exports.isNumeric = exports.MillimeterToUserUnits = exports.MetreToUserUnits = exports.KmToM = exports.PressToUserUnits = exports.MPHtoMPS = exports.FahrenheitToKelvin = exports.CelsiusToKelvin = exports.TempToUserConfig = exports.MPStoUserUnits = exports.GetFuncName = exports.get = exports.KPHtoMPS = exports.capitalizeFirstLetter = exports.compassToDeg = exports.IsNight = exports.MilitaryTime = exports.AwareDateString = exports.GetHoursMinutes = exports.GetDayName = exports.clearInterval = exports.GetDistance = exports.setInterval = exports.clearTimeout = exports.delay = exports.setTimeout = exports._ = void 0;
+exports.constructJsLocale = exports.shadeHexColor = exports.hasIcon = exports.weatherIconSafely = exports.Sentencify = exports.isLangSupported = exports.compassDirection = exports.nonempty = exports.isCoordinate = exports.isID = exports.isString = exports.isNumeric = exports.MillimeterToUserUnits = exports.MetreToUserUnits = exports.KmToM = exports.PressToUserUnits = exports.MPHtoMPS = exports.FahrenheitToKelvin = exports.CelsiusToKelvin = exports.TempToUserConfig = exports.MPStoUserUnits = exports.GetFuncName = exports.KPHtoMPS = exports.capitalizeFirstLetter = exports.compassToDeg = exports.IsNight = exports.MilitaryTime = exports.AwareDateString = exports.GetHoursMinutes = exports.GetDayName = exports.clearInterval = exports.GetDistance = exports.setInterval = exports.clearTimeout = exports.delay = exports.setTimeout = exports._ = void 0;
 const consts_1 = require("./consts");
 const { timeout_add, source_remove } = imports.mainloop;
 const { IconType } = imports.gi.St;
@@ -190,10 +190,6 @@ function KPHtoMPS(speed) {
 }
 exports.KPHtoMPS = KPHtoMPS;
 ;
-function get(p, o) {
-    return p.reduce((xs, x) => (xs && xs[x]) ? xs[x] : null, o);
-}
-exports.get = get;
 function GetFuncName(func) {
     if (!!func.name)
         return func.name;

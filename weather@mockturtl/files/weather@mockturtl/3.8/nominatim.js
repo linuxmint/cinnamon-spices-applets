@@ -12,9 +12,10 @@ class GeoLocation {
         this.app = app;
     }
     async GetLocation(searchText) {
+        var _a;
         try {
             searchText = searchText.trim();
-            let cached = utils_1.get([searchText], this.cache);
+            let cached = (_a = this.cache) === null || _a === void 0 ? void 0 : _a.searchText;
             if (cached != null) {
                 logger_1.Logger.Debug("Returning cached geolocation info for '" + searchText + "'.");
                 return cached;

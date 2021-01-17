@@ -11,7 +11,7 @@ import { Logger } from "./logger";
 import { WeatherApplet } from "./main";
 import { SunCalc } from "./sunCalc";
 import { WeatherProvider, Location, WeatherData, ForecastData, HourlyForecastData, Condition } from "./types";
-import { _, GetDistance, get, MPHtoMPS, compassToDeg, CelsiusToKelvin, MetreToUserUnits, weatherIconSafely } from "./utils";
+import { _, GetDistance, MPHtoMPS, compassToDeg, CelsiusToKelvin, MetreToUserUnits, weatherIconSafely } from "./utils";
 
 export class MetUk implements WeatherProvider {
 
@@ -218,11 +218,11 @@ export class MetUk implements WeatherProvider {
                 temperature: null,
                 pressure: null,
                 humidity: null,
-                condition: this.ResolveCondition(get(["W"], observation)),
+                condition: this.ResolveCondition(observation?.W),
                 forecasts: []
             };
 
-            if (get(["V"], observation) != null) {
+            if (observation?.V != null) {
                 weather.extra_field = {
                     name: _("Visibility"),
                     value: this.VisibilityToText(observation.V),
@@ -230,19 +230,19 @@ export class MetUk implements WeatherProvider {
                 }
             }
 
-            if (get(["S"], observation) != null) {
+            if (observation?.S != null) {
                 weather.wind.speed = MPHtoMPS(parseFloat(observation.S));
             }
-            if (get(["D"], observation) != null) {
+            if (observation?.D != null) {
                 weather.wind.degree = compassToDeg(observation.D);
             }
-            if (get(["T"], observation) != null) {
+            if (observation?.T != null) {
                 weather.temperature = CelsiusToKelvin(parseFloat(observation.T));
             }
-            if (get(["P"], observation) != null) {
+            if (observation?.P != null) {
                 weather.pressure = parseFloat(observation.P);
             }
-            if (get(["H"], observation) != null) {
+            if (observation?.H != null) {
                 weather.humidity = parseFloat(observation.H);
             }
 
@@ -351,10 +351,10 @@ export class MetUk implements WeatherProvider {
         if (!observations) return null;
         if (observations.length == 0) return null;
         // Sometimes Location property is missing
-        let result: ObservationPayload = this.GetLatestObservation(get(["SiteRep", "DV", "Location", "Period"], observations[0]), new Date());
+        let result: ObservationPayload = this.GetLatestObservation(observations[0]?.SiteRep?.DV?.Location?.Period, new Date());
         if (observations.length == 1) return result;
         for (let index = 0; index < observations.length; index++) {
-            if (get(["SiteRep", "DV", "Location", "Period"], observations[index]) == null) continue;
+            if (observations[index]?.SiteRep?.DV?.Location?.Period == null) continue;
             let nextObservation = this.GetLatestObservation(observations[index].SiteRep.DV.Location.Period, new Date());
             if (result == null) result = nextObservation;
             let debugText =
@@ -368,32 +368,32 @@ export class MetUk implements WeatherProvider {
                     this.currentLoc.lon
                 ))
                 + " metres";
-            if (get(["V"], result) == null) {
-                result.V = get(["V"], nextObservation);
+            if (result?.V == null) {
+                result.V = nextObservation?.V;
                 Logger.Debug("Visibility" + debugText);
             }
-            if (get(["W"], result) == null) {
-                result.W = get(["W"], nextObservation);
+            if (result?.W == null) {
+                result.W = nextObservation?.W;
                 Logger.Debug("Weather condition" + debugText);
             }
-            if (get(["S"], result) == null) {
-                result.S = get(["S"], nextObservation);
+            if (result?.S == null) {
+                result.S = nextObservation?.S;
                 Logger.Debug("Wind Speed" + debugText);
             }
-            if (get(["D"], result) == null) {
-                result.D = get(["D"], nextObservation);
+            if (result?.D == null) {
+                result.D = nextObservation?.D;
                 Logger.Debug("Wind degree" + debugText);
             }
-            if (get(["T"], result) == null) {
-                result.T = get(["T"], nextObservation);
+            if (result?.T == null) {
+                result.T = nextObservation?.T;
                 Logger.Debug("Temperature" + debugText);
             }
-            if (get(["P"], result) == null) {
-                result.P = get(["P"], nextObservation);
+            if (result?.P == null) {
+                result.P = nextObservation?.P;
                 Logger.Debug("Pressure" + debugText);
             }
-            if (get(["H"], result) == null) {
-                result.H = get(["H"], nextObservation);
+            if (result?.H == null) {
+                result.H = nextObservation?.H;
                 Logger.Debug("Humidity" + debugText);
             }
         }
