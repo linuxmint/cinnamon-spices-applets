@@ -6,8 +6,8 @@
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
 
+import { Logger } from "./logger";
 import { WeatherApplet } from "./main";
-import { Logger } from "./services";
 import { WeatherProvider, Location, WeatherData, ForecastData, BuiltinIcons, CustomIcons } from "./types";
 import { _, weatherIconSafely, CelsiusToKelvin, KPHtoMPS } from "./utils";
 

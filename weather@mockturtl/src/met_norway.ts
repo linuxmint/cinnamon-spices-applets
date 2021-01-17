@@ -1,5 +1,5 @@
+import { Logger } from "./logger";
 import { WeatherApplet } from "./main";
-import { Logger } from "./services";
 import { SunCalc } from "./sunCalc";
 import { WeatherProvider, Location, WeatherData, HourlyForecastData, ForecastData, Condition } from "./types";
 import { CelsiusToKelvin, IsNight, _, weatherIconSafely } from "./utils";
@@ -23,27 +23,18 @@ export class MetNorway implements WeatherProvider {
     }
 
     public async GetWeather(loc: Location): Promise<WeatherData> {
-        let query = this.GetUrl(loc);
-        let json: any;
-        if (query != "" && query != null) {
-            try {
-                json = await this.app.LoadJsonAsync(query);
-            }
-            catch (e) {
-                this.app.HandleHTTPError("met-norway", e, this.app);
-                Logger.Error("MET Norway: Network error - " + e);
-                return null;
-            }
+		let query = this.GetUrl(loc);
+		if (query == null)
+			return null;
 
-            if (!json) {
-                this.app.HandleError({ type: "soft", detail: "no api response", service: "met-norway" });
-                Logger.Error("MET Norway: Empty response from API");
-                return null;
-            }
+		let json = await this.app.LoadJsonAsync<any>(query);
+		
+		if (!json) {
+			Logger.Error("MET Norway: Empty response from API");
+			return null;
+		}
 
-            return this.ParseWeather(json);
-        }
-        return null;
+		return this.ParseWeather(json);
     }
 
     private RemoveEarlierElements(json: MetNorwayPayload): MetNorwayPayload {

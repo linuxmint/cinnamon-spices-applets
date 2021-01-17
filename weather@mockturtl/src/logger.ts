@@ -1,4 +1,4 @@
-const UUID = "weather@mockturtl"
+import { UUID } from "./consts";
 
 export class Log {
     private ID: number;
@@ -53,3 +53,5 @@ export class Log {
         return arr;
     }
 }
+
+export const Logger = new Log();

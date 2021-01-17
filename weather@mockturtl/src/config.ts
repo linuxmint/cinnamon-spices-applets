@@ -2,7 +2,7 @@ import { WeatherApplet } from "./main";
 import { IpApi } from "./ipApi";
 import { SettingKeys, LocationData, DistanceUnitLocalePrefs, WindSpeedLocalePrefs } from "./types";
 import { clearTimeout, setTimeout, _, isCoordinate } from "./utils";
-import { Logger } from "./services";
+import { Logger } from "./logger";
 
 const { AppletSettings, BindingDirection } = imports.ui.settings;
 const Lang: typeof imports.lang = imports.lang;

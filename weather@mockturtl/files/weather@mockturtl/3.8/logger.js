@@ -1,13 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Log = void 0;
-const UUID = "weather@mockturtl";
+exports.Logger = exports.Log = void 0;
+const consts_1 = require("./consts");
 class Log {
     constructor(_instanceId) {
         this.debug = false;
         this.level = 1;
         this.ID = _instanceId;
-        this.appletDir = imports.ui.appletManager.appletMeta[UUID].path;
+        this.appletDir = imports.ui.appletManager.appletMeta[consts_1.UUID].path;
         this.debug = this.DEBUG();
     }
     DEBUG() {
@@ -20,7 +20,7 @@ class Log {
     }
     ;
     Print(message) {
-        let msg = "[" + UUID + "#" + this.ID + "]: " + message.toString();
+        let msg = "[" + consts_1.UUID + "#" + this.ID + "]: " + message.toString();
         let debug = "";
         if (this.debug) {
             debug = this.GetErrorLine();
@@ -31,7 +31,7 @@ class Log {
         }
     }
     Error(error) {
-        global.logError("[" + UUID + "#" + this.ID + "]: " + error.toString(), '\n', "On Line:", this.GetErrorLine());
+        global.logError("[" + consts_1.UUID + "#" + this.ID + "]: " + error.toString(), '\n', "On Line:", this.GetErrorLine());
     }
     ;
     Debug(message) {
@@ -50,3 +50,4 @@ class Log {
     }
 }
 exports.Log = Log;
+exports.Logger = new Log();

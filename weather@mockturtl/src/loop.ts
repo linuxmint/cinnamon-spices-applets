@@ -1,5 +1,5 @@
+import { Logger } from "./logger";
 import { WeatherApplet } from "./main";
-import { Logger } from "./services";
 import { GUIDStore } from "./types";
 import { delay } from "./utils";
 

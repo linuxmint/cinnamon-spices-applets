@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DarkSky = void 0;
-const services_1 = require("./services");
+const logger_1 = require("./logger");
 const utils_1 = require("./utils");
 class DarkSky {
     constructor(_app) {
@@ -24,28 +24,18 @@ class DarkSky {
     }
     async GetWeather(loc) {
         let query = this.ConstructQuery(loc);
-        let json;
-        if (query != "" && query != null) {
-            try {
-                json = await this.app.LoadJsonAsync(query, this.OnObtainingData);
-            }
-            catch (e) {
-                this.app.HandleHTTPError("darksky", e, this.app);
-                return null;
-            }
-            if (!json) {
-                this.app.HandleError({ type: "soft", detail: "no api response", service: "darksky" });
-                return null;
-            }
-            if (!json.code) {
-                return this.ParseWeather(json);
-            }
-            else {
-                this.HandleResponseErrors(json);
-                return null;
-            }
+        if (query == "" && query == null)
+            return null;
+        let json = await this.app.LoadJsonAsync(query, null, this.HandleError);
+        if (!json)
+            return null;
+        if (!json.code) {
+            return this.ParseWeather(json);
         }
-        return null;
+        else {
+            this.HandleResponseErrors(json);
+            return null;
+        }
     }
     ;
     ParseWeather(json) {
@@ -123,7 +113,7 @@ class DarkSky {
             return result;
         }
         catch (e) {
-            services_1.Logger.Error("DarkSky payload parsing error: " + e);
+            logger_1.Logger.Error("DarkSky payload parsing error: " + e);
             this.app.HandleError({ type: "soft", detail: "unusual payload", service: "darksky", message: utils_1._("Failed to Process Weather Info") });
             return null;
         }
@@ -141,7 +131,7 @@ class DarkSky {
         let query;
         let key = this.app.config._apiKey.replace(" ", "");
         if (this.app.config.noApiKey()) {
-            services_1.Logger.Error("DarkSky: No API Key given");
+            logger_1.Logger.Error("DarkSky: No API Key given");
             this.app.HandleError({
                 type: "hard",
                 userError: true,
@@ -157,8 +147,8 @@ class DarkSky {
         }
         return query;
     }
-    OnObtainingData(message) {
-        if (message.status_code == 403) {
+    HandleError(message) {
+        if (message.code == 403) {
             return {
                 type: "hard",
                 userError: true,
@@ -167,7 +157,7 @@ class DarkSky {
                 message: utils_1._("Please Make sure you\nentered the API key correctly and your account is not locked")
             };
         }
-        if (message.status_code == 401) {
+        if (message.code == 401) {
             return {
                 type: "hard",
                 userError: true,
@@ -182,13 +172,13 @@ class DarkSky {
         let code = json.code;
         let error = json.error;
         let errorMsg = "DarkSky API: ";
-        services_1.Logger.Debug("DarksSky API error payload: " + json);
+        logger_1.Logger.Debug("DarksSky API error payload: " + json);
         switch (code) {
             case "400":
-                services_1.Logger.Error(errorMsg + error);
+                logger_1.Logger.Error(errorMsg + error);
                 break;
             default:
-                services_1.Logger.Error(errorMsg + error);
+                logger_1.Logger.Error(errorMsg + error);
                 break;
         }
     }

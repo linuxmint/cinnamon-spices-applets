@@ -1,6 +1,6 @@
 import { Config, DistanceUnits, WeatherUnits } from "./config";
+import { Logger } from "./logger";
 import { WeatherApplet } from "./main";
-import { Logger } from "./services";
 import { ForecastUI, HourlyForecastUI, WeatherData, WeatherProvider, HourlyForecastData } from "./types";
 import { shadeHexColor, delay, capitalizeFirstLetter, _, nonempty, AwareDateString, TempToUserConfig, compassDirection, MPStoUserUnits, PressToUserUnits, GetHoursMinutes, GetDayName, MetreToUserUnits, MillimeterToUserUnits } from "./utils";
 import { WeatherButton } from "./weatherbutton";
@@ -15,7 +15,6 @@ const { AppletPopupMenu } = imports.ui.applet;
 const { themeManager } = imports.ui.main;
 const { SignalManager } = imports.misc.signalManager;
 
-const UUID = "weather@mockturtl"
 const APPLET_ICON = "view-refresh-symbolic"
 
 // Signals

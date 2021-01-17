@@ -15,9 +15,10 @@ const us_weather_1 = require("./us_weather");
 const weatherbit_1 = require("./weatherbit");
 const yahoo_1 = require("./yahoo");
 const met_norway_1 = require("./met_norway");
-const services_1 = require("./services");
+const httpLib_1 = require("./httpLib");
+const logger_1 = require("./logger");
+const consts_1 = require("./consts");
 const { TextIconApplet, AllowedLayout, MenuItem } = imports.ui.applet;
-const { Message, Session, ProxyResolverDefault, SessionAsync } = imports.gi.Soup;
 const { get_language_names } = imports.gi.GLib;
 const { messageTray } = imports.ui.main;
 const { SystemNotificationSource, Notification } = imports.ui.messageTray;
@@ -26,7 +27,6 @@ const GLib = imports.gi.GLib;
 const { spawnCommandLine, spawnCommandLineAsyncIO } = imports.misc.util;
 const { IconType } = imports.gi.St;
 const keybindingManager = imports.ui.main.keybindingManager;
-const UUID = "weather@mockturtl";
 const APPLET_ICON = "view-refresh-symbolic";
 const REFRESH_ICON = "view-refresh";
 const DATA_SERVICE = {
@@ -42,8 +42,7 @@ const DATA_SERVICE = {
 class WeatherApplet extends TextIconApplet {
     constructor(metadata, orientation, panelHeight, instanceId) {
         super(orientation, panelHeight, instanceId);
-        this._httpSession = new SessionAsync();
-        this.appletDir = imports.ui.appletManager.appletMeta[UUID].path;
+        this.appletDir = imports.ui.appletManager.appletMeta[consts_1.UUID].path;
         this.currentLocale = null;
         this.lock = false;
         this.refreshTriggeredWhileLocked = false;
@@ -70,16 +69,12 @@ class WeatherApplet extends TextIconApplet {
             "location not covered": utils_1._("Location not covered"),
         };
         this.currentLocale = utils_1.constructJsLocale(get_language_names()[0]);
-        services_1.Logger.Debug("Applet created with instanceID " + instanceId);
-        services_1.Logger.Debug("System locale is " + this.currentLocale);
-        services_1.Logger.Debug("Appletdir is: " + this.appletDir);
-        this._httpSession.user_agent = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:37.0) Gecko/20100101 Firefox/37.0";
-        this._httpSession.timeout = 10;
-        this._httpSession.idle_timeout = 10;
-        imports.gettext.bindtextdomain(UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
+        logger_1.Logger.Debug("Applet created with instanceID " + instanceId);
+        logger_1.Logger.Debug("System locale is " + this.currentLocale);
+        logger_1.Logger.Debug("Appletdir is: " + this.appletDir);
+        imports.gettext.bindtextdomain(consts_1.UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
         this.msgSource = new SystemNotificationSource(utils_1._("Weather Applet"));
         messageTray.add(this.msgSource);
-        Session.prototype.add_feature.call(this._httpSession, new ProxyResolverDefault());
         imports.gi.Gtk.IconTheme.get_default().append_search_path(this.appletDir + "/../icons");
         this.SetAppletOnPanel();
         this.config = new config_1.Config(this, instanceId, this.currentLocale);
@@ -109,7 +104,7 @@ class WeatherApplet extends TextIconApplet {
     Unlock() {
         this.lock = false;
         if (this.refreshTriggeredWhileLocked) {
-            services_1.Logger.Print("Refreshing triggered by config change while refreshing, starting now...");
+            logger_1.Logger.Print("Refreshing triggered by config change while refreshing, starting now...");
             this.refreshTriggeredWhileLocked = false;
             this.refreshAndRebuild();
         }
@@ -130,50 +125,35 @@ class WeatherApplet extends TextIconApplet {
         this.refreshWeather(true, loc);
     }
     ;
-    async LoadJsonAsync(query, errorCallback, triggerUIError = true) {
-        let json = await new Promise((resolve, reject) => {
-            let message = Message.new('GET', query);
-            services_1.Logger.Debug("URL called: " + query);
-            this._httpSession.queue_message(message, (session, message) => {
-                let error = (errorCallback != null) ? errorCallback(message) : null;
-                if (error != null) {
-                    services_1.Logger.Error("there is an error, " + JSON.stringify(error, null, 2));
-                    this.HandleError(error);
-                    reject({ code: -1, message: "bad api response", data: null, reason_phrase: "" });
-                    return;
-                }
-                if (!message) {
-                    reject({ code: 0, message: "no network response", reason_phrase: "no network response", data: utils_1.get(["response_body", "data"], message) });
-                    return;
-                }
-                if (message.status_code >= 400 && message.status_code < 500) {
-                    reject({ code: message.status_code, message: "bad status code", reason_phrase: message.reason_phrase, data: utils_1.get(["response_body", "data"], message) });
-                    if (triggerUIError == true)
-                        this.HandleError({ detail: "bad api response", type: "hard", message: utils_1._("API returned status code between 400 and 500") });
-                    return;
-                }
-                if (message.status_code > 300 || message.status_code < 200) {
-                    reject({ code: message.status_code, message: "bad status code", reason_phrase: message.reason_phrase, data: utils_1.get(["response_body", "data"], message) });
-                    return;
-                }
-                if (utils_1.get(["response_body", "data"], message) == null) {
-                    reject({ code: message.status_code, message: "no response data", reason_phrase: message.reason_phrase, data: utils_1.get(["response_body", "data"], message) });
-                    return;
-                }
-                try {
-                    services_1.Logger.Debug2("API full response: " + message.response_body.data.toString());
-                    let payload = JSON.parse(message.response_body.data);
-                    resolve(payload);
-                }
-                catch (e) {
-                    services_1.Logger.Error("Error: API response is not JSON. The response: " + message.response_body.data);
-                    reject({ code: message.status_code, message: "bad api response - non json", reason_phrase: e });
-                }
-            });
-        });
-        return json;
+    async LoadJsonAsync(url, params, HandleError, method = "GET") {
+        let response = await httpLib_1.Http.LoadJsonAsync(url, params, method);
+        if (!response.Success) {
+            let customError = null;
+            if (!!HandleError)
+                customError = HandleError(response.ErrorData);
+            if (!!customError)
+                this.HandleError(customError);
+            else
+                this.HandleHTTPError(response.ErrorData);
+            return null;
+        }
+        return response.Data;
     }
-    ;
+    HandleHTTPError(error) {
+        let appletError = {
+            detail: error.message,
+            userError: false,
+            code: error.code,
+            message: this.errMsg[error.message],
+            type: "soft"
+        };
+        switch (error.message) {
+            case "bad status code":
+            case "unknown":
+                appletError.type = "hard";
+        }
+        this.HandleError(appletError);
+    }
     async SpawnProcess(command) {
         let cmd = "";
         for (let index = 0; index < command.length; index++) {
@@ -194,39 +174,11 @@ class WeatherApplet extends TextIconApplet {
             return json;
         }
         catch (e) {
-            services_1.Logger.Error("Error calling command " + cmd + ", error: ");
+            logger_1.Logger.Error("Error calling command " + cmd + ", error: ");
             global.log(e);
             return null;
         }
     }
-    async LoadAsync(query) {
-        let data = await new Promise((resolve, reject) => {
-            let message = Message.new('GET', query);
-            this._httpSession.queue_message(message, (session, message) => {
-                if (!message) {
-                    reject({ code: 0, message: "no network response", reason_phrase: "no network response" });
-                    return;
-                }
-                if (message.status_code > 300 || message.status_code < 200) {
-                    reject({ code: message.status_code, message: "bad status code", reason_phrase: message.reason_phrase });
-                    return;
-                }
-                if (!message.response_body) {
-                    reject({ code: message.status_code, message: "no response body", reason_phrase: message.reason_phrase });
-                    return;
-                }
-                if (!message.response_body.data) {
-                    reject({ code: message.status_code, message: "no response data", reason_phrase: message.reason_phrase });
-                    return;
-                }
-                services_1.Logger.Debug2("API full response: " + message.response_body.data.toString());
-                let payload = message.response_body.data;
-                resolve(payload);
-            });
-        });
-        return data;
-    }
-    ;
     sendNotification(title, message, transient) {
         let notification = new Notification(this.msgSource, utils_1._("Weather Applet") + ": " + title, message);
         if (transient)
@@ -270,7 +222,7 @@ class WeatherApplet extends TextIconApplet {
         this.locationStore.DeleteCurrentLocation(this.config.currentLocation);
     }
     onLocationStorageChanged(itemCount) {
-        services_1.Logger.Debug("On location storage callback called, number of locations now " + itemCount.toString());
+        logger_1.Logger.Debug("On location storage callback called, number of locations now " + itemCount.toString());
         if (this.locationStore.ShouldShowLocationSelectors(this.config.currentLocation))
             this.ui.ShowLocationSelectors();
         else
@@ -295,11 +247,11 @@ class WeatherApplet extends TextIconApplet {
     ;
     _onKeySettingsUpdated() {
         if (this.config.keybinding != null) {
-            keybindingManager.addHotKey(UUID, this.config.keybinding, Lang.bind(this, this.on_applet_clicked));
+            keybindingManager.addHotKey(consts_1.UUID, this.config.keybinding, Lang.bind(this, this.on_applet_clicked));
         }
     }
     on_applet_removed_from_panel(deleteConfig) {
-        services_1.Logger.Print("Removing applet instance...");
+        logger_1.Logger.Print("Removing applet instance...");
         this.loop.Stop();
     }
     on_applet_clicked(event) {
@@ -365,7 +317,7 @@ class WeatherApplet extends TextIconApplet {
     }
     async refreshWeather(rebuild, location) {
         if (this.lock) {
-            services_1.Logger.Print("Refreshing in progress, refresh skipped.");
+            logger_1.Logger.Print("Refreshing in progress, refresh skipped.");
             return "locked";
         }
         this.lock = true;
@@ -376,7 +328,7 @@ class WeatherApplet extends TextIconApplet {
                 locationData = await this.config.EnsureLocation();
             }
             catch (e) {
-                services_1.Logger.Error(e);
+                logger_1.Logger.Error(e);
                 this.Unlock();
                 return "error";
             }
@@ -393,7 +345,7 @@ class WeatherApplet extends TextIconApplet {
             this.EnsureProvider();
             let weatherInfo = await this.provider.GetWeather({ lat: locationData.lat, lon: locationData.lon, text: locationData.lat.toString() + "," + locationData.lon.toString() });
             if (weatherInfo == null) {
-                services_1.Logger.Error("Unable to obtain Weather Information");
+                logger_1.Logger.Error("Unable to obtain Weather Information");
                 this.HandleError({
                     type: "hard",
                     detail: "unknown",
@@ -412,13 +364,13 @@ class WeatherApplet extends TextIconApplet {
                 this.Unlock();
                 return "failure";
             }
-            services_1.Logger.Print("Weather Information refreshed");
+            logger_1.Logger.Print("Weather Information refreshed");
             this.loop.ResetErrorCount();
             this.Unlock();
             return "success";
         }
         catch (e) {
-            services_1.Logger.Error("Generic Error while refreshing Weather info: " + e);
+            logger_1.Logger.Error("Generic Error while refreshing Weather info: " + e);
             this.HandleError({ type: "hard", detail: "unknown", message: utils_1._("Unexpected Error While Refreshing Weather, please see log in Looking Glass") });
             this.Unlock();
             return "failure";
@@ -452,9 +404,9 @@ class WeatherApplet extends TextIconApplet {
         if (this.encounteredError == true)
             return;
         this.encounteredError = true;
-        services_1.Logger.Debug("User facing Error received, error: " + JSON.stringify(error, null, 2));
+        logger_1.Logger.Debug("User facing Error received, error: " + JSON.stringify(error, null, 2));
         if (error.type == "hard") {
-            services_1.Logger.Debug("Displaying hard error");
+            logger_1.Logger.Debug("Displaying hard error");
             this.ui.rebuild(this.config);
             this.DisplayError(this.errMsg[error.detail], (!error.message) ? "" : error.message);
         }
@@ -470,29 +422,7 @@ class WeatherApplet extends TextIconApplet {
             return;
         }
         let nextRefresh = this.loop.GetSecondsUntilNextRefresh();
-        services_1.Logger.Error("Retrying in the next " + nextRefresh.toString() + " seconds...");
-    }
-    HandleHTTPError(service, error, ctx, override) {
-        let uiError = {
-            type: "soft",
-            detail: "unknown",
-            message: utils_1._("Network Error, please check logs in Looking Glass"),
-            service: service
-        };
-        if (typeof error === 'string' || error instanceof String) {
-            services_1.Logger.Error("Error calling " + service + ": " + error.toString());
-        }
-        else {
-            services_1.Logger.Error("Error calling " + service + " '" + error.message.toString() + "' Reason: " + error.reason_phrase.toString());
-            uiError.detail = error.message;
-            uiError.code = error.code;
-            if (error.message == "bad api response - non json")
-                uiError.type = "hard";
-            if (!!override && override instanceof Function) {
-                uiError = override(error, uiError);
-            }
-        }
-        ctx.HandleError(uiError);
+        logger_1.Logger.Error("Retrying in the next " + nextRefresh.toString() + " seconds...");
     }
 }
 exports.WeatherApplet = WeatherApplet;

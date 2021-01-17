@@ -7,8 +7,8 @@
 //////////////////////////////////////////////////////////////
 
 import { DistanceUnits } from "./config";
+import { Logger } from "./logger";
 import { WeatherApplet } from "./main";
-import { Logger } from "./services";
 import { SunCalc } from "./sunCalc";
 import { WeatherProvider, Location, WeatherData, ForecastData, HourlyForecastData, Condition } from "./types";
 import { _, GetDistance, get, MPHtoMPS, compassToDeg, CelsiusToKelvin, MetreToUserUnits, weatherIconSafely } from "./utils";
@@ -125,7 +125,7 @@ export class MetUk implements WeatherProvider {
     private async GetObservationSitesInRange(loc: Location, range: number): Promise<WeatherSite[]> {
         let observationSiteList = null;
         try {
-            observationSiteList = await this.app.LoadJsonAsync(this.baseUrl + this.currentPrefix + this.sitesUrl + "?" + this.key);
+            observationSiteList = await this.app.LoadJsonAsync<any>(this.baseUrl + this.currentPrefix + this.sitesUrl + "?" + this.key);
         }
         catch (e) {
             Logger.Error("Failed to get sitelist, error: " + JSON.stringify(e, null, 2));
@@ -157,21 +157,14 @@ export class MetUk implements WeatherProvider {
     private async GetObservationData(observationSites: WeatherSite[]) {
         let observations: METPayload[] = [];
         for (let index = 0; index < observationSites.length; index++) {
-            const element = observationSites[index];
-            try {
-                Logger.Debug("Getting observation data from station: " + element.id);
-                observations.push(await this.app.LoadJsonAsync(this.baseUrl + this.currentPrefix + element.id + "?res=hourly&" + this.key));
-            }
-            catch {
-                this.app.HandleError({
-                    type: "soft",
-                    userError: true,
-                    detail: "no network response",
-                    service: "us-weather",
-                    message: _("Unexpected response from API")
-                })
-                Logger.Debug("Failed to get observations from " + element.id);
-            }
+			const element = observationSites[index];
+			Logger.Debug("Getting observation data from station: " + element.id);
+			let payload = await this.app.LoadJsonAsync<METPayload>(this.baseUrl + this.currentPrefix + element.id + "?res=hourly&" + this.key);
+			if (!!payload)
+				observations.push(payload);
+			else {
+				Logger.Debug("Failed to get observations from " + element.id);
+			}
         }
         return observations;
     }
@@ -184,27 +177,16 @@ export class MetUk implements WeatherProvider {
      * @param ParseFunction returns WeatherData or ForecastData Object
      */
     private async GetData(query: string, ParseFunction: (json: any, context: any) => WeatherData | ForecastData[] | HourlyForecastData[]) {
-        let json;
-        if (query != null) {
-            Logger.Debug("Query: " + query);
-            try {
-                json = await this.app.LoadJsonAsync(query);
-            }
-            catch (e) {
-                this.app.HandleHTTPError("met-uk", e, this.app, null);
-                return null;
-            }
+		if (query == null)
+			return null;
 
-            if (json == null) {
-                this.app.HandleError({ type: "soft", detail: "no api response", service: "met-uk" });
-                return null;
-            }
+		Logger.Debug("Query: " + query);
+		let json = await this.app.LoadJsonAsync(query);
 
-            return ParseFunction(json, this);
-        }
-        else {
-            return null;
-        }
+		if (json == null) 
+			return null;
+
+		return ParseFunction(json, this);
     };
 
     private ParseCurrent(json: METPayload[]): WeatherData {

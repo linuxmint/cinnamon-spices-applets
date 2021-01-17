@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.WeatherLoop = void 0;
-const services_1 = require("./services");
+const logger_1 = require("./logger");
 const utils_1 = require("./utils");
 function uuidv4() {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
@@ -38,26 +38,26 @@ class WeatherLoop {
                     this.IncrementErrorCount();
                 this.ValidateLastUpdate();
                 if (this.pauseRefresh) {
-                    services_1.Logger.Debug("Configuration error, updating paused");
+                    logger_1.Logger.Debug("Configuration error, updating paused");
                     await utils_1.delay(this.LoopInterval());
                     continue;
                 }
                 if (this.errorCount > 0 || this.NextUpdate() < new Date()) {
-                    services_1.Logger.Debug("Refresh triggered in main loop with these values: lastUpdated " + ((!this.lastUpdated) ? "null" : this.lastUpdated.toLocaleString())
+                    logger_1.Logger.Debug("Refresh triggered in main loop with these values: lastUpdated " + ((!this.lastUpdated) ? "null" : this.lastUpdated.toLocaleString())
                         + ", errorCount " + this.errorCount.toString() + " , loopInterval " + (this.LoopInterval() / 1000).toString()
                         + " seconds, refreshInterval " + this.app.config._refreshInterval + " minutes");
                     let state = await this.app.refreshWeather(false);
                     if (state == "locked")
-                        services_1.Logger.Print("App is currently refreshing, refresh skipped in main loop");
+                        logger_1.Logger.Print("App is currently refreshing, refresh skipped in main loop");
                     if (state == "success" || state == "locked")
                         this.lastUpdated = new Date();
                 }
                 else {
-                    services_1.Logger.Debug("No need to update yet, skipping");
+                    logger_1.Logger.Debug("No need to update yet, skipping");
                 }
             }
             catch (e) {
-                services_1.Logger.Error("Error in Main loop: " + e);
+                logger_1.Logger.Error("Error in Main loop: " + e);
                 this.app.encounteredError = true;
             }
             await utils_1.delay(this.LoopInterval());
@@ -68,9 +68,9 @@ class WeatherLoop {
         if (this.appletRemoved == true)
             return true;
         if (this.GUID != weatherAppletGUIDs[this.instanceID]) {
-            services_1.Logger.Debug("Applet GUID: " + this.GUID);
-            services_1.Logger.Debug("GUID stored globally: " + weatherAppletGUIDs[this.instanceID]);
-            services_1.Logger.Print("GUID mismatch, terminating applet");
+            logger_1.Logger.Debug("Applet GUID: " + this.GUID);
+            logger_1.Logger.Debug("GUID stored globally: " + weatherAppletGUIDs[this.instanceID]);
+            logger_1.Logger.Print("GUID mismatch, terminating applet");
             return true;
         }
         return false;
@@ -78,7 +78,7 @@ class WeatherLoop {
     IncrementErrorCount() {
         this.app.encounteredError = false;
         this.errorCount++;
-        services_1.Logger.Debug("Encountered error in previous loop");
+        logger_1.Logger.Debug("Encountered error in previous loop");
         if (this.errorCount > 60)
             this.errorCount = 60;
     }

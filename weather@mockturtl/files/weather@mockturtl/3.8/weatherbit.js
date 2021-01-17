@@ -1,8 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Weatherbit = void 0;
-const services_1 = require("./services");
+const logger_1 = require("./logger");
 const utils_1 = require("./utils");
+const Lang = imports.lang;
 class Weatherbit {
     constructor(_app) {
         this.prettyName = "WeatherBit";
@@ -39,58 +40,31 @@ class Weatherbit {
     ;
     async GetData(baseUrl, loc, ParseFunction) {
         let query = this.ConstructQuery(baseUrl, loc);
-        let json;
-        if (query != null) {
-            try {
-                json = await this.app.LoadJsonAsync(query, this.OnObtainingData);
-            }
-            catch (e) {
-                this.app.HandleHTTPError("weatherbit", e, this.app);
-                return null;
-            }
-            if (json == null) {
-                this.app.HandleError({ type: "soft", detail: "no api response", service: "weatherbit" });
-                return null;
-            }
-            return ParseFunction(json, this);
-        }
-        else {
+        if (query == null)
             return null;
-        }
+        let json = await this.app.LoadJsonAsync(query, null, this.HandleError);
+        if (json == null)
+            return null;
+        return ParseFunction(json, this);
     }
-    ;
     async GetHourlyData(baseUrl, loc) {
         let query = this.ConstructQuery(baseUrl, loc);
-        let json;
-        if (query != null) {
-            try {
-                json = await this.app.LoadJsonAsync(query, null, false);
-            }
-            catch (e) {
-                if (e.code == 403) {
-                    services_1.Logger.Print("Hourly forecast is inaccessible, skipping");
-                    this.hourlyAccess = false;
-                    return null;
-                }
-                this.app.HandleHTTPError("weatherbit", e, this.app);
-                return null;
-            }
-            if (json == null) {
-                this.app.HandleError({ type: "soft", detail: "no api response", service: "weatherbit" });
-                return null;
-            }
-            return this.ParseHourlyForecast(json, this);
-        }
-        else {
+        if (query == null)
+            return null;
+        let json = await this.app.LoadJsonAsync(query, null, Lang.bind(this, this.HandleHourlyError));
+        if (!!(json === null || json === void 0 ? void 0 : json.error)) {
             return null;
         }
+        if (json == null)
+            return null;
+        return this.ParseHourlyForecast(json, this);
     }
     ;
     ParseCurrent(json, self) {
         json = json.data[0];
         let hourDiff = self.HourDifference(new Date(json.ts * 1000), self.ParseStringTime(json.ob_time));
         if (hourDiff != 0)
-            services_1.Logger.Debug("Weatherbit reporting incorrect time, correcting with " + (0 - hourDiff).toString() + " hours");
+            logger_1.Logger.Debug("Weatherbit reporting incorrect time, correcting with " + (0 - hourDiff).toString() + " hours");
         try {
             let weather = {
                 coord: {
@@ -129,7 +103,7 @@ class Weatherbit {
             return weather;
         }
         catch (e) {
-            services_1.Logger.Error("Weatherbit Weather Parsing error: " + e);
+            logger_1.Logger.Error("Weatherbit Weather Parsing error: " + e);
             self.app.HandleError({ type: "soft", service: "weatherbit", detail: "unusual payload", message: utils_1._("Failed to Process Current Weather Info") });
             return null;
         }
@@ -156,7 +130,7 @@ class Weatherbit {
             return forecasts;
         }
         catch (e) {
-            services_1.Logger.Error("Weatherbit Forecast Parsing error: " + e);
+            logger_1.Logger.Error("Weatherbit Forecast Parsing error: " + e);
             self.app.HandleError({ type: "soft", service: "weatherbit", detail: "unusual payload", message: utils_1._("Failed to Process Forecast Info") });
             return null;
         }
@@ -191,7 +165,7 @@ class Weatherbit {
             return forecasts;
         }
         catch (e) {
-            services_1.Logger.Error("Weatherbit Forecast Parsing error: " + e);
+            logger_1.Logger.Error("Weatherbit Forecast Parsing error: " + e);
             self.app.HandleError({ type: "soft", service: "weatherbit", detail: "unusual payload", message: utils_1._("Failed to Process Forecast Info") });
             return null;
         }
@@ -225,7 +199,7 @@ class Weatherbit {
     ConstructQuery(query, loc) {
         let key = this.app.config._apiKey.replace(" ", "");
         if (this.app.config.noApiKey()) {
-            services_1.Logger.Error("DarkSky: No API Key given");
+            logger_1.Logger.Error("DarkSky: No API Key given");
             this.app.HandleError({
                 type: "hard",
                 userError: true,
@@ -242,14 +216,28 @@ class Weatherbit {
         return query;
     }
     ;
-    OnObtainingData(message) {
-        if (message.status_code == 403) {
+    HandleError(message) {
+        if (message.code == 403) {
             return {
                 type: "hard",
                 userError: true,
                 detail: "bad key",
                 service: "weatherbit",
                 message: utils_1._("Please Make sure you\nentered the API key correctly and your account is not locked")
+            };
+        }
+        return null;
+    }
+    HandleHourlyError(message) {
+        if (message.code == 403) {
+            this.hourlyAccess = false;
+            logger_1.Logger.Print("Hourly forecast is inaccessible, skipping");
+            return {
+                type: "soft",
+                userError: false,
+                detail: "bad key",
+                service: "weatherbit",
+                message: utils_1._("API key is doesn't provide acces to Hourly Weather")
             };
         }
         return null;

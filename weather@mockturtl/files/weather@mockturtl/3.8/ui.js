@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UI = void 0;
-const services_1 = require("./services");
+const logger_1 = require("./logger");
 const utils_1 = require("./utils");
 const weatherbutton_1 = require("./weatherbutton");
 const { PopupMenuManager, PopupSeparatorMenuItem } = imports.ui.popupMenu;
@@ -13,7 +13,6 @@ const { GridLayout } = imports.gi.Clutter;
 const { AppletPopupMenu } = imports.ui.applet;
 const { themeManager } = imports.ui.main;
 const { SignalManager } = imports.misc.signalManager;
-const UUID = "weather@mockturtl";
 const APPLET_ICON = "view-refresh-symbolic";
 const SIGNAL_CHANGED = 'changed::';
 const SIGNAL_CLICKED = 'clicked';
@@ -50,7 +49,7 @@ class UI {
         this.menuManager = new PopupMenuManager(this.app);
         this.menu = new AppletPopupMenu(this.app, orientation);
         this.menu.box.add_style_class_name(STYLE_WEATHER_MENU);
-        services_1.Logger.Debug("Popup Menu applied classes are: " + this.menu.box.get_style_class_name());
+        logger_1.Logger.Debug("Popup Menu applied classes are: " + this.menu.box.get_style_class_name());
         this.menuManager.addMenu(this.menu);
         this.menuManager._signals.connect(this.menu, "open-state-changed", this.PopupMenuToggled, this);
         this.signals = new SignalManager();
@@ -70,7 +69,7 @@ class UI {
         let color = this.menu.actor.get_theme_node().get_color("color");
         let luminance = (2126 * color.red + 7152 * color.green + 722 * color.blue) / 10000 / 255;
         luminance = Math.abs(1 - luminance);
-        services_1.Logger.Debug("Theme is Light: " + (luminance > 0.5));
+        logger_1.Logger.Debug("Theme is Light: " + (luminance > 0.5));
         return (luminance > 0.5);
     }
     ForegroundColor() {
@@ -157,7 +156,7 @@ class UI {
         this.AdjustHourlyBoxItemWidth();
         let [minWidth, naturalWidth] = this._hourlyScrollView.get_preferred_width(-1);
         let [minHeight, naturalHeight] = this._hourlyScrollView.get_preferred_height(minWidth);
-        services_1.Logger.Debug("hourlyScrollView requested height and is set to: " + naturalHeight);
+        logger_1.Logger.Debug("hourlyScrollView requested height and is set to: " + naturalHeight);
         this._hourlyScrollView.set_width(minWidth);
         this._separatorAreaHourly.actor.show();
         if (!!this._hourlyButton.child)
@@ -338,7 +337,7 @@ class UI {
             return true;
         }
         catch (e) {
-            services_1.Logger.Error("DisplayWeatherError: " + e);
+            logger_1.Logger.Error("DisplayWeatherError: " + e);
             return false;
         }
     }
@@ -379,7 +378,7 @@ class UI {
                 message: "Forecast parsing failed: " + e.toString(),
                 userError: false
             });
-            services_1.Logger.Error("DisplayForecastError " + e);
+            logger_1.Logger.Error("DisplayForecastError " + e);
             return false;
         }
     }
@@ -459,7 +458,7 @@ class UI {
         let boxItemHeight = 0;
         for (let index = 0; index < this._hourlyForecastBoxes.length; index++) {
             const ui = this._hourlyForecasts[index];
-            services_1.Logger.Debug("Height requests of Hourly box Items: " + index);
+            logger_1.Logger.Debug("Height requests of Hourly box Items: " + index);
             let hourHeight = ui.Hour.get_preferred_height(-1)[1];
             let iconHeight = ui.Icon.get_preferred_height(-1)[1];
             let summaryHeight = ui.Summary.get_preferred_height(-1)[1];
@@ -469,12 +468,12 @@ class UI {
             if (boxItemHeight < itemheight)
                 boxItemHeight = itemheight;
         }
-        services_1.Logger.Debug("Final Hourly box item height is: " + boxItemHeight);
+        logger_1.Logger.Debug("Final Hourly box item height is: " + boxItemHeight);
         let scrollBarHeight = this._hourlyScrollView.get_hscroll_bar().get_preferred_width(-1)[1];
-        services_1.Logger.Debug("Scrollbar height is " + scrollBarHeight);
+        logger_1.Logger.Debug("Scrollbar height is " + scrollBarHeight);
         let theme = this._hourlyBox.get_theme_node();
         let styling = theme.get_margin(Side.TOP) + theme.get_margin(Side.BOTTOM) + theme.get_padding(Side.TOP) + theme.get_padding(Side.BOTTOM);
-        services_1.Logger.Debug("ScollbarBox vertical padding and margin is: " + styling);
+        logger_1.Logger.Debug("ScollbarBox vertical padding and margin is: " + styling);
         return (boxItemHeight + scrollBarHeight + styling);
     }
     unitToUnicode(unit) {

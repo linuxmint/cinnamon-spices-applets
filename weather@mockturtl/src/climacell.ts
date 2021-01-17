@@ -6,8 +6,9 @@
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
 
+import { HttpError } from "./httpLib";
+import { Logger } from "./logger";
 import { WeatherApplet } from "./main";
-import { Logger } from "./services";
 import { SunTimes } from "./sunCalc";
 import { WeatherProvider, Location, WeatherData, HourlyForecastData, ForecastData, AppletError, Condition } from "./types";
 import { CelsiusToKelvin, _, IsNight, weatherIconSafely } from "./utils";
@@ -67,27 +68,16 @@ export class Climacell implements WeatherProvider {
      * @param ParseFunction returns WeatherData or ForecastData Object
      */
     private async GetData(baseUrl: CallType, loc: Location, ParseFunction: (json: any, context: any) => WeatherData | ForecastData[] | HourlyForecastData[]) {
-        let query = this.ConstructQuery(baseUrl, loc);
-        let json;
-        if (query != null) {
-            try {
-                json = await this.app.LoadJsonAsync(query, this.OnObtainingData);
-            }
-            catch (e) {
-                this.app.HandleHTTPError("climacell", e, this.app, null);
-                return null;
-            }
+		let query = this.ConstructQuery(baseUrl, loc);
+		if (query == null)
+			return null;
 
-            if (json == null) {
-                this.app.HandleError({ type: "soft", detail: "no api response", service: "climacell" });
-                return null;
-            }
+		let json = await this.app.LoadJsonAsync(query, null, this.HandleError);
 
-            return ParseFunction(json, this);
-        }
-        else {
-            return null;
-        }
+		if (json == null)
+			return null;
+
+		return ParseFunction(json, this);
     };
 
 
@@ -197,8 +187,8 @@ export class Climacell implements WeatherProvider {
     * @param message Soup Message object
     * @returns null if custom error checking does not find anything
     */
-    private OnObtainingData(message: any): AppletError {
-        if (message.status_code == 403) {
+    private HandleError(message: HttpError): AppletError {
+        if (message.code == 403) {
             return {
                 type: "hard",
                 userError: true,
@@ -207,7 +197,7 @@ export class Climacell implements WeatherProvider {
                 message: _("Please Make sure you\nentered the API key correctly and your account is not locked")
             };
         }
-        if (message.status_code == 401) {
+        if (message.code == 401) {
             return {
                 type: "hard",
                 userError: true,

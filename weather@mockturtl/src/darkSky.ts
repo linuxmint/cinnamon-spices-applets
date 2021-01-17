@@ -6,8 +6,9 @@
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
 
+import { HttpError, HttpLib } from "./httpLib";
+import { Logger } from "./logger";
 import { WeatherApplet } from "./main";
-import { Logger } from "./services";
 import { SunTimes } from "./sunCalc";
 import { WeatherProvider, Location, WeatherData, ForecastData, HourlyForecastData, PrecipitationType, AppletError, BuiltinIcons, CustomIcons } from "./types";
 import { _, weatherIconSafely, isLangSupported, IsNight, FahrenheitToKelvin, CelsiusToKelvin, MPHtoMPS } from "./utils";
@@ -47,31 +48,19 @@ export class DarkSky implements WeatherProvider {
     //  Functions
     //--------------------------------------------------------
     public async GetWeather(loc: Location): Promise<WeatherData> {
-        let query = this.ConstructQuery(loc);
-        let json;
-        if (query != "" && query != null) {
-            try {
-                json = await this.app.LoadJsonAsync(query, this.OnObtainingData);
-            }
-            catch (e) {
-                this.app.HandleHTTPError("darksky", e, this.app);
-                return null;
-            }
+		let query = this.ConstructQuery(loc);
+		if (query == "" && query == null) return null;
 
-            if (!json) {
-                this.app.HandleError({ type: "soft", detail: "no api response", service: "darksky" });
-                return null;
-            }
+        let json = await this.app.LoadJsonAsync<any>(query, null, this.HandleError);
+		if (!json) return null;
 
-            if (!json.code) {                   // No code, Request Success
-                return this.ParseWeather(json);
-            }
-            else {
-                this.HandleResponseErrors(json);
-                return null;
-            }
-        }
-        return null;
+		if (!json.code) {                   // No code, Request Success
+			return this.ParseWeather(json);
+		}
+		else {
+			this.HandleResponseErrors(json);
+			return null;
+		}
     };
 
 
@@ -199,8 +188,8 @@ export class DarkSky implements WeatherProvider {
      * @param message Soup Message object
      * @returns null if custom error checking does not find anything
      */
-    private OnObtainingData(message: any): AppletError {
-        if (message.status_code == 403) { // DarkSky returns auth error on the http level when key is wrong
+    private HandleError(message: HttpError): AppletError {
+        if (message.code == 403) { // DarkSky returns auth error on the http level when key is wrong
             return {
                 type: "hard",
                 userError: true,
@@ -209,7 +198,7 @@ export class DarkSky implements WeatherProvider {
                 message: _("Please Make sure you\nentered the API key correctly and your account is not locked")
             };
         }
-        if (message.status_code == 401) { // DarkSky returns auth error on the http level when key is wrong
+        if (message.code == 401) { // DarkSky returns auth error on the http level when key is wrong
             return {
                 type: "hard",
                 userError: true,

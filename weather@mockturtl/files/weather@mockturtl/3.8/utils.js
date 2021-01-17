@@ -1,13 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.constructJsLocale = exports.shadeHexColor = exports.hasIcon = exports.weatherIconSafely = exports.Sentencify = exports.isLangSupported = exports.compassDirection = exports.nonempty = exports.isCoordinate = exports.isID = exports.isString = exports.isNumeric = exports.MillimeterToUserUnits = exports.MetreToUserUnits = exports.KmToM = exports.PressToUserUnits = exports.MPHtoMPS = exports.FahrenheitToKelvin = exports.CelsiusToKelvin = exports.TempToUserConfig = exports.MPStoUserUnits = exports.GetFuncName = exports.get = exports.KPHtoMPS = exports.capitalizeFirstLetter = exports.compassToDeg = exports.IsNight = exports.MilitaryTime = exports.AwareDateString = exports.GetHoursMinutes = exports.GetDayName = exports.clearInterval = exports.GetDistance = exports.setInterval = exports.clearTimeout = exports.delay = exports.setTimeout = exports._ = void 0;
+const consts_1 = require("./consts");
 const { timeout_add, source_remove } = imports.mainloop;
 const { IconType } = imports.gi.St;
 const { IconTheme } = imports.gi.Gtk;
-const UUID = "weather@mockturtl";
-imports.gettext.bindtextdomain(UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
+imports.gettext.bindtextdomain(consts_1.UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
 function _(str) {
-    let customTrans = imports.gettext.dgettext(UUID, str);
+    let customTrans = imports.gettext.dgettext(consts_1.UUID, str);
     if (customTrans !== str && customTrans !== "")
         return customTrans;
     return imports.gettext.gettext(str);

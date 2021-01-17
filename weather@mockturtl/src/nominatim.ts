@@ -1,5 +1,5 @@
+import { Logger } from "./logger";
 import { WeatherApplet } from "./main";
-import { Logger } from "./services";
 import { LocationCache, LocationData } from "./types";
 import { get, _ } from "./utils";
 
@@ -25,7 +25,7 @@ export class GeoLocation {
                 return cached;
             }
 
-            let locationData = await this.app.LoadJsonAsync(this.url + encodeURIComponent(searchText) + this.params);
+            let locationData = await this.app.LoadJsonAsync<any>(this.url + encodeURIComponent(searchText) + this.params);
             if (locationData.length == 0) {
                 this.app.HandleError({
                     type: "hard",

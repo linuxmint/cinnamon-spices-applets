@@ -6,10 +6,13 @@
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
 
+import { HttpError } from "./httpLib";
+import { Logger } from "./logger";
 import { WeatherApplet } from "./main";
-import { Logger } from "./services";
 import { WeatherProvider, Location, WeatherData, ForecastData, HourlyForecastData, AppletError, BuiltinIcons, CustomIcons } from "./types";
 import { weatherIconSafely, _, isLangSupported } from "./utils";
+
+const Lang: typeof imports.lang = imports.lang;
 
 export class Weatherbit implements WeatherProvider {
 
@@ -46,7 +49,7 @@ export class Weatherbit implements WeatherProvider {
         let forecastPromise = this.GetData(this.daily_url, loc, this.ParseForecast) as Promise<ForecastData[]>;
         let hourlyPromise = null;
         if (!!this.hourlyAccess) hourlyPromise = this.GetHourlyData(this.hourly_url, loc);
-        let currentResult = await this.GetData(this.current_url, loc, this.ParseCurrent) as WeatherData;
+		let currentResult = await this.GetData(this.current_url, loc, this.ParseCurrent) as WeatherData;
         if (!currentResult) return null;
 
         let forecastResult = await forecastPromise;
@@ -64,60 +67,34 @@ export class Weatherbit implements WeatherProvider {
      * @param ParseFunction returns WeatherData or ForecastData Object
      */
     private async GetData(baseUrl: string, loc: Location, ParseFunction: (json: any, context: any) => WeatherData | ForecastData[] | HourlyForecastData[]) {
-        let query = this.ConstructQuery(baseUrl, loc);
-        let json;
-        if (query != null) {
-            try {
-                json = await this.app.LoadJsonAsync(query, this.OnObtainingData);
-            }
-            catch (e) {
-                this.app.HandleHTTPError("weatherbit", e, this.app);
-                return null;
-            }
+		let query = this.ConstructQuery(baseUrl, loc);
+		if (query == null)
+			return null;
 
-            if (json == null) {
-                this.app.HandleError({ type: "soft", detail: "no api response", service: "weatherbit" });
-                return null;
-            }
+		let json = await this.app.LoadJsonAsync(query, null, this.HandleError);
+            
+		if (json == null)
+			return null;
 
-            return ParseFunction(json, this);
-        }
-        else {
-            return null;
-        }
-    };
+		return ParseFunction(json, this);
+    }
 
     private async GetHourlyData(baseUrl: string, loc: Location) {
-        let query = this.ConstructQuery(baseUrl, loc);
-        let json;
-        if (query != null) {
-            try {
-                json = await this.app.LoadJsonAsync(query, null, false);
-            }
-            catch (e) {
-                // Skip Hourly forecast if it is forbidden (403)
-                if (e.code == 403) {
-                    Logger.Print("Hourly forecast is inaccessible, skipping")
-                    this.hourlyAccess = false;
-                    return null;
-                }
-                this.app.HandleHTTPError("weatherbit", e, this.app);
-                return null;
-            }
+		let query = this.ConstructQuery(baseUrl, loc);
+		if (query == null)
+			return null;
 
-            if (json == null) {
-                this.app.HandleError({ type: "soft", detail: "no api response", service: "weatherbit" });
-                return null;
-            }
+		let json = await this.app.LoadJsonAsync<any>(query, null, Lang.bind(this, this.HandleHourlyError));
+		
+		if (!!json?.error) {
+			return null;
+		}
 
-            return this.ParseHourlyForecast(json, this);
-        }
-        else {
-            return null;
-        }
+		if (json == null)
+			return null;
+
+		return this.ParseHourlyForecast(json, this);
     };
-
-
 
     private ParseCurrent(json: any, self: Weatherbit): WeatherData {
         json = json.data[0];
@@ -297,14 +274,30 @@ export class Weatherbit implements WeatherProvider {
     * @param message Soup Message object
     * @returns null if custom error checking does not find anything
     */
-    private OnObtainingData(message: any): AppletError {
-        if (message.status_code == 403) { // bad key
+    private HandleError(message: HttpError): AppletError {
+        if (message.code == 403) { // bad key
             return {
                 type: "hard",
                 userError: true,
                 detail: "bad key",
                 service: "weatherbit",
                 message: _("Please Make sure you\nentered the API key correctly and your account is not locked")
+            };
+        }
+        return null;
+	}
+	
+	private HandleHourlyError(message: HttpError): AppletError {
+		/// Skip Hourly forecast if it is forbidden (403)            
+		if (message.code == 403) { // bad key
+			this.hourlyAccess = false;
+			Logger.Print("Hourly forecast is inaccessible, skipping")
+            return {
+                type: "soft",
+                userError: false,
+                detail: "bad key",
+                service: "weatherbit",
+                message: _("API key is doesn't provide acces to Hourly Weather, skipping")
             };
         }
         return null;

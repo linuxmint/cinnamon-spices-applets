@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.MetNorway = void 0;
-const services_1 = require("./services");
+const logger_1 = require("./logger");
 const sunCalc_1 = require("./sunCalc");
 const utils_1 = require("./utils");
 class MetNorway {
@@ -18,24 +18,14 @@ class MetNorway {
     }
     async GetWeather(loc) {
         let query = this.GetUrl(loc);
-        let json;
-        if (query != "" && query != null) {
-            try {
-                json = await this.app.LoadJsonAsync(query);
-            }
-            catch (e) {
-                this.app.HandleHTTPError("met-norway", e, this.app);
-                services_1.Logger.Error("MET Norway: Network error - " + e);
-                return null;
-            }
-            if (!json) {
-                this.app.HandleError({ type: "soft", detail: "no api response", service: "met-norway" });
-                services_1.Logger.Error("MET Norway: Empty response from API");
-                return null;
-            }
-            return this.ParseWeather(json);
+        if (query == null)
+            return null;
+        let json = await this.app.LoadJsonAsync(query);
+        if (!json) {
+            logger_1.Logger.Error("MET Norway: Empty response from API");
+            return null;
         }
-        return null;
+        return this.ParseWeather(json);
     }
     RemoveEarlierElements(json) {
         let now = new Date();
@@ -51,7 +41,7 @@ class MetNorway {
             }
         }
         if (startIndex != -1) {
-            services_1.Logger.Debug("Removing outdated weather information...");
+            logger_1.Logger.Debug("Removing outdated weather information...");
             json.properties.timeseries.splice(0, startIndex + 1);
         }
         return json;
@@ -504,7 +494,7 @@ class MetNorway {
                     icon: utils_1.weatherIconSafely(["weather-snow-scattered", "weather-snow"], iconType)
                 };
             default:
-                services_1.Logger.Error("condition code not found: " + weather.condition);
+                logger_1.Logger.Error("condition code not found: " + weather.condition);
                 return {
                     customIcon: "cloud-refresh-symbolic",
                     main: utils_1._("Unknown"),

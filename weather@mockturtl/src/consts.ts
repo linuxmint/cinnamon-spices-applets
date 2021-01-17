@@ -1,0 +1,1 @@
+export const UUID = "weather@mockturtl"

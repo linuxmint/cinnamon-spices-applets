@@ -6,8 +6,8 @@
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
 
+import { Logger } from "./logger";
 import { WeatherApplet } from "./main";
-import { Logger } from "./services";
 import { LocationData } from "./types";
 import { _ } from "./utils";
 
@@ -15,23 +15,14 @@ export class IpApi {
     query = "http://ip-api.com/json/?fields=status,message,country,countryCode,city,lat,lon,timezone,mobile,query";
     app: WeatherApplet;
 
-
     constructor(_app: WeatherApplet) {
         this.app = _app;
     }
 
     public async GetLocation(): Promise<LocationData> {
-        let json: IpApiPayload;
-        try {
-            json = await this.app.LoadJsonAsync(this.query);
-        }
-        catch (e) {
-            this.app.HandleHTTPError("ipapi", e, this.app);
-            return null;
-        }
+        let json = await this.app.LoadJsonAsync<IpApiPayload>(this.query);
 
-        if (!json) {                         // Bad response
-            this.app.HandleError({ type: "soft", detail: "no api response" });
+        if (!json) {
             return null;
         }
 

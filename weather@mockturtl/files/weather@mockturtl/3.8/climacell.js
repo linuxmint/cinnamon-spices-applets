@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Climacell = void 0;
-const services_1 = require("./services");
+const logger_1 = require("./logger");
 const utils_1 = require("./utils");
 class Climacell {
     constructor(_app) {
@@ -39,24 +39,12 @@ class Climacell {
     ;
     async GetData(baseUrl, loc, ParseFunction) {
         let query = this.ConstructQuery(baseUrl, loc);
-        let json;
-        if (query != null) {
-            try {
-                json = await this.app.LoadJsonAsync(query, this.OnObtainingData);
-            }
-            catch (e) {
-                this.app.HandleHTTPError("climacell", e, this.app, null);
-                return null;
-            }
-            if (json == null) {
-                this.app.HandleError({ type: "soft", detail: "no api response", service: "climacell" });
-                return null;
-            }
-            return ParseFunction(json, this);
-        }
-        else {
+        if (query == null)
             return null;
-        }
+        let json = await this.app.LoadJsonAsync(query, null, this.HandleError);
+        if (json == null)
+            return null;
+        return ParseFunction(json, this);
     }
     ;
     ParseWeather(json, ctx) {
@@ -97,7 +85,7 @@ class Climacell {
             return result;
         }
         catch (e) {
-            services_1.Logger.Error("Climacell payload parsing error: " + e);
+            logger_1.Logger.Error("Climacell payload parsing error: " + e);
             ctx.app.HandleError({ type: "soft", detail: "unusual payload", service: "climacell", message: utils_1._("Failed to Process Weather Info") });
             return null;
         }
@@ -143,7 +131,7 @@ class Climacell {
         let query;
         let key = this.app.config._apiKey.replace(" ", "");
         if (this.app.config.noApiKey()) {
-            services_1.Logger.Error("Climacell: No API Key given");
+            logger_1.Logger.Error("Climacell: No API Key given");
             this.app.HandleError({
                 type: "hard",
                 userError: true,
@@ -156,8 +144,8 @@ class Climacell {
         return query;
     }
     ;
-    OnObtainingData(message) {
-        if (message.status_code == 403) {
+    HandleError(message) {
+        if (message.code == 403) {
             return {
                 type: "hard",
                 userError: true,
@@ -166,7 +154,7 @@ class Climacell {
                 message: utils_1._("Please Make sure you\nentered the API key correctly and your account is not locked")
             };
         }
-        if (message.status_code == 401) {
+        if (message.code == 401) {
             return {
                 type: "hard",
                 userError: true,
@@ -341,7 +329,7 @@ class Climacell {
                     icon: utils_1.weatherIconSafely((isNight) ? ["weather-clear-night"] : ["weather-clear"], this.app.config.IconType())
                 };
             default:
-                services_1.Logger.Error("condition code not found: " + condition);
+                logger_1.Logger.Error("condition code not found: " + condition);
                 return {
                     customIcon: "refresh-symbolic",
                     description: utils_1._("Unknown"),

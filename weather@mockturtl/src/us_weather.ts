@@ -6,8 +6,8 @@
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
 
+import { Logger } from "./logger";
 import { WeatherApplet } from "./main";
-import { Logger } from "./services";
 import { SunCalc } from "./sunCalc";
 import { WeatherProvider, Location, WeatherData, AppletError, ForecastData, HourlyForecastData, Condition } from "./types";
 import { _, GetDistance, get, KPHtoMPS, CelsiusToKelvin, IsNight, FahrenheitToKelvin, weatherIconSafely } from "./utils";
@@ -67,19 +67,15 @@ export class USWeather implements WeatherProvider {
         // Long wait time, can't do Promise.all because US weather will ban IP for some time on spamming
         let observations = await this.GetObservationsInRange(this.MAX_STATION_DIST, loc, this.observationStations);
 
-        let hourly = null;
-        let forecast = null;
-        try {
-            let hourlyForecastPromise = this.app.LoadJsonAsync(this.grid.properties.forecastHourly + "?units=si") as Promise<ForecastsPayload>;
-            let forecastPromise = this.app.LoadJsonAsync(this.grid.properties.forecast) as Promise<ForecastsPayload>;
-            hourly = await hourlyForecastPromise;
-            forecast = await forecastPromise;
-        }
-        catch (e) {
-            Logger.Error("Failed to obtain forecast Data, error: " + JSON.stringify(e, null, 2));
-            this.app.HandleError({ type: "soft", detail: "bad api response", message: _("Could not get forecast for your area") });
-            return null;
-        }
+		let hourlyForecastPromise = this.app.LoadJsonAsync<ForecastsPayload>(this.grid.properties.forecastHourly + "?units=si");
+		let forecastPromise = this.app.LoadJsonAsync<ForecastsPayload>(this.grid.properties.forecast);
+		let hourly = await hourlyForecastPromise;
+		let forecast = await forecastPromise;
+        
+        if (!hourly || !forecast) {
+			Logger.Error("Failed to obtain forecast Data");
+			return null;
+		}
 
         // Parsing data
         let weather = this.ParseCurrent(observations, hourly);
@@ -96,7 +92,7 @@ export class USWeather implements WeatherProvider {
     private async GetGridData(loc: Location): Promise<GridPayload> {
         try {
             // Handling out of country errors in callback
-            let siteData = await this.app.LoadJsonAsync(this.sitesUrl + loc.text, this.OnObtainingGridData) as GridPayload;
+            let siteData = await this.app.LoadJsonAsync<GridPayload>(this.sitesUrl + loc.text, this.OnObtainingGridData);
             Logger.Debug("Grid found: " + JSON.stringify(siteData, null, 2));
             return siteData;
         }
@@ -118,21 +114,8 @@ export class USWeather implements WeatherProvider {
 	 * @param stationListUrl 
 	 */
     private async GetStationData(stationListUrl: string): Promise<StationPayload[]> {
-        try {
-            let stations = await this.app.LoadJsonAsync(stationListUrl) as StationsPayload;
-            return stations.features;
-        }
-        catch (e) {
-            Logger.Error("Failed to obtain station data, error: " + JSON.stringify(e, null, 2));
-            this.app.HandleError({
-                type: "soft",
-                userError: true,
-                detail: "no network response",
-                service: "us-weather",
-                message: _("Unexpected response from API")
-            })
-            return null;
-        }
+		let stations = await this.app.LoadJsonAsync<StationsPayload>(stationListUrl);
+		return stations?.features;
     }
 
 	/**
@@ -148,7 +131,7 @@ export class USWeather implements WeatherProvider {
             if (element.dist > range) break;
             try {
                 //Logger.Debug("Observation query is: " + this.stations[index].id + "/observations/latest")
-                observations.push(await this.app.LoadJsonAsync(stations[index].id + "/observations/latest"))
+                observations.push(await this.app.LoadJsonAsync<any>(stations[index].id + "/observations/latest"))
             }
             catch {
                 Logger.Debug("Failed to get observations from " + stations[index].id);
@@ -376,7 +359,7 @@ export class USWeather implements WeatherProvider {
                     main: _("Clear"),
                     description: _("Clear"),
                     customIcon: (isNight) ? "night-clear-symbolic" : "day-sunny-symbolic",
-                    icon: weatherIconSafely(["weather-severe-alert"], iconType)
+                    icon: weatherIconSafely((isNight) ? ["weather-clear-night", "weather-severe-alert"] : ["weather-clear", "weather-severe-alert"], iconType)
                 }
             case "few": // A few clouds
                 return {
@@ -425,14 +408,14 @@ export class USWeather implements WeatherProvider {
                     main: _("Partly Cloudy"),
                     description: _("Partly cloudy and windy"),
                     customIcon: (IsNight) ? "night-alt-cloudy-windy-symbolic" : "day-cloudy-windy-symbolic",
-                    icon: weatherIconSafely((isNight) ? ["weather-clouds-night"] : ["weather-clouds"], iconType)
+                    icon: weatherIconSafely((isNight) ? ["weather-clouds-night", "weather-few-clouds-night"] : ["weather-clouds", "weather-few-clouds"], iconType)
                 }
             case "wind_bkn": // Mostly cloudy and windy
                 return {
                     main: _("Mostly Cloudy"),
                     description: _("Mostly cloudy and windy"),
                     customIcon: (IsNight) ? "night-alt-cloudy-windy-symbolic" : "day-cloudy-windy-symbolic",
-                    icon: weatherIconSafely((isNight) ? ["weather-clouds-night"] : ["weather-clouds"], iconType)
+                    icon: weatherIconSafely((isNight) ? ["weather-clouds-night", "weather-few-clouds-night"] : ["weather-clouds", "weather-few-clouds"], iconType)
                 }
             case "wind_ovc":
                 return { // Overcast and windy

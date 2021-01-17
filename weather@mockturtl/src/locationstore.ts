@@ -2,8 +2,8 @@
 // TODO: Make internal persistent setting when switching to location store entries and back
 // Example schema entry:
 
+import { Logger } from "./logger";
 import { WeatherApplet } from "./main";
-import { Logger } from "./services";
 import { LocationData } from "./types";
 import { _ } from "./utils";
 

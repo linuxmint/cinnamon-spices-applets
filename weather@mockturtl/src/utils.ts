@@ -1,11 +1,10 @@
 import { WeatherWindSpeedUnits, WeatherUnits, WeatherPressureUnits, DistanceUnits } from "./config";
+import { UUID } from "./consts";
 import { SunTimes } from "./sunCalc";
 import { BuiltinIcons } from "./types";
 const { timeout_add, source_remove } = imports.mainloop;
 const { IconType } = imports.gi.St;
 const { IconTheme } = imports.gi.Gtk;
-
-const UUID = "weather@mockturtl";
 
 imports.gettext.bindtextdomain(UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
 export function _(str: string): string {

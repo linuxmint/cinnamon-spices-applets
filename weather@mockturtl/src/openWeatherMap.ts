@@ -6,9 +6,10 @@
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
 
+import { HttpError } from "./httpLib";
+import { Logger } from "./logger";
 import { WeatherApplet } from "./main";
-import { Logger } from "./services";
-import { WeatherProvider, Location, WeatherData, ForecastData, HourlyForecastData, AppletError, HttpError, BuiltinIcons, CustomIcons } from "./types";
+import { WeatherProvider, Location, WeatherData, ForecastData, HourlyForecastData, AppletError, BuiltinIcons, CustomIcons } from "./types";
 import { get, weatherIconSafely, _, isLangSupported } from "./utils";
 
 export class OpenWeatherMap implements WeatherProvider {
@@ -38,33 +39,17 @@ export class OpenWeatherMap implements WeatherProvider {
     //--------------------------------------------------------
 
     public async GetWeather(loc: Location): Promise<WeatherData> {
-        let query = this.ConstructQuery(this.base_url, loc);
-        let json;
-        if (query != null) {
-            try {
-                json = await this.app.LoadJsonAsync(query);
-            } catch (e) {
-                this.app.HandleHTTPError("openweathermap", e, this.app, this.HandleHTTPError);
-                return null;
-            }
+		let query = this.ConstructQuery(this.base_url, loc);
+		if (query == null) 
+			return null;
 
-            if (json == null) {
-                this.app.HandleError({
-                    type: "soft",
-                    detail: "no api response",
-                    service: "openweathermap"
-                });
-                return null;
-            }
+		let json = await this.app.LoadJsonAsync<any>(query, null, this.HandleError);
+		if (!json)
+			return null;
 
-            return this.ParseWeather(json, this);
-            /*else {
-                this.HandleResponseErrors(json);
-                return null;
-            }*/
-        } else {
-            return null;
-        }
+		if (this.HadErrors(json)) return null;
+
+		return this.ParseWeather(json, this);
     };
 
     private ParseWeather(json: any, self: OpenWeatherMap): WeatherData {
@@ -203,13 +188,15 @@ export class OpenWeatherMap implements WeatherProvider {
         return lang;
     }
 
-    private HandleResponseErrors(json: any): void {
+    private HadErrors(json: any): boolean {
+		if (!this.HasReturnedError(json)) return false;
         let errorMsg = "OpenWeatherMap Response: ";
         let error = {
             service: "openweathermap",
             type: "hard",
-        } as AppletError;
-        switch (json.cod) {
+		} as AppletError;
+		let errorPayload: OpenWeatherMapError = json;
+        switch (errorPayload.cod) {
             case ("400"):
                 error.detail = "bad location format";
                 error.message = _("Please make sure Location is in the correct format in the Settings");
@@ -232,21 +219,27 @@ export class OpenWeatherMap implements WeatherProvider {
                 break;
         };
         this.app.HandleError(error);
-        Logger.Debug("OpenWeatherMap Error Code: " + json.cod)
-        Logger.Error(errorMsg + json.message);
-    };
+        Logger.Debug("OpenWeatherMap Error Code: " + errorPayload.cod)
+		Logger.Error(errorMsg + errorPayload.message);
+		return true;
+	};
+	
+	private HasReturnedError(json: any) {
+		return (!!json?.cod);
+	}
 
-    public HandleHTTPError(error: HttpError, uiError: AppletError): AppletError {
+    public HandleError(error: HttpError): AppletError {
         // "this" is not accessible here
         if (error.code == 404) {
-            uiError.detail = "location not found";
-            uiError.message = _("Location not found, make sure location is available or it is in the correct format");
-            uiError.userError = true;
-            uiError.type = "hard";
+			return {
+				detail: "location not found",
+				message: _("Location not found, make sure location is available or it is in the correct format"),
+				userError: true,
+				type: "hard"
+			}
         }
-        return uiError;
-    }
-
+        return null;
+	}
 
     private ResolveIcon(icon: string): BuiltinIcons[] {
         // https://openweathermap.org/weather-conditions
@@ -375,6 +368,11 @@ export class OpenWeatherMap implements WeatherProvider {
         }
     };
 };
+
+interface OpenWeatherMapError {
+	cod: string;
+	message: string;
+}
 
 const openWeatherMapConditionLibrary = [
     // Group 2xx: Thunderstorm

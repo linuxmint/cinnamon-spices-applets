@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.OpenWeatherMap = void 0;
-const services_1 = require("./services");
+const logger_1 = require("./logger");
 const utils_1 = require("./utils");
 class OpenWeatherMap {
     constructor(_app) {
@@ -19,28 +19,14 @@ class OpenWeatherMap {
     }
     async GetWeather(loc) {
         let query = this.ConstructQuery(this.base_url, loc);
-        let json;
-        if (query != null) {
-            try {
-                json = await this.app.LoadJsonAsync(query);
-            }
-            catch (e) {
-                this.app.HandleHTTPError("openweathermap", e, this.app, this.HandleHTTPError);
-                return null;
-            }
-            if (json == null) {
-                this.app.HandleError({
-                    type: "soft",
-                    detail: "no api response",
-                    service: "openweathermap"
-                });
-                return null;
-            }
-            return this.ParseWeather(json, this);
-        }
-        else {
+        if (query == null)
             return null;
-        }
+        let json = await this.app.LoadJsonAsync(query, null, this.HandleError);
+        if (!json)
+            return null;
+        if (this.HadErrors(json))
+            return null;
+        return this.ParseWeather(json, this);
     }
     ;
     ParseWeather(json, self) {
@@ -127,7 +113,7 @@ class OpenWeatherMap {
             return weather;
         }
         catch (e) {
-            services_1.Logger.Error("OpenWeatherMap Weather Parsing error: " + e);
+            logger_1.Logger.Error("OpenWeatherMap Weather Parsing error: " + e);
             self.app.HandleError({
                 type: "soft",
                 service: "openweathermap",
@@ -171,13 +157,16 @@ class OpenWeatherMap {
         }
         return lang;
     }
-    HandleResponseErrors(json) {
+    HadErrors(json) {
+        if (!this.HasReturnedError(json))
+            return false;
         let errorMsg = "OpenWeatherMap Response: ";
         let error = {
             service: "openweathermap",
             type: "hard",
         };
-        switch (json.cod) {
+        let errorPayload = json;
+        switch (errorPayload.cod) {
             case ("400"):
                 error.detail = "bad location format";
                 error.message = utils_1._("Please make sure Location is in the correct format in the Settings");
@@ -201,18 +190,24 @@ class OpenWeatherMap {
         }
         ;
         this.app.HandleError(error);
-        services_1.Logger.Debug("OpenWeatherMap Error Code: " + json.cod);
-        services_1.Logger.Error(errorMsg + json.message);
+        logger_1.Logger.Debug("OpenWeatherMap Error Code: " + errorPayload.cod);
+        logger_1.Logger.Error(errorMsg + errorPayload.message);
+        return true;
     }
     ;
-    HandleHTTPError(error, uiError) {
+    HasReturnedError(json) {
+        return (!!(json === null || json === void 0 ? void 0 : json.cod));
+    }
+    HandleError(error) {
         if (error.code == 404) {
-            uiError.detail = "location not found";
-            uiError.message = utils_1._("Location not found, make sure location is available or it is in the correct format");
-            uiError.userError = true;
-            uiError.type = "hard";
+            return {
+                detail: "location not found",
+                message: utils_1._("Location not found, make sure location is available or it is in the correct format"),
+                userError: true,
+                type: "hard"
+            };
         }
-        return uiError;
+        return null;
     }
     ResolveIcon(icon) {
         switch (icon) {

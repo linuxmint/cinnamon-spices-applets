@@ -5,11 +5,6 @@ import { Services, WeatherWindSpeedUnits, DistanceUnits } from "./config";
  */
 export interface WeatherProvider {
     GetWeather(loc: Location): Promise<WeatherData>;
-	/** Used as to extend the same named function in the Applet Class.
-	 * 
-	 * "this" (context) is not accessible here
-	 */
-    HandleHTTPError?: (error: HttpError, uiError: AppletError) => AppletError;
     prettyName: string;
     name: Services;
     maxForecastSupport: number;
@@ -141,13 +136,6 @@ export interface AppletError {
     code?: number;
     message?: string;
     service?: ApiService
-}
-
-export interface HttpError {
-    code: number;
-    message: ErrorDetail;
-    reason_phrase: string;
-    data: any;
 }
 
 export type RefreshState = "success" | "failure" | "error" | "locked";
