@@ -44,6 +44,9 @@ class Log {
             this.Print(message);
         }
     }
+    UpdateInstanceID(instanceID) {
+        this.ID = instanceID;
+    }
     GetErrorLine() {
         let arr = (new Error).stack.split("\n").slice(-2)[0].split('/').slice(-1)[0];
         return arr;

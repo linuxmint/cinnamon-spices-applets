@@ -1,3 +1,4 @@
+import { Logger } from "./logger";
 import { WeatherApplet } from "./main";
 
 //----------------------------------------------------------------------
@@ -7,5 +8,6 @@ import { WeatherApplet } from "./main";
 //----------------------------------------------------------------------
 
 function main(metadata: any, orientation: imports.gi.St.Side, panelHeight: number, instanceId: number) {
+	Logger.UpdateInstanceID(instanceId);
     return new WeatherApplet(metadata, orientation, panelHeight, instanceId);
 }

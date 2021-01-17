@@ -45,7 +45,11 @@ export class Log {
         if (this.debug && this.level > 1) {
             this.Print(message);
         }
-    }
+	}
+	
+	public UpdateInstanceID(instanceID: number): void {
+		this.ID = instanceID;
+	}
 
     private GetErrorLine(): string {
         // Couldn't be more ugly, but it returns the file and line number
@@ -54,4 +58,4 @@ export class Log {
     }
 }
 
-export const Logger = new Log();
+export const Logger: Log = new Log();
