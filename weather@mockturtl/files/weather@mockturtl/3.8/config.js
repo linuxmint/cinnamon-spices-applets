@@ -138,7 +138,7 @@ class Config {
         }
         let loc = this._location;
         if (loc == undefined || loc.trim() == "") {
-            this.app.HandleError({
+            this.app.ShowError({
                 type: "hard",
                 detail: "no location",
                 userError: true,
@@ -166,7 +166,7 @@ class Config {
         let locationData = await this.app.geoLocationService.GetLocation(loc);
         if (locationData == null)
             return null;
-        if (!!locationData.address_string) {
+        if (!!(locationData === null || locationData === void 0 ? void 0 : locationData.address_string)) {
             logger_1.Logger.Debug("Address found via address search, placing found full address '" + locationData.address_string + "' back to location entry");
         }
         this.InjectLocationToConfig(locationData);

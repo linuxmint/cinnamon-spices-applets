@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.LocationStore = void 0;
 const logger_1 = require("./logger");
+const notification_service_1 = require("./notification_service");
 const utils_1 = require("./utils");
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
@@ -108,34 +109,34 @@ class LocationStore {
     }
     async SaveCurrentLocation(loc) {
         if (this.app.Locked()) {
-            this.app.sendNotification(utils_1._("Warning") + " - " + utils_1._("Location Store"), utils_1._("You can only save correct locations when the applet is not refreshing"), true);
+            notification_service_1.Notifications.Send(utils_1._("Warning") + " - " + utils_1._("Location Store"), utils_1._("You can only save correct locations when the applet is not refreshing"), true);
             return;
         }
         if (loc == null) {
-            this.app.sendNotification(utils_1._("Warning") + " - " + utils_1._("Location Store"), utils_1._("You can't save an incorrect location"), true);
+            notification_service_1.Notifications.Send(utils_1._("Warning") + " - " + utils_1._("Location Store"), utils_1._("You can't save an incorrect location"), true);
             return;
         }
         if (this.InStorage(loc)) {
-            this.app.sendNotification(utils_1._("Info") + " - " + utils_1._("Location Store"), utils_1._("Location is already saved"), true);
+            notification_service_1.Notifications.Send(utils_1._("Info") + " - " + utils_1._("Location Store"), utils_1._("Location is already saved"), true);
             return;
         }
         this.locations.push(loc);
         this.currentIndex = this.locations.length - 1;
         this.InvokeStorageChanged();
         await this.SaveToFile();
-        this.app.sendNotification(utils_1._("Success") + " - " + utils_1._("Location Store"), utils_1._("Location is saved to library"), true);
+        notification_service_1.Notifications.Send(utils_1._("Success") + " - " + utils_1._("Location Store"), utils_1._("Location is saved to library"), true);
     }
     async DeleteCurrentLocation(loc) {
         if (this.app.Locked()) {
-            this.app.sendNotification(utils_1._("Info") + " - " + utils_1._("Location Store"), utils_1._("You can't remove a location while the applet is refreshing"), true);
+            notification_service_1.Notifications.Send(utils_1._("Info") + " - " + utils_1._("Location Store"), utils_1._("You can't remove a location while the applet is refreshing"), true);
             return;
         }
         if (loc == null) {
-            this.app.sendNotification(utils_1._("Info") + " - " + utils_1._("Location Store"), utils_1._("You can't remove an incorrect location"), true);
+            notification_service_1.Notifications.Send(utils_1._("Info") + " - " + utils_1._("Location Store"), utils_1._("You can't remove an incorrect location"), true);
             return;
         }
         if (!this.InStorage(loc)) {
-            this.app.sendNotification(utils_1._("Info") + " - " + utils_1._("Location Store"), utils_1._("Location is not in storage, can't delete"), true);
+            notification_service_1.Notifications.Send(utils_1._("Info") + " - " + utils_1._("Location Store"), utils_1._("Location is not in storage, can't delete"), true);
             return;
         }
         let index = this.FindIndex(loc);
@@ -145,7 +146,7 @@ class LocationStore {
             this.currentIndex = this.locations.length - 1;
         if (this.currentIndex < 0)
             this.currentIndex = 0;
-        this.app.sendNotification(utils_1._("Success") + " - " + utils_1._("Location Store"), utils_1._("Location is deleted from library"), true);
+        notification_service_1.Notifications.Send(utils_1._("Success") + " - " + utils_1._("Location Store"), utils_1._("Location is deleted from library"), true);
         this.InvokeStorageChanged();
     }
     InvokeStorageChanged() {
@@ -179,7 +180,7 @@ class LocationStore {
         }
         catch (e) {
             logger_1.Logger.Error("Error loading locations from store: " + e.message);
-            this.app.sendNotification(utils_1._("Error") + " - " + utils_1._("Location Store"), utils_1._("Failed to load in data from location storage, please see the logs for more information"));
+            notification_service_1.Notifications.Send(utils_1._("Error") + " - " + utils_1._("Location Store"), utils_1._("Failed to load in data from location storage, please see the logs for more information"));
             return false;
         }
     }

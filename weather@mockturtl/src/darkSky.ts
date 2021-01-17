@@ -148,7 +148,7 @@ export class DarkSky implements WeatherProvider {
         }
         catch (e) {
             Logger.Error("DarkSky payload parsing error: " + e)
-            this.app.HandleError({ type: "soft", detail: "unusual payload", service: "darksky", message: _("Failed to Process Weather Info") });
+            this.app.ShowError({ type: "soft", detail: "unusual payload", service: "darksky", message: _("Failed to Process Weather Info") });
             return null;
         }
     };
@@ -167,7 +167,7 @@ export class DarkSky implements WeatherProvider {
         let key = this.app.config._apiKey.replace(" ", "");
         if (this.app.config.noApiKey()) {
             Logger.Error("DarkSky: No API Key given");
-            this.app.HandleError({
+            this.app.ShowError({
                 type: "hard",
                 userError: true,
                 "detail": "no key",

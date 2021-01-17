@@ -18,10 +18,9 @@ const met_norway_1 = require("./met_norway");
 const httpLib_1 = require("./httpLib");
 const logger_1 = require("./logger");
 const consts_1 = require("./consts");
+const notification_service_1 = require("./notification_service");
 const { TextIconApplet, AllowedLayout, MenuItem } = imports.ui.applet;
 const { get_language_names } = imports.gi.GLib;
-const { messageTray } = imports.ui.main;
-const { SystemNotificationSource, Notification } = imports.ui.messageTray;
 const Lang = imports.lang;
 const GLib = imports.gi.GLib;
 const { spawnCommandLine, spawnCommandLineAsyncIO } = imports.misc.util;
@@ -42,7 +41,6 @@ const DATA_SERVICE = {
 class WeatherApplet extends TextIconApplet {
     constructor(metadata, orientation, panelHeight, instanceId) {
         super(orientation, panelHeight, instanceId);
-        this.appletDir = imports.ui.appletManager.appletMeta[consts_1.UUID].path;
         this.currentLocale = null;
         this.lock = false;
         this.refreshTriggeredWhileLocked = false;
@@ -68,13 +66,12 @@ class WeatherApplet extends TextIconApplet {
             "import error": utils_1._("Missing Packages"),
             "location not covered": utils_1._("Location not covered"),
         };
+        this.appletDir = metadata.path;
         this.currentLocale = utils_1.constructJsLocale(get_language_names()[0]);
         logger_1.Logger.Debug("Applet created with instanceID " + instanceId);
         logger_1.Logger.Debug("System locale is " + this.currentLocale);
         logger_1.Logger.Debug("Appletdir is: " + this.appletDir);
         imports.gettext.bindtextdomain(consts_1.UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
-        this.msgSource = new SystemNotificationSource(utils_1._("Weather Applet"));
-        messageTray.add(this.msgSource);
         imports.gi.Gtk.IconTheme.get_default().append_search_path(this.appletDir + "/../icons");
         this.SetAppletOnPanel();
         this.config = new config_1.Config(this, instanceId, this.currentLocale);
@@ -83,7 +80,6 @@ class WeatherApplet extends TextIconApplet {
         this.ui = new ui_1.UI(this, orientation);
         this.ui.rebuild(this.config);
         this.loop = new loop_1.WeatherLoop(this, instanceId);
-        GLib.getenv('XDG_CONFIG_HOME');
         this.locationStore = new locationstore_1.LocationStore(this, Lang.bind(this, this.onLocationStorageChanged));
         this.orientation = orientation;
         try {
@@ -132,7 +128,7 @@ class WeatherApplet extends TextIconApplet {
             if (!!HandleError)
                 customError = HandleError(response.ErrorData);
             if (!!customError)
-                this.HandleError(customError);
+                this.ShowError(customError);
             else
                 this.HandleHTTPError(response.ErrorData);
             return null;
@@ -152,7 +148,7 @@ class WeatherApplet extends TextIconApplet {
             case "unknown":
                 appletError.type = "hard";
         }
-        this.HandleError(appletError);
+        this.ShowError(appletError);
     }
     async SpawnProcess(command) {
         let cmd = "";
@@ -178,12 +174,6 @@ class WeatherApplet extends TextIconApplet {
             global.log(e);
             return null;
         }
-    }
-    sendNotification(title, message, transient) {
-        let notification = new Notification(this.msgSource, utils_1._("Weather Applet") + ": " + title, message);
-        if (transient)
-            notification.setTransient((!transient) ? false : true);
-        this.msgSource.notify(notification);
     }
     SetAppletTooltip(msg) {
         this.set_applet_tooltip(msg);
@@ -214,7 +204,7 @@ class WeatherApplet extends TextIconApplet {
     }
     async saveCurrentLocation() {
         if (this.config.currentLocation.locationSource == "ip-api") {
-            this.sendNotification(utils_1._("Error") + " - " + utils_1._("Location Store"), utils_1._("You can't save a location obtained automatically, sorry"));
+            notification_service_1.Notifications.Send(utils_1._("Error") + " - " + utils_1._("Location Store"), utils_1._("You can't save a location obtained automatically, sorry"));
         }
         this.locationStore.SaveCurrentLocation(this.config.currentLocation);
     }
@@ -261,21 +251,6 @@ class WeatherApplet extends TextIconApplet {
     }
     on_panel_height_changed() {
     }
-    OpenUrl(element) {
-        if (!element.url)
-            return;
-        imports.gi.Gio.app_info_launch_default_for_uri(element.url, global.create_app_launch_context());
-    }
-    GetMaxForecastDays() {
-        if (!this.provider)
-            return this.config._forecastDays;
-        return Math.min(this.config._forecastDays, this.provider.maxForecastSupport);
-    }
-    GetMaxHourlyForecasts() {
-        if (!this.provider)
-            return this.config._forecastHours;
-        return Math.min(this.config._forecastHours, this.provider.maxHourlyForecastSupport);
-    }
     EnsureProvider(force = false) {
         let currentName = utils_1.get(["name"], this.provider);
         switch (this.config._dataService) {
@@ -316,45 +291,30 @@ class WeatherApplet extends TextIconApplet {
         }
     }
     async refreshWeather(rebuild, location) {
-        if (this.lock) {
-            logger_1.Logger.Print("Refreshing in progress, refresh skipped.");
-            return "locked";
-        }
-        this.lock = true;
-        this.encounteredError = false;
-        let locationData = null;
-        if (location == null) {
-            try {
-                locationData = await this.config.EnsureLocation();
-            }
-            catch (e) {
-                logger_1.Logger.Error(e);
-                this.Unlock();
-                return "error";
-            }
-        }
-        else {
-            locationData = location;
-            this.config.InjectLocationToConfig(location, true);
-        }
-        if (locationData == null) {
-            this.Unlock();
-            return "failure";
-        }
         try {
+            if (this.lock) {
+                logger_1.Logger.Print("Refreshing in progress, refresh skipped.");
+                return "locked";
+            }
+            this.lock = true;
+            this.encounteredError = false;
+            if (!location) {
+                location = await this.config.EnsureLocation();
+                if (!location) {
+                    this.Unlock();
+                    return "error";
+                }
+            }
+            else {
+                this.config.InjectLocationToConfig(location, true);
+            }
             this.EnsureProvider();
-            let weatherInfo = await this.provider.GetWeather({ lat: locationData.lat, lon: locationData.lon, text: locationData.lat.toString() + "," + locationData.lon.toString() });
+            let weatherInfo = await this.provider.GetWeather({ lat: location.lat, lon: location.lon, text: location.lat.toString() + "," + location.lon.toString() });
             if (weatherInfo == null) {
-                logger_1.Logger.Error("Unable to obtain Weather Information");
-                this.HandleError({
-                    type: "hard",
-                    detail: "unknown",
-                    message: utils_1._("Could not get weather information"),
-                });
                 this.Unlock();
                 return "failure";
             }
-            weatherInfo = this.FillInWeatherData(weatherInfo, locationData);
+            weatherInfo = this.MergeWeatherData(weatherInfo, location);
             if (rebuild)
                 this.ui.rebuild(this.config);
             if (!this.ui.displayWeather(weatherInfo, this.config)
@@ -371,13 +331,28 @@ class WeatherApplet extends TextIconApplet {
         }
         catch (e) {
             logger_1.Logger.Error("Generic Error while refreshing Weather info: " + e);
-            this.HandleError({ type: "hard", detail: "unknown", message: utils_1._("Unexpected Error While Refreshing Weather, please see log in Looking Glass") });
+            this.ShowError({ type: "hard", detail: "unknown", message: utils_1._("Unexpected Error While Refreshing Weather, please see log in Looking Glass") });
             this.Unlock();
             return "failure";
         }
     }
     ;
-    FillInWeatherData(weatherInfo, locationData) {
+    OpenUrl(element) {
+        if (!element.url)
+            return;
+        imports.gi.Gio.app_info_launch_default_for_uri(element.url, global.create_app_launch_context());
+    }
+    GetMaxForecastDays() {
+        if (!this.provider)
+            return this.config._forecastDays;
+        return Math.min(this.config._forecastDays, this.provider.maxForecastSupport);
+    }
+    GetMaxHourlyForecasts() {
+        if (!this.provider)
+            return this.config._forecastHours;
+        return Math.min(this.config._forecastHours, this.provider.maxHourlyForecastSupport);
+    }
+    MergeWeatherData(weatherInfo, locationData) {
         if (!weatherInfo.location.city)
             weatherInfo.location.city = locationData.city;
         if (!weatherInfo.location.country)
@@ -398,7 +373,7 @@ class WeatherApplet extends TextIconApplet {
         this.ui.DisplayErrorMessage(msg);
     }
     ;
-    HandleError(error) {
+    ShowError(error) {
         if (error == null)
             return;
         if (this.encounteredError == true)

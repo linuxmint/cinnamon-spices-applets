@@ -122,7 +122,7 @@ export class Climacell implements WeatherProvider {
         }
         catch (e) {
             Logger.Error("Climacell payload parsing error: " + e)
-            ctx.app.HandleError({ type: "soft", detail: "unusual payload", service: "climacell", message: _("Failed to Process Weather Info") });
+            ctx.app.ShowError({ type: "soft", detail: "unusual payload", service: "climacell", message: _("Failed to Process Weather Info") });
             return null;
         }
     };
@@ -170,7 +170,7 @@ export class Climacell implements WeatherProvider {
         let key = this.app.config._apiKey.replace(" ", "");
         if (this.app.config.noApiKey()) {
             Logger.Error("Climacell: No API Key given");
-            this.app.HandleError({
+            this.app.ShowError({
                 type: "hard",
                 userError: true,
                 "detail": "no key",

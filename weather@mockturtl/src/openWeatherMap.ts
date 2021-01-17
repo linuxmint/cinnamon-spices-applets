@@ -144,7 +144,7 @@ export class OpenWeatherMap implements WeatherProvider {
             return weather;
         } catch (e) {
             Logger.Error("OpenWeatherMap Weather Parsing error: " + e);
-            self.app.HandleError({
+            self.app.ShowError({
                 type: "soft",
                 service: "openweathermap",
                 detail: "unusual payload",
@@ -218,7 +218,7 @@ export class OpenWeatherMap implements WeatherProvider {
                 error.message = _("Unknown Error, please see the logs in Looking Glass");
                 break;
         };
-        this.app.HandleError(error);
+        this.app.ShowError(error);
         Logger.Debug("OpenWeatherMap Error Code: " + errorPayload.cod)
 		Logger.Error(errorMsg + errorPayload.message);
 		return true;

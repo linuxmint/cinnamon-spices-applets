@@ -10,7 +10,7 @@ import { Config, Services } from "./config";
 import { LocationStore } from "./locationstore";
 import { WeatherLoop } from "./loop";
 import { MetUk } from "./met_uk";
-import { ServiceMap, WeatherData, WeatherProvider, LocationData, AppletError, CustomIcons, RefreshState, NiceErrorDetail, ApiService, ErrorDetail } from "./types";
+import { ServiceMap, WeatherData, WeatherProvider, LocationData, AppletError, CustomIcons, RefreshState, NiceErrorDetail } from "./types";
 import { UI } from "./ui";
 import { constructJsLocale, _, get } from "./utils";
 import { DarkSky } from "./darkSky";
@@ -23,11 +23,10 @@ import { MetNorway } from "./met_norway";
 import { Http, HttpError, Method } from "./httpLib";
 import { Logger } from "./logger";
 import { UUID } from "./consts";
+import { Notifications } from "./notification_service";
 
 const { TextIconApplet, AllowedLayout, MenuItem } = imports.ui.applet;
 const { get_language_names } = imports.gi.GLib;
-const { messageTray } = imports.ui.main;
-const { SystemNotificationSource, Notification } = imports.ui.messageTray;
 const Lang: typeof imports.lang = imports.lang;
 const GLib = imports.gi.GLib;
 const { spawnCommandLine, spawnCommandLineAsyncIO } = imports.misc.util;
@@ -52,8 +51,7 @@ const DATA_SERVICE: ServiceMap = {
 export class WeatherApplet extends TextIconApplet {
 
     /** Running applet's path*/
-    public readonly appletDir: string = imports.ui.appletManager.appletMeta[UUID].path;
-    private readonly msgSource: imports.ui.messageTray.SystemNotificationSource;
+    public readonly appletDir: string;
 
     public readonly currentLocale: string = null;
     private readonly loop: WeatherLoop;
@@ -74,7 +72,8 @@ export class WeatherApplet extends TextIconApplet {
     public encounteredError: boolean = false;
 
     public constructor(metadata: any, orientation: imports.gi.St.Side, panelHeight: number, instanceId: number) {
-        super(orientation, panelHeight, instanceId);
+		super(orientation, panelHeight, instanceId);
+		this.appletDir = metadata.path;
 		this.currentLocale = constructJsLocale(get_language_names()[0]);
 		Logger.Debug("Applet created with instanceID " + instanceId);
         Logger.Debug("System locale is " + this.currentLocale);
@@ -82,9 +81,7 @@ export class WeatherApplet extends TextIconApplet {
 
         // importing custom translations
         imports.gettext.bindtextdomain(UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
-
-        this.msgSource = new SystemNotificationSource(_("Weather Applet"));
-        messageTray.add(this.msgSource);
+		
         // Manually add the icons to the icon theme - only one icons folder
         imports.gi.Gtk.IconTheme.get_default().append_search_path(this.appletDir + "/../icons");
 
@@ -95,7 +92,7 @@ export class WeatherApplet extends TextIconApplet {
         this.ui = new UI(this, orientation);
         this.ui.rebuild(this.config);
         this.loop = new WeatherLoop(this, instanceId);
-        GLib.getenv('XDG_CONFIG_HOME')
+
         this.locationStore = new LocationStore(this, Lang.bind(this, this.onLocationStorageChanged));
 
         this.orientation = orientation;
@@ -150,11 +147,11 @@ export class WeatherApplet extends TextIconApplet {
 	};
 
 	/**
-	 * 
-	 * @param url 
-	 * @param params 
-	 * @param HandleError 
-	 * @param method 
+	 * Loads JSON response from specified URLs
+	 * @param url URL without params
+	 * @param params param object
+	 * @param HandleError should return null if you want this function to handle errors, else it needs to return an applet object 
+	 * @param method default is GET
 	 */
 	public async LoadJsonAsync<T>(url: string, params?: any, HandleError?: (message: HttpError) => AppletError, method: Method = "GET"): Promise<T> {
 		let response = await Http.LoadJsonAsync<T>(url, params, method);
@@ -164,7 +161,7 @@ export class WeatherApplet extends TextIconApplet {
 			if (!!HandleError) 
 				customError = HandleError(response.ErrorData);
 
-			if (!!customError) this.HandleError(customError);
+			if (!!customError) this.ShowError(customError);
 			else this.HandleHTTPError(response.ErrorData);
 			return null;
 		}
@@ -187,7 +184,7 @@ export class WeatherApplet extends TextIconApplet {
 				appletError.type = "hard"
 		}
 
-		this.HandleError(appletError);
+		this.ShowError(appletError);
 	}
 
     /** Spawn a command and await for the output it gives */
@@ -218,12 +215,6 @@ export class WeatherApplet extends TextIconApplet {
         }
     }
 
-    public sendNotification(title: string, message: string, transient?: boolean) {
-        let notification = new Notification(this.msgSource, _("Weather Applet") + ": " + title, message);
-        if (transient) notification.setTransient((!transient) ? false : true);
-        this.msgSource.notify(notification);
-    }
-
     public SetAppletTooltip(msg: string) {
         this.set_applet_tooltip(msg);
     }
@@ -245,7 +236,9 @@ export class WeatherApplet extends TextIconApplet {
 
     public GetPanelHeight(): number {
         return this.panel._getScaledPanelHeight();
-    }
+	}
+	
+	// Config Callbacks
 
     private async locationLookup(): Promise<void> {
         let command = "xdg-open ";
@@ -259,22 +252,22 @@ export class WeatherApplet extends TextIconApplet {
 
     private async saveCurrentLocation(): Promise<void> {
         if (this.config.currentLocation.locationSource == "ip-api") {
-            this.sendNotification(_("Error") + " - " + _("Location Store"), _("You can't save a location obtained automatically, sorry"));
+            Notifications.Send(_("Error") + " - " + _("Location Store"), _("You can't save a location obtained automatically, sorry"));
         }
         this.locationStore.SaveCurrentLocation(this.config.currentLocation);
     }
 
     private async deleteCurrentLocation(): Promise<void> {
         this.locationStore.DeleteCurrentLocation(this.config.currentLocation);
-    }
+	}
 
-    private onLocationStorageChanged(itemCount: number) {
+	private onLocationStorageChanged(itemCount: number) {
         Logger.Debug("On location storage callback called, number of locations now " + itemCount.toString());
         // Hide/show location selectors based on how many items are in storage
         if (this.locationStore.ShouldShowLocationSelectors(this.config.currentLocation)) this.ui.ShowLocationSelectors();
         else this.ui.HideLocationSelectors();
-    }
-
+	}
+	
     public NextLocationClicked() {
         let nextLoc = this.locationStore.NextLocation(this.config.currentLocation);
         if (nextLoc == null) return;
@@ -286,6 +279,10 @@ export class WeatherApplet extends TextIconApplet {
         if (previousLoc == null) return;
         this.refreshAndRebuild(previousLoc);
     }
+	
+	// -------------------------------------------------------------------
+
+	// Applet Overrides
 
     /** override function */
     private on_orientation_changed(orientation: imports.gi.St.Side) {
@@ -328,31 +325,15 @@ export class WeatherApplet extends TextIconApplet {
     /** Override function */
     private on_panel_height_changed() {
         // Implemented byApplets
-    }
+	}
+	
+	// ---------------------------------------------------------------------
 
     //----------------------------------------------------------------------
     //
-    // Methods
+    // Main methods
     //
     //----------------------------------------------------------------------
-
-    public OpenUrl(element: imports.gi.St.Button) {
-        if (!element.url) return;
-        imports.gi.Gio.app_info_launch_default_for_uri(
-            element.url,
-            global.create_app_launch_context()
-        )
-    }
-
-    public GetMaxForecastDays(): number {
-        if (!this.provider) return this.config._forecastDays;
-        return Math.min(this.config._forecastDays, this.provider.maxForecastSupport);
-    }
-
-    public GetMaxHourlyForecasts(): number {
-        if (!this.provider) return this.config._forecastHours;
-        return Math.min(this.config._forecastHours, this.provider.maxHourlyForecastSupport);
-    }
 
 	/**
 	 * Lazy load provider
@@ -395,96 +376,97 @@ export class WeatherApplet extends TextIconApplet {
 	 * @param rebuild 
 	 */
     public async refreshWeather(rebuild: boolean, location?: LocationData): Promise<RefreshState> {
-        if (this.lock) {
-            Logger.Print("Refreshing in progress, refresh skipped.");
-            return "locked";
-        }
+		try {
+			if (this.lock) {
+				Logger.Print("Refreshing in progress, refresh skipped.");
+				return "locked";
+			}
 
-        this.lock = true;
-        this.encounteredError = false;
+			this.lock = true;
+			this.encounteredError = false;
+			
+			if (!location) {
+				location = await this.config.EnsureLocation();
+				if (!location) {
+					this.Unlock();
+					return "error";
+				}
+			}
+			else {
+				// switching manual location switch to true in this case
+				this.config.InjectLocationToConfig(location, true);
+			}
+				this.EnsureProvider();
+				let weatherInfo = await this.provider.GetWeather({ lat: location.lat, lon: location.lon, text: location.lat.toString() + "," + location.lon.toString() });
+				if (weatherInfo == null) {
+					this.Unlock();
+					return "failure";
+				}
 
-        let locationData: LocationData = null;
-        // General call
-        if (location == null) {
-            try {
-                locationData = await this.config.EnsureLocation();
-            }
-            catch (e) {
-                Logger.Error(e);
-                this.Unlock();
-                return "error";
-            }
-        }
-        // when user uses the location selectors
-        else {
-            locationData = location;
-            // switching manual location switch to true in this case
-            this.config.InjectLocationToConfig(location, true);
-        }
+				weatherInfo = this.MergeWeatherData(weatherInfo, location);
 
-        if (locationData == null) {
-            // user facing errors are handled by EnsureLocation function
-            this.Unlock();
-            return "failure";
-        }
+				if (rebuild) this.ui.rebuild(this.config);
+				if (!this.ui.displayWeather(weatherInfo, this.config)
+					|| !this.ui.displayForecast(weatherInfo, this.config)
+					|| !this.ui.displayHourlyForecast(weatherInfo.hourlyForecasts, this.config, weatherInfo.location.timeZone)
+					|| !this.ui.displayBar(weatherInfo, this.provider, this.config)) {
+					this.Unlock();
+					return "failure";
+				}
 
-        try {
-            this.EnsureProvider();
-            let weatherInfo = await this.provider.GetWeather({ lat: locationData.lat, lon: locationData.lon, text: locationData.lat.toString() + "," + locationData.lon.toString() });
-            if (weatherInfo == null) {
-                Logger.Error("Unable to obtain Weather Information");
-                this.HandleError({
-                    type: "hard",
-                    detail: "unknown",
-                    message: _("Could not get weather information"),
-                })
-                this.Unlock();
-                return "failure";
-            }
-
-            weatherInfo = this.FillInWeatherData(weatherInfo, locationData);
-
-            if (rebuild) this.ui.rebuild(this.config);
-            if (
-                !this.ui.displayWeather(weatherInfo, this.config)
-                || !this.ui.displayForecast(weatherInfo, this.config)
-                || !this.ui.displayHourlyForecast(weatherInfo.hourlyForecasts, this.config, weatherInfo.location.timeZone)
-                || !this.ui.displayBar(weatherInfo, this.provider, this.config)) {
-                this.Unlock();
-                return "failure";
-            }
-
-            Logger.Print("Weather Information refreshed");
-            this.loop.ResetErrorCount();
-            this.Unlock();
-            return "success";
+				Logger.Print("Weather Information refreshed");
+				this.loop.ResetErrorCount();
+				this.Unlock();
+				return "success";
         }
         catch (e) {
             Logger.Error("Generic Error while refreshing Weather info: " + e);
-            this.HandleError({ type: "hard", detail: "unknown", message: _("Unexpected Error While Refreshing Weather, please see log in Looking Glass") });
-            this.Unlock();
+			this.ShowError({ type: "hard", detail: "unknown", message: _("Unexpected Error While Refreshing Weather, please see log in Looking Glass") });
+			this.Unlock();
             return "failure";
-        }
-    };
+		}
+	};
 
-    /** Fills in missing weather info from location Datas  */
-    private FillInWeatherData(weatherInfo: WeatherData, locationData: LocationData) {
-        if (!weatherInfo.location.city) weatherInfo.location.city = locationData.city;
-        if (!weatherInfo.location.country) weatherInfo.location.country = locationData.country;
-        if (!weatherInfo.location.timeZone) weatherInfo.location.timeZone = locationData.timeZone;
-        if (weatherInfo.coord.lat == null) weatherInfo.coord.lat = locationData.lat;
-        if (weatherInfo.coord.lon == null) weatherInfo.coord.lon = locationData.lon;
+	// --------------------------------------------------------------------------------------
+	
+	// Utils
 
-        weatherInfo.hourlyForecasts = (!weatherInfo.hourlyForecasts) ? [] : weatherInfo.hourlyForecasts;
-
-        // Estimation
-        //weatherInfo.location.tzOffset = Math.round(weatherInfo.coord.lon/15) * 3600;
-        return weatherInfo;
+	public OpenUrl(element: imports.gi.St.Button) {
+        if (!element.url) return;
+        imports.gi.Gio.app_info_launch_default_for_uri(
+            element.url,
+            global.create_app_launch_context()
+        )
     }
 
-    ///
-    ///  Error Handling in UI
-    ///
+    public GetMaxForecastDays(): number {
+        if (!this.provider) return this.config._forecastDays;
+        return Math.min(this.config._forecastDays, this.provider.maxForecastSupport);
+    }
+
+    public GetMaxHourlyForecasts(): number {
+        if (!this.provider) return this.config._forecastHours;
+        return Math.min(this.config._forecastHours, this.provider.maxHourlyForecastSupport);
+	}
+
+	/** Fills in missing weather info from location Datas  */
+	private MergeWeatherData(weatherInfo: WeatherData, locationData: LocationData) {
+		if (!weatherInfo.location.city) weatherInfo.location.city = locationData.city;
+		if (!weatherInfo.location.country) weatherInfo.location.country = locationData.country;
+		if (!weatherInfo.location.timeZone) weatherInfo.location.timeZone = locationData.timeZone;
+		if (weatherInfo.coord.lat == null) weatherInfo.coord.lat = locationData.lat;
+		if (weatherInfo.coord.lon == null) weatherInfo.coord.lon = locationData.lon;
+
+		weatherInfo.hourlyForecasts = (!weatherInfo.hourlyForecasts) ? [] : weatherInfo.hourlyForecasts;
+
+		// Estimation
+		//weatherInfo.location.tzOffset = Math.round(weatherInfo.coord.lon/15) * 3600;
+		return weatherInfo;
+	}
+	
+	// ---------------------------------------------------------------------------------------
+
+    // Error handling
 
     private DisplayError(title: string, msg: string): void {
         this.set_applet_label(title);
@@ -513,11 +495,14 @@ export class WeatherApplet extends TextIconApplet {
         "location not covered": _("Location not covered"),
 	}
 
-    public HandleError(error: AppletError): void {
-        if (error == null) return;
-        if (this.encounteredError == true) return; // Error Already called in this loop, ignore
+    public ShowError(error: AppletError): void {
+		if (error == null) return;
+		// An error already claimed in this loop
+		if (this.encounteredError == true) return;
+		
         this.encounteredError = true;
-        Logger.Debug("User facing Error received, error: " + JSON.stringify(error, null, 2));
+		Logger.Debug("User facing Error received, error: " + JSON.stringify(error, null, 2));
+		
         if (error.type == "hard") {
             Logger.Debug("Displaying hard error");
             this.ui.rebuild(this.config);
@@ -541,5 +526,7 @@ export class WeatherApplet extends TextIconApplet {
 
         let nextRefresh = this.loop.GetSecondsUntilNextRefresh();
         Logger.Error("Retrying in the next " + nextRefresh.toString() + " seconds...");
-    }
+	}
+	
+	//----------------------------------------------------------------------------------
 }

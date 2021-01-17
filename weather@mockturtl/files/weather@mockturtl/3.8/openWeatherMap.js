@@ -114,7 +114,7 @@ class OpenWeatherMap {
         }
         catch (e) {
             logger_1.Logger.Error("OpenWeatherMap Weather Parsing error: " + e);
-            self.app.HandleError({
+            self.app.ShowError({
                 type: "soft",
                 service: "openweathermap",
                 detail: "unusual payload",
@@ -189,7 +189,7 @@ class OpenWeatherMap {
                 break;
         }
         ;
-        this.app.HandleError(error);
+        this.app.ShowError(error);
         logger_1.Logger.Debug("OpenWeatherMap Error Code: " + errorPayload.cod);
         logger_1.Logger.Error(errorMsg + errorPayload.message);
         return true;

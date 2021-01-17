@@ -13,9 +13,8 @@ class HttpLib {
     }
     async LoadJsonAsync(url, params, method = "GET") {
         let response = await this.LoadAsync(url, params, method);
-        if (!response.Success) {
+        if (!response.Success)
             return response;
-        }
         try {
             let payload = JSON.parse(response.Data);
             response.Data = payload;

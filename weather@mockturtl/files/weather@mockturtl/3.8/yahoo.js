@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Yahoo = void 0;
 const logger_1 = require("./logger");
+const notification_service_1 = require("./notification_service");
 const utils_1 = require("./utils");
 class Yahoo {
     constructor(_app) {
@@ -19,12 +20,12 @@ class Yahoo {
                 json = await this.app.SpawnProcess(["python3", this.app.appletDir + "/../yahoo-bridge.py", "--params", JSON.stringify({ lat: loc.lat.toString(), lon: loc.lon.toString() })]);
             }
             catch (e) {
-                this.app.HandleError({ type: "hard", service: "yahoo", detail: "unknown", message: utils_1._("Unknown Error happened while calling Yahoo bridge,\n see Looking Glass log for errors") });
+                this.app.ShowError({ type: "hard", service: "yahoo", detail: "unknown", message: utils_1._("Unknown Error happened while calling Yahoo bridge,\n see Looking Glass log for errors") });
                 logger_1.Logger.Error("Yahoo API bridge call failed, error: " + e);
                 return null;
             }
             if (!json) {
-                this.app.HandleError({ type: "soft", detail: "no api response", service: "yahoo" });
+                this.app.ShowError({ type: "soft", detail: "no api response", service: "yahoo" });
                 return null;
             }
             logger_1.Logger.Debug("Yahoo API response: " + json);
@@ -32,7 +33,7 @@ class Yahoo {
                 json = JSON.parse(json);
             }
             catch (e) {
-                this.app.HandleError({ type: "hard", service: "yahoo", detail: "bad api response - non json", message: utils_1._("Yahoo bridge responded in bad format,\n see Looking Glass log for errors") });
+                this.app.ShowError({ type: "hard", service: "yahoo", detail: "bad api response - non json", message: utils_1._("Yahoo bridge responded in bad format,\n see Looking Glass log for errors") });
                 logger_1.Logger.Error("Yahoo service failed to parse payload to JSON, error: " + e);
                 return null;
             }
@@ -104,7 +105,7 @@ class Yahoo {
         }
         catch (e) {
             logger_1.Logger.Error("Yahoo payload parsing error: " + e);
-            this.app.HandleError({ type: "soft", detail: "unusual payload", service: "yahoo", message: utils_1._("Failed to Process Weather Info") });
+            this.app.ShowError({ type: "soft", detail: "unusual payload", service: "yahoo", message: utils_1._("Failed to Process Weather Info") });
             return null;
         }
     }
@@ -115,16 +116,16 @@ class Yahoo {
         logger_1.Logger.Debug("yahoo API error payload: " + json);
         switch (type) {
             case "import":
-                this.app.sendNotification(utils_1._("Missing package"), utils_1._("Please install '") + this.GetMissingPackage(json) + utils_1._("', then refresh manually."));
+                notification_service_1.Notifications.Send(utils_1._("Missing package"), utils_1._("Please install '") + this.GetMissingPackage(json) + utils_1._("', then refresh manually."));
                 logger_1.Logger.Error(errorMsg + json.error.message);
-                this.app.HandleError({ detail: "import error", type: "hard", userError: true, service: "yahoo", message: utils_1._("Please install '") + this.GetMissingPackage(json) + utils_1._("', then refresh manually.") });
+                this.app.ShowError({ detail: "import error", type: "hard", userError: true, service: "yahoo", message: utils_1._("Please install '") + this.GetMissingPackage(json) + utils_1._("', then refresh manually.") });
                 break;
             case "network":
-                this.app.HandleError({ detail: "no api response", type: "soft", service: "yahoo", message: utils_1._("Could not connect to Yahoo API.") });
+                this.app.ShowError({ detail: "no api response", type: "soft", service: "yahoo", message: utils_1._("Could not connect to Yahoo API.") });
                 logger_1.Logger.Error(errorMsg + "Could not connect to API, error - " + json.error.data);
                 break;
             case "unknown":
-                this.app.HandleError({ detail: "no api response", type: "hard", service: "yahoo", message: utils_1._("Unknown error happened while obtaining weather, see Looking Glass logs for more information") });
+                this.app.ShowError({ detail: "no api response", type: "hard", service: "yahoo", message: utils_1._("Unknown error happened while obtaining weather, see Looking Glass logs for more information") });
                 logger_1.Logger.Error(errorMsg + "Unknown Error happened in yahoo bridge, error - " + json.error.data);
                 break;
             default:

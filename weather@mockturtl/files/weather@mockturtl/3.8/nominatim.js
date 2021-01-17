@@ -21,7 +21,7 @@ class GeoLocation {
             }
             let locationData = await this.app.LoadJsonAsync(this.url + encodeURIComponent(searchText) + this.params);
             if (locationData.length == 0) {
-                this.app.HandleError({
+                this.app.ShowError({
                     type: "hard",
                     detail: "bad location format",
                     message: utils_1._("Could not find location based on address, please check if it's right")
@@ -45,7 +45,7 @@ class GeoLocation {
         }
         catch (e) {
             logger_1.Logger.Error("Could not geolocate, error: " + JSON.stringify(e, null, 2));
-            this.app.HandleError({
+            this.app.ShowError({
                 type: "soft",
                 detail: "bad api response",
                 message: utils_1._("Failed to call Geolocation API, see Looking Glass for errors.")

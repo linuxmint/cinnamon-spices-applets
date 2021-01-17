@@ -17,7 +17,6 @@ export class HttpLib {
 
 	/**
 	 * Handles obtaining JSON over http. 
-	 * returns HTTPError object on fail.
 	 * @param query fully constructed url
 	 * @param errorCallback do checking before generic error checking by this function, to display API specific UI errors. should return null if
 	 * everything is ok, AppletError to display if there is an error
@@ -25,9 +24,8 @@ export class HttpLib {
     public async LoadJsonAsync<T>(url: string, params?: any, method: Method = "GET"): Promise<Response<T>> {
 		let response = await this.LoadAsync(url, params, method);
 		
-		if (!response.Success) {
+		if (!response.Success) 
 			return response;
-		}
 
 		try {
 			let payload = JSON.parse(response.Data);

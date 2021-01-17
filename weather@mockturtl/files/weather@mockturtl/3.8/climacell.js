@@ -86,7 +86,7 @@ class Climacell {
         }
         catch (e) {
             logger_1.Logger.Error("Climacell payload parsing error: " + e);
-            ctx.app.HandleError({ type: "soft", detail: "unusual payload", service: "climacell", message: utils_1._("Failed to Process Weather Info") });
+            ctx.app.ShowError({ type: "soft", detail: "unusual payload", service: "climacell", message: utils_1._("Failed to Process Weather Info") });
             return null;
         }
     }
@@ -132,7 +132,7 @@ class Climacell {
         let key = this.app.config._apiKey.replace(" ", "");
         if (this.app.config.noApiKey()) {
             logger_1.Logger.Error("Climacell: No API Key given");
-            this.app.HandleError({
+            this.app.ShowError({
                 type: "hard",
                 userError: true,
                 "detail": "no key",

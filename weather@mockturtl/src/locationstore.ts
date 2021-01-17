@@ -4,6 +4,7 @@
 
 import { Logger } from "./logger";
 import { WeatherApplet } from "./main";
+import { Notifications } from "./notification_service";
 import { LocationData } from "./types";
 import { _ } from "./utils";
 
@@ -152,37 +153,37 @@ export class LocationStore {
 
     public async SaveCurrentLocation(loc: LocationData) {
         if (this.app.Locked()) {
-            this.app.sendNotification(_("Warning") + " - " + _("Location Store"), _("You can only save correct locations when the applet is not refreshing"), true);
+            Notifications.Send(_("Warning") + " - " + _("Location Store"), _("You can only save correct locations when the applet is not refreshing"), true);
             return;
         }
         if (loc == null) {
-            this.app.sendNotification(_("Warning") + " - " + _("Location Store"), _("You can't save an incorrect location"), true);
+            Notifications.Send(_("Warning") + " - " + _("Location Store"), _("You can't save an incorrect location"), true);
             return;
         }
         if (this.InStorage(loc)) {
-            this.app.sendNotification(_("Info") + " - " + _("Location Store"), _("Location is already saved"), true);
+            Notifications.Send(_("Info") + " - " + _("Location Store"), _("Location is already saved"), true);
             return;
         }
         this.locations.push(loc);
         this.currentIndex = this.locations.length - 1; // head to saved location
         this.InvokeStorageChanged();
         await this.SaveToFile();
-        this.app.sendNotification(_("Success") + " - " + _("Location Store"), _("Location is saved to library"), true);
+        Notifications.Send(_("Success") + " - " + _("Location Store"), _("Location is saved to library"), true);
 
     }
 
     public async DeleteCurrentLocation(loc: LocationData) {
         if (this.app.Locked()) {
-            this.app.sendNotification(_("Info") + " - " + _("Location Store"), _("You can't remove a location while the applet is refreshing"), true);
+            Notifications.Send(_("Info") + " - " + _("Location Store"), _("You can't remove a location while the applet is refreshing"), true);
             return;
         }
         if (loc == null) {
-            this.app.sendNotification(_("Info") + " - " + _("Location Store"), _("You can't remove an incorrect location"), true);
+            Notifications.Send(_("Info") + " - " + _("Location Store"), _("You can't remove an incorrect location"), true);
             return;
         }
 
         if (!this.InStorage(loc)) {
-            this.app.sendNotification(_("Info") + " - " + _("Location Store"), _("Location is not in storage, can't delete"), true);
+            Notifications.Send(_("Info") + " - " + _("Location Store"), _("Location is not in storage, can't delete"), true);
             return;
         }
         // Find location
@@ -192,7 +193,7 @@ export class LocationStore {
         this.currentIndex = this.currentIndex--;
         if (this.currentIndex < 0) this.currentIndex = this.locations.length - 1; // reached start of array
         if (this.currentIndex < 0) this.currentIndex = 0; // no items in array
-        this.app.sendNotification(_("Success") + " - " + _("Location Store"), _("Location is deleted from library"), true);
+        Notifications.Send(_("Success") + " - " + _("Location Store"), _("Location is deleted from library"), true);
         this.InvokeStorageChanged();
     }
 
@@ -229,7 +230,7 @@ export class LocationStore {
         }
         catch (e) {
             Logger.Error("Error loading locations from store: " + (e as Error).message);
-            this.app.sendNotification(_("Error") + " - " + _("Location Store"), _("Failed to load in data from location storage, please see the logs for more information"))
+            Notifications.Send(_("Error") + " - " + _("Location Store"), _("Failed to load in data from location storage, please see the logs for more information"))
             return false;
         }
 

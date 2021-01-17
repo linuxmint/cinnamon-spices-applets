@@ -37,13 +37,13 @@ class IpApi {
         }
         catch (e) {
             logger_1.Logger.Error("ip-api parsing error: " + e);
-            this.app.HandleError({ type: "hard", detail: "no location", service: "ipapi", message: utils_1._("Could not obtain location") });
+            this.app.ShowError({ type: "hard", detail: "no location", service: "ipapi", message: utils_1._("Could not obtain location") });
             return null;
         }
     }
     ;
     HandleErrorResponse(json) {
-        this.app.HandleError({ type: "hard", detail: "bad api response", message: utils_1._("Location Service responded with errors, please see the logs in Looking Glass"), service: "ipapi" });
+        this.app.ShowError({ type: "hard", detail: "bad api response", message: utils_1._("Location Service responded with errors, please see the logs in Looking Glass"), service: "ipapi" });
         logger_1.Logger.Error("ip-api responds with Error: " + json.reason);
     }
     ;

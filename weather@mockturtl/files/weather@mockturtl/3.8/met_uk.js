@@ -45,7 +45,7 @@ class MetUk {
         }
         if (this.observationSites.length == 0 || this.forecastSite.dist > 100000) {
             logger_1.Logger.Error("User is probably not in UK, aborting");
-            this.app.HandleError({
+            this.app.ShowError({
                 type: "hard",
                 userError: true,
                 detail: "location not covered",
@@ -75,7 +75,7 @@ class MetUk {
         }
         catch (e) {
             logger_1.Logger.Error("Failed to get sitelist, error: " + JSON.stringify(e, null, 2));
-            this.app.HandleError({
+            this.app.ShowError({
                 type: "soft",
                 userError: true,
                 detail: "no network response",
@@ -92,7 +92,7 @@ class MetUk {
         }
         catch (e) {
             logger_1.Logger.Error("Failed to get sitelist, error: " + JSON.stringify(e, null, 2));
-            this.app.HandleError({
+            this.app.ShowError({
                 type: "soft",
                 userError: true,
                 detail: "no network response",
@@ -195,7 +195,7 @@ class MetUk {
         }
         catch (e) {
             logger_1.Logger.Error("Met UK Weather Parsing error: " + e);
-            this.app.HandleError({ type: "soft", service: "met-uk", detail: "unusual payload", message: utils_1._("Failed to Process Current Weather Info") });
+            this.app.ShowError({ type: "soft", service: "met-uk", detail: "unusual payload", message: utils_1._("Failed to Process Current Weather Info") });
             return null;
         }
     }
@@ -219,7 +219,7 @@ class MetUk {
         }
         catch (e) {
             logger_1.Logger.Error("MET UK Forecast Parsing error: " + e);
-            self.app.HandleError({ type: "soft", service: "met-uk", detail: "unusual payload", message: utils_1._("Failed to Process Forecast Info") });
+            self.app.ShowError({ type: "soft", service: "met-uk", detail: "unusual payload", message: utils_1._("Failed to Process Forecast Info") });
             return null;
         }
     }
@@ -255,7 +255,7 @@ class MetUk {
         }
         catch (e) {
             logger_1.Logger.Error("MET UK Forecast Parsing error: " + e);
-            self.app.HandleError({ type: "soft", service: "met-uk", detail: "unusual payload", message: utils_1._("Failed to Process Forecast Info") });
+            self.app.ShowError({ type: "soft", service: "met-uk", detail: "unusual payload", message: utils_1._("Failed to Process Forecast Info") });
             return null;
         }
     }

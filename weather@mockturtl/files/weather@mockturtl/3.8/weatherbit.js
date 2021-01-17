@@ -104,7 +104,7 @@ class Weatherbit {
         }
         catch (e) {
             logger_1.Logger.Error("Weatherbit Weather Parsing error: " + e);
-            self.app.HandleError({ type: "soft", service: "weatherbit", detail: "unusual payload", message: utils_1._("Failed to Process Current Weather Info") });
+            self.app.ShowError({ type: "soft", service: "weatherbit", detail: "unusual payload", message: utils_1._("Failed to Process Current Weather Info") });
             return null;
         }
     }
@@ -131,7 +131,7 @@ class Weatherbit {
         }
         catch (e) {
             logger_1.Logger.Error("Weatherbit Forecast Parsing error: " + e);
-            self.app.HandleError({ type: "soft", service: "weatherbit", detail: "unusual payload", message: utils_1._("Failed to Process Forecast Info") });
+            self.app.ShowError({ type: "soft", service: "weatherbit", detail: "unusual payload", message: utils_1._("Failed to Process Forecast Info") });
             return null;
         }
     }
@@ -166,7 +166,7 @@ class Weatherbit {
         }
         catch (e) {
             logger_1.Logger.Error("Weatherbit Forecast Parsing error: " + e);
-            self.app.HandleError({ type: "soft", service: "weatherbit", detail: "unusual payload", message: utils_1._("Failed to Process Forecast Info") });
+            self.app.ShowError({ type: "soft", service: "weatherbit", detail: "unusual payload", message: utils_1._("Failed to Process Forecast Info") });
             return null;
         }
     }
@@ -200,7 +200,7 @@ class Weatherbit {
         let key = this.app.config._apiKey.replace(" ", "");
         if (this.app.config.noApiKey()) {
             logger_1.Logger.Error("DarkSky: No API Key given");
-            this.app.HandleError({
+            this.app.ShowError({
                 type: "hard",
                 userError: true,
                 "detail": "no key",
@@ -233,7 +233,7 @@ class Weatherbit {
             this.hourlyAccess = false;
             logger_1.Logger.Print("Hourly forecast is inaccessible, skipping");
             return {
-                type: "soft",
+                type: "silent",
                 userError: false,
                 detail: "bad key",
                 service: "weatherbit",

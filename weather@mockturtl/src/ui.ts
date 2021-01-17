@@ -553,7 +553,7 @@ export class UI {
             }
             return true;
         } catch (e) {
-            this.app.HandleError({
+            this.app.ShowError({
                 type: "hard",
                 detail: "unknown",
                 message: "Forecast parsing failed: " + e.toString(),

@@ -238,7 +238,8 @@ export class Config {
 	 * it looks up coordinates via geolocation api
 	 */
     public async EnsureLocation(): Promise<LocationData> {
-        this.currentLocation = null;
+		this.currentLocation = null;
+		
         // Automatic location
         if (!this._manualLocation) {
             let location = await this.autoLocProvider.GetLocation();
@@ -252,8 +253,8 @@ export class Config {
         // Manual Location
 
         let loc = this._location;
-        if (loc == undefined || loc.trim() == "") {
-            this.app.HandleError({
+        if (loc == undefined || loc.trim() == "") {  // No location
+            this.app.ShowError({
                 type: "hard",
                 detail: "no location",
                 userError: true,
@@ -284,7 +285,7 @@ export class Config {
         let locationData = await this.app.geoLocationService.GetLocation(loc);
         // User facing errors are handled by service
         if (locationData == null) return null;
-        if (!!locationData.address_string) {
+        if (!!locationData?.address_string) {
             Logger.Debug("Address found via address search, placing found full address '" + locationData.address_string + "' back to location entry");
         }
 

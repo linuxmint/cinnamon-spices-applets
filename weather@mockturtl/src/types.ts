@@ -144,7 +144,7 @@ export type RefreshState = "success" | "failure" | "error" | "locked";
  * 
  *  soft will show a subtle hint that the refresh failed (NOT IMPLEMENTED)
  */
-export type ErrorSeverity = "hard" | "soft";
+export type ErrorSeverity = "hard" | "soft" | "silent";
 export type ApiService = "ipapi" | "darksky" | "openweathermap" | "met-norway" | "weatherbit" | "yahoo" | "climacell" | "met-uk" | "us-weather";
 export type ErrorDetail = "no key" | "bad key" | "no location" | "bad location format" |
     "location not found" | "no network response" | "no api response" | "location not covered" |

@@ -114,7 +114,7 @@ class DarkSky {
         }
         catch (e) {
             logger_1.Logger.Error("DarkSky payload parsing error: " + e);
-            this.app.HandleError({ type: "soft", detail: "unusual payload", service: "darksky", message: utils_1._("Failed to Process Weather Info") });
+            this.app.ShowError({ type: "soft", detail: "unusual payload", service: "darksky", message: utils_1._("Failed to Process Weather Info") });
             return null;
         }
     }
@@ -132,7 +132,7 @@ class DarkSky {
         let key = this.app.config._apiKey.replace(" ", "");
         if (this.app.config.noApiKey()) {
             logger_1.Logger.Error("DarkSky: No API Key given");
-            this.app.HandleError({
+            this.app.ShowError({
                 type: "hard",
                 userError: true,
                 "detail": "no key",
