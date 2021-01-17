@@ -16,7 +16,7 @@
     },
     "page2": {
       "type": "page",
-      "title": "Icon",
+      "title": "Preferences",
       "sections": [
         "section2",
         "section3"
@@ -26,22 +26,25 @@
       "type": "section",
       "title": "Radio",
       "keys": [
-        "tree", "streamurl-button", "radiolist-button"
+        "tree",
+        "streamurl-button",
+        "radiolist-button"
       ]
     },
     "section2": {
       "type": "section",
-      "title": "Icon",
+      "title": "Appearance",
       "keys": [
-        "icon-type"
+        "icon-type",
+        "color-on",
+        "channel-on-panel"
       ]
     },
     "section3": {
       "type": "section",
-      "title": "Symbolic Icon Color",
-      "dependency": "icon-type=SYMBOLIC",
+      "title": "Volume",
       "keys": [
-        "color-on"
+        "initial-volume"
       ]
     }
   },
@@ -80,31 +83,46 @@
       }
     ]
   },
-  "streamurl-button" : {
-    "type" : "button",
-    "description" : "Open radio stream URL search engine",
-    "callback" : "on_streamurl_button_pressed",
-    "tooltip" : "Opens a website, which helps you to determine radio stream URLs."
+  "streamurl-button": {
+    "type": "button",
+    "description": "Open radio stream URL search engine",
+    "callback": "on_streamurl_button_pressed",
+    "tooltip": "Opens a website, which helps you to determine radio stream URLs."
   },
-  "radiolist-button" : {
-    "type" : "button",
-    "description" : "Show URL-list of radio stations",
-    "callback" : "on_radiolist_button_pressed",
-    "tooltip" : "Opens a website, which lists URLs of radio stations."
+  "radiolist-button": {
+    "type": "button",
+    "description": "Show URL-list of radio stations",
+    "callback": "on_radiolist_button_pressed",
+    "tooltip": "Opens a website, which lists URLs of radio stations."
   },
   "icon-type": {
     "type": "combobox",
-    "description": "Type",
+    "description": "Icon Type",
     "default": "SYMBOLIC",
     "options": {
-      "Symbolic Icon": "SYMBOLIC",
-      "Full Color Icon": "FULLCOLOR",
-      "Bicolor Icon": "BICOLOR"
+      "Symbolic": "SYMBOLIC",
+      "Full Color": "FULLCOLOR",
+      "Bicolor": "BICOLOR"
     }
   },
   "color-on": {
     "type": "colorchooser",
     "default": "#73d216",
+    "dependency": "icon-type=SYMBOLIC",
     "description": "Color of Symbolic Icon when playing a radio"
+  },
+  "channel-on-panel": {
+    "type": "checkbox",
+    "description": "Show Radio Channel on the panel",
+    "default": false
+  },
+  "initial-volume": {
+    "type": "spinbutton",
+    "default": 50,
+    "min": 5,
+    "max": 100,
+    "step": 5,
+    "description": "Initial Volume",
+    "tooltip": "The initial volume is applied when clicking on a radio stream and no other radio stream is already running"
   }
 }

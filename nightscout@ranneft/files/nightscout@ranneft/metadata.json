@@ -2,5 +2,5 @@
   "description": "Fetches API from your Nightscout site and showing BG",
   "uuid": "nightscout@ranneft",
   "name": "Nightscout",
-  "version": "0.0.1"
+  "version": "0.1.0"
 }

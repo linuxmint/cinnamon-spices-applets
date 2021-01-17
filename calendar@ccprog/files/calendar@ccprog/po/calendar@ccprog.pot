@@ -845,6 +845,14 @@ msgstr ""
 msgid "Timezone"
 msgstr ""
 
+#. settings-schema.json->keyOpen->description
+msgid "Show calendar"
+msgstr ""
+
+#. settings-schema.json->keyOpen->tooltip
+msgid "Set keybinding(s) to show the calendar."
+msgstr ""
+
 #. metadata.json->name
 msgid "Calendar with public Holidays"
 msgstr ""

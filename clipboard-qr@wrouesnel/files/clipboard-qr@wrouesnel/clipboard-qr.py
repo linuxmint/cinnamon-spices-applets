@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/python3
 # QR Code ZBar script to support the QR code applet
 
 from sys import argv

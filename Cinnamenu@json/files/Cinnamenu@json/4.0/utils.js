@@ -14,7 +14,7 @@ const APPTYPE = {
     place: 1,
     file: 2,
     provider: 3,
-    clearlist: 4
+    clearlist_button: 4
 };
 
 // Work around Cinnamon#8201
@@ -145,18 +145,17 @@ const searchStr = (q, str, quick = false) => {
     if ( !(typeof q === 'string' && q && typeof str === 'string' && str) ) {
         return { score: 0, result: str };
     }
-    let debug_markup ='';
     let foundPosition = 0;
     let foundLength = 0;
     const str2 = latinise(str.toLowerCase());
     const qletters = q.replace(/[^a-zA-Z0-9_ ]/g, ''); //latinise(q.toLowerCase()); //already done in doSearch()
-    if(qletters.length == 0){
+    if (qletters.length == 0){
         return { score: 0, result: str };
     }
-    let score = 0;
+    let score = 0, bigrams_score = 0;
     if (new RegExp('\\b'+qletters).test(str2)) { //match substring from beginning of words
-        score = 1.2;
         foundPosition = str2.indexOf(qletters);
+        score = (foundPosition === 0) ? 1.21 : 1.2;//slightly higher score if from beginning
         foundLength = qletters.length;
     } else if (str2.indexOf(q) !== -1) { //else match substring
         score = 1.1;
@@ -177,7 +176,6 @@ const searchStr = (q, str, quick = false) => {
         }
         if (longest) {
             //get a score for similarity by counting 2 letter pairs (bigrams) that match
-            let bigrams_score;
             if (qletters.length >= 2) {
                 const max_bigrams = qletters.length -1;
                 let found_bigrams = 0;
@@ -197,17 +195,17 @@ const searchStr = (q, str, quick = false) => {
             /*if (score>=0.4){
                 global.log(qletters+">"+longest+" "+score+":"+bigrams_score);
             }*/
-            if (SEARCH_DEBUG) {
-                debug_markup = ':'+score+':'+bigrams_score;
-            }
         }
     }
     //return result of match
     if (HIGHTLIGHT_MATCH && score > 0) {
-        const markup = str.slice(0, foundPosition) + '<b>' +
+        let markup = str.slice(0, foundPosition) + '<b>' +
                                     str.slice(foundPosition, foundPosition + foundLength) + '</b>' +
                                                     str.slice(foundPosition + foundLength, str.length);
-        return {score: score, result: markup + debug_markup};
+        if (SEARCH_DEBUG) {
+            markup += ':' + score + ':' + bigrams_score;
+        }
+        return {score: score, result: markup};
     } else {
         return {score: score, result: str};
     }
