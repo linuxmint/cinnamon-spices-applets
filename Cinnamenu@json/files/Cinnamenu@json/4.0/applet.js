@@ -14,7 +14,7 @@ const Mainloop = imports.mainloop;
 const {heightsUsedMonitor} = imports.ui.panel;
 //const {SessionManager} = imports.misc.gnomeSession;
 const {ScreenSaverProxy} = imports.misc.screenSaver;
-const {PopupMenuManager, PopupMenuSection} = imports.ui.popupMenu;
+const {PopupMenuManager, PopupMenuSection, PopupIconMenuItem} = imports.ui.popupMenu;
 const {getAppFavorites} = imports.ui.appFavorites;
 const {TextIconApplet, AllowedLayout, AppletPopupMenu} = imports.ui.applet;
 const {PopupResizeHandler} = require('./resizer');
@@ -58,6 +58,11 @@ class CinnamenuApplet extends TextIconApplet {
         this.displaySignals = new SignalManager(null);
         //this.tracker = Cinnamon.WindowTracker.get_default();//?
         this.appSystem = Cinnamon.AppSystem.get_default();
+        const searchFilesMenuItem = new PopupIconMenuItem(_('Find files...'), 'system-search',
+                                                                            St.IconType.SYMBOLIC, false);
+        this._applet_context_menu.addMenuItem(searchFilesMenuItem);
+        searchFilesMenuItem.connect('activate', () => {
+                            Util.spawnCommandLine(__meta.path + '/search.py ' + GLib.get_home_dir()); });
         this.resizer = new PopupResizeHandler(  this,
                                                 this.menu.actor,
                                                 400, this.getScreenWorkArea().width,
@@ -94,7 +99,7 @@ class CinnamenuApplet extends TextIconApplet {
         this.settingsObj = new AppletSettings(this.settings, __meta.uuid, this.instance_id);
 
         [
-            { key: 'categories',                value: 'categories',            cb: null },//?undo
+            { key: 'categories',                value: 'categories',            cb: null },
             { key: 'custom-menu-height',        value: 'customMenuHeight',      cb: null },
             { key: 'custom-menu-width',         value: 'customMenuWidth',       cb: null },
 
@@ -120,8 +125,7 @@ class CinnamenuApplet extends TextIconApplet {
             { key: 'category-click',            value: 'categoryClick',         cb: null },
             { key: 'enable-autoscroll',         value: 'enableAutoScroll',      cb: this.refresh },
             { key: 'web-search-option',         value: 'webSearchOption',       cb: null },
-            { key: 'enable-emoji-search',              value: 'enableEmojiSearch',     cb: null },
-            //{ key: 'enable-search-providers',   value: 'enableSearchProviders', cb: null },
+            { key: 'enable-emoji-search',       value: 'enableEmojiSearch',     cb: null },
 
             { key: 'menu-icon-custom',          value: 'menuIconCustom',        cb: this.updateIconAndLabel },
             { key: 'menu-icon',                 value: 'menuIcon',              cb: this.updateIconAndLabel },
@@ -689,30 +693,31 @@ class CinnamenuApplet extends TextIconApplet {
         const sidebarButtons = this.sidebar.getButtons();
         const categoryButtons = this.categories.buttons;
         const appButtons = this.appsView.getActiveButtons();
-        const refItemIndex = appButtons.findIndex(button =>
+        const enteredAppItemIndex = appButtons.findIndex(button =>
                         button.actor.has_style_class_name('menu-application-button-selected') ||
                                                                                     button.entered);
-        let refCategoryIndex = categoryButtons.findIndex(button => button.entered);
-        if (refCategoryIndex < 0) {
-            refCategoryIndex = categoryButtons.findIndex(button => this.currentCategory === button.id);
+        let enteredCategoryIndex = categoryButtons.findIndex(button => button.entered);
+        if (enteredCategoryIndex < 0) {
+            enteredCategoryIndex = categoryButtons.findIndex(button => this.currentCategory === button.id);
         }
-        const refSidebarItemIndex = sidebarButtons.findIndex(button => button.entered);
+        const enteredSidebarItemIndex = sidebarButtons.findIndex(button => button.entered);
 
-        const enteredItemExists = refItemIndex > -1;
-        const enteredCategoryExists = refCategoryIndex > -1;
-        let enteredSidebarItemExists = refSidebarItemIndex > -1;
+        const enteredAppItemExists = enteredAppItemIndex > -1;
+        const enteredCategoryExists = enteredCategoryIndex > -1;
+        let enteredSidebarItemExists = enteredSidebarItemIndex > -1;
 
         let enteredContextMenuItemExists = false;
         let contextMenuChildren = [];
-        let refContextMenuItemIndex = -1;
+        let enteredContextMenuItemIndex = -1;
         if (this.contextMenu.isOpen) {
             contextMenuChildren = this.contextMenu.contextMenuButtons;
-            refContextMenuItemIndex = contextMenuChildren.findIndex(button => button.entered);
-            if (refContextMenuItemIndex < 0) {
-                refContextMenuItemIndex = 0;
+            enteredContextMenuItemIndex = contextMenuChildren.findIndex(button => button.entered);
+            if (enteredContextMenuItemIndex < 0) {
+                enteredContextMenuItemIndex = 0;
             }
             enteredContextMenuItemExists = true;
         }
+
         let startingCategoryIndex = categoryButtons.findIndex(button =>
                                                                     this.currentCategory === button.id);
         if (startingCategoryIndex < 0) {
@@ -721,35 +726,35 @@ class CinnamenuApplet extends TextIconApplet {
 
         const leaveCurrentlyEnteredItem = () => {
             if (enteredContextMenuItemExists) {
-                contextMenuChildren[refContextMenuItemIndex].handleLeave();
-            } else if (enteredItemExists) {
-                appButtons[refItemIndex].handleLeave();
+                contextMenuChildren[enteredContextMenuItemIndex].handleLeave();
+            } else if (enteredAppItemExists) {
+                appButtons[enteredAppItemIndex].handleLeave();
             } else if (enteredSidebarItemExists) {
-                sidebarButtons[refSidebarItemIndex].handleLeave();
+                sidebarButtons[enteredSidebarItemIndex].handleLeave();
             } else if (enteredCategoryExists) {
-                categoryButtons[refCategoryIndex].handleLeave();
+                categoryButtons[enteredCategoryIndex].handleLeave();
             }
         };
 
         const nextSidebarItem = () => {
-            if (refSidebarItemIndex < sidebarButtons.length - 1) {
-                    sidebarButtons[refSidebarItemIndex + 1].handleEnter();
+            if (enteredSidebarItemIndex < sidebarButtons.length - 1) {
+                    sidebarButtons[enteredSidebarItemIndex + 1].handleEnter();
             } else {
                 sidebarButtons[0].handleEnter();
             }
         };
 
         const previousSidebarItem = () => {
-            if (refSidebarItemIndex === 0) {
+            if (enteredSidebarItemIndex === 0) {
                     sidebarButtons[sidebarButtons.length -1].handleEnter();
             } else {
-                sidebarButtons[refSidebarItemIndex - 1].handleEnter();
+                sidebarButtons[enteredSidebarItemIndex - 1].handleEnter();
             }
         };
 
         const leftNavigation = () => {
             if (enteredContextMenuItemExists) {
-                contextMenuChildren[refContextMenuItemIndex].handleEnter();//effectively ignore
+                contextMenuChildren[enteredContextMenuItemIndex].handleEnter();//effectively ignore
             } else if (enteredSidebarItemExists) {
                 if (this.settings.sidebarPlacement === PlacementLEFT ||
                                                 this.settings.sidebarPlacement === PlacementRIGHT) {
@@ -757,12 +762,12 @@ class CinnamenuApplet extends TextIconApplet {
                 } else {
                     previousSidebarItem();
                 }
-            } else if (enteredItemExists) {
+            } else if (enteredAppItemExists) {
                 if (this.settings.applicationsViewMode === ApplicationsViewModeLIST) {
                     categoryButtons[startingCategoryIndex].handleEnter();
                 } else {
-                    if (refItemIndex > 0) {
-                        appButtons[refItemIndex - 1].handleEnter();
+                    if (enteredAppItemIndex > 0) {
+                        appButtons[enteredAppItemIndex - 1].handleEnter();
                     } else {
                         appButtons[appButtons.length - 1].handleEnter();
                     }
@@ -774,7 +779,7 @@ class CinnamenuApplet extends TextIconApplet {
 
         const rightNavigation = () => {
             if (enteredContextMenuItemExists) {
-                contextMenuChildren[refContextMenuItemIndex].handleEnter();//Ignore
+                contextMenuChildren[enteredContextMenuItemIndex].handleEnter();//Ignore
             } else if (enteredSidebarItemExists) {
                 if (this.settings.sidebarPlacement === PlacementLEFT ||
                                                     this.settings.sidebarPlacement === PlacementRIGHT) {
@@ -782,12 +787,12 @@ class CinnamenuApplet extends TextIconApplet {
                 } else {
                     nextSidebarItem();
                 }
-            } else if (enteredItemExists) {
+            } else if (enteredAppItemExists) {
                 if (this.settings.applicationsViewMode === ApplicationsViewModeLIST) {
-                    appButtons[refItemIndex].handleEnter();//ignore
+                    appButtons[enteredAppItemIndex].handleEnter();//ignore
                 } else {
-                    if (appButtons[refItemIndex + 1]) {
-                        appButtons[refItemIndex + 1].handleEnter();
+                    if (appButtons[enteredAppItemIndex + 1]) {
+                        appButtons[enteredAppItemIndex + 1].handleEnter();
                     } else {
                         appButtons[0].handleEnter();
                     }
@@ -799,8 +804,8 @@ class CinnamenuApplet extends TextIconApplet {
 
         const downNavigation = () => {
             if (enteredContextMenuItemExists) {
-                if (contextMenuChildren[refContextMenuItemIndex + 1]) {
-                    contextMenuChildren[refContextMenuItemIndex + 1].handleEnter();
+                if (contextMenuChildren[enteredContextMenuItemIndex + 1]) {
+                    contextMenuChildren[enteredContextMenuItemIndex + 1].handleEnter();
                 } else {
                     contextMenuChildren[0].handleEnter();
                 }
@@ -811,23 +816,23 @@ class CinnamenuApplet extends TextIconApplet {
                 } else {
                     nextSidebarItem();
                 }
-            } else if (enteredItemExists) {
+            } else if (enteredAppItemExists) {
                 if (this.settings.applicationsViewMode === ApplicationsViewModeLIST) {
-                    if (appButtons[refItemIndex + 1]) {
-                        appButtons[refItemIndex + 1].handleEnter();
+                    if (appButtons[enteredAppItemIndex + 1]) {
+                        appButtons[enteredAppItemIndex + 1].handleEnter();
                     } else {
                         appButtons[0].handleEnter();
                     }
                 } else {//grid view
-                    if (appButtons[refItemIndex + this.getGridValues().columns]) {
-                        appButtons[refItemIndex + this.getGridValues().columns].handleEnter();
+                    if (appButtons[enteredAppItemIndex + this.getGridValues().columns]) {
+                        appButtons[enteredAppItemIndex + this.getGridValues().columns].handleEnter();
                     } else {
                         appButtons[appButtons.length - 1].handleEnter();
                     }
                 }
             } else if (enteredCategoryExists) {
-                if (categoryButtons[refCategoryIndex + 1]) {
-                    categoryButtons[refCategoryIndex + 1].handleEnter();
+                if (categoryButtons[enteredCategoryIndex + 1]) {
+                    categoryButtons[enteredCategoryIndex + 1].handleEnter();
                 } else {
                     categoryButtons[0].handleEnter();
                 }
@@ -836,8 +841,8 @@ class CinnamenuApplet extends TextIconApplet {
 
         const upNavigation = () => {
             if (enteredContextMenuItemExists) {
-                if (refContextMenuItemIndex > 0) {
-                    contextMenuChildren[refContextMenuItemIndex - 1].handleEnter();
+                if (enteredContextMenuItemIndex > 0) {
+                    contextMenuChildren[enteredContextMenuItemIndex - 1].handleEnter();
                 } else {
                     contextMenuChildren[contextMenuChildren.length - 1].handleEnter();
                 }
@@ -848,23 +853,23 @@ class CinnamenuApplet extends TextIconApplet {
                 } else {
                     previousSidebarItem();
                 }
-            } else if (enteredItemExists) {
+            } else if (enteredAppItemExists) {
                 if (this.settings.applicationsViewMode === ApplicationsViewModeLIST) {
-                    if (refItemIndex > 0) {
-                        appButtons[refItemIndex - 1].handleEnter();
+                    if (enteredAppItemIndex > 0) {
+                        appButtons[enteredAppItemIndex - 1].handleEnter();
                     } else {
                         appButtons[appButtons.length - 1].handleEnter();
                     }
                 } else {
-                    if (appButtons[refItemIndex - this.getGridValues().columns]) {
-                        appButtons[refItemIndex - this.getGridValues().columns].handleEnter();
+                    if (appButtons[enteredAppItemIndex - this.getGridValues().columns]) {
+                        appButtons[enteredAppItemIndex - this.getGridValues().columns].handleEnter();
                     } else {
                         appButtons[0].handleEnter();
                     }
                 }
             } else if (enteredCategoryExists) {
-                if (refCategoryIndex > 0) {
-                    categoryButtons[refCategoryIndex - 1].handleEnter();
+                if (enteredCategoryIndex > 0) {
+                    categoryButtons[enteredCategoryIndex - 1].handleEnter();
                 } else {
                     categoryButtons[categoryButtons.length - 1].handleEnter();
                 }
@@ -873,8 +878,8 @@ class CinnamenuApplet extends TextIconApplet {
 
         const tabNavigation = () => {
             if (enteredContextMenuItemExists) {
-                contextMenuChildren[refContextMenuItemIndex].handleEnter();//effectively ignore keypress
-            } else if (enteredItemExists) {
+                contextMenuChildren[enteredContextMenuItemIndex].handleEnter();//effectively ignore keypress
+            } else if (enteredAppItemExists) {
                 sidebarButtons[0].handleEnter();
             } else if (enteredSidebarItemExists && !this.searchActive) {
                 categoryButtons[startingCategoryIndex].handleEnter();
@@ -885,8 +890,8 @@ class CinnamenuApplet extends TextIconApplet {
 
         const shiftTabNavigation = () => {
             if (enteredContextMenuItemExists) {
-                contextMenuChildren[refContextMenuItemIndex].handleEnter();//effectively ignore keypress
-            } else if (enteredItemExists) {
+                contextMenuChildren[enteredContextMenuItemIndex].handleEnter();//effectively ignore keypress
+            } else if (enteredAppItemExists) {
                 categoryButtons[startingCategoryIndex].handleEnter();
             } else if (enteredSidebarItemExists && !this.searchActive) {
                 appButtons[0].handleEnter();
@@ -897,39 +902,39 @@ class CinnamenuApplet extends TextIconApplet {
 
         const activateItem = () => {
             if (enteredContextMenuItemExists) {
-                contextMenuChildren[refContextMenuItemIndex].activate();
-            } else if (enteredItemExists) {
-                appButtons[refItemIndex].activate();
+                contextMenuChildren[enteredContextMenuItemIndex].activate();
+            } else if (enteredAppItemExists) {
+                appButtons[enteredAppItemIndex].activate();
             } else if (enteredSidebarItemExists) {
-                sidebarButtons[refSidebarItemIndex].activate();
+                sidebarButtons[enteredSidebarItemIndex].activate();
             } else if (enteredCategoryExists) {
-                categoryButtons[refCategoryIndex].selectCategory();
+                categoryButtons[enteredCategoryIndex].selectCategory();
             }
         };
 
         const activateContextMenu = () => {
             if (this.contextMenu.isOpen) {
                 this.contextMenu.close();
-            } else if (enteredItemExists) {
-                appButtons[refItemIndex].openContextMenu();
+            } else if (enteredAppItemExists) {
+                appButtons[enteredAppItemIndex].openContextMenu();
             } else if (enteredSidebarItemExists) {
-                sidebarButtons[refSidebarItemIndex].openContextMenu();
+                sidebarButtons[enteredSidebarItemIndex].openContextMenu();
             } else if (enteredCategoryExists) {
-                categoryButtons[refCategoryIndex].openContextMenu();
+                categoryButtons[enteredCategoryIndex].openContextMenu();
             }
         };
 
         /*const moveCategory = (direction) => {
-            if (!enteredItemExists && !enteredSidebarItemExists && !enteredContextMenuItemExists &&
+            if (!enteredAppItemExists && !enteredSidebarItemExists && !enteredContextMenuItemExists &&
                                                                                     enteredCategoryExists) {
-                if (direction === "up" && refCategoryIndex > 0) {
-                    this.state.trigger('moveCategoryToPos', categoryButtons[refCategoryIndex].id,
-                                                        categoryButtons[refCategoryIndex - 1].id);
-                    categoryButtons[refCategoryIndex - 1].handleEnter();
-                } else if (direction === "down" && refCategoryIndex < categoryButtons.length - 1) {
-                    this.state.trigger('moveCategoryToPos', categoryButtons[refCategoryIndex].id,
-                                                        categoryButtons[refCategoryIndex + 1].id);
-                    categoryButtons[refCategoryIndex + 1].handleEnter();
+                if (direction === "up" && enteredCategoryIndex > 0) {
+                    this.state.trigger('moveCategoryToPos', categoryButtons[enteredCategoryIndex].id,
+                                                        categoryButtons[enteredCategoryIndex - 1].id);
+                    categoryButtons[enteredCategoryIndex - 1].handleEnter();
+                } else if (direction === "down" && enteredCategoryIndex < categoryButtons.length - 1) {
+                    this.state.trigger('moveCategoryToPos', categoryButtons[enteredCategoryIndex].id,
+                                                        categoryButtons[enteredCategoryIndex + 1].id);
+                    categoryButtons[enteredCategoryIndex + 1].handleEnter();
                 }
             }
         };*/
@@ -992,7 +997,7 @@ class CinnamenuApplet extends TextIconApplet {
                 return Clutter.EVENT_STOP;
             case (symbol === Clutter.KEY_Page_Up && noModifiers):
                 leaveCurrentlyEnteredItem();
-                if (enteredItemExists) {
+                if (enteredAppItemExists) {
                     appButtons[0].handleEnter();
                 } else if (enteredSidebarItemExists) {
                     sidebarButtons[0].handleEnter();
@@ -1002,7 +1007,7 @@ class CinnamenuApplet extends TextIconApplet {
                 return Clutter.EVENT_STOP;
             case (symbol === Clutter.KEY_Page_Down && noModifiers):
                 leaveCurrentlyEnteredItem();
-                if (enteredItemExists) {
+                if (enteredAppItemExists) {
                     appButtons[appButtons.length - 1].handleEnter();
                 } else if (enteredSidebarItemExists) {
                     sidebarButtons[sidebarButtons.length - 1].handleEnter();
@@ -1206,6 +1211,34 @@ class CinnamenuApplet extends TextIconApplet {
         //----------------------------------
         return false;
     }
+
+    /*searchDir(folder, pattern, res) {
+        const dir = Gio.file_new_for_path(folder);
+        let enumerator;
+        tryFn(() => {   enumerator = dir.enumerate_children("standard::*", 0, null); }, (e) => {
+                            this.appThis.appsView.setAnswerText(e.message); });
+        let next;
+        if (enumerator) {
+            next = enumerator.next_file(null);
+        }
+        while (next) {
+            const filename = next.get_name();
+            if (filename.toLowerCase().startsWith(pattern)) {
+                const file = Gio.file_new_for_path(folder + (folder === '/' ? '' : '/') + filename);
+                const foundFile = { name: next.get_name(),
+                                    icon: null,
+                                    gicon: next.get_icon(),
+                                    uri: file.get_uri(),
+                                    mimeType: next.get_content_type(),
+                                    isDirectory: file.query_file_type(0, null) === 2,
+                                    description: '',//file.get_path(),
+                                    type: APPTYPE.file };
+                res.push(foundFile);
+            }
+            next = enumerator.next_file(null);
+        }
+        return res;
+    }*/
 
     populateAppsBox(appList) {
         if (!appList) {
@@ -1928,15 +1961,14 @@ class Apps {
             const filename = next.get_name();
             if (!filename.startsWith('.')) {
                 const file = Gio.file_new_for_path(folder + (folder === '/' ? '' : '/') + filename);
-                const newRecent = { name: next.get_name(),
-                                    icon: null,
-                                    gicon: next.get_icon(),
-                                    uri: file.get_uri(),
-                                    mimeType: next.get_content_type(),
-                                    isDirectory: file.query_file_type(0, null) === 2,
-                                    description: '',//file.get_path(),
-                                    type: APPTYPE.file };
-                res.push(newRecent);
+                res.push({  name: next.get_name(),
+                            icon: null,
+                            gicon: next.get_icon(),
+                            uri: file.get_uri(),
+                            mimeType: next.get_content_type(),
+                            isDirectory: file.query_file_type(0, null) === 2,
+                            description: '',//file.get_path(),
+                            type: APPTYPE.file });
             }
             next = enumerator.next_file(null);
         }
@@ -1948,19 +1980,17 @@ class Apps {
                                     return (nameA > nameB) ? 1 : ( (nameA < nameB) ? -1 : 0 );
                                 } });
         const parent = dir.get_parent();
-        if (parent) {
-            const backButton = {  name: 'Back',
+        if (parent) {// Add back button
+            res.unshift({   name: 'Back',
                             icon: null,
                             uri: parent.get_uri(),
                             mimeType: 'inode/directory',
                             isDirectory: true,
                             isBackButton: true,
                             description: '',//parent.get_path(),
-                            type: APPTYPE.file };
-            return [backButton].concat(res);
-        } else {
-            return res;
+                            type: APPTYPE.file });
         }
+        return res;
     }
 
     destroy() {
@@ -2035,7 +2065,7 @@ class Sidebar {
                                     _('Leave the session'), () => { Util.spawnCommandLine('cinnamon-session-quit');
                                                                         this.appThis.closeMenu(); } ));
         iconObj.icon_name = 'system-lock-screen';
-        this.items.push(new SidebarButton( this.appThis, new St.Icon(iconObj), null, _('Lock Screen'),
+        this.items.push(new SidebarButton( this.appThis, new St.Icon(iconObj), null, _('Lock screen'),
                     _('Lock the screen'), () => {
                         const screensaver_settings = new Gio.Settings({
                                                     schema_id: 'org.cinnamon.desktop.screensaver' });
@@ -2050,7 +2080,6 @@ class Sidebar {
                             this.screenSaverProxy.LockRemote('');
                         }
                         this.appThis.closeMenu(); }));
-
         //add favorites
         if (this.appThis.settings.addFavorites) {
             this.appThis.apps.listFavoriteApps().forEach(fav => {

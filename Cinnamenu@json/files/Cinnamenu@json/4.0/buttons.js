@@ -317,8 +317,10 @@ class ContextMenu {
                 return;
             }
             const addMenuItem = (char, text) => {
-                const i = MODABLE.indexOf(app.emoji);
-                let newEmoji = MODED[i].replace('\u{1F3FB}', char);
+                const i = MODABLE.indexOf(app.emoji);//Find if emoji is in list of emoji that can have
+                                                     //skin tone modifiers.
+                let newEmoji = MODED[i].replace('\u{1F3FB}', char); //replace light skin tone character in
+                                                                    // MODED[i] with skin tone chosen by user.
                 newEmoji = newEmoji.replace('\u{1F3FB}', char);
                 const item = new ContextMenuItem(this.appThis, newEmoji + ' ' + text, null,
                                         () => { const clipboard = St.Clipboard.get_default();
