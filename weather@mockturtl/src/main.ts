@@ -380,7 +380,7 @@ export class WeatherApplet extends TextIconApplet {
 					return "error";
 				}
 			}
-			else {
+			else { // Using location changer buttons
 				// switching manual location switch to true in this case
 				this.config.InjectLocationToConfig(location, true);
 			}

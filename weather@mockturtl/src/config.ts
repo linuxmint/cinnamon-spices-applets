@@ -2,7 +2,7 @@ import { WeatherApplet } from "./main";
 import { IpApi } from "./ipApi";
 import { SettingKeys, LocationData, DistanceUnitLocalePrefs, WindSpeedLocalePrefs } from "./types";
 import { clearTimeout, setTimeout, _, isCoordinate } from "./utils";
-import { Logger } from "./logger";
+import { Log, Logger } from "./logger";
 import { UUID, SIGNAL_CHANGED } from "./consts";
 
 const { AppletSettings, BindingDirection } = imports.ui.settings;
@@ -262,7 +262,16 @@ export class Config {
             return null;
         }
 
-        if (isCoordinate(loc)) {
+        // Find location in storage
+        let location = this.app.locationStore.FindLocation(this._location);
+        if (location != null) {
+            Logger.Debug("location exist in locationstore, retrieve");
+            // TODO: change in locationstore as well
+            this.InjectLocationToConfig(location, true);
+            return location;
+        }
+        // location not in storage
+        else if (isCoordinate(loc)) {
             // Get Location
             loc = loc.replace(" ", "");
             let latLong = loc.split(",");
@@ -284,12 +293,22 @@ export class Config {
         let locationData = await this.app.geoLocationService.GetLocation(loc);
         // User facing errors are handled by service
         if (locationData == null) return null;
-        if (!!locationData?.address_string) {
-            Logger.Debug("Address found via address search, placing found full address '" + locationData.address_string + "' back to location entry");
+        if (!!locationData?.entryText) {
+            Logger.Debug("Address found via address search");
         }
 
-        this.InjectLocationToConfig(locationData);
-        return locationData;
+        // Maybe location is in locationStore, first search
+        location = this.app.locationStore.FindLocation(locationData.entryText);
+        if (location != null) {
+            // TODO: change in locationstore as well
+            Logger.Print("Found location was found in locationStore, return that instead");
+            this.InjectLocationToConfig(location);
+            return location;
+        }
+        else {
+            this.InjectLocationToConfig(locationData);
+            return locationData;
+        }
 	}
 	
 	// UTILS

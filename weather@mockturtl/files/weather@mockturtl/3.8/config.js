@@ -145,7 +145,13 @@ class Config {
             });
             return null;
         }
-        if (utils_1.isCoordinate(loc)) {
+        let location = this.app.locationStore.FindLocation(this._location);
+        if (location != null) {
+            logger_1.Logger.Debug("location exist in locationstore, retrieve");
+            this.InjectLocationToConfig(location, true);
+            return location;
+        }
+        else if (utils_1.isCoordinate(loc)) {
             loc = loc.replace(" ", "");
             let latLong = loc.split(",");
             let location = {
@@ -168,8 +174,16 @@ class Config {
         if (!!(locationData === null || locationData === void 0 ? void 0 : locationData.address_string)) {
             logger_1.Logger.Debug("Address found via address search, placing found full address '" + locationData.address_string + "' back to location entry");
         }
-        this.InjectLocationToConfig(locationData);
-        return locationData;
+        location = this.app.locationStore.FindLocation(locationData.entryText);
+        if (location != null) {
+            logger_1.Logger.Print("Found location was found in locationStore, return that instead");
+            this.InjectLocationToConfig(location);
+            return location;
+        }
+        else {
+            this.InjectLocationToConfig(locationData);
+            return locationData;
+        }
     }
     GetLocaleTemperateUnit(code) {
         if (code == null || this.fahrenheitCountries.indexOf(code) == -1)

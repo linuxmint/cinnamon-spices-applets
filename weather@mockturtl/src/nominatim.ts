@@ -16,6 +16,10 @@ export class GeoLocation {
         this.app = app;
     }
 
+    /**
+     * Finds location and rebuilds entryText so it can be looked up again
+     * @param searchText 
+     */
     public async GetLocation(searchText: string): Promise<LocationData> {
         try {
             searchText = searchText.trim();

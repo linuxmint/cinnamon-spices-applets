@@ -90,6 +90,24 @@ class LocationStore {
             locationSource: this.locations[previousIndex].locationSource,
         };
     }
+    FindLocation(entryText) {
+        for (let index = 0; index < this.locations.length; index++) {
+            const element = this.locations[index];
+            if (element.entryText == entryText)
+                return {
+                    address_string: element.address_string,
+                    country: element.country,
+                    city: element.city,
+                    entryText: element.entryText,
+                    lat: element.lat,
+                    lon: element.lon,
+                    mobile: element.mobile,
+                    timeZone: element.timeZone,
+                    locationSource: element.locationSource,
+                };
+        }
+        return null;
+    }
     InStorage(loc) {
         if (loc == null)
             return false;
