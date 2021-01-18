@@ -6,7 +6,6 @@ const { timeout_add, source_remove } = imports.mainloop;
 const { IconType } = imports.gi.St;
 const { IconTheme } = imports.gi.Gtk;
 
-imports.gettext.bindtextdomain(UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
 export function _(str: string): string {
     let customTrans = imports.gettext.dgettext(UUID, str);
      if (customTrans !== str && customTrans !== "")

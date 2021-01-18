@@ -25,16 +25,6 @@ const Lang = imports.lang;
 const { spawnCommandLine, spawnCommandLineAsyncIO } = imports.misc.util;
 const { IconType } = imports.gi.St;
 const keybindingManager = imports.ui.main.keybindingManager;
-const DATA_SERVICE = {
-    OPEN_WEATHER_MAP: "OpenWeatherMap",
-    DARK_SKY: "DarkSky",
-    MET_NORWAY: "MetNorway",
-    WEATHERBIT: "Weatherbit",
-    YAHOO: "Yahoo",
-    CLIMACELL: "Climacell",
-    MET_UK: "Met Office UK",
-    US_WEATHER: "US Weather"
-};
 class WeatherApplet extends TextIconApplet {
     constructor(metadata, orientation, panelHeight, instanceId) {
         super(orientation, panelHeight, instanceId);
@@ -250,35 +240,35 @@ class WeatherApplet extends TextIconApplet {
         var _a;
         let currentName = (_a = this.provider) === null || _a === void 0 ? void 0 : _a.name;
         switch (this.config._dataService) {
-            case DATA_SERVICE.DARK_SKY:
+            case "DarkSky":
                 if (currentName != "DarkSky" || force)
                     this.provider = new darkSky_1.DarkSky(this);
                 break;
-            case DATA_SERVICE.OPEN_WEATHER_MAP:
+            case "OpenWeatherMap":
                 if (currentName != "OpenWeatherMap" || force)
                     this.provider = new openWeatherMap_1.OpenWeatherMap(this);
                 break;
-            case DATA_SERVICE.MET_NORWAY:
+            case "MetNorway":
                 if (currentName != "MetNorway" || force)
                     this.provider = new met_norway_1.MetNorway(this);
                 break;
-            case DATA_SERVICE.WEATHERBIT:
+            case "Weatherbit":
                 if (currentName != "Weatherbit" || force)
                     this.provider = new weatherbit_1.Weatherbit(this);
                 break;
-            case DATA_SERVICE.YAHOO:
+            case "Yahoo":
                 if (currentName != "Yahoo" || force)
                     this.provider = new yahoo_1.Yahoo(this);
                 break;
-            case DATA_SERVICE.CLIMACELL:
+            case "Climacell":
                 if (currentName != "Climacell" || force)
                     this.provider = new climacell_1.Climacell(this);
                 break;
-            case DATA_SERVICE.MET_UK:
+            case "Met Office UK":
                 if (currentName != "Met Office UK" || force)
                     this.provider = new met_uk_1.MetUk(this);
                 break;
-            case DATA_SERVICE.US_WEATHER:
+            case "US Weather":
                 if (currentName != "US Weather" || force)
                     this.provider = new us_weather_1.USWeather(this);
                 break;

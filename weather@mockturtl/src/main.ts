@@ -10,7 +10,7 @@ import { Config } from "./config";
 import { LocationStore } from "./locationstore";
 import { WeatherLoop } from "./loop";
 import { MetUk } from "./met_uk";
-import { ServiceMap, WeatherData, WeatherProvider, LocationData, AppletError, CustomIcons, RefreshState, NiceErrorDetail } from "./types";
+import { WeatherData, WeatherProvider, LocationData, AppletError, CustomIcons, RefreshState, NiceErrorDetail } from "./types";
 import { UI } from "./ui";
 import { constructJsLocale, _ } from "./utils";
 import { DarkSky } from "./darkSky";
@@ -31,18 +31,6 @@ const Lang: typeof imports.lang = imports.lang;
 const { spawnCommandLine, spawnCommandLineAsyncIO } = imports.misc.util;
 const { IconType } = imports.gi.St;
 const keybindingManager = imports.ui.main.keybindingManager;
-
-// Settings keys
-const DATA_SERVICE: ServiceMap = {
-    OPEN_WEATHER_MAP: "OpenWeatherMap",
-    DARK_SKY: "DarkSky",
-    MET_NORWAY: "MetNorway",
-    WEATHERBIT: "Weatherbit",
-    YAHOO: "Yahoo",
-    CLIMACELL: "Climacell",
-    MET_UK: "Met Office UK",
-    US_WEATHER: "US Weather"
-}
 
 export class WeatherApplet extends TextIconApplet {
 
@@ -165,6 +153,10 @@ export class WeatherApplet extends TextIconApplet {
 		return response.Data;
 	}
 
+    /**
+     * Handles general errors from HTTPLib
+     * @param error 
+     */
 	private HandleHTTPError(error: HttpError): void {
 		let appletError: AppletError = {
 			detail: error.message,
@@ -183,7 +175,7 @@ export class WeatherApplet extends TextIconApplet {
 		this.ShowError(appletError);
 	}
 
-    /** Spawn a command and await for the output it gives */
+    /** Spawns a command and await for the output it gives */
     public async SpawnProcess(command: string[]): Promise<any> {
         // prepare command
         let cmd = "";
@@ -338,28 +330,28 @@ export class WeatherApplet extends TextIconApplet {
     private EnsureProvider(force: boolean = false): void {
         let currentName = this.provider?.name;
         switch (this.config._dataService) {
-            case DATA_SERVICE.DARK_SKY:           // No City Info
+            case "DarkSky":           // No City Info
                 if (currentName != "DarkSky" || force) this.provider = new DarkSky(this);
                 break;
-            case DATA_SERVICE.OPEN_WEATHER_MAP:   // No City Info
+            case "OpenWeatherMap":   // No City Info
                 if (currentName != "OpenWeatherMap" || force) this.provider = new OpenWeatherMap(this);
                 break;
-            case DATA_SERVICE.MET_NORWAY:         // No TZ or city info
+            case "MetNorway":         // No TZ or city info
                 if (currentName != "MetNorway" || force) this.provider = new MetNorway(this);
                 break;
-            case DATA_SERVICE.WEATHERBIT:
+            case "Weatherbit":
                 if (currentName != "Weatherbit" || force) this.provider = new Weatherbit(this);
                 break;
-            case DATA_SERVICE.YAHOO:
+            case "Yahoo":
                 if (currentName != "Yahoo" || force) this.provider = new Yahoo(this);
                 break;
-            case DATA_SERVICE.CLIMACELL:
+            case "Climacell":
                 if (currentName != "Climacell" || force) this.provider = new Climacell(this);
                 break;
-            case DATA_SERVICE.MET_UK:
+            case "Met Office UK":
                 if (currentName != "Met Office UK" || force) this.provider = new MetUk(this);
                 break;
-            case DATA_SERVICE.US_WEATHER:
+            case "US Weather":
                 if (currentName != "US Weather" || force) this.provider = new USWeather(this);
                 break;
             default:
@@ -368,7 +360,7 @@ export class WeatherApplet extends TextIconApplet {
     }
 
 	/**
-	 * Main function pulling data
+	 * Main function pulling and refreshing data
 	 * @param rebuild 
 	 */
     public async refreshWeather(rebuild: boolean, location?: LocationData): Promise<RefreshState> {

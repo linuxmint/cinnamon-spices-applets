@@ -147,9 +147,6 @@ export type GUIDStore = {
     [key: number]: string
 }
 
-export type ServiceMap = {
-    [key: string]: Services
-}
 export type ServiceDescriptions = {
     [key in Services]: string
 }
