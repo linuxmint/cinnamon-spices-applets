@@ -45,7 +45,7 @@ class GeoLocation {
             return result;
         }
         catch (e) {
-            logger_1.Logger.Error("Could not geolocate, error: " + JSON.stringify(e, null, 2));
+            logger_1.Logger.Error("Could not geo locate, error: " + JSON.stringify(e, null, 2));
             this.app.ShowError({
                 type: "soft",
                 detail: "bad api response",

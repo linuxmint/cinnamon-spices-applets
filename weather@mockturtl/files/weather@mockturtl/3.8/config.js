@@ -4,12 +4,11 @@ exports.Config = void 0;
 const ipApi_1 = require("./ipApi");
 const utils_1 = require("./utils");
 const logger_1 = require("./logger");
+const consts_1 = require("./consts");
 const { AppletSettings, BindingDirection } = imports.ui.settings;
 const Lang = imports.lang;
 const keybindingManager = imports.ui.main.keybindingManager;
-const UUID = "weather@mockturtl";
 const { IconType } = imports.gi.St;
-const SIGNAL_CHANGED = 'changed::';
 class Config {
     constructor(app, instanceID, locale) {
         this.fahrenheitCountries = ["bs", "bz", "ky", "pr", "pw", "us"];
@@ -56,7 +55,7 @@ class Config {
         this.app = app;
         this.autoLocProvider = new ipApi_1.IpApi(app);
         this.countryCode = this.GetCountryCode(locale);
-        this.settings = new AppletSettings(this, UUID, instanceID);
+        this.settings = new AppletSettings(this, consts_1.UUID, instanceID);
         this.BindSettings();
     }
     BindSettings() {
@@ -67,8 +66,8 @@ class Config {
         }
         this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, this.WEATHER_LOCATION, ("_" + this.WEATHER_LOCATION), Lang.bind(this, this.OnLocationChanged), null);
         this.settings.bindProperty(BindingDirection.IN, "keybinding", "keybinding", Lang.bind(this.app, this.app._onKeySettingsUpdated), null);
-        keybindingManager.addHotKey(UUID, this.keybinding, Lang.bind(this.app, this.app.on_applet_clicked));
-        this.settings.connect(SIGNAL_CHANGED + this.WEATHER_USE_SYMBOLIC_ICONS_KEY, Lang.bind(this, this.IconTypeChanged));
+        keybindingManager.addHotKey(consts_1.UUID, this.keybinding, Lang.bind(this.app, this.app.on_applet_clicked));
+        this.settings.connect(consts_1.SIGNAL_CHANGED + this.WEATHER_USE_SYMBOLIC_ICONS_KEY, Lang.bind(this, this.IconTypeChanged));
     }
     IconTypeChanged() {
         this.app.ui.UpdateIconType(this.IconType());
@@ -148,10 +147,10 @@ class Config {
         }
         if (utils_1.isCoordinate(loc)) {
             loc = loc.replace(" ", "");
-            let latlong = loc.split(",");
+            let latLong = loc.split(",");
             let location = {
-                lat: parseFloat(latlong[0]),
-                lon: parseFloat(latlong[1]),
+                lat: parseFloat(latLong[0]),
+                lon: parseFloat(latLong[1]),
                 city: null,
                 country: null,
                 mobile: null,
@@ -196,10 +195,10 @@ class Config {
         return "metric";
     }
     GetCountryCode(locale) {
-        let splitted = locale.split("-");
-        if (splitted.length < 2)
+        let split = locale.split("-");
+        if (split.length < 2)
             return null;
-        return splitted[1];
+        return split[1];
     }
 }
 exports.Config = Config;

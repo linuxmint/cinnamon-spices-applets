@@ -3,12 +3,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.WeatherLoop = void 0;
 const logger_1 = require("./logger");
 const utils_1 = require("./utils");
-function uuidv4() {
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-        var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
-        return v.toString(16);
-    });
-}
 var weatherAppletGUIDs = {};
 class WeatherLoop {
     constructor(app, instanceID) {
@@ -19,7 +13,7 @@ class WeatherLoop {
         this.errorCount = 0;
         this.app = app;
         this.instanceID = instanceID;
-        this.GUID = uuidv4();
+        this.GUID = utils_1.Guid();
         weatherAppletGUIDs[instanceID] = this.GUID;
     }
     IsDataTooOld() {

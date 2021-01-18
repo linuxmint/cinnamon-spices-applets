@@ -35,7 +35,7 @@ export class LocationStore {
     private app: WeatherApplet = null;
 
 	/**
-	 * Current head on locationstore array.
+	 * Current head on locationStore array.
 	 * Retains position even if user changes to location
 	 * not in the store. It gets moved to the end of array if user
 	 * saves a new location. On deletion it moves to the next index
@@ -89,7 +89,7 @@ export class LocationStore {
 
         Logger.Debug("Switching to index " + nextIndex.toString() + "...");
         this.currentIndex = nextIndex;
-        // Return copy, not original so nothing interferes with filestore
+        // Return copy, not original so nothing interferes with fileStore
         return {
             address_string: this.locations[nextIndex].address_string,
             country: this.locations[nextIndex].country,

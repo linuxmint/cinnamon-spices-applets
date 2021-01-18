@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UI = void 0;
+const consts_1 = require("./consts");
 const logger_1 = require("./logger");
 const utils_1 = require("./utils");
 const weatherbutton_1 = require("./weatherbutton");
@@ -13,10 +14,6 @@ const { GridLayout } = imports.gi.Clutter;
 const { AppletPopupMenu } = imports.ui.applet;
 const { themeManager } = imports.ui.main;
 const { SignalManager } = imports.misc.signalManager;
-const APPLET_ICON = "view-refresh-symbolic";
-const SIGNAL_CHANGED = 'changed::';
-const SIGNAL_CLICKED = 'clicked';
-const SIGNAL_REPAINT = 'repaint';
 const STYLE_SUMMARYBOX = 'weather-current-summarybox';
 const STYLE_SUMMARY = 'weather-current-summary';
 const STYLE_DATABOX = 'weather-current-databox';
@@ -37,10 +34,6 @@ const STYLE_FORECAST = 'forecast';
 const STYLE_WEATHER_MENU = 'weather-menu';
 const STYLE_BAR = 'bottombar';
 const STYLE_LOCATION_SELECTOR = 'location-selector';
-const BLANK = '   ';
-const ELLIPSIS = '...';
-const EN_DASH = '\u2013';
-const FORWARD_SLASH = '\u002F';
 class UI {
     constructor(app, orientation) {
         this.hourlyToggled = false;
@@ -107,12 +100,12 @@ class UI {
             x_align: Align.MIDDLE
         });
         this._hourlyScrollView.overlay_scrollbars = true;
-        let vscroll = this._hourlyScrollView.get_vscroll_bar();
-        vscroll.connect("scroll-start", () => { this.menu.passEvents = true; });
-        vscroll.connect("scroll-stop", () => { this.menu.passEvents = false; });
-        let hscroll = this._hourlyScrollView.get_hscroll_bar();
-        hscroll.connect("scroll-start", () => { this.menu.passEvents = true; });
-        hscroll.connect("scroll-stop", () => { this.menu.passEvents = false; });
+        let vScroll = this._hourlyScrollView.get_vscroll_bar();
+        vScroll.connect("scroll-start", () => { this.menu.passEvents = true; });
+        vScroll.connect("scroll-stop", () => { this.menu.passEvents = false; });
+        let hScroll = this._hourlyScrollView.get_hscroll_bar();
+        hScroll.connect("scroll-start", () => { this.menu.passEvents = true; });
+        hScroll.connect("scroll-stop", () => { this.menu.passEvents = false; });
         this._separatorAreaHourly.actor.hide();
         this._hourlyScrollView.hide();
         this._hourlyScrollView.set_clip_to_allocation(true);
@@ -364,7 +357,7 @@ class UI {
                 let dayName = utils_1.GetDayName(forecastData.date, this.app.currentLocale, this.app.config._showForecastDates, weather.location.timeZone);
                 forecastUi.Day.text = dayName;
                 forecastUi.Temperature.text = first_temperature;
-                forecastUi.Temperature.text += ((config._tempRussianStyle) ? ELLIPSIS : " " + FORWARD_SLASH + " ");
+                forecastUi.Temperature.text += ((config._tempRussianStyle) ? consts_1.ELLIPSIS : " " + consts_1.FORWARD_SLASH + " ");
                 forecastUi.Temperature.text += second_temperature + ' ' + this.unitToUnicode(config.TemperatureUnit());
                 forecastUi.Summary.text = comment;
                 forecastUi.Icon.icon_name = (config._useCustomMenuIcons) ? forecastData.condition.customIcon : forecastData.condition.icon;
@@ -464,9 +457,9 @@ class UI {
             let summaryHeight = ui.Summary.get_preferred_height(-1)[1];
             let temperatureHeight = ui.Temperature.get_preferred_height(-1)[1];
             let precipitationHeight = ui.Precipitation.get_preferred_height(-1)[1];
-            let itemheight = hourHeight + iconHeight + summaryHeight + temperatureHeight + precipitationHeight;
-            if (boxItemHeight < itemheight)
-                boxItemHeight = itemheight;
+            let itemHeight = hourHeight + iconHeight + summaryHeight + temperatureHeight + precipitationHeight;
+            if (boxItemHeight < itemHeight)
+                boxItemHeight = itemHeight;
         }
         logger_1.Logger.Debug("Final Hourly box item height is: " + boxItemHeight);
         let scrollBarHeight = this._hourlyScrollView.get_hscroll_bar().get_preferred_width(-1)[1];
@@ -512,17 +505,17 @@ class UI {
     rebuildCurrentWeatherUi(config) {
         this.destroyCurrentWeather();
         let textOb = {
-            text: ELLIPSIS
+            text: consts_1.ELLIPSIS
         };
         this._currentWeatherIcon = new Icon({
             icon_type: config.IconType(),
             icon_size: 64,
-            icon_name: APPLET_ICON,
+            icon_name: consts_1.APPLET_ICON,
             style_class: STYLE_ICON
         });
         this._locationButton = new weatherbutton_1.WeatherButton({ reactive: true, label: utils_1._('Refresh'), });
         this._currentWeatherLocation = this._locationButton.actor;
-        this._currentWeatherLocation.connect(SIGNAL_CLICKED, Lang.bind(this, function () {
+        this._currentWeatherLocation.connect(consts_1.SIGNAL_CLICKED, Lang.bind(this, function () {
             if (this.app.encounteredError)
                 this.app.refreshWeather(true);
             else if (this._currentWeatherLocation.url == null)
@@ -540,7 +533,7 @@ class UI {
                 style_class: STYLE_LOCATION_SELECTOR
             }),
         });
-        this._nextLocationButton.actor.connect(SIGNAL_CLICKED, Lang.bind(this.app, this.app.NextLocationClicked));
+        this._nextLocationButton.actor.connect(consts_1.SIGNAL_CLICKED, Lang.bind(this.app, this.app.NextLocationClicked));
         this._previousLocationButton = new weatherbutton_1.WeatherButton({
             reactive: true,
             can_focus: true,
@@ -551,14 +544,14 @@ class UI {
                 style_class: STYLE_LOCATION_SELECTOR
             }),
         });
-        this._previousLocationButton.actor.connect(SIGNAL_CLICKED, Lang.bind(this.app, this.app.PreviousLocationClicked));
+        this._previousLocationButton.actor.connect(consts_1.SIGNAL_CLICKED, Lang.bind(this.app, this.app.PreviousLocationClicked));
         this._locationBox = new BoxLayout();
         this._locationBox.add(this._previousLocationButton.actor, { x_fill: false, x_align: Align.START, y_align: Align.MIDDLE, expand: false });
         this._locationBox.add(this._currentWeatherLocation, { x_fill: true, x_align: Align.MIDDLE, y_align: Align.MIDDLE, expand: true });
         this._locationBox.add(this._nextLocationButton.actor, { x_fill: false, x_align: Align.END, y_align: Align.MIDDLE, expand: false });
         this._currentWeatherSummary = new Label({ text: utils_1._('Loading ...'), style_class: STYLE_SUMMARY });
-        this._currentWeatherSunrise = new Label({ text: ELLIPSIS, style: this.GetTextColorStyle() });
-        this._currentWeatherSunset = new Label({ text: ELLIPSIS, style: this.GetTextColorStyle() });
+        this._currentWeatherSunrise = new Label({ text: consts_1.ELLIPSIS, style: this.GetTextColorStyle() });
+        this._currentWeatherSunset = new Label({ text: consts_1.ELLIPSIS, style: this.GetTextColorStyle() });
         let sunriseBox = new BoxLayout();
         let sunsetBox = new BoxLayout();
         if (config._showSunrise) {
@@ -586,10 +579,10 @@ class UI {
         };
         sunriseBox.add(this._currentWeatherSunrise, textOptions);
         sunsetBox.add(this._currentWeatherSunset, textOptions);
-        let ab_spacerlabel = new Label({ text: BLANK });
+        let ab_spacerLabel = new Label({ text: consts_1.BLANK });
         let sunBox = new BoxLayout({ style_class: STYLE_ASTRONOMY });
         sunBox.add_actor(sunriseBox);
-        sunBox.add_actor(ab_spacerlabel);
+        sunBox.add_actor(ab_spacerLabel);
         sunBox.add_actor(sunsetBox);
         let middleColumn = new BoxLayout({ vertical: true, style_class: STYLE_SUMMARYBOX });
         middleColumn.add_actor(this._locationBox);
@@ -658,7 +651,7 @@ class UI {
             forecastWeather.Icon = new Icon({
                 icon_type: config.IconType(),
                 icon_size: 48,
-                icon_name: APPLET_ICON,
+                icon_name: consts_1.APPLET_ICON,
                 style_class: STYLE_FORECAST_ICON
             });
             forecastWeather.Day = new Label({
@@ -714,7 +707,7 @@ class UI {
                 icon_name: "custom-down-arrow-symbolic"
             }),
         }).actor;
-        this._hourlyButton.connect(SIGNAL_CLICKED, Lang.bind(this, this.ToggleHourlyWeather));
+        this._hourlyButton.connect(consts_1.SIGNAL_CLICKED, Lang.bind(this, this.ToggleHourlyWeather));
         this._bar.add(this._hourlyButton, {
             x_fill: false,
             x_align: Align.MIDDLE,
@@ -725,8 +718,8 @@ class UI {
         if (this.app.GetMaxHourlyForecasts() <= 0) {
             this.HideHourlyToggle();
         }
-        this._providerCredit = new weatherbutton_1.WeatherButton({ label: utils_1._(ELLIPSIS), reactive: true }).actor;
-        this._providerCredit.connect(SIGNAL_CLICKED, Lang.bind(this, this.app.OpenUrl));
+        this._providerCredit = new weatherbutton_1.WeatherButton({ label: utils_1._(consts_1.ELLIPSIS), reactive: true }).actor;
+        this._providerCredit.connect(consts_1.SIGNAL_CLICKED, Lang.bind(this, this.app.OpenUrl));
         this._bar.add(this._providerCredit, {
             x_fill: false,
             x_align: Align.END,
@@ -751,12 +744,12 @@ class UI {
                 Icon: new Icon({
                     icon_type: config.IconType(),
                     icon_size: 24,
-                    icon_name: APPLET_ICON,
+                    icon_name: consts_1.APPLET_ICON,
                     style_class: "hourly-icon"
                 }),
                 Precipitation: new Label({ text: " ", style_class: "hourly-data" }),
-                Summary: new Label({ text: utils_1._(ELLIPSIS), style_class: "hourly-data" }),
-                Temperature: new Label({ text: utils_1._(ELLIPSIS), style_class: "hourly-data" })
+                Summary: new Label({ text: utils_1._(consts_1.ELLIPSIS), style_class: "hourly-data" }),
+                Temperature: new Label({ text: utils_1._(consts_1.ELLIPSIS), style_class: "hourly-data" })
             });
             this._hourlyForecasts[index].Summary.clutter_text.set_line_wrap(true);
             box.add_child(this._hourlyForecasts[index].Hour);

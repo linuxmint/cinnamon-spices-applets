@@ -22,7 +22,7 @@ import { Yahoo } from "./yahoo";
 import { MetNorway } from "./met_norway";
 import { Http, HttpError, Method } from "./httpLib";
 import { Logger } from "./logger";
-import { UUID } from "./consts";
+import { APPLET_ICON, REFRESH_ICON, UUID } from "./consts";
 import { Notifications } from "./notification_service";
 
 const { TextIconApplet, AllowedLayout, MenuItem } = imports.ui.applet;
@@ -31,9 +31,6 @@ const Lang: typeof imports.lang = imports.lang;
 const { spawnCommandLine, spawnCommandLineAsyncIO } = imports.misc.util;
 const { IconType } = imports.gi.St;
 const keybindingManager = imports.ui.main.keybindingManager;
-
-const APPLET_ICON = "view-refresh-symbolic"
-const REFRESH_ICON = "view-refresh";
 
 // Settings keys
 const DATA_SERVICE: ServiceMap = {
@@ -76,7 +73,7 @@ export class WeatherApplet extends TextIconApplet {
 		this.currentLocale = constructJsLocale(get_language_names()[0]);
 		Logger.Debug("Applet created with instanceID " + instanceId);
         Logger.Debug("System locale is " + this.currentLocale);
-        Logger.Debug("Appletdir is: " + this.appletDir);
+        Logger.Debug("AppletDir is: " + this.appletDir);
 
         // importing custom translations
         imports.gettext.bindtextdomain(UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
@@ -336,7 +333,7 @@ export class WeatherApplet extends TextIconApplet {
 
 	/**
 	 * Lazy load provider
-	 * @param force Force provider reinitialization
+	 * @param force Force provider re initialization
 	 */
     private EnsureProvider(force: boolean = false): void {
         let currentName = this.provider?.name;
@@ -448,7 +445,7 @@ export class WeatherApplet extends TextIconApplet {
         return Math.min(this.config._forecastHours, this.provider.maxHourlyForecastSupport);
 	}
 
-	/** Fills in missing weather info from location Datas  */
+	/** Fills in missing weather info from location Data  */
 	private MergeWeatherData(weatherInfo: WeatherData, locationData: LocationData) {
 		if (!weatherInfo.location.city) weatherInfo.location.city = locationData.city;
 		if (!weatherInfo.location.country) weatherInfo.location.country = locationData.country;

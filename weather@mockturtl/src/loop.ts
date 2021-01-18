@@ -1,14 +1,7 @@
 import { Logger } from "./logger";
 import { WeatherApplet } from "./main";
 import { GUIDStore } from "./types";
-import { delay } from "./utils";
-
-function uuidv4() {
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-        var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
-        return v.toString(16);
-    });
-}
+import { delay, Guid } from "./utils";
 
 /** Stores applet instance's ID's globally,
  * Checked to make sure that instance is 
@@ -40,7 +33,7 @@ export class WeatherLoop {
     constructor(app: WeatherApplet, instanceID: number) {
         this.app = app;
         this.instanceID = instanceID;
-        this.GUID = uuidv4();
+        this.GUID = Guid();
         weatherAppletGUIDs[instanceID] = this.GUID;
     }
 

@@ -3,13 +3,12 @@ import { IpApi } from "./ipApi";
 import { SettingKeys, LocationData, DistanceUnitLocalePrefs, WindSpeedLocalePrefs } from "./types";
 import { clearTimeout, setTimeout, _, isCoordinate } from "./utils";
 import { Logger } from "./logger";
+import { UUID, SIGNAL_CHANGED } from "./consts";
 
 const { AppletSettings, BindingDirection } = imports.ui.settings;
 const Lang: typeof imports.lang = imports.lang;
 const keybindingManager = imports.ui.main.keybindingManager;
-const UUID = "weather@mockturtl"
 const { IconType } = imports.gi.St;
-const SIGNAL_CHANGED = 'changed::'
 
 /** Units Used in Options. Change Options list if You change this! */
 export type WeatherUnits = 'automatic' | 'celsius' | 'fahrenheit';
@@ -266,10 +265,10 @@ export class Config {
         if (isCoordinate(loc)) {
             // Get Location
             loc = loc.replace(" ", "");
-            let latlong = loc.split(",");
+            let latLong = loc.split(",");
             let location: LocationData = {
-                lat: parseFloat(latlong[0]),
-                lon: parseFloat(latlong[1]),
+                lat: parseFloat(latLong[0]),
+                lon: parseFloat(latLong[1]),
                 city: null,
                 country: null,
                 mobile: null,
@@ -319,10 +318,10 @@ export class Config {
 	}
 
 	private GetCountryCode(locale: string) {
-		let splitted = locale.split("-");
+		let split = locale.split("-");
 		// There is no country code
-		if (splitted.length < 2) return null;
+		if (split.length < 2) return null;
 	
-		return splitted[1];
+		return split[1];
 	}
 }

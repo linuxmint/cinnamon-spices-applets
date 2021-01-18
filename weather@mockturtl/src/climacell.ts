@@ -63,13 +63,13 @@ export class Climacell implements WeatherProvider {
     };
 
     // A function as a function parameter 2 levels deep does not know
-    // about the top level object information, has to pass it in as a paramater
+    // about the top level object information, has to pass it in as a parameter
     /**
      * 
      * @param baseUrl 
      * @param ParseFunction returns WeatherData or ForecastData Object
      */
-    private async GetData(baseUrl: CallType, loc: LocationData, ParseFunction: (json: any, context: any) => WeatherData | ForecastData[] | HourlyForecastData[]) {
+    private async GetData(baseUrl: CallType, loc: LocationData, ParseFunction: (json: any) => WeatherData | ForecastData[] | HourlyForecastData[]) {
 		let query = this.ConstructQuery(baseUrl, loc);
 		if (query == null)
 			return null;
@@ -79,13 +79,13 @@ export class Climacell implements WeatherProvider {
 		if (json == null)
 			return null;
 
-		return ParseFunction(json, this);
+		return Lang.bind(this, ParseFunction(json));
     };
 
 
-    private ParseWeather(json: any, ctx: Climacell): WeatherData {
+    private ParseWeather(json: any): WeatherData {
         try {
-            let suntimes: SunTimes = {
+            let sunTimes: SunTimes = {
                 sunrise: new Date(json.sunrise.value),
                 sunset: new Date(json.sunset.value)
             }
@@ -115,7 +115,7 @@ export class Climacell implements WeatherProvider {
                     type: "temperature",
                     value: CelsiusToKelvin(json.feels_like.value)
                 },
-                condition: ctx.ResolveCondition(json.weather_code.value, IsNight(suntimes)),
+                condition: this.ResolveCondition(json.weather_code.value, IsNight(sunTimes)),
                 forecasts: []
             };
 
@@ -124,16 +124,16 @@ export class Climacell implements WeatherProvider {
         }
         catch (e) {
             Logger.Error("Climacell payload parsing error: " + e)
-            ctx.app.ShowError({ type: "soft", detail: "unusual payload", service: "climacell", message: _("Failed to Process Weather Info") });
+            this.app.ShowError({ type: "soft", detail: "unusual payload", service: "climacell", message: _("Failed to Process Weather Info") });
             return null;
         }
     };
 
-    private ParseHourly(json: any, ctx: Climacell): HourlyForecastData[] {
+    private ParseHourly(json: any): HourlyForecastData[] {
         let results: HourlyForecastData[] = [];
         for (let index = 0; index < json.length; index++) {
             const element = json[index];
-            let suntimes: SunTimes = {
+            let sunTimes: SunTimes = {
                 sunrise: new Date(element.sunrise.value),
                 sunset: new Date(element.sunset.value)
             }
@@ -145,14 +145,14 @@ export class Climacell implements WeatherProvider {
                     volume: null,
                     chance: element.precipitation_probability.value
                 },
-                condition: ctx.ResolveCondition(element.weather_code.value, IsNight(suntimes, new Date(element.observation_time.value)))
+                condition: this.ResolveCondition(element.weather_code.value, IsNight(sunTimes, new Date(element.observation_time.value)))
             }
             results.push(hour);
         }
         return results;
     }
 
-    private ParseDaily(json: any, ctx: Climacell): ForecastData[] {
+    private ParseDaily(json: any): ForecastData[] {
         let results: ForecastData[] = [];
         for (let index = 0; index < json.length; index++) {
             const element = json[index];
@@ -160,14 +160,14 @@ export class Climacell implements WeatherProvider {
                 date: new Date(element.observation_time.value),
                 temp_max: CelsiusToKelvin(element.temp[1].max.value),
                 temp_min: CelsiusToKelvin(element.temp[0].min.value),
-                condition: ctx.ResolveCondition(element.weather_code.value)
+                condition: this.ResolveCondition(element.weather_code.value)
             }
             results.push(day);
         }
         return results;
     }
 
-    private ConstructQuery(subcall: CallType, loc: LocationData): string {
+    private ConstructQuery(callType: CallType, loc: LocationData): string {
         let query;
         let key = this.app.config._apiKey.replace(" ", "");
         if (this.app.config.noApiKey()) {
@@ -180,7 +180,7 @@ export class Climacell implements WeatherProvider {
             });
             return null;
         }
-        query = this.baseUrl + this.callData[subcall].url + "?apikey=" + key + "&lat=" + loc.lat + "&lon=" + loc.lon + "&unit_system=" + this.unit + "&fields=" + this.callData[subcall].required_fields.join();
+        query = this.baseUrl + this.callData[callType].url + "?apikey=" + key + "&lat=" + loc.lat + "&lon=" + loc.lon + "&unit_system=" + this.unit + "&fields=" + this.callData[callType].required_fields.join();
         return query;
     };
 
@@ -390,7 +390,7 @@ export class Climacell implements WeatherProvider {
 
 /**
  * - 'si' returns meter/sec and Celsius
- * - 'us' returns miles/hour and Farhenheit
+ * - 'us' returns miles/hour and Fahrenheit
  */
 type queryUnits = 'si' | 'us';
 

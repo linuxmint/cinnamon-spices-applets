@@ -45,12 +45,12 @@ class Climacell {
         let json = await this.app.LoadJsonAsync(query, null, Lang.bind(this, this.HandleError));
         if (json == null)
             return null;
-        return ParseFunction(json, this);
+        return Lang.bind(this, ParseFunction(json));
     }
     ;
-    ParseWeather(json, ctx) {
+    ParseWeather(json) {
         try {
-            let suntimes = {
+            let sunTimes = {
                 sunrise: new Date(json.sunrise.value),
                 sunset: new Date(json.sunset.value)
             };
@@ -80,23 +80,23 @@ class Climacell {
                     type: "temperature",
                     value: utils_1.CelsiusToKelvin(json.feels_like.value)
                 },
-                condition: ctx.ResolveCondition(json.weather_code.value, utils_1.IsNight(suntimes)),
+                condition: this.ResolveCondition(json.weather_code.value, utils_1.IsNight(sunTimes)),
                 forecasts: []
             };
             return result;
         }
         catch (e) {
             logger_1.Logger.Error("Climacell payload parsing error: " + e);
-            ctx.app.ShowError({ type: "soft", detail: "unusual payload", service: "climacell", message: utils_1._("Failed to Process Weather Info") });
+            this.app.ShowError({ type: "soft", detail: "unusual payload", service: "climacell", message: utils_1._("Failed to Process Weather Info") });
             return null;
         }
     }
     ;
-    ParseHourly(json, ctx) {
+    ParseHourly(json) {
         let results = [];
         for (let index = 0; index < json.length; index++) {
             const element = json[index];
-            let suntimes = {
+            let sunTimes = {
                 sunrise: new Date(element.sunrise.value),
                 sunset: new Date(element.sunset.value)
             };
@@ -108,13 +108,13 @@ class Climacell {
                     volume: null,
                     chance: element.precipitation_probability.value
                 },
-                condition: ctx.ResolveCondition(element.weather_code.value, utils_1.IsNight(suntimes, new Date(element.observation_time.value)))
+                condition: this.ResolveCondition(element.weather_code.value, utils_1.IsNight(sunTimes, new Date(element.observation_time.value)))
             };
             results.push(hour);
         }
         return results;
     }
-    ParseDaily(json, ctx) {
+    ParseDaily(json) {
         let results = [];
         for (let index = 0; index < json.length; index++) {
             const element = json[index];
@@ -122,13 +122,13 @@ class Climacell {
                 date: new Date(element.observation_time.value),
                 temp_max: utils_1.CelsiusToKelvin(element.temp[1].max.value),
                 temp_min: utils_1.CelsiusToKelvin(element.temp[0].min.value),
-                condition: ctx.ResolveCondition(element.weather_code.value)
+                condition: this.ResolveCondition(element.weather_code.value)
             };
             results.push(day);
         }
         return results;
     }
-    ConstructQuery(subcall, loc) {
+    ConstructQuery(callType, loc) {
         let query;
         let key = this.app.config._apiKey.replace(" ", "");
         if (this.app.config.noApiKey()) {
@@ -141,7 +141,7 @@ class Climacell {
             });
             return null;
         }
-        query = this.baseUrl + this.callData[subcall].url + "?apikey=" + key + "&lat=" + loc.lat + "&lon=" + loc.lon + "&unit_system=" + this.unit + "&fields=" + this.callData[subcall].required_fields.join();
+        query = this.baseUrl + this.callData[callType].url + "?apikey=" + key + "&lat=" + loc.lat + "&lon=" + loc.lon + "&unit_system=" + this.unit + "&fields=" + this.callData[callType].required_fields.join();
         return query;
     }
     ;

@@ -23,7 +23,6 @@ export class Yahoo implements WeatherProvider {
     public readonly website = "https://www.yahoo.com/news/weather/";
     public readonly maxHourlyForecastSupport = 0;
 
-
     private app: WeatherApplet
 
     constructor(_app: WeatherApplet) {

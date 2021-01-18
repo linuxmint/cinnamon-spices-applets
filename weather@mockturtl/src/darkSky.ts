@@ -26,7 +26,7 @@ export class DarkSky implements WeatherProvider {
     public readonly website = "https://darksky.net/poweredby/";
     public readonly maxHourlyForecastSupport = 168;
 
-    private descriptionLinelength = 25;
+    private descriptionLineLength = 25;
     private supportedLanguages = [
         'ar', 'az', 'be', 'bg', 'bs', 'ca', 'cs', 'da', 'de', 'el', 'en', 'es',
         'et', 'fi', 'fr', 'he', 'hr', 'hu', 'id', 'is', 'it', 'ja', 'ka', 'ko',
@@ -232,14 +232,14 @@ export class DarkSky implements WeatherProvider {
     private ProcessSummary(summary: string): string {
         let processed = summary.split(" ");
         let result = "";
-        let linelength = 0;
+        let lineLength = 0;
         for (let i = 0; i < processed.length; i++) {
-            if (linelength + processed[i].length > this.descriptionLinelength) {
+            if (lineLength + processed[i].length > this.descriptionLineLength) {
                 result = result + "\n";
-                linelength = 0;
+                lineLength = 0;
             }
             result = result + processed[i] + " ";
-            linelength = linelength + processed[i].length + 1;
+            lineLength = lineLength + processed[i].length + 1;
         }
         return result;
     };

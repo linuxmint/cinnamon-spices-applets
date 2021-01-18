@@ -36,7 +36,7 @@ export async function FileExists(file: imports.gi.Gio.File, dictionary: boolean 
 }
 
 /**
- * Loads contents of a file. Can throw Gio.IOErroEnum exception. (e.g file does not exist)
+ * Loads contents of a file. Can throw Gio.IOErrorEnum exception. (e.g file does not exist)
  * @param file 
  */
 export async function LoadContents(file: imports.gi.Gio.File): Promise<string> {

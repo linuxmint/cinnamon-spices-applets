@@ -11,13 +11,11 @@ export class MetNorway implements WeatherProvider {
     public readonly website = "https://www.met.no/en";
     public readonly maxHourlyForecastSupport = 48;
 
-    private ctx: MetNorway
     private app: WeatherApplet
     private baseUrl = "https://api.met.no/weatherapi/locationforecast/2.0/complete?"
     private sunCalc: SunCalc;
 
     constructor(app: WeatherApplet) {
-        this.ctx = this;
         this.app = app;
         this.sunCalc = new SunCalc();
     }
@@ -178,7 +176,7 @@ export class MetNorway implements WeatherProvider {
 
     private SortDataByDay(data: MetNorwayData[]): MetNorwayData[][] {
         let days: Array<any> = []
-        // Sort and conatinerize forecasts by date
+        // Sort and containerize forecasts by date
         let currentDay = new Date(this.GetEarliestDataForToday(data).time);
         let dayIndex = 0;
         days.push([]);

@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.constructJsLocale = exports.shadeHexColor = exports.hasIcon = exports.weatherIconSafely = exports.Sentencify = exports.isLangSupported = exports.compassDirection = exports.nonempty = exports.isCoordinate = exports.isID = exports.isString = exports.isNumeric = exports.MillimeterToUserUnits = exports.MetreToUserUnits = exports.KmToM = exports.PressToUserUnits = exports.MPHtoMPS = exports.FahrenheitToKelvin = exports.CelsiusToKelvin = exports.TempToUserConfig = exports.MPStoUserUnits = exports.GetFuncName = exports.KPHtoMPS = exports.capitalizeFirstLetter = exports.compassToDeg = exports.IsNight = exports.MilitaryTime = exports.AwareDateString = exports.GetHoursMinutes = exports.GetDayName = exports.clearInterval = exports.GetDistance = exports.setInterval = exports.clearTimeout = exports.delay = exports.setTimeout = exports._ = void 0;
+exports.constructJsLocale = exports.shadeHexColor = exports.hasIcon = exports.weatherIconSafely = exports.isLangSupported = exports.compassDirection = exports.nonempty = exports.isCoordinate = exports.isID = exports.isString = exports.isNumeric = exports.MillimeterToUserUnits = exports.MetreToUserUnits = exports.KmToM = exports.PressToUserUnits = exports.MPHtoMPS = exports.FahrenheitToKelvin = exports.CelsiusToKelvin = exports.TempToUserConfig = exports.MPStoUserUnits = exports.GetFuncName = exports.KPHtoMPS = exports.capitalizeFirstLetter = exports.compassToDeg = exports.IsNight = exports.MilitaryTime = exports.AwareDateString = exports.GetHoursMinutes = exports.GetDayName = exports.clearInterval = exports.GetDistance = exports.setInterval = exports.clearTimeout = exports.delay = exports.setTimeout = exports.Guid = exports._ = void 0;
 const consts_1 = require("./consts");
 const { timeout_add, source_remove } = imports.mainloop;
 const { IconType } = imports.gi.St;
@@ -13,6 +13,13 @@ function _(str) {
     return imports.gettext.gettext(str);
 }
 exports._ = _;
+function Guid() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+        var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+        return v.toString(16);
+    });
+}
+exports.Guid = Guid;
 function setTimeout(func, ms) {
     let args = [];
     if (arguments.length > 2) {
@@ -273,10 +280,10 @@ function CelsiusToKelvin(celsius) {
     return (celsius + 273.15);
 }
 exports.CelsiusToKelvin = CelsiusToKelvin;
-function FahrenheitToKelvin(fahr) {
-    if (fahr == null)
+function FahrenheitToKelvin(fahrenheit) {
+    if (fahrenheit == null)
         return null;
-    return ((fahr - 32) / 1.8 + 273.15);
+    return ((fahrenheit - 32) / 1.8 + 273.15);
 }
 exports.FahrenheitToKelvin = FahrenheitToKelvin;
 ;
@@ -368,17 +375,6 @@ function isLangSupported(lang, languages) {
 }
 exports.isLangSupported = isLangSupported;
 ;
-function Sentencify(words) {
-    let result = "";
-    for (let index = 0; index < words.length; index++) {
-        const element = words[index];
-        if (index != 0)
-            result += " ";
-        result += element;
-    }
-    return result;
-}
-exports.Sentencify = Sentencify;
 function weatherIconSafely(code, icon_type) {
     for (let i = 0; i < code.length; i++) {
         if (hasIcon(code[i], icon_type))

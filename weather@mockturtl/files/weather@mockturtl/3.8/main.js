@@ -25,8 +25,6 @@ const Lang = imports.lang;
 const { spawnCommandLine, spawnCommandLineAsyncIO } = imports.misc.util;
 const { IconType } = imports.gi.St;
 const keybindingManager = imports.ui.main.keybindingManager;
-const APPLET_ICON = "view-refresh-symbolic";
-const REFRESH_ICON = "view-refresh";
 const DATA_SERVICE = {
     OPEN_WEATHER_MAP: "OpenWeatherMap",
     DARK_SKY: "DarkSky",
@@ -69,7 +67,7 @@ class WeatherApplet extends TextIconApplet {
         this.currentLocale = utils_1.constructJsLocale(get_language_names()[0]);
         logger_1.Logger.Debug("Applet created with instanceID " + instanceId);
         logger_1.Logger.Debug("System locale is " + this.currentLocale);
-        logger_1.Logger.Debug("Appletdir is: " + this.appletDir);
+        logger_1.Logger.Debug("AppletDir is: " + this.appletDir);
         imports.gettext.bindtextdomain(consts_1.UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
         imports.gi.Gtk.IconTheme.get_default().append_search_path(this.appletDir + "/../icons");
         this.SetAppletOnPanel();
@@ -89,7 +87,7 @@ class WeatherApplet extends TextIconApplet {
         this.loop.Start();
     }
     SetAppletOnPanel() {
-        this.set_applet_icon_name(APPLET_ICON);
+        this.set_applet_icon_name(consts_1.APPLET_ICON);
         this.set_applet_label(utils_1._("..."));
         this.set_applet_tooltip(utils_1._("Click to open"));
     }
@@ -106,7 +104,7 @@ class WeatherApplet extends TextIconApplet {
     }
     AddRefreshButton() {
         let itemLabel = utils_1._("Refresh");
-        let refreshMenuItem = new MenuItem(itemLabel, REFRESH_ICON, Lang.bind(this, function () {
+        let refreshMenuItem = new MenuItem(itemLabel, consts_1.REFRESH_ICON, Lang.bind(this, function () {
             this.refreshAndRebuild();
         }));
         this._applet_context_menu.addMenuItem(refreshMenuItem);

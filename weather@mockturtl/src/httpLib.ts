@@ -55,7 +55,7 @@ export class HttpLib {
 
 		let error: HttpError = null;
 
-		// Error regenration
+		// Error generation
 		if (!message) {
 			error = {
 				code: 0,
@@ -130,8 +130,7 @@ export class HttpLib {
 
 export const Http = new HttpLib();
 
-// Declaarations
-
+// Declarations
 export type Method = "GET" | "POST" | "PUT" | "DELETE";
 export type NetworkError = "";
 

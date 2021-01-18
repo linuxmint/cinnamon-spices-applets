@@ -14,6 +14,13 @@ export function _(str: string): string {
     return imports.gettext.gettext(str);
 }
 
+export function Guid() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+        return v.toString(16);
+    });
+}
+
 export function setTimeout(func: any, ms: number) {
     let args: any[] = [];
     if (arguments.length > 2) {
@@ -303,9 +310,9 @@ export function CelsiusToKelvin(celsius: number): number {
     return (celsius + 273.15);
 }
 
-export function FahrenheitToKelvin(fahr: number): number {
-    if (fahr == null) return null;
-    return ((fahr - 32) / 1.8 + 273.15);
+export function FahrenheitToKelvin(fahrenheit: number): number {
+    if (fahrenheit == null) return null;
+    return ((fahrenheit - 32) / 1.8 + 273.15);
 };
 
 export function MPHtoMPS(speed: number): number {
@@ -394,16 +401,6 @@ export function isLangSupported(lang: string, languages: Array<string>): boolean
     }
     return false;
 };
-
-export function Sentencify(words: string[]): string {
-    let result = "";
-    for (let index = 0; index < words.length; index++) {
-        const element = words[index];
-        if (index != 0) result += " ";
-        result += element;
-    }
-    return result;
-}
 
 // Passing appropriate resolver function for the API, and the code
 export function weatherIconSafely(code: BuiltinIcons[], icon_type: imports.gi.St.IconType): BuiltinIcons {

@@ -102,7 +102,7 @@ class SunCalc {
     }
     ;
     getMoonIllumination(date) {
-        var d = toDays(date || new Date()), s = sunCoords(d), m = moonCoords(d), sdist = 149598000, phi = acos(sin(s.dec) * sin(m.dec) + cos(s.dec) * cos(m.dec) * cos(s.ra - m.ra)), inc = atan(sdist * sin(phi), m.dist - sdist * cos(phi)), angle = atan(cos(s.dec) * sin(s.ra - m.ra), sin(s.dec) * cos(m.dec) -
+        var d = toDays(date || new Date()), s = sunCoords(d), m = moonCoords(d), sunDist = 149598000, phi = acos(sin(s.dec) * sin(m.dec) + cos(s.dec) * cos(m.dec) * cos(s.ra - m.ra)), inc = atan(sunDist * sin(phi), m.dist - sunDist * cos(phi)), angle = atan(cos(s.dec) * sin(s.ra - m.ra), sin(s.dec) * cos(m.dec) -
             cos(s.dec) * sin(m.dec) * cos(s.ra - m.ra));
         return {
             fraction: (1 + cos(inc)) / 2,

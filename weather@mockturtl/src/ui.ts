@@ -1,4 +1,5 @@
 import { Config, DistanceUnits, WeatherUnits } from "./config";
+import { ELLIPSIS, FORWARD_SLASH, APPLET_ICON, SIGNAL_CLICKED, BLANK } from "./consts";
 import { Logger } from "./logger";
 import { WeatherApplet } from "./main";
 import { WeatherData, WeatherProvider, HourlyForecastData } from "./types";
@@ -14,13 +15,6 @@ const { GridLayout } = imports.gi.Clutter;
 const { AppletPopupMenu } = imports.ui.applet;
 const { themeManager } = imports.ui.main;
 const { SignalManager } = imports.misc.signalManager;
-
-const APPLET_ICON = "view-refresh-symbolic"
-
-// Signals
-const SIGNAL_CHANGED = 'changed::'
-const SIGNAL_CLICKED = 'clicked'
-const SIGNAL_REPAINT = 'repaint'
 
 // stylesheet.css
 const STYLE_SUMMARYBOX = 'weather-current-summarybox'
@@ -43,12 +37,6 @@ const STYLE_FORECAST = 'forecast'
 const STYLE_WEATHER_MENU = 'weather-menu'
 const STYLE_BAR = 'bottombar'
 const STYLE_LOCATION_SELECTOR = 'location-selector'
-
-// Magic strings
-const BLANK = '   ';
-const ELLIPSIS = '...';
-const EN_DASH = '\u2013';
-const FORWARD_SLASH = '\u002F';
 
 /** Roll-down Popup Menu */
 export class UI {
@@ -102,7 +90,7 @@ export class UI {
 
     private app: WeatherApplet;
 
-    /** Rolldown menu itself */
+    /** Roll down menu itself */
     public menu: imports.ui.applet.AppletPopupMenu;
     private menuManager: imports.ui.popupMenu.PopupMenuManager;
     private signals: imports.misc.signalManager.SignalManager;
@@ -150,7 +138,7 @@ export class UI {
 		let color = this.menu.actor.get_theme_node().get_color("color");
         // luminance between 0 and 1
 		let luminance = (2126 * color.red + 7152 * color.green + 722 * color.blue) / 10000 / 255;
-		// Inverse, we assume the bacground color here
+		// Inverse, we assume the background color here
 		luminance = Math.abs(1 - luminance);
         Logger.Debug("Theme is Light: " + (luminance > 0.5));
         return (luminance > 0.5);
@@ -209,13 +197,13 @@ export class UI {
             }
         );
         this._hourlyScrollView.overlay_scrollbars = true;
-        // Stop event passing while scrolling to prevent jankyness
-        let vscroll = this._hourlyScrollView.get_vscroll_bar();
-        vscroll.connect("scroll-start", () => { this.menu.passEvents = true; });
-        vscroll.connect("scroll-stop", () => { this.menu.passEvents = false; });
-        let hscroll = this._hourlyScrollView.get_hscroll_bar();
-        hscroll.connect("scroll-start", () => { this.menu.passEvents = true; });
-        hscroll.connect("scroll-stop", () => { this.menu.passEvents = false; });
+        // Stop event passing while scrolling to allow scrolling
+        let vScroll = this._hourlyScrollView.get_vscroll_bar();
+        vScroll.connect("scroll-start", () => { this.menu.passEvents = true; });
+        vScroll.connect("scroll-stop", () => { this.menu.passEvents = false; });
+        let hScroll = this._hourlyScrollView.get_hscroll_bar();
+        hScroll.connect("scroll-start", () => { this.menu.passEvents = true; });
+        hScroll.connect("scroll-stop", () => { this.menu.passEvents = false; });
         this._separatorAreaHourly.actor.hide();
         this._hourlyScrollView.hide();
         this._hourlyScrollView.set_clip_to_allocation(true);
@@ -282,7 +270,7 @@ export class UI {
         this._separatorAreaHourly.actor.show();
         if (!!this._hourlyButton.child) this._hourlyButton.child.icon_name = "custom-up-arrow-symbolic";
 		this._hourlyScrollView.show();
-		// When the srcollView is shown without animation and there is not enough vertical space
+		// When the scrollView is shown without animation and there is not enough vertical space
 		// (or cinnamon does not think there is enough), the text gets superimposed on top of
 		// each other.
 		// setting the min-height forces to draw with the view's requested height without
@@ -655,8 +643,8 @@ export class UI {
             let summaryHeight = ui.Summary.get_preferred_height(-1)[1];
             let temperatureHeight = ui.Temperature.get_preferred_height(-1)[1];
             let precipitationHeight = ui.Precipitation.get_preferred_height(-1)[1];
-            let itemheight = hourHeight + iconHeight + summaryHeight + temperatureHeight + precipitationHeight;
-            if (boxItemHeight < itemheight) boxItemHeight = itemheight;
+            let itemHeight = hourHeight + iconHeight + summaryHeight + temperatureHeight + precipitationHeight;
+            if (boxItemHeight < itemHeight) boxItemHeight = itemHeight;
         }
         Logger.Debug("Final Hourly box item height is: " + boxItemHeight)
         let scrollBarHeight = this._hourlyScrollView.get_hscroll_bar().get_preferred_width(-1)[1];
@@ -804,11 +792,11 @@ export class UI {
         sunriseBox.add(this._currentWeatherSunrise, textOptions);
         sunsetBox.add(this._currentWeatherSunset, textOptions);
 
-        let ab_spacerlabel = new Label({ text: BLANK })
+        let ab_spacerLabel = new Label({ text: BLANK })
 
         let sunBox = new BoxLayout({ style_class: STYLE_ASTRONOMY })
         sunBox.add_actor(sunriseBox)
-        sunBox.add_actor(ab_spacerlabel)
+        sunBox.add_actor(ab_spacerLabel)
         sunBox.add_actor(sunsetBox);
 
         let middleColumn = new BoxLayout({ vertical: true, style_class: STYLE_SUMMARYBOX })

@@ -248,10 +248,10 @@ export class SunCalc {
             s = sunCoords(d),
             m = moonCoords(d),
 
-            sdist = 149598000, // distance from Earth to Sun in km
+            sunDist = 149598000, // distance from Earth to Sun in km
 
             phi = acos(sin(s.dec) * sin(m.dec) + cos(s.dec) * cos(m.dec) * cos(s.ra - m.ra)),
-            inc = atan(sdist * sin(phi), m.dist - sdist * cos(phi)),
+            inc = atan(sunDist * sin(phi), m.dist - sunDist * cos(phi)),
             angle = atan(cos(s.dec) * sin(s.ra - m.ra), sin(s.dec) * cos(m.dec) -
                 cos(s.dec) * sin(m.dec) * cos(s.ra - m.ra));
 
