@@ -1,12 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.LocationStore = void 0;
+const io_lib_1 = require("./io_lib");
 const logger_1 = require("./logger");
 const notification_service_1 = require("./notification_service");
 const utils_1 = require("./utils");
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
-const ByteArray = imports.byteArray;
 class LocationStore {
     constructor(app, onStoreChanged) {
         this.path = null;
@@ -157,7 +157,7 @@ class LocationStore {
     async LoadSavedLocations() {
         let content = null;
         try {
-            content = await this.LoadContents(this.file);
+            content = await io_lib_1.LoadContents(this.file);
         }
         catch (e) {
             let error = e;
@@ -185,9 +185,9 @@ class LocationStore {
         }
     }
     async SaveToFile() {
-        let writeFile = (await this.OverwriteAndGetIOStream(this.file)).get_output_stream();
-        await this.WriteAsync(writeFile, JSON.stringify(this.locations, null, 2));
-        await this.CloseStream(writeFile);
+        let writeFile = (await io_lib_1.OverwriteAndGetIOStream(this.file)).get_output_stream();
+        await io_lib_1.WriteAsync(writeFile, JSON.stringify(this.locations, null, 2));
+        await io_lib_1.CloseStream(writeFile);
     }
     FindIndex(loc) {
         if (loc == null)
@@ -198,103 +198,6 @@ class LocationStore {
                 return index;
         }
         return -1;
-    }
-    async GetFileInfo(file) {
-        return new Promise((resolve, reject) => {
-            file.query_info_async("", Gio.FileQueryInfoFlags.NONE, null, null, (obj, res) => {
-                let result = file.query_info_finish(res);
-                resolve(result);
-                return result;
-            });
-        });
-    }
-    async FileExists(file, dictionary = false) {
-        try {
-            return file.query_exists(null);
-        }
-        catch (e) {
-            logger_1.Logger.Error("Cannot get file info for '" + file.get_path() + "', error: ");
-            global.log(e);
-            return false;
-        }
-    }
-    async LoadContents(file) {
-        return new Promise((resolve, reject) => {
-            file.load_contents_async(null, (obj, res) => {
-                let result, contents = null;
-                try {
-                    [result, contents] = file.load_contents_finish(res);
-                }
-                catch (e) {
-                    reject(e);
-                    return e;
-                }
-                if (result != true) {
-                    resolve(null);
-                    return null;
-                }
-                if (contents instanceof Uint8Array)
-                    contents = ByteArray.toString(contents);
-                resolve(contents.toString());
-                return contents.toString();
-            });
-        });
-    }
-    async DeleteFile(file) {
-        let result = await new Promise((resolve, reject) => {
-            file.delete_async(null, null, (obj, res) => {
-                let result = null;
-                try {
-                    result = file.delete_finish(res);
-                }
-                catch (e) {
-                    let error = e;
-                    if (error.matches(error.domain, Gio.IOErrorEnum.NOT_FOUND)) {
-                        resolve(true);
-                        return true;
-                    }
-                    logger_1.Logger.Error("Can't delete file, reason: ");
-                    global.log(e);
-                    resolve(false);
-                    return false;
-                }
-                resolve(result);
-                return result;
-            });
-        });
-        return result;
-    }
-    async OverwriteAndGetIOStream(file) {
-        if (!this.FileExists(file.get_parent()))
-            file.get_parent().make_directory_with_parents(null);
-        return new Promise((resolve, reject) => {
-            file.replace_readwrite_async(null, false, Gio.FileCreateFlags.NONE, null, null, (source_object, result) => {
-                let ioStream = file.replace_readwrite_finish(result);
-                resolve(ioStream);
-                return ioStream;
-            });
-        });
-    }
-    async WriteAsync(outputStream, buffer) {
-        let text = ByteArray.fromString(buffer);
-        if (outputStream.is_closed())
-            return false;
-        return new Promise((resolve, reject) => {
-            outputStream.write_bytes_async(text, null, null, (obj, res) => {
-                let ioStream = outputStream.write_bytes_finish(res);
-                resolve(true);
-                return true;
-            });
-        });
-    }
-    async CloseStream(stream) {
-        return new Promise((resolve, reject) => {
-            stream.close_async(null, null, (obj, res) => {
-                let result = stream.close_finish(res);
-                resolve(result);
-                return result;
-            });
-        });
     }
 }
 exports.LocationStore = LocationStore;
