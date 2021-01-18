@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.DarkSky = void 0;
 const logger_1 = require("./logger");
 const utils_1 = require("./utils");
+const Lang = imports.lang;
 class DarkSky {
     constructor(_app) {
         this.prettyName = "DarkSky";
@@ -26,7 +27,7 @@ class DarkSky {
         let query = this.ConstructQuery(loc);
         if (query == "" && query == null)
             return null;
-        let json = await this.app.LoadJsonAsync(query, null, this.HandleError);
+        let json = await this.app.LoadJsonAsync(query, null, Lang.bind(this, this.HandleError));
         if (!json)
             return null;
         if (!json.code) {
@@ -149,24 +150,26 @@ class DarkSky {
     }
     HandleError(message) {
         if (message.code == 403) {
-            return {
+            this.app.ShowError({
                 type: "hard",
                 userError: true,
                 detail: "bad key",
                 service: "darksky",
                 message: utils_1._("Please Make sure you\nentered the API key correctly and your account is not locked")
-            };
+            });
+            return false;
         }
         if (message.code == 401) {
-            return {
+            this.app.ShowError({
                 type: "hard",
                 userError: true,
                 detail: "no key",
                 service: "darksky",
                 message: utils_1._("Please Make sure you\nentered the API key what you have from DarkSky")
-            };
+            });
+            return false;
         }
-        return null;
+        return true;
     }
     HandleResponseErrors(json) {
         let code = json.code;

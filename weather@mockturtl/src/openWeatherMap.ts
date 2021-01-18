@@ -12,6 +12,8 @@ import { WeatherApplet } from "./main";
 import { WeatherProvider, Location, WeatherData, ForecastData, HourlyForecastData, AppletError, BuiltinIcons, CustomIcons } from "./types";
 import { weatherIconSafely, _, isLangSupported } from "./utils";
 
+const Lang: typeof imports.lang = imports.lang;
+
 export class OpenWeatherMap implements WeatherProvider {
     //--------------------------------------------------------
     //  Properties
@@ -43,7 +45,7 @@ export class OpenWeatherMap implements WeatherProvider {
 		if (query == null) 
 			return null;
 
-		let json = await this.app.LoadJsonAsync<any>(query, null, this.HandleError);
+		let json = await this.app.LoadJsonAsync<any>(query, null, Lang.bind(this, this.HandleError));
 		if (!json)
 			return null;
 
@@ -228,17 +230,17 @@ export class OpenWeatherMap implements WeatherProvider {
 		return (!!json?.cod);
 	}
 
-    public HandleError(error: HttpError): AppletError {
-        // "this" is not accessible here
+    public HandleError(error: HttpError): boolean {
         if (error.code == 404) {
-			return {
+			this.app.ShowError({
 				detail: "location not found",
 				message: _("Location not found, make sure location is available or it is in the correct format"),
 				userError: true,
 				type: "hard"
-			}
+            })
+            return false;
         }
-        return null;
+        return true;
 	}
 
     private ResolveIcon(icon: string): BuiltinIcons[] {

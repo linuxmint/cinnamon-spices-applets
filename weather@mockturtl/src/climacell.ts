@@ -13,6 +13,8 @@ import { SunTimes } from "./sunCalc";
 import { WeatherProvider, Location, WeatherData, HourlyForecastData, ForecastData, AppletError, Condition } from "./types";
 import { CelsiusToKelvin, _, IsNight, weatherIconSafely } from "./utils";
 
+const Lang: typeof imports.lang = imports.lang;
+
 export class Climacell implements WeatherProvider {
 
     //--------------------------------------------------------
@@ -72,7 +74,7 @@ export class Climacell implements WeatherProvider {
 		if (query == null)
 			return null;
 
-		let json = await this.app.LoadJsonAsync(query, null, this.HandleError);
+		let json = await this.app.LoadJsonAsync(query, null, Lang.bind(this, this.HandleError));
 
 		if (json == null)
 			return null;
@@ -187,26 +189,28 @@ export class Climacell implements WeatherProvider {
     * @param message Soup Message object
     * @returns null if custom error checking does not find anything
     */
-    private HandleError(message: HttpError): AppletError {
+    private HandleError(message: HttpError): boolean {
         if (message.code == 403) {
-            return {
+            this.app.ShowError({
                 type: "hard",
                 userError: true,
                 detail: "bad key",
                 service: "climacell",
                 message: _("Please Make sure you\nentered the API key correctly and your account is not locked")
-            };
+            });
+            return false;
         }
-        if (message.code == 401) {
-            return {
+        else if (message.code == 401) {
+            this.app.ShowError({
                 type: "hard",
                 userError: true,
                 detail: "no key",
                 service: "climacell",
                 message: _("Please Make sure you\nentered the API key what you have from Climacell")
-            };
+            });
+            return false;
         }
-        return null;
+        return true;
     }
 
     private ResolveCondition(condition: string, isNight: boolean = false): Condition {

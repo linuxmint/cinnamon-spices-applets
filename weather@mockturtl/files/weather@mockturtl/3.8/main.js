@@ -22,7 +22,6 @@ const notification_service_1 = require("./notification_service");
 const { TextIconApplet, AllowedLayout, MenuItem } = imports.ui.applet;
 const { get_language_names } = imports.gi.GLib;
 const Lang = imports.lang;
-const GLib = imports.gi.GLib;
 const { spawnCommandLine, spawnCommandLineAsyncIO } = imports.misc.util;
 const { IconType } = imports.gi.St;
 const keybindingManager = imports.ui.main.keybindingManager;
@@ -124,14 +123,12 @@ class WeatherApplet extends TextIconApplet {
     async LoadJsonAsync(url, params, HandleError, method = "GET") {
         let response = await httpLib_1.Http.LoadJsonAsync(url, params, method);
         if (!response.Success) {
-            let customError = null;
-            if (!!HandleError)
-                customError = HandleError(response.ErrorData);
-            if (!!customError)
-                this.ShowError(customError);
-            else
+            if (!!HandleError && !HandleError(response.ErrorData))
+                return null;
+            else {
                 this.HandleHTTPError(response.ErrorData);
-            return null;
+                return null;
+            }
         }
         return response.Data;
     }

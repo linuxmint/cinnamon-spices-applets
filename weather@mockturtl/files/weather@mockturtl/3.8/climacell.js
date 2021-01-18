@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Climacell = void 0;
 const logger_1 = require("./logger");
 const utils_1 = require("./utils");
+const Lang = imports.lang;
 class Climacell {
     constructor(_app) {
         this.prettyName = "Climacell";
@@ -41,7 +42,7 @@ class Climacell {
         let query = this.ConstructQuery(baseUrl, loc);
         if (query == null)
             return null;
-        let json = await this.app.LoadJsonAsync(query, null, this.HandleError);
+        let json = await this.app.LoadJsonAsync(query, null, Lang.bind(this, this.HandleError));
         if (json == null)
             return null;
         return ParseFunction(json, this);
@@ -146,24 +147,26 @@ class Climacell {
     ;
     HandleError(message) {
         if (message.code == 403) {
-            return {
+            this.app.ShowError({
                 type: "hard",
                 userError: true,
                 detail: "bad key",
                 service: "climacell",
                 message: utils_1._("Please Make sure you\nentered the API key correctly and your account is not locked")
-            };
+            });
+            return false;
         }
-        if (message.code == 401) {
-            return {
+        else if (message.code == 401) {
+            this.app.ShowError({
                 type: "hard",
                 userError: true,
                 detail: "no key",
                 service: "climacell",
                 message: utils_1._("Please Make sure you\nentered the API key what you have from Climacell")
-            };
+            });
+            return false;
         }
-        return null;
+        return true;
     }
     ResolveCondition(condition, isNight = false) {
         switch (condition) {

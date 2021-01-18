@@ -42,7 +42,7 @@ class Weatherbit {
         let query = this.ConstructQuery(baseUrl, loc);
         if (query == null)
             return null;
-        let json = await this.app.LoadJsonAsync(query, null, this.HandleError);
+        let json = await this.app.LoadJsonAsync(query, null, Lang.bind(this, this.HandleError));
         if (json == null)
             return null;
         return ParseFunction(json, this);
@@ -218,29 +218,29 @@ class Weatherbit {
     ;
     HandleError(message) {
         if (message.code == 403) {
-            return {
+            this.app.ShowError({
                 type: "hard",
                 userError: true,
                 detail: "bad key",
                 service: "weatherbit",
                 message: utils_1._("Please Make sure you\nentered the API key correctly and your account is not locked")
-            };
+            });
         }
-        return null;
+        return true;
     }
     HandleHourlyError(message) {
         if (message.code == 403) {
             this.hourlyAccess = false;
             logger_1.Logger.Print("Hourly forecast is inaccessible, skipping");
-            return {
+            this.app.ShowError({
                 type: "silent",
                 userError: false,
                 detail: "bad key",
                 service: "weatherbit",
-                message: utils_1._("API key is doesn't provide acces to Hourly Weather, skipping")
-            };
+                message: utils_1._("API key is doesn't provide access to Hourly Weather, skipping")
+            });
         }
-        return null;
+        return true;
     }
     ResolveIcon(icon) {
         switch (icon) {

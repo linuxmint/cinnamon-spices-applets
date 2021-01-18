@@ -6,7 +6,7 @@
 //----------------------------------------------------------------------
 
 import { Climacell } from "./climacell";
-import { Config, Services } from "./config";
+import { Config } from "./config";
 import { LocationStore } from "./locationstore";
 import { WeatherLoop } from "./loop";
 import { MetUk } from "./met_uk";
@@ -28,7 +28,6 @@ import { Notifications } from "./notification_service";
 const { TextIconApplet, AllowedLayout, MenuItem } = imports.ui.applet;
 const { get_language_names } = imports.gi.GLib;
 const Lang: typeof imports.lang = imports.lang;
-const GLib = imports.gi.GLib;
 const { spawnCommandLine, spawnCommandLineAsyncIO } = imports.misc.util;
 const { IconType } = imports.gi.St;
 const keybindingManager = imports.ui.main.keybindingManager;
@@ -153,17 +152,17 @@ export class WeatherApplet extends TextIconApplet {
 	 * @param HandleError should return null if you want this function to handle errors, else it needs to return an applet object 
 	 * @param method default is GET
 	 */
-	public async LoadJsonAsync<T>(url: string, params?: any, HandleError?: (message: HttpError) => AppletError, method: Method = "GET"): Promise<T> {
+	public async LoadJsonAsync<T>(url: string, params?: any, HandleError?: (message: HttpError) => boolean, method: Method = "GET"): Promise<T> {
 		let response = await Http.LoadJsonAsync<T>(url, params, method);
 		
 		if (!response.Success) {
-			let customError: AppletError = null;
-			if (!!HandleError) 
-				customError = HandleError(response.ErrorData);
-
-			if (!!customError) this.ShowError(customError);
-			else this.HandleHTTPError(response.ErrorData);
-			return null;
+            // check if caller wants
+            if (!!HandleError && !HandleError(response.ErrorData))
+                return null;
+            else {
+                this.HandleHTTPError(response.ErrorData);
+                return null;
+            }
 		}
 
 		return response.Data;

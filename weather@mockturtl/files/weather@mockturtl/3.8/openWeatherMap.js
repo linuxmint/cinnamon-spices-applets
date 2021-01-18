@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.OpenWeatherMap = void 0;
 const logger_1 = require("./logger");
 const utils_1 = require("./utils");
+const Lang = imports.lang;
 class OpenWeatherMap {
     constructor(_app) {
         this.prettyName = "OpenWeatherMap";
@@ -21,7 +22,7 @@ class OpenWeatherMap {
         let query = this.ConstructQuery(this.base_url, loc);
         if (query == null)
             return null;
-        let json = await this.app.LoadJsonAsync(query, null, this.HandleError);
+        let json = await this.app.LoadJsonAsync(query, null, Lang.bind(this, this.HandleError));
         if (!json)
             return null;
         if (this.HadErrors(json))
@@ -201,14 +202,15 @@ class OpenWeatherMap {
     }
     HandleError(error) {
         if (error.code == 404) {
-            return {
+            this.app.ShowError({
                 detail: "location not found",
                 message: utils_1._("Location not found, make sure location is available or it is in the correct format"),
                 userError: true,
                 type: "hard"
-            };
+            });
+            return false;
         }
-        return null;
+        return true;
     }
     ResolveIcon(icon) {
         switch (icon) {

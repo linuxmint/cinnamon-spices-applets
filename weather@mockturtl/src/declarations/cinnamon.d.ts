@@ -56,7 +56,7 @@ declare namespace imports.ui.themeManager {
 
 declare namespace imports.ui.main {
     export class KeybindingManager {
-        addHotKey(UUID: string, keybinding: any, binding: void): void;
+        addHotKey(UUID: string, keybinding: any, binding: (event: any) => void): void;
     }
 
     export const themeManager: themeManager.ThemeManager;
@@ -738,5 +738,8 @@ declare namespace imports.gettext {
 }
 
 declare namespace imports {
-    export const lang: any;
+    export const lang: Lang;
+    class Lang {
+        bind<T>(ctx: any, func: T): T;
+    }
 }

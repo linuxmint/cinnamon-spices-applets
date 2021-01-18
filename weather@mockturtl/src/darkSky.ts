@@ -13,6 +13,8 @@ import { SunTimes } from "./sunCalc";
 import { WeatherProvider, Location, WeatherData, ForecastData, HourlyForecastData, PrecipitationType, AppletError, BuiltinIcons, CustomIcons } from "./types";
 import { _, weatherIconSafely, isLangSupported, IsNight, FahrenheitToKelvin, CelsiusToKelvin, MPHtoMPS } from "./utils";
 
+const Lang: typeof imports.lang = imports.lang;
+
 export class DarkSky implements WeatherProvider {
 
     //--------------------------------------------------------
@@ -51,7 +53,7 @@ export class DarkSky implements WeatherProvider {
 		let query = this.ConstructQuery(loc);
 		if (query == "" && query == null) return null;
 
-        let json = await this.app.LoadJsonAsync<any>(query, null, this.HandleError);
+        let json = await this.app.LoadJsonAsync<any>(query, null, Lang.bind(this, this.HandleError));
 		if (!json) return null;
 
 		if (!json.code) {                   // No code, Request Success
@@ -188,26 +190,28 @@ export class DarkSky implements WeatherProvider {
      * @param message Soup Message object
      * @returns null if custom error checking does not find anything
      */
-    private HandleError(message: HttpError): AppletError {
+    private HandleError(message: HttpError): boolean {
         if (message.code == 403) { // DarkSky returns auth error on the http level when key is wrong
-            return {
+            this.app.ShowError({
                 type: "hard",
                 userError: true,
                 detail: "bad key",
                 service: "darksky",
                 message: _("Please Make sure you\nentered the API key correctly and your account is not locked")
-            };
+            });
+            return false;
         }
-        if (message.code == 401) { // DarkSky returns auth error on the http level when key is wrong
-            return {
+        else if (message.code == 401) { // DarkSky returns auth error on the http level when key is wrong
+            this.app.ShowError({
                 type: "hard",
                 userError: true,
                 detail: "no key",
                 service: "darksky",
                 message: _("Please Make sure you\nentered the API key what you have from DarkSky")
-            };
+            });
+            return false;
         }
-        return null;
+        return true;
     }
 
     private HandleResponseErrors(json: any): void {

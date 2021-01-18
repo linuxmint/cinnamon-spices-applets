@@ -71,7 +71,7 @@ export class Weatherbit implements WeatherProvider {
 		if (query == null)
 			return null;
 
-		let json = await this.app.LoadJsonAsync(query, null, this.HandleError);
+		let json = await this.app.LoadJsonAsync(query, null, Lang.bind(this, this.HandleError));
             
 		if (json == null)
 			return null;
@@ -274,33 +274,33 @@ export class Weatherbit implements WeatherProvider {
     * @param message Soup Message object
     * @returns null if custom error checking does not find anything
     */
-    private HandleError(message: HttpError): AppletError {
+    private HandleError(message: HttpError): boolean {
         if (message.code == 403) { // bad key
-            return {
+            this.app.ShowError({
                 type: "hard",
                 userError: true,
                 detail: "bad key",
                 service: "weatherbit",
                 message: _("Please Make sure you\nentered the API key correctly and your account is not locked")
-            };
+            });
         }
-        return null;
+        return true;
 	}
 	
-	private HandleHourlyError(message: HttpError): AppletError {
+	private HandleHourlyError(message: HttpError): boolean {
 		/// Skip Hourly forecast if it is forbidden (403)            
 		if (message.code == 403) { // bad key
 			this.hourlyAccess = false;
 			Logger.Print("Hourly forecast is inaccessible, skipping")
-            return {
+            this.app.ShowError({
                 type: "silent",
                 userError: false,
                 detail: "bad key",
                 service: "weatherbit",
-                message: _("API key is doesn't provide acces to Hourly Weather, skipping")
-            };
+                message: _("API key is doesn't provide access to Hourly Weather, skipping")
+            });
         }
-        return null;
+        return true;
     }
 
     private ResolveIcon(icon: string): BuiltinIcons[] {
