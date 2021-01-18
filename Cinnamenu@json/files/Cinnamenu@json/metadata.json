@@ -6,7 +6,6 @@
     "version": "4.12",
     "multiversion": true,
     "website": "https://github.com/linuxmint/cinnamon-spices-applets",
-    "comments": "Made possible thanks to the efforts of contributors to the Cinnamon menu, Gnomenu, and the contributors to projects they derived from.",
     "cinnamon-version": [
         "3.2",
         "3.4",
