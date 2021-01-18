@@ -1,8 +1,8 @@
 # Dutch translation for cinnamon-weather (weather@mockturtl)
 # Copyright (C) 2020
 # This file is distributed under the same license as the cinnamon-weather package.
-# Pjotr <pjotrvertaalt@gmail.com>, 2013-2020.
-# Jurien (French77) <Jurien@protonmail.com>, 2020.
+# Pjotr <pjotrvertaalt@gmail.com>, 2013-2021.
+# Jurien (French77) <Jurien@protonmail.com>, 2020-2021.
 #
 msgid ""
 msgstr ""
@@ -1456,9 +1456,9 @@ msgid ""
 "address.\n"
 "Waits for 3 seconds after you stop typing before refreshes the weather."
 msgstr ""
-"Aanvaardbare invoer is Breedtegraad,Lengtegraad. Bijv.: 68.1932,17.1426 of "
-"een adres.\n"
-"Wacht 3 seconden nadat u bent gestopt met typen voordat u ververst."
+"Aanvaardbare invoer is Breedtegraad,Lengtegraad. Bijv.: 68.1932,17.1426 "
+"of een adres.\n"
+"Wacht 3 seconden nadat u bent gestopt met typen voordat het zich ververst."
 
 #. 3.0->settings-schema.json->getLocation->description
 msgid "Setup API Key and Location"
@@ -1532,7 +1532,7 @@ msgid ""
 "language."
 msgstr ""
 "Automatisch zal proberen uw voorkeur te raden op basis van uw huidige "
-"display taal."
+"ingestelde taal voor uw besturingssysteem."
 
 #. 3.0->settings-schema.json->windSpeedUnit->description
 #. 3.8->settings-schema.json->windSpeedUnit->description
@@ -1720,14 +1720,12 @@ msgstr "Toon alleen uren voor de uurvoorspellingsperiode"
 #. 3.0->settings-schema.json->shortHourlyTime->tooltip
 #. 3.8->settings-schema.json->shortHourlyTime->tooltip
 msgid "Instead of 15:00 or 3 pm it will show up as 15 or 3 pm"
-msgstr ""
-"In plaats van 15.00 uur of 3 uur 's middags verschijnt het als 15 uur of 3 "
-"uur 's middags."
+msgstr "In plaats van 15.00 of 3 nm wordt het 15 of 3 nm"
 
 #. 3.0->settings-schema.json->showForecastDates->description
 #. 3.8->settings-schema.json->showForecastDates->description
 msgid "Display date for daily forecasts"
-msgstr "Weergave datum voor de dagelijkse voorspellingen"
+msgstr "Toon datum bij dagelijkse voorspellingen"
 
 #. 3.0->settings-schema.json->showForecastDates->tooltip
 #. 3.8->settings-schema.json->showForecastDates->tooltip
@@ -1775,7 +1773,7 @@ msgstr "Pictogrammen"
 
 #. 3.0->settings-schema.json->useSymbolicIcons->description
 msgid "Use symbolic icons in the applet"
-msgstr "Gebruik symbolische pictogrammen in dit werkbalkhulpje"
+msgstr "Gebruik symbolische pictogrammen in het werkbalkhulpje"
 
 #. 3.0->settings-schema.json->useCustomMenuIcons->description
 #. 3.8->settings-schema.json->useCustomMenuIcons->description
@@ -1856,7 +1854,7 @@ msgstr "Verwijdert locatie-informatie uit het opslagbestand."
 
 #. 3.8->settings-schema.json->getLocation->description
 msgid "Weather Applet at Cinnamon Spices Website"
-msgstr "Weer-werkbalkhulpje op Cinnamon Spices Website"
+msgstr "Weer-werkbalkhulpje op Cinnamon Spices website"
 
 #. 3.8->settings-schema.json->verticalOrientation->tooltip
 msgid "Displaying forecasts from top to bottom instead from left to right."
@@ -1865,9 +1863,7 @@ msgstr ""
 
 #. 3.8->settings-schema.json->useSymbolicIcons->tooltip
 msgid "Does not apply to custom iconset, that is symbolic by default"
-msgstr ""
-"Is niet van toepassing op aangepaste pictogrammen, die zijn standaard "
-"symbolisch"
+msgstr "N.v.t. op aangepaste pictogrammen die standaard symbolisch zijn."
 
 #. 3.8->settings-schema.json->useSymbolicIcons->description
 msgid "Use symbolic icons throughout the applet"
@@ -1925,7 +1921,7 @@ msgid ""
 "access with the button further down."
 msgstr ""
 "U kunt gebruik maken van verschillende weersverwachtingaanbieders die u "
-"kiest onder het eerste Weer-tabblad in dit configuratiepaneel. Sommige "
+"kiest onder het eerste Weer-tabblad in dit instellingenpaneel. Sommige "
 "aanbieders hebben een API-sleutel nodig om te kunnen werken, sommige hebben "
 "regionale limieten, ze verschillen in voorspellingslengte en ze hebben alle "
 "een werkende internetverbinding met de gekozen dienst nodig. De opties "
