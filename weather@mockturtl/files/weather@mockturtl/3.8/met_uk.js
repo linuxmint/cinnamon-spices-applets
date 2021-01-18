@@ -21,6 +21,7 @@ class MetUk {
         this.forecastSite = null;
         this.observationSites = null;
         this.currentLoc = null;
+        this.currentLocID = null;
         this.MAX_STATION_DIST = 50000;
         this.app = _app;
         this.sunCalc = new sunCalc_1.SunCalc();
@@ -28,9 +29,11 @@ class MetUk {
     async GetWeather(newLoc) {
         if (newLoc == null)
             return null;
-        if (this.currentLoc == null || this.currentLoc.text != newLoc.text || this.forecastSite == null || this.observationSites == null || this.observationSites.length == 0) {
+        let loc = newLoc.lat.toString() + "," + newLoc.lon.toString();
+        if (this.currentLocID == null || this.currentLocID != loc || this.forecastSite == null || this.observationSites == null || this.observationSites.length == 0) {
             logger_1.Logger.Print("Downloading new site data");
             this.currentLoc = newLoc;
+            this.currentLocID = loc;
             let forecastSite = await this.GetClosestForecastSite(newLoc);
             if (forecastSite == null)
                 return null;

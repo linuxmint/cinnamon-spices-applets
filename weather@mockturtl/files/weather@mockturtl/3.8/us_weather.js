@@ -16,15 +16,18 @@ class USWeather {
         this.MAX_STATION_DIST = 50000;
         this.observationStations = null;
         this.currentLoc = null;
+        this.currentLocID = null;
         this.app = _app;
         this.sunCalc = new sunCalc_1.SunCalc();
     }
     async GetWeather(loc) {
         if (loc == null)
             return null;
-        if (!this.grid || !this.observationStations || this.currentLoc.text != loc.text) {
+        let locID = loc.lat.toString() + "," + loc.lon.toString();
+        if (!this.grid || !this.observationStations || this.currentLocID != locID) {
             logger_1.Logger.Print("Downloading new site data");
             this.currentLoc = loc;
+            this.currentLocID = locID;
             let grid = await this.GetGridData(loc);
             if (grid == null)
                 return null;
@@ -54,7 +57,7 @@ class USWeather {
     ;
     async GetGridData(loc) {
         try {
-            let siteData = await this.app.LoadJsonAsync(this.sitesUrl + loc.text, this.OnObtainingGridData);
+            let siteData = await this.app.LoadJsonAsync(this.sitesUrl + loc.lat.toString() + "," + loc.lon.toString(), this.OnObtainingGridData);
             logger_1.Logger.Debug("Grid found: " + JSON.stringify(siteData, null, 2));
             return siteData;
         }

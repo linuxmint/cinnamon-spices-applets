@@ -9,7 +9,7 @@
 import { HttpError } from "./httpLib";
 import { Logger } from "./logger";
 import { WeatherApplet } from "./main";
-import { WeatherProvider, Location, WeatherData, ForecastData, HourlyForecastData, AppletError, BuiltinIcons, CustomIcons } from "./types";
+import { WeatherProvider, WeatherData, ForecastData, HourlyForecastData, AppletError, BuiltinIcons, CustomIcons, LocationData } from "./types";
 import { weatherIconSafely, _, isLangSupported } from "./utils";
 
 const Lang: typeof imports.lang = imports.lang;
@@ -40,7 +40,7 @@ export class OpenWeatherMap implements WeatherProvider {
     //  Functions
     //--------------------------------------------------------
 
-    public async GetWeather(loc: Location): Promise<WeatherData> {
+    public async GetWeather(loc: LocationData): Promise<WeatherData> {
 		let query = this.ConstructQuery(this.base_url, loc);
 		if (query == null) 
 			return null;
@@ -157,7 +157,7 @@ export class OpenWeatherMap implements WeatherProvider {
     };
 
 
-    private ConstructQuery(baseUrl: string, loc: Location): string {
+    private ConstructQuery(baseUrl: string, loc: LocationData): string {
         let query = baseUrl;
         query = query + "lat=" + loc.lat + "&lon=" + loc.lon + "&appid=";
         query += "1c73f8259a86c6fd43c7163b543c8640";

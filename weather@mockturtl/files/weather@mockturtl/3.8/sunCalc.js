@@ -60,9 +60,6 @@ class SunCalc {
             [-18, 'nightEnd', 'night'],
             [6, 'goldenHourEnd', 'goldenHour']
         ];
-        this.addTime = function (angle, riseName, setName) {
-            this.times.push([angle, riseName, setName]);
-        };
     }
     getPosition(date, lat, lng) {
         var lw = rad * -lng, phi = rad * lat, d = toDays(date), c = sunCoords(d), H = siderealTime(d, lw) - c.ra;
@@ -71,6 +68,10 @@ class SunCalc {
             altitude: altitude(H, phi, c.dec)
         };
     }
+    addTime(angle, riseName, setName) {
+        this.times.push([angle, riseName, setName]);
+    }
+    ;
     getTimes(date, lat, lng, height) {
         height = height || 0;
         var lw = rad * -lng, phi = rad * lat, dh = observerAngle(height), d = toDays(date), n = julianCycle(d, lw), ds = approxTransit(0, lw, n), M = solarMeanAnomaly(ds), L = eclipticLongitude(M), dec = declination(L, 0), Jnoon = solarTransitJ(ds, M, L), i, len, time, h0, Jset, Jrise;

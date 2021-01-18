@@ -3,7 +3,7 @@
  SunCalc is a JavaScript library for calculating sun/moon position and light phases.
  https://github.com/mourner/suncalc
 
- Typescript adatptation is made by Attila Greguss
+ Typescript adaptation is made by Attila Greguss
 */
 
 // shortcuts for easier to read formulas
@@ -89,7 +89,16 @@ function solarTransitJ(ds: number, M: number, L: number) { return J2000 + ds + 0
 function hourAngle(h: number, phi: number, d: number) { return acos((sin(h) - sin(phi) * sin(d)) / (cos(phi) * cos(d))); }
 function observerAngle(height: number) { return -2.076 * Math.sqrt(height) / 60; }
 
-// returns set time for the given sun altitude
+/**
+ * Returns set time for the given sun altitude
+ * @param h 
+ * @param lw 
+ * @param phi 
+ * @param dec 
+ * @param n 
+ * @param M 
+ * @param L 
+ */
 function getSetJ(h: number, lw: number, phi: number, dec: number, n: number, M: number, L: number) {
 
     var w = hourAngle(h, phi, dec),
@@ -97,8 +106,10 @@ function getSetJ(h: number, lw: number, phi: number, dec: number, n: number, M: 
     return solarTransitJ(a, M, L);
 }
 
-// moon calculations, based on http://aa.quae.nl/en/reken/hemelpositie.html formulas
-
+/**
+ * Moon calculations, based on http://aa.quae.nl/en/reken/hemelpositie.html formulas
+ * @param d 
+ */
 function moonCoords(d: number) { // geocentric ecliptic coordinates of the moon
 
     var L = rad * (218.316 + 13.176396 * d), // ecliptic longitude
@@ -120,9 +131,8 @@ function hoursLater(date: Date, h: number) {
     return new Date(date.valueOf() + h * dayMs / 24);
 }
 
-
 export class SunCalc {
-    times: any[][] = [
+    private times: any[][] = [
         [-0.833, 'sunrise', 'sunset'],
         [-0.3, 'sunriseEnd', 'sunsetStart'],
         [-6, 'dawn', 'dusk'],
@@ -131,9 +141,13 @@ export class SunCalc {
         [6, 'goldenHourEnd', 'goldenHour']
     ];
 
-    // calculates sun position for a given date and latitude/longitude
-
-    getPosition(date: Date, lat: number, lng: number) {
+    /**
+     * calculates sun position for a given date and latitude/longitude
+     * @param date 
+     * @param lat 
+     * @param lng 
+     */
+    public getPosition(date: Date, lat: number, lng: number) {
         var lw = rad * -lng,
             phi = rad * lat,
             d = toDays(date),
@@ -147,14 +161,19 @@ export class SunCalc {
         };
     }
 
-    addTime = function (angle: number, riseName: number, setName: number) {
+    private addTime (angle: number, riseName: number, setName: number) {
         this.times.push([angle, riseName, setName]);
     };
 
-    // calculates sun times for a given date, latitude/longitude, and, optionally,
-    // the observer height (in meters) relative to the horizon
-
-    getTimes(date: Date, lat: number, lng: number, height: number): SunTimes {
+    /**
+     * Calculates sun times for a given date, latitude/longitude, and, optionally,
+     * the observer height (in meters) relative to the horizon
+     * @param date 
+     * @param lat 
+     * @param lng 
+     * @param height 
+     */
+    public getTimes(date: Date, lat: number, lng: number, height?: number): SunTimes {
 
         height = height || 0;
 
@@ -176,7 +195,7 @@ export class SunCalc {
             i, len, time, h0, Jset, Jrise;
 
 
-        var result: any = {
+        var result: SunTimes = {
             solarNoon: fromJulian(Jnoon),
             nadir: fromJulian(Jnoon - 0.5)
         };
@@ -188,14 +207,14 @@ export class SunCalc {
             Jset = getSetJ(h0, lw, phi, dec, n, M, L);
             Jrise = Jnoon - (Jset - Jnoon);
 
-            result[time[1]] = fromJulian(Jrise);
-            result[time[2]] = fromJulian(Jset);
+            result[time[1] as SunTimeProperty] = fromJulian(Jrise);
+            result[time[2] as SunTimeProperty] = fromJulian(Jset);
         }
 
-        return result as SunTimes;
+        return result;
     };
 
-    getMoonPosition(date: Date, lat: number, lng: number): MoonPosition {
+    public getMoonPosition(date: Date, lat: number, lng: number): MoonPosition {
 
         var lw = rad * -lng,
             phi = rad * lat,
@@ -217,11 +236,13 @@ export class SunCalc {
         };
     };
 
-    // calculations for illumination parameters of the moon,
-    // based on http://idlastro.gsfc.nasa.gov/ftp/pro/astro/mphase.pro formulas and
-    // Chapter 48 of "Astronomical Algorithms" 2nd edition by Jean Meeus (Willmann-Bell, Richmond) 1998.
-
-    getMoonIllumination(date: Date) {
+    /**
+     * calculations for illumination parameters of the moon,
+     * based on http://idlastro.gsfc.nasa.gov/ftp/pro/astro/mphase.pro formulas and
+     * Chapter 48 of "Astronomical Algorithms" 2nd edition by Jean Meeus (Willmann-Bell, Richmond) 1998.
+     * @param date 
+     */
+    public getMoonIllumination(date: Date) {
 
         var d = toDays(date || new Date()),
             s = sunCoords(d),
@@ -241,9 +262,14 @@ export class SunCalc {
         };
     };
 
-    // calculations for moon rise/set times are based on http://www.stargazing.net/kepler/moonrise.html article
-
-    getMoonTimes(date: Date, lat: number, lng: number, inUTC: boolean) {
+    /**
+     * Calculations for moon rise/set times are based on http://www.stargazing.net/kepler/moonrise.html article
+     * @param date 
+     * @param lat 
+     * @param lng 
+     * @param inUTC 
+     */
+    public getMoonTimes(date: Date, lat: number, lng: number, inUTC: boolean): MoonTimes {
         var t = new Date(date);
         if (inUTC) t.setUTCHours(0, 0, 0, 0);
         else t.setHours(0, 0, 0, 0);
@@ -287,7 +313,7 @@ export class SunCalc {
             h0 = h2;
         }
 
-        var result: any = {};
+        var result: MoonTimes = {};
 
         if (rise) result.rise = hoursLater(t, rise);
         if (set) result.set = hoursLater(t, set);
@@ -298,6 +324,12 @@ export class SunCalc {
     };
 }
 
+interface MoonTimes {
+    rise?: Date;
+    set?: Date;
+    alwaysUp?: boolean;
+    alwaysDown?: boolean;
+}
 interface MoonPosition {
     azimuth: number;
     altitude: number;
@@ -310,4 +342,4 @@ export type SunTimes = {
 }
 
 type SunTimeProperty = 'sunrise' | 'sunset' | 'sunriseEnd' | 'sunsetStart' | 'dawn' | 'dusk' | 'nauticalDawn'
-    | 'nauticalDusk' | 'nightEnd' | 'night' | 'goldenHourEnd' | 'goldenHour' | 'solarNoon' | 'Nadir';
+    | 'nauticalDusk' | 'nightEnd' | 'night' | 'goldenHourEnd' | 'goldenHour' | 'solarNoon' | 'nadir';

@@ -396,7 +396,7 @@ export class WeatherApplet extends TextIconApplet {
 				this.config.InjectLocationToConfig(location, true);
 			}
 				this.EnsureProvider();
-				let weatherInfo = await this.provider.GetWeather({ lat: location.lat, lon: location.lon, text: location.lat.toString() + "," + location.lon.toString() });
+				let weatherInfo = await this.provider.GetWeather(location);
 				if (weatherInfo == null) {
 					this.Unlock();
 					return "failure";

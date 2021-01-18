@@ -1,7 +1,7 @@
 import { Logger } from "./logger";
 import { WeatherApplet } from "./main";
 import { SunCalc } from "./sunCalc";
-import { WeatherProvider, Location, WeatherData, HourlyForecastData, ForecastData, Condition } from "./types";
+import { WeatherProvider, WeatherData, HourlyForecastData, ForecastData, Condition, LocationData } from "./types";
 import { CelsiusToKelvin, IsNight, _, weatherIconSafely } from "./utils";
 
 export class MetNorway implements WeatherProvider {
@@ -22,7 +22,7 @@ export class MetNorway implements WeatherProvider {
         this.sunCalc = new SunCalc();
     }
 
-    public async GetWeather(loc: Location): Promise<WeatherData> {
+    public async GetWeather(loc: LocationData): Promise<WeatherData> {
 		let query = this.GetUrl(loc);
 		if (query == null)
 			return null;
@@ -229,7 +229,7 @@ export class MetNorway implements WeatherProvider {
         return conditions[result].name;
     }
 
-    private GetUrl(loc: Location): string {
+    private GetUrl(loc: LocationData): string {
         let url = this.baseUrl + "lat=";
         url += (loc.lat + "&lon=" + loc.lon);
         return url;

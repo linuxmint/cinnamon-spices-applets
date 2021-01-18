@@ -9,7 +9,7 @@
 import { Logger } from "./logger";
 import { WeatherApplet } from "./main";
 import { SunCalc } from "./sunCalc";
-import { WeatherProvider, Location, WeatherData, AppletError, ForecastData, HourlyForecastData, Condition } from "./types";
+import { WeatherProvider, WeatherData, AppletError, ForecastData, HourlyForecastData, Condition, LocationData } from "./types";
 import { _, GetDistance, KPHtoMPS, CelsiusToKelvin, IsNight, FahrenheitToKelvin, weatherIconSafely } from "./utils";
 
 export class USWeather implements WeatherProvider {
@@ -32,7 +32,8 @@ export class USWeather implements WeatherProvider {
     /** In metres */
     private readonly MAX_STATION_DIST = 50000;
     private observationStations: StationPayload[] = null;
-    private currentLoc: Location = null;
+    private currentLoc: LocationData = null;
+    private currentLocID: string = null;
 
     constructor(_app: WeatherApplet) {
         this.app = _app;
@@ -42,13 +43,15 @@ export class USWeather implements WeatherProvider {
     //--------------------------------------------------------
     //  Functions
     //--------------------------------------------------------
-    public async GetWeather(loc: Location): Promise<WeatherData> {
+    public async GetWeather(loc: LocationData): Promise<WeatherData> {
         if (loc == null) return null;
 
         // getting grid and station data first time or location changed
-        if (!this.grid || !this.observationStations || this.currentLoc.text != loc.text) {
+        let locID = loc.lat.toString() + "," + loc.lon.toString();
+        if (!this.grid || !this.observationStations || this.currentLocID != locID) {
             Logger.Print("Downloading new site data")
             this.currentLoc = loc;
+            this.currentLocID = locID;
 
             let grid = await this.GetGridData(loc);
             if (grid == null) return null;
@@ -89,10 +92,10 @@ export class USWeather implements WeatherProvider {
 	 * Handles App errors internally
 	 * @param loc 
 	 */
-    private async GetGridData(loc: Location): Promise<GridPayload> {
+    private async GetGridData(loc: LocationData): Promise<GridPayload> {
         try {
             // Handling out of country errors in callback
-            let siteData = await this.app.LoadJsonAsync<GridPayload>(this.sitesUrl + loc.text, this.OnObtainingGridData);
+            let siteData = await this.app.LoadJsonAsync<GridPayload>(this.sitesUrl + loc.lat.toString() + "," + loc.lon.toString(), this.OnObtainingGridData);
             Logger.Debug("Grid found: " + JSON.stringify(siteData, null, 2));
             return siteData;
         }
@@ -123,7 +126,7 @@ export class USWeather implements WeatherProvider {
 	 * Data is pretty spotty so we can fill them up from stations further away later
 	 * @param range in metres
 	 */
-    private async GetObservationsInRange(range: number, loc: Location, stations: StationPayload[]): Promise<ObservationPayload[]> {
+    private async GetObservationsInRange(range: number, loc: LocationData, stations: StationPayload[]): Promise<ObservationPayload[]> {
         let observations = [];
         for (let index = 0; index < stations.length; index++) {
             const element = stations[index];

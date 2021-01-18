@@ -4,7 +4,7 @@ import { Services, WeatherWindSpeedUnits, DistanceUnits } from "./config";
  * A WeatherProvider must implement this interface.
  */
 export interface WeatherProvider {
-    GetWeather(loc: Location): Promise<WeatherData>;
+    GetWeather(loc: LocationData): Promise<WeatherData>;
     prettyName: string;
     name: Services;
     maxForecastSupport: number;
@@ -102,27 +102,6 @@ export interface LocationData {
     address_string?: string;
     entryText: string;
     locationSource: LocationSource;
-}
-
-export interface Location {
-    lat: number;
-    lon: number;
-    text: string;
-}
-
-export interface ForecastUI {
-    Icon: imports.gi.St.Icon,
-    Day: imports.gi.St.Label,
-    Summary: imports.gi.St.Label,
-    Temperature: imports.gi.St.Label,
-}
-
-export interface HourlyForecastUI {
-    Icon: imports.gi.St.Icon,
-    Hour: imports.gi.St.Label,
-    Summary: imports.gi.St.Label,
-    Temperature: imports.gi.St.Label,
-    Precipitation: imports.gi.St.Label
 }
 
 export type SettingKeys = {

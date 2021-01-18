@@ -9,7 +9,7 @@
 import { HttpError } from "./httpLib";
 import { Logger } from "./logger";
 import { WeatherApplet } from "./main";
-import { WeatherProvider, Location, WeatherData, ForecastData, HourlyForecastData, AppletError, BuiltinIcons, CustomIcons } from "./types";
+import { WeatherProvider, WeatherData, ForecastData, HourlyForecastData, AppletError, BuiltinIcons, CustomIcons, LocationData } from "./types";
 import { weatherIconSafely, _, isLangSupported } from "./utils";
 
 const Lang: typeof imports.lang = imports.lang;
@@ -45,7 +45,7 @@ export class Weatherbit implements WeatherProvider {
     //--------------------------------------------------------
     //  Functions
     //--------------------------------------------------------
-    public async GetWeather(loc: Location): Promise<WeatherData> {
+    public async GetWeather(loc: LocationData): Promise<WeatherData> {
         let forecastPromise = this.GetData(this.daily_url, loc, this.ParseForecast) as Promise<ForecastData[]>;
         let hourlyPromise = null;
         if (!!this.hourlyAccess) hourlyPromise = this.GetHourlyData(this.hourly_url, loc);
@@ -66,7 +66,7 @@ export class Weatherbit implements WeatherProvider {
      * @param baseUrl 
      * @param ParseFunction returns WeatherData or ForecastData Object
      */
-    private async GetData(baseUrl: string, loc: Location, ParseFunction: (json: any, context: any) => WeatherData | ForecastData[] | HourlyForecastData[]) {
+    private async GetData(baseUrl: string, loc: LocationData, ParseFunction: (json: any, context: any) => WeatherData | ForecastData[] | HourlyForecastData[]) {
 		let query = this.ConstructQuery(baseUrl, loc);
 		if (query == null)
 			return null;
@@ -79,7 +79,7 @@ export class Weatherbit implements WeatherProvider {
 		return ParseFunction(json, this);
     }
 
-    private async GetHourlyData(baseUrl: string, loc: Location) {
+    private async GetHourlyData(baseUrl: string, loc: LocationData) {
 		let query = this.ConstructQuery(baseUrl, loc);
 		if (query == null)
 			return null;
@@ -248,7 +248,7 @@ export class Weatherbit implements WeatherProvider {
         return lang;
     }
 
-    private ConstructQuery(query: string, loc: Location): string {
+    private ConstructQuery(query: string, loc: LocationData): string {
         let key = this.app.config._apiKey.replace(" ", "");
         if (this.app.config.noApiKey()) {
             Logger.Error("DarkSky: No API Key given");

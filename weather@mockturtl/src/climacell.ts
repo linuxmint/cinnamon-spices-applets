@@ -10,7 +10,7 @@ import { HttpError } from "./httpLib";
 import { Logger } from "./logger";
 import { WeatherApplet } from "./main";
 import { SunTimes } from "./sunCalc";
-import { WeatherProvider, Location, WeatherData, HourlyForecastData, ForecastData, AppletError, Condition } from "./types";
+import { WeatherProvider, WeatherData, HourlyForecastData, ForecastData, Condition, LocationData } from "./types";
 import { CelsiusToKelvin, _, IsNight, weatherIconSafely } from "./utils";
 
 const Lang: typeof imports.lang = imports.lang;
@@ -52,7 +52,7 @@ export class Climacell implements WeatherProvider {
     //--------------------------------------------------------
     //  Functions
     //--------------------------------------------------------
-    public async GetWeather(loc: Location): Promise<WeatherData> {
+    public async GetWeather(loc: LocationData): Promise<WeatherData> {
         let hourly = this.GetData("hourly", loc, this.ParseHourly) as Promise<HourlyForecastData[]>;
         let daily = this.GetData("daily", loc, this.ParseDaily) as Promise<ForecastData[]>;
         let current = await this.GetData("current", loc, this.ParseWeather) as WeatherData;
@@ -69,7 +69,7 @@ export class Climacell implements WeatherProvider {
      * @param baseUrl 
      * @param ParseFunction returns WeatherData or ForecastData Object
      */
-    private async GetData(baseUrl: CallType, loc: Location, ParseFunction: (json: any, context: any) => WeatherData | ForecastData[] | HourlyForecastData[]) {
+    private async GetData(baseUrl: CallType, loc: LocationData, ParseFunction: (json: any, context: any) => WeatherData | ForecastData[] | HourlyForecastData[]) {
 		let query = this.ConstructQuery(baseUrl, loc);
 		if (query == null)
 			return null;
@@ -167,7 +167,7 @@ export class Climacell implements WeatherProvider {
         return results;
     }
 
-    private ConstructQuery(subcall: CallType, loc: Location): string {
+    private ConstructQuery(subcall: CallType, loc: LocationData): string {
         let query;
         let key = this.app.config._apiKey.replace(" ", "");
         if (this.app.config.noApiKey()) {

@@ -10,7 +10,7 @@ import { DistanceUnits } from "./config";
 import { Logger } from "./logger";
 import { WeatherApplet } from "./main";
 import { SunCalc } from "./sunCalc";
-import { WeatherProvider, Location, WeatherData, ForecastData, HourlyForecastData, Condition } from "./types";
+import { WeatherProvider, WeatherData, ForecastData, HourlyForecastData, Condition, LocationData } from "./types";
 import { _, GetDistance, MPHtoMPS, compassToDeg, CelsiusToKelvin, MetreToUserUnits, weatherIconSafely } from "./utils";
 
 export class MetUk implements WeatherProvider {
@@ -39,7 +39,8 @@ export class MetUk implements WeatherProvider {
     private app: WeatherApplet;
     private forecastSite: WeatherSite = null;
     private observationSites: WeatherSite[] = null;
-    private currentLoc: Location = null;
+    private currentLoc: LocationData = null;
+    private currentLocID: string = null;
     /** In metres */
     private readonly MAX_STATION_DIST = 50000;
 
@@ -51,13 +52,15 @@ export class MetUk implements WeatherProvider {
     //--------------------------------------------------------
     //  Functions
     //--------------------------------------------------------
-    public async GetWeather(newLoc: Location): Promise<WeatherData> {
+    public async GetWeather(newLoc: LocationData): Promise<WeatherData> {
         if (newLoc == null) return null;
 
+        let loc = newLoc.lat.toString() + "," + newLoc.lon.toString();
         // Get closest sites
-        if (this.currentLoc == null || this.currentLoc.text != newLoc.text || this.forecastSite == null || this.observationSites == null || this.observationSites.length == 0) {
+        if (this.currentLocID == null || this.currentLocID != loc || this.forecastSite == null || this.observationSites == null || this.observationSites.length == 0) {
             Logger.Print("Downloading new site data");
             this.currentLoc = newLoc;
+            this.currentLocID = loc;
 
             let forecastSite = await this.GetClosestForecastSite(newLoc);
             if (forecastSite == null) return null;
@@ -103,7 +106,7 @@ export class MetUk implements WeatherProvider {
         return currentResult;
     };
 
-    private async GetClosestForecastSite(loc: Location): Promise<WeatherSite> {
+    private async GetClosestForecastSite(loc: LocationData): Promise<WeatherSite> {
         let forecastSitelist = null;
         try {
             forecastSitelist = await this.app.LoadJsonAsync(this.baseUrl + this.forecastPrefix + this.sitesUrl + "?" + this.key);
@@ -122,7 +125,7 @@ export class MetUk implements WeatherProvider {
         }
     }
 
-    private async GetObservationSitesInRange(loc: Location, range: number): Promise<WeatherSite[]> {
+    private async GetObservationSitesInRange(loc: LocationData, range: number): Promise<WeatherSite[]> {
         let observationSiteList = null;
         try {
             observationSiteList = await this.app.LoadJsonAsync<any>(this.baseUrl + this.currentPrefix + this.sitesUrl + "?" + this.key);
@@ -424,7 +427,7 @@ export class MetUk implements WeatherProvider {
         return (date.replace("Z", "")) + "T00:00:00Z";
     }
 
-    private GetClosestSite(siteList: any, loc: Location): WeatherSite {
+    private GetClosestSite(siteList: any, loc: LocationData): WeatherSite {
         let sites = siteList.Locations.Location as WeatherSite[];
         let closest = sites[0];
         closest.dist = GetDistance(parseFloat(closest.latitude), parseFloat(closest.longitude), loc.lat, loc.lon);

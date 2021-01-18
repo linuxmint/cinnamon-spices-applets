@@ -6,11 +6,12 @@ const { messageTray } = imports.ui.main;
 const { SystemNotificationSource, Notification } = imports.ui.messageTray;
 class NotificationService {
     constructor() {
-        this.MessageSource = new SystemNotificationSource(utils_1._("Weather Applet"));
+        this.Title = utils_1._("Weather Applet");
+        this.MessageSource = new SystemNotificationSource(this.Title);
         messageTray.add(this.MessageSource);
     }
     Send(title, message, transient) {
-        let notification = new Notification(this.MessageSource, utils_1._("Weather Applet") + ": " + title, message);
+        let notification = new Notification(this.MessageSource, this.Title + ": " + title, message);
         if (transient)
             notification.setTransient((!transient) ? false : true);
         this.MessageSource.notify(notification);

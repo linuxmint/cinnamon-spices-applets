@@ -10,7 +10,7 @@ import { HttpError, HttpLib } from "./httpLib";
 import { Logger } from "./logger";
 import { WeatherApplet } from "./main";
 import { SunTimes } from "./sunCalc";
-import { WeatherProvider, Location, WeatherData, ForecastData, HourlyForecastData, PrecipitationType, AppletError, BuiltinIcons, CustomIcons } from "./types";
+import { WeatherProvider, WeatherData, ForecastData, HourlyForecastData, PrecipitationType, AppletError, BuiltinIcons, CustomIcons, LocationData } from "./types";
 import { _, weatherIconSafely, isLangSupported, IsNight, FahrenheitToKelvin, CelsiusToKelvin, MPHtoMPS } from "./utils";
 
 const Lang: typeof imports.lang = imports.lang;
@@ -49,7 +49,7 @@ export class DarkSky implements WeatherProvider {
     //--------------------------------------------------------
     //  Functions
     //--------------------------------------------------------
-    public async GetWeather(loc: Location): Promise<WeatherData> {
+    public async GetWeather(loc: LocationData): Promise<WeatherData> {
 		let query = this.ConstructQuery(loc);
 		if (query == "" && query == null) return null;
 
@@ -163,7 +163,7 @@ export class DarkSky implements WeatherProvider {
         return lang;
     }
 
-    private ConstructQuery(loc: Location): string {
+    private ConstructQuery(loc: LocationData): string {
         this.SetQueryUnit();
         let query;
         let key = this.app.config._apiKey.replace(" ", "");
@@ -177,7 +177,7 @@ export class DarkSky implements WeatherProvider {
             });
             return "";
         }
-        query = this.query + key + "/" + loc.text + "?exclude=minutely,flags" + "&units=" + this.unit;
+        query = this.query + key + "/" + loc.lat.toString() + "," + loc.lon.toString() + "?exclude=minutely,flags" + "&units=" + this.unit;
         let locale = this.ConvertToAPILocale(this.app.currentLocale);
         if (isLangSupported(locale, this.supportedLanguages) && this.app.config._translateCondition) {
             query = query + "&lang=" + locale;

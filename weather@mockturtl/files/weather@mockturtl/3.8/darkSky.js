@@ -141,7 +141,7 @@ class DarkSky {
             });
             return "";
         }
-        query = this.query + key + "/" + loc.text + "?exclude=minutely,flags" + "&units=" + this.unit;
+        query = this.query + key + "/" + loc.lat.toString() + "," + loc.lon.toString() + "?exclude=minutely,flags" + "&units=" + this.unit;
         let locale = this.ConvertToAPILocale(this.app.currentLocale);
         if (utils_1.isLangSupported(locale, this.supportedLanguages) && this.app.config._translateCondition) {
             query = query + "&lang=" + locale;
@@ -159,7 +159,7 @@ class DarkSky {
             });
             return false;
         }
-        if (message.code == 401) {
+        else if (message.code == 401) {
             this.app.ShowError({
                 type: "hard",
                 userError: true,

@@ -1,7 +1,7 @@
 import { Config, DistanceUnits, WeatherUnits } from "./config";
 import { Logger } from "./logger";
 import { WeatherApplet } from "./main";
-import { ForecastUI, HourlyForecastUI, WeatherData, WeatherProvider, HourlyForecastData } from "./types";
+import { WeatherData, WeatherProvider, HourlyForecastData } from "./types";
 import { shadeHexColor, delay, capitalizeFirstLetter, _, nonempty, AwareDateString, TempToUserConfig, compassDirection, MPStoUserUnits, PressToUserUnits, GetHoursMinutes, GetDayName, MetreToUserUnits, MillimeterToUserUnits } from "./utils";
 import { WeatherButton } from "./weatherbutton";
 
@@ -1045,6 +1045,19 @@ export class UI {
                 expand: true
             });
         }
-
     }
+}
+interface ForecastUI {
+    Icon: imports.gi.St.Icon,
+    Day: imports.gi.St.Label,
+    Summary: imports.gi.St.Label,
+    Temperature: imports.gi.St.Label,
+}
+
+interface HourlyForecastUI {
+    Icon: imports.gi.St.Icon,
+    Hour: imports.gi.St.Label,
+    Summary: imports.gi.St.Label,
+    Temperature: imports.gi.St.Label,
+    Precipitation: imports.gi.St.Label
 }

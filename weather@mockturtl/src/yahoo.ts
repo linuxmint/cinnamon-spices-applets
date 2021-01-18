@@ -9,7 +9,7 @@
 import { Logger } from "./logger";
 import { WeatherApplet } from "./main";
 import { Notifications } from "./notification_service";
-import { WeatherProvider, Location, WeatherData, ForecastData, BuiltinIcons, CustomIcons } from "./types";
+import { WeatherProvider, WeatherData, ForecastData, BuiltinIcons, CustomIcons, LocationData } from "./types";
 import { _, weatherIconSafely, CelsiusToKelvin, KPHtoMPS } from "./utils";
 
 export class Yahoo implements WeatherProvider {
@@ -33,7 +33,7 @@ export class Yahoo implements WeatherProvider {
     //--------------------------------------------------------
     //  Functions
     //--------------------------------------------------------
-    public async GetWeather(loc: Location): Promise<WeatherData> {
+    public async GetWeather(loc: LocationData): Promise<WeatherData> {
         let json;
         if (loc != null) {
             try {
