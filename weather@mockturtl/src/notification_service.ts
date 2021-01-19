@@ -4,10 +4,18 @@ const { messageTray } = imports.ui.main;
 const { SystemNotificationSource, Notification } = imports.ui.messageTray;
 
 export class NotificationService {
+	private static instance: NotificationService = null;
+	/** Single instance of log */
+	public static get Instance() {
+		if (this.instance == null)
+			this.instance = new NotificationService();
+		return this.instance;
+	}
+
     Title: string = _("Weather Applet");
 	MessageSource: imports.ui.messageTray.SystemNotificationSource;
 
-	constructor() {
+	private constructor() {
 		this.MessageSource = new SystemNotificationSource(this.Title);
         messageTray.add(this.MessageSource);
 	}
@@ -18,5 +26,3 @@ export class NotificationService {
         this.MessageSource.notify(notification);
     }
 }
-
-export const Notifications = new NotificationService();

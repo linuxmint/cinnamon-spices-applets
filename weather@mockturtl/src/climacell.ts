@@ -7,7 +7,7 @@
 //////////////////////////////////////////////////////////////
 
 import { HttpError } from "./httpLib";
-import { Logger } from "./logger";
+import { Log } from "./logger";
 import { WeatherApplet } from "./main";
 import { SunTimes } from "./sunCalc";
 import { WeatherProvider, WeatherData, HourlyForecastData, ForecastData, Condition, LocationData } from "./types";
@@ -123,7 +123,7 @@ export class Climacell implements WeatherProvider {
             return result;
         }
         catch (e) {
-            Logger.Error("Climacell payload parsing error: " + e)
+            Log.Instance.Error("Climacell payload parsing error: " + e)
             this.app.ShowError({ type: "soft", detail: "unusual payload", service: "climacell", message: _("Failed to Process Weather Info") });
             return null;
         }
@@ -171,7 +171,7 @@ export class Climacell implements WeatherProvider {
         let query;
         let key = this.app.config._apiKey.replace(" ", "");
         if (this.app.config.noApiKey()) {
-            Logger.Error("Climacell: No API Key given");
+            Log.Instance.Error("Climacell: No API Key given");
             this.app.ShowError({
                 type: "hard",
                 userError: true,
@@ -377,7 +377,7 @@ export class Climacell implements WeatherProvider {
                     icon: weatherIconSafely((isNight) ? ["weather-clear-night"] : ["weather-clear"], this.app.config.IconType())
                 }
             default:
-                Logger.Error("condition code not found: " + condition);
+                Log.Instance.Error("condition code not found: " + condition);
                 return {
                     customIcon: "refresh-symbolic",
                     description: _("Unknown"),

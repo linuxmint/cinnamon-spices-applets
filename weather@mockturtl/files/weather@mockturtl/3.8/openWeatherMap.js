@@ -115,7 +115,7 @@ class OpenWeatherMap {
             return weather;
         }
         catch (e) {
-            logger_1.Logger.Error("OpenWeatherMap Weather Parsing error: " + e);
+            logger_1.Log.Instance.Error("OpenWeatherMap Weather Parsing error: " + e);
             self.app.ShowError({
                 type: "soft",
                 service: "openweathermap",
@@ -192,8 +192,8 @@ class OpenWeatherMap {
         }
         ;
         this.app.ShowError(error);
-        logger_1.Logger.Debug("OpenWeatherMap Error Code: " + errorPayload.cod);
-        logger_1.Logger.Error(errorMsg + errorPayload.message);
+        logger_1.Log.Instance.Debug("OpenWeatherMap Error Code: " + errorPayload.cod);
+        logger_1.Log.Instance.Error(errorMsg + errorPayload.message);
         return true;
     }
     ;

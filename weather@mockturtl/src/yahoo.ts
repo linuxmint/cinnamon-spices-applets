@@ -6,9 +6,9 @@
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
 
-import { Logger } from "./logger";
+import { Log } from "./logger";
 import { WeatherApplet } from "./main";
-import { Notifications } from "./notification_service";
+import { NotificationService } from "./notification_service";
 import { WeatherProvider, WeatherData, ForecastData, BuiltinIcons, CustomIcons, LocationData } from "./types";
 import { _, weatherIconSafely, CelsiusToKelvin, KPHtoMPS } from "./utils";
 
@@ -40,7 +40,7 @@ export class Yahoo implements WeatherProvider {
             }
             catch (e) {
                 this.app.ShowError({ type: "hard", service: "yahoo", detail: "unknown", message: _("Unknown Error happened while calling Yahoo bridge,\n see Looking Glass log for errors") })
-                Logger.Error("Yahoo API bridge call failed, error: " + e);
+                Log.Instance.Error("Yahoo API bridge call failed, error: " + e);
                 return null;
             }
 
@@ -49,14 +49,14 @@ export class Yahoo implements WeatherProvider {
                 return null;
             }
 
-            Logger.Debug("Yahoo API response: " + json);
+            Log.Instance.Debug("Yahoo API response: " + json);
 
             try {
                 json = JSON.parse(json)
             }
             catch (e) {
                 this.app.ShowError({ type: "hard", service: "yahoo", detail: "bad api response - non json", message: _("Yahoo bridge responded in bad format,\n see Looking Glass log for errors") })
-                Logger.Error("Yahoo service failed to parse payload to JSON, error: " + e);
+                Log.Instance.Error("Yahoo service failed to parse payload to JSON, error: " + e);
                 return null;
             }
 
@@ -135,7 +135,7 @@ export class Yahoo implements WeatherProvider {
             return result;
         }
         catch (e) {
-            Logger.Error("Yahoo payload parsing error: " + e)
+            Log.Instance.Error("Yahoo payload parsing error: " + e)
             this.app.ShowError({ type: "soft", detail: "unusual payload", service: "yahoo", message: _("Failed to Process Weather Info") });
             return null;
         }
@@ -144,23 +144,23 @@ export class Yahoo implements WeatherProvider {
     private HandleResponseErrors(json: BridgeError): void {
         let type = json.error.type;
         let errorMsg = "Yahoo bridge: "
-        Logger.Debug("yahoo API error payload: " + json);
+        Log.Instance.Debug("yahoo API error payload: " + json);
         switch (type) {
             case "import":
-                Notifications.Send(_("Missing package"), _("Please install '") + this.GetMissingPackage(json) + _("', then refresh manually."))
-                Logger.Error(errorMsg + json.error.message);
+                NotificationService.Instance.Send(_("Missing package"), _("Please install '") + this.GetMissingPackage(json) + _("', then refresh manually."))
+                Log.Instance.Error(errorMsg + json.error.message);
                 this.app.ShowError({ detail: "import error", type: "hard", userError: true, service: "yahoo", message: _("Please install '") + this.GetMissingPackage(json) + _("', then refresh manually.") })
                 break;
             case "network":
                 this.app.ShowError({ detail: "no api response", type: "soft", service: "yahoo", message: _("Could not connect to Yahoo API.") })
-                Logger.Error(errorMsg + "Could not connect to API, error - " + json.error.data);
+                Log.Instance.Error(errorMsg + "Could not connect to API, error - " + json.error.data);
                 break;
             case "unknown":
                 this.app.ShowError({ detail: "no api response", type: "hard", service: "yahoo", message: _("Unknown error happened while obtaining weather, see Looking Glass logs for more information") })
-                Logger.Error(errorMsg + "Unknown Error happened in yahoo bridge, error - " + json.error.data);
+                Log.Instance.Error(errorMsg + "Unknown Error happened in yahoo bridge, error - " + json.error.data);
                 break
             default:
-                Logger.Error(errorMsg + json.error.message);
+                Log.Instance.Error(errorMsg + json.error.message);
                 break
         }
     };

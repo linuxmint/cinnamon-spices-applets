@@ -19,7 +19,7 @@ async function FileExists(file, dictionary = false) {
         return file.query_exists(null);
     }
     catch (e) {
-        logger_1.Logger.Error("Cannot get file info for '" + file.get_path() + "', error: ");
+        logger_1.Log.Instance.Error("Cannot get file info for '" + file.get_path() + "', error: ");
         global.log(e);
         return false;
     }
@@ -61,7 +61,7 @@ async function DeleteFile(file) {
                     resolve(true);
                     return true;
                 }
-                logger_1.Logger.Error("Can't delete file, reason: ");
+                logger_1.Log.Instance.Error("Can't delete file, reason: ");
                 global.log(e);
                 resolve(false);
                 return false;

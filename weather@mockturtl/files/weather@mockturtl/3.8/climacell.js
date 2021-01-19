@@ -86,7 +86,7 @@ class Climacell {
             return result;
         }
         catch (e) {
-            logger_1.Logger.Error("Climacell payload parsing error: " + e);
+            logger_1.Log.Instance.Error("Climacell payload parsing error: " + e);
             this.app.ShowError({ type: "soft", detail: "unusual payload", service: "climacell", message: utils_1._("Failed to Process Weather Info") });
             return null;
         }
@@ -132,7 +132,7 @@ class Climacell {
         let query;
         let key = this.app.config._apiKey.replace(" ", "");
         if (this.app.config.noApiKey()) {
-            logger_1.Logger.Error("Climacell: No API Key given");
+            logger_1.Log.Instance.Error("Climacell: No API Key given");
             this.app.ShowError({
                 type: "hard",
                 userError: true,
@@ -332,7 +332,7 @@ class Climacell {
                     icon: utils_1.weatherIconSafely((isNight) ? ["weather-clear-night"] : ["weather-clear"], this.app.config.IconType())
                 };
             default:
-                logger_1.Logger.Error("condition code not found: " + condition);
+                logger_1.Log.Instance.Error("condition code not found: " + condition);
                 return {
                     customIcon: "refresh-symbolic",
                     description: utils_1._("Unknown"),

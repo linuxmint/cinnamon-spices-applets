@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Logger = exports.Log = void 0;
+exports.Log = void 0;
 const consts_1 = require("./consts");
 class Log {
     constructor(_instanceId) {
@@ -9,6 +9,11 @@ class Log {
         this.ID = _instanceId;
         this.appletDir = imports.ui.appletManager.appletMeta[consts_1.UUID].path;
         this.debug = this.DEBUG();
+    }
+    static get Instance() {
+        if (this.instance == null)
+            this.instance = new Log();
+        return this.instance;
     }
     DEBUG() {
         let path = this.appletDir + "/../DEBUG";
@@ -53,4 +58,4 @@ class Log {
     }
 }
 exports.Log = Log;
-exports.Logger = new Log();
+Log.instance = null;

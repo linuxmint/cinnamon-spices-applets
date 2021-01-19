@@ -55,9 +55,9 @@ class WeatherApplet extends TextIconApplet {
         };
         this.appletDir = metadata.path;
         this.currentLocale = utils_1.constructJsLocale(get_language_names()[0]);
-        logger_1.Logger.Debug("Applet created with instanceID " + instanceId);
-        logger_1.Logger.Debug("System locale is " + this.currentLocale);
-        logger_1.Logger.Debug("AppletDir is: " + this.appletDir);
+        logger_1.Log.Instance.Debug("Applet created with instanceID " + instanceId);
+        logger_1.Log.Instance.Debug("System locale is " + this.currentLocale);
+        logger_1.Log.Instance.Debug("AppletDir is: " + this.appletDir);
         imports.gettext.bindtextdomain(consts_1.UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
         imports.gi.Gtk.IconTheme.get_default().append_search_path(this.appletDir + "/../icons");
         this.SetAppletOnPanel();
@@ -87,7 +87,7 @@ class WeatherApplet extends TextIconApplet {
     Unlock() {
         this.lock = false;
         if (this.refreshTriggeredWhileLocked) {
-            logger_1.Logger.Print("Refreshing triggered by config change while refreshing, starting now...");
+            logger_1.Log.Instance.Print("Refreshing triggered by config change while refreshing, starting now...");
             this.refreshTriggeredWhileLocked = false;
             this.refreshAndRebuild();
         }
@@ -109,7 +109,7 @@ class WeatherApplet extends TextIconApplet {
     }
     ;
     async LoadJsonAsync(url, params, HandleError, method = "GET") {
-        let response = await httpLib_1.Http.LoadJsonAsync(url, params, method);
+        let response = await httpLib_1.HttpLib.Instance.LoadJsonAsync(url, params, method);
         if (!response.Success) {
             if (!!HandleError && !HandleError(response.ErrorData))
                 return null;
@@ -155,7 +155,7 @@ class WeatherApplet extends TextIconApplet {
             return json;
         }
         catch (e) {
-            logger_1.Logger.Error("Error calling command " + cmd + ", error: ");
+            logger_1.Log.Instance.Error("Error calling command " + cmd + ", error: ");
             global.log(e);
             return null;
         }
@@ -189,7 +189,7 @@ class WeatherApplet extends TextIconApplet {
     }
     async saveCurrentLocation() {
         if (this.config.CurrentLocation.locationSource == "ip-api") {
-            notification_service_1.Notifications.Send(utils_1._("Error") + " - " + utils_1._("Location Store"), utils_1._("You can't save a location obtained automatically, sorry"));
+            notification_service_1.NotificationService.Instance.Send(utils_1._("Error") + " - " + utils_1._("Location Store"), utils_1._("You can't save a location obtained automatically, sorry"));
         }
         this.locationStore.SaveCurrentLocation(this.config.CurrentLocation);
     }
@@ -197,7 +197,7 @@ class WeatherApplet extends TextIconApplet {
         this.locationStore.DeleteCurrentLocation(this.config.CurrentLocation);
     }
     onLocationStorageChanged(itemCount) {
-        logger_1.Logger.Debug("On location storage callback called, number of locations now " + itemCount.toString());
+        logger_1.Log.Instance.Debug("On location storage callback called, number of locations now " + itemCount.toString());
         if (this.locationStore.ShouldShowLocationSelectors(this.config.CurrentLocation))
             this.ui.ShowLocationSelectors();
         else
@@ -226,7 +226,7 @@ class WeatherApplet extends TextIconApplet {
         }
     }
     on_applet_removed_from_panel(deleteConfig) {
-        logger_1.Logger.Print("Removing applet instance...");
+        logger_1.Log.Instance.Print("Removing applet instance...");
         this.loop.Stop();
     }
     on_applet_clicked(event) {
@@ -279,7 +279,7 @@ class WeatherApplet extends TextIconApplet {
     async refreshWeather(rebuild, location) {
         try {
             if (this.lock) {
-                logger_1.Logger.Print("Refreshing in progress, refresh skipped.");
+                logger_1.Log.Instance.Print("Refreshing in progress, refresh skipped.");
                 return "locked";
             }
             this.lock = true;
@@ -310,13 +310,13 @@ class WeatherApplet extends TextIconApplet {
                 this.Unlock();
                 return "failure";
             }
-            logger_1.Logger.Print("Weather Information refreshed");
+            logger_1.Log.Instance.Print("Weather Information refreshed");
             this.loop.ResetErrorCount();
             this.Unlock();
             return "success";
         }
         catch (e) {
-            logger_1.Logger.Error("Generic Error while refreshing Weather info: " + e);
+            logger_1.Log.Instance.Error("Generic Error while refreshing Weather info: " + e);
             this.ShowError({ type: "hard", detail: "unknown", message: utils_1._("Unexpected Error While Refreshing Weather, please see log in Looking Glass") });
             this.Unlock();
             return "failure";
@@ -365,9 +365,9 @@ class WeatherApplet extends TextIconApplet {
         if (this.encounteredError == true)
             return;
         this.encounteredError = true;
-        logger_1.Logger.Debug("User facing Error received, error: " + JSON.stringify(error, null, 2));
+        logger_1.Log.Instance.Debug("User facing Error received, error: " + JSON.stringify(error, null, 2));
         if (error.type == "hard") {
-            logger_1.Logger.Debug("Displaying hard error");
+            logger_1.Log.Instance.Debug("Displaying hard error");
             this.ui.rebuild(this.config);
             this.DisplayError(this.errMsg[error.detail], (!error.message) ? "" : error.message);
         }
@@ -383,7 +383,7 @@ class WeatherApplet extends TextIconApplet {
             return;
         }
         let nextRefresh = this.loop.GetSecondsUntilNextRefresh();
-        logger_1.Logger.Error("Retrying in the next " + nextRefresh.toString() + " seconds...");
+        logger_1.Log.Instance.Error("Retrying in the next " + nextRefresh.toString() + " seconds...");
     }
 }
 exports.WeatherApplet = WeatherApplet;

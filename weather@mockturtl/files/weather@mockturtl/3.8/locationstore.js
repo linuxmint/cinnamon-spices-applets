@@ -17,7 +17,7 @@ class LocationStore {
         this.StoreChanged = null;
         this.app = app;
         this.path = this.GetConfigPath() + "/weather-mockturtl/locations.json";
-        logger_1.Logger.Debug("location store path is: " + this.path);
+        logger_1.Log.Instance.Debug("location store path is: " + this.path);
         this.file = Gio.File.new_for_path(this.path);
         if (onStoreChanged != null)
             this.StoreChanged = onStoreChanged;
@@ -36,22 +36,22 @@ class LocationStore {
         this.currentIndex = index;
     }
     NextLocation(currentLoc) {
-        logger_1.Logger.Debug("Current location: " + JSON.stringify(currentLoc, null, 2));
+        logger_1.Log.Instance.Debug("Current location: " + JSON.stringify(currentLoc, null, 2));
         if (this.locations.length == 0)
             return currentLoc;
         let nextIndex = null;
         if (this.InStorage(currentLoc)) {
             nextIndex = this.FindIndex(currentLoc) + 1;
-            logger_1.Logger.Debug("Current location found in storage at index " + (nextIndex - 1).toString() + ", moving to the next index");
+            logger_1.Log.Instance.Debug("Current location found in storage at index " + (nextIndex - 1).toString() + ", moving to the next index");
         }
         else {
             nextIndex = this.currentIndex++;
         }
         if (nextIndex > this.locations.length - 1) {
             nextIndex = 0;
-            logger_1.Logger.Debug("Reached end of storage, move to the beginning");
+            logger_1.Log.Instance.Debug("Reached end of storage, move to the beginning");
         }
-        logger_1.Logger.Debug("Switching to index " + nextIndex.toString() + "...");
+        logger_1.Log.Instance.Debug("Switching to index " + nextIndex.toString() + "...");
         this.currentIndex = nextIndex;
         return {
             address_string: this.locations[nextIndex].address_string,
@@ -73,16 +73,16 @@ class LocationStore {
         let previousIndex = null;
         if (this.InStorage(currentLoc)) {
             previousIndex = this.FindIndex(currentLoc) - 1;
-            logger_1.Logger.Debug("Current location found in storage at index " + (previousIndex + 1).toString() + ", moving to the next index");
+            logger_1.Log.Instance.Debug("Current location found in storage at index " + (previousIndex + 1).toString() + ", moving to the next index");
         }
         else {
             previousIndex = this.currentIndex--;
         }
         if (previousIndex < 0) {
             previousIndex = this.locations.length - 1;
-            logger_1.Logger.Debug("Reached start of storage, move to the end");
+            logger_1.Log.Instance.Debug("Reached start of storage, move to the end");
         }
-        logger_1.Logger.Debug("Switching to index " + previousIndex.toString() + "...");
+        logger_1.Log.Instance.Debug("Switching to index " + previousIndex.toString() + "...");
         this.currentIndex = previousIndex;
         return {
             address_string: this.locations[previousIndex].address_string,
@@ -105,34 +105,34 @@ class LocationStore {
     }
     async SaveCurrentLocation(loc) {
         if (this.app.Locked()) {
-            notification_service_1.Notifications.Send(utils_1._("Warning") + " - " + utils_1._("Location Store"), utils_1._("You can only save correct locations when the applet is not refreshing"), true);
+            notification_service_1.NotificationService.Instance.Send(utils_1._("Warning") + " - " + utils_1._("Location Store"), utils_1._("You can only save correct locations when the applet is not refreshing"), true);
             return;
         }
         if (loc == null) {
-            notification_service_1.Notifications.Send(utils_1._("Warning") + " - " + utils_1._("Location Store"), utils_1._("You can't save an incorrect location"), true);
+            notification_service_1.NotificationService.Instance.Send(utils_1._("Warning") + " - " + utils_1._("Location Store"), utils_1._("You can't save an incorrect location"), true);
             return;
         }
         if (this.InStorage(loc)) {
-            notification_service_1.Notifications.Send(utils_1._("Info") + " - " + utils_1._("Location Store"), utils_1._("Location is already saved"), true);
+            notification_service_1.NotificationService.Instance.Send(utils_1._("Info") + " - " + utils_1._("Location Store"), utils_1._("Location is already saved"), true);
             return;
         }
         this.locations.push(loc);
         this.currentIndex = this.locations.length - 1;
         this.InvokeStorageChanged();
         await this.SaveToFile();
-        notification_service_1.Notifications.Send(utils_1._("Success") + " - " + utils_1._("Location Store"), utils_1._("Location is saved to library"), true);
+        notification_service_1.NotificationService.Instance.Send(utils_1._("Success") + " - " + utils_1._("Location Store"), utils_1._("Location is saved to library"), true);
     }
     async DeleteCurrentLocation(loc) {
         if (this.app.Locked()) {
-            notification_service_1.Notifications.Send(utils_1._("Info") + " - " + utils_1._("Location Store"), utils_1._("You can't remove a location while the applet is refreshing"), true);
+            notification_service_1.NotificationService.Instance.Send(utils_1._("Info") + " - " + utils_1._("Location Store"), utils_1._("You can't remove a location while the applet is refreshing"), true);
             return;
         }
         if (loc == null) {
-            notification_service_1.Notifications.Send(utils_1._("Info") + " - " + utils_1._("Location Store"), utils_1._("You can't remove an incorrect location"), true);
+            notification_service_1.NotificationService.Instance.Send(utils_1._("Info") + " - " + utils_1._("Location Store"), utils_1._("You can't remove an incorrect location"), true);
             return;
         }
         if (!this.InStorage(loc)) {
-            notification_service_1.Notifications.Send(utils_1._("Info") + " - " + utils_1._("Location Store"), utils_1._("Location is not in storage, can't delete"), true);
+            notification_service_1.NotificationService.Instance.Send(utils_1._("Info") + " - " + utils_1._("Location Store"), utils_1._("Location is not in storage, can't delete"), true);
             return;
         }
         let index = this.FindIndex(loc);
@@ -142,7 +142,7 @@ class LocationStore {
             this.currentIndex = this.locations.length - 1;
         if (this.currentIndex < 0)
             this.currentIndex = 0;
-        notification_service_1.Notifications.Send(utils_1._("Success") + " - " + utils_1._("Location Store"), utils_1._("Location is deleted from library"), true);
+        notification_service_1.NotificationService.Instance.Send(utils_1._("Success") + " - " + utils_1._("Location Store"), utils_1._("Location is deleted from library"), true);
         this.InvokeStorageChanged();
     }
     InvokeStorageChanged() {
@@ -158,10 +158,10 @@ class LocationStore {
         catch (e) {
             let error = e;
             if (error.matches(error.domain, Gio.IOErrorEnum.NOT_FOUND)) {
-                logger_1.Logger.Print("Location store does not exist, skipping loading...");
+                logger_1.Log.Instance.Print("Location store does not exist, skipping loading...");
                 return true;
             }
-            logger_1.Logger.Error("Can't load locations.json, error: " + error.message);
+            logger_1.Log.Instance.Error("Can't load locations.json, error: " + error.message);
             return false;
         }
         if (content == null)
@@ -169,14 +169,14 @@ class LocationStore {
         try {
             let locations = JSON.parse(content);
             this.locations = locations;
-            logger_1.Logger.Print("Saved locations are loaded in from location store at: '" + this.path + "'");
-            logger_1.Logger.Debug("Locations loaded: " + JSON.stringify(this.locations, null, 2));
+            logger_1.Log.Instance.Print("Saved locations are loaded in from location store at: '" + this.path + "'");
+            logger_1.Log.Instance.Debug("Locations loaded: " + JSON.stringify(this.locations, null, 2));
             this.InvokeStorageChanged();
             return true;
         }
         catch (e) {
-            logger_1.Logger.Error("Error loading locations from store: " + e.message);
-            notification_service_1.Notifications.Send(utils_1._("Error") + " - " + utils_1._("Location Store"), utils_1._("Failed to load in data from location storage, please see the logs for more information"));
+            logger_1.Log.Instance.Error("Error loading locations from store: " + e.message);
+            notification_service_1.NotificationService.Instance.Send(utils_1._("Error") + " - " + utils_1._("Location Store"), utils_1._("Failed to load in data from location storage, please see the logs for more information"));
             return false;
         }
     }

@@ -21,7 +21,7 @@ class MetNorway {
             return null;
         let json = await this.app.LoadJsonAsync(query);
         if (!json) {
-            logger_1.Logger.Error("MET Norway: Empty response from API");
+            logger_1.Log.Instance.Error("MET Norway: Empty response from API");
             return null;
         }
         return this.ParseWeather(json);
@@ -40,7 +40,7 @@ class MetNorway {
             }
         }
         if (startIndex != -1) {
-            logger_1.Logger.Debug("Removing outdated weather information...");
+            logger_1.Log.Instance.Debug("Removing outdated weather information...");
             json.properties.timeseries.splice(0, startIndex + 1);
         }
         return json;
@@ -493,7 +493,7 @@ class MetNorway {
                     icon: utils_1.weatherIconSafely(["weather-snow-scattered", "weather-snow"], iconType)
                 };
             default:
-                logger_1.Logger.Error("condition code not found: " + weather.condition);
+                logger_1.Log.Instance.Error("condition code not found: " + weather.condition);
                 return {
                     customIcon: "cloud-refresh-symbolic",
                     main: utils_1._("Unknown"),

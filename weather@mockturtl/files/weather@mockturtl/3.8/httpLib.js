@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Http = exports.HttpLib = void 0;
+exports.HttpLib = void 0;
 const logger_1 = require("./logger");
 const { Message, Session, ProxyResolverDefault, SessionAsync } = imports.gi.Soup;
 class HttpLib {
@@ -11,6 +11,11 @@ class HttpLib {
         this._httpSession.idle_timeout = 10;
         Session.prototype.add_feature.call(this._httpSession, new ProxyResolverDefault());
     }
+    static get Instance() {
+        if (this.instance == null)
+            this.instance = new HttpLib();
+        return this.instance;
+    }
     async LoadJsonAsync(url, params, method = "GET") {
         let response = await this.LoadAsync(url, params, method);
         if (!response.Success)
@@ -20,7 +25,7 @@ class HttpLib {
             response.Data = payload;
         }
         catch (e) {
-            logger_1.Logger.Error("Error: API response is not JSON. The response: " + response.Data);
+            logger_1.Log.Instance.Error("Error: API response is not JSON. The response: " + response.Data);
             response.Success = false;
             response.ErrorData = {
                 code: -1,
@@ -68,7 +73,7 @@ class HttpLib {
                 response: message
             };
         }
-        logger_1.Logger.Debug2("API full response: " + ((_b = (_a = message === null || message === void 0 ? void 0 : message.response_body) === null || _a === void 0 ? void 0 : _a.data) === null || _b === void 0 ? void 0 : _b.toString()));
+        logger_1.Log.Instance.Debug2("API full response: " + ((_b = (_a = message === null || message === void 0 ? void 0 : message.response_body) === null || _a === void 0 ? void 0 : _a.data) === null || _b === void 0 ? void 0 : _b.toString()));
         return {
             Success: (error == null),
             Data: (_c = message === null || message === void 0 ? void 0 : message.response_body) === null || _c === void 0 ? void 0 : _c.data,
@@ -86,7 +91,7 @@ class HttpLib {
             }
         }
         let query = encodeURI(url);
-        logger_1.Logger.Debug("URL called: " + query);
+        logger_1.Log.Instance.Debug("URL called: " + query);
         let data = await new Promise((resolve, reject) => {
             let message = Message.new(method, query);
             this._httpSession.queue_message(message, (session, message) => {
@@ -97,4 +102,4 @@ class HttpLib {
     }
 }
 exports.HttpLib = HttpLib;
-exports.Http = new HttpLib();
+HttpLib.instance = null;

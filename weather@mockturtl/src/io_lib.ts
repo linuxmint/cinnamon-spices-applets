@@ -2,7 +2,7 @@
 // IO
 // --------------------------
 
-import { Logger } from "./logger";
+import { Log } from "./logger";
 const Gio = imports.gi.Gio;
 const ByteArray = imports.byteArray;
 
@@ -29,7 +29,7 @@ export async function FileExists(file: imports.gi.Gio.File, dictionary: boolean 
         return true;*/
     }
     catch (e) {
-        Logger.Error("Cannot get file info for '" + file.get_path() + "', error: ");
+        Log.Instance.Error("Cannot get file info for '" + file.get_path() + "', error: ");
         global.log(e)
         return false;
     }
@@ -77,7 +77,7 @@ export async function DeleteFile(file: imports.gi.Gio.File): Promise<boolean> {
                     return true;
                 }
 
-                Logger.Error("Can't delete file, reason: ");
+                Log.Instance.Error("Can't delete file, reason: ");
                 global.log(e);
                 resolve(false);
                 return false;

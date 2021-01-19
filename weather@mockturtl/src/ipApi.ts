@@ -6,7 +6,7 @@
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
 
-import { Logger } from "./logger";
+import { Log } from "./logger";
 import { WeatherApplet } from "./main";
 import { LocationData } from "./types";
 import { _ } from "./utils";
@@ -47,11 +47,11 @@ export class IpApi {
                 entryText: json.lat + "," + json.lon,
                 locationSource: "ip-api"
             }
-            Logger.Debug("Location obtained:" + json.lat + "," + json.lon);
+            Log.Instance.Debug("Location obtained:" + json.lat + "," + json.lon);
             return result;
         }
         catch (e) {
-            Logger.Error("ip-api parsing error: " + e);
+            Log.Instance.Error("ip-api parsing error: " + e);
             this.app.ShowError({ type: "hard", detail: "no location", service: "ipapi", message: _("Could not obtain location") });
             return null;
         }
@@ -59,7 +59,7 @@ export class IpApi {
 
     HandleErrorResponse(json: any): void {
         this.app.ShowError({ type: "hard", detail: "bad api response", message: _("Location Service responded with errors, please see the logs in Looking Glass"), service: "ipapi" })
-        Logger.Error("ip-api responds with Error: " + json.reason);
+        Log.Instance.Error("ip-api responds with Error: " + json.reason);
     };
 };
 

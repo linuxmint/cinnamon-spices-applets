@@ -74,7 +74,7 @@ class Config {
     }
     IconTypeChanged() {
         this.app.ui.UpdateIconType(this.IconType());
-        logger_1.Logger.Debug("Symbolic icon setting changed");
+        logger_1.Log.Instance.Debug("Symbolic icon setting changed");
     }
     TemperatureUnit() {
         if (this._temperatureUnit == "automatic")
@@ -98,13 +98,13 @@ class Config {
     }
     ;
     OnLocationChanged() {
-        logger_1.Logger.Debug("User changed location, waiting 3 seconds...");
+        logger_1.Log.Instance.Debug("User changed location, waiting 3 seconds...");
         if (this.doneTypingLocation != null)
             utils_1.clearTimeout(this.doneTypingLocation);
         this.doneTypingLocation = utils_1.setTimeout(Lang.bind(this, this.DoneTypingLocation), 3000);
     }
     DoneTypingLocation() {
-        logger_1.Logger.Debug("User has finished typing, beginning refresh");
+        logger_1.Log.Instance.Debug("User has finished typing, beginning refresh");
         this.doneTypingLocation = null;
         this.app.refreshAndRebuild();
     }
@@ -122,7 +122,7 @@ class Config {
     }
     ;
     InjectLocationToConfig(loc, switchToManual = false) {
-        logger_1.Logger.Debug("Location setting is now: " + loc.entryText);
+        logger_1.Log.Instance.Debug("Location setting is now: " + loc.entryText);
         let text = loc.entryText + "";
         this.SetLocation(text);
         this.currentLocation = loc;
@@ -150,7 +150,7 @@ class Config {
         }
         let location = this.app.locationStore.FindLocation(this._location);
         if (location != null) {
-            logger_1.Logger.Debug("location exist in locationstore, retrieve");
+            logger_1.Log.Instance.Debug("location exist in locationstore, retrieve");
             this.app.locationStore.SwitchToLocation(location);
             this.InjectLocationToConfig(location, true);
             return location;
@@ -171,16 +171,16 @@ class Config {
             this.InjectLocationToConfig(location);
             return location;
         }
-        logger_1.Logger.Debug("Location is text, geolocating...");
+        logger_1.Log.Instance.Debug("Location is text, geolocating...");
         let locationData = await this.app.geoLocationService.GetLocation(loc);
         if (locationData == null)
             return null;
         if (!!(locationData === null || locationData === void 0 ? void 0 : locationData.entryText)) {
-            logger_1.Logger.Debug("Address found via address search");
+            logger_1.Log.Instance.Debug("Address found via address search");
         }
         location = this.app.locationStore.FindLocation(locationData.entryText);
         if (location != null) {
-            logger_1.Logger.Debug("Found location was found in locationStore, return that instead");
+            logger_1.Log.Instance.Debug("Found location was found in locationStore, return that instead");
             this.InjectLocationToConfig(location);
             this.app.locationStore.SwitchToLocation(location);
             return location;

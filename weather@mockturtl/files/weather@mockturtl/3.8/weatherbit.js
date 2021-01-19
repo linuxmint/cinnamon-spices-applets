@@ -64,7 +64,7 @@ class Weatherbit {
         json = json.data[0];
         let hourDiff = self.HourDifference(new Date(json.ts * 1000), self.ParseStringTime(json.ob_time));
         if (hourDiff != 0)
-            logger_1.Logger.Debug("Weatherbit reporting incorrect time, correcting with " + (0 - hourDiff).toString() + " hours");
+            logger_1.Log.Instance.Debug("Weatherbit reporting incorrect time, correcting with " + (0 - hourDiff).toString() + " hours");
         try {
             let weather = {
                 coord: {
@@ -103,7 +103,7 @@ class Weatherbit {
             return weather;
         }
         catch (e) {
-            logger_1.Logger.Error("Weatherbit Weather Parsing error: " + e);
+            logger_1.Log.Instance.Error("Weatherbit Weather Parsing error: " + e);
             self.app.ShowError({ type: "soft", service: "weatherbit", detail: "unusual payload", message: utils_1._("Failed to Process Current Weather Info") });
             return null;
         }
@@ -130,7 +130,7 @@ class Weatherbit {
             return forecasts;
         }
         catch (e) {
-            logger_1.Logger.Error("Weatherbit Forecast Parsing error: " + e);
+            logger_1.Log.Instance.Error("Weatherbit Forecast Parsing error: " + e);
             self.app.ShowError({ type: "soft", service: "weatherbit", detail: "unusual payload", message: utils_1._("Failed to Process Forecast Info") });
             return null;
         }
@@ -165,7 +165,7 @@ class Weatherbit {
             return forecasts;
         }
         catch (e) {
-            logger_1.Logger.Error("Weatherbit Forecast Parsing error: " + e);
+            logger_1.Log.Instance.Error("Weatherbit Forecast Parsing error: " + e);
             self.app.ShowError({ type: "soft", service: "weatherbit", detail: "unusual payload", message: utils_1._("Failed to Process Forecast Info") });
             return null;
         }
@@ -199,7 +199,7 @@ class Weatherbit {
     ConstructQuery(query, loc) {
         let key = this.app.config._apiKey.replace(" ", "");
         if (this.app.config.noApiKey()) {
-            logger_1.Logger.Error("DarkSky: No API Key given");
+            logger_1.Log.Instance.Error("DarkSky: No API Key given");
             this.app.ShowError({
                 type: "hard",
                 userError: true,
@@ -231,7 +231,7 @@ class Weatherbit {
     HandleHourlyError(message) {
         if (message.code == 403) {
             this.hourlyAccess = false;
-            logger_1.Logger.Print("Hourly forecast is inaccessible, skipping");
+            logger_1.Log.Instance.Print("Hourly forecast is inaccessible, skipping");
             this.app.ShowError({
                 type: "silent",
                 userError: false,

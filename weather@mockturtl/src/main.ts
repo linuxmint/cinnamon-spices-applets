@@ -20,10 +20,10 @@ import { USWeather } from "./us_weather";
 import { Weatherbit } from "./weatherbit";
 import { Yahoo } from "./yahoo";
 import { MetNorway } from "./met_norway";
-import { Http, HttpError, Method } from "./httpLib";
-import { Logger } from "./logger";
+import { HttpLib, HttpError, Method } from "./httpLib";
+import { Log } from "./logger";
 import { APPLET_ICON, REFRESH_ICON, UUID } from "./consts";
-import { Notifications } from "./notification_service";
+import { NotificationService } from "./notification_service";
 
 const { TextIconApplet, AllowedLayout, MenuItem } = imports.ui.applet;
 const { get_language_names } = imports.gi.GLib;
@@ -59,9 +59,9 @@ export class WeatherApplet extends TextIconApplet {
 		super(orientation, panelHeight, instanceId);
 		this.appletDir = metadata.path;
 		this.currentLocale = constructJsLocale(get_language_names()[0]);
-		Logger.Debug("Applet created with instanceID " + instanceId);
-        Logger.Debug("System locale is " + this.currentLocale);
-        Logger.Debug("AppletDir is: " + this.appletDir);
+		Log.Instance.Debug("Applet created with instanceID " + instanceId);
+        Log.Instance.Debug("System locale is " + this.currentLocale);
+        Log.Instance.Debug("AppletDir is: " + this.appletDir);
 
         // importing custom translations
         imports.gettext.bindtextdomain(UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
@@ -102,7 +102,7 @@ export class WeatherApplet extends TextIconApplet {
     private Unlock(): void {
         this.lock = false;
         if (this.refreshTriggeredWhileLocked) {
-            Logger.Print("Refreshing triggered by config change while refreshing, starting now...");
+            Log.Instance.Print("Refreshing triggered by config change while refreshing, starting now...");
             this.refreshTriggeredWhileLocked = false;
             this.refreshAndRebuild();
         }
@@ -138,7 +138,7 @@ export class WeatherApplet extends TextIconApplet {
 	 * @param method default is GET
 	 */
 	public async LoadJsonAsync<T>(url: string, params?: any, HandleError?: (message: HttpError) => boolean, method: Method = "GET"): Promise<T> {
-		let response = await Http.LoadJsonAsync<T>(url, params, method);
+		let response = await HttpLib.Instance.LoadJsonAsync<T>(url, params, method);
 		
 		if (!response.Success) {
             // check if caller wants
@@ -197,7 +197,7 @@ export class WeatherApplet extends TextIconApplet {
             return json;
         }
         catch(e) {
-            Logger.Error("Error calling command " + cmd + ", error: ");
+            Log.Instance.Error("Error calling command " + cmd + ", error: ");
             global.log(e);
             return null;
         }
@@ -240,7 +240,7 @@ export class WeatherApplet extends TextIconApplet {
 
     private async saveCurrentLocation(): Promise<void> {
         if (this.config.CurrentLocation.locationSource == "ip-api") {
-            Notifications.Send(_("Error") + " - " + _("Location Store"), _("You can't save a location obtained automatically, sorry"));
+            NotificationService.Instance.Send(_("Error") + " - " + _("Location Store"), _("You can't save a location obtained automatically, sorry"));
         }
         this.locationStore.SaveCurrentLocation(this.config.CurrentLocation);
     }
@@ -250,7 +250,7 @@ export class WeatherApplet extends TextIconApplet {
 	}
 
 	private onLocationStorageChanged(itemCount: number) {
-        Logger.Debug("On location storage callback called, number of locations now " + itemCount.toString());
+        Log.Instance.Debug("On location storage callback called, number of locations now " + itemCount.toString());
         // Hide/show location selectors based on how many items are in storage
         if (this.locationStore.ShouldShowLocationSelectors(this.config.CurrentLocation)) this.ui.ShowLocationSelectors();
         else this.ui.HideLocationSelectors();
@@ -296,7 +296,7 @@ export class WeatherApplet extends TextIconApplet {
         //this.sigMan.disconnectAllSignals();
         //this.settings && this.settings.finalize();
         //$.Debugger.destroy();
-        Logger.Print("Removing applet instance...")
+        Log.Instance.Print("Removing applet instance...")
         this.loop.Stop();
     }
 
@@ -366,7 +366,7 @@ export class WeatherApplet extends TextIconApplet {
     public async refreshWeather(rebuild: boolean, location?: LocationData): Promise<RefreshState> {
 		try {
 			if (this.lock) {
-				Logger.Print("Refreshing in progress, refresh skipped.");
+				Log.Instance.Print("Refreshing in progress, refresh skipped.");
 				return "locked";
 			}
 
@@ -402,13 +402,13 @@ export class WeatherApplet extends TextIconApplet {
 					return "failure";
 				}
 
-				Logger.Print("Weather Information refreshed");
+				Log.Instance.Print("Weather Information refreshed");
 				this.loop.ResetErrorCount();
 				this.Unlock();
 				return "success";
         }
         catch (e) {
-            Logger.Error("Generic Error while refreshing Weather info: " + e);
+            Log.Instance.Error("Generic Error while refreshing Weather info: " + e);
 			this.ShowError({ type: "hard", detail: "unknown", message: _("Unexpected Error While Refreshing Weather, please see log in Looking Glass") });
 			this.Unlock();
             return "failure";
@@ -489,10 +489,10 @@ export class WeatherApplet extends TextIconApplet {
 		if (this.encounteredError == true) return;
 		
         this.encounteredError = true;
-		Logger.Debug("User facing Error received, error: " + JSON.stringify(error, null, 2));
+		Log.Instance.Debug("User facing Error received, error: " + JSON.stringify(error, null, 2));
 		
         if (error.type == "hard") {
-            Logger.Debug("Displaying hard error");
+            Log.Instance.Debug("Displaying hard error");
             this.ui.rebuild(this.config);
             this.DisplayError(this.errMsg[error.detail], (!error.message) ? "" : error.message);
         }
@@ -513,7 +513,7 @@ export class WeatherApplet extends TextIconApplet {
         }
 
         let nextRefresh = this.loop.GetSecondsUntilNextRefresh();
-        Logger.Error("Retrying in the next " + nextRefresh.toString() + " seconds...");
+        Log.Instance.Error("Retrying in the next " + nextRefresh.toString() + " seconds...");
 	}
 	
 	//----------------------------------------------------------------------------------

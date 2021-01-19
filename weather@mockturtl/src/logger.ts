@@ -1,12 +1,22 @@
 import { UUID } from "./consts";
 
 export class Log {
+	// Static properties
+	
+	private static instance: Log = null;
+	/** Single instance of log */
+	public static get Instance() {
+		if (this.instance == null)
+			this.instance = new Log();
+		return this.instance;
+	}
+
     private ID: number;
     private debug: boolean = false;
     private level = 1;
     private appletDir: string;
 
-    constructor(_instanceId?: number) {
+    private constructor(_instanceId?: number) {
         this.ID = _instanceId;
         this.appletDir = imports.ui.appletManager.appletMeta[UUID].path;
         this.debug = this.DEBUG();
@@ -57,5 +67,3 @@ export class Log {
         return arr;
     }
 }
-
-export const Logger: Log = new Log();

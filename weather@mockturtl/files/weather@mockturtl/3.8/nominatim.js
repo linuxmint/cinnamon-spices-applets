@@ -17,7 +17,7 @@ class GeoLocation {
             searchText = searchText.trim();
             let cached = (_a = this.cache) === null || _a === void 0 ? void 0 : _a.searchText;
             if (cached != null) {
-                logger_1.Logger.Debug("Returning cached geolocation info for '" + searchText + "'.");
+                logger_1.Log.Instance.Debug("Returning cached geolocation info for '" + searchText + "'.");
                 return cached;
             }
             let locationData = await this.app.LoadJsonAsync(this.url + encodeURIComponent(searchText) + this.params);
@@ -29,7 +29,7 @@ class GeoLocation {
                 });
                 return null;
             }
-            logger_1.Logger.Debug("Location is found, payload: " + JSON.stringify(locationData, null, 2));
+            logger_1.Log.Instance.Debug("Location is found, payload: " + JSON.stringify(locationData, null, 2));
             let result = {
                 lat: parseFloat(locationData[0].lat),
                 lon: parseFloat(locationData[0].lon),
@@ -45,7 +45,7 @@ class GeoLocation {
             return result;
         }
         catch (e) {
-            logger_1.Logger.Error("Could not geo locate, error: " + JSON.stringify(e, null, 2));
+            logger_1.Log.Instance.Error("Could not geo locate, error: " + JSON.stringify(e, null, 2));
             this.app.ShowError({
                 type: "soft",
                 detail: "bad api response",

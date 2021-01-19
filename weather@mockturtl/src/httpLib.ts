@@ -1,14 +1,22 @@
-import { Logger } from "./logger";
+import { Log } from "./logger";
 import { ErrorDetail } from "./types";
 import { _ } from "./utils";
 
 const { Message, Session, ProxyResolverDefault, SessionAsync } = imports.gi.Soup;
 
 export class HttpLib {
+	private static instance: HttpLib = null;
+	/** Single instance of log */
+	public static get Instance() {
+		if (this.instance == null)
+			this.instance = new HttpLib();
+		return this.instance;
+	}
+
 	/** Soup session (see https://bugzilla.gnome.org/show_bug.cgi?id=661323#c64) */
 	private readonly _httpSession = new SessionAsync();
 
-	constructor() {
+	private constructor() {
 		this._httpSession.user_agent = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:37.0) Gecko/20100101 Firefox/37.0"; // ipapi blocks non-browsers agents, imitating browser
         this._httpSession.timeout = 10;
 		this._httpSession.idle_timeout = 10;
@@ -32,7 +40,7 @@ export class HttpLib {
 			response.Data = payload;
 		} 
 		catch (e) { // Payload is not JSON
-			Logger.Error("Error: API response is not JSON. The response: " + response.Data);
+			Log.Instance.Error("Error: API response is not JSON. The response: " + response.Data);
 			response.Success = false;
 			response.ErrorData = {
 				code: -1,
@@ -89,7 +97,7 @@ export class HttpLib {
 			}
 		}
 
-		Logger.Debug2("API full response: " + message?.response_body?.data?.toString());
+		Log.Instance.Debug2("API full response: " + message?.response_body?.data?.toString());
         return {
 			Success: (error == null),
 			Data: message?.response_body?.data,
@@ -116,7 +124,7 @@ export class HttpLib {
 		}
 
 		let query = encodeURI(url);
-		Logger.Debug("URL called: " + query);
+		Log.Instance.Debug("URL called: " + query);
 		let data: imports.gi.Soup.Message = await new Promise((resolve, reject) => {
 			let message = Message.new(method, query);
 			this._httpSession.queue_message(message, (session, message) => {
@@ -127,8 +135,6 @@ export class HttpLib {
 		return data;
 	}
 }
-
-export const Http = new HttpLib();
 
 // Declarations
 export type Method = "GET" | "POST" | "PUT" | "DELETE";

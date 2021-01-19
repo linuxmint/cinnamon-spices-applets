@@ -32,11 +32,11 @@ class IpApi {
                 entryText: json.lat + "," + json.lon,
                 locationSource: "ip-api"
             };
-            logger_1.Logger.Debug("Location obtained:" + json.lat + "," + json.lon);
+            logger_1.Log.Instance.Debug("Location obtained:" + json.lat + "," + json.lon);
             return result;
         }
         catch (e) {
-            logger_1.Logger.Error("ip-api parsing error: " + e);
+            logger_1.Log.Instance.Error("ip-api parsing error: " + e);
             this.app.ShowError({ type: "hard", detail: "no location", service: "ipapi", message: utils_1._("Could not obtain location") });
             return null;
         }
@@ -44,7 +44,7 @@ class IpApi {
     ;
     HandleErrorResponse(json) {
         this.app.ShowError({ type: "hard", detail: "bad api response", message: utils_1._("Location Service responded with errors, please see the logs in Looking Glass"), service: "ipapi" });
-        logger_1.Logger.Error("ip-api responds with Error: " + json.reason);
+        logger_1.Log.Instance.Error("ip-api responds with Error: " + json.reason);
     }
     ;
 }

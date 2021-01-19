@@ -31,7 +31,7 @@ class MetUk {
             return null;
         let loc = newLoc.lat.toString() + "," + newLoc.lon.toString();
         if (this.currentLocID == null || this.currentLocID != loc || this.forecastSite == null || this.observationSites == null || this.observationSites.length == 0) {
-            logger_1.Logger.Print("Downloading new site data");
+            logger_1.Log.Instance.Print("Downloading new site data");
             this.currentLoc = newLoc;
             this.currentLocID = loc;
             let forecastSite = await this.GetClosestForecastSite(newLoc);
@@ -44,10 +44,10 @@ class MetUk {
             this.observationSites = observationSites;
         }
         else {
-            logger_1.Logger.Debug("Site data downloading skipped");
+            logger_1.Log.Instance.Debug("Site data downloading skipped");
         }
         if (this.observationSites.length == 0 || this.forecastSite.dist > 100000) {
-            logger_1.Logger.Error("User is probably not in UK, aborting");
+            logger_1.Log.Instance.Error("User is probably not in UK, aborting");
             this.app.ShowError({
                 type: "hard",
                 userError: true,
@@ -77,7 +77,7 @@ class MetUk {
             return this.GetClosestSite(forecastSitelist, loc);
         }
         catch (e) {
-            logger_1.Logger.Error("Failed to get sitelist, error: " + JSON.stringify(e, null, 2));
+            logger_1.Log.Instance.Error("Failed to get sitelist, error: " + JSON.stringify(e, null, 2));
             this.app.ShowError({
                 type: "soft",
                 userError: true,
@@ -94,7 +94,7 @@ class MetUk {
             observationSiteList = await this.app.LoadJsonAsync(this.baseUrl + this.currentPrefix + this.sitesUrl + "?" + this.key);
         }
         catch (e) {
-            logger_1.Logger.Error("Failed to get sitelist, error: " + JSON.stringify(e, null, 2));
+            logger_1.Log.Instance.Error("Failed to get sitelist, error: " + JSON.stringify(e, null, 2));
             this.app.ShowError({
                 type: "soft",
                 userError: true,
@@ -113,19 +113,19 @@ class MetUk {
             observationSites.push(element);
         }
         observationSites = this.SortObservationSites(observationSites);
-        logger_1.Logger.Debug("Observation sites found: " + JSON.stringify(observationSites, null, 2));
+        logger_1.Log.Instance.Debug("Observation sites found: " + JSON.stringify(observationSites, null, 2));
         return observationSites;
     }
     async GetObservationData(observationSites) {
         let observations = [];
         for (let index = 0; index < observationSites.length; index++) {
             const element = observationSites[index];
-            logger_1.Logger.Debug("Getting observation data from station: " + element.id);
+            logger_1.Log.Instance.Debug("Getting observation data from station: " + element.id);
             let payload = await this.app.LoadJsonAsync(this.baseUrl + this.currentPrefix + element.id + "?res=hourly&" + this.key);
             if (!!payload)
                 observations.push(payload);
             else {
-                logger_1.Logger.Debug("Failed to get observations from " + element.id);
+                logger_1.Log.Instance.Debug("Failed to get observations from " + element.id);
             }
         }
         return observations;
@@ -133,7 +133,7 @@ class MetUk {
     async GetData(query, ParseFunction) {
         if (query == null)
             return null;
-        logger_1.Logger.Debug("Query: " + query);
+        logger_1.Log.Instance.Debug("Query: " + query);
         let json = await this.app.LoadJsonAsync(query);
         if (json == null)
             return null;
@@ -197,7 +197,7 @@ class MetUk {
             return weather;
         }
         catch (e) {
-            logger_1.Logger.Error("Met UK Weather Parsing error: " + e);
+            logger_1.Log.Instance.Error("Met UK Weather Parsing error: " + e);
             this.app.ShowError({ type: "soft", service: "met-uk", detail: "unusual payload", message: utils_1._("Failed to Process Current Weather Info") });
             return null;
         }
@@ -221,7 +221,7 @@ class MetUk {
             return forecasts;
         }
         catch (e) {
-            logger_1.Logger.Error("MET UK Forecast Parsing error: " + e);
+            logger_1.Log.Instance.Error("MET UK Forecast Parsing error: " + e);
             self.app.ShowError({ type: "soft", service: "met-uk", detail: "unusual payload", message: utils_1._("Failed to Process Forecast Info") });
             return null;
         }
@@ -257,7 +257,7 @@ class MetUk {
             return forecasts;
         }
         catch (e) {
-            logger_1.Logger.Error("MET UK Forecast Parsing error: " + e);
+            logger_1.Log.Instance.Error("MET UK Forecast Parsing error: " + e);
             self.app.ShowError({ type: "soft", service: "met-uk", detail: "unusual payload", message: utils_1._("Failed to Process Forecast Info") });
             return null;
         }
@@ -316,31 +316,31 @@ class MetUk {
                 + " metres";
             if ((result === null || result === void 0 ? void 0 : result.V) == null) {
                 result.V = nextObservation === null || nextObservation === void 0 ? void 0 : nextObservation.V;
-                logger_1.Logger.Debug("Visibility" + debugText);
+                logger_1.Log.Instance.Debug("Visibility" + debugText);
             }
             if ((result === null || result === void 0 ? void 0 : result.W) == null) {
                 result.W = nextObservation === null || nextObservation === void 0 ? void 0 : nextObservation.W;
-                logger_1.Logger.Debug("Weather condition" + debugText);
+                logger_1.Log.Instance.Debug("Weather condition" + debugText);
             }
             if ((result === null || result === void 0 ? void 0 : result.S) == null) {
                 result.S = nextObservation === null || nextObservation === void 0 ? void 0 : nextObservation.S;
-                logger_1.Logger.Debug("Wind Speed" + debugText);
+                logger_1.Log.Instance.Debug("Wind Speed" + debugText);
             }
             if ((result === null || result === void 0 ? void 0 : result.D) == null) {
                 result.D = nextObservation === null || nextObservation === void 0 ? void 0 : nextObservation.D;
-                logger_1.Logger.Debug("Wind degree" + debugText);
+                logger_1.Log.Instance.Debug("Wind degree" + debugText);
             }
             if ((result === null || result === void 0 ? void 0 : result.T) == null) {
                 result.T = nextObservation === null || nextObservation === void 0 ? void 0 : nextObservation.T;
-                logger_1.Logger.Debug("Temperature" + debugText);
+                logger_1.Log.Instance.Debug("Temperature" + debugText);
             }
             if ((result === null || result === void 0 ? void 0 : result.P) == null) {
                 result.P = nextObservation === null || nextObservation === void 0 ? void 0 : nextObservation.P;
-                logger_1.Logger.Debug("Pressure" + debugText);
+                logger_1.Log.Instance.Debug("Pressure" + debugText);
             }
             if ((result === null || result === void 0 ? void 0 : result.H) == null) {
                 result.H = nextObservation === null || nextObservation === void 0 ? void 0 : nextObservation.H;
-                logger_1.Logger.Debug("Humidity" + debugText);
+                logger_1.Log.Instance.Debug("Humidity" + debugText);
             }
         }
         return result;

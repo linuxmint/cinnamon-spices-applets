@@ -114,7 +114,7 @@ class DarkSky {
             return result;
         }
         catch (e) {
-            logger_1.Logger.Error("DarkSky payload parsing error: " + e);
+            logger_1.Log.Instance.Error("DarkSky payload parsing error: " + e);
             this.app.ShowError({ type: "soft", detail: "unusual payload", service: "darksky", message: utils_1._("Failed to Process Weather Info") });
             return null;
         }
@@ -132,7 +132,7 @@ class DarkSky {
         let query;
         let key = this.app.config._apiKey.replace(" ", "");
         if (this.app.config.noApiKey()) {
-            logger_1.Logger.Error("DarkSky: No API Key given");
+            logger_1.Log.Instance.Error("DarkSky: No API Key given");
             this.app.ShowError({
                 type: "hard",
                 userError: true,
@@ -175,13 +175,13 @@ class DarkSky {
         let code = json.code;
         let error = json.error;
         let errorMsg = "DarkSky API: ";
-        logger_1.Logger.Debug("DarksSky API error payload: " + json);
+        logger_1.Log.Instance.Debug("DarksSky API error payload: " + json);
         switch (code) {
             case "400":
-                logger_1.Logger.Error(errorMsg + error);
+                logger_1.Log.Instance.Error(errorMsg + error);
                 break;
             default:
-                logger_1.Logger.Error(errorMsg + error);
+                logger_1.Log.Instance.Error(errorMsg + error);
                 break;
         }
     }

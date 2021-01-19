@@ -2,7 +2,7 @@ import { WeatherApplet } from "./main";
 import { IpApi } from "./ipApi";
 import { SettingKeys, LocationData, DistanceUnitLocalePrefs, WindSpeedLocalePrefs } from "./types";
 import { clearTimeout, setTimeout, _, isCoordinate } from "./utils";
-import { Logger } from "./logger";
+import { Log } from "./logger";
 import { UUID, SIGNAL_CHANGED } from "./consts";
 
 const { AppletSettings, BindingDirection } = imports.ui.settings;
@@ -159,7 +159,7 @@ export class Config {
 
     private IconTypeChanged() {
         this.app.ui.UpdateIconType(this.IconType());
-        Logger.Debug("Symbolic icon setting changed");
+        Log.Instance.Debug("Symbolic icon setting changed");
 	}
 	
 	/**
@@ -199,14 +199,14 @@ export class Config {
 
     /** It was spamming refresh before, changed to wait until user stopped typing fro 3 seconds */
     private OnLocationChanged() {
-        Logger.Debug("User changed location, waiting 3 seconds...");
+        Log.Instance.Debug("User changed location, waiting 3 seconds...");
         if (this.doneTypingLocation != null) clearTimeout(this.doneTypingLocation);
         this.doneTypingLocation = setTimeout(Lang.bind(this, this.DoneTypingLocation), 3000);
     }
 
     /** Called when 3 seconds is up with no change in location */
     private DoneTypingLocation() {
-        Logger.Debug("User has finished typing, beginning refresh");
+		Log.Instance.Debug("User has finished typing, beginning refresh");
         this.doneTypingLocation = null;
         this.app.refreshAndRebuild();
     }
@@ -227,7 +227,7 @@ export class Config {
     };
 
     public InjectLocationToConfig(loc: LocationData, switchToManual: boolean = false) {
-        Logger.Debug("Location setting is now: " + loc.entryText);
+        Log.Instance.Debug("Location setting is now: " + loc.entryText);
         let text = loc.entryText + ""; // Only values can be injected into settings and not references, so we add empty string to it.
         this.SetLocation(text);
         this.currentLocation = loc;
@@ -269,7 +269,7 @@ export class Config {
         // Find location in storage
         let location = this.app.locationStore.FindLocation(this._location);
         if (location != null) {
-            Logger.Debug("location exist in locationstore, retrieve");
+            Log.Instance.Debug("location exist in locationstore, retrieve");
 			this.app.locationStore.SwitchToLocation(location);
             this.InjectLocationToConfig(location, true);
             return location;
@@ -293,18 +293,18 @@ export class Config {
             return location;
         }
 
-        Logger.Debug("Location is text, geolocating...")
+        Log.Instance.Debug("Location is text, geolocating...")
         let locationData = await this.app.geoLocationService.GetLocation(loc);
         // User facing errors are handled by service
         if (locationData == null) return null;
         if (!!locationData?.entryText) {
-            Logger.Debug("Address found via address search");
+            Log.Instance.Debug("Address found via address search");
         }
 
         // Maybe location is in locationStore, first search
         location = this.app.locationStore.FindLocation(locationData.entryText);
         if (location != null) {
-            Logger.Debug("Found location was found in locationStore, return that instead");
+            Log.Instance.Debug("Found location was found in locationStore, return that instead");
 			this.InjectLocationToConfig(location);
 			this.app.locationStore.SwitchToLocation(location);
             return location;
