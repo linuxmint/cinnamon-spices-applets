@@ -188,29 +188,29 @@ class WeatherApplet extends TextIconApplet {
         spawnCommandLine(command + "https://github.com/linuxmint/cinnamon-spices-applets/issues/new");
     }
     async saveCurrentLocation() {
-        if (this.config.currentLocation.locationSource == "ip-api") {
+        if (this.config.CurrentLocation.locationSource == "ip-api") {
             notification_service_1.Notifications.Send(utils_1._("Error") + " - " + utils_1._("Location Store"), utils_1._("You can't save a location obtained automatically, sorry"));
         }
-        this.locationStore.SaveCurrentLocation(this.config.currentLocation);
+        this.locationStore.SaveCurrentLocation(this.config.CurrentLocation);
     }
     async deleteCurrentLocation() {
-        this.locationStore.DeleteCurrentLocation(this.config.currentLocation);
+        this.locationStore.DeleteCurrentLocation(this.config.CurrentLocation);
     }
     onLocationStorageChanged(itemCount) {
         logger_1.Logger.Debug("On location storage callback called, number of locations now " + itemCount.toString());
-        if (this.locationStore.ShouldShowLocationSelectors(this.config.currentLocation))
+        if (this.locationStore.ShouldShowLocationSelectors(this.config.CurrentLocation))
             this.ui.ShowLocationSelectors();
         else
             this.ui.HideLocationSelectors();
     }
     NextLocationClicked() {
-        let nextLoc = this.locationStore.NextLocation(this.config.currentLocation);
+        let nextLoc = this.locationStore.NextLocation(this.config.CurrentLocation);
         if (nextLoc == null)
             return;
         this.refreshAndRebuild(nextLoc);
     }
     PreviousLocationClicked() {
-        let previousLoc = this.locationStore.PreviousLocation(this.config.currentLocation);
+        let previousLoc = this.locationStore.PreviousLocation(this.config.CurrentLocation);
         if (previousLoc == null)
             return;
         this.refreshAndRebuild(previousLoc);

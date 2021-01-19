@@ -58,6 +58,9 @@ class Config {
         this.settings = new AppletSettings(this, consts_1.UUID, instanceID);
         this.BindSettings();
     }
+    get CurrentLocation() {
+        return this.currentLocation;
+    }
     BindSettings() {
         for (let k in this.KEYS) {
             let key = this.KEYS[k];
@@ -148,6 +151,7 @@ class Config {
         let location = this.app.locationStore.FindLocation(this._location);
         if (location != null) {
             logger_1.Logger.Debug("location exist in locationstore, retrieve");
+            this.app.locationStore.SwitchToLocation(location);
             this.InjectLocationToConfig(location, true);
             return location;
         }
@@ -171,13 +175,14 @@ class Config {
         let locationData = await this.app.geoLocationService.GetLocation(loc);
         if (locationData == null)
             return null;
-        if (!!(locationData === null || locationData === void 0 ? void 0 : locationData.address_string)) {
-            logger_1.Logger.Debug("Address found via address search, placing found full address '" + locationData.address_string + "' back to location entry");
+        if (!!(locationData === null || locationData === void 0 ? void 0 : locationData.entryText)) {
+            logger_1.Logger.Debug("Address found via address search");
         }
         location = this.app.locationStore.FindLocation(locationData.entryText);
         if (location != null) {
-            logger_1.Logger.Print("Found location was found in locationStore, return that instead");
+            logger_1.Logger.Debug("Found location was found in locationStore, return that instead");
             this.InjectLocationToConfig(location);
+            this.app.locationStore.SwitchToLocation(location);
             return location;
         }
         else {

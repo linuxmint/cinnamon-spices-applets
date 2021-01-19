@@ -2,7 +2,7 @@ import { WeatherApplet } from "./main";
 import { IpApi } from "./ipApi";
 import { SettingKeys, LocationData, DistanceUnitLocalePrefs, WindSpeedLocalePrefs } from "./types";
 import { clearTimeout, setTimeout, _, isCoordinate } from "./utils";
-import { Log, Logger } from "./logger";
+import { Logger } from "./logger";
 import { UUID, SIGNAL_CHANGED } from "./consts";
 
 const { AppletSettings, BindingDirection } = imports.ui.settings;
@@ -115,7 +115,11 @@ export class Config {
 
     /** Timeout */
     private doneTypingLocation: any = null;
-    public currentLocation: LocationData = null;
+	private currentLocation: LocationData = null;
+	
+	public get CurrentLocation() {
+		return this.currentLocation;
+	}
 
     private settings: imports.ui.settings.AppletSettings;
 	private app: WeatherApplet;
@@ -266,7 +270,7 @@ export class Config {
         let location = this.app.locationStore.FindLocation(this._location);
         if (location != null) {
             Logger.Debug("location exist in locationstore, retrieve");
-            // TODO: change in locationstore as well
+			this.app.locationStore.SwitchToLocation(location);
             this.InjectLocationToConfig(location, true);
             return location;
         }
@@ -300,9 +304,9 @@ export class Config {
         // Maybe location is in locationStore, first search
         location = this.app.locationStore.FindLocation(locationData.entryText);
         if (location != null) {
-            // TODO: change in locationstore as well
-            Logger.Print("Found location was found in locationStore, return that instead");
-            this.InjectLocationToConfig(location);
+            Logger.Debug("Found location was found in locationStore, return that instead");
+			this.InjectLocationToConfig(location);
+			this.app.locationStore.SwitchToLocation(location);
             return location;
         }
         else {

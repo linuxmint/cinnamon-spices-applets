@@ -29,6 +29,12 @@ class LocationStore {
             configPath = GLib.get_home_dir() + "/.config";
         return configPath;
     }
+    SwitchToLocation(loc) {
+        let index = this.FindIndex(loc);
+        if (index == -1)
+            return false;
+        this.currentIndex = index;
+    }
     NextLocation(currentLoc) {
         logger_1.Logger.Debug("Current location: " + JSON.stringify(currentLoc, null, 2));
         if (this.locations.length == 0)
@@ -89,34 +95,6 @@ class LocationStore {
             timeZone: this.locations[previousIndex].timeZone,
             locationSource: this.locations[previousIndex].locationSource,
         };
-    }
-    FindLocation(entryText) {
-        for (let index = 0; index < this.locations.length; index++) {
-            const element = this.locations[index];
-            if (element.entryText == entryText)
-                return {
-                    address_string: element.address_string,
-                    country: element.country,
-                    city: element.city,
-                    entryText: element.entryText,
-                    lat: element.lat,
-                    lon: element.lon,
-                    mobile: element.mobile,
-                    timeZone: element.timeZone,
-                    locationSource: element.locationSource,
-                };
-        }
-        return null;
-    }
-    InStorage(loc) {
-        if (loc == null)
-            return false;
-        for (let index = 0; index < this.locations.length; index++) {
-            const element = this.locations[index];
-            if (element.lat.toString() == loc.lat.toString() && element.lon.toString() == loc.lon.toString())
-                return true;
-        }
-        return false;
     }
     ShouldShowLocationSelectors(currentLoc) {
         let threshold = this.InStorage(currentLoc) ? 2 : 1;
@@ -207,15 +185,36 @@ class LocationStore {
         await io_lib_1.WriteAsync(writeFile, JSON.stringify(this.locations, null, 2));
         await io_lib_1.CloseStream(writeFile);
     }
+    InStorage(loc) {
+        return this.FindIndex(loc) != -1;
+    }
     FindIndex(loc) {
         if (loc == null)
             return -1;
         for (let index = 0; index < this.locations.length; index++) {
             const element = this.locations[index];
-            if (element.lat.toString() == loc.lat.toString() && element.lon.toString() == loc.lon.toString())
+            if (element.entryText == loc.entryText)
                 return index;
         }
         return -1;
+    }
+    FindLocation(entryText) {
+        for (let index = 0; index < this.locations.length; index++) {
+            const element = this.locations[index];
+            if (element.entryText == entryText)
+                return {
+                    address_string: element.address_string,
+                    country: element.country,
+                    city: element.city,
+                    entryText: element.entryText,
+                    lat: element.lat,
+                    lon: element.lon,
+                    mobile: element.mobile,
+                    timeZone: element.timeZone,
+                    locationSource: element.locationSource,
+                };
+        }
+        return null;
     }
 }
 exports.LocationStore = LocationStore;

@@ -239,31 +239,31 @@ export class WeatherApplet extends TextIconApplet {
     }
 
     private async saveCurrentLocation(): Promise<void> {
-        if (this.config.currentLocation.locationSource == "ip-api") {
+        if (this.config.CurrentLocation.locationSource == "ip-api") {
             Notifications.Send(_("Error") + " - " + _("Location Store"), _("You can't save a location obtained automatically, sorry"));
         }
-        this.locationStore.SaveCurrentLocation(this.config.currentLocation);
+        this.locationStore.SaveCurrentLocation(this.config.CurrentLocation);
     }
 
     private async deleteCurrentLocation(): Promise<void> {
-        this.locationStore.DeleteCurrentLocation(this.config.currentLocation);
+        this.locationStore.DeleteCurrentLocation(this.config.CurrentLocation);
 	}
 
 	private onLocationStorageChanged(itemCount: number) {
         Logger.Debug("On location storage callback called, number of locations now " + itemCount.toString());
         // Hide/show location selectors based on how many items are in storage
-        if (this.locationStore.ShouldShowLocationSelectors(this.config.currentLocation)) this.ui.ShowLocationSelectors();
+        if (this.locationStore.ShouldShowLocationSelectors(this.config.CurrentLocation)) this.ui.ShowLocationSelectors();
         else this.ui.HideLocationSelectors();
 	}
 	
     public NextLocationClicked() {
-        let nextLoc = this.locationStore.NextLocation(this.config.currentLocation);
+        let nextLoc = this.locationStore.NextLocation(this.config.CurrentLocation);
         if (nextLoc == null) return;
         this.refreshAndRebuild(nextLoc);
     }
 
     public PreviousLocationClicked() {
-        let previousLoc = this.locationStore.PreviousLocation(this.config.currentLocation);
+        let previousLoc = this.locationStore.PreviousLocation(this.config.CurrentLocation);
         if (previousLoc == null) return;
         this.refreshAndRebuild(previousLoc);
     }
