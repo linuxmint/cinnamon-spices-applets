@@ -274,7 +274,7 @@ class USWeather {
         if (icon == null)
             return null;
         let code = icon.match(/(?!\/)[a-z_]+(?=(\?|,))/);
-        let iconType = this.app.config.IconType();
+        let iconType = this.app.config.IconType;
         switch (code[0]) {
             case "skc":
                 return {

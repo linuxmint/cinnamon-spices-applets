@@ -394,7 +394,7 @@ export class UI {
             }
             else {
                 this._currentWeatherIcon.icon_name = iconName;
-                this.UpdateIconType(config.IconType()); // Revert to user setting
+                this.UpdateIconType(config.IconType); // Revert to user setting
             }
 
             // Applet icon
@@ -403,8 +403,8 @@ export class UI {
             // Temperature
             let temp = "";
             if (weather.temperature != null) {
-                temp = TempToUserConfig(weather.temperature, config.TemperatureUnit(), config._tempRussianStyle);
-                this._currentWeatherTemperature.text = temp + " " + this.unitToUnicode(config.TemperatureUnit());
+                temp = TempToUserConfig(weather.temperature, config.TemperatureUnit, config._tempRussianStyle);
+                this._currentWeatherTemperature.text = temp + " " + this.unitToUnicode(config.TemperatureUnit);
             }
 
             // Applet panel label
@@ -418,7 +418,7 @@ export class UI {
                     if (label != "") {
                         label += " ";
                     }
-                    label += (temp + ' ' + this.unitToUnicode(config.TemperatureUnit()));
+                    label += (temp + ' ' + this.unitToUnicode(config.TemperatureUnit));
                 }
             }
             // Vertical panels
@@ -428,7 +428,7 @@ export class UI {
                     // Vertical panel width is more than this value then we has space
                     // to show units
                     if (this.app.GetPanelHeight() >= 35) {
-                        label += this.unitToUnicode(config.TemperatureUnit());
+                        label += this.unitToUnicode(config.TemperatureUnit);
                     }
                 }
             }
@@ -437,7 +437,7 @@ export class UI {
             if (nonempty(config._tempTextOverride)) {
                 label = config._tempTextOverride
                     .replace("{t}", temp)
-                    .replace("{u}", this.unitToUnicode(config.TemperatureUnit()))
+                    .replace("{u}", this.unitToUnicode(config.TemperatureUnit))
                     .replace("{c}", mainCondition);
             }
 
@@ -453,9 +453,9 @@ export class UI {
             let wind_direction = compassDirection(weather.wind.degree);
             this._currentWeatherWind.text =
                 (wind_direction != undefined ? _(wind_direction) + " " : "") +
-                MPStoUserUnits(weather.wind.speed, config.WindSpeedUnit());
+                MPStoUserUnits(weather.wind.speed, config.WindSpeedUnit);
             // No need to display unit to Beaufort scale
-            if (config.WindSpeedUnit() != "Beaufort") this._currentWeatherWind.text += " " + _(config.WindSpeedUnit());
+            if (config.WindSpeedUnit != "Beaufort") this._currentWeatherWind.text += " " + _(config.WindSpeedUnit);
 
             // API Unique display
             this._currentWeatherApiUnique.text = "";
@@ -468,7 +468,7 @@ export class UI {
                         value = weather.extra_field.value.toString() + "%";
                         break;
                     case "temperature":
-                        value = TempToUserConfig(weather.extra_field.value, config.TemperatureUnit(), config._tempRussianStyle) + " " + this.unitToUnicode(config.TemperatureUnit());
+                        value = TempToUserConfig(weather.extra_field.value, config.TemperatureUnit, config._tempRussianStyle) + " " + this.unitToUnicode(config.TemperatureUnit);
                         break;
                     default:
                         value = _(weather.extra_field.value);
@@ -513,8 +513,8 @@ export class UI {
                 let forecastData = weather.forecasts[i];
                 let forecastUi = this._forecast[i];
 
-                let t_low = TempToUserConfig(forecastData.temp_min, config.TemperatureUnit(), config._tempRussianStyle);
-                let t_high = TempToUserConfig(forecastData.temp_max, config.TemperatureUnit(), config._tempRussianStyle);
+                let t_low = TempToUserConfig(forecastData.temp_min, config.TemperatureUnit, config._tempRussianStyle);
+                let t_high = TempToUserConfig(forecastData.temp_max, config.TemperatureUnit, config._tempRussianStyle);
 
                 let first_temperature = config._temperatureHighFirst ? t_high : t_low;
                 let second_temperature = config._temperatureHighFirst ? t_low : t_high;
@@ -535,7 +535,7 @@ export class UI {
                 // As Russian Tradition, -temp...+temp
                 // See https://github.com/linuxmint/cinnamon-spices-applets/issues/618
                 forecastUi.Temperature.text += ((config._tempRussianStyle) ? ELLIPSIS : " " + FORWARD_SLASH + " ");
-                forecastUi.Temperature.text += second_temperature + ' ' + this.unitToUnicode(config.TemperatureUnit());
+                forecastUi.Temperature.text += second_temperature + ' ' + this.unitToUnicode(config.TemperatureUnit);
                 forecastUi.Summary.text = comment;
                 forecastUi.Icon.icon_name = (config._useCustomMenuIcons) ? forecastData.condition.customIcon : forecastData.condition.icon;
             }
@@ -558,8 +558,8 @@ export class UI {
         this._timestamp.text = _("As of") + " " + AwareDateString(weather.date, this.app.currentLocale, config._show24Hours);
         if (weather.location.distanceFrom != null) {
             this._timestamp.text += (
-                ", " + MetreToUserUnits(weather.location.distanceFrom, this.app.config.DistanceUnit())
-                + this.BigDistanceUnitFor(this.app.config.DistanceUnit()) + " " + _("from you")
+                ", " + MetreToUserUnits(weather.location.distanceFrom, this.app.config.DistanceUnit)
+                + this.BigDistanceUnitFor(this.app.config.DistanceUnit) + " " + _("from you")
             );
         }
         return true;
@@ -572,7 +572,7 @@ export class UI {
             const ui = this._hourlyForecasts[index];
 
             ui.Hour.text = GetHoursMinutes(hour.date, this.app.currentLocale, config._show24Hours, tz, this.app.config._shortHourlyTime);
-            ui.Temperature.text = TempToUserConfig(hour.temp, config.TemperatureUnit(), config._tempRussianStyle) + " " + this.unitToUnicode(config.TemperatureUnit());
+            ui.Temperature.text = TempToUserConfig(hour.temp, config.TemperatureUnit, config._tempRussianStyle) + " " + this.unitToUnicode(config.TemperatureUnit);
             ui.Icon.icon_name = (config._useCustomMenuIcons) ? hour.condition.customIcon : hour.condition.icon;
 
             hour.condition.main = capitalizeFirstLetter(hour.condition.main);
@@ -581,7 +581,7 @@ export class UI {
             if (!!hour.precipitation && hour.precipitation.type != "none") {
                 let precipitationText = null;
                 if (!!hour.precipitation.volume && hour.precipitation.volume > 0) {
-                    precipitationText = MillimeterToUserUnits(hour.precipitation.volume, this.app.config.DistanceUnit()) + " " + ((this.app.config.DistanceUnit() == "metric") ? _("mm") : _("in"));
+                    precipitationText = MillimeterToUserUnits(hour.precipitation.volume, this.app.config.DistanceUnit) + " " + ((this.app.config.DistanceUnit == "metric") ? _("mm") : _("in"));
                 }
                 if (!!hour.precipitation.chance) {
                     precipitationText = (precipitationText == null) ? "" : (precipitationText + ", ")
@@ -711,7 +711,7 @@ export class UI {
 
         // This will hold the icon for the current weather
         this._currentWeatherIcon = new Icon({
-            icon_type: config.IconType(),
+            icon_type: config.IconType,
             icon_size: 64,
             icon_name: APPLET_ICON,
             style_class: STYLE_ICON
@@ -893,7 +893,7 @@ export class UI {
             if (curRow >= maxRow) break;
 
             forecastWeather.Icon = new Icon({
-                icon_type: config.IconType(),
+                icon_type: config.IconType,
                 icon_size: 48,
                 icon_name: APPLET_ICON,
                 style_class: STYLE_FORECAST_ICON
@@ -1008,7 +1008,7 @@ export class UI {
                 // Override color on light theme for grey text
                 Hour: new Label({ text: "Hour", style_class: "hourly-time", style: this.GetTextColorStyle() }),
                 Icon: new Icon({
-                    icon_type: config.IconType(),
+                    icon_type: config.IconType,
                     icon_size: 24,
                     icon_name: APPLET_ICON,
                     style_class: "hourly-icon"

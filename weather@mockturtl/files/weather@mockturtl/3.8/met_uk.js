@@ -264,7 +264,7 @@ class MetUk {
     }
     VisibilityToText(dist) {
         let distance = parseInt(dist);
-        let unit = this.app.config.DistanceUnit();
+        let unit = this.app.config.DistanceUnit;
         if (distance < 1000)
             return utils_1._("Very poor - Less than") + " " + utils_1.MetreToUserUnits(1000, unit) + this.DistanceUnitFor(unit);
         if (distance < 4000)
@@ -374,7 +374,7 @@ class MetUk {
         return closest;
     }
     ResolveCondition(icon) {
-        let iconType = this.app.config.IconType();
+        let iconType = this.app.config.IconType;
         switch (icon) {
             case "NA":
                 return {

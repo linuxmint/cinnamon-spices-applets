@@ -322,7 +322,7 @@ export class MetUk implements WeatherProvider {
     /** https://www.metoffice.gov.uk/services/data/datapoint/code-definitions */
     private VisibilityToText(dist: string): string {
         let distance = parseInt(dist);
-        let unit = this.app.config.DistanceUnit();
+        let unit = this.app.config.DistanceUnit;
         if (distance < 1000) return _("Very poor - Less than") + " " + MetreToUserUnits(1000, unit) + this.DistanceUnitFor(unit);
         if (distance < 4000) return _("Poor - Between") + " " + MetreToUserUnits(1000, unit) + "-" + MetreToUserUnits(4000, unit) + " " + this.DistanceUnitFor(unit);
         if (distance < 10000) return _("Moderate - Between") + " " + MetreToUserUnits(4000, unit) + "-" + MetreToUserUnits(10000, unit) + " " + this.DistanceUnitFor(unit);
@@ -442,7 +442,7 @@ export class MetUk implements WeatherProvider {
     }
 
     private ResolveCondition(icon: string): Condition {
-        let iconType = this.app.config.IconType();
+        let iconType = this.app.config.IconType;
         switch (icon) {
             case "NA":
                 return {

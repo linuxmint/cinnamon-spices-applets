@@ -100,7 +100,7 @@ export class Yahoo implements WeatherProvider {
                 condition: {
                     main: (json.current_observation.condition.text),
                     description: json.current_observation.condition.text,
-                    icon: weatherIconSafely(this.ResolveIcon(json.current_observation.condition.code, { sunrise: sunrise, sunset: sunset }), this.app.config.IconType()),
+                    icon: weatherIconSafely(this.ResolveIcon(json.current_observation.condition.code, { sunrise: sunrise, sunset: sunset }), this.app.config.IconType),
                     customIcon: this.ResolveCustomIcon(json.current_observation.condition.code)
                 },
                 extra_field: {
@@ -120,7 +120,7 @@ export class Yahoo implements WeatherProvider {
                     condition: {
                         main: (day.text),
                         description: (day.text),
-                        icon: weatherIconSafely(this.ResolveIcon(day.code), this.app.config.IconType()),
+                        icon: weatherIconSafely(this.ResolveIcon(day.code), this.app.config.IconType),
                         customIcon: this.ResolveCustomIcon(day.code)
                     },
                 };

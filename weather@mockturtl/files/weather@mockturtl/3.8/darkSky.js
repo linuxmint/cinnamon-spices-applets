@@ -65,7 +65,7 @@ class DarkSky {
                 condition: {
                     main: this.GetShortCurrentSummary(json.currently.summary),
                     description: json.currently.summary,
-                    icon: utils_1.weatherIconSafely(this.ResolveIcon(json.currently.icon, { sunrise: sunrise, sunset: sunset }), this.app.config.IconType()),
+                    icon: utils_1.weatherIconSafely(this.ResolveIcon(json.currently.icon, { sunrise: sunrise, sunset: sunset }), this.app.config.IconType),
                     customIcon: this.ResolveCustomIcon(json.currently.icon)
                 },
                 extra_field: {
@@ -85,7 +85,7 @@ class DarkSky {
                     condition: {
                         main: this.GetShortSummary(day.summary),
                         description: this.ProcessSummary(day.summary),
-                        icon: utils_1.weatherIconSafely(this.ResolveIcon(day.icon), this.app.config.IconType()),
+                        icon: utils_1.weatherIconSafely(this.ResolveIcon(day.icon), this.app.config.IconType),
                         customIcon: this.ResolveCustomIcon(day.icon)
                     },
                 };
@@ -100,7 +100,7 @@ class DarkSky {
                     condition: {
                         main: this.GetShortSummary(hour.summary),
                         description: this.ProcessSummary(hour.summary),
-                        icon: utils_1.weatherIconSafely(this.ResolveIcon(hour.icon, { sunrise: sunrise, sunset: sunset }, new Date(hour.time * 1000)), this.app.config.IconType()),
+                        icon: utils_1.weatherIconSafely(this.ResolveIcon(hour.icon, { sunrise: sunrise, sunset: sunset }, new Date(hour.time * 1000)), this.app.config.IconType),
                         customIcon: this.ResolveCustomIcon(hour.icon)
                     },
                     precipitation: {
@@ -291,8 +291,8 @@ class DarkSky {
         }
     }
     SetQueryUnit() {
-        if (this.app.config.TemperatureUnit() == "celsius") {
-            if (this.app.config.WindSpeedUnit() == "kph" || this.app.config.WindSpeedUnit() == "m/s") {
+        if (this.app.config.TemperatureUnit == "celsius") {
+            if (this.app.config.WindSpeedUnit == "kph" || this.app.config.WindSpeedUnit == "m/s") {
                 this.unit = 'si';
             }
             else {

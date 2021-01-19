@@ -355,7 +355,7 @@ export class USWeather implements WeatherProvider {
     private ResolveCondition(icon: string, isNight: boolean = false): Condition {
         if (icon == null) return null;
         let code = icon.match(/(?!\/)[a-z_]+(?=(\?|,))/); // Clear cruft from icon url, leave only code
-        let iconType = this.app.config.IconType();
+        let iconType = this.app.config.IconType;
         switch (code[0]) {
             case "skc": // Fair/clear
                 return {

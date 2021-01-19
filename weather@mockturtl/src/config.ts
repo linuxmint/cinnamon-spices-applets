@@ -81,16 +81,17 @@ export class Config {
         SHOW_FORECAST_DATES: "showForecastDates"
     }
 
-    // Settings variables to bind to
+	// Settings variables to bind to
+	private readonly _location: string;
+	private readonly _temperatureUnit: WeatherUnits;
+	private readonly _windSpeedUnit: WeatherWindSpeedUnits;
+	private readonly _distanceUnit: DistanceUnits;
+
     public readonly _refreshInterval: number;
     public readonly _manualLocation: boolean;
     public readonly _dataService: Services;
-    private readonly _location: string;
     public readonly _translateCondition: boolean;
-    private readonly _temperatureUnit: WeatherUnits;
     public readonly _pressureUnit: WeatherPressureUnits;
-    private readonly _windSpeedUnit: WeatherWindSpeedUnits;
-    private readonly _distanceUnit: DistanceUnits;
     public readonly _show24Hours: boolean;
     public readonly _apiKey: string;
     public readonly _forecastDays: number;
@@ -116,10 +117,6 @@ export class Config {
     /** Timeout */
     private doneTypingLocation: any = null;
 	private currentLocation: LocationData = null;
-	
-	public get CurrentLocation() {
-		return this.currentLocation;
-	}
 
     private settings: imports.ui.settings.AppletSettings;
 	private app: WeatherApplet;
@@ -157,15 +154,14 @@ export class Config {
         this.settings.connect(SIGNAL_CHANGED + this.WEATHER_USE_SYMBOLIC_ICONS_KEY, Lang.bind(this, this.IconTypeChanged));
     }
 
-    private IconTypeChanged() {
-        this.app.ui.UpdateIconType(this.IconType());
-        Log.Instance.Debug("Symbolic icon setting changed");
+	public get CurrentLocation() {
+		return this.currentLocation;
 	}
 	
 	/**
 	 * @returns Units, automatic is already resolved here
 	 */
-	public TemperatureUnit(): WeatherUnits {
+	public get TemperatureUnit(): WeatherUnits {
 		if (this._temperatureUnit == "automatic") 
 			return this.GetLocaleTemperateUnit(this.countryCode);
 		return this._temperatureUnit;
@@ -174,7 +170,7 @@ export class Config {
 	/**
 	 * @returns Units, automatic is already resolved here
 	 */
-	public WindSpeedUnit(): WeatherWindSpeedUnits {
+	public get WindSpeedUnit(): WeatherWindSpeedUnits {
 		if (this._windSpeedUnit == "automatic") 
 			return this.GetLocaleWindSpeedUnit(this.countryCode);
 		return this._windSpeedUnit;
@@ -183,7 +179,7 @@ export class Config {
 	/**
 	 * @returns Units, automatic is already resolved here
 	 */
-	public DistanceUnit(): DistanceUnits {
+	public get DistanceUnit(): DistanceUnits {
 		if (this._distanceUnit == "automatic") return this.GetLocaleDistanceUnit(this.countryCode);
 		return this._distanceUnit;
 	}
@@ -191,33 +187,11 @@ export class Config {
 	/**
 	 * Gets Icon type based on user config
 	 */
-    public IconType(): imports.gi.St.IconType {
+    public get IconType(): imports.gi.St.IconType {
         return this.settings.getValue(this.WEATHER_USE_SYMBOLIC_ICONS_KEY) ?
             IconType.SYMBOLIC :
             IconType.FULLCOLOR
     };
-
-    /** It was spamming refresh before, changed to wait until user stopped typing fro 3 seconds */
-    private OnLocationChanged() {
-        Log.Instance.Debug("User changed location, waiting 3 seconds...");
-        if (this.doneTypingLocation != null) clearTimeout(this.doneTypingLocation);
-        this.doneTypingLocation = setTimeout(Lang.bind(this, this.DoneTypingLocation), 3000);
-    }
-
-    /** Called when 3 seconds is up with no change in location */
-    private DoneTypingLocation() {
-		Log.Instance.Debug("User has finished typing, beginning refresh");
-        this.doneTypingLocation = null;
-        this.app.refreshAndRebuild();
-    }
-
-    private OnSettingChanged() {
-        this.app.refreshAndRebuild();
-    }
-
-    public SetLocation(value: string) {
-        this.settings.setValue(this.WEATHER_LOCATION, value);
-    }
 
     public noApiKey(): boolean {
         if (this._apiKey == undefined || this._apiKey == "") {
@@ -316,6 +290,33 @@ export class Config {
 	}
 	
 	// UTILS
+
+	private IconTypeChanged() {
+        this.app.ui.UpdateIconType(this.IconType);
+        Log.Instance.Debug("Symbolic icon setting changed");
+	}
+
+	/** It was spamming refresh before, changed to wait until user stopped typing fro 3 seconds */
+	private OnLocationChanged() {
+		Log.Instance.Debug("User changed location, waiting 3 seconds...");
+		if (this.doneTypingLocation != null) clearTimeout(this.doneTypingLocation);
+		this.doneTypingLocation = setTimeout(Lang.bind(this, this.DoneTypingLocation), 3000);
+	}
+
+	/** Called when 3 seconds is up with no change in location */
+	private DoneTypingLocation() {
+		Log.Instance.Debug("User has finished typing, beginning refresh");
+		this.doneTypingLocation = null;
+		this.app.refreshAndRebuild();
+	}
+
+	private OnSettingChanged() {
+		this.app.refreshAndRebuild();
+	}
+
+	private SetLocation(value: string) {
+		this.settings.setValue(this.WEATHER_LOCATION, value);
+	}
 
 	private GetLocaleTemperateUnit(code: string): WeatherUnits {
 		if (code == null || this.fahrenheitCountries.indexOf(code) == -1) return "celsius";

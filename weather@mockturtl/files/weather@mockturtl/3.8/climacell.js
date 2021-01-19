@@ -175,161 +175,161 @@ class Climacell {
                     customIcon: "rain-symbolic",
                     description: utils_1._("Substantial Rain"),
                     main: utils_1._("Substantial Rain"),
-                    icon: utils_1.weatherIconSafely(["weather-rain", "weather-freezing-rain", "weather-showers-scattered"], this.app.config.IconType())
+                    icon: utils_1.weatherIconSafely(["weather-rain", "weather-freezing-rain", "weather-showers-scattered"], this.app.config.IconType)
                 };
             case ("rain"):
                 return {
                     customIcon: "rain-symbolic",
                     description: utils_1._("Rain"),
                     main: utils_1._("Rain"),
-                    icon: utils_1.weatherIconSafely(["weather-rain", "weather-freezing-rain", "weather-showers-scattered"], this.app.config.IconType())
+                    icon: utils_1.weatherIconSafely(["weather-rain", "weather-freezing-rain", "weather-showers-scattered"], this.app.config.IconType)
                 };
             case ("rain_light"):
                 return {
                     customIcon: "rain-mix-symbolic",
                     description: utils_1._("Light Rain"),
                     main: utils_1._("Light Rain"),
-                    icon: utils_1.weatherIconSafely(["weather-showers-scattered", "weather-rain", "weather-freezing-rain"], this.app.config.IconType())
+                    icon: utils_1.weatherIconSafely(["weather-showers-scattered", "weather-rain", "weather-freezing-rain"], this.app.config.IconType)
                 };
             case ("freezing_rain_heavy"):
                 return {
                     customIcon: "hail-symbolic",
                     description: utils_1._("Substantial Freezing Rain"),
                     main: utils_1._("Freezing Rain"),
-                    icon: utils_1.weatherIconSafely(["weather-freezing-rain", "weather-rain", "weather-showers-scattered"], this.app.config.IconType())
+                    icon: utils_1.weatherIconSafely(["weather-freezing-rain", "weather-rain", "weather-showers-scattered"], this.app.config.IconType)
                 };
             case ("freezing_rain"):
                 return {
                     customIcon: "hail-symbolic",
                     description: utils_1._("Freezing Rain"),
                     main: utils_1._("Freezing Rain"),
-                    icon: utils_1.weatherIconSafely(["weather-freezing-rain", "weather-rain", "weather-showers-scattered"], this.app.config.IconType())
+                    icon: utils_1.weatherIconSafely(["weather-freezing-rain", "weather-rain", "weather-showers-scattered"], this.app.config.IconType)
                 };
             case ("freezing_rain_light"):
                 return {
                     customIcon: "hail-symbolic",
                     description: utils_1._("Light Freezing Rain"),
                     main: utils_1._("Freezing Rain"),
-                    icon: utils_1.weatherIconSafely(["weather-showers-scattered", "weather-freezing-rain", "weather-rain"], this.app.config.IconType())
+                    icon: utils_1.weatherIconSafely(["weather-showers-scattered", "weather-freezing-rain", "weather-rain"], this.app.config.IconType)
                 };
             case ("freezing_drizzle"):
                 return {
                     customIcon: "sleet-symbolic",
                     description: utils_1._("Light freezing drizzle"),
                     main: utils_1._("Freezing Drizzle"),
-                    icon: utils_1.weatherIconSafely(["weather-showers-scattered", "weather-rain", "weather-freezing-rain"], this.app.config.IconType())
+                    icon: utils_1.weatherIconSafely(["weather-showers-scattered", "weather-rain", "weather-freezing-rain"], this.app.config.IconType)
                 };
             case ("drizzle"):
                 return {
                     customIcon: "sleet-symbolic",
                     description: utils_1._("Light Drizzle"),
                     main: utils_1._("Light Drizzle"),
-                    icon: utils_1.weatherIconSafely(["weather-showers-scattered", "weather-rain", "weather-freezing-rain"], this.app.config.IconType())
+                    icon: utils_1.weatherIconSafely(["weather-showers-scattered", "weather-rain", "weather-freezing-rain"], this.app.config.IconType)
                 };
             case ("ice_pellets_heavy"):
                 return {
                     customIcon: "snow-wind-symbolic",
                     description: utils_1._("Substantial Ice Pellets"),
                     main: utils_1._("Ice Pellets"),
-                    icon: utils_1.weatherIconSafely(["weather-freezing-rain", "weather-rain", "weather-showers-scattered"], this.app.config.IconType())
+                    icon: utils_1.weatherIconSafely(["weather-freezing-rain", "weather-rain", "weather-showers-scattered"], this.app.config.IconType)
                 };
             case ("ice_pellets"):
                 return {
                     customIcon: "snow-wind-symbolic",
                     description: utils_1._("Ice Pellets"),
                     main: utils_1._("Ice Pellets"),
-                    icon: utils_1.weatherIconSafely(["weather-freezing-rain", "weather-rain", "weather-showers-scattered"], this.app.config.IconType())
+                    icon: utils_1.weatherIconSafely(["weather-freezing-rain", "weather-rain", "weather-showers-scattered"], this.app.config.IconType)
                 };
             case ("ice_pellets_light"):
                 return {
                     customIcon: "snow-wind-symbolic",
                     description: utils_1._("Light Ice Pellets"),
                     main: utils_1._("Ice Pellets"),
-                    icon: utils_1.weatherIconSafely(["weather-freezing-rain", "weather-rain", "weather-showers-scattered"], this.app.config.IconType())
+                    icon: utils_1.weatherIconSafely(["weather-freezing-rain", "weather-rain", "weather-showers-scattered"], this.app.config.IconType)
                 };
             case ("snow_heavy"):
                 return {
                     customIcon: "snow-symbolic",
                     description: utils_1._("Substantial Snow"),
                     main: utils_1._("Substantial Snow"),
-                    icon: utils_1.weatherIconSafely(["weather-snow"], this.app.config.IconType())
+                    icon: utils_1.weatherIconSafely(["weather-snow"], this.app.config.IconType)
                 };
             case ("snow"):
                 return {
                     customIcon: "snow-symbolic",
                     description: utils_1._("Snow"),
                     main: utils_1._("Snow"),
-                    icon: utils_1.weatherIconSafely(["weather-snow"], this.app.config.IconType())
+                    icon: utils_1.weatherIconSafely(["weather-snow"], this.app.config.IconType)
                 };
             case ("snow_light"):
                 return {
                     customIcon: "snow-symbolic",
                     description: utils_1._("Light Snow"),
                     main: utils_1._("Light Snow"),
-                    icon: utils_1.weatherIconSafely(["weather-snow"], this.app.config.IconType())
+                    icon: utils_1.weatherIconSafely(["weather-snow"], this.app.config.IconType)
                 };
             case ("flurries"):
                 return {
                     customIcon: "cloudy-gusts-symbolic",
                     description: utils_1._("Flurries"),
                     main: utils_1._("Flurries"),
-                    icon: utils_1.weatherIconSafely(["weather-snow"], this.app.config.IconType())
+                    icon: utils_1.weatherIconSafely(["weather-snow"], this.app.config.IconType)
                 };
             case ("tstorm"):
                 return {
                     customIcon: "thunderstorm-symbolic",
                     description: utils_1._("Thunderstorm"),
                     main: utils_1._("Thunderstorm"),
-                    icon: utils_1.weatherIconSafely(["weather-storm"], this.app.config.IconType())
+                    icon: utils_1.weatherIconSafely(["weather-storm"], this.app.config.IconType)
                 };
             case ("fog_light"):
                 return {
                     customIcon: (isNight) ? "night-fog-symbolic" : "day-fog-symbolic",
                     description: utils_1._("Light Fog"),
                     main: utils_1._("Light Fog"),
-                    icon: utils_1.weatherIconSafely(["weather-fog"], this.app.config.IconType())
+                    icon: utils_1.weatherIconSafely(["weather-fog"], this.app.config.IconType)
                 };
             case ("fog"):
                 return {
                     customIcon: "fog-symbolic",
                     description: utils_1._("Fog"),
                     main: utils_1._("Fog"),
-                    icon: utils_1.weatherIconSafely(["weather-fog"], this.app.config.IconType())
+                    icon: utils_1.weatherIconSafely(["weather-fog"], this.app.config.IconType)
                 };
             case ("cloudy"):
                 return {
                     customIcon: "cloudy-symbolic",
                     description: utils_1._("Cloudy"),
                     main: utils_1._("Cloudy"),
-                    icon: (isNight) ? utils_1.weatherIconSafely(["weather-overcast", "weather-clouds-night", "weather-few-clouds-night"], this.app.config.IconType()) : utils_1.weatherIconSafely(["weather-overcast", "weather-clouds", "weather-few-clouds"], this.app.config.IconType())
+                    icon: (isNight) ? utils_1.weatherIconSafely(["weather-overcast", "weather-clouds-night", "weather-few-clouds-night"], this.app.config.IconType) : utils_1.weatherIconSafely(["weather-overcast", "weather-clouds", "weather-few-clouds"], this.app.config.IconType)
                 };
             case ("mostly_cloudy"):
                 return {
                     customIcon: (isNight) ? "night-alt-cloudy-symbolic" : "day-cloudy-symbolic",
                     description: utils_1._("Mostly Cloudy"),
                     main: utils_1._("Mostly Cloudy"),
-                    icon: utils_1.weatherIconSafely((isNight) ? ["weather-clouds-night", "weather-few-clouds-night", "weather-overcast"] : ["weather-clouds", "weather-few-clouds", "weather-overcast"], this.app.config.IconType())
+                    icon: utils_1.weatherIconSafely((isNight) ? ["weather-clouds-night", "weather-few-clouds-night", "weather-overcast"] : ["weather-clouds", "weather-few-clouds", "weather-overcast"], this.app.config.IconType)
                 };
             case ("partly_cloudy"):
                 return {
                     customIcon: (isNight) ? "night-alt-cloudy-symbolic" : "day-cloudy-symbolic",
                     description: utils_1._("Partly Cloudy"),
                     main: utils_1._("Partly Cloudy"),
-                    icon: utils_1.weatherIconSafely((isNight) ? ["weather-clouds-night", "weather-few-clouds-night", "weather-overcast"] : ["weather-clouds", "weather-few-clouds", "weather-overcast"], this.app.config.IconType())
+                    icon: utils_1.weatherIconSafely((isNight) ? ["weather-clouds-night", "weather-few-clouds-night", "weather-overcast"] : ["weather-clouds", "weather-few-clouds", "weather-overcast"], this.app.config.IconType)
                 };
             case ("mostly_clear"):
                 return {
                     customIcon: (isNight) ? "night-alt-partly-cloudy-symbolic" : "day-cloudy-symbolic",
                     description: utils_1._("Mostly Clear"),
                     main: utils_1._("Mostly Clear"),
-                    icon: utils_1.weatherIconSafely((isNight) ? ["weather-few-clouds-night", "weather-clouds-night", "weather-overcast"] : ["weather-few-clouds", "weather-clouds", "weather-overcast"], this.app.config.IconType())
+                    icon: utils_1.weatherIconSafely((isNight) ? ["weather-few-clouds-night", "weather-clouds-night", "weather-overcast"] : ["weather-few-clouds", "weather-clouds", "weather-overcast"], this.app.config.IconType)
                 };
             case ("clear"):
                 return {
                     customIcon: (isNight) ? "night-clear-symbolic" : "day-sunny-symbolic",
                     description: (isNight) ? utils_1._("Clear") : utils_1._("Sunny"),
                     main: (isNight) ? utils_1._("Clear") : utils_1._("Sunny"),
-                    icon: utils_1.weatherIconSafely((isNight) ? ["weather-clear-night"] : ["weather-clear"], this.app.config.IconType())
+                    icon: utils_1.weatherIconSafely((isNight) ? ["weather-clear-night"] : ["weather-clear"], this.app.config.IconType)
                 };
             default:
                 logger_1.Log.Instance.Error("condition code not found: " + condition);
@@ -337,7 +337,7 @@ class Climacell {
                     customIcon: "refresh-symbolic",
                     description: utils_1._("Unknown"),
                     main: utils_1._("Unknown"),
-                    icon: utils_1.weatherIconSafely(["weather-severe-alert"], this.app.config.IconType())
+                    icon: utils_1.weatherIconSafely(["weather-severe-alert"], this.app.config.IconType)
                 };
         }
     }

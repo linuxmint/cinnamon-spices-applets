@@ -208,7 +208,7 @@ export class WeatherApplet extends TextIconApplet {
     }
 
     public SetAppletIcon(iconName: string, customIcon: CustomIcons) {
-        this.config.IconType() == IconType.SYMBOLIC ?
+        this.config.IconType == IconType.SYMBOLIC ?
             this.set_applet_icon_symbolic_name(iconName) :
             this.set_applet_icon_name(iconName)
         if (this.config._useCustomAppletIcons) this.SetCustomIcon(customIcon);

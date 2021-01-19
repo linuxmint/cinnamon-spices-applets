@@ -250,13 +250,13 @@ class UI {
             }
             else {
                 this._currentWeatherIcon.icon_name = iconName;
-                this.UpdateIconType(config.IconType());
+                this.UpdateIconType(config.IconType);
             }
             this.app.SetAppletIcon(iconName, weather.condition.customIcon);
             let temp = "";
             if (weather.temperature != null) {
-                temp = utils_1.TempToUserConfig(weather.temperature, config.TemperatureUnit(), config._tempRussianStyle);
-                this._currentWeatherTemperature.text = temp + " " + this.unitToUnicode(config.TemperatureUnit());
+                temp = utils_1.TempToUserConfig(weather.temperature, config.TemperatureUnit, config._tempRussianStyle);
+                this._currentWeatherTemperature.text = temp + " " + this.unitToUnicode(config.TemperatureUnit);
             }
             let label = "";
             if (this.app.orientation != Side.LEFT && this.app.orientation != Side.RIGHT) {
@@ -267,21 +267,21 @@ class UI {
                     if (label != "") {
                         label += " ";
                     }
-                    label += (temp + ' ' + this.unitToUnicode(config.TemperatureUnit()));
+                    label += (temp + ' ' + this.unitToUnicode(config.TemperatureUnit));
                 }
             }
             else {
                 if (config._showTextInPanel) {
                     label = temp;
                     if (this.app.GetPanelHeight() >= 35) {
-                        label += this.unitToUnicode(config.TemperatureUnit());
+                        label += this.unitToUnicode(config.TemperatureUnit);
                     }
                 }
             }
             if (utils_1.nonempty(config._tempTextOverride)) {
                 label = config._tempTextOverride
                     .replace("{t}", temp)
-                    .replace("{u}", this.unitToUnicode(config.TemperatureUnit()))
+                    .replace("{u}", this.unitToUnicode(config.TemperatureUnit))
                     .replace("{c}", mainCondition);
             }
             this.app.SetAppletLabel(label);
@@ -291,9 +291,9 @@ class UI {
             let wind_direction = utils_1.compassDirection(weather.wind.degree);
             this._currentWeatherWind.text =
                 (wind_direction != undefined ? utils_1._(wind_direction) + " " : "") +
-                    utils_1.MPStoUserUnits(weather.wind.speed, config.WindSpeedUnit());
-            if (config.WindSpeedUnit() != "Beaufort")
-                this._currentWeatherWind.text += " " + utils_1._(config.WindSpeedUnit());
+                    utils_1.MPStoUserUnits(weather.wind.speed, config.WindSpeedUnit);
+            if (config.WindSpeedUnit != "Beaufort")
+                this._currentWeatherWind.text += " " + utils_1._(config.WindSpeedUnit);
             this._currentWeatherApiUnique.text = "";
             this._currentWeatherApiUniqueCap.text = "";
             if (!!weather.extra_field) {
@@ -304,7 +304,7 @@ class UI {
                         value = weather.extra_field.value.toString() + "%";
                         break;
                     case "temperature":
-                        value = utils_1.TempToUserConfig(weather.extra_field.value, config.TemperatureUnit(), config._tempRussianStyle) + " " + this.unitToUnicode(config.TemperatureUnit());
+                        value = utils_1.TempToUserConfig(weather.extra_field.value, config.TemperatureUnit, config._tempRussianStyle) + " " + this.unitToUnicode(config.TemperatureUnit);
                         break;
                     default:
                         value = utils_1._(weather.extra_field.value);
@@ -343,8 +343,8 @@ class UI {
             for (let i = 0; i < len; i++) {
                 let forecastData = weather.forecasts[i];
                 let forecastUi = this._forecast[i];
-                let t_low = utils_1.TempToUserConfig(forecastData.temp_min, config.TemperatureUnit(), config._tempRussianStyle);
-                let t_high = utils_1.TempToUserConfig(forecastData.temp_max, config.TemperatureUnit(), config._tempRussianStyle);
+                let t_low = utils_1.TempToUserConfig(forecastData.temp_min, config.TemperatureUnit, config._tempRussianStyle);
+                let t_high = utils_1.TempToUserConfig(forecastData.temp_max, config.TemperatureUnit, config._tempRussianStyle);
                 let first_temperature = config._temperatureHighFirst ? t_high : t_low;
                 let second_temperature = config._temperatureHighFirst ? t_low : t_high;
                 let comment = "";
@@ -358,7 +358,7 @@ class UI {
                 forecastUi.Day.text = dayName;
                 forecastUi.Temperature.text = first_temperature;
                 forecastUi.Temperature.text += ((config._tempRussianStyle) ? consts_1.ELLIPSIS : " " + consts_1.FORWARD_SLASH + " ");
-                forecastUi.Temperature.text += second_temperature + ' ' + this.unitToUnicode(config.TemperatureUnit());
+                forecastUi.Temperature.text += second_temperature + ' ' + this.unitToUnicode(config.TemperatureUnit);
                 forecastUi.Summary.text = comment;
                 forecastUi.Icon.icon_name = (config._useCustomMenuIcons) ? forecastData.condition.customIcon : forecastData.condition.icon;
             }
@@ -381,8 +381,8 @@ class UI {
         this._providerCredit.url = provider.website;
         this._timestamp.text = utils_1._("As of") + " " + utils_1.AwareDateString(weather.date, this.app.currentLocale, config._show24Hours);
         if (weather.location.distanceFrom != null) {
-            this._timestamp.text += (", " + utils_1.MetreToUserUnits(weather.location.distanceFrom, this.app.config.DistanceUnit())
-                + this.BigDistanceUnitFor(this.app.config.DistanceUnit()) + " " + utils_1._("from you"));
+            this._timestamp.text += (", " + utils_1.MetreToUserUnits(weather.location.distanceFrom, this.app.config.DistanceUnit)
+                + this.BigDistanceUnitFor(this.app.config.DistanceUnit) + " " + utils_1._("from you"));
         }
         return true;
     }
@@ -392,7 +392,7 @@ class UI {
             const hour = forecasts[index];
             const ui = this._hourlyForecasts[index];
             ui.Hour.text = utils_1.GetHoursMinutes(hour.date, this.app.currentLocale, config._show24Hours, tz, this.app.config._shortHourlyTime);
-            ui.Temperature.text = utils_1.TempToUserConfig(hour.temp, config.TemperatureUnit(), config._tempRussianStyle) + " " + this.unitToUnicode(config.TemperatureUnit());
+            ui.Temperature.text = utils_1.TempToUserConfig(hour.temp, config.TemperatureUnit, config._tempRussianStyle) + " " + this.unitToUnicode(config.TemperatureUnit);
             ui.Icon.icon_name = (config._useCustomMenuIcons) ? hour.condition.customIcon : hour.condition.icon;
             hour.condition.main = utils_1.capitalizeFirstLetter(hour.condition.main);
             if (config._translateCondition)
@@ -401,7 +401,7 @@ class UI {
             if (!!hour.precipitation && hour.precipitation.type != "none") {
                 let precipitationText = null;
                 if (!!hour.precipitation.volume && hour.precipitation.volume > 0) {
-                    precipitationText = utils_1.MillimeterToUserUnits(hour.precipitation.volume, this.app.config.DistanceUnit()) + " " + ((this.app.config.DistanceUnit() == "metric") ? utils_1._("mm") : utils_1._("in"));
+                    precipitationText = utils_1.MillimeterToUserUnits(hour.precipitation.volume, this.app.config.DistanceUnit) + " " + ((this.app.config.DistanceUnit == "metric") ? utils_1._("mm") : utils_1._("in"));
                 }
                 if (!!hour.precipitation.chance) {
                     precipitationText = (precipitationText == null) ? "" : (precipitationText + ", ");
@@ -508,7 +508,7 @@ class UI {
             text: consts_1.ELLIPSIS
         };
         this._currentWeatherIcon = new Icon({
-            icon_type: config.IconType(),
+            icon_type: config.IconType,
             icon_size: 64,
             icon_name: consts_1.APPLET_ICON,
             style_class: STYLE_ICON
@@ -649,7 +649,7 @@ class UI {
             if (curRow >= maxRow)
                 break;
             forecastWeather.Icon = new Icon({
-                icon_type: config.IconType(),
+                icon_type: config.IconType,
                 icon_size: 48,
                 icon_name: consts_1.APPLET_ICON,
                 style_class: STYLE_FORECAST_ICON
@@ -742,7 +742,7 @@ class UI {
             this._hourlyForecasts.push({
                 Hour: new Label({ text: "Hour", style_class: "hourly-time", style: this.GetTextColorStyle() }),
                 Icon: new Icon({
-                    icon_type: config.IconType(),
+                    icon_type: config.IconType,
                     icon_size: 24,
                     icon_name: consts_1.APPLET_ICON,
                     style_class: "hourly-icon"

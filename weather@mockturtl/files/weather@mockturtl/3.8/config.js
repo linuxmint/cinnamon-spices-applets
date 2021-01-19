@@ -73,47 +73,30 @@ class Config {
         this.settings.connect(consts_1.SIGNAL_CHANGED + this.WEATHER_USE_SYMBOLIC_ICONS_KEY, Lang.bind(this, this.IconTypeChanged));
     }
     IconTypeChanged() {
-        this.app.ui.UpdateIconType(this.IconType());
+        this.app.ui.UpdateIconType(this.IconType);
         logger_1.Log.Instance.Debug("Symbolic icon setting changed");
     }
-    TemperatureUnit() {
+    get TemperatureUnit() {
         if (this._temperatureUnit == "automatic")
             return this.GetLocaleTemperateUnit(this.countryCode);
         return this._temperatureUnit;
     }
-    WindSpeedUnit() {
+    get WindSpeedUnit() {
         if (this._windSpeedUnit == "automatic")
             return this.GetLocaleWindSpeedUnit(this.countryCode);
         return this._windSpeedUnit;
     }
-    DistanceUnit() {
+    get DistanceUnit() {
         if (this._distanceUnit == "automatic")
             return this.GetLocaleDistanceUnit(this.countryCode);
         return this._distanceUnit;
     }
-    IconType() {
+    get IconType() {
         return this.settings.getValue(this.WEATHER_USE_SYMBOLIC_ICONS_KEY) ?
             IconType.SYMBOLIC :
             IconType.FULLCOLOR;
     }
     ;
-    OnLocationChanged() {
-        logger_1.Log.Instance.Debug("User changed location, waiting 3 seconds...");
-        if (this.doneTypingLocation != null)
-            utils_1.clearTimeout(this.doneTypingLocation);
-        this.doneTypingLocation = utils_1.setTimeout(Lang.bind(this, this.DoneTypingLocation), 3000);
-    }
-    DoneTypingLocation() {
-        logger_1.Log.Instance.Debug("User has finished typing, beginning refresh");
-        this.doneTypingLocation = null;
-        this.app.refreshAndRebuild();
-    }
-    OnSettingChanged() {
-        this.app.refreshAndRebuild();
-    }
-    SetLocation(value) {
-        this.settings.setValue(this.WEATHER_LOCATION, value);
-    }
     noApiKey() {
         if (this._apiKey == undefined || this._apiKey == "") {
             return true;
@@ -189,6 +172,23 @@ class Config {
             this.InjectLocationToConfig(locationData);
             return locationData;
         }
+    }
+    OnLocationChanged() {
+        logger_1.Log.Instance.Debug("User changed location, waiting 3 seconds...");
+        if (this.doneTypingLocation != null)
+            utils_1.clearTimeout(this.doneTypingLocation);
+        this.doneTypingLocation = utils_1.setTimeout(Lang.bind(this, this.DoneTypingLocation), 3000);
+    }
+    DoneTypingLocation() {
+        logger_1.Log.Instance.Debug("User has finished typing, beginning refresh");
+        this.doneTypingLocation = null;
+        this.app.refreshAndRebuild();
+    }
+    OnSettingChanged() {
+        this.app.refreshAndRebuild();
+    }
+    SetLocation(value) {
+        this.settings.setValue(this.WEATHER_LOCATION, value);
     }
     GetLocaleTemperateUnit(code) {
         if (code == null || this.fahrenheitCountries.indexOf(code) == -1)
