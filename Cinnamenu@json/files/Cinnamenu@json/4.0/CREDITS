@@ -1,5 +1,8 @@
 This is a continuation of Cinnamenu by Jason Hicks - https://github.com/jaszhix/Cinnamenu
 
+search.py taken from placesCenter@scollins cinnamon applet https://github.com/linuxmint/cinnamon-spices-applets/tree/master/placesCenter%40scollins
+
+---------------
 Forked from Gnomenu by The Panacea Projects - https://github.com/The-Panacea-Projects/Gnomenu.
 
 A large part of this code was copied from the Mint menu and Axe menu extensions. Many thanks to those developers for their great extensions and laying the foundation for Cinnamenu.
