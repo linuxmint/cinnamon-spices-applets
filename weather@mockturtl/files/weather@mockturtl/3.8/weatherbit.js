@@ -209,7 +209,7 @@ class Weatherbit {
             return "";
         }
         query = query + "key=" + key + "&lat=" + loc.lat + "&lon=" + loc.lon + "&units=S";
-        let lang = this.ConvertToAPILocale(this.app.currentLocale);
+        let lang = this.ConvertToAPILocale(this.app.config.currentLocale);
         if (utils_1.isLangSupported(lang, this.supportedLanguages) && this.app.config._translateCondition) {
             query = query + "&lang=" + lang;
         }

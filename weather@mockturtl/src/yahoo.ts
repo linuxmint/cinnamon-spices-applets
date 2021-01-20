@@ -36,7 +36,7 @@ export class Yahoo implements WeatherProvider {
         let json;
         if (loc != null) {
             try {
-                json = await this.app.SpawnProcess(["python3", this.app.appletDir + "/../yahoo-bridge.py", "--params", JSON.stringify({ lat: loc.lat.toString(), lon: loc.lon.toString() })]);
+                json = await this.app.SpawnProcess(["python3", this.app.AppletDir + "/../yahoo-bridge.py", "--params", JSON.stringify({ lat: loc.lat.toString(), lon: loc.lon.toString() })]);
             }
             catch (e) {
                 this.app.ShowError({ type: "hard", service: "yahoo", detail: "unknown", message: _("Unknown Error happened while calling Yahoo bridge,\n see Looking Glass log for errors") })

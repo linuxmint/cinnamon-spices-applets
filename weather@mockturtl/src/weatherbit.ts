@@ -259,10 +259,10 @@ export class Weatherbit implements WeatherProvider {
                 message: _("Please enter API key in settings,\nor get one first on https://www.weatherbit.io/account/create")
             });
             return "";
-        }
+		}
 
         query = query + "key=" + key + "&lat=" + loc.lat + "&lon=" + loc.lon + "&units=S"
-        let lang = this.ConvertToAPILocale(this.app.currentLocale);
+        let lang = this.ConvertToAPILocale(this.app.config.currentLocale);
         if (isLangSupported(lang, this.supportedLanguages) && this.app.config._translateCondition) {
             query = query + "&lang=" + lang;
         }

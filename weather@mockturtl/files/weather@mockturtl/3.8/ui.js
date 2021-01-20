@@ -57,7 +57,7 @@ class UI {
         if (newThemeIsLight != this.lightTheme) {
             this.lightTheme = newThemeIsLight;
         }
-        this.App.refreshAndRebuild();
+        this.App.RefreshAndRebuild();
     }
     IsLightTheme() {
         let color = this.menu.actor.get_theme_node().get_color("color");
@@ -184,7 +184,7 @@ class UI {
             if (utils_1.nonempty(config._locationLabelOverride)) {
                 location = config._locationLabelOverride;
             }
-            this.App.SetAppletTooltip(location + " - " + utils_1._("As of") + " " + utils_1.AwareDateString(weather.date, this.App.currentLocale, config._show24Hours));
+            this.App.SetAppletTooltip(location + " - " + utils_1._("As of") + " " + utils_1.AwareDateString(weather.date, this.App.config.currentLocale, config._show24Hours));
             this._currentWeatherSummary.text = descriptionCondition;
             let iconName = weather.condition.icon;
             if (iconName == null) {
@@ -205,7 +205,7 @@ class UI {
                 this._currentWeatherTemperature.text = temp + " " + this.unitToUnicode(config.TemperatureUnit);
             }
             let label = "";
-            if (this.App.orientation != Side.LEFT && this.App.orientation != Side.RIGHT) {
+            if (this.App.Orientation != Side.LEFT && this.App.Orientation != Side.RIGHT) {
                 if (config._showCommentInPanel) {
                     label += mainCondition;
                 }
@@ -268,8 +268,8 @@ class UI {
             let sunriseText = "";
             let sunsetText = "";
             if (weather.sunrise != null && weather.sunset != null && config._showSunrise) {
-                sunriseText = (utils_1.GetHoursMinutes(weather.sunrise, this.App.currentLocale, config._show24Hours, weather.location.timeZone));
-                sunsetText = (utils_1.GetHoursMinutes(weather.sunset, this.App.currentLocale, config._show24Hours, weather.location.timeZone));
+                sunriseText = (utils_1.GetHoursMinutes(weather.sunrise, this.App.config.currentLocale, config._show24Hours, weather.location.timeZone));
+                sunsetText = (utils_1.GetHoursMinutes(weather.sunset, this.App.config.currentLocale, config._show24Hours, weather.location.timeZone));
             }
             this._currentWeatherSunrise.text = sunriseText;
             this._currentWeatherSunset.text = sunsetText;
@@ -300,7 +300,7 @@ class UI {
                     if (config._translateCondition)
                         comment = utils_1._(comment);
                 }
-                let dayName = utils_1.GetDayName(forecastData.date, this.App.currentLocale, this.App.config._showForecastDates, weather.location.timeZone);
+                let dayName = utils_1.GetDayName(forecastData.date, this.App.config.currentLocale, this.App.config._showForecastDates, weather.location.timeZone);
                 forecastUi.Day.text = dayName;
                 forecastUi.Temperature.text = first_temperature;
                 forecastUi.Temperature.text += ((config._tempRussianStyle) ? consts_1.ELLIPSIS : " " + consts_1.FORWARD_SLASH + " ");
@@ -325,7 +325,7 @@ class UI {
     DisplayBar(weather, provider, config) {
         this._providerCredit.label = utils_1._("Powered by") + " " + provider.prettyName;
         this._providerCredit.url = provider.website;
-        this._timestamp.text = utils_1._("As of") + " " + utils_1.AwareDateString(weather.date, this.App.currentLocale, config._show24Hours);
+        this._timestamp.text = utils_1._("As of") + " " + utils_1.AwareDateString(weather.date, this.App.config.currentLocale, config._show24Hours);
         if (weather.location.distanceFrom != null) {
             this._timestamp.text += (", " + utils_1.MetreToUserUnits(weather.location.distanceFrom, this.App.config.DistanceUnit)
                 + this.BigDistanceUnitFor(this.App.config.DistanceUnit) + " " + utils_1._("from you"));
@@ -337,7 +337,7 @@ class UI {
         for (let index = 0; index < max; index++) {
             const hour = forecasts[index];
             const ui = this._hourlyForecasts[index];
-            ui.Hour.text = utils_1.GetHoursMinutes(hour.date, this.App.currentLocale, config._show24Hours, tz, this.App.config._shortHourlyTime);
+            ui.Hour.text = utils_1.GetHoursMinutes(hour.date, this.App.config.currentLocale, config._show24Hours, tz, this.App.config._shortHourlyTime);
             ui.Temperature.text = utils_1.TempToUserConfig(hour.temp, config.TemperatureUnit, config._tempRussianStyle) + " " + this.unitToUnicode(config.TemperatureUnit);
             ui.Icon.icon_name = (config._useCustomMenuIcons) ? hour.condition.customIcon : hour.condition.icon;
             hour.condition.main = utils_1.capitalizeFirstLetter(hour.condition.main);
@@ -426,6 +426,14 @@ class UI {
     HideLocationSelectors() {
         this._nextLocationButton.actor.hide();
         this._previousLocationButton.actor.hide();
+    }
+    NextLocationClicked() {
+        let loc = this.App.config.SwitchToNextLocation();
+        this.App.RefreshAndRebuild(loc);
+    }
+    PreviousLocationClicked() {
+        let loc = this.App.config.SwitchToPreviousLocation();
+        this.App.RefreshAndRebuild(loc);
     }
     AdjustHourlyBoxItemWidth() {
         let requiredWidth = 0;
@@ -544,7 +552,7 @@ class UI {
                 style_class: STYLE_LOCATION_SELECTOR
             }),
         });
-        this._nextLocationButton.actor.connect(consts_1.SIGNAL_CLICKED, Lang.bind(this.App, this.App.NextLocationClicked));
+        this._nextLocationButton.actor.connect(consts_1.SIGNAL_CLICKED, Lang.bind(this, this.NextLocationClicked));
         this._previousLocationButton = new weatherbutton_1.WeatherButton({
             reactive: true,
             can_focus: true,
@@ -555,7 +563,7 @@ class UI {
                 style_class: STYLE_LOCATION_SELECTOR
             }),
         });
-        this._previousLocationButton.actor.connect(consts_1.SIGNAL_CLICKED, Lang.bind(this.App, this.App.PreviousLocationClicked));
+        this._previousLocationButton.actor.connect(consts_1.SIGNAL_CLICKED, Lang.bind(this, this.PreviousLocationClicked));
         this._locationBox = new BoxLayout();
         this._locationBox.add(this._previousLocationButton.actor, { x_fill: false, x_align: Align.START, y_align: Align.MIDDLE, expand: false });
         this._locationBox.add(this._currentWeatherLocation, { x_fill: true, x_align: Align.MIDDLE, y_align: Align.MIDDLE, expand: true });

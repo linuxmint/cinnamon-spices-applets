@@ -18,14 +18,12 @@ const logger_1 = require("./logger");
 const consts_1 = require("./consts");
 const notification_service_1 = require("./notification_service");
 const { TextIconApplet, AllowedLayout, MenuItem } = imports.ui.applet;
-const { get_language_names } = imports.gi.GLib;
 const Lang = imports.lang;
 const { spawnCommandLine, spawnCommandLineAsyncIO } = imports.misc.util;
 const { IconType } = imports.gi.St;
 class WeatherApplet extends TextIconApplet {
     constructor(metadata, orientation, panelHeight, instanceId) {
         super(orientation, panelHeight, instanceId);
-        this.currentLocale = null;
         this.lock = false;
         this.refreshTriggeredWhileLocked = false;
         this.encounteredError = false;
@@ -48,15 +46,11 @@ class WeatherApplet extends TextIconApplet {
             "import error": utils_1._("Missing Packages"),
             "location not covered": utils_1._("Location not covered"),
         };
-        this.appletDir = metadata.path;
-        this.currentLocale = utils_1.constructJsLocale(get_language_names()[0]);
+        this.AppletDir = metadata.path;
         logger_1.Log.Instance.Debug("Applet created with instanceID " + instanceId);
-        logger_1.Log.Instance.Debug("System locale is " + this.currentLocale);
-        logger_1.Log.Instance.Debug("AppletDir is: " + this.appletDir);
-        imports.gettext.bindtextdomain(consts_1.UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
-        imports.gi.Gtk.IconTheme.get_default().append_search_path(this.appletDir + "/../icons");
+        logger_1.Log.Instance.Debug("AppletDir is: " + this.AppletDir);
         this.SetAppletOnPanel();
-        this.config = new config_1.Config(this, instanceId, this.currentLocale);
+        this.config = new config_1.Config(this, instanceId);
         this.AddRefreshButton();
         this.EnsureProvider();
         this.ui = new ui_1.UI(this, orientation);
@@ -70,30 +64,13 @@ class WeatherApplet extends TextIconApplet {
         }
         this.loop.Start();
     }
-    SetAppletOnPanel() {
-        this.set_applet_icon_name(consts_1.APPLET_ICON);
-        this.set_applet_label(utils_1._("..."));
-        this.set_applet_tooltip(utils_1._("Click to open"));
+    get Orientation() {
+        return this.orientation;
     }
     Locked() {
         return this.lock;
     }
-    Unlock() {
-        this.lock = false;
-        if (this.refreshTriggeredWhileLocked) {
-            logger_1.Log.Instance.Print("Refreshing triggered by config change while refreshing, starting now...");
-            this.refreshTriggeredWhileLocked = false;
-            this.refreshAndRebuild();
-        }
-    }
-    AddRefreshButton() {
-        let itemLabel = utils_1._("Refresh");
-        let refreshMenuItem = new MenuItem(itemLabel, consts_1.REFRESH_ICON, Lang.bind(this, function () {
-            this.refreshAndRebuild();
-        }));
-        this._applet_context_menu.addMenuItem(refreshMenuItem);
-    }
-    refreshAndRebuild(loc) {
+    RefreshAndRebuild(loc) {
         this.loop.Resume();
         if (this.Locked()) {
             this.refreshTriggeredWhileLocked = true;
@@ -102,158 +79,6 @@ class WeatherApplet extends TextIconApplet {
         this.refreshWeather(true, loc);
     }
     ;
-    async LoadJsonAsync(url, params, HandleError, method = "GET") {
-        let response = await httpLib_1.HttpLib.Instance.LoadJsonAsync(url, params, method);
-        if (!response.Success) {
-            if (!!HandleError && !HandleError(response.ErrorData))
-                return null;
-            else {
-                this.HandleHTTPError(response.ErrorData);
-                return null;
-            }
-        }
-        return response.Data;
-    }
-    HandleHTTPError(error) {
-        let appletError = {
-            detail: error.message,
-            userError: false,
-            code: error.code,
-            message: this.errMsg[error.message],
-            type: "soft"
-        };
-        switch (error.message) {
-            case "bad status code":
-            case "unknown":
-                appletError.type = "hard";
-        }
-        this.ShowError(appletError);
-    }
-    async SpawnProcess(command) {
-        let cmd = "";
-        for (let index = 0; index < command.length; index++) {
-            const element = command[index];
-            cmd += "'" + element + "' ";
-        }
-        try {
-            let json = await new Promise((resolve, reject) => {
-                spawnCommandLineAsyncIO(cmd, (aStdout, err, exitCode) => {
-                    if (exitCode != 0) {
-                        reject(err);
-                    }
-                    else {
-                        resolve(aStdout);
-                    }
-                });
-            });
-            return json;
-        }
-        catch (e) {
-            logger_1.Log.Instance.Error("Error calling command " + cmd + ", error: ");
-            global.log(e);
-            return null;
-        }
-    }
-    SetAppletTooltip(msg) {
-        this.set_applet_tooltip(msg);
-    }
-    SetAppletIcon(iconName, customIcon) {
-        this.config.IconType == IconType.SYMBOLIC ?
-            this.set_applet_icon_symbolic_name(iconName) :
-            this.set_applet_icon_name(iconName);
-        if (this.config._useCustomAppletIcons)
-            this.SetCustomIcon(customIcon);
-    }
-    SetCustomIcon(iconName) {
-        this.set_applet_icon_symbolic_name(iconName);
-    }
-    SetAppletLabel(label) {
-        this.set_applet_label(label);
-    }
-    GetPanelHeight() {
-        return this.panel._getScaledPanelHeight();
-    }
-    async locationLookup() {
-        let command = "xdg-open ";
-        spawnCommandLine(command + "https://cinnamon-spices.linuxmint.com/applets/view/17");
-    }
-    async submitIssue() {
-        let command = "xdg-open ";
-        spawnCommandLine(command + "https://github.com/linuxmint/cinnamon-spices-applets/issues/new");
-    }
-    async saveCurrentLocation() {
-        if (this.config.CurrentLocation.locationSource == "ip-api") {
-            notification_service_1.NotificationService.Instance.Send(utils_1._("Error") + " - " + utils_1._("Location Store"), utils_1._("You can't save a location obtained automatically, sorry"));
-        }
-        this.config.LocStore.SaveCurrentLocation(this.config.CurrentLocation);
-    }
-    async deleteCurrentLocation() {
-        this.config.LocStore.DeleteCurrentLocation(this.config.CurrentLocation);
-    }
-    NextLocationClicked() {
-        let loc = this.config.SwitchToNextLocation();
-        this.refreshAndRebuild(loc);
-    }
-    PreviousLocationClicked() {
-        let loc = this.config.SwitchToPreviousLocation();
-        this.refreshAndRebuild(loc);
-    }
-    on_orientation_changed(orientation) {
-        this.orientation = orientation;
-        this.refreshWeather(true);
-    }
-    ;
-    on_applet_removed_from_panel(deleteConfig) {
-        logger_1.Log.Instance.Print("Removing applet instance...");
-        this.loop.Stop();
-    }
-    on_applet_clicked(event) {
-        this.ui.Toggle();
-    }
-    on_applet_middle_clicked(event) {
-    }
-    on_panel_height_changed() {
-    }
-    EnsureProvider(force = false) {
-        var _a;
-        let currentName = (_a = this.provider) === null || _a === void 0 ? void 0 : _a.name;
-        switch (this.config._dataService) {
-            case "DarkSky":
-                if (currentName != "DarkSky" || force)
-                    this.provider = new darkSky_1.DarkSky(this);
-                break;
-            case "OpenWeatherMap":
-                if (currentName != "OpenWeatherMap" || force)
-                    this.provider = new openWeatherMap_1.OpenWeatherMap(this);
-                break;
-            case "MetNorway":
-                if (currentName != "MetNorway" || force)
-                    this.provider = new met_norway_1.MetNorway(this);
-                break;
-            case "Weatherbit":
-                if (currentName != "Weatherbit" || force)
-                    this.provider = new weatherbit_1.Weatherbit(this);
-                break;
-            case "Yahoo":
-                if (currentName != "Yahoo" || force)
-                    this.provider = new yahoo_1.Yahoo(this);
-                break;
-            case "Climacell":
-                if (currentName != "Climacell" || force)
-                    this.provider = new climacell_1.Climacell(this);
-                break;
-            case "Met Office UK":
-                if (currentName != "Met Office UK" || force)
-                    this.provider = new met_uk_1.MetUk(this);
-                break;
-            case "US Weather":
-                if (currentName != "US Weather" || force)
-                    this.provider = new us_weather_1.USWeather(this);
-                break;
-            default:
-                return null;
-        }
-    }
     async refreshWeather(rebuild, location) {
         try {
             if (this.lock) {
@@ -298,10 +123,21 @@ class WeatherApplet extends TextIconApplet {
         }
     }
     ;
-    OpenUrl(element) {
-        if (!element.url)
-            return;
-        imports.gi.Gio.app_info_launch_default_for_uri(element.url, global.create_app_launch_context());
+    SetAppletTooltip(msg) {
+        this.set_applet_tooltip(msg);
+    }
+    SetAppletIcon(iconName, customIcon) {
+        this.config.IconType == IconType.SYMBOLIC ?
+            this.set_applet_icon_symbolic_name(iconName) :
+            this.set_applet_icon_name(iconName);
+        if (this.config._useCustomAppletIcons)
+            this.SetCustomIcon(customIcon);
+    }
+    SetAppletLabel(label) {
+        this.set_applet_label(label);
+    }
+    GetPanelHeight() {
+        return this.panel._getScaledPanelHeight();
     }
     GetMaxForecastDays() {
         if (!this.provider)
@@ -312,6 +148,157 @@ class WeatherApplet extends TextIconApplet {
         if (!this.provider)
             return this.config._forecastHours;
         return Math.min(this.config._forecastHours, this.provider.maxHourlyForecastSupport);
+    }
+    async LoadJsonAsync(url, params, HandleError, method = "GET") {
+        let response = await httpLib_1.HttpLib.Instance.LoadJsonAsync(url, params, method);
+        if (!response.Success) {
+            if (!!HandleError && !HandleError(response.ErrorData))
+                return null;
+            else {
+                this.HandleHTTPError(response.ErrorData);
+                return null;
+            }
+        }
+        return response.Data;
+    }
+    async SpawnProcess(command) {
+        let cmd = "";
+        for (let index = 0; index < command.length; index++) {
+            const element = command[index];
+            cmd += "'" + element + "' ";
+        }
+        try {
+            let json = await new Promise((resolve, reject) => {
+                spawnCommandLineAsyncIO(cmd, (aStdout, err, exitCode) => {
+                    if (exitCode != 0) {
+                        reject(err);
+                    }
+                    else {
+                        resolve(aStdout);
+                    }
+                });
+            });
+            return json;
+        }
+        catch (e) {
+            logger_1.Log.Instance.Error("Error calling command " + cmd + ", error: ");
+            global.log(e);
+            return null;
+        }
+    }
+    OpenUrl(element) {
+        if (!element.url)
+            return;
+        imports.gi.Gio.app_info_launch_default_for_uri(element.url, global.create_app_launch_context());
+    }
+    async locationLookup() {
+        let command = "xdg-open ";
+        spawnCommandLine(command + "https://cinnamon-spices.linuxmint.com/applets/view/17");
+    }
+    async submitIssue() {
+        let command = "xdg-open ";
+        spawnCommandLine(command + "https://github.com/linuxmint/cinnamon-spices-applets/issues/new");
+    }
+    async saveCurrentLocation() {
+        if (this.config.CurrentLocation.locationSource == "ip-api") {
+            notification_service_1.NotificationService.Instance.Send(utils_1._("Error") + " - " + utils_1._("Location Store"), utils_1._("You can't save a location obtained automatically, sorry"));
+        }
+        this.config.LocStore.SaveCurrentLocation(this.config.CurrentLocation);
+    }
+    async deleteCurrentLocation() {
+        this.config.LocStore.DeleteCurrentLocation(this.config.CurrentLocation);
+    }
+    on_orientation_changed(orientation) {
+        this.orientation = orientation;
+        this.refreshWeather(true);
+    }
+    ;
+    on_applet_removed_from_panel(deleteConfig) {
+        logger_1.Log.Instance.Print("Removing applet instance...");
+        this.loop.Stop();
+    }
+    on_applet_clicked(event) {
+        this.ui.Toggle();
+    }
+    on_applet_middle_clicked(event) {
+    }
+    on_panel_height_changed() {
+    }
+    SetAppletOnPanel() {
+        this.set_applet_icon_name(consts_1.APPLET_ICON);
+        this.set_applet_label(utils_1._("..."));
+        this.set_applet_tooltip(utils_1._("Click to open"));
+    }
+    Unlock() {
+        this.lock = false;
+        if (this.refreshTriggeredWhileLocked) {
+            logger_1.Log.Instance.Print("Refreshing triggered by config change while refreshing, starting now...");
+            this.refreshTriggeredWhileLocked = false;
+            this.RefreshAndRebuild();
+        }
+    }
+    AddRefreshButton() {
+        let itemLabel = utils_1._("Refresh");
+        let refreshMenuItem = new MenuItem(itemLabel, consts_1.REFRESH_ICON, Lang.bind(this, () => this.RefreshAndRebuild()));
+        this._applet_context_menu.addMenuItem(refreshMenuItem);
+    }
+    HandleHTTPError(error) {
+        let appletError = {
+            detail: error.message,
+            userError: false,
+            code: error.code,
+            message: this.errMsg[error.message],
+            type: "soft"
+        };
+        switch (error.message) {
+            case "bad status code":
+            case "unknown":
+                appletError.type = "hard";
+        }
+        this.ShowError(appletError);
+    }
+    SetCustomIcon(iconName) {
+        this.set_applet_icon_symbolic_name(iconName);
+    }
+    EnsureProvider(force = false) {
+        var _a;
+        let currentName = (_a = this.provider) === null || _a === void 0 ? void 0 : _a.name;
+        switch (this.config._dataService) {
+            case "DarkSky":
+                if (currentName != "DarkSky" || force)
+                    this.provider = new darkSky_1.DarkSky(this);
+                break;
+            case "OpenWeatherMap":
+                if (currentName != "OpenWeatherMap" || force)
+                    this.provider = new openWeatherMap_1.OpenWeatherMap(this);
+                break;
+            case "MetNorway":
+                if (currentName != "MetNorway" || force)
+                    this.provider = new met_norway_1.MetNorway(this);
+                break;
+            case "Weatherbit":
+                if (currentName != "Weatherbit" || force)
+                    this.provider = new weatherbit_1.Weatherbit(this);
+                break;
+            case "Yahoo":
+                if (currentName != "Yahoo" || force)
+                    this.provider = new yahoo_1.Yahoo(this);
+                break;
+            case "Climacell":
+                if (currentName != "Climacell" || force)
+                    this.provider = new climacell_1.Climacell(this);
+                break;
+            case "Met Office UK":
+                if (currentName != "Met Office UK" || force)
+                    this.provider = new met_uk_1.MetUk(this);
+                break;
+            case "US Weather":
+                if (currentName != "US Weather" || force)
+                    this.provider = new us_weather_1.USWeather(this);
+                break;
+            default:
+                return null;
+        }
     }
     MergeWeatherData(weatherInfo, locationData) {
         if (!weatherInfo.location.city)

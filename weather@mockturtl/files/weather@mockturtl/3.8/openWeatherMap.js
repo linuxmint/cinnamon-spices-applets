@@ -130,7 +130,7 @@ class OpenWeatherMap {
         let query = baseUrl;
         query = query + "lat=" + loc.lat + "&lon=" + loc.lon + "&appid=";
         query += "1c73f8259a86c6fd43c7163b543c8640";
-        let locale = this.ConvertToAPILocale(this.app.currentLocale);
+        let locale = this.ConvertToAPILocale(this.app.config.currentLocale);
         if (this.app.config._translateCondition && utils_1.isLangSupported(locale, this.supportedLanguages)) {
             query = query + "&lang=" + locale;
         }

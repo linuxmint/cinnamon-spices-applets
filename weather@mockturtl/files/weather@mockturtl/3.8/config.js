@@ -11,8 +11,9 @@ const { AppletSettings, BindingDirection } = imports.ui.settings;
 const Lang = imports.lang;
 const keybindingManager = imports.ui.main.keybindingManager;
 const { IconType } = imports.gi.St;
+const { get_language_names } = imports.gi.GLib;
 class Config {
-    constructor(app, instanceID, locale) {
+    constructor(app, instanceID) {
         this.fahrenheitCountries = ["bs", "bz", "ky", "pr", "pw", "us"];
         this.windSpeedUnitLocales = {
             "fi kr no pl ru se": "m/s",
@@ -56,9 +57,11 @@ class Config {
         this.currentLocation = null;
         this.app = app;
         this.LocStore = new locationstore_1.LocationStore(this.app);
+        this.currentLocale = utils_1.constructJsLocale(get_language_names()[0]);
+        logger_1.Log.Instance.Debug("System locale is " + this.currentLocale);
         this.autoLocProvider = new ipApi_1.IpApi(app);
         this.geoLocationService = new nominatim_1.GeoLocation(app);
-        this.countryCode = this.GetCountryCode(locale);
+        this.countryCode = this.GetCountryCode(this.currentLocale);
         this.settings = new AppletSettings(this, consts_1.UUID, instanceID);
         this.BindSettings();
     }
@@ -205,10 +208,10 @@ class Config {
     DoneTypingLocation() {
         logger_1.Log.Instance.Debug("User has finished typing, beginning refresh");
         this.doneTypingLocation = null;
-        this.app.refreshAndRebuild();
+        this.app.RefreshAndRebuild();
     }
     OnSettingChanged() {
-        this.app.refreshAndRebuild();
+        this.app.RefreshAndRebuild();
     }
     SetLocation(value) {
         this.settings.setValue(this.WEATHER_LOCATION, value);

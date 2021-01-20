@@ -128,7 +128,7 @@ export class UI {
         if (newThemeIsLight != this.lightTheme) {
             this.lightTheme = newThemeIsLight;
         }
-        this.App.refreshAndRebuild();
+        this.App.RefreshAndRebuild();
     }
 
 	/**
@@ -307,7 +307,7 @@ export class UI {
                 location = config._locationLabelOverride;
             }
 
-            this.App.SetAppletTooltip(location + " - " + _("As of") + " " + AwareDateString(weather.date, this.App.currentLocale, config._show24Hours));
+            this.App.SetAppletTooltip(location + " - " + _("As of") + " " + AwareDateString(weather.date, this.App.config.currentLocale, config._show24Hours));
 
             // Weather Condition
             this._currentWeatherSummary.text = descriptionCondition;
@@ -341,7 +341,7 @@ export class UI {
             // Applet panel label
             let label = "";
             // Horizontal panels
-            if (this.App.orientation != Side.LEFT && this.App.orientation != Side.RIGHT) {
+            if (this.App.Orientation != Side.LEFT && this.App.Orientation != Side.RIGHT) {
                 if (config._showCommentInPanel) {
                     label += mainCondition;
                 }
@@ -422,8 +422,8 @@ export class UI {
             let sunriseText = "";
             let sunsetText = "";
             if (weather.sunrise != null && weather.sunset != null && config._showSunrise) {
-                sunriseText = (GetHoursMinutes(weather.sunrise, this.App.currentLocale, config._show24Hours, weather.location.timeZone));
-                sunsetText = (GetHoursMinutes(weather.sunset, this.App.currentLocale, config._show24Hours, weather.location.timeZone));
+                sunriseText = (GetHoursMinutes(weather.sunrise, this.App.config.currentLocale, config._show24Hours, weather.location.timeZone));
+                sunsetText = (GetHoursMinutes(weather.sunset, this.App.config.currentLocale, config._show24Hours, weather.location.timeZone));
             }
 
             this._currentWeatherSunrise.text = sunriseText;
@@ -459,7 +459,7 @@ export class UI {
                 }
 
                 // Day Names
-                let dayName: string = GetDayName(forecastData.date, this.App.currentLocale, this.App.config._showForecastDates, weather.location.timeZone);
+                let dayName: string = GetDayName(forecastData.date, this.App.config.currentLocale, this.App.config._showForecastDates, weather.location.timeZone);
 
                 forecastUi.Day.text = dayName;
                 forecastUi.Temperature.text = first_temperature;
@@ -486,7 +486,7 @@ export class UI {
     public DisplayBar(weather: WeatherData, provider: WeatherProvider, config: Config): boolean {
         this._providerCredit.label = _("Powered by") + " " + provider.prettyName;
         this._providerCredit.url = provider.website;
-        this._timestamp.text = _("As of") + " " + AwareDateString(weather.date, this.App.currentLocale, config._show24Hours);
+        this._timestamp.text = _("As of") + " " + AwareDateString(weather.date, this.App.config.currentLocale, config._show24Hours);
         if (weather.location.distanceFrom != null) {
             this._timestamp.text += (
                 ", " + MetreToUserUnits(weather.location.distanceFrom, this.App.config.DistanceUnit)
@@ -502,7 +502,7 @@ export class UI {
             const hour = forecasts[index];
             const ui = this._hourlyForecasts[index];
 
-            ui.Hour.text = GetHoursMinutes(hour.date, this.App.currentLocale, config._show24Hours, tz, this.App.config._shortHourlyTime);
+            ui.Hour.text = GetHoursMinutes(hour.date, this.App.config.currentLocale, config._show24Hours, tz, this.App.config._shortHourlyTime);
             ui.Temperature.text = TempToUserConfig(hour.temp, config.TemperatureUnit, config._tempRussianStyle) + " " + this.unitToUnicode(config.TemperatureUnit);
             ui.Icon.icon_name = (config._useCustomMenuIcons) ? hour.condition.customIcon : hour.condition.icon;
 
@@ -611,7 +611,18 @@ export class UI {
     private HideLocationSelectors() {
         this._nextLocationButton.actor.hide();
         this._previousLocationButton.actor.hide();
+	}
+	
+	private NextLocationClicked() {
+		let loc = this.App.config.SwitchToNextLocation();
+		this.App.RefreshAndRebuild(loc);
     }
+
+    private PreviousLocationClicked() {
+		let loc = this.App.config.SwitchToPreviousLocation();
+		this.App.RefreshAndRebuild(loc);
+	}
+	
 
 	/** Calculates incorrect width the first time, make sure to call this
 	 * after a show/hide iteration as well when the Hourly box is shown
@@ -751,7 +762,7 @@ export class UI {
                 style_class: STYLE_LOCATION_SELECTOR
             }),
         });
-        this._nextLocationButton.actor.connect(SIGNAL_CLICKED, Lang.bind(this.App, this.App.NextLocationClicked));
+        this._nextLocationButton.actor.connect(SIGNAL_CLICKED, Lang.bind(this, this.NextLocationClicked));
 
         this._previousLocationButton = new WeatherButton({
             reactive: true,
@@ -763,7 +774,7 @@ export class UI {
                 style_class: STYLE_LOCATION_SELECTOR
             }),
         });
-        this._previousLocationButton.actor.connect(SIGNAL_CLICKED, Lang.bind(this.App, this.App.PreviousLocationClicked));
+        this._previousLocationButton.actor.connect(SIGNAL_CLICKED, Lang.bind(this, this.PreviousLocationClicked));
 
         this._locationBox = new BoxLayout();
         this._locationBox.add(this._previousLocationButton.actor, { x_fill: false, x_align: Align.START, y_align: Align.MIDDLE, expand: false });

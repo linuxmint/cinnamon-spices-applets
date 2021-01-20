@@ -162,7 +162,7 @@ export class OpenWeatherMap implements WeatherProvider {
         query = query + "lat=" + loc.lat + "&lon=" + loc.lon + "&appid=";
         query += "1c73f8259a86c6fd43c7163b543c8640";
         // Append Language if supported and enabled
-        let locale: string = this.ConvertToAPILocale(this.app.currentLocale);
+        let locale: string = this.ConvertToAPILocale(this.app.config.currentLocale);
         if (this.app.config._translateCondition && isLangSupported(locale, this.supportedLanguages)) {
             query = query + "&lang=" + locale;
         }

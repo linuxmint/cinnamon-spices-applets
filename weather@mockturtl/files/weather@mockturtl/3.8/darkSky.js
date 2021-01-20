@@ -142,7 +142,7 @@ class DarkSky {
             return "";
         }
         query = this.query + key + "/" + loc.lat.toString() + "," + loc.lon.toString() + "?exclude=minutely,flags" + "&units=" + this.unit;
-        let locale = this.ConvertToAPILocale(this.app.currentLocale);
+        let locale = this.ConvertToAPILocale(this.app.config.currentLocale);
         if (utils_1.isLangSupported(locale, this.supportedLanguages) && this.app.config._translateCondition) {
             query = query + "&lang=" + locale;
         }

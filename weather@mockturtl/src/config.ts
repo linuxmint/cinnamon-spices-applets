@@ -1,7 +1,7 @@
 import { WeatherApplet } from "./main";
 import { IpApi } from "./ipApi";
 import { SettingKeys, LocationData, DistanceUnitLocalePrefs, WindSpeedLocalePrefs } from "./types";
-import { clearTimeout, setTimeout, _, isCoordinate } from "./utils";
+import { clearTimeout, setTimeout, _, isCoordinate, constructJsLocale } from "./utils";
 import { Log } from "./logger";
 import { UUID, SIGNAL_CHANGED } from "./consts";
 import { LocationStore } from "./locationstore";
@@ -11,6 +11,7 @@ const { AppletSettings, BindingDirection } = imports.ui.settings;
 const Lang: typeof imports.lang = imports.lang;
 const keybindingManager = imports.ui.main.keybindingManager;
 const { IconType } = imports.gi.St;
+const { get_language_names } = imports.gi.GLib;
 
 /** Units Used in Options. Change Options list if You change this! */
 export type WeatherUnits = 'automatic' | 'celsius' | 'fahrenheit';
@@ -118,14 +119,17 @@ export class Config {
 
 	/** Stores and retrieves manual locations */
 	public readonly LocStore: LocationStore;
+	public currentLocale: string;
 
-    constructor(app: WeatherApplet, instanceID: number, locale: string) {
+    constructor(app: WeatherApplet, instanceID: number) {
 		this.app = app;
 		this.LocStore = new LocationStore(this.app);
+		this.currentLocale = constructJsLocale(get_language_names()[0]);
+		Log.Instance.Debug("System locale is " + this.currentLocale);
 
 		this.autoLocProvider = new IpApi(app); // IP location lookup
 		this.geoLocationService = new GeoLocation(app);
-		this.countryCode = this.GetCountryCode(locale);
+		this.countryCode = this.GetCountryCode(this.currentLocale);
         this.settings = new AppletSettings(this, UUID, instanceID);
         this.BindSettings();
     }
@@ -244,14 +248,14 @@ export class Config {
                 message: _("Make sure you entered a location or use Automatic location instead")
             });
             return null;
-        }
+		}
 
         // Find location in storage
         let location = this.LocStore.FindLocation(this._location);
         if (location != null) {
             Log.Instance.Debug("location exist in locationstore, retrieve");
 			this.LocStore.SwitchToLocation(location);
-            this.InjectLocationToConfig(location, true);
+			this.InjectLocationToConfig(location, true);
             return location;
         }
         // location not in storage
@@ -331,11 +335,11 @@ export class Config {
 	private DoneTypingLocation() {
 		Log.Instance.Debug("User has finished typing, beginning refresh");
 		this.doneTypingLocation = null;
-		this.app.refreshAndRebuild();
+		this.app.RefreshAndRebuild();
 	}
 
 	private OnSettingChanged() {
-		this.app.refreshAndRebuild();
+		this.app.RefreshAndRebuild();
 	}
 
 	private SetLocation(value: string) {
