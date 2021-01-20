@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Weather (weather@mockturtl) Version 2.6.8\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-01-15 20:07+0000\n"
-"PO-Revision-Date: 2021-01-17 11:09+0100\n"
+"PO-Revision-Date: 2021-01-20 20:07+0100\n"
 "Last-Translator: Jurien (French77) <Jurien@protonmail.com>\n"
 "Language-Team: Dutch\n"
 "Language: nl\n"
@@ -24,7 +24,7 @@ msgstr ""
 #: 3.8/openWeatherMap.js:84 3.8/weatherbit.js:134 3.8/darkSky.js:95
 #: 3.8/yahoo.js:93 3.8/us_weather.js:226 3.8/climacell.js:102
 msgid "Feels Like"
-msgstr "Voelt aan als"
+msgstr "Voelt als"
 
 #: 3.0/openWeatherMap.js:190 3.0/weatherbit.js:212 3.0/us_weather.js:334
 #: 3.0/met_uk.js:340 3.8/openWeatherMap.js:145 3.8/weatherbit.js:144
@@ -1024,7 +1024,7 @@ msgstr "Locatie-opslag"
 
 #: 3.0/applet.js:427 3.8/applet.js:329
 msgid "You can't save a location obtained automatically, sorry"
-msgstr "U kunt een automatisch verkregen locatie helaas niet opslaan."
+msgstr "U kunt een automatisch verkregen locatie helaas niet opslaan"
 
 #: 3.0/applet.js:602 3.8/applet.js:481
 msgid "Could not get weather information"
@@ -1078,19 +1078,19 @@ msgstr "Bezig met laden..."
 
 #: 3.0/applet.js:1330 3.8/applet.js:1191
 msgid "Temperature"
-msgstr "Temperatuur:"
+msgstr "Temperatuur"
 
 #: 3.0/applet.js:1331 3.8/applet.js:1192
 msgid "Humidity"
-msgstr "Luchtvochtigheid:"
+msgstr "Luchtvochtigheid"
 
 #: 3.0/applet.js:1332 3.8/applet.js:1193
 msgid "Pressure"
-msgstr "Luchtdruk:"
+msgstr "Luchtdruk"
 
 #: 3.0/applet.js:1333 3.8/applet.js:1194
 msgid "Wind"
-msgstr "Wind:"
+msgstr "Wind"
 
 #: 3.0/applet.js:1640 3.8/applet.js:1491
 msgid "Make sure you entered a location or use Automatic location instead"
@@ -1149,7 +1149,7 @@ msgstr "U kunt een onjuiste locatie niet verwijderen"
 
 #: 3.0/applet.js:2069 3.8/applet.js:1870
 msgid "Location is not in storage, can't delete"
-msgstr "Locatie is niet in opslag, kan haar niet verwijderen."
+msgstr "Locatie is niet in opslag, kan haar niet verwijderen"
 
 #: 3.0/applet.js:2079 3.8/applet.js:1880
 msgid "Location is deleted from library"
@@ -1456,8 +1456,8 @@ msgid ""
 "address.\n"
 "Waits for 3 seconds after you stop typing before refreshes the weather."
 msgstr ""
-"Aanvaardbare invoer is Breedtegraad,Lengtegraad. Bijv.: 68.1932,17.1426 "
-"of een adres.\n"
+"Aanvaardbare invoer is Breedtegraad,Lengtegraad. Bijv.: 68.1932,17.1426 of "
+"een adres.\n"
 "Wacht 3 seconden nadat u bent gestopt met typen voordat het zich ververst."
 
 #. 3.0->settings-schema.json->getLocation->description
@@ -1764,7 +1764,7 @@ msgstr "Korte omschrijving van weersomstandigheden"
 #. 3.0->settings-schema.json->shortConditions->tooltip
 #. 3.8->settings-schema.json->shortConditions->tooltip
 msgid "Currently only used with DarkSky."
-msgstr "Momenteel alleen gebruikt met DarkSky"
+msgstr "Momenteel alleen gebruikt met DarkSky."
 
 #. 3.0->settings-schema.json->iconSettings->description
 #. 3.8->settings-schema.json->icons->title
@@ -1863,7 +1863,7 @@ msgstr ""
 
 #. 3.8->settings-schema.json->useSymbolicIcons->tooltip
 msgid "Does not apply to custom iconset, that is symbolic by default"
-msgstr "N.v.t. op aangepaste pictogrammen die standaard symbolisch zijn."
+msgstr "N.v.t. op aangepaste pictogrammen die standaard symbolisch zijn"
 
 #. 3.8->settings-schema.json->useSymbolicIcons->description
 msgid "Use symbolic icons throughout the applet"
@@ -2263,3 +2263,7 @@ msgstr ""
 #~ "zou uw dagelijkse quotum kunnen overschrijden. Heeft u een sleutel nodig, "
 #~ "klik dan op 'API-sleutel en locatie instellen' voor de te nemen stappen "
 #~ "om deze te verkrijgen."
+
+
+
+
