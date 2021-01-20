@@ -53,10 +53,10 @@ export class DarkSky implements WeatherProvider {
 		let query = this.ConstructQuery(loc);
 		if (query == "" && query == null) return null;
 
-        let json = await this.app.LoadJsonAsync<any>(query, null, Lang.bind(this, this.HandleError));
+        let json = await this.app.LoadJsonAsync<DarkSkyPayload>(query, null, Lang.bind(this, this.HandleError));
 		if (!json) return null;
 
-		if (!json.code) {                   // No code, Request Success
+		if (!(json as any).code) {                   // No code, Request Success
 			return this.ParseWeather(json);
 		}
 		else {

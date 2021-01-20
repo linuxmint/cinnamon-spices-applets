@@ -195,7 +195,7 @@ export class Config {
             IconType.FULLCOLOR
 	};
 	
-	/** Called when user changed manual locations, automatically switches to maunal location mode. */
+	/** Called when user changed manual locations, automatically switches to manual location mode. */
 	public SwitchToNextLocation(): LocationData {
 		let nextLoc = this.LocStore.GetNextLocation(this.CurrentLocation);
 		if (nextLoc == null) return null;
@@ -203,7 +203,7 @@ export class Config {
 		return nextLoc;
 	}
 
-	/** Called when user changed manual locations, automatically switches to maunal location mode. */
+	/** Called when user changed manual locations, automatically switches to manual location mode. */
 	public SwitchToPreviousLocation(): LocationData {
         let previousLoc = this.LocStore.GetPreviousLocation(this.CurrentLocation);
 		if (previousLoc == null) return null;

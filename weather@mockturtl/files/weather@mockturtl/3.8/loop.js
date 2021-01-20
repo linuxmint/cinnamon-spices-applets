@@ -58,6 +58,21 @@ class WeatherLoop {
         }
     }
     ;
+    Stop() {
+        this.appletRemoved = true;
+    }
+    Pause() {
+        this.pauseRefresh = true;
+    }
+    Resume() {
+        this.pauseRefresh = false;
+    }
+    ResetErrorCount() {
+        this.errorCount = 0;
+    }
+    GetSecondsUntilNextRefresh() {
+        return (this.errorCount > 0) ? (this.errorCount) * this.LOOP_INTERVAL : this.LOOP_INTERVAL;
+    }
     IsStray() {
         if (this.appletRemoved == true)
             return true;
@@ -85,21 +100,6 @@ class WeatherLoop {
     }
     LoopInterval() {
         return (this.errorCount > 0) ? this.LOOP_INTERVAL * this.errorCount * 1000 : this.LOOP_INTERVAL * 1000;
-    }
-    Stop() {
-        this.appletRemoved = true;
-    }
-    Pause() {
-        this.pauseRefresh = true;
-    }
-    Resume() {
-        this.pauseRefresh = false;
-    }
-    ResetErrorCount() {
-        this.errorCount = 0;
-    }
-    GetSecondsUntilNextRefresh() {
-        return (this.errorCount > 0) ? (this.errorCount) * this.LOOP_INTERVAL : this.LOOP_INTERVAL;
     }
 }
 exports.WeatherLoop = WeatherLoop;

@@ -77,7 +77,7 @@ export class LocationStore {
 	}
 
 	/**
-	 * Tryes to find a location in storage based on the entryText
+	 * Tries to find a location in storage based on the entryText
 	 * @param entryText 
 	 */
 	public FindLocation(entryText: string): LocationData {
@@ -99,7 +99,7 @@ export class LocationStore {
         return null;
     }
 
-	/** Only gets the location, if you want to swtich between locations, use 
+	/** Only gets the location, if you want to switch between locations, use 
 	 * Config.SwitchToNextLocation function
 	 */
     public GetNextLocation(currentLoc: LocationData): LocationData {
@@ -136,7 +136,7 @@ export class LocationStore {
         }
     }
 
-	/** Only gets the location, if you want to swtich between locations, use 
+	/** Only gets the location, if you want to switch between locations, use 
 	 * Config.SwitchToPreviousLocation function
 	 */
     public GetPreviousLocation(currentLoc: LocationData): LocationData {

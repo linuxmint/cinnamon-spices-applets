@@ -79,6 +79,31 @@ export class WeatherLoop {
         }
     };
 
+    /** Stops loop. If called, the loop cannot be started again. */
+    public Stop(): void {
+        this.appletRemoved = true;
+    }
+
+    /** Pauses periodic refreshing of weather data. */
+    public Pause(): void {
+        this.pauseRefresh = true;
+    }
+
+    /** Resumes periodic refreshing, call after Pause. */
+    public Resume(): void {
+        this.pauseRefresh = false;
+    }
+
+    /** Used after a successful weather refresh. */
+    public ResetErrorCount(): void {
+        this.errorCount = 0;
+    }
+
+    /** Gets how many seconds are between the last and next refresh. */
+    public GetSecondsUntilNextRefresh(): number {
+        return (this.errorCount > 0) ? (this.errorCount) * this.LOOP_INTERVAL : this.LOOP_INTERVAL;
+    }
+
     private IsStray(): boolean {
         if (this.appletRemoved == true) return true;
         if (this.GUID != weatherAppletGUIDs[this.instanceID]) {
@@ -112,25 +137,5 @@ export class WeatherLoop {
 	 */
     private LoopInterval(): number {
         return (this.errorCount > 0) ? this.LOOP_INTERVAL * this.errorCount * 1000 : this.LOOP_INTERVAL * 1000; // Increase loop timeout linearly with the number of errors
-    }
-
-    public Stop(): void {
-        this.appletRemoved = true;
-    }
-
-    public Pause(): void {
-        this.pauseRefresh = true;
-    }
-
-    public Resume(): void {
-        this.pauseRefresh = false;
-    }
-
-    public ResetErrorCount(): void {
-        this.errorCount = 0;
-    }
-
-    public GetSecondsUntilNextRefresh(): number {
-        return (this.errorCount > 0) ? (this.errorCount) * this.LOOP_INTERVAL : this.LOOP_INTERVAL;
     }
 }
