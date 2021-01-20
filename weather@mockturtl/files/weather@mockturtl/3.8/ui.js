@@ -38,9 +38,9 @@ class UI {
     constructor(app, orientation) {
         this.hourlyToggled = false;
         this.lightTheme = false;
-        this.app = app;
-        this.menuManager = new PopupMenuManager(this.app);
-        this.menu = new AppletPopupMenu(this.app, orientation);
+        this.App = app;
+        this.menuManager = new PopupMenuManager(this.App);
+        this.menu = new AppletPopupMenu(this.App, orientation);
         this.menu.box.add_style_class_name(STYLE_WEATHER_MENU);
         logger_1.Log.Instance.Debug("Popup Menu applied classes are: " + this.menu.box.get_style_class_name());
         this.menuManager.addMenu(this.menu);
@@ -49,7 +49,7 @@ class UI {
         this.lightTheme = this.IsLightTheme();
         this.BuildPopupMenu();
         this.signals.connect(themeManager, 'theme-set', this.OnThemeChanged, this);
-        this.app.config.locationStore.StoreChanged.Subscribe(Lang.bind(this, this.onLocationStorageChanged));
+        this.App.config.locationStore.StoreChanged.Subscribe(Lang.bind(this, this.onLocationStorageChanged));
     }
     OnThemeChanged() {
         this.HideHourlyWeather();
@@ -57,7 +57,7 @@ class UI {
         if (newThemeIsLight != this.lightTheme) {
             this.lightTheme = newThemeIsLight;
         }
-        this.app.refreshAndRebuild();
+        this.App.refreshAndRebuild();
     }
     IsLightTheme() {
         let color = this.menu.actor.get_theme_node().get_color("color");
@@ -85,7 +85,7 @@ class UI {
     }
     onLocationStorageChanged(sender, itemCount) {
         logger_1.Log.Instance.Debug("On location storage callback called, number of locations now " + itemCount.toString());
-        if (this.app.config.locationStore.ShouldShowLocationSelectors(this.app.config.CurrentLocation))
+        if (this.App.config.locationStore.ShouldShowLocationSelectors(this.App.config.CurrentLocation))
             this.ShowLocationSelectors();
         else
             this.HideLocationSelectors();
@@ -130,7 +130,10 @@ class UI {
         mainBox.add_actor(this._bar);
         this.menu.addActor(mainBox);
     }
-    rebuild(config) {
+    Toggle() {
+        this.menu.toggle();
+    }
+    Rebuild(config) {
         this.showLoadingUi();
         this.rebuildCurrentWeatherUi(config);
         this.rebuildHourlyWeatherUi(config);
@@ -138,7 +141,7 @@ class UI {
         this.rebuildBar(config);
     }
     UpdateIconType(iconType) {
-        if (iconType == IconType.FULLCOLOR && this.app.config._useCustomMenuIcons)
+        if (iconType == IconType.FULLCOLOR && this.App.config._useCustomMenuIcons)
             return;
         this._currentWeatherIcon.icon_type = iconType;
         for (let i = 0; i < this._forecast.length; i++) {
@@ -150,6 +153,214 @@ class UI {
     }
     DisplayErrorMessage(msg) {
         this._timestamp.text = msg;
+    }
+    DisplayWeather(weather, config) {
+        try {
+            if (this.App.config.locationStore.ShouldShowLocationSelectors(config.CurrentLocation))
+                this.ShowLocationSelectors();
+            else
+                this.HideLocationSelectors();
+            let mainCondition = "";
+            let descriptionCondition = "";
+            if (weather.condition.main != null) {
+                mainCondition = weather.condition.main;
+                if (config._translateCondition) {
+                    mainCondition = utils_1.capitalizeFirstLetter(utils_1._(mainCondition));
+                }
+            }
+            if (weather.condition.description != null) {
+                descriptionCondition = utils_1.capitalizeFirstLetter(weather.condition.description);
+                if (config._translateCondition) {
+                    descriptionCondition = utils_1.capitalizeFirstLetter(utils_1._(weather.condition.description));
+                }
+            }
+            let location = "";
+            if (weather.location.city != null && weather.location.country != null) {
+                location = weather.location.city + ", " + weather.location.country;
+            }
+            else {
+                location = Math.round(weather.coord.lat * 10000) / 10000 + ", " + Math.round(weather.coord.lon * 10000) / 10000;
+            }
+            if (utils_1.nonempty(config._locationLabelOverride)) {
+                location = config._locationLabelOverride;
+            }
+            this.App.SetAppletTooltip(location + " - " + utils_1._("As of") + " " + utils_1.AwareDateString(weather.date, this.App.currentLocale, config._show24Hours));
+            this._currentWeatherSummary.text = descriptionCondition;
+            let iconName = weather.condition.icon;
+            if (iconName == null) {
+                iconName = "weather-severe-alert";
+            }
+            if (config._useCustomMenuIcons) {
+                this._currentWeatherIcon.icon_name = weather.condition.customIcon;
+                this.UpdateIconType(IconType.SYMBOLIC);
+            }
+            else {
+                this._currentWeatherIcon.icon_name = iconName;
+                this.UpdateIconType(config.IconType);
+            }
+            this.App.SetAppletIcon(iconName, weather.condition.customIcon);
+            let temp = "";
+            if (weather.temperature != null) {
+                temp = utils_1.TempToUserConfig(weather.temperature, config.TemperatureUnit, config._tempRussianStyle);
+                this._currentWeatherTemperature.text = temp + " " + this.unitToUnicode(config.TemperatureUnit);
+            }
+            let label = "";
+            if (this.App.orientation != Side.LEFT && this.App.orientation != Side.RIGHT) {
+                if (config._showCommentInPanel) {
+                    label += mainCondition;
+                }
+                if (config._showTextInPanel) {
+                    if (label != "") {
+                        label += " ";
+                    }
+                    label += (temp + ' ' + this.unitToUnicode(config.TemperatureUnit));
+                }
+            }
+            else {
+                if (config._showTextInPanel) {
+                    label = temp;
+                    if (this.App.GetPanelHeight() >= 35) {
+                        label += this.unitToUnicode(config.TemperatureUnit);
+                    }
+                }
+            }
+            if (utils_1.nonempty(config._tempTextOverride)) {
+                label = config._tempTextOverride
+                    .replace("{t}", temp)
+                    .replace("{u}", this.unitToUnicode(config.TemperatureUnit))
+                    .replace("{c}", mainCondition);
+            }
+            this.App.SetAppletLabel(label);
+            if (weather.humidity != null) {
+                this._currentWeatherHumidity.text = Math.round(weather.humidity) + "%";
+            }
+            let wind_direction = utils_1.compassDirection(weather.wind.degree);
+            this._currentWeatherWind.text =
+                (wind_direction != undefined ? utils_1._(wind_direction) + " " : "") +
+                    utils_1.MPStoUserUnits(weather.wind.speed, config.WindSpeedUnit);
+            if (config.WindSpeedUnit != "Beaufort")
+                this._currentWeatherWind.text += " " + utils_1._(config.WindSpeedUnit);
+            this._currentWeatherApiUnique.text = "";
+            this._currentWeatherApiUniqueCap.text = "";
+            if (!!weather.extra_field) {
+                this._currentWeatherApiUniqueCap.text = utils_1._(weather.extra_field.name) + ":";
+                let value;
+                switch (weather.extra_field.type) {
+                    case "percent":
+                        value = weather.extra_field.value.toString() + "%";
+                        break;
+                    case "temperature":
+                        value = utils_1.TempToUserConfig(weather.extra_field.value, config.TemperatureUnit, config._tempRussianStyle) + " " + this.unitToUnicode(config.TemperatureUnit);
+                        break;
+                    default:
+                        value = utils_1._(weather.extra_field.value);
+                        break;
+                }
+                this._currentWeatherApiUnique.text = value;
+            }
+            if (weather.pressure != null) {
+                this._currentWeatherPressure.text = utils_1.PressToUserUnits(weather.pressure, config._pressureUnit) + ' ' + utils_1._(config._pressureUnit);
+            }
+            this._currentWeatherLocation.label = location;
+            this._currentWeatherLocation.url = weather.location.url;
+            if (!weather.location.url)
+                this._locationButton.disable();
+            let sunriseText = "";
+            let sunsetText = "";
+            if (weather.sunrise != null && weather.sunset != null && config._showSunrise) {
+                sunriseText = (utils_1.GetHoursMinutes(weather.sunrise, this.App.currentLocale, config._show24Hours, weather.location.timeZone));
+                sunsetText = (utils_1.GetHoursMinutes(weather.sunset, this.App.currentLocale, config._show24Hours, weather.location.timeZone));
+            }
+            this._currentWeatherSunrise.text = sunriseText;
+            this._currentWeatherSunset.text = sunsetText;
+            return true;
+        }
+        catch (e) {
+            logger_1.Log.Instance.Error("DisplayWeatherError: " + e);
+            return false;
+        }
+    }
+    ;
+    DisplayForecast(weather, config) {
+        try {
+            if (!weather.forecasts)
+                return false;
+            let len = Math.min(this._forecast.length, weather.forecasts.length);
+            for (let i = 0; i < len; i++) {
+                let forecastData = weather.forecasts[i];
+                let forecastUi = this._forecast[i];
+                let t_low = utils_1.TempToUserConfig(forecastData.temp_min, config.TemperatureUnit, config._tempRussianStyle);
+                let t_high = utils_1.TempToUserConfig(forecastData.temp_max, config.TemperatureUnit, config._tempRussianStyle);
+                let first_temperature = config._temperatureHighFirst ? t_high : t_low;
+                let second_temperature = config._temperatureHighFirst ? t_low : t_high;
+                let comment = "";
+                if (forecastData.condition.main != null && forecastData.condition.description != null) {
+                    comment = (config._shortConditions) ? forecastData.condition.main : forecastData.condition.description;
+                    comment = utils_1.capitalizeFirstLetter(comment);
+                    if (config._translateCondition)
+                        comment = utils_1._(comment);
+                }
+                let dayName = utils_1.GetDayName(forecastData.date, this.App.currentLocale, this.App.config._showForecastDates, weather.location.timeZone);
+                forecastUi.Day.text = dayName;
+                forecastUi.Temperature.text = first_temperature;
+                forecastUi.Temperature.text += ((config._tempRussianStyle) ? consts_1.ELLIPSIS : " " + consts_1.FORWARD_SLASH + " ");
+                forecastUi.Temperature.text += second_temperature + ' ' + this.unitToUnicode(config.TemperatureUnit);
+                forecastUi.Summary.text = comment;
+                forecastUi.Icon.icon_name = (config._useCustomMenuIcons) ? forecastData.condition.customIcon : forecastData.condition.icon;
+            }
+            return true;
+        }
+        catch (e) {
+            this.App.ShowError({
+                type: "hard",
+                detail: "unknown",
+                message: "Forecast parsing failed: " + e.toString(),
+                userError: false
+            });
+            logger_1.Log.Instance.Error("DisplayForecastError " + e);
+            return false;
+        }
+    }
+    ;
+    DisplayBar(weather, provider, config) {
+        this._providerCredit.label = utils_1._("Powered by") + " " + provider.prettyName;
+        this._providerCredit.url = provider.website;
+        this._timestamp.text = utils_1._("As of") + " " + utils_1.AwareDateString(weather.date, this.App.currentLocale, config._show24Hours);
+        if (weather.location.distanceFrom != null) {
+            this._timestamp.text += (", " + utils_1.MetreToUserUnits(weather.location.distanceFrom, this.App.config.DistanceUnit)
+                + this.BigDistanceUnitFor(this.App.config.DistanceUnit) + " " + utils_1._("from you"));
+        }
+        return true;
+    }
+    DisplayHourlyForecast(forecasts, config, tz) {
+        let max = Math.min(forecasts.length, this._hourlyForecasts.length);
+        for (let index = 0; index < max; index++) {
+            const hour = forecasts[index];
+            const ui = this._hourlyForecasts[index];
+            ui.Hour.text = utils_1.GetHoursMinutes(hour.date, this.App.currentLocale, config._show24Hours, tz, this.App.config._shortHourlyTime);
+            ui.Temperature.text = utils_1.TempToUserConfig(hour.temp, config.TemperatureUnit, config._tempRussianStyle) + " " + this.unitToUnicode(config.TemperatureUnit);
+            ui.Icon.icon_name = (config._useCustomMenuIcons) ? hour.condition.customIcon : hour.condition.icon;
+            hour.condition.main = utils_1.capitalizeFirstLetter(hour.condition.main);
+            if (config._translateCondition)
+                hour.condition.main = utils_1._(hour.condition.main);
+            ui.Summary.text = hour.condition.main;
+            if (!!hour.precipitation && hour.precipitation.type != "none") {
+                let precipitationText = null;
+                if (!!hour.precipitation.volume && hour.precipitation.volume > 0) {
+                    precipitationText = utils_1.MillimeterToUserUnits(hour.precipitation.volume, this.App.config.DistanceUnit) + " " + ((this.App.config.DistanceUnit == "metric") ? utils_1._("mm") : utils_1._("in"));
+                }
+                if (!!hour.precipitation.chance) {
+                    precipitationText = (precipitationText == null) ? "" : (precipitationText + ", ");
+                    precipitationText += (Math.round(hour.precipitation.chance).toString() + "%");
+                }
+                if (precipitationText != null)
+                    ui.Precipitation.text = precipitationText;
+            }
+        }
+        this.AdjustHourlyBoxItemWidth();
+        if (max <= 0)
+            this.HideHourlyToggle();
+        return true;
     }
     ShowHourlyWeather() {
         this._hourlyScrollView.show();
@@ -215,214 +426,6 @@ class UI {
     HideLocationSelectors() {
         this._nextLocationButton.actor.hide();
         this._previousLocationButton.actor.hide();
-    }
-    displayWeather(weather, config) {
-        try {
-            if (this.app.config.locationStore.ShouldShowLocationSelectors(config.CurrentLocation))
-                this.ShowLocationSelectors();
-            else
-                this.HideLocationSelectors();
-            let mainCondition = "";
-            let descriptionCondition = "";
-            if (weather.condition.main != null) {
-                mainCondition = weather.condition.main;
-                if (config._translateCondition) {
-                    mainCondition = utils_1.capitalizeFirstLetter(utils_1._(mainCondition));
-                }
-            }
-            if (weather.condition.description != null) {
-                descriptionCondition = utils_1.capitalizeFirstLetter(weather.condition.description);
-                if (config._translateCondition) {
-                    descriptionCondition = utils_1.capitalizeFirstLetter(utils_1._(weather.condition.description));
-                }
-            }
-            let location = "";
-            if (weather.location.city != null && weather.location.country != null) {
-                location = weather.location.city + ", " + weather.location.country;
-            }
-            else {
-                location = Math.round(weather.coord.lat * 10000) / 10000 + ", " + Math.round(weather.coord.lon * 10000) / 10000;
-            }
-            if (utils_1.nonempty(config._locationLabelOverride)) {
-                location = config._locationLabelOverride;
-            }
-            this.app.SetAppletTooltip(location + " - " + utils_1._("As of") + " " + utils_1.AwareDateString(weather.date, this.app.currentLocale, config._show24Hours));
-            this._currentWeatherSummary.text = descriptionCondition;
-            let iconName = weather.condition.icon;
-            if (iconName == null) {
-                iconName = "weather-severe-alert";
-            }
-            if (config._useCustomMenuIcons) {
-                this._currentWeatherIcon.icon_name = weather.condition.customIcon;
-                this.UpdateIconType(IconType.SYMBOLIC);
-            }
-            else {
-                this._currentWeatherIcon.icon_name = iconName;
-                this.UpdateIconType(config.IconType);
-            }
-            this.app.SetAppletIcon(iconName, weather.condition.customIcon);
-            let temp = "";
-            if (weather.temperature != null) {
-                temp = utils_1.TempToUserConfig(weather.temperature, config.TemperatureUnit, config._tempRussianStyle);
-                this._currentWeatherTemperature.text = temp + " " + this.unitToUnicode(config.TemperatureUnit);
-            }
-            let label = "";
-            if (this.app.orientation != Side.LEFT && this.app.orientation != Side.RIGHT) {
-                if (config._showCommentInPanel) {
-                    label += mainCondition;
-                }
-                if (config._showTextInPanel) {
-                    if (label != "") {
-                        label += " ";
-                    }
-                    label += (temp + ' ' + this.unitToUnicode(config.TemperatureUnit));
-                }
-            }
-            else {
-                if (config._showTextInPanel) {
-                    label = temp;
-                    if (this.app.GetPanelHeight() >= 35) {
-                        label += this.unitToUnicode(config.TemperatureUnit);
-                    }
-                }
-            }
-            if (utils_1.nonempty(config._tempTextOverride)) {
-                label = config._tempTextOverride
-                    .replace("{t}", temp)
-                    .replace("{u}", this.unitToUnicode(config.TemperatureUnit))
-                    .replace("{c}", mainCondition);
-            }
-            this.app.SetAppletLabel(label);
-            if (weather.humidity != null) {
-                this._currentWeatherHumidity.text = Math.round(weather.humidity) + "%";
-            }
-            let wind_direction = utils_1.compassDirection(weather.wind.degree);
-            this._currentWeatherWind.text =
-                (wind_direction != undefined ? utils_1._(wind_direction) + " " : "") +
-                    utils_1.MPStoUserUnits(weather.wind.speed, config.WindSpeedUnit);
-            if (config.WindSpeedUnit != "Beaufort")
-                this._currentWeatherWind.text += " " + utils_1._(config.WindSpeedUnit);
-            this._currentWeatherApiUnique.text = "";
-            this._currentWeatherApiUniqueCap.text = "";
-            if (!!weather.extra_field) {
-                this._currentWeatherApiUniqueCap.text = utils_1._(weather.extra_field.name) + ":";
-                let value;
-                switch (weather.extra_field.type) {
-                    case "percent":
-                        value = weather.extra_field.value.toString() + "%";
-                        break;
-                    case "temperature":
-                        value = utils_1.TempToUserConfig(weather.extra_field.value, config.TemperatureUnit, config._tempRussianStyle) + " " + this.unitToUnicode(config.TemperatureUnit);
-                        break;
-                    default:
-                        value = utils_1._(weather.extra_field.value);
-                        break;
-                }
-                this._currentWeatherApiUnique.text = value;
-            }
-            if (weather.pressure != null) {
-                this._currentWeatherPressure.text = utils_1.PressToUserUnits(weather.pressure, config._pressureUnit) + ' ' + utils_1._(config._pressureUnit);
-            }
-            this._currentWeatherLocation.label = location;
-            this._currentWeatherLocation.url = weather.location.url;
-            if (!weather.location.url)
-                this._locationButton.disable();
-            let sunriseText = "";
-            let sunsetText = "";
-            if (weather.sunrise != null && weather.sunset != null && config._showSunrise) {
-                sunriseText = (utils_1.GetHoursMinutes(weather.sunrise, this.app.currentLocale, config._show24Hours, weather.location.timeZone));
-                sunsetText = (utils_1.GetHoursMinutes(weather.sunset, this.app.currentLocale, config._show24Hours, weather.location.timeZone));
-            }
-            this._currentWeatherSunrise.text = sunriseText;
-            this._currentWeatherSunset.text = sunsetText;
-            return true;
-        }
-        catch (e) {
-            logger_1.Log.Instance.Error("DisplayWeatherError: " + e);
-            return false;
-        }
-    }
-    ;
-    displayForecast(weather, config) {
-        try {
-            if (!weather.forecasts)
-                return false;
-            let len = Math.min(this._forecast.length, weather.forecasts.length);
-            for (let i = 0; i < len; i++) {
-                let forecastData = weather.forecasts[i];
-                let forecastUi = this._forecast[i];
-                let t_low = utils_1.TempToUserConfig(forecastData.temp_min, config.TemperatureUnit, config._tempRussianStyle);
-                let t_high = utils_1.TempToUserConfig(forecastData.temp_max, config.TemperatureUnit, config._tempRussianStyle);
-                let first_temperature = config._temperatureHighFirst ? t_high : t_low;
-                let second_temperature = config._temperatureHighFirst ? t_low : t_high;
-                let comment = "";
-                if (forecastData.condition.main != null && forecastData.condition.description != null) {
-                    comment = (config._shortConditions) ? forecastData.condition.main : forecastData.condition.description;
-                    comment = utils_1.capitalizeFirstLetter(comment);
-                    if (config._translateCondition)
-                        comment = utils_1._(comment);
-                }
-                let dayName = utils_1.GetDayName(forecastData.date, this.app.currentLocale, this.app.config._showForecastDates, weather.location.timeZone);
-                forecastUi.Day.text = dayName;
-                forecastUi.Temperature.text = first_temperature;
-                forecastUi.Temperature.text += ((config._tempRussianStyle) ? consts_1.ELLIPSIS : " " + consts_1.FORWARD_SLASH + " ");
-                forecastUi.Temperature.text += second_temperature + ' ' + this.unitToUnicode(config.TemperatureUnit);
-                forecastUi.Summary.text = comment;
-                forecastUi.Icon.icon_name = (config._useCustomMenuIcons) ? forecastData.condition.customIcon : forecastData.condition.icon;
-            }
-            return true;
-        }
-        catch (e) {
-            this.app.ShowError({
-                type: "hard",
-                detail: "unknown",
-                message: "Forecast parsing failed: " + e.toString(),
-                userError: false
-            });
-            logger_1.Log.Instance.Error("DisplayForecastError " + e);
-            return false;
-        }
-    }
-    ;
-    displayBar(weather, provider, config) {
-        this._providerCredit.label = utils_1._("Powered by") + " " + provider.prettyName;
-        this._providerCredit.url = provider.website;
-        this._timestamp.text = utils_1._("As of") + " " + utils_1.AwareDateString(weather.date, this.app.currentLocale, config._show24Hours);
-        if (weather.location.distanceFrom != null) {
-            this._timestamp.text += (", " + utils_1.MetreToUserUnits(weather.location.distanceFrom, this.app.config.DistanceUnit)
-                + this.BigDistanceUnitFor(this.app.config.DistanceUnit) + " " + utils_1._("from you"));
-        }
-        return true;
-    }
-    displayHourlyForecast(forecasts, config, tz) {
-        let max = Math.min(forecasts.length, this._hourlyForecasts.length);
-        for (let index = 0; index < max; index++) {
-            const hour = forecasts[index];
-            const ui = this._hourlyForecasts[index];
-            ui.Hour.text = utils_1.GetHoursMinutes(hour.date, this.app.currentLocale, config._show24Hours, tz, this.app.config._shortHourlyTime);
-            ui.Temperature.text = utils_1.TempToUserConfig(hour.temp, config.TemperatureUnit, config._tempRussianStyle) + " " + this.unitToUnicode(config.TemperatureUnit);
-            ui.Icon.icon_name = (config._useCustomMenuIcons) ? hour.condition.customIcon : hour.condition.icon;
-            hour.condition.main = utils_1.capitalizeFirstLetter(hour.condition.main);
-            if (config._translateCondition)
-                hour.condition.main = utils_1._(hour.condition.main);
-            ui.Summary.text = hour.condition.main;
-            if (!!hour.precipitation && hour.precipitation.type != "none") {
-                let precipitationText = null;
-                if (!!hour.precipitation.volume && hour.precipitation.volume > 0) {
-                    precipitationText = utils_1.MillimeterToUserUnits(hour.precipitation.volume, this.app.config.DistanceUnit) + " " + ((this.app.config.DistanceUnit == "metric") ? utils_1._("mm") : utils_1._("in"));
-                }
-                if (!!hour.precipitation.chance) {
-                    precipitationText = (precipitationText == null) ? "" : (precipitationText + ", ");
-                    precipitationText += (Math.round(hour.precipitation.chance).toString() + "%");
-                }
-                if (precipitationText != null)
-                    ui.Precipitation.text = precipitationText;
-            }
-        }
-        this.AdjustHourlyBoxItemWidth();
-        if (max <= 0)
-            this.HideHourlyToggle();
-        return true;
     }
     AdjustHourlyBoxItemWidth() {
         let requiredWidth = 0;
@@ -541,7 +544,7 @@ class UI {
                 style_class: STYLE_LOCATION_SELECTOR
             }),
         });
-        this._nextLocationButton.actor.connect(consts_1.SIGNAL_CLICKED, Lang.bind(this.app, this.app.NextLocationClicked));
+        this._nextLocationButton.actor.connect(consts_1.SIGNAL_CLICKED, Lang.bind(this.App, this.App.NextLocationClicked));
         this._previousLocationButton = new weatherbutton_1.WeatherButton({
             reactive: true,
             can_focus: true,
@@ -552,7 +555,7 @@ class UI {
                 style_class: STYLE_LOCATION_SELECTOR
             }),
         });
-        this._previousLocationButton.actor.connect(consts_1.SIGNAL_CLICKED, Lang.bind(this.app, this.app.PreviousLocationClicked));
+        this._previousLocationButton.actor.connect(consts_1.SIGNAL_CLICKED, Lang.bind(this.App, this.App.PreviousLocationClicked));
         this._locationBox = new BoxLayout();
         this._locationBox.add(this._previousLocationButton.actor, { x_fill: false, x_align: Align.START, y_align: Align.MIDDLE, expand: false });
         this._locationBox.add(this._currentWeatherLocation, { x_fill: true, x_align: Align.MIDDLE, y_align: Align.MIDDLE, expand: true });
@@ -640,7 +643,7 @@ class UI {
             style_class: STYLE_FORECAST_CONTAINER
         });
         this._futureWeather.set_child(table);
-        let maxDays = this.app.GetMaxForecastDays();
+        let maxDays = this.App.GetMaxForecastDays();
         let maxRow = config._forecastRows;
         let maxCol = config._forecastColumns;
         if (config._verticalOrientation) {
@@ -723,11 +726,11 @@ class UI {
             y_fill: false,
             expand: true
         });
-        if (this.app.GetMaxHourlyForecasts() <= 0) {
+        if (this.App.GetMaxHourlyForecasts() <= 0) {
             this.HideHourlyToggle();
         }
         this._providerCredit = new weatherbutton_1.WeatherButton({ label: utils_1._(consts_1.ELLIPSIS), reactive: true }).actor;
-        this._providerCredit.connect(consts_1.SIGNAL_CLICKED, Lang.bind(this, this.app.OpenUrl));
+        this._providerCredit.connect(consts_1.SIGNAL_CLICKED, Lang.bind(this, this.App.OpenUrl));
         this._bar.add(this._providerCredit, {
             x_fill: false,
             x_align: Align.END,
@@ -741,7 +744,7 @@ class UI {
     }
     rebuildHourlyWeatherUi(config) {
         this.destroyHourlyWeather();
-        let hours = this.app.GetMaxHourlyForecasts();
+        let hours = this.App.GetMaxHourlyForecasts();
         this._hourlyForecasts = [];
         this._hourlyForecastBoxes = [];
         for (let index = 0; index < hours; index++) {

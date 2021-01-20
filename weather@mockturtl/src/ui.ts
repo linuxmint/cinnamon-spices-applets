@@ -89,17 +89,17 @@ export class UI {
     private hourlyToggled: boolean = false;
     private lightTheme: boolean = false;
 
-    private app: WeatherApplet;
+    private readonly App: WeatherApplet;
 
     /** Roll down menu itself */
-    public menu: imports.ui.applet.AppletPopupMenu;
-    private menuManager: imports.ui.popupMenu.PopupMenuManager;
-    private signals: imports.misc.signalManager.SignalManager;
+    private readonly menu: imports.ui.applet.AppletPopupMenu;
+    private readonly menuManager: imports.ui.popupMenu.PopupMenuManager;
+    private readonly signals: imports.misc.signalManager.SignalManager;
 
     constructor(app: WeatherApplet, orientation: imports.gi.St.Side) {
-        this.app = app;
-        this.menuManager = new PopupMenuManager(this.app);
-        this.menu = new AppletPopupMenu(this.app, orientation);
+        this.App = app;
+        this.menuManager = new PopupMenuManager(this.App);
+        this.menu = new AppletPopupMenu(this.App, orientation);
         // this.menu.setCustomStyleClass and 
         //this.menu.actor.add_style_class_name(STYLE_WEATHER_MENU);
         // Doesn't do shit, setting class on the box instead.
@@ -112,7 +112,7 @@ export class UI {
         this.BuildPopupMenu();
         // Subscriptions
 		this.signals.connect(themeManager, 'theme-set', this.OnThemeChanged, this); // on theme change
-		this.app.config.locationStore.StoreChanged.Subscribe(Lang.bind(this, this.onLocationStorageChanged)); //on location store change
+		this.App.config.locationStore.StoreChanged.Subscribe(Lang.bind(this, this.onLocationStorageChanged)); //on location store change
     }
 
 	/**
@@ -128,7 +128,7 @@ export class UI {
         if (newThemeIsLight != this.lightTheme) {
             this.lightTheme = newThemeIsLight;
         }
-        this.app.refreshAndRebuild();
+        this.App.refreshAndRebuild();
     }
 
 	/**
@@ -172,10 +172,10 @@ export class UI {
         }
 	}
 	
-	public onLocationStorageChanged(sender: LocationStore, itemCount: number): void {
+	private onLocationStorageChanged(sender: LocationStore, itemCount: number): void {
         Log.Instance.Debug("On location storage callback called, number of locations now " + itemCount.toString());
         // Hide/show location selectors based on how many items are in storage
-		if (this.app.config.locationStore.ShouldShowLocationSelectors(this.app.config.CurrentLocation))
+		if (this.App.config.locationStore.ShouldShowLocationSelectors(this.App.config.CurrentLocation))
 			this.ShowLocationSelectors();
 		else
 			this.HideLocationSelectors();
@@ -237,10 +237,14 @@ export class UI {
         mainBox.add_actor(this._separatorArea2.actor)
         mainBox.add_actor(this._bar)
         this.menu.addActor(mainBox)
-    }
+	}
+	
+	public Toggle(): void {
+		this.menu.toggle();
+	}
 
     /** Fully rebuilds UI */
-    public rebuild(config: Config): void {
+    public Rebuild(config: Config): void {
         this.showLoadingUi();
         this.rebuildCurrentWeatherUi(config);
         this.rebuildHourlyWeatherUi(config);
@@ -252,7 +256,7 @@ export class UI {
 	 * the "use symbolic icons" setting
 	 */
     public UpdateIconType(iconType: imports.gi.St.IconType): void {
-        if (iconType == IconType.FULLCOLOR && this.app.config._useCustomMenuIcons) return;
+        if (iconType == IconType.FULLCOLOR && this.App.config._useCustomMenuIcons) return;
         this._currentWeatherIcon.icon_type = iconType;
         for (let i = 0; i < this._forecast.length; i++) {
             this._forecast[i].Icon.icon_type = iconType;
@@ -266,95 +270,11 @@ export class UI {
         this._timestamp.text = msg;
     }
 
-    public ShowHourlyWeather(): void {
-        // In some cases the preferred height is not calculated
-        // properly for the first time, so we work around by opening and closing it once
-        this._hourlyScrollView.show();
-        this._hourlyScrollView.hide();
-
-        this.AdjustHourlyBoxItemWidth();
-
-        let [minWidth, naturalWidth] = this._hourlyScrollView.get_preferred_width(-1);
-        let [minHeight, naturalHeight] = this._hourlyScrollView.get_preferred_height(minWidth);
-        Log.Instance.Debug("hourlyScrollView requested height and is set to: " + naturalHeight);
-        this._hourlyScrollView.set_width(minWidth);
-        this._separatorAreaHourly.actor.show();
-        if (!!this._hourlyButton.child) this._hourlyButton.child.icon_name = "custom-up-arrow-symbolic";
-		this._hourlyScrollView.show();
-		// When the scrollView is shown without animation and there is not enough vertical space
-		// (or cinnamon does not think there is enough), the text gets superimposed on top of
-		// each other.
-		// setting the min-height forces to draw with the view's requested height without
-		// interfering with animations.
-		this._hourlyScrollView.style = "min-height: " + naturalHeight.toString() + "px;";
-
-        if (global.settings.get_boolean("desktop-effects-on-menus")) {
-            this._hourlyScrollView.height = 0;
-            addTween(this._hourlyScrollView,
-                {
-                    height: naturalHeight,
-                    time: 0.25,
-                    onUpdate: () => { },
-                    onComplete: () => {
-                        this._hourlyScrollView.set_height(naturalHeight);
-                    }
-                });
-        }
-
-        this.hourlyToggled = true;
-    }
-
-    public HideHourlyWeather(): void {
-        this._separatorAreaHourly.actor.hide();
-        let hscroll = this._hourlyScrollView.get_hscroll_bar();
-        if (!!this._hourlyButton.child) this._hourlyButton.child.icon_name = "custom-down-arrow-symbolic";
-        if (global.settings.get_boolean("desktop-effects-on-menus")) {
-            // TODO: eliminate Clutter Warnings on collapse in logs
-            addTween(this._hourlyScrollView,
-                {
-                    height: 0,
-                    time: 0.25,
-                    onUpdate: () => { },
-                    onComplete: () => {
-                        this._hourlyScrollView.set_height(-1);
-                        this._hourlyScrollView.hide();
-                        // Scroll back to the start
-                        hscroll.get_adjustment().set_value(0);
-                    }
-                }
-            );
-        }
-        else {
-            this._hourlyScrollView.set_height(-1);
-            this._hourlyScrollView.hide();
-        }
-        this.hourlyToggled = false;
-    }
-
-    public ToggleHourlyWeather(): void {
-        if (this.hourlyToggled) {
-            this.HideHourlyWeather();
-        }
-        else {
-            this.ShowHourlyWeather();
-        }
-    }
-
-    public ShowLocationSelectors() {
-        this._nextLocationButton.actor.show();
-        this._previousLocationButton.actor.show();
-    }
-
-    public HideLocationSelectors() {
-        this._nextLocationButton.actor.hide();
-        this._previousLocationButton.actor.hide();
-    }
-
     /** Injects data from weather object into the popupMenu */
-    public displayWeather(weather: WeatherData, config: Config): boolean {
+    public DisplayWeather(weather: WeatherData, config: Config): boolean {
         try {
             // Hide/show location selectors based on how many items are in storage
-            if (this.app.config.locationStore.ShouldShowLocationSelectors(config.CurrentLocation)) this.ShowLocationSelectors();
+            if (this.App.config.locationStore.ShouldShowLocationSelectors(config.CurrentLocation)) this.ShowLocationSelectors();
             else this.HideLocationSelectors();
 
             let mainCondition = "";
@@ -387,7 +307,7 @@ export class UI {
                 location = config._locationLabelOverride;
             }
 
-            this.app.SetAppletTooltip(location + " - " + _("As of") + " " + AwareDateString(weather.date, this.app.currentLocale, config._show24Hours));
+            this.App.SetAppletTooltip(location + " - " + _("As of") + " " + AwareDateString(weather.date, this.App.currentLocale, config._show24Hours));
 
             // Weather Condition
             this._currentWeatherSummary.text = descriptionCondition;
@@ -409,7 +329,7 @@ export class UI {
             }
 
             // Applet icon
-            this.app.SetAppletIcon(iconName, weather.condition.customIcon);
+            this.App.SetAppletIcon(iconName, weather.condition.customIcon);
 
             // Temperature
             let temp = "";
@@ -421,7 +341,7 @@ export class UI {
             // Applet panel label
             let label = "";
             // Horizontal panels
-            if (this.app.orientation != Side.LEFT && this.app.orientation != Side.RIGHT) {
+            if (this.App.orientation != Side.LEFT && this.App.orientation != Side.RIGHT) {
                 if (config._showCommentInPanel) {
                     label += mainCondition;
                 }
@@ -438,7 +358,7 @@ export class UI {
                     label = temp;
                     // Vertical panel width is more than this value then we has space
                     // to show units
-                    if (this.app.GetPanelHeight() >= 35) {
+                    if (this.App.GetPanelHeight() >= 35) {
                         label += this.unitToUnicode(config.TemperatureUnit);
                     }
                 }
@@ -453,7 +373,7 @@ export class UI {
             }
 
             // Set Applet Label, even if the variables are empty
-            this.app.SetAppletLabel(label);
+            this.App.SetAppletLabel(label);
 
             // Displaying humidity
             if (weather.humidity != null) {
@@ -502,8 +422,8 @@ export class UI {
             let sunriseText = "";
             let sunsetText = "";
             if (weather.sunrise != null && weather.sunset != null && config._showSunrise) {
-                sunriseText = (GetHoursMinutes(weather.sunrise, this.app.currentLocale, config._show24Hours, weather.location.timeZone));
-                sunsetText = (GetHoursMinutes(weather.sunset, this.app.currentLocale, config._show24Hours, weather.location.timeZone));
+                sunriseText = (GetHoursMinutes(weather.sunrise, this.App.currentLocale, config._show24Hours, weather.location.timeZone));
+                sunsetText = (GetHoursMinutes(weather.sunset, this.App.currentLocale, config._show24Hours, weather.location.timeZone));
             }
 
             this._currentWeatherSunrise.text = sunriseText;
@@ -516,7 +436,7 @@ export class UI {
     };
 
     /** Injects data from forecasts array into popupMenu */
-    public displayForecast(weather: WeatherData, config: Config): boolean {
+    public DisplayForecast(weather: WeatherData, config: Config): boolean {
         try {
             if (!weather.forecasts) return false;
             let len = Math.min(this._forecast.length, weather.forecasts.length);
@@ -539,7 +459,7 @@ export class UI {
                 }
 
                 // Day Names
-                let dayName: string = GetDayName(forecastData.date, this.app.currentLocale, this.app.config._showForecastDates, weather.location.timeZone);
+                let dayName: string = GetDayName(forecastData.date, this.App.currentLocale, this.App.config._showForecastDates, weather.location.timeZone);
 
                 forecastUi.Day.text = dayName;
                 forecastUi.Temperature.text = first_temperature;
@@ -552,7 +472,7 @@ export class UI {
             }
             return true;
         } catch (e) {
-            this.app.ShowError({
+            this.App.ShowError({
                 type: "hard",
                 detail: "unknown",
                 message: "Forecast parsing failed: " + e.toString(),
@@ -563,26 +483,26 @@ export class UI {
         }
     };
 
-    public displayBar(weather: WeatherData, provider: WeatherProvider, config: Config): boolean {
+    public DisplayBar(weather: WeatherData, provider: WeatherProvider, config: Config): boolean {
         this._providerCredit.label = _("Powered by") + " " + provider.prettyName;
         this._providerCredit.url = provider.website;
-        this._timestamp.text = _("As of") + " " + AwareDateString(weather.date, this.app.currentLocale, config._show24Hours);
+        this._timestamp.text = _("As of") + " " + AwareDateString(weather.date, this.App.currentLocale, config._show24Hours);
         if (weather.location.distanceFrom != null) {
             this._timestamp.text += (
-                ", " + MetreToUserUnits(weather.location.distanceFrom, this.app.config.DistanceUnit)
-                + this.BigDistanceUnitFor(this.app.config.DistanceUnit) + " " + _("from you")
+                ", " + MetreToUserUnits(weather.location.distanceFrom, this.App.config.DistanceUnit)
+                + this.BigDistanceUnitFor(this.App.config.DistanceUnit) + " " + _("from you")
             );
         }
         return true;
     }
 
-    public displayHourlyForecast(forecasts: HourlyForecastData[], config: Config, tz: string): boolean {
+    public DisplayHourlyForecast(forecasts: HourlyForecastData[], config: Config, tz: string): boolean {
         let max = Math.min(forecasts.length, this._hourlyForecasts.length);
         for (let index = 0; index < max; index++) {
             const hour = forecasts[index];
             const ui = this._hourlyForecasts[index];
 
-            ui.Hour.text = GetHoursMinutes(hour.date, this.app.currentLocale, config._show24Hours, tz, this.app.config._shortHourlyTime);
+            ui.Hour.text = GetHoursMinutes(hour.date, this.App.currentLocale, config._show24Hours, tz, this.App.config._shortHourlyTime);
             ui.Temperature.text = TempToUserConfig(hour.temp, config.TemperatureUnit, config._tempRussianStyle) + " " + this.unitToUnicode(config.TemperatureUnit);
             ui.Icon.icon_name = (config._useCustomMenuIcons) ? hour.condition.customIcon : hour.condition.icon;
 
@@ -592,7 +512,7 @@ export class UI {
             if (!!hour.precipitation && hour.precipitation.type != "none") {
                 let precipitationText = null;
                 if (!!hour.precipitation.volume && hour.precipitation.volume > 0) {
-                    precipitationText = MillimeterToUserUnits(hour.precipitation.volume, this.app.config.DistanceUnit) + " " + ((this.app.config.DistanceUnit == "metric") ? _("mm") : _("in"));
+                    precipitationText = MillimeterToUserUnits(hour.precipitation.volume, this.App.config.DistanceUnit) + " " + ((this.App.config.DistanceUnit == "metric") ? _("mm") : _("in"));
                 }
                 if (!!hour.precipitation.chance) {
                     precipitationText = (precipitationText == null) ? "" : (precipitationText + ", ")
@@ -607,6 +527,90 @@ export class UI {
         if (max <= 0) this.HideHourlyToggle();
 
         return true;
+	}
+	
+	private ShowHourlyWeather(): void {
+        // In some cases the preferred height is not calculated
+        // properly for the first time, so we work around by opening and closing it once
+        this._hourlyScrollView.show();
+        this._hourlyScrollView.hide();
+
+        this.AdjustHourlyBoxItemWidth();
+
+        let [minWidth, naturalWidth] = this._hourlyScrollView.get_preferred_width(-1);
+        let [minHeight, naturalHeight] = this._hourlyScrollView.get_preferred_height(minWidth);
+        Log.Instance.Debug("hourlyScrollView requested height and is set to: " + naturalHeight);
+        this._hourlyScrollView.set_width(minWidth);
+        this._separatorAreaHourly.actor.show();
+        if (!!this._hourlyButton.child) this._hourlyButton.child.icon_name = "custom-up-arrow-symbolic";
+		this._hourlyScrollView.show();
+		// When the scrollView is shown without animation and there is not enough vertical space
+		// (or cinnamon does not think there is enough), the text gets superimposed on top of
+		// each other.
+		// setting the min-height forces to draw with the view's requested height without
+		// interfering with animations.
+		this._hourlyScrollView.style = "min-height: " + naturalHeight.toString() + "px;";
+
+        if (global.settings.get_boolean("desktop-effects-on-menus")) {
+            this._hourlyScrollView.height = 0;
+            addTween(this._hourlyScrollView,
+                {
+                    height: naturalHeight,
+                    time: 0.25,
+                    onUpdate: () => { },
+                    onComplete: () => {
+                        this._hourlyScrollView.set_height(naturalHeight);
+                    }
+                });
+        }
+
+        this.hourlyToggled = true;
+    }
+
+    private HideHourlyWeather(): void {
+        this._separatorAreaHourly.actor.hide();
+        let hscroll = this._hourlyScrollView.get_hscroll_bar();
+        if (!!this._hourlyButton.child) this._hourlyButton.child.icon_name = "custom-down-arrow-symbolic";
+        if (global.settings.get_boolean("desktop-effects-on-menus")) {
+            // TODO: eliminate Clutter Warnings on collapse in logs
+            addTween(this._hourlyScrollView,
+                {
+                    height: 0,
+                    time: 0.25,
+                    onUpdate: () => { },
+                    onComplete: () => {
+                        this._hourlyScrollView.set_height(-1);
+                        this._hourlyScrollView.hide();
+                        // Scroll back to the start
+                        hscroll.get_adjustment().set_value(0);
+                    }
+                }
+            );
+        }
+        else {
+            this._hourlyScrollView.set_height(-1);
+            this._hourlyScrollView.hide();
+        }
+        this.hourlyToggled = false;
+    }
+
+    private ToggleHourlyWeather(): void {
+        if (this.hourlyToggled) {
+            this.HideHourlyWeather();
+        }
+        else {
+            this.ShowHourlyWeather();
+        }
+    }
+
+    private ShowLocationSelectors() {
+        this._nextLocationButton.actor.show();
+        this._previousLocationButton.actor.show();
+    }
+
+    private HideLocationSelectors() {
+        this._nextLocationButton.actor.hide();
+        this._previousLocationButton.actor.hide();
     }
 
 	/** Calculates incorrect width the first time, make sure to call this
@@ -747,7 +751,7 @@ export class UI {
                 style_class: STYLE_LOCATION_SELECTOR
             }),
         });
-        this._nextLocationButton.actor.connect(SIGNAL_CLICKED, Lang.bind(this.app, this.app.NextLocationClicked));
+        this._nextLocationButton.actor.connect(SIGNAL_CLICKED, Lang.bind(this.App, this.App.NextLocationClicked));
 
         this._previousLocationButton = new WeatherButton({
             reactive: true,
@@ -759,7 +763,7 @@ export class UI {
                 style_class: STYLE_LOCATION_SELECTOR
             }),
         });
-        this._previousLocationButton.actor.connect(SIGNAL_CLICKED, Lang.bind(this.app, this.app.PreviousLocationClicked));
+        this._previousLocationButton.actor.connect(SIGNAL_CLICKED, Lang.bind(this.App, this.App.PreviousLocationClicked));
 
         this._locationBox = new BoxLayout();
         this._locationBox.add(this._previousLocationButton.actor, { x_fill: false, x_align: Align.START, y_align: Align.MIDDLE, expand: false });
@@ -878,7 +882,7 @@ export class UI {
 
         this._futureWeather.set_child(table);
 
-        let maxDays = this.app.GetMaxForecastDays();
+        let maxDays = this.App.GetMaxForecastDays();
         // User settings
         let maxRow = config._forecastRows;
         let maxCol = config._forecastColumns;
@@ -985,12 +989,12 @@ export class UI {
         })
 
         // Hide if Hourly forecasts are not supported
-        if (this.app.GetMaxHourlyForecasts() <= 0) {
+        if (this.App.GetMaxHourlyForecasts() <= 0) {
             this.HideHourlyToggle();
         }
 
         this._providerCredit = new WeatherButton({ label: _(ELLIPSIS), reactive: true }).actor;
-        this._providerCredit.connect(SIGNAL_CLICKED, Lang.bind(this, this.app.OpenUrl));
+        this._providerCredit.connect(SIGNAL_CLICKED, Lang.bind(this, this.App.OpenUrl));
 
         this._bar.add(this._providerCredit, {
             x_fill: false,
@@ -1007,7 +1011,7 @@ export class UI {
 
     private rebuildHourlyWeatherUi(config: Config) {
         this.destroyHourlyWeather();
-        let hours = this.app.GetMaxHourlyForecasts();
+        let hours = this.App.GetMaxHourlyForecasts();
         this._hourlyForecasts = [];
         this._hourlyForecastBoxes = [];
 

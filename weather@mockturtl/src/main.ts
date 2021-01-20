@@ -73,7 +73,7 @@ export class WeatherApplet extends TextIconApplet {
         this.AddRefreshButton();
         this.EnsureProvider();
         this.ui = new UI(this, orientation);
-        this.ui.rebuild(this.config);
+		this.ui.Rebuild(this.config);
         this.loop = new WeatherLoop(this, instanceId);
 
         this.orientation = orientation;
@@ -282,7 +282,7 @@ export class WeatherApplet extends TextIconApplet {
 
     /** Override function */
     public on_applet_clicked(event: any): void {
-        this.ui.menu.toggle()
+        this.ui.Toggle();
     }
 
     /** Override function */
@@ -373,11 +373,11 @@ export class WeatherApplet extends TextIconApplet {
 
 				weatherInfo = this.MergeWeatherData(weatherInfo, location);
 
-				if (rebuild) this.ui.rebuild(this.config);
-				if (!this.ui.displayWeather(weatherInfo, this.config)
-					|| !this.ui.displayForecast(weatherInfo, this.config)
-					|| !this.ui.displayHourlyForecast(weatherInfo.hourlyForecasts, this.config, weatherInfo.location.timeZone)
-					|| !this.ui.displayBar(weatherInfo, this.provider, this.config)) {
+				if (rebuild) this.ui.Rebuild(this.config);
+				if (!this.ui.DisplayWeather(weatherInfo, this.config)
+					|| !this.ui.DisplayForecast(weatherInfo, this.config)
+					|| !this.ui.DisplayHourlyForecast(weatherInfo.hourlyForecasts, this.config, weatherInfo.location.timeZone)
+					|| !this.ui.DisplayBar(weatherInfo, this.provider, this.config)) {
 					this.Unlock();
 					return "failure";
 				}
@@ -473,7 +473,7 @@ export class WeatherApplet extends TextIconApplet {
 		
         if (error.type == "hard") {
             Log.Instance.Debug("Displaying hard error");
-            this.ui.rebuild(this.config);
+            this.ui.Rebuild(this.config);
             this.DisplayError(this.errMsg[error.detail], (!error.message) ? "" : error.message);
         }
 

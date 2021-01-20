@@ -62,7 +62,7 @@ class WeatherApplet extends TextIconApplet {
         this.AddRefreshButton();
         this.EnsureProvider();
         this.ui = new ui_1.UI(this, orientation);
-        this.ui.rebuild(this.config);
+        this.ui.Rebuild(this.config);
         this.loop = new loop_1.WeatherLoop(this, instanceId);
         this.orientation = orientation;
         try {
@@ -214,7 +214,7 @@ class WeatherApplet extends TextIconApplet {
         this.loop.Stop();
     }
     on_applet_clicked(event) {
-        this.ui.menu.toggle();
+        this.ui.Toggle();
     }
     on_applet_middle_clicked(event) {
     }
@@ -286,11 +286,11 @@ class WeatherApplet extends TextIconApplet {
             }
             weatherInfo = this.MergeWeatherData(weatherInfo, location);
             if (rebuild)
-                this.ui.rebuild(this.config);
-            if (!this.ui.displayWeather(weatherInfo, this.config)
-                || !this.ui.displayForecast(weatherInfo, this.config)
-                || !this.ui.displayHourlyForecast(weatherInfo.hourlyForecasts, this.config, weatherInfo.location.timeZone)
-                || !this.ui.displayBar(weatherInfo, this.provider, this.config)) {
+                this.ui.Rebuild(this.config);
+            if (!this.ui.DisplayWeather(weatherInfo, this.config)
+                || !this.ui.DisplayForecast(weatherInfo, this.config)
+                || !this.ui.DisplayHourlyForecast(weatherInfo.hourlyForecasts, this.config, weatherInfo.location.timeZone)
+                || !this.ui.DisplayBar(weatherInfo, this.provider, this.config)) {
                 this.Unlock();
                 return "failure";
             }
@@ -352,7 +352,7 @@ class WeatherApplet extends TextIconApplet {
         logger_1.Log.Instance.Debug("User facing Error received, error: " + JSON.stringify(error, null, 2));
         if (error.type == "hard") {
             logger_1.Log.Instance.Debug("Displaying hard error");
-            this.ui.rebuild(this.config);
+            this.ui.Rebuild(this.config);
             this.DisplayError(this.errMsg[error.detail], (!error.message) ? "" : error.message);
         }
         if (error.type == "soft") {
