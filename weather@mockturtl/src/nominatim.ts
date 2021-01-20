@@ -9,11 +9,11 @@ import { _ } from "./utils";
 export class GeoLocation {
     private url = "https://nominatim.openstreetmap.org/search/";
     private params = "?format=json&addressdetails=1&limit=1";
-    private app: WeatherApplet = null;
+    private App: WeatherApplet = null;
     private cache: LocationCache = {};
 
     constructor(app: WeatherApplet) {
-        this.app = app;
+        this.App = app;
     }
 
     /**
@@ -29,9 +29,9 @@ export class GeoLocation {
                 return cached;
             }
 
-            let locationData = await this.app.LoadJsonAsync<any>(this.url + encodeURIComponent(searchText) + this.params);
+            let locationData = await this.App.LoadJsonAsync<any>(this.url + encodeURIComponent(searchText) + this.params);
             if (locationData.length == 0) {
-                this.app.ShowError({
+                this.App.ShowError({
                     type: "hard",
                     detail: "bad location format",
                     message: _("Could not find location based on address, please check if it's right")
@@ -55,7 +55,7 @@ export class GeoLocation {
         }
         catch (e) {
             Log.Instance.Error("Could not geo locate, error: " + JSON.stringify(e, null, 2));
-            this.app.ShowError({
+            this.App.ShowError({
                 type: "soft",
                 detail: "bad api response",
                 message: _("Failed to call Geolocation API, see Looking Glass for errors.")

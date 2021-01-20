@@ -62,13 +62,13 @@ export class LocationStore {
         this.file = Gio.File.new_for_path(this.path);
         this.LoadSavedLocations();
     }
-
-    private GetConfigPath(): string {
-        let configPath = GLib.getenv('XDG_CONFIG_HOME')
-        if (configPath == null) configPath = GLib.get_home_dir() + "/.config"
-        return configPath;
-	}
 	
+	/**
+	 * Switch to a location if it's in storage. DOES NOT
+	 * UPDATE THE CONFIG, NEVER USE IT DIRECTLY.
+	 * Use Config.SwitchToNextLocation or Config.SwitchToPreviousLocation.
+	 * @param loc preferably obtained from storage
+	 */
 	public SwitchToLocation(loc: LocationData): boolean {
 		let index = this.FindIndex(loc);
 		if (index == -1) return false;
@@ -76,7 +76,33 @@ export class LocationStore {
 		this.currentIndex = index;
 	}
 
-    public NextLocation(currentLoc: LocationData): LocationData {
+	/**
+	 * Tryes to find a location in storage based on the entryText
+	 * @param entryText 
+	 */
+	public FindLocation(entryText: string): LocationData {
+        for (let index = 0; index < this.locations.length; index++) {
+            const element = this.locations[index];
+            if (element.entryText == entryText)
+                return {
+                    address_string: element.address_string,
+                    country: element.country,
+                    city: element.city,
+                    entryText: element.entryText,
+                    lat: element.lat,
+                    lon: element.lon,
+                    mobile: element.mobile,
+                    timeZone: element.timeZone,
+                    locationSource: element.locationSource,
+                }
+        }
+        return null;
+    }
+
+	/** Only gets the location, if you want to swtich between locations, use 
+	 * Config.SwitchToNextLocation function
+	 */
+    public GetNextLocation(currentLoc: LocationData): LocationData {
         Log.Instance.Debug("Current location: " + JSON.stringify(currentLoc, null, 2));
         if (this.locations.length == 0) return currentLoc; // this should not happen, as buttons are useless in this case
         let nextIndex = null;
@@ -110,7 +136,10 @@ export class LocationStore {
         }
     }
 
-    public PreviousLocation(currentLoc: LocationData): LocationData {
+	/** Only gets the location, if you want to swtich between locations, use 
+	 * Config.SwitchToPreviousLocation function
+	 */
+    public GetPreviousLocation(currentLoc: LocationData): LocationData {
         if (this.locations.length == 0) return currentLoc; // this should not happen, as buttons are useless in this case
         if (this.locations.length == 0) return currentLoc; // this should not happen, as buttons are useless in this case
         let previousIndex = null;
@@ -145,8 +174,10 @@ export class LocationStore {
 
     public ShouldShowLocationSelectors(currentLoc: LocationData): boolean {
         let threshold = this.InStorage(currentLoc) ? 2 : 1;
-        if (this.locations.length >= threshold) return true;
-        else return false;
+		if (this.locations.length >= threshold) 
+			return true;
+		else 
+			return false;
     }
 
     public async SaveCurrentLocation(loc: LocationData) {
@@ -193,7 +224,13 @@ export class LocationStore {
         if (this.currentIndex < 0) this.currentIndex = 0; // no items in array
         NotificationService.Instance.Send(_("Success") + " - " + _("Location Store"), _("Location is deleted from library"), true);
         this.InvokeStorageChanged();
-    }
+	}
+	
+	private GetConfigPath(): string {
+        let configPath = GLib.getenv('XDG_CONFIG_HOME')
+        if (configPath == null) configPath = GLib.get_home_dir() + "/.config"
+        return configPath;
+	}
 
     private InvokeStorageChanged() {
         this.StoreChanged.Invoke(this, this.locations.length);
@@ -239,7 +276,7 @@ export class LocationStore {
         await CloseStream(writeFile);
 	}
 	
-	public InStorage(loc: LocationData): boolean {
+	private InStorage(loc: LocationData): boolean {
         return this.FindIndex(loc) != -1;
     }
 
@@ -251,23 +288,4 @@ export class LocationStore {
         }
         return -1;
 	}
-	
-	public FindLocation(entryText: string): LocationData {
-        for (let index = 0; index < this.locations.length; index++) {
-            const element = this.locations[index];
-            if (element.entryText == entryText)
-                return {
-                    address_string: element.address_string,
-                    country: element.country,
-                    city: element.city,
-                    entryText: element.entryText,
-                    lat: element.lat,
-                    lon: element.lon,
-                    mobile: element.mobile,
-                    timeZone: element.timeZone,
-                    locationSource: element.locationSource,
-                }
-        }
-        return null;
-    }
 }

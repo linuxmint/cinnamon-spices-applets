@@ -8,7 +8,6 @@ const met_uk_1 = require("./met_uk");
 const ui_1 = require("./ui");
 const utils_1 = require("./utils");
 const darkSky_1 = require("./darkSky");
-const nominatim_1 = require("./nominatim");
 const openWeatherMap_1 = require("./openWeatherMap");
 const us_weather_1 = require("./us_weather");
 const weatherbit_1 = require("./weatherbit");
@@ -29,7 +28,6 @@ class WeatherApplet extends TextIconApplet {
         this.currentLocale = null;
         this.lock = false;
         this.refreshTriggeredWhileLocked = false;
-        this.geoLocationService = new nominatim_1.GeoLocation(this);
         this.encounteredError = false;
         this.errMsg = {
             unknown: utils_1._("Error"),
@@ -187,22 +185,18 @@ class WeatherApplet extends TextIconApplet {
         if (this.config.CurrentLocation.locationSource == "ip-api") {
             notification_service_1.NotificationService.Instance.Send(utils_1._("Error") + " - " + utils_1._("Location Store"), utils_1._("You can't save a location obtained automatically, sorry"));
         }
-        this.config.locationStore.SaveCurrentLocation(this.config.CurrentLocation);
+        this.config.LocStore.SaveCurrentLocation(this.config.CurrentLocation);
     }
     async deleteCurrentLocation() {
-        this.config.locationStore.DeleteCurrentLocation(this.config.CurrentLocation);
+        this.config.LocStore.DeleteCurrentLocation(this.config.CurrentLocation);
     }
     NextLocationClicked() {
-        let nextLoc = this.config.locationStore.NextLocation(this.config.CurrentLocation);
-        if (nextLoc == null)
-            return;
-        this.refreshAndRebuild(nextLoc);
+        let loc = this.config.SwitchToNextLocation();
+        this.refreshAndRebuild(loc);
     }
     PreviousLocationClicked() {
-        let previousLoc = this.config.locationStore.PreviousLocation(this.config.CurrentLocation);
-        if (previousLoc == null)
-            return;
-        this.refreshAndRebuild(previousLoc);
+        let loc = this.config.SwitchToPreviousLocation();
+        this.refreshAndRebuild(loc);
     }
     on_orientation_changed(orientation) {
         this.orientation = orientation;
@@ -274,9 +268,6 @@ class WeatherApplet extends TextIconApplet {
                     this.Unlock();
                     return "error";
                 }
-            }
-            else {
-                this.config.InjectLocationToConfig(location, true);
             }
             this.EnsureProvider();
             let weatherInfo = await this.provider.GetWeather(location);

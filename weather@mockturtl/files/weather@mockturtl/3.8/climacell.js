@@ -131,7 +131,7 @@ class Climacell {
     ConstructQuery(callType, loc) {
         let query;
         let key = this.app.config._apiKey.replace(" ", "");
-        if (this.app.config.noApiKey()) {
+        if (this.app.config.NoApiKey()) {
             logger_1.Log.Instance.Error("Climacell: No API Key given");
             this.app.ShowError({
                 type: "hard",

@@ -5,6 +5,7 @@ import { clearTimeout, setTimeout, _, isCoordinate } from "./utils";
 import { Log } from "./logger";
 import { UUID, SIGNAL_CHANGED } from "./consts";
 import { LocationStore } from "./locationstore";
+import { GeoLocation } from "./nominatim";
 
 const { AppletSettings, BindingDirection } = imports.ui.settings;
 const Lang: typeof imports.lang = imports.lang;
@@ -13,46 +14,34 @@ const { IconType } = imports.gi.St;
 
 /** Units Used in Options. Change Options list if You change this! */
 export type WeatherUnits = 'automatic' | 'celsius' | 'fahrenheit';
-
 /** Units Used in Options. Change Options list if You change this! */
 export type WeatherWindSpeedUnits = 'automatic' | 'kph' | 'mph' | 'm/s' | 'Knots' | 'Beaufort';
-
 /** Units used in Options. Change Options list if You change this! */
 export type WeatherPressureUnits = 'hPa' | 'mm Hg' | 'in Hg' | 'Pa' | 'psi' | 'atm' | 'at';
-
 /** Change settings-scheme if you change this! */
 export type DistanceUnits = 'automatic' | 'metric' | 'imperial';
-
 export type Services = "OpenWeatherMap" | "DarkSky" | "MetNorway" | "Weatherbit" | "Yahoo" | "Climacell" | "Met Office UK" | "US Weather";
 export class Config {
 	// Info partially from https://github.com/unicode-org/cldr/blob/release-38-1/common/supplemental/units.xml
-	/**
-	 * Default is celsius
-	 */
-	fahrenheitCountries = ["bs", "bz", "ky", "pr", "pw", "us"];
-
-	/**
-	 * Default kph, gb added to mph keys
-	 */
-	windSpeedUnitLocales: WindSpeedLocalePrefs = {
+	/** Default is celsius */
+	private readonly fahrenheitCountries = ["bs", "bz", "ky", "pr", "pw", "us"];
+	/** Default kph, gb added to mph keys  */
+	private readonly windSpeedUnitLocales: WindSpeedLocalePrefs = {
 		"fi kr no pl ru se": "m/s",
 		"us gb": "mph"
 	}
-	
-	/**
-	 * Default metric
-	 */
-	distanceUnitLocales: DistanceUnitLocalePrefs = {
+	/** Default metric */
+	private readonly distanceUnitLocales: DistanceUnitLocalePrefs = {
 		"us gb": "imperial"
 	}
 
-    WEATHER_LOCATION = "location"
-    WEATHER_USE_SYMBOLIC_ICONS_KEY = 'useSymbolicIcons'
+    private readonly WEATHER_LOCATION = "location"
+    private readonly WEATHER_USE_SYMBOLIC_ICONS_KEY = 'useSymbolicIcons'
 
 	/**
 	 * Keys matching the ones in settings-schema.json
 	 */
-    KEYS: SettingKeys = {
+    private readonly KEYS: SettingKeys = {
         DATA_SERVICE: "dataService",
         API_KEY: "apiKey",
         TEMPERATURE_UNIT_KEY: "temperatureUnit",
@@ -81,13 +70,16 @@ export class Config {
         SHORT_HOURLY_TIME: "shortHourlyTime",
         SHOW_FORECAST_DATES: "showForecastDates"
     }
-
 	// Settings variables to bind to
+	// complex variables, using getters instead to access
 	private readonly _location: string;
 	private readonly _temperatureUnit: WeatherUnits;
 	private readonly _windSpeedUnit: WeatherWindSpeedUnits;
 	private readonly _distanceUnit: DistanceUnits;
+	// No need to access this from the outside
+	private readonly keybinding: any;
 
+	// simple variables
     public readonly _refreshInterval: number;
     public readonly _manualLocation: boolean;
     public readonly _dataService: Services;
@@ -113,8 +105,6 @@ export class Config {
     public readonly _shortHourlyTime: boolean;
     public readonly _showForecastDates: boolean;
 
-    public keybinding: any;
-
     /** Timeout */
     private doneTypingLocation: any = null;
 	private currentLocation: LocationData = null;
@@ -123,14 +113,18 @@ export class Config {
 	private app: WeatherApplet;
     private countryCode: string;
     
-	public readonly autoLocProvider: IpApi
-	public readonly locationStore: LocationStore;
+	private readonly autoLocProvider: IpApi
+	private readonly geoLocationService: GeoLocation;
+
+	/** Stores and retrieves manual locations */
+	public readonly LocStore: LocationStore;
 
     constructor(app: WeatherApplet, instanceID: number, locale: string) {
 		this.app = app;
-		this.locationStore = new LocationStore(this.app);
+		this.LocStore = new LocationStore(this.app);
 
-        this.autoLocProvider = new IpApi(app); // IP location lookup
+		this.autoLocProvider = new IpApi(app); // IP location lookup
+		this.geoLocationService = new GeoLocation(app);
 		this.countryCode = this.GetCountryCode(locale);
         this.settings = new AppletSettings(this, UUID, instanceID);
         this.BindSettings();
@@ -150,22 +144,12 @@ export class Config {
             this.WEATHER_LOCATION, ("_" + this.WEATHER_LOCATION), Lang.bind(this, this.OnLocationChanged), null);
 
         this.settings.bindProperty(BindingDirection.IN, "keybinding",
-            "keybinding", Lang.bind(this, this.onKeySettingsUpdated), null);
+            "keybinding", Lang.bind(this, this.OnKeySettingsUpdated), null);
 
         keybindingManager.addHotKey(
             UUID, this.keybinding, Lang.bind(this.app, this.app.on_applet_clicked));
 
         this.settings.connect(SIGNAL_CHANGED + this.WEATHER_USE_SYMBOLIC_ICONS_KEY, Lang.bind(this, this.IconTypeChanged));
-	}
-	
-	    /** Override function */
-	public onKeySettingsUpdated(): void {
-		if (this.keybinding != null) {
-			keybindingManager.addHotKey(UUID,
-				this.keybinding,
-				Lang.bind(this.app, this.app.on_applet_clicked)
-			);
-		}
 	}
 
 	public get CurrentLocation() {
@@ -205,22 +189,30 @@ export class Config {
         return this.settings.getValue(this.WEATHER_USE_SYMBOLIC_ICONS_KEY) ?
             IconType.SYMBOLIC :
             IconType.FULLCOLOR
-    };
+	};
+	
+	/** Called when user changed manual locations, automatically switches to maunal location mode. */
+	public SwitchToNextLocation(): LocationData {
+		let nextLoc = this.LocStore.GetNextLocation(this.CurrentLocation);
+		if (nextLoc == null) return null;
+		this.InjectLocationToConfig(nextLoc, true);
+		return nextLoc;
+	}
 
-    public noApiKey(): boolean {
+	/** Called when user changed manual locations, automatically switches to maunal location mode. */
+	public SwitchToPreviousLocation(): LocationData {
+        let previousLoc = this.LocStore.GetPreviousLocation(this.CurrentLocation);
+		if (previousLoc == null) return null;
+		this.InjectLocationToConfig(previousLoc, true);
+		return previousLoc;
+	}
+
+    public NoApiKey(): boolean {
         if (this._apiKey == undefined || this._apiKey == "") {
             return true;
         }
         return false;
     };
-
-    public InjectLocationToConfig(loc: LocationData, switchToManual: boolean = false) {
-        Log.Instance.Debug("Location setting is now: " + loc.entryText);
-        let text = loc.entryText + ""; // Only values can be injected into settings and not references, so we add empty string to it.
-        this.SetLocation(text);
-        this.currentLocation = loc;
-        if (switchToManual == true) this.settings.setValue(this.KEYS.MANUAL_LOCATION, true);
-    }
 
 	/** 
 	 * @returns LocationData null if failed to obtain
@@ -255,10 +247,10 @@ export class Config {
         }
 
         // Find location in storage
-        let location = this.locationStore.FindLocation(this._location);
+        let location = this.LocStore.FindLocation(this._location);
         if (location != null) {
             Log.Instance.Debug("location exist in locationstore, retrieve");
-			this.locationStore.SwitchToLocation(location);
+			this.LocStore.SwitchToLocation(location);
             this.InjectLocationToConfig(location, true);
             return location;
         }
@@ -282,7 +274,7 @@ export class Config {
         }
 
         Log.Instance.Debug("Location is text, geolocating...")
-        let locationData = await this.app.geoLocationService.GetLocation(loc);
+        let locationData = await this.geoLocationService.GetLocation(loc);
         // User facing errors are handled by service
         if (locationData == null) return null;
         if (!!locationData?.entryText) {
@@ -290,11 +282,11 @@ export class Config {
         }
 
         // Maybe location is in locationStore, first search
-        location = this.locationStore.FindLocation(locationData.entryText);
+        location = this.LocStore.FindLocation(locationData.entryText);
         if (location != null) {
             Log.Instance.Debug("Found location was found in locationStore, return that instead");
 			this.InjectLocationToConfig(location);
-			this.locationStore.SwitchToLocation(location);
+			this.LocStore.SwitchToLocation(location);
             return location;
         }
         else {
@@ -305,9 +297,27 @@ export class Config {
 	
 	// UTILS
 
+	private InjectLocationToConfig(loc: LocationData, switchToManual: boolean = false) {
+        Log.Instance.Debug("Location setting is now: " + loc.entryText);
+        let text = loc.entryText + ""; // Only values can be injected into settings and not references, so we add empty string to it.
+        this.SetLocation(text);
+        this.currentLocation = loc;
+        if (switchToManual == true) this.settings.setValue(this.KEYS.MANUAL_LOCATION, true);
+    }
+
 	private IconTypeChanged() {
         this.app.ui.UpdateIconType(this.IconType);
         Log.Instance.Debug("Symbolic icon setting changed");
+	}
+
+	private OnKeySettingsUpdated(): void {
+		if (this.keybinding != null) {
+			keybindingManager.addHotKey(
+				UUID,
+				this.keybinding,
+				Lang.bind(this.app, this.app.on_applet_clicked)
+			);
+		}
 	}
 
 	/** It was spamming refresh before, changed to wait until user stopped typing fro 3 seconds */

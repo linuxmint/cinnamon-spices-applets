@@ -167,7 +167,7 @@ export class DarkSky implements WeatherProvider {
         this.SetQueryUnit();
         let query;
         let key = this.app.config._apiKey.replace(" ", "");
-        if (this.app.config.noApiKey()) {
+        if (this.app.config.NoApiKey()) {
             Log.Instance.Error("DarkSky: No API Key given");
             this.app.ShowError({
                 type: "hard",

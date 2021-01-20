@@ -22,19 +22,31 @@ class LocationStore {
         this.file = Gio.File.new_for_path(this.path);
         this.LoadSavedLocations();
     }
-    GetConfigPath() {
-        let configPath = GLib.getenv('XDG_CONFIG_HOME');
-        if (configPath == null)
-            configPath = GLib.get_home_dir() + "/.config";
-        return configPath;
-    }
     SwitchToLocation(loc) {
         let index = this.FindIndex(loc);
         if (index == -1)
             return false;
         this.currentIndex = index;
     }
-    NextLocation(currentLoc) {
+    FindLocation(entryText) {
+        for (let index = 0; index < this.locations.length; index++) {
+            const element = this.locations[index];
+            if (element.entryText == entryText)
+                return {
+                    address_string: element.address_string,
+                    country: element.country,
+                    city: element.city,
+                    entryText: element.entryText,
+                    lat: element.lat,
+                    lon: element.lon,
+                    mobile: element.mobile,
+                    timeZone: element.timeZone,
+                    locationSource: element.locationSource,
+                };
+        }
+        return null;
+    }
+    GetNextLocation(currentLoc) {
         logger_1.Log.Instance.Debug("Current location: " + JSON.stringify(currentLoc, null, 2));
         if (this.locations.length == 0)
             return currentLoc;
@@ -64,7 +76,7 @@ class LocationStore {
             locationSource: this.locations[nextIndex].locationSource,
         };
     }
-    PreviousLocation(currentLoc) {
+    GetPreviousLocation(currentLoc) {
         if (this.locations.length == 0)
             return currentLoc;
         if (this.locations.length == 0)
@@ -144,6 +156,12 @@ class LocationStore {
         notification_service_1.NotificationService.Instance.Send(utils_1._("Success") + " - " + utils_1._("Location Store"), utils_1._("Location is deleted from library"), true);
         this.InvokeStorageChanged();
     }
+    GetConfigPath() {
+        let configPath = GLib.getenv('XDG_CONFIG_HOME');
+        if (configPath == null)
+            configPath = GLib.get_home_dir() + "/.config";
+        return configPath;
+    }
     InvokeStorageChanged() {
         this.StoreChanged.Invoke(this, this.locations.length);
     }
@@ -194,24 +212,6 @@ class LocationStore {
                 return index;
         }
         return -1;
-    }
-    FindLocation(entryText) {
-        for (let index = 0; index < this.locations.length; index++) {
-            const element = this.locations[index];
-            if (element.entryText == entryText)
-                return {
-                    address_string: element.address_string,
-                    country: element.country,
-                    city: element.city,
-                    entryText: element.entryText,
-                    lat: element.lat,
-                    lon: element.lon,
-                    mobile: element.mobile,
-                    timeZone: element.timeZone,
-                    locationSource: element.locationSource,
-                };
-        }
-        return null;
     }
 }
 exports.LocationStore = LocationStore;

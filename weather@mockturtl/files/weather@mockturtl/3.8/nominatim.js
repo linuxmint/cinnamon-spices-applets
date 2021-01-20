@@ -7,9 +7,9 @@ class GeoLocation {
     constructor(app) {
         this.url = "https://nominatim.openstreetmap.org/search/";
         this.params = "?format=json&addressdetails=1&limit=1";
-        this.app = null;
+        this.App = null;
         this.cache = {};
-        this.app = app;
+        this.App = app;
     }
     async GetLocation(searchText) {
         var _a;
@@ -20,9 +20,9 @@ class GeoLocation {
                 logger_1.Log.Instance.Debug("Returning cached geolocation info for '" + searchText + "'.");
                 return cached;
             }
-            let locationData = await this.app.LoadJsonAsync(this.url + encodeURIComponent(searchText) + this.params);
+            let locationData = await this.App.LoadJsonAsync(this.url + encodeURIComponent(searchText) + this.params);
             if (locationData.length == 0) {
-                this.app.ShowError({
+                this.App.ShowError({
                     type: "hard",
                     detail: "bad location format",
                     message: utils_1._("Could not find location based on address, please check if it's right")
@@ -46,7 +46,7 @@ class GeoLocation {
         }
         catch (e) {
             logger_1.Log.Instance.Error("Could not geo locate, error: " + JSON.stringify(e, null, 2));
-            this.app.ShowError({
+            this.App.ShowError({
                 type: "soft",
                 detail: "bad api response",
                 message: utils_1._("Failed to call Geolocation API, see Looking Glass for errors.")

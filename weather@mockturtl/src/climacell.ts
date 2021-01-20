@@ -170,7 +170,7 @@ export class Climacell implements WeatherProvider {
     private ConstructQuery(callType: CallType, loc: LocationData): string {
         let query;
         let key = this.app.config._apiKey.replace(" ", "");
-        if (this.app.config.noApiKey()) {
+        if (this.app.config.NoApiKey()) {
             Log.Instance.Error("Climacell: No API Key given");
             this.app.ShowError({
                 type: "hard",

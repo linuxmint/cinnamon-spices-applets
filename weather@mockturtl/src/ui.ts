@@ -112,7 +112,7 @@ export class UI {
         this.BuildPopupMenu();
         // Subscriptions
 		this.signals.connect(themeManager, 'theme-set', this.OnThemeChanged, this); // on theme change
-		this.App.config.locationStore.StoreChanged.Subscribe(Lang.bind(this, this.onLocationStorageChanged)); //on location store change
+		this.App.config.LocStore.StoreChanged.Subscribe(Lang.bind(this, this.onLocationStorageChanged)); //on location store change
     }
 
 	/**
@@ -175,7 +175,7 @@ export class UI {
 	private onLocationStorageChanged(sender: LocationStore, itemCount: number): void {
         Log.Instance.Debug("On location storage callback called, number of locations now " + itemCount.toString());
         // Hide/show location selectors based on how many items are in storage
-		if (this.App.config.locationStore.ShouldShowLocationSelectors(this.App.config.CurrentLocation))
+		if (this.App.config.LocStore.ShouldShowLocationSelectors(this.App.config.CurrentLocation))
 			this.ShowLocationSelectors();
 		else
 			this.HideLocationSelectors();
@@ -274,7 +274,7 @@ export class UI {
     public DisplayWeather(weather: WeatherData, config: Config): boolean {
         try {
             // Hide/show location selectors based on how many items are in storage
-            if (this.App.config.locationStore.ShouldShowLocationSelectors(config.CurrentLocation)) this.ShowLocationSelectors();
+            if (this.App.config.LocStore.ShouldShowLocationSelectors(config.CurrentLocation)) this.ShowLocationSelectors();
             else this.HideLocationSelectors();
 
             let mainCondition = "";

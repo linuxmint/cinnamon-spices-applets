@@ -36,15 +36,15 @@ export class WeatherApplet extends TextIconApplet {
     /** Running applet's path*/
     public readonly appletDir: string;
 
-    public readonly currentLocale: string = null;
+	public readonly currentLocale: string = null;
+	public readonly config: Config;
+	public readonly ui: UI;
+	
     private readonly loop: WeatherLoop;
-    public readonly config: Config;
-    public readonly ui: UI;
     private lock = false;
     private refreshTriggeredWhileLocked = false;
 
     private provider: WeatherProvider; // API
-    public readonly geoLocationService = new GeoLocation(this);
     public orientation: imports.gi.St.Side;
     //public locationStore: LocationStore = null;
     public displayedHourlyForecasts: number;
@@ -239,23 +239,21 @@ export class WeatherApplet extends TextIconApplet {
         if (this.config.CurrentLocation.locationSource == "ip-api") {
             NotificationService.Instance.Send(_("Error") + " - " + _("Location Store"), _("You can't save a location obtained automatically, sorry"));
         }
-        this.config.locationStore.SaveCurrentLocation(this.config.CurrentLocation);
+        this.config.LocStore.SaveCurrentLocation(this.config.CurrentLocation);
     }
 
     private async deleteCurrentLocation(): Promise<void> {
-        this.config.locationStore.DeleteCurrentLocation(this.config.CurrentLocation);
+		this.config.LocStore.DeleteCurrentLocation(this.config.CurrentLocation);
 	}
 	
     public NextLocationClicked() {
-        let nextLoc = this.config.locationStore.NextLocation(this.config.CurrentLocation);
-        if (nextLoc == null) return;
-        this.refreshAndRebuild(nextLoc);
+		let loc = this.config.SwitchToNextLocation();
+		this.refreshAndRebuild(loc);
     }
 
     public PreviousLocationClicked() {
-        let previousLoc = this.config.locationStore.PreviousLocation(this.config.CurrentLocation);
-        if (previousLoc == null) return;
-        this.refreshAndRebuild(previousLoc);
+		let loc = this.config.SwitchToPreviousLocation();
+		this.refreshAndRebuild(loc);
     }
 	
 	// -------------------------------------------------------------------
@@ -360,32 +358,29 @@ export class WeatherApplet extends TextIconApplet {
 					return "error";
 				}
 			}
-			else { // Using location changer buttons
-				// switching manual location switch to true in this case
-				this.config.InjectLocationToConfig(location, true);
-			}
-				this.EnsureProvider();
-				let weatherInfo = await this.provider.GetWeather(location);
-				if (weatherInfo == null) {
-					this.Unlock();
-					return "failure";
-				}
 
-				weatherInfo = this.MergeWeatherData(weatherInfo, location);
-
-				if (rebuild) this.ui.Rebuild(this.config);
-				if (!this.ui.DisplayWeather(weatherInfo, this.config)
-					|| !this.ui.DisplayForecast(weatherInfo, this.config)
-					|| !this.ui.DisplayHourlyForecast(weatherInfo.hourlyForecasts, this.config, weatherInfo.location.timeZone)
-					|| !this.ui.DisplayBar(weatherInfo, this.provider, this.config)) {
-					this.Unlock();
-					return "failure";
-				}
-
-				Log.Instance.Print("Weather Information refreshed");
-				this.loop.ResetErrorCount();
+			this.EnsureProvider();
+			let weatherInfo = await this.provider.GetWeather(location);
+			if (weatherInfo == null) {
 				this.Unlock();
-				return "success";
+				return "failure";
+			}
+
+			weatherInfo = this.MergeWeatherData(weatherInfo, location);
+
+			if (rebuild) this.ui.Rebuild(this.config);
+			if (!this.ui.DisplayWeather(weatherInfo, this.config)
+				|| !this.ui.DisplayForecast(weatherInfo, this.config)
+				|| !this.ui.DisplayHourlyForecast(weatherInfo.hourlyForecasts, this.config, weatherInfo.location.timeZone)
+				|| !this.ui.DisplayBar(weatherInfo, this.provider, this.config)) {
+				this.Unlock();
+				return "failure";
+			}
+
+			Log.Instance.Print("Weather Information refreshed");
+			this.loop.ResetErrorCount();
+			this.Unlock();
+			return "success";
         }
         catch (e) {
             Log.Instance.Error("Generic Error while refreshing Weather info: " + e);
@@ -409,7 +404,7 @@ export class WeatherApplet extends TextIconApplet {
 
     public GetMaxForecastDays(): number {
         if (!this.provider) return this.config._forecastDays;
-        return Math.min(this.config._forecastDays, this.provider.maxForecastSupport);
+		return Math.min(this.config._forecastDays, this.provider.maxForecastSupport);
     }
 
     public GetMaxHourlyForecasts(): number {

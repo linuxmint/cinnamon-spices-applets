@@ -250,7 +250,7 @@ export class Weatherbit implements WeatherProvider {
 
     private ConstructQuery(query: string, loc: LocationData): string {
         let key = this.app.config._apiKey.replace(" ", "");
-        if (this.app.config.noApiKey()) {
+        if (this.app.config.NoApiKey()) {
             Log.Instance.Error("DarkSky: No API Key given");
             this.app.ShowError({
                 type: "hard",
