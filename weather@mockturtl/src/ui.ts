@@ -343,7 +343,7 @@ export class UI {
     public displayWeather(weather: WeatherData, config: Config): boolean {
         try {
             // Hide/show location selectors based on how many items are in storage
-            if (this.app.locationStore.ShouldShowLocationSelectors(config.CurrentLocation)) this.ShowLocationSelectors();
+            if (this.app.config.locationStore.ShouldShowLocationSelectors(config.CurrentLocation)) this.ShowLocationSelectors();
             else this.HideLocationSelectors();
 
             let mainCondition = "";

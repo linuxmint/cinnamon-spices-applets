@@ -210,7 +210,7 @@ class UI {
     }
     displayWeather(weather, config) {
         try {
-            if (this.app.locationStore.ShouldShowLocationSelectors(config.CurrentLocation))
+            if (this.app.config.locationStore.ShouldShowLocationSelectors(config.CurrentLocation))
                 this.ShowLocationSelectors();
             else
                 this.HideLocationSelectors();

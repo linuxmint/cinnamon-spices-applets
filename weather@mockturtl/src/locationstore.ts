@@ -2,6 +2,7 @@
 // TODO: Make internal persistent setting when switching to location store entries and back
 // Example schema entry:
 
+import { Event } from "./events";
 import { CloseStream, LoadContents, OverwriteAndGetIOStream, WriteAsync } from "./io_lib";
 import { Log } from "./logger";
 import { WeatherApplet } from "./main";
@@ -29,7 +30,7 @@ const GLib = imports.gi.GLib;
 */
 export class LocationStore {
 
-    path: string = null; // ~/.config/weather-mockturtl/locations.json
+    private path: string = null; // ~/.config/weather-mockturtl/locations.json
     private file: imports.gi.Gio.File = null;
     private locations: LocationData[] = [];
     private app: WeatherApplet = null;
@@ -45,7 +46,7 @@ export class LocationStore {
 	/**
 	 * event callback for applet when location storage is modified
 	 */
-    private StoreChanged: (storeItemCount: number) => void = null;
+	public readonly StoreChanged = new Event<LocationStore, number>();
 
 	/**
 	 * 
@@ -53,13 +54,12 @@ export class LocationStore {
 	 * @param app 
 	 * @param onStoreChanged called when locations are loaded from file, added or deleted
 	 */
-    constructor(app: WeatherApplet, onStoreChanged?: (itemCount: number) => void) {
+    constructor(app: WeatherApplet) {
         this.app = app;
 
         this.path = this.GetConfigPath() + "/weather-mockturtl/locations.json"
         Log.Instance.Debug("location store path is: " + this.path);
         this.file = Gio.File.new_for_path(this.path);
-        if (onStoreChanged != null) this.StoreChanged = onStoreChanged;
         this.LoadSavedLocations();
     }
 
@@ -196,8 +196,7 @@ export class LocationStore {
     }
 
     private InvokeStorageChanged() {
-        if (this.StoreChanged == null) return;
-        this.StoreChanged(this.locations.length);
+        this.StoreChanged.Invoke(this, this.locations.length);
     }
 
     private async LoadSavedLocations(): Promise<boolean> {

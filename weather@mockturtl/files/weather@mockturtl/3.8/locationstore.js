@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.LocationStore = void 0;
+const events_1 = require("./events");
 const io_lib_1 = require("./io_lib");
 const logger_1 = require("./logger");
 const notification_service_1 = require("./notification_service");
@@ -8,19 +9,17 @@ const utils_1 = require("./utils");
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 class LocationStore {
-    constructor(app, onStoreChanged) {
+    constructor(app) {
         this.path = null;
         this.file = null;
         this.locations = [];
         this.app = null;
         this.currentIndex = 0;
-        this.StoreChanged = null;
+        this.StoreChanged = new events_1.Event();
         this.app = app;
         this.path = this.GetConfigPath() + "/weather-mockturtl/locations.json";
         logger_1.Log.Instance.Debug("location store path is: " + this.path);
         this.file = Gio.File.new_for_path(this.path);
-        if (onStoreChanged != null)
-            this.StoreChanged = onStoreChanged;
         this.LoadSavedLocations();
     }
     GetConfigPath() {
@@ -146,9 +145,7 @@ class LocationStore {
         this.InvokeStorageChanged();
     }
     InvokeStorageChanged() {
-        if (this.StoreChanged == null)
-            return;
-        this.StoreChanged(this.locations.length);
+        this.StoreChanged.Invoke(this, this.locations.length);
     }
     async LoadSavedLocations() {
         let content = null;

@@ -3,7 +3,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.WeatherApplet = void 0;
 const climacell_1 = require("./climacell");
 const config_1 = require("./config");
-const locationstore_1 = require("./locationstore");
 const loop_1 = require("./loop");
 const met_uk_1 = require("./met_uk");
 const ui_1 = require("./ui");
@@ -24,7 +23,6 @@ const { get_language_names } = imports.gi.GLib;
 const Lang = imports.lang;
 const { spawnCommandLine, spawnCommandLineAsyncIO } = imports.misc.util;
 const { IconType } = imports.gi.St;
-const keybindingManager = imports.ui.main.keybindingManager;
 class WeatherApplet extends TextIconApplet {
     constructor(metadata, orientation, panelHeight, instanceId) {
         super(orientation, panelHeight, instanceId);
@@ -32,7 +30,6 @@ class WeatherApplet extends TextIconApplet {
         this.lock = false;
         this.refreshTriggeredWhileLocked = false;
         this.geoLocationService = new nominatim_1.GeoLocation(this);
-        this.locationStore = null;
         this.encounteredError = false;
         this.errMsg = {
             unknown: utils_1._("Error"),
@@ -67,7 +64,6 @@ class WeatherApplet extends TextIconApplet {
         this.ui = new ui_1.UI(this, orientation);
         this.ui.rebuild(this.config);
         this.loop = new loop_1.WeatherLoop(this, instanceId);
-        this.locationStore = new locationstore_1.LocationStore(this, Lang.bind(this, this.onLocationStorageChanged));
         this.orientation = orientation;
         try {
             this.setAllowedLayout(AllowedLayout.BOTH);
@@ -191,26 +187,26 @@ class WeatherApplet extends TextIconApplet {
         if (this.config.CurrentLocation.locationSource == "ip-api") {
             notification_service_1.NotificationService.Instance.Send(utils_1._("Error") + " - " + utils_1._("Location Store"), utils_1._("You can't save a location obtained automatically, sorry"));
         }
-        this.locationStore.SaveCurrentLocation(this.config.CurrentLocation);
+        this.config.locationStore.SaveCurrentLocation(this.config.CurrentLocation);
     }
     async deleteCurrentLocation() {
-        this.locationStore.DeleteCurrentLocation(this.config.CurrentLocation);
+        this.config.locationStore.DeleteCurrentLocation(this.config.CurrentLocation);
     }
-    onLocationStorageChanged(itemCount) {
+    onLocationStorageChanged(sender, itemCount) {
         logger_1.Log.Instance.Debug("On location storage callback called, number of locations now " + itemCount.toString());
-        if (this.locationStore.ShouldShowLocationSelectors(this.config.CurrentLocation))
+        if (this.config.locationStore.ShouldShowLocationSelectors(this.config.CurrentLocation))
             this.ui.ShowLocationSelectors();
         else
             this.ui.HideLocationSelectors();
     }
     NextLocationClicked() {
-        let nextLoc = this.locationStore.NextLocation(this.config.CurrentLocation);
+        let nextLoc = this.config.locationStore.NextLocation(this.config.CurrentLocation);
         if (nextLoc == null)
             return;
         this.refreshAndRebuild(nextLoc);
     }
     PreviousLocationClicked() {
-        let previousLoc = this.locationStore.PreviousLocation(this.config.CurrentLocation);
+        let previousLoc = this.config.locationStore.PreviousLocation(this.config.CurrentLocation);
         if (previousLoc == null)
             return;
         this.refreshAndRebuild(previousLoc);
@@ -220,11 +216,6 @@ class WeatherApplet extends TextIconApplet {
         this.refreshWeather(true);
     }
     ;
-    _onKeySettingsUpdated() {
-        if (this.config.keybinding != null) {
-            keybindingManager.addHotKey(consts_1.UUID, this.config.keybinding, Lang.bind(this, this.on_applet_clicked));
-        }
-    }
     on_applet_removed_from_panel(deleteConfig) {
         logger_1.Log.Instance.Print("Removing applet instance...");
         this.loop.Stop();

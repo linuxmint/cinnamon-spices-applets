@@ -30,7 +30,6 @@ const { get_language_names } = imports.gi.GLib;
 const Lang: typeof imports.lang = imports.lang;
 const { spawnCommandLine, spawnCommandLineAsyncIO } = imports.misc.util;
 const { IconType } = imports.gi.St;
-const keybindingManager = imports.ui.main.keybindingManager;
 
 export class WeatherApplet extends TextIconApplet {
 
@@ -47,7 +46,7 @@ export class WeatherApplet extends TextIconApplet {
     private provider: WeatherProvider; // API
     public readonly geoLocationService = new GeoLocation(this);
     public orientation: imports.gi.St.Side;
-    public locationStore: LocationStore = null;
+    //public locationStore: LocationStore = null;
     public displayedHourlyForecasts: number;
 
 	/** Used for error handling, first error calls flips it
@@ -76,8 +75,6 @@ export class WeatherApplet extends TextIconApplet {
         this.ui = new UI(this, orientation);
         this.ui.rebuild(this.config);
         this.loop = new WeatherLoop(this, instanceId);
-
-        this.locationStore = new LocationStore(this, Lang.bind(this, this.onLocationStorageChanged));
 
         this.orientation = orientation;
         try {
@@ -242,28 +239,28 @@ export class WeatherApplet extends TextIconApplet {
         if (this.config.CurrentLocation.locationSource == "ip-api") {
             NotificationService.Instance.Send(_("Error") + " - " + _("Location Store"), _("You can't save a location obtained automatically, sorry"));
         }
-        this.locationStore.SaveCurrentLocation(this.config.CurrentLocation);
+        this.config.locationStore.SaveCurrentLocation(this.config.CurrentLocation);
     }
 
     private async deleteCurrentLocation(): Promise<void> {
-        this.locationStore.DeleteCurrentLocation(this.config.CurrentLocation);
+        this.config.locationStore.DeleteCurrentLocation(this.config.CurrentLocation);
 	}
 
-	private onLocationStorageChanged(itemCount: number) {
+	public onLocationStorageChanged(sender: LocationStore, itemCount: number): void {
         Log.Instance.Debug("On location storage callback called, number of locations now " + itemCount.toString());
         // Hide/show location selectors based on how many items are in storage
-        if (this.locationStore.ShouldShowLocationSelectors(this.config.CurrentLocation)) this.ui.ShowLocationSelectors();
+        if (this.config.locationStore.ShouldShowLocationSelectors(this.config.CurrentLocation)) this.ui.ShowLocationSelectors();
         else this.ui.HideLocationSelectors();
 	}
 	
     public NextLocationClicked() {
-        let nextLoc = this.locationStore.NextLocation(this.config.CurrentLocation);
+        let nextLoc = this.config.locationStore.NextLocation(this.config.CurrentLocation);
         if (nextLoc == null) return;
         this.refreshAndRebuild(nextLoc);
     }
 
     public PreviousLocationClicked() {
-        let previousLoc = this.locationStore.PreviousLocation(this.config.CurrentLocation);
+        let previousLoc = this.config.locationStore.PreviousLocation(this.config.CurrentLocation);
         if (previousLoc == null) return;
         this.refreshAndRebuild(previousLoc);
     }
@@ -277,16 +274,6 @@ export class WeatherApplet extends TextIconApplet {
         this.orientation = orientation;
         this.refreshWeather(true);
     };
-
-    /** Override function */
-    public _onKeySettingsUpdated(): void {
-        if (this.config.keybinding != null) {
-            keybindingManager.addHotKey(UUID,
-                this.config.keybinding,
-                Lang.bind(this, this.on_applet_clicked)
-            );
-        }
-    }
 
     /** Override function */
     private on_applet_removed_from_panel(deleteConfig: any) {

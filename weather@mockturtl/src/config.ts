@@ -4,6 +4,7 @@ import { SettingKeys, LocationData, DistanceUnitLocalePrefs, WindSpeedLocalePref
 import { clearTimeout, setTimeout, _, isCoordinate } from "./utils";
 import { Log } from "./logger";
 import { UUID, SIGNAL_CHANGED } from "./consts";
+import { LocationStore } from "./locationstore";
 
 const { AppletSettings, BindingDirection } = imports.ui.settings;
 const Lang: typeof imports.lang = imports.lang;
@@ -122,10 +123,14 @@ export class Config {
 	private app: WeatherApplet;
     private countryCode: string;
     
-    public readonly autoLocProvider: IpApi
+	public readonly autoLocProvider: IpApi
+	public readonly locationStore: LocationStore;
 
     constructor(app: WeatherApplet, instanceID: number, locale: string) {
-        this.app = app;
+		this.app = app;
+		this.locationStore = new LocationStore(this.app);
+		this.locationStore.StoreChanged.Subscribe(Lang.bind(this.app, this.app.onLocationStorageChanged));
+		
         this.autoLocProvider = new IpApi(app); // IP location lookup
 		this.countryCode = this.GetCountryCode(locale);
         this.settings = new AppletSettings(this, UUID, instanceID);
@@ -146,13 +151,23 @@ export class Config {
             this.WEATHER_LOCATION, ("_" + this.WEATHER_LOCATION), Lang.bind(this, this.OnLocationChanged), null);
 
         this.settings.bindProperty(BindingDirection.IN, "keybinding",
-            "keybinding", Lang.bind(this.app, this.app._onKeySettingsUpdated), null);
+            "keybinding", Lang.bind(this, this.onKeySettingsUpdated), null);
 
         keybindingManager.addHotKey(
             UUID, this.keybinding, Lang.bind(this.app, this.app.on_applet_clicked));
 
         this.settings.connect(SIGNAL_CHANGED + this.WEATHER_USE_SYMBOLIC_ICONS_KEY, Lang.bind(this, this.IconTypeChanged));
-    }
+	}
+	
+	    /** Override function */
+	public onKeySettingsUpdated(): void {
+		if (this.keybinding != null) {
+			keybindingManager.addHotKey(UUID,
+				this.keybinding,
+				Lang.bind(this.app, this.app.on_applet_clicked)
+			);
+		}
+	}
 
 	public get CurrentLocation() {
 		return this.currentLocation;
@@ -241,10 +256,10 @@ export class Config {
         }
 
         // Find location in storage
-        let location = this.app.locationStore.FindLocation(this._location);
+        let location = this.locationStore.FindLocation(this._location);
         if (location != null) {
             Log.Instance.Debug("location exist in locationstore, retrieve");
-			this.app.locationStore.SwitchToLocation(location);
+			this.locationStore.SwitchToLocation(location);
             this.InjectLocationToConfig(location, true);
             return location;
         }
@@ -276,11 +291,11 @@ export class Config {
         }
 
         // Maybe location is in locationStore, first search
-        location = this.app.locationStore.FindLocation(locationData.entryText);
+        location = this.locationStore.FindLocation(locationData.entryText);
         if (location != null) {
             Log.Instance.Debug("Found location was found in locationStore, return that instead");
 			this.InjectLocationToConfig(location);
-			this.app.locationStore.SwitchToLocation(location);
+			this.locationStore.SwitchToLocation(location);
             return location;
         }
         else {

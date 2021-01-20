@@ -5,6 +5,7 @@ const ipApi_1 = require("./ipApi");
 const utils_1 = require("./utils");
 const logger_1 = require("./logger");
 const consts_1 = require("./consts");
+const locationstore_1 = require("./locationstore");
 const { AppletSettings, BindingDirection } = imports.ui.settings;
 const Lang = imports.lang;
 const keybindingManager = imports.ui.main.keybindingManager;
@@ -53,13 +54,12 @@ class Config {
         this.doneTypingLocation = null;
         this.currentLocation = null;
         this.app = app;
+        this.locationStore = new locationstore_1.LocationStore(this.app);
+        this.locationStore.StoreChanged.Subscribe(Lang.bind(this.app, this.app.onLocationStorageChanged));
         this.autoLocProvider = new ipApi_1.IpApi(app);
         this.countryCode = this.GetCountryCode(locale);
         this.settings = new AppletSettings(this, consts_1.UUID, instanceID);
         this.BindSettings();
-    }
-    get CurrentLocation() {
-        return this.currentLocation;
     }
     BindSettings() {
         for (let k in this.KEYS) {
@@ -68,13 +68,17 @@ class Config {
             this.settings.bindProperty(BindingDirection.IN, key, keyProp, Lang.bind(this, this.OnSettingChanged), null);
         }
         this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, this.WEATHER_LOCATION, ("_" + this.WEATHER_LOCATION), Lang.bind(this, this.OnLocationChanged), null);
-        this.settings.bindProperty(BindingDirection.IN, "keybinding", "keybinding", Lang.bind(this.app, this.app._onKeySettingsUpdated), null);
+        this.settings.bindProperty(BindingDirection.IN, "keybinding", "keybinding", Lang.bind(this, this.onKeySettingsUpdated), null);
         keybindingManager.addHotKey(consts_1.UUID, this.keybinding, Lang.bind(this.app, this.app.on_applet_clicked));
         this.settings.connect(consts_1.SIGNAL_CHANGED + this.WEATHER_USE_SYMBOLIC_ICONS_KEY, Lang.bind(this, this.IconTypeChanged));
     }
-    IconTypeChanged() {
-        this.app.ui.UpdateIconType(this.IconType);
-        logger_1.Log.Instance.Debug("Symbolic icon setting changed");
+    onKeySettingsUpdated() {
+        if (this.keybinding != null) {
+            keybindingManager.addHotKey(consts_1.UUID, this.keybinding, Lang.bind(this.app, this.app.on_applet_clicked));
+        }
+    }
+    get CurrentLocation() {
+        return this.currentLocation;
     }
     get TemperatureUnit() {
         if (this._temperatureUnit == "automatic")
@@ -131,10 +135,10 @@ class Config {
             });
             return null;
         }
-        let location = this.app.locationStore.FindLocation(this._location);
+        let location = this.locationStore.FindLocation(this._location);
         if (location != null) {
             logger_1.Log.Instance.Debug("location exist in locationstore, retrieve");
-            this.app.locationStore.SwitchToLocation(location);
+            this.locationStore.SwitchToLocation(location);
             this.InjectLocationToConfig(location, true);
             return location;
         }
@@ -161,17 +165,21 @@ class Config {
         if (!!(locationData === null || locationData === void 0 ? void 0 : locationData.entryText)) {
             logger_1.Log.Instance.Debug("Address found via address search");
         }
-        location = this.app.locationStore.FindLocation(locationData.entryText);
+        location = this.locationStore.FindLocation(locationData.entryText);
         if (location != null) {
             logger_1.Log.Instance.Debug("Found location was found in locationStore, return that instead");
             this.InjectLocationToConfig(location);
-            this.app.locationStore.SwitchToLocation(location);
+            this.locationStore.SwitchToLocation(location);
             return location;
         }
         else {
             this.InjectLocationToConfig(locationData);
             return locationData;
         }
+    }
+    IconTypeChanged() {
+        this.app.ui.UpdateIconType(this.IconType);
+        logger_1.Log.Instance.Debug("Symbolic icon setting changed");
     }
     OnLocationChanged() {
         logger_1.Log.Instance.Debug("User changed location, waiting 3 seconds...");
