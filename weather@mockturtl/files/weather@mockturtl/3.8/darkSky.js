@@ -229,7 +229,7 @@ class DarkSky {
         return result;
     }
     WordBanned(word) {
-        return this.DarkSkyFilterWords.indexOf(word) != -1;
+        return this.DarkSkyFilterWords.includes(word);
     }
     ResolveIcon(icon, sunTimes, date) {
         switch (icon) {

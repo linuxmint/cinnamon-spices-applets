@@ -271,7 +271,7 @@ export class DarkSky implements WeatherProvider {
     }
 
     private WordBanned(word: string): boolean {
-        return this.DarkSkyFilterWords.indexOf(word) != -1;
+        return this.DarkSkyFilterWords.includes(word);
     }
 
     private ResolveIcon(icon: string, sunTimes?: SunTimes, date?: Date): BuiltinIcons[] {

@@ -395,19 +395,16 @@ export function compassDirection(deg: number): string {
 }
 
 export function isLangSupported(lang: string, languages: Array<string>): boolean {
-    if (languages.indexOf(lang) != -1) {
-        return true;
-    }
-    return false;
+    return (languages.includes(lang))
 };
 
 // Passing appropriate resolver function for the API, and the code
 export function weatherIconSafely(code: BuiltinIcons[], icon_type: imports.gi.St.IconType): BuiltinIcons {
     for (let i = 0; i < code.length; i++) {
         if (hasIcon(code[i], icon_type))
-            return code[i]
+            return code[i];
     }
-    return 'weather-severe-alert'
+    return 'weather-severe-alert';
 }
 
 export function hasIcon(icon: string, icon_type: imports.gi.St.IconType): boolean {

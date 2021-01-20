@@ -27,34 +27,35 @@ export type Services = "OpenWeatherMap" | "DarkSky" | "MetNorway" | "Weatherbit"
  * Keys matching the ones in settings-schema.json
  */
 const Keys: SettingKeys = {
-    DATA_SERVICE: "dataService",
-    API_KEY: "apiKey",
-    TEMPERATURE_UNIT_KEY: "temperatureUnit",
-    TEMPERATURE_HIGH_FIRST: "temperatureHighFirst",
-    WIND_SPEED_UNIT: "windSpeedUnit",
-    DISTANCE_UNIT: "distanceUnit",
-    CITY: "locationLabelOverride",
-    TRANSLATE_CONDITION: "translateCondition",
-    VERTICAL_ORIENTATION: "verticalOrientation",
-    SHOW_TEXT_IN_PANEL: "showTextInPanel",
-    TEMP_TEXT_OVERRIDE: "tempTextOverride",
-    SHOW_COMMENT_IN_PANEL: "showCommentInPanel",
-    SHOW_SUNRISE: "showSunrise",
-    SHOW_24HOURS: "show24Hours",
-    FORECAST_DAYS: "forecastDays",
-    FORECAST_HOURS: "forecastHours",
-    FORECAST_COLS: "forecastColumns",
-    FORECAST_ROWS: "forecastRows",
-    REFRESH_INTERVAL: "refreshInterval",
-    PRESSURE_UNIT: "pressureUnit",
-    SHORT_CONDITIONS: "shortConditions",
-    MANUAL_LOCATION: "manualLocation",
-    USE_CUSTOM_APPLETICONS: 'useCustomAppletIcons',
-    USE_CUSTOM_MENUICONS: "useCustomMenuIcons",
-    RUSSIAN_STYLE: "tempRussianStyle",
-    SHORT_HOURLY_TIME: "shortHourlyTime",
-    SHOW_FORECAST_DATES: "showForecastDates"
+    DATA_SERVICE:               "dataService",
+    API_KEY:                    "apiKey",
+    TEMPERATURE_UNIT_KEY:       "temperatureUnit",
+    TEMPERATURE_HIGH_FIRST:     "temperatureHighFirst",
+    WIND_SPEED_UNIT:            "windSpeedUnit",
+    DISTANCE_UNIT:              "distanceUnit",
+    CITY:                       "locationLabelOverride",
+    TRANSLATE_CONDITION:        "translateCondition",
+    VERTICAL_ORIENTATION:       "verticalOrientation",
+    SHOW_TEXT_IN_PANEL:         "showTextInPanel",
+    TEMP_TEXT_OVERRIDE:         "tempTextOverride",
+    SHOW_COMMENT_IN_PANEL:      "showCommentInPanel",
+    SHOW_SUNRISE:               "showSunrise",
+    SHOW_24HOURS:               "show24Hours",
+    FORECAST_DAYS:              "forecastDays",
+    FORECAST_HOURS:             "forecastHours",
+    FORECAST_COLS:              "forecastColumns",
+    FORECAST_ROWS:              "forecastRows",
+    REFRESH_INTERVAL:           "refreshInterval",
+    PRESSURE_UNIT:              "pressureUnit",
+    SHORT_CONDITIONS:           "shortConditions",
+    MANUAL_LOCATION:            "manualLocation",
+    USE_CUSTOM_APPLETICONS:     'useCustomAppletIcons',
+    USE_CUSTOM_MENUICONS:       "useCustomMenuIcons",
+    RUSSIAN_STYLE:              "tempRussianStyle",
+    SHORT_HOURLY_TIME:          "shortHourlyTime",
+    SHOW_FORECAST_DATES:        "showForecastDates"
 }
+
 export class Config {
 	// Info partially from https://github.com/unicode-org/cldr/blob/release-38-1/common/supplemental/units.xml
 	/** Default is celsius */
@@ -347,7 +348,7 @@ export class Config {
 	}
 
 	private GetLocaleTemperateUnit(code: string): WeatherUnits {
-		if (code == null || this.fahrenheitCountries.indexOf(code) == -1) return "celsius";
+		if (code == null || !this.fahrenheitCountries.includes(code)) return "celsius";
 		return "fahrenheit";
 	}
 
@@ -355,7 +356,7 @@ export class Config {
 		if (code == null) return "kph";
 
 		for (const key in this.windSpeedUnitLocales) {
-			if (key.indexOf(code) != -1) return this.windSpeedUnitLocales[key];
+			if (key.includes(code)) return this.windSpeedUnitLocales[key];
 		}
 		return "kph";
 	}
@@ -364,7 +365,7 @@ export class Config {
 		if (code == null) return "metric";
 
 		for (const key in this.distanceUnitLocales) {
-			if (key.indexOf(code) != -1) return this.distanceUnitLocales[key];
+			if (key.includes(code)) return this.distanceUnitLocales[key];
 		}
 		return "metric";
 	}

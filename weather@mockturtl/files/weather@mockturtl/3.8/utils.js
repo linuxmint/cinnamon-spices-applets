@@ -367,10 +367,7 @@ function compassDirection(deg) {
 }
 exports.compassDirection = compassDirection;
 function isLangSupported(lang, languages) {
-    if (languages.indexOf(lang) != -1) {
-        return true;
-    }
-    return false;
+    return (languages.includes(lang));
 }
 exports.isLangSupported = isLangSupported;
 ;

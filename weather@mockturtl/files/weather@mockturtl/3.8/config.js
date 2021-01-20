@@ -217,7 +217,7 @@ class Config {
         this.settings.setValue(this.WEATHER_LOCATION, value);
     }
     GetLocaleTemperateUnit(code) {
-        if (code == null || this.fahrenheitCountries.indexOf(code) == -1)
+        if (code == null || !this.fahrenheitCountries.includes(code))
             return "celsius";
         return "fahrenheit";
     }
@@ -225,7 +225,7 @@ class Config {
         if (code == null)
             return "kph";
         for (const key in this.windSpeedUnitLocales) {
-            if (key.indexOf(code) != -1)
+            if (key.includes(code))
                 return this.windSpeedUnitLocales[key];
         }
         return "kph";
@@ -234,7 +234,7 @@ class Config {
         if (code == null)
             return "metric";
         for (const key in this.distanceUnitLocales) {
-            if (key.indexOf(code) != -1)
+            if (key.includes(code))
                 return this.distanceUnitLocales[key];
         }
         return "metric";
