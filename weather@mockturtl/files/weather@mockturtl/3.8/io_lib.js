@@ -74,7 +74,7 @@ async function DeleteFile(file) {
 }
 exports.DeleteFile = DeleteFile;
 async function OverwriteAndGetIOStream(file) {
-    if (!this.FileExists(file.get_parent()))
+    if (!FileExists(file.get_parent()))
         file.get_parent().make_directory_with_parents(null);
     return new Promise((resolve, reject) => {
         file.replace_readwrite_async(null, false, Gio.FileCreateFlags.NONE, null, null, (source_object, result) => {

@@ -81,20 +81,20 @@ export class WeatherApplet extends TextIconApplet {
 	/**
 	 * @returns Queues a refresh if if refresh was triggered while locked.
 	 */
-    public RefreshAndRebuild(loc?: LocationData): void {
+    public RefreshAndRebuild(this: WeatherApplet, loc?: LocationData): void {
         this.loop.Resume();
         if (this.Locked()) {
             this.refreshTriggeredWhileLocked = true;
             return;
         }
-        this.refreshWeather(true, loc);
+        this.RefreshWeather(true, loc);
 	};
 
 	/**
 	 * Main function pulling and refreshing data
 	 * @param rebuild 
 	 */
-    public async refreshWeather(rebuild: boolean, location?: LocationData): Promise<RefreshState> {
+    public async RefreshWeather(this: WeatherApplet, rebuild: boolean, location?: LocationData): Promise<RefreshState> {
 		try {
 			if (this.lock) {
 				Log.Instance.Print("Refreshing in progress, refresh skipped.");
@@ -267,7 +267,7 @@ export class WeatherApplet extends TextIconApplet {
     /** override function */
     private on_orientation_changed(orientation: imports.gi.St.Side) {
         this.orientation = orientation;
-        this.refreshWeather(true);
+        this.RefreshWeather(true);
     };
 
     /** Override function */
@@ -319,8 +319,9 @@ export class WeatherApplet extends TextIconApplet {
 
 	/** Into right-click context menu */
 	private AddRefreshButton(): void {
-		let itemLabel = _("Refresh")
-		let refreshMenuItem = new MenuItem(itemLabel, REFRESH_ICON, Lang.bind(this, () => this.RefreshAndRebuild()));
+        let itemLabel = _("Refresh")
+        // () => functions do not need to bind context
+		let refreshMenuItem = new MenuItem(itemLabel, REFRESH_ICON, () => this.RefreshAndRebuild());
 		this._applet_context_menu.addMenuItem(refreshMenuItem);
 	}
 

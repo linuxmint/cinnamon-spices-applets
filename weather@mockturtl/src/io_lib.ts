@@ -92,7 +92,7 @@ export async function DeleteFile(file: imports.gi.Gio.File): Promise<boolean> {
 }
 
 export async function OverwriteAndGetIOStream(file: imports.gi.Gio.File): Promise<imports.gi.Gio.IOStream> {
-    if (!this.FileExists(file.get_parent())) 
+    if (!FileExists(file.get_parent())) 
         file.get_parent().make_directory_with_parents(null); //don't know if this is a blocking call or not
 
     return new Promise((resolve, reject) => {

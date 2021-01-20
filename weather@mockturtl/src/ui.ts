@@ -112,7 +112,7 @@ export class UI {
         this.BuildPopupMenu();
         // Subscriptions
 		this.signals.connect(themeManager, 'theme-set', this.OnThemeChanged, this); // on theme change
-		this.App.config.LocStore.StoreChanged.Subscribe(Lang.bind(this, this.onLocationStorageChanged)); //on location store change
+		this.App.config.LocStore.StoreChanged.Subscribe((s, a) => this.onLocationStorageChanged(s, a)); //on location store change
     }
 
 	/**
@@ -746,11 +746,11 @@ export class UI {
         // Current Weather Middle Column
         this._locationButton = new WeatherButton({ reactive: true, label: _('Refresh'), });
         this._currentWeatherLocation = this._locationButton.actor;
-        this._currentWeatherLocation.connect(SIGNAL_CLICKED, Lang.bind(this, function() {
-            if (this.app.encounteredError) this.app.refreshWeather(true);
+        this._currentWeatherLocation.connect(SIGNAL_CLICKED, () => {
+            if (this.App.encounteredError) this.App.RefreshWeather(true);
             else if (this._currentWeatherLocation.url == null) return;
-            else this.app.OpenUrl(this._currentWeatherLocation);
-        }));
+            else this.App.OpenUrl(this._currentWeatherLocation);
+        });
 
         this._nextLocationButton = new WeatherButton({
             reactive: true,

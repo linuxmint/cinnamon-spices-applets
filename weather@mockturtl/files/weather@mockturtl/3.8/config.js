@@ -12,6 +12,35 @@ const Lang = imports.lang;
 const keybindingManager = imports.ui.main.keybindingManager;
 const { IconType } = imports.gi.St;
 const { get_language_names } = imports.gi.GLib;
+const Keys = {
+    DATA_SERVICE: "dataService",
+    API_KEY: "apiKey",
+    TEMPERATURE_UNIT_KEY: "temperatureUnit",
+    TEMPERATURE_HIGH_FIRST: "temperatureHighFirst",
+    WIND_SPEED_UNIT: "windSpeedUnit",
+    DISTANCE_UNIT: "distanceUnit",
+    CITY: "locationLabelOverride",
+    TRANSLATE_CONDITION: "translateCondition",
+    VERTICAL_ORIENTATION: "verticalOrientation",
+    SHOW_TEXT_IN_PANEL: "showTextInPanel",
+    TEMP_TEXT_OVERRIDE: "tempTextOverride",
+    SHOW_COMMENT_IN_PANEL: "showCommentInPanel",
+    SHOW_SUNRISE: "showSunrise",
+    SHOW_24HOURS: "show24Hours",
+    FORECAST_DAYS: "forecastDays",
+    FORECAST_HOURS: "forecastHours",
+    FORECAST_COLS: "forecastColumns",
+    FORECAST_ROWS: "forecastRows",
+    REFRESH_INTERVAL: "refreshInterval",
+    PRESSURE_UNIT: "pressureUnit",
+    SHORT_CONDITIONS: "shortConditions",
+    MANUAL_LOCATION: "manualLocation",
+    USE_CUSTOM_APPLETICONS: 'useCustomAppletIcons',
+    USE_CUSTOM_MENUICONS: "useCustomMenuIcons",
+    RUSSIAN_STYLE: "tempRussianStyle",
+    SHORT_HOURLY_TIME: "shortHourlyTime",
+    SHOW_FORECAST_DATES: "showForecastDates"
+};
 class Config {
     constructor(app, instanceID) {
         this.fahrenheitCountries = ["bs", "bz", "ky", "pr", "pw", "us"];
@@ -24,35 +53,6 @@ class Config {
         };
         this.WEATHER_LOCATION = "location";
         this.WEATHER_USE_SYMBOLIC_ICONS_KEY = 'useSymbolicIcons';
-        this.KEYS = {
-            DATA_SERVICE: "dataService",
-            API_KEY: "apiKey",
-            TEMPERATURE_UNIT_KEY: "temperatureUnit",
-            TEMPERATURE_HIGH_FIRST: "temperatureHighFirst",
-            WIND_SPEED_UNIT: "windSpeedUnit",
-            DISTANCE_UNIT: "distanceUnit",
-            CITY: "locationLabelOverride",
-            TRANSLATE_CONDITION: "translateCondition",
-            VERTICAL_ORIENTATION: "verticalOrientation",
-            SHOW_TEXT_IN_PANEL: "showTextInPanel",
-            TEMP_TEXT_OVERRIDE: "tempTextOverride",
-            SHOW_COMMENT_IN_PANEL: "showCommentInPanel",
-            SHOW_SUNRISE: "showSunrise",
-            SHOW_24HOURS: "show24Hours",
-            FORECAST_DAYS: "forecastDays",
-            FORECAST_HOURS: "forecastHours",
-            FORECAST_COLS: "forecastColumns",
-            FORECAST_ROWS: "forecastRows",
-            REFRESH_INTERVAL: "refreshInterval",
-            PRESSURE_UNIT: "pressureUnit",
-            SHORT_CONDITIONS: "shortConditions",
-            MANUAL_LOCATION: "manualLocation",
-            USE_CUSTOM_APPLETICONS: 'useCustomAppletIcons',
-            USE_CUSTOM_MENUICONS: "useCustomMenuIcons",
-            RUSSIAN_STYLE: "tempRussianStyle",
-            SHORT_HOURLY_TIME: "shortHourlyTime",
-            SHOW_FORECAST_DATES: "showForecastDates"
-        };
         this.doneTypingLocation = null;
         this.currentLocation = null;
         this.app = app;
@@ -66,8 +66,8 @@ class Config {
         this.BindSettings();
     }
     BindSettings() {
-        for (let k in this.KEYS) {
-            let key = this.KEYS[k];
+        for (let k in Keys) {
+            let key = Keys[k];
             let keyProp = "_" + key;
             this.settings.bindProperty(BindingDirection.IN, key, keyProp, Lang.bind(this, this.OnSettingChanged), null);
         }
@@ -188,7 +188,7 @@ class Config {
         this.SetLocation(text);
         this.currentLocation = loc;
         if (switchToManual == true)
-            this.settings.setValue(this.KEYS.MANUAL_LOCATION, true);
+            this.settings.setValue(Keys.MANUAL_LOCATION, true);
     }
     IconTypeChanged() {
         this.app.ui.UpdateIconType(this.IconType);

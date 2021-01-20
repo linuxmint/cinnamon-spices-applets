@@ -22,6 +22,39 @@ export type WeatherPressureUnits = 'hPa' | 'mm Hg' | 'in Hg' | 'Pa' | 'psi' | 'a
 /** Change settings-scheme if you change this! */
 export type DistanceUnits = 'automatic' | 'metric' | 'imperial';
 export type Services = "OpenWeatherMap" | "DarkSky" | "MetNorway" | "Weatherbit" | "Yahoo" | "Climacell" | "Met Office UK" | "US Weather";
+
+/**
+ * Keys matching the ones in settings-schema.json
+ */
+const Keys: SettingKeys = {
+    DATA_SERVICE: "dataService",
+    API_KEY: "apiKey",
+    TEMPERATURE_UNIT_KEY: "temperatureUnit",
+    TEMPERATURE_HIGH_FIRST: "temperatureHighFirst",
+    WIND_SPEED_UNIT: "windSpeedUnit",
+    DISTANCE_UNIT: "distanceUnit",
+    CITY: "locationLabelOverride",
+    TRANSLATE_CONDITION: "translateCondition",
+    VERTICAL_ORIENTATION: "verticalOrientation",
+    SHOW_TEXT_IN_PANEL: "showTextInPanel",
+    TEMP_TEXT_OVERRIDE: "tempTextOverride",
+    SHOW_COMMENT_IN_PANEL: "showCommentInPanel",
+    SHOW_SUNRISE: "showSunrise",
+    SHOW_24HOURS: "show24Hours",
+    FORECAST_DAYS: "forecastDays",
+    FORECAST_HOURS: "forecastHours",
+    FORECAST_COLS: "forecastColumns",
+    FORECAST_ROWS: "forecastRows",
+    REFRESH_INTERVAL: "refreshInterval",
+    PRESSURE_UNIT: "pressureUnit",
+    SHORT_CONDITIONS: "shortConditions",
+    MANUAL_LOCATION: "manualLocation",
+    USE_CUSTOM_APPLETICONS: 'useCustomAppletIcons',
+    USE_CUSTOM_MENUICONS: "useCustomMenuIcons",
+    RUSSIAN_STYLE: "tempRussianStyle",
+    SHORT_HOURLY_TIME: "shortHourlyTime",
+    SHOW_FORECAST_DATES: "showForecastDates"
+}
 export class Config {
 	// Info partially from https://github.com/unicode-org/cldr/blob/release-38-1/common/supplemental/units.xml
 	/** Default is celsius */
@@ -38,39 +71,6 @@ export class Config {
 
     private readonly WEATHER_LOCATION = "location"
     private readonly WEATHER_USE_SYMBOLIC_ICONS_KEY = 'useSymbolicIcons'
-
-	/**
-	 * Keys matching the ones in settings-schema.json
-	 */
-    private readonly KEYS: SettingKeys = {
-        DATA_SERVICE: "dataService",
-        API_KEY: "apiKey",
-        TEMPERATURE_UNIT_KEY: "temperatureUnit",
-        TEMPERATURE_HIGH_FIRST: "temperatureHighFirst",
-        WIND_SPEED_UNIT: "windSpeedUnit",
-        DISTANCE_UNIT: "distanceUnit",
-        CITY: "locationLabelOverride",
-        TRANSLATE_CONDITION: "translateCondition",
-        VERTICAL_ORIENTATION: "verticalOrientation",
-        SHOW_TEXT_IN_PANEL: "showTextInPanel",
-        TEMP_TEXT_OVERRIDE: "tempTextOverride",
-        SHOW_COMMENT_IN_PANEL: "showCommentInPanel",
-        SHOW_SUNRISE: "showSunrise",
-        SHOW_24HOURS: "show24Hours",
-        FORECAST_DAYS: "forecastDays",
-        FORECAST_HOURS: "forecastHours",
-        FORECAST_COLS: "forecastColumns",
-        FORECAST_ROWS: "forecastRows",
-        REFRESH_INTERVAL: "refreshInterval",
-        PRESSURE_UNIT: "pressureUnit",
-        SHORT_CONDITIONS: "shortConditions",
-        MANUAL_LOCATION: "manualLocation",
-        USE_CUSTOM_APPLETICONS: 'useCustomAppletIcons',
-        USE_CUSTOM_MENUICONS: "useCustomMenuIcons",
-        RUSSIAN_STYLE: "tempRussianStyle",
-        SHORT_HOURLY_TIME: "shortHourlyTime",
-        SHOW_FORECAST_DATES: "showForecastDates"
-    }
 	// Settings variables to bind to
 	// complex variables, using getters instead to access
 	private readonly _location: string;
@@ -136,8 +136,8 @@ export class Config {
 
     /** Attaches settings to functions */
     private BindSettings() {
-        for (let k in this.KEYS) {
-            let key = this.KEYS[k];
+        for (let k in Keys) {
+            let key = Keys[k];
             let keyProp = "_" + key;
             this.settings.bindProperty(BindingDirection.IN,
                 key, keyProp, Lang.bind(this, this.OnSettingChanged), null);
@@ -306,7 +306,7 @@ export class Config {
         let text = loc.entryText + ""; // Only values can be injected into settings and not references, so we add empty string to it.
         this.SetLocation(text);
         this.currentLocation = loc;
-        if (switchToManual == true) this.settings.setValue(this.KEYS.MANUAL_LOCATION, true);
+        if (switchToManual == true) this.settings.setValue(Keys.MANUAL_LOCATION, true);
     }
 
 	private IconTypeChanged() {

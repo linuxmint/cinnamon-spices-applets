@@ -49,7 +49,7 @@ class UI {
         this.lightTheme = this.IsLightTheme();
         this.BuildPopupMenu();
         this.signals.connect(themeManager, 'theme-set', this.OnThemeChanged, this);
-        this.App.config.LocStore.StoreChanged.Subscribe(Lang.bind(this, this.onLocationStorageChanged));
+        this.App.config.LocStore.StoreChanged.Subscribe((s, a) => this.onLocationStorageChanged(s, a));
     }
     OnThemeChanged() {
         this.HideHourlyWeather();
@@ -534,14 +534,14 @@ class UI {
         });
         this._locationButton = new weatherbutton_1.WeatherButton({ reactive: true, label: utils_1._('Refresh'), });
         this._currentWeatherLocation = this._locationButton.actor;
-        this._currentWeatherLocation.connect(consts_1.SIGNAL_CLICKED, Lang.bind(this, function () {
-            if (this.app.encounteredError)
-                this.app.refreshWeather(true);
+        this._currentWeatherLocation.connect(consts_1.SIGNAL_CLICKED, () => {
+            if (this.App.encounteredError)
+                this.App.RefreshWeather(true);
             else if (this._currentWeatherLocation.url == null)
                 return;
             else
-                this.app.OpenUrl(this._currentWeatherLocation);
-        }));
+                this.App.OpenUrl(this._currentWeatherLocation);
+        });
         this._nextLocationButton = new weatherbutton_1.WeatherButton({
             reactive: true,
             can_focus: true,

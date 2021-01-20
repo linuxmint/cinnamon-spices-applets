@@ -740,6 +740,6 @@ declare namespace imports.gettext {
 declare namespace imports {
     export const lang: Lang;
     class Lang {
-        bind<T>(ctx: any, func: T): T;
+        bind<T, CTX>(ctx: CTX, func: T): T;
     }
 }

@@ -76,10 +76,10 @@ class WeatherApplet extends TextIconApplet {
             this.refreshTriggeredWhileLocked = true;
             return;
         }
-        this.refreshWeather(true, loc);
+        this.RefreshWeather(true, loc);
     }
     ;
-    async refreshWeather(rebuild, location) {
+    async RefreshWeather(rebuild, location) {
         try {
             if (this.lock) {
                 logger_1.Log.Instance.Print("Refreshing in progress, refresh skipped.");
@@ -210,7 +210,7 @@ class WeatherApplet extends TextIconApplet {
     }
     on_orientation_changed(orientation) {
         this.orientation = orientation;
-        this.refreshWeather(true);
+        this.RefreshWeather(true);
     }
     ;
     on_applet_removed_from_panel(deleteConfig) {
@@ -239,7 +239,7 @@ class WeatherApplet extends TextIconApplet {
     }
     AddRefreshButton() {
         let itemLabel = utils_1._("Refresh");
-        let refreshMenuItem = new MenuItem(itemLabel, consts_1.REFRESH_ICON, Lang.bind(this, () => this.RefreshAndRebuild()));
+        let refreshMenuItem = new MenuItem(itemLabel, consts_1.REFRESH_ICON, () => this.RefreshAndRebuild());
         this._applet_context_menu.addMenuItem(refreshMenuItem);
     }
     HandleHTTPError(error) {

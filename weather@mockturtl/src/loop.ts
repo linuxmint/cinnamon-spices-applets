@@ -63,7 +63,7 @@ export class WeatherLoop {
                         + ", errorCount " + this.errorCount.toString() + " , loopInterval " + (this.LoopInterval() / 1000).toString()
                         + " seconds, refreshInterval " + this.app.config._refreshInterval + " minutes");
                     // loop can skip 1 cycle if needed 
-                    let state = await this.app.refreshWeather(false);
+                    let state = await this.app.RefreshWeather(false);
                     if (state == "locked") Log.Instance.Print("App is currently refreshing, refresh skipped in main loop");
                     if (state == "success" || state == "locked") this.lastUpdated = new Date();
                 }
