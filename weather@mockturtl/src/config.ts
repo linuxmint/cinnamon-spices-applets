@@ -1,6 +1,6 @@
 import { WeatherApplet } from "./main";
 import { IpApi } from "./ipApi";
-import { SettingKeys, LocationData, DistanceUnitLocalePrefs, WindSpeedLocalePrefs } from "./types";
+import { LocationData } from "./types";
 import { clearTimeout, setTimeout, _, isCoordinate, constructJsLocale } from "./utils";
 import { Log } from "./logger";
 import { UUID, SIGNAL_CHANGED } from "./consts";
@@ -26,7 +26,7 @@ export type Services = "OpenWeatherMap" | "DarkSky" | "MetNorway" | "Weatherbit"
 /**
  * Keys matching the ones in settings-schema.json
  */
-const Keys: SettingKeys = {
+const Keys = {
     DATA_SERVICE:               "dataService",
     API_KEY:                    "apiKey",
     TEMPERATURE_UNIT_KEY:       "temperatureUnit",
@@ -68,7 +68,7 @@ export class Config {
 	/** Default metric */
 	private readonly distanceUnitLocales: DistanceUnitLocalePrefs = {
 		"us gb": "imperial"
-	}
+    }
 
     private readonly WEATHER_LOCATION = "location"
     private readonly WEATHER_USE_SYMBOLIC_ICONS_KEY = 'useSymbolicIcons'
@@ -137,7 +137,8 @@ export class Config {
 
     /** Attaches settings to functions */
     private BindSettings() {
-        for (let k in Keys) {
+        let k: keyof typeof Keys;
+        for (k in Keys) {
             let key = Keys[k];
             let keyProp = "_" + key;
             this.settings.bindProperty(BindingDirection.IN,
@@ -377,4 +378,11 @@ export class Config {
 	
 		return split[1];
 	}
+}
+
+interface WindSpeedLocalePrefs {
+	[key: string]: WeatherWindSpeedUnits;
+}
+interface DistanceUnitLocalePrefs {
+	[key: string]: DistanceUnits;
 }

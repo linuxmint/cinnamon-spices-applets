@@ -9,9 +9,9 @@ import { Climacell } from "./climacell";
 import { Config } from "./config";
 import { WeatherLoop } from "./loop";
 import { MetUk } from "./met_uk";
-import { WeatherData, WeatherProvider, LocationData, AppletError, CustomIcons, RefreshState, NiceErrorDetail } from "./types";
+import { WeatherData, WeatherProvider, LocationData, AppletError, CustomIcons, NiceErrorDetail, RefreshState } from "./types";
 import { UI } from "./ui";
-import { constructJsLocale, _ } from "./utils";
+import { _ } from "./utils";
 import { DarkSky } from "./darkSky";
 import { OpenWeatherMap } from "./openWeatherMap";
 import { USWeather } from "./us_weather";
@@ -20,11 +20,10 @@ import { Yahoo } from "./yahoo";
 import { MetNorway } from "./met_norway";
 import { HttpLib, HttpError, Method } from "./httpLib";
 import { Log } from "./logger";
-import { APPLET_ICON, REFRESH_ICON, UUID } from "./consts";
+import { APPLET_ICON, REFRESH_ICON } from "./consts";
 import { NotificationService } from "./notification_service";
 
 const { TextIconApplet, AllowedLayout, MenuItem } = imports.ui.applet;
-const Lang: typeof imports.lang = imports.lang;
 const { spawnCommandLine, spawnCommandLineAsyncIO } = imports.misc.util;
 const { IconType } = imports.gi.St;
 
@@ -98,7 +97,7 @@ export class WeatherApplet extends TextIconApplet {
 		try {
 			if (this.lock) {
 				Log.Instance.Print("Refreshing in progress, refresh skipped.");
-				return "locked";
+				return RefreshState.Locked;
 			}
 
 			this.lock = true;
@@ -108,7 +107,7 @@ export class WeatherApplet extends TextIconApplet {
 				location = await this.config.EnsureLocation();
 				if (!location) {
 					this.Unlock();
-					return "error";
+					return RefreshState.Error;
 				}
 			}
 
@@ -116,7 +115,7 @@ export class WeatherApplet extends TextIconApplet {
 			let weatherInfo = await this.provider.GetWeather(location);
 			if (weatherInfo == null) {
 				this.Unlock();
-				return "failure";
+				return RefreshState.Failure;
 			}
 
 			weatherInfo = this.MergeWeatherData(weatherInfo, location);
@@ -127,19 +126,19 @@ export class WeatherApplet extends TextIconApplet {
 				|| !this.ui.DisplayHourlyForecast(weatherInfo.hourlyForecasts, this.config, weatherInfo.location.timeZone)
 				|| !this.ui.DisplayBar(weatherInfo, this.provider, this.config)) {
 				this.Unlock();
-				return "failure";
+				return RefreshState.Failure;
 			}
 
 			Log.Instance.Print("Weather Information refreshed");
 			this.loop.ResetErrorCount();
 			this.Unlock();
-			return "success";
+			return RefreshState.Success;
         }
         catch (e) {
             Log.Instance.Error("Generic Error while refreshing Weather info: " + e);
 			this.ShowError({ type: "hard", detail: "unknown", message: _("Unexpected Error While Refreshing Weather, please see log in Looking Glass") });
 			this.Unlock();
-            return "failure";
+            return RefreshState.Failure;
 		}
 	};
 

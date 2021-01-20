@@ -1,6 +1,6 @@
 import { Log } from "./logger";
 import { WeatherApplet } from "./main";
-import { GUIDStore } from "./types";
+import { RefreshState } from "./types";
 import { delay, Guid } from "./utils";
 
 /** Stores applet instance's ID's globally,
@@ -64,8 +64,8 @@ export class WeatherLoop {
                         + " seconds, refreshInterval " + this.app.config._refreshInterval + " minutes");
                     // loop can skip 1 cycle if needed 
                     let state = await this.app.RefreshWeather(false);
-                    if (state == "locked") Log.Instance.Print("App is currently refreshing, refresh skipped in main loop");
-                    if (state == "success" || state == "locked") this.lastUpdated = new Date();
+                    if (state == RefreshState.Error) Log.Instance.Print("App is currently refreshing, refresh skipped in main loop");
+                    if (state == RefreshState.Success || RefreshState.Locked) this.lastUpdated = new Date();
                 }
                 else {
                     Log.Instance.Debug("No need to update yet, skipping")
@@ -138,4 +138,8 @@ export class WeatherLoop {
     private LoopInterval(): number {
         return (this.errorCount > 0) ? this.LOOP_INTERVAL * this.errorCount * 1000 : this.LOOP_INTERVAL * 1000; // Increase loop timeout linearly with the number of errors
     }
+}
+
+type GUIDStore = {
+    [key: number]: string
 }

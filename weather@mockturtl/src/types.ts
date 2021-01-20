@@ -1,4 +1,4 @@
-import { Services, WeatherWindSpeedUnits, DistanceUnits } from "./config";
+import { Services } from "./config";
 
 /**
  * A WeatherProvider must implement this interface.
@@ -12,14 +12,13 @@ export interface WeatherProvider {
     website: string;
 }
 
-/** 
- * percent: value is a number from 0-100 (or more)
- * 
- * temperature: value is number in Kelvin
- * 
- * string:  is a string
-*/
-type ExtraField = "percent" | "temperature" | "string";
+export const enum RefreshState {
+    Success = "success",
+    Failure = "fail",
+    Error = "error",
+    Locked = "locked"
+}
+
 export interface WeatherData {
     date: Date;
     coord: {
@@ -64,6 +63,15 @@ export interface WeatherData {
     };
 }
 
+/** 
+ * percent: value is a number from 0-100 (or more)
+ * 
+ * temperature: value is number in Kelvin
+ * 
+ * string:  is a string
+*/
+type ExtraField = "percent" | "temperature" | "string";
+
 export interface ForecastData {
     /** Set to 12:00 if possible */
     date: Date,
@@ -74,6 +82,7 @@ export interface ForecastData {
     condition: Condition
 }
 
+export type PrecipitationType = "rain" | "snow" | "none" | "ice pellets" | "freezing rain";
 export interface HourlyForecastData {
     /** Set to 12:00 if possible */
     date: Date,
@@ -89,8 +98,6 @@ export interface HourlyForecastData {
     };
 }
 
-export type PrecipitationType = "rain" | "snow" | "none" | "ice pellets" | "freezing rain";
-
 type LocationSource = "ip-api" | "address-search" | "manual";
 export interface LocationData {
     lat: number,
@@ -104,9 +111,6 @@ export interface LocationData {
     locationSource: LocationSource;
 }
 
-export type SettingKeys = {
-    [key: string]: string;
-}
 export interface AppletError {
     type: ErrorSeverity;
     /** Stops Refresh completely until settings have changed */
@@ -116,8 +120,6 @@ export interface AppletError {
     message?: string;
     service?: ApiService
 }
-
-export type RefreshState = "success" | "failure" | "error" | "locked";
 
 /** hard will not force a refresh and cleans the applet ui.
  * 
@@ -141,24 +143,6 @@ export interface Condition {
     /** GTK icon name */
     icon: BuiltinIcons,
     customIcon: CustomIcons
-}
-
-export type GUIDStore = {
-    [key: number]: string
-}
-
-export type ServiceDescriptions = {
-    [key in Services]: string
-}
-
-export type LocationCache = {
-    [key: string]: LocationData
-}
-export interface WindSpeedLocalePrefs {
-	[key: string]: WeatherWindSpeedUnits;
-}
-export interface DistanceUnitLocalePrefs {
-	[key: string]: DistanceUnits;
 }
 
 /**

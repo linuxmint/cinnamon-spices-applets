@@ -66,7 +66,8 @@ class Config {
         this.BindSettings();
     }
     BindSettings() {
-        for (let k in Keys) {
+        let k;
+        for (k in Keys) {
             let key = Keys[k];
             let keyProp = "_" + key;
             this.settings.bindProperty(BindingDirection.IN, key, keyProp, Lang.bind(this, this.OnSettingChanged), null);

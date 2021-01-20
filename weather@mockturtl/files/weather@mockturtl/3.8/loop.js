@@ -41,9 +41,9 @@ class WeatherLoop {
                         + ", errorCount " + this.errorCount.toString() + " , loopInterval " + (this.LoopInterval() / 1000).toString()
                         + " seconds, refreshInterval " + this.app.config._refreshInterval + " minutes");
                     let state = await this.app.RefreshWeather(false);
-                    if (state == "locked")
+                    if (state == "error")
                         logger_1.Log.Instance.Print("App is currently refreshing, refresh skipped in main loop");
-                    if (state == "success" || state == "locked")
+                    if (state == "success" || "locked")
                         this.lastUpdated = new Date();
                 }
                 else {

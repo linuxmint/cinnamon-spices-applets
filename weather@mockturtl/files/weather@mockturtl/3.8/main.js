@@ -18,7 +18,6 @@ const logger_1 = require("./logger");
 const consts_1 = require("./consts");
 const notification_service_1 = require("./notification_service");
 const { TextIconApplet, AllowedLayout, MenuItem } = imports.ui.applet;
-const Lang = imports.lang;
 const { spawnCommandLine, spawnCommandLineAsyncIO } = imports.misc.util;
 const { IconType } = imports.gi.St;
 class WeatherApplet extends TextIconApplet {
@@ -98,7 +97,7 @@ class WeatherApplet extends TextIconApplet {
             let weatherInfo = await this.provider.GetWeather(location);
             if (weatherInfo == null) {
                 this.Unlock();
-                return "failure";
+                return "fail";
             }
             weatherInfo = this.MergeWeatherData(weatherInfo, location);
             if (rebuild)
@@ -108,7 +107,7 @@ class WeatherApplet extends TextIconApplet {
                 || !this.ui.DisplayHourlyForecast(weatherInfo.hourlyForecasts, this.config, weatherInfo.location.timeZone)
                 || !this.ui.DisplayBar(weatherInfo, this.provider, this.config)) {
                 this.Unlock();
-                return "failure";
+                return "fail";
             }
             logger_1.Log.Instance.Print("Weather Information refreshed");
             this.loop.ResetErrorCount();
@@ -119,7 +118,7 @@ class WeatherApplet extends TextIconApplet {
             logger_1.Log.Instance.Error("Generic Error while refreshing Weather info: " + e);
             this.ShowError({ type: "hard", detail: "unknown", message: utils_1._("Unexpected Error While Refreshing Weather, please see log in Looking Glass") });
             this.Unlock();
-            return "failure";
+            return "fail";
         }
     }
     ;

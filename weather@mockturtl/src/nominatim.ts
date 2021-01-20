@@ -1,6 +1,6 @@
 import { Log } from "./logger";
 import { WeatherApplet } from "./main";
-import { LocationCache, LocationData } from "./types";
+import { LocationData } from "./types";
 import { _ } from "./utils";
 
 /**
@@ -81,4 +81,8 @@ export class GeoLocation {
 		}
 		return entryText.join(", ");
 	}
+}
+
+type LocationCache = {
+    [key: string]: LocationData
 }
