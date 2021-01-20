@@ -154,6 +154,7 @@ class LocationStore {
         if (this.currentIndex < 0)
             this.currentIndex = 0;
         notification_service_1.NotificationService.Instance.Send(utils_1._("Success") + " - " + utils_1._("Location Store"), utils_1._("Location is deleted from library"), true);
+        await this.SaveToFile();
         this.InvokeStorageChanged();
     }
     GetConfigPath() {

@@ -222,7 +222,8 @@ export class LocationStore {
         this.currentIndex = this.currentIndex--;
         if (this.currentIndex < 0) this.currentIndex = this.locations.length - 1; // reached start of array
         if (this.currentIndex < 0) this.currentIndex = 0; // no items in array
-        NotificationService.Instance.Send(_("Success") + " - " + _("Location Store"), _("Location is deleted from library"), true);
+		NotificationService.Instance.Send(_("Success") + " - " + _("Location Store"), _("Location is deleted from library"), true);
+		await this.SaveToFile();
         this.InvokeStorageChanged();
 	}
 	
