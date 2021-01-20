@@ -192,13 +192,6 @@ class WeatherApplet extends TextIconApplet {
     async deleteCurrentLocation() {
         this.config.locationStore.DeleteCurrentLocation(this.config.CurrentLocation);
     }
-    onLocationStorageChanged(sender, itemCount) {
-        logger_1.Log.Instance.Debug("On location storage callback called, number of locations now " + itemCount.toString());
-        if (this.config.locationStore.ShouldShowLocationSelectors(this.config.CurrentLocation))
-            this.ui.ShowLocationSelectors();
-        else
-            this.ui.HideLocationSelectors();
-    }
     NextLocationClicked() {
         let nextLoc = this.config.locationStore.NextLocation(this.config.CurrentLocation);
         if (nextLoc == null)

@@ -49,6 +49,7 @@ class UI {
         this.lightTheme = this.IsLightTheme();
         this.BuildPopupMenu();
         this.signals.connect(themeManager, 'theme-set', this.OnThemeChanged, this);
+        this.app.config.locationStore.StoreChanged.Subscribe(Lang.bind(this, this.onLocationStorageChanged));
     }
     OnThemeChanged() {
         this.HideHourlyWeather();
@@ -81,6 +82,13 @@ class UI {
             await utils_1.delay(100);
             this.HideHourlyWeather();
         }
+    }
+    onLocationStorageChanged(sender, itemCount) {
+        logger_1.Log.Instance.Debug("On location storage callback called, number of locations now " + itemCount.toString());
+        if (this.app.config.locationStore.ShouldShowLocationSelectors(this.app.config.CurrentLocation))
+            this.ShowLocationSelectors();
+        else
+            this.HideLocationSelectors();
     }
     BuildPopupMenu() {
         this._currentWeather = new Bin({ style_class: STYLE_CURRENT });

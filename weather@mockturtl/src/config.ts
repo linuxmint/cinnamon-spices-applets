@@ -129,8 +129,7 @@ export class Config {
     constructor(app: WeatherApplet, instanceID: number, locale: string) {
 		this.app = app;
 		this.locationStore = new LocationStore(this.app);
-		this.locationStore.StoreChanged.Subscribe(Lang.bind(this.app, this.app.onLocationStorageChanged));
-		
+
         this.autoLocProvider = new IpApi(app); // IP location lookup
 		this.countryCode = this.GetCountryCode(locale);
         this.settings = new AppletSettings(this, UUID, instanceID);

@@ -1,5 +1,6 @@
 import { Config, DistanceUnits, WeatherUnits } from "./config";
 import { ELLIPSIS, FORWARD_SLASH, APPLET_ICON, SIGNAL_CLICKED, BLANK } from "./consts";
+import { LocationStore } from "./locationstore";
 import { Log } from "./logger";
 import { WeatherApplet } from "./main";
 import { WeatherData, WeatherProvider, HourlyForecastData } from "./types";
@@ -109,8 +110,9 @@ export class UI {
         this.signals = new SignalManager();
         this.lightTheme = this.IsLightTheme();
         this.BuildPopupMenu();
-        // Subscribe to theme changes
-        this.signals.connect(themeManager, 'theme-set', this.OnThemeChanged, this);
+        // Subscriptions
+		this.signals.connect(themeManager, 'theme-set', this.OnThemeChanged, this); // on theme change
+		this.app.config.locationStore.StoreChanged.Subscribe(Lang.bind(this, this.onLocationStorageChanged)); //on location store change
     }
 
 	/**
@@ -168,7 +170,16 @@ export class UI {
             await delay(100); // Closing after popup menu is closed 
             this.HideHourlyWeather();
         }
-    }
+	}
+	
+	public onLocationStorageChanged(sender: LocationStore, itemCount: number): void {
+        Log.Instance.Debug("On location storage callback called, number of locations now " + itemCount.toString());
+        // Hide/show location selectors based on how many items are in storage
+		if (this.app.config.locationStore.ShouldShowLocationSelectors(this.app.config.CurrentLocation))
+			this.ShowLocationSelectors();
+		else
+			this.HideLocationSelectors();
+	}
 
     /** Creates the skeleton of the popup menu */
     private BuildPopupMenu(): void {

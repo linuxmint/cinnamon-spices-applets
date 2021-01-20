@@ -55,7 +55,6 @@ class Config {
         this.currentLocation = null;
         this.app = app;
         this.locationStore = new locationstore_1.LocationStore(this.app);
-        this.locationStore.StoreChanged.Subscribe(Lang.bind(this.app, this.app.onLocationStorageChanged));
         this.autoLocProvider = new ipApi_1.IpApi(app);
         this.countryCode = this.GetCountryCode(locale);
         this.settings = new AppletSettings(this, consts_1.UUID, instanceID);
