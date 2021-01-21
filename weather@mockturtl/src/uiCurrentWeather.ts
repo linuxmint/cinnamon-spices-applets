@@ -56,7 +56,7 @@ export class CurrentWeather {
 	}
 	
 	/** Injects data from weather object into the popupMenu */
-	public DisplayWeather(weather: WeatherData, config: Config): boolean {
+	public Display(weather: WeatherData, config: Config): boolean {
 		try {
 			// Hide/show location selectors based on how many items are in storage
 			if (this.app.config.LocStore.ShouldShowLocationSelectors(config.CurrentLocation)) this.ShowLocationSelectors();

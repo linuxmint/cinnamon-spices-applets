@@ -24,7 +24,7 @@ class CurrentWeather {
         this.actor.style_class = STYLE_CURRENT;
         this.app.config.LocStore.StoreChanged.Subscribe((s, a) => this.onLocationStorageChanged(s, a));
     }
-    DisplayWeather(weather, config) {
+    Display(weather, config) {
         try {
             if (this.app.config.LocStore.ShouldShowLocationSelectors(config.CurrentLocation))
                 this.ShowLocationSelectors();
