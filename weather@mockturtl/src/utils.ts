@@ -60,6 +60,10 @@ export function setInterval(func: any, ms: number) {
     return id;
 };
 
+export function UnitToUnicode(unit: WeatherUnits): string {
+    return unit == "fahrenheit" ? '\u2109' : '\u2103'
+}
+
 /**
  * https://www.movable-type.co.uk/scripts/latlong.html
  * @param lat1 

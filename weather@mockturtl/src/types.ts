@@ -53,14 +53,17 @@ export interface WeatherData {
     condition: Condition
     forecasts: ForecastData[];
     hourlyForecasts?: HourlyForecastData[]
-    extra_field?: {
-        name: string,
-		/**
-		 * Refer to the type 
-		 */
-        value: any,
-        type: ExtraField
-    };
+    extra_field?: APIUniqueField
+}
+
+
+export interface APIUniqueField {
+    name: string,
+    /**
+     * Refer to the type 
+     */
+    value: any,
+    type: ExtraField
 }
 
 /** 
