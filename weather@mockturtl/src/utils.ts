@@ -293,6 +293,7 @@ export function MPStoUserUnits(mps: number, units: WeatherWindSpeedUnits): strin
 
 // Conversion from Kelvin
 export function TempToUserConfig(kelvin: number, units: WeatherUnits, russianStyle: boolean): string {
+	if (kelvin == null) return null;
     let temp;
     if (units == "celsius") {
         temp = Math.round((kelvin - 273.15));

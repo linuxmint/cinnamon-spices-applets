@@ -11,7 +11,7 @@ import { WeatherLoop } from "./loop";
 import { MetUk } from "./met_uk";
 import { WeatherData, WeatherProvider, LocationData, AppletError, CustomIcons, NiceErrorDetail, RefreshState } from "./types";
 import { UI } from "./ui";
-import { _ } from "./utils";
+import { capitalizeFirstLetter, nonempty, TempToUserConfig, UnitToUnicode, _ } from "./utils";
 import { DarkSky } from "./darkSky";
 import { OpenWeatherMap } from "./openWeatherMap";
 import { USWeather } from "./us_weather";
@@ -25,7 +25,7 @@ import { NotificationService } from "./notification_service";
 
 const { TextIconApplet, AllowedLayout, MenuItem } = imports.ui.applet;
 const { spawnCommandLine, spawnCommandLineAsyncIO } = imports.misc.util;
-const { IconType } = imports.gi.St;
+const { IconType, Side } = imports.gi.St;
 
 export class WeatherApplet extends TextIconApplet {	
     private readonly loop: WeatherLoop;
@@ -121,10 +121,7 @@ export class WeatherApplet extends TextIconApplet {
 			weatherInfo = this.MergeWeatherData(weatherInfo, location);
 
 			if (rebuild) this.ui.Rebuild(this.config);
-			if (!this.ui.DisplayWeather(weatherInfo, this.config)
-				|| !this.ui.DisplayForecast(weatherInfo, this.config)
-				|| !this.ui.DisplayHourlyForecast(weatherInfo.hourlyForecasts, this.config, weatherInfo.location.timeZone)
-				|| !this.ui.DisplayBar(weatherInfo, this.provider, this.config)) {
+			if (!this.ui.Display(weatherInfo, this.config, this.provider)) {
 				this.Unlock();
 				return RefreshState.Failure;
 			}
@@ -145,15 +142,61 @@ export class WeatherApplet extends TextIconApplet {
 	// ---------------------------------------------------------------------------
 	// UI helpers
 
+	public DisplayWeatherOnLabel(temperature: number, mainCondition: string) {
+		let temp = TempToUserConfig(temperature, this.config.TemperatureUnit, this.config._tempRussianStyle);
+		// Applet panel label
+		let label = "";
+		// Horizontal panels
+		if (this.Orientation != Side.LEFT && this.Orientation != Side.RIGHT) {
+			if (this.config._showCommentInPanel) {
+				label += mainCondition;
+			}
+			if (this.config._showTextInPanel) {
+				if (label != "") {
+					label += " ";
+				}
+				label += (temp + ' ' + UnitToUnicode(this.config.TemperatureUnit));
+			}
+		}
+		// Vertical panels
+		else {
+			if (this.config._showTextInPanel) {
+				label = temp;
+				// Vertical panel width is more than this value then we has space
+				// to show units
+				if (this.GetPanelHeight() >= 35) {
+					label += UnitToUnicode(this.config.TemperatureUnit);
+				}
+			}
+		}
+
+		// Overriding temperature panel label
+		if (nonempty(this.config._tempTextOverride)) {
+			label = this.config._tempTextOverride
+				.replace("{t}", temp)
+				.replace("{u}", UnitToUnicode(this.config.TemperatureUnit))
+				.replace("{c}", mainCondition);
+		}
+
+		this.SetAppletLabel(label);
+	}
+
 	public SetAppletTooltip(msg: string) {
         this.set_applet_tooltip(msg);
     }
 
     public SetAppletIcon(iconName: string, customIcon: CustomIcons) {
-        this.config.IconType == IconType.SYMBOLIC ?
-            this.set_applet_icon_symbolic_name(iconName) :
-            this.set_applet_icon_name(iconName)
-        if (this.config._useCustomAppletIcons) this.SetCustomIcon(customIcon);
+		if (this.config._useCustomAppletIcons) {
+			this.SetCustomIcon(customIcon);
+		}
+		else {
+			if (iconName == null) {
+				iconName = "weather-severe-alert";
+			}
+			this.config.IconType == IconType.SYMBOLIC ? 
+			this.set_applet_icon_symbolic_name(iconName) :
+            this.set_applet_icon_name(iconName);
+		}
 	}
 	
 	public SetAppletLabel(label: string) {
@@ -395,6 +438,18 @@ export class WeatherApplet extends TextIconApplet {
 		if (weatherInfo.coord.lon == null) weatherInfo.coord.lon = locationData.lon;
 
 		weatherInfo.hourlyForecasts = (!weatherInfo.hourlyForecasts) ? [] : weatherInfo.hourlyForecasts;
+
+		weatherInfo.condition.description = capitalizeFirstLetter(weatherInfo.condition.description);
+		// Translate conditions if set
+		if (this.config._translateCondition) {
+			if (weatherInfo.condition.main != null) {
+				weatherInfo.condition.main = capitalizeFirstLetter(_(weatherInfo.condition.main));
+			}
+
+			if (weatherInfo.condition.description != null) {
+				weatherInfo.condition.description = capitalizeFirstLetter(_(weatherInfo.condition.description));
+			}
+		}
 
 		// Estimation
 		//weatherInfo.location.tzOffset = Math.round(weatherInfo.coord.lon/15) * 3600;

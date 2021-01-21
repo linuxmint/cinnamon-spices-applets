@@ -19,7 +19,7 @@ const consts_1 = require("./consts");
 const notification_service_1 = require("./notification_service");
 const { TextIconApplet, AllowedLayout, MenuItem } = imports.ui.applet;
 const { spawnCommandLine, spawnCommandLineAsyncIO } = imports.misc.util;
-const { IconType } = imports.gi.St;
+const { IconType, Side } = imports.gi.St;
 class WeatherApplet extends TextIconApplet {
     constructor(metadata, orientation, panelHeight, instanceId) {
         super(orientation, panelHeight, instanceId);
@@ -102,10 +102,7 @@ class WeatherApplet extends TextIconApplet {
             weatherInfo = this.MergeWeatherData(weatherInfo, location);
             if (rebuild)
                 this.ui.Rebuild(this.config);
-            if (!this.ui.DisplayWeather(weatherInfo, this.config)
-                || !this.ui.DisplayForecast(weatherInfo, this.config)
-                || !this.ui.DisplayHourlyForecast(weatherInfo.hourlyForecasts, this.config, weatherInfo.location.timeZone)
-                || !this.ui.DisplayBar(weatherInfo, this.provider, this.config)) {
+            if (!this.ui.Display(weatherInfo, this.config, this.provider)) {
                 this.Unlock();
                 return "fail";
             }
@@ -122,15 +119,51 @@ class WeatherApplet extends TextIconApplet {
         }
     }
     ;
+    DisplayWeatherOnLabel(temperature, mainCondition) {
+        let temp = utils_1.TempToUserConfig(temperature, this.config.TemperatureUnit, this.config._tempRussianStyle);
+        let label = "";
+        if (this.Orientation != Side.LEFT && this.Orientation != Side.RIGHT) {
+            if (this.config._showCommentInPanel) {
+                label += mainCondition;
+            }
+            if (this.config._showTextInPanel) {
+                if (label != "") {
+                    label += " ";
+                }
+                label += (temp + ' ' + utils_1.UnitToUnicode(this.config.TemperatureUnit));
+            }
+        }
+        else {
+            if (this.config._showTextInPanel) {
+                label = temp;
+                if (this.GetPanelHeight() >= 35) {
+                    label += utils_1.UnitToUnicode(this.config.TemperatureUnit);
+                }
+            }
+        }
+        if (utils_1.nonempty(this.config._tempTextOverride)) {
+            label = this.config._tempTextOverride
+                .replace("{t}", temp)
+                .replace("{u}", utils_1.UnitToUnicode(this.config.TemperatureUnit))
+                .replace("{c}", mainCondition);
+        }
+        this.SetAppletLabel(label);
+    }
     SetAppletTooltip(msg) {
         this.set_applet_tooltip(msg);
     }
     SetAppletIcon(iconName, customIcon) {
-        this.config.IconType == IconType.SYMBOLIC ?
-            this.set_applet_icon_symbolic_name(iconName) :
-            this.set_applet_icon_name(iconName);
-        if (this.config._useCustomAppletIcons)
+        if (this.config._useCustomAppletIcons) {
             this.SetCustomIcon(customIcon);
+        }
+        else {
+            if (iconName == null) {
+                iconName = "weather-severe-alert";
+            }
+            this.config.IconType == IconType.SYMBOLIC ?
+                this.set_applet_icon_symbolic_name(iconName) :
+                this.set_applet_icon_name(iconName);
+        }
     }
     SetAppletLabel(label) {
         this.set_applet_label(label);
@@ -311,6 +344,15 @@ class WeatherApplet extends TextIconApplet {
         if (weatherInfo.coord.lon == null)
             weatherInfo.coord.lon = locationData.lon;
         weatherInfo.hourlyForecasts = (!weatherInfo.hourlyForecasts) ? [] : weatherInfo.hourlyForecasts;
+        weatherInfo.condition.description = utils_1.capitalizeFirstLetter(weatherInfo.condition.description);
+        if (this.config._translateCondition) {
+            if (weatherInfo.condition.main != null) {
+                weatherInfo.condition.main = utils_1.capitalizeFirstLetter(utils_1._(weatherInfo.condition.main));
+            }
+            if (weatherInfo.condition.description != null) {
+                weatherInfo.condition.description = utils_1.capitalizeFirstLetter(utils_1._(weatherInfo.condition.description));
+            }
+        }
         return weatherInfo;
     }
     DisplayError(title, msg) {
