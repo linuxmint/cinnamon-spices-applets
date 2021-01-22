@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-08 10:12+0100\n"
+"POT-Creation-Date: 2021-01-22 15:31+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,35 +17,35 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: 4.6/applet.js:132
+#: 4.6/applet.js:147
 #, javascript-format
 msgid "Can't play  %s"
 msgstr ""
 
-#: 4.6/applet.js:132
+#: 4.6/applet.js:147
 msgid ""
 "Make sure that the URL is valid and you have a stable internet connection. "
 "Don't hestitate to open an Issue on Github if the problem persists."
 msgstr ""
 
-#: 4.6/applet.js:151 3.0/applet.js:140
+#: 4.6/applet.js:165 3.0/applet.js:140
 msgid "Stop"
 msgstr ""
 
-#: 4.6/applet.js:158
+#: 4.6/applet.js:172
 msgid "Copy current song title"
 msgstr ""
 
-#: 4.6/applet.js:169
+#: 4.6/applet.js:183
 msgid "Can't copy current Song. Is the Radio playing?"
 msgstr ""
 
-#: 4.6/applet.js:233 3.0/applet.js:183
+#: 4.6/applet.js:245 3.0/applet.js:183
 #, javascript-format
 msgid "Please install the '%s' package."
 msgstr ""
 
-#: 4.6/applet.js:257
+#: 4.6/applet.js:269
 msgid "Can't increase Volume. Volume already at maximum."
 msgstr ""
 
@@ -94,27 +94,29 @@ msgstr ""
 msgid "A simple radio applet for Cinnamon"
 msgstr ""
 
-#. 4.6->settings-schema.json->page1->title
-#. 4.6->settings-schema.json->tree->description
+#. 4.6->settings-schema.json->radio-stations-page->title
+msgid "Radio Stations"
+msgstr ""
+
+#. 4.6->settings-schema.json->preferences-page->title
+msgid "Preferences"
+msgstr ""
+
+#. 4.6->settings-schema.json->station-list-section->title
 #. 3.0->settings-schema.json->page1->title
 #. 3.0->settings-schema.json->tree->description
 msgid "List of stations"
 msgstr ""
 
-#. 4.6->settings-schema.json->page2->title
-msgid "Preferences"
+#. 4.6->settings-schema.json->find-station-section->title
+msgid "Find station"
 msgstr ""
 
-#. 4.6->settings-schema.json->section1->title
-#. 3.0->settings-schema.json->section1->title
-msgid "Radio"
-msgstr ""
-
-#. 4.6->settings-schema.json->section2->title
+#. 4.6->settings-schema.json->appearance-section->title
 msgid "Appearance"
 msgstr ""
 
-#. 4.6->settings-schema.json->section3->title
+#. 4.6->settings-schema.json->volume-section->title
 msgid "Volume"
 msgstr ""
 
@@ -154,7 +156,7 @@ msgid "Opens a website, which lists URLs of radio stations."
 msgstr ""
 
 #. 4.6->settings-schema.json->icon-type->description
-msgid "Icon Type"
+msgid "Icon type"
 msgstr ""
 
 #. 4.6->settings-schema.json->icon-type->options
@@ -170,16 +172,19 @@ msgid "Bicolor"
 msgstr ""
 
 #. 4.6->settings-schema.json->color-on->description
-#. 3.0->settings-schema.json->color-on->description
-msgid "Color of Symbolic Icon when playing a radio"
+msgid "Color of symbolic icon when playing a radio station"
 msgstr ""
 
 #. 4.6->settings-schema.json->channel-on-panel->description
-msgid "Show Radio Channel on the panel"
+msgid "Show current radio station on the panel"
+msgstr ""
+
+#. 4.6->settings-schema.json->keep-volume-between-sessions->description
+msgid "Remember volume after stopping the radio"
 msgstr ""
 
 #. 4.6->settings-schema.json->initial-volume->description
-msgid "Initial Volume"
+msgid "Initial volume"
 msgstr ""
 
 #. 4.6->settings-schema.json->initial-volume->tooltip
@@ -191,6 +196,10 @@ msgstr ""
 #. 3.0->settings-schema.json->page2->title
 #. 3.0->settings-schema.json->section2->title
 msgid "Icon"
+msgstr ""
+
+#. 3.0->settings-schema.json->section1->title
+msgid "Radio"
 msgstr ""
 
 #. 3.0->settings-schema.json->section3->title
@@ -211,4 +220,8 @@ msgstr ""
 
 #. 3.0->settings-schema.json->icon-type->options
 msgid "Bicolor Icon"
+msgstr ""
+
+#. 3.0->settings-schema.json->color-on->description
+msgid "Color of Symbolic Icon when playing a radio"
 msgstr ""
