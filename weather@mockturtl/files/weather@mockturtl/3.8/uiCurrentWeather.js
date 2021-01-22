@@ -18,7 +18,7 @@ const STYLE_DATABOX_VALUES = 'weather-current-databox-values';
 const STYLE_CURRENT = 'current';
 const STYLE_LOCATION_SELECTOR = 'location-selector';
 class CurrentWeather {
-    constructor(app, ui) {
+    constructor(app) {
         this.app = app;
         this.actor = new Bin();
         this.actor.style_class = STYLE_CURRENT;

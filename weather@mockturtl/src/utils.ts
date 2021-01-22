@@ -64,6 +64,16 @@ export function UnitToUnicode(unit: WeatherUnits): string {
     return unit == "fahrenheit" ? '\u2109' : '\u2103'
 }
 
+/** Capitalizes first letter and translates if needed */
+export function ProcessCondition(condition: string, shouldTranslate: boolean) {
+    if (condition == null) return null;
+
+    condition = capitalizeFirstLetter(condition);
+    if (shouldTranslate) 
+        condition = _(condition);
+    return condition;
+}
+
 /**
  * https://www.movable-type.co.uk/scripts/latlong.html
  * @param lat1 

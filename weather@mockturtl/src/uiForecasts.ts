@@ -5,8 +5,7 @@ import { WeatherApplet } from "./main";
 import { WeatherData } from "./types";
 import { TempToUserConfig, capitalizeFirstLetter, _, GetDayName, UnitToUnicode } from "./utils";
 
-
-const { Bin, BoxLayout, Side, IconType, Label, ScrollView, Icon, Align, Widget } = imports.gi.St;
+const { Bin, BoxLayout, Label, Icon, Widget } = imports.gi.St;
 const { GridLayout } = imports.gi.Clutter;
 
 // stylesheet.css
@@ -21,8 +20,8 @@ const STYLE_FORECAST = 'forecast'
 
 export class UIForecasts {
 	public actor: imports.gi.St.Bin;
-    private _forecast: ForecastUI[];
-	private _forecastBox: imports.gi.Clutter.GridLayout;
+    private forecasts: ForecastUI[];
+	private grid: imports.gi.Clutter.GridLayout;
 
 	private app: WeatherApplet;
 
@@ -32,8 +31,14 @@ export class UIForecasts {
 	}
 
 	public UpdateIconType(iconType: imports.gi.St.IconType): void {
-		for (let i = 0; i < this._forecast.length; i++) {
-            this._forecast[i].Icon.icon_type = iconType;
+        if (!this.forecasts)
+            return;
+
+		for (let i = 0; i < this.forecasts.length; i++) {
+            if (!this.forecasts[i]?.Icon)
+                continue;
+            
+            this.forecasts[i].Icon.icon_type = iconType;
         }
 	}
 
@@ -41,10 +46,10 @@ export class UIForecasts {
     public Display(weather: WeatherData, config: Config): boolean {
         try {
             if (!weather.forecasts) return false;
-            let len = Math.min(this._forecast.length, weather.forecasts.length);
+            let len = Math.min(this.forecasts.length, weather.forecasts.length);
             for (let i = 0; i < len; i++) {
                 let forecastData = weather.forecasts[i];
-                let forecastUi = this._forecast[i];
+                let forecastUi = this.forecasts[i];
 
                 let t_low = TempToUserConfig(forecastData.temp_min, config.TemperatureUnit, config._tempRussianStyle);
                 let t_high = TempToUserConfig(forecastData.temp_max, config.TemperatureUnit, config._tempRussianStyle);
@@ -53,12 +58,7 @@ export class UIForecasts {
                 let second_temperature = config._temperatureHighFirst ? t_low : t_high;
 
                 // Weather Condition
-                let comment = "";
-                if (forecastData.condition.main != null && forecastData.condition.description != null) {
-                    comment = (config._shortConditions) ? forecastData.condition.main : forecastData.condition.description;
-                    comment = capitalizeFirstLetter(comment);
-                    if (config._translateCondition) comment = _(comment);
-                }
+                let comment = (config._shortConditions) ? forecastData.condition.main : forecastData.condition.description;
 
                 // Day Names
                 let dayName: string = GetDayName(forecastData.date, config.currentLocale, config._showForecastDates, weather.location.timeZone);
@@ -88,15 +88,14 @@ export class UIForecasts {
 	public Rebuild(config: Config, textColorStyle: string): void {
         this.Destroy();
 
-        this._forecast = [];
-        this._forecastBox = new GridLayout({
-            /*style_class: STYLE_FORECAST_CONTAINER,*/
+        this.forecasts = [];
+        this.grid = new GridLayout({
             orientation: config._verticalOrientation
         });
-        this._forecastBox.set_column_homogeneous(true);
+        this.grid.set_column_homogeneous(true);
 
         let table = new Widget({
-            layout_manager: this._forecastBox,
+            layout_manager: this.grid,
             style_class: STYLE_FORECAST_CONTAINER
         });
 
@@ -166,13 +165,13 @@ export class UIForecasts {
             bb.add_actor(forecastWeather.Icon);
             bb.add_actor(by);
 
-            this._forecast[i] = forecastWeather;
+            this.forecasts[i] = forecastWeather;
             if (!config._verticalOrientation) {
-                this._forecastBox.attach(bb, curCol, curRow, 1, 1);
+                this.grid.attach(bb, curCol, curRow, 1, 1);
             }
             else {
                 // flip back column and row variables for correct display
-                this._forecastBox.attach(bb, curRow, curCol, 1, 1);
+                this.grid.attach(bb, curRow, curCol, 1, 1);
             }
 
             curCol++;

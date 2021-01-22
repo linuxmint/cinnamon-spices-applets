@@ -4,7 +4,7 @@ exports.UIForecasts = void 0;
 const consts_1 = require("./consts");
 const logger_1 = require("./logger");
 const utils_1 = require("./utils");
-const { Bin, BoxLayout, Side, IconType, Label, ScrollView, Icon, Align, Widget } = imports.gi.St;
+const { Bin, BoxLayout, Label, Icon, Widget } = imports.gi.St;
 const { GridLayout } = imports.gi.Clutter;
 const STYLE_FORECAST_ICON = 'weather-forecast-icon';
 const STYLE_FORECAST_DATABOX = 'weather-forecast-databox';
@@ -20,29 +20,28 @@ class UIForecasts {
         this.actor = new Bin({ style_class: STYLE_FORECAST });
     }
     UpdateIconType(iconType) {
-        for (let i = 0; i < this._forecast.length; i++) {
-            this._forecast[i].Icon.icon_type = iconType;
+        var _a;
+        if (!this.forecasts)
+            return;
+        for (let i = 0; i < this.forecasts.length; i++) {
+            if (!((_a = this.forecasts[i]) === null || _a === void 0 ? void 0 : _a.Icon))
+                continue;
+            this.forecasts[i].Icon.icon_type = iconType;
         }
     }
     Display(weather, config) {
         try {
             if (!weather.forecasts)
                 return false;
-            let len = Math.min(this._forecast.length, weather.forecasts.length);
+            let len = Math.min(this.forecasts.length, weather.forecasts.length);
             for (let i = 0; i < len; i++) {
                 let forecastData = weather.forecasts[i];
-                let forecastUi = this._forecast[i];
+                let forecastUi = this.forecasts[i];
                 let t_low = utils_1.TempToUserConfig(forecastData.temp_min, config.TemperatureUnit, config._tempRussianStyle);
                 let t_high = utils_1.TempToUserConfig(forecastData.temp_max, config.TemperatureUnit, config._tempRussianStyle);
                 let first_temperature = config._temperatureHighFirst ? t_high : t_low;
                 let second_temperature = config._temperatureHighFirst ? t_low : t_high;
-                let comment = "";
-                if (forecastData.condition.main != null && forecastData.condition.description != null) {
-                    comment = (config._shortConditions) ? forecastData.condition.main : forecastData.condition.description;
-                    comment = utils_1.capitalizeFirstLetter(comment);
-                    if (config._translateCondition)
-                        comment = utils_1._(comment);
-                }
+                let comment = (config._shortConditions) ? forecastData.condition.main : forecastData.condition.description;
                 let dayName = utils_1.GetDayName(forecastData.date, config.currentLocale, config._showForecastDates, weather.location.timeZone);
                 forecastUi.Day.text = dayName;
                 forecastUi.Temperature.text = first_temperature;
@@ -67,13 +66,13 @@ class UIForecasts {
     ;
     Rebuild(config, textColorStyle) {
         this.Destroy();
-        this._forecast = [];
-        this._forecastBox = new GridLayout({
+        this.forecasts = [];
+        this.grid = new GridLayout({
             orientation: config._verticalOrientation
         });
-        this._forecastBox.set_column_homogeneous(true);
+        this.grid.set_column_homogeneous(true);
         let table = new Widget({
-            layout_manager: this._forecastBox,
+            layout_manager: this.grid,
             style_class: STYLE_FORECAST_CONTAINER
         });
         this.actor.set_child(table);
@@ -123,12 +122,12 @@ class UIForecasts {
             });
             bb.add_actor(forecastWeather.Icon);
             bb.add_actor(by);
-            this._forecast[i] = forecastWeather;
+            this.forecasts[i] = forecastWeather;
             if (!config._verticalOrientation) {
-                this._forecastBox.attach(bb, curCol, curRow, 1, 1);
+                this.grid.attach(bb, curCol, curRow, 1, 1);
             }
             else {
-                this._forecastBox.attach(bb, curRow, curCol, 1, 1);
+                this.grid.attach(bb, curRow, curCol, 1, 1);
             }
             curCol++;
         }

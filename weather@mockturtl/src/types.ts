@@ -88,17 +88,19 @@ export interface ForecastData {
 export type PrecipitationType = "rain" | "snow" | "none" | "ice pellets" | "freezing rain";
 export interface HourlyForecastData {
     /** Set to 12:00 if possible */
-    date: Date,
+    date: Date;
     /** Kelvin */
-    temp: number,
-    condition: Condition
-    precipitation?: {
-        type: PrecipitationType,
-        /** in mm */
-        volume?: number,
-        /** % */
-        chance?: number
-    };
+    temp: number;
+    condition: Condition;
+    precipitation?: Precipitation;
+}
+
+export interface Precipitation {
+    type: PrecipitationType,
+    /** in mm */
+    volume?: number,
+    /** % */
+    chance?: number
 }
 
 type LocationSource = "ip-api" | "address-search" | "manual";

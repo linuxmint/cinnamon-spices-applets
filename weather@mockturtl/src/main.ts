@@ -11,7 +11,7 @@ import { WeatherLoop } from "./loop";
 import { MetUk } from "./met_uk";
 import { WeatherData, WeatherProvider, LocationData, AppletError, CustomIcons, NiceErrorDetail, RefreshState } from "./types";
 import { UI } from "./ui";
-import { capitalizeFirstLetter, nonempty, TempToUserConfig, UnitToUnicode, _ } from "./utils";
+import { capitalizeFirstLetter, nonempty, ProcessCondition, TempToUserConfig, UnitToUnicode, _ } from "./utils";
 import { DarkSky } from "./darkSky";
 import { OpenWeatherMap } from "./openWeatherMap";
 import { USWeather } from "./us_weather";
@@ -429,7 +429,9 @@ export class WeatherApplet extends TextIconApplet {
         }
     }
 
-	/** Fills in missing weather info from location Data  */
+	/** Fills in missing weather info from location Data
+	 * and applies translations if needed.
+	 */
 	private MergeWeatherData(weatherInfo: WeatherData, locationData: LocationData) {
 		if (!weatherInfo.location.city) weatherInfo.location.city = locationData.city;
 		if (!weatherInfo.location.country) weatherInfo.location.country = locationData.country;
@@ -438,17 +440,20 @@ export class WeatherApplet extends TextIconApplet {
 		if (weatherInfo.coord.lon == null) weatherInfo.coord.lon = locationData.lon;
 
 		weatherInfo.hourlyForecasts = (!weatherInfo.hourlyForecasts) ? [] : weatherInfo.hourlyForecasts;
-
-		weatherInfo.condition.description = capitalizeFirstLetter(weatherInfo.condition.description);
 		// Translate conditions if set
-		if (this.config._translateCondition) {
-			if (weatherInfo.condition.main != null) {
-				weatherInfo.condition.main = capitalizeFirstLetter(_(weatherInfo.condition.main));
-			}
-
-			if (weatherInfo.condition.description != null) {
-				weatherInfo.condition.description = capitalizeFirstLetter(_(weatherInfo.condition.description));
-			}
+		weatherInfo.condition.main = ProcessCondition(weatherInfo.condition.main, this.config._translateCondition);
+		weatherInfo.condition.description = ProcessCondition(weatherInfo.condition.description, this.config._translateCondition);
+			
+		for (let index = 0; index < weatherInfo.forecasts.length; index++) {
+			const condition = weatherInfo.forecasts[index].condition;
+			condition.main = ProcessCondition(condition.main, this.config._translateCondition);
+			condition.description = ProcessCondition(condition.description, this.config._translateCondition);
+		}
+		
+		for (let index = 0; index < weatherInfo.hourlyForecasts.length; index++) {
+			const condition = weatherInfo.hourlyForecasts[index].condition;
+			condition.main = ProcessCondition(condition.main, this.config._translateCondition);
+			condition.description = ProcessCondition(condition.description, this.config._translateCondition);		
 		}
 
 		// Estimation
@@ -460,11 +465,12 @@ export class WeatherApplet extends TextIconApplet {
 
     // Error handling
 
-    private DisplayError(title: string, msg: string): void {
+	/** For displaying hard errors */
+    private DisplayHardError(title: string, msg: string): void {
         this.set_applet_label(title);
         this.set_applet_tooltip("Click to open");
         this.set_applet_icon_name("weather-severe-alert");
-        this.ui.DisplayErrorMessage(msg);
+        this.ui.DisplayErrorMessage(msg, "hard");
     };
 
     private errMsg: NiceErrorDetail = { // Error messages to use
@@ -498,7 +504,7 @@ export class WeatherApplet extends TextIconApplet {
         if (error.type == "hard") {
             Log.Instance.Debug("Displaying hard error");
             this.ui.Rebuild(this.config);
-            this.DisplayError(this.errMsg[error.detail], (!error.message) ? "" : error.message);
+            this.DisplayHardError(this.errMsg[error.detail], (!error.message) ? "" : error.message);
         }
 
         if (error.type == "soft") {
@@ -507,7 +513,7 @@ export class WeatherApplet extends TextIconApplet {
             if (this.loop.IsDataTooOld()) {
                 this.set_applet_tooltip("Click to open");
                 this.set_applet_icon_name("weather-severe-alert");
-                this.ui.DisplayErrorMessage(_("Could not update weather for a while...\nare you connected to the internet?"));
+                this.ui.DisplayErrorMessage(_("Could not update weather for a while...\nare you connected to the internet?"), "soft");
             }
         }
 

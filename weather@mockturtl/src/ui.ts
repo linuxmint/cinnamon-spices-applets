@@ -2,7 +2,7 @@ import { Config } from "./config";
 import { CurrentWeather } from "./uiCurrentWeather";
 import { Log } from "./logger";
 import { WeatherApplet } from "./main";
-import { WeatherData, WeatherProvider } from "./types";
+import { ErrorDetail, ErrorSeverity, WeatherData, WeatherProvider } from "./types";
 import { shadeHexColor, delay, _ } from "./utils";
 import { UIForecasts } from "./uiForecasts";
 import { UIHourlyForecasts } from "./uiHourlyForecasts";
@@ -139,7 +139,7 @@ export class UI {
 
     /** Creates th skeleton of the popup menu */
     private BuildPopupMenu(): void {
-        this.CurrentWeather = new CurrentWeather(this.App, this);
+        this.CurrentWeather = new CurrentWeather(this.App);
         this.FutureWeather = new UIForecasts(this.App);
         this.HourlyWeather = new UIHourlyForecasts(this.App, this.menu);
         this.Bar = new UIBar(this.App);
@@ -185,7 +185,7 @@ export class UI {
         this.HourlyWeather.UpdateIconType(iconType);
     }
 
-    public DisplayErrorMessage(msg: string) {
+    public DisplayErrorMessage(msg: string, errorType: ErrorSeverity) {
         this.Bar.DisplayErrorMessage(msg);
 	}
 

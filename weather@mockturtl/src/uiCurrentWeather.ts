@@ -48,7 +48,7 @@ export class CurrentWeather {
 	private app: WeatherApplet;
 	//private ui: UI;
 
-    constructor(app: WeatherApplet, ui: UI) {
+    constructor(app: WeatherApplet) {
 		this.app = app;
 		this.actor = new Bin();
 		this.actor.style_class = STYLE_CURRENT;

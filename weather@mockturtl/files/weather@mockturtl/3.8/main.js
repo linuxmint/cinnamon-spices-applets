@@ -344,22 +344,25 @@ class WeatherApplet extends TextIconApplet {
         if (weatherInfo.coord.lon == null)
             weatherInfo.coord.lon = locationData.lon;
         weatherInfo.hourlyForecasts = (!weatherInfo.hourlyForecasts) ? [] : weatherInfo.hourlyForecasts;
-        weatherInfo.condition.description = utils_1.capitalizeFirstLetter(weatherInfo.condition.description);
-        if (this.config._translateCondition) {
-            if (weatherInfo.condition.main != null) {
-                weatherInfo.condition.main = utils_1.capitalizeFirstLetter(utils_1._(weatherInfo.condition.main));
-            }
-            if (weatherInfo.condition.description != null) {
-                weatherInfo.condition.description = utils_1.capitalizeFirstLetter(utils_1._(weatherInfo.condition.description));
-            }
+        weatherInfo.condition.main = utils_1.ProcessCondition(weatherInfo.condition.main, this.config._translateCondition);
+        weatherInfo.condition.description = utils_1.ProcessCondition(weatherInfo.condition.description, this.config._translateCondition);
+        for (let index = 0; index < weatherInfo.forecasts.length; index++) {
+            const condition = weatherInfo.forecasts[index].condition;
+            condition.main = utils_1.ProcessCondition(condition.main, this.config._translateCondition);
+            condition.description = utils_1.ProcessCondition(condition.description, this.config._translateCondition);
+        }
+        for (let index = 0; index < weatherInfo.hourlyForecasts.length; index++) {
+            const condition = weatherInfo.hourlyForecasts[index].condition;
+            condition.main = utils_1.ProcessCondition(condition.main, this.config._translateCondition);
+            condition.description = utils_1.ProcessCondition(condition.description, this.config._translateCondition);
         }
         return weatherInfo;
     }
-    DisplayError(title, msg) {
+    DisplayHardError(title, msg) {
         this.set_applet_label(title);
         this.set_applet_tooltip("Click to open");
         this.set_applet_icon_name("weather-severe-alert");
-        this.ui.DisplayErrorMessage(msg);
+        this.ui.DisplayErrorMessage(msg, "hard");
     }
     ;
     ShowError(error) {
@@ -372,13 +375,13 @@ class WeatherApplet extends TextIconApplet {
         if (error.type == "hard") {
             logger_1.Log.Instance.Debug("Displaying hard error");
             this.ui.Rebuild(this.config);
-            this.DisplayError(this.errMsg[error.detail], (!error.message) ? "" : error.message);
+            this.DisplayHardError(this.errMsg[error.detail], (!error.message) ? "" : error.message);
         }
         if (error.type == "soft") {
             if (this.loop.IsDataTooOld()) {
                 this.set_applet_tooltip("Click to open");
                 this.set_applet_icon_name("weather-severe-alert");
-                this.ui.DisplayErrorMessage(utils_1._("Could not update weather for a while...\nare you connected to the internet?"));
+                this.ui.DisplayErrorMessage(utils_1._("Could not update weather for a while...\nare you connected to the internet?"), "soft");
             }
         }
         if (error.userError) {

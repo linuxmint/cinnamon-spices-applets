@@ -81,7 +81,7 @@ class UI {
         }
     }
     BuildPopupMenu() {
-        this.CurrentWeather = new uiCurrentWeather_1.CurrentWeather(this.App, this);
+        this.CurrentWeather = new uiCurrentWeather_1.CurrentWeather(this.App);
         this.FutureWeather = new uiForecasts_1.UIForecasts(this.App);
         this.HourlyWeather = new uiHourlyForecasts_1.UIHourlyForecasts(this.App, this.menu);
         this.Bar = new uiBar_1.UIBar(this.App);
@@ -117,7 +117,7 @@ class UI {
         this.FutureWeather.UpdateIconType(iconType);
         this.HourlyWeather.UpdateIconType(iconType);
     }
-    DisplayErrorMessage(msg) {
+    DisplayErrorMessage(msg, errorType) {
         this.Bar.DisplayErrorMessage(msg);
     }
     Display(weather, config, provider) {
