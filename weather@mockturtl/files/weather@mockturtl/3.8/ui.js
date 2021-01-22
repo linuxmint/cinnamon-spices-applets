@@ -7,6 +7,7 @@ const utils_1 = require("./utils");
 const uiForecasts_1 = require("./uiForecasts");
 const uiHourlyForecasts_1 = require("./uiHourlyForecasts");
 const uiBar_1 = require("./uiBar");
+const uiSeparator_1 = require("./uiSeparator");
 const { PopupMenuManager, PopupSeparatorMenuItem } = imports.ui.popupMenu;
 const { BoxLayout, IconType, Label } = imports.gi.St;
 const Lang = imports.lang;
@@ -31,12 +32,12 @@ class UI {
     }
     ShowHourlyWeather() {
         this.HourlyWeather.Show();
-        this._separatorAreaHourly.actor.show();
+        this.HourlySeparator.Show();
         this.Bar.SwitchButtonToHide();
     }
     HideHourlyWeather() {
         this.HourlyWeather.Hide();
-        this._separatorAreaHourly.actor.hide();
+        this.HourlySeparator.Hide();
         this.Bar.SwitchButtonToShow();
     }
     ToggleHourlyWeather() {
@@ -85,20 +86,17 @@ class UI {
         this.HourlyWeather = new uiHourlyForecasts_1.UIHourlyForecasts(this.App, this.menu);
         this.Bar = new uiBar_1.UIBar(this.App);
         this.Bar.ToggleClicked.Subscribe(Lang.bind(this, this.ToggleHourlyWeather));
-        this._separatorArea = new PopupSeparatorMenuItem();
-        this._separatorAreaHourly = new PopupSeparatorMenuItem();
-        this._separatorArea2 = new PopupSeparatorMenuItem();
-        this._separatorArea.actor.remove_style_class_name("popup-menu-item");
-        this._separatorAreaHourly.actor.remove_style_class_name("popup-menu-item");
-        this._separatorArea2.actor.remove_style_class_name("popup-menu-item");
-        this._separatorAreaHourly.actor.hide();
+        this.ForecastSeparator = new uiSeparator_1.UISeparator();
+        this.HourlySeparator = new uiSeparator_1.UISeparator();
+        this.BarSeparator = new uiSeparator_1.UISeparator();
+        this.HourlySeparator.Hide();
         let mainBox = new BoxLayout({ vertical: true });
         mainBox.add_actor(this.CurrentWeather.actor);
-        mainBox.add_actor(this._separatorAreaHourly.actor);
+        mainBox.add_actor(this.HourlySeparator.Actor);
         mainBox.add_actor(this.HourlyWeather.actor);
-        mainBox.add_actor(this._separatorArea.actor);
+        mainBox.add_actor(this.ForecastSeparator.Actor);
         mainBox.add_actor(this.FutureWeather.actor);
-        mainBox.add_actor(this._separatorArea2.actor);
+        mainBox.add_actor(this.BarSeparator.Actor);
         mainBox.add_actor(this.Bar.Actor);
         this.menu.addActor(mainBox);
     }

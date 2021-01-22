@@ -7,6 +7,7 @@ import { shadeHexColor, delay, _ } from "./utils";
 import { UIForecasts } from "./uiForecasts";
 import { UIHourlyForecasts } from "./uiHourlyForecasts";
 import { UIBar } from "./uiBar";
+import { UISeparator } from "./uiSeparator";
 
 const { PopupMenuManager, PopupSeparatorMenuItem } = imports.ui.popupMenu;
 const { BoxLayout, IconType, Label} = imports.gi.St;
@@ -21,9 +22,9 @@ const STYLE_WEATHER_MENU = 'weather-menu'
 /** Roll-down Popup Menu */
 export class UI {
     // Separators
-    private _separatorArea: imports.ui.popupMenu.PopupSeparatorMenuItem;
-    private _separatorArea2: imports.ui.popupMenu.PopupSeparatorMenuItem;
-    private _separatorAreaHourly: imports.ui.popupMenu.PopupSeparatorMenuItem;
+    private ForecastSeparator: UISeparator;
+    private BarSeparator: UISeparator;
+    private HourlySeparator: UISeparator;
 
     private CurrentWeather: CurrentWeather;
     private FutureWeather: UIForecasts;
@@ -60,13 +61,13 @@ export class UI {
 
     public ShowHourlyWeather(): void {
         this.HourlyWeather.Show();
-        this._separatorAreaHourly.actor.show();
+        this.HourlySeparator.Show();
         this.Bar.SwitchButtonToHide();
     }
 
     public HideHourlyWeather(): void {
         this.HourlyWeather.Hide();
-        this._separatorAreaHourly.actor.hide();
+        this.HourlySeparator.Hide();
         this.Bar.SwitchButtonToShow();
     }
 
@@ -144,25 +145,19 @@ export class UI {
         this.Bar = new UIBar(this.App);
         this.Bar.ToggleClicked.Subscribe(Lang.bind(this, this.ToggleHourlyWeather));
 
-        // Separators and removing styling to make them span full width 
-        this._separatorArea = new PopupSeparatorMenuItem()
-        this._separatorAreaHourly = new PopupSeparatorMenuItem();
-        this._separatorArea2 = new PopupSeparatorMenuItem()
-        this._separatorArea.actor.remove_style_class_name("popup-menu-item");
-        this._separatorAreaHourly.actor.remove_style_class_name("popup-menu-item");
-        this._separatorArea2.actor.remove_style_class_name("popup-menu-item");
-
-        
-        this._separatorAreaHourly.actor.hide();
+        this.ForecastSeparator = new UISeparator();
+        this.HourlySeparator = new UISeparator();
+        this.BarSeparator = new UISeparator();        
+        this.HourlySeparator.Hide();
 
         // Add everything to the PopupMenu
         let mainBox = new BoxLayout({ vertical: true })
         mainBox.add_actor(this.CurrentWeather.actor)
-        mainBox.add_actor(this._separatorAreaHourly.actor);
+        mainBox.add_actor(this.HourlySeparator.Actor);
         mainBox.add_actor(this.HourlyWeather.actor);
-        mainBox.add_actor(this._separatorArea.actor)
+        mainBox.add_actor(this.ForecastSeparator.Actor)
         mainBox.add_actor(this.FutureWeather.actor)
-        mainBox.add_actor(this._separatorArea2.actor)
+        mainBox.add_actor(this.BarSeparator.Actor)
         mainBox.add_actor(this.Bar.Actor)
         this.menu.addActor(mainBox)
 	}
