@@ -3,7 +3,7 @@ import { APPLET_ICON, ELLIPSIS } from "./consts";
 import { Log } from "./logger";
 import { WeatherApplet } from "./main";
 import { HourlyForecastData, Precipitation } from "./types";
-import { GetHoursMinutes, TempToUserConfig, UnitToUnicode, capitalizeFirstLetter, _, MillimeterToUserUnits } from "./utils";
+import { GetHoursMinutes, TempToUserConfig, UnitToUnicode, capitalizeFirstLetter, _, MillimeterToUserUnits, nonempty } from "./utils";
 
 const { PolicyType } = imports.gi.Gtk;
 const { addTween } = imports.ui.tweener;
@@ -236,13 +236,14 @@ export class UIHourlyForecasts {
      * @returns Always returns text 
      */
     private GeneratePrecipitationText(precip: Precipitation, config: Config): string {
-        if (!precip || precip.type == "none") return "";
-        let precipitationText = null;
+		if (!precip || precip.type == "none") return "";
+		
+		let precipitationText = "";
         if (!!precip.volume && precip.volume > 0) {
             precipitationText = MillimeterToUserUnits(precip.volume, config.DistanceUnit) + " " + ((config.DistanceUnit == "metric") ? _("mm") : _("in"));
         }
         if (!!precip.chance) {
-            precipitationText = (precipitationText == null) ? "" : (precipitationText + ", ")
+            precipitationText = (nonempty(precipitationText)) ? (precipitationText + ", ") : ""; 
             precipitationText += (Math.round(precip.chance).toString() + "%")
         }
         return precipitationText;

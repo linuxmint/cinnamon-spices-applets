@@ -6,6 +6,7 @@
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
 
+import { HttpError } from "./httpLib";
 import { Log } from "./logger";
 import { WeatherApplet } from "./main";
 import { SunCalc } from "./sunCalc";
@@ -54,7 +55,8 @@ export class USWeather implements WeatherProvider {
             this.currentLocID = locID;
 
             let grid = await this.GetGridData(loc);
-            if (grid == null) return null;
+			if (grid == null) return null;
+			Log.Instance.Debug("Grid found: " + JSON.stringify(grid, null, 2));
 
             let observationStations = await this.GetStationData(grid.properties.observationStations);
             if (observationStations == null) return null;
@@ -93,23 +95,9 @@ export class USWeather implements WeatherProvider {
 	 * @param loc 
 	 */
     private async GetGridData(loc: LocationData): Promise<GridPayload> {
-        try {
-            // Handling out of country errors in callback
-            let siteData = await this.app.LoadJsonAsync<GridPayload>(this.sitesUrl + loc.lat.toString() + "," + loc.lon.toString(), this.OnObtainingGridData);
-            Log.Instance.Debug("Grid found: " + JSON.stringify(siteData, null, 2));
-            return siteData;
-        }
-        catch (e) {
-            this.app.ShowError({
-                type: "soft",
-                userError: true,
-                detail: "no network response",
-                service: "us-weather",
-                message: _("Unexpected response from API")
-            });
-            Log.Instance.Error("Failed to Obtain Grid data, error: " + JSON.stringify(e, null, 2));
-            return null;
-        }
+		// Handling out of country errors in callback
+		let siteData = await this.app.LoadJsonAsync<GridPayload>(this.sitesUrl + loc.lat.toString() + "," + loc.lon.toString(), null, (msg) => this.OnObtainingGridData(msg));
+		return siteData;
     }
 
 	/**
@@ -132,13 +120,14 @@ export class USWeather implements WeatherProvider {
             const element = stations[index];
             element.dist = GetDistance(element.geometry.coordinates[1], element.geometry.coordinates[0], loc.lat, loc.lon);
             if (element.dist > range) break;
-            try {
-                //Log.Instance.Debug("Observation query is: " + this.stations[index].id + "/observations/latest")
-                observations.push(await this.app.LoadJsonAsync<any>(stations[index].id + "/observations/latest"))
-            }
-            catch {
-                Log.Instance.Debug("Failed to get observations from " + stations[index].id);
-            }
+			// do not show errors here, we call multiple observation sites
+			let observation = await this.app.LoadJsonAsync<any>(stations[index].id + "/observations/latest", null, (msg) => false);
+			if (observation == null) {
+				Log.Instance.Debug("Failed to get observations from " + stations[index].id);
+			}
+			else {
+				observations.push(observation);
+			}
         }
         return observations;
     }
@@ -147,20 +136,21 @@ export class USWeather implements WeatherProvider {
 	 * 
 	 * @param message Soup Message object
 	 */
-    private OnObtainingGridData(message: imports.gi.Soup.Message): AppletError {
-        if (message.status_code == 404) {
-            let data = JSON.parse(message?.response_body?.data);
+    private OnObtainingGridData(this: USWeather, message: HttpError): boolean {
+        if (message.code == 404) {
+            let data = JSON.parse(message?.response?.response_body?.data);
             if (data.title == "Data Unavailable For Requested Point") {
-                return {
+                this.app.ShowError({
                     type: "hard",
                     userError: true,
                     detail: "location not covered",
                     service: "us-weather",
                     message: _("Location is outside US, please use a different provider.")
-                };
-            }
+                });
+			}
+			return false;
         }
-        return null;
+        return true;
     }
 
 	/**

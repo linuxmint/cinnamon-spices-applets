@@ -53,17 +53,15 @@ export class Climacell implements WeatherProvider {
     //  Functions
     //--------------------------------------------------------
     public async GetWeather(loc: LocationData): Promise<WeatherData> {
-        let hourly = this.GetData("hourly", loc, this.ParseHourly) as Promise<HourlyForecastData[]>;
-        let daily = this.GetData("daily", loc, this.ParseDaily) as Promise<ForecastData[]>;
-        let current = await this.GetData("current", loc, this.ParseWeather) as WeatherData;
+        let hourly = this.GetData("hourly", loc, Lang.bind(this, this.ParseHourly)) as Promise<HourlyForecastData[]>;
+        let daily = this.GetData("daily", loc, Lang.bind(this, this.ParseDaily)) as Promise<ForecastData[]>;
+        let current = await this.GetData("current", loc, Lang.bind(this, this.ParseWeather)) as WeatherData;
         current.forecasts = await daily;
         current.hourlyForecasts = await hourly;
 
         return current;
     };
 
-    // A function as a function parameter 2 levels deep does not know
-    // about the top level object information, has to pass it in as a parameter
     /**
      * 
      * @param baseUrl 
@@ -79,7 +77,7 @@ export class Climacell implements WeatherProvider {
 		if (json == null)
 			return null;
 
-		return Lang.bind(this, ParseFunction(json));
+		return ParseFunction(json);
     };
 
 

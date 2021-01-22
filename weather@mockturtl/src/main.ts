@@ -11,20 +11,20 @@ import { WeatherLoop } from "./loop";
 import { MetUk } from "./met_uk";
 import { WeatherData, WeatherProvider, LocationData, AppletError, CustomIcons, NiceErrorDetail, RefreshState } from "./types";
 import { UI } from "./ui";
-import { capitalizeFirstLetter, nonempty, ProcessCondition, TempToUserConfig, UnitToUnicode, _ } from "./utils";
+import { AwareDateString, GenerateLocationText, nonempty, ProcessCondition, TempToUserConfig, UnitToUnicode, _ } from "./utils";
 import { DarkSky } from "./darkSky";
 import { OpenWeatherMap } from "./openWeatherMap";
 import { USWeather } from "./us_weather";
 import { Weatherbit } from "./weatherbit";
 import { Yahoo } from "./yahoo";
 import { MetNorway } from "./met_norway";
-import { HttpLib, HttpError, Method } from "./httpLib";
+import { HttpLib, HttpError, Method, HTTPParams } from "./httpLib";
 import { Log } from "./logger";
 import { APPLET_ICON, REFRESH_ICON } from "./consts";
 import { NotificationService } from "./notification_service";
 
 const { TextIconApplet, AllowedLayout, MenuItem } = imports.ui.applet;
-const { spawnCommandLine, spawnCommandLineAsyncIO } = imports.misc.util;
+const { spawnCommandLine } = imports.misc.util;
 const { IconType, Side } = imports.gi.St;
 
 export class WeatherApplet extends TextIconApplet {	
@@ -121,7 +121,8 @@ export class WeatherApplet extends TextIconApplet {
 			weatherInfo = this.MergeWeatherData(weatherInfo, location);
 
 			if (rebuild) this.ui.Rebuild(this.config);
-			if (!this.ui.Display(weatherInfo, this.config, this.provider)) {
+			if (!this.ui.Display(weatherInfo, this.config, this.provider)||
+				!this.DisplayWeather(weatherInfo)) {
 				this.Unlock();
 				return RefreshState.Failure;
 			}
@@ -140,9 +141,18 @@ export class WeatherApplet extends TextIconApplet {
 	};
 
 	// ---------------------------------------------------------------------------
-	// UI helpers
+	// Panel Set helpers helpers
 
-	public DisplayWeatherOnLabel(temperature: number, mainCondition: string) {
+	/** Displayes weather info in applet's panel */
+	private DisplayWeather(weather: WeatherData): boolean {
+		let location = GenerateLocationText(weather, this.config);
+		this.SetAppletTooltip(location + " - " + _("As of") + " " + AwareDateString(weather.date, this.config.currentLocale, this.config._show24Hours));
+		this.DisplayWeatherOnLabel(weather.temperature, weather.condition.description);
+		this.SetAppletIcon(weather.condition.icon, weather.condition.customIcon);
+		return true;
+	}
+
+	private DisplayWeatherOnLabel(temperature: number, mainCondition: string) {
 		let temp = TempToUserConfig(temperature, this.config.TemperatureUnit, this.config._tempRussianStyle);
 		// Applet panel label
 		let label = "";
@@ -181,11 +191,11 @@ export class WeatherApplet extends TextIconApplet {
 		this.SetAppletLabel(label);
 	}
 
-	public SetAppletTooltip(msg: string) {
+	private SetAppletTooltip(msg: string) {
         this.set_applet_tooltip(msg);
     }
 
-    public SetAppletIcon(iconName: string, customIcon: CustomIcons) {
+    private SetAppletIcon(iconName: string, customIcon: CustomIcons) {
 		if (this.config._useCustomAppletIcons) {
 			this.SetCustomIcon(customIcon);
 		}
@@ -199,13 +209,16 @@ export class WeatherApplet extends TextIconApplet {
 		}
 	}
 	
-	public SetAppletLabel(label: string) {
+	private SetAppletLabel(label: string) {
         this.set_applet_label(label);
     }
 
-    public GetPanelHeight(): number {
+    private GetPanelHeight(): number {
         return this.panel._getScaledPanelHeight();
 	}
+
+	// ---------------------------------------------------------------------------
+	// UI helpers
 
 	public GetMaxForecastDays(): number {
         if (!this.provider) return this.config._forecastDays;
@@ -224,10 +237,10 @@ export class WeatherApplet extends TextIconApplet {
 	 * Loads JSON response from specified URLs
 	 * @param url URL without params
 	 * @param params param object
-	 * @param HandleError should return null if you want this function to handle errors, else it needs to return an applet object 
+	 * @param HandleError should return true if you want this function to handle errors, else false
 	 * @param method default is GET
 	 */
-	public async LoadJsonAsync<T>(url: string, params?: any, HandleError?: (message: HttpError) => boolean, method: Method = "GET"): Promise<T> {
+	public async LoadJsonAsync<T>(this: WeatherApplet, url: string, params?: HTTPParams, HandleError?: (message: HttpError) => boolean, method: Method = "GET"): Promise<T> {
 		let response = await HttpLib.Instance.LoadJsonAsync<T>(url, params, method);
 		
 		if (!response.Success) {
@@ -241,42 +254,6 @@ export class WeatherApplet extends TextIconApplet {
 		}
 
 		return response.Data;
-	}
-
-	/** Spawns a command and await for the output it gives */
-	public async SpawnProcess(command: string[]): Promise<any> {
-		// prepare command
-		let cmd = "";
-		for (let index = 0; index < command.length; index++) {
-			const element = command[index];
-			cmd += "'" + element + "' ";
-		}
-		try {
-			let json = await new Promise((resolve, reject) => {
-				spawnCommandLineAsyncIO(cmd, (aStdout: string, err: string, exitCode: number) => {
-					if (exitCode != 0) {
-						reject(err);
-					}
-					else {
-						resolve(aStdout);
-					}
-				});
-			});
-			return json;
-		}
-		catch(e) {
-			Log.Instance.Error("Error calling command " + cmd + ", error: ");
-			global.log(e);
-			return null;
-		}
-	}
-
-	public OpenUrl(element: imports.gi.St.Button) {
-        if (!element.url) return;
-        imports.gi.Gio.app_info_launch_default_for_uri(
-            element.url,
-            global.create_app_launch_context()
-        )
 	}
 	
 	// ----------------------------------------------------------------------------

@@ -30,15 +30,8 @@ class UI {
         this.BuildPopupMenu();
         this.signals.connect(themeManager, 'theme-set', this.OnThemeChanged, this);
     }
-    ShowHourlyWeather() {
-        this.HourlyWeather.Show();
-        this.HourlySeparator.Show();
-        this.Bar.SwitchButtonToHide();
-    }
-    HideHourlyWeather() {
-        this.HourlyWeather.Hide();
-        this.HourlySeparator.Hide();
-        this.Bar.SwitchButtonToShow();
+    Toggle() {
+        this.menu.toggle();
     }
     ToggleHourlyWeather() {
         if (this.HourlyWeather.Toggled) {
@@ -47,61 +40,6 @@ class UI {
         else {
             this.ShowHourlyWeather();
         }
-    }
-    OnThemeChanged() {
-        this.HideHourlyWeather();
-        let newThemeIsLight = this.IsLightTheme();
-        if (newThemeIsLight != this.lightTheme) {
-            this.lightTheme = newThemeIsLight;
-        }
-        this.App.RefreshAndRebuild();
-    }
-    IsLightTheme() {
-        let color = this.menu.actor.get_theme_node().get_color("color");
-        let luminance = (2126 * color.red + 7152 * color.green + 722 * color.blue) / 10000 / 255;
-        luminance = Math.abs(1 - luminance);
-        logger_1.Log.Instance.Debug("Theme is Light: " + (luminance > 0.5));
-        return (luminance > 0.5);
-    }
-    ForegroundColor() {
-        let hex = this.menu.actor.get_theme_node().get_foreground_color().to_string().substring(0, 7);
-        return hex;
-    }
-    GetTextColorStyle() {
-        let hexColor = null;
-        if (this.lightTheme) {
-            hexColor = utils_1.shadeHexColor(this.ForegroundColor(), -0.40);
-        }
-        return "color: " + hexColor;
-    }
-    async PopupMenuToggled(caller, data) {
-        if (data == false) {
-            await utils_1.delay(100);
-            this.HideHourlyWeather();
-        }
-    }
-    BuildPopupMenu() {
-        this.CurrentWeather = new uiCurrentWeather_1.CurrentWeather(this.App);
-        this.FutureWeather = new uiForecasts_1.UIForecasts(this.App);
-        this.HourlyWeather = new uiHourlyForecasts_1.UIHourlyForecasts(this.App, this.menu);
-        this.Bar = new uiBar_1.UIBar(this.App);
-        this.Bar.ToggleClicked.Subscribe(Lang.bind(this, this.ToggleHourlyWeather));
-        this.ForecastSeparator = new uiSeparator_1.UISeparator();
-        this.HourlySeparator = new uiSeparator_1.UISeparator();
-        this.BarSeparator = new uiSeparator_1.UISeparator();
-        this.HourlySeparator.Hide();
-        let mainBox = new BoxLayout({ vertical: true });
-        mainBox.add_actor(this.CurrentWeather.actor);
-        mainBox.add_actor(this.HourlySeparator.Actor);
-        mainBox.add_actor(this.HourlyWeather.actor);
-        mainBox.add_actor(this.ForecastSeparator.Actor);
-        mainBox.add_actor(this.FutureWeather.actor);
-        mainBox.add_actor(this.BarSeparator.Actor);
-        mainBox.add_actor(this.Bar.Actor);
-        this.menu.addActor(mainBox);
-    }
-    Toggle() {
-        this.menu.toggle();
     }
     Rebuild(config) {
         this.ShowLoadingUi();
@@ -127,6 +65,58 @@ class UI {
         this.Bar.Display(weather, provider, config, shouldShowToggle);
         return true;
     }
+    OnThemeChanged() {
+        this.HideHourlyWeather();
+        let newThemeIsLight = this.IsLightTheme();
+        if (newThemeIsLight != this.lightTheme) {
+            this.lightTheme = newThemeIsLight;
+        }
+        this.App.RefreshAndRebuild();
+    }
+    async PopupMenuToggled(caller, data) {
+        if (data == false) {
+            await utils_1.delay(100);
+            this.HideHourlyWeather();
+        }
+    }
+    IsLightTheme() {
+        let color = this.menu.actor.get_theme_node().get_color("color");
+        let luminance = (2126 * color.red + 7152 * color.green + 722 * color.blue) / 10000 / 255;
+        luminance = Math.abs(1 - luminance);
+        logger_1.Log.Instance.Debug("Theme is Light: " + (luminance > 0.5));
+        return (luminance > 0.5);
+    }
+    ForegroundColor() {
+        let hex = this.menu.actor.get_theme_node().get_foreground_color().to_string().substring(0, 7);
+        return hex;
+    }
+    GetTextColorStyle() {
+        let hexColor = null;
+        if (this.lightTheme) {
+            hexColor = utils_1.shadeHexColor(this.ForegroundColor(), -0.40);
+        }
+        return "color: " + hexColor;
+    }
+    BuildPopupMenu() {
+        this.CurrentWeather = new uiCurrentWeather_1.CurrentWeather(this.App);
+        this.FutureWeather = new uiForecasts_1.UIForecasts(this.App);
+        this.HourlyWeather = new uiHourlyForecasts_1.UIHourlyForecasts(this.App, this.menu);
+        this.Bar = new uiBar_1.UIBar(this.App);
+        this.Bar.ToggleClicked.Subscribe(Lang.bind(this, this.ToggleHourlyWeather));
+        this.ForecastSeparator = new uiSeparator_1.UISeparator();
+        this.HourlySeparator = new uiSeparator_1.UISeparator();
+        this.BarSeparator = new uiSeparator_1.UISeparator();
+        this.HourlySeparator.Hide();
+        let mainBox = new BoxLayout({ vertical: true });
+        mainBox.add_actor(this.CurrentWeather.actor);
+        mainBox.add_actor(this.HourlySeparator.Actor);
+        mainBox.add_actor(this.HourlyWeather.actor);
+        mainBox.add_actor(this.ForecastSeparator.Actor);
+        mainBox.add_actor(this.FutureWeather.actor);
+        mainBox.add_actor(this.BarSeparator.Actor);
+        mainBox.add_actor(this.Bar.Actor);
+        this.menu.addActor(mainBox);
+    }
     ShowLoadingUi() {
         this.CurrentWeather.Destroy();
         this.FutureWeather.Destroy();
@@ -137,6 +127,16 @@ class UI {
         this.FutureWeather.actor.set_child(new Label({
             text: utils_1._('Loading future weather ...')
         }));
+    }
+    ShowHourlyWeather() {
+        this.HourlyWeather.Show();
+        this.HourlySeparator.Show();
+        this.Bar.SwitchButtonToHide();
+    }
+    HideHourlyWeather() {
+        this.HourlyWeather.Hide();
+        this.HourlySeparator.Hide();
+        this.Bar.SwitchButtonToShow();
     }
 }
 exports.UI = UI;

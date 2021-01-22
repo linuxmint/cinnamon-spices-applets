@@ -18,7 +18,7 @@ const logger_1 = require("./logger");
 const consts_1 = require("./consts");
 const notification_service_1 = require("./notification_service");
 const { TextIconApplet, AllowedLayout, MenuItem } = imports.ui.applet;
-const { spawnCommandLine, spawnCommandLineAsyncIO } = imports.misc.util;
+const { spawnCommandLine } = imports.misc.util;
 const { IconType, Side } = imports.gi.St;
 class WeatherApplet extends TextIconApplet {
     constructor(metadata, orientation, panelHeight, instanceId) {
@@ -102,7 +102,8 @@ class WeatherApplet extends TextIconApplet {
             weatherInfo = this.MergeWeatherData(weatherInfo, location);
             if (rebuild)
                 this.ui.Rebuild(this.config);
-            if (!this.ui.Display(weatherInfo, this.config, this.provider)) {
+            if (!this.ui.Display(weatherInfo, this.config, this.provider) ||
+                !this.DisplayWeather(weatherInfo)) {
                 this.Unlock();
                 return "fail";
             }
@@ -119,6 +120,13 @@ class WeatherApplet extends TextIconApplet {
         }
     }
     ;
+    DisplayWeather(weather) {
+        let location = utils_1.GenerateLocationText(weather, this.config);
+        this.SetAppletTooltip(location + " - " + utils_1._("As of") + " " + utils_1.AwareDateString(weather.date, this.config.currentLocale, this.config._show24Hours));
+        this.DisplayWeatherOnLabel(weather.temperature, weather.condition.description);
+        this.SetAppletIcon(weather.condition.icon, weather.condition.customIcon);
+        return true;
+    }
     DisplayWeatherOnLabel(temperature, mainCondition) {
         let temp = utils_1.TempToUserConfig(temperature, this.config.TemperatureUnit, this.config._tempRussianStyle);
         let label = "";
@@ -192,36 +200,6 @@ class WeatherApplet extends TextIconApplet {
             }
         }
         return response.Data;
-    }
-    async SpawnProcess(command) {
-        let cmd = "";
-        for (let index = 0; index < command.length; index++) {
-            const element = command[index];
-            cmd += "'" + element + "' ";
-        }
-        try {
-            let json = await new Promise((resolve, reject) => {
-                spawnCommandLineAsyncIO(cmd, (aStdout, err, exitCode) => {
-                    if (exitCode != 0) {
-                        reject(err);
-                    }
-                    else {
-                        resolve(aStdout);
-                    }
-                });
-            });
-            return json;
-        }
-        catch (e) {
-            logger_1.Log.Instance.Error("Error calling command " + cmd + ", error: ");
-            global.log(e);
-            return null;
-        }
-    }
-    OpenUrl(element) {
-        if (!element.url)
-            return;
-        imports.gi.Gio.app_info_launch_default_for_uri(element.url, global.create_app_launch_context());
     }
     async locationLookup() {
         let command = "xdg-open ";

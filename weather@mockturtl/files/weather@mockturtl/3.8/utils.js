@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.constructJsLocale = exports.shadeHexColor = exports.hasIcon = exports.weatherIconSafely = exports.isLangSupported = exports.compassDirection = exports.nonempty = exports.isCoordinate = exports.isID = exports.isString = exports.isNumeric = exports.MillimeterToUserUnits = exports.MetreToUserUnits = exports.KmToM = exports.PressToUserUnits = exports.MPHtoMPS = exports.FahrenheitToKelvin = exports.CelsiusToKelvin = exports.TempToUserConfig = exports.MPStoUserUnits = exports.GetFuncName = exports.KPHtoMPS = exports.capitalizeFirstLetter = exports.compassToDeg = exports.IsNight = exports.MilitaryTime = exports.AwareDateString = exports.GetHoursMinutes = exports.GetDayName = exports.clearInterval = exports.GetDistance = exports.ProcessCondition = exports.UnitToUnicode = exports.setInterval = exports.clearTimeout = exports.delay = exports.setTimeout = exports.Guid = exports._ = void 0;
+exports.constructJsLocale = exports.shadeHexColor = exports.hasIcon = exports.weatherIconSafely = exports.isLangSupported = exports.compassDirection = exports.nonempty = exports.isCoordinate = exports.isID = exports.isString = exports.isNumeric = exports.MillimeterToUserUnits = exports.MetreToUserUnits = exports.KmToM = exports.PressToUserUnits = exports.MPHtoMPS = exports.FahrenheitToKelvin = exports.CelsiusToKelvin = exports.TempToUserConfig = exports.MPStoUserUnits = exports.GetFuncName = exports.KPHtoMPS = exports.capitalizeFirstLetter = exports.compassToDeg = exports.IsNight = exports.MilitaryTime = exports.AwareDateString = exports.GetHoursMinutes = exports.GetDayName = exports.clearInterval = exports.GetDistance = exports.GenerateLocationText = exports.ProcessCondition = exports.UnitToUnicode = exports.setInterval = exports.clearTimeout = exports.delay = exports.setTimeout = exports.Guid = exports._ = void 0;
 const consts_1 = require("./consts");
 const { timeout_add, source_remove } = imports.mainloop;
 const { IconType } = imports.gi.St;
@@ -71,6 +71,20 @@ function ProcessCondition(condition, shouldTranslate) {
     return condition;
 }
 exports.ProcessCondition = ProcessCondition;
+function GenerateLocationText(weather, config) {
+    let location = "";
+    if (weather.location.city != null && weather.location.country != null) {
+        location = weather.location.city + ", " + weather.location.country;
+    }
+    else {
+        location = Math.round(weather.coord.lat * 10000) / 10000 + ", " + Math.round(weather.coord.lon * 10000) / 10000;
+    }
+    if (nonempty(config._locationLabelOverride)) {
+        location = config._locationLabelOverride;
+    }
+    return location;
+}
+exports.GenerateLocationText = GenerateLocationText;
 function GetDistance(lat1, lon1, lat2, lon2) {
     const R = 6371e3;
     const φ1 = lat1 * Math.PI / 180;

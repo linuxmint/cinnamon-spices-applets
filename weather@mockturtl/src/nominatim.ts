@@ -29,7 +29,10 @@ export class GeoLocation {
                 return cached;
             }
 
-            let locationData = await this.App.LoadJsonAsync<any>(this.url + encodeURIComponent(searchText) + this.params);
+			let locationData = await this.App.LoadJsonAsync<any>(this.url + encodeURIComponent(searchText) + this.params);
+			if (locationData == null)
+				return null;
+			
             if (locationData.length == 0) {
                 this.App.ShowError({
                     type: "hard",

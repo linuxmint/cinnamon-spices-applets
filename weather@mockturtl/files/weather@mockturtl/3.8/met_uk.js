@@ -71,39 +71,15 @@ class MetUk {
     }
     ;
     async GetClosestForecastSite(loc) {
-        let forecastSitelist = null;
-        try {
-            forecastSitelist = await this.app.LoadJsonAsync(this.baseUrl + this.forecastPrefix + this.sitesUrl + "?" + this.key);
-            return this.GetClosestSite(forecastSitelist, loc);
-        }
-        catch (e) {
-            logger_1.Log.Instance.Error("Failed to get sitelist, error: " + JSON.stringify(e, null, 2));
-            this.app.ShowError({
-                type: "soft",
-                userError: true,
-                detail: "no network response",
-                service: "met-uk",
-                message: utils_1._("Unexpected response from API")
-            });
+        let forecastSitelist = await this.app.LoadJsonAsync(this.baseUrl + this.forecastPrefix + this.sitesUrl + "?" + this.key);
+        if (forecastSitelist == null)
             return null;
-        }
+        return this.GetClosestSite(forecastSitelist, loc);
     }
     async GetObservationSitesInRange(loc, range) {
-        let observationSiteList = null;
-        try {
-            observationSiteList = await this.app.LoadJsonAsync(this.baseUrl + this.currentPrefix + this.sitesUrl + "?" + this.key);
-        }
-        catch (e) {
-            logger_1.Log.Instance.Error("Failed to get sitelist, error: " + JSON.stringify(e, null, 2));
-            this.app.ShowError({
-                type: "soft",
-                userError: true,
-                detail: "no network response",
-                service: "met-uk",
-                message: utils_1._("Unexpected response from API")
-            });
+        let observationSiteList = await this.app.LoadJsonAsync(this.baseUrl + this.currentPrefix + this.sitesUrl + "?" + this.key);
+        if (observationSiteList == null)
             return null;
-        }
         let observationSites = [];
         for (let index = 0; index < observationSiteList.Locations.Location.length; index++) {
             const element = observationSiteList.Locations.Location[index];

@@ -29,7 +29,7 @@ export class HttpLib {
 	 * @param errorCallback do checking before generic error checking by this function, to display API specific UI errors. should return null if
 	 * everything is ok, AppletError to display if there is an error
 	 */
-    public async LoadJsonAsync<T>(url: string, params?: any, method: Method = "GET"): Promise<Response<T>> {
+    public async LoadJsonAsync<T>(url: string, params?: HTTPParams, method: Method = "GET"): Promise<Response<T>> {
 		let response = await this.LoadAsync(url, params, method);
 		
 		if (!response.Success) 
@@ -58,7 +58,7 @@ export class HttpLib {
 	 * @returns HTTPError object on fail.
 	 * @param query fully constructed url
 	 */
-    public async LoadAsync(url: string, params?: any, method: Method = "GET"): Promise<GenericResponse> {
+    public async LoadAsync(url: string, params?: HTTPParams, method: Method = "GET"): Promise<GenericResponse> {
 		let message = await this.Send(url, params, method);
 
 		let error: HttpError = null;
@@ -111,7 +111,7 @@ export class HttpLib {
 	 * @param params 
 	 * @param method 
 	 */
-	public async Send(url: string, params?: any, method: Method = "GET"): Promise<imports.gi.Soup.Message> {
+	public async Send(url: string, params?: HTTPParams, method: Method = "GET"): Promise<imports.gi.Soup.Message> {
 		// Add params to url
 		if (params != null) {
 			url += "?"
@@ -148,6 +148,10 @@ interface GenericResponse {
 	Success: boolean;
 	Data: any;
 	ErrorData: HttpError;
+}
+
+export interface HTTPParams {
+	[key: string]: boolean | string | number;
 }
 
 export interface HttpError {

@@ -1,7 +1,7 @@
-import { WeatherWindSpeedUnits, WeatherUnits, WeatherPressureUnits, DistanceUnits } from "./config";
+import { WeatherWindSpeedUnits, WeatherUnits, WeatherPressureUnits, DistanceUnits, Config } from "./config";
 import { UUID } from "./consts";
 import { SunTimes } from "./sunCalc";
-import { BuiltinIcons } from "./types";
+import { BuiltinIcons, WeatherData } from "./types";
 const { timeout_add, source_remove } = imports.mainloop;
 const { IconType } = imports.gi.St;
 const { IconTheme } = imports.gi.Gtk;
@@ -73,6 +73,24 @@ export function ProcessCondition(condition: string, shouldTranslate: boolean) {
         condition = _(condition);
     return condition;
 }
+
+/** Generates text for the LocationButton on to of the popup menu and tooltip */
+export function GenerateLocationText(weather: WeatherData, config: Config) { 
+	let location = "";
+	if (weather.location.city != null && weather.location.country != null) {
+		location = weather.location.city + ", " + weather.location.country;
+	} else {
+		location = Math.round(weather.coord.lat * 10000) / 10000 + ", " + Math.round(weather.coord.lon * 10000) / 10000;
+	}
+
+	// Overriding Location
+	if (nonempty(config._locationLabelOverride)) {
+		location = config._locationLabelOverride;
+	}
+
+	return location;
+}
+
 
 /**
  * https://www.movable-type.co.uk/scripts/latlong.html

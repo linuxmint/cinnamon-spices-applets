@@ -30,9 +30,9 @@ class Climacell {
         this.app = _app;
     }
     async GetWeather(loc) {
-        let hourly = this.GetData("hourly", loc, this.ParseHourly);
-        let daily = this.GetData("daily", loc, this.ParseDaily);
-        let current = await this.GetData("current", loc, this.ParseWeather);
+        let hourly = this.GetData("hourly", loc, Lang.bind(this, this.ParseHourly));
+        let daily = this.GetData("daily", loc, Lang.bind(this, this.ParseDaily));
+        let current = await this.GetData("current", loc, Lang.bind(this, this.ParseWeather));
         current.forecasts = await daily;
         current.hourlyForecasts = await hourly;
         return current;
@@ -45,7 +45,7 @@ class Climacell {
         let json = await this.app.LoadJsonAsync(query, null, Lang.bind(this, this.HandleError));
         if (json == null)
             return null;
-        return Lang.bind(this, ParseFunction(json));
+        return ParseFunction(json);
     }
     ;
     ParseWeather(json) {

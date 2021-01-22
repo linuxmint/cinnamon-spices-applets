@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CurrentWeather = void 0;
+const commandRunner_1 = require("./commandRunner");
 const consts_1 = require("./consts");
 const logger_1 = require("./logger");
 const utils_1 = require("./utils");
@@ -30,10 +31,7 @@ class CurrentWeather {
                 this.ShowLocationSelectors();
             else
                 this.HideLocationSelectors();
-            let location = this.GenerateLocationText(weather);
-            this.app.SetAppletTooltip(location + " - " + utils_1._("As of") + " " + utils_1.AwareDateString(weather.date, this.app.config.currentLocale, config._show24Hours));
-            this.app.DisplayWeatherOnLabel(weather.temperature, weather.condition.description);
-            this.app.SetAppletIcon(weather.condition.icon, weather.condition.customIcon);
+            let location = utils_1.GenerateLocationText(weather, config);
             this.SetLocation(location, weather.location.url);
             this.SetConditionText(weather.condition.description);
             this.SetWeatherIcon(weather.condition.icon, weather.condition.customIcon);
@@ -42,7 +40,8 @@ class CurrentWeather {
             this.SetWind(weather.wind.speed, weather.wind.degree);
             this.SetPressure(weather.pressure);
             this.SetAPIUniqueField(weather.extra_field);
-            this.SetSunriseAndSunset(weather.sunrise, weather.sunset, weather.location.timeZone);
+            if (config._showSunrise)
+                this.SetSunriseAndSunset(weather.sunrise, weather.sunset, weather.location.timeZone);
             return true;
         }
         catch (e) {
@@ -52,7 +51,7 @@ class CurrentWeather {
     }
     ;
     UpdateIconType(iconType) {
-        this._currentWeatherIcon.icon_type = iconType;
+        this.weatherIcon.icon_type = iconType;
     }
     Destroy() {
         if (this.actor.get_child() != null)
@@ -60,26 +59,67 @@ class CurrentWeather {
     }
     Rebuild(config, textColorStyle) {
         this.Destroy();
-        let textOb = {
-            text: consts_1.ELLIPSIS
-        };
-        this._currentWeatherIcon = new Icon({
+        this.weatherIcon = new Icon({
             icon_type: config.IconType,
             icon_size: 64,
             icon_name: consts_1.APPLET_ICON,
             style_class: STYLE_ICON
         });
-        this._locationButton = new weatherbutton_1.WeatherButton({ reactive: true, label: utils_1._('Refresh'), });
-        this._currentWeatherLocation = this._locationButton.actor;
-        this._currentWeatherLocation.connect(consts_1.SIGNAL_CLICKED, () => {
+        let box = new BoxLayout({ style_class: STYLE_ICONBOX });
+        box.add_actor(this.weatherIcon);
+        box.add_actor(this.BuildMiddleColumn(config, textColorStyle));
+        box.add_actor(this.BuildRightColumn(textColorStyle));
+        this.actor.set_child(box);
+    }
+    ;
+    BuildMiddleColumn(config, textColorStyle) {
+        this.weatherSummary = new Label({ text: utils_1._('Loading ...'), style_class: STYLE_SUMMARY });
+        let middleColumn = new BoxLayout({ vertical: true, style_class: STYLE_SUMMARYBOX });
+        middleColumn.add_actor(this.BuildLocationSection());
+        middleColumn.add(this.weatherSummary, { expand: true, x_align: Align.MIDDLE, y_align: Align.MIDDLE, x_fill: false, y_fill: false });
+        if (config._showSunrise)
+            middleColumn.add_actor(this.BuildSunBox(config, textColorStyle));
+        return middleColumn;
+    }
+    BuildRightColumn(textColorStyle) {
+        let textOb = {
+            text: consts_1.ELLIPSIS
+        };
+        this.temperatureLabel = new Label(textOb);
+        this.humidityLabel = new Label(textOb);
+        this.pressureLabel = new Label(textOb);
+        this.windLabel = new Label(textOb);
+        this.apiUniqueLabel = new Label({ text: '' });
+        this.apiUniqueCaptionLabel = new Label({ text: '', style: textColorStyle });
+        let rb_captions = new BoxLayout({ vertical: true, style_class: STYLE_DATABOX_CAPTIONS });
+        let rb_values = new BoxLayout({ vertical: true, style_class: STYLE_DATABOX_VALUES });
+        rb_captions.add_actor(new Label({ text: utils_1._('Temperature') + ":", style: textColorStyle }));
+        rb_captions.add_actor(new Label({ text: utils_1._('Humidity') + ":", style: textColorStyle }));
+        rb_captions.add_actor(new Label({ text: utils_1._('Pressure') + ":", style: textColorStyle }));
+        rb_captions.add_actor(new Label({ text: utils_1._('Wind') + ":", style: textColorStyle }));
+        rb_captions.add_actor(this.apiUniqueCaptionLabel);
+        rb_values.add_actor(this.temperatureLabel);
+        rb_values.add_actor(this.humidityLabel);
+        rb_values.add_actor(this.pressureLabel);
+        rb_values.add_actor(this.windLabel);
+        rb_values.add_actor(this.apiUniqueLabel);
+        let rightColumn = new BoxLayout({ style_class: STYLE_DATABOX });
+        rightColumn.add_actor(rb_captions);
+        rightColumn.add_actor(rb_values);
+        return rightColumn;
+    }
+    BuildLocationSection() {
+        this.locationButton = new weatherbutton_1.WeatherButton({ reactive: true, label: utils_1._('Refresh'), });
+        this.location = this.locationButton.actor;
+        this.location.connect(consts_1.SIGNAL_CLICKED, () => {
             if (this.app.encounteredError)
                 this.app.RefreshWeather(true);
-            else if (this._currentWeatherLocation.url == null)
+            else if (this.location.url == null)
                 return;
             else
-                this.app.OpenUrl(this._currentWeatherLocation);
+                commandRunner_1.OpenUrl(this.location);
         });
-        this._nextLocationButton = new weatherbutton_1.WeatherButton({
+        this.nextLocationButton = new weatherbutton_1.WeatherButton({
             reactive: true,
             can_focus: true,
             child: new Icon({
@@ -89,8 +129,8 @@ class CurrentWeather {
                 style_class: STYLE_LOCATION_SELECTOR
             }),
         });
-        this._nextLocationButton.actor.connect(consts_1.SIGNAL_CLICKED, Lang.bind(this, this.NextLocationClicked));
-        this._previousLocationButton = new weatherbutton_1.WeatherButton({
+        this.nextLocationButton.actor.connect(consts_1.SIGNAL_CLICKED, Lang.bind(this, this.NextLocationClicked));
+        this.previousLocationButton = new weatherbutton_1.WeatherButton({
             reactive: true,
             can_focus: true,
             child: new Icon({
@@ -100,14 +140,17 @@ class CurrentWeather {
                 style_class: STYLE_LOCATION_SELECTOR
             }),
         });
-        this._previousLocationButton.actor.connect(consts_1.SIGNAL_CLICKED, Lang.bind(this, this.PreviousLocationClicked));
-        this._locationBox = new BoxLayout();
-        this._locationBox.add(this._previousLocationButton.actor, { x_fill: false, x_align: Align.START, y_align: Align.MIDDLE, expand: false });
-        this._locationBox.add(this._currentWeatherLocation, { x_fill: true, x_align: Align.MIDDLE, y_align: Align.MIDDLE, expand: true });
-        this._locationBox.add(this._nextLocationButton.actor, { x_fill: false, x_align: Align.END, y_align: Align.MIDDLE, expand: false });
-        this._currentWeatherSummary = new Label({ text: utils_1._('Loading ...'), style_class: STYLE_SUMMARY });
-        this._currentWeatherSunrise = new Label({ text: consts_1.ELLIPSIS, style: textColorStyle });
-        this._currentWeatherSunset = new Label({ text: consts_1.ELLIPSIS, style: textColorStyle });
+        this.previousLocationButton.actor.connect(consts_1.SIGNAL_CLICKED, Lang.bind(this, this.PreviousLocationClicked));
+        let box = new BoxLayout();
+        box.add(this.previousLocationButton.actor, { x_fill: false, x_align: Align.START, y_align: Align.MIDDLE, expand: false });
+        box.add(this.location, { x_fill: true, x_align: Align.MIDDLE, y_align: Align.MIDDLE, expand: true });
+        box.add(this.nextLocationButton.actor, { x_fill: false, x_align: Align.END, y_align: Align.MIDDLE, expand: false });
+        return box;
+    }
+    BuildSunBox(config, textColorStyle) {
+        let sunBin = new Bin();
+        this.sunriseLabel = new Label({ text: consts_1.ELLIPSIS, style: textColorStyle });
+        this.sunsetLabel = new Label({ text: consts_1.ELLIPSIS, style: textColorStyle });
         let sunriseBox = new BoxLayout();
         let sunsetBox = new BoxLayout();
         if (config._showSunrise) {
@@ -133,49 +176,16 @@ class CurrentWeather {
             y_fill: false,
             expand: true
         };
-        sunriseBox.add(this._currentWeatherSunrise, textOptions);
-        sunsetBox.add(this._currentWeatherSunset, textOptions);
+        sunriseBox.add(this.sunriseLabel, textOptions);
+        sunsetBox.add(this.sunsetLabel, textOptions);
         let ab_spacerLabel = new Label({ text: consts_1.BLANK });
         let sunBox = new BoxLayout({ style_class: STYLE_ASTRONOMY });
         sunBox.add_actor(sunriseBox);
         sunBox.add_actor(ab_spacerLabel);
         sunBox.add_actor(sunsetBox);
-        let middleColumn = new BoxLayout({ vertical: true, style_class: STYLE_SUMMARYBOX });
-        middleColumn.add_actor(this._locationBox);
-        middleColumn.add(this._currentWeatherSummary, { expand: true, x_align: Align.START, y_align: Align.MIDDLE, x_fill: false, y_fill: false });
-        let sunBin = new Bin();
         sunBin.set_child(sunBox);
-        middleColumn.add_actor(sunBin);
-        this._currentWeatherTemperature = new Label(textOb);
-        this._currentWeatherHumidity = new Label(textOb);
-        this._currentWeatherPressure = new Label(textOb);
-        this._currentWeatherWind = new Label(textOb);
-        this._currentWeatherApiUnique = new Label({ text: '' });
-        this._currentWeatherApiUniqueCap = new Label({ text: '', style: textColorStyle });
-        let rb_captions = new BoxLayout({ vertical: true, style_class: STYLE_DATABOX_CAPTIONS });
-        let rb_values = new BoxLayout({ vertical: true, style_class: STYLE_DATABOX_VALUES });
-        rb_captions.add_actor(new Label({ text: utils_1._('Temperature') + ":", style: textColorStyle }));
-        rb_captions.add_actor(new Label({ text: utils_1._('Humidity') + ":", style: textColorStyle }));
-        rb_captions.add_actor(new Label({ text: utils_1._('Pressure') + ":", style: textColorStyle }));
-        rb_captions.add_actor(new Label({ text: utils_1._('Wind') + ":", style: textColorStyle }));
-        rb_captions.add_actor(this._currentWeatherApiUniqueCap);
-        rb_values.add_actor(this._currentWeatherTemperature);
-        rb_values.add_actor(this._currentWeatherHumidity);
-        rb_values.add_actor(this._currentWeatherPressure);
-        rb_values.add_actor(this._currentWeatherWind);
-        rb_values.add_actor(this._currentWeatherApiUnique);
-        let rightColumn = new BoxLayout({ style_class: STYLE_DATABOX });
-        rightColumn.add_actor(rb_captions);
-        rightColumn.add_actor(rb_values);
-        let weatherBox = new BoxLayout();
-        weatherBox.add_actor(middleColumn);
-        weatherBox.add_actor(rightColumn);
-        let box = new BoxLayout({ style_class: STYLE_ICONBOX });
-        box.add_actor(this._currentWeatherIcon);
-        box.add_actor(weatherBox);
-        this.actor.set_child(box);
+        return sunBin;
     }
-    ;
     SetSunriseAndSunset(sunrise, sunset, tz) {
         let sunriseText = "";
         let sunsetText = "";
@@ -183,14 +193,14 @@ class CurrentWeather {
             sunriseText = (utils_1.GetHoursMinutes(sunrise, this.app.config.currentLocale, this.app.config._show24Hours, tz));
             sunsetText = (utils_1.GetHoursMinutes(sunset, this.app.config.currentLocale, this.app.config._show24Hours, tz));
         }
-        this._currentWeatherSunrise.text = sunriseText;
-        this._currentWeatherSunset.text = sunsetText;
+        this.sunriseLabel.text = sunriseText;
+        this.sunsetLabel.text = sunsetText;
     }
     SetAPIUniqueField(extra_field) {
-        this._currentWeatherApiUnique.text = "";
-        this._currentWeatherApiUniqueCap.text = "";
+        this.apiUniqueLabel.text = "";
+        this.apiUniqueCaptionLabel.text = "";
         if (!!extra_field) {
-            this._currentWeatherApiUniqueCap.text = utils_1._(extra_field.name) + ":";
+            this.apiUniqueCaptionLabel.text = utils_1._(extra_field.name) + ":";
             let value;
             switch (extra_field.type) {
                 case "percent":
@@ -203,54 +213,54 @@ class CurrentWeather {
                     value = utils_1._(extra_field.value);
                     break;
             }
-            this._currentWeatherApiUnique.text = value;
+            this.apiUniqueLabel.text = value;
         }
     }
     SetWeatherIcon(iconName, customIconName) {
         if (this.app.config._useCustomMenuIcons) {
-            this._currentWeatherIcon.icon_name = customIconName;
+            this.weatherIcon.icon_name = customIconName;
             this.UpdateIconType(IconType.SYMBOLIC);
         }
         else {
             if (iconName == null) {
                 iconName = "weather-severe-alert";
             }
-            this._currentWeatherIcon.icon_name = iconName;
+            this.weatherIcon.icon_name = iconName;
             this.UpdateIconType(this.app.config.IconType);
         }
     }
     SetConditionText(condition) {
-        this._currentWeatherSummary.text = condition;
+        this.weatherSummary.text = condition;
     }
     SetTemperature(temperature) {
         let temp = utils_1.TempToUserConfig(temperature, this.app.config.TemperatureUnit, this.app.config._tempRussianStyle);
         if (temp == null)
             return;
-        this._currentWeatherTemperature.text = temp + " " + utils_1.UnitToUnicode(this.app.config.TemperatureUnit);
+        this.temperatureLabel.text = temp + " " + utils_1.UnitToUnicode(this.app.config.TemperatureUnit);
     }
     SetHumidity(humidity) {
         if (humidity != null) {
-            this._currentWeatherHumidity.text = Math.round(humidity) + "%";
+            this.humidityLabel.text = Math.round(humidity) + "%";
         }
     }
     SetWind(windSpeed, windDegree) {
         let wind_direction = utils_1.compassDirection(windDegree);
-        this._currentWeatherWind.text =
+        this.windLabel.text =
             (wind_direction != undefined ? utils_1._(wind_direction) + " " : "") +
                 utils_1.MPStoUserUnits(windSpeed, this.app.config.WindSpeedUnit);
         if (this.app.config.WindSpeedUnit != "Beaufort")
-            this._currentWeatherWind.text += " " + utils_1._(this.app.config.WindSpeedUnit);
+            this.windLabel.text += " " + utils_1._(this.app.config.WindSpeedUnit);
     }
     SetPressure(pressure) {
         if (pressure != null) {
-            this._currentWeatherPressure.text = utils_1.PressToUserUnits(pressure, this.app.config._pressureUnit) + ' ' + utils_1._(this.app.config._pressureUnit);
+            this.pressureLabel.text = utils_1.PressToUserUnits(pressure, this.app.config._pressureUnit) + ' ' + utils_1._(this.app.config._pressureUnit);
         }
     }
     SetLocation(locationString, url) {
-        this._currentWeatherLocation.label = locationString;
-        this._currentWeatherLocation.url = url;
+        this.location.label = locationString;
+        this.location.url = url;
         if (!url)
-            this._locationButton.disable();
+            this.locationButton.disable();
     }
     NextLocationClicked() {
         let loc = this.app.config.SwitchToNextLocation();
@@ -267,26 +277,13 @@ class CurrentWeather {
         else
             this.HideLocationSelectors();
     }
-    GenerateLocationText(weather) {
-        let location = "";
-        if (weather.location.city != null && weather.location.country != null) {
-            location = weather.location.city + ", " + weather.location.country;
-        }
-        else {
-            location = Math.round(weather.coord.lat * 10000) / 10000 + ", " + Math.round(weather.coord.lon * 10000) / 10000;
-        }
-        if (utils_1.nonempty(this.app.config._locationLabelOverride)) {
-            location = this.app.config._locationLabelOverride;
-        }
-        return location;
-    }
     ShowLocationSelectors() {
-        this._nextLocationButton.actor.show();
-        this._previousLocationButton.actor.show();
+        this.nextLocationButton.actor.show();
+        this.previousLocationButton.actor.show();
     }
     HideLocationSelectors() {
-        this._nextLocationButton.actor.hide();
-        this._previousLocationButton.actor.hide();
+        this.nextLocationButton.actor.hide();
+        this.previousLocationButton.actor.hide();
     }
 }
 exports.CurrentWeather = CurrentWeather;

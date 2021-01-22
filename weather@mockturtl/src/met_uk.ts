@@ -107,40 +107,17 @@ export class MetUk implements WeatherProvider {
     };
 
     private async GetClosestForecastSite(loc: LocationData): Promise<WeatherSite> {
-        let forecastSitelist = null;
-        try {
-            forecastSitelist = await this.app.LoadJsonAsync(this.baseUrl + this.forecastPrefix + this.sitesUrl + "?" + this.key);
-            return this.GetClosestSite(forecastSitelist, loc);
-        }
-        catch (e) {
-            Log.Instance.Error("Failed to get sitelist, error: " + JSON.stringify(e, null, 2));
-            this.app.ShowError({
-                type: "soft",
-                userError: true,
-                detail: "no network response",
-                service: "met-uk",
-                message: _("Unexpected response from API")
-            })
-            return null;
-        }
+		let forecastSitelist = await this.app.LoadJsonAsync(this.baseUrl + this.forecastPrefix + this.sitesUrl + "?" + this.key);
+		if (forecastSitelist == null)
+			return null;
+
+		return this.GetClosestSite(forecastSitelist, loc);
     }
 
     private async GetObservationSitesInRange(loc: LocationData, range: number): Promise<WeatherSite[]> {
-        let observationSiteList = null;
-        try {
-            observationSiteList = await this.app.LoadJsonAsync<any>(this.baseUrl + this.currentPrefix + this.sitesUrl + "?" + this.key);
-        }
-        catch (e) {
-            Log.Instance.Error("Failed to get sitelist, error: " + JSON.stringify(e, null, 2));
-            this.app.ShowError({
-                type: "soft",
-                userError: true,
-                detail: "no network response",
-                service: "met-uk",
-                message: _("Unexpected response from API")
-            })
-            return null;
-        }
+		let observationSiteList = await this.app.LoadJsonAsync<any>(this.baseUrl + this.currentPrefix + this.sitesUrl + "?" + this.key);
+		if (observationSiteList == null)
+			return null;
 
         // Sort out close observation sites
         let observationSites = [];

@@ -1,3 +1,4 @@
+import { OpenUrl } from "./commandRunner";
 import { Config, DistanceUnits } from "./config";
 import { SIGNAL_CLICKED, ELLIPSIS } from "./consts";
 import { Event } from "./events";
@@ -97,7 +98,7 @@ export class UIBar {
         }
 
         this._providerCredit = new WeatherButton({ label: _(ELLIPSIS), reactive: true }).actor;
-        this._providerCredit.connect(SIGNAL_CLICKED, Lang.bind(this, this.app.OpenUrl));
+        this._providerCredit.connect(SIGNAL_CLICKED, OpenUrl);
 
         this.actor.add(this._providerCredit, {
             x_fill: false,

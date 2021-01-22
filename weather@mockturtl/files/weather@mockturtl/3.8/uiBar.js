@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UIBar = void 0;
+const commandRunner_1 = require("./commandRunner");
 const consts_1 = require("./consts");
 const events_1 = require("./events");
 const utils_1 = require("./utils");
@@ -74,7 +75,7 @@ class UIBar {
             this.HideHourlyToggle();
         }
         this._providerCredit = new weatherbutton_1.WeatherButton({ label: utils_1._(consts_1.ELLIPSIS), reactive: true }).actor;
-        this._providerCredit.connect(consts_1.SIGNAL_CLICKED, Lang.bind(this, this.app.OpenUrl));
+        this._providerCredit.connect(consts_1.SIGNAL_CLICKED, commandRunner_1.OpenUrl);
         this.actor.add(this._providerCredit, {
             x_fill: false,
             x_align: Align.END,

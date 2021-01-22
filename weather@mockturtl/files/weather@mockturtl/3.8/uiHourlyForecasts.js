@@ -173,12 +173,12 @@ class UIHourlyForecasts {
     GeneratePrecipitationText(precip, config) {
         if (!precip || precip.type == "none")
             return "";
-        let precipitationText = null;
+        let precipitationText = "";
         if (!!precip.volume && precip.volume > 0) {
             precipitationText = utils_1.MillimeterToUserUnits(precip.volume, config.DistanceUnit) + " " + ((config.DistanceUnit == "metric") ? utils_1._("mm") : utils_1._("in"));
         }
         if (!!precip.chance) {
-            precipitationText = (precipitationText == null) ? "" : (precipitationText + ", ");
+            precipitationText = (utils_1.nonempty(precipitationText)) ? (precipitationText + ", ") : "";
             precipitationText += (Math.round(precip.chance).toString() + "%");
         }
         return precipitationText;

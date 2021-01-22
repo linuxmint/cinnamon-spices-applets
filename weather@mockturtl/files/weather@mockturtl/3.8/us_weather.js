@@ -31,6 +31,7 @@ class USWeather {
             let grid = await this.GetGridData(loc);
             if (grid == null)
                 return null;
+            logger_1.Log.Instance.Debug("Grid found: " + JSON.stringify(grid, null, 2));
             let observationStations = await this.GetStationData(grid.properties.observationStations);
             if (observationStations == null)
                 return null;
@@ -56,22 +57,8 @@ class USWeather {
     }
     ;
     async GetGridData(loc) {
-        try {
-            let siteData = await this.app.LoadJsonAsync(this.sitesUrl + loc.lat.toString() + "," + loc.lon.toString(), this.OnObtainingGridData);
-            logger_1.Log.Instance.Debug("Grid found: " + JSON.stringify(siteData, null, 2));
-            return siteData;
-        }
-        catch (e) {
-            this.app.ShowError({
-                type: "soft",
-                userError: true,
-                detail: "no network response",
-                service: "us-weather",
-                message: utils_1._("Unexpected response from API")
-            });
-            logger_1.Log.Instance.Error("Failed to Obtain Grid data, error: " + JSON.stringify(e, null, 2));
-            return null;
-        }
+        let siteData = await this.app.LoadJsonAsync(this.sitesUrl + loc.lat.toString() + "," + loc.lon.toString(), null, (msg) => this.OnObtainingGridData(msg));
+        return siteData;
     }
     async GetStationData(stationListUrl) {
         let stations = await this.app.LoadJsonAsync(stationListUrl);
@@ -84,30 +71,32 @@ class USWeather {
             element.dist = utils_1.GetDistance(element.geometry.coordinates[1], element.geometry.coordinates[0], loc.lat, loc.lon);
             if (element.dist > range)
                 break;
-            try {
-                observations.push(await this.app.LoadJsonAsync(stations[index].id + "/observations/latest"));
-            }
-            catch (_a) {
+            let observation = await this.app.LoadJsonAsync(stations[index].id + "/observations/latest", null, (msg) => false);
+            if (observation == null) {
                 logger_1.Log.Instance.Debug("Failed to get observations from " + stations[index].id);
+            }
+            else {
+                observations.push(observation);
             }
         }
         return observations;
     }
     OnObtainingGridData(message) {
-        var _a;
-        if (message.status_code == 404) {
-            let data = JSON.parse((_a = message === null || message === void 0 ? void 0 : message.response_body) === null || _a === void 0 ? void 0 : _a.data);
+        var _a, _b;
+        if (message.code == 404) {
+            let data = JSON.parse((_b = (_a = message === null || message === void 0 ? void 0 : message.response) === null || _a === void 0 ? void 0 : _a.response_body) === null || _b === void 0 ? void 0 : _b.data);
             if (data.title == "Data Unavailable For Requested Point") {
-                return {
+                this.app.ShowError({
                     type: "hard",
                     userError: true,
                     detail: "location not covered",
                     service: "us-weather",
                     message: utils_1._("Location is outside US, please use a different provider.")
-                };
+                });
             }
+            return false;
         }
-        return null;
+        return true;
     }
     MeshObservationData(observations) {
         if (observations.length < 1)

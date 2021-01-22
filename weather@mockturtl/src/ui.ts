@@ -57,21 +57,13 @@ export class UI {
         this.BuildPopupMenu();
         // Subscriptions
 		this.signals.connect(themeManager, 'theme-set', this.OnThemeChanged, this); // on theme change
-    }
+	}
+	
+	public Toggle(): void {
+		this.menu.toggle();
+	}
 
-    public ShowHourlyWeather(): void {
-        this.HourlyWeather.Show();
-        this.HourlySeparator.Show();
-        this.Bar.SwitchButtonToHide();
-    }
-
-    public HideHourlyWeather(): void {
-        this.HourlyWeather.Hide();
-        this.HourlySeparator.Hide();
-        this.Bar.SwitchButtonToShow();
-    }
-
-    public ToggleHourlyWeather(): void {
+	public ToggleHourlyWeather(): void {
         if (this.HourlyWeather.Toggled) {
             this.HideHourlyWeather();
         }
@@ -79,6 +71,46 @@ export class UI {
             this.ShowHourlyWeather();
         }
     }
+
+    /** Fully rebuilds UI */
+    public Rebuild(config: Config): void {
+        this.ShowLoadingUi();
+        this.CurrentWeather.Rebuild(config, this.GetTextColorStyle());
+        this.HourlyWeather.Rebuild(config, this.GetTextColorStyle());
+        this.FutureWeather.Rebuild(config, this.GetTextColorStyle());
+        this.Bar.Rebuild(config);
+    }
+
+	/** Changes all icon's type what are affected by
+	 * the "use symbolic icons" setting
+	 */
+    public UpdateIconType(iconType: imports.gi.St.IconType): void {
+		if (iconType == IconType.FULLCOLOR && this.App.config._useCustomMenuIcons) return;
+		this.CurrentWeather.UpdateIconType(iconType);
+		this.FutureWeather.UpdateIconType(iconType);
+        this.HourlyWeather.UpdateIconType(iconType);
+    }
+
+    public DisplayErrorMessage(msg: string, errorType: ErrorSeverity) {
+        this.Bar.DisplayErrorMessage(msg);
+	}
+
+	/**
+	 * Displays weather info in Popup
+	 * @param weather 
+	 * @param config 
+	 * @param provider 
+	 */
+	public Display(weather: WeatherData, config: Config, provider: WeatherProvider): boolean {
+		this.CurrentWeather.Display(weather, config);
+		this.FutureWeather.Display(weather, config);
+        let shouldShowToggle = this.HourlyWeather.Display(weather.hourlyForecasts, config, weather.location.timeZone);
+		this.Bar.Display(weather, provider, config, shouldShowToggle);
+		return true;
+	}
+
+	// --------------------------------------------------------------------
+	// Callbacks
 
 	/**
 	 * Resetting flags from Hourly scrollview when theme changed to 
@@ -94,7 +126,18 @@ export class UI {
             this.lightTheme = newThemeIsLight;
         }
         this.App.RefreshAndRebuild();
-    }
+	}
+	
+	private async PopupMenuToggled(caller: any, data: any) {
+        // data - true is opened, false is closed
+        if (data == false) {
+            await delay(100); // Closing after popup menu is closed 
+            this.HideHourlyWeather();
+        }
+	}
+
+	// -------------------------------------------------------------------
+	// Utils
 
 	/**
 	 * 
@@ -129,14 +172,6 @@ export class UI {
         return "color: " + hexColor;
     }
 
-    private async PopupMenuToggled(caller: any, data: any) {
-        // data - true is opened, false is closed
-        if (data == false) {
-            await delay(100); // Closing after popup menu is closed 
-            this.HideHourlyWeather();
-        }
-	}
-
     /** Creates th skeleton of the popup menu */
     private BuildPopupMenu(): void {
         this.CurrentWeather = new CurrentWeather(this.App);
@@ -161,41 +196,6 @@ export class UI {
         mainBox.add_actor(this.Bar.Actor)
         this.menu.addActor(mainBox)
 	}
-	
-	public Toggle(): void {
-		this.menu.toggle();
-	}
-
-    /** Fully rebuilds UI */
-    public Rebuild(config: Config): void {
-        this.ShowLoadingUi();
-        this.CurrentWeather.Rebuild(config, this.GetTextColorStyle());
-        this.HourlyWeather.Rebuild(config, this.GetTextColorStyle());
-        this.FutureWeather.Rebuild(config, this.GetTextColorStyle());
-        this.Bar.Rebuild(config);
-    }
-
-	/** Changes all icon's type what are affected by
-	 * the "use symbolic icons" setting
-	 */
-    public UpdateIconType(iconType: imports.gi.St.IconType): void {
-		if (iconType == IconType.FULLCOLOR && this.App.config._useCustomMenuIcons) return;
-		this.CurrentWeather.UpdateIconType(iconType);
-		this.FutureWeather.UpdateIconType(iconType);
-        this.HourlyWeather.UpdateIconType(iconType);
-    }
-
-    public DisplayErrorMessage(msg: string, errorType: ErrorSeverity) {
-        this.Bar.DisplayErrorMessage(msg);
-	}
-
-	public Display(weather: WeatherData, config: Config, provider: WeatherProvider): boolean {
-		this.CurrentWeather.Display(weather, config);
-		this.FutureWeather.Display(weather, config);
-        let shouldShowToggle = this.HourlyWeather.Display(weather.hourlyForecasts, config, weather.location.timeZone);
-		this.Bar.Display(weather, provider, config, shouldShowToggle);
-		return true;
-	}
 
     /** Destroys UI first then shows initial UI */
     private ShowLoadingUi(): void {
@@ -208,5 +208,17 @@ export class UI {
         this.FutureWeather.actor.set_child(new Label({
             text: _('Loading future weather ...')
         }))
+	}
+	
+	private ShowHourlyWeather(): void {
+        this.HourlyWeather.Show();
+        this.HourlySeparator.Show();
+        this.Bar.SwitchButtonToHide();
+    }
+
+    private HideHourlyWeather(): void {
+        this.HourlyWeather.Hide();
+        this.HourlySeparator.Hide();
+        this.Bar.SwitchButtonToShow();
     }
 }
