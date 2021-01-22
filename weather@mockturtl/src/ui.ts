@@ -1,15 +1,15 @@
 import { Config } from "./config";
-import { CurrentWeather } from "./uiCurrentWeather";
+import { CurrentWeather as UICurrentWeather } from "./uiCurrentWeather";
 import { Log } from "./logger";
 import { WeatherApplet } from "./main";
-import { ErrorDetail, ErrorSeverity, WeatherData, WeatherProvider } from "./types";
-import { shadeHexColor, delay, _ } from "./utils";
+import { ErrorSeverity, WeatherData, WeatherProvider } from "./types";
+import { ShadeHexColor, delay, _ } from "./utils";
 import { UIForecasts } from "./uiForecasts";
 import { UIHourlyForecasts } from "./uiHourlyForecasts";
 import { UIBar } from "./uiBar";
 import { UISeparator } from "./uiSeparator";
 
-const { PopupMenuManager, PopupSeparatorMenuItem } = imports.ui.popupMenu;
+const { PopupMenuManager } = imports.ui.popupMenu;
 const { BoxLayout, IconType, Label} = imports.gi.St;
 const Lang: typeof imports.lang = imports.lang;
 const { AppletPopupMenu } = imports.ui.applet;
@@ -26,7 +26,7 @@ export class UI {
     private BarSeparator: UISeparator;
     private HourlySeparator: UISeparator;
 
-    private CurrentWeather: CurrentWeather;
+    private CurrentWeather: UICurrentWeather;
     private FutureWeather: UIForecasts;
     private HourlyWeather: UIHourlyForecasts;
     private Bar: UIBar;
@@ -74,10 +74,11 @@ export class UI {
 
     /** Fully rebuilds UI */
     public Rebuild(config: Config): void {
-        this.ShowLoadingUi();
-        this.CurrentWeather.Rebuild(config, this.GetTextColorStyle());
-        this.HourlyWeather.Rebuild(config, this.GetTextColorStyle());
-        this.FutureWeather.Rebuild(config, this.GetTextColorStyle());
+		this.ShowLoadingUi();
+		let textColorStyle  = this.GetTextColorStyle();
+        this.CurrentWeather.Rebuild(config, textColorStyle);
+        this.HourlyWeather.Rebuild(config, textColorStyle);
+        this.FutureWeather.Rebuild(config, textColorStyle);
         this.Bar.Rebuild(config);
     }
 
@@ -167,14 +168,14 @@ export class UI {
         let hexColor = null;
         if (this.lightTheme) {
             // Darken default foreground color
-            hexColor = shadeHexColor(this.ForegroundColor(), -0.40);
+            hexColor = ShadeHexColor(this.ForegroundColor(), -0.40);
         }
         return "color: " + hexColor;
     }
 
     /** Creates th skeleton of the popup menu */
     private BuildPopupMenu(): void {
-        this.CurrentWeather = new CurrentWeather(this.App);
+        this.CurrentWeather = new UICurrentWeather(this.App);
         this.FutureWeather = new UIForecasts(this.App);
         this.HourlyWeather = new UIHourlyForecasts(this.App, this.menu);
         this.Bar = new UIBar(this.App);

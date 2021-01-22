@@ -244,7 +244,7 @@ class CurrentWeather {
         }
     }
     SetWind(windSpeed, windDegree) {
-        let wind_direction = utils_1.compassDirection(windDegree);
+        let wind_direction = utils_1.CompassDirection(windDegree);
         this.windLabel.text =
             (wind_direction != undefined ? utils_1._(wind_direction) + " " : "") +
                 utils_1.MPStoUserUnits(windSpeed, this.app.config.WindSpeedUnit);

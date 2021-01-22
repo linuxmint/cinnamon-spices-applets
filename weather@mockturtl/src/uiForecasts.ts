@@ -3,7 +3,7 @@ import { APPLET_ICON, ELLIPSIS, FORWARD_SLASH } from "./consts";
 import { Log } from "./logger";
 import { WeatherApplet } from "./main";
 import { WeatherData } from "./types";
-import { TempToUserConfig, capitalizeFirstLetter, _, GetDayName, UnitToUnicode } from "./utils";
+import { TempToUserConfig, CapitalizeFirstLetter, _, GetDayName, UnitToUnicode } from "./utils";
 
 const { Bin, BoxLayout, Label, Icon, Widget } = imports.gi.St;
 const { GridLayout } = imports.gi.Clutter;

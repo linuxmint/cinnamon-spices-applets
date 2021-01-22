@@ -10,7 +10,7 @@ import { HttpError } from "./httpLib";
 import { Log } from "./logger";
 import { WeatherApplet } from "./main";
 import { WeatherProvider, WeatherData, ForecastData, HourlyForecastData, AppletError, BuiltinIcons, CustomIcons, LocationData } from "./types";
-import { weatherIconSafely, _, isLangSupported } from "./utils";
+import { WeatherIconSafely, _, IsLangSupported } from "./utils";
 
 const Lang: typeof imports.lang = imports.lang;
 
@@ -125,7 +125,7 @@ export class Weatherbit implements WeatherProvider {
                 condition: {
                     main: json.weather.description,
                     description: json.weather.description,
-                    icon: weatherIconSafely(self.ResolveIcon(json.weather.icon), self.app.config.IconType),
+                    icon: WeatherIconSafely(self.ResolveIcon(json.weather.icon), self.app.config.IconType),
                     customIcon: self.ResolveCustomIcon(json.weather.icon)
                 },
                 extra_field: {
@@ -157,7 +157,7 @@ export class Weatherbit implements WeatherProvider {
                     condition: {
                         main: day.weather.description,
                         description: day.weather.description,
-                        icon: weatherIconSafely(self.ResolveIcon(day.weather.icon), self.app.config.IconType),
+                        icon: WeatherIconSafely(self.ResolveIcon(day.weather.icon), self.app.config.IconType),
                         customIcon: self.ResolveCustomIcon(day.weather.icon)
                     },
                 };
@@ -183,7 +183,7 @@ export class Weatherbit implements WeatherProvider {
                     condition: {
                         main: hour.weather.description,
                         description: hour.weather.description,
-                        icon: weatherIconSafely(self.ResolveIcon(hour.weather.icon), self.app.config.IconType),
+                        icon: WeatherIconSafely(self.ResolveIcon(hour.weather.icon), self.app.config.IconType),
                         customIcon: self.ResolveCustomIcon(hour.weather.icon)
                     },
                     precipitation: {
@@ -263,7 +263,7 @@ export class Weatherbit implements WeatherProvider {
 
         query = query + "key=" + key + "&lat=" + loc.lat + "&lon=" + loc.lon + "&units=S"
         let lang = this.ConvertToAPILocale(this.app.config.currentLocale);
-        if (isLangSupported(lang, this.supportedLanguages) && this.app.config._translateCondition) {
+        if (IsLangSupported(lang, this.supportedLanguages) && this.app.config._translateCondition) {
             query = query + "&lang=" + lang;
         }
         return query;

@@ -8,7 +8,7 @@ const uiForecasts_1 = require("./uiForecasts");
 const uiHourlyForecasts_1 = require("./uiHourlyForecasts");
 const uiBar_1 = require("./uiBar");
 const uiSeparator_1 = require("./uiSeparator");
-const { PopupMenuManager, PopupSeparatorMenuItem } = imports.ui.popupMenu;
+const { PopupMenuManager } = imports.ui.popupMenu;
 const { BoxLayout, IconType, Label } = imports.gi.St;
 const Lang = imports.lang;
 const { AppletPopupMenu } = imports.ui.applet;
@@ -43,9 +43,10 @@ class UI {
     }
     Rebuild(config) {
         this.ShowLoadingUi();
-        this.CurrentWeather.Rebuild(config, this.GetTextColorStyle());
-        this.HourlyWeather.Rebuild(config, this.GetTextColorStyle());
-        this.FutureWeather.Rebuild(config, this.GetTextColorStyle());
+        let textColorStyle = this.GetTextColorStyle();
+        this.CurrentWeather.Rebuild(config, textColorStyle);
+        this.HourlyWeather.Rebuild(config, textColorStyle);
+        this.FutureWeather.Rebuild(config, textColorStyle);
         this.Bar.Rebuild(config);
     }
     UpdateIconType(iconType) {
@@ -93,7 +94,7 @@ class UI {
     GetTextColorStyle() {
         let hexColor = null;
         if (this.lightTheme) {
-            hexColor = utils_1.shadeHexColor(this.ForegroundColor(), -0.40);
+            hexColor = utils_1.ShadeHexColor(this.ForegroundColor(), -0.40);
         }
         return "color: " + hexColor;
     }

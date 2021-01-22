@@ -77,7 +77,7 @@ class Yahoo {
                 condition: {
                     main: (json.current_observation.condition.text),
                     description: json.current_observation.condition.text,
-                    icon: utils_1.weatherIconSafely(this.ResolveIcon(json.current_observation.condition.code, { sunrise: sunrise, sunset: sunset }), this.app.config.IconType),
+                    icon: utils_1.WeatherIconSafely(this.ResolveIcon(json.current_observation.condition.code, { sunrise: sunrise, sunset: sunset }), this.app.config.IconType),
                     customIcon: this.ResolveCustomIcon(json.current_observation.condition.code)
                 },
                 extra_field: {
@@ -96,7 +96,7 @@ class Yahoo {
                     condition: {
                         main: (day.text),
                         description: (day.text),
-                        icon: utils_1.weatherIconSafely(this.ResolveIcon(day.code), this.app.config.IconType),
+                        icon: utils_1.WeatherIconSafely(this.ResolveIcon(day.code), this.app.config.IconType),
                         customIcon: this.ResolveCustomIcon(day.code)
                     },
                 };

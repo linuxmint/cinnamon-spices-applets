@@ -3,7 +3,7 @@ import { APPLET_ICON, ELLIPSIS } from "./consts";
 import { Log } from "./logger";
 import { WeatherApplet } from "./main";
 import { HourlyForecastData, Precipitation } from "./types";
-import { GetHoursMinutes, TempToUserConfig, UnitToUnicode, capitalizeFirstLetter, _, MillimeterToUserUnits, nonempty } from "./utils";
+import { GetHoursMinutes, TempToUserConfig, UnitToUnicode, CapitalizeFirstLetter, _, MillimeterToUserUnits, nonempty } from "./utils";
 
 const { PolicyType } = imports.gi.Gtk;
 const { addTween } = imports.ui.tweener;

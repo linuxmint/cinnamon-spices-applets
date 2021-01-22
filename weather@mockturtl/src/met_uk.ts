@@ -11,7 +11,7 @@ import { Log } from "./logger";
 import { WeatherApplet } from "./main";
 import { SunCalc } from "./sunCalc";
 import { WeatherProvider, WeatherData, ForecastData, HourlyForecastData, Condition, LocationData } from "./types";
-import { _, GetDistance, MPHtoMPS, compassToDeg, CelsiusToKelvin, MetreToUserUnits, weatherIconSafely } from "./utils";
+import { _, GetDistance, MPHtoMPS, CompassToDeg, CelsiusToKelvin, MetreToUserUnits, WeatherIconSafely } from "./utils";
 
 export class MetUk implements WeatherProvider {
 
@@ -214,7 +214,7 @@ export class MetUk implements WeatherProvider {
                 weather.wind.speed = MPHtoMPS(parseFloat(observation.S));
             }
             if (observation?.D != null) {
-                weather.wind.degree = compassToDeg(observation.D);
+                weather.wind.degree = CompassToDeg(observation.D);
             }
             if (observation?.T != null) {
                 weather.temperature = CelsiusToKelvin(parseFloat(observation.T));
@@ -426,231 +426,231 @@ export class MetUk implements WeatherProvider {
                     main: _("Unknown"),
                     description: _("Unknown"),
                     customIcon: "cloud-refresh-symbolic",
-                    icon: weatherIconSafely(["weather-severe-alert"], iconType)
+                    icon: WeatherIconSafely(["weather-severe-alert"], iconType)
                 }
             case "0": // Clear night
                 return {
                     main: _("Clear"),
                     description: _("Clear"),
                     customIcon: "night-clear-symbolic",
-                    icon: weatherIconSafely(["weather-clear-night", "weather-severe-alert"], iconType)
+                    icon: WeatherIconSafely(["weather-clear-night", "weather-severe-alert"], iconType)
                 }
             case "1": // Sunny day
                 return {
                     main: _("Sunny"),
                     description: _("Sunny"),
                     customIcon: "day-sunny-symbolic",
-                    icon: weatherIconSafely(["weather-clear", "weather-severe-alert"], iconType)
+                    icon: WeatherIconSafely(["weather-clear", "weather-severe-alert"], iconType)
                 }
             case "2": // Partly cloudy (night)
                 return {
                     main: _("Partly Cloudy"),
                     description: _("Partly Cloudy"),
                     customIcon: "night-alt-cloudy-symbolic",
-                    icon: weatherIconSafely(["weather-clouds-night", "weather-overcast", "weather-severe-alert"], iconType)
+                    icon: WeatherIconSafely(["weather-clouds-night", "weather-overcast", "weather-severe-alert"], iconType)
                 }
             case "3": // Partly cloudy (day)
                 return {
                     main: _("Partly Cloudy"),
                     description: _("Partly Cloudy"),
                     customIcon: "day-cloudy-symbolic",
-                    icon: weatherIconSafely(["weather-clouds", "weather-overcast", "weather-severe-alert"], iconType)
+                    icon: WeatherIconSafely(["weather-clouds", "weather-overcast", "weather-severe-alert"], iconType)
                 }
             case "4": // Not used - really?
                 return {
                     main: _("Unknown"),
                     description: _("Unknown"),
                     customIcon: "cloud-refresh-symbolic",
-                    icon: weatherIconSafely(["weather-severe-alert"], iconType)
+                    icon: WeatherIconSafely(["weather-severe-alert"], iconType)
                 }
             case "5": // Mist
                 return {
                     main: _("Mist"),
                     description: _("Mist"),
                     customIcon: "fog-symbolic",
-                    icon: weatherIconSafely(["weather-fog", "weather-severe-alert"], iconType)
+                    icon: WeatherIconSafely(["weather-fog", "weather-severe-alert"], iconType)
                 }
             case "6": // Fog
                 return {
                     main: _("Fog"),
                     description: _("Fog"),
                     customIcon: "fog-symbolic",
-                    icon: weatherIconSafely(["weather-fog", "weather-severe-alert"], iconType)
+                    icon: WeatherIconSafely(["weather-fog", "weather-severe-alert"], iconType)
                 }
             case "7": // Cloudy
                 return {
                     main: _("Cloudy"),
                     description: _("Cloudy"),
                     customIcon: "cloud-symbolic",
-                    icon: weatherIconSafely(["weather-overcast", "weather-many-clouds", "weather-severe-alert"], iconType)
+                    icon: WeatherIconSafely(["weather-overcast", "weather-many-clouds", "weather-severe-alert"], iconType)
                 }
             case "8":
                 return { // Overcast
                     main: _("Overcast"),
                     description: _("Overcast"),
                     customIcon: "cloudy-symbolic",
-                    icon: weatherIconSafely(["weather-overcast", "weather-many-clouds", "weather-severe-alert"], iconType)
+                    icon: WeatherIconSafely(["weather-overcast", "weather-many-clouds", "weather-severe-alert"], iconType)
                 }
             case "9": // Light rain shower (night)
                 return {
                     main: _("Light Rain"),
                     description: _("Light rain shower"),
                     customIcon: "night-alt-showers-symbolic",
-                    icon: weatherIconSafely(["weather-showers-scattered-night", "weather-showers-night", "weather-showers-scattered", "weather-showers", "weather-freezing-rain", "weather-severe-alert"], iconType)
+                    icon: WeatherIconSafely(["weather-showers-scattered-night", "weather-showers-night", "weather-showers-scattered", "weather-showers", "weather-freezing-rain", "weather-severe-alert"], iconType)
                 }
             case "10": // Light rain shower (day)
                 return {
                     main: _("Light Rain"),
                     description: _("Light rain shower"),
                     customIcon: "day-showers-symbolic",
-                    icon: weatherIconSafely(["weather-showers-scattered-day", "weather-showers-day", "weather-showers-scattered", "weather-showers", "weather-freezing-rain", "weather-severe-alert"], iconType)
+                    icon: WeatherIconSafely(["weather-showers-scattered-day", "weather-showers-day", "weather-showers-scattered", "weather-showers", "weather-freezing-rain", "weather-severe-alert"], iconType)
                 }
             case "11": // Drizzle
                 return {
                     main: _("Drizzle"),
                     description: _("Drizzle"),
                     customIcon: "showers-symbolic",
-                    icon: weatherIconSafely(["weather-showers-scattered", "weather-showers", "weather-rain", "weather-freezing-rain", "weather-severe-alert"], iconType)
+                    icon: WeatherIconSafely(["weather-showers-scattered", "weather-showers", "weather-rain", "weather-freezing-rain", "weather-severe-alert"], iconType)
                 }
             case "12": // Light rain
                 return {
                     main: _("Light Rain"),
                     description: _("Light rain"),
                     customIcon: "showers-symbolic",
-                    icon: weatherIconSafely(["weather-showers-scattered", "weather-showers", "weather-rain", "weather-freezing-rain", "weather-severe-alert"], iconType)
+                    icon: WeatherIconSafely(["weather-showers-scattered", "weather-showers", "weather-rain", "weather-freezing-rain", "weather-severe-alert"], iconType)
                 }
             case "13": // Heavy rain shower (night)
                 return {
                     main: _("Heavy Rain"),
                     description: _("Heavy rain shower"),
                     customIcon: "night-alt-rain-symbolic",
-                    icon: weatherIconSafely(["weather-showers-night", "weather-showers", "weather-showers-scattered", "weather-severe-alert"], iconType)
+                    icon: WeatherIconSafely(["weather-showers-night", "weather-showers", "weather-showers-scattered", "weather-severe-alert"], iconType)
                 }
             case "14": // Heavy rain shower (day)
                 return {
                     main: _("Heavy Rain"),
                     description: _("Heavy rain shower"),
                     customIcon: "day-rain-symbolic",
-                    icon: weatherIconSafely(["weather-showers-day", "weather-showers", "weather-showers-scattered", "weather-severe-alert"], iconType)
+                    icon: WeatherIconSafely(["weather-showers-day", "weather-showers", "weather-showers-scattered", "weather-severe-alert"], iconType)
                 }
             case "15": // Heavy rain
                 return {
                     main: _("Heavy Rain"),
                     description: _("Heavy Rain"),
                     customIcon: "rain-symbolic",
-                    icon: weatherIconSafely(["weather-showers", "weather-showers-scattered", "weather-severe-alert"], iconType)
+                    icon: WeatherIconSafely(["weather-showers", "weather-showers-scattered", "weather-severe-alert"], iconType)
                 }
             case "16": // Sleet shower (night)
                 return {
                     main: _("Sleet"),
                     description: _("Sleet shower"),
                     customIcon: "night-alt-rain-mix-symbolic",
-                    icon: weatherIconSafely(["weather-showers-night", "weather-showers", "weather-showers-scattered", "weather-severe-alert"], iconType)
+                    icon: WeatherIconSafely(["weather-showers-night", "weather-showers", "weather-showers-scattered", "weather-severe-alert"], iconType)
                 }
             case "17": // Sleet shower (day)
                 return {
                     main: _("Sleet"),
                     description: _("Sleet shower"),
                     customIcon: "day-rain-mix-symbolic",
-                    icon: weatherIconSafely(["weather-showers-day", "weather-showers", "weather-showers-scattered", "weather-severe-alert"], iconType)
+                    icon: WeatherIconSafely(["weather-showers-day", "weather-showers", "weather-showers-scattered", "weather-severe-alert"], iconType)
                 }
             case "18": // Sleet
                 return {
                     main: _("Sleet"),
                     description: _("Sleet"),
                     customIcon: "rain-mix-symbolic",
-                    icon: weatherIconSafely(["weather-showers", "weather-showers-scattered", "weather-severe-alert"], iconType)
+                    icon: WeatherIconSafely(["weather-showers", "weather-showers-scattered", "weather-severe-alert"], iconType)
                 }
             case "19": // Hail shower (night)
                 return {
                     main: _("Hail"),
                     description: _("Hail shower"),
                     customIcon: "night-alt-hail-symbolic",
-                    icon: weatherIconSafely(["weather-showers-night", "weather-showers", "weather-showers-scattered", "weather-severe-alert"], iconType)
+                    icon: WeatherIconSafely(["weather-showers-night", "weather-showers", "weather-showers-scattered", "weather-severe-alert"], iconType)
                 }
             case "20": // Hail shower (day)
                 return {
                     main: _("Hail"),
                     description: _("Hail shower"),
                     customIcon: "day-hail-symbolic",
-                    icon: weatherIconSafely(["weather-showers-day", "weather-showers", "weather-showers-scattered", "weather-severe-alert"], iconType)
+                    icon: WeatherIconSafely(["weather-showers-day", "weather-showers", "weather-showers-scattered", "weather-severe-alert"], iconType)
                 }
             case "21": // Hail
                 return {
                     main: _("Hail"),
                     description: _("Hail"),
                     customIcon: "hail-symbolic",
-                    icon: weatherIconSafely(["weather-showers", "weather-showers-scattered", "weather-severe-alert"], iconType)
+                    icon: WeatherIconSafely(["weather-showers", "weather-showers-scattered", "weather-severe-alert"], iconType)
                 }
             case "22": // Light snow shower (night)
                 return {
                     main: _("Light Snow"),
                     description: _("Light snow shower"),
                     customIcon: "night-alt-snow-symbolic",
-                    icon: weatherIconSafely(["weather-snow-scattered", "weather-snow", "weather-severe-alert"], iconType)
+                    icon: WeatherIconSafely(["weather-snow-scattered", "weather-snow", "weather-severe-alert"], iconType)
                 }
             case "23": // Light snow shower (day)
                 return {
                     main: _("Light Snow"),
                     description: _("Light snow shower"),
                     customIcon: "day-snow-symbolic",
-                    icon: weatherIconSafely(["weather-snow-scattered", "weather-snow", "weather-severe-alert"], iconType)
+                    icon: WeatherIconSafely(["weather-snow-scattered", "weather-snow", "weather-severe-alert"], iconType)
                 }
             case "24": // Light snow
                 return {
                     main: _("Light Snow"),
                     description: _("Light snow"),
                     customIcon: "snow-symbolic",
-                    icon: weatherIconSafely(["weather-snow-scattered", "weather-snow", "weather-severe-alert"], iconType)
+                    icon: WeatherIconSafely(["weather-snow-scattered", "weather-snow", "weather-severe-alert"], iconType)
                 }
             case "25": // Heavy snow shower (night)
                 return {
                     main: _("Heavy Snow"),
                     description: _("Heavy snow shower"),
                     customIcon: "night-alt-snow-symbolic",
-                    icon: weatherIconSafely(["weather-snow", "weather-snow-scattered", "weather-severe-alert"], iconType)
+                    icon: WeatherIconSafely(["weather-snow", "weather-snow-scattered", "weather-severe-alert"], iconType)
                 }
             case "26": // 	Heavy snow shower (day)
                 return {
                     main: _("Heavy Snow"),
                     description: _("Heavy snow shower"),
                     customIcon: "day-snow-symbolic",
-                    icon: weatherIconSafely(["weather-snow", "weather-snow-scattered", "weather-severe-alert"], iconType)
+                    icon: WeatherIconSafely(["weather-snow", "weather-snow-scattered", "weather-severe-alert"], iconType)
                 }
             case "27": // Heavy snow
                 return {
                     main: _("Heavy Snow"),
                     description: _("Heavy snow"),
                     customIcon: "snow-symbolic",
-                    icon: weatherIconSafely(["weather-snow", "weather-snow-scattered", "weather-severe-alert"], iconType)
+                    icon: WeatherIconSafely(["weather-snow", "weather-snow-scattered", "weather-severe-alert"], iconType)
                 }
             case "28": // Thunder shower (night)
                 return {
                     main: _("Thunder"),
                     description: _("Thunder shower"),
                     customIcon: "day-storm-showers-symbolic",
-                    icon: weatherIconSafely(["weather-storm", "weather-severe-alert"], iconType)
+                    icon: WeatherIconSafely(["weather-storm", "weather-severe-alert"], iconType)
                 }
             case "29": // Thunder shower (day)
                 return {
                     main: _("Thunder"),
                     description: _("Thunder shower"),
                     customIcon: "night-alt-storm-showers-symbolic",
-                    icon: weatherIconSafely(["weather-storm", "weather-severe-alert"], iconType)
+                    icon: WeatherIconSafely(["weather-storm", "weather-severe-alert"], iconType)
                 }
             case "30": // Thunder
                 return {
                     main: _("Thunder"),
                     description: _("Thunder"),
                     customIcon: "thunderstorm-symbolic",
-                    icon: weatherIconSafely(["weather-storm", "weather-severe-alert"], iconType)
+                    icon: WeatherIconSafely(["weather-storm", "weather-severe-alert"], iconType)
                 }
             default:
                 return {
                     main: _("Unknown"),
                     description: _("Unknown"),
                     customIcon: "cloud-refresh-symbolic",
-                    icon: weatherIconSafely(["weather-severe-alert"], iconType)
+                    icon: WeatherIconSafely(["weather-severe-alert"], iconType)
                 }
         }
     };

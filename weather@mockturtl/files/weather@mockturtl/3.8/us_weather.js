@@ -270,133 +270,133 @@ class USWeather {
                     main: utils_1._("Clear"),
                     description: utils_1._("Clear"),
                     customIcon: (isNight) ? "night-clear-symbolic" : "day-sunny-symbolic",
-                    icon: utils_1.weatherIconSafely((isNight) ? ["weather-clear-night", "weather-severe-alert"] : ["weather-clear", "weather-severe-alert"], iconType)
+                    icon: utils_1.WeatherIconSafely((isNight) ? ["weather-clear-night", "weather-severe-alert"] : ["weather-clear", "weather-severe-alert"], iconType)
                 };
             case "few":
                 return {
                     main: utils_1._("Few Clouds"),
                     description: utils_1._("Few clouds"),
                     customIcon: (isNight) ? "night-alt-cloudy-symbolic" : "day-cloudy-symbolic",
-                    icon: utils_1.weatherIconSafely(["weather-clear-night", "weather-severe-alert"], iconType)
+                    icon: utils_1.WeatherIconSafely(["weather-clear-night", "weather-severe-alert"], iconType)
                 };
             case "sct":
                 return {
                     main: utils_1._("Partly Cloudy"),
                     description: utils_1._("Partly cloudy"),
                     customIcon: (isNight) ? "night-alt-cloudy-symbolic" : "day-cloudy-symbolic",
-                    icon: utils_1.weatherIconSafely(["weather-clear", "weather-severe-alert"], iconType)
+                    icon: utils_1.WeatherIconSafely(["weather-clear", "weather-severe-alert"], iconType)
                 };
             case "bkn":
                 return {
                     main: utils_1._("Mostly Cloudy"),
                     description: utils_1._("Mostly cloudy"),
                     customIcon: (isNight) ? "night-alt-cloudy-symbolic" : "day-cloudy-symbolic",
-                    icon: utils_1.weatherIconSafely(["weather-clouds-night", "weather-overcast", "weather-severe-alert"], iconType)
+                    icon: utils_1.WeatherIconSafely(["weather-clouds-night", "weather-overcast", "weather-severe-alert"], iconType)
                 };
             case "ovc":
                 return {
                     main: utils_1._("Overcast"),
                     description: utils_1._("Overcast"),
                     customIcon: "cloudy-symbolic",
-                    icon: utils_1.weatherIconSafely(["weather-clouds", "weather-overcast", "weather-severe-alert"], iconType)
+                    icon: utils_1.WeatherIconSafely(["weather-clouds", "weather-overcast", "weather-severe-alert"], iconType)
                 };
             case "wind_skc":
                 return {
                     main: utils_1._("Clear"),
                     description: utils_1._("Clear and windy"),
                     customIcon: (utils_1.IsNight) ? "night-alt-wind-symbolic" : "day-windy-symbolic",
-                    icon: utils_1.weatherIconSafely((isNight) ? ["weather-clear-night"] : ["weather-clear"], iconType)
+                    icon: utils_1.WeatherIconSafely((isNight) ? ["weather-clear-night"] : ["weather-clear"], iconType)
                 };
             case "wind_few":
                 return {
                     main: utils_1._("Few Clouds"),
                     description: utils_1._("Few clouds and windy"),
                     customIcon: (utils_1.IsNight) ? "night-alt-cloudy-windy-symbolic" : "day-cloudy-windy-symbolic",
-                    icon: utils_1.weatherIconSafely((isNight) ? ["weather-few-clouds-night"] : ["weather-few-clouds"], iconType)
+                    icon: utils_1.WeatherIconSafely((isNight) ? ["weather-few-clouds-night"] : ["weather-few-clouds"], iconType)
                 };
             case "wind_sct":
                 return {
                     main: utils_1._("Partly Cloudy"),
                     description: utils_1._("Partly cloudy and windy"),
                     customIcon: (utils_1.IsNight) ? "night-alt-cloudy-windy-symbolic" : "day-cloudy-windy-symbolic",
-                    icon: utils_1.weatherIconSafely((isNight) ? ["weather-clouds-night", "weather-few-clouds-night"] : ["weather-clouds", "weather-few-clouds"], iconType)
+                    icon: utils_1.WeatherIconSafely((isNight) ? ["weather-clouds-night", "weather-few-clouds-night"] : ["weather-clouds", "weather-few-clouds"], iconType)
                 };
             case "wind_bkn":
                 return {
                     main: utils_1._("Mostly Cloudy"),
                     description: utils_1._("Mostly cloudy and windy"),
                     customIcon: (utils_1.IsNight) ? "night-alt-cloudy-windy-symbolic" : "day-cloudy-windy-symbolic",
-                    icon: utils_1.weatherIconSafely((isNight) ? ["weather-clouds-night", "weather-few-clouds-night"] : ["weather-clouds", "weather-few-clouds"], iconType)
+                    icon: utils_1.WeatherIconSafely((isNight) ? ["weather-clouds-night", "weather-few-clouds-night"] : ["weather-clouds", "weather-few-clouds"], iconType)
                 };
             case "wind_ovc":
                 return {
                     main: utils_1._("Overcast"),
                     description: utils_1._("Overcast and windy"),
                     customIcon: "cloudy-symbolic",
-                    icon: utils_1.weatherIconSafely(["weather-overcast", "weather-many-clouds", "weather-severe-alert"], iconType)
+                    icon: utils_1.WeatherIconSafely(["weather-overcast", "weather-many-clouds", "weather-severe-alert"], iconType)
                 };
             case "snow":
                 return {
                     main: utils_1._("Snow"),
                     description: utils_1._("Snow"),
                     customIcon: "snow-symbolic",
-                    icon: utils_1.weatherIconSafely(["weather-snow", "weather-severe-alert"], iconType)
+                    icon: utils_1.WeatherIconSafely(["weather-snow", "weather-severe-alert"], iconType)
                 };
             case "rain_snow":
                 return {
                     main: utils_1._("Rain"),
                     description: utils_1._("Snowy rain"),
                     customIcon: "rain-mix-symbolic",
-                    icon: utils_1.weatherIconSafely(["weather-snow-rain", "weather-snow", "weather-severe-alert"], iconType)
+                    icon: utils_1.WeatherIconSafely(["weather-snow-rain", "weather-snow", "weather-severe-alert"], iconType)
                 };
             case "rain_sleet":
                 return {
                     main: utils_1._("Sleet"),
                     description: utils_1._("Sleet"),
                     customIcon: "rain-mix-symbolic",
-                    icon: utils_1.weatherIconSafely(["weather-freezing-rain", "weather-severe-alert"], iconType)
+                    icon: utils_1.WeatherIconSafely(["weather-freezing-rain", "weather-severe-alert"], iconType)
                 };
             case "snow_sleet":
                 return {
                     main: utils_1._("Sleet"),
                     description: utils_1._("Sleet"),
                     customIcon: "sleet-symbolic",
-                    icon: utils_1.weatherIconSafely(["weather-freezing-rain", "weather-hail", "weather-severe-alert"], iconType)
+                    icon: utils_1.WeatherIconSafely(["weather-freezing-rain", "weather-hail", "weather-severe-alert"], iconType)
                 };
             case "fzra":
                 return {
                     main: utils_1._("Freezing Rain"),
                     description: utils_1._("Freezing Rain"),
                     customIcon: "rain-wind-symbolic",
-                    icon: utils_1.weatherIconSafely(["weather-freezing-rain", "weather-hail", "weather-severe-alert"], iconType)
+                    icon: utils_1.WeatherIconSafely(["weather-freezing-rain", "weather-hail", "weather-severe-alert"], iconType)
                 };
             case "rain_fzra":
                 return {
                     main: utils_1._("Freezing Rain"),
                     description: utils_1._("Freezing Rain"),
                     customIcon: "rain-wind-symbolic",
-                    icon: utils_1.weatherIconSafely(["weather-freezing-rain", "weather-hail", "weather-severe-alert"], iconType)
+                    icon: utils_1.WeatherIconSafely(["weather-freezing-rain", "weather-hail", "weather-severe-alert"], iconType)
                 };
             case "snow_fzra":
                 return {
                     main: utils_1._("Freezing Rain"),
                     description: utils_1._("Freezing Rain and snow"),
                     customIcon: "rain-wind-symbolic",
-                    icon: utils_1.weatherIconSafely(["weather-freezing-rain", "weather-hail", "weather-severe-alert"], iconType)
+                    icon: utils_1.WeatherIconSafely(["weather-freezing-rain", "weather-hail", "weather-severe-alert"], iconType)
                 };
             case "sleet":
                 return {
                     main: utils_1._("Sleet"),
                     description: utils_1._("Sleet"),
                     customIcon: "rain-mix-symbolic",
-                    icon: utils_1.weatherIconSafely(["weather-freezing-rain", "weather-rain", "weather-severe-alert"], iconType)
+                    icon: utils_1.WeatherIconSafely(["weather-freezing-rain", "weather-rain", "weather-severe-alert"], iconType)
                 };
             case "rain":
                 return {
                     main: utils_1._("Rain"),
                     description: utils_1._("Rain"),
                     customIcon: "rain-symbolic",
-                    icon: utils_1.weatherIconSafely(["weather-rain", "weather-freezing-rain", "weather-showers", "weather-showers-scattered", "weather-severe-alert"], iconType)
+                    icon: utils_1.WeatherIconSafely(["weather-rain", "weather-freezing-rain", "weather-showers", "weather-showers-scattered", "weather-severe-alert"], iconType)
                 };
             case "rain_showers":
             case "rain_showers_hi":
@@ -404,7 +404,7 @@ class USWeather {
                     main: utils_1._("Rain"),
                     description: utils_1._("Rain showers"),
                     customIcon: "rain-mix-symbolic",
-                    icon: utils_1.weatherIconSafely(["weather-showers", "weather-showers-scattered", "weather-rain", "weather-freezing-rain", "weather-severe-alert"], iconType)
+                    icon: utils_1.WeatherIconSafely(["weather-showers", "weather-showers-scattered", "weather-rain", "weather-freezing-rain", "weather-severe-alert"], iconType)
                 };
             case "tsra":
             case "tsra_sct":
@@ -413,84 +413,84 @@ class USWeather {
                     main: utils_1._("Thunderstorm"),
                     description: utils_1._("Thunderstorm"),
                     customIcon: "thunderstorm-symbolic",
-                    icon: utils_1.weatherIconSafely(["weather-storm", "weather-severe-alert"], iconType)
+                    icon: utils_1.WeatherIconSafely(["weather-storm", "weather-severe-alert"], iconType)
                 };
             case "tornado":
                 return {
                     main: utils_1._("Tornado"),
                     description: utils_1._("Tornado"),
                     customIcon: "tornado-symbolic",
-                    icon: utils_1.weatherIconSafely(["weather-severe-alert"], iconType)
+                    icon: utils_1.WeatherIconSafely(["weather-severe-alert"], iconType)
                 };
             case "hurricane":
                 return {
                     main: utils_1._("Hurricane"),
                     description: utils_1._("Hurricane"),
                     customIcon: "hurricane-symbolic",
-                    icon: utils_1.weatherIconSafely(["weather-severe-alert"], iconType)
+                    icon: utils_1.WeatherIconSafely(["weather-severe-alert"], iconType)
                 };
             case "tropical_storm":
                 return {
                     main: utils_1._("Storm"),
                     description: utils_1._("Tropical Storm"),
                     customIcon: "thunderstorm-symbolic",
-                    icon: utils_1.weatherIconSafely(["weather-storm", "weather-severe-alert"], iconType)
+                    icon: utils_1.WeatherIconSafely(["weather-storm", "weather-severe-alert"], iconType)
                 };
             case "dust":
                 return {
                     main: utils_1._("Dust"),
                     description: utils_1._("Dust"),
                     customIcon: "dust-symbolic",
-                    icon: utils_1.weatherIconSafely(["weather-fog", "weather-severe-alert"], iconType)
+                    icon: utils_1.WeatherIconSafely(["weather-fog", "weather-severe-alert"], iconType)
                 };
             case "smoke":
                 return {
                     main: utils_1._("Smoke"),
                     description: utils_1._("Smoke"),
                     customIcon: "smoke-symbolic",
-                    icon: utils_1.weatherIconSafely(["weather-fog", "weather-severe-alert"], iconType)
+                    icon: utils_1.WeatherIconSafely(["weather-fog", "weather-severe-alert"], iconType)
                 };
             case "haze":
                 return {
                     main: utils_1._("Haze"),
                     description: utils_1._("Haze"),
                     customIcon: "fog-symbolic",
-                    icon: utils_1.weatherIconSafely(["weather-fog", "weather-severe-alert"], iconType)
+                    icon: utils_1.WeatherIconSafely(["weather-fog", "weather-severe-alert"], iconType)
                 };
             case "hot":
                 return {
                     main: utils_1._("Hot"),
                     description: utils_1._("Hot"),
                     customIcon: "hot-symbolic",
-                    icon: utils_1.weatherIconSafely(["weather-severe-alert"], iconType)
+                    icon: utils_1.WeatherIconSafely(["weather-severe-alert"], iconType)
                 };
             case "cold":
                 return {
                     main: utils_1._("Cold"),
                     description: utils_1._("Cold"),
                     customIcon: "snowflake-cold-symbolic",
-                    icon: utils_1.weatherIconSafely(["weather-storm", "weather-severe-alert"], iconType)
+                    icon: utils_1.WeatherIconSafely(["weather-storm", "weather-severe-alert"], iconType)
                 };
             case "blizzard":
                 return {
                     main: utils_1._("Blizzard"),
                     description: utils_1._("Blizzard"),
                     customIcon: "thunderstorm-symbolic",
-                    icon: utils_1.weatherIconSafely(["weather-storm", "weather-severe-alert"], iconType)
+                    icon: utils_1.WeatherIconSafely(["weather-storm", "weather-severe-alert"], iconType)
                 };
             case "fog":
                 return {
                     main: utils_1._("Fog"),
                     description: utils_1._("Fog"),
                     customIcon: "fog-symbolic",
-                    icon: utils_1.weatherIconSafely(["weather-fog", "weather-severe-alert"], iconType)
+                    icon: utils_1.WeatherIconSafely(["weather-fog", "weather-severe-alert"], iconType)
                 };
             default:
                 return {
                     main: utils_1._("Unknown"),
                     description: utils_1._("Unknown"),
                     customIcon: "cloud-refresh-symbolic",
-                    icon: utils_1.weatherIconSafely(["weather-severe-alert"], iconType)
+                    icon: utils_1.WeatherIconSafely(["weather-severe-alert"], iconType)
                 };
         }
     }

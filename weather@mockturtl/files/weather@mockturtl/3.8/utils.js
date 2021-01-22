@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.constructJsLocale = exports.shadeHexColor = exports.hasIcon = exports.weatherIconSafely = exports.isLangSupported = exports.compassDirection = exports.nonempty = exports.isCoordinate = exports.isID = exports.isString = exports.isNumeric = exports.MillimeterToUserUnits = exports.MetreToUserUnits = exports.KmToM = exports.PressToUserUnits = exports.MPHtoMPS = exports.FahrenheitToKelvin = exports.CelsiusToKelvin = exports.TempToUserConfig = exports.MPStoUserUnits = exports.GetFuncName = exports.KPHtoMPS = exports.capitalizeFirstLetter = exports.compassToDeg = exports.IsNight = exports.MilitaryTime = exports.AwareDateString = exports.GetHoursMinutes = exports.GetDayName = exports.clearInterval = exports.GetDistance = exports.GenerateLocationText = exports.ProcessCondition = exports.UnitToUnicode = exports.setInterval = exports.clearTimeout = exports.delay = exports.setTimeout = exports.Guid = exports._ = void 0;
+exports.clearInterval = exports.setInterval = exports.clearTimeout = exports.delay = exports.setTimeout = exports.Guid = exports.GetFuncName = exports.GetDistance = exports.ConstructJsLocale = exports.ShadeHexColor = exports.WeatherIconSafely = exports.IsLangSupported = exports.nonempty = exports.IsCoordinate = exports.IsNight = exports.CompassDirection = exports.CompassToDeg = exports.KmToM = exports.MPHtoMPS = exports.FahrenheitToKelvin = exports.CelsiusToKelvin = exports.KPHtoMPS = exports.MillimeterToUserUnits = exports.MetreToUserUnits = exports.PressToUserUnits = exports.TempToUserConfig = exports.MPStoUserUnits = exports.ProcessCondition = exports.MilitaryTime = exports.AwareDateString = exports.GetHoursMinutes = exports.GetDayName = exports.CapitalizeFirstLetter = exports.GenerateLocationText = exports.UnitToUnicode = exports._ = void 0;
 const consts_1 = require("./consts");
 const { timeout_add, source_remove } = imports.mainloop;
 const { IconType } = imports.gi.St;
@@ -12,65 +12,10 @@ function _(str) {
     return imports.gettext.gettext(str);
 }
 exports._ = _;
-function Guid() {
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-        var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
-        return v.toString(16);
-    });
-}
-exports.Guid = Guid;
-function setTimeout(func, ms) {
-    let args = [];
-    if (arguments.length > 2) {
-        args = args.slice.call(arguments, 2);
-    }
-    let id = timeout_add(ms, () => {
-        func.apply(null, args);
-        return false;
-    }, null);
-    return id;
-}
-exports.setTimeout = setTimeout;
-;
-async function delay(ms) {
-    return await new Promise((resolve, reject) => {
-        setTimeout(() => {
-            resolve();
-        }, ms);
-    });
-}
-exports.delay = delay;
-function clearTimeout(id) {
-    source_remove(id);
-}
-exports.clearTimeout = clearTimeout;
-;
-function setInterval(func, ms) {
-    let args = [];
-    if (arguments.length > 2) {
-        args = args.slice.call(arguments, 2);
-    }
-    let id = timeout_add(ms, () => {
-        func.apply(null, args);
-        return true;
-    }, null);
-    return id;
-}
-exports.setInterval = setInterval;
-;
 function UnitToUnicode(unit) {
     return unit == "fahrenheit" ? '\u2109' : '\u2103';
 }
 exports.UnitToUnicode = UnitToUnicode;
-function ProcessCondition(condition, shouldTranslate) {
-    if (condition == null)
-        return null;
-    condition = capitalizeFirstLetter(condition);
-    if (shouldTranslate)
-        condition = _(condition);
-    return condition;
-}
-exports.ProcessCondition = ProcessCondition;
 function GenerateLocationText(weather, config) {
     let location = "";
     if (weather.location.city != null && weather.location.country != null) {
@@ -85,23 +30,13 @@ function GenerateLocationText(weather, config) {
     return location;
 }
 exports.GenerateLocationText = GenerateLocationText;
-function GetDistance(lat1, lon1, lat2, lon2) {
-    const R = 6371e3;
-    const φ1 = lat1 * Math.PI / 180;
-    const φ2 = lat2 * Math.PI / 180;
-    const Δφ = (lat2 - lat1) * Math.PI / 180;
-    const Δλ = (lon2 - lon1) * Math.PI / 180;
-    const a = Math.sin(Δφ / 2) * Math.sin(Δφ / 2) +
-        Math.cos(φ1) * Math.cos(φ2) *
-            Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    return R * c;
+function CapitalizeFirstLetter(description) {
+    if ((description == undefined || description == null)) {
+        return "";
+    }
+    return description.charAt(0).toUpperCase() + description.slice(1);
 }
-exports.GetDistance = GetDistance;
-function clearInterval(id) {
-    source_remove(id);
-}
-exports.clearInterval = clearInterval;
+exports.CapitalizeFirstLetter = CapitalizeFirstLetter;
 ;
 function GetDayName(date, locale, showDate = false, tz) {
     if (locale == "c" || locale == null)
@@ -169,67 +104,18 @@ function MilitaryTime(date) {
     return date.getHours() * 100 + date.getMinutes();
 }
 exports.MilitaryTime = MilitaryTime;
-function IsNight(sunTimes, date) {
-    if (!sunTimes)
-        return false;
-    let time = (!!date) ? MilitaryTime(date) : MilitaryTime(new Date());
-    let sunrise = MilitaryTime(sunTimes.sunrise);
-    let sunset = MilitaryTime(sunTimes.sunset);
-    if (time >= sunrise && time < sunset)
-        return false;
-    return true;
-}
-exports.IsNight = IsNight;
-function compassToDeg(compass) {
-    if (!compass)
+function ProcessCondition(condition, shouldTranslate) {
+    if (condition == null)
         return null;
-    compass = compass.toUpperCase();
-    switch (compass) {
-        case "N": return 0;
-        case "NNE": return 22.5;
-        case "NE": return 45;
-        case "ENE": return 67.5;
-        case "E": return 90;
-        case "ESE": return 112.5;
-        case "SE": return 135;
-        case "SSE": return 157.5;
-        case "S": return 180;
-        case "SSW": return 202.5;
-        case "SW": return 225;
-        case "WSW": return 247.5;
-        case "W": return 270;
-        case "WNW": return 292.5;
-        case "NW": return 315;
-        case "NNW": return 337.5;
-        default: return null;
-    }
+    condition = CapitalizeFirstLetter(condition);
+    if (shouldTranslate)
+        condition = _(condition);
+    return condition;
 }
-exports.compassToDeg = compassToDeg;
+exports.ProcessCondition = ProcessCondition;
 const WEATHER_CONV_MPH_IN_MPS = 2.23693629;
 const WEATHER_CONV_KPH_IN_MPS = 3.6;
 const WEATHER_CONV_KNOTS_IN_MPS = 1.94384449;
-function capitalizeFirstLetter(description) {
-    if ((description == undefined || description == null)) {
-        return "";
-    }
-    return description.charAt(0).toUpperCase() + description.slice(1);
-}
-exports.capitalizeFirstLetter = capitalizeFirstLetter;
-;
-function KPHtoMPS(speed) {
-    if (speed == null)
-        return null;
-    return speed / WEATHER_CONV_KPH_IN_MPS;
-}
-exports.KPHtoMPS = KPHtoMPS;
-;
-function GetFuncName(func) {
-    if (!!func.name)
-        return func.name;
-    var result = /^function\s+([\w\$]+)\s*\(/.exec(func.toString());
-    return result ? result[1] : '';
-}
-exports.GetFuncName = GetFuncName;
 function MPStoUserUnits(mps, units) {
     if (mps == null)
         return null;
@@ -302,25 +188,6 @@ function TempToUserConfig(kelvin, units, russianStyle) {
     return temp.toString();
 }
 exports.TempToUserConfig = TempToUserConfig;
-function CelsiusToKelvin(celsius) {
-    if (celsius == null)
-        return null;
-    return (celsius + 273.15);
-}
-exports.CelsiusToKelvin = CelsiusToKelvin;
-function FahrenheitToKelvin(fahrenheit) {
-    if (fahrenheit == null)
-        return null;
-    return ((fahrenheit - 32) / 1.8 + 273.15);
-}
-exports.FahrenheitToKelvin = FahrenheitToKelvin;
-;
-function MPHtoMPS(speed) {
-    if (speed == null || speed == undefined)
-        return null;
-    return speed * 0.44704;
-}
-exports.MPHtoMPS = MPHtoMPS;
 function PressToUserUnits(hpa, units) {
     switch (units) {
         case "hPa":
@@ -341,12 +208,6 @@ function PressToUserUnits(hpa, units) {
 }
 exports.PressToUserUnits = PressToUserUnits;
 ;
-function KmToM(km) {
-    if (km == null)
-        return null;
-    return km * 0.6213712;
-}
-exports.KmToM = KmToM;
 function MetreToUserUnits(m, distanceUnit) {
     if (distanceUnit == "metric")
         return Math.round(m / 1000 * 10) / 10;
@@ -359,65 +220,113 @@ function MillimeterToUserUnits(mm, distanceUnit) {
     return Math.round(mm * 0.03937 * 100) / 100;
 }
 exports.MillimeterToUserUnits = MillimeterToUserUnits;
-function isNumeric(n) {
-    return !isNaN(parseFloat(n)) && isFinite(n);
+function KPHtoMPS(speed) {
+    if (speed == null)
+        return null;
+    return speed / WEATHER_CONV_KPH_IN_MPS;
 }
-exports.isNumeric = isNumeric;
-function isString(text) {
-    if (typeof text == 'string' || text instanceof String) {
-        return true;
-    }
-    return false;
-}
-exports.isString = isString;
-function isID(text) {
-    if (text.length == 7 && isNumeric(text)) {
-        return true;
-    }
-    return false;
-}
-exports.isID = isID;
+exports.KPHtoMPS = KPHtoMPS;
 ;
-function isCoordinate(text) {
+function CelsiusToKelvin(celsius) {
+    if (celsius == null)
+        return null;
+    return (celsius + 273.15);
+}
+exports.CelsiusToKelvin = CelsiusToKelvin;
+function FahrenheitToKelvin(fahrenheit) {
+    if (fahrenheit == null)
+        return null;
+    return ((fahrenheit - 32) / 1.8 + 273.15);
+}
+exports.FahrenheitToKelvin = FahrenheitToKelvin;
+;
+function MPHtoMPS(speed) {
+    if (speed == null || speed == undefined)
+        return null;
+    return speed * 0.44704;
+}
+exports.MPHtoMPS = MPHtoMPS;
+function KmToM(km) {
+    if (km == null)
+        return null;
+    return km * 0.6213712;
+}
+exports.KmToM = KmToM;
+function CompassToDeg(compass) {
+    if (!compass)
+        return null;
+    compass = compass.toUpperCase();
+    switch (compass) {
+        case "N": return 0;
+        case "NNE": return 22.5;
+        case "NE": return 45;
+        case "ENE": return 67.5;
+        case "E": return 90;
+        case "ESE": return 112.5;
+        case "SE": return 135;
+        case "SSE": return 157.5;
+        case "S": return 180;
+        case "SSW": return 202.5;
+        case "SW": return 225;
+        case "WSW": return 247.5;
+        case "W": return 270;
+        case "WNW": return 292.5;
+        case "NW": return 315;
+        case "NNW": return 337.5;
+        default: return null;
+    }
+}
+exports.CompassToDeg = CompassToDeg;
+function CompassDirection(deg) {
+    let directions = [_('N'), _('NE'), _('E'), _('SE'), _('S'), _('SW'), _('W'), _('NW')];
+    return directions[Math.round(deg / 45) % directions.length];
+}
+exports.CompassDirection = CompassDirection;
+function IsNight(sunTimes, date) {
+    if (!sunTimes)
+        return false;
+    let time = (!!date) ? MilitaryTime(date) : MilitaryTime(new Date());
+    let sunrise = MilitaryTime(sunTimes.sunrise);
+    let sunset = MilitaryTime(sunTimes.sunset);
+    if (time >= sunrise && time < sunset)
+        return false;
+    return true;
+}
+exports.IsNight = IsNight;
+function IsCoordinate(text) {
     text = text.trim();
     if (/^-?\d{1,3}(?:\.\d*)?,(\s)*-?\d{1,3}(?:\.\d*)?/.test(text)) {
         return true;
     }
     return false;
 }
-exports.isCoordinate = isCoordinate;
+exports.IsCoordinate = IsCoordinate;
 function nonempty(str) {
     return (str != null && str.length > 0 && str != undefined);
 }
 exports.nonempty = nonempty;
-function compassDirection(deg) {
-    let directions = [_('N'), _('NE'), _('E'), _('SE'), _('S'), _('SW'), _('W'), _('NW')];
-    return directions[Math.round(deg / 45) % directions.length];
-}
-exports.compassDirection = compassDirection;
-function isLangSupported(lang, languages) {
+function IsLangSupported(lang, languages) {
     return (languages.includes(lang));
 }
-exports.isLangSupported = isLangSupported;
+exports.IsLangSupported = IsLangSupported;
 ;
-function weatherIconSafely(code, icon_type) {
+function HasIcon(icon, icon_type) {
+    return IconTheme.get_default().has_icon(icon + (icon_type == IconType.SYMBOLIC ? '-symbolic' : ''));
+}
+function WeatherIconSafely(code, icon_type) {
     for (let i = 0; i < code.length; i++) {
-        if (hasIcon(code[i], icon_type))
+        if (HasIcon(code[i], icon_type))
             return code[i];
     }
     return 'weather-severe-alert';
 }
-exports.weatherIconSafely = weatherIconSafely;
-function hasIcon(icon, icon_type) {
-    return IconTheme.get_default().has_icon(icon + (icon_type == IconType.SYMBOLIC ? '-symbolic' : ''));
-}
-exports.hasIcon = hasIcon;
-function shadeHexColor(color, percent) {
+exports.WeatherIconSafely = WeatherIconSafely;
+function ShadeHexColor(color, percent) {
     var f = parseInt(color.slice(1), 16), t = percent < 0 ? 0 : 255, p = percent < 0 ? percent * -1 : percent, R = f >> 16, G = f >> 8 & 0x00FF, B = f & 0x0000FF;
     return "#" + (0x1000000 + (Math.round((t - R) * p) + R) * 0x10000 + (Math.round((t - G) * p) + G) * 0x100 + (Math.round((t - B) * p) + B)).toString(16).slice(1);
 }
-exports.shadeHexColor = shadeHexColor;
-function constructJsLocale(locale) {
+exports.ShadeHexColor = ShadeHexColor;
+function ConstructJsLocale(locale) {
     let jsLocale = locale.split(".")[0];
     let tmp = jsLocale.split("_");
     jsLocale = "";
@@ -428,4 +337,75 @@ function constructJsLocale(locale) {
     }
     return jsLocale;
 }
-exports.constructJsLocale = constructJsLocale;
+exports.ConstructJsLocale = ConstructJsLocale;
+function GetDistance(lat1, lon1, lat2, lon2) {
+    const R = 6371e3;
+    const φ1 = lat1 * Math.PI / 180;
+    const φ2 = lat2 * Math.PI / 180;
+    const Δφ = (lat2 - lat1) * Math.PI / 180;
+    const Δλ = (lon2 - lon1) * Math.PI / 180;
+    const a = Math.sin(Δφ / 2) * Math.sin(Δφ / 2) +
+        Math.cos(φ1) * Math.cos(φ2) *
+            Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    return R * c;
+}
+exports.GetDistance = GetDistance;
+function GetFuncName(func) {
+    if (!!func.name)
+        return func.name;
+    var result = /^function\s+([\w\$]+)\s*\(/.exec(func.toString());
+    return result ? result[1] : '';
+}
+exports.GetFuncName = GetFuncName;
+function Guid() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+        var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+        return v.toString(16);
+    });
+}
+exports.Guid = Guid;
+function setTimeout(func, ms) {
+    let args = [];
+    if (arguments.length > 2) {
+        args = args.slice.call(arguments, 2);
+    }
+    let id = timeout_add(ms, () => {
+        func.apply(null, args);
+        return false;
+    }, null);
+    return id;
+}
+exports.setTimeout = setTimeout;
+;
+async function delay(ms) {
+    return await new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve();
+        }, ms);
+    });
+}
+exports.delay = delay;
+function clearTimeout(id) {
+    source_remove(id);
+}
+exports.clearTimeout = clearTimeout;
+;
+function setInterval(func, ms) {
+    let args = [];
+    if (arguments.length > 2) {
+        args = args.slice.call(arguments, 2);
+    }
+    let id = timeout_add(ms, () => {
+        func.apply(null, args);
+        return true;
+    }, null);
+    return id;
+}
+exports.setInterval = setInterval;
+;
+function clearInterval(id) {
+    source_remove(id);
+}
+exports.clearInterval = clearInterval;
+;

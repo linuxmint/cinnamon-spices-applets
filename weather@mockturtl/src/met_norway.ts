@@ -2,7 +2,7 @@ import { Log } from "./logger";
 import { WeatherApplet } from "./main";
 import { SunCalc } from "./sunCalc";
 import { WeatherProvider, WeatherData, HourlyForecastData, ForecastData, Condition, LocationData } from "./types";
-import { CelsiusToKelvin, IsNight, _, weatherIconSafely } from "./utils";
+import { CelsiusToKelvin, IsNight, _, WeatherIconSafely } from "./utils";
 
 export class MetNorway implements WeatherProvider {
     public readonly prettyName = "MET Norway";
@@ -251,21 +251,21 @@ export class MetNorway implements WeatherProvider {
                     customIcon: (isNight) ? "night-clear-symbolic" : "day-sunny-symbolic",
                     main: _("Clear Sky"),
                     description: _("Clear Sky"),
-                    icon: weatherIconSafely((isNight) ? ["weather-clear-night", "weather-severe-alert"] : ["weather-clear", "weather-severe-alert"], iconType)
+                    icon: WeatherIconSafely((isNight) ? ["weather-clear-night", "weather-severe-alert"] : ["weather-clear", "weather-severe-alert"], iconType)
                 }
             case "cloudy":
                 return {
                     customIcon: "cloudy-symbolic",
                     main: _("Cloudy"),
                     description: _("Cloudy"),
-                    icon: weatherIconSafely((isNight) ? ["weather-overcast", "weather-clouds-night", "weather-few-clouds-night"] : ["weather-overcast", "weather-clouds", "weather-few-clouds"], iconType)
+                    icon: WeatherIconSafely((isNight) ? ["weather-overcast", "weather-clouds-night", "weather-few-clouds-night"] : ["weather-overcast", "weather-clouds", "weather-few-clouds"], iconType)
                 }
             case "fair":
                 return {
                     customIcon: (isNight) ? "night-cloudy-symbolic" : "day-cloudy-symbolic",
                     main: _("Fair"),
                     description: _("Fair"),
-                    icon: weatherIconSafely((isNight) ? ["weather-few-clouds-night", "weather-clouds-night", "weather-overcast"] : ["weather-few-clouds", "weather-clouds", "weather-overcast"], iconType)
+                    icon: WeatherIconSafely((isNight) ? ["weather-few-clouds-night", "weather-clouds-night", "weather-overcast"] : ["weather-few-clouds", "weather-clouds", "weather-overcast"], iconType)
 
                 }
             case "fog":
@@ -273,14 +273,14 @@ export class MetNorway implements WeatherProvider {
                     customIcon: "fog-symbolic",
                     main: _("Fog"),
                     description: _("Fog"),
-                    icon: weatherIconSafely(["weather-fog", "weather-severe-alert"], iconType)
+                    icon: WeatherIconSafely(["weather-fog", "weather-severe-alert"], iconType)
                 }
             case "heavyrain":
                 return {
                     customIcon: "rain-symbolic",
                     main: _("Heavy Rain"),
                     description: _("Heavy rain"),
-                    icon: weatherIconSafely(["weather-rain", "weather-freezing-rain", "weather-showers-scattered"], iconType)
+                    icon: WeatherIconSafely(["weather-rain", "weather-freezing-rain", "weather-showers-scattered"], iconType)
 
                 }
             case "heavyrainandthunder":
@@ -288,7 +288,7 @@ export class MetNorway implements WeatherProvider {
                     customIcon: "thunderstorm-symbolic",
                     main: _("Heavy Rain"),
                     description: _("Heavy rain and thunder"),
-                    icon: weatherIconSafely(["weather-rain", "weather-freezing-rain", "weather-showers-scattered"], iconType)
+                    icon: WeatherIconSafely(["weather-rain", "weather-freezing-rain", "weather-showers-scattered"], iconType)
 
                 }
             case "heavyrainshowers":
@@ -296,7 +296,7 @@ export class MetNorway implements WeatherProvider {
                     customIcon: (isNight) ? "night-alt-rain-symbolic" : "day-rain-symbolic",
                     main: _("Heavy Rain"),
                     description: _("Heavy rain showers"),
-                    icon: weatherIconSafely(["weather-showers", "weather-showers-scattered", "weather-freezing-rain"], iconType)
+                    icon: WeatherIconSafely(["weather-showers", "weather-showers-scattered", "weather-freezing-rain"], iconType)
 
                 }
             case "heavyrainshowersandthunder":
@@ -304,7 +304,7 @@ export class MetNorway implements WeatherProvider {
                     customIcon: (IsNight) ? "night-alt-thunderstorm-symbolic" : "day-thunderstorm-symbolic",
                     main: _("Heavy Rain"),
                     description: _("Heavy rain showers and thunder"),
-                    icon: weatherIconSafely(["weather-showers", "weather-showers-scattered", "weather-freezing-rain"], iconType)
+                    icon: WeatherIconSafely(["weather-showers", "weather-showers-scattered", "weather-freezing-rain"], iconType)
 
                 }
             case "heavysleet":
@@ -312,21 +312,21 @@ export class MetNorway implements WeatherProvider {
                     customIcon: "sleet-symbolic",
                     main: _("Heavy Sleet"),
                     description: _("Heavy Sleet"),
-                    icon: weatherIconSafely(["weather-freezing-rain", "weather-rain", "weather-severe-alert"], iconType)
+                    icon: WeatherIconSafely(["weather-freezing-rain", "weather-rain", "weather-severe-alert"], iconType)
                 }
             case "heavysleetandthunder":
                 return {
                     customIcon: "sleet-storm-symbolic",
                     main: _("Heavy Sleet"),
                     description: _("Heavy Sleet and thunder"),
-                    icon: weatherIconSafely(["weather-freezing-rain", "weather-rain", "weather-severe-alert"], iconType)
+                    icon: WeatherIconSafely(["weather-freezing-rain", "weather-rain", "weather-severe-alert"], iconType)
                 }
             case "heavysleetshowers":
                 return {
                     customIcon: (isNight) ? "night-alt-sleet-symbolic" : "day-sleet-symbolic",
                     main: _("Heavy Sleet"),
                     description: _("Heavy sleet showers"),
-                    icon: weatherIconSafely(["weather-showers", "weather-showers-scattered", "weather-freezing-rain"], iconType)
+                    icon: WeatherIconSafely(["weather-showers", "weather-showers-scattered", "weather-freezing-rain"], iconType)
 
                 }
             case "heavysleetshowersandthunder":
@@ -334,7 +334,7 @@ export class MetNorway implements WeatherProvider {
                     customIcon: (IsNight) ? "night-alt-sleet-storm-symbolic" : "day-sleet-storm-symbolic",
                     main: _("Heavy Sleet"),
                     description: _("Heavy sleet showers and thunder"),
-                    icon: weatherIconSafely(["weather-showers", "weather-showers-scattered", "weather-freezing-rain"], iconType)
+                    icon: WeatherIconSafely(["weather-showers", "weather-showers-scattered", "weather-freezing-rain"], iconType)
 
                 }
             case "heavysnow":
@@ -342,21 +342,21 @@ export class MetNorway implements WeatherProvider {
                     customIcon: "snow-symbolic",
                     main: _("Heavy Snow"),
                     description: _("Heavy Snow"),
-                    icon: weatherIconSafely(["weather-snow", "weather-severe-alert"], iconType)
+                    icon: WeatherIconSafely(["weather-snow", "weather-severe-alert"], iconType)
                 }
             case "heavysnowandthunder":
                 return {
                     customIcon: "snow-symbolic",
                     main: _("Heavy Snow"),
                     description: _("Heavy Snow and thunder"),
-                    icon: weatherIconSafely(["weather-snow", "weather-severe-alert"], iconType)
+                    icon: WeatherIconSafely(["weather-snow", "weather-severe-alert"], iconType)
                 }
             case "heavysnowshowers":
                 return {
                     customIcon: (isNight) ? "night-alt-snow-symbolic" : "day-snow-symbolic",
                     main: _("Heavy Snow"),
                     description: _("Heavy snow showers"),
-                    icon: weatherIconSafely(["weather-snow-scattered", "weather-snow"], iconType)
+                    icon: WeatherIconSafely(["weather-snow-scattered", "weather-snow"], iconType)
 
                 }
             case "heavysnowshowersandthunder":
@@ -364,7 +364,7 @@ export class MetNorway implements WeatherProvider {
                     customIcon: (isNight) ? "night-alt-snow-thunderstorm-symbolic" : "day-snow-thunderstorm-symbolic",
                     main: _("Heavy Snow"),
                     description: _("Heavy snow showers and thunder"),
-                    icon: weatherIconSafely(["weather-snow-scattered", "weather-snow"], iconType)
+                    icon: WeatherIconSafely(["weather-snow-scattered", "weather-snow"], iconType)
 
                 }
             case "lightrain":
@@ -372,21 +372,21 @@ export class MetNorway implements WeatherProvider {
                     customIcon: "rain-mix-symbolic",
                     main: _("Light Rain"),
                     description: _("Light Rain"),
-                    icon: weatherIconSafely(["weather-showers-scattered", "weather-rain", "weather-severe-alert"], iconType)
+                    icon: WeatherIconSafely(["weather-showers-scattered", "weather-rain", "weather-severe-alert"], iconType)
                 }
             case "lightrainandthunder":
                 return {
                     customIcon: "rain-mix-storm-symbolic",
                     main: _("Light Rain"),
                     description: _("Light Rain and thunder"),
-                    icon: weatherIconSafely(["weather-showers-scattered", "weather-rain", "weather-severe-alert"], iconType)
+                    icon: WeatherIconSafely(["weather-showers-scattered", "weather-rain", "weather-severe-alert"], iconType)
                 }
             case "lightrainshowers":
                 return {
                     customIcon: (isNight) ? "night-alt-rain-mix-symbolic" : "day-rain-mix-symbolic",
                     main: _("Light Rain"),
                     description: _("Light rain showers"),
-                    icon: weatherIconSafely(["weather-showers-scattered", "weather-rain", "weather-severe-alert"], iconType)
+                    icon: WeatherIconSafely(["weather-showers-scattered", "weather-rain", "weather-severe-alert"], iconType)
 
                 }
             case "lightrainshowersandthunder":
@@ -394,7 +394,7 @@ export class MetNorway implements WeatherProvider {
                     customIcon: (isNight) ? "night-alt-rain-mix-storm-symbolic" : "day-rain-mix-storm-symbolic",
                     main: _("Light Rain"),
                     description: _("Light rain showers and thunder"),
-                    icon: weatherIconSafely(["weather-showers-scattered", "weather-rain", "weather-severe-alert"], iconType)
+                    icon: WeatherIconSafely(["weather-showers-scattered", "weather-rain", "weather-severe-alert"], iconType)
 
                 }
             case "lightsleet":
@@ -402,21 +402,21 @@ export class MetNorway implements WeatherProvider {
                     customIcon: "sleet-symbolic",
                     main: _("Light Sleet"),
                     description: _("Light Sleet"),
-                    icon: weatherIconSafely(["weather-freezing-rain", "weather-showers", "weather-severe-alert"], iconType)
+                    icon: WeatherIconSafely(["weather-freezing-rain", "weather-showers", "weather-severe-alert"], iconType)
                 }
             case "lightsleetandthunder":
                 return {
                     customIcon: "sleet-storm-symbolic",
                     main: _("Light Sleet"),
                     description: _("Light Sleet and thunder"),
-                    icon: weatherIconSafely(["weather-freezing-rain", "weather-showers", "weather-severe-alert"], iconType)
+                    icon: WeatherIconSafely(["weather-freezing-rain", "weather-showers", "weather-severe-alert"], iconType)
                 }
             case "lightsleetshowers":
                 return {
                     customIcon: (IsNight) ? "night-alt-sleet-symbolic" : "day-sleet-symbolic",
                     main: _("Light Sleet"),
                     description: _("Light sleet showers"),
-                    icon: weatherIconSafely(["weather-freezing-rain", "weather-showers", "weather-severe-alert"], iconType)
+                    icon: WeatherIconSafely(["weather-freezing-rain", "weather-showers", "weather-severe-alert"], iconType)
 
                 }
             case "lightssleetshowersandthunder":
@@ -424,7 +424,7 @@ export class MetNorway implements WeatherProvider {
                     customIcon: (IsNight) ? "night-alt-sleet-storm-symbolic" : "day-sleet-storm-symbolic",
                     main: _("Light Sleet"),
                     description: _("Light sleet showers and thunder"),
-                    icon: weatherIconSafely(["weather-freezing-rain", "weather-showers", "weather-severe-alert"], iconType)
+                    icon: WeatherIconSafely(["weather-freezing-rain", "weather-showers", "weather-severe-alert"], iconType)
 
                 }
             case "lightsnow":
@@ -432,21 +432,21 @@ export class MetNorway implements WeatherProvider {
                     customIcon: "snow-symbolic",
                     main: _("Light Snow"),
                     description: _("Light Snow"),
-                    icon: weatherIconSafely(["weather-snow", "weather-severe-alert"], iconType)
+                    icon: WeatherIconSafely(["weather-snow", "weather-severe-alert"], iconType)
                 }
             case "lightsnowandthunder":
                 return {
                     customIcon: "snow-storm-symbolic",
                     main: _("Light Snow"),
                     description: _("Light snow and thunder"),
-                    icon: weatherIconSafely(["weather-snow", "weather-severe-alert"], iconType)
+                    icon: WeatherIconSafely(["weather-snow", "weather-severe-alert"], iconType)
                 }
             case "lightsnowshowers":
                 return {
                     customIcon: (isNight) ? "night-alt-snow-symbolic" : "day-snow-symbolic",
                     main: _("Light Snow"),
                     description: _("Light snow showers"),
-                    icon: weatherIconSafely(["weather-snow-scattered", "weather-snow"], iconType)
+                    icon: WeatherIconSafely(["weather-snow-scattered", "weather-snow"], iconType)
 
                 }
             case "lightssnowshowersandthunder":
@@ -454,7 +454,7 @@ export class MetNorway implements WeatherProvider {
                     customIcon: (isNight) ? "night-alt-snow-thunderstorm-symbolic" : "day-snow-thunderstorm-symbolic",
                     main: _("Light Snow"),
                     description: _("Light snow showers and thunder"),
-                    icon: weatherIconSafely(["weather-snow-scattered", "weather-snow"], iconType)
+                    icon: WeatherIconSafely(["weather-snow-scattered", "weather-snow"], iconType)
 
                 }
             case "partlycloudy":
@@ -462,28 +462,28 @@ export class MetNorway implements WeatherProvider {
                     customIcon: (isNight) ? "night-alt-cloudy-symbolic" : "day-cloudy-symbolic",
                     main: _("Partly Cloudy"),
                     description: _("Partly Cloudy"),
-                    icon: weatherIconSafely((isNight) ? ["weather-clouds-night", "weather-few-clouds-night", "weather-overcast", "weather-severe-alert"] : ["weather-clouds", "weather-few-clouds", "weather-overcast", "weather-severe-alert"], iconType)
+                    icon: WeatherIconSafely((isNight) ? ["weather-clouds-night", "weather-few-clouds-night", "weather-overcast", "weather-severe-alert"] : ["weather-clouds", "weather-few-clouds", "weather-overcast", "weather-severe-alert"], iconType)
                 }
             case "rain":
                 return {
                     customIcon: "rain-symbolic",
                     main: _("Rain"),
                     description: _("Rain"),
-                    icon: weatherIconSafely(["weather-rain", "weather-freezing-rain", "weather-showers-scattered", "weather-severe-alert"], iconType)
+                    icon: WeatherIconSafely(["weather-rain", "weather-freezing-rain", "weather-showers-scattered", "weather-severe-alert"], iconType)
                 }
             case "rainandthunder":
                 return {
                     customIcon: "thunderstorm-symbolic",
                     main: _("Rain"),
                     description: _("Rain and thunder"),
-                    icon: weatherIconSafely(["weather-storm", "weather-rain", "weather-freezing-rain", "weather-showers-scattered", "weather-severe-alert"], iconType)
+                    icon: WeatherIconSafely(["weather-storm", "weather-rain", "weather-freezing-rain", "weather-showers-scattered", "weather-severe-alert"], iconType)
                 }
             case "rainshowers":
                 return {
                     customIcon: (isNight) ? "night-alt-rain-mix-symbolic" : "day-rain-mix-symbolic",
                     main: _("Rain Showers"),
                     description: _("Rain showers"),
-                    icon: weatherIconSafely(["weather-showers-scattered", "weather-rain", "weather-freezing-rain"], iconType)
+                    icon: WeatherIconSafely(["weather-showers-scattered", "weather-rain", "weather-freezing-rain"], iconType)
 
                 }
             case "rainshowersandthunder":
@@ -491,7 +491,7 @@ export class MetNorway implements WeatherProvider {
                     customIcon: (isNight) ? "night-alt-rain-mix-storm-symbolic" : "day-rain-mix-storm-symbolic",
                     main: _("Rain Showers"),
                     description: _("Rain showers and thunder"),
-                    icon: weatherIconSafely(["weather-showers-scattered", "weather-rain", "weather-freezing-rain", "weather-severe-alert"], iconType)
+                    icon: WeatherIconSafely(["weather-showers-scattered", "weather-rain", "weather-freezing-rain", "weather-severe-alert"], iconType)
 
                 }
             case "sleet":
@@ -499,21 +499,21 @@ export class MetNorway implements WeatherProvider {
                     customIcon: "sleet-symbolic",
                     main: _("Sleet"),
                     description: _("Sleet"),
-                    icon: weatherIconSafely(["weather-freezing-rain", "weather-showers", "weather-severe-alert"], iconType)
+                    icon: WeatherIconSafely(["weather-freezing-rain", "weather-showers", "weather-severe-alert"], iconType)
                 }
             case "sleetandthunder":
                 return {
                     customIcon: "sleet-storm-symbolic",
                     main: _("Sleet"),
                     description: _("Sleet and thunder"),
-                    icon: weatherIconSafely(["weather-freezing-rain", "weather-showers", "weather-severe-alert"], iconType)
+                    icon: WeatherIconSafely(["weather-freezing-rain", "weather-showers", "weather-severe-alert"], iconType)
                 }
             case "sleetshowers":
                 return {
                     customIcon: (isNight) ? "night-alt-sleet-symbolic" : "day-sleet-symbolic",
                     main: _("Sleet"),
                     description: _("Sleet showers"),
-                    icon: weatherIconSafely(["weather-freezing-rain", "weather-showers", "weather-severe-alert"], iconType)
+                    icon: WeatherIconSafely(["weather-freezing-rain", "weather-showers", "weather-severe-alert"], iconType)
 
                 }
             case "sleetshowersandthunder":
@@ -521,7 +521,7 @@ export class MetNorway implements WeatherProvider {
                     customIcon: (isNight) ? "night-alt-sleet-storm-symbolic" : "day-sleet-storm-symbolic",
                     main: _("Sleet"),
                     description: _("Sleet showers and thunder"),
-                    icon: weatherIconSafely(["weather-freezing-rain", "weather-showers", "weather-severe-alert"], iconType)
+                    icon: WeatherIconSafely(["weather-freezing-rain", "weather-showers", "weather-severe-alert"], iconType)
 
                 }
             case "snow":
@@ -529,21 +529,21 @@ export class MetNorway implements WeatherProvider {
                     customIcon: "snow-symbolic",
                     main: _("Snow"),
                     description: _("Snow"),
-                    icon: weatherIconSafely(["weather-snow", "weather-severe-alert"], iconType)
+                    icon: WeatherIconSafely(["weather-snow", "weather-severe-alert"], iconType)
                 }
             case "snowandthunder":
                 return {
                     customIcon: "snow-storm-symbolic",
                     main: _("Snow"),
                     description: _("Snow and thunder"),
-                    icon: weatherIconSafely(["weather-snow", "weather-severe-alert"], iconType)
+                    icon: WeatherIconSafely(["weather-snow", "weather-severe-alert"], iconType)
                 }
             case "snowshowers":
                 return {
                     customIcon: (isNight) ? "night-alt-snow-symbolic" : "day-snow-symbolic",
                     main: _("Snow Showers"),
                     description: _("Snow showers"),
-                    icon: weatherIconSafely(["weather-snow-scattered", "weather-snow"], iconType)
+                    icon: WeatherIconSafely(["weather-snow-scattered", "weather-snow"], iconType)
 
                 }
             case "snowshowersandthunder":
@@ -551,7 +551,7 @@ export class MetNorway implements WeatherProvider {
                     customIcon: (isNight) ? "night-alt-snow-thunderstorm-symbolic" : "day-snow-thunderstorm-symbolic",
                     main: _("Snow Showers"),
                     description: _("Snow showers and thunder"),
-                    icon: weatherIconSafely(["weather-snow-scattered", "weather-snow"], iconType)
+                    icon: WeatherIconSafely(["weather-snow-scattered", "weather-snow"], iconType)
                 }
             default:
                 Log.Instance.Error("condition code not found: " + weather.condition);
@@ -559,7 +559,7 @@ export class MetNorway implements WeatherProvider {
                     customIcon: "cloud-refresh-symbolic",
                     main: _("Unknown"),
                     description: _("Unknown"),
-                    icon: weatherIconSafely(["weather-severe-alert"], iconType)
+                    icon: WeatherIconSafely(["weather-severe-alert"], iconType)
                 }
         }
     }

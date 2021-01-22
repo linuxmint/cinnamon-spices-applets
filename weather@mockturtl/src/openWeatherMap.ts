@@ -10,7 +10,7 @@ import { HttpError } from "./httpLib";
 import { Log } from "./logger";
 import { WeatherApplet } from "./main";
 import { WeatherProvider, WeatherData, ForecastData, HourlyForecastData, AppletError, BuiltinIcons, CustomIcons, LocationData } from "./types";
-import { weatherIconSafely, _, isLangSupported } from "./utils";
+import { WeatherIconSafely, _, IsLangSupported } from "./utils";
 
 const Lang: typeof imports.lang = imports.lang;
 
@@ -80,7 +80,7 @@ export class OpenWeatherMap implements WeatherProvider {
                 condition: {
                     main: json?.current?.weather?.[0]?.main,
                     description: json?.current?.weather?.[0]?.description,
-                    icon: weatherIconSafely(self.ResolveIcon(json?.current?.weather?.[0]?.icon), self.app.config.IconType),
+                    icon: WeatherIconSafely(self.ResolveIcon(json?.current?.weather?.[0]?.icon), self.app.config.IconType),
                     customIcon: self.ResolveCustomIcon(json?.current?.weather?.[0]?.icon)
                 },
                 extra_field: {
@@ -101,7 +101,7 @@ export class OpenWeatherMap implements WeatherProvider {
                     condition: {
                         main: day.weather[0].main,
                         description: day.weather[0].description,
-                        icon: weatherIconSafely(self.ResolveIcon(day.weather[0].icon), self.app.config.IconType),
+                        icon: WeatherIconSafely(self.ResolveIcon(day.weather[0].icon), self.app.config.IconType),
                         customIcon: self.ResolveCustomIcon(day.weather[0].icon)
                     },
                 };
@@ -118,7 +118,7 @@ export class OpenWeatherMap implements WeatherProvider {
                     condition: {
                         main: hour.weather[0].main,
                         description: hour.weather[0].description,
-                        icon: weatherIconSafely(self.ResolveIcon(hour.weather[0].icon), self.app.config.IconType),
+                        icon: WeatherIconSafely(self.ResolveIcon(hour.weather[0].icon), self.app.config.IconType),
                         customIcon: self.ResolveCustomIcon(hour.weather[0].icon)
                     },
                 }
@@ -163,7 +163,7 @@ export class OpenWeatherMap implements WeatherProvider {
         query += "1c73f8259a86c6fd43c7163b543c8640";
         // Append Language if supported and enabled
         let locale: string = this.ConvertToAPILocale(this.app.config.currentLocale);
-        if (this.app.config._translateCondition && isLangSupported(locale, this.supportedLanguages)) {
+        if (this.app.config._translateCondition && IsLangSupported(locale, this.supportedLanguages)) {
             query = query + "&lang=" + locale;
         }
         return query;

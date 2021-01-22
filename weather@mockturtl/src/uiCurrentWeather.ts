@@ -6,7 +6,7 @@ import { Log } from "./logger";
 import { WeatherApplet } from "./main";
 import { WeatherData, APIUniqueField } from "./types";
 import { UI } from "./ui";
-import { _, AwareDateString, nonempty, GetHoursMinutes, TempToUserConfig, UnitToUnicode, compassDirection, MPStoUserUnits, PressToUserUnits, GenerateLocationText } from "./utils";
+import { _, AwareDateString, nonempty, GetHoursMinutes, TempToUserConfig, UnitToUnicode, CompassDirection, MPStoUserUnits, PressToUserUnits, GenerateLocationText } from "./utils";
 import { WeatherButton } from "./weatherbutton";
 
 const { Bin, BoxLayout, IconType, Label, Icon, Align } = imports.gi.St;
@@ -323,7 +323,7 @@ export class CurrentWeather {
     }
 
     private SetWind(windSpeed: number, windDegree: number) {
-        let wind_direction = compassDirection(windDegree);
+        let wind_direction = CompassDirection(windDegree);
             this.windLabel.text =
                 (wind_direction != undefined ? _(wind_direction) + " " : "") +
                 MPStoUserUnits(windSpeed, this.app.config.WindSpeedUnit);

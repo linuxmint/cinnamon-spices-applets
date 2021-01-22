@@ -1,7 +1,7 @@
 import { WeatherApplet } from "./main";
 import { IpApi } from "./ipApi";
 import { LocationData } from "./types";
-import { clearTimeout, setTimeout, _, isCoordinate, constructJsLocale } from "./utils";
+import { clearTimeout, setTimeout, _, IsCoordinate, ConstructJsLocale } from "./utils";
 import { Log } from "./logger";
 import { UUID, SIGNAL_CHANGED } from "./consts";
 import { LocationStore } from "./locationstore";
@@ -125,7 +125,7 @@ export class Config {
     constructor(app: WeatherApplet, instanceID: number) {
 		this.app = app;
 		this.LocStore = new LocationStore(this.app);
-		this.currentLocale = constructJsLocale(get_language_names()[0]);
+		this.currentLocale = ConstructJsLocale(get_language_names()[0]);
 		Log.Instance.Debug("System locale is " + this.currentLocale);
 
 		this.autoLocProvider = new IpApi(app); // IP location lookup
@@ -261,7 +261,7 @@ export class Config {
             return location;
         }
         // location not in storage
-        else if (isCoordinate(loc)) {
+        else if (IsCoordinate(loc)) {
             // Get Location
             loc = loc.replace(" ", "");
             let latLong = loc.split(",");

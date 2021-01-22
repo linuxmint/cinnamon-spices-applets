@@ -57,7 +57,7 @@ class Config {
         this.currentLocation = null;
         this.app = app;
         this.LocStore = new locationstore_1.LocationStore(this.app);
-        this.currentLocale = utils_1.constructJsLocale(get_language_names()[0]);
+        this.currentLocale = utils_1.ConstructJsLocale(get_language_names()[0]);
         logger_1.Log.Instance.Debug("System locale is " + this.currentLocale);
         this.autoLocProvider = new ipApi_1.IpApi(app);
         this.geoLocationService = new nominatim_1.GeoLocation(app);
@@ -148,7 +148,7 @@ class Config {
             this.InjectLocationToConfig(location, true);
             return location;
         }
-        else if (utils_1.isCoordinate(loc)) {
+        else if (utils_1.IsCoordinate(loc)) {
             loc = loc.replace(" ", "");
             let latLong = loc.split(",");
             let location = {

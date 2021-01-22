@@ -90,7 +90,7 @@ class Weatherbit {
                 condition: {
                     main: json.weather.description,
                     description: json.weather.description,
-                    icon: utils_1.weatherIconSafely(self.ResolveIcon(json.weather.icon), self.app.config.IconType),
+                    icon: utils_1.WeatherIconSafely(self.ResolveIcon(json.weather.icon), self.app.config.IconType),
                     customIcon: self.ResolveCustomIcon(json.weather.icon)
                 },
                 extra_field: {
@@ -121,7 +121,7 @@ class Weatherbit {
                     condition: {
                         main: day.weather.description,
                         description: day.weather.description,
-                        icon: utils_1.weatherIconSafely(self.ResolveIcon(day.weather.icon), self.app.config.IconType),
+                        icon: utils_1.WeatherIconSafely(self.ResolveIcon(day.weather.icon), self.app.config.IconType),
                         customIcon: self.ResolveCustomIcon(day.weather.icon)
                     },
                 };
@@ -147,7 +147,7 @@ class Weatherbit {
                     condition: {
                         main: hour.weather.description,
                         description: hour.weather.description,
-                        icon: utils_1.weatherIconSafely(self.ResolveIcon(hour.weather.icon), self.app.config.IconType),
+                        icon: utils_1.WeatherIconSafely(self.ResolveIcon(hour.weather.icon), self.app.config.IconType),
                         customIcon: self.ResolveCustomIcon(hour.weather.icon)
                     },
                     precipitation: {
@@ -210,7 +210,7 @@ class Weatherbit {
         }
         query = query + "key=" + key + "&lat=" + loc.lat + "&lon=" + loc.lon + "&units=S";
         let lang = this.ConvertToAPILocale(this.app.config.currentLocale);
-        if (utils_1.isLangSupported(lang, this.supportedLanguages) && this.app.config._translateCondition) {
+        if (utils_1.IsLangSupported(lang, this.supportedLanguages) && this.app.config._translateCondition) {
             query = query + "&lang=" + lang;
         }
         return query;

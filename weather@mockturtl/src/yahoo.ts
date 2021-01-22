@@ -11,7 +11,7 @@ import { Log } from "./logger";
 import { WeatherApplet } from "./main";
 import { NotificationService } from "./notification_service";
 import { WeatherProvider, WeatherData, ForecastData, BuiltinIcons, CustomIcons, LocationData } from "./types";
-import { _, weatherIconSafely, CelsiusToKelvin, KPHtoMPS } from "./utils";
+import { _, WeatherIconSafely, CelsiusToKelvin, KPHtoMPS } from "./utils";
 
 export class Yahoo implements WeatherProvider {
 
@@ -101,7 +101,7 @@ export class Yahoo implements WeatherProvider {
                 condition: {
                     main: (json.current_observation.condition.text),
                     description: json.current_observation.condition.text,
-                    icon: weatherIconSafely(this.ResolveIcon(json.current_observation.condition.code, { sunrise: sunrise, sunset: sunset }), this.app.config.IconType),
+                    icon: WeatherIconSafely(this.ResolveIcon(json.current_observation.condition.code, { sunrise: sunrise, sunset: sunset }), this.app.config.IconType),
                     customIcon: this.ResolveCustomIcon(json.current_observation.condition.code)
                 },
                 extra_field: {
@@ -121,7 +121,7 @@ export class Yahoo implements WeatherProvider {
                     condition: {
                         main: (day.text),
                         description: (day.text),
-                        icon: weatherIconSafely(this.ResolveIcon(day.code), this.app.config.IconType),
+                        icon: WeatherIconSafely(this.ResolveIcon(day.code), this.app.config.IconType),
                         customIcon: this.ResolveCustomIcon(day.code)
                     },
                 };
