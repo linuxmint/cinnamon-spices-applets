@@ -85,7 +85,7 @@ export class CurrentWeather {
 		}
 	};
 
-    public ChangeIconType(iconType: imports.gi.St.IconType) {
+    public UpdateIconType(iconType: imports.gi.St.IconType) {
         this._currentWeatherIcon.icon_type = iconType;
 	}
 
@@ -281,14 +281,14 @@ export class CurrentWeather {
     private SetWeatherIcon(iconName: string, customIconName: string) {
 		if (this.app.config._useCustomMenuIcons) {
 			this._currentWeatherIcon.icon_name = customIconName;
-			this.ChangeIconType(IconType.SYMBOLIC); // Hard set to symbolic as iconset is symbolic
+			this.UpdateIconType(IconType.SYMBOLIC); // Hard set to symbolic as iconset is symbolic
 		}
 		else {
 			if (iconName == null) {
 				iconName = "weather-severe-alert";
 			}
 			this._currentWeatherIcon.icon_name = iconName;
-			this.ChangeIconType(this.app.config.IconType); // Revert to user setting
+			this.UpdateIconType(this.app.config.IconType); // Revert to user setting
 		}
 	}
 
