@@ -9,7 +9,6 @@ const { Clipboard, ClipboardType } = imports.gi.St;
 const { file_new_for_path } = imports.gi.Gio;
 
 const { MpvPlayerHandler } = require('./mpvPlayerHandler')
-const MPRIS_PLUGIN_URL = "https://github.com/hoyon/mpv-mpris/releases/download/0.5/mpris.so"
 
 // for i18n
 let UUID;
@@ -44,8 +43,10 @@ class CinnamonRadioApplet extends TextIconApplet {
     this.settings.bind("icon-type", "icon_type", this.set_icon);
     this.settings.bind("color-on", "color_on", this.on_color_changed);
     this.settings.bind("tree", "channel_list", this.on_channel_list_update);
-    this.settings.bind("initial-volume", "initial_volume", this.on_initial_volume_changed);
     this.settings.bind("channel-on-panel", "show_channel_on_panel", this.on_show_channel_on_panel_changed)
+    this.settings.bind("initial-volume", "custom_initial_volume", this.on_initial_volume_changed);
+    this.settings.bind("keep-volume-between-sessions", "keep_volume_between_sessions")
+    this.settings.bind("last-volume", "last_volume")
 
     this._trimChannelList()
   }
@@ -53,16 +54,21 @@ class CinnamonRadioApplet extends TextIconApplet {
   _initMpvPlayer() {
 
     const configPath = `${get_home_dir()}/.cinnamon/configs/${__meta.uuid}`;
+    const mprisPluginPath = configPath + '/.mpris.so'
 
     this.mpvPlayer = new MpvPlayerHandler({
-      mprisPluginPath: configPath + '/.mpris.so',
-      handleRadioStopped: () => { this._changeSetCurrentMenuItem({ activatedMenuItem: this.stopitem }) },
-      initialVolume: this.initial_volume
+      mprisPluginPath: mprisPluginPath,
+      _handleRadioStopped: (...args) => this._handleRadioStopped(args),
+      _getInitialVolume: () => this._getInitialVolume()
     })
 
     const initialChannel = this._getChannel({ channelUrl: this.mpvPlayer.getRunningRadioUrl() })
-
     return initialChannel
+  }
+
+  _handleRadioStopped(volume) {
+    if (this.keep_volume_between_sessions) this.last_volume = volume
+    this._changeSetCurrentMenuItem({ activatedMenuItem: this.stopitem })
   }
 
   _initGui(orientation, initialChannel) {
@@ -107,7 +113,7 @@ class CinnamonRadioApplet extends TextIconApplet {
   }
 
   on_color_changed() {
-    this._setIconColor({ radioPlaying: this.mpvPlayer.channelUrl })
+    this._setIconColor({ radioPlaying: this.mpvPlayer.getRunningRadioUrl() })
   }
 
   on_channel_list_update() {
@@ -129,16 +135,18 @@ class CinnamonRadioApplet extends TextIconApplet {
     return channel
   }
 
+  _getInitialVolume() {
+    return this.keep_volume_between_sessions ? this.last_volume : this.custom_initial_volume
+  }
+
   async _on_radio_channel_clicked(e, channel) {
-    if (!this.currentMenuItem || this.currentMenuItem != e) {
-      this._changeSetCurrentMenuItem({ activatedMenuItem: e, channel: channel })
-      try {
-        await this.mpvPlayer.startChangeRadioChannel(channel.url)
-      } catch (error) {
-        this._notify_send(_("Can't play  %s").format(channel.name) + ". " + _("Make sure that the URL is valid and you have a stable internet connection. Don't hestitate to open an Issue on Github if the problem persists."))
-        global.logError(error)
-        return
-      }
+    this._changeSetCurrentMenuItem({ activatedMenuItem: e, channel: channel })
+    try {
+      await this.mpvPlayer.startChangeRadioChannel(channel.url)
+    } catch (error) {
+      this._notify_send(_("Can't play  %s").format(channel.name) + ". " + _("Make sure that the URL is valid and you have a stable internet connection. Don't hestitate to open an Issue on Github if the problem persists."))
+      global.logError(error)
+      return
     }
   }
 
@@ -173,7 +181,7 @@ class CinnamonRadioApplet extends TextIconApplet {
       Clipboard.get_default().set_text(ClipboardType.CLIPBOARD, currentSong);
     } catch (e) {
       this._notify_send(_("Can't copy current Song. Is the Radio playing?"))
-      global.logError(e)
+      // global.logError(e)
     }
   }
 
@@ -182,15 +190,14 @@ class CinnamonRadioApplet extends TextIconApplet {
   }
 
   _setDotToMenuItem({ menuItemWithDot }) {
-    menuItemWithDot.setShowDot(true);
     if (this.currentMenuItem) this.currentMenuItem.setShowDot(false)
+    menuItemWithDot.setShowDot(true);
     this.currentMenuItem = menuItemWithDot;
   }
 
   set_applet_tooltip({ channel }) {
     const text = channel ? channel.name : "Radio++";
     super.set_applet_tooltip(text)
-
   }
 
   _changeSetCurrentMenuItem({ activatedMenuItem, channel }) {
@@ -200,10 +207,6 @@ class CinnamonRadioApplet extends TextIconApplet {
 
     const radioPlaying = activatedMenuItem === this.stopitem ? false : true
     this._setIconColor({ radioPlaying: radioPlaying });
-  }
-
-  on_initial_volume_changed() {
-    this.mpvPlayer.initialVolume = this.initial_volume
   }
 
   // sends a notification but only if there hasn't been already the same notification in the last 10 seks
@@ -263,7 +266,7 @@ class CinnamonRadioApplet extends TextIconApplet {
     const volumeChange = direction === ScrollDirection.UP ? 5 : -5
     const volumeChanged = this.mpvPlayer.increaseDecreaseVolume(volumeChange)
 
-    if (!volumeChanged) this._notify_send(_("Can't increase Volume. Volume already at maximum."))
+    if (!volumeChanged && volumeChange > 0) this._notify_send(_("Can't increase Volume. Volume already at maximum."))
   }
 };
 
