@@ -68,7 +68,7 @@ class CurrentWeather {
         let box = new BoxLayout({ style_class: STYLE_ICONBOX });
         box.add_actor(this.weatherIcon);
         box.add_actor(this.BuildMiddleColumn(config, textColorStyle));
-        box.add_actor(this.BuildRightColumn(textColorStyle));
+        box.add_actor(this.BuildRightColumn(textColorStyle, config));
         this.actor.set_child(box);
     }
     ;
@@ -81,7 +81,7 @@ class CurrentWeather {
             middleColumn.add_actor(this.BuildSunBox(config, textColorStyle));
         return middleColumn;
     }
-    BuildRightColumn(textColorStyle) {
+    BuildRightColumn(textColorStyle, config) {
         let textOb = {
             text: consts_1.ELLIPSIS
         };
@@ -101,7 +101,11 @@ class CurrentWeather {
         rb_values.add_actor(this.temperatureLabel);
         rb_values.add_actor(this.humidityLabel);
         rb_values.add_actor(this.pressureLabel);
-        rb_values.add_actor(this.windLabel);
+        let windBox = new BoxLayout({ vertical: false });
+        this.windDirectionIcon = new Icon({ icon_type: config.IconType, icon_name: consts_1.APPLET_ICON, icon_size: this.app.config.CurrentFontSize });
+        windBox.add(this.windDirectionIcon, { x_fill: true, x_align: Align.MIDDLE, y_align: Align.MIDDLE, expand: true });
+        windBox.add(this.windLabel);
+        rb_values.add_actor(windBox);
         rb_values.add_actor(this.apiUniqueLabel);
         let rightColumn = new BoxLayout({ style_class: STYLE_DATABOX });
         rightColumn.add_actor(rb_captions);
@@ -124,7 +128,7 @@ class CurrentWeather {
             can_focus: true,
             child: new Icon({
                 icon_type: IconType.SYMBOLIC,
-                icon_size: 10,
+                icon_size: this.app.config.CurrentFontSize,
                 icon_name: "custom-right-arrow-symbolic",
                 style_class: STYLE_LOCATION_SELECTOR
             }),
@@ -135,7 +139,7 @@ class CurrentWeather {
             can_focus: true,
             child: new Icon({
                 icon_type: IconType.SYMBOLIC,
-                icon_size: 10,
+                icon_size: this.app.config.CurrentFontSize,
                 icon_name: "custom-left-arrow-symbolic",
                 style_class: STYLE_LOCATION_SELECTOR
             }),

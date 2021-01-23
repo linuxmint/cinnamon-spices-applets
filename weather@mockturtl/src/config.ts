@@ -12,6 +12,7 @@ const Lang: typeof imports.lang = imports.lang;
 const keybindingManager = imports.ui.main.keybindingManager;
 const { IconType } = imports.gi.St;
 const { get_language_names } = imports.gi.GLib;
+const { Settings } = imports.gi.Gio;
 
 /** Units Used in Options. Change Options list if You change this! */
 export type WeatherUnits = 'automatic' | 'celsius' | 'fahrenheit';
@@ -122,6 +123,12 @@ export class Config {
 	public readonly LocStore: LocationStore;
 	public currentLocale: string;
 
+	private InterfaceSettings: imports.gi.Gio.Settings;
+	private currentFontSize: number;
+	public get CurrentFontSize(): number {
+		return this.currentFontSize;
+	}
+
     constructor(app: WeatherApplet, instanceID: number) {
 		this.app = app;
 		this.LocStore = new LocationStore(this.app);
@@ -131,7 +138,10 @@ export class Config {
 		this.autoLocProvider = new IpApi(app); // IP location lookup
 		this.geoLocationService = new GeoLocation(app);
 		this.countryCode = this.GetCountryCode(this.currentLocale);
-        this.settings = new AppletSettings(this, UUID, instanceID);
+		this.settings = new AppletSettings(this, UUID, instanceID);
+		this.InterfaceSettings = new Settings({schema: "org.cinnamon.desktop.interface"});
+		this.InterfaceSettings.connect('changed::font-name', () => this.OnFontChanged());
+		this.currentFontSize = this.GetCurrentFontSize();
         this.BindSettings();
     }
 
@@ -333,6 +343,11 @@ export class Config {
 		this.doneTypingLocation = setTimeout(Lang.bind(this, this.DoneTypingLocation), 3000);
 	}
 
+	private OnFontChanged() {
+		this.currentFontSize = this.GetCurrentFontSize();
+		this.app.RefreshAndRebuild();
+	}
+
 	/** Called when 3 seconds is up with no change in location */
 	private DoneTypingLocation() {
 		Log.Instance.Debug("User has finished typing, beginning refresh");
@@ -377,6 +392,14 @@ export class Config {
 		if (split.length < 2) return null;
 	
 		return split[1];
+	}
+
+	private GetCurrentFontSize() {
+		let nameString = this.InterfaceSettings.get_string("font-name");
+		let elements = nameString.split(" ");
+		let size = parseFloat(elements[elements.length - 1]);
+		Log.Instance.Debug("Font size changed to " + size.toString());
+		return size;
 	}
 }
 

@@ -12,6 +12,7 @@ const Lang = imports.lang;
 const keybindingManager = imports.ui.main.keybindingManager;
 const { IconType } = imports.gi.St;
 const { get_language_names } = imports.gi.GLib;
+const { Settings } = imports.gi.Gio;
 const Keys = {
     DATA_SERVICE: "dataService",
     API_KEY: "apiKey",
@@ -63,7 +64,13 @@ class Config {
         this.geoLocationService = new nominatim_1.GeoLocation(app);
         this.countryCode = this.GetCountryCode(this.currentLocale);
         this.settings = new AppletSettings(this, consts_1.UUID, instanceID);
+        this.InterfaceSettings = new Settings({ schema: "org.cinnamon.desktop.interface" });
+        this.InterfaceSettings.connect('changed::font-name', () => this.OnFontChanged());
+        this.currentFontSize = this.GetCurrentFontSize();
         this.BindSettings();
+    }
+    get CurrentFontSize() {
+        return this.currentFontSize;
     }
     BindSettings() {
         let k;
@@ -206,6 +213,10 @@ class Config {
             utils_1.clearTimeout(this.doneTypingLocation);
         this.doneTypingLocation = utils_1.setTimeout(Lang.bind(this, this.DoneTypingLocation), 3000);
     }
+    OnFontChanged() {
+        this.currentFontSize = this.GetCurrentFontSize();
+        this.app.RefreshAndRebuild();
+    }
     DoneTypingLocation() {
         logger_1.Log.Instance.Debug("User has finished typing, beginning refresh");
         this.doneTypingLocation = null;
@@ -245,6 +256,13 @@ class Config {
         if (split.length < 2)
             return null;
         return split[1];
+    }
+    GetCurrentFontSize() {
+        let nameString = this.InterfaceSettings.get_string("font-name");
+        let elements = nameString.split(" ");
+        let size = parseFloat(elements[elements.length - 1]);
+        logger_1.Log.Instance.Debug("Font size changed to " + size.toString());
+        return size;
     }
 }
 exports.Config = Config;

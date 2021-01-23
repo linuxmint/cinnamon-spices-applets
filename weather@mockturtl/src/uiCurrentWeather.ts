@@ -5,8 +5,7 @@ import { LocationStore } from "./locationstore";
 import { Log } from "./logger";
 import { WeatherApplet } from "./main";
 import { WeatherData, APIUniqueField } from "./types";
-import { UI } from "./ui";
-import { _, AwareDateString, nonempty, GetHoursMinutes, TempToUserConfig, UnitToUnicode, CompassDirection, MPStoUserUnits, PressToUserUnits, GenerateLocationText } from "./utils";
+import { _, GetHoursMinutes, TempToUserConfig, UnitToUnicode, CompassDirection, MPStoUserUnits, PressToUserUnits, GenerateLocationText } from "./utils";
 import { WeatherButton } from "./weatherbutton";
 
 const { Bin, BoxLayout, IconType, Label, Icon, Align } = imports.gi.St;
@@ -45,12 +44,12 @@ export class CurrentWeather {
     private temperatureLabel: imports.gi.St.Label;
     private humidityLabel: imports.gi.St.Label;
     private pressureLabel: imports.gi.St.Label;
-    private windLabel: imports.gi.St.Label;
+	private windLabel: imports.gi.St.Label;
+	private windDirectionIcon: imports.gi.St.Icon;
     private apiUniqueLabel: imports.gi.St.Label;
     private apiUniqueCaptionLabel: imports.gi.St.Label;
 
 	private app: WeatherApplet;
-	//private ui: UI;
 
     constructor(app: WeatherApplet) {
 		this.app = app;
@@ -110,7 +109,7 @@ export class CurrentWeather {
         let box = new BoxLayout({ style_class: STYLE_ICONBOX })
 		box.add_actor(this.weatherIcon)
 		box.add_actor(this.BuildMiddleColumn(config, textColorStyle));
-        box.add_actor(this.BuildRightColumn(textColorStyle))
+        box.add_actor(this.BuildRightColumn(textColorStyle, config))
         this.actor.set_child(box)
 	};
 
@@ -130,7 +129,7 @@ export class CurrentWeather {
 	}
 
 	/** Builds Weather Information on the right side */
-	BuildRightColumn(textColorStyle: string) {
+	BuildRightColumn(textColorStyle: string, config: Config) {
         let textOb = {
             text: ELLIPSIS
         }
@@ -138,7 +137,8 @@ export class CurrentWeather {
         this.temperatureLabel = new Label(textOb)
         this.humidityLabel = new Label(textOb)
         this.pressureLabel = new Label(textOb)
-        this.windLabel = new Label(textOb)
+		this.windLabel = new Label(textOb);
+
         this.apiUniqueLabel = new Label({ text: '' })
         // APi Unique Caption
         this.apiUniqueCaptionLabel = new Label({ text: '', style: textColorStyle });
@@ -153,12 +153,13 @@ export class CurrentWeather {
         rb_values.add_actor(this.temperatureLabel);
         rb_values.add_actor(this.humidityLabel);
         rb_values.add_actor(this.pressureLabel);
-		/*let windBox = new BoxLayout({vertical: false});
-		let windIcon = new Icon({icon_type: IconType.SYMBOLIC, icon_name: "wind-symbolic", icon_size: 15});
-		windBox.add_actor(windIcon);
-		windBox.add_actor(this._currentWeatherWind);
-		rb_values.add_actor(windBox);*/
-        rb_values.add_actor(this.windLabel);
+		let windBox = new BoxLayout({vertical: false});
+
+		this.windDirectionIcon = new Icon({icon_type: config.IconType, icon_name: APPLET_ICON, icon_size: this.app.config.CurrentFontSize});
+		windBox.add(this.windDirectionIcon, { x_fill: true, x_align: Align.MIDDLE, y_align: Align.MIDDLE, expand: true });
+		windBox.add(this.windLabel);
+		rb_values.add_actor(windBox);
+        //rb_values.add_actor(this.windLabel);
         rb_values.add_actor(this.apiUniqueLabel);
 
         let rightColumn = new BoxLayout({ style_class: STYLE_DATABOX });
@@ -181,7 +182,7 @@ export class CurrentWeather {
 			can_focus: true,
 			child: new Icon({
 				icon_type: IconType.SYMBOLIC,
-				icon_size: 10,
+				icon_size: this.app.config.CurrentFontSize,
 				icon_name: "custom-right-arrow-symbolic",
 				style_class: STYLE_LOCATION_SELECTOR
 			}),
@@ -193,7 +194,7 @@ export class CurrentWeather {
 			can_focus: true,
 			child: new Icon({
 				icon_type: IconType.SYMBOLIC,
-				icon_size: 10,
+				icon_size: this.app.config.CurrentFontSize,
 				icon_name: "custom-left-arrow-symbolic",
 				style_class: STYLE_LOCATION_SELECTOR
 			}),

@@ -3,7 +3,7 @@ import { Config, DistanceUnits } from "./config";
 import { SIGNAL_CLICKED, ELLIPSIS } from "./consts";
 import { Event } from "./events";
 import { WeatherApplet } from "./main";
-import { WeatherData, WeatherProvider } from "./types";
+import { CustomIcons, WeatherData, WeatherProvider } from "./types";
 import { _, AwareDateString, MetreToUserUnits } from "./utils";
 import { WeatherButton } from "./weatherbutton";
 
@@ -78,9 +78,11 @@ export class UIBar {
             reactive: true,
             can_focus: true,
             child: new Icon({
-                icon_type: IconType.SYMBOLIC,
-                icon_size: 12,
-                icon_name: "custom-down-arrow-symbolic"
+				icon_type: IconType.SYMBOLIC,
+				// always want it a bit bigger due to the icons's horizontal nature
+                icon_size: config.CurrentFontSize + 3, 
+				icon_name: "custom-down-arrow-symbolic" as CustomIcons,
+				style: "margin: 2px 5px;"
             }),
         }).actor;
         this._hourlyButton.connect(SIGNAL_CLICKED, () => this.ToggleClicked.Invoke(this, true));

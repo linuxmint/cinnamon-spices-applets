@@ -59,8 +59,9 @@ class UIBar {
             can_focus: true,
             child: new Icon({
                 icon_type: IconType.SYMBOLIC,
-                icon_size: 12,
-                icon_name: "custom-down-arrow-symbolic"
+                icon_size: config.CurrentFontSize + 3,
+                icon_name: "custom-down-arrow-symbolic",
+                style: "margin: 2px 5px;"
             }),
         }).actor;
         this._hourlyButton.connect(consts_1.SIGNAL_CLICKED, () => this.ToggleClicked.Invoke(this, true));
