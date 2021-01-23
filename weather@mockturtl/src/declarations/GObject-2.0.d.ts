@@ -35,7 +35,7 @@ declare namespace imports.gi.GObject {
         bind_property (source_property: string, target: Object, target_property: string, flags: BindingFlags) : Binding;
         bind_property_full (source_property: string, target: Object, target_property: string, flags: BindingFlags, transform_to: BindingTransformFunc, transform_from: BindingTransformFunc, user_data: any, notify: GLib.DestroyNotify) : Binding;
         bind_property_with_closures (source_property: string, target: Object, target_property: string, flags: BindingFlags, transform_to: Closure, transform_from: Closure) : Binding;
-		/** signal+key: string, callback: Function */
+		/** signal+property: string, callback: Function */
 		connect (...params: any) : any;
         // disconnect (signal_spec: string) : void;
         dup_data (key: string, dup_func: GLib.DuplicateFunc, user_data: any) : any;

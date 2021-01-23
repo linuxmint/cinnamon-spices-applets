@@ -123,11 +123,8 @@ export class Config {
 	public readonly LocStore: LocationStore;
 	public currentLocale: string;
 
-	private InterfaceSettings: imports.gi.Gio.Settings;
+	private readonly InterfaceSettings: imports.gi.Gio.Settings;
 	private currentFontSize: number;
-	public get CurrentFontSize(): number {
-		return this.currentFontSize;
-	}
 
     constructor(app: WeatherApplet, instanceID: number) {
 		this.app = app;
@@ -166,6 +163,10 @@ export class Config {
             UUID, this.keybinding, Lang.bind(this.app, this.app.on_applet_clicked));
 
         this.settings.connect(SIGNAL_CHANGED + this.WEATHER_USE_SYMBOLIC_ICONS_KEY, Lang.bind(this, this.IconTypeChanged));
+	}
+
+	public get CurrentFontSize(): number {
+		return this.currentFontSize;
 	}
 
 	public get CurrentLocation() {

@@ -69,9 +69,6 @@ class Config {
         this.currentFontSize = this.GetCurrentFontSize();
         this.BindSettings();
     }
-    get CurrentFontSize() {
-        return this.currentFontSize;
-    }
     BindSettings() {
         let k;
         for (k in Keys) {
@@ -83,6 +80,9 @@ class Config {
         this.settings.bindProperty(BindingDirection.IN, "keybinding", "keybinding", Lang.bind(this, this.OnKeySettingsUpdated), null);
         keybindingManager.addHotKey(consts_1.UUID, this.keybinding, Lang.bind(this.app, this.app.on_applet_clicked));
         this.settings.connect(consts_1.SIGNAL_CHANGED + this.WEATHER_USE_SYMBOLIC_ICONS_KEY, Lang.bind(this, this.IconTypeChanged));
+    }
+    get CurrentFontSize() {
+        return this.currentFontSize;
     }
     get CurrentLocation() {
         return this.currentLocation;
