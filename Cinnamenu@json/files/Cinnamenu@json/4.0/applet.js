@@ -1715,7 +1715,8 @@ class Apps {
         while ((nextType = iter.next()) !== CMenu.TreeItemType.INVALID) {
             if (nextType === CMenu.TreeItemType.ENTRY) {
                 const entry = iter.get_entry();
-                if (!entry.get_app_info().get_nodisplay()) {
+                const appInfo = entry.get_app_info();
+                if (appInfo && !appInfo.get_nodisplay()) {
                     const id = entry.get_desktop_file_id();
                     const app = this.appThis.appSystem.lookup_app(id);
                     let found = false;
