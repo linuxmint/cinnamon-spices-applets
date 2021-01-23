@@ -102,8 +102,13 @@ class CurrentWeather {
         rb_values.add_actor(this.humidityLabel);
         rb_values.add_actor(this.pressureLabel);
         let windBox = new BoxLayout({ vertical: false });
-        this.windDirectionIcon = new Icon({ icon_type: config.IconType, icon_name: consts_1.APPLET_ICON, icon_size: this.app.config.CurrentFontSize });
-        windBox.add(this.windDirectionIcon, { x_fill: true, x_align: Align.MIDDLE, y_align: Align.MIDDLE, expand: true });
+        this.windDirectionIcon = new Icon({
+            icon_type: config.IconType,
+            icon_name: consts_1.APPLET_ICON,
+            icon_size: this.app.config.CurrentFontSize,
+            style: "padding-right: 5px"
+        });
+        windBox.add(this.windDirectionIcon, { x_fill: true, y_fill: true, x_align: Align.MIDDLE, y_align: Align.MIDDLE, expand: true });
         windBox.add(this.windLabel);
         rb_values.add_actor(windBox);
         rb_values.add_actor(this.apiUniqueLabel);
@@ -247,11 +252,16 @@ class CurrentWeather {
             this.humidityLabel.text = Math.round(humidity) + "%";
         }
     }
-    SetWind(windSpeed, windDegree) {
+    async SetWind(windSpeed, windDegree) {
         let wind_direction = utils_1.CompassDirection(windDegree);
-        this.windLabel.text =
-            (wind_direction != undefined ? utils_1._(wind_direction) + " " : "") +
-                utils_1.MPStoUserUnits(windSpeed, this.app.config.WindSpeedUnit);
+        let arrows = ["diagonal-arrow-3-weather-symbolic", "diagonal-arrow-5-weather-symbolic", "diagonal-arrow-8-weather-symbolic", "diagonal-arrow-weather-symbolic", "down-arrow-weather-symbolic", "left-arrow-weather-symbolic", "right-arrow-weather-symbolic", "up-arrow-weather-symbolic"];
+        for (let index = 0; index < arrows.length; index++) {
+            const element = arrows[index];
+            this.windDirectionIcon.icon_name = element;
+            await utils_1.delay(1000);
+        }
+        this.windDirectionIcon.icon_name = wind_direction;
+        this.windLabel.text = utils_1.MPStoUserUnits(windSpeed, this.app.config.WindSpeedUnit);
         if (this.app.config.WindSpeedUnit != "Beaufort")
             this.windLabel.text += " " + utils_1._(this.app.config.WindSpeedUnit);
     }

@@ -4,8 +4,8 @@ import { ELLIPSIS, APPLET_ICON, SIGNAL_CLICKED, BLANK } from "./consts";
 import { LocationStore } from "./locationstore";
 import { Log } from "./logger";
 import { WeatherApplet } from "./main";
-import { WeatherData, APIUniqueField } from "./types";
-import { _, GetHoursMinutes, TempToUserConfig, UnitToUnicode, CompassDirection, MPStoUserUnits, PressToUserUnits, GenerateLocationText } from "./utils";
+import { WeatherData, APIUniqueField, ArrowIcons } from "./types";
+import { _, GetHoursMinutes, TempToUserConfig, UnitToUnicode, CompassDirection, MPStoUserUnits, PressToUserUnits, GenerateLocationText, delay } from "./utils";
 import { WeatherButton } from "./weatherbutton";
 
 const { Bin, BoxLayout, IconType, Label, Icon, Align } = imports.gi.St;
@@ -155,8 +155,13 @@ export class CurrentWeather {
         rb_values.add_actor(this.pressureLabel);
 		let windBox = new BoxLayout({vertical: false});
 
-		this.windDirectionIcon = new Icon({icon_type: config.IconType, icon_name: APPLET_ICON, icon_size: this.app.config.CurrentFontSize});
-		windBox.add(this.windDirectionIcon, { x_fill: true, x_align: Align.MIDDLE, y_align: Align.MIDDLE, expand: true });
+		this.windDirectionIcon = new Icon({
+			icon_type: config.IconType,
+			icon_name: APPLET_ICON,
+			icon_size: this.app.config.CurrentFontSize,
+			style: "padding-right: 5px"
+		});
+		windBox.add(this.windDirectionIcon, { x_fill: true, y_fill: true, x_align: Align.MIDDLE, y_align: Align.MIDDLE, expand: true });
 		windBox.add(this.windLabel);
 		rb_values.add_actor(windBox);
         //rb_values.add_actor(this.windLabel);
@@ -323,13 +328,18 @@ export class CurrentWeather {
         }
     }
 
-    private SetWind(windSpeed: number, windDegree: number) {
-        let wind_direction = CompassDirection(windDegree);
-            this.windLabel.text =
-                (wind_direction != undefined ? _(wind_direction) + " " : "") +
-                MPStoUserUnits(windSpeed, this.app.config.WindSpeedUnit);
-            // No need to display unit to Beaufort scale
-            if (this.app.config.WindSpeedUnit != "Beaufort") this.windLabel.text += " " + _(this.app.config.WindSpeedUnit);
+    private async SetWind(windSpeed: number, windDegree: number) {
+		let wind_direction = CompassDirection(windDegree);
+		/*let arrows: ArrowIcons[] = ["diagonal-arrow-3-weather-symbolic", "diagonal-arrow-5-weather-symbolic", "diagonal-arrow-8-weather-symbolic", "diagonal-arrow-weather-symbolic", "down-arrow-weather-symbolic", "left-arrow-weather-symbolic", "right-arrow-weather-symbolic", "up-arrow-weather-symbolic"]
+		for (let index = 0; index < arrows.length; index++) {
+			const element = arrows[index];
+			this.windDirectionIcon.icon_name = element;
+			await delay(1000)
+		}*/
+		this.windDirectionIcon.icon_name = wind_direction;
+		this.windLabel.text = MPStoUserUnits(windSpeed, this.app.config.WindSpeedUnit);
+		// No need to display unit to Beaufort scale
+		if (this.app.config.WindSpeedUnit != "Beaufort") this.windLabel.text += " " + _(this.app.config.WindSpeedUnit);
     }
 
     private SetPressure(pressure: number) {

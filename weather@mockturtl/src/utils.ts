@@ -1,7 +1,7 @@
 import { WeatherWindSpeedUnits, WeatherUnits, WeatherPressureUnits, DistanceUnits, Config } from "./config";
 import { UUID } from "./consts";
 import { SunTimes } from "./sunCalc";
-import { BuiltinIcons, WeatherData } from "./types";
+import { ArrowIcons, BuiltinIcons, WeatherData } from "./types";
 const { timeout_add, source_remove } = imports.mainloop;
 const { IconType } = imports.gi.St;
 const { IconTheme } = imports.gi.Gtk;
@@ -311,9 +311,17 @@ export function CompassToDeg(compass: string): number {
     }
 }
 
-export function CompassDirection(deg: number): string {
-    let directions = [_('N'), _('NE'), _('E'), _('SE'), _('S'), _('SW'), _('W'), _('NW')]
-    //let directions = [_('⬇'), _('⬋'), _('⬅'), _('⬉'), _('⬆'), _('⬈'), _('➞'), _('⬊')]
+export function CompassDirection(deg: number): ArrowIcons {
+    let directions: ArrowIcons[] = [
+		'up-arrow-weather-symbolic',
+		'diagonal-arrow-8-weather-symbolic',
+		'right-arrow-weather-symbolic',
+		'diagonal-arrow-3-weather-symbolic',
+		'down-arrow-weather-symbolic',
+		'diagonal-arrow-weather-symbolic',
+		'left-arrow-weather-symbolic',
+		'diagonal-arrow-5-weather-symbolic'
+	];
     return directions[Math.round(deg / 45) % directions.length]
 }
 

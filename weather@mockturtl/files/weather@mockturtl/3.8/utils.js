@@ -278,7 +278,16 @@ function CompassToDeg(compass) {
 }
 exports.CompassToDeg = CompassToDeg;
 function CompassDirection(deg) {
-    let directions = [_('N'), _('NE'), _('E'), _('SE'), _('S'), _('SW'), _('W'), _('NW')];
+    let directions = [
+        'up-arrow-weather-symbolic',
+        'diagonal-arrow-8-weather-symbolic',
+        'right-arrow-weather-symbolic',
+        'diagonal-arrow-3-weather-symbolic',
+        'down-arrow-weather-symbolic',
+        'diagonal-arrow-weather-symbolic',
+        'left-arrow-weather-symbolic',
+        'diagonal-arrow-5-weather-symbolic'
+    ];
     return directions[Math.round(deg / 45) % directions.length];
 }
 exports.CompassDirection = CompassDirection;
