@@ -254,12 +254,6 @@ class CurrentWeather {
     }
     async SetWind(windSpeed, windDegree) {
         let wind_direction = utils_1.CompassDirection(windDegree);
-        let arrows = ["diagonal-arrow-3-weather-symbolic", "diagonal-arrow-5-weather-symbolic", "diagonal-arrow-8-weather-symbolic", "diagonal-arrow-weather-symbolic", "down-arrow-weather-symbolic", "left-arrow-weather-symbolic", "right-arrow-weather-symbolic", "up-arrow-weather-symbolic"];
-        for (let index = 0; index < arrows.length; index++) {
-            const element = arrows[index];
-            this.windDirectionIcon.icon_name = element;
-            await utils_1.delay(1000);
-        }
         this.windDirectionIcon.icon_name = wind_direction;
         this.windLabel.text = utils_1.MPStoUserUnits(windSpeed, this.app.config.WindSpeedUnit);
         if (this.app.config.WindSpeedUnit != "Beaufort")

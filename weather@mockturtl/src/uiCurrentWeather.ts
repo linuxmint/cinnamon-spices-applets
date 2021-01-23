@@ -4,8 +4,8 @@ import { ELLIPSIS, APPLET_ICON, SIGNAL_CLICKED, BLANK } from "./consts";
 import { LocationStore } from "./locationstore";
 import { Log } from "./logger";
 import { WeatherApplet } from "./main";
-import { WeatherData, APIUniqueField, ArrowIcons } from "./types";
-import { _, GetHoursMinutes, TempToUserConfig, UnitToUnicode, CompassDirection, MPStoUserUnits, PressToUserUnits, GenerateLocationText, delay } from "./utils";
+import { WeatherData, APIUniqueField } from "./types";
+import { _, GetHoursMinutes, TempToUserConfig, UnitToUnicode, CompassDirection, MPStoUserUnits, PressToUserUnits, GenerateLocationText } from "./utils";
 import { WeatherButton } from "./weatherbutton";
 
 const { Bin, BoxLayout, IconType, Label, Icon, Align } = imports.gi.St;
