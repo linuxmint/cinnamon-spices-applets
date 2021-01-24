@@ -3,7 +3,12 @@ const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
 const Lang = imports.lang;
 
-
+let Compatibility;
+if (typeof require !== 'undefined') {
+    Compatibility = require('./compatibility');
+} else {
+    Compatibility = AppletDirectory.compatibility;
+}
 
 const SignalType = {
     SIGHUP:    1,
@@ -51,6 +56,7 @@ ShellOutputProcess.prototype = {
         this.standard_input_file_descriptor = -1;
         this.standard_output_file_descriptor = -1;
         this.standard_error_file_descriptor = -1;
+        this.cinnamon_version_adapter = new Compatibility.CinnamonVersionAdapter();
     },
 
     spawn_sync_and_get_output: function() {
@@ -72,7 +78,7 @@ ShellOutputProcess.prototype = {
     },
 
     get_standard_output_content: function() {
-        return this.standard_output_content.toString();
+        return this.cinnamon_version_adapter.byte_array_to_string(this.standard_output_content);
     },
 
     spawn_sync_and_get_error: function() {
@@ -82,7 +88,7 @@ ShellOutputProcess.prototype = {
     },
 
     get_standard_error_content: function() {
-        return this.standard_error_content.toString();
+        return this.cinnamon_version_adapter.byte_array_to_string(this.standard_error_content);
     },
 
     spawn_async: function() {
