@@ -6,18 +6,20 @@ const Settings = imports.ui.settings;
 const Mainloop = imports.mainloop;
 
 const uuid = "disk-read-and-write-speed@cardsurf";
-let AppletConstants, ShellUtils, Files, AppletGui;
+let AppletConstants, ShellUtils, Files, AppletGui, Compatibility;
 if (typeof require !== 'undefined') {
     AppletConstants = require('./appletConstants');
     ShellUtils = require('./shellUtils');
     Files = require('./files');
     AppletGui = require('./appletGui');
+    Compatibility = require('./compatibility');
 } else {
     const AppletDirectory = imports.ui.appletManager.applets[uuid];
     AppletConstants = AppletDirectory.appletConstants;
     ShellUtils = AppletDirectory.shellUtils;
     Files = AppletDirectory.files;
     AppletGui = AppletDirectory.appletGui;
+    Compatibility = AppletDirectory.compatibility;
 }
 
 
@@ -70,6 +72,7 @@ MyApplet.prototype = {
 
         this.orientation = orientation;
         this.is_running = true;
+        this.cinnamon_version_adapter = new Compatibility.CinnamonVersionAdapter();
 
         this.major_number_index = 0;
         this.minor_number_index = 1;
@@ -367,7 +370,9 @@ MyApplet.prototype = {
     read_string: function (file, default_string) {
         try {
             let array_bytes = file.read_chars();
-            let string = array_bytes.length > 0 ? array_bytes.toString() : default_string.toString();
+            let string = array_bytes.length > 0 ?
+                this.cinnamon_version_adapter.byte_array_to_string(array_bytes) :
+                default_string.toString();
             return string;
         }
         catch(exception) {
@@ -421,7 +426,9 @@ MyApplet.prototype = {
     read_number: function (file, default_number) {
         try {
             let array_bytes = file.read_chars();
-            let string = array_bytes.length > 0 ? array_bytes.toString() : default_number.toString();
+            let string = array_bytes.length > 0 ?
+                this.cinnamon_version_adapter.byte_array_to_string(array_bytes) :
+                default_number.toString();
             let number = parseInt(string);
             return number;
         }
