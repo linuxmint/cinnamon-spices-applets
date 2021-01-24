@@ -4,8 +4,8 @@ const ByteArray = imports.byteArray;
 
 
 
-function CinnamonVersionAdapter(path) {
-    this._init(path);
+function CinnamonVersionAdapter() {
+    this._init();
 };
 
 CinnamonVersionAdapter.prototype = {
