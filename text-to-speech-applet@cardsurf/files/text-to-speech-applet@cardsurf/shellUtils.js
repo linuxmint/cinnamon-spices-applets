@@ -306,7 +306,7 @@ BackgroundProcess.prototype = {
     },
 
     _read_standard_error_buffer: function(stream) {
-       this.standard_error_content = this.cinnamon_version_adapter.byte_array_to_string(toString());
+       this.standard_error_content = this.cinnamon_version_adapter.byte_array_to_string(stream.peek_buffer());
     },
 
     _close_streams: function(){
