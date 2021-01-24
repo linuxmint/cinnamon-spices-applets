@@ -2,8 +2,13 @@
 const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
 const Lang = imports.lang;
-const ByteArray = imports.byteArray;
 
+let Compatibility;
+if (typeof require !== 'undefined') {
+    Compatibility = require('./compatibility');
+} else {
+    Compatibility = AppletDirectory.compatibility;
+}
 
 const SignalType = {
     SIGHUP:    1,
@@ -51,6 +56,7 @@ ShellOutputProcess.prototype = {
         this.standard_input_file_descriptor = -1;
         this.standard_output_file_descriptor = -1;
         this.standard_error_file_descriptor = -1;
+        this.cinnamon_version_adapter = new Compatibility.CinnamonVersionAdapter();
     },
 
     spawn_sync_and_get_output: function() {
@@ -71,19 +77,8 @@ ShellOutputProcess.prototype = {
         this.standard_error_content = standard_error_content;
     },
 
-    byte_array_to_string: function(byte_array) {
-        // Check Cinnamon version
-        let cinn_ver = GLib.getenv('CINNAMON_VERSION');
-        cinn_ver = cinn_ver.substring(0, cinn_ver.lastIndexOf("."))
-        if(parseFloat(cinn_ver) <= 4.6) {
-            return byte_array.toString();
-        } else {
-            return ByteArray.toString(byte_array);
-        }
-    },
-
     get_standard_output_content: function() {
-        return this.byte_array_to_string(this.standard_output_content);
+        return this.cinnamon_version_adapter.byte_array_to_string(this.standard_output_content);
     },
 
     spawn_sync_and_get_error: function() {
@@ -93,7 +88,7 @@ ShellOutputProcess.prototype = {
     },
 
     get_standard_error_content: function() {
-        return this.byte_array_to_string(this.standard_error_content);
+        return this.cinnamon_version_adapter.byte_array_to_string(this.standard_error_content);
     },
 
     spawn_async: function() {

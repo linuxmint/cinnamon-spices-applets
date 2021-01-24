@@ -2,7 +2,13 @@
 const GLib = imports.gi.GLib;
 const Gio = imports.gi.Gio;
 const Gettext = imports.gettext;
-const ByteArray = imports.byteArray;
+
+let Compatibility;
+if (typeof require !== 'undefined') {
+    Compatibility = require('./compatibility');
+} else {
+    Compatibility = AppletDirectory.compatibility;
+}
 
 function _(str) {
     return Gettext.dgettext(uuid, str);
@@ -20,6 +26,8 @@ File.prototype = {
     _init: function(path) {
         this.newline = "\n";
         this.regex_newline = /(?:[\n\r]+)/;
+        this.cinnamon_version_adapter = new Compatibility.CinnamonVersionAdapter();
+
         this.path = path;
         this.file = Gio.file_new_for_path(this.path);
     },
@@ -28,20 +36,9 @@ File.prototype = {
         return GLib.file_test(this.path, GLib.FileTest.IS_REGULAR) && GLib.file_test(this.path, GLib.FileTest.EXISTS);
     },
 
-    byte_array_to_string: function(byte_array) {
-        // Check Cinnamon version
-        let cinn_ver = GLib.getenv('CINNAMON_VERSION');
-        cinn_ver = cinn_ver.substring(0, cinn_ver.lastIndexOf("."))
-        if(parseFloat(cinn_ver) <= 4.6) {
-            return byte_array.toString();
-        } else {
-            return ByteArray.toString(byte_array);
-        }
-    },
-
     read: function() {
         let array_chars = this.read_chars();
-        let string = this.byte_array_to_string(array_chars).trim();
+        let string = this.cinnamon_version_adapter.byte_array_to_string(array_chars).trim();
         let array_strings = string.length == 0 ? [] : string.split(this.regex_newline);
         return array_strings;
     },
