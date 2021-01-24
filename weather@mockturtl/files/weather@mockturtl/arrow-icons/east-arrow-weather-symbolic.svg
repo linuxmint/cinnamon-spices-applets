@@ -11,14 +11,14 @@
    id="Layer_1"
    x="0px"
    y="0px"
-   viewBox="0 0 385.756 385.756"
-   style="enable-background:new 0 0 385.756 385.756;"
+   viewBox="0 0 492.004 492.004"
+   style="enable-background:new 0 0 492.004 492.004;"
    xml:space="preserve"
-   sodipodi:docname="diagonal-arrow-8-weather-symbolic.svg"
+   sodipodi:docname="east-arrow-weather-symbolic.svg"
    inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07, custom)"><metadata
    id="metadata43"><rdf:RDF><cc:Work
        rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
-         rdf:resource="http://purl.org/dc/dcmitype/StillImage" /></cc:Work></rdf:RDF></metadata><defs
+         rdf:resource="http://purl.org/dc/dcmitype/StillImage" /><dc:title></dc:title></cc:Work></rdf:RDF></metadata><defs
    id="defs41" /><sodipodi:namedview
    pagecolor="#ffffff"
    bordercolor="#666666"
@@ -28,25 +28,23 @@
    guidetolerance="10"
    inkscape:pageopacity="0"
    inkscape:pageshadow="2"
-   inkscape:window-width="1080"
-   inkscape:window-height="1898"
+   inkscape:window-width="1920"
+   inkscape:window-height="1014"
    id="namedview39"
    showgrid="false"
-   inkscape:zoom="1.7264799"
-   inkscape:cx="192.87801"
-   inkscape:cy="192.87801"
+   inkscape:zoom="1.1871249"
+   inkscape:cx="209.19766"
+   inkscape:cy="280.7902"
    inkscape:window-x="0"
    inkscape:window-y="0"
    inkscape:window-maximized="1"
-   inkscape:current-layer="Layer_1"
-   inkscape:document-rotation="0" />
+   inkscape:current-layer="Layer_1" />
 <g
-   id="g6"
-   transform="matrix(0.72288763,0,0,0.72288763,50.63907,78.978193)">
+   id="g6">
 	<g
    id="g4">
 		<path
-   d="M 377.816,7.492 C 372.504,2.148 366.088,0 358.608,0 H 98.544 C 83.104,0 69.464,10.988 69.464,26.428 V 50.152 C 69.464,65.592 83.104,80 98.544,80 H 251.468 L 8.464,322.08 c -5.268,5.272 -8.172,11.84 -8.176,19.34 0,7.5 2.908,14.296 8.176,19.568 L 25.24,377.64 c 5.264,5.272 12.296,8.116 19.796,8.116 7.5,0 13.768,-2.928 19.036,-8.2 L 305.464,135.384 v 151.124 c 0,15.444 14.084,29.492 29.52,29.492 h 23.732 c 15.432,0 26.752,-14.048 26.752,-29.492 V 26.52 c -0.004,-7.472 -2.324,-13.732 -7.652,-19.028 z"
+   d="M484.14,226.886L306.46,49.202c-5.072-5.072-11.832-7.856-19.04-7.856c-7.216,0-13.972,2.788-19.044,7.856l-16.132,16.136    c-5.068,5.064-7.86,11.828-7.86,19.04c0,7.208,2.792,14.2,7.86,19.264L355.9,207.526H26.58C11.732,207.526,0,219.15,0,234.002    v22.812c0,14.852,11.732,27.648,26.58,27.648h330.496L252.248,388.926c-5.068,5.072-7.86,11.652-7.86,18.864    c0,7.204,2.792,13.88,7.86,18.948l16.132,16.084c5.072,5.072,11.828,7.836,19.044,7.836c7.208,0,13.968-2.8,19.04-7.872    l177.68-177.68c5.084-5.088,7.88-11.88,7.86-19.1C492.02,238.762,489.228,231.966,484.14,226.886z"
    id="path2" />
 	</g>
 </g>

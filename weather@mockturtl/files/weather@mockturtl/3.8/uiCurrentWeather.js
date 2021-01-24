@@ -88,7 +88,6 @@ class CurrentWeather {
         this.temperatureLabel = new Label(textOb);
         this.humidityLabel = new Label(textOb);
         this.pressureLabel = new Label(textOb);
-        this.windLabel = new Label(textOb);
         this.apiUniqueLabel = new Label({ text: '' });
         this.apiUniqueCaptionLabel = new Label({ text: '', style: textColorStyle });
         let rb_captions = new BoxLayout({ vertical: true, style_class: STYLE_DATABOX_CAPTIONS });
@@ -101,21 +100,28 @@ class CurrentWeather {
         rb_values.add_actor(this.temperatureLabel);
         rb_values.add_actor(this.humidityLabel);
         rb_values.add_actor(this.pressureLabel);
-        let windBox = new BoxLayout({ vertical: false });
-        this.windDirectionIcon = new Icon({
-            icon_type: config.IconType,
-            icon_name: consts_1.APPLET_ICON,
-            icon_size: this.app.config.CurrentFontSize,
-            style: "padding-right: 5px"
-        });
-        windBox.add(this.windDirectionIcon, { x_fill: true, y_fill: true, x_align: Align.MIDDLE, y_align: Align.MIDDLE, expand: true });
-        windBox.add(this.windLabel);
-        rb_values.add_actor(windBox);
+        rb_values.add_actor(this.BuildWind(config));
         rb_values.add_actor(this.apiUniqueLabel);
         let rightColumn = new BoxLayout({ style_class: STYLE_DATABOX });
         rightColumn.add_actor(rb_captions);
         rightColumn.add_actor(rb_values);
         return rightColumn;
+    }
+    BuildWind(config) {
+        let windBox = new BoxLayout({ vertical: false });
+        let iconPaddingBottom = Math.round(config.CurrentFontSize * 0.05);
+        let iconPaddingTop = Math.round(config.CurrentFontSize * 0.15);
+        let iconSize = Math.round(config.CurrentFontSize * 0.8);
+        this.windLabel = new Label({ text: consts_1.ELLIPSIS });
+        this.windDirectionIcon = new Icon({
+            icon_type: config.IconType,
+            icon_name: consts_1.APPLET_ICON,
+            icon_size: iconSize,
+            style: "padding-right: 5px; padding-top: " + iconPaddingTop + "px; padding-bottom: " + iconPaddingBottom + "px;"
+        });
+        windBox.add(this.windDirectionIcon, { x_fill: true, y_fill: true, x_align: Align.MIDDLE, y_align: Align.MIDDLE, expand: true });
+        windBox.add(this.windLabel);
+        return windBox;
     }
     BuildLocationSection() {
         this.locationButton = new weatherbutton_1.WeatherButton({ reactive: true, label: utils_1._('Refresh'), });

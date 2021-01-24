@@ -186,18 +186,14 @@ export type BuiltinIcons =
 	"weather-severe-alert";
 	
 export type ArrowIcons =
-	"diagonal-arrow-3-weather-symbolic" |
-	"diagonal-arrow-5-weather-symbolic" |
-	"diagonal-arrow-8-weather-symbolic" |
-	"diagonal-arrow-weather-symbolic" |
-	"down-arrow-weather-symbolic" |
-	"down-chevron-weather-symbolic" |
-	"left-arrow-weather-symbolic" |
-	"left-chevron-weather-symbolic" |
-	"right-arrow-weather-symbolic" |
-	"right-chevron-weather-symbolic" |
-	"up-arrow-weather-symbolic" |
-	"up-chevron-weather-symbolic";
+    "east-arrow-weather-symbolic" |
+    "north-arrow-weather-symbolic" |
+    "north-east-arrow-weather-symbolic" |
+    "north-west-arrow-weather-symbolic" |
+    "south-arrow-weather-symbolic" |
+    "south-east-arrow-weather-symbolic" |
+    "south-west-arrow-weather-symbolic" |
+    "west-arrow-weather-symbolic";
 
 /**
  * Available icons in icons folder

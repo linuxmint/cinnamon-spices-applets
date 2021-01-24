@@ -4,8 +4,8 @@ import { ELLIPSIS, APPLET_ICON, SIGNAL_CLICKED, BLANK } from "./consts";
 import { LocationStore } from "./locationstore";
 import { Log } from "./logger";
 import { WeatherApplet } from "./main";
-import { WeatherData, APIUniqueField } from "./types";
-import { _, GetHoursMinutes, TempToUserConfig, UnitToUnicode, CompassDirection, MPStoUserUnits, PressToUserUnits, GenerateLocationText } from "./utils";
+import { WeatherData, APIUniqueField, ArrowIcons } from "./types";
+import { _, GetHoursMinutes, TempToUserConfig, UnitToUnicode, CompassDirection, MPStoUserUnits, PressToUserUnits, GenerateLocationText, delay } from "./utils";
 import { WeatherButton } from "./weatherbutton";
 
 const { Bin, BoxLayout, IconType, Label, Icon, Align } = imports.gi.St;
@@ -137,7 +137,6 @@ export class CurrentWeather {
         this.temperatureLabel = new Label(textOb)
         this.humidityLabel = new Label(textOb)
         this.pressureLabel = new Label(textOb)
-		this.windLabel = new Label(textOb);
 
         this.apiUniqueLabel = new Label({ text: '' })
         // APi Unique Caption
@@ -153,17 +152,7 @@ export class CurrentWeather {
         rb_values.add_actor(this.temperatureLabel);
         rb_values.add_actor(this.humidityLabel);
         rb_values.add_actor(this.pressureLabel);
-		let windBox = new BoxLayout({vertical: false});
-
-		this.windDirectionIcon = new Icon({
-			icon_type: config.IconType,
-			icon_name: APPLET_ICON,
-			icon_size: this.app.config.CurrentFontSize,
-			style: "padding-right: 5px"
-		});
-		windBox.add(this.windDirectionIcon, { x_fill: true, y_fill: true, x_align: Align.MIDDLE, y_align: Align.MIDDLE, expand: true });
-		windBox.add(this.windLabel);
-		rb_values.add_actor(windBox);
+		rb_values.add_actor(this.BuildWind(config));
         //rb_values.add_actor(this.windLabel);
         rb_values.add_actor(this.apiUniqueLabel);
 
@@ -171,6 +160,28 @@ export class CurrentWeather {
         rightColumn.add_actor(rb_captions);
 		rightColumn.add_actor(rb_values);
 		return rightColumn;
+	}
+
+	BuildWind(config: Config) {
+		let windBox = new BoxLayout({vertical: false});
+
+		// We try to make sure that icon doesn't take up more vertical space than text
+		// Also we position it close to the bottom to be perceived vertically centered
+		let iconPaddingBottom = Math.round(config.CurrentFontSize * 0.05);
+		let iconPaddingTop = Math.round(config.CurrentFontSize * 0.15);
+		let iconSize = Math.round(config.CurrentFontSize * 0.8);
+
+		this.windLabel = new Label({ text: ELLIPSIS });
+		this.windDirectionIcon = new Icon({
+			icon_type: config.IconType,
+			icon_name: APPLET_ICON,
+			icon_size: iconSize,
+			style: "padding-right: 5px; padding-top: " + iconPaddingTop + "px; padding-bottom: " + iconPaddingBottom + "px;"
+		});
+		windBox.add(this.windDirectionIcon, { x_fill: true, y_fill: true, x_align: Align.MIDDLE, y_align: Align.MIDDLE, expand: true });
+		windBox.add(this.windLabel);
+
+		return windBox;
 	}
 
 	BuildLocationSection() {
@@ -330,7 +341,7 @@ export class CurrentWeather {
 
     private async SetWind(windSpeed: number, windDegree: number) {
 		let wind_direction = CompassDirection(windDegree);
-		/*let arrows: ArrowIcons[] = ["diagonal-arrow-3-weather-symbolic", "diagonal-arrow-5-weather-symbolic", "diagonal-arrow-8-weather-symbolic", "diagonal-arrow-weather-symbolic", "down-arrow-weather-symbolic", "left-arrow-weather-symbolic", "right-arrow-weather-symbolic", "up-arrow-weather-symbolic"]
+		/*let arrows: ArrowIcons[] = ["north-arrow-weather-symbolic", "north-west-arrow-weather-symbolic", "west-arrow-weather-symbolic", "south-west-arrow-weather-symbolic", "south-arrow-weather-symbolic", "south-east-arrow-weather-symbolic", "east-arrow-weather-symbolic", "north-east-arrow-weather-symbolic"]
 		for (let index = 0; index < arrows.length; index++) {
 			const element = arrows[index];
 			this.windDirectionIcon.icon_name = element;
