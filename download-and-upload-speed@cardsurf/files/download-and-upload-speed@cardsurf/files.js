@@ -53,7 +53,7 @@ File.prototype = {
 
     overwrite: function(array_strings) {
         let string = array_strings.join(this.newline);
-        return GLib.file_set_contents(this.path, string, string.length, null);
+        return GLib.file_set_contents(this.path, string);
     },
 
     create: function() {
@@ -140,7 +140,7 @@ Directory.prototype = {
     },
 
     _create: function() {
-        return this.directory.make_directory(null, null);
+        return this.directory.make_directory(null);
     },
 
     removeIfEmpty: function() {
