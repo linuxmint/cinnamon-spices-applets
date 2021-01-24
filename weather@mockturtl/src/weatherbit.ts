@@ -24,6 +24,7 @@ export class Weatherbit implements WeatherProvider {
     public readonly maxForecastSupport = 16;
     public readonly website = "https://www.weatherbit.io/";
     public readonly maxHourlyForecastSupport = 48;
+    public readonly needsApiKey = true;
 
     private supportedLanguages = [
         'ar', 'az', 'be', 'bg', 'bs', 'ca', 'cz', 'da', 'de', 'el', 'en',
@@ -249,19 +250,7 @@ export class Weatherbit implements WeatherProvider {
     }
 
     private ConstructQuery(query: string, loc: LocationData): string {
-        let key = this.app.config._apiKey.replace(" ", "");
-        if (this.app.config.NoApiKey()) {
-            Log.Instance.Error("DarkSky: No API Key given");
-            this.app.ShowError({
-                type: "hard",
-                userError: true,
-                "detail": "no key",
-                message: _("Please enter API key in settings,\nor get one first on https://www.weatherbit.io/account/create")
-            });
-            return "";
-		}
-
-        query = query + "key=" + key + "&lat=" + loc.lat + "&lon=" + loc.lon + "&units=S"
+        query = query + "key=" + this.app.config.ApiKey + "&lat=" + loc.lat + "&lon=" + loc.lon + "&units=S"
         let lang = this.ConvertToAPILocale(this.app.config.currentLocale);
         if (IsLangSupported(lang, this.supportedLanguages) && this.app.config._translateCondition) {
             query = query + "&lang=" + lang;

@@ -22,6 +22,7 @@ import { HttpLib, HttpError, Method, HTTPParams } from "./httpLib";
 import { Log } from "./logger";
 import { APPLET_ICON, REFRESH_ICON } from "./consts";
 import { NotificationService } from "./notification_service";
+import { VisualCrossing } from "./visualcrossing";
 
 const { TextIconApplet, AllowedLayout, MenuItem } = imports.ui.applet;
 const { spawnCommandLine } = imports.misc.util;
@@ -112,6 +113,17 @@ export class WeatherApplet extends TextIconApplet {
 			}
 
 			this.EnsureProvider();
+			// No key
+			if (this.provider.needsApiKey && this.config.NoApiKey()) {
+				Log.Instance.Error("No API Key given");
+				this.ShowError({
+					type: "hard",
+					userError: true,
+					detail: "no key",
+					message: _("This provider requires an API key to operate")
+				});
+				return null;
+			}
 			let weatherInfo = await this.provider.GetWeather(location);
 			if (weatherInfo == null) {
 				this.Unlock();
@@ -133,7 +145,7 @@ export class WeatherApplet extends TextIconApplet {
 			return RefreshState.Success;
         }
         catch (e) {
-            Log.Instance.Error("Generic Error while refreshing Weather info: " + e);
+            Log.Instance.Error("Generic Error while refreshing Weather info: " + e + ", ");
 			this.ShowError({ type: "hard", detail: "unknown", message: _("Unexpected Error While Refreshing Weather, please see log in Looking Glass") });
 			this.Unlock();
             return RefreshState.Failure;
@@ -143,7 +155,7 @@ export class WeatherApplet extends TextIconApplet {
 	// ---------------------------------------------------------------------------
 	// Panel Set helpers helpers
 
-	/** Displayes weather info in applet's panel */
+	/** Displays weather info in applet's panel */
 	private DisplayWeather(weather: WeatherData): boolean {
 		let location = GenerateLocationText(weather, this.config);
 		this.SetAppletTooltip(location + " - " + _("As of") + " " + AwareDateString(weather.date, this.config.currentLocale, this.config._show24Hours));
@@ -400,7 +412,10 @@ export class WeatherApplet extends TextIconApplet {
                 break;
             case "US Weather":
                 if (currentName != "US Weather" || force) this.provider = new USWeather(this);
-                break;
+				break;
+			case "Visual Crossing":
+				if (currentName != "Visual Crossing" || force) this.provider = new VisualCrossing(this);
+				break;
             default:
                 return null;
         }

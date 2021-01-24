@@ -17,6 +17,7 @@ const httpLib_1 = require("./httpLib");
 const logger_1 = require("./logger");
 const consts_1 = require("./consts");
 const notification_service_1 = require("./notification_service");
+const visualcrossing_1 = require("./visualcrossing");
 const { TextIconApplet, AllowedLayout, MenuItem } = imports.ui.applet;
 const { spawnCommandLine } = imports.misc.util;
 const { IconType, Side } = imports.gi.St;
@@ -94,6 +95,16 @@ class WeatherApplet extends TextIconApplet {
                 }
             }
             this.EnsureProvider();
+            if (this.provider.needsApiKey && this.config.NoApiKey()) {
+                logger_1.Log.Instance.Error("No API Key given");
+                this.ShowError({
+                    type: "hard",
+                    userError: true,
+                    detail: "no key",
+                    message: utils_1._("This provider requires an API key to operate")
+                });
+                return null;
+            }
             let weatherInfo = await this.provider.GetWeather(location);
             if (weatherInfo == null) {
                 this.Unlock();
@@ -113,7 +124,7 @@ class WeatherApplet extends TextIconApplet {
             return "success";
         }
         catch (e) {
-            logger_1.Log.Instance.Error("Generic Error while refreshing Weather info: " + e);
+            logger_1.Log.Instance.Error("Generic Error while refreshing Weather info: " + e + ", ");
             this.ShowError({ type: "hard", detail: "unknown", message: utils_1._("Unexpected Error While Refreshing Weather, please see log in Looking Glass") });
             this.Unlock();
             return "fail";
@@ -305,6 +316,10 @@ class WeatherApplet extends TextIconApplet {
             case "US Weather":
                 if (currentName != "US Weather" || force)
                     this.provider = new us_weather_1.USWeather(this);
+                break;
+            case "Visual Crossing":
+                if (currentName != "Visual Crossing" || force)
+                    this.provider = new visualcrossing_1.VisualCrossing(this);
                 break;
             default:
                 return null;

@@ -11,6 +11,7 @@ class USWeather {
         this.maxForecastSupport = 7;
         this.website = "https://www.weather.gov/";
         this.maxHourlyForecastSupport = 156;
+        this.needsApiKey = false;
         this.sitesUrl = "https://api.weather.gov/points/";
         this.grid = null;
         this.MAX_STATION_DIST = 50000;

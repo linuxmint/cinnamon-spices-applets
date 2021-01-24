@@ -87,6 +87,12 @@ class Config {
     get CurrentLocation() {
         return this.currentLocation;
     }
+    get ApiKey() {
+        return this._apiKey.replace(" ", "");
+    }
+    get Language() {
+        return this.GetLanguage(this.currentLocale);
+    }
     get TemperatureUnit() {
         if (this._temperatureUnit == "automatic")
             return this.GetLocaleTemperateUnit(this.countryCode);
@@ -123,10 +129,9 @@ class Config {
         return previousLoc;
     }
     NoApiKey() {
-        if (this._apiKey == undefined || this._apiKey == "") {
-            return true;
-        }
-        return false;
+        var _a;
+        let key = (_a = this._apiKey) === null || _a === void 0 ? void 0 : _a.replace(" ", "");
+        return (!key || key == "");
     }
     ;
     async EnsureLocation() {
@@ -256,6 +261,12 @@ class Config {
         if (split.length < 2)
             return null;
         return split[1];
+    }
+    GetLanguage(locale) {
+        let split = locale.split("-");
+        if (split.length < 1)
+            return null;
+        return split[0];
     }
     GetCurrentFontSize() {
         let nameString = this.InterfaceSettings.get_string("font-name");

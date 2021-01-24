@@ -11,6 +11,7 @@ class OpenWeatherMap {
         this.maxForecastSupport = 7;
         this.website = "https://openweathermap.org/";
         this.maxHourlyForecastSupport = 48;
+        this.needsApiKey = false;
         this.supportedLanguages = ["af", "ar", "az", "bg", "ca", "cz", "da", "de", "el", "en", "eu", "fa", "fi",
             "fr", "gl", "he", "hi", "hr", "hu", "id", "it", "ja", "kr", "la", "lt", "mk", "no", "nl", "pl",
             "pt", "pt_br", "ro", "ru", "se", "sk", "sl", "sp", "es", "sr", "th", "tr", "ua", "uk", "vi", "zh_cn", "zh_tw", "zu"

@@ -25,6 +25,7 @@ export class Climacell implements WeatherProvider {
     public readonly maxForecastSupport = 16;
     public readonly website = "https://www.climacell.co/";
     public readonly maxHourlyForecastSupport = 96;
+    public readonly needsApiKey = true;
 
     private baseUrl = "https://api.climacell.co/v3/weather/";
     private callData: CallDict = {
@@ -166,20 +167,7 @@ export class Climacell implements WeatherProvider {
     }
 
     private ConstructQuery(callType: CallType, loc: LocationData): string {
-        let query;
-        let key = this.app.config._apiKey.replace(" ", "");
-        if (this.app.config.NoApiKey()) {
-            Log.Instance.Error("Climacell: No API Key given");
-            this.app.ShowError({
-                type: "hard",
-                userError: true,
-                "detail": "no key",
-                message: _("Please enter API key in settings,\nor get one first on " + "https://developer.climacell.co/sign-up")
-            });
-            return null;
-        }
-        query = this.baseUrl + this.callData[callType].url + "?apikey=" + key + "&lat=" + loc.lat + "&lon=" + loc.lon + "&unit_system=" + this.unit + "&fields=" + this.callData[callType].required_fields.join();
-        return query;
+        return this.baseUrl + this.callData[callType].url + "?apikey=" + this.app.config.ApiKey + "&lat=" + loc.lat + "&lon=" + loc.lon + "&unit_system=" + this.unit + "&fields=" + this.callData[callType].required_fields.join();
     };
 
     /**

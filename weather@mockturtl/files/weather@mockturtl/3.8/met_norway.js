@@ -11,6 +11,7 @@ class MetNorway {
         this.maxForecastSupport = 10;
         this.website = "https://www.met.no/en";
         this.maxHourlyForecastSupport = 48;
+        this.needsApiKey = false;
         this.baseUrl = "https://api.met.no/weatherapi/locationforecast/2.0/complete?";
         this.app = app;
         this.sunCalc = new sunCalc_1.SunCalc();

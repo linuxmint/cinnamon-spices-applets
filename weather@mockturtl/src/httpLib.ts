@@ -98,6 +98,8 @@ export class HttpLib {
 		}
 
 		Log.Instance.Debug2("API full response: " + message?.response_body?.data?.toString());
+		if (error != null) 
+			Log.Instance.Error("Error calling URL: " + error.reason_phrase + ", " + error?.response?.response_body?.data);
         return {
 			Success: (error == null),
 			Data: message?.response_body?.data,
@@ -114,7 +116,6 @@ export class HttpLib {
 	public async Send(url: string, params?: HTTPParams, method: Method = "GET"): Promise<imports.gi.Soup.Message> {
 		// Add params to url
 		if (params != null) {
-			url += "?"
 			let items = Object.keys(params);
 			for (let index = 0; index < items.length; index++) {
 				const item = items[index];

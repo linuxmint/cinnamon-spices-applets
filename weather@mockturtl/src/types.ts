@@ -4,12 +4,14 @@ import { Services } from "./config";
  * A WeatherProvider must implement this interface.
  */
 export interface WeatherProvider {
+    readonly needsApiKey: boolean;
+    readonly prettyName: string;
+    readonly name: Services;
+    readonly maxForecastSupport: number;
+    readonly maxHourlyForecastSupport: number;
+    readonly website: string;
+
     GetWeather(loc: LocationData): Promise<WeatherData>;
-    prettyName: string;
-    name: Services;
-    maxForecastSupport: number;
-    maxHourlyForecastSupport: number;
-    website: string;
 }
 
 export const enum RefreshState {
@@ -105,12 +107,12 @@ export interface Precipitation {
 
 type LocationSource = "ip-api" | "address-search" | "manual";
 export interface LocationData {
-    lat: number,
-    lon: number,
-    city: string,
-    country: string,
-    timeZone: string,
-    mobile: boolean,
+    lat: number;
+    lon: number;
+    city: string;
+    country: string;
+    timeZone: string;
+    mobile: boolean;
     address_string?: string;
     entryText: string;
     locationSource: LocationSource;

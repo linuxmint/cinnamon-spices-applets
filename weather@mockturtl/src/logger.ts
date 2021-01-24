@@ -42,7 +42,7 @@ export class Log {
     }
 
     Error(error: string): void {
-        global.logError("[" + UUID + "#" + this.ID + "]: " + error.toString(), '\n', "On Line:", this.GetErrorLine());
+        global.logError("[" + UUID + "#" + this.ID + "]: " + error.toString() + "\n" + "On Line: " + this.GetErrorLine());
     };
 
     Debug(message: string): void {

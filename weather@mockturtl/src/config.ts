@@ -22,7 +22,7 @@ export type WeatherWindSpeedUnits = 'automatic' | 'kph' | 'mph' | 'm/s' | 'Knots
 export type WeatherPressureUnits = 'hPa' | 'mm Hg' | 'in Hg' | 'Pa' | 'psi' | 'atm' | 'at';
 /** Change settings-scheme if you change this! */
 export type DistanceUnits = 'automatic' | 'metric' | 'imperial';
-export type Services = "OpenWeatherMap" | "DarkSky" | "MetNorway" | "Weatherbit" | "Yahoo" | "Climacell" | "Met Office UK" | "US Weather";
+export type Services = "OpenWeatherMap" | "DarkSky" | "MetNorway" | "Weatherbit" | "Yahoo" | "Climacell" | "Met Office UK" | "US Weather" | "Visual Crossing";
 
 /**
  * Keys matching the ones in settings-schema.json
@@ -79,6 +79,7 @@ export class Config {
 	private readonly _temperatureUnit: WeatherUnits;
 	private readonly _windSpeedUnit: WeatherWindSpeedUnits;
 	private readonly _distanceUnit: DistanceUnits;
+	private readonly _apiKey: string;
 	// No need to access this from the outside
 	private readonly keybinding: any;
 
@@ -89,7 +90,6 @@ export class Config {
     public readonly _translateCondition: boolean;
     public readonly _pressureUnit: WeatherPressureUnits;
     public readonly _show24Hours: boolean;
-    public readonly _apiKey: string;
     public readonly _forecastDays: number;
     public readonly _forecastHours: number;
     public readonly _forecastColumns: number;
@@ -172,6 +172,14 @@ export class Config {
 	public get CurrentLocation() {
 		return this.currentLocation;
 	}
+
+	public get ApiKey() {
+		return this._apiKey.replace(" ", "");
+	}
+
+	public get Language() {
+		return this.GetLanguage(this.currentLocale);
+	}
 	
 	/**
 	 * @returns Units, automatic is already resolved here
@@ -225,10 +233,8 @@ export class Config {
 	}
 
     public NoApiKey(): boolean {
-        if (this._apiKey == undefined || this._apiKey == "") {
-            return true;
-        }
-        return false;
+		let key = this._apiKey?.replace(" ", "");
+        return (!key || key == "");
     };
 
 	/** 
@@ -393,6 +399,13 @@ export class Config {
 		if (split.length < 2) return null;
 	
 		return split[1];
+	}
+
+	private GetLanguage(locale: string) {
+		let split = locale.split("-");
+		if (split.length < 1) return null;
+	
+		return split[0];
 	}
 
 	private GetCurrentFontSize() {

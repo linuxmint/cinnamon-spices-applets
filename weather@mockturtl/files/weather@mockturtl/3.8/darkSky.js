@@ -11,6 +11,7 @@ class DarkSky {
         this.maxForecastSupport = 8;
         this.website = "https://darksky.net/poweredby/";
         this.maxHourlyForecastSupport = 168;
+        this.needsApiKey = true;
         this.descriptionLineLength = 25;
         this.supportedLanguages = [
             'ar', 'az', 'be', 'bg', 'bs', 'ca', 'cs', 'da', 'de', 'el', 'en', 'es',
@@ -129,19 +130,7 @@ class DarkSky {
     }
     ConstructQuery(loc) {
         this.SetQueryUnit();
-        let query;
-        let key = this.app.config._apiKey.replace(" ", "");
-        if (this.app.config.NoApiKey()) {
-            logger_1.Log.Instance.Error("DarkSky: No API Key given");
-            this.app.ShowError({
-                type: "hard",
-                userError: true,
-                "detail": "no key",
-                message: utils_1._("Please enter API key in settings,\nor get one first on https://darksky.net/dev/register")
-            });
-            return "";
-        }
-        query = this.query + key + "/" + loc.lat.toString() + "," + loc.lon.toString() + "?exclude=minutely,flags" + "&units=" + this.unit;
+        let query = this.query + this.app.config.ApiKey + "/" + loc.lat.toString() + "," + loc.lon.toString() + "?exclude=minutely,flags" + "&units=" + this.unit;
         let locale = this.ConvertToAPILocale(this.app.config.currentLocale);
         if (utils_1.IsLangSupported(locale, this.supportedLanguages) && this.app.config._translateCondition) {
             query = query + "&lang=" + locale;

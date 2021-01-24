@@ -23,6 +23,7 @@ export class USWeather implements WeatherProvider {
     public readonly maxForecastSupport = 7;
     public readonly website = "https://www.weather.gov/";
     public readonly maxHourlyForecastSupport = 156;
+    public readonly needsApiKey = false;
 
     private sunCalc: any;
 

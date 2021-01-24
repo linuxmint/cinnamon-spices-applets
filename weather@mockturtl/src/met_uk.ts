@@ -23,6 +23,7 @@ export class MetUk implements WeatherProvider {
     public readonly maxForecastSupport = 5;
     public readonly website = "https://www.metoffice.gov.uk/";
     public readonly maxHourlyForecastSupport = 36;
+    public readonly needsApiKey = false;
 
     private sunCalc: any;
 

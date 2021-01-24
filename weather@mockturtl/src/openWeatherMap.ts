@@ -23,6 +23,7 @@ export class OpenWeatherMap implements WeatherProvider {
     public readonly maxForecastSupport = 7;
     public readonly website = "https://openweathermap.org/";
     public readonly maxHourlyForecastSupport = 48;
+    public readonly needsApiKey = false;
 
     private supportedLanguages = ["af", "ar", "az", "bg", "ca", "cz", "da", "de", "el", "en", "eu", "fa", "fi",
         "fr", "gl", "he", "hi", "hr", "hu", "id", "it", "ja", "kr", "la", "lt", "mk", "no", "nl", "pl",

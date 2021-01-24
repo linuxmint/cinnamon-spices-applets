@@ -12,6 +12,7 @@ class Yahoo {
         this.maxForecastSupport = 10;
         this.website = "https://www.yahoo.com/news/weather/";
         this.maxHourlyForecastSupport = 0;
+        this.needsApiKey = false;
         this.app = _app;
     }
     async GetWeather(loc) {

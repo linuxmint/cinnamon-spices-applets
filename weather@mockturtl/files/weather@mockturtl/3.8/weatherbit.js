@@ -11,6 +11,7 @@ class Weatherbit {
         this.maxForecastSupport = 16;
         this.website = "https://www.weatherbit.io/";
         this.maxHourlyForecastSupport = 48;
+        this.needsApiKey = true;
         this.supportedLanguages = [
             'ar', 'az', 'be', 'bg', 'bs', 'ca', 'cz', 'da', 'de', 'el', 'en',
             'et', 'fi', 'fr', 'hr', 'hu', 'id', 'is', 'it',
@@ -197,18 +198,7 @@ class Weatherbit {
         return lang;
     }
     ConstructQuery(query, loc) {
-        let key = this.app.config._apiKey.replace(" ", "");
-        if (this.app.config.NoApiKey()) {
-            logger_1.Log.Instance.Error("DarkSky: No API Key given");
-            this.app.ShowError({
-                type: "hard",
-                userError: true,
-                "detail": "no key",
-                message: utils_1._("Please enter API key in settings,\nor get one first on https://www.weatherbit.io/account/create")
-            });
-            return "";
-        }
-        query = query + "key=" + key + "&lat=" + loc.lat + "&lon=" + loc.lon + "&units=S";
+        query = query + "key=" + this.app.config.ApiKey + "&lat=" + loc.lat + "&lon=" + loc.lon + "&units=S";
         let lang = this.ConvertToAPILocale(this.app.config.currentLocale);
         if (utils_1.IsLangSupported(lang, this.supportedLanguages) && this.app.config._translateCondition) {
             query = query + "&lang=" + lang;

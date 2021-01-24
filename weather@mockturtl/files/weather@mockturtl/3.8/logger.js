@@ -36,7 +36,7 @@ class Log {
         }
     }
     Error(error) {
-        global.logError("[" + consts_1.UUID + "#" + this.ID + "]: " + error.toString(), '\n', "On Line:", this.GetErrorLine());
+        global.logError("[" + consts_1.UUID + "#" + this.ID + "]: " + error.toString() + "\n" + "On Line: " + this.GetErrorLine());
     }
     ;
     Debug(message) {

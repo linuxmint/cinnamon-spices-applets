@@ -11,6 +11,7 @@ class MetUk {
         this.maxForecastSupport = 5;
         this.website = "https://www.metoffice.gov.uk/";
         this.maxHourlyForecastSupport = 36;
+        this.needsApiKey = false;
         this.baseUrl = "http://datapoint.metoffice.gov.uk/public/data/val/";
         this.forecastPrefix = "wxfcs/all/json/";
         this.threeHourlyUrl = "?res=3hourly";

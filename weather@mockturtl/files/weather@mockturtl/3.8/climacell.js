@@ -11,6 +11,7 @@ class Climacell {
         this.maxForecastSupport = 16;
         this.website = "https://www.climacell.co/";
         this.maxHourlyForecastSupport = 96;
+        this.needsApiKey = true;
         this.baseUrl = "https://api.climacell.co/v3/weather/";
         this.callData = {
             current: {
@@ -129,20 +130,7 @@ class Climacell {
         return results;
     }
     ConstructQuery(callType, loc) {
-        let query;
-        let key = this.app.config._apiKey.replace(" ", "");
-        if (this.app.config.NoApiKey()) {
-            logger_1.Log.Instance.Error("Climacell: No API Key given");
-            this.app.ShowError({
-                type: "hard",
-                userError: true,
-                "detail": "no key",
-                message: utils_1._("Please enter API key in settings,\nor get one first on " + "https://developer.climacell.co/sign-up")
-            });
-            return null;
-        }
-        query = this.baseUrl + this.callData[callType].url + "?apikey=" + key + "&lat=" + loc.lat + "&lon=" + loc.lon + "&unit_system=" + this.unit + "&fields=" + this.callData[callType].required_fields.join();
-        return query;
+        return this.baseUrl + this.callData[callType].url + "?apikey=" + this.app.config.ApiKey + "&lat=" + loc.lat + "&lon=" + loc.lon + "&unit_system=" + this.unit + "&fields=" + this.callData[callType].required_fields.join();
     }
     ;
     HandleError(message) {

@@ -38,7 +38,7 @@ class HttpLib {
         }
     }
     async LoadAsync(url, params, method = "GET") {
-        var _a, _b, _c;
+        var _a, _b, _c, _d, _e;
         let message = await this.Send(url, params, method);
         let error = null;
         if (!message) {
@@ -74,15 +74,16 @@ class HttpLib {
             };
         }
         logger_1.Log.Instance.Debug2("API full response: " + ((_b = (_a = message === null || message === void 0 ? void 0 : message.response_body) === null || _a === void 0 ? void 0 : _a.data) === null || _b === void 0 ? void 0 : _b.toString()));
+        if (error != null)
+            logger_1.Log.Instance.Error("Error calling URL: " + error.reason_phrase + ", " + ((_d = (_c = error === null || error === void 0 ? void 0 : error.response) === null || _c === void 0 ? void 0 : _c.response_body) === null || _d === void 0 ? void 0 : _d.data));
         return {
             Success: (error == null),
-            Data: (_c = message === null || message === void 0 ? void 0 : message.response_body) === null || _c === void 0 ? void 0 : _c.data,
+            Data: (_e = message === null || message === void 0 ? void 0 : message.response_body) === null || _e === void 0 ? void 0 : _e.data,
             ErrorData: error
         };
     }
     async Send(url, params, method = "GET") {
         if (params != null) {
-            url += "?";
             let items = Object.keys(params);
             for (let index = 0; index < items.length; index++) {
                 const item = items[index];

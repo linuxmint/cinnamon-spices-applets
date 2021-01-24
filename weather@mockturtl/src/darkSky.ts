@@ -25,6 +25,7 @@ export class DarkSky implements WeatherProvider {
     public readonly maxForecastSupport = 8;
     public readonly website = "https://darksky.net/poweredby/";
     public readonly maxHourlyForecastSupport = 168;
+    public readonly needsApiKey = true;
 
     private descriptionLineLength = 25;
     private supportedLanguages = [
@@ -165,19 +166,7 @@ export class DarkSky implements WeatherProvider {
 
     private ConstructQuery(loc: LocationData): string {
         this.SetQueryUnit();
-        let query;
-        let key = this.app.config._apiKey.replace(" ", "");
-        if (this.app.config.NoApiKey()) {
-            Log.Instance.Error("DarkSky: No API Key given");
-            this.app.ShowError({
-                type: "hard",
-                userError: true,
-                "detail": "no key",
-                message: _("Please enter API key in settings,\nor get one first on https://darksky.net/dev/register")
-            });
-            return "";
-        }
-        query = this.query + key + "/" + loc.lat.toString() + "," + loc.lon.toString() + "?exclude=minutely,flags" + "&units=" + this.unit;
+        let query = this.query + this.app.config.ApiKey + "/" + loc.lat.toString() + "," + loc.lon.toString() + "?exclude=minutely,flags" + "&units=" + this.unit;
         let locale = this.ConvertToAPILocale(this.app.config.currentLocale);
         if (IsLangSupported(locale, this.supportedLanguages) && this.app.config._translateCondition) {
             query = query + "&lang=" + locale;

@@ -10,6 +10,7 @@ export class MetNorway implements WeatherProvider {
     public readonly maxForecastSupport = 10;
     public readonly website = "https://www.met.no/en";
     public readonly maxHourlyForecastSupport = 48;
+    public readonly needsApiKey = false;
 
     private app: WeatherApplet
     private baseUrl = "https://api.met.no/weatherapi/locationforecast/2.0/complete?"
