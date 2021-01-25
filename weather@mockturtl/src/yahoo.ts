@@ -10,6 +10,7 @@ import { SpawnProcess } from "./commandRunner";
 import { Log } from "./logger";
 import { WeatherApplet } from "./main";
 import { NotificationService } from "./notification_service";
+import { SunTimes } from "./sunCalc";
 import { WeatherProvider, WeatherData, ForecastData, BuiltinIcons, CustomIcons, LocationData } from "./types";
 import { _, WeatherIconSafely, CelsiusToKelvin, KPHtoMPS } from "./utils";
 
@@ -410,11 +411,6 @@ export class Yahoo implements WeatherProvider {
         return today;
     }
 };
-
-interface SunTimes {
-    sunrise: Date;
-    sunset: Date
-}
 
 interface BridgeError {
     error: {

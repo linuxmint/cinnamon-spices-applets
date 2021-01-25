@@ -475,7 +475,3 @@ export function setInterval(func: Function, ms: number) {
 
     return id;
 };
-
-export function clearInterval(id: number) {
-    source_remove(id);
-};

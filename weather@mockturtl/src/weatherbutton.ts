@@ -6,7 +6,7 @@ export class WeatherButton {
     public actor: imports.gi.St.Button;
     private signals = new SignalManager();
     private disabled = false;
-    constructor(options: any) {
+    constructor(options: imports.gi.St.ButtonOptions) {
         this.actor = new Button(options);
         this.actor.add_style_class_name("popup-menu-item");
 
