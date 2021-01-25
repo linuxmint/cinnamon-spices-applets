@@ -1,32 +1,54 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.OpenUrl = exports.SpawnProcess = void 0;
+exports.OpenUrl = exports.SpawnProcess = exports.SpawnProcessJson = void 0;
 const logger_1 = require("./logger");
 const { spawnCommandLineAsyncIO } = imports.misc.util;
+async function SpawnProcessJson(command) {
+    let response = await SpawnProcess(command);
+    if (!response.Success)
+        return response;
+    try {
+        response.Data = JSON.parse(response.Data);
+    }
+    catch (e) {
+        logger_1.Log.Instance.Error("Error: Command response is not JSON. The response: " + response.Data);
+        response.Success = false;
+        response.ErrorData = {
+            Code: -1,
+            Message: null,
+            Type: "jsonParse",
+        };
+    }
+    finally {
+        return response;
+    }
+}
+exports.SpawnProcessJson = SpawnProcessJson;
 async function SpawnProcess(command) {
     let cmd = "";
     for (let index = 0; index < command.length; index++) {
         const element = command[index];
         cmd += "'" + element + "' ";
     }
-    try {
-        let json = await new Promise((resolve, reject) => {
-            spawnCommandLineAsyncIO(cmd, (aStdout, err, exitCode) => {
-                if (exitCode != 0) {
-                    reject(err);
-                }
-                else {
-                    resolve(aStdout);
-                }
-            });
+    let response = await new Promise((resolve, reject) => {
+        spawnCommandLineAsyncIO(cmd, (aStdout, err, exitCode) => {
+            let result = {
+                Success: exitCode == 0,
+                ErrorData: null,
+                Data: aStdout !== null && aStdout !== void 0 ? aStdout : null
+            };
+            if (exitCode != 0) {
+                result.ErrorData = {
+                    Code: exitCode,
+                    Message: err !== null && err !== void 0 ? err : null,
+                    Type: "unknown"
+                };
+            }
+            resolve(result);
+            return result;
         });
-        return json;
-    }
-    catch (e) {
-        logger_1.Log.Instance.Error("Error calling command " + cmd + ", error: ");
-        global.log(e);
-        return null;
-    }
+    });
+    return response;
 }
 exports.SpawnProcess = SpawnProcess;
 function OpenUrl(element) {

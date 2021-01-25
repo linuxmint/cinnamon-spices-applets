@@ -122,7 +122,7 @@ export class USWeather implements WeatherProvider {
             element.dist = GetDistance(element.geometry.coordinates[1], element.geometry.coordinates[0], loc.lat, loc.lon);
             if (element.dist > range) break;
 			// do not show errors here, we call multiple observation sites
-			let observation = await this.app.LoadJsonAsync<any>(stations[index].id + "/observations/latest", null, (msg) => false);
+			let observation = await this.app.LoadJsonAsync<ObservationPayload>(stations[index].id + "/observations/latest", null, (msg) => false);
 			if (observation == null) {
 				Log.Instance.Debug("Failed to get observations from " + stations[index].id);
 			}

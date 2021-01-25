@@ -16,38 +16,26 @@ class Yahoo {
         this.app = _app;
     }
     async GetWeather(loc) {
-        let json;
-        if (loc != null) {
-            try {
-                json = await commandRunner_1.SpawnProcess(["python3", this.app.AppletDir + "/../yahoo-bridge.py", "--params", JSON.stringify({ lat: loc.lat.toString(), lon: loc.lon.toString() })]);
-            }
-            catch (e) {
-                this.app.ShowError({ type: "hard", service: "yahoo", detail: "unknown", message: utils_1._("Unknown Error happened while calling Yahoo bridge,\n see Looking Glass log for errors") });
-                logger_1.Log.Instance.Error("Yahoo API bridge call failed, error: " + e);
-                return null;
-            }
-            if (!json) {
-                this.app.ShowError({ type: "soft", detail: "no api response", service: "yahoo" });
-                return null;
-            }
-            logger_1.Log.Instance.Debug("Yahoo API response: " + json);
-            try {
-                json = JSON.parse(json);
-            }
-            catch (e) {
+        var _a;
+        if (loc == null)
+            return null;
+        let response = await commandRunner_1.SpawnProcessJson(["python3", this.app.AppletDir + "/../yahoo-bridge.py", "--params", JSON.stringify({ lat: loc.lat.toString(), lon: loc.lon.toString() })]);
+        if (!response.Success) {
+            if (response.ErrorData.Type == "jsonParse")
                 this.app.ShowError({ type: "hard", service: "yahoo", detail: "bad api response - non json", message: utils_1._("Yahoo bridge responded in bad format,\n see Looking Glass log for errors") });
-                logger_1.Log.Instance.Error("Yahoo service failed to parse payload to JSON, error: " + e);
-                return null;
-            }
-            if (!json.error) {
-                return this.ParseWeather(json);
-            }
-            else {
-                this.HandleResponseErrors(json);
-                return null;
-            }
+            else
+                this.app.ShowError({ type: "hard", service: "yahoo", detail: "unknown", message: utils_1._("Unknown Error happened while calling Yahoo bridge,\n see Looking Glass log for errors") });
+            logger_1.Log.Instance.Error("Yahoo API bridge call failed, error: " + response.ErrorData.Message);
+            return null;
         }
-        return null;
+        logger_1.Log.Instance.Debug2("Yahoo API response: " + response);
+        if (!((_a = response.Data) === null || _a === void 0 ? void 0 : _a.error)) {
+            return this.ParseWeather(response.Data);
+        }
+        else {
+            this.HandleResponseErrors(response.Data);
+            return null;
+        }
     }
     ;
     ParseWeather(json) {

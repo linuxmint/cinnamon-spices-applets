@@ -6,7 +6,7 @@
 //////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////
 
-import { SpawnProcess } from "./commandRunner";
+import { SpawnProcessJson } from "./commandRunner";
 import { Log } from "./logger";
 import { WeatherApplet } from "./main";
 import { NotificationService } from "./notification_service";
@@ -36,46 +36,34 @@ export class Yahoo implements WeatherProvider {
     //  Functions
     //--------------------------------------------------------
     public async GetWeather(loc: LocationData): Promise<WeatherData> {
-        let json;
-        if (loc != null) {
-            try {
-                json = await SpawnProcess(["python3", this.app.AppletDir + "/../yahoo-bridge.py", "--params", JSON.stringify({ lat: loc.lat.toString(), lon: loc.lon.toString() })]);
-            }
-            catch (e) {
-                this.app.ShowError({ type: "hard", service: "yahoo", detail: "unknown", message: _("Unknown Error happened while calling Yahoo bridge,\n see Looking Glass log for errors") })
-                Log.Instance.Error("Yahoo API bridge call failed, error: " + e);
-                return null;
-            }
-
-            if (!json) {
-                this.app.ShowError({ type: "soft", detail: "no api response", service: "yahoo" });
-                return null;
-            }
-
-            Log.Instance.Debug("Yahoo API response: " + json);
-
-            try {
-                json = JSON.parse(json)
-            }
-            catch (e) {
+        if (loc == null)
+            return null;
+        let response = await SpawnProcessJson<YahooPayload>(["python3", this.app.AppletDir + "/../yahoo-bridge.py", "--params", JSON.stringify({ lat: loc.lat.toString(), lon: loc.lon.toString() })]);
+        
+        if (!response.Success) {
+            if (response.ErrorData.Type == "jsonParse")
                 this.app.ShowError({ type: "hard", service: "yahoo", detail: "bad api response - non json", message: _("Yahoo bridge responded in bad format,\n see Looking Glass log for errors") })
-                Log.Instance.Error("Yahoo service failed to parse payload to JSON, error: " + e);
-                return null;
-            }
-
-            if (!json.error) {                   // No error object, Request Success
-                return this.ParseWeather(json);
-            }
-            else {
-                this.HandleResponseErrors(json);
-                return null;
-            }
+            else
+                this.app.ShowError({ type: "hard", service: "yahoo", detail: "unknown", message: _("Unknown Error happened while calling Yahoo bridge,\n see Looking Glass log for errors") })
+            
+            Log.Instance.Error("Yahoo API bridge call failed, error: " + response.ErrorData.Message);
+            return null;
         }
-        return null;
+
+        Log.Instance.Debug2("Yahoo API response: " + response);
+
+
+        if (!(response.Data as any as BridgeError)?.error) {                   // No error object, Request Success
+            return this.ParseWeather(response.Data);
+        }
+        else {
+            this.HandleResponseErrors(response.Data as any);
+            return null;
+        }
     };
 
 
-    private ParseWeather(json: any): WeatherData {
+    private ParseWeather(json: YahooPayload): WeatherData {
         try {
             let sunrise = this.TimeToDateObj(json.current_observation.astronomy.sunrise);
             let sunset = this.TimeToDateObj(json.current_observation.astronomy.sunset);
@@ -421,6 +409,56 @@ interface BridgeError {
 }
 
 type BridgeErrorType = "import" | "network" | "unknown";
+
+interface YahooPayload {
+    location: {
+        city: string;
+        region: string;
+        woeid: number;
+        country: string;
+        lat: number;
+        long: number;
+        timezone_id: string;
+    };
+    current_observation: {
+        wind: {
+            chill: number;
+            direction: number;
+            speed: number;
+        };
+        atmosphere: {
+            humidity: number;
+            visibility: number;
+            pressure: number;
+            rising: number;
+        };
+        astronomy: {
+            /** hours minutes in pm format */
+            sunrise: string;
+            /** hours minutes in pm format */
+            sunset: string;
+        };
+        condition: {
+            text: string;
+            code: number;
+            temperature: 2
+        };
+        /** Epoch seconds */
+        pubDate: number;
+    };
+    forecasts: YahooForecast[];
+}
+
+interface YahooForecast {
+    /** Short day name */
+    day: string;
+    /** epoch seconds */
+    date: number;
+    low: number;
+    high: number;
+    text: string;
+    code: number;
+}
 
 const YahooConditionLibrary = [
     _("Tornado"),

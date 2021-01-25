@@ -2,34 +2,80 @@ import { Log } from "./logger";
 
 const { spawnCommandLineAsyncIO } = imports.misc.util;
 
+/**
+ * Doesn't do JSON typechecking, you have to do that manually
+ * @param command 
+ */
+export async function SpawnProcessJson<TData>(command: string[]): Promise<TypedResponse<TData>> {
+	let response = await SpawnProcess(command);
+	if (!response.Success) return response;
+
+	try {
+		response.Data = JSON.parse(response.Data);
+	}
+	catch(e) {
+		Log.Instance.Error("Error: Command response is not JSON. The response: " + response.Data);
+		response.Success = false;
+		response.ErrorData = {
+			Code: -1,
+			Message: null,
+			Type: "jsonParse",
+		}
+	}
+	finally {
+		return response;
+	}
+}
+
 
 /** Spawns a command and await for the output it gives */
-export async function SpawnProcess(command: string[]): Promise<any> {
+export async function SpawnProcess(command: string[]): Promise<GenericResponse> {
 	// prepare command
 	let cmd = "";
 	for (let index = 0; index < command.length; index++) {
 		const element = command[index];
 		cmd += "'" + element + "' ";
 	}
-	try {
-		let json = await new Promise((resolve, reject) => {
-			spawnCommandLineAsyncIO(cmd, (aStdout: string, err: string, exitCode: number) => {
-				if (exitCode != 0) {
-					reject(err);
+
+	let response = await new Promise((resolve, reject) => {
+		spawnCommandLineAsyncIO(cmd, (aStdout: string, err: string, exitCode: number) => {
+			let result: GenericResponse = {
+				Success: exitCode == 0,
+				ErrorData: null,
+				Data: aStdout ?? null
+			}
+
+			if (exitCode != 0) {
+				result.ErrorData = {
+					Code: exitCode,
+					Message: err ?? null,
+					Type: "unknown"
 				}
-				else {
-					resolve(aStdout);
-				}
-			});
+			}
+			resolve(result);
+			return result;
 		});
-		return json;
-	}
-	catch(e) {
-		Log.Instance.Error("Error calling command " + cmd + ", error: ");
-		global.log(e);
-		return null;
-	}
+	});
+	return response as GenericResponse;
 }
+
+interface GenericResponse {
+	Success: boolean;
+	Data: any;
+	ErrorData: ErrorData;
+}
+
+interface TypedResponse<TData> extends GenericResponse {
+	Data: TData;
+}
+
+interface ErrorData {
+	Code: number;
+	Type: ErrorType;
+	Message: string;
+}
+
+type ErrorType = "jsonParse" | "unknown"
 
 export function OpenUrl(element: imports.gi.St.Button) {
 	if (!element.url) return;
