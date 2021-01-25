@@ -81,7 +81,7 @@ export class Config {
 	private readonly _distanceUnit: DistanceUnits;
 	private readonly _apiKey: string;
 	// No need to access this from the outside
-	private readonly keybinding: any;
+	private readonly keybinding: string;
 
 	// simple variables
     public readonly _refreshInterval: number;
@@ -109,7 +109,7 @@ export class Config {
     public readonly _showForecastDates: boolean;
 
     /** Timeout */
-    private doneTypingLocation: any = null;
+    private doneTypingLocation: number = null;
 	private currentLocation: LocationData = null;
 
     private settings: imports.ui.settings.AppletSettings;
@@ -162,7 +162,7 @@ export class Config {
         keybindingManager.addHotKey(
             UUID, this.keybinding, Lang.bind(this.app, this.app.on_applet_clicked));
 
-        this.settings.connect(SIGNAL_CHANGED + this.WEATHER_USE_SYMBOLIC_ICONS_KEY, Lang.bind(this, this.IconTypeChanged));
+		this.settings.connect(SIGNAL_CHANGED + this.WEATHER_USE_SYMBOLIC_ICONS_KEY, Lang.bind(this, this.IconTypeChanged));
 	}
 
 	public get CurrentFontSize(): number {

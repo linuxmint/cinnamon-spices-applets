@@ -25,7 +25,7 @@ export class MetUk implements WeatherProvider {
     public readonly maxHourlyForecastSupport = 36;
     public readonly needsApiKey = false;
 
-    private sunCalc: any;
+    private sunCalc: SunCalc;
 
     private baseUrl = "http://datapoint.metoffice.gov.uk/public/data/val/";
 

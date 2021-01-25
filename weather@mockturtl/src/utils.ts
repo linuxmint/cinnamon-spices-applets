@@ -436,7 +436,7 @@ export function Guid() {
 // -----------------------------------------------------------
 // Timeout polyfill
 
-export function setTimeout(func: any, ms: number) {
+export function setTimeout(func: Function, ms: number) {
     let args: any[] = [];
     if (arguments.length > 2) {
         args = args.slice.call(arguments, 2);
@@ -458,11 +458,11 @@ export async function delay(ms: number): Promise<void> {
     });
 }
 
-export function clearTimeout(id: any) {
+export function clearTimeout(id: number) {
     source_remove(id);
 };
 
-export function setInterval(func: any, ms: number) {
+export function setInterval(func: Function, ms: number) {
     let args: any[] = [];
     if (arguments.length > 2) {
         args = args.slice.call(arguments, 2);
@@ -476,6 +476,6 @@ export function setInterval(func: any, ms: number) {
     return id;
 };
 
-export function clearInterval(id: any) {
+export function clearInterval(id: number) {
     source_remove(id);
 };

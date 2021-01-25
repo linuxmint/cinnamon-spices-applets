@@ -26,7 +26,7 @@ export class MetNorway implements WeatherProvider {
 		if (query == null)
 			return null;
 
-		let json = await this.app.LoadJsonAsync<any>(query);
+		let json = await this.app.LoadJsonAsync<MetNorwayPayload>(query);
 		
 		if (!json) {
 			Log.Instance.Error("MET Norway: Empty response from API");

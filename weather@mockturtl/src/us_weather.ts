@@ -10,7 +10,7 @@ import { HttpError } from "./httpLib";
 import { Log } from "./logger";
 import { WeatherApplet } from "./main";
 import { SunCalc } from "./sunCalc";
-import { WeatherProvider, WeatherData, AppletError, ForecastData, HourlyForecastData, Condition, LocationData } from "./types";
+import { WeatherProvider, WeatherData, ForecastData, HourlyForecastData, Condition, LocationData } from "./types";
 import { _, GetDistance, KPHtoMPS, CelsiusToKelvin, IsNight, FahrenheitToKelvin, WeatherIconSafely } from "./utils";
 
 export class USWeather implements WeatherProvider {
@@ -25,7 +25,7 @@ export class USWeather implements WeatherProvider {
     public readonly maxHourlyForecastSupport = 156;
     public readonly needsApiKey = false;
 
-    private sunCalc: any;
+    private sunCalc: SunCalc;
 
     private sitesUrl = "https://api.weather.gov/points/";
 

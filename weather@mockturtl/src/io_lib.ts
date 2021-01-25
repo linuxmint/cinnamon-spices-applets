@@ -110,7 +110,7 @@ export async function WriteAsync(outputStream: imports.gi.Gio.OutputStream, buff
     let text = ByteArray.fromString(buffer);
     if (outputStream.is_closed()) return false;
     
-    return new Promise((resolve: any, reject: any) => {
+    return new Promise((resolve, reject) => {
         outputStream.write_bytes_async(text as any, null, null, (obj, res) => {
             let ioStream = outputStream.write_bytes_finish(res);
             resolve(true);
