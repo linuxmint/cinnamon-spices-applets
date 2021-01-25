@@ -36,6 +36,8 @@ class VisualCrossing {
         return this.ParseWeather(json, translate);
     }
     ParseWeather(weather, translate) {
+        var _a, _b, _c, _d, _e, _f;
+        let currentHour = this.GetCurrentHour(weather.days);
         let result = {
             date: new Date(weather.currentConditions.datetimeEpoch * 1000),
             location: {
@@ -47,20 +49,20 @@ class VisualCrossing {
                 lat: weather.latitude,
                 lon: weather.longitude,
             },
-            humidity: weather.currentConditions.humidity,
-            pressure: weather.currentConditions.pressure,
+            humidity: (_a = weather.currentConditions.humidity) !== null && _a !== void 0 ? _a : currentHour.humidity,
+            pressure: (_b = weather.currentConditions.pressure) !== null && _b !== void 0 ? _b : currentHour.pressure,
             wind: {
-                degree: weather.currentConditions.winddir,
-                speed: weather.currentConditions.windspeed,
+                degree: (_c = weather.currentConditions.winddir) !== null && _c !== void 0 ? _c : currentHour.winddir,
+                speed: (_d = weather.currentConditions.windspeed) !== null && _d !== void 0 ? _d : currentHour.windspeed,
             },
-            temperature: utils_1.CelsiusToKelvin(weather.currentConditions.temp),
+            temperature: utils_1.CelsiusToKelvin((_e = weather.currentConditions.temp) !== null && _e !== void 0 ? _e : currentHour.temp),
             sunrise: new Date(weather.currentConditions.sunriseEpoch * 1000),
             sunset: new Date(weather.currentConditions.sunsetEpoch * 1000),
             condition: this.GenerateCondition(weather.currentConditions.icon, weather.currentConditions.conditions, translate),
             extra_field: {
                 name: utils_1._("Feels Like"),
                 type: "temperature",
-                value: utils_1.CelsiusToKelvin(weather.currentConditions.feelslike)
+                value: utils_1.CelsiusToKelvin((_f = currentHour.feelslike) !== null && _f !== void 0 ? _f : weather.currentConditions.feelslike)
             },
             forecasts: this.ParseForecasts(weather.days, translate),
             hourlyForecasts: this.ParseHourlyForecasts(weather.days, translate)
@@ -107,6 +109,21 @@ class VisualCrossing {
             }
         }
         return result;
+    }
+    GetCurrentHour(forecasts) {
+        if ((forecasts === null || forecasts === void 0 ? void 0 : forecasts.length) < 1)
+            return null;
+        let currentHour = new Date();
+        currentHour.setMinutes(0, 0, 0);
+        const element = forecasts[0];
+        for (let index = 0; index < element.hours.length; index++) {
+            const hour = element.hours[index];
+            let time = new Date(hour.datetimeEpoch * 1000);
+            if (time < currentHour)
+                continue;
+            return hour;
+        }
+        return null;
     }
     GenerateCondition(icon, condition, translate) {
         let result = {

@@ -48,6 +48,7 @@ export class VisualCrossing implements WeatherProvider {
     }
 
     private ParseWeather(weather: VisualCrossingPayload, translate: boolean): WeatherData {
+        let currentHour = this.GetCurrentHour(weather.days);
         let result: WeatherData = {
             date: new Date(weather.currentConditions.datetimeEpoch * 1000),
             location: {
@@ -59,20 +60,21 @@ export class VisualCrossing implements WeatherProvider {
                 lat: weather.latitude,
                 lon: weather.longitude,
             },
-            humidity: weather.currentConditions.humidity,
-            pressure: weather.currentConditions.pressure,
+            humidity: weather.currentConditions.humidity ?? currentHour.humidity,
+            pressure: weather.currentConditions.pressure ?? currentHour.pressure,
             wind: {
-                degree: weather.currentConditions.winddir,
-                speed: weather.currentConditions.windspeed,
+                degree: weather.currentConditions.winddir ?? currentHour.winddir,
+                speed: weather.currentConditions.windspeed ?? currentHour.windspeed,
             },
-            temperature: CelsiusToKelvin(weather.currentConditions.temp),
+            temperature: CelsiusToKelvin(weather.currentConditions.temp ?? currentHour.temp),
             sunrise: new Date(weather.currentConditions.sunriseEpoch * 1000),
             sunset: new Date(weather.currentConditions.sunsetEpoch * 1000),
             condition: this.GenerateCondition(weather.currentConditions.icon, weather.currentConditions.conditions, translate),
             extra_field: {
                 name: _("Feels Like"),
                 type: "temperature",
-                value: CelsiusToKelvin(weather.currentConditions.feelslike)
+                // use current hour instead, observations feels like doesn't seem to differ at all
+                value: CelsiusToKelvin(currentHour.feelslike ?? weather.currentConditions.feelslike)
             },
             forecasts: this.ParseForecasts(weather.days, translate),
             hourlyForecasts: this.ParseHourlyForecasts(weather.days, translate)
@@ -128,6 +130,23 @@ export class VisualCrossing implements WeatherProvider {
             } 
         }
         return result;
+    }
+
+    private GetCurrentHour(forecasts: DayForecast[]): HourForecast {
+        if (forecasts?.length < 1)
+        return null;
+
+        let currentHour = new Date();
+        currentHour.setMinutes(0, 0, 0);
+        
+        const element = forecasts[0];
+        for (let index = 0; index < element.hours.length; index++) {
+            const hour = element.hours[index];
+            let time = new Date(hour.datetimeEpoch * 1000);
+            if (time < currentHour) continue;
+            return hour;
+        } 
+        return null;
     }
 
     private GenerateCondition(icon: string, condition: string, translate: boolean): Condition {
