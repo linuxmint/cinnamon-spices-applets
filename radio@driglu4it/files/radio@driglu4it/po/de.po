@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-08 10:12+0100\n"
-"PO-Revision-Date: 2021-01-08 10:14+0100\n"
+"POT-Creation-Date: 2021-01-22 15:31+0100\n"
+"PO-Revision-Date: 2021-01-22 15:37+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de\n"
@@ -18,12 +18,12 @@ msgstr ""
 "X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: 4.6/applet.js:132
+#: 4.6/applet.js:147
 #, javascript-format
 msgid "Can't play  %s"
 msgstr "%s kann nicht abgespielt werden"
 
-#: 4.6/applet.js:132
+#: 4.6/applet.js:147
 msgid ""
 "Make sure that the URL is valid and you have a stable internet connection. "
 "Don't hestitate to open an Issue on Github if the problem persists."
@@ -32,25 +32,25 @@ msgstr ""
 "stabile Internetverbindung verfügen. Zögern Sie nicht das Problem auf Github "
 "zu melden, sollte es bestehen bleiben."
 
-#: 4.6/applet.js:151 3.0/applet.js:140
+#: 4.6/applet.js:165 3.0/applet.js:140
 msgid "Stop"
 msgstr "Anhalten"
 
-#: 4.6/applet.js:158
+#: 4.6/applet.js:172
 msgid "Copy current song title"
 msgstr "Aktuellen Liedtitel kopieren"
 
-#: 4.6/applet.js:169
+#: 4.6/applet.js:183
 msgid "Can't copy current Song. Is the Radio playing?"
 msgstr ""
 "Aktueller Liedtitel konnte nicht kopiert werden. Ist das Radio eingeschaltet?"
 
-#: 4.6/applet.js:233 3.0/applet.js:183
+#: 4.6/applet.js:245 3.0/applet.js:183
 #, javascript-format
 msgid "Please install the '%s' package."
 msgstr "Bitte das Paket »%s« installieren."
 
-#: 4.6/applet.js:257
+#: 4.6/applet.js:269
 msgid "Can't increase Volume. Volume already at maximum."
 msgstr ""
 "Die Lautstärke kann nicht weiter erhöht werden, da bereits die maximale "
@@ -103,27 +103,29 @@ msgstr "Plugin auf eigenes Risiko herunterladen"
 msgid "A simple radio applet for Cinnamon"
 msgstr "Ein einfaches Radio-Applet für Cinnamon"
 
-#. 4.6->settings-schema.json->page1->title
-#. 4.6->settings-schema.json->tree->description
+#. 4.6->settings-schema.json->radio-stations-page->title
+msgid "Radio Stations"
+msgstr "Radiostationen"
+
+#. 4.6->settings-schema.json->preferences-page->title
+msgid "Preferences"
+msgstr "Einstellungen"
+
+#. 4.6->settings-schema.json->station-list-section->title
 #. 3.0->settings-schema.json->page1->title
 #. 3.0->settings-schema.json->tree->description
 msgid "List of stations"
 msgstr "Liste der Radiostationen"
 
-#. 4.6->settings-schema.json->page2->title
-msgid "Preferences"
-msgstr ""
+#. 4.6->settings-schema.json->find-station-section->title
+msgid "Find station"
+msgstr "Radiostation finden"
 
-#. 4.6->settings-schema.json->section1->title
-#. 3.0->settings-schema.json->section1->title
-msgid "Radio"
-msgstr "Radio"
-
-#. 4.6->settings-schema.json->section2->title
+#. 4.6->settings-schema.json->appearance-section->title
 msgid "Appearance"
 msgstr "Erscheinungsbild"
 
-#. 4.6->settings-schema.json->section3->title
+#. 4.6->settings-schema.json->volume-section->title
 msgid "Volume"
 msgstr "Lautstärke"
 
@@ -163,7 +165,7 @@ msgid "Opens a website, which lists URLs of radio stations."
 msgstr "Öffnet eine Website, die URLs von Radiosendern auflistet."
 
 #. 4.6->settings-schema.json->icon-type->description
-msgid "Icon Type"
+msgid "Icon type"
 msgstr "Icon Typ"
 
 #. 4.6->settings-schema.json->icon-type->options
@@ -179,16 +181,19 @@ msgid "Bicolor"
 msgstr "Zweifarbig"
 
 #. 4.6->settings-schema.json->color-on->description
-#. 3.0->settings-schema.json->color-on->description
-msgid "Color of Symbolic Icon when playing a radio"
+msgid "Color of symbolic icon when playing a radio station"
 msgstr "Farbe des symbolischen Icons, wenn das Radio läuft"
 
 #. 4.6->settings-schema.json->channel-on-panel->description
-msgid "Show Radio Channel on the panel"
+msgid "Show current radio station on the panel"
 msgstr "Radiostation in der Leiste anzeigen"
 
+#. 4.6->settings-schema.json->keep-volume-between-sessions->description
+msgid "Remember volume after stopping the radio"
+msgstr "Lautstärke nach Beenden des Radios speichern"
+
 #. 4.6->settings-schema.json->initial-volume->description
-msgid "Initial Volume"
+msgid "Initial volume"
 msgstr "Anfängliche Lautstärke"
 
 #. 4.6->settings-schema.json->initial-volume->tooltip
@@ -203,6 +208,10 @@ msgstr ""
 #. 3.0->settings-schema.json->section2->title
 msgid "Icon"
 msgstr "Icon"
+
+#. 3.0->settings-schema.json->section1->title
+msgid "Radio"
+msgstr "Radio"
 
 #. 3.0->settings-schema.json->section3->title
 msgid "Symbolic Icon Color"
@@ -223,6 +232,10 @@ msgstr "Farbiges Icon"
 #. 3.0->settings-schema.json->icon-type->options
 msgid "Bicolor Icon"
 msgstr "Zweifarbiges Icon"
+
+#. 3.0->settings-schema.json->color-on->description
+msgid "Color of Symbolic Icon when playing a radio"
+msgstr "Farbe des symbolischen Icons, wenn das Radio läuft"
 
 #~ msgid ""
 #~ "Can't increase Volume. Volume already at maximum. Change the Maximum "
