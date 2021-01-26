@@ -34,7 +34,7 @@ class CurrentWeather {
             let location = utils_1.GenerateLocationText(weather, config);
             this.SetLocation(location, weather.location.url);
             this.SetConditionText(weather.condition.description);
-            this.SetWeatherIcon(weather.condition.icon, weather.condition.customIcon);
+            this.SetWeatherIcon(weather.condition.icons, weather.condition.customIcon);
             this.SetTemperature(weather.temperature);
             this.SetHumidity(weather.humidity);
             this.SetWind(weather.wind.speed, weather.wind.degree);
@@ -231,16 +231,14 @@ class CurrentWeather {
             this.apiUniqueLabel.text = value;
         }
     }
-    SetWeatherIcon(iconName, customIconName) {
+    SetWeatherIcon(iconNames, customIconName) {
         if (this.app.config._useCustomMenuIcons) {
             this.weatherIcon.icon_name = customIconName;
             this.UpdateIconType(IconType.SYMBOLIC);
         }
         else {
-            if (iconName == null) {
-                iconName = "weather-severe-alert";
-            }
-            this.weatherIcon.icon_name = iconName;
+            let icon = utils_1.WeatherIconSafely(iconNames, this.app.config.IconType);
+            this.weatherIcon.icon_name = icon;
             this.UpdateIconType(this.app.config.IconType);
         }
     }

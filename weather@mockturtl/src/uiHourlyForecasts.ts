@@ -3,7 +3,7 @@ import { APPLET_ICON, ELLIPSIS } from "./consts";
 import { Log } from "./logger";
 import { WeatherApplet } from "./main";
 import { HourlyForecastData, Precipitation } from "./types";
-import { GetHoursMinutes, TempToUserConfig, UnitToUnicode, CapitalizeFirstLetter, _, MillimeterToUserUnits, nonempty } from "./utils";
+import { GetHoursMinutes, TempToUserConfig, UnitToUnicode, CapitalizeFirstLetter, _, MillimeterToUserUnits, nonempty, WeatherIconSafely } from "./utils";
 
 const { PolicyType } = imports.gi.Gtk;
 const { addTween } = imports.ui.tweener;
@@ -78,7 +78,7 @@ export class UIHourlyForecasts {
 
             ui.Hour.text = GetHoursMinutes(hour.date, config.currentLocale, config._show24Hours, tz, config._shortHourlyTime);
             ui.Temperature.text = TempToUserConfig(hour.temp, config.TemperatureUnit, config._tempRussianStyle) + " " + UnitToUnicode(config.TemperatureUnit);
-            ui.Icon.icon_name = (config._useCustomMenuIcons) ? hour.condition.customIcon : hour.condition.icon;
+            ui.Icon.icon_name = (config._useCustomMenuIcons) ? hour.condition.customIcon : WeatherIconSafely(hour.condition.icons, config.IconType);
             ui.Summary.text = hour.condition.main;
             ui.Precipitation.text = this.GeneratePrecipitationText(hour.precipitation, config);
         }

@@ -153,51 +153,49 @@ export class VisualCrossing implements WeatherProvider {
         let result: Condition = {
             main: (translate) ? this.ResolveTypeID(this.GetFirstCondition(condition)) : this.GetFirstCondition(condition),
             description: (translate) ? this.ResolveTypeIDs(condition) : condition,
-            icon: "weather-clear",
+            icons: [],
             customIcon: "refresh-symbolic"
         };
-        let icons: BuiltinIcons[] = [];
         
         switch(icon) {
             case "clear-day":
-                icons = ["weather-clear"];
+                result.icons = ["weather-clear"];
                 result.customIcon = "day-sunny-symbolic";
                 break;
             case "clear-night":
-                icons = ["weather-clear-night"];
+                result.icons = ["weather-clear-night"];
                 result.customIcon = "night-clear-symbolic";
                 break;
             case "partly-cloudy-day":
-                icons = ["weather-few-clouds"];
+                result.icons = ["weather-few-clouds"];
                 result.customIcon = "day-cloudy-symbolic";
                 break;
             case "partly-cloudy-night":
-                icons = ["weather-few-clouds-night"];
+                result.icons = ["weather-few-clouds-night"];
                 result.customIcon = "night-alt-cloudy-symbolic";
                 break;
             case "cloudy":
-                icons = ["weather-overcast", "weather-clouds", "weather-many-clouds"];
+                result.icons = ["weather-overcast", "weather-clouds", "weather-many-clouds"];
                 result.customIcon = "cloudy-symbolic";
                 break;
             case "wind":
-                icons = ["weather-windy", "weather-breeze"];
+                result.icons = ["weather-windy", "weather-breeze"];
                 result.customIcon = "windy-symbolic";
                 break;
             case "fog":
-                icons = ["weather-fog"];
+                result.icons = ["weather-fog"];
                 result.customIcon = "fog-symbolic";
                 break;
             case "rain":
-                icons = ["weather-rain", "weather-freezing-rain", "weather-snow-rain",  "weather-showers"];
+                result.icons = ["weather-rain", "weather-freezing-rain", "weather-snow-rain",  "weather-showers"];
                 result.customIcon = "rain-symbolic";
                 break;
             case "snow":
-                icons = ["weather-snow"];
+                result.icons = ["weather-snow"];
                 result.customIcon = "snow-symbolic";
                 break;
         }
 
-        result.icon = WeatherIconSafely(icons, this.app.config.IconType);
         return result;
     }
 

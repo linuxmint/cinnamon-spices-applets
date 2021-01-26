@@ -48,7 +48,7 @@ class UIForecasts {
                 forecastUi.Temperature.text += ((config._tempRussianStyle) ? consts_1.ELLIPSIS : " " + consts_1.FORWARD_SLASH + " ");
                 forecastUi.Temperature.text += second_temperature + ' ' + utils_1.UnitToUnicode(config.TemperatureUnit);
                 forecastUi.Summary.text = comment;
-                forecastUi.Icon.icon_name = (config._useCustomMenuIcons) ? forecastData.condition.customIcon : forecastData.condition.icon;
+                forecastUi.Icon.icon_name = (config._useCustomMenuIcons) ? forecastData.condition.customIcon : utils_1.WeatherIconSafely(forecastData.condition.icons, config.IconType);
             }
             return true;
         }

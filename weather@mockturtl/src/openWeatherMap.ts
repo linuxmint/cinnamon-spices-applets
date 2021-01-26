@@ -81,7 +81,7 @@ export class OpenWeatherMap implements WeatherProvider {
                 condition: {
                     main: json?.current?.weather?.[0]?.main,
                     description: json?.current?.weather?.[0]?.description,
-                    icon: WeatherIconSafely(self.ResolveIcon(json?.current?.weather?.[0]?.icon), self.app.config.IconType),
+                    icons: self.ResolveIcon(json?.current?.weather?.[0]?.icon),
                     customIcon: self.ResolveCustomIcon(json?.current?.weather?.[0]?.icon)
                 },
                 extra_field: {
@@ -102,7 +102,7 @@ export class OpenWeatherMap implements WeatherProvider {
                     condition: {
                         main: day.weather[0].main,
                         description: day.weather[0].description,
-                        icon: WeatherIconSafely(self.ResolveIcon(day.weather[0].icon), self.app.config.IconType),
+                        icons: self.ResolveIcon(day.weather[0].icon),
                         customIcon: self.ResolveCustomIcon(day.weather[0].icon)
                     },
                 };
@@ -119,7 +119,7 @@ export class OpenWeatherMap implements WeatherProvider {
                     condition: {
                         main: hour.weather[0].main,
                         description: hour.weather[0].description,
-                        icon: WeatherIconSafely(self.ResolveIcon(hour.weather[0].icon), self.app.config.IconType),
+                        icons: self.ResolveIcon(hour.weather[0].icon),
                         customIcon: self.ResolveCustomIcon(hour.weather[0].icon)
                     },
                 }

@@ -9,9 +9,9 @@ import { Climacell } from "./climacell";
 import { Config } from "./config";
 import { WeatherLoop } from "./loop";
 import { MetUk } from "./met_uk";
-import { WeatherData, WeatherProvider, LocationData, AppletError, CustomIcons, NiceErrorDetail, RefreshState } from "./types";
+import { WeatherData, WeatherProvider, LocationData, AppletError, CustomIcons, NiceErrorDetail, RefreshState, BuiltinIcons } from "./types";
 import { UI } from "./ui";
-import { AwareDateString, GenerateLocationText, nonempty, ProcessCondition, TempToUserConfig, UnitToUnicode, _ } from "./utils";
+import { AwareDateString, GenerateLocationText, nonempty, ProcessCondition, TempToUserConfig, UnitToUnicode, WeatherIconSafely, _ } from "./utils";
 import { DarkSky } from "./darkSky";
 import { OpenWeatherMap } from "./openWeatherMap";
 import { USWeather } from "./us_weather";
@@ -160,7 +160,7 @@ export class WeatherApplet extends TextIconApplet {
 		let location = GenerateLocationText(weather, this.config);
 		this.SetAppletTooltip(location + " - " + _("As of") + " " + AwareDateString(weather.date, this.config.currentLocale, this.config._show24Hours));
 		this.DisplayWeatherOnLabel(weather.temperature, weather.condition.description);
-		this.SetAppletIcon(weather.condition.icon, weather.condition.customIcon);
+		this.SetAppletIcon(weather.condition.icons, weather.condition.customIcon);
 		return true;
 	}
 
@@ -207,17 +207,15 @@ export class WeatherApplet extends TextIconApplet {
         this.set_applet_tooltip(msg);
     }
 
-    private SetAppletIcon(iconName: string, customIcon: CustomIcons) {
+    private SetAppletIcon(iconNames: BuiltinIcons[], customIcon: CustomIcons) {
 		if (this.config._useCustomAppletIcons) {
 			this.SetCustomIcon(customIcon);
 		}
 		else {
-			if (iconName == null) {
-				iconName = "weather-severe-alert";
-			}
+			let icon = WeatherIconSafely(iconNames, this.config.IconType);
 			this.config.IconType == IconType.SYMBOLIC ? 
-			this.set_applet_icon_symbolic_name(iconName) :
-            this.set_applet_icon_name(iconName);
+			this.set_applet_icon_symbolic_name(icon) :
+            this.set_applet_icon_name(icon);
 		}
 	}
 	
@@ -425,13 +423,13 @@ export class WeatherApplet extends TextIconApplet {
 	 * and applies translations if needed.
 	 */
 	private MergeWeatherData(weatherInfo: WeatherData, locationData: LocationData) {
-		if (!weatherInfo.location.city) weatherInfo.location.city = locationData.city;
-		if (!weatherInfo.location.country) weatherInfo.location.country = locationData.country;
-		if (!weatherInfo.location.timeZone) weatherInfo.location.timeZone = locationData.timeZone;
+		if (weatherInfo.location.city == null) weatherInfo.location.city = locationData.city;
+		if (weatherInfo.location.country == null) weatherInfo.location.country = locationData.country;
+		if (weatherInfo.location.timeZone == null) weatherInfo.location.timeZone = locationData.timeZone;
 		if (weatherInfo.coord.lat == null) weatherInfo.coord.lat = locationData.lat;
 		if (weatherInfo.coord.lon == null) weatherInfo.coord.lon = locationData.lon;
+		if (weatherInfo.hourlyForecasts == null) weatherInfo.hourlyForecasts = [];
 
-		weatherInfo.hourlyForecasts = (!weatherInfo.hourlyForecasts) ? [] : weatherInfo.hourlyForecasts;
 		// Translate conditions if set
 		weatherInfo.condition.main = ProcessCondition(weatherInfo.condition.main, this.config._translateCondition);
 		weatherInfo.condition.description = ProcessCondition(weatherInfo.condition.description, this.config._translateCondition);
@@ -448,8 +446,6 @@ export class WeatherApplet extends TextIconApplet {
 			condition.description = ProcessCondition(condition.description, this.config._translateCondition);		
 		}
 
-		// Estimation
-		//weatherInfo.location.tzOffset = Math.round(weatherInfo.coord.lon/15) * 3600;
 		return weatherInfo;
 	}
 	

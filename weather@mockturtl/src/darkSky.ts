@@ -93,7 +93,7 @@ export class DarkSky implements WeatherProvider {
                 condition: {
                     main: this.GetShortCurrentSummary(json.currently.summary),
                     description: json.currently.summary,
-                    icon: WeatherIconSafely(this.ResolveIcon(json.currently.icon, { sunrise: sunrise, sunset: sunset }), this.app.config.IconType),
+                    icons: this.ResolveIcon(json.currently.icon, { sunrise: sunrise, sunset: sunset }),
                     customIcon: this.ResolveCustomIcon(json.currently.icon)
                 },
                 extra_field: {
@@ -114,7 +114,7 @@ export class DarkSky implements WeatherProvider {
                     condition: {
                         main: this.GetShortSummary(day.summary),
                         description: this.ProcessSummary(day.summary),
-                        icon: WeatherIconSafely(this.ResolveIcon(day.icon), this.app.config.IconType),
+                        icons: this.ResolveIcon(day.icon),
                         customIcon: this.ResolveCustomIcon(day.icon)
                     },
                 };
@@ -135,7 +135,7 @@ export class DarkSky implements WeatherProvider {
                     condition: {
                         main: this.GetShortSummary(hour.summary),
                         description: this.ProcessSummary(hour.summary),
-                        icon: WeatherIconSafely(this.ResolveIcon(hour.icon, { sunrise: sunrise, sunset: sunset }, new Date(hour.time * 1000)), this.app.config.IconType),
+                        icons: this.ResolveIcon(hour.icon, { sunrise: sunrise, sunset: sunset }, new Date(hour.time * 1000)),
                         customIcon: this.ResolveCustomIcon(hour.icon)
                     },
                     precipitation: {

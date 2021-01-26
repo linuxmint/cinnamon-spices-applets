@@ -135,7 +135,7 @@ class WeatherApplet extends TextIconApplet {
         let location = utils_1.GenerateLocationText(weather, this.config);
         this.SetAppletTooltip(location + " - " + utils_1._("As of") + " " + utils_1.AwareDateString(weather.date, this.config.currentLocale, this.config._show24Hours));
         this.DisplayWeatherOnLabel(weather.temperature, weather.condition.description);
-        this.SetAppletIcon(weather.condition.icon, weather.condition.customIcon);
+        this.SetAppletIcon(weather.condition.icons, weather.condition.customIcon);
         return true;
     }
     DisplayWeatherOnLabel(temperature, mainCondition) {
@@ -171,17 +171,15 @@ class WeatherApplet extends TextIconApplet {
     SetAppletTooltip(msg) {
         this.set_applet_tooltip(msg);
     }
-    SetAppletIcon(iconName, customIcon) {
+    SetAppletIcon(iconNames, customIcon) {
         if (this.config._useCustomAppletIcons) {
             this.SetCustomIcon(customIcon);
         }
         else {
-            if (iconName == null) {
-                iconName = "weather-severe-alert";
-            }
+            let icon = utils_1.WeatherIconSafely(iconNames, this.config.IconType);
             this.config.IconType == IconType.SYMBOLIC ?
-                this.set_applet_icon_symbolic_name(iconName) :
-                this.set_applet_icon_name(iconName);
+                this.set_applet_icon_symbolic_name(icon) :
+                this.set_applet_icon_name(icon);
         }
     }
     SetAppletLabel(label) {
@@ -326,17 +324,18 @@ class WeatherApplet extends TextIconApplet {
         }
     }
     MergeWeatherData(weatherInfo, locationData) {
-        if (!weatherInfo.location.city)
+        if (weatherInfo.location.city == null)
             weatherInfo.location.city = locationData.city;
-        if (!weatherInfo.location.country)
+        if (weatherInfo.location.country == null)
             weatherInfo.location.country = locationData.country;
-        if (!weatherInfo.location.timeZone)
+        if (weatherInfo.location.timeZone == null)
             weatherInfo.location.timeZone = locationData.timeZone;
         if (weatherInfo.coord.lat == null)
             weatherInfo.coord.lat = locationData.lat;
         if (weatherInfo.coord.lon == null)
             weatherInfo.coord.lon = locationData.lon;
-        weatherInfo.hourlyForecasts = (!weatherInfo.hourlyForecasts) ? [] : weatherInfo.hourlyForecasts;
+        if (weatherInfo.hourlyForecasts == null)
+            weatherInfo.hourlyForecasts = [];
         weatherInfo.condition.main = utils_1.ProcessCondition(weatherInfo.condition.main, this.config._translateCondition);
         weatherInfo.condition.description = utils_1.ProcessCondition(weatherInfo.condition.description, this.config._translateCondition);
         for (let index = 0; index < weatherInfo.forecasts.length; index++) {

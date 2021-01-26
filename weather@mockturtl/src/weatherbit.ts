@@ -126,7 +126,7 @@ export class Weatherbit implements WeatherProvider {
                 condition: {
                     main: json.weather.description,
                     description: json.weather.description,
-                    icon: WeatherIconSafely(self.ResolveIcon(json.weather.icon), self.app.config.IconType),
+                    icons: self.ResolveIcon(json.weather.icon),
                     customIcon: self.ResolveCustomIcon(json.weather.icon)
                 },
                 extra_field: {
@@ -158,7 +158,7 @@ export class Weatherbit implements WeatherProvider {
                     condition: {
                         main: day.weather.description,
                         description: day.weather.description,
-                        icon: WeatherIconSafely(self.ResolveIcon(day.weather.icon), self.app.config.IconType),
+                        icons: self.ResolveIcon(day.weather.icon),
                         customIcon: self.ResolveCustomIcon(day.weather.icon)
                     },
                 };
@@ -184,7 +184,7 @@ export class Weatherbit implements WeatherProvider {
                     condition: {
                         main: hour.weather.description,
                         description: hour.weather.description,
-                        icon: WeatherIconSafely(self.ResolveIcon(hour.weather.icon), self.app.config.IconType),
+                        icons: self.ResolveIcon(hour.weather.icon),
                         customIcon: self.ResolveCustomIcon(hour.weather.icon)
                     },
                     precipitation: {

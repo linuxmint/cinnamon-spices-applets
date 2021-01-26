@@ -4,8 +4,8 @@ import { ELLIPSIS, APPLET_ICON, SIGNAL_CLICKED, BLANK } from "./consts";
 import { LocationStore } from "./locationstore";
 import { Log } from "./logger";
 import { WeatherApplet } from "./main";
-import { WeatherData, APIUniqueField, ArrowIcons } from "./types";
-import { _, GetHoursMinutes, TempToUserConfig, UnitToUnicode, CompassDirection, MPStoUserUnits, PressToUserUnits, GenerateLocationText, delay } from "./utils";
+import { WeatherData, APIUniqueField, ArrowIcons, BuiltinIcons } from "./types";
+import { _, GetHoursMinutes, TempToUserConfig, UnitToUnicode, CompassDirection, MPStoUserUnits, PressToUserUnits, GenerateLocationText, delay, WeatherIconSafely } from "./utils";
 import { WeatherButton } from "./weatherbutton";
 
 const { Bin, BoxLayout, IconType, Label, Icon, Align } = imports.gi.St;
@@ -68,7 +68,7 @@ export class CurrentWeather {
 			let location = GenerateLocationText(weather, config);
 			this.SetLocation(location, weather.location.url);
 			this.SetConditionText(weather.condition.description);
-			this.SetWeatherIcon(weather.condition.icon, weather.condition.customIcon);
+			this.SetWeatherIcon(weather.condition.icons, weather.condition.customIcon);
 			this.SetTemperature(weather.temperature);
 			this.SetHumidity(weather.humidity);
 			this.SetWind(weather.wind.speed, weather.wind.degree);
@@ -309,16 +309,14 @@ export class CurrentWeather {
         }
     }
 
-    private SetWeatherIcon(iconName: string, customIconName: string) {
+    private SetWeatherIcon(iconNames: BuiltinIcons[], customIconName: string) {
 		if (this.app.config._useCustomMenuIcons) {
 			this.weatherIcon.icon_name = customIconName;
 			this.UpdateIconType(IconType.SYMBOLIC); // Hard set to symbolic as iconset is symbolic
 		}
 		else {
-			if (iconName == null) {
-				iconName = "weather-severe-alert";
-			}
-			this.weatherIcon.icon_name = iconName;
+			let icon = WeatherIconSafely(iconNames, this.app.config.IconType);
+			this.weatherIcon.icon_name = icon;
 			this.UpdateIconType(this.app.config.IconType); // Revert to user setting
 		}
 	}

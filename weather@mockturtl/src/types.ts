@@ -147,8 +147,10 @@ export interface Condition {
     main: string,
     /** Long Description */
     description: string,
-    /** GTK icon name */
-    icon: BuiltinIcons,
+    /** GTK icon name, descending from most fit to least fit.
+	 * needs mutiple in case one/some of them are not available
+	 */
+    icons: BuiltinIcons[],
     customIcon: CustomIcons
 }
 
