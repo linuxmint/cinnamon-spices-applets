@@ -178,7 +178,7 @@ class UIHourlyForecasts {
             precipitationText = utils_1.MillimeterToUserUnits(precip.volume, config.DistanceUnit) + " " + ((config.DistanceUnit == "metric") ? utils_1._("mm") : utils_1._("in"));
         }
         if (!!precip.chance) {
-            precipitationText = (utils_1.nonempty(precipitationText)) ? (precipitationText + ", ") : "";
+            precipitationText = (utils_1.NotEmpty(precipitationText)) ? (precipitationText + ", ") : "";
             precipitationText += (Math.round(precip.chance).toString() + "%");
         }
         return precipitationText;

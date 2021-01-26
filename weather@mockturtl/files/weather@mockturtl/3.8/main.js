@@ -160,7 +160,7 @@ class WeatherApplet extends TextIconApplet {
                 }
             }
         }
-        if (utils_1.nonempty(this.config._tempTextOverride)) {
+        if (utils_1.NotEmpty(this.config._tempTextOverride)) {
             label = this.config._tempTextOverride
                 .replace("{t}", temp)
                 .replace("{u}", utils_1.UnitToUnicode(this.config.TemperatureUnit))

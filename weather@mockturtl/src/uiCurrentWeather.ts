@@ -4,7 +4,7 @@ import { ELLIPSIS, APPLET_ICON, SIGNAL_CLICKED, BLANK } from "./consts";
 import { LocationStore } from "./locationstore";
 import { Log } from "./logger";
 import { WeatherApplet } from "./main";
-import { WeatherData, APIUniqueField, ArrowIcons, BuiltinIcons } from "./types";
+import { WeatherData, APIUniqueField, BuiltinIcons } from "./types";
 import { _, GetHoursMinutes, TempToUserConfig, UnitToUnicode, CompassDirection, MPStoUserUnits, PressToUserUnits, GenerateLocationText, delay, WeatherIconSafely } from "./utils";
 import { WeatherButton } from "./weatherbutton";
 

@@ -11,7 +11,7 @@ import { WeatherLoop } from "./loop";
 import { MetUk } from "./met_uk";
 import { WeatherData, WeatherProvider, LocationData, AppletError, CustomIcons, NiceErrorDetail, RefreshState, BuiltinIcons } from "./types";
 import { UI } from "./ui";
-import { AwareDateString, GenerateLocationText, nonempty, ProcessCondition, TempToUserConfig, UnitToUnicode, WeatherIconSafely, _ } from "./utils";
+import { AwareDateString, GenerateLocationText, NotEmpty, ProcessCondition, TempToUserConfig, UnitToUnicode, WeatherIconSafely, _ } from "./utils";
 import { DarkSky } from "./darkSky";
 import { OpenWeatherMap } from "./openWeatherMap";
 import { USWeather } from "./us_weather";
@@ -193,7 +193,7 @@ export class WeatherApplet extends TextIconApplet {
 		}
 
 		// Overriding temperature panel label
-		if (nonempty(this.config._tempTextOverride)) {
+		if (NotEmpty(this.config._tempTextOverride)) {
 			label = this.config._tempTextOverride
 				.replace("{t}", temp)
 				.replace("{u}", UnitToUnicode(this.config.TemperatureUnit))

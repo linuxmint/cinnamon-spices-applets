@@ -30,7 +30,7 @@ export function GenerateLocationText(weather: WeatherData, config: Config) {
 	}
 
 	// Overriding Location
-	if (nonempty(config._locationLabelOverride)) {
+	if (NotEmpty(config._locationLabelOverride)) {
 		location = config._locationLabelOverride;
 	}
 
@@ -328,6 +328,11 @@ export function CompassDirection(deg: number): ArrowIcons {
 // -----------------------------------------------------------------
 // Testers
 
+/**
+ * Checks if a date is inside between sunrise and sunset.
+ * @param sunTimes sunrise and sunset is used
+ * @param date 
+ */
 export function IsNight(sunTimes: SunTimes, date?: Date): boolean {
     if (!sunTimes) return false;
     let time = (!!date) ? MilitaryTime(date) : MilitaryTime(new Date());
@@ -345,7 +350,7 @@ export function IsCoordinate(text: string): boolean {
     return false;
 }
 
-export function nonempty(str: string): boolean {
+export function NotEmpty(str: string): boolean {
     return (str != null && str.length > 0 && str != undefined)
 }
 
