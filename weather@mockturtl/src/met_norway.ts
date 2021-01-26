@@ -245,7 +245,6 @@ export class MetNorway implements WeatherProvider {
 
     private ResolveCondition(icon: string, isNight: boolean = false): Condition {
         let weather = this.DeconstructCondition(icon);
-        let iconType = this.app.config.IconType;
         switch (weather.condition) {
             case "clearsky":
                 return {
@@ -267,7 +266,6 @@ export class MetNorway implements WeatherProvider {
                     main: _("Fair"),
                     description: _("Fair"),
                     icons: (isNight) ? ["weather-few-clouds-night", "weather-clouds-night", "weather-overcast"] : ["weather-few-clouds", "weather-clouds", "weather-overcast"]
-
                 }
             case "fog":
                 return {
@@ -282,7 +280,6 @@ export class MetNorway implements WeatherProvider {
                     main: _("Heavy Rain"),
                     description: _("Heavy rain"),
                     icons: ["weather-rain", "weather-freezing-rain"]
-
                 }
             case "heavyrainandthunder":
                 return {
@@ -290,7 +287,6 @@ export class MetNorway implements WeatherProvider {
                     main: _("Heavy Rain"),
                     description: _("Heavy rain and thunder"),
                     icons: ["weather-rain", "weather-freezing-rain"]
-
                 }
             case "heavyrainshowers":
                 return {
@@ -298,7 +294,6 @@ export class MetNorway implements WeatherProvider {
                     main: _("Heavy Rain"),
                     description: _("Heavy rain showers"),
                     icons: ["weather-showers", "weather-showers-scattered"]
-
                 }
             case "heavyrainshowersandthunder":
                 return {
@@ -306,7 +301,6 @@ export class MetNorway implements WeatherProvider {
                     main: _("Heavy Rain"),
                     description: _("Heavy rain showers and thunder"),
                     icons: ["weather-showers", "weather-showers-scattered"]
-
                 }
             case "heavysleet":
                 return {
@@ -485,7 +479,6 @@ export class MetNorway implements WeatherProvider {
                     main: _("Rain Showers"),
                     description: _("Rain showers"),
                     icons: ["weather-showers-scattered", "weather-rain", "weather-freezing-rain"]
-
                 }
             case "rainshowersandthunder":
                 return {
@@ -493,7 +486,6 @@ export class MetNorway implements WeatherProvider {
                     main: _("Rain Showers"),
                     description: _("Rain showers and thunder"),
                     icons: ["weather-showers-scattered", "weather-rain", "weather-freezing-rain"]
-
                 }
             case "sleet":
                 return {
@@ -523,7 +515,6 @@ export class MetNorway implements WeatherProvider {
                     main: _("Sleet"),
                     description: _("Sleet showers and thunder"),
                     icons: ["weather-freezing-rain", "weather-showers"]
-
                 }
             case "snow":
                 return {
@@ -545,7 +536,6 @@ export class MetNorway implements WeatherProvider {
                     main: _("Snow Showers"),
                     description: _("Snow showers"),
                     icons: ["weather-snow-scattered", "weather-snow"]
-
                 }
             case "snowshowersandthunder":
                 return {

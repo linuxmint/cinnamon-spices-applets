@@ -204,7 +204,6 @@ class MetNorway {
     }
     ResolveCondition(icon, isNight = false) {
         let weather = this.DeconstructCondition(icon);
-        let iconType = this.app.config.IconType;
         switch (weather.condition) {
             case "clearsky":
                 return {
