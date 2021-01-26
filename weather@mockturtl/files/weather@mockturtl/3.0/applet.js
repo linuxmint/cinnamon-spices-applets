@@ -2057,28 +2057,34 @@ var LocationStore = (function () {
         return __awaiter(this, void 0, void 0, function () {
             var index;
             return __generator(this, function (_a) {
-                if (this.app.Locked()) {
-                    this.app.sendNotification(_("Info") + " - " + _("Location Store"), _("You can't remove a location while the applet is refreshing"), true);
-                    return [2];
+                switch (_a.label) {
+                    case 0:
+                        if (this.app.Locked()) {
+                            this.app.sendNotification(_("Info") + " - " + _("Location Store"), _("You can't remove a location while the applet is refreshing"), true);
+                            return [2];
+                        }
+                        if (loc == null) {
+                            this.app.sendNotification(_("Info") + " - " + _("Location Store"), _("You can't remove an incorrect location"), true);
+                            return [2];
+                        }
+                        if (!this.InStorage(loc)) {
+                            this.app.sendNotification(_("Info") + " - " + _("Location Store"), _("Location is not in storage, can't delete"), true);
+                            return [2];
+                        }
+                        index = this.FindIndex(loc);
+                        this.locations.splice(index, 1);
+                        this.currentIndex = this.currentIndex--;
+                        if (this.currentIndex < 0)
+                            this.currentIndex = this.locations.length - 1;
+                        if (this.currentIndex < 0)
+                            this.currentIndex = 0;
+                        return [4, this.SaveToFile()];
+                    case 1:
+                        _a.sent();
+                        this.app.sendNotification(_("Success") + " - " + _("Location Store"), _("Location is deleted from library"), true);
+                        this.InvokeStorageChanged();
+                        return [2];
                 }
-                if (loc == null) {
-                    this.app.sendNotification(_("Info") + " - " + _("Location Store"), _("You can't remove an incorrect location"), true);
-                    return [2];
-                }
-                if (!this.InStorage(loc)) {
-                    this.app.sendNotification(_("Info") + " - " + _("Location Store"), _("Location is not in storage, can't delete"), true);
-                    return [2];
-                }
-                index = this.FindIndex(loc);
-                this.locations.splice(index, 1);
-                this.currentIndex = this.currentIndex--;
-                if (this.currentIndex < 0)
-                    this.currentIndex = this.locations.length - 1;
-                if (this.currentIndex < 0)
-                    this.currentIndex = 0;
-                this.app.sendNotification(_("Success") + " - " + _("Location Store"), _("Location is deleted from library"), true);
-                this.InvokeStorageChanged();
-                return [2];
             });
         });
     };

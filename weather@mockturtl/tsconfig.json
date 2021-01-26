@@ -17,6 +17,5 @@
         "files",
         "node_modules",
 		"**/*.spec.ts",
-		"src/attic/**/*"
     ]
 }

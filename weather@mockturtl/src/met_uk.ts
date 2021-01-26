@@ -11,7 +11,7 @@ import { Log } from "./logger";
 import { WeatherApplet } from "./main";
 import { SunCalc } from "./sunCalc";
 import { WeatherProvider, WeatherData, ForecastData, HourlyForecastData, Condition, LocationData } from "./types";
-import { _, GetDistance, MPHtoMPS, CompassToDeg, CelsiusToKelvin, MetreToUserUnits, WeatherIconSafely } from "./utils";
+import { _, GetDistance, MPHtoMPS, CompassToDeg, CelsiusToKelvin, MetreToUserUnits } from "./utils";
 
 export class MetUk implements WeatherProvider {
 
