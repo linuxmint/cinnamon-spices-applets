@@ -16,6 +16,7 @@
     "exclude": [
         "files",
         "node_modules",
-        "**/*.spec.ts"
+		"**/*.spec.ts",
+		"src/attic/**/*"
     ]
 }

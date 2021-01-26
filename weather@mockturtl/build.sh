@@ -1,7 +1,6 @@
 #!/bin/bash
 # REQUIREMENTS:
 # - typescript installed
-# - sed
 
 # Getting bash script file location
 SOURCE="${BASH_SOURCE[0]}"
@@ -17,19 +16,5 @@ path=${PWD}
 
 cd $DIR/src
 echo Building 3.8...
-#cp promise-polyfill.js ../files/weather@mockturtl/3.8/
 tsc -p ../tsconfig.json
 cd $DIR
-#echo Building 3.0...
-#cp promise-polyfill.js ../files/weather@mockturtl/3.0/
-#tsc -p ../tsconfig.30.json
-
-# Remove Export lines because TS does not let me define every file
-# as individual modules and "export {};" is included in newer versions of TS
-#for f in ../files/weather@mockturtl/3.8/*.js; do
-#    sed -i '/export {};/d' "$f"
-#done
-
-#for f in ../files/weather@mockturtl/3.0/*.js; do
-#    sed -i '/export {};/d' "$f"
-#done

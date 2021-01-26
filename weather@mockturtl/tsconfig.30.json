@@ -11,7 +11,8 @@
         "outDir": "files/weather@mockturtl/3.0/"
     },
     "include": [
-        "src/**/*"
+		"src/declarations/*",
+		"src/attic/3_0/*"
     ],
     "exclude": [
         "files",
