@@ -2,7 +2,8 @@
 	"layout": {
         "type":"layout",
         "pages":[
-            "providers",
+			"providers",
+			"locations-page",
             "presentation-section",
 			"units-page",
 			"info-section"
@@ -13,6 +14,14 @@
             "sections":[
 				"provider-options",
 				"weather-conditions"
+            ]
+		},
+		"locations-page":{
+            "type":"page",
+            "title":"Location",
+            "sections": [
+				"location-section",
+				"location-store"
             ]
         },
         "presentation-section":{
@@ -42,16 +51,29 @@
 				"submit-issue"
 			]
 		},
+		"location-section" : {
+			"type":"section",
+			"title":"Location settings",
+			"keys":[
+				"manualLocation",
+				"location"
+			]
+		},
+		"location-store" : {
+			"type":"section",
+			"title":"Saved Locations",
+			"keys":[
+				"locationList",
+				"saveLocation",
+				"deleteLocation"
+			]
+		},
 		"provider-options" : {
 			"type":"section",
 			"title":"Weather Provider Options",
 			"keys":[
 				"dataService",
 				"apiKey",
-				"manualLocation",
-				"location",
-				"saveLocation",
-				"deleteLocation",
 				"refreshInterval",
 				"forecastDays",
 				"forecastHours"
@@ -333,6 +355,19 @@
 		"units": "rows",
 		"step": 1,
 		"description": "Maximum number of rows for forecast"
+	},
+	"locationList": {
+		"type" : "list",
+		"description" : "Your saved locations",
+		"columns" : [
+			{"id": "lat", "title": "Latitude", "type": "string"},
+			{"id": "lon", "title": "Longitude", "type": "string"},
+			{"id": "city", "title": "City", "type": "string"},
+			{"id": "country", "title": "Country", "type": "string"},
+			{"id": "entryText", "title": "Search entry", "type": "string", "default": ""},
+			{"id": "timeZone", "title": "Timezone", "type": "string", "default": ""}
+		],
+		"default" : []
 	},
 	"showSunrise": {
 		"type": "checkbox",
