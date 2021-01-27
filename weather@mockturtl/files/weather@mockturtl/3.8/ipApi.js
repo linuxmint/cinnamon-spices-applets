@@ -28,9 +28,7 @@ class IpApi {
                 city: json.city,
                 country: json.country,
                 timeZone: json.timezone,
-                mobile: json.mobile,
                 entryText: json.lat + "," + json.lon,
-                locationSource: "ip-api"
             };
             logger_1.Log.Instance.Debug("Location obtained:" + json.lat + "," + json.lon);
             return result;

@@ -16,7 +16,6 @@ const met_norway_1 = require("./met_norway");
 const httpLib_1 = require("./httpLib");
 const logger_1 = require("./logger");
 const consts_1 = require("./consts");
-const notification_service_1 = require("./notification_service");
 const visualcrossing_1 = require("./visualcrossing");
 const { TextIconApplet, AllowedLayout, MenuItem } = imports.ui.applet;
 const { spawnCommandLine } = imports.misc.util;
@@ -219,13 +218,7 @@ class WeatherApplet extends TextIconApplet {
         spawnCommandLine(command + "https://github.com/linuxmint/cinnamon-spices-applets/issues/new");
     }
     async saveCurrentLocation() {
-        if (this.config.CurrentLocation.locationSource == "ip-api") {
-            notification_service_1.NotificationService.Instance.Send(utils_1._("Error") + " - " + utils_1._("Location Store"), utils_1._("You can't save a location obtained automatically, sorry"));
-        }
         this.config.LocStore.SaveCurrentLocation(this.config.CurrentLocation);
-    }
-    async deleteCurrentLocation() {
-        this.config.LocStore.DeleteCurrentLocation(this.config.CurrentLocation);
     }
     on_orientation_changed(orientation) {
         this.orientation = orientation;

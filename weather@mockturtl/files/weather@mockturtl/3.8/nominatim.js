@@ -38,10 +38,7 @@ class GeoLocation {
                 city: locationData[0].address.city || locationData[0].address.town,
                 country: locationData[0].address.country,
                 timeZone: null,
-                mobile: null,
-                address_string: locationData[0].display_name,
                 entryText: this.BuildEntryText(locationData[0]),
-                locationSource: "address-search"
             };
             this.cache[searchText] = result;
             return result;

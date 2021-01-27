@@ -71,8 +71,9 @@ export class Config {
 		"us gb": "imperial"
     }
 
-    private readonly WEATHER_LOCATION = "location"
-    private readonly WEATHER_USE_SYMBOLIC_ICONS_KEY = 'useSymbolicIcons'
+    private readonly WEATHER_LOCATION = "location";
+	private readonly WEATHER_USE_SYMBOLIC_ICONS_KEY = 'useSymbolicIcons';
+	private readonly WEATHER_LOCATION_LIST = "locationList";
 	// Settings variables to bind to
 	// complex variables, using getters instead to access
 	private readonly _location: string;
@@ -106,7 +107,8 @@ export class Config {
     public readonly _tempTextOverride: string;
     public readonly _tempRussianStyle: boolean;
     public readonly _shortHourlyTime: boolean;
-    public readonly _showForecastDates: boolean;
+	public readonly _showForecastDates: boolean;
+	public readonly _locationList: LocationData[];
 
     /** Timeout */
     private doneTypingLocation: number = null;
@@ -128,7 +130,6 @@ export class Config {
 
     constructor(app: WeatherApplet, instanceID: number) {
 		this.app = app;
-		this.LocStore = new LocationStore(this.app);
 		this.currentLocale = ConstructJsLocale(get_language_names()[0]);
 		Log.Instance.Debug("System locale is " + this.currentLocale);
 
@@ -139,7 +140,8 @@ export class Config {
 		this.InterfaceSettings = new Settings({schema: "org.cinnamon.desktop.interface"});
 		this.InterfaceSettings.connect('changed::font-name', () => this.OnFontChanged());
 		this.currentFontSize = this.GetCurrentFontSize();
-        this.BindSettings();
+		this.BindSettings();
+		this.LocStore = new LocationStore(this.app, this);
     }
 
     /** Attaches settings to functions */
@@ -154,7 +156,10 @@ export class Config {
 
         // Settings what need special care
         this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
-            this.WEATHER_LOCATION, ("_" + this.WEATHER_LOCATION), Lang.bind(this, this.OnLocationChanged), null);
+			this.WEATHER_LOCATION, ("_" + this.WEATHER_LOCATION), Lang.bind(this, this.OnLocationChanged), null);
+		
+		this.settings.bindProperty(BindingDirection.BIDIRECTIONAL,
+			this.WEATHER_LOCATION_LIST, ("_" + this.WEATHER_LOCATION_LIST), Lang.bind(this, this.OnLocationStoreChanged), null);
 
         this.settings.bindProperty(BindingDirection.IN, "keybinding",
             "keybinding", Lang.bind(this, this.OnKeySettingsUpdated), null);
@@ -287,10 +292,8 @@ export class Config {
                 lon: parseFloat(latLong[1]),
                 city: null,
                 country: null,
-                mobile: null,
                 timeZone: null,
                 entryText: loc,
-                locationSource: "manual"
             }
             this.InjectLocationToConfig(location);
             return location;
@@ -350,6 +353,10 @@ export class Config {
 		this.doneTypingLocation = setTimeout(Lang.bind(this, this.DoneTypingLocation), 3000);
 	}
 
+	private OnLocationStoreChanged() {
+		this.LocStore.OnLocationChanged(this._locationList)
+	}
+
 	private OnFontChanged() {
 		this.currentFontSize = this.GetCurrentFontSize();
 		this.app.RefreshAndRebuild();
@@ -368,6 +375,10 @@ export class Config {
 
 	private SetLocation(value: string) {
 		this.settings.setValue(this.WEATHER_LOCATION, value);
+	}
+
+	public SetLocationList(list: LocationData[]) {
+		this.settings.setValue(this.WEATHER_LOCATION_LIST, list);
 	}
 
 	private GetLocaleTemperateUnit(code: string): WeatherUnits {

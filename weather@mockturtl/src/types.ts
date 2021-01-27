@@ -112,10 +112,7 @@ export interface LocationData {
     city: string;
     country: string;
     timeZone: string;
-    mobile: boolean;
-    address_string?: string;
     entryText: string;
-    locationSource: LocationSource;
 }
 
 export interface AppletError {

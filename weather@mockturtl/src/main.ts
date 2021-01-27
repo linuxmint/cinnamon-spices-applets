@@ -280,16 +280,9 @@ export class WeatherApplet extends TextIconApplet {
     }
 
     private async saveCurrentLocation(): Promise<void> {
-        if (this.config.CurrentLocation.locationSource == "ip-api") {
-            NotificationService.Instance.Send(_("Error") + " - " + _("Location Store"), _("You can't save a location obtained automatically, sorry"));
-        }
         this.config.LocStore.SaveCurrentLocation(this.config.CurrentLocation);
     }
 
-    private async deleteCurrentLocation(): Promise<void> {
-		this.config.LocStore.DeleteCurrentLocation(this.config.CurrentLocation);
-	}
-	
 	// -------------------------------------------------------------------
 	// Applet Overrides, do not delete
 

@@ -54,10 +54,10 @@ class Config {
         };
         this.WEATHER_LOCATION = "location";
         this.WEATHER_USE_SYMBOLIC_ICONS_KEY = 'useSymbolicIcons';
+        this.WEATHER_LOCATION_LIST = "locationList";
         this.doneTypingLocation = null;
         this.currentLocation = null;
         this.app = app;
-        this.LocStore = new locationstore_1.LocationStore(this.app);
         this.currentLocale = utils_1.ConstructJsLocale(get_language_names()[0]);
         logger_1.Log.Instance.Debug("System locale is " + this.currentLocale);
         this.autoLocProvider = new ipApi_1.IpApi(app);
@@ -68,6 +68,7 @@ class Config {
         this.InterfaceSettings.connect('changed::font-name', () => this.OnFontChanged());
         this.currentFontSize = this.GetCurrentFontSize();
         this.BindSettings();
+        this.LocStore = new locationstore_1.LocationStore(this.app, this);
     }
     BindSettings() {
         let k;
@@ -77,6 +78,7 @@ class Config {
             this.settings.bindProperty(BindingDirection.IN, key, keyProp, Lang.bind(this, this.OnSettingChanged), null);
         }
         this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, this.WEATHER_LOCATION, ("_" + this.WEATHER_LOCATION), Lang.bind(this, this.OnLocationChanged), null);
+        this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, this.WEATHER_LOCATION_LIST, ("_" + this.WEATHER_LOCATION_LIST), Lang.bind(this, this.OnLocationStoreChanged), null);
         this.settings.bindProperty(BindingDirection.IN, "keybinding", "keybinding", Lang.bind(this, this.OnKeySettingsUpdated), null);
         keybindingManager.addHotKey(consts_1.UUID, this.keybinding, Lang.bind(this.app, this.app.on_applet_clicked));
         this.settings.connect(consts_1.SIGNAL_CHANGED + this.WEATHER_USE_SYMBOLIC_ICONS_KEY, Lang.bind(this, this.IconTypeChanged));
@@ -168,10 +170,8 @@ class Config {
                 lon: parseFloat(latLong[1]),
                 city: null,
                 country: null,
-                mobile: null,
                 timeZone: null,
                 entryText: loc,
-                locationSource: "manual"
             };
             this.InjectLocationToConfig(location);
             return location;
@@ -218,6 +218,9 @@ class Config {
             utils_1.clearTimeout(this.doneTypingLocation);
         this.doneTypingLocation = utils_1.setTimeout(Lang.bind(this, this.DoneTypingLocation), 3000);
     }
+    OnLocationStoreChanged() {
+        this.LocStore.OnLocationChanged(this._locationList);
+    }
     OnFontChanged() {
         this.currentFontSize = this.GetCurrentFontSize();
         this.app.RefreshAndRebuild();
@@ -232,6 +235,9 @@ class Config {
     }
     SetLocation(value) {
         this.settings.setValue(this.WEATHER_LOCATION, value);
+    }
+    SetLocationList(list) {
+        this.settings.setValue(this.WEATHER_LOCATION_LIST, list);
     }
     GetLocaleTemperateUnit(code) {
         if (code == null || !this.fahrenheitCountries.includes(code))

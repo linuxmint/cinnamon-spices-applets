@@ -2,6 +2,7 @@
 // TODO: Make internal persistent setting when switching to location store entries and back
 // Example schema entry:
 
+import { Config } from "./config";
 import { Event } from "./events";
 import { CloseStream, LoadContents, OverwriteAndGetIOStream, WriteAsync } from "./io_lib";
 import { Log } from "./logger";
@@ -30,10 +31,11 @@ const GLib = imports.gi.GLib;
 */
 export class LocationStore {
 
-    private path: string = null; // ~/.config/weather-mockturtl/locations.json
-    private file: imports.gi.Gio.File = null;
+    //private path: string = null; // ~/.config/weather-mockturtl/locations.json
+    //private file: imports.gi.Gio.File = null;
     private locations: LocationData[] = [];
-    private app: WeatherApplet = null;
+	private app: WeatherApplet = null;
+	private config: Config = null;
 
 	/**
 	 * Current head on locationStore array.
@@ -41,7 +43,7 @@ export class LocationStore {
 	 * not in the store. It gets moved to the end of array if user
 	 * saves a new location. On deletion it moves to the next index
 	 */
-    private currentIndex = 0;
+	private currentIndex = 0;
 
 	/**
 	 * event callback for applet when location storage is modified
@@ -54,14 +56,60 @@ export class LocationStore {
 	 * @param app 
 	 * @param onStoreChanged called when locations are loaded from file, added or deleted
 	 */
-    constructor(app: WeatherApplet) {
-        this.app = app;
+    constructor(app: WeatherApplet, config: Config) {
+		this.app = app;
+		this.config = config;
 
-        this.path = this.GetConfigPath() + "/weather-mockturtl/locations.json"
-        Log.Instance.Debug("location store path is: " + this.path);
-        this.file = Gio.File.new_for_path(this.path);
-        this.LoadSavedLocations();
-    }
+        //this.path = this.GetConfigPath() + "/weather-mockturtl/locations.json"
+        //Log.Instance.Debug("location store path is: " + this.path);
+        //this.file = Gio.File.new_for_path(this.path);
+		//this.LoadSavedLocations();
+		this.locations = config._locationList;
+		
+	}
+	
+	public OnLocationChanged(locs: LocationData[]) {
+		// this is called 4 times in a row, try to prevent that
+		if (this.app.Locked())
+			return;
+		let currentEqual = this.IsEqual(this.locations?.[this.currentIndex], locs?.[this.currentIndex])
+		this.locations = locs;
+		if (!currentEqual)
+			this.app.RefreshAndRebuild()
+	}
+
+	public IsChanged(newLocs: LocationData[]) {
+		for (let index = 0; index < newLocs.length; index++) {
+			const element = newLocs[index];
+			const oldElement = this.locations?.[index];
+			if (!this.IsEqual(oldElement, element))
+				return true;
+		}
+		return false;
+	}
+
+	public IsSelectedChanged(newLocs: LocationData[]): boolean {
+		const element = newLocs?.[this.currentIndex];
+		const oldElement = this.locations?.[this.currentIndex];
+		return !this.IsEqual(oldElement, element);
+	}
+
+	public IsEqual(oldLoc: LocationData, newLoc: LocationData): boolean {
+		if (oldLoc == null)
+			return false;
+		if (newLoc == null)
+			return false;
+
+		for (let key in Object.keys(newLoc)) {
+			if ((oldLoc as any)[key] != (newLoc as any)[key]) {
+				global.log((oldLoc as any)[key])
+				global.log((newLoc as any)[key])
+				return false
+			}
+
+		}
+		return true;
+	}
 	
 	/**
 	 * Switch to a location if it's in storage. DOES NOT
@@ -85,15 +133,12 @@ export class LocationStore {
             const element = this.locations[index];
             if (element.entryText == entryText)
                 return {
-                    address_string: element.address_string,
                     country: element.country,
                     city: element.city,
                     entryText: element.entryText,
                     lat: element.lat,
                     lon: element.lon,
-                    mobile: element.mobile,
                     timeZone: element.timeZone,
-                    locationSource: element.locationSource,
                 }
         }
         return null;
@@ -124,15 +169,12 @@ export class LocationStore {
         this.currentIndex = nextIndex;
         // Return copy, not original so nothing interferes with fileStore
         return {
-            address_string: this.locations[nextIndex].address_string,
             country: this.locations[nextIndex].country,
             city: this.locations[nextIndex].city,
             entryText: this.locations[nextIndex].entryText,
             lat: this.locations[nextIndex].lat,
             lon: this.locations[nextIndex].lon,
-            mobile: this.locations[nextIndex].mobile,
             timeZone: this.locations[nextIndex].timeZone,
-            locationSource: this.locations[nextIndex].locationSource,
         }
     }
 
@@ -160,15 +202,12 @@ export class LocationStore {
         Log.Instance.Debug("Switching to index " + previousIndex.toString() + "...");
         this.currentIndex = previousIndex;
         return {
-            address_string: this.locations[previousIndex].address_string,
             country: this.locations[previousIndex].country,
             city: this.locations[previousIndex].city,
             entryText: this.locations[previousIndex].entryText,
             lat: this.locations[previousIndex].lat,
             lon: this.locations[previousIndex].lon,
-            mobile: this.locations[previousIndex].mobile,
             timeZone: this.locations[previousIndex].timeZone,
-            locationSource: this.locations[previousIndex].locationSource,
         };
     }
 
@@ -198,46 +237,19 @@ export class LocationStore {
         this.InvokeStorageChanged();
         await this.SaveToFile();
         NotificationService.Instance.Send(_("Success") + " - " + _("Location Store"), _("Location is saved to library"), true);
-
     }
-
-    public async DeleteCurrentLocation(loc: LocationData) {
-        if (this.app.Locked()) {
-            NotificationService.Instance.Send(_("Info") + " - " + _("Location Store"), _("You can't remove a location while the applet is refreshing"), true);
-            return;
-        }
-        if (loc == null) {
-            NotificationService.Instance.Send(_("Info") + " - " + _("Location Store"), _("You can't remove an incorrect location"), true);
-            return;
-        }
-
-        if (!this.InStorage(loc)) {
-            NotificationService.Instance.Send(_("Info") + " - " + _("Location Store"), _("Location is not in storage, can't delete"), true);
-            return;
-        }
-        // Find location
-        let index = this.FindIndex(loc);
-        this.locations.splice(index, 1);
-        // Go to to previous saved location
-        this.currentIndex = this.currentIndex--;
-        if (this.currentIndex < 0) this.currentIndex = this.locations.length - 1; // reached start of array
-        if (this.currentIndex < 0) this.currentIndex = 0; // no items in array
-		NotificationService.Instance.Send(_("Success") + " - " + _("Location Store"), _("Location is deleted from library"), true);
-		await this.SaveToFile();
-        this.InvokeStorageChanged();
-	}
 	
-	private GetConfigPath(): string {
+	/*private GetConfigPath(): string {
         let configPath = GLib.getenv('XDG_CONFIG_HOME')
         if (configPath == null) configPath = GLib.get_home_dir() + "/.config"
         return configPath;
-	}
+	}*/
 
     private InvokeStorageChanged() {
-        this.StoreChanged.Invoke(this, this.locations.length);
+        //this.StoreChanged.Invoke(this, this.locations.length);
     }
 
-    private async LoadSavedLocations(): Promise<boolean> {
+    /*private async LoadSavedLocations(): Promise<boolean> {
         let content = null;
         try {
             content = await LoadContents(this.file);
@@ -269,12 +281,10 @@ export class LocationStore {
             return false;
         }
 
-    }
+    }*/
 
     private async SaveToFile() {
-        let writeFile = (await OverwriteAndGetIOStream(this.file)).get_output_stream();
-        await WriteAsync(writeFile, JSON.stringify(this.locations, null, 2));
-        await CloseStream(writeFile);
+        this.config.SetLocationList(this.locations);
 	}
 	
 	private InStorage(loc: LocationData): boolean {
