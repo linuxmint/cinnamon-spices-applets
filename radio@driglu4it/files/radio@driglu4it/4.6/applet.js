@@ -1,5 +1,5 @@
 const { TextIconApplet, AllowedLayout, AppletPopupMenu } = imports.ui.applet;
-const { PopupMenuManager, PopupSeparatorMenuItem, PopupMenuItem } = imports.ui.popupMenu;
+const { PopupMenuManager, PopupSeparatorMenuItem, PopupMenuItem, PopupSubMenuMenuItem } = imports.ui.popupMenu;
 const { AppletSettings } = imports.ui.settings;
 const { spawnCommandLine, spawnCommandLineAsyncIO } = imports.misc.util;
 const { ScrollDirection } = imports.gi.Clutter;
@@ -7,8 +7,10 @@ const Gettext = imports.gettext; // l10n support
 const { get_home_dir } = imports.gi.GLib;
 const { Clipboard, ClipboardType } = imports.gi.St;
 const { file_new_for_path } = imports.gi.Gio;
+const St = imports.gi.St;
 
 const { MpvPlayerHandler } = require('./mpvPlayerHandler')
+const MPRIS_PLUGIN_URL = "https://github.com/hoyon/mpv-mpris/releases/download/0.5/mpris.so"
 
 // for i18n
 let UUID;
@@ -19,6 +21,7 @@ function _(str) {
   }
   return Gettext.gettext(str);
 }
+
 
 class CinnamonRadioApplet extends TextIconApplet {
   constructor(orientation, panel_height, instance_id) {
@@ -34,7 +37,8 @@ class CinnamonRadioApplet extends TextIconApplet {
     this.settings = new AppletSettings(this, __meta.uuid, instance_id);
     this._initSettings()
 
-    const initialChannel = this._initMpvPlayer()
+    this._initMpvPlayer()
+    const initialChannel = this._getChannel({ channelUrl: this.mpvPlayer.getRunningRadioUrl() })
     this._initGui(orientation, initialChannel)
   }
 
@@ -62,8 +66,6 @@ class CinnamonRadioApplet extends TextIconApplet {
       _getInitialVolume: () => this._getInitialVolume()
     })
 
-    const initialChannel = this._getChannel({ channelUrl: this.mpvPlayer.getRunningRadioUrl() })
-    return initialChannel
   }
 
   _handleRadioStopped(volume) {
@@ -72,16 +74,13 @@ class CinnamonRadioApplet extends TextIconApplet {
   }
 
   _initGui(orientation, initialChannel) {
-    const menuManager = new PopupMenuManager(this);
-    this.menu = new AppletPopupMenu(this, orientation);
-    menuManager.addMenu(this.menu);
 
-    this._createContextMenu()
     this.set_icon();
     this.set_applet_label({ currentChannel: initialChannel })
     this._setIconColor({ radioPlaying: initialChannel })
     this.set_applet_tooltip({ channel: initialChannel })
-    this._createMenu({ currentChannel: initialChannel })
+    this._createMenu({ currentChannel: initialChannel, orientation })
+    this._createContextMenu()
     this.actor.connect('scroll-event', (actor, event) => this._on_mouse_scroll(event));
   }
 
@@ -150,22 +149,37 @@ class CinnamonRadioApplet extends TextIconApplet {
     }
   }
 
-  _createMenu({ currentChannel }) {
-    this.channel_list.forEach(channel => {
-      if (channel.inc === true) {
-        const channelItem = new PopupMenuItem(channel.name, false);
-        this.menu.addMenuItem(channelItem);
-        channelItem.connect('activate', (e) => { this._on_radio_channel_clicked(e, channel) });
-        if (channel === currentChannel) this._setDotToMenuItem({ menuItemWithDot: channelItem })
-      }
-    });
-    this.menu.addMenuItem(new PopupSeparatorMenuItem());
+  _createMenu({ currentChannel, orientation }) {
+
+    if (!this.menu) {
+      const menuManager = new PopupMenuManager(this);
+      this.menu = new AppletPopupMenu(this, orientation);
+      menuManager.addMenu(this.menu);
+    }
+
+    this.radioListSubMenu = this._createRadioSubMenu({ currentChannel })
+    this.menu.addMenuItem(this.radioListSubMenu)
 
     // stop Item
     this.stopitem = new PopupMenuItem(_("Stop"), false);
     this.menu.addMenuItem(this.stopitem);
     if (!currentChannel) { this._setDotToMenuItem({ menuItemWithDot: this.stopitem }) }
     this.stopitem.connect('activate', () => { this._on_stop_item_clicked(); });
+  }
+
+  _createRadioSubMenu({ currentChannel }) {
+    const radioListSubMenu = new PopupSubMenuMenuItem(_("List of stations"))
+
+    this.channel_list.forEach(channel => {
+      if (channel.inc === true) {
+        const channelItem = new PopupMenuItem(channel.name, false);
+        radioListSubMenu.menu.addMenuItem(channelItem);
+        channelItem.connect('activate', (e) => { this._on_radio_channel_clicked(e, channel) });
+        if (channel === currentChannel) this._setDotToMenuItem({ menuItemWithDot: channelItem })
+      }
+    });
+
+    return radioListSubMenu
   }
 
   _createContextMenu() {
@@ -254,6 +268,7 @@ class CinnamonRadioApplet extends TextIconApplet {
   on_applet_clicked() {
     if (this._check_dependencies()) {
       this.menu.toggle();
+      this.radioListSubMenu.menu.open(true);
     }
   }
 
