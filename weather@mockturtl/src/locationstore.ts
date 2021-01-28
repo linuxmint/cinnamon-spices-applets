@@ -222,12 +222,6 @@ export class LocationStore {
         this.SaveBackLocations();
         NotificationService.Instance.Send(_("Success") + " - " + _("Location Store"), _("Location is saved to library"), true);
     }
-	
-	/*private GetConfigPath(): string {
-        let configPath = GLib.getenv('XDG_CONFIG_HOME')
-        if (configPath == null) configPath = GLib.get_home_dir() + "/.config"
-        return configPath;
-	}*/
 
     private InvokeStorageChanged() {
         this.StoreChanged.Invoke(this, this.locations.length);
