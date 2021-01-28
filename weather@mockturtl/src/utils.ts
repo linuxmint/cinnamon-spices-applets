@@ -9,11 +9,24 @@ const { IconTheme } = imports.gi.Gtk;
 // --------------------------------------------------------------
 // Text Generators
 
-export function _(str: string): string {
+export function _(str: string, ...args: string[]): string {
     let customTrans = imports.gettext.dgettext(UUID, str);
-     if (customTrans !== str && customTrans !== "")
-        return customTrans;
-    return imports.gettext.gettext(str);
+    let result;
+    if (customTrans !== str && customTrans !== "")
+        result = customTrans;
+    result = imports.gettext.gettext(str);
+
+    if (args.length > 0)
+        result = format(str, args);
+
+    return result;
+}
+
+export function format(str: string, args: string[]) {
+    for (let index = 0; index < args.length; index++) {
+        str = str.replace(new RegExp("\\$\\{[\\w]+\\}"), args[index]);
+    }
+    return str;
 }
 
 export function UnitToUnicode(unit: WeatherUnits): string {

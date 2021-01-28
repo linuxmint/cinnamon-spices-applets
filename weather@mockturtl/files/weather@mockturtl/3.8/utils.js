@@ -1,17 +1,28 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.setInterval = exports.clearTimeout = exports.delay = exports.setTimeout = exports.Guid = exports.GetFuncName = exports.GetDistance = exports.ConstructJsLocale = exports.ShadeHexColor = exports.WeatherIconSafely = exports.IsLangSupported = exports.NotEmpty = exports.IsCoordinate = exports.IsNight = exports.CompassDirection = exports.CompassToDeg = exports.KmToM = exports.MPHtoMPS = exports.FahrenheitToKelvin = exports.CelsiusToKelvin = exports.KPHtoMPS = exports.MillimeterToUserUnits = exports.MetreToUserUnits = exports.PressToUserUnits = exports.TempToUserConfig = exports.MPStoUserUnits = exports.ProcessCondition = exports.MilitaryTime = exports.AwareDateString = exports.GetHoursMinutes = exports.GetDayName = exports.CapitalizeFirstLetter = exports.GenerateLocationText = exports.UnitToUnicode = exports._ = void 0;
+exports.setInterval = exports.clearTimeout = exports.delay = exports.setTimeout = exports.Guid = exports.GetFuncName = exports.GetDistance = exports.ConstructJsLocale = exports.ShadeHexColor = exports.WeatherIconSafely = exports.IsLangSupported = exports.NotEmpty = exports.IsCoordinate = exports.IsNight = exports.CompassDirection = exports.CompassToDeg = exports.KmToM = exports.MPHtoMPS = exports.FahrenheitToKelvin = exports.CelsiusToKelvin = exports.KPHtoMPS = exports.MillimeterToUserUnits = exports.MetreToUserUnits = exports.PressToUserUnits = exports.TempToUserConfig = exports.MPStoUserUnits = exports.ProcessCondition = exports.MilitaryTime = exports.AwareDateString = exports.GetHoursMinutes = exports.GetDayName = exports.CapitalizeFirstLetter = exports.GenerateLocationText = exports.UnitToUnicode = exports.format = exports._ = void 0;
 const consts_1 = require("./consts");
 const { timeout_add, source_remove } = imports.mainloop;
 const { IconType } = imports.gi.St;
 const { IconTheme } = imports.gi.Gtk;
-function _(str) {
+function _(str, ...args) {
     let customTrans = imports.gettext.dgettext(consts_1.UUID, str);
+    let result;
     if (customTrans !== str && customTrans !== "")
-        return customTrans;
-    return imports.gettext.gettext(str);
+        result = customTrans;
+    result = imports.gettext.gettext(str);
+    if (args.length > 0)
+        result = format(str, args);
+    return result;
 }
 exports._ = _;
+function format(str, args) {
+    for (let index = 0; index < args.length; index++) {
+        str = str.replace(new RegExp("\\$\\{[\\w]+\\}"), args[index]);
+    }
+    return str;
+}
+exports.format = format;
 function UnitToUnicode(unit) {
     return unit == "fahrenheit" ? '\u2109' : '\u2103';
 }

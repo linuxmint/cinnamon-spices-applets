@@ -138,9 +138,9 @@ export class Yahoo implements WeatherProvider {
         Log.Instance.Debug("yahoo API error payload: " + json);
         switch (type) {
             case "import":
-                NotificationService.Instance.Send(_("Missing package"), _("Please install '") + this.GetMissingPackage(json) + _("', then refresh manually."))
+                NotificationService.Instance.Send(_("Missing package"), _("Please install '${missingPackage}', then refresh manually.", this.GetMissingPackage(json)));
                 Log.Instance.Error(errorMsg + json.error.message);
-                this.app.ShowError({ detail: "import error", type: "hard", userError: true, service: "yahoo", message: _("Please install '") + this.GetMissingPackage(json) + _("', then refresh manually.") })
+                this.app.ShowError({ detail: "import error", type: "hard", userError: true, service: "yahoo", message: _("Please install '${missingPackage}', then refresh manually.", this.GetMissingPackage(json)) })
                 break;
             case "network":
                 this.app.ShowError({ detail: "no api response", type: "soft", service: "yahoo", message: _("Could not connect to Yahoo API.") })

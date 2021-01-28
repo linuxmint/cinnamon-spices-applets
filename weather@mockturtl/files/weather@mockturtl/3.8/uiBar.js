@@ -32,10 +32,11 @@ class UIBar {
     Display(weather, provider, config, shouldShowToggle) {
         this._providerCredit.label = utils_1._("Powered by") + " " + provider.prettyName;
         this._providerCredit.url = provider.website;
-        this._timestamp.text = utils_1._("As of") + " " + utils_1.AwareDateString(weather.date, config.currentLocale, config._show24Hours);
+        let lastUpdatedTime = utils_1.AwareDateString(weather.date, config.currentLocale, config._show24Hours);
+        this._timestamp.text = utils_1._("As of ${lastUpdatedTime}", lastUpdatedTime);
         if (weather.location.distanceFrom != null) {
-            this._timestamp.text += (", " + utils_1.MetreToUserUnits(weather.location.distanceFrom, config.DistanceUnit)
-                + this.BigDistanceUnitFor(config.DistanceUnit) + " " + utils_1._("from you"));
+            this._timestamp.text += ", ";
+            this._timestamp.text += utils_1._("${distance}${distanceUnit} from you", utils_1.MetreToUserUnits(weather.location.distanceFrom, config.DistanceUnit).toString(), this.BigDistanceUnitFor(config.DistanceUnit));
         }
         if (!shouldShowToggle)
             this.HideHourlyToggle();

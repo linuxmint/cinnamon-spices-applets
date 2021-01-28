@@ -47,12 +47,13 @@ export class UIBar {
     public Display(weather: WeatherData, provider: WeatherProvider, config: Config, shouldShowToggle: boolean): boolean {
         this._providerCredit.label = _("Powered by") + " " + provider.prettyName;
         this._providerCredit.url = provider.website;
-        this._timestamp.text = _("As of") + " " + AwareDateString(weather.date, config.currentLocale, config._show24Hours);
+        let lastUpdatedTime = AwareDateString(weather.date, config.currentLocale, config._show24Hours);
+        this._timestamp.text = _("As of ${lastUpdatedTime}", lastUpdatedTime); 
         if (weather.location.distanceFrom != null) {
-            this._timestamp.text += (
-                ", " + MetreToUserUnits(weather.location.distanceFrom, config.DistanceUnit)
-                + this.BigDistanceUnitFor(config.DistanceUnit) + " " + _("from you")
-            );
+            this._timestamp.text += ", ";
+            this._timestamp.text += _("${distance}${distanceUnit} from you",
+                                       MetreToUserUnits(weather.location.distanceFrom, config.DistanceUnit).toString(),
+                                       this.BigDistanceUnitFor(config.DistanceUnit));
         }
         if (!shouldShowToggle)
             this.HideHourlyToggle();
