@@ -214,7 +214,6 @@
 		"indent": true,
 		"description": "Save current location to storage",
 		"callback": "saveCurrentLocation",
-		"dependency": "manualLocation",
 		"tooltip": "Saves location information to file, so you can switch between them with buttons in the applet (what will appear if you have more than one)."
 	},
 	"getLocation": {
@@ -355,8 +354,8 @@
 			{"id": "lon", "title": "Longitude", "type": "float", "min": -180, "max": 180},
 			{"id": "city", "title": "City", "type": "string"},
 			{"id": "country", "title": "Country", "type": "string"},
-			{"id": "entryText", "title": "Search entry", "type": "string", "default": ""},
-			{"id": "timeZone", "title": "Timezone", "type": "string", "default": ""}
+			{"id": "timeZone", "title": "Timezone", "type": "string", "default": ""},
+			{"id": "entryText", "title": "Search entry", "type": "string", "default": ""}
 		],
 		"default" : []
 	},

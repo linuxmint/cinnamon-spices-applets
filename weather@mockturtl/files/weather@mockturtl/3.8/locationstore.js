@@ -5,8 +5,6 @@ const events_1 = require("./events");
 const logger_1 = require("./logger");
 const notification_service_1 = require("./notification_service");
 const utils_1 = require("./utils");
-const Gio = imports.gi.Gio;
-const GLib = imports.gi.GLib;
 class LocationStore {
     constructor(app, config) {
         this.locations = [];
@@ -29,6 +27,7 @@ class LocationStore {
         if (newIndex == -1 && currentIndex == -1) {
             let tmp = [];
             this.locations = locs.concat(tmp);
+            this.InvokeStorageChanged();
             return;
         }
         else if (newIndex == currentIndex)
@@ -43,6 +42,7 @@ class LocationStore {
             logger_1.Log.Instance.Debug("Currently used location was changed or deleted from locationstore, triggering refresh.");
             this.app.RefreshAndRebuild();
         }
+        this.InvokeStorageChanged();
     }
     IsSelectedChanged(newLocs) {
         var _a;
@@ -161,12 +161,13 @@ class LocationStore {
         this.locations.push(loc);
         this.currentIndex = this.locations.length - 1;
         this.InvokeStorageChanged();
-        await this.SaveToFile();
+        this.SaveBackLocations();
         notification_service_1.NotificationService.Instance.Send(utils_1._("Success") + " - " + utils_1._("Location Store"), utils_1._("Location is saved to library"), true);
     }
     InvokeStorageChanged() {
+        this.StoreChanged.Invoke(this, this.locations.length);
     }
-    async SaveToFile() {
+    SaveBackLocations() {
         this.config.SetLocationList(this.locations);
     }
     InStorage(loc) {

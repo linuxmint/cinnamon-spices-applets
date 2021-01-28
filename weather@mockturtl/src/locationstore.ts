@@ -4,35 +4,12 @@
 
 import { Config } from "./config";
 import { Event } from "./events";
-import { CloseStream, LoadContents, OverwriteAndGetIOStream, WriteAsync } from "./io_lib";
 import { Log } from "./logger";
 import { WeatherApplet } from "./main";
 import { NotificationService } from "./notification_service";
 import { LocationData } from "./types";
 import { _ } from "./utils";
-
-const Gio = imports.gi.Gio;
-const GLib = imports.gi.GLib;
-
-/*"location-list": {
-		"type" : "list",
-		"description" : "Your saved locations",
-		"columns" : [
-			{"id": "lat", "title": "Latitude", "type": "string"},
-			{"id": "lon", "title": "Longitude", "type": "string"},
-			{"id": "city", "title": "City", "type": "string"},
-			{"id": "country", "title": "Country", "type": "string"},
-			{"id": "address_string", "title": "Full Address", "type": "string", "default": ""},
-			{"id": "entryText", "title": "Text in location entry", "type": "string", "default": ""},
-			{"id": "timeZone", "title": "Timezone", "type": "string", "default": ""}
-		],
-		"default" : []
-	},
-*/
 export class LocationStore {
-
-    //private path: string = null; // ~/.config/weather-mockturtl/locations.json
-    //private file: imports.gi.Gio.File = null;
     private locations: LocationData[] = [];
 	private app: WeatherApplet = null;
 	private config: Config = null;
@@ -59,11 +36,6 @@ export class LocationStore {
     constructor(app: WeatherApplet, config: Config) {
 		this.app = app;
 		this.config = config;
-
-        //this.path = this.GetConfigPath() + "/weather-mockturtl/locations.json"
-        //Log.Instance.Debug("location store path is: " + this.path);
-        //this.file = Gio.File.new_for_path(this.path);
-		//this.LoadSavedLocations();
 		this.locations = config._locationList;
 		
 	}
@@ -80,7 +52,8 @@ export class LocationStore {
 		// no need to do anything, not using locationstore atm
 		if (newIndex == -1 && currentIndex == -1) {
 			let tmp: LocationData[] = [];
-			this.locations = locs.concat(tmp)
+			this.locations = locs.concat(tmp);
+			this.InvokeStorageChanged();
 			return;
 		}
 		else if (newIndex == currentIndex)
@@ -100,6 +73,7 @@ export class LocationStore {
 			Log.Instance.Debug("Currently used location was changed or deleted from locationstore, triggering refresh.")
 			this.app.RefreshAndRebuild()
 		}
+		this.InvokeStorageChanged();
 	}
 
 	public IsSelectedChanged(newLocs: LocationData[]): boolean {
@@ -245,7 +219,7 @@ export class LocationStore {
         this.locations.push(loc);
         this.currentIndex = this.locations.length - 1; // head to saved location
         this.InvokeStorageChanged();
-        await this.SaveToFile();
+        this.SaveBackLocations();
         NotificationService.Instance.Send(_("Success") + " - " + _("Location Store"), _("Location is saved to library"), true);
     }
 	
@@ -256,44 +230,10 @@ export class LocationStore {
 	}*/
 
     private InvokeStorageChanged() {
-        //this.StoreChanged.Invoke(this, this.locations.length);
+        this.StoreChanged.Invoke(this, this.locations.length);
     }
 
-    /*private async LoadSavedLocations(): Promise<boolean> {
-        let content = null;
-        try {
-            content = await LoadContents(this.file);
-        }
-        catch(e) {
-            let error: GJSError = e;
-            if (error.matches(error.domain, Gio.IOErrorEnum.NOT_FOUND)) {
-                Log.Instance.Print("Location store does not exist, skipping loading...")
-                return true;
-            }
-
-            Log.Instance.Error("Can't load locations.json, error: " + error.message);
-            return false;
-        }
-
-        if (content == null) return false;
-
-        try {
-            let locations = JSON.parse(content) as LocationData[];
-            this.locations = locations;
-            Log.Instance.Print("Saved locations are loaded in from location store at: '" + this.path + "'");
-            Log.Instance.Debug("Locations loaded: " + JSON.stringify(this.locations, null, 2));
-            this.InvokeStorageChanged();
-            return true;
-        }
-        catch (e) {
-            Log.Instance.Error("Error loading locations from store: " + (e as Error).message);
-            NotificationService.Instance.Send(_("Error") + " - " + _("Location Store"), _("Failed to load in data from location storage, please see the logs for more information"))
-            return false;
-        }
-
-    }*/
-
-    private async SaveToFile() {
+    private SaveBackLocations() {
         this.config.SetLocationList(this.locations);
 	}
 	
