@@ -141,6 +141,6 @@
   "last-volume": {
     "type": "generic",
     "value": 0,
-    "default": 60
+    "default": 80
   }
 }
