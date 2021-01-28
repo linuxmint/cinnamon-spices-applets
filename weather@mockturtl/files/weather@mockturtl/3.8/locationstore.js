@@ -113,8 +113,6 @@ class LocationStore {
     GetPreviousLocation(currentLoc) {
         if (this.locations.length == 0)
             return currentLoc;
-        if (this.locations.length == 0)
-            return currentLoc;
         let previousIndex = null;
         if (this.InStorage(currentLoc)) {
             previousIndex = this.FindIndex(currentLoc) - 1;
@@ -162,7 +160,6 @@ class LocationStore {
         this.currentIndex = this.locations.length - 1;
         this.InvokeStorageChanged();
         this.SaveBackLocations();
-        notification_service_1.NotificationService.Instance.Send(utils_1._("Success") + " - " + utils_1._("Location Store"), utils_1._("Location is saved to library"), true);
     }
     InvokeStorageChanged() {
         this.StoreChanged.Invoke(this, this.locations.length);

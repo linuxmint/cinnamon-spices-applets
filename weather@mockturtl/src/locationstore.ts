@@ -167,7 +167,6 @@ export class LocationStore {
 	 */
     public GetPreviousLocation(currentLoc: LocationData): LocationData {
         if (this.locations.length == 0) return currentLoc; // this should not happen, as buttons are useless in this case
-        if (this.locations.length == 0) return currentLoc; // this should not happen, as buttons are useless in this case
         let previousIndex = null;
         if (this.InStorage(currentLoc)) { // if location is stored move to the previous one
             previousIndex = this.FindIndex(currentLoc) - 1;
@@ -220,7 +219,6 @@ export class LocationStore {
         this.currentIndex = this.locations.length - 1; // head to saved location
         this.InvokeStorageChanged();
         this.SaveBackLocations();
-        NotificationService.Instance.Send(_("Success") + " - " + _("Location Store"), _("Location is saved to library"), true);
     }
 
     private InvokeStorageChanged() {
