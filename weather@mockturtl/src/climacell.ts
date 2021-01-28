@@ -11,7 +11,7 @@ import { Log } from "./logger";
 import { WeatherApplet } from "./main";
 import { SunTimes } from "./sunCalc";
 import { WeatherProvider, WeatherData, HourlyForecastData, ForecastData, Condition, LocationData } from "./types";
-import { CelsiusToKelvin, _, IsNight, WeatherIconSafely } from "./utils";
+import { CelsiusToKelvin, _, IsNight } from "./utils";
 
 const Lang: typeof imports.lang = imports.lang;
 

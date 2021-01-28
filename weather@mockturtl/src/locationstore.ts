@@ -27,17 +27,10 @@ export class LocationStore {
 	 */
 	public readonly StoreChanged = new Event<LocationStore, number>();
 
-	/**
-	 * 
-	 * @param path to storage file
-	 * @param app 
-	 * @param onStoreChanged called when locations are loaded from file, added or deleted
-	 */
     constructor(app: WeatherApplet, config: Config) {
 		this.app = app;
 		this.config = config;
 		this.locations = config._locationList;
-		
 	}
 	
 	public OnLocationChanged(locs: LocationData[]) {
@@ -74,25 +67,6 @@ export class LocationStore {
 			this.app.RefreshAndRebuild()
 		}
 		this.InvokeStorageChanged();
-	}
-
-	public IsSelectedChanged(newLocs: LocationData[]): boolean {
-		const element = newLocs?.[this.currentIndex];
-		const oldElement = this.locations?.[this.currentIndex];
-		return !this.IsEqual(oldElement, element);
-	}
-
-	public IsEqual(oldLoc: LocationData, newLoc: LocationData): boolean {
-		if (oldLoc == null)
-			return false;
-		if (newLoc == null)
-			return false;
-		for (let key in newLoc) {
-			if ((oldLoc as any)[key] != (newLoc as any)[key]) {
-				return false
-			}
-		}
-		return true;
 	}
 	
 	/**
@@ -241,5 +215,23 @@ export class LocationStore {
             if (element.entryText == loc.entryText) return index;
         }
         return -1;
+	}
+
+	/**
+	 * Checks if 2 locations are completely equal
+	 * @param oldLoc 
+	 * @param newLoc 
+	 */
+	private IsEqual(oldLoc: LocationData, newLoc: LocationData): boolean {
+		if (oldLoc == null)
+			return false;
+		if (newLoc == null)
+			return false;
+		for (let key in newLoc) {
+			if ((oldLoc as any)[key] != (newLoc as any)[key]) {
+				return false
+			}
+		}
+		return true;
 	}
 }

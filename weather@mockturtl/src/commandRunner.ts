@@ -59,6 +59,14 @@ export async function SpawnProcess(command: string[]): Promise<GenericResponse> 
 	return response as GenericResponse;
 }
 
+export function OpenUrl(element: imports.gi.St.Button) {
+	if (!element.url) return;
+	imports.gi.Gio.app_info_launch_default_for_uri(
+		element.url,
+		global.create_app_launch_context()
+	)
+}
+
 interface GenericResponse {
 	Success: boolean;
 	Data: any;
@@ -76,11 +84,3 @@ interface ErrorData {
 }
 
 type ErrorType = "jsonParse" | "unknown"
-
-export function OpenUrl(element: imports.gi.St.Button) {
-	if (!element.url) return;
-	imports.gi.Gio.app_info_launch_default_for_uri(
-		element.url,
-		global.create_app_launch_context()
-	)
-}

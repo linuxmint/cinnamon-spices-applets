@@ -44,24 +44,6 @@ class LocationStore {
         }
         this.InvokeStorageChanged();
     }
-    IsSelectedChanged(newLocs) {
-        var _a;
-        const element = newLocs === null || newLocs === void 0 ? void 0 : newLocs[this.currentIndex];
-        const oldElement = (_a = this.locations) === null || _a === void 0 ? void 0 : _a[this.currentIndex];
-        return !this.IsEqual(oldElement, element);
-    }
-    IsEqual(oldLoc, newLoc) {
-        if (oldLoc == null)
-            return false;
-        if (newLoc == null)
-            return false;
-        for (let key in newLoc) {
-            if (oldLoc[key] != newLoc[key]) {
-                return false;
-            }
-        }
-        return true;
-    }
     SwitchToLocation(loc) {
         let index = this.FindIndex(loc);
         if (index == -1)
@@ -181,6 +163,18 @@ class LocationStore {
                 return index;
         }
         return -1;
+    }
+    IsEqual(oldLoc, newLoc) {
+        if (oldLoc == null)
+            return false;
+        if (newLoc == null)
+            return false;
+        for (let key in newLoc) {
+            if (oldLoc[key] != newLoc[key]) {
+                return false;
+            }
+        }
+        return true;
     }
 }
 exports.LocationStore = LocationStore;

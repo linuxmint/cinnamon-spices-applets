@@ -25,9 +25,6 @@ export class HttpLib {
 
 	/**
 	 * Handles obtaining JSON over http. 
-	 * @param query fully constructed url
-	 * @param errorCallback do checking before generic error checking by this function, to display API specific UI errors. should return null if
-	 * everything is ok, AppletError to display if there is an error
 	 */
     public async LoadJsonAsync<T>(url: string, params?: HTTPParams, method: Method = "GET"): Promise<Response<T>> {
 		let response = await this.LoadAsync(url, params, method);
@@ -55,8 +52,6 @@ export class HttpLib {
 	
 	/**
 	 * Handles obtaining data over http. 
-	 * @returns HTTPError object on fail.
-	 * @param query fully constructed url
 	 */
     public async LoadAsync(url: string, params?: HTTPParams, method: Method = "GET"): Promise<GenericResponse> {
 		let message = await this.Send(url, params, method);
@@ -95,6 +90,10 @@ export class HttpLib {
 				reason_phrase: message.reason_phrase,
 				response: message
 			}
+		}
+
+		if (message?.status_code > 200 && message?.status_code < 300) {
+			Log.Instance.Print("Wrning: API returned non-OK status code '" + message?.status_code + "'");
 		}
 
 		Log.Instance.Debug2("API full response: " + message?.response_body?.data?.toString());
