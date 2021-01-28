@@ -22,20 +22,27 @@ class LocationStore {
         var _a;
         if (this.app.Locked())
             return;
-        let currentEqual = this.IsEqual((_a = this.locations) === null || _a === void 0 ? void 0 : _a[this.currentIndex], locs === null || locs === void 0 ? void 0 : locs[this.currentIndex]);
-        this.locations = locs;
-        if (!currentEqual)
-            this.app.RefreshAndRebuild();
-    }
-    IsChanged(newLocs) {
-        var _a;
-        for (let index = 0; index < newLocs.length; index++) {
-            const element = newLocs[index];
-            const oldElement = (_a = this.locations) === null || _a === void 0 ? void 0 : _a[index];
-            if (!this.IsEqual(oldElement, element))
-                return true;
+        let currentIndex = this.FindIndex(this.config.CurrentLocation);
+        let newIndex = this.FindIndex(this.config.CurrentLocation, locs);
+        let currentlyDisplayedChanged = false;
+        let currentlyDisplayedDeleted = false;
+        if (newIndex == -1 && currentIndex == -1) {
+            let tmp = [];
+            this.locations = locs.concat(tmp);
+            return;
         }
-        return false;
+        else if (newIndex == currentIndex)
+            currentlyDisplayedChanged = !this.IsEqual((_a = this.locations) === null || _a === void 0 ? void 0 : _a[currentIndex], locs === null || locs === void 0 ? void 0 : locs[currentIndex]);
+        else if (newIndex == -1)
+            currentlyDisplayedDeleted = true;
+        else if (newIndex != currentIndex)
+            this.currentIndex = newIndex;
+        let tmp = [];
+        this.locations = locs.concat(tmp);
+        if (currentlyDisplayedChanged || currentlyDisplayedDeleted) {
+            logger_1.Log.Instance.Debug("Currently used location was changed or deleted from locationstore, triggering refresh.");
+            this.app.RefreshAndRebuild();
+        }
     }
     IsSelectedChanged(newLocs) {
         var _a;
@@ -48,10 +55,8 @@ class LocationStore {
             return false;
         if (newLoc == null)
             return false;
-        for (let key in Object.keys(newLoc)) {
+        for (let key in newLoc) {
             if (oldLoc[key] != newLoc[key]) {
-                global.log(oldLoc[key]);
-                global.log(newLoc[key]);
                 return false;
             }
         }
@@ -167,11 +172,13 @@ class LocationStore {
     InStorage(loc) {
         return this.FindIndex(loc) != -1;
     }
-    FindIndex(loc) {
+    FindIndex(loc, locations = null) {
         if (loc == null)
             return -1;
-        for (let index = 0; index < this.locations.length; index++) {
-            const element = this.locations[index];
+        if (locations == null)
+            locations = this.locations;
+        for (let index = 0; index < locations.length; index++) {
+            const element = locations[index];
             if (element.entryText == loc.entryText)
                 return index;
         }

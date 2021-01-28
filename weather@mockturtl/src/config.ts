@@ -325,7 +325,7 @@ export class Config {
 
 	private InjectLocationToConfig(loc: LocationData, switchToManual: boolean = false) {
         Log.Instance.Debug("Location setting is now: " + loc.entryText);
-        let text = loc.entryText + ""; // Only values can be injected into settings and not references, so we add empty string to it.
+        let text = (loc.entryText + ""); // Only values can be injected into settings and not references, so we add empty string to it.
         this.SetLocation(text);
         this.currentLocation = loc;
         if (switchToManual == true) this.settings.setValue(Keys.MANUAL_LOCATION, true);

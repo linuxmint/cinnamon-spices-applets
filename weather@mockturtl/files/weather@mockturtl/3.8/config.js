@@ -197,7 +197,7 @@ class Config {
     }
     InjectLocationToConfig(loc, switchToManual = false) {
         logger_1.Log.Instance.Debug("Location setting is now: " + loc.entryText);
-        let text = loc.entryText + "";
+        let text = (loc.entryText + "");
         this.SetLocation(text);
         this.currentLocation = loc;
         if (switchToManual == true)

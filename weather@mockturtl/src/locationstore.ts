@@ -72,20 +72,34 @@ export class LocationStore {
 		// this is called 4 times in a row, try to prevent that
 		if (this.app.Locked())
 			return;
-		let currentEqual = this.IsEqual(this.locations?.[this.currentIndex], locs?.[this.currentIndex])
-		this.locations = locs;
-		if (!currentEqual)
-			this.app.RefreshAndRebuild()
-	}
 
-	public IsChanged(newLocs: LocationData[]) {
-		for (let index = 0; index < newLocs.length; index++) {
-			const element = newLocs[index];
-			const oldElement = this.locations?.[index];
-			if (!this.IsEqual(oldElement, element))
-				return true;
+		let currentIndex = this.FindIndex(this.config.CurrentLocation);
+		let newIndex = this.FindIndex(this.config.CurrentLocation, locs);
+		let currentlyDisplayedChanged = false;
+		let currentlyDisplayedDeleted = false;
+		// no need to do anything, not using locationstore atm
+		if (newIndex == -1 && currentIndex == -1) {
+			let tmp: LocationData[] = [];
+			this.locations = locs.concat(tmp)
+			return;
 		}
-		return false;
+		else if (newIndex == currentIndex)
+			currentlyDisplayedChanged = !this.IsEqual(this.locations?.[currentIndex], locs?.[currentIndex])
+		else if (newIndex == -1)
+			currentlyDisplayedDeleted = true;
+		// currenlty displayed position's changed
+		// even tho this seems to happen automatically, 
+		// probably beacause I'm using object references somewhere
+		else if (newIndex != currentIndex) 
+			this.currentIndex = newIndex
+
+		let tmp: LocationData[] = [];
+		this.locations = locs.concat(tmp);
+
+		if (currentlyDisplayedChanged || currentlyDisplayedDeleted) {
+			Log.Instance.Debug("Currently used location was changed or deleted from locationstore, triggering refresh.")
+			this.app.RefreshAndRebuild()
+		}
 	}
 
 	public IsSelectedChanged(newLocs: LocationData[]): boolean {
@@ -99,14 +113,10 @@ export class LocationStore {
 			return false;
 		if (newLoc == null)
 			return false;
-
-		for (let key in Object.keys(newLoc)) {
+		for (let key in newLoc) {
 			if ((oldLoc as any)[key] != (newLoc as any)[key]) {
-				global.log((oldLoc as any)[key])
-				global.log((newLoc as any)[key])
 				return false
 			}
-
 		}
 		return true;
 	}
@@ -291,10 +301,11 @@ export class LocationStore {
         return this.FindIndex(loc) != -1;
     }
 
-    private FindIndex(loc: LocationData): number {
-        if (loc == null) return -1;
-        for (let index = 0; index < this.locations.length; index++) {
-            const element = this.locations[index];
+    private FindIndex(loc: LocationData, locations: LocationData[] = null): number {
+		if (loc == null) return -1;
+		if (locations == null) locations = this.locations
+        for (let index = 0; index < locations.length; index++) {
+            const element = locations[index];
             if (element.entryText == loc.entryText) return index;
         }
         return -1;
