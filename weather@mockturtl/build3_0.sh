@@ -15,14 +15,14 @@ DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null && pwd )"
 # Save current dir for convenience
 path=${PWD}
 
-cd $DIR/src/attic/3.0
+cd $DIR/src/3_0
 
 echo Building 3.0...
 cp promise-polyfill.js $DIR/files/weather@mockturtl/3.0/
-tsc -p $DIR/tsconfig.30.json
+tsc -p tsconfig.30.json
 cd $DIR
 
-for f in ../files/weather@mockturtl/3.0/*.js; do
+for f in files/weather@mockturtl/3.0/*.js; do
     sed -i '/export {};/d' "$f"
 done
 

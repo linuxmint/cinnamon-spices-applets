@@ -14,9 +14,4 @@
         "./**/*",
         "../declarations/*"
     ],
-    "exclude": [
-        "files",
-        "node_modules",
-		"**/*.spec.ts",
-    ]
 }

@@ -7,16 +7,10 @@
         "removeComments": true,
         "preserveConstEnums": true,
         "sourceMap": false,
-        "noImplicitThis": true,
-        "outDir": "files/weather@mockturtl/3.0/"
+        "outDir": "../../files/weather@mockturtl/3.0/"
     },
     "include": [
 		"../declarations/*",
 		"./**/*"
     ],
-    "exclude": [
-        "files",
-        "node_modules",
-        "**/*.spec.ts"
-    ]
 }
