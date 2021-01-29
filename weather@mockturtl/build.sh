@@ -14,7 +14,7 @@ DIR="$( cd -P "$( dirname "$SOURCE" )" >/dev/null && pwd )"
 # Save current dir for convenience
 path=${PWD}
 
-cd $DIR/src
+cd $DIR/src/3_8
 echo Building 3.8...
-tsc -p ../tsconfig.json
+tsc -p tsconfig.json
 cd $DIR
