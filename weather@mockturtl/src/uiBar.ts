@@ -48,13 +48,16 @@ export class UIBar {
         this._providerCredit.label = _("Powered by") + " " + provider.prettyName;
         this._providerCredit.url = provider.website;
         let lastUpdatedTime = AwareDateString(weather.date, config.currentLocale, config._show24Hours);
-        this._timestamp.text = _("As of ${lastUpdatedTime}", lastUpdatedTime); 
+		this._timestamp.text = _("As of ${lastUpdatedTime}", {"lastUpdatedTime": lastUpdatedTime}); 
+		
         if (weather.location.distanceFrom != null) {
-            this._timestamp.text += ", ";
-            this._timestamp.text += _("${distance}${distanceUnit} from you",
-                                       MetreToUserUnits(weather.location.distanceFrom, config.DistanceUnit).toString(),
-                                       this.BigDistanceUnitFor(config.DistanceUnit));
-        }
+			let stringFormat = {
+				distance: MetreToUserUnits(weather.location.distanceFrom, config.DistanceUnit).toString(),
+				distanceUnit: this.BigDistanceUnitFor(config.DistanceUnit)
+			}
+            this._timestamp.text += `, ${_("${distance}${distanceUnit} from you", stringFormat)}`;
+		}
+		
         if (!shouldShowToggle)
             this.HideHourlyToggle();
         return true;

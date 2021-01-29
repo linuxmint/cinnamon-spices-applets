@@ -138,16 +138,35 @@ export class Yahoo implements WeatherProvider {
         Log.Instance.Debug("yahoo API error payload: " + json);
         switch (type) {
             case "import":
-                NotificationService.Instance.Send(_("Missing package"), _("Please install '${missingPackage}', then refresh manually.", this.GetMissingPackage(json)));
+                NotificationService.Instance.Send(
+					_("Missing package"),
+					_("Please install '${missingPackage}', then refresh manually.", {"missingPackage": this.GetMissingPackage(json)})
+				);
                 Log.Instance.Error(errorMsg + json.error.message);
-                this.app.ShowError({ detail: "import error", type: "hard", userError: true, service: "yahoo", message: _("Please install '${missingPackage}', then refresh manually.", this.GetMissingPackage(json)) })
+                this.app.ShowError({ 
+					detail: "import error",
+					type: "hard",
+					userError: true,
+					service: "yahoo",
+					message: _("Please install '${missingPackage}', then refresh manually.", {"missingPackage": this.GetMissingPackage(json)})
+				})
                 break;
             case "network":
-                this.app.ShowError({ detail: "no api response", type: "soft", service: "yahoo", message: _("Could not connect to Yahoo API.") })
+                this.app.ShowError({
+					detail: "no api response",
+					type: "soft",
+					service: "yahoo",
+					message: _("Could not connect to Yahoo API.")
+				})
                 Log.Instance.Error(errorMsg + "Could not connect to API, error - " + json.error.data);
                 break;
             case "unknown":
-                this.app.ShowError({ detail: "no api response", type: "hard", service: "yahoo", message: _("Unknown error happened while obtaining weather, see Looking Glass logs for more information") })
+                this.app.ShowError({ 
+					detail: "no api response",
+					type: "hard",
+					service: "yahoo",
+					message: _("Unknown error happened while obtaining weather, see Looking Glass logs for more information")
+				})
                 Log.Instance.Error(errorMsg + "Unknown Error happened in yahoo bridge, error - " + json.error.data);
                 break
             default:

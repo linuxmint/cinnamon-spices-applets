@@ -5,20 +5,20 @@ const consts_1 = require("./consts");
 const { timeout_add, source_remove } = imports.mainloop;
 const { IconType } = imports.gi.St;
 const { IconTheme } = imports.gi.Gtk;
-function _(str, ...args) {
+function _(str, args) {
     let customTrans = imports.gettext.dgettext(consts_1.UUID, str);
     let result;
     if (customTrans !== str && customTrans !== "")
         result = customTrans;
     result = imports.gettext.gettext(str);
-    if (args.length > 0)
+    if (!!args)
         result = format(str, args);
     return result;
 }
 exports._ = _;
 function format(str, args) {
-    for (let index = 0; index < args.length; index++) {
-        str = str.replace(new RegExp("\\$\\{[\\w]+\\}"), args[index]);
+    for (let key in args) {
+        str = str.replace(new RegExp("\\$\\{" + key + "\\}"), args[key]);
     }
     return str;
 }

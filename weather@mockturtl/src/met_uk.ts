@@ -300,13 +300,42 @@ export class MetUk implements WeatherProvider {
     /** https://www.metoffice.gov.uk/services/data/datapoint/code-definitions */
     private VisibilityToText(dist: string): string {
         let distance = parseInt(dist);
-        let unit = this.app.config.DistanceUnit;
-        if (distance < 1000) return _("Very poor - Less than") + " " + MetreToUserUnits(1000, unit) + this.DistanceUnitFor(unit);
-        if (distance < 4000) return _("Poor - Between") + " " + MetreToUserUnits(1000, unit) + "-" + MetreToUserUnits(4000, unit) + " " + this.DistanceUnitFor(unit);
-        if (distance < 10000) return _("Moderate - Between") + " " + MetreToUserUnits(4000, unit) + "-" + MetreToUserUnits(10000, unit) + " " + this.DistanceUnitFor(unit);
-        if (distance < 20000) return _("Good - Between") + " " + MetreToUserUnits(10000, unit) + "-" + MetreToUserUnits(20000, unit) + " " + this.DistanceUnitFor(unit);
-        if (distance < 40000) return _("Very good - Between") + " " + MetreToUserUnits(20000, unit) + "-" + MetreToUserUnits(40000, unit) + " " + this.DistanceUnitFor(unit);
-        return _("Excellent - More than") + " " + MetreToUserUnits(40000, unit) + " " + this.DistanceUnitFor(unit);
+		let unit = this.app.config.DistanceUnit;
+		let stringFormat: any = {
+			distanceUnit: this.DistanceUnitFor(unit)
+		};
+
+		if (distance < 1000) {
+			stringFormat.distance = MetreToUserUnits(1000, unit).toString();
+			return `${_("Very poor")} - ${_("Less than ${distance}${distanceUnit}", stringFormat)}`;
+		}
+		else if (distance >= 40000) {
+			stringFormat.distance = MetreToUserUnits(40000, unit).toString();
+			return `${_("Excellent")} - ${_("More than ${distance} ${distanceUnit}", stringFormat)}`;
+		}
+		else if (distance < 4000)  {
+			stringFormat.smallerDistance = MetreToUserUnits(1000, unit).toString();
+			stringFormat.biggerDistance = MetreToUserUnits(4000, unit).toString();
+			return `${_("Poor")} - ${_("Between ${smallerDistance}-${biggerDistance} ${distanceUnit}", stringFormat)}`;
+		}
+			
+		else if (distance < 10000) {
+			stringFormat.smallerDistance = MetreToUserUnits(4000, unit).toString();
+			stringFormat.biggerDistance = MetreToUserUnits(10000, unit).toString();
+			return `${_("Moderate")} - ${_("Between ${smallerDistance}-${biggerDistance} ${distanceUnit}", stringFormat)}`;
+		}
+			
+		else if (distance < 20000)  {
+			stringFormat.smallerDistance = MetreToUserUnits(10000, unit).toString();
+			stringFormat.biggerDistance = MetreToUserUnits(20000, unit).toString();
+			return `${_("Good")} - ${_("Between ${smallerDistance}-${biggerDistance} ${distanceUnit}", stringFormat)}`;
+		}
+			
+		else if (distance < 40000) {
+			stringFormat.smallerDistance = MetreToUserUnits(20000, unit).toString();
+			stringFormat.biggerDistance = MetreToUserUnits(40000, unit).toString();
+			return `${_("Very good")} ${_("Between ${smallerDistance}-${biggerDistance} ${distanceUnit}", stringFormat)}`;
+		}
     }
 
     private DistanceUnitFor(unit: DistanceUnits) {

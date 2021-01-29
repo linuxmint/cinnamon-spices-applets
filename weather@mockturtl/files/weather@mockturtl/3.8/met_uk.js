@@ -242,17 +242,37 @@ class MetUk {
     VisibilityToText(dist) {
         let distance = parseInt(dist);
         let unit = this.app.config.DistanceUnit;
-        if (distance < 1000)
-            return utils_1._("Very poor - Less than") + " " + utils_1.MetreToUserUnits(1000, unit) + this.DistanceUnitFor(unit);
-        if (distance < 4000)
-            return utils_1._("Poor - Between") + " " + utils_1.MetreToUserUnits(1000, unit) + "-" + utils_1.MetreToUserUnits(4000, unit) + " " + this.DistanceUnitFor(unit);
-        if (distance < 10000)
-            return utils_1._("Moderate - Between") + " " + utils_1.MetreToUserUnits(4000, unit) + "-" + utils_1.MetreToUserUnits(10000, unit) + " " + this.DistanceUnitFor(unit);
-        if (distance < 20000)
-            return utils_1._("Good - Between") + " " + utils_1.MetreToUserUnits(10000, unit) + "-" + utils_1.MetreToUserUnits(20000, unit) + " " + this.DistanceUnitFor(unit);
-        if (distance < 40000)
-            return utils_1._("Very good - Between") + " " + utils_1.MetreToUserUnits(20000, unit) + "-" + utils_1.MetreToUserUnits(40000, unit) + " " + this.DistanceUnitFor(unit);
-        return utils_1._("Excellent - More than") + " " + utils_1.MetreToUserUnits(40000, unit) + " " + this.DistanceUnitFor(unit);
+        let stringFormat = {
+            distanceUnit: this.DistanceUnitFor(unit)
+        };
+        if (distance < 1000) {
+            stringFormat.distance = utils_1.MetreToUserUnits(1000, unit).toString();
+            return `${utils_1._("Very poor")} - ${utils_1._("Less than ${distance}${distanceUnit}", stringFormat)}`;
+        }
+        else if (distance >= 40000) {
+            stringFormat.distance = utils_1.MetreToUserUnits(40000, unit).toString();
+            return `${utils_1._("Excellent")} - ${utils_1._("More than ${distance} ${distanceUnit}", stringFormat)}`;
+        }
+        else if (distance < 4000) {
+            stringFormat.smallerDistance = utils_1.MetreToUserUnits(1000, unit).toString();
+            stringFormat.biggerDistance = utils_1.MetreToUserUnits(4000, unit).toString();
+            return `${utils_1._("Poor")} - ${utils_1._("Between ${smallerDistance}-${biggerDistance} ${distanceUnit}", stringFormat)}`;
+        }
+        else if (distance < 10000) {
+            stringFormat.smallerDistance = utils_1.MetreToUserUnits(4000, unit).toString();
+            stringFormat.biggerDistance = utils_1.MetreToUserUnits(10000, unit).toString();
+            return `${utils_1._("Moderate")} - ${utils_1._("Between ${smallerDistance}-${biggerDistance} ${distanceUnit}", stringFormat)}`;
+        }
+        else if (distance < 20000) {
+            stringFormat.smallerDistance = utils_1.MetreToUserUnits(10000, unit).toString();
+            stringFormat.biggerDistance = utils_1.MetreToUserUnits(20000, unit).toString();
+            return `${utils_1._("Good")} - ${utils_1._("Between ${smallerDistance}-${biggerDistance} ${distanceUnit}", stringFormat)}`;
+        }
+        else if (distance < 40000) {
+            stringFormat.smallerDistance = utils_1.MetreToUserUnits(20000, unit).toString();
+            stringFormat.biggerDistance = utils_1.MetreToUserUnits(40000, unit).toString();
+            return `${utils_1._("Very good")} ${utils_1._("Between ${smallerDistance}-${biggerDistance} ${distanceUnit}", stringFormat)}`;
+        }
     }
     DistanceUnitFor(unit) {
         if (unit == "imperial")

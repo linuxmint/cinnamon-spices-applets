@@ -9,23 +9,27 @@ const { IconTheme } = imports.gi.Gtk;
 // --------------------------------------------------------------
 // Text Generators
 
-export function _(str: string, ...args: string[]): string {
+export function _(str: string, args?: KeysValuePairs): string {
     let customTrans = imports.gettext.dgettext(UUID, str);
     let result;
     if (customTrans !== str && customTrans !== "")
         result = customTrans;
     result = imports.gettext.gettext(str);
 
-    if (args.length > 0)
+    if (!!args)
         result = format(str, args);
 
     return result;
 }
 
-export function format(str: string, args: string[]) {
-    for (let index = 0; index < args.length; index++) {
-        str = str.replace(new RegExp("\\$\\{[\\w]+\\}"), args[index]);
-    }
+interface KeysValuePairs {
+	[key: string]: any
+}
+
+export function format(str: string, args: KeysValuePairs) {
+	for (let key in args) {
+		str = str.replace(new RegExp("\\$\\{" + key + "\\}"), args[key]);
+	}
     return str;
 }
 
