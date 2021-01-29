@@ -5,11 +5,11 @@
 * Deprecating 3.0 in favor of refactoring 3.8 codebase to use in-build module resolution in TS
 * Fix issue in 3.0 where locations were not deleted from locationstore
 * Inline icons now respect the current font size
-* Buttons should remain highlighted after clicked as long as the cursor is till in their area
+* Buttons should remain highlighted after clicked as long as the cursor is still in their area
 * Change location storage to config based instead of file based
 * Add Visual Crossing as an API choice
-* Allow saving atomatic locations
-* Saved locations will be prioritised based on the search entry when getting locations for refresh
+* Allow saving automatic locations
+* Saved locations will be prioritized based on the search entry when getting locations for refresh
 * Wind directions are now represented by icons
 
 ## 2.7.0
