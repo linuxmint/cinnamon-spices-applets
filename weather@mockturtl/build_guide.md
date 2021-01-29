@@ -11,14 +11,8 @@ Visual Studio Code has the best Typescript support, although you can use other T
 
 ## Build for 3.8
 
-Run "build.sh", it will build for 3.8.
+Run `build.sh`, it will build for 3.8.
 
 ## Build for 3.0
 
-Note that 3.0 was deprecated in April 2020, but the src is kept for that version. can build it with.
-
-```bash
-./build3_0.sh
-```
-
-With the current folder structure langauge features probably won't work for you.
+Note that 3.0 was deprecated in April 2020, but the src is kept for that version. can build it with `./build3_0.sh`.
