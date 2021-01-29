@@ -178,7 +178,7 @@ export class CurrentWeather {
 			icon_size: iconSize,
 			style: "padding-right: 5px; padding-top: " + iconPaddingTop + "px; padding-bottom: " + iconPaddingBottom + "px;"
 		});
-		windBox.add(this.windDirectionIcon, { x_fill: true, y_fill: true, x_align: Align.MIDDLE, y_align: Align.MIDDLE, expand: true });
+		windBox.add(this.windDirectionIcon, { x_fill: false, y_fill: true, x_align: Align.MIDDLE, y_align: Align.MIDDLE, expand: false });
 		windBox.add(this.windLabel);
 
 		return windBox;
