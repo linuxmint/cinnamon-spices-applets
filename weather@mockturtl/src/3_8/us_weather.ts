@@ -357,21 +357,21 @@ export class USWeather implements WeatherProvider {
                 }
             case "few": // A few clouds
                 return {
-                    main: _("Few Clouds"),
+                    main: _("Few clouds"),
                     description: _("Few clouds"),
                     customIcon: (isNight) ? "night-alt-cloudy-symbolic" : "day-cloudy-symbolic",
                     icons: ["weather-clear-night", "weather-severe-alert"]
                 }
             case "sct": // Partly cloudy
                 return {
-                    main: _("Partly Cloudy"),
+                    main: _("Partly cloudy"),
                     description: _("Partly cloudy"),
                     customIcon: (isNight) ? "night-alt-cloudy-symbolic" : "day-cloudy-symbolic",
                     icons: ["weather-clear", "weather-severe-alert"]
                 }
             case "bkn": // Mostly cloudy
                 return {
-                    main: _("Mostly Cloudy"),
+                    main: _("Mostly cloudy"),
                     description: _("Mostly cloudy"),
                     customIcon: (isNight) ? "night-alt-cloudy-symbolic" : "day-cloudy-symbolic",
                     icons: ["weather-clouds-night", "weather-overcast", "weather-severe-alert"]
@@ -392,21 +392,21 @@ export class USWeather implements WeatherProvider {
                 }
             case "wind_few": // A few clouds and windy
                 return {
-                    main: _("Few Clouds"),
+                    main: _("Few clouds"),
                     description: _("Few clouds and windy"),
                     customIcon: (IsNight) ? "night-alt-cloudy-windy-symbolic" : "day-cloudy-windy-symbolic",
                     icons: (isNight) ? ["weather-few-clouds-night"] : ["weather-few-clouds"]
                 }
             case "wind_sct": // Partly cloudy and windy
                 return {
-                    main: _("Partly Cloudy"),
+                    main: _("Partly cloudy"),
                     description: _("Partly cloudy and windy"),
                     customIcon: (IsNight) ? "night-alt-cloudy-windy-symbolic" : "day-cloudy-windy-symbolic",
                     icons: (isNight) ? ["weather-clouds-night", "weather-few-clouds-night"] : ["weather-clouds", "weather-few-clouds"]
                 }
             case "wind_bkn": // Mostly cloudy and windy
                 return {
-                    main: _("Mostly Cloudy"),
+                    main: _("Mostly cloudy"),
                     description: _("Mostly cloudy and windy"),
                     customIcon: (IsNight) ? "night-alt-cloudy-windy-symbolic" : "day-cloudy-windy-symbolic",
                     icons: (isNight) ? ["weather-clouds-night", "weather-few-clouds-night"] : ["weather-clouds", "weather-few-clouds"]
@@ -448,22 +448,22 @@ export class USWeather implements WeatherProvider {
                 }
             case "fzra": // Freezing rain
                 return {
-                    main: _("Freezing Rain"),
-                    description: _("Freezing Rain"),
+                    main: _("Freezing rain"),
+                    description: _("Freezing rain"),
                     customIcon: "rain-wind-symbolic",
                     icons: ["weather-freezing-rain", "weather-hail", "weather-severe-alert"]
                 }
             case "rain_fzra": // Rain/freezing rain
                 return {
-                    main: _("Freezing Rain"),
-                    description: _("Freezing Rain"),
+                    main: _("Freezing rain"),
+                    description: _("Freezing rain"),
                     customIcon: "rain-wind-symbolic",
                     icons: ["weather-freezing-rain", "weather-hail", "weather-severe-alert"]
                 }
             case "snow_fzra": // Freezing rain/snow
                 return {
-                    main: _("Freezing Rain"),
-                    description: _("Freezing Rain and snow"),
+                    main: _("Freezing rain"),
+                    description: _("Freezing rain and snow"),
                     customIcon: "rain-wind-symbolic",
                     icons: ["weather-freezing-rain", "weather-hail", "weather-severe-alert"]
                 }
@@ -515,7 +515,7 @@ export class USWeather implements WeatherProvider {
             case "tropical_storm": // Tropical storm conditions
                 return {
                     main: _("Storm"),
-                    description: _("Tropical Storm"),
+                    description: _("Tropical storm"),
                     customIcon: "thunderstorm-symbolic",
                     icons: ["weather-storm", "weather-severe-alert"]
                 }

@@ -275,21 +275,21 @@ class USWeather {
                 };
             case "few":
                 return {
-                    main: utils_1._("Few Clouds"),
+                    main: utils_1._("Few clouds"),
                     description: utils_1._("Few clouds"),
                     customIcon: (isNight) ? "night-alt-cloudy-symbolic" : "day-cloudy-symbolic",
                     icons: ["weather-clear-night", "weather-severe-alert"]
                 };
             case "sct":
                 return {
-                    main: utils_1._("Partly Cloudy"),
+                    main: utils_1._("Partly cloudy"),
                     description: utils_1._("Partly cloudy"),
                     customIcon: (isNight) ? "night-alt-cloudy-symbolic" : "day-cloudy-symbolic",
                     icons: ["weather-clear", "weather-severe-alert"]
                 };
             case "bkn":
                 return {
-                    main: utils_1._("Mostly Cloudy"),
+                    main: utils_1._("Mostly cloudy"),
                     description: utils_1._("Mostly cloudy"),
                     customIcon: (isNight) ? "night-alt-cloudy-symbolic" : "day-cloudy-symbolic",
                     icons: ["weather-clouds-night", "weather-overcast", "weather-severe-alert"]
@@ -310,21 +310,21 @@ class USWeather {
                 };
             case "wind_few":
                 return {
-                    main: utils_1._("Few Clouds"),
+                    main: utils_1._("Few clouds"),
                     description: utils_1._("Few clouds and windy"),
                     customIcon: (utils_1.IsNight) ? "night-alt-cloudy-windy-symbolic" : "day-cloudy-windy-symbolic",
                     icons: (isNight) ? ["weather-few-clouds-night"] : ["weather-few-clouds"]
                 };
             case "wind_sct":
                 return {
-                    main: utils_1._("Partly Cloudy"),
+                    main: utils_1._("Partly cloudy"),
                     description: utils_1._("Partly cloudy and windy"),
                     customIcon: (utils_1.IsNight) ? "night-alt-cloudy-windy-symbolic" : "day-cloudy-windy-symbolic",
                     icons: (isNight) ? ["weather-clouds-night", "weather-few-clouds-night"] : ["weather-clouds", "weather-few-clouds"]
                 };
             case "wind_bkn":
                 return {
-                    main: utils_1._("Mostly Cloudy"),
+                    main: utils_1._("Mostly cloudy"),
                     description: utils_1._("Mostly cloudy and windy"),
                     customIcon: (utils_1.IsNight) ? "night-alt-cloudy-windy-symbolic" : "day-cloudy-windy-symbolic",
                     icons: (isNight) ? ["weather-clouds-night", "weather-few-clouds-night"] : ["weather-clouds", "weather-few-clouds"]
@@ -366,22 +366,22 @@ class USWeather {
                 };
             case "fzra":
                 return {
-                    main: utils_1._("Freezing Rain"),
-                    description: utils_1._("Freezing Rain"),
+                    main: utils_1._("Freezing rain"),
+                    description: utils_1._("Freezing rain"),
                     customIcon: "rain-wind-symbolic",
                     icons: ["weather-freezing-rain", "weather-hail", "weather-severe-alert"]
                 };
             case "rain_fzra":
                 return {
-                    main: utils_1._("Freezing Rain"),
-                    description: utils_1._("Freezing Rain"),
+                    main: utils_1._("Freezing rain"),
+                    description: utils_1._("Freezing rain"),
                     customIcon: "rain-wind-symbolic",
                     icons: ["weather-freezing-rain", "weather-hail", "weather-severe-alert"]
                 };
             case "snow_fzra":
                 return {
-                    main: utils_1._("Freezing Rain"),
-                    description: utils_1._("Freezing Rain and snow"),
+                    main: utils_1._("Freezing rain"),
+                    description: utils_1._("Freezing rain and snow"),
                     customIcon: "rain-wind-symbolic",
                     icons: ["weather-freezing-rain", "weather-hail", "weather-severe-alert"]
                 };
@@ -433,7 +433,7 @@ class USWeather {
             case "tropical_storm":
                 return {
                     main: utils_1._("Storm"),
-                    description: utils_1._("Tropical Storm"),
+                    description: utils_1._("Tropical storm"),
                     customIcon: "thunderstorm-symbolic",
                     icons: ["weather-storm", "weather-severe-alert"]
                 };

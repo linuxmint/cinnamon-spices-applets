@@ -208,8 +208,8 @@ class MetNorway {
             case "clearsky":
                 return {
                     customIcon: (isNight) ? "night-clear-symbolic" : "day-sunny-symbolic",
-                    main: utils_1._("Clear Sky"),
-                    description: utils_1._("Clear Sky"),
+                    main: utils_1._("Clear sky"),
+                    description: utils_1._("Clear sky"),
                     icons: (isNight) ? ["weather-clear-night"] : ["weather-clear"]
                 };
             case "cloudy":
@@ -236,176 +236,176 @@ class MetNorway {
             case "heavyrain":
                 return {
                     customIcon: "rain-symbolic",
-                    main: utils_1._("Heavy Rain"),
+                    main: utils_1._("Heavy rain"),
                     description: utils_1._("Heavy rain"),
                     icons: ["weather-rain", "weather-freezing-rain"]
                 };
             case "heavyrainandthunder":
                 return {
                     customIcon: "thunderstorm-symbolic",
-                    main: utils_1._("Heavy Rain"),
+                    main: utils_1._("Heavy rain"),
                     description: utils_1._("Heavy rain and thunder"),
                     icons: ["weather-rain", "weather-freezing-rain"]
                 };
             case "heavyrainshowers":
                 return {
                     customIcon: (isNight) ? "night-alt-rain-symbolic" : "day-rain-symbolic",
-                    main: utils_1._("Heavy Rain"),
+                    main: utils_1._("Heavy rain"),
                     description: utils_1._("Heavy rain showers"),
                     icons: ["weather-showers", "weather-showers-scattered"]
                 };
             case "heavyrainshowersandthunder":
                 return {
                     customIcon: (utils_1.IsNight) ? "night-alt-thunderstorm-symbolic" : "day-thunderstorm-symbolic",
-                    main: utils_1._("Heavy Rain"),
+                    main: utils_1._("Heavy rain"),
                     description: utils_1._("Heavy rain showers and thunder"),
                     icons: ["weather-showers", "weather-showers-scattered"]
                 };
             case "heavysleet":
                 return {
                     customIcon: "sleet-symbolic",
-                    main: utils_1._("Heavy Sleet"),
-                    description: utils_1._("Heavy Sleet"),
+                    main: utils_1._("Heavy sleet"),
+                    description: utils_1._("Heavy sleet"),
                     icons: ["weather-freezing-rain", "weather-rain"]
                 };
             case "heavysleetandthunder":
                 return {
                     customIcon: "sleet-storm-symbolic",
-                    main: utils_1._("Heavy Sleet"),
-                    description: utils_1._("Heavy Sleet and thunder"),
+                    main: utils_1._("Heavy sleet"),
+                    description: utils_1._("Heavy sleet and thunder"),
                     icons: ["weather-freezing-rain", "weather-rain"]
                 };
             case "heavysleetshowers":
                 return {
                     customIcon: (isNight) ? "night-alt-sleet-symbolic" : "day-sleet-symbolic",
-                    main: utils_1._("Heavy Sleet"),
+                    main: utils_1._("Heavy sleet"),
                     description: utils_1._("Heavy sleet showers"),
                     icons: ["weather-showers", "weather-showers-scattered", "weather-freezing-rain"]
                 };
             case "heavysleetshowersandthunder":
                 return {
                     customIcon: (utils_1.IsNight) ? "night-alt-sleet-storm-symbolic" : "day-sleet-storm-symbolic",
-                    main: utils_1._("Heavy Sleet"),
+                    main: utils_1._("Heavy sleet"),
                     description: utils_1._("Heavy sleet showers and thunder"),
                     icons: ["weather-showers", "weather-showers-scattered", "weather-freezing-rain"]
                 };
             case "heavysnow":
                 return {
                     customIcon: "snow-symbolic",
-                    main: utils_1._("Heavy Snow"),
-                    description: utils_1._("Heavy Snow"),
+                    main: utils_1._("Heavy snow"),
+                    description: utils_1._("Heavy snow"),
                     icons: ["weather-snow"]
                 };
             case "heavysnowandthunder":
                 return {
                     customIcon: "snow-symbolic",
-                    main: utils_1._("Heavy Snow"),
-                    description: utils_1._("Heavy Snow and thunder"),
+                    main: utils_1._("Heavy snow"),
+                    description: utils_1._("Heavy snow and thunder"),
                     icons: ["weather-snow"]
                 };
             case "heavysnowshowers":
                 return {
                     customIcon: (isNight) ? "night-alt-snow-symbolic" : "day-snow-symbolic",
-                    main: utils_1._("Heavy Snow"),
+                    main: utils_1._("Heavy snow"),
                     description: utils_1._("Heavy snow showers"),
                     icons: ["weather-snow-scattered", "weather-snow"]
                 };
             case "heavysnowshowersandthunder":
                 return {
                     customIcon: (isNight) ? "night-alt-snow-thunderstorm-symbolic" : "day-snow-thunderstorm-symbolic",
-                    main: utils_1._("Heavy Snow"),
+                    main: utils_1._("Heavy snow"),
                     description: utils_1._("Heavy snow showers and thunder"),
                     icons: ["weather-snow-scattered", "weather-snow"]
                 };
             case "lightrain":
                 return {
                     customIcon: "rain-mix-symbolic",
-                    main: utils_1._("Light Rain"),
-                    description: utils_1._("Light Rain"),
+                    main: utils_1._("Light rain"),
+                    description: utils_1._("Light rain"),
                     icons: ["weather-showers-scattered", "weather-rain"]
                 };
             case "lightrainandthunder":
                 return {
                     customIcon: "rain-mix-storm-symbolic",
-                    main: utils_1._("Light Rain"),
-                    description: utils_1._("Light Rain and thunder"),
+                    main: utils_1._("Light rain"),
+                    description: utils_1._("Light rain and thunder"),
                     icons: ["weather-showers-scattered", "weather-rain"]
                 };
             case "lightrainshowers":
                 return {
                     customIcon: (isNight) ? "night-alt-rain-mix-symbolic" : "day-rain-mix-symbolic",
-                    main: utils_1._("Light Rain"),
+                    main: utils_1._("Light rain"),
                     description: utils_1._("Light rain showers"),
                     icons: ["weather-showers-scattered", "weather-rain"]
                 };
             case "lightrainshowersandthunder":
                 return {
                     customIcon: (isNight) ? "night-alt-rain-mix-storm-symbolic" : "day-rain-mix-storm-symbolic",
-                    main: utils_1._("Light Rain"),
+                    main: utils_1._("Light rain"),
                     description: utils_1._("Light rain showers and thunder"),
                     icons: ["weather-showers-scattered", "weather-rain"]
                 };
             case "lightsleet":
                 return {
                     customIcon: "sleet-symbolic",
-                    main: utils_1._("Light Sleet"),
-                    description: utils_1._("Light Sleet"),
+                    main: utils_1._("Light sleet"),
+                    description: utils_1._("Light sleet"),
                     icons: ["weather-freezing-rain", "weather-showers"]
                 };
             case "lightsleetandthunder":
                 return {
                     customIcon: "sleet-storm-symbolic",
-                    main: utils_1._("Light Sleet"),
-                    description: utils_1._("Light Sleet and thunder"),
+                    main: utils_1._("Light sleet"),
+                    description: utils_1._("Light sleet and thunder"),
                     icons: ["weather-freezing-rain", "weather-showers"]
                 };
             case "lightsleetshowers":
                 return {
                     customIcon: (utils_1.IsNight) ? "night-alt-sleet-symbolic" : "day-sleet-symbolic",
-                    main: utils_1._("Light Sleet"),
+                    main: utils_1._("Light sleet"),
                     description: utils_1._("Light sleet showers"),
                     icons: ["weather-freezing-rain", "weather-showers"]
                 };
             case "lightssleetshowersandthunder":
                 return {
                     customIcon: (utils_1.IsNight) ? "night-alt-sleet-storm-symbolic" : "day-sleet-storm-symbolic",
-                    main: utils_1._("Light Sleet"),
+                    main: utils_1._("Light sleet"),
                     description: utils_1._("Light sleet showers and thunder"),
                     icons: ["weather-freezing-rain", "weather-showers"]
                 };
             case "lightsnow":
                 return {
                     customIcon: "snow-symbolic",
-                    main: utils_1._("Light Snow"),
-                    description: utils_1._("Light Snow"),
+                    main: utils_1._("Light snow"),
+                    description: utils_1._("Light snow"),
                     icons: ["weather-snow"]
                 };
             case "lightsnowandthunder":
                 return {
                     customIcon: "snow-storm-symbolic",
-                    main: utils_1._("Light Snow"),
+                    main: utils_1._("Light snow"),
                     description: utils_1._("Light snow and thunder"),
                     icons: ["weather-snow"]
                 };
             case "lightsnowshowers":
                 return {
                     customIcon: (isNight) ? "night-alt-snow-symbolic" : "day-snow-symbolic",
-                    main: utils_1._("Light Snow"),
+                    main: utils_1._("Light snow"),
                     description: utils_1._("Light snow showers"),
                     icons: ["weather-snow-scattered", "weather-snow"]
                 };
             case "lightssnowshowersandthunder":
                 return {
                     customIcon: (isNight) ? "night-alt-snow-thunderstorm-symbolic" : "day-snow-thunderstorm-symbolic",
-                    main: utils_1._("Light Snow"),
+                    main: utils_1._("Light snow"),
                     description: utils_1._("Light snow showers and thunder"),
                     icons: ["weather-snow-scattered", "weather-snow"]
                 };
             case "partlycloudy":
                 return {
                     customIcon: (isNight) ? "night-alt-cloudy-symbolic" : "day-cloudy-symbolic",
-                    main: utils_1._("Partly Cloudy"),
-                    description: utils_1._("Partly Cloudy"),
+                    main: utils_1._("Partly cloudy"),
+                    description: utils_1._("Partly cloudy"),
                     icons: (isNight) ? ["weather-clouds-night", "weather-few-clouds-night", "weather-overcast"] : ["weather-clouds", "weather-few-clouds", "weather-overcast"]
                 };
             case "rain":
@@ -425,14 +425,14 @@ class MetNorway {
             case "rainshowers":
                 return {
                     customIcon: (isNight) ? "night-alt-rain-mix-symbolic" : "day-rain-mix-symbolic",
-                    main: utils_1._("Rain Showers"),
+                    main: utils_1._("Rain showers"),
                     description: utils_1._("Rain showers"),
                     icons: ["weather-showers-scattered", "weather-rain", "weather-freezing-rain"]
                 };
             case "rainshowersandthunder":
                 return {
                     customIcon: (isNight) ? "night-alt-rain-mix-storm-symbolic" : "day-rain-mix-storm-symbolic",
-                    main: utils_1._("Rain Showers"),
+                    main: utils_1._("Rain showers"),
                     description: utils_1._("Rain showers and thunder"),
                     icons: ["weather-showers-scattered", "weather-rain", "weather-freezing-rain"]
                 };
@@ -481,14 +481,14 @@ class MetNorway {
             case "snowshowers":
                 return {
                     customIcon: (isNight) ? "night-alt-snow-symbolic" : "day-snow-symbolic",
-                    main: utils_1._("Snow Showers"),
+                    main: utils_1._("Snow showers"),
                     description: utils_1._("Snow showers"),
                     icons: ["weather-snow-scattered", "weather-snow"]
                 };
             case "snowshowersandthunder":
                 return {
                     customIcon: (isNight) ? "night-alt-snow-thunderstorm-symbolic" : "day-snow-thunderstorm-symbolic",
-                    main: utils_1._("Snow Showers"),
+                    main: utils_1._("Snow showers"),
                     description: utils_1._("Snow showers and thunder"),
                     icons: ["weather-snow-scattered", "weather-snow"]
                 };

@@ -33,13 +33,13 @@ class UIBar {
         this._providerCredit.label = utils_1._("Powered by") + " " + provider.prettyName;
         this._providerCredit.url = provider.website;
         let lastUpdatedTime = utils_1.AwareDateString(weather.date, config.currentLocale, config._show24Hours);
-        this._timestamp.text = utils_1._("As of ${lastUpdatedTime}", { "lastUpdatedTime": lastUpdatedTime });
+        this._timestamp.text = utils_1._("As of {lastUpdatedTime}", { "lastUpdatedTime": lastUpdatedTime });
         if (weather.location.distanceFrom != null) {
             let stringFormat = {
                 distance: utils_1.MetreToUserUnits(weather.location.distanceFrom, config.DistanceUnit).toString(),
                 distanceUnit: this.BigDistanceUnitFor(config.DistanceUnit)
             };
-            this._timestamp.text += `, ${utils_1._("${distance}${distanceUnit} from you", stringFormat)}`;
+            this._timestamp.text += `, ${utils_1._("{distance}{distanceUnit} from you", stringFormat)}`;
         }
         if (!shouldShowToggle)
             this.HideHourlyToggle();

@@ -307,34 +307,34 @@ export class MetUk implements WeatherProvider {
 
 		if (distance < 1000) {
 			stringFormat.distance = MetreToUserUnits(1000, unit).toString();
-			return `${_("Very poor")} - ${_("Less than ${distance}${distanceUnit}", stringFormat)}`;
+			return `${_("Very poor")} - ${_("Less than {distance} {distanceUnit}", stringFormat)}`;
 		}
 		else if (distance >= 40000) {
 			stringFormat.distance = MetreToUserUnits(40000, unit).toString();
-			return `${_("Excellent")} - ${_("More than ${distance} ${distanceUnit}", stringFormat)}`;
+			return `${_("Excellent")} - ${_("More than {distance} {distanceUnit}", stringFormat)}`;
 		}
 		else if (distance < 4000)  {
 			stringFormat.smallerDistance = MetreToUserUnits(1000, unit).toString();
 			stringFormat.biggerDistance = MetreToUserUnits(4000, unit).toString();
-			return `${_("Poor")} - ${_("Between ${smallerDistance}-${biggerDistance} ${distanceUnit}", stringFormat)}`;
+			return `${_("Poor")} - ${_("Between {smallerDistance}-{biggerDistance} {distanceUnit}", stringFormat)}`;
 		}
 			
 		else if (distance < 10000) {
 			stringFormat.smallerDistance = MetreToUserUnits(4000, unit).toString();
 			stringFormat.biggerDistance = MetreToUserUnits(10000, unit).toString();
-			return `${_("Moderate")} - ${_("Between ${smallerDistance}-${biggerDistance} ${distanceUnit}", stringFormat)}`;
+			return `${_("Moderate")} - ${_("Between {smallerDistance}-{biggerDistance} {distanceUnit}", stringFormat)}`;
 		}
 			
 		else if (distance < 20000)  {
 			stringFormat.smallerDistance = MetreToUserUnits(10000, unit).toString();
 			stringFormat.biggerDistance = MetreToUserUnits(20000, unit).toString();
-			return `${_("Good")} - ${_("Between ${smallerDistance}-${biggerDistance} ${distanceUnit}", stringFormat)}`;
+			return `${_("Good")} - ${_("Between {smallerDistance}-{biggerDistance} {distanceUnit}", stringFormat)}`;
 		}
 			
 		else if (distance < 40000) {
 			stringFormat.smallerDistance = MetreToUserUnits(20000, unit).toString();
 			stringFormat.biggerDistance = MetreToUserUnits(40000, unit).toString();
-			return `${_("Very good")} ${_("Between ${smallerDistance}-${biggerDistance} ${distanceUnit}", stringFormat)}`;
+			return `${_("Very good")} ${_("Between {smallerDistance}-{biggerDistance} {distanceUnit}", stringFormat)}`;
 		}
     }
 
@@ -473,15 +473,15 @@ export class MetUk implements WeatherProvider {
                 }
             case "2": // Partly cloudy (night)
                 return {
-                    main: _("Partly Cloudy"),
-                    description: _("Partly Cloudy"),
+                    main: _("Partly cloudy"),
+                    description: _("Partly cloudy"),
                     customIcon: "night-alt-cloudy-symbolic",
                     icons: ["weather-clouds-night", "weather-overcast", "weather-severe-alert"]
                 }
             case "3": // Partly cloudy (day)
                 return {
-                    main: _("Partly Cloudy"),
-                    description: _("Partly Cloudy"),
+                    main: _("Partly cloudy"),
+                    description: _("Partly cloudy"),
                     customIcon: "day-cloudy-symbolic",
                     icons: ["weather-clouds", "weather-overcast", "weather-severe-alert"]
                 }
@@ -522,14 +522,14 @@ export class MetUk implements WeatherProvider {
                 }
             case "9": // Light rain shower (night)
                 return {
-                    main: _("Light Rain"),
+                    main: _("Light rain"),
                     description: _("Light rain shower"),
                     customIcon: "night-alt-showers-symbolic",
                     icons: ["weather-showers-scattered-night", "weather-showers-night", "weather-showers-scattered", "weather-showers", "weather-freezing-rain", "weather-severe-alert"]
                 }
             case "10": // Light rain shower (day)
                 return {
-                    main: _("Light Rain"),
+                    main: _("Light rain"),
                     description: _("Light rain shower"),
                     customIcon: "day-showers-symbolic",
                     icons: ["weather-showers-scattered-day", "weather-showers-day", "weather-showers-scattered", "weather-showers", "weather-freezing-rain", "weather-severe-alert"]
@@ -543,29 +543,29 @@ export class MetUk implements WeatherProvider {
                 }
             case "12": // Light rain
                 return {
-                    main: _("Light Rain"),
+                    main: _("Light rain"),
                     description: _("Light rain"),
                     customIcon: "showers-symbolic",
                     icons: ["weather-showers-scattered", "weather-showers", "weather-rain", "weather-freezing-rain", "weather-severe-alert"]
                 }
             case "13": // Heavy rain shower (night)
                 return {
-                    main: _("Heavy Rain"),
+                    main: _("Heavy rain"),
                     description: _("Heavy rain shower"),
                     customIcon: "night-alt-rain-symbolic",
                     icons: ["weather-showers-night", "weather-showers", "weather-showers-scattered", "weather-severe-alert"]
                 }
             case "14": // Heavy rain shower (day)
                 return {
-                    main: _("Heavy Rain"),
+                    main: _("Heavy rain"),
                     description: _("Heavy rain shower"),
                     customIcon: "day-rain-symbolic",
                     icons: ["weather-showers-day", "weather-showers", "weather-showers-scattered", "weather-severe-alert"]
                 }
             case "15": // Heavy rain
                 return {
-                    main: _("Heavy Rain"),
-                    description: _("Heavy Rain"),
+                    main: _("Heavy rain"),
+                    description: _("Heavy rain"),
                     customIcon: "rain-symbolic",
                     icons: ["weather-showers", "weather-showers-scattered", "weather-severe-alert"]
                 }
@@ -613,42 +613,42 @@ export class MetUk implements WeatherProvider {
                 }
             case "22": // Light snow shower (night)
                 return {
-                    main: _("Light Snow"),
+                    main: _("Light snow"),
                     description: _("Light snow shower"),
                     customIcon: "night-alt-snow-symbolic",
                     icons: ["weather-snow-scattered", "weather-snow", "weather-severe-alert"]
                 }
             case "23": // Light snow shower (day)
                 return {
-                    main: _("Light Snow"),
+                    main: _("Light snow"),
                     description: _("Light snow shower"),
                     customIcon: "day-snow-symbolic",
                     icons: ["weather-snow-scattered", "weather-snow", "weather-severe-alert"]
                 }
             case "24": // Light snow
                 return {
-                    main: _("Light Snow"),
+                    main: _("Light snow"),
                     description: _("Light snow"),
                     customIcon: "snow-symbolic",
                     icons: ["weather-snow-scattered", "weather-snow", "weather-severe-alert"]
                 }
             case "25": // Heavy snow shower (night)
                 return {
-                    main: _("Heavy Snow"),
+                    main: _("Heavy snow"),
                     description: _("Heavy snow shower"),
                     customIcon: "night-alt-snow-symbolic",
                     icons: ["weather-snow", "weather-snow-scattered", "weather-severe-alert"]
                 }
             case "26": // 	Heavy snow shower (day)
                 return {
-                    main: _("Heavy Snow"),
+                    main: _("Heavy snow"),
                     description: _("Heavy snow shower"),
                     customIcon: "day-snow-symbolic",
                     icons: ["weather-snow", "weather-snow-scattered", "weather-severe-alert"]
                 }
             case "27": // Heavy snow
                 return {
-                    main: _("Heavy Snow"),
+                    main: _("Heavy snow"),
                     description: _("Heavy snow"),
                     customIcon: "snow-symbolic",
                     icons: ["weather-snow", "weather-snow-scattered", "weather-severe-alert"]

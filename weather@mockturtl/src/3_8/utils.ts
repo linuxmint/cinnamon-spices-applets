@@ -26,7 +26,7 @@ interface KeysValuePairs {
 
 export function format(str: string, args: KeysValuePairs) {
 	for (let key in args) {
-		str = str.replace(new RegExp("\\$\\{" + key + "\\}"), args[key]);
+		str = str.replace(new RegExp("\\{" + key + "\\}"), args[key]);
 	}
     return str;
 }

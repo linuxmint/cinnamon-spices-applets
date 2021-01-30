@@ -140,7 +140,7 @@ export class Yahoo implements WeatherProvider {
             case "import":
                 NotificationService.Instance.Send(
 					_("Missing package"),
-					_("Please install '${missingPackage}', then refresh manually.", {"missingPackage": this.GetMissingPackage(json)})
+					_("Please install '{missingPackage}', then refresh manually.", {"missingPackage": this.GetMissingPackage(json)})
 				);
                 Log.Instance.Error(errorMsg + json.error.message);
                 this.app.ShowError({ 
@@ -148,7 +148,7 @@ export class Yahoo implements WeatherProvider {
 					type: "hard",
 					userError: true,
 					service: "yahoo",
-					message: _("Please install '${missingPackage}', then refresh manually.", {"missingPackage": this.GetMissingPackage(json)})
+					message: _("Please install '{missingPackage}', then refresh manually.", {"missingPackage": this.GetMissingPackage(json)})
 				})
                 break;
             case "network":

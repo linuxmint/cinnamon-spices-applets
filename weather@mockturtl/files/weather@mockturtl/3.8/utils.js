@@ -16,7 +16,7 @@ function _(str, args) {
 exports._ = _;
 function format(str, args) {
     for (let key in args) {
-        str = str.replace(new RegExp("\\$\\{" + key + "\\}"), args[key]);
+        str = str.replace(new RegExp("\\{" + key + "\\}"), args[key]);
     }
     return str;
 }

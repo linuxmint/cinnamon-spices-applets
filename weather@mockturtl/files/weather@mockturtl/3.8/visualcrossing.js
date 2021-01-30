@@ -179,83 +179,83 @@ class VisualCrossing {
     ResolveTypeID(condition) {
         switch (condition.toLowerCase()) {
             case "type_1":
-                return utils_1._("Blowing Or Drifting Snow");
+                return utils_1._("Blowing or drifting snow");
             case "type_2":
                 return utils_1._("Drizzle");
             case "type_3":
-                return utils_1._("Heavy Drizzle");
+                return utils_1._("Heavy drizzle");
             case "type_4":
-                return utils_1._("Light Drizzle");
+                return utils_1._("Light drizzle");
             case "type_5":
-                return utils_1._("Heavy Drizzle/Rain");
+                return utils_1._("Heavy drizzle/rain");
             case "type_6":
-                return utils_1._("Light Drizzle/Rain");
+                return utils_1._("Light drizzle/rain");
             case "type_7":
                 return utils_1._("Duststorm");
             case "type_8":
                 return utils_1._("Fog");
             case "type_9":
-                return utils_1._("Freezing Drizzle/Freezing Rain");
+                return utils_1._("Freezing drizzle/freezing rain");
             case "type_10":
-                return utils_1._("Heavy Freezing Drizzle/Freezing Rain");
+                return utils_1._("Heavy freezing drizzle/freezing rain");
             case "type_11":
-                return utils_1._("Light Freezing Drizzle/Freezing Rain");
+                return utils_1._("Light freezing drizzle/freezing rain");
             case "type_12":
-                return utils_1._("Freezing Fog");
+                return utils_1._("Freezing fog");
             case "type_13":
-                return utils_1._("Heavy Freezing Rain");
+                return utils_1._("Heavy freezing rain");
             case "type_14":
-                return utils_1._("Light Freezing Rain");
+                return utils_1._("Light freezing rain");
             case "type_15":
-                return utils_1._("Funnel Cloud/Tornado");
+                return utils_1._("Funnel cloud/tornado");
             case "type_16":
-                return utils_1._("Hail Showers");
+                return utils_1._("Hail showers");
             case "type_17":
                 return utils_1._("Ice");
             case "type_18":
-                return utils_1._("Lightning Without Thunder");
+                return utils_1._("Lightning without thunder");
             case "type_19":
                 return utils_1._("Mist");
             case "type_20":
-                return utils_1._("Precipitation In Vicinity");
+                return utils_1._("Precipitation in vicinity");
             case "type_21":
                 return utils_1._("Rain");
             case "type_22":
-                return utils_1._("Heavy Rain And Snow");
+                return utils_1._("Heavy rain and snow");
             case "type_23":
-                return utils_1._("Light Rain And Snow");
+                return utils_1._("Light rain And snow");
             case "type_24":
-                return utils_1._("Rain Showers");
+                return utils_1._("Rain showers");
             case "type_25":
-                return utils_1._("Heavy Rain");
+                return utils_1._("Heavy rain");
             case "type_26":
-                return utils_1._("Light Rain");
+                return utils_1._("Light rain");
             case "type_27":
-                return utils_1._("Sky Coverage Decreasing");
+                return utils_1._("Sky coverage decreasing");
             case "type_28":
-                return utils_1._("Sky Coverage Increasing");
+                return utils_1._("Sky coverage increasing");
             case "type_29":
-                return utils_1._("Sky Unchanged");
+                return utils_1._("Sky unchanged");
             case "type_30":
-                return utils_1._("Smoke Or Haze");
+                return utils_1._("Smoke or haze");
             case "type_31":
                 return utils_1._("Snow");
             case "type_32":
-                return utils_1._("Snow And Rain Showers");
+                return utils_1._("Snow and rain showers");
             case "type_33":
-                return utils_1._("Snow Showers");
+                return utils_1._("Snow showers");
             case "type_34":
-                return utils_1._("Heavy Snow");
+                return utils_1._("Heavy snow");
             case "type_35":
-                return utils_1._("Light Snow");
+                return utils_1._("Light snow");
             case "type_36":
                 return utils_1._("Squalls");
             case "type_37":
                 return utils_1._("Thunderstorm");
             case "type_38":
-                return utils_1._("Thunderstorm Without Precipitation");
+                return utils_1._("Thunderstorm without precipitation");
             case "type_39":
-                return utils_1._("Diamond Dust");
+                return utils_1._("Diamond dust");
             case "type_40":
                 return utils_1._("Hail");
             case "type_41":

@@ -247,31 +247,31 @@ class MetUk {
         };
         if (distance < 1000) {
             stringFormat.distance = utils_1.MetreToUserUnits(1000, unit).toString();
-            return `${utils_1._("Very poor")} - ${utils_1._("Less than ${distance}${distanceUnit}", stringFormat)}`;
+            return `${utils_1._("Very poor")} - ${utils_1._("Less than {distance} {distanceUnit}", stringFormat)}`;
         }
         else if (distance >= 40000) {
             stringFormat.distance = utils_1.MetreToUserUnits(40000, unit).toString();
-            return `${utils_1._("Excellent")} - ${utils_1._("More than ${distance} ${distanceUnit}", stringFormat)}`;
+            return `${utils_1._("Excellent")} - ${utils_1._("More than {distance} {distanceUnit}", stringFormat)}`;
         }
         else if (distance < 4000) {
             stringFormat.smallerDistance = utils_1.MetreToUserUnits(1000, unit).toString();
             stringFormat.biggerDistance = utils_1.MetreToUserUnits(4000, unit).toString();
-            return `${utils_1._("Poor")} - ${utils_1._("Between ${smallerDistance}-${biggerDistance} ${distanceUnit}", stringFormat)}`;
+            return `${utils_1._("Poor")} - ${utils_1._("Between {smallerDistance}-{biggerDistance} {distanceUnit}", stringFormat)}`;
         }
         else if (distance < 10000) {
             stringFormat.smallerDistance = utils_1.MetreToUserUnits(4000, unit).toString();
             stringFormat.biggerDistance = utils_1.MetreToUserUnits(10000, unit).toString();
-            return `${utils_1._("Moderate")} - ${utils_1._("Between ${smallerDistance}-${biggerDistance} ${distanceUnit}", stringFormat)}`;
+            return `${utils_1._("Moderate")} - ${utils_1._("Between {smallerDistance}-{biggerDistance} {distanceUnit}", stringFormat)}`;
         }
         else if (distance < 20000) {
             stringFormat.smallerDistance = utils_1.MetreToUserUnits(10000, unit).toString();
             stringFormat.biggerDistance = utils_1.MetreToUserUnits(20000, unit).toString();
-            return `${utils_1._("Good")} - ${utils_1._("Between ${smallerDistance}-${biggerDistance} ${distanceUnit}", stringFormat)}`;
+            return `${utils_1._("Good")} - ${utils_1._("Between {smallerDistance}-{biggerDistance} {distanceUnit}", stringFormat)}`;
         }
         else if (distance < 40000) {
             stringFormat.smallerDistance = utils_1.MetreToUserUnits(20000, unit).toString();
             stringFormat.biggerDistance = utils_1.MetreToUserUnits(40000, unit).toString();
-            return `${utils_1._("Very good")} ${utils_1._("Between ${smallerDistance}-${biggerDistance} ${distanceUnit}", stringFormat)}`;
+            return `${utils_1._("Very good")} ${utils_1._("Between {smallerDistance}-{biggerDistance} {distanceUnit}", stringFormat)}`;
         }
     }
     DistanceUnitFor(unit) {
@@ -395,15 +395,15 @@ class MetUk {
                 };
             case "2":
                 return {
-                    main: utils_1._("Partly Cloudy"),
-                    description: utils_1._("Partly Cloudy"),
+                    main: utils_1._("Partly cloudy"),
+                    description: utils_1._("Partly cloudy"),
                     customIcon: "night-alt-cloudy-symbolic",
                     icons: ["weather-clouds-night", "weather-overcast", "weather-severe-alert"]
                 };
             case "3":
                 return {
-                    main: utils_1._("Partly Cloudy"),
-                    description: utils_1._("Partly Cloudy"),
+                    main: utils_1._("Partly cloudy"),
+                    description: utils_1._("Partly cloudy"),
                     customIcon: "day-cloudy-symbolic",
                     icons: ["weather-clouds", "weather-overcast", "weather-severe-alert"]
                 };
@@ -444,14 +444,14 @@ class MetUk {
                 };
             case "9":
                 return {
-                    main: utils_1._("Light Rain"),
+                    main: utils_1._("Light rain"),
                     description: utils_1._("Light rain shower"),
                     customIcon: "night-alt-showers-symbolic",
                     icons: ["weather-showers-scattered-night", "weather-showers-night", "weather-showers-scattered", "weather-showers", "weather-freezing-rain", "weather-severe-alert"]
                 };
             case "10":
                 return {
-                    main: utils_1._("Light Rain"),
+                    main: utils_1._("Light rain"),
                     description: utils_1._("Light rain shower"),
                     customIcon: "day-showers-symbolic",
                     icons: ["weather-showers-scattered-day", "weather-showers-day", "weather-showers-scattered", "weather-showers", "weather-freezing-rain", "weather-severe-alert"]
@@ -465,29 +465,29 @@ class MetUk {
                 };
             case "12":
                 return {
-                    main: utils_1._("Light Rain"),
+                    main: utils_1._("Light rain"),
                     description: utils_1._("Light rain"),
                     customIcon: "showers-symbolic",
                     icons: ["weather-showers-scattered", "weather-showers", "weather-rain", "weather-freezing-rain", "weather-severe-alert"]
                 };
             case "13":
                 return {
-                    main: utils_1._("Heavy Rain"),
+                    main: utils_1._("Heavy rain"),
                     description: utils_1._("Heavy rain shower"),
                     customIcon: "night-alt-rain-symbolic",
                     icons: ["weather-showers-night", "weather-showers", "weather-showers-scattered", "weather-severe-alert"]
                 };
             case "14":
                 return {
-                    main: utils_1._("Heavy Rain"),
+                    main: utils_1._("Heavy rain"),
                     description: utils_1._("Heavy rain shower"),
                     customIcon: "day-rain-symbolic",
                     icons: ["weather-showers-day", "weather-showers", "weather-showers-scattered", "weather-severe-alert"]
                 };
             case "15":
                 return {
-                    main: utils_1._("Heavy Rain"),
-                    description: utils_1._("Heavy Rain"),
+                    main: utils_1._("Heavy rain"),
+                    description: utils_1._("Heavy rain"),
                     customIcon: "rain-symbolic",
                     icons: ["weather-showers", "weather-showers-scattered", "weather-severe-alert"]
                 };
@@ -535,42 +535,42 @@ class MetUk {
                 };
             case "22":
                 return {
-                    main: utils_1._("Light Snow"),
+                    main: utils_1._("Light snow"),
                     description: utils_1._("Light snow shower"),
                     customIcon: "night-alt-snow-symbolic",
                     icons: ["weather-snow-scattered", "weather-snow", "weather-severe-alert"]
                 };
             case "23":
                 return {
-                    main: utils_1._("Light Snow"),
+                    main: utils_1._("Light snow"),
                     description: utils_1._("Light snow shower"),
                     customIcon: "day-snow-symbolic",
                     icons: ["weather-snow-scattered", "weather-snow", "weather-severe-alert"]
                 };
             case "24":
                 return {
-                    main: utils_1._("Light Snow"),
+                    main: utils_1._("Light snow"),
                     description: utils_1._("Light snow"),
                     customIcon: "snow-symbolic",
                     icons: ["weather-snow-scattered", "weather-snow", "weather-severe-alert"]
                 };
             case "25":
                 return {
-                    main: utils_1._("Heavy Snow"),
+                    main: utils_1._("Heavy snow"),
                     description: utils_1._("Heavy snow shower"),
                     customIcon: "night-alt-snow-symbolic",
                     icons: ["weather-snow", "weather-snow-scattered", "weather-severe-alert"]
                 };
             case "26":
                 return {
-                    main: utils_1._("Heavy Snow"),
+                    main: utils_1._("Heavy snow"),
                     description: utils_1._("Heavy snow shower"),
                     customIcon: "day-snow-symbolic",
                     icons: ["weather-snow", "weather-snow-scattered", "weather-severe-alert"]
                 };
             case "27":
                 return {
-                    main: utils_1._("Heavy Snow"),
+                    main: utils_1._("Heavy snow"),
                     description: utils_1._("Heavy snow"),
                     customIcon: "snow-symbolic",
                     icons: ["weather-snow", "weather-snow-scattered", "weather-severe-alert"]

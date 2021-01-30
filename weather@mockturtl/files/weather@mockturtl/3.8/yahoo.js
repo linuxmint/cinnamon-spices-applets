@@ -106,14 +106,14 @@ class Yahoo {
         logger_1.Log.Instance.Debug("yahoo API error payload: " + json);
         switch (type) {
             case "import":
-                notification_service_1.NotificationService.Instance.Send(utils_1._("Missing package"), utils_1._("Please install '${missingPackage}', then refresh manually.", { "missingPackage": this.GetMissingPackage(json) }));
+                notification_service_1.NotificationService.Instance.Send(utils_1._("Missing package"), utils_1._("Please install '{missingPackage}', then refresh manually.", { "missingPackage": this.GetMissingPackage(json) }));
                 logger_1.Log.Instance.Error(errorMsg + json.error.message);
                 this.app.ShowError({
                     detail: "import error",
                     type: "hard",
                     userError: true,
                     service: "yahoo",
-                    message: utils_1._("Please install '${missingPackage}', then refresh manually.", { "missingPackage": this.GetMissingPackage(json) })
+                    message: utils_1._("Please install '{missingPackage}', then refresh manually.", { "missingPackage": this.GetMissingPackage(json) })
                 });
                 break;
             case "network":
