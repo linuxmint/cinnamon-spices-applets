@@ -6,13 +6,11 @@ const { timeout_add, source_remove } = imports.mainloop;
 const { IconType } = imports.gi.St;
 const { IconTheme } = imports.gi.Gtk;
 function _(str, args) {
-    let customTrans = imports.gettext.dgettext(consts_1.UUID, str);
-    let result;
-    if (customTrans !== str && customTrans !== "")
-        result = customTrans;
-    result = imports.gettext.gettext(str);
+    let result = imports.gettext.dgettext(consts_1.UUID, str);
+    if (result === str && result === "")
+        result = imports.gettext.gettext(str);
     if (!!args)
-        result = format(str, args);
+        result = format(result, args);
     return result;
 }
 exports._ = _;

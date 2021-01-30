@@ -10,15 +10,13 @@ const { IconTheme } = imports.gi.Gtk;
 // Text Generators
 
 export function _(str: string, args?: KeysValuePairs): string {
-    let customTrans = imports.gettext.dgettext(UUID, str);
-    let result;
-    if (customTrans !== str && customTrans !== "")
-        result = customTrans;
-    result = imports.gettext.gettext(str);
+    let result = imports.gettext.dgettext(UUID, str);
 
+    if (result === str && result === "")
+        result = imports.gettext.gettext(str);
+    
     if (!!args)
-        result = format(str, args);
-
+        result = format(result, args);
     return result;
 }
 
