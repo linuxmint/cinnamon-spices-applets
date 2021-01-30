@@ -70,7 +70,8 @@
                 "open-on-favorites",
                 "enable-autoscroll",
                 "web-search-option",
-                "enable-emoji-search"
+                "enable-emoji-search",
+                "show-hidden-files"
             ]
         },
         "panel-appear":{
@@ -248,6 +249,12 @@
         "default":true,
         "description":"Enable emoji search",
         "tooltip":"Show emojis in search results"
+    },
+    "show-hidden-files":{
+        "type":"checkbox",
+        "default":false,
+        "description":"Show hidden files",
+        "tooltip":"Show hidden files in folder view"
     },
 
     "menu-icon-custom":{
