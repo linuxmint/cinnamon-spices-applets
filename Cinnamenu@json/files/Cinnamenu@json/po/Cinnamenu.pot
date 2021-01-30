@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-17 22:42+0000\n"
+"POT-Creation-Date: 2021-01-30 05:20+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -140,6 +140,21 @@ msgstr ""
 msgid "Shut down the computer"
 msgstr ""
 
+msgid "Reset category order"
+msgstr ""
+
+msgid "Open containing folder"
+msgstr ""
+
+msgid "Move to trash"
+msgstr ""
+
+msgid "Error while moving file to trash:"
+msgstr ""
+
+msgid "Find files..."
+msgstr ""
+
 msgid "Please wait..."
 msgstr ""
 
@@ -165,21 +180,6 @@ msgid "Favorite apps"
 msgstr ""
 
 msgid "Home folder"
-msgstr ""
-
-msgid "Find files..."
-msgstr ""
-
-msgid "Reset category order"
-msgstr ""
-
-msgid "Open containing folder"
-msgstr ""
-
-msgid "Move to trash"
-msgstr ""
-
-msgid "Error while moving file to trash:"
 msgstr ""
 
 msgid "Open..."
@@ -242,11 +242,6 @@ msgstr ""
 msgid ""
 "A flexible menu providing formatting options, web bookmarks, search provider"
 " support and fuzzy searching."
-msgstr ""
-
-msgid ""
-"Made possible thanks to the efforts of contributors to the Cinnamon menu, "
-"Gnomenu, and the contributors to projects they derived from."
 msgstr ""
 
 msgid "Behavior"
@@ -501,6 +496,12 @@ msgid "Enable emoji search"
 msgstr ""
 
 msgid "Show emojis in search results"
+msgstr ""
+
+msgid "Show hidden files"
+msgstr ""
+
+msgid "Show hidden files in folder view"
 msgstr ""
 
 msgid "Session buttons icon size"

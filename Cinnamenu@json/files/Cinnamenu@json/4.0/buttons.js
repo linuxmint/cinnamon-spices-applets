@@ -1,5 +1,6 @@
 const Gio = imports.gi.Gio;
 const Gtk = imports.gi.Gtk;
+const Gdk = imports.gi.Gdk;
 const GLib = imports.gi.GLib;
 const St = imports.gi.St;
 const Clutter = imports.gi.Clutter;
@@ -563,7 +564,7 @@ class AppButton extends PopupBaseMenuItem {
                                         icon_size: this.appThis.getAppIconSize()});
         }
         if (!this.icon) {
-            this.icon = new St.Icon({icon_name: 'error', icon_size: this.appThis.getAppIconSize()});
+            this.icon = new St.Icon({icon_name: 'dialog-error', icon_size: this.appThis.getAppIconSize()});
         }
         //--------Label------------------------------------
         this.label = new St.Label({ style_class: 'menu-application-button-label',
@@ -782,7 +783,6 @@ class AppButton extends PopupBaseMenuItem {
             if (this.appThis.contextMenu.isOpen) {
                 //if (this.menuIsOpen && this.menu._activeMenuItem) {
                 //    this.menu._activeMenuItem.activate();
-                this.appThis.contextMenu.close();
                 this.appThis.clearEnteredActors();
                 this.handleEnter();
             } else {
@@ -791,7 +791,6 @@ class AppButton extends PopupBaseMenuItem {
             return Clutter.EVENT_STOP;
         } else if (button === 3) {//right click
             if (this.appThis.contextMenu.isOpen) {
-                this.appThis.contextMenu.close();
                 this.appThis.clearEnteredActors();
                 this.handleEnter();
                 return Clutter.EVENT_STOP;
