@@ -411,21 +411,21 @@ var USWeather = (function () {
                 };
             case "few":
                 return {
-                    main: _("Few Clouds"),
+                    main: _("Few clouds"),
                     description: _("Few clouds"),
                     customIcon: (isNight) ? "night-alt-cloudy-symbolic" : "day-cloudy-symbolic",
                     icon: weatherIconSafely(["weather-clear-night", "weather-severe-alert"], iconType)
                 };
             case "sct":
                 return {
-                    main: _("Partly Cloudy"),
+                    main: _("Partly cloudy"),
                     description: _("Partly cloudy"),
                     customIcon: (isNight) ? "night-alt-cloudy-symbolic" : "day-cloudy-symbolic",
                     icon: weatherIconSafely(["weather-clear", "weather-severe-alert"], iconType)
                 };
             case "bkn":
                 return {
-                    main: _("Mostly Cloudy"),
+                    main: _("Mostly cloudy"),
                     description: _("Mostly cloudy"),
                     customIcon: (isNight) ? "night-alt-cloudy-symbolic" : "day-cloudy-symbolic",
                     icon: weatherIconSafely(["weather-clouds-night", "weather-overcast", "weather-severe-alert"], iconType)
@@ -446,21 +446,21 @@ var USWeather = (function () {
                 };
             case "wind_few":
                 return {
-                    main: _("Few Clouds"),
+                    main: _("Few clouds"),
                     description: _("Few clouds and windy"),
                     customIcon: (IsNight) ? "night-alt-cloudy-windy-symbolic" : "day-cloudy-windy-symbolic",
                     icon: weatherIconSafely((isNight) ? ["weather-few-clouds-night"] : ["weather-few-clouds"], iconType)
                 };
             case "wind_sct":
                 return {
-                    main: _("Partly Cloudy"),
+                    main: _("Partly cloudy"),
                     description: _("Partly cloudy and windy"),
                     customIcon: (IsNight) ? "night-alt-cloudy-windy-symbolic" : "day-cloudy-windy-symbolic",
                     icon: weatherIconSafely((isNight) ? ["weather-clouds-night"] : ["weather-clouds"], iconType)
                 };
             case "wind_bkn":
                 return {
-                    main: _("Mostly Cloudy"),
+                    main: _("Mostly cloudy"),
                     description: _("Mostly cloudy and windy"),
                     customIcon: (IsNight) ? "night-alt-cloudy-windy-symbolic" : "day-cloudy-windy-symbolic",
                     icon: weatherIconSafely((isNight) ? ["weather-clouds-night"] : ["weather-clouds"], iconType)
@@ -502,22 +502,22 @@ var USWeather = (function () {
                 };
             case "fzra":
                 return {
-                    main: _("Freezing Rain"),
-                    description: _("Freezing Rain"),
+                    main: _("Freezing rain"),
+                    description: _("Freezing rain"),
                     customIcon: "rain-wind-symbolic",
                     icon: weatherIconSafely(["weather-freezing-rain", "weather-hail", "weather-severe-alert"], iconType)
                 };
             case "rain_fzra":
                 return {
-                    main: _("Freezing Rain"),
-                    description: _("Freezing Rain"),
+                    main: _("Freezing rain"),
+                    description: _("Freezing rain"),
                     customIcon: "rain-wind-symbolic",
                     icon: weatherIconSafely(["weather-freezing-rain", "weather-hail", "weather-severe-alert"], iconType)
                 };
             case "snow_fzra":
                 return {
-                    main: _("Freezing Rain"),
-                    description: _("Freezing Rain and snow"),
+                    main: _("Freezing rain"),
+                    description: _("Freezing rain and snow"),
                     customIcon: "rain-wind-symbolic",
                     icon: weatherIconSafely(["weather-freezing-rain", "weather-hail", "weather-severe-alert"], iconType)
                 };
@@ -569,7 +569,7 @@ var USWeather = (function () {
             case "tropical_storm":
                 return {
                     main: _("Storm"),
-                    description: _("Tropical Storm"),
+                    description: _("Tropical storm"),
                     customIcon: "thunderstorm-symbolic",
                     icon: weatherIconSafely(["weather-storm", "weather-severe-alert"], iconType)
                 };

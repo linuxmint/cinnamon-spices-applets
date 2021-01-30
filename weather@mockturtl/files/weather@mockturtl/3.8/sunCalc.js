@@ -1,5 +1,8 @@
-var PI = Math.PI, sin = Math.sin, cos = Math.cos, tan = Math.tan, asin = Math.asin, atan = Math.atan2, acos = Math.acos, rad = PI / 180;
-var dayMs = 1000 * 60 * 60 * 24, J1970 = 2440588, J2000 = 2451545;
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.SunCalc = void 0;
+const PI = Math.PI, sin = Math.sin, cos = Math.cos, tan = Math.tan, asin = Math.asin, atan = Math.atan2, acos = Math.acos, rad = PI / 180;
+const dayMs = 1000 * 60 * 60 * 24, J1970 = 2440588, J2000 = 2451545;
 function toJulian(date) { return date.valueOf() / dayMs - 0.5 + J1970; }
 function fromJulian(j) { return new Date((j + 0.5 - J1970) * dayMs); }
 function toDays(date) { return toJulian(date) - J2000; }
@@ -57,9 +60,6 @@ class SunCalc {
             [-18, 'nightEnd', 'night'],
             [6, 'goldenHourEnd', 'goldenHour']
         ];
-        this.addTime = function (angle, riseName, setName) {
-            this.times.push([angle, riseName, setName]);
-        };
     }
     getPosition(date, lat, lng) {
         var lw = rad * -lng, phi = rad * lat, d = toDays(date), c = sunCoords(d), H = siderealTime(d, lw) - c.ra;
@@ -68,6 +68,10 @@ class SunCalc {
             altitude: altitude(H, phi, c.dec)
         };
     }
+    addTime(angle, riseName, setName) {
+        this.times.push([angle, riseName, setName]);
+    }
+    ;
     getTimes(date, lat, lng, height) {
         height = height || 0;
         var lw = rad * -lng, phi = rad * lat, dh = observerAngle(height), d = toDays(date), n = julianCycle(d, lw), ds = approxTransit(0, lw, n), M = solarMeanAnomaly(ds), L = eclipticLongitude(M), dec = declination(L, 0), Jnoon = solarTransitJ(ds, M, L), i, len, time, h0, Jset, Jrise;
@@ -98,7 +102,7 @@ class SunCalc {
     }
     ;
     getMoonIllumination(date) {
-        var d = toDays(date || new Date()), s = sunCoords(d), m = moonCoords(d), sdist = 149598000, phi = acos(sin(s.dec) * sin(m.dec) + cos(s.dec) * cos(m.dec) * cos(s.ra - m.ra)), inc = atan(sdist * sin(phi), m.dist - sdist * cos(phi)), angle = atan(cos(s.dec) * sin(s.ra - m.ra), sin(s.dec) * cos(m.dec) -
+        var d = toDays(date || new Date()), s = sunCoords(d), m = moonCoords(d), sunDist = 149598000, phi = acos(sin(s.dec) * sin(m.dec) + cos(s.dec) * cos(m.dec) * cos(s.ra - m.ra)), inc = atan(sunDist * sin(phi), m.dist - sunDist * cos(phi)), angle = atan(cos(s.dec) * sin(s.ra - m.ra), sin(s.dec) * cos(m.dec) -
             cos(s.dec) * sin(m.dec) * cos(s.ra - m.ra));
         return {
             fraction: (1 + cos(inc)) / 2,
@@ -159,3 +163,4 @@ class SunCalc {
     }
     ;
 }
+exports.SunCalc = SunCalc;

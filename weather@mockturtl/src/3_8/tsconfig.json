@@ -1,20 +1,17 @@
 {
     "compilerOptions": {
         "lib": ["es2017"],
-        "module": "ES6",
+        "module": "CommonJS",
         "target": "es2017",
         "noImplicitAny": true,
         "removeComments": true,
         "preserveConstEnums": true,
-		"sourceMap": false,
-        "outDir": "files/weather@mockturtl/3.8/"
+        "sourceMap": false,
+		"noImplicitThis": true,
+		"outDir": "../../files/weather@mockturtl/3.8/"
     },
     "include": [
-        "src/**/*"
+        "./**/*",
+        "../declarations/*"
     ],
-    "exclude": [
-        "files",
-        "node_modules",
-        "**/*.spec.ts"
-    ]
 }

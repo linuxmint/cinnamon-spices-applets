@@ -1,18 +1,9 @@
-function importModule(path) {
-    if (typeof require !== 'undefined') {
-        return require('./' + path);
-    }
-    else {
-        if (!AppletDir)
-            var AppletDir = imports.ui.appletManager.applets['weather@mockturtl'];
-        return AppletDir[path];
-    }
-}
-var utils = importModule("utils");
-var isLangSupported = utils.isLangSupported;
-var weatherIconSafely = utils.weatherIconSafely;
-var _ = utils._;
-var get = utils.get;
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.OpenWeatherMap = void 0;
+const logger_1 = require("./logger");
+const utils_1 = require("./utils");
+const Lang = imports.lang;
 class OpenWeatherMap {
     constructor(_app) {
         this.prettyName = "OpenWeatherMap";
@@ -20,6 +11,7 @@ class OpenWeatherMap {
         this.maxForecastSupport = 7;
         this.website = "https://openweathermap.org/";
         this.maxHourlyForecastSupport = 48;
+        this.needsApiKey = false;
         this.supportedLanguages = ["af", "ar", "az", "bg", "ca", "cz", "da", "de", "el", "en", "eu", "fa", "fi",
             "fr", "gl", "he", "hi", "hr", "hu", "id", "it", "ja", "kr", "la", "lt", "mk", "no", "nl", "pl",
             "pt", "pt_br", "ro", "ru", "se", "sk", "sl", "sp", "es", "sr", "th", "tr", "ua", "uk", "vi", "zh_cn", "zh_tw", "zu"
@@ -29,31 +21,18 @@ class OpenWeatherMap {
     }
     async GetWeather(loc) {
         let query = this.ConstructQuery(this.base_url, loc);
-        let json;
-        if (query != null) {
-            try {
-                json = await this.app.LoadJsonAsync(query);
-            }
-            catch (e) {
-                this.app.HandleHTTPError("openweathermap", e, this.app, this.HandleHTTPError);
-                return null;
-            }
-            if (json == null) {
-                this.app.HandleError({
-                    type: "soft",
-                    detail: "no api response",
-                    service: "openweathermap"
-                });
-                return null;
-            }
-            return this.ParseWeather(json, this);
-        }
-        else {
+        if (query == null)
             return null;
-        }
+        let json = await this.app.LoadJsonAsync(query, null, Lang.bind(this, this.HandleError));
+        if (!json)
+            return null;
+        if (this.HadErrors(json))
+            return null;
+        return this.ParseWeather(json, this);
     }
     ;
     ParseWeather(json, self) {
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m;
         try {
             let weather = {
                 coord: {
@@ -75,13 +54,13 @@ class OpenWeatherMap {
                 pressure: json.current.pressure,
                 humidity: json.current.humidity,
                 condition: {
-                    main: get(["current", "weather", "0", "main"], json),
-                    description: get(["current", "weather", "0", "description"], json),
-                    icon: weatherIconSafely(self.ResolveIcon(get(["current", "weather", "0", "icon"], json)), self.app.config.IconType()),
-                    customIcon: self.ResolveCustomIcon(get(["current", "weather", "0", "icon"], json))
+                    main: (_c = (_b = (_a = json === null || json === void 0 ? void 0 : json.current) === null || _a === void 0 ? void 0 : _a.weather) === null || _b === void 0 ? void 0 : _b[0]) === null || _c === void 0 ? void 0 : _c.main,
+                    description: (_f = (_e = (_d = json === null || json === void 0 ? void 0 : json.current) === null || _d === void 0 ? void 0 : _d.weather) === null || _e === void 0 ? void 0 : _e[0]) === null || _f === void 0 ? void 0 : _f.description,
+                    icons: self.ResolveIcon((_j = (_h = (_g = json === null || json === void 0 ? void 0 : json.current) === null || _g === void 0 ? void 0 : _g.weather) === null || _h === void 0 ? void 0 : _h[0]) === null || _j === void 0 ? void 0 : _j.icon),
+                    customIcon: self.ResolveCustomIcon((_m = (_l = (_k = json === null || json === void 0 ? void 0 : json.current) === null || _k === void 0 ? void 0 : _k.weather) === null || _l === void 0 ? void 0 : _l[0]) === null || _m === void 0 ? void 0 : _m.icon)
                 },
                 extra_field: {
-                    name: _("Feels Like"),
+                    name: utils_1._("Feels Like"),
                     value: json.current.feels_like,
                     type: "temperature"
                 },
@@ -97,7 +76,7 @@ class OpenWeatherMap {
                     condition: {
                         main: day.weather[0].main,
                         description: day.weather[0].description,
-                        icon: weatherIconSafely(self.ResolveIcon(day.weather[0].icon), self.app.config.IconType()),
+                        icons: self.ResolveIcon(day.weather[0].icon),
                         customIcon: self.ResolveCustomIcon(day.weather[0].icon)
                     },
                 };
@@ -113,7 +92,7 @@ class OpenWeatherMap {
                     condition: {
                         main: hour.weather[0].main,
                         description: hour.weather[0].description,
-                        icon: weatherIconSafely(self.ResolveIcon(hour.weather[0].icon), self.app.config.IconType()),
+                        icons: self.ResolveIcon(hour.weather[0].icon),
                         customIcon: self.ResolveCustomIcon(hour.weather[0].icon)
                     },
                 };
@@ -137,12 +116,12 @@ class OpenWeatherMap {
             return weather;
         }
         catch (e) {
-            self.app.log.Error("OpenWeatherMap Weather Parsing error: " + e);
-            self.app.HandleError({
+            logger_1.Log.Instance.Error("OpenWeatherMap Weather Parsing error: " + e);
+            self.app.ShowError({
                 type: "soft",
                 service: "openweathermap",
                 detail: "unusual payload",
-                message: _("Failed to Process Current Weather Info")
+                message: utils_1._("Failed to Process Current Weather Info")
             });
             return null;
         }
@@ -152,8 +131,8 @@ class OpenWeatherMap {
         let query = baseUrl;
         query = query + "lat=" + loc.lat + "&lon=" + loc.lon + "&appid=";
         query += "1c73f8259a86c6fd43c7163b543c8640";
-        let locale = this.ConvertToAPILocale(this.app.currentLocale);
-        if (this.app.config._translateCondition && isLangSupported(locale, this.supportedLanguages)) {
+        let locale = this.ConvertToAPILocale(this.app.config.currentLocale);
+        if (this.app.config._translateCondition && utils_1.IsLangSupported(locale, this.supportedLanguages)) {
             query = query + "&lang=" + locale;
         }
         return query;
@@ -181,48 +160,58 @@ class OpenWeatherMap {
         }
         return lang;
     }
-    HandleResponseErrors(json) {
+    HadErrors(json) {
+        if (!this.HasReturnedError(json))
+            return false;
         let errorMsg = "OpenWeatherMap Response: ";
         let error = {
             service: "openweathermap",
             type: "hard",
         };
-        switch (json.cod) {
+        let errorPayload = json;
+        switch (errorPayload.cod) {
             case ("400"):
                 error.detail = "bad location format";
-                error.message = _("Please make sure Location is in the correct format in the Settings");
+                error.message = utils_1._("Please make sure Location is in the correct format in the Settings");
                 break;
             case ("401"):
                 error.detail = "bad key";
-                error.message = _("Make sure you entered the correct key in settings");
+                error.message = utils_1._("Make sure you entered the correct key in settings");
                 break;
             case ("404"):
                 error.detail = "location not found";
-                error.message = _("Location not found, make sure location is available or it is in the correct format");
+                error.message = utils_1._("Location not found, make sure location is available or it is in the correct format");
                 break;
             case ("429"):
                 error.detail = "key blocked";
-                error.message = _("If this problem persists, please contact the Author of this applet");
+                error.message = utils_1._("If this problem persists, please contact the Author of this applet");
                 break;
             default:
                 error.detail = "unknown";
-                error.message = _("Unknown Error, please see the logs in Looking Glass");
+                error.message = utils_1._("Unknown Error, please see the logs in Looking Glass");
                 break;
         }
         ;
-        this.app.HandleError(error);
-        this.app.log.Debug("OpenWeatherMap Error Code: " + json.cod);
-        this.app.log.Error(errorMsg + json.message);
+        this.app.ShowError(error);
+        logger_1.Log.Instance.Debug("OpenWeatherMap Error Code: " + errorPayload.cod);
+        logger_1.Log.Instance.Error(errorMsg + errorPayload.message);
+        return true;
     }
     ;
-    HandleHTTPError(error, uiError) {
+    HasReturnedError(json) {
+        return (!!(json === null || json === void 0 ? void 0 : json.cod));
+    }
+    HandleError(error) {
         if (error.code == 404) {
-            uiError.detail = "location not found";
-            uiError.message = _("Location not found, make sure location is available or it is in the correct format");
-            uiError.userError = true;
-            uiError.type = "hard";
+            this.app.ShowError({
+                detail: "location not found",
+                message: utils_1._("Location not found, make sure location is available or it is in the correct format"),
+                userError: true,
+                type: "hard"
+            });
+            return false;
         }
-        return uiError;
+        return true;
     }
     ResolveIcon(icon) {
         switch (icon) {
@@ -311,63 +300,64 @@ class OpenWeatherMap {
     }
     ;
 }
+exports.OpenWeatherMap = OpenWeatherMap;
 ;
 const openWeatherMapConditionLibrary = [
-    _("Thunderstorm with light rain"),
-    _("Thunderstorm with rain"),
-    _("Thunderstorm with heavy rain"),
-    _("Light thunderstorm"),
-    _("Thunderstorm"),
-    _("Heavy thunderstorm"),
-    _("Ragged thunderstorm"),
-    _("Thunderstorm with light drizzle"),
-    _("Thunderstorm with drizzle"),
-    _("Thunderstorm with heavy drizzle"),
-    _("Light intensity drizzle"),
-    _("Drizzle"),
-    _("Heavy intensity drizzle"),
-    _("Light intensity drizzle rain"),
-    _("Drizzle rain"),
-    _("Heavy intensity drizzle rain"),
-    _("Shower rain and drizzle"),
-    _("Heavy shower rain and drizzle"),
-    _("Shower drizzle"),
-    _("Light rain"),
-    _("Moderate rain"),
-    _("Heavy intensity rain"),
-    _("Very heavy rain"),
-    _("Extreme rain"),
-    _("Freezing rain"),
-    _("Light intensity shower rain"),
-    _("Shower rain"),
-    _("Heavy intensity shower rain"),
-    _("Ragged shower rain"),
-    _("Light snow"),
-    _("Snow"),
-    _("Heavy snow"),
-    _("Sleet"),
-    _("Shower sleet"),
-    _("Light rain and snow"),
-    _("Rain and snow"),
-    _("Light shower snow"),
-    _("Shower snow"),
-    _("Heavy shower snow"),
-    _("Mist"),
-    _("Smoke"),
-    _("Haze"),
-    _("Sand, dust whirls"),
-    _("Fog"),
-    _("Sand"),
-    _("Dust"),
-    _("Volcanic ash"),
-    _("Squalls"),
-    _("Tornado"),
-    _("Clear"),
-    _("Clear sky"),
-    _("Sky is clear"),
-    _("Clouds"),
-    _("Few clouds"),
-    _("Scattered clouds"),
-    _("Broken clouds"),
-    _("Overcast clouds")
+    utils_1._("Thunderstorm with light rain"),
+    utils_1._("Thunderstorm with rain"),
+    utils_1._("Thunderstorm with heavy rain"),
+    utils_1._("Light thunderstorm"),
+    utils_1._("Thunderstorm"),
+    utils_1._("Heavy thunderstorm"),
+    utils_1._("Ragged thunderstorm"),
+    utils_1._("Thunderstorm with light drizzle"),
+    utils_1._("Thunderstorm with drizzle"),
+    utils_1._("Thunderstorm with heavy drizzle"),
+    utils_1._("Light intensity drizzle"),
+    utils_1._("Drizzle"),
+    utils_1._("Heavy intensity drizzle"),
+    utils_1._("Light intensity drizzle rain"),
+    utils_1._("Drizzle rain"),
+    utils_1._("Heavy intensity drizzle rain"),
+    utils_1._("Shower rain and drizzle"),
+    utils_1._("Heavy shower rain and drizzle"),
+    utils_1._("Shower drizzle"),
+    utils_1._("Light rain"),
+    utils_1._("Moderate rain"),
+    utils_1._("Heavy intensity rain"),
+    utils_1._("Very heavy rain"),
+    utils_1._("Extreme rain"),
+    utils_1._("Freezing rain"),
+    utils_1._("Light intensity shower rain"),
+    utils_1._("Shower rain"),
+    utils_1._("Heavy intensity shower rain"),
+    utils_1._("Ragged shower rain"),
+    utils_1._("Light snow"),
+    utils_1._("Snow"),
+    utils_1._("Heavy snow"),
+    utils_1._("Sleet"),
+    utils_1._("Shower sleet"),
+    utils_1._("Light rain and snow"),
+    utils_1._("Rain and snow"),
+    utils_1._("Light shower snow"),
+    utils_1._("Shower snow"),
+    utils_1._("Heavy shower snow"),
+    utils_1._("Mist"),
+    utils_1._("Smoke"),
+    utils_1._("Haze"),
+    utils_1._("Sand, dust whirls"),
+    utils_1._("Fog"),
+    utils_1._("Sand"),
+    utils_1._("Dust"),
+    utils_1._("Volcanic ash"),
+    utils_1._("Squalls"),
+    utils_1._("Tornado"),
+    utils_1._("Clear"),
+    utils_1._("Clear sky"),
+    utils_1._("Sky is clear"),
+    utils_1._("Clouds"),
+    utils_1._("Few clouds"),
+    utils_1._("Scattered clouds"),
+    utils_1._("Broken clouds"),
+    utils_1._("Overcast clouds")
 ];

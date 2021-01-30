@@ -2,7 +2,8 @@
 	"layout": {
         "type":"layout",
         "pages":[
-            "providers",
+			"providers",
+			"locations-page",
             "presentation-section",
 			"units-page",
 			"info-section"
@@ -13,6 +14,14 @@
             "sections":[
 				"provider-options",
 				"weather-conditions"
+            ]
+		},
+		"locations-page":{
+            "type":"page",
+            "title":"Location",
+            "sections": [
+				"location-section",
+				"location-store"
             ]
         },
         "presentation-section":{
@@ -42,16 +51,28 @@
 				"submit-issue"
 			]
 		},
+		"location-section" : {
+			"type":"section",
+			"title":"Location settings",
+			"keys":[
+				"manualLocation",
+				"location"
+			]
+		},
+		"location-store" : {
+			"type":"section",
+			"title":"Saved Locations",
+			"keys":[
+				"locationList",
+				"saveLocation"
+			]
+		},
 		"provider-options" : {
 			"type":"section",
 			"title":"Weather Provider Options",
 			"keys":[
 				"dataService",
 				"apiKey",
-				"manualLocation",
-				"location",
-				"saveLocation",
-				"deleteLocation",
 				"refreshInterval",
 				"forecastDays",
 				"forecastHours"
@@ -160,6 +181,7 @@
 		"options": {
 			"OpenWeatherMap": "OpenWeatherMap",
 			"DarkSky (key needed)": "DarkSky",
+			"Visual Crossing (key needed)": "Visual Crossing",
 			"MET Norway": "MetNorway",
 			"Weatherbit (key needed)": "Weatherbit",
 			"Yahoo": "Yahoo",
@@ -192,16 +214,7 @@
 		"indent": true,
 		"description": "Save current location to storage",
 		"callback": "saveCurrentLocation",
-		"dependency": "manualLocation",
 		"tooltip": "Saves location information to file, so you can switch between them with buttons in the applet (what will appear if you have more than one)."
-	},
-	"deleteLocation": {
-		"type": "button",
-		"indent": true,
-		"description": "Delete current location from storage",
-		"callback": "deleteCurrentLocation",
-		"dependency": "manualLocation",
-		"tooltip": "Removes location information from storage file."
 	},
 	"getLocation": {
 		"type": "button",
@@ -332,6 +345,19 @@
 		"units": "rows",
 		"step": 1,
 		"description": "Maximum number of rows for forecast"
+	},
+	"locationList": {
+		"type" : "list",
+		"description" : "Your saved locations",
+		"columns" : [
+			{"id": "lat", "title": "Latitude", "type": "float", "min": -85, "max": 85},
+			{"id": "lon", "title": "Longitude", "type": "float", "min": -180, "max": 180},
+			{"id": "city", "title": "City", "type": "string"},
+			{"id": "country", "title": "Country", "type": "string"},
+			{"id": "timeZone", "title": "Timezone", "type": "string", "default": ""},
+			{"id": "entryText", "title": "Search entry", "type": "string", "default": ""}
+		],
+		"default" : []
 	},
 	"showSunrise": {
 		"type": "checkbox",

@@ -884,7 +884,7 @@ declare namespace imports.gi.Gio {
     
     
     
-    interface IOStream extends GObject.Object {
+    class IOStream extends GObject.Object {
         clear_pending () : void;
         close (cancellable: Cancellable) : boolean;
         close_async (io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback) : void;
@@ -894,14 +894,9 @@ declare namespace imports.gi.Gio {
         has_pending () : boolean;
         is_closed () : boolean;
         set_pending () : boolean;
-        splice_async (stream2: IOStream, flags: IOStreamSpliceFlags, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;
+		splice_async (stream2: IOStream, flags: IOStreamSpliceFlags, io_priority: number, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;
+		static splice_finish (result: AsyncResult) : boolean;
     }
-    
-    var IOStream: {
-        
-        splice_finish (result: AsyncResult) : boolean;
-    }
-    
     
     
     
@@ -1380,13 +1375,14 @@ declare namespace imports.gi.Gio {
     
     
     
-    interface Settings extends GObject.Object {
+    class Settings extends GObject.Object {
+		constructor(options: any);
         apply () : void;
         bind (key: string, object: GObject.Object, property: string, flags: SettingsBindFlags) : void;
         bind_with_mapping (key: string, object: GObject.Object, property: string, flags: SettingsBindFlags, get_mapping: SettingsBindGetMapping, set_mapping: SettingsBindSetMapping, user_data: any, destroy: GLib.DestroyNotify) : void;
         bind_writable (key: string, object: GObject.Object, property: string, inverted: boolean) : void;
         create_action (key: string) : Action;
-        delay () : void;
+		delay () : void;
         get (key: string, format: string) : void;
         get_boolean (key: string) : boolean;
         get_child (name: string) : Settings;
@@ -1422,24 +1418,18 @@ declare namespace imports.gi.Gio {
         set_strv (key: string, value: string[]) : boolean;
         set_uint (key: string, value: number) : boolean;
         set_uint64 (key: string, value: number) : boolean;
-        set_value (key: string, value: GLib.Variant) : boolean;
-    }
-    
-    var Settings: {
-        new (schema_id: string) : Settings;
-        new_full (schema: SettingsSchema, backend: SettingsBackend, path: string) : Settings;
-        new_with_backend (schema_id: string, backend: SettingsBackend) : Settings;
-        new_with_backend_and_path (schema_id: string, backend: SettingsBackend, path: string) : Settings;
-        new_with_path (schema_id: string, path: string) : Settings;
-        list_relocatable_schemas () : string[];
-        list_schemas () : string[];
-        sync () : void;
-        unbind (object: GObject.Object, property: string) : void;
-    }
-    
-    
-    
-    
+		set_value (key: string, value: GLib.Variant) : boolean;
+		static new(schema_id: string): Settings;
+		static new_full (schema: SettingsSchema, backend: SettingsBackend, path: string) : Settings;
+        static new_with_backend (schema_id: string, backend: SettingsBackend) : Settings;
+        static new_with_backend_and_path (schema_id: string, backend: SettingsBackend, path: string) : Settings;
+        static new_with_path (schema_id: string, path: string) : Settings;
+        static list_relocatable_schemas () : string[];
+        static list_schemas () : string[];
+        static sync () : void;
+        static unbind (object: GObject.Object, property: string) : void;
+    }  
+
     interface SettingsBackend extends GObject.Object {
         changed (key: string, origin_tag: any) : void;
         changed_tree (tree: GLib.Tree, origin_tag: any) : void;
@@ -1565,7 +1555,7 @@ declare namespace imports.gi.Gio {
         condition_check (condition: GLib.IOCondition) : GLib.IOCondition;
         condition_timed_wait (condition: GLib.IOCondition, timeout_us: number, cancellable: Cancellable) : boolean;
         condition_wait (condition: GLib.IOCondition, cancellable: Cancellable) : boolean;
-        connect (address: SocketAddress, cancellable: Cancellable) : boolean;
+        //connect (address: SocketAddress, cancellable: Cancellable) : boolean;
         connection_factory_create_connection () : SocketConnection;
         create_source (condition: GLib.IOCondition, cancellable: Cancellable) : GLib.Source;
         get_available_bytes () : number;
@@ -1653,9 +1643,9 @@ declare namespace imports.gi.Gio {
     
     
     
-    interface SocketClient extends GObject.Object {
+    class SocketClient extends GObject.Object {
         add_application_proxy (protocol: string) : void;
-        connect (connectable: SocketConnectable, cancellable: Cancellable) : SocketConnection;
+        //connect (connectable: SocketConnectable, cancellable: Cancellable) : SocketConnection;
         connect_async (connectable: SocketConnectable, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;
         connect_finish (result: AsyncResult) : SocketConnection;
         connect_to_host (host_and_port: string, default_port: number, cancellable: Cancellable) : SocketConnection;
@@ -1684,35 +1674,23 @@ declare namespace imports.gi.Gio {
         set_socket_type (_type: SocketType) : void;
         set_timeout (timeout: number) : void;
         set_tls (tls: boolean) : void;
-        set_tls_validation_flags (flags: TlsCertificateFlags) : void;
-    }
-    
-    var SocketClient: {
-        new () : SocketClient;
-        
+		set_tls_validation_flags (flags: TlsCertificateFlags) : void;
+		static new(): SocketClient
     }
     
     
     
-    
-    interface SocketConnection extends IOStream {
-        connect (address: SocketAddress, cancellable: Cancellable) : boolean;
+    class SocketConnection extends IOStream {
+        //connect (address: SocketAddress, cancellable: Cancellable) : boolean;
         connect_async (address: SocketAddress, cancellable: Cancellable, callback: AsyncReadyCallback, user_data: any) : void;
         connect_finish (result: AsyncResult) : boolean;
         get_local_address () : SocketAddress;
         get_remote_address () : SocketAddress;
         get_socket () : Socket;
-        is_connected () : boolean;
-    }
-    
-    var SocketConnection: {
-        
-        factory_lookup_type (family: SocketFamily, _type: SocketType, protocol_id: number) : GObject.Type;
-        factory_register_type (g_type: GObject.Type, family: SocketFamily, _type: SocketType, protocol: number) : void;
-    }
-    
-    
-    
+		is_connected () : boolean;
+		static factory_lookup_type (family: SocketFamily, _type: SocketType, protocol_id: number) : GObject.Type;
+        static factory_register_type (g_type: GObject.Type, family: SocketFamily, _type: SocketType, protocol: number) : void;
+    } 
     
     interface SocketControlMessage extends GObject.Object {
         get_level () : number;

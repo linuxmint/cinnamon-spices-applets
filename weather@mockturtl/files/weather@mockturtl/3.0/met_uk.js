@@ -537,15 +537,15 @@ var MetUk = (function () {
                 };
             case "2":
                 return {
-                    main: _("Partly Cloudy"),
-                    description: _("Partly Cloudy"),
+                    main: _("Partly cloudy"),
+                    description: _("Partly cloudy"),
                     customIcon: "night-alt-cloudy-symbolic",
                     icon: weatherIconSafely(["weather-clouds-night", "weather-overcast", "weather-severe-alert"], iconType)
                 };
             case "3":
                 return {
-                    main: _("Partly Cloudy"),
-                    description: _("Partly Cloudy"),
+                    main: _("Partly cloudy"),
+                    description: _("Partly cloudy"),
                     customIcon: "day-cloudy-symbolic",
                     icon: weatherIconSafely(["weather-clouds", "weather-overcast", "weather-severe-alert"], iconType)
                 };
@@ -586,14 +586,14 @@ var MetUk = (function () {
                 };
             case "9":
                 return {
-                    main: _("Light Rain"),
+                    main: _("Light rain"),
                     description: _("Light rain shower"),
                     customIcon: "night-alt-showers-symbolic",
                     icon: weatherIconSafely(["weather-showers-scattered-night", "weather-showers-night", "weather-showers-scattered", "weather-showers", "weather-freezing-rain", "weather-severe-alert"], iconType)
                 };
             case "10":
                 return {
-                    main: _("Light Rain"),
+                    main: _("Light rain"),
                     description: _("Light rain shower"),
                     customIcon: "day-showers-symbolic",
                     icon: weatherIconSafely(["weather-showers-scattered-day", "weather-showers-day", "weather-showers-scattered", "weather-showers", "weather-freezing-rain", "weather-severe-alert"], iconType)
@@ -607,29 +607,29 @@ var MetUk = (function () {
                 };
             case "12":
                 return {
-                    main: _("Light Rain"),
+                    main: _("Light rain"),
                     description: _("Light rain"),
                     customIcon: "showers-symbolic",
                     icon: weatherIconSafely(["weather-showers-scattered", "weather-showers", "weather-rain", "weather-freezing-rain", "weather-severe-alert"], iconType)
                 };
             case "13":
                 return {
-                    main: _("Heavy Rain"),
+                    main: _("Heavy rain"),
                     description: _("Heavy rain shower"),
                     customIcon: "night-alt-rain-symbolic",
                     icon: weatherIconSafely(["weather-showers-night", "weather-showers", "weather-showers-scattered", "weather-severe-alert"], iconType)
                 };
             case "14":
                 return {
-                    main: _("Heavy Rain"),
+                    main: _("Heavy rain"),
                     description: _("Heavy rain shower"),
                     customIcon: "day-rain-symbolic",
                     icon: weatherIconSafely(["weather-showers-day", "weather-showers", "weather-showers-scattered", "weather-severe-alert"], iconType)
                 };
             case "15":
                 return {
-                    main: _("Heavy Rain"),
-                    description: _("Heavy Rain"),
+                    main: _("Heavy rain"),
+                    description: _("Heavy rain"),
                     customIcon: "rain-symbolic",
                     icon: weatherIconSafely(["weather-showers", "weather-showers-scattered", "weather-severe-alert"], iconType)
                 };
@@ -677,42 +677,42 @@ var MetUk = (function () {
                 };
             case "22":
                 return {
-                    main: _("Light Snow"),
+                    main: _("Light snow"),
                     description: _("Light snow shower"),
                     customIcon: "night-alt-snow-symbolic",
                     icon: weatherIconSafely(["weather-snow-scattered", "weather-snow", "weather-severe-alert"], iconType)
                 };
             case "23":
                 return {
-                    main: _("Light Snow"),
+                    main: _("Light snow"),
                     description: _("Light snow shower"),
                     customIcon: "day-snow-symbolic",
                     icon: weatherIconSafely(["weather-snow-scattered", "weather-snow", "weather-severe-alert"], iconType)
                 };
             case "24":
                 return {
-                    main: _("Light Snow"),
+                    main: _("Light snow"),
                     description: _("Light snow"),
                     customIcon: "snow-symbolic",
                     icon: weatherIconSafely(["weather-snow-scattered", "weather-snow", "weather-severe-alert"], iconType)
                 };
             case "25":
                 return {
-                    main: _("Heavy Snow"),
+                    main: _("Heavy snow"),
                     description: _("Heavy snow shower"),
                     customIcon: "night-alt-snow-symbolic",
                     icon: weatherIconSafely(["weather-snow", "weather-snow-scattered", "weather-severe-alert"], iconType)
                 };
             case "26":
                 return {
-                    main: _("Heavy Snow"),
+                    main: _("Heavy snow"),
                     description: _("Heavy snow shower"),
                     customIcon: "day-snow-symbolic",
                     icon: weatherIconSafely(["weather-snow", "weather-snow-scattered", "weather-severe-alert"], iconType)
                 };
             case "27":
                 return {
-                    main: _("Heavy Snow"),
+                    main: _("Heavy snow"),
                     description: _("Heavy snow"),
                     customIcon: "snow-symbolic",
                     icon: weatherIconSafely(["weather-snow", "weather-snow-scattered", "weather-severe-alert"], iconType)

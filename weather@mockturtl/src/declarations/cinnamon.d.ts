@@ -56,7 +56,7 @@ declare namespace imports.ui.themeManager {
 
 declare namespace imports.ui.main {
     export class KeybindingManager {
-        addHotKey(UUID: string, keybinding: any, binding: void): void;
+        addHotKey(UUID: string, keybinding: any, binding: (event: any) => void): void;
     }
 
     export const themeManager: themeManager.ThemeManager;
@@ -359,7 +359,7 @@ declare namespace imports.mainloop {
      * @param binding 
      */
     export function timeout_add_seconds(seconds: number, binding: () => any): void;
-    export function timeout_add(milliseconds: number, binding: () => any, errorCallback: () => null): void;
+    export function timeout_add(milliseconds: number, binding: () => any, errorCallback: () => null): number;
     export function source_remove(id: any): void;
 }
 
@@ -535,11 +535,10 @@ declare namespace imports.gi.St {
         constructor(options ? : any)
         /** Deprecated, use add_child instead */
         add_actor(element: Widget): void;
-        add_child(element: Widget): void;
+		add_child(element: Widget): void;
+		/** Works but I can't find where it comes from */
         add(element: Widget, options?: AddOptions): void;
         /** private function by default? */
-
-
     }
     export class Bin extends Widget {
         constructor(options ? : any)
@@ -563,15 +562,29 @@ declare namespace imports.gi.St {
         icon_type: IconType;
         icon_size: number;
         icon_name: string;
-        constructor(options ? : any);
-    }
+        constructor(options?: IconOptions);
+	}
+	
+	interface IconOptions {
+		icon_type?: IconType;
+		icon_name?: string;
+		icon_size?: number;
+		style_class?: string;
+		/** css string */
+		style?: string;
+	}
+
     export class Button extends Widget {
         reactive: boolean;
         label: string;
         url: string;
         child: any;
-        constructor(options ? : any);
-    }
+        constructor(options?: ButtonOptions);
+	}
+	
+	interface ButtonOptions {
+
+	}
 
     export class ScrollView  extends Widget {
 		set_row_size(row_size:number): void;
@@ -738,5 +751,8 @@ declare namespace imports.gettext {
 }
 
 declare namespace imports {
-    export const lang: any;
+    export const lang: Lang;
+    class Lang {
+        bind<T, CTX>(ctx: CTX, func: T): T;
+    }
 }

@@ -25,6 +25,7 @@ They are stored in a file at ```$XDG_CONFIG_HOME/weather-mockturtl/locations.jso
 | ----------------------- | ------------- | ------------------------- | -------------------------- | ------------------------- |
 | **OpenWeatherMap**      | No            | 7                         | 48                         | --                        |
 | **DarkSky**             | Yes*          | 8                         | 168                        | --                        |
+| **Visual Crossing**     | Yes           | 15                        | 336                        | --                        |
 | **MET Norway**          | No            | 10                        | 48                         | --                        |
 | **WeatherBit**          | Yes           | 16                        | 0**                        | --                        |
 | **Yahoo**               | No            | 10                        | 0                          | python3-requests-oauthlib |
@@ -39,6 +40,12 @@ The default, works out of the box. Big Thanks to them supporting free open sourc
 ### DarkSky
 
 ***[DarkSky has been acquired by Apple](https://blog.darksky.net/dark-sky-has-a-new-home/)** as of March 31, 2020. It does not allow new signups, and it will cease to function at the end of 2021.
+
+## Visual Crossing
+
+* Needs an API key, you can [Sign Up here](https://www.visualcrossing.com/weather/weather-data-services#/signup) and grab one
+
+* Provides 1000 Free calls a day
 
 ### MET Norway
 
@@ -76,9 +83,12 @@ Sometimes it takes 10-15 seconds to obtain weather, please be patient when it lo
 
 * Observations are quite spotty so it combines multiple observation stations if needed in a 50km area.
 
-## Requirements
+## Versions
 
-* [Cinnamon](https://github.com/linuxmint/Cinnamon) 3.0+, 
+*Versions are automatically selected based on you Cinnamon's version*
+
+* [Cinnamon](https://github.com/linuxmint/Cinnamon) 3.0+ **NOW EOL, won't receive more updates**
+* [Cinnamon](https://github.com/linuxmint/Cinnamon) 3.8+
 
 ## Configuration
 
@@ -91,7 +101,6 @@ http://groups.google.com/group/cinnamon-weather
 ## Future Plans
 
 * None at the moment, I can take requests for provider integrations or for new features
-* After Linux Mint 18 EOL switch to settings-schema based location storage, not file storage.
 
 ## Known Issues
 

@@ -2520,9 +2520,10 @@ class LocationStore {
         // Go to to previous saved location
         this.currentIndex = this.currentIndex--;
         if (this.currentIndex < 0) this.currentIndex = this.locations.length - 1; // reached start of array
-        if (this.currentIndex < 0) this.currentIndex = 0; // no items in array
+		if (this.currentIndex < 0) this.currentIndex = 0; // no items in array
+		await this.SaveToFile();
         this.app.sendNotification(_("Success") + " - " + _("Location Store"), _("Location is deleted from library"), true);
-        this.InvokeStorageChanged();
+		this.InvokeStorageChanged();
     }
 
     private InvokeStorageChanged() {
