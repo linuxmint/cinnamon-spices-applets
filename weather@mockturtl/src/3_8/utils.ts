@@ -59,6 +59,21 @@ export function CapitalizeFirstLetter(description: string): string {
     return description.charAt(0).toUpperCase() + description.slice(1);
 };
 
+export function CapitalizeEveryLetter(description: string): string {
+    if ((description == undefined || description == null)) {
+        return "";
+    }
+    let split = description.split(" ");
+    let result = "";
+    for (let index = 0; index < split.length; index++) {
+        const element = split[index];
+        result += CapitalizeFirstLetter(element);
+        if (index != split.length - 1)
+            result += " ";
+    }
+    return result;
+}
+
 // ---------------------------------------------------------------------------------
 // TimeString generators
 
