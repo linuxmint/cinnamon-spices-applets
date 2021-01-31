@@ -80,7 +80,7 @@ export class ClimacellV4 implements WeatherProvider {
             sunrise: new Date(daily?.[0].values.sunriseTime),
             sunset: new Date(daily?.[0].values.sunsetTime),
             location: {
-                url: null
+                url: "https://www.climacell.co/weather"
             },
             extra_field: {
                 name: _("Feels Like"),

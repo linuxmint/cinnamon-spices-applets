@@ -149,7 +149,7 @@ var Climacell = (function () {
                 temperature: CelsiusToKelvin(json.temp.value),
                 humidity: json.humidity.value,
                 location: {
-                    url: null,
+                    url: "https://www.climacell.co/weather",
                     city: null,
                     country: null,
                     timeZone: null

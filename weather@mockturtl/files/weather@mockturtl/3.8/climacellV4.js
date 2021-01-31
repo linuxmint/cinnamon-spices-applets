@@ -65,7 +65,7 @@ class ClimacellV4 {
             sunrise: new Date(daily === null || daily === void 0 ? void 0 : daily[0].values.sunriseTime),
             sunset: new Date(daily === null || daily === void 0 ? void 0 : daily[0].values.sunsetTime),
             location: {
-                url: null
+                url: "https://www.climacell.co/weather"
             },
             extra_field: {
                 name: utils_1._("Feels Like"),
