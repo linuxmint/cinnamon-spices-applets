@@ -21,7 +21,6 @@ import { MetNorway } from "./met_norway";
 import { HttpLib, HttpError, Method, HTTPParams } from "./httpLib";
 import { Log } from "./logger";
 import { APPLET_ICON, REFRESH_ICON } from "./consts";
-import { NotificationService } from "./notification_service";
 import { VisualCrossing } from "./visualcrossing";
 
 const { TextIconApplet, AllowedLayout, MenuItem } = imports.ui.applet;
