@@ -10,6 +10,8 @@
 
 * Fix [#3488](https://github.com/linuxmint/cinnamon-spices-applets/issues/3488), add Climacell V4 as a new provider because Climacell v3 is deprecated and dosen't accept new signups.
 
+* Make network and DNS related errors soft errors again
+
 ## 3.0.0
 
 * Deprecating 3.0 in favor of refactoring 3.8 codebase to use in-build module resolution in TS
