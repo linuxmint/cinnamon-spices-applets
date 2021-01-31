@@ -22,6 +22,7 @@ import { HttpLib, HttpError, Method, HTTPParams } from "./httpLib";
 import { Log } from "./logger";
 import { APPLET_ICON, REFRESH_ICON } from "./consts";
 import { VisualCrossing } from "./visualcrossing";
+import { ClimacellV4 } from "./climacellV4";
 
 const { TextIconApplet, AllowedLayout, MenuItem } = imports.ui.applet;
 const { spawnCommandLine } = imports.misc.util;
@@ -396,7 +397,10 @@ export class WeatherApplet extends TextIconApplet {
                 break;
             case "Yahoo":
                 if (currentName != "Yahoo" || force) this.provider = new Yahoo(this);
-                break;
+				break;
+			case "ClimacellV4":
+				if (currentName != "ClimacellV4" || force) this.provider = new ClimacellV4(this);
+					break;
             case "Climacell":
                 if (currentName != "Climacell" || force) this.provider = new Climacell(this);
                 break;

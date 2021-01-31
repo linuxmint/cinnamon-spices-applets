@@ -22,7 +22,17 @@ export type WeatherWindSpeedUnits = 'automatic' | 'kph' | 'mph' | 'm/s' | 'Knots
 export type WeatherPressureUnits = 'hPa' | 'mm Hg' | 'in Hg' | 'Pa' | 'psi' | 'atm' | 'at';
 /** Change settings-scheme if you change this! */
 export type DistanceUnits = 'automatic' | 'metric' | 'imperial';
-export type Services = "OpenWeatherMap" | "DarkSky" | "MetNorway" | "Weatherbit" | "Yahoo" | "Climacell" | "Met Office UK" | "US Weather" | "Visual Crossing";
+export type Services = 
+	"OpenWeatherMap" |
+	"DarkSky" |
+	"MetNorway" |
+	"Weatherbit" |
+	"Yahoo" |
+	"ClimacellV4" |
+	"Climacell" |
+	"Met Office UK" |
+	"US Weather" |
+	"Visual Crossing";
 
 /**
  * Keys matching the ones in settings-schema.json

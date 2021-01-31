@@ -161,8 +161,8 @@ class Climacell {
             case ("rain_heavy"):
                 return {
                     customIcon: "rain-symbolic",
-                    description: utils_1._("Substantial Rain"),
-                    main: utils_1._("Substantial Rain"),
+                    description: utils_1._("Heavy rain"),
+                    main: utils_1._("Heavy rain"),
                     icons: ["weather-rain", "weather-freezing-rain", "weather-showers-scattered"]
                 };
             case ("rain"):
@@ -175,71 +175,71 @@ class Climacell {
             case ("rain_light"):
                 return {
                     customIcon: "rain-mix-symbolic",
-                    description: utils_1._("Light Rain"),
-                    main: utils_1._("Light Rain"),
+                    description: utils_1._("Light rain"),
+                    main: utils_1._("Light rain"),
                     icons: ["weather-showers-scattered", "weather-rain", "weather-freezing-rain"]
                 };
             case ("freezing_rain_heavy"):
                 return {
                     customIcon: "hail-symbolic",
-                    description: utils_1._("Substantial Freezing Rain"),
-                    main: utils_1._("Freezing Rain"),
+                    description: utils_1._("Heavy freezing rain"),
+                    main: utils_1._("Freezing rain"),
                     icons: ["weather-freezing-rain", "weather-rain", "weather-showers-scattered"]
                 };
             case ("freezing_rain"):
                 return {
                     customIcon: "hail-symbolic",
-                    description: utils_1._("Freezing Rain"),
-                    main: utils_1._("Freezing Rain"),
+                    description: utils_1._("Freezing rain"),
+                    main: utils_1._("Freezing rain"),
                     icons: ["weather-freezing-rain", "weather-rain", "weather-showers-scattered"]
                 };
             case ("freezing_rain_light"):
                 return {
                     customIcon: "hail-symbolic",
-                    description: utils_1._("Light Freezing Rain"),
-                    main: utils_1._("Freezing Rain"),
+                    description: utils_1._("Light freezing rain"),
+                    main: utils_1._("Freezing rain"),
                     icons: ["weather-showers-scattered", "weather-freezing-rain", "weather-rain"]
                 };
             case ("freezing_drizzle"):
                 return {
                     customIcon: "sleet-symbolic",
                     description: utils_1._("Light freezing drizzle"),
-                    main: utils_1._("Freezing Drizzle"),
+                    main: utils_1._("Freezing drizzle"),
                     icons: ["weather-showers-scattered", "weather-rain", "weather-freezing-rain"]
                 };
             case ("drizzle"):
                 return {
                     customIcon: "sleet-symbolic",
-                    description: utils_1._("Light Drizzle"),
-                    main: utils_1._("Light Drizzle"),
+                    description: utils_1._("Light drizzle"),
+                    main: utils_1._("Light drizzle"),
                     icons: ["weather-showers-scattered", "weather-rain", "weather-freezing-rain"]
                 };
             case ("ice_pellets_heavy"):
                 return {
                     customIcon: "snow-wind-symbolic",
-                    description: utils_1._("Substantial Ice Pellets"),
-                    main: utils_1._("Ice Pellets"),
+                    description: utils_1._("Heavy ice pellets"),
+                    main: utils_1._("Ice pellets"),
                     icons: ["weather-freezing-rain", "weather-rain", "weather-showers-scattered"]
                 };
             case ("ice_pellets"):
                 return {
                     customIcon: "snow-wind-symbolic",
-                    description: utils_1._("Ice Pellets"),
-                    main: utils_1._("Ice Pellets"),
+                    description: utils_1._("Ice pellets"),
+                    main: utils_1._("Ice pellets"),
                     icons: ["weather-freezing-rain", "weather-rain", "weather-showers-scattered"]
                 };
             case ("ice_pellets_light"):
                 return {
                     customIcon: "snow-wind-symbolic",
-                    description: utils_1._("Light Ice Pellets"),
-                    main: utils_1._("Ice Pellets"),
+                    description: utils_1._("Light ice pellets"),
+                    main: utils_1._("Ice pellets"),
                     icons: ["weather-freezing-rain", "weather-rain", "weather-showers-scattered"]
                 };
             case ("snow_heavy"):
                 return {
                     customIcon: "snow-symbolic",
-                    description: utils_1._("Substantial Snow"),
-                    main: utils_1._("Substantial Snow"),
+                    description: utils_1._("Heavy snow"),
+                    main: utils_1._("Heavy snow"),
                     icons: ["weather-snow"]
                 };
             case ("snow"):
@@ -273,8 +273,8 @@ class Climacell {
             case ("fog_light"):
                 return {
                     customIcon: (isNight) ? "night-fog-symbolic" : "day-fog-symbolic",
-                    description: utils_1._("Light Fog"),
-                    main: utils_1._("Light Fog"),
+                    description: utils_1._("Light fog"),
+                    main: utils_1._("Light fog"),
                     icons: ["weather-fog"]
                 };
             case ("fog"):
@@ -294,22 +294,22 @@ class Climacell {
             case ("mostly_cloudy"):
                 return {
                     customIcon: (isNight) ? "night-alt-cloudy-symbolic" : "day-cloudy-symbolic",
-                    description: utils_1._("Mostly Cloudy"),
-                    main: utils_1._("Mostly Cloudy"),
+                    description: utils_1._("Mostly cloudy"),
+                    main: utils_1._("Mostly cloudy"),
                     icons: (isNight) ? ["weather-clouds-night", "weather-few-clouds-night", "weather-overcast"] : ["weather-clouds", "weather-few-clouds", "weather-overcast"]
                 };
             case ("partly_cloudy"):
                 return {
                     customIcon: (isNight) ? "night-alt-cloudy-symbolic" : "day-cloudy-symbolic",
-                    description: utils_1._("Partly Cloudy"),
-                    main: utils_1._("Partly Cloudy"),
+                    description: utils_1._("Partly cloudy"),
+                    main: utils_1._("Partly cloudy"),
                     icons: (isNight) ? ["weather-clouds-night", "weather-few-clouds-night", "weather-overcast"] : ["weather-clouds", "weather-few-clouds", "weather-overcast"]
                 };
             case ("mostly_clear"):
                 return {
                     customIcon: (isNight) ? "night-alt-partly-cloudy-symbolic" : "day-cloudy-symbolic",
-                    description: utils_1._("Mostly Clear"),
-                    main: utils_1._("Mostly Clear"),
+                    description: utils_1._("Mostly clear"),
+                    main: utils_1._("Mostly clear"),
                     icons: (isNight) ? ["weather-few-clouds-night", "weather-clouds-night", "weather-overcast"] : ["weather-few-clouds", "weather-clouds", "weather-overcast"]
                 };
             case ("clear"):
