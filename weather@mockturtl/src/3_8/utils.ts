@@ -343,14 +343,14 @@ export function CompassToDeg(compass: string): number {
 
 export function CompassDirection(deg: number): ArrowIcons {
     let directions: ArrowIcons[] = [
-		'north-arrow-weather-symbolic',
-		'north-east-arrow-weather-symbolic',
-		'east-arrow-weather-symbolic',
-		'south-east-arrow-weather-symbolic',
 		'south-arrow-weather-symbolic',
 		'south-west-arrow-weather-symbolic',
 		'west-arrow-weather-symbolic',
-		'north-west-arrow-weather-symbolic'
+		'north-west-arrow-weather-symbolic',
+		'north-arrow-weather-symbolic',
+		'north-east-arrow-weather-symbolic',
+		'east-arrow-weather-symbolic',
+		'south-east-arrow-weather-symbolic'
 	];
     return directions[Math.round(deg / 45) % directions.length]
 }
