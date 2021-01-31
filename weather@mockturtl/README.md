@@ -27,7 +27,7 @@ You can also save locations what you entered manually and switch between them in
 | **MET Norway**          | No            | 10                        | 48                         | --                        |
 | **WeatherBit**          | Yes           | 16                        | 0**                        | --                        |
 | **Yahoo**               | No            | 10                        | 0                          | python3-requests-oauthlib |
-| **ClimacellV3**         | Yes           | 16                        | 96                         | --                        |
+| **ClimacellV3**         | Yes*          | 16                        | 96                         | --                        |
 | **ClimacellV4**         | Yes           | 15                        | 108                        | --                        |
 | **Met Office UK**       | No            | 5                         | 36                         | --                        |
 | **US National Weather** | No            | 7                         | 156                        | --                        |
@@ -64,7 +64,7 @@ Current weather refreshes every 2 hours.
 
 ### Climacell V3
 
-Doesn't accept new registrations anymore, will be closed down later this year (2021)
+*Doesn't accept new registrations anymore, will be closed down later this year (2021)
 
 ### Climacell V4
 
