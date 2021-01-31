@@ -114,7 +114,7 @@ class CurrentWeather {
         let iconSize = Math.round(config.CurrentFontSize * 0.8);
         this.windLabel = new Label({ text: consts_1.ELLIPSIS });
         this.windDirectionIcon = new Icon({
-            icon_type: config.IconType,
+            icon_type: IconType.SYMBOLIC,
             icon_name: consts_1.APPLET_ICON,
             icon_size: iconSize,
             style: "padding-right: 5px; padding-top: " + iconPaddingTop + "px; padding-bottom: " + iconPaddingBottom + "px;"

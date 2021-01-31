@@ -40,7 +40,8 @@ const Keys = {
     USE_CUSTOM_MENUICONS: "useCustomMenuIcons",
     RUSSIAN_STYLE: "tempRussianStyle",
     SHORT_HOURLY_TIME: "shortHourlyTime",
-    SHOW_FORECAST_DATES: "showForecastDates"
+    SHOW_FORECAST_DATES: "showForecastDates",
+    WEATHER_USE_SYMBOLIC_ICONS_KEY: 'useSymbolicIcons'
 };
 class Config {
     constructor(app, instanceID) {
@@ -53,7 +54,6 @@ class Config {
             "us gb": "imperial"
         };
         this.WEATHER_LOCATION = "location";
-        this.WEATHER_USE_SYMBOLIC_ICONS_KEY = 'useSymbolicIcons';
         this.WEATHER_LOCATION_LIST = "locationList";
         this.doneTypingLocation = null;
         this.currentLocation = null;
@@ -81,7 +81,6 @@ class Config {
         this.settings.bindProperty(BindingDirection.BIDIRECTIONAL, this.WEATHER_LOCATION_LIST, ("_" + this.WEATHER_LOCATION_LIST), Lang.bind(this, this.OnLocationStoreChanged), null);
         this.settings.bindProperty(BindingDirection.IN, "keybinding", "keybinding", Lang.bind(this, this.OnKeySettingsUpdated), null);
         keybindingManager.addHotKey(consts_1.UUID, this.keybinding, Lang.bind(this.app, this.app.on_applet_clicked));
-        this.settings.connect(consts_1.SIGNAL_CHANGED + this.WEATHER_USE_SYMBOLIC_ICONS_KEY, Lang.bind(this, this.IconTypeChanged));
     }
     get CurrentFontSize() {
         return this.currentFontSize;
@@ -111,11 +110,20 @@ class Config {
         return this._distanceUnit;
     }
     get IconType() {
-        return this.settings.getValue(this.WEATHER_USE_SYMBOLIC_ICONS_KEY) ?
+        if (this._useCustomMenuIcons)
+            return IconType.SYMBOLIC;
+        return this._useSymbolicIcons ?
             IconType.SYMBOLIC :
             IconType.FULLCOLOR;
     }
     ;
+    get AppletIconType() {
+        if (this._useCustomAppletIcons)
+            return IconType.SYMBOLIC;
+        return this._useSymbolicIcons ?
+            IconType.SYMBOLIC :
+            IconType.FULLCOLOR;
+    }
     SwitchToNextLocation() {
         let nextLoc = this.LocStore.GetNextLocation(this.CurrentLocation);
         if (nextLoc == null)
@@ -202,10 +210,6 @@ class Config {
         this.currentLocation = loc;
         if (switchToManual == true)
             this.settings.setValue(Keys.MANUAL_LOCATION, true);
-    }
-    IconTypeChanged() {
-        this.app.ui.UpdateIconType(this.IconType);
-        logger_1.Log.Instance.Debug("Symbolic icon setting changed");
     }
     OnKeySettingsUpdated() {
         if (this.keybinding != null) {
