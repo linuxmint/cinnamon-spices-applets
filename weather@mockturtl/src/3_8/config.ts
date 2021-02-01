@@ -22,7 +22,17 @@ export type WeatherWindSpeedUnits = 'automatic' | 'kph' | 'mph' | 'm/s' | 'Knots
 export type WeatherPressureUnits = 'hPa' | 'mm Hg' | 'in Hg' | 'Pa' | 'psi' | 'atm' | 'at';
 /** Change settings-scheme if you change this! */
 export type DistanceUnits = 'automatic' | 'metric' | 'imperial';
-export type Services = "OpenWeatherMap" | "DarkSky" | "MetNorway" | "Weatherbit" | "Yahoo" | "Climacell" | "Met Office UK" | "US Weather" | "Visual Crossing";
+export type Services = 
+	"OpenWeatherMap" |
+	"DarkSky" |
+	"MetNorway" |
+	"Weatherbit" |
+	"Yahoo" |
+	"ClimacellV4" |
+	"Climacell" |
+	"Met Office UK" |
+	"US Weather" |
+	"Visual Crossing";
 
 /**
  * Keys matching the ones in settings-schema.json
@@ -54,7 +64,8 @@ const Keys = {
     USE_CUSTOM_MENUICONS:       "useCustomMenuIcons",
     RUSSIAN_STYLE:              "tempRussianStyle",
     SHORT_HOURLY_TIME:          "shortHourlyTime",
-    SHOW_FORECAST_DATES:        "showForecastDates"
+	SHOW_FORECAST_DATES:        "showForecastDates",
+	WEATHER_USE_SYMBOLIC_ICONS_KEY: 'useSymbolicIcons'
 }
 
 export class Config {
@@ -72,7 +83,6 @@ export class Config {
     }
 
     private readonly WEATHER_LOCATION = "location";
-	private readonly WEATHER_USE_SYMBOLIC_ICONS_KEY = 'useSymbolicIcons';
 	private readonly WEATHER_LOCATION_LIST = "locationList";
 	// Settings variables to bind to
 	// complex variables, using getters instead to access
@@ -81,6 +91,7 @@ export class Config {
 	private readonly _windSpeedUnit: WeatherWindSpeedUnits;
 	private readonly _distanceUnit: DistanceUnits;
 	private readonly _apiKey: string;
+	private readonly _useSymbolicIcons: boolean;
 	// No need to access this from the outside
 	private readonly keybinding: string;
 
@@ -166,8 +177,6 @@ export class Config {
 
         keybindingManager.addHotKey(
             UUID, this.keybinding, Lang.bind(this.app, this.app.on_applet_clicked));
-
-		this.settings.connect(SIGNAL_CHANGED + this.WEATHER_USE_SYMBOLIC_ICONS_KEY, Lang.bind(this, this.IconTypeChanged));
 	}
 
 	public get CurrentFontSize(): number {
@@ -216,10 +225,22 @@ export class Config {
 	 * Gets Icon type based on user config
 	 */
     public get IconType(): imports.gi.St.IconType {
-        return this.settings.getValue(this.WEATHER_USE_SYMBOLIC_ICONS_KEY) ?
+		if (this._useCustomMenuIcons)
+			return IconType.SYMBOLIC;
+
+        return this._useSymbolicIcons ?
             IconType.SYMBOLIC :
-            IconType.FULLCOLOR
+            IconType.FULLCOLOR;
 	};
+
+	public get AppletIconType(): imports.gi.St.IconType {
+		if (this._useCustomAppletIcons)
+			return IconType.SYMBOLIC;
+
+		return this._useSymbolicIcons ?
+		IconType.SYMBOLIC :
+		IconType.FULLCOLOR;
+	}
 	
 	/** Called when user changed manual locations, automatically switches to manual location mode. */
 	public SwitchToNextLocation(): LocationData {
@@ -330,11 +351,6 @@ export class Config {
         this.currentLocation = loc;
         if (switchToManual == true) this.settings.setValue(Keys.MANUAL_LOCATION, true);
     }
-
-	private IconTypeChanged() {
-        this.app.ui.UpdateIconType(this.IconType);
-        Log.Instance.Debug("Symbolic icon setting changed");
-	}
 
 	private OnKeySettingsUpdated(): void {
 		if (this.keybinding != null) {

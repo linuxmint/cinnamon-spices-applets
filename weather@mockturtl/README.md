@@ -17,8 +17,6 @@ In **Manual Location** mode the applet either accepts:
 
 You can also save locations what you entered manually and switch between them in the applet *(arrows will appear on both sides of the location in the applet if you have more than two saved)*. 
 
-They are stored in a file at ```$XDG_CONFIG_HOME/weather-mockturtl/locations.json``` or if the variable is not set, ```~/.config/weather-mockturtl/locations.json```. *Only the text what goes into the settings entry is used at the moment, the rest of the data is just there without purpose.*
-
 ## Weather providers to choose from
 
 | Weather Providers       | Needs API key | **Maximum Forecast Days** | **Maximum Forecast Hours** | Required Packages         |
@@ -29,7 +27,8 @@ They are stored in a file at ```$XDG_CONFIG_HOME/weather-mockturtl/locations.jso
 | **MET Norway**          | No            | 10                        | 48                         | --                        |
 | **WeatherBit**          | Yes           | 16                        | 0**                        | --                        |
 | **Yahoo**               | No            | 10                        | 0                          | python3-requests-oauthlib |
-| **Climacell**           | Yes           | 16                        | 96                         | --                        |
+| **ClimacellV3**         | Yes*          | 16                        | 96                         | --                        |
+| **ClimacellV4**         | Yes           | 15                        | 108                        | --                        |
 | **Met Office UK**       | No            | 5                         | 36                         | --                        |
 | **US National Weather** | No            | 7                         | 156                        | --                        |
 
@@ -53,7 +52,7 @@ Current weather is shown for the next hour, and the daily forecasts are generate
 
 ### Weatherbit.io
 
-* **Needs API key.** Go to [Weatherbit.io](https://www.weatherbit.io/account/create) and create an account. Then go your [Dashboard](https://www.weatherbit.io/account/dashboard) where you should find your secret key already created.
+* To get an API key, go to [Weatherbit.io](https://www.weatherbit.io/account/create) and create an account. Then go your [Dashboard](https://www.weatherbit.io/account/dashboard) where you should find your secret key already created.
 
 * At least 10 minutes as refresh rate is recommended, since otherwise you might exceed you daily quota.
 
@@ -61,11 +60,15 @@ Current weather is shown for the next hour, and the daily forecasts are generate
 
 ### Yahoo
 
-* Current weather refreshes every 2 hours.
+Current weather refreshes every 2 hours.
 
-### Climacell
+### Climacell V3
 
-* API key can be obtained [here](https://developer.climacell.co/sign-up). Register and the API key will be shown in the Overview section. At least 10 minutes refresh rate is recommended with a free plan.
+*Doesn't accept new registrations anymore, will be closed down later this year (2021)
+
+### Climacell V4
+
+API key can be obtained [here](https://app.climacell.co/signup?planid=5fa4047f4acee993fbd7399d&vid=153ef940-c389-41d4-847e-d83d632059d0). Register and the API key will be shown in the Overview section. Free plan comes with 1000 free calls per day.
 
 ### Met Office UK
 

@@ -17,6 +17,7 @@ const httpLib_1 = require("./httpLib");
 const logger_1 = require("./logger");
 const consts_1 = require("./consts");
 const visualcrossing_1 = require("./visualcrossing");
+const climacellV4_1 = require("./climacellV4");
 const { TextIconApplet, AllowedLayout, MenuItem } = imports.ui.applet;
 const { spawnCommandLine } = imports.misc.util;
 const { IconType, Side } = imports.gi.St;
@@ -177,8 +178,8 @@ class WeatherApplet extends TextIconApplet {
             this.SetCustomIcon(customIcon);
         }
         else {
-            let icon = utils_1.WeatherIconSafely(iconNames, this.config.IconType);
-            this.config.IconType == IconType.SYMBOLIC ?
+            let icon = utils_1.WeatherIconSafely(iconNames, this.config.AppletIconType);
+            this.config.AppletIconType == IconType.SYMBOLIC ?
                 this.set_applet_icon_symbolic_name(icon) :
                 this.set_applet_icon_name(icon);
         }
@@ -297,6 +298,10 @@ class WeatherApplet extends TextIconApplet {
             case "Yahoo":
                 if (currentName != "Yahoo" || force)
                     this.provider = new yahoo_1.Yahoo(this);
+                break;
+            case "ClimacellV4":
+                if (currentName != "ClimacellV4" || force)
+                    this.provider = new climacellV4_1.ClimacellV4(this);
                 break;
             case "Climacell":
                 if (currentName != "Climacell" || force)

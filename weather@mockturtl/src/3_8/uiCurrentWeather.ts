@@ -173,7 +173,7 @@ export class CurrentWeather {
 
 		this.windLabel = new Label({ text: ELLIPSIS });
 		this.windDirectionIcon = new Icon({
-			icon_type: config.IconType,
+			icon_type: IconType.SYMBOLIC,
 			icon_name: APPLET_ICON,
 			icon_size: iconSize,
 			style: "padding-right: 5px; padding-top: " + iconPaddingTop + "px; padding-bottom: " + iconPaddingBottom + "px;"

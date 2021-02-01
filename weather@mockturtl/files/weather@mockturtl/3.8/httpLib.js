@@ -49,6 +49,14 @@ class HttpLib {
                 response: null
             };
         }
+        else if (message.status_code < 100 && message.status_code >= 0) {
+            error = {
+                code: message.status_code,
+                message: "no network response",
+                reason_phrase: message.reason_phrase,
+                response: message
+            };
+        }
         else if (message.status_code > 300 || message.status_code < 200) {
             error = {
                 code: message.status_code,

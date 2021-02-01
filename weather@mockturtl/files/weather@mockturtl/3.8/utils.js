@@ -303,14 +303,14 @@ function CompassToDeg(compass) {
 exports.CompassToDeg = CompassToDeg;
 function CompassDirection(deg) {
     let directions = [
-        'north-arrow-weather-symbolic',
-        'north-east-arrow-weather-symbolic',
-        'east-arrow-weather-symbolic',
-        'south-east-arrow-weather-symbolic',
         'south-arrow-weather-symbolic',
         'south-west-arrow-weather-symbolic',
         'west-arrow-weather-symbolic',
-        'north-west-arrow-weather-symbolic'
+        'north-west-arrow-weather-symbolic',
+        'north-arrow-weather-symbolic',
+        'north-east-arrow-weather-symbolic',
+        'east-arrow-weather-symbolic',
+        'south-east-arrow-weather-symbolic'
     ];
     return directions[Math.round(deg / 45) % directions.length];
 }
