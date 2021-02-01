@@ -1,12 +1,12 @@
 const Gio = imports.gi.Gio;
 const Gtk = imports.gi.Gtk;
-const Gdk = imports.gi.Gdk;
 const GLib = imports.gi.GLib;
 const St = imports.gi.St;
 const Clutter = imports.gi.Clutter;
 const {AppState} = imports.gi.Cinnamon;
 const {EllipsizeMode} = imports.gi.Pango;
 const XApp = imports.gi.XApp;
+const Mainloop = imports.mainloop;
 const Main = imports.ui.main;
 const {PopupBaseMenuItem, PopupSubMenu, PopupIconMenuItem, PopupSeparatorMenuItem} = imports.ui.popupMenu;
 const {DragMotionResult, makeDraggable} = imports.ui.dnd;
@@ -477,16 +477,12 @@ class ContextMenu {
                                                                 this.close(); } ));
             } else {
                 addMenuItem( new ContextMenuItem(this.appThis, _('Add to favorites'), 'non-starred',
-                              () => {   favs.add(app.uri);
-                                        this.appThis.updateAfterFavFileChange();
-                                        if (XApp.Favorites.get_default().get_favorites(null).length == 0) {
-                                            //favs list doesn't update straight away so if adding first fav
-                                            //then close menu so favs category can appear after reopening menu.
-                                            this.appThis.closeMenu();
-                                        } else {
-                                            this.close();
-                                        }
-                                    } ));
+                        () =>   {   favs.add(app.uri);
+                                    //favs list doesn't update synchronously after adding fav so add small
+                                    //delay before updating menu
+                                    Mainloop.timeout_add(100, () => { this.appThis.updateAfterFavFileChange(); });
+                                    this.close();
+                                } ));
             }
         }
         const folder = file.get_parent();
@@ -624,7 +620,7 @@ class AppButton extends PopupBaseMenuItem {
                             if (source.isDraggableApp && source.get_app_id() !== this.app.get_id() &&
                                                             this.appThis.currentCategory === 'favorite_apps') {
                                 this.actor.set_opacity(255);
-                                this.appThis.addFavoriteToPos(source.get_app_id(), this.app.get_id());
+                                this.appThis.addFavoriteAppToPos(source.get_app_id(), this.app.get_id());
                                 return true;
                             } else {
                                 this.actor.set_opacity(255);
@@ -833,7 +829,8 @@ class AppButton extends PopupBaseMenuItem {
             }
         } else if (this.app.type === APPTYPE.clearlist_button) {
             Gtk.RecentManager.get_default().purge_items();
-            this.appThis.setActiveCategory('all');
+            this.appThis.recentsJustCleared = true;
+            this.appThis.setActiveCategory('recents');
             //don't closeMenu
         } else if (this.app.type === APPTYPE.provider) {
             this.app.activate(this.app);
@@ -915,7 +912,7 @@ class SidebarButton extends PopupBaseMenuItem {
                     acceptDrop: (source) => {
                             if (source.isDraggableApp === true && source.get_app_id() !== this.app.get_id()) {
                                 this.actor.set_opacity(255);
-                                this.appThis.addFavoriteToPos(source.get_app_id(), this.app.get_id());
+                                this.appThis.addFavoriteAppToPos(source.get_app_id(), this.app.get_id());
                                 return true;
                             } else {
                                 this.actor.set_opacity(255);

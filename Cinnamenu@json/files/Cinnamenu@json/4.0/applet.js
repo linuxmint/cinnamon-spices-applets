@@ -77,7 +77,7 @@ class CinnamenuApplet extends TextIconApplet {
         this.signals.connect(this.iconTheme, 'changed', (...args) => this.onIconsChanged(...args));
         this.signals.connect(this.appSystem, 'installed-changed',
                                                         (...args) => this.apps.installedChanged(...args));
-        this.signals.connect(this.appFavorites, 'changed', (...args) => this.onFavoritesChanged(...args));
+        this.signals.connect(this.appFavorites, 'changed', (...args) => this.onFavoriteAppsChanged(...args));
         this.signals.connect(this.menu, 'open-state-changed', (...args) => this.onOpenStateToggled(...args));
         //this.signals.connect(global, 'scale-changed', () => this.refresh() );
         this.categories = new Categories(this);
@@ -353,7 +353,7 @@ class CinnamenuApplet extends TextIconApplet {
         }
     }
 
-    onFavoritesChanged() {
+    onFavoriteAppsChanged() {
         // Check if the menu has been rendered at least once
         if (this.appsView) {
             this.sidebar.populate();
@@ -402,7 +402,7 @@ class CinnamenuApplet extends TextIconApplet {
         }
     }
 
-    addFavoriteToPos(add_id, pos_id) {
+    addFavoriteAppToPos(add_id, pos_id) {
         const pos = this.appFavorites._getIds().indexOf(pos_id);
         if (pos >= 0) { //move
             Meta.later_add(Meta.LaterType.BEFORE_REDRAW, () => {
@@ -1842,7 +1842,11 @@ class Apps {
     }
 
     listRecent(pattern) {
-        const {_infosByTimestamp} = this.recentManager;
+        let {_infosByTimestamp} = this.recentManager;
+        if (this.appThis.recentsJustCleared) {//_infosByTimestamp doesn't update synchronously
+            _infosByTimestamp = [];
+            this.appThis.recentsJustCleared = false;
+        }
         let res = [];
         _infosByTimestamp.forEach(recentInfo => {
             /*if (!GLib.file_test(Gio.File.new_for_uri(recentInfo.uri).get_path(), GLib.FileTest.EXISTS)) {
