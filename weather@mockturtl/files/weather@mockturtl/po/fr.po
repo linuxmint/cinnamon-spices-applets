@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: weather@mockturtl 3.0.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-01-30 07:55+0000\n"
-"PO-Revision-Date: 2021-01-30 13:35+0100\n"
+"PO-Revision-Date: 2021-02-01 10:31+0100\n"
 "Last-Translator: FabRCT <fab.rct@gmail.com>\n"
 "Language-Team: Français <ecyrbe@gmail.com>\n"
 "Language: fr\n"
@@ -26,7 +26,7 @@ msgstr ""
 #: 3.8/yahoo.js:73 3.8/us_weather.js:187 3.8/climacell.js:80
 #: 3.8/visualcrossing.js:63
 msgid "Feels Like"
-msgstr "Semble être"
+msgstr "T° ressentie"
 
 #: 3.0/openWeatherMap.js:190 3.0/weatherbit.js:212 3.0/us_weather.js:334
 #: 3.0/met_uk.js:340 3.8/openWeatherMap.js:124 3.8/weatherbit.js:108
