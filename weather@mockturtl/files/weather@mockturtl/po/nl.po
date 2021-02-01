@@ -1,16 +1,16 @@
 # Dutch translation for cinnamon-weather (weather@mockturtl)
-# Copyright (C) 2020
+# Copyright (C) 2021
 # This file is distributed under the same license as the cinnamon-weather package.
 # Pjotr <pjotrvertaalt@gmail.com>, 2013-2021.
 # Jurien (French77) <Jurien@protonmail.com>, 2020-2021.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Weather (weather@mockturtl) Version 2.6.8\n"
+"Project-Id-Version: Weather (weather@mockturtl)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-01-30 07:55+0000\n"
-"PO-Revision-Date: 2021-01-30 12:05+0100\n"
-"Last-Translator: Jurien (French77) <Jurien@protonmail.com>\n"
+"PO-Revision-Date: 2021-01-31 12:13+0100\n"
+"Last-Translator: Pjotr <pjotrvertaalt@gmail.com>\n"
 "Language-Team: Dutch\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
@@ -646,7 +646,7 @@ msgid ""
 "more information"
 msgstr ""
 "Onbekende fout trad op tijdens het verkrijgen van het weer, zie Looking "
-"Glass-logboeken voor meer informatie."
+"Glass-logboeken voor meer informatie"
 
 #: 3.0/yahoo.js:437 3.8/yahoo.js:385
 msgid "Tropical Storm"
@@ -1342,11 +1342,11 @@ msgstr "NW"
 
 #: 3.8/weatherbit.js:230
 msgid "API key is doesn't provide access to Hourly Weather, skipping"
-msgstr "API sleutel geeft geen toegang tot het uurlijks weer,overslaan"
+msgstr "API-sleutel geeft geen toegang tot het uurlijks weer, wordt overgeslagen"
 
 #: 3.8/main.js:103
 msgid "This provider requires an API key to operate"
-msgstr "Deze provider heeft een API sleutel nodig om te kunnen werken"
+msgstr "Deze aanbieder heeft een API-sleutel nodig om te kunnen werken"
 
 #: 3.8/main.js:136 3.8/uiBar.js:36
 msgid "As of {lastUpdatedTime}"
@@ -1354,7 +1354,7 @@ msgstr "Met ingang van {lastUpdatedTime}"
 
 #: 3.8/uiBar.js:42
 msgid "{distance}{distanceUnit} from you"
-msgstr "{distance}{distanceUnit} van jou"
+msgstr "{distance}{distanceUnit} van u"
 
 #: 3.8/yahoo.js:109 3.8/yahoo.js:116
 msgid "Please install '{missingPackage}', then refresh manually."
@@ -1362,7 +1362,7 @@ msgstr "Installeer a.u.b '{missingPackage}', ververs daarna handmatig."
 
 #: 3.8/met_uk.js:250
 msgid "Very poor"
-msgstr "Zeer slecht "
+msgstr "Zeer slecht"
 
 #: 3.8/met_uk.js:250
 msgid "Less than {distance} {distanceUnit}"
@@ -1370,7 +1370,7 @@ msgstr "Minder dan {distance} {distanceUnit}"
 
 #: 3.8/met_uk.js:254
 msgid "Excellent"
-msgstr "Uitstekend "
+msgstr "Uitstekend"
 
 #: 3.8/met_uk.js:254
 msgid "More than {distance} {distanceUnit}"
@@ -1394,11 +1394,11 @@ msgstr "Goed"
 
 #: 3.8/met_uk.js:274
 msgid "Very good"
-msgstr "Zeer goed "
+msgstr "Zeer goed"
 
 #: 3.8/visualcrossing.js:182
 msgid "Blowing or drifting snow"
-msgstr "Rondwaaiend of stuifsneeuw"
+msgstr "Rondwaaiende of stuivende sneeuw"
 
 #: 3.8/visualcrossing.js:186
 msgid "Heavy drizzle"
@@ -1422,15 +1422,15 @@ msgstr "Stofstorm"
 
 #: 3.8/visualcrossing.js:198
 msgid "Freezing drizzle/freezing rain"
-msgstr "Aanvriezende motregen/regen"
+msgstr "Motregenijzel/ijzel"
 
 #: 3.8/visualcrossing.js:200
 msgid "Heavy freezing drizzle/freezing rain"
-msgstr "Zware ijskoude motregen/regen"
+msgstr "Zware motregenijzel/ijzel"
 
 #: 3.8/visualcrossing.js:202
 msgid "Light freezing drizzle/freezing rain"
-msgstr "Lichte ijskoude motregen/regen"
+msgstr "Lichte motregenijzel/ijzel"
 
 #: 3.8/visualcrossing.js:204
 msgid "Freezing fog"
@@ -1454,11 +1454,11 @@ msgstr "Hagelbuien"
 
 #: 3.8/visualcrossing.js:214
 msgid "Ice"
-msgstr "Ijs"
+msgstr "IJs"
 
 #: 3.8/visualcrossing.js:216
 msgid "Lightning without thunder"
-msgstr "Lichte regen zonder onweersbuien"
+msgstr "Bliksem zonder donder"
 
 #: 3.8/visualcrossing.js:220
 msgid "Precipitation in vicinity"
@@ -1466,11 +1466,11 @@ msgstr "Neerslag in de omgeving"
 
 #: 3.8/visualcrossing.js:224
 msgid "Heavy rain and snow"
-msgstr "Zware regenval en sneeuwval"
+msgstr "Zware regen- en sneeuwval"
 
 #: 3.8/visualcrossing.js:226
 msgid "Light rain And snow"
-msgstr "Lichte regen en sneeuwval"
+msgstr "Lichte regen- en sneeuwval"
 
 #: 3.8/visualcrossing.js:234
 msgid "Sky coverage decreasing"
@@ -1490,7 +1490,7 @@ msgstr "Rook of nevel"
 
 #: 3.8/visualcrossing.js:244
 msgid "Snow and rain showers"
-msgstr "Sneeuw en regen buien"
+msgstr "Sneeuw en regenbuien"
 
 #: 3.8/visualcrossing.js:256
 msgid "Thunderstorm without precipitation"
@@ -1498,7 +1498,7 @@ msgstr "Onweer zonder neerslag"
 
 #: 3.8/visualcrossing.js:258
 msgid "Diamond dust"
-msgstr "Ijskristallen stof"
+msgstr "IJsstof"
 
 #: 3.8/visualcrossing.js:264
 msgid "Partially cloudy"
@@ -1506,7 +1506,7 @@ msgstr "Deels bewolkt"
 
 #: 3.8/visualcrossing.js:287
 msgid "Please make sure you entered the API key correctly"
-msgstr "Zorg ervoor dat u de API-sleutel correct hebt ingevoerd"
+msgstr "Zorg er a.u.b. voor dat u de API-sleutel correct hebt ingevoerd"
 
 #. metadata.json->name
 #. 3.8->settings-schema.json->providers->title
@@ -1876,7 +1876,7 @@ msgstr "Tijd tonen in 24-uurs-opmaak"
 #. 3.0->settings-schema.json->shortHourlyTime->description
 #. 3.8->settings-schema.json->shortHourlyTime->description
 msgid "Only display hours for hourly forecast time"
-msgstr "Toon alleen uren voor de uurvoorspellingsperiode"
+msgstr "Toon alleen uren voor de uurlijkse voorspelling"
 
 #. 3.0->settings-schema.json->shortHourlyTime->tooltip
 #. 3.8->settings-schema.json->shortHourlyTime->tooltip
@@ -1996,7 +1996,7 @@ msgstr "Een fout melden"
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "Visual Crossing (key needed)"
-msgstr "Visueel oversteken (sleutel nodig)"
+msgstr "Visual Crossing (sleutel nodig)"
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "Met Office UK (UK only)"
@@ -2049,11 +2049,11 @@ msgstr "Land"
 
 #. 3.8->settings-schema.json->locationList->columns->title
 msgid "Timezone"
-msgstr "Tijdszone"
+msgstr "Tijdzone"
 
 #. 3.8->settings-schema.json->locationList->columns->title
 msgid "Search entry"
-msgstr "Zoeken in"
+msgstr "Zoekterm"
 
 #. 3.8->settings-schema.json->useSymbolicIcons->tooltip
 msgid "Does not apply to custom iconset, that is symbolic by default"
@@ -2466,7 +2466,3 @@ msgstr ""
 #~ "zou uw dagelijkse quotum kunnen overschrijden. Heeft u een sleutel nodig, "
 #~ "klik dan op 'API-sleutel en locatie instellen' voor de te nemen stappen "
 #~ "om deze te verkrijgen."
-
-
-
-
