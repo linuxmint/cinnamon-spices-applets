@@ -1,15 +1,15 @@
 # SOME DESCRIPTIVE TITLE.
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Serkan ÖNDER <serkanonder@outlook.com>, 2020.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-02 14:59+0100\n"
-"PO-Revision-Date: 2021-01-05 11:34+0300\n"
-"Last-Translator: Serkan ÖNDER <serkanonder@outlook.com>\n"
+"POT-Creation-Date: 2021-01-22 15:31+0100\n"
+"PO-Revision-Date: 2021-02-01 16:13+0300\n"
+"Last-Translator: serkanonder@outlook.com\n"
 "Language-Team: \n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
@@ -18,35 +18,39 @@ msgstr ""
 "X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: 4.6/applet.js:136
+#: 4.6/applet.js:147
 #, javascript-format
 msgid "Can't play  %s"
 msgstr "Oynatılamıyor  %s"
 
-#: 4.6/applet.js:136
+#: 4.6/applet.js:147
 msgid ""
 "Make sure that the URL is valid and you have a stable internet connection. "
 "Don't hestitate to open an Issue on Github if the problem persists."
 msgstr ""
-"URL'nin geçerli olduğundan ve sabit bir internet bağlantınız olduğundan "
-"emin olun. Sorun devam ederse Github'da bir Sorun açmaktan çekinmeyin."
+"URL'nin geçerli olduğundan ve sabit bir internet bağlantınız olduğundan emin "
+"olun. Sorun devam ederse Github'da bir Sorun açmaktan çekinmeyin."
 
-#: 4.6/applet.js:155 3.0/applet.js:140
+#: 4.6/applet.js:165 3.0/applet.js:140
 msgid "Stop"
 msgstr "Durdur"
 
-#: 4.6/applet.js:205 3.0/applet.js:183
+#: 4.6/applet.js:172
+msgid "Copy current song title"
+msgstr "Geçerli şarkı başlığını kopyala"
+
+#: 4.6/applet.js:183
+msgid "Can't copy current Song. Is the Radio playing?"
+msgstr "Mevcut Şarkı kopyalanamıyor. Radyo çalıyor mu?"
+
+#: 4.6/applet.js:245 3.0/applet.js:183
 #, javascript-format
 msgid "Please install the '%s' package."
 msgstr "Lütfen '%s' paketini kurun."
 
-#: 4.6/applet.js:243
-msgid ""
-"Can't increase Volume. Volume already at maximum. Change the Maximum Volume "
-"in the Settings to further increase the Volume."
-msgstr ""
-"Sesi artıramıyorum. Hacim zaten maksimumda. Sesi daha da artırmak için "
-"Ayarlar'dan Maksimum Sesi değiştirin."
+#: 4.6/applet.js:269
+msgid "Can't increase Volume. Volume already at maximum."
+msgstr "Sesi artıramıyorum. Hacim zaten maksimumda."
 
 #. metadata.json->name
 #: 3.0/applet.js:99 3.0/applet.js:117 3.0/applet.js:143 3.0/applet.js:153
@@ -95,33 +99,29 @@ msgstr "Eklentiyi indir"
 msgid "A simple radio applet for Cinnamon"
 msgstr "Cinnamon için basit bir radyo uygulaması"
 
-#. 4.6->settings-schema.json->page1->title
-#. 4.6->settings-schema.json->tree->description
+#. 4.6->settings-schema.json->radio-stations-page->title
+msgid "Radio Stations"
+msgstr "Radyo İstasyonları"
+
+#. 4.6->settings-schema.json->preferences-page->title
+msgid "Preferences"
+msgstr "Tercihler"
+
+#. 4.6->settings-schema.json->station-list-section->title
 #. 3.0->settings-schema.json->page1->title
 #. 3.0->settings-schema.json->tree->description
 msgid "List of stations"
 msgstr "İstasyonların listesi"
 
-#. 4.6->settings-schema.json->page2->title
+#. 4.6->settings-schema.json->find-station-section->title
+msgid "Find station"
+msgstr "İstasyon bul"
+
+#. 4.6->settings-schema.json->appearance-section->title
 msgid "Appearance"
 msgstr "Görünüm"
 
-#. 4.6->settings-schema.json->page3->title
-msgid "Audio Player"
-msgstr "Ses oynatıcı"
-
-#. 4.6->settings-schema.json->section1->title
-#. 3.0->settings-schema.json->section1->title
-msgid "Radio"
-msgstr "Radyo"
-
-#. 4.6->settings-schema.json->section2->title
-#. 3.0->settings-schema.json->page2->title
-#. 3.0->settings-schema.json->section2->title
-msgid "Icon"
-msgstr "Simge"
-
-#. 4.6->settings-schema.json->section3->title
+#. 4.6->settings-schema.json->volume-section->title
 msgid "Volume"
 msgstr "Ses Düzeyi"
 
@@ -162,36 +162,35 @@ msgid "Opens a website, which lists URLs of radio stations."
 msgstr "Radyo istasyonlarının URL'lerini listeleyen bir web sitesi açar."
 
 #. 4.6->settings-schema.json->icon-type->description
-#. 3.0->settings-schema.json->icon-type->description
-msgid "Type"
-msgstr "Tip"
+msgid "Icon type"
+msgstr "Simge tipi"
 
 #. 4.6->settings-schema.json->icon-type->options
-#. 3.0->settings-schema.json->icon-type->options
-msgid "Symbolic Icon"
-msgstr "Sembolik Simge"
+msgid "Symbolic"
+msgstr "Sembolik"
 
 #. 4.6->settings-schema.json->icon-type->options
-#. 3.0->settings-schema.json->icon-type->options
-msgid "Full Color Icon"
-msgstr "Tam Renkli Simge"
+msgid "Full Color"
+msgstr "Tam Renkli"
 
 #. 4.6->settings-schema.json->icon-type->options
-#. 3.0->settings-schema.json->icon-type->options
-msgid "Bicolor Icon"
-msgstr "Çift renkli Simge"
+msgid "Bicolor"
+msgstr "Çift renkli"
 
 #. 4.6->settings-schema.json->color-on->description
-#. 3.0->settings-schema.json->color-on->description
-msgid "Color of Symbolic Icon when playing a radio"
+msgid "Color of symbolic icon when playing a radio station"
 msgstr "Radyo çalarken Sembolik Simgenin Rengi"
 
-#. 4.6->settings-schema.json->max-volume->description
-msgid "Maximum Volume"
-msgstr "En yüksek Ses seviyesi"
+#. 4.6->settings-schema.json->channel-on-panel->description
+msgid "Show current radio station on the panel"
+msgstr "Radyo Kanalını Panelde Göster"
+
+#. 4.6->settings-schema.json->keep-volume-between-sessions->description
+msgid "Remember volume after stopping the radio"
+msgstr "Radyoyu durdurduktan sonra sesi hatırla"
 
 #. 4.6->settings-schema.json->initial-volume->description
-msgid "Initial Volume"
+msgid "Initial volume"
 msgstr "İlk Ses seviyesi"
 
 #. 4.6->settings-schema.json->initial-volume->tooltip
@@ -202,9 +201,54 @@ msgstr ""
 "Bir radyo akışına tıklandığında ve halihazırda başka hiçbir radyo akışı "
 "çalışmadığında ilk ses seviyesi uygulanır"
 
+#. 3.0->settings-schema.json->page2->title
+#. 3.0->settings-schema.json->section2->title
+msgid "Icon"
+msgstr "Simge"
+
+#. 3.0->settings-schema.json->section1->title
+msgid "Radio"
+msgstr "Radyo"
+
 #. 3.0->settings-schema.json->section3->title
 msgid "Symbolic Icon Color"
 msgstr "Sembolik Simge Rengi"
+
+#. 3.0->settings-schema.json->icon-type->description
+msgid "Type"
+msgstr "Tip"
+
+#. 3.0->settings-schema.json->icon-type->options
+msgid "Symbolic Icon"
+msgstr "Sembolik Simge"
+
+#. 3.0->settings-schema.json->icon-type->options
+msgid "Full Color Icon"
+msgstr "Tam Renkli Simge"
+
+#. 3.0->settings-schema.json->icon-type->options
+msgid "Bicolor Icon"
+msgstr "Çift renkli Simge"
+
+#. 3.0->settings-schema.json->color-on->description
+msgid "Color of Symbolic Icon when playing a radio"
+msgstr "Radyo çalarken Sembolik Simgenin Rengi"
+
+#~ msgid ""
+#~ "Can't increase Volume. Volume already at maximum. Change the Maximum "
+#~ "Volume in the Settings to further increase the Volume."
+#~ msgstr ""
+#~ "Sesi artıramıyorum. Hacim zaten maksimumda. Sesi daha da artırmak için "
+#~ "Ayarlar'dan Maksimum Sesi değiştirin."
+
+#~ msgid "Audio Player"
+#~ msgstr "Ses oynatıcı"
+
+#~ msgid "Maximum Volume"
+#~ msgstr "En yüksek Ses seviyesi"
+
+#~ msgid "Caliyor %s"
+#~ msgstr "Caliyor %s"
 
 #~ msgid ""
 #~ "This simple radio for Cinnamon. Require moc player. In setting you may "
