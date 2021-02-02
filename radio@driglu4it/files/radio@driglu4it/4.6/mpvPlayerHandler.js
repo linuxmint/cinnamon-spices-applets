@@ -5,6 +5,7 @@ const Cvc = imports.gi.Cvc;
 const MAX_VOLUME = 100 // see https://github.com/linuxmint/cinnamon-spices-applets/issues/3402#issuecomment-756430754 for an explanation of this value
 
 // See: https://specifications.freedesktop.org/mpris-spec/2.2/Player_Interface.html
+// I think Methods always need a "Remote" as suffix to work
 const MEDIA_PLAYER_2_NAME = "org.mpris.MediaPlayer2";
 const MEDIA_PLAYER_2_PLAYER_NAME = "org.mpris.MediaPlayer2.Player";
 const MEDIA_PLAYER_2_PATH = "/org/mpris/MediaPlayer2";
@@ -17,11 +18,25 @@ class MpvPlayerHandler {
 
         Object.assign(this, arguments[0])
 
-        this._initMpris()
-        this._volume = this._checkMpvRunning() ? this._mediaServerPlayer.Volume * 100 : this._getInitialVolume()
-        this._initCvcSteam() // We need this to sync the volume in the sound applet with the mpris volume. See: https://github.com/linuxmint/cinnamon/issues/9770
+        this._volume = this._getInitialVolume()
         this._initDbus()
+
+        if (this._checkMpvRunning()) {
+            this._initMpris()
+            this._volume = this._mediaServerPlayer.Volume * 100
+            this._initCvcSteam() // We need this to sync the volume in the sound applet with the mpris volume. See: https://github.com/linuxmint/cinnamon/issues/9770
+        } else {
+            this._dbus = null
+        }
     }
+
+
+    _initInterfaces() {
+        this._initMpris()
+        this._initDbus()
+        this._initCvcSteam()
+    }
+
 
     _getMetadata() {
         return this._mediaServerPlayer.Metadata
@@ -43,7 +58,10 @@ class MpvPlayerHandler {
         this._control.connect('stream-added', (control, id) => {
             // this is executed each time when starting or changing a radio stream
             const stream = this._control.lookup_stream_id(id);
+            if (!stream) return // preventing stream is null in log
             if (stream.name === "mpv Media Player") {
+
+
                 // by default it is used the volume from the last time MPV was used. 
                 this._stream = stream
                 if (this._normalizeStreamVolume(this._stream.volume) != this._volume) {
@@ -77,11 +95,12 @@ class MpvPlayerHandler {
     }
 
     // theoretically it should also be possible to listen to props.PlaybackStatus but this doesn't work. 
-    // Probably because the mpv process is immediately killed when stopped as it is started headless  
+    // Probably because of this: https://github.com/hoyon/mpv-mpris/issues/22 (not sure though)
     _listenToRadioStopped() {
         this._dbus.connectSignal('NameOwnerChanged',
             (proxy, sender, [name, old_owner, new_owner]) => {
                 if (name === MPV_MPRIS_BUS_NAME && !new_owner) {
+                    this._mediaServerPlayer = this._mediaProps = this._dbus = null
                     this._handleRadioStopped(this._volume)
                 }
             }
@@ -94,15 +113,22 @@ class MpvPlayerHandler {
     }
 
     _listenToMediaPropsChanges() {
+
+        let previousUrl
+
         this._mediaProps.connectSignal('PropertiesChanged', (proxy, sender, [iface, props]) => {
 
             if (props.Volume) this._handleMprisVolumeChanged(props)
 
-            // if (props.PlaybackStatus) {
-            //     if (props.PlaybackStatus.unpack() === "Paused") {
-            //         // when paused . TODO
-            //     }
-            // }
+            if (props.Metadata) {
+                const metadata = props.Metadata.deep_unpack()
+                const newUrl = metadata["xesam:url"].unpack()
+                if (newUrl !== previousUrl) this._handleRadioChannelChangedPaused(newUrl)
+            }
+
+            if (props.PlaybackStatus) {
+                this._handleRadioChannelChangedPaused(this.getRunningRadioUrl())
+            }
         })
     }
 
@@ -113,7 +139,7 @@ class MpvPlayerHandler {
         }
     }
 
-    // Stops all running media outputs (which can be controlled via MPRIS) - not only potentially running radio streams
+    // Stops all running media outputs except MPV
     async _stopAllOtherMediaPlayer() {
         const allMprisPlayerBusNames = await this._getAllMrisPlayerBusNames()
 
@@ -138,14 +164,13 @@ class MpvPlayerHandler {
     }
 
     _updateVolume({ updateTarget, newVolume }) {
-        if (updateTarget === "cvcStream") {
-            this._updateCvcStreamVolume(newVolume)
-        } else if (updateTarget === "mpris") {
-            this._mediaServerPlayer.Volume = newVolume / 100
-        } else {
+        if (updateTarget === "cvcStream") this._updateCvcStreamVolume(newVolume)
+        if (updateTarget === "mpris") this._mediaServerPlayer.Volume = newVolume / 100
+        if (updateTarget === "Both") {
             this._updateCvcStreamVolume(newVolume)
             this._mediaServerPlayer.Volume = newVolume / 100
         }
+
         this._volume = newVolume
 
     }
@@ -157,6 +182,9 @@ class MpvPlayerHandler {
 
     async startChangeRadioChannel(channelUrl) {
 
+
+        if (this._mediaServerPlayer === null) { this._initInterfaces() }
+
         this._stopAllOtherMediaPlayer()
 
         if (!await this._checkMpvRunning()) {
@@ -164,6 +192,7 @@ class MpvPlayerHandler {
             // without --volume it would be used 100
             spawnCommandLine(`mpv --script=${this.mprisPluginPath} ${channelUrl} --volume=${this._volume}`)
         } else {
+            this._mediaServerPlayer.PlayRemote(); // ensures that the method is working when radio is paused. Has no effect if playing/stopped 
             // this actually should also work when no radio is playing but it doesn't (probably due to --script)
             this._mediaServerPlayer.OpenUriRemote(channelUrl)
         }
@@ -177,7 +206,7 @@ class MpvPlayerHandler {
     }
 
     // returns true when volume changed and false if not. This is the case when the increased volume would be higher than the max volume or lower than zero
-    // TODO: shouldn'T be allowed when radio isn't running
+    // TODO: shouldn't be allowed when radio isn't running
     increaseDecreaseVolume(amount) {
 
         let volumeChanged = false
@@ -192,15 +221,28 @@ class MpvPlayerHandler {
     }
 
     stopRadio() {
+        if (!this._mediaServerPlayer) { return "" }
+
         this._mediaServerPlayer.StopRemote()
     }
 
     getRunningRadioUrl() {
+
+        if (!this._mediaServerPlayer) { return "" }
+
         const radioUrl = this._getMetadata() ? this._getMetadata()["xesam:url"].unpack() : false
         return radioUrl
     }
 
+    // TODO: with proper JS getter setter 
+    getPlayPauseStatus() {
+        if (!this._mediaServerPlayer) { return "Stopped" }
+        return this._mediaServerPlayer.PlaybackStatus
+    }
+
     getCurrentSong() {
+        if (!this._mediaServerPlayer) { return "" }
+
         return (this._getMetadata()["xesam:title"].unpack())
     }
 }
