@@ -46,133 +46,134 @@ msgstr "Devise"
 
 #. cryptocoin@guantanamoe->settings-schema.json->layout->alerts-config->title
 msgid "Config"
-msgstr ""
+msgstr "Configuration"
 
 #. cryptocoin@guantanamoe->settings-schema.json->layout->alerts-delta-section->title
 msgid "Delta Alerts"
-msgstr ""
+msgstr "Alertes d'écarts"
 
 #. cryptocoin@guantanamoe->settings-schema.json->currency->tooltip
 msgid "Set the currency you want coin value to be set in"
-msgstr "Définissez la devise dans laquelle vous voulez définir la valeur de la monnaie "
+msgstr "Définit la devise avec laquelle vous voulez que la valeur de la cryptomonnaie soit définie"
 
 #. cryptocoin@guantanamoe->settings-schema.json->ticker->description
 msgid "Ticker"
-msgstr ""
+msgstr "Symbole boursier"
 
 #. cryptocoin@guantanamoe->settings-schema.json->ticker->tooltip
 msgid "Set the crypto currency ticker"
-msgstr ""
+msgstr "Définit le symbole boursier de la cryptomonnaie"
 
 #. cryptocoin@guantanamoe->settings-schema.json->show-ticker-icon->description
 msgid "Ticker Icon"
-msgstr ""
+msgstr "Afficher l'icône du symbole boursier"
 
 #. cryptocoin@guantanamoe->settings-schema.json->show-ticker-name->description
 msgid "Ticker Name"
-msgstr ""
+msgstr "Afficher le nom du symbole boursier"
 
 #. cryptocoin@guantanamoe->settings-schema.json->show-currency->description
 msgid "Show Currency"
-msgstr ""
+msgstr "Afficher la devise"
 
 #. cryptocoin@guantanamoe->settings-schema.json->show-currency->options->Name
 msgid "name"
-msgstr ""
+msgstr "Nom"
 
 #. cryptocoin@guantanamoe->settings-schema.json->show-currency->options->Symbol
 msgid "symbol"
-msgstr ""
+msgstr "Symbole"
 
 #. cryptocoin@guantanamoe->settings-schema.json->show-currency->options->None
 msgid "none"
-msgstr ""
+msgstr "Aucun"
 
 #. cryptocoin@guantanamoe->settings-schema.json->graph-unit->description
 msgid "Unit for Graph History"
-msgstr ""
+msgstr "Unité de l'histogramme"
 
 #. cryptocoin@guantanamoe->settings-schema.json->graph-unit->options
 #. cryptocoin@guantanamoe->settings-schema.json->alert-delta-unit->options
 msgid "Minutes"
-msgstr ""
+msgstr "Minutes"
 
 #. cryptocoin@guantanamoe->settings-schema.json->graph-unit->options
 #. cryptocoin@guantanamoe->settings-schema.json->alert-delta-unit->options
 msgid "Hours"
-msgstr ""
+msgstr "Heures"
 
 #. cryptocoin@guantanamoe->settings-schema.json->graph-unit->options
 #. cryptocoin@guantanamoe->settings-schema.json->alert-delta-unit->options
 msgid "Days"
-msgstr ""
+msgstr "Jours"
 
 #. cryptocoin@guantanamoe->settings-schema.json->graph-length->description
 msgid "Graph History Length"
-msgstr ""
+msgstr "Étendue de l'histogramme"
 
 #. cryptocoin@guantanamoe->settings-schema.json->graph-width->description
 msgid "Graph Popup Width"
-msgstr ""
+msgstr "Largeur de la fenêtre du graphique"
 
 #. cryptocoin@guantanamoe->settings-schema.json->graph-height->description
 msgid "Graph Popup Height"
-msgstr ""
+msgstr "Hauteur de la fenêtre du graphique"
 
 #. cryptocoin@guantanamoe->settings-schema.json->graph-color->description
 msgid "The Graph Foreground Color"
-msgstr ""
+msgstr "Couleur du graphique"
 
 #. cryptocoin@guantanamoe->settings-schema.json->alert-enable->description
 msgid "Enable alerts"
-msgstr ""
+msgstr "Active les alertes"
 
 #. cryptocoin@guantanamoe->settings-schema.json->alert-any-change->description
 msgid "Any change"
-msgstr ""
+msgstr "Tout changement"
 
 #. cryptocoin@guantanamoe->settings-schema.json->alert-label-color->description
 msgid "Label color"
-msgstr ""
+msgstr "Couleur de l'étiquette"
+
 #. cryptocoin@guantanamoe->settings-schema.json->alert-on-above->description
 msgid "Absolute maximum (money)"
-msgstr ""
+msgstr "Maximum absolu (devise)"
 
 #. cryptocoin@guantanamoe->settings-schema.json->alert-on-above->tooltip
 msgid "Alert when current value is above this value"
-msgstr ""
+msgstr "Alerter lorsque la valeur actuelle est au-dessus de cette valeur"
 
 #. cryptocoin@guantanamoe->settings-schema.json->alert-on-below->description
 msgid "Absolute minimum (money)"
-msgstr ""
+msgstr "Minimum absolu (devise)"
 
 #. cryptocoin@guantanamoe->settings-schema.json->alert-on-below->tooltip
 msgid "Alert when current value is below this value"
-msgstr ""
+msgstr "Alerter lorsque la valeur actuelle est en-dessous de cette valeur"
 
 #. cryptocoin@guantanamoe->settings-schema.json->alert-on-delta-above->description
 msgid "Increase variation (%)"
-msgstr ""
+msgstr "Diminution (%)"
 
 #. cryptocoin@guantanamoe->settings-schema.json->alert-on-delta-above->tooltip
 msgid "Alert when value increase this delta %"
-msgstr ""
+msgstr "Alerter lorsque la valeur augmente de cet écart en %"
 
 #. cryptocoin@guantanamoe->settings-schema.json->alert-on-delta-below->description
 msgid "Decrease variation (%)"
-msgstr ""
+msgstr "Augmentation (%)"
 
 #. cryptocoin@guantanamoe->settings-schema.json->alert-on-delta-below->tooltip
 msgid "Alert when value decrease this delta %"
-msgstr ""
+msgstr "Alerter lorsque la valeur diminue de cet écart en %"
 
 #. cryptocoin@guantanamoe->settings-schema.json->alert-delta-length->description
 msgid "Delta interval"
-msgstr ""
+msgstr "Écart de l'intervalle"
 
 #. cryptocoin@guantanamoe->settings-schema.json->alert-delta-unit->description
 msgid "Unit of interval"
-msgstr ""
+msgstr "Unité de l'intervalle"
 
 #. cryptocoin@guantanamoe->settings-schema.json->alert-delta-update-interval->description
 msgid "Update interval"
