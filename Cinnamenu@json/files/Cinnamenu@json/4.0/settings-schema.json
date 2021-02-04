@@ -37,7 +37,8 @@
                 "applications-view-mode",
                 "sidebar-placement",
                 "add-favorites",
-                "description-placement"
+                "description-placement",
+                "info-box"
             ]
         },
         "menu-content":{
@@ -143,6 +144,10 @@
             "Right":3
         },
         "tooltip":"Choose where to show the session buttons (quit, logout, etc.)"
+    },
+    "info-box":{
+        "type":"label",
+        "description":"\nInfo/tip: Drag on the menu edge to change the menu size.\n"
     },
     "add-favorites":{
         "type":"switch",
