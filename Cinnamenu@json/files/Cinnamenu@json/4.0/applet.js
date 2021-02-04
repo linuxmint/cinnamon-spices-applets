@@ -130,6 +130,8 @@ class CinnamenuApplet extends TextIconApplet {
 
             { key: 'menu-icon-custom',          value: 'menuIconCustom',        cb: this.updateIconAndLabel },
             { key: 'menu-icon',                 value: 'menuIcon',              cb: this.updateIconAndLabel },
+            { key: 'menu-icon-size-custom',     value: 'menuIconSizeCustom',    cb: this.updateIconAndLabel },
+            { key: 'menu-icon-size',            value: 'menuIconSize',          cb: this.updateIconAndLabel },
             { key: 'menu-label',                value: 'menuLabel',             cb: this.updateIconAndLabel },
 
             { key: 'category-icon-size',        value: 'categoryIconSize',      cb: this.refresh },
@@ -246,6 +248,7 @@ class CinnamenuApplet extends TextIconApplet {
     }
 
     updateIconAndLabel() {
+
         tryFn(() => {
             if (this.settings.menuIconCustom) {
                 if (this.settings.menuIcon === '') {
@@ -271,8 +274,8 @@ class CinnamenuApplet extends TextIconApplet {
         }, () => {
             global.logWarning('Could not load icon file ' + this.settings.menuIcon + ' for menu button');
         });
-
-        if (this.settings.menuIconCustom && this.settings.menuIcon === '') {
+        if (this.settings.menuIconCustom && this.settings.menuIcon === '' ||
+                                this.settings.menuIconSizeCustom && this.settings.menuIconSize === 0) {
             this._applet_icon_box.hide();
         } else {
             this._applet_icon_box.show();
@@ -281,16 +284,40 @@ class CinnamenuApplet extends TextIconApplet {
         if (this.orientation === St.Side.LEFT || this.orientation === St.Side.RIGHT) {
             this.set_applet_label('');
         } else {
-            if (!this.panelMenuLabelText || this.panelMenuLabelText.length > 0) {
-                if (!this.settings.menuLabel) {
-                    this.settings.menuLabel = '';
-                }
-                this.set_applet_label(this.settings.menuLabel);
-                this.set_applet_tooltip(this.settings.menuLabel);
-            } else {
-                this.set_applet_label('');
+            //if (!this.panelMenuLabelText || this.panelMenuLabelText.length > 0) {
+            if (!this.settings.menuLabel) {
+                this.settings.menuLabel = '';
             }
+            const menuLabel = this.settings.menuLabel.substring(0, 45);
+            this.set_applet_label(menuLabel);
+            this.set_applet_tooltip(menuLabel);
+            //} else {
+                //this.set_applet_label('');
+            //}
         }
+    }
+
+    _setStyle() {
+        // Override js/applet.js so _updateIconAndLabel doesn't have to fight with size changes
+        // from the panel configuration. This gets called any time set_applet_icon() variants are
+        // called.
+
+        let icon_type = this._applet_icon.get_icon_type();
+        let size;
+        global.log("_setStyle");
+        if (this.settings.menuIconSizeCustom) {
+            size = Math.max(Math.min(this.settings.menuIconSize, this.panel.height), 1);
+        } else {
+            size = this.getPanelIconSize(icon_type);
+        }
+
+        if (icon_type === St.IconType.FULLCOLOR) {
+            this._applet_icon.set_style_class_name('applet-icon');
+        } else {
+            this._applet_icon.set_style_class_name('system-status-icon');
+        }
+
+        this._applet_icon.set_icon_size(size);
     }
 
     onEnableRecentChange() {
@@ -518,7 +545,8 @@ class CinnamenuApplet extends TextIconApplet {
                                                                 'favorite_apps' : this.currentCategory;
             this.updateMenuWidth();
             this.updateMenuHeight();
-            Mainloop.idle_add_full(Mainloop.PRIORITY_DEFAULT, () => this.setActiveCategory(currentCategory));
+            Mainloop.idle_add(() => this.setActiveCategory(currentCategory));
+            this.panel.peekPanel();
         } else {
             if (this.searchActive) {
                 this.allItemsCleanup();
