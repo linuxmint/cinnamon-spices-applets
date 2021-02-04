@@ -86,8 +86,23 @@ class CinnamonRadioApplet extends TextIconApplet {
   }
 
   _setIconColor() {
-    const color = (this.mpvPlayer.getPlayPauseStatus() === "Playing") ? this.color_on : "white"
+    const color = (this.mpvPlayer.getPlayPauseStatus() === "Playing") ? this.color_on : this._getThemeIconColor()
     this.actor.style = `color: ${color}`
+  }
+
+  _getThemeIconColor() {
+
+    let iconThemeColor
+
+    try {
+      iconThemeColor = this.actor.get_theme_node().get_icon_colors().foreground.to_string()
+    } catch (error) {
+      global.logError(`Couldn't set theme icon color. Using white instead. The following error occured: ${error}`)
+      iconThemeColor = "white"
+    }
+
+    return iconThemeColor
+
   }
 
   set_icon() {
@@ -302,6 +317,7 @@ class CinnamonRadioApplet extends TextIconApplet {
   }
 
   on_applet_removed_from_panel() {
+    this.mpvPlayer.stopRadio()
     this.settings.finalize();
   }
 
