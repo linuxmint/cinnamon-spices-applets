@@ -1,12 +1,12 @@
 # Dutch translation for cinnamon-weather (weather@mockturtl)
 # Copyright (C) 2021
-# This file is distributed under the same license as the cinnamon-weather package.
+# This file is distributed under the same license as the cinnamon-weather (weather@mockturtl) package.
 # Pjotr <pjotrvertaalt@gmail.com>, 2013-2021.
 # Jurien (French77) <Jurien@protonmail.com>, 2020-2021.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Weather (weather@mockturtl)\n"
+"Project-Id-Version: cinnamon-weather (weather@mockturtl or Weather)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-01-31 15:37+0000\n"
 "PO-Revision-Date: 2021-02-01 23:43+0100\n"
@@ -494,7 +494,7 @@ msgstr "Lichte hagelbuien en onweer"
 
 #: 3.0/met_norway.js:456 3.8/met_norway.js:387
 msgid "Light snow and thunder"
-msgstr "Lichte sneeuwval en onweersbuien"
+msgstr "Lichte sneeuwval en onweer"
 
 #: 3.0/met_norway.js:463 3.8/met_norway.js:394
 msgid "Light snow showers"
@@ -699,7 +699,7 @@ msgstr "Mengsel van sneeuw en hagel"
 
 #: 3.0/yahoo.js:444 3.8/yahoo.js:392
 msgid "Freezing Drizzle"
-msgstr "Lichte ijzel"
+msgstr "Motregenijzel"
 
 #: 3.0/yahoo.js:446 3.8/yahoo.js:394
 msgid "Freezing Rain"
@@ -850,7 +850,7 @@ msgstr "Helder en winderig"
 
 #: 3.0/us_weather.js:450 3.8/us_weather.js:314
 msgid "Few clouds and windy"
-msgstr "Winderig met enkele wolken"
+msgstr "Weinig bewolking en winderig"
 
 #: 3.0/us_weather.js:457 3.8/us_weather.js:321
 msgid "Partly cloudy and windy"
@@ -866,7 +866,7 @@ msgstr "Zwaar bewolkt en winderig"
 
 #: 3.0/us_weather.js:485 3.8/us_weather.js:349
 msgid "Snowy rain"
-msgstr "Sneeuwbuien"
+msgstr "Natte sneeuw"
 
 #: 3.0/us_weather.js:520 3.8/us_weather.js:384
 msgid "Freezing rain and snow"
@@ -883,7 +883,7 @@ msgstr "Tropische storm"
 
 #: 3.0/met_uk.js:316 3.8/met_uk.js:154
 msgid "Visibility"
-msgstr "Zichtbaarheid"
+msgstr "Zicht"
 
 #: 3.0/met_uk.js:408
 msgid "Very poor - Less than"
@@ -944,11 +944,11 @@ msgstr "Zware sneeuwbui"
 #: 3.0/met_uk.js:722 3.0/met_uk.js:729 3.0/met_uk.js:736 3.0/met_uk.js:737
 #: 3.8/met_uk.js:580 3.8/met_uk.js:587 3.8/met_uk.js:594 3.8/met_uk.js:595
 msgid "Thunder"
-msgstr "Onweer"
+msgstr "Donder"
 
 #: 3.0/met_uk.js:723 3.0/met_uk.js:730 3.8/met_uk.js:581 3.8/met_uk.js:588
 msgid "Thunder shower"
-msgstr "Regenbui met onweer"
+msgstr "Onweersbui"
 
 #: 3.0/applet.js:167 3.0/applet.js:427 3.0/applet.js:2132 3.8/main.js:31
 msgid "Error"
@@ -1356,7 +1356,7 @@ msgstr "Harde wind"
 #: 3.8/weatherbit.js:230
 msgid "API key is doesn't provide access to Hourly Weather, skipping"
 msgstr ""
-"API-sleutel geeft geen toegang tot het uurlijks weer, wordt overgeslagen"
+"API-sleutel geeft geen toegang tot uurlijks weer, wordt overgeslagen"
 
 #: 3.8/main.js:104
 msgid "This provider requires an API key to operate"
@@ -1420,7 +1420,7 @@ msgstr "Rondwaaiende of stuivende sneeuw"
 
 #: 3.8/visualcrossing.js:186
 msgid "Heavy drizzle"
-msgstr "Hevige motregen"
+msgstr "Zware motregen"
 
 #: 3.8/visualcrossing.js:190
 msgid "Heavy drizzle/rain"
@@ -1496,7 +1496,7 @@ msgstr "Rook of nevel"
 
 #: 3.8/visualcrossing.js:244
 msgid "Snow and rain showers"
-msgstr "Sneeuw en regenbuien"
+msgstr "Sneeuw- en regenbuien"
 
 #: 3.8/visualcrossing.js:256
 msgid "Thunderstorm without precipitation"
@@ -1609,7 +1609,7 @@ msgstr "Handmatige locatie"
 #. 3.0->settings-schema.json->manualLocation->tooltip
 #. 3.8->settings-schema.json->manualLocation->tooltip
 msgid "Enable this if your location is not accurate"
-msgstr "Schakel dit in indien uw locatie niet accuraat is"
+msgstr "Schakel dit in indien uw locatie niet klopt"
 
 #. 3.0->settings-schema.json->location->description
 msgid "Location - Coordinates"
@@ -1624,7 +1624,7 @@ msgid ""
 msgstr ""
 "Aanvaardbare invoer is Breedtegraad,Lengtegraad. Bijv.: 68.1932,17.1426 of "
 "een adres.\n"
-"Wacht 3 seconden nadat u bent gestopt met typen voordat het zich ververst."
+"Drie seconden nadat u bent opgehouden met tikken ververst het zich."
 
 #. 3.0->settings-schema.json->getLocation->description
 msgid "Setup API Key and Location"
@@ -1697,7 +1697,7 @@ msgid ""
 "Automatic will try to guess your preference based your current display "
 "language."
 msgstr ""
-"Automatisch zal proberen uw voorkeur te raden op basis van uw huidige "
+"Automatisch zal proberen uw voorkeur te raden op basis van de huidige "
 "ingestelde taal voor uw besturingssysteem."
 
 #. 3.0->settings-schema.json->windSpeedUnit->description
@@ -1896,7 +1896,7 @@ msgstr "Toon datum bij dagelijkse voorspellingen"
 #. 3.0->settings-schema.json->showForecastDates->tooltip
 #. 3.8->settings-schema.json->showForecastDates->tooltip
 msgid "Like \"Friday 15\""
-msgstr "Zoals \"Vrijdag 15\""
+msgstr "Zoals 'Vrijdag 15'"
 
 #. 3.0->settings-schema.json->temperatureHighFirst->description
 #. 3.8->settings-schema.json->temperatureHighFirst->description
@@ -2084,7 +2084,7 @@ msgid ""
 msgstr ""
 "Ga voor meer informatie naar de website van Spices door op de onderstaande "
 "knop te klikken. U kunt ook commentaar geven en vragen stellen aan de "
-"gemeenschap op deze pagina, door in te loggen met uw Github-account."
+"gemeenschap op deze pagina, door uzelf aan te melden met uw Github-account."
 
 #. 3.8->settings-schema.json->submitIssue->description
 msgid "Submit an Issue"
@@ -2148,9 +2148,9 @@ msgstr ""
 "handmatig invoeren met de coördinaten 'Breedtegraad,Lengtegraad' (bijv. "
 "51,5085,-0,1257) of gebruik 'Stad,Landcode' (bijv. Oss,NL) of probeer "
 "{Huisnummer} {Straat} {Stad/Plaats} {Postcode} {Land} in te voeren. Het "
-"zoekalgoritme is zeer flexibel met de opmaak. Nadat u 3 seconden niets heeft "
-"ingetikt zal het door u ingegeven adres automatisch worden vervangen om uw "
-"keuze te valideren."
+"zoekalgoritme is zeer flexibel met de opmaak. Drie seconden nadat u bent "
+"opgehouden met tikken zal het door u ingegeven adres automatisch worden "
+"vervangen om uw keuze te valideren."
 
 #~ msgid "Substantial Rain"
 #~ msgstr "Veel regen"
