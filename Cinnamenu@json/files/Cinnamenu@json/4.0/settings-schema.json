@@ -37,7 +37,8 @@
                 "applications-view-mode",
                 "sidebar-placement",
                 "add-favorites",
-                "description-placement"
+                "description-placement",
+                "info-box"
             ]
         },
         "menu-content":{
@@ -80,6 +81,8 @@
             "keys":[
                 "menu-icon-custom",
                 "menu-icon",
+                "menu-icon-size-custom",
+                "menu-icon-size",
                 "menu-label"
             ]
         },
@@ -141,6 +144,10 @@
             "Right":3
         },
         "tooltip":"Choose where to show the session buttons (quit, logout, etc.)"
+    },
+    "info-box":{
+        "type":"label",
+        "description":"\nInfo/tip: Drag on the menu edge to change the menu size.\n"
     },
     "add-favorites":{
         "type":"switch",
@@ -265,11 +272,29 @@
     },
     "menu-icon":{
         "type":"iconfilechooser",
-        "default":"/usr/share/cinnamon/theme/menu-symbolic.svg",
+        "default":"cinnamon-symbolic",
         "description":"Panel icon",
         "dependency":"menu-icon-custom",
         "indent":"true",
         "tooltip":"Panel icon"
+    },
+    "menu-icon-size-custom":{
+        "type":"checkbox",
+        "default":false,
+        "description":"Use a custom icon size",
+        "tooltip":"Use a custom size for the panel icon"
+    },
+    "menu-icon-size":{
+        "type":"spinbutton",
+        "default":24,
+        "min":0,
+        "max":60,
+        "step":1,
+        "units":"pixels",
+        "description":"Panel icon size",
+        "dependency":"menu-icon-size-custom",
+        "indent":"true",
+        "tooltip":"Choose a custom size for the panel icon"
     },
     "menu-label":{
         "type":"entry",
