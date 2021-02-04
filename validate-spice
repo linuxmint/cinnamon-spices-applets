@@ -36,20 +36,22 @@ do
     fi
 done
 
-# Check if icon.png exists
-iconFile="icon.png"
-if [ ! -f $iconFile ]; then
-    echo -e "[$missing] Missing file: $UUID/$iconFile"
-    valid=false
-else
-    # check if icon is square
-    iconWidth=$(identify -format '%w' $iconFile)
-    iconHeight=$(identify -format '%h' $iconFile)
-    if [ $iconWidth != $iconHeight ]; then
-        echo -e "[$missing] icon.png of $UUID has to be square"
+# Check if icon.png exists in root directory
+for iconFile in "icon.png" "files/$UUID/icon.png"
+    do
+    if [ ! -f $iconFile ]; then
+        echo -e "[$missing] Missing file: $UUID/$iconFile"
         valid=false
+    else
+        # check if icon is square
+        iconWidth=$(identify -format '%w' $iconFile)
+        iconHeight=$(identify -format '%h' $iconFile)
+        if [ $iconWidth != $iconHeight ]; then
+            echo -e "[$missing] icon.png of $UUID has to be square"
+            valid=false
+        fi
     fi
-fi
+done
 
 # Check if UUID/files directory exists
 UUIDfilesUUIDDirExists=false
