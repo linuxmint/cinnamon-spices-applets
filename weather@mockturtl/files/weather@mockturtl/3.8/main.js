@@ -188,7 +188,7 @@ class WeatherApplet extends TextIconApplet {
         this.set_applet_label(label);
     }
     GetPanelHeight() {
-        return this.panel._getScaledPanelHeight();
+        return this.panel.height;
     }
     GetMaxForecastDays() {
         if (!this.provider)

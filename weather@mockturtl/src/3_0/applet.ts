@@ -406,7 +406,7 @@ class WeatherApplet extends TextIconApplet {
     }
 
     public GetPanelHeight(): number {
-        return this.panel._getScaledPanelHeight();
+        return this.panel.height;
     }
 
     private async locationLookup(): Promise<void> {
@@ -450,7 +450,7 @@ class WeatherApplet extends TextIconApplet {
     }
 
     /** override function */
-    private on_orientation_changed(orientation: imports.gi.St.Side) {
+    public on_orientation_changed(orientation: imports.gi.St.Side) {
         this.orientation = orientation;
         this.refreshWeather(true);
     };
@@ -466,7 +466,7 @@ class WeatherApplet extends TextIconApplet {
     }
 
     /** Override function */
-    private on_applet_removed_from_panel(deleteConfig: any) {
+    public on_applet_removed_from_panel(deleteConfig: any) {
         // TODO: Proper unload
         //this.unloadStylesheet();
         //Main.keybindingManager.removeHotKey(this.menu_keybinding_name);
@@ -483,12 +483,12 @@ class WeatherApplet extends TextIconApplet {
     }
 
     /** Override function */
-    private on_applet_middle_clicked(event: any) {
+    public on_applet_middle_clicked(event: any) {
 
     }
 
     /** Override function */
-    private on_panel_height_changed() {
+    public on_panel_height_changed() {
         // Implemented byApplets
     }
 
