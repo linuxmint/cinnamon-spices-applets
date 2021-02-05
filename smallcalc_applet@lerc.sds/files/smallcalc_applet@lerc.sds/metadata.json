@@ -1,6 +1,5 @@
 {
     "uuid": "smallcalc_applet@lerc.sds",
     "name": "SmallCalc",
-    "description": "A nice compact popup calculator",
-    "icon": "calc"
+    "description": "A nice compact popup calculator"
 }
