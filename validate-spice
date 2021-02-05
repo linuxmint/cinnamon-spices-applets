@@ -15,7 +15,6 @@ PARAMETER=$1
 check="\xE2\x9C\x94"
 missing=" "
 cross="\xE2\x9D\x8C"
-valid=true
 
 # Get xlet type
 parentDirName=$(basename -- "$(pwd)")
@@ -24,6 +23,7 @@ xletType="${xletType::-1}"
 
 # function with checks for an xlet
 function validate_xlet {
+    valid=true
     UUID=$1
     cd $UUID
 
