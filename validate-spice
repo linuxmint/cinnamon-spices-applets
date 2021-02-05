@@ -36,23 +36,6 @@ function validate_xlet {
         fi
     done
 
-    # Check if icon.png exists in root directory
-    for iconFile in "icon.png" "files/$UUID/icon.png"
-        do
-        if [ ! -f $iconFile ]; then
-            echo -e "[$missing] Missing file: $UUID/$iconFile"
-            valid=false
-        else
-            # check if icon is square
-            iconWidth=$(identify -format '%w' $iconFile)
-            iconHeight=$(identify -format '%h' $iconFile)
-            if [ $iconWidth != $iconHeight ]; then
-                echo -e "[$missing] icon.png of $UUID has to be square"
-                valid=false
-            fi
-        fi
-    done
-
     # Check if UUID/files directory exists
     UUIDfilesUUIDDirExists=false
     if [ ! -d "files" ]; then
@@ -90,6 +73,21 @@ function validate_xlet {
             dangerousFlag=$(grep '"dangerous"' $metadataFile | wc -c)
             if [ $dangerousFlag != 0 ]; then
                 echo -e "[$missing] dangerous flag in $UUID/metadata.json has to be removed!"
+                valid=false
+            fi
+        fi
+
+        # Check if icon.png exists
+        iconFile="files/$UUID/icon.png"
+        if [ ! -f $iconFile ]; then
+            echo -e "[$missing] Missing file: $iconFile"
+            valid=false
+        else
+            # check if icon is square
+            iconWidth=$(identify -format '%w' $iconFile)
+            iconHeight=$(identify -format '%h' $iconFile)
+            if [ $iconWidth != $iconHeight ]; then
+                echo -e "[$missing] icon.png of $UUID has to be square"
                 valid=false
             fi
         fi
