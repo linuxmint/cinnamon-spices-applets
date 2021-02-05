@@ -279,14 +279,14 @@ export class MetNorway implements WeatherProvider {
                     customIcon: "rain-symbolic",
                     main: _("Heavy rain"),
                     description: _("Heavy rain"),
-                    icons: ["weather-rain", "weather-freezing-rain"]
+                    icons: ["weather-rain", "weather-freezing-rain", "weather-showers"]
                 }
             case "heavyrainandthunder":
                 return {
                     customIcon: "thunderstorm-symbolic",
                     main: _("Heavy rain"),
                     description: _("Heavy rain and thunder"),
-                    icons: ["weather-rain", "weather-freezing-rain"]
+                    icons: ["weather-rain", "weather-freezing-rain", "weather-showers"]
                 }
             case "heavyrainshowers":
                 return {
@@ -307,14 +307,14 @@ export class MetNorway implements WeatherProvider {
                     customIcon: "sleet-symbolic",
                     main: _("Heavy sleet"),
                     description: _("Heavy sleet"),
-                    icons: ["weather-freezing-rain", "weather-rain"]
+                    icons: ["weather-showers", "weather-freezing-rain", "weather-rain"]
                 }
             case "heavysleetandthunder":
                 return {
                     customIcon: "sleet-storm-symbolic",
                     main: _("Heavy sleet"),
                     description: _("Heavy sleet and thunder"),
-                    icons: ["weather-freezing-rain", "weather-rain"]
+                    icons: ["weather-showers", "weather-freezing-rain", "weather-rain"]
                 }
             case "heavysleetshowers":
                 return {

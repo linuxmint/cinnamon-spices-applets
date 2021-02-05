@@ -238,14 +238,14 @@ class MetNorway {
                     customIcon: "rain-symbolic",
                     main: utils_1._("Heavy rain"),
                     description: utils_1._("Heavy rain"),
-                    icons: ["weather-rain", "weather-freezing-rain"]
+                    icons: ["weather-rain", "weather-freezing-rain", "weather-showers"]
                 };
             case "heavyrainandthunder":
                 return {
                     customIcon: "thunderstorm-symbolic",
                     main: utils_1._("Heavy rain"),
                     description: utils_1._("Heavy rain and thunder"),
-                    icons: ["weather-rain", "weather-freezing-rain"]
+                    icons: ["weather-rain", "weather-freezing-rain", "weather-showers"]
                 };
             case "heavyrainshowers":
                 return {
