@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-31 15:37+0000\n"
+"POT-Creation-Date: 2021-02-06 19:08+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1318,7 +1318,7 @@ msgid "Strong wind"
 msgstr ""
 
 #: 3.8/weatherbit.js:230
-msgid "API key is doesn't provide access to Hourly Weather, skipping"
+msgid "API key doesn't provide access to Hourly Weather, skipping"
 msgstr ""
 
 #: 3.8/main.js:104
@@ -1578,7 +1578,6 @@ msgid "Location - Coordinates"
 msgstr ""
 
 #. 3.0->settings-schema.json->location->tooltip
-#. 3.8->settings-schema.json->location->tooltip
 msgid ""
 "Acceptable inputs are Latitude,Longitude. e.g.: 68.1932,17.1426 or an address.\n"
 "Waits for 3 seconds after you stop typing before refreshes the weather."
@@ -1933,20 +1932,21 @@ msgstr ""
 msgid "Keybindings"
 msgstr ""
 
-#. 3.8->settings-schema.json->provider-info->title
-msgid "How to choose a weather provider"
-msgstr ""
-
-#. 3.8->settings-schema.json->location-info->title
-msgid "Allowed location formats"
-msgstr ""
-
 #. 3.8->settings-schema.json->more-info->title
-msgid "View additional information"
+msgid "More about the Weather applet"
 msgstr ""
 
 #. 3.8->settings-schema.json->submit-issue->title
 msgid "Report an issue"
+msgstr ""
+
+#. 3.8->settings-schema.json->dataService->tooltip
+msgid ""
+"You can choose between several different weather forecast providers. Some "
+"providers require a API key to work, some have regional limits, differ in "
+"forecast length, and they all need a functional internet connection to work."
+" The options are described in detail on the Cinnamon Spices Website which "
+"you can access with the button on the Help tab."
 msgstr ""
 
 #. 3.8->settings-schema.json->dataService->options
@@ -1967,6 +1967,15 @@ msgstr ""
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "US National Weather (US only)"
+msgstr ""
+
+#. 3.8->settings-schema.json->location->tooltip
+msgid ""
+"You can enter coordinates 'Latitude,Longitude' (e.g. 51.5085,-0.1257) or use"
+" 'City,Country-code' (e.g. London,UK) or try to enter {House number} "
+"{Street} {City/Town} {Postcode} {Country}. The search algorithm is very "
+"flexible with the format. After 3 seconds without typing the address you "
+"entered is replaced automatically for validating your choice."
 msgstr ""
 
 #. 3.8->settings-schema.json->saveLocation->description
@@ -2025,9 +2034,10 @@ msgstr ""
 
 #. 3.8->settings-schema.json->more-info-label->description
 msgid ""
-"For more information go to the Spices Website by clicking the button below. "
-"You can also comment and ask a questions to the community at this page by "
-"logging in with your Github account."
+"For detailed information about the applet please go to the Spices Website by"
+" clicking the button below. You can also comment and ask a questions to the "
+"community at this page by logging in with your Github account. You can also "
+"find information about known issues, troubleshooting, changelog and more."
 msgstr ""
 
 #. 3.8->settings-schema.json->submitIssue->description
@@ -2051,16 +2061,6 @@ msgid ""
 "write weather@mockturtl in the top Title field to make it easier for "
 "everyone to know that the issue is about the weather applet (the form is for"
 " all Cinnamon applets)."
-msgstr ""
-
-#. 3.8->settings-schema.json->provider-explanation->description
-msgid ""
-"You can use several different weather forecast providers that you choose "
-"under the first Weather Tab in this Configuration panel. Some providers "
-"require a API key to work, some have regional limits, differ in forecast "
-"length, and they all need a functional internet connection to work. The "
-"options are described in detail on the Cinnamon Spices Website, what you can"
-" access with the button further down."
 msgstr ""
 
 #. 3.8->settings-schema.json->loc-info->description

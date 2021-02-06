@@ -286,7 +286,7 @@ export class Weatherbit implements WeatherProvider {
                 userError: false,
                 detail: "bad key",
                 service: "weatherbit",
-                message: _("API key is doesn't provide access to Hourly Weather, skipping")
+                message: _("API key doesn't provide access to Hourly Weather, skipping")
             });
         }
         return true;
