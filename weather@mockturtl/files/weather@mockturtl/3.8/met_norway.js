@@ -266,14 +266,14 @@ class MetNorway {
                     customIcon: "sleet-symbolic",
                     main: utils_1._("Heavy sleet"),
                     description: utils_1._("Heavy sleet"),
-                    icons: ["weather-freezing-rain", "weather-rain"]
+                    icons: ["weather-showers", "weather-freezing-rain", "weather-rain"]
                 };
             case "heavysleetandthunder":
                 return {
                     customIcon: "sleet-storm-symbolic",
                     main: utils_1._("Heavy sleet"),
                     description: utils_1._("Heavy sleet and thunder"),
-                    icons: ["weather-freezing-rain", "weather-rain"]
+                    icons: ["weather-showers", "weather-freezing-rain", "weather-rain"]
                 };
             case "heavysleetshowers":
                 return {
