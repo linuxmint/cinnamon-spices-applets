@@ -75,12 +75,26 @@ function validate_xlet {
                 echo -e "[$missing] dangerous flag in $UUID/metadata.json has to be removed!"
                 valid=false
             fi
+
+            # check for last-edited flag in metadata
+            lastEditedFlag=$(grep '"last-edited"' $metadataFile | wc -c)
+            if [ $lastEditedFlag != 0 ]; then
+                echo -e "[$missing] last-edited flag in $UUID/metadata.json has to be removed!"
+                valid=false
+            fi
+
+            # check for icon flag in metadata
+            iconFlag=$(grep '"icon"' $metadataFile | wc -c)
+            if [ $iconFlag != 0 ]; then
+                echo -e "[$missing] icon flag in $UUID/metadata.json has to be removed!"
+                valid=false
+            fi
         fi
 
-        # Check if icon.png exists
+        # Check if files/UUID/icon.png exists
         iconFile="files/$UUID/icon.png"
         if [ ! -f $iconFile ]; then
-            echo -e "[$missing] Missing file: $iconFile"
+            echo -e "[$missing] Missing file: $UUID/$iconFile"
             valid=false
         else
             # check if icon is square
@@ -90,6 +104,13 @@ function validate_xlet {
                 echo -e "[$missing] icon.png of $UUID has to be square"
                 valid=false
             fi
+        fi
+
+        # Check if icon.png in root directory exists
+        iconRootFile="icon.png"
+        if [ -f $iconRootFile ]; then
+            echo -e "[$missing] Remove icon in root directory: $UUID/$iconRootFile"
+            valid=false
         fi
 
         # Check if applet.js/desklet.js/extension.js exists
