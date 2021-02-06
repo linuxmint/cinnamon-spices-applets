@@ -40,7 +40,7 @@ The default, works out of the box. Big Thanks to them supporting free open sourc
 
 ***[DarkSky has been acquired by Apple](https://blog.darksky.net/dark-sky-has-a-new-home/)** as of March 31, 2020. It does not allow new signups, and it will cease to function at the end of 2021.
 
-## Visual Crossing
+### Visual Crossing
 
 * Needs an API key, you can [Sign Up here](https://www.visualcrossing.com/weather/weather-data-services#/signup) and grab one
 
