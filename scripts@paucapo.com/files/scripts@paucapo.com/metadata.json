@@ -3,6 +3,5 @@
    "name": "Scripts Menu",
    "description": "Menu applet for starting scripts",
    "version": "1.03",
-   "last-edited": "1408701315",
    "max-instances": "100"
 }
