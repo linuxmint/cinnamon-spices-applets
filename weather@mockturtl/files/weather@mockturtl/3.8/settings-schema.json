@@ -165,15 +165,16 @@
 		"tooltip": "You can choose between several different weather forecast providers. Some providers require a API key to work, some have regional limits, differ in forecast length, and they all need a functional internet connection to work. The options are described in detail on the Cinnamon Spices Website which you can access with the button on the Help tab.",
 		"options": {
 			"OpenWeatherMap": "OpenWeatherMap",
-			"DarkSky (key needed)": "DarkSky",
-			"Visual Crossing (key needed)": "Visual Crossing",
 			"MET Norway": "MetNorway",
-			"Weatherbit (key needed)": "Weatherbit",
 			"Yahoo": "Yahoo",
-			"ClimacellV4 (key needed)": "ClimacellV4",
-			"ClimacellV3 (key needed)": "Climacell",
+			"Danish Meteorologist Institute": "DanishMI",
 			"Met Office UK (UK only)": "Met Office UK",
-			"US National Weather (US only)": "US Weather"
+			"US National Weather (US only)": "US Weather",
+			"Visual Crossing (key needed)": "Visual Crossing",
+			"Weatherbit (key needed)": "Weatherbit",
+			"ClimacellV4 (key needed)": "ClimacellV4",
+			"DarkSky (key needed)": "DarkSky",
+			"ClimacellV3 (key needed)": "Climacell"
 		}
 	},
 	"apiKey": {

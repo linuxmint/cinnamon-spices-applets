@@ -32,7 +32,8 @@ export type Services =
 	"Climacell" |
 	"Met Office UK" |
 	"US Weather" |
-	"Visual Crossing";
+	"Visual Crossing" |
+	"DanishMI";
 
 /**
  * Keys matching the ones in settings-schema.json

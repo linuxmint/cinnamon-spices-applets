@@ -23,6 +23,7 @@ import { Log } from "./logger";
 import { APPLET_ICON, REFRESH_ICON } from "./consts";
 import { VisualCrossing } from "./visualcrossing";
 import { ClimacellV4 } from "./climacellV4";
+import { DanishMI } from "./danishMI";
 
 const { TextIconApplet, AllowedLayout, MenuItem } = imports.ui.applet;
 const { spawnCommandLine } = imports.misc.util;
@@ -412,6 +413,9 @@ export class WeatherApplet extends TextIconApplet {
 				break;
 			case "Visual Crossing":
 				if (currentName != "Visual Crossing" || force) this.provider = new VisualCrossing(this);
+				break;
+			case "DanishMI":
+				if (currentName != "DanishMI" || force) this.provider = new DanishMI(this);
 				break;
             default:
                 return null;

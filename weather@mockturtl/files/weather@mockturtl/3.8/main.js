@@ -18,6 +18,7 @@ const logger_1 = require("./logger");
 const consts_1 = require("./consts");
 const visualcrossing_1 = require("./visualcrossing");
 const climacellV4_1 = require("./climacellV4");
+const danishMI_1 = require("./danishMI");
 const { TextIconApplet, AllowedLayout, MenuItem } = imports.ui.applet;
 const { spawnCommandLine } = imports.misc.util;
 const { IconType, Side } = imports.gi.St;
@@ -318,6 +319,10 @@ class WeatherApplet extends TextIconApplet {
             case "Visual Crossing":
                 if (currentName != "Visual Crossing" || force)
                     this.provider = new visualcrossing_1.VisualCrossing(this);
+                break;
+            case "DanishMI":
+                if (currentName != "DanishMI" || force)
+                    this.provider = new danishMI_1.DanishMI(this);
                 break;
             default:
                 return null;

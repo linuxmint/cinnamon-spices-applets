@@ -215,7 +215,7 @@ exports.TempToUserConfig = TempToUserConfig;
 function PressToUserUnits(hpa, units) {
     switch (units) {
         case "hPa":
-            return hpa;
+            return Math.round(hpa * 100) / 100;
         case "at":
             return Math.round((hpa * 0.001019716) * 1000) / 1000;
         case "atm":
