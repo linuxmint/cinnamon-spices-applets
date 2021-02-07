@@ -43,7 +43,7 @@ class DanishMI {
             temperature: utils_1.CelsiusToKelvin(observation.Temperature2m),
             condition: this.ResolveCondition(observation.symbol),
             humidity: observation.RelativeHumidity,
-            pressure: observation.PressureMSL / 100,
+            pressure: (!observation.PressureMSL) ? null : observation.PressureMSL / 100,
             wind: {
                 degree: observation.WindDirection,
                 speed: observation.WindSpeed10m
