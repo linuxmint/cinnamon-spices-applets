@@ -23,7 +23,7 @@ msgstr "%l:%M %p"
 
 #: applet.js:132
 msgid "%A %B %e, %Y"
-msgid "%A %B %e, %Y"
+msgstr "%A %B %e, %Y"
 
 #: applet.js:277
 msgid "Edit World Clocks"
