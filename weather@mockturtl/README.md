@@ -109,7 +109,7 @@ http://groups.google.com/group/cinnamon-weather
 
 * Hourly forecast toggle button is not centered to the middle of the popup menu
 
-* Sunset/Sunrise is not displayed correctly if there is a mismatch between the Location Timezone and System Timezone when using Manual Location with some of the weather providers
+* Sunset/Sunrise is not displayed correctly if there is a mismatch between the Location Timezone and System Timezone when using Manual Location with some of the weather providers (Yahoo, for example)
 
 * DarkSky verbose conditions are only in cm/celsius or in/fahrenheit
 
