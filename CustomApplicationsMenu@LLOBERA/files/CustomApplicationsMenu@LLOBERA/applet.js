@@ -7,7 +7,6 @@
 const Applet = imports.ui.applet;
 const Cinnamon = imports.gi.Cinnamon;
 const Gettext = imports.gettext;
-const _ = Gettext.gettext;
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const Gtk = imports.gi.Gtk;
