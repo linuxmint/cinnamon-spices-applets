@@ -57,13 +57,13 @@ def validate_xlet(uuid):
             # check forbidden fields
             for field in ['icon', 'dangerous', 'last-edited']:
                 if field in metadata.keys():
-                    print("[%s] Forbidden field %s in %s" % (uuid, field, "files/%s/metadata.json" % uuid))
+                    print("[%s] Forbidden field '%s' in %s" % (uuid, field, "files/%s/metadata.json" % uuid))
                     valid = False
 
             # check mandatory fields
             for field in ['uuid', 'name', 'description']:
                 if field not in metadata.keys():
-                    print("[%s] Missing field %s in %s" % (uuid, field, "files/%s/metadata.json" % uuid))
+                    print("[%s] Missing field '%s' in %s" % (uuid, field, "files/%s/metadata.json" % uuid))
                     valid = False
                     return
 
@@ -71,6 +71,13 @@ def validate_xlet(uuid):
             if metadata['uuid'] != uuid:
                 print("[%s] Wrong uuid in %s" % (uuid, "files/%s/metadata.json" % uuid))
                 valid = False
+
+            # check for unicode characters in metadata
+            for field in metadata.keys():
+                strvalue = str(metadata[field])
+                if len(strvalue.encode()) != len(strvalue):
+                    print("[%s] Forbidden unicode characters in field '%s' in %s" % (uuid, field, "files/%s/metadata.json" % uuid))
+                    valid = False
 
         # check if icon is square
         im = Image.open("files/%s/icon.png" % uuid)
