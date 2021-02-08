@@ -1,3 +1,4 @@
+// see: https://projects.linuxmint.com/reference/git/cinnamon-tutorials/importer.html
 const { TextIconApplet, AllowedLayout, AppletPopupMenu } = imports.ui.applet;
 const { PopupMenuManager, PopupSeparatorMenuItem, PopupMenuItem, PopupSubMenuMenuItem } = imports.ui.popupMenu;
 const { AppletSettings } = imports.ui.settings;
@@ -6,12 +7,10 @@ const { ScrollDirection } = imports.gi.Clutter;
 const Gettext = imports.gettext; // l10n support
 const { get_home_dir } = imports.gi.GLib;
 const { Clipboard, ClipboardType } = imports.gi.St;
-const { file_new_for_path } = imports.gi.Gio;
 
 const { MpvPlayerHandler } = require('./mpvPlayerHandler')
 const { PlayPauseIconMenuItem } = require('./playPauseIconMenuItem')
-
-const MPRIS_PLUGIN_URL = "https://github.com/hoyon/mpv-mpris/releases/download/0.5/mpris.so"
+const { notifySend, checkInstallMprisPlugin, checkInstallAptPackage, checkInstallYoutubeDl, downloadFromYoutube } = require('./utils.js')
 
 // for i18n
 let UUID;
@@ -22,7 +21,6 @@ function _(str) {
   }
   return Gettext.gettext(str);
 }
-
 
 class CinnamonRadioApplet extends TextIconApplet {
   constructor(orientation, panel_height, instance_id) {
@@ -53,6 +51,7 @@ class CinnamonRadioApplet extends TextIconApplet {
     this.settings.bind("initial-volume", "custom_initial_volume");
     this.settings.bind("keep-volume-between-sessions", "keep_volume_between_sessions")
     this.settings.bind("last-volume", "last_volume")
+    this.settings.bind("music-download-dir-select", "music_dir")
   }
 
   _initMpvPlayer() {
@@ -154,11 +153,10 @@ class CinnamonRadioApplet extends TextIconApplet {
   }
 
   async _on_radio_channel_clicked(e, channel) {
-    //this._changeSetCurrentMenuItem(e)
     try {
       await this.mpvPlayer.startChangeRadioChannel(channel.url)
     } catch (error) {
-      this._notify_send(_("Can't play  %s").format(channel.name) + ". " + _("Make sure that the URL is valid and you have a stable internet connection. Don't hestitate to open an Issue on Github if the problem persists."))
+      notifySend(_("Can't play  %s").format(channel.name) + ". " + _("Make sure that the URL is valid and you have a stable internet connection. Don't hestitate to open an Issue on Github if the problem persists."))
       global.logError(error)
       return
     }
@@ -200,7 +198,12 @@ class CinnamonRadioApplet extends TextIconApplet {
   _createContextMenu() {
     const copyTitleItem = new PopupMenuItem(_("Copy current song title"));
     copyTitleItem.connect('activate', () => { this._on_copy_song(); });
+
+    const downloadYoutubeItem = new PopupMenuItem(_("Download from Youtube"))
+    downloadYoutubeItem.connect('activate', () => { this._on_youtube_download() })
+
     this._applet_context_menu.addMenuItem(copyTitleItem, 0)
+    this._applet_context_menu.addMenuItem(downloadYoutubeItem, 1)
     this._applet_context_menu.addMenuItem(new PopupSeparatorMenuItem());
   }
 
@@ -209,11 +212,33 @@ class CinnamonRadioApplet extends TextIconApplet {
       const currentSong = this.mpvPlayer.getCurrentSong()
       Clipboard.get_default().set_text(ClipboardType.CLIPBOARD, currentSong);
     } catch (e) {
-      this._notify_send(_("Can't copy current Song. Is the Radio playing?"))
+      notifySend(_("Can't copy current Song. Is the Radio playing?"))
       //global.logError(e)
     }
   }
 
+  async _on_youtube_download() {
+
+    try {
+      await checkInstallYoutubeDl()
+
+      const currentSong = this.mpvPlayer.getCurrentSong()
+
+      notifySend(`Downloading ${currentSong} ...`)
+
+      // when using the default value of the settings, the dir starts with ~ what can't be understand when executing command. Else it starts with file:// what youtube-dl can't handle. Saving to network directories (e.g. ftp) doesn't work 
+      const music_dir_absolut =
+        this.music_dir.replace('~', get_home_dir()).replace('file://', '')
+
+      const filePath = await downloadFromYoutube(music_dir_absolut, currentSong)
+      global.log(`${currentSong} downloaded from youtube saved to: ${filePath}`)
+      notifySend(_("download finished. File saved to %s").format(filePath))
+    } catch (error) {
+      const notifyMsg = _("Couldn't download song from Youtube due to an Error.")
+      notifySend(notifyMsg + _("See Logs for more information"))
+      global.logError(`${notifyMsg} The following error occured: ${error} `)
+    }
+  }
 
   _getChannelMenuItem(channelUrl) {
 
@@ -267,52 +292,17 @@ class CinnamonRadioApplet extends TextIconApplet {
 
   }
 
-  // sends a notification but only if there hasn't been already the same notification in the last 10 seks
-  _notify_send(notificationMsg) {
-    const currentTime = Date.now()
+  async on_applet_clicked() {
 
-    // preventing "reference to ... is undefined" in log
-    if (!this.timeLastNotification) this.timeLastNotification = 0
-    if (!this.lastNotificationMsg) this.lastNotificationMsg = null
-
-    const timeDiff = currentTime - this.timeLastNotification
-    if (timeDiff < 10000 && this.lastNotificationMsg === notificationMsg) return
-
-    const iconPath = `${__meta.path}/icon.png`;
-    spawnCommandLine('notify-send --hint=int:transient:1 --expire-time=10000 "' + notificationMsg + '" -i ' + iconPath);
-
-    this.timeLastNotification = currentTime
-    this.lastNotificationMsg = notificationMsg
-  }
-
-  _check_dependencies() {
-    if (!file_new_for_path(this.mpvPlayer.mprisPluginPath).query_exists(null)) {
-      const parentDir = __meta.path.split('/').slice(0, -1).join('/')
-
-      spawnCommandLineAsyncIO(`python3  ${parentDir}/download-dialog.py`, (stdout) => {
-        if (stdout.trim() == 'Continue') {
-          spawnCommandLineAsyncIO(`wget ${MPRIS_PLUGIN_URL} -O ${this.mpvPlayer.mprisPluginPath}`);
-        }
-      })
-      return false;
-    }
-
-    else {
-
-      if (!file_new_for_path(`/usr/bin/mpv`).query_exists(null)) {
-        this._notify_send(_("Please install the '%s' package.").format("mpv"));
-        spawnCommandLine(`apturl apt://mpv`);
-        return false;
-      }
-
-    }
-    return true;
-  }
-
-  on_applet_clicked() {
-    if (this._check_dependencies()) {
+    try {
+      await checkInstallMprisPlugin(this.mpvPlayer.mprisPluginPath)
+      await checkInstallAptPackage("mpv")
       this.menu.toggle();
       this.radioListSubMenu.menu.open(true);
+
+    } catch (error) {
+      notifySend(_("couldn't install required dependencies. Make sure you are connected to the internet. See the Logs for more information"))
+      global.logError(`couldn't install required dependencies. The following error occured: ${error}`)
     }
   }
 
@@ -326,7 +316,7 @@ class CinnamonRadioApplet extends TextIconApplet {
     const volumeChange = direction === ScrollDirection.UP ? 5 : -5
     const volumeChanged = this.mpvPlayer.increaseDecreaseVolume(volumeChange)
 
-    if (!volumeChanged && volumeChange > 0) this._notify_send(_("Can't increase Volume. Volume already at maximum."))
+    if (!volumeChanged && volumeChange > 0) notifySend(_("Can't increase Volume. Volume already at maximum."))
   }
 };
 
