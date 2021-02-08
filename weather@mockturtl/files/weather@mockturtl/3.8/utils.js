@@ -69,7 +69,7 @@ function GetDayName(date, locale, showDate = false, tz) {
         weekday: "long",
         timeZone: tz
     };
-    if (!tz || tz == "")
+    if (!tz || tz == "" || tz == "UTC")
         params.timeZone = undefined;
     if (showDate) {
         params.day = 'numeric';
@@ -95,7 +95,7 @@ function GetHoursMinutes(date, locale, hours24Format, tz, onlyHours = false) {
         hour12: !hours24Format,
         timeZone: tz
     };
-    if (!tz || tz == "")
+    if (!tz || tz == "" || tz == "UTC")
         params.timeZone = undefined;
     if (!onlyHours)
         params.minute = "2-digit";
@@ -119,7 +119,7 @@ function AwareDateString(date, locale, hours24Format, tz) {
     if (date.getFullYear() != now.getFullYear()) {
         params.year = "numeric";
     }
-    if (!tz || tz == "")
+    if (!tz || tz == "" || tz == "UTC")
         params.timeZone = tz;
     return date.toLocaleString(locale, params);
 }

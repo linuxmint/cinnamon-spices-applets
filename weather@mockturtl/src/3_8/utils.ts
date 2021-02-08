@@ -86,7 +86,7 @@ export function GetDayName(date: Date, locale: string, showDate: boolean = false
         timeZone: tz
     }
 
-    if (!tz || tz == "")
+    if (!tz || tz == "" || tz == "UTC")
         params.timeZone = undefined;
 
     if (showDate) {
@@ -119,7 +119,7 @@ export function GetHoursMinutes(date: Date, locale: string, hours24Format: boole
         timeZone: tz
     }
 
-    if (!tz || tz == "")
+    if (!tz || tz == "" || tz == "UTC")
         params.timeZone = undefined;
 
     if (!onlyHours)
@@ -147,7 +147,7 @@ export function AwareDateString(date: Date, locale: string, hours24Format: boole
         params.year = "numeric";
     }
 
-    if (!tz || tz == "")
+    if (!tz || tz == "" || tz == "UTC")
         params.timeZone = tz;
 
     return date.toLocaleString(locale, params);

@@ -52,7 +52,7 @@ class DanishMI {
         result.location = {
             city: forecasts.city,
             country: forecasts.country,
-            timeZone: forecasts.timezone,
+            timeZone: null,
             url: "https://www.dmi.dk/"
         };
         result.coord = {

@@ -18,7 +18,7 @@ export class DanishMI implements WeatherProvider {
         cmd: "llj", // latlongjson
         lon: null,
         lat: null,
-        tz: "UTC"
+        tz: "UTC"   // have to as in UTC unless we don't get proper times
     }
 
     /** Params has to be in this exact order */
@@ -64,7 +64,7 @@ export class DanishMI implements WeatherProvider {
         result.location = {
             city: forecasts.city,
             country: forecasts.country,
-            timeZone: forecasts.timezone,
+            timeZone: null, // because we ask in UTC, we get UTC as the timezone, so we just drop it
             url: "https://www.dmi.dk/"
         };
         result.coord = {
