@@ -2,13 +2,13 @@ import { Services } from "./config";
 import { HTTPParams } from "./httpLib";
 import { WeatherApplet } from "./main";
 import { Condition, ForecastData, HourlyForecastData, LocationData, PrecipitationType, WeatherData, WeatherProvider } from "./types";
-import { CelsiusToKelvin, GetDistance, _ } from "./utils";
+import { CelsiusToKelvin, GetDistance, mode, _ } from "./utils";
 
 export class DanishMI implements WeatherProvider {
     needsApiKey: boolean = false;
     prettyName: string = "Danish MI";
     name: Services = "DanishMI";
-    maxForecastSupport: number = 4;
+    maxForecastSupport: number = 10;
     maxHourlyForecastSupport: number = 48;
     website: string = "https://www.dmi.dk/";
 
@@ -85,13 +85,14 @@ export class DanishMI implements WeatherProvider {
         }
 
         let forecastData: ForecastData[] = [];
-        for (let index = 0; index < 5; index++) {
+		// for the last one we don't have symbols, so skip
+        for (let index = 0; index < forecasts.aggData.length - 1; index++) {
             const element = forecasts.aggData[index];
             forecastData.push( {
                 date: this.DateStringToDate(element.time),
                 temp_max: CelsiusToKelvin(element.maxTemp),
                 temp_min: CelsiusToKelvin(element.minTemp),
-                condition: this.ResolveDailyCondition(0) // TODO: Create condition by hourly weather
+                condition: this.ResolveDailyCondition(forecasts.timeserie, this.DateStringToDate(element.time))
             })
         }
         result.forecasts = forecastData;
@@ -141,10 +142,31 @@ export class DanishMI implements WeatherProvider {
         return result;
     }
 
-    private ResolveDailyCondition(symbol: number) {
-        if (symbol > 100) 
-            symbol = symbol - 100;
-        return this.ResolveCondition(symbol);
+    private ResolveDailyCondition(hourlyData: DanishMIHourlyPayload[], date: Date) {
+		let target = new Date(date);
+		// change it to 6 in the morning so a day makes more sense
+		target.setHours(target.getHours() + 6);
+		// next day boundary
+		let upto = new Date(target);
+		upto.setDate(upto.getDate() + 1);
+
+		let relevantHours = hourlyData.filter(x => {
+			let hour = this.DateStringToDate(x.time);
+			if (hour >= target && hour < upto)
+				return hour;
+		});
+
+		// convert night symbols to day symbols for daily
+		let normalizedSymbols = relevantHours.map(x => (x.symbol > 100) ? (x.symbol - 100) : x.symbol);
+
+		let resultSymbol: number = null;
+		// symbols include rain or other stuff, get most severe
+		if (!!normalizedSymbols.find(x => x > 10)) 
+			resultSymbol = Math.max(...normalizedSymbols);
+		else // get most common if there is no precipitation
+			resultSymbol = mode(normalizedSymbols);
+		
+        return this.ResolveCondition(resultSymbol);
     }
 
     private ResolveCondition(symbol: number): Condition {

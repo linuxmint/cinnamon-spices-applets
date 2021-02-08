@@ -395,6 +395,17 @@ function HasIcon(icon: string, icon_type: imports.gi.St.IconType): boolean {
 // --------------------------------------------------------
 // ETC
 
+export function mode<T>(arr: T[]): T {
+    return arr.reduce(function(current, item) {
+        var val = current.numMapping[item] = (current.numMapping[item] || 0) + 1;
+        if (val > current.greatestFreq) {
+            current.greatestFreq = val;
+            current.mode = item;
+        }
+        return current;
+    }, {mode: null, greatestFreq: -Infinity, numMapping: {} as any}).mode;
+};
+
 // Passing appropriate resolver function for the API, and the code
 export function WeatherIconSafely(code: BuiltinIcons[], icon_type: imports.gi.St.IconType): BuiltinIcons {
     for (let i = 0; i < code.length; i++) {

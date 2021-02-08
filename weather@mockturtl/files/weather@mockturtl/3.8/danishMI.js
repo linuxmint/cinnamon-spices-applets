@@ -7,7 +7,7 @@ class DanishMI {
         this.needsApiKey = false;
         this.prettyName = "Danish MI";
         this.name = "DanishMI";
-        this.maxForecastSupport = 4;
+        this.maxForecastSupport = 10;
         this.maxHourlyForecastSupport = 48;
         this.website = "https://www.dmi.dk/";
         this.url = "https://www.dmi.dk/NinJo2DmiDk/ninjo2dmidk";
@@ -71,13 +71,13 @@ class DanishMI {
             result.condition = this.ResolveCondition(forecasts.timeserie[0].symbol);
         }
         let forecastData = [];
-        for (let index = 0; index < 5; index++) {
+        for (let index = 0; index < forecasts.aggData.length - 1; index++) {
             const element = forecasts.aggData[index];
             forecastData.push({
                 date: this.DateStringToDate(element.time),
                 temp_max: utils_1.CelsiusToKelvin(element.maxTemp),
                 temp_min: utils_1.CelsiusToKelvin(element.minTemp),
-                condition: this.ResolveDailyCondition(0)
+                condition: this.ResolveDailyCondition(forecasts.timeserie, this.DateStringToDate(element.time))
             });
         }
         result.forecasts = forecastData;
@@ -121,10 +121,23 @@ class DanishMI {
         }
         return result;
     }
-    ResolveDailyCondition(symbol) {
-        if (symbol > 100)
-            symbol = symbol - 100;
-        return this.ResolveCondition(symbol);
+    ResolveDailyCondition(hourlyData, date) {
+        let target = new Date(date);
+        target.setHours(target.getHours() + 6);
+        let upto = new Date(target);
+        upto.setDate(upto.getDate() + 1);
+        let relevantHours = hourlyData.filter(x => {
+            let hour = this.DateStringToDate(x.time);
+            if (hour >= target && hour < upto)
+                return hour;
+        });
+        let normalizedSymbols = relevantHours.map(x => (x.symbol > 100) ? (x.symbol - 100) : x.symbol);
+        let resultSymbol = null;
+        if (!!normalizedSymbols.find(x => x > 10))
+            resultSymbol = Math.max(...normalizedSymbols);
+        else
+            resultSymbol = utils_1.mode(normalizedSymbols);
+        return this.ResolveCondition(resultSymbol);
     }
     ResolveCondition(symbol) {
         let isNight = (symbol > 100);
