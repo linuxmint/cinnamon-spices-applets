@@ -1,5 +1,6 @@
 const { spawnCommandLine, spawnCommandLineAsyncIO } = imports.misc.util;
 const { file_new_for_path } = imports.gi.Gio;
+const { find_program_in_path } = imports.gi.GLib;
 
 var timeLastNotification = 0
 var lastNotificationMsg = ""
@@ -51,16 +52,17 @@ const checkInstallMprisPlugin = function (targetPath) {
     })
 }
 
-const checkInstallAptPackage = function (packageName) {
+const checkInstallMpv = function (packageName) {
     return new Promise(async (resolve, reject) => {
 
-        if (file_new_for_path(`/usr/bin/${packageName}`).query_exists(null)) {
-            return resolve()
-        }
+        if (find_program_in_path("mpv")) return resolve()
 
-        notifySend(_("Please also install the '%s' package.").format(packageName))
+        if (!find_program_in_path("apturl")) return reject()
+
+        notifySend(_("Please also install the '%s' package.").format("mpv"))
+
         const [stderr, stdout, exitCode] = await spawnCommandLinePromise(`
-            apturl apt://${packageName}`
+            apturl apt://mpv`
         )
         // exitCode 0 means sucessfully see: man apturl
         return (exitCode === 0) ? resolve() : reject(stderr)
@@ -73,6 +75,8 @@ const checkInstallYoutubeDl = function () {
 
         const [error, version] = await spawnCommandLinePromise('youtube-dl --version')
         if (version && version.trim() === "2021.02.04.1") return resolve()
+
+        if (!find_program_in_path("apturl")) return reject()
 
         const [stderr, stdout, errMessage] = await spawnCommandLinePromise(
             `python3  ${__meta.path}/download-dialog-youtube-dl.py`

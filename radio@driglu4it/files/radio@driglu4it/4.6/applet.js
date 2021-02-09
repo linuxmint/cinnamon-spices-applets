@@ -10,7 +10,7 @@ const { Clipboard, ClipboardType } = imports.gi.St;
 
 const { MpvPlayerHandler } = require('./mpvPlayerHandler')
 const { PlayPauseIconMenuItem } = require('./playPauseIconMenuItem')
-const { notifySend, checkInstallMprisPlugin, checkInstallAptPackage, checkInstallYoutubeDl, downloadFromYoutube } = require('./utils.js')
+const { notifySend, checkInstallMprisPlugin, checkInstallMpv, checkInstallYoutubeDl, downloadFromYoutube } = require('./utils.js')
 
 // for i18n
 let UUID;
@@ -24,6 +24,7 @@ function _(str) {
 
 class CinnamonRadioApplet extends TextIconApplet {
   constructor(orientation, panel_height, instance_id) {
+
     super(orientation, panel_height, instance_id);
 
     // Allow Applet to be used on vertical and horizontal panels. By default only horizontal panels are allowed
@@ -60,6 +61,7 @@ class CinnamonRadioApplet extends TextIconApplet {
 
     this.mpvPlayer = new MpvPlayerHandler({
       mprisPluginPath: mprisPluginPath,
+      // TODO: hier auch ...args??
       _handleRadioStopped: (...args) => this._handleRadioStopped(args),
       _getInitialVolume: () => this._getInitialVolume(),
       _handleRadioChannelChangedPaused: (...args) => this._handleRadioChannelChangedPaused(...args)
@@ -153,6 +155,7 @@ class CinnamonRadioApplet extends TextIconApplet {
   }
 
   async _on_radio_channel_clicked(e, channel) {
+
     try {
       await this.mpvPlayer.startChangeRadioChannel(channel.url)
     } catch (error) {
@@ -221,9 +224,13 @@ class CinnamonRadioApplet extends TextIconApplet {
 
     try {
       await checkInstallYoutubeDl()
+    } catch (error) {
+      notifySend(_("Not the correct version of youtube-dl installed. Please install youtube-dl 2021.02.04.1"))
+      return
+    }
 
+    try {
       const currentSong = this.mpvPlayer.getCurrentSong()
-
       notifySend(`Downloading ${currentSong} ...`)
 
       // when using the default value of the settings, the dir starts with ~ what can't be understand when executing command. Else it starts with file:// what youtube-dl can't handle. Saving to network directories (e.g. ftp) doesn't work 
@@ -231,7 +238,6 @@ class CinnamonRadioApplet extends TextIconApplet {
         this.music_dir.replace('~', get_home_dir()).replace('file://', '')
 
       const filePath = await downloadFromYoutube(music_dir_absolut, currentSong)
-      global.log(`${currentSong} downloaded from youtube saved to: ${filePath}`)
       notifySend(_("download finished. File saved to %s").format(filePath))
     } catch (error) {
       const notifyMsg = _("Couldn't download song from Youtube due to an Error.")
@@ -296,13 +302,12 @@ class CinnamonRadioApplet extends TextIconApplet {
 
     try {
       await checkInstallMprisPlugin(this.mpvPlayer.mprisPluginPath)
-      await checkInstallAptPackage("mpv")
+      await checkInstallMpv("mpv")
       this.menu.toggle();
       this.radioListSubMenu.menu.open(true);
 
     } catch (error) {
-      notifySend(_("couldn't install required dependencies. Make sure you are connected to the internet. See the Logs for more information"))
-      global.logError(`couldn't install required dependencies. The following error occured: ${error}`)
+      notifySend(_("couldn't start the applet. Make sure mpv is installed and the mpv mpris plugin saved in the configs folder."))
     }
   }
 

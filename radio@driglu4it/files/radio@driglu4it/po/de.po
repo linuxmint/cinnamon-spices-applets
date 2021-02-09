@@ -21,7 +21,7 @@ msgstr ""
 #: 4.6/utils.js:61
 #, javascript-format
 msgid "Please also install the '%s' package."
-msgstr "Bitte das Paket »%s« installieren."
+msgstr "Bitte auch das Paket »%s« installieren."
 
 #: 4.6/applet.js:159
 #, javascript-format
