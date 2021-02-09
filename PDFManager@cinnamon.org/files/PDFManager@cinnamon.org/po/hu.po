@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-10-30 21:16+0100\n"
-"PO-Revision-Date: 2020-09-21 15:03+0200\n"
+"PO-Revision-Date: 2021-02-09 14:55+0100\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.4.1\n"
+"X-Generator: Poedit 2.3\n"
 "X-Poedit-Basepath: ..\n"
-"Last-Translator: \n"
+"Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Language: hu\n"
 "X-Poedit-SearchPath-0: applet.js\n"
@@ -31,11 +31,11 @@ msgstr "PDF összeolvasztása"
 
 #: applet.js:76 pdf-manager.py:153
 msgid "Extract PDF"
-msgstr "PDF kivonása"
+msgstr "PDF kiszedése"
 
 #: applet.js:83
 msgid "Reduce size of PDF"
-msgstr "PDF méretének csökkentése"
+msgstr "PDF fájlméretének csökkentése"
 
 #: applet.js:90
 msgid "Rotate left PDF"
@@ -55,7 +55,7 @@ msgstr "PDFManager eszököz telepítése"
 
 #: applet.js:115
 msgid "Open Document Viewer"
-msgstr "Dokumentum megjelenítő megnyitása"
+msgstr "Dokumentum-megjelenítő megnyitása"
 
 #: applet.js:122
 msgid "Open Evince"
@@ -63,7 +63,7 @@ msgstr "Evince megnyitása"
 
 #: applet.js:129
 msgid "Open PDF Mod"
-msgstr "PDF Mod megnyitása"
+msgstr "PDF Üzemmód megnyitása"
 
 #: applet.js:136
 msgid "Open PDF Editor"
@@ -71,7 +71,7 @@ msgstr "PDF szerkesztő megnyitása"
 
 #: pdf-manager.py:28
 msgid "Installation of PDF Toolkit necessary"
-msgstr "A PDF eszköztár telepítése szükségszerű"
+msgstr "A PDF eszköztár telepítése szükséges"
 
 #: pdf-manager.py:30
 msgid ""
@@ -92,7 +92,7 @@ msgstr ""
 #: pdf-manager.py:42 pdf-manager.py:84 pdf-manager.py:137 pdf-manager.py:198
 #: pdf-manager.py:218 pdf-manager.py:239
 msgid "Select your PDF..."
-msgstr "PDF kiválasztása..."
+msgstr "PDF kiválasztása…"
 
 #: pdf-manager.py:51 pdf-manager.py:93 pdf-manager.py:145 pdf-manager.py:207
 #: pdf-manager.py:227 pdf-manager.py:248
@@ -101,25 +101,24 @@ msgstr "PDF fájlok"
 
 #: pdf-manager.py:63
 msgid "Reducing PDF"
-msgstr "PDF csökkentése"
+msgstr "PDF méretcsökkentése"
 
 #: pdf-manager.py:65
 msgid "Your PDF are reducing... Don't manipulate selected files!"
-msgstr ""
-"Az Ön PDF fájl mérete csökken... Ne módosítsa a kiválasztott fájlokat!"
+msgstr "A PDF fájl mérete csökken… Ne módosítsa a kiválasztott fájlokat."
 
 #: pdf-manager.py:103 pdf-manager.py:176
 msgid "Save as..."
-msgstr "Mentés másként..."
+msgstr "Mentés másként…"
 
 #: pdf-manager.py:158
 msgid "Extract following pages (example: 1-10 15-17):"
-msgstr "A következő oldalak kivonása (példa: 1-10 15-17):"
+msgstr "A következő oldalak kiszedése (példa: 1-10 15-17):"
 
 #: pdf-manager.py:159
 msgid "Extract even pages"
-msgstr "Páros oldalak kivonása"
+msgstr "Páros oldalak kiszedése"
 
 #: pdf-manager.py:160
 msgid "Extract odd pages"
-msgstr "Páratlan oldalak kivonása"
+msgstr "Páratlan oldalak kiszedése"
