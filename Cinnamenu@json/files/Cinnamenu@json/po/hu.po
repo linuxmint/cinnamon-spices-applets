@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-07-17 12:34+0100\n"
-"PO-Revision-Date: 2020-07-18 22:53+0100\n"
-"Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
+"PO-Revision-Date: 2021-02-09 14:46+0100\n"
+"Last-Translator: Kálmán „KAMI” Szalai <kami9811@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3.1\n"
+"X-Generator: Poedit 2.3\n"
 
 #. 3.2 4.0
 msgid "Type to search..."
@@ -145,7 +145,7 @@ msgstr "Eltávolítás"
 
 #. 4.0 4.0
 msgid "Please wait..."
-msgstr ""
+msgstr "Kis türelmet…"
 
 #. metadata.json->name
 #. 3.2
@@ -165,6 +165,8 @@ msgid ""
 "Made possible thanks to the efforts of contributors to the Cinnamon menu, "
 "Gnomenu, and the contributors to projects they derived from."
 msgstr ""
+"A Cinnamon menü, a Gnomenu és a belőlük származó projekteken dolgozó "
+"hozzájárulóknak köszönhetően érhető el."
 
 #. 3.2 4.0
 msgid "Behavior"
@@ -219,10 +221,8 @@ msgid "Use a custom icon"
 msgstr "Saját ikon használata"
 
 #. 3.2 4.0
-#, fuzzy
-#| msgid "Use a custom icon"
 msgid "Use a custom icon in the panel"
-msgstr "Saját ikon használata"
+msgstr "Saját ikon használata a panelen"
 
 #. 3.2 4.0
 msgid "Panel icon"
@@ -261,10 +261,8 @@ msgid "Open menu on hover"
 msgstr "Nyissa meg a menüt lebegve"
 
 #. 3.2 4.0
-#, fuzzy
-#| msgid "Open the menu when I move my mouse over it"
 msgid "Open the menu when I move my mouse over the panel icon"
-msgstr "Menü megnyitása, ha az egérmutató felette van"
+msgstr "Menü megnyitása, ha az egérmutató a panel ikon felett van"
 
 #. 3.2 4.0
 msgid "milliseconds"
@@ -279,26 +277,20 @@ msgid "Use menu animations"
 msgstr "Menü animáció használata"
 
 #. 3.2 4.0
-#, fuzzy
-#| msgid "Allow the menu to animate on open and close"
 msgid "Animate the menu on open and close"
-msgstr "Megnyitás és bezárás animáció megjelenítése a menüben"
+msgstr "Menüben megnyitása és bezárása animációval"
 
 #. 3.2 4.0
 msgid "Activate categories on click"
 msgstr "Kategória aktiválása egy kattintással"
 
 #. 3.2 4.0
-#, fuzzy
-#| msgid "Activate categories on click"
 msgid "Activate categories on click instead of on hover"
-msgstr "Kategória aktiválása egy kattintással"
+msgstr "Kategória aktiválása egy kattintással követés helyett"
 
 #. 3.2 4.0
-#, fuzzy
-#| msgid "Enable autoscrolling in application list"
 msgid "Enable autoscrolling"
-msgstr "Automatikus görgetés az alkalmazás listában"
+msgstr "Automatikus görgetés"
 
 #. 3.2 4.0
 msgid "Enable autoscrolling in application list"
@@ -321,10 +313,8 @@ msgid "Enable search providers"
 msgstr "Keresőszolgáltatók engedélyezése"
 
 #. 3.2 4.0
-#, fuzzy
-#| msgid "Enable search providers"
 msgid "Include search provider results in searches"
-msgstr "Keresőszolgáltatók engedélyezése"
+msgstr "Keresőszolgáltatók által adott keresési eredmények megjelenítése"
 
 #. 3.2 4.0
 msgid "Example Search Providers"
@@ -355,10 +345,8 @@ msgid "Show bookmarks and places"
 msgstr "Könyvjelzők és helyek megjelenítése"
 
 #. 3.2 4.0
-#, fuzzy
-#| msgid "Show bookmarks and places"
 msgid "Show bookmarks and places category in the menu"
-msgstr "Könyvjelzők és helyek megjelenítése"
+msgstr "Könyvjelzők és helyek kategóriák megjelenítése a menüben"
 
 #. 3.2 4.0
 msgid "Show application icons"
@@ -453,7 +441,6 @@ msgstr "Kedvencek hozzáadása a munkamenet gombjaihoz"
 msgid "Show your favorite app icons next to the session buttons"
 msgstr "Mutassa meg kedvenc alkalmazásikonjait a munkamenet gombjai mellett"
 
-#, javascript-format
 #~ msgid "Failed to launch \"%s\""
 #~ msgstr "„%s” indítása meghiúsult"
 
