@@ -498,11 +498,11 @@ msgstr "Neige légère avec orage"
 
 #: 3.0/met_norway.js:463 3.8/met_norway.js:394
 msgid "Light snow showers"
-msgstr "Légère averses de neige"
+msgstr "Légères averses de neige"
 
 #: 3.0/met_norway.js:470 3.8/met_norway.js:401
 msgid "Light snow showers and thunder"
-msgstr "Légère averses de neige et orage"
+msgstr "Légères averses de neige et orage"
 
 #: 3.0/met_norway.js:476 3.0/met_norway.js:477 3.0/us_weather.js:421
 #: 3.0/us_weather.js:422 3.0/us_weather.js:456 3.0/met_uk.js:540
@@ -832,7 +832,7 @@ msgstr ""
 
 #: 3.0/us_weather.js:394 3.8/us_weather.js:259
 msgid "Failed to Process Hourly Forecast Info"
-msgstr "Échec du traitement des prévisions météorologiques horaires"
+msgstr "Échec du traitement des prévisions horaires"
 
 #: 3.0/us_weather.js:428 3.0/us_weather.js:429 3.0/us_weather.js:463
 #: 3.0/climacell.js:392 3.0/climacell.js:393 3.8/climacellV4.js:149
@@ -939,7 +939,7 @@ msgstr "Averses de grêle"
 
 #: 3.0/met_uk.js:681 3.0/met_uk.js:688 3.8/met_uk.js:539 3.8/met_uk.js:546
 msgid "Light snow shower"
-msgstr "Légère averses de neige"
+msgstr "Légères averses de neige"
 
 #: 3.0/met_uk.js:702 3.0/met_uk.js:709 3.8/met_uk.js:560 3.8/met_uk.js:567
 msgid "Heavy snow shower"
@@ -1032,7 +1032,7 @@ msgstr ""
 
 #: 3.0/applet.js:602
 msgid "Could not get weather information"
-msgstr "Impossible d'obtenir les informations météorologiques"
+msgstr "Impossible d'obtenir les informations"
 
 #: 3.0/applet.js:625 3.8/main.js:128
 msgid ""
@@ -1059,7 +1059,7 @@ msgstr "À"
 
 #: 3.0/applet.js:1109 3.8/uiBar.js:33
 msgid "Powered by"
-msgstr "Propulsé par"
+msgstr "Fonctionne avec"
 
 #: 3.0/applet.js:1114
 msgid "from you"
@@ -1107,7 +1107,7 @@ msgstr ""
 #: 3.0/applet.js:1878 3.8/nominatim.js:30
 msgid "Could not find location based on address, please check if it's right"
 msgstr ""
-"Impossible de trouver l'emplecement en fonction de l'adresse, veuillez "
+"Impossible de trouver l'emplacement en fonction de l'adresse, veuillez "
 "vérifier si elle est correcte"
 
 #: 3.0/applet.js:1902 3.8/nominatim.js:51
@@ -1179,7 +1179,7 @@ msgid ""
 "or get one first on https://developer.climacell.co/sign-up"
 msgstr ""
 "Veuillez saisir la clé API dans les paramètres,\n"
-"ou en obtenir une sur  https://developer.climacell.co/sign-up"
+"ou en obtenir une sur https://developer.climacell.co/sign-up"
 
 #: 3.0/climacell.js:248 3.8/climacellV4.js:40 3.8/climacell.js:153
 msgid ""
@@ -1529,7 +1529,7 @@ msgstr "Météo"
 
 #. metadata.json->description
 msgid "View your local weather forecast"
-msgstr "Affiche les prévisions météorologiques de votre région"
+msgstr "Affiche les prévisions de votre région"
 
 #. 3.0->settings-schema.json->head->description
 msgid "Settings for weather@mockturtl 3.0+"
@@ -1552,7 +1552,7 @@ msgstr "Cliquez ici pour une description détaillée"
 #. 3.0->settings-schema.json->getLocation->tooltip
 #. 3.8->settings-schema.json->getLocation->tooltip
 msgid "Opens webpage guide"
-msgstr "Ouvre l'aide (page web)"
+msgstr "Ouvre la page web de l'aide"
 
 #. 3.0->settings-schema.json->providerSettings->description
 #. 3.8->settings-schema.json->provider-options->title
@@ -1656,7 +1656,7 @@ msgstr "jours"
 #. 3.0->settings-schema.json->forecastDays->description
 #. 3.8->settings-schema.json->forecastDays->description
 msgid "Forecast length"
-msgstr "Étendue des prévisions météorologiques"
+msgstr "Étendue des prévisions"
 
 #. 3.0->settings-schema.json->forecastHours->units
 #. 3.8->settings-schema.json->forecastHours->units
@@ -1666,7 +1666,7 @@ msgstr "heures"
 #. 3.0->settings-schema.json->forecastHours->description
 #. 3.8->settings-schema.json->forecastHours->description
 msgid "Hourly Forecast length"
-msgstr "Durée des prévisions météo par heure"
+msgstr "Durée des prévisions par heure"
 
 #. 3.0->settings-schema.json->unitSettings->description
 #. 3.8->settings-schema.json->units-section->title
@@ -1826,7 +1826,7 @@ msgid ""
 "Can be used if label does not fit on vertical panel, among other smart "
 "things."
 msgstr ""
-"Les valeurs disponibles sont : {c} pour les conditions météo, {t} pour la "
+"Les valeurs disponibles sont : {c} pour les conditions météorologiques, {t} pour la "
 "température et {u} pour l'unité.\n"
 "Peut être utilisé si l'étiquette ne tient pas sur le panneau vertical."
 
@@ -1993,7 +1993,7 @@ msgstr "Raccourcis clavier"
 
 #. 3.8->settings-schema.json->provider-info->title
 msgid "How to choose a weather provider"
-msgstr "Comment choisir un fournisseur météo"
+msgstr "Comment choisir un fournisseur météorologique"
 
 #. 3.8->settings-schema.json->location-info->title
 msgid "Allowed location formats"
@@ -2042,7 +2042,7 @@ msgstr ""
 
 #. 3.8->settings-schema.json->getLocation->description
 msgid "Weather Applet at Cinnamon Spices Website"
-msgstr "Weather Applet sur le site Web de Cinnamon Spices"
+msgstr "Weather Applet sur le site web de Cinnamon Spices"
 
 #. 3.8->settings-schema.json->verticalOrientation->tooltip
 msgid "Displaying forecasts from top to bottom instead from left to right."
@@ -2092,7 +2092,7 @@ msgid ""
 "You can also comment and ask a questions to the community at this page by "
 "logging in with your Github account."
 msgstr ""
-"Pour plus d'informations, rendez-vous sur le site Web de Spice en cliquant "
+"Pour plus d'informations, rendez-vous sur le site web de Spice en cliquant "
 "sur le bouton ci-dessous. Vous pouvez également commenter et poser des "
 "questions à la communauté sur cette page en vous connectant avec votre "
 "compte Github."
@@ -2107,7 +2107,7 @@ msgid ""
 "GitHub account.\n"
 " Please make sure that the issue is not already submitted."
 msgstr ""
-"Ouvre une page Web où vous pouvez remplir un nouveau problème pour l'applet, "
+"Ouvre une page web où vous pouvez remplir un nouveau problème pour l'applet, "
 "nécessite un compte GitHub.\n"
 "  Veuillez vous assurer que le problème n'est pas déjà soumis."
 
@@ -2143,8 +2143,8 @@ msgstr ""
 "configuration. Certains fournisseurs ont besoin d'une clé API pour "
 "fonctionner, certains ont des limites régionales, diffèrent par "
 "l'échelonnage des prévisions et ils ont tous besoin d'une connexion Internet "
-"fonctionnelle au service choisi. Les options sont décrites en détail sur le "
-"site Web Cinnamon Spices, auquel vous pouvez accéder avec le bouton plus bas."
+"fonctionnelle pour fonctionner. Les options sont décrites en détail sur le "
+"site web Cinnamon Spices, auquel vous pouvez accéder avec le bouton plus bas."
 
 #. 3.8->settings-schema.json->loc-info->description
 msgid ""
@@ -2201,7 +2201,7 @@ msgstr ""
 
 #~ msgid "Removes location information from storage file."
 #~ msgstr ""
-#~ "Supprime les informations de localisation du fichier d'enristrement."
+#~ "Supprime les informations de localisation du fichier d'enregistrement."
 
 #~ msgid "Settings"
 #~ msgstr "Paramètres"
@@ -2262,7 +2262,7 @@ msgstr ""
 #~ msgstr "Contact"
 
 #~ msgid "Weather provider choices and details"
-#~ msgstr "Informations sur les services météo"
+#~ msgstr "Choix et détails sur les fournisseurs de données météo"
 
 #~ msgid "Entering location manually"
 #~ msgstr "Saisie manuelle de l'emplacement"
@@ -2401,7 +2401,7 @@ msgstr ""
 #~ "powered by: OpenWeatherMap, DarkSky, MET Norway, Weatherbit, Yahoo and ip-"
 #~ "api. Big Thanks to OpenWeatherMap for their FOSS support!"
 #~ msgstr ""
-#~ "Propulsé par : OpenWeatherMap, DarkSky, MET Norway, Weatherbit, Yahoo! et "
+#~ "Fonctionne avec : OpenWeatherMap, DarkSky, MET Norway, Weatherbit, Yahoo! et "
 #~ "ip-api.\n"
 #~ "Un grand merci à OpenWeatherMap pour leur support FOSS !"
 
@@ -2505,7 +2505,7 @@ msgstr ""
 #~ "WeatherBit - Un taux de rafraîchissement minimum de 10 minutes est "
 #~ "recommandé ou vous pourriez dépasser votre quota quotidien.\n"
 #~ "Si vous avez besoin d'une clé, veuillez cliquer sur 'Configurer la clé et "
-#~ "l'emplacement de l'API' pour les étapes comment en obtenir une."
+#~ "l'emplacement de l'API' pour les étapes pour en obtenir une."
 
 #~ msgid ""
 #~ "WeatherBit - Minimum of 10min refresh rate is recommended or you might "
@@ -2515,4 +2515,4 @@ msgstr ""
 #~ "WeatherBit - Un taux de rafraîchissement minimum de 10 minutes est "
 #~ "recommandé ou vous pourriez dépasser votre quota quotidien. Une clé est "
 #~ "requise, veuillez cliquer sur 'Configurer la clé API et l'emplacement' "
-#~ "pour en obtenir une."
+#~ "pour les étapes pour en obtenir une."
