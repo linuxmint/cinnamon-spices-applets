@@ -25,6 +25,7 @@ You can also save locations what you entered manually and switch between them in
 | **DarkSky**             | Yes*          | 8                         | 168                        | --                        |
 | **Visual Crossing**     | Yes           | 15                        | 336                        | --                        |
 | **MET Norway**          | No            | 10                        | 48                         | --                        |
+| **Danish MI**           | No            | 10                        | 48                         | --                        |
 | **WeatherBit**          | Yes           | 16                        | 0**                        | --                        |
 | **Yahoo**               | No            | 10                        | 0                          | python3-requests-oauthlib |
 | **ClimacellV3**         | Yes*          | 16                        | 96                         | --                        |
@@ -49,6 +50,10 @@ The default, works out of the box. Big Thanks to them supporting free open sourc
 ### MET Norway
 
 Current weather is shown for the next hour, and the daily forecasts are generated from 6 hour forecasts, so there is a possibility that they  are inaccurate sometimes.
+
+### Danish Meteorologist Institute
+
+It has higher accuracy in Denmark,
 
 ### Weatherbit.io
 
@@ -111,7 +116,7 @@ http://groups.google.com/group/cinnamon-weather
 
 * Sunset/Sunrise is not displayed correctly if there is a mismatch between the Location Timezone and System Timezone when using Manual Location with some of the weather providers (Yahoo, for example)
 
-* DarkSky verbose conditions are only in cm/celsius or in/fahrenheit
+* DarkSky verbose conditions are only in cm/Celsius or in/Fahrenheit
 
 ### Troubleshooting
 
