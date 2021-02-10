@@ -62,15 +62,17 @@ function CapitalizeEveryWord(description) {
     return result;
 }
 exports.CapitalizeEveryWord = CapitalizeEveryWord;
+function NormalizeTimezone(tz) {
+    if (!tz || tz == "" || tz == "UTC")
+        tz = undefined;
+    return tz;
+}
 function GetDayName(date, locale, showDate = false, tz) {
-    if (locale == "c" || locale == null)
-        locale = undefined;
     let params = {
         weekday: "long",
         timeZone: tz
     };
-    if (!tz || tz == "" || tz == "UTC")
-        params.timeZone = undefined;
+    params.timeZone = NormalizeTimezone(tz);
     if (showDate) {
         params.day = 'numeric';
     }
@@ -90,23 +92,19 @@ function GetDayName(date, locale, showDate = false, tz) {
 }
 exports.GetDayName = GetDayName;
 function GetHoursMinutes(date, locale, hours24Format, tz, onlyHours = false) {
-    if (locale == "c" || locale == null)
-        locale = undefined;
     let params = {
         hour: "numeric",
         hour12: !hours24Format,
         timeZone: tz
     };
-    if (!tz || tz == "" || tz == "UTC")
-        params.timeZone = undefined;
+    params.timeZone = NormalizeTimezone(tz);
+    ;
     if (!onlyHours)
         params.minute = "2-digit";
     return date.toLocaleString(locale, params);
 }
 exports.GetHoursMinutes = GetHoursMinutes;
 function AwareDateString(date, locale, hours24Format, tz) {
-    if (locale == "c" || locale == null)
-        locale = undefined;
     let now = new Date();
     let params = {
         hour: "numeric",
@@ -121,8 +119,7 @@ function AwareDateString(date, locale, hours24Format, tz) {
     if (date.getFullYear() != now.getFullYear()) {
         params.year = "numeric";
     }
-    if (!tz || tz == "" || tz == "UTC")
-        params.timeZone = tz;
+    params.timeZone = NormalizeTimezone(tz);
     return date.toLocaleString(locale, params);
 }
 exports.AwareDateString = AwareDateString;
@@ -382,6 +379,8 @@ function ConstructJsLocale(locale) {
             jsLocale += "-";
         jsLocale += tmp[i].toLowerCase();
     }
+    if (locale == "c" || locale == null)
+        jsLocale = undefined;
     return jsLocale;
 }
 exports.ConstructJsLocale = ConstructJsLocale;

@@ -77,17 +77,19 @@ export function CapitalizeEveryWord(description: string): string {
 // ---------------------------------------------------------------------------------
 // TimeString generators
 
-export function GetDayName(date: Date, locale: string, showDate: boolean = false, tz?: string): string {
-    // No timezone, Date passed in corrected with offset
-    if (locale == "c" || locale == null) locale = undefined;
+function NormalizeTimezone(tz: string) {
+	if (!tz || tz == "" || tz == "UTC")
+        tz = undefined;
+	return tz;
+}
 
+export function GetDayName(date: Date, locale: string, showDate: boolean = false, tz?: string): string {
     let params: Intl.DateTimeFormatOptions = {
         weekday: "long",
         timeZone: tz
     }
 
-    if (!tz || tz == "" || tz == "UTC")
-        params.timeZone = undefined;
+    params.timeZone = NormalizeTimezone(tz);
 
     if (showDate) {
         params.day = 'numeric';
@@ -114,17 +116,13 @@ export function GetDayName(date: Date, locale: string, showDate: boolean = false
 }
 
 export function GetHoursMinutes(date: Date, locale: string, hours24Format: boolean, tz?: string, onlyHours: boolean = false): string {
-    if (locale == "c" || locale == null) locale = undefined;
-    // No timezone, Date passed in corrected with offset
-
     let params: Intl.DateTimeFormatOptions = {
         hour: "numeric",
         hour12: !hours24Format,
         timeZone: tz
     }
 
-    if (!tz || tz == "" || tz == "UTC")
-        params.timeZone = undefined;
+	params.timeZone = NormalizeTimezone(tz);;
 
     if (!onlyHours)
         params.minute = "2-digit";
@@ -133,7 +131,6 @@ export function GetHoursMinutes(date: Date, locale: string, hours24Format: boole
 }
 
 export function AwareDateString(date: Date, locale: string, hours24Format: boolean, tz?: string): string {
-    if (locale == "c" || locale == null) locale = undefined; // Ignore unset locales
     let now = new Date();
     let params: Intl.DateTimeFormatOptions = {
         hour: "numeric",
@@ -151,8 +148,7 @@ export function AwareDateString(date: Date, locale: string, hours24Format: boole
         params.year = "numeric";
     }
 
-    if (!tz || tz == "" || tz == "UTC")
-        params.timeZone = tz;
+    params.timeZone = NormalizeTimezone(tz);
 
     return date.toLocaleString(locale, params);
 }
@@ -441,6 +437,8 @@ export function ConstructJsLocale(locale: string): string {
 		if (i != 0) jsLocale += "-";
 		jsLocale += tmp[i].toLowerCase();
 	}
+
+	if (locale == "c" || locale == null) jsLocale = undefined;
 	return jsLocale;
 }
 
