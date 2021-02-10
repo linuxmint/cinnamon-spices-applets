@@ -141,7 +141,7 @@ class WeatherApplet extends TextIconApplet {
         return true;
     }
     DisplayWeatherOnLabel(temperature, mainCondition) {
-        mainCondition = utils_1.CapitalizeEveryLetter(mainCondition);
+        mainCondition = utils_1.CapitalizeEveryWord(mainCondition);
         let temp = utils_1.TempToUserConfig(temperature, this.config.TemperatureUnit, this.config._tempRussianStyle);
         let label = "";
         if (this.Orientation != Side.LEFT && this.Orientation != Side.RIGHT) {

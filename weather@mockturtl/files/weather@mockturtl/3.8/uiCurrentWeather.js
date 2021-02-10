@@ -253,7 +253,7 @@ class CurrentWeather {
     }
     SetHumidity(humidity) {
         if (humidity != null) {
-            this.humidityLabel.text = Math.round(humidity) + "%";
+            this.humidityLabel.text = Math.round(humidity) + " %";
         }
     }
     async SetWind(windSpeed, windDegree) {

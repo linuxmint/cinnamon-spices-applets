@@ -59,7 +59,7 @@ export function CapitalizeFirstLetter(description: string): string {
     return description.charAt(0).toUpperCase() + description.slice(1);
 };
 
-export function CapitalizeEveryLetter(description: string): string {
+export function CapitalizeEveryWord(description: string): string {
     if ((description == undefined || description == null)) {
         return "";
     }
@@ -102,6 +102,10 @@ export function GetDayName(date: Date, locale: string, showDate: boolean = false
         delete params.weekday;
 
     let dateString = date.toLocaleString(locale, params);
+
+	// Make sure French days are caapitalised (they are not by default)
+	if (locale.startsWith("fr")) 
+		dateString = CapitalizeFirstLetter(dateString);
 
     if (date.getDate() == now.getDate()) dateString = _("Today");
     if (date.getDate() == tomorrow.getDate()) dateString = _("Tomorrow");

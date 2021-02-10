@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.setInterval = exports.clearTimeout = exports.delay = exports.setTimeout = exports.Guid = exports.GetFuncName = exports.GetDistance = exports.ConstructJsLocale = exports.ShadeHexColor = exports.WeatherIconSafely = exports.mode = exports.IsLangSupported = exports.NotEmpty = exports.IsCoordinate = exports.IsNight = exports.CompassDirection = exports.CompassToDeg = exports.KmToM = exports.MPHtoMPS = exports.FahrenheitToKelvin = exports.CelsiusToKelvin = exports.KPHtoMPS = exports.MillimeterToUserUnits = exports.MetreToUserUnits = exports.PressToUserUnits = exports.TempToUserConfig = exports.MPStoUserUnits = exports.ProcessCondition = exports.MilitaryTime = exports.AwareDateString = exports.GetHoursMinutes = exports.GetDayName = exports.CapitalizeEveryLetter = exports.CapitalizeFirstLetter = exports.GenerateLocationText = exports.UnitToUnicode = exports.format = exports._ = void 0;
+exports.setInterval = exports.clearTimeout = exports.delay = exports.setTimeout = exports.Guid = exports.GetFuncName = exports.GetDistance = exports.ConstructJsLocale = exports.ShadeHexColor = exports.WeatherIconSafely = exports.mode = exports.IsLangSupported = exports.NotEmpty = exports.IsCoordinate = exports.IsNight = exports.CompassDirection = exports.CompassToDeg = exports.KmToM = exports.MPHtoMPS = exports.FahrenheitToKelvin = exports.CelsiusToKelvin = exports.KPHtoMPS = exports.MillimeterToUserUnits = exports.MetreToUserUnits = exports.PressToUserUnits = exports.TempToUserConfig = exports.MPStoUserUnits = exports.ProcessCondition = exports.MilitaryTime = exports.AwareDateString = exports.GetHoursMinutes = exports.GetDayName = exports.CapitalizeEveryWord = exports.CapitalizeFirstLetter = exports.GenerateLocationText = exports.UnitToUnicode = exports.format = exports._ = void 0;
 const consts_1 = require("./consts");
 const { timeout_add, source_remove } = imports.mainloop;
 const { IconType } = imports.gi.St;
@@ -47,7 +47,7 @@ function CapitalizeFirstLetter(description) {
 }
 exports.CapitalizeFirstLetter = CapitalizeFirstLetter;
 ;
-function CapitalizeEveryLetter(description) {
+function CapitalizeEveryWord(description) {
     if ((description == undefined || description == null)) {
         return "";
     }
@@ -61,7 +61,7 @@ function CapitalizeEveryLetter(description) {
     }
     return result;
 }
-exports.CapitalizeEveryLetter = CapitalizeEveryLetter;
+exports.CapitalizeEveryWord = CapitalizeEveryWord;
 function GetDayName(date, locale, showDate = false, tz) {
     if (locale == "c" || locale == null)
         locale = undefined;
@@ -80,6 +80,8 @@ function GetDayName(date, locale, showDate = false, tz) {
     if (date.getDate() == now.getDate() || date.getDate() == tomorrow.getDate())
         delete params.weekday;
     let dateString = date.toLocaleString(locale, params);
+    if (locale.startsWith("fr"))
+        dateString = CapitalizeFirstLetter(dateString);
     if (date.getDate() == now.getDate())
         dateString = _("Today");
     if (date.getDate() == tomorrow.getDate())

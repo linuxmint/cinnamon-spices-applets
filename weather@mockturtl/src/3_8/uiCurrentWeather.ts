@@ -333,7 +333,7 @@ export class CurrentWeather {
 
     private SetHumidity(humidity: number) {
         if (humidity != null) {
-            this.humidityLabel.text = Math.round(humidity) + "%";
+            this.humidityLabel.text = Math.round(humidity) + " %";
         }
     }
 
