@@ -1,5 +1,17 @@
 # Changelog
 
+## 3.0.2
+
+* Fix icons for Met Norway, some are missing
+
+* Reorganize settings, Add help text where it belongs, to the tooltips
+
+* Add Danish Meteorologist Institute as a Weather Provider
+
+* Make sure French days are capitalized
+
+* Use Locale formatting for percent (humidity)
+
 ## 3.0.1
 
 * Fix issue where Symbolic icons setting was not reflected in the app when changed

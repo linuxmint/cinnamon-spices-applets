@@ -25,6 +25,7 @@ You can also save locations what you entered manually and switch between them in
 | **DarkSky**             | Yes*          | 8                         | 168                        | --                        |
 | **Visual Crossing**     | Yes           | 15                        | 336                        | --                        |
 | **MET Norway**          | No            | 10                        | 48                         | --                        |
+| **Danish MI**           | No            | 10                        | 48                         | --                        |
 | **WeatherBit**          | Yes           | 16                        | 0**                        | --                        |
 | **Yahoo**               | No            | 10                        | 0                          | python3-requests-oauthlib |
 | **ClimacellV3**         | Yes*          | 16                        | 96                         | --                        |
@@ -40,7 +41,7 @@ The default, works out of the box. Big Thanks to them supporting free open sourc
 
 ***[DarkSky has been acquired by Apple](https://blog.darksky.net/dark-sky-has-a-new-home/)** as of March 31, 2020. It does not allow new signups, and it will cease to function at the end of 2021.
 
-## Visual Crossing
+### Visual Crossing
 
 * Needs an API key, you can [Sign Up here](https://www.visualcrossing.com/weather/weather-data-services#/signup) and grab one
 
@@ -49,6 +50,10 @@ The default, works out of the box. Big Thanks to them supporting free open sourc
 ### MET Norway
 
 Current weather is shown for the next hour, and the daily forecasts are generated from 6 hour forecasts, so there is a possibility that they  are inaccurate sometimes.
+
+### Danish Meteorologist Institute
+
+It has higher accuracy in Denmark,
 
 ### Weatherbit.io
 
@@ -109,9 +114,9 @@ http://groups.google.com/group/cinnamon-weather
 
 * Hourly forecast toggle button is not centered to the middle of the popup menu
 
-* Sunset/Sunrise is not displayed correctly if there is a mismatch between the Location Timezone and System Timezone when using Manual Location with some of the weather providers
+* Sunset/Sunrise is not displayed correctly if there is a mismatch between the Location Timezone and System Timezone when using Manual Location with some of the weather providers (Yahoo, for example)
 
-* DarkSky verbose conditions are only in cm/celsius or in/fahrenheit
+* DarkSky verbose conditions are only in cm/Celsius or in/Fahrenheit
 
 ### Troubleshooting
 

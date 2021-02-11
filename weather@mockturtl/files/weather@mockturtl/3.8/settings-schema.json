@@ -45,8 +45,6 @@
             "type":"page",
             "title":"Help",
             "sections":[
-				"provider-info",
-				"location-info",
 				"more-info",
 				"submit-issue"
 			]
@@ -137,23 +135,9 @@
 				"keybinding"
 			]
 		},
-		"provider-info" : {
-			"type":"section",
-			"title":"How to choose a weather provider",
-			"keys":[
-				"provider-explanation"
-			]
-		},
-		"location-info": {
-			"type":"section",
-			"title":"Allowed location formats",
-			"keys":[
-				"loc-info"
-			]
-		},
 		"more-info": {
 			"type":"section",
-			"title": "View additional information",
+			"title": "More about the Weather applet",
 			"keys":[
 				"more-info-label",
 				"getLocation"
@@ -178,17 +162,19 @@
 		"type": "radiogroup",
 		"default": "OpenWeatherMap",
 		"description": "Data service",
+		"tooltip": "You can choose between several different weather forecast providers. Some providers require a API key to work, some have regional limits, differ in forecast length, and they all need a functional internet connection to work. The options are described in detail on the Cinnamon Spices Website which you can access with the button on the Help tab.",
 		"options": {
 			"OpenWeatherMap": "OpenWeatherMap",
-			"DarkSky (key needed)": "DarkSky",
-			"Visual Crossing (key needed)": "Visual Crossing",
 			"MET Norway": "MetNorway",
-			"Weatherbit (key needed)": "Weatherbit",
 			"Yahoo": "Yahoo",
-			"ClimacellV4 (key needed)": "ClimacellV4",
-			"ClimacellV3 (key needed)": "Climacell",
+			"Danish Meteorologist Institute": "DanishMI",
 			"Met Office UK (UK only)": "Met Office UK",
-			"US National Weather (US only)": "US Weather"
+			"US National Weather (US only)": "US Weather",
+			"Visual Crossing (key needed)": "Visual Crossing",
+			"Weatherbit (key needed)": "Weatherbit",
+			"ClimacellV4 (key needed)": "ClimacellV4",
+			"DarkSky (key needed)": "DarkSky",
+			"ClimacellV3 (key needed)": "Climacell"
 		}
 	},
 	"apiKey": {
@@ -208,7 +194,7 @@
 		"default": "London,UK",
 		"dependency": "manualLocation",
 		"description": "Location",
-		"tooltip": "Acceptable inputs are Latitude,Longitude. e.g.: 68.1932,17.1426 or an address.\nWaits for 3 seconds after you stop typing before refreshes the weather."
+		"tooltip": "You can enter coordinates 'Latitude,Longitude' (e.g. 51.5085,-0.1257) or use 'City,Country-code' (e.g. London,UK) or try to enter {House number} {Street} {City/Town} {Postcode} {Country}. The search algorithm is very flexible with the format. After 3 seconds without typing the address you entered is replaced automatically for validating your choice."
 	},
 	"saveLocation": {
 		"type": "button",
@@ -423,7 +409,7 @@
 	},
 	"more-info-label": {
 		"type": "label",
-		"description": "For more information go to the Spices Website by clicking the button below. You can also comment and ask a questions to the community at this page by logging in with your Github account."
+		"description": "For detailed information about the applet please go to the Spices Website by clicking the button below. You can also comment and ask a questions to the community at this page by logging in with your Github account. You can also find information about known issues, troubleshooting, changelog and more."
 	},
 	"submitIssue": {
 		"type": "button",
@@ -439,10 +425,6 @@
 	"issue-reporting-explanation": {
 		"type": "label",
 		"description": "If you find an issue with this applet please make a report by clicking on the button below and login in with your Github account. Don't forget to write weather@mockturtl in the top Title field to make it easier for everyone to know that the issue is about the weather applet (the form is for all Cinnamon applets)."
-	},
-	"provider-explanation": {
-		"type": "label",
-		"description": "You can use several different weather forecast providers that you choose under the first Weather Tab in this Configuration panel. Some providers require a API key to work, some have regional limits, differ in forecast length, and they all need a functional internet connection to work. The options are described in detail on the Cinnamon Spices Website, what you can access with the button further down."
 	},
 	"loc-info": {
 		"type": "label",
