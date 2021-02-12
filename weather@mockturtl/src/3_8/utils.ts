@@ -122,7 +122,7 @@ export function GetHoursMinutes(date: Date, locale: string, hours24Format: boole
         timeZone: tz
     }
 
-	params.timeZone = NormalizeTimezone(tz);;
+	params.timeZone = NormalizeTimezone(tz);
 
     if (!onlyHours)
         params.minute = "2-digit";

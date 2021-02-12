@@ -6,7 +6,7 @@ import { CelsiusToKelvin, GetDistance, mode, _ } from "./utils";
 
 export class DanishMI implements WeatherProvider {
     needsApiKey: boolean = false;
-    prettyName: string = "Danish MI";
+    prettyName: string = "DMI Denmark";
     name: Services = "DanishMI";
     maxForecastSupport: number = 10;
     maxHourlyForecastSupport: number = 48;

@@ -5,7 +5,7 @@ const utils_1 = require("./utils");
 class DanishMI {
     constructor(app) {
         this.needsApiKey = false;
-        this.prettyName = "Danish MI";
+        this.prettyName = "DMI Denmark";
         this.name = "DanishMI";
         this.maxForecastSupport = 10;
         this.maxHourlyForecastSupport = 48;

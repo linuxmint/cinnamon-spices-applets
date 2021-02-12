@@ -98,7 +98,6 @@ function GetHoursMinutes(date, locale, hours24Format, tz, onlyHours = false) {
         timeZone: tz
     };
     params.timeZone = NormalizeTimezone(tz);
-    ;
     if (!onlyHours)
         params.minute = "2-digit";
     return date.toLocaleString(locale, params);
