@@ -11,7 +11,7 @@ import { WeatherLoop } from "./loop";
 import { MetUk } from "./met_uk";
 import { WeatherData, WeatherProvider, LocationData, AppletError, CustomIcons, NiceErrorDetail, RefreshState, BuiltinIcons } from "./types";
 import { UI } from "./ui";
-import { AwareDateString, CapitalizeEveryWord, GenerateLocationText, NotEmpty, ProcessCondition, TempToUserConfig, UnitToUnicode, WeatherIconSafely, _ } from "./utils";
+import { AwareDateString, CapitalizeEveryWord, CapitalizeFirstLetter, GenerateLocationText, NotEmpty, ProcessCondition, TempToUserConfig, UnitToUnicode, WeatherIconSafely, _ } from "./utils";
 import { DarkSky } from "./darkSky";
 import { OpenWeatherMap } from "./openWeatherMap";
 import { USWeather } from "./us_weather";
@@ -168,7 +168,7 @@ export class WeatherApplet extends TextIconApplet {
 	}
 
 	private DisplayWeatherOnLabel(temperature: number, mainCondition: string) {
-		mainCondition = CapitalizeEveryWord(mainCondition)
+		mainCondition = CapitalizeFirstLetter(mainCondition)
 		let temp = TempToUserConfig(temperature, this.config.TemperatureUnit, this.config._tempRussianStyle);
 		// Applet panel label
 		let label = "";
