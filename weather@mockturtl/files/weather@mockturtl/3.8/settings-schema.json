@@ -409,7 +409,7 @@
 	},
 	"more-info-label": {
 		"type": "label",
-		"description": "For detailed information about the applet please go to the Spices Website by clicking the button below. You can also comment and ask a questions to the community at this page by logging in with your Github account. You can also find information about known issues, troubleshooting, changelog and more."
+		"description": "For detailed information about the applet please go to the Spices Website to find info about known issues, troubleshooting, changelog and more by clicking the button below. Here you can ask questions etc in the comment section by logging in with your Github account."
 	},
 	"submitIssue": {
 		"type": "button",
