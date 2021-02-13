@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-12 14:23+0000\n"
+"POT-Creation-Date: 2021-02-13 09:20+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1674,12 +1674,12 @@ msgstr ""
 
 #. 3.0->settings-schema.json->temperatureUnit->options
 #. 3.8->settings-schema.json->temperatureUnit->options
-msgid "celsius"
+msgid "Celsius"
 msgstr ""
 
 #. 3.0->settings-schema.json->temperatureUnit->options
 #. 3.8->settings-schema.json->temperatureUnit->options
-msgid "fahrenheit"
+msgid "Fahrenheit"
 msgstr ""
 
 #. 3.0->settings-schema.json->temperatureUnit->tooltip
@@ -2097,10 +2097,11 @@ msgstr ""
 #. 3.8->settings-schema.json->issue-reporting-explanation->description
 msgid ""
 "If you find an issue with this applet please make a report by clicking on "
-"the button below and login in with your Github account. Don't forget to "
-"write weather@mockturtl in the top Title field to make it easier for "
-"everyone to know that the issue is about the weather applet (the form is for"
-" all Cinnamon applets)."
+"the button below and login in with your Github account. Before you start "
+"writing please make sure that the issue is not already submitted in the "
+"issues section. Don't forget to write weather@mockturtl in the top Title "
+"field to make it easier for everyone to know that the issue is about the "
+"weather applet (the form is for all Cinnamon applets)."
 msgstr ""
 
 #. 3.8->settings-schema.json->loc-info->description

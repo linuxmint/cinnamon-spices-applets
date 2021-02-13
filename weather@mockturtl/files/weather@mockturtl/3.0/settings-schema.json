@@ -99,9 +99,9 @@
     "default": "automatic",
     "description": "Temperature unit",
     "options": {
-	    "Automatic": "automatic",
-      "celsius": "celsius",
-      "fahrenheit": "fahrenheit"
+	  "Automatic": "automatic",
+      "Celsius": "celsius",
+      "Fahrenheit": "fahrenheit"
     },
     "tooltip": "Automatic will try to guess your preference based your current display language."
   },

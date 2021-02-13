@@ -243,8 +243,8 @@
 		"description": "Temperature unit",
 		"options": {
 			"Automatic": "automatic",
-			"celsius": "celsius",
-			"fahrenheit": "fahrenheit"
+			"Celsius": "celsius",
+			"Fahrenheit": "fahrenheit"
 		},
 		"tooltip": "Automatic will try to guess your preference based your current display language."
 	},
@@ -424,7 +424,7 @@
 	},
 	"issue-reporting-explanation": {
 		"type": "label",
-		"description": "If you find an issue with this applet please make a report by clicking on the button below and login in with your Github account. Don't forget to write weather@mockturtl in the top Title field to make it easier for everyone to know that the issue is about the weather applet (the form is for all Cinnamon applets)."
+		"description": "If you find an issue with this applet please make a report by clicking on the button below and login in with your Github account. Before you start writing please make sure that the issue is not already submitted in the issues section. Don't forget to write weather@mockturtl in the top Title field to make it easier for everyone to know that the issue is about the weather applet (the form is for all Cinnamon applets)."
 	},
 	"loc-info": {
 		"type": "label",
