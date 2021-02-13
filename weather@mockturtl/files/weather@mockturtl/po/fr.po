@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: weather@mockturtl 3.0.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-01-31 15:37+0000\n"
-"PO-Revision-Date: 2021-02-10 21:05+0100\n"
+"PO-Revision-Date: 2021-02-13 13:29+0100\n"
 "Last-Translator: FabRCT <fab.rct@gmail.com>\n"
 "Language-Team: Français <ecyrbe@gmail.com>\n"
 "Language: fr\n"
@@ -1502,7 +1502,7 @@ msgstr "Météo"
 
 #. metadata.json->description
 msgid "View your local weather forecast"
-msgstr "Affiche les prévisions de votre région"
+msgstr "Affiche les prévisions météo de votre région"
 
 #. 3.0->settings-schema.json->head->description
 msgid "Settings for weather@mockturtl 3.0+"
@@ -1627,7 +1627,7 @@ msgstr "jours"
 #. 3.0->settings-schema.json->forecastDays->description
 #. 3.8->settings-schema.json->forecastDays->description
 msgid "Forecast length"
-msgstr "Étendue des prévisions"
+msgstr "Étendue des prévisions journalières"
 
 #. 3.0->settings-schema.json->forecastHours->units
 #. 3.8->settings-schema.json->forecastHours->units
