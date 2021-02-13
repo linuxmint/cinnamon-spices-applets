@@ -6,20 +6,20 @@
 .menu-favorites-button
 .menu-favorites-button:hover
 ---search box-----------------------------
-.menu-search-entry-icon
-.menu-search-box
+.menu-search-box (when the searchBox is the full width of the menu (i.e. when session button placement
+is left or right,)  the left padding and margin will be set by cinnamenu to equal it's respective right
+padding/margin value for symmetry)
 .menu-search-entry
+.menu-search-entry-icon
 ---categories box-------------------------
-.menu-categories-box
+.menu-categories-box (.menu-categories-box left padding will be limited to max 20px by cinnamenu)
 .menu-categories-scrollbox and .vfade
 .menu-category-button
 .menu-category-button-label
 .menu-category-button-selected
 .menu-category-button-greyed
-.menu-category-button-hover (or .menu-category-button-selected
-   if .menu-category-button-hover is not defined or defined earlier
-   in the css file. .menu-category-button-hover is used when "activate
-   categories on click" option is set.)
+.menu-category-button-hover (and .menu-category-button-selected.
+   .menu-category-button-hover is used when "activate categories on click" option is set.)
 ---applications box-----------------------
 .menu-applications-scrollbox or .vfade
 .menu-applications-inner-box (and .menu-applications-box for compatability with old themes)
@@ -29,22 +29,15 @@
 .menu-application-button:highlighted (used to highlight newly installed apps in list or grid view)
 .menu-application-button-selected:highlighted
 ---context menu---------------------------
-.menu-context-menu (or .menu)
+(.menu)
 ---whole menu-----------------------------
 .cinnamenu (or menu-background)
 .menu-applications-outer-box (and .menu-applications-box for compatability with old themes)
 */
 
-.menu-application-button:highlighted {
-    font-weight: bold;
-}
-.menu-application-button-selected:highlighted {
-    font-weight: bold;
-}
-
-.menu-category-button:highlighted {
-    font-weight: bold;
-}
+.menu-application-button:highlighted,
+.menu-application-button-selected:highlighted,
+.menu-category-button:highlighted,
 .menu-category-button-selected:highlighted {
     font-weight: bold;
 }
