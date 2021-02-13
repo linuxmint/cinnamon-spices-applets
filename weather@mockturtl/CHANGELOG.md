@@ -1,16 +1,24 @@
 # Changelog
 
+## 3.0.3
+
+* Fixes [#3508](https://github.com/linuxmint/cinnamon-spices-applets/issues/3508), just a minor issue with naming
+
+* Fixes [#3539](https://github.com/linuxmint/cinnamon-spices-applets/issues/3539) - Revert capitalisation of every word in the applet label.
+
+* Fix some text in the settings-schema, they didn't make much sense or were missing some explanations
+
+* Change Temperature units to be capitalized
+
 ## 3.0.2
 
 * Fix icons for Met Norway, some are missing
 
-* Reorganize settings, Add help text where it belongs, to the tooltips
+* Fixes [#3507](https://github.com/linuxmint/cinnamon-spices-applets/issues/3507) - Reorganize settings, Add help text where it belongs, to the tooltips
 
 * Add Danish Meteorologist Institute as a Weather Provider
 
-* Make sure French days are capitalized
-
-* Use Locale formatting for percent (humidity)
+* Fixes [#3538](https://github.com/linuxmint/cinnamon-spices-applets/issues/3538) - Make sure French days are capitalized and Use Locale formatting for percent (humidity)
 
 ## 3.0.1
 
