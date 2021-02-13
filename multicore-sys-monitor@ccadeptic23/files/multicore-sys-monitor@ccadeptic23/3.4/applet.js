@@ -234,6 +234,13 @@ MyApplet.prototype = {
     this.diskGraph.logScale = this.configSettings._prefs.disk.logscale;
 
     this.actor.add_actor(this.graphArea);
+
+    if (St.Widget.get_default_direction() === St.TextDirection.RTL) {
+      this._applet_tooltip._tooltip.set_style('text-align: right; font-family: monospace;');
+    } else {
+      this._applet_tooltip._tooltip.set_style('text-align: left; font-family: monospace;');
+    }
+    this.loopId = 0;
     this.loopId = Mainloop.timeout_add(this.configSettings._prefs.refreshRate, Lang.bind(this, this._update));
   },
 
@@ -283,6 +290,9 @@ MyApplet.prototype = {
   _update: function() {
     // This loops on interval, we need to make sure it stops when the xlet is removed.
     if (!this.networkProvider) {
+      if (this.loopId > 0) {
+        Mainloop.source_remove(this.loopId);
+      }
       this.loopId = 0;
       return false;
     }

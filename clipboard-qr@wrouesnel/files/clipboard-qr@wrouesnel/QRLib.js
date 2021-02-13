@@ -299,14 +299,14 @@ let encode = function(ver, mode, data, maxbuflen) {
 
 	switch (mode) {
 	case MODE_NUMERIC:
-		for (let i = 2; i < datalen; i += 3) {
+		for (var i = 2; i < datalen; i += 3) {
 			pack(parseInt(data.substring(i-2,i+1), 10), 10);
 		}
 		pack(parseInt(data.substring(i-2), 10), [0,4,7][datalen%3]);
 		break;
 
 	case MODE_ALPHANUMERIC:
-		for (let i = 1; i < datalen; i += 2) {
+		for (var i = 1; i < datalen; i += 2) {
 			pack(ALPHANUMERIC_MAP[data.charAt(i-1)] * 45 +
 				ALPHANUMERIC_MAP[data.charAt(i)], 11);
 		}
@@ -650,7 +650,7 @@ let generate = function(data, ver, mode, ecclevel, mask) {
 	return matrix;
 };
 
-let qr_generate = function(data, options) {
+var qr_generate = function(data, options) {
 	let MODES = {'numeric': MODE_NUMERIC, 'alphanumeric': MODE_ALPHANUMERIC,
 		'octet': MODE_OCTET};
 	let ECCLEVELS = {'L': ECCLEVEL_L, 'M': ECCLEVEL_M, 'Q': ECCLEVEL_Q,

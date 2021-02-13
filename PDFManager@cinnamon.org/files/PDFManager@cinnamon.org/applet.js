@@ -49,7 +49,7 @@ MyApplet.prototype = {
         Applet.IconApplet.prototype._init.call(this, orientation)
         try {
             this.set_applet_tooltip(_("Manage your PDF"))
-            this.set_applet_icon_name("gnome-mime-application-pdf")
+            this.set_applet_icon_symbolic_name("pdf-symbolic")
 
             this.menuManager = new PopupMenu.PopupMenuManager(this)
             this.menu = new Applet.AppletPopupMenu(this, orientation)

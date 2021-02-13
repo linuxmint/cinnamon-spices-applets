@@ -125,9 +125,9 @@ MyApplet.prototype = {
         });
         this._notification.setUrgency(MessageTray.Urgency.NORMAL);
         this._notification.setTransient(true);
-        this._notification.connect('destroy', function() {
+        this._notification.connect('destroy', Lang.bind(this, function() {
             this._notification = null;
-        });
+        }));
         this._source.notify(this._notification);
     },
 

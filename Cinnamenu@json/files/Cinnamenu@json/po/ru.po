@@ -5,8 +5,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Cinnamenu\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-31 01:03-0500\n"
-"PO-Revision-Date: 2017-03-22 11:10+0100\n"
+"POT-Creation-Date: 2020-07-17 12:34+0100\n"
+"PO-Revision-Date: 2020-07-20 08:10+0100\n"
 "Last-Translator: Ivan Komaritsyn <vantu5z@mail.ru>\n"
 "Language-Team: \n"
 "Language: ru\n"
@@ -15,436 +15,492 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Poedit 1.8.7.1\n"
+"X-Generator: Poedit 2.3.1\n"
 
-#: buttons.js:382
-msgid "Please provide your password to uninstall this application"
-msgstr "Пожалуйста, укажите ваш пароль для удаления этого приложения"
-
-#: buttons.js:1020
-msgid "Add to panel"
-msgstr "Добавить на панель"
-
-#: buttons.js:1022
-msgid "Add to desktop"
-msgstr "Добавить на Рабочий стол"
-
-#: buttons.js:1025
-msgid "Remove from favorites"
-msgstr "Удалить из Избранного"
-
-#: buttons.js:1027
-msgid "Add to favorites"
-msgstr "Добавить в Избранное"
-
-#: buttons.js:1029
-msgid "Uninstall"
-msgstr "Удалить"
-
-#: buttons.js:1031
-msgid "Run with NVIDIA GPU"
-msgstr "Запустить с NVIDIA GPU"
-
-#: buttons.js:1228 applet.js:2253
-msgid "List View"
-msgstr "В виде списка"
-
-#: buttons.js:1229 applet.js:2254
-msgid "Switch to list view"
-msgstr "Переключить на вид списка"
-
-#: buttons.js:1234 applet.js:2253
-msgid "Grid View"
-msgstr "В виде сетки"
-
-#: buttons.js:1235 applet.js:2254
-msgid "Switch to grid view"
-msgstr "Переключить на вид сетки"
-
-#: placeDisplay.js:57
-#, fuzzy, javascript-format
-msgid "Failed to launch \"%s\""
-msgstr "Не удалось запустить '%s'"
-
-#: placeDisplay.js:146
-msgid "Home"
-msgstr "Домашняя папка"
-
-#: placeDisplay.js:220
-msgid "Computer"
-msgstr "Компьютер"
-
-#: placeDisplay.js:224
-msgid "Browse network"
-msgstr "Обзор сети"
-
-#: applet.js:84
+#. 3.2 4.0
 msgid "Type to search..."
 msgstr "Введите запрос для поиска..."
 
-#: applet.js:149
+#. 3.2 4.0
 msgid "Initializing"
 msgstr ""
 
-#: applet.js:275
+#. 3.2 4.0
 msgid "No description available"
-msgstr ""
+msgstr "Нет доступного описания"
 
-#: applet.js:956
+#. 3.2 4.0
 msgid "All Applications"
 msgstr "Все приложения"
 
-#: applet.js:994
+#. 3.2 4.0
 msgid "Places"
 msgstr "Места"
 
-#: applet.js:995
+#. 3.2 4.0
 msgid "Recent Files"
 msgstr "Недавние файлы"
 
-#: applet.js:996
+#. 3.2 4.0
 msgid "Bookmarks"
 msgstr "Закладки"
 
-#: applet.js:997
+#. 3.2 4.0
 msgid "Favorite Apps"
 msgstr "Избранные приложения"
 
-#: applet.js:1282
+#. 3.2 4.0
 msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
 msgstr "gir1.2-gda-5.0, необходимый для закладок Firefox и Midori."
 
-#: applet.js:1362
+#. 3.2 4.0
 msgid "Clear List"
 msgstr "Очистить список"
 
-#: applet.js:1373
+#. 3.2 4.0
 msgid "No recent documents"
-msgstr ""
+msgstr "Нет последних документов"
 
-#: applet.js:2246
+#. 3.2
 msgid "Account details"
-msgstr ""
+msgstr "Детали учетной записи"
 
-#: applet.js:2260
+#. 3.2 3.2
+msgid "Grid View"
+msgstr "В виде сетки"
+
+#. 3.2 3.2
+msgid "List View"
+msgstr "В виде списка"
+
+#. 3.2 3.2
+msgid "Switch to grid view"
+msgstr "Переключить на вид сетки"
+
+#. 3.2 3.2
+msgid "Switch to list view"
+msgstr "Переключить на вид списка"
+
+#. 3.2 4.0
 msgid "Lock Screen"
 msgstr "Заблокировать экран"
 
-#: applet.js:2261
+#. 3.2 4.0
 msgid "Lock the screen"
-msgstr ""
+msgstr "Заблокировать экран"
 
-#: applet.js:2282
+#. 3.2 4.0
 msgid "Logout"
-msgstr ""
+msgstr "Выйти"
 
-#: applet.js:2283
+#. 3.2 4.0
 msgid "Leave the session"
-msgstr ""
+msgstr "Покинуть сессию"
 
-#: applet.js:2290
+#. 3.2 4.0
 msgid "Quit"
 msgstr "Выход"
 
-#: applet.js:2291
+#. 3.2 4.0
 msgid "Shutdown the computer"
 msgstr "Выключить компьютер"
 
+#. 3.2 4.0
+msgid "Home"
+msgstr "Домашняя папка"
+
+#. 3.2 4.0
+msgid "Computer"
+msgstr "Компьютер"
+
+#. 3.2 4.0
+msgid "Browse network"
+msgstr "Обзор сети"
+
+#. 3.2 4.0
+msgid "Run with NVIDIA GPU"
+msgstr "Запустить с NVIDIA GPU"
+
+#. 3.2 4.0
+msgid "Add to panel"
+msgstr "Добавить на панель"
+
+#. 3.2 4.0
+msgid "Add to desktop"
+msgstr "Добавить на Рабочий стол"
+
+#. 3.2 4.0
+msgid "Remove favorite"
+msgstr "Удалить любимую"
+
+#. 3.2 4.0
+msgid "Add to favorites"
+msgstr "Добавить в Избранное"
+
+#. 3.2 4.0
+msgid "Uninstall"
+msgstr "Удалить"
+
+#. 4.0 4.0
+msgid "Please wait..."
+msgstr "Пожалуйста, подождите..."
+
 #. metadata.json->name
-#. settings-schema.json->cinnamenuProvidersSection->title
+#. 3.2
 msgid "Cinnamenu"
 msgstr "Cinnamenu"
 
 #. metadata.json->description
 msgid ""
-"A flexible menu providing formatting options, web bookmarks, open window "
-"lookup, and search provider support with fuzzy searching."
+"A flexible menu providing formatting options, web bookmarks, search provider "
+"support and fuzzy searching."
+msgstr ""
+"Гибкое меню с параметрами форматирования, веб-закладками, поддержкой "
+"поставщиков поиска и нечетким поиском."
+
+#. metadata.json->comments
+msgid ""
+"Made possible thanks to the efforts of contributors to the Cinnamon menu, "
+"Gnomenu, and the contributors to projects they derived from."
 msgstr ""
 
-#. settings-schema.json->panel->title
+#. 3.2 4.0
 msgid "Behavior"
 msgstr "Поведение"
 
-#. settings-schema.json->appearance->title
+#. 3.2 4.0
 msgid "Appearance"
 msgstr "Оформление"
 
-#. settings-schema.json->menu->title
+#. 3.2 4.0
 msgid "Layout and Content"
-msgstr ""
+msgstr "Макет и содержание"
 
-#. settings-schema.json->providers->title
+#. 3.2
 msgid "Search Providers"
-msgstr ""
+msgstr "Поисковые провайдеры"
 
-#. settings-schema.json->extensionProvidersSection->title
+#. 3.2
 msgid "No search provider extensions found"
 msgstr ""
 
-#. settings-schema.json->panel-appear->title
-#. settings-schema.json->panel-behave->title
+#. 3.2 4.0
 msgid "Panel"
-msgstr ""
+msgstr "панель"
 
-#. settings-schema.json->menu-behave->title
-#. settings-schema.json->menu-icons->title
+#. 3.2 4.0
 msgid "Menu"
-msgstr ""
+msgstr "Меню"
 
-#. settings-schema.json->menu-layout->title
+#. 3.2 4.0
 msgid "Layout"
-msgstr ""
+msgstr "раскладка"
 
-#. settings-schema.json->menu-content->title
+#. 3.2 4.0
 msgid "Content"
-msgstr ""
+msgstr "содержание"
 
-#. settings-schema.json->privacy-settings-button->description
-#, fuzzy
-msgid "Toggle recent files"
-msgstr "Недавние файлы"
+#. 3.2 4.0
+msgid "Recent files settings"
+msgstr "Настройки последних файлов"
 
-#. settings-schema.json->privacy-settings-button->tooltip
-msgid "Press this button to customize your privacy settings."
-msgstr ""
-
-#. settings-schema.json->menu-editor-button->description
+#. 3.2 4.0
 msgid "Open the menu editor"
 msgstr "Открыть редактор меню"
 
-#. settings-schema.json->menu-editor-button->tooltip
-msgid "Press this button to customize your menu entries."
-msgstr ""
-
-#. settings-schema.json->resetCategoryOrder-button->description
+#. 3.2 4.0
 msgid "Reset category order"
-msgstr ""
+msgstr "Сбросить заказ категории"
 
-#. settings-schema.json->menu-icon-custom->description
+#. 3.2 4.0
 msgid "Use a custom icon"
 msgstr "Использовать свой значок"
 
-#. settings-schema.json->menu-icon-custom->tooltip
-msgid "Unchecking this allows the theme to set the icon"
-msgstr ""
+#. 3.2 4.0
+msgid "Use a custom icon in the panel"
+msgstr "Используйте пользовательский значок на панели"
 
-#. settings-schema.json->menu-icon->description
-msgid "Icon"
-msgstr "Значок"
+#. 3.2 4.0
+msgid "Panel icon"
+msgstr "Значок панели"
 
-#. settings-schema.json->menu-icon->tooltip
-msgid "Select an icon to show in the panel."
-msgstr "Выберите отображаемый на панели значок"
+#. 3.2 4.0
+msgid "Panel text"
+msgstr "Текст панели"
 
-#. settings-schema.json->menu-label->description
-#. settings-schema.json->menu-label->tooltip
-msgid "Set the custom menu button icon name"
-msgstr ""
+#. 3.2 4.0
+msgid "Text to show beside the panel icon"
+msgstr "Текст для отображения рядом со значком панели"
 
-#. settings-schema.json->category-icon-size->units
-#. settings-schema.json->apps-list-icon-size->units
-#. settings-schema.json->apps-grid-icon-size->units
+#. 3.2 4.0
 msgid "pixels"
 msgstr "пиксели"
 
-#. settings-schema.json->category-icon-size->description
-#. settings-schema.json->category-icon-size->tooltip
+#. 3.2 4.0
 msgid "Category icon size"
 msgstr "Размер значка категорий"
 
-#. settings-schema.json->apps-list-icon-size->description
-#. settings-schema.json->apps-list-icon-size->tooltip
+#. 3.2 4.0
 msgid "Applications list icon size"
 msgstr "Размер значков в списке приложений"
 
-#. settings-schema.json->apps-grid-icon-size->description
-#. settings-schema.json->apps-grid-icon-size->tooltip
+#. 3.2 4.0
 msgid "Applications grid icon size"
 msgstr "Размер значков в сетке приложений"
 
-#. settings-schema.json->overlay-key->description
+#. 3.2 4.0
 msgid "Keyboard shortcut to open and close the menu"
-msgstr ""
+msgstr "Сочетание клавиш для открытия и закрытия меню"
 
-#. settings-schema.json->activate-on-hover->description
-msgid "Open the menu when I move my mouse over it"
-msgstr "Открывать меню при наведении на него указателя"
+#. 3.2 4.0
+msgid "Open menu on hover"
+msgstr "Открыть меню при наведении"
 
-#. settings-schema.json->activate-on-hover->tooltip
-msgid "Enable opening the menu when the mouse enters the applet"
-msgstr ""
+#. 3.2 4.0
+msgid "Open the menu when I move my mouse over the panel icon"
+msgstr "Откройте меню, когда наведите курсор мыши на значок панели"
 
-#. settings-schema.json->hover-delay->units
-#. settings-schema.json->tooltip-delay->units
+#. 3.2 4.0
 msgid "milliseconds"
 msgstr "миллисекунды"
 
-#. settings-schema.json->hover-delay->description
-msgid "Menu hover delay:"
-msgstr ""
+#. 3.2 4.0
+msgid "Menu hover delay"
+msgstr "Задержка меню"
 
-#. settings-schema.json->hover-delay->tooltip
-msgid "Delay between switching categories"
-msgstr ""
-
-#. settings-schema.json->enable-animation->description
+#. 3.2 4.0
 msgid "Use menu animations"
 msgstr "Использовать анимацию меню"
 
-#. settings-schema.json->enable-animation->tooltip
-msgid "Allow the menu to animate on open and close"
-msgstr "Использовать анимацию меню при открытии и закрытии"
+#. 3.2 4.0
+msgid "Animate the menu on open and close"
+msgstr "Анимировать меню на открывать и закрывать"
 
-#. settings-schema.json->category-click->description
+#. 3.2 4.0
 msgid "Activate categories on click"
-msgstr ""
+msgstr "Активировать категории по клику"
 
-#. settings-schema.json->category-click->tooltip
-msgid ""
-"When enabled, category views are activated on click instead of on hover."
-msgstr ""
+#. 3.2 4.0
+msgid "Activate categories on click instead of on hover"
+msgstr "Активировать категории по клику, а не при наведении"
 
-#. settings-schema.json->enable-autoscroll->description
+#. 3.2 4.0
+msgid "Enable autoscrolling"
+msgstr "Включить автопрокрутку"
+
+#. 3.2 4.0
 msgid "Enable autoscrolling in application list"
 msgstr "Включить автопрокрутку в списке приложений"
 
-#. settings-schema.json->enable-autoscroll->tooltip
-msgid ""
-"Choose whether or not to enable smooth autoscrolling in the application list."
-msgstr ""
-
-#. settings-schema.json->enable-bookmarks->description
-#, fuzzy
+#. 3.2 4.0
 msgid "Show web bookmarks"
-msgstr "Показывать закладки и места"
+msgstr "Показать веб-закладки"
 
-#. settings-schema.json->enable-bookmarks->tooltip
-#, fuzzy
-msgid "Choose whether or not bookmarks are indexed in the menu."
-msgstr "Выберите, следует ли показывать закладки и места в меню."
+#. 3.2 4.0
+msgid "Show your browser's web bookmarks in the menu"
+msgstr "Показывать веб-закладки вашего браузера в меню"
 
-#. settings-schema.json->enable-windows->description
+#. 3.2
 msgid "Enable searching of open windows"
 msgstr ""
 
-#. settings-schema.json->enable-windows->tooltip
-#, fuzzy
-msgid "Choose whether or not open windows are indexed in menu searches."
-msgstr "Выберите, следует ли показывать закладки и места в меню."
-
-#. settings-schema.json->enable-search-providers->description
+#. 3.2 4.0
 msgid "Enable search providers"
-msgstr ""
+msgstr "Включить поисковые провайдеры"
 
-#. settings-schema.json->enable-search-providers->tooltip
-#, fuzzy
-msgid ""
-"Choose whether or not search provider results are indexed in menu searches."
-msgstr "Выберите, следует ли показывать закладки и места в меню."
+#. 3.2 4.0
+msgid "Include search provider results in searches"
+msgstr "Включить результаты поиска в результаты поиска"
 
-#. settings-schema.json->get-providers->description
+#. 3.2 4.0
 msgid "Example Search Providers"
-msgstr ""
+msgstr "Пример поиска поставщиков"
 
-#. settings-schema.json->startup-view-mode->description
-#. settings-schema.json->startup-view-mode->tooltip
+#. 3.2
 msgid "Startup applications view mode"
-msgstr ""
+msgstr "Режим просмотра запускаемых приложений"
 
-#. settings-schema.json->startup-view-mode->options
+#. 3.2 4.0
 msgid "List"
 msgstr "Список"
 
-#. settings-schema.json->startup-view-mode->options
+#. 3.2 4.0
 msgid "Grid"
 msgstr "Сетка"
 
-#. settings-schema.json->apps-grid-column-count->units
+#. 3.2 4.0
 msgid "columns"
 msgstr "колонки"
 
-#. settings-schema.json->apps-grid-column-count->description
-#. settings-schema.json->apps-grid-column-count->tooltip
+#. 3.2 4.0
 msgid "Number of columns in apps grid"
 msgstr "Номер колонки в сетке приложений"
 
-#. settings-schema.json->show-places->description
+#. 3.2 4.0
 msgid "Show bookmarks and places"
 msgstr "Показывать закладки и места"
 
-#. settings-schema.json->show-places->tooltip
-msgid "Choose whether or not to show bookmarks and places in the menu."
-msgstr "Выберите, следует ли показывать закладки и места в меню."
+#. 3.2 4.0
+msgid "Show bookmarks and places category in the menu"
+msgstr "Показать категорию закладок и мест в меню"
 
-#. settings-schema.json->show-application-icons->description
+#. 3.2 4.0
 msgid "Show application icons"
 msgstr "Показывать значки приложений"
 
-#. settings-schema.json->show-application-icons->tooltip
-msgid "Choose whether or not to show icons on applications."
-msgstr "Выбрать показывать или нет иконки в приложениях."
-
-#. settings-schema.json->show-category-icons->description
+#. 3.2 4.0
 msgid "Show category icons"
 msgstr "Показывать значки категорий"
 
-#. settings-schema.json->show-category-icons->tooltip
-msgid "Choose whether or not to show icons on categories."
-msgstr "Выбрать показывать или нет иконки в категориях."
-
-#. settings-schema.json->search-filesystem->description
-msgid "Enable filesystem path entry in search box"
-msgstr "Включить путь файловой системы в окне поиска"
-
-#. settings-schema.json->search-filesystem->tooltip
-msgid "Allows path entry in the menu search box."
-msgstr "Позволяет вводить путь в окне поиска меню."
-
-#. settings-schema.json->show-apps-description-on-buttons->description
-#, fuzzy
+#. 3.2
 msgid "Show application descriptions under titles"
-msgstr "Показать примечания к программам под их заголовком"
+msgstr "Показывать описания приложений под заголовками"
 
-#. settings-schema.json->show-apps-description-on-buttons->tooltip
-msgid ""
-"Choose whether or not to show the application description on the application "
-"buttons."
-msgstr ""
-"Выберите будут ли показываться примечания к программам под их заголовком"
-
-#. settings-schema.json->show-tooltips->description
+#. 3.2
 msgid "Show tooltips"
 msgstr ""
 
-#. settings-schema.json->show-tooltips->tooltip
-msgid ""
-"When enabled, tooltips containing the item's name or description is shown "
-"when hovered over."
-msgstr ""
-
-#. settings-schema.json->tooltip-delay->description
+#. 3.2
 msgid "Tooltip delay"
-msgstr ""
+msgstr "Задержка всплывающей подсказки"
 
-#. settings-schema.json->tooltip-delay->tooltip
-msgid ""
-"The delay time in milliseconds for tooltips when hovering over a menu item."
-msgstr ""
-
-#. settings-schema.json->enable-custom-menu-height->description
-#. settings-schema.json->enable-custom-menu-height->tooltip
-#, fuzzy
+#. 3.2 4.0
 msgid "Use a custom menu height"
-msgstr "Использовать свой значок"
+msgstr "Используйте настраиваемую высоту меню"
 
-#. settings-schema.json->custom-menu-height->units
+#. 3.2 4.0
 msgid "px"
-msgstr ""
+msgstr "px"
 
-#. settings-schema.json->custom-menu-height->description
-#. settings-schema.json->custom-menu-height->tooltip
+#. 3.2 4.0
 msgid "Custom menu height"
-msgstr ""
+msgstr "Пользовательская высота меню"
+
+#. 4.0
+msgid "Applications view mode"
+msgstr "Режим просмотра приложений"
+
+#. 4.0
+msgid "View applications as list or grid"
+msgstr "Просмотр приложений в виде списка или сетки"
+
+#. 4.0
+msgid "Application description placement"
+msgstr "Размещение описания приложения"
+
+#. 4.0
+msgid "Tooltips"
+msgstr "Всплывающие"
+
+#. 4.0
+msgid "Under titles"
+msgstr "Под заголовками"
+
+#. 4.0
+msgid "None"
+msgstr "Никто"
+
+#. 4.0
+msgid "Choose where to show application descriptions"
+msgstr "Выберите, где показывать описания приложений"
+
+#. 4.0
+msgid "Session buttons location"
+msgstr "Расположение кнопок сеанса"
+
+#. 4.0
+msgid "Top"
+msgstr "внизу"
+
+#. 4.0
+msgid "Bottom"
+msgstr "внизу"
+
+#. 4.0
+msgid "Left"
+msgstr "налево"
+
+#. 4.0
+msgid "Right"
+msgstr "направо"
+
+#. 4.0
+msgid "Choose where to show the session (quit, logout, etc.) buttons"
+msgstr "Выберите, где показывать кнопки сеанса (выход, выход и т. Д.)"
+
+#. 4.0
+msgid "Add favorites to session buttons"
+msgstr "Добавить избранное в кнопки сеанса"
+
+#. 4.0
+msgid "Show your favorite app icons next to the session buttons"
+msgstr "Покажите ваши любимые значки приложений рядом с кнопками сеанса"
+
+#, javascript-format
+#~ msgid "Failed to launch \"%s\""
+#~ msgstr "Не удалось запустить '%s'"
+
+#~ msgid "Remove from favorites"
+#~ msgstr "Удалить из Избранного"
+
+#, fuzzy
+#~ msgid "Toggle recent files"
+#~ msgstr "Недавние файлы"
+
+#~ msgid "Unchecking this allows the theme to set the icon"
+#~ msgstr "Снятие отметки позволяет теме установить значок"
+
+#~ msgid "Icon"
+#~ msgstr "Значок"
+
+#~ msgid "Set the custom menu button icon name"
+#~ msgstr "Установите имя значка кнопки пользовательского меню"
+
+#~ msgid "Enable opening the menu when the mouse enters the applet"
+#~ msgstr "Разрешить открытие меню при входе мыши в апплет"
+
+#~ msgid ""
+#~ "When enabled, category views are activated on click instead of on hover."
+#~ msgstr ""
+#~ "При включении просмотра категорий активируются по щелчку, а не при "
+#~ "наведении."
+
+#~ msgid ""
+#~ "Choose whether or not to enable smooth autoscrolling in the application "
+#~ "list."
+#~ msgstr ""
+#~ "Выберите, следует ли включить плавную автопрокрутку в списке приложений."
+
+#~ msgid "Choose whether or not bookmarks are indexed in the menu."
+#~ msgstr "Выберите, следует ли индексировать закладки в меню."
+
+#, fuzzy
+#~ msgid "Choose whether or not open windows are indexed in menu searches."
+#~ msgstr "Выберите, следует ли показывать закладки и места в меню."
+
+#~ msgid "Choose whether or not to show bookmarks and places in the menu."
+#~ msgstr "Выберите, следует ли показывать закладки и места в меню."
+
+#~ msgid "Choose whether or not to show icons on applications."
+#~ msgstr "Выбрать показывать или нет иконки в приложениях."
+
+#~ msgid "Choose whether or not to show icons on categories."
+#~ msgstr "Выбрать показывать или нет иконки в категориях."
+
+#~ msgid ""
+#~ "Choose whether or not to show the application description on the "
+#~ "application buttons."
+#~ msgstr ""
+#~ "Выберите будут ли показываться примечания к программам под их заголовком"
+
+#~ msgid "Please provide your password to uninstall this application"
+#~ msgstr "Пожалуйста, укажите ваш пароль для удаления этого приложения"
+
+#~ msgid "Enable filesystem path entry in search box"
+#~ msgstr "Включить путь файловой системы в окне поиска"
+
+#~ msgid "Allows path entry in the menu search box."
+#~ msgstr "Позволяет вводить путь в окне поиска меню."
 
 #~ msgid "Cinnamenu Settings"
 #~ msgstr "Настройки Cinnamenu"

@@ -7,7 +7,7 @@
     "type": "checkbox",
     "indent": true,
     "default": true,
-    "description": "Let regularly check if your applets are up to date",
+    "description": "Check regularly whether your applets are up to date",
     "tooltip": "If applets updates do not concern you, uncheck this box."
   },
   "check_new_applets": {
@@ -15,7 +15,7 @@
     "indent": true,
     "default": true,
     "dependency": "check_applets",
-    "description": "Let regularly check if new applets are available",
+    "description": "Check regularly whether new applets are available",
     "tooltip": "If new applets do not concern you, uncheck this box."
   },
   "btn_cs_applets": {
@@ -32,7 +32,7 @@
     "type": "checkbox",
     "indent": true,
     "default": true,
-    "description": "Let regularly check if your desklets are up to date",
+    "description": "Check regularly whether your desklets are up to date",
     "tooltip": "If desklets updates do not concern you, uncheck this box."
   },
   "check_new_desklets": {
@@ -40,7 +40,7 @@
     "indent": true,
     "default": true,
     "dependency": "check_desklets",
-    "description": "Let regularly check if new desklets are available",
+    "description": "Check regularly whether new desklets are available",
     "tooltip": "If new desklets do not concern you, uncheck this box."
   },
   "btn_cs_desklets": {
@@ -57,7 +57,7 @@
     "type": "checkbox",
     "indent": true,
     "default": true,
-    "description": "Let regularly check if your extensions are up to date",
+    "description": "Check regularly whether your extensions are up to date",
     "tooltip": "If extensions updates do not concern you, uncheck this box."
   },
   "check_new_extensions": {
@@ -65,7 +65,7 @@
     "indent": true,
     "default": true,
     "dependency": "check_extensions",
-    "description": "Let regularly check if new extensions are available",
+    "description": "Check regularly whether new extensions are available",
     "tooltip": "If new extensions do not concern you, uncheck this box."
   },
   "btn_cs_extensions": {
@@ -82,7 +82,7 @@
     "type": "checkbox",
     "indent": true,
     "default": true,
-    "description": "Let regularly check if your themes are up to date",
+    "description": "Check regularly whether your themes are up to date",
     "tooltip": "If themes updates do not concern you, uncheck this box."
   },
   "check_new_themes": {
@@ -90,7 +90,7 @@
     "indent": true,
     "default": true,
     "dependency": "check_themes",
-    "description": "Let regularly check if new themes are available",
+    "description": "Check regularly whether new themes are available",
     "tooltip": "If new themes do not concern you, uncheck this box."
   },
   "btn_cs_themes": {
@@ -104,13 +104,12 @@
     "description" : "General"
   },
   "general_frequency": {
-    "type": "spinbutton",
+    "type": "scale",
     "default": 1,
     "min": 1,
-    "max": 24,
+    "max": 720,
     "step": 1,
-    "units": "hours",
-    "description": "Time interval between two checks",
+    "description": "Time interval between two checks (hours)",
     "tooltip": "Please note that the first check will take place one minute after starting this applet."
   },
   "general_warning": {

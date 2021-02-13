@@ -16,6 +16,7 @@ const St = imports.gi.St; // ++
 const PopupMenu = imports.ui.popupMenu; // ++ Needed for menus
 const Lang = imports.lang; //  ++ Needed for menus
 const GLib = imports.gi.GLib; // ++ Needed for starting programs and translations
+const Util = imports.misc.util; // ++ Needed for spawn_async() with callback
 const Mainloop = imports.mainloop; // Needed for timer update loop
 const ModalDialog = imports.ui.modalDialog; // Needed for Modal Dialog used in Alert
 const Gettext = imports.gettext; // ++ Needed for translations
@@ -110,7 +111,8 @@ MyApplet.prototype = {
             this.cssfile = metadata.path + "/stylesheet.css"; // No longer required
             this.changelog = metadata.path + "/CHANGELOG.md";
             this.helpfile = metadata.path + "/README.md";
-            this.batteryscript = metadata.path + "/batteryscript.sh";
+            this.wait4cmd = false;
+            this.batteryPath = "";
             this.battery100 = metadata.path + "/icons/battery-100.png";
             this.battery080 = metadata.path + "/icons/battery-080.png";
             this.battery060 = metadata.path + "/icons/battery-060.png";
@@ -131,6 +133,9 @@ MyApplet.prototype = {
             UUID = metadata.uuid;
             Gettext.bindtextdomain(metadata.uuid, GLib.get_home_dir() + "/.local/share/locale");
 
+            this.set_applet_label(_("--%"));
+            this.set_applet_tooltip(_("Waiting"));
+
             this.nvidiagputemp = 0;
             this.flashFlag = true; // flag for flashing background
             this.flashFlag2 = true; // flag for second flashing background
@@ -149,16 +154,30 @@ MyApplet.prototype = {
                 this.textEd = "xdg-open";
             }
 
-            // Check that all Dependencies Met by presence of sox and zenity
-            if (GLib.find_program_in_path("sox") && GLib.find_program_in_path("zenity") ) {
+            // Check that all Dependencies Met by presence of upower, sox and zenity
+            if (GLib.find_program_in_path("upower") && GLib.find_program_in_path("sox") && GLib.find_program_in_path("zenity") ) {
                  this.dependenciesMet = true;
             } else {
                  let icon = new St.Icon({ icon_name: 'error',
                  icon_type: St.IconType.FULLCOLOR,
                  icon_size: 36 });
-                 Main.criticalNotify(_("Some Dependencies not Installed"), _("Both 'sox' and 'zenity' are required for this applet to have all its facilities including notifications and audible alerts .\n\nPlease read the help file on how to install them."), icon);
+                 Main.criticalNotify(_("Some Dependencies not Installed"), _("'upower', 'sox' and 'zenity' are required for this applet to have all its facilities including notifications and audible alerts .\n\nPlease read the help file on how to install them."), icon);
                  this.dependenciesMet = false;
             }
+
+            // Determine upower's path to battery
+            this.wait4cmd = true;
+            Util.spawn_async(["upower", "--enumerate"], Lang.bind(this, function(out) {
+                out = out.split("\n");
+                for(var n = 0; n < out.length - 1; n++) {
+                    let line = out[n].trim();
+                    if (line.indexOf("BAT") !== -1) {
+                        this.batteryPath = line;
+                        this.wait4cmd = false;
+                        break;
+                    }
+                }
+            }));
 
 /*
             // Set sound file locations as used in versions < 3.2
@@ -200,15 +219,8 @@ MyApplet.prototype = {
             this.buildContextMenu();
             this.makeMenu();
 
-            // Make sure the temp files are created
-
-            GLib.spawn_command_line_async('touch .batteryPercentage');
-            GLib.spawn_command_line_async('touch .batteryState');
-
             // Finally setup to start the update loop for the applet display running
 
-            this.set_applet_label(_(""));
-            this.set_applet_tooltip(_("Waiting"));
             this.on_settings_changed()   // This starts the MainLoop timer loop
 
         } catch (e) {
@@ -263,7 +275,7 @@ MyApplet.prototype = {
               this.batteryLowSound = this.batteryLowSound1;
               this.batteryShutdownSound = this.batteryShutdownSound1
          }
-         this.updateLoop();
+        this.updateLoop();
     },
 
     // ++ Null function called when Generic (internal) Setting changed
@@ -352,12 +364,30 @@ MyApplet.prototype = {
         this.menu.toggle();
     },
 
+    //++ Call-back for the delete temporary files button.
+    deleteTemporaryFiles: function() {
+        GLib.spawn_command_line_async('rm --force .batteryPercentage');
+        GLib.spawn_command_line_async('rm --force .batteryState');
+    },
+
     // This updates the numerical display in the applet and in the tooltip
-    updateUI: function() {
+    updateUI: function(out) {
 
         try {
-            this.batteryPercentage = GLib.file_get_contents(".batteryPercentage").toString();
-            this.batteryPercentage = this.batteryPercentage.trim().substr(5);
+            // Parse the upower command output
+            out = out.split("\n");
+            for (var n = 0; n < out.length - 1; n++) {
+                let tokens = out[n].split(":");
+                switch (tokens[0].trim()) {
+                    case "percentage":
+                        this.batteryPercentage = tokens[1].trim(); //.trimRight("%");
+                        this.batteryPercentage = this.batteryPercentage.substring(0, this.batteryPercentage.length - 1)
+                        break;
+                    case "state":
+                        this.batteryState = tokens[1].trim();
+                        break;
+                }
+            }
             this.batteryPercentage = Math.floor(this.batteryPercentage);
              // now check we have a genuine number otherwise use last value
             if ( ! ( this.batteryPercentage > 0 && this.batteryPercentage <= 100 )) {
@@ -365,9 +395,9 @@ MyApplet.prototype = {
             }
 //          Comment out following line when tests are complete
 //          this.batteryPercentage = this.batteryPercentage / 5 ;
-            this.batteryState = GLib.file_get_contents(".batteryState").toString();
-            if ( this.batteryState.trim().length > 6 ) {
-                 this.batteryState = this.batteryState.trim().substr(5);
+             if ( this.batteryState.length > 6 ) {
+// TODO: Why substr()?
+//                 this.batteryState = this.batteryState.substr(0, 5);
                  this.batteryStateOld = this.batteryState;
             } else {
                  this.batteryState =  this.batteryStateOld;
@@ -388,7 +418,7 @@ MyApplet.prototype = {
                     this.flashFlag = false;
                 } else {
                  if (this.batteryState.indexOf("discharg") > -1) {
-                     this.actor.style_class = 'bam-alert-discharging';
+                    this.actor.style_class = 'bam-alert-discharging';
                     this.flashFlag = true; // Corrected placement
                     }
                 }
@@ -435,37 +465,27 @@ If less than 4% then shutdown completely immediately.
 May be implemented in future version
 */
              // set Tooltip
-             this.set_applet_tooltip(_("Charge:") + " " + this.batteryPercentage + "% " + "(" + this.batteryState + ")" + " " + _("Alert:") + " " + Math.floor(this.alertPercentage) + "% "  + _("Suspend:") + " " + Math.floor(this.alertPercentage / 1.5)+ "%" ) ;
-             // Now select icon to dispaly
-             if (this.batteryPercentage == 100 && !this.batteryState.indexOf("discharg") > -1) {
-                  this.batteryIcon = this.batteryCharging100 }
-             if (this.batteryPercentage == 100 && this.batteryState.indexOf("discharg") > -1) {
-                  this.batteryIcon = this.battery100 }
-
-             if (this.batteryPercentage < 100 && this.batteryPercentage >= 80 && !this.batteryState.indexOf("discharg") > -1) {
-                  this.batteryIcon = this.batteryCharging080 }
-             if (this.batteryPercentage < 100  && this.batteryPercentage >= 80 && this.batteryState.indexOf("discharg") > -1) {
-                  this.batteryIcon = this.battery080 }
-
-             if (this.batteryPercentage < 80 && this.batteryPercentage >= 60 && !this.batteryState.indexOf("discharg") > -1) {
-        this.batteryIcon = this.batteryCharging060 }
-             if (this.batteryPercentage < 80  && this.batteryPercentage >= 60 && this.batteryState.indexOf("discharg") > -1) {
-                  this.batteryIcon = this.battery060 }
-
-             if (this.batteryPercentage < 60 && this.batteryPercentage >= Math.floor(this.alertPercentage) && !this.batteryState.indexOf("discharg") > -1) {
-                  this.batteryIcon = this.batteryCharging040 }
-if (this.batteryPercentage < 60  && this.batteryPercentage >= Math.floor(this.alertPercentage) && this.batteryState.indexOf("discharg") > -1) {
-                  this.batteryIcon = this.battery040 }
-
-             if (this.batteryPercentage < Math.floor(this.alertPercentage) && this.batteryPercentage >= Math.floor(this.alertPercentage / 1.5) && !this.batteryState.indexOf("discharg") > -1) {
-                  this.batteryIcon = this.batteryChargingCaution }
-             if (this.batteryPercentage < Math.floor(this.alertPercentage)  && this.batteryPercentage >= Math.floor(this.alertPercentage / 1.5) && this.batteryState.indexOf("discharg") > -1) {
-                  this.batteryIcon = this.batteryCaution }
-
-             if (this.batteryPercentage < Math.floor(this.alertPercentage / 1.5) && this.batteryPercentage >= 0 && !this.batteryState.indexOf("discharg") > -1) {
-                  this.batteryIcon = this.batteryChargingLow }
-             if (this.batteryPercentage < Math.floor(this.alertPercentage / 1.5)  && this.batteryPercentage >= 0 && this.batteryState.indexOf("discharg") > -1) {
-                  this.batteryIcon = this.batteryLow };
+             this.set_applet_tooltip(_("Charge:") + " " + this.batteryPercentage + "% (" + this.batteryState + ")\n" + _("Alert:") + " " + Math.floor(this.alertPercentage) + "%\n"  + _("Suspend:") + " " + Math.floor(this.alertPercentage / 1.5)+ "%" );
+             // Now select icon to display
+             if (this.batteryPercentage == 100) {
+                  if (this.batteryState.indexOf("discharg") > -1) this.batteryIcon = this.battery100;
+                  else                                            this.batteryIcon = this.batteryCharging100;
+             } else if (this.batteryPercentage >= 80) {
+                  if (this.batteryState.indexOf("discharg") > -1) this.batteryIcon = this.battery080;
+                  else                                            this.batteryIcon = this.batteryCharging080;
+             } else if (this.batteryPercentage >= 60) {
+                  if (this.batteryState.indexOf("discharg") > -1) this.batteryIcon = this.battery060;
+                  else                                            this.batteryIcon = this.batteryCharging060;
+             } else if (this.batteryPercentage >= Math.floor(this.alertPercentage)) {
+                  if (this.batteryState.indexOf("discharg") > -1) this.batteryIcon = this.battery040;
+                  else                                            this.batteryIcon = this.batteryCharging040;
+             } else if (this.batteryPercentage >= Math.floor(this.alertPercentage / 1.5)) {
+                  if (this.batteryState.indexOf("discharg") > -1) this.batteryIcon = this.batteryCaution;
+                  else                                            this.batteryIcon = this.batteryChargingCaution;
+             } else {
+                  if (this.batteryState.indexOf("discharg") > -1) this.batteryIcon = this.batteryLow;
+                  else                                            this.batteryIcon = this.batteryChargingLow;
+             }
 
              // Choose what to display based on Display Type from settings dropdown
              if (this.displayType == "classicPlus" || this.displayType == "compactPlus" ||this.displayType == "icon"  ) {
@@ -474,7 +494,7 @@ if (this.batteryPercentage < 60  && this.batteryPercentage >= Math.floor(this.al
                  this.hide_applet_icon();
              }
              if ( !(this.displayType == "classic" || this.displayType == "classicPlus") || !this.isHorizontal ) {
-    this.batteryMessage = ""
+                 this.batteryMessage = ""
              }
 
 
@@ -495,19 +515,22 @@ if (this.batteryPercentage < 60  && this.batteryPercentage >= Math.floor(this.al
             // Set left click menu item 'label' for slider
             this.menuitemInfo2.label.text = _("Percentage Charge:") + " " + this.batteryPercentage + "% " + "(" + this.batteryState + ")" + " " + _("Alert at:") + " "   + Math.floor(this.alertPercentage)+ "% " + _("Suspend at:") + " " + Math.floor(this.alertPercentage / 1.5)+ "%";
 
-            // Get temperatures via asyncronous script ready for next cycle
-            GLib.spawn_command_line_async('sh ' + this.batteryscript);
-
         } catch (e) {
             global.logError(e);
         }
+
+        this.wait4cmd = false;
+
     },
 
     // This is the loop run at refreshInterval rate to call updateUI() to update the display in the applet and tooltip
     updateLoop: function() {
-        this.updateUI();
         // Also inhibit when applet after has been removed from panel
         if (this.applet_running == true) {
+            if (!this.wait4cmd) {
+                this.wait4cmd = true;
+                Util.spawn_async(["upower", "--show-info", this.batteryPath], Lang.bind(this, this.updateUI));
+            }
             Mainloop.timeout_add_seconds(this.refreshInterval, Lang.bind(this, this.updateLoop));
         }
     },
@@ -633,5 +656,14 @@ Bug Fix for use with early versions of Cinnamon
   * Adds events-sounds property to soundfilechoser widget to allow any sound file to be selected under Cinnamon 4.2
   * Adds additional option to inhibit notifications when user selected audible alert is in use
    - closes feature request #2511
+### 1.4.0
+  * Removes dependency on 'batteryscript.sh'. This script writes two files on every update, maybe wearing out
+    the harddisk. Now it uses asyncronous calls to execute the 'upower' command directly and captures its output.
+  * Checks for dependency on 'upower'.
+  * Increases maximum refresh interval to 5 min (300 s).
+  * Simplification of the logic to select the icon to display.
+  * Removes (outdated) changelog.txt.
+### 1.4.1
+  * Updates README.md to stress audio file must be .oga mime type audio/x-vorbis+ogg - the mime type is crucial to it being recognised by the soundfilechoser widget
+  * Cinnamon versions up to 5.2
 */
-

@@ -1,5 +1,9 @@
 # VPN Look-Out Applet
 
+## Important!
+In order to be sure to download the latest version of VPN Lookout, use
+**[this link](https://cinnamon-spices.linuxmint.com/files/applets/vpnLookOut@claudiux.zip?67f17bb2-27e6-4ea7-8197-497fcbe291b1)** rather than the Download button at the top of this page.
+
 ## Summary
 
 This is a simple applet that I wrote because I often saw too late that my VPN (_Virtual Private Network_) was shut down.
@@ -30,9 +34,11 @@ When hovering over or click on the icon, the status of the VPN is displayed with
 The most important settings are accessible by the menu (by left or right click on applet icon) ; they are shown in bold in the list below. For all of them, see Settings in the Right Click Menu.
 
 Settings :
+
   * VPN Network Interface (default: tun0).
   * VPN Name (name of the connection, automatically filled in, you can change for other existing connection name).
   * Try (or don't try) to connect to VPN when this applet starts.
+  * Deactivate this applet at startup (only if the previous option is unchecked). This saves resources, but your connections and applications are no longer monitored. You can activate vpnLookOut from its menu, or using keyboard shortcut, or middle-clicking on its icon.
   * Try (or don't try) to reconnect to VPN when it shuts down incidentally.
   * Refresh Interval for Display (from 1 to 60 seconds).
   * Type of Display : Icon, with or without text 'VPN'.
@@ -44,6 +50,7 @@ Settings :
   * Log the status of the VPN link, and the status of the VPN-related Apps.
 
 The left click menu also contains:
+
   * A button to connect to (or disconnect from) the last VPN used. This button appears only if the option "Try to reconnect to VPN when it shuts down incidentally" is unchecked.
   * A list of all VPN connections available. Click on one of them to change of VPN connection ; it disconnects from actual (if any) and connects to new.
 

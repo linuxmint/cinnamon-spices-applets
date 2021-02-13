@@ -22,8 +22,14 @@ var DecimalPlaces = {
     THREE: 3
 }
 
+var SortColumn = {
+    BYTES_READ: 0,
+    BYTES_WRITTEN: 1,
+    OTHER: 2
+}
+
 var SortOrder = {
     ASCENDING: 0,
-    DESCENDING: 1,
+    DESCENDING: 1
 }
 

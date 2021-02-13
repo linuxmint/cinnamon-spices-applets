@@ -228,18 +228,23 @@ class QPopupItem extends PopupMenu.PopupBaseMenuItem {
 
 /** @exports QUtils.QPopupHeader */
 class QPopupHeader extends QPopupItem {
-    constructor({label = '', status = '', iconPath, iconSize = 32}) {
+    constructor({label = '', sub_label = '', status = '', iconPath, iconSize = 32}) {
         super({reactive: false});
         
         this._icon = new QIcon({icon_size: iconSize, icon_path: iconPath, icon_name: 'quintao'});
         
         this.addActor(this._icon.stIcon, {span: 0, expand: false});
         
-        
         this._label = new St.Label({text: label});
         this.addActor(this._label, {span: 0, expand: false});
         this._label.add_style_class_name('q-text-bigger');
         this._label.add_style_class_name('q-text-bold');
+        
+        this._sub_label = new St.Label({text: sub_label});
+        this._sub_label.add_style_class_name('q-text-smaller');
+        this.addActor(this._sub_label, {span: 0, expand: false});
+        // this._sub_label.add_style_class_name('q-text-bold');
+        
         
         this._statusText = new St.Label({text: status});
         this._statusText.add_style_class_name('q-text-smaller');
@@ -343,9 +348,9 @@ class QPopupSlider extends QPopupItem {
         this.addActor(this.infoText, {span: -1, expand: false, align: St.Align.END});
         
         
- 
         
- 
+        
+        
     }
     
     setValue(value) {
@@ -356,7 +361,7 @@ class QPopupSlider extends QPopupItem {
     }
     
     _setValueEmit(value) {
-        if (!Number.isInteger(this.STEP)) value  = value.toFixed(2);
+        if (!Number.isInteger(this.STEP)) value = value.toFixed(2);
         
         this._value = Math.max(Math.min(value, this.MAX), this.MIN);
         
@@ -390,11 +395,11 @@ class QPopupSlider extends QPopupItem {
         
         let sliderBorderColor = themeNode.get_color('-slider-border-color');
         // let sliderColor = themeNode.get_color('-slider-background-color');
-
-    
+        
+        
         let sliderActiveBorderColor = themeNode.get_color('-slider-active-border-color');
         // let sliderActiveColor = themeNode.get_color('-slider-active-background-color');
-    
+        
         let startColor = themeNode.get_color('-gradient-start');
         let endColor = themeNode.get_color('-gradient-end');
         

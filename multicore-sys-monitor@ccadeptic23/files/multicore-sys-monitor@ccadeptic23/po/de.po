@@ -27,7 +27,7 @@ msgid "Labels"
 msgstr "Beschriftungen"
 
 #: ../3.0/prefsui.glade.h:3 ../3.2/prefsui.glade.h:3 ../3.4/prefsui.glade.h:3
-msgid "Resfresh Rate (ms)"
+msgid "Refresh Rate (ms)"
 msgstr "Aktualisierungsrate (ms)"
 
 #: ../3.0/prefsui.glade.h:4 ../3.2/prefsui.glade.h:4
@@ -178,8 +178,8 @@ msgstr "Farbe der Beschriftungen"
 
 #: ../3.0/DataProviders.js:103 ../3.2/DataProviders.js:103
 #: ../3.4/DataProviders.js:123
-msgid "------- CPU -------"
-msgstr "------- Prozessor (CPU) -------"
+msgid "------------- CPU ------------"
+msgstr "------- Prozessor (CPU) ------"
 
 #: ../3.0/DataProviders.js:144 ../3.2/DataProviders.js:144
 #: ../3.4/DataProviders.js:138
@@ -188,7 +188,7 @@ msgstr "MEM"
 
 #: ../3.0/DataProviders.js:150 ../3.2/DataProviders.js:150
 #: ../3.4/DataProviders.js:158
-msgid "------- Memory -------"
+msgid "----------- Memory -----------"
 msgstr "------- Speicher (MEM) -------"
 
 #: ../3.0/DataProviders.js:151 ../3.2/DataProviders.js:151
@@ -217,8 +217,8 @@ msgstr "SWAP"
 
 #: ../3.0/DataProviders.js:186 ../3.2/DataProviders.js:186
 #: ../3.4/DataProviders.js:191
-msgid "------- Swap -------"
-msgstr "------- Swap (SWAP) -------"
+msgid "------------ Swap ------------"
+msgstr "--------- Swap (SWAP) --------"
 
 #: ../3.0/DataProviders.js:251 ../3.2/DataProviders.js:251
 #: ../3.4/DataProviders.js:202
@@ -227,7 +227,7 @@ msgstr "NET"
 
 #: ../3.0/DataProviders.js:292 ../3.2/DataProviders.js:292
 #: ../3.4/DataProviders.js:286
-msgid "------- Networks -------"
+msgid "---------- Networks ----------"
 msgstr "------- Networks (NET) -------"
 
 #: ../3.0/DataProviders.js:294 ../3.2/DataProviders.js:294
@@ -251,8 +251,8 @@ msgstr "DISK"
 
 #: ../3.0/DataProviders.js:394 ../3.2/DataProviders.js:394
 #: ../3.4/DataProviders.js:375
-msgid "------- Disks -------"
-msgstr "------- Festplatte (DISK) -------"
+msgid "------------ Disks -----------"
+msgstr "----- Festplatte (DISK) ------"
 
 #: ../3.0/DataProviders.js:396 ../3.2/DataProviders.js:396
 #: ../3.4/DataProviders.js:383

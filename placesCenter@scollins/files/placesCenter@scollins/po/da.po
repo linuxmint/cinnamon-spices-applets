@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-19 21:13-0700\n"
-"PO-Revision-Date: 2018-11-18 16:05+0100\n"
+"POT-Creation-Date: 2019-09-08 19:11+0200\n"
+"PO-Revision-Date: 2019-12-03 18:13+0100\n"
 "Last-Translator: Alan Mortensen <alanmortensen.am@gmail.com>\n"
 "Language-Team: \n"
 "Language: da\n"
@@ -18,43 +18,47 @@ msgstr ""
 "X-Generator: Poedit 2.0.6\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: applet.js:178
+#: applet.js:144
+msgid "(Right click to open folder)"
+msgstr "(Højreklik for at åbne mappen)"
+
+#: applet.js:166
 msgid "Places"
 msgstr "Steder"
 
-#: applet.js:291
+#: applet.js:281
 msgid "Search Home Folder"
 msgstr "Søg i mappen Hjem"
 
-#: applet.js:305
+#: applet.js:304
 msgid "SYSTEM"
 msgstr "SYSTEM"
 
-#: applet.js:314
+#: applet.js:313
 msgid "Search File System"
 msgstr "Søg i Filsystem"
 
-#: applet.js:330
+#: applet.js:338
 msgid "RECENT DOCUMENTS"
 msgstr "SENESTE DOKUMENTER"
 
-#: applet.js:344
+#: applet.js:352
 msgid "Clear"
 msgstr "Ryd"
 
-#: applet.js:388
+#: applet.js:395
 msgid "Computer"
 msgstr "Computer"
 
-#: applet.js:394
+#: applet.js:401
 msgid "File System"
 msgstr "Filsystem"
 
-#: applet.js:410
+#: applet.js:417
 msgid "Network"
 msgstr "Netværk"
 
-#: applet.js:513
+#: applet.js:554
 msgid "Trash"
 msgstr "Papirkurven"
 
@@ -129,6 +133,34 @@ msgstr "Springer over"
 #: search.py:259
 msgid " - direcotry already searched"
 msgstr " - allerede søgt i mappe"
+
+#. metadata.json->name
+msgid "Places Center"
+msgstr "Stedercenter"
+
+#. metadata.json->description
+msgid "Provides an easy-to-read layout to access your places"
+msgstr "Letlæseligt layout med adgang til dine steder"
+
+#. metadata.json->comments
+msgid ""
+"Places Center is a feature-rich, cross-platform Cinnamon applet that "
+"provides easy access to all of your most-used places. Feel free to "
+"contribute by submitting pull requests, bug reports and feature requests to "
+"my github repo."
+msgstr ""
+"Stedercenter er et Cinnamon-panelprogram med mange funktioner, som giver nem "
+"adgang til alle dine hyppigst brugte steder. Du er velkommen til at bidrage "
+"ved at indsende pull-anmodninger, fejlrapporter og ønsker til nye funktioner "
+"til mit github-arkiv."
+
+#. metadata.json->contributors
+msgid "Stephen Collins - Author"
+msgstr "Stephen Collins - forfatter"
+
+#. metadata.json->contributors
+msgid "kehugter - Added configurability to middle click"
+msgstr "kehugter - Tilføjede konfigurering af midterklik"
 
 #. settings-schema.json->generalPage->title
 msgid "General"
@@ -257,34 +289,38 @@ msgstr "Vis netværk"
 msgid "Show recent documents"
 msgstr "Vis seneste dokumenter"
 
+#. settings-schema.json->recentSizeLimit->options
+msgid "5"
+msgstr "5"
+
+#. settings-schema.json->recentSizeLimit->options
+msgid "10"
+msgstr "10"
+
+#. settings-schema.json->recentSizeLimit->options
+msgid "15"
+msgstr "15"
+
+#. settings-schema.json->recentSizeLimit->options
+msgid "20"
+msgstr "20"
+
+#. settings-schema.json->recentSizeLimit->options
+msgid "25"
+msgstr "25"
+
+#. settings-schema.json->recentSizeLimit->options
+msgid "30"
+msgstr "30"
+
+#. settings-schema.json->recentSizeLimit->options
+msgid "All Recent Documents"
+msgstr "Alle seneste dokumenter"
+
 #. settings-schema.json->recentSizeLimit->description
 msgid "Number to show"
 msgstr "Antal der skal vises"
 
-#. metadata.json->name
-msgid "Places Center"
-msgstr "Stedercenter"
-
-#. metadata.json->description
-msgid "Provides an easy-to-read layout to access your places"
-msgstr "Letlæseligt layout med adgang til dine steder"
-
-#. metadata.json->comments
-msgid ""
-"Places Center is a feature-rich, cross-platform Cinnamon applet that "
-"provides easy access to all of your most-used places. Feel free to "
-"contribute by submitting pull requests, bug reports and feature requests to "
-"my github repo."
-msgstr ""
-"Stedercenter er et Cinnamon-panelprogram med mange funktioner, som giver nem "
-"adgang til alle dine hyppigst brugte steder. Du er velkommen til at bidrage "
-"ved at indsende pull-anmodninger, fejlrapporter og ønsker til nye funktioner "
-"til mit github-arkiv."
-
-#. metadata.json->contributors
-msgid "Stephen Collins - Author"
-msgstr "Stephen Collins - forfatter"
-
-#. metadata.json->contributors
-msgid "kehugter - Added configurability to middle click"
-msgstr "kehugter - Tilføjede konfigurering af midterklik"
+#. settings-schema.json->btnPrivacy->description
+msgid "Privacy"
+msgstr "Privatliv"

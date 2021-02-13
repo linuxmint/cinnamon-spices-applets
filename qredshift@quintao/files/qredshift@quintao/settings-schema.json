@@ -1,7 +1,7 @@
 {
   "layout": {
     "type": "layout",
-    "pages": ["panel-options", "panel-location"],
+    "pages": ["panel-options", "panel-location", "panel-shortcuts"],
     
     "panel-options": {
       "type": "page",
@@ -19,6 +19,27 @@
         "location-section"
       ]
     },
+    "panel-shortcuts": {
+      "type": "page",
+      "title": "Shortcuts",
+      "sections": [
+        "keybind-section",
+        "info-section"
+      ]
+    },
+    
+    
+    
+    "info-section": {
+      "type": "section",
+      "title": "Tips",
+      "keys": [
+        "textTips",
+        "textHelp",
+        "textInfo"
+      ]
+    },
+    
     "opt-section": {
       "type": "section",
       "title": "Options",
@@ -28,7 +49,8 @@
         "autoUpdateInterval",
         "adjustmentMethod",
         "labelScrollAction",
-        "iconLabel"
+        "iconLabel",
+        "symbolicIcon"
       ]
     },
     
@@ -50,6 +72,18 @@
       ]
     },
     
+    "keybind-section": {
+      "type": "section",
+      "title": "Key Bindings",
+      "keys": [
+        "keyToggle",
+        "keyBrightnessUp",
+        "keyBrightnessDown",
+        "keyTempUp",
+        "keyTempDown"
+      ]
+    },
+    
     "location-section": {
       "type": "section",
       "title": "Location Settings",
@@ -66,17 +100,17 @@
   },
   "autoUpdate": {
     "type": "checkbox",
-    "default": false,
+    "default": true,
     "description": "Auto Update",
     "tooltip": "Continuously adjust color temperature"
   },
   "autoUpdateInterval": {
     "type": "spinbutton",
     "dependency": "autoUpdate=true",
-    "default": 5,
-    "min": 1,
-    "max": 60,
-    "units": "Sec",
+    "default": 30,
+    "min": 5,
+    "max": 1800,
+    "units": "Sec.",
     "step": 1,
     "description": "Update interval"
   },
@@ -106,8 +140,42 @@
   },
   "iconLabel": {
     "type": "checkbox",
-    "default": false,
+    "default": true,
     "description": "Show Label"
+  },
+  "symbolicIcon": {
+    "type": "checkbox",
+    "default": false,
+    "description": "Use symbolic icon"
+  },
+  
+  "keyToggle": {
+    "type": "keybinding",
+    "description": "On/Off",
+    "default": "<Control>End"
+  },
+  
+  "keyBrightnessUp": {
+    "type": "keybinding",
+    "description": "Increase brightness level",
+    "default": "<Control>Page_Up"
+  },
+  
+  "keyBrightnessDown": {
+    "type": "keybinding",
+    "description": "Decrease brightness level",
+    "default": "<Control>Page_Down"
+  },
+  "keyTempUp": {
+    "type": "keybinding",
+    "description": "Increase temperature level",
+    "default": "<Control><Shift>Page_Up"
+  },
+  
+  "keyTempDown": {
+    "type": "keybinding",
+    "description": "Decrease temperature level",
+    "default": "<Control><Shift>Page_Down"
   },
   "dayTemp": {
     "type": "spinbutton",
@@ -115,7 +183,7 @@
     "min": 1000,
     "max": 9000,
     "units": "K",
-    "step": 50,
+    "step": 1,
     "description": "Temperature"
   },
   "dayBrightness": {
@@ -130,7 +198,7 @@
   "gammaMix": {
     "type": "spinbutton",
     "default": 1,
-    "min": 1,
+    "min": 0.5,
     "max": 5,
     "units": "",
     "step": 0.01,
@@ -149,7 +217,7 @@
     "min": 1000,
     "max": 9000,
     "units": "K",
-    "step": 50,
+    "step": 1,
     "description": "Temperature"
   },
   "nightBrightness": {
@@ -188,6 +256,18 @@
   },
   "aboutLocation": {
     "type": "label",
-    "description": "Native geoclue on redshift can make the experience slow.\nUsing: https://geoip-db.com/"
+    "description": "Native geoclue on redshift can make the experience slow.\nUsing: https://geolocation-db.com/"
+  },
+  "textTips": {
+    "type": "label",
+    "description": "* Right-click the sliders to reset the default (neutral) value."
+  },
+  "textHelp": {
+    "type": "label",
+    "description": "When update to a new version make sure you reset the configs to default by deleting the ~/.cinnamon/configs/qredshift@quintao/qredshift@quintao.json.\n You will lost all your configs."
+  },
+  "textInfo": {
+    "type": "label",
+    "description": "If you like and use this applet take the time to visit it's page on Cinnamon Spices and give it a star. You only need a github account to do this."
   }
 }

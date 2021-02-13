@@ -49,29 +49,41 @@
 <ul>
 <li>vous avertit dès lors que des Spices que vous avez installées disposent d'une mise à jour ;</li>
 <li>peut vous avertir, si vous le désirez, lorsque de nouvelles Spices sont disponibles ;</li>
-<li>vous donne un accès direct aux Paramètres système des Applets, Desklets, Extensions et Thèmes.</li>
+<li>vous donne un accès direct aux Paramètres système des Applets, Desklets, Extensions et Thèmes ;</li>
+<li>Et à partir de Cinnamon 3.8 :
+<ul>
+<li>vous permet de renouveler le téléchargement de la dernière version d'une Spice ;</li>
+<li>vous garantit de télécharger réellement la toute dernière version d'une Spice ;</li>
+<li>vous permet d'ignorer complètement les mises à jour disponibles pour les Spices que vous voulez préserver ;</li>
+<li>vous permet, d'un clic-molette sur son icône, de forcer le rafraîchissement des données à propos des nouvelles Spices et des mises à jour disponibles, ou d'ouvrir toutes les fenêtres nécessaires pour effectuer ces mises à jour.</li>
+</ul>
+</li>
 </ul>
 <h2>
 <a id="user-content-état" class="anchor" href="#%C3%A9tat" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>État</h2>
-<p>Disponible de Cinnamon 2.8 à Cinnamon 4.2.</p>
-<p>Cette applet est active, c'est-à-dire développée et utilisée par l'auteur sur plusieurs machines fonctionnant sous <strong>Linux Mint</strong>, <strong>Fedora</strong> ou <strong>Archlinux</strong>.</p>
+<p>Disponible de Cinnamon 2.8 à Cinnamon 4.4.</p>
+<p>Cette applet est active, c'est-à-dire développée et utilisée par l'auteur sur plusieurs machines fonctionnant sous <strong>Linux Mint</strong>, <strong>Fedora</strong>, <strong>Archlinux</strong> ou <strong>Debian 10</strong>.</p>
 <p>À partir de la version v3.0.0 ~ 20190808:</p>
 <ul>
 <li>Spices Update est compatible avec Cinnamon 2.8 -&gt; 4.2 (Mint 17.3 -&gt; 19.2).</li>
-<li>De Cinnamon 3.8 à 4.2 (Mint 19 à 19.2): <strong>Parfaitement fonctionnel, comme d'habitude.</strong>
+<li>De Cinnamon 3.8 à 4.4 (Mint 19 à 19.3): <strong>Parfaitement fonctionnel, comme d'habitude.</strong>
 </li>
-<li>De Cinnamon 2.8 à 3.6 (Mint 17.3 à 18.3): certaines fonctionnalités sont réduites:</li>
+<li>De Cinnamon 2.8 à 3.6 (Mint 17.3 à 18.3): certaines fonctionnalités sont réduites:
+<ul>
 <li>La fenêtre de configuration des Spices ne s'ouvre pas sur le deuxième onglet, mais sur le premier. Vous devrez cliquer sur le deuxième onglet et sélectionner vous-même le tri par date.</li>
 <li>La fenêtre Paramètres de cet applet ne contient aucun onglet.</li>
 <li>Dans les paramètres de cette applet, vous ne pouvez pas accéder aux listes des Spices pour désactiver leur surveillance. Par conséquent, toutes les Spices installées sont surveillées.</li>
 <li>Le script <code>generate_mo.sh</code> (dans le dossier <code>scripts</code>) vous permet d'installer toutes les traductions disponibles. Redémarrez Cinnamon après l'exécution de ce script.</li>
 <li>Si la police <code>Symbola_Hinted</code> ne peut pas s'installer automatiquement, placez-vous dans le dossier <code>fonts/symbola</code> et double-cliquez sur le fichier <code>Symbola_Hinted.ttf</code>. Installez-la avec l'application <code>gnome-font-viewer</code> qui vient de s'ouvrir.</li>
 </ul>
+</li>
+</ul>
 <p>L'auteur est ouvert à toute suggestion d'amélioration.</p>
 <h2>
 <a id="user-content-dépendances" class="anchor" href="#d%C3%A9pendances" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Dépendances</h2>
 <p>Spices Update nécessite l'installation de l'outil <code>notify-send</code> et de la police de caractères <code>symbola</code> (de type TrueType).</p>
-<p>Pour les installer :</p>
+<p><strong>Cette applet vous aide à installer ces dépendances, si besoin.</strong> En effet, lors de son lancement, l'applet Spice Update vérifie que ces dépendances sont bien installées. Si ce n'est pas le cas, elle vous propose de les installer.</p>
+<p>Pour les installer <em>manuellement</em> :</p>
 <ul>
 <li>Fedora: <code>sudo dnf install libnotify gdouros-symbola-fonts</code>
 </li>
@@ -92,7 +104,6 @@
 </ul>
 </li>
 </ul>
-<p><strong>Cette applet vous aide à installer ces dépendances, si besoin.</strong> En effet, lors de son lancement, l'applet Spice Update vérifie que ces dépendances sont installées. Si ce n'est pas le cas, elle vous propose de les installer.</p>
 <h2>
 <a id="user-content-configuration" class="anchor" href="#configuration" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Configuration</h2>
 <p>La fenêtre de configuration dispose de cinq onglets.</p>
@@ -105,13 +116,14 @@
 </li>
 </ul>
 <p><a href="https://github.com/claudiux/docs/raw/master/SpicesUpdate/images/System_Settings_Applets-fr.png" target="_blank" rel="noopener noreferrer"><img src="https://github.com/claudiux/docs/raw/master/SpicesUpdate/images/System_Settings_Applets-fr.png" alt="system_settings_applet" style="max-width:100%;"></a></p>
-<p>Quant au contenu des autres onglets (<em>Applets</em>, <em>Desklets</em>, etc), veuillez consulter la capture d'écran ci-dessous et noter que <strong>la liste des Spices installées est automatiquement remplie</strong> au démarrage, mais qu'un bouton <em>Rafraîchir</em> vous permet de la recharger.</p>
-<p><a href="https://github.com/claudiux/docs/raw/master/SpicesUpdate/images/Settings_Spices_Update_Applets-fr.png" target="_blank" rel="noopener noreferrer"><img src="https://github.com/claudiux/docs/raw/master/SpicesUpdate/images/Settings_Spices_Update_Applets-fr.png" alt="settings_spices_update_applets" style="max-width:100%;"></a></p>
-<p>Réglez sur <em>FALSE</em> (ou décochez à partir de Cinnamon 4.2) toutes les Spices dont vous ne voulez pas vérifier les mises à jour. Il y a au moins deux raisons à cela:</p>
+<p>Quant au contenu des autres onglets (<em>Applets</em>, <em>Desklets</em>, etc), veuillez consulter la capture d'écran ci-dessous et noter que <strong>la liste des Spices installées est automatiquement remplie</strong> au démarrage, mais qu'un bouton <em>Actualiser</em> vous permet de la recharger (et de rechercher de nouvelles mises à jour).</p>
+<p>Réglez sur <em>FALSE</em> le premier commutateur (ou décochez-le à partir de Cinnamon 4.2) de toutes les Spices dont vous ne voulez pas vérifier les mises à jour. Il y a au moins deux raisons à cela:</p>
 <ul>
 <li>Une Spice vous convient pleinement et vous ne voulez pas être averti d'un quelconque changement la concernant.</li>
-<li>Vous êtes un développeur travaillant sur une Spice et vous ne souhaitez pas être informé de quelque modification que ce soit durant son développement.</li>
+<li>Vous êtes un développeur travaillant sur une Spice et vous souhaitez qu'elle soit protégée durant son développement.</li>
 </ul>
+<p>À partir de Cinnamon 3.8, pour re-télécharger la dernière version d'une Spice, cochez ses deux cases (ou positionnez à TRUE ses deux commutateurs) puis cliquez sur le bouton <em>Actualiser</em>.</p>
+<p><a href="https://github.com/claudiux/docs/raw/master/SpicesUpdate/images/Settings_Spices_Update_Applets-fr.png" target="_blank" rel="noopener noreferrer"><img src="https://github.com/claudiux/docs/raw/master/SpicesUpdate/images/Settings_Spices_Update_Applets-fr.png" alt="settings_spices_update_applets" style="max-width:100%;"></a></p>
 <h2>
 <a id="user-content-menu" class="anchor" href="#menu" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Menu</h2>
 <p>Dans le menu de Spices Update (accessible par un clic sur son icône) :</p>
@@ -119,13 +131,27 @@
 <li>un bouton Actualiser vous permet de forcer la vérification de la disponibilité des mises à jour pour vos Spices;</li>
 <li>un point apparaît devant chaque type de Spices lorsqu'au moins une mise à jour est disponible;</li>
 <li>un clic sur un type de Spices (applets, desklets, etc.) ouvre l'onglet de téléchargement de la page correspondante dans les paramètres de Cinnamon, avec les Spices triées par date décroissante (les plus récentes en premier);</li>
-<li>lorsque de nouvelles Spices sont disponibles, une option <em>Oublier les nouveautés</em> apparaît; en cliquant dessus, ces notifications de nouvelles Spices seront effacées jusqu'à l'arrivée d'autres;</li>
+<li>lorsque de nouvelles Spices sont disponibles :
+<ul>
+<li>une option <em>Oublier les nouveautés</em> apparaît; en cliquant dessus, ces notifications de nouvelles Spices seront effacées jusqu'à l'arrivée d'autres;</li>
+</ul>
+</li>
+<li>lorsque de nouvelles Spices ou des mises à jour sont disponibles :
+<ul>
+<li>une option_Ouvrir les Paramètres système utiles_ (pour effectuer les mises à jour) apparaît;</li>
+</ul>
+</li>
 <li>Un bouton <em>Configurer...</em> ouvre la fenêtre de configuration de Spices Update.</li>
 </ul>
 <h2>
 <a id="user-content-icône" class="anchor" href="#ic%C3%B4ne" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Icône</h2>
 <p>La couleur de l'icône change lorsqu'au moins une de vos Spices nécessite une mise à jour, ou lorsqu'une nouveauté est signalée.</p>
-<p>Son infobulle (le message affiché lorsque l'icône est survolé) contient la liste des Spices à mettre à jour et/ou des nouveautés.</p>
+<p>Depuis Cinnamon 3.8, l'icône de cette applet tourne et sa couleur s'assombrit tandis que le rafraîchissement des données s'effectue.</p>
+<p>Un <strong><em>Clic-Molette</em></strong> (ou clic central) sur l'cône de cette applet :</p>
+<ul>
+<li>Effectue une actualisation des données tant qu'aucune mise à jour n'est signalée (comme un clic sur Actualiser).</li>
+<li>Ouvre tous les paramètres système utiles aux mises à jour, lorsque certaines sont signalées.</li>
+</ul>
 <p><a href="https://github.com/claudiux/docs/raw/master/SpicesUpdate/images/hovering_icon-fr.png" target="_blank" rel="noopener noreferrer"><img src="https://github.com/claudiux/docs/raw/master/SpicesUpdate/images/hovering_icon-fr.png" alt="hovering_icon" style="max-width:100%;"></a></p>
 <h2>
 <a id="user-content-notifications" class="anchor" href="#notifications" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Notifications</h2>
@@ -136,14 +162,36 @@
 <p><a href="https://github.com/claudiux/docs/raw/master/SpicesUpdate/images/notif_simple_with_details-fr.png" target="_blank" rel="noopener noreferrer"><img src="https://github.com/claudiux/docs/raw/master/SpicesUpdate/images/notif_simple_with_details-fr.png" alt="notif_simple_with_details" style="max-width:100%;"></a></p>
 <h3>
 <a id="user-content-notifications-avec-boutons" class="anchor" href="#notifications-avec-boutons" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Notifications avec boutons</h3>
-<p>Deux boutons sont présents : l'un pour ouvrir la page Paramètres système afin de télécharger les mises à jour ; l'autre pour actualiser la notification afin d’obtenir des détails, le cas échéant.</p>
-<p>Ici sans les détails :</p>
-<p><a href="https://github.com/claudiux/docs/raw/master/SpicesUpdate/images/notif_without_details-fr.png" target="_blank" rel="noopener noreferrer"><img src="https://github.com/claudiux/docs/raw/master/SpicesUpdate/images/notif_without_details-fr.png" alt="notif_without_details" style="max-width:100%;"></a></p>
-<p>Après actualisation, le motif de la mise à jour apparaît :</p>
+<p>Deux boutons sont présents : l'un pour ouvrir la page Paramètres système afin de télécharger les mises à jour ; l'autre pour actualiser les notifications.</p>
 <p><a href="https://github.com/claudiux/docs/raw/master/SpicesUpdate/images/notif_with_details2-fr.png" target="_blank" rel="noopener noreferrer"><img src="https://github.com/claudiux/docs/raw/master/SpicesUpdate/images/notif_with_details2-fr.png" alt="notif_with_details" style="max-width:100%;"></a></p>
 <h2>
 <a id="user-content-traductions" class="anchor" href="#traductions" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Traductions</h2>
 <p>Toute traduction est la bienvenue. Merci de contribuer en traduisant les messages de l'applet dans de nouvelles langues ou en améliorant/complétant les traductions existantes.</p>
+<h3>
+<a id="user-content-traductions-disponibles-et-leurs-auteurs" class="anchor" href="#traductions-disponibles-et-leurs-auteurs" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Traductions disponibles et leurs auteurs</h3>
+<ul>
+<li>Croate (hr): muzena</li>
+<li>Néerlandais (nl): Jurien (French77)</li>
+<li>Finnois (fi): MahtiAnkka</li>
+<li>Français (fr): claudiux</li>
+<li>Allemand (de): Mintulix</li>
+<li>Italien (it): Dragone2</li>
+<li>Espagnol (es): claudiux</li>
+<li>Suédois (sv): Åke Engelbrektson (eson57)</li>
+</ul>
+<p>Un grand merci à eux !</p>
+<h3>
+<a id="user-content-comment-proposer-une-traduction" class="anchor" href="#comment-proposer-une-traduction" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Comment proposer une traduction</h3>
+<ol>
+<li>Créer un compte sur <a href="https://github.com/">Github</a>.</li>
+<li>Faire un Fork du dépôt <a href="https://github.com/linuxmint/cinnamon-spices-applets">cinnamon-spices-applets</a>.</li>
+<li>Dans votre fork, créer une branche (la nommer comme <code>SpicesUpdate-CODE_LANGUE</code>) à partir de la branche master.</li>
+<li>Sur votre ordinateur, installer <code>git</code> et <code>poedit</code>.</li>
+<li>Cloner votre branche sur votre ordinateur : <code>git clone -b SpicesUpdate-CODE_LANGUE --single-branch https://github.com/VOTRE_COMPTE_GITHUB/cinnamon-spices-applets.git SpicesUpdate-CODE_LANGUE</code>
+</li>
+<li>Ouvrir le fichier <code>SpicesUpdate@claudiux.pot</code> (qui est dans le dossier <code>po</code>) avec poedit et créer votre traduction. Vous obtenez une fichier CODE_LANGUE.po.</li>
+<li>Sur Github, envoyer le fichier <code>CODE_LANGUE.po</code> au bon endroit dans votre branche puis aller à la racine de votre branche et faire un Pull Request.</li>
+</ol>
 <h2>
 <a id="user-content-installation" class="anchor" href="#installation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installation</h2>
 <h3>
@@ -153,7 +201,7 @@
 <a id="user-content-installation-manuelle-" class="anchor" href="#installation-manuelle-" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installation manuelle :</h3>
 <ul>
 <li>Installer les programmes supplémentaires requis.</li>
-<li>Télécharger Spices Update à partir du <a href="https://cinnamon-spices.linuxmint.com/applets/view/309" rel="nofollow">site web des Spices</a>.</li>
+<li>Télécharger la <a href="https://cinnamon-spices.linuxmint.com/files/applets/SpicesUpdate@claudiux.zip?04831377-cbe4-482d-b035-b8ce9349632e" rel="nofollow">dernière version de Spices Update</a>.</li>
 <li>Décompresser et extraire le dossier <code>SpicesUpdate@claudiux</code> dans <code> ~/.local/share/cinnamon/applets/</code>
 </li>
 <li>Activer cette applet dans Paramètres système -&gt; Applets.</li>
@@ -161,8 +209,8 @@
 </ul>
 <h2>
 <a id="user-content-une-étoile-pour-remercier-lauteur" class="anchor" href="#une-%C3%A9toile-pour-remercier-lauteur" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Une Étoile pour remercier l'auteur</h2>
-<p>Si vous appréciez les services rendus par Spices Update, n'offrez ni argent ni café à l'auteur, mais connectez-vous et cliquez sur l'étoile en haut de <a href="https://cinnamon-spices.linuxmint.com/applets/view/309#" rel="nofollow">cette page</a>.</p>
-<p>Merci beaucoup.</p>
+<p>Si vous appréciez les services rendus par Spices Update, n'offrez ni argent ni café à l'auteur, mais connectez-vous et cliquez sur l'étoile en haut de <strong><a href="https://cinnamon-spices.linuxmint.com/applets/view/309" rel="nofollow">cette page</a></strong>.</p>
+<p>Merci à vous.</p>
 
               </article>
             </div>

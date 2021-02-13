@@ -4,7 +4,8 @@
         "pages" : [
             "general-page",
             "graph-page",
-            "alerts-page"
+            "alerts-page",
+            "advanced-page"
         ],
         "general-page" : {
             "type" : "page",
@@ -29,21 +30,31 @@
                 "alerts-delta-section"
             ]
         },
+        "advanced-page" : {
+            "type" : "page",
+            "title" : "Advanced",
+            "sections" : [
+                "advanced-currency-section"
+            ]
+        },
         "currency-section" : {
             "type" : "section",
             "title" : "Currency",
             "keys" : [
+                "amount",
                 "currency",
                 "ticker",
                 "show-ticker-icon",
                 "show-ticker-name",
-                "show-currency"
+                "show-currency",
+                "rates-update-interval"
             ]
         },
         "graph-section" : {
             "type" : "section",
             "title" : "Graph",
             "keys" : [
+                "graph-type",
                 "graph-unit",
                 "graph-length",
                 "graph-width",
@@ -80,7 +91,23 @@
                 "alert-delta-update-interval"
             ],
             "dependency": "alert-enable"
+        },
+        "advanced-currency-section" : {
+            "type": "section",
+            "title": "Currency",
+            "keys": [
+                "currency-format-enable",
+                "currency-format-symbol",
+                "currency-format-name",
+                "currency-format-precision"
+            ]
         }
+    },
+    "amount" : {
+        "type" : "entry",
+        "default" : "1",
+        "description" : "Amount",
+        "tooltip" : "Set the balance to multiply the price"
     },
     "currency" : {
         "type" : "entry",
@@ -113,6 +140,21 @@
             "Symbol": "symbol",
             "None": "none"
         }
+    },
+    "rates-update-interval" : {
+        "type" : "entry",
+        "default" : "5",
+        "description" : "Rates update interval (in seconds)",
+        "tooltip" : "Set the delay between each rates update."
+    },
+    "graph-type" : {
+        "type" : "combobox",
+        "description" : "Graph Type",
+        "default" : "candlestick",
+        "options" : {
+			"Candlestick" : "candlestick",
+			"Line" : "line"
+		}
     },
     "graph-unit" : {
 		"type" : "combobox",
@@ -151,7 +193,7 @@
     "graph-color" : {
         "type" : "colorchooser",
         "default" : "red",
-        "description" : "The Graph Foreground Color"
+        "description" : "Graph Foreground Color"
     },
     "alert-enable" : {
         "type" : "switch",
@@ -220,5 +262,31 @@
         "step" : 1,
         "units" : "seconds",
         "description" : "Update interval"
+    },
+    "currency-format-enable" : {
+        "type" : "switch",
+        "default" : false,
+        "description" : "Custom format"
+    },
+    "currency-format-symbol" : {
+        "type" : "entry",
+        "default" : "$",
+        "description" : "Currency symbol",
+        "dependency": "currency-format-enable"
+    },
+    "currency-format-name" : {
+        "type" : "entry",
+        "default" : "",
+        "description" : "Currency name",
+        "dependency": "currency-format-enable"
+    },
+    "currency-format-precision" : {
+        "type" : "spinbutton",
+        "default" : 2,
+        "min" : 0,
+        "max" : 32,
+        "step" : 1,
+        "description" : "Decimal places",
+        "dependency": "currency-format-enable"
     }
 }

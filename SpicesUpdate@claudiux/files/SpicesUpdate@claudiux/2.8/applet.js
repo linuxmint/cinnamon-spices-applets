@@ -255,6 +255,38 @@ SpicesUpdate.prototype = {
       "themes": false
     };
 
+    // Default icon color
+    this.defaultColor = "#000000FF";
+
+    // Monitoring metadata.json files and png directories
+    this.monitors = new Array();
+
+    // Monitoring png directories: Ids
+    this.monitorsPngId = {
+      "applets": 0,
+      "desklets": 0,
+      "extensions": 0,
+      "themes": 0
+    }
+
+    // Count of Spices to update
+    this.nb_to_update = 0;
+    this.nb_in_menu = {
+      "applets": 0,
+      "desklets": 0,
+      "extensions": 0,
+      "themes": 0
+    }
+
+    // New Spices
+    this.nb_to_watch = 0;
+    this.new_Spices = {
+      "applets": [],
+      "desklets": [],
+      "extensions": [],
+      "themes": []
+    }
+
 
     // ++ Settings
     this.settings = new Settings.AppletSettings(this, UUID, instance_id);
@@ -347,7 +379,7 @@ SpicesUpdate.prototype = {
       "general_frequency",
       this.on_frequency_changed,
       null);
-      this.refreshInterval = 3600*this.general_frequency;
+      this.refreshInterval = 3600 * this.general_frequency;
 
     this.settings.bindProperty(Settings.BindingDirection.IN,
       "general_warning",
@@ -417,38 +449,6 @@ SpicesUpdate.prototype = {
     this.menu = new Applet.AppletPopupMenu(this, orientation);
     this.menuManager.addMenu(this.menu);
 
-    // Default icon color
-    this.defaultColor = "#000000FF";
-
-    // Monitoring metadata.json files and png directories
-    this.monitors = new Array();
-
-    // Monitoring png directories: Ids
-    this.monitorsPngId = {
-      "applets": 0,
-      "desklets": 0,
-      "extensions": 0,
-      "themes": 0
-    }
-
-    // Count of Spices to update
-    this.nb_to_update = 0;
-    this.nb_in_menu = {
-      "applets": 0,
-      "desklets": 0,
-      "extensions": 0,
-      "themes": 0
-    }
-
-    // New Spices
-    this.nb_to_watch = 0;
-    this.new_Spices = {
-      "applets": [],
-      "desklets": [],
-      "extensions": [],
-      "themes": []
-    }
-
     // Badge
     this.badge = new St.BoxLayout({
       style_class: 'grouped-window-list-badge',
@@ -484,6 +484,7 @@ SpicesUpdate.prototype = {
     this.first_loop = true; // To do nothing for 1 minute.
     this.on_settings_changed();
     // Run the loop !
+    this.iteration = 0;
     this.updateLoop();
   }, // End of _init
 
@@ -559,7 +560,7 @@ SpicesUpdate.prototype = {
       let img_uri = GLib.filename_to_uri("%s/cs-%s.svg".format(ICONS_DIR, type.toString()), null);
       if (uuid !== null) {
         let uri= CACHE_DIR + "/" + this._get_singular_type(type) + "/" + uuid + ".png";
-        log("uri = " + uri);
+        //log("uri = " + uri);
         let file = Gio.file_new_for_path(uri);
         if (file.query_exists(null)) {
           img_uri = GLib.filename_to_uri(uri, null);
@@ -643,7 +644,7 @@ SpicesUpdate.prototype = {
       Mainloop.source_remove(this.loopId);
     }
     this.loopId = 0;
-    this.refreshInterval = 3600*this.general_frequency;
+    this.refreshInterval = 3600 * this.general_frequency;
     this.loopId = Mainloop.timeout_add_seconds(this.refreshInterval, () => this.updateLoop());
   }, // End of on_frequency_changed
 
@@ -658,7 +659,7 @@ SpicesUpdate.prototype = {
     this._set_main_label();
 
     // Refresh intervall:
-    this.refreshInterval = 3600*this.general_frequency;
+    this.refreshInterval = 3600 * this.general_frequency;
 
     // Types to check
     this.types_to_check = [];
@@ -734,20 +735,16 @@ SpicesUpdate.prototype = {
     }
   }, // End of on_btn_test_notif_pressed
   on_btn_refresh_applets_pressed:function () {
-    this.OKtoPopulateSettingsApplets = true;
-    this.populateSettingsUnprotectedApplets()
+    this._on_refresh_pressed()
   }, // End of on_btn_refresh_applets_pressed
   on_btn_refresh_desklets_pressed:function () {
-    this.OKtoPopulateSettingsDesklets = true;
-    this.populateSettingsUnprotectedDesklets()
+    this._on_refresh_pressed()
   }, // End of on_btn_refresh_applets_pressed
   on_btn_refresh_extensions_pressed:function () {
-    this.OKtoPopulateSettingsExtensions = true;
-    this.populateSettingsUnprotectedExtensions()
+    this._on_refresh_pressed()
   }, // End of on_btn_refresh_applets_pressed
   on_btn_refresh_themes_pressed:function () {
-    this.OKtoPopulateSettingsThemes = true;
-    this.populateSettingsUnprotectedThemes()
+    this._on_refresh_pressed()
   }, // End of on_btn_refresh_applets_pressed
   on_btn_cs_applets_pressed:function () {
     GLib.spawn_command_line_async('bash -c \'cinnamon-settings applets\'');
@@ -821,6 +818,7 @@ SpicesUpdate.prototype = {
             if (this.unprotectedAppletsDico[name] === undefined) {
               this.unprotectedAppletsList.push({"name": name, "isunprotected": true});
               this.unprotectedAppletsDico[name] = {"name": name, "isunprotected": true};
+              this._get_last_edited_from_metadata("applets", name);
             }
           }
         }
@@ -858,6 +856,7 @@ SpicesUpdate.prototype = {
             if (this.unprotectedDeskletsDico[name] === undefined) {
               this.unprotectedDeskletsList.push({"name": name, "isunprotected": true});
               this.unprotectedDeskletsDico[name] = {"name": name, "isunprotected": true};
+              this._get_last_edited_from_metadata("desklets", name);
             }
           }
         }
@@ -895,6 +894,7 @@ SpicesUpdate.prototype = {
             if (this.unprotectedExtensionsDico[name] === undefined) {
               this.unprotectedExtensionsList.push({"name": name, "isunprotected": true});
               this.unprotectedExtensionsDico[name] = {"name": name, "isunprotected": true};
+              this._get_last_edited_from_metadata("extensions", name);
             }
           }
         }
@@ -932,6 +932,7 @@ SpicesUpdate.prototype = {
             if (this.unprotectedThemesDico[name] === undefined) {
               this.unprotectedThemesList.push({"name": name, "isunprotected": true});
               this.unprotectedThemesDico[name] = {"name": name, "isunprotected": true};
+              this._get_last_edited_from_metadata("themes", name);
             }
           }
         }
@@ -958,7 +959,8 @@ SpicesUpdate.prototype = {
       Gio.file_new_for_path("/usr/share/fonts/TTF/Symbola.ttf").query_exists(null) ||
       Gio.file_new_for_path("/usr/share/fonts/gdouros-symbola/Symbola.ttf").query_exists(null) ||
       Gio.file_new_for_path("%s/.local/share/fonts/Symbola_Hinted.ttf".format(HOME_DIR)).query_exists(null) ||
-      Gio.file_new_for_path("%s/.local/share/fonts/Symbola.ttf".format(HOME_DIR)).query_exists(null)
+      Gio.file_new_for_path("%s/.local/share/fonts/Symbola.ttf".format(HOME_DIR)).query_exists(null) ||
+      Gio.file_new_for_path("%s/.local/share/fonts/Symbola.otf".format(HOME_DIR)).query_exists(null)
     )
     if (!_fonts_installed) {
       let _ArchlinuxWitnessFile = Gio.file_new_for_path("/etc/arch-release");
@@ -986,7 +988,7 @@ SpicesUpdate.prototype = {
     return term_found
   }, // End of get_terminal
 
-  check_dependencies() {
+  check_dependencies: function() {
     if (!this.dependenciesMet && this.are_dependencies_installed()) {
       // At this time, the user just finished to install all dependencies.
       this.dependenciesMet=true;
@@ -1182,7 +1184,7 @@ SpicesUpdate.prototype = {
     newData["last-edited"] = lastEdited;
     let message = JSON.stringify(newData, null, 2);
     GLib.file_set_contents(fileName, message);
-    log("Added missing last-edited field into " + fileName.toString())
+    //log("Added missing last-edited field into " + fileName.toString())
   }, // End of _rewrite_metadataFile
 
   _get_last_edited_from_metadata:function (type, uuid) {
@@ -1190,6 +1192,9 @@ SpicesUpdate.prototype = {
     let metadataParser = new Json.Parser();
     let metadataFileName = DIR_MAP[type] + "/" + uuid + "/metadata.json";
     let metadataFile = Gio.file_new_for_path(metadataFileName);
+    let dirName = DIR_MAP[type] + "/" + uuid;
+    let dir = Gio.file_new_for_path(dirName);
+    let most_recent;
 
     // For some themes, the metadata.json file is in the subfolder /cinnamon:
     if (type.toString() === "themes" && !metadataFile.query_exists(null)) {
@@ -1209,32 +1214,47 @@ SpicesUpdate.prototype = {
           lastEdited = obj.get_member("last-edited").get_value();
         } catch(e) {
           // The last-edited member doesn't exist
-          lastEdited = null;
-          //let message = "The last-edited member doesn't exist for the " + this._get_singular_type(type) + " " + uuid + ".";
-          //log(message);
-          // Replace the last-edited member's value by the last modification time of the metadate file, in epoch format.
-          try {
-            lastEdited = metadataFile.query_info('time::modified', Gio.FileQueryInfoFlags.NONE, null).get_modification_time().tv_sec;
-            //message = "The last-edited value for the " + this._get_singular_type(type) + " " + uuid + " has been fixed to " + lastEdited.toString();
-            //log(message);
-            lastEditedIsToSet = true;
-            //obj.set_member("last-edited", lastEdited);
-            //log("obj = " + JSON.stringify(obj, null, 2));
-            //log("obj = " + JSON.stringify(obj))
-          } catch(e) {
-            // Sure, the metadata file doesn't exist!
-            lastEdited = null;
-            //message = "The last-edited value for the " + this._get_singular_type(type) + " " + uuid + " has been fixed to null";
-            //log(message);
+          most_recent = this._most_recent_file_in(dir);
+          // Set the last-edited member's value to the last modification time of the most_recent file, in epoch format.
+          if (most_recent !== null) {
+            lastEdited = most_recent.query_info('time::modified', Gio.FileQueryInfoFlags.NONE, null).get_modification_time().tv_sec;
+            this.get_date_of_nearest_commit(type, uuid, lastEdited, metadataFileName);
           }
-        }
-        if (lastEditedIsToSet === true) {
-          this._rewrite_metadataFile(metadataFileName, lastEdited)
         }
       }
     }
     return lastEdited
   }, // End of _get_last_edited_from_metadata
+
+  _most_recent_file_in:function(dir) {
+    if (dir.query_exists(null)) {
+      var latest_time = dir.query_info('time::modified', Gio.FileQueryInfoFlags.NONE, null).get_modification_time().tv_sec;
+      var latest_file = dir;
+      let children = dir.enumerate_children('standard::name,standard::type', Gio.FileQueryInfoFlags.NONE, null);
+      let info, file_type;
+      let file, file_time;
+      while ((info = children.next_file(null)) != null) {
+        file = children.get_child(info);
+        file_time = file.query_info('time::modified', Gio.FileQueryInfoFlags.NONE, null).get_modification_time().tv_sec;
+        if (file_time > latest_time) {
+          latest_time = file_time;
+          latest_file = file;
+        }
+        file_type = info.get_file_type();
+        if (file_type == Gio.FileType.DIRECTORY) {
+          file = this._most_recent_file_in(file);
+          file_time = file.query_info('time::modified', Gio.FileQueryInfoFlags.NONE, null).get_modification_time().tv_sec;
+          if (file_time > latest_time) {
+            latest_time = file_time;
+            latest_file = file;
+          }
+        }
+      }
+      return latest_file;
+    } else {
+      return null;
+    }
+  }, // End of _most_recent_file_in
 
   _on_forget_new_spices_pressed:function () {
     for (let type of TYPES) {
@@ -1296,16 +1316,17 @@ SpicesUpdate.prototype = {
 
   get_last_commit_subject:function (type, uuid) {
     let marker_begin = "</span>\]";
-    let marker_end = "</div>"
+    let marker_end = "</div>";
     //let subject_regexp = new RegExp(`${marker_begin}(.+)${marker_end}`);
     let subject_regexp = new RegExp(marker_begin + '(.+)' + marker_end);
     let url = "https://cinnamon-spices.linuxmint.com/%s/view/%s/".format(type.toString(),
                                                                         this._get_member_from_cache(type, uuid, "spices-id").toString());
     var msg = Soup.Message.new('GET', url);
 
+    let iteration = this.iteration;
     // Queue of the http request
     _httpSession.queue_message(msg, Lang.bind(this, function(_httpSession, message) {
-      if (message.status_code === Soup.KnownStatusCode.OK) {
+      if (message.status_code === Soup.KnownStatusCode.OK && iteration === this.iteration) {
         let data = message.response_body.data;
         let result = subject_regexp.exec(data.toString());
         this.details_by_uuid[uuid] = result[1].toString();
@@ -1314,8 +1335,41 @@ SpicesUpdate.prototype = {
         this.details_by_uuid[uuid] = "";
       }
     }));
-    return (this.details_by_uuid[uuid] !== undefined)
+    return (this.details_by_uuid[uuid] !== undefined && this.details_by_uuid[uuid] !== "")
   }, // End of get_last_commit_subject
+
+  get_date_of_nearest_commit:function(type, uuid, timestamp, fileName) {
+    let marker_begin = '<relative-time datetime="';
+    let marker_end = '" class="no-wrap">';
+    let subject_regexp = new RegExp(marker_begin + '(.+)' + marker_end, 'g');
+    let url = "https://github.com/linuxmint/cinnamon-spices-%s/commits/master/%s".format(type.toString(), uuid);
+    var msg = Soup.Message.new('GET', url);
+
+    let iteration = this.iteration;
+    // Queue of the http request
+    _httpSession.queue_message(msg, Lang.bind(this, function(_httpSession, message) {
+      if (message.status_code === Soup.KnownStatusCode.OK && iteration === this.iteration) {
+        this.do_rotation = false;
+        this.updateUI();
+        let data = message.response_body.data;
+        let result;
+        let commit_time;
+        var nearest_commit_time = timestamp;
+        var smaller_difference = Math.round(Date.now() / 1000);
+        let difference;
+        while (result == subject_regexp.exec(data.toString())) {
+          commit_time = Date.parse(result[1].toString()) / 1000;
+          difference = Math.abs(timestamp - commit_time);
+          if (difference < smaller_difference) {
+            smaller_difference = difference;
+            nearest_commit_time = commit_time;
+          }
+        }
+        this._rewrite_metadataFile(fileName, nearest_commit_time);
+      }
+    }));
+    //return (this.details_by_uuid[uuid] !== undefined && this.details_by_uuid[uuid] !== "")
+  }, // End of get_date_of_nearest_commit
 
   is_to_check:function (type) {
     return (this.types_to_check.indexOf(type) > -1);
@@ -1364,12 +1418,13 @@ SpicesUpdate.prototype = {
             if (this.details_requested) {
               if (this.get_last_commit_subject(type, uuid)) {
                 if (this.details_by_uuid[uuid].trim() !== "") {
-                  ret.push("%s (%s)\n\t« %s »".format(_(this.get_spice_name(type, uuid)), uuid, this.details_by_uuid[uuid].trim()));
+                  ret.push("%s (%s)\n\t\t« %s »".format(_(this.get_spice_name(type, uuid)), uuid, this.details_by_uuid[uuid].trim()));
                 } else {
-                  ret.push("%s (%s)\n\t%s".format(_(this.get_spice_name(type, uuid)), uuid, _("(Description unavailable)")));
+                  ret.push("%s (%s)\n\t\t%s".format(_(this.get_spice_name(type, uuid)), uuid, _("(Description unavailable)")));
                 }
               } else {
-                ret.push("%s (%s)\n\t%s".format(_(this.get_spice_name(type, uuid)), uuid, _("(Refresh to see the description)")));
+                this.refreshInterval = 10; // Wait 15 more seconds to avoid the message "(Refresh to see the description)".
+                //ret.push("%s (%s)\n\t\t%s".format(_(this.get_spice_name(type, uuid)), uuid, _("(Refresh to see the description)")));
               }
             } else {
               ret.push("%s (%s)".format(_(this.get_spice_name(type, uuid)), uuid));
@@ -1386,7 +1441,7 @@ SpicesUpdate.prototype = {
     var ret = new Array();
     for (let uuid of this.new_Spices[type]) {
       if (this.details_requested === true)
-        ret.push("%s (%s)\n\t« %s »".format(_(this.get_spice_name(type, uuid)),
+        ret.push("%s (%s)\n\t\t« %s »".format(_(this.get_spice_name(type, uuid)),
                                             uuid,
                                             _(this.get_spice_description(type, uuid))))
       else
@@ -1440,7 +1495,7 @@ SpicesUpdate.prototype = {
           this.monitors.push([monitor, Id]);
           this.monitorsPngId[type] = Id;
         } catch(e) {
-          log("Unable to monitor the png directory for the %s: %s".format(type.toString(), e))
+          //log("Unable to monitor the png directory for the %s: %s".format(type.toString(), e))
         }
       }
     }
@@ -1466,7 +1521,7 @@ SpicesUpdate.prototype = {
         let Id = monitor.connect('changed', (type, uuid) => this._on_metadatajson_changed(type, uuid));
         this.monitors.push([monitor, Id]);
       } catch(e) {
-        log("Unable to monitor metadata.json of the %s %s: %s".format(this._get_singular_type(type.toString()), uuid, e))
+        //log("Unable to monitor metadata.json of the %s %s: %s".format(this._get_singular_type(type.toString()), uuid, e))
       }
     }
   }, // End of monitor_metadatajson
@@ -1511,9 +1566,13 @@ SpicesUpdate.prototype = {
   }, // End of get_active_spices
 
   get_default_icon_color:function () {
-    let themeNode = this.actor.get_theme_node(); // get_theme_node() fails in constructor! (cause: widget not on stage)
-    let icon_color = themeNode.get_icon_colors();
-    this.defaultColor = icon_color.foreground.to_string();
+    try {
+      let themeNode = this.actor.get_theme_node(); // get_theme_node() fails in constructor! (cause: widget not on stage)
+      let icon_color = themeNode.get_icon_colors();
+      this.defaultColor = icon_color.foreground.to_string();
+    } catch(e) {
+      this.defaultColor = "white";
+    }
   }, // End of get_default_icon_color
 
   makeMenu:function () {
@@ -1550,10 +1609,17 @@ SpicesUpdate.prototype = {
       this.spicesMenuItems[t].setShowDot(this.menuDots[t]);
       this.menu.addMenuItem(this.spicesMenuItems[t]);
     }
+    // button Forget
     if (this.nb_to_watch > 0) {
       let _forget_button = new PopupMenu.PopupIconMenuItem(_("Forget new Spices") + " -\u2604-", "emblem-ok", St.IconType.SYMBOLIC);
-      _forget_button.connect("activate", (event) => this._on_forget_new_spices_pressed())
+      _forget_button.connect("activate", (event) => this._on_forget_new_spices_pressed());
       this.menu.addMenuItem(_forget_button);
+    }
+    //button Download
+    if ((this.nb_to_update + this.nb_to_watch) > 0) {
+      let _download_tabs_button = new PopupMenu.PopupIconMenuItem(_("Open useful Cinnamon Settings"), "folder-download", St.IconType.SYMBOLIC);
+      _download_tabs_button.connect("activate", (event) => this.open_each_download_tab());
+      this.menu.addMenuItem(_download_tabs_button);
     }
     this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 
@@ -1565,7 +1631,7 @@ SpicesUpdate.prototype = {
     this.menu.addMenuItem(configure);
     if (DEBUG) {
       let _reload_button = new PopupMenu.PopupIconMenuItem("Reload this applet", "edit-redo", St.IconType.SYMBOLIC);
-      _reload_button.connect("activate", (event) => this._on_reload_this_applet_pressed())
+      _reload_button.connect("activate", (event) => this._on_reload_this_applet_pressed());
       this.menu.addMenuItem(_reload_button);
     }
 
@@ -1615,7 +1681,7 @@ SpicesUpdate.prototype = {
   // This updates the display of the applet and the tooltip
   updateUI:function () {
     this.get_default_icon_color();
-    log("defaultColor = " + this.defaultColor);
+    //log("defaultColor = " + this.defaultColor);
     this._applet_icon.style = "color: %s;".format(this.defaultColor);
     if (this.general_warning === true) {
       for (let t of TYPES) {
@@ -1627,21 +1693,33 @@ SpicesUpdate.prototype = {
     }
     if (this.nb_to_update > 0 || this.nb_to_watch > 0) {
       var _tooltip = this.default_tooltip;
+      var tooltip_was_modified = false;
       for (let type of TYPES) {
-        // \uD83D\uDDD8
-        // \u2605
-        //if (this.old_message[type] != "") _tooltip += "\n\u21BB %s".format(this.old_message[type].replace(/, /gi, "\n\t"));
-        //if (this.old_watch_message[type] != "") _tooltip += "\n\u23FF %s".format(this.old_watch_message[type].replace(/, /gi, "\n\t"));
-        if (this.old_message[type] != "") _tooltip += "\n\u21BB %s".format(this._clean_str(this.old_message[type].replace(/, /gi, "\n\t")));
-        if (this.old_watch_message[type] != "") _tooltip += "\n\u23FF %s".format(this._clean_str(this.old_watch_message[type].replace(/, /gi, "\n\t")));
+        if (this.old_message[type] != "" || this.old_watch_message[type] != "") {
+          if (!tooltip_was_modified) {
+            _tooltip += "\n%s".format(_("Middle-Click to open useful Cinnamon Settings"));
+            tooltip_was_modified = true;
+          }
+          _tooltip += "\n\n\t\t\t%s".format(_(type).toLocaleUpperCase());
+          if (this.old_message[type] != "") _tooltip += "\n\u21BB %s".format(this._clean_str(this.old_message[type].replace(/, /gi, "\n\t")));
+          if (this.old_watch_message[type] != "") _tooltip += "\n\u2604 %s".format(this._clean_str(this.old_watch_message[type].replace(/, /gi, "\n\t")));
+        }
+      }
+      if (!tooltip_was_modified) {
+        _tooltip += "\n%s".format(_("Middle-Click to Refresh"));
       }
       this.set_applet_tooltip(_tooltip);
       this.numberLabel.text = (this.nb_to_update + this.nb_to_watch).toString();
       this.badge.show();
     } else {
-      this.set_applet_tooltip(this.default_tooltip);
+      this.set_applet_tooltip(this.default_tooltip + "\n%s".format(_("Middle-Click to Refresh")));
       this.numberLabel.text = '';
       this.badge.hide();
+    }
+    if (St.Widget.get_default_direction() === St.TextDirection.RTL) {
+      this._applet_tooltip._tooltip.set_style('text-align: right;');
+    } else {
+      this._applet_tooltip._tooltip.set_style('text-align: left;');
     }
   }, // End of updateUI
 
@@ -1653,8 +1731,10 @@ SpicesUpdate.prototype = {
     this.loopId = 0;
     this.check_dependencies();
 
+    this.iteration = (this.iteration + 1) % 10;
+
     // Inhibits also after the applet has been removed from the panel
-    if (this.applet_running == true) {
+    if (this.applet_running === true) {
       this.get_translated_help_file();
       this.OKtoPopulateSettingsApplets = true;
       this.OKtoPopulateSettingsDesklets = true;
@@ -1665,7 +1745,7 @@ SpicesUpdate.prototype = {
         this.refreshInterval = 5;
       } else {
         if (!this.first_loop) {
-          this.refreshInterval = 3600*this.general_frequency;
+          this.refreshInterval = 3600 * this.general_frequency;
           var monitor, Id;
           for (let tuple of this.monitors) {
             [monitor, Id] = tuple;
@@ -1673,6 +1753,11 @@ SpicesUpdate.prototype = {
           }
           this.monitors = [];
           for (let type of TYPES) this.monitorsPngId[type] = 0;
+
+          this.populateSettingsUnprotectedApplets();
+          this.populateSettingsUnprotectedDesklets();
+          this.populateSettingsUnprotectedExtensions();
+          this.populateSettingsUnprotectedThemes();
 
           var must_be_updated;
           this.nb_to_update = 0;
@@ -1748,6 +1833,43 @@ SpicesUpdate.prototype = {
       this.loopId = Mainloop.timeout_add_seconds(this.refreshInterval, () => this.updateLoop());
     }
   }, // End of updateLoop
+
+  open_each_download_tab:function() {
+    for (let t of TYPES) {
+      if (this.nb_in_menu[t] > 0) {
+        Util.spawnCommandLine("cinnamon-settings %s".format(t.toString()));
+      }
+    }
+  },  // End of open_each_download_tab
+
+  _onButtonPressEvent:function(actor, event) {
+    if (this._applet_enabled) {
+      if (event.get_button() == 1) {
+        if (!this._draggable.inhibit) {
+          return false;
+        } else {
+          if (this._applet_context_menu.isOpen) {
+            this._applet_context_menu.toggle();
+          }
+          this.on_applet_clicked(event);
+        }
+      }
+      if (event.get_button() == 2) {
+        if ((this.nb_to_update + this.nb_to_watch) === 0) {
+          this._on_refresh_pressed();
+        } else {
+          this.open_each_download_tab();
+        }
+      }
+
+      if (event.get_button() == 3) {
+        if (this._applet_context_menu._getMenuItems().length > 0) {
+          this._applet_context_menu.toggle();
+        }
+      }
+    }
+    return true;
+  }, // End of _onButtonPressEvent
 
   //++ Handler for when the applet is clicked.
   on_applet_clicked:function (event) {

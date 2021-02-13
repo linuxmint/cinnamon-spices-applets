@@ -37,7 +37,7 @@ msgid "No location provided"
 msgstr "没有提供位置信息"
 
 #: applet.js:610 3.6/applet.js:610 3.8/applet.js:743
-msgid "Cloudiness:"
+msgid "Cloudiness"
 msgstr "云量："
 
 #: applet.js:634 3.6/applet.js:634 3.8/applet.js:781
@@ -210,7 +210,7 @@ msgid "in"
 msgstr "在"
 
 #: 3.8/applet.js:749
-msgid "Feels like:"
+msgid "Feels like"
 msgstr "似乎："
 
 #: 3.8/applet.js:1234

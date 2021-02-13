@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Svg Vector Icons : http://www.onlinewebfonts.com/icon -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   x="0px"
+   y="0px"
+   viewBox="0 0 1000 1000"
+   enable-background="new 0 0 1000 1000"
+   xml:space="preserve"
+   id="svg8"
+   sodipodi:docname="su-ignore.svg"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)"><defs
+   id="defs12" /><sodipodi:namedview
+   pagecolor="#ffffff"
+   bordercolor="#666666"
+   borderopacity="1"
+   objecttolerance="10"
+   gridtolerance="10"
+   guidetolerance="10"
+   inkscape:pageopacity="0"
+   inkscape:pageshadow="2"
+   inkscape:window-width="1726"
+   inkscape:window-height="833"
+   id="namedview10"
+   showgrid="false"
+   inkscape:zoom="0.236"
+   inkscape:cx="-652.54237"
+   inkscape:cy="500"
+   inkscape:window-x="0"
+   inkscape:window-y="36"
+   inkscape:window-maximized="0"
+   inkscape:current-layer="g6" />
+<metadata
+   id="metadata2"> Svg Vector Icons : http://www.onlinewebfonts.com/icon <rdf:RDF><cc:Work
+     rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+       rdf:resource="http://purl.org/dc/dcmitype/StillImage" /></cc:Work></rdf:RDF></metadata>
+<g
+   id="g6"><path
+     d="m 787.1,293.9 99.1,-106 -102.1,-95.6 -126.2,135 C 609.3,209.8 556.5,198.9 500,198.9 c -294,0 -490,294 -490,294 0,0 78,117 209.4,203.4 L 111,812.2 213.2,907.7 350.1,761.3 c 46.3,15.9 96.5,25.6 149.9,25.6 294,0 490,-294 490,-294 0,0 -75.4,-113.1 -202.9,-199 z M 305,491.8 c 0,-107.7 87.3,-195 195,-195 27.6,0 53.9,5.8 77.8,16.1 l -76.6,81.9 c -0.6,0 -1.1,0 -1.7,0 -53.9,0 -97.5,43.7 -97.5,97.5 0,2.8 0.1,5.5 0.3,8.2 l -75.6,80.8 C 312.9,554.6 305,524.1 305,491.8 Z m 195,195 c -24.2,0 -47.3,-4.4 -68.6,-12.4 L 511,589.2 c 46.8,-5.5 83.5,-44.2 85.9,-91.9 l 80.6,-86.2 c 11.2,24.6 17.4,51.9 17.4,80.7 0.1,107.7 -87.2,195 -194.9,195 z"
+     id="path4"
+     style="fill:#bebebe;fill-rule:evenodd;enable-background:new"
+     inkscape:connector-curvature="0" /></g>
+</svg>

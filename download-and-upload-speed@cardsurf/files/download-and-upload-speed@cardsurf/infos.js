@@ -2,18 +2,20 @@
 const GLib = imports.gi.GLib;
 
 const uuid = 'download-and-upload-speed@cardsurf';
-let AppletConstants, Files, FilesCsv, Dates;
+let AppletConstants, Files, FilesCsv, Dates, Compatibility;
 if (typeof require !== 'undefined') {
     AppletConstants = require('./appletConstants')
     Files = require('./files');
     FilesCsv = require('./filesCsv');
     Dates = require('./dates');
+    Compatibility = require('./compatibility');
 } else {
     const AppletDirectory = imports.ui.appletManager.applets[uuid];
     AppletConstants = AppletDirectory.appletConstants
     Files = AppletDirectory.files;
     FilesCsv = AppletDirectory.filesCsv;
     Dates = AppletDirectory.dates;
+    Compatibility = AppletDirectory.compatibility;
 }
 
 
@@ -31,6 +33,7 @@ NetworkInterfaceInfo.prototype = {
         this.network_interface = network_interface;
         this.applet_directory = this._get_applet_directory();
         this.bytes_directory = this.applet_directory + "/bytes/";
+        this.cinnamon_version_adapter = new Compatibility.CinnamonVersionAdapter();
 
         this.bytes_received_previous = 0;
         this.bytes_received_iteration = 0;
@@ -122,7 +125,9 @@ NetworkInterfaceInfo.prototype = {
     read_number: function (file, default_number) {
         try {
             let array_bytes = file.read_chars();
-            let string = array_bytes.length > 0 ? array_bytes.toString() : default_number.toString();
+            let string = array_bytes.length > 0 ?
+                this.cinnamon_version_adapter.byte_array_to_string(array_bytes) :
+                default_number.toString();
             let number = parseInt(string);
             return number;
         }

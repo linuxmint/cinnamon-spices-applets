@@ -3,6 +3,5 @@
 	"name": "Azan",
     "description": "Azan is an Islamic prayer times application", 
     "max-instances": "-1",
-    "version": "0.1", 
-    "icon": "force-exit"
+    "version": "0.1"
 }

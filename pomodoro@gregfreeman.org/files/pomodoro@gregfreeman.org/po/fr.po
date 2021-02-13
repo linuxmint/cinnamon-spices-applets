@@ -29,8 +29,8 @@ msgid "Pomodori %d, set %d running"
 msgstr "Pomodoro %d, set %d en cours"
 
 #: applet.js:358
-msgid "Let's go to work !"
-msgstr "Au travail !"
+msgid "Let's go to work!"
+msgstr "Au travail!"
 
 #: applet.js:370
 msgid "Take a short break"

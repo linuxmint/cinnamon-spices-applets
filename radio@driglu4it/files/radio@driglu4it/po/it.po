@@ -1,0 +1,61 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-03-07 14:22+0300\n"
+"PO-Revision-Date: 2019-10-16 23:04+0200\n"
+"Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: it\n"
+"Language-Team: \n"
+"X-Generator: Poedit 2.2.1\n"
+
+#. radio@driglu4it->metadata.json->name
+#: applet.js:38 applet.js:62
+msgid "Radio++"
+msgstr "Radio++"
+
+#: applet.js:53
+#, javascript-format
+msgid "Playing %s"
+msgstr "Riproducendo %s"
+
+#: applet.js:60 applet.js:65
+msgid "Stop"
+msgstr "Ferma"
+
+#. radio@driglu4it->settings-schema.json->section1->title
+msgid "Radio"
+msgstr "Radio"
+
+#. radio@driglu4it->settings-schema.json->page1->title
+#. radio@driglu4it->settings-schema.json->tree->description
+msgid "List of stations"
+msgstr "Elenco stazioni"
+
+#. radio@driglu4it->settings-schema.json->tree->columns->title
+msgid "Title"
+msgstr "Titolo"
+
+#. radio@driglu4it->settings-schema.json->tree->columns->title
+msgid "URL"
+msgstr "URL"
+
+#. radio@driglu4it->settings-schema.json->tree->columns->title
+msgid "Include of list"
+msgstr "Includi in elenco"
+
+#. radio@driglu4it->metadata.json->description
+msgid ""
+"This simple radio for Cinnamon. Require moc player. In setting you may add, "
+"edit and remove stations."
+msgstr ""
+"Semplice radio per Cinnamon. Richiede il player moc. Nelle impostazioni è "
+"possibile aggiungere, modificare e rimuovere le stazioni."

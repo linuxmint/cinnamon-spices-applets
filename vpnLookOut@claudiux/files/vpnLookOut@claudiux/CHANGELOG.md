@@ -1,7 +1,29 @@
 ## Changelog
 
+### 3.5.1~20200810
+  * Fixes a minor bug.
+  * Now can detect usage of Wireguard (but not manage it).
+
+### 3.5.0~20191218
+  * Some bug fixes and code cleanup. See [issue 8914](https://github.com/linuxmint/cinnamon/issues/8914) - Many thanks to @Odyseus and @collinss !
+
+### 3.4.2~20191207
+  * Activate vpnLookOut with middle-click or keyboard shortcut.
+  * Change tooltip.
+
+### 3.4.1~20191205
+  * New option in Settings -> VPN: Deactivate vpnLookOut at startup.
+
+### 3.4.0~20191108
+  * Add ability to deactivate vpnLookOut.
+
+### 3.3.5~20191106
+  * Bug fixes.
+  * Compatible with Cinnamon 4.4.
+  * Cinnamon 4.2 and above versions: Add ability to use symbolic icons.
+
 ### 3.3.4~20190702
-  * Now compatible with Cinnamon 4.2
+  * Now compatible with Cinnamon 4.2.
 
 ### 3.3.3~20190202
   * Improves responsiveness.
