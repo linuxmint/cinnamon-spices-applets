@@ -10,6 +10,8 @@
 
 * Change Temperature units to be capitalized
 
+* Fixes [#3556](https://github.com/linuxmint/cinnamon-spices-applets/issues/3556)
+
 ## 3.0.2
 
 * Fix icons for Met Norway, some are missing

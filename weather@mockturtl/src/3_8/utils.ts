@@ -174,6 +174,20 @@ export function ProcessCondition(condition: string, shouldTranslate: boolean) {
     return condition;
 }
 
+export function LocalizedColon(locale: string): string {
+	if (locale == null)
+		return ":"
+
+	if (locale.startsWith("fr"))
+		return " :"
+
+	return ":"
+}
+
+export function PrecentToLocale(humidity: number, locale: string): string {
+	return (humidity / 100).toLocaleString(locale, {style: "percent"});
+}
+
 // Conversion Factors
 const WEATHER_CONV_MPH_IN_MPS = 2.23693629
 const WEATHER_CONV_KPH_IN_MPS = 3.6
