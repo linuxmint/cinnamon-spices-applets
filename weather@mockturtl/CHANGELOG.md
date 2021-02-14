@@ -4,7 +4,7 @@
 
 * Fixes [#3508](https://github.com/linuxmint/cinnamon-spices-applets/issues/3508), just a minor issue with naming
 
-* Fixes [#3539](https://github.com/linuxmint/cinnamon-spices-applets/issues/3539) - Revert capitalisation of every word in the applet label.
+* Fixes [#3539](https://github.com/linuxmint/cinnamon-spices-applets/issues/3539) - Revert capitalization of every word in the applet label.
 
 * Fix some text in the settings-schema, they didn't make much sense or were missing some explanations
 
@@ -13,6 +13,8 @@
 * Fixes [#3556](https://github.com/linuxmint/cinnamon-spices-applets/issues/3556)
 
 * Fixes [#3554](https://github.com/linuxmint/cinnamon-spices-applets/issues/3554)
+
+* Fixes [#3567](https://github.com/linuxmint/cinnamon-spices-applets/issues/3567)
 
 ## 3.0.2
 
