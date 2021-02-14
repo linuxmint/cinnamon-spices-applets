@@ -166,14 +166,6 @@ class CinnamenuApplet extends TextIconApplet {
         return this.menu.actor.get_theme_node().get_foreground_color().to_string().substring(0, 7);
     }
 
-    /*getThemeBackgroundColor() {
-        let col = this.menu.actor.get_theme_node().get_background_color();
-        if (col.to_string().startsWith('#000000')) {
-            col = this.menu.actor.get_theme_node().get_background_gradient()[1];
-        }
-        return col;
-    }*/
-
     getScreenWorkArea() {
         const monitor = Main.layoutManager.currentMonitor;
         const ws = global.screen.get_active_workspace();
@@ -544,6 +536,7 @@ class CinnamenuApplet extends TextIconApplet {
             return false;
         }
         if (open) {
+            this.tweakTheme();
             this.categories.update();//in case menu editor updates
             this.categoriesView.populate();
             this.sidebar.populate();//in case fav files changed
@@ -566,6 +559,28 @@ class CinnamenuApplet extends TextIconApplet {
             this.categoriesView.categoriesBox.remove_all_children();
         }
         return true;
+    }
+
+    tweakTheme() {
+        this.searchView.searchBox.style = 'min-width: 160px; ';
+
+        //make searchBox l/r padding & margin symmetrical when it uses the full width of the menu.
+        if (this.settings.sidebarPlacement === PlacementRIGHT || this.settings.sidebarPlacement === PlacementLEFT) {
+
+            //set left padding of searchBox to match right padding
+            const searchBoxNode = this.searchView.searchBox.get_theme_node();
+            const searchBoxPaddingRight = searchBoxNode.get_padding(1);
+            this.searchView.searchBox.style += `padding-left: ${searchBoxPaddingRight}px; `;
+
+            //deal with uneven searchBox margins and uneven mainBox paddings by setting searchBox margins.
+            const searchBoxRightMargin = searchBoxNode.get_margin(3);
+            const mainBoxNode = this.mainBox.get_theme_node();
+            const mainBoxPaddingRight = mainBoxNode.get_padding(1);
+            const mainBoxPaddingLeft = mainBoxNode.get_padding(3);
+            const newMargin = Math.max(searchBoxRightMargin, mainBoxPaddingRight, mainBoxPaddingLeft);
+            this.searchView.searchBox.style += `margin-left: ${newMargin - mainBoxPaddingLeft}px; ` +
+                                                `margin-right: ${newMargin - mainBoxPaddingRight}px; `;
+        }
     }
 
     onBoxResized(userWidth, userHeight){
@@ -614,8 +629,7 @@ class CinnamenuApplet extends TextIconApplet {
                                                 this.settings.sidebarPlacement === PlacementRIGHT) {
             leftSideWidth += this.sidebar.sidebarOuterBox.width;
         }
-        this.searchView.searchEntry.width = 5;//a small number to effectively set it to it's minimum width
-                                              //for the purpose of calculating bottomPaneMinWidth
+        this.searchView.searchEntry.width = 5;//don't know why this works.
         let bottomPaneMinWidth = 0;
         if (this.settings.sidebarPlacement === PlacementTOP ||
                                                 this.settings.sidebarPlacement === PlacementBOTTOM) {
@@ -1346,7 +1360,7 @@ class CinnamenuApplet extends TextIconApplet {
         this.displaySignals.connect(this.searchView.searchEntryText, 'key-press-event',
                                                             (...args) => this.onMenuKeyPress(...args));
         //this.previousSearchPattern = '';
-        this.bottomPane = new St.BoxLayout({ /*style: 'padding-top: 12px;'*/ });
+        this.bottomPane = new St.BoxLayout({});
         if (sidebarPlacement === PlacementTOP || sidebarPlacement === PlacementBOTTOM) {
             this.bottomPane.add(this.sidebar.sidebarOuterBox, { expand: false, x_fill: false, y_fill: false,
                                                   x_align: St.Align.START, y_align: St.Align.MIDDLE });
@@ -1379,7 +1393,6 @@ class CinnamenuApplet extends TextIconApplet {
                                         vertical: true, reactive: true,
                                         show_on_set_parent: false });
         this.mainBox.add_style_class_name('menu-applications-box'); //this is to support old themes
-        // mainbox packs vertically
         if (sidebarPlacement === PlacementTOP) {
             this.mainBox.add(this.bottomPane);
         }
@@ -1392,29 +1405,30 @@ class CinnamenuApplet extends TextIconApplet {
         //is then positioned at mouse coords and above siblings.
         this.mainBox.add(this.contextMenu.contextMenuBox, {expand: false, x_fill: false,
                                                     x_align: St.Align.START, y_align: St.Align.MIDDLE,});
-        // add all to section
+        //=============menu================
         const section = new PopupMenuSection();
         section.actor.add_actor(this.mainBox);
         this.menu.addMenuItem(section);
+
         //if a blank part of the menu was clicked on, close context menu
         this.menu.actor.set_reactive(true);
         this.displaySignals.connect(this.menu.actor, 'button-release-event',() => this.clearEnteredActors());
+
         //monitor mouse motion to prevent category mis-selection
         this.categoriesView.categoriesBox.set_reactive(true);
         this.displaySignals.connect(this.categoriesView.categoriesBox, "motion-event",
                                                         (...args) => this.onMouseMotion(...args));
-        //Limit excessive left padding on categoriesBox
-        const Lpadding = this.categoriesView.categoriesBox.get_theme_node().get_length('padding-left');
-        if (Lpadding > 20) {
-            this.categoriesView.categoriesBox.style = 'padding-left: 20px;';
-        }
-        //make searchBox l/r padding & margin symmetrical when it uses the full width of the menu.
-        if (sidebarPlacement === PlacementRIGHT || sidebarPlacement === PlacementLEFT) {
-            const themeNode = this.searchView.searchBox.get_theme_node();
-            const paddingRight = themeNode.lookup_length('padding-right', true)[1];
-            this.searchView.searchBox.style += `padding-left: ${paddingRight}px;`;
-            const marginRight = themeNode.lookup_length('margin-right', true)[1];
-            this.searchView.searchBox.style += `margin-left: ${marginRight}px;`;
+
+        //When sidebar is not on the left, limit mainBox left padding + categoriesBox left padding to
+        //20px by subtracting the difference from categoriesBox left padding.
+        if (sidebarPlacement !== PlacementLEFT) {
+            const catLpadding = this.categoriesView.categoriesBox.get_theme_node().get_padding(3);
+            const mainBoxLpadding = this.mainBox.get_theme_node().get_padding(3);
+            const excessPadding = Math.max(catLpadding + mainBoxLpadding - 20, 0);//=total padding > 20px
+            if (excessPadding > 0) {
+                this.categoriesView.categoriesBox.style = `padding-left: ${
+                                            Math.max(catLpadding - excessPadding, 0)}px; `;
+            }
         }
 
         this.sidebar.populate();
@@ -1587,7 +1601,6 @@ class Categories {
 class CategoriesView {
     constructor(appThis) {
         this.appThis = appThis;
-
         this.categoriesBox = new St.BoxLayout({ style_class: 'menu-categories-box', vertical: true });
         this.groupCategoriesWorkspacesWrapper = new St.BoxLayout({/*style: 'max-width: 185px;',*/
                                                                                     vertical: true });
@@ -1797,9 +1810,6 @@ class Apps {
                             app.description = _('No description available');
                         }
                         app.type = APPTYPE.application;
-                        if (dirId === 'Preferences') {
-                            app.dontAllowUninstall = true;
-                        }
                     }
                     if (this.knownApps.indexOf(id) < 0) {//unknown app
                         if (!this.newInstance) {
@@ -2067,10 +2077,10 @@ class SearchView {
         this.searchInactiveIcon = new St.Icon({ style_class: 'menu-search-entry-icon', icon_name: 'edit-find' });
         this.searchActiveIcon = new St.Icon({ style_class: 'menu-search-entry-icon', icon_name: 'edit-clear' });
         this.searchEntry = new St.Entry({ name: 'menu-search-entry', //hint_text: HINT_TEXT,
-                                            track_hover: true, can_focus: true, style: 'min-width: 100px;'});
+                                            track_hover: true, can_focus: true/*, style: 'min-width: 100px;'*/});
         this.searchEntryText = this.searchEntry.clutter_text;
         this.searchEntry.set_primary_icon(this.searchInactiveIcon);
-        this.searchBox = new St.BoxLayout({ style_class: 'menu-search-box', style: 'min-width: 160px;' });
+        this.searchBox = new St.BoxLayout({ style_class: 'menu-search-box' });
         this.searchBox.add(this.searchEntry, { expand: true, x_align: St.Align.START, y_align: St.Align.MIDDLE });
     }
 

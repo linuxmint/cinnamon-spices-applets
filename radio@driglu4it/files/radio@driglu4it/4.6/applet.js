@@ -63,9 +63,13 @@ class CinnamonRadioApplet extends TextIconApplet {
       mprisPluginPath: mprisPluginPath,
       _handleRadioStopped: (...args) => this._handleRadioStopped(args),
       _getInitialVolume: () => this._getInitialVolume(),
-      _handleRadioChannelChangedPaused: (...args) => this._handleRadioChannelChangedPaused(...args)
+      _handleRadioChannelChangedPaused: (...args) => this._handleRadioChannelChangedPaused(...args),
+      _handleVolumeChanged: (...args) => this.set_applet_tooltip(...args)
 
     })
+
+    this.mpvPlayer.init()
+
   }
 
   _handleRadioChannelChangedPaused(channelUrl) {
@@ -249,8 +253,8 @@ class CinnamonRadioApplet extends TextIconApplet {
     }
   }
 
-  set_applet_tooltip(nameCurrentMenuItem) {
-    const text = (nameCurrentMenuItem === "Stop") ? "Radio++" : nameCurrentMenuItem
+  set_applet_tooltip(stop, volume) {
+    const text = (stop) ? "Radio++" : _("Volume: ") + volume.toString() + "%"
     super.set_applet_tooltip(text)
   }
 
@@ -259,7 +263,9 @@ class CinnamonRadioApplet extends TextIconApplet {
     const nameCurrentMenuItem = activatedMenuItem.label.text
 
     this._setIconToMenuItem({ menuItem: activatedMenuItem })
-    this.set_applet_tooltip(nameCurrentMenuItem)
+
+    if (nameCurrentMenuItem === "Stop") this.set_applet_tooltip(true)
+
     this.set_applet_label(nameCurrentMenuItem)
     this._setIconColor();
 
