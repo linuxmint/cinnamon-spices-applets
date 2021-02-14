@@ -20,7 +20,6 @@ const {MODABLE, MODED} = require('./emoji');
 const PlacementTOOLTIP = 1, PlacementUNDER = 2, PlacementNONE = 3;
 const SHOW_SEARCH_MARKUP_IN_TOOLTIP = true;
 const USER_DESKTOP_PATH = getUserDesktopDir();
-const CAN_UNINSTALL = GLib.file_test('/usr/bin/cinnamon-remove-application', GLib.FileTest.EXISTS);
 
 class CategoryButton extends PopupBaseMenuItem {
     constructor(appThis, dir, altNameText, altIconName) {
@@ -424,12 +423,6 @@ class ContextMenu {
             addMenuItem( new ContextMenuItem(this.appThis, _('Add to favorites'), 'non-starred',
                                         () => { this.appThis.appFavorites.addFavorite(app.get_id());
                                                 this.close(); } ));
-        }
-        if (CAN_UNINSTALL && !app.dontAllowUninstall) {
-            addMenuItem( new ContextMenuItem(this.appThis, _('Uninstall'), 'edit-delete',
-                        () => { spawnCommandLine('/usr/bin/cinnamon-remove-application \'' +
-                                                                app.get_app_info().get_filename() + '\'');
-                                this.appThis.closeMenu();} ));
         }
     }
 
