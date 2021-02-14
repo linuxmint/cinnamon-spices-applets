@@ -34,7 +34,7 @@
 
 * Fix wind icon color when non-symbolic icons used in the applet
 
-* Fix [#3488](https://github.com/linuxmint/cinnamon-spices-applets/issues/3488), add Climacell V4 as a new provider because Climacell v3 is deprecated and dosen't accept new signups.
+* Fix [#3488](https://github.com/linuxmint/cinnamon-spices-applets/issues/3488), add Climacell V4 as a new provider because Climacell v3 is deprecated and doesn't accept new signups.
 
 * Make network and DNS related errors soft errors again
 
@@ -61,7 +61,7 @@
 * Add option to short display Hourly weather times
 * Minor refactor
 * Fix typos
-* OpenWeatherMap now shows Feels Like temerature instead of Cloudiness
+* OpenWeatherMap now shows Feels Like temperature instead of Cloudiness
 
 ## 2.6.9
 
@@ -166,7 +166,7 @@ Fixes:
 ## 2.4.6
 
 * Fixes [#2907](https://github.com/linuxmint/cinnamon-spices-applets/issues/2907)
-* Update Hungraian translation
+* Update Hungarian translation
 
 ## 2.4.5
 
@@ -244,7 +244,7 @@ Fixes:
 
 ## 2.3.0
 
-* Fixed Issues with Debian, now Polyfilling Promises when needed
+* Fixed Issues with Debian, now polyfilled Promises when needed
 * Reworked on how to import from other files, now in line with other applets
 * Utility functions moved to other file.
 * Typescript declarations reorganized now they make a little bit more sense *(generated declarations from gir files still don't work that well, although mostly working)*
