@@ -1951,7 +1951,7 @@ msgstr "Locatie"
 
 #. 3.8->settings-schema.json->units-page->title
 msgid "Units, Icons and Keys"
-msgstr "Eenheden, pictogr., toets"
+msgstr "Overige keuzes"
 
 #. 3.8->settings-schema.json->info-section->title
 msgid "Help"
