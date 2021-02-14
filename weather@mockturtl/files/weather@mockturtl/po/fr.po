@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: weather@mockturtl 3.0.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-01-31 15:37+0000\n"
-"PO-Revision-Date: 2021-02-10 21:05+0100\n"
+"PO-Revision-Date: 2021-02-14 10:53+0100\n"
 "Last-Translator: FabRCT <fab.rct@gmail.com>\n"
 "Language-Team: Français <ecyrbe@gmail.com>\n"
 "Language: fr\n"
@@ -31,7 +31,7 @@ msgstr "T° ressentie"
 #: 3.0/met_uk.js:340 3.8/openWeatherMap.js:124 3.8/weatherbit.js:108
 #: 3.8/us_weather.js:199 3.8/met_uk.js:178
 msgid "Failed to Process Current Weather Info"
-msgstr "Échec du traitement des informations météorologiques actuelles"
+msgstr "Échec du traitement de l'information météorologique actuelle"
 
 #: 3.0/openWeatherMap.js:238 3.8/openWeatherMap.js:175
 msgid "Please make sure Location is in the correct format in the Settings"
@@ -361,7 +361,7 @@ msgstr "Ciel couvert"
 #: 3.0/met_uk.js:400 3.8/weatherbit.js:135 3.8/weatherbit.js:170 3.8/us_weather.js:236
 #: 3.8/met_uk.js:202 3.8/met_uk.js:238
 msgid "Failed to Process Forecast Info"
-msgstr "Échec du traitement des prévisions météorologiques"
+msgstr "Échec du traitement des données de prévision"
 
 #: 3.0/weatherbit.js:312
 msgid ""
@@ -594,7 +594,7 @@ msgstr "Possible"
 #: 3.0/darkSky.js:189 3.0/yahoo.js:166 3.0/climacell.js:174 3.8/darkSky.js:119
 #: 3.8/yahoo.js:98 3.8/climacell.js:91
 msgid "Failed to Process Weather Info"
-msgstr "Échec du traitement des informations météorologiques"
+msgstr "Échec du traitement de l'information météorologique"
 
 #: 3.0/darkSky.js:211
 msgid ""
@@ -977,7 +977,7 @@ msgstr "Emplacement non couvert"
 
 #: 3.0/applet.js:194 3.0/applet.js:379 3.8/notification_service.js:9
 msgid "Weather Applet"
-msgstr "Applet météo"
+msgstr "Applet Météo"
 
 #: 3.0/applet.js:218 3.8/main.js:244
 msgid "..."
@@ -1013,8 +1013,8 @@ msgstr "Impossible d'obtenir les informations"
 #: 3.0/applet.js:625 3.8/main.js:128
 msgid "Unexpected Error While Refreshing Weather, please see log in Looking Glass"
 msgstr ""
-"Erreur inattendue lors d'une mise à jour des données météo, veuillez consulter les "
-"journaux dans Looking Glass"
+"Erreur inattendue en actualisant la météo, veuillez consulter les journaux dans "
+"Looking Glass"
 
 #: 3.0/applet.js:671 3.8/main.js:376
 msgid ""
@@ -1022,7 +1022,7 @@ msgid ""
 "are you connected to the internet?"
 msgstr ""
 "Impossible de mettre à jour la météo depuis un certain temps...\n"
-"êtes-vous connecté à internet ?"
+"êtes-vous connecté·e à internet ?"
 
 #: 3.0/applet.js:685
 msgid "Network Error, please check logs in Looking Glass"
@@ -1337,7 +1337,7 @@ msgstr "Vent fort"
 
 #: 3.8/weatherbit.js:230
 msgid "API key is doesn't provide access to Hourly Weather, skipping"
-msgstr "La clé API ne donne pas accès à la météo horaire, ignorée"
+msgstr "La clé API ne donne pas accès à la météo horaire, on l'ignore"
 
 #: 3.8/main.js:104
 msgid "This provider requires an API key to operate"
@@ -1502,7 +1502,7 @@ msgstr "Météo"
 
 #. metadata.json->description
 msgid "View your local weather forecast"
-msgstr "Affiche les prévisions de votre région"
+msgstr "Affiche les prévisions météorologiques de votre région"
 
 #. 3.0->settings-schema.json->head->description
 msgid "Settings for weather@mockturtl 3.0+"
@@ -1515,7 +1515,7 @@ msgstr "Définir le raccourci clavier pour ouvrir le menu"
 
 #. 3.0->settings-schema.json->descriptions->description
 msgid "Weather service information"
-msgstr "Informations sur les services météo"
+msgstr "Informations sur les services météorologiques"
 
 #. 3.0->settings-schema.json->moreInfo->description
 msgid "Click here for detailed description"
@@ -1530,7 +1530,7 @@ msgstr "Ouvre la page web de l'aide"
 #. 3.0->settings-schema.json->providerSettings->description
 #. 3.8->settings-schema.json->provider-options->title
 msgid "Weather Provider Options"
-msgstr "Paramètres du service météo"
+msgstr "Paramètres du service météorologique"
 
 #. 3.0->settings-schema.json->dataService->description
 #. 3.8->settings-schema.json->dataService->description
@@ -1627,7 +1627,7 @@ msgstr "jours"
 #. 3.0->settings-schema.json->forecastDays->description
 #. 3.8->settings-schema.json->forecastDays->description
 msgid "Forecast length"
-msgstr "Étendue des prévisions"
+msgstr "Étendue des prévisions journalières"
 
 #. 3.0->settings-schema.json->forecastHours->units
 #. 3.8->settings-schema.json->forecastHours->units
@@ -1962,7 +1962,7 @@ msgstr "Raccourcis clavier"
 
 #. 3.8->settings-schema.json->provider-info->title
 msgid "How to choose a weather provider"
-msgstr "Comment choisir un fournisseur météorologique"
+msgstr "Comment choisir un fournisseur de prévisions météorologiques"
 
 #. 3.8->settings-schema.json->location-info->title
 msgid "Allowed location formats"
@@ -2092,7 +2092,7 @@ msgstr ""
 "Si vous rencontrez un problème avec cette applet, veuillez faire un rapport en "
 "cliquant sur le bouton ci-dessous et connectez-vous avec votre compte GitHub. "
 "N'oubliez pas d'écrire weather@mockturtl dans le champ Titre en haut pour que tout "
-"le monde sache plus facilement que le problème concerne l'applet météo (le "
+"le monde sache plus facilement que le problème concerne l'applet Météo (le "
 "formulaire est pour toutes les applets Cinnamon)."
 
 #. 3.8->settings-schema.json->provider-explanation->description
