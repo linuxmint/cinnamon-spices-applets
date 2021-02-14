@@ -237,7 +237,7 @@
   },
   "conditionSettings": {
     "type": "header",
-    "description": "Weather Conditions"
+    "description": "Weather conditions"
   },
   "translateCondition": {
     "type": "checkbox",
