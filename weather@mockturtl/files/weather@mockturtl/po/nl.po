@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: cinnamon-weather (weather@mockturtl or Weather)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-31 15:37+0000\n"
-"PO-Revision-Date: 2021-02-01 23:43+0100\n"
+"POT-Creation-Date: 2021-02-06 19:08+0000\n"
+"PO-Revision-Date: 2021-02-13 15:21+0100\n"
 "Last-Translator: Pjotr <pjotrvertaalt@gmail.com>\n"
 "Language-Team: Dutch\n"
 "Language: nl\n"
@@ -31,7 +31,7 @@ msgstr "Voelt als"
 #: 3.0/met_uk.js:340 3.8/openWeatherMap.js:124 3.8/weatherbit.js:108
 #: 3.8/us_weather.js:199 3.8/met_uk.js:178
 msgid "Failed to Process Current Weather Info"
-msgstr "Kon de huidige weersinformatie niet verwerken"
+msgstr "Kon de huidige weerinformatie niet verwerken"
 
 #: 3.0/openWeatherMap.js:238 3.8/openWeatherMap.js:175
 msgid "Please make sure Location is in the correct format in the Settings"
@@ -1354,9 +1354,8 @@ msgid "Strong wind"
 msgstr "Harde wind"
 
 #: 3.8/weatherbit.js:230
-msgid "API key is doesn't provide access to Hourly Weather, skipping"
-msgstr ""
-"API-sleutel geeft geen toegang tot uurlijks weer, wordt overgeslagen"
+msgid "API key doesn't provide access to Hourly Weather, skipping"
+msgstr "API-sleutel geeft geen toegang tot uurlijks weer, wordt overgeslagen"
 
 #: 3.8/main.js:104
 msgid "This provider requires an API key to operate"
@@ -1616,7 +1615,6 @@ msgid "Location - Coordinates"
 msgstr "Locatie - Coördinaten"
 
 #. 3.0->settings-schema.json->location->tooltip
-#. 3.8->settings-schema.json->location->tooltip
 msgid ""
 "Acceptable inputs are Latitude,Longitude. e.g.: 68.1932,17.1426 or an "
 "address.\n"
@@ -1871,12 +1869,12 @@ msgstr "Maximaal aantal rijen voor de voorspelling"
 #. 3.0->settings-schema.json->showSunrise->description
 #. 3.8->settings-schema.json->showSunrise->description
 msgid "Show sunrise / sunset times"
-msgstr "Tijdstippen tonen van zonsopgang en zonsondergang"
+msgstr "Toon tijdstippen van zonsopgang en zonsondergang"
 
 #. 3.0->settings-schema.json->show24Hours->description
 #. 3.8->settings-schema.json->show24Hours->description
 msgid "Display time in 24 hour format"
-msgstr "Tijd tonen in 24-uurs-opmaak"
+msgstr "Toon tijd in 24-uurs-opmaak"
 
 #. 3.0->settings-schema.json->shortHourlyTime->description
 #. 3.8->settings-schema.json->shortHourlyTime->description
@@ -1953,7 +1951,7 @@ msgstr "Locatie"
 
 #. 3.8->settings-schema.json->units-page->title
 msgid "Units, Icons and Keys"
-msgstr "Eenheden, pictogrammen en toetsen"
+msgstr "Eenheden, pictogr., toets"
 
 #. 3.8->settings-schema.json->info-section->title
 msgid "Help"
@@ -1983,21 +1981,28 @@ msgstr "Opduikmenu"
 msgid "Keybindings"
 msgstr "Toetsbindingen"
 
-#. 3.8->settings-schema.json->provider-info->title
-msgid "How to choose a weather provider"
-msgstr "Zo kiest u een weeraanbieder"
-
-#. 3.8->settings-schema.json->location-info->title
-msgid "Allowed location formats"
-msgstr "Toegestane opmaaksoorten voor locatie"
-
 #. 3.8->settings-schema.json->more-info->title
-msgid "View additional information"
-msgstr "Bekijk aanvullende informatie"
+msgid "More about the Weather applet"
+msgstr "Meer over het Weer-werkbalkhulpje"
 
 #. 3.8->settings-schema.json->submit-issue->title
 msgid "Report an issue"
 msgstr "Een fout melden"
+
+#. 3.8->settings-schema.json->dataService->tooltip
+msgid ""
+"You can choose between several different weather forecast providers. Some "
+"providers require a API key to work, some have regional limits, differ in "
+"forecast length, and they all need a functional internet connection to work. "
+"The options are described in detail on the Cinnamon Spices Website which you "
+"can access with the button on the Help tab."
+msgstr ""
+"U kunt gebruik maken van verschillende weersverwachtingaanbieders. Sommige "
+"aanbieders hebben een API-sleutel nodig om te kunnen werken, sommige hebben "
+"regionale limieten, ze verschillen in voorspellingslengte en ze hebben alle "
+"een werkende internetverbinding nodig. De opties worden in detail beschreven "
+"op de Cinnamon Spices-website, waartoe u toegang heeft met de knop op het "
+"tabblad Hulp."
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "Visual Crossing (key needed)"
@@ -2018,6 +2023,21 @@ msgstr "Met Office UK (alleen voor het VK)"
 #. 3.8->settings-schema.json->dataService->options
 msgid "US National Weather (US only)"
 msgstr "US National Weather (alleen voor de VS)"
+
+#. 3.8->settings-schema.json->location->tooltip
+msgid ""
+"You can enter coordinates 'Latitude,Longitude' (e.g. 51.5085,-0.1257) or use "
+"'City,Country-code' (e.g. London,UK) or try to enter {House number} {Street} "
+"{City/Town} {Postcode} {Country}. The search algorithm is very flexible with "
+"the format. After 3 seconds without typing the address you entered is "
+"replaced automatically for validating your choice."
+msgstr ""
+"U kunt de coördinaten 'Breedtegraad,Lengtegraad' (bijv. 51,5085,-0,1257) "
+"invoeren of gebruik 'Stad,Landcode' (bijv. Oss,NL) of probeer {Huisnummer} "
+"{Straat} {Stad/Plaats} {Postcode} {Land} in te voeren. Het zoekalgoritme is "
+"zeer flexibel met de opmaak. Drie seconden nadat u bent opgehouden met "
+"tikken zal het door u ingegeven adres automatisch worden vervangen om uw "
+"keuze te valideren."
 
 #. 3.8->settings-schema.json->saveLocation->description
 msgid "Save current location to storage"
@@ -2078,13 +2098,16 @@ msgstr "Gebruik symbolische pictogrammen in dit werkbalkhulpje"
 
 #. 3.8->settings-schema.json->more-info-label->description
 msgid ""
-"For more information go to the Spices Website by clicking the button below. "
-"You can also comment and ask a questions to the community at this page by "
-"logging in with your Github account."
+"For detailed information about the applet please go to the Spices Website by "
+"clicking the button below. You can also comment and ask a questions to the "
+"community at this page by logging in with your Github account. You can also "
+"find information about known issues, troubleshooting, changelog and more."
 msgstr ""
-"Ga voor meer informatie naar de website van Spices door op de onderstaande "
-"knop te klikken. U kunt ook commentaar geven en vragen stellen aan de "
-"gemeenschap op deze pagina, door uzelf aan te melden met uw Github-account."
+"Ga voor gedetailleerde informatie over het werkbalkhulpje a.u.b. naar de "
+"website van Spices door op de onderstaande knop te klikken. U kunt daar ook "
+"commentaar geven en vragen stellen aan de gemeenschap, door uzelf aan te "
+"melden met uw Github-account. U kunt er ook informatie vinden over bekende "
+"fouten, probleemoplossing, logboek van wijzigingen en meer."
 
 #. 3.8->settings-schema.json->submitIssue->description
 msgid "Submit an Issue"
@@ -2118,23 +2141,6 @@ msgstr ""
 "duidelijk is dat de fout het weer-werkbalkhulpje betreft (het formulier is "
 "voor alle Cinnamon-werkbalkhulpjes)."
 
-#. 3.8->settings-schema.json->provider-explanation->description
-msgid ""
-"You can use several different weather forecast providers that you choose "
-"under the first Weather Tab in this Configuration panel. Some providers "
-"require a API key to work, some have regional limits, differ in forecast "
-"length, and they all need a functional internet connection to work. The "
-"options are described in detail on the Cinnamon Spices Website, what you can "
-"access with the button further down."
-msgstr ""
-"U kunt gebruik maken van verschillende weersverwachtingaanbieders die u "
-"kiest onder het eerste Weer-tabblad in dit instellingenpaneel. Sommige "
-"aanbieders hebben een API-sleutel nodig om te kunnen werken, sommige hebben "
-"regionale limieten, ze verschillen in voorspellingslengte en ze hebben alle "
-"een werkende internetverbinding met de gekozen dienst nodig. De opties "
-"worden in detail beschreven op de Cinnamon Spices-website, waartoe u toegang "
-"heeft met de knop verderop."
-
 #. 3.8->settings-schema.json->loc-info->description
 msgid ""
 "Your location in most cases work automatically but you can enter it manually "
@@ -2151,6 +2157,15 @@ msgstr ""
 "zoekalgoritme is zeer flexibel met de opmaak. Drie seconden nadat u bent "
 "opgehouden met tikken zal het door u ingegeven adres automatisch worden "
 "vervangen om uw keuze te valideren."
+
+#~ msgid "How to choose a weather provider"
+#~ msgstr "Zo kiest u een weeraanbieder"
+
+#~ msgid "Allowed location formats"
+#~ msgstr "Toegestane opmaaksoorten voor locatie"
+
+#~ msgid "View additional information"
+#~ msgstr "Bekijk aanvullende informatie"
 
 #~ msgid "Substantial Rain"
 #~ msgstr "Veel regen"
