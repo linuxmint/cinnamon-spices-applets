@@ -34,6 +34,14 @@ export class LocationStore {
 		if (this.app.Locked())
 			return;
 
+		// Ensure Entry text is not empty
+		for (let index = 0; index < locs.length; index++) {
+			const element = locs[index];
+			if (!element.entryText) {
+				locs[index] = this.EnsureSearchEntry(element);
+			}
+		}
+
 		let currentIndex = this.FindIndex(this.config.CurrentLocation);
 		let newIndex = this.FindIndex(this.config.CurrentLocation, locs);
 		let currentlyDisplayedChanged = false;
@@ -93,10 +101,17 @@ export class LocationStore {
                     lat: element.lat,
                     lon: element.lon,
                     timeZone: element.timeZone,
-                }
+                };
         }
         return null;
     }
+
+	private EnsureSearchEntry(loc: LocationData): LocationData {
+		if (!loc.entryText)
+			loc.entryText = `${loc.lat},${loc.lon}`;
+
+		return loc;
+	}
 
 	/** Only gets the location, if you want to switch between locations, use 
 	 * Config.SwitchToNextLocation function
