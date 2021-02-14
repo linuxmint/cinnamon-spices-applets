@@ -14,24 +14,30 @@ const MPV_MPRIS_BUS_NAME = `${MEDIA_PLAYER_2_NAME}.mpv`
 
 class MpvPlayerHandler {
 
-    constructor({ mprisPluginPath, _handleRadioStopped, _getInitialVolume }) {
+    constructor({ mprisPluginPath, _handleRadioStopped, _getInitialVolume, _handleVolumeChanged }) {
 
         Object.assign(this, arguments[0])
-
         this._volume = this._getInitialVolume()
-        this._initDbus()
+    }
+
+    async init() {
+        this._initDbus() // used to to check if mpv is running
 
         if (this._checkMpvRunning()) {
             this._initMpris()
-            this._volume = this._mediaServerPlayer.Volume * 100
-            this._initCvcSteam() // We need this to sync the volume in the sound applet with the mpris volume. See: https://github.com/linuxmint/cinnamon/issues/9770
+            await this._initCvcSteam()
+
+            // updating the volume has several benefits: cvcStream and mpris is synched, handleVolumeChanged function is executed and it is ensured that the volume is not above the maxVolume
+            this._updateVolume({
+                updateTarget: "Both",
+                newVolume: Math.min(this._mediaServerPlayer.Volume * 100, MAX_VOLUME)
+            })
         } else {
             this._dbus = null
         }
     }
 
-
-    _initInterfaces() {
+    _initAllInterfaces() {
         this._initMpris()
         this._initDbus()
         this._initCvcSteam()
@@ -53,27 +59,27 @@ class MpvPlayerHandler {
         this._listenToRadioStopped()
     }
 
-    _initCvcSteam() {
+    async _initCvcSteam() {
+
         this._control = new Cvc.MixerControl({ name: 'Radio' });
-        this._control.connect('stream-added', (control, id) => {
-            // this is executed each time when starting or changing a radio stream
-            const stream = this._control.lookup_stream_id(id);
-            if (!stream) return // preventing stream is null in log
-            if (stream.name === "mpv Media Player") {
-
-
-                // by default it is used the volume from the last time MPV was used. 
-                this._stream = stream
-                if (this._normalizeStreamVolume(this._stream.volume) != this._volume) {
-                    this._updateVolume({ updateTarget: "cvcStream", newVolume: this._volume })
-                }
-
-                this._stream.connect("notify::volume", () => {
-                    this._handleCvcVolumeChanged()
-                })
-            }
-        })
         this._control.open();
+
+        this._stream = await this._getCvcStream()
+        this._stream.connect("notify::volume", () => {
+            this._handleCvcVolumeChanged()
+        })
+
+    }
+
+
+    _getCvcStream() {
+        return new Promise((resolve, reject) => {
+            this._control.connect('stream-added', (control, id) => {
+                const stream = this._control.lookup_stream_id(id);
+                if (!stream) return
+                if (stream.name === "mpv Media Player") resolve(stream)
+            })
+        })
     }
 
     _handleCvcVolumeChanged() {
@@ -133,7 +139,13 @@ class MpvPlayerHandler {
     }
 
     _handleMprisVolumeChanged(props) {
-        const newVolume = props.Volume.unpack() * 100
+        let newVolume = Math.round(props.Volume.unpack() * 100)
+
+        if (newVolume > MAX_VOLUME) {
+            this._updateVolume({ updateTarget: "Both", newVolume: MAX_VOLUME })
+            return
+        }
+
         if (newVolume != this._volume) {
             this._updateVolume({ updateTarget: "cvcStream", newVolume: newVolume })
         }
@@ -171,8 +183,8 @@ class MpvPlayerHandler {
             this._mediaServerPlayer.Volume = newVolume / 100
         }
 
+        this._handleVolumeChanged(false, newVolume)
         this._volume = newVolume
-
     }
 
     _updateCvcStreamVolume(newVolume) {
@@ -182,8 +194,7 @@ class MpvPlayerHandler {
 
     async startChangeRadioChannel(channelUrl) {
 
-
-        if (this._mediaServerPlayer === null) { this._initInterfaces() }
+        if (this._mediaServerPlayer === null) { this._initAllInterfaces() }
 
         this._stopAllOtherMediaPlayer()
 
@@ -206,8 +217,9 @@ class MpvPlayerHandler {
     }
 
     // returns true when volume changed and false if not. This is the case when the increased volume would be higher than the max volume or lower than zero
-    // TODO: shouldn't be allowed when radio isn't running
     increaseDecreaseVolume(amount) {
+
+        if (!this._mediaServerPlayer) return
 
         let volumeChanged = false
         const newVolume = Math.min(MAX_VOLUME, Math.max(0, this._volume + amount))
@@ -234,7 +246,7 @@ class MpvPlayerHandler {
         return radioUrl
     }
 
-    // TODO: with proper JS getter setter 
+    // TODO: with proper JS getter setter
     getPlayPauseStatus() {
         if (!this._mediaServerPlayer) { return "Stopped" }
         return this._mediaServerPlayer.PlaybackStatus
