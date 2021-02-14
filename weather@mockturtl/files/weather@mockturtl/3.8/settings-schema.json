@@ -34,7 +34,7 @@
         },
         "units-page":{
             "type":"page",
-            "title":"Units, Icons and Keys",
+            "title":"Other options",
             "sections":[
 				"units-section",
 				"icons",
@@ -336,6 +336,7 @@
 	"locationList": {
 		"type" : "list",
 		"description" : "Your saved locations",
+		"tooltip": "You have to make sure the Search entry field is unique and your Timezone is in the IANA time zone format (e.g. 'Europe/London')",
 		"columns" : [
 			{"id": "lat", "title": "Latitude", "type": "float", "min": -85, "max": 85},
 			{"id": "lon", "title": "Longitude", "type": "float", "min": -180, "max": 180},

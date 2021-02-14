@@ -12,6 +12,8 @@
 
 * Fixes [#3556](https://github.com/linuxmint/cinnamon-spices-applets/issues/3556)
 
+* Fixes [#3554](https://github.com/linuxmint/cinnamon-spices-applets/issues/3554)
+
 ## 3.0.2
 
 * Fix icons for Met Norway, some are missing

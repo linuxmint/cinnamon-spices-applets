@@ -1,7 +1,3 @@
-// TODO: Switch to setting-schema based LocationStore as soon as 3.0 id Deprecated
-// TODO: Make internal persistent setting when switching to location store entries and back
-// Example schema entry:
-
 import { Config } from "./config";
 import { Event } from "./events";
 import { Log } from "./logger";
