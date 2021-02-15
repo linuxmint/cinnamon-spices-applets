@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-08-12 12:09+0800\n"
-"PO-Revision-Date: 2021-02-15 09:37+0100\n"
+"PO-Revision-Date: 2021-02-15 09:51+0100\n"
 "Last-Translator: David VANTYGHEM <david.vantyghem@laposte.net>\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -155,7 +155,7 @@ msgstr "Alerter lorsque la valeur actuelle est en-dessous de cette valeur"
 
 #. cryptocoin@guantanamoe->settings-schema.json->alert-on-delta-above->description
 msgid "Increase variation (%)"
-msgstr "Diminution (%)"
+msgstr "Augmentation (%)"
 
 #. cryptocoin@guantanamoe->settings-schema.json->alert-on-delta-above->tooltip
 msgid "Alert when value increase this delta %"
@@ -163,7 +163,7 @@ msgstr "Alerter lorsque la valeur augmente de cet écart en %"
 
 #. cryptocoin@guantanamoe->settings-schema.json->alert-on-delta-below->description
 msgid "Decrease variation (%)"
-msgstr "Augmentation (%)"
+msgstr "Diminution (%)"
 
 #. cryptocoin@guantanamoe->settings-schema.json->alert-on-delta-below->tooltip
 msgid "Alert when value decrease this delta %"
