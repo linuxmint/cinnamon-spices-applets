@@ -9,10 +9,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: 3.0.1\n"
+"Project-Id-Version: 3.0.2\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-31 15:37+0000\n"
-"PO-Revision-Date: 2021-02-02 14:36+0300\n"
+"POT-Creation-Date: 2021-02-06 19:08+0000\n"
+"PO-Revision-Date: 2021-02-15 12:39+0300\n"
 "Last-Translator: serkanonder@outlook.com\n"
 "Language-Team: \n"
 "Language: tr\n"
@@ -387,8 +387,8 @@ msgid ""
 "Please Make sure you\n"
 "entered the API key correctly and your account is not locked"
 msgstr ""
-"Lütfen API anahtarını doğru girdiğinizde emin olun\n"
-" hesabınız kilitli değil"
+"Lütfen API anahtarını doğru girdiğinizden emin olun\n"
+"hesabınız kilitli değil"
 
 #: 3.0/met_norway.js:131 3.8/met_norway.js:64
 msgid "Cloudiness"
@@ -633,7 +633,7 @@ msgid ""
 " see Looking Glass log for errors"
 msgstr ""
 "Yahoo köprüsü çağrılırken Bilinmeyen Hata oluştu,\n"
-"  Hatalar için Hata Günlüğüne bakın"
+" Hatalar için Hata Günlüğüne bakın"
 
 #: 3.0/yahoo.js:91 3.8/yahoo.js:25
 msgid ""
@@ -641,7 +641,7 @@ msgid ""
 " see Looking Glass log for errors"
 msgstr ""
 "Yahoo köprüsü kötü biçimde yanıt verdi,\n"
-"  Hatalar için Hata Günlüğüne bakın"
+" Hatalar için Hata Günlüğüne bakın"
 
 #: 3.0/yahoo.js:177 3.8/yahoo.js:109
 msgid "Missing package"
@@ -1174,7 +1174,7 @@ msgid ""
 "entered the API key what you have from Climacell"
 msgstr ""
 "Lütfen emin olun\n"
-"Climacell'den sahip olduğunuz API anahtarını girdiniz"
+"Climacell'den sahip olduğunuz API anahtarını giriniz"
 
 #: 3.0/climacell.js:280 3.8/climacellV4.js:269 3.8/climacell.js:185
 #: 3.8/visualcrossing.js:206
@@ -1350,8 +1350,8 @@ msgid "Strong wind"
 msgstr "Şiddetli Rüzgar"
 
 #: 3.8/weatherbit.js:230
-msgid "API key is doesn't provide access to Hourly Weather, skipping"
-msgstr "API anahtarı, Saatlik Hava Durumuna erişim sağlamıyor, atla"
+msgid "API key doesn't provide access to Hourly Weather, skipping"
+msgstr "API anahtarı, Saatlik Hava Durumuna erişim sağlamıyor, atlanıyor"
 
 #: 3.8/main.js:104
 msgid "This provider requires an API key to operate"
@@ -1612,7 +1612,6 @@ msgid "Location - Coordinates"
 msgstr "Konum - Koordinatlar"
 
 #. 3.0->settings-schema.json->location->tooltip
-#. 3.8->settings-schema.json->location->tooltip
 msgid ""
 "Acceptable inputs are Latitude,Longitude. e.g.: 68.1932,17.1426 or an "
 "address.\n"
@@ -1976,21 +1975,28 @@ msgstr "Açılır menü"
 msgid "Keybindings"
 msgstr "Tuş atamaları"
 
-#. 3.8->settings-schema.json->provider-info->title
-msgid "How to choose a weather provider"
-msgstr "Hava durumu sağlayıcısı nasıl seçilir"
-
-#. 3.8->settings-schema.json->location-info->title
-msgid "Allowed location formats"
-msgstr "İzin verilen konum biçimleri"
-
 #. 3.8->settings-schema.json->more-info->title
-msgid "View additional information"
-msgstr "Ek bilgileri görüntüleyin"
+msgid "More about the Weather applet"
+msgstr "Hava Durumu uygulaması hakkında daha fazla bilgi"
 
 #. 3.8->settings-schema.json->submit-issue->title
 msgid "Report an issue"
 msgstr "Sorun bildirin"
+
+#. 3.8->settings-schema.json->dataService->tooltip
+msgid ""
+"You can choose between several different weather forecast providers. Some "
+"providers require a API key to work, some have regional limits, differ in "
+"forecast length, and they all need a functional internet connection to work. "
+"The options are described in detail on the Cinnamon Spices Website which you "
+"can access with the button on the Help tab."
+msgstr ""
+"Birkaç farklı hava tahmini sağlayıcısı arasından seçim yapabilirsiniz. Bazı "
+"sağlayıcıların çalışması için bir API anahtarı gerekir, bazılarının bölgesel "
+"sınırları vardır, tahmin uzunluğu farklıdır ve hepsinin çalışması için "
+"işlevsel bir internet bağlantısına ihtiyacı vardır. Seçenekler, Yardım "
+"sekmesindeki buton ile erişebileceğiniz Cinnamon Spices Web sitesinde "
+"detaylı olarak açıklanmıştır."
 
 #. 3.8->settings-schema.json->dataService->options
 msgid "Visual Crossing (key needed)"
@@ -2011,6 +2017,20 @@ msgstr "Met Office UK (yalnızca İngiltere)"
 #. 3.8->settings-schema.json->dataService->options
 msgid "US National Weather (US only)"
 msgstr "ABD Ulusal Hava Durumu (yalnızca ABD)"
+
+#. 3.8->settings-schema.json->location->tooltip
+msgid ""
+"You can enter coordinates 'Latitude,Longitude' (e.g. 51.5085,-0.1257) or use "
+"'City,Country-code' (e.g. London,UK) or try to enter {House number} {Street} "
+"{City/Town} {Postcode} {Country}. The search algorithm is very flexible with "
+"the format. After 3 seconds without typing the address you entered is "
+"replaced automatically for validating your choice."
+msgstr ""
+"Koordinatları 'Enlem, Boylam' (ör. 51.5085, -0.1257) girebilir veya 'Şehir, "
+"Ülke kodu' (ör. Londra, İngiltere) kullanabilir veya {Ev numarası} {Sokak} "
+"{Şehir/Kasaba} {Postakodu} {Ulke} girmeyi deneyebilirsiniz. Arama "
+"algoritması, format ile çok esnektir. Girdiğiniz adresi yazdıktan 3 saniye "
+"sonra, seçiminizi doğrulamak için otomatik olarak kaydedilir."
 
 #. 3.8->settings-schema.json->saveLocation->description
 msgid "Save current location to storage"
@@ -2071,13 +2091,16 @@ msgstr "Uygulama boyunca sembolik simgeler kullan"
 
 #. 3.8->settings-schema.json->more-info-label->description
 msgid ""
-"For more information go to the Spices Website by clicking the button below. "
-"You can also comment and ask a questions to the community at this page by "
-"logging in with your Github account."
+"For detailed information about the applet please go to the Spices Website by "
+"clicking the button below. You can also comment and ask a questions to the "
+"community at this page by logging in with your Github account. You can also "
+"find information about known issues, troubleshooting, changelog and more."
 msgstr ""
-"Daha fazla bilgi için aşağıdaki düğmeyi tıklayarak Spices Web sitesine "
-"gidin. Ayrıca Github hesabınızla giriş yaparak bu sayfada topluluğa yorum "
-"yapabilir ve sorular sorabilirsiniz."
+"Uygulama hakkında detaylı bilgi için lütfen aşağıdaki butona tıklayarak "
+"Spices Web sitesine gidin. Ayrıca Github hesabınızla giriş yaparak bu "
+"sayfada topluluğa yorum yapabilir ve sorular sorabilirsiniz. Ayrıca bilinen "
+"sorunlar, sorun giderme, değişim günlüğü ve daha fazlası hakkında bilgi "
+"bulabilirsiniz."
 
 #. 3.8->settings-schema.json->submitIssue->description
 msgid "Submit an Issue"
@@ -2111,23 +2134,6 @@ msgstr ""
 "kolaylaştırmak için üst Başlık alanına weather@mockturtl yazmayı unutmayın "
 "(form tüm Cinnamon uygulamaları içindir)."
 
-#. 3.8->settings-schema.json->provider-explanation->description
-msgid ""
-"You can use several different weather forecast providers that you choose "
-"under the first Weather Tab in this Configuration panel. Some providers "
-"require a API key to work, some have regional limits, differ in forecast "
-"length, and they all need a functional internet connection to work. The "
-"options are described in detail on the Cinnamon Spices Website, what you can "
-"access with the button further down."
-msgstr ""
-"Bu Yapılandırma panelindeki ilk Hava Durumu Sekmesi altında seçtiğiniz "
-"birkaç farklı hava tahmini sağlayıcısını kullanabilirsiniz. Bazı "
-"sağlayıcıların çalışması için bir API anahtarı gerekir, bazılarının bölgesel "
-"sınırları vardır, tahmin uzunlukları farklılık gösterir ve hepsinin "
-"çalışması için işlevsel bir internet bağlantısına ihtiyacı vardır. "
-"Seçenekler, daha aşağıda bulunan düğmeyle erişebileceğiniz Cinnamon Spices "
-"Web sitesinde ayrıntılı olarak açıklanmıştır."
-
 #. 3.8->settings-schema.json->loc-info->description
 msgid ""
 "Your location in most cases work automatically but you can enter it manually "
@@ -2143,6 +2149,15 @@ msgstr ""
 "deneyebilirsiniz. {Sokak} {Şehir/Kasaba} {Posta Kodu} {Ülke}. Arama "
 "algoritması, format ile çok esnektir. Girdiğiniz adresi yazdıktan 3 saniye "
 "sonra, seçiminizi doğrulamak için otomatik olarak değiştirilir."
+
+#~ msgid "How to choose a weather provider"
+#~ msgstr "Hava durumu sağlayıcısı nasıl seçilir"
+
+#~ msgid "Allowed location formats"
+#~ msgstr "İzin verilen konum biçimleri"
+
+#~ msgid "View additional information"
+#~ msgstr "Ek bilgileri görüntüleyin"
 
 #~ msgid "Clear Sky"
 #~ msgstr "Gökyüzü Açık"
