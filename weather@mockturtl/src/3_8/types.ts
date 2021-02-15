@@ -152,6 +152,8 @@ export interface Condition {
     customIcon: CustomIcons
 }
 
+/** Immediate precipitation for the next hour, currenlty only OpenWeatherMap uses it.
+ */
 export interface ImmediatePrecipitation {
     /** Precipitation in * minutes */
     start: number;

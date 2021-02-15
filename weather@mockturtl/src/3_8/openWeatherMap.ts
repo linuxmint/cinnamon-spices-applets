@@ -96,13 +96,20 @@ export class OpenWeatherMap implements WeatherProvider {
                 start: -1,
                 end: -1
             }
+
             for (let index = 0; index < json?.minutely.length; index++) {
                 const element = json?.minutely[index];
-                if (element.precipitation > 0)
+                if (element.precipitation > 0 && immediate.start == -1) {
                     immediate.start = index;
-                if (element.precipitation)
-                
+					continue
+				}
+                else if (element.precipitation == 0 && immediate.start != -1) {
+					immediate.end = index;
+					break
+				}
             }
+
+			weather.immediatePrecipitation = immediate;
 
             let forecasts: ForecastData[] = [];
             for (let i = 0; i < json.daily.length; i++) {

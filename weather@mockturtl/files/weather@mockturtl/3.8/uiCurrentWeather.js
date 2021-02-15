@@ -42,6 +42,7 @@ class CurrentWeather {
             this.SetAPIUniqueField(weather.extra_field);
             if (config._showSunrise)
                 this.SetSunriseAndSunset(weather.sunrise, weather.sunset, weather.location.timeZone);
+            this.SetImmediatePrecipitation(weather.immediatePrecipitation);
             return true;
         }
         catch (e) {
@@ -77,6 +78,11 @@ class CurrentWeather {
         let middleColumn = new BoxLayout({ vertical: true, style_class: STYLE_SUMMARYBOX });
         middleColumn.add_actor(this.BuildLocationSection());
         middleColumn.add(this.weatherSummary, { expand: true, x_align: Align.MIDDLE, y_align: Align.MIDDLE, x_fill: false, y_fill: false });
+        this.immediatePrecipitationLabel = new Label({ style_class: "weather-immediate-precipitation" });
+        this.immediatePrecipitationBox = new Bin();
+        this.immediatePrecipitationBox.add_actor(this.immediatePrecipitationLabel);
+        this.immediatePrecipitationBox.hide();
+        middleColumn.add_actor(this.immediatePrecipitationBox);
         if (config._showSunrise)
             middleColumn.add_actor(this.BuildSunBox(config, textColorStyle));
         return middleColumn;
@@ -200,6 +206,23 @@ class CurrentWeather {
         sunBox.add_actor(sunsetBox);
         sunBin.set_child(sunBox);
         return sunBin;
+    }
+    SetImmediatePrecipitation(precip) {
+        if (!precip || precip.end == null || precip.start == null)
+            return;
+        this.immediatePrecipitationBox.show();
+        if (precip.start == -1) {
+            this.immediatePrecipitationBox.hide();
+        }
+        else if (precip.start == 0) {
+            if (precip.end != -1)
+                this.immediatePrecipitationLabel.text = utils_1._("Precipitation will end in {precipEnd} minutes", { precipEnd: precip.end });
+            else
+                this.immediatePrecipitationLabel.text = utils_1._("Precipitation won't end in within an hour");
+        }
+        else {
+            this.immediatePrecipitationLabel.text = utils_1._("Precipitation will start within {precipStart} minutes", { precipStart: precip.start });
+        }
     }
     SetSunriseAndSunset(sunrise, sunset, tz) {
         let sunriseText = "";
