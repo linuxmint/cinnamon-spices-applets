@@ -8,7 +8,7 @@ class OpenWeatherMap {
     constructor(_app) {
         this.prettyName = "OpenWeatherMap";
         this.name = "OpenWeatherMap";
-        this.maxForecastSupport = 7;
+        this.maxForecastSupport = 8;
         this.website = "https://openweathermap.org/";
         this.maxHourlyForecastSupport = 48;
         this.needsApiKey = false;

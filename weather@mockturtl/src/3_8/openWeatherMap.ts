@@ -20,7 +20,7 @@ export class OpenWeatherMap implements WeatherProvider {
     //--------------------------------------------------------
     public readonly prettyName = "OpenWeatherMap";
     public readonly name = "OpenWeatherMap";
-    public readonly maxForecastSupport = 7;
+    public readonly maxForecastSupport = 8;
     public readonly website = "https://openweathermap.org/";
     public readonly maxHourlyForecastSupport = 48;
     public readonly needsApiKey = false;
