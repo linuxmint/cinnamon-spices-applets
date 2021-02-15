@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-08-12 12:09+0800\n"
-"PO-Revision-Date: 2021-02-14 12:03+0100\n"
+"PO-Revision-Date: 2021-02-15 09:51+0100\n"
 "Last-Translator: David VANTYGHEM <david.vantyghem@laposte.net>\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -55,8 +55,8 @@ msgstr "Alertes sur les écarts"
 #. cryptocoin@guantanamoe->settings-schema.json->currency->tooltip
 msgid "Set the currency you want coin value to be set in"
 msgstr ""
-"Définit la devise avec laquelle vous voulez que la valeur de la "
-"cryptomonnaie soit définie"
+"Définit la devise dans laquelle vous voulez que la valeur de la "
+"cryptomonnaie soit exprimée"
 
 #. cryptocoin@guantanamoe->settings-schema.json->ticker->description
 msgid "Ticker"
@@ -155,7 +155,7 @@ msgstr "Alerter lorsque la valeur actuelle est en-dessous de cette valeur"
 
 #. cryptocoin@guantanamoe->settings-schema.json->alert-on-delta-above->description
 msgid "Increase variation (%)"
-msgstr "Diminution (%)"
+msgstr "Augmentation (%)"
 
 #. cryptocoin@guantanamoe->settings-schema.json->alert-on-delta-above->tooltip
 msgid "Alert when value increase this delta %"
@@ -163,7 +163,7 @@ msgstr "Alerter lorsque la valeur augmente de cet écart en %"
 
 #. cryptocoin@guantanamoe->settings-schema.json->alert-on-delta-below->description
 msgid "Decrease variation (%)"
-msgstr "Augmentation (%)"
+msgstr "Diminution (%)"
 
 #. cryptocoin@guantanamoe->settings-schema.json->alert-on-delta-below->tooltip
 msgid "Alert when value decrease this delta %"
