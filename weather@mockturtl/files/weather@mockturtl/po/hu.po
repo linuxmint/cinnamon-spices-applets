@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Neroth-gnome-shell-extension-weather 3696468\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-06 19:08+0000\n"
-"PO-Revision-Date: 2021-02-14 12:09+0100\n"
+"PO-Revision-Date: 2021-02-15 20:32+0100\n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: Hungarian\n"
 "Language: hu\n"
@@ -57,7 +57,7 @@ msgstr ""
 
 #: 3.0/openWeatherMap.js:254 3.8/openWeatherMap.js:191
 msgid "Unknown Error, please see the logs in Looking Glass"
-msgstr "Ismeretlen hiba, a hibaüzenet megtekinthető a Looking Glass-ban"
+msgstr "Ismeretlen hiba, a hibaüzenet megtekinthető a Looking Glass naplóban"
 
 #: 3.0/openWeatherMap.js:362 3.8/openWeatherMap.js:306
 msgid "Thunderstorm with light rain"
@@ -65,7 +65,7 @@ msgstr "Vihar enyhe esővel"
 
 #: 3.0/openWeatherMap.js:363 3.8/openWeatherMap.js:307
 msgid "Thunderstorm with rain"
-msgstr "Vihar esővel"
+msgstr "Vihar"
 
 #: 3.0/openWeatherMap.js:364 3.8/openWeatherMap.js:308
 msgid "Thunderstorm with heavy rain"
@@ -431,24 +431,20 @@ msgstr "Erős viharos záporeső és mennydörgés"
 #: 3.0/met_norway.js:350 3.0/met_norway.js:357 3.8/met_norway.js:267
 #: 3.8/met_norway.js:268 3.8/met_norway.js:274 3.8/met_norway.js:281
 #: 3.8/met_norway.js:288
-#, fuzzy
-#| msgid "Heavy Sleet"
 msgid "Heavy sleet"
-msgstr "Intenzív havas esőzés"
+msgstr "Erős havas eső"
 
 #: 3.0/met_norway.js:344 3.8/met_norway.js:275
-#, fuzzy
-#| msgid "Heavy Sleet and thunder"
 msgid "Heavy sleet and thunder"
-msgstr "Intenzív havas eső és mennydörgés"
+msgstr "Erős havas eső és mennydörgés"
 
 #: 3.0/met_norway.js:351 3.8/met_norway.js:282
 msgid "Heavy sleet showers"
-msgstr "Erős hózápor"
+msgstr "Erős havas záporeső"
 
 #: 3.0/met_norway.js:358 3.8/met_norway.js:289
 msgid "Heavy sleet showers and thunder"
-msgstr "Erős ónos záporeső és mennydörgés"
+msgstr "Erős havas záporeső és mennydörgés"
 
 #: 3.0/met_norway.js:372 3.8/met_norway.js:303
 msgid "Heavy snow and thunder"
@@ -463,8 +459,6 @@ msgid "Heavy snow showers and thunder"
 msgstr "Erős zápor és szitáló eső"
 
 #: 3.0/met_norway.js:400 3.8/met_norway.js:331
-#, fuzzy
-#| msgid "Light Rain and thunder"
 msgid "Light rain and thunder"
 msgstr "Enyhe esőzés és mennydörgés"
 
@@ -480,20 +474,16 @@ msgstr "Enyhe záporeső és mennydörgés"
 #: 3.0/met_norway.js:434 3.0/met_norway.js:441 3.8/met_norway.js:351
 #: 3.8/met_norway.js:352 3.8/met_norway.js:358 3.8/met_norway.js:365
 #: 3.8/met_norway.js:372
-#, fuzzy
-#| msgid "Light Sleet"
 msgid "Light sleet"
-msgstr "Gyenge havas eső"
+msgstr "Gyenge havas záporeső"
 
 #: 3.0/met_norway.js:428 3.8/met_norway.js:359
-#, fuzzy
-#| msgid "Light Sleet and thunder"
 msgid "Light sleet and thunder"
 msgstr "Gyenge havas eső és mennydörgés"
 
 #: 3.0/met_norway.js:435 3.8/met_norway.js:366
 msgid "Light sleet showers"
-msgstr "Enyhe elszórt ónoseső"
+msgstr "Gyenge havas záporeső"
 
 #: 3.0/met_norway.js:442 3.8/met_norway.js:373
 msgid "Light sleet showers and thunder"
@@ -624,7 +614,7 @@ msgid ""
 "Please enter API key in settings,\n"
 "or get one first on https://darksky.net/dev/register"
 msgstr ""
-"API kulcs megadása szükséges a beállíításokban,\n"
+"API-kulcs megadása szükséges a beállításokban,\n"
 "vagy szerezzen egyet a https://darksky.net/dev/register oldalról"
 
 #: 3.0/darkSky.js:238 3.8/darkSky.js:157
@@ -632,8 +622,8 @@ msgid ""
 "Please Make sure you\n"
 "entered the API key what you have from DarkSky"
 msgstr ""
-"Ellenőrizze hogy az API kulcs helyes\n"
-"és az felhasználó nincs letiltva"
+"Ellenőrizze, hogy a DarkSky szolgáltatótól származó\n"
+"API kulcsot helyesen adta meg"
 
 #: 3.0/yahoo.js:78 3.8/yahoo.js:27
 msgid ""
@@ -641,7 +631,7 @@ msgid ""
 " see Looking Glass log for errors"
 msgstr ""
 "Ismeretlen hiba történt az időjárás lekérése közben,\n"
-"nézd meg a Looking Glass logokat"
+"a hibaüzenet megtekinthető a Looking Glass naplóban"
 
 #: 3.0/yahoo.js:91 3.8/yahoo.js:25
 msgid ""
@@ -673,8 +663,8 @@ msgid ""
 "more information"
 msgstr ""
 "Ismeretlen hiba lépett fel a az időjárás-előrejelzési adatok letöltése "
-"közben. További információkért a naplóbejegyzések megtekinthetők a Looking "
-"Glass naplóban"
+"közben. További információkért tekintse meg a naplóbejegyzéseket a Looking "
+"Glass naplóban."
 
 #: 3.0/yahoo.js:437 3.8/yahoo.js:385
 msgid "Tropical Storm"
@@ -1006,7 +996,7 @@ msgstr "A földrajzi helyzetről nincs információ"
 
 #: 3.0/applet.js:194 3.0/applet.js:379 3.8/notification_service.js:9
 msgid "Weather Applet"
-msgstr "Időjárás kisalkalmaás"
+msgstr "Időjárás kisalkalmazás"
 
 #: 3.0/applet.js:218 3.8/main.js:244
 msgid "..."
@@ -1030,7 +1020,7 @@ msgstr "Az API 400 és 500 közötti állapotkóddal hibát jelzett"
 #: 3.0/applet.js:2084 3.0/applet.js:2132 3.8/locationstore.js:130
 #: 3.8/locationstore.js:134 3.8/locationstore.js:138
 msgid "Location Store"
-msgstr "Földrajzi helyzet tárolása"
+msgstr "Földrajzi helyzet tároló"
 
 #: 3.0/applet.js:427
 msgid "You can't save a location obtained automatically, sorry"
@@ -1044,8 +1034,8 @@ msgstr "Az időjárás információk nem kérhetők le"
 msgid ""
 "Unexpected Error While Refreshing Weather, please see log in Looking Glass"
 msgstr ""
-"Ismeretlen hiba frissítés közben, hibaüzenet megtekinthető a Looking Glass-"
-"ban"
+"Ismeretlen hiba lépett fel frissítés közben, a hibaüzenet megtekinthető a "
+"Looking Glass naplóban"
 
 #: 3.0/applet.js:671 3.8/main.js:376
 msgid ""
@@ -1058,7 +1048,7 @@ msgstr ""
 #: 3.0/applet.js:685
 msgid "Network Error, please check logs in Looking Glass"
 msgstr ""
-"Hálózati hiba lépett fel a frissítés közben. A hibaüzenet megtekinthető a "
+"Hálózati hiba lépett fel a frissítés közben, a hibaüzenet megtekinthető a "
 "Looking Glass naplóban"
 
 #: 3.0/applet.js:970 3.0/applet.js:1111
@@ -1067,11 +1057,11 @@ msgstr "Frissítve:"
 
 #: 3.0/applet.js:1109 3.8/uiBar.js:33
 msgid "Powered by"
-msgstr "Az adatokat szolgáltatja: "
+msgstr "Időjárási-adatszolgáltató:"
 
 #: 3.0/applet.js:1114
 msgid "from you"
-msgstr ""
+msgstr "Öntől"
 
 #: 3.0/applet.js:1133 3.8/uiHourlyForecasts.js:178
 msgid "mm"
@@ -1132,6 +1122,8 @@ msgstr "Figyelmeztetés"
 #: 3.0/applet.js:2033 3.8/locationstore.js:130
 msgid "You can only save correct locations when the applet is not refreshing"
 msgstr ""
+"Csak akkor távolítható el a földrajzi helyzet, ha a kisalkalmazás éppen nem "
+"áll frissítés alatt"
 
 #: 3.0/applet.js:2037 3.8/locationstore.js:134
 msgid "You can't save an incorrect location"
@@ -1176,6 +1168,8 @@ msgid ""
 "Failed to load in data from location storage, please see the logs for more "
 "information"
 msgstr ""
+"Nem tölthető be adat a földrajzi helyzet tárolóból. További információkért "
+"tekintse meg a naplóbejegyzéseket a Looking Glass naplóban."
 
 #: 3.0/climacell.js:224
 msgid ""
@@ -1186,16 +1180,12 @@ msgstr ""
 "vagy szerezzen egyet a https://developer.climacell.co/sign-up oldalról"
 
 #: 3.0/climacell.js:248 3.8/climacellV4.js:40 3.8/climacell.js:153
-#, fuzzy
-#| msgid ""
-#| "Please Make sure you\n"
-#| "entered the API key what you have from DarkSky"
 msgid ""
 "Please Make sure you\n"
 "entered the API key what you have from Climacell"
 msgstr ""
-"Ellenőrizze hogy az API kulcs helyes\n"
-"és az felhasználó nincs letiltva"
+"Ellenőrizze, hogy a Climacell szolgáltatótól származó\n"
+"API kulcsot helyesen adta meg"
 
 #: 3.0/climacell.js:280 3.8/climacellV4.js:269 3.8/climacell.js:185
 #: 3.8/visualcrossing.js:206
@@ -1212,36 +1202,26 @@ msgid "Light freezing drizzle"
 msgstr "Enyhe ónos eső"
 
 #: 3.0/climacell.js:302 3.8/climacellV4.js:248 3.8/climacell.js:207
-#, fuzzy
-#| msgid "Freezing Drizzle"
 msgid "Freezing drizzle"
 msgstr "Jeges szitálás"
 
 #: 3.0/climacell.js:308 3.0/climacell.js:309 3.8/climacell.js:213
 #: 3.8/climacell.js:214 3.8/visualcrossing.js:188
-#, fuzzy
-#| msgid "Light Drizzle"
 msgid "Light drizzle"
-msgstr "Enyhe szitálás"
+msgstr "Enyhe szitáló eső"
 
 #: 3.0/climacell.js:315 3.8/climacellV4.js:283 3.8/climacell.js:220
-#, fuzzy
-#| msgid "Heavy Sleet"
 msgid "Heavy ice pellets"
-msgstr "Intenzív havas esőzés"
+msgstr "Erős jég eső"
 
 #: 3.0/climacell.js:316 3.0/climacell.js:322 3.0/climacell.js:323
 #: 3.0/climacell.js:330 3.8/climacellV4.js:275 3.8/climacellV4.js:276
 #: 3.8/climacellV4.js:282 3.8/climacellV4.js:289 3.8/climacell.js:221
 #: 3.8/climacell.js:227 3.8/climacell.js:228 3.8/climacell.js:235
-#, fuzzy
-#| msgid "Ice Pellets"
 msgid "Ice pellets"
 msgstr "Jégeső"
 
 #: 3.0/climacell.js:329 3.8/climacellV4.js:290 3.8/climacell.js:234
-#, fuzzy
-#| msgid "Light Ice Pellets"
 msgid "Light ice pellets"
 msgstr "Enyhe jégeső"
 
@@ -1252,8 +1232,6 @@ msgstr "Széllökések"
 
 #: 3.0/climacell.js:371 3.0/climacell.js:372 3.8/climacellV4.js:164
 #: 3.8/climacell.js:276 3.8/climacell.js:277
-#, fuzzy
-#| msgid "Light Fog"
 msgid "Light fog"
 msgstr "Enyhe köd"
 
@@ -1308,7 +1286,7 @@ msgstr "Gyenge szellő"
 
 #: 3.0/utils.js:307 3.8/utils.js:163
 msgid "Light breeze"
-msgstr "Enyhe szél"
+msgstr "Enyhe szellő"
 
 #: 3.0/utils.js:310 3.8/utils.js:166
 msgid "Gentle breeze"
@@ -1375,10 +1353,8 @@ msgid "NW"
 msgstr "ÉNY"
 
 #: 3.8/climacellV4.js:171
-#, fuzzy
-#| msgid "Light rain"
 msgid "Light wind"
-msgstr "Enyhe eső"
+msgstr "Enyhe szellő"
 
 #: 3.8/climacellV4.js:185
 msgid "Strong wind"
@@ -1387,10 +1363,14 @@ msgstr "Erős szél"
 #: 3.8/weatherbit.js:230
 msgid "API key doesn't provide access to Hourly Weather, skipping"
 msgstr ""
+"Az API-kulcs nem biztosít elérést az óránkénti időjárás előrejelzéshez. "
+"Adatok kihagyása."
 
 #: 3.8/main.js:104
 msgid "This provider requires an API key to operate"
 msgstr ""
+"Ez az időjárás-előrejelzés szolgáltató API-kulcs használatát írj elő a "
+"szolgáltatása használatához"
 
 #: 3.8/main.js:137 3.8/uiBar.js:36
 msgid "As of {lastUpdatedTime}"
@@ -1398,7 +1378,7 @@ msgstr "Frissítve: {lastUpdatedTime}"
 
 #: 3.8/uiBar.js:42
 msgid "{distance}{distanceUnit} from you"
-msgstr ""
+msgstr "{distance}{distanceUnit} távolságra Öntől"
 
 #: 3.8/yahoo.js:109 3.8/yahoo.js:116
 msgid "Please install '{missingPackage}', then refresh manually."
@@ -1413,10 +1393,8 @@ msgid "Less than {distance} {distanceUnit}"
 msgstr "Kevesebb mint {distance} {distanceUnit}"
 
 #: 3.8/met_uk.js:254
-#, fuzzy
-#| msgid "Excellent - More than"
 msgid "Excellent"
-msgstr "Kiváló - Több mint"
+msgstr "Kiváló"
 
 #: 3.8/met_uk.js:254
 msgid "More than {distance} {distanceUnit}"
@@ -1447,50 +1425,36 @@ msgid "Light Snow"
 msgstr "Enyhe havazás"
 
 #: 3.8/visualcrossing.js:182
-#, fuzzy
-#| msgid "Blowing Snow"
 msgid "Blowing or drifting snow"
-msgstr "Hófúvás"
+msgstr "Hófúvás vagy hócsuszamlás"
 
 #: 3.8/visualcrossing.js:186
-#, fuzzy
-#| msgid "Heavy intensity drizzle"
 msgid "Heavy drizzle"
 msgstr "Erősen szitáló eső"
 
 #: 3.8/visualcrossing.js:190
-#, fuzzy
-#| msgid "Heavy intensity drizzle rain"
 msgid "Heavy drizzle/rain"
-msgstr "Erősen szitáló eső"
+msgstr "Erősen szitáló eső és eső"
 
 #: 3.8/visualcrossing.js:192
-#, fuzzy
-#| msgid "Light Drizzle"
 msgid "Light drizzle/rain"
-msgstr "Enyhe szitálás"
+msgstr "Enyhe szitáló eső"
 
 #: 3.8/visualcrossing.js:194
 msgid "Duststorm"
 msgstr "Porvihar"
 
 #: 3.8/visualcrossing.js:198
-#, fuzzy
-#| msgid "Freezing Drizzle"
 msgid "Freezing drizzle/freezing rain"
-msgstr "Jeges szitálás"
+msgstr "Jeges szitálás és ónos eső"
 
 #: 3.8/visualcrossing.js:200
-#, fuzzy
-#| msgid "Heavy intensity drizzle rain"
 msgid "Heavy freezing drizzle/freezing rain"
-msgstr "Erősen szitáló eső"
+msgstr "Erősen szitáló ónos eső és ónos eső"
 
 #: 3.8/visualcrossing.js:202
-#, fuzzy
-#| msgid "Light freezing drizzle"
 msgid "Light freezing drizzle/freezing rain"
-msgstr "Enyhe ónos eső"
+msgstr "Enyhe jégszitálás és ónos eső"
 
 #: 3.8/visualcrossing.js:204
 msgid "Freezing fog"
@@ -1501,8 +1465,6 @@ msgid "Funnel cloud/tornado"
 msgstr "Tölcsérfelhő és tornádó"
 
 #: 3.8/visualcrossing.js:212
-#, fuzzy
-#| msgid "Hail shower"
 msgid "Hail showers"
 msgstr "Jégzápor"
 
@@ -1511,10 +1473,8 @@ msgid "Ice"
 msgstr "Jég"
 
 #: 3.8/visualcrossing.js:216
-#, fuzzy
-#| msgid "Light Rain with Thunderstorms"
 msgid "Lightning without thunder"
-msgstr "Gyenge eső elszórt viharokkal"
+msgstr "Villámlás mennydörgés nélkül"
 
 #: 3.8/visualcrossing.js:220
 msgid "Precipitation in vicinity"
@@ -1525,58 +1485,44 @@ msgid "Heavy rain and snow"
 msgstr "Erős eső és havazás"
 
 #: 3.8/visualcrossing.js:226
-#, fuzzy
-#| msgid "Light rain and snow"
 msgid "Light rain And snow"
 msgstr "Enyhe esőzés és havazás"
 
 #: 3.8/visualcrossing.js:234
 msgid "Sky coverage decreasing"
-msgstr ""
+msgstr "Csökkenő felhőzet"
 
 #: 3.8/visualcrossing.js:236
 msgid "Sky coverage increasing"
-msgstr ""
+msgstr "Növekvő felhőzet"
 
 #: 3.8/visualcrossing.js:238
 msgid "Sky unchanged"
-msgstr ""
+msgstr "Változatlan fedettség"
 
 #: 3.8/visualcrossing.js:240
 msgid "Smoke or haze"
-msgstr ""
+msgstr "Füst vagy köd"
 
 #: 3.8/visualcrossing.js:244
-#, fuzzy
-#| msgid "Snow showers"
 msgid "Snow and rain showers"
-msgstr "Hózápor"
+msgstr "Hózápor és záporeső"
 
 #: 3.8/visualcrossing.js:256
-#, fuzzy
-#| msgid "Thunderstorm with rain"
 msgid "Thunderstorm without precipitation"
-msgstr "Vihar esővel"
+msgstr "Vihar lecsapás nélkül"
 
 #: 3.8/visualcrossing.js:258
 msgid "Diamond dust"
 msgstr ""
 
 #: 3.8/visualcrossing.js:264
-#, fuzzy
-#| msgid "Partly cloudy"
 msgid "Partially cloudy"
 msgstr "Közepesen felhős"
 
 #: 3.8/visualcrossing.js:287
-#, fuzzy
-#| msgid ""
-#| "Please Make sure you\n"
-#| "entered the API key what you have from DarkSky"
 msgid "Please make sure you entered the API key correctly"
-msgstr ""
-"Ellenőrizze hogy az API kulcs helyes\n"
-"és az felhasználó nincs letiltva"
+msgstr "Ellenőrizze hogy az API kulcsot helyesen adta meg"
 
 #. metadata.json->name
 #. 3.8->settings-schema.json->providers->title
@@ -1618,7 +1564,7 @@ msgstr "Időjárás-előrejelzés szolgáltató beállítások"
 #. 3.0->settings-schema.json->dataService->description
 #. 3.8->settings-schema.json->dataService->description
 msgid "Data service"
-msgstr "Adat-szolgáltató"
+msgstr "Időjárási-adatszolgáltató"
 
 #. 3.0->settings-schema.json->dataService->options
 #. 3.8->settings-schema.json->dataService->options
@@ -1683,6 +1629,10 @@ msgid ""
 "address.\n"
 "Waits for 3 seconds after you stop typing before refreshes the weather."
 msgstr ""
+"Elfogadott érték a „szélesség,hosszúság”, például „68.1932,17.1426 ” vagy "
+"egy cím.\n"
+"Váron három másodpercet miután beírta a földrajzi helyet és frissítve "
+"letölti az időjárás előrejelzési adatokat."
 
 #. 3.0->settings-schema.json->getLocation->description
 msgid "Setup API Key and Location"
@@ -1935,19 +1885,19 @@ msgstr "Huszonnégy órás időformátum"
 #. 3.0->settings-schema.json->shortHourlyTime->description
 #. 3.8->settings-schema.json->shortHourlyTime->description
 msgid "Only display hours for hourly forecast time"
-msgstr ""
+msgstr "Kizárólag az órát jelzi ki az óránkénti előrejelzésnél"
 
 #. 3.0->settings-schema.json->shortHourlyTime->tooltip
 #. 3.8->settings-schema.json->shortHourlyTime->tooltip
 msgid "Instead of 15:00 or 3 pm it will show up as 15 or 3 pm"
 msgstr ""
+"15:00 vagy du. 3:00 időkijelzés helyett 15 vagy du. 3 időkijelzés lesz "
+"megjelenítve"
 
 #. 3.0->settings-schema.json->showForecastDates->description
 #. 3.8->settings-schema.json->showForecastDates->description
-#, fuzzy
-#| msgid "Display time in 24 hour format"
 msgid "Display date for daily forecasts"
-msgstr "Huszonnégy órás időformátum"
+msgstr "Dátum megjelenítése a napi előrejelzéseknél"
 
 #. 3.0->settings-schema.json->showForecastDates->tooltip
 #. 3.8->settings-schema.json->showForecastDates->tooltip
@@ -1985,10 +1935,8 @@ msgstr "Rövidebb leírás megjelenítése az időjárási körülményekhez"
 
 #. 3.0->settings-schema.json->shortConditions->tooltip
 #. 3.8->settings-schema.json->shortConditions->tooltip
-#, fuzzy
-#| msgid "Currently only used with DarkSky "
 msgid "Currently only used with DarkSky."
-msgstr "Jelenleg csak DarkSky szolgáltatást érinti "
+msgstr "Jelenleg csak a DarkSky szolgáltatást érinti."
 
 #. 3.0->settings-schema.json->iconSettings->description
 #. 3.8->settings-schema.json->icons->title
@@ -2018,16 +1966,12 @@ msgid "Help"
 msgstr "Súgó"
 
 #. 3.8->settings-schema.json->location-section->title
-#, fuzzy
-#| msgid "Locations"
 msgid "Location settings"
-msgstr "Helyek"
+msgstr "Helybeállítások"
 
 #. 3.8->settings-schema.json->location-store->title
-#, fuzzy
-#| msgid "Setup Location"
 msgid "Saved Locations"
-msgstr "Hely megadása"
+msgstr "Elmentett földrajzi helyzet"
 
 #. 3.8->settings-schema.json->weather-conditions->title
 msgid "Weather conditions"
@@ -2046,10 +1990,8 @@ msgid "Keybindings"
 msgstr "Billentyűtársítások"
 
 #. 3.8->settings-schema.json->more-info->title
-#, fuzzy
-#| msgid "Weather Applet"
 msgid "More about the Weather applet"
-msgstr "Időjárás kisalkalmaás"
+msgstr "Tudjon meg többet az Időjárás kisalkalmazásról"
 
 #. 3.8->settings-schema.json->submit-issue->title
 msgid "Report an issue"
@@ -2144,6 +2086,7 @@ msgstr "Keresési bejegyzés"
 #. 3.8->settings-schema.json->useSymbolicIcons->tooltip
 msgid "Does not apply to custom iconset, that is symbolic by default"
 msgstr ""
+"Nem vonatkozik az egyedi ikonkészletre, amely eleve szimbolikus megjelenésű"
 
 #. 3.8->settings-schema.json->useSymbolicIcons->description
 msgid "Use symbolic icons throughout the applet"
