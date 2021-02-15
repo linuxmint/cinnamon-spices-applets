@@ -7,539 +7,525 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-17 12:34+0100\n"
-"PO-Revision-Date: 2020-07-20 08:13+0100\n"
+"POT-Creation-Date: 2021-02-04 14:57+0000\n"
+"PO-Revision-Date: 2021-02-14 21:40+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3.1\n"
+"X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#. 3.2 4.0
 msgid "Type to search..."
 msgstr "Kirjoita haku..."
 
-#. 3.2 4.0
 msgid "Initializing"
 msgstr "Alustetaan"
 
-#. 3.2 4.0
 msgid "No description available"
 msgstr "Ei kuvausta saatavilla"
 
-#. 3.2 4.0
 msgid "All Applications"
 msgstr "Kaikki sovellukset"
 
-#. 3.2 4.0
 msgid "Places"
 msgstr "Sijainnit"
 
-#. 3.2 4.0
 msgid "Recent Files"
 msgstr "Viimeisimmät tiedostot"
 
-#. 3.2 4.0
 msgid "Bookmarks"
 msgstr "Kirjanmerkit"
 
-#. 3.2 4.0
 msgid "Favorite Apps"
 msgstr "Suosikkisovellukset"
 
-#. 3.2 4.0
 msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
 msgstr "gir1.2-gda-5.0-paketti vaaditaan Firefox- ja Midori-kirjanmerkkeihin."
 
-#. 3.2 4.0
 msgid "Clear List"
 msgstr "Tyhjennä luettelo"
 
-#. 3.2 4.0
-msgid "No recent documents"
-msgstr "Ei viimeaikaisia asiakirjoja"
+msgid "No recent files"
+msgstr "Ei viimeaikaisia tiedostoja"
 
-#. 3.2
 msgid "Account details"
 msgstr "Tilin tiedot"
 
-#. 3.2 3.2
 msgid "Grid View"
-msgstr "Kuvakenäkymä"
+msgstr "Kuvakkeet"
 
-#. 3.2 3.2
 msgid "List View"
-msgstr "Luettelonäkymä"
+msgstr "Luettelo"
 
-#. 3.2 3.2
 msgid "Switch to grid view"
-msgstr "Vaihda kuvakenäkymään"
+msgstr "Vaihda kuvakkeisiin"
 
-#. 3.2 3.2
 msgid "Switch to list view"
-msgstr "Vaihda luettelonäkymään"
+msgstr "Vaihda luetteloon"
 
-#. 3.2 4.0
 msgid "Lock Screen"
 msgstr "Lukitusnäyttö"
 
-#. 3.2 4.0
 msgid "Lock the screen"
 msgstr "Lukitse näyttö"
 
-#. 3.2 4.0
 msgid "Logout"
 msgstr "Kirjaudu ulos"
 
-#. 3.2 4.0
 msgid "Leave the session"
 msgstr "Poistu istunnosta"
 
-#. 3.2 4.0
 msgid "Quit"
 msgstr "Lopeta"
 
-#. 3.2 4.0
 msgid "Shutdown the computer"
 msgstr "Sammuta tietokone"
 
-#. 3.2 4.0
 msgid "Home"
 msgstr "Koti"
 
-#. 3.2 4.0
 msgid "Computer"
 msgstr "Tietokone"
 
-#. 3.2 4.0
 msgid "Browse network"
 msgstr "Selaa verkkoa"
 
-#. 3.2 4.0
 msgid "Run with NVIDIA GPU"
 msgstr "Suorita NVIDIA GPU:lla"
 
-#. 3.2 4.0
 msgid "Add to panel"
 msgstr "Lisää paneeliin"
 
-#. 3.2 4.0
 msgid "Add to desktop"
 msgstr "Lisää työpöydälle"
 
-#. 3.2 4.0
-#, fuzzy
-#| msgid "Remove from favorites"
-msgid "Remove favorite"
+msgid "Remove from favorites"
 msgstr "Poista suosikeista"
 
-#. 3.2 4.0
 msgid "Add to favorites"
 msgstr "Lisää suosikkeihin"
 
-#. 3.2 4.0
 msgid "Uninstall"
 msgstr "Asennuksen poisto"
 
-#. 4.0 4.0
-msgid "Please wait..."
-msgstr ""
+msgid "This file is no longer available"
+msgstr "Tämä tiedosto ei ole enää saatavilla"
 
-#. metadata.json->name
-#. 3.2
+msgid "Open with"
+msgstr "Avaa"
+
+msgid "Other application..."
+msgstr "Muu sovellus..."
+
+msgid "Menu"
+msgstr "Valikko"
+
+msgid "Clear list"
+msgstr "Tyhjennä luettelo"
+
+msgid "Clear all recent documents"
+msgstr "Tyhjennä viimeaikaiset asiakirjat"
+
+msgid "No recent documents"
+msgstr "Ei viimeaikaisia asiakirjoja"
+
+msgid "Favorites"
+msgstr "Suosikit"
+
+msgid "Lock screen"
+msgstr "Lukitusnäyttö"
+
+msgid "Shut down the computer"
+msgstr "Sammuta tietokone"
+
+msgid "Reset category order"
+msgstr "Nollaa järjestys"
+
+msgid "Open containing folder"
+msgstr "Avaa sisällön kansio"
+
+msgid "Move to trash"
+msgstr "Siirrä roskakoriin"
+
+msgid "Error while moving file to trash:"
+msgstr "Virhe siirrettäessä tiedostoa roskakoriin:"
+
+msgid "Find files..."
+msgstr "Hae tiedostoja..."
+
+msgid "Please wait..."
+msgstr "Odota hetki..."
+
+msgid "Solution:"
+msgstr "Ratkaisu:"
+
+msgid "Click to copy"
+msgstr "Kopioi napsauttamalla"
+
+msgid "Search web for"
+msgstr "Hae verkosta"
+
+msgid "Too many entries - showing first 1000 entries only"
+msgstr "Liian monta - vain ensimmäiset 1000 näytetään"
+
+msgid "All applications"
+msgstr "Kaikki ohjelmat"
+
+msgid "Recent files"
+msgstr "Viimeaikaiset"
+
+msgid "Favorite apps"
+msgstr "Suosikki sovellukset"
+
+msgid "Home folder"
+msgstr "Koti"
+
+msgid "Open..."
+msgstr "Avaa..."
+
+msgid "Open Containing Folder..."
+msgstr "Avaa sisällön kansio..."
+
+msgid "Search"
+msgstr "Haku"
+
+msgid "Start in"
+msgstr "Aloita"
+
+msgid "Select a folder"
+msgstr "Valitse kansio"
+
+msgid "Follow symlinks"
+msgstr "Seuraa symlinkkejä"
+
+msgid "Search hidden"
+msgstr "Hae piilotetut"
+
+msgid "Use regular expressions"
+msgstr "Käytä säännöllisiä lauseita"
+
+msgid "Stop"
+msgstr "Pysäytä"
+
+msgid "File"
+msgstr "Tiedosto"
+
+msgid "Path"
+msgstr "Polku"
+
+msgid "Searching..."
+msgstr "Hakee..."
+
+msgid "Search Stopped"
+msgstr "Haku pysäytetty"
+
+msgid "Searching: "
+msgstr "Hakee: "
+
+msgid "Error: insufficient permissions to read folder "
+msgstr "Virhe: oikeudet kansion lukemiseen ei riitä "
+
+msgid "Search Completed"
+msgstr "Haku valmis"
+
+msgid "Skipping"
+msgstr "Ohitus"
+
+msgid " - direcotry already searched"
+msgstr " - hakemisto jo haettu"
+
 msgid "Cinnamenu"
 msgstr "Cinnamenu"
 
-#. metadata.json->description
 msgid ""
 "A flexible menu providing formatting options, web bookmarks, search provider "
 "support and fuzzy searching."
 msgstr ""
-"Joustava valikko, joka tarjoaa muotoiluvaihtoehtoja, web-kirjanmerkkejä, "
-"hakupalveluntarjoajan tukea ja sumeaa hakua."
+"Valikko, joka tarjoaa joustavat asetukset, kirjanmerkit, hakupalvelun ja sumeaa "
+"tiedotojen hakua."
 
-#. metadata.json->comments
-msgid ""
-"Made possible thanks to the efforts of contributors to the Cinnamon menu, "
-"Gnomenu, and the contributors to projects they derived from."
-msgstr ""
-
-#. 3.2 4.0
 msgid "Behavior"
 msgstr "Käyttäytyminen"
 
-#. 3.2 4.0
 msgid "Appearance"
-msgstr "Ulkomuoto"
+msgstr "Ulkoasu"
 
-#. 3.2 4.0
 msgid "Layout and Content"
 msgstr "Asettelu ja sisältö"
 
-#. 3.2
 msgid "Search Providers"
 msgstr "Hakupalvelut"
 
-#. 3.2
 msgid "No search provider extensions found"
 msgstr "Hakupalvelun laajennuksia ei löytynyt"
 
-#. 3.2 4.0
 msgid "Panel"
 msgstr "Paneeli"
 
-#. 3.2 4.0
-msgid "Menu"
-msgstr "Valikko"
-
-#. 3.2 4.0
 msgid "Layout"
 msgstr "Ulkoasu"
 
-#. 3.2 4.0
 msgid "Content"
 msgstr "Sisältö"
 
-#. 3.2 4.0
-#, fuzzy
-#| msgid "Recent Files"
 msgid "Recent files settings"
-msgstr "Viimeisimmät tiedostot"
+msgstr "Viimeisten tiedostojen asetukset"
 
-#. 3.2 4.0
 msgid "Open the menu editor"
 msgstr "Avaa valikon muokkausikkuna"
 
-#. 3.2 4.0
-msgid "Reset category order"
-msgstr "Nollaa asetukset"
-
-#. 3.2 4.0
 msgid "Use a custom icon"
-msgstr "Käytä toista kuvaketta"
+msgstr "Vaihda kuvake"
 
-#. 3.2 4.0
-#, fuzzy
-#| msgid "Use a custom icon"
 msgid "Use a custom icon in the panel"
-msgstr "Käytä toista kuvaketta"
+msgstr "Käytä paneeliin eri kuvaketta"
 
-#. 3.2 4.0
 msgid "Panel icon"
-msgstr "Paneelikuvake"
+msgstr "Paneelin kuvake"
 
-#. 3.2 4.0
 msgid "Panel text"
 msgstr "Paneelin teksti"
 
-#. 3.2 4.0
 msgid "Text to show beside the panel icon"
-msgstr "Paneelikuvakkeen vieressä näkyvä teksti"
+msgstr "Kuvakkeen vieressä näkyvä teksti"
 
-#. 3.2 4.0
 msgid "pixels"
 msgstr "pikseliä"
 
-#. 3.2 4.0
 msgid "Category icon size"
-msgstr "Ryhmän kuvakkeen koko"
+msgstr "Ryhmän kuvakekoko"
 
-#. 3.2 4.0
 msgid "Applications list icon size"
-msgstr "Sovellusluettelon kuvakkeen koko"
+msgstr "Ohjelmien kuvakekoko luettelona"
 
-#. 3.2 4.0
 msgid "Applications grid icon size"
-msgstr "Sovellusten ruudukon kuvakeen koko"
+msgstr "Ohjelmien kuvakekoko ruudukossa"
 
-#. 3.2 4.0
 msgid "Keyboard shortcut to open and close the menu"
-msgstr "Pikanäppäin valikon avaamiseen ja sulkemiseen"
+msgstr "Valikon avaa ja sulje pikanäppäin"
 
-#. 3.2 4.0
 msgid "Open menu on hover"
-msgstr "Avaa valikko hiirellä"
+msgstr "Avaa valikko hiiren kosketuksella"
 
-#. 3.2 4.0
 msgid "Open the menu when I move my mouse over the panel icon"
-msgstr "Avaa valikko, kun siirrän hiiren sen päälle"
+msgstr "Valikko avautuu, kun siirrän hiiren sen päälle"
 
-#. 3.2 4.0
 msgid "milliseconds"
-msgstr "millisekuntia"
+msgstr "millisekunnit"
 
-#. 3.2 4.0
 msgid "Menu hover delay"
-msgstr "Valikkokohtainen viive"
+msgstr "Valikon valintaviive"
 
-#. 3.2 4.0
 msgid "Use menu animations"
 msgstr "Käytä valikon animaatioita"
 
-#. 3.2 4.0
 msgid "Animate the menu on open and close"
-msgstr "Salli valikon animaatio avatessa ja sulkeutuessa"
+msgstr "Animoi valikko avatessa ja sulkeutuessa"
 
-#. 3.2 4.0
 msgid "Activate categories on click"
-msgstr "Aktivoi ryhmät napsauttamalla"
+msgstr "Aktivoi ryhmät auki napsauttamalla"
 
-#. 3.2 4.0
 msgid "Activate categories on click instead of on hover"
 msgstr "Aktivoi ryhmät napsauttamalla"
 
-#. 3.2 4.0
 msgid "Enable autoscrolling"
-msgstr "Ota automaattinen vieritys käyttöön"
+msgstr "Automaattinen vieritys"
 
-#. 3.2 4.0
 msgid "Enable autoscrolling in application list"
-msgstr "Ota automaattinen vieritys käyttöön sovellusluettelossa"
+msgstr "Ota automaattinen vieritys käyttöön ohjelmien luettelossa"
 
-#. 3.2 4.0
 msgid "Show web bookmarks"
-msgstr "Näytä web-kirjanmerkit"
+msgstr "Näytä selaimen kirjanmerkit"
 
-#. 3.2 4.0
 msgid "Show your browser's web bookmarks in the menu"
-msgstr "Näytä selaimesi Web-kirjanmerkit valikossa"
+msgstr "Näytä selaimesi kirjanmerkit valikossa"
 
-#. 3.2
 msgid "Enable searching of open windows"
 msgstr "Ota avoimien ikkunoiden haku käyttöön"
 
-#. 3.2 4.0
 msgid "Enable search providers"
 msgstr "Ota hakupalvelut käyttöön"
 
-#. 3.2 4.0
 msgid "Include search provider results in searches"
-msgstr "Valitse, indeksoidaanko hakupalvelun tulokset valikkohaussa"
+msgstr "Valitse, indeksoidaanko hakupalvelun tulokset hakuihin"
 
-#. 3.2 4.0
 msgid "Example Search Providers"
-msgstr "Esimerkkejä hakupalvelujen tarjoajista"
+msgstr "Esimerkkejä hakupalvelun tarjoajista"
 
-#. 3.2
 msgid "Startup applications view mode"
-msgstr "Käynnistyvien sovellusten katselutila"
+msgstr "Käynnistyvien sovellusten katselu"
 
-#. 3.2 4.0
 msgid "List"
 msgstr "Luettelo"
 
-#. 3.2 4.0
 msgid "Grid"
 msgstr "Ruudukko"
 
-#. 3.2 4.0
 msgid "columns"
-msgstr "Sarakkeet"
+msgstr "sarakkeet"
 
-#. 3.2 4.0
 msgid "Number of columns in apps grid"
 msgstr "Sarakkeiden lukumäärä sovellusruudussa"
 
-#. 3.2 4.0
 msgid "Show bookmarks and places"
 msgstr "Näytä kirjanmerkit ja sijainti"
 
-#. 3.2 4.0
-#, fuzzy
-#| msgid "Show bookmarks and places"
 msgid "Show bookmarks and places category in the menu"
-msgstr "Näytä kirjanmerkit ja sijainti"
+msgstr "Näytä valikossa kirjanmerkit ja sijainti"
 
-#. 3.2 4.0
 msgid "Show application icons"
 msgstr "Näytä sovellusten kuvakkeet"
 
-#. 3.2 4.0
 msgid "Show category icons"
 msgstr "Näytä ryhmän kuvakkeet"
 
-#. 3.2
 msgid "Show application descriptions under titles"
 msgstr "Näytä sovellusten kuvaukset otsikoiden alla"
 
-#. 3.2
 msgid "Show tooltips"
 msgstr "Näytä työkaluvihjeet"
 
-#. 3.2
 msgid "Tooltip delay"
 msgstr "Työkaluvinkin viive"
 
-#. 3.2 4.0
 msgid "Use a custom menu height"
 msgstr "Käytä mukautettua valikon korkeutta"
 
-#. 3.2 4.0
 msgid "px"
 msgstr "px"
 
-#. 3.2 4.0
 msgid "Custom menu height"
 msgstr "Muokatun valikon korkeus"
 
-#. 4.0
 msgid "Applications view mode"
-msgstr "Sovellusten katselutila"
+msgstr "Sovellukset näytetään"
 
-#. 4.0
 msgid "View applications as list or grid"
 msgstr "Näytä sovellukset luettelona tai ruudukkona"
 
-#. 4.0
 msgid "Application description placement"
-msgstr "Sovelluksen kuvaus"
+msgstr "Sovellusten kuvauksen paikka"
 
-#. 4.0
 msgid "Tooltips"
 msgstr "Työkaluvinkit"
 
-#. 4.0
 msgid "Under titles"
 msgstr "Otsikkojen alla"
 
-#. 4.0
 msgid "None"
 msgstr "Ei mitään"
 
-#. 4.0
 msgid "Choose where to show application descriptions"
-msgstr "Valitse, missä sovelluskuvaukset näytetään"
+msgstr "Valitse, missä sovellusten kuvaukset näytetään"
 
-#. 4.0
 msgid "Session buttons location"
-msgstr "Istuntopainikkeiden sijainti"
+msgstr "Sijainti Istunnon painikkeille"
 
-#. 4.0
 msgid "Top"
-msgstr "ylin"
+msgstr "Ylös"
 
-#. 4.0
 msgid "Bottom"
-msgstr "alin"
+msgstr "Alas"
 
-#. 4.0
 msgid "Left"
 msgstr "Vasen"
 
-#. 4.0
 msgid "Right"
-msgstr "oikealle"
+msgstr "Oikea"
 
-#. 4.0
-msgid "Choose where to show the session (quit, logout, etc.) buttons"
-msgstr ""
-"Valitse missä näytetään istunto (lopettaa, kirjautua ulos, jne.) -Painikkeet"
+msgid "Choose where to show the session buttons (quit, logout, etc.)"
+msgstr "Valitse missä näytetään istunnon painikkeet (lopeta, kirjaudu ulos, jne.)"
 
-#. 4.0
 msgid "Add favorites to session buttons"
-msgstr "Lisää suosikkeja istuntopainikkeisiin"
+msgstr "Lisää suosikit istunnon painikkeisiin"
 
-#. 4.0
 msgid "Show your favorite app icons next to the session buttons"
-msgstr "Näytä suosikkisovelluksesi kuvakkeet istuntopainikkeiden vieressä"
+msgstr "Näytä suositut sovellukset kuvake istunnon painikkeiden vieressä"
 
-#, javascript-format
-#~ msgid "Failed to launch \"%s\""
-#~ msgstr "Epäonnistui ajaa \"%s\""
+msgid "Show recent files"
+msgstr "Näytä käyttämäsi viimeisimmät tiedostot"
 
-#~ msgid "Remove from favorites"
-#~ msgstr "Poista suosikeista"
+msgid "Show recent files category in the menu"
+msgstr "Näytä käyttämäsi viimeisimmät tiedostot valikossa"
 
-#~ msgid "Toggle recent files"
-#~ msgstr "Vaihda viimeisimmät tiedostot"
+msgid ""
+"Show your browser's web bookmarks in the menu.\n"
+" Note: Install package gir1.2-gda-5.0 to read firefox bookmarks."
+msgstr ""
+"Näytä selaimesi suosikit valikossa.\n"
+"Huomaa: Asenna paketti gir1.2-gda-5.0 joka osaa lukea firefox suosikkeja."
 
-#~ msgid "Press this button to customize your privacy settings."
-#~ msgstr "Paina tätä painiketta muokataksesi yksityisyyden asetuksia."
+msgid "Show favorite apps category"
+msgstr "Näytä suositut sovellukset"
 
-#~ msgid "Press this button to customize your menu entries."
-#~ msgstr "Paina tätä painiketta muokataksesi valikon kohteita."
+msgid "Show your favorite apps category in the menu"
+msgstr "Näytä sinun suosikki sovellukset valikossa"
 
-#~ msgid "Unchecking this allows the theme to set the icon"
-#~ msgstr "Jos poistat tämän valinnan, teema asettaa kuvakkeen"
+msgid "Show home folder"
+msgstr "Näytä kansio Koti"
 
-#~ msgid "Icon"
-#~ msgstr "Kuvake"
+msgid "Show home folder category in the menu"
+msgstr "Näytä kansion Koti sisältö valikossa"
 
-#~ msgid "Set the custom menu button icon name"
-#~ msgstr "Aseta valikkopainikkeen kuvakkeen nimi"
+msgid "Always open menu on favorite apps"
+msgstr "Avaa aina suositut sovellukset valikkoon"
 
-#~ msgid "Enable opening the menu when the mouse enters the applet"
-#~ msgstr "Ota valikon avaaminen käyttöön hiiren tullessa sovelmaan päälle"
+msgid "Always open the menu with favorite apps category selected"
+msgstr "Avaa aina valikko tilaan, jossa suositut sovellukset näkyvät"
 
-#~ msgid "Delay between switching categories"
-#~ msgstr "Viive luokkien välillä"
+msgid "Autoscroll the application list on mouse hover"
+msgstr "Vieritä sovelluslistaa automaattisesti hiiren osoittimen kohdalla"
 
-#~ msgid ""
-#~ "When enabled, category views are activated on click instead of on hover."
-#~ msgstr "Kun käytössä, ryhmän näkymät aktivoidaan napsautuksella."
+msgid "Web search option"
+msgstr "Hakupalvelun vaihtoehdot"
 
-#~ msgid ""
-#~ "Choose whether or not to enable smooth autoscrolling in the application "
-#~ "list."
-#~ msgstr ""
-#~ "Valitse, otetaanko pehmeä automaattinen vieritys käyttöön "
-#~ "sovellusluettelossa vai ei."
+msgid "Google"
+msgstr "Google"
 
-#~ msgid "Choose whether or not bookmarks are indexed in the menu."
-#~ msgstr "Valitse, indeksoidaanko kirjanmerkit valikossa."
+msgid "Bing"
+msgstr "Bing"
 
-#~ msgid "Choose whether or not open windows are indexed in menu searches."
-#~ msgstr "Valitse, indeksoidaanko avoimet ikkunat valikkohaussa."
+msgid "Yahoo"
+msgstr "Yahoo"
 
-#~ msgid "Choose whether or not to show bookmarks and places in the menu."
-#~ msgstr "Valitse näytetäänkö kirjanmerkkejä ja sijaiteja valikossa."
+msgid "DuckDuckGo"
+msgstr "DuckDuckGo"
 
-#~ msgid "Choose whether or not to show icons on applications."
-#~ msgstr "Valitse, näytetäänkö sovelluksissa kuvakkeita."
+msgid "Show an internet search option in search results"
+msgstr "Näytä hakupalvelun vaihtoehdot hakutuloksissa"
 
-#~ msgid "Choose whether or not to show icons on categories."
-#~ msgstr "Valitse, näytetäänkö ryhmän kuvakkeet vai ei."
+msgid "Enable emoji search"
+msgstr "Emojien haku"
 
-#~ msgid ""
-#~ "Choose whether or not to show the application description on the "
-#~ "application buttons."
-#~ msgstr "Valitse, näytetäänkö sovelluksen kuvaus sovelluspainikkeissa."
+msgid "Show emojis in search results"
+msgstr "Näytä emojit hakutuloksissa"
 
-#~ msgid ""
-#~ "When enabled, tooltips containing the item's name or description is shown "
-#~ "when hovered over."
-#~ msgstr ""
-#~ "Kun käytössä, työkaluvihjeet, jotka sisältävät kohteen nimen tai "
-#~ "kuvauksen, näkyvät, kun hiirellä osoitetaan ."
+msgid "Show hidden files"
+msgstr "Näytä piilotiedostot"
 
-#~ msgid ""
-#~ "The delay time in milliseconds for tooltips when hovering over a menu "
-#~ "item."
-#~ msgstr ""
-#~ "Työkaluvihjeiden viive millisekunnissa, kun hiiri on valikkokohteen "
-#~ "päällä."
+msgid "Show hidden files in folder view"
+msgstr "Näytä piilotetut tiedostot kansioissa"
 
-#~ msgid "Please provide your password to uninstall this application"
-#~ msgstr "Anna salasanasi poistaaksesi tämän sovelluksen"
+msgid "Use a custom icon size"
+msgstr "Mukauta kuvakeen kokoa"
 
-#~ msgid "Enable filesystem path entry in search box"
-#~ msgstr "Käytä tiedostojärjestelmän polun syöttämistä hakukenttään"
+msgid "Use a custom size for the panel icon"
+msgstr "Mukauta kokoa paneelin kuvakkeessa"
 
-#~ msgid "Allows path entry in the menu search box."
-#~ msgstr "Mahdollistaa polun syöttämisen valikkon hakukenttään."
+msgid "Panel icon size"
+msgstr "Paneelin kuvakkeen koko"
 
-#~ msgid ""
-#~ "Choose where application descriptions will be placed, or select \"None\" "
-#~ "to disable."
-#~ msgstr ""
-#~ "Valitse kuvausten sijoituspaikka tai poista \"Poista\" käytöstä "
-#~ "valitsemalla \"Ei mitään\"."
+msgid "Choose a custom size for the panel icon"
+msgstr "Valitse mukautettu koko paneelin kuvakkeeseen"
 
-#~ msgid "Startup category"
-#~ msgstr "Käynnistysryhmä"
+msgid "Session buttons icon size"
+msgstr "Istunnon painikkeiden kuvakekoko"
 
-#~ msgid "Category first seen when the menu is opened"
-#~ msgstr "Ryhmä näkyy ensimmäisen kerran, kun valikko avataan"
+msgid "Use session buttons box style"
+msgstr "Lokeroidut painikkeet istunnon tyylissä"
+
+msgid "Info/tip: Drag on the menu edge to change the menu size."
+msgstr "Vihje/vinkki: Muuta valikon kokoa vetämällä valikon reunaa."
