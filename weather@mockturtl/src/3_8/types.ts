@@ -55,7 +55,8 @@ export interface WeatherData {
     condition: Condition
     forecasts: ForecastData[];
     hourlyForecasts?: HourlyForecastData[]
-    extra_field?: APIUniqueField
+    extra_field?: APIUniqueField;
+    immediatePrecipitation?: ImmediatePrecipitation;
 }
 
 
@@ -149,6 +150,13 @@ export interface Condition {
 	 */
     icons: BuiltinIcons[],
     customIcon: CustomIcons
+}
+
+export interface ImmediatePrecipitation {
+    /** Precipitation in * minutes */
+    start: number;
+    /** ends in * minutes */
+    end: number;
 }
 
 /**

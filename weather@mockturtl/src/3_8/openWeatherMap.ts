@@ -9,7 +9,7 @@
 import { HttpError } from "./httpLib";
 import { Log } from "./logger";
 import { WeatherApplet } from "./main";
-import { WeatherProvider, WeatherData, ForecastData, HourlyForecastData, AppletError, BuiltinIcons, CustomIcons, LocationData } from "./types";
+import { WeatherProvider, WeatherData, ForecastData, HourlyForecastData, AppletError, BuiltinIcons, CustomIcons, LocationData, ImmediatePrecipitation } from "./types";
 import { _, IsLangSupported } from "./utils";
 
 const Lang: typeof imports.lang = imports.lang;
@@ -91,6 +91,18 @@ export class OpenWeatherMap implements WeatherProvider {
                 },
                 forecasts: []
             };
+
+            let immediate: ImmediatePrecipitation = {
+                start: -1,
+                end: -1
+            }
+            for (let index = 0; index < json?.minutely.length; index++) {
+                const element = json?.minutely[index];
+                if (element.precipitation > 0)
+                    immediate.start = index;
+                if (element.precipitation)
+                
+            }
 
             let forecasts: ForecastData[] = [];
             for (let i = 0; i < json.daily.length; i++) {
