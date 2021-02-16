@@ -16,7 +16,7 @@ msgstr ""
 "X-Generator: Poedit 2.3\n"
 "Last-Translator: André Silva\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: pt_PT\n"
+"Language: pt\n"
 
 #: 3.2/providers.js:56 3.0/providers.js:49
 msgid "CPU:"
