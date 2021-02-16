@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: brightness-and-gamma-applet@cardsurf 1.1.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-05-01 14:00+0800\n"
-"PO-Revision-Date: 2021-02-16 11:21+0100\n"
+"PO-Revision-Date: 2021-02-16 19:35+0100\n"
 "Last-Translator: Jonas JF\n"
 "Language-Team: \n"
 "Language: pt_BR\n"
@@ -123,7 +123,7 @@ msgstr "O valor mÃ¡ximomo de brilho varia de 51% a 200%."
 #. brightness-and-gamma-applet@cardsurf->settings-
 #. schema.json->gui_icon_filepath->description
 msgid "Icon"
-msgstr "Ãcone"
+msgstr "Ícone"
 
 #. brightness-and-gamma-applet@cardsurf->settings-
 #. schema.json->gui_icon_filepath->tooltip
