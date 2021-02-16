@@ -236,7 +236,7 @@ export class UIHourlyForecasts {
      * @returns Always returns text 
      */
     private GeneratePrecipitationText(precip: Precipitation, config: Config): string {
-		if (!precip || precip.type == "none") return "";
+		if (!precip) return "";
 		
 		let precipitationText = "";
         if (!!precip.volume && precip.volume > 0) {

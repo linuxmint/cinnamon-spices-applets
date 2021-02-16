@@ -142,22 +142,25 @@ export class OpenWeatherMap implements WeatherProvider {
                         customIcon: self.ResolveCustomIcon(hour.weather[0].icon)
                     },
                 }
-                if (!!hour.rain) {
-                    forecast.precipitation = {
-                        volume: hour.rain["1h"],
-                        type: "rain"
-                    }
-                }
-                // Snow takes precedence
-                if (!!hour.snow) {
-                    forecast.precipitation = {
-                        volume: hour.snow["1h"],
-                        type: "snow"
-                    }
+
+				if (hour.pop >= 0.1) {
+					forecast.precipitation = {
+						chance: hour.pop * 100,
+						type: "none",
+						volume: null
+					}
+				}
+
+                if (!!hour.rain && forecast.precipitation != null) {
+                    forecast.precipitation.volume = hour.rain["1h"];
+					forecast.precipitation.type = "rain";
                 }
 
-                if (!!hour.pop && forecast.precipitation)
-                    forecast.precipitation.chance = hour.pop * 100;
+                // Snow takes precedence
+                if (!!hour.snow && forecast.precipitation != null) {
+                    forecast.precipitation.volume = hour.snow["1h"];
+					forecast.precipitation.type = "snow"
+                }
 
                 hourly.push(forecast);
             }

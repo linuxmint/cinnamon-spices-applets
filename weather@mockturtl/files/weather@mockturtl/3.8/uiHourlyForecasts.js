@@ -171,7 +171,7 @@ class UIHourlyForecasts {
         }
     }
     GeneratePrecipitationText(precip, config) {
-        if (!precip || precip.type == "none")
+        if (!precip)
             return "";
         let precipitationText = "";
         if (!!precip.volume && precip.volume > 0) {
