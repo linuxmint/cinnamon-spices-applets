@@ -458,7 +458,8 @@ msgid " days"
 msgstr ""
 
 #. modules/stringsForTranslation.js:57
-msgid " _days" #for some countries the third declension of the word
+# TRANSLATORS: for some countries the third declension of the word
+msgid " _days"
 msgstr ""
 
 #. modules/stringsForTranslation.js:58
