@@ -42,7 +42,7 @@ class CurrentWeather {
             this.SetAPIUniqueField(weather.extra_field);
             if (config._showSunrise)
                 this.SetSunriseAndSunset(weather.sunrise, weather.sunset, weather.location.timeZone);
-            this.SetImmediatePrecipitation(weather.immediatePrecipitation);
+            this.SetImmediatePrecipitation(weather.immediatePrecipitation, config);
             return true;
         }
         catch (e) {
@@ -207,9 +207,11 @@ class CurrentWeather {
         sunBin.set_child(sunBox);
         return sunBin;
     }
-    SetImmediatePrecipitation(precip) {
-        if (!precip || precip.end == null || precip.start == null)
+    SetImmediatePrecipitation(precip, config) {
+        if (!config._immediatePrecip || !precip || precip.end == null || precip.start == null) {
+            this.immediatePrecipitationBox.hide();
             return;
+        }
         this.immediatePrecipitationBox.show();
         if (precip.start == -1) {
             this.immediatePrecipitationBox.hide();

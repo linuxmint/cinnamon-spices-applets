@@ -73,7 +73,8 @@
 				"apiKey",
 				"refreshInterval",
 				"forecastDays",
-				"forecastHours"
+				"forecastHours",
+				"immediatePrecip"
 			]
 		},
 		"weather-conditions" : {
@@ -217,7 +218,8 @@
 		"max": 360,
 		"units": "minutes",
 		"step": 5,
-		"description": "Update interval"
+		"description": "Update interval",
+		"tooltip": "If you are using a provider with API keys set it to an interval you won't run out of your quota with."
 	},
 	"forecastDays": {
 		"type": "spinbutton",
@@ -226,7 +228,8 @@
 		"max": 16,
 		"units": "days",
 		"step": 1,
-		"description": "Forecast length"
+		"description": "Forecast length",
+		"tooltip": "Maximum number of days what can be displayed, maximum rows and columns setting in the Presentation tab will affect the final number."
 	},
 	"forecastHours": {
 		"type": "spinbutton",
@@ -236,6 +239,12 @@
 		"units": "hours",
 		"step": 1,
 		"description": "Hourly Forecast length"
+	},
+	"immediatePrecip": {
+		"type": "checkbox",
+		"default": false,
+		"description": "Enable minutely precipitation forecast",
+		"tooltip": "If you'd like to use this make sure you use your exact coordinates/address as location to help its accuracy. Currently implemented with OpenWeatherMap only."
 	},
 	"temperatureUnit": {
 		"type": "radiogroup",

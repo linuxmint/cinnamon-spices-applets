@@ -41,7 +41,8 @@ const Keys = {
     RUSSIAN_STYLE: "tempRussianStyle",
     SHORT_HOURLY_TIME: "shortHourlyTime",
     SHOW_FORECAST_DATES: "showForecastDates",
-    WEATHER_USE_SYMBOLIC_ICONS_KEY: 'useSymbolicIcons'
+    WEATHER_USE_SYMBOLIC_ICONS_KEY: 'useSymbolicIcons',
+    IMMEDIATE_PRECIP: "immediatePrecip"
 };
 class Config {
     constructor(app, instanceID) {

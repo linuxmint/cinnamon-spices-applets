@@ -80,7 +80,7 @@ export class CurrentWeather {
 			if (config._showSunrise)
 				this.SetSunriseAndSunset(weather.sunrise, weather.sunset, weather.location.timeZone);
 
-			this.SetImmediatePrecipitation(weather.immediatePrecipitation);			
+			this.SetImmediatePrecipitation(weather.immediatePrecipitation, config);			
 			return true;
 		} catch (e) {
 			Log.Instance.Error("DisplayWeatherError: " + e);
@@ -285,9 +285,11 @@ export class CurrentWeather {
 
 	// Data display helpers
 
-	private SetImmediatePrecipitation(precip: ImmediatePrecipitation): void {
-		if (!precip || precip.end == null || precip.start == null)
+	private SetImmediatePrecipitation(precip: ImmediatePrecipitation, config: Config): void {
+		if (!config._immediatePrecip || !precip || precip.end == null || precip.start == null) {
+			this.immediatePrecipitationBox.hide();
 			return;
+		}
 		
 		this.immediatePrecipitationBox.show()
 		if (precip.start == -1) {
