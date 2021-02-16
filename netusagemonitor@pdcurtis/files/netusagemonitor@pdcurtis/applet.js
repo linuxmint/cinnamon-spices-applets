@@ -561,7 +561,7 @@ MyApplet.prototype = {
 
 
         if (this.useTotalLimit) {
-            this.menuitemInfo2.label.text = "    " + _("Alert level (Orange):") + " " + Math.round(this.alertPercentage) + _("% of Data Limit of") + " " + this.formatSentReceived((this.totalLimit* 1024 * 1024 )) ;
+            this.menuitemInfo2.label.text = "    " + _("Alert level (Orange):") + " " + Math.round(this.alertPercentage) + /* xgettext:no-javascript-format */ _("% of Data Limit of") + " " + this.formatSentReceived((this.totalLimit* 1024 * 1024 )) ;
         }
 
         if (this.cumulativeInterface1 != "null" && this.cumulativeInterface1 != "") {
