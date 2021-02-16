@@ -28,6 +28,7 @@ const tryFn = function(callback, errCallback) {
     }
 };
 
+const wordWrap = text => text.match( /.{1,80}(\s|$|-|=|\+)|\S+?(\s|$|-|=|\+)/g ).join('\n');
 //=========================================
 
 const Gio = imports.gi.Gio;
@@ -211,5 +212,5 @@ const searchStr = (q, str, quick = false) => {
     }
 };
 
-module.exports = {SEARCH_DEBUG, _, APPTYPE, tryFn, readFileAsync, readJSONAsync,
+module.exports = {SEARCH_DEBUG, _, APPTYPE, tryFn, readFileAsync, readJSONAsync, wordWrap,
                                                             showTooltip, hideTooltip, searchStr};

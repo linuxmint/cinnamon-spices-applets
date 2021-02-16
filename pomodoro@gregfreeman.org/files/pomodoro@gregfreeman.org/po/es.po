@@ -5,16 +5,16 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-01-28 11:55-0500\n"
-"PO-Revision-Date: 2015-02-21 19:30-0800\n"
+"PO-Revision-Date: 2021-02-16 11:27+0100\n"
 "Last-Translator: Ben Southall <stellarpower@googlemail.com>\n"
 "Language-Team: Richard Decal <decal@uw.edu>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.5.4\n"
+"X-Generator: Poedit 2.3\n"
 "Language: es\n"
 
 # notifications
