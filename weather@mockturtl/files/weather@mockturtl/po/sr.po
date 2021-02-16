@@ -3,19 +3,19 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <vladimirknezev@gmail.com>, 2019.
 #
-#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-09-07 14:19+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2021-02-16 11:25+0100\n"
 "Last-Translator: Knez <vladimirknezev@gmail.com>\n"
 "Language-Team: Serbia <LL@li.org>\n"
 "Language: sr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
 
 #: applet.js:337 3.0/applet.js:234 3.8/applet.js:184
 msgid "..."
@@ -57,8 +57,7 @@ msgstr "Учитавање будуће прогнозе..."
 msgid "Loading ..."
 msgstr "Учитавање..."
 
-#: applet.js:737 3.0/applet.js:268 3.0/applet.js:708 3.8/applet.js:218
-#: 3.8/applet.js:617
+#: applet.js:737 3.0/applet.js:268 3.0/applet.js:708 3.8/applet.js:218 3.8/applet.js:617
 msgid "Refresh"
 msgstr "Освежи"
 
@@ -142,11 +141,10 @@ msgstr "СЗ"
 msgid "Service Unavailable"
 msgstr "Услуга недоступна"
 
-#: applet.js:1084 3.0/applet.js:195 3.0/applet.js:197 3.0/applet.js:199
-#: 3.0/applet.js:202 3.0/applet.js:205 3.0/applet.js:206 3.0/applet.js:207
-#: 3.0/applet.js:208 3.8/applet.js:146 3.8/applet.js:148 3.8/applet.js:150
-#: 3.8/applet.js:153 3.8/applet.js:156 3.8/applet.js:157 3.8/applet.js:158
-#: 3.8/applet.js:159
+#: applet.js:1084 3.0/applet.js:195 3.0/applet.js:197 3.0/applet.js:199 3.0/applet.js:202
+#: 3.0/applet.js:205 3.0/applet.js:206 3.0/applet.js:207 3.0/applet.js:208 3.8/applet.js:146
+#: 3.8/applet.js:148 3.8/applet.js:150 3.8/applet.js:153 3.8/applet.js:156 3.8/applet.js:157
+#: 3.8/applet.js:158 3.8/applet.js:159
 msgid "Service Error"
 msgstr "Грешка услуге"
 
@@ -185,6 +183,7 @@ msgid ""
 msgstr ""
 "Молимо вас да унесете АПИ кључ у подешавањима,\n"
 "или узмите прво један са https://darksky.net/dev/register"
+
 #: 3.0/darkSky.js:218 3.8/darkSky.js:171
 msgid ""
 "Please Make sure you\n"
@@ -192,15 +191,15 @@ msgid ""
 msgstr ""
 "Проверите да ли сте\n"
 "правилно унели АПИ кључ"
+
 #: 3.0/ipApi.js:85 3.8/ipApi.js:40
 msgid "Could not obtain location"
 msgstr "Није могуће добити локацију"
 
 #: 3.0/ipApi.js:91 3.8/ipApi.js:46
-msgid ""
-"Location Service responded with errors, please see the logs in Looking Glass"
-msgstr ""
-"Локацијска служба одговорила је на грешке, погледајте записнике у прозорче огледала"
+msgid "Location Service responded with errors, please see the logs in Looking Glass"
+msgstr "Локацијска служба одговорила је на грешке, погледајте записнике у прозорче огледала"
+
 #: 3.0/openWeatherMap.js:153 3.8/openWeatherMap.js:96
 msgid "Failed to Process Current Weather Info"
 msgstr "Обрада тренутних информација о времену није успела"
@@ -221,14 +220,11 @@ msgstr "Проверите да ли је локација у исправном
 msgid "Make sure you entered the correct key in settings"
 msgstr "Проверите да ли сте унели исправан кључ у подешавању"
 
-#: 3.0/openWeatherMap.js:253 3.0/openWeatherMap.js:273
-#: 3.8/openWeatherMap.js:196 3.8/openWeatherMap.js:216
-msgid ""
-"Location not found, make sure location is available or it is in the correct "
-"format"
-msgstr ""
-"Локација није пронађена, проверите да ли је локација доступна или је исправна"
-"формат"
+#: 3.0/openWeatherMap.js:253 3.0/openWeatherMap.js:273 3.8/openWeatherMap.js:196
+#: 3.8/openWeatherMap.js:216
+msgid "Location not found, make sure location is available or it is in the correct format"
+msgstr "Локација није пронађена, проверите да ли је локација доступна или је исправнаформат"
+
 #: 3.0/openWeatherMap.js:257 3.8/openWeatherMap.js:200
 msgid "If this problem persists, please contact the Author of this applet"
 msgstr "Ако овај проблем и даље постоји, обратите се аутору овог програмчета"
@@ -494,8 +490,7 @@ msgid "Make sure you entered a location or use Automatic location instead"
 msgstr "Проверите да ли сте унели локацију или уместо ње користите Аутоматску локацију"
 
 #: 3.0/applet.js:487 3.8/applet.js:399
-msgid ""
-"Unexpected Error While Refreshing Weather, please see log in Looking Glass"
+msgid "Unexpected Error While Refreshing Weather, please see log in Looking Glass"
 msgstr "Неочекивана грешка током освежавања времена, погледајте записнике у прозорче огледала"
 
 #: 3.0/applet.js:569 3.8/applet.js:478
@@ -557,12 +552,10 @@ msgstr "Локација"
 #. settings-schema.json->location->tooltip
 #. 3.0->settings-schema.json->location->tooltip
 #. 3.8->settings-schema.json->location->tooltip
-msgid ""
-"Acceptable inputs: City,CountryCode or Zipcode,CountryCode or "
-"Latitude,Longtitude"
+msgid "Acceptable inputs: City,CountryCode or Zipcode,CountryCode or Latitude,Longtitude"
 msgstr ""
-"Прихватљиви уноси: Град, позивни број земље или поштански број, код земље или"
-"Ширина, дужина"
+"Прихватљиви уноси: Град, позивни број земље или поштански број, код земље илиШирина, дужина"
+
 #. settings-schema.json->getLocation->description
 msgid "Setup Location"
 msgstr "Подесите локацију"
@@ -780,10 +773,8 @@ msgstr "АПИ кључ"
 
 #. 3.0->settings-schema.json->apiKey->tooltip
 #. 3.8->settings-schema.json->apiKey->tooltip
-msgid ""
-"Copy this from your account of the used Data service and paste it here."
-msgstr ""
-"Копирајте ово са свог налога коришћене услуге података и убаците га овде."
+msgid "Copy this from your account of the used Data service and paste it here."
+msgstr "Копирајте ово са свог налога коришћене услуге података и убаците га овде."
 
 #. 3.0->settings-schema.json->manualLocation->description
 #. 3.8->settings-schema.json->manualLocation->description
@@ -813,11 +804,10 @@ msgstr "Manje opširna vremenska stanja"
 #. 3.0->settings-schema.json->credits->description
 #. 3.8->settings-schema.json->credits->description
 msgid ""
-"powered by: OpenWeatherMap, DarkSky, ipapi. Big Thanks to OpenWeatherMap for"
-" their support!"
+"powered by: OpenWeatherMap, DarkSky, ipapi. Big Thanks to OpenWeatherMap for their support!"
 msgstr ""
-"покреће га: OpenWeatherMap, DarkSky, ipapi. Велико хвала OpenWeatherMap за"
-"њихову подршку!"
+"покреће га: OpenWeatherMap, DarkSky, ipapi. Велико хвала OpenWeatherMap зањихову подршку!"
+
 #. 3.8->settings-schema.json->head->description
 msgid "Settings for weather@mockturtl 3.8+"
 msgstr "Подешавања за weather@mockturtl 3.8+"
