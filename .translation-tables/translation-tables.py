@@ -92,7 +92,7 @@ def str2html_href(link, text):
 
 def value2html_progress_image(percentage):
     """ Creates a HTML code snippet, which links to a progress bar image to a given percentage. """
-    return '<img src="http://progressed.io/bar/' + percentage + '" alt="' + percentage + '%" />'
+    return '<img src="https://progress-bar.dev/' + percentage + '" alt="' + percentage + '%" />'
 
 def progress(untranslated, translated):
     """ Calculates percentage for translation progress. """
