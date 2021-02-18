@@ -105,6 +105,17 @@ def validate_xlet(uuid):
                         print("[%s] The following errors were found in translation template '%s':\n%s" % (uuid, file, potcheck.stderr))
                         valid = False
 
+        # check forbidden settings key names
+        for root, dirs, files in os.walk("files/%s" % uuid):
+            for file in files:
+                if file == "settings-schema.json":
+                    with open(os.path.join(root, file)) as settingsfile:
+                        settings = json.load(settingsfile)
+                        for badvalue in key_runner(settings):
+                            if isinstance(badvalue, dict):
+                                print("[%s] Forbidden settings key name '%s' in %s.\nThe value of the forbidden key is:\n%s\n" % (uuid, badkey, os.path.join(root, file), str(badvalue)))
+                                valid = False
+
     except Exception as error:
         print("[%s] Unknown error. %s" % (uuid, error))
 
@@ -118,6 +129,17 @@ def quit(valid):
     else:
         print ("Errors were found!")
         sys.exit(1)
+
+def key_runner(dictvar):
+    for k, v in dictvar.items():
+        if k in ["description", "tooltip", "units", "title"]:
+            if isinstance(v, dict):
+                global badkey
+                badkey = k
+            yield v
+        elif isinstance(v, dict):
+            for key_val in key_runner(v):
+                yield key_val
 
 if sys.argv[1] == "--all":
     valid = True
