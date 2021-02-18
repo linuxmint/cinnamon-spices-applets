@@ -80,7 +80,9 @@
         "keyBrightnessUp",
         "keyBrightnessDown",
         "keyTempUp",
-        "keyTempDown"
+        "keyTempDown",
+        "keyGammaUp",
+        "keyGammaDown"
       ]
     },
     
@@ -152,31 +154,45 @@
   "keyToggle": {
     "type": "keybinding",
     "description": "On/Off",
-    "default": "<Control>End"
+    "default": ""
   },
   
   "keyBrightnessUp": {
     "type": "keybinding",
     "description": "Increase brightness level",
-    "default": "<Control>Page_Up"
+    "default": ""
   },
   
   "keyBrightnessDown": {
     "type": "keybinding",
     "description": "Decrease brightness level",
-    "default": "<Control>Page_Down"
+    "default": ""
   },
+
   "keyTempUp": {
     "type": "keybinding",
     "description": "Increase temperature level",
-    "default": "<Control><Shift>Page_Up"
+    "default": ""
   },
   
   "keyTempDown": {
     "type": "keybinding",
     "description": "Decrease temperature level",
-    "default": "<Control><Shift>Page_Down"
+    "default": ""
   },
+  
+  "keyGammaUp": {
+    "type": "keybinding",
+    "description": "Increase gamma level",
+    "default": ""
+  },
+  
+  "keyGammaDown": {
+    "type": "keybinding",
+    "description": "Decrease gamma level",
+    "default": ""
+  },
+
   "dayTemp": {
     "type": "spinbutton",
     "default": 5900,
