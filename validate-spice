@@ -87,7 +87,7 @@ def validate_xlet(uuid):
             print("[%s] icon.png has to be square." % uuid)
             valid = False
 
-        # check po files
+        # check po and pot files
         podir = "files/%s/po" % uuid
         if os.path.isdir(podir):
             for file in os.listdir(podir):
@@ -98,6 +98,11 @@ def validate_xlet(uuid):
                               "HINT: Most errors in translation file `%s` can usually be prevented and solved by using Poedit.\n"
                               % (uuid, file, pocheck.stderr, file)
                         )
+                        valid = False
+                if file.endswith(".pot"):
+                    potcheck = subprocess.run(["xgettext", os.path.join(podir, file), "-o", "-"], stdout=subprocess.DEVNULL, stderr=subprocess.PIPE, text=True)
+                    if potcheck.stderr:
+                        print("[%s] The following errors were found in translation template '%s':\n%s" % (uuid, file, potcheck.stderr))
                         valid = False
 
     except Exception as error:
