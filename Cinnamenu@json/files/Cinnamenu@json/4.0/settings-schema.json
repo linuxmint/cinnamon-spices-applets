@@ -68,7 +68,7 @@
             "title":"Menu",
             "keys":[
                 "category-click",
-                "open-on-favorites",
+                "open-on-category",
                 "enable-autoscroll",
                 "web-search-option",
                 "enable-emoji-search",
@@ -226,11 +226,19 @@
         "description":"Activate categories on click",
         "tooltip":"Activate categories on click instead of on hover"
     },
-    "open-on-favorites":{
-        "type":"checkbox",
-        "default":false,
-        "description":"Always open menu on favorite apps",
-        "tooltip":"Always open the menu with favorite apps category selected"
+    "open-on-category":{
+        "type":"combobox",
+        "default":0,
+        "description":"Open menu on category:",
+        "tooltip":"Always open the menu with this category selected",
+        "options":{
+            "Previous category":0,
+            "Favorite apps":1,
+            "Recent files":2,
+            "Places":3,
+            "All applications":4,
+            "Home folder":5
+        }
     },
     "enable-autoscroll":{
         "type":"checkbox",

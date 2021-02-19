@@ -120,7 +120,7 @@ class CinnamenuApplet extends TextIconApplet {
                             cb: () => { this.updateActivateOnHover(false);
                                         this.updateActivateOnHover(true); } },
             { key: 'enable-animation',          value: 'enableAnimation',       cb: null },
-            { key: 'open-on-favorites',         value: 'openOnFavorites',       cb: null },
+            { key: 'open-on-category',         value: 'openOnCategory',       cb: null },
 
             { key: 'category-click',            value: 'categoryClick',         cb: null },
             { key: 'enable-autoscroll',         value: 'enableAutoScroll',      cb: this.refresh },
@@ -146,11 +146,11 @@ class CinnamenuApplet extends TextIconApplet {
     }
 
     getGridValues() {
-        const gridWidth = this.appsView.applicationsGridBox.width;
-        const columns = Math.floor(gridWidth / (140 * global.ui_scale));
-        const columnWidth = Math.floor(gridWidth / columns);
-        //bigger if large icons
-        //width = Math.max(width, this.getAppIconSize() * this.settings.appsGridColumnCount * 1.5);
+        const appsBoxWidth = this.appsView.applicationsGridBox.width;
+        const minColumnWidth = Math.max(140, this.settings.appsGridIconSize * 1.2);
+        const columns = Math.floor(appsBoxWidth / (minColumnWidth * global.ui_scale));
+        const columnWidth = Math.floor(appsBoxWidth / columns);
+
         return {columnWidth: columnWidth, columns: columns};
     }
 
@@ -183,7 +183,6 @@ class CinnamenuApplet extends TextIconApplet {
             this.hide_applet_label(false);
         }
         this.updateIconAndLabel();
-        //this.refresh();
     }
 
     on_applet_added_to_panel() {
@@ -211,10 +210,6 @@ class CinnamenuApplet extends TextIconApplet {
             return;
         }
         this.menu.toggle_with_options(this.settings.enableAnimation);
-    }
-
-    on_panel_height_changed() {
-        //this.refresh();
     }
 
     on_applet_instances_changed(instance) {
@@ -283,16 +278,12 @@ class CinnamenuApplet extends TextIconApplet {
         if (this.orientation === St.Side.LEFT || this.orientation === St.Side.RIGHT) {
             this.set_applet_label('');
         } else {
-            //if (!this.panelMenuLabelText || this.panelMenuLabelText.length > 0) {
             if (!this.settings.menuLabel) {
                 this.settings.menuLabel = '';
             }
             const menuLabel = this.settings.menuLabel.substring(0, 45);
             this.set_applet_label(menuLabel);
             this.set_applet_tooltip(menuLabel);
-            //} else {
-                //this.set_applet_label('');
-            //}
         }
     }
 
@@ -541,12 +532,22 @@ class CinnamenuApplet extends TextIconApplet {
             this.categoriesView.populate();
             this.sidebar.populate();//in case fav files changed
             global.stage.set_key_focus(this.searchView.searchEntry);
-            const currentCategory = this.settings.openOnFavorites && this.settings.showFavAppsCategory ?
-                                                                'favorite_apps' : this.currentCategory;
+            let openOnCategory = this.currentCategory;
+            if (this.settings.openOnCategory === 1 && this.settings.showFavAppsCategory) {
+                openOnCategory = 'favorite_apps';
+            } else if (this.settings.openOnCategory === 2 && this.settings.showRecents) {
+                openOnCategory = 'recents';
+            } else if (this.settings.openOnCategory === 3 && this.settings.showPlaces) {
+                openOnCategory = 'places';
+            } else if (this.settings.openOnCategory === 4) {
+                openOnCategory = 'all';
+            } else if (this.settings.openOnCategory === 5 && this.settings.showHomeFolder) {
+                openOnCategory = GLib.get_home_dir();
+            }
             this.updateMenuWidth();
             this.updateMenuHeight();
             //Mainloop.idle_add(() => this.setActiveCategory(currentCategory));
-            this.setActiveCategory(currentCategory);
+            this.setActiveCategory(openOnCategory);
             this.panel.peekPanel();
         } else {
             if (this.searchActive) {
@@ -681,32 +682,32 @@ class CinnamenuApplet extends TextIconApplet {
         this.allItemsCleanup();
         this.appsView.clear();
         switch (categoryId) {
-            case 'places':
-                this.populateAppsBox(this.apps.listPlaces());
-                break;
-            case 'recents':
-                const recents = this.apps.listRecent();
-                this.populateAppsBox(recents);
-                if (recents.length === 0) {
-                    this.appsView.setAnswerText(_('No recent files'));
-                }
-                break;
-            case 'favorite_files':
-                this.populateAppsBox(this.apps.listFavoriteFiles());
-                break;
-            case 'bookmarks':
-                this.populateAppsBox(this.apps.listWebBookmarks());
-                break;
-            case 'favorite_apps':
-                this.populateAppsBox(this.apps.listFavoriteApps());
-                break;
-            default:
-                if (categoryId.startsWith('/')) {
-                    this.appsView.setAnswerText(categoryId);
-                    this.populateAppsBox(this.apps.listFolder(categoryId));
-                } else {
-                    this.populateAppsBox(this.apps.listApplications(categoryId));
-                }
+        case 'places':
+            this.populateAppsBox(this.apps.listPlaces());
+            break;
+        case 'recents':
+            const recents = this.apps.listRecent();
+            this.populateAppsBox(recents);
+            if (recents.length === 0) {
+                this.appsView.setAnswerText(_('No recent files'));
+            }
+            break;
+        case 'favorite_files':
+            this.populateAppsBox(this.apps.listFavoriteFiles());
+            break;
+        case 'bookmarks':
+            this.populateAppsBox(this.apps.listWebBookmarks());
+            break;
+        case 'favorite_apps':
+            this.populateAppsBox(this.apps.listFavoriteApps());
+            break;
+        default:
+            if (categoryId.startsWith('/')) {
+                this.appsView.setAnswerText(categoryId);
+                this.populateAppsBox(this.apps.listFolder(categoryId));
+            } else {
+                this.populateAppsBox(this.apps.listApplications(categoryId));
+            }
         }
     }
 
@@ -999,83 +1000,83 @@ class CinnamenuApplet extends TextIconApplet {
         };*/
 
         switch (true) {
-            case symbol === Clutter.KP_Enter || symbol === Clutter.KEY_Return:
-                if (ctrlKey) {
-                    activateContextMenu();
-                } else if (noModifiers) {
-                    activateItem();
-                } else {
-                    return Clutter.EVENT_PROPAGATE;
-                }
-                return Clutter.EVENT_STOP;
-            case (symbol === Clutter.KEY_Menu && noModifiers):
+        case symbol === Clutter.KP_Enter || symbol === Clutter.KEY_Return:
+            if (ctrlKey) {
                 activateContextMenu();
-                return Clutter.EVENT_STOP;
-            case (symbol === Clutter.KEY_Up && noModifiers):
-                leaveCurrentlyEnteredItem();
-                upNavigation();
-                return Clutter.EVENT_STOP;
-            /*case (symbol === Clutter.KEY_Up && modifierState === 4)://ctrl up
-                moveCategory("up");
-                return true;*/
-            case (symbol === Clutter.KEY_Down && noModifiers):
-                leaveCurrentlyEnteredItem();
-                downNavigation();
-                return Clutter.EVENT_STOP;
-            /*case (symbol === Clutter.KEY_Down && modifierState === 4)://ctrl down
-                moveCategory("down");
-                return true;*/
-            case (symbol === Clutter.KEY_Right && noModifiers):
-                leaveCurrentlyEnteredItem();
-                rightNavigation();
-                return Clutter.EVENT_PROPAGATE; //so that left/right can also be used to navigate search entry
-            case (symbol === Clutter.KEY_Left && noModifiers):
-                leaveCurrentlyEnteredItem();
-                leftNavigation();
-                return Clutter.EVENT_PROPAGATE; //so that left/right can also be used to navigate search entry
-            case symbol === Clutter.ISO_Left_Tab || symbol === Clutter.Tab:
-                if (altKey) {  //Close menu as alt-tab is used for app-switcher in cinnamon
-                    this.closeMenu();
-                    return Clutter.EVENT_STOP;
-                } else if (noModifiers) {
-                    leaveCurrentlyEnteredItem();
-                    tabNavigation();
-                    return Clutter.EVENT_STOP;
-                } else if (shiftKey) {
-                    leaveCurrentlyEnteredItem();
-                    shiftTabNavigation();
-                    return Clutter.EVENT_STOP;
-                }
+            } else if (noModifiers) {
+                activateItem();
+            } else {
                 return Clutter.EVENT_PROPAGATE;
-            case (symbol === Clutter.Escape || symbol === Clutter.KEY_Escape) && noModifiers:
-                if (this.contextMenu.isOpen) {
-                    this.contextMenu.close();
-                } else {
-                    this.closeMenu();
-                }
+            }
+            return Clutter.EVENT_STOP;
+        case (symbol === Clutter.KEY_Menu && noModifiers):
+            activateContextMenu();
+            return Clutter.EVENT_STOP;
+        case (symbol === Clutter.KEY_Up && noModifiers):
+            leaveCurrentlyEnteredItem();
+            upNavigation();
+            return Clutter.EVENT_STOP;
+        /*case (symbol === Clutter.KEY_Up && modifierState === 4)://ctrl up
+            moveCategory("up");
+            return true;*/
+        case (symbol === Clutter.KEY_Down && noModifiers):
+            leaveCurrentlyEnteredItem();
+            downNavigation();
+            return Clutter.EVENT_STOP;
+        /*case (symbol === Clutter.KEY_Down && modifierState === 4)://ctrl down
+            moveCategory("down");
+            return true;*/
+        case (symbol === Clutter.KEY_Right && noModifiers):
+            leaveCurrentlyEnteredItem();
+            rightNavigation();
+            return Clutter.EVENT_PROPAGATE; //so that left/right can also be used to navigate search entry
+        case (symbol === Clutter.KEY_Left && noModifiers):
+            leaveCurrentlyEnteredItem();
+            leftNavigation();
+            return Clutter.EVENT_PROPAGATE; //so that left/right can also be used to navigate search entry
+        case symbol === Clutter.ISO_Left_Tab || symbol === Clutter.Tab:
+            if (altKey) {  //Close menu as alt-tab is used for app-switcher in cinnamon
+                this.closeMenu();
                 return Clutter.EVENT_STOP;
-            case (symbol === Clutter.KEY_Page_Up && noModifiers):
+            } else if (noModifiers) {
                 leaveCurrentlyEnteredItem();
-                if (enteredAppItemExists) {
-                    appButtons[0].handleEnter();
-                } else if (enteredSidebarItemExists) {
-                    sidebarButtons[0].handleEnter();
-                } else {
-                    categoryButtons[0].handleEnter();
-                }
+                tabNavigation();
                 return Clutter.EVENT_STOP;
-            case (symbol === Clutter.KEY_Page_Down && noModifiers):
+            } else if (shiftKey) {
                 leaveCurrentlyEnteredItem();
-                if (enteredAppItemExists) {
-                    appButtons[appButtons.length - 1].handleEnter();
-                } else if (enteredSidebarItemExists) {
-                    sidebarButtons[sidebarButtons.length - 1].handleEnter();
-                } else {
-                    categoryButtons[categoryButtons.length - 1].handleEnter();
-                }
+                shiftTabNavigation();
                 return Clutter.EVENT_STOP;
-            default:
-                return Clutter.EVENT_PROPAGATE;
+            }
+            return Clutter.EVENT_PROPAGATE;
+        case (symbol === Clutter.Escape || symbol === Clutter.KEY_Escape) && noModifiers:
+            if (this.contextMenu.isOpen) {
+                this.contextMenu.close();
+            } else {
+                this.closeMenu();
+            }
+            return Clutter.EVENT_STOP;
+        case (symbol === Clutter.KEY_Page_Up && noModifiers):
+            leaveCurrentlyEnteredItem();
+            if (enteredAppItemExists) {
+                appButtons[0].handleEnter();
+            } else if (enteredSidebarItemExists) {
+                sidebarButtons[0].handleEnter();
+            } else {
+                categoryButtons[0].handleEnter();
+            }
+            return Clutter.EVENT_STOP;
+        case (symbol === Clutter.KEY_Page_Down && noModifiers):
+            leaveCurrentlyEnteredItem();
+            if (enteredAppItemExists) {
+                appButtons[appButtons.length - 1].handleEnter();
+            } else if (enteredSidebarItemExists) {
+                sidebarButtons[sidebarButtons.length - 1].handleEnter();
+            } else {
+                categoryButtons[categoryButtons.length - 1].handleEnter();
+            }
+            return Clutter.EVENT_STOP;
+        default:
+            return Clutter.EVENT_PROPAGATE;
         }
     }
 
