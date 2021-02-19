@@ -197,6 +197,9 @@ class CategoryButton extends PopupBaseMenuItem {
             this.selectCategory();
             return Clutter.EVENT_STOP;
         } else if (button === 3) {
+            if (this.actor.has_style_class_name('menu-category-button-hover')) {
+                this.handleLeave();
+            }
             this.openContextMenu(event);
             return Clutter.EVENT_STOP;
         }
@@ -232,13 +235,19 @@ class CategoryButton extends PopupBaseMenuItem {
     }
 }
 
-class ContextMenuItem extends PopupIconMenuItem {
+class ContextMenuItem extends PopupBaseMenuItem {
     constructor(appThis, label, iconName, action) {
-        super(label, iconName, St.IconType.SYMBOLIC, {focusOnHover: false});
+        super({focusOnHover: false});
         this.appThis = appThis;
+        if (iconName) {
+            const icon = new St.Icon({ style_class: 'popup-menu-icon', icon_name: iconName,
+                                                                icon_type: St.IconType.SYMBOLIC});
+            this.addActor(icon, {span: 0});
+        }
+        this.addActor(new St.Label({text: label}));
+
         this.signals = new SignalManager(null);
         this.action = action;
-
         if (this.action == null) {
             this.actor.style = "font-weight: bold";
         }
@@ -281,8 +290,8 @@ class ContextMenuItem extends PopupIconMenuItem {
 class ContextMenu {
     constructor(appThis) {
         this.appThis = appThis;
-        this.menu = new PopupMenu(this.appThis.actor);
-        this.menu.actor.hide();//Context menu seems to get drawn on creation?
+        this.menu = new PopupMenu(this.appThis.actor, /*St.Side.TOP*/);
+        this.menu.actor.hide();
         this.contextMenuBox = new St.BoxLayout({ style_class: '', vertical: true, reactive: true });
         this.contextMenuBox.add_actor(this.menu.actor);
         this.contextMenuBox.height = 0;

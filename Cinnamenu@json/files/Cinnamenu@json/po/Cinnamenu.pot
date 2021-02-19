@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-04 14:57+0000\n"
+"POT-Creation-Date: 2021-02-16 12:45+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -233,7 +233,7 @@ msgstr ""
 msgid "Skipping"
 msgstr ""
 
-msgid " - direcotry already searched"
+msgid " - directory already searched"
 msgstr ""
 
 msgid "Cinnamenu"
@@ -436,6 +436,10 @@ msgstr ""
 msgid "Choose where to show the session buttons (quit, logout, etc.)"
 msgstr ""
 
+msgid ""
+"\nInfo/tip: Drag on the menu edge to change the menu size.\n"
+msgstr ""
+
 msgid "Add favorites to session buttons"
 msgstr ""
 
@@ -465,10 +469,13 @@ msgstr ""
 msgid "Show home folder category in the menu"
 msgstr ""
 
-msgid "Always open menu on favorite apps"
+msgid "Open menu on category:"
 msgstr ""
 
-msgid "Always open the menu with favorite apps category selected"
+msgid "Always open the menu with this category selected"
+msgstr ""
+
+msgid "Previous category"
 msgstr ""
 
 msgid "Autoscroll the application list on mouse hover"
