@@ -15,7 +15,7 @@ export class WeatherButton {
         this.signals.connect(this.actor, 'enter-event', this.handleEnter, this);
 		this.signals.connect(this.actor, 'leave-event', this.handleLeave, this);
 		this.actor.connect("clicked", () => this.clicked());
-		this.actor.connect("enter-event", () => this.hovered());
+		this.actor.connect("enter-event", (ev) => this.hovered(ev));
     }
 
     handleEnter(actor?: WeatherButton) {
@@ -43,7 +43,7 @@ export class WeatherButton {
 		if (!this.disabled) this.actor.add_style_pseudo_class('active');
 	}
 
-	private hovered() {
+	private hovered(event: imports.gi.Clutter.Event) {
 	}
 
 }

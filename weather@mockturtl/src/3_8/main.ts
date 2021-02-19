@@ -228,7 +228,7 @@ export class WeatherApplet extends TextIconApplet {
     }
 
     private GetPanelHeight(): number {
-        return this.panel._getScaledPanelHeight();
+        return this.panel.height;
 	}
 
 	// ---------------------------------------------------------------------------
@@ -291,13 +291,13 @@ export class WeatherApplet extends TextIconApplet {
 	// Applet Overrides, do not delete
 
     /** override function */
-    private on_orientation_changed(orientation: imports.gi.St.Side) {
+    public on_orientation_changed(orientation: imports.gi.St.Side) {
         this.orientation = orientation;
         this.RefreshWeather(true);
     };
 
     /** Override function */
-    private on_applet_removed_from_panel(deleteConfig: any) {
+    public on_applet_removed_from_panel(deleteConfig: any) {
         // TODO: Proper unload
         //this.unloadStylesheet();
         //Main.keybindingManager.removeHotKey(this.menu_keybinding_name);
@@ -314,12 +314,12 @@ export class WeatherApplet extends TextIconApplet {
     }
 
     /** Override function */
-    private on_applet_middle_clicked(event: any) {
+    public on_applet_middle_clicked(event: any) {
 
     }
 
     /** Override function */
-    private on_panel_height_changed() {
+    public on_panel_height_changed() {
         // Implemented byApplets
 	}
 	
