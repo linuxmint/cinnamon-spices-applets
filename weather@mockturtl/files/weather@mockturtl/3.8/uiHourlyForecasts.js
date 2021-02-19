@@ -58,6 +58,8 @@ class UIHourlyForecasts {
         this.AdjustHourlyBoxItemWidth();
         return !(max <= 0);
     }
+    ScrollTo(date) {
+    }
     Show() {
         this.actor.show();
         this.actor.hide();

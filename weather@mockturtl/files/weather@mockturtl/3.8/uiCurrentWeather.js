@@ -315,12 +315,14 @@ class CurrentWeather {
             this.HideLocationSelectors();
     }
     ShowLocationSelectors() {
-        this.nextLocationButton.actor.show();
-        this.previousLocationButton.actor.show();
+        var _a, _b, _c, _d;
+        (_b = (_a = this.nextLocationButton) === null || _a === void 0 ? void 0 : _a.actor) === null || _b === void 0 ? void 0 : _b.show();
+        (_d = (_c = this.previousLocationButton) === null || _c === void 0 ? void 0 : _c.actor) === null || _d === void 0 ? void 0 : _d.show();
     }
     HideLocationSelectors() {
-        this.nextLocationButton.actor.hide();
-        this.previousLocationButton.actor.hide();
+        var _a, _b, _c, _d;
+        (_b = (_a = this.nextLocationButton) === null || _a === void 0 ? void 0 : _a.actor) === null || _b === void 0 ? void 0 : _b.hide();
+        (_d = (_c = this.previousLocationButton) === null || _c === void 0 ? void 0 : _c.actor) === null || _d === void 0 ? void 0 : _d.hide();
     }
 }
 exports.CurrentWeather = CurrentWeather;

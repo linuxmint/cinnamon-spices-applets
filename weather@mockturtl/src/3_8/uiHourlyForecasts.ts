@@ -87,6 +87,10 @@ export class UIHourlyForecasts {
 
         return !(max <= 0);
     }
+
+	public ScrollTo(date: Date): void {
+		
+	}
     
     public Show(): void {
         // In some cases the preferred height is not calculated

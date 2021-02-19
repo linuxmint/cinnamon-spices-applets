@@ -13,6 +13,7 @@ class WeatherButton {
         this.signals.connect(this.actor, 'enter-event', this.handleEnter, this);
         this.signals.connect(this.actor, 'leave-event', this.handleLeave, this);
         this.actor.connect("clicked", () => this.clicked());
+        this.actor.connect("enter-event", () => this.hovered());
     }
     handleEnter(actor) {
         if (!this.disabled)
@@ -32,6 +33,8 @@ class WeatherButton {
     clicked() {
         if (!this.disabled)
             this.actor.add_style_pseudo_class('active');
+    }
+    hovered() {
     }
 }
 exports.WeatherButton = WeatherButton;

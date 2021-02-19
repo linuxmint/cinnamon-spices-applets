@@ -418,12 +418,12 @@ export class CurrentWeather {
 	// Utils
 
 	private ShowLocationSelectors() {
-		this.nextLocationButton.actor.show();
-		this.previousLocationButton.actor.show();
+		this.nextLocationButton?.actor?.show();
+		this.previousLocationButton?.actor?.show();
 	}
 
 	private HideLocationSelectors() {
-		this.nextLocationButton.actor.hide();
-		this.previousLocationButton.actor.hide();
+		this.nextLocationButton?.actor?.hide();
+		this.previousLocationButton?.actor?.hide();
 	}
 }
