@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: download-and-upload-speed@cardsurf 1.4.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-01-24 23:31+0100\n"
-"PO-Revision-Date: 2021-02-20 22:50+0100\n"
+"PO-Revision-Date: 2021-02-20 23:09+0100\n"
 "Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -159,8 +159,7 @@ msgstr "Période de calcul"
 
 #. settings-schema.json->update_every->tooltip
 msgid "How often to calculate download and upload speed"
-msgstr ""
-"Nombre de secondes entre deux calculs de vitesse d'envoi et de réception"
+msgstr "Périodicité du calcul de vitesse d'envoi et de réception"
 
 #. settings-schema.json->update_available_interfaces_every->description
 msgid "Update available interfaces every"
@@ -171,8 +170,8 @@ msgid ""
 "How often to update list of available network interfaces. 0 means list of "
 "available network interfaces is not updated periodically."
 msgstr ""
-"Périodicité de mise à jour de la liste des interfaces réseaux disponibles. 0 "
-"signifie que cette liste n'est pas mise à jour périodiquement."
+"Périodicité de la mise à jour de la liste des interfaces réseaux "
+"disponibles. 0 signifie que cette liste n'est pas mise à jour périodiquement."
 
 #. settings-schema.json->gui_speed_type->description
 msgid "Type"
@@ -300,7 +299,8 @@ msgstr "Total des données"
 
 #. settings-schema.json->show_hover->description
 msgid "Show total download and upload on hover"
-msgstr "Afficher dans la bulle le total des données reçues et envoyées"
+msgstr ""
+"Afficher dans la bulle la quantité totale de données reçues et envoyées"
 
 #. settings-schema.json->show_hover->tooltip
 msgid "Show the hover popup with total amount of data downloaded and uploaded"
@@ -339,8 +339,8 @@ msgid ""
 "How often to save total amount of data downloaded and uploaded to the file. "
 "0 means no saving to the file."
 msgstr ""
-"Nombre de secondes entre deux sauvegardes des quantités de données reçues et "
-"envoyées. 0 signifie qu'il n'y a aucune sauvegarde."
+"Périodicité de la sauvegarde des quantités de données reçues et envoyées. 0 "
+"signifie qu'il n'y a aucune sauvegarde dans le fichier."
 
 #. settings-schema.json->data_limit_start->description
 msgid "Data limits"
