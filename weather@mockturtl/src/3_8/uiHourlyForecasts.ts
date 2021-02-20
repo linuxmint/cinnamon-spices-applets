@@ -3,9 +3,7 @@ import { APPLET_ICON, ELLIPSIS } from "./consts";
 import { Log } from "./logger";
 import { WeatherApplet } from "./main";
 import { HourlyForecastData, Precipitation } from "./types";
-import { UIForecasts } from "./uiForecasts";
 import { GetHoursMinutes, TempToUserConfig, UnitToUnicode, _, MillimeterToUserUnits, NotEmpty, WeatherIconSafely, AddHours, OnSameDay } from "./utils";
-import { WeatherButton } from "./weatherbutton";
 
 const { PolicyType } = imports.gi.Gtk;
 const { addTween } = imports.ui.tweener;
@@ -61,23 +59,6 @@ export class UIHourlyForecasts {
         // and only BoxLayout results in drawn stuff inside the ScrollView.
         // (Only Boxlayout and Viewport implements St.Scrollable needed inside a scrollview)
         this.actor.add_actor(this.container)
-    }
-
-	public async OnDayClicked(sender: WeatherButton, date: Date): Promise<void> {
-		if (this.hourlyToggled) {
-			this.Hide();
-		}
-		else {
-			await this.Show();
-			this.ScrollTo(date);
-		}
-	}
-
-	public OnDayHovered(sender: WeatherButton, date: Date): void {
-		if (!this.hourlyToggled)
-			return;
-
-		this.ScrollTo(date);
 	}
 
 	/**
@@ -157,6 +138,7 @@ export class UIHourlyForecasts {
 		// setting the min-height forces to draw with the view's requested height without
 		// interfering with animations.
 		this.actor.style = "min-height: " + naturalHeight.toString() + "px;";
+		this.hourlyToggled = true;
 		return new Promise((resolve, reject) => {
 			if (global.settings.get_boolean("desktop-effects-on-menus")) {
 				this.actor.height = 0;
@@ -171,13 +153,15 @@ export class UIHourlyForecasts {
 						}
 					});
 			}
-	
-			this.hourlyToggled = true;
+			else {
+				resolve();
+			}
 		});
     }
 
     public async Hide(): Promise<void> {
         let hscroll = this.actor.get_hscroll_bar();
+		this.hourlyToggled = false;
 		return new Promise((resolve, reject) => {
 			if (global.settings.get_boolean("desktop-effects-on-menus")) {
 				// TODO: eliminate Clutter Warnings on collapse in logs
@@ -201,7 +185,6 @@ export class UIHourlyForecasts {
 				this.actor.hide();
 				resolve();
 			}
-			this.hourlyToggled = false;
 		});
     }
 

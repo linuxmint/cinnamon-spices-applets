@@ -22,6 +22,8 @@ class UIForecasts {
         this.DayHovered = new events_1.Event();
         this.app = app;
         this.actor = new Bin({ style_class: STYLE_FORECAST });
+        this.DayClickedCallback = (s, e) => this.OnDayClicked(s, e);
+        this.DayHoveredCallback = (s, e) => this.OnDayHovered(s, e);
     }
     UpdateIconType(iconType) {
         var _a;
@@ -49,14 +51,23 @@ class UIForecasts {
                 let dayName = utils_1.GetDayName(forecastData.date, config.currentLocale, config._showForecastDates, weather.location.timeZone);
                 forecastUi.Day.actor.label = dayName;
                 forecastUi.Day.ID = forecastData.date;
+                forecastUi.Day.Hovered.Unsubscribe(this.DayHoveredCallback);
+                forecastUi.Day.Clicked.Unsubscribe(this.DayClickedCallback);
+                let hasHourlyWeather = false;
                 for (let index = 0; index < this.app.GetMaxHourlyForecasts(); index++) {
                     const element = weather.hourlyForecasts[index];
                     if (utils_1.OnSameDay(element.date, forecastData.date)) {
-                        forecastUi.Day.enable();
-                        forecastUi.Day.Hovered.Subscribe((s, e) => this.OnDayHovered(s, e));
-                        forecastUi.Day.Clicked.Subscribe((s, e) => this.OnDayClicked(s, e));
+                        hasHourlyWeather = true;
                         break;
                     }
+                }
+                if (hasHourlyWeather) {
+                    forecastUi.Day.enable();
+                    forecastUi.Day.Hovered.Subscribe(this.DayHoveredCallback);
+                    forecastUi.Day.Clicked.Subscribe(this.DayClickedCallback);
+                }
+                else {
+                    forecastUi.Day.disable();
                 }
                 forecastUi.Temperature.text = first_temperature;
                 forecastUi.Temperature.text += ((config._tempRussianStyle) ? consts_1.ELLIPSIS : " " + consts_1.FORWARD_SLASH + " ");
@@ -152,9 +163,11 @@ class UIForecasts {
             this.actor.get_child().destroy();
     }
     OnDayHovered(sender, event) {
+        logger_1.Log.Instance.Debug("Day Hovered: " + sender.ID.toDateString());
         this.DayHovered.Invoke(sender, sender.ID);
     }
     OnDayClicked(sender, event) {
+        logger_1.Log.Instance.Debug("Day Clicked: " + sender.ID.toDateString());
         this.DayClicked.Invoke(sender, sender.ID);
     }
 }

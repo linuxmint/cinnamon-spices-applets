@@ -30,9 +30,16 @@ export class UIForecasts {
 	public DayClicked: Event<WeatherButton, Date> = new Event();
 	public DayHovered: Event<WeatherButton, Date> = new Event();
 
+	// Callbacks with bound context, which has constant signature for event subsciption/unsubscription
+	public DayClickedCallback: (sender: WeatherButton, event: imports.gi.Clutter.Event) => void;
+	public DayHoveredCallback: (sender: WeatherButton, event: imports.gi.Clutter.Event) => void;
+
 	constructor(app: WeatherApplet) {
 		this.app = app;
 		this.actor = new Bin({ style_class: STYLE_FORECAST });
+
+		this.DayClickedCallback = (s, e) => this.OnDayClicked(s, e);
+		this.DayHoveredCallback = (s, e) => this.OnDayHovered(s, e);
 	}
 
 	public UpdateIconType(iconType: imports.gi.St.IconType): void {
@@ -71,15 +78,27 @@ export class UIForecasts {
 
 				// We set ID to the buttons as date so we can use them later on
 				forecastUi.Day.ID = forecastData.date;
+
+				forecastUi.Day.Hovered.Unsubscribe(this.DayHoveredCallback);
+				forecastUi.Day.Clicked.Unsubscribe(this.DayClickedCallback);
+
 				// Enable and subscribe to buttons what has hourly weathers
+				let hasHourlyWeather: boolean = false;
 				for (let index = 0; index < this.app.GetMaxHourlyForecasts(); index++) {
 					const element = weather.hourlyForecasts[index];
 					if (OnSameDay(element.date, forecastData.date)) {
-						forecastUi.Day.enable();
-						forecastUi.Day.Hovered.Subscribe((s, e) => this.OnDayHovered(s, e));
-						forecastUi.Day.Clicked.Subscribe((s, e) => this.OnDayClicked(s, e));
+						hasHourlyWeather = true;
 						break;
 					}					
+				}
+
+				if (hasHourlyWeather) {
+					forecastUi.Day.enable();
+					forecastUi.Day.Hovered.Subscribe(this.DayHoveredCallback);
+					forecastUi.Day.Clicked.Subscribe(this.DayClickedCallback);
+				}
+				else {
+					forecastUi.Day.disable();
 				}
 
                 forecastUi.Temperature.text = first_temperature;
@@ -205,10 +224,12 @@ export class UIForecasts {
 	}
 
 	private OnDayHovered(sender: WeatherButton, event: imports.gi.Clutter.Event): void {
+		Log.Instance.Debug("Day Hovered: " + (sender.ID as Date).toDateString());
 		this.DayHovered.Invoke(sender, sender.ID as Date);
 	}
 
 	private OnDayClicked(sender: WeatherButton, event: imports.gi.Clutter.Event): void {
+		Log.Instance.Debug("Day Clicked: " + (sender.ID as Date).toDateString());
 		this.DayClicked.Invoke(sender, sender.ID as Date);
 	}
 }

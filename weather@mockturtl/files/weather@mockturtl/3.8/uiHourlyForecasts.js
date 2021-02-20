@@ -34,20 +34,6 @@ class UIHourlyForecasts {
     get Toggled() {
         return this.hourlyToggled;
     }
-    async OnDayClicked(sender, date) {
-        if (this.hourlyToggled) {
-            this.Hide();
-        }
-        else {
-            await this.Show();
-            this.ScrollTo(date);
-        }
-    }
-    OnDayHovered(sender, date) {
-        if (!this.hourlyToggled)
-            return;
-        this.ScrollTo(date);
-    }
     ScrollTo(date) {
         if (this.hourlyForecastDates == null)
             return;
@@ -97,6 +83,7 @@ class UIHourlyForecasts {
         this.actor.set_width(minWidth);
         this.actor.show();
         this.actor.style = "min-height: " + naturalHeight.toString() + "px;";
+        this.hourlyToggled = true;
         return new Promise((resolve, reject) => {
             if (global.settings.get_boolean("desktop-effects-on-menus")) {
                 this.actor.height = 0;
@@ -110,11 +97,14 @@ class UIHourlyForecasts {
                     }
                 });
             }
-            this.hourlyToggled = true;
+            else {
+                resolve();
+            }
         });
     }
     async Hide() {
         let hscroll = this.actor.get_hscroll_bar();
+        this.hourlyToggled = false;
         return new Promise((resolve, reject) => {
             if (global.settings.get_boolean("desktop-effects-on-menus")) {
                 addTween(this.actor, {
@@ -134,7 +124,6 @@ class UIHourlyForecasts {
                 this.actor.hide();
                 resolve();
             }
-            this.hourlyToggled = false;
         });
     }
     AdjustHourlyBoxItemWidth() {
