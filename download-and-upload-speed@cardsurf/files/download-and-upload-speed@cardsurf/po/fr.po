@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: download-and-upload-speed@cardsurf 1.4.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-01-24 23:31+0100\n"
-"PO-Revision-Date: 2021-02-20 15:45+0100\n"
+"PO-Revision-Date: 2021-02-20 22:50+0100\n"
 "Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -344,7 +344,7 @@ msgstr ""
 
 #. settings-schema.json->data_limit_start->description
 msgid "Data limits"
-msgstr "Limites des données"
+msgstr "Quantité limite de données"
 
 #. settings-schema.json->data_limit->units
 msgid "MB"
@@ -352,7 +352,7 @@ msgstr "Mo"
 
 #. settings-schema.json->data_limit->description
 msgid "Data limit"
-msgstr "Limite des données"
+msgstr "Quantité limite de données"
 
 #. settings-schema.json->data_limit->tooltip
 msgid "The maximum amount of data to download and upload. 0 means no limits."
@@ -383,7 +383,9 @@ msgstr ""
 
 #. settings-schema.json->data_limit_command_enabled->description
 msgid "Invoke command when data limit exceeded"
-msgstr "Exécuter la commande suivante quand la limite des données est dépassée"
+msgstr ""
+"Exécuter la commande suivante quand la quantité limite de données est "
+"dépassée"
 
 #. settings-schema.json->data_limit_command_enabled->tooltip
 msgid ""
