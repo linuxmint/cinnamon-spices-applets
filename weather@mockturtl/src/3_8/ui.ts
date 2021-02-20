@@ -42,6 +42,8 @@ export class UI {
     private readonly menuManager: imports.ui.popupMenu.PopupMenuManager;
     private readonly signals: imports.misc.signalManager.SignalManager;
 
+    private lastDateToggled: Date = null;
+
     constructor(app: WeatherApplet, orientation: imports.gi.St.Side) {
         this.App = app;
         this.menuManager = new PopupMenuManager(this.App);
@@ -179,9 +181,7 @@ export class UI {
         this.CurrentWeather = new UICurrentWeather(this.App);
         this.FutureWeather = new UIForecasts(this.App);
         this.HourlyWeather = new UIHourlyForecasts(this.App, this.menu);
-
 		this.FutureWeather.DayClicked.Subscribe((s, e) => this.OnDayClicked(s, e));
-		this.FutureWeather.DayHovered.Subscribe((s, e) => this.OnDayHovered(s, e));
 
         this.Bar = new UIBar(this.App);
         this.Bar.ToggleClicked.Subscribe(Lang.bind(this, this.ToggleHourlyWeather));
@@ -217,15 +217,17 @@ export class UI {
 	}
 
 	private async OnDayClicked(sender: WeatherButton, date: Date): Promise<void> {
-		await this.ToggleHourlyWeather();
-		if (this.HourlyWeather.Toggled)
-			this.HourlyWeather.ScrollTo(date);
-	}
+        // Open hourly weather if collapsed
+        if (!this.HourlyWeather.Toggled)
+            await this.ShowHourlyWeather();
+        // If the same day was toggle the second time, collapse
+        else if (this.lastDateToggled == date) {
+            await this.HideHourlyWeather();
+            return;
+        }
 
-	private async OnDayHovered(sender: WeatherButton, date: Date): Promise<void> {
-		if (!this.HourlyWeather.Toggled)
-			return;
-		this.HourlyWeather.ScrollTo(date);
+        this.HourlyWeather.ScrollTo(date);
+        this.lastDateToggled = date;
 	}
 	
 	private async ShowHourlyWeather(): Promise<void> {
@@ -235,6 +237,7 @@ export class UI {
     }
 
     private async HideHourlyWeather(): Promise<void> {
+        this.lastDateToggled = null;
 		this.HourlySeparator.Hide();
         this.Bar.SwitchButtonToShow();
 		await this.HourlyWeather.Hide();

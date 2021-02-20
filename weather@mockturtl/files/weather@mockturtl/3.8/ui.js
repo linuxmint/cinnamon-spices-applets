@@ -18,6 +18,7 @@ const STYLE_WEATHER_MENU = 'weather-menu';
 class UI {
     constructor(app, orientation) {
         this.lightTheme = false;
+        this.lastDateToggled = null;
         this.App = app;
         this.menuManager = new PopupMenuManager(this.App);
         this.menu = new AppletPopupMenu(this.App, orientation);
@@ -103,7 +104,6 @@ class UI {
         this.FutureWeather = new uiForecasts_1.UIForecasts(this.App);
         this.HourlyWeather = new uiHourlyForecasts_1.UIHourlyForecasts(this.App, this.menu);
         this.FutureWeather.DayClicked.Subscribe((s, e) => this.OnDayClicked(s, e));
-        this.FutureWeather.DayHovered.Subscribe((s, e) => this.OnDayHovered(s, e));
         this.Bar = new uiBar_1.UIBar(this.App);
         this.Bar.ToggleClicked.Subscribe(Lang.bind(this, this.ToggleHourlyWeather));
         this.ForecastSeparator = new uiSeparator_1.UISeparator();
@@ -132,14 +132,14 @@ class UI {
         }));
     }
     async OnDayClicked(sender, date) {
-        await this.ToggleHourlyWeather();
-        if (this.HourlyWeather.Toggled)
-            this.HourlyWeather.ScrollTo(date);
-    }
-    async OnDayHovered(sender, date) {
         if (!this.HourlyWeather.Toggled)
+            await this.ShowHourlyWeather();
+        else if (this.lastDateToggled == date) {
+            await this.HideHourlyWeather();
             return;
+        }
         this.HourlyWeather.ScrollTo(date);
+        this.lastDateToggled = date;
     }
     async ShowHourlyWeather() {
         this.HourlySeparator.Show();
@@ -147,6 +147,7 @@ class UI {
         await this.HourlyWeather.Show();
     }
     async HideHourlyWeather() {
+        this.lastDateToggled = null;
         this.HourlySeparator.Hide();
         this.Bar.SwitchButtonToShow();
         await this.HourlyWeather.Hide();
