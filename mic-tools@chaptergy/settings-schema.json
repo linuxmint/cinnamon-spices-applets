@@ -1,0 +1,54 @@
+{
+  "layout": {
+    "type": "layout",
+    "pages": ["panelSettings"],
+
+    "panelSettings": {
+      "type": "page",
+      "title": "Settings",
+      "sections": [
+        "generalSection",
+        "keybindSection"
+      ]
+    },
+
+    "generalSection": {
+      "type": "section",
+      "title": "General",
+      "keys": [
+        "autoListen",
+        "lightIcons"
+      ]
+    },  
+    "keybindSection": {
+      "type": "section",
+      "title": "Key Bindings",
+      "keys": [
+        "keyMute",
+        "keyListen"
+      ]
+    }
+  },
+  "lightIcons": {
+    "type": "checkbox",
+    "default": false,
+    "description": "Use light icons"
+  },
+  "autoListen": {
+    "type": "checkbox",
+    "default": true,
+    "description": "Automatically listen to the microphone when it is used"
+  },
+  
+  "keyMute": {
+    "type": "keybinding",
+    "description": "Mute / Unmute",
+    "default": ""
+  },
+  
+  "keyListen": {
+    "type": "keybinding",
+    "description": "Enable / Disable listening to the microphone",
+    "default": ""
+  }
+}

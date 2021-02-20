@@ -1,0 +1,9 @@
+{
+  "uuid": "mic-tools@chaptergy",
+  "name": "Mic-Tools",
+  "version": "1.0.1",
+  "description": "Listen to and mute your microphone right from the tray",
+  "multiversion": true,
+  "max-instances": 1,
+  "cinnamon-version": ["3.8", "4.0", "4.2", "4.3", "4.4", "4.5", "4.6", "4.8"]
+}

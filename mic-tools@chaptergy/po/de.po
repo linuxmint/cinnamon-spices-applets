@@ -1,0 +1,87 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Mic-Tools\n"
+"POT-Creation-Date: 2021-02-20 11:02+0100\n"
+"PO-Revision-Date: 2021-02-20 11:17+0100\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.4.1\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Last-Translator: \n"
+"Language: de\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: applet.js:98
+msgid "Reload Applet"
+msgstr "Applet neu laden"
+
+#: applet.js:110
+msgid "Recompile Translations"
+msgstr "Applet neu laden"
+
+#: applet.js:314
+msgid ""
+"Command 'amixer' is required but not installed. It is usually contained in "
+"the 'alsa-utils' package."
+msgstr ""
+"Der Befehl 'amixer' wird benötigt, er ist aber nicht installiert. Er ist "
+"normalerweise im 'alsa-utils' Paket enthalten."
+
+#: applet.js:323
+msgid ""
+"Command 'pctl' is required but not installed. It is usually contained in the "
+"'pulseaudio' package."
+msgstr ""
+"Der Befehl 'pctl' wird benötigt, er ist aber nicht installiert. Er ist "
+"normalerweise im 'pulseaudio' Paket enthalten."
+
+#: applet.js:331
+msgid ""
+"Please install the missing packages, right click on this applet and hit "
+"'Refresh'."
+msgstr ""
+"Bitte installiere die fehlenden Pakete, mache dann einen Rechtsklick auf das "
+"Applet und drücke auf 'Neu laden'."
+
+#: applet.js:339
+msgid "Listen to microphone"
+msgstr "Mikrofon abhören"
+
+#: applet.js:346
+msgid "Automatically listen when in use"
+msgstr "Bei Benutzung abhören"
+
+#: applet.js:353
+msgid "Mute microphone"
+msgstr "Stummschalten"
+
+#. settings-schema.json->layout->panelSettings->title
+msgid "Settings"
+msgstr "Einstellungen"
+
+#. settings-schema.json->layout->generalSection->title
+msgid "General"
+msgstr "Allgemein"
+
+#. settings-schema.json->layout->keybindSection->title
+msgid "Key Bindings"
+msgstr "Tastenkürzel"
+
+#. settings-schema.json->lightIcons->description
+msgid "Use light icons"
+msgstr "Helle Icons verwenden"
+
+#. settings-schema.json->autoListen->description
+msgid "Automatically listen to the microphone when it is used"
+msgstr "Das Mikrofon bei Benutzung automatisch abhören"
+
+#. settings-schema.json->keyMute->description
+msgid "Mute / Unmute"
+msgstr "Stummschalten / Stummschaltung aufheben"
+
+#. settings-schema.json->keyListen->description
+msgid "Enable / Disable listening to the microphone"
+msgstr "Abhören ein- / ausschalten"
