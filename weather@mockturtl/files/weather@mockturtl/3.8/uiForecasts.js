@@ -2,8 +2,10 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UIForecasts = void 0;
 const consts_1 = require("./consts");
+const events_1 = require("./events");
 const logger_1 = require("./logger");
 const utils_1 = require("./utils");
+const weatherbutton_1 = require("./weatherbutton");
 const { Bin, BoxLayout, Label, Icon, Widget } = imports.gi.St;
 const { GridLayout } = imports.gi.Clutter;
 const STYLE_FORECAST_ICON = 'weather-forecast-icon';
@@ -16,6 +18,8 @@ const STYLE_FORECAST_CONTAINER = 'weather-forecast-container';
 const STYLE_FORECAST = 'forecast';
 class UIForecasts {
     constructor(app) {
+        this.DayClicked = new events_1.Event();
+        this.DayHovered = new events_1.Event();
         this.app = app;
         this.actor = new Bin({ style_class: STYLE_FORECAST });
     }
@@ -43,7 +47,17 @@ class UIForecasts {
                 let second_temperature = config._temperatureHighFirst ? t_low : t_high;
                 let comment = (config._shortConditions) ? forecastData.condition.main : forecastData.condition.description;
                 let dayName = utils_1.GetDayName(forecastData.date, config.currentLocale, config._showForecastDates, weather.location.timeZone);
-                forecastUi.Day.text = dayName;
+                forecastUi.Day.actor.label = dayName;
+                forecastUi.Day.ID = forecastData.date;
+                for (let index = 0; index < this.app.GetMaxHourlyForecasts(); index++) {
+                    const element = weather.hourlyForecasts[index];
+                    if (utils_1.OnSameDay(element.date, forecastData.date)) {
+                        forecastUi.Day.enable();
+                        forecastUi.Day.Hovered.Subscribe((s, e) => this.OnDayHovered(s, e));
+                        forecastUi.Day.Clicked.Subscribe((s, e) => this.OnDayClicked(s, e));
+                        break;
+                    }
+                }
                 forecastUi.Temperature.text = first_temperature;
                 forecastUi.Temperature.text += ((config._tempRussianStyle) ? consts_1.ELLIPSIS : " " + consts_1.FORWARD_SLASH + " ");
                 forecastUi.Temperature.text += second_temperature + ' ' + utils_1.UnitToUnicode(config.TemperatureUnit);
@@ -98,11 +112,12 @@ class UIForecasts {
                 icon_name: consts_1.APPLET_ICON,
                 style_class: STYLE_FORECAST_ICON
             });
-            forecastWeather.Day = new Label({
+            forecastWeather.Day = new weatherbutton_1.WeatherButton({
                 style_class: STYLE_FORECAST_DAY,
                 reactive: true,
-                style: textColorStyle
-            });
+                style: textColorStyle,
+            }, true);
+            forecastWeather.Day.disable();
             forecastWeather.Summary = new Label({
                 style_class: STYLE_FORECAST_SUMMARY,
                 reactive: true
@@ -114,7 +129,7 @@ class UIForecasts {
                 vertical: true,
                 style_class: STYLE_FORECAST_DATABOX
             });
-            by.add_actor(forecastWeather.Day);
+            by.add(forecastWeather.Day.actor, { x_align: imports.gi.St.Align.START, expand: false, x_fill: false });
             by.add_actor(forecastWeather.Summary);
             by.add_actor(forecastWeather.Temperature);
             let bb = new BoxLayout({
@@ -135,6 +150,12 @@ class UIForecasts {
     Destroy() {
         if (this.actor.get_child() != null)
             this.actor.get_child().destroy();
+    }
+    OnDayHovered(sender, event) {
+        this.DayHovered.Invoke(sender, sender.ID);
+    }
+    OnDayClicked(sender, event) {
+        this.DayClicked.Invoke(sender, sender.ID);
     }
 }
 exports.UIForecasts = UIForecasts;

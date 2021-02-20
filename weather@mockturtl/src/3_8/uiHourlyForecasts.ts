@@ -3,7 +3,9 @@ import { APPLET_ICON, ELLIPSIS } from "./consts";
 import { Log } from "./logger";
 import { WeatherApplet } from "./main";
 import { HourlyForecastData, Precipitation } from "./types";
-import { GetHoursMinutes, TempToUserConfig, UnitToUnicode, _, MillimeterToUserUnits, NotEmpty, WeatherIconSafely } from "./utils";
+import { UIForecasts } from "./uiForecasts";
+import { GetHoursMinutes, TempToUserConfig, UnitToUnicode, _, MillimeterToUserUnits, NotEmpty, WeatherIconSafely, AddHours, OnSameDay } from "./utils";
+import { WeatherButton } from "./weatherbutton";
 
 const { PolicyType } = imports.gi.Gtk;
 const { addTween } = imports.ui.tweener;
@@ -16,6 +18,12 @@ export class UIHourlyForecasts {
     private container: imports.gi.St.BoxLayout;
     private hourlyForecasts: HourlyForecastUI[];
     private hourlyContainers: imports.gi.St.BoxLayout[];
+
+	/** 
+	 * Stores the dates for each displayed hour, so we can scroll to them later.
+	 * Populated in the Display function.
+	 */
+	private hourlyForecastDates: Date[];
 
     private hourlyToggled: boolean = false;
 
@@ -55,6 +63,45 @@ export class UIHourlyForecasts {
         this.actor.add_actor(this.container)
     }
 
+	public async OnDayClicked(sender: WeatherButton, date: Date): Promise<void> {
+		if (this.hourlyToggled) {
+			this.Hide();
+		}
+		else {
+			await this.Show();
+			this.ScrollTo(date);
+		}
+	}
+
+	public OnDayHovered(sender: WeatherButton, date: Date): void {
+		if (!this.hourlyToggled)
+			return;
+
+		this.ScrollTo(date);
+	}
+
+	/**
+	 * Make sure to call this after the hourly weather was shown at least once,
+	 * otherwise the calculation will not be accurate! 
+	 *
+	 * @param date 
+	 */
+	public ScrollTo(date: Date) {
+		if (this.hourlyForecastDates == null)
+			return;
+
+		let itemWidth = this.GetHourlyBoxItemWidth();
+		for (let index = 0; index < this.hourlyForecastDates.length; index++) {
+			// Adjust dates so we jump to 6 in the morning, not midnight when we scroll to a date
+			const element = AddHours(this.hourlyForecastDates[index], -6);
+			let tmp = AddHours(date, -6);
+			if (OnSameDay(element, tmp)) {
+				this.actor.get_hscroll_bar().get_adjustment().set_value(index * itemWidth);
+				break;
+			}
+		}
+	}
+
     /** Changes all icon's type what are affected by
 	 * the "use symbolic icons" setting
 	 */
@@ -71,10 +118,13 @@ export class UIHourlyForecasts {
     }
 
     public Display(forecasts: HourlyForecastData[], config: Config, tz: string): boolean {
+		this.hourlyForecastDates = [];
         let max = Math.min(forecasts.length, this.hourlyForecasts.length);
         for (let index = 0; index < max; index++) {
             const hour = forecasts[index];
             const ui = this.hourlyForecasts[index];
+
+			this.hourlyForecastDates.push(hour.date);
 
             ui.Hour.text = GetHoursMinutes(hour.date, config.currentLocale, config._show24Hours, tz, config._shortHourlyTime);
             ui.Temperature.text = TempToUserConfig(hour.temp, config.TemperatureUnit, config._tempRussianStyle) + " " + UnitToUnicode(config.TemperatureUnit);
@@ -87,12 +137,8 @@ export class UIHourlyForecasts {
 
         return !(max <= 0);
     }
-
-	public ScrollTo(date: Date): void {
-		
-	}
     
-    public Show(): void {
+    public async Show(): Promise<void> {
         // In some cases the preferred height is not calculated
         // properly for the first time, so we work around by opening and closing it once
         this.actor.show();
@@ -111,53 +157,71 @@ export class UIHourlyForecasts {
 		// setting the min-height forces to draw with the view's requested height without
 		// interfering with animations.
 		this.actor.style = "min-height: " + naturalHeight.toString() + "px;";
-
-        if (global.settings.get_boolean("desktop-effects-on-menus")) {
-            this.actor.height = 0;
-            addTween(this.actor,
-                {
-                    height: naturalHeight,
-                    time: 0.25,
-                    onUpdate: () => { },
-                    onComplete: () => {
-                        this.actor.set_height(naturalHeight);
-                    }
-                });
-        }
-
-        this.hourlyToggled = true;
+		return new Promise((resolve, reject) => {
+			if (global.settings.get_boolean("desktop-effects-on-menus")) {
+				this.actor.height = 0;
+				addTween(this.actor,
+					{
+						height: naturalHeight,
+						time: 0.25,
+						onUpdate: () => { },
+						onComplete: () => {
+							this.actor.set_height(naturalHeight);
+							resolve();
+						}
+					});
+			}
+	
+			this.hourlyToggled = true;
+		});
     }
 
-    public Hide(): void {
+    public async Hide(): Promise<void> {
         let hscroll = this.actor.get_hscroll_bar();
-        if (global.settings.get_boolean("desktop-effects-on-menus")) {
-            // TODO: eliminate Clutter Warnings on collapse in logs
-            addTween(this.actor,
-                {
-                    height: 0,
-                    time: 0.25,
-                    onUpdate: () => { },
-                    onComplete: () => {
-                        this.actor.set_height(-1);
-                        this.actor.hide();
-                        // Scroll back to the start
-                        hscroll.get_adjustment().set_value(0);
-                    }
-                }
-            );
-        }
-        else {
-            this.actor.set_height(-1);
-            this.actor.hide();
-        }
-        this.hourlyToggled = false;
+		return new Promise((resolve, reject) => {
+			if (global.settings.get_boolean("desktop-effects-on-menus")) {
+				// TODO: eliminate Clutter Warnings on collapse in logs
+				addTween(this.actor,
+					{
+						height: 0,
+						time: 0.25,
+						onUpdate: () => { },
+						onComplete: () => {
+							this.actor.set_height(-1);
+							this.actor.hide();
+							// Scroll back to the start
+							hscroll.get_adjustment().set_value(0);
+							resolve();
+						}
+					}
+				);
+			}
+			else {
+				this.actor.set_height(-1);
+				this.actor.hide();
+				resolve();
+			}
+			this.hourlyToggled = false;
+		});
     }
 
-    /** Calculates incorrect width the first time, make sure to call this
-	 * after a show/hide iteration as well when the Hourly box is shown
+    /** Sets the correct width for the hourly boxes, make
+	 * sure to call this whn the hourly scrollview is shown
 	 */
     private AdjustHourlyBoxItemWidth(): void {
-        let requiredWidth = 0;
+        let requiredWidth = this.GetHourlyBoxItemWidth();
+
+        for (let index = 0; index < this.hourlyContainers.length; index++) {
+            const element = this.hourlyContainers[index];
+            element.set_width(requiredWidth);
+        }
+    }
+
+	/**
+	 * Calculates incorrect width the first time, make sure to call this after a show/hide iteration.
+	 */
+	private GetHourlyBoxItemWidth(): number {
+		let requiredWidth = 0;
         for (let index = 0; index < this.hourlyContainers.length; index++) {
             const ui = this.hourlyForecasts[index];
             let hourWidth = ui.Hour.get_preferred_width(-1)[1];
@@ -180,12 +244,8 @@ export class UIHourlyForecasts {
             if (requiredWidth < temperatureWidth) requiredWidth = temperatureWidth;
             if (requiredWidth < precipitationWidth) requiredWidth = precipitationWidth;
         }
-
-        for (let index = 0; index < this.hourlyContainers.length; index++) {
-            const element = this.hourlyContainers[index];
-            element.set_width(requiredWidth);
-        }
-    }
+		return requiredWidth;
+	}
 
     public Destroy(): void {
         this.container.destroy_all_children();

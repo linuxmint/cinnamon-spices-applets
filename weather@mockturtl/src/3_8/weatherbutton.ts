@@ -1,3 +1,4 @@
+import { Event } from "./events";
 
 const { Button } = imports.gi.St;
 const { SignalManager } = imports.misc.signalManager;
@@ -6,11 +7,20 @@ export class WeatherButton {
     public actor: imports.gi.St.Button;
     private signals = new SignalManager();
     private disabled = false;
-    constructor(options: imports.gi.St.ButtonOptions) {
+
+	public ID: any;
+
+	public Hovered: Event<WeatherButton, imports.gi.Clutter.Event> = new Event();
+	public Clicked: Event<WeatherButton, imports.gi.Clutter.Event> = new Event();
+
+    constructor(options: imports.gi.St.ButtonOptions, doNotAddPadding: boolean = false) {
         this.actor = new Button(options);
         this.actor.add_style_class_name("popup-menu-item");
 
-        this.actor.style = 'padding-top: 0px;padding-bottom: 0px; padding-right: 2px; padding-left: 2px; border-radius: 2px;';
+		if (doNotAddPadding)
+			this.actor.style = 'padding: 0px; border-radius: 2px;';
+		else
+        	this.actor.style = 'padding-top: 0px;padding-bottom: 0px; padding-right: 2px; padding-left: 2px; border-radius: 2px;';
 
         this.signals.connect(this.actor, 'enter-event', this.handleEnter, this);
 		this.signals.connect(this.actor, 'leave-event', this.handleLeave, this);
@@ -40,10 +50,13 @@ export class WeatherButton {
 	
 	private clicked() {
 		// when clicked the button loses active styling, so we readd
-		if (!this.disabled) this.actor.add_style_pseudo_class('active');
+		if (!this.disabled)  {
+			this.actor.add_style_pseudo_class('active');
+			this.Clicked.Invoke(this, null);
+		}
 	}
 
 	private hovered(event: imports.gi.Clutter.Event) {
+		this.Hovered.Invoke(this, event);
 	}
-
 }

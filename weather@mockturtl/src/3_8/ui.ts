@@ -8,6 +8,7 @@ import { UIForecasts } from "./uiForecasts";
 import { UIHourlyForecasts } from "./uiHourlyForecasts";
 import { UIBar } from "./uiBar";
 import { UISeparator } from "./uiSeparator";
+import { WeatherButton } from "./weatherbutton";
 
 const { PopupMenuManager } = imports.ui.popupMenu;
 const { BoxLayout, IconType, Label} = imports.gi.St;
@@ -63,12 +64,12 @@ export class UI {
 		this.menu.toggle();
 	}
 
-	public ToggleHourlyWeather(): void {
+	public async ToggleHourlyWeather(): Promise<void> {
         if (this.HourlyWeather.Toggled) {
-            this.HideHourlyWeather();
+            await this.HideHourlyWeather();
         }
         else {
-            this.ShowHourlyWeather();
+            await this.ShowHourlyWeather();
         }
     }
 
@@ -178,6 +179,10 @@ export class UI {
         this.CurrentWeather = new UICurrentWeather(this.App);
         this.FutureWeather = new UIForecasts(this.App);
         this.HourlyWeather = new UIHourlyForecasts(this.App, this.menu);
+
+		this.FutureWeather.DayClicked.Subscribe((s, e) => this.OnDayClicked(s, e));
+		this.FutureWeather.DayHovered.Subscribe((s, e) => this.OnDayHovered(s, e));
+
         this.Bar = new UIBar(this.App);
         this.Bar.ToggleClicked.Subscribe(Lang.bind(this, this.ToggleHourlyWeather));
 
@@ -210,16 +215,28 @@ export class UI {
             text: _('Loading future weather ...')
         }))
 	}
+
+	private async OnDayClicked(sender: WeatherButton, date: Date): Promise<void> {
+		await this.ToggleHourlyWeather();
+		if (this.HourlyWeather.Toggled)
+			this.HourlyWeather.ScrollTo(date);
+	}
+
+	private async OnDayHovered(sender: WeatherButton, date: Date): Promise<void> {
+		if (!this.HourlyWeather.Toggled)
+			return;
+		this.HourlyWeather.ScrollTo(date);
+	}
 	
-	private ShowHourlyWeather(): void {
-        this.HourlyWeather.Show();
+	private async ShowHourlyWeather(): Promise<void> {
         this.HourlySeparator.Show();
         this.Bar.SwitchButtonToHide();
+		await this.HourlyWeather.Show();
     }
 
-    private HideHourlyWeather(): void {
-        this.HourlyWeather.Hide();
-        this.HourlySeparator.Hide();
+    private async HideHourlyWeather(): Promise<void> {
+		this.HourlySeparator.Hide();
         this.Bar.SwitchButtonToShow();
+		await this.HourlyWeather.Hide();
     }
 }

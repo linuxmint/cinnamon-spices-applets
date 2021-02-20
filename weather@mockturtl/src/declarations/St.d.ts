@@ -94,7 +94,19 @@ declare namespace imports.gi.St {
 	}
 
 	export class Adjustment {
-		set_value(value: number): void; 
+		set_value(value: number): void;
+		/**
+		 * @returns 
+
+        value (Number) — the current value
+        lower (Number) — the lower bound
+        upper (Number) — the upper bound
+        step_increment (Number) — the step increment
+        page_increment (Number) — the page increment
+        page_size (Number) — the page size
+		 */
+		get_values(): number[];
+		get_value(): number;
 	}
 
     export class Theme {

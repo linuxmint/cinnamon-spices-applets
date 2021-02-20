@@ -1,9 +1,11 @@
 import { Config } from "./config";
 import { APPLET_ICON, ELLIPSIS, FORWARD_SLASH } from "./consts";
+import { Event } from "./events";
 import { Log } from "./logger";
 import { WeatherApplet } from "./main";
 import { WeatherData } from "./types";
-import { TempToUserConfig, _, GetDayName, UnitToUnicode, WeatherIconSafely } from "./utils";
+import { TempToUserConfig, _, GetDayName, UnitToUnicode, WeatherIconSafely, OnSameDay } from "./utils";
+import { WeatherButton } from "./weatherbutton";
 
 const { Bin, BoxLayout, Label, Icon, Widget } = imports.gi.St;
 const { GridLayout } = imports.gi.Clutter;
@@ -24,6 +26,9 @@ export class UIForecasts {
 	private grid: imports.gi.Clutter.GridLayout;
 
 	private app: WeatherApplet;
+
+	public DayClicked: Event<WeatherButton, Date> = new Event();
+	public DayHovered: Event<WeatherButton, Date> = new Event();
 
 	constructor(app: WeatherApplet) {
 		this.app = app;
@@ -62,8 +67,21 @@ export class UIForecasts {
 
                 // Day Names
                 let dayName: string = GetDayName(forecastData.date, config.currentLocale, config._showForecastDates, weather.location.timeZone);
+                forecastUi.Day.actor.label = dayName;
 
-                forecastUi.Day.text = dayName;
+				// We set ID to the buttons as date so we can use them later on
+				forecastUi.Day.ID = forecastData.date;
+				// Enable and subscribe to buttons what has hourly weathers
+				for (let index = 0; index < this.app.GetMaxHourlyForecasts(); index++) {
+					const element = weather.hourlyForecasts[index];
+					if (OnSameDay(element.date, forecastData.date)) {
+						forecastUi.Day.enable();
+						forecastUi.Day.Hovered.Subscribe((s, e) => this.OnDayHovered(s, e));
+						forecastUi.Day.Clicked.Subscribe((s, e) => this.OnDayClicked(s, e));
+						break;
+					}					
+				}
+
                 forecastUi.Temperature.text = first_temperature;
                 // As Russian Tradition, -temp...+temp
                 // See https://github.com/linuxmint/cinnamon-spices-applets/issues/618
@@ -133,11 +151,13 @@ export class UIForecasts {
                 style_class: STYLE_FORECAST_ICON
             });
 
-            forecastWeather.Day = new Label({
+            forecastWeather.Day = new WeatherButton({
                 style_class: STYLE_FORECAST_DAY,
                 reactive: true,
-                style: textColorStyle
-            });
+                style: textColorStyle,
+            }, true);
+
+			forecastWeather.Day.disable();
 
             forecastWeather.Summary = new Label({
                 /*text: Placeholders.LOADING,*/
@@ -154,7 +174,7 @@ export class UIForecasts {
                 vertical: true,
                 style_class: STYLE_FORECAST_DATABOX
             });
-            by.add_actor(forecastWeather.Day);
+            by.add(forecastWeather.Day.actor, {x_align: imports.gi.St.Align.START, expand: false, x_fill: false });
             by.add_actor(forecastWeather.Summary);
             by.add_actor(forecastWeather.Temperature);
 
@@ -183,11 +203,19 @@ export class UIForecasts {
 		if (this.actor.get_child() != null)
 			this.actor.get_child().destroy()
 	}
+
+	private OnDayHovered(sender: WeatherButton, event: imports.gi.Clutter.Event): void {
+		this.DayHovered.Invoke(sender, sender.ID as Date);
+	}
+
+	private OnDayClicked(sender: WeatherButton, event: imports.gi.Clutter.Event): void {
+		this.DayClicked.Invoke(sender, sender.ID as Date);
+	}
 }
 
 interface ForecastUI {
     Icon: imports.gi.St.Icon,
-    Day: imports.gi.St.Label,
+    Day: WeatherButton,
     Summary: imports.gi.St.Label,
     Temperature: imports.gi.St.Label,
 }

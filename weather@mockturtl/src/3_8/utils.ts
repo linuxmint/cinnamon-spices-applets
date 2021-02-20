@@ -161,6 +161,16 @@ export function MilitaryTime(date: Date): number {
     return date.getHours() * 100 + date.getMinutes();
 }
 
+export function AddHours(date: Date, hours: number): Date {
+	let result = new Date(date);
+	result.setHours(result.getHours() + hours);
+	return result;
+}
+
+export function OnSameDay(date1: Date, date2: Date): boolean {
+	return date1.toDateString() == date2.toDateString();
+}
+
 // ------------------------------------------------------------------------------
 // To UserConfig converters
 
