@@ -20,8 +20,10 @@ export type WeatherUnits = 'automatic' | 'celsius' | 'fahrenheit';
 export type WeatherWindSpeedUnits = 'automatic' | 'kph' | 'mph' | 'm/s' | 'Knots' | 'Beaufort';
 /** Units used in Options. Change Options list if You change this! */
 export type WeatherPressureUnits = 'hPa' | 'mm Hg' | 'in Hg' | 'Pa' | 'psi' | 'atm' | 'at';
-/** Change settings-scheme if you change this! */
+/** Change settings-schema if you change this! */
 export type DistanceUnits = 'automatic' | 'metric' | 'imperial';
+
+/** Change settings-schema if you change this */
 export type Services = 
 	"OpenWeatherMap" |
 	"DarkSky" |

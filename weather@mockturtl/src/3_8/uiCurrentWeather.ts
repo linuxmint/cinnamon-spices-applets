@@ -119,7 +119,7 @@ export class CurrentWeather {
 
 	// Build helpers
 
-	BuildMiddleColumn(config: Config, textColorStyle: string) {
+	private BuildMiddleColumn(config: Config, textColorStyle: string) {
 		this.weatherSummary = new Label({ text: _('Loading ...'), style_class: STYLE_SUMMARY })
 
         let middleColumn = new BoxLayout({ vertical: true, style_class: STYLE_SUMMARYBOX })
@@ -139,7 +139,7 @@ export class CurrentWeather {
 	}
 
 	/** Builds Weather Information on the right side */
-	BuildRightColumn(textColorStyle: string, config: Config) {
+	private BuildRightColumn(textColorStyle: string, config: Config) {
         let textOb = {
             text: ELLIPSIS
         }
@@ -172,7 +172,7 @@ export class CurrentWeather {
 		return rightColumn;
 	}
 
-	BuildWind(config: Config) {
+	private BuildWind(config: Config) {
 		let windBox = new BoxLayout({vertical: false});
 
 		// We try to make sure that icon doesn't take up more vertical space than text
@@ -194,7 +194,7 @@ export class CurrentWeather {
 		return windBox;
 	}
 
-	BuildLocationSection() {
+	private BuildLocationSection() {
 		this.locationButton = new WeatherButton({ reactive: true, label: _('Refresh'), });
 		this.location = this.locationButton.actor;
 		this.location.connect(SIGNAL_CLICKED, () => {
@@ -234,7 +234,7 @@ export class CurrentWeather {
 		return box;
 	}
 
-	BuildSunBox(config: Config, textColorStyle: string) {
+	private BuildSunBox(config: Config, textColorStyle: string) {
 		// Bin is used here to horizontally center BoxLayout inside BoxLayout, normal add() function does not work here 
 		let sunBin = new Bin();
 		this.sunriseLabel = new Label({ text: ELLIPSIS, style: textColorStyle })
