@@ -37,7 +37,7 @@ MyApplet.prototype = {
     _init: function (orientation, panel_height, instance_id) {
         Applet.IconApplet.prototype._init.call(this, orientation, panel_height, instance_id);
 
-        this.set_applet_icon_name("notification-display-brightness");
+        this.set_applet_icon_name("display-brightness");
         this.set_applet_tooltip(_("Adjust external monitor brightness and contrast"));
 
         // Init menu
