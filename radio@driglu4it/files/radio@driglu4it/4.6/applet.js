@@ -12,6 +12,9 @@ const { file_new_for_path } = imports.gi.Gio;
 const { MpvPlayerHandler } = require('./mpvPlayerHandler')
 const { PlayPauseIconMenuItem } = require('./playPauseIconMenuItem')
 
+const MPRIS_PLUGIN_URL = "https://github.com/hoyon/mpv-mpris/releases/download/0.5/mpris.so"
+
+
 // for i18n
 let UUID;
 function _(str) {
