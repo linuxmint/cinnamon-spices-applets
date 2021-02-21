@@ -163,7 +163,7 @@ class MpvPlayerHandler {
         })
     }
 
-    async _updateVolume({ updateTarget, newVolume }) {
+    _updateVolume({ updateTarget, newVolume }) {
         if (updateTarget === "cvcStream") this._updateCvcStreamVolume(newVolume)
         if (updateTarget === "mpris") this._mediaServerPlayer.Volume = newVolume / 100
         if (updateTarget === "Both") {
@@ -176,7 +176,7 @@ class MpvPlayerHandler {
 
     }
 
-    async _updateCvcStreamVolume(newVolume) {
+    _updateCvcStreamVolume(newVolume) {
 
         if (this._stream.is_muted) this._stream.change_is_muted(false)
 

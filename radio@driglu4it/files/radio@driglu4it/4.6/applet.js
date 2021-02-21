@@ -70,12 +70,10 @@ class CinnamonRadioApplet extends TextIconApplet {
 
     this.mpvPlayer = new MpvPlayerHandler({
       mprisPluginPath: mprisPluginPath,
-      // TODO: hier auch ...args??
       _handleRadioStopped: (...args) => this._handleRadioStopped(...args),
       _getInitialVolume: () => this._getInitialVolume(),
       _handleRadioChannelChangedPaused: (...args) => this._handleRadioChannelChangedPaused(...args),
       _handleVolumeChanged: (...args) => this.set_applet_tooltip(false, ...args)
-
     })
 
     await this.mpvPlayer.init()
