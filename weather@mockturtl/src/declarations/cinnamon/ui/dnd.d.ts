@@ -1,16 +1,16 @@
 declare namespace imports.ui.dnd {
 
 	export enum DragMotionResult {
-		NO_DROP =       0,
-		COPY_DROP =     1,
-		MOVE_DROP =     2,
+		NO_DROP = 0,
+		COPY_DROP = 1,
+		MOVE_DROP = 2,
 		POINTING_DROP = 3,
-		CONTINUE =      4
+		CONTINUE = 4
 	}
 
 	export enum DragDropResult {
-		FAILURE =  0,
-		SUCCESS =  1,
+		FAILURE = 0,
+		SUCCESS = 1,
 		CONTINUE = 2
 	}
 
@@ -33,7 +33,7 @@ declare namespace imports.ui.dnd {
 
 	export class Draggable {
 		public readonly Name: string;
-		public readonly actor: gi.Clutter.Actor; 
+		public readonly actor: gi.Clutter.Actor;
 		public readonly target: any;
 		public readonly inhibit: boolean;
 		public readonly recentDropTarget: any;
@@ -126,7 +126,7 @@ declare namespace imports.ui.dnd {
 
 		private _getPreferredWidth(actor: gi.Clutter.Actor, forHeight: number, alloc: gi.Clutter.Actor): void;
 
-		public animateIn(onCompleteFunc?:() => void): void;
+		public animateIn(onCompleteFunc?: () => void): void;
 
 		public animateOutAndDestroy(onCompleteFunc?: () => void): void;
 
@@ -144,7 +144,7 @@ declare namespace imports.ui.dnd {
 	export class LauncherDraggable {
 		public readonly launchersBox: any;
 		constructor(launchersBox: any);
-		
+
 		public getId(): any;
 	}
 

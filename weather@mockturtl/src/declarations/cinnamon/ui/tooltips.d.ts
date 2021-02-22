@@ -40,9 +40,9 @@ declare namespace imports.ui.tooltips {
 		/** Whether the tooltip is currently visible */
 		public readonly visible: boolean;
 		/** Whether to inhibit the display of the tooltip */
-		public readonly preventShow: boolean; 
+		public readonly preventShow: boolean;
 		/** The coordinates of the event that triggered the show */
-		public readonly mousePosition: number[]; 
+		public readonly mousePosition: number[];
 
 		public readonly signals: misc.signalManager.SignalManager;
 
@@ -60,7 +60,7 @@ declare namespace imports.ui.tooltips {
 		/**
 		 * Destroys the tooltip.
 		 */
-		public destroy(): void; 
+		public destroy(): void;
 	}
 
 	/**

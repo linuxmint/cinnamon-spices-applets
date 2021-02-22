@@ -1,15 +1,15 @@
 /** Models an event with a generic sender and generic arguments */
 interface IEvent<TSender, TArgs> {
 
-    Subscribe(fn: (sender: TSender, args: TArgs) => void): void;
+	Subscribe(fn: (sender: TSender, args: TArgs) => void): void;
 
 	Unsubscribe(fn: (sender: TSender, args: TArgs) => void): void;
-	
+
 	Invoke(sender: TSender, args: TArgs): void;
 }
 
 export class Event<TSender, TArgs> implements IEvent<TSender, TArgs> {
-	private subscribers: Array<(sender: TSender, args: TArgs) => void>  = [];
+	private subscribers: Array<(sender: TSender, args: TArgs) => void> = [];
 
 	public Subscribe(fn: (sender: TSender, args: TArgs) => void): void {
 		this.subscribers.push(fn);

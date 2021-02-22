@@ -139,20 +139,20 @@ declare namespace imports.misc.signalManager {
 		 * checks need not be performed before calling this function.
 		 */
 
-		 /**
-		  * This disconnects all *signals* named @sigName. By default, it
-		 * disconnects the signal on all objects, but can be fine-tuned with the
-		 * optional @obj and @callback arguments.
-		 *
-		 * This function will do nothing if no such signal is connected, the object
-		 * no longer exists, or the signal is somehow already disconnected. So
-		 * checks need not be performed before calling this function.
-		  * @param signName the signal we care about
-		  * @param obj the object we care about, or leave empty if we
-		 * don't care about which object it is
-		  * @param callback the callback function we care about, or
-		 * leave empty if we don't care about what callback is connected
-		  */
+		/**
+		 * This disconnects all *signals* named @sigName. By default, it
+		* disconnects the signal on all objects, but can be fine-tuned with the
+		* optional @obj and @callback arguments.
+		*
+		* This function will do nothing if no such signal is connected, the object
+		* no longer exists, or the signal is somehow already disconnected. So
+		* checks need not be performed before calling this function.
+		 * @param signName the signal we care about
+		 * @param obj the object we care about, or leave empty if we
+		* don't care about which object it is
+		 * @param callback the callback function we care about, or
+		* leave empty if we don't care about what callback is connected
+		 */
 		disconnect(signName: string, obj?: any, callback?: Function): void;
 
 		/**

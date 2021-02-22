@@ -25,7 +25,7 @@ declare namespace imports.ui.tweener {
 		/** The duration of the transition in seconds */
 		time?: number;
 		/** The delay (in seconds) before the transition starts. The
- 		*    default of this parameter (when omitted) is 0. */
+			*    default of this parameter (when omitted) is 0. */
 		delay?: number;
 		/**   (int) How many updates must be skipped before an actual
 		 *    update is made.  This is a powerful property that allows the developer to
@@ -128,16 +128,16 @@ declare namespace imports.ui.tweener {
 		 *    Leave empty for no maximum.*/
 		max?: number;
 		/** A list of parameters (of any type) to be passed
- 		*    to the onStart function.  */
+			*    to the onStart function.  */
 		onStartParams?: any[];
 		/** A list of parameters (of any type) to be passed
- 		*    to the onUpdate function. */
+			*    to the onUpdate function. */
 		onUpdateParams?: any[];
 		/** A list of parameters (of any type) to be
- 		*    passed to the onComplete function.  */
+			*    passed to the onComplete function.  */
 		onCompleteParams?: any[];
 		/** A list of parameters (of any type) to be
- 		*    passed to the onOverwrite function.  */
+			*    passed to the onOverwrite function.  */
 		onOverwriteParams?: any[];
 		/** The object in which the onStart function will
 		 *    be executed. This is needed if you have some specialized code inside the

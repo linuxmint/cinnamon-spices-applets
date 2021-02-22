@@ -61,15 +61,15 @@ declare namespace imports.ui.popupMenu {
 		constructor(params?: PopupBaseMenuItemParams)
 
 		private _onStyleChanged(actor: gi.Clutter.Actor): void;
-	
+
 		private _onButtonReleaseEvent(actor: gi.Clutter.Actor, event: gi.Clutter.Event): any;
-	
+
 		private _onKeyPressEvent(actor: gi.Clutter.Actor, event: gi.Clutter.Event): boolean;
-	
+
 		private _onKeyFocusIn(actor: gi.Clutter.Actor): void;
-	
+
 		private _onKeyFocusOut(actor: gi.Clutter.Actor): void;
-	
+
 		private _onHoverChanged(actor: gi.Clutter.Actor): void;
 
 		activate(event: any, keepMenu?: boolean): void;
@@ -91,7 +91,7 @@ declare namespace imports.ui.popupMenu {
 
 		removeActor(child: gi.Clutter.Actor): void;
 
-		setShowDot(show: boolean):void;
+		setShowDot(show: boolean): void;
 
 		private _onRepaintDot(area: any): void;
 
@@ -102,7 +102,7 @@ declare namespace imports.ui.popupMenu {
 		getColumnWidths(): number[];
 
 		private _getPreferredWidth(actor: gi.Clutter.Actor, forHeight: number, alloc: gi.Clutter.Actor): void;
-	
+
 		private _getPreferredHeight(actor: gi.Clutter.Actor, forWidth: number, alloc: gi.Clutter.Actor): void;
 
 		private _allocate(actor: gi.Clutter.Actor, box: gi.Clutter.ActorBox, flags: any): void;
@@ -133,15 +133,15 @@ declare namespace imports.ui.popupMenu {
 		constructor(text: string, alternateText: string, params?: PopupBaseMenuItemParams);
 
 		private _onMapped(): void;
-	
+
 		private _setState(state: PopupAlternatingMenuItemState): void;
-	
+
 		private _updateStateFromModifiers(): void;
-	
+
 		private _onCapturedEvent(actor: gi.Clutter.Actor, event: gi.Clutter.Event): boolean;
-	
+
 		private _updateLabel(): void;
-	
+
 		private _canAlternate(): boolean;
 
 		updateText(text: string, alternateText: string): void;
@@ -153,15 +153,15 @@ declare namespace imports.ui.popupMenu {
 		setValue(value: number): void;
 
 		private _sliderRepaint(area: any): void;
-	
+
 		private _startDragging(actor: gi.Clutter.Actor, event: gi.Clutter.Event): void;
-	
+
 		private _endDragging(): boolean;
-	
+
 		private _onScrollEvent(actor: gi.Clutter.Actor, event: gi.Clutter.Event): void;
-	
+
 		private _motionEvent(actor: gi.Clutter.Actor, event: gi.Clutter.Event): boolean;
-	
+
 		private _moveHandle(absX: number, absY: number): void;
 
 		get value(): number;
@@ -204,13 +204,13 @@ declare namespace imports.ui.popupMenu {
 		 * Changes the icon to a symbolic icon with name iconName.
 		 * @param iconName name of the icon
 		 */
-		setIconSymbolicName (iconName: string): void;
+		setIconSymbolicName(iconName: string): void;
 
 		/**
 		 * Changes the icon to a full color icon with name iconName.
 		 * @param iconName name of the icon
 		 */
-		setIconName (iconName: string): void;
+		setIconName(iconName: string): void;
 
 		setStatus(text: string): void;
 
@@ -249,7 +249,7 @@ declare namespace imports.ui.popupMenu {
 		 * @param iconName name of the icon
 		 */
 		setIconSymbolicName(iconName: string): void;
-		
+
 		/**
 		 * Changes the icon to a full color icon with name @iconName.
 		 * @param iconName name of the icon
@@ -369,17 +369,17 @@ declare namespace imports.ui.popupMenu {
 		setShellItem(shellItem: any, handlers: any[]): void;
 
 		private _updateLabel(): void;
-	
+
 		private _updateOrnament(): void;
-	
+
 		private _updateAccel(): void;
-	
+
 		private _updateImage(): void;
-	
+
 		private _updateVisible(): void;
-	
+
 		private _updateSensitive(): void;
-	
+
 		private _updateType(): void;
 
 		getShellItem(): any;
@@ -453,7 +453,7 @@ declare namespace imports.ui.popupMenu {
 		 * @param sourceActor the actor that owns the popup menu
 		 * @param styleClass the style class of the popup menu
 		 */
-		constructor(sourceActor: gi.St.Widget, styleClass?:  string);
+		constructor(sourceActor: gi.St.Widget, styleClass?: string);
 
 		/**
 		 * Adds a #PopupMenuItem with label title to the menu. When the item is
@@ -503,9 +503,9 @@ declare namespace imports.ui.popupMenu {
 		removeChildMenu(menu: PopupMenuBase): void;
 
 		private _connectSubMenuSignals(object: any, menu: PopupMenuBase): void;
-	
+
 		private _connectItemSignals(menuItem: PopupMenuAbstractItem): void;
-	
+
 		private _updateSeparatorVisibility(menuItem: PopupMenuAbstractItem): void;
 
 		/**
@@ -537,7 +537,7 @@ declare namespace imports.ui.popupMenu {
 		addActor(actor: gi.St.Widget): void;
 
 		private _getMenuItems(): PopupBaseMenuItem[];
-		
+
 		/** 
 		 * The first item in the popup menu
 		 */
@@ -567,7 +567,7 @@ declare namespace imports.ui.popupMenu {
 		/**
 		 * Destroys the popup menu completely.
 		 */
-		destroy(): void; 
+		destroy(): void;
 	}
 
 	/** An actual popup menu */
@@ -586,7 +586,7 @@ declare namespace imports.ui.popupMenu {
 		 * @param sourceActor the actor that owns the popup menu
 		 * @param orientation the side of the menu that will be attached to @ourceActor. See %setOrientation() for details
 		 */
-		constructor(sourceActor: gi.St.Widget, orientation: gi.St.Side); 
+		constructor(sourceActor: gi.St.Widget, orientation: gi.St.Side);
 
 		/**
 		 * Sets the orientation of the sourceActor with respect to the menu. This function is deprecated and kept
@@ -656,11 +656,11 @@ declare namespace imports.ui.popupMenu {
 		setMaxHeight(): void;
 
 		private _boxGetPreferredWidth(actor: gi.Clutter.Actor, forHeight: number, alloc: gi.Clutter.Actor): void;
-	
+
 		private _boxGetPreferredHeight(actor: gi.Clutter.Actor, forWidth: number, alloc: gi.Clutter.Actor): void;
-	
+
 		private _boxAllocate(actor: gi.Clutter.Actor, box: gi.Clutter.ActorBox, flags: any): void;
-	
+
 		private _onKeyPressEvent(actor: gi.Clutter.Actor, event: gi.Clutter.Event): boolean;
 
 		on_paint(actor: gi.St.Widget): void;
@@ -691,7 +691,7 @@ declare namespace imports.ui.popupMenu {
 		constructor(sourceActor: gi.St.Widget, sourceArrow?: gi.St.Icon);
 
 		private _getTopMenu(): PopupMenu;
-	
+
 		private _needsScrollbar(): boolean;
 
 		/**
@@ -699,7 +699,7 @@ declare namespace imports.ui.popupMenu {
 		 * @param animate whether the animate the open effect
 		 */
 		open(animate: boolean): void;
-		
+
 		/**
 		 * Closes the submenu
 		 * @param animate whether the animate the close effect
@@ -761,7 +761,7 @@ declare namespace imports.ui.popupMenu {
 		constructor(parasm?: PopupBaseMenuItemParams);
 
 		private _getTopMenu(): PopupMenu;
-	
+
 		private _onScrollEvent(actor: gi.Clutter.Actor, event: gi.Clutter.Event): void;
 
 		activate(event: any): void;
@@ -794,19 +794,19 @@ declare namespace imports.ui.popupMenu {
 		buildShellMenu(client: any, launcher: any, orientation: gi.St.Side): any;
 
 		private _attachToMenu(shellItem: any, factoryItem: any): void;
-	
+
 		private _onDestroyMainMenu(factoryItem: any): void;
-	
+
 		private _createItem(factoryItem: any): any;
-	
+
 		private _createChildrens(factoryItem: any): void;
-	
+
 		private _onChildAdded(factoryItem: any, child: any, position: number): void;
-	
+
 		private _onChildMoved(factoryItem: any, child: any, oldpos: number, newpos: number): void;
-	
-		private _onTypeChanged(factoryItem: any): void; 
-	
+
+		private _onTypeChanged(factoryItem: any): void;
+
 		private _moveItemInMenu(menu: PopupMenu, factoryItem: any, newpos: number): void;
 	}
 
@@ -825,32 +825,32 @@ declare namespace imports.ui.popupMenu {
 		removeMenu(menu: PopupMenuBase): void;
 
 		private _grab(): void;
-	
+
 		private _ungrab(): void;
-	
+
 		private _onMenuOpenState(menu: PopupMenu, open: boolean): void;
-	
+
 		private _onChildMenuAdded(menu: PopupMenu, childMenu: PopupBaseMenuItem): void;
-	
+
 		private _onChildMenuRemoved(menu: PopupMenu, childMenu: PopupBaseMenuItem): void;
-	
+
 		// change the currently-open menu without dropping grab
 		private _changeMenu(newMenu: PopupMenu): void;
 
 		private _onMenuSourceEnter(menu: PopupMenu): boolean;
-	
+
 		private _onKeyFocusChanged(): void;
-	
+
 		private _onMenuDestroy(menu: PopupMenu): void;
-	
+
 		private _activeMenuContains(actor: gi.Clutter.Actor): boolean;
-	
+
 		private _eventIsOnActiveMenu(event: gi.Clutter.Event): void;
-	
+
 		private _shouldBlockEvent(event: gi.Clutter.Event): boolean;
-	
+
 		private _onEventCapture(actor: gi.Clutter.Actor, event: gi.Clutter.Event): boolean;
-	
+
 		private _closeMenu(): void;
 
 		destroy(): void;

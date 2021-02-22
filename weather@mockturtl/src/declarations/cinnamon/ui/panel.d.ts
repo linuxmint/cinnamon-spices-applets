@@ -11,7 +11,7 @@ declare namespace imports.ui.panel {
 
 
 	export enum Direction {
-		LEFT  = 0,
+		LEFT = 0,
 		RIGHT = 1
 	}
 
@@ -62,7 +62,7 @@ declare namespace imports.ui.panel {
 	 * @param listofpanels array of panels
 	 * @returns a two element array
 	 */
-	export function heightsUsedMonitor (monitorIndex: number, listofpanels: Panel[]): number[];
+	export function heightsUsedMonitor(monitorIndex: number, listofpanels: Panel[]): number[];
 
 	/**
 	 * get the panel numeric type from its name in settings
@@ -213,7 +213,7 @@ declare namespace imports.ui.panel {
 		 * Prompts user where to add the panel
 		 */
 		public addPanelQuery(): void;
-		
+
 		/**
 		 * Prompts user where to move the panel
 		 * @param id the id of the panel to be moved
@@ -387,19 +387,19 @@ declare namespace imports.ui.panel {
 		public readonly margin_bottom: number;
 		public readonly margin_left: number;
 		public readonly margin_right: number;
-		
+
 		public readonly themeSettings: gi.Gio.Settings;
 
 		/** the box containing all the applets in the left region */
-		private _leftBox: gi.St.BoxLayout; 
+		private _leftBox: gi.St.BoxLayout;
 		/** the box containing all the applets in the center region */
-		private _centerBox: gi.St.BoxLayout; 
+		private _centerBox: gi.St.BoxLayout;
 		/** the box containing all the applets in the right region */
 		private _rightBox: gi.St.BoxLayout;
 		/** whether the panel is currently hidden  */
 		private _hidden: boolean;
 		/** whether the panel is disabled */
-		private _disabled: boolean; 
+		private _disabled: boolean;
 		/**  whether the panel edit mode is on */
 		private _panelEditMode: boolean;
 		/** the context menu of the panel */
@@ -419,7 +419,7 @@ declare namespace imports.ui.panel {
 		constructor(id: number, monitorIndex: number, panelPosition: PanelLoc, toppanelHeight: number, bottompanelHeight: number, drawcorner: number[]);
 
 		public drawCorners(drawcorner: number[]): void;
-		
+
 		private _destroycorners(): void;
 
 		/**
@@ -468,16 +468,16 @@ declare namespace imports.ui.panel {
 		 * @returns property required
 		 */
 		private _getProperty(key: string, type?: string): string | boolean | number;
-		
+
 		/**
 		 * Gets the desired JSON encoded property of the panel from gsettings
 		 * @param key name of gsettings key
 		 * @returns property required
 		 */
-		private _getJSONProperty(key: string) : any;
+		private _getJSONProperty(key: string): any;
 
 		public handleDragOver(source: any, actor: gi.Clutter.Actor, x: number, y: number, time: number): dnd.DragMotionResult;
-		
+
 		/**
 		 * _updatePanelBarriers:
 		 *
@@ -494,24 +494,24 @@ declare namespace imports.ui.panel {
 		private _onFocusChanged(): void;
 
 		private _processPanelAutoHide(): void;
-		
+
 		/**
 		 * Function to calculate the desired panel height
 		 * @returns panelheight
 		 */
 		private _getScaledPanelHeight(): number;
 
-	/**
-		* If hidden is true the clip region is set to the one exposed strip of pixels
-		* adjacent to the monitor edge. Otherwise, the clip region is set to the panel
-		* size plus the shadow on the side of the panel opposite the monitor edge.
-		*
-		* @ffset is only used during tweens. If provided, it is used to offset the
-		* current position in order to calculate the exposed size.
-		* @param hidden whether the panel should be clipped for hide
-		* @param offset x or y position offset
-		*/
-		private _setClipRegion(hidden: boolean, offset?: number): void; 
+		/**
+			* If hidden is true the clip region is set to the one exposed strip of pixels
+			* adjacent to the monitor edge. Otherwise, the clip region is set to the panel
+			* size plus the shadow on the side of the panel opposite the monitor edge.
+			*
+			* @ffset is only used during tweens. If provided, it is used to offset the
+			* current position in order to calculate the exposed size.
+			* @param hidden whether the panel should be clipped for hide
+			* @param offset x or y position offset
+			*/
+		private _setClipRegion(hidden: boolean, offset?: number): void;
 
 		/**
 		 * Function to update the panel position, size, and clip region according to settings
@@ -602,14 +602,14 @@ declare namespace imports.ui.panel {
 		private _setHorizChildbox(childbox: gi.Clutter.ActorBox, x1: number, x2: number, x1_rtl: number, x2_rtl: number): void;
 
 		private _allocate(actor: gi.Clutter.Actor, box: gi.Clutter.ActorBox, flags?: any): void;
-		
+
 		/**
 		 * Checks whether the panel should show based on the autohide settings and
 		 * position of mouse/active window. It then calls the _queueShowHidePanel
 		 * function to show or hide the panel as necessary.
 		 */
 		private _updatePanelVisibility(): PanelVisibility;
-		
+
 		/**
 		 * Makes the panel show or hide after a delay specified by
 		 * panels-show-delay and panels-hide-delay.

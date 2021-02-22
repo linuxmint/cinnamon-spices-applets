@@ -29,14 +29,14 @@ const { TextIconApplet, AllowedLayout, MenuItem } = imports.ui.applet;
 const { spawnCommandLine } = imports.misc.util;
 const { IconType, Side } = imports.gi.St;
 
-export class WeatherApplet extends TextIconApplet {	
-    private readonly loop: WeatherLoop;
-    private lock = false;
-    private refreshTriggeredWhileLocked = false;
+export class WeatherApplet extends TextIconApplet {
+	private readonly loop: WeatherLoop;
+	private lock = false;
+	private refreshTriggeredWhileLocked = false;
 
 	/** Chosen API */
 	private provider: WeatherProvider;
-	
+
 	private orientation: imports.gi.St.Side;
 	public get Orientation() {
 		return this.orientation;
@@ -50,52 +50,52 @@ export class WeatherApplet extends TextIconApplet {
 	/** Used for error handling, first error calls flips it
 	 * to prevents displaying other errors in the current loop.
 	 */
-    public encounteredError: boolean = false;
+	public encounteredError: boolean = false;
 
-    public constructor(metadata: any, orientation: imports.gi.St.Side, panelHeight: number, instanceId: number) {
+	public constructor(metadata: any, orientation: imports.gi.St.Side, panelHeight: number, instanceId: number) {
 		super(orientation, panelHeight, instanceId);
 		this.AppletDir = metadata.path;
 		Log.Instance.Debug("Applet created with instanceID " + instanceId);
 		Log.Instance.Debug("AppletDir is: " + this.AppletDir);
 
-        this.SetAppletOnPanel();
-        this.config = new Config(this, instanceId);
-        this.AddRefreshButton();
-        this.EnsureProvider();
-        this.ui = new UI(this, orientation);
+		this.SetAppletOnPanel();
+		this.config = new Config(this, instanceId);
+		this.AddRefreshButton();
+		this.EnsureProvider();
+		this.ui = new UI(this, orientation);
 		this.ui.Rebuild(this.config);
-        this.loop = new WeatherLoop(this, instanceId);
+		this.loop = new WeatherLoop(this, instanceId);
 
-        this.orientation = orientation;
-        try {
-            this.setAllowedLayout(AllowedLayout.BOTH);
-        } catch (e) {
-            // vertical panel not supported
-        }
-        this.loop.Start();
+		this.orientation = orientation;
+		try {
+			this.setAllowedLayout(AllowedLayout.BOTH);
+		} catch (e) {
+			// vertical panel not supported
+		}
+		this.loop.Start();
 	}
-	
+
 	public Locked(): boolean {
-        return this.lock;
+		return this.lock;
 	}
-	
+
 	/**
 	 * @returns Queues a refresh if if refresh was triggered while locked.
 	 */
-    public RefreshAndRebuild(this: WeatherApplet, loc?: LocationData): void {
-        this.loop.Resume();
-        if (this.Locked()) {
-            this.refreshTriggeredWhileLocked = true;
-            return;
-        }
-        this.RefreshWeather(true, loc);
+	public RefreshAndRebuild(this: WeatherApplet, loc?: LocationData): void {
+		this.loop.Resume();
+		if (this.Locked()) {
+			this.refreshTriggeredWhileLocked = true;
+			return;
+		}
+		this.RefreshWeather(true, loc);
 	};
 
 	/**
 	 * Main function pulling and refreshing data
 	 * @param rebuild 
 	 */
-    public async RefreshWeather(this: WeatherApplet, rebuild: boolean, location?: LocationData): Promise<RefreshState> {
+	public async RefreshWeather(this: WeatherApplet, rebuild: boolean, location?: LocationData): Promise<RefreshState> {
 		try {
 			if (this.lock) {
 				Log.Instance.Print("Refreshing in progress, refresh skipped.");
@@ -104,7 +104,7 @@ export class WeatherApplet extends TextIconApplet {
 
 			this.lock = true;
 			this.encounteredError = false;
-			
+
 			if (!location) {
 				location = await this.config.EnsureLocation();
 				if (!location) {
@@ -134,7 +134,7 @@ export class WeatherApplet extends TextIconApplet {
 			weatherInfo = this.MergeWeatherData(weatherInfo, location);
 
 			if (rebuild) this.ui.Rebuild(this.config);
-			if (!this.ui.Display(weatherInfo, this.config, this.provider)||
+			if (!this.ui.Display(weatherInfo, this.config, this.provider) ||
 				!this.DisplayWeather(weatherInfo)) {
 				this.Unlock();
 				return RefreshState.Failure;
@@ -144,12 +144,12 @@ export class WeatherApplet extends TextIconApplet {
 			this.loop.ResetErrorCount();
 			this.Unlock();
 			return RefreshState.Success;
-        }
-        catch (e) {
-            Log.Instance.Error("Generic Error while refreshing Weather info: " + e + ", ");
+		}
+		catch (e) {
+			Log.Instance.Error("Generic Error while refreshing Weather info: " + e + ", ");
 			this.ShowError({ type: "hard", detail: "unknown", message: _("Unexpected Error While Refreshing Weather, please see log in Looking Glass") });
 			this.Unlock();
-            return RefreshState.Failure;
+			return RefreshState.Failure;
 		}
 	};
 
@@ -161,7 +161,7 @@ export class WeatherApplet extends TextIconApplet {
 		let location = GenerateLocationText(weather, this.config);
 
 		let lastUpdatedTime = AwareDateString(weather.date, this.config.currentLocale, this.config._show24Hours);
-		this.SetAppletTooltip(`${location} - ${_("As of {lastUpdatedTime}", {"lastUpdatedTime": lastUpdatedTime})}`);
+		this.SetAppletTooltip(`${location} - ${_("As of {lastUpdatedTime}", { "lastUpdatedTime": lastUpdatedTime })}`);
 		this.DisplayWeatherOnLabel(weather.temperature, weather.condition.description);
 		this.SetAppletIcon(weather.condition.icons, weather.condition.customIcon);
 		return true;
@@ -208,40 +208,40 @@ export class WeatherApplet extends TextIconApplet {
 	}
 
 	private SetAppletTooltip(msg: string) {
-        this.set_applet_tooltip(msg);
-    }
+		this.set_applet_tooltip(msg);
+	}
 
-    private SetAppletIcon(iconNames: BuiltinIcons[], customIcon: CustomIcons) {
+	private SetAppletIcon(iconNames: BuiltinIcons[], customIcon: CustomIcons) {
 		if (this.config._useCustomAppletIcons) {
 			this.SetCustomIcon(customIcon);
 		}
 		else {
 			let icon = WeatherIconSafely(iconNames, this.config.AppletIconType);
-			this.config.AppletIconType == IconType.SYMBOLIC ? 
-			this.set_applet_icon_symbolic_name(icon) :
-            this.set_applet_icon_name(icon);
+			this.config.AppletIconType == IconType.SYMBOLIC ?
+				this.set_applet_icon_symbolic_name(icon) :
+				this.set_applet_icon_name(icon);
 		}
 	}
-	
-	private SetAppletLabel(label: string) {
-        this.set_applet_label(label);
-    }
 
-    private GetPanelHeight(): number {
-        return this.panel.height;
+	private SetAppletLabel(label: string) {
+		this.set_applet_label(label);
+	}
+
+	private GetPanelHeight(): number {
+		return this.panel.height;
 	}
 
 	// ---------------------------------------------------------------------------
 	// UI helpers
 
 	public GetMaxForecastDays(): number {
-        if (!this.provider) return this.config._forecastDays;
+		if (!this.provider) return this.config._forecastDays;
 		return Math.min(this.config._forecastDays, this.provider.maxForecastSupport);
-    }
+	}
 
-    public GetMaxHourlyForecasts(): number {
-        if (!this.provider) return this.config._forecastHours;
-        return Math.min(this.config._forecastHours, this.provider.maxHourlyForecastSupport);
+	public GetMaxHourlyForecasts(): number {
+		if (!this.provider) return this.config._forecastHours;
+		return Math.min(this.config._forecastHours, this.provider.maxHourlyForecastSupport);
 	}
 
 	// ------------------------------------------------------------------------
@@ -256,73 +256,73 @@ export class WeatherApplet extends TextIconApplet {
 	 */
 	public async LoadJsonAsync<T>(this: WeatherApplet, url: string, params?: HTTPParams, HandleError?: (message: HttpError) => boolean, method: Method = "GET"): Promise<T> {
 		let response = await HttpLib.Instance.LoadJsonAsync<T>(url, params, method);
-		
+
 		if (!response.Success) {
-            // check if caller wants
-            if (!!HandleError && !HandleError(response.ErrorData))
-                return null;
-            else {
-                this.HandleHTTPError(response.ErrorData);
-                return null;
-            }
+			// check if caller wants
+			if (!!HandleError && !HandleError(response.ErrorData))
+				return null;
+			else {
+				this.HandleHTTPError(response.ErrorData);
+				return null;
+			}
 		}
 
 		return response.Data;
 	}
-	
+
 	// ----------------------------------------------------------------------------
 	// Config Callbacks, do not delete
 
-    private async locationLookup(): Promise<void> {
-        let command = "xdg-open ";
-        spawnCommandLine(command + "https://cinnamon-spices.linuxmint.com/applets/view/17");
-    }
+	private async locationLookup(): Promise<void> {
+		let command = "xdg-open ";
+		spawnCommandLine(command + "https://cinnamon-spices.linuxmint.com/applets/view/17");
+	}
 
-    private async submitIssue(): Promise<void> {
-        let command = "xdg-open ";
-        spawnCommandLine(command + "https://github.com/linuxmint/cinnamon-spices-applets/issues/new");
-    }
+	private async submitIssue(): Promise<void> {
+		let command = "xdg-open ";
+		spawnCommandLine(command + "https://github.com/linuxmint/cinnamon-spices-applets/issues/new");
+	}
 
-    private async saveCurrentLocation(): Promise<void> {
-        this.config.LocStore.SaveCurrentLocation(this.config.CurrentLocation);
-    }
+	private async saveCurrentLocation(): Promise<void> {
+		this.config.LocStore.SaveCurrentLocation(this.config.CurrentLocation);
+	}
 
 	// -------------------------------------------------------------------
 	// Applet Overrides, do not delete
 
-    /** override function */
-    public on_orientation_changed(orientation: imports.gi.St.Side) {
-        this.orientation = orientation;
-        this.RefreshWeather(true);
-    };
+	/** override function */
+	public on_orientation_changed(orientation: imports.gi.St.Side) {
+		this.orientation = orientation;
+		this.RefreshWeather(true);
+	};
 
-    /** Override function */
-    public on_applet_removed_from_panel(deleteConfig: any) {
-        // TODO: Proper unload
-        //this.unloadStylesheet();
-        //Main.keybindingManager.removeHotKey(this.menu_keybinding_name);
-        //this.sigMan.disconnectAllSignals();
-        //this.settings && this.settings.finalize();
-        //$.Debugger.destroy();
-        Log.Instance.Print("Removing applet instance...")
-        this.loop.Stop();
-    }
-
-    /** Override function */
-    public on_applet_clicked(event: any): void {
-        this.ui.Toggle();
-    }
-
-    /** Override function */
-    public on_applet_middle_clicked(event: any) {
-
-    }
-
-    /** Override function */
-    public on_panel_height_changed() {
-        // Implemented byApplets
+	/** Override function */
+	public on_applet_removed_from_panel(deleteConfig: any) {
+		// TODO: Proper unload
+		//this.unloadStylesheet();
+		//Main.keybindingManager.removeHotKey(this.menu_keybinding_name);
+		//this.sigMan.disconnectAllSignals();
+		//this.settings && this.settings.finalize();
+		//$.Debugger.destroy();
+		Log.Instance.Print("Removing applet instance...")
+		this.loop.Stop();
 	}
-	
+
+	/** Override function */
+	public on_applet_clicked(event: any): void {
+		this.ui.Toggle();
+	}
+
+	/** Override function */
+	public on_applet_middle_clicked(event: any) {
+
+	}
+
+	/** Override function */
+	public on_panel_height_changed() {
+		// Implemented byApplets
+	}
+
 	// ---------------------------------------------------------------------
 	// Utilities
 
@@ -345,8 +345,8 @@ export class WeatherApplet extends TextIconApplet {
 
 	/** Into right-click context menu */
 	private AddRefreshButton(): void {
-        let itemLabel = _("Refresh")
-        // () => functions do not need to bind context
+		let itemLabel = _("Refresh")
+		// () => functions do not need to bind context
 		let refreshMenuItem = new MenuItem(itemLabel, REFRESH_ICON, () => this.RefreshAndRebuild());
 		this._applet_context_menu.addMenuItem(refreshMenuItem);
 	}
@@ -364,7 +364,7 @@ export class WeatherApplet extends TextIconApplet {
 			type: "soft"
 		};
 
-		switch(error.message) {
+		switch (error.message) {
 			case "bad status code":
 			case "unknown":
 				appletError.type = "hard"
@@ -381,35 +381,35 @@ export class WeatherApplet extends TextIconApplet {
 	 * Lazy load provider
 	 * @param force Force provider re initialization
 	 */
-    private EnsureProvider(force: boolean = false): void {
-        let currentName = this.provider?.name;
-        switch (this.config._dataService) {
-            case "DarkSky":           // No City Info
-                if (currentName != "DarkSky" || force) this.provider = new DarkSky(this);
-                break;
-            case "OpenWeatherMap":   // No City Info
-                if (currentName != "OpenWeatherMap" || force) this.provider = new OpenWeatherMap(this);
-                break;
-            case "MetNorway":         // No TZ or city info
-                if (currentName != "MetNorway" || force) this.provider = new MetNorway(this);
-                break;
-            case "Weatherbit":
-                if (currentName != "Weatherbit" || force) this.provider = new Weatherbit(this);
-                break;
-            case "Yahoo":
-                if (currentName != "Yahoo" || force) this.provider = new Yahoo(this);
+	private EnsureProvider(force: boolean = false): void {
+		let currentName = this.provider?.name;
+		switch (this.config._dataService) {
+			case "DarkSky":           // No City Info
+				if (currentName != "DarkSky" || force) this.provider = new DarkSky(this);
+				break;
+			case "OpenWeatherMap":   // No City Info
+				if (currentName != "OpenWeatherMap" || force) this.provider = new OpenWeatherMap(this);
+				break;
+			case "MetNorway":         // No TZ or city info
+				if (currentName != "MetNorway" || force) this.provider = new MetNorway(this);
+				break;
+			case "Weatherbit":
+				if (currentName != "Weatherbit" || force) this.provider = new Weatherbit(this);
+				break;
+			case "Yahoo":
+				if (currentName != "Yahoo" || force) this.provider = new Yahoo(this);
 				break;
 			case "ClimacellV4":
 				if (currentName != "ClimacellV4" || force) this.provider = new ClimacellV4(this);
-					break;
-            case "Climacell":
-                if (currentName != "Climacell" || force) this.provider = new Climacell(this);
-                break;
-            case "Met Office UK":
-                if (currentName != "Met Office UK" || force) this.provider = new MetUk(this);
-                break;
-            case "US Weather":
-                if (currentName != "US Weather" || force) this.provider = new USWeather(this);
+				break;
+			case "Climacell":
+				if (currentName != "Climacell" || force) this.provider = new Climacell(this);
+				break;
+			case "Met Office UK":
+				if (currentName != "Met Office UK" || force) this.provider = new MetUk(this);
+				break;
+			case "US Weather":
+				if (currentName != "US Weather" || force) this.provider = new USWeather(this);
 				break;
 			case "Visual Crossing":
 				if (currentName != "Visual Crossing" || force) this.provider = new VisualCrossing(this);
@@ -417,10 +417,10 @@ export class WeatherApplet extends TextIconApplet {
 			case "DanishMI":
 				if (currentName != "DanishMI" || force) this.provider = new DanishMI(this);
 				break;
-            default:
-                return null;
-        }
-    }
+			default:
+				return null;
+		}
+	}
 
 	/** Fills in missing weather info from location Data
 	 * and applies translations if needed.
@@ -436,86 +436,86 @@ export class WeatherApplet extends TextIconApplet {
 		// Translate conditions if set
 		weatherInfo.condition.main = ProcessCondition(weatherInfo.condition.main, this.config._translateCondition);
 		weatherInfo.condition.description = ProcessCondition(weatherInfo.condition.description, this.config._translateCondition);
-			
+
 		for (let index = 0; index < weatherInfo.forecasts.length; index++) {
 			const condition = weatherInfo.forecasts[index].condition;
 			condition.main = ProcessCondition(condition.main, this.config._translateCondition);
 			condition.description = ProcessCondition(condition.description, this.config._translateCondition);
 		}
-		
+
 		for (let index = 0; index < weatherInfo.hourlyForecasts.length; index++) {
 			const condition = weatherInfo.hourlyForecasts[index].condition;
 			condition.main = ProcessCondition(condition.main, this.config._translateCondition);
-			condition.description = ProcessCondition(condition.description, this.config._translateCondition);		
+			condition.description = ProcessCondition(condition.description, this.config._translateCondition);
 		}
 
 		return weatherInfo;
 	}
-	
+
 	// ---------------------------------------------------------------------------------------
 
-    // Error handling
+	// Error handling
 
 	/** For displaying hard errors */
-    private DisplayHardError(title: string, msg: string): void {
-        this.set_applet_label(title);
-        this.set_applet_tooltip("Click to open");
-        this.set_applet_icon_name("weather-severe-alert");
-        this.ui.DisplayErrorMessage(msg, "hard");
-    };
+	private DisplayHardError(title: string, msg: string): void {
+		this.set_applet_label(title);
+		this.set_applet_tooltip("Click to open");
+		this.set_applet_icon_name("weather-severe-alert");
+		this.ui.DisplayErrorMessage(msg, "hard");
+	};
 
-    private errMsg: NiceErrorDetail = { // Error messages to use
-        unknown: _("Error"),
-        "bad api response - non json": _("Service Error"),
-        "bad key": _("Incorrect API Key"),
-        "bad api response": _("Service Error"),
-        "bad location format": _("Incorrect Location Format"),
-        "bad status code": _("Service Error"),
-        "key blocked": _("Key Blocked"),
-        "location not found": _("Can't find location"),
-        "no api response": _("Service Error"),
-        "no key": _("No Api Key"),
-        "no location": _("No Location"),
-        "no network response": _("Service Error"),
-        "no response body": _("Service Error"),
-        "no response data": _("Service Error"),
-        "unusual payload": _("Service Error"),
-        "import error": _("Missing Packages"),
-        "location not covered": _("Location not covered"),
+	private errMsg: NiceErrorDetail = { // Error messages to use
+		unknown: _("Error"),
+		"bad api response - non json": _("Service Error"),
+		"bad key": _("Incorrect API Key"),
+		"bad api response": _("Service Error"),
+		"bad location format": _("Incorrect Location Format"),
+		"bad status code": _("Service Error"),
+		"key blocked": _("Key Blocked"),
+		"location not found": _("Can't find location"),
+		"no api response": _("Service Error"),
+		"no key": _("No Api Key"),
+		"no location": _("No Location"),
+		"no network response": _("Service Error"),
+		"no response body": _("Service Error"),
+		"no response data": _("Service Error"),
+		"unusual payload": _("Service Error"),
+		"import error": _("Missing Packages"),
+		"location not covered": _("Location not covered"),
 	}
 
-    public ShowError(error: AppletError): void {
+	public ShowError(error: AppletError): void {
 		if (error == null) return;
 		// An error already claimed in this loop
 		if (this.encounteredError == true) return;
-		
-        this.encounteredError = true;
+
+		this.encounteredError = true;
 		Log.Instance.Debug("User facing Error received, error: " + JSON.stringify(error, null, 2));
-		
-        if (error.type == "hard") {
-            Log.Instance.Debug("Displaying hard error");
-            this.ui.Rebuild(this.config);
-            this.DisplayHardError(this.errMsg[error.detail], (!error.message) ? "" : error.message);
-        }
 
-        if (error.type == "soft") {
-            // Maybe something less invasive on network related errors?
-            // Nothing yet
-            if (this.loop.IsDataTooOld()) {
-                this.set_applet_tooltip("Click to open");
-                this.set_applet_icon_name("weather-severe-alert");
-                this.ui.DisplayErrorMessage(_("Could not update weather for a while...\nare you connected to the internet?"), "soft");
-            }
-        }
+		if (error.type == "hard") {
+			Log.Instance.Debug("Displaying hard error");
+			this.ui.Rebuild(this.config);
+			this.DisplayHardError(this.errMsg[error.detail], (!error.message) ? "" : error.message);
+		}
 
-        if (error.userError) {
-            this.loop.Pause();
-            return;
-        }
+		if (error.type == "soft") {
+			// Maybe something less invasive on network related errors?
+			// Nothing yet
+			if (this.loop.IsDataTooOld()) {
+				this.set_applet_tooltip("Click to open");
+				this.set_applet_icon_name("weather-severe-alert");
+				this.ui.DisplayErrorMessage(_("Could not update weather for a while...\nare you connected to the internet?"), "soft");
+			}
+		}
 
-        let nextRefresh = this.loop.GetSecondsUntilNextRefresh();
-        Log.Instance.Error("Retrying in the next " + nextRefresh.toString() + " seconds...");
+		if (error.userError) {
+			this.loop.Pause();
+			return;
+		}
+
+		let nextRefresh = this.loop.GetSecondsUntilNextRefresh();
+		Log.Instance.Error("Retrying in the next " + nextRefresh.toString() + " seconds...");
 	}
-	
+
 	//----------------------------------------------------------------------------------
 }

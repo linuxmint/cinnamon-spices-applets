@@ -181,23 +181,6 @@ declare namespace imports.ui.main {
     export function _logInfo(msg: Error | string): void;
 }
 
-/*declare namespace imports.ui.applet {
-    export class TextIconApplet {
-        constructor(orientation: gi.St.Side, panelHeight: number, instanceID: number);
-        protected set_applet_icon_name(text: string): void;
-        protected set_applet_icon_symbolic_name(iconName: string): void;
-        protected set_applet_label(text: string): void;
-        protected set_applet_tooltip(text: string): void;
-        protected setAllowedLayout(text: string): void;
-        protected hide_applet_label(hide: boolean): void;
-        protected set_show_label_in_vertical_panels (show: boolean): void;
-        protected hide_applet_icon(): void;
-        protected panel: any;
-        protected actor: imports.gi.St.BoxLayout;
-        protected _applet_context_menu: any;
-    }
-}*/
-
 declare namespace imports.ui.messageTray {
     export class Notification {
         constructor(source: SystemNotificationSource, title: string, message: string);

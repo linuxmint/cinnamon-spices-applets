@@ -91,15 +91,15 @@ declare namespace imports.ui.applet {
 		 * @param panel_height height of the panel containing the applet
 		 * @param instance_id instance id of the applet
 		 */
-		constructor(orientation: gi.St.Side, panel_height: number, instance_id: number); 
-		
+		constructor(orientation: gi.St.Side, panel_height: number, instance_id: number);
+
 		public getDragActor(): gi.St.BoxLayout;
 
 		/**
 		 * Returns the original actor that should align with the actor we show as the item is being dragged.
 		 */
 		public getDragActorSource(): gi.St.BoxLayout;
-		
+
 
 		private _addStyleClass(className: string): void;
 
@@ -120,7 +120,7 @@ declare namespace imports.ui.applet {
 		 * @param text the tooltip text to be set
 		 * @param use_markup parse the text as markup if true
 		 */
-		public set_applet_tooltip(text: string, use_markup?: boolean): void; 
+		public set_applet_tooltip(text: string, use_markup?: boolean): void;
 
 		/**
 		 * Sets whether the applet is enabled or not. A disabled applet sets its
@@ -329,7 +329,7 @@ declare namespace imports.ui.applet {
 	 */
 	export class TextApplet extends Applet {
 		/** Label of the applet */
-		private _applet_label: gi.St.Label; 
+		private _applet_label: gi.St.Label;
 
 		/**
 		 * Note that suitability for display in a vertical panel is handled by having applets declare
@@ -377,7 +377,7 @@ declare namespace imports.ui.applet {
 		 * Sets whether to show the label in vertical panels
 		 * @param show whether to show the label in vertical panels
 		 */
-		public set_show_label_in_vertical_panels(show: boolean): void; 
+		public set_show_label_in_vertical_panels(show: boolean): void;
 
 		/**
 		 * Sets the text of the actor to text
@@ -404,12 +404,12 @@ declare namespace imports.ui.applet {
 		 * Hides the applet label
 		 */
 		public hideLabel(): void;
-		
+
 		/**
 		 * Shows the applet label
 		 */
 		public showLabel(): void;
-		
+
 		/**
 		 * Hides the icon of the applet
 		 */
