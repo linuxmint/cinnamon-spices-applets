@@ -1,5 +1,14 @@
 # Changelog
 
+## 3.0.4
+
+* Add declarations for some of the cinnamon js files an organizing declarations better (and add more when I feel up to it again). Technically anyone can use it if want to use Typescript by including the declarations folder into their tsconfig.json file, but whatever.
+* Resolves [#3603](https://github.com/linuxmint/cinnamon-spices-applets/issues/3603)
+* Add minutely precipitation under current condition, when there is any (and the setting is on)
+* Add more tooltips to settings
+* OpenWeatherMap can also display Precipitation chance if there is no volume specified
+* Autoformat 3.8 and new declaration files
+
 ## 3.0.3
 
 * Fixes [#3508](https://github.com/linuxmint/cinnamon-spices-applets/issues/3508), just a minor issue with naming
