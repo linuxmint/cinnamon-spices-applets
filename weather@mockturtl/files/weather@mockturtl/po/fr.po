@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: weather@mockturtl 3.0.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-14 10:57+0000\n"
-"PO-Revision-Date: 2021-02-22 11:43+0100\n"
+"PO-Revision-Date: 2021-02-22 11:55+0100\n"
 "Last-Translator: FabRCT <fab.rct@gmail.com>\n"
 "Language-Team: Français <ecyrbe@gmail.com>\n"
 "Language: fr\n"
@@ -1665,8 +1665,8 @@ msgid ""
 "address.\n"
 "Waits for 3 seconds after you stop typing before refreshes the weather."
 msgstr ""
-"Les entrées acceptables sont la latitude, la longitude. Ex : 68.1932,17.1426 "
-"ou une adresse.\n"
+"Les entrées acceptables sont Latitude,Longitude. Par exemple : "
+"68.1932,17.1426 ou une adresse.\n"
 "Attendez 3 secondes après avoir arrêté de taper, puis actualisez la météo."
 
 #. 3.0->settings-schema.json->getLocation->description
@@ -2183,7 +2183,7 @@ msgstr ""
 
 #. 3.8->settings-schema.json->maintainer->description
 msgid "Current maintainer: Gr3q"
-msgstr "Mainteneur actuel: Gr3q"
+msgstr "Mainteneur actuel : Gr3q"
 
 #. 3.8->settings-schema.json->issue-reporting-explanation->description
 msgid ""
