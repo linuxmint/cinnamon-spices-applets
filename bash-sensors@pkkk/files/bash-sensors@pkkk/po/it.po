@@ -7,18 +7,18 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-15 12:28+0200\n"
-"PO-Revision-Date: 2019-10-19 17:59+0200\n"
+"POT-Creation-Date: 2021-02-16 20:27+0100\n"
+"PO-Revision-Date: 2021-02-16 20:32+0100\n"
+"Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
 "Language-Team: \n"
+"Language: it_IT\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.6\n"
-"Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
+"X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"Language: it_IT\n"
 
-#: applet.js:71
+#: applet.js:79
 msgid "Error: Still waiting for command to finish!"
 msgstr "Errore: sto ancora aspettando che il comando finisca!"
 
@@ -31,12 +31,20 @@ msgid ""
 "Write your Bash commands to specify applet output (temperature sensors and "
 "not only!)"
 msgstr ""
-"Scrivi i tuoi comandi Bash per specificare l'uscita dell'applet (sensori "
-"di temperatura e non solo!)"
+"Scrivi i tuoi comandi Bash per specificare l'uscita dell'applet (sensori di "
+"temperatura e non solo!)"
 
 #. settings-schema.json->head->description
 msgid "Settings - Bash Sensors (write commands in Bash!)"
 msgstr "Impostazioni - Sensori Bash (scrivi comandi in Bash!)"
+
+#. settings-schema.json->title1->description
+msgid "Title"
+msgstr ""
+
+#. settings-schema.json->title1->tooltip
+msgid "Title used when displaying notifications"
+msgstr ""
 
 #. settings-schema.json->refreshInterval->units
 msgid "seconds"
@@ -63,8 +71,8 @@ msgid "Command 1"
 msgstr "Comando 1"
 
 #. settings-schema.json->script1->tooltip
-msgid "first line of output (use \f for more lines)"
-msgstr "prima riga di output (usa \f per più righe)"
+msgid "first line of output (use \\f for more lines)"
+msgstr "prima riga di output (usa \\f per più righe)"
 
 #. settings-schema.json->enableScript2->description
 msgid "Two-line mode (command 2 enabled)"
@@ -77,6 +85,24 @@ msgstr "Comando 2"
 #. settings-schema.json->script2->tooltip
 msgid "second line of output (optional)"
 msgstr "seconda riga di output (opzionale)"
+
+#. settings-schema.json->head2->description
+msgid "Icon"
+msgstr ""
+
+#. settings-schema.json->dynamicIcon->description
+#, fuzzy
+#| msgid "Dynamic tooltip (use output of tooltip command as tooltip)"
+msgid "Dynamic icon (use output of icon command as icon)"
+msgstr "Tooltip dinamico (usa l'output del comando tooltip come tooltip)"
+
+#. settings-schema.json->iconScript->description
+msgid "Static icon or command returning the full path to an icon"
+msgstr ""
+
+#. settings-schema.json->iconScript->tooltip
+msgid "command should return an icon (leave empty for no icon)"
+msgstr ""
 
 #. settings-schema.json->head3->description
 msgid "Tooltip"
@@ -109,3 +135,13 @@ msgstr "permetti di mostrare molte informazioni nel menù popup"
 #. settings-schema.json->menuScriptDisplay->description
 msgid "Display output of menu command"
 msgstr "Mostra l'output del comando menù"
+
+#. settings-schema.json->head5->description
+#, fuzzy
+#| msgid "Command on applet click"
+msgid "Command on start-up"
+msgstr "Comando da eseguire al clic sull'applet"
+
+#. settings-schema.json->startupScript->description
+msgid "Command run at start-up"
+msgstr ""

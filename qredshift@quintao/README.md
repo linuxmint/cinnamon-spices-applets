@@ -21,37 +21,49 @@ Original Repository: [https://github.com/raphaelquintao/QRedshift](https://githu
 1. Install Redshift:
     - Debian/Ubuntu/Linux Mint: `sudo apt-get install redshift`
     - Red Hat/Cent OS/Fedora: `sudo dnf install redshift`
-2. Download zip from [this link](https://cinnamon-spices.linuxmint.com/files/applets/qredshift@quintao.zip)
-3. Extract .zip archive to `~/.local/share/cinnamon/applets`
-4. Enable the applet in Cinnamon settings
-5. Make sure you remove redshift-gtk `sudo apt-get remove redshift-gtk`
+2. Download zip from [this link](https://cinnamon-spices.linuxmint.com/files/applets/qredshift@quintao.zip) and extract .zip archive to `~/.local/share/cinnamon/applets`
+    - Or automatically download it from Cinnamon Applets download tab.
+3. Enable the applet in Cinnamon settings
+4. Make sure you remove redshift-gtk `sudo apt-get remove redshift-gtk`
+5. `~/.config/redshift.conf` may conflict with this applet, it is highly recommended removing it.
+    - Applet will show a warning to remove it.
+6. Make sure you disable redshift service `systemctl mask --user redshift.service`
+    - Applet will automatically attempt to disable the default redshift service.
+    - If you want to enable it again, run `systemctl unmask --user redshift.service`
 
 ## Changelog
+* 1.5.3
+    - Fixed some issues with Debian.
+        - Automatically disable redshift default service.
+    - Removed default keyboard shortcuts.
+    - Added translations:
+        - Hungarian by [KAMI911](https://github.com/KAMI911 "@KAMI911 on Github")
+        - Danish by [Alan01](https://github.com/Alan01 "@Alan01 on Github")
 * 1.5.2
-  - Added keyboard shortcut to increase brightness `<Control>Page_Up`
-  - Added keyboard shortcut to decrease brightness `<Control>Page_Down`
-  - Added keyboard shortcut to increase temperature `<Control><Shift>Page_Up`
-  - Added keyboard shortcut to decrease temperature `<Control><Shift>Page_Down`
-  - Added support to lower gamma.
-  - Added option to use a symbolic icon.
+    - Added keyboard shortcut to increase brightness `<Control>Page_Up`
+    - Added keyboard shortcut to decrease brightness `<Control>Page_Down`
+    - Added keyboard shortcut to increase temperature `<Control><Shift>Page_Up`
+    - Added keyboard shortcut to decrease temperature `<Control><Shift>Page_Down`
+    - Added support to lower gamma.
+    - Added option to use a symbolic icon.
 * 1.5.1
-  - Update night brightness on scrolling.
-  - Added support to version 4.6.
-  - Added translations:
-    - Bulgarian by [@spacy01](https://github.com/spacy01 "@spacy01 on Github")
-    - German by [@OzzieIsaacs](https://github.com/OzzieIsaacs "@OzzieIsaacs on Github")
-    - Romanian by [@AndreiMiculita](https://github.com/AndreiMiculita "@AndreiMiculita on Github")
-    
+    - Update night brightness on scrolling.
+    - Added support to version 4.6.
+    - Added translations:
+        - Bulgarian by [@spacy01](https://github.com/spacy01 "@spacy01 on Github")
+        - German by [@OzzieIsaacs](https://github.com/OzzieIsaacs "@OzzieIsaacs on Github")
+        - Romanian by [@AndreiMiculita](https://github.com/AndreiMiculita "@AndreiMiculita on Github")
 * 1.5
-  - Added keyboard shortcut to toggle On/Off `<Control>End`
-  - Added localization support.
-    - Turkish by [@kelebek333](https://github.com/kelebek333 "@kelebek333 on Github")
-    - French by [@claudiux](https://github.com/claudiux "@claudiux on Github")
-    - Swedish by [@eson57](https://github.com/eson57 "@eson57 on Github")
-    - Portuguese by [@raphaelquintao](https://github.com/raphaelquintao "@raphaelquintao on Github")
+    - Added keyboard shortcut to toggle On/Off `<Control>End`
+    - Added localization support.
+        - Turkish by [@kelebek333](https://github.com/kelebek333 "@kelebek333 on Github")
+        - French by [@claudiux](https://github.com/claudiux "@claudiux on Github")
+        - Swedish by [@eson57](https://github.com/eson57 "@eson57 on Github")
+        - Portuguese by [@raphaelquintao](https://github.com/raphaelquintao "@raphaelquintao on Github")
 * 1.4
-  - Fixed icon scale.
-  - Added support to version 4.3 and 4.4
+    - Fixed icon scale.
+    - Added support to version 4.3 and 4.4
+    
 
 ## Screenshots
 ![](https://raw.githubusercontent.com/raphaelquintao/QRedshift/master/screenshots/screenshot1.png)

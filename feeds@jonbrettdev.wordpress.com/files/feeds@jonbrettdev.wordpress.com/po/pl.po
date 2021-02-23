@@ -16,7 +16,7 @@ msgstr ""
 "X-Generator: Poedit 2.3\n"
 "Last-Translator: \n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
-"Language: pl_PL\n"
+"Language: pl\n"
 
 #: feedreader.js:151
 msgid "Invalid feed url"

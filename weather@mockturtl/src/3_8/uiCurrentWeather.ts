@@ -5,7 +5,7 @@ import { LocationStore } from "./locationstore";
 import { Log } from "./logger";
 import { WeatherApplet } from "./main";
 import { WeatherData, APIUniqueField, BuiltinIcons } from "./types";
-import { _, GetHoursMinutes, TempToUserConfig, UnitToUnicode, CompassDirection, MPStoUserUnits, PressToUserUnits, GenerateLocationText, delay, WeatherIconSafely } from "./utils";
+import { _, GetHoursMinutes, TempToUserConfig, UnitToUnicode, CompassDirection, MPStoUserUnits, PressToUserUnits, GenerateLocationText, delay, WeatherIconSafely, LocalizedColon, PrecentToLocale } from "./utils";
 import { WeatherButton } from "./weatherbutton";
 
 const { Bin, BoxLayout, IconType, Label, Icon, Align } = imports.gi.St;
@@ -144,10 +144,10 @@ export class CurrentWeather {
 
         let rb_captions = new BoxLayout({ vertical: true, style_class: STYLE_DATABOX_CAPTIONS })
         let rb_values = new BoxLayout({ vertical: true, style_class: STYLE_DATABOX_VALUES })
-        rb_captions.add_actor(new Label({ text: _('Temperature') + ":", style: textColorStyle }));
-        rb_captions.add_actor(new Label({ text: _('Humidity') + ":", style: textColorStyle }));
-        rb_captions.add_actor(new Label({ text: _('Pressure') + ":", style: textColorStyle }));
-        rb_captions.add_actor(new Label({ text: _('Wind') + ":", style: textColorStyle }));
+        rb_captions.add_actor(new Label({ text: _('Temperature') + LocalizedColon(config.currentLocale), style: textColorStyle }));
+        rb_captions.add_actor(new Label({ text: _('Humidity') + LocalizedColon(config.currentLocale), style: textColorStyle }));
+        rb_captions.add_actor(new Label({ text: _('Pressure') + LocalizedColon(config.currentLocale), style: textColorStyle }));
+        rb_captions.add_actor(new Label({ text: _('Wind') + LocalizedColon(config.currentLocale), style: textColorStyle }));
         rb_captions.add_actor(this.apiUniqueCaptionLabel);
         rb_values.add_actor(this.temperatureLabel);
         rb_values.add_actor(this.humidityLabel);
@@ -292,11 +292,11 @@ export class CurrentWeather {
         this.apiUniqueLabel.text = "";
         this.apiUniqueCaptionLabel.text = "";
         if (!!extra_field) {
-            this.apiUniqueCaptionLabel.text = _(extra_field.name) + ":";
+            this.apiUniqueCaptionLabel.text = _(extra_field.name) + LocalizedColon(this.app.config.currentLocale);
             let value;
             switch (extra_field.type) {
                 case "percent":
-                    value = extra_field.value.toString() + "%";
+                    value = PrecentToLocale(extra_field.value, this.app.config.currentLocale);
                     break;
                 case "temperature":
                     value = TempToUserConfig(extra_field.value, this.app.config.TemperatureUnit, this.app.config._tempRussianStyle) + " " + UnitToUnicode(this.app.config.TemperatureUnit);
@@ -333,7 +333,7 @@ export class CurrentWeather {
 
     private SetHumidity(humidity: number) {
         if (humidity != null) {
-            this.humidityLabel.text = Math.round(humidity) + "%";
+            this.humidityLabel.text = PrecentToLocale(humidity, this.app.config.currentLocale);
         }
     }
 

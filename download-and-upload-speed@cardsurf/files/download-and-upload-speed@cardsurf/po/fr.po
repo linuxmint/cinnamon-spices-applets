@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: download-and-upload-speed@cardsurf 1.4.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-01-24 23:31+0100\n"
-"PO-Revision-Date: 2020-01-25 00:16+0100\n"
+"PO-Revision-Date: 2021-02-21 09:53+0100\n"
 "Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: \n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: applet.js:427
@@ -97,19 +97,19 @@ msgstr "b"
 
 #: appletGui.js:470
 msgid "Total download:"
-msgstr "Total Reçu :"
+msgstr "Total reçu :"
 
 #: appletGui.js:471
 msgid "Total upload:"
-msgstr "Total Envoyé :"
+msgstr "Total envoyé :"
 
 #. metadata.json->description
 msgid "Shows usage of a network interface"
-msgstr "Afficher l'utilisation d'une interface réseau"
+msgstr "Affiche l'utilisation d'une interface réseau"
 
 #. metadata.json->name
 msgid "Download and upload speed"
-msgstr "Vitesses d'envoi et de réception"
+msgstr "Vitesses de réception et d'envoi"
 
 #. settings-schema.json->configuration->description
 msgid "Configuration"
@@ -125,7 +125,7 @@ msgstr "Vitesse moyenne par seconde"
 
 #. settings-schema.json->display_mode->options
 msgid "Amount of data transferred"
-msgstr "Total des données transférées"
+msgstr "Quantité de données transférées"
 
 #. settings-schema.json->display_mode->tooltip
 msgid "Values shown in the panel"
@@ -155,24 +155,23 @@ msgstr "secondes"
 
 #. settings-schema.json->update_every->description
 msgid "Calculate every"
-msgstr "Fréquence de calcul"
+msgstr "Période de calcul"
 
 #. settings-schema.json->update_every->tooltip
 msgid "How often to calculate download and upload speed"
-msgstr ""
-"Nombre de secondes entre deux calculs de vitesse d'envoi et de réception"
+msgstr "Périodicité du calcul de vitesse d'envoi et de réception"
 
 #. settings-schema.json->update_available_interfaces_every->description
 msgid "Update available interfaces every"
-msgstr "Fréquence de mise à jour des interfaces disponibles"
+msgstr "Période de mise à jour des interfaces disponibles"
 
 #. settings-schema.json->update_available_interfaces_every->tooltip
 msgid ""
 "How often to update list of available network interfaces. 0 means list of "
 "available network interfaces is not updated periodically."
 msgstr ""
-"Fréquence de mise à jour de la liste des interfaces réseaux disponibles. 0 "
-"signifie que cette liste n'est pas mise à jour périodiquement."
+"Périodicité de la mise à jour de la liste des interfaces réseaux "
+"disponibles. 0 signifie que cette liste n'est pas mise à jour périodiquement."
 
 #. settings-schema.json->gui_speed_type->description
 msgid "Type"
@@ -180,7 +179,7 @@ msgstr "Type d'affichage"
 
 #. settings-schema.json->gui_speed_type->tooltip
 msgid "Applet Gui"
-msgstr "Affichage dans le panneau"
+msgstr "Affichage de l'applet"
 
 #. settings-schema.json->gui_value_order->description
 msgid "Value order"
@@ -225,7 +224,7 @@ msgstr "3 "
 #. settings-schema.json->decimal_places->tooltip
 msgid "Decimal places of download and upload speed shown in the panel"
 msgstr ""
-"Nombre de décimales des vitesses d'envoi et de réception affichées dans le "
+"Nombre de décimales des vitesses de réception et d'envoi affichées dans le "
 "panneau"
 
 #. settings-schema.json->gui_text_css->description
@@ -251,7 +250,8 @@ msgstr "Icône Envoi"
 
 #. settings-schema.json->gui_sent_icon_filename->tooltip
 msgid "An icon displayed next to upload speed in the panel"
-msgstr "Une icône s'affiche à côté de la vitesse d'envoi dans le panneau"
+msgstr ""
+"Choisir une icône affichée à côté de la vitesse d'envoi dans le panneau"
 
 #. settings-schema.json->hover_popup_text_css->description
 msgid "Popup text CSS"
@@ -278,20 +278,20 @@ msgstr "octets"
 
 #. settings-schema.json->minimum_bytes_received_to_display->description
 msgid "Minimum displayed download value"
-msgstr "Valeur minimale affichée en Réception"
+msgstr "Valeur minimale affichée en réception"
 
 #. settings-schema.json->minimum_bytes_received_to_display->tooltip
 msgid "A minimum download value to display in the panel"
 msgstr ""
-"Choisir la vitesse minimale de Réception qui sera affichée dans le panneau"
+"Choisir la vitesse minimale de réception qui sera affichée dans le panneau"
 
 #. settings-schema.json->minimum_bytes_sent_to_display->description
 msgid "Minimum displayed upload value"
-msgstr "Valeur minimale affichée en Envoi"
+msgstr "Valeur minimale affichée en envoi"
 
 #. settings-schema.json->minimum_bytes_sent_to_display->tooltip
 msgid "A minimum upload value to display in the panel"
-msgstr "Choisir la vitesse minimale d'Envoi qui sera affichée dans le panneau"
+msgstr "Choisir la vitesse minimale d'envoi qui sera affichée dans le panneau"
 
 #. settings-schema.json->total_data_start->description
 msgid "Total data"
@@ -299,12 +299,13 @@ msgstr "Quantité totale de données"
 
 #. settings-schema.json->show_hover->description
 msgid "Show total download and upload on hover"
-msgstr "Afficher dans la bulle le total des données reçues et envoyées"
+msgstr ""
+"Afficher dans la bulle la quantité totale de données reçues et envoyées"
 
 #. settings-schema.json->show_hover->tooltip
 msgid "Show the hover popup with total amount of data downloaded and uploaded"
 msgstr ""
-"Afficher dans la bulle la quantité totale des données reçues et envoyées"
+"Afficher dans la bulle la quantité totale de données reçues et envoyées"
 
 #. settings-schema.json->bytes_start_time->description
 msgid "Start"
@@ -313,7 +314,7 @@ msgstr "Début du comptage"
 #. settings-schema.json->bytes_start_time->tooltip
 msgid "Start time to count total amount of data downloaded and uploaded"
 msgstr ""
-"Indiquer depuis quand la quantité totale des données reçues et envoyées est "
+"Indiquer depuis quand la quantité totale de données reçues et envoyées est "
 "comptabilisée"
 
 #. settings-schema.json->custom_start_date->description
@@ -331,19 +332,19 @@ msgstr ""
 
 #. settings-schema.json->write_every->description
 msgid "Save every"
-msgstr "Fréquence de sauvegarde"
+msgstr "Période de sauvegarde"
 
 #. settings-schema.json->write_every->tooltip
 msgid ""
 "How often to save total amount of data downloaded and uploaded to the file. "
 "0 means no saving to the file."
 msgstr ""
-"Nombre de secondes entre deux sauvegardes des quantités de données émises et "
-"reçues. 0 signifie : Aucune sauvegarde."
+"Périodicité de la sauvegarde des quantités de données reçues et envoyées. 0 "
+"signifie qu'il n'y a aucune sauvegarde dans le fichier."
 
 #. settings-schema.json->data_limit_start->description
 msgid "Data limits"
-msgstr "Limites des données"
+msgstr "Quantité limite de données"
 
 #. settings-schema.json->data_limit->units
 msgid "MB"
@@ -351,13 +352,13 @@ msgstr "Mo"
 
 #. settings-schema.json->data_limit->description
 msgid "Data limit"
-msgstr "Limite des données"
+msgstr "Quantité limite de données"
 
 #. settings-schema.json->data_limit->tooltip
 msgid "The maximum amount of data to download and upload. 0 means no limits."
 msgstr ""
-"Quantité maximale de données en envoi et en réception. 0 signifie : Aucune "
-"limite."
+"Quantité maximale de données en réception et en envoi. 0 signifie qu'il n'y "
+"a pas de limite."
 
 #. settings-schema.json->gui_data_limit_type->description
 msgid "Show data limit usage"
@@ -382,15 +383,17 @@ msgstr ""
 
 #. settings-schema.json->data_limit_command_enabled->description
 msgid "Invoke command when data limit exceeded"
-msgstr "Exécuter la commande suivante quand la limite des données est dépassée"
+msgstr ""
+"Exécuter la commande suivante quand la quantité limite de données est "
+"dépassée"
 
 #. settings-schema.json->data_limit_command_enabled->tooltip
 msgid ""
 "Invoke a command when amount of data downloaded and uploaded exceeded the "
 "limit"
 msgstr ""
-"Exécuter la commande qui suit lorsque les quantités de données émises et "
-"reçues excèdent leur limite"
+"Exécuter la commande qui suit lorsque la quantité de données reçues et "
+"envoyées excède la limite"
 
 #. settings-schema.json->data_limit_command->description
 msgid "Command"
@@ -398,9 +401,7 @@ msgstr "Commande"
 
 #. settings-schema.json->data_limit_command->tooltip
 msgid "A command to invoke"
-msgstr ""
-"Saisir la commande à exécuter lorsque les quantités de données en Envoi ou "
-"Réception dépassent la limite fixée"
+msgstr "Saisir une commande à exécuter"
 
 #. settings-schema.json->connections_start->description
 msgid "Connections"
@@ -415,8 +416,8 @@ msgid ""
 "Open a terminal with a list of current connections on a left mouse click. "
 "The next click closes the terminal."
 msgstr ""
-"Le clic gauche ouvre un terminal contenant la liste des connexions actives. "
-"Le clic suivant ferme ce terminal."
+"Le clic gauche ouvre un terminal avec la liste des connexions actives. Le "
+"clic suivant ferme ce terminal."
 
 #. settings-schema.json->list_connections_command->description
 msgid "Command "

@@ -68,6 +68,8 @@ class QRedshift extends Applet.TextIconApplet {
             keyBrightnessDown: '',
             keyTempUp: '',
             keyTempDown: '',
+            keyGammaUp: '',
+            keyGammaDown: '',
             
             dayTemp: 6500,
             dayBrightness: 1,
@@ -123,6 +125,9 @@ class QRedshift extends Applet.TextIconApplet {
         this.settings.bind("keyBrightnessDown", "keyBrightnessDown", this.onKeyChanged.bind(this));
         this.settings.bind("keyTempUp", "keyTempUp", this.onKeyChanged.bind(this));
         this.settings.bind("keyTempDown", "keyTempDown", this.onKeyChanged.bind(this));
+        this.settings.bind("keyGammaUp", "keyGammaUp", this.onKeyChanged.bind(this));
+        this.settings.bind("keyGammaDown", "keyGammaDown", this.onKeyChanged.bind(this));
+
         
         if (!this.verifyVersion()) {
             qLOG('Redshift required!');
@@ -263,8 +268,10 @@ class QRedshift extends Applet.TextIconApplet {
             if (success && out) {
                 let res = out.toString();
                 let mts = /redshift\s*(\d+.?\d*)/gi.exec(res);
-                if (mts.length == 2)
-                    this.opt.redshift_version = parseFloat(mts[1]);
+                if (mts.length == 2) this.opt.redshift_version = parseFloat(mts[1]);
+                
+                this.disableRedshiftService();
+                
                 
                 // qLOG('success', this.opt);
                 return true;
@@ -275,6 +282,37 @@ class QRedshift extends Applet.TextIconApplet {
             return false;
         }
         
+    }
+    
+    disableRedshiftService() {
+        try {
+            let [success, out] = GLib.spawn_command_line_sync('systemctl is-enabled --user redshift');
+            if(success && out.toString().trim() === 'enabled') {
+                let [s, o] = GLib.spawn_command_line_sync('systemctl mask --user redshift');
+                qLOG('QRedshift Disabling Service', o.toString());
+            }
+    
+            let [success2, out2] = GLib.spawn_command_line_sync('systemctl is-active --user redshift');
+            if(success2 && out2.toString().trim() === 'active') {
+                let [s, o] = GLib.spawn_command_line_sync('systemctl stop --user redshift');
+                qLOG('QRedshift Stopping Service', o.toString());
+            }
+            
+            return true;
+        } catch (e) {
+            return false;
+        }
+        
+    }
+    
+    checkLocalConfig(){
+        try {
+            let home = this.metadata.path.split('.local')[0];
+            let exists = GLib.file_test(home + '.config/redshift.conf', 16);
+            return exists;
+        } catch (e) {
+            return true;
+        }
     }
     
     setAdjustmentMethods(force = false) {
@@ -348,6 +386,14 @@ class QRedshift extends Applet.TextIconApplet {
             this.nc_Slider._setValueEmit(this.nc_Slider.value - this.nc_Slider.STEP);
         });
         
+        Main.keybindingManager.addHotKey("keyGammaUp", this.opt.keyGammaUp, (event) => {
+            this.gm_Slider._setValueEmit(this.gm_Slider.value + this.gm_Slider.STEP);
+        });
+
+        Main.keybindingManager.addHotKey("keyGammaDown", this.opt.keyGammaDown, (event) => {
+            this.gm_Slider._setValueEmit(this.gm_Slider.value - this.gm_Slider.STEP);
+        });
+
         Main.keybindingManager.addHotKey("keyToggle", this.opt.keyToggle, (event) => {
             this.opt.enabled = !this.opt.enabled;
             this.enabledDay.setToggleState(this.opt.enabled);
@@ -397,6 +443,25 @@ class QRedshift extends Applet.TextIconApplet {
         });
         this.menu.addMenuItem(this.headerIcon);
         this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+    
+    
+        if(this.checkLocalConfig()){
+            qLOG('QRedshift', '~/.config/redshift.conf should be removed');
+    
+            let info = new QPopupHeader({
+                label: "~/.config/redshift.conf",
+                sub_label: _("may conflict with this applet, it is highly recommended removing it."),
+                iconName: "dialog-warning", //dialog-warning-symbolic
+                iconSize: 16
+            })
+            this.menu.addMenuItem(info);
+    
+    
+            this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+            
+        }
+        
+        
         
         
         
@@ -596,6 +661,8 @@ class QRedshift extends Applet.TextIconApplet {
         Main.keybindingManager.removeHotKey("keyBrightnessDown");
         Main.keybindingManager.removeHotKey("keyTempUp");
         Main.keybindingManager.removeHotKey("keyTempDown");
+        Main.keybindingManager.removeHotKey("keyGammaUp");
+        Main.keybindingManager.removeHotKey("keyGammaDown");
         if (this.timeout) {
             Mainloop.source_remove(this.timeout);
             this.timeout = undefined;
@@ -608,6 +675,8 @@ class QRedshift extends Applet.TextIconApplet {
     
     
     doCommand(command) {
+        // qLOG('QRedshift CMD',  command);
+        
         let [success, out] = GLib.spawn_command_line_sync(command);
         if (!success || out == null) return;
         let resp = out.toString();
@@ -623,7 +692,7 @@ class QRedshift extends Applet.TextIconApplet {
         Util.killall('redshift');
         if (this.opt.enabled) {
             let cmd = `redshift `;
-            cmd += `-c ${this.metadata.path + BASE_CONF}  `;
+            // cmd += `-c ${this.metadata.path + BASE_CONF}  `;
             if (this.opt.redshift_version >= 1.12) cmd += `-P `;
             cmd += `-r -v -o  `;
             
@@ -631,7 +700,6 @@ class QRedshift extends Applet.TextIconApplet {
             if (this.opt.adjustmentMethod) cmd += `-m ${this.opt.adjustmentMethod} `;
             
             if (this.opt.locationLatitude && this.opt.locationLongitude) {
-                if (this.opt.adjustmentMethod) cmd += `-m ${this.opt.adjustmentMethod} `;
                 cmd += `-l ${this.opt.locationLatitude}:${this.opt.locationLongitude} `
             }
             

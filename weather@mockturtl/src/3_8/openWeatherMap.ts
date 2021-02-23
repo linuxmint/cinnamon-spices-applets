@@ -10,7 +10,7 @@ import { HttpError } from "./httpLib";
 import { Log } from "./logger";
 import { WeatherApplet } from "./main";
 import { WeatherProvider, WeatherData, ForecastData, HourlyForecastData, AppletError, BuiltinIcons, CustomIcons, LocationData } from "./types";
-import { WeatherIconSafely, _, IsLangSupported } from "./utils";
+import { _, IsLangSupported } from "./utils";
 
 const Lang: typeof imports.lang = imports.lang;
 
@@ -20,12 +20,12 @@ export class OpenWeatherMap implements WeatherProvider {
     //--------------------------------------------------------
     public readonly prettyName = "OpenWeatherMap";
     public readonly name = "OpenWeatherMap";
-    public readonly maxForecastSupport = 7;
+    public readonly maxForecastSupport = 8;
     public readonly website = "https://openweathermap.org/";
     public readonly maxHourlyForecastSupport = 48;
     public readonly needsApiKey = false;
 
-    private supportedLanguages = ["af", "ar", "az", "bg", "ca", "cz", "da", "de", "el", "en", "eu", "fa", "fi",
+    private supportedLanguages = ["af", "al", "ar", "az", "bg", "ca", "cz", "da", "de", "el", "en", "eu", "fa", "fi",
         "fr", "gl", "he", "hi", "hr", "hu", "id", "it", "ja", "kr", "la", "lt", "mk", "no", "nl", "pl",
         "pt", "pt_br", "ro", "ru", "se", "sk", "sl", "sp", "es", "sr", "th", "tr", "ua", "uk", "vi", "zh_cn", "zh_tw", "zu"
     ];

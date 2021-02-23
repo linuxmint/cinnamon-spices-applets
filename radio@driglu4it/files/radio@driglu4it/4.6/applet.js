@@ -12,6 +12,7 @@ const { MpvPlayerHandler } = require('./mpvPlayerHandler')
 const { PlayPauseIconMenuItem } = require('./playPauseIconMenuItem')
 const { notifySend, checkInstallMprisPlugin, checkInstallMpv, checkInstallYoutubeDl, downloadFromYoutube } = require('./utils.js')
 
+
 // for i18n
 let UUID;
 function _(str) {
@@ -69,7 +70,6 @@ class CinnamonRadioApplet extends TextIconApplet {
       _getInitialVolume: () => this._getInitialVolume(),
       _handleRadioChannelChangedPaused: (...args) => this._handleRadioChannelChangedPaused(...args),
       _handleVolumeChanged: (...args) => this.set_applet_tooltip(false, ...args)
-
     })
 
     await this.mpvPlayer.init()

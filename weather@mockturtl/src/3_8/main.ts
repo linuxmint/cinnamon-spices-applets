@@ -11,7 +11,7 @@ import { WeatherLoop } from "./loop";
 import { MetUk } from "./met_uk";
 import { WeatherData, WeatherProvider, LocationData, AppletError, CustomIcons, NiceErrorDetail, RefreshState, BuiltinIcons } from "./types";
 import { UI } from "./ui";
-import { AwareDateString, CapitalizeEveryLetter, GenerateLocationText, NotEmpty, ProcessCondition, TempToUserConfig, UnitToUnicode, WeatherIconSafely, _ } from "./utils";
+import { AwareDateString, CapitalizeEveryWord, CapitalizeFirstLetter, GenerateLocationText, NotEmpty, ProcessCondition, TempToUserConfig, UnitToUnicode, WeatherIconSafely, _ } from "./utils";
 import { DarkSky } from "./darkSky";
 import { OpenWeatherMap } from "./openWeatherMap";
 import { USWeather } from "./us_weather";
@@ -23,6 +23,7 @@ import { Log } from "./logger";
 import { APPLET_ICON, REFRESH_ICON } from "./consts";
 import { VisualCrossing } from "./visualcrossing";
 import { ClimacellV4 } from "./climacellV4";
+import { DanishMI } from "./danishMI";
 
 const { TextIconApplet, AllowedLayout, MenuItem } = imports.ui.applet;
 const { spawnCommandLine } = imports.misc.util;
@@ -167,7 +168,7 @@ export class WeatherApplet extends TextIconApplet {
 	}
 
 	private DisplayWeatherOnLabel(temperature: number, mainCondition: string) {
-		mainCondition = CapitalizeEveryLetter(mainCondition)
+		mainCondition = CapitalizeFirstLetter(mainCondition)
 		let temp = TempToUserConfig(temperature, this.config.TemperatureUnit, this.config._tempRussianStyle);
 		// Applet panel label
 		let label = "";
@@ -412,6 +413,9 @@ export class WeatherApplet extends TextIconApplet {
 				break;
 			case "Visual Crossing":
 				if (currentName != "Visual Crossing" || force) this.provider = new VisualCrossing(this);
+				break;
+			case "DanishMI":
+				if (currentName != "DanishMI" || force) this.provider = new DanishMI(this);
 				break;
             default:
                 return null;

@@ -1,5 +1,7 @@
 # cinnamon-spices-applets
 
+![Validate spices](https://github.com/linuxmint/cinnamon-spices-applets/workflows/Validate%20spices/badge.svg)
+
 This repository hosts all the applets available for the Cinnamon desktop environment.
 
 Users can install spices from https://cinnamon-spices.linuxmint.com, or directly from within Cinnamon -> System Settings.

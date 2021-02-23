@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.setInterval = exports.clearTimeout = exports.delay = exports.setTimeout = exports.Guid = exports.GetFuncName = exports.GetDistance = exports.ConstructJsLocale = exports.ShadeHexColor = exports.WeatherIconSafely = exports.IsLangSupported = exports.NotEmpty = exports.IsCoordinate = exports.IsNight = exports.CompassDirection = exports.CompassToDeg = exports.KmToM = exports.MPHtoMPS = exports.FahrenheitToKelvin = exports.CelsiusToKelvin = exports.KPHtoMPS = exports.MillimeterToUserUnits = exports.MetreToUserUnits = exports.PressToUserUnits = exports.TempToUserConfig = exports.MPStoUserUnits = exports.ProcessCondition = exports.MilitaryTime = exports.AwareDateString = exports.GetHoursMinutes = exports.GetDayName = exports.CapitalizeEveryLetter = exports.CapitalizeFirstLetter = exports.GenerateLocationText = exports.UnitToUnicode = exports.format = exports._ = void 0;
+exports.setInterval = exports.clearTimeout = exports.delay = exports.setTimeout = exports.Guid = exports.GetFuncName = exports.GetDistance = exports.ConstructJsLocale = exports.ShadeHexColor = exports.WeatherIconSafely = exports.mode = exports.IsLangSupported = exports.NotEmpty = exports.IsCoordinate = exports.IsNight = exports.CompassDirection = exports.CompassToDeg = exports.KmToM = exports.MPHtoMPS = exports.FahrenheitToKelvin = exports.CelsiusToKelvin = exports.KPHtoMPS = exports.MillimeterToUserUnits = exports.MetreToUserUnits = exports.PressToUserUnits = exports.TempToUserConfig = exports.MPStoUserUnits = exports.PrecentToLocale = exports.LocalizedColon = exports.ProcessCondition = exports.MilitaryTime = exports.AwareDateString = exports.GetHoursMinutes = exports.GetDayName = exports.CapitalizeEveryWord = exports.CapitalizeFirstLetter = exports.GenerateLocationText = exports.UnitToUnicode = exports.format = exports._ = void 0;
 const consts_1 = require("./consts");
 const { timeout_add, source_remove } = imports.mainloop;
 const { IconType } = imports.gi.St;
@@ -47,7 +47,7 @@ function CapitalizeFirstLetter(description) {
 }
 exports.CapitalizeFirstLetter = CapitalizeFirstLetter;
 ;
-function CapitalizeEveryLetter(description) {
+function CapitalizeEveryWord(description) {
     if ((description == undefined || description == null)) {
         return "";
     }
@@ -61,16 +61,18 @@ function CapitalizeEveryLetter(description) {
     }
     return result;
 }
-exports.CapitalizeEveryLetter = CapitalizeEveryLetter;
+exports.CapitalizeEveryWord = CapitalizeEveryWord;
+function NormalizeTimezone(tz) {
+    if (!tz || tz == "" || tz == "UTC")
+        tz = undefined;
+    return tz;
+}
 function GetDayName(date, locale, showDate = false, tz) {
-    if (locale == "c" || locale == null)
-        locale = undefined;
     let params = {
         weekday: "long",
         timeZone: tz
     };
-    if (!tz || tz == "")
-        params.timeZone = undefined;
+    params.timeZone = NormalizeTimezone(tz);
     if (showDate) {
         params.day = 'numeric';
     }
@@ -80,6 +82,8 @@ function GetDayName(date, locale, showDate = false, tz) {
     if (date.getDate() == now.getDate() || date.getDate() == tomorrow.getDate())
         delete params.weekday;
     let dateString = date.toLocaleString(locale, params);
+    if (locale.startsWith("fr"))
+        dateString = CapitalizeFirstLetter(dateString);
     if (date.getDate() == now.getDate())
         dateString = _("Today");
     if (date.getDate() == tomorrow.getDate())
@@ -88,23 +92,18 @@ function GetDayName(date, locale, showDate = false, tz) {
 }
 exports.GetDayName = GetDayName;
 function GetHoursMinutes(date, locale, hours24Format, tz, onlyHours = false) {
-    if (locale == "c" || locale == null)
-        locale = undefined;
     let params = {
         hour: "numeric",
         hour12: !hours24Format,
         timeZone: tz
     };
-    if (!tz || tz == "")
-        params.timeZone = undefined;
+    params.timeZone = NormalizeTimezone(tz);
     if (!onlyHours)
         params.minute = "2-digit";
     return date.toLocaleString(locale, params);
 }
 exports.GetHoursMinutes = GetHoursMinutes;
 function AwareDateString(date, locale, hours24Format, tz) {
-    if (locale == "c" || locale == null)
-        locale = undefined;
     let now = new Date();
     let params = {
         hour: "numeric",
@@ -119,8 +118,7 @@ function AwareDateString(date, locale, hours24Format, tz) {
     if (date.getFullYear() != now.getFullYear()) {
         params.year = "numeric";
     }
-    if (!tz || tz == "")
-        params.timeZone = tz;
+    params.timeZone = NormalizeTimezone(tz);
     return date.toLocaleString(locale, params);
 }
 exports.AwareDateString = AwareDateString;
@@ -137,6 +135,18 @@ function ProcessCondition(condition, shouldTranslate) {
     return condition;
 }
 exports.ProcessCondition = ProcessCondition;
+function LocalizedColon(locale) {
+    if (locale == null)
+        return ":";
+    if (locale.startsWith("fr"))
+        return " :";
+    return ":";
+}
+exports.LocalizedColon = LocalizedColon;
+function PrecentToLocale(humidity, locale) {
+    return (humidity / 100).toLocaleString(locale, { style: "percent" });
+}
+exports.PrecentToLocale = PrecentToLocale;
 const WEATHER_CONV_MPH_IN_MPS = 2.23693629;
 const WEATHER_CONV_KPH_IN_MPS = 3.6;
 const WEATHER_CONV_KNOTS_IN_MPS = 1.94384449;
@@ -215,7 +225,7 @@ exports.TempToUserConfig = TempToUserConfig;
 function PressToUserUnits(hpa, units) {
     switch (units) {
         case "hPa":
-            return hpa;
+            return Math.round(hpa * 100) / 100;
         case "at":
             return Math.round((hpa * 0.001019716) * 1000) / 1000;
         case "atm":
@@ -346,6 +356,18 @@ exports.IsLangSupported = IsLangSupported;
 function HasIcon(icon, icon_type) {
     return IconTheme.get_default().has_icon(icon + (icon_type == IconType.SYMBOLIC ? '-symbolic' : ''));
 }
+function mode(arr) {
+    return arr.reduce(function (current, item) {
+        var val = current.numMapping[item] = (current.numMapping[item] || 0) + 1;
+        if (val > current.greatestFreq) {
+            current.greatestFreq = val;
+            current.mode = item;
+        }
+        return current;
+    }, { mode: null, greatestFreq: -Infinity, numMapping: {} }).mode;
+}
+exports.mode = mode;
+;
 function WeatherIconSafely(code, icon_type) {
     for (let i = 0; i < code.length; i++) {
         if (HasIcon(code[i], icon_type))
@@ -368,6 +390,8 @@ function ConstructJsLocale(locale) {
             jsLocale += "-";
         jsLocale += tmp[i].toLowerCase();
     }
+    if (locale == "c" || locale == null)
+        jsLocale = undefined;
     return jsLocale;
 }
 exports.ConstructJsLocale = ConstructJsLocale;

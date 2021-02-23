@@ -53,7 +53,7 @@ class CinnamenuApplet extends TextIconApplet {
         this.menuManager.addMenu(this.menu);
         this.menu.setCustomStyleClass('menu-background');
         this.menu.setCustomStyleClass('cinnamenu');
-        this.menu.setCustomStyleClass('starkmenu-background');
+        //this.menu.setCustomStyleClass('starkmenu-background');
         this.signals = new SignalManager(null);
         this.displaySignals = new SignalManager(null);
         //this.tracker = Cinnamon.WindowTracker.get_default();//?
@@ -120,7 +120,7 @@ class CinnamenuApplet extends TextIconApplet {
                             cb: () => { this.updateActivateOnHover(false);
                                         this.updateActivateOnHover(true); } },
             { key: 'enable-animation',          value: 'enableAnimation',       cb: null },
-            { key: 'open-on-favorites',         value: 'openOnFavorites',       cb: null },
+            { key: 'open-on-category',         value: 'openOnCategory',       cb: null },
 
             { key: 'category-click',            value: 'categoryClick',         cb: null },
             { key: 'enable-autoscroll',         value: 'enableAutoScroll',      cb: this.refresh },
@@ -146,11 +146,11 @@ class CinnamenuApplet extends TextIconApplet {
     }
 
     getGridValues() {
-        const gridWidth = this.appsView.applicationsGridBox.width;
-        const columns = Math.floor(gridWidth / (140 * global.ui_scale));
-        const columnWidth = Math.floor(gridWidth / columns);
-        //bigger if large icons
-        //width = Math.max(width, this.getAppIconSize() * this.settings.appsGridColumnCount * 1.5);
+        const appsBoxWidth = this.appsView.applicationsGridBox.width;
+        const minColumnWidth = Math.max(140, this.settings.appsGridIconSize * 1.2);
+        const columns = Math.floor(appsBoxWidth / (minColumnWidth * global.ui_scale));
+        const columnWidth = Math.floor(appsBoxWidth / columns);
+
         return {columnWidth: columnWidth, columns: columns};
     }
 
@@ -163,8 +163,7 @@ class CinnamenuApplet extends TextIconApplet {
     }
 
     getThemeForegroundColor() {
-        const appletMenuThemeNode = this.menu.actor.get_theme_node();
-        return appletMenuThemeNode.get_foreground_color().to_string().substring(0, 7);
+        return this.menu.actor.get_theme_node().get_foreground_color().to_string().substring(0, 7);
     }
 
     getScreenWorkArea() {
@@ -184,7 +183,6 @@ class CinnamenuApplet extends TextIconApplet {
             this.hide_applet_label(false);
         }
         this.updateIconAndLabel();
-        //this.refresh();
     }
 
     on_applet_added_to_panel() {
@@ -212,10 +210,6 @@ class CinnamenuApplet extends TextIconApplet {
             return;
         }
         this.menu.toggle_with_options(this.settings.enableAnimation);
-    }
-
-    on_panel_height_changed() {
-        //this.refresh();
     }
 
     on_applet_instances_changed(instance) {
@@ -284,16 +278,12 @@ class CinnamenuApplet extends TextIconApplet {
         if (this.orientation === St.Side.LEFT || this.orientation === St.Side.RIGHT) {
             this.set_applet_label('');
         } else {
-            //if (!this.panelMenuLabelText || this.panelMenuLabelText.length > 0) {
             if (!this.settings.menuLabel) {
                 this.settings.menuLabel = '';
             }
             const menuLabel = this.settings.menuLabel.substring(0, 45);
             this.set_applet_label(menuLabel);
             this.set_applet_tooltip(menuLabel);
-            //} else {
-                //this.set_applet_label('');
-            //}
         }
     }
 
@@ -304,7 +294,7 @@ class CinnamenuApplet extends TextIconApplet {
 
         let icon_type = this._applet_icon.get_icon_type();
         let size;
-        global.log("_setStyle");
+
         if (this.settings.menuIconSizeCustom) {
             size = Math.max(Math.min(this.settings.menuIconSize, this.panel.height), 1);
         } else {
@@ -537,15 +527,27 @@ class CinnamenuApplet extends TextIconApplet {
             return false;
         }
         if (open) {
+            this.tweakTheme();
             this.categories.update();//in case menu editor updates
             this.categoriesView.populate();
             this.sidebar.populate();//in case fav files changed
             global.stage.set_key_focus(this.searchView.searchEntry);
-            const currentCategory = this.settings.openOnFavorites && this.settings.showFavAppsCategory ?
-                                                                'favorite_apps' : this.currentCategory;
+            let openOnCategory = this.currentCategory;
+            if (this.settings.openOnCategory === 1 && this.settings.showFavAppsCategory) {
+                openOnCategory = 'favorite_apps';
+            } else if (this.settings.openOnCategory === 2 && this.settings.showRecents) {
+                openOnCategory = 'recents';
+            } else if (this.settings.openOnCategory === 3 && this.settings.showPlaces) {
+                openOnCategory = 'places';
+            } else if (this.settings.openOnCategory === 4) {
+                openOnCategory = 'all';
+            } else if (this.settings.openOnCategory === 5 && this.settings.showHomeFolder) {
+                openOnCategory = GLib.get_home_dir();
+            }
             this.updateMenuWidth();
             this.updateMenuHeight();
-            Mainloop.idle_add(() => this.setActiveCategory(currentCategory));
+            //Mainloop.idle_add(() => this.setActiveCategory(currentCategory));
+            this.setActiveCategory(openOnCategory);
             this.panel.peekPanel();
         } else {
             if (this.searchActive) {
@@ -558,6 +560,28 @@ class CinnamenuApplet extends TextIconApplet {
             this.categoriesView.categoriesBox.remove_all_children();
         }
         return true;
+    }
+
+    tweakTheme() {
+        this.searchView.searchBox.style = 'min-width: 160px; ';
+
+        //make searchBox l/r padding & margin symmetrical when it uses the full width of the menu.
+        if (this.settings.sidebarPlacement === PlacementRIGHT || this.settings.sidebarPlacement === PlacementLEFT) {
+
+            //set left padding of searchBox to match right padding
+            const searchBoxNode = this.searchView.searchBox.get_theme_node();
+            const searchBoxPaddingRight = searchBoxNode.get_padding(1);
+            this.searchView.searchBox.style += `padding-left: ${searchBoxPaddingRight}px; `;
+
+            //deal with uneven searchBox margins and uneven mainBox paddings by setting searchBox margins.
+            const searchBoxRightMargin = searchBoxNode.get_margin(3);
+            const mainBoxNode = this.mainBox.get_theme_node();
+            const mainBoxPaddingRight = mainBoxNode.get_padding(1);
+            const mainBoxPaddingLeft = mainBoxNode.get_padding(3);
+            const newMargin = Math.max(searchBoxRightMargin, mainBoxPaddingRight, mainBoxPaddingLeft);
+            this.searchView.searchBox.style += `margin-left: ${newMargin - mainBoxPaddingLeft}px; ` +
+                                                `margin-right: ${newMargin - mainBoxPaddingRight}px; `;
+        }
     }
 
     onBoxResized(userWidth, userHeight){
@@ -579,10 +603,17 @@ class CinnamenuApplet extends TextIconApplet {
         }
         const menuHeight = Math.min(newHeight, this.getScreenWorkArea().height);
         const appsHeight = menuHeight - this.bottomPane.height;
+        //---make middlePane actors the same height
         this.appsView.applicationsScrollBox.height = appsHeight;
         this.categoriesView.groupCategoriesWorkspacesScrollBox.height = appsHeight;
+        //find sidebarOuterBox vertical padding
+        const themeNode = this.sidebar.sidebarOuterBox.get_theme_node();
+        const topAndBottomPadding = themeNode.lookup_length('padding-top', true)[1] +
+                                            themeNode.lookup_length('padding-bottom', true)[1];
+        let padding = Math.max(themeNode.lookup_length('padding', true)[1] * 2, topAndBottomPadding);
         this.sidebar.sidebarScrollBox.set_height(-1);
-        this.sidebar.sidebarScrollBox.set_height(Math.min(appsHeight, this.sidebar.sidebarScrollBox.height));
+        this.sidebar.sidebarScrollBox.set_height(Math.min(appsHeight - padding, this.sidebar.sidebarScrollBox.height));
+        //-----
         if (!this.resizer.resizingInProgress) {
             //due to a intermittent bug causing cinnamon to crash, don't update settings while resizing
             //https://github.com/linuxmint/cinnamon/pull/9771#issuecomment-755081805
@@ -597,10 +628,9 @@ class CinnamenuApplet extends TextIconApplet {
         let leftSideWidth = this.categoriesView.groupCategoriesWorkspacesScrollBox.width;
         if (this.settings.sidebarPlacement === PlacementLEFT ||
                                                 this.settings.sidebarPlacement === PlacementRIGHT) {
-            leftSideWidth += this.sidebar.sidebarScrollBox.width;
+            leftSideWidth += this.sidebar.sidebarOuterBox.width;
         }
-        this.searchView.searchEntry.width = 5;//a small number to effectively set it to it's minimum width
-                                              //for the purpose of calculating bottomPaneMinWidth
+        this.searchView.searchEntry.width = 5;//don't know why this works.
         let bottomPaneMinWidth = 0;
         if (this.settings.sidebarPlacement === PlacementTOP ||
                                                 this.settings.sidebarPlacement === PlacementBOTTOM) {
@@ -652,32 +682,32 @@ class CinnamenuApplet extends TextIconApplet {
         this.allItemsCleanup();
         this.appsView.clear();
         switch (categoryId) {
-            case 'places':
-                this.populateAppsBox(this.apps.listPlaces());
-                break;
-            case 'recents':
-                const recents = this.apps.listRecent();
-                this.populateAppsBox(recents);
-                if (recents.length === 0) {
-                    this.appsView.setAnswerText(_('No recent files'));
-                }
-                break;
-            case 'favorite_files':
-                this.populateAppsBox(this.apps.listFavoriteFiles());
-                break;
-            case 'bookmarks':
-                this.populateAppsBox(this.apps.listWebBookmarks());
-                break;
-            case 'favorite_apps':
-                this.populateAppsBox(this.apps.listFavoriteApps());
-                break;
-            default:
-                if (categoryId.startsWith('/')) {
-                    this.appsView.setAnswerText(categoryId);
-                    this.populateAppsBox(this.apps.listFolder(categoryId));
-                } else {
-                    this.populateAppsBox(this.apps.listApplications(categoryId));
-                }
+        case 'places':
+            this.populateAppsBox(this.apps.listPlaces());
+            break;
+        case 'recents':
+            const recents = this.apps.listRecent();
+            this.populateAppsBox(recents);
+            if (recents.length === 0) {
+                this.appsView.setAnswerText(_('No recent files'));
+            }
+            break;
+        case 'favorite_files':
+            this.populateAppsBox(this.apps.listFavoriteFiles());
+            break;
+        case 'bookmarks':
+            this.populateAppsBox(this.apps.listWebBookmarks());
+            break;
+        case 'favorite_apps':
+            this.populateAppsBox(this.apps.listFavoriteApps());
+            break;
+        default:
+            if (categoryId.startsWith('/')) {
+                this.appsView.setAnswerText(categoryId);
+                this.populateAppsBox(this.apps.listFolder(categoryId));
+            } else {
+                this.populateAppsBox(this.apps.listApplications(categoryId));
+            }
         }
     }
 
@@ -970,83 +1000,83 @@ class CinnamenuApplet extends TextIconApplet {
         };*/
 
         switch (true) {
-            case symbol === Clutter.KP_Enter || symbol === Clutter.KEY_Return:
-                if (ctrlKey) {
-                    activateContextMenu();
-                } else if (noModifiers) {
-                    activateItem();
-                } else {
-                    return Clutter.EVENT_PROPAGATE;
-                }
-                return Clutter.EVENT_STOP;
-            case (symbol === Clutter.KEY_Menu && noModifiers):
+        case symbol === Clutter.KP_Enter || symbol === Clutter.KEY_Return:
+            if (ctrlKey) {
                 activateContextMenu();
-                return Clutter.EVENT_STOP;
-            case (symbol === Clutter.KEY_Up && noModifiers):
-                leaveCurrentlyEnteredItem();
-                upNavigation();
-                return Clutter.EVENT_STOP;
-            /*case (symbol === Clutter.KEY_Up && modifierState === 4)://ctrl up
-                moveCategory("up");
-                return true;*/
-            case (symbol === Clutter.KEY_Down && noModifiers):
-                leaveCurrentlyEnteredItem();
-                downNavigation();
-                return Clutter.EVENT_STOP;
-            /*case (symbol === Clutter.KEY_Down && modifierState === 4)://ctrl down
-                moveCategory("down");
-                return true;*/
-            case (symbol === Clutter.KEY_Right && noModifiers):
-                leaveCurrentlyEnteredItem();
-                rightNavigation();
-                return Clutter.EVENT_PROPAGATE; //so that left/right can also be used to navigate search entry
-            case (symbol === Clutter.KEY_Left && noModifiers):
-                leaveCurrentlyEnteredItem();
-                leftNavigation();
-                return Clutter.EVENT_PROPAGATE; //so that left/right can also be used to navigate search entry
-            case symbol === Clutter.ISO_Left_Tab || symbol === Clutter.Tab:
-                if (altKey) {  //Close menu as alt-tab is used for app-switcher in cinnamon
-                    this.closeMenu();
-                    return Clutter.EVENT_STOP;
-                } else if (noModifiers) {
-                    leaveCurrentlyEnteredItem();
-                    tabNavigation();
-                    return Clutter.EVENT_STOP;
-                } else if (shiftKey) {
-                    leaveCurrentlyEnteredItem();
-                    shiftTabNavigation();
-                    return Clutter.EVENT_STOP;
-                }
+            } else if (noModifiers) {
+                activateItem();
+            } else {
                 return Clutter.EVENT_PROPAGATE;
-            case (symbol === Clutter.Escape || symbol === Clutter.KEY_Escape) && noModifiers:
-                if (this.contextMenu.isOpen) {
-                    this.contextMenu.close();
-                } else {
-                    this.closeMenu();
-                }
+            }
+            return Clutter.EVENT_STOP;
+        case (symbol === Clutter.KEY_Menu && noModifiers):
+            activateContextMenu();
+            return Clutter.EVENT_STOP;
+        case (symbol === Clutter.KEY_Up && noModifiers):
+            leaveCurrentlyEnteredItem();
+            upNavigation();
+            return Clutter.EVENT_STOP;
+        /*case (symbol === Clutter.KEY_Up && modifierState === 4)://ctrl up
+            moveCategory("up");
+            return true;*/
+        case (symbol === Clutter.KEY_Down && noModifiers):
+            leaveCurrentlyEnteredItem();
+            downNavigation();
+            return Clutter.EVENT_STOP;
+        /*case (symbol === Clutter.KEY_Down && modifierState === 4)://ctrl down
+            moveCategory("down");
+            return true;*/
+        case (symbol === Clutter.KEY_Right && noModifiers):
+            leaveCurrentlyEnteredItem();
+            rightNavigation();
+            return Clutter.EVENT_PROPAGATE; //so that left/right can also be used to navigate search entry
+        case (symbol === Clutter.KEY_Left && noModifiers):
+            leaveCurrentlyEnteredItem();
+            leftNavigation();
+            return Clutter.EVENT_PROPAGATE; //so that left/right can also be used to navigate search entry
+        case symbol === Clutter.ISO_Left_Tab || symbol === Clutter.Tab:
+            if (altKey) {  //Close menu as alt-tab is used for app-switcher in cinnamon
+                this.closeMenu();
                 return Clutter.EVENT_STOP;
-            case (symbol === Clutter.KEY_Page_Up && noModifiers):
+            } else if (noModifiers) {
                 leaveCurrentlyEnteredItem();
-                if (enteredAppItemExists) {
-                    appButtons[0].handleEnter();
-                } else if (enteredSidebarItemExists) {
-                    sidebarButtons[0].handleEnter();
-                } else {
-                    categoryButtons[0].handleEnter();
-                }
+                tabNavigation();
                 return Clutter.EVENT_STOP;
-            case (symbol === Clutter.KEY_Page_Down && noModifiers):
+            } else if (shiftKey) {
                 leaveCurrentlyEnteredItem();
-                if (enteredAppItemExists) {
-                    appButtons[appButtons.length - 1].handleEnter();
-                } else if (enteredSidebarItemExists) {
-                    sidebarButtons[sidebarButtons.length - 1].handleEnter();
-                } else {
-                    categoryButtons[categoryButtons.length - 1].handleEnter();
-                }
+                shiftTabNavigation();
                 return Clutter.EVENT_STOP;
-            default:
-                return Clutter.EVENT_PROPAGATE;
+            }
+            return Clutter.EVENT_PROPAGATE;
+        case (symbol === Clutter.Escape || symbol === Clutter.KEY_Escape) && noModifiers:
+            if (this.contextMenu.isOpen) {
+                this.contextMenu.close();
+            } else {
+                this.closeMenu();
+            }
+            return Clutter.EVENT_STOP;
+        case (symbol === Clutter.KEY_Page_Up && noModifiers):
+            leaveCurrentlyEnteredItem();
+            if (enteredAppItemExists) {
+                appButtons[0].handleEnter();
+            } else if (enteredSidebarItemExists) {
+                sidebarButtons[0].handleEnter();
+            } else {
+                categoryButtons[0].handleEnter();
+            }
+            return Clutter.EVENT_STOP;
+        case (symbol === Clutter.KEY_Page_Down && noModifiers):
+            leaveCurrentlyEnteredItem();
+            if (enteredAppItemExists) {
+                appButtons[appButtons.length - 1].handleEnter();
+            } else if (enteredSidebarItemExists) {
+                sidebarButtons[sidebarButtons.length - 1].handleEnter();
+            } else {
+                categoryButtons[categoryButtons.length - 1].handleEnter();
+            }
+            return Clutter.EVENT_STOP;
+        default:
+            return Clutter.EVENT_PROPAGATE;
         }
     }
 
@@ -1292,7 +1322,7 @@ class CinnamenuApplet extends TextIconApplet {
                 if (!gridLayout) {
                     return false;
                 }
-                appButton.setWidth();// In case menu is being resized.
+                appButton.setButtonWidth();// In case menu is being resized.
                 gridLayout.attach(appButton.actor, column, rownum, 1, 1);
                 column++;
 
@@ -1331,9 +1361,9 @@ class CinnamenuApplet extends TextIconApplet {
         this.displaySignals.connect(this.searchView.searchEntryText, 'key-press-event',
                                                             (...args) => this.onMenuKeyPress(...args));
         //this.previousSearchPattern = '';
-        this.bottomPane = new St.BoxLayout({ /*style: 'padding-top: 12px;'*/ });
+        this.bottomPane = new St.BoxLayout({});
         if (sidebarPlacement === PlacementTOP || sidebarPlacement === PlacementBOTTOM) {
-            this.bottomPane.add(this.sidebar.sidebarScrollBox, { expand: false, x_fill: false, y_fill: false,
+            this.bottomPane.add(this.sidebar.sidebarOuterBox, { expand: false, x_fill: false, y_fill: false,
                                                   x_align: St.Align.START, y_align: St.Align.MIDDLE });
         }
         this.bottomPane.add(this.searchView.searchBox, { expand: true, x_fill: true, y_fill: false,
@@ -1346,7 +1376,7 @@ class CinnamenuApplet extends TextIconApplet {
         this.categoriesView.populate();//just for init sizing
         this.middlePane = new St.BoxLayout({ style_class: '' });
         if (sidebarPlacement === PlacementLEFT) {
-            this.middlePane.add(this.sidebar.sidebarScrollBox, { expand: false, x_fill: false, y_fill: false,
+            this.middlePane.add(this.sidebar.sidebarOuterBox, { expand: false, x_fill: false, y_fill: false,
                                                     x_align: St.Align.START, y_align: St.Align.MIDDLE });
         }
         this.middlePane.add(this.categoriesView.groupCategoriesWorkspacesScrollBox, { x_fill: false, y_fill: false,
@@ -1354,7 +1384,7 @@ class CinnamenuApplet extends TextIconApplet {
         this.middlePane.add(this.appsView.applicationsScrollBox, { x_fill: false, y_fill: false,
                                             x_align: St.Align.START, y_align: St.Align.START, expand: false });
         if (sidebarPlacement === PlacementRIGHT) {
-            this.middlePane.add(this.sidebar.sidebarScrollBox, { expand: false, x_fill: false, y_fill: false,
+            this.middlePane.add(this.sidebar.sidebarOuterBox, { expand: false, x_fill: false, y_fill: false,
                                                     x_align: St.Align.START, y_align: St.Align.MIDDLE });
         }
         //=============mainBox================
@@ -1364,7 +1394,6 @@ class CinnamenuApplet extends TextIconApplet {
                                         vertical: true, reactive: true,
                                         show_on_set_parent: false });
         this.mainBox.add_style_class_name('menu-applications-box'); //this is to support old themes
-        // mainbox packs vertically
         if (sidebarPlacement === PlacementTOP) {
             this.mainBox.add(this.bottomPane);
         }
@@ -1377,28 +1406,32 @@ class CinnamenuApplet extends TextIconApplet {
         //is then positioned at mouse coords and above siblings.
         this.mainBox.add(this.contextMenu.contextMenuBox, {expand: false, x_fill: false,
                                                     x_align: St.Align.START, y_align: St.Align.MIDDLE,});
-        // add all to section
+        //=============menu================
         const section = new PopupMenuSection();
         section.actor.add_actor(this.mainBox);
         this.menu.addMenuItem(section);
+
         //if a blank part of the menu was clicked on, close context menu
         this.menu.actor.set_reactive(true);
-        this.displaySignals.connect(this.menu.actor, 'button-release-event',
-                                            (...args) => {
-                                                    if (!this.stopMouseEvent) {
-                                                        this.clearEnteredActors();
-                                                    } else {
-                                                        this.stopMouseEvent = false;
-                                                    } });
+        this.displaySignals.connect(this.menu.actor, 'button-release-event',() => this.clearEnteredActors());
+
         //monitor mouse motion to prevent category mis-selection
         this.categoriesView.categoriesBox.set_reactive(true);
         this.displaySignals.connect(this.categoriesView.categoriesBox, "motion-event",
                                                         (...args) => this.onMouseMotion(...args));
-        //Limit excessive left padding on categoriesBox
-        const Lpadding = this.categoriesView.categoriesBox.get_theme_node().get_length('padding-left');
-        if (Lpadding > 20) {
-            this.categoriesView.categoriesBox.style = 'padding-left: 20px;';
+
+        //When sidebar is not on the left, limit mainBox left padding + categoriesBox left padding to
+        //20px by subtracting the difference from categoriesBox left padding.
+        if (sidebarPlacement !== PlacementLEFT) {
+            const catLpadding = this.categoriesView.categoriesBox.get_theme_node().get_padding(3);
+            const mainBoxLpadding = this.mainBox.get_theme_node().get_padding(3);
+            const excessPadding = Math.max(catLpadding + mainBoxLpadding - 20, 0);//=total padding > 20px
+            if (excessPadding > 0) {
+                this.categoriesView.categoriesBox.style = `padding-left: ${
+                                            Math.max(catLpadding - excessPadding, 0)}px; `;
+            }
         }
+
         this.sidebar.populate();
 
         if (this.settings.applicationsViewMode === ApplicationsViewModeLIST) {
@@ -1569,7 +1602,6 @@ class Categories {
 class CategoriesView {
     constructor(appThis) {
         this.appThis = appThis;
-
         this.categoriesBox = new St.BoxLayout({ style_class: 'menu-categories-box', vertical: true });
         this.groupCategoriesWorkspacesWrapper = new St.BoxLayout({/*style: 'max-width: 185px;',*/
                                                                                     vertical: true });
@@ -1619,6 +1651,7 @@ class AppsView {
                                          text: '', show_on_set_parent: false });
         this.applicationsBoxWrapper = new St.BoxLayout({  style_class: 'menu-applications-inner-box',
                                                     /*style: 'min-width: 275px',*/ vertical: true, reactive: true });
+        this.applicationsBoxWrapper.add_style_class_name('menu-applications-box'); //this is to support old themes
 
         this.applicationsBoxWrapper.add(this.answerText, {  x_fill: false, y_fill: false,
                                                             x_align: St.Align.MIDDLE, y_align: St.Align.START });
@@ -1637,27 +1670,7 @@ class AppsView {
         this.applicationsScrollBox.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.AUTOMATIC);
         this.applicationsScrollBox.set_auto_scrolling(this.appThis.settings.enableAutoScroll);
         this.applicationsScrollBox.set_mouse_scrolling(true);
-
-        //this.applicationsScrollBox.set_reactive(true);
-        //this.appThis.displaySignals.connect(this.applicationsScrollBox, 'button-release-event',
-        //                                                (...args) => {this.onButtonRelease(...args);});
     }
-
-    /*onButtonRelease(actor, event) {
-        const button = event.get_button();
-        if (button === 3) {//right click
-            if (this.appThis.contextMenu.isOpen) {
-                this.appThis.clearEnteredActors();
-                return Clutter.EVENT_STOP;
-            } else if (this.appThis.currentCategory.startsWith('/')) {//if directory view
-                this.appThis.contextMenu.open(this.appThis.currentCategory, event);
-                //for some reason return Clutter.EVENT_STOP; is not stopping the event?
-                this.appThis.stopMouseEvent = true;
-                return Clutter.EVENT_STOP;
-            }
-        }
-        return Clutter.EVENT_PROPAGATE;
-    }*/
 
     getActiveButtons() {
         const buttons = [];
@@ -2065,14 +2078,11 @@ class SearchView {
         this.searchInactiveIcon = new St.Icon({ style_class: 'menu-search-entry-icon', icon_name: 'edit-find' });
         this.searchActiveIcon = new St.Icon({ style_class: 'menu-search-entry-icon', icon_name: 'edit-clear' });
         this.searchEntry = new St.Entry({ name: 'menu-search-entry', //hint_text: HINT_TEXT,
-                                          track_hover: true, can_focus: true,
-                                            style: 'min-width: 100px;'});
+                                            track_hover: true, can_focus: true/*, style: 'min-width: 100px;'*/});
         this.searchEntryText = this.searchEntry.clutter_text;
-
         this.searchEntry.set_primary_icon(this.searchInactiveIcon);
-        this.searchBox = new St.BoxLayout({ style_class: 'menu-search-box',
-                                            style: /*'padding-right: 7px;*/ 'min-width: 160px;' });
-        this.searchBox.add(this.searchEntry, {  expand: true, x_align: St.Align.START, y_align: St.Align.MIDDLE });
+        this.searchBox = new St.BoxLayout({ style_class: 'menu-search-box' });
+        this.searchBox.add(this.searchEntry, { expand: true, x_align: St.Align.START, y_align: St.Align.MIDDLE });
     }
 
     showSecondaryIcon(show) {
@@ -2095,11 +2105,14 @@ class SearchView {
 class Sidebar {
     constructor (appThis, sidebarPlacement) {
         this.appThis = appThis;
-        const style_class = this.appThis.settings.useBoxStyle ? 'menu-favorites-box' : '';
-        this.innerBox = new St.BoxLayout({style_class: style_class,
+        this.innerBox = new St.BoxLayout({
                         vertical: (sidebarPlacement === PlacementLEFT || sidebarPlacement === PlacementRIGHT) });
+        //fix problem with Cinnamox themes.
+        let themePath = Main.getThemeStylesheet();
+        if (!themePath) themePath = '';
+        const scroll_style = themePath.includes('Cinnamox') ? 'vfade' : 'vfade menu-favorites-scrollbox';
         this.sidebarScrollBox = new St.ScrollView({x_fill: true, y_fill: false, x_align: St.Align.MIDDLE,
-                            y_align: St.Align.MIDDLE, style_class: 'vfade menu-favorites-scrollbox' });
+                                                        y_align: St.Align.MIDDLE, style_class: scroll_style });
         const vscroll_bar = this.sidebarScrollBox.get_vscroll_bar();
         this.appThis.displaySignals.connect(vscroll_bar, 'scroll-start',
                                                                 () => { this.appThis.menu.passEvents = true; });
@@ -2109,6 +2122,10 @@ class Sidebar {
         this.sidebarScrollBox.set_policy(Gtk.PolicyType.NEVER, Gtk.PolicyType.NEVER);
         this.sidebarScrollBox.set_auto_scrolling(this.appThis.settings.enableAutoScroll);
         this.sidebarScrollBox.set_mouse_scrolling(true);
+        const style_class = this.appThis.settings.useBoxStyle ? 'menu-favorites-box' : '';
+        this.sidebarOuterBox = new St.BoxLayout({style_class: style_class});
+        this.sidebarOuterBox.add(this.sidebarScrollBox, { expand: false, x_fill: false, y_fill: false,
+                                                x_align: St.Align.MIDDLE, y_align: St.Align.MIDDLE });
     }
 
     populate (favs) {
@@ -2185,7 +2202,7 @@ class Sidebar {
         }
         line.style = `width: ${width}px; height: ${height}px; background-color: ${
                     this.appThis.getThemeForegroundColor()}; margin: 1px; border: 0px; border-radius: 10px; `;
-        line.set_opacity(25);
+        line.set_opacity(35);
     }
 
     getButtons() {

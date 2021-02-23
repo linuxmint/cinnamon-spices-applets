@@ -92,10 +92,10 @@ class CurrentWeather {
         this.apiUniqueCaptionLabel = new Label({ text: '', style: textColorStyle });
         let rb_captions = new BoxLayout({ vertical: true, style_class: STYLE_DATABOX_CAPTIONS });
         let rb_values = new BoxLayout({ vertical: true, style_class: STYLE_DATABOX_VALUES });
-        rb_captions.add_actor(new Label({ text: utils_1._('Temperature') + ":", style: textColorStyle }));
-        rb_captions.add_actor(new Label({ text: utils_1._('Humidity') + ":", style: textColorStyle }));
-        rb_captions.add_actor(new Label({ text: utils_1._('Pressure') + ":", style: textColorStyle }));
-        rb_captions.add_actor(new Label({ text: utils_1._('Wind') + ":", style: textColorStyle }));
+        rb_captions.add_actor(new Label({ text: utils_1._('Temperature') + utils_1.LocalizedColon(config.currentLocale), style: textColorStyle }));
+        rb_captions.add_actor(new Label({ text: utils_1._('Humidity') + utils_1.LocalizedColon(config.currentLocale), style: textColorStyle }));
+        rb_captions.add_actor(new Label({ text: utils_1._('Pressure') + utils_1.LocalizedColon(config.currentLocale), style: textColorStyle }));
+        rb_captions.add_actor(new Label({ text: utils_1._('Wind') + utils_1.LocalizedColon(config.currentLocale), style: textColorStyle }));
         rb_captions.add_actor(this.apiUniqueCaptionLabel);
         rb_values.add_actor(this.temperatureLabel);
         rb_values.add_actor(this.humidityLabel);
@@ -215,11 +215,11 @@ class CurrentWeather {
         this.apiUniqueLabel.text = "";
         this.apiUniqueCaptionLabel.text = "";
         if (!!extra_field) {
-            this.apiUniqueCaptionLabel.text = utils_1._(extra_field.name) + ":";
+            this.apiUniqueCaptionLabel.text = utils_1._(extra_field.name) + utils_1.LocalizedColon(this.app.config.currentLocale);
             let value;
             switch (extra_field.type) {
                 case "percent":
-                    value = extra_field.value.toString() + "%";
+                    value = utils_1.PrecentToLocale(extra_field.value, this.app.config.currentLocale);
                     break;
                 case "temperature":
                     value = utils_1.TempToUserConfig(extra_field.value, this.app.config.TemperatureUnit, this.app.config._tempRussianStyle) + " " + utils_1.UnitToUnicode(this.app.config.TemperatureUnit);
@@ -253,7 +253,7 @@ class CurrentWeather {
     }
     SetHumidity(humidity) {
         if (humidity != null) {
-            this.humidityLabel.text = Math.round(humidity) + "%";
+            this.humidityLabel.text = utils_1.PrecentToLocale(humidity, this.app.config.currentLocale);
         }
     }
     async SetWind(windSpeed, windDegree) {

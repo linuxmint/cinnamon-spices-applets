@@ -1,76 +1,74 @@
 {
 	"layout": {
-        "type":"layout",
-        "pages":[
+		"type": "layout",
+		"pages": [
 			"providers",
 			"locations-page",
-            "presentation-section",
+			"presentation-section",
 			"units-page",
 			"info-section"
-        ],
-        "providers":{
-            "type":"page",
-            "title":"Weather",
-            "sections":[
+		],
+		"providers": {
+			"type": "page",
+			"title": "Weather",
+			"sections": [
 				"provider-options",
 				"weather-conditions"
-            ]
+			]
 		},
-		"locations-page":{
-            "type":"page",
-            "title":"Location",
-            "sections": [
+		"locations-page": {
+			"type": "page",
+			"title": "Location",
+			"sections": [
 				"location-section",
 				"location-store"
-            ]
-        },
-        "presentation-section":{
-            "type":"page",
-            "title":"Presentation",
-            "sections":[
+			]
+		},
+		"presentation-section": {
+			"type": "page",
+			"title": "Presentation",
+			"sections": [
 				"panel-options",
 				"presentation"
-            ]
-        },
-        "units-page":{
-            "type":"page",
-            "title":"Units, Icons and Keys",
-            "sections":[
+			]
+		},
+		"units-page": {
+			"type": "page",
+			"title": "Other options",
+			"sections": [
 				"units-section",
 				"icons",
 				"keybindings"
-            ]
+			]
 		},
-		"info-section":{
-            "type":"page",
-            "title":"Help",
-            "sections":[
-				"provider-info",
-				"location-info",
+		"info-section": {
+			"type": "page",
+			"title": "Help",
+			"sections": [
 				"more-info",
 				"submit-issue"
 			]
 		},
-		"location-section" : {
-			"type":"section",
-			"title":"Location settings",
-			"keys":[
+		"location-section": {
+			"type": "section",
+			"title": "Location settings",
+			"keys": [
 				"manualLocation",
 				"location"
 			]
 		},
-		"location-store" : {
-			"type":"section",
-			"title":"Saved Locations",
-			"keys":[
+		"location-store": {
+			"type": "section",
+			"title": "Saved Locations",
+			"keys": [
 				"locationList",
 				"saveLocation"
 			]
 		},
-		"provider-options" : {
-			"type":"section",
-			"title":"Weather Provider Options",
-			"keys":[
+		"provider-options": {
+			"type": "section",
+			"title": "Weather Provider Options",
+			"keys": [
 				"dataService",
 				"apiKey",
 				"refreshInterval",
@@ -78,27 +76,27 @@
 				"forecastHours"
 			]
 		},
-		"weather-conditions" : {
-			"type":"section",
-			"title":"Weather conditions",
-			"keys":[
+		"weather-conditions": {
+			"type": "section",
+			"title": "Weather conditions",
+			"keys": [
 				"translateCondition",
 				"shortConditions"
 			]
 		},
-		"panel-options" : {
-			"type":"section",
-			"title":"Panel (Taskbar)",
-			"keys":[
+		"panel-options": {
+			"type": "section",
+			"title": "Panel (Taskbar)",
+			"keys": [
 				"showTextInPanel",
 				"showCommentInPanel",
 				"tempTextOverride"
 			]
 		},
-		"presentation" : {
-			"type":"section",
-			"title":"Popup menu",
-			"keys":[
+		"presentation": {
+			"type": "section",
+			"title": "Popup menu",
+			"keys": [
 				"verticalOrientation",
 				"forecastColumns",
 				"forecastRows",
@@ -111,58 +109,44 @@
 				"locationLabelOverride"
 			]
 		},
-		"units-section" : {
-			"type":"section",
-			"title":"Units",
-			"keys":[
+		"units-section": {
+			"type": "section",
+			"title": "Units",
+			"keys": [
 				"temperatureUnit",
 				"windSpeedUnit",
 				"pressureUnit",
 				"distanceUnit"
 			]
 		},
-		"icons" : {
-			"type":"section",
-			"title":"Icons",
-			"keys":[
+		"icons": {
+			"type": "section",
+			"title": "Icons",
+			"keys": [
 				"useSymbolicIcons",
 				"useCustomMenuIcons",
 				"useCustomAppletIcons"
 			]
 		},
-		"keybindings" : {
-			"type":"section",
-			"title":"Keybindings",
-			"keys":[
+		"keybindings": {
+			"type": "section",
+			"title": "Keybindings",
+			"keys": [
 				"keybinding"
 			]
 		},
-		"provider-info" : {
-			"type":"section",
-			"title":"How to choose a weather provider",
-			"keys":[
-				"provider-explanation"
-			]
-		},
-		"location-info": {
-			"type":"section",
-			"title":"Allowed location formats",
-			"keys":[
-				"loc-info"
-			]
-		},
 		"more-info": {
-			"type":"section",
-			"title": "View additional information",
-			"keys":[
+			"type": "section",
+			"title": "More about the Weather applet",
+			"keys": [
 				"more-info-label",
 				"getLocation"
 			]
 		},
-		"submit-issue" : {
-			"type":"section",
-			"title":"Report an issue",
-			"keys":[
+		"submit-issue": {
+			"type": "section",
+			"title": "Report an issue",
+			"keys": [
 				"issue-reporting-explanation",
 				"submitIssue",
 				"maintainer"
@@ -178,17 +162,19 @@
 		"type": "radiogroup",
 		"default": "OpenWeatherMap",
 		"description": "Data service",
+		"tooltip": "You can choose between several different weather forecast providers. Some providers require a API key to work, some have regional limits, differ in forecast length, and they all need a functional internet connection to work. The options are described in detail on the Cinnamon Spices Website which you can access with the button on the Help tab.",
 		"options": {
 			"OpenWeatherMap": "OpenWeatherMap",
-			"DarkSky (key needed)": "DarkSky",
-			"Visual Crossing (key needed)": "Visual Crossing",
 			"MET Norway": "MetNorway",
-			"Weatherbit (key needed)": "Weatherbit",
 			"Yahoo": "Yahoo",
-			"ClimacellV4 (key needed)": "ClimacellV4",
-			"ClimacellV3 (key needed)": "Climacell",
+			"DMI Denmark": "DanishMI",
 			"Met Office UK (UK only)": "Met Office UK",
-			"US National Weather (US only)": "US Weather"
+			"US National Weather (US only)": "US Weather",
+			"Visual Crossing (key needed)": "Visual Crossing",
+			"Weatherbit (key needed)": "Weatherbit",
+			"ClimacellV4 (key needed)": "ClimacellV4",
+			"DarkSky (key needed)": "DarkSky",
+			"ClimacellV3 (key needed)": "Climacell"
 		}
 	},
 	"apiKey": {
@@ -208,7 +194,7 @@
 		"default": "London,UK",
 		"dependency": "manualLocation",
 		"description": "Location",
-		"tooltip": "Acceptable inputs are Latitude,Longitude. e.g.: 68.1932,17.1426 or an address.\nWaits for 3 seconds after you stop typing before refreshes the weather."
+		"tooltip": "You can enter coordinates 'Latitude,Longitude' (e.g. 51.5085,-0.1257) or use 'City,Country-code' (e.g. London,UK) or try to enter {House number} {Street} {City/Town} {Postcode} {Country}. The search algorithm is very flexible with the format. After 3 seconds without typing the address you entered is replaced automatically for validating your choice."
 	},
 	"saveLocation": {
 		"type": "button",
@@ -257,8 +243,8 @@
 		"description": "Temperature unit",
 		"options": {
 			"Automatic": "automatic",
-			"celsius": "celsius",
-			"fahrenheit": "fahrenheit"
+			"Celsius": "celsius",
+			"Fahrenheit": "fahrenheit"
 		},
 		"tooltip": "Automatic will try to guess your preference based your current display language."
 	},
@@ -348,17 +334,48 @@
 		"description": "Maximum number of rows for forecast"
 	},
 	"locationList": {
-		"type" : "list",
-		"description" : "Your saved locations",
-		"columns" : [
-			{"id": "lat", "title": "Latitude", "type": "float", "min": -85, "max": 85},
-			{"id": "lon", "title": "Longitude", "type": "float", "min": -180, "max": 180},
-			{"id": "city", "title": "City", "type": "string"},
-			{"id": "country", "title": "Country", "type": "string"},
-			{"id": "timeZone", "title": "Timezone", "type": "string", "default": ""},
-			{"id": "entryText", "title": "Search entry", "type": "string", "default": ""}
+		"type": "list",
+		"description": "Your saved locations",
+		"tooltip": "You have to make sure the Search entry field is unique and your Timezone is in the IANA time zone format (e.g. 'Europe/London')",
+		"columns": [
+			{
+				"id": "lat",
+				"title": "Latitude",
+				"type": "float",
+				"min": -85,
+				"max": 85
+			},
+			{
+				"id": "lon",
+				"title": "Longitude",
+				"type": "float",
+				"min": -180,
+				"max": 180
+			},
+			{
+				"id": "city",
+				"title": "City",
+				"type": "string"
+			},
+			{
+				"id": "country",
+				"title": "Country",
+				"type": "string"
+			},
+			{
+				"id": "timeZone",
+				"title": "Timezone",
+				"type": "string",
+				"default": ""
+			},
+			{
+				"id": "entryText",
+				"title": "Search entry",
+				"type": "string",
+				"default": ""
+			}
 		],
-		"default" : []
+		"default": []
 	},
 	"showSunrise": {
 		"type": "checkbox",
@@ -419,11 +436,10 @@
 		"tooltip": "Iconset is weather-icons by Erik Flowers",
 		"default": false,
 		"description": "Use custom icons in the popup menu"
-		
 	},
 	"more-info-label": {
 		"type": "label",
-		"description": "For more information go to the Spices Website by clicking the button below. You can also comment and ask a questions to the community at this page by logging in with your Github account."
+		"description": "For detailed information about the applet please go to the Spices Website to find info about known issues, troubleshooting, changelog and more by clicking the button below. Here you can ask questions etc in the comment section by logging in with your Github account."
 	},
 	"submitIssue": {
 		"type": "button",
@@ -438,11 +454,7 @@
 	},
 	"issue-reporting-explanation": {
 		"type": "label",
-		"description": "If you find an issue with this applet please make a report by clicking on the button below and login in with your Github account. Don't forget to write weather@mockturtl in the top Title field to make it easier for everyone to know that the issue is about the weather applet (the form is for all Cinnamon applets)."
-	},
-	"provider-explanation": {
-		"type": "label",
-		"description": "You can use several different weather forecast providers that you choose under the first Weather Tab in this Configuration panel. Some providers require a API key to work, some have regional limits, differ in forecast length, and they all need a functional internet connection to work. The options are described in detail on the Cinnamon Spices Website, what you can access with the button further down."
+		"description": "If you find an issue with this applet please make a report by clicking on the button below and login in with your Github account. Before you start writing please make sure that the issue is not already submitted in the issues section. Don't forget to write weather@mockturtl in the top Title field to make it easier for everyone to know that the issue is about the weather applet (the form is for all Cinnamon applets)."
 	},
 	"loc-info": {
 		"type": "label",

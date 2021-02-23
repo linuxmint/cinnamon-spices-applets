@@ -227,7 +227,7 @@ class Weatherbit {
                 userError: false,
                 detail: "bad key",
                 service: "weatherbit",
-                message: utils_1._("API key is doesn't provide access to Hourly Weather, skipping")
+                message: utils_1._("API key doesn't provide access to Hourly Weather, skipping")
             });
         }
         return true;

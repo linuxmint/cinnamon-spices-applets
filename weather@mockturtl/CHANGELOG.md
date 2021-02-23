@@ -1,5 +1,31 @@
 # Changelog
 
+## 3.0.3
+
+* Fixes [#3508](https://github.com/linuxmint/cinnamon-spices-applets/issues/3508), just a minor issue with naming
+
+* Fixes [#3539](https://github.com/linuxmint/cinnamon-spices-applets/issues/3539) - Revert capitalization of every word in the applet label.
+
+* Fix some text in the settings-schema, they didn't make much sense or were missing some explanations
+
+* Change Temperature units to be capitalized
+
+* Fixes [#3556](https://github.com/linuxmint/cinnamon-spices-applets/issues/3556)
+
+* Fixes [#3554](https://github.com/linuxmint/cinnamon-spices-applets/issues/3554)
+
+* Fixes [#3567](https://github.com/linuxmint/cinnamon-spices-applets/issues/3567)
+
+## 3.0.2
+
+* Fix icons for Met Norway, some are missing
+
+* Fixes [#3507](https://github.com/linuxmint/cinnamon-spices-applets/issues/3507) - Reorganize settings, Add help text where it belongs, to the tooltips
+
+* Add Danish Meteorologist Institute as a Weather Provider
+
+* Fixes [#3538](https://github.com/linuxmint/cinnamon-spices-applets/issues/3538) - Make sure French days are capitalized and Use Locale formatting for percent (humidity)
+
 ## 3.0.1
 
 * Fix issue where Symbolic icons setting was not reflected in the app when changed
@@ -8,7 +34,7 @@
 
 * Fix wind icon color when non-symbolic icons used in the applet
 
-* Fix [#3488](https://github.com/linuxmint/cinnamon-spices-applets/issues/3488), add Climacell V4 as a new provider because Climacell v3 is deprecated and dosen't accept new signups.
+* Fix [#3488](https://github.com/linuxmint/cinnamon-spices-applets/issues/3488), add Climacell V4 as a new provider because Climacell v3 is deprecated and doesn't accept new signups.
 
 * Make network and DNS related errors soft errors again
 
@@ -35,7 +61,7 @@
 * Add option to short display Hourly weather times
 * Minor refactor
 * Fix typos
-* OpenWeatherMap now shows Feels Like temerature instead of Cloudiness
+* OpenWeatherMap now shows Feels Like temperature instead of Cloudiness
 
 ## 2.6.9
 
@@ -140,7 +166,7 @@ Fixes:
 ## 2.4.6
 
 * Fixes [#2907](https://github.com/linuxmint/cinnamon-spices-applets/issues/2907)
-* Update Hungraian translation
+* Update Hungarian translation
 
 ## 2.4.5
 
@@ -218,7 +244,7 @@ Fixes:
 
 ## 2.3.0
 
-* Fixed Issues with Debian, now Polyfilling Promises when needed
+* Fixed Issues with Debian, now polyfilled Promises when needed
 * Reworked on how to import from other files, now in line with other applets
 * Utility functions moved to other file.
 * Typescript declarations reorganized now they make a little bit more sense *(generated declarations from gir files still don't work that well, although mostly working)*

@@ -59,7 +59,7 @@ export function CapitalizeFirstLetter(description: string): string {
     return description.charAt(0).toUpperCase() + description.slice(1);
 };
 
-export function CapitalizeEveryLetter(description: string): string {
+export function CapitalizeEveryWord(description: string): string {
     if ((description == undefined || description == null)) {
         return "";
     }
@@ -77,17 +77,19 @@ export function CapitalizeEveryLetter(description: string): string {
 // ---------------------------------------------------------------------------------
 // TimeString generators
 
-export function GetDayName(date: Date, locale: string, showDate: boolean = false, tz?: string): string {
-    // No timezone, Date passed in corrected with offset
-    if (locale == "c" || locale == null) locale = undefined;
+function NormalizeTimezone(tz: string) {
+	if (!tz || tz == "" || tz == "UTC")
+        tz = undefined;
+	return tz;
+}
 
+export function GetDayName(date: Date, locale: string, showDate: boolean = false, tz?: string): string {
     let params: Intl.DateTimeFormatOptions = {
         weekday: "long",
         timeZone: tz
     }
 
-    if (!tz || tz == "")
-        params.timeZone = undefined;
+    params.timeZone = NormalizeTimezone(tz);
 
     if (showDate) {
         params.day = 'numeric';
@@ -103,6 +105,10 @@ export function GetDayName(date: Date, locale: string, showDate: boolean = false
 
     let dateString = date.toLocaleString(locale, params);
 
+	// Make sure French days are caapitalised (they are not by default)
+	if (locale.startsWith("fr")) 
+		dateString = CapitalizeFirstLetter(dateString);
+
     if (date.getDate() == now.getDate()) dateString = _("Today");
     if (date.getDate() == tomorrow.getDate()) dateString = _("Tomorrow");
 
@@ -110,17 +116,13 @@ export function GetDayName(date: Date, locale: string, showDate: boolean = false
 }
 
 export function GetHoursMinutes(date: Date, locale: string, hours24Format: boolean, tz?: string, onlyHours: boolean = false): string {
-    if (locale == "c" || locale == null) locale = undefined;
-    // No timezone, Date passed in corrected with offset
-
     let params: Intl.DateTimeFormatOptions = {
         hour: "numeric",
         hour12: !hours24Format,
         timeZone: tz
     }
 
-    if (!tz || tz == "")
-        params.timeZone = undefined;
+	params.timeZone = NormalizeTimezone(tz);
 
     if (!onlyHours)
         params.minute = "2-digit";
@@ -129,7 +131,6 @@ export function GetHoursMinutes(date: Date, locale: string, hours24Format: boole
 }
 
 export function AwareDateString(date: Date, locale: string, hours24Format: boolean, tz?: string): string {
-    if (locale == "c" || locale == null) locale = undefined; // Ignore unset locales
     let now = new Date();
     let params: Intl.DateTimeFormatOptions = {
         hour: "numeric",
@@ -147,8 +148,7 @@ export function AwareDateString(date: Date, locale: string, hours24Format: boole
         params.year = "numeric";
     }
 
-    if (!tz || tz == "")
-        params.timeZone = tz;
+    params.timeZone = NormalizeTimezone(tz);
 
     return date.toLocaleString(locale, params);
 }
@@ -172,6 +172,20 @@ export function ProcessCondition(condition: string, shouldTranslate: boolean) {
     if (shouldTranslate) 
         condition = _(condition);
     return condition;
+}
+
+export function LocalizedColon(locale: string): string {
+	if (locale == null)
+		return ":"
+
+	if (locale.startsWith("fr"))
+		return " :"
+
+	return ":"
+}
+
+export function PrecentToLocale(humidity: number, locale: string): string {
+	return (humidity / 100).toLocaleString(locale, {style: "percent"});
 }
 
 // Conversion Factors
@@ -263,7 +277,7 @@ export function TempToUserConfig(kelvin: number, units: WeatherUnits, russianSty
 export function PressToUserUnits(hpa: number, units: WeatherPressureUnits): number {
     switch (units) {
         case "hPa":
-            return hpa;
+            return Math.round(hpa * 100) / 100;
         case "at":
             return Math.round((hpa * 0.001019716) * 1000) / 1000;
         case "atm":
@@ -395,6 +409,17 @@ function HasIcon(icon: string, icon_type: imports.gi.St.IconType): boolean {
 // --------------------------------------------------------
 // ETC
 
+export function mode<T>(arr: T[]): T {
+    return arr.reduce(function(current, item) {
+        var val = current.numMapping[item] = (current.numMapping[item] || 0) + 1;
+        if (val > current.greatestFreq) {
+            current.greatestFreq = val;
+            current.mode = item;
+        }
+        return current;
+    }, {mode: null, greatestFreq: -Infinity, numMapping: {} as any}).mode;
+};
+
 // Passing appropriate resolver function for the API, and the code
 export function WeatherIconSafely(code: BuiltinIcons[], icon_type: imports.gi.St.IconType): BuiltinIcons {
     for (let i = 0; i < code.length; i++) {
@@ -426,6 +451,8 @@ export function ConstructJsLocale(locale: string): string {
 		if (i != 0) jsLocale += "-";
 		jsLocale += tmp[i].toLowerCase();
 	}
+
+	if (locale == "c" || locale == null) jsLocale = undefined;
 	return jsLocale;
 }
 
