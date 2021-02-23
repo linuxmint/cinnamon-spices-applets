@@ -35,12 +35,16 @@ class CinnamonRadioApplet extends TextIconApplet {
     Gettext.bindtextdomain(UUID, get_home_dir() + "/.local/share/locale");
 
     this.settings = new AppletSettings(this, __meta.uuid, instance_id);
+  }
+
+  async init(orientation) {
     this._initSettings()
     this._trimChannelList()
+    await this._initMpvPlayer()
 
-    this._initMpvPlayer()
     const initialChannelName = this._getChannelName({ channelUrl: this.mpvPlayer.getRunningRadioUrl() })
     this._initGui(orientation, initialChannelName)
+
   }
 
   _initSettings() {
@@ -55,18 +59,21 @@ class CinnamonRadioApplet extends TextIconApplet {
     this.settings.bind("music-download-dir-select", "music_dir")
   }
 
-  _initMpvPlayer() {
+  async _initMpvPlayer() {
     const configPath = `${get_home_dir()}/.cinnamon/configs/${__meta.uuid}`;
     const mprisPluginPath = configPath + '/.mpris.so'
 
     this.mpvPlayer = new MpvPlayerHandler({
       mprisPluginPath: mprisPluginPath,
-      // TODO: hier auch ...args??
-      _handleRadioStopped: (...args) => this._handleRadioStopped(args),
+      _handleRadioStopped: (...args) => this._handleRadioStopped(...args),
       _getInitialVolume: () => this._getInitialVolume(),
-      _handleRadioChannelChangedPaused: (...args) => this._handleRadioChannelChangedPaused(...args)
+      _handleRadioChannelChangedPaused: (...args) => this._handleRadioChannelChangedPaused(...args),
+      _handleVolumeChanged: (...args) => this.set_applet_tooltip(false, ...args)
 
     })
+
+    await this.mpvPlayer.init()
+
   }
 
   _handleRadioChannelChangedPaused(channelUrl) {
@@ -87,7 +94,7 @@ class CinnamonRadioApplet extends TextIconApplet {
   }
 
   _setIconColor() {
-    const color = (this.mpvPlayer.getPlayPauseStatus() === "Playing") ? this.color_on : this._getThemeIconColor()
+    const color = (this.mpvPlayer.getPlaybackStatus() === "Playing") ? this.color_on : this._getThemeIconColor()
     this.actor.style = `color: ${color}`
   }
 
@@ -112,7 +119,7 @@ class CinnamonRadioApplet extends TextIconApplet {
   }
 
   set_applet_label(nameCurrentMenuItem) {
-    const text = (this.mpvPlayer.getPlayPauseStatus() === "Playing" && this.show_channel_on_panel)
+    const text = (this.mpvPlayer.getPlaybackStatus() === "Playing" && this.show_channel_on_panel)
       ? " " + nameCurrentMenuItem : ""
     super.set_applet_label(text)
   }
@@ -151,7 +158,9 @@ class CinnamonRadioApplet extends TextIconApplet {
   }
 
   _getInitialVolume() {
-    return this.keep_volume_between_sessions ? this.last_volume : this.custom_initial_volume
+    let initialVolume = this.keep_volume_between_sessions ? this.last_volume : this.custom_initial_volume
+    if (!initialVolume) global.logError(`couldn't get valid initalVolume from settings. Have a look at  ~/.cinnamon/configs.json`)
+    return initialVolume
   }
 
   async _on_radio_channel_clicked(e, channel) {
@@ -276,12 +285,12 @@ class CinnamonRadioApplet extends TextIconApplet {
     if (menuItem === this.stopitem) {
       menuItem.setShowDot(true);
     } else {
-      menuItem.changePlayPauseOffStatus(this.mpvPlayer.getPlayPauseStatus())
+      menuItem.changePlayPauseOffStatus(this.mpvPlayer.getPlaybackStatus())
     }
   }
 
-  set_applet_tooltip(nameCurrentMenuItem) {
-    const text = (nameCurrentMenuItem === "Stop") ? "Radio++" : nameCurrentMenuItem
+  set_applet_tooltip(stop, volume) {
+    const text = (stop) ? "Radio++" : _("Volume: ") + volume.toString() + "%"
     super.set_applet_tooltip(text)
   }
 
@@ -290,7 +299,9 @@ class CinnamonRadioApplet extends TextIconApplet {
     const nameCurrentMenuItem = activatedMenuItem.label.text
 
     this._setIconToMenuItem({ menuItem: activatedMenuItem })
-    this.set_applet_tooltip(nameCurrentMenuItem)
+
+    if (nameCurrentMenuItem === "Stop") this.set_applet_tooltip(true)
+
     this.set_applet_label(nameCurrentMenuItem)
     this._setIconColor();
 
@@ -326,5 +337,7 @@ class CinnamonRadioApplet extends TextIconApplet {
 };
 
 function main(metadata, orientation, panel_height, instance_id) {
-  return new CinnamonRadioApplet(orientation, panel_height, instance_id);
+  const radioApplet = new CinnamonRadioApplet(orientation, panel_height, instance_id);
+  radioApplet.init(orientation)
+  return radioApplet;
 }

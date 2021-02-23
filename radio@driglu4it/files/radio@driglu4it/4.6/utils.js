@@ -1,10 +1,11 @@
 const { spawnCommandLine, spawnCommandLineAsyncIO } = imports.misc.util;
+const { getDBusProxyWithOwnerAsync, getDBusPropertiesAsync, getDBusAsync } = imports.misc.interfaces;
+
 const { file_new_for_path } = imports.gi.Gio;
 const { find_program_in_path } = imports.gi.GLib;
 
 var timeLastNotification = 0
 var lastNotificationMsg = ""
-
 
 const spawnCommandLinePromise = function (command) {
     return new Promise((resolve, reject) => {
@@ -109,4 +110,29 @@ const downloadFromYoutube = function (dir, searchTerm) {
         filePath ? resolve(filePath) : reject("couldn't get filePath")
     })
 
+}
+
+// TODO error handling
+const getDBusProxyWithOwnerPromise = function (name, path) {
+    return new Promise((resolve, reject) => {
+        getDBusProxyWithOwnerAsync(...Object.values(arguments), (p, e) => {
+            resolve(p)
+        })
+    })
+}
+
+const getDBusPropertiesPromise = function (name, path) {
+    return new Promise((resolve, reject) => {
+        getDBusPropertiesAsync(...Object.values(arguments), (p, e) => {
+            resolve(p)
+        })
+    })
+}
+
+const getDBusPromise = function () {
+    return new Promise((resolve, reject) => {
+        getDBusAsync((p, e) => {
+            resolve(p)
+        })
+    })
 }
