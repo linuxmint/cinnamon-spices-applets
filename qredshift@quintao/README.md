@@ -32,6 +32,8 @@ Original Repository: [https://github.com/raphaelquintao/QRedshift](https://githu
     - If you want to enable it again, run `systemctl unmask --user redshift.service`
 
 ## Changelog
+* 1.5.4
+    - Fixed: "This applet contains function calls that could potentially cause Cinnamon to crash or freeze."
 * 1.5.3
     - Fixed some issues with Debian.
         - Automatically disable redshift default service.
@@ -66,11 +68,16 @@ Original Repository: [https://github.com/raphaelquintao/QRedshift](https://githu
     
 
 ## Screenshots
+<span style="display:block; text-align:center">
+
+![](https://raw.githubusercontent.com/raphaelquintao/QRedshift/master/screenshot.png)
+
 ![](https://raw.githubusercontent.com/raphaelquintao/QRedshift/master/screenshots/screenshot1.png)
 
 ![](https://raw.githubusercontent.com/raphaelquintao/QRedshift/master/screenshots/screenshot2.png)
 
 ![](https://raw.githubusercontent.com/raphaelquintao/QRedshift/master/screenshots/screenshot3.png)
 
+</span>
 
 
