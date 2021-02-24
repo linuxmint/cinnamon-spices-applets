@@ -105,10 +105,10 @@ msgstr "QRedshift"
 #. metadata.json->description
 msgid ""
 "Sets brightness, gamma levels and color temperature with Redshift. "
-"This applet conflicts with redshift-gtk, make sure you remove it. When installing this applet, it will automatically attempt to disable the default redshift service."
+"This applet conflicts with redshift-gtk, make sure you remove it."
 msgstr ""
 "Define o brilho, os níveis de gama e a temperatura da cor com Redshift. "
-"Este applet entra em conflito com o redshift-gtk, certifique-se de removê-lo. Ao instalar este applet, ele tentará desativar automaticamente o serviço padrão do redshift."
+"Este applet entra em conflito com o redshift-gtk, certifique-se de removê-lo."
 
 #. settings-schema.json->panel-options->title
 msgid "Settings"
