@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Cinnamenu\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-24 20:27+0100\n"
-"PO-Revision-Date: 2021-02-24 20:51+0100\n"
+"PO-Revision-Date: 2021-02-24 21:51+0100\n"
 "Last-Translator: Kim <kipuka@eclipso.eu>\n"
 "Language-Team: \n"
 "Language: de\n"
@@ -241,7 +241,7 @@ msgstr "Einen Ordner auswählen"
 
 #: 4.0/search.py:113
 msgid "Follow symlinks"
-msgstr "Symbolischer Verknüpfung folgen"
+msgstr "Symbolischen Verknüpfungen folgen"
 
 #: 4.0/search.py:117
 msgid "Search hidden"
