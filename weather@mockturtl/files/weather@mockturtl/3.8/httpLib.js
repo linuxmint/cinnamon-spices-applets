@@ -9,7 +9,7 @@ class HttpLib {
         this._httpSession.user_agent = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:37.0) Gecko/20100101 Firefox/37.0";
         this._httpSession.timeout = 10;
         this._httpSession.idle_timeout = 10;
-        Session.prototype.add_feature.call(this._httpSession, new ProxyResolverDefault());
+        this._httpSession.add_feature(new ProxyResolverDefault());
     }
     static get Instance() {
         if (this.instance == null)
