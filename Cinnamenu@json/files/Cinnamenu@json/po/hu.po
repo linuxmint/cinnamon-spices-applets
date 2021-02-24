@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-04 14:57+0000\n"
-"PO-Revision-Date: 2021-02-17 09:59+0100\n"
+"POT-Creation-Date: 2021-02-16 12:45+0000\n"
+"PO-Revision-Date: 2021-02-22 10:47+0100\n"
 "Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
 "Language-Team: \n"
 "Language: hu\n"
@@ -235,7 +235,7 @@ msgstr "A keresés befejeződött"
 msgid "Skipping"
 msgstr "Kihagyás"
 
-msgid " - direcotry already searched"
+msgid " - directory already searched"
 msgstr " - a mappa már része volt a keresésnek"
 
 msgid "Cinnamenu"
@@ -442,6 +442,13 @@ msgstr ""
 "Válassza ki, hogy hol jelenjen meg a munkamenet-kezelő gombok (kilépés, "
 "kijelentkezés, stb.)"
 
+msgid ""
+"\n"
+"Info/tip: Drag on the menu edge to change the menu size.\n"
+msgstr ""
+"\n"
+"Tipp: A menü szélének húzásával megváltoztathatja a menü méretét.\n"
+
 msgid "Add favorites to session buttons"
 msgstr "Kedvencek hozzáadása a munkamenet gombjaihoz"
 
@@ -474,12 +481,14 @@ msgstr "Saját mappa megjelenítése"
 msgid "Show home folder category in the menu"
 msgstr "A Saját mappa kategória megjelenítése a menüben"
 
-msgid "Always open menu on favorite apps"
-msgstr "Mindig a Kedvenc alkalmazásokat megjelenítve nyíljon meg a menü"
+msgid "Open menu on category:"
+msgstr "A menü megnyitásakor ez a kategória legyen kiválasztva:"
 
-msgid "Always open the menu with favorite apps category selected"
-msgstr ""
-"A menü megnyitásakor a Kedvenc alkalmazások kategória legyen kiválasztva"
+msgid "Always open the menu with this category selected"
+msgstr "A menü megnyitásakor a megadott kategória legyen kiválasztva"
+
+msgid "Previous category"
+msgstr "Előző kategória"
 
 msgid "Autoscroll the application list on mouse hover"
 msgstr "Automatikus görgetés az alkalmazás listában egér rámutatással"
@@ -532,6 +541,9 @@ msgstr "Munkamenet gombok ikonjainak mérete"
 
 msgid "Use session buttons box style"
 msgstr "Munkamenet gombok stílusa"
+
+#~ msgid "Always open menu on favorite apps"
+#~ msgstr "Mindig a Kedvenc alkalmazásokat megjelenítve nyíljon meg a menü"
 
 #~ msgid "Remove favorite"
 #~ msgstr "Távolítsa el a kedvencet"

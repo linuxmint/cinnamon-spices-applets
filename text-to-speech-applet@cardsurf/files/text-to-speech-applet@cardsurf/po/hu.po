@@ -1,0 +1,151 @@
+# Main translation file for text-to-speech-applet@cardsurf.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-04-20 23:44+0800\n"
+"PO-Revision-Date: 2021-02-23 09:16+0100\n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
+"Language-Team: \n"
+"X-Generator: Poedit 2.3\n"
+
+#: applet.js:405
+msgid "Error parsing command parameters"
+msgstr "Hiba történt a parancs értelmezésekor"
+
+#: applet.js:406
+msgid "Try to use less parameters to determine which one is causing the error"
+msgstr ""
+"Próbáljon kevesebb paramétert használni, így könnyebben meghatározhatja, "
+"hogy mi okozza a problémát"
+
+#. text-to-speech-applet@cardsurf->metadata.json->name
+msgid "Text to speech applet"
+msgstr "Szöveg felolvasása kisalkalmazás"
+
+#. text-to-speech-applet@cardsurf->metadata.json->description
+msgid "A text reading applet"
+msgstr "Egy szövegfelolvasó kisalkalmazás"
+
+#. text-to-speech-applet@cardsurf->settings-
+#. schema.json->configuration->description
+msgid "Configuration"
+msgstr "Beállítások"
+
+#. text-to-speech-applet@cardsurf->settings-
+#. schema.json->clipboard_type->description
+msgid "Clipboard"
+msgstr "Vágólap"
+
+#. text-to-speech-applet@cardsurf->settings-
+#. schema.json->clipboard_type->tooltip
+msgid ""
+"The clipboard that contains the text to read. \n"
+"The primary selection stores highlighted text. \n"
+"The clipboard selection stores text copied with Ctrl+C."
+msgstr ""
+
+#. text-to-speech-applet@cardsurf->settings-
+#. schema.json->clipboard_type->options
+msgid "Primary selection"
+msgstr "Elsődleges kijelölés"
+
+#. text-to-speech-applet@cardsurf->settings-
+#. schema.json->clipboard_type->options
+msgid "Clipboard selection"
+msgstr "Vágólap kijelölés"
+
+#. text-to-speech-applet@cardsurf->settings-
+#. schema.json->voice_command->description
+msgid "Voice command"
+msgstr "Hangparancs"
+
+#. text-to-speech-applet@cardsurf->settings-
+#. schema.json->voice_command->tooltip
+msgid "A command used to read the text"
+msgstr "A szövegfelolvasás indításához használt parancs"
+
+#. text-to-speech-applet@cardsurf->settings-
+#. schema.json->reading_start->description
+msgid "Reading"
+msgstr "Felolvasás"
+
+#. text-to-speech-applet@cardsurf->settings-
+#. schema.json->read_lines_and_stop->description
+msgid "Read lines and stop"
+msgstr "Sor felolvasása, majd a felolvasás befejezése"
+
+#. text-to-speech-applet@cardsurf->settings-
+#. schema.json->read_lines_and_stop->tooltip
+msgid ""
+"If checked reading is stopped after the specified number of lines. Reading "
+"is resumed from the line it was stopped."
+msgstr ""
+
+#. text-to-speech-applet@cardsurf->settings-
+#. schema.json->number_lines_to_read->description
+msgid "Read"
+msgstr "Felolvas"
+
+#. text-to-speech-applet@cardsurf->settings-
+#. schema.json->number_lines_to_read->tooltip
+msgid "The number of lines to read"
+msgstr "Felolvasandó sorok száma"
+
+#. text-to-speech-applet@cardsurf->settings-
+#. schema.json->number_lines_to_read->units
+msgid "lines and stop"
+msgstr "sor és befejezés"
+
+#. text-to-speech-applet@cardsurf->settings-
+#. schema.json->line_separator->description
+msgid "Line separator"
+msgstr "Újsor"
+
+#. text-to-speech-applet@cardsurf->settings-
+#. schema.json->line_separator->tooltip
+msgid "A regular expression separating lines of text"
+msgstr "A sorelválasztót meghatározó reguláris kifejezés"
+
+#. text-to-speech-applet@cardsurf->settings-
+#. schema.json->gui_start->description
+msgid "Gui"
+msgstr "Felhasználói felület"
+
+#. text-to-speech-applet@cardsurf->settings-
+#. schema.json->gui_idle_icon_filename->description
+msgid "Idle icon"
+msgstr "Üresjárat ikon"
+
+#. text-to-speech-applet@cardsurf->settings-
+#. schema.json->gui_idle_icon_filename->tooltip
+msgid "An icon displayed when idle"
+msgstr "Az üresjárat során megjelenített ikon"
+
+#. text-to-speech-applet@cardsurf->settings-
+#. schema.json->gui_pause_icon_filename->description
+msgid "Pause icon"
+msgstr "Szünet ikon"
+
+#. text-to-speech-applet@cardsurf->settings-
+#. schema.json->gui_pause_icon_filename->tooltip
+msgid "An icon displayed when paused"
+msgstr "A felolvasás szüneteletetése során megjelenített ikon"
+
+#. text-to-speech-applet@cardsurf->settings-
+#. schema.json->gui_reading_icon_filename->description
+msgid "Reading icon"
+msgstr "Felolvasás ikon"
+
+#. text-to-speech-applet@cardsurf->settings-
+#. schema.json->gui_reading_icon_filename->tooltip
+msgid "An icon displayed when reading"
+msgstr "A felolvasás során megjelenített ikon"
