@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-24 20:57+0100\n"
-"PO-Revision-Date: 2021-02-24 21:00+0100\n"
+"PO-Revision-Date: 2021-02-24 21:50+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -84,7 +84,7 @@ msgstr "Einen Ordner auswählen"
 
 #: search.py:113
 msgid "Follow symlinks"
-msgstr "Symbolischer Verknüpfung folgen"
+msgstr "Symbolischen Verknüpfungen folgen"
 
 #: search.py:117
 msgid "Search hidden"
