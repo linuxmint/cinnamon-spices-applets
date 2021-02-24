@@ -8,7 +8,7 @@ const {EllipsizeMode} = imports.gi.Pango;
 const XApp = imports.gi.XApp;
 const Mainloop = imports.mainloop;
 const Main = imports.ui.main;
-const {PopupBaseMenuItem, PopupMenu, PopupIconMenuItem, PopupSeparatorMenuItem} = imports.ui.popupMenu;
+const {PopupBaseMenuItem, PopupMenu, PopupSeparatorMenuItem} = imports.ui.popupMenu;
 const {DragMotionResult, makeDraggable} = imports.ui.dnd;
 const {getUserDesktopDir, changeModeGFile} = imports.misc.fileUtils;
 const {SignalManager} = imports.misc.signalManager;
@@ -59,8 +59,6 @@ class CategoryButton extends PopupBaseMenuItem {
             this.addActor(this.icon);
         }
 
-
-        //this.categoryNameText = categoryNameText;
         this.label = new St.Label({ text: this.categoryNameText,
                                     style_class: 'menu-category-button-label' });
         this.addActor(this.label);
@@ -72,15 +70,25 @@ class CategoryButton extends PopupBaseMenuItem {
                         if (!source.categoryNameText || source.categoryNameText === this.categoryNameText) {
                             return DragMotionResult.NO_DROP;
                         }
-                        this.appThis.resetAllCategoriesOpacity();
+                        this.resetAllCategoriesOpacity();
                         this.actor.set_opacity(50);
                         return DragMotionResult.MOVE_DROP; },
                 acceptDrop: (source /*, actor, x, y, time */) => {
                         if (!source.categoryNameText || source.categoryNameText === this.categoryNameText) {
-                            this.appThis.resetAllCategoriesOpacity();
+                            this.resetAllCategoriesOpacity();
                             return DragMotionResult.NO_DROP;
                         }
-                        this.appThis.moveCategoryToPos(source.id, this.id);
+                        //move category to new position
+                        let categories = this.appThis.settings.categories.slice();
+                        const oldIndex = categories.indexOf(source.id);
+                        const newIndex = categories.indexOf(this.id);
+                        categories.splice(oldIndex, 1);
+                        this.appThis.settings.categories = categories.slice(0, newIndex).concat(
+                                                            [source.id]).concat(categories.slice(newIndex));
+                        this.resetAllCategoriesOpacity();
+                        this.appThis.categories.update();
+                        this.appThis.categoriesView.populate();
+                        this.appThis.setActiveCategory(this.appThis.currentCategory);
                         return true; },
                 getDragActorSource: () => this.actor,
                 _getDragActor: () => new Clutter.Clone({source: this.actor}),
@@ -96,8 +104,10 @@ class CategoryButton extends PopupBaseMenuItem {
         this.signals.connect(this.draggable, 'drag-cancelled', (...args) => this.onDragCancelled(...args));
         this.signals.connect(this.draggable, 'drag-end', (...args) => this.onDragEnd(...args));
         //?undo
-        this.signals.connect(this.actor, 'motion-event', (...args) => this.handleEnter(...args));
         this.signals.connect(this.actor, 'enter-event', (...args) => this.handleEnter(...args));
+        //Allow motion-event to trigger handleEnter because previous enter-event may have been
+        //invalidated by this.appThis.badAngle === true when this is no longer the case.
+        this.signals.connect(this.actor, 'motion-event', (...args) => this.handleEnter(...args));
         this.signals.connect(this.actor, 'leave-event', (...args) => this.handleLeave(...args));
         this.signals.connect(this.actor, 'button-release-event', (...args) => this.handleButtonRelease(...args));
     }
@@ -123,7 +133,7 @@ class CategoryButton extends PopupBaseMenuItem {
     }
 
     onDragEnd() {
-        this.appThis.resetAllCategoriesOpacity();
+        this.resetAllCategoriesOpacity();
     }
 
     selectCategory() {
@@ -136,10 +146,9 @@ class CategoryButton extends PopupBaseMenuItem {
     handleEnter(actor, event) {
         //this method handles enter-event, motion-event and keypress
         if (this.entered || this.disabled || this.appThis.contextMenu.isOpen ||
-                            this.appThis.badAngle && !this.appThis.settings.categoryClick) {
+                            this.appThis.badAngle && event && !this.appThis.settings.categoryClick) {
             return Clutter.EVENT_PROPAGATE;
         }
-
         if (event) {//mouse
             this.appThis.clearEnteredActors();
         } else {//keypress
@@ -150,20 +159,34 @@ class CategoryButton extends PopupBaseMenuItem {
         if (this.appThis.settings.categoryClick) {
             if (this.id != this.appThis.currentCategory) {
                 this.actor.set_style_class_name('menu-category-button-hover');
-                this.actor.add_style_class_name('menu-category-button-selected');//for backward compatability
-                //fix menu-category-button-hover for Mint-Y themes
-                const bgColor = this.actor.get_theme_node().get_background_color().to_string();
-                if (bgColor === '#ff0000ff') {
-                    const menubgColor = this.appThis.menu.actor.get_theme_node().get_background_color();
-                    if (menubgColor.red > 128) {
-                        this.actor.set_style('background-color: #e4e4e4; color: black;');
-                    } else {
-                        this.actor.set_style('background-color: #404040;');
+                //Also use menu-category-button-selected as menu-category-button-hover not defined in most themes
+                this.actor.add_style_class_name('menu-category-button-selected');
+                //some style tweaks for menu-category-button-hover class.
+                let themePath = Main.getThemeStylesheet();
+                if (!themePath) themePath = 'Cinnamon default';
+                [['/Mint-Y/',           'background-color: #d8d8d8; color: black;'],
+                ['/Mint-Y-Dark/',       'background-color: #404040;'],
+                ['/Mint-X/',            'background-color: #d4d4d4; color: black; border-image: none;'],
+                ['/Pragmatic-Darker-Blue/','background-color: #383838;'],
+                ['/Faded-Dream/',       'background-color: rgba(255,255,255,0.25);'],
+                ['/Linux Mint/',        'box-shadow: none; background-gradient-end: rgba(90, 90, 90, 0.5);'],
+                ['Cinnamon default',    'background-gradient-start: rgba(255,255,255,0.03); background-gradient-end: rgba(255,255,255,0.03);'],
+                ['/Adapta-Nokto/',      'background-color: rgba(207, 216, 220, 0.12); color: #CFD8DC'],
+                ['/Eleganse/',          'background-gradient-start: rgba(255,255,255,0.08); box-shadow: none;'],
+                ['/Eleganse-dark/',     'background-gradient-start: rgba(255,255,255,0.08); box-shadow: none;'],
+                ['/Adapta/',            'color: #263238; background-color: rgba(38, 50, 56, 0.12)'],
+                ['/Adapta-Maia/',       'color: #263238; background-color: rgba(38, 50, 56, 0.12)'],
+                ['/Adapta-Nokto-Maia/', 'color: #CFD8DC; background-color: rgba(207, 216, 220, 0.12);'],
+                ['Cinnamox-',           'background-color: rgba(255,255,255,0.2);']
+                ].forEach(fix => {
+                    if (themePath.includes(fix[0])) {
+                        this.actor.set_style(fix[1]);
                     }
-                }
+                });
             }
             return Clutter.EVENT_STOP;
         } else {
+            global.log('selectCategory');
             this.selectCategory();
             return Clutter.EVENT_STOP;
         }
@@ -224,6 +247,10 @@ class CategoryButton extends PopupBaseMenuItem {
         this.disabled = false;
     }
 
+    resetAllCategoriesOpacity() {
+        this.appThis.categories.buttons.forEach( (button) => button.actor.set_opacity(255) );
+    }
+
     destroy() {
         this.signals.disconnectAllSignals();
         this.label.destroy();
@@ -248,8 +275,8 @@ class ContextMenuItem extends PopupBaseMenuItem {
 
         this.signals = new SignalManager(null);
         this.action = action;
-        if (this.action == null) {
-            this.actor.style = "font-weight: bold";
+        if (this.action === null) {
+            this.actor.style = "font-weight: bold;";
         }
         this.signals.connect(this.actor, 'enter-event', (...args) => this.handleEnter(...args));
         this.signals.connect(this.actor, 'leave-event', (...args) => this.handleLeave(...args));
@@ -290,30 +317,36 @@ class ContextMenuItem extends PopupBaseMenuItem {
 class ContextMenu {
     constructor(appThis) {
         this.appThis = appThis;
-        this.menu = new PopupMenu(this.appThis.actor, /*St.Side.TOP*/);
+        this.menu = new PopupMenu(this.appThis.actor /*,St.Side.TOP*/);
         this.menu.actor.hide();
         this.contextMenuBox = new St.BoxLayout({ style_class: '', vertical: true, reactive: true });
         this.contextMenuBox.add_actor(this.menu.actor);
+        //Note: The context menu is not fully model. Instead, it is added to the stage by adding it to
+        //mainBox with it's height set to 0. contextMenuBox is then positioned at mouse coords and above
+        //siblings. The context menu is not fully model because then it would be difficult to close both
+        //the context menu and the applet menu when the user clicks outside of both.
         this.contextMenuBox.height = 0;
-        //appThis.mainBox.add(this.contextMenuBox, {expand: false, x_fill: false, //y_fill: false,
-        //                                        x_align: St.Align.START, y_align: St.Align.MIDDLE});
+        this.appThis.mainBox.add(this.contextMenuBox, {expand: false, x_fill: false,
+                                                    x_align: St.Align.START, y_align: St.Align.MIDDLE,});
         this.contextMenuButtons = [];
         this.isOpen = false;
     }
 
-    open(app, e, button, category = false) {
+    open(app, e, button, isACategoryButton = false) {
         //e is used to position context menu at mouse coords. If keypress opens menu then
         // e is undefined and button position is used instead.
         this.contextMenuButtons.forEach(button => button.destroy());
         this.contextMenuButtons = [];
 
-        if (category) {
+        if (isACategoryButton) {
             const addMenuItem = (item) => {
                 this.menu.addMenuItem(item);
                 this.contextMenuButtons.push(item);
             };
             addMenuItem( new ContextMenuItem(this.appThis, _('Reset category order'), null,
-                                () => { this.appThis.resetCategoryOrder();
+                                () => { this.appThis.settings.categories = [];
+                                        this.appThis.categories.update();
+                                        this.appThis.categoriesView.populate();
                                         this.close(); } ));
         } else if (app.type === APPTYPE.application) {
             this.populateContextMenu_apps(app);
@@ -514,16 +547,16 @@ class ContextMenu {
     }
 
     close() {
-        /*if (this.isOpen) {
-            this.menu.toggle_with_options(this.appThis.settings.enableAnimation);
-        }*/
         this.menu.close();
         this.isOpen = false;
         this.appThis.resizer.inhibit_resizing = false;
     }
 
     destroy() {
-        return true;
+        this.contextMenuButtons.forEach(button => button.destroy());
+        this.contextMenuButtons = null;
+        //this.menu.destroy(); //causes errors in .xsession-errors??
+        this.contextMenuBox.destroy();
     }
 }
 
@@ -590,8 +623,6 @@ class AppButton extends PopupBaseMenuItem {
         this.buttonBox = new St.BoxLayout({ vertical: !isListView, y_expand: false });
         if (!isListView) {
             this.buttonBox.width = 600;//bigger than needed to ensure it centers in it's grid space
-        //} else {
-            //this.buttonBox.width = this.appThis.appBoxWidth - 30;
         }
         this.buttonBox.add(this.iconContainer, {
                                 x_fill: false, y_fill: false,
@@ -613,7 +644,7 @@ class AppButton extends PopupBaseMenuItem {
                     handleDragOver: (source) => {
                             if (source.isDraggableApp && source.get_app_id() !== this.app.get_id() &&
                                                             this.appThis.currentCategory === 'favorite_apps') {
-                                this.appThis.resetAllAppsOpacity();
+                                this.resetAllAppsOpacity();
                                 this.actor.set_opacity(40);
                                 return DragMotionResult.MOVE_DROP;
                             }
@@ -664,9 +695,9 @@ class AppButton extends PopupBaseMenuItem {
     }
 
     onDragBegin() {
-        if (this.tooltip) {
+        if (this.tooltipVisible) {
             hideTooltip();
-            this.tooltip = false;
+            this.tooltipVisible = false;
         }
     }
 
@@ -674,7 +705,7 @@ class AppButton extends PopupBaseMenuItem {
     }
 
     onDragEnd() {
-        this.appThis.resetAllAppsOpacity();
+        this.resetAllAppsOpacity();
     }
 
     formatLabel() {
@@ -757,10 +788,10 @@ class AppButton extends PopupBaseMenuItem {
                 y += height + 8 * global.ui_scale;
                 center_x = true;
             }
-            if (!this.tooltip) {/*handleEnter may have been called twice, once with key nav and again with mouse.
-                                 *In which case, don't create new tooltip*/
+            if (!this.tooltipVisible) { //handleEnter may have been called twice, once with key nav and again
+                                        //with mouse. in which case, don't create new tooltip
                 showTooltip(this.actor, x, y, center_x, tooltipMarkup);
-                this.tooltip = true;
+                this.tooltipVisible = true;
             }
         }
         return false;
@@ -773,22 +804,19 @@ class AppButton extends PopupBaseMenuItem {
 
         this.entered = null;
         this.setButtonStyle(false);//normal style (not selected)
-        if (this.tooltip) {
+        if (this.tooltipVisible) {
             hideTooltip();
-            this.tooltip = false;
+            this.tooltipVisible = false;
         }
     }
 
     handleButtonPress() {
-        //this.appThis.categoryDragged = true;
     }
 
     handleButtonRelease(actor, e) {
         const button = e.get_button();
         if (button === 1) {//left click
             if (this.appThis.contextMenu.isOpen) {
-                //if (this.menuIsOpen && this.menu._activeMenuItem) {
-                //    this.menu._activeMenuItem.activate();
                 this.appThis.clearEnteredActors();
                 this.handleEnter();
             } else {
@@ -860,22 +888,23 @@ class AppButton extends PopupBaseMenuItem {
 
     openContextMenu(e) {
         this.setButtonStyle(true);//selected style
-        if (this.tooltip) {
+        if (this.tooltipVisible) {
             hideTooltip();
-            this.tooltip = false;
-        }
-        if (!this.actor.get_parent()) {
-            return; // Favorite change ??
+            this.tooltipVisible = false;
         }
         this.appThis.contextMenu.open(this.app, e, this);
+    }
+
+    resetAllAppsOpacity() {
+        this.appThis.appsView.getActiveContainer().get_children().forEach( child => child.set_opacity(255) );
     }
 
     destroy(skipDestroy) {
         this.signals.disconnectAllSignals();
 
-        if (this.tooltip) {
+        if (this.tooltipVisible) {
             hideTooltip();
-            this.tooltip = false;
+            this.tooltipVisible = false;
         }
         if (!skipDestroy) {
             this.dot.destroy();
@@ -947,9 +976,9 @@ class SidebarButton extends PopupBaseMenuItem {
     }
 
     onDragBegin() {
-        if (this.tooltip) {
+        if (this.tooltipVisible) {
             hideTooltip();
-            this.tooltip = false;
+            this.tooltipVisible = false;
         }
     }
 
@@ -999,9 +1028,9 @@ class SidebarButton extends PopupBaseMenuItem {
     }
 
     openContextMenu(e) {
-        if (this.tooltip) {
+        if (this.tooltipVisible) {
             hideTooltip();
-            this.tooltip = false;
+            this.tooltipVisible = false;
         }
         this.appThis.contextMenu.open(this.app, e, this);
     }
@@ -1031,7 +1060,7 @@ class SidebarButton extends PopupBaseMenuItem {
         }
         text = text.replace(/&/g, '&amp;');
         showTooltip(this.actor, x, y, false /*don't center x*/, text);
-        this.tooltip = true;
+        this.tooltipVisible = true;
         return true;
     }
 
@@ -1041,24 +1070,12 @@ class SidebarButton extends PopupBaseMenuItem {
         }
         this.entered = null;
         this.actor.remove_style_pseudo_class('hover');
-        if (this.tooltip) {
+        if (this.tooltipVisible) {
             hideTooltip();
-            this.tooltip = false;
+            this.tooltipVisible = false;
         }
         return true;
     }
-
-    /*setIcon(iconName) {
-        this.removeActor(this.icon);
-        this.icon.destroy();
-        this.icon = this.icon = new St.Icon({
-            icon_name: iconName,
-            icon_size: this.iconSize,
-            icon_type: St.IconType.FULLCOLOR
-        });
-        this.addActor(this.icon);
-        this.icon.realize();
-    }*/
 
     destroy() {
         this.signals.disconnectAllSignals();
