@@ -26,6 +26,8 @@ class MpvPlayerHandler {
 
         const mpvRunning = (await this._getAllMrisPlayerBusNames()).includes(MPV_MPRIS_BUS_NAME)
 
+        this.stopped = mpvRunning ? false : true
+
         if (mpvRunning) {
             this.stopped = false
             await this._watchStreamAdded()
@@ -164,6 +166,7 @@ class MpvPlayerHandler {
     }
 
     _updateVolume({ updateTarget, newVolume }) {
+
         if (updateTarget === "cvcStream") this._updateCvcStreamVolume(newVolume)
         if (updateTarget === "mpris") this._mediaServerPlayer.Volume = newVolume / 100
         if (updateTarget === "Both") {

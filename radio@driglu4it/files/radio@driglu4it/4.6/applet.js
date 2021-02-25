@@ -7,12 +7,10 @@ const { ScrollDirection } = imports.gi.Clutter;
 const Gettext = imports.gettext; // l10n support
 const { get_home_dir } = imports.gi.GLib;
 const { Clipboard, ClipboardType } = imports.gi.St;
-const { file_new_for_path } = imports.gi.Gio;
 
 const { MpvPlayerHandler } = require('./mpvPlayerHandler')
 const { PlayPauseIconMenuItem } = require('./playPauseIconMenuItem')
-
-const MPRIS_PLUGIN_URL = "https://github.com/hoyon/mpv-mpris/releases/download/0.5/mpris.so"
+const { notifySend, checkInstallMprisPlugin, checkInstallMpv, checkInstallYoutubeDl, downloadFromYoutube } = require('./utils.js')
 
 
 // for i18n
@@ -38,11 +36,9 @@ class CinnamonRadioApplet extends TextIconApplet {
     Gettext.bindtextdomain(UUID, get_home_dir() + "/.local/share/locale");
 
     this.settings = new AppletSettings(this, __meta.uuid, instance_id);
-
   }
 
   async init(orientation) {
-
     this._initSettings()
     this._trimChannelList()
     await this._initMpvPlayer()
@@ -163,7 +159,7 @@ class CinnamonRadioApplet extends TextIconApplet {
 
   _getInitialVolume() {
     let initialVolume = this.keep_volume_between_sessions ? this.last_volume : this.custom_initial_volume
-    if (!initialVolume) global.logError(`couldn'T get valid initalVolume from settings. Have a look at  ~/.cinnamon/configs.json`)
+    if (!initialVolume) global.logError(`couldn't get valid initalVolume from settings. Have a look at  ~/.cinnamon/configs.json`)
     return initialVolume
   }
 
@@ -214,7 +210,12 @@ class CinnamonRadioApplet extends TextIconApplet {
   _createContextMenu() {
     const copyTitleItem = new PopupMenuItem(_("Copy current song title"));
     copyTitleItem.connect('activate', () => { this._on_copy_song(); });
+
+    const downloadYoutubeItem = new PopupMenuItem(_("Download from Youtube"))
+    downloadYoutubeItem.connect('activate', () => { this._on_youtube_download() })
+
     this._applet_context_menu.addMenuItem(copyTitleItem, 0)
+    this._applet_context_menu.addMenuItem(downloadYoutubeItem, 1)
     this._applet_context_menu.addMenuItem(new PopupSeparatorMenuItem());
   }
 
@@ -223,11 +224,36 @@ class CinnamonRadioApplet extends TextIconApplet {
       const currentSong = this.mpvPlayer.getCurrentSong()
       Clipboard.get_default().set_text(ClipboardType.CLIPBOARD, currentSong);
     } catch (e) {
-      this._notify_send(_("Can't copy current Song. Is the Radio playing?"))
+      notifySend(_("Can't copy current Song. Is the Radio playing?"))
       //global.logError(e)
     }
   }
 
+  async _on_youtube_download() {
+
+    try {
+      await checkInstallYoutubeDl()
+    } catch (error) {
+      notifySend(_("Not the correct version of youtube-dl installed. Please install youtube-dl 2021.02.04.1"))
+      return
+    }
+
+    try {
+      const currentSong = this.mpvPlayer.getCurrentSong()
+      notifySend(`Downloading ${currentSong} ...`)
+
+      // when using the default value of the settings, the dir starts with ~ what can't be understand when executing command. Else it starts with file:// what youtube-dl can't handle. Saving to network directories (e.g. ftp) doesn't work 
+      const music_dir_absolut =
+        this.music_dir.replace('~', get_home_dir()).replace('file://', '')
+
+      const filePath = await downloadFromYoutube(music_dir_absolut, currentSong)
+      notifySend(_("download finished. File saved to %s").format(filePath))
+    } catch (error) {
+      const notifyMsg = _("Couldn't download song from Youtube due to an Error.")
+      notifySend(notifyMsg + _("See Logs for more information"))
+      global.logError(`${notifyMsg} The following error occured: ${error} `)
+    }
+  }
 
   _getChannelMenuItem(channelUrl) {
 
@@ -281,52 +307,18 @@ class CinnamonRadioApplet extends TextIconApplet {
 
     this.currentMenuItem = activatedMenuItem;
 
-  }  // sends a notification but only if there hasn't been already the same notification in the last 10 seks
-  _notify_send(notificationMsg) {
-    const currentTime = Date.now()
-
-    // preventing "reference to ... is undefined" in log
-    if (!this.timeLastNotification) this.timeLastNotification = 0
-    if (!this.lastNotificationMsg) this.lastNotificationMsg = null
-
-    const timeDiff = currentTime - this.timeLastNotification
-    if (timeDiff < 10000 && this.lastNotificationMsg === notificationMsg) return
-
-    const iconPath = `${__meta.path}/icon.png`;
-    spawnCommandLine('notify-send --hint=int:transient:1 --expire-time=10000 "' + notificationMsg + '" -i ' + iconPath);
-
-    this.timeLastNotification = currentTime
-    this.lastNotificationMsg = notificationMsg
   }
 
-  _check_dependencies() {
-    if (!file_new_for_path(this.mpvPlayer.mprisPluginPath).query_exists(null)) {
-      const parentDir = __meta.path.split('/').slice(0, -1).join('/')
+  async on_applet_clicked() {
 
-      spawnCommandLineAsyncIO(`python3  ${parentDir}/download-dialog.py`, (stdout) => {
-        if (stdout.trim() == 'Continue') {
-          spawnCommandLineAsyncIO(`wget ${MPRIS_PLUGIN_URL} -O ${this.mpvPlayer.mprisPluginPath}`);
-        }
-      })
-      return false;
-    }
-
-    else {
-
-      if (!file_new_for_path(`/usr/bin/mpv`).query_exists(null)) {
-        this._notify_send(_("Please install the '%s' package.").format("mpv"));
-        spawnCommandLine(`apturl apt://mpv`);
-        return false;
-      }
-
-    }
-    return true;
-  }
-
-  on_applet_clicked() {
-    if (this._check_dependencies()) {
+    try {
+      await checkInstallMprisPlugin(this.mpvPlayer.mprisPluginPath)
+      await checkInstallMpv("mpv")
       this.menu.toggle();
       this.radioListSubMenu.menu.open(true);
+
+    } catch (error) {
+      notifySend(_("couldn't start the applet. Make sure mpv is installed and the mpv mpris plugin saved in the configs folder."))
     }
   }
 
@@ -340,7 +332,7 @@ class CinnamonRadioApplet extends TextIconApplet {
     const volumeChange = direction === ScrollDirection.UP ? 5 : -5
     const volumeChanged = this.mpvPlayer.increaseDecreaseVolume(volumeChange)
 
-    if (!volumeChanged && volumeChange > 0) this._notify_send(_("Can't increase Volume. Volume already at maximum."))
+    if (!volumeChanged && volumeChange > 0) notifySend(_("Can't increase Volume. Volume already at maximum."))
   }
 };
 

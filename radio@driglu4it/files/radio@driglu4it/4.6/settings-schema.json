@@ -20,7 +20,8 @@
       "title": "Preferences",
       "sections": [
         "appearance-section",
-        "volume-section"
+        "volume-section",
+        "youtube-section"
       ]
     },
     "station-list-section": {
@@ -53,6 +54,13 @@
       "keys": [
         "keep-volume-between-sessions",
         "initial-volume"
+      ]
+    },
+    "youtube-section": {
+      "type": "section",
+      "title": "Youtube Download",
+      "keys": [
+        "music-download-dir-select"
       ]
     }
   },
@@ -142,5 +150,12 @@
     "type": "generic",
     "value": 0,
     "default": 80
+  },
+  "music-download-dir-select": {
+    "type": "filechooser",
+    "description": "Download directory",
+    "tooltip": "Songs downloaded from Youtube will be saved to this directory. This feature can be found in the right-click-menu of the applet",
+    "default": "~/Music/Radio",
+    "select-dir": true
   }
 }
