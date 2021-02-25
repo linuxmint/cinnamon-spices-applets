@@ -273,14 +273,14 @@ declare namespace imports.gi.Soup {
 		request_body_data: ByteArray;
 		request_headers: MessageHeaders;
 		response_body: MessageBody;
-		response_body_data:	ByteArray
+		response_body_data: ByteArray
 		response_headers: MessageHeaders;
 		server_side: boolean;
 		site_for_cookies: URI;
 		status_code: number;
 		tls_certificate: Gio.TlsCertificate;
 		tls_errors: Gio.TlsCertificateFlags;
-		uri: URI;	
+		uri: URI;
 		add_header_handler(signal: string, header: string, callback: GObject.Callback, user_data: any): number;
 		add_status_code_handler(signal: string, status_code: number, callback: GObject.Callback, user_data: any): number;
 		content_sniffed(content_type: string, params: GLib.HashTable): void;
@@ -317,7 +317,7 @@ declare namespace imports.gi.Soup {
 		wrote_chunk(): void;
 		wrote_headers(): void;
 		wrote_informational(): void;
-		static new (method: string, uri_string: string): Message;
+		static new(method: string, uri_string: string): Message;
 		static new_from_uri(method: string, uri: URI): Message;
 	}
 
@@ -454,26 +454,26 @@ declare namespace imports.gi.Soup {
 	interface Session extends GObject.Object {
 		user_agent: string;
 		/**
-         * The timeout (in seconds) for socket I/O operations
-            (including connecting to a server, and waiting for a reply
-            to an HTTP request).
+		 * The timeout (in seconds) for socket I/O operations
+			(including connecting to a server, and waiting for a reply
+			to an HTTP request).
 
-            Although you can change this property at any time, it will
-            only affect newly-created connections, not currently-open
-            ones. You can call Soup.Session.abort after setting this
-            if you want to ensure that all future connections will have
-            this timeout value.
+			Although you can change this property at any time, it will
+			only affect newly-created connections, not currently-open
+			ones. You can call Soup.Session.abort after setting this
+			if you want to ensure that all future connections will have
+			this timeout value.
 
-            Note that the default value of 60 seconds only applies to
-            plain Soup.Sessions. If you are using Soup.SessionAsync or
-            Soup.SessionSync, the default value is 0 (meaning socket I/O
-            will not time out).
+			Note that the default value of 60 seconds only applies to
+			plain Soup.Sessions. If you are using Soup.SessionAsync or
+			Soup.SessionSync, the default value is 0 (meaning socket I/O
+			will not time out).
 
-            Not to be confused with Soup.Session.idle-timeout (which is
-            the length of time that idle persistent connections will be
-            kept open).
-        */
-	   	timeout: number;
+			Not to be confused with Soup.Session.idle-timeout (which is
+			the length of time that idle persistent connections will be
+			kept open).
+		*/
+		timeout: number;
 		/**
 			* Connection lifetime (in seconds) when idle. Any connection
 			left idle longer than this will be closed.
@@ -489,12 +489,12 @@ declare namespace imports.gi.Soup {
 			Soup.SessionSync, the default value is 0 (meaning idle
 			connections will never time out).
 		*/
-	   	idle_timeout: number;
+		idle_timeout: number;
 
 		/**
-         * Cancels all pending requests in this and closes all idle
-         *   persistent connections.
-         */
+		 * Cancels all pending requests in this and closes all idle
+		 *   persistent connections.
+		 */
 		abort(): void;
 		add_feature(feature: SessionFeature): void;
 		add_feature_by_type(feature_type: GObject.Type): void;
