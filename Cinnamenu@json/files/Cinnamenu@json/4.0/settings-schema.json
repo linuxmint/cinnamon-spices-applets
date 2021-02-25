@@ -232,7 +232,7 @@
         "description":"Open menu on category:",
         "tooltip":"Always open the menu with this category selected",
         "options":{
-            "Previous category":0,
+            "Last used category":0,
             "Favorite apps":1,
             "Recent files":2,
             "Places":3,
