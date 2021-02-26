@@ -23,12 +23,7 @@ function _(str) {
   return Gettext.dgettext(uuid, str);
 }
 
-let MathJS;
-if (typeof require !== 'undefined') {
-  MathJS = require('./math');
-} else {
-  MathJS = imports.ui.appletManager.applets[uuid].math.math;
-}
+const MathJS = imports.ui.appletManager.applets[uuid].math.math;
 
 MathJS.import({"Pi" : Math.PI});
 
@@ -41,7 +36,7 @@ function main(metadata, orientation, panel_height, applet_id) {
 
 function makeApplet(orientation, panel_height, applet_id) {
    var applet = new Applet.IconApplet(orientation,panel_height, applet_id);
-   applet.set_applet_icon_name("calc");
+   applet.set_applet_icon_symbolic_name("accessories-calculator");
    applet.set_applet_tooltip(_("Show calculator"));
    var layoutBox;
    let history = ['top of history',""];
@@ -122,7 +117,7 @@ function makeApplet(orientation, panel_height, applet_id) {
      osdBox.connect("button-release-event", function() {
        dragging=false;
        Main.popModal(osdBox);
-       Clutter.ungrab_pointer(osdBox);
+       Clutter.ungrab_pointer();
 
        layoutBox.textEntryField.grab_key_focus();
      });
@@ -206,7 +201,7 @@ function makeApplet(orientation, panel_height, applet_id) {
      const buttonOct = {  label : "oct",   handler : function() { changeBase(8);} };
      const buttonDec = {  label : "dec",   handler : function() { changeBase(10);} };
      const buttonHex = {  label : "hex",   handler : function() { changeBase(16);} };
-     const buttonsmt = {  label : "   ",   handler : toggleButtonClick };
+     const buttonsmt = {  label : " ⌄ ",   handler : toggleButtonClick };
      const buttonRec = {  label : "1/x",   handler : makePrefixHandler("1/") };
      const buttonRoot = {  label : " √ ",   handler : makePrefixHandler("sqrt") };
      const buttonLog = {  label : "log",   handler : makePrefixHandler("log") };
@@ -235,10 +230,10 @@ function makeApplet(orientation, panel_height, applet_id) {
      const buttonSub = {  label : "  -  ",   handler : makeInsertHandler("-") };
      const buttonMul = {  label : "  ×  ",   handler : makeInsertHandler("*")  };
      const buttonDiv = {  label : "  ÷  ",   handler : makeInsertHandler("/")  };
-     const buttonC = {  label : _("  C  "),   handler : function(){textBox.clutter_text.text=" "; } };
-     const buttonAC = {  label : _(" AC "),   handler : function(){textBox.clutter_text.text=" "; resetParser();} };
+     const buttonC = {  label : "  C  ",   handler : function(){textBox.clutter_text.text=" "; } };
+     const buttonAC = {  label : " AC ",   handler : function(){textBox.clutter_text.text=" "; resetParser();} };
 
-     const buttonPi = {  label : "  π  ",   handler : makeInsertHandler(" Pi ") };
+     const buttonPi = {  label : "  𝞹  ",   handler : makeInsertHandler(" Pi ") };
      const buttonEquals = {  label : "  =  ",   handler : evaluateDisplay };
 
 
@@ -403,7 +398,7 @@ function makeApplet(orientation, panel_height, applet_id) {
      let buttons = new Clutter.Actor(); //St.Widget({style_class:"buttongrid"});
      buttons.margin_left=2;
      buttons.margin_top=2;
-     buttons.height=160;
+     buttons.height=320;
      buttons.layout_manager=buttonGrid;
      content.add_actor(buttons);
 
@@ -478,14 +473,16 @@ function makeApplet(orientation, panel_height, applet_id) {
 
    function resetParser() {
      parser=MathJS.parser();
-     loadDefinitons();
+     loadDefinitions();
    }
+
    function loadDefinitions() {
      let lines = applet.definitions;
      for (let line of lines.split("\n") ) {
        parser.eval(line);
      }
    }
+
    function definitionsChanged() {
       //global.log(" defintions changed for  "+applet.instance_id);
       loadDefinitions();
