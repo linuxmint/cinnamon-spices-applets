@@ -127,6 +127,7 @@ class UIForecasts {
                 style_class: STYLE_FORECAST_DAY,
                 reactive: true,
                 style: textColorStyle,
+                label: ""
             }, true);
             forecastWeather.Day.disable();
             forecastWeather.Summary = new Label({

@@ -174,6 +174,8 @@ export class UIForecasts {
 				style_class: STYLE_FORECAST_DAY,
 				reactive: true,
 				style: textColorStyle,
+				/** Need the empty string here because when we change it later from null it can lose it's color */
+				label: ""
 			}, true);
 
 			forecastWeather.Day.disable();

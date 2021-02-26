@@ -18,9 +18,9 @@ export class WeatherButton {
 		this.actor.add_style_class_name("popup-menu-item");
 
 		if (doNotAddPadding)
-			this.actor.style = 'padding: 0px; border-radius: 2px;';
+			this.actor.set_style('padding: 0px; border-radius: 2px;');
 		else
-			this.actor.style = 'padding-top: 0px;padding-bottom: 0px; padding-right: 2px; padding-left: 2px; border-radius: 2px;';
+			this.actor.set_style('padding-top: 0px;padding-bottom: 0px; padding-right: 2px; padding-left: 2px; border-radius: 2px;');
 
 		this.signals.connect(this.actor, 'enter-event', this.handleEnter, this);
 		this.signals.connect(this.actor, 'leave-event', this.handleLeave, this);

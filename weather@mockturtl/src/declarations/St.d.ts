@@ -69,8 +69,13 @@ declare namespace imports.gi.St {
         constructor(options?: ButtonOptions);
 	}
 	
-	interface ButtonOptions {
-
+	export interface ButtonOptions {
+        style?: string;
+        reactive?: boolean;
+        style_class?: string;
+        can_focus?: boolean;
+        label?: string;
+        child?: Widget;
 	}
 
     export class ScrollView extends Widget {
