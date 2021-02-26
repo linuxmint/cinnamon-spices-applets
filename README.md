@@ -136,8 +136,8 @@ More info:
 
 # Translations Status Tables
 
-The spices receive updates that sometimes contain more and sometimes less new strings, which need to be translated. The Translation Status Tables were created to give translators a better overview of the current state of translations and also to make it easier to track where new untranslated strings appear.
+The spices receive updates which sometimes contain new or updated strings that need to be translated. The translation status tables were created to give translators a better overview of the current state of translations and also to make it easier to track where new untranslated strings appear.
 
 * [Translation Status Tables for Applets](https://github.com/linuxmint/cinnamon-spices-applets/blob/translation-status-tables/.translation-tables/tables/README.md)
 
-To ensure that these tables are always up-to-date, they are automatically updated whenever a new commit is pushed to the master branch.
+To ensure that these tables are always up-to-date, they are automatically regenerated whenever a new commit is pushed to the master branch.
