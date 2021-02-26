@@ -43,10 +43,6 @@ class UIForecasts {
             for (let i = 0; i < len; i++) {
                 let forecastData = weather.forecasts[i];
                 let forecastUi = this.forecasts[i];
-                let t_low = utils_1.TempToUserConfig(forecastData.temp_min, config.TemperatureUnit, config._tempRussianStyle);
-                let t_high = utils_1.TempToUserConfig(forecastData.temp_max, config.TemperatureUnit, config._tempRussianStyle);
-                let first_temperature = config._temperatureHighFirst ? t_high : t_low;
-                let second_temperature = config._temperatureHighFirst ? t_low : t_high;
                 let comment = (config._shortConditions) ? forecastData.condition.main : forecastData.condition.description;
                 let dayName = utils_1.GetDayName(forecastData.date, config.currentLocale, config._showForecastDates, weather.location.timeZone);
                 forecastUi.Day.actor.label = dayName;
@@ -69,9 +65,13 @@ class UIForecasts {
                 else {
                     forecastUi.Day.disable();
                 }
+                let t_low = utils_1.TempToUserConfig(forecastData.temp_min, config);
+                let t_high = utils_1.TempToUserConfig(forecastData.temp_max, config);
+                let first_temperature = config._temperatureHighFirst ? t_high : t_low;
+                let second_temperature = config._temperatureHighFirst ? t_low : t_high;
                 forecastUi.Temperature.text = first_temperature;
-                forecastUi.Temperature.text += ((config._tempRussianStyle) ? consts_1.ELLIPSIS : " " + consts_1.FORWARD_SLASH + " ");
-                forecastUi.Temperature.text += second_temperature + ' ' + utils_1.UnitToUnicode(config.TemperatureUnit);
+                forecastUi.Temperature.text += ((config._tempRussianStyle) ? consts_1.ELLIPSIS : ` ${consts_1.FORWARD_SLASH} `);
+                forecastUi.Temperature.text += `${second_temperature} ${utils_1.UnitToUnicode(config.TemperatureUnit)}`;
                 forecastUi.Summary.text = comment;
                 forecastUi.Icon.icon_name = (config._useCustomMenuIcons) ? forecastData.condition.customIcon : utils_1.WeatherIconSafely(forecastData.condition.icons, config.IconType);
             }

@@ -63,12 +63,6 @@ export class UIForecasts {
 				let forecastData = weather.forecasts[i];
 				let forecastUi = this.forecasts[i];
 
-				let t_low = TempToUserConfig(forecastData.temp_min, config.TemperatureUnit, config._tempRussianStyle);
-				let t_high = TempToUserConfig(forecastData.temp_max, config.TemperatureUnit, config._tempRussianStyle);
-
-				let first_temperature = config._temperatureHighFirst ? t_high : t_low;
-				let second_temperature = config._temperatureHighFirst ? t_low : t_high;
-
 				// Weather Condition
 				let comment = (config._shortConditions) ? forecastData.condition.main : forecastData.condition.description;
 
@@ -101,11 +95,17 @@ export class UIForecasts {
 					forecastUi.Day.disable();
 				}
 
+				let t_low = TempToUserConfig(forecastData.temp_min, config);
+				let t_high = TempToUserConfig(forecastData.temp_max, config);
+
+				let first_temperature = config._temperatureHighFirst ? t_high : t_low;
+				let second_temperature = config._temperatureHighFirst ? t_low : t_high;
+
 				forecastUi.Temperature.text = first_temperature;
 				// As Russian Tradition, -temp...+temp
 				// See https://github.com/linuxmint/cinnamon-spices-applets/issues/618
-				forecastUi.Temperature.text += ((config._tempRussianStyle) ? ELLIPSIS : " " + FORWARD_SLASH + " ");
-				forecastUi.Temperature.text += second_temperature + ' ' + UnitToUnicode(config.TemperatureUnit);
+				forecastUi.Temperature.text += ((config._tempRussianStyle) ? ELLIPSIS : ` ${FORWARD_SLASH} `);
+				forecastUi.Temperature.text += `${second_temperature} ${UnitToUnicode(config.TemperatureUnit)}`;
 				forecastUi.Summary.text = comment;
 				forecastUi.Icon.icon_name = (config._useCustomMenuIcons) ? forecastData.condition.customIcon : WeatherIconSafely(forecastData.condition.icons, config.IconType);
 			}

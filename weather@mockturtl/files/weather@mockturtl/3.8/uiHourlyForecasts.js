@@ -65,7 +65,7 @@ class UIHourlyForecasts {
             const ui = this.hourlyForecasts[index];
             this.hourlyForecastDates.push(hour.date);
             ui.Hour.text = utils_1.GetHoursMinutes(hour.date, config.currentLocale, config._show24Hours, tz, config._shortHourlyTime);
-            ui.Temperature.text = utils_1.TempToUserConfig(hour.temp, config.TemperatureUnit, config._tempRussianStyle) + " " + utils_1.UnitToUnicode(config.TemperatureUnit);
+            ui.Temperature.text = `${utils_1.TempToUserConfig(hour.temp, config)} ${utils_1.UnitToUnicode(config.TemperatureUnit)}`;
             ui.Icon.icon_name = (config._useCustomMenuIcons) ? hour.condition.customIcon : utils_1.WeatherIconSafely(hour.condition.icons, config.IconType);
             ui.Summary.text = hour.condition.main;
             ui.Precipitation.text = this.GeneratePrecipitationText(hour.precipitation, config);

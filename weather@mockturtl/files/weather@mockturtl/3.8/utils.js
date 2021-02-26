@@ -213,17 +213,17 @@ function MPStoUserUnits(mps, units) {
     }
 }
 exports.MPStoUserUnits = MPStoUserUnits;
-function TempToUserConfig(kelvin, units, russianStyle) {
+function TempToUserConfig(kelvin, config) {
     if (kelvin == null)
         return null;
     let temp;
-    if (units == "celsius") {
+    if (config.TemperatureUnit == "celsius") {
         temp = Math.round((kelvin - 273.15));
     }
-    if (units == "fahrenheit") {
+    if (config.TemperatureUnit == "fahrenheit") {
         temp = Math.round((9 / 5 * (kelvin - 273.15) + 32));
     }
-    if (!russianStyle)
+    if (!config._tempRussianStyle)
         return temp.toString();
     if (temp < 0)
         temp = "−" + Math.abs(temp).toString();

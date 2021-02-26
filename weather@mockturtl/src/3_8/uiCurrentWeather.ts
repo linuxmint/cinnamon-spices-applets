@@ -330,7 +330,7 @@ export class CurrentWeather {
 					value = PrecentToLocale(extra_field.value, this.app.config.currentLocale);
 					break;
 				case "temperature":
-					value = TempToUserConfig(extra_field.value, this.app.config.TemperatureUnit, this.app.config._tempRussianStyle) + " " + UnitToUnicode(this.app.config.TemperatureUnit);
+					value = `${TempToUserConfig(extra_field.value, this.app.config)} ${UnitToUnicode(this.app.config.TemperatureUnit)}`;
 					break;
 				default:
 					value = _(extra_field.value);
@@ -357,9 +357,9 @@ export class CurrentWeather {
 	}
 
 	private SetTemperature(temperature: number) {
-		let temp = TempToUserConfig(temperature, this.app.config.TemperatureUnit, this.app.config._tempRussianStyle);
+		let temp = TempToUserConfig(temperature, this.app.config);
 		if (temp == null) return;
-		this.temperatureLabel.text = temp + " " + UnitToUnicode(this.app.config.TemperatureUnit);
+		this.temperatureLabel.text = `${temp} ${UnitToUnicode(this.app.config.TemperatureUnit)}`;
 	}
 
 	private SetHumidity(humidity: number) {
