@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-02-26 23:27+0100\n"
-"PO-Revision-Date: 2021-02-26 23:28+0100\n"
+"POT-Creation-Date: 2021-02-27 00:47+0100\n"
+"PO-Revision-Date: 2021-02-27 00:47+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de\n"
@@ -18,9 +18,13 @@ msgstr ""
 "X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: applet.js:40
+#: applet.js:37 applet.js:96
 msgid "Show calculator"
 msgstr "Taschenrechner einblenden"
+
+#: applet.js:99
+msgid "Hide calculator"
+msgstr "Taschenrechner ausblenden"
 
 #. metadata.json->name
 msgid "SmallCalc"
