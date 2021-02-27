@@ -1,57 +1,57 @@
 declare namespace imports.gi.Clutter {
-    export class GridLayout {
-        constructor(options: any);
+	export class GridLayout {
+		constructor(options: any);
 		set_column_homogeneous(homogeneous: boolean): void;
-		set_row_homogeneous(homogeneous: boolean): void; 
+		set_row_homogeneous(homogeneous: boolean): void;
 		set_column_spacing(spacing: number): void;
 		set_row_spacing(spacing: number): void;
-        attach(widget: imports.gi.St.Widget, col: number, row: number, colspan: number, rowspan: number): void;
-    }
+		attach(widget: imports.gi.St.Widget, col: number, row: number, colspan: number, rowspan: number): void;
+	}
 
-    export class Actor {
-        add_child(child: any): void;
-        add_actor(element: any): void;
-        hide(): void;
-        show(): void;
-        get_preferred_height(for_width: number): number[];
-        get_preferred_width(for_height: number): number[]; 
-        get_width(): number;
-        get_height(): number;
-		set_clip_to_allocation(clip_set: boolean): void; 
-        destroy_all_children(): void;
-        remove_all_children(): void;
-        height: number;
+	export class Actor {
+		add_child(child: any): void;
+		add_actor(element: any): void;
+		hide(): void;
+		show(): void;
+		get_preferred_height(for_width: number): number[];
+		get_preferred_width(for_height: number): number[];
+		get_width(): number;
+		get_height(): number;
+		set_clip_to_allocation(clip_set: boolean): void;
+		destroy_all_children(): void;
+		remove_all_children(): void;
+		height: number;
 		width: number;
-		set_width(width: number): void; 
-        set_height(height: number): void;
-        remove_clip(): void;
-        set_size(width: number, height: number): void;
-        opacity: number;
-        allocation: Clutter.ActorBox;
+		set_width(width: number): void;
+		set_height(height: number): void;
+		remove_clip(): void;
+		set_size(width: number, height: number): void;
+		opacity: number;
+		allocation: Clutter.ActorBox;
 		//clip_to_allocation: boolean;
 		set_x_align(x_align: ActorAlign): void;
 		set_y_align(y_align: ActorAlign): void;
 		set_x_expand(expand: boolean): void;
 		set_y_expand(expand: boolean): void;
-    }
-    
-    export class ActorBox {
-        get_width(): number;
-        get_height(): number;
-        /** In pixels */
-        get_area(): number;
-        /** x and y */
-        get_origin(): number[];
-    }
+	}
+
+	export class ActorBox {
+		get_width(): number;
+		get_height(): number;
+		/** In pixels */
+		get_area(): number;
+		/** x and y */
+		get_origin(): number[];
+	}
 
 	export class Text extends Actor {
-		set_line_wrap(line_wrap: boolean): void; 
-		set_ellipsize(mode: gi.Pango.EllipsizeMode): void; 
-		set_line_alignment(alignment: gi.Pango.Alignment): void; 
-		set_line_wrap_mode(wrap_mode: gi.Pango.WrapMode): void; 
+		set_line_wrap(line_wrap: boolean): void;
+		set_ellipsize(mode: gi.Pango.EllipsizeMode): void;
+		set_line_alignment(alignment: gi.Pango.Alignment): void;
+		set_line_wrap_mode(wrap_mode: gi.Pango.WrapMode): void;
 		get_layout(): gi.Pango.Layout;
 	}
-	
+
 	export enum ActorAlign {
 		CENTER,
 		END,
@@ -104,7 +104,7 @@ declare namespace imports.gi.Clutter {
 	}
 
 	export class Color {
-		
+
 	}
 
 	interface Coords {
