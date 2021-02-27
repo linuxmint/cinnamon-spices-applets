@@ -224,7 +224,7 @@
             "Hessen": "he",
             "Niedersachsen": "ni",
             "Mecklenburg-Vorpommern": "mv",
-            "Nordrhein-Westphalen": "nw",
+            "Nordrhein-Westfalen": "nw",
             "Rheinland-Pfalz": "rp",
             "Saarland": "sl",
             "Sachsen": "sn",
@@ -391,8 +391,7 @@
         "description": "World Clocks",
         "file": "settings_widgets.py",
         "widget": "ClocksList",
-        "columns": [
-            {
+        "columns": [{
                 "id": "label",
                 "title": "Display name",
                 "type": "string"
