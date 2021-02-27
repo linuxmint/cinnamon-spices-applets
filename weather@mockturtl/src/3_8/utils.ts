@@ -122,7 +122,7 @@ export function GetHoursMinutes(date: Date, locale: string, hours24Format: boole
         timeZone: tz
     }
 
-	params.timeZone = NormalizeTimezone(tz);;
+	params.timeZone = NormalizeTimezone(tz);
 
     if (!onlyHours)
         params.minute = "2-digit";
@@ -172,6 +172,20 @@ export function ProcessCondition(condition: string, shouldTranslate: boolean) {
     if (shouldTranslate) 
         condition = _(condition);
     return condition;
+}
+
+export function LocalizedColon(locale: string): string {
+	if (locale == null)
+		return ":"
+
+	if (locale.startsWith("fr"))
+		return " :"
+
+	return ":"
+}
+
+export function PrecentToLocale(humidity: number, locale: string): string {
+	return (humidity / 100).toLocaleString(locale, {style: "percent"});
 }
 
 // Conversion Factors

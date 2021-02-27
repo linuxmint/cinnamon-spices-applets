@@ -103,7 +103,7 @@ msgstr ""
 
 #. metadata.json->description
 msgid ""
-"Sets brightness, gamma levels and color temperature with Redshift.\n"
+"Sets brightness, gamma levels and color temperature with Redshift. "
 "This applet conflicts with redshift-gtk, make sure you remove it."
 msgstr ""
 
@@ -206,6 +206,14 @@ msgstr ""
 
 #. settings-schema.json->keyTempDown->description
 msgid "Decrease temperature level"
+msgstr ""
+
+#. settings-schema.json->keyGammaUp->description
+msgid "Increase gamma level"
+msgstr ""
+
+#. settings-schema.json->keyGammaDown->description
+msgid "Decrease gamma level"
 msgstr ""
 
 #. settings-schema.json->labelScrollAction->options

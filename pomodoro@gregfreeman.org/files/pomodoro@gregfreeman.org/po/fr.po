@@ -6,10 +6,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-08-27 13:08+0200\n"
-"PO-Revision-Date: 2016-05-23 18:37+0200\n"
+"PO-Revision-Date: 2021-02-16 11:27+0100\n"
 "Last-Translator: Alador <4lador@gmail.com>\n"
 "Language-Team: French\n"
 "Language: fr\n"
@@ -17,6 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 2.3\n"
 
 # notifications
 #: applet.js:311
@@ -170,8 +171,7 @@ msgstr "Fichier son de pause"
 #. pomodoro@gregfreeman.org->settings-
 #. schema.json->auto_start_after_break_ends->description
 msgid "Auto start a new pomodoro after a break ends"
-msgstr ""
-"Démarrer automatiquement un nouveau Pomodoro lorsque la pause est terminée"
+msgstr "Démarrer automatiquement un nouveau Pomodoro lorsque la pause est terminée"
 
 #. pomodoro@gregfreeman.org->settings-
 #. schema.json->timer_sound_file->description

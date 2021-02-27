@@ -2,6 +2,7 @@
 import json
 import os
 import sys
+import subprocess
 from PIL import Image
 
 if len(sys.argv) != 2:
@@ -85,6 +86,24 @@ def validate_xlet(uuid):
         if width != height:
             print("[%s] icon.png has to be square." % uuid)
             valid = False
+
+        # check po and pot files
+        podir = "files/%s/po" % uuid
+        if os.path.isdir(podir):
+            for file in os.listdir(podir):
+                if file.endswith(".po"):
+                    pocheck = subprocess.run(["msgfmt", "-c", os.path.join(podir, file), "-o", "-"], stdout=subprocess.DEVNULL, stderr=subprocess.PIPE, text=True)
+                    if pocheck.stderr:
+                        print("[%s] The following errors were found in translation file '%s':\n%s"
+                              "HINT: Most errors in translation file `%s` can usually be prevented and solved by using Poedit.\n"
+                              % (uuid, file, pocheck.stderr, file)
+                        )
+                        valid = False
+                elif file.endswith(".pot"):
+                    potcheck = subprocess.run(["xgettext", os.path.join(podir, file), "-o", "-"], stdout=subprocess.DEVNULL, stderr=subprocess.PIPE, text=True)
+                    if potcheck.stderr:
+                        print("[%s] The following errors were found in translation template '%s':\n%s" % (uuid, file, potcheck.stderr))
+                        valid = False
 
     except Exception as error:
         print("[%s] Unknown error. %s" % (uuid, error))

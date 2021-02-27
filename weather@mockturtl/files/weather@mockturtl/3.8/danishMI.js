@@ -5,7 +5,7 @@ const utils_1 = require("./utils");
 class DanishMI {
     constructor(app) {
         this.needsApiKey = false;
-        this.prettyName = "Danish MI";
+        this.prettyName = "DMI Denmark";
         this.name = "DanishMI";
         this.maxForecastSupport = 10;
         this.maxHourlyForecastSupport = 48;
@@ -53,7 +53,7 @@ class DanishMI {
             city: forecasts.city,
             country: forecasts.country,
             timeZone: null,
-            url: "https://www.dmi.dk/"
+            url: `https://www.dmi.dk/lokation/show/${forecasts.country}/${forecasts.id}`
         };
         result.coord = {
             lon: forecasts.longitude,

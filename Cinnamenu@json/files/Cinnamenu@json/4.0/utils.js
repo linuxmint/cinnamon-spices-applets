@@ -1,5 +1,7 @@
 const SEARCH_DEBUG = false;
+const GLib = imports.gi.GLib;
 const Gettext = imports.gettext;
+Gettext.bindtextdomain('Cinnamenu@json', GLib.get_home_dir() + "/.local/share/locale");
 
 function _(str) {
     let cinnamonTranslation = Gettext.gettext(str);

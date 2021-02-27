@@ -5,7 +5,7 @@ gi.require_version('Gtk', '3.0')
 import sys, os, threading, re, gettext
 from gi.repository import Gio, Gtk, GLib, GObject, Pango, GdkPixbuf
 
-gettext.install("placesCenter@scollins", os.environ['HOME'] + "/.local/share/locale")
+gettext.install("Cinnamenu@json", os.environ['HOME'] + "/.local/share/locale")
 
 def launch(path):
     fileObj = Gio.File.new_for_path(path)
@@ -256,7 +256,7 @@ class SearchWindow(Gtk.Window):
             return False
         else:
             if os.path.realpath(path) in self.dirs:
-                GObject.idle_add(self.setStatusText, _("Skipping") + ' ' + path + (_(" - direcotry already searched")))
+                GObject.idle_add(self.setStatusText, _("Skipping") + ' ' + path + (_(" - directory already searched")))
                 return True
 
     def isMatch(self, key, child):
