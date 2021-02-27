@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: download-and-upload-speed@cardsurf 1.4.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-24 23:31+0100\n"
-"PO-Revision-Date: 2021-02-21 09:53+0100\n"
+"POT-Creation-Date: 2021-02-27 00:05+0100\n"
+"PO-Revision-Date: 2021-02-27 09:02+0100\n"
 "Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
 "Language-Team: \n"
 "Language: fr\n"
@@ -18,80 +18,80 @@ msgstr ""
 "X-Generator: Poedit 2.3\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: applet.js:427
+#: applet.js:437
 msgid "Network interfaces"
 msgstr "Interfaces réseau"
 
-#: applet.js:496
+#: applet.js:506
 msgid "Total data start"
 msgstr "Quantités totales depuis..."
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:503
+#: applet.js:513
 msgid "Launch of applet"
 msgstr "le lancement de l'applet"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:504
+#: applet.js:514
 msgid "Today"
 msgstr "aujourd'hui"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:505
+#: applet.js:515
 msgid "Yesterday"
 msgstr "hier"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:506
+#: applet.js:516
 msgid "3 days ago"
 msgstr "3 jours"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:507
+#: applet.js:517
 msgid "5 days ago"
 msgstr "5 jours"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:508
+#: applet.js:518
 msgid "7 days ago"
 msgstr "7 jours"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:509
+#: applet.js:519
 msgid "10 days ago"
 msgstr "10 jours"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:510
+#: applet.js:520
 msgid "14 days ago"
 msgstr "14 jours"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:511
+#: applet.js:521
 msgid "30 days ago"
 msgstr "30 jours"
 
 #. settings-schema.json->bytes_start_time->options
-#: applet.js:512
+#: applet.js:522
 msgid "Custom date"
 msgstr "la date choisie"
 
 #. settings-schema.json->gui_start->description
-#: applet.js:549
+#: applet.js:559
 msgid "Gui"
 msgstr "Affichage"
 
 #. settings-schema.json->gui_speed_type->options
-#: applet.js:549
+#: applet.js:559
 msgid "Compact"
 msgstr "Compact"
 
 #. settings-schema.json->gui_speed_type->options
-#: applet.js:549
+#: applet.js:559
 msgid "Large"
 msgstr "Étendu"
 
-#: applet.js:815
+#: applet.js:825
 msgid "b"
 msgstr "b"
 
@@ -159,7 +159,7 @@ msgstr "Période de calcul"
 
 #. settings-schema.json->update_every->tooltip
 msgid "How often to calculate download and upload speed"
-msgstr "Périodicité du calcul de vitesse d'envoi et de réception"
+msgstr "Fréquence de calcul de vitesse d'envoi et de réception"
 
 #. settings-schema.json->update_available_interfaces_every->description
 msgid "Update available interfaces every"
@@ -240,18 +240,30 @@ msgid "Download icon"
 msgstr "Icône Réception"
 
 #. settings-schema.json->gui_received_icon_filename->tooltip
-msgid "An icon displayed next to download speed in the panel"
+msgid ""
+"An icon displayed next to download speed in the panel.\n"
+"To display a symbolic icon make sure its name ends with '-symbolic.svg'."
 msgstr ""
-"Choisir une icône affichée à côté de la vitesse de réception dans le panneau"
+"Icône affichée à côté de la vitesse de réception dans le panneau.\n"
+"Pour afficher une icône symbolique, assurez-vous que son nom se termine pas "
+"« -symbolic.svg »."
 
 #. settings-schema.json->gui_sent_icon_filename->description
 msgid "Upload icon"
 msgstr "Icône Envoi"
 
 #. settings-schema.json->gui_sent_icon_filename->tooltip
-msgid "An icon displayed next to upload speed in the panel"
+msgid ""
+"An icon displayed next to upload speed in the panel.\n"
+"To display a symbolic icon make sure its name ends with '-symbolic.svg'."
 msgstr ""
-"Choisir une icône affichée à côté de la vitesse d'envoi dans le panneau"
+"Icône affichée à côté de la vitesse d'envoi dans le panneau.\n"
+"Pour afficher une icône symbolique, assurez-vous que son nom se termine pas "
+"« -symbolic.svg »."
+
+#. settings-schema.json->gui_symbolic_icon->description
+msgid "Show a default set of symbolic icons"
+msgstr "Affiche par défaut un ensemble d'icônes symboliques"
 
 #. settings-schema.json->hover_popup_text_css->description
 msgid "Popup text CSS"
@@ -282,8 +294,7 @@ msgstr "Valeur minimale affichée en réception"
 
 #. settings-schema.json->minimum_bytes_received_to_display->tooltip
 msgid "A minimum download value to display in the panel"
-msgstr ""
-"Choisir la vitesse minimale de réception qui sera affichée dans le panneau"
+msgstr "Une valeur de téléchargement minimale à afficher dans le panneau"
 
 #. settings-schema.json->minimum_bytes_sent_to_display->description
 msgid "Minimum displayed upload value"
@@ -291,7 +302,7 @@ msgstr "Valeur minimale affichée en envoi"
 
 #. settings-schema.json->minimum_bytes_sent_to_display->tooltip
 msgid "A minimum upload value to display in the panel"
-msgstr "Choisir la vitesse minimale d'envoi qui sera affichée dans le panneau"
+msgstr "Une valeur d'envoi minimale à afficher dans le panneau"
 
 #. settings-schema.json->total_data_start->description
 msgid "Total data"
@@ -428,6 +439,15 @@ msgid "A command used to list current Internet connections"
 msgstr ""
 "Saisir une commande permettant d'obtenir la liste des connexions internet "
 "disponibles"
+
+#~ msgid "An icon displayed next to download speed in the panel"
+#~ msgstr ""
+#~ "Choisir une icône affichée à côté de la vitesse de réception dans le "
+#~ "panneau"
+
+#~ msgid "An icon displayed next to upload speed in the panel"
+#~ msgstr ""
+#~ "Choisir une icône affichée à côté de la vitesse d'envoi dans le panneau"
 
 #~ msgid "Settings for download-and-upload-speed@cardsurf"
 #~ msgstr ""
