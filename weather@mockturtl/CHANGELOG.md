@@ -8,6 +8,7 @@
 * Add more tooltips to settings
 * OpenWeatherMap can also display Precipitation chance if there is no volume specified
 * Autoformat 3.8 and new declaration files
+* Fixes [#3637](https://github.com/linuxmint/cinnamon-spices-applets/issues/3637)
 
 ## 3.0.3
 
