@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Sensors@claudiux.pot 1.4.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-09-24 00:44+0200\n"
-"PO-Revision-Date: 2020-11-07 11:28+0100\n"
+"PO-Revision-Date: 2021-01-23 11:28+0100\n"
 "Last-Translator: Bohuslav Kotál <fotobob1@centrum.cz>\n"
 "Language-Team: \n"
 "Language: cs_CZ\n"
@@ -32,7 +32,7 @@ msgstr ""
 
 #: checkDependencies.js:306
 msgid "Please execute, in the just opened terminal, the commands:"
-msgstr "V právě otevřeném okně terminálu prosím spusť příkazy:"
+msgstr "V právě otevřeném okně terminálu prosím spusť následující příkazy:"
 
 #: checkDependencies.js:307
 msgid "Some dependencies are not installed!"
@@ -65,7 +65,7 @@ msgstr "max:"
 
 #: applet.js:425
 msgid "No intrusion detected"
-msgstr "Nedetekováno narušení"
+msgstr "Narušení nedetekováno"
 
 #: applet.js:425
 msgid "INTRUSION DETECTED!"
@@ -130,11 +130,11 @@ msgstr ""
 
 #. settings-schema.json->page_Temperatures->title
 msgid "🌡 Temperature"
-msgstr "🌡 Teplota"
+msgstr "🌡 Teploty"
 
 #. settings-schema.json->page_Fans->title
 msgid "🤂 Fan"
-msgstr "🤂 Větrák"
+msgstr "🤂 Větráky"
 
 #. settings-schema.json->page_Voltages->title
 msgid "🗲 Voltage"
@@ -158,7 +158,8 @@ msgstr "Hodnoty senzorů"
 
 #. settings-schema.json->section_remove_incompatible_xlets->title
 msgid "Remove from panels certain applets that also use sensors"
-msgstr "Odstraň z panelu některý z appletů, který rovněž sleduje senzory"
+msgstr ""
+"Odstraň z panelu některý z appletů, který rovněž sleduje senzory počítače"
 
 #. settings-schema.json->section_tempDisplay->title
 #. settings-schema.json->section_fanDisplay->title
@@ -271,7 +272,7 @@ msgstr "Bez okrajové linky"
 
 #. settings-schema.json->remove_border->tooltip
 msgid "Whether or not to remove the border line around this applet."
-msgstr "Zobrazit s linkou kolem applety či naopak."
+msgstr "Zobrazit s linkou kolem appletu či naopak."
 
 #. settings-schema.json->remove_icons->description
 msgid "Remove icons"
@@ -283,11 +284,11 @@ msgstr "Zapne či vypne zobrazení ikon."
 
 #. settings-schema.json->bold_values->description
 msgid "Show values in bold in the tooltip"
-msgstr "Hodnoty ve vyskakovací nápovědě zobrazovat tučně"
+msgstr "Hodnoty ve vyskakovací bublině zobrazovat tučně"
 
 #. settings-schema.json->bold_values->tooltip
 msgid "Whether or not to show values in bold in the tooltip."
-msgstr "Definuje písmo hodnot ve vyskakovací tootip nabídce."
+msgstr "Definuje jestli použít tučné písmo hodnot v bublinové nabídce."
 
 #. settings-schema.json->bold_italics_main_sensors->description
 msgid "Show main sensors in bold italics in the tooltip"
@@ -334,7 +335,7 @@ msgstr "Zobrazovat výhradně kladné hodnoty"
 
 #. settings-schema.json->use_fahrenheit->description
 msgid "Show temperature in Fahrenheit"
-msgstr "Teploty ve stupníchFahrenheita"
+msgstr "Teploty ve stupních Fahrenheita"
 
 #. settings-schema.json->only_integer_part->description
 msgid "Display integer values"
@@ -342,7 +343,7 @@ msgstr "Zobrazovat celá čísla"
 
 #. settings-schema.json->only_integer_part->tooltip
 msgid "Whether or not to round the values."
-msgstr "Zvolit možnost jestli čísla zaokrouhlovat na celé hodnoty."
+msgstr "Zvolit možnost jestli hodnoty zaokrouhlovat na celá čísla."
 
 #. settings-schema.json->show_unit->description
 #. settings-schema.json->show_fan_unit->description
@@ -358,15 +359,16 @@ msgstr "Umožní připojit či odebrat jednotku za hodnotou."
 
 #. settings-schema.json->show_unit_letter->description
 msgid "Show unit character"
-msgstr "Zobrazovat zkratku jednotky"
+msgstr "Připojit zkratku jednotky"
 
 #. settings-schema.json->show_unit_letter->tooltip
 msgid "Whether or not to show the unit character (C or F)."
-msgstr "Možnost připojení zkratky jednotky (C či F)."
+msgstr "Možnost zobrazení zkratky jednotky (C či F)."
 
 #. settings-schema.json->always_show_unit_in_line->description
 msgid "Vertical panel: Temperature value and °C / °F on one line"
-msgstr "Vertikální panel: hodnota teploty a jednotka °C / °F na jednom řádku"
+msgstr ""
+"Při vertikálním panelu: hodnota teploty a jednotka °C / °F na jednom řádku"
 
 #. settings-schema.json->always_show_unit_in_line->tooltip
 msgid ""
@@ -410,7 +412,7 @@ msgstr "Zobrazit na panelu"
 msgid ""
 "Show\n"
 "in tooltip"
-msgstr "Zobrazit ve vyskakovací nápovědě"
+msgstr "Zobrazit v bublinové nabídce"
 
 #. settings-schema.json->temp_sensors->columns->title
 #. settings-schema.json->fan_sensors->columns->title
@@ -456,7 +458,7 @@ msgstr "Zobrazit na panelu upozornění na 'narušení' pouze v případě detek
 
 #. settings-schema.json->report->description
 msgid "Example of sensor values from this computer"
-msgstr "Ukázka hodnot senzorů tohoto počítače"
+msgstr "Ukázka hodnot senzorů dostupných na tomto počítači"
 
 #. settings-schema.json->report->tooltip
 msgid "Useful for reporting an issue."

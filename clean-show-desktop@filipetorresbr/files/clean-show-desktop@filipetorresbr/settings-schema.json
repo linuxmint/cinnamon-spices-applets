@@ -5,13 +5,13 @@
  },
  "peek-at-desktop" : {
     "type" : "switch",
-    "default" : false,
+    "default" : true,
     "description": "Peek at the desktop on hover",
     "tooltip": "Peek at the desktop when hovering the applet"
  },
   "peek-blur" : {
     "type" : "switch",
-    "default" : false,
+    "default" : true,
     "dependency" : "peek-at-desktop",
     "indent" : true,
     "description" : "Blur effect",
@@ -44,7 +44,7 @@
     "type": "scale",
     "default" : 1,
     "min" : 1,
-    "max" : 100,
+    "max" : 10,
     "step" : 1,
     "units" : "pixels",
     "description" : "Applet size",
@@ -78,7 +78,7 @@
     "type": "scale",
     "default" : 1,
     "min" : 0,
-    "max" : 30,
+    "max" : 5,
     "step" : 1,
     "units" : "pixels",
     "description" : "Border width",

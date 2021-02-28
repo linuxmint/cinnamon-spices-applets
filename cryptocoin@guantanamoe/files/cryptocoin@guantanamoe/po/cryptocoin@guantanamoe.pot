@@ -12,10 +12,10 @@ msgstr ""
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
 
 #. cryptocoin@guantanamoe->metadata.json->description
 msgid "Monitor current price and trends of cryptocurrencies"
@@ -26,29 +26,40 @@ msgid "Cryptocoin"
 msgstr ""
 
 #. cryptocoin@guantanamoe->settings-schema.json->layout->general-page->title
+#. settings-schema.json->general-page->title
 msgid "General"
 msgstr ""
 
 #. cryptocoin@guantanamoe->settings-schema.json->layout->graph-page->title
 #. cryptocoin@guantanamoe->settings-schema.json->layout->graph-section->title
+#. settings-schema.json->graph-page->title
+#. settings-schema.json->graph-section->title
 msgid "Graph"
 msgstr ""
 
 #. cryptocoin@guantanamoe->settings-schema.json->layout->alerts-page->title
 #. cryptocoin@guantanamoe->settings-schema.json->layout->alerts-section->title
+#. settings-schema.json->alerts-page->title
+#. settings-schema.json->alerts-section->title
 msgid "Alerts"
 msgstr ""
 
-#. cryptocoin@guantanamoe->settings-schema.json->layout->currency-section->title
+#. cryptocoin@guantanamoe->settings-schema.json->layout->currency-
+#. section->title
 #. cryptocoin@guantanamoe->settings-schema.json->currency->description
+#. settings-schema.json->currency-section->title
+#. settings-schema.json->advanced-currency-section->title
 msgid "Currency"
 msgstr ""
 
 #. cryptocoin@guantanamoe->settings-schema.json->layout->alerts-config->title
+#. settings-schema.json->alerts-config->title
 msgid "Config"
 msgstr ""
 
-#. cryptocoin@guantanamoe->settings-schema.json->layout->alerts-delta-section->title
+#. cryptocoin@guantanamoe->settings-schema.json->layout->alerts-delta-
+#. section->title
+#. settings-schema.json->alerts-delta-section->title
 msgid "Delta Alerts"
 msgstr ""
 
@@ -80,7 +91,8 @@ msgstr ""
 msgid "name"
 msgstr ""
 
-#. cryptocoin@guantanamoe->settings-schema.json->show-currency->options->Symbol
+#. cryptocoin@guantanamoe->settings-schema.json->show-
+#. currency->options->Symbol
 msgid "symbol"
 msgstr ""
 
@@ -131,9 +143,11 @@ msgstr ""
 msgid "Any change"
 msgstr ""
 
-#. cryptocoin@guantanamoe->settings-schema.json->alert-label-color->description
+#. cryptocoin@guantanamoe->settings-schema.json->alert-label-
+#. color->description
 msgid "Label color"
 msgstr ""
+
 #. cryptocoin@guantanamoe->settings-schema.json->alert-on-above->description
 msgid "Absolute maximum (money)"
 msgstr ""
@@ -150,7 +164,8 @@ msgstr ""
 msgid "Alert when current value is below this value"
 msgstr ""
 
-#. cryptocoin@guantanamoe->settings-schema.json->alert-on-delta-above->description
+#. cryptocoin@guantanamoe->settings-schema.json->alert-on-delta-
+#. above->description
 msgid "Increase variation (%)"
 msgstr ""
 
@@ -158,7 +173,8 @@ msgstr ""
 msgid "Alert when value increase this delta %"
 msgstr ""
 
-#. cryptocoin@guantanamoe->settings-schema.json->alert-on-delta-below->description
+#. cryptocoin@guantanamoe->settings-schema.json->alert-on-delta-
+#. below->description
 msgid "Decrease variation (%)"
 msgstr ""
 
@@ -166,7 +182,8 @@ msgstr ""
 msgid "Alert when value decrease this delta %"
 msgstr ""
 
-#. cryptocoin@guantanamoe->settings-schema.json->alert-delta-length->description
+#. cryptocoin@guantanamoe->settings-schema.json->alert-delta-
+#. length->description
 msgid "Delta interval"
 msgstr ""
 
@@ -174,6 +191,75 @@ msgstr ""
 msgid "Unit of interval"
 msgstr ""
 
-#. cryptocoin@guantanamoe->settings-schema.json->alert-delta-update-interval->description
+#. cryptocoin@guantanamoe->settings-schema.json->alert-delta-update-
+#. interval->description
 msgid "Update interval"
+msgstr ""
+
+#. settings-schema.json->advanced-page->title
+msgid "Advanced"
+msgstr ""
+
+#. settings-schema.json->amount->description
+msgid "Amount"
+msgstr ""
+
+#. settings-schema.json->amount->tooltip
+msgid "Set the balance to multiply the price"
+msgstr ""
+
+#. settings-schema.json->show-currency->options
+msgid "Name"
+msgstr ""
+
+#. settings-schema.json->show-currency->options
+msgid "Symbol"
+msgstr ""
+
+#. settings-schema.json->show-currency->options
+msgid "None"
+msgstr ""
+
+#. settings-schema.json->rates-update-interval->description
+msgid "Rates update interval (in seconds)"
+msgstr ""
+
+#. settings-schema.json->rates-update-interval->tooltip
+msgid "Set the delay between each rates update."
+msgstr ""
+
+#. settings-schema.json->graph-type->description
+msgid "Graph Type"
+msgstr ""
+
+#. settings-schema.json->graph-type->options
+msgid "Candlestick"
+msgstr ""
+
+#. settings-schema.json->graph-type->options
+msgid "Line"
+msgstr ""
+
+#. settings-schema.json->graph-color->description
+msgid "Graph Foreground Color"
+msgstr ""
+
+#. settings-schema.json->alert-delta-update-interval->units
+msgid "seconds"
+msgstr ""
+
+#. settings-schema.json->currency-format-enable->description
+msgid "Custom format"
+msgstr ""
+
+#. settings-schema.json->currency-format-symbol->description
+msgid "Currency symbol"
+msgstr ""
+
+#. settings-schema.json->currency-format-name->description
+msgid "Currency name"
+msgstr ""
+
+#. settings-schema.json->currency-format-precision->description
+msgid "Decimal places"
 msgstr ""

@@ -1,0 +1,11 @@
+#!/bin/bash
+
+cd ..
+uuid="calendar@ccprog"
+
+cinnamon-xlet-makepot --potfile po/$uuid.pot .
+
+# We need to set UTF-8 charset in the .pot file,
+# since there are unicode characters in the settings schema file,
+# e.g. German umlauts, which else are shown wrong in .po files. 
+sed -i 's/charset=CHARSET/charset=UTF-8/g' po/$uuid.pot

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-08 19:11+0200\n"
+"POT-Creation-Date: 2021-02-24 20:57+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,47 +17,47 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: applet.js:144
+#: applet.js:148
 msgid "(Right click to open folder)"
 msgstr ""
 
-#: applet.js:166
+#: applet.js:170
 msgid "Places"
 msgstr ""
 
-#: applet.js:281
+#: applet.js:284
 msgid "Search Home Folder"
 msgstr ""
 
-#: applet.js:304
+#: applet.js:307
 msgid "SYSTEM"
 msgstr ""
 
-#: applet.js:313
+#: applet.js:316
 msgid "Search File System"
 msgstr ""
 
-#: applet.js:338
+#: applet.js:341
 msgid "RECENT DOCUMENTS"
 msgstr ""
 
-#: applet.js:352
+#: applet.js:355
 msgid "Clear"
 msgstr ""
 
-#: applet.js:395
+#: applet.js:398
 msgid "Computer"
 msgstr ""
 
-#: applet.js:401
+#: applet.js:404
 msgid "File System"
 msgstr ""
 
-#: applet.js:417
+#: applet.js:420
 msgid "Network"
 msgstr ""
 
-#: applet.js:554
+#: applet.js:560
 msgid "Trash"
 msgstr ""
 
@@ -130,7 +130,7 @@ msgid "Skipping"
 msgstr ""
 
 #: search.py:259
-msgid " - direcotry already searched"
+msgid " - directory already searched"
 msgstr ""
 
 #. metadata.json->name

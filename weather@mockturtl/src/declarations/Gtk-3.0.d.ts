@@ -44,7 +44,7 @@ declare namespace imports.gi.Gtk {
     
     interface AccelGroup extends GObject.Object {
         activate (accel_quark: GLib.Quark, acceleratable: GObject.Object, accel_key: number, accel_mods: Gdk.ModifierType) : boolean;
-        connect (accel_key: number, accel_mods: Gdk.ModifierType, accel_flags: AccelFlags, closure: GObject.Closure) : void;
+        //connect (accel_key: number, accel_mods: Gdk.ModifierType, accel_flags: AccelFlags, closure: GObject.Closure) : void;
         connect_by_path (accel_path: string, closure: GObject.Closure) : void;
         disconnect (closure: GObject.Closure) : boolean;
         disconnect_key (accel_key: number, accel_mods: Gdk.ModifierType) : boolean;

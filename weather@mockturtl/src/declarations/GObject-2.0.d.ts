@@ -29,13 +29,14 @@ declare namespace imports.gi.GObject {
     
     
     
-    interface Object {
+    class Object {
         add_toggle_ref (notify: ToggleNotify, data: any) : void;
         add_weak_pointer (weak_pointer_location: any) : void;
         bind_property (source_property: string, target: Object, target_property: string, flags: BindingFlags) : Binding;
         bind_property_full (source_property: string, target: Object, target_property: string, flags: BindingFlags, transform_to: BindingTransformFunc, transform_from: BindingTransformFunc, user_data: any, notify: GLib.DestroyNotify) : Binding;
         bind_property_with_closures (source_property: string, target: Object, target_property: string, flags: BindingFlags, transform_to: Closure, transform_from: Closure) : Binding;
-        // connect (signal_spec: string) : Object;
+		/** signal+property: string, callback: Function */
+		connect (...params: any) : any;
         // disconnect (signal_spec: string) : void;
         dup_data (key: string, dup_func: GLib.DuplicateFunc, user_data: any) : any;
         dup_qdata (quark: GLib.Quark, dup_func: GLib.DuplicateFunc, user_data: any) : any;
@@ -71,22 +72,17 @@ declare namespace imports.gi.GObject {
         unref () : void;
         watch_closure (closure: Closure) : void;
         weak_ref (notify: WeakNotify, data: any) : void;
-        weak_unref (notify: WeakNotify, data: any) : void;
+		weak_unref (notify: WeakNotify, data: any) : void;
+		
+		static new (...params: any) : Object;
+        static new_valist (object_type: GObject.Type, first_property_name: string, var_args: any[]) : Object;
+        static new_with_properties (object_type: GObject.Type, n_properties: number, names: string[], values: Value[]) : Object;
+        static newv (object_type: GObject.Type, n_parameters: number, parameters: Parameter[]) : Object;
+        static compat_control (what: number, data: any) : number;
+        static interface_find_property (g_iface: TypeInterface, property_name: string) : ParamSpec;
+        static interface_install_property (g_iface: TypeInterface, pspec: ParamSpec) : void;
+        static interface_list_properties (g_iface: TypeInterface, n_properties_p: number) : ParamSpec[];
     }
-    
-    var Object: {
-        new (object_type: GObject.Type, first_property_name: string) : Object;
-        new_valist (object_type: GObject.Type, first_property_name: string, var_args: any[]) : Object;
-        new_with_properties (object_type: GObject.Type, n_properties: number, names: string[], values: Value[]) : Object;
-        newv (object_type: GObject.Type, n_parameters: number, parameters: Parameter[]) : Object;
-        compat_control (what: number, data: any) : number;
-        interface_find_property (g_iface: TypeInterface, property_name: string) : ParamSpec;
-        interface_install_property (g_iface: TypeInterface, pspec: ParamSpec) : void;
-        interface_list_properties (g_iface: TypeInterface, n_properties_p: number) : ParamSpec[];
-    }
-    
-    
-    
     
     interface ParamSpec {
         get_blurb () : string;

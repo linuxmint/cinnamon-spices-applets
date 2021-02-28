@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-15 12:28+0200\n"
+"POT-Creation-Date: 2021-02-16 20:27+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: applet.js:71
+#: applet.js:79
 msgid "Error: Still waiting for command to finish!"
 msgstr ""
 
@@ -33,6 +33,14 @@ msgstr ""
 
 #. settings-schema.json->head->description
 msgid "Settings - Bash Sensors (write commands in Bash!)"
+msgstr ""
+
+#. settings-schema.json->title1->description
+msgid "Title"
+msgstr ""
+
+#. settings-schema.json->title1->tooltip
+msgid "Title used when displaying notifications"
 msgstr ""
 
 #. settings-schema.json->refreshInterval->units
@@ -60,9 +68,7 @@ msgid "Command 1"
 msgstr ""
 
 #. settings-schema.json->script1->tooltip
-msgid ""
-"first line of output (use "
-" for more lines)"
+msgid "first line of output (use \\f for more lines)"
 msgstr ""
 
 #. settings-schema.json->enableScript2->description
@@ -75,6 +81,22 @@ msgstr ""
 
 #. settings-schema.json->script2->tooltip
 msgid "second line of output (optional)"
+msgstr ""
+
+#. settings-schema.json->head2->description
+msgid "Icon"
+msgstr ""
+
+#. settings-schema.json->dynamicIcon->description
+msgid "Dynamic icon (use output of icon command as icon)"
+msgstr ""
+
+#. settings-schema.json->iconScript->description
+msgid "Static icon or command returning the full path to an icon"
+msgstr ""
+
+#. settings-schema.json->iconScript->tooltip
+msgid "command should return an icon (leave empty for no icon)"
 msgstr ""
 
 #. settings-schema.json->head3->description

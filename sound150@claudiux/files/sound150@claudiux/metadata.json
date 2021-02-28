@@ -2,7 +2,6 @@
   "multiversion": true,
   "uuid": "sound150@claudiux",
   "name": "Sound 150%",
-  "icon": "audio-volume-high-symbolic",
   "max-instances": "1",
   "description": "An applet, based on the Cinnamon one, to control sound (up to 150% of nominal volume) and music",
   "hide-configuration": false,

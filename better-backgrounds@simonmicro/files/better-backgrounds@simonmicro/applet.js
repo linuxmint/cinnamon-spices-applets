@@ -167,7 +167,7 @@ class UnsplashBackgroundApplet extends Applet.TextIconApplet {
                         tileId++;
                         that.set_applet_label(Math.floor(tileId / (zoomLvl * zoomLvl) * 100) + '%');
                         that._download_image('https://himawari8-dl.nict.go.jp/himawari8/img/D531106/' +
-                            zoomLvl + 'd/550/' + latestDate.getFullYear() + '/' + ('0' + latestDate.getMonth()).slice(-2) + 
+                            zoomLvl + 'd/550/' + latestDate.getFullYear() + '/' + ('0' + (latestDate.getMonth() + 1)).slice(-2) + 
                             '/' + ('0' + latestDate.getDate()).slice(-2) + '/' + ('0' + latestDate.getHours()).slice(-2) +
                             ('0' + latestDate.getMinutes()).slice(-2) + ('0' + latestDate.getSeconds()).slice(-2) + '_' +
                             y + '_' + x + '.png', tileName)

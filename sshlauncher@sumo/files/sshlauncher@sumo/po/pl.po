@@ -17,7 +17,7 @@ msgstr ""
 "Last-Translator: \n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n"
 "%100<12 || n%100>14) ? 1 : 2);\n"
-"Language: pl_PL\n"
+"Language: pl\n"
 
 #. metadata.json->name
 #: applet.js:40 applet.js:56 applet.js:99 applet.js:206 applet.js:223

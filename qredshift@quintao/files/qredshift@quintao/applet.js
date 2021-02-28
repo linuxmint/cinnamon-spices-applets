@@ -3,9 +3,9 @@ const Applet = imports.ui.applet;
 const PopupMenu = imports.ui.popupMenu;
 const Util = imports.misc.util;
 const GLib = imports.gi.GLib;
-const Gio = imports.gi.Gio;
-const Gtk = imports.gi.Gtk;
-const St = imports.gi.St;
+// const Gio = imports.gi.Gio;
+// const Gtk = imports.gi.Gtk;
+// const St = imports.gi.St;
 const Mainloop = imports.mainloop;
 const Settings = imports.ui.settings;
 const Main = imports.ui.main;
@@ -68,6 +68,8 @@ class QRedshift extends Applet.TextIconApplet {
             keyBrightnessDown: '',
             keyTempUp: '',
             keyTempDown: '',
+            keyGammaUp: '',
+            keyGammaDown: '',
             
             dayTemp: 6500,
             dayBrightness: 1,
@@ -123,38 +125,21 @@ class QRedshift extends Applet.TextIconApplet {
         this.settings.bind("keyBrightnessDown", "keyBrightnessDown", this.onKeyChanged.bind(this));
         this.settings.bind("keyTempUp", "keyTempUp", this.onKeyChanged.bind(this));
         this.settings.bind("keyTempDown", "keyTempDown", this.onKeyChanged.bind(this));
-        
-        if (!this.verifyVersion()) {
-            qLOG('Redshift required!');
-            
-            this.setIcon();
-            this.set_applet_label(_("REDSHIFT NOT INSTALLED!"));
-            this.set_applet_tooltip(_("Requires Redshift: sudo apt-get install redshift"));
-            
-            // Reload BTN - view-refresh-symbolic
-            let reload_btn = new PopupMenu.PopupMenuItem(_("Reload Applet"), {hover: true});
-            reload_btn.connect('activate', this.reloadApplet.bind(this));
-            this._applet_context_menu.addMenuItem(reload_btn);
-            
-            this.menu = this._applet_context_menu;
-            
-            return this;
-        }
+        this.settings.bind("keyGammaUp", "keyGammaUp", this.onKeyChanged.bind(this));
+        this.settings.bind("keyGammaDown", "keyGammaDown", this.onKeyChanged.bind(this));
         
         
-        // Load Informations
-        this.setAdjustmentMethods(false);
-        this.setLocation(false);
-    
-    
+        
+        
+        
         this.setIcon();
-        this.set_applet_label(this.metadata.name);
+        this.set_applet_label("QRedshift Loading...");
         
         this.hide_applet_label(!this.opt.iconLabel);
         if (!this.opt.enabled && !this.opt.iconLabelAlways) this.hideLabel();
         
         
-        qLOG("QRedshift");
+        qLOG("QRedshift", 'Created');
         
         this.maxBrightness = 100;
         this.minBrightness = 10;
@@ -168,6 +153,8 @@ class QRedshift extends Applet.TextIconApplet {
         this.menu = new Applet.AppletPopupMenu(this, orientation);
         this.menuManager.addMenu(this.menu);
         this.createPopup();
+        
+        this.appMenu = this.menu;
         
         // Reload BTN
         let reload_btn = new PopupMenu.PopupIconMenuItem(_("Reload Applet"), 'view-refresh-symbolic', QIcon.SYMBOLIC, {hover: true});
@@ -217,27 +204,38 @@ class QRedshift extends Applet.TextIconApplet {
         
         // qLOG("KEY|");
         this.onKeyChanged();
-        this.doUpdate();
-    }
-    
-    
-    loadStyle() {
-        const style_path = this.metadata.path + '/css/style.css';
-        const theme_path = Main.getThemeStylesheet();
-        qLOG('Theme', theme_path);
         
-        const fallback = this.menu.actor.get_theme_node().get_theme()['fallback-stylesheet'];
-        qLOG('Fallback', fallback);
+        this.running = false;
+        this.timeout_info = false;
         
-        let theme = new St.Theme({
-            application_stylesheet: style_path,
-            theme_stylesheet: theme_path,
-            default_stylesheet: null,
-            fallback_stylesheet: fallback
+        // --- Async Loading ---
+        this.verifyVersion(() => {
+            this.menu = this._applet_context_menu;
+            this.timeout_info = setTimeout(() => {
+                qLOG('Redshift required!');
+                this.setIcon();
+                this.set_applet_label(_("REDSHIFT NOT INSTALLED!"));
+                this.set_applet_tooltip(_("Requires Redshift: sudo apt-get install redshift"));
+            }, 500);
+            
+        }, (success) => {
+            clearTimeout(this.timeout_info);
+            // Set Menu
+            this.menu = this.appMenu;
+            
+            // Disable Redshift
+            this.disableRedshiftService()
+            
+            // Load Informations
+            this.setAdjustmentMethods(false);
+            this.setLocation(false);
+            
+            this.doUpdate();
+            
         });
         
-        this.menu.actor.set_theme(theme);
     }
+    
     
     setIcon() {
         // qLOG('ICON', this.opt.symbolicIcon);
@@ -257,24 +255,48 @@ class QRedshift extends Applet.TextIconApplet {
     }
     
     
-    verifyVersion() {
-        try {
-            let [success, out] = GLib.spawn_command_line_sync('redshift -V');
-            if (success && out) {
-                let res = out.toString();
-                let mts = /redshift\s*(\d+.?\d*)/gi.exec(res);
-                if (mts.length == 2)
-                    this.opt.redshift_version = parseFloat(mts[1]);
-                
-                // qLOG('success', this.opt);
-                return true;
-            } else {
-                return false;
-            }
-        } catch (e) {
-            return false;
-        }
+    verifyVersion(before = false, success = false) {
+        if (before) before();
         
+        try {
+            let cmd = "redshift -V";
+            Util.spawn_async(GLib.shell_parse_argv(cmd)[1], (out) => {
+                let mts = /redshift\s*(\d+.?\d*)/gi.exec(out.trim());
+                if (mts.length == 2) this.opt.redshift_version = parseFloat(mts[1]);
+                
+                // qLOG('DEBUG', this.opt.redshift_version);
+                if (success) success(true);
+            });
+        } catch (e) {}
+        
+        
+    }
+    
+    disableRedshiftService() {
+        Util.spawn_async(GLib.shell_parse_argv("systemctl is-enabled --user redshift")[1], (out) => {
+            if (out.toString().trim() === 'enabled') {
+                Util.spawnCommandLine('systemctl mask --user redshift');
+                qLOG('QRedshift', 'Disabling Service');
+            }
+        });
+        
+        Util.spawn_async(GLib.shell_parse_argv("systemctl is-active --user redshift")[1], (out) => {
+            if (out.toString().trim() === 'active') {
+                Util.spawnCommandLine('systemctl stop --user redshift');
+                qLOG('QRedshift', 'Stopping Service');
+            }
+        });
+        
+    }
+    
+    checkLocalConfig() {
+        try {
+            let home = this.metadata.path.split('.local')[0];
+            let exists = GLib.file_test(home + '.config/redshift.conf', 16);
+            return exists;
+        } catch (e) {
+            return true;
+        }
     }
     
     setAdjustmentMethods(force = false) {
@@ -283,21 +305,20 @@ class QRedshift extends Applet.TextIconApplet {
         
         const regex = new RegExp(/^\s+(\w+)$/gm);
         
-        let [success, out] = GLib.spawn_command_line_sync('redshift -m list');
-        if (success && out) {
-            let res = out.toString();
-            let mts = res.match(regex).map(s => s.trim());
+        let cmd = "redshift -m list";
+        Util.spawn_async(GLib.shell_parse_argv(cmd)[1], (out) => {
+            let mts = out.match(regex).map(s => s.trim());
             let opts = {};
             mts.forEach(value => { opts[value] = value;});
             this.settings.setOptions('adjustmentMethod', opts);
-        }
+        });
+        
     }
     
     setLocation(force = true) {
         let remoteEnable = this.settings.getValue('locationRemote');
         
-        if (this.opt.locationLatitude != "0" &&
-            this.opt.locationLongitude != "0" && !force && !remoteEnable) return;
+        if (this.opt.locationLatitude != "0" && this.opt.locationLongitude != "0" && !force && !remoteEnable) return;
         
         Util.spawn_async(['curl', 'https://geolocation-db.com/json/'], (out) => {
             let {city, state, country_name, latitude, longitude} = JSON.parse(out);
@@ -346,6 +367,14 @@ class QRedshift extends Applet.TextIconApplet {
         Main.keybindingManager.addHotKey("keyTempDown", this.opt.keyTempDown, (event) => {
             this.dc_Slider._setValueEmit(this.dc_Slider.value - this.dc_Slider.STEP);
             this.nc_Slider._setValueEmit(this.nc_Slider.value - this.nc_Slider.STEP);
+        });
+        
+        Main.keybindingManager.addHotKey("keyGammaUp", this.opt.keyGammaUp, (event) => {
+            this.gm_Slider._setValueEmit(this.gm_Slider.value + this.gm_Slider.STEP);
+        });
+        
+        Main.keybindingManager.addHotKey("keyGammaDown", this.opt.keyGammaDown, (event) => {
+            this.gm_Slider._setValueEmit(this.gm_Slider.value - this.gm_Slider.STEP);
         });
         
         Main.keybindingManager.addHotKey("keyToggle", this.opt.keyToggle, (event) => {
@@ -397,6 +426,25 @@ class QRedshift extends Applet.TextIconApplet {
         });
         this.menu.addMenuItem(this.headerIcon);
         this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+        
+        
+        if (this.checkLocalConfig()) {
+            qLOG('QRedshift', '~/.config/redshift.conf should be removed');
+            
+            let info = new QPopupHeader({
+                label: "~/.config/redshift.conf",
+                sub_label: _("may conflict with this applet, it is highly recommended removing it."),
+                iconName: "dialog-warning", //dialog-warning-symbolic
+                iconSize: 16
+            })
+            this.menu.addMenuItem(info);
+            
+            
+            this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+            
+        }
+        
+        
         
         
         
@@ -580,7 +628,7 @@ class QRedshift extends Applet.TextIconApplet {
     
     
     on_applet_added_to_panel() {
-        qLOG('QRedshift - ADDED TO PANEL');
+        qLOG('QRedshift', 'ADDED TO PANEL');
     }
     
     
@@ -589,32 +637,42 @@ class QRedshift extends Applet.TextIconApplet {
     }
     
     on_applet_removed_from_panel() {
-        qLOG('QRedshift - REMOVED FROM PANEL');
+        qLOG('QRedshift', 'REMOVED FROM PANEL');
         this.settings.finalize();
         Main.keybindingManager.removeHotKey("keyToggle");
         Main.keybindingManager.removeHotKey("keyBrightnessUp");
         Main.keybindingManager.removeHotKey("keyBrightnessDown");
         Main.keybindingManager.removeHotKey("keyTempUp");
         Main.keybindingManager.removeHotKey("keyTempDown");
+        Main.keybindingManager.removeHotKey("keyGammaUp");
+        Main.keybindingManager.removeHotKey("keyGammaDown");
         if (this.timeout) {
             Mainloop.source_remove(this.timeout);
             this.timeout = undefined;
         }
         
         Util.killall('redshift');
-        Util.spawnCommandLine(`redshift -x -c ${this.metadata.path + BASE_CONF}`);
+        Util.spawnCommandLine(`redshift -x`);
         
     }
     
     
     doCommand(command) {
-        let [success, out] = GLib.spawn_command_line_sync(command);
-        if (!success || out == null) return;
-        let resp = out.toString();
-        
-        let period = resp.match(/Period:.+/g);
-        if (period && period[0]) {
-            this.opt.period = period[0].split(':')[1].trim();
+        // qLOG('QRedshift CMD',  command);
+        if (!this.running) {
+            this.running = true;
+            Util.spawn_async(GLib.shell_parse_argv(command)[1], (out) => {
+                let period = out.match(/Period:.+/g);
+                if (period && period[0]) {
+                    this.opt.period = period[0].split(':')[1].trim();
+                }
+                // qLOG('QRedshift Command', command);
+                // qLOG('QRedshift Period', this.opt.period);
+                this.setIcon();
+                this.updateTooltip();
+                this.setInfo();
+                this.running = false;
+            });
         }
     }
     
@@ -623,7 +681,7 @@ class QRedshift extends Applet.TextIconApplet {
         Util.killall('redshift');
         if (this.opt.enabled) {
             let cmd = `redshift `;
-            cmd += `-c ${this.metadata.path + BASE_CONF}  `;
+            // cmd += `-c ${this.metadata.path + BASE_CONF}  `;
             if (this.opt.redshift_version >= 1.12) cmd += `-P `;
             cmd += `-r -v -o  `;
             
@@ -631,7 +689,6 @@ class QRedshift extends Applet.TextIconApplet {
             if (this.opt.adjustmentMethod) cmd += `-m ${this.opt.adjustmentMethod} `;
             
             if (this.opt.locationLatitude && this.opt.locationLongitude) {
-                if (this.opt.adjustmentMethod) cmd += `-m ${this.opt.adjustmentMethod} `;
                 cmd += `-l ${this.opt.locationLatitude}:${this.opt.locationLongitude} `
             }
             
@@ -646,21 +703,21 @@ class QRedshift extends Applet.TextIconApplet {
             if (this.opt.gammaMix) cmd += `-g ${this.opt.gammaMix} `;
             
             // Util.spawnCommandLine(cmd);
-            this.doCommand(cmd);
             this.set_applet_icon_symbolic_path(this.metadata.path + ICON_ON);
+            this.doCommand(cmd);
             
         } else {
             // if(this.opt.period !== '' ){
-            Util.spawnCommandLine(`redshift -x -c ${this.metadata.path + BASE_CONF}`);
+            Util.spawnCommandLine(`redshift -x`);
             this.set_applet_icon_symbolic_path(this.metadata.path + ICON_OFF);
             this.opt.period = '-';
             
             // }
-            
+            this.setIcon();
+            this.updateTooltip();
+            this.setInfo();
         }
-        this.setIcon();
-        this.updateTooltip();
-        this.setInfo();
+        
     }
     
     setInfo() {
@@ -726,8 +783,6 @@ class QRedshift extends Applet.TextIconApplet {
 }
 
 
-function
-
-main(metadata, orientation, panel_height, instance_id) {
+function main(metadata, orientation, panel_height, instance_id) {
     return new QRedshift(metadata, orientation, panel_height, instance_id);
 }

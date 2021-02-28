@@ -44,17 +44,13 @@ function importModule(path) {
         return AppletDir[path];
     }
 }
-var UUID = "weather@mockturtl";
-imports.gettext.bindtextdomain(UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
-function _(str) {
-    return imports.gettext.dgettext(UUID, str);
-}
 var utils = importModule("utils");
 var isCoordinate = utils.isCoordinate;
 var isLangSupported = utils.isLangSupported;
 var CelsiusToKelvin = utils.CelsiusToKelvin;
 var IsNight = utils.IsNight;
 var weatherIconSafely = utils.weatherIconSafely;
+var _ = utils._;
 var Climacell = (function () {
     function Climacell(_app) {
         this.prettyName = "Climacell";
@@ -153,7 +149,7 @@ var Climacell = (function () {
                 temperature: CelsiusToKelvin(json.temp.value),
                 humidity: json.humidity.value,
                 location: {
-                    url: null,
+                    url: "https://www.climacell.co/weather",
                     city: null,
                     country: null,
                     timeZone: null
@@ -239,7 +235,7 @@ var Climacell = (function () {
                 type: "hard",
                 userError: true,
                 detail: "bad key",
-                service: "darksky",
+                service: "climacell",
                 message: _("Please Make sure you\nentered the API key correctly and your account is not locked")
             };
         }
@@ -248,8 +244,8 @@ var Climacell = (function () {
                 type: "hard",
                 userError: true,
                 detail: "no key",
-                service: "darksky",
-                message: _("Please Make sure you\nentered the API key what you have from DarkSky")
+                service: "climacell",
+                message: _("Please Make sure you\nentered the API key what you have from Climacell")
             };
         }
         return null;
@@ -260,8 +256,8 @@ var Climacell = (function () {
             case ("rain_heavy"):
                 return {
                     customIcon: "rain-symbolic",
-                    description: _("Substantial Rain"),
-                    main: _("Substantial Rain"),
+                    description: _("Heavy rain"),
+                    main: _("Heavy rain"),
                     icon: weatherIconSafely(["weather-rain", "weather-freezing-rain", "weather-showers-scattered"], this.app.config.IconType())
                 };
             case ("rain"):
@@ -274,71 +270,71 @@ var Climacell = (function () {
             case ("rain_light"):
                 return {
                     customIcon: "rain-mix-symbolic",
-                    description: _("Light Rain"),
-                    main: _("Light Rain"),
+                    description: _("Light rain"),
+                    main: _("Light rain"),
                     icon: weatherIconSafely(["weather-showers-scattered", "weather-rain", "weather-freezing-rain"], this.app.config.IconType())
                 };
             case ("freezing_rain_heavy"):
                 return {
                     customIcon: "hail-symbolic",
-                    description: _("Substantial Freezing Rain"),
-                    main: _("Freezing Rain"),
+                    description: _("Heavy freezing rain"),
+                    main: _("Freezing rain"),
                     icon: weatherIconSafely(["weather-freezing-rain", "weather-rain", "weather-showers-scattered"], this.app.config.IconType())
                 };
             case ("freezing_rain"):
                 return {
                     customIcon: "hail-symbolic",
-                    description: _("Freezing Rain"),
-                    main: _("Freezing Rain"),
+                    description: _("Freezing rain"),
+                    main: _("Freezing rain"),
                     icon: weatherIconSafely(["weather-freezing-rain", "weather-rain", "weather-showers-scattered"], this.app.config.IconType())
                 };
             case ("freezing_rain_light"):
                 return {
                     customIcon: "hail-symbolic",
-                    description: _("Light Freezing Rain"),
-                    main: _("Freezing Rain"),
+                    description: _("Light freezing rain"),
+                    main: _("Freezing rain"),
                     icon: weatherIconSafely(["weather-showers-scattered", "weather-freezing-rain", "weather-rain"], this.app.config.IconType())
                 };
             case ("freezing_drizzle"):
                 return {
                     customIcon: "sleet-symbolic",
                     description: _("Light freezing drizzle"),
-                    main: _("Freezing Drizzle"),
+                    main: _("Freezing drizzle"),
                     icon: weatherIconSafely(["weather-showers-scattered", "weather-rain", "weather-freezing-rain"], this.app.config.IconType())
                 };
             case ("drizzle"):
                 return {
                     customIcon: "sleet-symbolic",
-                    description: _("Light Drizzle"),
-                    main: _("Light Drizzle"),
+                    description: _("Light drizzle"),
+                    main: _("Light drizzle"),
                     icon: weatherIconSafely(["weather-showers-scattered", "weather-rain", "weather-freezing-rain"], this.app.config.IconType())
                 };
             case ("ice_pellets_heavy"):
                 return {
                     customIcon: "snow-wind-symbolic",
-                    description: _("Substantial Ice Pellets"),
-                    main: _("Ice Pellets"),
+                    description: _("Heavy ice pellets"),
+                    main: _("Ice pellets"),
                     icon: weatherIconSafely(["weather-freezing-rain", "weather-rain", "weather-showers-scattered"], this.app.config.IconType())
                 };
             case ("ice_pellets"):
                 return {
                     customIcon: "snow-wind-symbolic",
-                    description: _("Ice Pellets"),
-                    main: _("Ice Pellets"),
+                    description: _("Ice pellets"),
+                    main: _("Ice pellets"),
                     icon: weatherIconSafely(["weather-freezing-rain", "weather-rain", "weather-showers-scattered"], this.app.config.IconType())
                 };
             case ("ice_pellets_light"):
                 return {
                     customIcon: "snow-wind-symbolic",
-                    description: _("Light Ice Pellets"),
-                    main: _("Ice Pellets"),
+                    description: _("Light ice pellets"),
+                    main: _("Ice pellets"),
                     icon: weatherIconSafely(["weather-freezing-rain", "weather-rain", "weather-showers-scattered"], this.app.config.IconType())
                 };
             case ("snow_heavy"):
                 return {
                     customIcon: "snow-symbolic",
-                    description: _("Substantial Snow"),
-                    main: _("Substantial Snow"),
+                    description: _("Heavy snow"),
+                    main: _("Heavy snow"),
                     icon: weatherIconSafely(["weather-snow"], this.app.config.IconType())
                 };
             case ("snow"):
@@ -351,8 +347,8 @@ var Climacell = (function () {
             case ("snow_light"):
                 return {
                     customIcon: "snow-symbolic",
-                    description: _("Light Snow"),
-                    main: _("Light Snow"),
+                    description: _("Light snow"),
+                    main: _("Light snow"),
                     icon: weatherIconSafely(["weather-snow"], this.app.config.IconType())
                 };
             case ("flurries"):
@@ -372,8 +368,8 @@ var Climacell = (function () {
             case ("fog_light"):
                 return {
                     customIcon: (isNight) ? "night-fog-symbolic" : "day-fog-symbolic",
-                    description: _("Light Fog"),
-                    main: _("Light Fog"),
+                    description: _("Light fog"),
+                    main: _("Light fog"),
                     icon: weatherIconSafely(["weather-fog"], this.app.config.IconType())
                 };
             case ("fog"):
@@ -393,22 +389,22 @@ var Climacell = (function () {
             case ("mostly_cloudy"):
                 return {
                     customIcon: (isNight) ? "night-alt-cloudy-symbolic" : "day-cloudy-symbolic",
-                    description: _("Mostly Cloudy"),
-                    main: _("Mostly Cloudy"),
+                    description: _("Mostly cloudy"),
+                    main: _("Mostly cloudy"),
                     icon: weatherIconSafely((isNight) ? ["weather-clouds-night", "weather-few-clouds-night", "weather-overcast"] : ["weather-clouds", "weather-few-clouds", "weather-overcast"], this.app.config.IconType())
                 };
             case ("partly_cloudy"):
                 return {
                     customIcon: (isNight) ? "night-alt-cloudy-symbolic" : "day-cloudy-symbolic",
-                    description: _("Partly Cloudy"),
-                    main: _("Partly Cloudy"),
+                    description: _("Partly cloudy"),
+                    main: _("Partly cloudy"),
                     icon: weatherIconSafely((isNight) ? ["weather-clouds-night", "weather-few-clouds-night", "weather-overcast"] : ["weather-clouds", "weather-few-clouds", "weather-overcast"], this.app.config.IconType())
                 };
             case ("mostly_clear"):
                 return {
                     customIcon: (isNight) ? "night-alt-partly-cloudy-symbolic" : "day-cloudy-symbolic",
-                    description: _("Mostly Clear"),
-                    main: _("Mostly Clear"),
+                    description: _("Mostly clear"),
+                    main: _("Mostly clear"),
                     icon: weatherIconSafely((isNight) ? ["weather-few-clouds-night", "weather-clouds-night", "weather-overcast"] : ["weather-few-clouds", "weather-clouds", "weather-overcast"], this.app.config.IconType())
                 };
             case ("clear"):

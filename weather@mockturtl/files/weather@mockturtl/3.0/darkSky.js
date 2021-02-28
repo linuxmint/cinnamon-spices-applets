@@ -44,11 +44,6 @@ function importModule(path) {
         return AppletDir[path];
     }
 }
-var UUID = "weather@mockturtl";
-imports.gettext.bindtextdomain(UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
-function _(str) {
-    return imports.gettext.dgettext(UUID, str);
-}
 var utils = importModule("utils");
 var isCoordinate = utils.isCoordinate;
 var isLangSupported = utils.isLangSupported;
@@ -57,6 +52,7 @@ var CelsiusToKelvin = utils.CelsiusToKelvin;
 var MPHtoMPS = utils.MPHtoMPS;
 var IsNight = utils.IsNight;
 var weatherIconSafely = utils.weatherIconSafely;
+var _ = utils._;
 var DarkSky = (function () {
     function DarkSky(_app) {
         this.prettyName = "DarkSky";
@@ -364,8 +360,8 @@ var DarkSky = (function () {
         }
     };
     DarkSky.prototype.SetQueryUnit = function () {
-        if (this.app.config._temperatureUnit == "celsius") {
-            if (this.app.config._windSpeedUnit == "kph" || this.app.config._windSpeedUnit == "m/s") {
+        if (this.app.config.TemperatureUnit() == "celsius") {
+            if (this.app.config.WindSpeedUnit() == "kph" || this.app.config.WindSpeedUnit() == "m/s") {
                 this.unit = 'si';
             }
             else {

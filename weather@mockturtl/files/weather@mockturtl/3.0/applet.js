@@ -71,12 +71,13 @@ var addTween = imports.ui.tweener.addTween;
 var _e = imports.ui.applet, TextIconApplet = _e.TextIconApplet, AllowedLayout = _e.AllowedLayout, AppletPopupMenu = _e.AppletPopupMenu, MenuItem = _e.MenuItem;
 var _f = imports.ui.popupMenu, PopupMenuManager = _f.PopupMenuManager, PopupSeparatorMenuItem = _f.PopupSeparatorMenuItem;
 var _g = imports.ui.settings, AppletSettings = _g.AppletSettings, BindingDirection = _g.BindingDirection;
-var _h = imports.misc.util, spawnCommandLine = _h.spawnCommandLine, spawn_async = _h.spawn_async, trySpawnCommandLine = _h.trySpawnCommandLine;
+var _h = imports.misc.util, spawnCommandLine = _h.spawnCommandLine, spawn_async = _h.spawn_async, spawnCommandLineAsyncIO = _h.spawnCommandLineAsyncIO;
 var _j = imports.ui.messageTray, SystemNotificationSource = _j.SystemNotificationSource, Notification = _j.Notification;
 var SignalManager = imports.misc.signalManager.SignalManager;
 var _k = imports.ui.main, messageTray = _k.messageTray, themeManager = _k.themeManager;
 var Gio = imports.gi.Gio;
 var GLib = imports.gi.GLib;
+var ByteArray = imports.byteArray;
 var utils = importModule("utils");
 var GetDayName = utils.GetDayName;
 var GetHoursMinutes = utils.GetHoursMinutes;
@@ -95,6 +96,8 @@ var clearTimeout = utils.clearTimeout;
 var MillimeterToUserUnits = utils.MillimeterToUserUnits;
 var shadeHexColor = utils.shadeHexColor;
 var MetreToUserUnits = utils.MetreToUserUnits;
+var constructJsLocale = utils.constructJsLocale;
+var _ = utils._;
 if (typeof Promise != "function") {
     var promisePoly = importModule("promise-polyfill");
     var finallyConstructor = promisePoly.finallyConstructor;
@@ -139,10 +142,6 @@ var DATA_SERVICE = {
     MET_UK: "Met Office UK",
     US_WEATHER: "US Weather"
 };
-imports.gettext.bindtextdomain(UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
-function _(str) {
-    return imports.gettext.dgettext(UUID, str);
-}
 function uuidv4() {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
         var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
@@ -184,19 +183,20 @@ var WeatherApplet = (function (_super) {
             "location not covered": _("Location not covered"),
         };
         _this.log = new Log(instanceId);
-        _this.currentLocale = _this.constructJsLocale(get_language_names()[0]);
+        _this.currentLocale = constructJsLocale(get_language_names()[0]);
         _this.log.Debug("Applet created with instanceID " + instanceId);
         _this.log.Debug("System locale is " + _this.currentLocale);
         _this.log.Debug("Appletdir is: " + _this.appletDir);
         _this._httpSession.user_agent = "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:37.0) Gecko/20100101 Firefox/37.0";
         _this._httpSession.timeout = 10;
         _this._httpSession.idle_timeout = 10;
+        imports.gettext.bindtextdomain(UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
         _this.msgSource = new SystemNotificationSource(_("Weather Applet"));
         messageTray.add(_this.msgSource);
         Session.prototype.add_feature.call(_this._httpSession, new ProxyResolverDefault());
         imports.gi.Gtk.IconTheme.get_default().append_search_path(_this.appletDir + "/../icons");
         _this.SetAppletOnPanel();
-        _this.config = new Config(_this, instanceId);
+        _this.config = new Config(_this, instanceId, _this.currentLocale);
         _this.AddRefreshButton();
         _this.EnsureProvider();
         _this.ui = new UI(_this, orientation);
@@ -302,17 +302,37 @@ var WeatherApplet = (function (_super) {
     ;
     WeatherApplet.prototype.SpawnProcess = function (command) {
         return __awaiter(this, void 0, void 0, function () {
-            var json;
+            var cmd, index, element, json, e_1;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4, new Promise(function (resolve, reject) {
-                            spawn_async(command, function (aStdout) {
-                                resolve(aStdout);
-                            });
-                        })];
+                    case 0:
+                        cmd = "";
+                        for (index = 0; index < command.length; index++) {
+                            element = command[index];
+                            cmd += "'" + element + "' ";
+                        }
+                        _a.label = 1;
                     case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4, new Promise(function (resolve, reject) {
+                                spawnCommandLineAsyncIO(cmd, function (aStdout, err, exitCode) {
+                                    if (exitCode != 0) {
+                                        reject(err);
+                                    }
+                                    else {
+                                        resolve(aStdout);
+                                    }
+                                });
+                            })];
+                    case 2:
                         json = _a.sent();
                         return [2, json];
+                    case 3:
+                        e_1 = _a.sent();
+                        this.log.Error("Error calling command " + cmd + ", error: ");
+                        global.log(e_1);
+                        return [2, null];
+                    case 4: return [2];
                 }
             });
         });
@@ -530,20 +550,9 @@ var WeatherApplet = (function (_super) {
                 return null;
         }
     };
-    WeatherApplet.prototype.constructJsLocale = function (locale) {
-        var jsLocale = locale.split(".")[0];
-        var tmp = jsLocale.split("_");
-        jsLocale = "";
-        for (var i = 0; i < tmp.length; i++) {
-            if (i != 0)
-                jsLocale += "-";
-            jsLocale += tmp[i].toLowerCase();
-        }
-        return jsLocale;
-    };
     WeatherApplet.prototype.refreshWeather = function (rebuild, location) {
         return __awaiter(this, void 0, void 0, function () {
-            var locationData, e_1, weatherInfo, e_2;
+            var locationData, e_2, weatherInfo, e_3;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -563,8 +572,8 @@ var WeatherApplet = (function (_super) {
                         locationData = _a.sent();
                         return [3, 4];
                     case 3:
-                        e_1 = _a.sent();
-                        this.log.Error(e_1);
+                        e_2 = _a.sent();
+                        this.log.Error(e_2);
                         this.Unlock();
                         return [2, "error"];
                     case 4: return [3, 6];
@@ -611,8 +620,8 @@ var WeatherApplet = (function (_super) {
                         this.Unlock();
                         return [2, "success"];
                     case 9:
-                        e_2 = _a.sent();
-                        this.log.Error("Generic Error while refreshing Weather info: " + e_2);
+                        e_3 = _a.sent();
+                        this.log.Error("Generic Error while refreshing Weather info: " + e_3);
                         this.HandleError({ type: "hard", detail: "unknown", message: _("Unexpected Error While Refreshing Weather, please see log in Looking Glass") });
                         this.Unlock();
                         return [2, "failure"];
@@ -766,8 +775,9 @@ var UI = (function () {
         this.app.refreshAndRebuild();
     };
     UI.prototype.IsLightTheme = function () {
-        var color = this.menu.actor.get_theme_node().get_background_color();
+        var color = this.menu.actor.get_theme_node().get_color("color");
         var luminance = (2126 * color.red + 7152 * color.green + 722 * color.blue) / 10000 / 255;
+        luminance = Math.abs(1 - luminance);
         this.app.log.Debug("Theme is Light: " + (luminance > 0.5));
         return (luminance > 0.5);
     };
@@ -974,8 +984,8 @@ var UI = (function () {
             this.app.SetAppletIcon(iconName, weather.condition.customIcon);
             var temp = "";
             if (weather.temperature != null) {
-                temp = TempToUserConfig(weather.temperature, config._temperatureUnit, config._tempRussianStyle);
-                this._currentWeatherTemperature.text = temp + " " + this.unitToUnicode(config._temperatureUnit);
+                temp = TempToUserConfig(weather.temperature, config.TemperatureUnit(), config._tempRussianStyle);
+                this._currentWeatherTemperature.text = temp + " " + this.unitToUnicode(config.TemperatureUnit());
             }
             var label = "";
             if (this.app.orientation != Side.LEFT && this.app.orientation != Side.RIGHT) {
@@ -986,21 +996,21 @@ var UI = (function () {
                     if (label != "") {
                         label += " ";
                     }
-                    label += (temp + ' ' + this.unitToUnicode(config._temperatureUnit));
+                    label += (temp + ' ' + this.unitToUnicode(config.TemperatureUnit()));
                 }
             }
             else {
                 if (config._showTextInPanel) {
                     label = temp;
                     if (this.app.GetPanelHeight() >= 35) {
-                        label += this.unitToUnicode(config._temperatureUnit);
+                        label += this.unitToUnicode(config.TemperatureUnit());
                     }
                 }
             }
             if (nonempty(config._tempTextOverride)) {
                 label = config._tempTextOverride
                     .replace("{t}", temp)
-                    .replace("{u}", this.unitToUnicode(config._temperatureUnit))
+                    .replace("{u}", this.unitToUnicode(config.TemperatureUnit()))
                     .replace("{c}", mainCondition);
             }
             this.app.SetAppletLabel(label);
@@ -1010,9 +1020,9 @@ var UI = (function () {
             var wind_direction = compassDirection(weather.wind.degree);
             this._currentWeatherWind.text =
                 (wind_direction != undefined ? _(wind_direction) + " " : "") +
-                    MPStoUserUnits(weather.wind.speed, config._windSpeedUnit);
-            if (config._windSpeedUnit != "Beaufort")
-                this._currentWeatherWind.text += " " + _(config._windSpeedUnit);
+                    MPStoUserUnits(weather.wind.speed, config.WindSpeedUnit());
+            if (config.WindSpeedUnit() != "Beaufort")
+                this._currentWeatherWind.text += " " + _(config.WindSpeedUnit());
             this._currentWeatherApiUnique.text = "";
             this._currentWeatherApiUniqueCap.text = "";
             if (!!weather.extra_field) {
@@ -1023,7 +1033,7 @@ var UI = (function () {
                         value = weather.extra_field.value.toString() + "%";
                         break;
                     case "temperature":
-                        value = TempToUserConfig(weather.extra_field.value, config._temperatureUnit, config._tempRussianStyle) + " " + this.unitToUnicode(config._temperatureUnit);
+                        value = TempToUserConfig(weather.extra_field.value, config.TemperatureUnit(), config._tempRussianStyle) + " " + this.unitToUnicode(config.TemperatureUnit());
                         break;
                     default:
                         value = _(weather.extra_field.value);
@@ -1062,8 +1072,8 @@ var UI = (function () {
             for (var i = 0; i < len; i++) {
                 var forecastData = weather.forecasts[i];
                 var forecastUi = this._forecast[i];
-                var t_low = TempToUserConfig(forecastData.temp_min, config._temperatureUnit, config._tempRussianStyle);
-                var t_high = TempToUserConfig(forecastData.temp_max, config._temperatureUnit, config._tempRussianStyle);
+                var t_low = TempToUserConfig(forecastData.temp_min, config.TemperatureUnit(), config._tempRussianStyle);
+                var t_high = TempToUserConfig(forecastData.temp_max, config.TemperatureUnit(), config._tempRussianStyle);
                 var first_temperature = config._temperatureHighFirst ? t_high : t_low;
                 var second_temperature = config._temperatureHighFirst ? t_low : t_high;
                 var comment = "";
@@ -1073,18 +1083,11 @@ var UI = (function () {
                     if (config._translateCondition)
                         comment = _(comment);
                 }
-                var dayName = GetDayName(forecastData.date, this.app.currentLocale, weather.location.timeZone);
-                if (forecastData.date) {
-                    var now = new Date();
-                    if (forecastData.date.getDate() == now.getDate())
-                        dayName = _("Today");
-                    if (forecastData.date.getDate() == new Date(now.setDate(now.getDate() + 1)).getDate())
-                        dayName = _("Tomorrow");
-                }
+                var dayName = GetDayName(forecastData.date, this.app.currentLocale, this.app.config._showForecastDates, weather.location.timeZone);
                 forecastUi.Day.text = dayName;
                 forecastUi.Temperature.text = first_temperature;
                 forecastUi.Temperature.text += ((config._tempRussianStyle) ? ELLIPSIS : " " + FORWARD_SLASH + " ");
-                forecastUi.Temperature.text += second_temperature + ' ' + this.unitToUnicode(config._temperatureUnit);
+                forecastUi.Temperature.text += second_temperature + ' ' + this.unitToUnicode(config.TemperatureUnit());
                 forecastUi.Summary.text = comment;
                 forecastUi.Icon.icon_name = (config._useCustomMenuIcons) ? forecastData.condition.customIcon : forecastData.condition.icon;
             }
@@ -1107,8 +1110,8 @@ var UI = (function () {
         this._providerCredit.url = provider.website;
         this._timestamp.text = _("As of") + " " + AwareDateString(weather.date, this.app.currentLocale, config._show24Hours);
         if (weather.location.distanceFrom != null) {
-            this._timestamp.text += (", " + MetreToUserUnits(weather.location.distanceFrom, this.app.config._distanceUnit)
-                + this.BigDistanceUnitFor(this.app.config._distanceUnit) + " " + _("from you"));
+            this._timestamp.text += (", " + MetreToUserUnits(weather.location.distanceFrom, this.app.config.DistanceUnit())
+                + this.BigDistanceUnitFor(this.app.config.DistanceUnit()) + " " + _("from you"));
         }
         return true;
     };
@@ -1117,8 +1120,8 @@ var UI = (function () {
         for (var index = 0; index < max; index++) {
             var hour = forecasts[index];
             var ui = this._hourlyForecasts[index];
-            ui.Hour.text = AwareDateString(hour.date, this.app.currentLocale, config._show24Hours, tz);
-            ui.Temperature.text = TempToUserConfig(hour.temp, config._temperatureUnit, config._tempRussianStyle) + " " + this.unitToUnicode(config._temperatureUnit);
+            ui.Hour.text = GetHoursMinutes(hour.date, this.app.currentLocale, config._show24Hours, tz, this.app.config._shortHourlyTime);
+            ui.Temperature.text = TempToUserConfig(hour.temp, config.TemperatureUnit(), config._tempRussianStyle) + " " + this.unitToUnicode(config.TemperatureUnit());
             ui.Icon.icon_name = (config._useCustomMenuIcons) ? hour.condition.customIcon : hour.condition.icon;
             hour.condition.main = capitalizeFirstLetter(hour.condition.main);
             if (config._translateCondition)
@@ -1127,7 +1130,7 @@ var UI = (function () {
             if (!!hour.precipitation && hour.precipitation.type != "none") {
                 var precipitationText = null;
                 if (!!hour.precipitation.volume && hour.precipitation.volume > 0) {
-                    precipitationText = MillimeterToUserUnits(hour.precipitation.volume, this.app.config._distanceUnit) + " " + ((this.app.config._distanceUnit == "metric") ? _("mm") : _("in"));
+                    precipitationText = MillimeterToUserUnits(hour.precipitation.volume, this.app.config.DistanceUnit()) + " " + ((this.app.config.DistanceUnit() == "metric") ? _("mm") : _("in"));
                 }
                 if (!!hour.precipitation.chance) {
                     precipitationText = (precipitationText == null) ? "" : (precipitationText + ", ");
@@ -1324,10 +1327,10 @@ var UI = (function () {
         this._currentWeatherApiUniqueCap = new Label({ text: '', style: this.GetTextColorStyle() });
         var rb_captions = new BoxLayout({ vertical: true, style_class: STYLE_DATABOX_CAPTIONS });
         var rb_values = new BoxLayout({ vertical: true, style_class: STYLE_DATABOX_VALUES });
-        rb_captions.add_actor(new Label({ text: _('Temperature:'), style: this.GetTextColorStyle() }));
-        rb_captions.add_actor(new Label({ text: _('Humidity:'), style: this.GetTextColorStyle() }));
-        rb_captions.add_actor(new Label({ text: _('Pressure:'), style: this.GetTextColorStyle() }));
-        rb_captions.add_actor(new Label({ text: _('Wind:'), style: this.GetTextColorStyle() }));
+        rb_captions.add_actor(new Label({ text: _('Temperature') + ":", style: this.GetTextColorStyle() }));
+        rb_captions.add_actor(new Label({ text: _('Humidity') + ":", style: this.GetTextColorStyle() }));
+        rb_captions.add_actor(new Label({ text: _('Pressure') + ":", style: this.GetTextColorStyle() }));
+        rb_captions.add_actor(new Label({ text: _('Wind') + ":", style: this.GetTextColorStyle() }));
         rb_captions.add_actor(this._currentWeatherApiUniqueCap);
         rb_values.add_actor(this._currentWeatherTemperature);
         rb_values.add_actor(this._currentWeatherHumidity);
@@ -1496,7 +1499,15 @@ var UI = (function () {
     return UI;
 }());
 var Config = (function () {
-    function Config(app, instanceID) {
+    function Config(app, instanceID, locale) {
+        this.fahrenheitCountries = ["bs", "bz", "ky", "pr", "pw", "us"];
+        this.windSpeedUnitLocales = {
+            "fi kr no pl ru se": "m/s",
+            "us gb": "mph"
+        };
+        this.distanceUnitLocales = {
+            "us gb": "imperial"
+        };
         this.WEATHER_LOCATION = "location";
         this.WEATHER_USE_SYMBOLIC_ICONS_KEY = 'useSymbolicIcons';
         this.KEYS = {
@@ -1525,10 +1536,13 @@ var Config = (function () {
             USE_CUSTOM_APPLETICONS: 'useCustomAppletIcons',
             USE_CUSTOM_MENUICONS: "useCustomMenuIcons",
             RUSSIAN_STYLE: "tempRussianStyle",
+            SHORT_HOURLY_TIME: "shortHourlyTime",
+            SHOW_FORECAST_DATES: "showForecastDates"
         };
         this.doneTypingLocation = null;
         this.currentLocation = null;
         this.app = app;
+        this.countryCode = this.GetCountryCode(locale);
         this.settings = new AppletSettings(this, UUID, instanceID);
         this.BindSettings();
     }
@@ -1546,6 +1560,21 @@ var Config = (function () {
     Config.prototype.IconTypeChanged = function () {
         this.app.ui.UpdateIconType(this.IconType());
         this.app.log.Debug("Symbolic icon setting changed");
+    };
+    Config.prototype.TemperatureUnit = function () {
+        if (this._temperatureUnit == "automatic")
+            return this.GetLocaleTemperateUnit(this.countryCode);
+        return this._temperatureUnit;
+    };
+    Config.prototype.WindSpeedUnit = function () {
+        if (this._windSpeedUnit == "automatic")
+            return this.GetLocaleWindSpeedUnit(this.countryCode);
+        return this._windSpeedUnit;
+    };
+    Config.prototype.DistanceUnit = function () {
+        if (this._distanceUnit == "automatic")
+            return this.GetLocaleDistanceUnit(this.countryCode);
+        return this._distanceUnit;
     };
     Config.prototype.IconType = function () {
         return this.settings.getValue(this.WEATHER_USE_SYMBOLIC_ICONS_KEY) ?
@@ -1643,6 +1672,35 @@ var Config = (function () {
             });
         });
     };
+    Config.prototype.GetLocaleTemperateUnit = function (code) {
+        if (code == null || this.fahrenheitCountries.indexOf(code) == -1)
+            return "celsius";
+        return "fahrenheit";
+    };
+    Config.prototype.GetLocaleWindSpeedUnit = function (code) {
+        if (code == null)
+            return "kph";
+        for (var key in this.windSpeedUnitLocales) {
+            if (key.indexOf(code) != -1)
+                return this.windSpeedUnitLocales[key];
+        }
+        return "kph";
+    };
+    Config.prototype.GetLocaleDistanceUnit = function (code) {
+        if (code == null)
+            return "metric";
+        for (var key in this.distanceUnitLocales) {
+            if (key.indexOf(code) != -1)
+                return this.distanceUnitLocales[key];
+        }
+        return "metric";
+    };
+    Config.prototype.GetCountryCode = function (locale) {
+        var splitted = locale.split("-");
+        if (splitted.length < 2)
+            return null;
+        return splitted[1];
+    };
     return Config;
 }());
 var WeatherLoop = (function () {
@@ -1666,7 +1724,7 @@ var WeatherLoop = (function () {
     };
     WeatherLoop.prototype.Start = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var state, e_3;
+            var state, e_4;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -1703,8 +1761,8 @@ var WeatherLoop = (function () {
                         _a.label = 6;
                     case 6: return [3, 8];
                     case 7:
-                        e_3 = _a.sent();
-                        this.app.log.Error("Error in Main loop: " + e_3);
+                        e_4 = _a.sent();
+                        this.app.log.Error("Error in Main loop: " + e_4);
                         this.app.encounteredError = true;
                         return [3, 8];
                     case 8: return [4, delay(this.LoopInterval())];
@@ -1799,7 +1857,7 @@ var GeoLocation = (function () {
     }
     GeoLocation.prototype.GetLocation = function (searchText) {
         return __awaiter(this, void 0, void 0, function () {
-            var cached, locationData, result, e_4;
+            var cached, locationData, result, e_5;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -1836,8 +1894,8 @@ var GeoLocation = (function () {
                         this.cache[searchText] = result;
                         return [2, result];
                     case 2:
-                        e_4 = _a.sent();
-                        this.app.log.Error("Could not geolocate, error: " + JSON.stringify(e_4, null, 2));
+                        e_5 = _a.sent();
+                        this.app.log.Error("Could not geolocate, error: " + JSON.stringify(e_5, null, 2));
                         this.app.HandleError({
                             type: "soft",
                             detail: "bad api response",
@@ -1999,28 +2057,34 @@ var LocationStore = (function () {
         return __awaiter(this, void 0, void 0, function () {
             var index;
             return __generator(this, function (_a) {
-                if (this.app.Locked()) {
-                    this.app.sendNotification(_("Info") + " - " + _("Location Store"), _("You can't remove a location while the applet is refreshing"), true);
-                    return [2];
+                switch (_a.label) {
+                    case 0:
+                        if (this.app.Locked()) {
+                            this.app.sendNotification(_("Info") + " - " + _("Location Store"), _("You can't remove a location while the applet is refreshing"), true);
+                            return [2];
+                        }
+                        if (loc == null) {
+                            this.app.sendNotification(_("Info") + " - " + _("Location Store"), _("You can't remove an incorrect location"), true);
+                            return [2];
+                        }
+                        if (!this.InStorage(loc)) {
+                            this.app.sendNotification(_("Info") + " - " + _("Location Store"), _("Location is not in storage, can't delete"), true);
+                            return [2];
+                        }
+                        index = this.FindIndex(loc);
+                        this.locations.splice(index, 1);
+                        this.currentIndex = this.currentIndex--;
+                        if (this.currentIndex < 0)
+                            this.currentIndex = this.locations.length - 1;
+                        if (this.currentIndex < 0)
+                            this.currentIndex = 0;
+                        return [4, this.SaveToFile()];
+                    case 1:
+                        _a.sent();
+                        this.app.sendNotification(_("Success") + " - " + _("Location Store"), _("Location is deleted from library"), true);
+                        this.InvokeStorageChanged();
+                        return [2];
                 }
-                if (loc == null) {
-                    this.app.sendNotification(_("Info") + " - " + _("Location Store"), _("You can't remove an incorrect location"), true);
-                    return [2];
-                }
-                if (!this.InStorage(loc)) {
-                    this.app.sendNotification(_("Info") + " - " + _("Location Store"), _("Location is not in storage, can't delete"), true);
-                    return [2];
-                }
-                index = this.FindIndex(loc);
-                this.locations.splice(index, 1);
-                this.currentIndex = this.currentIndex--;
-                if (this.currentIndex < 0)
-                    this.currentIndex = this.locations.length - 1;
-                if (this.currentIndex < 0)
-                    this.currentIndex = 0;
-                this.app.sendNotification(_("Success") + " - " + _("Location Store"), _("Location is deleted from library"), true);
-                this.InvokeStorageChanged();
-                return [2];
             });
         });
     };
@@ -2031,18 +2095,28 @@ var LocationStore = (function () {
     };
     LocationStore.prototype.LoadSavedLocations = function () {
         return __awaiter(this, void 0, void 0, function () {
-            var content, locations;
+            var content, e_6, error, locations;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4, this.FileExists(this.file)];
+                    case 0:
+                        content = null;
+                        _a.label = 1;
                     case 1:
-                        if (!(_a.sent())) {
-                            this.app.log.Print("Location store does not exist, skipping loading...");
-                            return [2, true];
-                        }
+                        _a.trys.push([1, 3, , 4]);
                         return [4, this.LoadContents(this.file)];
                     case 2:
                         content = _a.sent();
+                        return [3, 4];
+                    case 3:
+                        e_6 = _a.sent();
+                        error = e_6;
+                        if (error.matches(error.domain, Gio.IOErrorEnum.NOT_FOUND)) {
+                            this.app.log.Print("Location store does not exist, skipping loading...");
+                            return [2, true];
+                        }
+                        this.app.log.Error("Can't load locations.json, error: " + error.message);
+                        return [2, false];
+                    case 4:
                         if (content == null)
                             return [2, false];
                         try {
@@ -2105,24 +2179,19 @@ var LocationStore = (function () {
             });
         });
     };
-    LocationStore.prototype.FileExists = function (file) {
+    LocationStore.prototype.FileExists = function (file, dictionary) {
+        if (dictionary === void 0) { dictionary = false; }
         return __awaiter(this, void 0, void 0, function () {
-            var info, e_5;
             return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        _a.trys.push([0, 2, , 3]);
-                        return [4, this.GetFileInfo(file)];
-                    case 1:
-                        info = _a.sent();
-                        return [2, true];
-                    case 2:
-                        e_5 = _a.sent();
-                        this.app.log.Error("Cannot get file info for '" + file.get_path() + "', error: ");
-                        global.log(e_5);
-                        return [2, false];
-                    case 3: return [2];
+                try {
+                    return [2, file.query_exists(null)];
                 }
+                catch (e) {
+                    this.app.log.Error("Cannot get file info for '" + file.get_path() + "', error: ");
+                    global.log(e);
+                    return [2, false];
+                }
+                return [2];
             });
         });
     };
@@ -2131,11 +2200,21 @@ var LocationStore = (function () {
             return __generator(this, function (_a) {
                 return [2, new Promise(function (resolve, reject) {
                         file.load_contents_async(null, function (obj, res) {
-                            var _a = file.load_contents_finish(res), result = _a[0], contents = _a[1];
+                            var _a;
+                            var result, contents = null;
+                            try {
+                                _a = file.load_contents_finish(res), result = _a[0], contents = _a[1];
+                            }
+                            catch (e) {
+                                reject(e);
+                                return e;
+                            }
                             if (result != true) {
                                 resolve(null);
                                 return null;
                             }
+                            if (contents instanceof Uint8Array)
+                                contents = ByteArray.toString(contents);
                             resolve(contents.toString());
                             return contents.toString();
                         });
@@ -2156,6 +2235,11 @@ var LocationStore = (function () {
                                     result = file.delete_finish(res);
                                 }
                                 catch (e) {
+                                    var error = e;
+                                    if (error.matches(error.domain, Gio.IOErrorEnum.NOT_FOUND)) {
+                                        resolve(true);
+                                        return true;
+                                    }
                                     _this.app.log.Error("Can't delete file, reason: ");
                                     global.log(e);
                                     resolve(false);
@@ -2175,7 +2259,7 @@ var LocationStore = (function () {
     LocationStore.prototype.OverwriteAndGetIOStream = function (file) {
         return __awaiter(this, void 0, void 0, function () {
             return __generator(this, function (_a) {
-                if (!file.get_parent().query_exists(null))
+                if (!this.FileExists(file.get_parent()))
                     file.get_parent().make_directory_with_parents(null);
                 return [2, new Promise(function (resolve, reject) {
                         file.replace_readwrite_async(null, false, Gio.FileCreateFlags.NONE, null, null, function (source_object, result) {
@@ -2189,11 +2273,18 @@ var LocationStore = (function () {
     };
     LocationStore.prototype.WriteAsync = function (outputStream, buffer) {
         return __awaiter(this, void 0, void 0, function () {
-            var text, result;
+            var text;
             return __generator(this, function (_a) {
-                text = buffer;
-                result = outputStream.write(text, null);
-                return [2, true];
+                text = ByteArray.fromString(buffer);
+                if (outputStream.is_closed())
+                    return [2, false];
+                return [2, new Promise(function (resolve, reject) {
+                        outputStream.write_bytes_async(text, null, null, function (obj, res) {
+                            var ioStream = outputStream.write_bytes_finish(res);
+                            resolve(true);
+                            return true;
+                        });
+                    })];
             });
         });
     };

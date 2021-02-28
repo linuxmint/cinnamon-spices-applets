@@ -4,34 +4,42 @@
     "height": 600,
     "width": 800,
     "pages": [
-      "page1",
-      "page2"
+      "radio-stations-page",
+      "preferences-page"
     ],
-    "page1": {
+    "radio-stations-page": {
       "type": "page",
-      "title": "List of stations",
+      "title": "Radio Stations",
       "sections": [
-        "section1"
+        "station-list-section",
+        "find-station-section"
       ]
     },
-    "page2": {
+    "preferences-page": {
       "type": "page",
       "title": "Preferences",
       "sections": [
-        "section2",
-        "section3"
+        "appearance-section",
+        "volume-section",
+        "youtube-section"
       ]
     },
-    "section1": {
+    "station-list-section": {
       "type": "section",
-      "title": "Radio",
+      "title": "List of stations",
       "keys": [
-        "tree",
+        "tree"
+      ]
+    },
+    "find-station-section": {
+      "type": "section",
+      "title": "Find station",
+      "keys": [
         "streamurl-button",
         "radiolist-button"
       ]
     },
-    "section2": {
+    "appearance-section": {
       "type": "section",
       "title": "Appearance",
       "keys": [
@@ -40,17 +48,24 @@
         "channel-on-panel"
       ]
     },
-    "section3": {
+    "volume-section": {
       "type": "section",
       "title": "Volume",
       "keys": [
+        "keep-volume-between-sessions",
         "initial-volume"
+      ]
+    },
+    "youtube-section": {
+      "type": "section",
+      "title": "Youtube Download",
+      "keys": [
+        "music-download-dir-select"
       ]
     }
   },
   "tree": {
     "type": "list",
-    "description": "List of stations",
     "height": 400,
     "columns": [
       {
@@ -97,7 +112,7 @@
   },
   "icon-type": {
     "type": "combobox",
-    "description": "Icon Type",
+    "description": "Icon type",
     "default": "SYMBOLIC",
     "options": {
       "Symbolic": "SYMBOLIC",
@@ -109,12 +124,17 @@
     "type": "colorchooser",
     "default": "#73d216",
     "dependency": "icon-type=SYMBOLIC",
-    "description": "Color of Symbolic Icon when playing a radio"
+    "description": "Color of symbolic icon when playing a radio station"
   },
   "channel-on-panel": {
     "type": "checkbox",
-    "description": "Show Radio Channel on the panel",
+    "description": "Show current radio station on the panel",
     "default": false
+  },
+  "keep-volume-between-sessions": {
+    "type": "checkbox",
+    "description": "Remember volume after stopping the radio",
+    "default": true
   },
   "initial-volume": {
     "type": "spinbutton",
@@ -122,7 +142,20 @@
     "min": 5,
     "max": 100,
     "step": 5,
-    "description": "Initial Volume",
-    "tooltip": "The initial volume is applied when clicking on a radio stream and no other radio stream is already running"
+    "description": "Initial volume",
+    "tooltip": "The initial volume is applied when clicking on a radio stream and no other radio stream is already running",
+    "dependency": "keep-volume-between-sessions!=true"
+  },
+  "last-volume": {
+    "type": "generic",
+    "value": 0,
+    "default": 80
+  },
+  "music-download-dir-select": {
+    "type": "filechooser",
+    "description": "Download directory",
+    "tooltip": "Songs downloaded from Youtube will be saved to this directory. This feature can be found in the right-click-menu of the applet",
+    "default": "~/Music/Radio",
+    "select-dir": true
   }
 }

@@ -44,16 +44,12 @@ function importModule(path) {
         return AppletDir[path];
     }
 }
-var UUID = "weather@mockturtl";
-imports.gettext.bindtextdomain(UUID, imports.gi.GLib.get_home_dir() + "/.local/share/locale");
-function _(str) {
-    return imports.gettext.dgettext(UUID, str);
-}
 var utils = importModule("utils");
 var isCoordinate = utils.isCoordinate;
 var CelsiusToKelvin = utils.CelsiusToKelvin;
 var KPHtoMPS = utils.MPHtoMPS;
 var weatherIconSafely = utils.weatherIconSafely;
+var _ = utils._;
 var Yahoo = (function () {
     function Yahoo(_app) {
         this.prettyName = "Yahoo";
@@ -166,8 +162,8 @@ var Yahoo = (function () {
             return result;
         }
         catch (e) {
-            this.app.log.Error("DarkSky payload parsing error: " + e);
-            this.app.HandleError({ type: "soft", detail: "unusual payload", service: "darksky", message: _("Failed to Process Weather Info") });
+            this.app.log.Error("Yahoo payload parsing error: " + e);
+            this.app.HandleError({ type: "soft", detail: "unusual payload", service: "yahoo", message: _("Failed to Process Weather Info") });
             return null;
         }
     };
@@ -468,6 +464,7 @@ var YahooConditionLibrary = [
     _("Partly Cloudy"),
     _("Clear"),
     _("Sunny"),
+    _("Mostly Sunny"),
     _("Fair"),
     _("Mixed Rain and Hail"),
     _("Hot"),

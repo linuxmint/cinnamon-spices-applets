@@ -926,7 +926,8 @@ CinnamenuApplet.prototype = {
     while ((nextType = iter.next()) !== CMenu.TreeItemType.INVALID) {
       if (nextType === CMenu.TreeItemType.ENTRY) {
         let entry = iter.get_entry();
-        if (!entry.get_app_info().get_nodisplay()) {
+        let appInfo = entry.get_app_info();
+        if (appInfo && !appInfo.get_nodisplay()) {
           let id = entry.get_desktop_file_id();
           let app = this.appSystem.lookup_app(id);
           if (rootDir && typeof rootDir.get_menu_id === 'function') {
