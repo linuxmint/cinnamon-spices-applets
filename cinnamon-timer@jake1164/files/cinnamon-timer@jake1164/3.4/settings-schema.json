@@ -6,12 +6,12 @@
             "type": "page",
             "title": "General",
             "sections": ["section1"]
-        }, 
+        },
         "page2": {
             "type": "page",
             "title": "Sounds",
             "sections": ["section2"]
-        },         
+        },
         "page3": {
             "type": "page",
             "title": "Preset Times",
@@ -21,20 +21,21 @@
             "type": "page",
             "title": "Slider Intervals",
             "sections": ["section4"]
-        },        
+        },
         "section1": {
             "type": "section",
             "title": "General Settings",
             "keys": [
-                "confirm-prompt-enable", 
-                "message-prompt-enable", 
-                "display-message", 
-                "display-menu-enable", 
+                "confirm-prompt-enable",
+                "message-prompt-enable",
+                "display-message",
+                "display-menu-enable",
                 "duration-display-enable",
                 "alarmtime-display-enable",
                 "alarmtime-format-small",
                 "alarmtime-format-large",
-                "alarmtime-format-switchover"
+                "alarmtime-format-switchover",
+                "auto-loop-enable"
             ]
         },
         "section2": {
@@ -46,12 +47,12 @@
             "type": "section",
             "title": "Preset Times",
             "keys": [ "preset_time"]
-        },        
+        },
         "section4": {
             "type": "section",
             "title": "Slider Intervals",
             "keys": [ "slider_intervals"]
-        }                
+        }
     },
     "confirm-prompt-enable" : {
         "type" : "checkbox",
@@ -127,6 +128,12 @@
         "description" : "Time when switching from small to large time format",
         "tooltip" : "Switch over time between the two formats specified above"
     },
+    "auto-loop-enable" : {
+        "type" : "checkbox",
+        "default" : false,
+        "description" : "Restart the timer automatically when time is elapsed",
+        "tooltip" : "Restart the timer automatically when time is elapsed"
+    },
     "alarm_end" : {
         "type" : "generic",
         "default" : "",
@@ -144,7 +151,7 @@
         "default" : "",
         "description" : "Do not change, message being displayed when the current timer expires",
         "tooltip" : "Do not change, message being displayed when the current timer expires"
-    },    
+    },
     "slider_intervals" : {
         "type" : "list",
         "description" : "Slider Intervals",
@@ -166,15 +173,15 @@
         "columns" : [
             {"id": "hours", "title": "Hours", "type": "integer", "min": 0, "max":500, "default": 0},
             {"id": "minutes", "title": "Minutes", "type": "integer", "min": 0, "max":59, "default": 0},
-            {"id": "seconds", "title": "Seconds", "type": "integer", "min": 0, "max":59, "default": 0},                        
+            {"id": "seconds", "title": "Seconds", "type": "integer", "min": 0, "max":59, "default": 0},
             {"id": "label", "title": "Label", "type": "string"},
             {"id": "message", "title": "Custom Message (overrides global message)", "type": "string"}
         ],
         "default": [
-            {"seconds": 0, "minutes": 0, "hours": 5},           
+            {"seconds": 0, "minutes": 0, "hours": 5},
             {"seconds": 0, "minutes": 0, "hours": 4},
-            {"seconds": 0, "minutes": 0, "hours": 3},            
-            {"seconds": 0, "minutes": 0, "hours": 2},             
+            {"seconds": 0, "minutes": 0, "hours": 3},
+            {"seconds": 0, "minutes": 0, "hours": 2},
             {"seconds": 0, "hours":1, "minutes": 30},
             {"seconds": 0, "minutes": 0, "hours": 1},
             {"seconds": 0, "minutes": 45, "hours": 0},
@@ -187,6 +194,6 @@
             {"seconds": 0, "minutes": 2, "hours": 0},
             {"seconds": 0, "minutes": 1, "hours": 0},
             {"seconds": 30, "minutes": 0, "hours": 0}
-        ]        
+        ]
     }
 }
