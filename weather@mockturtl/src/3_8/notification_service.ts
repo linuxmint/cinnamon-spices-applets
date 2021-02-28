@@ -12,17 +12,17 @@ export class NotificationService {
 		return this.instance;
 	}
 
-    Title: string = _("Weather Applet");
+	Title: string = _("Weather Applet");
 	MessageSource: imports.ui.messageTray.SystemNotificationSource;
 
 	private constructor() {
 		this.MessageSource = new SystemNotificationSource(this.Title);
-        messageTray.add(this.MessageSource);
+		messageTray.add(this.MessageSource);
 	}
 
 	public Send(title: string, message: string, transient?: boolean) {
-        let notification = new Notification(this.MessageSource, this.Title + ": " + title, message);
-        if (transient) notification.setTransient((!transient) ? false : true);
-        this.MessageSource.notify(notification);
-    }
+		let notification = new Notification(this.MessageSource, this.Title + ": " + title, message);
+		if (transient) notification.setTransient((!transient) ? false : true);
+		this.MessageSource.notify(notification);
+	}
 }

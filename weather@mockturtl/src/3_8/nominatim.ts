@@ -7,63 +7,63 @@ import { _ } from "./utils";
  * Nominatim communication interface
  */
 export class GeoLocation {
-    private url = "https://nominatim.openstreetmap.org/search/";
-    private params = "?format=json&addressdetails=1&limit=1";
-    private App: WeatherApplet = null;
-    private cache: LocationCache = {};
+	private url = "https://nominatim.openstreetmap.org/search/";
+	private params = "?format=json&addressdetails=1&limit=1";
+	private App: WeatherApplet = null;
+	private cache: LocationCache = {};
 
-    constructor(app: WeatherApplet) {
-        this.App = app;
-    }
+	constructor(app: WeatherApplet) {
+		this.App = app;
+	}
 
-    /**
-     * Finds location and rebuilds entryText so it can be looked up again
-     * @param searchText 
-     */
-    public async GetLocation(searchText: string): Promise<LocationData> {
-        try {
-            searchText = searchText.trim();
-            let cached = this.cache?.searchText;
-            if (cached != null) {
-                Log.Instance.Debug("Returning cached geolocation info for '" + searchText + "'.");
-                return cached;
-            }
+	/**
+	 * Finds location and rebuilds entryText so it can be looked up again
+	 * @param searchText 
+	 */
+	public async GetLocation(searchText: string): Promise<LocationData> {
+		try {
+			searchText = searchText.trim();
+			let cached = this.cache?.searchText;
+			if (cached != null) {
+				Log.Instance.Debug("Returning cached geolocation info for '" + searchText + "'.");
+				return cached;
+			}
 
 			let locationData = await this.App.LoadJsonAsync<any>(this.url + encodeURIComponent(searchText) + this.params);
 			if (locationData == null)
 				return null;
-			
-            if (locationData.length == 0) {
-                this.App.ShowError({
-                    type: "hard",
-                    detail: "bad location format",
-                    message: _("Could not find location based on address, please check if it's right")
-                })
-                return null;
-            }
-            Log.Instance.Debug("Location is found, payload: " + JSON.stringify(locationData, null, 2));
-            let result: LocationData = {
-                lat: parseFloat(locationData[0].lat),
-                lon: parseFloat(locationData[0].lon),
-                city: locationData[0].address.city || locationData[0].address.town,
-                country: locationData[0].address.country,
-                timeZone: null,
-                entryText: this.BuildEntryText(locationData[0]),
-            }
-            this.cache[searchText] = result;
-            return result;
-        }
-        catch (e) {
-            Log.Instance.Error("Could not geo locate, error: " + JSON.stringify(e, null, 2));
-            this.App.ShowError({
-                type: "soft",
-                detail: "bad api response",
-                message: _("Failed to call Geolocation API, see Looking Glass for errors.")
-            })
-            return null;
-        }
+
+			if (locationData.length == 0) {
+				this.App.ShowError({
+					type: "hard",
+					detail: "bad location format",
+					message: _("Could not find location based on address, please check if it's right")
+				})
+				return null;
+			}
+			Log.Instance.Debug("Location is found, payload: " + JSON.stringify(locationData, null, 2));
+			let result: LocationData = {
+				lat: parseFloat(locationData[0].lat),
+				lon: parseFloat(locationData[0].lon),
+				city: locationData[0].address.city || locationData[0].address.town,
+				country: locationData[0].address.country,
+				timeZone: null,
+				entryText: this.BuildEntryText(locationData[0]),
+			}
+			this.cache[searchText] = result;
+			return result;
+		}
+		catch (e) {
+			Log.Instance.Error("Could not geo locate, error: " + JSON.stringify(e, null, 2));
+			this.App.ShowError({
+				type: "soft",
+				detail: "bad api response",
+				message: _("Failed to call Geolocation API, see Looking Glass for errors.")
+			})
+			return null;
+		}
 	}
-	
+
 	/**
 	 * Nominatim doesn't return any result if the State district is included in the search 
 	 * in specific case, we have to build it from the address details omitting specific
@@ -84,5 +84,5 @@ export class GeoLocation {
 }
 
 type LocationCache = {
-    [key: string]: LocationData
+	[key: string]: LocationData
 }

@@ -34,6 +34,19 @@ class UIHourlyForecasts {
     get Toggled() {
         return this.hourlyToggled;
     }
+    ScrollTo(date) {
+        if (this.hourlyForecastDates == null)
+            return;
+        let itemWidth = this.GetHourlyBoxItemWidth();
+        for (let index = 0; index < this.hourlyForecastDates.length; index++) {
+            const element = utils_1.AddHours(this.hourlyForecastDates[index], -6);
+            let tmp = utils_1.AddHours(date, -6);
+            if (utils_1.OnSameDay(element, tmp)) {
+                this.actor.get_hscroll_bar().get_adjustment().set_value(index * itemWidth);
+                break;
+            }
+        }
+    }
     UpdateIconType(iconType) {
         var _a;
         if (!this.hourlyForecasts)
@@ -45,12 +58,14 @@ class UIHourlyForecasts {
         }
     }
     Display(forecasts, config, tz) {
+        this.hourlyForecastDates = [];
         let max = Math.min(forecasts.length, this.hourlyForecasts.length);
         for (let index = 0; index < max; index++) {
             const hour = forecasts[index];
             const ui = this.hourlyForecasts[index];
+            this.hourlyForecastDates.push(hour.date);
             ui.Hour.text = utils_1.GetHoursMinutes(hour.date, config.currentLocale, config._show24Hours, tz, config._shortHourlyTime);
-            ui.Temperature.text = utils_1.TempToUserConfig(hour.temp, config.TemperatureUnit, config._tempRussianStyle) + " " + utils_1.UnitToUnicode(config.TemperatureUnit);
+            ui.Temperature.text = `${utils_1.TempToUserConfig(hour.temp, config)} ${utils_1.UnitToUnicode(config.TemperatureUnit)}`;
             ui.Icon.icon_name = (config._useCustomMenuIcons) ? hour.condition.customIcon : utils_1.WeatherIconSafely(hour.condition.icons, config.IconType);
             ui.Summary.text = hour.condition.main;
             ui.Precipitation.text = this.GeneratePrecipitationText(hour.precipitation, config);
@@ -58,7 +73,7 @@ class UIHourlyForecasts {
         this.AdjustHourlyBoxItemWidth();
         return !(max <= 0);
     }
-    Show() {
+    async Show() {
         this.actor.show();
         this.actor.hide();
         this.AdjustHourlyBoxItemWidth();
@@ -68,40 +83,57 @@ class UIHourlyForecasts {
         this.actor.set_width(minWidth);
         this.actor.show();
         this.actor.style = "min-height: " + naturalHeight.toString() + "px;";
-        if (global.settings.get_boolean("desktop-effects-on-menus")) {
-            this.actor.height = 0;
-            addTween(this.actor, {
-                height: naturalHeight,
-                time: 0.25,
-                onUpdate: () => { },
-                onComplete: () => {
-                    this.actor.set_height(naturalHeight);
-                }
-            });
-        }
         this.hourlyToggled = true;
+        return new Promise((resolve, reject) => {
+            if (global.settings.get_boolean("desktop-effects-on-menus")) {
+                this.actor.height = 0;
+                addTween(this.actor, {
+                    height: naturalHeight,
+                    time: 0.25,
+                    onUpdate: () => { },
+                    onComplete: () => {
+                        this.actor.set_height(naturalHeight);
+                        resolve();
+                    }
+                });
+            }
+            else {
+                resolve();
+            }
+        });
     }
-    Hide() {
+    async Hide() {
         let hscroll = this.actor.get_hscroll_bar();
-        if (global.settings.get_boolean("desktop-effects-on-menus")) {
-            addTween(this.actor, {
-                height: 0,
-                time: 0.25,
-                onUpdate: () => { },
-                onComplete: () => {
-                    this.actor.set_height(-1);
-                    this.actor.hide();
-                    hscroll.get_adjustment().set_value(0);
-                }
-            });
-        }
-        else {
-            this.actor.set_height(-1);
-            this.actor.hide();
-        }
         this.hourlyToggled = false;
+        return new Promise((resolve, reject) => {
+            if (global.settings.get_boolean("desktop-effects-on-menus")) {
+                addTween(this.actor, {
+                    height: 0,
+                    time: 0.25,
+                    onUpdate: () => { },
+                    onComplete: () => {
+                        this.actor.set_height(-1);
+                        this.actor.hide();
+                        hscroll.get_adjustment().set_value(0);
+                        resolve();
+                    }
+                });
+            }
+            else {
+                this.actor.set_height(-1);
+                this.actor.hide();
+                resolve();
+            }
+        });
     }
     AdjustHourlyBoxItemWidth() {
+        let requiredWidth = this.GetHourlyBoxItemWidth();
+        for (let index = 0; index < this.hourlyContainers.length; index++) {
+            const element = this.hourlyContainers[index];
+            element.set_width(requiredWidth);
+        }
+    }
+    GetHourlyBoxItemWidth() {
         let requiredWidth = 0;
         for (let index = 0; index < this.hourlyContainers.length; index++) {
             const ui = this.hourlyForecasts[index];
@@ -127,10 +159,7 @@ class UIHourlyForecasts {
             if (requiredWidth < precipitationWidth)
                 requiredWidth = precipitationWidth;
         }
-        for (let index = 0; index < this.hourlyContainers.length; index++) {
-            const element = this.hourlyContainers[index];
-            element.set_width(requiredWidth);
-        }
+        return requiredWidth;
     }
     Destroy() {
         this.container.destroy_all_children();
@@ -171,7 +200,7 @@ class UIHourlyForecasts {
         }
     }
     GeneratePrecipitationText(precip, config) {
-        if (!precip || precip.type == "none")
+        if (!precip)
             return "";
         let precipitationText = "";
         if (!!precip.volume && precip.volume > 0) {

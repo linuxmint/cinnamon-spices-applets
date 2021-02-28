@@ -42,6 +42,7 @@ class CurrentWeather {
             this.SetAPIUniqueField(weather.extra_field);
             if (config._showSunrise)
                 this.SetSunriseAndSunset(weather.sunrise, weather.sunset, weather.location.timeZone);
+            this.SetImmediatePrecipitation(weather.immediatePrecipitation, config);
             return true;
         }
         catch (e) {
@@ -77,6 +78,11 @@ class CurrentWeather {
         let middleColumn = new BoxLayout({ vertical: true, style_class: STYLE_SUMMARYBOX });
         middleColumn.add_actor(this.BuildLocationSection());
         middleColumn.add(this.weatherSummary, { expand: true, x_align: Align.MIDDLE, y_align: Align.MIDDLE, x_fill: false, y_fill: false });
+        this.immediatePrecipitationLabel = new Label({ style_class: "weather-immediate-precipitation" });
+        this.immediatePrecipitationBox = new Bin();
+        this.immediatePrecipitationBox.add_actor(this.immediatePrecipitationLabel);
+        this.immediatePrecipitationBox.hide();
+        middleColumn.add_actor(this.immediatePrecipitationBox);
         if (config._showSunrise)
             middleColumn.add_actor(this.BuildSunBox(config, textColorStyle));
         return middleColumn;
@@ -201,6 +207,25 @@ class CurrentWeather {
         sunBin.set_child(sunBox);
         return sunBin;
     }
+    SetImmediatePrecipitation(precip, config) {
+        if (!config._immediatePrecip || !precip || precip.end == null || precip.start == null) {
+            this.immediatePrecipitationBox.hide();
+            return;
+        }
+        this.immediatePrecipitationBox.show();
+        if (precip.start == -1) {
+            this.immediatePrecipitationBox.hide();
+        }
+        else if (precip.start == 0) {
+            if (precip.end != -1)
+                this.immediatePrecipitationLabel.text = utils_1._("Precipitation will end in {precipEnd} minutes", { precipEnd: precip.end });
+            else
+                this.immediatePrecipitationLabel.text = utils_1._("Precipitation won't end in within an hour");
+        }
+        else {
+            this.immediatePrecipitationLabel.text = utils_1._("Precipitation will start within {precipStart} minutes", { precipStart: precip.start });
+        }
+    }
     SetSunriseAndSunset(sunrise, sunset, tz) {
         let sunriseText = "";
         let sunsetText = "";
@@ -222,7 +247,7 @@ class CurrentWeather {
                     value = utils_1.PrecentToLocale(extra_field.value, this.app.config.currentLocale);
                     break;
                 case "temperature":
-                    value = utils_1.TempToUserConfig(extra_field.value, this.app.config.TemperatureUnit, this.app.config._tempRussianStyle) + " " + utils_1.UnitToUnicode(this.app.config.TemperatureUnit);
+                    value = `${utils_1.TempToUserConfig(extra_field.value, this.app.config)} ${utils_1.UnitToUnicode(this.app.config.TemperatureUnit)}`;
                     break;
                 default:
                     value = utils_1._(extra_field.value);
@@ -246,10 +271,10 @@ class CurrentWeather {
         this.weatherSummary.text = condition;
     }
     SetTemperature(temperature) {
-        let temp = utils_1.TempToUserConfig(temperature, this.app.config.TemperatureUnit, this.app.config._tempRussianStyle);
+        let temp = utils_1.TempToUserConfig(temperature, this.app.config);
         if (temp == null)
             return;
-        this.temperatureLabel.text = temp + " " + utils_1.UnitToUnicode(this.app.config.TemperatureUnit);
+        this.temperatureLabel.text = `${temp} ${utils_1.UnitToUnicode(this.app.config.TemperatureUnit)}`;
     }
     SetHumidity(humidity) {
         if (humidity != null) {
@@ -290,12 +315,14 @@ class CurrentWeather {
             this.HideLocationSelectors();
     }
     ShowLocationSelectors() {
-        this.nextLocationButton.actor.show();
-        this.previousLocationButton.actor.show();
+        var _a, _b, _c, _d;
+        (_b = (_a = this.nextLocationButton) === null || _a === void 0 ? void 0 : _a.actor) === null || _b === void 0 ? void 0 : _b.show();
+        (_d = (_c = this.previousLocationButton) === null || _c === void 0 ? void 0 : _c.actor) === null || _d === void 0 ? void 0 : _d.show();
     }
     HideLocationSelectors() {
-        this.nextLocationButton.actor.hide();
-        this.previousLocationButton.actor.hide();
+        var _a, _b, _c, _d;
+        (_b = (_a = this.nextLocationButton) === null || _a === void 0 ? void 0 : _a.actor) === null || _b === void 0 ? void 0 : _b.hide();
+        (_d = (_c = this.previousLocationButton) === null || _c === void 0 ? void 0 : _c.actor) === null || _d === void 0 ? void 0 : _d.hide();
     }
 }
 exports.CurrentWeather = CurrentWeather;

@@ -4,7 +4,7 @@ import { ELLIPSIS, APPLET_ICON, SIGNAL_CLICKED, BLANK } from "./consts";
 import { LocationStore } from "./locationstore";
 import { Log } from "./logger";
 import { WeatherApplet } from "./main";
-import { WeatherData, APIUniqueField, BuiltinIcons } from "./types";
+import { WeatherData, APIUniqueField, BuiltinIcons, ImmediatePrecipitation } from "./types";
 import { _, GetHoursMinutes, TempToUserConfig, UnitToUnicode, CompassDirection, MPStoUserUnits, PressToUserUnits, GenerateLocationText, delay, WeatherIconSafely, LocalizedColon, PrecentToLocale } from "./utils";
 import { WeatherButton } from "./weatherbutton";
 
@@ -25,39 +25,42 @@ const STYLE_LOCATION_SELECTOR = 'location-selector'
 
 export class CurrentWeather {
 	public readonly actor: imports.gi.St.Bin;
-	
 
-    private weatherIcon: imports.gi.St.Icon;
-    private weatherSummary: imports.gi.St.Label;
+
+	private weatherIcon: imports.gi.St.Icon;
+	private weatherSummary: imports.gi.St.Label;
 
 	private locationButton: WeatherButton;
 	/** Actor inside locationButton */
-    private location: imports.gi.St.Button;
+	private location: imports.gi.St.Button;
 
-    private previousLocationButton: WeatherButton;
-    private nextLocationButton: WeatherButton;
+	private previousLocationButton: WeatherButton;
+	private nextLocationButton: WeatherButton;
 
 	/** If config._showSunrise is not true this can be null|deallocated */
 	private sunriseLabel: imports.gi.St.Label;
 	/** If config._showSunrise is not true this can be null|deallocated */
-    private sunsetLabel: imports.gi.St.Label;
-    private temperatureLabel: imports.gi.St.Label;
-    private humidityLabel: imports.gi.St.Label;
-    private pressureLabel: imports.gi.St.Label;
+	private sunsetLabel: imports.gi.St.Label;
+	private temperatureLabel: imports.gi.St.Label;
+	private humidityLabel: imports.gi.St.Label;
+	private pressureLabel: imports.gi.St.Label;
 	private windLabel: imports.gi.St.Label;
 	private windDirectionIcon: imports.gi.St.Icon;
-    private apiUniqueLabel: imports.gi.St.Label;
-    private apiUniqueCaptionLabel: imports.gi.St.Label;
+	private apiUniqueLabel: imports.gi.St.Label;
+	private apiUniqueCaptionLabel: imports.gi.St.Label;
+
+	private immediatePrecipitationBox: imports.gi.St.Bin;
+	private immediatePrecipitationLabel: imports.gi.St.Label;
 
 	private app: WeatherApplet;
 
-    constructor(app: WeatherApplet) {
+	constructor(app: WeatherApplet) {
 		this.app = app;
 		this.actor = new Bin();
 		this.actor.style_class = STYLE_CURRENT;
 		this.app.config.LocStore.StoreChanged.Subscribe((s, a) => this.onLocationStorageChanged(s, a)); //on location store change
 	}
-	
+
 	/** Injects data from weather object into the popupMenu */
 	public Display(weather: WeatherData, config: Config): boolean {
 		try {
@@ -76,7 +79,8 @@ export class CurrentWeather {
 			this.SetAPIUniqueField(weather.extra_field);
 			if (config._showSunrise)
 				this.SetSunriseAndSunset(weather.sunrise, weather.sunset, weather.location.timeZone);
-			
+
+			this.SetImmediatePrecipitation(weather.immediatePrecipitation, config);
 			return true;
 		} catch (e) {
 			Log.Instance.Error("DisplayWeatherError: " + e);
@@ -84,86 +88,92 @@ export class CurrentWeather {
 		}
 	};
 
-    public UpdateIconType(iconType: imports.gi.St.IconType) {
-        this.weatherIcon.icon_type = iconType;
+	public UpdateIconType(iconType: imports.gi.St.IconType) {
+		this.weatherIcon.icon_type = iconType;
 	}
 
 	/** Destroys current weather UI box */
-    public Destroy(): void {
-        if (this.actor.get_child() != null)
-            this.actor.get_child().destroy()
-    }
+	public Destroy(): void {
+		if (this.actor.get_child() != null)
+			this.actor.get_child().destroy()
+	}
 
-    public Rebuild(config: Config, textColorStyle: string): void {
-        this.Destroy()
+	public Rebuild(config: Config, textColorStyle: string): void {
+		this.Destroy()
 
-        // This will hold the icon for the current weather
-        this.weatherIcon = new Icon({
-            icon_type: config.IconType,
-            icon_size: 64,
-            icon_name: APPLET_ICON,
-            style_class: STYLE_ICON
-        })
+		// This will hold the icon for the current weather
+		this.weatherIcon = new Icon({
+			icon_type: config.IconType,
+			icon_size: 64,
+			icon_name: APPLET_ICON,
+			style_class: STYLE_ICON
+		})
 
 		// Main box
-        let box = new BoxLayout({ style_class: STYLE_ICONBOX })
+		let box = new BoxLayout({ style_class: STYLE_ICONBOX })
 		box.add_actor(this.weatherIcon)
 		box.add_actor(this.BuildMiddleColumn(config, textColorStyle));
-        box.add_actor(this.BuildRightColumn(textColorStyle, config))
-        this.actor.set_child(box)
+		box.add_actor(this.BuildRightColumn(textColorStyle, config))
+		this.actor.set_child(box)
 	};
 
 	// Build helpers
 
-	BuildMiddleColumn(config: Config, textColorStyle: string) {
+	private BuildMiddleColumn(config: Config, textColorStyle: string) {
 		this.weatherSummary = new Label({ text: _('Loading ...'), style_class: STYLE_SUMMARY })
 
-        let middleColumn = new BoxLayout({ vertical: true, style_class: STYLE_SUMMARYBOX })
-        middleColumn.add_actor(this.BuildLocationSection())
-        middleColumn.add(this.weatherSummary, { expand: true, x_align: Align.MIDDLE, y_align: Align.MIDDLE, x_fill: false, y_fill: false })
-		
+		let middleColumn = new BoxLayout({ vertical: true, style_class: STYLE_SUMMARYBOX })
+		middleColumn.add_actor(this.BuildLocationSection())
+		middleColumn.add(this.weatherSummary, { expand: true, x_align: Align.MIDDLE, y_align: Align.MIDDLE, x_fill: false, y_fill: false })
+
+		this.immediatePrecipitationLabel = new Label({ style_class: "weather-immediate-precipitation" });
+		this.immediatePrecipitationBox = new Bin();
+		this.immediatePrecipitationBox.add_actor(this.immediatePrecipitationLabel)
+		this.immediatePrecipitationBox.hide();
+		middleColumn.add_actor(this.immediatePrecipitationBox);
+
 		if (config._showSunrise)
 			middleColumn.add_actor(this.BuildSunBox(config, textColorStyle));
-			
+
 		return middleColumn;
 	}
 
 	/** Builds Weather Information on the right side */
-	BuildRightColumn(textColorStyle: string, config: Config) {
-        let textOb = {
-            text: ELLIPSIS
-        }
-        // Current Weather Right Column
-        this.temperatureLabel = new Label(textOb)
-        this.humidityLabel = new Label(textOb)
-        this.pressureLabel = new Label(textOb)
+	private BuildRightColumn(textColorStyle: string, config: Config) {
+		let textOb = {
+			text: ELLIPSIS
+		}
+		// Current Weather Right Column
+		this.temperatureLabel = new Label(textOb)
+		this.humidityLabel = new Label(textOb)
+		this.pressureLabel = new Label(textOb)
 
-        this.apiUniqueLabel = new Label({ text: '' })
-        // APi Unique Caption
-        this.apiUniqueCaptionLabel = new Label({ text: '', style: textColorStyle });
+		this.apiUniqueLabel = new Label({ text: '' })
+		// APi Unique Caption
+		this.apiUniqueCaptionLabel = new Label({ text: '', style: textColorStyle });
 
-        let rb_captions = new BoxLayout({ vertical: true, style_class: STYLE_DATABOX_CAPTIONS })
-        let rb_values = new BoxLayout({ vertical: true, style_class: STYLE_DATABOX_VALUES })
-        rb_captions.add_actor(new Label({ text: _('Temperature') + LocalizedColon(config.currentLocale), style: textColorStyle }));
-        rb_captions.add_actor(new Label({ text: _('Humidity') + LocalizedColon(config.currentLocale), style: textColorStyle }));
-        rb_captions.add_actor(new Label({ text: _('Pressure') + LocalizedColon(config.currentLocale), style: textColorStyle }));
-        rb_captions.add_actor(new Label({ text: _('Wind') + LocalizedColon(config.currentLocale), style: textColorStyle }));
-        rb_captions.add_actor(this.apiUniqueCaptionLabel);
-        rb_values.add_actor(this.temperatureLabel);
-        rb_values.add_actor(this.humidityLabel);
-        rb_values.add_actor(this.pressureLabel);
+		let rb_captions = new BoxLayout({ vertical: true, style_class: STYLE_DATABOX_CAPTIONS })
+		let rb_values = new BoxLayout({ vertical: true, style_class: STYLE_DATABOX_VALUES })
+		rb_captions.add_actor(new Label({ text: _('Temperature') + LocalizedColon(config.currentLocale), style: textColorStyle }));
+		rb_captions.add_actor(new Label({ text: _('Humidity') + LocalizedColon(config.currentLocale), style: textColorStyle }));
+		rb_captions.add_actor(new Label({ text: _('Pressure') + LocalizedColon(config.currentLocale), style: textColorStyle }));
+		rb_captions.add_actor(new Label({ text: _('Wind') + LocalizedColon(config.currentLocale), style: textColorStyle }));
+		rb_captions.add_actor(this.apiUniqueCaptionLabel);
+		rb_values.add_actor(this.temperatureLabel);
+		rb_values.add_actor(this.humidityLabel);
+		rb_values.add_actor(this.pressureLabel);
 		rb_values.add_actor(this.BuildWind(config));
-        //rb_values.add_actor(this.windLabel);
-        rb_values.add_actor(this.apiUniqueLabel);
+		//rb_values.add_actor(this.windLabel);
+		rb_values.add_actor(this.apiUniqueLabel);
 
-        let rightColumn = new BoxLayout({ style_class: STYLE_DATABOX });
-        rightColumn.add_actor(rb_captions);
+		let rightColumn = new BoxLayout({ style_class: STYLE_DATABOX });
+		rightColumn.add_actor(rb_captions);
 		rightColumn.add_actor(rb_values);
 		return rightColumn;
 	}
 
-	BuildWind(config: Config) {
-		let windBox = new BoxLayout({vertical: false});
+	private BuildWind(config: Config) {
+		let windBox = new BoxLayout({ vertical: false });
 
 		// We try to make sure that icon doesn't take up more vertical space than text
 		// Also we position it close to the bottom to be perceived vertically centered
@@ -184,7 +194,7 @@ export class CurrentWeather {
 		return windBox;
 	}
 
-	BuildLocationSection() {
+	private BuildLocationSection() {
 		this.locationButton = new WeatherButton({ reactive: true, label: _('Refresh'), });
 		this.location = this.locationButton.actor;
 		this.location.connect(SIGNAL_CLICKED, () => {
@@ -224,92 +234,113 @@ export class CurrentWeather {
 		return box;
 	}
 
-	BuildSunBox(config: Config, textColorStyle: string) {
+	private BuildSunBox(config: Config, textColorStyle: string) {
 		// Bin is used here to horizontally center BoxLayout inside BoxLayout, normal add() function does not work here 
 		let sunBin = new Bin();
 		this.sunriseLabel = new Label({ text: ELLIPSIS, style: textColorStyle })
-        this.sunsetLabel = new Label({ text: ELLIPSIS, style: textColorStyle })
+		this.sunsetLabel = new Label({ text: ELLIPSIS, style: textColorStyle })
 
-        let sunriseBox = new BoxLayout();
-        let sunsetBox = new BoxLayout();
-        if (config._showSunrise) {
-            let sunsetIcon = new Icon({
-                icon_name: "sunset-symbolic",
-                icon_type: IconType.SYMBOLIC,
-                icon_size: 25,
-                style: textColorStyle
-            });
+		let sunriseBox = new BoxLayout();
+		let sunsetBox = new BoxLayout();
+		if (config._showSunrise) {
+			let sunsetIcon = new Icon({
+				icon_name: "sunset-symbolic",
+				icon_type: IconType.SYMBOLIC,
+				icon_size: 25,
+				style: textColorStyle
+			});
 
-            let sunriseIcon = new Icon({
-                icon_name: "sunrise-symbolic",
-                icon_type: IconType.SYMBOLIC,
-                icon_size: 25,
-                style: textColorStyle
-            });
+			let sunriseIcon = new Icon({
+				icon_name: "sunrise-symbolic",
+				icon_type: IconType.SYMBOLIC,
+				icon_size: 25,
+				style: textColorStyle
+			});
 
-            sunriseBox.add_actor(sunriseIcon);
-            sunsetBox.add_actor(sunsetIcon);
-        }
+			sunriseBox.add_actor(sunriseIcon);
+			sunsetBox.add_actor(sunsetIcon);
+		}
 
-        let textOptions: imports.gi.St.AddOptions = {
-            x_fill: false,
-            x_align: Align.START,
-            y_align: Align.MIDDLE,
-            y_fill: false,
-            expand: true
-        }
+		let textOptions: imports.gi.St.AddOptions = {
+			x_fill: false,
+			x_align: Align.START,
+			y_align: Align.MIDDLE,
+			y_fill: false,
+			expand: true
+		}
 
-        sunriseBox.add(this.sunriseLabel, textOptions);
-        sunsetBox.add(this.sunsetLabel, textOptions);
+		sunriseBox.add(this.sunriseLabel, textOptions);
+		sunsetBox.add(this.sunsetLabel, textOptions);
 
-        let ab_spacerLabel = new Label({ text: BLANK })
+		let ab_spacerLabel = new Label({ text: BLANK })
 
-        let sunBox = new BoxLayout({ style_class: STYLE_ASTRONOMY })
-        sunBox.add_actor(sunriseBox)
-        sunBox.add_actor(ab_spacerLabel)
+		let sunBox = new BoxLayout({ style_class: STYLE_ASTRONOMY })
+		sunBox.add_actor(sunriseBox)
+		sunBox.add_actor(ab_spacerLabel)
 		sunBox.add_actor(sunsetBox);
-		
+
 		sunBin.set_child(sunBox);
 		return sunBin;
 	}
 
 	// Data display helpers
 
-    private SetSunriseAndSunset(sunrise: Date, sunset: Date, tz: string): void {
-        let sunriseText = "";
-        let sunsetText = "";
-        if (sunrise != null && sunset != null && this.app.config._showSunrise) {
-            sunriseText = (GetHoursMinutes(sunrise, this.app.config.currentLocale, this.app.config._show24Hours, tz));
-            sunsetText = (GetHoursMinutes(sunset, this.app.config.currentLocale, this.app.config._show24Hours, tz));
-        }
+	private SetImmediatePrecipitation(precip: ImmediatePrecipitation, config: Config): void {
+		if (!config._immediatePrecip || !precip || precip.end == null || precip.start == null) {
+			this.immediatePrecipitationBox.hide();
+			return;
+		}
 
-        this.sunriseLabel.text = sunriseText;
-        this.sunsetLabel.text = sunsetText;
-    }
+		this.immediatePrecipitationBox.show()
+		if (precip.start == -1) {
+			this.immediatePrecipitationBox.hide()
+		}
+		else if (precip.start == 0) {
+			if (precip.end != -1)
+				this.immediatePrecipitationLabel.text = _("Precipitation will end in {precipEnd} minutes", { precipEnd: precip.end });
+			else
+				this.immediatePrecipitationLabel.text = _("Precipitation won't end in within an hour");
+		}
+		else {
+			this.immediatePrecipitationLabel.text = _("Precipitation will start within {precipStart} minutes", { precipStart: precip.start });
+		}
+	}
 
-    private SetAPIUniqueField(extra_field: APIUniqueField) {
-        // API Unique display
-        this.apiUniqueLabel.text = "";
-        this.apiUniqueCaptionLabel.text = "";
-        if (!!extra_field) {
-            this.apiUniqueCaptionLabel.text = _(extra_field.name) + LocalizedColon(this.app.config.currentLocale);
-            let value;
-            switch (extra_field.type) {
-                case "percent":
-                    value = PrecentToLocale(extra_field.value, this.app.config.currentLocale);
-                    break;
-                case "temperature":
-                    value = TempToUserConfig(extra_field.value, this.app.config.TemperatureUnit, this.app.config._tempRussianStyle) + " " + UnitToUnicode(this.app.config.TemperatureUnit);
-                    break;
-                default:
-                    value = _(extra_field.value);
-                    break;
-            }
-            this.apiUniqueLabel.text = value;
-        }
-    }
+	private SetSunriseAndSunset(sunrise: Date, sunset: Date, tz: string): void {
+		let sunriseText = "";
+		let sunsetText = "";
+		if (sunrise != null && sunset != null && this.app.config._showSunrise) {
+			sunriseText = (GetHoursMinutes(sunrise, this.app.config.currentLocale, this.app.config._show24Hours, tz));
+			sunsetText = (GetHoursMinutes(sunset, this.app.config.currentLocale, this.app.config._show24Hours, tz));
+		}
 
-    private SetWeatherIcon(iconNames: BuiltinIcons[], customIconName: string) {
+		this.sunriseLabel.text = sunriseText;
+		this.sunsetLabel.text = sunsetText;
+	}
+
+	private SetAPIUniqueField(extra_field: APIUniqueField) {
+		// API Unique display
+		this.apiUniqueLabel.text = "";
+		this.apiUniqueCaptionLabel.text = "";
+		if (!!extra_field) {
+			this.apiUniqueCaptionLabel.text = _(extra_field.name) + LocalizedColon(this.app.config.currentLocale);
+			let value;
+			switch (extra_field.type) {
+				case "percent":
+					value = PrecentToLocale(extra_field.value, this.app.config.currentLocale);
+					break;
+				case "temperature":
+					value = `${TempToUserConfig(extra_field.value, this.app.config)} ${UnitToUnicode(this.app.config.TemperatureUnit)}`;
+					break;
+				default:
+					value = _(extra_field.value);
+					break;
+			}
+			this.apiUniqueLabel.text = value;
+		}
+	}
+
+	private SetWeatherIcon(iconNames: BuiltinIcons[], customIconName: string) {
 		if (this.app.config._useCustomMenuIcons) {
 			this.weatherIcon.icon_name = customIconName;
 			this.UpdateIconType(IconType.SYMBOLIC); // Hard set to symbolic as iconset is symbolic
@@ -321,23 +352,23 @@ export class CurrentWeather {
 		}
 	}
 
-    private SetConditionText(condition: string) {
-        this.weatherSummary.text = condition;
-    }
+	private SetConditionText(condition: string) {
+		this.weatherSummary.text = condition;
+	}
 
-    private SetTemperature(temperature: number) {
-		let temp = TempToUserConfig(temperature, this.app.config.TemperatureUnit, this.app.config._tempRussianStyle);
+	private SetTemperature(temperature: number) {
+		let temp = TempToUserConfig(temperature, this.app.config);
 		if (temp == null) return;
-        this.temperatureLabel.text = temp + " " + UnitToUnicode(this.app.config.TemperatureUnit);
-    }
+		this.temperatureLabel.text = `${temp} ${UnitToUnicode(this.app.config.TemperatureUnit)}`;
+	}
 
-    private SetHumidity(humidity: number) {
-        if (humidity != null) {
-            this.humidityLabel.text = PrecentToLocale(humidity, this.app.config.currentLocale);
-        }
-    }
+	private SetHumidity(humidity: number) {
+		if (humidity != null) {
+			this.humidityLabel.text = PrecentToLocale(humidity, this.app.config.currentLocale);
+		}
+	}
 
-    private async SetWind(windSpeed: number, windDegree: number) {
+	private async SetWind(windSpeed: number, windDegree: number) {
 		let wind_direction = CompassDirection(windDegree);
 		/*let arrows: ArrowIcons[] = ["north-arrow-weather-symbolic", "north-west-arrow-weather-symbolic", "west-arrow-weather-symbolic", "south-west-arrow-weather-symbolic", "south-arrow-weather-symbolic", "south-east-arrow-weather-symbolic", "east-arrow-weather-symbolic", "north-east-arrow-weather-symbolic"]
 		for (let index = 0; index < arrows.length; index++) {
@@ -349,14 +380,14 @@ export class CurrentWeather {
 		this.windLabel.text = MPStoUserUnits(windSpeed, this.app.config.WindSpeedUnit);
 		// No need to display unit to Beaufort scale
 		if (this.app.config.WindSpeedUnit != "Beaufort") this.windLabel.text += " " + _(this.app.config.WindSpeedUnit);
-    }
+	}
 
-    private SetPressure(pressure: number) {
-        if (pressure != null) {
-            this.pressureLabel.text = PressToUserUnits(pressure, this.app.config._pressureUnit) + ' ' + _(this.app.config._pressureUnit);
-        }
-    }
-	
+	private SetPressure(pressure: number) {
+		if (pressure != null) {
+			this.pressureLabel.text = PressToUserUnits(pressure, this.app.config._pressureUnit) + ' ' + _(this.app.config._pressureUnit);
+		}
+	}
+
 	private SetLocation(locationString: string, url: string) {
 		this.location.label = locationString;
 		this.location.url = url;
@@ -364,20 +395,20 @@ export class CurrentWeather {
 	}
 
 	// Callbacks
-	
+
 	private NextLocationClicked() {
 		let loc = this.app.config.SwitchToNextLocation();
 		this.app.RefreshAndRebuild(loc);
-    }
+	}
 
-    private PreviousLocationClicked() {
+	private PreviousLocationClicked() {
 		let loc = this.app.config.SwitchToPreviousLocation();
 		this.app.RefreshAndRebuild(loc);
 	}
 
 	private onLocationStorageChanged(sender: LocationStore, itemCount: number): void {
-        Log.Instance.Debug("On location storage callback called, number of locations now " + itemCount.toString());
-        // Hide/show location selectors based on how many items are in storage
+		Log.Instance.Debug("On location storage callback called, number of locations now " + itemCount.toString());
+		// Hide/show location selectors based on how many items are in storage
 		if (this.app.config.LocStore.ShouldShowLocationSelectors(this.app.config.CurrentLocation))
 			this.ShowLocationSelectors();
 		else
@@ -387,12 +418,12 @@ export class CurrentWeather {
 	// Utils
 
 	private ShowLocationSelectors() {
-		this.nextLocationButton.actor.show();
-		this.previousLocationButton.actor.show();
+		this.nextLocationButton?.actor?.show();
+		this.previousLocationButton?.actor?.show();
 	}
 
 	private HideLocationSelectors() {
-		this.nextLocationButton.actor.hide();
-		this.previousLocationButton.actor.hide();
+		this.nextLocationButton?.actor?.hide();
+		this.previousLocationButton?.actor?.hide();
 	}
 }

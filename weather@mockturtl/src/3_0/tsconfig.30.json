@@ -10,7 +10,7 @@
         "outDir": "../../files/weather@mockturtl/3.0/"
     },
     "include": [
-		"../declarations/*",
+		"../declarations/**/*",
 		"./**/*"
     ],
 }

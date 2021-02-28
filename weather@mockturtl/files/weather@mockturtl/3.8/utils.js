@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.setInterval = exports.clearTimeout = exports.delay = exports.setTimeout = exports.Guid = exports.GetFuncName = exports.GetDistance = exports.ConstructJsLocale = exports.ShadeHexColor = exports.WeatherIconSafely = exports.mode = exports.IsLangSupported = exports.NotEmpty = exports.IsCoordinate = exports.IsNight = exports.CompassDirection = exports.CompassToDeg = exports.KmToM = exports.MPHtoMPS = exports.FahrenheitToKelvin = exports.CelsiusToKelvin = exports.KPHtoMPS = exports.MillimeterToUserUnits = exports.MetreToUserUnits = exports.PressToUserUnits = exports.TempToUserConfig = exports.MPStoUserUnits = exports.PrecentToLocale = exports.LocalizedColon = exports.ProcessCondition = exports.MilitaryTime = exports.AwareDateString = exports.GetHoursMinutes = exports.GetDayName = exports.CapitalizeEveryWord = exports.CapitalizeFirstLetter = exports.GenerateLocationText = exports.UnitToUnicode = exports.format = exports._ = void 0;
+exports.setInterval = exports.clearTimeout = exports.delay = exports.setTimeout = exports.Guid = exports.GetFuncName = exports.GetDistance = exports.ConstructJsLocale = exports.ShadeHexColor = exports.WeatherIconSafely = exports.mode = exports.IsLangSupported = exports.NotEmpty = exports.IsCoordinate = exports.IsNight = exports.CompassDirection = exports.CompassToDeg = exports.KmToM = exports.MPHtoMPS = exports.FahrenheitToKelvin = exports.CelsiusToKelvin = exports.KPHtoMPS = exports.MillimeterToUserUnits = exports.MetreToUserUnits = exports.PressToUserUnits = exports.TempToUserConfig = exports.MPStoUserUnits = exports.PrecentToLocale = exports.LocalizedColon = exports.ProcessCondition = exports.OnSameDay = exports.AddHours = exports.MilitaryTime = exports.AwareDateString = exports.GetHoursMinutes = exports.GetDayName = exports.CapitalizeEveryWord = exports.CapitalizeFirstLetter = exports.GenerateLocationText = exports.UnitToUnicode = exports.format = exports._ = void 0;
 const consts_1 = require("./consts");
 const { timeout_add, source_remove } = imports.mainloop;
 const { IconType } = imports.gi.St;
@@ -126,6 +126,16 @@ function MilitaryTime(date) {
     return date.getHours() * 100 + date.getMinutes();
 }
 exports.MilitaryTime = MilitaryTime;
+function AddHours(date, hours) {
+    let result = new Date(date);
+    result.setHours(result.getHours() + hours);
+    return result;
+}
+exports.AddHours = AddHours;
+function OnSameDay(date1, date2) {
+    return date1.toDateString() == date2.toDateString();
+}
+exports.OnSameDay = OnSameDay;
 function ProcessCondition(condition, shouldTranslate) {
     if (condition == null)
         return null;
@@ -203,17 +213,17 @@ function MPStoUserUnits(mps, units) {
     }
 }
 exports.MPStoUserUnits = MPStoUserUnits;
-function TempToUserConfig(kelvin, units, russianStyle) {
+function TempToUserConfig(kelvin, config) {
     if (kelvin == null)
         return null;
     let temp;
-    if (units == "celsius") {
+    if (config.TemperatureUnit == "celsius") {
         temp = Math.round((kelvin - 273.15));
     }
-    if (units == "fahrenheit") {
+    if (config.TemperatureUnit == "fahrenheit") {
         temp = Math.round((9 / 5 * (kelvin - 273.15) + 32));
     }
-    if (!russianStyle)
+    if (!config._tempRussianStyle)
         return temp.toString();
     if (temp < 0)
         temp = "−" + Math.abs(temp).toString();

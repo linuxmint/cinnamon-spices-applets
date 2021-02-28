@@ -25,5 +25,8 @@ class Event {
             element(sender, args);
         }
     }
+    UnSubscribeAll() {
+        this.subscribers = [];
+    }
 }
 exports.Event = Event;

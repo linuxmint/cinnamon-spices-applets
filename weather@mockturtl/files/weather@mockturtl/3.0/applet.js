@@ -398,7 +398,7 @@ var WeatherApplet = (function (_super) {
         this.set_applet_label(label);
     };
     WeatherApplet.prototype.GetPanelHeight = function () {
-        return this.panel._getScaledPanelHeight();
+        return this.panel.height;
     };
     WeatherApplet.prototype.locationLookup = function () {
         return __awaiter(this, void 0, void 0, function () {
