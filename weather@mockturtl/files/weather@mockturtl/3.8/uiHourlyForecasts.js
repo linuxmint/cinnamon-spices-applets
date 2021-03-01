@@ -38,13 +38,18 @@ class UIHourlyForecasts {
         if (this.hourlyForecastDates == null)
             return;
         let itemWidth = this.GetHourlyBoxItemWidth();
+        let midnightIndex = null;
         for (let index = 0; index < this.hourlyForecastDates.length; index++) {
+            if (utils_1.OnSameDay(this.hourlyForecastDates[index], date))
+                midnightIndex = index;
             const element = utils_1.AddHours(this.hourlyForecastDates[index], -6);
             if (utils_1.OnSameDay(element, date)) {
                 this.actor.get_hscroll_bar().get_adjustment().set_value(index * itemWidth);
                 break;
             }
         }
+        if (midnightIndex != null)
+            this.actor.get_hscroll_bar().get_adjustment().set_value(midnightIndex * itemWidth);
     }
     UpdateIconType(iconType) {
         var _a;
