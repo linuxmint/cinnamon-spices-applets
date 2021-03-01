@@ -102,7 +102,7 @@ export class DanishMI implements WeatherProvider {
 			const element = forecasts.timeserie[index];
 			if (element.time == null)
 				continue
-			
+
 			let hour: HourlyForecastData = {
 				date: this.DateStringToDate(element.time),
 				temp: CelsiusToKelvin(element.temp),
