@@ -100,6 +100,9 @@ export class DanishMI implements WeatherProvider {
 		let hourlyData: HourlyForecastData[] = [];
 		for (let index = 0; index < forecasts.timeserie.length; index++) {
 			const element = forecasts.timeserie[index];
+			if (element.time == null)
+				continue
+			
 			let hour: HourlyForecastData = {
 				date: this.DateStringToDate(element.time),
 				temp: CelsiusToKelvin(element.temp),
@@ -161,7 +164,8 @@ export class DanishMI implements WeatherProvider {
 
 		let resultSymbol: number = null;
 		// symbols include rain or other stuff, get most severe
-		if (!!normalizedSymbols.find(x => x > 10))
+		// exclude foggy from priority symbols
+		if (!!normalizedSymbols.find(x => x > 10 && x != 45))
 			resultSymbol = Math.max(...normalizedSymbols);
 		else // get most common if there is no precipitation
 			resultSymbol = mode(normalizedSymbols);

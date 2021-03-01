@@ -84,6 +84,8 @@ class DanishMI {
         let hourlyData = [];
         for (let index = 0; index < forecasts.timeserie.length; index++) {
             const element = forecasts.timeserie[index];
+            if (element.time == null)
+                continue;
             let hour = {
                 date: this.DateStringToDate(element.time),
                 temp: utils_1.CelsiusToKelvin(element.temp),
@@ -133,7 +135,7 @@ class DanishMI {
         });
         let normalizedSymbols = relevantHours.map(x => (x.symbol > 100) ? (x.symbol - 100) : x.symbol);
         let resultSymbol = null;
-        if (!!normalizedSymbols.find(x => x > 10))
+        if (!!normalizedSymbols.find(x => x > 10 && x != 45))
             resultSymbol = Math.max(...normalizedSymbols);
         else
             resultSymbol = utils_1.mode(normalizedSymbols);
