@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.0.5
+
+  * Fixes [#3654](https://github.com/linuxmint/cinnamon-spices-applets/issues/3654)
+
 ## 3.0.4
 
 * Add declarations for some of the cinnamon js files an organizing declarations better (and add more when I feel up to it again). Technically anyone can use it if want to use Typescript by including the declarations folder into their tsconfig.json file, but whatever.
