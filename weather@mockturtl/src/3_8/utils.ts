@@ -167,8 +167,11 @@ export function AddHours(date: Date, hours: number): Date {
 	return result;
 }
 
-export function OnSameDay(date1: Date, date2: Date): boolean {
-	return date1.toDateString() == date2.toDateString();
+export function OnSameDay(date1: Date, date2: Date, config: Config): boolean {
+	//if (!config.Timezone)
+		return date1.toDateString() == date2.toDateString();
+	//else
+		//return date1.toLocaleDateString(config.currentLocale, {timeZone: config.Timezone}) == date2.toLocaleDateString(config.currentLocale, {timeZone: config.Timezone});
 }
 
 // ------------------------------------------------------------------------------

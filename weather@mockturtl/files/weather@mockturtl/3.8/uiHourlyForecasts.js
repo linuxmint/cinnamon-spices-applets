@@ -40,10 +40,10 @@ class UIHourlyForecasts {
         let itemWidth = this.GetHourlyBoxItemWidth();
         let midnightIndex = null;
         for (let index = 0; index < this.hourlyForecastDates.length; index++) {
-            if (utils_1.OnSameDay(this.hourlyForecastDates[index], date))
+            if (utils_1.OnSameDay(this.hourlyForecastDates[index], date, this.app.config))
                 midnightIndex = index;
             const element = utils_1.AddHours(this.hourlyForecastDates[index], -6);
-            if (utils_1.OnSameDay(element, date)) {
+            if (utils_1.OnSameDay(element, date, this.app.config)) {
                 this.actor.get_hscroll_bar().get_adjustment().set_value(index * itemWidth);
                 break;
             }

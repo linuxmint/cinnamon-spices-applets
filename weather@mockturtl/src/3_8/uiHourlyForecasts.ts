@@ -74,12 +74,12 @@ export class UIHourlyForecasts {
 		let itemWidth = this.GetHourlyBoxItemWidth();
 		let midnightIndex = null;
 		for (let index = 0; index < this.hourlyForecastDates.length; index++) {
-			if (OnSameDay(this.hourlyForecastDates[index], date))
+			if (OnSameDay(this.hourlyForecastDates[index], date, this.app.config))
 				midnightIndex = index;
 			
 			// Adjust dates so we jump to 6 in the morning, not midnight when we scroll to a date
 			const element = AddHours(this.hourlyForecastDates[index], -6);
-			if (OnSameDay(element, date)) {
+			if (OnSameDay(element, date, this.app.config)) {
 				this.actor.get_hscroll_bar().get_adjustment().set_value(index * itemWidth);
 				break;
 			}

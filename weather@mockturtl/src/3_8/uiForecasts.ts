@@ -70,9 +70,6 @@ export class UIForecasts {
 				let dayName: string = GetDayName(forecastData.date, config.currentLocale, config._showForecastDates, weather.location.timeZone);
 				forecastUi.Day.actor.label = dayName;
 
-				// We set ID to the buttons as date so we can use them later on
-				forecastUi.Day.ID = forecastData.date;
-
 				forecastUi.Day.Hovered.Unsubscribe(this.DayHoveredCallback);
 				forecastUi.Day.Clicked.Unsubscribe(this.DayClickedCallback);
 
@@ -80,11 +77,14 @@ export class UIForecasts {
 				let hasHourlyWeather: boolean = false;
 				for (let index = 0; index < this.app.GetMaxHourlyForecasts(); index++) {
 					const element = weather.hourlyForecasts[index];
-					if (OnSameDay(element.date, forecastData.date)) {
+					if (OnSameDay(element.date, forecastData.date, config)) {
 						hasHourlyWeather = true;
 						break;
 					}
 				}
+
+				// We set ID to the buttons as date so we can use them later on
+				forecastUi.Day.ID = forecastData.date;
 
 				if (hasHourlyWeather) {
 					forecastUi.Day.enable();

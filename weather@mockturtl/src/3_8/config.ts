@@ -134,6 +134,18 @@ export class Config {
 	private app: WeatherApplet;
 	private countryCode: string;
 
+	private timezone: string = undefined;
+
+	public get Timezone() {
+		return this.timezone;
+	}
+
+	public set Timezone(value: string) {
+		if (value === null || value == "")
+			value = undefined;
+		this.timezone = value;
+	}
+
 	private readonly autoLocProvider: IpApi
 	private readonly geoLocationService: GeoLocation;
 
