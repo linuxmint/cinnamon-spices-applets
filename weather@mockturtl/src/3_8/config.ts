@@ -134,15 +134,15 @@ export class Config {
 	private app: WeatherApplet;
 	private countryCode: string;
 
-	private timezone: string = undefined;
+	private timezone: string = null;
 
 	public get Timezone() {
 		return this.timezone;
 	}
 
 	public set Timezone(value: string) {
-		if (value === null || value == "")
-			value = undefined;
+		if (!value || value == "")
+			value = null;
 		this.timezone = value;
 	}
 

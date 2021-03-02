@@ -58,7 +58,7 @@ class Config {
         this.WEATHER_LOCATION_LIST = "locationList";
         this.doneTypingLocation = null;
         this.currentLocation = null;
-        this.timezone = undefined;
+        this.timezone = null;
         this.app = app;
         this.currentLocale = utils_1.ConstructJsLocale(get_language_names()[0]);
         logger_1.Log.Instance.Debug("System locale is " + this.currentLocale);
@@ -76,8 +76,8 @@ class Config {
         return this.timezone;
     }
     set Timezone(value) {
-        if (value === null || value == "")
-            value = undefined;
+        if (!value || value == "")
+            value = null;
         this.timezone = value;
     }
     BindSettings() {
