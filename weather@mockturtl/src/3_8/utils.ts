@@ -171,6 +171,7 @@ export function OnSameDay(date1: Date, date2: Date, config: Config): boolean {
 	//if (!config.Timezone)
 		return date1.toDateString() == date2.toDateString();
 	//else
+		//TODO: This breaks cinnamon for some reason, investigate why.
 		//return date1.toLocaleDateString(config.currentLocale, {timeZone: config.Timezone}) == date2.toLocaleDateString(config.currentLocale, {timeZone: config.Timezone});
 }
 
