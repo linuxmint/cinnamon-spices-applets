@@ -46,17 +46,19 @@ class UIForecasts {
                 let comment = (config._shortConditions) ? forecastData.condition.main : forecastData.condition.description;
                 let dayName = utils_1.GetDayName(forecastData.date, config.currentLocale, config._showForecastDates, weather.location.timeZone);
                 forecastUi.Day.actor.label = dayName;
-                forecastUi.Day.ID = forecastData.date;
                 forecastUi.Day.Hovered.Unsubscribe(this.DayHoveredCallback);
                 forecastUi.Day.Clicked.Unsubscribe(this.DayClickedCallback);
                 let hasHourlyWeather = false;
                 for (let index = 0; index < this.app.GetMaxHourlyForecasts(); index++) {
                     const element = weather.hourlyForecasts[index];
-                    if (utils_1.OnSameDay(element.date, forecastData.date)) {
+                    if (!element)
+                        break;
+                    if (utils_1.OnSameDay(element.date, forecastData.date, config)) {
                         hasHourlyWeather = true;
                         break;
                     }
                 }
+                forecastUi.Day.ID = forecastData.date;
                 if (hasHourlyWeather) {
                     forecastUi.Day.enable();
                     forecastUi.Day.Hovered.Subscribe(this.DayHoveredCallback);

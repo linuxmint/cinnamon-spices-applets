@@ -149,6 +149,7 @@ class LocationStore {
             notification_service_1.NotificationService.Instance.Send(utils_1._("Info") + " - " + utils_1._("Location Store"), utils_1._("Location is already saved"), true);
             return;
         }
+        loc.timeZone = this.app.config.Timezone;
         this.locations.push(loc);
         this.currentIndex = this.locations.length - 1;
         this.InvokeStorageChanged();

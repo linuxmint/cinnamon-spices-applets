@@ -72,15 +72,21 @@ export class UIHourlyForecasts {
 			return;
 
 		let itemWidth = this.GetHourlyBoxItemWidth();
+		let midnightIndex = null;
 		for (let index = 0; index < this.hourlyForecastDates.length; index++) {
+			if (OnSameDay(this.hourlyForecastDates[index], date, this.app.config))
+				midnightIndex = index;
+			
 			// Adjust dates so we jump to 6 in the morning, not midnight when we scroll to a date
 			const element = AddHours(this.hourlyForecastDates[index], -6);
-			let tmp = AddHours(date, -6);
-			if (OnSameDay(element, tmp)) {
+			if (OnSameDay(element, date, this.app.config)) {
 				this.actor.get_hscroll_bar().get_adjustment().set_value(index * itemWidth);
 				break;
 			}
 		}
+		// Day has hourly forecasts earlier than 6 but not later than 6, scroll to midnight
+		if (midnightIndex != null)
+			this.actor.get_hscroll_bar().get_adjustment().set_value(midnightIndex * itemWidth);
 	}
 
 	/** Changes all icon's type what are affected by
