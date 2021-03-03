@@ -51,6 +51,8 @@ class UIForecasts {
                 let hasHourlyWeather = false;
                 for (let index = 0; index < this.app.GetMaxHourlyForecasts(); index++) {
                     const element = weather.hourlyForecasts[index];
+                    if (!element)
+                        break;
                     if (utils_1.OnSameDay(element.date, forecastData.date, config)) {
                         hasHourlyWeather = true;
                         break;
