@@ -4,15 +4,15 @@
     "height": 600,
     "width": 800,
     "pages": [
+      "search-page",
       "radio-stations-page",
       "preferences-page"
     ],
     "radio-stations-page": {
       "type": "page",
-      "title": "Radio Stations",
+      "title": "My Stations",
       "sections": [
-        "station-list-section",
-        "find-station-section"
+        "station-list-section"
       ]
     },
     "preferences-page": {
@@ -24,6 +24,13 @@
         "youtube-section"
       ]
     },
+    "search-page": {
+      "type": "page",
+      "title": "Find Station",
+      "sections": [
+        "find-station-section"
+      ]
+    },
     "station-list-section": {
       "type": "section",
       "title": "List of stations",
@@ -33,10 +40,9 @@
     },
     "find-station-section": {
       "type": "section",
-      "title": "Find station",
+      "title": "Search Radio station",
       "keys": [
-        "streamurl-button",
-        "radiolist-button"
+        "radio-search-widget"
       ]
     },
     "appearance-section": {
@@ -157,5 +163,11 @@
     "tooltip": "Songs downloaded from Youtube will be saved to this directory. This feature can be found in the right-click-menu of the applet",
     "default": "~/Music/Radio",
     "select-dir": true
+  },
+  "radio-search-widget": {
+    "type": "custom",
+    "file": "RadioSearchWidget.py",
+    "widget": "RadioSearchWidget",
+    "description": "Try out this custom widget!"
   }
 }

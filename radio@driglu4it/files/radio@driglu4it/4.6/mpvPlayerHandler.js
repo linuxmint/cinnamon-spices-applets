@@ -214,17 +214,13 @@ class MpvPlayerHandler {
     // returns true when volume changed and false if not. This is the case when the increased volume would be higher than the max volume or lower than zero
     increaseDecreaseVolume(amount) {
 
-        if (this.stopped) { return "" }
+        if (this.stopped) return
 
-        let volumeChanged = false
         const newVolume = Math.min(MAX_VOLUME, Math.max(0, this._volume + amount))
 
         if (newVolume !== this._volume) {
-            volumeChanged = true
             this._updateVolume({ updateTarget: "Both", newVolume: newVolume })
         }
-
-        return volumeChanged
     }
 
     stopRadio() {
