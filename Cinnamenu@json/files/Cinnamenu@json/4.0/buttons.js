@@ -15,7 +15,7 @@ const {SignalManager} = imports.misc.signalManager;
 const {spawnCommandLine, spawn, unref} = imports.misc.util;
 const MessageTray = imports.ui.messageTray;
 const ApplicationsViewModeLIST = 0, ApplicationsViewModeGRID = 1;
-const {SEARCH_DEBUG, _, APPTYPE, tryFn, wordWrap, showTooltip, hideTooltip} = require('./utils');
+const {_, wordWrap, showTooltip, hideTooltipIfVisible} = require('./utils');
 const {MODABLE, MODED} = require('./emoji');
 const PlacementTOOLTIP = 1, PlacementUNDER = 2, PlacementNONE = 3;
 const SHOW_SEARCH_MARKUP_IN_TOOLTIP = true;
@@ -70,12 +70,12 @@ class CategoryButton extends PopupBaseMenuItem {
                         if (!source.categoryNameText || source.categoryNameText === this.categoryNameText) {
                             return DragMotionResult.NO_DROP;
                         }
-                        this.resetAllCategoriesOpacity();
+                        this._resetAllCategoriesOpacity();
                         this.actor.set_opacity(50);
                         return DragMotionResult.MOVE_DROP; },
                 acceptDrop: (source /*, actor, x, y, time */) => {
                         if (!source.categoryNameText || source.categoryNameText === this.categoryNameText) {
-                            this.resetAllCategoriesOpacity();
+                            this._resetAllCategoriesOpacity();
                             return DragMotionResult.NO_DROP;
                         }
                         //move category to new position
@@ -85,7 +85,7 @@ class CategoryButton extends PopupBaseMenuItem {
                         categories.splice(oldIndex, 1);
                         this.appThis.settings.categories = categories.slice(0, newIndex).concat(
                                                             [source.id]).concat(categories.slice(newIndex));
-                        this.resetAllCategoriesOpacity();
+                        this._resetAllCategoriesOpacity();
                         this.appThis.categories.update();
                         this.appThis.categoriesView.populate();
                         this.appThis.setActiveCategory(this.appThis.currentCategory);
@@ -100,16 +100,16 @@ class CategoryButton extends PopupBaseMenuItem {
         this.draggable = makeDraggable(this.actor);
 
         // Connect signals
-        this.signals.connect(this.draggable, 'drag-begin', (...args) => this.onDragBegin(...args));
-        this.signals.connect(this.draggable, 'drag-cancelled', (...args) => this.onDragCancelled(...args));
-        this.signals.connect(this.draggable, 'drag-end', (...args) => this.onDragEnd(...args));
+        this.signals.connect(this.draggable, 'drag-begin', (...args) => this._onDragBegin(...args));
+        this.signals.connect(this.draggable, 'drag-cancelled', (...args) => this._onDragCancelled(...args));
+        this.signals.connect(this.draggable, 'drag-end', (...args) => this._onDragEnd(...args));
         //?undo
         this.signals.connect(this.actor, 'enter-event', (...args) => this.handleEnter(...args));
         //Allow motion-event to trigger handleEnter because previous enter-event may have been
         //invalidated by this.appThis.badAngle === true when this is no longer the case.
         this.signals.connect(this.actor, 'motion-event', (...args) => this.handleEnter(...args));
         this.signals.connect(this.actor, 'leave-event', (...args) => this.handleLeave(...args));
-        this.signals.connect(this.actor, 'button-release-event', (...args) => this.handleButtonRelease(...args));
+        this.signals.connect(this.actor, 'button-release-event', (...args) => this._handleButtonRelease(...args));
     }
 
     setHighlight(on) {
@@ -124,16 +124,16 @@ class CategoryButton extends PopupBaseMenuItem {
         }
     }
 
-    onDragBegin() {
+    _onDragBegin() {
         this.actor.set_opacity(51);
     }
 
-    onDragCancelled() {
+    _onDragCancelled() {
         this.actor.set_opacity(255);
     }
 
-    onDragEnd() {
-        this.resetAllCategoriesOpacity();
+    _onDragEnd() {
+        this._resetAllCategoriesOpacity();
     }
 
     selectCategory() {
@@ -167,7 +167,6 @@ class CategoryButton extends PopupBaseMenuItem {
                 [['/Mint-Y/',           'background-color: #d8d8d8; color: black;'],
                 ['/Mint-Y-Dark/',       'background-color: #404040;'],
                 ['/Mint-X/',            'background-color: #d4d4d4; color: black; border-image: none;'],
-                ['/Pragmatic-Darker-Blue/','background-color: #383838;'],
                 ['/Faded-Dream/',       'background-color: rgba(255,255,255,0.25);'],
                 ['/Linux Mint/',        'box-shadow: none; background-gradient-end: rgba(90, 90, 90, 0.5);'],
                 ['Cinnamon default',    'background-gradient-start: rgba(255,255,255,0.03); background-gradient-end: rgba(255,255,255,0.03);'],
@@ -186,7 +185,6 @@ class CategoryButton extends PopupBaseMenuItem {
             }
             return Clutter.EVENT_STOP;
         } else {
-            global.log('selectCategory');
             this.selectCategory();
             return Clutter.EVENT_STOP;
         }
@@ -207,7 +205,7 @@ class CategoryButton extends PopupBaseMenuItem {
         }
     }
 
-    handleButtonRelease(actor, event) {
+    _handleButtonRelease(actor, event) {
         if (this.disabled) {
             return;
         }
@@ -233,10 +231,6 @@ class CategoryButton extends PopupBaseMenuItem {
     }
 
     disable() {
-        if (this.actor.has_style_class_name('menu-category-button-greyed')) {
-            return false;
-        }
-
         this.actor.set_style_class_name('menu-category-button-greyed');
         this.disabled = true;
         this.entered = null;
@@ -247,7 +241,7 @@ class CategoryButton extends PopupBaseMenuItem {
         this.disabled = false;
     }
 
-    resetAllCategoriesOpacity() {
+    _resetAllCategoriesOpacity() {
         this.appThis.categories.buttons.forEach( (button) => button.actor.set_opacity(255) );
     }
 
@@ -337,7 +331,7 @@ class ContextMenu {
         // e is undefined and button position is used instead.
         this.contextMenuButtons.forEach(button => button.destroy());
         this.contextMenuButtons = [];
-
+        //------populate menu
         if (isACategoryButton) {
             const addMenuItem = (item) => {
                 this.menu.addMenuItem(item);
@@ -348,13 +342,13 @@ class ContextMenu {
                                         this.appThis.categories.update();
                                         this.appThis.categoriesView.populate();
                                         this.close(); } ));
-        } else if (app.type === APPTYPE.application) {
-            this.populateContextMenu_apps(app);
-        } else if (app.type === APPTYPE.file && !app.isBackButton) {
-            if (!this.populateContextMenu_files(app)) {
+        } else if (app.isApplication) {
+            this._populateContextMenu_apps(app);
+        } else if (app.isFolderviewFile || app.isRecentFile || app.isFavoriteFile) {
+            if (!this._populateContextMenu_files(app)) {
                 return;
             }
-        } else if (app.type == APPTYPE.provider && app.emoji) {
+        } else if (app.isSearchResult && app.emoji) {
             if (!MODABLE.includes(app.emoji)) {
                 return;
             }
@@ -382,7 +376,7 @@ class ContextMenu {
 
         this.isOpen = true;
         this.appThis.resizer.inhibit_resizing = true;
-
+        //----Position and open menu----
         const contextMenuWidth = this.menu.actor.width;
         const contextMenuHeight = this.menu.actor.height;
 
@@ -413,7 +407,7 @@ class ContextMenu {
         return;
     }
 
-    populateContextMenu_apps(app) { //add items to context menu of type: application
+    _populateContextMenu_apps(app) { //add items to context menu of type: application
         const addMenuItem = (item) => {
             this.menu.addMenuItem(item);
             this.contextMenuButtons.push(item);
@@ -449,12 +443,12 @@ class ContextMenu {
             addMenuItem( new ContextMenuItem(this.appThis, _('Add to desktop'), 'computer',
                 () => { const file = Gio.file_new_for_path(app.get_app_info().get_filename());
                         const destFile = Gio.file_new_for_path(USER_DESKTOP_PATH + '/' + file.get_basename());
-                        tryFn(() => {
+                        try {
                             file.copy( destFile, 0, null, null);
                             changeModeGFile(destFile, 755);
-                        }, (e) => {
+                        } catch(e) {
                             global.log(e);
-                        });
+                        }
                         this.close(); } ));
         }
         if (this.appThis.appFavorites.isFavorite(app.get_id())) {
@@ -468,7 +462,7 @@ class ContextMenu {
         }
     }
 
-    populateContextMenu_files(app) {
+    _populateContextMenu_files(app) {
         const addMenuItem = (item) => {
             this.menu.addMenuItem(item);
             this.contextMenuButtons.push(item);
@@ -566,13 +560,13 @@ class AppButton extends PopupBaseMenuItem {
         this.appThis = appThis;
         this.app = app;
         const isListView = this.appThis.settings.applicationsViewMode === ApplicationsViewModeLIST;
-        this.setButtonStyle(false);//normal style (not slected)
+        this._setButtonStyleNormal();
         this.actor.x_align = isListView ? St.Align.START : St.Align.MIDDLE;
         this.actor.y_align = St.Align.MIDDLE;
         if (!isListView) {
             //remove l/r padding in grid view to allow maximum space for label
             this.actor.set_style('padding-left: 0px; padding-right: 0px;');
-            this.setButtonWidth();
+            this.setGridButtonWidth();
         }
         this.signals = new SignalManager(null);
         this.entered = null;
@@ -580,37 +574,57 @@ class AppButton extends PopupBaseMenuItem {
         //create icon even if iconSize is 0 so dnd has something to drag
         if (this.app.icon) { //APPTYPE.place or APPTYPE.provider //instanceof St.Icon
             this.icon = this.app.icon;
-        } else if (this.app.gicon) { //APPTYPE.file or APPTYPE.place
+        } else if (this.app.gicon) { //file or APPTYPE.place
             this.icon = new St.Icon({ gicon: this.app.gicon, icon_size: this.appThis.getAppIconSize()});
         } else if (this.app.emoji) {
             const iconLabel = new St.Label({ style_class: '', style: 'color: white; font-size: ' +
                                             (Math.round(this.appThis.getAppIconSize() * 0.85)) + 'px;'});
             iconLabel.get_clutter_text().set_markup(this.app.emoji);
             this.icon = iconLabel;
-        } else if (this.app.type === APPTYPE.application) {
+        } else if (this.app.isApplication) {
             this.icon = this.app.create_icon_texture(this.appThis.getAppIconSize());
         } else if (this.app.isBackButton) {
             this.icon = new St.Icon({ icon_name: 'edit-undo-symbolic', icon_size: this.appThis.getAppIconSize()});
-        } else if (this.app.type === APPTYPE.clearlist_button) {
+        } else if (this.app.isClearRecentsButton) {
             this.icon = new St.Icon({   icon_name: 'edit-clear', icon_type: St.IconType.SYMBOLIC,
                                         icon_size: this.appThis.getAppIconSize()});
         }
         if (!this.icon) {
             this.icon = new St.Icon({icon_name: 'dialog-error', icon_size: this.appThis.getAppIconSize()});
         }
-        //--------Label------------------------------------
-        this.label = new St.Label({ style_class: 'menu-application-button-label',
-                                    style: 'padding-right: 2px; padding-left: 2px;'});
-        if (!isListView && this.appThis.settings.descriptionPlacement === PlacementUNDER) {
-            this.label.set_style('text-align: center;');
-        }
-        this.formatLabel();
         this.iconContainer = new St.BoxLayout();
         if (this.icon && this.appThis.getAppIconSize() > 0) {
             this.iconContainer.add(this.icon, { x_fill: false, y_fill: false,
                                                 x_align: St.Align.MIDDLE, y_align: St.Align.MIDDLE});
         }
-        this.dot = new St.Widget({ //app running indicator
+        //--------Label------------------------------------
+        this.label = new St.Label({ style_class: 'menu-application-button-label' });
+        //menu-application-button-label in themes are designed for list view and may have uneven
+        //padding, so in grid view make padding symmetrical and center text
+        if (!isListView) {
+            this.label.style = 'padding-right: 2px; padding-left: 2px; text-align: center;';
+        }
+        //set label text
+        let name = this.app.name.replace(/&/g, '&amp;').replace(/</g, '&lt;');
+        let description = this.app.description ?
+                            this.app.description.replace(/&/g, '&amp;').replace(/</g, '&lt;') : '';
+        let markup = '<span>' + name + '</span>';
+        if (this.appThis.settings.descriptionPlacement === PlacementUNDER && description) {
+            markup += '\n<span size="small">' + description + '</span>';
+        }
+        const clutterText = this.label.get_clutter_text();
+        clutterText.set_markup(markup);
+        /*if (this.app.isFolderviewFile && !description) {
+            clutterText.set_line_wrap(true);
+            clutterText.set_line_wrap_mode(2);//WORD_CHAR
+            const lines = clutterText.get_layout().get_lines();
+            global.log(clutterText.get_text());
+        } else {*/
+        clutterText.ellipsize = EllipsizeMode.END;
+        //
+        this._setAppHighlightClass();
+        //--------app running indicator--------------
+        this.appRunningIndicator = new St.Widget({
                 style: isListView ?
                 'width: 2px; height: 12px; background-color: ' + this.appThis.getThemeForegroundColor() +
                                                     '; margin: 0px; border: 1px; border-radius: 10px;' :
@@ -622,13 +636,15 @@ class AppButton extends PopupBaseMenuItem {
         //-------------------buttonBox-------------------------
         this.buttonBox = new St.BoxLayout({ vertical: !isListView, y_expand: false });
         if (!isListView) {
-            this.buttonBox.width = 600;//bigger than needed to ensure it centers in it's grid space
+            //PopupBaseMenuItem's contents are aligned left so make buttonBox bigger than needed so that
+            //it takes all available space in grid column and buttonBox's contents can then be centered.
+            this.buttonBox.width = 600;
         }
         this.buttonBox.add(this.iconContainer, {
                                 x_fill: false, y_fill: false,
                                 x_align: isListView ? St.Align.START : St.Align.MIDDLE,
                                 y_align: St.Align.MIDDLE});
-        this.buttonBox.add(this.dot, {  x_fill: false, y_fill: false,
+        this.buttonBox.add(this.appRunningIndicator, {  x_fill: false, y_fill: false,
                                         x_align: St.Align.MIDDLE, y_align: St.Align.MIDDLE });
         this.buttonBox.add(this.label, {
                                 x_fill: false, y_fill: false,
@@ -639,12 +655,12 @@ class AppButton extends PopupBaseMenuItem {
             this.icon.realize();
         }
         //----------dnd--------------
-        if (this.app.type === APPTYPE.application) {
+        if (this.app.isApplication) {
             this.actor._delegate = {
                     handleDragOver: (source) => {
                             if (source.isDraggableApp && source.get_app_id() !== this.app.get_id() &&
                                                             this.appThis.currentCategory === 'favorite_apps') {
-                                this.resetAllAppsOpacity();
+                                this._resetAllAppsOpacity();
                                 this.actor.set_opacity(40);
                                 return DragMotionResult.MOVE_DROP;
                             }
@@ -664,55 +680,44 @@ class AppButton extends PopupBaseMenuItem {
                     _getDragActor: () => new Clutter.Clone({source: this.actor}),
                     getDragActor: () => new Clutter.Clone({source: this.icon}),
                     get_app_id: () => this.app.get_id(),
-                    isDraggableApp: this.app.type === APPTYPE.application
+                    isDraggableApp: this.app.isApplication
             };
 
             this.draggable = makeDraggable(this.actor);
-            this.signals.connect(this.draggable, 'drag-begin', (...args) => this.onDragBegin(...args));
-            this.signals.connect(this.draggable, 'drag-cancelled', (...args) => this.onDragCancelled(...args));
-            this.signals.connect(this.draggable, 'drag-end', (...args) => this.onDragEnd(...args));
+            this.signals.connect(this.draggable, 'drag-begin', (...args) => this._onDragBegin(...args));
+            //this.signals.connect(this.draggable, 'drag-cancelled', (...args) => this._onDragCancelled(...args));
+            this.signals.connect(this.draggable, 'drag-end', (...args) => this._onDragEnd(...args));
         }
 
         //----running state
-        this.dot.opacity = 0;
-        if (this.app.type === APPTYPE.application) {
-            this.signals.connect(this.app, 'notify::state', (...args) => this.onStateChanged(...args));
-            this.onStateChanged();
+        this._onRunningStateChanged();
+        if (this.app.isApplication) {
+            this.signals.connect(this.app, 'notify::state', (...args) => this._onRunningStateChanged(...args));
         }
 
-        this.signals.connect(this.actor, 'button-press-event', (...args) => this.handleButtonPress(...args));
-        this.signals.connect(this.actor, 'button-release-event', (...args) => this.handleButtonRelease(...args));
+        //this.signals.connect(this.actor, 'button-press-event', (...args) => this.handleButtonPress(...args));
+        this.signals.connect(this.actor, 'button-release-event', (...args) => this._handleButtonRelease(...args));
         this.signals.connect(this.actor, 'enter-event', (...args) => this.handleEnter(...args));
         this.signals.connect(this.actor, 'leave-event', (...args) => this.handleLeave(...args));
     }
 
-    setButtonStyle(selected) {
-        if (selected) {
-            this.actor.set_style_class_name('menu-application-button-selected');
-        } else {
-            this.actor.set_style_class_name('menu-application-button');
-        }
+    _setButtonStyleNormal() {
+        this.actor.set_style_class_name('menu-application-button');
     }
 
-    onDragBegin() {
-        if (this.tooltipVisible) {
-            hideTooltip();
-            this.tooltipVisible = false;
-        }
+    _setButtonStyleSelected() {
+        this.actor.set_style_class_name('menu-application-button-selected');
     }
 
-    onDragCancelled() {
+    _onDragBegin() {
+        hideTooltipIfVisible();
     }
 
-    onDragEnd() {
-        this.resetAllAppsOpacity();
+    _onDragEnd() {
+        this._resetAllAppsOpacity();
     }
 
-    formatLabel() {
-        let name = this.app.name.replace(/&/g, '&amp;').replace(/</g, '&lt;');
-        let description = this.app.description ?
-                            this.app.description.replace(/&/g, '&amp;').replace(/</g, '&lt;') : '';
-
+    _setAppHighlightClass() {
         if (this.app.newAppShouldHighlight) {
             if (!this.actor.has_style_pseudo_class('highlighted')) {
                 this.actor.add_style_pseudo_class('highlighted'); //'font-weight: bold;';
@@ -722,23 +727,9 @@ class AppButton extends PopupBaseMenuItem {
                 this.actor.remove_style_pseudo_class('highlighted');
             }
         }
-        let markup = '<span>' + name + '</span>';
-        if (this.appThis.settings.descriptionPlacement === PlacementUNDER && description) {
-            markup += '\n<span size="small">' + description + '</span>';
-        }
-        const clutterText = this.label.get_clutter_text();
-        clutterText.set_markup(markup);
-        /*if (this.app.type === APPTYPE.file && !description) {
-            clutterText.set_line_wrap(true);
-            clutterText.set_line_wrap_mode(2);//WORD_CHAR
-            const lines = clutterText.get_layout().get_lines();
-            global.log(clutterText.get_text());
-        } else {*/
-            clutterText.ellipsize = EllipsizeMode.END;
-        //}
     }
 
-    setButtonWidth() {
+    setGridButtonWidth() {
         //set width of grid button
         this.actor.width = this.appThis.getGridValues().columnWidth;
     }
@@ -755,8 +746,9 @@ class AppButton extends PopupBaseMenuItem {
         }
 
         this.entered = true;
-        this.setButtonStyle(true);//selected style
+        this._setButtonStyleSelected();
 
+        //show tooltip
         if (this.appThis.settings.descriptionPlacement === PlacementTOOLTIP) {
             let tooltipMarkup = '<span>' + wordWrap((this.app.nameWithSearchMarkup &&
                                             SHOW_SEARCH_MARKUP_IN_TOOLTIP && this.appThis.searchActive) ?
@@ -765,16 +757,6 @@ class AppButton extends PopupBaseMenuItem {
                 tooltipMarkup += '\n<span size="small">' + wordWrap((this.app.descriptionWithSearchMarkup &&
                                     SHOW_SEARCH_MARKUP_IN_TOOLTIP && this.appThis.searchActive) ?
                                     this.app.descriptionWithSearchMarkup : this.app.description) + '</span>';
-            }
-            if (SEARCH_DEBUG) {
-                if (SHOW_SEARCH_MARKUP_IN_TOOLTIP && this.app.keywordsWithSearchMarkup &&
-                                                                                this.appThis.searchActive) {
-                    tooltipMarkup += '\n<span size="small">' +
-                                                wordWrap(this.app.keywordsWithSearchMarkup) + '</span>';
-                }
-                if (SHOW_SEARCH_MARKUP_IN_TOOLTIP && this.app.idWithSearchMarkup && this.appThis.searchActive) {
-                    tooltipMarkup += '\n<span size="small">' + wordWrap(this.app.idWithSearchMarkup) + '</span>';
-                }
             }
             tooltipMarkup = tooltipMarkup.replace(/&/g, '&amp;');
             let [x, y] = this.actor.get_transformed_position();
@@ -788,11 +770,7 @@ class AppButton extends PopupBaseMenuItem {
                 y += height + 8 * global.ui_scale;
                 center_x = true;
             }
-            if (!this.tooltipVisible) { //handleEnter may have been called twice, once with key nav and again
-                                        //with mouse. in which case, don't create new tooltip
-                showTooltip(this.actor, x, y, center_x, tooltipMarkup);
-                this.tooltipVisible = true;
-            }
+            showTooltip(this.actor, x, y, center_x, tooltipMarkup);
         }
         return false;
     }
@@ -803,17 +781,11 @@ class AppButton extends PopupBaseMenuItem {
         }
 
         this.entered = null;
-        this.setButtonStyle(false);//normal style (not selected)
-        if (this.tooltipVisible) {
-            hideTooltip();
-            this.tooltipVisible = false;
-        }
+        this._setButtonStyleNormal();
+        hideTooltipIfVisible();
     }
 
-    handleButtonPress() {
-    }
-
-    handleButtonRelease(actor, e) {
+    _handleButtonRelease(actor, e) {
         const button = e.get_button();
         if (button === 1) {//left click
             if (this.appThis.contextMenu.isOpen) {
@@ -829,7 +801,8 @@ class AppButton extends PopupBaseMenuItem {
                 this.handleEnter();
                 return Clutter.EVENT_STOP;
             } else {
-                if (this.app.type == APPTYPE.application || this.app.type == APPTYPE.file || this.app.emoji ){
+                if (this.app.isApplication || this.app.isFolderviewFile || this.app.isFavoriteFile ||
+                                                                    this.app.emoji || this.app.isRecentFile){
                     this.openContextMenu(e);
                 }
                 return Clutter.EVENT_STOP;
@@ -839,75 +812,74 @@ class AppButton extends PopupBaseMenuItem {
     }
 
     activate() {
-        if (this.app.type === APPTYPE.application) {
+        if (this.app.isApplication) {
             if (this.app.newAppShouldHighlight) {
                 this.app.newAppShouldHighlight = false;
-                this.formatLabel();
+                this._setAppHighlightClass();
             }
             this.app.open_new_window(-1);
             this.appThis.closeMenu();
-        } else if (this.app.type === APPTYPE.place) {
-            if (this.app.uri) {
-                this.app.app.launch_uris([this.app.uri], null);
-            } else {
-                this.app.launch();
-            }
+        } else if (this.app.isPlace) {
+            this.app.launch();
             this.appThis.closeMenu();
-        } else if (this.app.type === APPTYPE.file) {
-            if (this.app.isDirectory) {//broswer view
-                this.appThis.setActiveCategory(Gio.File.new_for_uri(this.app.uri).get_path());
-            } else {
-                try {
-                    Gio.app_info_launch_default_for_uri(this.app.uri, global.create_app_launch_context());
-                    this.appThis.closeMenu();
-                } catch (e) {
-                    Main.notify(_("This file is no longer available"),e.message);
-                    //don't closeMenu
-                }
+        } else if (this.app.isWebBookmark) {
+            this.app.app.launch_uris([this.app.uri], null);
+            this.appThis.closeMenu();
+        } else if (this.app.isFolderviewDirectory) {
+            this.appThis.setActiveCategory(Gio.File.new_for_uri(this.app.uri).get_path());
+        } else if (this.app.isFolderviewFile || this.app.isRecentFile || this.app.isFavoriteFile ||
+                                                                                this.app.isBackButton) {
+            try {
+                Gio.app_info_launch_default_for_uri(this.app.uri, global.create_app_launch_context());
+                this.appThis.closeMenu();
+            } catch (e) {
+                Main.notify(_("This file is no longer available"),e.message);
+                //don't closeMenu
             }
-        } else if (this.app.type === APPTYPE.clearlist_button) {
+        } else if (this.app.isClearRecentsButton) {
             Gtk.RecentManager.get_default().purge_items();
             this.appThis.recentsJustCleared = true;
             this.appThis.setActiveCategory('recents');
             //don't closeMenu
-        } else if (this.app.type === APPTYPE.provider) {
+        } else if (this.app.isSearchResult) {
             this.app.activate(this.app);
             this.appThis.closeMenu();
         }
     }
 
-    onStateChanged() {
-        if (!this.app || this.dot.is_finalized()) {
-            return false;
-        }
-        if (this.app.type === APPTYPE.application) {
-            this.dot.opacity = this.app.state !== AppState.STOPPED ? 255 : 0;
+    _onRunningStateChanged() {
+        if (this.appThis.settings.applicationsViewMode === ApplicationsViewModeLIST) {
+            if (this.app.isApplication && this.app.state !== AppState.STOPPED) {
+                this.appRunningIndicator.show();
+            } else {
+                this.appRunningIndicator.hide();
+            }
+        } else {
+            if (this.app.isApplication && this.app.state !== AppState.STOPPED) {
+                this.appRunningIndicator.opacity = 255;
+            } else {
+                this.appRunningIndicator.opacity = 0;
+            }
         }
         return true;
     }
 
     openContextMenu(e) {
-        this.setButtonStyle(true);//selected style
-        if (this.tooltipVisible) {
-            hideTooltip();
-            this.tooltipVisible = false;
-        }
+        this._setButtonStyleSelected();
+        hideTooltipIfVisible();
         this.appThis.contextMenu.open(this.app, e, this);
     }
 
-    resetAllAppsOpacity() {
+    _resetAllAppsOpacity() {
         this.appThis.appsView.getActiveContainer().get_children().forEach( child => child.set_opacity(255) );
     }
 
     destroy(skipDestroy) {
         this.signals.disconnectAllSignals();
 
-        if (this.tooltipVisible) {
-            hideTooltip();
-            this.tooltipVisible = false;
-        }
+        hideTooltipIfVisible();
         if (!skipDestroy) {
-            this.dot.destroy();
+            this.appRunningIndicator.destroy();
             this.label.destroy();
             if (this.icon) {
                 this.icon.destroy();
@@ -939,7 +911,7 @@ class SidebarButton extends PopupBaseMenuItem {
             this.icon.realize();
         }
 
-        if (this.app && this.app.type === APPTYPE.application) { //----------dnd--------------
+        if (this.app && this.app.isApplication) { //----------dnd--------------
             this.actor._delegate = {
                     handleDragOver: (source) => {
                             if (source.isDraggableApp === true && source.get_app_id() !== this.app.get_id()) {
@@ -965,24 +937,21 @@ class SidebarButton extends PopupBaseMenuItem {
             };
 
             this.draggable = makeDraggable(this.actor);
-            this.signals.connect(this.draggable, 'drag-begin', (...args) => this.onDragBegin(...args));
-            //this.signals.connect(this.draggable, 'drag-cancelled', (...args) => this.onDragCancelled(...args));
-            //this.signals.connect(this.draggable, 'drag-end', (...args) => this.onDragEnd(...args));
+            this.signals.connect(this.draggable, 'drag-begin', (...args) => this._onDragBegin(...args));
+            //this.signals.connect(this.draggable, 'drag-cancelled', (...args) => this._onDragCancelled(...args));
+            //this.signals.connect(this.draggable, 'drag-end', (...args) => this._onDragEnd(...args));
         }
 
         this.signals.connect(this.actor, 'enter-event', (...args) => this.handleEnter(...args));
         this.signals.connect(this.actor, 'leave-event', (...args) => this.handleLeave(...args));
-        this.signals.connect(this.actor, 'button-release-event', (...args) => this.handleButtonRelease(...args));
+        this.signals.connect(this.actor, 'button-release-event', (...args) => this._handleButtonRelease(...args));
     }
 
-    onDragBegin() {
-        if (this.tooltipVisible) {
-            hideTooltip();
-            this.tooltipVisible = false;
-        }
+    _onDragBegin() {
+        hideTooltipIfVisible();
     }
 
-    handleButtonRelease(actor, e) {
+    _handleButtonRelease(actor, e) {
         const button = e.get_button();
         if (button === 1) {//left click
             if (this.appThis.contextMenu.isOpen) {
@@ -1013,11 +982,11 @@ class SidebarButton extends PopupBaseMenuItem {
     activate() {
         if (this.callback) {
             this.callback();
-        } else if (this.app.type === APPTYPE.application) {
+        } else if (this.app.isApplication) {
             this.app.newAppShouldHighlight = false;
             this.app.open_new_window(-1);
             this.appThis.closeMenu();
-        } else if (this.app.type === APPTYPE.file) {
+        } else if (this.app.isFavoriteFile) {
             try {
                 Gio.app_info_launch_default_for_uri(this.app.uri, global.create_app_launch_context());
                 this.appThis.closeMenu();
@@ -1028,10 +997,7 @@ class SidebarButton extends PopupBaseMenuItem {
     }
 
     openContextMenu(e) {
-        if (this.tooltipVisible) {
-            hideTooltip();
-            this.tooltipVisible = false;
-        }
+        hideTooltipIfVisible();
         this.appThis.contextMenu.open(this.app, e, this);
     }
 
@@ -1060,7 +1026,6 @@ class SidebarButton extends PopupBaseMenuItem {
         }
         text = text.replace(/&/g, '&amp;');
         showTooltip(this.actor, x, y, false /*don't center x*/, text);
-        this.tooltipVisible = true;
         return true;
     }
 
@@ -1070,10 +1035,7 @@ class SidebarButton extends PopupBaseMenuItem {
         }
         this.entered = null;
         this.actor.remove_style_pseudo_class('hover');
-        if (this.tooltipVisible) {
-            hideTooltip();
-            this.tooltipVisible = false;
-        }
+        hideTooltipIfVisible();
         return true;
     }
 

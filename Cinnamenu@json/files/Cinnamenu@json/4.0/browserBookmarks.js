@@ -23,62 +23,61 @@
  */
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
-const {APPTYPE, readJSONAsync, tryFn} = require('./utils');
+const {readJSONAsync} = require('./utils');
 
 let Gda = null;
-tryFn(function() {
+try {
     Gda = imports.gi.Gda;
-});
+} catch(e) {}
 
 const readFirefoxBookmarks = function(appInfo, profileDir) {
-  let connection, bookmarks = [];
+    let connection, bookmarks = [];
 
-  let result;
+    let result;
 
-  if (!connection) {
-    tryFn(function() {
-      connection = Gda.Connection.open_from_string(
-        'SQLite', 'DB_DIR=' + profileDir + ';DB_NAME=places.sqlite',
-        null, Gda.ConnectionOptions.READ_ONLY
-      );
-    });
-  }
+    if (!connection) {
+        try {
+            connection = Gda.Connection.open_from_string(
+                            'SQLite', 'DB_DIR=' + profileDir + ';DB_NAME=places.sqlite',
+                            null, Gda.ConnectionOptions.READ_ONLY);
+        } catch(e) {}
+    }
 
-  tryFn(function() {
-    result = connection.execute_select_command(
-      'SELECT moz_bookmarks.title, moz_places.url FROM moz_bookmarks ' +
-      'INNER JOIN moz_places ON (moz_bookmarks.fk = moz_places.id) ' +
-      'WHERE moz_bookmarks.fk NOT NULL AND moz_bookmarks.title NOT ' +
-      'NULL AND moz_bookmarks.type = 1'
-    );
-  });
+    try {
+        result = connection.execute_select_command(
+            'SELECT moz_bookmarks.title, moz_places.url FROM moz_bookmarks ' +
+            'INNER JOIN moz_places ON (moz_bookmarks.fk = moz_places.id) ' +
+            'WHERE moz_bookmarks.fk NOT NULL AND moz_bookmarks.title NOT ' +
+            'NULL AND moz_bookmarks.type = 1'
+        );
+    } catch(e) {}
 
-  // Gda binding seems buggy on Ubuntu 18.04 with error:
-  // "Unsupported type void, deriving from fundamental void"
-  if (!result) return [];
+    // Gda binding seems buggy on Ubuntu 18.04 with error:
+    // "Unsupported type void, deriving from fundamental void"
+    if (!result) return [];
 
-  let nRows = result.get_n_rows();
+    let nRows = result.get_n_rows();
 
-  const handleMeta = function(result, row) {
-    return tryFn(function() {
-      return [
-        result.get_value_at(0, row),
-        result.get_value_at(1, row)
-      ];
-    }, () => [null, null]);
-  };
+    const handleMeta = function(result, row) {
+        try {
+            return [result.get_value_at(0, row),
+                    result.get_value_at(1, row)];
+        } catch(e) {
+            return [null, null];
+        }
+    };
 
-  for (let row = 0; row < nRows; row++) {
-    let [name, uri] = handleMeta(result, row);
+    for (let row = 0; row < nRows; row++) {
+        let [name, uri] = handleMeta(result, row);
 
-    bookmarks.push({
-      app: appInfo,
-      name: name.replace(/\//g, '|'),
-      score: 0,
-      uri
-    });
-  }
-  return bookmarks;
+        bookmarks.push({
+            app: appInfo,
+            name: name.replace(/\//g, '|'),
+            score: 0,
+            uri
+        });
+    }
+    return bookmarks;
 };
 
 function readFirefoxProfiles(appSystem) {
@@ -136,8 +135,7 @@ function readFirefoxProfiles(appSystem) {
     return [];
 }
 
-const readChromiumBookmarks = function(bookmarks, path = ['chromium', 'Default', 'Bookmarks'],
-                                                                wmClass = 'chromium-browser', appSystem) {
+const readChromiumBookmarks = function(bookmarks, path, wmClass, appSystem) {
     let appInfo, bookmarksFile;
 
     let foundApps = appSystem.lookup_desktop_wmclass(path[0]);
@@ -204,9 +202,9 @@ class BookmarksManager {
 
             for (let i = 0, len = bookmarks.length; i < len; i++) {
                 bookmarks[i].gicon = bookmarks[i].app.get_icon();
-                bookmarks[i].mime = null;
+                //bookmarks[i].mime = null;
                 bookmarks[i].description = bookmarks[i].uri;
-                bookmarks[i].type = APPTYPE.place;
+                bookmarks[i].isWebBookmark = true;
             }
 
             // Create a unique list of bookmarks across all browsers.
