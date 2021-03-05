@@ -344,7 +344,7 @@ class ContextMenu {
                                         this.close(); } ));
         } else if (app.isApplication) {
             this._populateContextMenu_apps(app);
-        } else if (app.isFolderviewFile || app.isRecentFile || app.isFavoriteFile) {
+        } else if (app.isFolderviewFile || app.isFolderviewDirectory || app.isRecentFile || app.isFavoriteFile) {
             if (!this._populateContextMenu_files(app)) {
                 return;
             }
@@ -572,17 +572,22 @@ class AppButton extends PopupBaseMenuItem {
         this.entered = null;
         //----------ICON---------------------------------------------
         //create icon even if iconSize is 0 so dnd has something to drag
-        if (this.app.icon) { //APPTYPE.place or APPTYPE.provider //instanceof St.Icon
+        if (this.app.icon) { //isSearchResult(excl. emoji)
             this.icon = this.app.icon;
-        } else if (this.app.gicon) { //file or APPTYPE.place
+        } else if (this.app.gicon) { //isRecentFile, isFavoriteFile, isWebBookmark, isFolderviewFile/Directory
             this.icon = new St.Icon({ gicon: this.app.gicon, icon_size: this.appThis.getAppIconSize()});
-        } else if (this.app.emoji) {
+        } else if (this.app.emoji) {//emoji search result
             const iconLabel = new St.Label({ style_class: '', style: 'color: white; font-size: ' +
                                             (Math.round(this.appThis.getAppIconSize() * 0.85)) + 'px;'});
             iconLabel.get_clutter_text().set_markup(this.app.emoji);
             this.icon = iconLabel;
-        } else if (this.app.isApplication) {
+        } else if (this.app.isApplication) {//isApplication
             this.icon = this.app.create_icon_texture(this.appThis.getAppIconSize());
+        } else if (this.app.isPlace) {//isPlace
+            this.icon = this.app.iconFactory(this.appThis.getAppIconSize());
+            if (!this.icon) {
+                this.icon = new St.Icon({ icon_name: 'folder', icon_size: this.appThis.getAppIconSize()});
+            }
         } else if (this.app.isBackButton) {
             this.icon = new St.Icon({ icon_name: 'edit-undo-symbolic', icon_size: this.appThis.getAppIconSize()});
         } else if (this.app.isClearRecentsButton) {
@@ -614,12 +619,6 @@ class AppButton extends PopupBaseMenuItem {
         }
         const clutterText = this.label.get_clutter_text();
         clutterText.set_markup(markup);
-        /*if (this.app.isFolderviewFile && !description) {
-            clutterText.set_line_wrap(true);
-            clutterText.set_line_wrap_mode(2);//WORD_CHAR
-            const lines = clutterText.get_layout().get_lines();
-            global.log(clutterText.get_text());
-        } else {*/
         clutterText.ellipsize = EllipsizeMode.END;
         //
         this._setAppHighlightClass();
@@ -730,7 +729,6 @@ class AppButton extends PopupBaseMenuItem {
     }
 
     setGridButtonWidth() {
-        //set width of grid button
         this.actor.width = this.appThis.getGridValues().columnWidth;
     }
 
@@ -801,8 +799,8 @@ class AppButton extends PopupBaseMenuItem {
                 this.handleEnter();
                 return Clutter.EVENT_STOP;
             } else {
-                if (this.app.isApplication || this.app.isFolderviewFile || this.app.isFavoriteFile ||
-                                                                    this.app.emoji || this.app.isRecentFile){
+                if (this.app.isApplication || this.app.isFolderviewFile || this.app.isFolderviewDirectory ||
+                                            this.app.isFavoriteFile || this.app.emoji || this.app.isRecentFile){
                     this.openContextMenu(e);
                 }
                 return Clutter.EVENT_STOP;
@@ -825,10 +823,9 @@ class AppButton extends PopupBaseMenuItem {
         } else if (this.app.isWebBookmark) {
             this.app.app.launch_uris([this.app.uri], null);
             this.appThis.closeMenu();
-        } else if (this.app.isFolderviewDirectory) {
+        } else if (this.app.isFolderviewDirectory || this.app.isBackButton) {
             this.appThis.setActiveCategory(Gio.File.new_for_uri(this.app.uri).get_path());
-        } else if (this.app.isFolderviewFile || this.app.isRecentFile || this.app.isFavoriteFile ||
-                                                                                this.app.isBackButton) {
+        } else if (this.app.isFolderviewFile || this.app.isRecentFile || this.app.isFavoriteFile) {
             try {
                 Gio.app_info_launch_default_for_uri(this.app.uri, global.create_app_launch_context());
                 this.appThis.closeMenu();

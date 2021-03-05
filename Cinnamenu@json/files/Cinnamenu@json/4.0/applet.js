@@ -529,15 +529,33 @@ class CinnamenuApplet extends TextIconApplet {
     onBoxResized(userWidth, userHeight){
         this.updateMenuHeight(userHeight);
         this.updateMenuWidth(userWidth);
-        //no adjustments to app buttons are needed for list view
+        //when resizing, no adjustments to app buttons are needed for list view
         if (this.settings.applicationsViewMode === ApplicationsViewModeGRID) {
-            if (this.previousColumns === this.getGridValues().columns) {
-                //number of columns are the same so just adjust button widths only
+            const newcolumnCount = this.getGridValues().columns;
+            if (this.currentGridViewColumnCount === newcolumnCount) {
+                //Number of columns are the same so just adjust button widths only.
                 this.appsView.applicationsGridBox.get_children().forEach(actor =>
                                                         actor.width = this.getGridValues().columnWidth );
-            } else {
-                this.setActiveCategory(this.currentCategory);
+            } else {//Rearrange buttons to fit new number of columns.
+                this.appsView.applicationsGridBox.hide();//for performance
+                const buttons = this.appsView.applicationsGridBox.get_children();
+                this.appsView.applicationsGridBox.remove_all_children();
+                let column = 0;
+                let rownum = 0;
+                const gridLayout = this.appsView.applicationsGridBox.layout_manager;
+                const newColumnWidth = this.getGridValues().columnWidth;
+                buttons.forEach(actor => {
+                    actor.width = newColumnWidth;
+                    gridLayout.attach(actor, column, rownum, 1, 1);
+                    column++;
+                    if (column > newcolumnCount - 1) {
+                        column = 0;
+                        rownum++;
+                    }
+                });
+                this.appsView.applicationsGridBox.show();
             }
+            this.currentGridViewColumnCount = newcolumnCount;
         }
     }
 
@@ -914,8 +932,9 @@ class CinnamenuApplet extends TextIconApplet {
     buttonStoreCleanup() {
         //delete all buttons which won't be reused
         const buttonStore = this.buttonStore.filter(button => {
-            if (button.app.isSearchResult || button.app.isFolderviewFile || button.app.isFavoriteFile ||
-                                                                                button.app.isBackButton) {
+            if (button.app.isSearchResult || button.app.isFolderviewFile || button.app.isFolderviewDirectory ||
+                                                        button.app.isFavoriteFile || button.app.isBackButton) {
+                // listFavoriteFiles() returns new objs each time so buttons cannot be reused.
                 button.destroy(true);
                 return false;
             } else {
@@ -931,6 +950,7 @@ class CinnamenuApplet extends TextIconApplet {
 
     setActiveCategory(categoryId) {
         this.currentCategory = categoryId;
+
         this.categories.buttons.forEach(categoryButton => {
                         if (categoryButton.id === categoryId) {
                             categoryButton.actor.set_style_class_name('menu-category-button-selected');
@@ -960,10 +980,10 @@ class CinnamenuApplet extends TextIconApplet {
             this.populateAppsBox(this.apps.listFavoriteApps());
             break;
         default:
-            if (categoryId.startsWith('/')) {
+            if (categoryId.startsWith('/')) {//folder view
                 this.appsView.setHeaderText(categoryId);
                 this.populateAppsBox(this.apps.listFolder(categoryId));
-            } else {
+            } else {//applications category
                 this.populateAppsBox(this.apps.listApplications(categoryId));
             }
         }
@@ -1154,22 +1174,21 @@ class CinnamenuApplet extends TextIconApplet {
     }
 
     populateAppsBox(appList) {
-        if (!appList) {
-            return false;
-        }
+        //if (!appList) {
+            //return false;
+        //}
         let column = 0;
         let rownum = 0;
-
+        //global.log('buttons',this.buttonStore.length);
         this.appsView.applicationsListBox.hide();//hide while populating for performance.
         this.appsView.applicationsGridBox.hide();//
-        let appCount = appList.length;
-        if (appCount > 1000) {
+
+        if (appList.length > 1000) {
+            appList.length = 1000; //truncate array
             this.appsView.setHeaderText(_('Too many entries - showing first 1000 entries only'));
-            appCount = 1000;
         }
-        for (let i = 0; i < appCount; i++) {
-            const app = appList[i];
-            let appButton = this.buttonStore.find(item => item && item.app === app);
+        appList.forEach(app => {
+            let appButton = this.buttonStore.find(button => button.app === app);
 
             if (!appButton) {
                 appButton = new AppButton(this, app);
@@ -1183,7 +1202,7 @@ class CinnamenuApplet extends TextIconApplet {
                 if (!gridLayout) {
                     return false;
                 }
-                appButton.setGridButtonWidth();// In case menu is being resized.
+                appButton.setGridButtonWidth();// In case menu has been resized.
                 gridLayout.attach(appButton.actor, column, rownum, 1, 1);
                 column++;
 
@@ -1192,14 +1211,14 @@ class CinnamenuApplet extends TextIconApplet {
                     rownum++;
                 }
             }
-        }
+        });
         if (this.settings.applicationsViewMode === ApplicationsViewModeLIST) {
             this.appsView.applicationsListBox.show();
         } else {
             this.appsView.applicationsGridBox.show();
         }
 
-        this.previousColumns = this.getGridValues().columns;
+        this.currentGridViewColumnCount = this.getGridValues().columns;
     }
 //--------------------
     initDisplay() {
@@ -1703,27 +1722,24 @@ class Apps {
             /*if (!GLib.file_test(Gio.File.new_for_uri(recentInfo.uri).get_path(), GLib.FileTest.EXISTS)) {
                 continue;
             }*/
-            const found = this.appThis.buttonStore.find(item =>
-                                                item.app.isRecentFile && item.app.uri === recentInfo.uri);
+            const found = this.appThis.buttonStore.find(button =>
+                                            button.app.isRecentFile && button.app.uri === recentInfo.uri);
             if (found) {
                 res.push(found.app);
             } else {
-                res.push({  name: recentInfo.name,
-                            gicon: recentInfo.gicon,
-                            uri: recentInfo.uri,
-                            mimeType: recentInfo.mimeType,
-                            description: Gio.File.new_for_uri(recentInfo.uri).get_path(),
-                            isRecentFile: true });
+                recentInfo.description = Gio.File.new_for_uri(recentInfo.uri).get_path();
+                recentInfo.isRecentFile = true;
+                res.push(recentInfo);
             }
         });
-        // create "Clear list" icon
+        // add "Clear list" icon
         if (res.length > 0  && !pattern) {
-            if (!this.clearlistItem) {
-                this.clearlistItem = {  name: _('Clear List'),
+            if (!this.clearRecentsButton) {
+                this.clearRecentsButton = {  name: _('Clear List'),
                                         description: '',
                                         isClearRecentsButton: true };
             }
-            res.push(this.clearlistItem);
+            res.push(this.clearRecentsButton);
         }
 
         if (pattern) {
@@ -1752,11 +1768,6 @@ class Apps {
             if (selectedAppId === "home" || selectedAppId === "desktop" || selectedAppId === "connect") {
                 selectedAppId = place.name;
             }
-            let icon = place.iconFactory(this.appThis.getAppIconSize());
-            if (!icon) {
-                icon = new St.Icon({ icon_name: 'folder', icon_size: this.appThis.getAppIconSize()});
-            }
-            place.icon = icon;
             place.isPlace = true;
             place.description = selectedAppId;
             res.push(place);
@@ -1843,14 +1854,14 @@ class Apps {
             const filename = next.get_name();
             if (this.appThis.settings.showHiddenFiles || !filename.startsWith('.')) {
                 const file = Gio.file_new_for_path(folder + (folder === '/' ? '' : '/') + filename);
+                const isDirectory = file.query_file_type(0, null) === 2;
                 res.push({  name: next.get_name(),
-                            icon: null,
                             gicon: next.get_icon(),
                             uri: file.get_uri(),
                             mimeType: next.get_content_type(),
-                            isFolderviewDirectory: file.query_file_type(0, null) === 2,
+                            isFolderviewDirectory: isDirectory,
                             description: '',//file.get_path(),
-                            isFolderviewFile: true });
+                            isFolderviewFile: !isDirectory });
             }
             next = enumerator.next_file(null);
         }
@@ -1868,10 +1879,8 @@ class Apps {
         const parent = dir.get_parent();
         if (parent) {// Add back button
             res.unshift({   name: 'Back',
-                            icon: null,
                             uri: parent.get_uri(),
                             mimeType: 'inode/directory',
-                            isFolderviewDirectory: true,
                             isBackButton: true,
                             description: '',//parent.get_path(),
                         });
