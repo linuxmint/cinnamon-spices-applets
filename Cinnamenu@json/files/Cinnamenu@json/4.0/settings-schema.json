@@ -46,7 +46,6 @@
             "title":"Content",
             "keys":[
                 "show-places-category",
-                "show-recents-category",
                 "show-web-bookmarks-category",
                 "show-favorite-apps-category",
                 "show-home-folder-category",
@@ -71,7 +70,6 @@
                 "open-on-category",
                 "enable-autoscroll",
                 "web-search-option",
-                "enable-emoji-search",
                 "show-hidden-files"
             ]
         },
@@ -160,12 +158,6 @@
         "default":true,
         "description":"Show bookmarks and places",
         "tooltip":"Show bookmarks and places category in the menu"
-    },
-    "show-recents-category":{
-        "type":"switch",
-        "default":true,
-        "description":"Show recent files",
-        "tooltip":"Show recent files category in the menu"
     },
     "show-web-bookmarks-category":{
         "type":"checkbox",
@@ -258,12 +250,6 @@
             "None":4
         },
         "tooltip":"Show an internet search option in search results"
-    },
-    "enable-emoji-search":{
-        "type":"checkbox",
-        "default":true,
-        "description":"Enable emoji search",
-        "tooltip":"Show emojis in search results"
     },
     "show-hidden-files":{
         "type":"checkbox",

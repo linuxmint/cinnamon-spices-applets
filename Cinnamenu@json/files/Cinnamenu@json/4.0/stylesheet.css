@@ -22,7 +22,7 @@ menu-search-box margins will be adjusted to ensure l/r symmetry)
 
 ---categories box-------------------------
 .menu-categories-scrollbox and .vfade
-.menu-categories-box (Note: for compatibility with older themes, when the favorites box is not on the
+.menu-categories-box (Note: for compatibility with older themes, when the favorites box is on the
 left of the menu, menu-categories-box left padding will be reduced so that menu-categories-box left
 padding + menu-applications-outer-box left padding does not exceed 20px. Use menu-categories-box left
 margin to override)
