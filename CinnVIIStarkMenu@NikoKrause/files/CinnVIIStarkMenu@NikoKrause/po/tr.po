@@ -20,7 +20,7 @@ msgstr ""
 
 #: 3.2/applet.js:175 2.6/applet.js:176
 msgid "Please enter your password to uninstall this application"
-msgstr "Bu uygulamayı kaldırmak için lütfen şifrenizi giriniz"
+msgstr "Bu uygulamayı kaldırmak için lütfen parola giriniz"
 
 #: 3.2/applet.js:258 2.6/applet.js:259 3.4/applet.js:258 4.2/applet.js:460
 msgid "Add to panel"
