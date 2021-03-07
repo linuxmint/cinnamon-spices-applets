@@ -22,39 +22,22 @@ const SHOW_SEARCH_MARKUP_IN_TOOLTIP = true;
 const USER_DESKTOP_PATH = getUserDesktopDir();
 
 class CategoryButton extends PopupBaseMenuItem {
-    constructor(appThis, dir, altNameText, altIconName) {
+    constructor(appThis, category_id, category_name, icon_name, gicon) {
         super({ hover: false, activate: false });
         this.appThis = appThis;
         this.signals = new SignalManager(null);
         this.actor.set_style_class_name('menu-category-button');
         this.disabled = false;
         this.entered = null;
-        let iconName;
-        let isStrDir = typeof dir === 'string';
-        if (isStrDir) {
-            this.id = dir;
-            this.categoryNameText = altNameText;
-            iconName = altIconName;
+        this.id = category_id;
+        this.categoryNameText = category_name ? category_name : '';
+        if (icon_name) {
+            this.icon = new St.Icon({   icon_name: icon_name, icon_type: St.IconType.FULLCOLOR,
+                                        icon_size: this.appThis.settings.categoryIconSize});
         } else {
-            this.id = altNameText;
-            const dirName = dir.get_name();
-            this.categoryNameText = dirName ? dirName : '';
-            //
-            let icon = dir.get_icon();
-            if (icon) {
-                if (icon.names) {
-                    iconName = icon.names[0];
-                }
-                if (!iconName && icon.get_names) {
-                    iconName = icon.get_names()[0];
-                }
-            }
-            if (!iconName) {
-                iconName = 'folder';
-            }
+            this.icon = new St.Icon({   gicon: gicon, icon_type: St.IconType.FULLCOLOR,
+                                        icon_size: this.appThis.settings.categoryIconSize});
         }
-        this.icon = new St.Icon({   icon_name: iconName, icon_type: St.IconType.FULLCOLOR,
-                                    icon_size: this.appThis.settings.categoryIconSize});
         if (this.appThis.settings.categoryIconSize > 0) {
             this.addActor(this.icon);
         }
@@ -66,15 +49,16 @@ class CategoryButton extends PopupBaseMenuItem {
 
         //?undo
         this.actor._delegate = {
-                handleDragOver: (source /*, actor, x, y, time */) => {
+                handleDragOver: (source) => {
                         if (!source.categoryNameText || source.categoryNameText === this.categoryNameText) {
                             return DragMotionResult.NO_DROP;
                         }
                         this._resetAllCategoriesOpacity();
                         this.actor.set_opacity(50);
                         return DragMotionResult.MOVE_DROP; },
-                acceptDrop: (source /*, actor, x, y, time */) => {
-                        if (!source.categoryNameText || source.categoryNameText === this.categoryNameText) {
+                acceptDrop: (source) => {
+                        if (!source.categoryNameText || source.categoryNameText === this.categoryNameText ||
+                                                                                this.appThis.searchActive) {
                             this._resetAllCategoriesOpacity();
                             return DragMotionResult.NO_DROP;
                         }
@@ -815,6 +799,7 @@ class AppButton extends PopupBaseMenuItem {
                 this.app.newAppShouldHighlight = false;
                 this._setAppHighlightClass();
             }
+            this.appThis.recentApps.add(this.app.get_id());
             this.app.open_new_window(-1);
             this.appThis.closeMenu();
         } else if (this.app.isPlace) {
@@ -834,6 +819,7 @@ class AppButton extends PopupBaseMenuItem {
                 //don't closeMenu
             }
         } else if (this.app.isClearRecentsButton) {
+            this.appThis.recentApps.clear();
             Gtk.RecentManager.get_default().purge_items();
             this.appThis.recentsJustCleared = true;
             this.appThis.setActiveCategory('recents');
@@ -981,6 +967,7 @@ class SidebarButton extends PopupBaseMenuItem {
             this.callback();
         } else if (this.app.isApplication) {
             this.app.newAppShouldHighlight = false;
+            this.appThis.recentApps.add(this.app.get_id());
             this.app.open_new_window(-1);
             this.appThis.closeMenu();
         } else if (this.app.isFavoriteFile) {

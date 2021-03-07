@@ -109,6 +109,10 @@
         "type":"generic",
         "default":530
     },
+    "recent-apps":{
+        "type":"generic",
+        "default":[]
+    },
 
     "applications-view-mode":{
         "type":"combobox",
@@ -226,7 +230,7 @@
         "options":{
             "Last used category":0,
             "Favorite apps":1,
-            "Recent files":2,
+            "Recent":2,
             "Places":3,
             "All applications":4,
             "Home folder":5
