@@ -140,7 +140,7 @@ const searchStr = (q, str, quick = false) => {
     let foundPosition = 0;
     let foundLength = 0;
     const str2 = latinise(str.toLowerCase());
-    const qletters = q.replace(/[^a-zA-Z0-9_ ]/g, ''); //latinise(q.toLowerCase()); //already done in doSearch()
+    const qletters = q.replace(/[^a-zA-Z0-9_ ]/g, ''); //latinise(q.toLowerCase()); //already done in _doSearch()
     if (qletters.length == 0){
         return { score: 0, result: str };
     }
