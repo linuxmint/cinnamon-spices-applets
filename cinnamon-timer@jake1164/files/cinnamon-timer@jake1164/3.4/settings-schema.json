@@ -90,7 +90,7 @@
         "default" : 50,
         "min" : 10,
         "max" : 100,
-        "step" : 10,
+        "step" : 5,
         "description" : "Specify the playback volume",
         "tooltip" : "Specify the playback volume"
     },
