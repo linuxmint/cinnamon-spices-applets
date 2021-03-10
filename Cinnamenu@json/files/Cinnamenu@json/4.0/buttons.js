@@ -18,19 +18,17 @@ const ApplicationsViewModeLIST = 0, ApplicationsViewModeGRID = 1;
 const {_, wordWrap, showTooltip, hideTooltipIfVisible} = require('./utils');
 const {MODABLE, MODED} = require('./emoji');
 const PlacementTOOLTIP = 1, PlacementUNDER = 2, PlacementNONE = 3;
-const SHOW_SEARCH_MARKUP_IN_TOOLTIP = true;
-const USER_DESKTOP_PATH = getUserDesktopDir();
 
 class CategoryButton extends PopupBaseMenuItem {
     constructor(appThis, category_id, category_name, icon_name, gicon) {
         super({ hover: false, activate: false });
         this.appThis = appThis;
         this.signals = new SignalManager(null);
-        this.actor.set_style_class_name('menu-category-button');
         this.disabled = false;
         this.entered = null;
         this.id = category_id;
-        this.categoryNameText = category_name ? category_name : '';
+        this.actor.set_style_class_name('menu-category-button');
+        //----icon
         if (icon_name) {
             this.icon = new St.Icon({   icon_name: icon_name, icon_type: St.IconType.FULLCOLOR,
                                         icon_size: this.appThis.settings.categoryIconSize});
@@ -41,24 +39,21 @@ class CategoryButton extends PopupBaseMenuItem {
         if (this.appThis.settings.categoryIconSize > 0) {
             this.addActor(this.icon);
         }
-
-        this.label = new St.Label({ text: this.categoryNameText,
-                                    style_class: 'menu-category-button-label' });
+        //---label
+        category_name = category_name ? category_name : '';//is this needed?
+        this.label = new St.Label({ text: category_name, style_class: 'menu-category-button-label' });
         this.addActor(this.label);
-        this.label.realize();
 
-        //?undo
         this.actor._delegate = {
                 handleDragOver: (source) => {
-                        if (!source.categoryNameText || source.categoryNameText === this.categoryNameText) {
+                        if (!source.isDraggableCategory || source.id === this.id || this.appThis.searchActive) {
                             return DragMotionResult.NO_DROP;
                         }
                         this._resetAllCategoriesOpacity();
                         this.actor.set_opacity(50);
                         return DragMotionResult.MOVE_DROP; },
                 acceptDrop: (source) => {
-                        if (!source.categoryNameText || source.categoryNameText === this.categoryNameText ||
-                                                                                this.appThis.searchActive) {
+                        if (!source.isDraggableCategory || source.id === this.id || this.appThis.searchActive) {
                             this._resetAllCategoriesOpacity();
                             return DragMotionResult.NO_DROP;
                         }
@@ -67,26 +62,24 @@ class CategoryButton extends PopupBaseMenuItem {
                         const oldIndex = categories.indexOf(source.id);
                         const newIndex = categories.indexOf(this.id);
                         categories.splice(oldIndex, 1);
-                        this.appThis.settings.categories = categories.slice(0, newIndex).concat(
-                                                            [source.id]).concat(categories.slice(newIndex));
+                        categories.splice(newIndex, 0, source.id);
+                        this.appThis.settings.categories = categories;
                         this._resetAllCategoriesOpacity();
-                        this.appThis.categories.update();
-                        this.appThis.categoriesView.populate();
+                        this.appThis.categoriesView.update();
                         this.appThis.setActiveCategory(this.appThis.currentCategory);
                         return true; },
                 getDragActorSource: () => this.actor,
                 _getDragActor: () => new Clutter.Clone({source: this.actor}),
                 getDragActor: () => new Clutter.Clone({source: this.icon}),
-                isDraggableApp: false,
-                categoryNameText: this.categoryNameText,
+                isDraggableCategory: true,
                 id: this.id };
 
         this.draggable = makeDraggable(this.actor);
 
         // Connect signals
-        this.signals.connect(this.draggable, 'drag-begin', (...args) => this._onDragBegin(...args));
-        this.signals.connect(this.draggable, 'drag-cancelled', (...args) => this._onDragCancelled(...args));
-        this.signals.connect(this.draggable, 'drag-end', (...args) => this._onDragEnd(...args));
+        this.signals.connect(this.draggable, 'drag-begin', () => this.actor.set_opacity(51));
+        this.signals.connect(this.draggable, 'drag-cancelled', () => this.actor.set_opacity(255));
+        this.signals.connect(this.draggable, 'drag-end', () => this._resetAllCategoriesOpacity());
         //?undo
         this.signals.connect(this.actor, 'enter-event', (...args) => this.handleEnter(...args));
         //Allow motion-event to trigger handleEnter because previous enter-event may have been
@@ -106,18 +99,6 @@ class CategoryButton extends PopupBaseMenuItem {
                 this.actor.remove_style_pseudo_class('highlighted');
             }
         }
-    }
-
-    _onDragBegin() {
-        this.actor.set_opacity(51);
-    }
-
-    _onDragCancelled() {
-        this.actor.set_opacity(255);
-    }
-
-    _onDragEnd() {
-        this._resetAllCategoriesOpacity();
     }
 
     selectCategory() {
@@ -226,7 +207,7 @@ class CategoryButton extends PopupBaseMenuItem {
     }
 
     _resetAllCategoriesOpacity() {
-        this.appThis.categories.buttons.forEach( (button) => button.actor.set_opacity(255) );
+        this.appThis.categoriesView.buttons.forEach(button => button.actor.set_opacity(255));
     }
 
     destroy() {
@@ -323,8 +304,7 @@ class ContextMenu {
             };
             addMenuItem( new ContextMenuItem(this.appThis, _('Reset category order'), null,
                                 () => { this.appThis.settings.categories = [];
-                                        this.appThis.categories.update();
-                                        this.appThis.categoriesView.populate();
+                                        this.appThis.categoriesView.update();
                                         this.close(); } ));
         } else if (app.isApplication) {
             this._populateContextMenu_apps(app);
@@ -341,7 +321,7 @@ class ContextMenu {
                                                      //skin tone modifiers.
                 let newEmoji = MODED[i].replace('\u{1F3FB}', char); //replace light skin tone character in
                                                                     // MODED[i] with skin tone chosen by user.
-                newEmoji = newEmoji.replace('\u{1F3FB}', char);
+                newEmoji = newEmoji.replace('\u{1F3FB}', char);//repeat in case a second modifier
                 const item = new ContextMenuItem(this.appThis, newEmoji + ' ' + text, null,
                                         () => { const clipboard = St.Clipboard.get_default();
                                                 clipboard.set_text(St.ClipboardType.CLIPBOARD, newEmoji);
@@ -387,11 +367,14 @@ class ContextMenu {
         this.menu.actor.anchor_x = -cx;
         this.menu.actor.anchor_y = -cy;
 
-        this.menu.toggle_with_options(this.appThis.settings.enableAnimation);
+        //This context menu doesn't have an St.Side and so produces errors in .xsession-errors
+        //enable animation for the sole reason that it spams .xsession-errors less. Can't add an
+        //St.Side because in some themes it looks like it should be attached to a panel but isn't.
+        this.menu.open(true);
         return;
     }
 
-    _populateContextMenu_apps(app) { //add items to context menu of type: application
+    _populateContextMenu_apps(app) {
         const addMenuItem = (item) => {
             this.menu.addMenuItem(item);
             this.contextMenuButtons.push(item);
@@ -423,10 +406,11 @@ class ContextMenu {
                     launcherApplet.acceptNewLauncher(app.get_id());
                 }
                 this.close(); } ));
-        if (USER_DESKTOP_PATH) {
+        const userDesktopPath = getUserDesktopDir();
+        if (userDesktopPath) {
             addMenuItem( new ContextMenuItem(this.appThis, _('Add to desktop'), 'computer',
                 () => { const file = Gio.file_new_for_path(app.get_app_info().get_filename());
-                        const destFile = Gio.file_new_for_path(USER_DESKTOP_PATH + '/' + file.get_basename());
+                        const destFile = Gio.file_new_for_path(userDesktopPath + '/' + file.get_basename());
                         try {
                             file.copy( destFile, 0, null, null);
                             changeModeGFile(destFile, 755);
@@ -483,17 +467,25 @@ class ContextMenu {
         const favs = XApp.Favorites ? XApp.Favorites.get_default() : null;
         if (favs) {//prior to cinnamon 4.8, XApp favorites are not available
             this.menu.addMenuItem(new PopupSeparatorMenuItem(this.appThis));
+            const updateAfterFavFileChange = () => {
+                    this.appThis.sidebar.populate();
+                    this.appThis.categoriesView.update();//in case fav files category needs adding/removing
+                    this.appThis.updateMenuWidth();
+                    this.appThis.updateMenuHeight();
+                    if (this.appThis.currentCategory === 'favorite_files') {
+                        this.appThis.setActiveCategory(this.appThis.currentCategory);
+                    } };
             if (favs.find_by_uri(app.uri)) { //favorite
                 addMenuItem( new ContextMenuItem(this.appThis, _('Remove from favorites'), 'starred',
                                                         () => { favs.remove(app.uri);
-                                                                this.appThis.updateAfterFavFileChange();
+                                                                updateAfterFavFileChange();
                                                                 this.close(); } ));
             } else {
                 addMenuItem( new ContextMenuItem(this.appThis, _('Add to favorites'), 'non-starred',
                         () =>   {   favs.add(app.uri);
                                     //favs list doesn't update synchronously after adding fav so add small
                                     //delay before updating menu
-                                    Mainloop.timeout_add(100, () => { this.appThis.updateAfterFavFileChange(); });
+                                    Mainloop.timeout_add(100, () => { updateAfterFavFileChange(); });
                                     this.close();
                                 } ));
             }
@@ -663,13 +655,13 @@ class AppButton extends PopupBaseMenuItem {
                     _getDragActor: () => new Clutter.Clone({source: this.actor}),
                     getDragActor: () => new Clutter.Clone({source: this.icon}),
                     get_app_id: () => this.app.get_id(),
-                    isDraggableApp: this.app.isApplication
+                    isDraggableApp: true
             };
 
             this.draggable = makeDraggable(this.actor);
-            this.signals.connect(this.draggable, 'drag-begin', (...args) => this._onDragBegin(...args));
+            this.signals.connect(this.draggable, 'drag-begin', () => hideTooltipIfVisible());
             //this.signals.connect(this.draggable, 'drag-cancelled', (...args) => this._onDragCancelled(...args));
-            this.signals.connect(this.draggable, 'drag-end', (...args) => this._onDragEnd(...args));
+            this.signals.connect(this.draggable, 'drag-end', () => this._resetAllAppsOpacity());
         }
 
         //----running state
@@ -692,14 +684,6 @@ class AppButton extends PopupBaseMenuItem {
         this.actor.set_style_class_name('menu-application-button-selected');
     }
 
-    _onDragBegin() {
-        hideTooltipIfVisible();
-    }
-
-    _onDragEnd() {
-        this._resetAllAppsOpacity();
-    }
-
     _setAppHighlightClass() {
         if (this.app.newAppShouldHighlight) {
             if (!this.actor.has_style_pseudo_class('highlighted')) {
@@ -713,7 +697,7 @@ class AppButton extends PopupBaseMenuItem {
     }
 
     setGridButtonWidth() {
-        this.actor.width = this.appThis.getGridValues().columnWidth;
+        this.actor.width = this.appThis.appsView.getGridValues().columnWidth;
     }
 
     handleEnter(actor, event) {
@@ -721,17 +705,18 @@ class AppButton extends PopupBaseMenuItem {
             return false;
         }
 
-        if (event) {
+        if (event) {//mouse
             this.appThis.clearEnteredActors();
-        } else {
+        } else {//keyboard navigation
             this.appThis.scrollToButton(this);
         }
 
         this.entered = true;
         this._setButtonStyleSelected();
 
-        //show tooltip
+        //------show tooltip
         if (this.appThis.settings.descriptionPlacement === PlacementTOOLTIP) {
+            const SHOW_SEARCH_MARKUP_IN_TOOLTIP = true;
             let tooltipMarkup = '<span>' + wordWrap((this.app.nameWithSearchMarkup &&
                                             SHOW_SEARCH_MARKUP_IN_TOOLTIP && this.appThis.searchActive) ?
                                             this.app.nameWithSearchMarkup : this.app.name) + '</span>';
@@ -857,21 +842,20 @@ class AppButton extends PopupBaseMenuItem {
         this.appThis.appsView.getActiveContainer().get_children().forEach( child => child.set_opacity(255) );
     }
 
-    destroy(skipDestroy) {
+    destroy() {
         this.signals.disconnectAllSignals();
-
         hideTooltipIfVisible();
-        if (!skipDestroy) {
-            this.appRunningIndicator.destroy();
-            this.label.destroy();
-            if (this.icon) {
-                this.icon.destroy();
-            }
-            if (this.iconContainer) {
-                this.iconContainer.destroy();
-            }
-            this.buttonBox.destroy();
+
+        this.appRunningIndicator.destroy();
+        this.label.destroy();
+        if (this.icon) {
+            this.icon.destroy();
         }
+        if (this.iconContainer) {
+            this.iconContainer.destroy();
+        }
+        this.buttonBox.destroy();
+
         PopupBaseMenuItem.prototype.destroy.call(this);
         //unref(this);
     }
