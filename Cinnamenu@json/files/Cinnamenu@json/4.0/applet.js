@@ -62,8 +62,7 @@ class CinnamenuApplet extends TextIconApplet {
         this._applet_context_menu.addMenuItem(searchFilesMenuItem);
         searchFilesMenuItem.connect('activate', () => {
                             Util.spawnCommandLine(__meta.path + '/search.py ' + GLib.get_home_dir()); });
-        this.resizer = new PopupResizeHandler(  this,
-                                                this.menu.actor,
+        this.resizer = new PopupResizeHandler(  this, this.menu.actor,
                                                 400, this._getScreenWorkArea().width,
                                                 300, this._getScreenWorkArea().height,
                                                 (w,h) => this.onBoxResized(w,h),
@@ -160,7 +159,7 @@ class CinnamenuApplet extends TextIconApplet {
         const ws = global.screen.get_active_workspace();
         return ws.get_work_area_for_monitor(monitor.index);
     }
-//----------------callbacks---------
+//----------------TextIconApplet methods---------
     on_applet_reloaded() {}
 
     on_orientation_changed(orientation) {
@@ -205,6 +204,29 @@ class CinnamenuApplet extends TextIconApplet {
       }
     }
 
+    _setStyle() {
+        // Override js/applet.js so _updateIconAndLabel doesn't have to fight with size changes
+        // from the panel configuration. This gets called any time set_applet_icon() variants are
+        // called.
+
+        let icon_type = this._applet_icon.get_icon_type();
+        let size;
+
+        if (this.settings.menuIconSizeCustom) {
+            size = Math.max(Math.min(this.settings.menuIconSize, this.panel.height), 1);
+        } else {
+            size = this.getPanelIconSize(icon_type);
+        }
+
+        if (icon_type === St.IconType.FULLCOLOR) {
+            this._applet_icon.set_style_class_name('applet-icon');
+        } else {
+            this._applet_icon.set_style_class_name('system-status-icon');
+        }
+
+        this._applet_icon.set_icon_size(size);
+    }
+//-------settings callbacks--------
     launchEditor() {
         Util.spawnCommandLine('cinnamon-menu-editor');
     }
@@ -268,29 +290,6 @@ class CinnamenuApplet extends TextIconApplet {
             this.set_applet_label(menuLabel);
             this.set_applet_tooltip(menuLabel);
         }
-    }
-
-    _setStyle() {
-        // Override js/applet.js so _updateIconAndLabel doesn't have to fight with size changes
-        // from the panel configuration. This gets called any time set_applet_icon() variants are
-        // called.
-
-        let icon_type = this._applet_icon.get_icon_type();
-        let size;
-
-        if (this.settings.menuIconSizeCustom) {
-            size = Math.max(Math.min(this.settings.menuIconSize, this.panel.height), 1);
-        } else {
-            size = this.getPanelIconSize(icon_type);
-        }
-
-        if (icon_type === St.IconType.FULLCOLOR) {
-            this._applet_icon.set_style_class_name('applet-icon');
-        } else {
-            this._applet_icon.set_style_class_name('system-status-icon');
-        }
-
-        this._applet_icon.set_icon_size(size);
     }
 
     _onEnableRecentChange() {
@@ -1115,7 +1114,6 @@ class CinnamenuApplet extends TextIconApplet {
                                                         (...args) => this._onSearchTextChanged(...args));
         this.displaySignals.connect(this.searchView.searchEntryText, 'key-press-event',
                                                             (...args) => this._onMenuKeyPress(...args));
-        //this.previousSearchPattern = '';
         this.bottomPane = new St.BoxLayout({});
         if (sidebarPlacement === PlacementTOP || sidebarPlacement === PlacementBOTTOM) {
             this.bottomPane.add(this.sidebar.sidebarOuterBox, { expand: false, x_fill: false, y_fill: false,
@@ -1204,11 +1202,9 @@ class CinnamenuApplet extends TextIconApplet {
         this.sidebar.populate();
 
         if (this.settings.applicationsViewMode === ApplicationsViewModeLIST) {
-            //this.appsView.applicationsGridBox.width = this.appsView.applicationsListBox.width;
             this.appsView.applicationsGridBox.hide();
             this.appsView.applicationsListBox.show();
         } else {
-            //this.appsView.applicationsGridBox.width = this.getGridWidth();
             this.appsView.applicationsListBox.hide();
             this.appsView.applicationsGridBox.show();
         }
@@ -1220,7 +1216,7 @@ class CinnamenuApplet extends TextIconApplet {
             vscroll.get_adjustment().set_value(newScrollValue);
         }*/
         this.mainBox.show();
-        this.updateMenuHeight();
+        //this.updateMenuHeight();
     }
 
     _destroyDisplayed() {
@@ -1760,6 +1756,7 @@ class AppsView {
     populate(appList) {
         let column = 0;
         let rownum = 0;
+
         this.applicationsListBox.hide();//hide while populating for performance.
         this.applicationsGridBox.hide();//
 
@@ -1774,7 +1771,6 @@ class AppsView {
                 appButton = new AppButton(this.appThis, app);
                 this.buttonStore.push(appButton);
             }
-
             if (this.appThis.settings.applicationsViewMode === ApplicationsViewModeLIST) {
                 this.applicationsListBox.add_actor(appButton.actor);
             } else {
@@ -1792,7 +1788,7 @@ class AppsView {
                 }
             }
         });
-        if (this.applicationsViewMode === ApplicationsViewModeLIST) {
+        if (this.appThis.settings.applicationsViewMode === ApplicationsViewModeLIST) {
             this.applicationsListBox.show();
         } else {
             this.applicationsGridBox.show();
