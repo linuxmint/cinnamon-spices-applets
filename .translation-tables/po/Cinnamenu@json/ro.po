@@ -1,0 +1,849 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-03-07 10:42+0000\n"
+"PO-Revision-Date: 2020-07-20 09:09+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ro\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3.1\n"
+"Plural-Forms: nplurals=3; plural=(n==1?0:(((n%100>19)||((n%100==0)&&(n!=0)))?"
+"2:1));\n"
+
+#: 3.2
+msgid "Type to search..."
+msgstr "Scrie pentru a căuta..."
+
+#: 3.2 4.0
+msgid "Initializing"
+msgstr "Inițializare"
+
+#: 3.2 4.0
+msgid "No description available"
+msgstr "Nu este disponibilă o descriere"
+
+#. 4.0->settings->open-on-category->options
+#: 3.2 4.0
+#, fuzzy
+msgid "All applications"
+msgstr "Toate Aplicațiile"
+
+#. 4.0->settings->open-on-category->options
+#: 3.2 4.0
+msgid "Places"
+msgstr "Locuri"
+
+#: 3.2
+#, fuzzy
+msgid "Recent files"
+msgstr "Fișiere recente"
+
+#: 3.2 4.0
+msgid "Bookmarks"
+msgstr "Marcaje"
+
+#. 4.0->settings->open-on-category->options
+#: 3.2 4.0
+#, fuzzy
+msgid "Favorite apps"
+msgstr "Aplicații favorite"
+
+#: 3.2
+msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
+msgstr "Pachetul gir1.2-gda-5.0 este necesar pentru marcaje Firefox și Midori."
+
+#: 3.2 4.0
+msgid "Clear List"
+msgstr "Curăță lista"
+
+#: 3.2 4.0
+#, fuzzy
+msgid "No recent files"
+msgstr "Comută fișiere recente"
+
+#: 3.2
+msgid "Account details"
+msgstr "Detaliile contului"
+
+#: 3.2
+msgid "Grid View"
+msgstr "Vedere grilă"
+
+#: 3.2
+msgid "List View"
+msgstr "Vedere listă"
+
+#: 3.2
+msgid "Switch to grid view"
+msgstr "Schimbă la vedere grilă"
+
+#: 3.2
+msgid "Switch to list view"
+msgstr "Schimbă la vedere listă"
+
+#: 3.2 4.0
+#, fuzzy
+msgid "Lock screen"
+msgstr "Ecran de blocare"
+
+#: 3.2 4.0
+msgid "Lock the screen"
+msgstr "Blochează ecranul"
+
+#: 3.2 4.0
+msgid "Logout"
+msgstr "Delogare"
+
+#: 3.2 4.0
+msgid "Leave the session"
+msgstr "Părăsește sesiunea"
+
+#: 3.2 4.0
+msgid "Quit"
+msgstr "Închide"
+
+#: 3.2 4.0
+msgid "Shutdown the computer"
+msgstr "Închide calculatorul"
+
+#: 3.2
+msgid "Home"
+msgstr "Acasă"
+
+#: 3.2
+msgid "Computer"
+msgstr "Calculator"
+
+#: 3.2
+msgid "Browse network"
+msgstr "Navighează rețeaua"
+
+#: 3.2 4.0
+msgid "Run with NVIDIA GPU"
+msgstr "Rulează cu placa grafică NVIDIA"
+
+#: 3.2 4.0
+msgid "Add to panel"
+msgstr "Adaugă la panou"
+
+#: 3.2 4.0
+msgid "Add to desktop"
+msgstr "Adaugă la desktop"
+
+#: 3.2 4.0
+msgid "Remove from favorites"
+msgstr "Scoate din favorite"
+
+#: 3.2 4.0
+msgid "Add to favorites"
+msgstr "Adaugă la favorite"
+
+#: 3.2
+msgid "Uninstall"
+msgstr "Dezinstalează"
+
+#: 4.0
+msgid "Find files..."
+msgstr ""
+
+#: 4.0
+msgid "Please wait..."
+msgstr ""
+
+#: 4.0
+msgid "Solution:"
+msgstr ""
+
+#: 4.0
+msgid "Click to copy"
+msgstr ""
+
+#: 4.0
+#, fuzzy
+msgid "Search web for"
+msgstr "Furnizori de căutare"
+
+#: 4.0
+msgid "Too many entries - showing first 1000 entries only"
+msgstr ""
+
+#: 4.0
+#, fuzzy
+msgid "Favorites"
+msgstr "Aplicații favorite"
+
+#. 4.0->settings->open-on-category->options
+#: 4.0
+#, fuzzy
+msgid "Recent"
+msgstr "Fișiere recente"
+
+#. 4.0->settings->open-on-category->options
+#: 4.0
+msgid "Home folder"
+msgstr ""
+
+#. 3.2->settings->resetCategoryOrder-button->description
+#: 4.0
+msgid "Reset category order"
+msgstr "Resetează ordinea categoriilor"
+
+#: 4.0
+msgid "This file is no longer available"
+msgstr ""
+
+#: 4.0
+msgid "Open with"
+msgstr ""
+
+#: 4.0
+#, fuzzy
+msgid "Other application..."
+msgstr "Arată pictogramele aplicațiilor"
+
+#: 4.0 4.0/search.py:48
+msgid "Open containing folder"
+msgstr ""
+
+#: 4.0
+msgid "Move to trash"
+msgstr ""
+
+#: 4.0
+msgid "Error while moving file to trash:"
+msgstr ""
+
+#: 4.0/search.py:43
+msgid "Open"
+msgstr ""
+
+#: 4.0/search.py:85
+msgid "Search"
+msgstr ""
+
+#: 4.0/search.py:106
+msgid "Start in"
+msgstr ""
+
+#: 4.0/search.py:107
+msgid "Select a folder"
+msgstr ""
+
+#: 4.0/search.py:113
+msgid "Follow symlinks"
+msgstr ""
+
+#: 4.0/search.py:117
+#, fuzzy
+msgid "Search hidden"
+msgstr "Furnizori de căutare"
+
+#: 4.0/search.py:121
+msgid "Use regular expressions"
+msgstr ""
+
+#: 4.0/search.py:125
+msgid "Stop"
+msgstr ""
+
+#: 4.0/search.py:140
+msgid "File"
+msgstr ""
+
+#: 4.0/search.py:156
+msgid "Path"
+msgstr ""
+
+#: 4.0/search.py:184
+msgid "Searching..."
+msgstr ""
+
+#: 4.0/search.py:198 4.0/search.py:199
+#, fuzzy
+msgid "Search Stopped"
+msgstr "Furnizori de căutare"
+
+#: 4.0/search.py:215
+msgid "Searching: "
+msgstr ""
+
+#: 4.0/search.py:220
+msgid "Error: insufficient permissions to read folder "
+msgstr ""
+
+#: 4.0/search.py:252
+msgid "Search Completed"
+msgstr ""
+
+#: 4.0/search.py:259
+msgid "Skipping"
+msgstr ""
+
+#: 4.0/search.py:259
+msgid " - directory already searched"
+msgstr ""
+
+#. metadata.json->name
+#. 3.2->settings->cinnamenuProvidersSection->title
+msgid "Cinnamenu"
+msgstr "Cinnamenu"
+
+#. metadata.json->description
+msgid ""
+"A flexible menu providing formatting options, web bookmarks, search provider "
+"support and fuzzy searching."
+msgstr ""
+"Un meniu flexibil care oferă opțiuni de formatare, semne de carte web, "
+"asistență pentru furnizorii de căutare și căutare incorectă."
+
+#. 3.2->settings->panel->title
+#. 4.0->settings->behaviour->title
+msgid "Behavior"
+msgstr "Comportament"
+
+#. 3.2->settings->appearance->title
+#. 4.0->settings->appearance->title
+msgid "Appearance"
+msgstr "Aspect"
+
+#. 3.2->settings->menu->title
+#. 4.0->settings->layout->title
+msgid "Layout and Content"
+msgstr "Amplasare și conținut"
+
+#. 3.2->settings->providers->title
+msgid "Search Providers"
+msgstr "Furnizori de căutare"
+
+#. 3.2->settings->extensionProvidersSection->title
+msgid "No search provider extensions found"
+msgstr "Nu s-a găsit nicio extensie pentru furnizori de căutare"
+
+#. 3.2->settings->panel-appear->title
+#. 3.2->settings->panel-behave->title
+#. 4.0->settings->panel-behave->title
+#. 4.0->settings->panel-appear->title
+msgid "Panel"
+msgstr "Panou"
+
+#. 3.2->settings->menu-behave->title
+#. 3.2->settings->menu-icons->title
+#. 4.0->settings->menu-behave->title
+#. 4.0->settings->menu-icons->title
+msgid "Menu"
+msgstr "Meniu"
+
+#. 3.2->settings->menu-layout->title
+#. 4.0->settings->menu-layout->title
+msgid "Layout"
+msgstr "Amplasare"
+
+#. 3.2->settings->menu-content->title
+#. 4.0->settings->menu-content->title
+msgid "Content"
+msgstr "Conținut"
+
+#. 3.2->settings->privacy-settings-button->description
+msgid "Recent files settings"
+msgstr "Setări recente de fișiere"
+
+#. 3.2->settings->menu-editor-button->description
+#. 4.0->settings->menu-editor-button->description
+msgid "Open the menu editor"
+msgstr "Deschide editorul meniului"
+
+#. 3.2->settings->menu-icon-custom->description
+#. 4.0->settings->menu-icon-custom->description
+msgid "Use a custom icon"
+msgstr "Folosește o pictogramă personalizată"
+
+#. 3.2->settings->menu-icon-custom->tooltip
+#. 4.0->settings->menu-icon-custom->tooltip
+msgid "Use a custom icon in the panel"
+msgstr "Folosește o pictogramă personalizată"
+
+#. 3.2->settings->menu-icon->description
+#. 3.2->settings->menu-icon->tooltip
+#. 4.0->settings->menu-icon->description
+#. 4.0->settings->menu-icon->tooltip
+msgid "Panel icon"
+msgstr "Pictograma panoului"
+
+#. 3.2->settings->menu-label->description
+#. 4.0->settings->menu-label->description
+msgid "Panel text"
+msgstr "Textul panoului"
+
+#. 3.2->settings->menu-label->tooltip
+#. 4.0->settings->menu-label->tooltip
+msgid "Text to show beside the panel icon"
+msgstr "Text de afișat lângă pictograma panoului"
+
+#. 3.2->settings->category-icon-size->units
+#. 3.2->settings->apps-list-icon-size->units
+#. 3.2->settings->apps-grid-icon-size->units
+#. 3.2->settings->custom-menu-height->units
+#. 4.0->settings->menu-icon-size->units
+#. 4.0->settings->category-icon-size->units
+#. 4.0->settings->apps-list-icon-size->units
+#. 4.0->settings->apps-grid-icon-size->units
+#. 4.0->settings->sidebar-icon-size->units
+msgid "pixels"
+msgstr "pixeli"
+
+#. 3.2->settings->category-icon-size->description
+#. 3.2->settings->category-icon-size->tooltip
+#. 4.0->settings->category-icon-size->description
+#. 4.0->settings->category-icon-size->tooltip
+msgid "Category icon size"
+msgstr "Mărimea pictogramelor categoriilor"
+
+#. 3.2->settings->apps-list-icon-size->description
+#. 3.2->settings->apps-list-icon-size->tooltip
+#. 4.0->settings->apps-list-icon-size->description
+#. 4.0->settings->apps-list-icon-size->tooltip
+msgid "Applications list icon size"
+msgstr "Mărimea pictogramei în lista de aplicații"
+
+#. 3.2->settings->apps-grid-icon-size->description
+#. 3.2->settings->apps-grid-icon-size->tooltip
+#. 4.0->settings->apps-grid-icon-size->description
+#. 4.0->settings->apps-grid-icon-size->tooltip
+msgid "Applications grid icon size"
+msgstr "Mărimea pictogramei în grila de aplicații"
+
+#. 3.2->settings->overlay-key->description
+#. 4.0->settings->overlay-key->description
+msgid "Keyboard shortcut to open and close the menu"
+msgstr "Scurtătura de pe tastatură pentru a deschide și închide meniul"
+
+#. 3.2->settings->activate-on-hover->description
+#. 4.0->settings->activate-on-hover->description
+msgid "Open menu on hover"
+msgstr "Deschideți meniul în cursură"
+
+#. 3.2->settings->activate-on-hover->tooltip
+#. 4.0->settings->activate-on-hover->tooltip
+msgid "Open the menu when I move my mouse over the panel icon"
+msgstr "Deschide meniul când pun cursorul pe el"
+
+#. 3.2->settings->hover-delay->units
+#. 3.2->settings->tooltip-delay->units
+#. 4.0->settings->hover-delay->units
+msgid "milliseconds"
+msgstr "milisecunde"
+
+#. 3.2->settings->hover-delay->description
+#. 4.0->settings->hover-delay->description
+msgid "Menu hover delay"
+msgstr "Întărziere la cursor deasupra meniului"
+
+#. 3.2->settings->enable-animation->description
+#. 4.0->settings->enable-animation->description
+msgid "Use menu animations"
+msgstr "Folosește animații pentru meniu"
+
+#. 3.2->settings->enable-animation->tooltip
+#. 4.0->settings->enable-animation->tooltip
+msgid "Animate the menu on open and close"
+msgstr "Permite animarea meniului la deschidere și închidere"
+
+#. 3.2->settings->category-click->description
+#. 4.0->settings->category-click->description
+msgid "Activate categories on click"
+msgstr "Activează categorii când dau click"
+
+#. 3.2->settings->category-click->tooltip
+#. 4.0->settings->category-click->tooltip
+msgid "Activate categories on click instead of on hover"
+msgstr "Activează categorii când dau click"
+
+#. 3.2->settings->enable-autoscroll->description
+#. 4.0->settings->enable-autoscroll->description
+msgid "Enable autoscrolling"
+msgstr "Activează derularea automată în lista de aplicații"
+
+#. 3.2->settings->enable-autoscroll->tooltip
+msgid "Enable autoscrolling in application list"
+msgstr "Activează derularea automată în lista de aplicații"
+
+#. 3.2->settings->enable-bookmarks->description
+#. 4.0->settings->show-web-bookmarks-category->description
+msgid "Show web bookmarks"
+msgstr "Arată marcaje web"
+
+#. 3.2->settings->enable-bookmarks->tooltip
+#. 4.0->settings->show-web-bookmarks-category->tooltip
+msgid ""
+"Show your browser's web bookmarks in the menu.\n"
+"Note: Install package gir1.2-gda-5.0 to read firefox bookmarks."
+msgstr ""
+
+#. 3.2->settings->enable-windows->description
+msgid "Enable searching of open windows"
+msgstr "Activează căutarea în ferestre deschise"
+
+#. 3.2->settings->enable-search-providers->description
+msgid "Enable search providers"
+msgstr "Activează furnizori de căutare"
+
+#. 3.2->settings->enable-search-providers->tooltip
+msgid "Include search provider results in searches"
+msgstr ""
+"Alege dacă rezultatele de la furnizorii de căutare sunt indexate în "
+"căutarile în menu"
+
+#. 3.2->settings->get-providers->description
+msgid "Example Search Providers"
+msgstr "Exemple de furnizori de căutare"
+
+#. 3.2->settings->startup-view-mode->description
+#. 4.0->settings->open-on-category->description
+#, fuzzy
+msgid "Open menu on category:"
+msgstr "Deschideți meniul în cursură"
+
+#. 3.2->settings->startup-view-mode->options
+#. 4.0->settings->applications-view-mode->options
+msgid "List"
+msgstr "Listă"
+
+#. 3.2->settings->startup-view-mode->options
+#. 4.0->settings->applications-view-mode->options
+msgid "Grid"
+msgstr "Grilă"
+
+#. 3.2->settings->startup-view-mode->tooltip
+#. 4.0->settings->open-on-category->tooltip
+msgid "Always open the menu with this category selected"
+msgstr ""
+
+#. 3.2->settings->apps-grid-column-count->units
+msgid "columns"
+msgstr "coloane"
+
+#. 3.2->settings->apps-grid-column-count->description
+#. 3.2->settings->apps-grid-column-count->tooltip
+msgid "Number of columns in apps grid"
+msgstr "Numărul de coloane din grila de aplicații"
+
+#. 3.2->settings->show-places->description
+#. 4.0->settings->show-places-category->description
+msgid "Show bookmarks and places"
+msgstr "Arată marcaje și locuri"
+
+#. 3.2->settings->show-places->tooltip
+#. 4.0->settings->show-places-category->tooltip
+msgid "Show bookmarks and places category in the menu"
+msgstr "Arată marcaje și locuri"
+
+#. 3.2->settings->show-application-icons->description
+#. 3.2->settings->show-application-icons->tooltip
+msgid "Show application icons"
+msgstr "Arată pictogramele aplicațiilor"
+
+#. 3.2->settings->show-category-icons->description
+#. 3.2->settings->show-category-icons->tooltip
+msgid "Show category icons"
+msgstr "Arată pictogramele categoriilor"
+
+#. 3.2->settings->show-apps-description-on-buttons->description
+#. 3.2->settings->show-apps-description-on-buttons->tooltip
+msgid "Show application descriptions under titles"
+msgstr "Arată descrierea aplicațiilor sub titluri"
+
+#. 3.2->settings->show-tooltips->description
+#. 3.2->settings->show-tooltips->tooltip
+msgid "Show tooltips"
+msgstr "Arată baloane explicative"
+
+#. 3.2->settings->tooltip-delay->description
+#. 3.2->settings->tooltip-delay->tooltip
+msgid "Tooltip delay"
+msgstr "Întârzierea balonului explicativ"
+
+#. 3.2->settings->enable-custom-menu-height->description
+#. 3.2->settings->enable-custom-menu-height->tooltip
+msgid "Use a custom menu height"
+msgstr "Folosește o înălțime personalizată a meniului"
+
+#. 3.2->settings->custom-menu-height->description
+#. 3.2->settings->custom-menu-height->tooltip
+msgid "Custom menu height"
+msgstr "Înălțime personalizată pentru meniu"
+
+#. 4.0->settings->applications-view-mode->description
+msgid "Applications view mode"
+msgstr "Modul vizualizare aplicații"
+
+#. 4.0->settings->applications-view-mode->tooltip
+msgid "View applications as list or grid"
+msgstr "Vizualizați aplicațiile ca listă sau grilă"
+
+#. 4.0->settings->description-placement->description
+msgid "Application description placement"
+msgstr "Poziționarea descrierilor aplicațiilor"
+
+#. 4.0->settings->description-placement->options
+msgid "Tooltips"
+msgstr "Baloane explicative"
+
+#. 4.0->settings->description-placement->options
+msgid "Under titles"
+msgstr "Sub titluri"
+
+#. 4.0->settings->description-placement->options
+#. 4.0->settings->web-search-option->options
+msgid "None"
+msgstr "Niciuna"
+
+#. 4.0->settings->description-placement->tooltip
+msgid "Choose where to show application descriptions"
+msgstr "Alegeți unde să afișați descrierile aplicațiilor"
+
+#. 4.0->settings->sidebar-placement->description
+msgid "Session buttons location"
+msgstr "Locația butoanelor de sesiune"
+
+#. 4.0->settings->sidebar-placement->options
+msgid "Top"
+msgstr "În vârf"
+
+#. 4.0->settings->sidebar-placement->options
+msgid "Bottom"
+msgstr "În partea de jos"
+
+#. 4.0->settings->sidebar-placement->options
+msgid "Left"
+msgstr "În stânga"
+
+#. 4.0->settings->sidebar-placement->options
+msgid "Right"
+msgstr "La dreapta"
+
+#. 4.0->settings->sidebar-placement->tooltip
+#, fuzzy
+msgid "Choose where to show the session buttons (quit, logout, etc.)"
+msgstr ""
+"Alegeți unde să afișați butoanele sesiunii (renunțare, deconectare etc.)"
+
+#. 4.0->settings->info-box->description
+msgid ""
+"\n"
+"Info/tip: Drag on the menu edge to change the menu size.\n"
+msgstr ""
+
+#. 4.0->settings->add-favorites->description
+msgid "Add favorites to session buttons"
+msgstr "Adăugați favorite la butoanele de sesiune"
+
+#. 4.0->settings->add-favorites->tooltip
+msgid "Show your favorite app icons next to the session buttons"
+msgstr "Afișează pictogramele aplicației preferate lângă butoanele sesiunii"
+
+#. 4.0->settings->show-favorite-apps-category->description
+#, fuzzy
+msgid "Show favorite apps category"
+msgstr "Categorie de pornire"
+
+#. 4.0->settings->show-favorite-apps-category->tooltip
+#, fuzzy
+msgid "Show your favorite apps category in the menu"
+msgstr "Arată marcaje și locuri"
+
+#. 4.0->settings->show-home-folder-category->description
+msgid "Show home folder"
+msgstr ""
+
+#. 4.0->settings->show-home-folder-category->tooltip
+#, fuzzy
+msgid "Show home folder category in the menu"
+msgstr "Arată marcaje și locuri"
+
+#. 4.0->settings->open-on-category->options
+#, fuzzy
+msgid "Last used category"
+msgstr "Categorie de pornire"
+
+#. 4.0->settings->enable-autoscroll->tooltip
+#, fuzzy
+msgid "Autoscroll the application list on mouse hover"
+msgstr "Activează derularea automată în lista de aplicații"
+
+#. 4.0->settings->web-search-option->description
+msgid "Web search option"
+msgstr ""
+
+#. 4.0->settings->web-search-option->options
+msgid "Google"
+msgstr ""
+
+#. 4.0->settings->web-search-option->options
+msgid "Bing"
+msgstr ""
+
+#. 4.0->settings->web-search-option->options
+msgid "Yahoo"
+msgstr ""
+
+#. 4.0->settings->web-search-option->options
+msgid "DuckDuckGo"
+msgstr ""
+
+#. 4.0->settings->web-search-option->tooltip
+msgid "Show an internet search option in search results"
+msgstr ""
+
+#. 4.0->settings->show-hidden-files->description
+msgid "Show hidden files"
+msgstr ""
+
+#. 4.0->settings->show-hidden-files->tooltip
+msgid "Show hidden files in folder view"
+msgstr ""
+
+#. 4.0->settings->menu-icon-size-custom->description
+#, fuzzy
+msgid "Use a custom icon size"
+msgstr "Folosește o pictogramă personalizată"
+
+#. 4.0->settings->menu-icon-size-custom->tooltip
+#, fuzzy
+msgid "Use a custom size for the panel icon"
+msgstr "Folosește o pictogramă personalizată"
+
+#. 4.0->settings->menu-icon-size->description
+#, fuzzy
+msgid "Panel icon size"
+msgstr "Pictograma panoului"
+
+#. 4.0->settings->menu-icon-size->tooltip
+#, fuzzy
+msgid "Choose a custom size for the panel icon"
+msgstr "Folosește o pictogramă personalizată"
+
+#. 4.0->settings->sidebar-icon-size->description
+#. 4.0->settings->sidebar-icon-size->tooltip
+#, fuzzy
+msgid "Session buttons icon size"
+msgstr "Locația butoanelor de sesiune"
+
+#. 4.0->settings->use-box-style->description
+#. 4.0->settings->use-box-style->tooltip
+#, fuzzy
+msgid "Use session buttons box style"
+msgstr "Locația butoanelor de sesiune"
+
+#~ msgid "No recent documents"
+#~ msgstr "Nu sunt documente recente"
+
+#~ msgid "Remove favorite"
+#~ msgstr "Eliminați favoritul"
+
+#~ msgid "Show your browser's web bookmarks in the menu"
+#~ msgstr "Afișați marcajele web ale browserului dvs. în meniu"
+
+#~ msgid "Startup applications view mode"
+#~ msgstr "Modul de vizualizare al aplicațiilor de pornire"
+
+#~ msgid "px"
+#~ msgstr "px"
+
+#~ msgid "Failed to launch \"%s\""
+#~ msgstr "Nu s-a putut lansa \"%s\""
+
+#~ msgid "Press this button to customize your privacy settings."
+#~ msgstr "Apasă acest buton pentru a personaliza setările de intimitate."
+
+#~ msgid "Press this button to customize your menu entries."
+#~ msgstr "Apasă acest buton pentru a personaliza articolele din meniu."
+
+#~ msgid "Unchecking this allows the theme to set the icon"
+#~ msgstr "Debifarea aici permite temei să seteze pictograma"
+
+#~ msgid "Icon"
+#~ msgstr "Pictogramă"
+
+#~ msgid "Set the custom menu button icon name"
+#~ msgstr "Setează un nume personalizat pentru pictograma butonului meniului"
+
+#~ msgid "Enable opening the menu when the mouse enters the applet"
+#~ msgstr "Permite deschiderea meniului când mouse-ul intră în applet"
+
+#~ msgid "Delay between switching categories"
+#~ msgstr "Întârziere la schimbarea categoriilor"
+
+#~ msgid ""
+#~ "When enabled, category views are activated on click instead of on hover."
+#~ msgstr ""
+#~ "Când este activat, vederile categoriilor sunt activate la click, nu la "
+#~ "punerea cursorului pe ele."
+
+#~ msgid ""
+#~ "Choose whether or not to enable smooth autoscrolling in the application "
+#~ "list."
+#~ msgstr "Alege dacă derularea fluentă este activată în lista de aplicații."
+
+#~ msgid "Choose whether or not bookmarks are indexed in the menu."
+#~ msgstr "Alege dacă marcajele sunt indexate în meniu."
+
+#~ msgid "Choose whether or not open windows are indexed in menu searches."
+#~ msgstr "Alege dacă ferestrele deschise sunt indexate în căutările în meniu."
+
+#~ msgid "Choose whether or not to show bookmarks and places in the menu."
+#~ msgstr "Alege dacă se afișează marcaje și locuri în meniu."
+
+#~ msgid "Choose whether or not to show icons on applications."
+#~ msgstr "Alege dacă se afișează pictogramele pentru aplicații."
+
+#~ msgid "Choose whether or not to show icons on categories."
+#~ msgstr "Alege dacă se afișează pictograme la categorii."
+
+#~ msgid ""
+#~ "Choose whether or not to show the application description on the "
+#~ "application buttons."
+#~ msgstr ""
+#~ "Alege dacă se afișează descrierea aplicațiilor în butoanele aplicațiilor."
+
+#~ msgid ""
+#~ "When enabled, tooltips containing the item's name or description is shown "
+#~ "when hovered over."
+#~ msgstr ""
+#~ "Când este activat, baloanele explicative ce conțin numele sau descrierea "
+#~ "articolului sunt afișate la punerea cursorului pe el."
+
+#~ msgid ""
+#~ "The delay time in milliseconds for tooltips when hovering over a menu "
+#~ "item."
+#~ msgstr ""
+#~ "Timpul de întârziere în milisecunde pentru baloanele explicative ce apar "
+#~ "când cursorul este pe un articol din meniu."
+
+#~ msgid "Please provide your password to uninstall this application"
+#~ msgstr ""
+#~ "Sunteți rugat să furnizați parola pentru dezinstalarea acestei aplicații"
+
+#~ msgid "Enable filesystem path entry in search box"
+#~ msgstr "Activează scrierea unei căi din sistem în caseta de căutare"
+
+#~ msgid "Allows path entry in the menu search box."
+#~ msgstr "Permite scrierea unei căi din caseta de căutare a meniului."
+
+#~ msgid ""
+#~ "Choose where application descriptions will be placed, or select \"None\" "
+#~ "to disable."
+#~ msgstr ""
+#~ "Alege unde vor fi puse descrierile aplicațiilor, sau selectează ”Niciuna” "
+#~ "pentru a dezactiva."
+
+#~ msgid "Category first seen when the menu is opened"
+#~ msgstr "Prima categorie văzută la deschiderea meniului"

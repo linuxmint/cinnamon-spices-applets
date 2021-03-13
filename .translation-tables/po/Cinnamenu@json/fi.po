@@ -1,0 +1,774 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-03-07 10:42+0000\n"
+"PO-Revision-Date: 2021-02-14 21:40+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: 3.2
+msgid "Type to search..."
+msgstr "Kirjoita haku..."
+
+#: 3.2 4.0
+msgid "Initializing"
+msgstr "Alustetaan"
+
+#: 3.2 4.0
+msgid "No description available"
+msgstr "Ei kuvausta saatavilla"
+
+#. 4.0->settings->open-on-category->options
+#: 3.2 4.0
+msgid "All applications"
+msgstr "Kaikki ohjelmat"
+
+#. 4.0->settings->open-on-category->options
+#: 3.2 4.0
+msgid "Places"
+msgstr "Sijainnit"
+
+#: 3.2
+msgid "Recent files"
+msgstr "Viimeaikaiset"
+
+#: 3.2 4.0
+msgid "Bookmarks"
+msgstr "Kirjanmerkit"
+
+#. 4.0->settings->open-on-category->options
+#: 3.2 4.0
+msgid "Favorite apps"
+msgstr "Suosikki sovellukset"
+
+#: 3.2
+msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
+msgstr "gir1.2-gda-5.0-paketti vaaditaan Firefox- ja Midori-kirjanmerkkeihin."
+
+#: 3.2 4.0
+msgid "Clear List"
+msgstr "Tyhjennä luettelo"
+
+#: 3.2 4.0
+msgid "No recent files"
+msgstr "Ei viimeaikaisia tiedostoja"
+
+#: 3.2
+msgid "Account details"
+msgstr "Tilin tiedot"
+
+#: 3.2
+msgid "Grid View"
+msgstr "Kuvakkeet"
+
+#: 3.2
+msgid "List View"
+msgstr "Luettelo"
+
+#: 3.2
+msgid "Switch to grid view"
+msgstr "Vaihda kuvakkeisiin"
+
+#: 3.2
+msgid "Switch to list view"
+msgstr "Vaihda luetteloon"
+
+#: 3.2 4.0
+msgid "Lock screen"
+msgstr "Lukitusnäyttö"
+
+#: 3.2 4.0
+msgid "Lock the screen"
+msgstr "Lukitse näyttö"
+
+#: 3.2 4.0
+msgid "Logout"
+msgstr "Kirjaudu ulos"
+
+#: 3.2 4.0
+msgid "Leave the session"
+msgstr "Poistu istunnosta"
+
+#: 3.2 4.0
+msgid "Quit"
+msgstr "Lopeta"
+
+#: 3.2 4.0
+msgid "Shutdown the computer"
+msgstr "Sammuta tietokone"
+
+#: 3.2
+msgid "Home"
+msgstr "Koti"
+
+#: 3.2
+msgid "Computer"
+msgstr "Tietokone"
+
+#: 3.2
+msgid "Browse network"
+msgstr "Selaa verkkoa"
+
+#: 3.2 4.0
+msgid "Run with NVIDIA GPU"
+msgstr "Suorita NVIDIA GPU:lla"
+
+#: 3.2 4.0
+msgid "Add to panel"
+msgstr "Lisää paneeliin"
+
+#: 3.2 4.0
+msgid "Add to desktop"
+msgstr "Lisää työpöydälle"
+
+#: 3.2 4.0
+msgid "Remove from favorites"
+msgstr "Poista suosikeista"
+
+#: 3.2 4.0
+msgid "Add to favorites"
+msgstr "Lisää suosikkeihin"
+
+#: 3.2
+msgid "Uninstall"
+msgstr "Asennuksen poisto"
+
+#: 4.0
+msgid "Find files..."
+msgstr "Hae tiedostoja..."
+
+#: 4.0
+msgid "Please wait..."
+msgstr "Odota hetki..."
+
+#: 4.0
+msgid "Solution:"
+msgstr "Ratkaisu:"
+
+#: 4.0
+msgid "Click to copy"
+msgstr "Kopioi napsauttamalla"
+
+#: 4.0
+msgid "Search web for"
+msgstr "Hae verkosta"
+
+#: 4.0
+msgid "Too many entries - showing first 1000 entries only"
+msgstr "Liian monta - vain ensimmäiset 1000 näytetään"
+
+#: 4.0
+msgid "Favorites"
+msgstr "Suosikit"
+
+#. 4.0->settings->open-on-category->options
+#: 4.0
+#, fuzzy
+msgid "Recent"
+msgstr "Viimeisimmät tiedostot"
+
+#. 4.0->settings->open-on-category->options
+#: 4.0
+msgid "Home folder"
+msgstr "Koti"
+
+#. 3.2->settings->resetCategoryOrder-button->description
+#: 4.0
+msgid "Reset category order"
+msgstr "Nollaa järjestys"
+
+#: 4.0
+msgid "This file is no longer available"
+msgstr "Tämä tiedosto ei ole enää saatavilla"
+
+#: 4.0
+msgid "Open with"
+msgstr "Avaa"
+
+#: 4.0
+msgid "Other application..."
+msgstr "Muu sovellus..."
+
+#: 4.0 4.0/search.py:48
+msgid "Open containing folder"
+msgstr "Avaa sisällön kansio"
+
+#: 4.0
+msgid "Move to trash"
+msgstr "Siirrä roskakoriin"
+
+#: 4.0
+msgid "Error while moving file to trash:"
+msgstr "Virhe siirrettäessä tiedostoa roskakoriin:"
+
+#: 4.0/search.py:43
+#, fuzzy
+msgid "Open"
+msgstr "Avaa..."
+
+#: 4.0/search.py:85
+msgid "Search"
+msgstr "Haku"
+
+#: 4.0/search.py:106
+msgid "Start in"
+msgstr "Aloita"
+
+#: 4.0/search.py:107
+msgid "Select a folder"
+msgstr "Valitse kansio"
+
+#: 4.0/search.py:113
+msgid "Follow symlinks"
+msgstr "Seuraa symlinkkejä"
+
+#: 4.0/search.py:117
+msgid "Search hidden"
+msgstr "Hae piilotetut"
+
+#: 4.0/search.py:121
+msgid "Use regular expressions"
+msgstr "Käytä säännöllisiä lauseita"
+
+#: 4.0/search.py:125
+msgid "Stop"
+msgstr "Pysäytä"
+
+#: 4.0/search.py:140
+msgid "File"
+msgstr "Tiedosto"
+
+#: 4.0/search.py:156
+msgid "Path"
+msgstr "Polku"
+
+#: 4.0/search.py:184
+msgid "Searching..."
+msgstr "Hakee..."
+
+#: 4.0/search.py:198 4.0/search.py:199
+msgid "Search Stopped"
+msgstr "Haku pysäytetty"
+
+#: 4.0/search.py:215
+msgid "Searching: "
+msgstr "Hakee: "
+
+#: 4.0/search.py:220
+msgid "Error: insufficient permissions to read folder "
+msgstr "Virhe: oikeudet kansion lukemiseen ei riitä "
+
+#: 4.0/search.py:252
+msgid "Search Completed"
+msgstr "Haku valmis"
+
+#: 4.0/search.py:259
+msgid "Skipping"
+msgstr "Ohitus"
+
+#: 4.0/search.py:259
+#, fuzzy
+msgid " - directory already searched"
+msgstr " - hakemisto jo haettu"
+
+#. metadata.json->name
+#. 3.2->settings->cinnamenuProvidersSection->title
+msgid "Cinnamenu"
+msgstr "Cinnamenu"
+
+#. metadata.json->description
+msgid ""
+"A flexible menu providing formatting options, web bookmarks, search provider "
+"support and fuzzy searching."
+msgstr ""
+"Valikko, joka tarjoaa joustavat asetukset, kirjanmerkit, hakupalvelun ja "
+"sumeaa tiedotojen hakua."
+
+#. 3.2->settings->panel->title
+#. 4.0->settings->behaviour->title
+msgid "Behavior"
+msgstr "Käyttäytyminen"
+
+#. 3.2->settings->appearance->title
+#. 4.0->settings->appearance->title
+msgid "Appearance"
+msgstr "Ulkoasu"
+
+#. 3.2->settings->menu->title
+#. 4.0->settings->layout->title
+msgid "Layout and Content"
+msgstr "Asettelu ja sisältö"
+
+#. 3.2->settings->providers->title
+msgid "Search Providers"
+msgstr "Hakupalvelut"
+
+#. 3.2->settings->extensionProvidersSection->title
+msgid "No search provider extensions found"
+msgstr "Hakupalvelun laajennuksia ei löytynyt"
+
+#. 3.2->settings->panel-appear->title
+#. 3.2->settings->panel-behave->title
+#. 4.0->settings->panel-behave->title
+#. 4.0->settings->panel-appear->title
+msgid "Panel"
+msgstr "Paneeli"
+
+#. 3.2->settings->menu-behave->title
+#. 3.2->settings->menu-icons->title
+#. 4.0->settings->menu-behave->title
+#. 4.0->settings->menu-icons->title
+msgid "Menu"
+msgstr "Valikko"
+
+#. 3.2->settings->menu-layout->title
+#. 4.0->settings->menu-layout->title
+msgid "Layout"
+msgstr "Ulkoasu"
+
+#. 3.2->settings->menu-content->title
+#. 4.0->settings->menu-content->title
+msgid "Content"
+msgstr "Sisältö"
+
+#. 3.2->settings->privacy-settings-button->description
+msgid "Recent files settings"
+msgstr "Viimeisten tiedostojen asetukset"
+
+#. 3.2->settings->menu-editor-button->description
+#. 4.0->settings->menu-editor-button->description
+msgid "Open the menu editor"
+msgstr "Avaa valikon muokkausikkuna"
+
+#. 3.2->settings->menu-icon-custom->description
+#. 4.0->settings->menu-icon-custom->description
+msgid "Use a custom icon"
+msgstr "Vaihda kuvake"
+
+#. 3.2->settings->menu-icon-custom->tooltip
+#. 4.0->settings->menu-icon-custom->tooltip
+msgid "Use a custom icon in the panel"
+msgstr "Käytä paneeliin eri kuvaketta"
+
+#. 3.2->settings->menu-icon->description
+#. 3.2->settings->menu-icon->tooltip
+#. 4.0->settings->menu-icon->description
+#. 4.0->settings->menu-icon->tooltip
+msgid "Panel icon"
+msgstr "Paneelin kuvake"
+
+#. 3.2->settings->menu-label->description
+#. 4.0->settings->menu-label->description
+msgid "Panel text"
+msgstr "Paneelin teksti"
+
+#. 3.2->settings->menu-label->tooltip
+#. 4.0->settings->menu-label->tooltip
+msgid "Text to show beside the panel icon"
+msgstr "Kuvakkeen vieressä näkyvä teksti"
+
+#. 3.2->settings->category-icon-size->units
+#. 3.2->settings->apps-list-icon-size->units
+#. 3.2->settings->apps-grid-icon-size->units
+#. 3.2->settings->custom-menu-height->units
+#. 4.0->settings->menu-icon-size->units
+#. 4.0->settings->category-icon-size->units
+#. 4.0->settings->apps-list-icon-size->units
+#. 4.0->settings->apps-grid-icon-size->units
+#. 4.0->settings->sidebar-icon-size->units
+msgid "pixels"
+msgstr "pikseliä"
+
+#. 3.2->settings->category-icon-size->description
+#. 3.2->settings->category-icon-size->tooltip
+#. 4.0->settings->category-icon-size->description
+#. 4.0->settings->category-icon-size->tooltip
+msgid "Category icon size"
+msgstr "Ryhmän kuvakekoko"
+
+#. 3.2->settings->apps-list-icon-size->description
+#. 3.2->settings->apps-list-icon-size->tooltip
+#. 4.0->settings->apps-list-icon-size->description
+#. 4.0->settings->apps-list-icon-size->tooltip
+msgid "Applications list icon size"
+msgstr "Ohjelmien kuvakekoko luettelona"
+
+#. 3.2->settings->apps-grid-icon-size->description
+#. 3.2->settings->apps-grid-icon-size->tooltip
+#. 4.0->settings->apps-grid-icon-size->description
+#. 4.0->settings->apps-grid-icon-size->tooltip
+msgid "Applications grid icon size"
+msgstr "Ohjelmien kuvakekoko ruudukossa"
+
+#. 3.2->settings->overlay-key->description
+#. 4.0->settings->overlay-key->description
+msgid "Keyboard shortcut to open and close the menu"
+msgstr "Valikon avaa ja sulje pikanäppäin"
+
+#. 3.2->settings->activate-on-hover->description
+#. 4.0->settings->activate-on-hover->description
+msgid "Open menu on hover"
+msgstr "Avaa valikko hiiren kosketuksella"
+
+#. 3.2->settings->activate-on-hover->tooltip
+#. 4.0->settings->activate-on-hover->tooltip
+msgid "Open the menu when I move my mouse over the panel icon"
+msgstr "Valikko avautuu, kun siirrän hiiren sen päälle"
+
+#. 3.2->settings->hover-delay->units
+#. 3.2->settings->tooltip-delay->units
+#. 4.0->settings->hover-delay->units
+msgid "milliseconds"
+msgstr "millisekunnit"
+
+#. 3.2->settings->hover-delay->description
+#. 4.0->settings->hover-delay->description
+msgid "Menu hover delay"
+msgstr "Valikon valintaviive"
+
+#. 3.2->settings->enable-animation->description
+#. 4.0->settings->enable-animation->description
+msgid "Use menu animations"
+msgstr "Käytä valikon animaatioita"
+
+#. 3.2->settings->enable-animation->tooltip
+#. 4.0->settings->enable-animation->tooltip
+msgid "Animate the menu on open and close"
+msgstr "Animoi valikko avatessa ja sulkeutuessa"
+
+#. 3.2->settings->category-click->description
+#. 4.0->settings->category-click->description
+msgid "Activate categories on click"
+msgstr "Aktivoi ryhmät auki napsauttamalla"
+
+#. 3.2->settings->category-click->tooltip
+#. 4.0->settings->category-click->tooltip
+msgid "Activate categories on click instead of on hover"
+msgstr "Aktivoi ryhmät napsauttamalla"
+
+#. 3.2->settings->enable-autoscroll->description
+#. 4.0->settings->enable-autoscroll->description
+msgid "Enable autoscrolling"
+msgstr "Automaattinen vieritys"
+
+#. 3.2->settings->enable-autoscroll->tooltip
+msgid "Enable autoscrolling in application list"
+msgstr "Ota automaattinen vieritys käyttöön ohjelmien luettelossa"
+
+#. 3.2->settings->enable-bookmarks->description
+#. 4.0->settings->show-web-bookmarks-category->description
+msgid "Show web bookmarks"
+msgstr "Näytä selaimen kirjanmerkit"
+
+#. 3.2->settings->enable-bookmarks->tooltip
+#. 4.0->settings->show-web-bookmarks-category->tooltip
+#, fuzzy
+msgid ""
+"Show your browser's web bookmarks in the menu.\n"
+"Note: Install package gir1.2-gda-5.0 to read firefox bookmarks."
+msgstr ""
+"Näytä selaimesi suosikit valikossa.\n"
+"Huomaa: Asenna paketti gir1.2-gda-5.0 joka osaa lukea firefox suosikkeja."
+
+#. 3.2->settings->enable-windows->description
+msgid "Enable searching of open windows"
+msgstr "Ota avoimien ikkunoiden haku käyttöön"
+
+#. 3.2->settings->enable-search-providers->description
+msgid "Enable search providers"
+msgstr "Ota hakupalvelut käyttöön"
+
+#. 3.2->settings->enable-search-providers->tooltip
+msgid "Include search provider results in searches"
+msgstr "Valitse, indeksoidaanko hakupalvelun tulokset hakuihin"
+
+#. 3.2->settings->get-providers->description
+msgid "Example Search Providers"
+msgstr "Esimerkkejä hakupalvelun tarjoajista"
+
+#. 3.2->settings->startup-view-mode->description
+#. 4.0->settings->open-on-category->description
+#, fuzzy
+msgid "Open menu on category:"
+msgstr "Avaa valikko hiiren kosketuksella"
+
+#. 3.2->settings->startup-view-mode->options
+#. 4.0->settings->applications-view-mode->options
+msgid "List"
+msgstr "Luettelo"
+
+#. 3.2->settings->startup-view-mode->options
+#. 4.0->settings->applications-view-mode->options
+msgid "Grid"
+msgstr "Ruudukko"
+
+#. 3.2->settings->startup-view-mode->tooltip
+#. 4.0->settings->open-on-category->tooltip
+#, fuzzy
+msgid "Always open the menu with this category selected"
+msgstr "Avaa aina valikko tilaan, jossa suositut sovellukset näkyvät"
+
+#. 3.2->settings->apps-grid-column-count->units
+msgid "columns"
+msgstr "sarakkeet"
+
+#. 3.2->settings->apps-grid-column-count->description
+#. 3.2->settings->apps-grid-column-count->tooltip
+msgid "Number of columns in apps grid"
+msgstr "Sarakkeiden lukumäärä sovellusruudussa"
+
+#. 3.2->settings->show-places->description
+#. 4.0->settings->show-places-category->description
+msgid "Show bookmarks and places"
+msgstr "Näytä kirjanmerkit ja sijainti"
+
+#. 3.2->settings->show-places->tooltip
+#. 4.0->settings->show-places-category->tooltip
+msgid "Show bookmarks and places category in the menu"
+msgstr "Näytä valikossa kirjanmerkit ja sijainti"
+
+#. 3.2->settings->show-application-icons->description
+#. 3.2->settings->show-application-icons->tooltip
+msgid "Show application icons"
+msgstr "Näytä sovellusten kuvakkeet"
+
+#. 3.2->settings->show-category-icons->description
+#. 3.2->settings->show-category-icons->tooltip
+msgid "Show category icons"
+msgstr "Näytä ryhmän kuvakkeet"
+
+#. 3.2->settings->show-apps-description-on-buttons->description
+#. 3.2->settings->show-apps-description-on-buttons->tooltip
+msgid "Show application descriptions under titles"
+msgstr "Näytä sovellusten kuvaukset otsikoiden alla"
+
+#. 3.2->settings->show-tooltips->description
+#. 3.2->settings->show-tooltips->tooltip
+msgid "Show tooltips"
+msgstr "Näytä työkaluvihjeet"
+
+#. 3.2->settings->tooltip-delay->description
+#. 3.2->settings->tooltip-delay->tooltip
+msgid "Tooltip delay"
+msgstr "Työkaluvinkin viive"
+
+#. 3.2->settings->enable-custom-menu-height->description
+#. 3.2->settings->enable-custom-menu-height->tooltip
+msgid "Use a custom menu height"
+msgstr "Käytä mukautettua valikon korkeutta"
+
+#. 3.2->settings->custom-menu-height->description
+#. 3.2->settings->custom-menu-height->tooltip
+msgid "Custom menu height"
+msgstr "Muokatun valikon korkeus"
+
+#. 4.0->settings->applications-view-mode->description
+msgid "Applications view mode"
+msgstr "Sovellukset näytetään"
+
+#. 4.0->settings->applications-view-mode->tooltip
+msgid "View applications as list or grid"
+msgstr "Näytä sovellukset luettelona tai ruudukkona"
+
+#. 4.0->settings->description-placement->description
+msgid "Application description placement"
+msgstr "Sovellusten kuvauksen paikka"
+
+#. 4.0->settings->description-placement->options
+msgid "Tooltips"
+msgstr "Työkaluvinkit"
+
+#. 4.0->settings->description-placement->options
+msgid "Under titles"
+msgstr "Otsikkojen alla"
+
+#. 4.0->settings->description-placement->options
+#. 4.0->settings->web-search-option->options
+msgid "None"
+msgstr "Ei mitään"
+
+#. 4.0->settings->description-placement->tooltip
+msgid "Choose where to show application descriptions"
+msgstr "Valitse, missä sovellusten kuvaukset näytetään"
+
+#. 4.0->settings->sidebar-placement->description
+msgid "Session buttons location"
+msgstr "Sijainti Istunnon painikkeille"
+
+#. 4.0->settings->sidebar-placement->options
+msgid "Top"
+msgstr "Ylös"
+
+#. 4.0->settings->sidebar-placement->options
+msgid "Bottom"
+msgstr "Alas"
+
+#. 4.0->settings->sidebar-placement->options
+msgid "Left"
+msgstr "Vasen"
+
+#. 4.0->settings->sidebar-placement->options
+msgid "Right"
+msgstr "Oikea"
+
+#. 4.0->settings->sidebar-placement->tooltip
+msgid "Choose where to show the session buttons (quit, logout, etc.)"
+msgstr ""
+"Valitse missä näytetään istunnon painikkeet (lopeta, kirjaudu ulos, jne.)"
+
+#. 4.0->settings->info-box->description
+#, fuzzy
+msgid ""
+"\n"
+"Info/tip: Drag on the menu edge to change the menu size.\n"
+msgstr "Vihje/vinkki: Muuta valikon kokoa vetämällä valikon reunaa."
+
+#. 4.0->settings->add-favorites->description
+msgid "Add favorites to session buttons"
+msgstr "Lisää suosikit istunnon painikkeisiin"
+
+#. 4.0->settings->add-favorites->tooltip
+msgid "Show your favorite app icons next to the session buttons"
+msgstr "Näytä suositut sovellukset kuvake istunnon painikkeiden vieressä"
+
+#. 4.0->settings->show-favorite-apps-category->description
+msgid "Show favorite apps category"
+msgstr "Näytä suositut sovellukset"
+
+#. 4.0->settings->show-favorite-apps-category->tooltip
+msgid "Show your favorite apps category in the menu"
+msgstr "Näytä sinun suosikki sovellukset valikossa"
+
+#. 4.0->settings->show-home-folder-category->description
+msgid "Show home folder"
+msgstr "Näytä kansio Koti"
+
+#. 4.0->settings->show-home-folder-category->tooltip
+msgid "Show home folder category in the menu"
+msgstr "Näytä kansion Koti sisältö valikossa"
+
+#. 4.0->settings->open-on-category->options
+msgid "Last used category"
+msgstr ""
+
+#. 4.0->settings->enable-autoscroll->tooltip
+msgid "Autoscroll the application list on mouse hover"
+msgstr "Vieritä sovelluslistaa automaattisesti hiiren osoittimen kohdalla"
+
+#. 4.0->settings->web-search-option->description
+msgid "Web search option"
+msgstr "Hakupalvelun vaihtoehdot"
+
+#. 4.0->settings->web-search-option->options
+msgid "Google"
+msgstr "Google"
+
+#. 4.0->settings->web-search-option->options
+msgid "Bing"
+msgstr "Bing"
+
+#. 4.0->settings->web-search-option->options
+msgid "Yahoo"
+msgstr "Yahoo"
+
+#. 4.0->settings->web-search-option->options
+msgid "DuckDuckGo"
+msgstr "DuckDuckGo"
+
+#. 4.0->settings->web-search-option->tooltip
+msgid "Show an internet search option in search results"
+msgstr "Näytä hakupalvelun vaihtoehdot hakutuloksissa"
+
+#. 4.0->settings->show-hidden-files->description
+msgid "Show hidden files"
+msgstr "Näytä piilotiedostot"
+
+#. 4.0->settings->show-hidden-files->tooltip
+msgid "Show hidden files in folder view"
+msgstr "Näytä piilotetut tiedostot kansioissa"
+
+#. 4.0->settings->menu-icon-size-custom->description
+msgid "Use a custom icon size"
+msgstr "Mukauta kuvakeen kokoa"
+
+#. 4.0->settings->menu-icon-size-custom->tooltip
+msgid "Use a custom size for the panel icon"
+msgstr "Mukauta kokoa paneelin kuvakkeessa"
+
+#. 4.0->settings->menu-icon-size->description
+msgid "Panel icon size"
+msgstr "Paneelin kuvakkeen koko"
+
+#. 4.0->settings->menu-icon-size->tooltip
+msgid "Choose a custom size for the panel icon"
+msgstr "Valitse mukautettu koko paneelin kuvakkeeseen"
+
+#. 4.0->settings->sidebar-icon-size->description
+#. 4.0->settings->sidebar-icon-size->tooltip
+msgid "Session buttons icon size"
+msgstr "Istunnon painikkeiden kuvakekoko"
+
+#. 4.0->settings->use-box-style->description
+#. 4.0->settings->use-box-style->tooltip
+msgid "Use session buttons box style"
+msgstr "Lokeroidut painikkeet istunnon tyylissä"
+
+#~ msgid "All Applications"
+#~ msgstr "Kaikki sovellukset"
+
+#~ msgid "Favorite Apps"
+#~ msgstr "Suosikkisovellukset"
+
+#~ msgid "Lock Screen"
+#~ msgstr "Lukitusnäyttö"
+
+#~ msgid "Clear list"
+#~ msgstr "Tyhjennä luettelo"
+
+#~ msgid "Clear all recent documents"
+#~ msgstr "Tyhjennä viimeaikaiset asiakirjat"
+
+#~ msgid "No recent documents"
+#~ msgstr "Ei viimeaikaisia asiakirjoja"
+
+#~ msgid "Shut down the computer"
+#~ msgstr "Sammuta tietokone"
+
+#~ msgid "Open Containing Folder..."
+#~ msgstr "Avaa sisällön kansio..."
+
+#~ msgid "Show your browser's web bookmarks in the menu"
+#~ msgstr "Näytä selaimesi kirjanmerkit valikossa"
+
+#~ msgid "Startup applications view mode"
+#~ msgstr "Käynnistyvien sovellusten katselu"
+
+#~ msgid "px"
+#~ msgstr "px"
+
+#~ msgid "Show recent files"
+#~ msgstr "Näytä käyttämäsi viimeisimmät tiedostot"
+
+#~ msgid "Show recent files category in the menu"
+#~ msgstr "Näytä käyttämäsi viimeisimmät tiedostot valikossa"
+
+#~ msgid "Always open menu on favorite apps"
+#~ msgstr "Avaa aina suositut sovellukset valikkoon"
+
+#~ msgid "Enable emoji search"
+#~ msgstr "Emojien haku"
+
+#~ msgid "Show emojis in search results"
+#~ msgstr "Näytä emojit hakutuloksissa"

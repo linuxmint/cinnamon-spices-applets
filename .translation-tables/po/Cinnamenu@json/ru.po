@@ -1,0 +1,813 @@
+# Translator list
+# Ivan Komaritsyn <vantu5z@mail.ru>, 2015, 2016.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Cinnamenu\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-03-07 10:42+0000\n"
+"PO-Revision-Date: 2020-07-20 08:10+0100\n"
+"Last-Translator: Ivan Komaritsyn <vantu5z@mail.ru>\n"
+"Language-Team: \n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Poedit 2.3.1\n"
+
+#: 3.2
+msgid "Type to search..."
+msgstr "Введите запрос для поиска..."
+
+#: 3.2 4.0
+msgid "Initializing"
+msgstr ""
+
+#: 3.2 4.0
+msgid "No description available"
+msgstr "Нет доступного описания"
+
+#. 4.0->settings->open-on-category->options
+#: 3.2 4.0
+#, fuzzy
+msgid "All applications"
+msgstr "Все приложения"
+
+#. 4.0->settings->open-on-category->options
+#: 3.2 4.0
+msgid "Places"
+msgstr "Места"
+
+#: 3.2
+#, fuzzy
+msgid "Recent files"
+msgstr "Недавние файлы"
+
+#: 3.2 4.0
+msgid "Bookmarks"
+msgstr "Закладки"
+
+#. 4.0->settings->open-on-category->options
+#: 3.2 4.0
+#, fuzzy
+msgid "Favorite apps"
+msgstr "Избранные приложения"
+
+#: 3.2
+msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
+msgstr "gir1.2-gda-5.0, необходимый для закладок Firefox и Midori."
+
+#: 3.2 4.0
+msgid "Clear List"
+msgstr "Очистить список"
+
+#: 3.2 4.0
+#, fuzzy
+msgid "No recent files"
+msgstr "Недавние файлы"
+
+#: 3.2
+msgid "Account details"
+msgstr "Детали учетной записи"
+
+#: 3.2
+msgid "Grid View"
+msgstr "В виде сетки"
+
+#: 3.2
+msgid "List View"
+msgstr "В виде списка"
+
+#: 3.2
+msgid "Switch to grid view"
+msgstr "Переключить на вид сетки"
+
+#: 3.2
+msgid "Switch to list view"
+msgstr "Переключить на вид списка"
+
+#: 3.2 4.0
+#, fuzzy
+msgid "Lock screen"
+msgstr "Заблокировать экран"
+
+#: 3.2 4.0
+msgid "Lock the screen"
+msgstr "Заблокировать экран"
+
+#: 3.2 4.0
+msgid "Logout"
+msgstr "Выйти"
+
+#: 3.2 4.0
+msgid "Leave the session"
+msgstr "Покинуть сессию"
+
+#: 3.2 4.0
+msgid "Quit"
+msgstr "Выход"
+
+#: 3.2 4.0
+msgid "Shutdown the computer"
+msgstr "Выключить компьютер"
+
+#: 3.2
+msgid "Home"
+msgstr "Домашняя папка"
+
+#: 3.2
+msgid "Computer"
+msgstr "Компьютер"
+
+#: 3.2
+msgid "Browse network"
+msgstr "Обзор сети"
+
+#: 3.2 4.0
+msgid "Run with NVIDIA GPU"
+msgstr "Запустить с NVIDIA GPU"
+
+#: 3.2 4.0
+msgid "Add to panel"
+msgstr "Добавить на панель"
+
+#: 3.2 4.0
+msgid "Add to desktop"
+msgstr "Добавить на Рабочий стол"
+
+#: 3.2 4.0
+msgid "Remove from favorites"
+msgstr "Удалить из Избранного"
+
+#: 3.2 4.0
+msgid "Add to favorites"
+msgstr "Добавить в Избранное"
+
+#: 3.2
+msgid "Uninstall"
+msgstr "Удалить"
+
+#: 4.0
+msgid "Find files..."
+msgstr ""
+
+#: 4.0
+msgid "Please wait..."
+msgstr "Пожалуйста, подождите..."
+
+#: 4.0
+msgid "Solution:"
+msgstr ""
+
+#: 4.0
+msgid "Click to copy"
+msgstr ""
+
+#: 4.0
+#, fuzzy
+msgid "Search web for"
+msgstr "Поисковые провайдеры"
+
+#: 4.0
+msgid "Too many entries - showing first 1000 entries only"
+msgstr ""
+
+#: 4.0
+#, fuzzy
+msgid "Favorites"
+msgstr "Избранные приложения"
+
+#. 4.0->settings->open-on-category->options
+#: 4.0
+#, fuzzy
+msgid "Recent"
+msgstr "Недавние файлы"
+
+#. 4.0->settings->open-on-category->options
+#: 4.0
+msgid "Home folder"
+msgstr ""
+
+#. 3.2->settings->resetCategoryOrder-button->description
+#: 4.0
+msgid "Reset category order"
+msgstr "Сбросить заказ категории"
+
+#: 4.0
+msgid "This file is no longer available"
+msgstr ""
+
+#: 4.0
+msgid "Open with"
+msgstr ""
+
+#: 4.0
+#, fuzzy
+msgid "Other application..."
+msgstr "Показывать значки приложений"
+
+#: 4.0 4.0/search.py:48
+msgid "Open containing folder"
+msgstr ""
+
+#: 4.0
+msgid "Move to trash"
+msgstr ""
+
+#: 4.0
+msgid "Error while moving file to trash:"
+msgstr ""
+
+#: 4.0/search.py:43
+msgid "Open"
+msgstr ""
+
+#: 4.0/search.py:85
+msgid "Search"
+msgstr ""
+
+#: 4.0/search.py:106
+msgid "Start in"
+msgstr ""
+
+#: 4.0/search.py:107
+msgid "Select a folder"
+msgstr ""
+
+#: 4.0/search.py:113
+msgid "Follow symlinks"
+msgstr ""
+
+#: 4.0/search.py:117
+#, fuzzy
+msgid "Search hidden"
+msgstr "Поисковые провайдеры"
+
+#: 4.0/search.py:121
+msgid "Use regular expressions"
+msgstr ""
+
+#: 4.0/search.py:125
+msgid "Stop"
+msgstr ""
+
+#: 4.0/search.py:140
+msgid "File"
+msgstr ""
+
+#: 4.0/search.py:156
+msgid "Path"
+msgstr ""
+
+#: 4.0/search.py:184
+msgid "Searching..."
+msgstr ""
+
+#: 4.0/search.py:198 4.0/search.py:199
+#, fuzzy
+msgid "Search Stopped"
+msgstr "Поисковые провайдеры"
+
+#: 4.0/search.py:215
+msgid "Searching: "
+msgstr ""
+
+#: 4.0/search.py:220
+msgid "Error: insufficient permissions to read folder "
+msgstr ""
+
+#: 4.0/search.py:252
+msgid "Search Completed"
+msgstr ""
+
+#: 4.0/search.py:259
+msgid "Skipping"
+msgstr ""
+
+#: 4.0/search.py:259
+msgid " - directory already searched"
+msgstr ""
+
+#. metadata.json->name
+#. 3.2->settings->cinnamenuProvidersSection->title
+msgid "Cinnamenu"
+msgstr "Cinnamenu"
+
+#. metadata.json->description
+msgid ""
+"A flexible menu providing formatting options, web bookmarks, search provider "
+"support and fuzzy searching."
+msgstr ""
+"Гибкое меню с параметрами форматирования, веб-закладками, поддержкой "
+"поставщиков поиска и нечетким поиском."
+
+#. 3.2->settings->panel->title
+#. 4.0->settings->behaviour->title
+msgid "Behavior"
+msgstr "Поведение"
+
+#. 3.2->settings->appearance->title
+#. 4.0->settings->appearance->title
+msgid "Appearance"
+msgstr "Оформление"
+
+#. 3.2->settings->menu->title
+#. 4.0->settings->layout->title
+msgid "Layout and Content"
+msgstr "Макет и содержание"
+
+#. 3.2->settings->providers->title
+msgid "Search Providers"
+msgstr "Поисковые провайдеры"
+
+#. 3.2->settings->extensionProvidersSection->title
+msgid "No search provider extensions found"
+msgstr ""
+
+#. 3.2->settings->panel-appear->title
+#. 3.2->settings->panel-behave->title
+#. 4.0->settings->panel-behave->title
+#. 4.0->settings->panel-appear->title
+msgid "Panel"
+msgstr "панель"
+
+#. 3.2->settings->menu-behave->title
+#. 3.2->settings->menu-icons->title
+#. 4.0->settings->menu-behave->title
+#. 4.0->settings->menu-icons->title
+msgid "Menu"
+msgstr "Меню"
+
+#. 3.2->settings->menu-layout->title
+#. 4.0->settings->menu-layout->title
+msgid "Layout"
+msgstr "раскладка"
+
+#. 3.2->settings->menu-content->title
+#. 4.0->settings->menu-content->title
+msgid "Content"
+msgstr "содержание"
+
+#. 3.2->settings->privacy-settings-button->description
+msgid "Recent files settings"
+msgstr "Настройки последних файлов"
+
+#. 3.2->settings->menu-editor-button->description
+#. 4.0->settings->menu-editor-button->description
+msgid "Open the menu editor"
+msgstr "Открыть редактор меню"
+
+#. 3.2->settings->menu-icon-custom->description
+#. 4.0->settings->menu-icon-custom->description
+msgid "Use a custom icon"
+msgstr "Использовать свой значок"
+
+#. 3.2->settings->menu-icon-custom->tooltip
+#. 4.0->settings->menu-icon-custom->tooltip
+msgid "Use a custom icon in the panel"
+msgstr "Используйте пользовательский значок на панели"
+
+#. 3.2->settings->menu-icon->description
+#. 3.2->settings->menu-icon->tooltip
+#. 4.0->settings->menu-icon->description
+#. 4.0->settings->menu-icon->tooltip
+msgid "Panel icon"
+msgstr "Значок панели"
+
+#. 3.2->settings->menu-label->description
+#. 4.0->settings->menu-label->description
+msgid "Panel text"
+msgstr "Текст панели"
+
+#. 3.2->settings->menu-label->tooltip
+#. 4.0->settings->menu-label->tooltip
+msgid "Text to show beside the panel icon"
+msgstr "Текст для отображения рядом со значком панели"
+
+#. 3.2->settings->category-icon-size->units
+#. 3.2->settings->apps-list-icon-size->units
+#. 3.2->settings->apps-grid-icon-size->units
+#. 3.2->settings->custom-menu-height->units
+#. 4.0->settings->menu-icon-size->units
+#. 4.0->settings->category-icon-size->units
+#. 4.0->settings->apps-list-icon-size->units
+#. 4.0->settings->apps-grid-icon-size->units
+#. 4.0->settings->sidebar-icon-size->units
+msgid "pixels"
+msgstr "пиксели"
+
+#. 3.2->settings->category-icon-size->description
+#. 3.2->settings->category-icon-size->tooltip
+#. 4.0->settings->category-icon-size->description
+#. 4.0->settings->category-icon-size->tooltip
+msgid "Category icon size"
+msgstr "Размер значка категорий"
+
+#. 3.2->settings->apps-list-icon-size->description
+#. 3.2->settings->apps-list-icon-size->tooltip
+#. 4.0->settings->apps-list-icon-size->description
+#. 4.0->settings->apps-list-icon-size->tooltip
+msgid "Applications list icon size"
+msgstr "Размер значков в списке приложений"
+
+#. 3.2->settings->apps-grid-icon-size->description
+#. 3.2->settings->apps-grid-icon-size->tooltip
+#. 4.0->settings->apps-grid-icon-size->description
+#. 4.0->settings->apps-grid-icon-size->tooltip
+msgid "Applications grid icon size"
+msgstr "Размер значков в сетке приложений"
+
+#. 3.2->settings->overlay-key->description
+#. 4.0->settings->overlay-key->description
+msgid "Keyboard shortcut to open and close the menu"
+msgstr "Сочетание клавиш для открытия и закрытия меню"
+
+#. 3.2->settings->activate-on-hover->description
+#. 4.0->settings->activate-on-hover->description
+msgid "Open menu on hover"
+msgstr "Открыть меню при наведении"
+
+#. 3.2->settings->activate-on-hover->tooltip
+#. 4.0->settings->activate-on-hover->tooltip
+msgid "Open the menu when I move my mouse over the panel icon"
+msgstr "Откройте меню, когда наведите курсор мыши на значок панели"
+
+#. 3.2->settings->hover-delay->units
+#. 3.2->settings->tooltip-delay->units
+#. 4.0->settings->hover-delay->units
+msgid "milliseconds"
+msgstr "миллисекунды"
+
+#. 3.2->settings->hover-delay->description
+#. 4.0->settings->hover-delay->description
+msgid "Menu hover delay"
+msgstr "Задержка меню"
+
+#. 3.2->settings->enable-animation->description
+#. 4.0->settings->enable-animation->description
+msgid "Use menu animations"
+msgstr "Использовать анимацию меню"
+
+#. 3.2->settings->enable-animation->tooltip
+#. 4.0->settings->enable-animation->tooltip
+msgid "Animate the menu on open and close"
+msgstr "Анимировать меню на открывать и закрывать"
+
+#. 3.2->settings->category-click->description
+#. 4.0->settings->category-click->description
+msgid "Activate categories on click"
+msgstr "Активировать категории по клику"
+
+#. 3.2->settings->category-click->tooltip
+#. 4.0->settings->category-click->tooltip
+msgid "Activate categories on click instead of on hover"
+msgstr "Активировать категории по клику, а не при наведении"
+
+#. 3.2->settings->enable-autoscroll->description
+#. 4.0->settings->enable-autoscroll->description
+msgid "Enable autoscrolling"
+msgstr "Включить автопрокрутку"
+
+#. 3.2->settings->enable-autoscroll->tooltip
+msgid "Enable autoscrolling in application list"
+msgstr "Включить автопрокрутку в списке приложений"
+
+#. 3.2->settings->enable-bookmarks->description
+#. 4.0->settings->show-web-bookmarks-category->description
+msgid "Show web bookmarks"
+msgstr "Показать веб-закладки"
+
+#. 3.2->settings->enable-bookmarks->tooltip
+#. 4.0->settings->show-web-bookmarks-category->tooltip
+msgid ""
+"Show your browser's web bookmarks in the menu.\n"
+"Note: Install package gir1.2-gda-5.0 to read firefox bookmarks."
+msgstr ""
+
+#. 3.2->settings->enable-windows->description
+msgid "Enable searching of open windows"
+msgstr ""
+
+#. 3.2->settings->enable-search-providers->description
+msgid "Enable search providers"
+msgstr "Включить поисковые провайдеры"
+
+#. 3.2->settings->enable-search-providers->tooltip
+msgid "Include search provider results in searches"
+msgstr "Включить результаты поиска в результаты поиска"
+
+#. 3.2->settings->get-providers->description
+msgid "Example Search Providers"
+msgstr "Пример поиска поставщиков"
+
+#. 3.2->settings->startup-view-mode->description
+#. 4.0->settings->open-on-category->description
+#, fuzzy
+msgid "Open menu on category:"
+msgstr "Открыть меню при наведении"
+
+#. 3.2->settings->startup-view-mode->options
+#. 4.0->settings->applications-view-mode->options
+msgid "List"
+msgstr "Список"
+
+#. 3.2->settings->startup-view-mode->options
+#. 4.0->settings->applications-view-mode->options
+msgid "Grid"
+msgstr "Сетка"
+
+#. 3.2->settings->startup-view-mode->tooltip
+#. 4.0->settings->open-on-category->tooltip
+msgid "Always open the menu with this category selected"
+msgstr ""
+
+#. 3.2->settings->apps-grid-column-count->units
+msgid "columns"
+msgstr "колонки"
+
+#. 3.2->settings->apps-grid-column-count->description
+#. 3.2->settings->apps-grid-column-count->tooltip
+msgid "Number of columns in apps grid"
+msgstr "Номер колонки в сетке приложений"
+
+#. 3.2->settings->show-places->description
+#. 4.0->settings->show-places-category->description
+msgid "Show bookmarks and places"
+msgstr "Показывать закладки и места"
+
+#. 3.2->settings->show-places->tooltip
+#. 4.0->settings->show-places-category->tooltip
+msgid "Show bookmarks and places category in the menu"
+msgstr "Показать категорию закладок и мест в меню"
+
+#. 3.2->settings->show-application-icons->description
+#. 3.2->settings->show-application-icons->tooltip
+msgid "Show application icons"
+msgstr "Показывать значки приложений"
+
+#. 3.2->settings->show-category-icons->description
+#. 3.2->settings->show-category-icons->tooltip
+msgid "Show category icons"
+msgstr "Показывать значки категорий"
+
+#. 3.2->settings->show-apps-description-on-buttons->description
+#. 3.2->settings->show-apps-description-on-buttons->tooltip
+msgid "Show application descriptions under titles"
+msgstr "Показывать описания приложений под заголовками"
+
+#. 3.2->settings->show-tooltips->description
+#. 3.2->settings->show-tooltips->tooltip
+msgid "Show tooltips"
+msgstr ""
+
+#. 3.2->settings->tooltip-delay->description
+#. 3.2->settings->tooltip-delay->tooltip
+msgid "Tooltip delay"
+msgstr "Задержка всплывающей подсказки"
+
+#. 3.2->settings->enable-custom-menu-height->description
+#. 3.2->settings->enable-custom-menu-height->tooltip
+msgid "Use a custom menu height"
+msgstr "Используйте настраиваемую высоту меню"
+
+#. 3.2->settings->custom-menu-height->description
+#. 3.2->settings->custom-menu-height->tooltip
+msgid "Custom menu height"
+msgstr "Пользовательская высота меню"
+
+#. 4.0->settings->applications-view-mode->description
+msgid "Applications view mode"
+msgstr "Режим просмотра приложений"
+
+#. 4.0->settings->applications-view-mode->tooltip
+msgid "View applications as list or grid"
+msgstr "Просмотр приложений в виде списка или сетки"
+
+#. 4.0->settings->description-placement->description
+msgid "Application description placement"
+msgstr "Размещение описания приложения"
+
+#. 4.0->settings->description-placement->options
+msgid "Tooltips"
+msgstr "Всплывающие"
+
+#. 4.0->settings->description-placement->options
+msgid "Under titles"
+msgstr "Под заголовками"
+
+#. 4.0->settings->description-placement->options
+#. 4.0->settings->web-search-option->options
+msgid "None"
+msgstr "Никто"
+
+#. 4.0->settings->description-placement->tooltip
+msgid "Choose where to show application descriptions"
+msgstr "Выберите, где показывать описания приложений"
+
+#. 4.0->settings->sidebar-placement->description
+msgid "Session buttons location"
+msgstr "Расположение кнопок сеанса"
+
+#. 4.0->settings->sidebar-placement->options
+msgid "Top"
+msgstr "внизу"
+
+#. 4.0->settings->sidebar-placement->options
+msgid "Bottom"
+msgstr "внизу"
+
+#. 4.0->settings->sidebar-placement->options
+msgid "Left"
+msgstr "налево"
+
+#. 4.0->settings->sidebar-placement->options
+msgid "Right"
+msgstr "направо"
+
+#. 4.0->settings->sidebar-placement->tooltip
+#, fuzzy
+msgid "Choose where to show the session buttons (quit, logout, etc.)"
+msgstr "Выберите, где показывать кнопки сеанса (выход, выход и т. Д.)"
+
+#. 4.0->settings->info-box->description
+msgid ""
+"\n"
+"Info/tip: Drag on the menu edge to change the menu size.\n"
+msgstr ""
+
+#. 4.0->settings->add-favorites->description
+msgid "Add favorites to session buttons"
+msgstr "Добавить избранное в кнопки сеанса"
+
+#. 4.0->settings->add-favorites->tooltip
+msgid "Show your favorite app icons next to the session buttons"
+msgstr "Покажите ваши любимые значки приложений рядом с кнопками сеанса"
+
+#. 4.0->settings->show-favorite-apps-category->description
+msgid "Show favorite apps category"
+msgstr ""
+
+#. 4.0->settings->show-favorite-apps-category->tooltip
+#, fuzzy
+msgid "Show your favorite apps category in the menu"
+msgstr "Показать категорию закладок и мест в меню"
+
+#. 4.0->settings->show-home-folder-category->description
+msgid "Show home folder"
+msgstr ""
+
+#. 4.0->settings->show-home-folder-category->tooltip
+#, fuzzy
+msgid "Show home folder category in the menu"
+msgstr "Показать категорию закладок и мест в меню"
+
+#. 4.0->settings->open-on-category->options
+msgid "Last used category"
+msgstr ""
+
+#. 4.0->settings->enable-autoscroll->tooltip
+#, fuzzy
+msgid "Autoscroll the application list on mouse hover"
+msgstr "Включить автопрокрутку в списке приложений"
+
+#. 4.0->settings->web-search-option->description
+msgid "Web search option"
+msgstr ""
+
+#. 4.0->settings->web-search-option->options
+msgid "Google"
+msgstr ""
+
+#. 4.0->settings->web-search-option->options
+msgid "Bing"
+msgstr ""
+
+#. 4.0->settings->web-search-option->options
+msgid "Yahoo"
+msgstr ""
+
+#. 4.0->settings->web-search-option->options
+msgid "DuckDuckGo"
+msgstr ""
+
+#. 4.0->settings->web-search-option->tooltip
+msgid "Show an internet search option in search results"
+msgstr ""
+
+#. 4.0->settings->show-hidden-files->description
+msgid "Show hidden files"
+msgstr ""
+
+#. 4.0->settings->show-hidden-files->tooltip
+msgid "Show hidden files in folder view"
+msgstr ""
+
+#. 4.0->settings->menu-icon-size-custom->description
+#, fuzzy
+msgid "Use a custom icon size"
+msgstr "Использовать свой значок"
+
+#. 4.0->settings->menu-icon-size-custom->tooltip
+#, fuzzy
+msgid "Use a custom size for the panel icon"
+msgstr "Используйте пользовательский значок на панели"
+
+#. 4.0->settings->menu-icon-size->description
+#, fuzzy
+msgid "Panel icon size"
+msgstr "Значок панели"
+
+#. 4.0->settings->menu-icon-size->tooltip
+#, fuzzy
+msgid "Choose a custom size for the panel icon"
+msgstr "Используйте пользовательский значок на панели"
+
+#. 4.0->settings->sidebar-icon-size->description
+#. 4.0->settings->sidebar-icon-size->tooltip
+#, fuzzy
+msgid "Session buttons icon size"
+msgstr "Расположение кнопок сеанса"
+
+#. 4.0->settings->use-box-style->description
+#. 4.0->settings->use-box-style->tooltip
+#, fuzzy
+msgid "Use session buttons box style"
+msgstr "Расположение кнопок сеанса"
+
+#~ msgid "No recent documents"
+#~ msgstr "Нет последних документов"
+
+#~ msgid "Remove favorite"
+#~ msgstr "Удалить любимую"
+
+#~ msgid "Show your browser's web bookmarks in the menu"
+#~ msgstr "Показывать веб-закладки вашего браузера в меню"
+
+#~ msgid "Startup applications view mode"
+#~ msgstr "Режим просмотра запускаемых приложений"
+
+#~ msgid "px"
+#~ msgstr "px"
+
+#~ msgid "Failed to launch \"%s\""
+#~ msgstr "Не удалось запустить '%s'"
+
+#~ msgid "Unchecking this allows the theme to set the icon"
+#~ msgstr "Снятие отметки позволяет теме установить значок"
+
+#~ msgid "Icon"
+#~ msgstr "Значок"
+
+#~ msgid "Set the custom menu button icon name"
+#~ msgstr "Установите имя значка кнопки пользовательского меню"
+
+#~ msgid "Enable opening the menu when the mouse enters the applet"
+#~ msgstr "Разрешить открытие меню при входе мыши в апплет"
+
+#~ msgid ""
+#~ "When enabled, category views are activated on click instead of on hover."
+#~ msgstr ""
+#~ "При включении просмотра категорий активируются по щелчку, а не при "
+#~ "наведении."
+
+#~ msgid ""
+#~ "Choose whether or not to enable smooth autoscrolling in the application "
+#~ "list."
+#~ msgstr ""
+#~ "Выберите, следует ли включить плавную автопрокрутку в списке приложений."
+
+#~ msgid "Choose whether or not bookmarks are indexed in the menu."
+#~ msgstr "Выберите, следует ли индексировать закладки в меню."
+
+#, fuzzy
+#~ msgid "Choose whether or not open windows are indexed in menu searches."
+#~ msgstr "Выберите, следует ли показывать закладки и места в меню."
+
+#~ msgid "Choose whether or not to show bookmarks and places in the menu."
+#~ msgstr "Выберите, следует ли показывать закладки и места в меню."
+
+#~ msgid "Choose whether or not to show icons on applications."
+#~ msgstr "Выбрать показывать или нет иконки в приложениях."
+
+#~ msgid "Choose whether or not to show icons on categories."
+#~ msgstr "Выбрать показывать или нет иконки в категориях."
+
+#~ msgid ""
+#~ "Choose whether or not to show the application description on the "
+#~ "application buttons."
+#~ msgstr ""
+#~ "Выберите будут ли показываться примечания к программам под их заголовком"
+
+#~ msgid "Please provide your password to uninstall this application"
+#~ msgstr "Пожалуйста, укажите ваш пароль для удаления этого приложения"
+
+#~ msgid "Enable filesystem path entry in search box"
+#~ msgstr "Включить путь файловой системы в окне поиска"
+
+#~ msgid "Allows path entry in the menu search box."
+#~ msgstr "Позволяет вводить путь в окне поиска меню."
+
+#~ msgid "Cinnamenu Settings"
+#~ msgstr "Настройки Cinnamenu"

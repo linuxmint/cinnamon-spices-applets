@@ -1,0 +1,48 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: sound150@claudiux v2.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-07-31 22:37+0200\n"
+"PO-Revision-Date: 2021-02-23 08:53+0100\n"
+"Last-Translator: Kálmán „KAMI” Szalai <kami911@gmail.com>\n"
+"Language-Team: \n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+
+#. 2.8->settings-schema.json->percentMaxVol->tooltip
+#. 3.4->settings-schema.json->percentMaxVol->tooltip
+msgid ""
+"You can try to increase the volume of your sound card up to 150% of its "
+"nominal value. Use with caution. You can also set a value less than 100%, "
+"for example on a child's computer."
+msgstr ""
+
+#. 2.8->settings-schema.json->adaptColor->description
+#. 3.4->settings-schema.json->adaptColor->description
+#. 4.4->settings-schema.json->adaptColor->description
+#. 4.6->settings-schema.json->adaptColor->description
+msgid "Adjust the color of the icon to the volume"
+msgstr ""
+
+#. 3.4->settings-schema.json->magneticOn->description
+#. 4.4->settings-schema.json->magneticOn->description
+#. 4.6->settings-schema.json->magneticOn->description
+msgid "Magnetize the 'Volume 100%' mark"
+msgstr ""
+
+#. 3.4->settings-schema.json->magneticOn->tooltip
+#. 4.4->settings-schema.json->magneticOn->tooltip
+#. 4.6->settings-schema.json->magneticOn->tooltip
+msgid ""
+"When checked, the 'Volume 100%' mark becomes magnetic: the volume is "
+"automatically set to 100% when the distance between the volume value and "
+"100% is lesser than a half-step."
+msgstr ""

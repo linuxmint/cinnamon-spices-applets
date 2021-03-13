@@ -1,0 +1,847 @@
+# Dutch translation for Cinnamenu
+# Copyright (C) 2019
+# This file is distributed under the same license as the Cinnamenu package.
+# Pjotr <pjotrvertaalt@gmail.com>, 2013-2019.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-03-07 10:42+0000\n"
+"PO-Revision-Date: 2020-07-18 23:15+0100\n"
+"Last-Translator: Pjotr <pjotrvertaalt@gmail.com>\n"
+"Language-Team: nl\n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3.1\n"
+
+#: 3.2
+msgid "Type to search..."
+msgstr "Tik in om te zoeken..."
+
+#: 3.2 4.0
+msgid "Initializing"
+msgstr "Bezig met opstarten"
+
+#: 3.2 4.0
+msgid "No description available"
+msgstr "Geen beschrijving beschikbaar"
+
+#. 4.0->settings->open-on-category->options
+#: 3.2 4.0
+#, fuzzy
+msgid "All applications"
+msgstr "Alle toepassingen"
+
+#. 4.0->settings->open-on-category->options
+#: 3.2 4.0
+msgid "Places"
+msgstr "Locaties"
+
+#: 3.2
+#, fuzzy
+msgid "Recent files"
+msgstr "Recente bestanden"
+
+#: 3.2 4.0
+msgid "Bookmarks"
+msgstr "Bladwijzers"
+
+#. 4.0->settings->open-on-category->options
+#: 3.2 4.0
+#, fuzzy
+msgid "Favorite apps"
+msgstr "Favoriete toepassingen"
+
+#: 3.2
+msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
+msgstr ""
+"Voor bladwijzers van Firefox en Midori is het pakket gir1.2-gda-5.0 vereist"
+
+#: 3.2 4.0
+msgid "Clear List"
+msgstr "Lijst wissen"
+
+#: 3.2 4.0
+#, fuzzy
+msgid "No recent files"
+msgstr "Recente bestanden omschakelen"
+
+#: 3.2
+msgid "Account details"
+msgstr "Bijzonderheden van account"
+
+#: 3.2
+msgid "Grid View"
+msgstr "Rasterweergave"
+
+#: 3.2
+msgid "List View"
+msgstr "Lijstweergave"
+
+#: 3.2
+msgid "Switch to grid view"
+msgstr "Omschakelen naar rasterweergave"
+
+#: 3.2
+msgid "Switch to list view"
+msgstr "Omschakelen naar lijstweergave"
+
+#: 3.2 4.0
+#, fuzzy
+msgid "Lock screen"
+msgstr "Scherm vergrendelen"
+
+#: 3.2 4.0
+msgid "Lock the screen"
+msgstr "Vergrendel het scherm"
+
+#: 3.2 4.0
+msgid "Logout"
+msgstr "Afmelden"
+
+#: 3.2 4.0
+msgid "Leave the session"
+msgstr "Sessie verlaten"
+
+#: 3.2 4.0
+msgid "Quit"
+msgstr "Afsluiten"
+
+#: 3.2 4.0
+msgid "Shutdown the computer"
+msgstr "De computer afsluiten"
+
+#: 3.2
+msgid "Home"
+msgstr "Persoonlijke map"
+
+#: 3.2
+msgid "Computer"
+msgstr "Computer"
+
+#: 3.2
+msgid "Browse network"
+msgstr "Netwerk verkennen"
+
+#: 3.2 4.0
+msgid "Run with NVIDIA GPU"
+msgstr "Draaien met NVIDIA-GPU"
+
+#: 3.2 4.0
+msgid "Add to panel"
+msgstr "Toevoegen aan werkbalk"
+
+#: 3.2 4.0
+msgid "Add to desktop"
+msgstr "Toevoegen aan bureaublad"
+
+#: 3.2 4.0
+msgid "Remove from favorites"
+msgstr "Verwijderen uit favorieten"
+
+#: 3.2 4.0
+msgid "Add to favorites"
+msgstr "Toevoegen aan favorieten"
+
+#: 3.2
+msgid "Uninstall"
+msgstr "DeÃ¯nstalleren"
+
+#: 4.0
+msgid "Find files..."
+msgstr ""
+
+#: 4.0
+msgid "Please wait..."
+msgstr ""
+
+#: 4.0
+msgid "Solution:"
+msgstr ""
+
+#: 4.0
+msgid "Click to copy"
+msgstr ""
+
+#: 4.0
+#, fuzzy
+msgid "Search web for"
+msgstr "Zoekdienstaanbieders"
+
+#: 4.0
+msgid "Too many entries - showing first 1000 entries only"
+msgstr ""
+
+#: 4.0
+#, fuzzy
+msgid "Favorites"
+msgstr "Favoriete toepassingen"
+
+#. 4.0->settings->open-on-category->options
+#: 4.0
+#, fuzzy
+msgid "Recent"
+msgstr "Recente bestanden"
+
+#. 4.0->settings->open-on-category->options
+#: 4.0
+msgid "Home folder"
+msgstr ""
+
+#. 3.2->settings->resetCategoryOrder-button->description
+#: 4.0
+msgid "Reset category order"
+msgstr "Categorievolgorde terugzetten op standaard"
+
+#: 4.0
+msgid "This file is no longer available"
+msgstr ""
+
+#: 4.0
+msgid "Open with"
+msgstr ""
+
+#: 4.0
+#, fuzzy
+msgid "Other application..."
+msgstr "Toepassingspictogrammen tonen"
+
+#: 4.0 4.0/search.py:48
+msgid "Open containing folder"
+msgstr ""
+
+#: 4.0
+msgid "Move to trash"
+msgstr ""
+
+#: 4.0
+msgid "Error while moving file to trash:"
+msgstr ""
+
+#: 4.0/search.py:43
+msgid "Open"
+msgstr ""
+
+#: 4.0/search.py:85
+msgid "Search"
+msgstr ""
+
+#: 4.0/search.py:106
+msgid "Start in"
+msgstr ""
+
+#: 4.0/search.py:107
+msgid "Select a folder"
+msgstr ""
+
+#: 4.0/search.py:113
+msgid "Follow symlinks"
+msgstr ""
+
+#: 4.0/search.py:117
+#, fuzzy
+msgid "Search hidden"
+msgstr "Zoekdienstaanbieders"
+
+#: 4.0/search.py:121
+msgid "Use regular expressions"
+msgstr ""
+
+#: 4.0/search.py:125
+msgid "Stop"
+msgstr ""
+
+#: 4.0/search.py:140
+msgid "File"
+msgstr ""
+
+#: 4.0/search.py:156
+msgid "Path"
+msgstr ""
+
+#: 4.0/search.py:184
+msgid "Searching..."
+msgstr ""
+
+#: 4.0/search.py:198 4.0/search.py:199
+#, fuzzy
+msgid "Search Stopped"
+msgstr "Zoekdienstaanbieders"
+
+#: 4.0/search.py:215
+msgid "Searching: "
+msgstr ""
+
+#: 4.0/search.py:220
+msgid "Error: insufficient permissions to read folder "
+msgstr ""
+
+#: 4.0/search.py:252
+msgid "Search Completed"
+msgstr ""
+
+#: 4.0/search.py:259
+msgid "Skipping"
+msgstr ""
+
+#: 4.0/search.py:259
+msgid " - directory already searched"
+msgstr ""
+
+#. metadata.json->name
+#. 3.2->settings->cinnamenuProvidersSection->title
+msgid "Cinnamenu"
+msgstr "Cinnamenu"
+
+#. metadata.json->description
+msgid ""
+"A flexible menu providing formatting options, web bookmarks, search provider "
+"support and fuzzy searching."
+msgstr ""
+"Een flexibel menu met opmaakopties, webbladwijzers, ondersteuning voor "
+"zoekmachines en vaag zoeken."
+
+#. 3.2->settings->panel->title
+#. 4.0->settings->behaviour->title
+msgid "Behavior"
+msgstr "Gedrag"
+
+#. 3.2->settings->appearance->title
+#. 4.0->settings->appearance->title
+msgid "Appearance"
+msgstr "Uiterlijk"
+
+#. 3.2->settings->menu->title
+#. 4.0->settings->layout->title
+msgid "Layout and Content"
+msgstr "Vormgeving en inhoud"
+
+#. 3.2->settings->providers->title
+msgid "Search Providers"
+msgstr "Zoekdienstaanbieders"
+
+#. 3.2->settings->extensionProvidersSection->title
+msgid "No search provider extensions found"
+msgstr "Geen extensies aangetroffen voor zoekdiensten"
+
+#. 3.2->settings->panel-appear->title
+#. 3.2->settings->panel-behave->title
+#. 4.0->settings->panel-behave->title
+#. 4.0->settings->panel-appear->title
+msgid "Panel"
+msgstr "Werkbalk"
+
+#. 3.2->settings->menu-behave->title
+#. 3.2->settings->menu-icons->title
+#. 4.0->settings->menu-behave->title
+#. 4.0->settings->menu-icons->title
+msgid "Menu"
+msgstr "Menu"
+
+#. 3.2->settings->menu-layout->title
+#. 4.0->settings->menu-layout->title
+msgid "Layout"
+msgstr "Vormgeving"
+
+#. 3.2->settings->menu-content->title
+#. 4.0->settings->menu-content->title
+msgid "Content"
+msgstr "Inhoud"
+
+#. 3.2->settings->privacy-settings-button->description
+msgid "Recent files settings"
+msgstr "Instellingen voor recente bestanden"
+
+#. 3.2->settings->menu-editor-button->description
+#. 4.0->settings->menu-editor-button->description
+msgid "Open the menu editor"
+msgstr "Open de menubewerker"
+
+#. 3.2->settings->menu-icon-custom->description
+#. 4.0->settings->menu-icon-custom->description
+msgid "Use a custom icon"
+msgstr "Een aangepast pictogram gebruiken"
+
+#. 3.2->settings->menu-icon-custom->tooltip
+#. 4.0->settings->menu-icon-custom->tooltip
+#, fuzzy
+msgid "Use a custom icon in the panel"
+msgstr "Een aangepast pictogram gebruiken"
+
+#. 3.2->settings->menu-icon->description
+#. 3.2->settings->menu-icon->tooltip
+#. 4.0->settings->menu-icon->description
+#. 4.0->settings->menu-icon->tooltip
+msgid "Panel icon"
+msgstr "Paneelpictogram"
+
+#. 3.2->settings->menu-label->description
+#. 4.0->settings->menu-label->description
+msgid "Panel text"
+msgstr "Paneeltekst"
+
+#. 3.2->settings->menu-label->tooltip
+#. 4.0->settings->menu-label->tooltip
+msgid "Text to show beside the panel icon"
+msgstr "Tekst die naast het paneelpictogram moet worden weergegeven"
+
+#. 3.2->settings->category-icon-size->units
+#. 3.2->settings->apps-list-icon-size->units
+#. 3.2->settings->apps-grid-icon-size->units
+#. 3.2->settings->custom-menu-height->units
+#. 4.0->settings->menu-icon-size->units
+#. 4.0->settings->category-icon-size->units
+#. 4.0->settings->apps-list-icon-size->units
+#. 4.0->settings->apps-grid-icon-size->units
+#. 4.0->settings->sidebar-icon-size->units
+msgid "pixels"
+msgstr "beeldpunten"
+
+#. 3.2->settings->category-icon-size->description
+#. 3.2->settings->category-icon-size->tooltip
+#. 4.0->settings->category-icon-size->description
+#. 4.0->settings->category-icon-size->tooltip
+msgid "Category icon size"
+msgstr "Pictogramgrootte voor categorie"
+
+#. 3.2->settings->apps-list-icon-size->description
+#. 3.2->settings->apps-list-icon-size->tooltip
+#. 4.0->settings->apps-list-icon-size->description
+#. 4.0->settings->apps-list-icon-size->tooltip
+msgid "Applications list icon size"
+msgstr "Pictogramgrootte voor toepassingenlijst"
+
+#. 3.2->settings->apps-grid-icon-size->description
+#. 3.2->settings->apps-grid-icon-size->tooltip
+#. 4.0->settings->apps-grid-icon-size->description
+#. 4.0->settings->apps-grid-icon-size->tooltip
+msgid "Applications grid icon size"
+msgstr "Pictogramgrootte voor toepassingenraster"
+
+#. 3.2->settings->overlay-key->description
+#. 4.0->settings->overlay-key->description
+msgid "Keyboard shortcut to open and close the menu"
+msgstr "Sneltoets voor openen en sluiten van het menu"
+
+#. 3.2->settings->activate-on-hover->description
+#. 4.0->settings->activate-on-hover->description
+msgid "Open menu on hover"
+msgstr "Menu openen bij zweven"
+
+#. 3.2->settings->activate-on-hover->tooltip
+#. 4.0->settings->activate-on-hover->tooltip
+#, fuzzy
+msgid "Open the menu when I move my mouse over the panel icon"
+msgstr "Open het menu wanneer ik mijn muispijl er overheen beweeg"
+
+#. 3.2->settings->hover-delay->units
+#. 3.2->settings->tooltip-delay->units
+#. 4.0->settings->hover-delay->units
+msgid "milliseconds"
+msgstr "milliseconden"
+
+#. 3.2->settings->hover-delay->description
+#. 4.0->settings->hover-delay->description
+msgid "Menu hover delay"
+msgstr "Zweefvertraging voor menu"
+
+#. 3.2->settings->enable-animation->description
+#. 4.0->settings->enable-animation->description
+msgid "Use menu animations"
+msgstr "Menu-animaties gebruiken"
+
+#. 3.2->settings->enable-animation->tooltip
+#. 4.0->settings->enable-animation->tooltip
+#, fuzzy
+msgid "Animate the menu on open and close"
+msgstr "Menu-animaties inschakelen voor openen en sluiten"
+
+#. 3.2->settings->category-click->description
+#. 4.0->settings->category-click->description
+msgid "Activate categories on click"
+msgstr "CategorieÃ«n activeren bij klikken"
+
+#. 3.2->settings->category-click->tooltip
+#. 4.0->settings->category-click->tooltip
+#, fuzzy
+msgid "Activate categories on click instead of on hover"
+msgstr "CategorieÃ«n activeren bij klikken"
+
+#. 3.2->settings->enable-autoscroll->description
+#. 4.0->settings->enable-autoscroll->description
+msgid "Enable autoscrolling"
+msgstr "Schakel automatisch scrollen in"
+
+#. 3.2->settings->enable-autoscroll->tooltip
+msgid "Enable autoscrolling in application list"
+msgstr "Automatisch schuiven in toepassingenlijst inschakelen"
+
+#. 3.2->settings->enable-bookmarks->description
+#. 4.0->settings->show-web-bookmarks-category->description
+msgid "Show web bookmarks"
+msgstr "Webbladwijzers tonen"
+
+#. 3.2->settings->enable-bookmarks->tooltip
+#. 4.0->settings->show-web-bookmarks-category->tooltip
+msgid ""
+"Show your browser's web bookmarks in the menu.\n"
+"Note: Install package gir1.2-gda-5.0 to read firefox bookmarks."
+msgstr ""
+
+#. 3.2->settings->enable-windows->description
+msgid "Enable searching of open windows"
+msgstr "Opzoeken van open vensters inschakelen"
+
+#. 3.2->settings->enable-search-providers->description
+msgid "Enable search providers"
+msgstr "Zoekdiensten inschakelen"
+
+#. 3.2->settings->enable-search-providers->tooltip
+msgid "Include search provider results in searches"
+msgstr "Zoekresultaten van zoekmachines opnemen in zoekopdrachten"
+
+#. 3.2->settings->get-providers->description
+msgid "Example Search Providers"
+msgstr "Voorbeeld van zoekdiensten"
+
+#. 3.2->settings->startup-view-mode->description
+#. 4.0->settings->open-on-category->description
+#, fuzzy
+msgid "Open menu on category:"
+msgstr "Menu openen bij zweven"
+
+#. 3.2->settings->startup-view-mode->options
+#. 4.0->settings->applications-view-mode->options
+msgid "List"
+msgstr "Lijst"
+
+#. 3.2->settings->startup-view-mode->options
+#. 4.0->settings->applications-view-mode->options
+msgid "Grid"
+msgstr "Raster"
+
+#. 3.2->settings->startup-view-mode->tooltip
+#. 4.0->settings->open-on-category->tooltip
+msgid "Always open the menu with this category selected"
+msgstr ""
+
+#. 3.2->settings->apps-grid-column-count->units
+msgid "columns"
+msgstr "rijen"
+
+#. 3.2->settings->apps-grid-column-count->description
+#. 3.2->settings->apps-grid-column-count->tooltip
+msgid "Number of columns in apps grid"
+msgstr "Aantal rijen in toepassingenraster"
+
+#. 3.2->settings->show-places->description
+#. 4.0->settings->show-places-category->description
+msgid "Show bookmarks and places"
+msgstr "Bladwijzers en locaties tonen"
+
+#. 3.2->settings->show-places->tooltip
+#. 4.0->settings->show-places-category->tooltip
+#, fuzzy
+msgid "Show bookmarks and places category in the menu"
+msgstr "Bladwijzers en locaties tonen"
+
+#. 3.2->settings->show-application-icons->description
+#. 3.2->settings->show-application-icons->tooltip
+msgid "Show application icons"
+msgstr "Toepassingspictogrammen tonen"
+
+#. 3.2->settings->show-category-icons->description
+#. 3.2->settings->show-category-icons->tooltip
+msgid "Show category icons"
+msgstr "Categoriepictogrammen tonen"
+
+#. 3.2->settings->show-apps-description-on-buttons->description
+#. 3.2->settings->show-apps-description-on-buttons->tooltip
+msgid "Show application descriptions under titles"
+msgstr "Beschrijvingen van toepassingen tonen onder titels"
+
+#. 3.2->settings->show-tooltips->description
+#. 3.2->settings->show-tooltips->tooltip
+msgid "Show tooltips"
+msgstr "Zweeftips tonen"
+
+#. 3.2->settings->tooltip-delay->description
+#. 3.2->settings->tooltip-delay->tooltip
+msgid "Tooltip delay"
+msgstr "Vertraging voor zweeftip"
+
+#. 3.2->settings->enable-custom-menu-height->description
+#. 3.2->settings->enable-custom-menu-height->tooltip
+msgid "Use a custom menu height"
+msgstr "Een aangepaste menuhoogte gebruiken"
+
+#. 3.2->settings->custom-menu-height->description
+#. 3.2->settings->custom-menu-height->tooltip
+msgid "Custom menu height"
+msgstr "Aangepaste menuhoogte"
+
+#. 4.0->settings->applications-view-mode->description
+msgid "Applications view mode"
+msgstr "Toepassingsweergavemodus"
+
+#. 4.0->settings->applications-view-mode->tooltip
+msgid "View applications as list or grid"
+msgstr "Bekijk applicaties als lijst of raster"
+
+#. 4.0->settings->description-placement->description
+msgid "Application description placement"
+msgstr "Plaatsing van applicatiebeschrijving"
+
+#. 4.0->settings->description-placement->options
+msgid "Tooltips"
+msgstr "Tooltips"
+
+#. 4.0->settings->description-placement->options
+msgid "Under titles"
+msgstr "Onder titels"
+
+#. 4.0->settings->description-placement->options
+#. 4.0->settings->web-search-option->options
+msgid "None"
+msgstr "Geen"
+
+#. 4.0->settings->description-placement->tooltip
+msgid "Choose where to show application descriptions"
+msgstr "Kies waar applicatiebeschrijvingen moeten worden weergegeven"
+
+#. 4.0->settings->sidebar-placement->description
+msgid "Session buttons location"
+msgstr "Locatie van sessieknoppen"
+
+#. 4.0->settings->sidebar-placement->options
+msgid "Top"
+msgstr "Top"
+
+#. 4.0->settings->sidebar-placement->options
+msgid "Bottom"
+msgstr "Bodem"
+
+#. 4.0->settings->sidebar-placement->options
+msgid "Left"
+msgstr "Links"
+
+#. 4.0->settings->sidebar-placement->options
+msgid "Right"
+msgstr "Rechtsaf"
+
+#. 4.0->settings->sidebar-placement->tooltip
+#, fuzzy
+msgid "Choose where to show the session buttons (quit, logout, etc.)"
+msgstr "Kies waar u de sessieknoppen (stoppen, afmelden, enz.) Wilt weergeven"
+
+#. 4.0->settings->info-box->description
+msgid ""
+"\n"
+"Info/tip: Drag on the menu edge to change the menu size.\n"
+msgstr ""
+
+#. 4.0->settings->add-favorites->description
+msgid "Add favorites to session buttons"
+msgstr "Voeg favorieten toe aan sessieknoppen"
+
+#. 4.0->settings->add-favorites->tooltip
+msgid "Show your favorite app icons next to the session buttons"
+msgstr "Toon uw favoriete app-pictogrammen naast de sessieknoppen"
+
+#. 4.0->settings->show-favorite-apps-category->description
+msgid "Show favorite apps category"
+msgstr ""
+
+#. 4.0->settings->show-favorite-apps-category->tooltip
+#, fuzzy
+msgid "Show your favorite apps category in the menu"
+msgstr "Bladwijzers en locaties tonen"
+
+#. 4.0->settings->show-home-folder-category->description
+msgid "Show home folder"
+msgstr ""
+
+#. 4.0->settings->show-home-folder-category->tooltip
+#, fuzzy
+msgid "Show home folder category in the menu"
+msgstr "Bladwijzers en locaties tonen"
+
+#. 4.0->settings->open-on-category->options
+msgid "Last used category"
+msgstr ""
+
+#. 4.0->settings->enable-autoscroll->tooltip
+#, fuzzy
+msgid "Autoscroll the application list on mouse hover"
+msgstr "Automatisch schuiven in toepassingenlijst inschakelen"
+
+#. 4.0->settings->web-search-option->description
+msgid "Web search option"
+msgstr ""
+
+#. 4.0->settings->web-search-option->options
+msgid "Google"
+msgstr ""
+
+#. 4.0->settings->web-search-option->options
+msgid "Bing"
+msgstr ""
+
+#. 4.0->settings->web-search-option->options
+msgid "Yahoo"
+msgstr ""
+
+#. 4.0->settings->web-search-option->options
+msgid "DuckDuckGo"
+msgstr ""
+
+#. 4.0->settings->web-search-option->tooltip
+msgid "Show an internet search option in search results"
+msgstr ""
+
+#. 4.0->settings->show-hidden-files->description
+msgid "Show hidden files"
+msgstr ""
+
+#. 4.0->settings->show-hidden-files->tooltip
+msgid "Show hidden files in folder view"
+msgstr ""
+
+#. 4.0->settings->menu-icon-size-custom->description
+#, fuzzy
+msgid "Use a custom icon size"
+msgstr "Een aangepast pictogram gebruiken"
+
+#. 4.0->settings->menu-icon-size-custom->tooltip
+#, fuzzy
+msgid "Use a custom size for the panel icon"
+msgstr "Een aangepast pictogram gebruiken"
+
+#. 4.0->settings->menu-icon-size->description
+#, fuzzy
+msgid "Panel icon size"
+msgstr "Paneelpictogram"
+
+#. 4.0->settings->menu-icon-size->tooltip
+#, fuzzy
+msgid "Choose a custom size for the panel icon"
+msgstr "Een aangepast pictogram gebruiken"
+
+#. 4.0->settings->sidebar-icon-size->description
+#. 4.0->settings->sidebar-icon-size->tooltip
+#, fuzzy
+msgid "Session buttons icon size"
+msgstr "Locatie van sessieknoppen"
+
+#. 4.0->settings->use-box-style->description
+#. 4.0->settings->use-box-style->tooltip
+#, fuzzy
+msgid "Use session buttons box style"
+msgstr "Locatie van sessieknoppen"
+
+#~ msgid "No recent documents"
+#~ msgstr "Geen recente documenten"
+
+#~ msgid "Remove favorite"
+#~ msgstr "Verwijder favoriet"
+
+#~ msgid "Show your browser's web bookmarks in the menu"
+#~ msgstr "Toon de webbladwijzers van uw browser in het menu"
+
+#~ msgid "Startup applications view mode"
+#~ msgstr "Weergavemodus van opstarttoepassingen"
+
+#~ msgid "px"
+#~ msgstr "bp"
+
+#~ msgid "Failed to launch \"%s\""
+#~ msgstr "Kon '%s' niet starten"
+
+#~ msgid "Press this button to customize your privacy settings."
+#~ msgstr "Klik op deze knop om uw privÃ©leven-instellingen aan te passen."
+
+#~ msgid "Press this button to customize your menu entries."
+#~ msgstr "Klik op deze knop om uw menu-onderdelen aan te passen."
+
+#~ msgid "Unchecking this allows the theme to set the icon"
+#~ msgstr "Als u dit uitvinkt zal het thema het pictogram instellen"
+
+#~ msgid "Icon"
+#~ msgstr "Pictogram"
+
+#~ msgid "Set the custom menu button icon name"
+#~ msgstr "Stel de naam in van het aangepaste menuknoppictogram"
+
+#~ msgid "Enable opening the menu when the mouse enters the applet"
+#~ msgstr ""
+#~ "Schakel openen van het menu in wanneer de muispijl de hulptoepassing "
+#~ "binnengaat"
+
+#~ msgid "Delay between switching categories"
+#~ msgstr "Vertraging tussen het wisselen van categorieÃ«n"
+
+#~ msgid ""
+#~ "When enabled, category views are activated on click instead of on hover."
+#~ msgstr ""
+#~ "Indien ingeschakeld worden categorieweergaven geactiveerd bij klikken in "
+#~ "plaats van bij zweven."
+
+#~ msgid ""
+#~ "Choose whether or not to enable smooth autoscrolling in the application "
+#~ "list."
+#~ msgstr ""
+#~ "Kies of soepel automatisch schuiven moet worden ingeschakeld in de "
+#~ "toepassingenlijst."
+
+#~ msgid "Choose whether or not bookmarks are indexed in the menu."
+#~ msgstr "Kies of webbladwijzers al dan niet worden opgenomen in het menu."
+
+#~ msgid "Choose whether or not open windows are indexed in menu searches."
+#~ msgstr ""
+#~ "Kies of open vensters al dan niet worden opgenomen in menu-zoekresultaten."
+
+#~ msgid "Choose whether or not to show bookmarks and places in the menu."
+#~ msgstr ""
+#~ "Kies of bladwijzers en locaties al dan niet worden weergegeven in het "
+#~ "menu."
+
+#~ msgid "Choose whether or not to show icons on applications."
+#~ msgstr ""
+#~ "Kies of toepassingspictogrammen al dan niet worden weergegeven in het "
+#~ "menu."
+
+#~ msgid "Choose whether or not to show icons on categories."
+#~ msgstr "Kies of categoriepictogrammen al dan niet worden getoond."
+
+#~ msgid ""
+#~ "Choose whether or not to show the application description on the "
+#~ "application buttons."
+#~ msgstr ""
+#~ "Kies of de beschrijving van de toepassing wordt getoond op de knop van de "
+#~ "toepassing."
+
+#~ msgid ""
+#~ "When enabled, tooltips containing the item's name or description is shown "
+#~ "when hovered over."
+#~ msgstr ""
+#~ "Indien ingeschakeld zullen er zweeftips worden getoond met de naam of "
+#~ "beschrijving van het menu-onderdeel."
+
+#~ msgid ""
+#~ "The delay time in milliseconds for tooltips when hovering over a menu "
+#~ "item."
+#~ msgstr ""
+#~ "De vertraging in milliseconden voor het verschijnen van zweeftips bij "
+#~ "menu-onderdelen."
+
+#~ msgid "Please provide your password to uninstall this application"
+#~ msgstr "Voer a.u.b. uw wachtwoord in om deze toepassing te deÃ¯nstalleren"
+
+#~ msgid "Enable filesystem path entry in search box"
+#~ msgstr "Bestandssysteempad in zoekveld inschakelen"
+
+#~ msgid "Allows path entry in the menu search box."
+#~ msgstr "Maakt bestandspad mogelijk in het menuzoekveld."

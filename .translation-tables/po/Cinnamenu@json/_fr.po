@@ -1,0 +1,254 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-03-07 10:42+0000\n"
+"PO-Revision-Date: 2020-08-12 21:07+0200\n"
+"Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. 4.0->settings->open-on-category->options
+#: 3.2 4.0
+msgid "All applications"
+msgstr ""
+
+#: 3.2
+msgid "Recent files"
+msgstr ""
+
+#. 4.0->settings->open-on-category->options
+#: 3.2 4.0
+msgid "Favorite apps"
+msgstr ""
+
+#: 3.2 4.0
+msgid "Lock screen"
+msgstr ""
+
+#: 4.0
+msgid "Find files..."
+msgstr ""
+
+#: 4.0
+msgid "Search web for"
+msgstr ""
+
+#: 4.0
+msgid "Too many entries - showing first 1000 entries only"
+msgstr ""
+
+#: 4.0
+msgid "Favorites"
+msgstr ""
+
+#. 4.0->settings->open-on-category->options
+#: 4.0
+msgid "Recent"
+msgstr ""
+
+#. 4.0->settings->open-on-category->options
+#: 4.0
+msgid "Home folder"
+msgstr ""
+
+#: 4.0
+msgid "This file is no longer available"
+msgstr ""
+
+#: 4.0
+msgid "Open with"
+msgstr ""
+
+#: 4.0
+msgid "Other application..."
+msgstr ""
+
+#: 4.0 4.0/search.py:48
+msgid "Open containing folder"
+msgstr ""
+
+#: 4.0
+msgid "Move to trash"
+msgstr ""
+
+#: 4.0
+msgid "Error while moving file to trash:"
+msgstr ""
+
+#: 4.0/search.py:43
+msgid "Open"
+msgstr ""
+
+#: 4.0/search.py:85
+msgid "Search"
+msgstr ""
+
+#: 4.0/search.py:106
+msgid "Start in"
+msgstr ""
+
+#: 4.0/search.py:107
+msgid "Select a folder"
+msgstr ""
+
+#: 4.0/search.py:113
+msgid "Follow symlinks"
+msgstr ""
+
+#: 4.0/search.py:117
+msgid "Search hidden"
+msgstr ""
+
+#: 4.0/search.py:121
+msgid "Use regular expressions"
+msgstr ""
+
+#: 4.0/search.py:125
+msgid "Stop"
+msgstr ""
+
+#: 4.0/search.py:140
+msgid "File"
+msgstr ""
+
+#: 4.0/search.py:156
+msgid "Path"
+msgstr ""
+
+#: 4.0/search.py:184
+msgid "Searching..."
+msgstr ""
+
+#: 4.0/search.py:198 4.0/search.py:199
+msgid "Search Stopped"
+msgstr ""
+
+#: 4.0/search.py:215
+msgid "Searching: "
+msgstr ""
+
+#: 4.0/search.py:220
+msgid "Error: insufficient permissions to read folder "
+msgstr ""
+
+#: 4.0/search.py:252
+msgid "Search Completed"
+msgstr ""
+
+#: 4.0/search.py:259
+msgid "Skipping"
+msgstr ""
+
+#: 4.0/search.py:259
+msgid " - directory already searched"
+msgstr ""
+
+#. 3.2->settings->enable-bookmarks->tooltip
+#. 4.0->settings->show-web-bookmarks-category->tooltip
+msgid ""
+"Show your browser's web bookmarks in the menu.\n"
+"Note: Install package gir1.2-gda-5.0 to read firefox bookmarks."
+msgstr ""
+
+#. 3.2->settings->startup-view-mode->description
+#. 4.0->settings->open-on-category->description
+msgid "Open menu on category:"
+msgstr ""
+
+#. 3.2->settings->startup-view-mode->tooltip
+#. 4.0->settings->open-on-category->tooltip
+msgid "Always open the menu with this category selected"
+msgstr ""
+
+#. 4.0->settings->sidebar-placement->tooltip
+msgid "Choose where to show the session buttons (quit, logout, etc.)"
+msgstr ""
+
+#. 4.0->settings->info-box->description
+msgid ""
+"\n"
+"Info/tip: Drag on the menu edge to change the menu size.\n"
+msgstr ""
+
+#. 4.0->settings->show-favorite-apps-category->description
+msgid "Show favorite apps category"
+msgstr ""
+
+#. 4.0->settings->show-favorite-apps-category->tooltip
+msgid "Show your favorite apps category in the menu"
+msgstr ""
+
+#. 4.0->settings->show-home-folder-category->description
+msgid "Show home folder"
+msgstr ""
+
+#. 4.0->settings->show-home-folder-category->tooltip
+msgid "Show home folder category in the menu"
+msgstr ""
+
+#. 4.0->settings->open-on-category->options
+msgid "Last used category"
+msgstr ""
+
+#. 4.0->settings->enable-autoscroll->tooltip
+msgid "Autoscroll the application list on mouse hover"
+msgstr ""
+
+#. 4.0->settings->web-search-option->description
+msgid "Web search option"
+msgstr ""
+
+#. 4.0->settings->web-search-option->options
+msgid "Google"
+msgstr ""
+
+#. 4.0->settings->web-search-option->options
+msgid "Bing"
+msgstr ""
+
+#. 4.0->settings->web-search-option->options
+msgid "Yahoo"
+msgstr ""
+
+#. 4.0->settings->web-search-option->options
+msgid "DuckDuckGo"
+msgstr ""
+
+#. 4.0->settings->web-search-option->tooltip
+msgid "Show an internet search option in search results"
+msgstr ""
+
+#. 4.0->settings->show-hidden-files->description
+msgid "Show hidden files"
+msgstr ""
+
+#. 4.0->settings->show-hidden-files->tooltip
+msgid "Show hidden files in folder view"
+msgstr ""
+
+#. 4.0->settings->menu-icon-size-custom->description
+msgid "Use a custom icon size"
+msgstr ""
+
+#. 4.0->settings->menu-icon-size-custom->tooltip
+msgid "Use a custom size for the panel icon"
+msgstr ""
+
+#. 4.0->settings->menu-icon-size->description
+msgid "Panel icon size"
+msgstr ""
+
+#. 4.0->settings->menu-icon-size->tooltip
+msgid "Choose a custom size for the panel icon"
+msgstr ""

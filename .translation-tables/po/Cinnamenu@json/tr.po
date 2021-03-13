@@ -1,0 +1,850 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Cinnamenu 3.2.4\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-03-07 10:42+0000\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Gökhan Gökkaya <gokhanlnx@gmail.com>\n"
+"Language-Team: tr\n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+
+#: 3.2
+msgid "Type to search..."
+msgstr "Aramak için yaz..."
+
+#: 3.2 4.0
+msgid "Initializing"
+msgstr "Başlatılıyor"
+
+#: 3.2 4.0
+msgid "No description available"
+msgstr "Açıklama mevcut değil"
+
+#. 4.0->settings->open-on-category->options
+#: 3.2 4.0
+msgid "All applications"
+msgstr "Tüm uygulamalar"
+
+#. 4.0->settings->open-on-category->options
+#: 3.2 4.0
+msgid "Places"
+msgstr "Yerler"
+
+#: 3.2
+msgid "Recent files"
+msgstr "Son dosyalar"
+
+#: 3.2 4.0
+msgid "Bookmarks"
+msgstr "Yer İmleri"
+
+#. 4.0->settings->open-on-category->options
+#: 3.2 4.0
+msgid "Favorite apps"
+msgstr "Favori uygulamalar"
+
+#: 3.2
+msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
+msgstr "Firefox ve Midori yer imleri için gir1.2-gda-5.0 paketi gerek."
+
+#: 3.2 4.0
+msgid "Clear List"
+msgstr "Listeyi Temizle"
+
+#: 3.2 4.0
+msgid "No recent files"
+msgstr "Son kullanılan dosya yok"
+
+#: 3.2
+msgid "Account details"
+msgstr "Hesap ayrıntıları"
+
+#: 3.2
+msgid "Grid View"
+msgstr "Izgara Görünümü"
+
+#: 3.2
+msgid "List View"
+msgstr "Liste Görünümü"
+
+#: 3.2
+msgid "Switch to grid view"
+msgstr "Izgara görünümüne geç"
+
+#: 3.2
+msgid "Switch to list view"
+msgstr "Liste görünümüne geç"
+
+#: 3.2 4.0
+msgid "Lock screen"
+msgstr "Ekranı kilitle"
+
+#: 3.2 4.0
+msgid "Lock the screen"
+msgstr "Ekranı kilitle"
+
+#: 3.2 4.0
+msgid "Logout"
+msgstr "Çıkış Yap"
+
+#: 3.2 4.0
+msgid "Leave the session"
+msgstr "Oturumu açık tut"
+
+#: 3.2 4.0
+msgid "Quit"
+msgstr "Çık"
+
+#: 3.2 4.0
+msgid "Shutdown the computer"
+msgstr "Bilgisayarı kapat"
+
+#: 3.2
+msgid "Home"
+msgstr "Başlangıç"
+
+#: 3.2
+msgid "Computer"
+msgstr "Bilgisayar"
+
+#: 3.2
+msgid "Browse network"
+msgstr "Ağa göz at"
+
+#: 3.2 4.0
+msgid "Run with NVIDIA GPU"
+msgstr "NVIDIA GPU ile çalıştır"
+
+#: 3.2 4.0
+msgid "Add to panel"
+msgstr "Panele ekle"
+
+#: 3.2 4.0
+msgid "Add to desktop"
+msgstr "Masaüstüne ekle"
+
+#: 3.2 4.0
+msgid "Remove from favorites"
+msgstr "Favorilerden kaldır"
+
+#: 3.2 4.0
+msgid "Add to favorites"
+msgstr "Favorilere ekle"
+
+#: 3.2
+msgid "Uninstall"
+msgstr "Kaldır"
+
+#: 4.0
+msgid "Find files..."
+msgstr "Dosyaları bul..."
+
+#: 4.0
+msgid "Please wait..."
+msgstr "Lütfen bekleyin..."
+
+#: 4.0
+msgid "Solution:"
+msgstr "Çözüm:"
+
+#: 4.0
+msgid "Click to copy"
+msgstr "Kopyalamak için tıkla"
+
+#: 4.0
+msgid "Search web for"
+msgstr "İnternette arama seçeneği için"
+
+#: 4.0
+msgid "Too many entries - showing first 1000 entries only"
+msgstr "Çok fazla girdi - sadece ilk 1000 girdi gösteriliyor"
+
+#: 4.0
+msgid "Favorites"
+msgstr "Favoriler"
+
+#. 4.0->settings->open-on-category->options
+#: 4.0
+#, fuzzy
+msgid "Recent"
+msgstr "Son dosyalar"
+
+#. 4.0->settings->open-on-category->options
+#: 4.0
+msgid "Home folder"
+msgstr "Ev dizini"
+
+#. 3.2->settings->resetCategoryOrder-button->description
+#: 4.0
+msgid "Reset category order"
+msgstr "Kategori sırasını sıfırla"
+
+#: 4.0
+msgid "This file is no longer available"
+msgstr "Bu dosya artık mevcut değil"
+
+#: 4.0
+msgid "Open with"
+msgstr "Birlikte aç"
+
+#: 4.0
+msgid "Other application..."
+msgstr "Diğer uygulamalar..."
+
+#: 4.0 4.0/search.py:48
+msgid "Open containing folder"
+msgstr "İçeren dizini aç"
+
+#: 4.0
+msgid "Move to trash"
+msgstr "Çöpe taşı"
+
+#: 4.0
+msgid "Error while moving file to trash:"
+msgstr "Dosya çöpe taşınırken hata:"
+
+#: 4.0/search.py:43
+#, fuzzy
+msgid "Open"
+msgstr "Aç..."
+
+#: 4.0/search.py:85
+msgid "Search"
+msgstr "Ara"
+
+#: 4.0/search.py:106
+msgid "Start in"
+msgstr "Şurada ara"
+
+#: 4.0/search.py:107
+msgid "Select a folder"
+msgstr "Bir dizin seç"
+
+#: 4.0/search.py:113
+msgid "Follow symlinks"
+msgstr "Sembolik bağlantıları takip et"
+
+#: 4.0/search.py:117
+msgid "Search hidden"
+msgstr "Gizlileri ara"
+
+#: 4.0/search.py:121
+msgid "Use regular expressions"
+msgstr "Düzenli ifadeler kullan"
+
+#: 4.0/search.py:125
+msgid "Stop"
+msgstr "Durdur"
+
+#: 4.0/search.py:140
+msgid "File"
+msgstr "Dosya"
+
+#: 4.0/search.py:156
+msgid "Path"
+msgstr "Yol"
+
+#: 4.0/search.py:184
+msgid "Searching..."
+msgstr "Aranıyor..."
+
+#: 4.0/search.py:198 4.0/search.py:199
+msgid "Search Stopped"
+msgstr "Arama Durduruldu"
+
+#: 4.0/search.py:215
+msgid "Searching: "
+msgstr "Aranıyor: "
+
+#: 4.0/search.py:220
+msgid "Error: insufficient permissions to read folder "
+msgstr "Hata: Yetersiz dizin okuma izni "
+
+#: 4.0/search.py:252
+msgid "Search Completed"
+msgstr "Arama Tamamlandı"
+
+#: 4.0/search.py:259
+msgid "Skipping"
+msgstr "Atlanıyor"
+
+#: 4.0/search.py:259
+msgid " - directory already searched"
+msgstr " - dizini zaten arandı"
+
+#. metadata.json->name
+#. 3.2->settings->cinnamenuProvidersSection->title
+msgid "Cinnamenu"
+msgstr "Cinnamenü"
+
+#. metadata.json->description
+msgid ""
+"A flexible menu providing formatting options, web bookmarks, search provider "
+"support and fuzzy searching."
+msgstr ""
+"Biçimlendirme seçenekleri, web yer imleri, arama sağlayıcı desteği ve "
+"eşleşik arama sağlayan esnek bir menü."
+
+#. 3.2->settings->panel->title
+#. 4.0->settings->behaviour->title
+msgid "Behavior"
+msgstr "Davranış"
+
+#. 3.2->settings->appearance->title
+#. 4.0->settings->appearance->title
+msgid "Appearance"
+msgstr "Görünüm"
+
+#. 3.2->settings->menu->title
+#. 4.0->settings->layout->title
+msgid "Layout and Content"
+msgstr "Yerleşim ve İçerik"
+
+#. 3.2->settings->providers->title
+msgid "Search Providers"
+msgstr "Arama Sağlayıcıları"
+
+#. 3.2->settings->extensionProvidersSection->title
+msgid "No search provider extensions found"
+msgstr "Hiçbir arama sağlayıcı eklentisi bulunamadı"
+
+#. 3.2->settings->panel-appear->title
+#. 3.2->settings->panel-behave->title
+#. 4.0->settings->panel-behave->title
+#. 4.0->settings->panel-appear->title
+msgid "Panel"
+msgstr "Panel"
+
+#. 3.2->settings->menu-behave->title
+#. 3.2->settings->menu-icons->title
+#. 4.0->settings->menu-behave->title
+#. 4.0->settings->menu-icons->title
+msgid "Menu"
+msgstr "Menü"
+
+#. 3.2->settings->menu-layout->title
+#. 4.0->settings->menu-layout->title
+msgid "Layout"
+msgstr "Düzen"
+
+#. 3.2->settings->menu-content->title
+#. 4.0->settings->menu-content->title
+msgid "Content"
+msgstr "İçerik"
+
+#. 3.2->settings->privacy-settings-button->description
+msgid "Recent files settings"
+msgstr "Son dosya ayarları"
+
+#. 3.2->settings->menu-editor-button->description
+#. 4.0->settings->menu-editor-button->description
+msgid "Open the menu editor"
+msgstr "Menü düzenleyiciyi aç"
+
+#. 3.2->settings->menu-icon-custom->description
+#. 4.0->settings->menu-icon-custom->description
+msgid "Use a custom icon"
+msgstr "Özel bir simge kullan"
+
+#. 3.2->settings->menu-icon-custom->tooltip
+#. 4.0->settings->menu-icon-custom->tooltip
+msgid "Use a custom icon in the panel"
+msgstr "Özel bir simge kullan"
+
+#. 3.2->settings->menu-icon->description
+#. 3.2->settings->menu-icon->tooltip
+#. 4.0->settings->menu-icon->description
+#. 4.0->settings->menu-icon->tooltip
+msgid "Panel icon"
+msgstr "Panel simgesi"
+
+#. 3.2->settings->menu-label->description
+#. 4.0->settings->menu-label->description
+msgid "Panel text"
+msgstr "Panel metni"
+
+#. 3.2->settings->menu-label->tooltip
+#. 4.0->settings->menu-label->tooltip
+msgid "Text to show beside the panel icon"
+msgstr "Panel simgesinin yanında gösterilecek metin"
+
+#. 3.2->settings->category-icon-size->units
+#. 3.2->settings->apps-list-icon-size->units
+#. 3.2->settings->apps-grid-icon-size->units
+#. 3.2->settings->custom-menu-height->units
+#. 4.0->settings->menu-icon-size->units
+#. 4.0->settings->category-icon-size->units
+#. 4.0->settings->apps-list-icon-size->units
+#. 4.0->settings->apps-grid-icon-size->units
+#. 4.0->settings->sidebar-icon-size->units
+msgid "pixels"
+msgstr "piksel"
+
+#. 3.2->settings->category-icon-size->description
+#. 3.2->settings->category-icon-size->tooltip
+#. 4.0->settings->category-icon-size->description
+#. 4.0->settings->category-icon-size->tooltip
+msgid "Category icon size"
+msgstr "Kategori simge boyutu"
+
+#. 3.2->settings->apps-list-icon-size->description
+#. 3.2->settings->apps-list-icon-size->tooltip
+#. 4.0->settings->apps-list-icon-size->description
+#. 4.0->settings->apps-list-icon-size->tooltip
+msgid "Applications list icon size"
+msgstr "Uygulama listesi simge boyutu"
+
+#. 3.2->settings->apps-grid-icon-size->description
+#. 3.2->settings->apps-grid-icon-size->tooltip
+#. 4.0->settings->apps-grid-icon-size->description
+#. 4.0->settings->apps-grid-icon-size->tooltip
+msgid "Applications grid icon size"
+msgstr "Uygulama listesi ızgara simge boyutu"
+
+#. 3.2->settings->overlay-key->description
+#. 4.0->settings->overlay-key->description
+msgid "Keyboard shortcut to open and close the menu"
+msgstr "Menüyü açıp kapatmak için klavye kısayolu"
+
+#. 3.2->settings->activate-on-hover->description
+#. 4.0->settings->activate-on-hover->description
+msgid "Open menu on hover"
+msgstr "Fareyle üzerine gelindiğinde menüyü aç"
+
+#. 3.2->settings->activate-on-hover->tooltip
+#. 4.0->settings->activate-on-hover->tooltip
+msgid "Open the menu when I move my mouse over the panel icon"
+msgstr "Fareyi üstüne getirdiğimde menüyü aç"
+
+#. 3.2->settings->hover-delay->units
+#. 3.2->settings->tooltip-delay->units
+#. 4.0->settings->hover-delay->units
+msgid "milliseconds"
+msgstr "milisaniye"
+
+#. 3.2->settings->hover-delay->description
+#. 4.0->settings->hover-delay->description
+msgid "Menu hover delay"
+msgstr "Menü bekleme gecikmesi"
+
+#. 3.2->settings->enable-animation->description
+#. 4.0->settings->enable-animation->description
+msgid "Use menu animations"
+msgstr "Menü animasyonları kullan"
+
+#. 3.2->settings->enable-animation->tooltip
+#. 4.0->settings->enable-animation->tooltip
+msgid "Animate the menu on open and close"
+msgstr "Açarken ve kapanırken menü animasyonuna izin ver"
+
+#. 3.2->settings->category-click->description
+#. 4.0->settings->category-click->description
+msgid "Activate categories on click"
+msgstr "Kategorileri tıklatarak açın"
+
+#. 3.2->settings->category-click->tooltip
+#. 4.0->settings->category-click->tooltip
+msgid "Activate categories on click instead of on hover"
+msgstr "Kategorileri tıklatarak açın"
+
+#. 3.2->settings->enable-autoscroll->description
+#. 4.0->settings->enable-autoscroll->description
+msgid "Enable autoscrolling"
+msgstr "Uygulama listesinde otomatik kaydırmayı etkinleştir"
+
+#. 3.2->settings->enable-autoscroll->tooltip
+msgid "Enable autoscrolling in application list"
+msgstr "Uygulama listesinde otomatik kaydırmayı etkinleştir"
+
+#. 3.2->settings->enable-bookmarks->description
+#. 4.0->settings->show-web-bookmarks-category->description
+msgid "Show web bookmarks"
+msgstr "Tarayıcı yer imlerini göster"
+
+#. 3.2->settings->enable-bookmarks->tooltip
+#. 4.0->settings->show-web-bookmarks-category->tooltip
+msgid ""
+"Show your browser's web bookmarks in the menu.\n"
+"Note: Install package gir1.2-gda-5.0 to read firefox bookmarks."
+msgstr ""
+"Tarayıcının sık kullanılanlarını menüde göster.\n"
+"Not: Firefox sık kullanılanlarını okumak için gir1.2-gda-5.0 paketini kurun."
+
+#. 3.2->settings->enable-windows->description
+msgid "Enable searching of open windows"
+msgstr "Açık pencerelerde aramayı etkinleştir"
+
+#. 3.2->settings->enable-search-providers->description
+msgid "Enable search providers"
+msgstr "Arama sağlayıcılarını etkinleştir"
+
+#. 3.2->settings->enable-search-providers->tooltip
+msgid "Include search provider results in searches"
+msgstr ""
+"Arama sağlayıcısı sonuçlarının menü aramalarına dahil edilip edilmeyeceğini "
+"seçin"
+
+#. 3.2->settings->get-providers->description
+msgid "Example Search Providers"
+msgstr "Arama Sağlayıcıları Eklentileri"
+
+#. 3.2->settings->startup-view-mode->description
+#. 4.0->settings->open-on-category->description
+msgid "Open menu on category:"
+msgstr "Menünün üstünde açılacağı kategori:"
+
+#. 3.2->settings->startup-view-mode->options
+#. 4.0->settings->applications-view-mode->options
+msgid "List"
+msgstr "Liste"
+
+#. 3.2->settings->startup-view-mode->options
+#. 4.0->settings->applications-view-mode->options
+msgid "Grid"
+msgstr "Izgara"
+
+#. 3.2->settings->startup-view-mode->tooltip
+#. 4.0->settings->open-on-category->tooltip
+msgid "Always open the menu with this category selected"
+msgstr "Menü daima bu seçilen kategori ile açılır"
+
+#. 3.2->settings->apps-grid-column-count->units
+msgid "columns"
+msgstr "sütun"
+
+#. 3.2->settings->apps-grid-column-count->description
+#. 3.2->settings->apps-grid-column-count->tooltip
+msgid "Number of columns in apps grid"
+msgstr "Uygulama kılavuzundaki sütun sayısı"
+
+#. 3.2->settings->show-places->description
+#. 4.0->settings->show-places-category->description
+msgid "Show bookmarks and places"
+msgstr "Yer imlerini ve yerleri göster"
+
+#. 3.2->settings->show-places->tooltip
+#. 4.0->settings->show-places-category->tooltip
+msgid "Show bookmarks and places category in the menu"
+msgstr "Yer imlerini ve yerleri göster"
+
+#. 3.2->settings->show-application-icons->description
+#. 3.2->settings->show-application-icons->tooltip
+msgid "Show application icons"
+msgstr "Uygulama simgelerini göster"
+
+#. 3.2->settings->show-category-icons->description
+#. 3.2->settings->show-category-icons->tooltip
+msgid "Show category icons"
+msgstr "Kategori simgelerini göster"
+
+#. 3.2->settings->show-apps-description-on-buttons->description
+#. 3.2->settings->show-apps-description-on-buttons->tooltip
+msgid "Show application descriptions under titles"
+msgstr "Uygulama açıklamalarını listede göster"
+
+#. 3.2->settings->show-tooltips->description
+#. 3.2->settings->show-tooltips->tooltip
+msgid "Show tooltips"
+msgstr "Araç ipuçlarını göster"
+
+#. 3.2->settings->tooltip-delay->description
+#. 3.2->settings->tooltip-delay->tooltip
+msgid "Tooltip delay"
+msgstr "Araç ipucu gecikmesi"
+
+#. 3.2->settings->enable-custom-menu-height->description
+#. 3.2->settings->enable-custom-menu-height->tooltip
+msgid "Use a custom menu height"
+msgstr "Özel bir menü yüksekliği kullanın"
+
+#. 3.2->settings->custom-menu-height->description
+#. 3.2->settings->custom-menu-height->tooltip
+msgid "Custom menu height"
+msgstr "Özel menü yüksekliği"
+
+#. 4.0->settings->applications-view-mode->description
+msgid "Applications view mode"
+msgstr "Uygulama görüntüleme modu"
+
+#. 4.0->settings->applications-view-mode->tooltip
+msgid "View applications as list or grid"
+msgstr "Uygulamaları liste veya ızgara olarak görüntüleme"
+
+#. 4.0->settings->description-placement->description
+msgid "Application description placement"
+msgstr "Uygulama açıklaması yerleşimi"
+
+#. 4.0->settings->description-placement->options
+msgid "Tooltips"
+msgstr "Araç ipuçları"
+
+#. 4.0->settings->description-placement->options
+msgid "Under titles"
+msgstr "Başlıkların altında"
+
+#. 4.0->settings->description-placement->options
+#. 4.0->settings->web-search-option->options
+msgid "None"
+msgstr "Yok"
+
+#. 4.0->settings->description-placement->tooltip
+msgid "Choose where to show application descriptions"
+msgstr "Uygulama açıklamalarının nerede gösterileceğini seçin"
+
+#. 4.0->settings->sidebar-placement->description
+msgid "Session buttons location"
+msgstr "Oturum düğmelerinin konumu"
+
+#. 4.0->settings->sidebar-placement->options
+msgid "Top"
+msgstr "Tepede"
+
+#. 4.0->settings->sidebar-placement->options
+msgid "Bottom"
+msgstr "Alt bölme"
+
+#. 4.0->settings->sidebar-placement->options
+msgid "Left"
+msgstr "Sola"
+
+#. 4.0->settings->sidebar-placement->options
+msgid "Right"
+msgstr "Sağa"
+
+#. 4.0->settings->sidebar-placement->tooltip
+msgid "Choose where to show the session buttons (quit, logout, etc.)"
+msgstr "Oturum düğmelerinin (kapat, çıkış vb.) nerede gösterileceğini seç"
+
+#. 4.0->settings->info-box->description
+msgid ""
+"\n"
+"Info/tip: Drag on the menu edge to change the menu size.\n"
+msgstr ""
+"\n"
+"Bilgi/ipucu: Menü boyutunu köşeden tutarak değiştirebilirsiniz.\n"
+
+#. 4.0->settings->add-favorites->description
+msgid "Add favorites to session buttons"
+msgstr "Oturum düğmelerinin yanına sık kullanılanları ekle"
+
+#. 4.0->settings->add-favorites->tooltip
+msgid "Show your favorite app icons next to the session buttons"
+msgstr "Oturum düğmelerinin yanında favori uygulama simgelerinizi gösterin"
+
+#. 4.0->settings->show-favorite-apps-category->description
+msgid "Show favorite apps category"
+msgstr "Favori uygulamalar kategorisini göster"
+
+#. 4.0->settings->show-favorite-apps-category->tooltip
+msgid "Show your favorite apps category in the menu"
+msgstr "Favori uygulamalar kategorisini menüde gösterir"
+
+#. 4.0->settings->show-home-folder-category->description
+msgid "Show home folder"
+msgstr "Ev dizinini göster"
+
+#. 4.0->settings->show-home-folder-category->tooltip
+msgid "Show home folder category in the menu"
+msgstr "Ev dizini kategorisini menüde gösterir"
+
+#. 4.0->settings->open-on-category->options
+#, fuzzy
+msgid "Last used category"
+msgstr "Önceki kategori"
+
+#. 4.0->settings->enable-autoscroll->tooltip
+msgid "Autoscroll the application list on mouse hover"
+msgstr "Uygulama listesi üstünde fare ile otomatik kaydır"
+
+#. 4.0->settings->web-search-option->description
+msgid "Web search option"
+msgstr "Web arama seçenekleri"
+
+#. 4.0->settings->web-search-option->options
+msgid "Google"
+msgstr "Google"
+
+#. 4.0->settings->web-search-option->options
+msgid "Bing"
+msgstr "Bing"
+
+#. 4.0->settings->web-search-option->options
+msgid "Yahoo"
+msgstr "Yahoo"
+
+#. 4.0->settings->web-search-option->options
+msgid "DuckDuckGo"
+msgstr "DuckDuckGo"
+
+#. 4.0->settings->web-search-option->tooltip
+msgid "Show an internet search option in search results"
+msgstr "Arama sonuçlarında bir internet arama seçeneği gösterir"
+
+#. 4.0->settings->show-hidden-files->description
+msgid "Show hidden files"
+msgstr "Gizli dosyaları göster"
+
+#. 4.0->settings->show-hidden-files->tooltip
+msgid "Show hidden files in folder view"
+msgstr "Gizli dosyaları dizin görünümünde göster"
+
+#. 4.0->settings->menu-icon-size-custom->description
+msgid "Use a custom icon size"
+msgstr "Özel simge boyutu kullan"
+
+#. 4.0->settings->menu-icon-size-custom->tooltip
+msgid "Use a custom size for the panel icon"
+msgstr "Panel simgesi için özel boyut kullan"
+
+#. 4.0->settings->menu-icon-size->description
+msgid "Panel icon size"
+msgstr "Panel simge boyutu"
+
+#. 4.0->settings->menu-icon-size->tooltip
+msgid "Choose a custom size for the panel icon"
+msgstr "Panel simgesi için özel boyut seçin"
+
+#. 4.0->settings->sidebar-icon-size->description
+#. 4.0->settings->sidebar-icon-size->tooltip
+msgid "Session buttons icon size"
+msgstr "Oturum düğmelerinin simge boyutu"
+
+#. 4.0->settings->use-box-style->description
+#. 4.0->settings->use-box-style->tooltip
+msgid "Use session buttons box style"
+msgstr "Oturum düğmelerini kutu stilinde kullan"
+
+#~ msgid "All Applications"
+#~ msgstr "Tüm Uygulamalar"
+
+#~ msgid "Recent Files"
+#~ msgstr "Son Dosyalar"
+
+#~ msgid "Favorite Apps"
+#~ msgstr "Favorilerim"
+
+#~ msgid "Lock Screen"
+#~ msgstr "Ekranı Kilitle"
+
+#~ msgid "Open Containing Folder..."
+#~ msgstr "İçeren Dizin Açılıyor..."
+
+#~ msgid "Show recent files"
+#~ msgstr "Son dosyları göster"
+
+#~ msgid "Show recent files category in the menu"
+#~ msgstr "Son dosyalar kategorisini menüden göster"
+
+#~ msgid "Enable emoji search"
+#~ msgstr "Emoji aramayı etkinleştir"
+
+#~ msgid "Show emojis in search results"
+#~ msgstr "Emojileri arama seçeneklerinde gösterir"
+
+#~ msgid "Show your browser's web bookmarks in the menu"
+#~ msgstr "Tarayıcınızın web yer işaretlerini menüde gösterin"
+
+#~ msgid "Startup applications view mode"
+#~ msgstr "Başlangıç uygulamaları görünüm kipi"
+
+#~ msgid "px"
+#~ msgstr "piksel"
+
+#~ msgid "No recent documents"
+#~ msgstr "Yakın tarihli belge yok"
+
+#~ msgid "Remove favorite"
+#~ msgstr "Favorilerden kaldır"
+
+#~ msgid "Failed to launch \"%s\""
+#~ msgstr "Başlatılamadı \"%s\""
+
+#~ msgid "Press this button to customize your privacy settings."
+#~ msgstr "Gizlilik ayarlarınızı özelleştirmek için bu düğmeye basın."
+
+#~ msgid "Press this button to customize your menu entries."
+#~ msgstr "Menü girişlerinizi özelleştirmek için bu düğmeye basın."
+
+#~ msgid "Unchecking this allows the theme to set the icon"
+#~ msgstr "Seçeneğin işaretini kaldırmak, temanın simgeyi ayarlamasını sağlar"
+
+#~ msgid "Icon"
+#~ msgstr "Simge"
+
+#~ msgid "Set the custom menu button icon name"
+#~ msgstr "Menü simge ismini ayarla"
+
+#~ msgid "Enable opening the menu when the mouse enters the applet"
+#~ msgstr ""
+#~ "Fare menü uygulamacığının üstüne geldiğinde menü açılmasını etkinleştir"
+
+#~ msgid "Delay between switching categories"
+#~ msgstr "Kategoriler arası geçişlerdeki gecikme"
+
+#~ msgid ""
+#~ "When enabled, category views are activated on click instead of on hover."
+#~ msgstr "Kategoriler içindeki uygulama listelerine tıklayarak ulaşırsınız."
+
+#~ msgid ""
+#~ "Choose whether or not to enable smooth autoscrolling in the application "
+#~ "list."
+#~ msgstr ""
+#~ "Uygulamada sorunsuz otomatik gezinmeyi etkinleştirip etkinleştirmemesini "
+#~ "seçin."
+
+#~ msgid "Choose whether or not bookmarks are indexed in the menu."
+#~ msgstr "Bilgisayar menüsünde bulunan yer imlerini göster."
+
+#~ msgid "Choose whether or not open windows are indexed in menu searches."
+#~ msgstr ""
+#~ "Açık pencerelerin menü aramalarına dahil edilip edilmeyeceğini seçin."
+
+#~ msgid "Choose whether or not to show bookmarks and places in the menu."
+#~ msgstr ""
+#~ "Menüde yer imlerinin ve yerlerin gösterilip gösterilmeyeceğini seçin."
+
+#~ msgid "Choose whether or not to show icons on applications."
+#~ msgstr "Uygulamalardaki simgelerin gösterilip gösterilmeyeceğini seçin."
+
+#~ msgid "Choose whether or not to show icons on categories."
+#~ msgstr "Kategorilerdeki simgelerin gösterilip gösterilmeyeceğini seçin."
+
+#~ msgid ""
+#~ "Choose whether or not to show the application description on the "
+#~ "application buttons."
+#~ msgstr "Listede uygulama açıklamasının gösterilip gösterilmeyeceğini seçin."
+
+#~ msgid ""
+#~ "When enabled, tooltips containing the item's name or description is shown "
+#~ "when hovered over."
+#~ msgstr ""
+#~ "Etkinleştirildiğinde, uygulamaların açıklamasını içeren araç ipuçları "
+#~ "gösterilir."
+
+#~ msgid ""
+#~ "The delay time in milliseconds for tooltips when hovering over a menu "
+#~ "item."
+#~ msgstr "Araç ipuçları için milisaniye cinsinden gecikme süresi."
+
+#~ msgid "Please provide your password to uninstall this application"
+#~ msgstr "Bu uygulamayı kaldırmak için lütfen şifrenizi girin"
+
+#~ msgid "Enable filesystem path entry in search box"
+#~ msgstr "Arama kutusuna dosya sistemi yolu girişini etkinleştir"
+
+#~ msgid "Allows path entry in the menu search box."
+#~ msgstr "Menü arama kutusuna yol girişini sağlar."
+
+#~ msgid ""
+#~ "Choose where application descriptions will be placed, or select \"None\" "
+#~ "to disable."
+#~ msgstr ""
+#~ "Uygulama açıklamalarının nereye yerleştirileceğini veya devre dışı "
+#~ "bırakmak için \"Yok\" u seç."
+
+#~ msgid "Category first seen when the menu is opened"
+#~ msgstr "Kategori ilk menü açıldığında görülür"

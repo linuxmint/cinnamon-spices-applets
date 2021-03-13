@@ -1,0 +1,70 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-04-28 15:32+0800\n"
+"PO-Revision-Date: 2019-10-16 22:41+0200\n"
+"Last-Translator: Dragone2 <dragone2@risposteinformatiche.it>\n"
+"Language-Team: \n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.2.1\n"
+
+#: applet.js:61
+msgid "Has never run succesfully!"
+msgstr "Non ha mai funzionato con successo!"
+
+#: applet.js:77
+msgid "Last successful back-up completed on"
+msgstr "Ultimo backup riuscito completato il"
+
+#: applet.js:100
+msgid "Has never run successfully!"
+msgstr "Non ha mai funzionato con successo!"
+
+#. back-up_state@natsakis.com->metadata.json->description
+msgid ""
+"Probes for the state of a certain rsync back-up by checking the exit status "
+"of the log file"
+msgstr ""
+"Verifica lo stato di un certo backup rsync controllando lo status di uscita "
+"del file di log"
+
+#. back-up_state@natsakis.com->metadata.json->name
+msgid "Back-up State"
+msgstr "Stato Backup"
+
+#. back-up_state@natsakis.com->settings-schema.json->id_string->description
+msgid "String to be searched for "
+msgstr "Stringa da ricercare "
+
+#. back-up_state@natsakis.com->settings-schema.json->id_string->tooltip
+msgid ""
+"Set the string that will be searched for in your log file, to determine the "
+"last good back-up"
+msgstr ""
+"Impostare la stringa che verrà cercata nel file di log, per determinare "
+"l'ultimo backup valido"
+
+#. back-up_state@natsakis.com->settings-schema.json->log_file->description
+msgid "Log file "
+msgstr "File di log "
+
+#. back-up_state@natsakis.com->settings-schema.json->refresh_int->description
+msgid "Refresh interval (min):  "
+msgstr "Intervallo di aggiornamento (min): "
+
+#. back-up_state@natsakis.com->settings-schema.json->error_days->description
+msgid "Error after days:  "
+msgstr "Errore dopo giorni: "
+
+#. back-up_state@natsakis.com->settings-schema.json->warning_days->description
+msgid "Warning after days:  "
+msgstr "Avviso dopo giorni: "

@@ -1,0 +1,70 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# gogo <trebelnik2@gmail.com>, 2017.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-04-28 15:32+0800\n"
+"PO-Revision-Date: 2017-11-19 15:21+0100\n"
+"Last-Translator: gogo <trebelnik2@gmail.com>\n"
+"Language-Team: \n"
+"Language: hr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.7.1\n"
+
+#: applet.js:61
+msgid "Has never run succesfully!"
+msgstr "Nikada nije pokrenuto uspješno!"
+
+#: applet.js:77
+msgid "Last successful back-up completed on"
+msgstr "Posljednje uspješno sigurnosno kopiranje je završeno"
+
+#: applet.js:100
+msgid "Has never run successfully!"
+msgstr "Nikada nije pokrenuto uspješno!"
+
+#. back-up_state@natsakis.com->metadata.json->description
+msgid ""
+"Probes for the state of a certain rsync back-up by checking the exit status "
+"of the log file"
+msgstr ""
+"Prikazuje stanje određenog rsync sigurnosnog kopiranja provjerom izlaznog "
+"stanja u datoteci zapisa"
+
+#. back-up_state@natsakis.com->metadata.json->name
+msgid "Back-up State"
+msgstr "Stanje sigurnosnog kopiranja"
+
+#. back-up_state@natsakis.com->settings-schema.json->id_string->description
+msgid "String to be searched for "
+msgstr "Izraz za pretragu "
+
+#. back-up_state@natsakis.com->settings-schema.json->id_string->tooltip
+msgid ""
+"Set the string that will be searched for in your log file, to determine the "
+"last good back-up"
+msgstr ""
+"Postavite izraz koji će se tražiti u vašoj datoteci zapisa, u svrhu "
+"otkrivanja posljednjeg uspješnog sigurnosnog kopiranja"
+
+#. back-up_state@natsakis.com->settings-schema.json->log_file->description
+msgid "Log file "
+msgstr "Datoteka zapisa"
+
+#. back-up_state@natsakis.com->settings-schema.json->refresh_int->description
+msgid "Refresh interval (min):  "
+msgstr "Razdoblje osvježavanja (min):  "
+
+#. back-up_state@natsakis.com->settings-schema.json->error_days->description
+msgid "Error after days:  "
+msgstr "Greška nakon dana:  "
+
+#. back-up_state@natsakis.com->settings-schema.json->warning_days->description
+msgid "Warning after days:  "
+msgstr "Upozorenje nakon dana:  "

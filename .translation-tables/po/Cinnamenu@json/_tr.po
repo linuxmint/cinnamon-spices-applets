@@ -1,0 +1,26 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Cinnamenu 3.2.4\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-03-07 10:42+0000\n"
+"PO-Revision-Date: \n"
+"Last-Translator: Gökhan Gökkaya <gokhanlnx@gmail.com>\n"
+"Language-Team: tr\n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+
+#. 4.0->settings->open-on-category->options
+#: 4.0
+msgid "Recent"
+msgstr ""
+
+#: 4.0/search.py:43
+msgid "Open"
+msgstr ""
+
+#. 4.0->settings->open-on-category->options
+msgid "Last used category"
+msgstr ""

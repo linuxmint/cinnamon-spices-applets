@@ -1,0 +1,874 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-03-07 10:42+0000\n"
+"PO-Revision-Date: 2020-08-12 21:07+0200\n"
+"Last-Translator: Claudiux <claude.clerc@gmail.com>\n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: 3.2
+msgid "Type to search..."
+msgstr "Tapez pour rechercher..."
+
+#: 3.2 4.0
+msgid "Initializing"
+msgstr "Initialisation"
+
+#: 3.2 4.0
+msgid "No description available"
+msgstr "Aucune description"
+
+#. 4.0->settings->open-on-category->options
+#: 3.2 4.0
+#, fuzzy
+msgid "All applications"
+msgstr "Toutes les applications"
+
+#. 4.0->settings->open-on-category->options
+#: 3.2 4.0
+msgid "Places"
+msgstr "Emplacements"
+
+#: 3.2
+#, fuzzy
+msgid "Recent files"
+msgstr "Documents récents"
+
+#: 3.2 4.0
+msgid "Bookmarks"
+msgstr "Signets web"
+
+#. 4.0->settings->open-on-category->options
+#: 3.2 4.0
+#, fuzzy
+msgid "Favorite apps"
+msgstr "Applis favorites"
+
+#: 3.2
+msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
+msgstr ""
+"Le paquet gir1.2-gda-5.0 est requis pour pouvoir afficher les signets web de "
+"Firefox et de Midori."
+
+#: 3.2 4.0
+msgid "Clear List"
+msgstr "Vider la liste"
+
+#: 3.2 4.0
+msgid "No recent files"
+msgstr "Aucun document récent"
+
+#: 3.2
+msgid "Account details"
+msgstr "Votre compte"
+
+#: 3.2
+msgid "Grid View"
+msgstr "Vue en grille"
+
+#: 3.2
+msgid "List View"
+msgstr "Vue en liste"
+
+#: 3.2
+msgid "Switch to grid view"
+msgstr "Passer à une vue en grille"
+
+#: 3.2
+msgid "Switch to list view"
+msgstr "Passer à une vue en liste"
+
+#: 3.2 4.0
+#, fuzzy
+msgid "Lock screen"
+msgstr "Verrouiller l'écran"
+
+#: 3.2 4.0
+msgid "Lock the screen"
+msgstr "Verrouille l'écran"
+
+#: 3.2 4.0
+msgid "Logout"
+msgstr "Sortir"
+
+#: 3.2 4.0
+msgid "Leave the session"
+msgstr "Clôt votre session"
+
+#: 3.2 4.0
+msgid "Quit"
+msgstr "Quitter"
+
+#: 3.2 4.0
+msgid "Shutdown the computer"
+msgstr "Éteindre l'ordinateur"
+
+#: 3.2
+msgid "Home"
+msgstr "Dossier personnel"
+
+#: 3.2
+msgid "Computer"
+msgstr "Ordinateur"
+
+#: 3.2
+msgid "Browse network"
+msgstr "Parcourir le réseau"
+
+#: 3.2 4.0
+msgid "Run with NVIDIA GPU"
+msgstr "Démarrer avec le GPU NVIDIA"
+
+#: 3.2 4.0
+msgid "Add to panel"
+msgstr "Ajouter au tableau de bord"
+
+#: 3.2 4.0
+msgid "Add to desktop"
+msgstr "Ajouter au Bureau"
+
+#: 3.2 4.0
+msgid "Remove from favorites"
+msgstr "Supprimer des Favoris"
+
+#: 3.2 4.0
+msgid "Add to favorites"
+msgstr "Ajouter aux Favoris"
+
+#: 3.2
+msgid "Uninstall"
+msgstr "Désinstaller"
+
+#: 4.0
+msgid "Find files..."
+msgstr ""
+
+#: 4.0
+msgid "Please wait..."
+msgstr "Veuillez patienter..."
+
+#: 4.0
+msgid "Solution:"
+msgstr "Résultat :"
+
+#: 4.0
+msgid "Click to copy"
+msgstr "Cliquer pour copier"
+
+#: 4.0
+#, fuzzy
+msgid "Search web for"
+msgstr "Rechercher sur Google"
+
+#: 4.0
+msgid "Too many entries - showing first 1000 entries only"
+msgstr ""
+
+#: 4.0
+#, fuzzy
+msgid "Favorites"
+msgstr "Applis favorites"
+
+#. 4.0->settings->open-on-category->options
+#: 4.0
+#, fuzzy
+msgid "Recent"
+msgstr "Documents récents"
+
+#. 4.0->settings->open-on-category->options
+#: 4.0
+msgid "Home folder"
+msgstr ""
+
+#. 3.2->settings->resetCategoryOrder-button->description
+#: 4.0
+msgid "Reset category order"
+msgstr "Restaurer l'ordre initial des catégories"
+
+#: 4.0
+msgid "This file is no longer available"
+msgstr ""
+
+#: 4.0
+msgid "Open with"
+msgstr ""
+
+#: 4.0
+#, fuzzy
+msgid "Other application..."
+msgstr "Montrer les icônes des applications"
+
+#: 4.0 4.0/search.py:48
+msgid "Open containing folder"
+msgstr ""
+
+#: 4.0
+msgid "Move to trash"
+msgstr ""
+
+#: 4.0
+msgid "Error while moving file to trash:"
+msgstr ""
+
+#: 4.0/search.py:43
+msgid "Open"
+msgstr ""
+
+#: 4.0/search.py:85
+msgid "Search"
+msgstr ""
+
+#: 4.0/search.py:106
+msgid "Start in"
+msgstr ""
+
+#: 4.0/search.py:107
+msgid "Select a folder"
+msgstr ""
+
+#: 4.0/search.py:113
+msgid "Follow symlinks"
+msgstr ""
+
+#: 4.0/search.py:117
+#, fuzzy
+msgid "Search hidden"
+msgstr "Moteurs de Recherche"
+
+#: 4.0/search.py:121
+msgid "Use regular expressions"
+msgstr ""
+
+#: 4.0/search.py:125
+msgid "Stop"
+msgstr ""
+
+#: 4.0/search.py:140
+msgid "File"
+msgstr ""
+
+#: 4.0/search.py:156
+msgid "Path"
+msgstr ""
+
+#: 4.0/search.py:184
+msgid "Searching..."
+msgstr ""
+
+#: 4.0/search.py:198 4.0/search.py:199
+#, fuzzy
+msgid "Search Stopped"
+msgstr "Moteurs de Recherche"
+
+#: 4.0/search.py:215
+msgid "Searching: "
+msgstr ""
+
+#: 4.0/search.py:220
+msgid "Error: insufficient permissions to read folder "
+msgstr ""
+
+#: 4.0/search.py:252
+#, fuzzy
+msgid "Search Completed"
+msgstr "Rechercher sur Google"
+
+#: 4.0/search.py:259
+msgid "Skipping"
+msgstr ""
+
+#: 4.0/search.py:259
+msgid " - directory already searched"
+msgstr ""
+
+#. metadata.json->name
+#. 3.2->settings->cinnamenuProvidersSection->title
+msgid "Cinnamenu"
+msgstr "Cinnamenu"
+
+#. metadata.json->description
+msgid ""
+"A flexible menu providing formatting options, web bookmarks, search provider "
+"support and fuzzy searching."
+msgstr ""
+"Un menu flexible offrant des options de formatage, des signets Web, une "
+"recherche parmi vos fichiers et applications, et un support de moteurs de "
+"recherche sur le web."
+
+#. 3.2->settings->panel->title
+#. 4.0->settings->behaviour->title
+msgid "Behavior"
+msgstr "Comportement"
+
+#. 3.2->settings->appearance->title
+#. 4.0->settings->appearance->title
+msgid "Appearance"
+msgstr "Apparence"
+
+#. 3.2->settings->menu->title
+#. 4.0->settings->layout->title
+msgid "Layout and Content"
+msgstr "Mise en page et contenu"
+
+#. 3.2->settings->providers->title
+msgid "Search Providers"
+msgstr "Moteurs de Recherche"
+
+#. 3.2->settings->extensionProvidersSection->title
+msgid "No search provider extensions found"
+msgstr "Aucune extension pour moteur de recherche n'a été installée"
+
+#. 3.2->settings->panel-appear->title
+#. 3.2->settings->panel-behave->title
+#. 4.0->settings->panel-behave->title
+#. 4.0->settings->panel-appear->title
+msgid "Panel"
+msgstr "Tableau de bord"
+
+#. 3.2->settings->menu-behave->title
+#. 3.2->settings->menu-icons->title
+#. 4.0->settings->menu-behave->title
+#. 4.0->settings->menu-icons->title
+msgid "Menu"
+msgstr "Menu"
+
+#. 3.2->settings->menu-layout->title
+#. 4.0->settings->menu-layout->title
+msgid "Layout"
+msgstr "Mise en page"
+
+#. 3.2->settings->menu-content->title
+#. 4.0->settings->menu-content->title
+msgid "Content"
+msgstr "Contenu"
+
+#. 3.2->settings->privacy-settings-button->description
+msgid "Recent files settings"
+msgstr "Paramètres des Documents récents"
+
+#. 3.2->settings->menu-editor-button->description
+#. 4.0->settings->menu-editor-button->description
+msgid "Open the menu editor"
+msgstr "Ouvrir l'éditeur de menu"
+
+#. 3.2->settings->menu-icon-custom->description
+#. 4.0->settings->menu-icon-custom->description
+msgid "Use a custom icon"
+msgstr "Personnaliser l'icône"
+
+#. 3.2->settings->menu-icon-custom->tooltip
+#. 4.0->settings->menu-icon-custom->tooltip
+msgid "Use a custom icon in the panel"
+msgstr "Personnaliser l'icône de cette applet affichée dans le panneau"
+
+#. 3.2->settings->menu-icon->description
+#. 3.2->settings->menu-icon->tooltip
+#. 4.0->settings->menu-icon->description
+#. 4.0->settings->menu-icon->tooltip
+msgid "Panel icon"
+msgstr "Icône affichée sur le tableau de bord"
+
+#. 3.2->settings->menu-label->description
+#. 4.0->settings->menu-label->description
+msgid "Panel text"
+msgstr "Texte affiché sur le tableau de bord"
+
+#. 3.2->settings->menu-label->tooltip
+#. 4.0->settings->menu-label->tooltip
+msgid "Text to show beside the panel icon"
+msgstr "Texte à afficher à côté de l'icône du panneau"
+
+#. 3.2->settings->category-icon-size->units
+#. 3.2->settings->apps-list-icon-size->units
+#. 3.2->settings->apps-grid-icon-size->units
+#. 3.2->settings->custom-menu-height->units
+#. 4.0->settings->menu-icon-size->units
+#. 4.0->settings->category-icon-size->units
+#. 4.0->settings->apps-list-icon-size->units
+#. 4.0->settings->apps-grid-icon-size->units
+#. 4.0->settings->sidebar-icon-size->units
+msgid "pixels"
+msgstr "pixels"
+
+#. 3.2->settings->category-icon-size->description
+#. 3.2->settings->category-icon-size->tooltip
+#. 4.0->settings->category-icon-size->description
+#. 4.0->settings->category-icon-size->tooltip
+msgid "Category icon size"
+msgstr "Taille des icônes des catégories du menu"
+
+#. 3.2->settings->apps-list-icon-size->description
+#. 3.2->settings->apps-list-icon-size->tooltip
+#. 4.0->settings->apps-list-icon-size->description
+#. 4.0->settings->apps-list-icon-size->tooltip
+msgid "Applications list icon size"
+msgstr "Taille des icônes pour la vue en liste"
+
+#. 3.2->settings->apps-grid-icon-size->description
+#. 3.2->settings->apps-grid-icon-size->tooltip
+#. 4.0->settings->apps-grid-icon-size->description
+#. 4.0->settings->apps-grid-icon-size->tooltip
+msgid "Applications grid icon size"
+msgstr "Taille des icônes pour la vue en grille"
+
+#. 3.2->settings->overlay-key->description
+#. 4.0->settings->overlay-key->description
+msgid "Keyboard shortcut to open and close the menu"
+msgstr "Raccourci-clavier pour ouvrir et fermer le menu"
+
+#. 3.2->settings->activate-on-hover->description
+#. 4.0->settings->activate-on-hover->description
+msgid "Open menu on hover"
+msgstr "Ouvrir le menu lors du survol"
+
+#. 3.2->settings->activate-on-hover->tooltip
+#. 4.0->settings->activate-on-hover->tooltip
+msgid "Open the menu when I move my mouse over the panel icon"
+msgstr "Ouvrir le menu au passage de la souris sur l'icône de Cinnamenu"
+
+#. 3.2->settings->hover-delay->units
+#. 3.2->settings->tooltip-delay->units
+#. 4.0->settings->hover-delay->units
+msgid "milliseconds"
+msgstr "millisecondes"
+
+#. 3.2->settings->hover-delay->description
+#. 4.0->settings->hover-delay->description
+msgid "Menu hover delay"
+msgstr "Délai du survol avant ouverture du menu"
+
+#. 3.2->settings->enable-animation->description
+#. 4.0->settings->enable-animation->description
+msgid "Use menu animations"
+msgstr "Animer l'ouverture et la fermeture du menu"
+
+#. 3.2->settings->enable-animation->tooltip
+#. 4.0->settings->enable-animation->tooltip
+msgid "Animate the menu on open and close"
+msgstr ""
+"Autorise les effets d'animation lors de l'ouverture ou la fermeture du menu"
+
+#. 3.2->settings->category-click->description
+#. 4.0->settings->category-click->description
+msgid "Activate categories on click"
+msgstr "Ouvrir les catégories avec un clic"
+
+#. 3.2->settings->category-click->tooltip
+#. 4.0->settings->category-click->tooltip
+msgid "Activate categories on click instead of on hover"
+msgstr ""
+"Ouvre les catégories avec un clic, au lieu du simple survol par la souris"
+
+#. 3.2->settings->enable-autoscroll->description
+#. 4.0->settings->enable-autoscroll->description
+msgid "Enable autoscrolling"
+msgstr "Activer le défilement automatique"
+
+#. 3.2->settings->enable-autoscroll->tooltip
+msgid "Enable autoscrolling in application list"
+msgstr "Active le défilement automatique dans la liste des applications"
+
+#. 3.2->settings->enable-bookmarks->description
+#. 4.0->settings->show-web-bookmarks-category->description
+msgid "Show web bookmarks"
+msgstr "Afficher les signets Web"
+
+#. 3.2->settings->enable-bookmarks->tooltip
+#. 4.0->settings->show-web-bookmarks-category->tooltip
+msgid ""
+"Show your browser's web bookmarks in the menu.\n"
+"Note: Install package gir1.2-gda-5.0 to read firefox bookmarks."
+msgstr ""
+
+#. 3.2->settings->enable-windows->description
+msgid "Enable searching of open windows"
+msgstr "Activer la recherche des fenêtres ouvertes"
+
+#. 3.2->settings->enable-search-providers->description
+msgid "Enable search providers"
+msgstr "Activer les moteurs de recherche"
+
+#. 3.2->settings->enable-search-providers->tooltip
+msgid "Include search provider results in searches"
+msgstr ""
+"Ajoute également les résultats des moteurs de recherche à ceux de vos "
+"recherches dans le menu"
+
+#. 3.2->settings->get-providers->description
+msgid "Example Search Providers"
+msgstr "Exemples de moteurs de recherche"
+
+#. 3.2->settings->startup-view-mode->description
+#. 4.0->settings->open-on-category->description
+#, fuzzy
+msgid "Open menu on category:"
+msgstr "Ouvrir le menu lors du survol"
+
+#. 3.2->settings->startup-view-mode->options
+#. 4.0->settings->applications-view-mode->options
+msgid "List"
+msgstr "Liste"
+
+#. 3.2->settings->startup-view-mode->options
+#. 4.0->settings->applications-view-mode->options
+msgid "Grid"
+msgstr "Grille"
+
+#. 3.2->settings->startup-view-mode->tooltip
+#. 4.0->settings->open-on-category->tooltip
+#, fuzzy
+msgid "Always open the menu with this category selected"
+msgstr "Ouvre toujours le menu avec la catégorie Applis favorites sélectionnée"
+
+#. 3.2->settings->apps-grid-column-count->units
+msgid "columns"
+msgstr "colonnes"
+
+#. 3.2->settings->apps-grid-column-count->description
+#. 3.2->settings->apps-grid-column-count->tooltip
+msgid "Number of columns in apps grid"
+msgstr "Nombre de colonnes de la grille des applications"
+
+#. 3.2->settings->show-places->description
+#. 4.0->settings->show-places-category->description
+msgid "Show bookmarks and places"
+msgstr "Inclure les signets et les emplacements"
+
+#. 3.2->settings->show-places->tooltip
+#. 4.0->settings->show-places-category->tooltip
+msgid "Show bookmarks and places category in the menu"
+msgstr "Affiche également dans le menu vos signets et vos emplacements"
+
+#. 3.2->settings->show-application-icons->description
+#. 3.2->settings->show-application-icons->tooltip
+msgid "Show application icons"
+msgstr "Montrer les icônes des applications"
+
+#. 3.2->settings->show-category-icons->description
+#. 3.2->settings->show-category-icons->tooltip
+msgid "Show category icons"
+msgstr "Montrer les icônes des catégories"
+
+#. 3.2->settings->show-apps-description-on-buttons->description
+#. 3.2->settings->show-apps-description-on-buttons->tooltip
+msgid "Show application descriptions under titles"
+msgstr "Afficher la description des applications sous leur titre"
+
+#. 3.2->settings->show-tooltips->description
+#. 3.2->settings->show-tooltips->tooltip
+msgid "Show tooltips"
+msgstr "Afficher les infobulles"
+
+#. 3.2->settings->tooltip-delay->description
+#. 3.2->settings->tooltip-delay->tooltip
+msgid "Tooltip delay"
+msgstr "Délai avant l'affichage de l'infobulle"
+
+#. 3.2->settings->enable-custom-menu-height->description
+#. 3.2->settings->enable-custom-menu-height->tooltip
+msgid "Use a custom menu height"
+msgstr "Utiliser une hauteur de menu personnalisée"
+
+#. 3.2->settings->custom-menu-height->description
+#. 3.2->settings->custom-menu-height->tooltip
+msgid "Custom menu height"
+msgstr "Hauteur de menu personnalisée"
+
+#. 4.0->settings->applications-view-mode->description
+msgid "Applications view mode"
+msgstr "Mode d'affichage des applications"
+
+#. 4.0->settings->applications-view-mode->tooltip
+msgid "View applications as list or grid"
+msgstr ""
+"Vous permet de faire afficher les applications sous forme de liste (une "
+"seule colonne) ou de grille (lignes et colonnes)"
+
+#. 4.0->settings->description-placement->description
+msgid "Application description placement"
+msgstr "Emplacement de la description d'une application"
+
+#. 4.0->settings->description-placement->options
+msgid "Tooltips"
+msgstr "Info-bulles"
+
+#. 4.0->settings->description-placement->options
+msgid "Under titles"
+msgstr "Sous les titres"
+
+#. 4.0->settings->description-placement->options
+#. 4.0->settings->web-search-option->options
+msgid "None"
+msgstr "Aucun"
+
+#. 4.0->settings->description-placement->tooltip
+msgid "Choose where to show application descriptions"
+msgstr "Vous permet de choisir l'emplacement des descriptions des applications"
+
+#. 4.0->settings->sidebar-placement->description
+msgid "Session buttons location"
+msgstr "Emplacement des boutons de session"
+
+#. 4.0->settings->sidebar-placement->options
+msgid "Top"
+msgstr "Haut"
+
+#. 4.0->settings->sidebar-placement->options
+msgid "Bottom"
+msgstr "Bas"
+
+#. 4.0->settings->sidebar-placement->options
+msgid "Left"
+msgstr "Gauche"
+
+#. 4.0->settings->sidebar-placement->options
+msgid "Right"
+msgstr "Droite"
+
+#. 4.0->settings->sidebar-placement->tooltip
+#, fuzzy
+msgid "Choose where to show the session buttons (quit, logout, etc.)"
+msgstr ""
+"Vous permet de choisir où, dans le menu, seront affichés les boutons : "
+"Éteindre l'ordinateur, Fermer la session, Verrouiller l'écran"
+
+#. 4.0->settings->info-box->description
+msgid ""
+"\n"
+"Info/tip: Drag on the menu edge to change the menu size.\n"
+msgstr ""
+
+#. 4.0->settings->add-favorites->description
+msgid "Add favorites to session buttons"
+msgstr "Accoler vos applis favorites aux boutons de session"
+
+#. 4.0->settings->add-favorites->tooltip
+msgid "Show your favorite app icons next to the session buttons"
+msgstr ""
+"Affiche les icônes de vos applications favorites à côté des boutons de "
+"session"
+
+#. 4.0->settings->show-favorite-apps-category->description
+#, fuzzy
+msgid "Show favorite apps category"
+msgstr "Catégorie en première position"
+
+#. 4.0->settings->show-favorite-apps-category->tooltip
+#, fuzzy
+msgid "Show your favorite apps category in the menu"
+msgstr "Affiche également dans le menu vos signets et vos emplacements"
+
+#. 4.0->settings->show-home-folder-category->description
+msgid "Show home folder"
+msgstr ""
+
+#. 4.0->settings->show-home-folder-category->tooltip
+#, fuzzy
+msgid "Show home folder category in the menu"
+msgstr "Affiche également dans le menu vos signets et vos emplacements"
+
+#. 4.0->settings->open-on-category->options
+#, fuzzy
+msgid "Last used category"
+msgstr "Catégorie en première position"
+
+#. 4.0->settings->enable-autoscroll->tooltip
+#, fuzzy
+msgid "Autoscroll the application list on mouse hover"
+msgstr "Active le défilement automatique dans la liste des applications"
+
+#. 4.0->settings->web-search-option->description
+msgid "Web search option"
+msgstr ""
+
+#. 4.0->settings->web-search-option->options
+msgid "Google"
+msgstr ""
+
+#. 4.0->settings->web-search-option->options
+msgid "Bing"
+msgstr ""
+
+#. 4.0->settings->web-search-option->options
+msgid "Yahoo"
+msgstr ""
+
+#. 4.0->settings->web-search-option->options
+msgid "DuckDuckGo"
+msgstr ""
+
+#. 4.0->settings->web-search-option->tooltip
+msgid "Show an internet search option in search results"
+msgstr ""
+
+#. 4.0->settings->show-hidden-files->description
+#, fuzzy
+msgid "Show hidden files"
+msgstr "Aucun document récent"
+
+#. 4.0->settings->show-hidden-files->tooltip
+msgid "Show hidden files in folder view"
+msgstr ""
+
+#. 4.0->settings->menu-icon-size-custom->description
+#, fuzzy
+msgid "Use a custom icon size"
+msgstr "Personnaliser l'icône"
+
+#. 4.0->settings->menu-icon-size-custom->tooltip
+#, fuzzy
+msgid "Use a custom size for the panel icon"
+msgstr "Personnaliser l'icône de cette applet affichée dans le panneau"
+
+#. 4.0->settings->menu-icon-size->description
+#, fuzzy
+msgid "Panel icon size"
+msgstr "Icône affichée sur le tableau de bord"
+
+#. 4.0->settings->menu-icon-size->tooltip
+#, fuzzy
+msgid "Choose a custom size for the panel icon"
+msgstr "Personnaliser l'icône de cette applet affichée dans le panneau"
+
+#. 4.0->settings->sidebar-icon-size->description
+#. 4.0->settings->sidebar-icon-size->tooltip
+msgid "Session buttons icon size"
+msgstr "Taille des icônes des boutons de session"
+
+#. 4.0->settings->use-box-style->description
+#. 4.0->settings->use-box-style->tooltip
+msgid "Use session buttons box style"
+msgstr "Afficher un cadre autour des boutons de session"
+
+#~ msgid ""
+#~ "Made possible thanks to the efforts of contributors to the Cinnamon menu, "
+#~ "Gnomenu, and the contributors to projects they derived from."
+#~ msgstr ""
+#~ "Rendu possible grâce aux efforts des contributeurs au menu Cinnamon, "
+#~ "Gnomenu, et des contributeurs aux projets dont ils sont issus."
+
+#~ msgid "Show your browser's web bookmarks in the menu"
+#~ msgstr "Affiche dans le menu les signets Web de votre navigateur"
+
+#~ msgid "Startup applications view mode"
+#~ msgstr "Mode de vue par défaut des applications"
+
+#~ msgid "px"
+#~ msgstr "px"
+
+#~ msgid "Always open menu on favorite apps"
+#~ msgstr "Toujours ouvrir le menu sur les Applis favorites"
+
+#~ msgid "Remove favorite"
+#~ msgstr "Supprimer des Favoris"
+
+#~ msgid "No recent documents"
+#~ msgstr "Aucun document récent"
+
+#~ msgid "Failed to launch \"%s\""
+#~ msgstr "Échec au lancement de \"%s\""
+
+#~ msgid "Press this button to customize your privacy settings."
+#~ msgstr "Pressez ce bouton pour accéder à vos paramètres de confidentialité."
+
+#~ msgid "Press this button to customize your menu entries."
+#~ msgstr "Pressez ce bouton pour adapter les entrées de menu à vos besoins."
+
+#~ msgid "Unchecking this allows the theme to set the icon"
+#~ msgstr "Décochez cette case pour utiliser l'icône définie par le thème"
+
+#~ msgid "Icon"
+#~ msgstr "Icône"
+
+#~ msgid "Set the custom menu button icon name"
+#~ msgstr "Définir le nom de l'icône sur le bouton du menu"
+
+#~ msgid "Enable opening the menu when the mouse enters the applet"
+#~ msgstr "Permet l'ouverture du menu au survol de la souris"
+
+#~ msgid "Delay between switching categories"
+#~ msgstr "Délai entre les changements de catégorie"
+
+#~ msgid ""
+#~ "When enabled, category views are activated on click instead of on hover."
+#~ msgstr ""
+#~ "Ouvrir les catégories en cliquant dessus plutôt qu'en les survolant avec "
+#~ "la souris."
+
+#~ msgid ""
+#~ "Choose whether or not to enable smooth autoscrolling in the application "
+#~ "list."
+#~ msgstr ""
+#~ "Choisissez d'activer ou non le défilement automatique dans la liste des "
+#~ "applications."
+
+#~ msgid "Choose whether or not bookmarks are indexed in the menu."
+#~ msgstr "Choisissez si les signets sont indexés ou non dans le menu."
+
+#~ msgid "Choose whether or not open windows are indexed in menu searches."
+#~ msgstr ""
+#~ "Choisissez si les fenêtres ouvertes sont indexées ou non dans le menu."
+
+#~ msgid "Choose whether or not to show bookmarks and places in the menu."
+#~ msgstr ""
+#~ "Choisissez d'afficher ou non les favoris et les emplacements dans le menu."
+
+#~ msgid "Choose whether or not to show icons on applications."
+#~ msgstr "Choisissez d'afficher ou non les icônes sur les applications."
+
+#~ msgid "Choose whether or not to show icons on categories."
+#~ msgstr "Choisissez d'afficher ou non les icônes sur les catégories."
+
+#~ msgid ""
+#~ "Choose whether or not to show the application description on the "
+#~ "application buttons."
+#~ msgstr ""
+#~ "Choisissez d'afficher ou non la description de l'application sous son "
+#~ "bouton."
+
+#~ msgid ""
+#~ "When enabled, tooltips containing the item's name or description is shown "
+#~ "when hovered over."
+#~ msgstr ""
+#~ "Lorsque cette option est activée, les infobulles contenant le nom ou la "
+#~ "description de l'élément s'affichent lorsqu'il est survolé."
+
+#~ msgid ""
+#~ "The delay time in milliseconds for tooltips when hovering over a menu "
+#~ "item."
+#~ msgstr ""
+#~ "Le temps de retard en millisecondes avant d'afficher son infobulle en "
+#~ "survolant un élément de menu."
+
+#~ msgid "Enable filesystem path entry in search box"
+#~ msgstr ""
+#~ "Activer l'entrée d'un chemin du système de fichiers dans la zone de "
+#~ "recherche"
+
+#~ msgid "Allows path entry in the menu search box."
+#~ msgstr "Permet l'entrée d'un chemin dans la boîte de recherche du menu."
+
+#~ msgid "Please provide your password to uninstall this application"
+#~ msgstr ""
+#~ "Veuillez renseigner votre mot de passe pour désinstaller cette application"
+
+#~ msgid "Category first seen when the menu is opened"
+#~ msgstr "Première catégorie vue à l'ouverture du menu"
+
+#~ msgid ""
+#~ "Choose where application descriptions will be placed, or select \"None\" "
+#~ "to disable."
+#~ msgstr ""
+#~ "Choisir où la description de l'application sera placée, ou bien \"Aucun\"."

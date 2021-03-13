@@ -1,0 +1,803 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-03-07 10:42+0000\n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: lt\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.3.1\n"
+
+#: 3.2
+msgid "Type to search..."
+msgstr "Įveskite paiešką ..."
+
+#: 3.2 4.0
+msgid "Initializing"
+msgstr "Inicijavimas"
+
+#: 3.2 4.0
+msgid "No description available"
+msgstr "Aprašo nėra"
+
+#. 4.0->settings->open-on-category->options
+#: 3.2 4.0
+#, fuzzy
+msgid "All applications"
+msgstr "Visos programos"
+
+#. 4.0->settings->open-on-category->options
+#: 3.2 4.0
+msgid "Places"
+msgstr "Vietos"
+
+#: 3.2
+#, fuzzy
+msgid "Recent files"
+msgstr "Naujausi failai"
+
+#: 3.2 4.0
+msgid "Bookmarks"
+msgstr "Žymos"
+
+#. 4.0->settings->open-on-category->options
+#: 3.2 4.0
+#, fuzzy
+msgid "Favorite apps"
+msgstr "Mėgstamiausios programos"
+
+#: 3.2
+msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
+msgstr "reikalingas„ gir1.2-gda-5.0 “paketas„ Firefox “ir„ Midori “žymėms."
+
+#: 3.2 4.0
+msgid "Clear List"
+msgstr "Išvalyti sąrašą"
+
+#: 3.2 4.0
+#, fuzzy
+msgid "No recent files"
+msgstr "Perjungti naujausius failus"
+
+#: 3.2
+msgid "Account details"
+msgstr "Sąskaitos duomenys"
+
+#: 3.2
+msgid "Grid View"
+msgstr "Tinklelis"
+
+#: 3.2
+msgid "List View"
+msgstr "Sąrašo vaizdas"
+
+#: 3.2
+msgid "Switch to grid view"
+msgstr "Perjungti į tinklelio rodinį"
+
+#: 3.2
+msgid "Switch to list view"
+msgstr ""
+
+#: 3.2 4.0
+#, fuzzy
+msgid "Lock screen"
+msgstr "Užrakinti ekraną"
+
+#: 3.2 4.0
+msgid "Lock the screen"
+msgstr "Užrakinti ekraną"
+
+#: 3.2 4.0
+msgid "Logout"
+msgstr "Atsijungti"
+
+#: 3.2 4.0
+msgid "Leave the session"
+msgstr "Palikti sesiją"
+
+#: 3.2 4.0
+msgid "Quit"
+msgstr "Baigti"
+
+#: 3.2 4.0
+msgid "Shutdown the computer"
+msgstr "Išjungti kompiuterį"
+
+#: 3.2
+msgid "Home"
+msgstr "Home"
+
+#: 3.2
+msgid "Computer"
+msgstr "Computer"
+
+#: 3.2
+msgid "Browse network"
+msgstr "Naršyti tinklą"
+
+#: 3.2 4.0
+msgid "Run with NVIDIA GPU"
+msgstr "Vykdyti su NVIDIA GPU"
+
+#: 3.2 4.0
+msgid "Add to panel"
+msgstr "Pridėti prie skydelio"
+
+#: 3.2 4.0
+msgid "Add to desktop"
+msgstr "Pridėti prie darbalaukio"
+
+#: 3.2 4.0
+msgid "Remove from favorites"
+msgstr "Pašalinti iš parankinių"
+
+#: 3.2 4.0
+msgid "Add to favorites"
+msgstr "Įtraukti į adresyną"
+
+#: 3.2
+msgid "Uninstall"
+msgstr "Pašalinti"
+
+#: 4.0
+msgid "Find files..."
+msgstr ""
+
+#: 4.0
+msgid "Please wait..."
+msgstr "Prašome palaukti ..."
+
+#: 4.0
+msgid "Solution:"
+msgstr ""
+
+#: 4.0
+msgid "Click to copy"
+msgstr ""
+
+#: 4.0
+#, fuzzy
+msgid "Search web for"
+msgstr "Paieškos teikėjai"
+
+#: 4.0
+msgid "Too many entries - showing first 1000 entries only"
+msgstr ""
+
+#: 4.0
+#, fuzzy
+msgid "Favorites"
+msgstr "Mėgstamiausios programos"
+
+#. 4.0->settings->open-on-category->options
+#: 4.0
+#, fuzzy
+msgid "Recent"
+msgstr "Naujausi failai"
+
+#. 4.0->settings->open-on-category->options
+#: 4.0
+msgid "Home folder"
+msgstr ""
+
+#. 3.2->settings->resetCategoryOrder-button->description
+#: 4.0
+msgid "Reset category order"
+msgstr "Iš naujo nustatyti kategorijos užsakymą"
+
+#: 4.0
+msgid "This file is no longer available"
+msgstr ""
+
+#: 4.0
+msgid "Open with"
+msgstr ""
+
+#: 4.0
+#, fuzzy
+msgid "Other application..."
+msgstr "Rodyti programos piktogramas"
+
+#: 4.0 4.0/search.py:48
+msgid "Open containing folder"
+msgstr ""
+
+#: 4.0
+msgid "Move to trash"
+msgstr ""
+
+#: 4.0
+msgid "Error while moving file to trash:"
+msgstr ""
+
+#: 4.0/search.py:43
+msgid "Open"
+msgstr ""
+
+#: 4.0/search.py:85
+msgid "Search"
+msgstr ""
+
+#: 4.0/search.py:106
+msgid "Start in"
+msgstr ""
+
+#: 4.0/search.py:107
+msgid "Select a folder"
+msgstr ""
+
+#: 4.0/search.py:113
+msgid "Follow symlinks"
+msgstr ""
+
+#: 4.0/search.py:117
+#, fuzzy
+msgid "Search hidden"
+msgstr "Paieškos teikėjai"
+
+#: 4.0/search.py:121
+msgid "Use regular expressions"
+msgstr ""
+
+#: 4.0/search.py:125
+msgid "Stop"
+msgstr ""
+
+#: 4.0/search.py:140
+msgid "File"
+msgstr ""
+
+#: 4.0/search.py:156
+msgid "Path"
+msgstr ""
+
+#: 4.0/search.py:184
+msgid "Searching..."
+msgstr ""
+
+#: 4.0/search.py:198 4.0/search.py:199
+#, fuzzy
+msgid "Search Stopped"
+msgstr "Paieškos teikėjai"
+
+#: 4.0/search.py:215
+msgid "Searching: "
+msgstr ""
+
+#: 4.0/search.py:220
+msgid "Error: insufficient permissions to read folder "
+msgstr ""
+
+#: 4.0/search.py:252
+msgid "Search Completed"
+msgstr ""
+
+#: 4.0/search.py:259
+msgid "Skipping"
+msgstr ""
+
+#: 4.0/search.py:259
+msgid " - directory already searched"
+msgstr ""
+
+#. metadata.json->name
+#. 3.2->settings->cinnamenuProvidersSection->title
+msgid "Cinnamenu"
+msgstr ""
+
+#. metadata.json->description
+msgid ""
+"A flexible menu providing formatting options, web bookmarks, search provider "
+"support and fuzzy searching."
+msgstr ""
+"Lankstus meniu, kuriame pateikiamos formatavimo parinktys, žiniatinklio "
+"žymės, paieškos teikėjo palaikymas ir neaiški paieška."
+
+#. 3.2->settings->panel->title
+#. 4.0->settings->behaviour->title
+msgid "Behavior"
+msgstr "Elgesys"
+
+#. 3.2->settings->appearance->title
+#. 4.0->settings->appearance->title
+msgid "Appearance"
+msgstr "Išvaizda"
+
+#. 3.2->settings->menu->title
+#. 4.0->settings->layout->title
+msgid "Layout and Content"
+msgstr "Išdėstymas ir turinys"
+
+#. 3.2->settings->providers->title
+msgid "Search Providers"
+msgstr "Paieškos teikėjai"
+
+#. 3.2->settings->extensionProvidersSection->title
+msgid "No search provider extensions found"
+msgstr "Nerasta paieškos paslaugų teikėjo plėtinių"
+
+#. 3.2->settings->panel-appear->title
+#. 3.2->settings->panel-behave->title
+#. 4.0->settings->panel-behave->title
+#. 4.0->settings->panel-appear->title
+msgid "Panel"
+msgstr "Skydas"
+
+#. 3.2->settings->menu-behave->title
+#. 3.2->settings->menu-icons->title
+#. 4.0->settings->menu-behave->title
+#. 4.0->settings->menu-icons->title
+msgid "Menu"
+msgstr "Meniu"
+
+#. 3.2->settings->menu-layout->title
+#. 4.0->settings->menu-layout->title
+msgid "Layout"
+msgstr "Maketas"
+
+#. 3.2->settings->menu-content->title
+#. 4.0->settings->menu-content->title
+msgid "Content"
+msgstr "Turinys"
+
+#. 3.2->settings->privacy-settings-button->description
+msgid "Recent files settings"
+msgstr "Naujausių failų nustatymai"
+
+#. 3.2->settings->menu-editor-button->description
+#. 4.0->settings->menu-editor-button->description
+msgid "Open the menu editor"
+msgstr "Atidaryti meniu rengyklę"
+
+#. 3.2->settings->menu-icon-custom->description
+#. 4.0->settings->menu-icon-custom->description
+msgid "Use a custom icon"
+msgstr "Naudoti pasirinktinę piktogramą"
+
+#. 3.2->settings->menu-icon-custom->tooltip
+#. 4.0->settings->menu-icon-custom->tooltip
+#, fuzzy
+msgid "Use a custom icon in the panel"
+msgstr "Naudoti pasirinktinę piktogramą"
+
+#. 3.2->settings->menu-icon->description
+#. 3.2->settings->menu-icon->tooltip
+#. 4.0->settings->menu-icon->description
+#. 4.0->settings->menu-icon->tooltip
+msgid "Panel icon"
+msgstr "Skydelio piktograma"
+
+#. 3.2->settings->menu-label->description
+#. 4.0->settings->menu-label->description
+msgid "Panel text"
+msgstr "Skydelio tekstas"
+
+#. 3.2->settings->menu-label->tooltip
+#. 4.0->settings->menu-label->tooltip
+msgid "Text to show beside the panel icon"
+msgstr "Tekstas, rodomas šalia skydelio piktogramos"
+
+#. 3.2->settings->category-icon-size->units
+#. 3.2->settings->apps-list-icon-size->units
+#. 3.2->settings->apps-grid-icon-size->units
+#. 3.2->settings->custom-menu-height->units
+#. 4.0->settings->menu-icon-size->units
+#. 4.0->settings->category-icon-size->units
+#. 4.0->settings->apps-list-icon-size->units
+#. 4.0->settings->apps-grid-icon-size->units
+#. 4.0->settings->sidebar-icon-size->units
+msgid "pixels"
+msgstr "pikselių"
+
+#. 3.2->settings->category-icon-size->description
+#. 3.2->settings->category-icon-size->tooltip
+#. 4.0->settings->category-icon-size->description
+#. 4.0->settings->category-icon-size->tooltip
+msgid "Category icon size"
+msgstr "Kategorijos piktogramos dydis"
+
+#. 3.2->settings->apps-list-icon-size->description
+#. 3.2->settings->apps-list-icon-size->tooltip
+#. 4.0->settings->apps-list-icon-size->description
+#. 4.0->settings->apps-list-icon-size->tooltip
+msgid "Applications list icon size"
+msgstr "Programų sąrašo piktogramos dydis"
+
+#. 3.2->settings->apps-grid-icon-size->description
+#. 3.2->settings->apps-grid-icon-size->tooltip
+#. 4.0->settings->apps-grid-icon-size->description
+#. 4.0->settings->apps-grid-icon-size->tooltip
+msgid "Applications grid icon size"
+msgstr "Programų tinklelio piktogramos dydis"
+
+#. 3.2->settings->overlay-key->description
+#. 4.0->settings->overlay-key->description
+msgid "Keyboard shortcut to open and close the menu"
+msgstr "Spartusis klavišas meniu atidarymui ir uždarymui"
+
+#. 3.2->settings->activate-on-hover->description
+#. 4.0->settings->activate-on-hover->description
+msgid "Open menu on hover"
+msgstr "Atidarykite meniu užveskite pelės žymeklį"
+
+#. 3.2->settings->activate-on-hover->tooltip
+#. 4.0->settings->activate-on-hover->tooltip
+#, fuzzy
+msgid "Open the menu when I move my mouse over the panel icon"
+msgstr "Atidarykite meniu perkeldami pelę virš jo"
+
+#. 3.2->settings->hover-delay->units
+#. 3.2->settings->tooltip-delay->units
+#. 4.0->settings->hover-delay->units
+msgid "milliseconds"
+msgstr "milisekundės"
+
+#. 3.2->settings->hover-delay->description
+#. 4.0->settings->hover-delay->description
+msgid "Menu hover delay"
+msgstr "Meniu užvedimo atidėjimas"
+
+#. 3.2->settings->enable-animation->description
+#. 4.0->settings->enable-animation->description
+msgid "Use menu animations"
+msgstr "Naudoti meniu animaciją"
+
+#. 3.2->settings->enable-animation->tooltip
+#. 4.0->settings->enable-animation->tooltip
+#, fuzzy
+msgid "Animate the menu on open and close"
+msgstr "Leisti meniu animuoti atidarant ir uždarant"
+
+#. 3.2->settings->category-click->description
+#. 4.0->settings->category-click->description
+msgid "Activate categories on click"
+msgstr "Suaktyvinkite kategorijas spustelėdami"
+
+#. 3.2->settings->category-click->tooltip
+#. 4.0->settings->category-click->tooltip
+#, fuzzy
+msgid "Activate categories on click instead of on hover"
+msgstr "Suaktyvinkite kategorijas spustelėdami"
+
+#. 3.2->settings->enable-autoscroll->description
+#. 4.0->settings->enable-autoscroll->description
+#, fuzzy
+msgid "Enable autoscrolling"
+msgstr "Įgalinti automatinį slinktį programų sąraše"
+
+#. 3.2->settings->enable-autoscroll->tooltip
+msgid "Enable autoscrolling in application list"
+msgstr "Įgalinti automatinį slinktį programų sąraše"
+
+#. 3.2->settings->enable-bookmarks->description
+#. 4.0->settings->show-web-bookmarks-category->description
+msgid "Show web bookmarks"
+msgstr "Rodyti žiniatinklio žymes"
+
+#. 3.2->settings->enable-bookmarks->tooltip
+#. 4.0->settings->show-web-bookmarks-category->tooltip
+msgid ""
+"Show your browser's web bookmarks in the menu.\n"
+"Note: Install package gir1.2-gda-5.0 to read firefox bookmarks."
+msgstr ""
+
+#. 3.2->settings->enable-windows->description
+msgid "Enable searching of open windows"
+msgstr ""
+
+#. 3.2->settings->enable-search-providers->description
+msgid "Enable search providers"
+msgstr "Įgalinti paieškos teikėjus"
+
+#. 3.2->settings->enable-search-providers->tooltip
+#, fuzzy
+msgid "Include search provider results in searches"
+msgstr ""
+"Pasirinkite, ar paieškos teikėjo rezultatai yra indeksuojami ieškant meniu."
+
+#. 3.2->settings->get-providers->description
+msgid "Example Search Providers"
+msgstr "Paieškos teikėjų pavyzdys"
+
+#. 3.2->settings->startup-view-mode->description
+#. 4.0->settings->open-on-category->description
+#, fuzzy
+msgid "Open menu on category:"
+msgstr "Atidarykite meniu užveskite pelės žymeklį"
+
+#. 3.2->settings->startup-view-mode->options
+#. 4.0->settings->applications-view-mode->options
+msgid "List"
+msgstr "Sąrašas"
+
+#. 3.2->settings->startup-view-mode->options
+#. 4.0->settings->applications-view-mode->options
+msgid "Grid"
+msgstr "Tinklelis"
+
+#. 3.2->settings->startup-view-mode->tooltip
+#. 4.0->settings->open-on-category->tooltip
+msgid "Always open the menu with this category selected"
+msgstr ""
+
+#. 3.2->settings->apps-grid-column-count->units
+msgid "columns"
+msgstr "stulpeliai"
+
+#. 3.2->settings->apps-grid-column-count->description
+#. 3.2->settings->apps-grid-column-count->tooltip
+msgid "Number of columns in apps grid"
+msgstr "Stulpelių skaičius programų tinklelyje"
+
+#. 3.2->settings->show-places->description
+#. 4.0->settings->show-places-category->description
+msgid "Show bookmarks and places"
+msgstr "Rodyti žymas ir vietas"
+
+#. 3.2->settings->show-places->tooltip
+#. 4.0->settings->show-places-category->tooltip
+#, fuzzy
+msgid "Show bookmarks and places category in the menu"
+msgstr "Rodyti žymas ir vietas"
+
+#. 3.2->settings->show-application-icons->description
+#. 3.2->settings->show-application-icons->tooltip
+msgid "Show application icons"
+msgstr "Rodyti programos piktogramas"
+
+#. 3.2->settings->show-category-icons->description
+#. 3.2->settings->show-category-icons->tooltip
+msgid "Show category icons"
+msgstr "Rodyti kategorijos piktogramas"
+
+#. 3.2->settings->show-apps-description-on-buttons->description
+#. 3.2->settings->show-apps-description-on-buttons->tooltip
+msgid "Show application descriptions under titles"
+msgstr "Rodyti programų aprašus su pavadinimais"
+
+#. 3.2->settings->show-tooltips->description
+#. 3.2->settings->show-tooltips->tooltip
+msgid "Show tooltips"
+msgstr "Rodyti patarimus"
+
+#. 3.2->settings->tooltip-delay->description
+#. 3.2->settings->tooltip-delay->tooltip
+msgid "Tooltip delay"
+msgstr "Patarimo patarimas"
+
+#. 3.2->settings->enable-custom-menu-height->description
+#. 3.2->settings->enable-custom-menu-height->tooltip
+msgid "Use a custom menu height"
+msgstr "Naudoti pasirinktinio meniu aukštį"
+
+#. 3.2->settings->custom-menu-height->description
+#. 3.2->settings->custom-menu-height->tooltip
+msgid "Custom menu height"
+msgstr "Pasirinktinio meniu aukštis"
+
+#. 4.0->settings->applications-view-mode->description
+msgid "Applications view mode"
+msgstr "Programų peržiūros režimas"
+
+#. 4.0->settings->applications-view-mode->tooltip
+msgid "View applications as list or grid"
+msgstr "Žiūrėti programas kaip sąrašą arba tinklelį"
+
+#. 4.0->settings->description-placement->description
+msgid "Application description placement"
+msgstr "Programos aprašymo vieta"
+
+#. 4.0->settings->description-placement->options
+msgid "Tooltips"
+msgstr "Patarimai"
+
+#. 4.0->settings->description-placement->options
+msgid "Under titles"
+msgstr "Po pavadinimais"
+
+#. 4.0->settings->description-placement->options
+#. 4.0->settings->web-search-option->options
+msgid "None"
+msgstr "Nėra"
+
+#. 4.0->settings->description-placement->tooltip
+msgid "Choose where to show application descriptions"
+msgstr "Pasirinkite, kur norite rodyti programų aprašus"
+
+#. 4.0->settings->sidebar-placement->description
+msgid "Session buttons location"
+msgstr "Sesijos mygtukų vieta"
+
+#. 4.0->settings->sidebar-placement->options
+msgid "Top"
+msgstr "viršuje"
+
+#. 4.0->settings->sidebar-placement->options
+msgid "Bottom"
+msgstr "Apačia"
+
+#. 4.0->settings->sidebar-placement->options
+msgid "Left"
+msgstr "Kairė"
+
+#. 4.0->settings->sidebar-placement->options
+msgid "Right"
+msgstr "Teisingai"
+
+#. 4.0->settings->sidebar-placement->tooltip
+#, fuzzy
+msgid "Choose where to show the session buttons (quit, logout, etc.)"
+msgstr ""
+"Pasirinkite vietą, kur norite rodyti sesijos mygtukus (išeiti, atsijungti ir "
+"tt)"
+
+#. 4.0->settings->info-box->description
+msgid ""
+"\n"
+"Info/tip: Drag on the menu edge to change the menu size.\n"
+msgstr ""
+
+#. 4.0->settings->add-favorites->description
+msgid "Add favorites to session buttons"
+msgstr "Pridėti mėgstamiausius prie sesijos mygtukų"
+
+#. 4.0->settings->add-favorites->tooltip
+msgid "Show your favorite app icons next to the session buttons"
+msgstr "Parodykite savo mėgstamos programos piktogramas šalia sesijos mygtukų"
+
+#. 4.0->settings->show-favorite-apps-category->description
+msgid "Show favorite apps category"
+msgstr ""
+
+#. 4.0->settings->show-favorite-apps-category->tooltip
+#, fuzzy
+msgid "Show your favorite apps category in the menu"
+msgstr "Rodyti žymas ir vietas"
+
+#. 4.0->settings->show-home-folder-category->description
+msgid "Show home folder"
+msgstr ""
+
+#. 4.0->settings->show-home-folder-category->tooltip
+#, fuzzy
+msgid "Show home folder category in the menu"
+msgstr "Rodyti žymas ir vietas"
+
+#. 4.0->settings->open-on-category->options
+msgid "Last used category"
+msgstr ""
+
+#. 4.0->settings->enable-autoscroll->tooltip
+#, fuzzy
+msgid "Autoscroll the application list on mouse hover"
+msgstr "Įgalinti automatinį slinktį programų sąraše"
+
+#. 4.0->settings->web-search-option->description
+msgid "Web search option"
+msgstr ""
+
+#. 4.0->settings->web-search-option->options
+msgid "Google"
+msgstr ""
+
+#. 4.0->settings->web-search-option->options
+msgid "Bing"
+msgstr ""
+
+#. 4.0->settings->web-search-option->options
+msgid "Yahoo"
+msgstr ""
+
+#. 4.0->settings->web-search-option->options
+msgid "DuckDuckGo"
+msgstr ""
+
+#. 4.0->settings->web-search-option->tooltip
+msgid "Show an internet search option in search results"
+msgstr ""
+
+#. 4.0->settings->show-hidden-files->description
+msgid "Show hidden files"
+msgstr ""
+
+#. 4.0->settings->show-hidden-files->tooltip
+msgid "Show hidden files in folder view"
+msgstr ""
+
+#. 4.0->settings->menu-icon-size-custom->description
+#, fuzzy
+msgid "Use a custom icon size"
+msgstr "Naudoti pasirinktinę piktogramą"
+
+#. 4.0->settings->menu-icon-size-custom->tooltip
+#, fuzzy
+msgid "Use a custom size for the panel icon"
+msgstr "Naudoti pasirinktinę piktogramą"
+
+#. 4.0->settings->menu-icon-size->description
+#, fuzzy
+msgid "Panel icon size"
+msgstr "Skydelio piktograma"
+
+#. 4.0->settings->menu-icon-size->tooltip
+#, fuzzy
+msgid "Choose a custom size for the panel icon"
+msgstr "Naudoti pasirinktinę piktogramą"
+
+#. 4.0->settings->sidebar-icon-size->description
+#. 4.0->settings->sidebar-icon-size->tooltip
+#, fuzzy
+msgid "Session buttons icon size"
+msgstr "Sesijos mygtukų vieta"
+
+#. 4.0->settings->use-box-style->description
+#. 4.0->settings->use-box-style->tooltip
+#, fuzzy
+msgid "Use session buttons box style"
+msgstr "Sesijos mygtukų vieta"
+
+#~ msgid "No recent documents"
+#~ msgstr "Nėra naujausių dokumentų"
+
+#~ msgid "Remove favorite"
+#~ msgstr "Pašalinti mėgstamą"
+
+#~ msgid ""
+#~ "Made possible thanks to the efforts of contributors to the Cinnamon menu, "
+#~ "Gnomenu, and the contributors to projects they derived from."
+#~ msgstr ""
+#~ "Tai įmanoma dėl Cinamono meniu „Gnomenu“ bendradarbių ir projektų, iš "
+#~ "kurių jie kilo, pastangų."
+
+#~ msgid "Startup applications view mode"
+#~ msgstr "Paleisties programų peržiūros režimas"
+
+#~ msgid "Failed to launch \"%s\""
+#~ msgstr "Nepavyko paleisti \"%s\""
+
+#~ msgid "Press this button to customize your privacy settings."
+#~ msgstr "Paspauskite šį mygtuką norėdami tinkinti savo privatumo nustatymus."
+
+#~ msgid "Press this button to customize your menu entries."
+#~ msgstr "Paspauskite šį mygtuką norėdami tinkinti savo meniu įrašus."
+
+#~ msgid "Unchecking this allows the theme to set the icon"
+#~ msgstr "Panaikinus žymėjimą, tema gali nustatyti piktogramą"
+
+#~ msgid "Icon"
+#~ msgstr "Piktograma"
+
+#~ msgid "Set the custom menu button icon name"
+#~ msgstr "Nustatyti pasirinktinio meniu mygtuko piktogramos pavadinimą"
+
+#~ msgid "Enable opening the menu when the mouse enters the applet"
+#~ msgstr "Įgalinti meniu atidarymą, kai pelė įveda programėlę"
+
+#~ msgid ""
+#~ "When enabled, category views are activated on click instead of on hover."
+#~ msgstr ""
+#~ "Kai įjungta, kategorijų rodiniai suaktyvinami spustelėjus, o ne užvedus "
+#~ "pelę"
+
+#~ msgid ""
+#~ "Choose whether or not to enable smooth autoscrolling in the application "
+#~ "list."
+#~ msgstr ""
+#~ "Pasirinkite, ar programų sąraše įgalinti sklandų automatinį slinktį."
+
+#~ msgid "Choose whether or not bookmarks are indexed in the menu."
+#~ msgstr "Pasirinkite, ar žymos yra indeksuojamos meniu."
+
+#~ msgid "Choose whether or not to show bookmarks and places in the menu."
+#~ msgstr "Pasirinkite, ar nerodyti žymių ir vietų meniu."
+
+#~ msgid "Choose whether or not to show icons on applications."
+#~ msgstr "Pasirinkite, ar programose rodyti piktogramas, ar ne."
+
+#~ msgid "Choose whether or not to show icons on categories."
+#~ msgstr "Pasirinkite, ar kategorijose rodyti piktogramas, ar ne."
