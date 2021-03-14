@@ -287,7 +287,8 @@ class SimpleMenuItem {
     addDescription(appName, appDescription) {
         if (appDescription == '')
             appDescription = _("No description available");
-        this.label.get_clutter_text().set_markup(appName.replace("&", "&amp;") + '\n' + '<span size="small">' + appDescription.replace("&", "&amp;") + '</span>');
+        this.label.get_clutter_text().set_markup(appName.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;") + '\n' + '<span size="small">'
+                                                                    + appDescription.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;") + '</span>');
     }
 
     /**
@@ -664,7 +665,7 @@ class WebSearchButton extends SimpleMenuItem {
 
     changeLabel(pattern) {
         this.name = pattern;
-        let searchLabel = pattern;
+        let searchLabel = pattern.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
         if (this.searchEngineName != '')
             searchLabel += ' - ' + '<span size="small">' + this.searchEngineName + '</span>';
         this.label.clutter_text.set_markup(searchLabel);
