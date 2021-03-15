@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-07 10:42+0000\n"
+"POT-Creation-Date: 2021-03-11 07:33+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -60,7 +60,7 @@ msgstr ""
 msgid "Clear List"
 msgstr ""
 
-#: 3.2 4.0
+#: 3.2
 msgid "No recent files"
 msgstr ""
 
@@ -154,6 +154,10 @@ msgid "Please wait..."
 msgstr ""
 
 #: 4.0
+msgid "No recent Items"
+msgstr ""
+
+#: 4.0
 msgid "Solution:"
 msgstr ""
 
@@ -166,21 +170,20 @@ msgid "Search web for"
 msgstr ""
 
 #: 4.0
-msgid "Too many entries - showing first 1000 entries only"
-msgstr ""
-
-#: 4.0
 msgid "Favorites"
 msgstr ""
 
-#. 4.0->settings->open-on-category->options
 #: 4.0
-msgid "Recent"
+msgid "Recent items"
 msgstr ""
 
 #. 4.0->settings->open-on-category->options
 #: 4.0
 msgid "Home folder"
+msgstr ""
+
+#: 4.0
+msgid "Too many entries - showing first 1000 entries only"
 msgstr ""
 
 #. 3.2->settings->resetCategoryOrder-button->description
@@ -200,7 +203,7 @@ msgstr ""
 msgid "Other application..."
 msgstr ""
 
-#: 4.0 4.0/search.py:48
+#: 4.0 search.py
 msgid "Open containing folder"
 msgstr ""
 
@@ -212,71 +215,71 @@ msgstr ""
 msgid "Error while moving file to trash:"
 msgstr ""
 
-#: 4.0/search.py:43
+#: search.py
 msgid "Open"
 msgstr ""
 
-#: 4.0/search.py:85
+#: search.py
 msgid "Search"
 msgstr ""
 
-#: 4.0/search.py:106
+#: search.py
 msgid "Start in"
 msgstr ""
 
-#: 4.0/search.py:107
+#: search.py
 msgid "Select a folder"
 msgstr ""
 
-#: 4.0/search.py:113
+#: search.py
 msgid "Follow symlinks"
 msgstr ""
 
-#: 4.0/search.py:117
+#: search.py
 msgid "Search hidden"
 msgstr ""
 
-#: 4.0/search.py:121
+#: search.py
 msgid "Use regular expressions"
 msgstr ""
 
-#: 4.0/search.py:125
+#: search.py
 msgid "Stop"
 msgstr ""
 
-#: 4.0/search.py:140
+#: search.py
 msgid "File"
 msgstr ""
 
-#: 4.0/search.py:156
+#: search.py
 msgid "Path"
 msgstr ""
 
-#: 4.0/search.py:184
+#: search.py
 msgid "Searching..."
 msgstr ""
 
-#: 4.0/search.py:198 4.0/search.py:199
+#: search.py search.py
 msgid "Search Stopped"
 msgstr ""
 
-#: 4.0/search.py:215
+#: search.py
 msgid "Searching: "
 msgstr ""
 
-#: 4.0/search.py:220
+#: search.py
 msgid "Error: insufficient permissions to read folder "
 msgstr ""
 
-#: 4.0/search.py:252
+#: search.py
 msgid "Search Completed"
 msgstr ""
 
-#: 4.0/search.py:259
+#: search.py
 msgid "Skipping"
 msgstr ""
 
-#: 4.0/search.py:259
+#: search.py
 msgid " - directory already searched"
 msgstr ""
 
@@ -651,6 +654,10 @@ msgstr ""
 msgid "Last used category"
 msgstr ""
 
+#. 4.0->settings->open-on-category->options
+msgid "Recent"
+msgstr ""
+
 #. 4.0->settings->enable-autoscroll->tooltip
 msgid "Autoscroll the application list on mouse hover"
 msgstr ""
@@ -677,6 +684,14 @@ msgstr ""
 
 #. 4.0->settings->web-search-option->tooltip
 msgid "Show an internet search option in search results"
+msgstr ""
+
+#. 4.0->settings->enable-emoji-search->description
+msgid "Enable emoji search"
+msgstr ""
+
+#. 4.0->settings->enable-emoji-search->tooltip
+msgid "Show emojis in search results"
 msgstr ""
 
 #. 4.0->settings->show-hidden-files->description
