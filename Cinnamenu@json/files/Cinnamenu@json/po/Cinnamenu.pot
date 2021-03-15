@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-03-11 07:33+0000\n"
+"POT-Creation-Date: 2021-03-15 15:40+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,713 +17,479 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: 3.2
 msgid "Type to search..."
 msgstr ""
 
-#: 3.2 4.0
 msgid "Initializing"
 msgstr ""
 
-#: 3.2 4.0
 msgid "No description available"
 msgstr ""
 
-#. 4.0->settings->open-on-category->options
-#: 3.2 4.0
 msgid "All applications"
 msgstr ""
 
-#. 4.0->settings->open-on-category->options
-#: 3.2 4.0
 msgid "Places"
 msgstr ""
 
-#: 3.2
 msgid "Recent files"
 msgstr ""
 
-#: 3.2 4.0
 msgid "Bookmarks"
 msgstr ""
 
-#. 4.0->settings->open-on-category->options
-#: 3.2 4.0
 msgid "Favorite apps"
 msgstr ""
 
-#: 3.2
 msgid "gir1.2-gda-5.0 package required for Firefox and Midori bookmarks."
 msgstr ""
 
-#: 3.2 4.0
 msgid "Clear List"
 msgstr ""
 
-#: 3.2
 msgid "No recent files"
 msgstr ""
 
-#: 3.2
 msgid "Account details"
 msgstr ""
 
-#: 3.2 3.2
 msgid "Grid View"
 msgstr ""
 
-#: 3.2 3.2
 msgid "List View"
 msgstr ""
 
-#: 3.2 3.2
 msgid "Switch to grid view"
 msgstr ""
 
-#: 3.2 3.2
 msgid "Switch to list view"
 msgstr ""
 
-#: 3.2 4.0
 msgid "Lock screen"
 msgstr ""
 
-#: 3.2 4.0
 msgid "Lock the screen"
 msgstr ""
 
-#: 3.2 4.0
 msgid "Logout"
 msgstr ""
 
-#: 3.2 4.0
 msgid "Leave the session"
 msgstr ""
 
-#: 3.2 4.0
 msgid "Quit"
 msgstr ""
 
-#: 3.2 4.0
 msgid "Shutdown the computer"
 msgstr ""
 
-#: 3.2
 msgid "Home"
 msgstr ""
 
-#: 3.2
 msgid "Computer"
 msgstr ""
 
-#: 3.2
 msgid "Browse network"
 msgstr ""
 
-#: 3.2 3.2 4.0
-#: 4.0
 msgid "Run with NVIDIA GPU"
 msgstr ""
 
-#: 3.2 4.0
 msgid "Add to panel"
 msgstr ""
 
-#: 3.2 4.0
 msgid "Add to desktop"
 msgstr ""
 
-#: 3.2 4.0 4.0
 msgid "Remove from favorites"
 msgstr ""
 
-#: 3.2 4.0 4.0
 msgid "Add to favorites"
 msgstr ""
 
-#: 3.2
 msgid "Uninstall"
 msgstr ""
 
-#: 4.0
 msgid "Find files..."
 msgstr ""
 
-#: 4.0
 msgid "Please wait..."
 msgstr ""
 
-#: 4.0
 msgid "No recent Items"
 msgstr ""
 
-#: 4.0
 msgid "Solution:"
 msgstr ""
 
-#: 4.0 4.0
 msgid "Click to copy"
 msgstr ""
 
-#: 4.0
 msgid "Search web for"
 msgstr ""
 
-#: 4.0
 msgid "Favorites"
 msgstr ""
 
-#: 4.0
-msgid "Recent items"
+msgid "Recent"
 msgstr ""
 
-#. 4.0->settings->open-on-category->options
-#: 4.0
 msgid "Home folder"
 msgstr ""
 
-#: 4.0
 msgid "Too many entries - showing first 1000 entries only"
 msgstr ""
 
-#. 3.2->settings->resetCategoryOrder-button->description
-#: 4.0
 msgid "Reset category order"
 msgstr ""
 
-#: 4.0 4.0 4.0
 msgid "This file is no longer available"
 msgstr ""
 
-#: 4.0
 msgid "Open with"
 msgstr ""
 
-#: 4.0
 msgid "Other application..."
 msgstr ""
 
-#: 4.0 search.py
 msgid "Open containing folder"
 msgstr ""
 
-#: 4.0
 msgid "Move to trash"
 msgstr ""
 
-#: 4.0
 msgid "Error while moving file to trash:"
 msgstr ""
 
-#: search.py
 msgid "Open"
 msgstr ""
 
-#: search.py
 msgid "Search"
 msgstr ""
 
-#: search.py
 msgid "Start in"
 msgstr ""
 
-#: search.py
 msgid "Select a folder"
 msgstr ""
 
-#: search.py
 msgid "Follow symlinks"
 msgstr ""
 
-#: search.py
 msgid "Search hidden"
 msgstr ""
 
-#: search.py
 msgid "Use regular expressions"
 msgstr ""
 
-#: search.py
 msgid "Stop"
 msgstr ""
 
-#: search.py
 msgid "File"
 msgstr ""
 
-#: search.py
 msgid "Path"
 msgstr ""
 
-#: search.py
 msgid "Searching..."
 msgstr ""
 
-#: search.py search.py
 msgid "Search Stopped"
 msgstr ""
 
-#: search.py
 msgid "Searching: "
 msgstr ""
 
-#: search.py
 msgid "Error: insufficient permissions to read folder "
 msgstr ""
 
-#: search.py
 msgid "Search Completed"
 msgstr ""
 
-#: search.py
 msgid "Skipping"
 msgstr ""
 
-#: search.py
 msgid " - directory already searched"
 msgstr ""
 
-#. metadata.json->name
-#. 3.2->settings->cinnamenuProvidersSection->title
 msgid "Cinnamenu"
 msgstr ""
 
-#. metadata.json->description
 msgid ""
 "A flexible menu providing formatting options, web bookmarks, search provider"
 " support and fuzzy searching."
 msgstr ""
 
-#. 3.2->settings->panel->title
-#. 4.0->settings->behaviour->title
 msgid "Behavior"
 msgstr ""
 
-#. 3.2->settings->appearance->title
-#. 4.0->settings->appearance->title
 msgid "Appearance"
 msgstr ""
 
-#. 3.2->settings->menu->title
-#. 4.0->settings->layout->title
 msgid "Layout and Content"
 msgstr ""
 
-#. 3.2->settings->providers->title
 msgid "Search Providers"
 msgstr ""
 
-#. 3.2->settings->extensionProvidersSection->title
 msgid "No search provider extensions found"
 msgstr ""
 
-#. 3.2->settings->panel-appear->title
-#. 3.2->settings->panel-behave->title
-#. 4.0->settings->panel-behave->title
-#. 4.0->settings->panel-appear->title
 msgid "Panel"
 msgstr ""
 
-#. 3.2->settings->menu-behave->title
-#. 3.2->settings->menu-icons->title
-#. 4.0->settings->menu-behave->title
-#. 4.0->settings->menu-icons->title
 msgid "Menu"
 msgstr ""
 
-#. 3.2->settings->menu-layout->title
-#. 4.0->settings->menu-layout->title
 msgid "Layout"
 msgstr ""
 
-#. 3.2->settings->menu-content->title
-#. 4.0->settings->menu-content->title
 msgid "Content"
 msgstr ""
 
-#. 3.2->settings->privacy-settings-button->description
 msgid "Recent files settings"
 msgstr ""
 
-#. 3.2->settings->menu-editor-button->description
-#. 4.0->settings->menu-editor-button->description
 msgid "Open the menu editor"
 msgstr ""
 
-#. 3.2->settings->menu-icon-custom->description
-#. 4.0->settings->menu-icon-custom->description
 msgid "Use a custom icon"
 msgstr ""
 
-#. 3.2->settings->menu-icon-custom->tooltip
-#. 4.0->settings->menu-icon-custom->tooltip
 msgid "Use a custom icon in the panel"
 msgstr ""
 
-#. 3.2->settings->menu-icon->description
-#. 3.2->settings->menu-icon->tooltip
-#. 4.0->settings->menu-icon->description
-#. 4.0->settings->menu-icon->tooltip
 msgid "Panel icon"
 msgstr ""
 
-#. 3.2->settings->menu-label->description
-#. 4.0->settings->menu-label->description
 msgid "Panel text"
 msgstr ""
 
-#. 3.2->settings->menu-label->tooltip
-#. 4.0->settings->menu-label->tooltip
 msgid "Text to show beside the panel icon"
 msgstr ""
 
-#. 3.2->settings->category-icon-size->units
-#. 3.2->settings->apps-list-icon-size->units
-#. 3.2->settings->apps-grid-icon-size->units
-#. 3.2->settings->custom-menu-height->units
-#. 4.0->settings->menu-icon-size->units
-#. 4.0->settings->category-icon-size->units
-#. 4.0->settings->apps-list-icon-size->units
-#. 4.0->settings->apps-grid-icon-size->units
-#. 4.0->settings->sidebar-icon-size->units
 msgid "pixels"
 msgstr ""
 
-#. 3.2->settings->category-icon-size->description
-#. 3.2->settings->category-icon-size->tooltip
-#. 4.0->settings->category-icon-size->description
-#. 4.0->settings->category-icon-size->tooltip
 msgid "Category icon size"
 msgstr ""
 
-#. 3.2->settings->apps-list-icon-size->description
-#. 3.2->settings->apps-list-icon-size->tooltip
-#. 4.0->settings->apps-list-icon-size->description
-#. 4.0->settings->apps-list-icon-size->tooltip
 msgid "Applications list icon size"
 msgstr ""
 
-#. 3.2->settings->apps-grid-icon-size->description
-#. 3.2->settings->apps-grid-icon-size->tooltip
-#. 4.0->settings->apps-grid-icon-size->description
-#. 4.0->settings->apps-grid-icon-size->tooltip
 msgid "Applications grid icon size"
 msgstr ""
 
-#. 3.2->settings->overlay-key->description
-#. 4.0->settings->overlay-key->description
 msgid "Keyboard shortcut to open and close the menu"
 msgstr ""
 
-#. 3.2->settings->activate-on-hover->description
-#. 4.0->settings->activate-on-hover->description
 msgid "Open menu on hover"
 msgstr ""
 
-#. 3.2->settings->activate-on-hover->tooltip
-#. 4.0->settings->activate-on-hover->tooltip
 msgid "Open the menu when I move my mouse over the panel icon"
 msgstr ""
 
-#. 3.2->settings->hover-delay->units
-#. 3.2->settings->tooltip-delay->units
-#. 4.0->settings->hover-delay->units
 msgid "milliseconds"
 msgstr ""
 
-#. 3.2->settings->hover-delay->description
-#. 4.0->settings->hover-delay->description
 msgid "Menu hover delay"
 msgstr ""
 
-#. 3.2->settings->enable-animation->description
-#. 4.0->settings->enable-animation->description
 msgid "Use menu animations"
 msgstr ""
 
-#. 3.2->settings->enable-animation->tooltip
-#. 4.0->settings->enable-animation->tooltip
 msgid "Animate the menu on open and close"
 msgstr ""
 
-#. 3.2->settings->category-click->description
-#. 4.0->settings->category-click->description
 msgid "Activate categories on click"
 msgstr ""
 
-#. 3.2->settings->category-click->tooltip
-#. 4.0->settings->category-click->tooltip
 msgid "Activate categories on click instead of on hover"
 msgstr ""
 
-#. 3.2->settings->enable-autoscroll->description
-#. 4.0->settings->enable-autoscroll->description
 msgid "Enable autoscrolling"
 msgstr ""
 
-#. 3.2->settings->enable-autoscroll->tooltip
 msgid "Enable autoscrolling in application list"
 msgstr ""
 
-#. 3.2->settings->enable-bookmarks->description
-#. 4.0->settings->show-web-bookmarks-category->description
 msgid "Show web bookmarks"
 msgstr ""
 
-#. 3.2->settings->enable-bookmarks->tooltip
-#. 4.0->settings->show-web-bookmarks-category->tooltip
 msgid ""
 "Show your browser's web bookmarks in the menu.\n"
 "Note: Install package gir1.2-gda-5.0 to read firefox bookmarks."
 msgstr ""
 
-#. 3.2->settings->enable-windows->description
 msgid "Enable searching of open windows"
 msgstr ""
 
-#. 3.2->settings->enable-search-providers->description
 msgid "Enable search providers"
 msgstr ""
 
-#. 3.2->settings->enable-search-providers->tooltip
 msgid "Include search provider results in searches"
 msgstr ""
 
-#. 3.2->settings->get-providers->description
 msgid "Example Search Providers"
 msgstr ""
 
-#. 3.2->settings->startup-view-mode->description
-#. 4.0->settings->open-on-category->description
 msgid "Open menu on category:"
 msgstr ""
 
-#. 3.2->settings->startup-view-mode->options
-#. 4.0->settings->applications-view-mode->options
 msgid "List"
 msgstr ""
 
-#. 3.2->settings->startup-view-mode->options
-#. 4.0->settings->applications-view-mode->options
 msgid "Grid"
 msgstr ""
 
-#. 3.2->settings->startup-view-mode->tooltip
-#. 4.0->settings->open-on-category->tooltip
 msgid "Always open the menu with this category selected"
 msgstr ""
 
-#. 3.2->settings->apps-grid-column-count->units
 msgid "columns"
 msgstr ""
 
-#. 3.2->settings->apps-grid-column-count->description
-#. 3.2->settings->apps-grid-column-count->tooltip
 msgid "Number of columns in apps grid"
 msgstr ""
 
-#. 3.2->settings->show-places->description
-#. 4.0->settings->show-places-category->description
 msgid "Show bookmarks and places"
 msgstr ""
 
-#. 3.2->settings->show-places->tooltip
-#. 4.0->settings->show-places-category->tooltip
 msgid "Show bookmarks and places category in the menu"
 msgstr ""
 
-#. 3.2->settings->show-application-icons->description
-#. 3.2->settings->show-application-icons->tooltip
 msgid "Show application icons"
 msgstr ""
 
-#. 3.2->settings->show-category-icons->description
-#. 3.2->settings->show-category-icons->tooltip
 msgid "Show category icons"
 msgstr ""
 
-#. 3.2->settings->show-apps-description-on-buttons->description
-#. 3.2->settings->show-apps-description-on-buttons->tooltip
 msgid "Show application descriptions under titles"
 msgstr ""
 
-#. 3.2->settings->show-tooltips->description
-#. 3.2->settings->show-tooltips->tooltip
 msgid "Show tooltips"
 msgstr ""
 
-#. 3.2->settings->tooltip-delay->description
-#. 3.2->settings->tooltip-delay->tooltip
 msgid "Tooltip delay"
 msgstr ""
 
-#. 3.2->settings->enable-custom-menu-height->description
-#. 3.2->settings->enable-custom-menu-height->tooltip
 msgid "Use a custom menu height"
 msgstr ""
 
-#. 3.2->settings->custom-menu-height->description
-#. 3.2->settings->custom-menu-height->tooltip
 msgid "Custom menu height"
 msgstr ""
 
-#. 4.0->settings->applications-view-mode->description
 msgid "Applications view mode"
 msgstr ""
 
-#. 4.0->settings->applications-view-mode->tooltip
 msgid "View applications as list or grid"
 msgstr ""
 
-#. 4.0->settings->description-placement->description
 msgid "Application description placement"
 msgstr ""
 
-#. 4.0->settings->description-placement->options
 msgid "Tooltips"
 msgstr ""
 
-#. 4.0->settings->description-placement->options
 msgid "Under titles"
 msgstr ""
 
-#. 4.0->settings->description-placement->options
-#. 4.0->settings->web-search-option->options
 msgid "None"
 msgstr ""
 
-#. 4.0->settings->description-placement->tooltip
 msgid "Choose where to show application descriptions"
 msgstr ""
 
-#. 4.0->settings->sidebar-placement->description
 msgid "Session buttons location"
 msgstr ""
 
-#. 4.0->settings->sidebar-placement->options
 msgid "Top"
 msgstr ""
 
-#. 4.0->settings->sidebar-placement->options
 msgid "Bottom"
 msgstr ""
 
-#. 4.0->settings->sidebar-placement->options
 msgid "Left"
 msgstr ""
 
-#. 4.0->settings->sidebar-placement->options
 msgid "Right"
 msgstr ""
 
-#. 4.0->settings->sidebar-placement->tooltip
 msgid "Choose where to show the session buttons (quit, logout, etc.)"
 msgstr ""
 
-#. 4.0->settings->info-box->description
 msgid ""
 "\n"
 "Info/tip: Drag on the menu edge to change the menu size.\n"
 msgstr ""
 
-#. 4.0->settings->add-favorites->description
 msgid "Add favorites to session buttons"
 msgstr ""
 
-#. 4.0->settings->add-favorites->tooltip
 msgid "Show your favorite app icons next to the session buttons"
 msgstr ""
 
-#. 4.0->settings->show-favorite-apps-category->description
 msgid "Show favorite apps category"
 msgstr ""
 
-#. 4.0->settings->show-favorite-apps-category->tooltip
 msgid "Show your favorite apps category in the menu"
 msgstr ""
 
-#. 4.0->settings->show-home-folder-category->description
 msgid "Show home folder"
 msgstr ""
 
-#. 4.0->settings->show-home-folder-category->tooltip
 msgid "Show home folder category in the menu"
 msgstr ""
 
-#. 4.0->settings->open-on-category->options
 msgid "Last used category"
 msgstr ""
 
-#. 4.0->settings->open-on-category->options
-msgid "Recent"
-msgstr ""
-
-#. 4.0->settings->enable-autoscroll->tooltip
 msgid "Autoscroll the application list on mouse hover"
 msgstr ""
 
-#. 4.0->settings->web-search-option->description
 msgid "Web search option"
 msgstr ""
 
-#. 4.0->settings->web-search-option->options
 msgid "Google"
 msgstr ""
 
-#. 4.0->settings->web-search-option->options
 msgid "Bing"
 msgstr ""
 
-#. 4.0->settings->web-search-option->options
 msgid "Yahoo"
 msgstr ""
 
-#. 4.0->settings->web-search-option->options
 msgid "DuckDuckGo"
 msgstr ""
 
-#. 4.0->settings->web-search-option->tooltip
 msgid "Show an internet search option in search results"
 msgstr ""
 
-#. 4.0->settings->enable-emoji-search->description
 msgid "Enable emoji search"
 msgstr ""
 
-#. 4.0->settings->enable-emoji-search->tooltip
 msgid "Show emojis in search results"
 msgstr ""
 
-#. 4.0->settings->show-hidden-files->description
 msgid "Show hidden files"
 msgstr ""
 
-#. 4.0->settings->show-hidden-files->tooltip
 msgid "Show hidden files in folder view"
 msgstr ""
 
-#. 4.0->settings->menu-icon-size-custom->description
 msgid "Use a custom icon size"
 msgstr ""
 
-#. 4.0->settings->menu-icon-size-custom->tooltip
 msgid "Use a custom size for the panel icon"
 msgstr ""
 
-#. 4.0->settings->menu-icon-size->description
 msgid "Panel icon size"
 msgstr ""
 
-#. 4.0->settings->menu-icon-size->tooltip
 msgid "Choose a custom size for the panel icon"
 msgstr ""
 
-#. 4.0->settings->sidebar-icon-size->description
-#. 4.0->settings->sidebar-icon-size->tooltip
 msgid "Session buttons icon size"
 msgstr ""
 
-#. 4.0->settings->use-box-style->description
-#. 4.0->settings->use-box-style->tooltip
 msgid "Use session buttons box style"
 msgstr ""
