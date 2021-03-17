@@ -141,6 +141,7 @@ class QRedshift extends Applet.TextIconApplet {
         
         qLOG("QRedshift", 'Created');
         
+        
         this.maxBrightness = 100;
         this.minBrightness = 10;
         this.maxColor = 9000;
@@ -241,12 +242,13 @@ class QRedshift extends Applet.TextIconApplet {
         // qLOG('ICON', this.opt.symbolicIcon);
         
         if (this.opt.symbolicIcon) {
-            this.set_applet_icon_symbolic_path('');
+            // this.set_applet_icon_symbolic_path('');
             if (this.opt.enabled)
                 this.set_applet_icon_symbolic_name(S_ICON_ON);
             else
                 this.set_applet_icon_symbolic_name(S_ICON_OFF);
         } else {
+            this.set_applet_icon_symbolic_path('');
             if (this.opt.enabled)
                 this.set_applet_icon_symbolic_path(this.metadata.path + ICON_ON);
             else
@@ -291,8 +293,8 @@ class QRedshift extends Applet.TextIconApplet {
     
     checkLocalConfig() {
         try {
-            let home = this.metadata.path.split('.local')[0];
-            let exists = GLib.file_test(home + '.config/redshift.conf', 16);
+            let home = GLib.get_home_dir();
+            let exists = GLib.file_test(home + '/.config/redshift.conf', 16);
             return exists;
         } catch (e) {
             return true;
@@ -668,12 +670,13 @@ class QRedshift extends Applet.TextIconApplet {
                 }
                 // qLOG('QRedshift Command', command);
                 // qLOG('QRedshift Period', this.opt.period);
-                this.setIcon();
+                // this.setIcon();
                 this.updateTooltip();
                 this.setInfo();
                 this.running = false;
             });
         }
+        this.setIcon();
     }
     
     
