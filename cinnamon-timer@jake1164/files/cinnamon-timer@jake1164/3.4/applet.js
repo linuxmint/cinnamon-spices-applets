@@ -179,6 +179,7 @@ MyApplet.prototype = {
         this.MessagePromptOn = this.settings.getValue("message-prompt-enable");
         this.ShowMenuOn = this.settings.getValue("display-menu-enable");
         this.SoundPath = this.settings.getValue("sound-file");
+        this.SoundVolume = this.settings.getValue("sound-volume");
         this.MessageStr = this.settings.getValue("display-message");
         this.AutoLoopPromptOn = this.settings.getValue("auto-loop-enable");
         this.on_orientation_changed(this._orientation);
@@ -401,7 +402,7 @@ MyApplet.prototype = {
         }
         if (this.SoundPromptOn) {
             try {
-                Util.spawnCommandLine("play " + this.SoundPath);
+                Util.spawnCommandLine("play -v " + this.SoundVolume/100 + " " + this.SoundPath);
             }
             catch (e) {
                 // spawnCommandLine does not actually throw exception when a sound fails to play

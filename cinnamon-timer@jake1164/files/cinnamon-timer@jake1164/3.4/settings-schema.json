@@ -41,7 +41,7 @@
         "section2": {
             "type": "section",
             "title": "Sound Settings",
-            "keys": ["sound-prompt-enable", "sound-file"]
+            "keys": ["sound-prompt-enable", "sound-file", "sound-volume"]
         },
         "section3": {
             "type": "section",
@@ -85,6 +85,16 @@
         "description": "Full path and filename of alert sound file",
         "tooltip": "Must have Sox installed. Most sound file types supported"
     },
+    "sound-volume" : {
+        "type" : "scale",
+        "default" : 50,
+        "min" : 10,
+        "max" : 100,
+        "step" : 5,
+        "description" : "Specify the playback volume",
+        "tooltip" : "Specify the playback volume"
+    },
+
     "display-menu-enable" : {
         "type" : "checkbox",
         "default" : false,
