@@ -189,7 +189,7 @@ MyApplet.prototype = {
 
     getUserName: function getUserName() {
         try {
-            let [stdout] = GLib.spawn_command_line_sync('whoami');
+            let [_, stdout] = GLib.spawn_command_line_sync('whoami');
             if (stdout !== null)
                 return stdout.toString();
         } catch (e) {
