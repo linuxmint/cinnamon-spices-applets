@@ -13,7 +13,7 @@ const {PopupBaseMenuItem, PopupMenu, PopupSeparatorMenuItem} = imports.ui.popupM
 const {DragMotionResult, makeDraggable} = imports.ui.dnd;
 const {getUserDesktopDir, changeModeGFile} = imports.misc.fileUtils;
 const {SignalManager} = imports.misc.signalManager;
-const {spawnCommandLine, spawn, unref} = imports.misc.util;
+const {spawnCommandLine} = imports.misc.util;
 const MessageTray = imports.ui.messageTray;
 const ApplicationsViewModeLIST = 0, ApplicationsViewModeGRID = 1;
 const {_, wordWrap, showTooltip, hideTooltipIfVisible} = require('./utils');
@@ -125,33 +125,34 @@ class CategoryButton {
         }
 
         this.entered = true;
+        if (this.id === this.appThis.currentCategory) {//No need to select category as already selected
+            return Clutter.EVENT_STOP;
+        }
         if (this.appThis.settings.categoryClick) {
-            if (this.id != this.appThis.currentCategory) {
-                this.actor.set_style_class_name('menu-category-button-hover');
-                //Also use menu-category-button-selected as menu-category-button-hover not defined in most themes
-                this.actor.add_style_class_name('menu-category-button-selected');
-                //some style tweaks for menu-category-button-hover class.
-                let themePath = Main.getThemeStylesheet();
-                if (!themePath) themePath = 'Cinnamon default';
-                [['/Mint-Y/',           'background-color: #d8d8d8; color: black;'],
-                ['/Mint-Y-Dark/',       'background-color: #404040;'],
-                ['/Mint-X/',            'background-color: #d4d4d4; color: black; border-image: none;'],
-                ['/Faded-Dream/',       'background-color: rgba(255,255,255,0.25);'],
-                ['/Linux Mint/',        'box-shadow: none; background-gradient-end: rgba(90, 90, 90, 0.5);'],
-                ['Cinnamon default',    'background-gradient-start: rgba(255,255,255,0.03); background-gradient-end: rgba(255,255,255,0.03);'],
-                ['/Adapta-Nokto/',      'background-color: rgba(207, 216, 220, 0.12); color: #CFD8DC'],
-                ['/Eleganse/',          'background-gradient-start: rgba(255,255,255,0.08); box-shadow: none;'],
-                ['/Eleganse-dark/',     'background-gradient-start: rgba(255,255,255,0.08); box-shadow: none;'],
-                ['/Adapta/',            'color: #263238; background-color: rgba(38, 50, 56, 0.12)'],
-                ['/Adapta-Maia/',       'color: #263238; background-color: rgba(38, 50, 56, 0.12)'],
-                ['/Adapta-Nokto-Maia/', 'color: #CFD8DC; background-color: rgba(207, 216, 220, 0.12);'],
-                ['Cinnamox-',           'background-color: rgba(255,255,255,0.2);']
-                ].forEach(fix => {
-                    if (themePath.includes(fix[0])) {
-                        this.actor.set_style(fix[1]);
-                    }
-                });
-            }
+            this.actor.set_style_class_name('menu-category-button-hover');
+            //Also use menu-category-button-selected as menu-category-button-hover not defined in most themes
+            this.actor.add_style_class_name('menu-category-button-selected');
+            //-----some style tweaks for menu-category-button-hover class.-----
+            let themePath = Main.getThemeStylesheet();
+            if (!themePath) themePath = 'Cinnamon default';
+            [['/Mint-Y/',           'background-color: #d8d8d8; color: black;'],
+            ['/Mint-Y-Dark/',       'background-color: #404040;'],
+            ['/Mint-X/',            'background-color: #d4d4d4; color: black; border-image: none;'],
+            ['/Faded-Dream/',       'background-color: rgba(255,255,255,0.25);'],
+            ['/Linux Mint/',        'box-shadow: none; background-gradient-end: rgba(90, 90, 90, 0.5);'],
+            ['Cinnamon default',    'background-gradient-start: rgba(255,255,255,0.03); background-gradient-end: rgba(255,255,255,0.03);'],
+            ['/Adapta-Nokto/',      'background-color: rgba(207, 216, 220, 0.12); color: #CFD8DC'],
+            ['/Eleganse/',          'background-gradient-start: rgba(255,255,255,0.08); box-shadow: none;'],
+            ['/Eleganse-dark/',     'background-gradient-start: rgba(255,255,255,0.08); box-shadow: none;'],
+            ['/Adapta/',            'color: #263238; background-color: rgba(38, 50, 56, 0.12)'],
+            ['/Adapta-Maia/',       'color: #263238; background-color: rgba(38, 50, 56, 0.12)'],
+            ['/Adapta-Nokto-Maia/', 'color: #CFD8DC; background-color: rgba(207, 216, 220, 0.12);'],
+            ['Cinnamox-',           'background-color: rgba(255,255,255,0.2);']
+            ].forEach(fix => {
+                if (themePath.includes(fix[0])) {
+                    this.actor.set_style(fix[1]);
+                }
+            });
             return Clutter.EVENT_STOP;
         } else {
             this.selectCategory();
@@ -165,7 +166,7 @@ class CategoryButton {
         }
         this.entered = false;
         if ((!event || this.appThis.settings.categoryClick) && this.appThis.currentCategory !== this.id) {
-            if (this.id != this.appThis.currentCategory) {
+            if (this.id !== this.appThis.currentCategory) {
                 this.actor.set_style_class_name('menu-category-button');
             } else {
                 this.actor.set_style_class_name('menu-category-button-selected');
@@ -180,7 +181,7 @@ class CategoryButton {
             return Clutter.EVENT_STOP;
         }
         if (this.disabled) {
-            return;
+            return Clutter.EVENT_STOP;
         }
         const button = event.get_button();
         if (button === 1 && this.appThis.settings.categoryClick) {
@@ -272,7 +273,6 @@ class ContextMenuItem extends PopupBaseMenuItem {
     destroy() {
         this.signals.disconnectAllSignals();
         PopupBaseMenuItem.prototype.destroy.call(this);
-        unref(this);
     }
 }
 
@@ -533,7 +533,6 @@ class ContextMenu {
 
 class AppButton {
     constructor(appThis, app) {
-        //super({ hover: false, activate: false });
         this.appThis = appThis;
         this.app = app;
         const isListView = this.appThis.settings.applicationsViewMode === ApplicationsViewModeLIST;
@@ -589,7 +588,6 @@ class AppButton {
                                                     '; margin: 0px; border: 1px; border-radius: 10px;' :
                 'width: 32px; height: 2px; background-color: ' + this.appThis.getThemeForegroundColor() +
                                                     '; margin: 0px; border: 1px; border-radius: 10px;',
-                layout_manager: new Clutter.BinLayout(),
                 x_expand: false,
                 y_expand: false});
         //-------------actor---------------------
@@ -924,7 +922,6 @@ class SidebarButton {
         if (this.callback) {
             this.callback();
         } else if (this.app.isApplication) {
-            this.app.newAppShouldHighlight = false;
             this.appThis.recentApps.add(this.app.id);
             this.app.open_new_window(-1);
             this.appThis.closeMenu();
@@ -986,9 +983,7 @@ class SidebarButton {
         if (this.icon) {
             this.icon.destroy();
         }
-
-        //super.destroy();
-        //unref(this);
+        this.actor.destroy();
     }
 }
 
