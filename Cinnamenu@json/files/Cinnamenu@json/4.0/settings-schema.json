@@ -219,7 +219,7 @@
 
     "category-click":{
         "type":"checkbox",
-        "default":false,
+        "default":true,
         "description":"Activate categories on click",
         "tooltip":"Activate categories on click instead of on hover"
     },
