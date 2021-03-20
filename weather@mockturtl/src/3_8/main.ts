@@ -182,7 +182,7 @@ export class WeatherApplet extends TextIconApplet {
 				if (label != "") {
 					label += " ";
 				}
-				label += `${temp} ${UnitToUnicode(this.config.TemperatureUnit)}`;
+				label += temp;
 			}
 		}
 		// Vertical panels
@@ -200,7 +200,7 @@ export class WeatherApplet extends TextIconApplet {
 		// Overriding temperature panel label
 		if (NotEmpty(this.config._tempTextOverride)) {
 			label = this.config._tempTextOverride
-				.replace("{t}", temp)
+				.replace("{t}", TempToUserConfig(temperature, this.config, false))
 				.replace("{u}", UnitToUnicode(this.config.TemperatureUnit))
 				.replace("{c}", mainCondition);
 		}

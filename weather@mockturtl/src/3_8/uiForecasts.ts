@@ -4,7 +4,7 @@ import { Event } from "./events";
 import { Log } from "./logger";
 import { WeatherApplet } from "./main";
 import { WeatherData } from "./types";
-import { TempToUserConfig, _, GetDayName, UnitToUnicode, WeatherIconSafely, OnSameDay } from "./utils";
+import { TempToUserConfig, _, GetDayName, UnitToUnicode, WeatherIconSafely, OnSameDay, TempRangeToUserConfig } from "./utils";
 import { WeatherButton } from "./weatherbutton";
 
 const { Bin, BoxLayout, Label, Icon, Widget } = imports.gi.St;
@@ -97,17 +97,7 @@ export class UIForecasts {
 					forecastUi.Day.disable();
 				}
 
-				let t_low = TempToUserConfig(forecastData.temp_min, config);
-				let t_high = TempToUserConfig(forecastData.temp_max, config);
-
-				let first_temperature = config._temperatureHighFirst ? t_high : t_low;
-				let second_temperature = config._temperatureHighFirst ? t_low : t_high;
-
-				forecastUi.Temperature.text = first_temperature;
-				// As Russian Tradition, -temp...+temp
-				// See https://github.com/linuxmint/cinnamon-spices-applets/issues/618
-				forecastUi.Temperature.text += ((config._tempRussianStyle) ? ELLIPSIS : ` ${FORWARD_SLASH} `);
-				forecastUi.Temperature.text += `${second_temperature} ${UnitToUnicode(config.TemperatureUnit)}`;
+				forecastUi.Temperature.text = TempRangeToUserConfig(forecastData.temp_min, forecastData.temp_max, config);
 				forecastUi.Summary.text = comment;
 				forecastUi.Icon.icon_name = (config._useCustomMenuIcons) ? forecastData.condition.customIcon : WeatherIconSafely(forecastData.condition.icons, config.IconType);
 			}

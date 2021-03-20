@@ -247,7 +247,7 @@ class CurrentWeather {
                     value = utils_1.PrecentToLocale(extra_field.value, this.app.config.currentLocale);
                     break;
                 case "temperature":
-                    value = `${utils_1.TempToUserConfig(extra_field.value, this.app.config)} ${utils_1.UnitToUnicode(this.app.config.TemperatureUnit)}`;
+                    value = utils_1.TempToUserConfig(extra_field.value, this.app.config);
                     break;
                 default:
                     value = utils_1._(extra_field.value);
@@ -274,7 +274,7 @@ class CurrentWeather {
         let temp = utils_1.TempToUserConfig(temperature, this.app.config);
         if (temp == null)
             return;
-        this.temperatureLabel.text = `${temp} ${utils_1.UnitToUnicode(this.app.config.TemperatureUnit)}`;
+        this.temperatureLabel.text = temp;
     }
     SetHumidity(humidity) {
         if (humidity != null) {

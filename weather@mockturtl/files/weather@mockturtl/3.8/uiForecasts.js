@@ -67,13 +67,7 @@ class UIForecasts {
                 else {
                     forecastUi.Day.disable();
                 }
-                let t_low = utils_1.TempToUserConfig(forecastData.temp_min, config);
-                let t_high = utils_1.TempToUserConfig(forecastData.temp_max, config);
-                let first_temperature = config._temperatureHighFirst ? t_high : t_low;
-                let second_temperature = config._temperatureHighFirst ? t_low : t_high;
-                forecastUi.Temperature.text = first_temperature;
-                forecastUi.Temperature.text += ((config._tempRussianStyle) ? consts_1.ELLIPSIS : ` ${consts_1.FORWARD_SLASH} `);
-                forecastUi.Temperature.text += `${second_temperature} ${utils_1.UnitToUnicode(config.TemperatureUnit)}`;
+                forecastUi.Temperature.text = utils_1.TempRangeToUserConfig(forecastData.temp_min, forecastData.temp_max, config);
                 forecastUi.Summary.text = comment;
                 forecastUi.Icon.icon_name = (config._useCustomMenuIcons) ? forecastData.condition.customIcon : utils_1.WeatherIconSafely(forecastData.condition.icons, config.IconType);
             }

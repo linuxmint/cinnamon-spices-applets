@@ -1,5 +1,5 @@
 import { WeatherWindSpeedUnits, WeatherUnits, WeatherPressureUnits, DistanceUnits, Config } from "./config";
-import { UUID } from "./consts";
+import { ELLIPSIS, FORWARD_SLASH, UUID } from "./consts";
 import { SunTimes } from "./sunCalc";
 import { ArrowIcons, BuiltinIcons, WeatherData } from "./types";
 const { timeout_add, source_remove } = imports.mainloop;
@@ -266,21 +266,56 @@ export function MPStoUserUnits(mps: number, units: WeatherWindSpeedUnits): strin
 }
 
 // Conversion from Kelvin
-export function TempToUserConfig(kelvin: number, config: Config): string {
+export function TempToUserConfig(kelvin: number, config: Config, withUnit: boolean = true): string {
 	if (kelvin == null) return null;
-	let temp;
-	if (config.TemperatureUnit == "celsius") {
-		temp = Math.round((kelvin - 273.15));
-	}
-	if (config.TemperatureUnit == "fahrenheit") {
-		temp = Math.round((9 / 5 * (kelvin - 273.15) + 32));
+
+	let temp: any = (config.TemperatureUnit == "celsius") ? KelvinToCelsius(kelvin) : KelvinToFahrenheit(kelvin);
+	temp = RussianTransform(temp, config._tempRussianStyle);
+
+	if (config._showBothTempUnits) {
+		let secondTemp: any = (config.TemperatureUnit == "celsius") ? KelvinToFahrenheit(kelvin) : KelvinToCelsius(kelvin);
+		secondTemp = RussianTransform(secondTemp, config._tempRussianStyle);
+		temp += ` (${secondTemp.toString()})`;
 	}
 
-	if (!config._tempRussianStyle) return temp.toString();
+	if (withUnit)
+		temp = `${temp} ${UnitToUnicode(config.TemperatureUnit)}`;
 
-	if (temp < 0) temp = "−" + Math.abs(temp).toString();
-	else if (temp > 0) temp = "+" + temp.toString();
 	return temp.toString();
+}
+
+export function RussianTransform(temp: number, russianStyle: boolean): string {
+	if (russianStyle) {
+		if (temp < 0) return `−${Math.abs(temp).toString()}`;
+		else if (temp > 0) return `+${temp.toString()}`;
+	}
+	else
+		return temp.toString();
+}
+
+export function TempRangeToUserConfig(min: number, max: number, config: Config): string {
+	let t_low = TempToUserConfig(min, config, false);
+	let t_high = TempToUserConfig(max, config, false);
+
+	let first_temperature = config._temperatureHighFirst ? t_high : t_low;
+	let second_temperature = config._temperatureHighFirst ? t_low : t_high;
+
+	let result = "";
+	result = first_temperature;
+	// As Russian Tradition, -temp...+temp
+	// See https://github.com/linuxmint/cinnamon-spices-applets/issues/618
+	result += ((config._tempRussianStyle) ? ELLIPSIS : ` ${FORWARD_SLASH} `);
+	result += `${second_temperature} `;
+	result += `${UnitToUnicode(config.TemperatureUnit)}`;
+	return result;
+}
+
+function KelvinToCelsius(k: number): number {
+	return Math.round((k - 273.15));
+}
+
+function KelvinToFahrenheit(k: number): number {
+	return Math.round((9 / 5 * (k - 273.15) + 32));
 }
 
 /**

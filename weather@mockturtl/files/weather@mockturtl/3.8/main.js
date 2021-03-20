@@ -153,7 +153,7 @@ class WeatherApplet extends TextIconApplet {
                 if (label != "") {
                     label += " ";
                 }
-                label += `${temp} ${utils_1.UnitToUnicode(this.config.TemperatureUnit)}`;
+                label += temp;
             }
         }
         else {
@@ -166,7 +166,7 @@ class WeatherApplet extends TextIconApplet {
         }
         if (utils_1.NotEmpty(this.config._tempTextOverride)) {
             label = this.config._tempTextOverride
-                .replace("{t}", temp)
+                .replace("{t}", utils_1.TempToUserConfig(temperature, this.config, false))
                 .replace("{u}", utils_1.UnitToUnicode(this.config.TemperatureUnit))
                 .replace("{c}", mainCondition);
         }

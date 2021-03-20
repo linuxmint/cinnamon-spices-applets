@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.setInterval = exports.clearTimeout = exports.delay = exports.setTimeout = exports.Guid = exports.GetFuncName = exports.GetDistance = exports.ConstructJsLocale = exports.ShadeHexColor = exports.WeatherIconSafely = exports.mode = exports.IsLangSupported = exports.NotEmpty = exports.IsCoordinate = exports.IsNight = exports.CompassDirection = exports.CompassToDeg = exports.KmToM = exports.MPHtoMPS = exports.FahrenheitToKelvin = exports.CelsiusToKelvin = exports.KPHtoMPS = exports.MillimeterToUserUnits = exports.MetreToUserUnits = exports.PressToUserUnits = exports.TempToUserConfig = exports.MPStoUserUnits = exports.PrecentToLocale = exports.LocalizedColon = exports.ProcessCondition = exports.OnSameDay = exports.AddHours = exports.MilitaryTime = exports.AwareDateString = exports.GetHoursMinutes = exports.GetDayName = exports.CapitalizeEveryWord = exports.CapitalizeFirstLetter = exports.GenerateLocationText = exports.UnitToUnicode = exports.format = exports._ = void 0;
+exports.setInterval = exports.clearTimeout = exports.delay = exports.setTimeout = exports.Guid = exports.GetFuncName = exports.GetDistance = exports.ConstructJsLocale = exports.ShadeHexColor = exports.WeatherIconSafely = exports.mode = exports.IsLangSupported = exports.NotEmpty = exports.IsCoordinate = exports.IsNight = exports.CompassDirection = exports.CompassToDeg = exports.KmToM = exports.MPHtoMPS = exports.FahrenheitToKelvin = exports.CelsiusToKelvin = exports.KPHtoMPS = exports.MillimeterToUserUnits = exports.MetreToUserUnits = exports.PressToUserUnits = exports.TempRangeToUserConfig = exports.RussianTransform = exports.TempToUserConfig = exports.MPStoUserUnits = exports.PrecentToLocale = exports.LocalizedColon = exports.ProcessCondition = exports.OnSameDay = exports.AddHours = exports.MilitaryTime = exports.AwareDateString = exports.GetHoursMinutes = exports.GetDayName = exports.CapitalizeEveryWord = exports.CapitalizeFirstLetter = exports.GenerateLocationText = exports.UnitToUnicode = exports.format = exports._ = void 0;
 const consts_1 = require("./consts");
 const { timeout_add, source_remove } = imports.mainloop;
 const { IconType } = imports.gi.St;
@@ -213,25 +213,51 @@ function MPStoUserUnits(mps, units) {
     }
 }
 exports.MPStoUserUnits = MPStoUserUnits;
-function TempToUserConfig(kelvin, config) {
+function TempToUserConfig(kelvin, config, withUnit = true) {
     if (kelvin == null)
         return null;
-    let temp;
-    if (config.TemperatureUnit == "celsius") {
-        temp = Math.round((kelvin - 273.15));
+    let temp = (config.TemperatureUnit == "celsius") ? KelvinToCelsius(kelvin) : KelvinToFahrenheit(kelvin);
+    temp = RussianTransform(temp, config._tempRussianStyle);
+    if (config._showBothTempUnits) {
+        let secondTemp = (config.TemperatureUnit == "celsius") ? KelvinToFahrenheit(kelvin) : KelvinToCelsius(kelvin);
+        secondTemp = RussianTransform(secondTemp, config._tempRussianStyle);
+        temp += ` (${secondTemp.toString()})`;
     }
-    if (config.TemperatureUnit == "fahrenheit") {
-        temp = Math.round((9 / 5 * (kelvin - 273.15) + 32));
-    }
-    if (!config._tempRussianStyle)
-        return temp.toString();
-    if (temp < 0)
-        temp = "−" + Math.abs(temp).toString();
-    else if (temp > 0)
-        temp = "+" + temp.toString();
+    if (withUnit)
+        temp = `${temp} ${UnitToUnicode(config.TemperatureUnit)}`;
     return temp.toString();
 }
 exports.TempToUserConfig = TempToUserConfig;
+function RussianTransform(temp, russianStyle) {
+    if (russianStyle) {
+        if (temp < 0)
+            return `−${Math.abs(temp).toString()}`;
+        else if (temp > 0)
+            return `+${temp.toString()}`;
+    }
+    else
+        return temp.toString();
+}
+exports.RussianTransform = RussianTransform;
+function TempRangeToUserConfig(min, max, config) {
+    let t_low = TempToUserConfig(min, config, false);
+    let t_high = TempToUserConfig(max, config, false);
+    let first_temperature = config._temperatureHighFirst ? t_high : t_low;
+    let second_temperature = config._temperatureHighFirst ? t_low : t_high;
+    let result = "";
+    result = first_temperature;
+    result += ((config._tempRussianStyle) ? consts_1.ELLIPSIS : ` ${consts_1.FORWARD_SLASH} `);
+    result += `${second_temperature} `;
+    result += `${UnitToUnicode(config.TemperatureUnit)}`;
+    return result;
+}
+exports.TempRangeToUserConfig = TempRangeToUserConfig;
+function KelvinToCelsius(k) {
+    return Math.round((k - 273.15));
+}
+function KelvinToFahrenheit(k) {
+    return Math.round((9 / 5 * (k - 273.15) + 32));
+}
 function PressToUserUnits(hpa, units) {
     switch (units) {
         case "hPa":
