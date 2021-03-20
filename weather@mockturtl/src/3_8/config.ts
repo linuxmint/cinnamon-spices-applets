@@ -69,7 +69,8 @@ const Keys = {
 	SHORT_HOURLY_TIME: "shortHourlyTime",
 	SHOW_FORECAST_DATES: "showForecastDates",
 	WEATHER_USE_SYMBOLIC_ICONS_KEY: 'useSymbolicIcons',
-	IMMEDIATE_PRECIP: "immediatePrecip"
+	IMMEDIATE_PRECIP: "immediatePrecip",
+	SHOW_BOTH_TEMP: "showBothTempUnits"
 }
 
 export class Config {
@@ -125,6 +126,7 @@ export class Config {
 	public readonly _showForecastDates: boolean;
 	public readonly _locationList: LocationData[];
 	public readonly _immediatePrecip: boolean;
+	public readonly _showBothTempUnits: boolean;
 
 	/** Timeout */
 	private doneTypingLocation: number = null;

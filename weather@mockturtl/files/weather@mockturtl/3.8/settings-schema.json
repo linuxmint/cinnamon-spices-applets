@@ -36,6 +36,7 @@
 			"type": "page",
 			"title": "Other options",
 			"sections": [
+				"temp-unit-section",
 				"units-section",
 				"icons",
 				"keybindings"
@@ -106,18 +107,25 @@
 				"showForecastDates",
 				"shortHourlyTime",
 				"temperatureHighFirst",
-				"tempRussianStyle",
 				"locationLabelOverride"
 			]
 		},
 		"units-section": {
 			"type": "section",
-			"title": "Units",
+			"title": "Other Units",
 			"keys": [
-				"temperatureUnit",
 				"windSpeedUnit",
 				"pressureUnit",
 				"distanceUnit"
+			]
+		},
+		"temp-unit-section": {
+			"type": "section",
+			"title": "Temperature Unit",
+			"keys": [
+				"temperatureUnit",
+				"showBothTempUnits",
+				"tempRussianStyle"
 			]
 		},
 		"icons": {
@@ -256,6 +264,11 @@
 			"Fahrenheit": "fahrenheit"
 		},
 		"tooltip": "Automatic will try to guess your preference based your current display language."
+	},
+	"showBothTempUnits": {
+		"type": "checkbox",
+		"default": false,
+		"description": "Show both temperature units at the same time"
 	},
 	"windSpeedUnit": {
 		"type": "combobox",
