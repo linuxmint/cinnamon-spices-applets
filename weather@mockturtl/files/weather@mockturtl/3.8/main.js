@@ -109,6 +109,12 @@ class WeatherApplet extends TextIconApplet {
             let weatherInfo = await this.provider.GetWeather(location);
             if (weatherInfo == null) {
                 this.Unlock();
+                logger_1.Log.Instance.Error("Could not refresh weather, data could not be obtained.");
+                this.ShowError({
+                    type: "hard",
+                    detail: "no api response",
+                    message: "API did not return data"
+                });
                 return "fail";
             }
             weatherInfo = this.MergeWeatherData(weatherInfo, location);
@@ -204,6 +210,18 @@ class WeatherApplet extends TextIconApplet {
     }
     async LoadJsonAsync(url, params, HandleError, method = "GET") {
         let response = await httpLib_1.HttpLib.Instance.LoadJsonAsync(url, params, method);
+        if (!response.Success) {
+            if (!!HandleError && !HandleError(response.ErrorData))
+                return null;
+            else {
+                this.HandleHTTPError(response.ErrorData);
+                return null;
+            }
+        }
+        return response.Data;
+    }
+    async LoadAsync(url, params, HandleError, method = "GET") {
+        let response = await httpLib_1.HttpLib.Instance.LoadAsync(url, params, method);
         if (!response.Success) {
             if (!!HandleError && !HandleError(response.ErrorData))
                 return null;
