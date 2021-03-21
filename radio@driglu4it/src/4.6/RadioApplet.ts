@@ -1,6 +1,6 @@
 // see: https://projects.linuxmint.com/reference/git/cinnamon-tutorials/importer.html
 const { TextIconApplet, AllowedLayout, AppletPopupMenu } = imports.ui.applet;
-const { PopupMenuManager, PopupSeparatorMenuItem, PopupMenuItem, PopupSubMenuMenuItem } = imports.ui.popupMenu;
+const { PopupMenuManager, PopupSeparatorMenuItem, PopupMenuItem } = imports.ui.popupMenu;
 
 const { Clipboard, ClipboardType } = imports.gi.St
 
@@ -10,7 +10,6 @@ import { PopupMenu } from './PopupMenu'
 import { ChannelStore } from "./ChannelStore";
 import { checkInstallMpv, checkInstallMrisPlugin, notifySend, downloadSongFromYoutube } from './utils'
 
-const { get_home_dir } = imports.gi.GLib;
 const { ScrollDirection } = imports.gi.Clutter;
 
 
@@ -58,7 +57,6 @@ export class RadioApplet extends TextIconApplet {
 
 	}
 
-	//  INITIALIZATION FUNCTIONS
 	public async init(orientation: imports.gi.St.Side) {
 		this.initSettings()
 
@@ -92,10 +90,9 @@ export class RadioApplet extends TextIconApplet {
 
 		this.setIconColor(playbackStatus)
 		this.setAppletLabel(playbackStatus, channelName)
-		this.setAppletTooltip(this.mpvPlayer.volume)
+		this.setAppletTooltip(playbackStatus, this.mpvPlayer?.volume)
 		this.createMenu(channelName, playbackStatus)
 		this.createContextMenu()
-
 	}
 
 	private initChannelStore(channelList: Channel[]) {
@@ -122,7 +119,6 @@ export class RadioApplet extends TextIconApplet {
 	}
 
 	private createMenu(channelName: string | null, playbackStatus: PlaybackStatus) {
-
 
 		const stationNames = this.channelStore.getActivatedChannelNames()
 
@@ -160,8 +156,6 @@ export class RadioApplet extends TextIconApplet {
 		if (currentSong) {
 			Clipboard.get_default().set_text(ClipboardType.CLIPBOARD, currentSong)
 		}
-
-
 	}
 
 	private setIcon() {
@@ -203,8 +197,9 @@ export class RadioApplet extends TextIconApplet {
 		this.set_applet_label(label)
 	}
 
-	private setAppletTooltip(volume: number | null) {
-		const tooltipTxt = volume ? `Volume: ${volume.toString()}%` : "Radio++"
+	private setAppletTooltip(playbackStatus: PlaybackStatus, volume?: number) {
+
+		const tooltipTxt = playbackStatus === "Stopped" ? "Radio++" : `Volume: ${volume.toString()}%`
 		this.set_applet_tooltip(tooltipTxt)
 	}
 
@@ -216,7 +211,7 @@ export class RadioApplet extends TextIconApplet {
 
 		this.setAppletLabel('Stopped')
 		this.setIconColor('Stopped')
-		this.setAppletTooltip(null)
+		this.setAppletTooltip('Stopped')
 		this.mainMenu.activateStopItem(previousChannelName)
 	}
 
@@ -244,6 +239,7 @@ export class RadioApplet extends TextIconApplet {
 
 		this.mainMenu.activateChannelItem(channelName)
 
+		this.setAppletTooltip('Playing', this.mpvPlayer.volume)
 		this.setIconColor('Playing')
 		this.setAppletLabel('Playing', channelName)
 
@@ -291,7 +287,7 @@ export class RadioApplet extends TextIconApplet {
 	}
 
 	private handleVolumeChanged(volume: number) {
-		this.setAppletTooltip(volume)
+		this.setAppletTooltip('Playing', volume)
 		if (volume) this.lastVolume = volume
 	}
 
@@ -307,7 +303,7 @@ export class RadioApplet extends TextIconApplet {
 
 	/** Override function */
 	public on_applet_removed_from_panel(deleteConfig: any) {
-
+		// TODO!!
 	}
 
 	public async on_applet_clicked(event: any): Promise<void> {

@@ -167,7 +167,8 @@ class RadioApplet extends TextIconApplet {
     }
     handleVolumeChanged(volume) {
         this.setAppletTooltip(volume);
-        this.lastVolume = volume;
+        if (volume)
+            this.lastVolume = volume;
     }
     get initialVolume() {
         return this.keepVolume ? this.lastVolume : this.customInitVolume;
