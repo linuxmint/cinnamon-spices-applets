@@ -97,6 +97,14 @@ declare namespace imports.gi.Clutter {
 		EVENT_LAST = 29
 	}
 
+	export enum ScrollDirection {
+		DOWN,
+		LEFT,
+		RIGHT,
+		SMOOTH,
+		UP
+	}
+
 	export class Event {
 		public get_button(): number;
 		public get_coords(): number[];

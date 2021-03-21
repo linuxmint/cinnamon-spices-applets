@@ -9,6 +9,19 @@ declare class global {
 	static unset_cursor(): void;
 }
 
+declare class __meta {
+    static uuid: string;
+    static path: string;
+    static name: string;
+    static description: string;
+    static "max-instances": number;
+    static multiversion: boolean;
+    static author: string;
+    static "last-edited": number;
+    static error: any;
+    static "force-loaded": boolean
+}
+
 declare class GJSError {
     stack: any;
     fileName: string;
@@ -200,6 +213,7 @@ declare namespace imports.ui.settings {
         getValue(key: string): any;
         connect(key: string, callback: Function): void;
         bindProperty(direction: BindingDirection, key: string, keyProp: string, callback: Function, something: any): void;
+        bind(key: string, applet_prop: string | boolean | number, callback?: Function, user_data?: any): void
     }
 
     export enum BindingDirection {
